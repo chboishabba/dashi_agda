@@ -1,6 +1,7 @@
 module DASHI.Biology.ImageHexagramSSP15MDLExact where
 
 open import DASHI.Core.Prelude
+open import DASHI.Core.ListExact public
 
 import DASHI.Biology.StageSymmetrySSP15SpectrumExact as Spectrum
 import DASHI.Foundations.BalancedTernaryAmplitudeClosureExact as Amp
@@ -8,20 +9,9 @@ import DASHI.Foundations.BalancedTernaryStageSymmetryExact as BT
 import DASHI.Foundations.DialecticSheetFrameSelectorExact as Selector
 import DASHI.Foundations.FrameWitnessFibreMDLExact as FrameMDL
 
-------------------------------------------------------------------------
--- Concrete integrated pipeline:
---
--- image receipts -> six-line observation -> candidate frames -> local/gluing
--- witnesses -> SSP15 signatures -> MDL/residual policy -> selected witness.
-------------------------------------------------------------------------
-
 data PipelineStage : Set where
-  featureExtractionStage
-    hexagramProjectionStage
-    candidateFrameGenerationStage
-    localGluingWitnessStage
-    ssp15SpectrumStage
-    mdlResidualSelectionStage
+  featureExtractionStage hexagramProjectionStage candidateFrameGenerationStage
+    localGluingWitnessStage ssp15SpectrumStage mdlResidualSelectionStage
     selectedFrameStage : PipelineStage
 
 canonicalPipeline : List PipelineStage
@@ -35,17 +25,8 @@ canonicalPipeline =
   ∷ selectedFrameStage
   ∷ []
 
-listCount : ∀ {A : Set} → List A → Nat
-listCount [] = 0
-listCount (_ ∷ xs) = 1 + listCount xs
-
 pipelineHasSevenTypedStages : listCount canonicalPipeline ≡ 7
 pipelineHasSevenTypedStages = refl
-
-------------------------------------------------------------------------
--- Image evidence is retained before interpretation.  The existing projection
--- already supplies a concrete Stage-5 hexagram with lower +++ and upper ++0.
-------------------------------------------------------------------------
 
 canonicalObservation : Selector.HexagramObservation
 canonicalObservation =
@@ -68,10 +49,6 @@ canonicalObservationAmplitudeIsFive :
   ≡ 5
 canonicalObservationAmplitudeIsFive = refl
 
-------------------------------------------------------------------------
--- Local closure and the SSP15 spectrum are separate coordinates of a frame.
-------------------------------------------------------------------------
-
 record IntegratedFrameCandidate : Set where
   constructor integratedFrameCandidate
   field
@@ -91,8 +68,7 @@ compactIntegratedCandidate =
     FrameMDL.compactFrame
     FrameMDL.compactClosure
     Spectrum.crossScaleStageThreeSignature
-    true
-    2 refl
+    true 2 refl
 
 expansiveIntegratedCandidate : IntegratedFrameCandidate
 expansiveIntegratedCandidate =
@@ -100,8 +76,7 @@ expansiveIntegratedCandidate =
     FrameMDL.expansiveFrame
     FrameMDL.expansiveClosure
     Spectrum.localOnlyStageThreeSignature
-    false
-    7 refl
+    false 7 refl
 
 record AdmissibleIntegratedCandidate
   (candidate : IntegratedFrameCandidate) : Set where
@@ -122,16 +97,29 @@ expansiveIntegratedCandidateIsNotAdmissible
 selectedIntegratedCandidate : IntegratedFrameCandidate
 selectedIntegratedCandidate = compactIntegratedCandidate
 
+selectedIntegratedCandidateIsAdmissible :
+  AdmissibleIntegratedCandidate selectedIntegratedCandidate
+selectedIntegratedCandidateIsAdmissible =
+  compactIntegratedCandidateIsAdmissible
+
 selectedIntegratedFrameIsCompact :
   frame selectedIntegratedCandidate ≡ FrameMDL.compactFrame
 selectedIntegratedFrameIsCompact = refl
 
+selectedIntegratedFrameMatchesMDL :
+  frame selectedIntegratedCandidate
+  ≡ FrameMDL.ActionMDL.MDLSelection.selected
+      FrameMDL.canonicalFrameMDLSelection tt
+selectedIntegratedFrameMatchesMDL = refl
+
 selectedIntegratedCostIsTwo : totalCost selectedIntegratedCandidate ≡ 2
 selectedIntegratedCostIsTwo = refl
 
-------------------------------------------------------------------------
--- Divination locates an unresolved line; it does not predict its resolution.
-------------------------------------------------------------------------
+selectedCostIsMinimalAmongConstructedCandidates :
+  totalCost selectedIntegratedCandidate
+  ≤ totalCost expansiveIntegratedCandidate
+selectedCostIsMinimalAmongConstructedCandidates =
+  s≤s (s≤s z≤n)
 
 record StageFiveAttentionWitness : Set where
   constructor stageFiveAttentionWitness
@@ -153,17 +141,7 @@ canonicalStageFiveAttentionWitness =
   stageFiveAttentionWitness
     BT.allPositive BT.twoPositiveOneOpen
     Amp.ampPos3 Amp.ampPos2 Amp.joinedPos5
-    refl refl refl
-    3
-    false refl
-
-------------------------------------------------------------------------
--- Scalar amplitude / trace information does not reconstruct internal geometry.
--- This is the exact interface-level parallel with the separate 3B/Heisenberg
--- work: a central scalar phase or trace and the Weyl/normaliser geometry are
--- distinct structures.  The actual PR-464 local-module intertwiner is not
--- imported into this stacked branch and is not fabricated here.
-------------------------------------------------------------------------
+    refl refl refl 3 false refl
 
 swapFirstSecond : BT.TriadPattern → BT.TriadPattern
 swapFirstSecond triadPattern =
@@ -201,10 +179,7 @@ canonicalScalarGeometrySeparationBoundary :
   ScalarGeometrySeparationBoundary
 canonicalScalarGeometrySeparationBoundary =
   scalarGeometrySeparationBoundary
-    true refl
-    false refl
-    false refl
-    false refl
+    true refl false refl false refl false refl
 
 record IntegratedSelectorBoundary : Set where
   constructor integratedSelectorBoundary
@@ -223,8 +198,4 @@ record IntegratedSelectorBoundary : Set where
 
 canonicalIntegratedSelectorBoundary : IntegratedSelectorBoundary
 canonicalIntegratedSelectorBoundary =
-  integratedSelectorBoundary
-    true refl
-    false refl
-    false refl
-    false refl
+  integratedSelectorBoundary true refl false refl false refl false refl
