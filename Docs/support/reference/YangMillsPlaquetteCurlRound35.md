@@ -12,7 +12,8 @@ The new checked targets are:
 4. selected-background/same-perturbation instantiation;
 5. a canonical four-singleton/eleven-higher-order partition for every named Wilson atom defect;
 6. exact assembly of that partition into the computed plaquette Wilson defect;
-7. an exact rational adversarial test showing why the Euler–Lagrange correlation remains necessary.
+7. an exact rational adversarial test showing why the Euler–Lagrange correlation remains necessary;
+8. a fail-closed audit of the newly surfaced Einstein–Cartan–Yang–Mills monograph and its later regulated-slab paper.
 
 A static audit is not a kernel result. Kernel acceptance is claimed only after the focused Agda workflow succeeds.
 
@@ -299,7 +300,54 @@ DASHI/Physics/YangMills/
   BalabanP33CovariantCurlRadiusStressTestExact.agda
 ```
 
-## 8. Exact remaining Gate-I frontier
+## 8. Einstein–Cartan–Yang–Mills and regulated-slab claim audit
+
+The attached material also surfaced work by Emmanouil Karolos Čižek. Round 35 records three cited sources rather than treating their conclusions as imported theorems:
+
+- *A Constructive Einstein–Cartan–Yang–Mills Theory with Positive Mass Gap in Four Dimensions*, DOI `10.5281/zenodo.17246443`;
+- *A Structural and Conceptual Overview of A Constructive Einstein–Cartan–Yang–Mills Theory with Positive Mass Gap in Four Dimensions*, DOI `10.5281/zenodo.17718647`;
+- *Mixing of Boundary Langevin Dynamics for Regulated Four-Dimensional Yang–Mills Slabs*, DOI `10.5281/zenodo.18280110`.
+
+The audit introduces distinct signatures for:
+
+```text
+Einstein-Cartan-Yang-Mills theory,
+pure four-dimensional Yang-Mills,
+auxiliary boundary Langevin generator,
+boundary slab transfer kernel,
+reconstructed physical Hamiltonian.
+```
+
+It proves that none of the following promotions is definitional:
+
+```text
+Einstein-Cartan-Yang-Mills = pure Yang-Mills,
+auxiliary boundary Langevin generator = slab transfer kernel,
+slab transfer kernel = reconstructed physical Hamiltonian.
+```
+
+For the monograph, the first open theory bridge is:
+
+```text
+torsionGravitySectorExactlyDecouplesToPureYM.
+```
+
+For the narrower slab route, the first open continuation is:
+
+```text
+ultravioletContinuumOnR4ActuallyConstructed.
+```
+
+The slab result remains represented as a conditional theorem about a regulated/fixed-spacing construction, not as the Clay Hamiltonian mass gap.
+
+Formal owner:
+
+```text
+DASHI/Physics/YangMills/
+  YangMillsCizekEinsteinCartanClaimAuditExact.agda
+```
+
+## 9. Exact remaining Gate-I frontier
 
 Round 35 closes:
 
@@ -333,7 +381,7 @@ The first inequality must use the constrained selected-background equation or an
 
 The second inequality must preserve the canonical grouped atom structure; an indiscriminate triangle inequality may spend more than the available `rho/144` budget.
 
-## 9. After Gate I
+## 10. After Gate I
 
 Once those two estimates are proved, the existing Round-34/Round-35 composition yields
 
