@@ -158,8 +158,8 @@ inageNecessaryConditions = claimedSolutionSource
 polozov : ClaimedSolutionSource
 polozov = claimedSolutionSource
   "Andrei Polozov"
-  "Emergent Nonlinear Vorticity Dissipation"
-  "Springer Nature Communities post / repository deposit; DOI not verified"
+  "Global Regularity for the 3D Incompressible Navier-Stokes Equations via Emergent Nonlinear Vorticity Dissipation"
+  "Springer Nature Communities record: global-regularity-for-the-3d-incompressible-navier-stokes-equations-via-emergent-nonlinear-vorticity-dissipation"
   blogOrWebsite emergentVorticityDamping loadBearingProducerOpen true false
 
 nemoto : ClaimedSolutionSource
