@@ -11,6 +11,8 @@ files=(
   DASHI/Physics/Closure/NSTriadKNLuoClaimedSolutionCorpusRound24Exact.agda
   DASHI/Physics/Closure/NSTriadKNLuoAbuGhuwalehAdditiveFloorNoGoExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoCamlinTemporalLiftNoGoExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoFiniteCascadeSpeedFluxNoGoExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoRestrictedClassDoesNotYieldClayBExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoClaimRouteCrosswalkRound24Exact.agda
   DASHI/Physics/Closure/NSTriadKNLuoHighestAlphaClayLemmaLadderRound24Exact.agda
   DASHI/Physics/Closure/NSTriadKNLuoClaimCorpusHighestAlphaRound24Validation.agda
@@ -40,6 +42,7 @@ fi
 corpus=DASHI/Physics/Closure/NSTriadKNLuoClaimedSolutionCorpusRound24Exact.agda
 grep -q 'claimedSolutionCorpusRound24' "$corpus"
 grep -q '10.5281/zenodo.19559087' "$corpus"
+grep -q '10.20944/preprints202603.1889.v1' "$corpus"
 grep -q '10.63968/post-bio-ai-epistemics.v1n2.012' "$corpus"
 grep -q '10.5281/zenodo.21194906' "$corpus"
 grep -q '10.5281/zenodo.19632058' "$corpus"
@@ -50,6 +53,11 @@ grep -q '2601.15685' "$corpus"
 grep -q '10.3390/math14091410' "$corpus"
 grep -q '10.20944/preprints202603.1591.v1' "$corpus"
 grep -q 'NEMGRO' "$corpus"
+grep -q '18963533' "$corpus"
+grep -q '10.31224/5814' "$corpus"
+grep -q '10.5281/zenodo.19601371' "$corpus"
+grep -q '10.5281/zenodo.21263877' "$corpus"
+grep -q '10.5281/zenodo.19180827' "$corpus"
 grep -q 'allCorpusSourcesAreProofAuthorities = false' "$corpus"
 grep -q 'corpusSearchIsDeclaredExhaustive = false' "$corpus"
 
@@ -66,11 +74,26 @@ grep -q 'bkmDivergenceCannotBeRemovedByExactTimeChange' "$camlin"
 grep -q 'bkmFinitenessCannotBeCreatedByExactTimeChange' "$camlin"
 grep -q 'superlinearDriftGapAtCoefficientPlusOne' "$camlin"
 
+cascade=DASHI/Physics/Closure/NSTriadKNLuoFiniteCascadeSpeedFluxNoGoExact.agda
+grep -q 'reciprocalCascadeIdentity' "$cascade"
+grep -q 'unitFluxAllowedByCascadeBound' "$cascade"
+grep -q 'unitFluxIsNotStrictlyBelowItsBound' "$cascade"
+grep -q 'canonicalFiniteCascadeSpeedNoGoWitness' "$cascade"
+
+restricted=DASHI/Physics/Closure/NSTriadKNLuoRestrictedClassDoesNotYieldClayBExact.agda
+grep -q 'restrictedSymmetryTheoremHolds' "$restricted"
+grep -q 'restrictedSymmetryDoesNotLogicallyYieldUniversalTheorem' "$restricted"
+grep -q 'canonicalRestrictedClassScopeWitness' "$restricted"
+
 crosswalk=DASHI/Physics/Closure/NSTriadKNLuoClaimRouteCrosswalkRound24Exact.agda
 grep -q 'firstLoadBearingNode' "$crosswalk"
 grep -q 'abuClaimEntersAtStrictMargin' "$crosswalk"
+grep -q 'abuPacketClaimEntersAtUniformFiveSourceTax' "$crosswalk"
 grep -q 'camlinClaimEntersAtNonCircularGronwall' "$crosswalk"
 grep -q 'permanaClaimEntersAtPeriodicKernel' "$crosswalk"
+grep -q 'higginsClaimEntersAtFarFieldPacking' "$crosswalk"
+grep -q 'aksmanClaimEntersAtDissipationRange' "$crosswalk"
+grep -q 'cavazziniRestrictedClaimEntersAtFullCarrier' "$crosswalk"
 
 ladder=DASHI/Physics/Closure/NSTriadKNLuoHighestAlphaClayLemmaLadderRound24Exact.agda
 grep -q 'L0_literalFeffermanPeriodicAlternativeB' "$ladder"
@@ -83,6 +106,8 @@ grep -q 'unconditionalClayTheoremPromoted' "$ladder"
 paper=DASHI/Papers/NavierStokes/ClaimCorpusHighestAlphaRound24.agda
 grep -q 'canonicalClaimCorpusHighestAlphaRound24Status' "$paper"
 grep -q 'claimCorpusIsNotProofAuthority' "$paper"
+grep -q 'finiteCascadeFluxNoGo' "$paper"
+grep -q 'restrictedClassScopeNoGo' "$paper"
 grep -q 'physicalProducersRemainOpen' "$paper"
 grep -q 'clayPromotionRemainsFalse' "$paper"
 
