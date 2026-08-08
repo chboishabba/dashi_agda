@@ -27,7 +27,7 @@ module DASHI.Physics.Closure.NSTriadKNDivisionFreePluckerDefectRound28Exact wher
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Integer using (ℤ; _+_; _-_; _*_; -_; _≤_)
+open import Data.Integer using (ℤ; +_; _+_; _-_; _*_; -_; _≤_)
 import Data.Integer.Tactic.RingSolver as IntRS
 import Tactic.RingSolver.NonReflective as NR
 open import Data.Product.Base using (_,_)
