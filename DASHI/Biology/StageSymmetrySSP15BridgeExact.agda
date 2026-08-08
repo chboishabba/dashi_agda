@@ -87,6 +87,10 @@ record StageSymmetrySSP15Boundary : Set where
     existingPrimeInfrastructureReused : Bool
     existingPrimeInfrastructureReusedIsTrue :
       existingPrimeInfrastructureReused ≡ true
+    oggLaneCountWitness : countList allOggPrimeLanes ≡ 15
+    supersingularNatCountWitness : countList allSupersingularPrimeNats ≡ 15
+    existingReceiptCountWitness :
+      OggBoundary.oggPrimeCarrierLaneCount ≡ 15
     sspLaneReplacesUnderlyingCarrier : Bool
     sspLaneReplacesUnderlyingCarrierIsFalse :
       sspLaneReplacesUnderlyingCarrier ≡ false
@@ -98,4 +102,11 @@ record StageSymmetrySSP15Boundary : Set where
 
 canonicalStageSymmetrySSP15Boundary : StageSymmetrySSP15Boundary
 canonicalStageSymmetrySSP15Boundary =
-  stageSymmetrySSP15Boundary true refl false refl false refl false refl
+  stageSymmetrySSP15Boundary
+    true refl
+    oggPrimeLaneCountIsFifteen
+    supersingularPrimeNatCountIsFifteen
+    existingOggReceiptLaneCountIsFifteen
+    false refl
+    false refl
+    false refl
