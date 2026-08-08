@@ -38,7 +38,7 @@ payload = json.loads(Path(
     "build/monster_3b_actual_kernel_character_certificate.json"
 ).read_text())
 
-assert payload["actual_group_order"] == 2859230155080499200
+assert payload["group_order"] == 2859230155080499200
 assert payload["kernel_order"] == 1594323
 assert payload["kernel_exponent"] == 3
 assert payload["centre_order"] == 3
