@@ -25,16 +25,31 @@ required=(
   heisenberg_weyl_phase_portrait.png
   heisenberg_times_12_plus_78.png
   orbit_length_sheet.png
+  elementary_abelian_two_plane_certificate.json
 )
 
 for name in "${required[@]}"; do
   test -s "build/monster_3b_dashboard/$name"
 done
 
+python - <<'PY'
+import json
+from pathlib import Path
+payload = json.loads(Path(
+    "build/monster_3b_dashboard/elementary_abelian_two_plane_certificate.json"
+).read_text())
+assert payload == {
+    "isotropic_two_plane_count": 3640,
+    "symplectic_two_plane_count": 7371,
+    "two_plane_count": 11011,
+}
+PY
+
 agda_sources=(
   DASHI/Moonshine/Monster3BNormalizerBridge.agda
   DASHI/Moonshine/Monster3BCyclicFourierDyadicBridgeExact.agda
   DASHI/Moonshine/Monster3BHeisenbergMultiplicityExact.agda
+  DASHI/Moonshine/Monster3BElementaryAbelianInvariantExact.agda
   DASHI/Moonshine/Monster3BPhaseTransportExact.agda
   DASHI/Moonshine/MonsterThreeLocalE8LeechBridgeExact.agda
   DASHI/Moonshine/LeechWeightTwo196608BridgeExact.agda
