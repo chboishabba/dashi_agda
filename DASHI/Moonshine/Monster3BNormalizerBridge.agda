@@ -1,6 +1,6 @@
 module DASHI.Moonshine.Monster3BNormalizerBridge where
 
-open import Agda.Builtin.Bool using (Bool; false)
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; _+_; _*_)
 open import Agda.Builtin.String using (String)
@@ -65,6 +65,8 @@ record NormalizerRestrictionBoundary : Set where
     sourceTable : String
     targetTable : String
     externalComputationRequired : Bool
+    externalComputationRequiredIsTrue :
+      externalComputationRequired ≡ true
     actualConstituentIdentificationPromoted : Bool
     explicitMonsterBasisAvailable : Bool
     actualConstituentIdentificationPromotedIsFalse :
@@ -77,7 +79,8 @@ normalizerRestrictionBoundary =
   mkBoundary
     "M"
     "MN3B"
-    false
+    true
+    refl
     false
     false
     refl
