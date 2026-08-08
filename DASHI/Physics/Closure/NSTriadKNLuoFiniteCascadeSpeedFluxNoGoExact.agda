@@ -30,8 +30,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoFiniteCascadeSpeedFluxNoGoExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.List using ([]; _∷_)
-open import Data.Integer.Base using (+_)
-open import Data.Rational.Base using (ℚ; 1ℚ; _*_; _≤_; _<_; _/_)
+open import Data.Rational.Base using (ℚ; 1ℚ; _*_; _≤_; _<_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (_≡_; refl; trans)
@@ -45,6 +44,10 @@ record ReciprocalScale : Set where
     scaleTimesInverse : scale * inverse ≡ 1ℚ
 
 open ReciprocalScale public
+
+unitReciprocalScale : ReciprocalScale
+unitReciprocalScale =
+  reciprocalScale 1ℚ 1ℚ (ℚRing.solve [])
 
 cube : ℚ → ℚ
 cube x = x * x * x
