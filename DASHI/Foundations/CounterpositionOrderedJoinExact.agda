@@ -38,27 +38,27 @@ data CounterContext : Set where
     CounterContext
 
 counterUnder : CounterContext → BT.TriadPattern → BT.TriadPattern
-counterUnder invertAll pattern = BT.strictInverse pattern
-counterUnder rejectFirst pattern =
+counterUnder invertAll triadPattern = BT.strictInverse triadPattern
+counterUnder rejectFirst triadPattern =
   BT.triad
-    (BT.invertDigit (BT.first pattern))
-    (BT.second pattern)
-    (BT.third pattern)
-counterUnder rejectSecond pattern =
+    (BT.invertDigit (BT.first triadPattern))
+    (BT.second triadPattern)
+    (BT.third triadPattern)
+counterUnder rejectSecond triadPattern =
   BT.triad
-    (BT.first pattern)
-    (BT.invertDigit (BT.second pattern))
-    (BT.third pattern)
-counterUnder rejectThird pattern =
+    (BT.first triadPattern)
+    (BT.invertDigit (BT.second triadPattern))
+    (BT.third triadPattern)
+counterUnder rejectThird triadPattern =
   BT.triad
-    (BT.first pattern)
-    (BT.second pattern)
-    (BT.invertDigit (BT.third pattern))
-counterUnder reindexFirstSecond pattern =
+    (BT.first triadPattern)
+    (BT.second triadPattern)
+    (BT.invertDigit (BT.third triadPattern))
+counterUnder reindexFirstSecond triadPattern =
   BT.triad
-    (BT.second pattern)
-    (BT.first pattern)
-    (BT.third pattern)
+    (BT.second triadPattern)
+    (BT.first triadPattern)
+    (BT.third triadPattern)
 
 rejectThirdAllPositiveIsPartialCounterposition :
   counterUnder rejectThird BT.allPositive
