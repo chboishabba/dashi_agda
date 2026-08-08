@@ -29,8 +29,10 @@ package "Finite physical system" {
   component "Commuting physical selector\nLeray, reality and centering" as PhysSelector <<Checked generic theorem>>
   component "Conjugate triad/output fibres\nPlucker invariant under conjugation" as ConjugateFibres <<Checked exact>>
   component "Reality-orbit phase space\nand quadratic coordinate RHS" as Coordinates <<Checked exact algebra>>
+  component "Finite rational coordinate\nlocal-Lipschitz majorant" as RationalLipschitz <<Checked exact algebra>>
+  component "Continuum-real finite norm\nand Picard-Lindelof instance" as PicardBridge <<Open producer>>
   component "Concrete selector and nonlinear equivariance" as PhysicalEquivariance <<Open producer>>
-  component "Finite Picard-Lindelof\nand global Galerkin solution" as FiniteODE <<Open producer>>
+  component "Finite global Galerkin solution" as FiniteODE <<Open producer>>
   component "Triadwise energy cancellation" as Energy <<Checked exact algebra>>
   component "Signed critical shell ledger\nexplicit lower and upper boundaries" as SignedLedger <<Checked exact algebra>>
   component "Physical filtered-vorticity instantiation" as PhysicalLedger <<Open producer>>
@@ -98,8 +100,10 @@ Reality --> PhysSelector : fixed-point selector
 PhysSelector --> PhysicalEquivariance : instantiate concrete operations
 ConjugateFibres --> PhysicalEquivariance : triad involution and opposite output
 Coordinates --> PhysicalEquivariance : literal nonlinear RHS
-PhysicalEquivariance --> FiniteODE : invariant finite phase space
-Coordinates --> FiniteODE : local Lipschitz input
+Coordinates --> RationalLipschitz : degree-two atom factorisation
+RationalLipschitz --> PicardBridge : transfer to continuum-real norm
+PhysicalEquivariance --> PicardBridge : invariant finite phase space
+PicardBridge --> FiniteODE : local existence and uniqueness
 Coordinates --> Energy : resonant atoms
 FiniteODE --> PhysicalLedger : time-dependent finite solution
 Energy --> PhysicalLedger : exact finite energy cancellation
@@ -147,6 +151,7 @@ AgdaRoot ..> SignedLedger : imports through Round 26
 AgdaRoot ..> Projectors : imports through Round 27
 AgdaRoot ..> PhysSelector : imports Round 28
 AgdaRoot ..> ConjugateFibres : imports Round 28
+AgdaRoot ..> RationalLipschitz : imports Round 28
 AgdaRoot ..> Constituents : imports Round 28
 AgdaRoot ..> Ownership : imports Round 28
 AgdaRoot ..> InteractionFibres : imports Round 28
@@ -168,6 +173,12 @@ note right of PhysSelector
 The commuting-selector theorem is generic.
 Concrete Leray idempotence and full nonlinear
 commutation remain open physical instances.
+end note
+
+note right of RationalLipschitz
+Exact rational coordinate majorants are closed.
+The continuum-real norm transfer and
+Picard-Lindelof instance remain open.
 end note
 
 note right of Constituents
