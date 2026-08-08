@@ -237,8 +237,6 @@ if Sum(phaseMultiplicityDegrees) <> 90 then
   Error("actual paired-phase multiplicity degrees do not sum to 90");
 fi;
 
-twelvePlusSeventyEightCertified := true;
-
 records := [];
 for i in nonzero do
   if i in centreTrivialConstituents then
@@ -286,7 +284,7 @@ PrintTo(output,
   "  \"phase_pair_constituent_degree_total\": ", phasePairDegreeTotal, ",\n",
   "  \"phase_pair_heisenberg_degree\": ", heisenbergPairDegree, ",\n",
   "  \"phase_pair_multiplicity_degrees\": [12, 78],\n",
-  "  \"twelve_plus_seventy_eight_certified\": true,\n",
+  "  \"twelve_plus_seventy_eight_degree_split_certified\": true,\n",
   "  \"extraspecial_kernel_class_positions\": ["
 );
 for j in [1..Length(kernelClasses)] do
@@ -357,5 +355,5 @@ Print("Extraspecial-kernel invariant dimension: ",
   kernelInvariantDimension, "\n");
 Print("Clifford totals: fixed ", centreTrivialDegreeTotal,
   "; paired phases ", phasePairDegreeTotal, "\n");
-Print("Actual phase multiplicity degrees: 12, 78\n");
+Print("Actual phase multiplicity degree split: 12, 78\n");
 QUIT;
