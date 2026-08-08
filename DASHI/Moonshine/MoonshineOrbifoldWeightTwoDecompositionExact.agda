@@ -38,15 +38,20 @@ module DASHI.Moonshine.MoonshineOrbifoldWeightTwoDecompositionExact where
 --
 --   98580 + 98304 = 196884.
 --
--- The earlier 196608 subtotal remains exact arithmetic after choosing a basis,
--- but it is not promoted to either orbifold summand or to a Monster-invariant
--- submodule.
+-- The three summands are also represented by distinct typed constructors:
+-- the conformal line, the remaining untwisted-invariant coordinates, and the
+-- twisted-invariant coordinates.  Thus the sector split is not only a scalar
+-- identity.  The earlier 196608 subtotal remains exact arithmetic after
+-- choosing a basis, but is not promoted to an orbifold summand or a
+-- Monster-invariant submodule.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; _+_; _*_)
 open import Data.Empty using (⊥)
+open import Data.Fin.Base using (Fin; zero)
+open import Data.Sum using (_⊎_; inj₁; inj₂)
 
 heisenbergRank : Nat
 heisenbergRank = 24
@@ -138,6 +143,61 @@ conformalPlusMonsterReconstructsWeightTwo :
 conformalPlusMonsterReconstructsWeightTwo = refl
 
 ------------------------------------------------------------------------
+-- Typed sector carriers.  These retain source-sector provenance instead of
+-- flattening all 196884 coordinates into one Fin index.
+------------------------------------------------------------------------
+
+ConformalLineCoordinate : Set
+ConformalLineCoordinate = Fin conformalLineDimension
+
+UntwistedNonconformalCoordinate : Set
+UntwistedNonconformalCoordinate = Fin untwistedNonconformalDimension
+
+TwistedInvariantWeightTwoCoordinate : Set
+TwistedInvariantWeightTwoCoordinate = Fin twistedInvariantWeightTwoDimension
+
+UntwistedInvariantWeightTwoCoordinate : Set
+UntwistedInvariantWeightTwoCoordinate =
+  ConformalLineCoordinate ⊎ UntwistedNonconformalCoordinate
+
+MoonshineWeightTwoCoordinate : Set
+MoonshineWeightTwoCoordinate =
+  UntwistedInvariantWeightTwoCoordinate
+  ⊎ TwistedInvariantWeightTwoCoordinate
+
+MonsterNontrivialWeightTwoCoordinate : Set
+MonsterNontrivialWeightTwoCoordinate =
+  UntwistedNonconformalCoordinate
+  ⊎ TwistedInvariantWeightTwoCoordinate
+
+conformalVectorCoordinate : MoonshineWeightTwoCoordinate
+conformalVectorCoordinate = inj₁ (inj₁ zero)
+
+includeMonsterNontrivialCoordinate :
+  MonsterNontrivialWeightTwoCoordinate → MoonshineWeightTwoCoordinate
+includeMonsterNontrivialCoordinate (inj₁ untwisted) = inj₁ (inj₂ untwisted)
+includeMonsterNontrivialCoordinate (inj₂ twisted) = inj₂ twisted
+
+conformalVectorNotInMonsterImage :
+  (coordinate : MonsterNontrivialWeightTwoCoordinate) →
+  conformalVectorCoordinate ≡ includeMonsterNontrivialCoordinate coordinate → ⊥
+conformalVectorNotInMonsterImage (inj₁ untwisted) ()
+conformalVectorNotInMonsterImage (inj₂ twisted) ()
+
+untwistedAndTwistedTagsDisjoint :
+  (untwisted : UntwistedInvariantWeightTwoCoordinate) →
+  (twisted : TwistedInvariantWeightTwoCoordinate) →
+  inj₁ untwisted ≡ inj₂ twisted → ⊥
+untwistedAndTwistedTagsDisjoint untwisted twisted ()
+
+monsterUntwistedAndTwistedTagsDisjoint :
+  (untwisted : UntwistedNonconformalCoordinate) →
+  (twisted : TwistedInvariantWeightTwoCoordinate) →
+  includeMonsterNontrivialCoordinate (inj₁ untwisted)
+  ≡ includeMonsterNontrivialCoordinate (inj₂ twisted) → ⊥
+monsterUntwistedAndTwistedTagsDisjoint untwisted twisted ()
+
+------------------------------------------------------------------------
 -- The old 196608 chart is retained only as a basis-dependent coordinate sum.
 ------------------------------------------------------------------------
 
@@ -173,6 +233,14 @@ record OrbifoldWeightTwoAuthorityBoundary : Set where
     totalDimensionWitness : moonshineWeightTwoDimension ≡ 196884
     monsterQuotientDimensionWitness :
       monsterNontrivialWeightTwoDimension ≡ 196883
+    conformalCoordinateOutsideMonsterImage :
+      (coordinate : MonsterNontrivialWeightTwoCoordinate) →
+      conformalVectorCoordinate
+      ≡ includeMonsterNontrivialCoordinate coordinate → ⊥
+    sourceSectorTagsAreDisjoint :
+      (untwisted : UntwistedInvariantWeightTwoCoordinate) →
+      (twisted : TwistedInvariantWeightTwoCoordinate) →
+      inj₁ untwisted ≡ inj₂ twisted → ⊥
     coordinateSubtotalIsPublishedOrbifoldSummand : Bool
     coordinateSubtotalIsPublishedOrbifoldSummandIsFalse :
       coordinateSubtotalIsPublishedOrbifoldSummand ≡ false
@@ -188,5 +256,7 @@ canonicalOrbifoldWeightTwoAuthorityBoundary =
     twistedInvariantWeightTwoDimensionIs98304
     moonshineWeightTwoDimensionIs196884
     monsterNontrivialWeightTwoDimensionIs196883
+    conformalVectorNotInMonsterImage
+    untwistedAndTwistedTagsDisjoint
     false refl
     false refl
