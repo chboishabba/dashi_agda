@@ -22,10 +22,11 @@ module DASHI.Physics.Closure.NSTriadKNGlobalBilinearShellPairingRound29Exact whe
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using ([]; _∷_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ; _+_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (trans)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
@@ -126,8 +127,6 @@ physicalShellBalanceExpandsOnce balance =
         ∷ lowerBoundary balance
         ∷ upperBoundary balance
         ∷ [])))
-  where
-  open import Relation.Binary.PropositionalEquality using (cong)
 
 staticPhysicalShellPairingClosed : Bool
 staticPhysicalShellPairingClosed = true
