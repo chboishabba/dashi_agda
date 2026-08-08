@@ -16,7 +16,8 @@ module DASHI.Moonshine.MoonshineOrbifoldWeightTwoDecompositionExact where
 --
 -- Scott Carnahan,
 -- "51 constructions of the Moonshine module",
--- arXiv:1707.02954; no DOI assigned in this file.
+-- Communications in Number Theory and Physics 12 (2018), 305--334.
+-- DOI: 10.4310/CNTP.2018.v12.n2.a3; arXiv:1707.02954.
 --
 -- DASHI CONTRIBUTION
 --
