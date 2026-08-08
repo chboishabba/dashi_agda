@@ -14,6 +14,8 @@ record CurrentNSPaperTheoremInterfaceRound28 : Set where
     sharpFiniteProjectorsChecked : Bool
     commutingCarrierSelectorChecked : Bool
     conjugateOutputFibreChecked : Bool
+    finiteRationalLocalLipschitzChecked : Bool
+    continuumRealPicardLindelof : Bool
     dependentOwnerPartitionChecked : Bool
     signedConstituentGroupingChecked : Bool
     signedInteractionFibreChecked : Bool
@@ -33,13 +35,24 @@ canonicalCurrentNSPaperTheoremInterfaceRound28 :
   CurrentNSPaperTheoremInterfaceRound28
 canonicalCurrentNSPaperTheoremInterfaceRound28 =
   current-ns-paper-theorem-interface-round28
-    true true true true true true true true true true
+    true true true true true true false
+    true true true true true
     false false false false false false false
 
 round28ExactArchitectureAdvanced :
   admissibleNineOwnerAlgebraChecked
     canonicalCurrentNSPaperTheoremInterfaceRound28 ≡ true
 round28ExactArchitectureAdvanced = refl
+
+finiteLocalLipschitzChecked :
+  finiteRationalLocalLipschitzChecked
+    canonicalCurrentNSPaperTheoremInterfaceRound28 ≡ true
+finiteLocalLipschitzChecked = refl
+
+continuumPicardLindelofStillOpen :
+  continuumRealPicardLindelof
+    canonicalCurrentNSPaperTheoremInterfaceRound28 ≡ false
+continuumPicardLindelofStillOpen = refl
 
 finiteGlobalFlowStillOpen :
   finiteGlobalGalerkinFlow
