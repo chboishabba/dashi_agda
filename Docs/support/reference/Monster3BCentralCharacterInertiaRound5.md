@@ -192,13 +192,14 @@ Accordingly, the unnormalised representative has constant `10`, while the normal
 normalizedConstant + 10 = unnormalizedConstant.
 ```
 
-The arithmetic coincidence
+The two exact arithmetic coincidences retained by validation are
 
 ```text
-71 + unnormalizedConstant = 81
+71 + 10 = 81
+196874 + 10 = 196884.
 ```
 
-is exact. It does **not** identify the normalization offset with a ten-dimensional surviving Monster subspace. Such an interpretation would require an actual graded carrier and trace or dimension map realizing the ten.
+Equivalently, validation substitutes the unnormalised `7A` constant into both identities. Neither equality identifies the normalization offset with a ten-dimensional surviving Monster subspace. Such an interpretation would require an actual graded carrier and trace or dimension map realizing the ten.
 
 ## Exact semantic 7+7+1 carrier equivalence
 
