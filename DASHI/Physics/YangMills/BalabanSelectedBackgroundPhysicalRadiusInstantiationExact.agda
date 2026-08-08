@@ -34,7 +34,7 @@ module DASHI.Physics.YangMills.BalabanSelectedBackgroundPhysicalRadiusInstantiat
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Data.Rational.Base as ℚ using (ℚ; _≤_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _≤_; _<_)
 import Data.Rational.Properties as ℚP
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
@@ -99,7 +99,7 @@ record SelectedPhysicalBackgroundInstantiation
       ≡ Log.inverseGroup (Selected.principalChart bridge) value
 
     positiveScalarInPrincipalImage : ∀ value →
-      ℚ.0ℚ < Q.q0 value →
+      0ℚ < Q.q0 value →
       Log.InPrincipalImage (Selected.principalChart bridge) value
 
 open SelectedPhysicalBackgroundInstantiation public
