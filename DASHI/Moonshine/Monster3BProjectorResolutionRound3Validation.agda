@@ -5,7 +5,7 @@ import DASHI.Moonshine.Monster3BModelProjectorResolutionExact as Resolution
 import DASHI.Moonshine.Monster3BModelStoneVonNeumannRecognitionExact as Stone
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
+open import Data.Empty using (⊥)
 open import Data.Fin.Base using (Fin)
 
 import DASHI.Moonshine.Monster3BFiniteHeisenbergGeneratorsExact as H
@@ -38,6 +38,6 @@ allStandardTranslationsAreFixedPointFree :
   (axis : H.Axis6) →
   (basis : Model.ZetaModelBasis) →
   Model.translatedBasis axis basis ≡ basis →
-  Data.Empty.⊥
+  ⊥
 allStandardTranslationsAreFixedPointFree =
   Stone.standardTranslationHasNoFixedModelBasis
