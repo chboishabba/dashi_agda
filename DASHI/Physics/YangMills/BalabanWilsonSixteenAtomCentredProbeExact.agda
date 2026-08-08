@@ -38,7 +38,8 @@ module DASHI.Physics.YangMills.BalabanWilsonSixteenAtomCentredProbeExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Integer.Base using (+_)
-open import Data.Rational.Base as ℚ using (ℚ; _+_; _-_; _*_)
+open import Data.Rational.Base as ℚ using
+  (ℚ; 0ℚ; _+_; _-_; _*_; _/_)
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (trans)
 
@@ -96,7 +97,7 @@ addBase16 : ℚ → Vector16 → Vector16
 addBase16 base defects = map16 (base +_) defects
 
 sixteen : ℚ
-sixteen = + 16
+sixteen = + 16 / 1
 
 centredWeight16 : Vector16 → Vector16
 centredWeight16 weights =
@@ -124,7 +125,7 @@ sixteenAtomCentredProbeExact base
 
 uniformWeightCentredCoefficientZero : ∀ weight →
   centredWeight16 (constant16 weight)
-  ≡ constant16 (+ 0)
+  ≡ constant16 0ℚ
 uniformWeightCentredCoefficientZero weight =
   Vector16-ext
     (ℚRing.solve-∀ weight) (ℚRing.solve-∀ weight)
