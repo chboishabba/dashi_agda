@@ -19,9 +19,11 @@ files=(
 
 docs=(
   docs/ns-clay-contract/README.md
+  docs/ns-clay-contract/architecture.puml
   docs/ns-clay-contract/paper-corpus/README.md
   docs/ns-clay-contract/paper-corpus/audit-matrix.md
   docs/ns-clay-contract/paper-corpus/highest-alpha-lemma-ladder.md
+  docs/ns-clay-contract/paper-corpus/verification.md
 )
 
 for file in "${files[@]}" "${docs[@]}"; do
@@ -87,8 +89,14 @@ grep -q 'clayPromotionRemainsFalse' "$paper"
 grep -q '\[Claimed-paper corpus and audits\](paper-corpus/README.md)' docs/ns-clay-contract/README.md
 grep -q '\[Audit matrix\](audit-matrix.md)' docs/ns-clay-contract/paper-corpus/README.md
 grep -q '\[Highest-alpha lemma ladder\](highest-alpha-lemma-ladder.md)' docs/ns-clay-contract/paper-corpus/README.md
+grep -q '\[Verification phase\](verification.md)' docs/ns-clay-contract/paper-corpus/README.md
 grep -q '\[Back to the paper-corpus overview\](README.md)' docs/ns-clay-contract/paper-corpus/audit-matrix.md
 grep -q '\[Back to the paper-corpus overview\](README.md)' docs/ns-clay-contract/paper-corpus/highest-alpha-lemma-ladder.md
+grep -q '\[Back to the paper-corpus overview\](README.md)' docs/ns-clay-contract/paper-corpus/verification.md
+
+grep -q '^@startuml' docs/ns-clay-contract/architecture.puml
+grep -q '^@enduml' docs/ns-clay-contract/architecture.puml
+grep -q 'Claim corpus and falsification' docs/ns-clay-contract/architecture.puml
 
 scripts/run_agda29_parallel_check.sh \
   DASHI/Physics/Closure/NSTriadKNLuoClaimCorpusHighestAlphaRound24Validation.agda
