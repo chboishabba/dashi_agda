@@ -84,4 +84,4 @@ The disjoint development lanes are:
 
 ## Scope boundary
 
-This round does not claim global regularity, an exhaustive literature search, a successful Agda kernel check, a successful GitHub Actions run, publication readiness or Clay acceptance. It establishes the exact target, the shortest auditable path, and a formal process for harvesting or falsifying every claimed route.
+This round does not claim global regularity, an exhaustive literature search, a successful Agda kernel check, a successful GitHub Actions run, publication readiness or Clay acceptance. It establishes the exact target, the shortest auditable path, and a formal process for harvesting or falsifying every discovered route.
