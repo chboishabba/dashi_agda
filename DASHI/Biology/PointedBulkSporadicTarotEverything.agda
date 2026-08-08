@@ -4,6 +4,7 @@ import DASHI.Biology.PointedTernaryBulkExact
 import DASHI.Biology.DecimalTenTernaryPresentationExact
 import DASHI.Biology.ThreeSixNineMoonshineScaleExact
 import DASHI.Biology.ReducedFiftyThreeOrbitCandidateExact
+import DASHI.Biology.SporadicSignedFiftyThreeTarotProjectionExact
 import DASHI.Biology.SporadicTarotDependencyExact
 import DASHI.Biology.TarotCarrierExact
 import DASHI.Biology.JMDSporadicTarotV2CorrespondenceExact
@@ -16,5 +17,6 @@ import DASHI.Foundations.BalancedTernaryStageSymmetryExact
 import DASHI.Foundations.BalancedTernaryUltrametricExact
 import DASHI.Foundations.StageSymmetryCarrierTowerExact
 import DASHI.Foundations.DialecticSheetFrameSelectorExact
+import DASHI.Foundations.DialecticCubieTetralemmaExact
 import DASHI.Foundations.SecondRevolutionJankoTarotExact
 import DASHI.Moonshine.EulerMonsterMeaningSeparationExact
