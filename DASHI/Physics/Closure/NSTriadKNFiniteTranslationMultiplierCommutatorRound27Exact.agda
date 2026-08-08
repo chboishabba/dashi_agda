@@ -25,7 +25,8 @@ module DASHI.Physics.Closure.NSTriadKNFiniteTranslationMultiplierCommutatorRound
 --
 -- which is the algebraic source of the low-advection commutator.  No absolute
 -- value is inserted, so later TT* or square-function cancellation remains
--- available.  This theorem does not claim the cutoff-uniform operator bound.
+-- available.  The identity is lifted through every finite multiplier/test
+-- pairing.  This theorem does not claim the cutoff-uniform operator bound.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -155,11 +156,31 @@ finitePairingAppend (mode ∷ rest) right multiplier state
     ∷ finitePairing right multiplier state
     ∷ [])
 
+finitePairingCommutesWithSignedDifference :
+  (modes : List Z3.FourierMode) →
+  (test multiplier : MultiplierDualCarrier) →
+  (shift : Z3.FourierMode) →
+  (state : FourierStateCarrier) →
+  finitePairing modes test
+    (translationMultiplierCommutator multiplier shift state)
+  ≡
+  finitePairing modes test
+    (signedDifferenceCommutator multiplier shift state)
+finitePairingCommutesWithSignedDifference [] test multiplier shift state = refl
+finitePairingCommutesWithSignedDifference
+  (mode ∷ rest) test multiplier shift state
+  rewrite translationMultiplierCommutatorExact multiplier shift state mode
+        | finitePairingCommutesWithSignedDifference
+            rest test multiplier shift state = refl
+
 stateDualSeparationClosed : Bool
 stateDualSeparationClosed = true
 
 translationMultiplierCommutatorIdentityClosed : Bool
 translationMultiplierCommutatorIdentityClosed = true
+
+finiteSignedPairingIdentityClosed : Bool
+finiteSignedPairingIdentityClosed = true
 
 cutoffUniformSignedOperatorTaxClosed : Bool
 cutoffUniformSignedOperatorTaxClosed = false
