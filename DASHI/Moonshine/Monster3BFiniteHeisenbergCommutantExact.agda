@@ -29,7 +29,7 @@ module DASHI.Moonshine.Monster3BFiniteHeisenbergCommutantExact where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥; ⊥-elim)
 open import Data.Product using (Σ; _,_)
-open import Relation.Binary.PropositionalEquality using (_≢_; sym)
+open import Relation.Binary.PropositionalEquality using (_≢_; cong₂; sym; trans)
 open import Relation.Nullary using (Dec; yes; no)
 open import DASHI.Algebra.Trit using (Trit; neg; zer; pos)
 
@@ -78,11 +78,11 @@ coordinateSeparation
 ------------------------------------------------------------------------
 
 subtract3 : Trit → Trit → Trit
-subtract3 target source = target H.+3 H.negate3 source
+subtract3 target source = H._+3_ target (H.negate3 source)
 
 subtract3Restores :
   (target source : Trit) →
-  subtract3 target source H.+3 source ≡ target
+  H._+3_ (subtract3 target source) source ≡ target
 subtract3Restores neg neg = refl
 subtract3Restores neg zer = refl
 subtract3Restores neg pos = refl
@@ -96,12 +96,12 @@ subtract3Restores pos pos = refl
 translateBy : H.X6 → H.X6 → H.X6
 translateBy shift state =
   H.x6
-    (H.x0 shift H.+3 H.x0 state)
-    (H.x1 shift H.+3 H.x1 state)
-    (H.x2 shift H.+3 H.x2 state)
-    (H.x3 shift H.+3 H.x3 state)
-    (H.x4 shift H.+3 H.x4 state)
-    (H.x5 shift H.+3 H.x5 state)
+    (H._+3_ (H.x0 shift) (H.x0 state))
+    (H._+3_ (H.x1 shift) (H.x1 state))
+    (H._+3_ (H.x2 shift) (H.x2 state))
+    (H._+3_ (H.x3 shift) (H.x3 state))
+    (H._+3_ (H.x4 shift) (H.x4 state))
+    (H._+3_ (H.x5 shift) (H.x5 state))
 
 difference6 : H.X6 → H.X6 → H.X6
 difference6 target source =
@@ -176,11 +176,15 @@ diagonalCoefficientIsOrigin :
   (matrix : SchrodingerCommutantMatrix) →
   (state : H.X6) →
   entry matrix state state ≡ entry matrix origin origin
-diagonalCoefficientIsOrigin matrix state
-  rewrite difference6Restores origin state =
-  sym
-    (translationCommutationCoefficient matrix
-      (difference6 origin state) state state)
+diagonalCoefficientIsOrigin matrix state =
+  trans
+    (sym
+      (translationCommutationCoefficient matrix
+        (difference6 origin state) state state))
+    (cong₂
+      (entry matrix)
+      (difference6Restores origin state)
+      (difference6Restores origin state))
 
 record ScalarCommutantConclusion
   (matrix : SchrodingerCommutantMatrix) : Set where
@@ -206,26 +210,8 @@ schrodingerCommutantIsScalar matrix =
     (offDiagonalCoefficientVanishes matrix)
 
 ------------------------------------------------------------------------
--- The exact irreducibility bridge remains standard finite-dimensional linear
--- algebra: over an algebraically closed characteristic-zero field, a unitary
--- finite-group representation with scalar commutant is irreducible.  This
--- module supplies its previously missing concrete commutant hypothesis.
+-- Standard finite-dimensional linear representation theory can now consume
+-- ScalarCommutantConclusion to derive irreducibility.  No abstract
+-- irreducibility receipt is introduced here: the concrete missing hypothesis
+-- has been proved and exposed directly.
 ------------------------------------------------------------------------
-
-record FiniteSchurConverseInput
-  (matrix : SchrodingerCommutantMatrix) : Set₁ where
-  field
-    representationIsFiniteDimensional : Set
-    scalarFieldAlgebraicallyClosedCharacteristicZero : Set
-    representationCompletelyReducible : Set
-    scalarCommutantImpliesIrreducible :
-      ScalarCommutantConclusion matrix → Set
-
-open FiniteSchurConverseInput public
-
-schrodingerRepresentationIrreducible :
-  (matrix : SchrodingerCommutantMatrix) →
-  FiniteSchurConverseInput matrix → Set
-schrodingerRepresentationIrreducible matrix input =
-  scalarCommutantImpliesIrreducible input
-    (schrodingerCommutantIsScalar matrix)
