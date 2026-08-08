@@ -10,6 +10,7 @@ on:
     paths:
       - 'DASHI/Physics/YangMills/BalabanSelectedPlaquetteLinearRepairModelExact.agda'
       - 'DASHI/Physics/YangMills/BalabanSelectedPlaquetteResidualBudgetRound37Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33WilsonGateSignatureRound37Exact.agda'
       - 'DASHI/Physics/YangMills/BalabanClayHighestAlphaRound37RepairSelectorValidation.agda'
       - 'Docs/support/reference/YangMillsSelectedVariationRepairRound37.md'
       - 'scripts/check_yang_mills_clay_highest_alpha_round37.sh'
