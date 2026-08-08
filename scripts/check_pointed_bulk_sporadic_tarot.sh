@@ -11,6 +11,7 @@ fi
 
 FILES=(
   DASHI/Core/Optional.agda
+  DASHI/Core/ListExact.agda
   DASHI/Biology/PointedTernaryBulkExact.agda
   DASHI/Biology/DecimalTenTernaryPresentationExact.agda
   DASHI/Biology/ThreeSixNineMoonshineScaleExact.agda
@@ -57,9 +58,17 @@ for file in "${FILES[@]}"; do
 done
 
 grep -q 'optionalMapIdentity' DASHI/Core/Optional.agda
+grep -q 'listCountAppend' DASHI/Core/ListExact.agda
 grep -q 'open import DASHI.Core.Optional public' DASHI/Biology/SporadicTarotDependencyExact.agda
 grep -q 'open import DASHI.Core.Optional public' DASHI/Foundations/DialecticSheetFrameSelectorExact.agda
 grep -q 'open import DASHI.Core.Optional public' DASHI/Foundations/BalancedTernaryAmplitudeClosureExact.agda
+grep -q 'open import DASHI.Core.ListExact public' DASHI/Foundations/CounterpositionOrderedJoinExact.agda
+grep -q 'open import DASHI.Core.ListExact public' DASHI/Foundations/FrameWitnessFibreMDLExact.agda
+grep -q 'open import DASHI.Core.ListExact public' DASHI/Biology/ImageHexagramSSP15MDLExact.agda
+! grep -q '^listCount :' DASHI/Foundations/CounterpositionOrderedJoinExact.agda
+! grep -q '^listCount :' DASHI/Foundations/FrameWitnessFibreMDLExact.agda
+! grep -q '^listCount :' DASHI/Biology/ImageHexagramSSP15MDLExact.agda
+
 grep -q 'pointedBulkDimensionIs196830' DASHI/Biology/PointedTernaryBulkExact.agda
 grep -q 'candidateR53DimensionIsFiftyThree' DASHI/Biology/ReducedFiftyThreeOrbitCandidateExact.agda
 grep -q 'sporadicInventoryCountIsTwentySix' DASHI/Biology/SporadicTarotDependencyExact.agda
@@ -120,8 +129,13 @@ grep -q 'lowestCostFrameIsUniversallyTrueIsFalse' DASHI/Foundations/FrameWitness
 grep -q 'stageThreeCarrierRetained' DASHI/Foundations/DialecticCubieTetralemmaExact.agda
 grep -q 'cubiePositionCardinalityIsTwentySeven' DASHI/Foundations/DialecticCubieTetralemmaExact.agda
 grep -q 'decisionPoliciesDifferOnNegative' DASHI/Foundations/DialecticCubieTetralemmaExact.agda
+grep -q 'policyName : PolicyName' DASHI/Foundations/DialecticCubieTetralemmaExact.agda
+grep -q 'frameName : CubieFrameName' DASHI/Foundations/DialecticCubieTetralemmaExact.agda
 grep -q 'cubieListAloneProvesManifoldIsFalse' DASHI/Foundations/DialecticCubieTetralemmaExact.agda
 grep -q 'pipelineHasSevenTypedStages' DASHI/Biology/ImageHexagramSSP15MDLExact.agda
+grep -q 'selectedIntegratedCandidateIsAdmissible' DASHI/Biology/ImageHexagramSSP15MDLExact.agda
+grep -q 'selectedIntegratedFrameMatchesMDL' DASHI/Biology/ImageHexagramSSP15MDLExact.agda
+grep -q 'selectedCostIsMinimalAmongConstructedCandidates' DASHI/Biology/ImageHexagramSSP15MDLExact.agda
 grep -q 'resolutionPredictedIsFalse' DASHI/Biology/ImageHexagramSSP15MDLExact.agda
 grep -q 'scalarTraceReconstructsHeisenbergGeometryIsFalse' DASHI/Biology/ImageHexagramSSP15MDLExact.agda
 ! grep -q 'swapFirstSecond pattern' DASHI/Biology/ImageHexagramSSP15MDLExact.agda
