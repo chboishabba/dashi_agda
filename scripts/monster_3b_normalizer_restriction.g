@@ -1,7 +1,8 @@
 # Exact CTblLib restriction of the 196883-dimensional Monster character
 # to the 3B normalizer.  The computation fails closed if the tables,
 # stored fusion, character, integral decomposition, classwise reconstruction,
-# or central 3B class cannot be recovered.
+# central 3B class, or the normal extraspecial kernel class carrier cannot be
+# recovered.
 #
 # PRIMARY COMPUTATIONAL SOURCE
 # Thomas Breuer, "The GAP Character Table Library", CTblLib 1.3.11 (2025).
@@ -111,6 +112,59 @@ if invariantMultiplicity + 2 * nontrivialMultiplicity <> 196883 then
   Error("3B eigenspace multiplicities do not reconstruct dimension");
 fi;
 
+# Recover the actual normal extraspecial kernel E from the ordinary character
+# table as the unique normal class union of order 3^13.  This certifies the
+# complete MN3B class carrier of E, but it does not split the two nontrivial
+# central eigenspaces, since the full normalizer fuses zeta and zeta^2.
+kernelOrder := 3^13;
+normalClassSets := ClassPositionsOfNormalSubgroups(mn3b);
+kernelCandidates := Filtered(normalClassSets, classes ->
+  Sum(classes, i -> mn3bClassSizes[i]) = kernelOrder);
+if Length(kernelCandidates) <> 1 then
+  Error("expected one normal MN3B class union of order 3^13");
+fi;
+kernelClasses := kernelCandidates[1];
+if not 1 in kernelClasses then
+  Error("extraspecial kernel class carrier does not contain the identity");
+fi;
+if not central3BClass in kernelClasses then
+  Error("extraspecial kernel class carrier does not contain the central 3B class");
+fi;
+
+kernelClassSizeSum := Sum(kernelClasses, i -> mn3bClassSizes[i]);
+if kernelClassSizeSum <> kernelOrder then
+  Error("extraspecial kernel class sizes do not sum to 3^13");
+fi;
+
+kernelOrders := Set(List(kernelClasses, i -> mn3bOrders[i]));
+if ForAny(kernelOrders, order -> not order in [1, 3]) then
+  Error("extraspecial kernel class carrier contains an element order other than 1 or 3");
+fi;
+
+if ForAny(kernelClasses, i -> not IsInt(restrictedValues[i])) then
+  Error("expected integral Monster character values on all extraspecial kernel classes");
+fi;
+
+kernelInvariantNumerator := Sum(kernelClasses,
+  i -> mn3bClassSizes[i] * restrictedValues[i]);
+if not IsInt(kernelInvariantNumerator) then
+  Error("extraspecial-kernel character average numerator is not integral");
+fi;
+if kernelInvariantNumerator mod kernelOrder <> 0 then
+  Error("extraspecial-kernel character average is not an integer");
+fi;
+kernelInvariantDimension := kernelInvariantNumerator / kernelOrder;
+if not IsInt(kernelInvariantDimension) or kernelInvariantDimension < 0 then
+  Error("extraspecial-kernel invariant dimension is not a nonnegative integer");
+fi;
+
+kernelClassRecords := List(kernelClasses, i -> rec(
+  position := i,
+  size := mn3bClassSizes[i],
+  order := mn3bOrders[i],
+  trace := restrictedValues[i]
+));
+
 records := List(nonzero, i -> rec(
   position := i,
   multiplicity := multiplicities[i],
@@ -137,8 +191,36 @@ PrintTo(output,
   "  \"invariant_multiplicity\": ", invariantMultiplicity, ",\n",
   "  \"zeta_multiplicity\": ", nontrivialMultiplicity, ",\n",
   "  \"zeta_squared_multiplicity\": ", nontrivialMultiplicity, ",\n",
-  "  \"constituents\": [\n"
+  "  \"extraspecial_kernel_order\": ", kernelOrder, ",\n",
+  "  \"extraspecial_kernel_class_count\": ", Length(kernelClasses), ",\n",
+  "  \"extraspecial_kernel_class_size_sum\": ", kernelClassSizeSum, ",\n",
+  "  \"extraspecial_kernel_contains_central_3b\": true,\n",
+  "  \"extraspecial_kernel_all_nonidentity_orders_three\": true,\n",
+  "  \"extraspecial_kernel_invariant_numerator\": ", kernelInvariantNumerator, ",\n",
+  "  \"extraspecial_kernel_invariant_dimension\": ", kernelInvariantDimension, ",\n",
+  "  \"extraspecial_kernel_class_positions\": ["
 );
+for j in [1..Length(kernelClasses)] do
+  PrintTo(output, kernelClasses[j]);
+  if j < Length(kernelClasses) then
+    PrintTo(output, ", ");
+  fi;
+od;
+PrintTo(output, "],\n  \"extraspecial_kernel_classes\": [\n");
+for j in [1..Length(kernelClassRecords)] do
+  r := kernelClassRecords[j];
+  PrintTo(output,
+    "    {\"position\": ", r.position,
+    ", \"size\": ", r.size,
+    ", \"order\": ", r.order,
+    ", \"trace\": ", r.trace, "}"
+  );
+  if j < Length(kernelClassRecords) then
+    PrintTo(output, ",");
+  fi;
+  PrintTo(output, "\n");
+od;
+PrintTo(output, "  ],\n  \"constituents\": [\n");
 
 for j in [1..Length(records)] do
   r := records[j];
@@ -162,4 +244,8 @@ Print("Nonzero constituents: ", Length(records), "\n");
 Print("Classwise reconstruction: true\n");
 Print("3B multiplicities: ", invariantMultiplicity, ", ",
   nontrivialMultiplicity, ", ", nontrivialMultiplicity, "\n");
+Print("Extraspecial kernel order: ", kernelOrder,
+  "; MN3B class count: ", Length(kernelClasses), "\n");
+Print("Extraspecial-kernel invariant dimension: ",
+  kernelInvariantDimension, "\n");
 QUIT;
