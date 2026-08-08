@@ -89,7 +89,7 @@ multiplierEndpointMagnitudeBound current path =
   subst
     (λ difference →
       ∣ difference ∣ ≤ stepMagnitudeSum current path)
-    (multiplierDifferenceIsSignedPathSum current path)
+    (sym (multiplierDifferenceIsSignedPathSum current path))
     (signedPathMagnitudeBound current path)
 
 discreteMultiplierTelescopingClosed : Bool
