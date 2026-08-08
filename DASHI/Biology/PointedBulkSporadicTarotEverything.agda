@@ -28,3 +28,13 @@ import DASHI.Foundations.DialecticCubieTetralemmaExact
 import DASHI.Foundations.SecondRevolutionJankoTarotExact
 import DASHI.Moonshine.DepthTwoNonaryResidueFibreExact
 import DASHI.Moonshine.EulerMonsterMeaningSeparationExact
+
+------------------------------------------------------------------------
+-- SSP15 nonary complement quotient and j-coarse/j-fine continuation.
+
+import DASHI.Biology.NonaryCompletionPhaseQuotientExact
+import DASHI.Biology.SSP15ComplementPhaseProjectorExact
+import DASHI.Biology.OggPrimeNonaryAddressExact
+import DASHI.Biology.JCoarseFineEvaluationFibreExact
+import DASHI.Biology.SSP15NineObserverAtlasExact
+import DASHI.Biology.SSP15JCoarseFineIntegratedExact
