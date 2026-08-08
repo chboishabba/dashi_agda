@@ -239,15 +239,22 @@ fi;
 
 twelvePlusSeventyEightCertified := true;
 
-records := List(nonzero, i -> rec(
-  position := i,
-  multiplicity := multiplicities[i],
-  degree := mn3bIrr[i][1],
-  centralTrace := mn3bIrr[i][central3BClass],
-  cliffordType :=
-    (i in centreTrivialConstituents) and "centre-trivial" or "paired-phase",
-  contribution := multiplicities[i] * mn3bIrr[i][1]
-));
+records := [];
+for i in nonzero do
+  if i in centreTrivialConstituents then
+    cliffordType := "centre-trivial";
+  else
+    cliffordType := "paired-phase";
+  fi;
+  Add(records, rec(
+    position := i,
+    multiplicity := multiplicities[i],
+    degree := mn3bIrr[i][1],
+    centralTrace := mn3bIrr[i][central3BClass],
+    cliffordType := cliffordType,
+    contribution := multiplicities[i] * mn3bIrr[i][1]
+  ));
+od;
 
 output := OutputTextFile("build/monster_3b_normalizer_restriction.json", false);
 SetPrintFormattingStatus(output, false);
