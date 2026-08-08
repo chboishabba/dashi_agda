@@ -38,13 +38,13 @@ The identity
 90 = 12 + 78
 ```
 
-is retained only as dimension compatibility on this branch. A genuine theorem now requires:
+is retained only as dimension compatibility. A genuine theorem now requires:
 
 ```text
 S_zeta ~= S_12 disjoint-union S_78
 ```
 
-with two-sided inverse maps and block-diagonal inertia action. Character inner products and the actual intertwiner remain open here.
+with two-sided inverse maps and block-diagonal inertia action. Character inner products and the actual intertwiner remain open.
 
 ## Complete nonary address theorem
 
@@ -200,9 +200,9 @@ The arithmetic coincidence
 
 is exact. It does **not** identify the normalization offset with a ten-dimensional surviving Monster subspace. Such an interpretation would require an actual graded carrier and trace or dimension map realizing the ten.
 
-## Exact semantic 7+7+1 carrier partition
+## Exact semantic 7+7+1 carrier equivalence
 
-The existing semantic partition is reconstructed directly as finite lane types rather than merely copied from an older receipt:
+The existing semantic partition is reconstructed directly as finite lane types:
 
 ```text
 MirrorA7 = [2,3,5,7,11,13,17]
@@ -210,13 +210,22 @@ MirrorB7 = [19,23,29,31,41,47,59]
 Sign1    = [71].
 ```
 
-The code proves the three counts `7`, `7`, and `1`, and their sum `15`. Every MirrorA and MirrorB lane lies in a coarse sheet `0` through `6`, while `p71` has the unique address
+The address authority proves the three counts `7`, `7`, and `1`, and their sum `15`. The separate module `MonsterOggNonarySevenSevenOneEquivalenceExact.agda` upgrades that arithmetic to a two-sided finite equivalence
+
+```text
+MonsterPrimeLane
+  ~= MirrorA7Lane disjoint-union (MirrorB7Lane disjoint-union Sign1Lane).
+```
+
+It constructs classification and forgetting maps and proves both round trips by exhaustive pattern matching. Thus no lane is omitted or duplicated by the semantic partition.
+
+Every MirrorA and MirrorB lane lies in a coarse sheet `0` through `6`, while `p71` has address
 
 ```text
 71 = 7*9 + 8.
 ```
 
-This makes the finite carrier organization geometrically explicit. It does not prove that the two septets are invariant Monster modules, literal CM split/inert classes, or positive frame factors.
+The uniqueness theorem proves that any Ogg lane whose coarse sheet equals `7` is propositionally equal to `p71`. This makes the finite carrier organization geometrically explicit. It does not prove that the two septets are invariant Monster modules, literal CM split/inert classes, or positive frame factors.
 
 ## Genus-zero and Clay boundary
 
@@ -228,7 +237,8 @@ nonary address -> equivariant Monster operation
 absence of residues 0 and 6 -> genus-zero
 nonary cascade acyclicity <-> genus-zero
 41 reflection -> Leray projector
-7+7+1 finite partition -> Monster-module direct sum
+7+7+1 finite equivalence -> Monster-module direct sum
+unnormalised 7A offset ten -> ten-dimensional Monster mass
 nonary arithmetic -> Yang--Mills Clay theorem.
 ```
 
