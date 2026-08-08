@@ -36,7 +36,9 @@ scripts=(
   scripts/ns_round26_finite_tax_adversarial.py
 )
 
-for file in "${files[@]}" "${docs[@]}" "${scripts[@]}"; do
+workflow=.github/workflows/ns-luo-galerkin-critical-ledger-round26.yml
+
+for file in "${files[@]}" "${docs[@]}" "${scripts[@]}" "$workflow"; do
   test -f "$file"
 done
 
@@ -153,6 +155,11 @@ grep -q '\[Back to the Clay-contract overview\](README.md)' docs/ns-clay-contrac
 grep -q 'Duplicate-free tax ownership' docs/ns-clay-contract/galerkin-critical-ledger-round26.md
 grep -q 'L7 — Duplicate-free physical tax ledger' docs/ns-clay-contract/paper-corpus/highest-alpha-lemma-ladder.md
 grep -q 'Strict unique-owner viscosity certificate' docs/ns-clay-contract/architecture.puml
+
+grep -q 'agent/ns-luo-galerkin-critical-ledger-round26' "$workflow"
+grep -q 'check_ns_luo_galerkin_critical_ledger_round26.sh' "$workflow"
+grep -q 'ns-round26-finite-regression.json' "$workflow"
+grep -q 'ns-round26-critical-ledger-agda' "$workflow"
 
 python3 scripts/ns_round26_finite_tax_adversarial.py \
   --radius 2 \
