@@ -16,6 +16,7 @@ on:
       - 'DASHI/Biology/TarotCarrierExact.agda'
       - 'DASHI/Biology/JMDSporadicTarotV2CorrespondenceExact.agda'
       - 'DASHI/Biology/JMDSporadicTarotOrdinalTotalisationExact.agda'
+      - 'DASHI/Biology/StageSymmetrySSP15BridgeExact.agda'
       - 'DASHI/Biology/SporadicStageSymmetryTarotRegression.agda'
       - 'DASHI/Biology/PointedBulkReducedMoonshineBoundary.agda'
       - 'DASHI/Biology/PointedBulkSporadicTarotSourceAtlas.agda'
