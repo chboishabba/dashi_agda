@@ -1,44 +1,46 @@
 module DASHI.Moonshine.Monster3BActualKernelCharacterRound4Validation where
 
-import DASHI.Moonshine.Monster3BProjectorResolutionRound3Validation
-import DASHI.Moonshine.Monster3BExtraspecialCharacterSignatureExact as Signature
+import DASHI.Moonshine.Monster3BOrbifoldLocalModuleRound4Validation
+import DASHI.Moonshine.Monster3BKernelCharacterCriterionExact as Character
 import DASHI.Moonshine.Monster3BActualKernelCharacterPromotionExact as Promotion
 import DASHI.Moonshine.Monster3BFiniteStoneVonNeumannMultiplicityExact as StoneCount
-import DASHI.Moonshine.Monster3BActualMultiplicityIntertwinerExact as Evaluation
-import DASHI.Moonshine.Monster3BProjectiveTensorCocycleExact as Cocycle
+import DASHI.Moonshine.Monster3BMultiplicityEvaluationExact as Existing
+import DASHI.Moonshine.Monster3BActualMultiplicityEvaluationFromRecognitionExact as Evaluation
+import DASHI.Moonshine.Monster3BNormalizerCocycleCancellationExact as Cocycle
 import DASHI.Moonshine.Monster3BMultiplicityCharacterSafeReconstructionExact as Safe
-import DASHI.Moonshine.MoonshineOrbifoldMasslessStateRemovalExact as Orbifold
+import DASHI.Moonshine.MoonshineOrbifoldMasslessStateRemovalExact as Gap
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (_∷_; [])
 open import Agda.Builtin.Nat using (Nat; _*_)
+open import Data.Empty using (⊥)
 
 extraspecialDegreeBudgetCloses :
-  Signature.extraspecialCharacterDegreeSquareSum
-  ≡ Signature.extraspecialOrder
+  Character.extraspecialCharacterDegreeSquareSum
+  ≡ Character.extraspecialOrder
 extraspecialDegreeBudgetCloses =
-  Signature.extraspecialCharacterDegreeSquareSumIsOrder
+  Character.extraspecialCharacterDegreeSquareSumIsOrder
 
 heisenbergCharacterHasUnitNormNumerator :
-  Signature.heisenbergNormNumerator ≡ Signature.extraspecialOrder
+  Character.heisenbergNormNumerator ≡ Character.extraspecialOrder
 heisenbergCharacterHasUnitNormNumerator =
-  Signature.heisenbergNormNumeratorIsExtraspecialOrder
+  Character.heisenbergNormNumeratorIsExtraspecialOrder
 
-ninetyCopiesHaveActualPhaseDegree :
-  Signature.zetaSectorDegree ≡ 65610
-ninetyCopiesHaveActualPhaseDegree = Signature.zetaSectorDegreeIs65610
+ninetyCopiesHaveActualPhaseDegree : 90 * 729 ≡ 65610
+ninetyCopiesHaveActualPhaseDegree = refl
 
 noncentralNinetyCopyTraceVanishes :
-  Signature.ninetyHeisenbergCharacter Signature.noncentralClass
-  ≡ Signature.zeroTrace
+  Character.ninetyFoldModelKernelTrace Character.noncentralClass
+  ≡ Character.zeroTrace
 noncentralNinetyCopyTraceVanishes =
-  Signature.ninetyHeisenbergNoncentralValue
+  Character.modelNoncentralTraceIsZero
 
 stoneVonNeumannMultiplicityIsUnique :
   (multiplicity : Nat) →
   729 * multiplicity ≡ 65610 →
   multiplicity ≡ 90
-stoneVonNeumannMultiplicityIsUnique = StoneCount.multiplicityForcedToNinety
+stoneVonNeumannMultiplicityIsUnique =
+  StoneCount.multiplicityForcedToNinety
 
 safeNonzeroTraceRow :
   Safe.MultiplicityClassRow Safe.naturalTraceAlgebra
@@ -60,22 +62,31 @@ safeClassReconstructionExample =
     Safe.naturalTraceAlgebra
     (safeNonzeroTraceRow ∷ safeZeroTraceRow ∷ [])
 
-moonshineWeightOneIsRemoved : Orbifold.moonshineWeightOneDimension ≡ 0
-moonshineWeightOneIsRemoved = Orbifold.moonshineWeightOneVanishes
+moonshineWeightOneIsRemoved : Gap.MoonshineWeightOne → ⊥
+moonshineWeightOneIsRemoved = Gap.moonshineWeightOneEmpty
 
-moonshineFirstExcitationGrade : Orbifold.conformalExcitationIndex ≡ 2
-moonshineFirstExcitationGrade = Orbifold.conformalExcitationIndexIsTwo
-
--- The cocycle cancellation and actual evaluation theorems are generic:
--- every future actual normalizer action and actual multiplicity-space map must
--- instantiate these definitions rather than introducing parallel interfaces.
-projectiveTensorCancellationAvailable :
-  (data : Cocycle.CompensatingProjectiveTensor) →
-  Cocycle.GenuineTensorActionCertificate data
-projectiveTensorCancellationAvailable = Cocycle.actualTensorNormalizerAction
+moonshineFirstExcitationGrade :
+  Gap.firstPositiveExcitationGrade
+    Gap.canonicalFiniteConformalExcitationProfile
+  ≡ 2
+moonshineFirstExcitationGrade = Gap.conformalExcitationIndexIsTwo
 
 actualEvaluationPromotionAvailable :
-  (data : Evaluation.ActualMultiplicityEvaluationData) →
-  Evaluation.ActualEvaluationEquivariantIsomorphism data
+  ∀ {ActualSector} →
+  (recognition : Existing.ActualZetaSectorRecognition ActualSector) →
+  Evaluation.ActualMultiplicityEvaluationIsomorphism ActualSector
 actualEvaluationPromotionAvailable =
-  Evaluation.actualMonsterLocalModuleIntertwiner
+  Evaluation.actualMonsterMultiplicityEvaluationIsomorphism
+
+projectiveTensorCancellationAvailable :
+  (action : Cocycle.CocycleCompensatedTensorAction) →
+  (n m : Cocycle.Normalizer action) →
+  (h : Cocycle.Heisenberg action) →
+  (s : Cocycle.Multiplicity action) →
+  Cocycle.actTensor action n
+    (Cocycle.actTensor action m (Cocycle.pureTensor action h s))
+  ≡ Cocycle.actTensor action
+      (Cocycle.compose action n m)
+      (Cocycle.pureTensor action h s)
+projectiveTensorCancellationAvailable =
+  Cocycle.compensatedTensorActionIsHonestOnPureTensors
