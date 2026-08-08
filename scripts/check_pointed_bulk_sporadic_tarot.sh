@@ -31,6 +31,7 @@ FILES=(
   DASHI/Foundations/BalancedTernaryAmplitudeClosureExact.agda
   DASHI/Foundations/BalancedTernaryUltrametricExact.agda
   DASHI/Foundations/StageSymmetryCarrierTowerExact.agda
+  DASHI/Foundations/CounterpositionOrderedJoinExact.agda
   DASHI/Foundations/DialecticSheetFrameSelectorExact.agda
   DASHI/Foundations/FrameWitnessFibreMDLExact.agda
   DASHI/Foundations/DialecticCubieTetralemmaExact.agda
@@ -83,6 +84,15 @@ grep -q 'constituentSuffixesErasedIsFalse' DASHI/Foundations/BalancedTernaryUltr
 grep -q 'hexadicCardinalityIsSix' DASHI/Foundations/StageSymmetryCarrierTowerExact.agda
 grep -q 'nonaryCardinalityIsNine' DASHI/Foundations/StageSymmetryCarrierTowerExact.agda
 
+# Binary embedding, context counterpositions, ordered joins, and square actions.
+grep -q 'binaryEmbeddingInjective' DASHI/Foundations/CounterpositionOrderedJoinExact.agda
+grep -q 'binaryEmbeddingNeverNeutral' DASHI/Foundations/CounterpositionOrderedJoinExact.agda
+grep -q 'partialCounterpositionIsNotFullInverse' DASHI/Foundations/CounterpositionOrderedJoinExact.agda
+grep -q 'orderedStageFiveJoinsShareAmplitude' DASHI/Foundations/CounterpositionOrderedJoinExact.agda
+grep -q 'orderedStageFiveJoinsDiffer' DASHI/Foundations/CounterpositionOrderedJoinExact.agda
+grep -q 'squareMoveCountIsEight' DASHI/Foundations/CounterpositionOrderedJoinExact.agda
+grep -q 'squareStateCarrierIdentifiedWithSquareMoveCarrierIsFalse' DASHI/Foundations/CounterpositionOrderedJoinExact.agda
+
 # Image/hexagram/frame selector, witness fibre, finite MDL, and cubie layers.
 grep -q 'selectInhabitableFrame' DASHI/Foundations/DialecticSheetFrameSelectorExact.agda
 grep -q 'localWitnessImpliesUniversalTruthIsFalse' DASHI/Foundations/DialecticSheetFrameSelectorExact.agda
@@ -132,7 +142,7 @@ grep -q 'stageCarrierIdentifiedWithJankoGroupIsFalse' DASHI/Foundations/SecondRe
 grep -q 'differentialSquaresToZero' DASHI/Moonshine/EulerMonsterMeaningSeparationExact.agda
 grep -q 'coefficient196884IsEulerCharacteristicClaimedIsFalse' DASHI/Moonshine/EulerMonsterMeaningSeparationExact.agda
 
-echo "Pointed bulk / sporadic Tarot / amplitude / SSP15 / depth-two static guards passed."
+echo "Pointed bulk / sporadic Tarot / amplitude / counterposition / SSP15 / depth-two static guards passed."
 
 scripts/run_agda29_parallel_check.sh \
   DASHI/Biology/JMDSporadicTarotV2Regression.agda \
