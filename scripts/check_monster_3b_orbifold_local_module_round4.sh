@@ -53,6 +53,12 @@ character=DASHI/Moonshine/Monster3BKernelCharacterCriterionExact.agda
 cocycle=DASHI/Moonshine/Monster3BNormalizerCocycleCancellationExact.agda
 validation=DASHI/Moonshine/Monster3BOrbifoldLocalModuleRound4Validation.agda
 aggregate=DASHI/EverythingMonster3BOrbifoldLocalModuleRound4.agda
+reference=Docs/support/reference/Monster3BOrbifoldLocalModuleRound4.md
+
+if [ ! -s "$reference" ]; then
+  echo "missing or empty reference document: $reference" >&2
+  exit 1
+fi
 
 require_pattern "$weight2" 'untwistedInvariantWeightTwoDimensionIs98580'
 require_pattern "$weight2" 'twistedInvariantWeightTwoDimensionIs98304'
@@ -91,6 +97,9 @@ require_pattern "$cocycle" 'compensatedTensorActionIsHonestOnPureTensors'
 require_pattern "$validation" 'publishedWeightTwoSectorSplit'
 require_pattern "$aggregate" 'import DASHI.Everything'
 require_pattern "$aggregate" 'Monster3BOrbifoldLocalModuleRound4Validation'
+require_pattern "$reference" 'Equal total dimension does not transport an action'
+require_pattern "$reference" 'does not prove a four-dimensional Yang--Mills Hamiltonian gap'
+require_pattern "$reference" 'The numerical equality `90 = 12 + 78` remains insufficient by itself.'
 
 scripts/run_agda29_parallel_check.sh \
   DASHI/Moonshine/Monster3BOrbifoldLocalModuleRound4Validation.agda \
