@@ -30,9 +30,9 @@ Run the smallest relevant exact tests:
 - supercritical amplitude scaling;
 - spectral-projector eigenvalue crossing;
 - low-frequency Poincaré failure;
-- exact time-change invariance of the BKM integral.
+- generic property transport under a supplied exact integral equality.
 
-A counterexample narrows only the implication it satisfies. It does not erase unrelated local lemmas.
+The concrete time map and BKM change-of-variables equality for any source remain open until separately constructed. A counterexample narrows only the implication it satisfies. It does not erase unrelated local lemmas.
 
 ## 4. Highest-alpha acceptance gate
 
@@ -54,7 +54,7 @@ Run:
 AGDA_JOBS=1 bash scripts/check_ns_luo_claim_corpus_highest_alpha_round24.sh
 ```
 
-The checker cascades through Round 23, rejects holes, postulates, unsafe options, trust primitives and placeholders, verifies source identifiers and theorem markers, checks the relative documentation graph, and invokes pinned Agda 2.9 on the cumulative Round 24 validation root.
+The checker cascades through Round 23, rejects holes, postulates, unsafe options, trust primitives and placeholders, verifies every identifier currently stored in the typed source corpus, checks all twenty-four L0–L23 node names and fail-closed status theorems, checks every relative documentation link declared by this tranche, and invokes pinned Agda 2.9 on the cumulative Round 24 validation root.
 
 An absent or failed kernel result leaves every new lane unpromoted. A code-review bot result is not a substitute for kernel verification.
 
