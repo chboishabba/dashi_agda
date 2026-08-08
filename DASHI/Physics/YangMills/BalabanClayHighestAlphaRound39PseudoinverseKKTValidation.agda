@@ -54,35 +54,35 @@ fullInversePromotesToPseudoinverse = Pseudo.fullInverseToPseudoinverse
 
 pseudoinverseProjectorIdempotenceRegression :
   ∀ {Multiplier}
-    (data : Pseudo.FiniteKKTPseudoinverseData Multiplier)
+    (pseudoData : Pseudo.FiniteKKTPseudoinverseData Multiplier)
     vector coordinate →
-  Pseudo.admissibleProject data
-    (Pseudo.admissibleProject data vector) coordinate
-  ≡ Pseudo.admissibleProject data vector coordinate
+  Pseudo.admissibleProject pseudoData
+    (Pseudo.admissibleProject pseudoData vector) coordinate
+  ≡ Pseudo.admissibleProject pseudoData vector coordinate
 pseudoinverseProjectorIdempotenceRegression = Pseudo.projectIdempotent
 
 annihilatorProducesKKTMultiplierRegression :
   ∀ {Multiplier}
-    (data : Pseudo.FiniteKKTPseudoinverseData Multiplier)
+    (pseudoData : Pseudo.FiniteKKTPseudoinverseData Multiplier)
     covector →
-  Annihilator.AnnihilatesConstraintKernel data covector →
-  Annihilator.KKTMultiplierWitness data covector
+  Annihilator.AnnihilatesConstraintKernel pseudoData covector →
+  Annihilator.KKTMultiplierWitness pseudoData covector
 annihilatorProducesKKTMultiplierRegression =
   Annihilator.selectedKKTMultiplierExistence
 
 rawExtractorDefectPairingRegression :
   ∀ {Multiplier}
-    (data : Stationary.SelectedKKTStationaryData Multiplier)
-    field plaquette →
-  Stationary.firstVariation data
+    (stationaryData : Stationary.SelectedKKTStationaryData Multiplier)
+    bondField plaquette →
+  Stationary.firstVariation stationaryData
     (KKT.selectedConstraintRepair
-      (Stationary.projectorData data)
-      (Boundary.rawPlaquetteSingletonExtractor field plaquette))
+      (Stationary.projectorData stationaryData)
+      (Boundary.rawPlaquetteSingletonExtractor bondField plaquette))
   ≡ KKT.multiplierDot
-      (Stationary.projectorData data)
-      (Stationary.kktMultiplier data)
+      (Stationary.projectorData stationaryData)
+      (Stationary.kktMultiplier stationaryData)
       (RawDefect.rawExtractorConstraintDefect
-        (Stationary.projectorData data) field plaquette)
+        (Stationary.projectorData stationaryData) bondField plaquette)
 rawExtractorDefectPairingRegression =
   RawDefect.rawExtractorProjectorDefectPairingExact
 
