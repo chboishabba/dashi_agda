@@ -25,6 +25,7 @@ FILES=(
   DASHI/Biology/PointedBulkSporadicTarotSourceAtlas.agda
   DASHI/Biology/PointedBulkSporadicTarotEverything.agda
   DASHI/Foundations/BalancedTernaryStageSymmetryExact.agda
+  DASHI/Foundations/BalancedTernaryUltrametricExact.agda
   DASHI/Foundations/StageSymmetryCarrierTowerExact.agda
   DASHI/Foundations/DialecticSheetFrameSelectorExact.agda
   DASHI/Foundations/SecondRevolutionJankoTarotExact.agda
@@ -64,12 +65,15 @@ grep -q 'posterCardCountIsTwentyTwo' DASHI/Biology/JMDSporadicTarotV2Corresponde
 grep -q 'posterSuppliesTotalS26ToA22MapIsFalse' DASHI/Biology/JMDSporadicTarotV2CorrespondenceExact.agda
 grep -q 'omittedGroupsMayBeAssignedWithoutRationaleIsFalse' DASHI/Biology/JMDSporadicTarotV2CorrespondenceExact.agda
 
-# Balanced ternary, symmetry, retained fallback, and depth-two boundaries.
+# Balanced ternary, retained fallback, ultrametric prefix, and symmetry.
 grep -q 'stage5To3RetainsTwo' DASHI/Foundations/BalancedTernaryStageSymmetryExact.agda
 grep -q 'residualErasedIsFalse' DASHI/Foundations/BalancedTernaryStageSymmetryExact.agda
 grep -q 'counterpositionNeedNotBeInverse' DASHI/Foundations/BalancedTernaryStageSymmetryExact.agda
 grep -q 'eightyOneSplitsTenAndSeventyOne' DASHI/Foundations/BalancedTernaryStageSymmetryExact.agda
 grep -q 'independentEvidenceForTenTimesThreePowerNineIsFalse' DASHI/Foundations/BalancedTernaryStageSymmetryExact.agda
+grep -q 'prefixAgreementTransitive' DASHI/Foundations/BalancedTernaryUltrametricExact.agda
+grep -q 'fiveSixAgreeThroughDepthTwo' DASHI/Foundations/BalancedTernaryUltrametricExact.agda
+grep -q 'constituentSuffixesErasedIsFalse' DASHI/Foundations/BalancedTernaryUltrametricExact.agda
 grep -q 'hexadicCardinalityIsSix' DASHI/Foundations/StageSymmetryCarrierTowerExact.agda
 grep -q 'nonaryCardinalityIsNine' DASHI/Foundations/StageSymmetryCarrierTowerExact.agda
 
