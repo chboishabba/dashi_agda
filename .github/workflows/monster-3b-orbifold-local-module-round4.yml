@@ -9,6 +9,7 @@ on:
       - 'agent/monster-3b-projector-resolution-round3'
       - 'agent/monster-3b-orbifold-local-module-round4'
     paths:
+      - 'DASHI/Moonshine/LeechWeightTwo196608BridgeExact.agda'
       - 'DASHI/Moonshine/MoonshineOrbifoldWeightTwoDecompositionExact.agda'
       - 'DASHI/Moonshine/MoonshineOrbifoldMasslessStateRemovalExact.agda'
       - 'DASHI/Moonshine/MoonshineZ3OrbifoldThreeLocalSiblingExact.agda'
