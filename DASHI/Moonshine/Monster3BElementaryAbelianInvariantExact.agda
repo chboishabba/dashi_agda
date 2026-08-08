@@ -19,20 +19,33 @@ module DASHI.Moonshine.Monster3BElementaryAbelianInvariantExact where
 --
 -- DASHI CONTRIBUTION
 --
--- Supply the exact finite incidence counts consumed by the executable
--- generator-to-invariant dashboard for the symplectic space F_3^6.
+-- Correctly separate the 729-dimensional Schrodinger coordinate
 --
--- Every two-dimensional subspace is an elementary abelian subgroup C_3^2
--- of the additive carrier.  Its alternating-form restriction has rank zero
--- or two.  The exact strata are
+--   X = F_3^6
 --
---   all 2-planes          = [6 choose 2]_3 = 11011,
---   totally isotropic     = 3640,
---   nondegenerate rank-2  = 7371.
+-- from the full extraspecial quotient
 --
--- These are the subgroup strata on which genuine Chern-class restrictions
--- and kappa_r generators may later be evaluated.  This module does not
--- fabricate cohomology classes from the incidence counts.
+--   E / Z(E) = X + X^* = F_3^12.
+--
+-- Every two-plane in the fixed Lagrangian X is automatically isotropic in
+-- the full symplectic quotient.  There are
+--
+--   [6 choose 2]_3 = 11011
+--
+-- such planes.  Each U <= X lifts with the centre to an elementary abelian
+-- subgroup Z(E) x U of rank three.  The 729-dimensional Schrodinger module
+-- restricts to U as
+--
+--   3^(6-2) copies of Reg(U) = 81 copies of a 9-dimensional regular module.
+--
+-- Separately, the full twelve-dimensional symplectic quotient has
+--
+--   [12 choose 2]_3 = 5883904390 total two-planes,
+--   1961279320 isotropic two-planes,
+--   3922625070 non-isotropic two-planes.
+--
+-- These are exact incidence and character-restriction inputs for a future
+-- kappa_r/Chern-subring calculation; no cohomology class is fabricated here.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -42,101 +55,145 @@ open import Agda.Builtin.Nat using (Nat; _+_; _*_)
 fieldOrder : Nat
 fieldOrder = 3
 
-ambientVectorCount : Nat
-ambientVectorCount = 729
+lLagrangianDimension : Nat
+lLagrangianDimension = 6
 
-projectiveLineCount : Nat
-projectiveLineCount = 364
+schrodingerDimension : Nat
+schrodingerDimension = 729
 
-projectiveLineCountCertificate :
-  2 * projectiveLineCount + 1 ≡ ambientVectorCount
-projectiveLineCountCertificate = refl
+fullSymplecticDimension : Nat
+fullSymplecticDimension = 12
 
-allTwoPlaneCount : Nat
-allTwoPlaneCount = 11011
-
-isotropicTwoPlaneCount : Nat
-isotropicTwoPlaneCount = 3640
-
-symplecticTwoPlaneCount : Nat
-symplecticTwoPlaneCount = 7371
+centreOrder : Nat
+centreOrder = 3
 
 ------------------------------------------------------------------------
--- Gaussian-binomial and symplectic-Grassmann multiplication certificates.
---
--- [6 choose 2]_3
---   = ((3^6-1)(3^5-1))/((3^2-1)(3-1))
---   = (728*242)/16.
---
--- The rank-two totally isotropic Grassmannian in a six-dimensional
--- symplectic space has
---
---   ((3^6-1)(3^4-1))/((3^2-1)(3-1))
---   = (728*80)/16
---
--- points.
+-- Fixed-Lagrangian two-plane count.
 ------------------------------------------------------------------------
 
-gradedDenominator : Nat
-gradedDenominator = 16
+lLagrangianTwoPlaneCount : Nat
+lLagrangianTwoPlaneCount = 11011
 
-gaussianTwoPlaneNumerator : Nat
-gaussianTwoPlaneNumerator = 728 * 242
+gaussianDenominator : Nat
+gaussianDenominator = 16
 
-gaussianTwoPlaneCertificate :
-  gradedDenominator * allTwoPlaneCount ≡ gaussianTwoPlaneNumerator
-gaussianTwoPlaneCertificate = refl
+lLagrangianTwoPlaneNumerator : Nat
+lLagrangianTwoPlaneNumerator = 728 * 242
 
-isotropicTwoPlaneNumerator : Nat
-isotropicTwoPlaneNumerator = 728 * 80
+lLagrangianTwoPlaneCertificate :
+  gaussianDenominator * lLagrangianTwoPlaneCount
+  ≡ lLagrangianTwoPlaneNumerator
+lLagrangianTwoPlaneCertificate = refl
 
-isotropicTwoPlaneCertificate :
-  gradedDenominator * isotropicTwoPlaneCount
-  ≡ isotropicTwoPlaneNumerator
-isotropicTwoPlaneCertificate = refl
+translationPlaneOrder : Nat
+translationPlaneOrder = 9
 
-twoPlanePartition :
-  isotropicTwoPlaneCount + symplecticTwoPlaneCount ≡ allTwoPlaneCount
-twoPlanePartition = refl
+centralLiftOrder : Nat
+centralLiftOrder = centreOrder * translationPlaneOrder
 
-data AlternatingRestrictionRank : Set where
-  rankZero : AlternatingRestrictionRank
-  rankTwo : AlternatingRestrictionRank
+centralLiftOrderIsTwentySeven : centralLiftOrder ≡ 27
+centralLiftOrderIsTwentySeven = refl
 
-rankStratumCount : AlternatingRestrictionRank → Nat
-rankStratumCount rankZero = isotropicTwoPlaneCount
-rankStratumCount rankTwo = symplecticTwoPlaneCount
+centralLiftRank : Nat
+centralLiftRank = 3
 
-rankStrataExhaustTwoPlanes :
-  rankStratumCount rankZero + rankStratumCount rankTwo ≡ allTwoPlaneCount
-rankStrataExhaustTwoPlanes = refl
+regularCharacterCount : Nat
+regularCharacterCount = translationPlaneOrder
 
-record GeneratorInvariantInput : Set where
-  constructor generatorInvariantInput
+regularCharacterMultiplicity : Nat
+regularCharacterMultiplicity = 81
+
+restrictedSchrodingerDimension : Nat
+restrictedSchrodingerDimension =
+  regularCharacterCount * regularCharacterMultiplicity
+
+restrictedSchrodingerDimensionIs729 :
+  restrictedSchrodingerDimension ≡ schrodingerDimension
+restrictedSchrodingerDimensionIs729 = refl
+
+regularCopiesTimesPlaneOrderIsSchrodinger :
+  regularCharacterMultiplicity * translationPlaneOrder
+  ≡ schrodingerDimension
+regularCopiesTimesPlaneOrderIsSchrodinger = refl
+
+------------------------------------------------------------------------
+-- Full F_3^12 symplectic two-plane strata.
+------------------------------------------------------------------------
+
+fullTwoPlaneCount : Nat
+fullTwoPlaneCount = 5883904390
+
+fullIsotropicTwoPlaneCount : Nat
+fullIsotropicTwoPlaneCount = 1961279320
+
+fullNonIsotropicTwoPlaneCount : Nat
+fullNonIsotropicTwoPlaneCount = 3922625070
+
+fullTwoPlaneNumerator : Nat
+fullTwoPlaneNumerator = 531440 * 177146
+
+fullIsotropicTwoPlaneNumerator : Nat
+fullIsotropicTwoPlaneNumerator = 531440 * 59048
+
+fullTwoPlaneCertificate :
+  gaussianDenominator * fullTwoPlaneCount ≡ fullTwoPlaneNumerator
+fullTwoPlaneCertificate = refl
+
+fullIsotropicTwoPlaneCertificate :
+  gaussianDenominator * fullIsotropicTwoPlaneCount
+  ≡ fullIsotropicTwoPlaneNumerator
+fullIsotropicTwoPlaneCertificate = refl
+
+fullTwoPlanePartition :
+  fullIsotropicTwoPlaneCount + fullNonIsotropicTwoPlaneCount
+  ≡ fullTwoPlaneCount
+fullTwoPlanePartition = refl
+
+data PlaneLocation : Set where
+  fixedLagrangianPlane : PlaneLocation
+  fullSymplecticIsotropicPlane : PlaneLocation
+  fullSymplecticNonIsotropicPlane : PlaneLocation
+
+planeCount : PlaneLocation → Nat
+planeCount fixedLagrangianPlane = lLagrangianTwoPlaneCount
+planeCount fullSymplecticIsotropicPlane = fullIsotropicTwoPlaneCount
+planeCount fullSymplecticNonIsotropicPlane = fullNonIsotropicTwoPlaneCount
+
+record ElementaryRestrictionInput : Set where
+  constructor elementaryRestrictionInput
   field
-    alternatingRank : AlternatingRestrictionRank
-    qPlusZeroCount : Nat
-    qMinusZeroCount : Nat
-    rrefSupportWeight : Nat
+    translationRank : Nat
+    centralRank : Nat
+    subgroupOrder : Nat
+    linearCharacterCount : Nat
+    characterMultiplicity : Nat
+    representedDimension : Nat
+
+canonicalRankThreeRestrictionInput : ElementaryRestrictionInput
+canonicalRankThreeRestrictionInput =
+  elementaryRestrictionInput 2 1 27 9 81 729
 
 record ChernRestrictionBoundary : Set where
   constructor chernRestrictionBoundary
   field
-    elementaryAbelianStrataEnumerated : Bool
-    elementaryAbelianStrataEnumeratedIsTrue :
-      elementaryAbelianStrataEnumerated ≡ true
-    alternatingRestrictionRanksEnumerated : Bool
-    alternatingRestrictionRanksEnumeratedIsTrue :
-      alternatingRestrictionRanksEnumerated ≡ true
+    lLagrangianPlanesEnumerated : Bool
+    lLagrangianPlanesEnumeratedIsTrue :
+      lLagrangianPlanesEnumerated ≡ true
+    fullSymplecticStrataCounted : Bool
+    fullSymplecticStrataCountedIsTrue :
+      fullSymplecticStrataCounted ≡ true
+    fixedLagrangianPlanesSplitByArtificialAlternatingRank : Bool
+    fixedLagrangianPlanesSplitByArtificialAlternatingRankIsFalse :
+      fixedLagrangianPlanesSplitByArtificialAlternatingRank ≡ false
+    schrodingerRestrictionMultiplicityChecked : Bool
+    schrodingerRestrictionMultiplicityCheckedIsTrue :
+      schrodingerRestrictionMultiplicityChecked ≡ true
     kappaClassesConstructed : Bool
     kappaClassesConstructedIsFalse :
       kappaClassesConstructed ≡ false
     chernSubringRestrictionMapComputed : Bool
     chernSubringRestrictionMapComputedIsFalse :
       chernSubringRestrictionMapComputed ≡ false
-    incidenceCountsAloneDetermineCohomology : Bool
-    incidenceCountsAloneDetermineCohomologyIsFalse :
-      incidenceCountsAloneDetermineCohomology ≡ false
 
 canonicalChernRestrictionBoundary : ChernRestrictionBoundary
 canonicalChernRestrictionBoundary =
@@ -144,5 +201,6 @@ canonicalChernRestrictionBoundary =
     true refl
     true refl
     false refl
+    true refl
     false refl
     false refl
