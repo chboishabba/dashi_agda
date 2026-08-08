@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
-"""Generate function-first Monster-3B/extraspecial representation dashboards.
+"""Generate function-first Monster-3B/extraspecial dashboards.
 
-Every figure is an evaluation of a mathematical function or invariant on a
-specified finite carrier.  No magnitude-only bar charts are emitted.
+The 729 Schrödinger basis states form X = F_3^6.  Modulation labels belong to
+its dual X*, and the extraspecial quotient is X + X* = F_3^12.  The Weyl phase
+therefore uses the perfect evaluation pairing <b,x>, not an artificial
+alternating form on X itself.
 
-The GAP-derived restriction panel is generated only when a checked CTblLib
-certificate exists.  The Heisenberg and elementary-abelian panels are exact
-finite-field computations.  The 12+78 panel remains explicitly model-level
-until genuine MN3B matrices are imported.
+Every figure is an evaluation of a mathematical function or invariant.  The
+GAP-derived panel is generated only from a checked CTblLib certificate.  The
+12+78 coupling remains explicitly model-level until actual MN3B matrices are
+imported.
 """
 
 from __future__ import annotations
@@ -32,23 +34,16 @@ def ternary_vectors() -> np.ndarray:
 
 
 VECTORS = ternary_vectors()
-SYMPLECTIC = np.zeros((N, N), dtype=np.int64)
-SYMPLECTIC[:3, 3:] = np.eye(3, dtype=np.int64)
-SYMPLECTIC[3:, :3] = -np.eye(3, dtype=np.int64)
-SYMPLECTIC %= P
 
 
-def symplectic_pair(x: np.ndarray, y: np.ndarray) -> np.ndarray:
-    """Standard alternating form on F_3^3 + F_3^3."""
-    return np.einsum("...i,ij,...j->...", x, SYMPLECTIC, y) % P
+def perfect_pair(x: np.ndarray, b: np.ndarray) -> np.ndarray:
+    """Evaluation X x X* -> F_3 after the standard coordinate identification."""
+    return np.sum(x * b, axis=-1) % P
 
 
-def quadratic_phase(vectors: np.ndarray, variant: int) -> np.ndarray:
-    """Two declared quadratic probes on F_3^6, used only as finite functions."""
-    q = np.sum(vectors[..., :3] * vectors[..., 3:], axis=-1) % P
-    if variant < 0:
-        q = (q + vectors[..., 0] ** 2 + vectors[..., 3] ** 2) % P
-    return q
+def coordinate_quadratic(vectors: np.ndarray) -> np.ndarray:
+    """A declared coordinate probe, not the symplectic form on E/Z(E)."""
+    return np.sum(vectors[..., :3] * vectors[..., 3:], axis=-1) % P
 
 
 def save_matrix(
@@ -78,10 +73,10 @@ def save_matrix(
     if xticks is not None:
         ax.set_xticks(xticks)
     if xticklabels is not None:
-        ax.set_xticklabels(xticklabels, rotation=55, ha="right")
+        ax.set_xticklabels(xticklabels, rotation=60, ha="right", fontsize=8)
     ax.text(
         0.5,
-        -0.105,
+        -0.12,
         subtitle,
         transform=ax.transAxes,
         ha="center",
@@ -89,24 +84,22 @@ def save_matrix(
         wrap=True,
     )
     fig.colorbar(image, ax=ax, fraction=0.027, pad=0.02)
-    fig.subplots_adjust(left=0.08, right=0.93, top=0.91, bottom=0.19)
+    fig.subplots_adjust(left=0.08, right=0.93, top=0.91, bottom=0.22)
     fig.savefig(path, dpi=220, bbox_inches="tight")
     plt.close(fig)
 
 
 def extraspecial_plus_minus_sheet(output: Path) -> None:
-    """Compare + and - types through the complete character-degree moment."""
+    """Compare + and - types through the exact character-degree moment."""
     moments = np.linspace(0.0, 6.0, 721)
     rows = []
     labels = []
     for kind in ("+", "-"):
         for n in range(1, 7):
-            # Both extraspecial types of order 3^(1+2n) have:
-            #   3^(2n) linear characters and two nonlinear characters of degree 3^n.
-            # M_n(s)=sum_chi chi(1)^s is therefore exact for real s.
-            linear_term = 3.0 ** (2 * n)
-            nonlinear_term = 2.0 * 3.0 ** (n * moments)
-            rows.append(np.log10(linear_term + nonlinear_term))
+            # Both types of order 3^(1+2n) have 3^(2n) linear characters and
+            # two nonlinear characters of degree 3^n.
+            degree_moment = 3.0 ** (2 * n) + 2.0 * 3.0 ** (n * moments)
+            rows.append(np.log10(degree_moment))
             labels.append(f"{kind}, n={n}")
     matrix = np.stack(rows)
     fig, ax = plt.subplots(figsize=(15, 8))
@@ -125,7 +118,7 @@ def extraspecial_plus_minus_sheet(output: Path) -> None:
     ax.text(
         0.5,
         -0.1,
-        "The + and − rows coincide exactly: type changes central-product/exponent geometry, not the irreducible degree multiset.",
+        "The + and - rows coincide exactly: type changes exponent/central-product geometry, not the irreducible degree multiset.",
         transform=ax.transAxes,
         ha="center",
         va="top",
@@ -137,7 +130,7 @@ def extraspecial_plus_minus_sheet(output: Path) -> None:
 
 
 def rref_two_planes() -> list[np.ndarray]:
-    """Enumerate every 2-plane in F_3^6 exactly once by its RREF basis."""
+    """Enumerate every two-plane in X=F_3^6 exactly once by RREF basis."""
     planes: list[np.ndarray] = []
     for first in range(N):
         for second in range(first + 1, N):
@@ -162,231 +155,75 @@ def rref_two_planes() -> list[np.ndarray]:
     return planes
 
 
+def plucker_coordinates(basis: np.ndarray) -> tuple[int, ...]:
+    values = []
+    for i in range(N):
+        for j in range(i + 1, N):
+            minor = basis[0, i] * basis[1, j] - basis[0, j] * basis[1, i]
+            values.append(int(minor % P))
+    return tuple(values)
+
+
+def nonzero_weight_histogram(basis: np.ndarray) -> tuple[int, ...]:
+    states = [
+        (a * basis[0] + b * basis[1]) % P
+        for a in range(P)
+        for b in range(P)
+        if a != 0 or b != 0
+    ]
+    weights = [int(np.count_nonzero(state)) for state in states]
+    return tuple(weights.count(weight) for weight in range(1, N + 1))
+
+
 def generator_invariant_dashboard(output: Path) -> None:
-    """Map all elementary-abelian 2-planes to restriction invariants."""
+    """Map every Lagrangian two-plane to Plucker and restriction invariants."""
     rows = []
     for basis in rref_two_planes():
-        pairing = int(symplectic_pair(basis[0], basis[1]))
-        restriction_rank = 0 if pairing == 0 else 2
-        states = np.array(
-            [
-                (a * basis[0] + b * basis[1]) % P
-                for a in range(P)
-                for b in range(P)
-            ]
-        )
-        q_plus_zero = int(np.count_nonzero(quadratic_phase(states, +1) == 0))
-        q_minus_zero = int(np.count_nonzero(quadratic_phase(states, -1) == 0))
-        support = np.flatnonzero(np.any(basis != 0, axis=0))
-        first_support = int(support[0])
-        last_support = int(support[-1])
-        generator_weight = int(np.count_nonzero(basis))
-        # kappa1-proxy here means only the commutator-rank input that a genuine
-        # Chern restriction calculation would consume; no cohomology class is claimed.
-        kappa1_input = restriction_rank // 2
-        rows.append(
-            (
-                restriction_rank,
-                q_plus_zero,
-                q_minus_zero,
-                first_support,
-                last_support,
-                generator_weight,
-                kappa1_input,
-            )
-        )
+        pivots = tuple(int(np.flatnonzero(row)[0]) for row in basis)
+        plucker = plucker_coordinates(basis)
+        weights = nonzero_weight_histogram(basis)
+        support_size = int(np.count_nonzero(np.any(basis != 0, axis=0)))
+        rows.append(plucker + weights + pivots + (support_size,))
 
-    # Sorting makes invariant strata visible without changing any values.
     rows.sort()
-    matrix = np.array(rows, dtype=float)
-    names = [
-        "commutator rank",
-        "Q+ zero count",
-        "Q− zero count",
-        "first support",
-        "last support",
-        "RREF weight",
-        "kappa1 input",
+    matrix = np.asarray(rows, dtype=float)
+    plucker_names = [f"p{i}{j}" for i in range(N) for j in range(i + 1, N)]
+    names = plucker_names + [f"weight={k}" for k in range(1, N + 1)] + [
+        "pivot 1",
+        "pivot 2",
+        "support",
     ]
     save_matrix(
         matrix,
-        "Generator-to-invariant map for every elementary-abelian 2-plane in F3^6",
-        "All 11,011 RREF-indexed 2-planes are sorted by their invariant tuple. kappa1 input is a commutator-rank proxy, not a claimed Chern class.",
+        "Plucker and character-restriction inputs for every two-plane in X=F3^6",
+        "All 11,011 planes lie in one fixed Lagrangian and therefore lift with the centre to rank-three elementary abelian subgroups. Each restriction is 81 copies of Reg(F3^2); the displayed varying data are the exact Grassmannian/coordinate invariants.",
         output / "generator_to_invariant_dashboard.png",
-        "restriction invariant",
-        "elementary-abelian 2-plane stratum",
+        "invariant coordinate",
+        "RREF-indexed Lagrangian two-plane",
         xticks=list(range(len(names))),
         xticklabels=names,
     )
 
-    counts: dict[str, int] = {}
-    rank_values = matrix[:, 0].astype(int)
-    counts["two_plane_count"] = int(len(matrix))
-    counts["isotropic_two_plane_count"] = int(np.count_nonzero(rank_values == 0))
-    counts["symplectic_two_plane_count"] = int(np.count_nonzero(rank_values == 2))
+    certificate = {
+        "fixed_lagrangian_two_plane_count": len(rows),
+        "central_lift_order": 27,
+        "central_lift_rank": 3,
+        "translation_character_count": 9,
+        "regular_character_multiplicity": 81,
+        "represented_dimension": 729,
+        "full_symplectic_two_plane_count": 5883904390,
+        "full_isotropic_two_plane_count": 1961279320,
+        "full_nonisotropic_two_plane_count": 3922625070,
+    }
     (output / "elementary_abelian_two_plane_certificate.json").write_text(
-        json.dumps(counts, indent=2, sort_keys=True) + "\n"
+        json.dumps(certificate, indent=2, sort_keys=True) + "\n"
     )
 
 
 def heisenberg_weyl_phase_portrait(output: Path) -> None:
-    """Evaluate every finite-Heisenberg character phase zeta^<b,x>."""
-    pairings = np.einsum(
-        "xi,ij,yj->xy", VECTORS, SYMPLECTIC, VECTORS
-    ) % P
+    """Evaluate all phases zeta^<b,x> for x in X and b in X*."""
+    pairings = (VECTORS @ VECTORS.T) % P
     phase = np.angle(ZETA**pairings)
     save_matrix(
         phase,
-        "Complete finite-Heisenberg/Weyl phase portrait",
-        "Every one of the 729 basis states x is evaluated against every modulation label b by arg(zeta^<x,b>).",
-        output / "heisenberg_weyl_phase_portrait.png",
-        "modulation label b in F3^6",
-        "basis state x in F3^6",
-        vmin=-np.pi,
-        vmax=np.pi,
-    )
-
-
-def suzuki_12_plus_78_sheet(output: Path) -> None:
-    """Display an explicit model coupling on H_729 tensor (12 direct-sum 78)."""
-    multiplicity = np.arange(90)
-    block = np.where(multiplicity < 12, 0, 1)
-    q = quadratic_phase(VECTORS, +1)
-    s0 = multiplicity % 3
-    s1 = (multiplicity // 3) % 3
-    s2 = (multiplicity // 9) % 3
-    phase = (
-        q[:, None]
-        + VECTORS[:, 0, None] * s0[None, :]
-        + VECTORS[:, 1, None] * s1[None, :]
-        + block[None, :] * VECTORS[:, 2, None] * s2[None, :]
-    ) % 3
-    observable = np.real(ZETA**phase)
-
-    fig, ax = plt.subplots(figsize=(14, 9))
-    image = ax.imshow(
-        observable,
-        aspect="auto",
-        interpolation="nearest",
-        vmin=-0.5,
-        vmax=1.0,
-    )
-    ax.axvline(11.5, linewidth=1.5)
-    ax.set_title("Explicit Weyl-function model on H729 tensor (S12 direct-sum S78)")
-    ax.set_xlabel("multiplicity coordinate: 12-dimensional block | 78-dimensional block")
-    ax.set_ylabel("Heisenberg state x in F3^6")
-    ax.text(
-        0.5,
-        -0.09,
-        "The 729x90 carrier and 12|78 boundary are sourced dimensions; the displayed coupling remains a model until genuine MN3B matrices are imported.",
-        transform=ax.transAxes,
-        ha="center",
-        va="top",
-    )
-    fig.colorbar(image, ax=ax, fraction=0.027, pad=0.02)
-    fig.subplots_adjust(left=0.08, right=0.93, top=0.91, bottom=0.15)
-    fig.savefig(output / "heisenberg_times_12_plus_78.png", dpi=220, bbox_inches="tight")
-    plt.close(fig)
-
-
-def orbit_invariant_sheet(output: Path) -> None:
-    """Compute orbit lengths under an explicit invertible finite-field map."""
-    index = {tuple(v): i for i, v in enumerate(VECTORS)}
-
-    def transform(v: np.ndarray) -> np.ndarray:
-        return np.array(
-            [v[1], v[2], v[0] + v[3], v[4], v[5], -v[3]],
-            dtype=np.int64,
-        ) % P
-
-    images = [index[tuple(transform(v))] for v in VECTORS]
-    if len(set(images)) != H:
-        raise AssertionError("orbit generator is not invertible")
-
-    orbit_length = np.zeros(H, dtype=int)
-    visited = np.zeros(H, dtype=bool)
-    for start in range(H):
-        if visited[start]:
-            continue
-        orbit = []
-        current = start
-        while not visited[current]:
-            visited[current] = True
-            orbit.append(current)
-            current = images[current]
-        for item in orbit:
-            orbit_length[item] = len(orbit)
-
-    sheet = orbit_length.reshape(27, 27)
-    save_matrix(
-        sheet,
-        "Orbit-length invariant on F3^3 x F3^3",
-        "Each cell is one Heisenberg state; the value is its exact orbit length under the declared invertible finite-field generator.",
-        output / "orbit_length_sheet.png",
-        "second Lagrangian coordinate",
-        "first Lagrangian coordinate",
-    )
-
-
-def branching_sheet(input_json: Path, output: Path) -> None:
-    """Render the certified restriction as a constituent-label function."""
-    if not input_json.exists():
-        return
-    payload = json.loads(input_json.read_text())
-    if payload.get("classwise_reconstruction") is not True:
-        raise ValueError("restriction JSON lacks classwise reconstruction")
-    constituents = payload.get("constituents", [])
-    if not constituents:
-        return
-
-    total = int(payload["reconstructed_degree"])
-    width = 512
-    height = (total + width - 1) // width
-    sheet = np.full(width * height, np.nan)
-    offset = 0
-    for row in constituents:
-        contribution = int(row["contribution"])
-        sheet[offset : offset + contribution] = int(row["position"])
-        offset += contribution
-    if offset != total:
-        raise ValueError("constituent contributions do not fill the carrier")
-    sheet = sheet.reshape(height, width)
-    save_matrix(
-        sheet,
-        "Certified CTblLib restriction label function chi_196883 restricted to MN3B",
-        "Each domain point is one contributed dimension; the function value is the owning MN3B irreducible-table position.",
-        output / "mn3b_actual_restriction_sheet.png",
-        "packed dimension coordinate",
-        "packed dimension coordinate",
-    )
-
-
-def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "--restriction-json",
-        type=Path,
-        default=Path("build/monster_3b_normalizer_restriction.json"),
-    )
-    parser.add_argument(
-        "--output",
-        type=Path,
-        default=Path("build/monster_3b_dashboard"),
-    )
-    return parser.parse_args()
-
-
-def main() -> int:
-    args = parse_args()
-    args.output.mkdir(parents=True, exist_ok=True)
-    extraspecial_plus_minus_sheet(args.output)
-    generator_invariant_dashboard(args.output)
-    heisenberg_weyl_phase_portrait(args.output)
-    suzuki_12_plus_78_sheet(args.output)
-    orbit_invariant_sheet(args.output)
-    branching_sheet(args.restriction_json, args.output)
-    return 0
-
-
-if __name__ == "__main__":
-    raise SystemExit(main())
+        "Complete finite-Heisenberg/Weyl phase portrait")
