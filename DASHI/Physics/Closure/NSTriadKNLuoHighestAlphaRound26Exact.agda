@@ -7,15 +7,16 @@ module DASHI.Physics.Closure.NSTriadKNLuoHighestAlphaRound26Exact where
 -- support.  This round advances three different proof layers without
 -- conflating them:
 --
--- * finite Galerkin algebra: reality reconstruction, degree-two coordinate
---   syntax, exact difference factorisation and physical triad cancellation;
+-- * finite Galerkin algebra: reality reconstruction, conjugate transversality,
+--   degree-two coordinate syntax, exact difference factorisation and physical
+--   triad cancellation;
 -- * finite critical accounting: the Round-25 physical five-source fibre is
 --   forced into a signed weighted shell ledger with explicit boundaries;
 -- * analytic tax discipline: finite commutator increments, division-free HH
 --   normalisation, hysteretic entry charge, named remainder classes and
 --   duplicate-free tax ownership.
 --
--- The continuum-real Picard-Lindelof instance, physical time-dependent shell
+-- The finite normed Picard-Lindelof instance, physical time-dependent shell
 -- balances, cutoff-independent class taxes, strict viscosity margin and Clay
 -- theorem remain open.
 ------------------------------------------------------------------------
@@ -37,6 +38,7 @@ import DASHI.Physics.Closure.NSTriadKNLuoFiniteTaxAdversarialRegressionRound26Ex
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteGalerkinPolynomialRound26Exact as Polynomial
 import DASHI.Physics.Closure.NSTriadKNLuoHystereticPositiveVariationRound26Exact as Hysteresis
 import DASHI.Physics.Closure.NSTriadKNLuoCriticalRemainderClassificationRound26Exact as Remainder
+import DASHI.Physics.Closure.NSTriadKNLuoRealityTransversePhaseSpaceRound26Exact as Phase
 
 record Round26ExactEvidence : Set₁ where
   field
@@ -174,12 +176,18 @@ canonicalRound26HighestAlphaBoundary : Round26HighestAlphaBoundary
 canonicalRound26HighestAlphaBoundary =
   round26-highest-alpha-boundary
     true
-    true true false false
+    true true true false
     true false
     true true false
     true true false
     true true true true
     false false false false
+
+negativeTransversalityClosed :
+  negativeTransversalityLawInstantiated
+    canonicalRound26HighestAlphaBoundary
+  ≡ true
+negativeTransversalityClosed = refl
 
 localODEStillOpen :
   continuumRealLocalODEExistenceInstantiated
