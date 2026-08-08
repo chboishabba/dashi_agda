@@ -12,6 +12,7 @@ sources=(
   DASHI/Biology/OggPrimeNonaryAddressExact.agda
   DASHI/Biology/JCoarseFineEvaluationFibreExact.agda
   DASHI/Biology/SSP15NineObserverAtlasExact.agda
+  DASHI/Biology/StageSymmetrySSP15BridgeExact.agda
   DASHI/Biology/SSP15JCoarseFineIntegratedExact.agda
   DASHI/Biology/SSP15JCoarseFineRound3Validation.agda
   DASHI/Biology/PointedBulkSporadicTarotEverything.agda
@@ -42,6 +43,9 @@ required_patterns=(
   'fixedValueAssignmentFibreHasCardinalityThreePowerNineIsFalse'
   'ssp15NineAtlas'
   'pointedSignedCardinalityValue'
+  'canonicalPrimeSpecificSSP15'
+  'primeSpecificAddressReconstructsLane'
+  'legacyUniformReadingContainsPrimeSpecificAddressIsFalse'
   'primeSpecificSSP15Reading'
   'canonicalOggInternalLaneBijectionConstructedIsFalse'
 )
