@@ -72,8 +72,8 @@ allNegativeBalance : patternBalance allNegative ≡ signedBalance 0 3
 allNegativeBalance = refl
 
 ------------------------------------------------------------------------
--- The central balanced/unbalanced carry identities.  Subtraction is expressed
--- without truncated natural subtraction: a = b-c is represented by a+c=b.
+-- Balanced/unbalanced carry identities.  Subtraction is expressed without
+-- truncated natural subtraction: a = b-c is represented by a+c=b.
 ------------------------------------------------------------------------
 
 twoIsThreeMinusOne : 2 + 1 ≡ 3
@@ -98,9 +98,8 @@ nineIsThreeSquared : 3 ^ 2 ≡ 9
 nineIsThreeSquared = refl
 
 ------------------------------------------------------------------------
--- Stage 5 is the complete constituent pair (+++) dot (++0), not the scalar
--- five alone.  The 5 -> 3 edge is a coarse retraction which retains the second
--- constituent as a residual fibre.
+-- Stage 5 is (+++) dot (++0), not the scalar five alone.  The 5 -> 3 edge is
+-- a coarse retraction which retains the second constituent as a residual fibre.
 ------------------------------------------------------------------------
 
 record TwoTriadComposite : Set where
@@ -138,16 +137,11 @@ open RetainedTriadicFallback public
 stage5To3RetainsTwo : RetainedTriadicFallback
 stage5To3RetainsTwo =
   retainedTriadicFallback
-    stage5Composite
-    allPositive
-    twoPositiveOneOpen
-    3
-    2
+    stage5Composite allPositive twoPositiveOneOpen 3 2
     refl refl refl refl false refl
 
 ------------------------------------------------------------------------
--- Pattern symmetry is separate from amplitude.  (+++) has full coordinate
--- symmetry; (++0) has only the exchange symmetry of its two positive slots.
+-- Pattern symmetry is separate from amplitude.
 ------------------------------------------------------------------------
 
 data StabiliserType : Set where
@@ -176,11 +170,11 @@ stage2PatternHasS2 = refl
 record SymmetryAwareStageState : Set where
   constructor symmetryAwareStageState
   field
-    pattern : TriadPattern
+    linePattern : TriadPattern
     balance : SignedBalance
     stabiliser : StabiliserType
-    balanceExact : balance ≡ patternBalance pattern
-    stabiliserExact : stabiliser ≡ patternStabiliser pattern
+    balanceExact : balance ≡ patternBalance linePattern
+    stabiliserExact : stabiliser ≡ patternStabiliser linePattern
 
 stage3SymmetryState : SymmetryAwareStageState
 stage3SymmetryState =
@@ -193,9 +187,8 @@ stage2SymmetryState =
     pairStabiliserS2 refl refl
 
 ------------------------------------------------------------------------
--- Counterposition is a context-indexed relation.  Strict additive inversion is
--- one possible counterposition, but a one-coordinate counterposition need not
--- equal it.
+-- Counterposition is context-indexed.  Strict inversion is one possible
+-- counterposition, but a one-coordinate counterposition need not equal it.
 ------------------------------------------------------------------------
 
 invertDigit : BalancedDigit → BalancedDigit
@@ -231,8 +224,7 @@ partialCounterpositionWitness =
   counterpositionWitness allPositive thirdCoordinateCounterposition false refl
 
 ------------------------------------------------------------------------
--- Simultaneous 3/6/9 closure charts.  These retain quotient/remainder and
--- signed distance-to-next-closure information instead of one lossy residue.
+-- Simultaneous 3/6/9 closure charts.
 ------------------------------------------------------------------------
 
 record ClosureProfile369 : Set where
@@ -254,9 +246,7 @@ sixClosureProfile : ClosureProfile369
 sixClosureProfile = closureProfile369 6 2 0 refl 0 refl 3 refl
 
 ------------------------------------------------------------------------
--- Balanced-ternary addresses form a retained radix tree.  A shared high-order
--- prefix is an ultrametric witness; suffixes remain available and are not
--- erased by projection to the common ancestor.
+-- Balanced-ternary addresses form a retained radix tree.
 ------------------------------------------------------------------------
 
 appendDigits : List BalancedDigit → List BalancedDigit → List BalancedDigit
@@ -298,78 +288,18 @@ fiveSixSharedPrefix :
   SharedPrefixWitness fiveBalancedAddress sixBalancedAddress
 fiveSixSharedPrefix =
   sharedPrefixWitness
-    (pos ∷ neg ∷ [])
-    (neg ∷ [])
-    (zeroDigit ∷ [])
-    refl refl 2
+    (pos ∷ neg ∷ []) (neg ∷ []) (zeroDigit ∷ []) refl refl 2
 
 ------------------------------------------------------------------------
--- The Ogg-prime observer carrier and the exact 81 = 10 + 71 complement.
--- Arithmetic selects a candidate lane only; no invariant 71-dimensional
--- complement or Monster action is inferred.
+-- Exact arithmetic candidates retained at the foundation boundary.  Domain-
+-- specific Ogg/SSP interpretation is supplied by a downstream bridge.
 ------------------------------------------------------------------------
-
-data OggPrime : Set where
-  ogg2 ogg3 ogg5 ogg7 ogg11 ogg13 ogg17 ogg19
-    ogg23 ogg29 ogg31 ogg41 ogg47 ogg59 ogg71 : OggPrime
-
-oggPrimeValue : OggPrime → Nat
-oggPrimeValue ogg2 = 2
-oggPrimeValue ogg3 = 3
-oggPrimeValue ogg5 = 5
-oggPrimeValue ogg7 = 7
-oggPrimeValue ogg11 = 11
-oggPrimeValue ogg13 = 13
-oggPrimeValue ogg17 = 17
-oggPrimeValue ogg19 = 19
-oggPrimeValue ogg23 = 23
-oggPrimeValue ogg29 = 29
-oggPrimeValue ogg31 = 31
-oggPrimeValue ogg41 = 41
-oggPrimeValue ogg47 = 47
-oggPrimeValue ogg59 = 59
-oggPrimeValue ogg71 = 71
-
-allOggPrimes : List OggPrime
-allOggPrimes =
-  ogg2 ∷ ogg3 ∷ ogg5 ∷ ogg7 ∷ ogg11 ∷ ogg13 ∷ ogg17 ∷ ogg19
-  ∷ ogg23 ∷ ogg29 ∷ ogg31 ∷ ogg41 ∷ ogg47 ∷ ogg59 ∷ ogg71 ∷ []
-
-countList : ∀ {A : Set} → List A → Nat
-countList [] = 0
-countList (_ ∷ xs) = 1 + countList xs
-
-oggPrimeCountIsFifteen : countList allOggPrimes ≡ 15
-oggPrimeCountIsFifteen = refl
 
 depthTwoNonaryIsEightyOne : 9 ^ 2 ≡ 81
 depthTwoNonaryIsEightyOne = refl
 
 eightyOneSplitsTenAndSeventyOne : 10 + 71 ≡ 81
 eightyOneSplitsTenAndSeventyOne = refl
-
-seventyOneIsOggLane : oggPrimeValue ogg71 ≡ 71
-seventyOneIsOggLane = refl
-
-record OggComplementBoundary : Set where
-  constructor oggComplementBoundary
-  field
-    arithmeticComplementExact : Bool
-    arithmeticComplementExactIsTrue : arithmeticComplementExact ≡ true
-    invariantComplementConstructed : Bool
-    invariantComplementConstructedIsFalse :
-      invariantComplementConstructed ≡ false
-    monsterActionConstructed : Bool
-    monsterActionConstructedIsFalse : monsterActionConstructed ≡ false
-
-canonicalOggComplementBoundary : OggComplementBoundary
-canonicalOggComplementBoundary =
-  oggComplementBoundary true refl false refl false refl
-
-------------------------------------------------------------------------
--- The depth-two nonary residue equations are exact but derivative of the
--- previously selected 10 * 3^9 + 54/53 chart because 81 divides 3^9.
-------------------------------------------------------------------------
 
 moonshineCoefficientDepthTwoEquation :
   2430 * 81 + 54 ≡ 196884
