@@ -7,10 +7,11 @@ module DASHI.Physics.Closure.NSTriadKNLuoGalerkinCriticalLedgerRound26Validation
 --
 -- * reality-by-construction finite phase-space surface;
 -- * degree-two Galerkin coordinate algebra and difference factorisation;
--- * exact six-term resonant-triad energy cancellation;
+-- * exact physical Complex3 and scalar six-term triad cancellation;
 -- * signed finite critical shell ledger with explicit cutoff boundaries;
--- * exact low-transport self-cancellation and finite commutator increments;
--- * exact finite-kernel first-moment scaling;
+-- * physical Round-25 five-source fibres forced into signed shell cells;
+-- * exact low-transport shell cancellation and multiplier-difference stack;
+-- * exact finite-kernel commutator increments and first-moment scaling;
 -- * division-free HH defect normalisation and zero-denominator branch;
 -- * hysteretic entry charges paid by positive variation;
 -- * duplicate-free tax ownership;
@@ -24,6 +25,7 @@ import DASHI.Physics.Closure.NSTriadKNLuoRealityTransversePhaseSpaceRound26Exact
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteGalerkinPolynomialRound26Exact
 import DASHI.Physics.Closure.NSTriadKNLuoTriadwiseEnergyCancellationRound26Exact
 import DASHI.Physics.Closure.NSTriadKNLuoSignedCriticalLedgerRound26Exact
+import DASHI.Physics.Closure.NSTriadKNLuoPhysicalSignedShellCellRound26Exact
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteKernelCommutatorRound26Exact
 import DASHI.Physics.Closure.NSTriadKNLuoLowTransportCommutatorRound26Exact
 import DASHI.Physics.Closure.NSTriadKNLuoDivisionFreeHHDefectRound26Exact
