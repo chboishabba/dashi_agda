@@ -26,7 +26,6 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Sigma using (Σ; _,_)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_)
-open import Relation.Binary.PropositionalEquality using (trans)
 
 import DASHI.Physics.Closure.NSTriadKNLuoDuplicateFreeTaxOwnershipRound26Exact as Tax
 
@@ -118,10 +117,7 @@ ownedFibreMembershipUnique :
   Tax.owner atom ≡ first →
   Tax.owner atom ≡ second →
   first ≡ second
-ownedFibreMembershipUnique first second = trans first second
-  where
-  trans : ∀ {A : Set} {x y z : A} → x ≡ y → x ≡ z → y ≡ z
-  trans refl refl = refl
+ownedFibreMembershipUnique refl refl = refl
 
 dependentTaxOwnerPartitionClosed : Bool
 dependentTaxOwnerPartitionClosed = true
