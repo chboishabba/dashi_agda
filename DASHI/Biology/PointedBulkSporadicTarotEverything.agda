@@ -13,6 +13,7 @@ import DASHI.Biology.SporadicStageSymmetryTarotRegression
 import DASHI.Biology.PointedBulkReducedMoonshineBoundary
 import DASHI.Biology.PointedBulkSporadicTarotSourceAtlas
 import DASHI.Foundations.BalancedTernaryStageSymmetryExact
+import DASHI.Foundations.BalancedTernaryUltrametricExact
 import DASHI.Foundations.StageSymmetryCarrierTowerExact
 import DASHI.Foundations.DialecticSheetFrameSelectorExact
 import DASHI.Foundations.SecondRevolutionJankoTarotExact
