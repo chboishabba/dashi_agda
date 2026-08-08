@@ -27,6 +27,7 @@ open import Relation.Binary.PropositionalEquality using (_≡_; refl)
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNLiteralDyadicShellConstants as Shell
+import DASHI.Physics.Closure.NSTriadKNLuoFiniteBonyFourClassAccountingExact as Four
 import DASHI.Physics.Closure.NSTriadKNLuoHighestAlphaClayLemmaLadderRound24Exact as R24
 import DASHI.Physics.Closure.NSTriadKNLuoLiteralGalerkinCarrierRound25Exact as Carrier
 import DASHI.Physics.Closure.NSTriadKNLuoPhysicalFiveClassSupportRound25Exact as Support
@@ -155,13 +156,13 @@ record Round25ExactEvidence : Set₁ where
       (commutatorValue : ℚ) →
       Sum.fiveSourceTotal cutoff output value commutatorValue
       ≡
-      DASHI.Physics.Closure.NSTriadKNLuoFiniteBonyFourClassAccountingExact.highHighToLowSum
+      Four.highHighToLowSum
         (Sum.physicalTaggedOutputFiber cutoff output value)
-      + DASHI.Physics.Closure.NSTriadKNLuoFiniteBonyFourClassAccountingExact.lowHighSum
+      + Four.lowHighSum
         (Sum.physicalTaggedOutputFiber cutoff output value)
-      + DASHI.Physics.Closure.NSTriadKNLuoFiniteBonyFourClassAccountingExact.highLowSum
+      + Four.highLowSum
         (Sum.physicalTaggedOutputFiber cutoff output value)
-      + DASHI.Physics.Closure.NSTriadKNLuoFiniteBonyFourClassAccountingExact.comparableSum
+      + Four.comparableSum
         (Sum.physicalTaggedOutputFiber cutoff output value)
       + commutatorValue
 
