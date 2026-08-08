@@ -68,15 +68,20 @@ criticalVelocityVorticityWeightIdentity :
   (W : CriticalWeightMeaning) →
   shellWeight W * vorticityEnergy W
   ≡ criticalVelocityWeight W * velocityEnergy W
-criticalVelocityVorticityWeightIdentity W
-  rewrite vorticityEnergyMeaning W
-        | criticalWeightMeaning W =
-  solve
-    ( shellWeight W
-    ∷ frequencySquared W
-    ∷ velocityEnergy W
-    ∷ criticalVelocityWeight W
-    ∷ [])
+criticalVelocityVorticityWeightIdentity W =
+  trans
+    (cong
+      (λ energy → shellWeight W * energy)
+      (vorticityEnergyMeaning W))
+    (trans
+      (solve
+        ( shellWeight W
+        ∷ frequencySquared W
+        ∷ velocityEnergy W
+        ∷ []))
+      (cong
+        (λ coefficient → coefficient * velocityEnergy W)
+        (criticalWeightMeaning W)))
 
 record SignedCriticalShellCell : Set where
   constructor signed-critical-shell-cell
