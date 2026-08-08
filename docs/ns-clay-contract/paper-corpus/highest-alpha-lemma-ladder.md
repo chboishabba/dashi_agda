@@ -45,8 +45,8 @@ Round 26 adds:
 - the exact finite difference factorization `xy-uv=(x-u)y+u(y-v)`;
 - a positive-orbit phase-space surface reconstructing negative modes by conjugation;
 - an explicit conjugate-transversality law as the remaining constraint instance;
-- local six-term triadwise energy cancellation;
-- finite internal-transfer cancellation.
+- a rational six-term energy audit normal form;
+- direct reuse of the repository’s actual Complex3 three-leg cancellation theorem for the signed Leray coefficient.
 
 The remaining L3 producer is now:
 
@@ -54,7 +54,7 @@ The remaining L3 producer is now:
 instantiate conjugate transversality on the selected continuum real carrier;
 prove the literal polynomial vector field is locally Lipschitz in a finite norm;
 apply Picard–Lindelöf;
-connect the triadwise cancellation to the literal finite ODE energy identity;
+derive the finite ODE energy identity from the physical triad theorem;
 use that identity to prove global finite-dimensional existence.
 ```
 
@@ -70,7 +70,7 @@ HH, LH, HL, CC.
 
 The differentiated commutator is the fifth class `Com`; there is no unnamed remainder. The output fibre recomposes exactly and the fixed support collars do not depend on final cutoffs.
 
-### L5 — Signed finite filtered-vorticity and critical shell ledger — algebra checked; physical instantiation open
+### L5 — Signed finite filtered-vorticity and critical shell ledger — source bridge checked; time evolution open
 
 Round 26 proves a finite signed weighted identity with separate coordinates
 
@@ -87,12 +87,21 @@ weight · vorticityEnergy
 
 from the declared frequency-square meanings.
 
+`NSTriadKNLuoPhysicalSignedShellCellRound26Exact.agda` now forces the five signed source coordinates from the literal Round 25 physical output fibre. Given
+
+```text
+energyRate + dissipation
+= fiveSourceTotal + lowerBoundary + upperBoundary,
+```
+
+it constructs the signed critical shell cell, so `HH`, `LH`, `HL`, `CC` and `Com` cannot be supplied independently.
+
 Still required:
 
 ```text
-derive every SignedCriticalShellCell from the actual time-dependent Galerkin PDE;
-prove uniform critical norm equivalence for the fixed dyadic partition;
-identify every lower and upper cutoff atom physically.
+construct the time-dependent Galerkin solution;
+derive the shell energy balance and both boundary families from that solution;
+prove uniform critical norm equivalence for the fixed dyadic partition.
 ```
 
 The homogeneous critical route explicitly excludes the zero mode; L1/L22 restore arbitrary periodic means.
@@ -172,16 +181,18 @@ Still required: order, nonnegativity and continuum convolution estimates yieldin
 
 Prove the annular/far-field sum is critically summable with constants independent of cutoffs. A flux-decay statement is useful only after it controls the same continuation norm.
 
-### L11 — Low transport, commutator and subgrid-stress estimate — finite identity checked; quantitative tax open
+### L11 — Low transport, commutator and subgrid-stress estimate — physical identity stack checked; quantitative tax open
 
-Round 26 fixes the derivative-placement name `LowAdvectsHigh`, reuses exact periodic self-test cancellation, and proves the finite kernel identity
+Round 26 fixes the derivative-placement name `LowAdvectsHigh` and reuses the repository’s exact periodic stack:
 
 ```text
-[P_q,a·∇]b
-= finite sum of K_q(y)(a(x-y)-a(x))·∇b(x-y).
+self-tested transport cancellation;
+projected shell commutator energy identity;
+signed multiplier-difference kernel;
+pointwise mean-value reduction.
 ```
 
-It also proves exact first-moment scaling under literal displacement rescaling.
+It also proves the finite physical-space kernel increment identity and exact first-moment rescaling.
 
 The next theorem is the physical bound
 
@@ -190,7 +201,7 @@ The next theorem is the physical bound
 ≤ ηCom D + C Xint + RCom
 ```
 
-with cutoff-independent constants. This is the preferred first genuine L7 tax.
+with cutoff-independent constants. The existing absolute Schur reconnaissance is too large; a sign-preserving or orthogonal operator estimate is the highest-alpha fork.
 
 ### L12 — Hysteretic positive-variation estimate — finite charge checked; PDE budget open
 
@@ -289,7 +300,7 @@ The immediate sequence is:
 
 ```text
 L3 continuum-real finite ODE instance and global finite existence;
-L5 physical signed critical-shell instantiation;
+L5 physical time-dependent signed shell balance;
 L11 first cutoff-independent low-advection/Com tax;
 L8–L10 and L12–L14 remaining physical taxes;
 L15 strict unique-owner viscosity certificate.
