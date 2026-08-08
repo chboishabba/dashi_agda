@@ -25,20 +25,16 @@ module DASHI.Biology.SSP15ComplementPhaseProjectorExact where
 -- reversal is an involution and transports the projector family equivariantly.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Nat using (_+_; _*_)
-open import Data.Product using (_×_; _,_; proj₁; proj₂)
+open import Data.Product using (_×_; _,_)
 
 import DASHI.Biology.BalancedTernaryHarmonicCarrierExact as Harmonic
 import DASHI.Biology.NonaryCompletionPhaseQuotientExact as Quotient
 import DASHI.Biology.TernaryMonsterSymmetryCandidateExact as D4
-
-------------------------------------------------------------------------
--- Five modes, three phases, fifteen internal lanes.
-------------------------------------------------------------------------
 
 BalancedPhase : Set
 BalancedPhase = Harmonic.BalancedTrit
@@ -110,71 +106,70 @@ d4IrrepToMode D4.B1 = Quotient.mode27
 d4IrrepToMode D4.B2 = Quotient.mode36
 d4IrrepToMode D4.E2 = Quotient.mode45
 
-modeAfterIrrep :
+irrepAfterMode :
   (kind : D4.D4IrrepKind) →
   modeToD4Irrep (d4IrrepToMode kind) ≡ kind
-modeAfterIrrep D4.A1 = refl
-modeAfterIrrep D4.A2 = refl
-modeAfterIrrep D4.B1 = refl
-modeAfterIrrep D4.B2 = refl
-modeAfterIrrep D4.E2 = refl
+irrepAfterMode D4.A1 = refl
+irrepAfterMode D4.A2 = refl
+irrepAfterMode D4.B1 = refl
+irrepAfterMode D4.B2 = refl
+irrepAfterMode D4.E2 = refl
 
-irrepAfterMode :
+modeAfterIrrep :
   (mode : Quotient.ComplementMode5) →
   d4IrrepToMode (modeToD4Irrep mode) ≡ mode
-irrepAfterMode Quotient.mode09 = refl
-irrepAfterMode Quotient.mode18 = refl
-irrepAfterMode Quotient.mode27 = refl
-irrepAfterMode Quotient.mode36 = refl
-irrepAfterMode Quotient.mode45 = refl
-
-------------------------------------------------------------------------
--- Exact lane equality and characteristic projectors.
-------------------------------------------------------------------------
+modeAfterIrrep Quotient.mode09 = refl
+modeAfterIrrep Quotient.mode18 = refl
+modeAfterIrrep Quotient.mode27 = refl
+modeAfterIrrep Quotient.mode36 = refl
+modeAfterIrrep Quotient.mode45 = refl
 
 modeEqual : Quotient.ComplementMode5 → Quotient.ComplementMode5 → Bool
-modeEqual Quotient.mode09 Quotient.mode09 = true
-modeEqual Quotient.mode18 Quotient.mode18 = true
-modeEqual Quotient.mode27 Quotient.mode27 = true
-modeEqual Quotient.mode36 Quotient.mode36 = true
-modeEqual Quotient.mode45 Quotient.mode45 = true
+modeEqual Quotient.mode09 Quotient.mode09 = Agda.Builtin.Bool.true
+modeEqual Quotient.mode18 Quotient.mode18 = Agda.Builtin.Bool.true
+modeEqual Quotient.mode27 Quotient.mode27 = Agda.Builtin.Bool.true
+modeEqual Quotient.mode36 Quotient.mode36 = Agda.Builtin.Bool.true
+modeEqual Quotient.mode45 Quotient.mode45 = Agda.Builtin.Bool.true
 modeEqual left right = false
 
 phaseEqual : BalancedPhase → BalancedPhase → Bool
-phaseEqual Harmonic.negativeTrit Harmonic.negativeTrit = true
-phaseEqual Harmonic.zeroTrit Harmonic.zeroTrit = true
-phaseEqual Harmonic.positiveTrit Harmonic.positiveTrit = true
+phaseEqual Harmonic.negativeTrit Harmonic.negativeTrit = Agda.Builtin.Bool.true
+phaseEqual Harmonic.zeroTrit Harmonic.zeroTrit = Agda.Builtin.Bool.true
+phaseEqual Harmonic.positiveTrit Harmonic.positiveTrit = Agda.Builtin.Bool.true
 phaseEqual left right = false
 
 laneEqual : SSP15InternalLane → SSP15InternalLane → Bool
 laneEqual (leftMode , leftPhase) (rightMode , rightPhase)
   with modeEqual leftMode rightMode | phaseEqual leftPhase rightPhase
-... | true | true = true
-... | true | false = false
-... | false | true = false
+... | Agda.Builtin.Bool.true | Agda.Builtin.Bool.true = Agda.Builtin.Bool.true
+... | Agda.Builtin.Bool.true | false = false
+... | false | Agda.Builtin.Bool.true = false
 ... | false | false = false
 
 modeEqualOwn :
-  (mode : Quotient.ComplementMode5) → modeEqual mode mode ≡ true
+  (mode : Quotient.ComplementMode5) →
+  modeEqual mode mode ≡ Agda.Builtin.Bool.true
 modeEqualOwn Quotient.mode09 = refl
 modeEqualOwn Quotient.mode18 = refl
 modeEqualOwn Quotient.mode27 = refl
 modeEqualOwn Quotient.mode36 = refl
 modeEqualOwn Quotient.mode45 = refl
 
-phaseEqualOwn : (phase : BalancedPhase) → phaseEqual phase phase ≡ true
+phaseEqualOwn :
+  (phase : BalancedPhase) → phaseEqual phase phase ≡ Agda.Builtin.Bool.true
 phaseEqualOwn Harmonic.negativeTrit = refl
 phaseEqualOwn Harmonic.zeroTrit = refl
 phaseEqualOwn Harmonic.positiveTrit = refl
 
-laneEqualOwn : (lane : SSP15InternalLane) → laneEqual lane lane ≡ true
+laneEqualOwn :
+  (lane : SSP15InternalLane) → laneEqual lane lane ≡ Agda.Builtin.Bool.true
 laneEqualOwn (mode , phase)
   rewrite modeEqualOwn mode | phaseEqualOwn phase = refl
 
 laneProjectorCoefficient :
   SSP15InternalLane → SSP15InternalLane → Nat
 laneProjectorCoefficient selected actual with laneEqual selected actual
-... | true = 1
+... | Agda.Builtin.Bool.true = 1
 ... | false = 0
 
 laneProjectorOwnCoefficient :
@@ -186,7 +181,10 @@ explicitlyDifferentLaneAnnihilates :
   (selected actual : SSP15InternalLane) →
   laneEqual selected actual ≡ false →
   laneProjectorCoefficient selected actual ≡ 0
-explicitlyDifferentLaneAnnihilates selected actual different
+explicitlyDifferentLaneAnnihilates
+  (selectedMode , selectedPhase)
+  (actualMode , actualPhase)
+  different
   rewrite different = refl
 
 laneProjectorCoefficientIdempotent :
@@ -196,12 +194,8 @@ laneProjectorCoefficientIdempotent :
   ≡ laneProjectorCoefficient selected actual
 laneProjectorCoefficientIdempotent selected actual
   with laneEqual selected actual
-... | true = refl
+... | Agda.Builtin.Bool.true = refl
 ... | false = refl
-
-------------------------------------------------------------------------
--- Equivariant transport under balanced phase reversal.
-------------------------------------------------------------------------
 
 reverseLane : SSP15InternalLane → SSP15InternalLane
 reverseLane (mode , phase) = mode , reverseBalancedPhase phase
@@ -238,11 +232,6 @@ laneProjectorReverseCovariant :
 laneProjectorReverseCovariant selected actual
   rewrite laneEqualReverseCovariant selected actual = refl
 
-------------------------------------------------------------------------
--- Complement can preserve or reverse the balanced phase.  Both policies keep
--- the digit complement and the mode fixed; the policy is explicit data.
-------------------------------------------------------------------------
-
 data ComplementPhasePolicy : Set where
   preserveBalancedPhase reverseBalancedPhasePolicy : ComplementPhasePolicy
 
@@ -278,12 +267,22 @@ complementStructuredStateInvolutive reverseBalancedPhasePolicy
   rewrite Quotient.complementStateInvolutive digit
         | reverseBalancedPhaseInvolutive phase = refl
 
+------------------------------------------------------------------------
+-- Authority is backed by the exact laws above, not by self-attesting Booleans.
+------------------------------------------------------------------------
+
 record SSP15ComplementPhaseBoundary : Set where
   constructor ssp15-complement-phase-boundary
   field
-    internalFiveByThreeCarrierConstructed : Bool
-    internalFiveByThreeCarrierConstructedIsTrue :
-      internalFiveByThreeCarrierConstructed ≡ true
+    internalLaneCountWitness :
+      listCount canonicalSSP15InternalLanes ≡ 15
+    ownLaneProjectorWitness :
+      (lane : SSP15InternalLane) →
+      laneProjectorCoefficient lane lane ≡ 1
+    phaseReversalCovarianceWitness :
+      (selected actual : SSP15InternalLane) →
+      laneProjectorCoefficient (reverseLane selected) (reverseLane actual)
+      ≡ laneProjectorCoefficient selected actual
     d4NameBijectionProvesSemanticIdentity : Bool
     d4NameBijectionProvesSemanticIdentityIsFalse :
       d4NameBijectionProvesSemanticIdentity ≡ false
@@ -293,4 +292,9 @@ record SSP15ComplementPhaseBoundary : Set where
 
 canonicalSSP15ComplementPhaseBoundary : SSP15ComplementPhaseBoundary
 canonicalSSP15ComplementPhaseBoundary =
-  ssp15-complement-phase-boundary true refl false refl false refl
+  ssp15-complement-phase-boundary
+    ssp15InternalLaneCountIsFifteen
+    laneProjectorOwnCoefficient
+    laneProjectorReverseCovariant
+    false refl
+    false refl
