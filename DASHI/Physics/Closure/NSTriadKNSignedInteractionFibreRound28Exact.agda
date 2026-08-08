@@ -65,8 +65,10 @@ cellSignedCommutatorExact :
   cellCommutatorValue cell ≡ cellSignedDifferenceValue cell
 cellSignedCommutatorExact cell =
   cong
-    (Commutator.multiplierSymbol
-      (testSymbol cell) (output cell) *_)
+    (λ value →
+      Commutator.multiplierSymbol
+        (testSymbol cell) (output cell)
+      * value)
     (Commutator.translationMultiplierCommutatorExact
       (multiplier cell) (lowShift cell) (state cell) (output cell))
 
