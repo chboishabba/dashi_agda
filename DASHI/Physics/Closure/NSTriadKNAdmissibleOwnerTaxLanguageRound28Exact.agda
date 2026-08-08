@@ -20,15 +20,16 @@ module DASHI.Physics.Closure.NSTriadKNAdmissibleOwnerTaxLanguageRound28Exact whe
 --
 -- There is no constructor for an uncontrolled BKM, Serrin or target critical
 -- supremum.  A finite list of owner estimates is aggregated exactly, retaining
--- the literal sum of viscosity coefficients.  The analytic work still has to
--- inhabit each owner estimate and prove the strict total coefficient below one.
+-- the literal sum of viscosity coefficients.  The strict budget stores
+-- nonnegativity only for estimates actually present in the list and carries
+-- both the explicit sum-eta inequality and its positive-reserve form.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base using
-  (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; _<_)
+  (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_; _<_)
 import Data.Rational.Properties as ℚₚ
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (subst)
@@ -139,15 +140,25 @@ aggregateOwnerEstimates {environment} (estimate ∷ rest) =
     rightMeaning
     summed
 
+data AllEtasNonnegative
+    {environment : TaxEnvironment} :
+    List (AdmissibleOwnerEstimate environment) → Set where
+  allEtas[] : AllEtasNonnegative []
+  allEtas∷ :
+    ∀ {estimate rest} →
+    0ℚ ≤ eta estimate →
+    AllEtasNonnegative rest →
+    AllEtasNonnegative (estimate ∷ rest)
+
 record StrictAdmissibleOwnerBudget
     {environment : TaxEnvironment}
     (estimates : List (AdmissibleOwnerEstimate environment)) : Set where
   constructor strict-admissible-owner-budget
   field
-    eachEtaNonnegative :
-      (estimate : AdmissibleOwnerEstimate environment) →
-      0ℚ ≤ eta estimate
+    eachEtaNonnegative : AllEtasNonnegative estimates
     totalEtaStrict : sumEta estimates < 1ℚ
+    remainingViscosityPositive :
+      0ℚ < 1ℚ - sumEta estimates
 
 open StrictAdmissibleOwnerBudget public
 
