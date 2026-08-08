@@ -19,6 +19,7 @@ import DASHI.Foundations.BalancedTernaryStageSymmetryExact
 import DASHI.Foundations.BalancedTernaryAmplitudeClosureExact
 import DASHI.Foundations.BalancedTernaryUltrametricExact
 import DASHI.Foundations.StageSymmetryCarrierTowerExact
+import DASHI.Foundations.CounterpositionOrderedJoinExact
 import DASHI.Foundations.DialecticSheetFrameSelectorExact
 import DASHI.Foundations.FrameWitnessFibreMDLExact
 import DASHI.Foundations.DialecticCubieTetralemmaExact
