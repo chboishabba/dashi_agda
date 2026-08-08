@@ -18,9 +18,16 @@ FILES=(
   DASHI/Biology/TarotCarrierExact.agda
   DASHI/Biology/JMDSporadicTarotV2CorrespondenceExact.agda
   DASHI/Biology/JMDSporadicTarotV2Regression.agda
+  DASHI/Biology/JMDSporadicTarotOrdinalTotalisationExact.agda
+  DASHI/Biology/SporadicStageSymmetryTarotRegression.agda
   DASHI/Biology/PointedBulkReducedMoonshineBoundary.agda
   DASHI/Biology/PointedBulkSporadicTarotSourceAtlas.agda
   DASHI/Biology/PointedBulkSporadicTarotEverything.agda
+  DASHI/Foundations/BalancedTernaryStageSymmetryExact.agda
+  DASHI/Foundations/StageSymmetryCarrierTowerExact.agda
+  DASHI/Foundations/DialecticSheetFrameSelectorExact.agda
+  DASHI/Foundations/SecondRevolutionJankoTarotExact.agda
+  DASHI/Moonshine/EulerMonsterMeaningSeparationExact.agda
   DASHI/Governance/CabarlahTraumaProjectionBridgeExact.agda
   DASHI/Governance/Everything.agda
   DASHI/PointedBulkSporadicTarotCabarlahBoundary.agda
@@ -56,10 +63,38 @@ grep -q 'posterCardCountIsTwentyTwo' DASHI/Biology/JMDSporadicTarotV2Corresponde
 grep -q 'posterSuppliesTotalS26ToA22MapIsFalse' DASHI/Biology/JMDSporadicTarotV2CorrespondenceExact.agda
 grep -q 'omittedGroupsMayBeAssignedWithoutRationaleIsFalse' DASHI/Biology/JMDSporadicTarotV2CorrespondenceExact.agda
 
-echo "Pointed bulk / sporadic Tarot / JMD v2 static guards passed."
+# Balanced ternary, symmetry, retained fallback, and Ogg/depth-two boundaries.
+grep -q 'stage5To3RetainsTwo' DASHI/Foundations/BalancedTernaryStageSymmetryExact.agda
+grep -q 'residualErasedIsFalse' DASHI/Foundations/BalancedTernaryStageSymmetryExact.agda
+grep -q 'counterpositionNeedNotBeInverse' DASHI/Foundations/BalancedTernaryStageSymmetryExact.agda
+grep -q 'oggPrimeCountIsFifteen' DASHI/Foundations/BalancedTernaryStageSymmetryExact.agda
+grep -q 'eightyOneSplitsTenAndSeventyOne' DASHI/Foundations/BalancedTernaryStageSymmetryExact.agda
+grep -q 'independentEvidenceForTenTimesThreePowerNineIsFalse' DASHI/Foundations/BalancedTernaryStageSymmetryExact.agda
+grep -q 'hexadicCardinalityIsSix' DASHI/Foundations/StageSymmetryCarrierTowerExact.agda
+grep -q 'nonaryCardinalityIsNine' DASHI/Foundations/StageSymmetryCarrierTowerExact.agda
+
+# Selector/hexagram/SSP witness boundary.
+grep -q 'selectInhabitableFrame' DASHI/Foundations/DialecticSheetFrameSelectorExact.agda
+grep -q 'SSP15Signature' DASHI/Foundations/DialecticSheetFrameSelectorExact.agda
+grep -q 'localWitnessImpliesUniversalTruthIsFalse' DASHI/Foundations/DialecticSheetFrameSelectorExact.agda
+
+# Actual total map with explicit collisions and authority.
+grep -q 'familyCompressionTotalisation' DASHI/Biology/JMDSporadicTarotOrdinalTotalisationExact.agda
+grep -q 'fi23BabyMonsterCollision' DASHI/Biology/JMDSporadicTarotOrdinalTotalisationExact.agda
+grep -q 'totalMapIsSourceForcedIsFalse' DASHI/Biology/JMDSporadicTarotOrdinalTotalisationExact.agda
+grep -q 'symbolicRationalesPromotedToGroupTheoremsIsFalse' DASHI/Biology/JMDSporadicTarotOrdinalTotalisationExact.agda
+
+# Dual second-revolution and Euler/Monster meaning separation.
+grep -q 'address14' DASHI/Foundations/SecondRevolutionJankoTarotExact.agda
+grep -q 'stageCarrierIdentifiedWithJankoGroupIsFalse' DASHI/Foundations/SecondRevolutionJankoTarotExact.agda
+grep -q 'differentialSquaresToZero' DASHI/Moonshine/EulerMonsterMeaningSeparationExact.agda
+grep -q 'coefficient196884IsEulerCharacteristicClaimedIsFalse' DASHI/Moonshine/EulerMonsterMeaningSeparationExact.agda
+
+echo "Pointed bulk / sporadic Tarot / balanced-stage symmetry static guards passed."
 
 scripts/run_agda29_parallel_check.sh \
   DASHI/Biology/JMDSporadicTarotV2Regression.agda \
+  DASHI/Biology/SporadicStageSymmetryTarotRegression.agda \
   DASHI/PointedBulkSporadicTarotCabarlahRegression.agda \
   DASHI/PointedBulkSporadicTarotCabarlahBoundary.agda \
   DASHI/EverythingPointedBulkSporadicTarot.agda
