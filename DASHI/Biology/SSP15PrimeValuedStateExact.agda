@@ -25,6 +25,9 @@ module DASHI.Biology.SSP15PrimeValuedStateExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
+open import Data.Empty using (⊥)
+open import Data.Product using (proj₁; proj₂)
 
 import DASHI.Biology.BalancedTernaryHarmonicCarrierExact as Harmonic
 import DASHI.Biology.NonaryCompletionPhaseQuotientExact as Quotient
@@ -58,16 +61,16 @@ record PrimeValuedSSP15State
 open PrimeValuedSSP15State public
 
 primeValue :
-  ∀ {prime} → PrimeValuedSSP15State prime → Agda.Builtin.Nat.Nat
+  ∀ {prime} → PrimeValuedSSP15State prime → Nat
 primeValue {prime} state = Lane.monsterPrimeLaneToNat prime
 
 internalMode :
   ∀ {prime} → PrimeValuedSSP15State prime → Quotient.ComplementMode5
-internalMode state = Data.Product.proj₁ (internalLane state)
+internalMode state = proj₁ (internalLane state)
 
 internalPhase :
   ∀ {prime} → PrimeValuedSSP15State prime → Internal.BalancedPhase
-internalPhase state = Data.Product.proj₂ (internalLane state)
+internalPhase state = proj₂ (internalLane state)
 
 internalIrrepName :
   ∀ {prime} → PrimeValuedSSP15State prime → D4.D4IrrepKind
@@ -129,8 +132,7 @@ p71A2CounterposedPhaseIsNegative :
 p71A2CounterposedPhaseIsNegative = refl
 
 p71ExamplesHaveSamePrimeDifferentInternalMode :
-  internalMode p71A1Neutral ≡ internalMode p71A2Counterposed →
-  Data.Empty.⊥
+  internalMode p71A1Neutral ≡ internalMode p71A2Counterposed → ⊥
 p71ExamplesHaveSamePrimeDifferentInternalMode ()
 
 ------------------------------------------------------------------------
@@ -139,7 +141,7 @@ p71ExamplesHaveSamePrimeDifferentInternalMode ()
 
 reversePrimeValuedPhase :
   ∀ {prime} → PrimeValuedSSP15State prime → PrimeValuedSSP15State prime
-reversePrimeValuedPhase {prime}
+reversePrimeValuedPhase
   (prime-valued-ssp15-state reading lane residual) =
   prime-valued-ssp15-state reading (Internal.reverseLane lane) residual
 
