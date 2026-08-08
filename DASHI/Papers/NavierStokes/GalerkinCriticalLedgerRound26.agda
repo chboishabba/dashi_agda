@@ -7,6 +7,7 @@ module DASHI.Papers.NavierStokes.GalerkinCriticalLedgerRound26 where
 --
 -- * degree-two Galerkin coordinate algebra and difference factorisation;
 -- * reality reconstruction from positive mode orbits;
+-- * exact conjugate transversality for reconstructed negative modes;
 -- * physical Complex3 plus scalar six-term triad cancellation;
 -- * signed weighted critical shell ledger;
 -- * Round-25 physical five-source fibres forced into signed shell cells;
@@ -15,7 +16,7 @@ module DASHI.Papers.NavierStokes.GalerkinCriticalLedgerRound26 where
 -- * duplicate-free tax ownership and admissible remainder classification;
 -- * hysteretic entry charge bounded by positive variation.
 --
--- The continuum-real ODE instance, physical time-dependent shell balance and
+-- The finite normed ODE instance, physical time-dependent shell balance and
 -- every cutoff-uniform analytic tax remain open.  No global regularity or Clay
 -- promotion is asserted.
 ------------------------------------------------------------------------
@@ -30,6 +31,7 @@ record GalerkinCriticalLedgerRound26Status : Set where
   field
     literalQuadraticCoordinateAlgebra : Bool
     realityReconstructionByConstruction : Bool
+    conjugateTransversality : Bool
     physicalTriadEnergyCancellation : Bool
     signedCriticalLedger : Bool
     physicalFiveSourceSignedShellBridge : Bool
@@ -39,7 +41,7 @@ record GalerkinCriticalLedgerRound26Status : Set where
     hystereticPositiveVariationCharge : Bool
     criticalRemainderClassification : Bool
 
-    continuumRealPicardLindelofInstance : Bool
+    finiteNormedPicardLindelofInstance : Bool
     finiteGalerkinGlobalExistence : Bool
     physicalTimeDependentShellBalance : Bool
     cutoffUniformLowTransportTax : Bool
@@ -54,8 +56,13 @@ canonicalGalerkinCriticalLedgerRound26Status :
   GalerkinCriticalLedgerRound26Status
 canonicalGalerkinCriticalLedgerRound26Status =
   galerkin-critical-ledger-round26-status
-    true true true true true true true true true true
+    true true true true true true true true true true true
     false false false false false false false false
+
+conjugateTransversalityAdvanced :
+  conjugateTransversality canonicalGalerkinCriticalLedgerRound26Status
+  ≡ true
+conjugateTransversalityAdvanced = refl
 
 finiteAlgebraAdvanced :
   physicalTriadEnergyCancellation canonicalGalerkinCriticalLedgerRound26Status
@@ -74,7 +81,7 @@ taxOwnershipAdvanced :
 taxOwnershipAdvanced = refl
 
 localODEInstanceRemainsOpen :
-  continuumRealPicardLindelofInstance
+  finiteNormedPicardLindelofInstance
     canonicalGalerkinCriticalLedgerRound26Status
   ≡ false
 localODEInstanceRemainsOpen = refl
