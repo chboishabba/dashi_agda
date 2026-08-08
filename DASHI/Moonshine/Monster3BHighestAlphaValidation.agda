@@ -14,9 +14,16 @@ import DASHI.Moonshine.Monster3BPhaseTransportExact as Transport
 import DASHI.Moonshine.MonsterThreeLocalE8LeechBridgeExact as ThreeLocal
 import DASHI.Moonshine.LeechWeightTwo196608BridgeExact as Leech
 import DASHI.Moonshine.MonsterYangMills196608CrossLaneExact as CrossLane
+import DASHI.Moonshine.Monster3BCentredProbeCoreSelectorExact as Centred
+import DASHI.Moonshine.Monster3BMaximalRegularCoreExact as Maximal
+import DASHI.Moonshine.Monster3BConformalLinePlacementExact as Conformal
+import DASHI.Moonshine.Monster3BFiniteProjectorModelExact as Projector
+import DASHI.Moonshine.Monster3BFiniteWeightProjectorExact as WeightProjector
+import DASHI.Moonshine.Monster3BMultiplicityCharacterProjectorExact as Character
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (_+_; _*_)
+open import Data.Fin.Base using (Fin)
 
 normalizerAndFourierAgreeOnNontrivialMultiplicity :
   Normalizer.nontrivialPhaseDegree ≡ Fourier.zeta Fourier.monsterW3B
@@ -100,3 +107,44 @@ sampleTranslationPermutationLaw :
   ≡ state
 sampleTranslationPermutationLaw =
   Permutations.translateInverseAfterTranslate Generators.axis4
+
+maximalCoreCertificateIsCanonical :
+  Maximal.core Maximal.canonicalMaximalCoreDecomposition
+  ≡ Centred.maximalRegularCore
+maximalCoreCertificateIsCanonical = Maximal.canonicalCoreIsMaximal
+
+conformalLineIsInvariantOnly :
+  Conformal.addMultiplicity
+    Conformal.conformalLineMultiplicity Fourier.monsterW3B
+  ≡ Fourier.moonshineWeightTwo3B
+conformalLineIsInvariantOnly =
+  Conformal.moonshineWeightTwoSplitsConformalPlusMonster
+
+projectorIndexModelHasCorrectDimension :
+  Projector.zetaModelDimension ≡ 65610
+projectorIndexModelHasCorrectDimension =
+  Projector.zetaModelDimensionIs65610
+
+sampleWeightProjectorIdempotent :
+  (position : Generators.X6) →
+  (coordinate : Fin 90) →
+  WeightProjector.weightProjectorCoefficient position
+      (WeightProjector.basisAt position coordinate)
+    * WeightProjector.weightProjectorCoefficient position
+      (WeightProjector.basisAt position coordinate)
+  ≡ WeightProjector.weightProjectorCoefficient position
+      (WeightProjector.basisAt position coordinate)
+sampleWeightProjectorIdempotent position coordinate =
+  WeightProjector.weightProjectorCoefficientIdempotent
+    position (WeightProjector.basisAt position coordinate)
+
+projectorCharacterDimensionMatchesNormalizer :
+  Character.zetaSectorDegree ≡ Normalizer.nontrivialPhaseDegree
+projectorCharacterDimensionMatchesNormalizer = refl
+
+multiplicityCharacterTargetDegreeSplits :
+  Heisenberg.naturalSuzukiDegree
+  + Heisenberg.symmetricSquareDualDegree
+  ≡ Character.multiplicityDegree
+multiplicityCharacterTargetDegreeSplits =
+  Character.multiplicityTwelvePlusSeventyEight
