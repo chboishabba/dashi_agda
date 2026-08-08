@@ -23,6 +23,7 @@ import DASHI.Moonshine.Monster3BMultiplicityCharacterProjectorExact as Character
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (_+_; _*_)
+open import Data.Fin.Base using (Fin)
 
 normalizerAndFourierAgreeOnNontrivialMultiplicity :
   Normalizer.nontrivialPhaseDegree ≡ Fourier.zeta Fourier.monsterW3B
@@ -126,7 +127,7 @@ projectorIndexModelHasCorrectDimension =
 
 sampleWeightProjectorIdempotent :
   (position : Generators.X6) →
-  (coordinate : Data.Fin.Base.Fin 90) →
+  (coordinate : Fin 90) →
   WeightProjector.weightProjectorCoefficient position
       (WeightProjector.basisAt position coordinate)
     * WeightProjector.weightProjectorCoefficient position
