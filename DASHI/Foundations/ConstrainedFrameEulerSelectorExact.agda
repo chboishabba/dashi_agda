@@ -15,7 +15,7 @@ import DASHI.Foundations.FrameWitnessFibreMDLExact as Frame
 -- exact stationarity theorem for cost-preserving admissible deformations.
 ------------------------------------------------------------------------
 
-record FiniteConstrainedMinimum : Set where
+record FiniteConstrainedMinimum : Set₁ where
   constructor finite-constrained-minimum
   field
     Candidate : Set
