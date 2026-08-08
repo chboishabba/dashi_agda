@@ -18,6 +18,7 @@ sources=(
   DASHI/Biology/SSP15PrimeValuedStateExact.agda
   DASHI/Biology/SSP15JCoarseFineRound3Validation.agda
   DASHI/Biology/PointedBulkSporadicTarotEverything.agda
+  DASHI/EverythingSSP15JCoarseFineRound3.agda
 )
 
 for source in "${sources[@]}"; do
@@ -55,6 +56,7 @@ integrated=DASHI/Biology/SSP15JCoarseFineIntegratedExact.agda
 valued=DASHI/Biology/SSP15PrimeValuedStateExact.agda
 validation=DASHI/Biology/SSP15JCoarseFineRound3Validation.agda
 aggregate=DASHI/Biology/PointedBulkSporadicTarotEverything.agda
+top_aggregate=DASHI/EverythingSSP15JCoarseFineRound3.agda
 
 require_pattern "$quotient" 'decodeAfterEncode'
 require_pattern "$quotient" 'complementFlipsBinaryPhase'
@@ -96,6 +98,9 @@ require_pattern "$valued" 'reversePrimeValuedPhaseInvolutive'
 require_pattern "$valued" 'equalPrimeAndInternalCardinalitySuppliesCanonicalBijectionIsFalse'
 require_pattern "$validation" 'pointedSignedChainReachesFortySeven'
 require_pattern "$aggregate" 'import DASHI.Biology.SSP15PrimeValuedStateExact'
+require_pattern "$top_aggregate" 'import DASHI.Everything'
+require_pattern "$top_aggregate" 'import DASHI.Biology.PointedBulkSporadicTarotEverything'
 
 scripts/run_agda29_parallel_check.sh \
-  DASHI/Biology/SSP15JCoarseFineRound3Validation.agda
+  DASHI/Biology/SSP15JCoarseFineRound3Validation.agda \
+  DASHI/EverythingSSP15JCoarseFineRound3.agda
