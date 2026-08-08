@@ -49,7 +49,8 @@ entryGapPaidByRise {gap} entry =
   shifted :
     (- before entry) + (before entry + gap)
     ≤ (- before entry) + after entry
-  shifted = ℚₚ.+-monoˡ-≤ (- before entry) (crossesGap entry)
+  shifted =
+    ℚₚ.+-mono-≤ ℚₚ.≤-refl (crossesGap entry)
 
   leftNormal :
     (- before entry) + (before entry + gap) ≡ gap
