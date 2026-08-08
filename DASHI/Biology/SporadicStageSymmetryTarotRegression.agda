@@ -11,6 +11,7 @@ import DASHI.Biology.SporadicTarotDependencyExact as Sporadic
 import DASHI.Biology.TarotCarrierExact as Tarot
 import DASHI.Biology.JMDSporadicTarotOrdinalTotalisationExact as Total
 import DASHI.Moonshine.EulerMonsterMeaningSeparationExact as Euler
+import DASHI.Physics.Closure.MoonshinePrimeLaneReceiptSurface as Lane
 
 stageFiveConstituentRegression :
   BT.TwoTriadComposite.totalAmplitude BT.stage5Composite ≡ 5
@@ -40,9 +41,7 @@ oggCountRegression : SSP.countList SSP.allOggPrimeLanes ≡ 15
 oggCountRegression = SSP.oggPrimeLaneCountIsFifteen
 
 seventyOneExistingLaneRegression :
-  10 + SSP.oggPrimeLaneValue
-    DASHI.Physics.Closure.MoonshinePrimeLaneReceiptSurface.p71
-  ≡ 81
+  10 + SSP.oggPrimeLaneValue Lane.p71 ≡ 81
 seventyOneExistingLaneRegression = SSP.eightyOneTenSeventyOneBridge
 
 moonshineResidueRegression :
