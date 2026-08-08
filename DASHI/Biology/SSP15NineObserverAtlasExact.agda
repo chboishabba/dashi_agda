@@ -168,27 +168,29 @@ mapPointedSignedIdentity :
 mapPointedSignedIdentity distinguishedObserver = refl
 mapPointedSignedIdentity (signedPoint point phase) = refl
 
-pointedSignedCardinalityValue : Nat → Nat
-pointedSignedCardinalityValue cardinality = 2 * cardinality + 1
+-- Numeric size formula for the pointed-sign constructor.  It is deliberately
+-- not named as a cardinality theorem about an arbitrary carrier X.
+pointedSignedSizeFormula : Nat → Nat
+pointedSignedSizeFormula size = 2 * size + 1
 
-pointedSignedTwoIsFive : pointedSignedCardinalityValue 2 ≡ 5
+pointedSignedTwoIsFive : pointedSignedSizeFormula 2 ≡ 5
 pointedSignedTwoIsFive = refl
 
-pointedSignedFiveIsEleven : pointedSignedCardinalityValue 5 ≡ 11
+pointedSignedFiveIsEleven : pointedSignedSizeFormula 5 ≡ 11
 pointedSignedFiveIsEleven = refl
 
-pointedSignedElevenIsTwentyThree : pointedSignedCardinalityValue 11 ≡ 23
+pointedSignedElevenIsTwentyThree : pointedSignedSizeFormula 11 ≡ 23
 pointedSignedElevenIsTwentyThree = refl
 
 pointedSignedTwentyThreeIsFortySeven :
-  pointedSignedCardinalityValue 23 ≡ 47
+  pointedSignedSizeFormula 23 ≡ 47
 pointedSignedTwentyThreeIsFortySeven = refl
 
-pointedSignedThreeIsSeven : pointedSignedCardinalityValue 3 ≡ 7
+pointedSignedThreeIsSeven : pointedSignedSizeFormula 3 ≡ 7
 pointedSignedThreeIsSeven = refl
 
 pointedSignedTwentyNineIsFiftyNine :
-  pointedSignedCardinalityValue 29 ≡ 59
+  pointedSignedSizeFormula 29 ≡ 59
 pointedSignedTwentyNineIsFiftyNine = refl
 
 ------------------------------------------------------------------------
