@@ -38,34 +38,34 @@ stageFiveResidualRetainedRegression :
 stageFiveResidualRetainedRegression = refl
 
 stageFiveSymmetryRegression :
-  BT.SymmetryAwareStageState.stabiliser BT.stage3SymmetryState
-    ≡ BT.fullStabiliserS3
-  × BT.SymmetryAwareStageState.stabiliser BT.stage2SymmetryState
-    ≡ BT.pairStabiliserS2
+  (BT.SymmetryAwareStageState.stabiliser BT.stage3SymmetryState
+    ≡ BT.fullStabiliserS3)
+  × (BT.SymmetryAwareStageState.stabiliser BT.stage2SymmetryState
+    ≡ BT.pairStabiliserS2)
 stageFiveSymmetryRegression = refl , refl
 
 exhaustiveStabiliserRegression :
-  BT.patternStabiliser BT.allOpen ≡ BT.fullStabiliserS3
-  × BT.patternStabiliser BT.thirdCoordinateCounterposition
-    ≡ BT.pairStabiliserS2
+  (BT.patternStabiliser BT.allOpen ≡ BT.fullStabiliserS3)
+  × (BT.patternStabiliser BT.thirdCoordinateCounterposition
+    ≡ BT.pairStabiliserS2)
 exhaustiveStabiliserRegression =
   BT.allOpenPatternHasS3 , BT.counterpositionPatternHasS2
 
 signedAmplitudeRegression :
-  Amp.triadAmplitude BT.allPositive ≡ Amp.ampPos3
-  × Amp.triadAmplitude BT.allNegative ≡ Amp.ampNeg3
-  × Amp.triadAmplitude BT.balancedZeroPattern ≡ Amp.ampZero
+  (Amp.triadAmplitude BT.allPositive ≡ Amp.ampPos3)
+  × (Amp.triadAmplitude BT.allNegative ≡ Amp.ampNeg3)
+  × (Amp.triadAmplitude BT.balancedZeroPattern ≡ Amp.ampZero)
 signedAmplitudeRegression = refl , refl , refl
 
 joinedAmplitudeRegression :
-  Amp.joinAmplitude BT.allPositive BT.twoPositiveOneOpen ≡ Amp.joinedPos5
-  × Amp.joinAmplitude BT.allPositive BT.allPositive ≡ Amp.joinedPos6
+  (Amp.joinAmplitude BT.allPositive BT.twoPositiveOneOpen ≡ Amp.joinedPos5)
+  × (Amp.joinAmplitude BT.allPositive BT.allPositive ≡ Amp.joinedPos6)
 joinedAmplitudeRegression = refl , refl
 
 stageFiveFullBranchRegression :
-  Amp.StageFiveBranch.visibleTarget Amp.positiveStageFiveCompletion ≡ 6
-  × Amp.StageFiveBranch.visibleTarget Amp.negativeStageFiveResolution ≡ 4
-  × Amp.StageFiveBranch.visibleTarget Amp.stageFiveFallbackWithResidual ≡ 3
+  (Amp.StageFiveBranch.visibleTarget Amp.positiveStageFiveCompletion ≡ 6)
+  × (Amp.StageFiveBranch.visibleTarget Amp.negativeStageFiveResolution ≡ 4)
+  × (Amp.StageFiveBranch.visibleTarget Amp.stageFiveFallbackWithResidual ≡ 3)
 stageFiveFullBranchRegression = refl , refl , refl
 
 negativeBranchStabiliserRegression :
@@ -74,23 +74,22 @@ negativeBranchStabiliserRegression :
 negativeBranchStabiliserRegression = Amp.negativeBranchRetainsS2
 
 stageFiveResidueProfileRegression :
-  Amp.ResidueDeficit369.remainder3 Amp.fiveResidueDeficitProfile ≡ 2
-  × Amp.ResidueDeficit369.deficit6 Amp.fiveResidueDeficitProfile ≡ 1
-  × Amp.ResidueDeficit369.deficit9 Amp.fiveResidueDeficitProfile ≡ 4
+  (Amp.ResidueDeficit369.remainder3 Amp.fiveResidueDeficitProfile ≡ 2)
+  × (Amp.ResidueDeficit369.deficit6 Amp.fiveResidueDeficitProfile ≡ 1)
+  × (Amp.ResidueDeficit369.deficit9 Amp.fiveResidueDeficitProfile ≡ 4)
 stageFiveResidueProfileRegression = refl , refl , refl
 
-triadicDeficitTargetsNextMultipleRegression :
+triadicDeficitTargetsNextMultipleRegression : 5 + 1 ≡ 3 * (suc 1)
+triadicDeficitTargetsNextMultipleRegression =
   Amp.ResidueDeficit369.closesAtNext3 Amp.fiveResidueDeficitProfile
-  ≡ refl
-triadicDeficitTargetsNextMultipleRegression = refl
 
 counterpositionRegression :
   BT.thirdCoordinateCounterposition ≡ BT.strictInverse BT.allPositive → ⊥
 counterpositionRegression = BT.counterpositionNeedNotBeInverse
 
 binaryEmbeddingRegression :
-  Counter.embedBinaryOrientation Sym.direct ≡ BT.pos
-  × Counter.embedBinaryOrientation Sym.inverse ≡ BT.neg
+  (Counter.embedBinaryOrientation Sym.direct ≡ BT.pos)
+  × (Counter.embedBinaryOrientation Sym.inverse ≡ BT.neg)
 binaryEmbeddingRegression = refl , refl
 
 partialCounterpositionRegression :
@@ -109,15 +108,15 @@ orderedJoinCarrierRegression :
 orderedJoinCarrierRegression = Counter.orderedStageFiveJoinsDiffer
 
 squareStateMoveSeparationRegression :
-  Counter.listCount Counter.allSquareMoves ≡ 8
-  × Sym.squareCardinality ≡ 4
+  (Counter.listCount Counter.allSquareMoves ≡ 8)
+  × (Sym.squareCardinality ≡ 4)
 squareStateMoveSeparationRegression =
   Counter.squareMoveCountIsEight , Counter.squareStateCountIsFour
 
 carrierEnumerationRegression :
-  Sym.carrierListLength Sym.allSquareCarriers ≡ 4
-  × Sym.carrierListLength Sym.allHexadicCarriers ≡ 6
-  × Sym.carrierListLength Sym.allNonaryCarriers ≡ 9
+  (Sym.carrierListLength Sym.allSquareCarriers ≡ 4)
+  × (Sym.carrierListLength Sym.allHexadicCarriers ≡ 6)
+  × (Sym.carrierListLength Sym.allNonaryCarriers ≡ 9)
 carrierEnumerationRegression = refl , refl , refl
 
 stageFiveConstituentAmplitudeRegression :
@@ -136,8 +135,8 @@ stageFiveConstituentAmplitudeRegression =
     Sym.canonicalStageFiveSymmetryMismatch
 
 sixDualReadingRegression :
-  Sym.hexadicCardinality ≡ 6
-  × 6 + 3 ≡ Sym.nonaryCardinality
+  (Sym.hexadicCardinality ≡ 6)
+  × (6 + 3 ≡ Sym.nonaryCardinality)
 sixDualReadingRegression = refl , refl
 
 balancedAddressDecoderRegression :
@@ -168,6 +167,21 @@ cubiePositionCountRegression = Cubie.cubiePositionCardinalityIsTwentySeven
 decisionPoliciesReallyDifferRegression :
   Cubie.positiveOnlyDecision BT.neg ≡ Cubie.nonzeroDecision BT.neg → ⊥
 decisionPoliciesReallyDifferRegression = Cubie.decisionPoliciesDifferOnNegative
+
+typedPolicyNameRegression :
+  (Cubie.DeclaredDecisionPolicy.policyName Cubie.positiveOnlyPolicy
+    ≡ Cubie.positiveOnlyName)
+  × (Cubie.DeclaredDecisionPolicy.policyName Cubie.nonzeroPolicy
+    ≡ Cubie.nonzeroName)
+typedPolicyNameRegression = refl , refl
+
+typedPolicyNamesDifferRegression :
+  Cubie.positiveOnlyName ≡ Cubie.nonzeroName → ⊥
+typedPolicyNamesDifferRegression = Cubie.policyNamesDiffer
+
+typedFrameNamesDifferRegression :
+  Cubie.localCubieFrame ≡ Cubie.contextualCubieFrame → ⊥
+typedFrameNamesDifferRegression ()
 
 witnessFibreRetainsAlternativesRegression :
   FrameMDL.listCount FrameMDL.allAdmissibleWitnesses ≡ 2
@@ -207,9 +221,27 @@ integratedPipelineRegression :
   Integrated.listCount Integrated.canonicalPipeline ≡ 7
 integratedPipelineRegression = Integrated.pipelineHasSevenTypedStages
 
+integratedSelectionAdmissibleRegression :
+  Integrated.AdmissibleIntegratedCandidate
+    Integrated.selectedIntegratedCandidate
+integratedSelectionAdmissibleRegression =
+  Integrated.selectedIntegratedCandidateIsAdmissible
+
+integratedSelectionMDLRegression :
+  Integrated.frame Integrated.selectedIntegratedCandidate
+  ≡ ActionMDL.MDLSelection.selected
+      FrameMDL.canonicalFrameMDLSelection tt
+integratedSelectionMDLRegression = Integrated.selectedIntegratedFrameMatchesMDL
+
+integratedSelectionCostRegression :
+  Integrated.totalCost Integrated.selectedIntegratedCandidate
+  ≤ Integrated.totalCost Integrated.expansiveIntegratedCandidate
+integratedSelectionCostRegression =
+  Integrated.selectedCostIsMinimalAmongConstructedCandidates
+
 moonshineResidueRegression :
-  2430 * 81 + 54 ≡ 196884
-  × 2430 * 81 + 53 ≡ 196883
+  (2430 * 81 + 54 ≡ 196884)
+  × (2430 * 81 + 53 ≡ 196883)
 moonshineResidueRegression =
   BT.moonshineCoefficientDepthTwoEquation ,
   BT.monsterConstituentDepthTwoEquation
@@ -220,9 +252,9 @@ moonshineTernaryExpansionRegression =
   DepthTwo.moonshineCoefficientTernaryExpansion
 
 depthTwoCommutingSquareRegression :
-  DepthTwo.fullResidue DepthTwo.canonicalDepthTwoCommutingSquare ≡ 54
-  × DepthTwo.reducedResidue DepthTwo.canonicalDepthTwoCommutingSquare ≡ 53
-  × DepthTwo.terminalProductCount ≡ 54
+  (DepthTwo.fullResidue DepthTwo.canonicalDepthTwoCommutingSquare ≡ 54)
+  × (DepthTwo.reducedResidue DepthTwo.canonicalDepthTwoCommutingSquare ≡ 53)
+  × (DepthTwo.terminalProductCount ≡ 54)
 depthTwoCommutingSquareRegression = refl , refl , refl
 
 signedSporadicDimensionRegression : Signed.sporadicSignedDimension ≡ 53
@@ -234,9 +266,8 @@ signedSporadic54Regression = Signed.sporadicSigned54DimensionIsFiftyFour
 signedPolaritySharesCardRegression :
   Signed.canonicalArcanaProjection
     (Signed.sporadicSignedState Sporadic.J2 Candidate.positiveFibre)
-  ≡
-  Signed.canonicalArcanaProjection
-    (Signed.sporadicSignedState Sporadic.J2 Candidate.negativeFibre)
+  ≡ Signed.canonicalArcanaProjection
+      (Signed.sporadicSignedState Sporadic.J2 Candidate.negativeFibre)
 signedPolaritySharesCardRegression = Signed.polaritiesShareArcana Sporadic.J2
 
 selectorReturnsWitnessRegression :
@@ -247,10 +278,10 @@ selectorReturnsWitnessRegression :
 selectorReturnsWitnessRegression = Selector.selectInhabitableFrame
 
 jankoAddressRegression :
-  Revolution.DualRevolutionAddress.global Revolution.address14 ≡ 14
-  × Revolution.DualRevolutionAddress.carryRelativeOffset
-      Revolution.address14 ≡ Revolution.localOffset Revolution.janko4
-  × 9 + (1 + Revolution.localOffset Revolution.janko4) ≡ 14
+  (Revolution.DualRevolutionAddress.global Revolution.address14 ≡ 14)
+  × (Revolution.DualRevolutionAddress.carryRelativeOffset
+      Revolution.address14 ≡ Revolution.localOffset Revolution.janko4)
+  × (9 + (1 + Revolution.localOffset Revolution.janko4) ≡ 14)
 jankoAddressRegression = refl , refl , refl
 
 fi22TotalisedRegression :
@@ -263,12 +294,12 @@ explicitCollisionRegression :
 explicitCollisionRegression = Total.fi23BabyMonsterCollision
 
 eulerExamplesRegression :
-  Euler.FiniteEulerCharacteristic.evenDimension
+  (Euler.FiniteEulerCharacteristic.evenDimension
     Euler.oneTwoOneFiniteEulerCharacteristic
-  ≡ Euler.FiniteEulerCharacteristic.oddDimension
-      Euler.oneTwoOneFiniteEulerCharacteristic
-  × Euler.FiniteGradedSupertrace.evenTrace Euler.oneTwoOneSupertrace
-  ≡ Euler.FiniteGradedSupertrace.oddTrace Euler.oneTwoOneSupertrace
+   ≡ Euler.FiniteEulerCharacteristic.oddDimension
+      Euler.oneTwoOneFiniteEulerCharacteristic)
+  × (Euler.FiniteGradedSupertrace.evenTrace Euler.oneTwoOneSupertrace
+   ≡ Euler.FiniteGradedSupertrace.oddTrace Euler.oneTwoOneSupertrace)
 eulerExamplesRegression = refl , refl
 
 totalisationBoundaryRegression : Total.TotalisationAuthorityBoundary
