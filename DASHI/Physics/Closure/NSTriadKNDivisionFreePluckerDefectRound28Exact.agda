@@ -144,10 +144,30 @@ parallelScaledModesHaveZeroDefect : ∀ leftScale rightScale direction →
   ≡ + 0
 parallelScaledModesHaveZeroDefect leftScale rightScale direction =
   let
-    scaled = pluckerNormScale
-      leftScale rightScale direction direction
+    factor = leftScale * rightScale
+
+    scaled :
+      Plucker.pluckerNormSquared
+        (scaleMode leftScale direction)
+        (scaleMode rightScale direction)
+      ≡
+      (factor * factor)
+      * Plucker.pluckerNormSquared direction direction
+    scaled = pluckerNormScale leftScale rightScale direction direction
+
+    zeroProduct :
+      (factor * factor)
+      * Plucker.pluckerNormSquared direction direction
+      ≡ + 0
+    zeroProduct
+      rewrite pluckerSelfNormZero direction =
+      RingZ.solve 1
+        (λ coefficient →
+          (coefficient ⊗ RingZ.Κ (+ 0), RingZ.Κ (+ 0)))
+        refl
+        (factor * factor)
   in
-  rewrite pluckerSelfNormZero direction in scaled
+  Relation.Binary.PropositionalEquality.trans scaled zeroProduct
 
 record CrossMultipliedAngularDefect
     (thresholdSquared : ℤ)
