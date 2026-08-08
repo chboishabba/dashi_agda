@@ -24,10 +24,17 @@ open import Data.Integer.Base using (+_)
 open import Data.List.Base using (length)
 open import Data.Rational.Base using (_*_; _/_; _+_)
 
-subsetOwnershipExhaustsAllAtoms :
-  length Ownership.correlatedAtoms + length Ownership.deepAtoms
-  ≡ length Ownership.allSubsetAtoms
-subsetOwnershipExhaustsAllAtoms = Ownership.correlatedAndDeepCountExact
+correlatedOwnershipCountRegression :
+  length Ownership.correlatedAtoms ≡ 10
+correlatedOwnershipCountRegression = Ownership.correlatedAtomCountExact
+
+deepOwnershipCountRegression :
+  length Ownership.deepAtoms ≡ 5
+deepOwnershipCountRegression = Ownership.deepAtomCountExact
+
+allOwnershipCountRegression :
+  length Ownership.allSubsetAtoms ≡ 15
+allOwnershipCountRegression = Ownership.allSubsetAtomCountExact
 
 pairCoefficientPerCrossRegression :
   Coeff.pairCoefficientPerCrossCharge
