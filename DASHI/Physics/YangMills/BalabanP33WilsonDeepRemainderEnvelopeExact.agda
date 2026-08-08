@@ -15,11 +15,11 @@ module DASHI.Physics.YangMills.BalabanP33WilsonDeepRemainderEnvelopeExact where
 -- DASHI CONTRIBUTION
 --
 -- Prove the complete finite algebra behind the grouped deep Wilson remainder.
--- If each selected factor defect satisfies
+-- If every selected-factor defect satisfies
 --
 --   N(D_i) <= epsilon^2 w_i,
 --
--- each identity factor has N(B_i)=w_i, and
+-- every identity factor has N(B_i)=w_i, and
 --
 --   w0 w1 w2 w3 = leftCharge * rightCharge,
 --
@@ -27,15 +27,16 @@ module DASHI.Physics.YangMills.BalabanP33WilsonDeepRemainderEnvelopeExact where
 -- square-root-free Young charge, and the quartic term by epsilon^4.  Summing
 -- the four cubic terms and one quartic term gives
 --
---   -(4 epsilon^3 + epsilon^4) Young(left,right)
+--   -(4 epsilon^3 + epsilon^4) (leftCharge+rightCharge)/2
 --     <= WilsonScalar(deepRemainder).
 --
--- The theorem is entirely over exact rationals and ordered quaternion
--- multiplication.  No commutativity of quaternion factors or square root is
--- used.
+-- Every upper-bound transport below is an explicit equality of rational
+-- scalars.  No unresolved factor placeholder, square root, commutativity of
+-- quaternion multiplication, or analytic norm receipt is used.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; _+_; _*_; -_; _≤_; _/_)
@@ -76,6 +77,32 @@ multiplyMonotoneNonnegative
   in
   ℚP.≤-trans first second
 
+orderedProduct4NormSqExact : ∀ f0 f1 f2 f3 →
+  Norm.normSq (Telescope.orderedProduct4 f0 f1 f2 f3)
+  ≡ Norm.normSq f0 * Norm.normSq f1
+      * Norm.normSq f2 * Norm.normSq f3
+orderedProduct4NormSqExact f0 f1 f2 f3 =
+  let
+    n0 = Norm.normSq f0
+    n1 = Norm.normSq f1
+    n2 = Norm.normSq f2
+    n3 = Norm.normSq f3
+  in
+  trans
+    (Norm.normSqMultiplyExact f0
+      (f1 Q.*q (f2 Q.*q (f3 Q.*q Q.oneQ))))
+    (trans
+      (cong (n0 *_)
+        (Norm.normSqMultiplyExact f1
+          (f2 Q.*q (f3 Q.*q Q.oneQ))))
+      (trans
+        (cong (λ selected → n0 * (n1 * selected))
+          (Norm.normSqMultiplyExact f2 (f3 Q.*q Q.oneQ)))
+        (trans
+          (cong (λ selected → n0 * (n1 * (n2 * selected)))
+            (Norm.normSqMultiplyExact f3 Q.oneQ))
+          (ℚRing.solve-∀ n0 n1 n2 n3)))
+
 product4NormUpper :
   ∀ f0 f1 f2 f3 u0 u1 u2 u3 →
   Norm.normSq f0 ≤ u0 → Norm.normSq f1 ≤ u1 →
@@ -101,42 +128,23 @@ product4NormUpper
     u012NN = Strong.multiplyNonnegative (u0 * u1) u2 u01NN u2NN
 
     pairBound : n0 * n1 ≤ u0 * u1
-    pairBound =
-      multiplyMonotoneNonnegative
-        n0 u0 n1 u1 u0NN n1NN bound0 bound1
+    pairBound = multiplyMonotoneNonnegative
+      n0 u0 n1 u1 u0NN n1NN bound0 bound1
 
     tripleBound : n0 * n1 * n2 ≤ u0 * u1 * u2
-    tripleBound =
-      multiplyMonotoneNonnegative
-        (n0 * n1) (u0 * u1) n2 u2
-        u01NN n2NN pairBound bound2
+    tripleBound = multiplyMonotoneNonnegative
+      (n0 * n1) (u0 * u1) n2 u2
+      u01NN n2NN pairBound bound2
 
     quadrupleBound :
       n0 * n1 * n2 * n3 ≤ u0 * u1 * u2 * u3
-    quadrupleBound =
-      multiplyMonotoneNonnegative
-        (n0 * n1 * n2) (u0 * u1 * u2) n3 u3
-        u012NN n3NN tripleBound bound3
+    quadrupleBound = multiplyMonotoneNonnegative
+      (n0 * n1 * n2) (u0 * u1 * u2) n3 u3
+      u012NN n3NN tripleBound bound3
   in
   subst
     (λ lower → lower ≤ u0 * u1 * u2 * u3)
-    (sym
-      (trans
-        (Norm.normSqMultiplyExact f0
-          (f1 Q.*q (f2 Q.*q (f3 Q.*q Q.oneQ))))
-        (trans
-          (cong (n0 *_)
-            (Norm.normSqMultiplyExact f1
-              (f2 Q.*q (f3 Q.*q Q.oneQ))))
-          (trans
-            (cong
-              (λ selected → n0 * (n1 * selected))
-              (Norm.normSqMultiplyExact f2 (f3 Q.*q Q.oneQ)))
-            (trans
-              (cong
-                (λ selected → n0 * (n1 * (n2 * selected)))
-                (Norm.normSqMultiplyExact f3 Q.oneQ))
-              (ℚRing.solve-∀ n0 n1 n2 n3)))))
+    (sym (orderedProduct4NormSqExact f0 f1 f2 f3))
     quadrupleBound
 
 record FourFactorDeepEnvelope
@@ -176,14 +184,8 @@ record FourFactorDeepEnvelope
 
 open FourFactorDeepEnvelope public
 
-epsilonSquareNonnegative :
-  ∀ {a0 a1 a2 a3 b0 b1 b2 b3 epsilon left right}
-    (envelope : FourFactorDeepEnvelope
-      a0 a1 a2 a3 b0 b1 b2 b3 epsilon left right) →
-  0ℚ ≤ epsilon * epsilon
-epsilonSquareNonnegative envelope =
-  Strong.multiplyNonnegative
-    _ _ (epsilonNonnegative envelope) (epsilonNonnegative envelope)
+epsilonSquare : ℚ → ℚ
+epsilonSquare epsilon = epsilon * epsilon
 
 epsilonCube : ℚ → ℚ
 epsilonCube epsilon = epsilon * epsilon * epsilon
@@ -191,14 +193,23 @@ epsilonCube epsilon = epsilon * epsilon * epsilon
 epsilonFourth : ℚ → ℚ
 epsilonFourth epsilon = epsilon * epsilon * epsilon * epsilon
 
+epsilonSquareNonnegative :
+  ∀ {a0 a1 a2 a3 b0 b1 b2 b3 epsilon left right}
+    (envelope : FourFactorDeepEnvelope
+      a0 a1 a2 a3 b0 b1 b2 b3 epsilon left right) →
+  0ℚ ≤ epsilonSquare epsilon
+epsilonSquareNonnegative {epsilon = epsilon} envelope =
+  Strong.multiplyNonnegative epsilon epsilon
+    (epsilonNonnegative envelope) (epsilonNonnegative envelope)
+
 epsilonCubeNonnegative :
   ∀ {a0 a1 a2 a3 b0 b1 b2 b3 epsilon left right}
     (envelope : FourFactorDeepEnvelope
       a0 a1 a2 a3 b0 b1 b2 b3 epsilon left right) →
   0ℚ ≤ epsilonCube epsilon
-epsilonCubeNonnegative envelope =
+epsilonCubeNonnegative {epsilon = epsilon} envelope =
   Strong.multiplyNonnegative
-    (_ * _) _
+    (epsilonSquare epsilon) epsilon
     (epsilonSquareNonnegative envelope)
     (epsilonNonnegative envelope)
 
@@ -207,15 +218,86 @@ epsilonFourthNonnegative :
     (envelope : FourFactorDeepEnvelope
       a0 a1 a2 a3 b0 b1 b2 b3 epsilon left right) →
   0ℚ ≤ epsilonFourth epsilon
-epsilonFourthNonnegative envelope =
+epsilonFourthNonnegative {epsilon = epsilon} envelope =
   Strong.multiplyNonnegative
-    (_ * _ * _) _
+    (epsilonCube epsilon) epsilon
     (epsilonCubeNonnegative envelope)
     (epsilonNonnegative envelope)
 
 baseNormBelow : ∀ {value weight} →
   Norm.normSq value ≡ weight → Norm.normSq value ≤ weight
 baseNormBelow refl = ℚP.≤-refl
+
+scaledWeightNonnegative : ∀ scale weight →
+  0ℚ ≤ scale → 0ℚ ≤ weight → 0ℚ ≤ scale * weight
+scaledWeightNonnegative = Strong.multiplyNonnegative
+
+triple012UpperExact : ∀ epsilon w0 w1 w2 w3 left right →
+  w0 * w1 * w2 * w3 ≡ left * right →
+  (epsilonSquare epsilon * w0)
+    * (epsilonSquare epsilon * w1)
+    * (epsilonSquare epsilon * w2) * w3
+  ≡ (epsilonCube epsilon * left) * (epsilonCube epsilon * right)
+triple012UpperExact epsilon w0 w1 w2 w3 left right weights =
+  trans
+    (ℚRing.solve-∀ epsilon w0 w1 w2 w3)
+    (trans
+      (cong ((epsilonCube epsilon * epsilonCube epsilon) *_) weights)
+      (ℚRing.solve-∀ epsilon left right))
+
+triple013UpperExact : ∀ epsilon w0 w1 w2 w3 left right →
+  w0 * w1 * w2 * w3 ≡ left * right →
+  (epsilonSquare epsilon * w0)
+    * (epsilonSquare epsilon * w1)
+    * w2 * (epsilonSquare epsilon * w3)
+  ≡ (epsilonCube epsilon * left) * (epsilonCube epsilon * right)
+triple013UpperExact epsilon w0 w1 w2 w3 left right weights =
+  trans
+    (ℚRing.solve-∀ epsilon w0 w1 w2 w3)
+    (trans
+      (cong ((epsilonCube epsilon * epsilonCube epsilon) *_) weights)
+      (ℚRing.solve-∀ epsilon left right))
+
+triple023UpperExact : ∀ epsilon w0 w1 w2 w3 left right →
+  w0 * w1 * w2 * w3 ≡ left * right →
+  (epsilonSquare epsilon * w0)
+    * w1 * (epsilonSquare epsilon * w2)
+    * (epsilonSquare epsilon * w3)
+  ≡ (epsilonCube epsilon * left) * (epsilonCube epsilon * right)
+triple023UpperExact epsilon w0 w1 w2 w3 left right weights =
+  trans
+    (ℚRing.solve-∀ epsilon w0 w1 w2 w3)
+    (trans
+      (cong ((epsilonCube epsilon * epsilonCube epsilon) *_) weights)
+      (ℚRing.solve-∀ epsilon left right))
+
+triple123UpperExact : ∀ epsilon w0 w1 w2 w3 left right →
+  w0 * w1 * w2 * w3 ≡ left * right →
+  w0 * (epsilonSquare epsilon * w1)
+    * (epsilonSquare epsilon * w2)
+    * (epsilonSquare epsilon * w3)
+  ≡ (epsilonCube epsilon * left) * (epsilonCube epsilon * right)
+triple123UpperExact epsilon w0 w1 w2 w3 left right weights =
+  trans
+    (ℚRing.solve-∀ epsilon w0 w1 w2 w3)
+    (trans
+      (cong ((epsilonCube epsilon * epsilonCube epsilon) *_) weights)
+      (ℚRing.solve-∀ epsilon left right))
+
+quarticUpperExact : ∀ epsilon w0 w1 w2 w3 left right →
+  w0 * w1 * w2 * w3 ≡ left * right →
+  (epsilonSquare epsilon * w0)
+    * (epsilonSquare epsilon * w1)
+    * (epsilonSquare epsilon * w2)
+    * (epsilonSquare epsilon * w3)
+  ≡ (epsilonFourth epsilon * left)
+      * (epsilonFourth epsilon * right)
+quarticUpperExact epsilon w0 w1 w2 w3 left right weights =
+  trans
+    (ℚRing.solve-∀ epsilon w0 w1 w2 w3)
+    (trans
+      (cong ((epsilonFourth epsilon * epsilonFourth epsilon) *_) weights)
+      (ℚRing.solve-∀ epsilon left right))
 
 triple012NormUpper :
   ∀ {a0 a1 a2 a3 b0 b1 b2 b3 epsilon left right}
@@ -227,46 +309,36 @@ triple012NormUpper :
       (Partition.factorDefect a1 b1)
       (Partition.factorDefect a2 b2) b3)
   ≤ (epsilonCube epsilon * left) * (epsilonCube epsilon * right)
-triple012NormUpper {epsilon = epsilon} {left} {right} envelope =
+triple012NormUpper
+    {a0} {a1} {a2} {a3} {b0} {b1} {b2} {b3}
+    {epsilon} {left} {right} envelope =
   let
-    e2 = epsilon * epsilon
-    raw = product4NormUpper
-      (Partition.factorDefect _ _) (Partition.factorDefect _ _)
-      (Partition.factorDefect _ _) _
+    e2 = epsilonSquare epsilon
+    f0 = Partition.factorDefect a0 b0
+    f1 = Partition.factorDefect a1 b1
+    f2 = Partition.factorDefect a2 b2
+
+    raw = product4NormUpper f0 f1 f2 b3
       (e2 * w0 envelope) (e2 * w1 envelope)
       (e2 * w2 envelope) (w3 envelope)
       (defectNorm0 envelope) (defectNorm1 envelope)
       (defectNorm2 envelope) (baseNormBelow (baseNorm3 envelope))
-      (Strong.multiplyNonnegative e2 (w0 envelope)
+      (scaledWeightNonnegative e2 (w0 envelope)
         (epsilonSquareNonnegative envelope) (w0Nonnegative envelope))
-      (Strong.multiplyNonnegative e2 (w1 envelope)
+      (scaledWeightNonnegative e2 (w1 envelope)
         (epsilonSquareNonnegative envelope) (w1Nonnegative envelope))
-      (Strong.multiplyNonnegative e2 (w2 envelope)
+      (scaledWeightNonnegative e2 (w2 envelope)
         (epsilonSquareNonnegative envelope) (w2Nonnegative envelope))
       (w3Nonnegative envelope)
+
+    upperExact = triple012UpperExact epsilon
+      (w0 envelope) (w1 envelope) (w2 envelope) (w3 envelope)
+      left right (weightProductExact envelope)
   in
   subst
-    (λ upper →
-      Norm.normSq
-        (Telescope.orderedProduct4
-          (Partition.factorDefect _ _)
-          (Partition.factorDefect _ _)
-          (Partition.factorDefect _ _) _)
-      ≤ upper)
-    (trans
-      (cong
-        (λ weight →
-          (epsilonCube epsilon * left)
-            * (epsilonCube epsilon * right)
-          ≡ (epsilonCube epsilon * epsilonCube epsilon) * weight)
-        (sym (weightProductExact envelope)))
-      (ℚRing.solve-∀ epsilon (w0 envelope) (w1 envelope)
-        (w2 envelope) (w3 envelope) left right))
-    raw
-
--- The other three cubic placements and the quartic placement differ only in
--- which base factor remains.  Exact rational normalization keeps their common
--- epsilon^3/epsilon^4 charge visible.
+    (λ upper → Norm.normSq
+      (Telescope.orderedProduct4 f0 f1 f2 b3) ≤ upper)
+    upperExact raw
 
 triple013NormUpper :
   ∀ {a0 a1 a2 a3 b0 b1 b2 b3 epsilon left right}
@@ -278,34 +350,36 @@ triple013NormUpper :
       (Partition.factorDefect a1 b1) b2
       (Partition.factorDefect a3 b3))
   ≤ (epsilonCube epsilon * left) * (epsilonCube epsilon * right)
-triple013NormUpper {epsilon = epsilon} {left} {right} envelope =
-  let e2 = epsilon * epsilon
-      raw = product4NormUpper
-        (Partition.factorDefect _ _) (Partition.factorDefect _ _) _
-        (Partition.factorDefect _ _)
-        (e2 * w0 envelope) (e2 * w1 envelope)
-        (w2 envelope) (e2 * w3 envelope)
-        (defectNorm0 envelope) (defectNorm1 envelope)
-        (baseNormBelow (baseNorm2 envelope)) (defectNorm3 envelope)
-        (Strong.multiplyNonnegative e2 (w0 envelope)
-          (epsilonSquareNonnegative envelope) (w0Nonnegative envelope))
-        (Strong.multiplyNonnegative e2 (w1 envelope)
-          (epsilonSquareNonnegative envelope) (w1Nonnegative envelope))
-        (w2Nonnegative envelope)
-        (Strong.multiplyNonnegative e2 (w3 envelope)
-          (epsilonSquareNonnegative envelope) (w3Nonnegative envelope))
+triple013NormUpper
+    {a0} {a1} {a2} {a3} {b0} {b1} {b2} {b3}
+    {epsilon} {left} {right} envelope =
+  let
+    e2 = epsilonSquare epsilon
+    f0 = Partition.factorDefect a0 b0
+    f1 = Partition.factorDefect a1 b1
+    f3 = Partition.factorDefect a3 b3
+
+    raw = product4NormUpper f0 f1 b2 f3
+      (e2 * w0 envelope) (e2 * w1 envelope)
+      (w2 envelope) (e2 * w3 envelope)
+      (defectNorm0 envelope) (defectNorm1 envelope)
+      (baseNormBelow (baseNorm2 envelope)) (defectNorm3 envelope)
+      (scaledWeightNonnegative e2 (w0 envelope)
+        (epsilonSquareNonnegative envelope) (w0Nonnegative envelope))
+      (scaledWeightNonnegative e2 (w1 envelope)
+        (epsilonSquareNonnegative envelope) (w1Nonnegative envelope))
+      (w2Nonnegative envelope)
+      (scaledWeightNonnegative e2 (w3 envelope)
+        (epsilonSquareNonnegative envelope) (w3Nonnegative envelope))
+
+    upperExact = triple013UpperExact epsilon
+      (w0 envelope) (w1 envelope) (w2 envelope) (w3 envelope)
+      left right (weightProductExact envelope)
   in
-  subst (λ upper → _ ≤ upper)
-    (trans
-      (cong
-        (λ weight →
-          (epsilonCube epsilon * left)
-            * (epsilonCube epsilon * right)
-          ≡ (epsilonCube epsilon * epsilonCube epsilon) * weight)
-        (sym (weightProductExact envelope)))
-      (ℚRing.solve-∀ epsilon (w0 envelope) (w1 envelope)
-        (w2 envelope) (w3 envelope) left right))
-    raw
+  subst
+    (λ upper → Norm.normSq
+      (Telescope.orderedProduct4 f0 f1 b2 f3) ≤ upper)
+    upperExact raw
 
 triple023NormUpper :
   ∀ {a0 a1 a2 a3 b0 b1 b2 b3 epsilon left right}
@@ -317,34 +391,36 @@ triple023NormUpper :
       (Partition.factorDefect a2 b2)
       (Partition.factorDefect a3 b3))
   ≤ (epsilonCube epsilon * left) * (epsilonCube epsilon * right)
-triple023NormUpper {epsilon = epsilon} {left} {right} envelope =
-  let e2 = epsilon * epsilon
-      raw = product4NormUpper
-        (Partition.factorDefect _ _) _ (Partition.factorDefect _ _)
-        (Partition.factorDefect _ _)
-        (e2 * w0 envelope) (w1 envelope)
-        (e2 * w2 envelope) (e2 * w3 envelope)
-        (defectNorm0 envelope) (baseNormBelow (baseNorm1 envelope))
-        (defectNorm2 envelope) (defectNorm3 envelope)
-        (Strong.multiplyNonnegative e2 (w0 envelope)
-          (epsilonSquareNonnegative envelope) (w0Nonnegative envelope))
-        (w1Nonnegative envelope)
-        (Strong.multiplyNonnegative e2 (w2 envelope)
-          (epsilonSquareNonnegative envelope) (w2Nonnegative envelope))
-        (Strong.multiplyNonnegative e2 (w3 envelope)
-          (epsilonSquareNonnegative envelope) (w3Nonnegative envelope))
+triple023NormUpper
+    {a0} {a1} {a2} {a3} {b0} {b1} {b2} {b3}
+    {epsilon} {left} {right} envelope =
+  let
+    e2 = epsilonSquare epsilon
+    f0 = Partition.factorDefect a0 b0
+    f2 = Partition.factorDefect a2 b2
+    f3 = Partition.factorDefect a3 b3
+
+    raw = product4NormUpper f0 b1 f2 f3
+      (e2 * w0 envelope) (w1 envelope)
+      (e2 * w2 envelope) (e2 * w3 envelope)
+      (defectNorm0 envelope) (baseNormBelow (baseNorm1 envelope))
+      (defectNorm2 envelope) (defectNorm3 envelope)
+      (scaledWeightNonnegative e2 (w0 envelope)
+        (epsilonSquareNonnegative envelope) (w0Nonnegative envelope))
+      (w1Nonnegative envelope)
+      (scaledWeightNonnegative e2 (w2 envelope)
+        (epsilonSquareNonnegative envelope) (w2Nonnegative envelope))
+      (scaledWeightNonnegative e2 (w3 envelope)
+        (epsilonSquareNonnegative envelope) (w3Nonnegative envelope))
+
+    upperExact = triple023UpperExact epsilon
+      (w0 envelope) (w1 envelope) (w2 envelope) (w3 envelope)
+      left right (weightProductExact envelope)
   in
-  subst (λ upper → _ ≤ upper)
-    (trans
-      (cong
-        (λ weight →
-          (epsilonCube epsilon * left)
-            * (epsilonCube epsilon * right)
-          ≡ (epsilonCube epsilon * epsilonCube epsilon) * weight)
-        (sym (weightProductExact envelope)))
-      (ℚRing.solve-∀ epsilon (w0 envelope) (w1 envelope)
-        (w2 envelope) (w3 envelope) left right))
-    raw
+  subst
+    (λ upper → Norm.normSq
+      (Telescope.orderedProduct4 f0 b1 f2 f3) ≤ upper)
+    upperExact raw
 
 triple123NormUpper :
   ∀ {a0 a1 a2 a3 b0 b1 b2 b3 epsilon left right}
@@ -356,34 +432,36 @@ triple123NormUpper :
       (Partition.factorDefect a2 b2)
       (Partition.factorDefect a3 b3))
   ≤ (epsilonCube epsilon * left) * (epsilonCube epsilon * right)
-triple123NormUpper {epsilon = epsilon} {left} {right} envelope =
-  let e2 = epsilon * epsilon
-      raw = product4NormUpper
-        _ (Partition.factorDefect _ _) (Partition.factorDefect _ _)
-        (Partition.factorDefect _ _)
-        (w0 envelope) (e2 * w1 envelope)
-        (e2 * w2 envelope) (e2 * w3 envelope)
-        (baseNormBelow (baseNorm0 envelope)) (defectNorm1 envelope)
-        (defectNorm2 envelope) (defectNorm3 envelope)
-        (w0Nonnegative envelope)
-        (Strong.multiplyNonnegative e2 (w1 envelope)
-          (epsilonSquareNonnegative envelope) (w1Nonnegative envelope))
-        (Strong.multiplyNonnegative e2 (w2 envelope)
-          (epsilonSquareNonnegative envelope) (w2Nonnegative envelope))
-        (Strong.multiplyNonnegative e2 (w3 envelope)
-          (epsilonSquareNonnegative envelope) (w3Nonnegative envelope))
+triple123NormUpper
+    {a0} {a1} {a2} {a3} {b0} {b1} {b2} {b3}
+    {epsilon} {left} {right} envelope =
+  let
+    e2 = epsilonSquare epsilon
+    f1 = Partition.factorDefect a1 b1
+    f2 = Partition.factorDefect a2 b2
+    f3 = Partition.factorDefect a3 b3
+
+    raw = product4NormUpper b0 f1 f2 f3
+      (w0 envelope) (e2 * w1 envelope)
+      (e2 * w2 envelope) (e2 * w3 envelope)
+      (baseNormBelow (baseNorm0 envelope)) (defectNorm1 envelope)
+      (defectNorm2 envelope) (defectNorm3 envelope)
+      (w0Nonnegative envelope)
+      (scaledWeightNonnegative e2 (w1 envelope)
+        (epsilonSquareNonnegative envelope) (w1Nonnegative envelope))
+      (scaledWeightNonnegative e2 (w2 envelope)
+        (epsilonSquareNonnegative envelope) (w2Nonnegative envelope))
+      (scaledWeightNonnegative e2 (w3 envelope)
+        (epsilonSquareNonnegative envelope) (w3Nonnegative envelope))
+
+    upperExact = triple123UpperExact epsilon
+      (w0 envelope) (w1 envelope) (w2 envelope) (w3 envelope)
+      left right (weightProductExact envelope)
   in
-  subst (λ upper → _ ≤ upper)
-    (trans
-      (cong
-        (λ weight →
-          (epsilonCube epsilon * left)
-            * (epsilonCube epsilon * right)
-          ≡ (epsilonCube epsilon * epsilonCube epsilon) * weight)
-        (sym (weightProductExact envelope)))
-      (ℚRing.solve-∀ epsilon (w0 envelope) (w1 envelope)
-        (w2 envelope) (w3 envelope) left right))
-    raw
+  subst
+    (λ upper → Norm.normSq
+      (Telescope.orderedProduct4 b0 f1 f2 f3) ≤ upper)
+    upperExact raw
 
 quarticNormUpper :
   ∀ {a0 a1 a2 a3 b0 b1 b2 b3 epsilon left right}
@@ -395,36 +473,40 @@ quarticNormUpper :
       (Partition.factorDefect a1 b1)
       (Partition.factorDefect a2 b2)
       (Partition.factorDefect a3 b3))
-  ≤ (epsilonFourth epsilon * left) * (epsilonFourth epsilon * right)
-quarticNormUpper {epsilon = epsilon} {left} {right} envelope =
-  let e2 = epsilon * epsilon
-      raw = product4NormUpper
-        (Partition.factorDefect _ _) (Partition.factorDefect _ _)
-        (Partition.factorDefect _ _) (Partition.factorDefect _ _)
-        (e2 * w0 envelope) (e2 * w1 envelope)
-        (e2 * w2 envelope) (e2 * w3 envelope)
-        (defectNorm0 envelope) (defectNorm1 envelope)
-        (defectNorm2 envelope) (defectNorm3 envelope)
-        (Strong.multiplyNonnegative e2 (w0 envelope)
-          (epsilonSquareNonnegative envelope) (w0Nonnegative envelope))
-        (Strong.multiplyNonnegative e2 (w1 envelope)
-          (epsilonSquareNonnegative envelope) (w1Nonnegative envelope))
-        (Strong.multiplyNonnegative e2 (w2 envelope)
-          (epsilonSquareNonnegative envelope) (w2Nonnegative envelope))
-        (Strong.multiplyNonnegative e2 (w3 envelope)
-          (epsilonSquareNonnegative envelope) (w3Nonnegative envelope))
+  ≤ (epsilonFourth epsilon * left)
+      * (epsilonFourth epsilon * right)
+quarticNormUpper
+    {a0} {a1} {a2} {a3} {b0} {b1} {b2} {b3}
+    {epsilon} {left} {right} envelope =
+  let
+    e2 = epsilonSquare epsilon
+    f0 = Partition.factorDefect a0 b0
+    f1 = Partition.factorDefect a1 b1
+    f2 = Partition.factorDefect a2 b2
+    f3 = Partition.factorDefect a3 b3
+
+    raw = product4NormUpper f0 f1 f2 f3
+      (e2 * w0 envelope) (e2 * w1 envelope)
+      (e2 * w2 envelope) (e2 * w3 envelope)
+      (defectNorm0 envelope) (defectNorm1 envelope)
+      (defectNorm2 envelope) (defectNorm3 envelope)
+      (scaledWeightNonnegative e2 (w0 envelope)
+        (epsilonSquareNonnegative envelope) (w0Nonnegative envelope))
+      (scaledWeightNonnegative e2 (w1 envelope)
+        (epsilonSquareNonnegative envelope) (w1Nonnegative envelope))
+      (scaledWeightNonnegative e2 (w2 envelope)
+        (epsilonSquareNonnegative envelope) (w2Nonnegative envelope))
+      (scaledWeightNonnegative e2 (w3 envelope)
+        (epsilonSquareNonnegative envelope) (w3Nonnegative envelope))
+
+    upperExact = quarticUpperExact epsilon
+      (w0 envelope) (w1 envelope) (w2 envelope) (w3 envelope)
+      left right (weightProductExact envelope)
   in
-  subst (λ upper → _ ≤ upper)
-    (trans
-      (cong
-        (λ weight →
-          (epsilonFourth epsilon * left)
-            * (epsilonFourth epsilon * right)
-          ≡ (epsilonFourth epsilon * epsilonFourth epsilon) * weight)
-        (sym (weightProductExact envelope)))
-      (ℚRing.solve-∀ epsilon (w0 envelope) (w1 envelope)
-        (w2 envelope) (w3 envelope) left right))
-    raw
+  subst
+    (λ upper → Norm.normSq
+      (Telescope.orderedProduct4 f0 f1 f2 f3) ≤ upper)
+    upperExact raw
 
 deepWilsonScalarSumExact :
   ∀ t0 t1 t2 t3 t4 →
@@ -450,17 +532,19 @@ deepRemainderLower :
   ≤ Telescope.wilsonScalar
       (Deep.fourFactorDeepRemainder
         a0 a1 a2 a3 b0 b1 b2 b3)
-deepRemainderLower {epsilon = epsilon} {left} {right} envelope =
+deepRemainderLower
+    {a0} {a1} {a2} {a3} {b0} {b1} {b2} {b3}
+    {epsilon} {left} {right} envelope =
   let
-    d0 = Partition.factorDefect _ _
-    d1 = Partition.factorDefect _ _
-    d2 = Partition.factorDefect _ _
-    d3 = Partition.factorDefect _ _
+    d0 = Partition.factorDefect a0 b0
+    d1 = Partition.factorDefect a1 b1
+    d2 = Partition.factorDefect a2 b2
+    d3 = Partition.factorDefect a3 b3
 
-    t012 = Telescope.orderedProduct4 d0 d1 d2 _
-    t013 = Telescope.orderedProduct4 d0 d1 _ d3
-    t023 = Telescope.orderedProduct4 d0 _ d2 d3
-    t123 = Telescope.orderedProduct4 _ d1 d2 d3
+    t012 = Telescope.orderedProduct4 d0 d1 d2 b3
+    t013 = Telescope.orderedProduct4 d0 d1 b2 d3
+    t023 = Telescope.orderedProduct4 d0 b1 d2 d3
+    t123 = Telescope.orderedProduct4 b0 d1 d2 d3
     t0123 = Telescope.orderedProduct4 d0 d1 d2 d3
 
     cubeLower0 = Scaled.scaledYoungLowerFromNorm
@@ -493,23 +577,43 @@ deepRemainderLower {epsilon = epsilon} {left} {right} envelope =
       (ℚP.+-mono-≤ cubeLower1
         (ℚP.+-mono-≤ cubeLower2
           (ℚP.+-mono-≤ cubeLower3 fourthLower)))
+
+    rawLower =
+      - Scaled.scaledYoungBudget (epsilonCube epsilon) left right
+      + (- Scaled.scaledYoungBudget (epsilonCube epsilon) left right
+      + (- Scaled.scaledYoungBudget (epsilonCube epsilon) left right
+      + (- Scaled.scaledYoungBudget (epsilonCube epsilon) left right
+      + - Scaled.scaledYoungBudget (epsilonFourth epsilon) left right)))
+
+    targetLower =
+      - ((+ 4 / 1) * epsilonCube epsilon + epsilonFourth epsilon)
+        * ((+ 1 / 2) * (left + right))
+
+    rawLowerExact : rawLower ≡ targetLower
+    rawLowerExact = ℚRing.solve-∀ epsilon left right
+
+    upperExact :
+      Telescope.wilsonScalar
+        (Deep.fourFactorDeepRemainder
+          a0 a1 a2 a3 b0 b1 b2 b3)
+      ≡ Telescope.wilsonScalar t012
+        + (Telescope.wilsonScalar t013
+        + (Telescope.wilsonScalar t023
+        + (Telescope.wilsonScalar t123
+        + Telescope.wilsonScalar t0123)))
+    upperExact = deepWilsonScalarSumExact t012 t013 t023 t123 t0123
   in
   subst
-    (λ lower →
-      lower
-      ≤ Telescope.wilsonScalar
-          (Deep.fourFactorDeepRemainder
-            _ _ _ _ _ _ _ _))
-    (ℚRing.solve-∀ epsilon left right)
+    (λ upper → targetLower ≤ upper)
+    (sym upperExact)
     (subst
-      (λ upper →
-        - Scaled.scaledYoungBudget (epsilonCube epsilon) left right
-        + (- Scaled.scaledYoungBudget (epsilonCube epsilon) left right
-        + (- Scaled.scaledYoungBudget (epsilonCube epsilon) left right
-        + (- Scaled.scaledYoungBudget (epsilonCube epsilon) left right
-        + - Scaled.scaledYoungBudget (epsilonFourth epsilon) left right)))
-        ≤ upper)
-      (sym (deepWilsonScalarSumExact t012 t013 t023 t123 t0123))
+      (λ lower → lower
+        ≤ Telescope.wilsonScalar t012
+          + (Telescope.wilsonScalar t013
+          + (Telescope.wilsonScalar t023
+          + (Telescope.wilsonScalar t123
+          + Telescope.wilsonScalar t0123))))
+      rawLowerExact
       summed)
 
 wilsonDeepRemainderEnvelopeLevel : ProofLevel
