@@ -11,6 +11,7 @@ import DASHI.Moonshine.MoonshineOrbifoldMasslessStateRemovalExact as Orbifold
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (_∷_; [])
+open import Agda.Builtin.Nat using (Nat; _*_)
 
 extraspecialDegreeBudgetCloses :
   Signature.extraspecialCharacterDegreeSquareSum
@@ -34,8 +35,8 @@ noncentralNinetyCopyTraceVanishes =
   Signature.ninetyHeisenbergNoncentralValue
 
 stoneVonNeumannMultiplicityIsUnique :
-  (multiplicity : Agda.Builtin.Nat.Nat) →
-  729 Agda.Builtin.Nat.* multiplicity ≡ 65610 →
+  (multiplicity : Nat) →
+  729 * multiplicity ≡ 65610 →
   multiplicity ≡ 90
 stoneVonNeumannMultiplicityIsUnique = StoneCount.multiplicityForcedToNinety
 
