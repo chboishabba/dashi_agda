@@ -83,6 +83,20 @@ The involution
 
 preserves resonance and the cutoff cube. Every triad in the output fibre over `k` receives a concrete representative in the output fibre over `-k`. Simultaneous conjugation preserves every Plücker coordinate and squared interaction-plane area.
 
+### M8b — Finite rational local-Lipschitz majorant — checked exact in Round 28
+
+On a pointwise radius-`R` ball, with pointwise state difference at most `delta`, Round 28 proves:
+
+```text
+linear atom c*x:
+  |c*x-c*y| <= |c| delta,
+
+bilinear atom c*x*z:
+  |c*x*z-c*y*w| <= |c| (R+R) delta.
+```
+
+The estimate is summed over every finite coordinate atom. Thus every literal rational Galerkin coordinate has an explicit finite local-Lipschitz majorant. The continuum-real finite coordinate norm and Picard–Lindelöf instance remain open.
+
 ### L3 — Literal finite Galerkin flow — materially narrowed; analytic instance open
 
 Already checked:
@@ -91,6 +105,7 @@ Already checked:
 - exact Leray coefficient and physical/Fourier coefficient equality;
 - linear/bilinear coordinate syntax of degree at most two;
 - finite difference factorisation `xy-uv=(x-u)y+u(y-v)`;
+- finite rational coordinate local-Lipschitz majorants from M8b;
 - reality reconstruction and conjugate transversality;
 - physical three-leg triad energy cancellation;
 - M2 fixed-point/equivariance criterion;
@@ -104,7 +119,7 @@ instantiate concrete commuting selectors;
 prove each nonlinear triad atom conjugates correctly;
 fold the atom law over opposite output fibres;
 prove the full vector field maps the finite carrier to itself;
-prove a finite normed local-Lipschitz bound;
+connect the rational coordinate majorant to the continuum-real finite norm;
 instantiate Picard–Lindelöf;
 derive the time-dependent physical energy identity;
 prove global finite-dimensional existence.
@@ -211,7 +226,7 @@ Xout + (1-sum eta_i)D
   <= Xin + sum A_i + (sum B_i) integral X.
 ```
 
-No physical estimate or strict margin is manufactured by this theorem.
+The strict budget also exposes `0 < 1-sum eta_i`. No physical estimate or strict physical margin is manufactured by this theorem.
 
 ## E. Load-bearing physical estimates
 
@@ -343,13 +358,14 @@ Once the physical inputs above are inhabited, the existing composition construct
 ```text
 1. instantiate concrete Leray/reality/centering selectors;
 2. prove literal nonlinear triad-atom conjugation and fold it over M8 fibres;
-3. close finite local Lipschitz, Picard–Lindelöf, energy and global flow;
-4. derive the physical time-dependent M11 signed constituent tree;
-5. prove the first cutoff-uniform M9 signed operator estimate;
-6. close periodic strain/CZ and M10 high–high depletion;
-7. prove bad-excursion, lower-interaction and residual taxes;
-8. inhabit all nine M13 owner estimates and prove L15 eta_total<1;
-9. pass limits, Serrin continuation, smooth pressure and Galilean restoration.
+3. connect M8b to the continuum-real finite norm and instantiate Picard–Lindelöf;
+4. derive the physical energy identity and global finite flow;
+5. derive the physical time-dependent M11 signed constituent tree;
+6. prove the first cutoff-uniform M9 signed operator estimate;
+7. close periodic strain/CZ and M10 high–high depletion;
+8. prove bad-excursion, lower-interaction and residual taxes;
+9. inhabit all nine M13 owner estimates and prove L15 eta_total<1;
+10. pass limits, Serrin continuation, smooth pressure and Galilean restoration.
 ```
 
 The single highest-value theorem remains `UniformCriticalNonlinearityAbsorption` with a cutoff-independent coefficient strictly below one. A result counts as progress only when it completes a physical producer, produces a uniform coefficient, or supplies a quantified counterexample eliminating a route.
