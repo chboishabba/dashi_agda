@@ -5,8 +5,11 @@ import DASHI.Moonshine.Monster3BCentralCharacterInertiaExact as Inertia
 import DASHI.Moonshine.MonsterOggNonaryProbeAuthorityExact as Probe
 import DASHI.Moonshine.Monster3BActualZetaPromotionPipelineExact as Pipeline
 import DASHI.Moonshine.Monster3BMultiplicityTwelveSeventyEightRecognitionExact as Split
+import DASHI.Moonshine.Monster3BMultiplicityEvaluationExact as Multiplicity
+import DASHI.Physics.Closure.MoonshinePrimeLaneReceiptSurface as Lane
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (_+_; _*_)
 open import Data.Empty using (⊥)
 
 centralPhaseInversionIsInvolutive :
@@ -35,8 +38,8 @@ inverterSwapsChosenPhase :
 inverterSwapsChosenPhase = Inertia.inverterSendsZetaToZetaSquared
 
 allOggAddressesReconstruct :
-  (prime : DASHI.Physics.Closure.MoonshinePrimeLaneReceiptSurface.MonsterPrimeLane) →
-  DASHI.Physics.Closure.MoonshinePrimeLaneReceiptSurface.monsterPrimeLaneToNat prime
+  (prime : Lane.MonsterPrimeLane) →
+  Lane.monsterPrimeLaneToNat prime
   ≡ Probe.coarseSheets (Probe.nonaryProbe prime) * 9
     + Probe.fineResidue (Probe.nonaryProbe prime)
 allOggAddressesReconstruct prime = Probe.addressExact (Probe.nonaryProbe prime)
@@ -55,7 +58,7 @@ fortyOneReflectionPairIsExact =
 pipelineTransportsOwnWeightProjector :
   (pipeline : Pipeline.ActualZetaPromotionPipeline) →
   (state : Pipeline.chosenZetaSector pipeline) →
-  DASHI.Moonshine.Monster3BMultiplicityEvaluationExact.actualWeightProjectorCoefficient
+  Multiplicity.actualWeightProjectorCoefficient
     (Pipeline.modelRecognition pipeline)
     (Pipeline.chosenWeightPosition pipeline state)
     state
