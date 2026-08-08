@@ -34,7 +34,8 @@ open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; _+_; _*_; -_; _≤_; _/_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using
+  (cong; subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionWilsonSecondVariationExact as Q
@@ -138,7 +139,7 @@ scaledYoungLowerFromNorm
     negNormUpper =
       subst
         (λ lower → lower ≤ (scale * left) * (scale * right))
-        (Atom.normSqNegExact value)
+        (sym (Atom.normSqNegExact value))
         normUpper
 
     negUpper :
