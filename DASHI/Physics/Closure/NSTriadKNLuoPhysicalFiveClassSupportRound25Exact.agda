@@ -45,6 +45,7 @@ open import Agda.Builtin.Sigma using (Σ; _,_)
 open import Data.Empty using (⊥)
 open import Data.Nat.Base using (_≤_; z≤n; s≤s; ∣_-_∣)
 import Data.Nat.Properties as Nat
+open import Data.Product.Base using (_×_; _,_; proj₁; proj₂)
 open import Data.Sum.Base using (inj₁; inj₂)
 open import Relation.Binary.PropositionalEquality using (sym; trans)
 
@@ -215,8 +216,6 @@ highHighWeakGaps :
 highHighWeakGaps
   (Scale.highHighCondition notLowHigh notHighLow outputBelowP outputBelowQ) =
   natLessTrueToLe outputBelowP , natLessTrueToLe outputBelowQ
-  where
-  open import Data.Product.Base using (_×_; _,_)
 
 lowHighOutputTracksHighOne :
   ∀ {τ} →
@@ -242,12 +241,11 @@ highHighInputsComparableOne :
   ∣ Shell.shellIndex (Physical.p τ)
     - Shell.shellIndex (Physical.q τ) ∣ ≤ 1
 highHighInputsComparableOne certificate =
-  Dyadic.highHighToLowInputsComparableOne _ firstGap secondGap
+  Dyadic.highHighToLowInputsComparableOne _
+    (proj₁ gaps)
+    (proj₂ gaps)
   where
   gaps = highHighWeakGaps (classMeaning certificate)
-  firstGap = Data.Product.Base.proj₁ gaps
-  secondGap = Data.Product.Base.proj₂ gaps
-  import Data.Product.Base
 
 ------------------------------------------------------------------------
 -- Enumeration-wide classification and exact erasure.
