@@ -18,10 +18,9 @@ module DASHI.Physics.YangMills.BalabanSelectedBackgroundVariationalChartBridgeEx
 --
 -- Compose the repository's source-faithful Bałaban variational theorem with
 -- its SU(2) principal-log chart.  Once the physical bond deviation is
--- identified with the chart defect and the published source upper bound lies
--- below the selected chart radius, every selected background bond is admitted
--- to the principal branch.  Existence, regular-gauge membership, minimization,
--- uniqueness and inverse-orientation logarithms then share one background.
+-- identified with the chart defect, the two order conventions are identified,
+-- and the published source upper bound lies below the selected chart radius,
+-- every selected background bond is admitted to the principal branch.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -71,6 +70,10 @@ record SelectedBackgroundVariationalChartBridge
           (Variational.bondValue variational
             (Variational.background variational coarse small) bond)
           (Variational.identityBondValue variational)
+
+    variationalOrderIsChartOrder :
+      Variational.LessEqual variational
+      ≡ Scale.LessEqual (Path.scale defectAlgebra)
 
     sameDefectAlgebra :
       Path.defectAlgebra cutData ≡ defectAlgebra
@@ -140,9 +143,26 @@ selectedBackgroundBondDefectBelowChart :
     (Path.chartRadius (cutData bridge))
 selectedBackgroundBondDefectBelowChart bridge coarse small bond =
   let
+    deviation =
+      Variational.bondDeviation (variational bridge)
+        (Variational.bondValue (variational bridge)
+          (Variational.background (variational bridge) coarse small) bond)
+        (Variational.identityBondValue (variational bridge))
+
     sourceBound =
       Variational.fineBondSmallness
         (variational bridge) coarse small bond
+
+    sourceBoundInChartOrder :
+      Scale.LessEqual (Path.scale (defectAlgebra bridge))
+        deviation
+        (sourceFineBondUpper (variational bridge))
+    sourceBoundInChartOrder =
+      subst
+        (λ relation →
+          relation deviation (sourceFineBondUpper (variational bridge)))
+        (variationalOrderIsChartOrder bridge)
+        sourceBound
 
     defectBound :
       Scale.LessEqual (Path.scale (defectAlgebra bridge))
@@ -156,7 +176,7 @@ selectedBackgroundBondDefectBelowChart bridge coarse small bond =
             (sourceFineBondUpper (variational bridge)))
         (sym (defectMatchesPublishedBondDeviation
           bridge coarse small bond))
-        sourceBound
+        sourceBoundInChartOrder
   in
   Scale.transitive (Path.scale (defectAlgebra bridge))
     defectBound
