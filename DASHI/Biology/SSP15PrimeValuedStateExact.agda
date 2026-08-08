@@ -19,11 +19,10 @@ module DASHI.Biology.SSP15PrimeValuedStateExact where
 -- symmetry-phase state.  A prime does not equal an internal lane: each prime
 -- indexes a fibre containing every internal mode/phase choice together with
 -- explicit residual geometry.  This makes examples such as (71,A1,0) and
--- (71,A2,-1) real typed values without manufacturing a canonical bijection
--- between the fifteen Ogg primes and the fifteen internal lanes.
+-- (71,A2,-1) real typed values without manufacturing a canonical bijection.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
@@ -55,8 +54,7 @@ record PrimeValuedSSP15State
 
 open PrimeValuedSSP15State public
 
-primeValue :
-  ∀ {prime} → PrimeValuedSSP15State prime → Nat
+primeValue : ∀ {prime} → PrimeValuedSSP15State prime → Nat
 primeValue {prime} state = Lane.monsterPrimeLaneToNat prime
 
 internalMode :
@@ -142,19 +140,33 @@ reversePhasePreservesPrimeValue :
   primeValue (reversePrimeValuedPhase state) ≡ primeValue state
 reversePhasePreservesPrimeValue state = refl
 
-record SSP15PrimeValuedStateBoundary : Set where
+record SSP15PrimeValuedStateBoundary : Set₁ where
   constructor ssp15-prime-valued-state-boundary
   field
-    primeFibresOverInternalCarrierConstructed : Bool
-    primeFibresOverInternalCarrierConstructedIsTrue :
-      primeFibresOverInternalCarrierConstructed ≡ true
-    p71SupportsMultipleInternalStates : Bool
-    p71SupportsMultipleInternalStatesIsTrue :
-      p71SupportsMultipleInternalStates ≡ true
+    everyPrimeAcceptsEveryInternalLane :
+      (prime : Lane.MonsterPrimeLane) →
+      (lane : Internal.SSP15InternalLane) →
+      (residual : ResidualGeometryKind) →
+      internalLane (attachInternalLane prime lane residual) ≡ lane
+    p71InternalModesAreDistinct :
+      internalMode p71A1Neutral ≡ internalMode p71A2Counterposed → ⊥
+    phaseReversalIsInvolutive :
+      ∀ {prime} →
+      (state : PrimeValuedSSP15State prime) →
+      reversePrimeValuedPhase (reversePrimeValuedPhase state) ≡ state
+    phaseReversalPreservesPrime :
+      ∀ {prime} →
+      (state : PrimeValuedSSP15State prime) →
+      primeValue (reversePrimeValuedPhase state) ≡ primeValue state
     equalPrimeAndInternalCardinalitySuppliesCanonicalBijection : Bool
     equalPrimeAndInternalCardinalitySuppliesCanonicalBijectionIsFalse :
       equalPrimeAndInternalCardinalitySuppliesCanonicalBijection ≡ false
 
 canonicalSSP15PrimeValuedStateBoundary : SSP15PrimeValuedStateBoundary
 canonicalSSP15PrimeValuedStateBoundary =
-  ssp15-prime-valued-state-boundary true refl true refl false refl
+  ssp15-prime-valued-state-boundary
+    primeValuationDoesNotRestrictInternalLane
+    p71ExamplesHaveSamePrimeDifferentInternalMode
+    reversePrimeValuedPhaseInvolutive
+    reversePhasePreservesPrimeValue
+    false refl
