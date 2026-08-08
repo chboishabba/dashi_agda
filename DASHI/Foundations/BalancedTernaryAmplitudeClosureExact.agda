@@ -1,6 +1,7 @@
 module DASHI.Foundations.BalancedTernaryAmplitudeClosureExact where
 
 open import DASHI.Core.Prelude
+open import DASHI.Core.Optional public
 
 import DASHI.Foundations.BalancedTernaryStageSymmetryExact as BT
 
@@ -182,10 +183,6 @@ data StageFiveBranchKind : Set where
   positiveCompletion negativeResolution withholdIncomplete :
     StageFiveBranchKind
 
-data Optional (A : Set) : Set where
-  none : Optional A
-  some : A → Optional A
-
 record StageFiveBranch : Set where
   constructor stageFiveBranch
   field
@@ -214,7 +211,7 @@ negativeStageFiveResolution =
   stageFiveBranch
     negativeResolution
     BT.allPositive BT.twoPositiveOneOpen BT.thirdCoordinateCounterposition
-    4 none ampPos1 refl BT.trivialStabiliser refl
+    4 none ampPos1 refl BT.pairStabiliserS2 refl
 
 stageFiveFallbackWithResidual : StageFiveBranch
 stageFiveFallbackWithResidual =
@@ -226,6 +223,10 @@ stageFiveFallbackWithResidual =
 positiveBranchRestoresS3 :
   upperStabiliserAfter positiveStageFiveCompletion ≡ BT.fullStabiliserS3
 positiveBranchRestoresS3 = refl
+
+negativeBranchRetainsS2 :
+  upperStabiliserAfter negativeStageFiveResolution ≡ BT.pairStabiliserS2
+negativeBranchRetainsS2 = refl
 
 negativeBranchTargetsFour :
   visibleTarget negativeStageFiveResolution ≡ 4
