@@ -21,16 +21,21 @@ FILES=(
   DASHI/Biology/JMDSporadicTarotV2Regression.agda
   DASHI/Biology/JMDSporadicTarotOrdinalTotalisationExact.agda
   DASHI/Biology/StageSymmetrySSP15BridgeExact.agda
+  DASHI/Biology/StageSymmetrySSP15SpectrumExact.agda
+  DASHI/Biology/ImageHexagramSSP15MDLExact.agda
   DASHI/Biology/SporadicStageSymmetryTarotRegression.agda
   DASHI/Biology/PointedBulkReducedMoonshineBoundary.agda
   DASHI/Biology/PointedBulkSporadicTarotSourceAtlas.agda
   DASHI/Biology/PointedBulkSporadicTarotEverything.agda
   DASHI/Foundations/BalancedTernaryStageSymmetryExact.agda
+  DASHI/Foundations/BalancedTernaryAmplitudeClosureExact.agda
   DASHI/Foundations/BalancedTernaryUltrametricExact.agda
   DASHI/Foundations/StageSymmetryCarrierTowerExact.agda
   DASHI/Foundations/DialecticSheetFrameSelectorExact.agda
+  DASHI/Foundations/FrameWitnessFibreMDLExact.agda
   DASHI/Foundations/DialecticCubieTetralemmaExact.agda
   DASHI/Foundations/SecondRevolutionJankoTarotExact.agda
+  DASHI/Moonshine/DepthTwoNonaryResidueFibreExact.agda
   DASHI/Moonshine/EulerMonsterMeaningSeparationExact.agda
   DASHI/Governance/CabarlahTraumaProjectionBridgeExact.agda
   DASHI/Governance/Everything.agda
@@ -60,30 +65,56 @@ grep -q 'jmdV2Assignment Sporadic.Fi22' DASHI/Biology/JMDSporadicTarotV2Correspo
 grep -q 'co4StrengthAssignment' DASHI/Biology/JMDSporadicTarotV2CorrespondenceExact.agda
 grep -q 'posterSuppliesTotalS26ToA22MapIsFalse' DASHI/Biology/JMDSporadicTarotV2CorrespondenceExact.agda
 
-# Balanced ternary, retained fallback, ultrametric prefix, and symmetry.
+# Balanced ternary, signed amplitude, full Stage-5 branching, and ultrametric.
 grep -q 'stage5To3RetainsTwo' DASHI/Foundations/BalancedTernaryStageSymmetryExact.agda
 grep -q 'residualErasedIsFalse' DASHI/Foundations/BalancedTernaryStageSymmetryExact.agda
 grep -q 'counterpositionNeedNotBeInverse' DASHI/Foundations/BalancedTernaryStageSymmetryExact.agda
 grep -q 'independentEvidenceForTenTimesThreePowerNineIsFalse' DASHI/Foundations/BalancedTernaryStageSymmetryExact.agda
+grep -q 'triadAmplitude' DASHI/Foundations/BalancedTernaryAmplitudeClosureExact.agda
+grep -q 'joinedAmplitudeRangeConstructedIsTrue' DASHI/Foundations/BalancedTernaryAmplitudeClosureExact.agda
+grep -q 'fiveResidueDeficitProfile' DASHI/Foundations/BalancedTernaryAmplitudeClosureExact.agda
+grep -q 'positiveStageFiveCompletion' DASHI/Foundations/BalancedTernaryAmplitudeClosureExact.agda
+grep -q 'negativeStageFiveResolution' DASHI/Foundations/BalancedTernaryAmplitudeClosureExact.agda
+grep -q 'stageFiveFallbackWithResidual' DASHI/Foundations/BalancedTernaryAmplitudeClosureExact.agda
+grep -q 'irrepDecompositionGeneratesPrimaryFiveToThreeArithmeticIsFalse' DASHI/Foundations/BalancedTernaryAmplitudeClosureExact.agda
 grep -q 'prefixAgreementTransitive' DASHI/Foundations/BalancedTernaryUltrametricExact.agda
 grep -q 'fiveSixAgreeThroughDepthTwo' DASHI/Foundations/BalancedTernaryUltrametricExact.agda
 grep -q 'constituentSuffixesErasedIsFalse' DASHI/Foundations/BalancedTernaryUltrametricExact.agda
 grep -q 'hexadicCardinalityIsSix' DASHI/Foundations/StageSymmetryCarrierTowerExact.agda
 grep -q 'nonaryCardinalityIsNine' DASHI/Foundations/StageSymmetryCarrierTowerExact.agda
 
-# Image/hexagram/frame-selector and cubie/tetralemma layers.
+# Image/hexagram/frame selector, witness fibre, finite MDL, and cubie layers.
 grep -q 'selectInhabitableFrame' DASHI/Foundations/DialecticSheetFrameSelectorExact.agda
 grep -q 'localWitnessImpliesUniversalTruthIsFalse' DASHI/Foundations/DialecticSheetFrameSelectorExact.agda
+grep -q 'allAdmissibleWitnesses' DASHI/Foundations/FrameWitnessFibreMDLExact.agda
+grep -q 'canonicalFrameMDLSelection' DASHI/Foundations/FrameWitnessFibreMDLExact.agda
+grep -q 'finiteMDLMinimiserConstructedIsTrue' DASHI/Foundations/FrameWitnessFibreMDLExact.agda
+grep -q 'lowestCostFrameIsUniversallyTrueIsFalse' DASHI/Foundations/FrameWitnessFibreMDLExact.agda
 grep -q 'stageThreeCarrierRetained' DASHI/Foundations/DialecticCubieTetralemmaExact.agda
 grep -q 'cubiePositionCardinalityIsTwentySeven' DASHI/Foundations/DialecticCubieTetralemmaExact.agda
 grep -q 'decisionPoliciesDifferOnNegative' DASHI/Foundations/DialecticCubieTetralemmaExact.agda
 grep -q 'cubieListAloneProvesManifoldIsFalse' DASHI/Foundations/DialecticCubieTetralemmaExact.agda
+grep -q 'pipelineHasSevenTypedStages' DASHI/Biology/ImageHexagramSSP15MDLExact.agda
+grep -q 'resolutionPredictedIsFalse' DASHI/Biology/ImageHexagramSSP15MDLExact.agda
+grep -q 'scalarTraceReconstructsHeisenbergGeometryIsFalse' DASHI/Biology/ImageHexagramSSP15MDLExact.agda
 
-# Reused SSP15/Ogg lane infrastructure.
+# Reused and enriched SSP15/Ogg lane infrastructure.
 grep -q 'allOggPrimeLanes = Lane.canonicalMonsterPrimeLane' DASHI/Biology/StageSymmetrySSP15BridgeExact.agda
 grep -q 'oggPrimeLaneCountIsFifteen' DASHI/Biology/StageSymmetrySSP15BridgeExact.agda
 grep -q 'existingPrimeInfrastructureReusedIsTrue' DASHI/Biology/StageSymmetrySSP15BridgeExact.agda
 grep -q 'arithmetic71ConstructsInvariantComplementIsFalse' DASHI/Biology/StageSymmetrySSP15BridgeExact.agda
+grep -q 'RichSSP15Signature' DASHI/Biology/StageSymmetrySSP15SpectrumExact.agda
+grep -q 'signaturesDifferAtP71' DASHI/Biology/StageSymmetrySSP15SpectrumExact.agda
+grep -q 'everyOrderPMonsterClassHasSameGamma0PlusHauptmodulIsFalse' DASHI/Biology/StageSymmetrySSP15SpectrumExact.agda
+grep -q 'divinationSemanticsEstablishedByMoonshineSourcesIsFalse' DASHI/Biology/StageSymmetrySSP15SpectrumExact.agda
+
+# Exact depth-two nonary arithmetic, product carrier, and tetration boundary.
+grep -q 'moonshineCoefficientTernaryExpansion' DASHI/Moonshine/DepthTwoNonaryResidueFibreExact.agda
+grep -q 'canonicalDepthTwoCommutingSquare' DASHI/Moonshine/DepthTwoNonaryResidueFibreExact.agda
+grep -q 'terminalProductCountIsFiftyFour' DASHI/Moonshine/DepthTwoNonaryResidueFibreExact.agda
+grep -q 'literalNineTetrationLevelTwo' DASHI/Moonshine/DepthTwoNonaryResidueFibreExact.agda
+grep -q 'canonicalEightyOneBlockMonsterModuleDecompositionIsFalse' DASHI/Moonshine/DepthTwoNonaryResidueFibreExact.agda
+grep -q 'modEightyOneIsIndependentEvidenceForSelectedChartIsFalse' DASHI/Moonshine/DepthTwoNonaryResidueFibreExact.agda
 
 # Actual total map and signed 53 -> 22 observer.
 grep -q 'familyCompressionTotalisation' DASHI/Biology/JMDSporadicTarotOrdinalTotalisationExact.agda
@@ -101,7 +132,7 @@ grep -q 'stageCarrierIdentifiedWithJankoGroupIsFalse' DASHI/Foundations/SecondRe
 grep -q 'differentialSquaresToZero' DASHI/Moonshine/EulerMonsterMeaningSeparationExact.agda
 grep -q 'coefficient196884IsEulerCharacteristicClaimedIsFalse' DASHI/Moonshine/EulerMonsterMeaningSeparationExact.agda
 
-echo "Pointed bulk / sporadic Tarot / balanced-stage symmetry static guards passed."
+echo "Pointed bulk / sporadic Tarot / amplitude / SSP15 / depth-two static guards passed."
 
 scripts/run_agda29_parallel_check.sh \
   DASHI/Biology/JMDSporadicTarotV2Regression.agda \
