@@ -30,8 +30,8 @@ module DASHI.Biology.NonaryCompletionPhaseQuotientExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Agda.Builtin.Nat using (Nat; _*_)
-open import Data.Product using (_×_; _,_)
+open import Agda.Builtin.Nat using (Nat; _+_; _*_)
+open import Data.Product using (_×_; _,_; proj₁; proj₂)
 
 import DASHI.Biology.BalancedTernaryHarmonicCarrierExact as Harmonic
 
@@ -137,10 +137,10 @@ encodeAfterDecode (mode45 , directPhase) = refl
 encodeAfterDecode (mode45 , counterPhase) = refl
 
 complementMode : DecimalCompletionState → ComplementMode5
-complementMode state = Data.Product.proj₁ (encodeModePhase state)
+complementMode state = proj₁ (encodeModePhase state)
 
 binaryPhase : DecimalCompletionState → BinaryPhase
-binaryPhase state = Data.Product.proj₂ (encodeModePhase state)
+binaryPhase state = proj₂ (encodeModePhase state)
 
 complementPreservesMode :
   (state : DecimalCompletionState) →
