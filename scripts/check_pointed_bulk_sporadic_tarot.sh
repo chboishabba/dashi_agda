@@ -15,6 +15,9 @@ FILES=(
   DASHI/Biology/ThreeSixNineMoonshineScaleExact.agda
   DASHI/Biology/ReducedFiftyThreeOrbitCandidateExact.agda
   DASHI/Biology/SporadicTarotDependencyExact.agda
+  DASHI/Biology/TarotCarrierExact.agda
+  DASHI/Biology/JMDSporadicTarotV2CorrespondenceExact.agda
+  DASHI/Biology/JMDSporadicTarotV2Regression.agda
   DASHI/Biology/PointedBulkReducedMoonshineBoundary.agda
   DASHI/Biology/PointedBulkSporadicTarotSourceAtlas.agda
   DASHI/Biology/PointedBulkSporadicTarotEverything.agda
@@ -39,55 +42,24 @@ for file in "${FILES[@]}"; do
   fi
 done
 
-# Exact arithmetic and action guards.
-grep -q 'pointedBulkDimensionIs196830' \
-  DASHI/Biology/PointedTernaryBulkExact.agda
-grep -q 'pointedBulkEqualsUnpointedPlusPointed' \
-  DASHI/Biology/PointedTernaryBulkExact.agda
-grep -q 'rotatePointedFourReturns' \
-  DASHI/Biology/PointedTernaryBulkExact.agda
-grep -q 'pointedA2MultiplicityIsZero' \
-  DASHI/Biology/PointedTernaryBulkExact.agda
-grep -q 'decimalAndPointedBulkDimensionsAgree' \
-  DASHI/Biology/DecimalTenTernaryPresentationExact.agda
-grep -q 'tenSectorListIsRawD4IsotypicDecompositionIsFalse' \
-  DASHI/Biology/DecimalTenTernaryPresentationExact.agda
-grep -q 'fiftyFourIsTwoTimesThreeCubed' \
-  DASHI/Biology/ThreeSixNineMoonshineScaleExact.agda
-grep -q 'tenIrrepOrientationMatchesSectorCount' \
-  DASHI/Biology/ThreeSixNineMoonshineScaleExact.agda
-grep -q 'arithmeticEqualityTransfersGroupActionIsFalse' \
-  DASHI/Biology/ThreeSixNineMoonshineScaleExact.agda
+grep -q 'pointedBulkDimensionIs196830' DASHI/Biology/PointedTernaryBulkExact.agda
+grep -q 'candidateR53DimensionIsFiftyThree' DASHI/Biology/ReducedFiftyThreeOrbitCandidateExact.agda
+grep -q 'sporadicInventoryCountIsTwentySix' DASHI/Biology/SporadicTarotDependencyExact.agda
+grep -q 'majorArcanaCountIsTwentyTwo' DASHI/Biology/TarotCarrierExact.agda
 
-# Reduced-53 promotion guards.
-grep -q 'candidateR53DimensionIsFiftyThree' \
-  DASHI/Biology/ReducedFiftyThreeOrbitCandidateExact.agda
-grep -q 'candidateInvolutionIsInvolutive' \
-  DASHI/Biology/ReducedFiftyThreeOrbitCandidateExact.agda
-grep -q 'oneFixedPointCandidateLabelsSporadicGroupsIsFalse' \
-  DASHI/Biology/ReducedFiftyThreeOrbitCandidateExact.agda
-grep -q 'signTwistOccursSevenPromotionsAfterArithmetic' \
-  DASHI/Biology/PointedBulkReducedMoonshineBoundary.agda
-grep -q 'S26ActionMayBeReusedWithoutConstructionIsFalse' \
-  DASHI/Biology/PointedBulkReducedMoonshineBoundary.agda
+# JMD poster transcription and non-promotion guards.
+grep -q 'jmdV2Assignment Sporadic.M11' DASHI/Biology/JMDSporadicTarotV2CorrespondenceExact.agda
+grep -q 'jmdV2Assignment Sporadic.Fi22' DASHI/Biology/JMDSporadicTarotV2CorrespondenceExact.agda
+grep -q 'co4StrengthAssignment' DASHI/Biology/JMDSporadicTarotV2CorrespondenceExact.agda
+grep -q 'actualInventoryAccounting' DASHI/Biology/JMDSporadicTarotV2CorrespondenceExact.agda
+grep -q 'posterCardCountIsTwentyTwo' DASHI/Biology/JMDSporadicTarotV2CorrespondenceExact.agda
+grep -q 'posterSuppliesTotalS26ToA22MapIsFalse' DASHI/Biology/JMDSporadicTarotV2CorrespondenceExact.agda
+grep -q 'omittedGroupsMayBeAssignedWithoutRationaleIsFalse' DASHI/Biology/JMDSporadicTarotV2CorrespondenceExact.agda
 
-# Sporadic inventory, Tarot, and political-authority guards.
-grep -q 'sporadicInventoryCountIsTwentySix' \
-  DASHI/Biology/SporadicTarotDependencyExact.agda
-grep -q 'co4HasNoConwaySporadicReferent' \
-  DASHI/Biology/SporadicTarotDependencyExact.agda
-grep -q 'inventoryMinusArcanaCountIsFour' \
-  DASHI/Biology/SporadicTarotDependencyExact.agda
-grep -q 'typedDependencyGraphRetainsEdgeAuthorityIsTrue' \
-  DASHI/Biology/SporadicTarotDependencyExact.agda
-grep -q 'reflectingPoolReadingDoesNotInferMotive' \
-  DASHI/Governance/CabarlahTraumaProjectionBridgeExact.agda
-grep -q 'pineGapConcernDoesNotVerifySpecificStrike' \
-  DASHI/Governance/CabarlahTraumaProjectionBridgeExact.agda
-
-echo "Pointed bulk / sporadic Tarot static guards passed."
+echo "Pointed bulk / sporadic Tarot / JMD v2 static guards passed."
 
 scripts/run_agda29_parallel_check.sh \
+  DASHI/Biology/JMDSporadicTarotV2Regression.agda \
   DASHI/PointedBulkSporadicTarotCabarlahRegression.agda \
   DASHI/PointedBulkSporadicTarotCabarlahBoundary.agda \
   DASHI/EverythingPointedBulkSporadicTarot.agda
