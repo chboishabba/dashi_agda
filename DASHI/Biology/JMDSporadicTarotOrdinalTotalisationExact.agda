@@ -6,6 +6,7 @@ open import Agda.Builtin.String using (String)
 import DASHI.Biology.SporadicTarotDependencyExact as Sporadic
 import DASHI.Biology.TarotCarrierExact as Tarot
 import DASHI.Biology.JMDSporadicTarotV2CorrespondenceExact as JMD
+open JMD.TotalisedCorrespondence
 
 ------------------------------------------------------------------------
 -- Sources and authority scope
@@ -64,11 +65,6 @@ sporadicName Sporadic.Ly = sporadicNameRecord "Ly" "Lyons group" "Richard Lyons"
 mathieuDegreeRegression :
   naturalPermutationDegree (sporadicName Sporadic.M24) ≡ Sporadic.some 24
 mathieuDegreeRegression = refl
-
-------------------------------------------------------------------------
--- JMD's displayed sequence is an ordered block correspondence.  The block and
--- ordinal coordinates are retained separately from narrative interpretation.
-------------------------------------------------------------------------
 
 data PosterBlock : Set where
   mathieuBlock conwayBlock hsMcLBlock jankoBlock terminalBlock omittedBlock : PosterBlock
@@ -142,11 +138,6 @@ syntheticCo4FillsOrdinalEight :
   ≡ 8
 syntheticCo4FillsOrdinalEight = refl
 
-------------------------------------------------------------------------
--- Four-axis scoring preserves the distinction between ordinal/family fit,
--- mathematical referent fit, and narrative fit.
-------------------------------------------------------------------------
-
 data FitStrength : Set where
   noFit weakFit moderateFit strongFit maximalFit : FitStrength
 
@@ -176,13 +167,6 @@ jankoScoreIsOrdinalFirst :
   ordinalFit (jmdScore Sporadic.J3) ≡ maximalFit
   × mathematicalFit (jmdScore Sporadic.J3) ≡ weakFit
 jankoScoreIsOrdinalFirst = refl , refl
-
-------------------------------------------------------------------------
--- A concrete totalisation is now inhabited.  It is named and scoped as one
--- family-compression policy, not as the unique or source-forced completion.
--- All twenty-one source assignments are preserved.  The omitted five receive
--- explicit symbolic rationales and declared-symbolic authority.
-------------------------------------------------------------------------
 
 familyCompressionAssignment : Sporadic.SporadicGroup → Tarot.MajorArcana
 familyCompressionAssignment Sporadic.Fi22 = Tarot.strength
