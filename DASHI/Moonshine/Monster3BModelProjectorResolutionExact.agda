@@ -30,16 +30,11 @@ module DASHI.Moonshine.Monster3BModelProjectorResolutionExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; _*_)
-open import Data.Empty using (⊥)
 open import Data.Fin.Base using (Fin)
 
 import DASHI.Moonshine.Monster3BFiniteHeisenbergGeneratorsExact as H
 import DASHI.Moonshine.Monster3BFiniteProjectorModelExact as Model
 import DASHI.Moonshine.Monster3BFiniteWeightProjectorExact as Projector
-
-------------------------------------------------------------------------
--- Pointwise support and orthogonality.
-------------------------------------------------------------------------
 
 DifferentWeight : H.X6 → H.X6 → Set
 DifferentWeight left right = Projector.x6Equal left right ≡ false
@@ -91,11 +86,6 @@ ownProjectorIsPointwiseIdempotent basis =
   Projector.weightProjectorCoefficientIdempotent
     (Model.weightPosition basis) basis
 
-------------------------------------------------------------------------
--- Each weight fibre is literally Fin 90.  Encoding and decoding are
--- constructive and do not require a dense matrix.
-------------------------------------------------------------------------
-
 ModelWeightFibre : H.X6 → Set
 ModelWeightFibre position = Fin 90
 
@@ -138,19 +128,13 @@ modelResolutionDimension = modelWeightCount * modelWeightFibreDimension
 modelResolutionDimensionIs65610 : modelResolutionDimension ≡ 65610
 modelResolutionDimensionIs65610 = refl
 
-------------------------------------------------------------------------
--- Translation covariance of the resolved fibres.
-------------------------------------------------------------------------
-
 translateFibreBasis :
-  H.Axis6 →
+  (axis : H.Axis6) →
   (position : H.X6) →
   ModelWeightFibre position →
-  ModelWeightFibre (H.translate H.axis0 position)
+  ModelWeightFibre (H.translate axis position)
 translateFibreBasis axis position multiplicity = multiplicity
 
--- The multiplicity label is untouched by every translation.  The separate
--- position coordinate carries the entire translation action.
 translationPreservesMultiplicityCoordinate :
   (axis : H.Axis6) →
   (basis : Model.ZetaModelBasis) →
