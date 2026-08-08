@@ -32,7 +32,6 @@ import DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber as Output
 import DASHI.Physics.Closure.NSTriadKNCommutingPhysicalCarrierSelectorRound28Exact as Selector
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadConjugationOrbitRound28Exact as Conjugation
 import DASHI.Physics.Closure.NSTriadKNDependentTaxOwnerPartitionRound28Exact as Partition
-import DASHI.Physics.Closure.NSTriadKNSignedConstituentTreeRound28Exact as Constituents
 import DASHI.Physics.Closure.NSTriadKNSignedInteractionFibreRound28Exact as Interaction
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadOrbitSignatureRound28Exact as Orbit
 import DASHI.Physics.Closure.NSTriadKNDivisionFreePluckerDefectRound28Exact as Defect
@@ -82,9 +81,11 @@ record Round28ExactEvidence : Set₁ where
         (Defect.scaleMode leftScale left)
         (Defect.scaleMode rightScale right)
       ≡
-      ((leftScale Int.* rightScale)
-        Int.* (leftScale Int.* rightScale))
-      Int.* Plucker.pluckerNormSquared left right
+      Int._*_
+        (Int._*_
+          (Int._*_ leftScale rightScale)
+          (Int._*_ leftScale rightScale))
+        (Plucker.pluckerNormSquared left right)
 
     nineOwnerAggregate :
       ∀ {environment}
