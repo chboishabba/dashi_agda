@@ -61,6 +61,7 @@ grep -q 'OwnedTaxAtom' "$partition"
 grep -q 'dependentPartitionListRoundtrip' "$partition"
 grep -q 'signedTotalPreservedByDependentPartition' "$partition"
 grep -q 'taxableTotalPreservedByDependentPartition' "$partition"
+grep -q 'ownedFibreMembershipUnique refl refl = refl' "$partition"
 
 constituents=DASHI/Physics/Closure/NSTriadKNSignedConstituentTreeRound28Exact.agda
 grep -q '10.24033/asens.1404' "$constituents"
@@ -92,13 +93,17 @@ grep -q 'continuumDirectionalNearFieldTaxClosed = false' "$defect"
 language=DASHI/Physics/Closure/NSTriadKNAdmissibleOwnerTaxLanguageRound28Exact.agda
 grep -q 'AdmissibleOwnerEstimate' "$language"
 grep -q 'aggregateOwnerEstimates' "$language"
+grep -q 'AllEtasNonnegative' "$language"
+grep -q 'remainingViscosityPositive' "$language"
 grep -q 'NineOwnerEstimateFamily' "$language"
 grep -q 'physicalNineOwnerEstimatesInstantiated = false' "$language"
 grep -q 'strictPhysicalEtaMarginClosed = false' "$language"
 
 absorption=DASHI/Physics/Closure/NSTriadKNNineOwnerCriticalAbsorptionRound28Exact.agda
 grep -q 'NineOwnerCriticalBalance' "$absorption"
+grep -q 'nineOwnerRemainingViscosityPositive' "$absorption"
 grep -q 'nineOwnerStrictCriticalEstimate' "$absorption"
+grep -q 'positiveResidualViscosityExposed = true' "$absorption"
 grep -q 'physicalNineOwnerCriticalBalanceInstantiated = false' "$absorption"
 grep -q 'strictPhysicalEtaCertificateInstantiated = false' "$absorption"
 
@@ -106,6 +111,7 @@ integration=DASHI/Physics/Closure/NSTriadKNLuoHighestAlphaRound28Exact.agda
 grep -q 'Round28ExactEvidence' "$integration"
 grep -q 'conjugateOutputFibre' "$integration"
 grep -q 'divisionFreePluckerScaling' "$integration"
+grep -q 'positiveRemainingViscosity' "$integration"
 grep -q 'strictNineOwnerAbsorption' "$integration"
 grep -q 'uniformOperatorTaxStillOpen' "$integration"
 grep -q 'strictMarginStillOpen' "$integration"
