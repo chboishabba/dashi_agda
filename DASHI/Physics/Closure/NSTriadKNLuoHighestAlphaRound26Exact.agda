@@ -12,7 +12,8 @@ module DASHI.Physics.Closure.NSTriadKNLuoHighestAlphaRound26Exact where
 -- * finite critical accounting: a signed weighted shell ledger with explicit
 --   HH/LH/HL/CC/Com and cutoff-boundary coordinates;
 -- * analytic tax discipline: finite commutator increments, division-free HH
---   normalisation and duplicate-free tax ownership.
+--   normalisation, hysteretic entry charge, named remainder classes and
+--   duplicate-free tax ownership.
 --
 -- The continuum-real Picard-Lindelof instance, cutoff-independent class taxes,
 -- strict viscosity margin and Clay theorem remain open.
@@ -21,8 +22,9 @@ module DASHI.Physics.Closure.NSTriadKNLuoHighestAlphaRound26Exact where
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
-open import Data.Rational.Base using (ℚ)
+open import Data.Rational.Base using (ℚ; _+_; _-_; _*_; _≤_)
 
+import DASHI.Physics.Closure.NSTriadKNLuoHighestAlphaClayLemmaLadderRound24Exact as R24
 import DASHI.Physics.Closure.NSTriadKNLuoHighestAlphaClayLemmaLadderRound25Exact as R25
 import DASHI.Physics.Closure.NSTriadKNLuoTriadwiseEnergyCancellationRound26Exact as Energy
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteKernelCommutatorRound26Exact as Kernel
@@ -31,6 +33,8 @@ import DASHI.Physics.Closure.NSTriadKNLuoSignedCriticalLedgerRound26Exact as Led
 import DASHI.Physics.Closure.NSTriadKNLuoDivisionFreeHHDefectRound26Exact as HH
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteTaxAdversarialRegressionRound26Exact as Regression
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteGalerkinPolynomialRound26Exact as Polynomial
+import DASHI.Physics.Closure.NSTriadKNLuoHystereticPositiveVariationRound26Exact as Hysteresis
+import DASHI.Physics.Closure.NSTriadKNLuoCriticalRemainderClassificationRound26Exact as Remainder
 
 record Round26ExactEvidence : Set₁ where
   field
@@ -80,6 +84,24 @@ record Round26ExactEvidence : Set₁ where
         - Polynomial.evaluateAtoms atoms reference
       ≡ Polynomial.differenceAtoms atoms state reference
 
+    hystereticEntriesPaidByPositiveVariation :
+      ∀ {gap} →
+      (entries : List (Hysteresis.HystereticEntry gap)) →
+      Hysteresis.entryGapCharge entries
+      ≤ Hysteresis.entryPositiveVariation entries
+
+    namedRemaindersRecomposeExactly :
+      (atoms : List Remainder.RemainderAtom) →
+      Remainder.totalRemainder atoms
+      ≡
+      Remainder.dataRemainder atoms
+      + Remainder.integrableRemainder atoms
+      + Remainder.smallRemainderTotal atoms
+      + Remainder.telescopingRemainder atoms
+
+    earlyAbsoluteValueRegression :
+      Regression.one + Regression.negativeOne ≡ Regression.zero
+
 open Round26ExactEvidence public
 
 canonicalRound26ExactEvidence : Round26ExactEvidence
@@ -98,6 +120,12 @@ canonicalRound26ExactEvidence = record
       HH.divisionFreeHHProductIdentity
   ; finiteGalerkinDifference =
       Polynomial.finiteGalerkinDifferenceFactorisation
+  ; hystereticEntriesPaidByPositiveVariation =
+      Hysteresis.hystereticEntryChargeBelowPositiveVariation
+  ; namedRemaindersRecomposeExactly =
+      Remainder.remainderClassificationExact
+  ; earlyAbsoluteValueRegression =
+      Regression.signedCancellationExample
   }
 
 record Round26HighestAlphaBoundary : Set where
@@ -115,6 +143,8 @@ record Round26HighestAlphaBoundary : Set where
     finiteKernelCommutatorIdentityProved : Bool
     cutoffIndependentCommutatorTaxProved : Bool
     divisionFreeHHNormalisationProved : Bool
+    hystereticEntryChargeProved : Bool
+    namedRemainderClassificationProved : Bool
     duplicateFreeTaxOwnershipProved : Bool
     classwiseCutoffUniformTaxesProved : Bool
     strictTotalViscosityMarginProved : Bool
@@ -130,7 +160,8 @@ canonicalRound26HighestAlphaBoundary =
     true true false false
     true false
     true true true false
-    true true false false false false
+    true true true true
+    false false false false
 
 localODEStillOpen :
   continuumRealLocalODEExistenceInstantiated
@@ -162,6 +193,5 @@ clayPromotionStillFalse :
   ≡ false
 clayPromotionStillFalse = refl
 
-round25Ladder :
-  R25.HighestAlphaClayLemmaLadder
+round25Ladder : R24.HighestAlphaClayLemmaLadder
 round25Ladder = R25.canonicalHighestAlphaClayLemmaLadderRound25
