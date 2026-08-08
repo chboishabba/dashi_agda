@@ -33,11 +33,18 @@ module DASHI.Moonshine.MonsterYangMills196608CrossLaneExact where
 --   196608 = 196560 + 24 + 24,
 --   196884 = 196608 + C(24,2).
 --
--- Hence the same integer is simultaneously the reduced denominator of the
--- sharp Wilson budget and a natural basis-coordinate subtotal of the Leech
--- lattice VOA weight-two space.  This is a real shared arithmetic object,
--- not merely hexadecimal proximity.  No dynamical or representation-
--- theoretic selection mechanism between the two theories is asserted.
+-- The conformal line lies in the diagonal 24-dimensional quadratic sector,
+-- so the correct geometric quotient is
+--
+--   196883 = (196608 - 1) + 276
+--          = 196607 + 276.
+--
+-- The numerically equivalent 196608 + 275 identity is retained only as
+-- arithmetic and is not interpreted as a canonical 275-dimensional sector.
+-- The same integer 196608 is thus both the reduced denominator of the sharp
+-- Wilson budget and a natural basis-coordinate subtotal of the Leech
+-- lattice-VOA weight-two space.  No common dynamical selection theorem is
+-- asserted.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -78,10 +85,16 @@ moonshineCompletionOverCommonDenominator :
   ≡ Leech.leechWeightTwoDimension
 moonshineCompletionOverCommonDenominator = refl
 
-monsterCompletionOverCommonDenominator :
-  commonDenominator + Leech.offDiagonalAfterConformalAdjustment
+monsterGeometricCompletionAfterConformalQuotient :
+  Leech.coordinateSubtotalAfterConformalQuotient
+  + Leech.offDiagonalQuadraticCount
   ≡ Leech.monsterNontrivialDegree
-monsterCompletionOverCommonDenominator = refl
+monsterGeometricCompletionAfterConformalQuotient = refl
+
+monsterNumericalCompletionOverCommonDenominator :
+  commonDenominator + Leech.numericalResidualBeyond196608
+  ≡ Leech.monsterNontrivialDegree
+monsterNumericalCompletionOverCommonDenominator = refl
 
 record CrossLaneSelectionBoundary : Set where
   constructor crossLaneSelectionBoundary
@@ -89,6 +102,12 @@ record CrossLaneSelectionBoundary : Set where
     actualRepositoryObjectsShareDenominator : Bool
     actualRepositoryObjectsShareDenominatorIsTrue :
       actualRepositoryObjectsShareDenominator ≡ true
+    conformalQuotientPlacedInDiagonalSector : Bool
+    conformalQuotientPlacedInDiagonalSectorIsTrue :
+      conformalQuotientPlacedInDiagonalSector ≡ true
+    numerical275PromotedToCanonicalSector : Bool
+    numerical275PromotedToCanonicalSectorIsFalse :
+      numerical275PromotedToCanonicalSector ≡ false
     leechCoordinateCountDerivesWilsonEstimate : Bool
     leechCoordinateCountDerivesWilsonEstimateIsFalse :
       leechCoordinateCountDerivesWilsonEstimate ≡ false
@@ -101,4 +120,10 @@ record CrossLaneSelectionBoundary : Set where
 
 canonicalCrossLaneSelectionBoundary : CrossLaneSelectionBoundary
 canonicalCrossLaneSelectionBoundary =
-  crossLaneSelectionBoundary true refl false refl false refl true refl
+  crossLaneSelectionBoundary
+    true refl
+    true refl
+    false refl
+    false refl
+    false refl
+    true refl
