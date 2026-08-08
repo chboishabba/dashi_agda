@@ -22,6 +22,7 @@ open import Data.Empty using (⊥)
 open import Data.Product using (Σ; _,_)
 open import Data.Rational.Base using (ℚ; _≤_)
 import Data.Rational.Properties as ℚₚ
+open import Relation.Nullary using (¬_)
 
 record FiniteNormTrajectory
     {timeLevel stateLevel : Level}
@@ -55,8 +56,8 @@ record EscapeWitness
   field
     escapesEveryBound :
       (candidate : ℚ) →
-      Σ (Time) (λ time →
-        ¬ normSquared trajectory (stateAt trajectory time) ≤ candidate)
+      Σ Time (λ time →
+        ¬ (normSquared trajectory (stateAt trajectory time) ≤ candidate))
 
 open EscapeWitness public
 
@@ -118,12 +119,12 @@ energyConstructsUniformNormBound :
     {State : Set stateLevel}
     {trajectory : FiniteNormTrajectory Time State} →
   EnergyControl trajectory → UniformNormBound trajectory
-energyConstructsUniformNormBound control =
+energyConstructsUniformNormBound {trajectory = trajectory} control =
   uniform-norm-bound
     (initialEnergyBound control)
     (λ time →
       ℚₚ.≤-trans
-        (normControlledByEnergy control (stateAt _ time))
+        (normControlledByEnergy control (stateAt trajectory time))
         (energyBoundAtEveryTime control time))
 
 energyExcludesFiniteMaximalTime :
