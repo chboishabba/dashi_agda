@@ -6,6 +6,7 @@ import DASHI.Foundations.BalancedTernaryStageSymmetryExact as BT
 import DASHI.Foundations.StageSymmetryCarrierTowerExact as Sym
 import DASHI.Foundations.DialecticSheetFrameSelectorExact as Selector
 import DASHI.Foundations.SecondRevolutionJankoTarotExact as Revolution
+import DASHI.Biology.StageSymmetrySSP15BridgeExact as SSP
 import DASHI.Biology.SporadicTarotDependencyExact as Sporadic
 import DASHI.Biology.TarotCarrierExact as Tarot
 import DASHI.Biology.JMDSporadicTarotOrdinalTotalisationExact as Total
@@ -35,11 +36,14 @@ sixDualReadingRegression :
   × 6 + 3 ≡ Sym.nonaryCardinality
 sixDualReadingRegression = refl , refl
 
-oggCountRegression : BT.countList BT.allOggPrimes ≡ 15
-oggCountRegression = BT.oggPrimeCountIsFifteen
+oggCountRegression : SSP.countList SSP.allOggPrimeLanes ≡ 15
+oggCountRegression = SSP.oggPrimeLaneCountIsFifteen
 
-seventyOneComplementRegression : 10 + 71 ≡ 81
-seventyOneComplementRegression = BT.eightyOneSplitsTenAndSeventyOne
+seventyOneExistingLaneRegression :
+  10 + SSP.oggPrimeLaneValue
+    DASHI.Physics.Closure.MoonshinePrimeLaneReceiptSurface.p71
+  ≡ 81
+seventyOneExistingLaneRegression = SSP.eightyOneTenSeventyOneBridge
 
 moonshineResidueRegression :
   2430 * 81 + 54 ≡ 196884
@@ -72,6 +76,9 @@ explicitCollisionRegression = Total.fi23BabyMonsterCollision
 
 totalisationBoundaryRegression : Total.TotalisationAuthorityBoundary
 totalisationBoundaryRegression = Total.canonicalTotalisationAuthorityBoundary
+
+sspReuseBoundaryRegression : SSP.StageSymmetrySSP15Boundary
+sspReuseBoundaryRegression = SSP.canonicalStageSymmetrySSP15Boundary
 
 eulerMeaningBoundaryRegression : Euler.EulerMonsterAuthorityBoundary
 eulerMeaningBoundaryRegression = Euler.canonicalEulerMonsterAuthorityBoundary
