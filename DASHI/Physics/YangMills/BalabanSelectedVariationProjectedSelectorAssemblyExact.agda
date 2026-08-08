@@ -30,7 +30,7 @@ module DASHI.Physics.YangMills.BalabanSelectedVariationProjectedSelectorAssembly
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; _+_; _*_; _≤_)
+  (ℚ; 0ℚ; _+_; _*_; -_; _≤_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanP33PhysicalRationalWilsonPlaquetteJetExact as Physical
@@ -40,6 +40,7 @@ import DASHI.Physics.YangMills.BalabanP33PlaquetteBoundaryProjectorExact as Boun
 import DASHI.Physics.YangMills.BalabanSelectedVariationProjectionSpilloverExact as Spillover
 import DASHI.Physics.YangMills.BalabanSelectedVariationProjectedNoetherResidualExact as Noether
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundVariationSelectorExact as Selector
+import DASHI.Physics.YangMills.BalabanP33PhysicalWilsonLinearNonlinearPartitionExact as Partition
 import DASHI.Physics.YangMills.BalabanP33PhysicalWilsonSignedGlobalExact as Wilson
 
 record ProjectedSelectorAnalyticData
@@ -188,7 +189,7 @@ analyticDataGivesSingletonLower :
   ProjectedSelectorAnalyticData background field plaquette →
   - (Selector.remainingSingletonCoefficient
       * Wilson.plaquetteCrossCharge field plaquette)
-  ≤ Noether.Partition.physicalPlaquetteWilsonLinearPart
+  ≤ Partition.physicalPlaquetteWilsonLinearPart
       background field plaquette
 analyticDataGivesSingletonLower data =
   Selector.selectedBackgroundSingletonCurvatureLower
