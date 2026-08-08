@@ -8,6 +8,7 @@ import DASHI.Biology.SporadicTarotDependencyExact
 import DASHI.Biology.TarotCarrierExact
 import DASHI.Biology.JMDSporadicTarotV2CorrespondenceExact
 import DASHI.Biology.JMDSporadicTarotOrdinalTotalisationExact
+import DASHI.Biology.StageSymmetrySSP15BridgeExact
 import DASHI.Biology.SporadicStageSymmetryTarotRegression
 import DASHI.Biology.PointedBulkReducedMoonshineBoundary
 import DASHI.Biology.PointedBulkSporadicTarotSourceAtlas
