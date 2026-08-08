@@ -83,80 +83,81 @@ roleActualFactor :
   Coordinates.PhysicalSU2BondField4 →
   Physical.Plaquette4 → PhysicalFactorRole →
   Q.RationalQuaternion
-roleActualFactor background field plaquette role =
-  Envelope.slotActualFactor background field plaquette
+roleActualFactor background bondField plaquette role =
+  Envelope.slotActualFactor background bondField plaquette
     (slot role) (selection role)
 
 roleFlatFactor :
   Coordinates.PhysicalSU2BondField4 →
   Physical.Plaquette4 → PhysicalFactorRole →
   Q.RationalQuaternion
-roleFlatFactor field plaquette role =
-  Envelope.slotFlatFactor field plaquette
+roleFlatFactor bondField plaquette role =
+  Envelope.slotFlatFactor bondField plaquette
     (slot role) (selection role)
 
 roleSelectedEnvelope :
-  ∀ background field plaquette role →
+  ∀ background bondField plaquette role →
   Radius.RelaxedInverseLinkRadius background →
   Envelope.SelectedFactorEnvelope
-    (roleActualFactor background field plaquette role)
-    (roleFlatFactor field plaquette role)
+    (roleActualFactor background bondField plaquette role)
+    (roleFlatFactor bondField plaquette role)
     Budget.epsilon
-roleSelectedEnvelope background field plaquette role radius =
+roleSelectedEnvelope background bondField plaquette role radius =
   Envelope.slotSelectedEnvelope
-    background field plaquette (slot role) (selection role) radius
+    background bondField plaquette (slot role) (selection role) radius
 
 record FourRoleEnvelopeFamily
     (background : Physical.RationalSU2Background4)
-    (field : Coordinates.PhysicalSU2BondField4)
+    (bondField : Coordinates.PhysicalSU2BondField4)
     (plaquette : Physical.Plaquette4)
     (placement : Placement.PlaquetteSecondVariationPlacement4) : Set₁ where
   field
     radius : Radius.RelaxedInverseLinkRadius background
 
     envelope0 : Envelope.SelectedFactorEnvelope
-      (roleActualFactor background field plaquette
+      (roleActualFactor background bondField plaquette
         (roleOfSlot placement Placement.slot0))
-      (roleFlatFactor field plaquette
+      (roleFlatFactor bondField plaquette
         (roleOfSlot placement Placement.slot0))
       Budget.epsilon
 
     envelope1 : Envelope.SelectedFactorEnvelope
-      (roleActualFactor background field plaquette
+      (roleActualFactor background bondField plaquette
         (roleOfSlot placement Placement.slot1))
-      (roleFlatFactor field plaquette
+      (roleFlatFactor bondField plaquette
         (roleOfSlot placement Placement.slot1))
       Budget.epsilon
 
     envelope2 : Envelope.SelectedFactorEnvelope
-      (roleActualFactor background field plaquette
+      (roleActualFactor background bondField plaquette
         (roleOfSlot placement Placement.slot2))
-      (roleFlatFactor field plaquette
+      (roleFlatFactor bondField plaquette
         (roleOfSlot placement Placement.slot2))
       Budget.epsilon
 
     envelope3 : Envelope.SelectedFactorEnvelope
-      (roleActualFactor background field plaquette
+      (roleActualFactor background bondField plaquette
         (roleOfSlot placement Placement.slot3))
-      (roleFlatFactor field plaquette
+      (roleFlatFactor bondField plaquette
         (roleOfSlot placement Placement.slot3))
       Budget.epsilon
 
 open FourRoleEnvelopeFamily public
 
 physicalFourRoleEnvelopeFamily :
-  ∀ background field plaquette placement →
+  ∀ background bondField plaquette placement →
   Radius.RelaxedInverseLinkRadius background →
-  FourRoleEnvelopeFamily background field plaquette placement
-physicalFourRoleEnvelopeFamily background field plaquette placement radius = record
+  FourRoleEnvelopeFamily background bondField plaquette placement
+physicalFourRoleEnvelopeFamily
+    background bondField plaquette placement radius = record
   { radius = radius
-  ; envelope0 = roleSelectedEnvelope background field plaquette
+  ; envelope0 = roleSelectedEnvelope background bondField plaquette
       (roleOfSlot placement Placement.slot0) radius
-  ; envelope1 = roleSelectedEnvelope background field plaquette
+  ; envelope1 = roleSelectedEnvelope background bondField plaquette
       (roleOfSlot placement Placement.slot1) radius
-  ; envelope2 = roleSelectedEnvelope background field plaquette
+  ; envelope2 = roleSelectedEnvelope background bondField plaquette
       (roleOfSlot placement Placement.slot2) radius
-  ; envelope3 = roleSelectedEnvelope background field plaquette
+  ; envelope3 = roleSelectedEnvelope background bondField plaquette
       (roleOfSlot placement Placement.slot3) radius
   }
 
