@@ -7,6 +7,7 @@ cd "$ROOT"
 bash scripts/check_monster_3b_projector_resolution_round3.sh
 
 sources=(
+  DASHI/Moonshine/LeechWeightTwo196608BridgeExact.agda
   DASHI/Moonshine/MoonshineOrbifoldWeightTwoDecompositionExact.agda
   DASHI/Moonshine/MoonshineOrbifoldMasslessStateRemovalExact.agda
   DASHI/Moonshine/MoonshineZ3OrbifoldThreeLocalSiblingExact.agda
@@ -44,6 +45,7 @@ require_pattern() {
   fi
 }
 
+legacy=DASHI/Moonshine/LeechWeightTwo196608BridgeExact.agda
 weight2=DASHI/Moonshine/MoonshineOrbifoldWeightTwoDecompositionExact.agda
 massless=DASHI/Moonshine/MoonshineOrbifoldMasslessStateRemovalExact.agda
 siblings=DASHI/Moonshine/MoonshineZ3OrbifoldThreeLocalSiblingExact.agda
@@ -60,6 +62,10 @@ if [ ! -s "$reference" ]; then
   exit 1
 fi
 
+require_pattern "$legacy" 'exactWeightTwoCountingWitness'
+require_pattern "$legacy" 'coordinateSubtotalWitness'
+require_pattern "$legacy" 'coordinateChartIsPublishedFLMOrbifoldDecompositionIsFalse'
+require_pattern "$legacy" 'subtotalIsMonsterInvariantSubmoduleIsFalse'
 require_pattern "$weight2" 'untwistedInvariantWeightTwoDimensionIs98580'
 require_pattern "$weight2" 'twistedInvariantWeightTwoDimensionIs98304'
 require_pattern "$weight2" 'publishedOrbifoldWeightTwoSplit'
