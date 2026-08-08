@@ -28,6 +28,22 @@ globalAddress janko2 = 12
 globalAddress janko3 = 13
 globalAddress janko4 = 14
 
+globalIsTenPlusLocalOffset :
+  (index : JankoIndex) →
+  10 + localOffset index ≡ globalAddress index
+globalIsTenPlusLocalOffset janko1 = refl
+globalIsTenPlusLocalOffset janko2 = refl
+globalIsTenPlusLocalOffset janko3 = refl
+globalIsTenPlusLocalOffset janko4 = refl
+
+globalIsNinePlusLocalSuccessor :
+  (index : JankoIndex) →
+  9 + (1 + localOffset index) ≡ globalAddress index
+globalIsNinePlusLocalSuccessor janko1 = refl
+globalIsNinePlusLocalSuccessor janko2 = refl
+globalIsNinePlusLocalSuccessor janko3 = refl
+globalIsNinePlusLocalSuccessor janko4 = refl
+
 jankoGroup : JankoIndex → Sporadic.SporadicGroup
 jankoGroup janko1 = Sporadic.J1
 jankoGroup janko2 = Sporadic.J2
@@ -48,6 +64,7 @@ record DualRevolutionAddress : Set where
     carryRelativeOffset : Nat
     systemRelativeOffset : Nat
     globalExact : global ≡ globalAddress index
+    carryOffsetExact : carryRelativeOffset ≡ localOffset index
     carryChart : 10 + carryRelativeOffset ≡ global
     systemChart : 9 + systemRelativeOffset ≡ global
     systemOffsetIsCarrySuccessor :
@@ -56,16 +73,16 @@ record DualRevolutionAddress : Set where
 open DualRevolutionAddress public
 
 address11 : DualRevolutionAddress
-address11 = dualRevolutionAddress janko1 11 1 2 refl refl refl refl
+address11 = dualRevolutionAddress janko1 11 1 2 refl refl refl refl refl
 
 address12 : DualRevolutionAddress
-address12 = dualRevolutionAddress janko2 12 2 3 refl refl refl refl
+address12 = dualRevolutionAddress janko2 12 2 3 refl refl refl refl refl
 
 address13 : DualRevolutionAddress
-address13 = dualRevolutionAddress janko3 13 3 4 refl refl refl refl
+address13 = dualRevolutionAddress janko3 13 3 4 refl refl refl refl refl
 
 address14 : DualRevolutionAddress
-address14 = dualRevolutionAddress janko4 14 4 5 refl refl refl refl
+address14 = dualRevolutionAddress janko4 14 4 5 refl refl refl refl refl
 
 ------------------------------------------------------------------------
 -- Source-faithful compatibility with the JMD poster.
@@ -161,8 +178,14 @@ record JankoStageBridgeBoundary : Set where
   field
     tenPlusNIndexRuleExact : Bool
     tenPlusNIndexRuleExactIsTrue : tenPlusNIndexRuleExact ≡ true
+    carryChartWitness :
+      (index : JankoIndex) →
+      10 + localOffset index ≡ globalAddress index
     ninePlusSuccessorRuleExact : Bool
     ninePlusSuccessorRuleExactIsTrue : ninePlusSuccessorRuleExact ≡ true
+    systemChartWitness :
+      (index : JankoIndex) →
+      9 + (1 + localOffset index) ≡ globalAddress index
     stageCarrierIdentifiedWithJankoGroup : Bool
     stageCarrierIdentifiedWithJankoGroupIsFalse :
       stageCarrierIdentifiedWithJankoGroup ≡ false
@@ -172,4 +195,8 @@ record JankoStageBridgeBoundary : Set where
 
 canonicalJankoStageBridgeBoundary : JankoStageBridgeBoundary
 canonicalJankoStageBridgeBoundary =
-  jankoStageBridgeBoundary true refl true refl false refl false refl
+  jankoStageBridgeBoundary
+    true refl globalIsTenPlusLocalOffset
+    true refl globalIsNinePlusLocalSuccessor
+    false refl
+    false refl
