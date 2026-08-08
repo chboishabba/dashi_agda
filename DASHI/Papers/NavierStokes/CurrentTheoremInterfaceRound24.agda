@@ -15,7 +15,9 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Relation.Binary.PropositionalEquality using (_≡_; refl)
 
 import DASHI.Papers.NavierStokes.TheoremInterface as Base
+import DASHI.Papers.NavierStokes.ClayContractRound23 as Clay23
 import DASHI.Papers.NavierStokes.ClaimCorpusHighestAlphaRound24 as Round24
+import DASHI.Physics.Closure.NSTriadKNLuoClaimedSolutionCorpusRound24Exact as Corpus
 
 record CurrentNSPaperTheoremInterfaceRound24 : Setω where
   field
@@ -30,15 +32,15 @@ record CurrentNSPaperTheoremInterfaceRound24 : Setω where
       ≡ Round24.canonicalClaimCorpusHighestAlphaRound24Status
 
     literalClayTargetImplemented :
-      Base.Clay23.literalFeffermanPeriodicStatementImplemented
+      Clay23.literalFeffermanPeriodicStatementImplemented
         (Base.clayContractRound23 baseInterface)
       ≡ true
 
     corpusNotProofAuthority :
-      Round24.Corpus.allCorpusSourcesAreProofAuthorities ≡ false
+      Corpus.allCorpusSourcesAreProofAuthorities ≡ false
 
     corpusNotDeclaredExhaustive :
-      Round24.Corpus.corpusSearchIsDeclaredExhaustive ≡ false
+      Corpus.corpusSearchIsDeclaredExhaustive ≡ false
 
     physicalProducersRemainOpen :
       Round24.allPhysicalProducersInhabited claimCorpusStatus ≡ false
@@ -69,7 +71,7 @@ canonicalCurrentNSPaperTheoremInterfaceRound24 = record
   }
 
 currentLiteralTargetImplemented :
-  Base.Clay23.literalFeffermanPeriodicStatementImplemented
+  Clay23.literalFeffermanPeriodicStatementImplemented
     (Base.clayContractRound23
       (baseInterface canonicalCurrentNSPaperTheoremInterfaceRound24))
   ≡ true
