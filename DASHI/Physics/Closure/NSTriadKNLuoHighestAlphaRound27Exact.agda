@@ -22,10 +22,11 @@ module DASHI.Physics.Closure.NSTriadKNLuoHighestAlphaRound27Exact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
-open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.Nat using (Nat; _*_)
+open import Agda.Builtin.Equality using (_≡_; refl)
+import Agda.Builtin.Nat as Nat
 open import Data.Nat.Base using (_≤_)
-open import Data.Rational.Base using (ℚ)
+import Data.Integer.Base as Int
+import Data.Rational.Base as Rat
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
@@ -41,14 +42,16 @@ import DASHI.Physics.Closure.NSTriadKNLuoRound27FiniteCertificateGenerated as Ce
 record Round27ExactEvidence : Set₁ where
   field
     shellProjectorIdempotent : ∀ shell mode →
-      Projector.shellProjectorCoefficient shell mode
-      * Projector.shellProjectorCoefficient shell mode
+      Nat._*_
+        (Projector.shellProjectorCoefficient shell mode)
+        (Projector.shellProjectorCoefficient shell mode)
       ≡ Projector.shellProjectorCoefficient shell mode
 
     shellProjectorsDisjoint : ∀ left right mode →
       Projector.natEqual left right ≡ false →
-      Projector.shellProjectorCoefficient left mode
-      * Projector.shellProjectorCoefficient right mode
+      Nat._*_
+        (Projector.shellProjectorCoefficient left mode)
+        (Projector.shellProjectorCoefficient right mode)
       ≡ 0
 
     shellProjectorsResolveFiniteCarrier : ∀ maximum mode →
@@ -70,10 +73,15 @@ record Round27ExactEvidence : Set₁ where
     centredFiveSourceProbe :
       (weights : Probe.FiveSourceWeights) →
       (source : Probe.FiveSourceCoreDefect) →
-      Probe.five * Probe.weightedSourceProbe weights source
+      Rat._*_
+        Probe.five
+        (Probe.weightedSourceProbe weights source)
       ≡
-      Probe.weightSum weights * Probe.sourceAugmentation source
-      + Probe.centredDefectProbe weights source
+      Rat._+_
+        (Rat._*_
+          (Probe.weightSum weights)
+          (Probe.sourceAugmentation source))
+        (Probe.centredDefectProbe weights source)
 
     maximalUniformViscosityCore :
       ∀ {allocation} →
@@ -86,10 +94,13 @@ record Round27ExactEvidence : Set₁ where
       (triad : Physical.PhysicalTriadIncidence) →
       Plucker.pluckerNormSquared (Physical.p triad) (Physical.q triad)
       ≡
-      Plucker.modeNormSquared (Physical.p triad)
-      * Plucker.modeNormSquared (Physical.q triad)
-      - Plucker.dotMode (Physical.p triad) (Physical.q triad)
-        * Plucker.dotMode (Physical.p triad) (Physical.q triad)
+      Int._-_
+        (Int._*_
+          (Plucker.modeNormSquared (Physical.p triad))
+          (Plucker.modeNormSquared (Physical.q triad)))
+        (Int._*_
+          (Plucker.dotMode (Physical.p triad) (Physical.q triad))
+          (Plucker.dotMode (Physical.p triad) (Physical.q triad)))
 
 open Round27ExactEvidence public
 
@@ -147,32 +158,26 @@ physicalVectorFieldEquivarianceStillOpen :
   fullPhysicalVectorFieldEquivariance canonicalRound27HighestAlphaBoundary
   ≡ false
 physicalVectorFieldEquivarianceStillOpen = refl
-  where open import Agda.Builtin.Equality using (refl)
 
 uniformSignedOperatorTaxStillOpen :
   cutoffUniformSignedOperatorTax canonicalRound27HighestAlphaBoundary
   ≡ false
 uniformSignedOperatorTaxStillOpen = refl
-  where open import Agda.Builtin.Equality using (refl)
 
 finiteODEStillOpen :
   finitePicardLindelofInstantiated canonicalRound27HighestAlphaBoundary
   ≡ false
 finiteODEStillOpen = refl
-  where open import Agda.Builtin.Equality using (refl)
 
 strictMarginStillOpen :
   strictTotalViscosityMargin canonicalRound27HighestAlphaBoundary
   ≡ false
 strictMarginStillOpen = refl
-  where open import Agda.Builtin.Equality using (refl)
 
 clayPromotionStillFalse :
   unconditionalClayTheorem canonicalRound27HighestAlphaBoundary
   ≡ false
 clayPromotionStillFalse = refl
-  where open import Agda.Builtin.Equality using (refl)
 
 finiteCertificatePassed : Certificate.allFiniteChecksPassed ≡ true
 finiteCertificatePassed = refl
-  where open import Agda.Builtin.Equality using (refl)
