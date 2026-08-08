@@ -25,10 +25,12 @@ The workflow is:
 - `NSTriadKNLuoClaimedSolutionCorpusRound24Exact.agda`
 - `NSTriadKNLuoAbuGhuwalehAdditiveFloorNoGoExact.agda`
 - `NSTriadKNLuoCamlinTemporalLiftNoGoExact.agda`
+- `NSTriadKNLuoFiniteCascadeSpeedFluxNoGoExact.agda`
+- `NSTriadKNLuoRestrictedClassDoesNotYieldClayBExact.agda`
 - `NSTriadKNLuoClaimRouteCrosswalkRound24Exact.agda`
 - `NSTriadKNLuoHighestAlphaClayLemmaLadderRound24Exact.agda`
 - `DASHI/Papers/NavierStokes/ClaimCorpusHighestAlphaRound24.agda`
 
 ## Current authority boundary
 
-The corpus search is intentionally not declared exhaustive. The two exact no-go modules disprove particular implications as written; they do not prove that every lemma in the corresponding manuscript is false. Papers with open load-bearing producers remain in the corpus until those producers are proved, repaired or falsified.
+The corpus search is intentionally not declared exhaustive. The four exact falsification/scope packages disprove particular implications or scope transfers as written; they do not prove that every lemma in the corresponding manuscript is false. Papers with open load-bearing producers remain in the corpus until those producers are proved, repaired or falsified.
