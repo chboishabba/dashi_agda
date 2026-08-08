@@ -17,6 +17,10 @@ files=(
   DASHI/Physics/YangMills/BalabanP33FlatPlaquetteFirstVariationCurlExact.agda
   DASHI/Physics/YangMills/BalabanP33CovariantCurlRadiusStressTestExact.agda
   DASHI/Physics/YangMills/BalabanP33PhysicalWilsonLinearNonlinearPartitionExact.agda
+  DASHI/Physics/YangMills/BalabanP33PhysicalWilsonCorrelatedDeepPartitionExact.agda
+  DASHI/Physics/YangMills/BalabanP33WilsonPairDeepBudgetExact.agda
+  DASHI/Physics/YangMills/BalabanP33QuaternionScaledYoungLowerExact.agda
+  DASHI/Physics/YangMills/BalabanP33WilsonDeepRemainderEnvelopeExact.agda
   DASHI/Physics/YangMills/BalabanClayHighestAlphaRound35PlaquetteCurlValidation.agda
 )
 
@@ -76,8 +80,32 @@ checks=(
   'BalabanP33PhysicalWilsonLinearNonlinearPartitionExact.agda:physicalPlaquetteWilsonDefectLinearNonlinearExact'
   'BalabanP33PhysicalWilsonLinearNonlinearPartitionExact.agda:canonicalBoundsAsRound34Control'
   'BalabanP33PhysicalWilsonLinearNonlinearPartitionExact.agda:canonicalBoundsImplyWLocal'
-  'BalabanP33PhysicalWilsonLinearNonlinearPartitionExact.agda:selectedVariationalCanonicalTerminalCoefficient'
   'BalabanP33PhysicalWilsonLinearNonlinearPartitionExact.agda:selectedVariationalCanonicalOneThirtySecond'
+  'BalabanP33PhysicalWilsonCorrelatedDeepPartitionExact.agda:fourFactorPairCountExact'
+  'BalabanP33PhysicalWilsonCorrelatedDeepPartitionExact.agda:fourFactorDeepCountExact'
+  'BalabanP33PhysicalWilsonCorrelatedDeepPartitionExact.agda:fourFactorHigherSplitsPairDeep'
+  'BalabanP33PhysicalWilsonCorrelatedDeepPartitionExact.agda:fourFactorCorrelatedDeepExpansionExact'
+  'BalabanP33PhysicalWilsonCorrelatedDeepPartitionExact.agda:physicalPlaquetteWilsonDefectCorrelatedDeepExact'
+  'BalabanP33PhysicalWilsonCorrelatedDeepPartitionExact.agda:refinedBoundsAsRound34Control'
+  'BalabanP33PhysicalWilsonCorrelatedDeepPartitionExact.agda:refinedBoundsImplyWLocal'
+  'BalabanP33PhysicalWilsonCorrelatedDeepPartitionExact.agda:selectedVariationalRefinedOneThirtySecond'
+  'BalabanP33WilsonPairDeepBudgetExact.agda:pairCoefficientExact'
+  'BalabanP33WilsonPairDeepBudgetExact.agda:deepCoefficientExact'
+  'BalabanP33WilsonPairDeepBudgetExact.agda:deepCoefficientPlusSlackIsDiagonalTarget'
+  'BalabanP33WilsonPairDeepBudgetExact.agda:deepCoefficientBelowDiagonalTarget'
+  'BalabanP33WilsonPairDeepBudgetExact.agda:diagonalTargetPlusPairExcessIsPairCoefficient'
+  'BalabanP33WilsonPairDeepBudgetExact.agda:pairPerCrossExact'
+  'BalabanP33WilsonPairDeepBudgetExact.agda:remainingCorrelatedCoefficientExact'
+  'BalabanP33QuaternionScaledYoungLowerExact.agda:scaledYoungUpperFromNorm'
+  'BalabanP33QuaternionScaledYoungLowerExact.agda:scaledYoungLowerFromNorm'
+  'BalabanP33WilsonDeepRemainderEnvelopeExact.agda:orderedProduct4NormSqExact'
+  'BalabanP33WilsonDeepRemainderEnvelopeExact.agda:product4NormUpper'
+  'BalabanP33WilsonDeepRemainderEnvelopeExact.agda:triple012NormUpper'
+  'BalabanP33WilsonDeepRemainderEnvelopeExact.agda:triple013NormUpper'
+  'BalabanP33WilsonDeepRemainderEnvelopeExact.agda:triple023NormUpper'
+  'BalabanP33WilsonDeepRemainderEnvelopeExact.agda:triple123NormUpper'
+  'BalabanP33WilsonDeepRemainderEnvelopeExact.agda:quarticNormUpper'
+  'BalabanP33WilsonDeepRemainderEnvelopeExact.agda:deepRemainderLower'
 )
 
 for check in "${checks[@]}"; do
@@ -87,54 +115,38 @@ for check in "${checks[@]}"; do
 done
 
 # Bibliographic guards.
-grep -q '10.5281/zenodo.17246443' \
-  DASHI/Physics/YangMills/YangMillsCizekEinsteinCartanClaimAuditExact.agda
-grep -q '10.5281/zenodo.17718647' \
-  DASHI/Physics/YangMills/YangMillsCizekEinsteinCartanClaimAuditExact.agda
-grep -q '10.5281/zenodo.18280110' \
-  DASHI/Physics/YangMills/YangMillsCizekEinsteinCartanClaimAuditExact.agda
-grep -q '10.1007/978-3-319-13467-3' \
-  DASHI/Physics/YangMills/BalabanP33PhysicalCovariantPlaquetteCurlExact.agda
-grep -q '10.1103/PhysRevD.10.2445' \
-  DASHI/Physics/YangMills/BalabanP33PhysicalPlaquetteFirstVariationExact.agda
-grep -q '10.1007/BF01240355' \
-  DASHI/Physics/YangMills/BalabanP33CovariantCurlDefectFactorizationExact.agda
-grep -q '10.1007/BF01229381' \
-  DASHI/Physics/YangMills/BalabanSelectedBackgroundCovariantCurlInstantiationExact.agda
-grep -q '10.1103/PhysRevD.10.2445' \
-  DASHI/Physics/YangMills/BalabanP33PhysicalWilsonLinearNonlinearPartitionExact.agda
+grep -q '10.5281/zenodo.17246443' DASHI/Physics/YangMills/YangMillsCizekEinsteinCartanClaimAuditExact.agda
+grep -q '10.5281/zenodo.17718647' DASHI/Physics/YangMills/YangMillsCizekEinsteinCartanClaimAuditExact.agda
+grep -q '10.5281/zenodo.18280110' DASHI/Physics/YangMills/YangMillsCizekEinsteinCartanClaimAuditExact.agda
+grep -q '10.1007/978-3-319-13467-3' DASHI/Physics/YangMills/BalabanP33PhysicalCovariantPlaquetteCurlExact.agda
+grep -q '10.1103/PhysRevD.10.2445' DASHI/Physics/YangMills/BalabanP33PhysicalPlaquetteFirstVariationExact.agda
+grep -q '10.1007/BF01240355' DASHI/Physics/YangMills/BalabanP33CovariantCurlDefectFactorizationExact.agda
+grep -q '10.1007/BF01229381' DASHI/Physics/YangMills/BalabanSelectedBackgroundCovariantCurlInstantiationExact.agda
+grep -q '10.1007/s00220-022-04609-1' DASHI/Physics/YangMills/BalabanP33WilsonPairDeepBudgetExact.agda
 
-# Exact theory/operator separation, transport-order, partition and adversarial guards.
-grep -q 'einsteinCartanYangMillsTheory' \
-  DASHI/Physics/YangMills/YangMillsPaperClaimAuditCarrierExact.agda
-grep -q 'boundarySlabTransferKernel' \
-  DASHI/Physics/YangMills/YangMillsPaperClaimAuditCarrierExact.agda
-grep -q 'torsionGravitySectorExactlyDecouplesToPureYM' \
-  DASHI/Physics/YangMills/YangMillsCizekEinsteinCartanClaimAuditExact.agda
-grep -q 'ultravioletContinuumOnR4ActuallyConstructed' \
-  DASHI/Physics/YangMills/YangMillsCizekEinsteinCartanClaimAuditExact.agda
-grep -Fq 'Ad_A X0 + Ad_{AB} X1' \
-  DASHI/Physics/YangMills/BalabanP33PhysicalCovariantPlaquetteCurlExact.agda
-grep -Fq -- '- Ad_{AB} X2 - Ad_{ABC^-1} X3' \
-  DASHI/Physics/YangMills/BalabanP33PhysicalCovariantPlaquetteCurlExact.agda
-grep -Fq 'Ad_U X - X' \
-  DASHI/Physics/YangMills/BalabanP33CovariantCurlDefectFactorizationExact.agda
-grep -Fq 'sum_{|S|=1}' \
-  DASHI/Physics/YangMills/BalabanP33PhysicalWilsonLinearNonlinearPartitionExact.agda
-grep -q 'four singleton terms and eleven higher-order terms' \
-  DASHI/Physics/YangMills/BalabanP33PhysicalWilsonLinearNonlinearPartitionExact.agda
-grep -q 'physicalWilsonCanonicalBoundsLevel = conditional' \
-  DASHI/Physics/YangMills/BalabanP33PhysicalWilsonLinearNonlinearPartitionExact.agda
-grep -q '67108863 / 67108865' \
-  DASHI/Physics/YangMills/BalabanP33CovariantCurlRadiusStressTestExact.agda
-grep -q '1073741824 / 4503599761588225' \
-  DASHI/Physics/YangMills/BalabanP33CovariantCurlRadiusStressTestExact.agda
-grep -q '2589569785603817471 / 10880332700790838158950400' \
-  DASHI/Physics/YangMills/BalabanP33CovariantCurlRadiusStressTestExact.agda
-grep -q 'selectedEulerLagrangeCorrelationStillRequiredLevel = conditional' \
-  DASHI/Physics/YangMills/BalabanP33CovariantCurlRadiusStressTestExact.agda
-grep -q 'selectedBackgroundCurvatureLowerProducerLevel = conditional' \
-  DASHI/Physics/YangMills/BalabanSelectedBackgroundCovariantCurlInstantiationExact.agda
+# Exact theory/operator separation, transport-order, partition and budget guards.
+grep -q 'einsteinCartanYangMillsTheory' DASHI/Physics/YangMills/YangMillsPaperClaimAuditCarrierExact.agda
+grep -q 'boundarySlabTransferKernel' DASHI/Physics/YangMills/YangMillsPaperClaimAuditCarrierExact.agda
+grep -q 'torsionGravitySectorExactlyDecouplesToPureYM' DASHI/Physics/YangMills/YangMillsCizekEinsteinCartanClaimAuditExact.agda
+grep -q 'ultravioletContinuumOnR4ActuallyConstructed' DASHI/Physics/YangMills/YangMillsCizekEinsteinCartanClaimAuditExact.agda
+grep -Fq 'Ad_A X0 + Ad_{AB} X1' DASHI/Physics/YangMills/BalabanP33PhysicalCovariantPlaquetteCurlExact.agda
+grep -Fq -- '- Ad_{AB} X2 - Ad_{ABC^-1} X3' DASHI/Physics/YangMills/BalabanP33PhysicalCovariantPlaquetteCurlExact.agda
+grep -Fq 'Ad_U X - X' DASHI/Physics/YangMills/BalabanP33CovariantCurlDefectFactorizationExact.agda
+grep -Fq 'sum_{|S|=1}' DASHI/Physics/YangMills/BalabanP33PhysicalWilsonLinearNonlinearPartitionExact.agda
+grep -q 'four singleton terms and eleven higher-order terms' DASHI/Physics/YangMills/BalabanP33PhysicalWilsonLinearNonlinearPartitionExact.agda
+grep -q 'six quadratic subset terms' DASHI/Physics/YangMills/BalabanP33PhysicalWilsonCorrelatedDeepPartitionExact.agda
+grep -q '16385 / 70368744177664' DASHI/Physics/YangMills/BalabanP33WilsonPairDeepBudgetExact.agda
+grep -q '536723447 / 633318697598976' DASHI/Physics/YangMills/BalabanP33WilsonPairDeepBudgetExact.agda
+grep -q '11 / 18874368' DASHI/Physics/YangMills/BalabanP33WilsonPairDeepBudgetExact.agda
+grep -q '55 / 18874368' DASHI/Physics/YangMills/BalabanP33WilsonPairDeepBudgetExact.agda
+grep -q 'No unresolved factor placeholder' DASHI/Physics/YangMills/BalabanP33WilsonDeepRemainderEnvelopeExact.agda
+grep -q 'physicalWilsonCorrelatedLowerLevel = conditional' DASHI/Physics/YangMills/BalabanP33PhysicalWilsonCorrelatedDeepPartitionExact.agda
+grep -q 'physicalWilsonDeepRemainderLowerLevel = conditional' DASHI/Physics/YangMills/BalabanP33PhysicalWilsonCorrelatedDeepPartitionExact.agda
+grep -q '67108863 / 67108865' DASHI/Physics/YangMills/BalabanP33CovariantCurlRadiusStressTestExact.agda
+grep -q '1073741824 / 4503599761588225' DASHI/Physics/YangMills/BalabanP33CovariantCurlRadiusStressTestExact.agda
+grep -q '2589569785603817471 / 10880332700790838158950400' DASHI/Physics/YangMills/BalabanP33CovariantCurlRadiusStressTestExact.agda
+grep -q 'selectedEulerLagrangeCorrelationStillRequiredLevel = conditional' DASHI/Physics/YangMills/BalabanP33CovariantCurlRadiusStressTestExact.agda
+grep -q 'selectedBackgroundCurvatureLowerProducerLevel = conditional' DASHI/Physics/YangMills/BalabanSelectedBackgroundCovariantCurlInstantiationExact.agda
 
 grep -Fq '[Round 35 — literal plaquette differentiation, covariant curl and adversarial stress test](./YangMillsPlaquetteCurlRound35.md)' "$index"
 grep -q 'The repeated `Ad_(A B)` is essential' "$doc"
@@ -142,7 +154,7 @@ grep -q 'four singleton terms and eleven higher-order terms' "$doc"
 grep -q 'Einstein–Cartan–Yang–Mills' "$doc"
 grep -q 'A static audit is not a kernel result' "$doc"
 grep -q 'variationalEulerLagrangeEquationAtSelectedBackground' "$doc"
-grep -q 'groupedSixteenAtomNonlinearRemainderLower' "$doc"
+grep -q 'physical selected-factor envelope' "$doc"
 
 scripts/run_agda29_parallel_check.sh \
   DASHI/Physics/YangMills/BalabanClayHighestAlphaRound35PlaquetteCurlValidation.agda
