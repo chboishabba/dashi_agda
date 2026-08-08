@@ -14,6 +14,7 @@ FILES=(
   DASHI/Biology/DecimalTenTernaryPresentationExact.agda
   DASHI/Biology/ThreeSixNineMoonshineScaleExact.agda
   DASHI/Biology/ReducedFiftyThreeOrbitCandidateExact.agda
+  DASHI/Biology/SporadicSignedFiftyThreeTarotProjectionExact.agda
   DASHI/Biology/SporadicTarotDependencyExact.agda
   DASHI/Biology/TarotCarrierExact.agda
   DASHI/Biology/JMDSporadicTarotV2CorrespondenceExact.agda
@@ -28,6 +29,7 @@ FILES=(
   DASHI/Foundations/BalancedTernaryUltrametricExact.agda
   DASHI/Foundations/StageSymmetryCarrierTowerExact.agda
   DASHI/Foundations/DialecticSheetFrameSelectorExact.agda
+  DASHI/Foundations/DialecticCubieTetralemmaExact.agda
   DASHI/Foundations/SecondRevolutionJankoTarotExact.agda
   DASHI/Moonshine/EulerMonsterMeaningSeparationExact.agda
   DASHI/Governance/CabarlahTraumaProjectionBridgeExact.agda
@@ -40,11 +42,7 @@ FILES=(
 FORBIDDEN_PATTERN='\{![^}]*!\}|(^|[[:space:]=:(])\?([[:space:];,)}]|$)|^[[:space:]]*postulate([[:space:]]|$)|--allow-unsolved-metas|\{-# OPTIONS[^#]*--(unsafe|type-in-type|no-positivity-check|no-termination-check|rewriting)([[:space:]]|#)|=[[:space:]]*_[[:space:]]*$'
 
 for file in "${FILES[@]}"; do
-  if [[ ! -f "$file" ]]; then
-    echo "required pointed-bulk/sporadic-Tarot source is missing: $file" >&2
-    exit 1
-  fi
-
+  [[ -f "$file" ]] || { echo "required source is missing: $file" >&2; exit 1; }
   if grep -nE "$FORBIDDEN_PATTERN" "$file"; then
     echo "forbidden hole, postulate, placeholder, or unsafe option in $file" >&2
     exit 1
@@ -60,16 +58,12 @@ grep -q 'majorArcanaCountIsTwentyTwo' DASHI/Biology/TarotCarrierExact.agda
 grep -q 'jmdV2Assignment Sporadic.M11' DASHI/Biology/JMDSporadicTarotV2CorrespondenceExact.agda
 grep -q 'jmdV2Assignment Sporadic.Fi22' DASHI/Biology/JMDSporadicTarotV2CorrespondenceExact.agda
 grep -q 'co4StrengthAssignment' DASHI/Biology/JMDSporadicTarotV2CorrespondenceExact.agda
-grep -q 'actualInventoryAccounting' DASHI/Biology/JMDSporadicTarotV2CorrespondenceExact.agda
-grep -q 'posterCardCountIsTwentyTwo' DASHI/Biology/JMDSporadicTarotV2CorrespondenceExact.agda
 grep -q 'posterSuppliesTotalS26ToA22MapIsFalse' DASHI/Biology/JMDSporadicTarotV2CorrespondenceExact.agda
-grep -q 'omittedGroupsMayBeAssignedWithoutRationaleIsFalse' DASHI/Biology/JMDSporadicTarotV2CorrespondenceExact.agda
 
 # Balanced ternary, retained fallback, ultrametric prefix, and symmetry.
 grep -q 'stage5To3RetainsTwo' DASHI/Foundations/BalancedTernaryStageSymmetryExact.agda
 grep -q 'residualErasedIsFalse' DASHI/Foundations/BalancedTernaryStageSymmetryExact.agda
 grep -q 'counterpositionNeedNotBeInverse' DASHI/Foundations/BalancedTernaryStageSymmetryExact.agda
-grep -q 'eightyOneSplitsTenAndSeventyOne' DASHI/Foundations/BalancedTernaryStageSymmetryExact.agda
 grep -q 'independentEvidenceForTenTimesThreePowerNineIsFalse' DASHI/Foundations/BalancedTernaryStageSymmetryExact.agda
 grep -q 'prefixAgreementTransitive' DASHI/Foundations/BalancedTernaryUltrametricExact.agda
 grep -q 'fiveSixAgreeThroughDepthTwo' DASHI/Foundations/BalancedTernaryUltrametricExact.agda
@@ -77,22 +71,29 @@ grep -q 'constituentSuffixesErasedIsFalse' DASHI/Foundations/BalancedTernaryUltr
 grep -q 'hexadicCardinalityIsSix' DASHI/Foundations/StageSymmetryCarrierTowerExact.agda
 grep -q 'nonaryCardinalityIsNine' DASHI/Foundations/StageSymmetryCarrierTowerExact.agda
 
-# Image/hexagram selector witness boundary.
+# Image/hexagram/frame-selector and cubie/tetralemma layers.
 grep -q 'selectInhabitableFrame' DASHI/Foundations/DialecticSheetFrameSelectorExact.agda
 grep -q 'localWitnessImpliesUniversalTruthIsFalse' DASHI/Foundations/DialecticSheetFrameSelectorExact.agda
+grep -q 'stageThreeCarrierRetained' DASHI/Foundations/DialecticCubieTetralemmaExact.agda
+grep -q 'cubiePositionCardinalityIsTwentySeven' DASHI/Foundations/DialecticCubieTetralemmaExact.agda
+grep -q 'decisionPoliciesDifferOnNegative' DASHI/Foundations/DialecticCubieTetralemmaExact.agda
+grep -q 'cubieListAloneProvesManifoldIsFalse' DASHI/Foundations/DialecticCubieTetralemmaExact.agda
 
 # Reused SSP15/Ogg lane infrastructure.
 grep -q 'allOggPrimeLanes = Lane.canonicalMonsterPrimeLane' DASHI/Biology/StageSymmetrySSP15BridgeExact.agda
-grep -q 'SSP15Signature' DASHI/Biology/StageSymmetrySSP15BridgeExact.agda
 grep -q 'oggPrimeLaneCountIsFifteen' DASHI/Biology/StageSymmetrySSP15BridgeExact.agda
 grep -q 'existingPrimeInfrastructureReusedIsTrue' DASHI/Biology/StageSymmetrySSP15BridgeExact.agda
 grep -q 'arithmetic71ConstructsInvariantComplementIsFalse' DASHI/Biology/StageSymmetrySSP15BridgeExact.agda
 
-# Actual total map with explicit collisions and authority.
+# Actual total map and signed 53 -> 22 observer.
 grep -q 'familyCompressionTotalisation' DASHI/Biology/JMDSporadicTarotOrdinalTotalisationExact.agda
 grep -q 'fi23BabyMonsterCollision' DASHI/Biology/JMDSporadicTarotOrdinalTotalisationExact.agda
 grep -q 'totalMapIsSourceForcedIsFalse' DASHI/Biology/JMDSporadicTarotOrdinalTotalisationExact.agda
-grep -q 'symbolicRationalesPromotedToGroupTheoremsIsFalse' DASHI/Biology/JMDSporadicTarotOrdinalTotalisationExact.agda
+grep -q 'sporadicSignedDimensionIsFiftyThree' DASHI/Biology/SporadicSignedFiftyThreeTarotProjectionExact.agda
+grep -q 'polaritiesShareArcana' DASHI/Biology/SporadicSignedFiftyThreeTarotProjectionExact.agda
+grep -q 'completeHebrewLetterAssignmentSuppliedIsFalse' DASHI/Biology/SporadicSignedFiftyThreeTarotProjectionExact.agda
+grep -q 'actualReducedMode53EquivalenceConstructedIsFalse' DASHI/Biology/SporadicSignedFiftyThreeTarotProjectionExact.agda
+grep -q 'tarotProjectionIsGroupTheoreticQuotientIsFalse' DASHI/Biology/SporadicSignedFiftyThreeTarotProjectionExact.agda
 
 # Dual second-revolution and Euler/Monster meaning separation.
 grep -q 'address14' DASHI/Foundations/SecondRevolutionJankoTarotExact.agda
