@@ -83,10 +83,11 @@ else
 fi
 
 if command -v agda >/dev/null 2>&1; then
-  agda -i . DASHI/Moonshine/Monster3BHighestAlphaValidation.agda
+  agda -i . -l standard-library \
+    DASHI/Moonshine/Monster3BHighestAlphaValidation.agda
 
   if test -s build/generated/DASHI/Moonshine/Generated/Monster3BRestrictionCertificate.agda; then
-    agda -i . -i build/generated \
+    agda -i . -i build/generated -l standard-library \
       build/generated/DASHI/Moonshine/Generated/Monster3BRestrictionCertificate.agda
   fi
 else
