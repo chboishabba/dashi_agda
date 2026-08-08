@@ -39,7 +39,8 @@ module DASHI.Physics.YangMills.BalabanP33PhysicalWilsonLinearNonlinearPartitionE
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.List.Base using (length)
-open import Data.Rational.Base as ℚ using (ℚ; _+_)
+open import Data.Rational.Base as ℚ using
+  (ℚ; _+_; _-_; _*_; -_; _≤_)
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using
   (cong; cong₂; sym; trans)
@@ -59,7 +60,6 @@ import DASHI.Physics.YangMills.BalabanSelectedBackgroundPhysicalRadiusInstantiat
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundVariationalChartBridgeExact as Selected
 import DASHI.Physics.YangMills.BalabanClayGate4BackgroundFieldVariationalTheoremExact as Variational
 import DASHI.Physics.YangMills.BalabanP33SelectedBackgroundFiniteCoercivityExact as Coercivity
-import DASHI.Physics.YangMills.BalabanP33LiteralGaugeConstraintSecondVariationExact as Literal
 import DASHI.Physics.YangMills.BalabanP33PhysicalTerminalHessianCoercivityExact as Terminal
 import DASHI.Physics.YangMills.BalabanP33Path4SignedRemainderCoercivityExact as P33
 
@@ -136,8 +136,9 @@ fourFactorNonlinearRemainder a0 a1 a2 a3 b0 b1 b2 b3 =
 
 fourFactorLinearNonlinearExpansionExact :
   ∀ a0 a1 a2 a3 b0 b1 b2 b3 →
-  Telescope.orderedProduct4 a0 a1 a2 a3
-    Telescope.-q Telescope.orderedProduct4 b0 b1 b2 b3
+  Telescope._-q_
+    (Telescope.orderedProduct4 a0 a1 a2 a3)
+    (Telescope.orderedProduct4 b0 b1 b2 b3)
   ≡ fourFactorLinearPart a0 a1 a2 a3 b0 b1 b2 b3
     Q.+q fourFactorNonlinearRemainder a0 a1 a2 a3 b0 b1 b2 b3
 fourFactorLinearNonlinearExpansionExact
@@ -291,6 +292,16 @@ physicalPlacementWilsonDefectLinearNonlinearExact
           (a0 factors) (a1 factors) (a2 factors) (a3 factors)
           (b0 factors) (b1 factors) (b2 factors) (b3 factors))))
 
+sumMapCong :
+  ∀ {A : Set} (values : List A) (left right : A → ℚ) →
+  (∀ value → left value ≡ right value) →
+  NamedSum.sumMap values left ≡ NamedSum.sumMap values right
+sumMapCong [] left right pointwise = refl
+sumMapCong (value ∷ values) left right pointwise =
+  cong₂ _+_
+    (pointwise value)
+    (sumMapCong values left right pointwise)
+
 sumMapPointwiseAdd :
   ∀ {A : Set} (values : List A) (left right : A → ℚ) →
   NamedSum.sumMap values (λ value → left value + right value)
@@ -323,7 +334,7 @@ physicalPlacementDefectSumSplitsExact :
     + physicalPlaquetteGroupedNonlinearRemainder background field plaquette
 physicalPlacementDefectSumSplitsExact background field plaquette =
   trans
-    (NamedSum.Sums.sumRationalCong
+    (sumMapCong
       Placement.plaquetteSecondVariationPlacements4
       (Named.physicalPlacementWilsonScalarDefect
         background field plaquette)
@@ -372,13 +383,13 @@ canonicalBoundsAsRound34Control :
   ∀ {background field} →
   CanonicalPhysicalWilsonBounds background field →
   WLocal.PhysicalPlaquetteLinearRemainderControl background field
-canonicalBoundsAsRound34Control bounds = record
+canonicalBoundsAsRound34Control {background} {field} bounds = record
   { WLocal.PhysicalPlaquetteLinearRemainderControl.physicalLinearPart =
-      physicalPlaquetteWilsonLinearPart _ _
+      physicalPlaquetteWilsonLinearPart background field
   ; WLocal.PhysicalPlaquetteLinearRemainderControl.physicalGroupedRemainder =
-      physicalPlaquetteGroupedNonlinearRemainder _ _
+      physicalPlaquetteGroupedNonlinearRemainder background field
   ; WLocal.PhysicalPlaquetteLinearRemainderControl.physicalDecomposition =
-      physicalPlaquetteWilsonDefectLinearNonlinearExact _ _
+      physicalPlaquetteWilsonDefectLinearNonlinearExact background field
   ; WLocal.PhysicalPlaquetteLinearRemainderControl.selectedCurvatureLinearLower =
       canonicalLinearLower bounds
   ; WLocal.PhysicalPlaquetteLinearRemainderControl.groupedSixteenAtomRemainderLower =
@@ -411,7 +422,7 @@ selectedVariationalCanonicalTerminalCoefficient :
   Terminal.terminalPhysicalCoefficient
       * Coordinates.physicalSU2BondNormSq
           (Coercivity.physicalFieldOf (Instantiation.model family) h)
-  ≤ Literal.literalTotalSecondVariation
+  ≤ Jets.literalTotalSecondVariation
       (Coercivity.selectedLiteralSecondVariation
         (Instantiation.model family) h)
 selectedVariationalCanonicalTerminalCoefficient family h bounds =
@@ -436,7 +447,7 @@ selectedVariationalCanonicalOneThirtySecond :
   P33.p33PhysicalFloor
       * Coordinates.physicalSU2BondNormSq
           (Coercivity.physicalFieldOf (Instantiation.model family) h)
-  ≤ Literal.literalTotalSecondVariation
+  ≤ Jets.literalTotalSecondVariation
       (Coercivity.selectedLiteralSecondVariation
         (Instantiation.model family) h)
 selectedVariationalCanonicalOneThirtySecond family h bounds =
