@@ -29,11 +29,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 open import Data.Product using (Σ; _,_; proj₁; proj₂)
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
-
-------------------------------------------------------------------------
--- Central phases and inversion.
-------------------------------------------------------------------------
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 data CentralPhase3 : Set where
   phaseOne phaseZeta phaseZetaSquared : CentralPhase3
@@ -53,13 +49,19 @@ zetaAndZetaSquaredDistinct : phaseZeta ≡ phaseZetaSquared → ⊥
 zetaAndZetaSquaredDistinct ()
 
 ------------------------------------------------------------------------
--- A central operator and its literal eigensectors.
+-- A central operator, its inverse, and literal eigensectors.
 ------------------------------------------------------------------------
 
 record CentralPhaseAction (State : Set) : Set₁ where
   field
     centralAct : State → State
+    centralInverseAct : State → State
     phaseScale : CentralPhase3 → State → State
+    inverseCentralOnEigenstate :
+      (phase : CentralPhase3) →
+      (state : State) →
+      centralAct state ≡ phaseScale phase state →
+      centralInverseAct state ≡ phaseScale (invertPhase phase) state
 
 open CentralPhaseAction public
 
@@ -101,23 +103,14 @@ record CentralNormalizerAction (State Normalizer : Set) : Set₁ where
       preservesOrInverts normalizer ≡ false →
       (state : State) →
       centralAct phaseAction (act normalizer state)
-      ≡ act normalizer (centralAct phaseAction state)
+      ≡ act normalizer (centralInverseAct phaseAction state)
 
-    preservingPhaseLinearity :
+    phaseLinearity :
       (normalizer : Normalizer) →
-      preservesOrInverts normalizer ≡ true →
       (phase : CentralPhase3) →
       (state : State) →
       act normalizer (phaseScale phaseAction phase state)
       ≡ phaseScale phaseAction phase (act normalizer state)
-
-    invertingPhaseSemilinearity :
-      (normalizer : Normalizer) →
-      preservesOrInverts normalizer ≡ false →
-      (phase : CentralPhase3) →
-      (state : State) →
-      act normalizer (phaseScale phaseAction phase state)
-      ≡ phaseScale phaseAction (invertPhase phase) (act normalizer state)
 
 open CentralNormalizerAction public
 
@@ -130,10 +123,6 @@ CentralInverter : ∀ {State Normalizer} →
   CentralNormalizerAction State Normalizer → Set
 CentralInverter action =
   Σ _ (λ normalizer → preservesOrInverts action normalizer ≡ false)
-
-------------------------------------------------------------------------
--- Inertia acts within a selected central-character sector.
-------------------------------------------------------------------------
 
 inertiaActsWithinPhase :
   ∀ {State Normalizer}
@@ -148,7 +137,7 @@ inertiaActsWithinPhase normalizerAction phase (normalizer , preserves) (state , 
     (preservingIntertwiner normalizerAction normalizer preserves state)
     (trans
       (cong (act normalizerAction normalizer) eigenlaw)
-      (preservingPhaseLinearity normalizerAction normalizer preserves phase state))
+      (phaseLinearity normalizerAction normalizer phase state))
 
 inertiaPreservesZetaSector :
   ∀ {State Normalizer}
@@ -158,10 +147,6 @@ inertiaPreservesZetaSector :
     CentralEigenspace (phaseAction normalizerAction) phaseZeta
 inertiaPreservesZetaSector normalizerAction =
   inertiaActsWithinPhase normalizerAction phaseZeta
-
-------------------------------------------------------------------------
--- An inverting normalizer element exchanges zeta and zeta-squared.
-------------------------------------------------------------------------
 
 inverterSwapsPhase :
   ∀ {State Normalizer}
@@ -177,8 +162,10 @@ inverterSwapsPhase normalizerAction phase (normalizer , inverts) (state , eigenl
   trans
     (invertingIntertwiner normalizerAction normalizer inverts state)
     (trans
-      (cong (act normalizerAction normalizer) eigenlaw)
-      (invertingPhaseSemilinearity normalizerAction normalizer inverts phase state))
+      (cong (act normalizerAction normalizer)
+        (inverseCentralOnEigenstate
+          (phaseAction normalizerAction) phase state eigenlaw))
+      (phaseLinearity normalizerAction normalizer (invertPhase phase) state))
 
 inverterSendsZetaToZetaSquared :
   ∀ {State Normalizer}
@@ -197,10 +184,6 @@ inverterSendsZetaSquaredToZeta :
     CentralEigenspace (phaseAction normalizerAction) phaseZeta
 inverterSendsZetaSquaredToZeta normalizerAction =
   inverterSwapsPhase normalizerAction phaseZetaSquared
-
-------------------------------------------------------------------------
--- Exact promotion contract for the actual Monster phase split.
-------------------------------------------------------------------------
 
 record ActualMonster3BPhaseResolvedSector : Set₁ where
   field
