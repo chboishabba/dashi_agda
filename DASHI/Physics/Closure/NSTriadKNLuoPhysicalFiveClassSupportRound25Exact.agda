@@ -50,7 +50,6 @@ open import Data.Sum.Base using (inj₁; inj₂)
 open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
-import DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier as Cube
 import DASHI.Physics.Closure.NSPeriodicNearTriadClassification as Near
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber as Output
@@ -59,8 +58,6 @@ import DASHI.Physics.Closure.NSTriadKNLiteralDyadicShellConstants as Shell
 import DASHI.Physics.Closure.NSTriadKNLiteralDyadicConsequencesClosed as Dyadic
 import DASHI.Physics.Closure.NSTriadKNPhysicalScaleTrichotomy as Scale
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteParaproductRangePartitionExact as Range
-
-open Cube using (_∈_)
 
 ------------------------------------------------------------------------
 -- Boolean strict-order evidence to propositional natural-number order.
@@ -104,19 +101,15 @@ noTwoInputsThreeShellsBelowOutput τ pGap qGap
 ... | inj₁ pShell≤qShell =
   Dyadic.gapThreeContradictsUpperSuccessor qGap
     (Dyadic.shellOfNormSumUpperRight
-      (Infinity.outputTriangle consequences)
+      (Infinity.outputTriangle
+        (Infinity.officialResonantNormConsequences τ))
       pShell≤qShell)
-  where
-  consequences : Infinity.OfficialResonantNormConsequences τ
-  consequences = Infinity.officialResonantNormConsequences τ
 ... | inj₂ qShell≤pShell =
   Dyadic.gapThreeContradictsUpperSuccessor pGap
     (Dyadic.shellOfNormSumUpperRight
-      (Infinity.outputTriangle consequences)
+      (Infinity.outputTriangle
+        (Infinity.officialResonantNormConsequences τ))
       qShell≤pShell)
-  where
-  consequences : Infinity.OfficialResonantNormConsequences τ
-  consequences = Infinity.officialResonantNormConsequences τ
 
 ------------------------------------------------------------------------
 -- Exact four-way classification of literal physical triads.
