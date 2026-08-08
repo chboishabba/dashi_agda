@@ -6,6 +6,7 @@ import DASHI.Moonshine.MoonshineOrbifoldMasslessStateRemovalExact as Gap
 import DASHI.Moonshine.MoonshineZ3OrbifoldThreeLocalSiblingExact as Sibling
 import DASHI.Moonshine.LeechWeightTwo196608BridgeExact as Old
 import DASHI.Moonshine.LeechWeightTwo196608AuthorityCorrectionExact as Correction
+import DASHI.Moonshine.Monster3BFiniteHeisenbergGeneratorsExact as H
 import DASHI.Moonshine.Monster3BMultiplicityEvaluationExact as Multiplicity
 import DASHI.Moonshine.Monster3BKernelCharacterCriterionExact as Character
 import DASHI.Moonshine.Monster3BNormalizerCocycleCancellationExact as Cocycle
@@ -33,6 +34,13 @@ firstPositiveConformalGradeIsTwo :
     Gap.canonicalFiniteConformalExcitationProfile ≡ 2
 firstPositiveConformalGradeIsTwo = Gap.conformalExcitationIndexIsTwo
 
+allStrictlyLowerPositiveInitialGradesAreEmpty :
+  (grade : Gap.InitialConformalGrade) →
+  Gap.PositiveGradeStrictlyBelowTwo grade →
+  Gap.IsEmpty (Gap.InitialGradeCarrier grade)
+allStrictlyLowerPositiveInitialGradesAreEmpty =
+  Gap.conformalExcitationMinimality
+
 threeLocalSiblingsHaveCommonOrigin :
   Sibling.origin Sibling.extraspecialSuzukiShape
   ≡ Sibling.origin Sibling.elementaryOmegaShape
@@ -56,6 +64,19 @@ modelMultiplicityEvaluationRoundTrip :
     (Multiplicity.evaluateModelTensor tensor)
   ≡ tensor
 modelMultiplicityEvaluationRoundTrip = Multiplicity.recoverAfterEvaluate
+
+transportedActualWeylExponentRelation :
+  ∀ {ActualSector} →
+  (recognition : Multiplicity.ActualZetaSectorRecognition ActualSector) →
+  (dual translationAxis : H.Axis6) →
+  (state : ActualSector) →
+  Multiplicity.actualModulationExponent recognition dual
+    (Multiplicity.actualTranslate recognition translationAxis state)
+  ≡ H._+3_
+      (H.kronecker dual translationAxis)
+      (Multiplicity.actualModulationExponent recognition dual state)
+transportedActualWeylExponentRelation =
+  Multiplicity.actualGeneratorWeylExponent
 
 modelKernelCharacterIsNinetyHeisenbergCopies :
   (kind : Character.ExtraspecialClassKind) →
