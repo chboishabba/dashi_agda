@@ -110,6 +110,11 @@ atomLipschitzWeightNonnegative radius radiusNN
     radiusSumNN : NonNegative (radius + radius)
     radiusSumNN = nonNegative radiusSumNonnegative
 
+    productNN : NonNegative (∣ coefficient ∣ * (radius + radius))
+    productNN =
+      ℚₚ.nonNeg*nonNeg⇒nonNeg
+        ∣ coefficient ∣ (radius + radius)
+
 atomDifferenceAbsoluteBound :
   (radius delta : ℚ) →
   0ℚ ≤ radius →
