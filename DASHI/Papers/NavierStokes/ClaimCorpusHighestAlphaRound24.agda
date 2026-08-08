@@ -4,18 +4,21 @@ module DASHI.Papers.NavierStokes.ClaimCorpusHighestAlphaRound24 where
 -- Paper-facing status surface for Round 24.
 --
 -- Claimed and conditional solution papers are retained as auditable source
--- objects.  Two exact countermodels are present.  The dependency-ordered Clay
--- ladder is explicit.  No source claim or repository status flag is permitted
--- to inhabit the physical theorem.
+-- objects.  Four exact falsification/scope packages are present.  The
+-- dependency-ordered Clay ladder is explicit.  No source claim or repository
+-- status flag is permitted to inhabit the physical theorem.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
+open import Data.Rational.Base using (1ℚ)
 open import Relation.Binary.PropositionalEquality using (_≡_; refl)
 open import Relation.Nullary.Negation using (¬_)
 
 import DASHI.Physics.Closure.NSTriadKNLuoClaimedSolutionCorpusRound24Exact as Corpus
 import DASHI.Physics.Closure.NSTriadKNLuoAbuGhuwalehAdditiveFloorNoGoExact as Abu
 import DASHI.Physics.Closure.NSTriadKNLuoCamlinTemporalLiftNoGoExact as Camlin
+import DASHI.Physics.Closure.NSTriadKNLuoFiniteCascadeSpeedFluxNoGoExact as Cascade
+import DASHI.Physics.Closure.NSTriadKNLuoRestrictedClassDoesNotYieldClayBExact as Restricted
 import DASHI.Physics.Closure.NSTriadKNLuoHighestAlphaClayLemmaLadderRound24Exact as Ladder
 import DASHI.Physics.Closure.NSTriadKNLuoClaimRouteCrosswalkRound24Exact as Crosswalk
 
@@ -27,6 +30,8 @@ record ClaimCorpusHighestAlphaRound24Status : Set where
     additiveFloorCountermodelConstructed : Bool
     finiteHorizonCountermodelConstructed : Bool
     timeChangeIntegralInvarianceConstructed : Bool
+    finiteCascadeFluxCountermodelConstructed : Bool
+    restrictedClassScopeCountermodelConstructed : Bool
     claimedRoutesCrosswalkedToPhysicalLemmas : Bool
     highestAlphaLadderNormalized : Bool
     allPhysicalProducersInhabited : Bool
@@ -38,7 +43,7 @@ canonicalClaimCorpusHighestAlphaRound24Status :
   ClaimCorpusHighestAlphaRound24Status
 canonicalClaimCorpusHighestAlphaRound24Status =
   claimCorpusHighestAlphaRound24Status
-    true false true true true true true false false
+    true false true true true true true true true false false
 
 claimCorpusIsNotProofAuthority :
   Corpus.allCorpusSourcesAreProofAuthorities ≡ false
@@ -70,6 +75,19 @@ camlinFiniteHorizonNoGo :
   ¬ Camlin.GlobalUniformHorizonBound
 camlinFiniteHorizonNoGo =
   Camlin.finiteHorizonFamilyDoesNotYieldGlobalUniformBound
+
+unitReciprocalScale : Cascade.ReciprocalScale
+unitReciprocalScale =
+  Cascade.reciprocalScale 1ℚ 1ℚ refl
+
+finiteCascadeFluxNoGo :
+  Cascade.FiniteCascadeSpeedNoGoWitness unitReciprocalScale
+finiteCascadeFluxNoGo =
+  Cascade.canonicalFiniteCascadeSpeedNoGoWitness unitReciprocalScale
+
+restrictedClassScopeNoGo : Restricted.RestrictedClassScopeWitness
+restrictedClassScopeNoGo =
+  Restricted.canonicalRestrictedClassScopeWitness
 
 abuRouteNode : Crosswalk.LadderNode
 abuRouteNode = Crosswalk.firstLoadBearingNode (Corpus.family Corpus.abuGhuwaleh)
