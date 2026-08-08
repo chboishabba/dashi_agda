@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
 """Exhaustively validate the finite-Heisenberg model used by the 3B lane.
 
-This is not a substitute for an actual MN3B matrix representation.  It proves
-that the explicit F_3^6 Schrödinger/Weyl carrier used by the dashboard has the
-claimed symplectic, character-degree, and generator commutation properties.
+The Schrodinger coordinate is X=F_3^6, with dual X*.  The extraspecial
+quotient is V=X+X*=F_3^12 with its standard alternating form.  The Weyl model
+uses the perfect evaluation pairing X* x X -> F_3.
+
+This proves the explicit model identities but does not substitute for a
+concrete MN3B matrix representation.
 """
 
 from __future__ import annotations
@@ -25,10 +28,10 @@ def vectors() -> np.ndarray:
     return np.stack([(values // (P**j)) % P for j in range(N)], axis=1)
 
 
-def symplectic_matrix() -> np.ndarray:
-    matrix = np.zeros((N, N), dtype=np.int64)
-    matrix[:3, 3:] = np.eye(3, dtype=np.int64)
-    matrix[3:, :3] = -np.eye(3, dtype=np.int64)
+def full_symplectic_matrix() -> np.ndarray:
+    matrix = np.zeros((2 * N, 2 * N), dtype=np.int64)
+    matrix[:N, N:] = np.eye(N, dtype=np.int64)
+    matrix[N:, :N] = -np.eye(N, dtype=np.int64)
     return matrix % P
 
 
@@ -50,71 +53,59 @@ def rank_mod_p(matrix: np.ndarray, p: int) -> int:
     return rank
 
 
-def pairing(xs: np.ndarray, ys: np.ndarray, form: np.ndarray) -> np.ndarray:
-    return np.einsum("...i,ij,...j->...", xs, form, ys) % P
+def evaluation(duals: np.ndarray, states: np.ndarray) -> np.ndarray:
+    return np.sum(duals * states, axis=-1) % P
 
 
 def validate() -> dict[str, int | bool]:
     xs = vectors()
-    form = symplectic_matrix()
     basis = np.eye(N, dtype=np.int64)
+    duality = np.eye(N, dtype=np.int64)
+    full_form = full_symplectic_matrix()
 
     if H != 729 or xs.shape != (729, 6):
-        raise AssertionError("unexpected F_3^6 carrier")
-    if rank_mod_p(form, P) != N:
-        raise AssertionError("symplectic form is degenerate")
-    if not np.all(pairing(xs, xs, form) == 0):
-        raise AssertionError("symplectic form is not alternating")
+        raise AssertionError("unexpected X=F_3^6 carrier")
+    if rank_mod_p(duality, P) != N:
+        raise AssertionError("X-X* evaluation pairing is degenerate")
+    if rank_mod_p(full_form, P) != 2 * N:
+        raise AssertionError("full symplectic quotient form is degenerate")
+    if not np.array_equal((full_form + full_form.T) % P, np.zeros_like(full_form)):
+        raise AssertionError("full quotient form is not alternating")
+    if np.any(np.diag(full_form) % P):
+        raise AssertionError("full quotient form has nonzero diagonal")
 
-    # Exhaustive generator-level bilinearity.  Since the six basis vectors
-    # generate F_3^6, these checks certify the implemented linear formula.
-    for e in basis:
-        lhs_left = pairing((xs + e) % P, basis[:, None, :], form)
-        rhs_left = (
-            pairing(xs[None, :, :], basis[:, None, :], form)
-            + pairing(
-                np.broadcast_to(e, xs.shape)[None, :, :],
-                basis[:, None, :],
-                form,
-            )
-        ) % P
-        if not np.array_equal(lhs_left, rhs_left):
-            raise AssertionError("left bilinearity failed")
-
-    # Weyl relation for all 36 standard translation/modulation generator
-    # pairs and all 729 basis states.  We use
-    #
-    #   T_a e_x = e_{x+a},
-    #   M_b e_x = zeta^{<b,x>} e_x,
-    #
-    # hence M_b T_a = zeta^{<b,a>} T_a M_b.
-    generator_checks = 0
+    # Bilinearity of the perfect X*-X pairing for every state and standard
+    # basis generator on each side.
+    bilinear_checks = 0
     for a in basis:
         shifted = (xs + a) % P
         for b in basis:
             repeated_b = np.broadcast_to(b, xs.shape)
-            left_phase = ZETA ** pairing(repeated_b, shifted, form)
+            lhs = evaluation(repeated_b, shifted)
+            rhs = (
+                evaluation(repeated_b, xs)
+                + int(evaluation(b, a))
+            ) % P
+            if not np.array_equal(lhs, rhs):
+                raise AssertionError("evaluation pairing bilinearity failed")
+            bilinear_checks += H
+
+    # T_a e_x=e_(x+a), M_b e_x=zeta^<b,x>e_x, hence
+    # M_b T_a=zeta^<b,a>T_a M_b.
+    weyl_checks = 0
+    for a in basis:
+        shifted = (xs + a) % P
+        for b in basis:
+            repeated_b = np.broadcast_to(b, xs.shape)
+            left_phase = ZETA ** evaluation(repeated_b, shifted)
             right_phase = (
-                ZETA ** int(pairing(b, a, form))
-                * ZETA ** pairing(repeated_b, xs, form)
+                ZETA ** int(evaluation(b, a))
+                * ZETA ** evaluation(repeated_b, xs)
             )
             if not np.allclose(left_phase, right_phase, atol=1e-12, rtol=0):
                 raise AssertionError("Weyl commutation relation failed")
-            generator_checks += H
+            weyl_checks += H
 
-    linear_character_count = P ** (2 * 3)
-    nonlinear_character_count = P - 1
-    nonlinear_character_degree = P**3
-    extraspecial_order = P ** (1 + 2 * 3)
-    degree_sum_squares = (
-        linear_character_count
-        + nonlinear_character_count * nonlinear_character_degree**2
-    )
-    if degree_sum_squares != extraspecial_order:
-        raise AssertionError("extraspecial character-degree sum of squares failed")
-
-    # The Monster case uses n=6 rather than n=3.  Check its exact scale
-    # separately without allocating 3^12 states.
     monster_heisenberg_degree = 3**6
     monster_linear_count = 3**12
     monster_extraspecial_order = 3**13
@@ -128,28 +119,49 @@ def validate() -> dict[str, int | bool]:
     if 10 * 3**8 != 90 * 3**6:
         raise AssertionError("10*3^8 and 90*3^6 charts disagree")
 
-    # Leech/weight-two coordinate identity explaining the integer 196608.
+    # A two-plane U in the translation Lagrangian has order nine.  C[X]
+    # restricts to 3^(6-2)=81 copies of Reg(U).
+    if 3**2 != 9 or 3 ** (6 - 2) != 81 or 9 * 81 != H:
+        raise AssertionError("Lagrangian two-plane restriction identity failed")
+
+    full_two_planes = 5883904390
+    full_isotropic_two_planes = 1961279320
+    full_nonisotropic_two_planes = 3922625070
+    if 16 * full_two_planes != (3**12 - 1) * (3**11 - 1):
+        raise AssertionError("full Gaussian two-plane count failed")
+    if 16 * full_isotropic_two_planes != (3**12 - 1) * (3**10 - 1):
+        raise AssertionError("full isotropic two-plane count failed")
+    if full_isotropic_two_planes + full_nonisotropic_two_planes != full_two_planes:
+        raise AssertionError("full symplectic two-plane partition failed")
+
+    # Leech weight-two coordinate subtotal and correctly placed conformal line.
     if 196560 + 24 + 24 != 196608:
         raise AssertionError("Leech coordinate subtotal failed")
     if 2 * 276 != 24 * 23:
         raise AssertionError("off-diagonal pair count failed")
     if 196608 + 276 != 196884:
         raise AssertionError("Leech weight-two completion failed")
-    if 196608 + 275 != 196883:
-        raise AssertionError("Monster nontrivial degree completion failed")
+    if 196560 + 24 + 23 + 276 != 196883:
+        raise AssertionError("conformal-line quotient failed")
 
     return {
         "field_prime": P,
-        "schrodinger_coordinate_dimension": N,
+        "lagrangian_dimension": N,
         "schrodinger_state_count": H,
-        "symplectic_rank": rank_mod_p(form, P),
-        "alternating_state_checks": H,
-        "weyl_generator_state_checks": generator_checks,
+        "perfect_pairing_rank": rank_mod_p(duality, P),
+        "full_symplectic_dimension": 2 * N,
+        "full_symplectic_rank": rank_mod_p(full_form, P),
+        "pairing_bilinearity_state_checks": bilinear_checks,
+        "weyl_generator_state_checks": weyl_checks,
         "monster_heisenberg_degree": monster_heisenberg_degree,
         "monster_extraspecial_order": monster_extraspecial_order,
         "monster_degree_sum_squares": monster_degree_sum_squares,
         "monster_multiplicity_degree": 90,
         "monster_nontrivial_phase_degree": 65610,
+        "translation_two_plane_order": 9,
+        "regular_restriction_multiplicity": 81,
+        "full_symplectic_two_plane_count": full_two_planes,
+        "full_isotropic_two_plane_count": full_isotropic_two_planes,
         "leech_coordinate_subtotal": 196608,
         "leech_off_diagonal_pairs": 276,
         "all_checks_passed": True,
