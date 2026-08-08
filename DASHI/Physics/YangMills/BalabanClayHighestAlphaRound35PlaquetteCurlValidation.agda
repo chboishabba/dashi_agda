@@ -23,7 +23,10 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound35PlaquetteCurlValida
 --     arbitrary caller field;
 --   * an exact rational adversarial test proves that the configured radius and
 --     flat cancellation alone do not imply the target correlated curvature
---     scale.
+--     scale;
+--   * the newly surfaced Einstein--Cartan Yang--Mills monograph and its later
+--     slab-kernel paper are audited with distinct theory/operator signatures,
+--     rather than treated as proof receipts.
 --
 -- The selected-background Euler--Lagrange curvature estimate and the sharp
 -- lower bounds on the now-canonical linear and grouped nonlinear terms remain
@@ -38,3 +41,4 @@ import DASHI.Physics.YangMills.BalabanSelectedBackgroundCovariantCurlInstantiati
 import DASHI.Physics.YangMills.BalabanP33FlatPlaquetteFirstVariationCurlExact
 import DASHI.Physics.YangMills.BalabanP33CovariantCurlRadiusStressTestExact
 import DASHI.Physics.YangMills.BalabanP33PhysicalWilsonLinearNonlinearPartitionExact
+import DASHI.Physics.YangMills.YangMillsCizekEinsteinCartanClaimAuditExact
