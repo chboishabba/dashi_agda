@@ -10,7 +10,6 @@ module DASHI.Papers.NavierStokes.ClaimCorpusHighestAlphaRound24 where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
-open import Data.Rational.Base using (1ℚ)
 open import Relation.Binary.PropositionalEquality using (_≡_; refl)
 open import Relation.Nullary.Negation using (¬_)
 
@@ -76,14 +75,11 @@ camlinFiniteHorizonNoGo :
 camlinFiniteHorizonNoGo =
   Camlin.finiteHorizonFamilyDoesNotYieldGlobalUniformBound
 
-unitReciprocalScale : Cascade.ReciprocalScale
-unitReciprocalScale =
-  Cascade.reciprocalScale 1ℚ 1ℚ refl
-
 finiteCascadeFluxNoGo :
-  Cascade.FiniteCascadeSpeedNoGoWitness unitReciprocalScale
+  Cascade.FiniteCascadeSpeedNoGoWitness Cascade.unitReciprocalScale
 finiteCascadeFluxNoGo =
-  Cascade.canonicalFiniteCascadeSpeedNoGoWitness unitReciprocalScale
+  Cascade.canonicalFiniteCascadeSpeedNoGoWitness
+    Cascade.unitReciprocalScale
 
 restrictedClassScopeNoGo : Restricted.RestrictedClassScopeWitness
 restrictedClassScopeNoGo =
