@@ -6,6 +6,7 @@ import DASHI.Biology.SSP15ComplementPhaseProjectorExact as Internal
 import DASHI.Biology.OggPrimeNonaryAddressExact as Address
 import DASHI.Biology.JCoarseFineEvaluationFibreExact as J
 import DASHI.Biology.SSP15NineObserverAtlasExact as Atlas
+import DASHI.Biology.StageSymmetrySSP15BridgeExact as Bridge
 import DASHI.Biology.SSP15JCoarseFineIntegratedExact as Integrated
 import DASHI.Biology.BalancedTernaryHarmonicCarrierExact as Harmonic
 import DASHI.Physics.Closure.MoonshinePrimeLaneReceiptSurface as Lane
@@ -48,9 +49,24 @@ allOggAddressesReconstructTheirPrime :
 allOggAddressesReconstructTheirPrime prime =
   Address.addressExact (Address.nonaryOggAddress prime)
 
+primeSpecificBridgeReconstructsEveryLane :
+  (prime : Lane.MonsterPrimeLane) →
+  Lane.monsterPrimeLaneToNat prime
+  ≡ Address.coarseSheets
+      (Bridge.nonaryAddress (Bridge.canonicalPrimeSpecificSSP15 prime)) * 9
+    + Address.remainder
+      (Bridge.nonaryAddress (Bridge.canonicalPrimeSpecificSSP15 prime))
+primeSpecificBridgeReconstructsEveryLane =
+  Bridge.primeSpecificAddressReconstructsLane
+
 p71IsSevenSheetsPlusEight :
   Lane.monsterPrimeLaneToNat Lane.p71 ≡ 7 * 9 + 8
 p71IsSevenSheetsPlusEight = refl
+
+p71PrimeSpecificBridgeDepth :
+  Address.coarseSheets
+    (Bridge.nonaryAddress (Bridge.canonicalPrimeSpecificSSP15 Lane.p71)) ≡ 7
+p71PrimeSpecificBridgeDepth = Bridge.p71PrimeSpecificCoarseDepth
 
 p71RemovesBinaryFiveInterface : 71 + 5 * 2 ≡ 81
 p71RemovesBinaryFiveInterface =
