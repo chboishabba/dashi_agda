@@ -18,6 +18,7 @@ The workflow is:
 
 - [Audit matrix](audit-matrix.md)
 - [Highest-alpha lemma ladder](highest-alpha-lemma-ladder.md)
+- [Verification phase](verification.md)
 
 ## Formal modules
 
