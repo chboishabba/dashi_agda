@@ -2,7 +2,7 @@
 ' C4-style component view without a remote include.
 ' Parent document: README.md
 
-title DASHI periodic Navier–Stokes Clay contract
+title DASHI periodic Navier–Stokes Clay contract and paper-audit route
 
 skinparam componentStyle rectangle
 skinparam wrapWidth 220
@@ -13,6 +13,12 @@ actor "Mathematical reviewer" as Reviewer
 
 package "Official requirement boundary" {
   component "Fefferman periodic alternative B\nExact preconditions and postconditions" as ClayTarget <<Requirement>>
+}
+
+package "Claim corpus and falsification" {
+  component "Broad claimed-paper corpus\npeer-reviewed, arXiv, repositories, web" as Corpus <<Source registry>>
+  component "Exact countermodels\nadditive floor, horizon quantifier, time change" as NoGo <<Checked exact>>
+  component "Claim-family to first physical lemma crosswalk" as Crosswalk <<Checked reducer>>
 }
 
 package "Finite analytic system" {
@@ -37,10 +43,16 @@ package "Submission adaptation system" {
 }
 
 package "Assurance system" {
-  component "Round 23 cumulative Agda root" as AgdaRoot <<Verification>>
-  component "Static no-hole and provenance checker" as Checker <<Verification>>
+  component "Round 24 cumulative Agda root" as AgdaRoot <<Verification>>
+  component "Static no-hole, source and link checker" as Checker <<Verification>>
   component "Change, risk and traceability record" as Governance <<Governance>>
 }
+
+Corpus --> NoGo : isolate first load-bearing implication
+Corpus --> Crosswalk : retain surviving local lemmas
+NoGo --> Crosswalk : reject or narrow false routes
+Crosswalk --> Tax : assign physical producer lane
+Crosswalk --> Margin : assign strict-budget lane
 
 Galerkin --> Defect : actual Fourier cells
 Defect --> Tax : five named source terms
@@ -55,17 +67,26 @@ Adapter --> Galilean : centered literal witness
 Galilean --> Literal : arbitrary periodic datum
 Literal --> ClayTarget : inhabits exact theorem type
 
-AgdaRoot ..> Galerkin : imports
-AgdaRoot ..> Defect : imports
-AgdaRoot ..> Gronwall : imports
-AgdaRoot ..> Limits : imports
-AgdaRoot ..> Restart : imports
-AgdaRoot ..> Adapter : imports
-AgdaRoot ..> Galilean : imports
+AgdaRoot ..> Corpus : imports
+AgdaRoot ..> NoGo : imports
+AgdaRoot ..> Crosswalk : imports
+AgdaRoot ..> Galerkin : imports through Round 23
+AgdaRoot ..> Defect : imports through Round 23
+AgdaRoot ..> Gronwall : imports through Round 23
+AgdaRoot ..> Limits : imports through Round 23
+AgdaRoot ..> Restart : imports through Round 23
+AgdaRoot ..> Adapter : imports through Round 23
+AgdaRoot ..> Galilean : imports through Round 23
 Checker ..> AgdaRoot : executes pinned Agda check
 Governance ..> Checker : quality and change gates
 Reviewer --> Governance : reviews evidence
-Reviewer --> ClayTarget : checks source fidelity
+Reviewer --> Corpus : verifies source fidelity
+Reviewer --> ClayTarget : checks exact target
+
+note right of Corpus
+The search is not declared exhaustive.
+Claimed conclusion is never proof authority.
+end note
 
 note right of Tax
 Open: uniform physical bounds in q, Q and N.
