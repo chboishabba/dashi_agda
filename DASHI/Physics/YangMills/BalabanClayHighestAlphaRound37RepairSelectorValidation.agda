@@ -37,8 +37,8 @@ explicitSelectorChargeIsHalfSquare =
   Repair.selectedPlaquetteVariationChargeExact
 
 residualLedgerClosesExactBudget :
-  Residual.gaugeCoefficient + Residual.constraintCoefficient
-  + Residual.transportCoefficient + Residual.boundaryCoefficient
+  (Residual.gaugeCoefficient + Residual.constraintCoefficient)
+  + (Residual.transportCoefficient + Residual.boundaryCoefficient)
   ≡ Residual.totalResidualCoefficient
 residualLedgerClosesExactBudget =
   Residual.residualCoefficientLedgerExact
