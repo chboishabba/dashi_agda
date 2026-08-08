@@ -27,10 +27,12 @@ module DASHI.Moonshine.Monster3BMultiplicityEvaluationExact where
 --   H_model x S_model ~= ZetaModelBasis.
 --
 -- Each multiplicity coordinate gives a translation-equivariant embedding of
--- the Schrodinger basis.  A single actual-sector recognition isomorphism that
--- intertwines the six translations then transports the projector resolution
--- and fixed-point-free theorem to that actual sector.  This minimizes the
--- remaining promotion input without pretending it has already been supplied.
+-- the Schrodinger basis.  One actual-sector recognition isomorphism now
+-- retains both the six translations and the six modulation-exponent observers.
+-- From those inputs all 36 standard Weyl exponent relations, projector
+-- transport, and translation fixed-point-freedom are derived.  This minimizes
+-- the remaining promotion input without pretending it has already been
+-- supplied by the actual Monster representation.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false)
@@ -40,6 +42,7 @@ open import Data.Empty using (⊥)
 open import Data.Fin.Base using (Fin)
 open import Data.Product using (_×_; _,_; proj₁; proj₂)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import DASHI.Algebra.Trit using (Trit)
 
 import DASHI.Moonshine.Monster3BFiniteHeisenbergGeneratorsExact as H
 import DASHI.Moonshine.Monster3BFiniteProjectorModelExact as Model
@@ -88,6 +91,15 @@ multiplicityEmbeddingTranslationEquivariant :
       (multiplicityEmbedding multiplicity position)
 multiplicityEmbeddingTranslationEquivariant multiplicity axis position = refl
 
+multiplicityEmbeddingModulationExponent :
+  (multiplicity : ModelMultiplicitySpace) →
+  (axis : H.Axis6) →
+  (position : ModelHeisenbergBasis) →
+  H.modulationExponent axis
+    (Model.weightPosition (multiplicityEmbedding multiplicity position))
+  ≡ H.modulationExponent axis position
+multiplicityEmbeddingModulationExponent multiplicity axis position = refl
+
 modelHeisenbergDimension : Nat
 modelHeisenbergDimension = 729
 
@@ -123,7 +135,8 @@ canonicalModelMultiplicityEvaluationIsomorphism =
 
 ------------------------------------------------------------------------
 -- One proof-bearing promotion object replaces a collection of unrelated
--- "actual sector" Booleans.
+-- "actual sector" Booleans.  Translation and modulation are distinct data:
+-- the latter records the exponent read by the diagonal Weyl generator.
 ------------------------------------------------------------------------
 
 record ActualZetaSectorRecognition (ActualSector : Set) : Set where
@@ -134,12 +147,21 @@ record ActualZetaSectorRecognition (ActualSector : Set) : Set where
     fromAfterTo : (state : ActualSector) → fromModel (toModel state) ≡ state
     toAfterFrom :
       (basis : Model.ZetaModelBasis) → toModel (fromModel basis) ≡ basis
+
     actualTranslate : H.Axis6 → ActualSector → ActualSector
     translationIntertwines :
       (axis : H.Axis6) →
       (state : ActualSector) →
       toModel (actualTranslate axis state)
       ≡ Model.translatedBasis axis (toModel state)
+
+    actualModulationExponent : H.Axis6 → ActualSector → Trit
+    modulationExponentIntertwines :
+      (axis : H.Axis6) →
+      (state : ActualSector) →
+      actualModulationExponent axis state
+      ≡ H.modulationExponent axis
+          (Model.weightPosition (toModel state))
 
 open ActualZetaSectorRecognition public
 
@@ -189,6 +211,25 @@ actualProjectorTranslationCovariant recognition axis selected state
   Resolution.projectorResolutionTranslationCovariant
     axis selected (toModel recognition state)
 
+actualGeneratorWeylExponent :
+  ∀ {ActualSector} →
+  (recognition : ActualZetaSectorRecognition ActualSector) →
+  (dual translationAxis : H.Axis6) →
+  (state : ActualSector) →
+  actualModulationExponent recognition dual
+    (actualTranslate recognition translationAxis state)
+  ≡ H._+3_
+      (H.kronecker dual translationAxis)
+      (actualModulationExponent recognition dual state)
+actualGeneratorWeylExponent recognition dual translationAxis state
+  rewrite modulationExponentIntertwines recognition dual
+            (actualTranslate recognition translationAxis state)
+        | translationIntertwines recognition translationAxis state
+        | modulationExponentIntertwines recognition dual state =
+  H.generatorWeylExponent
+    dual translationAxis
+    (Model.weightPosition (toModel recognition state))
+
 actualStandardTranslationFixedPointFree :
   ∀ {ActualSector} →
   (recognition : ActualZetaSectorRecognition ActualSector) →
@@ -216,11 +257,15 @@ record MultiplicityPromotionBoundary : Set where
     actualKernelClassCharacterCertified : Bool
     actualKernelClassCharacterCertifiedIsFalse :
       actualKernelClassCharacterCertified ≡ false
+    actualWeylGeneratorRecognitionConstructed : Bool
+    actualWeylGeneratorRecognitionConstructedIsFalse :
+      actualWeylGeneratorRecognitionConstructed ≡ false
 
 canonicalMultiplicityPromotionBoundary : MultiplicityPromotionBoundary
 canonicalMultiplicityPromotionBoundary =
   multiplicity-promotion-boundary
     recoverAfterEvaluate
     modelTensorDimensionIs65610
+    false refl
     false refl
     false refl
