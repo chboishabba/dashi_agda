@@ -32,7 +32,7 @@ The reducers for steps 2, 4, the order-theoretic part of 5, the contradiction lo
 
 Round 24 adds a broad [claimed-paper corpus](paper-corpus/README.md), including low-authority and claimed-solution papers. Each source is mapped to its first load-bearing physical lemma, and exact countermodels are retained where a displayed implication fails.
 
-Round 25 closes the discrete support part of that path. The [literal physical carrier and five-class support tranche](physical-carrier-support-round25.md) proves duplicate-free output fibres, the low-low-to-far-high obstruction, exhaustive and unique physical triad classification, and exact `HH+LH+HL+CC+Com` recomposition. L4 is now checked exact; L3 is narrowed to finite-dimensional continuum ODE existence and constraint propagation.
+Round 25 closes the discrete support part of that path. The [literal physical carrier and five-class support tranche](physical-carrier-support-round25.md) proves duplicate-free output fibres, the low-low-to-far-high obstruction, exhaustive and unique physical triad classification, and exact `HH+LH+HL+CC+Com` recomposition after evaluating the appended `Com` cell with a mode-indexed commutator functional. L4 is now checked exact; L3 is narrowed to finite-dimensional continuum ODE existence and constraint propagation.
 
 ### 3. What are the preconditions, postconditions and invariants?
 
