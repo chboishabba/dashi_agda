@@ -318,7 +318,7 @@ record BalancedTernaryAddress : Set where
     denominatorClearedEquation :
       representedValue + balancingDebt ≡ promotedWeight
     decodedWeightsExact :
-      addressWeights digitsHighToLow ≡ promotedWeight , balancingDebt
+      addressWeights digitsHighToLow ≡ (promotedWeight , balancingDebt)
 
 fiveBalancedAddress : BalancedTernaryAddress
 fiveBalancedAddress =
