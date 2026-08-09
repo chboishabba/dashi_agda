@@ -28,7 +28,7 @@ module DASHI.Physics.YangMills.BalabanP33ConstraintGramD4CovarianceExact where
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Rational.Base as ℚ using (ℚ; _*_)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
@@ -79,12 +79,22 @@ constraintGramCovariantUnderD4 :
 constraintGramCovariantUnderD4 {pseudoData = pseudoData}
     covariance symmetry multiplier row =
   trans
-    (constraintCovariant covariance symmetry
-      (Pseudo.constraintAdjointApply pseudoData multiplier) row)
-    (cong
-      (λ transported →
-        multiplierTransport covariance symmetry transported row)
-      (Pseudo.constraintGramActionExact pseudoData multiplier row))
+    (sym
+      (Pseudo.constraintGramActionExact pseudoData
+        (multiplierTransport covariance symmetry multiplier) row))
+    (trans
+      (Rect.applyRectangularVectorCong
+        KKT.physicalStateCarrier
+        (Pseudo.constraintMatrix pseudoData)
+        (adjointCovariant covariance symmetry multiplier)
+        row)
+      (trans
+        (constraintCovariant covariance symmetry
+          (Pseudo.constraintAdjointApply pseudoData multiplier) row)
+        (cong
+          (λ value →
+            multiplierTransport covariance symmetry value row)
+          (Pseudo.constraintGramActionExact pseudoData multiplier row))))
 
 record ConstraintPseudoinverseD4Covariance
     {Multiplier : Set}
