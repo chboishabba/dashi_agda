@@ -14,6 +14,7 @@ on:
       - 'DASHI/Biology/IndexedJExternalGluingExact.agda'
       - 'DASHI/Biology/IteratedPointedAttachmentSpiralExact.agda'
       - 'DASHI/Moonshine/MathieuDivisorLatticeExact.agda'
+      - 'DASHI/Moonshine/MathieuDivisorPathInterferenceExact.agda'
       - 'DASHI/Moonshine/MathieuJTransportIntegrationExact.agda'
       - 'DASHI/Moonshine/MathieuStabilizerTowerExact.agda'
       - 'DASHI/Moonshine/Monster196884FibreInterferenceExact.agda'
