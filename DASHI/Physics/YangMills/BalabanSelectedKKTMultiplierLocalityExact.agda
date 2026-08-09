@@ -29,16 +29,13 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; _+_; _*_; _≤_; ∣_∣)
+  (ℚ; 0ℚ; _+_; _*_; _≤_; ∣_∣; NonNegative)
 import Data.Rational.Properties as ℚP
-import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
 import DASHI.Physics.YangMills.BalabanConstructiveRationalMatrixInverseExact as Matrix
-import DASHI.Physics.YangMills.BalabanFiniteRectangularRationalExact as Rect
-import DASHI.Physics.YangMills.BalabanP33FiniteKKTAdmissibleProjectorExact as KKT
 import DASHI.Physics.YangMills.BalabanP33FiniteKKTPseudoinverseProjectorExact as Pseudo
 import DASHI.Physics.YangMills.BalabanP33FiniteWeightedRowSumContractionExact as Row
 import DASHI.Physics.YangMills.BalabanP33FiniteCombesThomasTiltBudgetExact as Tilt
@@ -168,11 +165,7 @@ restrictedMultiplierPointwiseBound
     collar multiplier weight majorant majorantNonnegative
     weightNonnegative pointwise row with collar row
 ... | true = pointwise row
-... | false =
-  subst
-    (λ right → 0ℚ ≤ right)
-    (sym (ℚRing.solve-∀ majorant))
-    ℚP.≤-refl
+... | false = ℚP.≤-refl
 
 selectedMultiplierCollarNormUpper :
   ∀ {Multiplier}
@@ -192,10 +185,22 @@ selectedMultiplierCollarNormUpper
   let
     majorant =
       greenWeightedRowMajorant locality * sourceMajorant locality
-    majorantNonnegative =
-      ℚP.*-mono-≤
-        (greenMajorantNonnegative locality)
-        (sourceMajorantNonnegative locality)
+
+    instance
+      greenNN : NonNegative (greenWeightedRowMajorant locality)
+      greenNN = ℚ.nonNegative (greenMajorantNonnegative locality)
+
+      sourceNN : NonNegative (sourceMajorant locality)
+      sourceNN = ℚ.nonNegative (sourceMajorantNonnegative locality)
+
+      majorantNN : NonNegative majorant
+      majorantNN = ℚP.nonNeg*nonNeg⇒nonNeg
+        (greenWeightedRowMajorant locality)
+        (sourceMajorant locality)
+
+    majorantNonnegative : 0ℚ ≤ majorant
+    majorantNonnegative = ℚP.nonNegative⁻¹ majorant
+
     pointwise = restrictedMultiplierPointwiseBound
       collar
       (Pseudo.pseudoApply pseudoData source)
