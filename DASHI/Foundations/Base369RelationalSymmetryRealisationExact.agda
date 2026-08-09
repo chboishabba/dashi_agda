@@ -18,6 +18,7 @@ open import DASHI.Foundations.Base369NonaryTritSquareExact using
   ; nonaryDigitToLowTrit
   ; negateSSPTrit
   ; complementNonaryDigit
+  ; complementNonaryDigitInvolutive
   ; complementReversesLowTrit
   )
 
@@ -64,7 +65,7 @@ nonaryComplementRealisation =
     nonaryDigitToLowTrit
     (λ _ → uninstantiated)
     complementNonaryDigit
-    DASHI.Foundations.Base369NonaryTritSquareExact.complementNonaryDigitInvolutive
+    complementNonaryDigitInvolutive
     complementReversesLowTrit
     (λ state → state)
     (λ state → state)
