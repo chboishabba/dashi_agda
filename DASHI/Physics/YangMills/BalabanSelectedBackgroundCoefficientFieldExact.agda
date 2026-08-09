@@ -79,11 +79,11 @@ open SelectedBackgroundCoefficientField public
 
 record RationalRealisation
     {Background ConstraintIndex StateIndex FrameIndex : Set}
-    (data : SelectedBackgroundCoefficientField
+    (fieldData : SelectedBackgroundCoefficientField
       Background ConstraintIndex StateIndex FrameIndex)
     (background : Background) : Set₁ where
   field
-    rationalEmbedding : ℚ → Scalar (coefficientField data)
+    rationalEmbedding : ℚ → Scalar (coefficientField fieldData)
 
     constraintRationalRepresentative :
       ConstraintIndex → StateIndex → ℚ
@@ -91,12 +91,12 @@ record RationalRealisation
       StateIndex → FrameIndex → ℚ
 
     constraintEntriesAreRational : ∀ row coordinate →
-      constraintEntry data background row coordinate
+      constraintEntry fieldData background row coordinate
       ≡ rationalEmbedding
           (constraintRationalRepresentative row coordinate)
 
     frameEntriesAreRational : ∀ coordinate frameCoordinate →
-      frameEntry data background coordinate frameCoordinate
+      frameEntry fieldData background coordinate frameCoordinate
       ≡ rationalEmbedding
           (frameRationalRepresentative coordinate frameCoordinate)
 
@@ -104,21 +104,21 @@ open RationalRealisation public
 
 record RationalFrameAuthority
     {Background ConstraintIndex StateIndex FrameIndex : Set}
-    (data : SelectedBackgroundCoefficientField
+    (fieldData : SelectedBackgroundCoefficientField
       Background ConstraintIndex StateIndex FrameIndex)
     (background : Background) : Set₁ where
   field
-    realisation : RationalRealisation data background
+    realisation : RationalRealisation fieldData background
 
 open RationalFrameAuthority public
 
 rationalFrameAvailableOnlyFromLiteralEntries :
   ∀ {Background ConstraintIndex StateIndex FrameIndex}
-    {data : SelectedBackgroundCoefficientField
+    {fieldData : SelectedBackgroundCoefficientField
       Background ConstraintIndex StateIndex FrameIndex}
     {background} →
-  RationalRealisation data background →
-  RationalFrameAuthority data background
+  RationalRealisation fieldData background →
+  RationalFrameAuthority fieldData background
 rationalFrameAvailableOnlyFromLiteralEntries realisation = record
   { realisation = realisation }
 
