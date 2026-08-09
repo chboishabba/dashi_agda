@@ -7,21 +7,22 @@ This document abstracts a recurring parent–child communication pattern without
 A conversation maintains a provisional shared state
 
 \[
-S_t=(O_t,C_t,P_t,Q_t,A_t,D_t,U_t,R_t),
+S_t=(O_t,C_t,P_t,Q_t,A_t,D_t,H_t,U_t,R_t),
 \]
 
-where the components record:
+where:
 
-- \(O_t\): current conversational object;
-- \(C_t\): contribution history;
-- \(P_t\): explicitly retained durable preferences, each with owner, scope, time, and provenance;
-- \(Q_t\): unresolved questions;
-- \(A_t\): recorded assents and refusals;
-- \(D_t\): decision kind and provenance;
-- \(U_t\): attributed future obligations;
-- \(R_t\): rupture status.
+- \(O_t\) is the current conversational object;
+- \(C_t\) is the ordered contribution history;
+- \(P_t\) is the typed durable-preference state;
+- \(Q_t\) is the set of unresolved questions;
+- \(A_t\) records assents and refusals;
+- \(D_t\) is the current decision and provenance;
+- \(H_t\) is retained decision history;
+- \(U_t\) records attributed future obligations;
+- \(R_t\) records unresolved rupture status.
 
-A preference contribution does not automatically become a durable preference. Promotion into \(P_t\) requires an explicit retained state object.
+`DurablePreference` is not merely a preference utterance. It records owner, label, scope, time, and provenance. A preference contribution enters \(P_t\) only through an explicit `DurablePreferenceTransition`.
 
 A contribution may be heard without being taken up:
 
@@ -29,21 +30,23 @@ A contribution may be heard without being taken up:
 \operatorname{Heard}(c)\not\Rightarrow\operatorname{Uptaken}(c).
 \]
 
-The Agda `Uptaken c before after` type now requires an exact `ContributionTransition` witness:
+The Agda `Uptaken c before after` contract is proof-carrying. It requires a `ContributionTransition c before after` proving:
 
-\[
-\operatorname{contributions}(after)
-=
-c::\operatorname{contributions}(before).
-\]
+1. the after-state contribution history is exactly
+   \[
+   C_{t+1}=c::C_t;
+   \]
+2. the contribution is classified as a retained non-question, an open question, a question resolved by assent, or a question resolved by refusal;
+3. the durable-preference list is either preserved for a non-preference contribution or extended by a preference whose owner and label match the contribution;
+4. both the prior and current decision records occur in the after-state decision history.
 
-Only after that state transition is proved does the uptake record describe whether the contribution retained its conversational role and constrained later responses and decision history. A bare report that something was heard cannot inhabit this retained-state guarantee.
+Thus the type does not permit an `Uptaken` witness relating an arbitrary contribution to unrelated before and after states.
 
-Object displacement occurs when a still-open contribution triggers an association, solution, preference, defensive reaction, or regulatory need which then replaces the jointly established object.
+Object displacement is different. Its proof requires that a replacement object becomes operative and that the original contribution is not retained in the after-state contribution list.
 
 ## 2. Pseudo-consultation and provenance
 
-Consultation is genuine only when the consulted contribution enters the decision procedure as actual information. It does not give the consulted person control, but the decision must be sensitive to their input.
+Consultation is genuine only when the consulted contribution enters the decision procedure as actual information. It does not give the consulted person unilateral control, but the decision must be sensitive to their input.
 
 The following implications are invalid:
 
@@ -77,16 +80,9 @@ The general response object is
 \operatorname{ActualResponse}(x,n,d,t),
 \]
 
-indexed to participant, node, decision episode, and time.
+indexed internally by participant, node, decision episode, and time.
 
-Affirmation is local. It does not automatically transport to:
-
-- descendant tasks;
-- broader antecedents;
-- stronger modalities;
-- larger practical scopes;
-- later decision episodes;
-- changed capacity states.
+Affirmation is local. It does not automatically transport to descendant tasks, broader antecedents, stronger modalities, larger practical scopes, later decision episodes, or changed capacity states.
 
 In particular,
 
@@ -96,20 +92,21 @@ In particular,
 \operatorname{Affirm}(\mathsf{Commit}(z)\mid\Gamma').
 \]
 
-Transport is represented at two levels.
+### Exact transport
 
-1. `ResponseTransportWitness source target` is an **assessment**. Its Boolean fields may explicitly report failed locality conditions.
-2. `AuthorisedResponseTransport source target` is the licensing type. It contains the assessment plus equality proofs that node, context, modality, scope, temporal validity, and any strengthened commitment requirement are all `true`.
+`ResponseTransportWitness source target` contains propositional equalities proving preservation of:
 
-Therefore:
+- antecedent;
+- contemplated action;
+- modality;
+- temporal scope;
+- practical scope;
+- exceptions;
+- unresolved conditions.
 
-\[
-\operatorname{TransportAssessment}
-\not\Rightarrow
-\operatorname{TransportAuthorised}.
-\]
+`transportResponse` additionally requires a proof that the original response targets `source`. It returns an `ActualResponse` targeting `target` while preserving the response state and decision episode.
 
-Only the proof-carrying authorised type may be supplied to the transport operation.
+This is re-addressing under semantic equality, not broadening. If modality, context, or scope becomes stronger, exact transport is unavailable. `FreshStrengthenedResponse source target` instead requires a distinct new response targeting the stronger node, with the original retained only as provenance.
 
 A statement that an option *might be considered* can positively affirm branch liveness while leaving the option itself unresolved:
 
@@ -153,13 +150,17 @@ Ambiguous present participation can later be rewritten as an obligation against 
 \operatorname{DemandOnFutureCapacity}.
 \]
 
-The protective invariant is:
+The protective invariant is implemented as an exact projection:
 
 \[
 \operatorname{FutureObligation}(x,a)
 \Rightarrow
-\operatorname{ExplicitCommitment}(x,a).
+\operatorname{ExplicitCommitmentEvidence}(x,a).
 \]
+
+`ExplicitCommitmentEvidence x a` contains a typed representation together with proofs that its owner is \(x\), its representation type is `commitmentRepresentation`, and its label is exactly \(a\).
+
+`futureObligationRequiresExplicitCommitment` extracts this evidence from every valid `FutureObligation`. Conversely, `FutureCapacityCapture` carries a function proving that no such evidence exists for the later attributed commitment.
 
 This matters most where capacity is scarce or unpredictable because attribution errors are not cheaply reversible.
 
@@ -192,16 +193,19 @@ A behavioural allegation requires an actor, observable particular, context, affe
 
 ## 8. Partial family-name intrusion
 
-The base `CorrectedNameIntrusion` record is an **observation carrier**. It records the intended and competing referents, candidates, emitted fragment, final name, stage, contextual flags, and whether a composite label was reported. Because an observation may be uncertain or miscoded, this base record alone does not prove that the event was immediately corrected or non-composite.
+`CorrectedNameIntrusion` is deliberately an observation record. It may contain uncertain coding and does not by itself establish that an event was corrected, non-composite, or referentially distinct.
 
-The stronger `ValidatedCorrectedNameIntrusion event` subtype requires proofs that:
+The proof-bearing subtype is
 
-- `immediatelySelfCorrected event ≡ true`;
-- `deliberateCompositeLabelUsed event ≡ false`;
-- speaker, intended referent, and competing referent have the required distinct typed roles;
-- candidate roles agree with the intended and competing referents.
+\[
+\operatorname{ValidatedCorrectedNameIntrusion}(e).
+\]
 
-Only after those proofs exist is the following sequence licensed as the coded classification:
+A value of this type proves immediate self-correction, no deliberate composite label, distinct intended and competing referent roles, speaker-role distinction from each referent, and agreement between each candidate role and the corresponding referent role.
+
+Only the validated subtype supports the phrase *corrected name intrusion* as a guaranteed classification.
+
+The relevant sequence may be:
 
 \[
 \text{intended name activation}
@@ -212,8 +216,6 @@ Only after those proofs exist is the following sequence licensed as the coded cl
 \to
 \text{monitoring and correction}.
 \]
-
-For example, a parent frustrated with a child may begin producing a sibling's name and then correct to the child's name; a grandparent may similarly begin another descendant's name. This is a corrected name intrusion only when the validation witness exists, and it is not thereby a deliberate “relative–child” composite label.
 
 Freud's parapraxis framework supplies historical provenance for asking whether slips can reflect structured association. Modern lexical-access and speech-error models supply a less motive-heavy account in terms of competing semantic, lexical, phonological, and affective activation.
 
@@ -241,7 +243,7 @@ Repeated context-sensitive intrusions may support a defeasible associative-trans
 
 ## 9. Process-bearing branches and memory
 
-Some propositions authorise extended goal processes rather than atomic acts. A goal branch may carry applications, documents, contacts, queue positions, learned constraints, pending responses, deadlines, external dependencies, and handover obligations even while its outcome remains absent:
+Some propositions authorise extended goal processes rather than atomic acts. A goal branch may carry applications, documents, contacts, queue positions, learned constraints, pending responses, deadlines, external dependencies, assigned participants, and handover obligations even while its outcome remains absent:
 
 \[
 G_t=0\not\Rightarrow S_t=0.
@@ -270,9 +272,9 @@ Quantitative promotion is synchronized. A family refinement carries one authorit
 \end{aligned}
 \]
 
-Each branch refinement also proves metric identity/cost preservation and exact derivation of its wave from the branch's amplitude and phase. Foreign, missing, or duplicated metrics and waves therefore cannot inhabit the synchronized refinement type.
+Each branch refinement also proves metric identity and cost preservation and exact derivation of its wave from the qualitative branch's recorded amplitude and phase. Foreign, missing, or duplicated metrics and waves therefore cannot inhabit the synchronized refinement type.
 
-Hyperformal incidence likewise requires a membership proof that the participant occurs in the branch's `assignedParticipants`; it is no longer true by construction for every participant–branch pair.
+Hyperformal incidence requires a membership proof that the participant occurs in the branch's `assignedParticipants`; it is not true by construction for every participant–branch pair.
 
 ## 10. Feasibility filtration
 
@@ -299,26 +301,9 @@ More branches do not necessarily improve outcomes. A branch must be serviceable 
 
 Qualitatively, a branch may be aligned, orthogonal, opposed, or of unknown alignment. Pairs of branches may interfere constructively, neutrally, destructively, or incoherently through shared resources, incompatible requirements, conflicting provenance, or timing.
 
-The double-slit and \(n\)-slit analogy captures the non-additivity:
+The portfolio optimizer accepts only a `ValidatedInteractions branches` matrix. Its upper-triangular type contains exactly one cell for each unordered pair of list positions, has no diagonal cell, and cannot mention a foreign branch endpoint. Only interactions represented in that validated matrix contribute to benefit or burden.
 
-\[
-\left|\sum_i a_i e^{i\phi_i}\right|^2
-=
-\sum_i a_i^2
-+
-2\sum_{i<j}a_i a_j\cos(\phi_i-\phi_j).
-\]
-
-In the exact optimizer, the \(i<j\) condition is enforced structurally by an upper-triangular typed interaction matrix. There is no diagonal cell, there is exactly one cell per unordered branch-position pair, and a cell may contain at most one interaction. Arbitrary string endpoints, self-interactions, and repeated pair entries cannot contribute to the portfolio ledger.
-
-A useful branch family should:
-
-- remain within servicing capacity;
-- improve attractor reachability;
-- preserve useful optionality;
-- value information gain;
-- penalise destructive interference;
-- distinguish visible activity from genuine progress.
+A useful branch family should remain within servicing capacity, improve attractor reachability, preserve useful optionality, value information gain, penalise destructive interference, and distinguish visible activity from genuine progress.
 
 ## 12. Trauma and memory deformation
 
@@ -332,7 +317,7 @@ A minimally corrigible relational process preserves:
 
 1. open conversational objects until answered, explicitly deferred, or withdrawn by their originator;
 2. exact proposition identity, context, modality, scope, and time;
-3. decision provenance;
+3. durable preference and decision-history provenance;
 4. feeling–fact–allegation type separation;
 5. causal order;
 6. particularity of serious allegations;
@@ -347,11 +332,6 @@ The central law is:
 
 \[
 \boxed{
-\operatorname{Transport}(r,n\to n')
-\text{ is permitted only when }
-\operatorname{AuthorisedResponseTransport}(n,n')
-\text{ is inhabited.}
+\text{A response may be re-addressed only under a proof that every semantic node coordinate is preserved. Any strengthening requires a fresh response.}
 }
 \]
-
-An assessment record, narrative similarity, or Boolean flag with failed requirements is not an authorisation witness.
