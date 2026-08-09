@@ -71,7 +71,7 @@ data ProductionTrajectory : Set where
   rowByRow : ProductionTrajectory
   helicalTrajectory : ProductionTrajectory
 
-record CircularWeaveGeometry : Set where
+record CircularWeaveGeometry : Set₁ where
   constructor circularWeaveGeometry
   field
     topology : FabricTopology
