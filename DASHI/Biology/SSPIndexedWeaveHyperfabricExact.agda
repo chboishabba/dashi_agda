@@ -7,45 +7,83 @@ import DASHI.Biology.SignedSSPFRACTRANWeaveExact as SSP
 import DASHI.Biology.SSPHyperfibreSymmetryTowerExact as Tower
 
 ------------------------------------------------------------------------
--- The SSP weave is concretely an SSPPrime-indexed family.  Paths carry one
--- bit of transport parity.  Reverse paths flip the balanced lane state;
--- composing two reversals preserves it.  All category and action laws are
--- proved by finite case analysis.
+-- Lawful upgrade of the existing SSP hyperfibre atlas.
+--
+-- Paths retain the repository's three FibreOrientation values rather than
+-- replacing them by a fresh Boolean.  Composition adjoins a global mediated
+-- identity to the two-element {forward,inverse} subgroup:
+--
+--   mediated is the path identity;
+--   forward is the identity inside the nontrivial transport component;
+--   inverse * inverse = forward.
+--
+-- The existing lane action is a monoid action: mediated and forward preserve
+-- lane state, inverse reverses polarity.  All laws are proved by finite cases.
 ------------------------------------------------------------------------
 
-data LaneParity : Set where
-  preserveParity : LaneParity
-  reverseParity : LaneParity
+composeOrientation :
+  SSP.FibreOrientation →
+  SSP.FibreOrientation →
+  SSP.FibreOrientation
+composeOrientation SSP.mediatedOrientation orientation = orientation
+composeOrientation SSP.forwardOrientation SSP.mediatedOrientation =
+  SSP.forwardOrientation
+composeOrientation SSP.inverseOrientation SSP.mediatedOrientation =
+  SSP.inverseOrientation
+composeOrientation SSP.forwardOrientation SSP.forwardOrientation =
+  SSP.forwardOrientation
+composeOrientation SSP.forwardOrientation SSP.inverseOrientation =
+  SSP.inverseOrientation
+composeOrientation SSP.inverseOrientation SSP.forwardOrientation =
+  SSP.inverseOrientation
+composeOrientation SSP.inverseOrientation SSP.inverseOrientation =
+  SSP.forwardOrientation
 
-composeParity : LaneParity → LaneParity → LaneParity
-composeParity preserveParity parity = parity
-composeParity reverseParity preserveParity = reverseParity
-composeParity reverseParity reverseParity = preserveParity
+composeOrientationIdLeft :
+  (orientation : SSP.FibreOrientation) →
+  composeOrientation SSP.mediatedOrientation orientation ≡ orientation
+composeOrientationIdLeft SSP.inverseOrientation = refl
+composeOrientationIdLeft SSP.mediatedOrientation = refl
+composeOrientationIdLeft SSP.forwardOrientation = refl
 
-composeParityIdLeft :
-  (parity : LaneParity) →
-  composeParity preserveParity parity ≡ parity
-composeParityIdLeft preserveParity = refl
-composeParityIdLeft reverseParity = refl
+composeOrientationIdRight :
+  (orientation : SSP.FibreOrientation) →
+  composeOrientation orientation SSP.mediatedOrientation ≡ orientation
+composeOrientationIdRight SSP.inverseOrientation = refl
+composeOrientationIdRight SSP.mediatedOrientation = refl
+composeOrientationIdRight SSP.forwardOrientation = refl
 
-composeParityIdRight :
-  (parity : LaneParity) →
-  composeParity parity preserveParity ≡ parity
-composeParityIdRight preserveParity = refl
-composeParityIdRight reverseParity = refl
-
-composeParityAssoc :
-  (r q p : LaneParity) →
-  composeParity (composeParity r q) p
-  ≡ composeParity r (composeParity q p)
-composeParityAssoc preserveParity preserveParity preserveParity = refl
-composeParityAssoc preserveParity preserveParity reverseParity = refl
-composeParityAssoc preserveParity reverseParity preserveParity = refl
-composeParityAssoc preserveParity reverseParity reverseParity = refl
-composeParityAssoc reverseParity preserveParity preserveParity = refl
-composeParityAssoc reverseParity preserveParity reverseParity = refl
-composeParityAssoc reverseParity reverseParity preserveParity = refl
-composeParityAssoc reverseParity reverseParity reverseParity = refl
+composeOrientationAssoc :
+  (r q p : SSP.FibreOrientation) →
+  composeOrientation (composeOrientation r q) p
+  ≡ composeOrientation r (composeOrientation q p)
+composeOrientationAssoc SSP.mediatedOrientation SSP.mediatedOrientation SSP.mediatedOrientation = refl
+composeOrientationAssoc SSP.mediatedOrientation SSP.mediatedOrientation SSP.forwardOrientation = refl
+composeOrientationAssoc SSP.mediatedOrientation SSP.mediatedOrientation SSP.inverseOrientation = refl
+composeOrientationAssoc SSP.mediatedOrientation SSP.forwardOrientation SSP.mediatedOrientation = refl
+composeOrientationAssoc SSP.mediatedOrientation SSP.forwardOrientation SSP.forwardOrientation = refl
+composeOrientationAssoc SSP.mediatedOrientation SSP.forwardOrientation SSP.inverseOrientation = refl
+composeOrientationAssoc SSP.mediatedOrientation SSP.inverseOrientation SSP.mediatedOrientation = refl
+composeOrientationAssoc SSP.mediatedOrientation SSP.inverseOrientation SSP.forwardOrientation = refl
+composeOrientationAssoc SSP.mediatedOrientation SSP.inverseOrientation SSP.inverseOrientation = refl
+composeOrientationAssoc SSP.forwardOrientation SSP.mediatedOrientation SSP.mediatedOrientation = refl
+composeOrientationAssoc SSP.forwardOrientation SSP.mediatedOrientation SSP.forwardOrientation = refl
+composeOrientationAssoc SSP.forwardOrientation SSP.mediatedOrientation SSP.inverseOrientation = refl
+composeOrientationAssoc SSP.forwardOrientation SSP.forwardOrientation SSP.mediatedOrientation = refl
+composeOrientationAssoc SSP.forwardOrientation SSP.forwardOrientation SSP.forwardOrientation = refl
+composeOrientationAssoc SSP.forwardOrientation SSP.forwardOrientation SSP.inverseOrientation = refl
+composeOrientationAssoc SSP.forwardOrientation SSP.inverseOrientation SSP.mediatedOrientation = refl
+composeOrientationAssoc SSP.forwardOrientation SSP.inverseOrientation SSP.forwardOrientation = refl
+composeOrientationAssoc SSP.forwardOrientation SSP.inverseOrientation SSP.inverseOrientation = refl
+composeOrientationAssoc SSP.inverseOrientation SSP.mediatedOrientation SSP.mediatedOrientation = refl
+composeOrientationAssoc SSP.inverseOrientation SSP.mediatedOrientation SSP.forwardOrientation = refl
+composeOrientationAssoc SSP.inverseOrientation SSP.mediatedOrientation SSP.inverseOrientation = refl
+composeOrientationAssoc SSP.inverseOrientation SSP.forwardOrientation SSP.mediatedOrientation = refl
+composeOrientationAssoc SSP.inverseOrientation SSP.forwardOrientation SSP.forwardOrientation = refl
+composeOrientationAssoc SSP.inverseOrientation SSP.forwardOrientation SSP.inverseOrientation = refl
+composeOrientationAssoc SSP.inverseOrientation SSP.inverseOrientation SSP.mediatedOrientation = refl
+composeOrientationAssoc SSP.inverseOrientation SSP.inverseOrientation SSP.forwardOrientation = refl
+composeOrientationAssoc SSP.inverseOrientation SSP.inverseOrientation SSP.inverseOrientation = refl
 
 SSPWeaveState : SSP.SSPPrime → Set
 SSPWeaveState lane = Tower.LaneState
@@ -53,19 +91,19 @@ SSPWeaveState lane = Tower.LaneState
 data SSPWeavePath : SSP.SSPPrime → SSP.SSPPrime → Set where
   lanePath :
     {source target : SSP.SSPPrime} →
-    LaneParity →
+    SSP.FibreOrientation →
     SSPWeavePath source target
 
-pathParity :
+pathOrientation :
   {source target : SSP.SSPPrime} →
   SSPWeavePath source target →
-  LaneParity
-pathParity (lanePath parity) = parity
+  SSP.FibreOrientation
+pathOrientation (lanePath orientation) = orientation
 
 identitySSPPath :
   (lane : SSP.SSPPrime) →
   SSPWeavePath lane lane
-identitySSPPath lane = lanePath preserveParity
+identitySSPPath lane = lanePath SSP.mediatedOrientation
 
 infixr 40 _thenSSP_
 
@@ -75,21 +113,21 @@ _thenSSP_ :
   SSPWeavePath source middle →
   SSPWeavePath source target
 _thenSSP_ (lanePath q) (lanePath p) =
-  lanePath (composeParity q p)
+  lanePath (composeOrientation q p)
 
 sspPathIdLeft :
   {source target : SSP.SSPPrime} →
   (path : SSPWeavePath source target) →
   identitySSPPath target thenSSP path ≡ path
-sspPathIdLeft (lanePath preserveParity) = refl
-sspPathIdLeft (lanePath reverseParity) = refl
+sspPathIdLeft (lanePath orientation)
+  rewrite composeOrientationIdLeft orientation = refl
 
 sspPathIdRight :
   {source target : SSP.SSPPrime} →
   (path : SSPWeavePath source target) →
   path thenSSP identitySSPPath source ≡ path
-sspPathIdRight (lanePath preserveParity) = refl
-sspPathIdRight (lanePath reverseParity) = refl
+sspPathIdRight (lanePath orientation)
+  rewrite composeOrientationIdRight orientation = refl
 
 sspPathAssoc :
   {i j k l : SSP.SSPPrime} →
@@ -98,31 +136,39 @@ sspPathAssoc :
   (p : SSPWeavePath i j) →
   (r thenSSP q) thenSSP p ≡ r thenSSP (q thenSSP p)
 sspPathAssoc (lanePath r) (lanePath q) (lanePath p)
-  rewrite composeParityAssoc r q p = refl
+  rewrite composeOrientationAssoc r q p = refl
 
-transportParity : LaneParity → Tower.LaneState → Tower.LaneState
-transportParity preserveParity state = state
-transportParity reverseParity state =
-  Tower.laneOrientationAction SSP.inverseOrientation state
+transportOrientation :
+  SSP.FibreOrientation →
+  Tower.LaneState →
+  Tower.LaneState
+transportOrientation orientation state =
+  Tower.laneOrientationAction orientation state
+
+transportOrientationComposition :
+  (q p : SSP.FibreOrientation) →
+  (state : Tower.LaneState) →
+  transportOrientation (composeOrientation q p) state
+  ≡ transportOrientation q (transportOrientation p state)
+transportOrientationComposition SSP.mediatedOrientation SSP.mediatedOrientation state = refl
+transportOrientationComposition SSP.mediatedOrientation SSP.forwardOrientation state = refl
+transportOrientationComposition SSP.mediatedOrientation SSP.inverseOrientation state = refl
+transportOrientationComposition SSP.forwardOrientation SSP.mediatedOrientation state = refl
+transportOrientationComposition SSP.forwardOrientation SSP.forwardOrientation state = refl
+transportOrientationComposition SSP.forwardOrientation SSP.inverseOrientation state = refl
+transportOrientationComposition SSP.inverseOrientation SSP.mediatedOrientation state = refl
+transportOrientationComposition SSP.inverseOrientation SSP.forwardOrientation state = refl
+transportOrientationComposition SSP.inverseOrientation SSP.inverseOrientation Tower.negativeLaneState = refl
+transportOrientationComposition SSP.inverseOrientation SSP.inverseOrientation Tower.mediatedLaneState = refl
+transportOrientationComposition SSP.inverseOrientation SSP.inverseOrientation Tower.positiveLaneState = refl
 
 transportSSP :
   {source target : SSP.SSPPrime} →
   SSPWeavePath source target →
   SSPWeaveState source →
   SSPWeaveState target
-transportSSP (lanePath parity) state = transportParity parity state
-
-transportParityComposition :
-  (q p : LaneParity) →
-  (state : Tower.LaneState) →
-  transportParity (composeParity q p) state
-  ≡ transportParity q (transportParity p state)
-transportParityComposition preserveParity preserveParity state = refl
-transportParityComposition preserveParity reverseParity state = refl
-transportParityComposition reverseParity preserveParity state = refl
-transportParityComposition reverseParity reverseParity Tower.negativeLaneState = refl
-transportParityComposition reverseParity reverseParity Tower.mediatedLaneState = refl
-transportParityComposition reverseParity reverseParity Tower.positiveLaneState = refl
+transportSSP (lanePath orientation) state =
+  transportOrientation orientation state
 
 transportSSPIdentity :
   (lane : SSP.SSPPrime) →
@@ -138,23 +184,23 @@ transportSSPComposition :
   transportSSP (q thenSSP p) state
   ≡ transportSSP q (transportSSP p state)
 transportSSPComposition (lanePath q) (lanePath p) state =
-  transportParityComposition q p state
+  transportOrientationComposition q p state
 
 SSPResidual : SSP.SSPPrime → Set
-SSPResidual lane = LaneParity
+SSPResidual lane = SSP.FibreOrientation
 
 sspStateResidual :
   (lane : SSP.SSPPrime) →
   SSPWeaveState lane →
   SSPResidual lane
-sspStateResidual lane state = preserveParity
+sspStateResidual lane state = SSP.mediatedOrientation
 
 sspResidualAfter :
   {source target : SSP.SSPPrime} →
   SSPWeavePath source target →
   SSPWeaveState source →
   SSPResidual target
-sspResidualAfter path state = pathParity path
+sspResidualAfter path state = pathOrientation path
 
 sspResidualIdentity :
   (lane : SSP.SSPPrime) →
@@ -182,23 +228,40 @@ canonicalSSPIndexedWeave =
     ; residualId = sspResidualIdentity
     }
 
-reverseTwicePreservesEveryLaneState :
+inverseTwicePreservesEveryLaneState :
   (source middle target : SSP.SSPPrime) →
   (state : SSPWeaveState source) →
   transportSSP
     (_thenSSP_
-      (lanePath {source = middle} {target = target} reverseParity)
-      (lanePath {source = source} {target = middle} reverseParity))
+      (lanePath {source = middle} {target = target} SSP.inverseOrientation)
+      (lanePath {source = source} {target = middle} SSP.inverseOrientation))
     state
   ≡ state
-reverseTwicePreservesEveryLaneState source middle target state =
-  transportParityComposition reverseParity reverseParity state
+inverseTwicePreservesEveryLaneState source middle target state =
+  transportOrientationComposition
+    SSP.inverseOrientation
+    SSP.inverseOrientation
+    state
 
-reversePathRetainsTargetResidual :
+inverseTwiceComposesToForward :
+  composeOrientation SSP.inverseOrientation SSP.inverseOrientation
+  ≡ SSP.forwardOrientation
+inverseTwiceComposesToForward = refl
+
+inversePathRetainsTargetResidual :
   {source target : SSP.SSPPrime} →
   (state : SSPWeaveState source) →
   sspResidualAfter
-    (lanePath {source = source} {target = target} reverseParity)
+    (lanePath {source = source} {target = target} SSP.inverseOrientation)
     state
-  ≡ reverseParity
-reversePathRetainsTargetResidual state = refl
+  ≡ SSP.inverseOrientation
+inversePathRetainsTargetResidual state = refl
+
+forwardPathRetainsTargetResidual :
+  {source target : SSP.SSPPrime} →
+  (state : SSPWeaveState source) →
+  sspResidualAfter
+    (lanePath {source = source} {target = target} SSP.forwardOrientation)
+    state
+  ≡ SSP.forwardOrientation
+forwardPathRetainsTargetResidual state = refl
