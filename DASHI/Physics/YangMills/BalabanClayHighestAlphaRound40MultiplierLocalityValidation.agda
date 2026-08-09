@@ -1,11 +1,10 @@
 module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound40MultiplierLocalityValidation where
 
 ------------------------------------------------------------------------
--- Round Forty validation root.
---
--- Imported cumulatively by the Round-39 root on this child branch so the
--- existing pull-request workflow typechecks the complete new tranche.
+-- Cumulative Round Forty validation root.
 ------------------------------------------------------------------------
+
+import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound39PseudoinverseKKTValidation
 
 import DASHI.Physics.YangMills.BalabanSelectedVariationSignConventionExact as Sign
 import DASHI.Physics.YangMills.BalabanSelectedMultiplierPairingRedundancyInvariantExact
