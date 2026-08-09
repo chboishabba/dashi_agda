@@ -12,6 +12,7 @@ files=(
   DASHI/Physics/YangMills/BalabanFiniteLinearFunctionalCoordinatesExact.agda
   DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeConstraintMatrixExact.agda
   DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeConstraintStencilExact.agda
+  DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeGramFiniteRangeExact.agda
   DASHI/Physics/YangMills/BalabanSelectedOwnerBudgetSlackExact.agda
   DASHI/Physics/YangMills/BalabanSelectedCertifiedOwnerEnclosureExact.agda
   DASHI/Physics/YangMills/BalabanSelectedSinglePlaquetteWitnessExact.agda
@@ -45,6 +46,8 @@ grep -q 'selectedBackgroundGaugeConstraintMatrix' DASHI/Physics/YangMills/Balaba
 grep -q 'selectedBackgroundGaugeConstraintMatrixApplyExact' DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeConstraintMatrixExact.agda
 grep -q 'GaugeConstraintSpatialSupport' DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeConstraintStencilExact.agda
 grep -q 'selectedBackgroundGaugeConstraintMatrixOutsideStencilZero' DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeConstraintStencilExact.agda
+grep -q 'selectedBackgroundGaugeGram' DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeGramFiniteRangeExact.agda
+grep -q 'selectedBackgroundGaugeGramOutsideRangeZero' DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeGramFiniteRangeExact.agda
 grep -q 'ownerBudgetSlack' DASHI/Physics/YangMills/BalabanSelectedOwnerBudgetSlackExact.agda
 grep -q 'slackCompletesLegacyOwnerBudget' DASHI/Physics/YangMills/BalabanSelectedOwnerBudgetSlackExact.agda
 grep -q 'certifiedEnclosuresToOwnerBounds' DASHI/Physics/YangMills/BalabanSelectedCertifiedOwnerEnclosureExact.agda
@@ -68,6 +71,7 @@ grep -q 'nineOwnerAbsorptionWithSlack' DASHI/Physics/Closure/NSNineOwnerStrictSl
 
 grep -q '10.1007/BF01466594' DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeConstraintMatrixExact.agda
 grep -q '10.1007/BF01240355' DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeConstraintStencilExact.agda
+grep -q '10.1007/BF01646473' DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeGramFiniteRangeExact.agda
 grep -q '10.1007/BF01229381' DASHI/Physics/YangMills/BalabanSelectedSinglePlaquetteWitnessExact.agda
 grep -q '10.1137/1.9780898717716' DASHI/Physics/YangMills/BalabanSelectedCertifiedOwnerEnclosureExact.agda
 grep -q '10.1016/0001-8708(69)90009-7' DASHI/Physics/YangMills/BalabanMoscoRecoveryGapTransferExact.agda
@@ -79,6 +83,7 @@ grep -q 'Delta_NS' "$doc"
 grep -q 'Mosco recovery' "$doc"
 grep -q 'raw Bernstein' "$doc"
 grep -q 'gauge-fixing component' "$doc"
+grep -q 'gauge-only Gram' "$doc"
 grep -Fq '(./HighestAlphaProducerKernelRound41.md)' "$index"
 
 scripts/run_agda29_parallel_check.sh \
