@@ -6,14 +6,16 @@ open import Agda.Builtin.String using (String)
 import DASHI.Biology.SymbolicTransformWithoutHomunculus as Symbolic
 import DASHI.Reasoning.RelationalStateCore as Core
 
+_≢_ : {A : Set} → A → A → Set
+x ≢ y = x ≡ y → ⊥
+
 ------------------------------------------------------------------------
 -- Corrected abstraction of partial family-name intrusions.
 --
--- The phenomenon represented here is not a deliberate composite label such
--- as "relative-child".  It is a false start in which a competing family name
--- becomes partially active, is emitted, and is immediately corrected to the
--- intended name.  The formalism records lexical and affective competition but
--- does not infer hidden motive or a stable identity attribution.
+-- The base CorrectedNameIntrusion record is an observation carrier: it can
+-- faithfully record uncertain or contradictory coding.  Claims that an event
+-- was immediately corrected, non-composite and referentially distinct require
+-- the validated subtype below.
 --
 -- Historical provenance:
 -- * Sigmund Freud, The Psychopathology of Everyday Life (1901), no DOI.
@@ -66,6 +68,39 @@ record CorrectedNameIntrusion : Set where
 
 open CorrectedNameIntrusion public
 
+------------------------------------------------------------------------
+-- Validated corrected-intrusion subtype.
+--
+-- The role inequalities are stronger than comparing surface strings: the
+-- intended and competing referents occupy distinct typed roles, and the
+-- speaker is distinct from each referent in the coded episode.
+------------------------------------------------------------------------
+
+record ValidatedCorrectedNameIntrusion
+    (event : CorrectedNameIntrusion) : Set where
+  constructor validatedCorrectedNameIntrusion
+  field
+    immediateCorrectionProof : immediatelySelfCorrected event ≡ true
+    nonCompositeProof : deliberateCompositeLabelUsed event ≡ false
+    intendedCompetingRolesDistinct :
+      referentRole (intendedCandidate event)
+      ≢ referentRole (competingCandidate event)
+    speakerIntendedRolesDistinct :
+      Core.participantRole (speaker event)
+      ≢ Core.participantRole (intendedReferent event)
+    speakerCompetingRolesDistinct :
+      Core.participantRole (speaker event)
+      ≢ Core.participantRole (competingReferent event)
+    intendedCandidateRoleMatchesReferent :
+      referentRole (intendedCandidate event)
+      ≡ Core.participantRole (intendedReferent event)
+    competingCandidateRoleMatchesReferent :
+      referentRole (competingCandidate event)
+      ≡ Core.participantRole (competingReferent event)
+    validationReceipt : String
+
+open ValidatedCorrectedNameIntrusion public
+
 record AssociativeTransportHypothesis : Set where
   constructor associativeTransportHypothesis
   field
@@ -86,6 +121,7 @@ record NameIntrusionEvidenceBoundary : Set where
     speechErrorAloneRecoversUnconsciousMotive : Bool
     modernLexicalCompetitionCompatible : Bool
     symbolicTransformRequiresHomunculus : Bool
+    observationRecordAloneEstablishesCorrectedClassification : Bool
     boundaryNote : String
 
 canonicalNameIntrusionEvidenceBoundary : NameIntrusionEvidenceBoundary
@@ -98,8 +134,9 @@ canonicalNameIntrusionEvidenceBoundary = record
   ; modernLexicalCompetitionCompatible = true
   ; symbolicTransformRequiresHomunculus =
       Symbolic.innerTranslatorRequired Symbolic.canonicalSymbolicCompromise
+  ; observationRecordAloneEstablishesCorrectedClassification = false
   ; boundaryNote =
-      "A partial competing-name intrusion is evidence of transient lexical competition. A family-association reading remains contextual and defeasible; it is not a composite label, diagnosis or proof of hidden intent."
+      "CorrectedNameIntrusion stores an observation. Only ValidatedCorrectedNameIntrusion proves immediate correction, non-composite use, distinct typed referents and candidate/referent role agreement. Even then, a family-association reading remains contextual and defeasible rather than proof of hidden intent."
   }
 
 record IntergenerationalAssimilationRisk : Set where
