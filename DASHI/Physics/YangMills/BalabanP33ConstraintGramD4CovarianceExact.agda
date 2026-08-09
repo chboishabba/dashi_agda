@@ -126,11 +126,11 @@ finiteDotRightPointwiseCong :
   (∀ row → right row ≡ transported row) →
   Rect.finiteDot (Pseudo.multiplierCarrier pseudoData) left right
   ≡ Rect.finiteDot (Pseudo.multiplierCarrier pseudoData) left transported
-finiteDotRightPointwiseCong pseudoData left pointwise =
+finiteDotRightPointwiseCong pseudoData left {right} {transported} pointwise =
   Sums.sumRationalCong
     (Matrix.coordinates (Pseudo.multiplierCarrier pseudoData))
-    (λ row → left row * _)
-    (λ row → left row * _)
+    (λ row → left row * right row)
+    (λ row → left row * transported row)
     (λ row → cong (left row *_) (pointwise row))
 
 multiplierGreenPairingOrbitInvariant :
