@@ -10,6 +10,8 @@ module DASHI.Foundations.Base369RelationalUpdateKernelExact where
 -- which an explicit transport witness is supplied.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_)
+
 import DASHI.Foundations.Base369CalculationFibreClosureExact as Calculation
 import DASHI.Foundations.Base369InteractionAppraisalCubeExact as Cube
 import DASHI.Foundations.Base369PropositionResponseTransportExact as Response
@@ -43,8 +45,6 @@ record ParticipantSwap (kernel : RelationalUpdateKernel) : Set₁ where
   field
     swap : Participant kernel → Participant kernel
     swapInvolutive : (p : Participant kernel) → swap (swap p) ≡ p
-
-open import Agda.Builtin.Equality using (_≡_)
 
 record OperatorEquivariance
   (kernel : RelationalUpdateKernel)
