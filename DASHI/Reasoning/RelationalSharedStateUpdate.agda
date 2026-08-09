@@ -5,6 +5,9 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Reasoning.RelationalStateCore as Core
 
+_≢_ : {A : Set} → A → A → Set
+x ≢ y = x ≡ y → ⊥
+
 ------------------------------------------------------------------------
 -- Shared-state update.
 --
@@ -16,17 +19,63 @@ data Heard : Core.Contribution → Set where
   acousticallyRegistered :
     (c : Core.Contribution) → Heard c
 
-data UptakeKind : Set where
-  registeredOnly retainedRole constrainsLaterState : UptakeKind
+------------------------------------------------------------------------
+-- Exact contribution disposition.
+------------------------------------------------------------------------
 
-------------------------------------------------------------------------
--- Exact contribution transition.
---
--- This relation binds the contribution and both state indices: the after-state
--- must retain the new contribution immediately before the prior contribution
--- history.  Other fields may change under a separately documented update, but
--- an Uptaken value can no longer relate arbitrary before/after states.
-------------------------------------------------------------------------
+data ContributionDisposition
+    (c : Core.Contribution)
+    (after : Core.SharedState) : Set where
+  nonQuestionRetained :
+    Core.contributionKind c ≢ Core.questionContribution →
+    ContributionDisposition c after
+  questionRemainsOpen :
+    Core.Member
+      (Core.contributionLabel c)
+      (Core.unresolvedQuestions after) →
+    ContributionDisposition c after
+  questionResolvedByAssent :
+    Core.Member
+      (Core.contributionLabel c)
+      (Core.recordedAssents after) →
+    ContributionDisposition c after
+  questionResolvedByRefusal :
+    Core.Member
+      (Core.contributionLabel c)
+      (Core.recordedRefusals after) →
+    ContributionDisposition c after
+
+data DurablePreferenceTransition
+    (c : Core.Contribution)
+    (before after : Core.SharedState) : Set where
+  noPreferenceInsertion :
+    Core.contributionKind c ≢ Core.preferenceContribution →
+    Core.durablePreferences after ≡ Core.durablePreferences before →
+    DurablePreferenceTransition c before after
+  insertDurablePreference :
+    (preference : Core.DurablePreference) →
+    Core.contributionKind c ≡ Core.preferenceContribution →
+    Core.preferenceOwner preference ≡ Core.contributor c →
+    Core.preferenceLabel preference ≡ Core.contributionLabel c →
+    Core.durablePreferences after
+      ≡ preference ∷ Core.durablePreferences before →
+    DurablePreferenceTransition c before after
+
+record DecisionHistoryTransition
+    (before after : Core.SharedState) : Set where
+  constructor decisionHistoryTransition
+  field
+    priorDecisionRetained :
+      Core.Member
+        (Core.currentDecisionRecord before)
+        (Core.decisionHistory after)
+    currentDecisionRetained :
+      Core.Member
+        (Core.currentDecisionRecord after)
+        (Core.decisionHistory after)
+    decisionTransitionReceipt : String
+
+open DecisionHistoryTransition public
 
 record ContributionTransition
     (c : Core.Contribution)
@@ -35,6 +84,9 @@ record ContributionTransition
   field
     contributionHistoryTransition :
       Core.contributions after ≡ c ∷ Core.contributions before
+    contributionDisposition : ContributionDisposition c after
+    preferenceTransition : DurablePreferenceTransition c before after
+    decisionTransition : DecisionHistoryTransition before after
     transitionReceipt : String
 
 open ContributionTransition public
@@ -46,9 +98,6 @@ record Uptaken
   field
     registered : Heard c
     stateTransition : ContributionTransition c before after
-    retainedConversationalRole : Bool
-    constrainsLaterResponses : Bool
-    constrainsDecisionHistory : Bool
     uptakeReceipt : String
 
 open Uptaken public
@@ -59,8 +108,8 @@ record HeardWithoutUptake
   constructor heardWithoutUptake
   field
     heard : Heard c
-    roleDiscarded : Bool
-    laterConstraintLost : Bool
+    contributionNotInserted :
+      (Core.contributions after ≡ c ∷ Core.contributions before) → ⊥
     receipt : String
 
 open HeardWithoutUptake public
@@ -70,10 +119,10 @@ record ObjectDisplacement
     (before after : Core.SharedState) : Set where
   constructor objectDisplacement
   field
-    contributionStillOpen : Bool
     replacementObject : Core.Topic
-    replacementBecameOperative : Bool
-    originalContributionCeasedToConstrain : Bool
+    replacementBecameOperative : Core.currentObject after ≡ replacementObject
+    contributionNotRetained :
+      Core.Member c (Core.contributions after) → ⊥
     displacementReceipt : String
 
 open ObjectDisplacement public
@@ -95,8 +144,6 @@ consultationDecisionSensitive : ConsultationEpisode → Bool
 consultationDecisionSensitive episode =
   decisionSensitiveToInput episode
 
--- The following witness carries the pseudo-consultation failure pattern
--- without pretending Boolean negation is a proof.
 record PseudoConsultationWitness (episode : ConsultationEpisode) : Set where
   field
     inputWasRequested : Bool
@@ -143,13 +190,52 @@ record BehaviouralAllegation : Set where
     particularised : Bool
     allegationReceipt : String
 
+------------------------------------------------------------------------
+-- Future obligation evidence.
+------------------------------------------------------------------------
+
+record ExplicitCommitmentEvidence
+    (participant : Core.Participant)
+    (obligation : String) : Set where
+  constructor explicitCommitmentEvidence
+  field
+    sourceRepresentation : Core.TypedRepresentation
+    ownerMatches :
+      Core.representationOwner sourceRepresentation ≡ participant
+    representationIsCommitment :
+      Core.representationType sourceRepresentation
+      ≡ Core.commitmentRepresentation
+    obligationMatches :
+      Core.representationLabel sourceRepresentation ≡ obligation
+
+open ExplicitCommitmentEvidence public
+
+record FutureObligation
+    (participant : Core.Participant)
+    (obligation : String) : Set where
+  constructor futureObligation
+  field
+    commitmentEvidence : ExplicitCommitmentEvidence participant obligation
+    futureCapacity : Core.CapacityState
+    obligationReceipt : String
+
+open FutureObligation public
+
+futureObligationRequiresExplicitCommitment :
+  {participant : Core.Participant} →
+  {obligation : String} →
+  FutureObligation participant obligation →
+  ExplicitCommitmentEvidence participant obligation
+futureObligationRequiresExplicitCommitment = commitmentEvidence
+
 record FutureCapacityCapture : Set where
   constructor futureCapacityCapture
   field
     decisionMaker labourBearer : Core.Participant
     presentInteraction : String
     laterAttributedCommitment : String
-    explicitCommitmentPresent : Bool
+    noExplicitCommitment :
+      ExplicitCommitmentEvidence labourBearer laterAttributedCommitment → ⊥
     futureCapacity : Core.CapacityState
     captureReceipt : String
 
@@ -178,6 +264,7 @@ record SharedStateInvariants : Set where
     futureObligationsRequireExplicitCommitment : Bool
     careAndAccountabilityRemainDistinct : Bool
     uptakeRequiresContributionTransition : Bool
+    durablePreferenceRequiresExplicitTransition : Bool
 
 canonicalSharedStateInvariants : SharedStateInvariants
 canonicalSharedStateInvariants = record
@@ -190,6 +277,7 @@ canonicalSharedStateInvariants = record
   ; futureObligationsRequireExplicitCommitment = true
   ; careAndAccountabilityRemainDistinct = true
   ; uptakeRequiresContributionTransition = true
+  ; durablePreferenceRequiresExplicitTransition = true
   }
 
 record MinimalRepairProtocol : Set where
