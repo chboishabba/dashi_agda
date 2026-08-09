@@ -74,7 +74,8 @@ _thenSSP_ :
   SSPWeavePath middle target →
   SSPWeavePath source middle →
   SSPWeavePath source target
-lanePath q thenSSP lanePath p = lanePath (composeParity q p)
+_thenSSP_ (lanePath q) (lanePath p) =
+  lanePath (composeParity q p)
 
 sspPathIdLeft :
   {source target : SSP.SSPPrime} →
@@ -181,9 +182,9 @@ reverseTwicePreservesEveryLaneState :
   (source middle target : SSP.SSPPrime) →
   (state : SSPWeaveState source) →
   transportSSP
-    (lanePath {source = middle} {target = target} reverseParity
-      thenSSP
-     lanePath {source = source} {target = middle} reverseParity)
+    (_thenSSP_
+      (lanePath {source = middle} {target = target} reverseParity)
+      (lanePath {source = source} {target = middle} reverseParity))
     state
   ≡ state
 reverseTwicePreservesEveryLaneState source middle target state =
