@@ -21,16 +21,16 @@ module DASHI.Physics.YangMills.BalabanSelectedConstraintGramCombesThomasExact wh
 -- DASHI CONTRIBUTION
 --
 -- Apply the repository's standard finite Combes--Thomas algebra first to the
--- smaller multiplier Gram operator K=L L*.  Its spectral floor gamma_L is an
--- independent selected-background datum: it is not identified with the
--- 1/32 state-Hessian floor.  A certified half-gap and resolvent majorant obey
+-- redundancy-safe multiplier Gram operator K=L L*.  No constraint row is
+-- deleted.  The spectral floor gamma_L is imposed only on a declared reduced
+-- multiplier representative space and is independent of the 1/32 state-
+-- Hessian floor.  A certified half-gap and pseudoinverse majorant obey
 --
 --   2 halfGap = gamma_L,
 --   greenMajorant gamma_L = 2.
 --
--- The module exposes the exact finite-range stencil, reduced multiplier-space
--- coercivity, diagonal tilt row budget, and off-diagonal decay of K^{-1} or K+.
--- No physical decay claim is promoted until those literal producers exist.
+-- The module exposes the exact finite-range stencil, reduced coercivity,
+-- diagonal tilt row budget and off-diagonal decay of K+.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
@@ -41,36 +41,36 @@ open import Data.Rational.Base as ℚ using
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanConstructiveRationalMatrixInverseExact as Matrix
 import DASHI.Physics.YangMills.BalabanFiniteRectangularRationalExact as Rect
-import DASHI.Physics.YangMills.BalabanP33FiniteKKTAdmissibleProjectorExact as KKT
+import DASHI.Physics.YangMills.BalabanP33FiniteKKTPseudoinverseProjectorExact as Pseudo
 import DASHI.Physics.YangMills.BalabanP33FiniteCombesThomasConjugationExact as CT
 import DASHI.Physics.YangMills.BalabanP33FiniteCombesThomasTiltBudgetExact as Tilt
 
 record ConstraintGramFiniteRange
     {Multiplier : Set}
-    (projectorData : KKT.FiniteKKTProjectorData Multiplier) : Set₁ where
+    (pseudoData : Pseudo.FiniteKKTPseudoinverseData Multiplier) : Set₁ where
   field
     distance : Multiplier → Multiplier → ℚ
     interactionRange : ℚ
     interactionRangeNonnegative : 0ℚ ≤ interactionRange
     outsideRangeZero : ∀ left right →
       interactionRange < distance left right →
-      KKT.constraintGram projectorData left right ≡ 0ℚ
+      Pseudo.constraintGram pseudoData left right ≡ 0ℚ
 
 open ConstraintGramFiniteRange public
 
 selectedConstraintGramFiniteRange :
   ∀ {Multiplier}
-    {projectorData : KKT.FiniteKKTProjectorData Multiplier}
-    (finiteRange : ConstraintGramFiniteRange projectorData)
+    {pseudoData : Pseudo.FiniteKKTPseudoinverseData Multiplier}
+    (finiteRange : ConstraintGramFiniteRange pseudoData)
     left right →
   interactionRange finiteRange < distance finiteRange left right →
-  KKT.constraintGram projectorData left right ≡ 0ℚ
+  Pseudo.constraintGram pseudoData left right ≡ 0ℚ
 selectedConstraintGramFiniteRange finiteRange =
   outsideRangeZero finiteRange
 
 record ConstraintGramReducedFloor
     {Multiplier : Set}
-    (projectorData : KKT.FiniteKKTProjectorData Multiplier) : Set₁ where
+    (pseudoData : Pseudo.FiniteKKTPseudoinverseData Multiplier) : Set₁ where
   field
     ReducedMultiplier : (Multiplier → ℚ) → Set
 
@@ -92,57 +92,51 @@ record ConstraintGramReducedFloor
       ReducedMultiplier multiplier →
       reducedFloor
         * Rect.finiteNormSq
-            (KKT.multiplierCarrier projectorData) multiplier
+            (Pseudo.multiplierCarrier pseudoData) multiplier
       ≤ Rect.finiteDot
-          (KKT.multiplierCarrier projectorData)
+          (Pseudo.multiplierCarrier pseudoData)
           multiplier
-          (Rect.applyRectangular
-            (KKT.multiplierCarrier projectorData)
-            (KKT.constraintGram projectorData)
-            multiplier)
+          (Pseudo.gramApply pseudoData multiplier)
 
 open ConstraintGramReducedFloor public
 
 selectedConstraintGramReducedFloor :
   ∀ {Multiplier}
-    {projectorData : KKT.FiniteKKTProjectorData Multiplier}
-    (floorData : ConstraintGramReducedFloor projectorData)
+    {pseudoData : Pseudo.FiniteKKTPseudoinverseData Multiplier}
+    (floorData : ConstraintGramReducedFloor pseudoData)
     multiplier →
   ReducedMultiplier floorData multiplier →
   reducedFloor floorData
     * Rect.finiteNormSq
-        (KKT.multiplierCarrier projectorData) multiplier
+        (Pseudo.multiplierCarrier pseudoData) multiplier
   ≤ Rect.finiteDot
-      (KKT.multiplierCarrier projectorData)
+      (Pseudo.multiplierCarrier pseudoData)
       multiplier
-      (Rect.applyRectangular
-        (KKT.multiplierCarrier projectorData)
-        (KKT.constraintGram projectorData)
-        multiplier)
+      (Pseudo.gramApply pseudoData multiplier)
 selectedConstraintGramReducedFloor = reducedMultiplierCoercive
 
 selectedConstraintGramTilt :
   ∀ {Multiplier} →
   (weight inverseWeight : Multiplier → ℚ) →
-  KKT.FiniteKKTProjectorData Multiplier →
+  Pseudo.FiniteKKTPseudoinverseData Multiplier →
   CT.Matrix Multiplier
-selectedConstraintGramTilt weight inverseWeight projectorData =
+selectedConstraintGramTilt weight inverseWeight pseudoData =
   CT.diagonalConjugate weight inverseWeight
-    (KKT.constraintGram projectorData)
+    (Pseudo.constraintGram pseudoData)
 
 selectedConstraintGramTiltDefect :
   ∀ {Multiplier} →
   (weight inverseWeight : Multiplier → ℚ) →
-  KKT.FiniteKKTProjectorData Multiplier →
+  Pseudo.FiniteKKTPseudoinverseData Multiplier →
   CT.Matrix Multiplier
-selectedConstraintGramTiltDefect weight inverseWeight projectorData =
+selectedConstraintGramTiltDefect weight inverseWeight pseudoData =
   CT.diagonalTiltDefect weight inverseWeight
-    (KKT.constraintGram projectorData)
+    (Pseudo.constraintGram pseudoData)
 
 record ConstraintGramTiltCertificate
     {Multiplier : Set}
-    (projectorData : KKT.FiniteKKTProjectorData Multiplier)
-    (floorData : ConstraintGramReducedFloor projectorData) : Set₁ where
+    (pseudoData : Pseudo.FiniteKKTPseudoinverseData Multiplier)
+    (floorData : ConstraintGramReducedFloor pseudoData) : Set₁ where
   field
     weight inverseWeight : Multiplier → ℚ
     distortion rowMass : ℚ
@@ -158,8 +152,8 @@ record ConstraintGramTiltCertificate
 
     gramRowMassBound : ∀ left →
       Tilt.absoluteRowMass
-        (Matrix.coordinates (KKT.multiplierCarrier projectorData))
-        (KKT.constraintGram projectorData) left
+        (Matrix.coordinates (Pseudo.multiplierCarrier pseudoData))
+        (Pseudo.constraintGram pseudoData) left
       ≤ rowMass
 
     halfGapBudget :
@@ -169,24 +163,24 @@ open ConstraintGramTiltCertificate public
 
 selectedConstraintGramTiltBelowHalfGap :
   ∀ {Multiplier}
-    {projectorData : KKT.FiniteKKTProjectorData Multiplier}
-    {floorData : ConstraintGramReducedFloor projectorData} →
-  (certificate : ConstraintGramTiltCertificate projectorData floorData) →
+    {pseudoData : Pseudo.FiniteKKTPseudoinverseData Multiplier}
+    {floorData : ConstraintGramReducedFloor pseudoData} →
+  (certificate : ConstraintGramTiltCertificate pseudoData floorData) →
   ∀ left →
   Tilt.tiltDefectAbsoluteRowMass
-    (Matrix.coordinates (KKT.multiplierCarrier projectorData))
+    (Matrix.coordinates (Pseudo.multiplierCarrier pseudoData))
     (weight certificate)
     (inverseWeight certificate)
-    (KKT.constraintGram projectorData)
+    (Pseudo.constraintGram pseudoData)
     left
   ≤ halfGap floorData
 selectedConstraintGramTiltBelowHalfGap
-    {projectorData = projectorData} {floorData = floorData} certificate =
+    {pseudoData = pseudoData} {floorData = floorData} certificate =
   Tilt.tiltDefectRowBelowBudget
-    (Matrix.coordinates (KKT.multiplierCarrier projectorData))
+    (Matrix.coordinates (Pseudo.multiplierCarrier pseudoData))
     (weight certificate)
     (inverseWeight certificate)
-    (KKT.constraintGram projectorData)
+    (Pseudo.constraintGram pseudoData)
     (distortion certificate)
     (rowMass certificate)
     (halfGap floorData)
@@ -197,8 +191,8 @@ selectedConstraintGramTiltBelowHalfGap
 
 record ConstraintGramDecayCertificate
     {Multiplier : Set}
-    (projectorData : KKT.FiniteKKTProjectorData Multiplier)
-    (floorData : ConstraintGramReducedFloor projectorData)
+    (pseudoData : Pseudo.FiniteKKTPseudoinverseData Multiplier)
+    (floorData : ConstraintGramReducedFloor pseudoData)
     (root target : Multiplier) : Set₁ where
   field
     weight inverseWeight : Multiplier → ℚ
@@ -209,28 +203,28 @@ record ConstraintGramDecayCertificate
     targetWeightAbsolute : ∣ weight target ∣ ≡ weight target
     tiltedGreenEntryBound :
       ∣ CT.diagonalConjugate weight inverseWeight
-          (KKT.multiplierGreen projectorData) root target ∣
+          (Pseudo.gramPseudoinverse pseudoData) root target ∣
       ≤ tiltedGreenMajorant floorData
 
 open ConstraintGramDecayCertificate public
 
 selectedConstraintGramCombesThomasDecay :
   ∀ {Multiplier}
-    (projectorData : KKT.FiniteKKTProjectorData Multiplier)
-    (floorData : ConstraintGramReducedFloor projectorData)
+    (pseudoData : Pseudo.FiniteKKTPseudoinverseData Multiplier)
+    (floorData : ConstraintGramReducedFloor pseudoData)
     root target
     (certificate : ConstraintGramDecayCertificate
-      projectorData floorData root target) →
-  ∣ KKT.multiplierGreen projectorData root target ∣
+      pseudoData floorData root target) →
+  ∣ Pseudo.gramPseudoinverse pseudoData root target ∣
   ≤ tiltedGreenMajorant floorData
       * weight certificate target
 selectedConstraintGramCombesThomasDecay
-    projectorData floorData root target certificate =
+    pseudoData floorData root target certificate =
   CT.combesThomasKernelDecayFromTiltedEntry
     (weight certificate)
     (inverseWeight certificate)
     (inverseLaw certificate)
-    (KKT.multiplierGreen projectorData)
+    (Pseudo.gramPseudoinverse pseudoData)
     root target
     (tiltedGreenMajorant floorData)
     (rootInverseOne certificate)
