@@ -1,7 +1,11 @@
 module DASHI.Reasoning.RelationalEverything where
 
+import DASHI.Biology.PredictiveMetastabilityTraumaBridge
 import DASHI.Biology.SymbolicTransformWithoutHomunculus
 import DASHI.Cognition.PNF.EventAlgebra
+import DASHI.Cognition.PNF.TraumaMemoryHypervoxelBridge
+import DASHI.Core.RelationalHypervoxelBraidCore
+import DASHI.FullRelationalFlowRepairHyperfabric
 import DASHI.Physics.ShiftDiscreteWaveStep
 import DASHI.Physics.ShiftUnitaryLikeConstraint
 import DASHI.Reasoning.TypedHyperfabricCore
@@ -13,5 +17,6 @@ import DASHI.Reasoning.IntergenerationalNameIntrusion
 import DASHI.Reasoning.AttractorAlignedBranchSelection
 import DASHI.Reasoning.RelationalBranchInterference
 import DASHI.Reasoning.RelationalProcessMemoryHyperfabric
+import DASHI.Reasoning.DevelopmentalAttunementPNFBridge
 import DASHI.Reasoning.RelationalFormalismSourceAtlas
 import DASHI.Reasoning.RelationalRegression
