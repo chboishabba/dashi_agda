@@ -22,11 +22,12 @@ module DASHI.Physics.Closure.NSTriadKNLiteralNonlinearEnergyCancellationRound30E
 -- third leg as an ad hoc balancing receipt.
 ------------------------------------------------------------------------
 
-open import Agda.Primitive using (Level; lsuc)
+open import Agda.Primitive using (Level; lsuc; _⊔_)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_)
+open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 sumPower : ∀ {Packet : Set} → List Packet → (Packet → ℚ) → ℚ
@@ -48,7 +49,7 @@ sumPointwiseZero (packet ∷ rest) contribution pointwise =
       (sumPointwiseZero rest contribution pointwise))
     (trans
       (cong (λ selected → selected + 0ℚ) (pointwise packet))
-      refl)
+      (solve []))
 
 record LiteralCanonicalTriadEnergyFamily
     {packetLevel : Level}
