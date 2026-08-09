@@ -20,10 +20,30 @@ module DASHI.Biology.EisensteinNineRingInterferenceExact where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; _+_; _-_; _*_)
+  (ℚ; 0ℚ; _+_; _-_; _*_; _/_)
 import Data.Rational.Tactic.RingSolver as ℚRing
 
 import DASHI.Biology.TernaryHypercubeHyperfabricExact as Hyper
+
+------------------------------------------------------------------------
+-- Explicit rational constants.  Integer constructors appear only as the
+-- numerators of /1 rational values; no integer is used where ℚ is expected.
+------------------------------------------------------------------------
+
+qOne : ℚ
+qOne = + 1 / 1
+
+qTwo : ℚ
+qTwo = + 2 / 1
+
+qThree : ℚ
+qThree = + 3 / 1
+
+qMinusOne : ℚ
+qMinusOne = 0ℚ - qOne
+
+qMinusThree : ℚ
+qMinusThree = 0ℚ - qThree
 
 record Eisenstein : Set where
   constructor eisenstein
@@ -52,16 +72,16 @@ norm (eisenstein a b) = a * a - a * b + b * b
 
 crossTerm : Eisenstein → Eisenstein → ℚ
 crossTerm (eisenstein a b) (eisenstein c d) =
-  (+ 2) * a * c - a * d - b * c + (+ 2) * b * d
+  qTwo * a * c - a * d - b * c + qTwo * b * d
 
 one : Eisenstein
-one = eisenstein (+ 1) 0ℚ
+one = eisenstein qOne 0ℚ
 
 omega : Eisenstein
-omega = eisenstein 0ℚ (+ 1)
+omega = eisenstein 0ℚ qOne
 
 omegaSquared : Eisenstein
-omegaSquared = eisenstein (0ℚ - (+ 1)) (0ℚ - (+ 1))
+omegaSquared = eisenstein qMinusOne qMinusOne
 
 omegaSquareReal : realCoordinate (multiply omega omega) ≡ realCoordinate omegaSquared
 omegaSquareReal = refl
@@ -84,24 +104,24 @@ threePhaseCancellationReal = refl
 threePhaseCancellationOmega : omegaCoordinate threePhaseSum ≡ 0ℚ
 threePhaseCancellationOmega = refl
 
-oneHasUnitNorm : norm one ≡ + 1
+oneHasUnitNorm : norm one ≡ qOne
 oneHasUnitNorm = refl
 
-omegaHasUnitNorm : norm omega ≡ + 1
+omegaHasUnitNorm : norm omega ≡ qOne
 omegaHasUnitNorm = refl
 
-omegaSquaredHasUnitNorm : norm omegaSquared ≡ + 1
+omegaSquaredHasUnitNorm : norm omegaSquared ≡ qOne
 omegaSquaredHasUnitNorm = refl
 
-pairOneOmegaCrossIsMinusOne : crossTerm one omega ≡ 0ℚ - (+ 1)
+pairOneOmegaCrossIsMinusOne : crossTerm one omega ≡ qMinusOne
 pairOneOmegaCrossIsMinusOne = refl
 
 pairOneOmegaSquaredCrossIsMinusOne :
-  crossTerm one omegaSquared ≡ 0ℚ - (+ 1)
+  crossTerm one omegaSquared ≡ qMinusOne
 pairOneOmegaSquaredCrossIsMinusOne = refl
 
 pairOmegaOmegaSquaredCrossIsMinusOne :
-  crossTerm omega omegaSquared ≡ 0ℚ - (+ 1)
+  crossTerm omega omegaSquared ≡ qMinusOne
 pairOmegaOmegaSquaredCrossIsMinusOne = refl
 
 normPolarization :
@@ -120,11 +140,11 @@ threePhasePairMass =
   + crossTerm one omegaSquared
   + crossTerm omega omegaSquared
 
-threePhaseDiagonalMassIsThree : threePhaseDiagonalMass ≡ + 3
+threePhaseDiagonalMassIsThree : threePhaseDiagonalMass ≡ qThree
 threePhaseDiagonalMassIsThree = refl
 
 threePhasePairMassIsMinusThree :
-  threePhasePairMass ≡ 0ℚ - (+ 3)
+  threePhasePairMass ≡ qMinusThree
 threePhasePairMassIsMinusThree = refl
 
 threePhaseTotalMassCancels :
@@ -168,7 +188,7 @@ canonicalDestructivePair : HostGuestWave
 canonicalDestructivePair = hostGuestWave one omega
 
 canonicalDestructiveCrossIsMinusOne :
-  interferenceContribution canonicalDestructivePair ≡ 0ℚ - (+ 1)
+  interferenceContribution canonicalDestructivePair ≡ qMinusOne
 canonicalDestructiveCrossIsMinusOne = refl
 
 ------------------------------------------------------------------------
