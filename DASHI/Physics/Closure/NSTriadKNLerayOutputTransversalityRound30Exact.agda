@@ -33,7 +33,8 @@ module DASHI.Physics.Closure.NSTriadKNLerayOutputTransversalityRound30Exact wher
 open import Agda.Primitive using (Level)
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Relation.Binary.PropositionalEquality using
+  (cong; cong₂; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
