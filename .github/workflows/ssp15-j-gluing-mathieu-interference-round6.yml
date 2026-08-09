@@ -26,6 +26,7 @@ on:
       - 'scripts/run_agda29_parallel_check.sh'
       - 'Docs/support/reference/SSP15JGluingMathieuInterferenceRound6.md'
       - 'Docs/support/reference/SSP15MathieuDivisorPathInterferenceExact.md'
+      - 'Docs/support/reference/SSP15MathieuTowerArithmeticWitnessBoundary.md'
       - '.github/workflows/ssp15-j-gluing-mathieu-interference-round6.yml'
   workflow_dispatch:
 
