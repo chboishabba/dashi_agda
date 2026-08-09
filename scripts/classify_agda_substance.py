@@ -32,9 +32,8 @@ RECORD_RE = re.compile(r"(?m)^\s*record\s+[A-Za-z0-9_'.-]+")
 IMPORT_RE = re.compile(r"(?m)^\s*(?:open\s+)?import\s+")
 EQUATION_RE = re.compile(r"(?m)^\s*[A-Za-z0-9_'-]+(?:\s+[^:=\n]+)+\s*=\s*(?!refl\b).+$")
 THEOREM_SIGNATURE_RE = re.compile(
-    r"(?m)^([A-Za-z][A-Za-z0-9_'-]*(?:\s*\{[^\n]*\})?)\s*:\s*$"
+    r"(?m)^[A-Za-z][A-Za-z0-9_'-]*(?:\s*\{[^\n]*\})?\s*:"
 )
-COMMENT_LINE_RE = re.compile(r"(?m)^\s*--")
 
 
 @dataclass(frozen=True)
@@ -145,11 +144,11 @@ postulate A : Set
     ledger_metrics = classify_text("ledger.agda", ledger)
     unsafe_metrics = classify_text("unsafe.agda", unsafe)
 
-    assert proof_metrics.category in {
-        "proof-bearing-computational",
-        "structural-with-witnesses",
-    }
-    assert ledger_metrics.string_literals == 0 or ledger_metrics.bool_fields >= 1
+    assert proof_metrics.executable_equations >= 2
+    assert proof_metrics.theorem_signatures >= 2
+    assert proof_metrics.postulates == 0
+    assert proof_metrics.holes == 0
+    assert ledger_metrics.bool_fields >= 1
     assert unsafe_metrics.category == "external-or-unsafe-interface"
     assert unsafe_metrics.postulates == 1
 
