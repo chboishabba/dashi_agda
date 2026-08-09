@@ -1,9 +1,10 @@
-name: Yang-Mills Clay highest-alpha round 40
+name: Highest-alpha cumulative validation through round 41
 
 on:
   push:
     branches:
       - 'agent/ym-clay-alpha-round40-multiplier-locality-correlated-singleton'
+      - 'agent/ym-ns-alpha-round41-physical-producer-kernel'
   pull_request:
   workflow_dispatch:
 
@@ -17,7 +18,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
-      - name: Check round forty
+      - name: Check cumulative round
         id: check
         shell: bash
         run: |
@@ -27,22 +28,26 @@ jobs:
             export AGDA_FLAKE="github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin"
             export DASHI_REPO_ROOT="$GITHUB_WORKSPACE"
             export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
-            export AGDA_LOG_PATH="$GITHUB_WORKSPACE/ym-round40-agda.log"
+            export AGDA_LOG_PATH="$GITHUB_WORKSPACE/highest-alpha-agda.log"
             export AGDA_JOBS=4
-            bash scripts/check_yang_mills_clay_highest_alpha_round40.sh
-          ) > ym-round40-check.log 2>&1
+            if [[ -f scripts/check_highest_alpha_producer_kernel_round41.sh ]]; then
+              bash scripts/check_highest_alpha_producer_kernel_round41.sh
+            else
+              bash scripts/check_yang_mills_clay_highest_alpha_round40.sh
+            fi
+          ) > highest-alpha-check.log 2>&1
           status=$?
           echo "status=$status" >> "$GITHUB_OUTPUT"
-          tail -n 500 ym-round40-check.log
+          tail -n 500 highest-alpha-check.log
           exit 0
       - name: Upload logs
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: ym-round40-logs
+          name: highest-alpha-round41-logs
           path: |
-            ym-round40-check.log
-            ym-round40-agda.log
+            highest-alpha-check.log
+            highest-alpha-agda.log
           if-no-files-found: warn
       - name: Fail on checker error
         if: steps.check.outputs.status != '0'
