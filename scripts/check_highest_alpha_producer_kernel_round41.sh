@@ -9,10 +9,12 @@ bash scripts/check_yang_mills_clay_highest_alpha_round40.sh
 
 files=(
   DASHI/Physics/Common/PhysicalProducerMaturityExact.agda
+  DASHI/Physics/Common/SameSourceGluedProducerExact.agda
   DASHI/Physics/YangMills/BalabanFiniteLinearFunctionalCoordinatesExact.agda
   DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeConstraintMatrixExact.agda
   DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeConstraintStencilExact.agda
   DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeGramFiniteRangeExact.agda
+  DASHI/Physics/YangMills/BalabanSelectedCombinedConstraintGluingExact.agda
   DASHI/Physics/YangMills/BalabanSelectedOwnerBudgetSlackExact.agda
   DASHI/Physics/YangMills/BalabanSelectedCertifiedOwnerEnclosureExact.agda
   DASHI/Physics/YangMills/BalabanSelectedSinglePlaquetteWitnessExact.agda
@@ -40,6 +42,8 @@ grep -q 'PhysicalProducer' DASHI/Physics/Common/PhysicalProducerMaturityExact.ag
 grep -q 'sameCarrierCompositeExact' DASHI/Physics/Common/PhysicalProducerMaturityExact.agda
 grep -q 'sourceRepresentsIntermediate' DASHI/Physics/Common/PhysicalProducerMaturityExact.agda
 grep -q 'intermediateRepresentsOutput' DASHI/Physics/Common/PhysicalProducerMaturityExact.agda
+grep -q 'SameSourceGluedProducer' DASHI/Physics/Common/SameSourceGluedProducerExact.agda
+grep -q 'sameSourceCombinedUniquePointwise' DASHI/Physics/Common/SameSourceGluedProducerExact.agda
 
 grep -q 'finiteLinearFunctionalCoordinateExpansion' DASHI/Physics/YangMills/BalabanFiniteLinearFunctionalCoordinatesExact.agda
 grep -q 'selectedBackgroundGaugeConstraintMatrix' DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeConstraintMatrixExact.agda
@@ -48,6 +52,9 @@ grep -q 'GaugeConstraintSpatialSupport' DASHI/Physics/YangMills/BalabanSelectedB
 grep -q 'selectedBackgroundGaugeConstraintMatrixOutsideStencilZero' DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeConstraintStencilExact.agda
 grep -q 'selectedBackgroundGaugeGram' DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeGramFiniteRangeExact.agda
 grep -q 'selectedBackgroundGaugeGramOutsideRangeZero' DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeGramFiniteRangeExact.agda
+grep -q 'selectedBackgroundCombinedConstraintCommutesWithProjections' DASHI/Physics/YangMills/BalabanSelectedCombinedConstraintGluingExact.agda
+grep -q 'selectedBackgroundCombinedConstraintUnique' DASHI/Physics/YangMills/BalabanSelectedCombinedConstraintGluingExact.agda
+grep -q 'selectedConstraintOperatorLayerForced' DASHI/Physics/YangMills/BalabanSelectedCombinedConstraintGluingExact.agda
 grep -q 'ownerBudgetSlack' DASHI/Physics/YangMills/BalabanSelectedOwnerBudgetSlackExact.agda
 grep -q 'slackCompletesLegacyOwnerBudget' DASHI/Physics/YangMills/BalabanSelectedOwnerBudgetSlackExact.agda
 grep -q 'certifiedEnclosuresToOwnerBounds' DASHI/Physics/YangMills/BalabanSelectedCertifiedOwnerEnclosureExact.agda
