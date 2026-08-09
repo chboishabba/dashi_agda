@@ -302,7 +302,20 @@ The Agda theorem proves for arbitrary integer-pair waves:
 }
 \]
 
-The cross term is the exact branch-interference contribution.
+The cross term is the exact branch-interference contribution.  Its sign is
+transported into the optimizer by a dependent certificate:
+
+\[
+2\langle\psi,\chi\rangle>0\Rightarrow\mathsf{reinforcing},
+\qquad
+2\langle\psi,\chi\rangle=0\Rightarrow\mathsf{independent},
+\qquad
+2\langle\psi,\chi\rangle<0\Rightarrow\mathsf{interfering}.
+\]
+
+The certificate retains both the exact integer cross term and the optimizer's
+direction and magnitude, preventing the wave and portfolio layers from drifting
+into unrelated metaphors.
 
 Canonical witnesses include:
 
