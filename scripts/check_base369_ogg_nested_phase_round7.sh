@@ -11,9 +11,11 @@ sources=(
   DASHI/Foundations/Base369CompletedRelationalDigitExact.agda
   DASHI/Foundations/Base369FiveModePhaseQuotientExact.agda
   DASHI/Foundations/Base369RelationalSymmetryRealisationExact.agda
+  DASHI/Foundations/Base369PhaseCompletionAndNestedEvaluationExact.agda
   DASHI/Moonshine/MonsterOggNonarySSPTritBridgeExact.agda
   DASHI/Moonshine/Monster3BBalancedRegularFibreExact.agda
   DASHI/Moonshine/MonsterOggPrimaryDepthAndNestedEigenCarrierExact.agda
+  DASHI/Moonshine/MonsterFivePrimaryRelationalModelBoundaryExact.agda
   DASHI/Foundations/Base369OggNestedPhaseRound7Validation.agda
   DASHI/EverythingBase369OggNestedPhaseRound7.agda
 )
