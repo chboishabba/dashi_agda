@@ -77,7 +77,7 @@ A raw shell Bernstein estimate alone cannot close the lane.
 
 ## Same-carrier, same-object condition
 
-The strengthened Galerkin builder now requires:
+The same-carrier invariant is strengthened to a literal same-object condition. The Galerkin builder now requires:
 
 ```text
 velocityAt(positive mode) = stored positive coefficient
