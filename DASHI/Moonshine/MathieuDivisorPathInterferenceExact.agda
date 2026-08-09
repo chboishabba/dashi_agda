@@ -19,8 +19,7 @@ module DASHI.Moonshine.MathieuDivisorPathInterferenceExact where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Integer.Base using (+_)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _-_)
+open import Data.Rational.Base as ℚ using (ℚ; _+_)
 
 import DASHI.Biology.EisensteinNineRingInterferenceExact as Eisenstein
 import DASHI.Moonshine.MathieuDivisorLatticeExact as Divisor
@@ -89,21 +88,21 @@ canonicalHistoriesReachSix :
 canonicalHistoriesReachSix = refl
 
 canonicalNodeIntensityIsOne :
-  nodeIntensity canonicalPhaseDecoratedConfluence ≡ + 1
+  nodeIntensity canonicalPhaseDecoratedConfluence ≡ Eisenstein.qOne
 canonicalNodeIntensityIsOne = refl
 
 canonicalDiagonalIntensityIsTwo :
-  diagonalIntensity canonicalPhaseDecoratedConfluence ≡ + 2
+  diagonalIntensity canonicalPhaseDecoratedConfluence ≡ Eisenstein.qTwo
 canonicalDiagonalIntensityIsTwo = refl
 
 canonicalPathCrossIsMinusOne :
-  pathCrossTerm canonicalPhaseDecoratedConfluence ≡ 0ℚ - (+ 1)
+  pathCrossTerm canonicalPhaseDecoratedConfluence ≡ Eisenstein.qMinusOne
 canonicalPathCrossIsMinusOne = refl
 
 canonicalInterferenceLedger :
   diagonalIntensity canonicalPhaseDecoratedConfluence
   + pathCrossTerm canonicalPhaseDecoratedConfluence
-  ≡ + 1
+  ≡ Eisenstein.qOne
 canonicalInterferenceLedger = refl
 
 record DivisorPathInterferenceBoundary : Set where
