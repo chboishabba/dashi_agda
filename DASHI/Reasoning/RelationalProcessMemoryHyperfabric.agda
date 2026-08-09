@@ -141,6 +141,7 @@ record QuantitativeFamilyRefinement : Set where
     qualitativeFamily : BranchFamily
     selectionPortfolio : Selection.BranchPortfolio
     branchWaves : List Interference.BranchWave
+    waveBackedInteractions : List Interference.WaveBackedInteraction
     exactNSlitReceipt :
       Interference.coherentIntensity branchWaves
       ≡
