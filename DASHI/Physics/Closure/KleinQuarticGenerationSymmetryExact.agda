@@ -43,8 +43,8 @@ FullySymmetricSelectedFactor : Set
 FullySymmetricSelectedFactor =
   Σ Factor3
     (λ factor →
-      swapAB factor ≡ factor
-      × swapBC factor ≡ factor)
+      (swapAB factor ≡ factor)
+      × (swapBC factor ≡ factor))
 
 noFullySymmetricSelectedFactor :
   FullySymmetricSelectedFactor → ⊥
@@ -75,7 +75,7 @@ receiptStillBlocksPhysicalCKMPromotion :
   ≡ false
 receiptStillBlocksPhysicalCKMPromotion = refl
 
-record ThreeFactorGenerationBoundary : Set where
+record ThreeFactorGenerationBoundary : Set₁ where
   constructor threeFactorGenerationBoundary
   field
     factorCarrier : Set
@@ -84,8 +84,8 @@ record ThreeFactorGenerationBoundary : Set where
     noCommonFixedSelector :
       Σ factorCarrier
         (λ factor →
-          firstTransposition factor ≡ factor
-          × secondTransposition factor ≡ factor)
+          (firstTransposition factor ≡ factor)
+          × (secondTransposition factor ≡ factor))
       → ⊥
     threeFactorsExist : Bool
     threeFactorsExistIsTrue : threeFactorsExist ≡ true
