@@ -85,7 +85,7 @@ constraintGramCovariantUnderD4 {pseudoData = pseudoData}
     (trans
       (Rect.applyRectangularVectorCong
         KKT.physicalStateCarrier
-        (Pseudo.constraintMatrix pseudoData)
+        (KKT.constraintMatrix (Pseudo.projectorData pseudoData))
         (adjointCovariant covariance symmetry multiplier)
         row)
       (trans
