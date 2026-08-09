@@ -12,6 +12,7 @@ files=(
   DASHI/Physics/YangMills/BalabanSelectedMultiplierPairingRedundancyInvariantExact.agda
   DASHI/Physics/YangMills/BalabanSelectedConstraintCollarPairingExact.agda
   DASHI/Physics/YangMills/BalabanSelectedRawExtractorConstraintDefectAtomsExact.agda
+  DASHI/Physics/YangMills/BalabanSelectedConstraintAtomGreenExpansionExact.agda
   DASHI/Physics/YangMills/BalabanSelectedMultiplierDefectGreenContractionExact.agda
   DASHI/Physics/YangMills/BalabanSelectedCorrelatedResidualOwnershipExact.agda
   DASHI/Physics/YangMills/BalabanSelectedConstraintGramCombesThomasExact.agda
@@ -61,6 +62,7 @@ checks=(
   'BalabanSelectedConstraintCollarPairingExact.agda:outsideCollarMultiplierAnnihilatesDefect'
   'BalabanSelectedRawExtractorConstraintDefectAtomsExact.agda:selectedRawExtractorConstraintDefectAtomsExact'
   'BalabanSelectedRawExtractorConstraintDefectAtomsExact.agda:literalRawDefectAtomReconstruction'
+  'BalabanSelectedConstraintAtomGreenExpansionExact.agda:constraintAtomGreenExpansionExact'
   'BalabanSelectedMultiplierDefectGreenContractionExact.agda:selectedMultiplierDefectGreenContractionExact'
   'BalabanSelectedCorrelatedResidualOwnershipExact.agda:correlatedResidualReconstructedFromOwners'
   'BalabanSelectedCorrelatedResidualOwnershipExact.agda:exactCorrelatedCancellationRemovedBeforeMajorisation'
@@ -93,6 +95,7 @@ done
 # The locality route must remain redundancy-safe end to end.
 grep -q 'FiniteKKTPseudoinverseData' DASHI/Physics/YangMills/BalabanSelectedConstraintCollarPairingExact.agda
 grep -q 'FiniteKKTPseudoinverseData' DASHI/Physics/YangMills/BalabanSelectedRawExtractorConstraintDefectAtomsExact.agda
+grep -q 'FiniteKKTPseudoinverseData' DASHI/Physics/YangMills/BalabanSelectedConstraintAtomGreenExpansionExact.agda
 grep -q 'FiniteKKTPseudoinverseData' DASHI/Physics/YangMills/BalabanSelectedConstraintGramCombesThomasExact.agda
 
 # The multiplier Gram has its own gamma_L; it must not borrow the 1/32 state floor.
