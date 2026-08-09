@@ -102,6 +102,9 @@ record KAMWitness (problem : KAMProblem) : Set₁ where
 
 open KAMWitness public
 
+KAMAuthority : Set₁
+KAMAuthority = Σ KAMProblem KAMWitness
+
 data CascadeComparison : Set where
   frequencyCascadeAnalogy : CascadeComparison
 
@@ -123,7 +126,6 @@ record CarrierKAMBoundary : Set where
     cascadeAnalogyPromotesKAM : Bool
     cascadeAnalogyPromotesKAMIsFalse :
       cascadeAnalogyPromotesKAM ≡ false
-    KAMRequiresSeparateWitness : Set₁
 
 canonicalCarrierKAMBoundary : CarrierKAMBoundary
 canonicalCarrierKAMBoundary =
@@ -131,4 +133,3 @@ canonicalCarrierKAMBoundary =
     phaseThreeResonance
     orderThreeRotationRefutesNoReturn
     false refl
-    (Σ KAMProblem KAMWitness)
