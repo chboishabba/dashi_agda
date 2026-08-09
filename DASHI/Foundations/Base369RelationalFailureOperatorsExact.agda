@@ -3,50 +3,30 @@ module DASHI.Foundations.Base369RelationalFailureOperatorsExact where
 ------------------------------------------------------------------------
 -- DASHI CONTRIBUTION
 --
--- Three recurrent relational failures are typed separately:
---
---   * projection loss: a rich latent state is replaced by a lossy observable;
---   * prior contamination: the current participant is evaluated through an
---     unresolved identity template;
---   * recursive boundary expansion: each defensive transition spawns a new
---     unresolved object while preserving the original unresolved boundary.
---
--- Defensive reflection is also separated from genuine inversion, and consent
--- is separated from behaviour by the availability of counterfactual refusal.
+-- Projection loss, prior contamination and recursive boundary expansion are
+-- independent failures.  Defensive reflection is separated from genuine
+-- inversion, and behaviour is separated from consent by counterfactual refusal
+-- and capacity witnesses.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; suc)
-
-------------------------------------------------------------------------
--- Projection loss.
-------------------------------------------------------------------------
 
 record ProjectionLoss : Set₁ where
   constructor projectionLoss
   field
-    Latent : Set
-    Observable : Set
+    Latent Observable : Set
     project : Latent → Observable
-    distinctLatentA : Latent
-    distinctLatentB : Latent
+    distinctLatentA distinctLatentB : Latent
     sameObservation : project distinctLatentA ≡ project distinctLatentB
 
 open ProjectionLoss public
 
--- Equal observed behaviour therefore does not imply equal latent state.
-
-------------------------------------------------------------------------
--- Prior contamination.
-------------------------------------------------------------------------
-
 record PriorContamination : Set₁ where
   constructor priorContamination
   field
-    Current : Set
-    PriorTemplate : Set
-    Perceived : Set
+    Current PriorTemplate Perceived : Set
     observeCurrent : Current → Perceived
     contaminate : Current → PriorTemplate → Perceived
 
@@ -57,14 +37,9 @@ record UncontaminatedObservation (p : PriorContamination) : Set₁ where
   field
     current : Current p
     prior : PriorTemplate p
-    contaminationAbsent :
-      contaminate p current prior ≡ observeCurrent p current
+    contaminationAbsent : contaminate p current prior ≡ observeCurrent p current
 
 open UncontaminatedObservation public
-
-------------------------------------------------------------------------
--- Recursive conflict expansion.
-------------------------------------------------------------------------
 
 record BoundaryMeasure : Set where
   constructor boundaryMeasure
@@ -72,32 +47,25 @@ record BoundaryMeasure : Set where
 
 open BoundaryMeasure public
 
-record ProductiveRefinement : Set where
+record ProductiveRefinement : Set₁ where
   constructor productiveRefinement
   field
-    before : BoundaryMeasure
-    after : BoundaryMeasure
+    before after : BoundaryMeasure
     reductionWitness : Set
 
-record RecursiveBoundaryExpansion : Set where
+record RecursiveBoundaryExpansion : Set₁ where
   constructor recursiveBoundaryExpansion
   field
     initiatingBoundary : Set
     newlySpawnedBoundary : Nat → Set
     originalRemainsOpen : (depth : Nat) → Set
     expansionWitness :
-      (depth : Nat) →
-      unresolvedCount (boundaryMeasure (suc depth)) ≡ suc depth
-
-------------------------------------------------------------------------
--- Genuine inversion versus defensive role swapping.
-------------------------------------------------------------------------
+      (depth : Nat) → unresolvedCount (boundaryMeasure (suc depth)) ≡ suc depth
 
 record GroundedComplaint : Set₁ where
   constructor groundedComplaint
   field
-    Act : Set
-    Label : Set
+    Act Label : Set
     particulars : Act
     classification : Label
 
@@ -110,8 +78,7 @@ record GenuineInversion
     inverseAct : Act target
     evidentialTransport : Set
 
-record DefensiveReflection
-  (source : GroundedComplaint) : Set₁ where
+record DefensiveReflection (source : GroundedComplaint) : Set₁ where
   constructor defensiveReflection
   field
     ReturnedLabel : Set
@@ -119,43 +86,23 @@ record DefensiveReflection
     noParticularsTransported : Set
     sourceStillUnresolved : Set
 
-------------------------------------------------------------------------
--- Typed promotion boundaries.
-------------------------------------------------------------------------
-
 data RepresentationalType : Set where
-  presentPreference
-  presentFeeling
-  rememberedEvent
-  attributedIntention
-  proposal
-  assent
-  unilateralDecision
-  jointAgreement
-  publicFact : RepresentationalType
+  presentPreference presentFeeling rememberedEvent attributedIntention
+    proposal assent unilateralDecision jointAgreement publicFact :
+    RepresentationalType
 
 record PromotionWitness
-  (source target : RepresentationalType) : Set where
+  (source target : RepresentationalType) : Set₁ where
   constructor promotionWitness
   field evidence : Set
 
 -- No generic coercion between representational types is provided.
 
-------------------------------------------------------------------------
--- Behaviour and consent are non-identical.
-------------------------------------------------------------------------
-
 data BehaviourObservation : Set where
-  performed
-  silent
-  withdrew
-  froze : BehaviourObservation
+  performed silent withdrew froze : BehaviourObservation
 
 data LatentChoiceState : Set where
-  willing
-  complyingUnderPressure
-  submitted
-  frozenWithoutChoice : LatentChoiceState
+  willing complyingUnderPressure submitted frozenWithoutChoice : LatentChoiceState
 
 observeChoice : LatentChoiceState → BehaviourObservation
 observeChoice willing = performed
@@ -170,9 +117,7 @@ performedObservationIsNonInjective = refl
 record ConsentCounterfactual : Set where
   constructor consentCounterfactual
   field
-    refusalAvailable : Bool
-    deferralAvailable : Bool
-    capacityAvailable : Bool
+    refusalAvailable deferralAvailable capacityAvailable : Bool
 
 open ConsentCounterfactual public
 
