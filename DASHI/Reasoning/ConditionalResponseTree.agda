@@ -87,8 +87,8 @@ open ActualResponse public
 --
 -- ResponseTransportWitness is deliberately only an assessment: its Booleans
 -- may report failed requirements.  AuthorisedResponseTransport is the
--- unforgeable locality gate used to license transport; it requires equality
--- proofs that every relevant assessment field is true.
+-- locality gate used to license transport; it requires equality proofs that
+-- every relevant assessment field is true.
 ------------------------------------------------------------------------
 
 record ResponseTransportWitness
@@ -126,10 +126,7 @@ transportResponse :
   ActualResponse →
   AuthorisedResponseTransport source target →
   PropositionNode
-transportResponse response authorisation = target
-  where
-  target : PropositionNode
-  target = _
+transportResponse {target = target} response authorisation = target
 
 ------------------------------------------------------------------------
 -- Goal-process authority.
