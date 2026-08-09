@@ -8,7 +8,7 @@ module DASHI.Foundations.Base369ProcessBranchAttractorExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
+open import Agda.Builtin.Nat using (Nat)
 
 open import Base369 using
   ( TriTruth
@@ -18,7 +18,10 @@ open import Base369 using
   )
 
 open import DASHI.Foundations.Base369LayeredAttractorAndCoarseFineExact using
-  (LayeredAttractor; HorizonDrift)
+  ( LayeredAttractor
+  ; HorizonDrift
+  ; horizonDrift
+  )
 
 record ProcessBranch
   (Goal State Provenance : Set) : Set₁ where
@@ -41,7 +44,7 @@ branchDrift :
   {Goal State Provenance : Set} →
   ProcessBranch Goal State Provenance → HorizonDrift
 branchDrift branch =
-  DASHI.Foundations.Base369LayeredAttractorAndCoarseFineExact.horizonDrift
+  horizonDrift
     (immediateDirection branch)
     (mediumDirection branch)
     (longDirection branch)
@@ -66,9 +69,6 @@ record GoalProcessState (SearchState : Set) : Set where
     status : GoalStatus
     searchState : SearchState
 
--- A pending/searching state is a constructor carrying search state; it is not
--- definitionally the same object as an unstarted state.
-
 ------------------------------------------------------------------------
 -- Branch-value orientation is a signed reduction of a richer fibre.
 ------------------------------------------------------------------------
@@ -85,7 +85,7 @@ data BranchValueReason : Set where
 record FibredBranchValue : Set where
   constructor fibredBranchValue
   field
-    orientation : TriTruth
+    branchOrientation : TriTruth
     reason : BranchValueReason
 
 open FibredBranchValue public
@@ -120,9 +120,6 @@ record EffectiveBranchOrbit (Branch : Set) : Set₁ where
     representative : Branch
     member : Branch → Set
     operationalCopies : Nat
-
--- The number of nominal copies and the number of dynamically distinct orbits
--- are therefore separate quantities.
 
 ------------------------------------------------------------------------
 -- Adding a branch is beneficial only with a proof-bearing marginal witness.
