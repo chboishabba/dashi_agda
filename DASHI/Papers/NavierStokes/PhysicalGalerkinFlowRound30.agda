@@ -18,6 +18,8 @@ record PhysicalGalerkinFlowRound30Status : Set where
     differentialEnergyIdentityProduced : Bool
     integratedEnergyContinuationBridgeProduced : Bool
     noFiniteMaximalTimeReducerProduced : Bool
+    timeDependentFiveSourceReducerProduced : Bool
+    operatorCotlarSteinReducerProduced : Bool
 
     literalTriadCoefficientProducerSupplied : Bool
     concretePhysicalCoordinateEquivalenceSupplied : Bool
@@ -25,7 +27,8 @@ record PhysicalGalerkinFlowRound30Status : Set where
     literalNavierStokesEnergyPacketIdentificationSupplied : Bool
     realTimeIntegrationAuthoritySupplied : Bool
     finiteGlobalPhysicalFlowInstantiated : Bool
-    physicalShellBalanceProduced : Bool
+    literalTrajectoryShellAuthoritySupplied : Bool
+    physicalCrossShellOperatorDecaySupplied : Bool
     physicalNineOwnerEstimatesProduced : Bool
     unconditionalClayPromotion : Bool
 
@@ -35,23 +38,38 @@ canonicalPhysicalGalerkinFlowRound30Status :
   PhysicalGalerkinFlowRound30Status
 canonicalPhysicalGalerkinFlowRound30Status =
   physical-galerkin-flow-round30-status
-    true true true true true true true true true true
-    false false false false false false false false false
+    true true true true true true true true true true true true
+    false false false false false false false false false false
 
 physicalFiniteFlowReducerAdvanced :
   noFiniteMaximalTimeReducerProduced
     canonicalPhysicalGalerkinFlowRound30Status ≡ true
 physicalFiniteFlowReducerAdvanced = refl
 
-literalPhysicalFlowStillRequiresFiveProducers :
+physicalShellReducerAdvanced :
+  timeDependentFiveSourceReducerProduced
+    canonicalPhysicalGalerkinFlowRound30Status ≡ true
+physicalShellReducerAdvanced = refl
+
+operatorCotlarReducerAdvanced :
+  operatorCotlarSteinReducerProduced
+    canonicalPhysicalGalerkinFlowRound30Status ≡ true
+operatorCotlarReducerAdvanced = refl
+
+literalPhysicalFlowStillRequiresProducers :
   finiteGlobalPhysicalFlowInstantiated
     canonicalPhysicalGalerkinFlowRound30Status ≡ false
-literalPhysicalFlowStillRequiresFiveProducers = refl
+literalPhysicalFlowStillRequiresProducers = refl
 
-physicalShellBalanceStillOpen :
-  physicalShellBalanceProduced
+literalPhysicalShellStillOpen :
+  literalTrajectoryShellAuthoritySupplied
     canonicalPhysicalGalerkinFlowRound30Status ≡ false
-physicalShellBalanceStillOpen = refl
+literalPhysicalShellStillOpen = refl
+
+physicalOperatorDecayStillOpen :
+  physicalCrossShellOperatorDecaySupplied
+    canonicalPhysicalGalerkinFlowRound30Status ≡ false
+physicalOperatorDecayStillOpen = refl
 
 clayPromotionStillFalse :
   unconditionalClayPromotion
