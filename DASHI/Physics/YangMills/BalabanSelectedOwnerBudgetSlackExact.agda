@@ -33,7 +33,7 @@ open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; _+_; _-_; _*_; _≤_; NonNegative; nonNegative)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundVariationSelectorExact as Selector
@@ -129,13 +129,13 @@ farUpperAfterSlackCompletion :
   ∀ {family charge}
     (bounds : CorrelatedOwnerBoundsWithSlack family charge) →
   Ownership.ownerContribution family Ownership.farGreenOwner
-  ≤ (farGreenCoefficient bounds
+  ≤ ((farGreenCoefficient bounds
       + ownerBudgetSlack
           (localizationCoefficient bounds)
           (transportCoefficient bounds)
           (nearGreenCoefficient bounds)
           (farGreenCoefficient bounds))
-      * charge
+      * charge)
 farUpperAfterSlackCompletion {charge = charge} bounds =
   let
     instance
