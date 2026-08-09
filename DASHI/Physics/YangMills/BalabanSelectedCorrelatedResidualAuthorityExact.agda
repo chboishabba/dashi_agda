@@ -28,7 +28,7 @@ module DASHI.Physics.YangMills.BalabanSelectedCorrelatedResidualAuthorityExact w
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Rational.Base as ℚ using (ℚ; _-_)
-open import Relation.Binary.PropositionalEquality using (cong₂; trans)
+open import Relation.Binary.PropositionalEquality using (cong₂; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
@@ -105,10 +105,9 @@ canonicalCorrelatedResidualExact
     authority =
   cong₂ _-_
     (rawLocalizationReconstruct authority)
-    (trans
+    (sym
       (GreenExpansion.constraintAtomGreenExpansionExact
-        (constraintAtoms authority))
-      (Agda.Builtin.Equality.refl))
+        (constraintAtoms authority)))
 
 canonicalCorrelatedResidualIsProjectedSpillover :
   ∀ {Multiplier pseudoData firstVariationCovector rawExtractor}
