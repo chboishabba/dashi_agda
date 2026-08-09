@@ -52,7 +52,8 @@ record CanonicalGalerkinState (Mode : Set) : Set₁ where
 open CanonicalGalerkinState public
 
 encodedState :
-  ∀ {Mode} → CanonicalGalerkinState Mode → EncodedState
+  ∀ {Mode} (state : CanonicalGalerkinState Mode) →
+  EncodedState state
 encodedState state =
   Producer.intermediate (producerChain state)
 
