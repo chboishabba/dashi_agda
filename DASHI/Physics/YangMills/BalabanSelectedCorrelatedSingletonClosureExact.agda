@@ -16,110 +16,192 @@ module DASHI.Physics.YangMills.BalabanSelectedCorrelatedSingletonClosureExact wh
 --
 -- DASHI CONTRIBUTION
 --
--- Assemble the corrected selected-variation sign with the pair-indexed Green
--- owner ledger.  After exact cancellation and before positive majorisation,
--- the canonical residual
+-- Assemble the Round-40 algebra into the existing physical selector reducer.
+-- The projected variation has the exact public form
 --
---   RawLocalization - <Lg,K+Lw>
+--   dS(Pw) = Singleton + RawLocalization - <lambda,Lw>.
 --
--- is bounded by 55/18874368 times the plaquette cross charge.  Stationarity
--- then gives the literal singleton curvature lower bound with the correct
--- reflected sign.  This is the terminal algebraic reducer for Gate I; the
--- selected-background atom estimates remain explicit producer data.
+-- The final two terms are identified with the signed, owner-aggregated
+-- correlated residual.  Exact cancellation is removed first; the four
+-- surviving owner estimates close 55/18874368.  The resulting witness reuses
+-- the already physical pair/deep channel to obtain the correlated Wilson lower
+-- bound.  No alternative sign or arbitrary 27+28 split enters this path.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; _+_; _*_; -_; _≤_)
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanP33PhysicalRationalWilsonPlaquetteJetExact as Physical
+import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Coordinates
+import DASHI.Physics.YangMills.BalabanP33PhysicalWilsonLinearNonlinearPartitionExact as Partition
+import DASHI.Physics.YangMills.BalabanP33PhysicalWilsonCorrelatedDeepPartitionExact as Split
+import DASHI.Physics.YangMills.BalabanP33PhysicalWilsonSignedGlobalExact as Wilson
+import DASHI.Physics.YangMills.BalabanP33PhysicalBackgroundGaugeParameterizedYoungExact as Radius
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundVariationSelectorExact as Selector
 import DASHI.Physics.YangMills.BalabanSelectedVariationSignConventionExact as Sign
-import DASHI.Physics.YangMills.BalabanSelectedCorrelatedGreenAtomOwnershipExact as Ownership
+import DASHI.Physics.YangMills.BalabanSelectedCorrelatedResidualOwnershipExact as Ownership
 
-record CorrelatedSingletonClosureData : Set₁ where
+record CorrelatedSingletonExtractionData
+    (background : Physical.RationalSU2Background4)
+    (field : Coordinates.PhysicalSU2BondField4)
+    (plaquette : Physical.Plaquette4) : Set₁ where
   field
-    family : Ownership.CorrelatedGreenAtomFamily
-    charge : ℚ
-    singleton rawLocalization multiplierPairing : ℚ
+    FineVariation : Set
+    variation : FineVariation
 
-    chargeNonnegative : 0ℚ ≤ charge
+    GaugeAdmissible : FineVariation → Set
+    ConstraintTangent : FineVariation → Set
+    SupportedNearPlaquette : FineVariation → Set
+
+    gaugeAdmissible : GaugeAdmissible variation
+    constraintTangent : ConstraintTangent variation
+    localSupport : SupportedNearPlaquette variation
+
+    variationNormSq : FineVariation → ℚ
+    selectorConstant : ℚ
+    selectorConstantNonnegative : 0ℚ ≤ selectorConstant
+    variationChargeBound :
+      variationNormSq variation
+      ≤ selectorConstant * Wilson.plaquetteCrossCharge field plaquette
+
+    firstVariation : FineVariation → ℚ
+    rawLocalization multiplierDefectPairing : ℚ
+
+    selectedEulerLagrangeStationary :
+      firstVariation variation ≡ 0ℚ
+
+    projectedVariationExact :
+      firstVariation variation
+      ≡ Partition.physicalPlaquetteWilsonLinearPart
+          background field plaquette
+        + Sign.canonicalProjectedSpillover
+            rawLocalization multiplierDefectPairing
+
+    correlatedFamily : Ownership.CorrelatedResidualFamily
+    correlatedResidualExact :
+      Ownership.correlatedResidualTotal correlatedFamily
+      ≡ Sign.canonicalProjectedSpillover
+          rawLocalization multiplierDefectPairing
 
     exactCancellation :
-      Ownership.ExactCorrelatedCancellation family
+      Ownership.ExactCorrelatedCancellation correlatedFamily
 
     ownerBudgets :
-      Ownership.CorrelatedOwnerBudgets family charge
-        Selector.remainingSingletonCoefficient
+      Ownership.CorrelatedOwnerBudgets correlatedFamily
+        (Wilson.plaquetteCrossCharge field plaquette)
 
-    residualRepresentationExact :
-      Sign.canonicalProjectedSpillover
-        rawLocalization multiplierPairing
-      ≡ Ownership.correlatedResidualTotal family
+open CorrelatedSingletonExtractionData public
 
-    selectedStationarity :
-      singleton
-        + Sign.canonicalProjectedSpillover
-            rawLocalization multiplierPairing
-      ≡ 0ℚ
-
-open CorrelatedSingletonClosureData public
-
-correlatedResidualUpper :
-  ∀ data →
+selectedSingletonResidualBudgetExact :
+  ∀ {background field plaquette} →
+  (dataSet : CorrelatedSingletonExtractionData
+    background field plaquette) →
   Sign.canonicalProjectedSpillover
-    (rawLocalization data) (multiplierPairing data)
-  ≤ Selector.remainingSingletonCoefficient * charge data
-correlatedResidualUpper data =
-  let
-    survivingUpper =
-      Ownership.survivingCorrelatedOwnersCloseBudget
-        (chargeNonnegative data) (ownerBudgets data)
-
-    totalUpper :
-      Ownership.correlatedResidualTotal (family data)
-      ≤ Selector.remainingSingletonCoefficient * charge data
-    totalUpper =
-      subst
-        (λ lower → lower
-          ≤ Selector.remainingSingletonCoefficient * charge data)
-        (sym
-          (Ownership.exactCorrelatedCancellationRemovedBeforeMajorisation
-            (exactCancellation data)))
-        survivingUpper
-  in
+    (rawLocalization dataSet)
+    (multiplierDefectPairing dataSet)
+  ≤ Selector.remainingSingletonCoefficient
+      * Wilson.plaquetteCrossCharge field plaquette
+selectedSingletonResidualBudgetExact dataSet =
   subst
-    (λ lower → lower
-      ≤ Selector.remainingSingletonCoefficient * charge data)
-    (sym (residualRepresentationExact data))
-    totalUpper
+    (λ lower →
+      lower
+      ≤ Selector.remainingSingletonCoefficient
+          * Wilson.plaquetteCrossCharge _ _)
+    (correlatedResidualExact dataSet)
+    (Ownership.correlatedResidualClosesSingletonBudget
+      (exactCancellation dataSet)
+      (ownerBudgets dataSet))
 
-selectedCorrelatedSingletonLower :
-  ∀ data →
-  - (Selector.remainingSingletonCoefficient * charge data)
-  ≤ singleton data
-selectedCorrelatedSingletonLower data =
-  Sign.singletonBudgetTargetExact
-    (singleton data)
-    (rawLocalization data)
-    (multiplierPairing data)
-    Selector.remainingSingletonCoefficient
-    (charge data)
-    (selectedStationarity data)
-    (correlatedResidualUpper data)
+correlatedSingletonExtractionWitness :
+  ∀ {background field plaquette} →
+  CorrelatedSingletonExtractionData background field plaquette →
+  Selector.SingletonExtractionWitness background field plaquette
+correlatedSingletonExtractionWitness dataSet = record
+  { Selector.SingletonExtractionWitness.FineVariation =
+      FineVariation dataSet
+  ; Selector.SingletonExtractionWitness.variation = variation dataSet
+  ; Selector.SingletonExtractionWitness.GaugeAdmissible =
+      GaugeAdmissible dataSet
+  ; Selector.SingletonExtractionWitness.ConstraintTangent =
+      ConstraintTangent dataSet
+  ; Selector.SingletonExtractionWitness.SupportedNearPlaquette =
+      SupportedNearPlaquette dataSet
+  ; Selector.SingletonExtractionWitness.gaugeAdmissible =
+      gaugeAdmissible dataSet
+  ; Selector.SingletonExtractionWitness.constraintTangent =
+      constraintTangent dataSet
+  ; Selector.SingletonExtractionWitness.localSupport =
+      localSupport dataSet
+  ; Selector.SingletonExtractionWitness.variationNormSq =
+      variationNormSq dataSet
+  ; Selector.SingletonExtractionWitness.selectorConstant =
+      selectorConstant dataSet
+  ; Selector.SingletonExtractionWitness.selectorConstantNonnegative =
+      selectorConstantNonnegative dataSet
+  ; Selector.SingletonExtractionWitness.variationChargeBound =
+      variationChargeBound dataSet
+  ; Selector.SingletonExtractionWitness.firstVariation =
+      firstVariation dataSet
+  ; Selector.SingletonExtractionWitness.extractionSpillover =
+      Sign.canonicalProjectedSpillover
+        (rawLocalization dataSet)
+        (multiplierDefectPairing dataSet)
+  ; Selector.SingletonExtractionWitness.selectedEulerLagrangeStationary =
+      selectedEulerLagrangeStationary dataSet
+  ; Selector.SingletonExtractionWitness.extractsLiteralSingleton =
+      projectedVariationExact dataSet
+  ; Selector.SingletonExtractionWitness.spilloverUpper =
+      selectedSingletonResidualBudgetExact dataSet }
 
-record CorrelatedSingletonPhysicalAuthority : Set₁ where
+selectedBackgroundSingletonLowerFromCorrelatedResidual :
+  ∀ {background field plaquette} →
+  (dataSet : CorrelatedSingletonExtractionData
+    background field plaquette) →
+  - (Selector.remainingSingletonCoefficient
+      * Wilson.plaquetteCrossCharge field plaquette)
+  ≤ Partition.physicalPlaquetteWilsonLinearPart
+      background field plaquette
+selectedBackgroundSingletonLowerFromCorrelatedResidual dataSet =
+  Selector.selectedBackgroundSingletonCurvatureLower
+    (correlatedSingletonExtractionWitness dataSet)
+
+selectedBackgroundCorrelatedWilsonLower :
+  ∀ {background field plaquette} →
+  Radius.RelaxedInverseLinkRadius background →
+  CorrelatedSingletonExtractionData background field plaquette →
+  - (Wilson.rhoOverThirtySix
+      * Wilson.plaquetteCrossCharge field plaquette)
+  ≤ Split.physicalPlaquetteCorrelatedWilsonPart
+      background field plaquette
+selectedBackgroundCorrelatedWilsonLower radius dataSet =
+  Selector.selectedBackgroundCorrelatedWilsonLower
+    radius (correlatedSingletonExtractionWitness dataSet)
+
+record SelectedCorrelatedSingletonSelector
+    (background : Physical.RationalSU2Background4)
+    (field : Coordinates.PhysicalSU2BondField4) : Set₁ where
   field
-    closureData : CorrelatedSingletonClosureData
-    rawLocalizationComesFromLiteralWilsonExpansion : Set
-    multiplierPairingComesFromSelectedKKTGreen : Set
-    pairOwnersCarryD4OrientationAndCollarDisplacement : Set
+    selectCorrelated : ∀ plaquette →
+      CorrelatedSingletonExtractionData background field plaquette
+open SelectedCorrelatedSingletonSelector public
 
-open CorrelatedSingletonPhysicalAuthority public
+correlatedSelectorToPhysicalSelector :
+  ∀ {background field} →
+  SelectedCorrelatedSingletonSelector background field →
+  Selector.SelectedBackgroundVariationSelector background field
+correlatedSelectorToPhysicalSelector selected = record
+  { Selector.SelectedBackgroundVariationSelector.select = λ plaquette →
+      correlatedSingletonExtractionWitness
+        (selectCorrelated selected plaquette) }
 
-correlatedSingletonClosureLevel : ProofLevel
-correlatedSingletonClosureLevel = machineChecked
+selectedSingletonResidualBudgetLevel : ProofLevel
+selectedSingletonResidualBudgetLevel = machineChecked
 
-selectedCorrelatedSingletonPhysicalAuthorityProducerLevel : ProofLevel
-selectedCorrelatedSingletonPhysicalAuthorityProducerLevel = conditional
+selectedCorrelatedWilsonLowerLevel : ProofLevel
+selectedCorrelatedWilsonLowerLevel = machineChecked
+
+selectedPhysicalCorrelatedSingletonDataProducerLevel : ProofLevel
+selectedPhysicalCorrelatedSingletonDataProducerLevel = conditional
