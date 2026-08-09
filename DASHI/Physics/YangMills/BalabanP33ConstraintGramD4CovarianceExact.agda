@@ -27,10 +27,12 @@ module DASHI.Physics.YangMills.BalabanP33ConstraintGramD4CovarianceExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Data.Rational.Base as ℚ using (ℚ)
-open import Relation.Binary.PropositionalEquality using (trans)
+open import Data.Rational.Base as ℚ using (ℚ; _*_)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
+import DASHI.Physics.YangMills.BalabanConstructiveRationalMatrixInverseExact as Matrix
 import DASHI.Physics.YangMills.BalabanFiniteRectangularRationalExact as Rect
 import DASHI.Physics.YangMills.BalabanP33FiniteKKTAdmissibleProjectorExact as KKT
 import DASHI.Physics.YangMills.BalabanP33FiniteKKTPseudoinverseProjectorExact as Pseudo
@@ -117,6 +119,20 @@ multiplierGreenPairing pseudoData source defect =
   Rect.finiteDot (Pseudo.multiplierCarrier pseudoData)
     source (Pseudo.pseudoApply pseudoData defect)
 
+finiteDotRightPointwiseCong :
+  ∀ {Multiplier}
+    (pseudoData : Pseudo.FiniteKKTPseudoinverseData Multiplier)
+    left {right transported} →
+  (∀ row → right row ≡ transported row) →
+  Rect.finiteDot (Pseudo.multiplierCarrier pseudoData) left right
+  ≡ Rect.finiteDot (Pseudo.multiplierCarrier pseudoData) left transported
+finiteDotRightPointwiseCong pseudoData left pointwise =
+  Sums.sumRationalCong
+    (Matrix.coordinates (Pseudo.multiplierCarrier pseudoData))
+    (λ row → left row * _)
+    (λ row → left row * _)
+    (λ row → cong (left row *_) (pointwise row))
+
 multiplierGreenPairingOrbitInvariant :
   ∀ {Multiplier}
     {pseudoData : Pseudo.FiniteKKTPseudoinverseData Multiplier}
@@ -131,13 +147,10 @@ multiplierGreenPairingOrbitInvariant
     {pseudoData = pseudoData} covariance pseudoCovariance
     symmetry source defect =
   trans
-    (cong
-      (λ right →
-        Rect.finiteDot (Pseudo.multiplierCarrier pseudoData)
-          (multiplierTransport covariance symmetry source) right)
-      (funext λ row →
-        constraintPseudoinverseCovariantUnderD4
-          pseudoCovariance symmetry defect row))
+    (finiteDotRightPointwiseCong pseudoData
+      (multiplierTransport covariance symmetry source)
+      (constraintPseudoinverseCovariantUnderD4
+        pseudoCovariance symmetry defect))
     (multiplierDotInvariant covariance symmetry
       source (Pseudo.pseudoApply pseudoData defect))
 
