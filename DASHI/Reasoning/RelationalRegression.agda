@@ -84,9 +84,27 @@ correctedFamilyNameSlip = Slip.correctedNameIntrusion
   false
   "partial competing name followed by immediate correction"
 
+validatedFamilyNameSlip :
+  Slip.ValidatedCorrectedNameIntrusion correctedFamilyNameSlip
+validatedFamilyNameSlip = Slip.validatedCorrectedNameIntrusion
+  refl
+  refl
+  (λ ())
+  (λ ())
+  (λ ())
+  refl
+  refl
+  "immediate correction, non-composite use and distinct typed roles proved"
+
 slipIsNotCompositeLabel :
   Slip.deliberateCompositeLabelUsed correctedFamilyNameSlip ≡ false
-slipIsNotCompositeLabel = refl
+slipIsNotCompositeLabel =
+  Slip.nonCompositeProof validatedFamilyNameSlip
+
+slipIsImmediatelyCorrected :
+  Slip.immediatelySelfCorrected correctedFamilyNameSlip ≡ true
+slipIsImmediatelyCorrected =
+  Slip.immediateCorrectionProof validatedFamilyNameSlip
 
 considerNodeIsNotCommitNode :
   Response.modality boundedHelpNode ≡ Response.considerModality
@@ -108,6 +126,18 @@ processBoundaryRequiresQuantitativeReceipt :
   ≡ true
 processBoundaryRequiresQuantitativeReceipt = refl
 
+processBoundaryRejectsForeignMetricsOrWaves :
+  Process.quantitativeFamilyAllowsForeignMetricsOrWaves
+    Process.canonicalProcessMemoryAuthorityBoundary
+  ≡ false
+processBoundaryRejectsForeignMetricsOrWaves = refl
+
+processBoundaryRejectsUniversalIncidence :
+  Process.arbitraryParticipantIncidentToEveryBranch
+    Process.canonicalProcessMemoryAuthorityBoundary
+  ≡ false
+processBoundaryRejectsUniversalIncidence = refl
+
 repairPreservesBothQuestions :
   Repair.preserveBothQuestions Repair.canonicalRepairSequence ≡ true
 repairPreservesBothQuestions = refl
@@ -115,6 +145,12 @@ repairPreservesBothQuestions = refl
 sharedStateRequiresAllegationParticulars :
   Shared.allegationsRequireParticulars Shared.canonicalSharedStateInvariants ≡ true
 sharedStateRequiresAllegationParticulars = refl
+
+sharedStateRequiresTransitionForUptake :
+  Shared.uptakeRequiresContributionTransition
+    Shared.canonicalSharedStateInvariants
+  ≡ true
+sharedStateRequiresTransitionForUptake = refl
 
 ------------------------------------------------------------------------
 -- Exact developmental-attunement regressions.
@@ -231,6 +267,12 @@ trapUtilityDoesNotImplyAttractorAlignment :
     (Selection.expectedDrift Selection.trapBranch)
   ≡ Selection.awayFromAttractor
 trapUtilityDoesNotImplyAttractorAlignment = refl
+
+validatedPortfolioPairsExcludeDiagonalAndDuplicates :
+  Selection.arbitraryOrDuplicatePairEntriesAffectValue
+    Selection.canonicalAttractorSelectionAuthorityBoundary
+  ≡ false
+validatedPortfolioPairsExcludeDiagonalAndDuplicates = refl
 
 ------------------------------------------------------------------------
 -- Exact double-/n-slit regressions.
