@@ -7,6 +7,8 @@ import DASHI.Cognition.PNF.EventAlgebra as PNF
 import DASHI.Reasoning.TypedHyperfabricCore as Hyperfabric
 import DASHI.Reasoning.RelationalStateCore as Core
 import DASHI.Reasoning.ConditionalResponseTree as Response
+import DASHI.Reasoning.AttractorAlignedBranchSelection as Selection
+import DASHI.Reasoning.RelationalBranchInterference as Interference
 
 ------------------------------------------------------------------------
 -- Process-bearing branches.
@@ -114,6 +116,38 @@ record BranchFamily : Set where
     desiredAttractor : String
     familyReceipt : String
 
+------------------------------------------------------------------------
+-- Quantitative refinement seams.
+--
+-- The qualitative process record remains useful for narrative intake.  A
+-- promotion to exact branch selection or wave interference requires a second,
+-- receipt-bearing object rather than silently reading numbers into prose.
+------------------------------------------------------------------------
+
+record QuantitativeBranchRefinement : Set where
+  constructor quantitativeBranchRefinement
+  field
+    qualitativeBranch : ProcessBearingBranch
+    selectionMetric : Selection.BranchMetric
+    branchWave : Interference.BranchWave
+    metricIsCandidateOnly : Bool
+    phaseIsCompatibilityAnalogyOnly : Bool
+    refinementReceipt : String
+
+record QuantitativeFamilyRefinement : Set where
+  constructor quantitativeFamilyRefinement
+  field
+    qualitativeFamily : BranchFamily
+    selectionPortfolio : Selection.BranchPortfolio
+    branchWaves : List Interference.BranchWave
+    exactNSlitReceipt :
+      Interference.coherentIntensity branchWaves
+      ≡
+      Interference.diagonalIntensity branchWaves
+      + Interference.allPairwiseInterference branchWaves
+    portfolioAndWaveWeightsEmpiricallyCalibrated : Bool
+    familyRefinementReceipt : String
+
 record BranchSelectionCriterion : Set where
   field
     respectsCapacity : Bool
@@ -122,6 +156,8 @@ record BranchSelectionCriterion : Set where
     valuesInformationGain : Bool
     penalisesDestructiveInterference : Bool
     distinguishesActivityFromProgress : Bool
+    quotientsNominalOptionsByReachableBasin : Bool
+    checksLocalUtilityAgainstGlobalDrift : Bool
 
 canonicalBranchSelectionCriterion : BranchSelectionCriterion
 canonicalBranchSelectionCriterion = record
@@ -131,6 +167,8 @@ canonicalBranchSelectionCriterion = record
   ; valuesInformationGain = true
   ; penalisesDestructiveInterference = true
   ; distinguishesActivityFromProgress = true
+  ; quotientsNominalOptionsByReachableBasin = true
+  ; checksLocalUtilityAgainstGlobalDrift = true
   }
 
 ------------------------------------------------------------------------
@@ -230,6 +268,9 @@ record ProcessMemoryAuthorityBoundary : Set where
     revocationErasesProcessState : Bool
     moreBranchesAlwaysImproveOutcome : Bool
     highActivityProvesAttractorProgress : Bool
+    qualitativeAlignmentIsFinalMathematics : Bool
+    literalQuantumDecisionDynamicsClaimed : Bool
+    quantitativePromotionRequiresReceipt : Bool
     traumaDeformationIsDiagnosis : Bool
     boundaryNote : String
 
@@ -241,7 +282,10 @@ canonicalProcessMemoryAuthorityBoundary = record
   ; revocationErasesProcessState = false
   ; moreBranchesAlwaysImproveOutcome = false
   ; highActivityProvesAttractorProgress = false
+  ; qualitativeAlignmentIsFinalMathematics = false
+  ; literalQuantumDecisionDynamicsClaimed = false
+  ; quantitativePromotionRequiresReceipt = true
   ; traumaDeformationIsDiagnosis = false
   ; boundaryNote =
-      "Branches may be stateful, costly, perishable and partly exogenous before an outcome exists. PNF memory retains path, liveness layer, capacity and provenance without turning the model into a clinical diagnosis."
+      "Branches may be stateful, costly, perishable and partly exogenous before an outcome exists. Exact selection and n-slit layers require explicit quantitative refinements; PNF memory retains path, liveness layer, capacity and provenance without turning the model into a clinical or quantum diagnosis."
   }
