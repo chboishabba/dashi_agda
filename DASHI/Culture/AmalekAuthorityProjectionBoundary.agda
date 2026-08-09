@@ -67,7 +67,7 @@ record AmalekAuthorityProjectionBoundary : Set where
     coercionBoundary : Coercion.DependentAuthorityCoercionBoundary
     authorityProjectionSurfaces : List AuthorityProjectionSurface
     admissibleUses : List AdmissibleAmalekUse
-    correctionInterface : CorrectionInterface
+    correctionLayer : CorrectionInterface
     authorityClosureTracked : Bool
     authorityClosureTrackedIsTrue : authorityClosureTracked ≡ true
     childDissentAsEnemyPromotion : Bool
