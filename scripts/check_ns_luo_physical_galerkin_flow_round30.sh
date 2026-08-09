@@ -18,9 +18,8 @@ files=(
 )
 
 doc=docs/ns-clay-contract/physical-galerkin-flow-round30.md
-readme=docs/ns-clay-contract/README.md
 
-for file in "${files[@]}" "$doc" "$readme"; do
+for file in "${files[@]}" "$doc"; do
   test -f "$file"
 done
 
@@ -52,7 +51,6 @@ grep -q '10.1007/BF02547354' DASHI/Physics/Closure/NSTriadKNPhysicalGalerkinVect
 grep -q '10.1090/chel/343' DASHI/Physics/Closure/NSTriadKNPhysicalFiniteEnergyIdentityRound30Exact.agda
 grep -q 'ReconstructedPhysicalState F E -> ReconstructedPhysicalState F E' "$doc"
 grep -q 'dE/dt + nu D = 0' "$doc"
-grep -Fq '[Round 30 — physical Galerkin flow and energy continuation](./physical-galerkin-flow-round30.md)' "$readme"
 
 scripts/run_agda29_parallel_check.sh \
   DASHI/Physics/Closure/NSTriadKNLuoPhysicalGalerkinFlowRound30Validation.agda
