@@ -237,11 +237,9 @@ inverseTwicePreservesEveryLaneState :
       (lanePath {source = source} {target = middle} SSP.inverseOrientation))
     state
   ≡ state
-inverseTwicePreservesEveryLaneState source middle target state =
-  transportOrientationComposition
-    SSP.inverseOrientation
-    SSP.inverseOrientation
-    state
+inverseTwicePreservesEveryLaneState source middle target Tower.negativeLaneState = refl
+inverseTwicePreservesEveryLaneState source middle target Tower.mediatedLaneState = refl
+inverseTwicePreservesEveryLaneState source middle target Tower.positiveLaneState = refl
 
 inverseTwiceComposesToForward :
   composeOrientation SSP.inverseOrientation SSP.inverseOrientation
