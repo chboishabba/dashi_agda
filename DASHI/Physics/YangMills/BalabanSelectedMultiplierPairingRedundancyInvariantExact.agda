@@ -82,7 +82,7 @@ multiplierDefectPairingIgnoresRedundancy
       (Rect.rectangularAdjointExact
         (Pseudo.multiplierCarrier pseudoData)
         KKT.physicalStateCarrier
-        (Pseudo.constraintMatrix pseudoData)
+        (KKT.constraintMatrix (Pseudo.projectorData pseudoData))
         vector multiplier)
       (trans
         (stateDotRightPointwiseCong
