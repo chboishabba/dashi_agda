@@ -30,10 +30,11 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; _*_)
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
+import DASHI.Physics.YangMills.BalabanFiniteSumFubiniExact as Fubini
 import DASHI.Physics.YangMills.BalabanConstructiveRationalMatrixInverseExact as Matrix
 import DASHI.Physics.YangMills.BalabanP33FiniteKKTAdmissibleProjectorExact as KKT
 import DASHI.Physics.YangMills.BalabanP33PhysicalRationalWilsonPlaquetteJetExact as Physical
@@ -181,24 +182,8 @@ outsideCollarMultiplierAnnihilatesDefect
               projectorData bondField plaquette row)
       (λ _ → 0ℚ)
       (outsideCollarTermZero outside))
-    (zeroFiniteMultiplierSum
+    (Fubini.sumRationalZero
       (Matrix.coordinates (KKT.multiplierCarrier projectorData)))
-  where
-  zeroFiniteMultiplierSum :
-    ∀ {Index : Set} →
-    Agda.Builtin.List.List Index → ℚ
-  zeroFiniteMultiplierSum [] = 0ℚ
-  zeroFiniteMultiplierSum (_ Agda.Builtin.List.∷ rest) =
-    zeroFiniteMultiplierSum rest
-
-  zeroFiniteMultiplierSumExact :
-    ∀ {Index : Set} (values : Agda.Builtin.List.List Index) →
-    Sums.sumRational values (λ _ → 0ℚ) ≡ 0ℚ
-  zeroFiniteMultiplierSumExact [] = refl
-  zeroFiniteMultiplierSumExact (_ Agda.Builtin.List.∷ rest)
-    rewrite zeroFiniteMultiplierSumExact rest = refl
-
-  zeroFiniteMultiplierSum = zeroFiniteMultiplierSumExact
 
 constraintCollarLocalizationLevel : ProofLevel
 constraintCollarLocalizationLevel = machineChecked
