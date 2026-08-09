@@ -18,14 +18,14 @@ module DASHI.Moonshine.MathieuStabilizerTowerExact where
 --
 --   8 --x9--> 72 --x10--> 720 --x11--> 7920 --x12--> 95040
 --
--- as typed stabilizer steps.  The arithmetic is internal and exact.  The
--- identification of these orders with the successive point stabilizers in
--- the Mathieu actions is retained as source-bounded authority rather than
--- fabricated from cardinalities.  In particular, the order-eight stabilizer
--- is reported as quaternion Q8, not the square-grid dihedral group D4.
+-- as typed arithmetic stabilizer steps.  The arithmetic is internal and
+-- exact.  The identification of these orders with successive point
+-- stabilizers in the Mathieu actions is retained as source-bounded authority
+-- rather than fabricated from cardinalities.  In particular, the order-eight
+-- stabilizer is reported as quaternion Q8, not square-grid dihedral D4.
 ------------------------------------------------------------------------
 
-open import Agda.Primitive using (Set; Set₁)
+open import Agda.Primitive using (Set)
 open import DASHI.Core.Prelude
 
 ------------------------------------------------------------------------
@@ -92,37 +92,61 @@ m12Factorization : 95040 ≡ 8 * 9 * 10 * 11 * 12
 m12Factorization = refl
 
 ------------------------------------------------------------------------
--- Generic finite orbit--stabilizer carrier.
+-- Arithmetic witness only.
+--
+-- This record deliberately does not contain carriers, an action, a chosen
+-- point, an inclusion, or finite-cardinality equivalences.  Those data are
+-- required before promoting an order identity to a genuine orbit-stabilizer
+-- construction.  Keeping the witness arithmetic-only prevents arbitrary
+-- Sets plus unrelated Nat fields from masquerading as a group action.
 ------------------------------------------------------------------------
 
-record PointedOrbitFibration : Set₁ where
+record OrbitStabilizerArithmeticWitness : Set where
+  constructor orbitStabilizerArithmeticWitness
   field
-    TotalTransformation : Set
-    Point : Set
-    StabilizerFibre : Set
-
-    chosenPoint : Point
-    transportPoint : TotalTransformation → Point
-    includeStabilizer : StabilizerFibre → TotalTransformation
-
     totalOrder : Nat
-    fibreOrder : Nat
+    stabilizerOrder : Nat
     orbitOrder : Nat
-    orbitStabilizerOrderLaw : totalOrder ≡ orbitOrder * fibreOrder
+    orbitStabilizerOrderLaw : totalOrder ≡ orbitOrder * stabilizerOrder
 
-open PointedOrbitFibration public
+open OrbitStabilizerArithmeticWitness public
 
-record MathieuStepRealization (step : StabilizerStep) : Set₁ where
+record MathieuStepArithmeticWitness (step : StabilizerStep) : Set where
+  constructor mathieuStepArithmeticWitness
   field
-    fibration : PointedOrbitFibration
+    witness : OrbitStabilizerArithmeticWitness
     totalMatchesUpper :
-      totalOrder fibration ≡ levelOrder (upperLevel step)
-    fibreMatchesLower :
-      fibreOrder fibration ≡ levelOrder (lowerLevel step)
+      totalOrder witness ≡ levelOrder (upperLevel step)
+    stabilizerMatchesLower :
+      stabilizerOrder witness ≡ levelOrder (lowerLevel step)
     orbitMatchesStep :
-      orbitOrder fibration ≡ orbitSize step
+      orbitOrder witness ≡ orbitSize step
 
-open MathieuStepRealization public
+open MathieuStepArithmeticWitness public
+
+stepArithmeticWitness :
+  (step : StabilizerStep) →
+  MathieuStepArithmeticWitness step
+stepArithmeticWitness step =
+  mathieuStepArithmeticWitness
+    (orbitStabilizerArithmeticWitness
+      (levelOrder (upperLevel step))
+      (levelOrder (lowerLevel step))
+      (orbitSize step)
+      (orderLaw step))
+    refl refl refl
+
+step8To9ArithmeticWitness : MathieuStepArithmeticWitness step8To9
+step8To9ArithmeticWitness = stepArithmeticWitness step8To9
+
+step9To10ArithmeticWitness : MathieuStepArithmeticWitness step9To10
+step9To10ArithmeticWitness = stepArithmeticWitness step9To10
+
+step10To11ArithmeticWitness : MathieuStepArithmeticWitness step10To11
+step10To11ArithmeticWitness = stepArithmeticWitness step10To11
+
+step11To12ArithmeticWitness : MathieuStepArithmeticWitness step11To12
+step11To12ArithmeticWitness = stepArithmeticWitness step11To12
 
 ------------------------------------------------------------------------
 -- Source authority and anti-numerology boundaries.
@@ -158,6 +182,9 @@ record MathieuTowerBoundary : Set where
     actualGroupActionsConstructedHere : Bool
     actualGroupActionsConstructedHereIsFalse :
       actualGroupActionsConstructedHere ≡ false
+    arithmeticWitnessContainsActionLaws : Bool
+    arithmeticWitnessContainsActionLawsIsFalse :
+      arithmeticWitnessContainsActionLaws ≡ false
     atlasPointStabilizerDataIsExternalAuthority : Bool
     atlasPointStabilizerDataIsExternalAuthorityIsTrue :
       atlasPointStabilizerDataIsExternalAuthority ≡ true
@@ -170,4 +197,10 @@ record MathieuTowerBoundary : Set where
 
 canonicalMathieuTowerBoundary : MathieuTowerBoundary
 canonicalMathieuTowerBoundary =
-  mathieuTowerBoundary true refl false refl true refl false refl false refl
+  mathieuTowerBoundary
+    true refl
+    false refl
+    false refl
+    true refl
+    false refl
+    false refl
