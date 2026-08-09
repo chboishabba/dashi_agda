@@ -29,8 +29,10 @@ doc=Docs/support/reference/YangMillsMultiplierLocalityRound40.md
 index=Docs/support/reference/YangMillsReferenceIndex.md
 optimizer=scripts/ym_round40_singleton_budget_optimize.py
 fixture=scripts/fixtures/ym_round40_singleton_budget_candidates.json
+round39root=DASHI/Physics/YangMills/BalabanClayHighestAlphaRound39PseudoinverseKKTValidation.agda
+round40root=DASHI/Physics/YangMills/BalabanClayHighestAlphaRound40MultiplierLocalityValidation.agda
 
-for file in "${files[@]}" "$doc" "$index" "$optimizer" "$fixture"; do
+for file in "${files[@]}" "$doc" "$index" "$optimizer" "$fixture" "$round39root"; do
   test -f "$file"
 done
 
@@ -43,6 +45,12 @@ if grep -nE '\((data|field)[[:space:]]*:' "${files[@]}"; then
   echo "round forty uses an Agda reserved keyword as a typed binder" >&2
   exit 1
 fi
+
+if grep -q 'BalabanClayHighestAlphaRound40MultiplierLocalityValidation' "$round39root"; then
+  echo "round thirty nine must not import its child validation root" >&2
+  exit 1
+fi
+grep -q 'BalabanClayHighestAlphaRound39PseudoinverseKKTValidation' "$round40root"
 
 checks=(
   'BalabanSelectedVariationSignConventionExact.agda:singletonResidualSignExact'
@@ -57,6 +65,7 @@ checks=(
   'BalabanSelectedCorrelatedResidualOwnershipExact.agda:correlatedResidualReconstructedFromOwners'
   'BalabanSelectedCorrelatedResidualOwnershipExact.agda:exactCorrelatedCancellationRemovedBeforeMajorisation'
   'BalabanSelectedCorrelatedResidualOwnershipExact.agda:correlatedResidualClosesSingletonBudget'
+  'BalabanSelectedConstraintGramCombesThomasExact.agda:selectedConstraintGramReducedFloor'
   'BalabanSelectedConstraintGramCombesThomasExact.agda:selectedConstraintGramTiltBelowHalfGap'
   'BalabanSelectedConstraintGramCombesThomasExact.agda:selectedConstraintGramCombesThomasDecay'
   'BalabanSelectedKKTMultiplierLocalityExact.agda:selectedCanonicalMultiplierLocality'
@@ -69,6 +78,7 @@ checks=(
   'BalabanP33ConstraintGramD4CovarianceExact.agda:multiplierGreenPairingOrbitInvariant'
   'BalabanP33PhysicalSingletonBudgetOptimizationExact.agda:generatedCertificateGivesSymbolicSplit'
   'BalabanP33PhysicalSingletonBudgetOptimizationExact.agda:noFitDualContradictsGeneratedCertificate'
+  'BalabanSelectedBackgroundCoefficientFieldExact.agda:GramInverseOverCoefficientField'
   'BalabanSelectedBackgroundCoefficientFieldExact.agda:rationalFrameAvailableOnlyFromLiteralEntries'
   'BalabanSelectedCorrelatedSingletonClosureExact.agda:selectedBackgroundSingletonLowerFromCorrelatedResidual'
   'BalabanSelectedCorrelatedSingletonClosureExact.agda:selectedBackgroundCorrelatedWilsonLower'
@@ -79,6 +89,18 @@ for check in "${checks[@]}"; do
   theorem="${check#*:}"
   grep -q "$theorem" "DASHI/Physics/YangMills/$file"
 done
+
+# The locality route must remain redundancy-safe end to end.
+grep -q 'FiniteKKTPseudoinverseData' DASHI/Physics/YangMills/BalabanSelectedConstraintCollarPairingExact.agda
+grep -q 'FiniteKKTPseudoinverseData' DASHI/Physics/YangMills/BalabanSelectedRawExtractorConstraintDefectAtomsExact.agda
+grep -q 'FiniteKKTPseudoinverseData' DASHI/Physics/YangMills/BalabanSelectedConstraintGramCombesThomasExact.agda
+
+# The multiplier Gram has its own gamma_L; it must not borrow the 1/32 state floor.
+if grep -nE 'p33HalfGap|p33TiltedResolventMajorant' \
+    DASHI/Physics/YangMills/BalabanSelectedConstraintGramCombesThomasExact.agda; then
+  echo "constraint-Gram Combes--Thomas incorrectly reuses the state-Hessian floor" >&2
+  exit 1
+fi
 
 grep -q '10.1007/BF01229381' DASHI/Physics/YangMills/BalabanSelectedVariationSignConventionExact.agda
 grep -q '10.1017/S0305004100030401' DASHI/Physics/YangMills/BalabanSelectedMultiplierPairingRedundancyInvariantExact.agda
