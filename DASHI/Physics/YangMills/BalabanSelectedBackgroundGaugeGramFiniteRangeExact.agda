@@ -26,8 +26,9 @@ module DASHI.Physics.YangMills.BalabanSelectedBackgroundGaugeGramFiniteRangeExac
 -- gauge-only part of the constraint-Gram finite-range producer.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_)
 open import Data.Empty using (⊥)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _*_)
+open import Data.Rational.Base as ℚ using (0ℚ; _*_)
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (trans)
 
