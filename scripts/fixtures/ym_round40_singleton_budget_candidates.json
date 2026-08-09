@@ -1,0 +1,25 @@
+{
+  "candidates": [
+    {
+      "name": "coarse_bound",
+      "admissible": true,
+      "raw_localization_cost": "21/18874368",
+      "multiplier_defect_cost": "35/18874368",
+      "metadata": {"synthetic_checker_fixture": true}
+    },
+    {
+      "name": "correlated_owner_bound",
+      "admissible": true,
+      "raw_localization_cost": "20/18874368",
+      "multiplier_defect_cost": "34/18874368",
+      "metadata": {"synthetic_checker_fixture": true}
+    },
+    {
+      "name": "inadmissible_optimistic_bound",
+      "admissible": false,
+      "raw_localization_cost": "1/18874368",
+      "multiplier_defect_cost": "1/18874368",
+      "metadata": {"synthetic_checker_fixture": true}
+    }
+  ]
+}
