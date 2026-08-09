@@ -23,6 +23,7 @@ module DASHI.Biology.EisensteinThreeSixSymmetryExact where
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
+open import Data.Rational.Base using (0ℚ)
 
 import DASHI.Biology.EisensteinNineRingInterferenceExact as E
 
@@ -55,11 +56,11 @@ symmetricPhaseResultant =
       (phaseAmplitude phaseOmegaSquared))
 
 symmetricPhaseResultantRealIsZero :
-  E.realCoordinate symmetricPhaseResultant ≡ E.0ℚ
+  E.realCoordinate symmetricPhaseResultant ≡ 0ℚ
 symmetricPhaseResultantRealIsZero = E.threePhaseCancellationReal
 
 symmetricPhaseResultantOmegaIsZero :
-  E.omegaCoordinate symmetricPhaseResultant ≡ E.0ℚ
+  E.omegaCoordinate symmetricPhaseResultant ≡ 0ℚ
 symmetricPhaseResultantOmegaIsZero = E.threePhaseCancellationOmega
 
 data Opposition : Set where
