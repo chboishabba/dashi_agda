@@ -21,6 +21,7 @@ on:
       - 'DASHI/EverythingSSPJGluingMathieuRound6.agda'
       - 'scripts/check_ssp15_j_gluing_mathieu_interference_round6.sh'
       - 'Docs/support/reference/SSP15JGluingMathieuInterferenceRound6.md'
+      - 'Docs/support/reference/SSP15JGluingMathieuRound6ValidationTrigger.md'
       - '.github/workflows/ssp15-j-gluing-mathieu-interference-round6.yml'
   workflow_dispatch:
 
