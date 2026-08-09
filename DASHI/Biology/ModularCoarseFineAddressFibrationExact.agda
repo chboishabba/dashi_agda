@@ -159,6 +159,83 @@ canonicalFineAddressTenCoordinateEquivalence =
     lookupAfterTabulate
     tabulateAfterLookup
 
+------------------------------------------------------------------------
+-- Finite Fricke quotient analogue.
+--
+-- The existing complement involution pairs the ten fine sectors into five
+-- quotient coordinates.  The quotient coordinate is invariant, and each
+-- coordinate has direct and counterphase lifts exchanged by complement.  This
+-- is the exact finite compression theorem used by the SSP address model; it is
+-- not a proof of the modular-curve genus-zero or Hauptmodul theorems.
+------------------------------------------------------------------------
+
+FineQuotientCoordinate : Set
+FineQuotientCoordinate = Quotient.ComplementMode5
+
+finiteFrickeSector : FineSector → FineSector
+finiteFrickeSector = Quotient.complementState
+
+finiteFrickeSectorInvolutive :
+  (sector : FineSector) →
+  finiteFrickeSector (finiteFrickeSector sector) ≡ sector
+finiteFrickeSectorInvolutive = Quotient.complementStateInvolutive
+
+finiteHauptmodulCoordinate : FineSector → FineQuotientCoordinate
+finiteHauptmodulCoordinate = Quotient.complementMode
+
+finiteHauptmodulFrickeInvariant :
+  (sector : FineSector) →
+  finiteHauptmodulCoordinate (finiteFrickeSector sector)
+  ≡ finiteHauptmodulCoordinate sector
+finiteHauptmodulFrickeInvariant = Quotient.complementPreservesMode
+
+directFineLift : FineQuotientCoordinate → FineSector
+directFineLift mode =
+  Quotient.decodeModePhase (mode , Quotient.directPhase)
+
+counterFineLift : FineQuotientCoordinate → FineSector
+counterFineLift mode =
+  Quotient.decodeModePhase (mode , Quotient.counterPhase)
+
+finiteHauptmodulDirectSection :
+  (mode : FineQuotientCoordinate) →
+  finiteHauptmodulCoordinate (directFineLift mode) ≡ mode
+finiteHauptmodulDirectSection Quotient.mode09 = refl
+finiteHauptmodulDirectSection Quotient.mode18 = refl
+finiteHauptmodulDirectSection Quotient.mode27 = refl
+finiteHauptmodulDirectSection Quotient.mode36 = refl
+finiteHauptmodulDirectSection Quotient.mode45 = refl
+
+finiteHauptmodulCounterSection :
+  (mode : FineQuotientCoordinate) →
+  finiteHauptmodulCoordinate (counterFineLift mode) ≡ mode
+finiteHauptmodulCounterSection Quotient.mode09 = refl
+finiteHauptmodulCounterSection Quotient.mode18 = refl
+finiteHauptmodulCounterSection Quotient.mode27 = refl
+finiteHauptmodulCounterSection Quotient.mode36 = refl
+finiteHauptmodulCounterSection Quotient.mode45 = refl
+
+counterLiftIsFrickeOfDirectLift :
+  (mode : FineQuotientCoordinate) →
+  counterFineLift mode ≡ finiteFrickeSector (directFineLift mode)
+counterLiftIsFrickeOfDirectLift Quotient.mode09 = refl
+counterLiftIsFrickeOfDirectLift Quotient.mode18 = refl
+counterLiftIsFrickeOfDirectLift Quotient.mode27 = refl
+counterLiftIsFrickeOfDirectLift Quotient.mode36 = refl
+counterLiftIsFrickeOfDirectLift Quotient.mode45 = refl
+
+finiteFrickePullback : FineAddress → FineAddress
+finiteFrickePullback assignment sector =
+  assignment (finiteFrickeSector sector)
+
+finiteFrickePullbackPointwiseInvolutive :
+  (assignment : FineAddress) →
+  (sector : FineSector) →
+  finiteFrickePullback (finiteFrickePullback assignment) sector
+  ≡ assignment sector
+finiteFrickePullbackPointwiseInvolutive assignment sector
+  rewrite finiteFrickeSectorInvolutive sector = refl
+
 FineFibre : CoarseAddress → Set
 FineFibre coarse = FineAddress
 
@@ -201,18 +278,6 @@ fineSectorCountIsTen = refl
 completionSector : FineSector
 completionSector = Quotient.j9
 
-frickeComplement : FineAddress → FineAddress
-frickeComplement assignment sector =
-  assignment (Quotient.complementState sector)
-
-frickeComplementPointwiseInvolutive :
-  (assignment : FineAddress) →
-  (sector : FineSector) →
-  frickeComplement (frickeComplement assignment) sector
-  ≡ assignment sector
-frickeComplementPointwiseInvolutive assignment sector
-  rewrite Quotient.complementStateInvolutive sector = refl
-
 SSPLevelFibre : SSP.SSPPrime → CoarseAddress → Set
 SSPLevelFibre prime coarse = FineAddress
 
@@ -245,6 +310,20 @@ sspFineSectionForgets :
   sspForgetfulMap prime (sspFineSection prime coarse value) ≡ coarse
 sspFineSectionForgets prime coarse value = refl
 
+sspFiniteHauptmodulCoordinate :
+  SSP.SSPPrime →
+  FineSector →
+  FineQuotientCoordinate
+sspFiniteHauptmodulCoordinate prime = finiteHauptmodulCoordinate
+
+sspFiniteHauptmodulFrickeInvariant :
+  (prime : SSP.SSPPrime) →
+  (sector : FineSector) →
+  sspFiniteHauptmodulCoordinate prime (finiteFrickeSector sector)
+  ≡ sspFiniteHauptmodulCoordinate prime sector
+sspFiniteHauptmodulFrickeInvariant prime =
+  finiteHauptmodulFrickeInvariant
+
 ------------------------------------------------------------------------
 -- The finite fibration is an exact internal model.  It does not reconstruct
 -- the moduli stack, prove X_0(p)^+ has genus zero, or construct a Hauptmodul.
@@ -261,6 +340,10 @@ record ModularAddressBoundary : Set where
     stateCountLaw :
       pow 3 absoluteDepth ≡ pow 3 coarseDepth * pow 3 fineDepth
     tenCoordinateTabulation : FineAddressTenCoordinateEquivalence
+    finiteQuotientInvariant :
+      (sector : FineSector) →
+      finiteHauptmodulCoordinate (finiteFrickeSector sector)
+      ≡ finiteHauptmodulCoordinate sector
     fineCoordinatesAreTenIndependentJInvariants : Bool
     fineCoordinatesAreTenIndependentJInvariantsIsFalse :
       fineCoordinatesAreTenIndependentJInvariants ≡ false
@@ -269,9 +352,9 @@ record ModularAddressBoundary : Set where
       finiteAddressFibrationIsLiteralX0p ≡ false
     genusZeroProvedInternally : Bool
     genusZeroProvedInternallyIsFalse : genusZeroProvedInternally ≡ false
-    hauptmodulConstructedInternally : Bool
-    hauptmodulConstructedInternallyIsFalse :
-      hauptmodulConstructedInternally ≡ false
+    actualHauptmodulConstructedInternally : Bool
+    actualHauptmodulConstructedInternallyIsFalse :
+      actualHauptmodulConstructedInternally ≡ false
 
 canonicalModularAddressBoundary : ModularAddressBoundary
 canonicalModularAddressBoundary =
@@ -282,6 +365,7 @@ canonicalModularAddressBoundary =
     jAbsoluteAddressDepthReconstructs
     jAbsoluteStateCountFactors
     canonicalFineAddressTenCoordinateEquivalence
+    finiteHauptmodulFrickeInvariant
     false refl
     false refl
     false refl
