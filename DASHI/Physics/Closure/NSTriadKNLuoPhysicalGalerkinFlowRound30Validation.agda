@@ -13,6 +13,8 @@ import DASHI.Physics.Closure.NSTriadKNPicardLindelofTransportRound30Exact as Pic
 import DASHI.Physics.Closure.NSTriadKNLiteralNonlinearEnergyCancellationRound30Exact as Cancellation
 import DASHI.Physics.Closure.NSTriadKNPhysicalFiniteEnergyIdentityRound30Exact as Energy
 import DASHI.Physics.Closure.NSTriadKNPhysicalGlobalGalerkinFlowRound30Exact as Global
+import DASHI.Physics.Closure.NSTriadKNPhysicalTimeDependentShellBalanceRound30Exact as Shell
+import DASHI.Physics.Closure.NSTriadKNCutoffUniformCotlarSteinRound30Exact as Cotlar
 
 open import Agda.Builtin.Bool using (true)
 open import Agda.Builtin.Equality using (_≡_)
@@ -44,3 +46,13 @@ globalFlowReducerRegression :
   Global.literalPhysicalGlobalFlowReducerClosed ≡ true
 globalFlowReducerRegression =
   Global.literalPhysicalGlobalFlowReducerClosedIsTrue
+
+physicalShellReducerRegression :
+  Shell.physicalTimeDependentShellReducerClosed ≡ true
+physicalShellReducerRegression =
+  Shell.physicalTimeDependentShellReducerClosedIsTrue
+
+operatorCotlarReducerRegression :
+  Cotlar.operatorValuedCotlarSteinReducerClosed ≡ true
+operatorCotlarReducerRegression =
+  Cotlar.operatorValuedCotlarSteinReducerClosedIsTrue
