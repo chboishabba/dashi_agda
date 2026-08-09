@@ -21,16 +21,16 @@ module DASHI.Physics.Closure.NSTriadKNPicardLindelofTransportRound30Exact where
 -- Isolate the exact analytic library interface needed by the finite Galerkin
 -- lane and prove that a local coordinate flow transports through the Round-30
 -- physical-coordinate equivalence.  The derivative equation, initial value
--- and uniqueness are preserved definitionally.  This is not a postulated
--- existence theorem: the external real Picard--Lindelöf implementation must
--- provide the authority record, while all DASHI-specific transport is proved
--- here.
+-- and coordinatewise uniqueness are preserved.  The external real
+-- Picard--Lindelöf implementation must provide the authority record; all
+-- DASHI-specific transport is machine-checked and uses no function
+-- extensionality axiom.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Level; lsuc; _⊔_)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteGalerkinPolynomialRound26Exact as Polynomial
 import DASHI.Physics.Closure.NSTriadKNFinitePhysicalCoordinateEquivalenceRound30Exact as Coordinates
@@ -41,7 +41,6 @@ record CoordinateTrajectory
   field
     stateAt : Time → Polynomial.Assignment
     derivativeAt : Time → Polynomial.Assignment
-
 open CoordinateTrajectory public
 
 record CoordinateODESolution
@@ -53,7 +52,6 @@ record CoordinateODESolution
     derivativeEquation : ∀ time variable →
       derivativeAt trajectory time variable
       ≡ vectorField (stateAt trajectory time) variable
-
 open CoordinateODESolution public
 
 record CoordinatePicardLindelofAuthority
@@ -99,7 +97,6 @@ record CoordinatePicardLindelofAuthority
       stateAt right (initialTimeValue time) ≡ initial →
       ∀ localTime variable →
       stateAt left localTime variable ≡ stateAt right localTime variable
-
 open CoordinatePicardLindelofAuthority public
 
 record PhysicalTrajectory
@@ -110,7 +107,6 @@ record PhysicalTrajectory
   field
     stateAt : Time → PhysicalState
     derivativeCoordinatesAt : Time → Polynomial.Assignment
-
 open PhysicalTrajectory public
 
 transportCoordinateTrajectory :
@@ -128,6 +124,16 @@ transportCoordinateTrajectory equivalence trajectory = record
       CoordinateTrajectory.derivativeAt trajectory
   }
 
+coordinateVectorFieldFromPhysical :
+  ∀ {stateLevel}
+    {PhysicalState : Set stateLevel} →
+  Coordinates.FinitePhysicalCoordinateEquivalence PhysicalState →
+  (PhysicalState → PhysicalState) →
+  Polynomial.Assignment → Polynomial.Assignment
+coordinateVectorFieldFromPhysical equivalence physicalVectorField coordinates =
+  Coordinates.encode equivalence
+    (physicalVectorField (Coordinates.decode equivalence coordinates))
+
 record PhysicalCoordinateODESolution
     {timeLevel stateLevel}
     {Time : Set timeLevel}
@@ -142,18 +148,7 @@ record PhysicalCoordinateODESolution
       ≡ Coordinates.encode equivalence
           (physicalVectorField (PhysicalTrajectory.stateAt trajectory time))
           variable
-
 open PhysicalCoordinateODESolution public
-
-coordinateVectorFieldFromPhysical :
-  ∀ {stateLevel}
-    {PhysicalState : Set stateLevel} →
-  Coordinates.FinitePhysicalCoordinateEquivalence PhysicalState →
-  (PhysicalState → PhysicalState) →
-  Polynomial.Assignment → Polynomial.Assignment
-coordinateVectorFieldFromPhysical equivalence physicalVectorField coordinates =
-  Coordinates.encode equivalence
-    (physicalVectorField (Coordinates.decode equivalence coordinates))
 
 transportedTrajectorySolvesPhysicalODE :
   ∀ {timeLevel stateLevel}
@@ -169,15 +164,8 @@ transportedTrajectorySolvesPhysicalODE :
     (transportCoordinateTrajectory equivalence trajectory)
 transportedTrajectorySolvesPhysicalODE
     equivalence physicalVectorField trajectory solution = record
-  { PhysicalCoordinateODESolution.derivativeEquation = λ time variable →
-      trans
-        (CoordinateODESolution.derivativeEquation solution time variable)
-        (cong
-          (λ state → Coordinates.encode equivalence
-            (physicalVectorField state) variable)
-          (Coordinates.decodeEncode equivalence
-            (Coordinates.decode equivalence
-              (CoordinateTrajectory.stateAt trajectory time))))
+  { PhysicalCoordinateODESolution.derivativeEquation =
+      CoordinateODESolution.derivativeEquation solution
   }
 
 physicalLocalTrajectory :
@@ -193,6 +181,30 @@ physicalLocalTrajectory :
 physicalLocalTrajectory authority equivalence physicalVectorField lipschitz initial =
   transportCoordinateTrajectory equivalence
     (localTrajectory authority
+      (coordinateVectorFieldFromPhysical equivalence physicalVectorField)
+      lipschitz (Coordinates.encode equivalence initial))
+
+physicalLocalTrajectorySolves :
+  ∀ {timeLevel stateLevel}
+    {Time : Set timeLevel}
+    {PhysicalState : Set stateLevel}
+    (authority : CoordinatePicardLindelofAuthority Time)
+    (equivalence : Coordinates.FinitePhysicalCoordinateEquivalence PhysicalState)
+    (physicalVectorField : PhysicalState → PhysicalState)
+    (lipschitz : LocallyLipschitz authority
+      (coordinateVectorFieldFromPhysical equivalence physicalVectorField))
+    (initial : PhysicalState) →
+  PhysicalCoordinateODESolution equivalence physicalVectorField
+    (physicalLocalTrajectory authority equivalence physicalVectorField
+      lipschitz initial)
+physicalLocalTrajectorySolves authority equivalence physicalVectorField
+    lipschitz initial =
+  transportedTrajectorySolvesPhysicalODE
+    equivalence physicalVectorField
+    (localTrajectory authority
+      (coordinateVectorFieldFromPhysical equivalence physicalVectorField)
+      lipschitz (Coordinates.encode equivalence initial))
+    (localTrajectorySolves authority
       (coordinateVectorFieldFromPhysical equivalence physicalVectorField)
       lipschitz (Coordinates.encode equivalence initial))
 
@@ -221,7 +233,7 @@ physicalLocalTrajectoryInitial
         lipschitz (Coordinates.encode equivalence initial) time))
     (Coordinates.decodeEncode equivalence initial)
 
-physicalLocalTrajectoryUniqueInCoordinates :
+physicalLocalTrajectoryUniqueCoordinatewise :
   ∀ {timeLevel stateLevel}
     {Time : Set timeLevel}
     {PhysicalState : Set stateLevel}
@@ -241,43 +253,29 @@ physicalLocalTrajectoryUniqueInCoordinates :
     ≡ Coordinates.encode equivalence initial →
   CoordinateTrajectory.stateAt right (initialTimeValue authority time)
     ≡ Coordinates.encode equivalence initial →
-  ∀ localTime →
-  PhysicalTrajectory.stateAt (transportCoordinateTrajectory equivalence left)
-    localTime
-  ≡ PhysicalTrajectory.stateAt (transportCoordinateTrajectory equivalence right)
-    localTime
-physicalLocalTrajectoryUniqueInCoordinates
+  ∀ localTime variable →
+  Coordinates.encode equivalence
+    (PhysicalTrajectory.stateAt
+      (transportCoordinateTrajectory equivalence left) localTime) variable
+  ≡ Coordinates.encode equivalence
+      (PhysicalTrajectory.stateAt
+        (transportCoordinateTrajectory equivalence right) localTime) variable
+physicalLocalTrajectoryUniqueCoordinatewise
     authority equivalence physicalVectorField lipschitz initial
-    left right leftSolves rightSolves time leftInitial rightInitial localTime =
-  cong (Coordinates.decode equivalence)
-    (funextPointwise localTime)
-  where
-  funextPointwise : ∀ selectedTime →
-    CoordinateTrajectory.stateAt left selectedTime
-    ≡ CoordinateTrajectory.stateAt right selectedTime
-  funextPointwise selectedTime =
-    assignmentExt
+    left right leftSolves rightSolves time leftInitial rightInitial
+    localTime variable =
+  trans
+    (Coordinates.encodeDecode equivalence
+      (CoordinateTrajectory.stateAt left localTime) variable)
+    (trans
       (localUniqueness authority
         (coordinateVectorFieldFromPhysical equivalence physicalVectorField)
         lipschitz (Coordinates.encode equivalence initial)
         left right leftSolves rightSolves time leftInitial rightInitial
-        selectedTime)
-
-  assignmentExt :
-    ∀ {leftCoordinates rightCoordinates : Polynomial.Assignment} →
-    (∀ variable → leftCoordinates variable ≡ rightCoordinates variable) →
-    leftCoordinates ≡ rightCoordinates
-  assignmentExt pointwise =
-    -- Function extensionality is intentionally an authority boundary in the
-    -- real ODE implementation.  Avoid using it in downstream physical theorems
-    -- by consuming uniqueness coordinatewise.
-    uniquenessCoordinatesAreEqual pointwise
-
-  uniquenessCoordinatesAreEqual :
-    ∀ {leftCoordinates rightCoordinates : Polynomial.Assignment} →
-    (∀ variable → leftCoordinates variable ≡ rightCoordinates variable) →
-    leftCoordinates ≡ rightCoordinates
-  uniquenessCoordinatesAreEqual pointwise = refl
+        localTime variable)
+      (sym
+        (Coordinates.encodeDecode equivalence
+          (CoordinateTrajectory.stateAt right localTime) variable)))
 
 picardLindelofTransportClosed : Bool
 picardLindelofTransportClosed = true
