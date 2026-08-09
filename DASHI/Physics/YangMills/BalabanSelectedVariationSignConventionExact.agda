@@ -57,45 +57,45 @@ import DASHI.Physics.YangMills.BalabanSelectedRawExtractorConstraintDefectExact 
 
 rawVariationDecomposition :
   ∀ {Multiplier}
-    (data : Stationary.SelectedKKTStationaryData Multiplier)
+    (dataSet : Stationary.SelectedKKTStationaryData Multiplier)
     vector →
-  Stationary.firstVariation data vector
-  ≡ Stationary.firstVariation data
+  Stationary.firstVariation dataSet vector
+  ≡ Stationary.firstVariation dataSet
       (KKT.selectedAdmissibleProject
-        (Stationary.projectorData data) vector)
-    + Stationary.firstVariation data
+        (Stationary.projectorData dataSet) vector)
+    + Stationary.firstVariation dataSet
       (KKT.selectedConstraintRepair
-        (Stationary.projectorData data) vector)
+        (Stationary.projectorData dataSet) vector)
 rawVariationDecomposition =
   Stationary.firstVariationRawSplitsProjectedRepair
 
 projectedVariationDecomposition :
   ∀ {Multiplier}
-    (data : Stationary.SelectedKKTStationaryData Multiplier)
+    (dataSet : Stationary.SelectedKKTStationaryData Multiplier)
     vector →
-  Stationary.firstVariation data
+  Stationary.firstVariation dataSet
       (KKT.selectedAdmissibleProject
-        (Stationary.projectorData data) vector)
-  ≡ Stationary.firstVariation data vector
-    - Stationary.firstVariation data
+        (Stationary.projectorData dataSet) vector)
+  ≡ Stationary.firstVariation dataSet vector
+    - Stationary.firstVariation dataSet
       (KKT.selectedConstraintRepair
-        (Stationary.projectorData data) vector)
+        (Stationary.projectorData dataSet) vector)
 projectedVariationDecomposition =
   Stationary.projectedFirstVariationIsRawMinusRepair
 
 projectorDefectSignExact :
   ∀ {Multiplier}
-    (data : Stationary.SelectedKKTStationaryData Multiplier)
+    (dataSet : Stationary.SelectedKKTStationaryData Multiplier)
     bondField plaquette →
-  Stationary.firstVariation data
+  Stationary.firstVariation dataSet
     (KKT.selectedConstraintRepair
-      (Stationary.projectorData data)
+      (Stationary.projectorData dataSet)
       (Boundary.rawPlaquetteSingletonExtractor bondField plaquette))
   ≡ KKT.multiplierDot
-      (Stationary.projectorData data)
-      (Stationary.kktMultiplier data)
+      (Stationary.projectorData dataSet)
+      (Stationary.kktMultiplier dataSet)
       (RawDefect.rawExtractorConstraintDefect
-        (Stationary.projectorData data) bondField plaquette)
+        (Stationary.projectorData dataSet) bondField plaquette)
 projectorDefectSignExact =
   RawDefect.rawExtractorProjectorDefectPairingExact
 
@@ -155,7 +155,7 @@ singletonBudgetTargetExact
       - (coefficient * charge)
       ≤ - canonicalProjectedSpillover
           rawLocalization multiplierPairing
-    reflected = ℚP.neg-mono-≤ residualUpper
+    reflected = ℚP.neg-antimono-≤ residualUpper
   in
   subst
     (λ upper → - (coefficient * charge) ≤ upper)
