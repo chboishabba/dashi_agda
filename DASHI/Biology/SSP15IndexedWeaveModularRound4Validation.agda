@@ -18,4 +18,5 @@ import DASHI.Reasoning.DistributedBraidGluingExact
 import DASHI.Unified.ThreePhaseCrossPollinationExact
 import DASHI.Dynamics.KAMHypothesisCoreExact
 import DASHI.Physics.Moonshine.MoonshineTraceIndexedWeaveExact
+import DASHI.Physics.Moonshine.SSPMoonshineTraceFibreIntegrationExact
 import DASHI.Physics.Closure.KleinQuarticGenerationSymmetryExact
