@@ -15,58 +15,157 @@ module DASHI.Physics.Closure.NSAdmissibleRemainderGrammarExact where
 --
 -- DASHI CONTRIBUTION
 --
--- Make the anti-circularity condition structural.  An admissible owner
--- remainder can contain only initial-data constants, integrals already known
--- to be finite, lower-order controlled terms, absorbed dissipation, and finite
--- sums of these.  There is deliberately no constructor for the target
--- critical supremum, an uncontrolled BKM integral, or an uncontrolled Serrin
--- norm.  Consequently every consumer eliminates the grammar using only the
--- four permitted handlers.
+-- Make the anti-circularity condition structural.  A remainder leaf is not an
+-- unrestricted rational wearing a label.  It contains a source term and the
+-- proof appropriate to its class: initial-data boundedness, known-integral
+-- finiteness, lower-order control, or dissipation absorption.  The source
+-- authority also proves that each such certificate excludes dependence on the
+-- target critical supremum, an uncontrolled BKM integral, and an uncontrolled
+-- Serrin norm.  The fold can therefore consume only proof-carrying leaves.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Empty using (⊥)
 open import Data.Rational.Base as ℚ using (ℚ; _+_)
-
-data AdmissibleRemainder : Set where
-  initialDataConstant : ℚ → AdmissibleRemainder
-  knownTimeIntegral : ℚ → AdmissibleRemainder
-  lowerOrderControlled : ℚ → AdmissibleRemainder
-  absorbedDissipation : ℚ → AdmissibleRemainder
-  _⊕_ : AdmissibleRemainder → AdmissibleRemainder → AdmissibleRemainder
-
-infixr 6 _⊕_
 
 data ForbiddenCircularDependency : Set where
   targetCriticalSupremum : ForbiddenCircularDependency
   uncontrolledBKMIntegral : ForbiddenCircularDependency
   uncontrolledSerrinNorm : ForbiddenCircularDependency
 
-evaluateRemainder : AdmissibleRemainder → ℚ
-evaluateRemainder (initialDataConstant value) = value
-evaluateRemainder (knownTimeIntegral value) = value
-evaluateRemainder (lowerOrderControlled value) = value
-evaluateRemainder (absorbedDissipation value) = value
+record RemainderSourceAuthority : Set₁ where
+  field
+    Source : Set
+    value : Source → ℚ
+
+    DependsOn : Source → ForbiddenCircularDependency → Set
+
+    InitialDataBounded : Source → Set
+    KnownTimeIntegralFinite : Source → Set
+    LowerOrderControlled : Source → Set
+    DissipationAbsorbable : Source → Set
+
+    initialDataExcludesCircularity :
+      ∀ source → InitialDataBounded source →
+      ∀ dependency → DependsOn source dependency → ⊥
+
+    knownIntegralExcludesCircularity :
+      ∀ source → KnownTimeIntegralFinite source →
+      ∀ dependency → DependsOn source dependency → ⊥
+
+    lowerOrderExcludesCircularity :
+      ∀ source → LowerOrderControlled source →
+      ∀ dependency → DependsOn source dependency → ⊥
+
+    dissipationExcludesCircularity :
+      ∀ source → DissipationAbsorbable source →
+      ∀ dependency → DependsOn source dependency → ⊥
+open RemainderSourceAuthority public
+
+NoForbiddenDependency :
+  (authority : RemainderSourceAuthority) →
+  Source authority → Set
+NoForbiddenDependency authority source =
+  ∀ dependency → DependsOn authority source dependency → ⊥
+
+initialDataNoForbiddenDependency :
+  ∀ authority source →
+  InitialDataBounded authority source →
+  NoForbiddenDependency authority source
+initialDataNoForbiddenDependency authority source proof =
+  initialDataExcludesCircularity authority source proof
+
+knownIntegralNoForbiddenDependency :
+  ∀ authority source →
+  KnownTimeIntegralFinite authority source →
+  NoForbiddenDependency authority source
+knownIntegralNoForbiddenDependency authority source proof =
+  knownIntegralExcludesCircularity authority source proof
+
+lowerOrderNoForbiddenDependency :
+  ∀ authority source →
+  LowerOrderControlled authority source →
+  NoForbiddenDependency authority source
+lowerOrderNoForbiddenDependency authority source proof =
+  lowerOrderExcludesCircularity authority source proof
+
+dissipationNoForbiddenDependency :
+  ∀ authority source →
+  DissipationAbsorbable authority source →
+  NoForbiddenDependency authority source
+dissipationNoForbiddenDependency authority source proof =
+  dissipationExcludesCircularity authority source proof
+
+data AdmissibleRemainder
+    (authority : RemainderSourceAuthority) : Set where
+  initialDataConstant :
+    (source : Source authority) →
+    InitialDataBounded authority source →
+    AdmissibleRemainder authority
+
+  knownTimeIntegral :
+    (source : Source authority) →
+    KnownTimeIntegralFinite authority source →
+    AdmissibleRemainder authority
+
+  lowerOrderControlled :
+    (source : Source authority) →
+    LowerOrderControlled authority source →
+    AdmissibleRemainder authority
+
+  absorbedDissipation :
+    (source : Source authority) →
+    DissipationAbsorbable authority source →
+    AdmissibleRemainder authority
+
+  _⊕_ :
+    AdmissibleRemainder authority →
+    AdmissibleRemainder authority →
+    AdmissibleRemainder authority
+
+infixr 6 _⊕_
+
+evaluateRemainder :
+  ∀ {authority} → AdmissibleRemainder authority → ℚ
+evaluateRemainder {authority} (initialDataConstant source _) =
+  value authority source
+evaluateRemainder {authority} (knownTimeIntegral source _) =
+  value authority source
+evaluateRemainder {authority} (lowerOrderControlled source _) =
+  value authority source
+evaluateRemainder {authority} (absorbedDissipation source _) =
+  value authority source
 evaluateRemainder (left ⊕ right) =
   evaluateRemainder left + evaluateRemainder right
 
 foldAdmissibleRemainder :
-  ∀ {A : Set} →
-  (initialHandler knownIntegralHandler lowerOrderHandler
-    dissipationHandler : ℚ → A) →
+  ∀ {authority} {A : Set} →
+  (initialHandler :
+    ∀ source → InitialDataBounded authority source → A) →
+  (knownIntegralHandler :
+    ∀ source → KnownTimeIntegralFinite authority source → A) →
+  (lowerOrderHandler :
+    ∀ source → LowerOrderControlled authority source → A) →
+  (dissipationHandler :
+    ∀ source → DissipationAbsorbable authority source → A) →
   (combine : A → A → A) →
-  AdmissibleRemainder → A
+  AdmissibleRemainder authority → A
 foldAdmissibleRemainder initialHandler knownIntegralHandler
     lowerOrderHandler dissipationHandler combine
-    (initialDataConstant value) = initialHandler value
+    (initialDataConstant source proof) =
+  initialHandler source proof
 foldAdmissibleRemainder initialHandler knownIntegralHandler
     lowerOrderHandler dissipationHandler combine
-    (knownTimeIntegral value) = knownIntegralHandler value
+    (knownTimeIntegral source proof) =
+  knownIntegralHandler source proof
 foldAdmissibleRemainder initialHandler knownIntegralHandler
     lowerOrderHandler dissipationHandler combine
-    (lowerOrderControlled value) = lowerOrderHandler value
+    (lowerOrderControlled source proof) =
+  lowerOrderHandler source proof
 foldAdmissibleRemainder initialHandler knownIntegralHandler
     lowerOrderHandler dissipationHandler combine
-    (absorbedDissipation value) = dissipationHandler value
+    (absorbedDissipation source proof) =
+  dissipationHandler source proof
 foldAdmissibleRemainder initialHandler knownIntegralHandler
     lowerOrderHandler dissipationHandler combine (left ⊕ right) =
   combine
@@ -75,23 +174,28 @@ foldAdmissibleRemainder initialHandler knownIntegralHandler
     (foldAdmissibleRemainder initialHandler knownIntegralHandler
       lowerOrderHandler dissipationHandler combine right)
 
-identityHandler : ℚ → ℚ
-identityHandler value = value
+valueHandler :
+  ∀ {authority} →
+  (source : Source authority) → ℚ
+valueHandler {authority} source = value authority source
 
 admissibleRemainderEvaluationIsCanonical :
-  ∀ remainder →
+  ∀ {authority} (remainder : AdmissibleRemainder authority) →
   foldAdmissibleRemainder
-    identityHandler identityHandler identityHandler identityHandler
+    (λ source _ → valueHandler source)
+    (λ source _ → valueHandler source)
+    (λ source _ → valueHandler source)
+    (λ source _ → valueHandler source)
     _+_ remainder
   ≡ evaluateRemainder remainder
 admissibleRemainderEvaluationIsCanonical
-    (initialDataConstant value) = refl
+    (initialDataConstant source proof) = refl
 admissibleRemainderEvaluationIsCanonical
-    (knownTimeIntegral value) = refl
+    (knownTimeIntegral source proof) = refl
 admissibleRemainderEvaluationIsCanonical
-    (lowerOrderControlled value) = refl
+    (lowerOrderControlled source proof) = refl
 admissibleRemainderEvaluationIsCanonical
-    (absorbedDissipation value) = refl
+    (absorbedDissipation source proof) = refl
 admissibleRemainderEvaluationIsCanonical (left ⊕ right)
   rewrite admissibleRemainderEvaluationIsCanonical left
         | admissibleRemainderEvaluationIsCanonical right =
