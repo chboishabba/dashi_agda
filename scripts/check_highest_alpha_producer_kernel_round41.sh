@@ -11,6 +11,7 @@ files=(
   DASHI/Physics/Common/PhysicalProducerMaturityExact.agda
   DASHI/Physics/YangMills/BalabanFiniteLinearFunctionalCoordinatesExact.agda
   DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeConstraintMatrixExact.agda
+  DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeConstraintStencilExact.agda
   DASHI/Physics/YangMills/BalabanSelectedOwnerBudgetSlackExact.agda
   DASHI/Physics/YangMills/BalabanSelectedCertifiedOwnerEnclosureExact.agda
   DASHI/Physics/YangMills/BalabanSelectedSinglePlaquetteWitnessExact.agda
@@ -39,6 +40,8 @@ grep -q 'sameCarrierCompositeExact' DASHI/Physics/Common/PhysicalProducerMaturit
 grep -q 'finiteLinearFunctionalCoordinateExpansion' DASHI/Physics/YangMills/BalabanFiniteLinearFunctionalCoordinatesExact.agda
 grep -q 'selectedBackgroundGaugeConstraintMatrix' DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeConstraintMatrixExact.agda
 grep -q 'selectedBackgroundGaugeConstraintMatrixApplyExact' DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeConstraintMatrixExact.agda
+grep -q 'GaugeConstraintSpatialSupport' DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeConstraintStencilExact.agda
+grep -q 'selectedBackgroundGaugeConstraintMatrixOutsideStencilZero' DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeConstraintStencilExact.agda
 grep -q 'ownerBudgetSlack' DASHI/Physics/YangMills/BalabanSelectedOwnerBudgetSlackExact.agda
 grep -q 'slackCompletesLegacyOwnerBudget' DASHI/Physics/YangMills/BalabanSelectedOwnerBudgetSlackExact.agda
 grep -q 'certifiedEnclosuresToOwnerBounds' DASHI/Physics/YangMills/BalabanSelectedCertifiedOwnerEnclosureExact.agda
@@ -58,6 +61,7 @@ grep -q 'ForbiddenCircularDependency' DASHI/Physics/Closure/NSAdmissibleRemainde
 grep -q 'nineOwnerAbsorptionWithSlack' DASHI/Physics/Closure/NSNineOwnerStrictSlackExact.agda
 
 grep -q '10.1007/BF01466594' DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeConstraintMatrixExact.agda
+grep -q '10.1007/BF01240355' DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeConstraintStencilExact.agda
 grep -q '10.1007/BF01229381' DASHI/Physics/YangMills/BalabanSelectedSinglePlaquetteWitnessExact.agda
 grep -q '10.1137/1.9780898717716' DASHI/Physics/YangMills/BalabanSelectedCertifiedOwnerEnclosureExact.agda
 grep -q '10.1016/0001-8708(69)90009-7' DASHI/Physics/YangMills/BalabanMoscoRecoveryGapTransferExact.agda
