@@ -186,3 +186,24 @@ thirdOrderResidualRegression :
   Interference.thirdOrderResidual left middle right ≡ + 0
 thirdOrderResidualRegression =
   Interference.thirdOrderResidualZero
+
+waveBridgeClassifiesInPhaseAsReinforcing :
+  Selection.interactionDirection
+    (Interference.optimizerInteraction
+      Interference.inPhaseInteractionCertificate)
+  ≡ Selection.reinforcing
+waveBridgeClassifiesInPhaseAsReinforcing = refl
+
+waveBridgeClassifiesOppositionAsInterfering :
+  Selection.interactionDirection
+    (Interference.optimizerInteraction
+      Interference.oppositeInteractionCertificate)
+  ≡ Selection.interfering
+waveBridgeClassifiesOppositionAsInterfering = refl
+
+waveBridgeClassifiesQuadratureAsIndependent :
+  Selection.interactionDirection
+    (Interference.optimizerInteraction
+      Interference.quadratureInteractionCertificate)
+  ≡ Selection.independent
+waveBridgeClassifiesQuadratureAsIndependent = refl
