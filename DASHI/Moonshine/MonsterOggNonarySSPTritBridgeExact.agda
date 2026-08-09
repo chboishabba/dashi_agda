@@ -123,18 +123,28 @@ complementReversesResidueTrit Probe.unit5 = refl
 complementReversesResidueTrit Probe.unit7 = refl
 complementReversesResidueTrit Probe.unit8 = refl
 
-orientationToSSPTrit : Probe.UnitOrientation → SSPTrit
-orientationToSSPTrit Probe.directOrientation = sspPosOne
-orientationToSSPTrit Probe.counterOrientation = sspNegOne
+-- The existing direct/counter orientation is defined inside each complement
+-- mode.  Its conversion to the low residue trit is therefore mode-dependent:
+-- mode27 carries the opposite local convention from modes18 and45.
+modeOrientationToSSPTrit :
+  Probe.UnitComplementMode → Probe.UnitOrientation → SSPTrit
+modeOrientationToSSPTrit Probe.mode18 Probe.directOrientation = sspPosOne
+modeOrientationToSSPTrit Probe.mode18 Probe.counterOrientation = sspNegOne
+modeOrientationToSSPTrit Probe.mode27 Probe.directOrientation = sspNegOne
+modeOrientationToSSPTrit Probe.mode27 Probe.counterOrientation = sspPosOne
+modeOrientationToSSPTrit Probe.mode45 Probe.directOrientation = sspPosOne
+modeOrientationToSSPTrit Probe.mode45 Probe.counterOrientation = sspNegOne
 
-unitOrientationAgreesWithResidueTrit :
+modeOrientationRecoversResidueTrit :
   ∀ {residue} →
   (unit : Probe.UnitResidue9 residue) →
-  orientationToSSPTrit (Probe.unitOrientation unit)
+  modeOrientationToSSPTrit
+    (Probe.unitComplementMode unit)
+    (Probe.unitOrientation unit)
   ≡ unitResidueTrit unit
-unitOrientationAgreesWithResidueTrit Probe.unit1 = refl
-unitOrientationAgreesWithResidueTrit Probe.unit2 = refl
-unitOrientationAgreesWithResidueTrit Probe.unit4 = refl
-unitOrientationAgreesWithResidueTrit Probe.unit5 = refl
-unitOrientationAgreesWithResidueTrit Probe.unit7 = refl
-unitOrientationAgreesWithResidueTrit Probe.unit8 = refl
+modeOrientationRecoversResidueTrit Probe.unit1 = refl
+modeOrientationRecoversResidueTrit Probe.unit2 = refl
+modeOrientationRecoversResidueTrit Probe.unit4 = refl
+modeOrientationRecoversResidueTrit Probe.unit5 = refl
+modeOrientationRecoversResidueTrit Probe.unit7 = refl
+modeOrientationRecoversResidueTrit Probe.unit8 = refl
