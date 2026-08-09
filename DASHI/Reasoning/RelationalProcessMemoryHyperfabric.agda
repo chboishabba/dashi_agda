@@ -3,13 +3,24 @@ module DASHI.Reasoning.RelationalProcessMemoryHyperfabric where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 open import Data.Integer using (ℤ) renaming (_+_ to _+ℤ_)
+open import Data.List.Base using (map)
 
 import DASHI.Cognition.PNF.EventAlgebra as PNF
+import DASHI.Physics.ShiftDiscreteWaveStep as Wave
+import DASHI.Physics.ShiftPhaseTableInterference as Phase
 import DASHI.Reasoning.TypedHyperfabricCore as Hyperfabric
 import DASHI.Reasoning.RelationalStateCore as Core
 import DASHI.Reasoning.ConditionalResponseTree as Response
 import DASHI.Reasoning.AttractorAlignedBranchSelection as Selection
 import DASHI.Reasoning.RelationalBranchInterference as Interference
+
+------------------------------------------------------------------------
+-- Typed list membership used for actual hyperfabric incidence.
+------------------------------------------------------------------------
+
+data _∈_ {A : Set} (x : A) : List A → Set where
+  here : ∀ {xs} → x ∈ (x ∷ xs)
+  there : ∀ {y xs} → x ∈ xs → x ∈ (y ∷ xs)
 
 ------------------------------------------------------------------------
 -- Process-bearing branches.
@@ -89,9 +100,11 @@ record ProcessBearingBranch : Set where
     liveness : List LivenessWitness
     opportunities : List OpportunityWindow
     externalDependencies : List String
+    assignedParticipants : List Core.Participant
     servicingCost : Nat
     attractorAlignment : AttractorAlignment
     branchPhase : Nat
+    branchWaveAmplitude : Nat
     provenance : List String
 
 open ProcessBearingBranch public
@@ -118,12 +131,34 @@ record BranchFamily : Set where
     familyReceipt : String
 
 ------------------------------------------------------------------------
--- Quantitative refinement seams.
---
--- The qualitative process record remains useful for narrative intake.  A
--- promotion to exact branch selection or wave interference requires a second,
--- receipt-bearing object rather than silently reading numbers into prose.
+-- Exact qualitative -> quantitative branch derivation.
 ------------------------------------------------------------------------
+
+phaseFromNat : Nat → Phase.Phase4
+phaseFromNat zero = Phase.φ0
+phaseFromNat (suc zero) = Phase.φ1
+phaseFromNat (suc (suc zero)) = Phase.φ2
+phaseFromNat (suc (suc (suc zero))) = Phase.φ3
+phaseFromNat (suc (suc (suc (suc n)))) = phaseFromNat n
+
+qualitativeBranchWave : ProcessBearingBranch → Interference.BranchWave
+qualitativeBranchWave branch =
+  Wave.waveOfData
+    (branchWaveAmplitude branch)
+    (phaseFromNat (branchPhase branch))
+
+record MetricDerivation
+    (source : ProcessBearingBranch)
+    (metric : Selection.BranchMetric) : Set where
+  constructor metricDerivation
+  field
+    branchIdentityPreserved :
+      Selection.branchLabel metric ≡ branchId source
+    servicingCostPreserved :
+      Selection.servicingCost metric ≡ servicingCost source
+    additionalMetricFieldsAreExplicitRefinements : String
+
+open MetricDerivation public
 
 record QuantitativeBranchRefinement : Set where
   constructor quantitativeBranchRefinement
@@ -131,17 +166,41 @@ record QuantitativeBranchRefinement : Set where
     qualitativeBranch : ProcessBearingBranch
     selectionMetric : Selection.BranchMetric
     branchWave : Interference.BranchWave
+    metricDerivationWitness :
+      MetricDerivation qualitativeBranch selectionMetric
+    branchWaveDerivation :
+      branchWave ≡ qualitativeBranchWave qualitativeBranch
     metricIsCandidateOnly : Bool
     phaseIsCompatibilityAnalogyOnly : Bool
     refinementReceipt : String
+
+open QuantitativeBranchRefinement public
+
+------------------------------------------------------------------------
+-- Synchronized family refinement.
+--
+-- One refinement list is authoritative.  Three equality witnesses prove that
+-- the qualitative family, portfolio metrics, and wave list are exactly its
+-- projections.  Foreign metrics/waves and missing/duplicated coverage are not
+-- representable by a QuantitativeFamilyRefinement.
+------------------------------------------------------------------------
 
 record QuantitativeFamilyRefinement : Set where
   constructor quantitativeFamilyRefinement
   field
     qualitativeFamily : BranchFamily
     selectionPortfolio : Selection.BranchPortfolio
+    branchRefinements : List QuantitativeBranchRefinement
     branchWaves : List Interference.BranchWave
     waveBackedInteractions : List Interference.WaveBackedInteraction
+    qualitativeCoverage :
+      fineBranches qualitativeFamily
+      ≡ map qualitativeBranch branchRefinements
+    metricCoverage :
+      Selection.branches selectionPortfolio
+      ≡ map selectionMetric branchRefinements
+    waveCoverage :
+      branchWaves ≡ map branchWave branchRefinements
     exactNSlitReceipt :
       Interference.coherentIntensity branchWaves
       ≡
@@ -160,6 +219,7 @@ record BranchSelectionCriterion : Set where
     distinguishesActivityFromProgress : Bool
     quotientsNominalOptionsByReachableBasin : Bool
     checksLocalUtilityAgainstGlobalDrift : Bool
+    requiresSynchronizedQualitativeMetricWaveCoverage : Bool
 
 canonicalBranchSelectionCriterion : BranchSelectionCriterion
 canonicalBranchSelectionCriterion = record
@@ -171,6 +231,7 @@ canonicalBranchSelectionCriterion = record
   ; distinguishesActivityFromProgress = true
   ; quotientsNominalOptionsByReachableBasin = true
   ; checksLocalUtilityAgainstGlobalDrift = true
+  ; requiresSynchronizedQualitativeMetricWaveCoverage = true
   }
 
 ------------------------------------------------------------------------
@@ -225,8 +286,8 @@ branchStalk branch = BranchMemory
 
 data IncidentTo : Core.Participant → ProcessBearingBranch → Set where
   servicesBranch :
-    (participant : Core.Participant) →
-    (branch : ProcessBearingBranch) →
+    ∀ {participant branch} →
+    participant ∈ assignedParticipants branch →
     IncidentTo participant branch
 
 restrictParticipantToBranch :
@@ -234,7 +295,7 @@ restrictParticipantToBranch :
   IncidentTo participant branch →
   participantStalk participant →
   branchStalk branch
-restrictParticipantToBranch {participant} {branch} membership capacity =
+restrictParticipantToBranch {branch = branch} membership capacity =
   branchMemory
     branch
     (branchStatus branch ∷ [])
@@ -242,7 +303,7 @@ restrictParticipantToBranch {participant} {branch} membership capacity =
     PNF.residuallyDifferent
     true
     capacity
-    "participant capacity restricted to process-bearing branch"
+    "assigned participant capacity restricted to process-bearing branch"
 
 branchProvenance : ProcessBearingBranch → List String
 branchProvenance = provenance
@@ -273,6 +334,8 @@ record ProcessMemoryAuthorityBoundary : Set where
     qualitativeAlignmentIsFinalMathematics : Bool
     literalQuantumDecisionDynamicsClaimed : Bool
     quantitativePromotionRequiresReceipt : Bool
+    quantitativeFamilyAllowsForeignMetricsOrWaves : Bool
+    arbitraryParticipantIncidentToEveryBranch : Bool
     traumaDeformationIsDiagnosis : Bool
     boundaryNote : String
 
@@ -287,7 +350,9 @@ canonicalProcessMemoryAuthorityBoundary = record
   ; qualitativeAlignmentIsFinalMathematics = false
   ; literalQuantumDecisionDynamicsClaimed = false
   ; quantitativePromotionRequiresReceipt = true
+  ; quantitativeFamilyAllowsForeignMetricsOrWaves = false
+  ; arbitraryParticipantIncidentToEveryBranch = false
   ; traumaDeformationIsDiagnosis = false
   ; boundaryNote =
-      "Branches may be stateful, costly, perishable and partly exogenous before an outcome exists. Exact selection and n-slit layers require explicit quantitative refinements; PNF memory retains path, liveness layer, capacity and provenance without turning the model into a clinical or quantum diagnosis."
+      "Branches may be stateful, costly, perishable and partly exogenous before an outcome exists. Exact selection and n-slit layers require synchronized qualitative/metric/wave refinements, and hyperfabric incidence requires typed participant assignment. PNF memory retains path, liveness, capacity and provenance without becoming a clinical or quantum diagnosis."
   }
