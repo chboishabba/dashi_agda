@@ -32,6 +32,7 @@ module DASHI.Moonshine.MonsterOggPrimaryDepthAndNestedEigenCarrierExact where
 open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
+open import Data.Fin.Base using (Fin)
 
 import DASHI.Physics.Closure.MoonshinePrimeLaneReceiptSurface as Lane
 import DASHI.Foundations.Base369CompletedRelationalDigitExact as Cell
@@ -130,6 +131,14 @@ oddPhaseDecompositionExact odd47 = refl
 oddPhaseDecompositionExact odd59 = refl
 oddPhaseDecompositionExact odd71 = refl
 
+record PrimeRelationalCell (prime : Lane.MonsterPrimeLane) : Set where
+  constructor primeRelationalCell
+  field
+    cyclicPhase : Fin (Lane.monsterPrimeLaneToNat prime)
+    localRelationalCell : Cell.NestedRelationalCell
+
+open PrimeRelationalCell public
+
 iterate : {A : Set} → Nat → (A → A) → A → A
 iterate zero step state = state
 iterate (suc n) step state = step (iterate n step state)
@@ -144,7 +153,7 @@ record OggNestedEigenCarrier
     Scale : Set
 
     symmetry : State → State
-    symmetryHasPrimeOrder :
+    symmetryPowerPIsIdentity :
       (state : State) →
       iterate (Lane.monsterPrimeLaneToNat prime) symmetry state ≡ state
 
@@ -158,7 +167,7 @@ record OggNestedEigenCarrier
     transition : State → State
     stable : State → Set
 
-    relationalCell : State → Cell.NestedRelationalCell
+    relationalCell : State → PrimeRelationalCell prime
     overflow : State → State
 
 open OggNestedEigenCarrier public
