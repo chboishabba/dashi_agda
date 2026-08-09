@@ -8,6 +8,7 @@ import DASHI.Biology.HalfChartNineRingQuotientExact as Half
 import DASHI.Biology.IndexedJExternalGluingExact as Gluing
 import DASHI.Biology.IteratedPointedAttachmentSpiralExact as Spiral
 import DASHI.Moonshine.MathieuDivisorLatticeExact as Divisor
+import DASHI.Moonshine.MathieuDivisorPathInterferenceExact as Path
 import DASHI.Moonshine.MathieuJTransportIntegrationExact as Integration
 import DASHI.Moonshine.MathieuStabilizerTowerExact as Mathieu
 import DASHI.Moonshine.Monster196884FibreInterferenceExact as Monster
@@ -79,6 +80,12 @@ validationPrimePathConfluence :
   Divisor.endpoint Divisor.historyTwoThree
   ≡ Divisor.endpoint Divisor.historyThreeTwo
 validationPrimePathConfluence = Divisor.historiesShareEndpoint
+
+validationDecoratedPathsReachSix :
+  Divisor.endpoint
+    (Path.leftHistory (Path.confluence Path.canonicalPhaseDecoratedConfluence))
+  ≡ 6
+validationDecoratedPathsReachSix = Path.canonicalHistoriesReachSix
 
 validationPointedTen : Integration.pointedTenCount ≡ 10
 validationPointedTen = Integration.pointedTenCountIsTen
