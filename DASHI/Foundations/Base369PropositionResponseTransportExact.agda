@@ -6,42 +6,25 @@ module DASHI.Foundations.Base369PropositionResponseTransportExact where
 -- A visible yes is not a free-standing Boolean.  An actual response is indexed
 -- by the exact guarded proposition node, decision episode and time.  Response
 -- transport across descendants, contexts, modalities, scopes and times
--- requires independent witnesses.  In particular, affirming that an option
--- might be considered preserves branch liveness without promising weighing,
--- selection, execution or obligation.
+-- requires independent witnesses.  Affirming that an option might be
+-- considered preserves branch liveness without promising weighing, selection,
+-- execution or obligation.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 
-open import DASHI.Foundations.SSPTritCarrier using
-  ( SSPTrit
-  ; sspNegOne
-  ; sspZero
-  ; sspPosOne
-  )
+open import DASHI.Foundations.SSPTritCarrier using (SSPTrit; sspPosOne)
 open import DASHI.Foundations.Base369SignedMembershipExact using (ZeroKind)
 
-------------------------------------------------------------------------
--- Guarded proposition nodes.
-------------------------------------------------------------------------
-
 data DeliberativeStatus : Set where
-  excluded
-  live
-  mightConsider
-  willConsider : DeliberativeStatus
+  excluded live mightConsider willConsider : DeliberativeStatus
 
 data SelectionStatus : Set where
-  unselected
-  preferred
-  intended
-  selected : SelectionStatus
+  unselected preferred intended selected : SelectionStatus
 
 data ObligationStatus : Set where
-  noObligation
-  selfPlan
-  commitmentToAnother : ObligationStatus
+  noObligation selfPlan commitmentToAnother : ObligationStatus
 
 record FactoredModality : Set where
   constructor factoredModality
@@ -55,11 +38,7 @@ open FactoredModality public
 record PropositionNode : Set₁ where
   constructor propositionNode
   field
-    Context : Set
-    Action : Set
-    Scope : Set
-    Exception : Set
-    UnresolvedCondition : Set
+    Context Action Scope Exception UnresolvedCondition : Set
     contextWitness : Context
     contemplatedAction : Action
     modality : FactoredModality
@@ -70,31 +49,19 @@ open PropositionNode public
 record DecisionEpisode : Set₁ where
   constructor decisionEpisode
   field
-    ContextCarrier : Set
-    Alternative : Set
-    Version : Set
+    ContextCarrier Alternative Version : Set
     decisionContext : ContextCarrier
     availableAlternative : Alternative → Set
     propositionVersion : Version
-    openedAt : Nat
-    closesAt : Nat
+    openedAt closesAt : Nat
 
 open DecisionEpisode public
 
-------------------------------------------------------------------------
--- Proposition-indexed response state.
-------------------------------------------------------------------------
-
 data CapacityState : Set where
-  noCapacity
-  uncertainCapacity
-  sufficientCapacity : CapacityState
+  noCapacity uncertainCapacity sufficientCapacity : CapacityState
 
 data ProvenanceKind : Set where
-  participantProduced
-  observerAttributed
-  recordingWitnessed
-  reconstructed : ProvenanceKind
+  participantProduced observerAttributed recordingWitnessed reconstructed : ProvenanceKind
 
 record ResponseState : Set where
   constructor responseState
@@ -110,7 +77,7 @@ record ActualResponse
   (Participant : Set)
   (node : PropositionNode)
   (episode : DecisionEpisode)
-  (time : Nat) : Set where
+  (time : Nat) : Set₁ where
   constructor actualResponse
   field
     participant : Participant
@@ -120,24 +87,17 @@ record ActualResponse
 
 open ActualResponse public
 
-------------------------------------------------------------------------
--- Positive response is indexed to semantic content.
-------------------------------------------------------------------------
-
 record PositiveResponse
   {Participant : Set}
   {node : PropositionNode}
   {episode : DecisionEpisode}
   {time : Nat}
-  (r : ActualResponse Participant node episode time) : Set where
+  (r : ActualResponse Participant node episode time) : Set₁ where
   constructor positiveResponse
-  field
-    stanceIsPositive : stance (response r) ≡ sspPosOne
+  field stanceIsPositive : stance (response r) ≡ sspPosOne
 
 open PositiveResponse public
 
--- Consider and commit are different proposition types even where both receive
--- a positive stance.  No coercion between them is supplied.
 considerModality : FactoredModality
 considerModality = factoredModality mightConsider unselected noObligation
 
@@ -145,24 +105,19 @@ commitModality : FactoredModality
 commitModality = factoredModality willConsider selected commitmentToAnother
 
 ------------------------------------------------------------------------
--- Might-consider means a live possible weighing path, not guaranteed uptake.
+-- Might-consider means possible uptake, not guaranteed uptake.
 ------------------------------------------------------------------------
 
 record MightConsiderSemantics : Set₁ where
   constructor mightConsiderSemantics
   field
-    History : Set
-    Option : Set
+    History Option : Set
     option : Option
     Weighed : History → Option → Set
     liveHistory : History
     possibleWeighing : Weighed liveHistory option
 
 open MightConsiderSemantics public
-
--- The record deliberately contains no field asserting that every history
--- weighs the option, that any outcome is selected, that selection remains in a
--- fixed menu, or that the option is executed.
 
 record WillConsiderSemantics (might : MightConsiderSemantics) : Set₁ where
   constructor willConsiderSemantics
@@ -176,25 +131,25 @@ open WillConsiderSemantics public
 -- Independent transport witnesses.
 ------------------------------------------------------------------------
 
-record NodeTransportable (source target : PropositionNode) : Set where
+record NodeTransportable (source target : PropositionNode) : Set₁ where
   constructor nodeTransportable
   field nodeTransportWitness : Set
 
-record ContextTransportable (source target : PropositionNode) : Set where
+record ContextTransportable (source target : PropositionNode) : Set₁ where
   constructor contextTransportable
   field contextTransportWitness : Set
 
-record ModalityTransportable (source target : PropositionNode) : Set where
+record ModalityTransportable (source target : PropositionNode) : Set₁ where
   constructor modalityTransportable
   field modalityTransportWitness : Set
 
-record ScopeTransportable (source target : PropositionNode) : Set where
+record ScopeTransportable (source target : PropositionNode) : Set₁ where
   constructor scopeTransportable
   field scopeTransportWitness : Set
 
 record TemporalTransportable
   (sourceEpisode targetEpisode : DecisionEpisode)
-  (sourceTime targetTime : Nat) : Set where
+  (sourceTime targetTime : Nat) : Set₁ where
   constructor temporalTransportable
   field temporalTransportWitness : Set
 
@@ -227,16 +182,14 @@ transportActualResponse witness sourceResponse =
     (exactNodeUnderstood sourceResponse)
 
 ------------------------------------------------------------------------
--- Consent adds counterfactual refusal availability and capacity.
+-- Consent adds refusal alternatives, capacity and participant provenance.
 ------------------------------------------------------------------------
 
 record CounterfactualChoiceCone : Set₁ where
   constructor counterfactualChoiceCone
   field
     World : Set
-    acceptWorld : World
-    refuseWorld : World
-    deferWorld : World
+    acceptWorld refuseWorld deferWorld : World
     refusalReachable : Set
     deferralReachable : Set
 
@@ -257,20 +210,12 @@ record ValidConsent
 
 open ValidConsent public
 
-------------------------------------------------------------------------
--- Decision-token and branch-memory distinction.
-------------------------------------------------------------------------
-
 record ReinstantiatedBranch
   (oldEpisode newEpisode : DecisionEpisode) : Set₁ where
   constructor reinstantiatedBranch
   field
     Branch : Set
-    oldBranch : Branch
-    newBranch : Branch
+    oldBranch newBranch : Branch
     provenanceFromOld : Set
 
 open ReinstantiatedBranch public
-
--- Reinstantiation preserves provenance but does not identify the old and new
--- decision tokens or silently transport their authority.
