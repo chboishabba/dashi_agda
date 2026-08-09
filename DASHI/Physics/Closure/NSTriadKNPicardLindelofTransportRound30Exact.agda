@@ -30,7 +30,7 @@ module DASHI.Physics.Closure.NSTriadKNPicardLindelofTransportRound30Exact where
 open import Agda.Primitive using (Level; lsuc; _⊔_)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteGalerkinPolynomialRound26Exact as Polynomial
 import DASHI.Physics.Closure.NSTriadKNFinitePhysicalCoordinateEquivalenceRound30Exact as Coordinates
@@ -60,22 +60,18 @@ record CoordinatePicardLindelofAuthority
   field
     InitialTime : Set timeLevel
     initialTimeValue : InitialTime → Time
-
     LocallyLipschitz :
       (Polynomial.Assignment → Polynomial.Assignment) → Set
-
     localTrajectory :
       (vectorField : Polynomial.Assignment → Polynomial.Assignment) →
       LocallyLipschitz vectorField →
       Polynomial.Assignment → CoordinateTrajectory Time
-
     localTrajectorySolves :
       (vectorField : Polynomial.Assignment → Polynomial.Assignment) →
       (lipschitz : LocallyLipschitz vectorField) →
       (initial : Polynomial.Assignment) →
       CoordinateODESolution vectorField
         (localTrajectory vectorField lipschitz initial)
-
     localTrajectoryInitial :
       (vectorField : Polynomial.Assignment → Polynomial.Assignment) →
       (lipschitz : LocallyLipschitz vectorField) →
@@ -84,7 +80,6 @@ record CoordinatePicardLindelofAuthority
       stateAt (localTrajectory vectorField lipschitz initial)
         (initialTimeValue time)
       ≡ initial
-
     localUniqueness :
       (vectorField : Polynomial.Assignment → Polynomial.Assignment) →
       LocallyLipschitz vectorField →
