@@ -47,7 +47,7 @@ zetaSquaredC3 : Cyclotomic3
 zetaSquaredC3 = c3 (- (+ 1)) (- (+ 1))
 
 _+c3_ : Cyclotomic3 → Cyclotomic3 → Cyclotomic3
-c3 a b +c3 c3 c d = c3 (a + c) (b + d)
+_+c3_ (c3 a b) (c3 c d) = c3 (a + c) (b + d)
 
 zetaSquaredIsMinusOneMinusZeta :
   zetaSquaredC3 ≡ c3 (- (+ 1)) (- (+ 1))
@@ -79,9 +79,9 @@ generatorEvaluation : C3PhaseMultiplicity → Cyclotomic3
 generatorEvaluation multiplicity =
   c3
     (fixedMultiplicity multiplicity
-      + (- zetaSquaredMultiplicity multiplicity))
+      + (- (zetaSquaredMultiplicity multiplicity)))
     (zetaMultiplicity multiplicity
-      + (- zetaSquaredMultiplicity multiplicity))
+      + (- (zetaSquaredMultiplicity multiplicity)))
 
 residualPlusRegular : ℤ → ℤ → C3PhaseMultiplicity
 residualPlusRegular residual regular =
@@ -90,7 +90,7 @@ residualPlusRegular residual regular =
     regular
     regular
 
--- The specialization used by the certified Monster 3B restriction.  Written
+-- The specialization used by the certified Monster 3B restriction. Written
 -- over exact integers, the generator evaluation computes to the residual 53.
 monster3BPhaseMultiplicity : C3PhaseMultiplicity
 monster3BPhaseMultiplicity =
