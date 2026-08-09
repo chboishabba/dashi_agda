@@ -32,7 +32,7 @@ open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_; _<_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
 
 sumNine : ℚ → ℚ → ℚ → ℚ → ℚ → ℚ → ℚ → ℚ → ℚ → ℚ
 sumNine a b c d e f g h i =
@@ -149,10 +149,16 @@ nineOwnerAbsorptionWithSlack packet =
         + viscositySlack packet * dissipation packet
       ≡ dissipation packet
     upperExact =
-      subst
-        (λ total → total * dissipation packet ≡ dissipation packet)
-        (coefficientTotalPlusSlackExact packet)
-        (ℚRing.solve-∀ (dissipation packet))
+      trans
+        (ℚRing.solve-∀
+          (coefficientTotal packet)
+          (viscositySlack packet)
+          (dissipation packet))
+        (trans
+          (cong
+            (λ total → total * dissipation packet)
+            (coefficientTotalPlusSlackExact packet))
+          (ℚRing.solve-∀ (dissipation packet)))
   in
   subst
     (λ upper →
