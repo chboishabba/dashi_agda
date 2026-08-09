@@ -19,7 +19,10 @@ import DASHI.Reasoning.RelationalBranchInterference
 import DASHI.Reasoning.RelationalTernaryPhaseGeometry
 import DASHI.Reasoning.RelationalBranchCobordismGeometry
 import DASHI.Reasoning.RelationalProcessMemoryHyperfabric
+import DASHI.Reasoning.RelationalGeometricProcessIntegration
 import DASHI.Reasoning.DevelopmentalAttunementPNFBridge
 import DASHI.Reasoning.DevelopmentalExplanationWithdrawalExact
 import DASHI.Reasoning.RelationalFormalismSourceAtlas
+import DASHI.Reasoning.RelationalBranchGeometrySourceAtlas
 import DASHI.Reasoning.RelationalRegression
+import DASHI.Reasoning.RelationalBranchGeometryRegression
