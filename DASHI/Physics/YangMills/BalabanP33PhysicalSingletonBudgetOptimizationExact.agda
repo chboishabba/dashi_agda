@@ -155,11 +155,12 @@ noFitDualRejectsEveryAdmissibleBudgetFit :
   Admissible model candidate →
   ¬ (singletonTotalCost (evaluate model candidate) ≤ singletonBudget)
 noFitDualRejectsEveryAdmissibleBudgetFit dual candidate admissible fit =
-  ℚP.<⇒≱
+  ℚP.<-irrefl singletonBudget
     (ℚP.<-≤-trans
-      (lowerBoundStrictlyExceedsBudget dual)
-      (allAdmissibleCostsAboveLowerBound dual candidate admissible))
-    fit
+      (ℚP.<-≤-trans
+        (lowerBoundStrictlyExceedsBudget dual)
+        (allAdmissibleCostsAboveLowerBound dual candidate admissible))
+      fit)
 
 noFitDualContradictsGeneratedCertificate :
   ∀ {Parameter}
