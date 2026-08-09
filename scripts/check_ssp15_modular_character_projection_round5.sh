@@ -9,6 +9,8 @@ bash scripts/check_ssp15_indexed_weave_modular_round4.sh
 sources=(
   DASHI/Biology/CoarseFineTenSectorProjectionExact.agda
   DASHI/Biology/D4NineCellOrbitCompressionExact.agda
+  DASHI/Biology/RelationalAppraisalPointedPhaseExact.agda
+  DASHI/Moonshine/C3CoarseFineRatioTypingExact.agda
   DASHI/Moonshine/ModularCurveJFrickeInterfaceExact.agda
   DASHI/Moonshine/Monster3BC3RepresentationRingEvaluationExact.agda
   DASHI/Moonshine/MonsterOrderExponentCorrectionExact.agda
@@ -43,6 +45,8 @@ require_pattern() {
 exponents=DASHI/Moonshine/MonsterOrderExponentCorrectionExact.agda
 projection=DASHI/Biology/CoarseFineTenSectorProjectionExact.agda
 d4=DASHI/Biology/D4NineCellOrbitCompressionExact.agda
+relational=DASHI/Biology/RelationalAppraisalPointedPhaseExact.agda
+ratios=DASHI/Moonshine/C3CoarseFineRatioTypingExact.agda
 modular=DASHI/Moonshine/ModularCurveJFrickeInterfaceExact.agda
 c3=DASHI/Moonshine/Monster3BC3RepresentationRingEvaluationExact.agda
 validation=DASHI/Moonshine/SSPModularCharacterProjectionRound5Validation.agda
@@ -65,6 +69,16 @@ require_pattern "$d4" 'nineCellOrbitCount'
 require_pattern "$d4" 'decodeAfterEncode'
 require_pattern "$d4" 'encodeAfterDecode'
 require_pattern "$d4" 'd4IrrepKindCountIsFive'
+require_pattern "$relational" 'oneRoundFactorsAsBaseTimesFibre'
+require_pattern "$relational" 'appraisalFibreAsPointedExpansion'
+require_pattern "$relational" 'recursiveFineCarrierSizeIs65610'
+require_pattern "$relational" 'completeCycleAxisCountIsTwelve'
+require_pattern "$relational" 'relationalConstructionDerivesTenIsFalse'
+require_pattern "$ratios" 'fineToCoarseDimensionIs196830Over53'
+require_pattern "$ratios" 'coarseShareIs53Over196883'
+require_pattern "$ratios" 'nonidentityFineContributionIsZero'
+require_pattern "$ratios" 'characterEvaluationIsTenSectorAverageIsFalse'
+require_pattern "$ratios" 'regularCharacterCancellationDerivesCoefficientTenIsFalse'
 require_pattern "$modular" 'frickeSwapsSource'
 require_pattern "$modular" 'observeUnorientedIsFrickeInvariant'
 require_pattern "$modular" 'record OggPrimeModularPackage'
@@ -73,8 +87,10 @@ require_pattern "$c3" 'monster3BDimensionIs196883'
 require_pattern "$c3" 'monster3BGeneratorTraceIs53'
 require_pattern "$c3" 'moonshineV2TraceAt3BIs54'
 require_pattern "$c3" 'coefficientTenDerivedByRepresentationRingIsFalse'
-require_pattern "$validation" 'validationResidual'
-require_pattern "$top" 'import DASHI.Moonshine.MonsterOrderExponentCorrectionExact'
+require_pattern "$validation" 'validationNonidentityCancellation'
+require_pattern "$validation" 'validationPointedExpansion'
+require_pattern "$top" 'import DASHI.Moonshine.C3CoarseFineRatioTypingExact'
+require_pattern "$top" 'import DASHI.Biology.RelationalAppraisalPointedPhaseExact'
 
 mkdir -p artifacts
 python3 scripts/classify_agda_substance.py \
