@@ -1,0 +1,8 @@
+module DASHI.EverythingSSPModularCharacterProjectionRound5 where
+
+import DASHI.Biology.CoarseFineTenSectorProjectionExact
+import DASHI.Biology.D4NineCellOrbitCompressionExact
+import DASHI.Moonshine.ModularCurveJFrickeInterfaceExact
+import DASHI.Moonshine.Monster3BC3RepresentationRingEvaluationExact
+import DASHI.Moonshine.MonsterOrderExponentCorrectionExact
+import DASHI.Moonshine.SSPModularCharacterProjectionRound5Validation
