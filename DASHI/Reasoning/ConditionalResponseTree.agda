@@ -83,50 +83,74 @@ record ActualResponse : Set where
 open ActualResponse public
 
 ------------------------------------------------------------------------
--- Transport assessment versus transport authorisation.
+-- Exact response transport.
 --
--- ResponseTransportWitness is deliberately only an assessment: its Booleans
--- may report failed requirements.  AuthorisedResponseTransport is the
--- locality gate used to license transport; it requires equality proofs that
--- every relevant assessment field is true.
+-- Transport is available only when every semantic coordinate of the source
+-- node is propositionally equal to the corresponding coordinate of the target.
+-- Node identifiers and parent links may differ, permitting a provenance-
+-- preserving re-addressing without silently broadening context, modality,
+-- scope, exceptions, or unresolved conditions.
 ------------------------------------------------------------------------
 
 record ResponseTransportWitness
     (source target : PropositionNode) : Set where
-  constructor responseTransportAssessment
+  constructor responseTransportWitness
   field
-    nodeTransportable : Bool
-    contextTransportable : Bool
-    modalityTransportable : Bool
-    scopeTransportable : Bool
-    temporalValidityRechecked : Bool
-    newExplicitCommitmentWhereStrengthened : Bool
+    antecedentPreserved : antecedent source ≡ antecedent target
+    actionPreserved : contemplatedAction source ≡ contemplatedAction target
+    modalityPreserved : modality source ≡ modality target
+    temporalScopePreserved : temporalScope source ≡ temporalScope target
+    practicalScopePreserved : practicalScope source ≡ practicalScope target
+    exceptionsPreserved : exceptions source ≡ exceptions target
+    unresolvedConditionsPreserved :
+      unresolvedConditions source ≡ unresolvedConditions target
     transportReceipt : String
 
 open ResponseTransportWitness public
 
-record AuthorisedResponseTransport
-    (source target : PropositionNode) : Set where
-  constructor authorisedResponseTransport
-  field
-    assessment : ResponseTransportWitness source target
-    nodeTransportableProof : nodeTransportable assessment ≡ true
-    contextTransportableProof : contextTransportable assessment ≡ true
-    modalityTransportableProof : modalityTransportable assessment ≡ true
-    scopeTransportableProof : scopeTransportable assessment ≡ true
-    temporalValidityProof : temporalValidityRechecked assessment ≡ true
-    strengtheningCommitmentProof :
-      newExplicitCommitmentWhereStrengthened assessment ≡ true
-    authorisationReceipt : String
-
-open AuthorisedResponseTransport public
-
 transportResponse :
   {source target : PropositionNode} →
-  ActualResponse →
-  AuthorisedResponseTransport source target →
-  PropositionNode
-transportResponse {target = target} response authorisation = target
+  (response : ActualResponse) →
+  node response ≡ source →
+  ResponseTransportWitness source target →
+  ActualResponse
+transportResponse {target = target} response responseTargetsSource witness =
+  actualResponse
+    (respondent response)
+    target
+    (episode response)
+    (responseTime response)
+    (stance response)
+    (zeroKind response)
+    (deliberativeStatus response)
+    (selectionStatus response)
+    (obligationStatus response)
+    (capacity response)
+    (ownershipPresent response)
+    (refusalAvailable response)
+    (refusalSafe response)
+    (provenance response)
+
+------------------------------------------------------------------------
+-- Strengthening is not transport.
+--
+-- A stronger modality or broader context requires a fresh response whose node
+-- is definitionally tied to the target.  The old response is retained only as
+-- provenance and cannot be reused as the new assent.
+------------------------------------------------------------------------
+
+record FreshStrengthenedResponse
+    (source target : PropositionNode) : Set where
+  constructor freshStrengthenedResponse
+  field
+    priorResponse : ActualResponse
+    priorResponseTargetsSource : node priorResponse ≡ source
+    newResponse : ActualResponse
+    newResponseTargetsTarget : node newResponse ≡ target
+    sameRespondent : respondent priorResponse ≡ respondent newResponse
+    strengtheningReceipt : String
+
+open FreshStrengthenedResponse public
 
 ------------------------------------------------------------------------
 -- Goal-process authority.
@@ -179,5 +203,5 @@ canonicalResponseLocalityBoundary = record
   ; laterRevocationErasesEarlierProvenance = false
   ; assessmentAloneAuthorisesTransport = false
   ; localityNote =
-      "Affirmation is local to node, context, modality, scope, episode, capacity and time. An assessment may contain failed conditions; only AuthorisedResponseTransport, whose requirements are all proved true, licenses transport."
+      "Transport requires propositional equality of every semantic node coordinate. Any strengthening or broadening requires a fresh response explicitly indexed to the target node."
   }
