@@ -60,10 +60,10 @@ sameCarrierCompositeExact :
     {source : A} {first : A → B} {second : B → C} →
   (chain : SameCarrierSameObject source first second) →
   output chain ≡ second (first source)
-sameCarrierCompositeExact chain =
+sameCarrierCompositeExact {second = second} chain =
   trans
     (outputIsLiteral chain)
-    (cong _ (intermediateIsLiteral chain))
+    (cong second (intermediateIsLiteral chain))
 
 literalSameCarrierChain :
   ∀ {a b c}
