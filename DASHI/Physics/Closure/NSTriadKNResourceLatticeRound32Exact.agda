@@ -46,7 +46,7 @@ remainderValuation (Grammar.lowerOrderControlled coefficient) =
   resource-vector 0ℚ coefficient 0ℚ 0ℚ
 remainderValuation (Grammar.absorbedDissipation coefficient) =
   resource-vector coefficient 0ℚ 0ℚ 0ℚ
-remainderValuation (left Grammar.⊕ right) =
+remainderValuation (Grammar._⊕_ left right) =
   remainderValuation left ⊞ remainderValuation right
 
 valuationEtaExact :
@@ -57,7 +57,7 @@ valuationEtaExact (Grammar.initialDataConstant coefficient) = refl
 valuationEtaExact (Grammar.knownCriticalIntegral coefficient) = refl
 valuationEtaExact (Grammar.lowerOrderControlled coefficient) = refl
 valuationEtaExact (Grammar.absorbedDissipation coefficient) = refl
-valuationEtaExact (left Grammar.⊕ right) =
+valuationEtaExact (Grammar._⊕_ left right) =
   cong₂ _+_ (valuationEtaExact left) (valuationEtaExact right)
 
 valuationCriticalExact :
@@ -68,7 +68,7 @@ valuationCriticalExact (Grammar.initialDataConstant coefficient) = refl
 valuationCriticalExact (Grammar.knownCriticalIntegral coefficient) = refl
 valuationCriticalExact (Grammar.lowerOrderControlled coefficient) = refl
 valuationCriticalExact (Grammar.absorbedDissipation coefficient) = refl
-valuationCriticalExact (left Grammar.⊕ right) =
+valuationCriticalExact (Grammar._⊕_ left right) =
   cong₂ _+_ (valuationCriticalExact left) (valuationCriticalExact right)
 
 noForbiddenValuation :
@@ -78,7 +78,7 @@ noForbiddenValuation (Grammar.initialDataConstant coefficient) = refl
 noForbiddenValuation (Grammar.knownCriticalIntegral coefficient) = refl
 noForbiddenValuation (Grammar.lowerOrderControlled coefficient) = refl
 noForbiddenValuation (Grammar.absorbedDissipation coefficient) = refl
-noForbiddenValuation (left Grammar.⊕ right) =
+noForbiddenValuation (Grammar._⊕_ left right) =
   trans
     (cong₂ _+_
       (noForbiddenValuation left)
@@ -91,16 +91,16 @@ data OwnerDerivation :
   identity : ∀ {remainder} → OwnerDerivation remainder remainder
   appendInitial : ∀ {remainder coefficient} →
     OwnerDerivation remainder
-      (remainder Grammar.⊕ Grammar.initialDataConstant coefficient)
+      (Grammar._⊕_ remainder (Grammar.initialDataConstant coefficient))
   appendCritical : ∀ {remainder coefficient} →
     OwnerDerivation remainder
-      (remainder Grammar.⊕ Grammar.knownCriticalIntegral coefficient)
+      (Grammar._⊕_ remainder (Grammar.knownCriticalIntegral coefficient))
   appendLowerOrder : ∀ {remainder coefficient} →
     OwnerDerivation remainder
-      (remainder Grammar.⊕ Grammar.lowerOrderControlled coefficient)
+      (Grammar._⊕_ remainder (Grammar.lowerOrderControlled coefficient))
   appendDissipation : ∀ {remainder coefficient} →
     OwnerDerivation remainder
-      (remainder Grammar.⊕ Grammar.absorbedDissipation coefficient)
+      (Grammar._⊕_ remainder (Grammar.absorbedDissipation coefficient))
   compose : ∀ {first middle last} →
     OwnerDerivation first middle →
     OwnerDerivation middle last →
