@@ -31,7 +31,9 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _≤_)
 
-sumRational : ∀ {Index : Set} → List Index → (Index → ℚ) → ℚ
+sumRational :
+  ∀ {indexLevel : Level} {Index : Set indexLevel} →
+  List Index → (Index → ℚ) → ℚ
 sumRational [] value = 0ℚ
 sumRational (index ∷ rest) value =
   value index + sumRational rest value
