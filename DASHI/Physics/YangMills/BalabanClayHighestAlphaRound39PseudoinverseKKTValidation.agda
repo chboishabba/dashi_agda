@@ -2,6 +2,19 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound39PseudoinverseKKTVal
 
 ------------------------------------------------------------------------
 -- Cumulative Round Thirty Nine validation root.
+--
+-- Round 39 repairs the invalid exploratory reduced-frame proof, imports the
+-- complete Round-38 finite KKT/Mobius/D4 algebra, and adds:
+--
+-- * a redundancy-safe Moore--Penrose projector surface;
+-- * the finite annihilator/kernel = adjoint-image KKT theorem;
+-- * literal raw-extractor constraint-defect and multiplier pairing;
+-- * exact singleton-budget feasibility and cancellation-before-norm;
+-- * rational nonorthogonal physical frames and generalized coercivity;
+-- * an exact finite KKT block solve and full-block tilt algebra;
+-- * typed geometric/covariant D4 cocycle separation;
+-- * a physical four-role deep-envelope enumeration;
+-- * a fail-closed hierarchy from finite Gaussian stability to OS mass gap.
 ------------------------------------------------------------------------
 
 import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound37ProjectorResidualValidation
