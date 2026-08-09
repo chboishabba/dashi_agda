@@ -3,6 +3,7 @@ module DASHI.Foundations.Base369OggNestedPhaseRound7Validation where
 open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (zero)
+open import Data.Integer.Base using (+_)
 
 open import Base369 using
   ( non-0
@@ -23,6 +24,7 @@ import DASHI.Foundations.Base369FiveModePhaseQuotientExact as Five
 import DASHI.Foundations.Base369RelationalSymmetryRealisationExact as Realisation
 import DASHI.Foundations.Base369PhaseCompletionAndNestedEvaluationExact as Phase
 import DASHI.Moonshine.MonsterOggNonarySSPTritBridgeExact as Bridge
+import DASHI.Moonshine.MonsterC3CyclotomicEvaluationExact as Cyclo
 import DASHI.Moonshine.Monster3BBalancedRegularFibreExact as Fibre
 import DASHI.Moonshine.MonsterOggPrimaryDepthAndNestedEigenCarrierExact as Nested
 import DASHI.Moonshine.MonsterFivePrimaryRelationalModelBoundaryExact as FiveBoundary
@@ -86,6 +88,17 @@ monsterSeventyOneIsShallowWide = refl
 fiveHasTwoInversePhasePairs :
   Nested.phasePairCount Nested.odd5 ≡ 2
 fiveHasTwoInversePhasePairs = refl
+
+completeC3RegularOrbitCancelsExactly :
+  Cyclo.completeRegularPhaseOrbit ≡ Cyclo.zeroC3
+completeC3RegularOrbitCancelsExactly =
+  Cyclo.completeRegularPhaseOrbitCancels
+
+monster3BCyclotomicEvaluationIsResidual :
+  Cyclo.generatorEvaluation Cyclo.monster3BPhaseMultiplicity
+  ≡ Cyclo.c3 (+ 53) (+ 0)
+monster3BCyclotomicEvaluationIsResidual =
+  Cyclo.monster3BGeneratorEvaluation
 
 monster3BFineMultiplicityIs65610 :
   Fibre.monster3BRegularMultiplicity ≡ 65610
