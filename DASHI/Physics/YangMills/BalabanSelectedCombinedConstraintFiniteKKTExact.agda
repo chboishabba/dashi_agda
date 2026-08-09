@@ -31,10 +31,10 @@ module DASHI.Physics.YangMills.BalabanSelectedCombinedConstraintFiniteKKTExact w
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _≤_)
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
-import DASHI.Physics.YangMills.BalabanConstructiveRationalMatrixInverseExact as Matrix
+import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
 import DASHI.Physics.YangMills.BalabanFiniteRectangularRationalExact as Rect
 import DASHI.Physics.YangMills.BalabanP33FiniteKKTAdmissibleProjectorExact as KKT
 import DASHI.Physics.YangMills.BalabanP33PhysicalRationalWilsonPlaquetteJetExact as Physical
@@ -96,25 +96,22 @@ selectedCombinedConstraintGramQuadraticExact :
       (selectedCombinedConstraintTransposeApply background multiplier)
 selectedCombinedConstraintGramQuadraticExact background multiplier =
   trans
-    (Rect.finiteDotSymmetric
-      Rows.selectedCombinedConstraintRowCarrier
-      (selectedCombinedConstraintGramApply background multiplier)
+    (Sums.sumRationalCong
+      (Rows.selectedCombinedConstraintRows)
+      (λ row →
+        selectedCombinedConstraintGramApply background multiplier row
+        ℚ.* multiplier row)
+      (λ row →
+        Combined.selectedBackgroundCombinedConstraintApply background
+          (selectedCombinedConstraintTransposeApply background multiplier) row
+        ℚ.* multiplier row)
+      (λ row →
+        cong (ℚ._* multiplier row)
+          (selectedCombinedConstraintGramActionExact
+            background multiplier row)))
+    (selectedCombinedConstraintAdjointExact background
+      (selectedCombinedConstraintTransposeApply background multiplier)
       multiplier)
-    (trans
-      (Rect.applyRectangularVectorCong
-        Rows.selectedCombinedConstraintRowCarrier
-        (λ left right →
-          Rows.selectedCombinedConstraintRowDelta left right)
-        {left = multiplier}
-        {right = multiplier}
-        (λ _ → Agda.Builtin.Equality.refl)
-        (Combined.averageConstraintRow
-          (DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier.pair
-            DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact.coordinateX
-            DASHI.Physics.YangMills.BalabanP33PeriodicFourDimensionalHodgeIdentityExact.axis0)))
-      (selectedCombinedConstraintAdjointExact background
-        (selectedCombinedConstraintTransposeApply background multiplier)
-        multiplier))
 
 selectedCombinedConstraintGramQuadraticNonnegative :
   ∀ background multiplier →
@@ -122,7 +119,7 @@ selectedCombinedConstraintGramQuadraticNonnegative :
     (selectedCombinedConstraintGramApply background multiplier)
     multiplier
 selectedCombinedConstraintGramQuadraticNonnegative background multiplier =
-  Relation.Binary.PropositionalEquality.subst
+  subst
     (λ value → 0ℚ ≤ value)
     (sym (selectedCombinedConstraintGramQuadraticExact background multiplier))
     (Rect.finiteNormSqNonnegative KKT.physicalStateCarrier
