@@ -11,6 +11,8 @@ on:
     paths:
       - 'DASHI/Biology/CoarseFineTenSectorProjectionExact.agda'
       - 'DASHI/Biology/D4NineCellOrbitCompressionExact.agda'
+      - 'DASHI/Biology/RelationalAppraisalPointedPhaseExact.agda'
+      - 'DASHI/Moonshine/C3CoarseFineRatioTypingExact.agda'
       - 'DASHI/Moonshine/ModularCurveJFrickeInterfaceExact.agda'
       - 'DASHI/Moonshine/Monster3BC3RepresentationRingEvaluationExact.agda'
       - 'DASHI/Moonshine/MonsterOrderExponentCorrectionExact.agda'
