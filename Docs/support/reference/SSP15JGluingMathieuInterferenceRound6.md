@@ -69,7 +69,7 @@ with multiplication reduced by
 omega^2 + omega + 1 = 0.
 ```
 
-It defines
+All scalar constants are explicitly typed as rational `/1` values before they enter the Eisenstein carrier or an equality target. It defines
 
 ```text
 N(a + b omega) = a^2 - ab + b^2
@@ -115,7 +115,7 @@ The same module constructs the pointed-square quotient:
 (occupied,-) -> zeta^2.
 ```
 
-Thus the orientation is conditional on occupancy rather than an independent bit at the zero state.
+Thus orientation is conditional on occupancy rather than an independent bit at the zero state.
 
 It also keeps the cardinality layers separate:
 
@@ -174,7 +174,7 @@ In particular:
 95040 = 8 * 9 * 10 * 11 * 12.
 ```
 
-Each transition is stored as a `StabilizerStep` containing the lower level, upper level, orbit size, and exact order law. A generic `PointedOrbitFibration` records the orbit-stabilizer cardinality interface, while `MathieuStepRealization` makes an actual action an explicit producer obligation.
+Each transition is stored as a `StabilizerStep` containing the lower level, upper level, orbit size, and exact order law. `OrbitStabilizerArithmeticWitness` and `MathieuStepArithmeticWitness` package only the three orders and their multiplication law. They deliberately contain no arbitrary carriers, action, chosen point, stabilizer inclusion, or cardinality equivalences. Consequently they cannot masquerade as an actual group action; constructing the Mathieu permutation action remains a separate producer obligation.
 
 The source boundary is important. The Atlas reports the order-eight four-point stabilizer in the Mathieu chain as quaternion `Q8`. It must not be replaced by square-grid `D4` merely because both groups have order eight. The module therefore gives these different `OrderEightShape` constructors and proves the selected source tag is not `D4`.
 
@@ -231,7 +231,18 @@ choose(12,4) = 495.
 
 The module does not infer a cycle shape from that binomial equality alone.
 
-Prime-coloured histories are represented explicitly. Different orderings such as `x2` then `x3`, and `x3` then `x2`, have the same endpoint. This proves the arithmetic confluence skeleton behind the interference analogy. The divisor incidence graph itself does not supply complex amplitudes or a physical interference law.
+Prime-coloured histories are represented explicitly. Different orderings such as `x2` then `x3`, and `x3` then `x2`, have the same endpoint. This proves the arithmetic confluence skeleton behind the interference analogy.
+
+`DASHI.Moonshine.MathieuDivisorPathInterferenceExact` adds the missing amplitude data explicitly. For two histories ending at the same divisor it assigns independent Eisenstein amplitudes and proves
+
+```text
+node intensity
+  = left diagonal intensity
+  + right diagonal intensity
+  + path cross term.
+```
+
+For amplitudes `1` and `omega`, it proves diagonal intensity `2`, cross term `-1`, and resulting node intensity `1`. The amplitudes are additional structure and are not inferred from divisor incidence. This is an exact finite coherent-amplitude model, not a claim of physical quantum dynamics.
 
 Primary source for the lattice vocabulary:
 
@@ -290,11 +301,11 @@ The checker:
 
 - chains the Round-5 checker;
 - rejects holes, postulates, unsafe pragmas, trust primitives, and termination escapes;
-- checks source and theorem markers;
+- checks source and theorem markers, explicit rational constants, arithmetic-only Mathieu witnesses, and amplitude-decorated path proofs;
 - emits `artifacts/ssp15-j-gluing-mathieu-interference-round6.json`;
 - invokes pinned Agda 2.9 on the Round-6 validation and aggregate roots.
 
-No successful Agda-kernel result is claimed until a local or GitHub Actions run is observed.
+The workflow pins all third-party actions to immutable commit SHAs and watches every direct checker dependency. No successful Agda-kernel result is claimed until a local or GitHub Actions run is observed.
 
 ## Exact boundary
 
@@ -305,6 +316,6 @@ This round proves finite arithmetic, finite quotient, rational Eisenstein, and t
 - actual Mathieu permutation actions or subgroup embeddings;
 - `Q8 ~= D4`;
 - a Monster-module decomposition from `196884 = 196830 + 54`;
-- that the divisor lattice is a quantum interference experiment;
+- that the divisor lattice determines amplitudes or is a physical quantum experiment;
 - that `3^6` is the quotient of `3^9` without three explicit independent constraints;
 - a historical claim that Marx formulated this categorical construction.
