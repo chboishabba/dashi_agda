@@ -24,7 +24,8 @@ module DASHI.Physics.Closure.NSAdmissibleRemainderGrammarExact where
 -- four permitted handlers.
 ------------------------------------------------------------------------
 
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Rational.Base as ℚ using (ℚ; _+_)
 
 data AdmissibleRemainder : Set where
   initialDataConstant : ℚ → AdmissibleRemainder
@@ -74,31 +75,24 @@ foldAdmissibleRemainder initialHandler knownIntegralHandler
     (foldAdmissibleRemainder initialHandler knownIntegralHandler
       lowerOrderHandler dissipationHandler combine right)
 
+identityHandler : ℚ → ℚ
+identityHandler value = value
+
 admissibleRemainderEvaluationIsCanonical :
   ∀ remainder →
   foldAdmissibleRemainder
-    initialDataConstantValue knownTimeIntegralValue
-    lowerOrderControlledValue absorbedDissipationValue
+    identityHandler identityHandler identityHandler identityHandler
     _+_ remainder
   ≡ evaluateRemainder remainder
 admissibleRemainderEvaluationIsCanonical
-    (initialDataConstant value) = Agda.Builtin.Equality.refl
+    (initialDataConstant value) = refl
 admissibleRemainderEvaluationIsCanonical
-    (knownTimeIntegral value) = Agda.Builtin.Equality.refl
+    (knownTimeIntegral value) = refl
 admissibleRemainderEvaluationIsCanonical
-    (lowerOrderControlled value) = Agda.Builtin.Equality.refl
+    (lowerOrderControlled value) = refl
 admissibleRemainderEvaluationIsCanonical
-    (absorbedDissipation value) = Agda.Builtin.Equality.refl
+    (absorbedDissipation value) = refl
 admissibleRemainderEvaluationIsCanonical (left ⊕ right)
   rewrite admissibleRemainderEvaluationIsCanonical left
         | admissibleRemainderEvaluationIsCanonical right =
-  Agda.Builtin.Equality.refl
-  where
-  initialDataConstantValue : ℚ → ℚ
-  initialDataConstantValue value = value
-  knownTimeIntegralValue : ℚ → ℚ
-  knownTimeIntegralValue value = value
-  lowerOrderControlledValue : ℚ → ℚ
-  lowerOrderControlledValue value = value
-  absorbedDissipationValue : ℚ → ℚ
-  absorbedDissipationValue value = value
+  refl
