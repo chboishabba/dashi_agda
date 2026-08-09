@@ -30,7 +30,6 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _≤_)
-import Data.Rational.Properties as ℚP
 
 sumRational : ∀ {Index : Set} → List Index → (Index → ℚ) → ℚ
 sumRational [] value = 0ℚ
@@ -71,14 +70,12 @@ record OperatorCrossShellDecay
       0ℚ ≤ leftEnvelope left right
     rightEnvelopeNonnegative : ∀ left right →
       0ℚ ≤ rightEnvelope left right
-
     adjointThenForwardBound : ∀ left right →
       operatorNorm space
         (composeOperator space
           (adjointOperator space (operatorAt left))
           (operatorAt right))
       ≤ leftEnvelope left right
-
     forwardThenAdjointBound : ∀ left right →
       operatorNorm space
         (composeOperator space
@@ -96,8 +93,8 @@ leftRowMass :
     {shells : List Shell}
     {operatorAt : Shell → Operator} →
   OperatorCrossShellDecay space shells operatorAt → Shell → ℚ
-leftRowMass decay left =
-  sumRational _ (leftEnvelope decay left)
+leftRowMass {shells = shells} decay left =
+  sumRational shells (leftEnvelope decay left)
 
 rightRowMass :
   ∀ {operatorLevel shellLevel}
@@ -107,8 +104,8 @@ rightRowMass :
     {shells : List Shell}
     {operatorAt : Shell → Operator} →
   OperatorCrossShellDecay space shells operatorAt → Shell → ℚ
-rightRowMass decay left =
-  sumRational _ (rightEnvelope decay left)
+rightRowMass {shells = shells} decay left =
+  sumRational shells (rightEnvelope decay left)
 
 record CutoffUniformCrossShellMass
     {operatorLevel shellLevel}
@@ -134,6 +131,9 @@ record FiniteCotlarSteinAuthority
     {Operator : Set operatorLevel}
     (space : FiniteOperatorSpace Operator) : Set (lsuc operatorLevel) where
   field
+    mapOperators : ∀ {Shell : Set} →
+      List Shell → (Shell → Operator) → List Operator
+
     finiteCotlarSteinSquared :
       ∀ {Shell : Set}
         (shells : List Shell)
@@ -145,9 +145,6 @@ record FiniteCotlarSteinAuthority
       * operatorNorm space
         (finiteOperatorSum space (mapOperators shells operatorAt))
       ≤ uniformLeftMass mass * uniformRightMass mass
-
-    mapOperators : ∀ {Shell : Set} →
-      List Shell → (Shell → Operator) → List Operator
 
 open FiniteCotlarSteinAuthority public
 
@@ -181,7 +178,7 @@ record GeometricCrossShellEnvelope
     (decay : OperatorCrossShellDecay space shells operatorAt) : Set where
   field
     commonConstant geometricMass : ℚ
-    geometricMassNonnegative : 0ℚ ≤ geometricMass
+    productNonnegative : 0ℚ ≤ commonConstant * geometricMass
     leftGeometricMass : ∀ shell →
       leftRowMass decay shell ≤ commonConstant * geometricMass
     rightGeometricMass : ∀ shell →
@@ -198,15 +195,12 @@ geometricEnvelopeProducesUniformMass :
     {operatorAt : Shell → Operator}
     {decay : OperatorCrossShellDecay space shells operatorAt} →
   GeometricCrossShellEnvelope decay →
-  0ℚ ≤ commonConstant _ →
   CutoffUniformCrossShellMass decay
-geometricEnvelopeProducesUniformMass envelope constantNN = record
+geometricEnvelopeProducesUniformMass envelope = record
   { uniformLeftMass = commonConstant envelope * geometricMass envelope
   ; uniformRightMass = commonConstant envelope * geometricMass envelope
-  ; uniformLeftMassNonnegative = ℚP.*-nonNegative constantNN
-      (geometricMassNonnegative envelope)
-  ; uniformRightMassNonnegative = ℚP.*-nonNegative constantNN
-      (geometricMassNonnegative envelope)
+  ; uniformLeftMassNonnegative = productNonnegative envelope
+  ; uniformRightMassNonnegative = productNonnegative envelope
   ; leftMassBound = leftGeometricMass envelope
   ; rightMassBound = rightGeometricMass envelope
   }
