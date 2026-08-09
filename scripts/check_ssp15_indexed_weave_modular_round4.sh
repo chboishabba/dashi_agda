@@ -9,6 +9,7 @@ bash scripts/check_ssp15_j_coarse_fine_round3.sh
 sources=(
   DASHI/Core/IndexedWeaveHyperfabricExact.agda
   DASHI/Biology/SSPIndexedWeaveHyperfabricExact.agda
+  DASHI/Biology/SSPHyperfibreLawfulUpgradeExact.agda
   DASHI/Biology/ModularCoarseFineAddressFibrationExact.agda
   DASHI/Biology/SSPIndexedWeaveModularIntegrationExact.agda
   DASHI/Biology/LayeredBindingSystemExact.agda
@@ -70,6 +71,7 @@ require_pattern() {
 
 indexed=DASHI/Core/IndexedWeaveHyperfabricExact.agda
 ssp=DASHI/Biology/SSPIndexedWeaveHyperfabricExact.agda
+upgrade=DASHI/Biology/SSPHyperfibreLawfulUpgradeExact.agda
 modular=DASHI/Biology/ModularCoarseFineAddressFibrationExact.agda
 integrated=DASHI/Biology/SSPIndexedWeaveModularIntegrationExact.agda
 binding=DASHI/Biology/LayeredBindingSystemExact.agda
@@ -88,9 +90,14 @@ require_pattern "$indexed" 'record IndexedWeave'
 require_pattern "$indexed" 'transportComp'
 require_pattern "$indexed" 'Residual : Index → Set'
 require_pattern "$indexed" 'stateResidual'
+require_pattern "$ssp" 'composeOrientationAssoc'
 require_pattern "$ssp" 'canonicalSSPIndexedWeave'
-require_pattern "$ssp" 'reverseTwicePreservesEveryLaneState'
-require_pattern "$ssp" 'reversePathRetainsTargetResidual'
+require_pattern "$ssp" 'inverseTwicePreservesEveryLaneState'
+require_pattern "$ssp" 'inverseTwiceComposesToForward'
+require_pattern "$ssp" 'inversePathRetainsTargetResidual'
+require_pattern "$upgrade" 'legacyTransportAgrees'
+require_pattern "$upgrade" 'legacyResidualAgrees'
+require_pattern "$upgrade" 'canonicalSSPHyperfibreLawfulUpgrade'
 require_pattern "$modular" 'jCoarseAddressDepth = 1'
 require_pattern "$modular" 'jFineAddressDepth = 10'
 require_pattern "$modular" 'jAbsoluteAddressDepth = 11'
@@ -103,6 +110,7 @@ require_pattern "$modular" 'finiteFrickePullbackPointwiseInvolutive'
 require_pattern "$integrated" 'canonicalSSPModularIndexedWeave'
 require_pattern "$integrated" 'integratedPathsPreserveCoarseBase'
 require_pattern "$integrated" 'fineAddressSurvivesLaneTransport'
+require_pattern "$integrated" 'inverseIntegratedPathRetainsInverseResidual'
 require_pattern "$binding" 'coarseProjectionIsNotInjective'
 require_pattern "$binding" 'bindingCanBePresentWhileDepthContinuityFails'
 require_pattern "$binding" 'boundaryDefectRepeatsAcrossSuperplies'
@@ -126,6 +134,7 @@ require_pattern "$moonshine" 'canonicalMoonshineTraceIndexedWeave'
 require_pattern "$moonshine" 'identityTransportRetainsHiddenTraceResidual'
 require_pattern "$klein" 'noFullySymmetricSelectedFactor'
 require_pattern "$klein" 'receiptStillBlocksPhysicalCKMPromotion'
+require_pattern "$validation" 'import DASHI.Biology.SSPHyperfibreLawfulUpgradeExact'
 require_pattern "$validation" 'import DASHI.Biology.SSPIndexedWeaveModularIntegrationExact'
 require_pattern "$validation" 'import DASHI.Computation.JacquardHelicalWeaveBridgeExact'
 require_pattern "$validation" 'import DASHI.Unified.ThreePhaseCrossPollinationExact'
