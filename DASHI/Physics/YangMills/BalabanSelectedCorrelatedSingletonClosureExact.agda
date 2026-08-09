@@ -14,18 +14,24 @@ module DASHI.Physics.YangMills.BalabanSelectedCorrelatedSingletonClosureExact wh
 -- Communications in Mathematical Physics 99 (1985), 389--434.
 -- DOI: 10.1007/BF01240355.
 --
+-- Roger Penrose,
+-- "A Generalized Inverse for Matrices",
+-- Proceedings of the Cambridge Philosophical Society 51 (1955), 406--413.
+-- DOI: 10.1017/S0305004100030401.
+--
 -- DASHI CONTRIBUTION
 --
--- Assemble the Round-40 algebra into the existing physical selector reducer.
--- The projected variation has the exact public form
+-- Assemble the Round-40 algebra into the existing physical selector reducer
+-- without accepting an independently supplied scalar residual equality.
+-- The literal raw-localization atoms and the pair-indexed Moore--Penrose Green
+-- contraction generate the correlated residual definitionally through
+-- CorrelatedResidualAuthority.  The projected variation has the unique sign
 --
---   dS(Pw) = Singleton + RawLocalization - <lambda,Lw>.
+--   dS(Pw) = Singleton + RawLocalization - <Lg,K+Lw>.
 --
--- The final two terms are identified with the signed, owner-aggregated
--- correlated residual.  Exact cancellation is removed first; the four
--- surviving owner estimates close 55/18874368.  The resulting witness reuses
--- the already physical pair/deep channel to obtain the correlated Wilson lower
--- bound.  No alternative sign or arbitrary 27+28 split enters this path.
+-- Exact cancellation is removed before the four surviving owner estimates
+-- close 55/18874368.  The resulting witness reuses the already physical
+-- pair/deep channel to obtain the correlated Wilson lower bound.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
@@ -40,15 +46,32 @@ import DASHI.Physics.YangMills.BalabanP33PhysicalWilsonLinearNonlinearPartitionE
 import DASHI.Physics.YangMills.BalabanP33PhysicalWilsonCorrelatedDeepPartitionExact as Split
 import DASHI.Physics.YangMills.BalabanP33PhysicalWilsonSignedGlobalExact as Wilson
 import DASHI.Physics.YangMills.BalabanP33PhysicalBackgroundGaugeParameterizedYoungExact as Radius
+import DASHI.Physics.YangMills.BalabanP33PlaquetteBoundaryProjectorExact as Boundary
+import DASHI.Physics.YangMills.BalabanP33FiniteKKTAdmissibleProjectorExact as KKT
+import DASHI.Physics.YangMills.BalabanP33FiniteKKTPseudoinverseProjectorExact as Pseudo
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundVariationSelectorExact as Selector
 import DASHI.Physics.YangMills.BalabanSelectedVariationSignConventionExact as Sign
 import DASHI.Physics.YangMills.BalabanSelectedCorrelatedResidualOwnershipExact as Ownership
+import DASHI.Physics.YangMills.BalabanSelectedCorrelatedResidualAuthorityExact as Authority
+
+literalRawExtractor :
+  Coordinates.PhysicalSU2BondField4 → Physical.Plaquette4 →
+  KKT.StateVector
+literalRawExtractor = Boundary.rawPlaquetteSingletonExtractor
 
 record CorrelatedSingletonExtractionData
     (background : Physical.RationalSU2Background4)
     (bondField : Coordinates.PhysicalSU2BondField4)
-    (plaquette : Physical.Plaquette4) : Set₁ where
+    (plaquette : Physical.Plaquette4) : Set₂ where
   field
+    Multiplier : Set
+    pseudoData : Pseudo.FiniteKKTPseudoinverseData Multiplier
+    firstVariationCovector : KKT.StateVector
+
+    residualAuthority : Authority.CorrelatedResidualAuthority
+      pseudoData firstVariationCovector
+      (literalRawExtractor bondField plaquette)
+
     FineVariation : Set
     variation : FineVariation
 
@@ -68,7 +91,6 @@ record CorrelatedSingletonExtractionData
       ≤ selectorConstant * Wilson.plaquetteCrossCharge bondField plaquette
 
     firstVariation : FineVariation → ℚ
-    rawLocalization multiplierDefectPairing : ℚ
 
     selectedEulerLagrangeStationary :
       firstVariation variation ≡ 0ℚ
@@ -78,19 +100,18 @@ record CorrelatedSingletonExtractionData
       ≡ Partition.physicalPlaquetteWilsonLinearPart
           background bondField plaquette
         + Sign.canonicalProjectedSpillover
-            rawLocalization multiplierDefectPairing
-
-    correlatedFamily : Ownership.CorrelatedResidualFamily
-    correlatedResidualExact :
-      Ownership.correlatedResidualTotal correlatedFamily
-      ≡ Sign.canonicalProjectedSpillover
-          rawLocalization multiplierDefectPairing
+            (Authority.rawLocalization residualAuthority)
+            (Authority.canonicalMultiplierGreenPairing
+              pseudoData firstVariationCovector
+              (literalRawExtractor bondField plaquette))
 
     exactCancellation :
-      Ownership.ExactCorrelatedCancellation correlatedFamily
+      Ownership.ExactCorrelatedCancellation
+        (Authority.canonicalCorrelatedResidualFamily residualAuthority)
 
     ownerBudgets :
-      Ownership.CorrelatedOwnerBudgets correlatedFamily
+      Ownership.CorrelatedOwnerBudgets
+        (Authority.canonicalCorrelatedResidualFamily residualAuthority)
         (Wilson.plaquetteCrossCharge bondField plaquette)
 
 open CorrelatedSingletonExtractionData public
@@ -100,8 +121,11 @@ selectedSingletonResidualBudgetExact :
   (dataSet : CorrelatedSingletonExtractionData
     background bondField plaquette) →
   Sign.canonicalProjectedSpillover
-    (rawLocalization dataSet)
-    (multiplierDefectPairing dataSet)
+    (Authority.rawLocalization (residualAuthority dataSet))
+    (Authority.canonicalMultiplierGreenPairing
+      (pseudoData dataSet)
+      (firstVariationCovector dataSet)
+      (literalRawExtractor bondField plaquette))
   ≤ Selector.remainingSingletonCoefficient
       * Wilson.plaquetteCrossCharge bondField plaquette
 selectedSingletonResidualBudgetExact
@@ -111,7 +135,8 @@ selectedSingletonResidualBudgetExact
       lower
       ≤ Selector.remainingSingletonCoefficient
           * Wilson.plaquetteCrossCharge bondField plaquette)
-    (correlatedResidualExact dataSet)
+    (Authority.canonicalCorrelatedResidualIsProjectedSpillover
+      (residualAuthority dataSet))
     (Ownership.correlatedResidualClosesSingletonBudget
       (exactCancellation dataSet)
       (ownerBudgets dataSet))
@@ -120,7 +145,8 @@ correlatedSingletonExtractionWitness :
   ∀ {background bondField plaquette} →
   CorrelatedSingletonExtractionData background bondField plaquette →
   Selector.SingletonExtractionWitness background bondField plaquette
-correlatedSingletonExtractionWitness dataSet = record
+correlatedSingletonExtractionWitness
+    {bondField = bondField} {plaquette = plaquette} dataSet = record
   { Selector.SingletonExtractionWitness.FineVariation =
       FineVariation dataSet
   ; Selector.SingletonExtractionWitness.variation = variation dataSet
@@ -148,8 +174,11 @@ correlatedSingletonExtractionWitness dataSet = record
       firstVariation dataSet
   ; Selector.SingletonExtractionWitness.extractionSpillover =
       Sign.canonicalProjectedSpillover
-        (rawLocalization dataSet)
-        (multiplierDefectPairing dataSet)
+        (Authority.rawLocalization (residualAuthority dataSet))
+        (Authority.canonicalMultiplierGreenPairing
+          (pseudoData dataSet)
+          (firstVariationCovector dataSet)
+          (literalRawExtractor bondField plaquette))
   ; Selector.SingletonExtractionWitness.selectedEulerLagrangeStationary =
       selectedEulerLagrangeStationary dataSet
   ; Selector.SingletonExtractionWitness.extractsLiteralSingleton =
@@ -183,7 +212,7 @@ selectedBackgroundCorrelatedWilsonLower radius dataSet =
 
 record SelectedCorrelatedSingletonSelector
     (background : Physical.RationalSU2Background4)
-    (bondField : Coordinates.PhysicalSU2BondField4) : Set₁ where
+    (bondField : Coordinates.PhysicalSU2BondField4) : Set₂ where
   field
     selectCorrelated : ∀ plaquette →
       CorrelatedSingletonExtractionData background bondField plaquette
