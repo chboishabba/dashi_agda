@@ -7,6 +7,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoSameObjectSharpGainRound33Validation wh
 import DASHI.Physics.Closure.NSTriadKNLuoIndexedGluingResourceLatticeRound32Validation
 import DASHI.Physics.Closure.NSTriadKNSameObjectLookupConsistencyRound33Exact as Lookup
 import DASHI.Physics.Closure.NSTriadKNHHBadSharpDyadicGainRound33Exact as Gain
+import DASHI.Physics.Closure.NSTriadKNHHBadNoScaleFreeGainRound33Exact as NoScaleFree
 import DASHI.Physics.Closure.NSTriadKNNineOwnerResourceReserveRound33Exact as Reserve
 
 open import Agda.Builtin.Bool using (true; false)
@@ -31,6 +32,11 @@ sharpDyadicGainRegression :
   Gain.sharpDyadicGainCalibrationClosed ≡ true
 sharpDyadicGainRegression =
   Gain.sharpDyadicGainCalibrationClosedIsTrue
+
+scaleFreeGainNoGoRegression :
+  NoScaleFree.scaleFreeExactGainNoGoClosed ≡ true
+scaleFreeGainNoGoRegression =
+  NoScaleFree.scaleFreeExactGainNoGoClosedIsTrue
 
 physicalDyadicGainStillOpenRegression :
   Gain.physicalHHBadDyadicGainConstructed ≡ false
