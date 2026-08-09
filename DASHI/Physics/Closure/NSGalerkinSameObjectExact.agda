@@ -16,11 +16,12 @@ module DASHI.Physics.Closure.NSGalerkinSameObjectExact where
 --
 -- DASHI CONTRIBUTION
 --
--- Give the finite Galerkin lane literal same-object semantics.  Positive and
--- negative Fourier lookup, cutoff retention and the elementary cyclic triad
--- cancellation are definitions or exact rational identities.  No existential
--- replacement state can enter between the stored coefficients and the vector
--- field consumed downstream.
+-- Give the finite Galerkin lane literal same-object semantics.  The stored
+-- coefficient function is no longer an arbitrary field of the state record.
+-- It is the output of a representation-preserving physical-source -> encoded
+-- state -> coefficient-function chain.  Positive and negative Fourier lookup,
+-- cutoff retention and the elementary cyclic triad cancellation are then
+-- definitions or exact rational identities of that same produced object.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -28,12 +29,58 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _-_)
 import Data.Rational.Tactic.RingSolver as ℚRing
 
+import DASHI.Physics.Common.PhysicalProducerMaturityExact as Producer
+
 record CanonicalGalerkinState (Mode : Set) : Set₁ where
   field
-    coefficient : Mode → ℚ
+    PhysicalState EncodedState : Set
+    physicalState : PhysicalState
+
+    encode : PhysicalState → EncodedState
+    decodeCoefficients : EncodedState → Mode → ℚ
+
+    RepresentsEncoding : PhysicalState → EncodedState → Set
+    RepresentsCoefficients : EncodedState → (Mode → ℚ) → Set
+
+    producerChain :
+      Producer.SameCarrierSameObject
+        physicalState encode decodeCoefficients
+        RepresentsEncoding RepresentsCoefficients
+
     negateMode : Mode → Mode
     retained : Mode → Bool
 open CanonicalGalerkinState public
+
+encodedState :
+  ∀ {Mode} → CanonicalGalerkinState Mode → EncodedState
+encodedState state =
+  Producer.intermediate (producerChain state)
+
+coefficient :
+  ∀ {Mode} → CanonicalGalerkinState Mode → Mode → ℚ
+coefficient state =
+  Producer.output (producerChain state)
+
+physicalStateRepresentsEncoding :
+  ∀ {Mode} (state : CanonicalGalerkinState Mode) →
+  RepresentsEncoding state
+    (physicalState state) (encodedState state)
+physicalStateRepresentsEncoding state =
+  Producer.sourceRepresentsIntermediate (producerChain state)
+
+encodingRepresentsCoefficientFunction :
+  ∀ {Mode} (state : CanonicalGalerkinState Mode) →
+  RepresentsCoefficients state
+    (encodedState state) (coefficient state)
+encodingRepresentsCoefficientFunction state =
+  Producer.intermediateRepresentsOutput (producerChain state)
+
+coefficientIsLiteralProducerComposite :
+  ∀ {Mode} (state : CanonicalGalerkinState Mode) →
+  coefficient state
+  ≡ decodeCoefficients state (encode state (physicalState state))
+coefficientIsLiteralProducerComposite state =
+  Producer.sameCarrierCompositeExact (producerChain state)
 
 ifRetained : Bool → ℚ → ℚ
 ifRetained true value = value
