@@ -135,6 +135,14 @@ hessianAddExact : ∀ {Multiplier}
 hessianAddExact greenData = Rect.applyRectangularAdd
   KKT.physicalStateCarrier (hessianMatrix greenData)
 
+hessianSubtractExact : ∀ {Multiplier}
+    (greenData : ConstrainedGreenData Multiplier) left right coordinate →
+  hessianApply greenData (Rect.vectorSubtract left right) coordinate
+  ≡ hessianApply greenData left coordinate
+    - hessianApply greenData right coordinate
+hessianSubtractExact greenData = Rect.applyRectangularSubtract
+  KKT.physicalStateCarrier (hessianMatrix greenData)
+
 projectAddExact : ∀ {Multiplier}
     (greenData : ConstrainedGreenData Multiplier) left right coordinate →
   project greenData (Rect.vectorAdd left right) coordinate
