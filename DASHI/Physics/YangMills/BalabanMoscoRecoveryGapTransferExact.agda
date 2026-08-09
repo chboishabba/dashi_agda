@@ -30,13 +30,11 @@ module DASHI.Physics.YangMills.BalabanMoscoRecoveryGapTransferExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using ([]; _∷_)
-import Data.Integer.Base as Int
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; 1ℚ; _/_; _*_; _≤_; NonNegative; nonNegative)
+  (ℚ; 0ℚ; 1ℚ; _*_; _≤_; NonNegative; nonNegative)
 import Data.Rational.Properties as ℚP
-import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (subst)
+open ℚP using (_≤?_)
+open import Relation.Nullary.Decidable.Core using (toWitness)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -99,7 +97,7 @@ liminfOnlyCounterexample = record
   ; finiteEnergy = 1ℚ
   ; limitEnergy = 0ℚ
   ; finiteUniformGap = ℚP.≤-refl
-  ; liminfDirectionOnly = ℚP.0≤p }
+  ; liminfDirectionOnly = toWitness {a? = 0ℚ ≤? 1ℚ} _ }
 
 liminfOnlyCounterexampleFiniteGapExact :
   gapConstant liminfOnlyCounterexample
