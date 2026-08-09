@@ -56,6 +56,16 @@ selectedBackgroundGaugeConstraintMatrixApplyExact :
 
 `BalabanSelectedBackgroundGaugeConstraintStencilExact.agda` proves the exact support theorem: a row based at `x` sees only a positive bond based at `x` or the positive bond of direction `mu` based at `x-mu`. The adjoint transport may mix Lie coordinates but cannot enlarge the spatial stencil. Thus every entry outside that stencil is exactly zero before majorisation.
 
+`BalabanSelectedBackgroundGaugeGramFiniteRangeExact.agda` composes this matrix with its transpose. If two gauge rows have disjoint literal stencils, every summand in their Gram entry vanishes and
+
+```text
+selectedBackgroundGaugeGramOutsideRangeZero :
+  disjointStencil(left,right)
+  -> (L_gauge L_gauge*)(left,right) = 0.
+```
+
+This closes the gauge-only Gram finite-range identity structurally, before any Combes–Thomas norm estimate.
+
 This closes the literal gauge-fixing component of `L_A`. It does not silently identify that component with the missing derivative of the block-average constraint. The next Yang–Mills matrix task is to construct that block-average row family and combine it with the now-concrete gauge rows on one multiplier carrier.
 
 ## Yang–Mills: one vertical selected-plaquette witness
