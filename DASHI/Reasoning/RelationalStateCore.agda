@@ -78,11 +78,32 @@ record CapacityState : Set where
 
 open CapacityState public
 
+------------------------------------------------------------------------
+-- Durable preference state.
+--
+-- A preference contribution may be transient.  A DurablePreference is the
+-- stronger state object that has been explicitly retained with owner, scope,
+-- time and provenance.  This prevents the documentation's P_t component from
+-- existing only as prose while the Agda SharedState silently drops it.
+------------------------------------------------------------------------
+
+record DurablePreference : Set where
+  constructor durablePreference
+  field
+    preferenceOwner : Participant
+    preferenceLabel : String
+    preferenceScope : String
+    preferenceTime : String
+    preferenceProvenance : String
+
+open DurablePreference public
+
 record SharedState : Set where
   constructor sharedState
   field
     currentObject : Topic
     contributions : List Contribution
+    durablePreferences : List DurablePreference
     unresolvedQuestions : List String
     recordedAssents : List String
     recordedRefusals : List String
@@ -112,6 +133,7 @@ record RelationalStateAuthorityBoundary : Set where
   field
     rolesAreDiagnoses : Bool
     feelingsAutomaticallyBecomeFacts : Bool
+    preferenceContributionAutomaticallyBecomesDurable : Bool
     careAutomaticallyCancelsMisconduct : Bool
     currentAccountErasesPriorProvenance : Bool
     abstractionAppliesOnlyToOneFamily : Bool
@@ -121,9 +143,10 @@ canonicalRelationalStateAuthorityBoundary : RelationalStateAuthorityBoundary
 canonicalRelationalStateAuthorityBoundary = record
   { rolesAreDiagnoses = false
   ; feelingsAutomaticallyBecomeFacts = false
+  ; preferenceContributionAutomaticallyBecomesDurable = false
   ; careAutomaticallyCancelsMisconduct = false
   ; currentAccountErasesPriorProvenance = false
   ; abstractionAppliesOnlyToOneFamily = false
   ; boundaryNote =
-      "The vocabulary is a typed carrier for reconstructing relational episodes. It does not infer motive, diagnosis, guilt or family identity without incident-specific evidence."
+      "The vocabulary is a typed carrier for reconstructing relational episodes. Durable preferences require explicit owner, scope, time and provenance; the model does not infer motive, diagnosis, guilt or family identity without incident-specific evidence."
   }
