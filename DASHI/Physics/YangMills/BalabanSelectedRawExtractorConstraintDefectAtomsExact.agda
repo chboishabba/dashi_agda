@@ -25,8 +25,8 @@ module DASHI.Physics.YangMills.BalabanSelectedRawExtractorConstraintDefectAtomsE
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
+open import Data.Empty using (⊥)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _*_)
-open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using (Empty)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
@@ -130,10 +130,10 @@ record ConstraintAtomSupport
     (collar : Multiplier → Set) : Set₁ where
   field
     sourceAtomOutsideZero : ∀ subset row →
-      (collar row → Empty) →
+      (collar row → ⊥) →
       sourceAtom atoms subset row ≡ 0ℚ
     defectAtomOutsideZero : ∀ subset row →
-      (collar row → Empty) →
+      (collar row → ⊥) →
       defectAtom atoms subset row ≡ 0ℚ
 open ConstraintAtomSupport public
 
