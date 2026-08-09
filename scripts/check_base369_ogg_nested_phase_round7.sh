@@ -38,6 +38,58 @@ for source in "${sources[@]}"; do
   fi
 done
 
+require_pattern() {
+  local source="$1"
+  local pattern="$2"
+  if ! grep -F "$pattern" "$source" >/dev/null; then
+    echo "missing required marker '$pattern' in $source" >&2
+    exit 1
+  fi
+}
+
+square=DASHI/Foundations/Base369NonaryTritSquareExact.agda
+completed=DASHI/Foundations/Base369CompletedRelationalDigitExact.agda
+five=DASHI/Foundations/Base369FiveModePhaseQuotientExact.agda
+phase=DASHI/Foundations/Base369PhaseCompletionAndNestedEvaluationExact.agda
+bridge=DASHI/Moonshine/MonsterOggNonarySSPTritBridgeExact.agda
+cyclo=DASHI/Moonshine/MonsterC3CyclotomicEvaluationExact.agda
+fibre=DASHI/Moonshine/Monster3BBalancedRegularFibreExact.agda
+nested=DASHI/Moonshine/MonsterOggPrimaryDepthAndNestedEigenCarrierExact.agda
+fiveBoundary=DASHI/Moonshine/MonsterFivePrimaryRelationalModelBoundaryExact.agda
+validation=DASHI/Foundations/Base369OggNestedPhaseRound7Validation.agda
+aggregate=DASHI/EverythingBase369OggNestedPhaseRound7.agda
+
+require_pattern "$square" 'nonaryDigitRoundTrip'
+require_pattern "$square" 'tritSquareRoundTrip'
+require_pattern "$square" 'complementReversesLowTrit'
+require_pattern "$completed" 'emptyZeroDigit'
+require_pattern "$completed" 'completedNineDigit'
+require_pattern "$completed" 'overflowAdvancesScale'
+require_pattern "$five" 'pointedNonaryRoundTrip'
+require_pattern "$five" 'orientedModeRoundTrip'
+require_pattern "$five" 'identityOrientationDuplicationCollapsed'
+require_pattern "$phase" 'promotionRetainsFineFibre'
+require_pattern "$bridge" 'primeAboveThreeResidueTritNonneutral'
+require_pattern "$bridge" 'threeResidueTritNeutral'
+require_pattern "$bridge" 'complementReversesResidueTrit'
+require_pattern "$bridge" 'modeOrientationRecoversResidueTrit'
+require_pattern "$cyclo" 'completeRegularPhaseOrbitCancels'
+require_pattern "$cyclo" 'monster3BGeneratorEvaluation'
+require_pattern "$fibre" 'monster3BIdentityEvaluationIs196883'
+require_pattern "$fibre" 'monster3BNontrivialEvaluationIs53'
+require_pattern "$fibre" 'monster3BConformalTraceIs54'
+require_pattern "$nested" 'oddPhaseDecompositionExact'
+require_pattern "$nested" 'PrimeRelationalCell'
+require_pattern "$nested" 'FrickeEigenInversionBridge'
+require_pattern "$nested" 'actualOggNestedCarrierConstructedIsFalse'
+require_pattern "$fiveBoundary" 'observerIntertwines'
+require_pattern "$fiveBoundary" 'actualFiveLocalCarrierIdentifiedIsFalse'
+require_pattern "$fiveBoundary" 'actualNineChannelObserverConstructedIsFalse'
+require_pattern "$validation" 'completeC3RegularOrbitCancelsExactly'
+require_pattern "$validation" 'phasePromotionRetainsFineFibre'
+require_pattern "$aggregate" 'MonsterC3CyclotomicEvaluationExact'
+require_pattern "$aggregate" 'MonsterFivePrimaryRelationalModelBoundaryExact'
+
 scripts/run_agda29_parallel_check.sh \
   DASHI/Foundations/Base369OggNestedPhaseRound7Validation.agda \
   DASHI/EverythingBase369OggNestedPhaseRound7.agda \
