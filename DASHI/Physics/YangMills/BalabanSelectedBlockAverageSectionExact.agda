@@ -23,10 +23,12 @@ module DASHI.Physics.YangMills.BalabanSelectedBlockAverageSectionExact where
 -- Construct an exact right inverse of the literal side-four P33 block-average
 -- constraint.  Each requested Lie-coordinate/direction average is spread
 -- uniformly over the 256 physical sites with coefficient 1/256.  The finite
--- sum then recovers the requested multiplier value exactly.  This supplies a
--- constructive full-row-rank certificate for the twelve-row average component
--- before it is coupled to gauge rows.  The pointwise row-independence corollary
--- still requires the finite row-delta carrier and is not fabricated here.
+-- sum then recovers the requested multiplier value exactly.  The unnormalised
+-- constant lift is the physical adjoint candidate and its normal operator is
+-- proved pointwise equal to 256 I, with exact two-sided inverse (1/256) I.
+-- This supplies a constructive full-row-rank certificate for the twelve-row
+-- average component before it is coupled to gauge rows.  The matrix-transpose
+-- identification and pointwise row-delta carrier remain separate obligations.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -80,6 +82,10 @@ sideFourSumConstantExact constant =
         (cong Sums.natAsRational Count.periodicSide4SiteCount)
         natAsRationalSideFourSiteCountExact))
 
+------------------------------------------------------------------------
+-- Exact section and surjectivity.
+------------------------------------------------------------------------
+
 selectedBlockAverageSection :
   (Average.SelectedBlockAverageRow4 → ℚ) → KKT.StateVector
 selectedBlockAverageSection multiplier
@@ -117,6 +123,61 @@ selectedBlockAverageConstraintSurjective multiplier = record
   ; mapsExactly = selectedBlockAverageSectionExact multiplier
   }
 
+------------------------------------------------------------------------
+-- Physical adjoint candidate and exact normal operator.
+------------------------------------------------------------------------
+
+selectedBlockAverageAdjointLift :
+  (Average.SelectedBlockAverageRow4 → ℚ) → KKT.StateVector
+selectedBlockAverageAdjointLift multiplier
+    (pair coordinate (pair axis site)) =
+  multiplier (pair coordinate axis)
+
+selectedBlockAverageNormalApply :
+  (Average.SelectedBlockAverageRow4 → ℚ) →
+  Average.SelectedBlockAverageRow4 → ℚ
+selectedBlockAverageNormalApply multiplier =
+  Average.selectedBackgroundBlockAverageConstraintApply
+    (selectedBlockAverageAdjointLift multiplier)
+
+selectedBlockAverageNormalExact :
+  ∀ multiplier row →
+  selectedBlockAverageNormalApply multiplier row
+  ≡ siteCount * multiplier row
+selectedBlockAverageNormalExact multiplier (pair coordinate axis) =
+  trans
+    (Average.selectedBackgroundBlockAverageConstraintMatrixApplyExact
+      (selectedBlockAverageAdjointLift multiplier)
+      (pair coordinate axis))
+    (sideFourSumConstantExact (multiplier (pair coordinate axis)))
+
+selectedBlockAverageNormalInverseApply :
+  (Average.SelectedBlockAverageRow4 → ℚ) →
+  Average.SelectedBlockAverageRow4 → ℚ
+selectedBlockAverageNormalInverseApply multiplier row =
+  oneOverSiteCount * multiplier row
+
+selectedBlockAverageNormalInverseLeftExact :
+  ∀ multiplier row →
+  selectedBlockAverageNormalInverseApply
+    (selectedBlockAverageNormalApply multiplier) row
+  ≡ multiplier row
+selectedBlockAverageNormalInverseLeftExact multiplier row =
+  trans
+    (cong (oneOverSiteCount *_) (selectedBlockAverageNormalExact multiplier row))
+    (ℚRing.solve-∀ (multiplier row))
+
+selectedBlockAverageNormalInverseRightExact :
+  ∀ multiplier row →
+  selectedBlockAverageNormalApply
+    (selectedBlockAverageNormalInverseApply multiplier) row
+  ≡ multiplier row
+selectedBlockAverageNormalInverseRightExact multiplier row =
+  trans
+    (selectedBlockAverageNormalExact
+      (selectedBlockAverageNormalInverseApply multiplier) row)
+    (ℚRing.solve-∀ (multiplier row))
+
 record SelectedBlockAverageRowRelation
     (coefficients : Average.SelectedBlockAverageRow4 → ℚ) : Set where
   field
@@ -130,5 +191,8 @@ open SelectedBlockAverageRowRelation public
 selectedBlockAverageSectionLevel : ProofLevel
 selectedBlockAverageSectionLevel = machineChecked
 
-selectedBlockAverageRowIndependenceProducerLevel : ProofLevel
-selectedBlockAverageRowIndependenceProducerLevel = conditional
+selectedBlockAverageNormalOperatorLevel : ProofLevel
+selectedBlockAverageNormalOperatorLevel = machineChecked
+
+selectedBlockAverageTransposeIdentificationLevel : ProofLevel
+selectedBlockAverageTransposeIdentificationLevel = conditional
