@@ -22,9 +22,8 @@ module DASHI.Physics.Closure.NSTriadKNPhysicalGalerkinVectorFieldRound30Exact wh
 --   ReconstructedPhysicalState F E -> ReconstructedPhysicalState F E,
 --
 -- and lifts to the dependent physical ODE carrier.  No later theorem can
--- insert a non-transverse, non-real or zero-mode derivative.  The remaining
--- analytic task is construction of the literal producer from the finite triad
--- enumeration; that obligation is a named field rather than an untyped claim.
+-- insert a non-transverse, non-real or zero-mode derivative.  Construction of
+-- the literal finite-triad producer remains a named physical obligation.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Level; lsuc)
@@ -35,6 +34,7 @@ open import Agda.Builtin.List using (List)
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNLuoRealityTransversePhaseSpaceRound26Exact as Phase
+import DASHI.Physics.Closure.NSTriadKNCommutingPhysicalCarrierSelectorRound28Exact as Selector
 import DASHI.Physics.Closure.NSTriadKNConcreteReconstructedPhysicalSelectorRound29Exact as State
 import DASHI.Physics.Closure.NSTriadKNDependentPhysicalODECarrierRound29Exact as ODE
 
@@ -53,9 +53,6 @@ record LiteralPhysicalGalerkinProducer
       State._∈_ coefficient (outputCoefficients state) →
       Z3.NonZeroMode (Phase.coefficientMode coefficient)
 
-    -- This equality is the concrete producer boundary.  Its right side must be
-    -- the repository's literal finite viscous term plus the exhaustive signed
-    -- Leray-projected quadratic convolution, not a separately supplied field.
     LiteralRawCoefficient :
       State.ReconstructedPhysicalState F E →
       Phase.TransverseModeCoefficient F E → Set r
@@ -163,9 +160,9 @@ physicalGalerkinDependentVectorField :
     {F : C3.RealField r}
     {E : C3.IntegerEmbedding F} →
   LiteralPhysicalGalerkinProducer F E →
-  ODE.Selector.PhysicalCarrier
+  Selector.PhysicalCarrier
     (State.reconstructedPhysicalSelectors F E) →
-  ODE.Selector.PhysicalCarrier
+  Selector.PhysicalCarrier
     (State.reconstructedPhysicalSelectors F E)
 physicalGalerkinDependentVectorField producer =
   ODE.physicalVectorField (physicalGalerkinSelectorEquivariant producer)
