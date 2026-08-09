@@ -16,6 +16,7 @@ files=(
   DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeGramFiniteRangeExact.agda
   DASHI/Physics/YangMills/BalabanSelectedCombinedConstraintGluingExact.agda
   DASHI/Physics/YangMills/BalabanSelectedBackgroundBlockAverageConstraintMatrixExact.agda
+  DASHI/Physics/YangMills/BalabanSelectedBlockAverageSectionExact.agda
   DASHI/Physics/YangMills/BalabanSelectedBackgroundCombinedConstraintMatrixExact.agda
   DASHI/Physics/YangMills/BalabanSelectedConstraintDimensionTowerExact.agda
   DASHI/Physics/YangMills/BalabanSZZStrongCouplingDecisionExact.agda
@@ -64,6 +65,8 @@ grep -q 'selectedConstraintOperatorLayerForced' DASHI/Physics/YangMills/BalabanS
 grep -q 'selectedBackgroundBlockAverageConstraintMatrixExact' DASHI/Physics/YangMills/BalabanSelectedBackgroundBlockAverageConstraintMatrixExact.agda
 grep -q 'selectedBackgroundBlockAverageConstraintMatrixApplyExact' DASHI/Physics/YangMills/BalabanSelectedBackgroundBlockAverageConstraintMatrixExact.agda
 grep -q 'selectedBackgroundBlockAverageConstraintPhysicalExact' DASHI/Physics/YangMills/BalabanSelectedBackgroundBlockAverageConstraintMatrixExact.agda
+grep -q 'selectedBlockAverageSectionExact' DASHI/Physics/YangMills/BalabanSelectedBlockAverageSectionExact.agda
+grep -q 'selectedBlockAverageConstraintSurjective' DASHI/Physics/YangMills/BalabanSelectedBlockAverageSectionExact.agda
 grep -q 'selectedBackgroundLinearizedConstraintMatrixExact' DASHI/Physics/YangMills/BalabanSelectedBackgroundCombinedConstraintMatrixExact.agda
 grep -q 'selectedBackgroundCombinedConstraintApplyExact' DASHI/Physics/YangMills/BalabanSelectedBackgroundCombinedConstraintMatrixExact.agda
 grep -q 'selectedBackgroundConstraintGramExact' DASHI/Physics/YangMills/BalabanSelectedBackgroundCombinedConstraintMatrixExact.agda
