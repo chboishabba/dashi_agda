@@ -33,7 +33,7 @@ selectedBackgroundBlockAverageConstraintMatrixApplyExact :
 
 and `selectedBackgroundBlockAverageConstraintPhysicalExact` identifies this with the decoded physical SU(2) bond field.
 
-`BalabanSelectedBlockAverageSectionExact.agda` goes one step further. For an arbitrary twelve-row multiplier value `lambda`, it constructs the literal state
+`BalabanSelectedBlockAverageSectionExact.agda` goes further. For an arbitrary twelve-row multiplier value `lambda`, it constructs
 
 ```text
 R_avg(lambda)^a_mu(x) = (1/256) lambda(a,mu)
@@ -46,9 +46,23 @@ selectedBlockAverageSectionExact :
   L_avg (R_avg lambda) = lambda.
 ```
 
-Thus the finite P33 average component is surjective and carries an explicit right inverse before coupling to the gauge rows. This is a genuine full-row-rank certificate for the average component, not a rank inference from the number twelve. The customary pointwise row-independence theorem still requires the finite row-delta carrier and remains explicit.
+The unnormalised constant lift
 
-This closes the exact finite P33 zero-mode block constraint. It does **not** pretend that the transported nonlinear CMP98 block-average derivative has thereby been reconstructed. The repository's existing `BalabanSU2CMP98LiteralLinearization` remains the separate multiscale formula to be connected when the Gate-I lane is lifted beyond the P33 finite carrier.
+```text
+L_avg^*(lambda)^a_mu(x) = lambda(a,mu)
+```
+
+is proved to be the exact adjoint under the literal finite row and physical-state dot products. Consequently the normal operator satisfies
+
+```text
+L_avg L_avg^* = 256 I,
+```
+
+with exact two-sided inverse `(1/256) I`.
+
+`BalabanSelectedBlockAverageRowCarrierExact.agda` constructs the actual twelve-row Kronecker carrier from the product of the existing three-coordinate and four-axis finite selectors. It then proves that the rectangular matrix transpose is exactly the physical constant lift. Therefore `256 I` is the literal average-average Gram block, not merely an analogous physical operator.
+
+This closes the exact finite P33 zero-mode block constraint and its isolated Gram inverse. It does **not** pretend that the transported nonlinear CMP98 block-average derivative has thereby been reconstructed. The repository's existing `BalabanSU2CMP98LiteralLinearization` remains the separate multiscale formula to be connected when the Gate-I lane is lifted beyond the P33 finite carrier.
 
 Primary sources:
 
@@ -74,13 +88,31 @@ selectedBackgroundCombinedConstraintApplyExact
 
 reduces its average rows to the physical block average and its gauge rows to the physical covariant backward divergence. The same operator is also exposed through the generic same-source gluing producer, with exact projections and pointwise uniqueness.
 
-The full Gram matrix is now literally
+The full Gram matrix is literally
 
 ```text
 K_A = L_A L_A*,
 ```
 
 rather than a supplied compatible-looking matrix. Exact theorems identify its average-average and gauge-gauge blocks. A generic pointwise-disjointness theorem proves a Gram entry is zero whenever every common state-coordinate product is zero.
+
+`BalabanSelectedCombinedConstraintRowCarrierExact.agda` constructs the finite Kronecker carrier for the entire tagged row sum. Its selector proof is not inferred from the row count: it proves the selector law on the average and gauge summands separately and proves all cross-tag selector terms vanish.
+
+`BalabanSelectedCombinedConstraintFiniteKKTExact.agda` then proves, on that actual carrier,
+
+```text
+K_A lambda = L_A (L_A* lambda)
+```
+
+and
+
+```text
+< K_A lambda , lambda >
+  = || L_A* lambda ||^2
+  >= 0.
+```
+
+Thus the full combined Gram is now a concrete positive-semidefinite finite operator. Positive definiteness on a reduced carrier is still a separate theorem because the physical redundancy kernel has not been quotient-trivialised.
 
 ## Exact raw dimension ledger
 
@@ -172,7 +204,7 @@ This closes the arithmetic and order-theoretic decision step. It does not fabric
 
 The exact immediate cut is now:
 
-1. Construct the physical redundancy projection for the 780-row combined carrier and trivialize the reduced carrier across the selected-background neighbourhood.
+1. Construct the physical redundancy projection for the concrete 780-row carrier and trivialize the reduced carrier across the selected-background neighbourhood.
 2. Prove a positive reduced Gram floor and rank stability on that common carrier.
 3. Construct the exact or certified Moore–Penrose inverse `K_A+` and prove its weighted Combes–Thomas decay.
 4. Derive tangent first-variation annihilation from the actual selected minimizer.
