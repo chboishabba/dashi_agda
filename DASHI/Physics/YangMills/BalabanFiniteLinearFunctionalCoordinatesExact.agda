@@ -19,10 +19,9 @@ module DASHI.Physics.YangMills.BalabanFiniteLinearFunctionalCoordinatesExact whe
 -- selected-background gauge derivative into a rectangular KKT matrix.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; _+_; _*_; _≡_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _*_)
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
@@ -110,6 +109,21 @@ functionalOfListExpansion {carrier = carrier}
               functional linear (basisVector carrier selected)
               * vector selected))))
 
+listExpansionPointwiseAsSum :
+  ∀ {Index}
+    (carrier : Matrix.FiniteRationalCoordinates Index)
+    columns vector row →
+  listCoordinateExpansion carrier columns vector row
+  ≡ Sums.sumRational columns
+      (λ column →
+        vector column * Matrix.delta carrier row column)
+listExpansionPointwiseAsSum carrier [] vector row =
+  refl
+listExpansionPointwiseAsSum carrier (column ∷ columns) vector row =
+  cong
+    (vector column * Matrix.delta carrier row column +_)
+    (listExpansionPointwiseAsSum carrier columns vector row)
+
 listExpansionIsVector :
   ∀ {Index}
     (carrier : Matrix.FiniteRationalCoordinates Index)
@@ -119,15 +133,18 @@ listExpansionIsVector :
   ≡ vector row
 listExpansionIsVector carrier vector row =
   trans
-    (Sums.sumRationalCong
-      (Matrix.coordinates carrier)
-      (λ column →
-        vector column * Matrix.delta carrier row column)
-      (λ column →
-        Matrix.delta carrier row column * vector column)
-      (λ column → ℚRing.solve-∀
-        (vector column) (Matrix.delta carrier row column)))
-    (Matrix.deltaActsAsIdentity carrier vector row)
+    (listExpansionPointwiseAsSum
+      carrier (Matrix.coordinates carrier) vector row)
+    (trans
+      (Sums.sumRationalCong
+        (Matrix.coordinates carrier)
+        (λ column →
+          vector column * Matrix.delta carrier row column)
+        (λ column →
+          Matrix.delta carrier row column * vector column)
+        (λ column → ℚRing.solve-∀
+          (vector column) (Matrix.delta carrier row column)))
+      (Matrix.deltaActsAsIdentity carrier vector row))
 
 finiteLinearFunctionalCoordinateExpansion :
   ∀ {Index}
