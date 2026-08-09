@@ -33,23 +33,24 @@ module DASHI.Physics.YangMills.BalabanSZZStrongCouplingDecisionExact where
 --   K_S(betaAbs) = 1 - 48 betaAbs
 --                = 48 (1/48 - betaAbs);
 --
--- proves the exact threshold using the normalized curvature; gives a literal
+-- proves the exact threshold through the normalized curvature; gives a literal
 -- counterexample to the invalid inference from the selected-background radius
--- rho = 1/8192 to strong coupling; and isolates the only RG-to-SZZ theorem
--- that matters: the effective-action Hessian loss must be strictly smaller
--- than the product-group Ricci floor at some finite depth.
+-- rho = 1/8192 to strong coupling; and isolates the RG-to-SZZ decision theorem:
+-- the effective-action Hessian loss must be strictly smaller than the
+-- product-group Ricci floor at some finite depth.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
+import Data.List.Base as List using (length)
 open import Data.Integer.Base using (+_)
 open import Data.Product.Base using (_×_; _,_)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; -_; _<_; _/_)
+  (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; -_; _≤_; _<_; _/_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (subst)
 open import Relation.Nullary.Negation.Core using (¬_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -69,11 +70,6 @@ selectedSmallFieldRadius = + 1 / 8192
 
 ------------------------------------------------------------------------
 -- Exact SU(2) action-convention bridge.
---
--- DASHI's normalized SU(2) trace is q0 = (1/2) Re Tr U.  Hence its Wilson
--- plaquette action is 1-q0.  SZZ use N beta Re Tr U in the exponent; for
--- N=2 this is 4 beta q0.  Therefore beta_DASHI = 4 beta_SZZ and the two
--- exponent conventions differ only by an additive constant per plaquette.
 ------------------------------------------------------------------------
 
 dashiSU2PlaquetteAction : ℚ → ℚ
@@ -110,8 +106,7 @@ szzDashiNormalizationExact : ∀ betaSZZ traces →
   szzWilsonExponentFromNormalizedTraces betaSZZ traces
   ≡ - (dashiCouplingFromSZZ betaSZZ)
       * dashiWilsonActionFromNormalizedTraces traces
-    + Sums.natAsRational
-        (Data.List.Base.length traces)
+    + Sums.natAsRational (List.length traces)
       * dashiCouplingFromSZZ betaSZZ
 szzDashiNormalizationExact betaSZZ [] =
   ℚRing.solve-∀ betaSZZ
@@ -120,7 +115,7 @@ szzDashiNormalizationExact betaSZZ (trace ∷ traces)
   ℚRing.solve-∀
     betaSZZ trace
     (dashiWilsonActionFromNormalizedTraces traces)
-    (Sums.natAsRational (Data.List.Base.length traces))
+    (Sums.natAsRational (List.length traces))
 
 ------------------------------------------------------------------------
 -- Exact SZZ SU(2), d=4 curvature threshold.
@@ -144,23 +139,50 @@ differencePositive : ∀ larger smaller →
   smaller < larger → 0ℚ < larger - smaller
 differencePositive larger smaller smaller<larger =
   let
-    negated : - larger < - smaller
-    negated = ℚP.neg-antimono-< smaller<larger
+    left : ℚ
+    left = - larger + larger
+
+    right : ℚ
+    right = - smaller + larger
+
+    step : left < right
+    step = ℚP.+-monoˡ-< larger
+      (ℚP.neg-antimono-< smaller<larger)
+
+    leftExact : left ≡ 0ℚ
+    leftExact = ℚRing.solve-∀ larger
+
+    rightExact : right ≡ larger - smaller
+    rightExact = ℚRing.solve-∀ larger smaller
   in
-  trans
-    (ℚRing.solve-∀ larger)
-    (trans
-      (ℚP.+-monoˡ-< larger negated)
-      (ℚRing.solve-∀ larger smaller))
+  subst (λ selectedLeft → selectedLeft < larger - smaller)
+    leftExact
+    (subst (λ selectedRight → left < selectedRight)
+      rightExact step)
 
 positiveDifferenceImpliesLess : ∀ larger smaller →
   0ℚ < larger - smaller → smaller < larger
 positiveDifferenceImpliesLess larger smaller positiveDifference =
-  trans
-    (ℚRing.solve-∀ smaller)
-    (trans
-      (ℚP.+-monoʳ-< smaller positiveDifference)
-      (ℚRing.solve-∀ larger smaller))
+  let
+    left : ℚ
+    left = smaller + 0ℚ
+
+    right : ℚ
+    right = smaller + (larger - smaller)
+
+    step : left < right
+    step = ℚP.+-monoʳ-< smaller positiveDifference
+
+    leftExact : left ≡ smaller
+    leftExact = ℚRing.solve-∀ smaller
+
+    rightExact : right ≡ larger
+    rightExact = ℚRing.solve-∀ larger smaller
+  in
+  subst (λ selectedLeft → selectedLeft < larger)
+    leftExact
+    (subst (λ selectedRight → left < selectedRight)
+      rightExact step)
 
 szzSU2D4StrongCouplingThresholdForward : ∀ betaAbs →
   betaAbs < oneFortyEighth →
@@ -175,7 +197,8 @@ szzSU2D4StrongCouplingThresholdBackward betaAbs =
   positiveDifferenceImpliesLess oneFortyEighth betaAbs
 
 szzSU2D4StrongCouplingThresholdExact : ∀ betaAbs →
-  (betaAbs < oneFortyEighth)
+  (betaAbs < oneFortyEighth →
+    0ℚ < szzSU2D4NormalizedCurvature betaAbs)
   × (0ℚ < szzSU2D4NormalizedCurvature betaAbs →
       betaAbs < oneFortyEighth)
 szzSU2D4StrongCouplingThresholdExact betaAbs =
@@ -219,7 +242,7 @@ record SelectedRGEffectiveActionHessianData : Set₁ where
 
     hessianLower : ∀ tangent →
       - hessianLoss * normSq tangent
-      ℚ.≤ effectiveHessian tangent
+      ≤ effectiveHessian tangent
 
     hessianLossBelowRicci : hessianLoss < ricciFloor
 open SelectedRGEffectiveActionHessianData public
