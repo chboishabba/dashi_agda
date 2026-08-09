@@ -129,13 +129,13 @@ farUpperAfterSlackCompletion :
   ∀ {family charge}
     (bounds : CorrelatedOwnerBoundsWithSlack family charge) →
   Ownership.ownerContribution family Ownership.farGreenOwner
-  ≤ ((farGreenCoefficient bounds
+  ≤ (farGreenCoefficient bounds
       + ownerBudgetSlack
           (localizationCoefficient bounds)
           (transportCoefficient bounds)
           (nearGreenCoefficient bounds)
           (farGreenCoefficient bounds))
-      * charge)
+    * charge
 farUpperAfterSlackCompletion {charge = charge} bounds =
   let
     instance
