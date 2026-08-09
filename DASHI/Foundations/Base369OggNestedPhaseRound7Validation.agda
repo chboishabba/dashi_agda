@@ -1,6 +1,8 @@
 module DASHI.Foundations.Base369OggNestedPhaseRound7Validation where
 
+open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (zero)
 
 open import Base369 using
   ( non-0
@@ -9,7 +11,8 @@ open import Base369 using
   )
 
 open import DASHI.Foundations.SSPTritCarrier using
-  ( sspNegOne
+  ( SSPTrit
+  ; sspNegOne
   ; sspZero
   ; sspPosOne
   )
@@ -18,9 +21,11 @@ import DASHI.Foundations.Base369NonaryTritSquareExact as Square
 import DASHI.Foundations.Base369CompletedRelationalDigitExact as Completed
 import DASHI.Foundations.Base369FiveModePhaseQuotientExact as Five
 import DASHI.Foundations.Base369RelationalSymmetryRealisationExact as Realisation
+import DASHI.Foundations.Base369PhaseCompletionAndNestedEvaluationExact as Phase
 import DASHI.Moonshine.MonsterOggNonarySSPTritBridgeExact as Bridge
 import DASHI.Moonshine.Monster3BBalancedRegularFibreExact as Fibre
 import DASHI.Moonshine.MonsterOggPrimaryDepthAndNestedEigenCarrierExact as Nested
+import DASHI.Moonshine.MonsterFivePrimaryRelationalModelBoundaryExact as FiveBoundary
 import DASHI.Physics.Closure.MoonshinePrimeLaneReceiptSurface as Lane
 
 nonarySquareRoundTripAtEight :
@@ -105,3 +110,29 @@ nonaryRealisationUsesPolarityReversal :
   ≡ Square.negateSSPTrit
       (Realisation.observeTrit Realisation.nonaryComplementRealisation non-1)
 nonaryRealisationUsesPolarityReversal = refl
+
+sampleBalancedPhaseFibre : Phase.BalancedPhaseFibre SSPTrit
+sampleBalancedPhaseFibre =
+  Phase.balancedPhaseFibre sspNegOne sspZero sspPosOne
+
+sampleInstantiatedPhaseCompletion : Phase.PhaseCompletion SSPTrit SSPTrit
+sampleInstantiatedPhaseCompletion =
+  Phase.instantiatedPhaseCompletion sampleBalancedPhaseFibre sspZero
+
+phasePromotionRetainsFineFibre :
+  Phase.retainedFineFibre
+    (Phase.promoteCompletedBlock zero sampleInstantiatedPhaseCompletion)
+  ≡ Phase.fineFibre sampleInstantiatedPhaseCompletion
+phasePromotionRetainsFineFibre = refl
+
+fiveLocalActualCarrierRemainsOpen :
+  FiveBoundary.actualFiveLocalCarrierIdentified
+    FiveBoundary.canonicalMonsterFivePrimaryPromotionBoundary
+  ≡ false
+fiveLocalActualCarrierRemainsOpen = refl
+
+fiveLocalNineChannelObserverRemainsOpen :
+  FiveBoundary.actualNineChannelObserverConstructed
+    FiveBoundary.canonicalMonsterFivePrimaryPromotionBoundary
+  ≡ false
+fiveLocalNineChannelObserverRemainsOpen = refl
