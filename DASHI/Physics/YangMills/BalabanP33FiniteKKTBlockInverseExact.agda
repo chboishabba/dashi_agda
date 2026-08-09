@@ -18,14 +18,14 @@ module DASHI.Physics.YangMills.BalabanP33FiniteKKTBlockInverseExact where
 --
 -- Close the finite-dimensional logical gap between a constructed KKT right
 -- inverse and a genuine inverse.  Coercivity is required only on ker L, while
--- multiplier uniqueness is required only modulo the retained row redundancy.
--- From these two exact hypotheses we prove
+-- multiplier uniqueness is required on the selected reduced multiplier
+-- representative space.  From these two exact hypotheses we prove
 --
 --   ker [H L*; L 0] = {0},
 --
--- injectivity of the complete block, and hence that the Round-39 right inverse
--- is also a left inverse.  No determinant, dimension count or hidden deletion
--- of redundant rows is used.
+-- injectivity of the complete reduced block, and hence that the Round-39 right
+-- inverse is also a left inverse.  No determinant or hidden coordinate deletion
+-- is used.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -37,6 +37,7 @@ open import Relation.Binary.PropositionalEquality using
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
+import DASHI.Physics.YangMills.BalabanFiniteSumFubiniExact as Fubini
 import DASHI.Physics.YangMills.BalabanConstructiveRationalMatrixInverseExact as Matrix
 import DASHI.Physics.YangMills.BalabanFiniteRectangularRationalExact as Rect
 import DASHI.Physics.YangMills.BalabanP33FiniteKKTAdmissibleProjectorExact as KKT
@@ -145,7 +146,7 @@ constraintAdjointPairingZero {greenData = greenData} {vector = vector}
           (cong (_* Block.multiplierPart vector row)
             (constraintPartOfHomogeneous homogeneous row))
           (ℚRing.solve-∀ (Block.multiplierPart vector row))))
-      (DASHI.Physics.YangMills.BalabanFiniteSumFubiniExact.sumRationalZero
+      (Fubini.sumRationalZero
         (Matrix.coordinates
           (KKT.multiplierCarrier (Algebra.projectorData greenData)))))
 
@@ -162,6 +163,13 @@ homogeneousStateQuadraticZero {greenData = greenData} {vector = vector}
   let
     state = Block.statePart vector
     multiplier = Block.multiplierPart vector
+    hessianPairing =
+      KKT.stateDot state (Algebra.hessianApply greenData state)
+    adjointPairing =
+      KKT.stateDot state
+        (KKT.constraintAdjointApply
+          (Algebra.projectorData greenData) multiplier)
+
     dotFullZero :
       KKT.stateDot state
         (Rect.vectorAdd
@@ -174,30 +182,24 @@ homogeneousStateQuadraticZero {greenData = greenData} {vector = vector}
         (stateEquationExpanded homogeneous) state)
       (Rect.finiteDotZeroRight KKT.physicalStateCarrier state)
 
-    dotSplit = Rect.finiteDotAddRight
-      KKT.physicalStateCarrier state
-      (Algebra.hessianApply greenData state)
-      (KKT.constraintAdjointApply
-        (Algebra.projectorData greenData) multiplier)
+    sumZero : hessianPairing + adjointPairing ≡ 0ℚ
+    sumZero = trans
+      (sym
+        (Rect.finiteDotAddRight
+          KKT.physicalStateCarrier state
+          (Algebra.hessianApply greenData state)
+          (KKT.constraintAdjointApply
+            (Algebra.projectorData greenData) multiplier)))
+      dotFullZero
+
+    adjointZero : adjointPairing ≡ 0ℚ
+    adjointZero = constraintAdjointPairingZero homogeneous
   in
   trans
-    (sym (ℚRing.solve-∀
-      (KKT.stateDot state (Algebra.hessianApply greenData state))
-      (KKT.stateDot state
-        (KKT.constraintAdjointApply
-          (Algebra.projectorData greenData) multiplier))))
+    (ℚRing.solve-∀ hessianPairing)
     (trans
-      (cong
-        (λ selected → selected
-          - KKT.stateDot state
-              (KKT.constraintAdjointApply
-                (Algebra.projectorData greenData) multiplier))
-        (trans (sym dotSplit) dotFullZero))
-      (trans
-        (cong
-          (λ selected → 0ℚ - selected)
-          (constraintAdjointPairingZero homogeneous))
-        (ℚRing.solve [])))
+      (cong (hessianPairing +_) (sym adjointZero))
+      sumZero)
 
 finiteKKTHomogeneousStateZero :
   ∀ {Multiplier}
@@ -223,34 +225,30 @@ finiteKKTHomogeneousReducedMultiplierZero
     {greenData = greenData} control {vector} homogeneous =
   let
     stateZero = finiteKKTHomogeneousStateZero control homogeneous
+
+    hessianZero : ∀ coordinate →
+      Algebra.hessianApply greenData (Block.statePart vector) coordinate
+      ≡ 0ℚ
+    hessianZero coordinate = trans
+      (Algebra.hessianPointwiseCong greenData stateZero coordinate)
+      (Rect.applyRectangularZero
+        KKT.physicalStateCarrier
+        (Algebra.hessianMatrix greenData) coordinate)
+
     adjointZero : ∀ coordinate →
       KKT.constraintAdjointApply (Algebra.projectorData greenData)
         (Block.multiplierPart vector) coordinate ≡ 0ℚ
     adjointZero coordinate =
+      let
+        adjointValue =
+          KKT.constraintAdjointApply (Algebra.projectorData greenData)
+            (Block.multiplierPart vector) coordinate
+      in
       trans
-        (sym
-          (ℚRing.solve-∀
-            (Algebra.hessianApply greenData
-              (Block.statePart vector) coordinate)
-            (KKT.constraintAdjointApply
-              (Algebra.projectorData greenData)
-              (Block.multiplierPart vector) coordinate)))
+        (ℚRing.solve-∀ adjointValue)
         (trans
-          (cong
-            (λ selected →
-              selected
-              - Algebra.hessianApply greenData
-                  (Block.statePart vector) coordinate)
-            (stateEquationExpanded homogeneous coordinate))
-          (trans
-            (cong
-              (λ selected → 0ℚ - selected)
-              (trans
-                (Algebra.hessianPointwiseCong greenData stateZero coordinate)
-                (Rect.applyRectangularZero
-                  KKT.physicalStateCarrier
-                  (Algebra.hessianMatrix greenData) coordinate)))
-            (ℚRing.solve [])))
+          (cong (_+ adjointValue) (sym (hessianZero coordinate)))
+          (stateEquationExpanded homogeneous coordinate))
   in
   reducedMultiplierAdjointInjective control
     (Block.multiplierPart vector) adjointZero
@@ -288,8 +286,8 @@ blockApplyDifferenceHomogeneous {greenData = greenData} {left} {right}
   { stateEquationZero = λ coordinate →
       trans
         (cong₂ _+_
-          (Algebra.hessianPointwiseCong greenData
-            (λ selected → refl) coordinate)
+          (Algebra.hessianSubtractExact greenData
+            (Block.statePart left) (Block.statePart right) coordinate)
           (Rect.applyRectangularSubtract
             (KKT.multiplierCarrier (Algebra.projectorData greenData))
             (Rect.transposeRectangular
@@ -297,20 +295,20 @@ blockApplyDifferenceHomogeneous {greenData = greenData} {left} {right}
             (Block.multiplierPart left) (Block.multiplierPart right)
             coordinate))
         (trans
-          (sym
-            (ℚRing.solve-∀
-              (Algebra.hessianApply greenData (Block.statePart left) coordinate)
-              (KKT.constraintAdjointApply
-                (Algebra.projectorData greenData)
-                (Block.multiplierPart left) coordinate)
-              (Algebra.hessianApply greenData (Block.statePart right) coordinate)
-              (KKT.constraintAdjointApply
-                (Algebra.projectorData greenData)
-                (Block.multiplierPart right) coordinate)))
+          (ℚRing.solve-∀
+            (Algebra.hessianApply greenData
+              (Block.statePart left) coordinate)
+            (KKT.constraintAdjointApply
+              (Algebra.projectorData greenData)
+              (Block.multiplierPart left) coordinate)
+            (Algebra.hessianApply greenData
+              (Block.statePart right) coordinate)
+            (KKT.constraintAdjointApply
+              (Algebra.projectorData greenData)
+              (Block.multiplierPart right) coordinate))
           (trans
             (cong₂ _-_
-              (Block.stateEqual equality coordinate)
-              refl)
+              (Block.stateEqual equality coordinate) refl)
             (ℚRing.solve-∀
               (Block.statePart
                 (Block.applyKKTBlock greenData right) coordinate))))
