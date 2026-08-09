@@ -82,8 +82,18 @@ record ActualResponse : Set where
 
 open ActualResponse public
 
+------------------------------------------------------------------------
+-- Transport assessment versus transport authorisation.
+--
+-- ResponseTransportWitness is deliberately only an assessment: its Booleans
+-- may report failed requirements.  AuthorisedResponseTransport is the
+-- unforgeable locality gate used to license transport; it requires equality
+-- proofs that every relevant assessment field is true.
+------------------------------------------------------------------------
+
 record ResponseTransportWitness
     (source target : PropositionNode) : Set where
+  constructor responseTransportAssessment
   field
     nodeTransportable : Bool
     contextTransportable : Bool
@@ -92,6 +102,38 @@ record ResponseTransportWitness
     temporalValidityRechecked : Bool
     newExplicitCommitmentWhereStrengthened : Bool
     transportReceipt : String
+
+open ResponseTransportWitness public
+
+record AuthorisedResponseTransport
+    (source target : PropositionNode) : Set where
+  constructor authorisedResponseTransport
+  field
+    assessment : ResponseTransportWitness source target
+    nodeTransportableProof : nodeTransportable assessment ≡ true
+    contextTransportableProof : contextTransportable assessment ≡ true
+    modalityTransportableProof : modalityTransportable assessment ≡ true
+    scopeTransportableProof : scopeTransportable assessment ≡ true
+    temporalValidityProof : temporalValidityRechecked assessment ≡ true
+    strengtheningCommitmentProof :
+      newExplicitCommitmentWhereStrengthened assessment ≡ true
+    authorisationReceipt : String
+
+open AuthorisedResponseTransport public
+
+transportResponse :
+  {source target : PropositionNode} →
+  ActualResponse →
+  AuthorisedResponseTransport source target →
+  PropositionNode
+transportResponse response authorisation = target
+  where
+  target : PropositionNode
+  target = _
+
+------------------------------------------------------------------------
+-- Goal-process authority.
+------------------------------------------------------------------------
 
 record GoalProcessAuthorisation : Set where
   constructor goalProcessAuthorisation
@@ -125,6 +167,7 @@ record ResponseLocalityBoundary : Set where
     expiryAutomaticallyMeansRejection : Bool
     authoriseStartMeansAuthoriseEveryFutureStep : Bool
     laterRevocationErasesEarlierProvenance : Bool
+    assessmentAloneAuthorisesTransport : Bool
     localityNote : String
 
 canonicalResponseLocalityBoundary : ResponseLocalityBoundary
@@ -137,6 +180,7 @@ canonicalResponseLocalityBoundary = record
   ; expiryAutomaticallyMeansRejection = false
   ; authoriseStartMeansAuthoriseEveryFutureStep = false
   ; laterRevocationErasesEarlierProvenance = false
+  ; assessmentAloneAuthorisesTransport = false
   ; localityNote =
-      "Affirmation is local to node, context, modality, scope, episode, capacity and time; transport requires independent witnesses."
+      "Affirmation is local to node, context, modality, scope, episode, capacity and time. An assessment may contain failed conditions; only AuthorisedResponseTransport, whose requirements are all proved true, licenses transport."
   }
