@@ -76,6 +76,89 @@ FineSector = Quotient.DecimalCompletionState
 FineAddress : Set
 FineAddress = FineSector → Harmonic.BalancedTrit
 
+------------------------------------------------------------------------
+-- Exact finite tabulation: the function-space reading really is ten indexed
+-- ternary coordinates.  The two representations are constructively inverse.
+------------------------------------------------------------------------
+
+record FineAddress10 : Set where
+  constructor fineAddress10
+  field
+    at0 at1 at2 at3 at4 at5 at6 at7 at8 atJ : Harmonic.BalancedTrit
+
+open FineAddress10 public
+
+lookupFineAddress10 : FineAddress10 → FineAddress
+lookupFineAddress10 table Quotient.d0 = at0 table
+lookupFineAddress10 table Quotient.d1 = at1 table
+lookupFineAddress10 table Quotient.d2 = at2 table
+lookupFineAddress10 table Quotient.d3 = at3 table
+lookupFineAddress10 table Quotient.d4 = at4 table
+lookupFineAddress10 table Quotient.d5 = at5 table
+lookupFineAddress10 table Quotient.d6 = at6 table
+lookupFineAddress10 table Quotient.d7 = at7 table
+lookupFineAddress10 table Quotient.d8 = at8 table
+lookupFineAddress10 table Quotient.j9 = atJ table
+
+tabulateFineAddress : FineAddress → FineAddress10
+tabulateFineAddress address =
+  fineAddress10
+    (address Quotient.d0)
+    (address Quotient.d1)
+    (address Quotient.d2)
+    (address Quotient.d3)
+    (address Quotient.d4)
+    (address Quotient.d5)
+    (address Quotient.d6)
+    (address Quotient.d7)
+    (address Quotient.d8)
+    (address Quotient.j9)
+
+lookupAfterTabulate :
+  (address : FineAddress) →
+  (sector : FineSector) →
+  lookupFineAddress10 (tabulateFineAddress address) sector
+  ≡ address sector
+lookupAfterTabulate address Quotient.d0 = refl
+lookupAfterTabulate address Quotient.d1 = refl
+lookupAfterTabulate address Quotient.d2 = refl
+lookupAfterTabulate address Quotient.d3 = refl
+lookupAfterTabulate address Quotient.d4 = refl
+lookupAfterTabulate address Quotient.d5 = refl
+lookupAfterTabulate address Quotient.d6 = refl
+lookupAfterTabulate address Quotient.d7 = refl
+lookupAfterTabulate address Quotient.d8 = refl
+lookupAfterTabulate address Quotient.j9 = refl
+
+tabulateAfterLookup :
+  (table : FineAddress10) →
+  tabulateFineAddress (lookupFineAddress10 table) ≡ table
+tabulateAfterLookup (fineAddress10 x0 x1 x2 x3 x4 x5 x6 x7 x8 xJ) = refl
+
+record FineAddressTenCoordinateEquivalence : Set where
+  constructor fineAddressTenCoordinateEquivalence
+  field
+    toTable : FineAddress → FineAddress10
+    fromTable : FineAddress10 → FineAddress
+    fromAfterToPointwise :
+      (address : FineAddress) →
+      (sector : FineSector) →
+      fromTable (toTable address) sector ≡ address sector
+    toAfterFrom :
+      (table : FineAddress10) →
+      toTable (fromTable table) ≡ table
+
+open FineAddressTenCoordinateEquivalence public
+
+canonicalFineAddressTenCoordinateEquivalence :
+  FineAddressTenCoordinateEquivalence
+canonicalFineAddressTenCoordinateEquivalence =
+  fineAddressTenCoordinateEquivalence
+    tabulateFineAddress
+    lookupFineAddress10
+    lookupAfterTabulate
+    tabulateAfterLookup
+
 FineFibre : CoarseAddress → Set
 FineFibre coarse = FineAddress
 
@@ -177,6 +260,7 @@ record ModularAddressBoundary : Set where
     depthLaw : absoluteDepth ≡ coarseDepth + fineDepth
     stateCountLaw :
       pow 3 absoluteDepth ≡ pow 3 coarseDepth * pow 3 fineDepth
+    tenCoordinateTabulation : FineAddressTenCoordinateEquivalence
     fineCoordinatesAreTenIndependentJInvariants : Bool
     fineCoordinatesAreTenIndependentJInvariantsIsFalse :
       fineCoordinatesAreTenIndependentJInvariants ≡ false
@@ -197,6 +281,7 @@ canonicalModularAddressBoundary =
     jAbsoluteAddressDepth
     jAbsoluteAddressDepthReconstructs
     jAbsoluteStateCountFactors
+    canonicalFineAddressTenCoordinateEquivalence
     false refl
     false refl
     false refl
