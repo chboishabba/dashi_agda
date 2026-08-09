@@ -1,31 +1,37 @@
-# Mathieu tower: arithmetic witness boundary
+# Mathieu tower: sharp-transitivity boundary
 
-`DASHI.Moonshine.MathieuStabilizerTowerExact` proves the exact order/index spine
-
-```text
-8 --x9--> 72 --x10--> 720 --x11--> 7920 --x12--> 95040.
-```
-
-The implementation deliberately uses the names
+The exact products are explained by a standard permutation-group theorem, not by a grid decomposition:
 
 ```text
-OrbitStabilizerArithmeticWitness
-MathieuStepArithmeticWitness
+|M11| = 11 falling 4 = 11 * 10 * 9 * 8 = 7920
+|M12| = 12 falling 5 = 12 * 11 * 10 * 9 * 8 = 95040.
 ```
 
-rather than `PointedOrbitFibration` or `MathieuStepRealization`.
+`M11` is sharply 4-transitive on 11 points. Fix an ordered 4-tuple of distinct points. Every ordered 4-tuple is its image under exactly one group element. Hence the group is in bijection with the `11 * 10 * 9 * 8` ordered distinct 4-tuples.
 
-An order equation
+Likewise, sharp 5-transitivity of `M12` gives `12 * 11 * 10 * 9 * 8` directly.
+
+The displayed stabilizer chain
 
 ```text
-|G| = |orbit| * |stabilizer|
+8 --x9--> 72 --x10--> 720 --x11--> 7920 --x12--> 95040
 ```
 
-is necessary but not sufficient to construct a group action. A genuine realization would additionally require finite carriers, a group structure on the transformation carrier, an action law, a chosen point, a definition of its stabilizer, finite-cardinality equivalences, and a proof that the stabilizer inclusion and orbit quotient have the stated sizes.
+is the same falling-factorial count read through successive point stabilizers. In `M11`, after fixing three ordered points, eight images remain for the fourth point. That is the structural source of the factor `8`.
 
-The Round-6 record therefore contains only the three natural-number orders and their multiplication law. `stepArithmeticWitness` packages each exact Mathieu order equation into that type. The actual Mathieu action and point-stabilizer identifications remain source-bounded external authority.
+It is therefore incorrect to derive this factor from `|D4| = 8`, from a nine-cell grid, or from the number of irreducible `D4` channels. Those are different objects whose cardinalities happen to reuse some numerals.
 
-The same boundary prevents the order-eight factor from being silently identified with the square-grid group `D4`. The Atlas-reported stabilizer is tagged as quaternion `Q8`; equality of orders does not imply isomorphism.
+The Agda module now contains:
+
+- `fallingFactorial`;
+- exact ordered-tuple counts for `(11,4)` and `(12,5)`;
+- `SharpTransitivityOrderWitness`;
+- the `M11` sharp-4 and `M12` sharp-5 order witnesses;
+- the successive stabilizer-order chain;
+- an explicit boundary theorem that the Mathieu factor `8` does not come from square-grid `D4` symmetry;
+- an explicit boundary that divisor lattices are not required to derive either order.
+
+The module stores the textbook sharp-transitivity theorem as source-bounded order data. It still does not manufacture the full permutation actions.
 
 Primary sources:
 
