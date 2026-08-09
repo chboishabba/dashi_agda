@@ -13,11 +13,16 @@ module DASHI.Physics.YangMills.BalabanSelectedConstraintCollarPairingExact where
 -- Communications in Mathematical Physics 99 (1985), 389--434.
 -- DOI: 10.1007/BF01240355.
 --
+-- Roger Penrose,
+-- "A Generalized Inverse for Matrices",
+-- Proceedings of the Cambridge Philosophical Society 51 (1955), 406--413.
+-- DOI: 10.1017/S0305004100030401.
+--
 -- DASHI CONTRIBUTION
 --
--- Turn the row-locality observation for delta_(p,h)=Lw_(p,h) into an exact
--- finite theorem.  A Boolean constraint-collar mask and a proof that the raw
--- defect vanishes outside it imply
+-- Turn row locality of delta_(p,h)=Lw_(p,h) into an exact finite theorem while
+-- retaining redundant constraint rows.  A Boolean collar mask and a proof that
+-- the literal raw defect vanishes outside it imply
 --
 --   <lambda,delta> = <chi_C lambda,delta>.
 --
@@ -36,30 +41,31 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
 import DASHI.Physics.YangMills.BalabanFiniteSumFubiniExact as Fubini
 import DASHI.Physics.YangMills.BalabanConstructiveRationalMatrixInverseExact as Matrix
-import DASHI.Physics.YangMills.BalabanP33FiniteKKTAdmissibleProjectorExact as KKT
+import DASHI.Physics.YangMills.BalabanFiniteRectangularRationalExact as Rect
+import DASHI.Physics.YangMills.BalabanP33FiniteKKTPseudoinverseProjectorExact as Pseudo
 import DASHI.Physics.YangMills.BalabanP33PhysicalRationalWilsonPlaquetteJetExact as Physical
 import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Coordinates
-import DASHI.Physics.YangMills.BalabanSelectedRawExtractorConstraintDefectExact as RawDefect
+import DASHI.Physics.YangMills.BalabanSelectedRawExtractorConstraintDefectAtomsExact as Atoms
 
 record RawExtractorConstraintCollar
     {Multiplier : Set}
-    (projectorData : KKT.FiniteKKTProjectorData Multiplier)
+    (pseudoData : Pseudo.FiniteKKTPseudoinverseData Multiplier)
     (bondField : Coordinates.PhysicalSU2BondField4)
     (plaquette : Physical.Plaquette4) : Set₁ where
   field
     collarMask : Multiplier → Bool
     defectOutsideCollarZero : ∀ row →
       collarMask row ≡ false →
-      RawDefect.rawExtractorConstraintDefect
-        projectorData bondField plaquette row
+      Atoms.rawExtractorConstraintDefect
+        pseudoData bondField plaquette row
       ≡ 0ℚ
 
 open RawExtractorConstraintCollar public
 
 restrictMultiplierToCollar :
-  ∀ {Multiplier projectorData bondField plaquette} →
+  ∀ {Multiplier pseudoData bondField plaquette} →
   RawExtractorConstraintCollar
-    {Multiplier} projectorData bondField plaquette →
+    {Multiplier} pseudoData bondField plaquette →
   (Multiplier → ℚ) → Multiplier → ℚ
 restrictMultiplierToCollar collar multiplier row
   with collarMask collar row
@@ -67,28 +73,28 @@ restrictMultiplierToCollar collar multiplier row
 ... | true = multiplier row
 
 rawExtractorDefectSupportedOnConstraintCollar :
-  ∀ {Multiplier projectorData bondField plaquette}
+  ∀ {Multiplier pseudoData bondField plaquette}
     (collar : RawExtractorConstraintCollar
-      {Multiplier} projectorData bondField plaquette)
+      {Multiplier} pseudoData bondField plaquette)
     row →
   collarMask collar row ≡ false →
-  RawDefect.rawExtractorConstraintDefect
-    projectorData bondField plaquette row
+  Atoms.rawExtractorConstraintDefect
+    pseudoData bondField plaquette row
   ≡ 0ℚ
 rawExtractorDefectSupportedOnConstraintCollar collar =
   defectOutsideCollarZero collar
 
 collarRestrictionPreservesPairingTerm :
-  ∀ {Multiplier projectorData bondField plaquette}
+  ∀ {Multiplier pseudoData bondField plaquette}
     (collar : RawExtractorConstraintCollar
-      {Multiplier} projectorData bondField plaquette)
+      {Multiplier} pseudoData bondField plaquette)
     multiplier row →
   multiplier row
-    * RawDefect.rawExtractorConstraintDefect
-        projectorData bondField plaquette row
+    * Atoms.rawExtractorConstraintDefect
+        pseudoData bondField plaquette row
   ≡ restrictMultiplierToCollar collar multiplier row
-    * RawDefect.rawExtractorConstraintDefect
-        projectorData bondField plaquette row
+    * Atoms.rawExtractorConstraintDefect
+        pseudoData bondField plaquette row
 collarRestrictionPreservesPairingTerm collar multiplier row
   with collarMask collar row
 ... | true = refl
@@ -98,39 +104,39 @@ collarRestrictionPreservesPairingTerm collar multiplier row
 
 multiplierPairingRestrictsToConstraintCollar :
   ∀ {Multiplier}
-    (projectorData : KKT.FiniteKKTProjectorData Multiplier)
+    (pseudoData : Pseudo.FiniteKKTPseudoinverseData Multiplier)
     bondField plaquette
     (collar : RawExtractorConstraintCollar
-      projectorData bondField plaquette)
+      pseudoData bondField plaquette)
     multiplier →
-  KKT.multiplierDot projectorData multiplier
-    (RawDefect.rawExtractorConstraintDefect
-      projectorData bondField plaquette)
-  ≡ KKT.multiplierDot projectorData
+  Rect.finiteDot (Pseudo.multiplierCarrier pseudoData) multiplier
+    (Atoms.rawExtractorConstraintDefect
+      pseudoData bondField plaquette)
+  ≡ Rect.finiteDot (Pseudo.multiplierCarrier pseudoData)
       (restrictMultiplierToCollar collar multiplier)
-      (RawDefect.rawExtractorConstraintDefect
-        projectorData bondField plaquette)
+      (Atoms.rawExtractorConstraintDefect
+        pseudoData bondField plaquette)
 multiplierPairingRestrictsToConstraintCollar
-    projectorData bondField plaquette collar multiplier =
+    pseudoData bondField plaquette collar multiplier =
   Sums.sumRationalCong
-    (Matrix.coordinates (KKT.multiplierCarrier projectorData))
+    (Matrix.coordinates (Pseudo.multiplierCarrier pseudoData))
     (λ row →
       multiplier row
-        * RawDefect.rawExtractorConstraintDefect
-            projectorData bondField plaquette row)
+        * Atoms.rawExtractorConstraintDefect
+            pseudoData bondField plaquette row)
     (λ row →
       restrictMultiplierToCollar collar multiplier row
-        * RawDefect.rawExtractorConstraintDefect
-            projectorData bondField plaquette row)
+        * Atoms.rawExtractorConstraintDefect
+            pseudoData bondField plaquette row)
     (collarRestrictionPreservesPairingTerm collar multiplier)
 
 record OutsideCollarMultiplier
     {Multiplier : Set}
-    {projectorData : KKT.FiniteKKTProjectorData Multiplier}
+    {pseudoData : Pseudo.FiniteKKTPseudoinverseData Multiplier}
     {bondField : Coordinates.PhysicalSU2BondField4}
     {plaquette : Physical.Plaquette4}
     (collar : RawExtractorConstraintCollar
-      projectorData bondField plaquette)
+      pseudoData bondField plaquette)
     (multiplier : Multiplier → ℚ) : Set where
   field
     zeroOnCollar : ∀ row →
@@ -140,15 +146,15 @@ record OutsideCollarMultiplier
 open OutsideCollarMultiplier public
 
 outsideCollarTermZero :
-  ∀ {Multiplier projectorData bondField plaquette}
+  ∀ {Multiplier pseudoData bondField plaquette}
     {collar : RawExtractorConstraintCollar
-      {Multiplier} projectorData bondField plaquette}
+      {Multiplier} pseudoData bondField plaquette}
     {multiplier : Multiplier → ℚ} →
   OutsideCollarMultiplier collar multiplier →
   ∀ row →
   multiplier row
-    * RawDefect.rawExtractorConstraintDefect
-        projectorData bondField plaquette row
+    * Atoms.rawExtractorConstraintDefect
+        pseudoData bondField plaquette row
   ≡ 0ℚ
 outsideCollarTermZero {collar = collar} {multiplier = multiplier}
     outside row with collarMask collar row
@@ -161,29 +167,29 @@ outsideCollarTermZero {collar = collar} {multiplier = multiplier}
 
 outsideCollarMultiplierAnnihilatesDefect :
   ∀ {Multiplier}
-    (projectorData : KKT.FiniteKKTProjectorData Multiplier)
+    (pseudoData : Pseudo.FiniteKKTPseudoinverseData Multiplier)
     bondField plaquette
     (collar : RawExtractorConstraintCollar
-      projectorData bondField plaquette)
+      pseudoData bondField plaquette)
     multiplier →
   OutsideCollarMultiplier collar multiplier →
-  KKT.multiplierDot projectorData multiplier
-    (RawDefect.rawExtractorConstraintDefect
-      projectorData bondField plaquette)
+  Rect.finiteDot (Pseudo.multiplierCarrier pseudoData) multiplier
+    (Atoms.rawExtractorConstraintDefect
+      pseudoData bondField plaquette)
   ≡ 0ℚ
 outsideCollarMultiplierAnnihilatesDefect
-    projectorData bondField plaquette collar multiplier outside =
+    pseudoData bondField plaquette collar multiplier outside =
   trans
     (Sums.sumRationalCong
-      (Matrix.coordinates (KKT.multiplierCarrier projectorData))
+      (Matrix.coordinates (Pseudo.multiplierCarrier pseudoData))
       (λ row →
         multiplier row
-          * RawDefect.rawExtractorConstraintDefect
-              projectorData bondField plaquette row)
+          * Atoms.rawExtractorConstraintDefect
+              pseudoData bondField plaquette row)
       (λ _ → 0ℚ)
       (outsideCollarTermZero outside))
     (Fubini.sumRationalZero
-      (Matrix.coordinates (KKT.multiplierCarrier projectorData)))
+      (Matrix.coordinates (Pseudo.multiplierCarrier pseudoData)))
 
 constraintCollarLocalizationLevel : ProofLevel
 constraintCollarLocalizationLevel = machineChecked
