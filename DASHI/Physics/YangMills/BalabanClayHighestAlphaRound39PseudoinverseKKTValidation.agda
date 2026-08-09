@@ -28,9 +28,6 @@ import DASHI.Physics.YangMills.BalabanP33CovariantD4TransportCocycleBoundaryExac
 import DASHI.Physics.YangMills.BalabanP33PhysicalFactorRoleDeepEnvelopeExact as Roles
 import DASHI.Physics.YangMills.BalabanYangMillsGapAuthorityHierarchyExact as Gap
 
--- Child-branch cumulative validation.
-import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound40MultiplierLocalityValidation
-
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Empty using (⊥)
 open import Data.List.Base using (length)
