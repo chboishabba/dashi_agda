@@ -110,6 +110,8 @@ require_pattern "$validation" 'validationMonsterSplit'
 require_pattern "$validation" 'validationM8NotD4'
 require_pattern "$validation" 'validationChooseTwelveFour'
 require_pattern "$validation" 'validationDecoratedPathsReachSix'
+require_pattern "$validation" 'validationDecoratedPathNodeIntensity'
+require_pattern "$validation" 'validationDecoratedPathCrossTerm'
 require_pattern "$top" 'import DASHI.Moonshine.MathieuDivisorPathInterferenceExact'
 require_pattern "$top" 'import DASHI.Moonshine.SSPJGluingMathieuRound6Validation'
 
