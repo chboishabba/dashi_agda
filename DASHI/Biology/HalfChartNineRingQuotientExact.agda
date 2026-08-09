@@ -86,7 +86,7 @@ identifiedEndpointCount : Nat
 identifiedEndpointCount = 1
 
 quotientCount : Nat
-quotientCount = unfoldedCount - identifiedEndpointCount
+quotientCount = unfoldedCount ∸ identifiedEndpointCount
 
 unfoldedCountIsTen : unfoldedCount ≡ 10
 unfoldedCountIsTen = refl
@@ -94,7 +94,7 @@ unfoldedCountIsTen = refl
 quotientCountIsNine : quotientCount ≡ 9
 quotientCountIsNine = refl
 
-halfUnionCountIsNine : 5 + 5 - 1 ≡ 9
+halfUnionCountIsNine : 5 + 5 ∸ 1 ≡ 9
 halfUnionCountIsNine = refl
 
 data HalfChartRole : Half5 → Set where
