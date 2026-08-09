@@ -19,6 +19,8 @@ files=(
   DASHI/Physics/YangMills/BalabanSelectedBlockAverageSectionExact.agda
   DASHI/Physics/YangMills/BalabanSelectedBlockAverageRowCarrierExact.agda
   DASHI/Physics/YangMills/BalabanSelectedBackgroundCombinedConstraintMatrixExact.agda
+  DASHI/Physics/YangMills/BalabanSelectedCombinedConstraintRowCarrierExact.agda
+  DASHI/Physics/YangMills/BalabanSelectedCombinedConstraintFiniteKKTExact.agda
   DASHI/Physics/YangMills/BalabanSelectedConstraintDimensionTowerExact.agda
   DASHI/Physics/YangMills/BalabanSZZStrongCouplingDecisionExact.agda
   DASHI/Physics/YangMills/BalabanSelectedOwnerBudgetSlackExact.agda
@@ -78,6 +80,11 @@ grep -q 'selectedBackgroundLinearizedConstraintMatrixExact' DASHI/Physics/YangMi
 grep -q 'selectedBackgroundCombinedConstraintApplyExact' DASHI/Physics/YangMills/BalabanSelectedBackgroundCombinedConstraintMatrixExact.agda
 grep -q 'selectedBackgroundConstraintGramExact' DASHI/Physics/YangMills/BalabanSelectedBackgroundCombinedConstraintMatrixExact.agda
 grep -q 'selectedBackgroundConstraintGramOutsideRangeZero' DASHI/Physics/YangMills/BalabanSelectedBackgroundCombinedConstraintMatrixExact.agda
+grep -q 'selectedCombinedConstraintRowCarrier' DASHI/Physics/YangMills/BalabanSelectedCombinedConstraintRowCarrierExact.agda
+grep -q 'selectedCombinedConstraintRowSelectorExact' DASHI/Physics/YangMills/BalabanSelectedCombinedConstraintRowCarrierExact.agda
+grep -q 'selectedCombinedConstraintGramActionExact' DASHI/Physics/YangMills/BalabanSelectedCombinedConstraintFiniteKKTExact.agda
+grep -q 'selectedCombinedConstraintGramQuadraticExact' DASHI/Physics/YangMills/BalabanSelectedCombinedConstraintFiniteKKTExact.agda
+grep -q 'selectedCombinedConstraintGramQuadraticNonnegative' DASHI/Physics/YangMills/BalabanSelectedCombinedConstraintFiniteKKTExact.agda
 grep -q 'selectedCombinedConstraintRowCount' DASHI/Physics/YangMills/BalabanSelectedConstraintDimensionTowerExact.agda
 grep -q 'selectedBackgroundConstraintGramSymmetric' DASHI/Physics/YangMills/BalabanSelectedConstraintDimensionTowerExact.agda
 grep -q 'szzDashiNormalizationExact' DASHI/Physics/YangMills/BalabanSZZStrongCouplingDecisionExact.agda
