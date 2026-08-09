@@ -33,10 +33,12 @@ import DASHI.Physics.YangMills.BalabanP33ConstraintGramD4CovarianceExact as D4
 import DASHI.Physics.YangMills.BalabanP33PhysicalSingletonBudgetOptimizationExact as Optimization
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundCoefficientFieldExact as Coefficients
 import DASHI.Physics.YangMills.BalabanSelectedCorrelatedSingletonClosureExact as Closure
+import DASHI.Physics.YangMills.BalabanSelectedBackgroundVariationSelectorExact as Selector
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Empty using (⊥)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _*_; -_; _≤_)
+open import Data.Rational.Base as ℚ using
+  (ℚ; 0ℚ; _+_; _-_; _*_; -_; _≤_)
 
 correctedSingletonSignRegression :
   ∀ singleton raw pairing →
@@ -68,8 +70,7 @@ literalFieldIsNotRationalClaimRegression =
 
 terminalCorrelatedSingletonRegression :
   ∀ data →
-  - (DASHI.Physics.YangMills.BalabanSelectedBackgroundVariationSelectorExact.remainingSingletonCoefficient
-      * Closure.charge data)
+  - (Selector.remainingSingletonCoefficient * Closure.charge data)
   ≤ Closure.singleton data
 terminalCorrelatedSingletonRegression =
   Closure.selectedCorrelatedSingletonLower
