@@ -24,8 +24,9 @@ files=(
 )
 
 doc=Docs/support/reference/HighestAlphaProducerKernelRound41.md
+index=Docs/support/reference/YangMillsReferenceIndex.md
 
-for file in "${files[@]}" "$doc"; do
+for file in "${files[@]}" "$doc" "$index"; do
   test -f "$file"
 done
 
@@ -36,6 +37,8 @@ fi
 
 grep -q 'PhysicalProducer' DASHI/Physics/Common/PhysicalProducerMaturityExact.agda
 grep -q 'sameCarrierCompositeExact' DASHI/Physics/Common/PhysicalProducerMaturityExact.agda
+grep -q 'sourceRepresentsIntermediate' DASHI/Physics/Common/PhysicalProducerMaturityExact.agda
+grep -q 'intermediateRepresentsOutput' DASHI/Physics/Common/PhysicalProducerMaturityExact.agda
 
 grep -q 'finiteLinearFunctionalCoordinateExpansion' DASHI/Physics/YangMills/BalabanFiniteLinearFunctionalCoordinatesExact.agda
 grep -q 'selectedBackgroundGaugeConstraintMatrix' DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeConstraintMatrixExact.agda
@@ -50,6 +53,8 @@ grep -q 'literalSelectedPlaquetteWitnessToCorrelatedExtractionData' DASHI/Physic
 grep -q 'recoveryStepTransfersUniformGap' DASHI/Physics/YangMills/BalabanMoscoRecoveryGapTransferExact.agda
 grep -q 'liminfOnlyCounterexampleLimitGapWouldBeOneBelowZero' DASHI/Physics/YangMills/BalabanMoscoRecoveryGapTransferExact.agda
 
+grep -q 'physicalStateRepresentsEncoding' DASHI/Physics/Closure/NSGalerkinSameObjectExact.agda
+grep -q 'encodingRepresentsCoefficientFunction' DASHI/Physics/Closure/NSGalerkinSameObjectExact.agda
 grep -q 'velocityAtPositiveExact' DASHI/Physics/Closure/NSGalerkinSameObjectExact.agda
 grep -q 'velocityAtNegativeExact' DASHI/Physics/Closure/NSGalerkinSameObjectExact.agda
 grep -q 'retainedModesExact' DASHI/Physics/Closure/NSGalerkinSameObjectExact.agda
@@ -57,7 +62,8 @@ grep -q 'actualTriadCancellationExact' DASHI/Physics/Closure/NSGalerkinSameObjec
 grep -q 'rawHHBadCostDoubles' DASHI/Physics/Closure/NSHHBadScaleGainFalsificationExact.agda
 grep -q 'requiredHHBadGainCalibration' DASHI/Physics/Closure/NSHHBadScaleGainFalsificationExact.agda
 grep -q 'physicalHHBadEstimateFromScaleGain' DASHI/Physics/Closure/NSHHBadScaleGainFalsificationExact.agda
-grep -q 'ForbiddenCircularDependency' DASHI/Physics/Closure/NSAdmissibleRemainderGrammarExact.agda
+grep -q 'RemainderSourceAuthority' DASHI/Physics/Closure/NSAdmissibleRemainderGrammarExact.agda
+grep -q 'NoForbiddenDependency' DASHI/Physics/Closure/NSAdmissibleRemainderGrammarExact.agda
 grep -q 'nineOwnerAbsorptionWithSlack' DASHI/Physics/Closure/NSNineOwnerStrictSlackExact.agda
 
 grep -q '10.1007/BF01466594' DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeConstraintMatrixExact.agda
@@ -73,6 +79,7 @@ grep -q 'Delta_NS' "$doc"
 grep -q 'Mosco recovery' "$doc"
 grep -q 'raw Bernstein' "$doc"
 grep -q 'gauge-fixing component' "$doc"
+grep -Fq '(./HighestAlphaProducerKernelRound41.md)' "$index"
 
 scripts/run_agda29_parallel_check.sh \
   DASHI/Physics/HighestAlphaProducerKernelRound41Validation.agda
