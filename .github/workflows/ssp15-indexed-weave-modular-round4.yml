@@ -10,6 +10,7 @@ on:
     paths:
       - 'DASHI/Core/IndexedWeaveHyperfabricExact.agda'
       - 'DASHI/Biology/SSPIndexedWeaveHyperfabricExact.agda'
+      - 'DASHI/Biology/SSPHyperfibreLawfulUpgradeExact.agda'
       - 'DASHI/Biology/ModularCoarseFineAddressFibrationExact.agda'
       - 'DASHI/Biology/SSPIndexedWeaveModularIntegrationExact.agda'
       - 'DASHI/Biology/LayeredBindingSystemExact.agda'
