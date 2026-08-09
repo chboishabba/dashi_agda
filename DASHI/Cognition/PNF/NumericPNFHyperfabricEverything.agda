@@ -12,6 +12,7 @@ open import DASHI.Cognition.PNF.BoundedMDLPlanner public
 open import DASHI.Cognition.PNF.BoundedInterfaceSketch public
 open import DASHI.Cognition.PNF.ParentInterfaceReduction public
 open import DASHI.Cognition.PNF.SparseFibredFrontier public
+open import DASHI.Cognition.PNF.SparseFrontierConstraints public
 open import DASHI.Cognition.PNF.DirectDemandLookup public
 open import DASHI.Cognition.PNF.SetBasedDemandPlanning public
 open import DASHI.Cognition.PNF.NumericPNFCompilation public
