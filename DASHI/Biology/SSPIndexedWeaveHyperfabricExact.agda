@@ -143,8 +143,11 @@ transportSSPComposition (lanePath q) (lanePath p) state =
 SSPResidual : SSP.SSPPrime → Set
 SSPResidual lane = LaneParity
 
-zeroSSPResidual : (lane : SSP.SSPPrime) → SSPResidual lane
-zeroSSPResidual lane = preserveParity
+sspStateResidual :
+  (lane : SSP.SSPPrime) →
+  SSPWeaveState lane →
+  SSPResidual lane
+sspStateResidual lane state = preserveParity
 
 sspResidualAfter :
   {source target : SSP.SSPPrime} →
@@ -156,7 +159,8 @@ sspResidualAfter path state = pathParity path
 sspResidualIdentity :
   (lane : SSP.SSPPrime) →
   (state : SSPWeaveState lane) →
-  sspResidualAfter (identitySSPPath lane) state ≡ zeroSSPResidual lane
+  sspResidualAfter (identitySSPPath lane) state
+  ≡ sspStateResidual lane state
 sspResidualIdentity lane state = refl
 
 canonicalSSPIndexedWeave :
@@ -173,7 +177,7 @@ canonicalSSPIndexedWeave =
     ; transportId = transportSSPIdentity
     ; transportComp = transportSSPComposition
     ; Residual = SSPResidual
-    ; zeroResidual = zeroSSPResidual
+    ; stateResidual = sspStateResidual
     ; residualAfter = sspResidualAfter
     ; residualId = sspResidualIdentity
     }
