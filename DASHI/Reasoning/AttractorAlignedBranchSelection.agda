@@ -56,27 +56,114 @@ open BranchMetric public
 data InteractionDirection : Set where
   reinforcing independent interfering : InteractionDirection
 
-record BranchInteraction : Set where
-  constructor branchInteraction
+------------------------------------------------------------------------
+-- Typed unordered interaction matrix.
+--
+-- A PairInteraction is indexed by its two actual branch values.  Validated
+-- interactions form an upper-triangular matrix over the portfolio list:
+--
+--   * no diagonal cell exists, so self-interaction cannot be entered;
+--   * exactly one cell exists for each unordered pair of list positions;
+--   * each cell is either absent or carries one typed interaction;
+--   * foreign string-labelled endpoints cannot contribute to portfolio value.
+------------------------------------------------------------------------
+
+record PairInteraction (left right : BranchMetric) : Set where
+  constructor pairInteraction
   field
-    leftBranchLabel rightBranchLabel : String
     interactionDirection : InteractionDirection
     interactionMagnitude : Nat
     interactionReceipt : String
 
-open BranchInteraction public
+open PairInteraction public
 
-constructiveMass : BranchInteraction → Nat
-constructiveMass interaction with interactionDirection interaction
+data InteractionCell (left right : BranchMetric) : Set where
+  noInteraction : InteractionCell left right
+  presentInteraction : PairInteraction left right → InteractionCell left right
+
+data InteractionRow (left : BranchMetric) : List BranchMetric → Set where
+  rowNil : InteractionRow left []
+  rowCons :
+    ∀ {right rest} →
+    InteractionCell left right →
+    InteractionRow left rest →
+    InteractionRow left (right ∷ rest)
+
+data ValidatedInteractions : List BranchMetric → Set where
+  matrixNil : ValidatedInteractions []
+  matrixCons :
+    ∀ {left rest} →
+    InteractionRow left rest →
+    ValidatedInteractions rest →
+    ValidatedInteractions (left ∷ rest)
+
+cellConstructiveMass :
+  ∀ {left right} → InteractionCell left right → Nat
+cellConstructiveMass noInteraction = zero
+cellConstructiveMass (presentInteraction interaction)
+  with interactionDirection interaction
 ... | reinforcing = interactionMagnitude interaction
 ... | independent = zero
 ... | interfering = zero
 
-destructiveMass : BranchInteraction → Nat
-destructiveMass interaction with interactionDirection interaction
+cellDestructiveMass :
+  ∀ {left right} → InteractionCell left right → Nat
+cellDestructiveMass noInteraction = zero
+cellDestructiveMass (presentInteraction interaction)
+  with interactionDirection interaction
 ... | reinforcing = zero
 ... | independent = zero
 ... | interfering = interactionMagnitude interaction
+
+rowConstructiveMass :
+  ∀ {left rest} → InteractionRow left rest → Nat
+rowConstructiveMass rowNil = zero
+rowConstructiveMass (rowCons cell row) =
+  cellConstructiveMass cell + rowConstructiveMass row
+
+rowDestructiveMass :
+  ∀ {left rest} → InteractionRow left rest → Nat
+rowDestructiveMass rowNil = zero
+rowDestructiveMass (rowCons cell row) =
+  cellDestructiveMass cell + rowDestructiveMass row
+
+sumConstructiveMass :
+  ∀ {branches} → ValidatedInteractions branches → Nat
+sumConstructiveMass matrixNil = zero
+sumConstructiveMass (matrixCons row matrix) =
+  rowConstructiveMass row + sumConstructiveMass matrix
+
+sumDestructiveMass :
+  ∀ {branches} → ValidatedInteractions branches → Nat
+sumDestructiveMass matrixNil = zero
+sumDestructiveMass (matrixCons row matrix) =
+  rowDestructiveMass row + sumDestructiveMass matrix
+
+emptyInteractionRow :
+  (left : BranchMetric) →
+  (rest : List BranchMetric) →
+  InteractionRow left rest
+emptyInteractionRow left [] = rowNil
+emptyInteractionRow left (right ∷ rest) =
+  rowCons noInteraction (emptyInteractionRow left rest)
+
+emptyInteractionMatrix :
+  (branches : List BranchMetric) →
+  ValidatedInteractions branches
+emptyInteractionMatrix [] = matrixNil
+emptyInteractionMatrix (left ∷ rest) =
+  matrixCons
+    (emptyInteractionRow left rest)
+    (emptyInteractionMatrix rest)
+
+twoBranchInteractionMatrix :
+  ∀ {left right} →
+  PairInteraction left right →
+  ValidatedInteractions (left ∷ right ∷ [])
+twoBranchInteractionMatrix interaction =
+  matrixCons
+    (rowCons (presentInteraction interaction) rowNil)
+    (matrixCons rowNil matrixNil)
 
 sumBranchBenefit : List BranchMetric → Nat
 sumBranchBenefit [] = zero
@@ -93,22 +180,12 @@ sumBranchBurden (branch ∷ branches) =
   + diversionCost branch
   + sumBranchBurden branches
 
-sumConstructiveMass : List BranchInteraction → Nat
-sumConstructiveMass [] = zero
-sumConstructiveMass (interaction ∷ interactions) =
-  constructiveMass interaction + sumConstructiveMass interactions
-
-sumDestructiveMass : List BranchInteraction → Nat
-sumDestructiveMass [] = zero
-sumDestructiveMass (interaction ∷ interactions) =
-  destructiveMass interaction + sumDestructiveMass interactions
-
 record BranchPortfolio : Set where
   constructor branchPortfolio
   field
     portfolioLabel : String
     branches : List BranchMetric
-    interactions : List BranchInteraction
+    interactions : ValidatedInteractions branches
     availableCapacity : Nat
     portfolioReceipt : String
 
@@ -213,7 +290,7 @@ emptyPortfolio =
   branchPortfolio
     "empty"
     []
-    []
+    matrixNil
     10
     "no live branch"
 
@@ -282,20 +359,16 @@ trapBranch =
     false
     "high immediate utility with adverse global drift"
 
-reinforcingAB : BranchInteraction
+reinforcingAB : PairInteraction alignedBranchA alignedBranchB
 reinforcingAB =
-  branchInteraction
-    "aligned-a"
-    "aligned-b"
+  pairInteraction
     reinforcing
     2
     "shared evidence and compatible work reinforce both branches"
 
-destructiveAB : BranchInteraction
+destructiveAB : PairInteraction alignedBranchA alignedBranchB
 destructiveAB =
-  branchInteraction
-    "aligned-a"
-    "aligned-b"
+  pairInteraction
     interfering
     8
     "incompatible requirements dominate their separate positive drift"
@@ -305,7 +378,7 @@ portfolioA =
   branchPortfolio
     "a-only"
     (alignedBranchA ∷ [])
-    []
+    (emptyInteractionMatrix (alignedBranchA ∷ []))
     10
     "single aligned branch"
 
@@ -314,7 +387,7 @@ portfolioB =
   branchPortfolio
     "b-only"
     (alignedBranchB ∷ [])
-    []
+    (emptyInteractionMatrix (alignedBranchB ∷ []))
     10
     "second individually useful branch"
 
@@ -323,7 +396,7 @@ constructivePortfolio =
   branchPortfolio
     "constructive-a-b"
     (alignedBranchA ∷ alignedBranchB ∷ [])
-    (reinforcingAB ∷ [])
+    (twoBranchInteractionMatrix reinforcingAB)
     10
     "two aligned branches with constructive interaction"
 
@@ -332,7 +405,7 @@ destructivePortfolio =
   branchPortfolio
     "destructive-a-b"
     (alignedBranchA ∷ alignedBranchB ∷ [])
-    (destructiveAB ∷ [])
+    (twoBranchInteractionMatrix destructiveAB)
     10
     "two individually useful branches with larger destructive interaction"
 
@@ -341,7 +414,7 @@ noisePortfolio =
   branchPortfolio
     "a-plus-noise"
     (alignedBranchA ∷ noiseBranch ∷ [])
-    []
+    (emptyInteractionMatrix (alignedBranchA ∷ noiseBranch ∷ []))
     10
     "nominal option count rises but benefit does not"
 
@@ -350,7 +423,7 @@ explorationPortfolio =
   branchPortfolio
     "exploration-only"
     (explorationBranch ∷ [])
-    []
+    (emptyInteractionMatrix (explorationBranch ∷ []))
     10
     "information value makes a zero-drift branch useful"
 
@@ -359,7 +432,7 @@ trapPortfolio =
   branchPortfolio
     "trap-only"
     (trapBranch ∷ [])
-    []
+    (emptyInteractionMatrix (trapBranch ∷ []))
     10
     "locally attractive but globally adverse"
 
@@ -426,7 +499,8 @@ optionNoisePortfolio =
   branchPortfolio
     "three-label-one-basin"
     (sameBasinOne ∷ sameBasinTwo ∷ sameBasinThree ∷ [])
-    []
+    (emptyInteractionMatrix
+      (sameBasinOne ∷ sameBasinTwo ∷ sameBasinThree ∷ []))
     10
     "nominal diversity collapses after basin quotient"
 
@@ -469,6 +543,7 @@ record AttractorSelectionAuthorityBoundary : Set where
     neutralDriftMeansNoInformationValue : Bool
     individuallyUsefulBranchesAlwaysCombineUsefully : Bool
     nominalOptionCountEqualsEffectiveBasinCount : Bool
+    arbitraryOrDuplicatePairEntriesAffectValue : Bool
     scalarWeightsAreMorallyCanonical : Bool
     boundaryNote : String
 
@@ -480,7 +555,8 @@ canonicalAttractorSelectionAuthorityBoundary = record
   ; neutralDriftMeansNoInformationValue = false
   ; individuallyUsefulBranchesAlwaysCombineUsefully = false
   ; nominalOptionCountEqualsEffectiveBasinCount = false
+  ; arbitraryOrDuplicatePairEntriesAffectValue = false
   ; scalarWeightsAreMorallyCanonical = false
   ; boundaryNote =
-      "The finite ledger proves exact examples of constructive gain, option noise, destructive interaction, exploration value and trap attraction. It does not claim that one scalarization is morally canonical or empirically estimated for a person."
+      "Portfolio interactions form an upper-triangular typed matrix: no diagonal cell and one cell per unordered branch-position pair. The finite ledger proves exact examples of constructive gain, option noise, destructive interaction, exploration value and trap attraction without claiming a morally canonical scalarization."
   }
