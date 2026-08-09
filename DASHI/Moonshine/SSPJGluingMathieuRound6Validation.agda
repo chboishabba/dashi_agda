@@ -87,6 +87,16 @@ validationDecoratedPathsReachSix :
   ≡ 6
 validationDecoratedPathsReachSix = Path.canonicalHistoriesReachSix
 
+validationDecoratedPathNodeIntensity :
+  Path.nodeIntensity Path.canonicalPhaseDecoratedConfluence
+  ≡ Eisenstein.qOne
+validationDecoratedPathNodeIntensity = Path.canonicalNodeIntensityIsOne
+
+validationDecoratedPathCrossTerm :
+  Path.pathCrossTerm Path.canonicalPhaseDecoratedConfluence
+  ≡ Eisenstein.qMinusOne
+validationDecoratedPathCrossTerm = Path.canonicalPathCrossIsMinusOne
+
 validationPointedTen : Integration.pointedTenCount ≡ 10
 validationPointedTen = Integration.pointedTenCountIsTen
 
