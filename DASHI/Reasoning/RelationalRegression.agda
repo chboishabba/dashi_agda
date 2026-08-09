@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 open import Data.Integer using (ℤ; +_) renaming (_+_ to _+ℤ_)
 
+import DASHI.Cognition.PNF.TraumaMemoryHypervoxelBridge as TraumaPNF
 import DASHI.Reasoning.RelationalStateCore as Core
 import DASHI.Reasoning.RelationalSharedStateUpdate as Shared
 import DASHI.Reasoning.ConditionalResponseTree as Response
@@ -12,6 +13,7 @@ import DASHI.Reasoning.IntergenerationalNameIntrusion as Slip
 import DASHI.Reasoning.AttractorAlignedBranchSelection as Selection
 import DASHI.Reasoning.RelationalBranchInterference as Interference
 import DASHI.Reasoning.RelationalProcessMemoryHyperfabric as Process
+import DASHI.Reasoning.DevelopmentalAttunementPNFBridge as Developmental
 import DASHI.Reasoning.RelationalFormalismSourceAtlas as Sources
 
 parent : Core.Participant
@@ -90,7 +92,7 @@ considerNodeIsNotCommitNode :
 considerNodeIsNotCommitNode = refl
 
 sourceCountRegression :
-  Sources.canonicalRelationalSourceCount ≡ 10
+  Sources.canonicalRelationalSourceCount ≡ 15
 sourceCountRegression = refl
 
 processBoundaryRejectsMoreIsAlwaysBetter :
@@ -112,6 +114,52 @@ repairPreservesBothQuestions = refl
 sharedStateRequiresAllegationParticulars :
   Shared.allegationsRequireParticulars Shared.canonicalSharedStateInvariants ≡ true
 sharedStateRequiresAllegationParticulars = refl
+
+------------------------------------------------------------------------
+-- Exact developmental-attunement regressions.
+------------------------------------------------------------------------
+
+developmentalAttentionQuantityAgrees :
+  Developmental.attentionMass Developmental.stableTrace
+  ≡ Developmental.attentionMass Developmental.fragmentedTrace
+developmentalAttentionQuantityAgrees =
+  Developmental.sameAttention
+    Developmental.canonicalFragmentationWitness
+
+developmentalUptakeQuantityAgrees :
+  Developmental.uptakeMass Developmental.stableTrace
+  ≡ Developmental.uptakeMass Developmental.fragmentedTrace
+developmentalUptakeQuantityAgrees =
+  Developmental.sameUptakeQuantity
+    Developmental.canonicalFragmentationWitness
+
+developmentalFragmentedTraceHasTwoAdditionalSwitches :
+  Developmental.switchCount Developmental.fragmentedTrace
+  ≡ suc (suc (Developmental.switchCount Developmental.stableTrace))
+developmentalFragmentedTraceHasTwoAdditionalSwitches =
+  Developmental.twoAdditionalSwitches
+    Developmental.canonicalFragmentationWitness
+
+developmentalFragmentedTraceHasTwoAdditionalBurdenUnits :
+  Developmental.traceTotalBurden Developmental.fragmentedTrace
+  ≡ suc (suc (Developmental.traceTotalBurden Developmental.stableTrace))
+developmentalFragmentedTraceHasTwoAdditionalBurdenUnits =
+  Developmental.twoAdditionalTotalBurden
+    Developmental.canonicalFragmentationWitness
+
+developmentalTraumaPNFReuseIsCanonical :
+  Developmental.traumaMemoryHypervoxelBoundary
+    Developmental.canonicalExistingTraumaPNFHyperformalismReuse
+  ≡ TraumaPNF.canonicalTraumaMemoryHypervoxelAuthorityBoundary
+developmentalTraumaPNFReuseIsCanonical =
+  Developmental.traumaMemoryHypervoxelBoundaryIsCanonical
+    Developmental.canonicalExistingTraumaPNFHyperformalismReuse
+
+developmentalFiniteTraceDoesNotDiagnose :
+  Developmental.oneFiniteTraceEstablishesStableCharacter
+    Developmental.canonicalDevelopmentalAttunementAuthorityBoundary
+  ≡ false
+developmentalFiniteTraceDoesNotDiagnose = refl
 
 ------------------------------------------------------------------------
 -- Exact attractor-selection regressions.
