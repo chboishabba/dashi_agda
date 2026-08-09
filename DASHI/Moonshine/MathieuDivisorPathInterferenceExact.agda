@@ -17,9 +17,10 @@ module DASHI.Moonshine.MathieuDivisorPathInterferenceExact where
 -- the divisor lattice; it is not asserted to be physical quantum dynamics.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Integer.Base using (+_)
-open import Data.Rational.Base using (0ℚ)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _-_)
 
 import DASHI.Biology.EisensteinNineRingInterferenceExact as Eisenstein
 import DASHI.Moonshine.MathieuDivisorLatticeExact as Divisor
@@ -54,22 +55,22 @@ nodeAmplitude : HistoryAmplitudePair → Eisenstein.Eisenstein
 nodeAmplitude pair =
   Eisenstein.add (leftAmplitude pair) (rightAmplitude pair)
 
-nodeIntensity : HistoryAmplitudePair → Data.Rational.Base.ℚ
+nodeIntensity : HistoryAmplitudePair → ℚ
 nodeIntensity pair = Eisenstein.norm (nodeAmplitude pair)
 
-diagonalIntensity : HistoryAmplitudePair → Data.Rational.Base.ℚ
+diagonalIntensity : HistoryAmplitudePair → ℚ
 diagonalIntensity pair =
   Eisenstein.norm (leftAmplitude pair)
-  Data.Rational.Base.+ Eisenstein.norm (rightAmplitude pair)
+  + Eisenstein.norm (rightAmplitude pair)
 
-pathCrossTerm : HistoryAmplitudePair → Data.Rational.Base.ℚ
+pathCrossTerm : HistoryAmplitudePair → ℚ
 pathCrossTerm pair =
   Eisenstein.crossTerm (leftAmplitude pair) (rightAmplitude pair)
 
 nodeInterferenceIdentity :
   (pair : HistoryAmplitudePair) →
   nodeIntensity pair
-  ≡ diagonalIntensity pair Data.Rational.Base.+ pathCrossTerm pair
+  ≡ diagonalIntensity pair + pathCrossTerm pair
 nodeInterferenceIdentity
   (historyAmplitudePair histories left right) =
   Eisenstein.normPolarization left right
@@ -96,12 +97,12 @@ canonicalDiagonalIntensityIsTwo :
 canonicalDiagonalIntensityIsTwo = refl
 
 canonicalPathCrossIsMinusOne :
-  pathCrossTerm canonicalPhaseDecoratedConfluence ≡ 0ℚ Data.Rational.Base.- (+ 1)
+  pathCrossTerm canonicalPhaseDecoratedConfluence ≡ 0ℚ - (+ 1)
 canonicalPathCrossIsMinusOne = refl
 
 canonicalInterferenceLedger :
   diagonalIntensity canonicalPhaseDecoratedConfluence
-  Data.Rational.Base.+ pathCrossTerm canonicalPhaseDecoratedConfluence
+  + pathCrossTerm canonicalPhaseDecoratedConfluence
   ≡ + 1
 canonicalInterferenceLedger = refl
 
