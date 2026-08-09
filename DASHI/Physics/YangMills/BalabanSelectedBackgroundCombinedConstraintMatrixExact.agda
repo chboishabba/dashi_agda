@@ -30,7 +30,7 @@ module DASHI.Physics.YangMills.BalabanSelectedBackgroundCombinedConstraintMatrix
 -- same 3072-coordinate perturbation vector.  The combined matrix is defined
 -- by cases, its action reduces exactly to each physical component, and its
 -- Gram matrix is the literal L_A L_A*.  Block identities and a generic
--- pointwise-disjointness theorem close finite range without assuming an
+-- pointwise-disjointness theorem close finite range without accepting an
 -- independently supplied compatible block matrix.
 ------------------------------------------------------------------------
 
@@ -39,12 +39,15 @@ open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _*_)
 open import Relation.Binary.PropositionalEquality using (trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.Common.SameSourceGluedProducerExact as Product
 import DASHI.Physics.YangMills.BalabanConstructiveRationalMatrixInverseExact as Matrix
 import DASHI.Physics.YangMills.BalabanFiniteRectangularRationalExact as Rect
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
 import DASHI.Physics.YangMills.BalabanFiniteSumFubiniExact as Fubini
 import DASHI.Physics.YangMills.BalabanP33FiniteKKTAdmissibleProjectorExact as KKT
+import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Coordinates
 import DASHI.Physics.YangMills.BalabanP33PhysicalFlatGaugeDivergenceIdentificationExact as FlatGauge
+import DASHI.Physics.YangMills.BalabanP33PhysicalBackgroundGaugeFirstExact as GaugePhysical
 import DASHI.Physics.YangMills.BalabanP33PhysicalRationalWilsonPlaquetteJetExact as Physical
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundBlockAverageConstraintMatrixExact as Average
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundGaugeConstraintMatrixExact as Gauge
@@ -69,15 +72,20 @@ selectedBackgroundLinearizedConstraintMatrix background
     (gaugeConstraintRow row) column =
   Gauge.selectedBackgroundGaugeConstraintMatrix background row column
 
+selectedConstraintMatrixComponent :
+  Physical.RationalSU2Background4 →
+  SelectedConstraintRow4 → KKT.State → ℚ
+selectedConstraintMatrixComponent background
+    (averageConstraintRow row) column =
+  Average.selectedBackgroundBlockAverageConstraintMatrix row column
+selectedConstraintMatrixComponent background
+    (gaugeConstraintRow row) column =
+  Gauge.selectedBackgroundGaugeConstraintMatrix background row column
+
 selectedBackgroundLinearizedConstraintMatrixExact :
   ∀ background row column →
   selectedBackgroundLinearizedConstraintMatrix background row column
-  ≡
-  (case row of λ where
-    (averageConstraintRow averageRow) →
-      Average.selectedBackgroundBlockAverageConstraintMatrix averageRow column
-    (gaugeConstraintRow gaugeRow) →
-      Gauge.selectedBackgroundGaugeConstraintMatrix background gaugeRow column)
+  ≡ selectedConstraintMatrixComponent background row column
 selectedBackgroundLinearizedConstraintMatrixExact
   background (averageConstraintRow row) column = refl
 selectedBackgroundLinearizedConstraintMatrixExact
@@ -90,28 +98,22 @@ selectedBackgroundCombinedConstraintApply background =
   Rect.applyRectangular KKT.physicalStateCarrier
     (selectedBackgroundLinearizedConstraintMatrix background)
 
+selectedPhysicalConstraintValue :
+  Physical.RationalSU2Background4 →
+  KKT.StateVector → SelectedConstraintRow4 → ℚ
+selectedPhysicalConstraintValue background vector
+    (averageConstraintRow row) =
+  Average.physicalSelectedBlockAverage
+    (Coordinates.decodePhysicalSU2 vector) row
+selectedPhysicalConstraintValue background vector
+    (gaugeConstraintRow row) =
+  GaugePhysical.backgroundGaugeFirst background
+    (Coordinates.decodePhysicalSU2 vector) row
+
 selectedBackgroundCombinedConstraintApplyExact :
   ∀ background vector row →
   selectedBackgroundCombinedConstraintApply background vector row
-  ≡
-  (case row of λ where
-    (averageConstraintRow averageRow) →
-      Average.physicalSelectedBlockAverage
-        (PhysicalField vector) averageRow
-    (gaugeConstraintRow gaugeRow) →
-      GaugePhysical background vector gaugeRow)
-  where
-    PhysicalField : KKT.StateVector →
-      DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact.PhysicalSU2BondField4
-    PhysicalField =
-      DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact.decodePhysicalSU2
-
-    GaugePhysical :
-      Physical.RationalSU2Background4 → KKT.StateVector →
-      FlatGauge.GaugeCoordinate4 → ℚ
-    GaugePhysical selectedBackground selectedVector =
-      DASHI.Physics.YangMills.BalabanP33PhysicalBackgroundGaugeFirstExact.backgroundGaugeFirst
-        selectedBackground (PhysicalField selectedVector)
+  ≡ selectedPhysicalConstraintValue background vector row
 selectedBackgroundCombinedConstraintApplyExact
   background vector (averageConstraintRow row) =
   Average.selectedBackgroundBlockAverageConstraintPhysicalExact vector row
@@ -120,8 +122,7 @@ selectedBackgroundCombinedConstraintApplyExact
   Gauge.selectedBackgroundGaugeConstraintMatrixApplyExact background vector row
 
 ------------------------------------------------------------------------
--- Same-source product form.  This is the exact bridge to the generic gluing
--- architecture already used by Round 41.
+-- Same-source product form.
 ------------------------------------------------------------------------
 
 selectedConstraintCharts :
@@ -143,25 +144,23 @@ selectedConstraintCharts background = record
 
 selectedBackgroundCombinedConstraint :
   Physical.RationalSU2Background4 → KKT.StateVector →
-  (Average.SelectedBlockAverageRow4 → ℚ)
-    DASHI.Physics.Common.SameSourceGluedProducerExact.×
-  (FlatGauge.GaugeCoordinate4 → ℚ)
+  Product._×_
+    (Average.SelectedBlockAverageRow4 → ℚ)
+    (FlatGauge.GaugeCoordinate4 → ℚ)
 selectedBackgroundCombinedConstraint background =
   Gluing.selectedBackgroundCombinedConstraint
     (selectedConstraintCharts background)
 
 selectedBackgroundCombinedConstraintCommutesWithProjections :
   ∀ background →
-  (∀ vector →
-    DASHI.Physics.Common.SameSourceGluedProducerExact.fst
-      (selectedBackgroundCombinedConstraint background vector)
-    ≡ Average.selectedBackgroundBlockAverageConstraintApply vector)
-  DASHI.Physics.Common.SameSourceGluedProducerExact.×
-  (∀ vector →
-    DASHI.Physics.Common.SameSourceGluedProducerExact.snd
-      (selectedBackgroundCombinedConstraint background vector)
-    ≡ Rect.applyRectangular KKT.physicalStateCarrier
-        (Gauge.selectedBackgroundGaugeConstraintMatrix background) vector)
+  Product._×_
+    (∀ vector →
+      Product.fst (selectedBackgroundCombinedConstraint background vector)
+      ≡ Average.selectedBackgroundBlockAverageConstraintApply vector)
+    (∀ vector →
+      Product.snd (selectedBackgroundCombinedConstraint background vector)
+      ≡ Rect.applyRectangular KKT.physicalStateCarrier
+          (Gauge.selectedBackgroundGaugeConstraintMatrix background) vector)
 selectedBackgroundCombinedConstraintCommutesWithProjections background =
   Gluing.selectedBackgroundCombinedConstraintCommutesWithProjections
     (selectedConstraintCharts background)
@@ -169,13 +168,13 @@ selectedBackgroundCombinedConstraintCommutesWithProjections background =
 selectedBackgroundCombinedConstraintUnique :
   ∀ background
     (candidate : KKT.StateVector →
-      (Average.SelectedBlockAverageRow4 → ℚ)
-        DASHI.Physics.Common.SameSourceGluedProducerExact.×
-      (FlatGauge.GaugeCoordinate4 → ℚ))
+      Product._×_
+        (Average.SelectedBlockAverageRow4 → ℚ)
+        (FlatGauge.GaugeCoordinate4 → ℚ))
     vector →
-  DASHI.Physics.Common.SameSourceGluedProducerExact.fst (candidate vector)
+  Product.fst (candidate vector)
     ≡ Average.selectedBackgroundBlockAverageConstraintApply vector →
-  DASHI.Physics.Common.SameSourceGluedProducerExact.snd (candidate vector)
+  Product.snd (candidate vector)
     ≡ Rect.applyRectangular KKT.physicalStateCarrier
         (Gauge.selectedBackgroundGaugeConstraintMatrix background) vector →
   candidate vector ≡ selectedBackgroundCombinedConstraint background vector
@@ -201,10 +200,8 @@ selectedBackgroundConstraintGramExact :
   selectedBackgroundConstraintGram background left right
   ≡ Sums.sumRational (Matrix.coordinates KKT.physicalStateCarrier)
       (λ column →
-        selectedBackgroundLinearizedConstraintMatrix
-          background left column
-        * selectedBackgroundLinearizedConstraintMatrix
-          background right column)
+        selectedBackgroundLinearizedConstraintMatrix background left column
+        * selectedBackgroundLinearizedConstraintMatrix background right column)
 selectedBackgroundConstraintGramExact background left right = refl
 
 selectedBackgroundConstraintGramGaugeBlockExact :
