@@ -54,7 +54,7 @@ monsterPrimaryDepth Lane.p59 = 1
 monsterPrimaryDepth Lane.p71 = 1
 
 record OggWidthDepthProfile (prime : Lane.MonsterPrimeLane) : Set where
-  constructor oggWidthDepthProfile
+  constructor mkOggWidthDepthProfile
   field
     phaseResolution : Nat
     primaryDepth : Nat
@@ -65,11 +65,11 @@ record OggWidthDepthProfile (prime : Lane.MonsterPrimeLane) : Set where
 
 open OggWidthDepthProfile public
 
-oggWidthDepthProfile :
+canonicalOggWidthDepthProfile :
   (prime : Lane.MonsterPrimeLane) →
   OggWidthDepthProfile prime
-oggWidthDepthProfile prime =
-  oggWidthDepthProfile
+canonicalOggWidthDepthProfile prime =
+  mkOggWidthDepthProfile
     (Lane.monsterPrimeLaneToNat prime)
     (monsterPrimaryDepth prime)
     refl
@@ -136,7 +136,7 @@ iterate (suc n) step state = step (iterate n step state)
 
 record OggNestedEigenCarrier
   (prime : Lane.MonsterPrimeLane) : Set₁ where
-  constructor oggNestedEigenCarrier
+  constructor mkOggNestedEigenCarrier
   field
     State : Set
     Phase : Set
@@ -166,7 +166,7 @@ open OggNestedEigenCarrier public
 record FrickeEigenInversionBridge
   {prime : Lane.MonsterPrimeLane}
   (carrier : OggNestedEigenCarrier prime) : Set₁ where
-  constructor frickeEigenInversionBridge
+  constructor mkFrickeEigenInversionBridge
   field
     fricke : State carrier → State carrier
     frickeInvolutive :
@@ -177,7 +177,7 @@ record FrickeEigenInversionBridge
       ≡ phaseInverse carrier (phaseObservation carrier state)
 
 record ActualNestedEigenCarrierBoundary : Set where
-  constructor actualNestedEigenCarrierBoundary
+  constructor mkActualNestedEigenCarrierBoundary
   field
     actualOggNestedCarrierConstructed : Bool
     actualOggNestedCarrierConstructedIsFalse :
@@ -186,6 +186,6 @@ record ActualNestedEigenCarrierBoundary : Set where
     actualFrickeEigenInversionBridgeConstructedIsFalse :
       actualFrickeEigenInversionBridgeConstructed ≡ false
 
-actualNestedEigenCarrierBoundary : ActualNestedEigenCarrierBoundary
-actualNestedEigenCarrierBoundary =
-  actualNestedEigenCarrierBoundary false refl false refl
+canonicalActualNestedEigenCarrierBoundary : ActualNestedEigenCarrierBoundary
+canonicalActualNestedEigenCarrierBoundary =
+  mkActualNestedEigenCarrierBoundary false refl false refl
