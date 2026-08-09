@@ -15,6 +15,7 @@ files=(
   DASHI/Physics/YangMills/BalabanSelectedConstraintAtomGreenExpansionExact.agda
   DASHI/Physics/YangMills/BalabanSelectedMultiplierDefectGreenContractionExact.agda
   DASHI/Physics/YangMills/BalabanSelectedCorrelatedResidualOwnershipExact.agda
+  DASHI/Physics/YangMills/BalabanSelectedCorrelatedResidualAuthorityExact.agda
   DASHI/Physics/YangMills/BalabanSelectedConstraintGramCombesThomasExact.agda
   DASHI/Physics/YangMills/BalabanSelectedKKTMultiplierLocalityExact.agda
   DASHI/Physics/YangMills/BalabanP33FiniteKKTBlockCombesThomasConstantsExact.agda
@@ -32,6 +33,7 @@ optimizer=scripts/ym_round40_singleton_budget_optimize.py
 fixture=scripts/fixtures/ym_round40_singleton_budget_candidates.json
 round39root=DASHI/Physics/YangMills/BalabanClayHighestAlphaRound39PseudoinverseKKTValidation.agda
 round40root=DASHI/Physics/YangMills/BalabanClayHighestAlphaRound40MultiplierLocalityValidation.agda
+closure=DASHI/Physics/YangMills/BalabanSelectedCorrelatedSingletonClosureExact.agda
 
 for file in "${files[@]}" "$doc" "$index" "$optimizer" "$fixture" "$round39root"; do
   test -f "$file"
@@ -67,6 +69,8 @@ checks=(
   'BalabanSelectedCorrelatedResidualOwnershipExact.agda:correlatedResidualReconstructedFromOwners'
   'BalabanSelectedCorrelatedResidualOwnershipExact.agda:exactCorrelatedCancellationRemovedBeforeMajorisation'
   'BalabanSelectedCorrelatedResidualOwnershipExact.agda:correlatedResidualClosesSingletonBudget'
+  'BalabanSelectedCorrelatedResidualAuthorityExact.agda:canonicalCorrelatedResidualExact'
+  'BalabanSelectedCorrelatedResidualAuthorityExact.agda:canonicalCorrelatedResidualIsProjectedSpillover'
   'BalabanSelectedConstraintGramCombesThomasExact.agda:selectedConstraintGramReducedFloor'
   'BalabanSelectedConstraintGramCombesThomasExact.agda:selectedConstraintGramTiltBelowHalfGap'
   'BalabanSelectedConstraintGramCombesThomasExact.agda:selectedConstraintGramCombesThomasDecay'
@@ -96,7 +100,18 @@ done
 grep -q 'FiniteKKTPseudoinverseData' DASHI/Physics/YangMills/BalabanSelectedConstraintCollarPairingExact.agda
 grep -q 'FiniteKKTPseudoinverseData' DASHI/Physics/YangMills/BalabanSelectedRawExtractorConstraintDefectAtomsExact.agda
 grep -q 'FiniteKKTPseudoinverseData' DASHI/Physics/YangMills/BalabanSelectedConstraintAtomGreenExpansionExact.agda
+grep -q 'FiniteKKTPseudoinverseData' DASHI/Physics/YangMills/BalabanSelectedCorrelatedResidualAuthorityExact.agda
 grep -q 'FiniteKKTPseudoinverseData' DASHI/Physics/YangMills/BalabanSelectedConstraintGramCombesThomasExact.agda
+
+# The terminal reducer must derive its correlated family from literal atoms,
+# not accept a free family plus a scalar equality receipt.
+grep -q 'CorrelatedResidualAuthority' "$closure"
+grep -q 'canonicalCorrelatedResidualFamily' "$closure"
+grep -q 'canonicalCorrelatedResidualIsProjectedSpillover' "$closure"
+if grep -nE '^[[:space:]]*correlatedFamily[[:space:]]*:|^[[:space:]]*correlatedResidualExact[[:space:]]*:' "$closure"; then
+  echo "terminal correlated singleton closure accepts a scalar residual receipt" >&2
+  exit 1
+fi
 
 # The multiplier Gram has its own gamma_L; it must not borrow the 1/32 state floor.
 if grep -nE 'p33HalfGap|p33TiltedResolventMajorant' \
