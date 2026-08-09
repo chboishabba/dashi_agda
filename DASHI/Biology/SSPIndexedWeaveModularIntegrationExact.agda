@@ -28,7 +28,7 @@ IntegratedState index =
 IntegratedPath : SSPModularIndex → SSPModularIndex → Set
 IntegratedPath source target =
   SSPWeave.SSPWeavePath (fst source) (fst target)
-  × snd source ≡ snd target
+  × (snd source ≡ snd target)
 
 identityIntegratedPath :
   (index : SSPModularIndex) →
@@ -99,9 +99,11 @@ transportIntegratedComposition
 IntegratedResidual : SSPModularIndex → Set
 IntegratedResidual index = SSPWeave.LaneParity
 
-zeroIntegratedResidual :
-  (index : SSPModularIndex) → IntegratedResidual index
-zeroIntegratedResidual index = SSPWeave.preserveParity
+integratedStateResidual :
+  (index : SSPModularIndex) →
+  IntegratedState index →
+  IntegratedResidual index
+integratedStateResidual index state = SSPWeave.preserveParity
 
 integratedResidualAfter :
   {source target : SSPModularIndex} →
@@ -115,7 +117,7 @@ integratedResidualIdentity :
   (index : SSPModularIndex) →
   (state : IntegratedState index) →
   integratedResidualAfter (identityIntegratedPath index) state
-  ≡ zeroIntegratedResidual index
+  ≡ integratedStateResidual index state
 integratedResidualIdentity index state = refl
 
 canonicalSSPModularIndexedWeave :
@@ -132,7 +134,7 @@ canonicalSSPModularIndexedWeave =
     ; transportId = transportIntegratedIdentity
     ; transportComp = transportIntegratedComposition
     ; Residual = IntegratedResidual
-    ; zeroResidual = zeroIntegratedResidual
+    ; stateResidual = integratedStateResidual
     ; residualAfter = integratedResidualAfter
     ; residualId = integratedResidualIdentity
     }
