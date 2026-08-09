@@ -7,6 +7,7 @@ module DASHI.Biology.SSP15IndexedWeaveModularRound4Validation where
 import DASHI.Biology.SSP15JCoarseFineRound3Validation
 import DASHI.Core.IndexedWeaveHyperfabricExact
 import DASHI.Biology.SSPIndexedWeaveHyperfabricExact
+import DASHI.Biology.SSPHyperfibreLawfulUpgradeExact
 import DASHI.Biology.ModularCoarseFineAddressFibrationExact
 import DASHI.Biology.SSPIndexedWeaveModularIntegrationExact
 import DASHI.Biology.LayeredBindingSystemExact
