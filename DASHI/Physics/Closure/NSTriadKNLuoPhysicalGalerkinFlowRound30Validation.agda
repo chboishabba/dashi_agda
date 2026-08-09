@@ -3,10 +3,14 @@ module DASHI.Physics.Closure.NSTriadKNLuoPhysicalGalerkinFlowRound30Validation w
 ------------------------------------------------------------------------
 -- Round Thirty validation root.
 --
--- Imported cumulatively by the Round-29 root on this child branch so the
--- existing pull-request workflow typechecks the new tranche as well.
+-- This root exercises the concrete Leray/output-fibre/viscous-quadratic
+-- construction before the coordinate-flow, energy, shell and Cotlar reducers.
 ------------------------------------------------------------------------
 
+import DASHI.Physics.Closure.NSTriadKNLerayOutputTransversalityRound30Exact as Leray
+import DASHI.Physics.Closure.NSTriadKNProjectedNonlinearityTransverseRound30Exact as Nonlinear
+import DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact as Coefficient
+import DASHI.Physics.Closure.NSTriadKNConcretePhysicalGalerkinVectorFieldRound30Exact as ConcreteField
 import DASHI.Physics.Closure.NSTriadKNPhysicalGalerkinVectorFieldRound30Exact as Field
 import DASHI.Physics.Closure.NSTriadKNFinitePhysicalCoordinateEquivalenceRound30Exact as Coordinates
 import DASHI.Physics.Closure.NSTriadKNPicardLindelofTransportRound30Exact as Picard
@@ -18,6 +22,29 @@ import DASHI.Physics.Closure.NSTriadKNCutoffUniformCotlarSteinRound30Exact as Co
 
 open import Agda.Builtin.Bool using (true)
 open import Agda.Builtin.Equality using (_≡_)
+
+lerayOutputRegression :
+  Leray.lerayOutputTransversalityClosed ≡ true
+lerayOutputRegression = Leray.lerayOutputTransversalityClosedIsTrue
+
+lerayIdempotenceRegression :
+  Leray.lerayIdempotenceClosed ≡ true
+lerayIdempotenceRegression = Leray.lerayIdempotenceClosedIsTrue
+
+projectedNonlinearityRegression :
+  Nonlinear.projectedNonlinearityTransverseClosed ≡ true
+projectedNonlinearityRegression =
+  Nonlinear.projectedNonlinearityTransverseClosedIsTrue
+
+literalCoefficientRegression :
+  Coefficient.literalViscousQuadraticCoefficientClosed ≡ true
+literalCoefficientRegression =
+  Coefficient.literalViscousQuadraticCoefficientClosedIsTrue
+
+concreteFieldRegression :
+  ConcreteField.concretePhysicalGalerkinVectorFieldClosed ≡ true
+concreteFieldRegression =
+  ConcreteField.concretePhysicalGalerkinVectorFieldClosedIsTrue
 
 physicalFieldCodomainRegression :
   Field.fullGalerkinVectorFieldMapsReconstructedState ≡ true
