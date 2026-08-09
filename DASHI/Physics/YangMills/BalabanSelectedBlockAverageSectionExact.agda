@@ -24,11 +24,11 @@ module DASHI.Physics.YangMills.BalabanSelectedBlockAverageSectionExact where
 -- constraint.  Each requested Lie-coordinate/direction average is spread
 -- uniformly over the 256 physical sites with coefficient 1/256.  The finite
 -- sum then recovers the requested multiplier value exactly.  The unnormalised
--- constant lift is the physical adjoint candidate and its normal operator is
--- proved pointwise equal to 256 I, with exact two-sided inverse (1/256) I.
--- This supplies a constructive full-row-rank certificate for the twelve-row
--- average component before it is coupled to gauge rows.  The matrix-transpose
--- identification and pointwise row-delta carrier remain separate obligations.
+-- constant lift is proved to be the exact finite adjoint under the literal row
+-- and state dot products.  Consequently its normal operator is 256 I, with
+-- exact two-sided inverse (1/256) I.  This is a constructive full-row-rank
+-- certificate for the twelve-row average component before coupling to gauge
+-- rows; no rank fact is inferred from dimensions alone.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -38,15 +38,20 @@ open import Data.List.Base using (length)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; _+_; _*_; _/_)
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
-open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using (pair)
+open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using
+  (pair; cartesian)
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreCarrier as Block
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
+import DASHI.Physics.YangMills.BalabanFiniteSumFubiniExact as Fubini
 import DASHI.Physics.YangMills.BalabanPath4AxisAverageExact as Path4
+import DASHI.Physics.YangMills.BalabanP33LiteralBondCellIncidenceExact as Cell
 import DASHI.Physics.YangMills.BalabanP33LiteralResidualKernelNumericalCalibrationExact as Count
 import DASHI.Physics.YangMills.BalabanP33FiniteKKTAdmissibleProjectorExact as KKT
+import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Coordinates
+import DASHI.Physics.YangMills.BalabanP33PhysicalBackgroundGaugeFirstExact as Gauge
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundBlockAverageConstraintMatrixExact as Average
 
 oneOverSiteCount : ℚ
@@ -124,14 +129,160 @@ selectedBlockAverageConstraintSurjective multiplier = record
   }
 
 ------------------------------------------------------------------------
--- Physical adjoint candidate and exact normal operator.
+-- Exact finite adjoint identity.
 ------------------------------------------------------------------------
+
+selectedBlockAverageRowDot :
+  (Average.SelectedBlockAverageRow4 → ℚ) →
+  (Average.SelectedBlockAverageRow4 → ℚ) → ℚ
+selectedBlockAverageRowDot left right =
+  Sums.sumRational Average.selectedBlockAverageRows4
+    (λ row → left row * right row)
 
 selectedBlockAverageAdjointLift :
   (Average.SelectedBlockAverageRow4 → ℚ) → KKT.StateVector
 selectedBlockAverageAdjointLift multiplier
     (pair coordinate (pair axis site)) =
   multiplier (pair coordinate axis)
+
+selectedBlockAverageNestedPairing :
+  KKT.StateVector →
+  (Average.SelectedBlockAverageRow4 → ℚ) → ℚ
+selectedBlockAverageNestedPairing state multiplier =
+  Sums.sumRational Coordinates.lieCoordinates3
+    (λ coordinate →
+      Sums.sumRational Gauge.axes4
+        (λ axis →
+          Sums.sumRational (Block.physicalBlockSites Path4.side4)
+            (λ site →
+              state (pair coordinate (pair axis site))
+              * multiplier (pair coordinate axis))))
+
+selectedBlockAverageRowPairingExpand :
+  ∀ state multiplier coordinate axis →
+  Average.selectedBackgroundBlockAverageConstraintApply state
+      (pair coordinate axis)
+    * multiplier (pair coordinate axis)
+  ≡ Sums.sumRational (Block.physicalBlockSites Path4.side4)
+      (λ site →
+        state (pair coordinate (pair axis site))
+        * multiplier (pair coordinate axis))
+selectedBlockAverageRowPairingExpand
+    state multiplier coordinate axis =
+  let
+    rowValue = multiplier (pair coordinate axis)
+    siteTerm = λ site → state (pair coordinate (pair axis site))
+  in
+  trans
+    (cong (_* rowValue)
+      (Average.selectedBackgroundBlockAverageConstraintMatrixApplyExact
+        state (pair coordinate axis)))
+    (trans
+      (ℚRing.solve-∀
+        (Sums.sumRational (Block.physicalBlockSites Path4.side4) siteTerm)
+        rowValue)
+      (trans
+        (sym (Sums.sumRationalScale rowValue
+          (Block.physicalBlockSites Path4.side4) siteTerm))
+        (Sums.sumRationalCong
+          (Block.physicalBlockSites Path4.side4)
+          (λ site → rowValue * siteTerm site)
+          (λ site → siteTerm site * rowValue)
+          (λ site → ℚRing.solve-∀ rowValue (siteTerm site)))))
+
+selectedBlockAverageRowPairingAsNested :
+  ∀ state multiplier →
+  selectedBlockAverageRowDot
+    (Average.selectedBackgroundBlockAverageConstraintApply state)
+    multiplier
+  ≡ selectedBlockAverageNestedPairing state multiplier
+selectedBlockAverageRowPairingAsNested state multiplier =
+  trans
+    (Fubini.sumCartesian
+      Coordinates.lieCoordinates3 Gauge.axes4
+      (λ row →
+        Average.selectedBackgroundBlockAverageConstraintApply state row
+        * multiplier row))
+    (Sums.sumRationalCong
+      Coordinates.lieCoordinates3
+      (λ coordinate →
+        Sums.sumRational Gauge.axes4
+          (λ axis →
+            Average.selectedBackgroundBlockAverageConstraintApply state
+              (pair coordinate axis)
+            * multiplier (pair coordinate axis)))
+      (λ coordinate →
+        Sums.sumRational Gauge.axes4
+          (λ axis →
+            Sums.sumRational (Block.physicalBlockSites Path4.side4)
+              (λ site →
+                state (pair coordinate (pair axis site))
+                * multiplier (pair coordinate axis))))
+      (λ coordinate →
+        Sums.sumRationalCong Gauge.axes4
+          (λ axis →
+            Average.selectedBackgroundBlockAverageConstraintApply state
+              (pair coordinate axis)
+            * multiplier (pair coordinate axis))
+          (λ axis →
+            Sums.sumRational (Block.physicalBlockSites Path4.side4)
+              (λ site →
+                state (pair coordinate (pair axis site))
+                * multiplier (pair coordinate axis)))
+          (λ axis →
+            selectedBlockAverageRowPairingExpand
+              state multiplier coordinate axis)))
+
+selectedBlockAverageStatePairingAsNested :
+  ∀ state multiplier →
+  Coordinates.physicalCoordinateDot state
+    (selectedBlockAverageAdjointLift multiplier)
+  ≡ selectedBlockAverageNestedPairing state multiplier
+selectedBlockAverageStatePairingAsNested state multiplier =
+  trans
+    (Fubini.sumCartesian
+      Coordinates.lieCoordinates3 Cell.bondCells4
+      (λ selected →
+        state selected * selectedBlockAverageAdjointLift multiplier selected))
+    (Sums.sumRationalCong
+      Coordinates.lieCoordinates3
+      (λ coordinate →
+        Sums.sumRational Cell.bondCells4
+          (λ cell →
+            state (pair coordinate cell)
+            * selectedBlockAverageAdjointLift multiplier
+                (pair coordinate cell)))
+      (λ coordinate →
+        Sums.sumRational Gauge.axes4
+          (λ axis →
+            Sums.sumRational (Block.physicalBlockSites Path4.side4)
+              (λ site →
+                state (pair coordinate (pair axis site))
+                * multiplier (pair coordinate axis))))
+      (λ coordinate →
+        Fubini.sumCartesian
+          Gauge.axes4
+          (Block.physicalBlockSites Path4.side4)
+          (λ cell →
+            state (pair coordinate cell)
+            * selectedBlockAverageAdjointLift multiplier
+                (pair coordinate cell))))
+
+selectedBlockAverageAdjointExact :
+  ∀ state multiplier →
+  selectedBlockAverageRowDot
+    (Average.selectedBackgroundBlockAverageConstraintApply state)
+    multiplier
+  ≡ Coordinates.physicalCoordinateDot state
+      (selectedBlockAverageAdjointLift multiplier)
+selectedBlockAverageAdjointExact state multiplier =
+  trans
+    (selectedBlockAverageRowPairingAsNested state multiplier)
+    (sym (selectedBlockAverageStatePairingAsNested state multiplier))
+
+------------------------------------------------------------------------
+-- Exact normal operator and inverse.
+------------------------------------------------------------------------
 
 selectedBlockAverageNormalApply :
   (Average.SelectedBlockAverageRow4 → ℚ) →
@@ -178,21 +329,11 @@ selectedBlockAverageNormalInverseRightExact multiplier row =
       (selectedBlockAverageNormalInverseApply multiplier) row)
     (ℚRing.solve-∀ (multiplier row))
 
-record SelectedBlockAverageRowRelation
-    (coefficients : Average.SelectedBlockAverageRow4 → ℚ) : Set where
-  field
-    annihilatesAllStates : ∀ state →
-      Sums.sumRational Average.selectedBlockAverageRows4
-        (λ row → coefficients row
-          * Average.selectedBackgroundBlockAverageConstraintApply state row)
-      ≡ 0ℚ
-open SelectedBlockAverageRowRelation public
-
 selectedBlockAverageSectionLevel : ProofLevel
 selectedBlockAverageSectionLevel = machineChecked
 
+selectedBlockAverageAdjointLevel : ProofLevel
+selectedBlockAverageAdjointLevel = machineChecked
+
 selectedBlockAverageNormalOperatorLevel : ProofLevel
 selectedBlockAverageNormalOperatorLevel = machineChecked
-
-selectedBlockAverageTransposeIdentificationLevel : ProofLevel
-selectedBlockAverageTransposeIdentificationLevel = conditional
