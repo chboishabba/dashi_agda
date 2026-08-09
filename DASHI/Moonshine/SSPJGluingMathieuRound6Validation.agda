@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 open import Data.Rational.Base using (0ℚ)
 
 import DASHI.Biology.EisensteinNineRingInterferenceExact as Eisenstein
+import DASHI.Biology.EisensteinThreeSixSymmetryExact as ThreeSix
 import DASHI.Biology.HalfChartNineRingQuotientExact as Half
 import DASHI.Biology.IndexedJExternalGluingExact as Gluing
 import DASHI.Biology.IteratedPointedAttachmentSpiralExact as Spiral
@@ -44,6 +45,17 @@ validationThreePhaseCancellationReal :
   Eisenstein.realCoordinate Eisenstein.threePhaseSum ≡ 0ℚ
 validationThreePhaseCancellationReal = Eisenstein.threePhaseCancellationReal
 
+validationThreePhaseCycle :
+  (phase : ThreeSix.TernaryPhase) →
+  ThreeSix.nextPhase
+    (ThreeSix.nextPhase
+      (ThreeSix.nextPhase phase))
+  ≡ phase
+validationThreePhaseCycle = ThreeSix.threePhaseCycleCloses
+
+validationSixEisensteinUnits : ThreeSix.eisensteinUnitCount ≡ 6
+validationSixEisensteinUnits = ThreeSix.eisensteinUnitCountIsSix
+
 validationMonsterSplit : Monster.fibreInterferenceTotal ≡ 196884
 validationMonsterSplit = Monster.fibreInterferenceTotalIs196884
 
@@ -51,17 +63,24 @@ validationMonsterCoarseTrace :
   Monster.coarseSectorDimension ≡ 54
 validationMonsterCoarseTrace = Monster.coarseSectorDimensionIs54
 
-validationM11Tower :
-  Mathieu.levelOrder Mathieu.M11Level ≡ 8 * 9 * 10 * 11
-validationM11Tower = Mathieu.m11OrderAsSuccessiveOrbits
+validationM11SharpFourOrder :
+  Mathieu.groupOrder Mathieu.m11SharpFourOrderWitness
+  ≡ 11 * 10 * 9 * 8
+validationM11SharpFourOrder = Mathieu.m11OrderFromSharpFourTransitivity
 
-validationM12Tower :
-  Mathieu.levelOrder Mathieu.M12Level ≡ 8 * 9 * 10 * 11 * 12
-validationM12Tower = Mathieu.m12OrderAsSuccessiveOrbits
+validationM12SharpFiveOrder :
+  Mathieu.groupOrder Mathieu.m12SharpFiveOrderWitness
+  ≡ 12 * 11 * 10 * 9 * 8
+validationM12SharpFiveOrder = Mathieu.m12OrderFromSharpFiveTransitivity
 
-validationM8NotD4 :
-  Mathieu.atlasReportedM8Shape ≡ Mathieu.squareDihedralD4 → ⊥
-validationM8NotD4 = Mathieu.atlasReportedM8IsNotD4
+validationM11ThreePointStabilizerOrder :
+  Mathieu.threePointStabilizerOrderInM11 ≡ 8
+validationM11ThreePointStabilizerOrder =
+  Mathieu.threePointStabilizerOrderInM11IsEight
+
+validationMathieuEightNotD4Source :
+  Mathieu.mathieuEightSource ≡ Mathieu.squareGridDihedralOrder → ⊥
+validationMathieuEightNotD4Source = Mathieu.mathieuEightDoesNotComeFromD4
 
 validationM12DivisorNodes : Divisor.nodeCount Divisor.m12Bounds ≡ 112
 validationM12DivisorNodes = Divisor.m12DivisorNodeCount
