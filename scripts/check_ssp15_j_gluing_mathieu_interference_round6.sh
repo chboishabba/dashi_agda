@@ -12,6 +12,7 @@ sources=(
   DASHI/Biology/IndexedJExternalGluingExact.agda
   DASHI/Biology/IteratedPointedAttachmentSpiralExact.agda
   DASHI/Moonshine/MathieuDivisorLatticeExact.agda
+  DASHI/Moonshine/MathieuDivisorPathInterferenceExact.agda
   DASHI/Moonshine/MathieuJTransportIntegrationExact.agda
   DASHI/Moonshine/MathieuStabilizerTowerExact.agda
   DASHI/Moonshine/Monster196884FibreInterferenceExact.agda
@@ -50,6 +51,7 @@ spiral=DASHI/Biology/IteratedPointedAttachmentSpiralExact.agda
 monster=DASHI/Moonshine/Monster196884FibreInterferenceExact.agda
 mathieu=DASHI/Moonshine/MathieuStabilizerTowerExact.agda
 divisor=DASHI/Moonshine/MathieuDivisorLatticeExact.agda
+path=DASHI/Moonshine/MathieuDivisorPathInterferenceExact.agda
 integration=DASHI/Moonshine/MathieuJTransportIntegrationExact.agda
 validation=DASHI/Moonshine/SSPJGluingMathieuRound6Validation.agda
 top=DASHI/EverythingSSPJGluingMathieuRound6.agda
@@ -88,6 +90,10 @@ require_pattern "$divisor" 'm11DivisorNodeCount'
 require_pattern "$divisor" 'centralizerPlusClassIsM12'
 require_pattern "$divisor" 'chooseTwelveFourIs495'
 require_pattern "$divisor" 'historiesShareEndpoint'
+require_pattern "$path" 'nodeInterferenceIdentity'
+require_pattern "$path" 'canonicalNodeIntensityIsOne'
+require_pattern "$path" 'canonicalPathCrossIsMinusOne'
+require_pattern "$path" 'divisorIncidenceDeterminesAmplitudeIsFalse'
 require_pattern "$integration" 'mathieuTenOrbitOrderLaw'
 require_pattern "$integration" 'mathieuElevenOrbitOrderLaw'
 require_pattern "$integration" 'canonicalNineToTenAnalogy'
@@ -96,6 +102,8 @@ require_pattern "$validation" 'validationZeroOneSeam'
 require_pattern "$validation" 'validationMonsterSplit'
 require_pattern "$validation" 'validationM8NotD4'
 require_pattern "$validation" 'validationChooseTwelveFour'
+require_pattern "$validation" 'validationDecoratedPathsReachSix'
+require_pattern "$top" 'import DASHI.Moonshine.MathieuDivisorPathInterferenceExact'
 require_pattern "$top" 'import DASHI.Moonshine.SSPJGluingMathieuRound6Validation'
 
 mkdir -p artifacts
