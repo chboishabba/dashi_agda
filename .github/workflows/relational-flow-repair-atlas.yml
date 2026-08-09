@@ -105,6 +105,7 @@ jobs:
               DASHI/Reasoning/AttractorAlignedBranchSelection.agda
               DASHI/Reasoning/RelationalBranchInterference.agda
               DASHI/Reasoning/RelationalTernaryPhaseGeometry.agda
+              DASHI/Reasoning/RelationalBranchCobordismGeometry.agda
               DASHI/Reasoning/RelationalProcessMemoryHyperfabric.agda
               DASHI/Reasoning/DevelopmentalAttunementPNFBridge.agda
               DASHI/Reasoning/DevelopmentalExplanationWithdrawalExact.agda
