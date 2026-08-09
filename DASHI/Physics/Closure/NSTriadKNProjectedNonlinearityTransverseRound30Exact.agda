@@ -119,13 +119,7 @@ projectedOrderedTermTransverse {F = F} system output nonzero incidence outputExa
     (λ selectedOutput →
       C3.bilinearDot3
         (C3.modeVector (Audit.integerEmbedding system) selectedOutput)
-        (Signed.orderedVelocityInteraction
-          (Audit.galerkinLaws system)
-          selectedOutput
-          (Physical.p incidence)
-          (Physical.q incidence)
-          (Audit.velocityAt system (Physical.p incidence))
-          (Audit.velocityAt system (Physical.q incidence)))
+        (Audit.projectedOrderedTerm system incidence)
       ≡ C3.complexZero F)
     outputExact
     (trans
