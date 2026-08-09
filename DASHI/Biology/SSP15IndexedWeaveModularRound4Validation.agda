@@ -15,6 +15,9 @@ import DASHI.Computation.JacquardOperationalSemanticsExact
 import DASHI.Computation.JacquardHelicalWeaveBridgeExact
 import DASHI.Topology.HelicalWeaveMappingTorusExact
 import DASHI.Reasoning.DistributedBraidGluingExact
+import DASHI.Reasoning.AttractorAlignedBranchSelectionExact
+import DASHI.Reasoning.ChildhoodReligiousCoercionExact
+import DASHI.Reasoning.TraumaAttractorBranchRegulationExact
 import DASHI.Unified.ThreePhaseCrossPollinationExact
 import DASHI.Dynamics.KAMHypothesisCoreExact
 import DASHI.Physics.Moonshine.MoonshineTraceIndexedWeaveExact
