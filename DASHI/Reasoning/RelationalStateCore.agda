@@ -11,6 +11,10 @@ open import Agda.Builtin.String using (String)
 -- psychological diagnosis or a moral verdict.
 ------------------------------------------------------------------------
 
+data Member {A : Set} (x : A) : List A → Set where
+  memberHere : ∀ {xs} → Member x (x ∷ xs)
+  memberThere : ∀ {y xs} → Member x xs → Member x (y ∷ xs)
+
 data RelationalRole : Set where
   parentRole childRole caregiverRole dependentRole : RelationalRole
   siblingRole grandparentRole clinicianRole thirdPartyRole : RelationalRole
@@ -44,6 +48,7 @@ open Contribution public
 data RepresentationType : Set where
   presentFeeling presentPreference rememberedEvent attributedIntention : RepresentationType
   expressedPreference proposalRepresentation assentRepresentation : RepresentationType
+  commitmentRepresentation : RepresentationType
   unilateralDecisionRepresentation jointAgreementRepresentation : RepresentationType
   publicFactRepresentation unresolvedRepresentation : RepresentationType
 
@@ -79,12 +84,7 @@ record CapacityState : Set where
 open CapacityState public
 
 ------------------------------------------------------------------------
--- Durable preference state.
---
--- A preference contribution may be transient.  A DurablePreference is the
--- stronger state object that has been explicitly retained with owner, scope,
--- time and provenance.  This prevents the documentation's P_t component from
--- existing only as prose while the Agda SharedState silently drops it.
+-- Durable preference and decision-history state.
 ------------------------------------------------------------------------
 
 record DurablePreference : Set where
@@ -98,6 +98,14 @@ record DurablePreference : Set where
 
 open DurablePreference public
 
+record DecisionRecord : Set where
+  constructor decisionRecord
+  field
+    recordedDecisionKind : DecisionKind
+    recordedDecisionProvenance : String
+
+open DecisionRecord public
+
 record SharedState : Set where
   constructor sharedState
   field
@@ -109,11 +117,16 @@ record SharedState : Set where
     recordedRefusals : List String
     decisionKind : DecisionKind
     decisionProvenance : String
+    decisionHistory : List DecisionRecord
     attributedFutureObligations : List String
     ruptureStatus : RuptureStatus
     stateReceipt : String
 
 open SharedState public
+
+currentDecisionRecord : SharedState → DecisionRecord
+currentDecisionRecord state =
+  decisionRecord (decisionKind state) (decisionProvenance state)
 
 record TypedRepresentation : Set where
   constructor typedRepresentation
@@ -148,5 +161,5 @@ canonicalRelationalStateAuthorityBoundary = record
   ; currentAccountErasesPriorProvenance = false
   ; abstractionAppliesOnlyToOneFamily = false
   ; boundaryNote =
-      "The vocabulary is a typed carrier for reconstructing relational episodes. Durable preferences require explicit owner, scope, time and provenance; the model does not infer motive, diagnosis, guilt or family identity without incident-specific evidence."
+      "The vocabulary is a typed carrier for reconstructing relational episodes. Durable preferences and decision history require explicit owner, scope, time and provenance; the model does not infer motive, diagnosis, guilt or family identity without incident-specific evidence."
   }
