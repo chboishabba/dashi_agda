@@ -2,8 +2,9 @@ module DASHI.Reasoning.RelationalBranchInterference where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
-open import Data.Integer using (ℤ; +_; _+_; _-_; _*_)
+open import Data.Integer using (ℤ; +_; -[1+_]; _+_; _-_; _*_)
 open import Data.List.Base using (List; []; _∷_)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
@@ -13,6 +14,7 @@ import Tactic.RingSolver.NonReflective as NR
 import DASHI.Physics.ShiftDiscreteWaveStep as Wave
 import DASHI.Physics.ShiftPhaseTableInterference as Phase
 import DASHI.Physics.ShiftUnitaryLikeConstraint as Norm
+import DASHI.Reasoning.AttractorAlignedBranchSelection as Selection
 
 ------------------------------------------------------------------------
 -- Exact finite double-/n-slit algebra on the repository's integer-pair wave
@@ -44,6 +46,80 @@ waveDot ψ χ =
 
 pairInterference : BranchWave → BranchWave → ℤ
 pairInterference ψ χ = (+ 2) * waveDot ψ χ
+
+------------------------------------------------------------------------
+-- Exact bridge from wave cross terms to optimizer interactions.
+------------------------------------------------------------------------
+
+data SignedInteractionWitness :
+    ℤ → Selection.InteractionDirection → Nat → Set where
+  zeroInteraction :
+    SignedInteractionWitness (+ 0) Selection.independent zero
+  positiveInteraction :
+    (n : Nat) →
+    SignedInteractionWitness
+      (+ (suc n)) Selection.reinforcing (suc n)
+  negativeInteraction :
+    (n : Nat) →
+    SignedInteractionWitness
+      (-[1+ n ]) Selection.interfering (suc n)
+
+record ClassifiedInteraction (value : ℤ) : Set where
+  constructor classifiedInteraction
+  field
+    interactionDirection : Selection.InteractionDirection
+    interactionMagnitude : Nat
+    signedWitness :
+      SignedInteractionWitness
+        value interactionDirection interactionMagnitude
+
+open ClassifiedInteraction public
+
+classifySignedInteraction :
+  (value : ℤ) → ClassifiedInteraction value
+classifySignedInteraction (+ zero) =
+  classifiedInteraction Selection.independent zero zeroInteraction
+classifySignedInteraction (+ (suc n)) =
+  classifiedInteraction
+    Selection.reinforcing (suc n) (positiveInteraction n)
+classifySignedInteraction (-[1+ n ]) =
+  classifiedInteraction
+    Selection.interfering (suc n) (negativeInteraction n)
+
+record WaveBackedInteraction : Set where
+  constructor waveBackedInteraction
+  field
+    leftLabel rightLabel : String
+    leftWave rightWave : BranchWave
+    exactCrossTerm : ℤ
+    crossTermReceipt : exactCrossTerm ≡ pairInterference leftWave rightWave
+    classification : ClassifiedInteraction exactCrossTerm
+    optimizerInteraction : Selection.BranchInteraction
+    optimizerDirectionMatches :
+      Selection.interactionDirection optimizerInteraction
+      ≡ interactionDirection classification
+    optimizerMagnitudeMatches :
+      Selection.interactionMagnitude optimizerInteraction
+      ≡ interactionMagnitude classification
+
+open WaveBackedInteraction public
+
+interactionFromWaves :
+  String → String → BranchWave → BranchWave → String →
+  WaveBackedInteraction
+interactionFromWaves leftLabel rightLabel left right receipt
+  with classifySignedInteraction (pairInterference left right)
+... | classifiedInteraction direction magnitude witness =
+  waveBackedInteraction
+    leftLabel rightLabel
+    left right
+    (pairInterference left right)
+    refl
+    (classifiedInteraction direction magnitude witness)
+    (Selection.branchInteraction
+      leftLabel rightLabel direction magnitude receipt)
+    refl
+    refl
 
 ------------------------------------------------------------------------
 -- Double-slit polarization identity.
@@ -267,6 +343,45 @@ threeInPhaseIntensityIsNine = refl
 fourQuarterTurnsCancel :
   coherentIntensity (phase0 ∷ phase1 ∷ phase2 ∷ phase3 ∷ []) ≡ + 0
 fourQuarterTurnsCancel = refl
+
+inPhaseInteractionCertificate : WaveBackedInteraction
+inPhaseInteractionCertificate =
+  interactionFromWaves
+    "phase-zero-left" "phase-zero-right"
+    phase0 phase0
+    "positive cross term yields reinforcing optimizer interaction"
+
+oppositeInteractionCertificate : WaveBackedInteraction
+oppositeInteractionCertificate =
+  interactionFromWaves
+    "phase-zero" "phase-two"
+    phase0 phase2
+    "negative cross term yields interfering optimizer interaction"
+
+quadratureInteractionCertificate : WaveBackedInteraction
+quadratureInteractionCertificate =
+  interactionFromWaves
+    "phase-zero" "phase-one"
+    phase0 phase1
+    "zero cross term yields independent optimizer interaction"
+
+inPhaseOptimizerDirectionIsReinforcing :
+  Selection.interactionDirection
+    (optimizerInteraction inPhaseInteractionCertificate)
+  ≡ Selection.reinforcing
+inPhaseOptimizerDirectionIsReinforcing = refl
+
+oppositeOptimizerDirectionIsInterfering :
+  Selection.interactionDirection
+    (optimizerInteraction oppositeInteractionCertificate)
+  ≡ Selection.interfering
+oppositeOptimizerDirectionIsInterfering = refl
+
+quadratureOptimizerDirectionIsIndependent :
+  Selection.interactionDirection
+    (optimizerInteraction quadratureInteractionCertificate)
+  ≡ Selection.independent
+quadratureOptimizerDirectionIsIndependent = refl
 
 record BranchInterferenceAuthorityBoundary : Set where
   field
