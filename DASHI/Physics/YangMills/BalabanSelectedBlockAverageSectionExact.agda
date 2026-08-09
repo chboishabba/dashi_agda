@@ -23,9 +23,10 @@ module DASHI.Physics.YangMills.BalabanSelectedBlockAverageSectionExact where
 -- Construct an exact right inverse of the literal side-four P33 block-average
 -- constraint.  Each requested Lie-coordinate/direction average is spread
 -- uniformly over the 256 physical sites with coefficient 1/256.  The finite
--- sum then recovers the requested multiplier value exactly.  This proves the
--- twelve average rows are genuinely independent before they are coupled to
--- the gauge rows; no rank claim is inferred from dimensions alone.
+-- sum then recovers the requested multiplier value exactly.  This supplies a
+-- constructive full-row-rank certificate for the twelve-row average component
+-- before it is coupled to gauge rows.  The pointwise row-independence corollary
+-- still requires the finite row-delta carrier and is not fabricated here.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -62,6 +63,10 @@ sumConstantAsLength (_ ∷ values) constant
   rewrite sumConstantAsLength values constant =
   ℚRing.solve-∀ constant (Sums.natAsRational (length values))
 
+natAsRationalSideFourSiteCountExact :
+  Sums.natAsRational 256 ≡ siteCount
+natAsRationalSideFourSiteCountExact = ℚRing.solve []
+
 sideFourSumConstantExact : ∀ constant →
   Sums.sumRational (Block.physicalBlockSites Path4.side4)
     (λ _ → constant)
@@ -73,7 +78,7 @@ sideFourSumConstantExact constant =
     (cong (_* constant)
       (trans
         (cong Sums.natAsRational Count.periodicSide4SiteCount)
-        refl))
+        natAsRationalSideFourSiteCountExact))
 
 selectedBlockAverageSection :
   (Average.SelectedBlockAverageRow4 → ℚ) → KKT.StateVector
@@ -122,13 +127,8 @@ record SelectedBlockAverageRowRelation
       ≡ 0ℚ
 open SelectedBlockAverageRowRelation public
 
--- The section is the constructive rank certificate needed downstream.  A
--- separate finite-row delta carrier can turn this into the customary statement
--- that every annihilating coefficient is zero pointwise; no such carrier is
--- assumed here merely from the count twelve.
-
 selectedBlockAverageSectionLevel : ProofLevel
 selectedBlockAverageSectionLevel = machineChecked
 
 selectedBlockAverageRowIndependenceProducerLevel : ProofLevel
-selectedBlockAverageRowIndependenceProducerLevel = machineChecked
+selectedBlockAverageRowIndependenceProducerLevel = conditional
