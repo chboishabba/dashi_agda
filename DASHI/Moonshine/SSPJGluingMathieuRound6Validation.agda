@@ -1,6 +1,7 @@
 module DASHI.Moonshine.SSPJGluingMathieuRound6Validation where
 
 open import DASHI.Core.Prelude
+open import Data.Rational.Base using (0ℚ)
 
 import DASHI.Biology.EisensteinNineRingInterferenceExact as Eisenstein
 import DASHI.Biology.HalfChartNineRingQuotientExact as Half
@@ -39,7 +40,7 @@ validationLocalSymmetry : Eisenstein.localPhaseSymmetryCount ≡ 6
 validationLocalSymmetry = Eisenstein.localPhaseSymmetryCountIsSix
 
 validationThreePhaseCancellationReal :
-  Eisenstein.realCoordinate Eisenstein.threePhaseSum ≡ Eisenstein.0ℚ
+  Eisenstein.realCoordinate Eisenstein.threePhaseSum ≡ 0ℚ
 validationThreePhaseCancellationReal = Eisenstein.threePhaseCancellationReal
 
 validationMonsterSplit : Monster.fibreInterferenceTotal ≡ 196884
