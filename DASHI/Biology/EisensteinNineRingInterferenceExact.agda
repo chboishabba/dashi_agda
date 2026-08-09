@@ -116,12 +116,9 @@ threePhaseDiagonalMass = norm one + norm omega + norm omegaSquared
 
 threePhasePairMass : ℚ
 threePhasePairMass =
-  pairContribution one omega
-  + pairContribution one omegaSquared
-  + pairContribution omega omegaSquared
-  where
-  pairContribution : Eisenstein → Eisenstein → ℚ
-  pairContribution left right = crossTerm left right
+  crossTerm one omega
+  + crossTerm one omegaSquared
+  + crossTerm omega omegaSquared
 
 threePhaseDiagonalMassIsThree : threePhaseDiagonalMass ≡ + 3
 threePhaseDiagonalMassIsThree = refl
