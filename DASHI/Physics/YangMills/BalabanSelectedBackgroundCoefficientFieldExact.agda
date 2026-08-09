@@ -17,13 +17,14 @@ module DASHI.Physics.YangMills.BalabanSelectedBackgroundCoefficientFieldExact wh
 --
 -- Prevent the finite reduced-Hessian proof from silently assuming that the
 -- kernel of the selected-background constraint matrix is defined over Q.
--- The literal background supplies an exact ordered star field F_A.  A rational
--- frame is available only after every constraint and frame entry is exhibited
--- as the image of a rational.  Otherwise the generic nonorthogonal-frame
--- algebra must be instantiated over F_A rather than over Q.
+-- The literal background supplies an exact ordered star field F_A.  A frame,
+-- its Gram matrix and its two-sided Gram inverse all live over F_A.  A rational
+-- specialization is authorized only after every literal constraint and frame
+-- entry is exhibited as the image of a rational.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Empty using (⊥)
 open import Data.Rational.Base using (ℚ)
 
@@ -62,6 +63,54 @@ record ExactOrderedStarField : Set₁ where
 
 open ExactOrderedStarField public
 
+sumOverField : ∀ {Index} →
+  (coefficientField : ExactOrderedStarField) →
+  List Index → (Index → Scalar coefficientField) →
+  Scalar coefficientField
+sumOverField coefficientField [] value = zero coefficientField
+sumOverField coefficientField (index ∷ indices) value =
+  _add_ coefficientField
+    (value index)
+    (sumOverField coefficientField indices value)
+
+record FiniteFieldCoordinates
+    (coefficientField : ExactOrderedStarField)
+    (Index : Set) : Set₁ where
+  field
+    coordinates : List Index
+    delta : Index → Index → Scalar coefficientField
+
+open FiniteFieldCoordinates public
+
+record GramInverseOverCoefficientField
+    (coefficientField : ExactOrderedStarField)
+    (FrameIndex : Set)
+    (carrier : FiniteFieldCoordinates coefficientField FrameIndex)
+    (gramEntry : FrameIndex → FrameIndex → Scalar coefficientField) : Set₁ where
+  field
+    inverseGramEntry :
+      FrameIndex → FrameIndex → Scalar coefficientField
+
+    leftInverseExact : ∀ left right →
+      sumOverField coefficientField
+        (coordinates carrier)
+        (λ middle →
+          _mul_ coefficientField
+            (inverseGramEntry left middle)
+            (gramEntry middle right))
+      ≡ delta carrier left right
+
+    rightInverseExact : ∀ left right →
+      sumOverField coefficientField
+        (coordinates carrier)
+        (λ middle →
+          _mul_ coefficientField
+            (gramEntry left middle)
+            (inverseGramEntry middle right))
+      ≡ delta carrier left right
+
+open GramInverseOverCoefficientField public
+
 record SelectedBackgroundCoefficientField
     (Background ConstraintIndex StateIndex FrameIndex : Set) : Set₂ where
   field
@@ -76,6 +125,44 @@ record SelectedBackgroundCoefficientField
       Scalar coefficientField
 
 open SelectedBackgroundCoefficientField public
+
+constraintEntriesLiveInCoefficientField :
+  ∀ {Background ConstraintIndex StateIndex FrameIndex}
+    (fieldData : SelectedBackgroundCoefficientField
+      Background ConstraintIndex StateIndex FrameIndex)
+    background row coordinate →
+  Scalar (coefficientField fieldData)
+constraintEntriesLiveInCoefficientField fieldData background row coordinate =
+  constraintEntry fieldData background row coordinate
+
+frameEntriesLiveInCoefficientField :
+  ∀ {Background ConstraintIndex StateIndex FrameIndex}
+    (fieldData : SelectedBackgroundCoefficientField
+      Background ConstraintIndex StateIndex FrameIndex)
+    background coordinate frameCoordinate →
+  Scalar (coefficientField fieldData)
+frameEntriesLiveInCoefficientField
+    fieldData background coordinate frameCoordinate =
+  frameEntry fieldData background coordinate frameCoordinate
+
+record SelectedBackgroundFrameAuthority
+    {Background ConstraintIndex StateIndex FrameIndex : Set}
+    (fieldData : SelectedBackgroundCoefficientField
+      Background ConstraintIndex StateIndex FrameIndex)
+    (background : Background) : Set₂ where
+  field
+    frameCarrier :
+      FiniteFieldCoordinates (coefficientField fieldData) FrameIndex
+
+    frameGramEntry :
+      FrameIndex → FrameIndex → Scalar (coefficientField fieldData)
+
+    frameGramInverse :
+      GramInverseOverCoefficientField
+        (coefficientField fieldData)
+        FrameIndex frameCarrier frameGramEntry
+
+open SelectedBackgroundFrameAuthority public
 
 record RationalRealisation
     {Background ConstraintIndex StateIndex FrameIndex : Set}
@@ -106,8 +193,10 @@ record RationalFrameAuthority
     {Background ConstraintIndex StateIndex FrameIndex : Set}
     (fieldData : SelectedBackgroundCoefficientField
       Background ConstraintIndex StateIndex FrameIndex)
-    (background : Background) : Set₁ where
+    (background : Background) : Set₂ where
   field
+    coefficientFrameAuthority :
+      SelectedBackgroundFrameAuthority fieldData background
     realisation : RationalRealisation fieldData background
 
 open RationalFrameAuthority public
@@ -117,10 +206,12 @@ rationalFrameAvailableOnlyFromLiteralEntries :
     {fieldData : SelectedBackgroundCoefficientField
       Background ConstraintIndex StateIndex FrameIndex}
     {background} →
+  SelectedBackgroundFrameAuthority fieldData background →
   RationalRealisation fieldData background →
   RationalFrameAuthority fieldData background
-rationalFrameAvailableOnlyFromLiteralEntries realisation = record
-  { realisation = realisation }
+rationalFrameAvailableOnlyFromLiteralEntries authority realisation = record
+  { coefficientFrameAuthority = authority
+  ; realisation = realisation }
 
 data CoefficientFieldClaim : Set where
   literalSelectedField rationalSpecialisation : CoefficientFieldClaim
@@ -131,6 +222,9 @@ literalFieldIsNotRationalSpecialisation ()
 
 selectedBackgroundCoefficientFieldLevel : ProofLevel
 selectedBackgroundCoefficientFieldLevel = machineChecked
+
+gramInverseOverCoefficientFieldLevel : ProofLevel
+gramInverseOverCoefficientFieldLevel = machineChecked
 
 rationalFrameAuthorityLevel : ProofLevel
 rationalFrameAuthorityLevel = machineChecked
