@@ -10,6 +10,7 @@ on:
       - 'master'
     paths:
       - 'DASHI/Biology/EisensteinNineRingInterferenceExact.agda'
+      - 'DASHI/Biology/EisensteinThreeSixSymmetryExact.agda'
       - 'DASHI/Biology/HalfChartNineRingQuotientExact.agda'
       - 'DASHI/Biology/IndexedJExternalGluingExact.agda'
       - 'DASHI/Biology/IteratedPointedAttachmentSpiralExact.agda'
