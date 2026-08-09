@@ -9,10 +9,6 @@ import DASHI.Reasoning.RelationalStateCore as Core
 
 ------------------------------------------------------------------------
 -- Explanation / impact / repair separation.
---
--- Candidate mechanisms may explain why a caregiver response was difficult to
--- inhibit.  They do not inhabit the impact or repair coordinates and no
--- constructor in this module converts explanation into exemption.
 ------------------------------------------------------------------------
 
 data CandidateMechanism : Set where
@@ -65,8 +61,6 @@ record ExplanationImpactRepairSeparation : Set where
     explanationDoesNotDeleteRepair : Bool
     separationReceipt : String
 
--- Constructorless forbidden promotions: there is no proof term witnessing
--- that a candidate explanation automatically erases impact or repair.
 data ExplanationErasesImpact : Set where
 
 data ExplanationErasesRepair : Set where
@@ -79,11 +73,6 @@ explanationErasesRepairImpossible ()
 
 ------------------------------------------------------------------------
 -- Context-sensitive speech / withdrawal selection.
---
--- Withdrawal is neither globally promoted nor globally pathologised.  The
--- existing exact portfolio comparator shows that continuing is preferable
--- after attuned repair, while protective withdrawal is preferable when
--- repeated displacement makes continuation carry sufficiently high burden.
 ------------------------------------------------------------------------
 
 continueAfterAttunedRepair : Selection.BranchMetric
@@ -126,7 +115,7 @@ attunedContinuePortfolio : Selection.BranchPortfolio
 attunedContinuePortfolio = Selection.branchPortfolio
   "attuned-continue"
   (continueAfterAttunedRepair ∷ [])
-  []
+  (Selection.emptyInteractionMatrix (continueAfterAttunedRepair ∷ []))
   10
   "continuation after the floor is returned and the contribution remains open"
 
@@ -134,7 +123,7 @@ repeatedDisplacementContinuePortfolio : Selection.BranchPortfolio
 repeatedDisplacementContinuePortfolio = Selection.branchPortfolio
   "repeated-displacement-continue"
   (continueAfterRepeatedDisplacement ∷ [])
-  []
+  (Selection.emptyInteractionMatrix (continueAfterRepeatedDisplacement ∷ []))
   10
   "continuation under repeated reconstruction and diversion cost"
 
@@ -142,7 +131,7 @@ protectiveWithdrawalPortfolio : Selection.BranchPortfolio
 protectiveWithdrawalPortfolio = Selection.branchPortfolio
   "protective-withdrawal"
   (protectiveWithdrawal ∷ [])
-  []
+  (Selection.emptyInteractionMatrix (protectiveWithdrawal ∷ []))
   10
   "capacity-preserving pause"
 
