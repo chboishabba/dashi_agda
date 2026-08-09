@@ -26,7 +26,9 @@ module DASHI.Physics.YangMills.BalabanSelectedBackgroundGaugeConstraintStencilEx
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥; ⊥-elim)
 open import Data.Rational.Base as ℚ using (0ℚ)
+import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Nullary.Decidable.Core using (yes; no)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using (pair)
@@ -135,9 +137,10 @@ basisTransportBackwardOutsideZero :
       (pair columnCoordinate (pair columnAxis columnSite)))
     selectedAxis rowSite
   ≡ Q.zeroQ
-basisTransportBackwardOutsideZero background outside selectedAxis =
+basisTransportBackwardOutsideZero
+    {rowSite = rowSite} background outside selectedAxis =
   let
-    unit = Gauge.backwardTransportUnit background selectedAxis _
+    unit = Gauge.backwardTransportUnit background selectedAxis rowSite
   in
   trans
     (cong (Adjoint.adjointTransport unit)
@@ -163,7 +166,7 @@ basisBackwardTermOutsideZero
         | basisTransportBackwardOutsideZero
             background outside selectedAxis
         | GaugeMatrix.quaternionCoordinateZeroExact rowCoordinate =
-  refl
+  ℚRing.solve []
 
 selectedBackgroundGaugeConstraintMatrixOutsideStencilZero :
   ∀ background row column →
