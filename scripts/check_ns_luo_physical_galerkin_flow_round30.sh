@@ -14,6 +14,8 @@ files=(
   DASHI/Physics/Closure/NSTriadKNLiteralNonlinearEnergyCancellationRound30Exact.agda
   DASHI/Physics/Closure/NSTriadKNPhysicalFiniteEnergyIdentityRound30Exact.agda
   DASHI/Physics/Closure/NSTriadKNPhysicalGlobalGalerkinFlowRound30Exact.agda
+  DASHI/Physics/Closure/NSTriadKNPhysicalTimeDependentShellBalanceRound30Exact.agda
+  DASHI/Physics/Closure/NSTriadKNCutoffUniformCotlarSteinRound30Exact.agda
   DASHI/Physics/Closure/NSTriadKNLuoPhysicalGalerkinFlowRound30Validation.agda
 )
 
@@ -40,6 +42,9 @@ checks=(
   'NSTriadKNPhysicalFiniteEnergyIdentityRound30Exact.agda:physicalFiniteDifferentialEnergyIdentity'
   'NSTriadKNPhysicalFiniteEnergyIdentityRound30Exact.agda:physicalEnergyContinuationTrajectory'
   'NSTriadKNPhysicalGlobalGalerkinFlowRound30Exact.agda:physicalFiniteFlowHasNoFiniteMaximalTime'
+  'NSTriadKNPhysicalTimeDependentShellBalanceRound30Exact.agda:physicalFiveSourceShellBalanceAt'
+  'NSTriadKNCutoffUniformCotlarSteinRound30Exact.agda:cutoffUniformCotlarSteinSquaredBound'
+  'NSTriadKNCutoffUniformCotlarSteinRound30Exact.agda:geometricEnvelopeProducesUniformMass'
 )
 for check in "${checks[@]}"; do
   file="${check%%:*}"
@@ -49,8 +54,11 @@ done
 
 grep -q '10.1007/BF02547354' DASHI/Physics/Closure/NSTriadKNPhysicalGalerkinVectorFieldRound30Exact.agda
 grep -q '10.1090/chel/343' DASHI/Physics/Closure/NSTriadKNPhysicalFiniteEnergyIdentityRound30Exact.agda
+grep -q '10.24033/asens.1404' DASHI/Physics/Closure/NSTriadKNPhysicalTimeDependentShellBalanceRound30Exact.agda
+grep -q '10.1002/cpa.3160410704' DASHI/Physics/Closure/NSTriadKNCutoffUniformCotlarSteinRound30Exact.agda
 grep -q 'ReconstructedPhysicalState F E -> ReconstructedPhysicalState F E' "$doc"
 grep -q 'dE/dt + nu D = 0' "$doc"
+grep -q 'T_q\* T_r' "$doc"
 
 scripts/run_agda29_parallel_check.sh \
   DASHI/Physics/Closure/NSTriadKNLuoPhysicalGalerkinFlowRound30Validation.agda
