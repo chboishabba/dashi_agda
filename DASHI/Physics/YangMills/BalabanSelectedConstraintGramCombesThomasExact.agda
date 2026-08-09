@@ -21,24 +21,26 @@ module DASHI.Physics.YangMills.BalabanSelectedConstraintGramCombesThomasExact wh
 -- DASHI CONTRIBUTION
 --
 -- Apply the repository's standard finite Combes--Thomas algebra first to the
--- smaller multiplier Gram operator K=L L*.  The module exposes:
+-- smaller multiplier Gram operator K=L L*.  Its spectral floor gamma_L is an
+-- independent selected-background datum: it is not identified with the
+-- 1/32 state-Hessian floor.  A certified half-gap and resolvent majorant obey
 --
--- * an exact finite-range certificate for K;
--- * the literal tilted kernel and its three scalar inputs;
--- * a half-gap row-defect theorem from distortion times row mass;
--- * off-diagonal decay of K^{-1} (or K+) from a tilted-entry majorant.
+--   2 halfGap = gamma_L,
+--   greenMajorant gamma_L = 2.
 --
--- The selected-background stencil, reduced floor and numerical tilt are
--- explicit producer fields.  No decay claim is promoted until those physical
--- fields are supplied.
+-- The module exposes the exact finite-range stencil, reduced multiplier-space
+-- coercivity, diagonal tilt row budget, and off-diagonal decay of K^{-1} or K+.
+-- No physical decay claim is promoted until those literal producers exist.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
+open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; 1ℚ; _-_; _*_; _≤_; _<_; ∣_∣)
+  (ℚ; 0ℚ; 1ℚ; _-_; _*_; _≤_; _<_; _/_; ∣_∣)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanConstructiveRationalMatrixInverseExact as Matrix
+import DASHI.Physics.YangMills.BalabanFiniteRectangularRationalExact as Rect
 import DASHI.Physics.YangMills.BalabanP33FiniteKKTAdmissibleProjectorExact as KKT
 import DASHI.Physics.YangMills.BalabanP33FiniteCombesThomasConjugationExact as CT
 import DASHI.Physics.YangMills.BalabanP33FiniteCombesThomasTiltBudgetExact as Tilt
@@ -49,6 +51,7 @@ record ConstraintGramFiniteRange
   field
     distance : Multiplier → Multiplier → ℚ
     interactionRange : ℚ
+    interactionRangeNonnegative : 0ℚ ≤ interactionRange
     outsideRangeZero : ∀ left right →
       interactionRange < distance left right →
       KKT.constraintGram projectorData left right ≡ 0ℚ
@@ -64,6 +67,59 @@ selectedConstraintGramFiniteRange :
   KKT.constraintGram projectorData left right ≡ 0ℚ
 selectedConstraintGramFiniteRange finiteRange =
   outsideRangeZero finiteRange
+
+record ConstraintGramReducedFloor
+    {Multiplier : Set}
+    (projectorData : KKT.FiniteKKTProjectorData Multiplier) : Set₁ where
+  field
+    ReducedMultiplier : (Multiplier → ℚ) → Set
+
+    reducedFloor : ℚ
+    halfGap : ℚ
+    tiltedGreenMajorant : ℚ
+
+    reducedFloorPositive : 0ℚ < reducedFloor
+    halfGapNonnegative : 0ℚ ≤ halfGap
+    tiltedGreenMajorantNonnegative : 0ℚ ≤ tiltedGreenMajorant
+
+    halfGapCalibration :
+      (+ 2 / 1) * halfGap ≡ reducedFloor
+
+    tiltedGreenMajorantCalibration :
+      tiltedGreenMajorant * reducedFloor ≡ (+ 2 / 1)
+
+    reducedMultiplierCoercive : ∀ multiplier →
+      ReducedMultiplier multiplier →
+      reducedFloor
+        * Rect.finiteNormSq
+            (KKT.multiplierCarrier projectorData) multiplier
+      ≤ Rect.finiteDot
+          (KKT.multiplierCarrier projectorData)
+          multiplier
+          (Rect.applyRectangular
+            (KKT.multiplierCarrier projectorData)
+            (KKT.constraintGram projectorData)
+            multiplier)
+
+open ConstraintGramReducedFloor public
+
+selectedConstraintGramReducedFloor :
+  ∀ {Multiplier}
+    {projectorData : KKT.FiniteKKTProjectorData Multiplier}
+    (floorData : ConstraintGramReducedFloor projectorData)
+    multiplier →
+  ReducedMultiplier floorData multiplier →
+  reducedFloor floorData
+    * Rect.finiteNormSq
+        (KKT.multiplierCarrier projectorData) multiplier
+  ≤ Rect.finiteDot
+      (KKT.multiplierCarrier projectorData)
+      multiplier
+      (Rect.applyRectangular
+        (KKT.multiplierCarrier projectorData)
+        (KKT.constraintGram projectorData)
+        multiplier)
+selectedConstraintGramReducedFloor = reducedMultiplierCoercive
 
 selectedConstraintGramTilt :
   ∀ {Multiplier} →
@@ -85,7 +141,8 @@ selectedConstraintGramTiltDefect weight inverseWeight projectorData =
 
 record ConstraintGramTiltCertificate
     {Multiplier : Set}
-    (projectorData : KKT.FiniteKKTProjectorData Multiplier) : Set₁ where
+    (projectorData : KKT.FiniteKKTProjectorData Multiplier)
+    (floorData : ConstraintGramReducedFloor projectorData) : Set₁ where
   field
     weight inverseWeight : Multiplier → ℚ
     distortion rowMass : ℚ
@@ -106,14 +163,15 @@ record ConstraintGramTiltCertificate
       ≤ rowMass
 
     halfGapBudget :
-      distortion * rowMass ≤ Tilt.p33HalfGap
+      distortion * rowMass ≤ halfGap floorData
 
 open ConstraintGramTiltCertificate public
 
 selectedConstraintGramTiltBelowHalfGap :
   ∀ {Multiplier}
-    {projectorData : KKT.FiniteKKTProjectorData Multiplier} →
-  (certificate : ConstraintGramTiltCertificate projectorData) →
+    {projectorData : KKT.FiniteKKTProjectorData Multiplier}
+    {floorData : ConstraintGramReducedFloor projectorData} →
+  (certificate : ConstraintGramTiltCertificate projectorData floorData) →
   ∀ left →
   Tilt.tiltDefectAbsoluteRowMass
     (Matrix.coordinates (KKT.multiplierCarrier projectorData))
@@ -121,16 +179,17 @@ selectedConstraintGramTiltBelowHalfGap :
     (inverseWeight certificate)
     (KKT.constraintGram projectorData)
     left
-  ≤ Tilt.p33HalfGap
+  ≤ halfGap floorData
 selectedConstraintGramTiltBelowHalfGap
-    {projectorData = projectorData} certificate =
-  Tilt.p33TiltDefectBelowHalfGap
+    {projectorData = projectorData} {floorData = floorData} certificate =
+  Tilt.tiltDefectRowBelowBudget
     (Matrix.coordinates (KKT.multiplierCarrier projectorData))
     (weight certificate)
     (inverseWeight certificate)
     (KKT.constraintGram projectorData)
     (distortion certificate)
     (rowMass certificate)
+    (halfGap floorData)
     (distortionNonnegative certificate)
     (ratioBound certificate)
     (gramRowMassBound certificate)
@@ -139,6 +198,7 @@ selectedConstraintGramTiltBelowHalfGap
 record ConstraintGramDecayCertificate
     {Multiplier : Set}
     (projectorData : KKT.FiniteKKTProjectorData Multiplier)
+    (floorData : ConstraintGramReducedFloor projectorData)
     (root target : Multiplier) : Set₁ where
   field
     weight inverseWeight : Multiplier → ℚ
@@ -150,28 +210,29 @@ record ConstraintGramDecayCertificate
     tiltedGreenEntryBound :
       ∣ CT.diagonalConjugate weight inverseWeight
           (KKT.multiplierGreen projectorData) root target ∣
-      ≤ Tilt.p33TiltedResolventMajorant
+      ≤ tiltedGreenMajorant floorData
 
 open ConstraintGramDecayCertificate public
 
 selectedConstraintGramCombesThomasDecay :
   ∀ {Multiplier}
     (projectorData : KKT.FiniteKKTProjectorData Multiplier)
+    (floorData : ConstraintGramReducedFloor projectorData)
     root target
     (certificate : ConstraintGramDecayCertificate
-      projectorData root target) →
+      projectorData floorData root target) →
   ∣ KKT.multiplierGreen projectorData root target ∣
-  ≤ Tilt.p33TiltedResolventMajorant
+  ≤ tiltedGreenMajorant floorData
       * weight certificate target
 selectedConstraintGramCombesThomasDecay
-    projectorData root target certificate =
+    projectorData floorData root target certificate =
   CT.combesThomasKernelDecayFromTiltedEntry
     (weight certificate)
     (inverseWeight certificate)
     (inverseLaw certificate)
     (KKT.multiplierGreen projectorData)
     root target
-    Tilt.p33TiltedResolventMajorant
+    (tiltedGreenMajorant floorData)
     (rootInverseOne certificate)
     (targetWeightNonnegative certificate)
     (targetWeightAbsolute certificate)
@@ -179,6 +240,9 @@ selectedConstraintGramCombesThomasDecay
 
 constraintGramFiniteRangeLevel : ProofLevel
 constraintGramFiniteRangeLevel = machineChecked
+
+constraintGramReducedFloorLevel : ProofLevel
+constraintGramReducedFloorLevel = machineChecked
 
 constraintGramCombesThomasReductionLevel : ProofLevel
 constraintGramCombesThomasReductionLevel = machineChecked
