@@ -91,8 +91,9 @@ record ConstraintGramReducedFloor
     reducedMultiplierCoercive : ∀ multiplier →
       ReducedMultiplier multiplier →
       reducedFloor
-        * Rect.finiteNormSq
-            (Pseudo.multiplierCarrier pseudoData) multiplier
+        * Rect.finiteDot
+            (Pseudo.multiplierCarrier pseudoData)
+            multiplier multiplier
       ≤ Rect.finiteDot
           (Pseudo.multiplierCarrier pseudoData)
           multiplier
@@ -107,8 +108,9 @@ selectedConstraintGramReducedFloor :
     multiplier →
   ReducedMultiplier floorData multiplier →
   reducedFloor floorData
-    * Rect.finiteNormSq
-        (Pseudo.multiplierCarrier pseudoData) multiplier
+    * Rect.finiteDot
+        (Pseudo.multiplierCarrier pseudoData)
+        multiplier multiplier
   ≤ Rect.finiteDot
       (Pseudo.multiplierCarrier pseudoData)
       multiplier
