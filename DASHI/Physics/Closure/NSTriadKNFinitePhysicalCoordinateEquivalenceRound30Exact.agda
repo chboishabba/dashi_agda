@@ -24,14 +24,21 @@ module DASHI.Physics.Closure.NSTriadKNFinitePhysicalCoordinateEquivalenceRound30
 
 open import Agda.Primitive using (Level; lsuc)
 open import Agda.Builtin.Bool using (Bool; true; false)
-open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.List using (List)
-open import Data.Rational.Base using (ℚ; _≤_)
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List; _∷_)
+open import Data.Rational.Base using
+  (ℚ; 0ℚ; _-_; _*_; _≤_)
+open import Relation.Binary.PropositionalEquality using
+  (cong₂; trans)
 
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteGalerkinPolynomialRound26Exact as Polynomial
 import DASHI.Physics.Closure.NSTriadKNFiniteGalerkinLocalLipschitzRound28Exact as Coordinate
 import DASHI.Physics.Closure.NSTriadKNFiniteGalerkinVectorLipschitzRound29Exact as Vector
+
+-- Local list membership, intentionally tied to the exact finite equation list.
+data _∈_ {A : Set} (value : A) : List A → Set where
+  here : ∀ {head tail} → value ≡ head → value ∈ (head ∷ tail)
+  there : ∀ {head tail} → value ∈ tail → value ∈ (head ∷ tail)
 
 record FinitePhysicalCoordinateEquivalence
     {stateLevel : Level}
@@ -67,11 +74,6 @@ record LiteralCoordinatesRepresentPhysicalVectorField
           (equationFor variable) (encode equivalence state)
 
 open LiteralCoordinatesRepresentPhysicalVectorField public
-
--- Local list membership, intentionally tied to the exact finite equation list.
-data _∈_ {A : Set} (value : A) : List A → Set where
-  here : ∀ {head tail} → value ≡ head → value ∈ (head ∷ tail)
-  there : ∀ {head tail} → value ∈ tail → value ∈ (head ∷ tail)
 
 physicalCoordinateRightHandSideDifference :
   ∀ {stateLevel}
@@ -147,11 +149,13 @@ transportCompleteFiniteVectorLipschitz :
   ≤ Vector.finiteVectorLipschitzWeight radius
       (Vector.coordinateEquations coordinateField) * delta
 transportCompleteFiniteVectorLipschitz
+    {equivalence = equivalence}
+    {coordinateField = coordinateField}
     representation radius delta radiusNN deltaNN state reference
     stateBound referenceBound differenceBound =
   Vector.literalFiniteVectorFieldLocalLipschitz
-    _ radius delta radiusNN deltaNN
-    (encode _ state) (encode _ reference)
+    coordinateField radius delta radiusNN deltaNN
+    (encode equivalence state) (encode equivalence reference)
     (encodedBound stateBound)
     (encodedBound referenceBound)
     (encodedDifferenceBound differenceBound)
