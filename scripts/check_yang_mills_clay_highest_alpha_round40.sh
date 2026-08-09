@@ -16,6 +16,7 @@ files=(
   DASHI/Physics/YangMills/BalabanSelectedMultiplierDefectGreenContractionExact.agda
   DASHI/Physics/YangMills/BalabanSelectedCorrelatedResidualOwnershipExact.agda
   DASHI/Physics/YangMills/BalabanSelectedCorrelatedResidualAuthorityExact.agda
+  DASHI/Physics/YangMills/BalabanSelectedCorrelatedResidualBoundsExact.agda
   DASHI/Physics/YangMills/BalabanSelectedConstraintGramCombesThomasExact.agda
   DASHI/Physics/YangMills/BalabanSelectedKKTMultiplierLocalityExact.agda
   DASHI/Physics/YangMills/BalabanP33FiniteKKTBlockCombesThomasConstantsExact.agda
@@ -71,6 +72,9 @@ checks=(
   'BalabanSelectedCorrelatedResidualOwnershipExact.agda:correlatedResidualClosesSingletonBudget'
   'BalabanSelectedCorrelatedResidualAuthorityExact.agda:canonicalCorrelatedResidualExact'
   'BalabanSelectedCorrelatedResidualAuthorityExact.agda:canonicalCorrelatedResidualIsProjectedSpillover'
+  'BalabanSelectedCorrelatedResidualBoundsExact.agda:rawLocalizationSpilloverUpper'
+  'BalabanSelectedCorrelatedResidualBoundsExact.agda:selectedMultiplierDefectPairingUpper'
+  'BalabanSelectedCorrelatedResidualBoundsExact.agda:selectedCorrelatedResidualAtomCancellationExact'
   'BalabanSelectedConstraintGramCombesThomasExact.agda:selectedConstraintGramReducedFloor'
   'BalabanSelectedConstraintGramCombesThomasExact.agda:selectedConstraintGramTiltBelowHalfGap'
   'BalabanSelectedConstraintGramCombesThomasExact.agda:selectedConstraintGramCombesThomasDecay'
