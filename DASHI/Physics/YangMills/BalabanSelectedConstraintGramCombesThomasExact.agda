@@ -35,7 +35,7 @@ module DASHI.Physics.YangMills.BalabanSelectedConstraintGramCombesThomasExact wh
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; 1ℚ; _*_; _≤_; _<_; ∣_∣)
+  (ℚ; 0ℚ; 1ℚ; _-_; _*_; _≤_; _<_; ∣_∣)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanConstructiveRationalMatrixInverseExact as Matrix
@@ -57,10 +57,10 @@ open ConstraintGramFiniteRange public
 
 selectedConstraintGramFiniteRange :
   ∀ {Multiplier}
-    {projectorData : KKT.FiniteKKTProjectorData Multiplier} →
-  ConstraintGramFiniteRange projectorData →
-  ∀ left right →
-  interactionRange _ < distance _ left right →
+    {projectorData : KKT.FiniteKKTProjectorData Multiplier}
+    (finiteRange : ConstraintGramFiniteRange projectorData)
+    left right →
+  interactionRange finiteRange < distance finiteRange left right →
   KKT.constraintGram projectorData left right ≡ 0ℚ
 selectedConstraintGramFiniteRange finiteRange =
   outsideRangeZero finiteRange
@@ -157,24 +157,25 @@ open ConstraintGramDecayCertificate public
 selectedConstraintGramCombesThomasDecay :
   ∀ {Multiplier}
     (projectorData : KKT.FiniteKKTProjectorData Multiplier)
-    root target →
-  ConstraintGramDecayCertificate projectorData root target →
+    root target
+    (certificate : ConstraintGramDecayCertificate
+      projectorData root target) →
   ∣ KKT.multiplierGreen projectorData root target ∣
   ≤ Tilt.p33TiltedResolventMajorant
-      * ConstraintGramDecayCertificate.weight _ target
+      * weight certificate target
 selectedConstraintGramCombesThomasDecay
     projectorData root target certificate =
   CT.combesThomasKernelDecayFromTiltedEntry
-    (ConstraintGramDecayCertificate.weight certificate)
-    (ConstraintGramDecayCertificate.inverseWeight certificate)
-    (ConstraintGramDecayCertificate.inverseLaw certificate)
+    (weight certificate)
+    (inverseWeight certificate)
+    (inverseLaw certificate)
     (KKT.multiplierGreen projectorData)
     root target
     Tilt.p33TiltedResolventMajorant
-    (ConstraintGramDecayCertificate.rootInverseOne certificate)
-    (ConstraintGramDecayCertificate.targetWeightNonnegative certificate)
-    (ConstraintGramDecayCertificate.targetWeightAbsolute certificate)
-    (ConstraintGramDecayCertificate.tiltedGreenEntryBound certificate)
+    (rootInverseOne certificate)
+    (targetWeightNonnegative certificate)
+    (targetWeightAbsolute certificate)
+    (tiltedGreenEntryBound certificate)
 
 constraintGramFiniteRangeLevel : ProofLevel
 constraintGramFiniteRangeLevel = machineChecked
