@@ -18,7 +18,8 @@ module DASHI.Physics.Common.PhysicalProducerMaturityExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Primitive using (Level; _⊔_; lsuc)
-open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
+open import Relation.Binary.PropositionalEquality using
+  (cong; subst; sym; trans)
 
 data CompletionStage : Set where
   reducerComplete certificateSchemaComplete syntheticFixtureComplete
@@ -84,8 +85,6 @@ sourceRepresentsIntermediate
     (RepresentsFirst source)
     (sym (intermediateIsLiteral chain))
     (firstPreservesRepresentation chain source)
-  where
-  open import Relation.Binary.PropositionalEquality using (sym)
 
 intermediateRepresentsOutput :
   ∀ {a b c r s}
@@ -102,8 +101,6 @@ intermediateRepresentsOutput
     (RepresentsSecond (intermediate chain))
     (sym (outputIsLiteral chain))
     (secondPreservesRepresentation chain (intermediate chain))
-  where
-  open import Relation.Binary.PropositionalEquality using (sym)
 
 sameCarrierCompositeExact :
   ∀ {a b c r s}
