@@ -82,7 +82,23 @@ gR_q=\eta\quad\Longrightarrow\quad g=g_q(\eta).
 
 This strengthens the Round-31 dimensional diagnosis. Exact cutoff-independent calibration does not merely benefit from one inverse shell power: on this dyadic model the compensating multiplicative factor is forced and halves at every shell.
 
-The physical theorem remains to derive that gain from the actual trajectory through occupation time, dissipation-range localization, intermittency, alignment, or another signed cancellation. The algebra cannot manufacture that mechanism.
+There is also an adjacent-shell no-go theorem. If one scale-independent gain satisfies
+
+\[
+gR_q=\eta,
+\qquad
+gR_{q+1}=\eta,
+\]
+
+then necessarily
+
+\[
+\eta=0.
+\]
+
+Therefore every nonzero owner allocation refutes a scale-free exact calibration, even before an infinite-cutoff limit is taken.
+
+The physical theorem remains to derive the shell-dependent gain from the actual trajectory through occupation time, dissipation-range localization, intermittency, alignment, or another signed cancellation. The algebra cannot manufacture that mechanism.
 
 ## 4. Resource valuation on the actual nine-owner family
 
