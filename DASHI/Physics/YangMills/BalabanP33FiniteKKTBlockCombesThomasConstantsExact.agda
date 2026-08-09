@@ -29,10 +29,9 @@ module DASHI.Physics.YangMills.BalabanP33FiniteKKTBlockCombesThomasConstantsExac
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; _<_; _/_; ∣_∣)
+  (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; _<_; _/_; ∣_∣; NonNegative)
 import Data.Rational.Properties as ℚP
-import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanP33FiniteCombesThomasConjugationExact as CT
@@ -103,8 +102,21 @@ selectedKKTTiltedInverseMajorantNonnegative constants =
   let
     twoNonnegative : 0ℚ ≤ (+ 2 / 1)
     twoNonnegative = ℚP.nonNegative⁻¹ (+ 2 / 1)
+
+    instance
+      twoNN : NonNegative (+ 2 / 1)
+      twoNN = ℚ.nonNegative twoNonnegative
+
+      inverseNN : NonNegative (selectedKKTInverseNormUpper constants)
+      inverseNN = ℚ.nonNegative (inverseNormNonnegative constants)
+
+      productNN : NonNegative
+        ((+ 2 / 1) * selectedKKTInverseNormUpper constants)
+      productNN = ℚP.nonNeg*nonNeg⇒nonNeg
+        (+ 2 / 1) (selectedKKTInverseNormUpper constants)
   in
-  ℚP.*-mono-≤ twoNonnegative (inverseNormNonnegative constants)
+  ℚP.nonNegative⁻¹
+    ((+ 2 / 1) * selectedKKTInverseNormUpper constants)
 
 record ThreeBlockTiltEstimate
     (constants : SelectedKKTCombesThomasConstants)
@@ -141,7 +153,7 @@ threeBlockNeumannParameterBelowHalf
     {constants} estimate inverseNonnegative =
   let
     instance
-      inverseNN : ℚ.NonNegative
+      inverseNN : NonNegative
         (selectedKKTInverseNormUpper constants)
       inverseNN = ℚ.nonNegative inverseNonnegative
   in
@@ -174,21 +186,21 @@ selectedKKTCombesThomasDecay :
     (constants : SelectedKKTCombesThomasConstants)
     (green : CT.Matrix Site)
     root target →
-  SelectedKKTKernelDecayData constants green root target →
+  (dataSet : SelectedKKTKernelDecayData constants green root target) →
   ∣ green root target ∣
   ≤ selectedKKTTiltedInverseMajorant constants
-      * weight _ target
-selectedKKTCombesThomasDecay constants green root target data =
+      * weight dataSet target
+selectedKKTCombesThomasDecay constants green root target dataSet =
   CT.combesThomasKernelDecayFromTiltedEntry
-    (weight data)
-    (inverseWeight data)
-    (weightInverseLaw data)
+    (weight dataSet)
+    (inverseWeight dataSet)
+    (weightInverseLaw dataSet)
     green root target
     (selectedKKTTiltedInverseMajorant constants)
-    (rootInverseWeightOne data)
-    (targetWeightNonnegative data)
-    (targetWeightAbsolute data)
-    (tiltedKKTGreenEntryUpper data)
+    (rootInverseWeightOne dataSet)
+    (targetWeightNonnegative dataSet)
+    (targetWeightAbsolute dataSet)
+    (tiltedKKTGreenEntryUpper dataSet)
 
 record FullBlockFiniteRange
     {Site : Set}
