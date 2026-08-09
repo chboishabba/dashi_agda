@@ -163,7 +163,16 @@ This theorem does not reconstruct the Klein quartic, its Jacobian, its endomorph
 
 `DASHI.Physics.Moonshine.MoonshineTraceIndexedWeaveExact` is a bounded finite proxy with no postulates. Two distinct hidden states share one trace profile while carrying different hidden tags. Trace fibres form an indexed weave under equality transport, and identity transport retains the hidden residual rather than erasing it.
 
-No actual Monster representation or McKay–Thompson trace equality is claimed.
+`DASHI.Physics.Moonshine.SSPMoonshineTraceFibreIntegrationExact` then forms the actual bounded product index
+
+```text
+Index = SSPPrime x TraceProfile
+State = laneState x TraceFibre.
+```
+
+Paths transport the SSP lane while preserving the trace profile by equality. Residuals retain both the lane orientation and hidden trace tag. The module proves that equal observed traces remain hidden-distinct in every SSP lane and that inverse lane transport preserves the hidden trace tag.
+
+This is a finite cross-pollination theorem. It explicitly leaves false the stronger statement that Monster symmetry supplies a canonical compatibility or identification among the fifteen Ogg-prime lanes. No actual Monster representation or McKay–Thompson trace equality is claimed.
 
 ## KAM boundary
 
