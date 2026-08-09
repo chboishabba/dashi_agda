@@ -1,207 +1,551 @@
-# Finite Relational Branch Cobordism Geometry
+# Relational Branch Cobordism Geometry
 
-## Scope
+This note formalises the “pair of pants” intuition as an exact finite carrier. It complements the process-bearing PNF hyperfabric, the finite attractor-selection ledger, and the integer-pair double-/\(n\)-slit algebra.
 
-`DASHI.Reasoning.RelationalBranchCobordismGeometry` supplies an exact finite boundary-and-channel carrier for one coarse proposition or process splitting into several fine continuations.
+The implementation separates three levels:
 
-The construction uses the pants/cobordism picture as structural provenance, but it does not claim:
+1. **branch topology:** one coarse boundary splitting into \(n\) fine boundaries;
+2. **branch dynamics:** phase-sensitive recombination and pairwise interference;
+3. **branch direction:** signed transport toward, orthogonal to, or away from a desired attractor.
 
-- a smooth manifold;
-- a topological quantum field theory functor;
-- a Hilbert-space interpretation;
-- a continuous angle reconstruction;
-- a literal modular `j`-invariant;
-- a clinical interpretation of path markers.
+The carrier is combinatorial. It does not claim a smooth cobordism, TQFT, Hilbert space, Born rule, or literal quantum cognition.
 
-The exact object is combinatorial:
+## 1. The finite \(1\to n\) pants object
 
-```text
-coarse boundary
-    -> finite list of typed branch channels
-    -> optional gluing into a further one-to-n junction.
-```
+A branching junction is represented by
 
-## Boundary and channel types
+\[
+\mathcal P_{1\to n}
+=
+(c;f_1,\ldots,f_n),
+\]
 
-A `BoundaryInterface` records:
+where \(c\) is one coarse input channel and \(f_i\) are fine output channels.
 
-- a proposition type;
-- a coarse/fine scale label;
-- finite capacity;
-- a phase label on the existing four-phase carrier;
-- openness;
-- provenance.
+Each channel carries:
 
-A `BranchChannel` adds a finite wave and destination basin. A `OneToNBranching` contains one coarse input channel and a finite list of fine outputs.
+\[
+(\text{proposition type},
+\text{scale label},
+\text{capacity},
+\text{phase},
+\text{open status},
+\text{provenance},
+\text{wave},
+\text{destination basin}).
+\]
 
-The carrier retains two distinct conservation questions:
+The names `j-coarse` and `j-fine` denote scale levels in this relational model. They do not assert identity with the modular \(j\)-invariant.
 
-```text
-output capacity = input capacity
-```
+## 2. Capacity and wave conservation are different
 
-and
+For a junction \(P\), define
 
-```text
-sum of output waves = input wave.
-```
+\[
+C_{\rm in}(P)=C(c),
+\qquad
+C_{\rm out}(P)=\sum_i C(f_i).
+\]
 
-Capacity may be conserved while the recombined state retains a non-zero phase/path residual.
+Capacity conservation is
 
-## Exact composition
+\[
+C_{\rm out}(P)=C_{\rm in}(P).
+\]
 
-`BranchSubstitution` glues a secondary junction into one selected output of an outer junction. The gluing witness checks:
+Wave recombination is
+
+\[
+\mu(P)=\sum_i \psi(f_i).
+\]
+
+Wave conservation is the separate condition
+
+\[
+\mu(P)=\psi(c).
+\]
+
+A system can conserve nominal capacity while changing phase, provenance, or the reconstructed coarse state.
+
+The split/recombine residual is
+
+\[
+R(P)=\mu(P)-\psi(c).
+\]
+
+This residual is a finite memory defect: it records how the state after traversing the branch structure differs from the state before splitting.
+
+The canonical phase-changing witness conserves capacity but has
+
+\[
+R(P)=(-1,1).
+\]
+
+Thus
+
+\[
+\boxed{
+\text{same total capacity}
+\not\Rightarrow
+\text{same recombined state}.
+}
+\]
+
+## 3. Composition by boundary gluing
+
+A fine output of one junction may be replaced by another \(1\to m\) junction when their interfaces match.
+
+The matching witness requires equality of:
 
 - proposition type;
 - capacity;
 - phase;
-- wave;
-- openness.
+- wave state;
+- open status.
 
-The canonical example composes:
+If
 
-```text
-3 -> (2, 1)
-```
+\[
+P:c\to(f_1,\ldots,f_k,\ldots,f_n)
+\]
 
-with:
+and
 
-```text
-2 -> (1, 1)
-```
+\[
+Q:f_k\to(g_1,\ldots,g_m),
+\]
 
-to obtain:
+then substitution gives
 
-```text
-3 -> (1, 1, 1).
-```
+\[
+P\circ_kQ:
+ c\to(f_1,\ldots,f_{k-1},g_1,\ldots,g_m,f_{k+1},\ldots,f_n).
+\]
 
-Agda proves exactly:
+The canonical Agda witness composes two \(1\to2\) junctions to obtain an exact \(1\to3\) junction. It proves:
 
-```text
-outputCount composedOneToThree = 3
-outputCapacity composedOneToThree = inputCapacity composedOneToThree
-recombinedWave composedOneToThree = coarse input wave
-splitRecombineResidual composedOneToThree = 0.
-```
+\[
+N_{\rm outputs}=3,
+\]
 
-This is finite compositional mathematics rather than a stored narrative receipt.
+\[
+C_{\rm out}=C_{\rm in}=3,
+\]
 
-## Path-dependent residual memory
+and
 
-A second exact example conserves scalar capacity while assigning different phases to two output channels. The result is:
+\[
+R(P\circ Q)=0.
+\]
 
-```text
-capacity conserved
-but
-splitRecombineResidual = (-1, +1).
-```
+This is the finite analogue of gluing pants-like pieces into a larger branching surface.
 
-This supplies a concrete PNF-compatible memory distinction:
+## 4. Input alignment and attractor alignment
 
-```text
-same coarse amount
-!=
-same fine transport history.
-```
+The attachments distinguish two geometrically different questions:
 
-A reduction that stores only total capacity would erase the retained path residual.
+1. Does a branch faithfully continue the incoming proposition?
+2. Does it move toward the desired attractor?
 
-## Attractor projection
+In a continuous model these would be measured by
 
-Each branch can be assigned a balanced attractor orientation:
-
-```text
-+1  toward the target attractor
- 0  orthogonal/open
--1  away from the target attractor.
-```
-
-The module computes both:
-
-- squared coherent intensity, which retains magnitude;
-- signed attractor flux, which retains direction.
-
-This avoids the error:
-
-```text
-large coherent magnitude
-=>
-progress toward the desired basin.
-```
-
-For example, two opposed branches have coherent intensity four but signed flux minus two.
-
-## Marker suppression and relational memory
-
-A path-marker relation is either:
-
-```text
-indistinguishablePaths
-```
-
-or:
-
-```text
-distinguishablePaths.
-```
-
-On the finite carrier, distinguishable path markers suppress the cross term. Agda computes:
-
-```text
-in-phase indistinguishable intensity = 4
-in-phase distinguishable intensity   = 2
-
-opposed indistinguishable intensity  = 0
-opposed distinguishable intensity    = 2.
-```
-
-The point is not literal quantum cognition. It is an exact demonstration that whether path provenance is retained or quotiented changes the interaction term.
-
-For relational PNF memory this creates two opposite errors:
-
-- path erasure can create spurious constructive coherence;
-- path over-separation can destroy genuine constructive coherence.
-
-The memory system must therefore preserve path identity only at the resolution justified by evidence.
-
-## Branch marginal law
-
-For one branch and a finite list of other branches, the module proves:
-
-```text
-intensity(branch :: others)
+\[
+\cos\theta_i^{\rm in}
 =
-branch diagonal intensity
-+ intensity(others)
-+ every cross term touching branch.
-```
+\frac{\langle p,v_i\rangle}{\|p\|\|v_i\|},
+\]
 
-Closing a branch therefore removes both its own diagonal mass and all interactions incident to it. This is the exact branch-level version of the earlier marginal-attractor principle: the value of one option depends on the currently live branch ecology.
+and
 
-## PNF, trauma, and hyperfabric integration
+\[
+\cos\theta_i^{\rm att}
+=
+\frac{\langle -\nabla V_{A^*},v_i\rangle}
+{\|\nabla V_{A^*}\|\|v_i\|}.
+\]
 
-The cobordism carrier is imported by `DASHI.Reasoning.RelationalEverything`, which is imported by `DASHI.RelationalFlowRepairAtlas` alongside:
+The present exact carrier uses the balanced discretisation
 
-- `DASHI.Cognition.PNF.TraumaMemoryHypervoxelBridge`;
-- `DASHI.Biology.PredictiveMetastabilityTraumaBridge`;
-- `DASHI.Core.RelationalHypervoxelBraidCore`;
-- `DASHI.FullRelationalFlowRepairHyperfabric`.
+\[
+\cos\theta_i^{\rm att}
+\in\{-1,0,+1\}.
+\]
 
-A trauma-related deformation may preserve a historical path marker too broadly or erase relevant path distinctions too quickly. The module does not diagnose either condition; it provides the finite carrier on which a later evidence-bearing transport witness can be stated.
+These values mean:
 
-## Source provenance
+\[
++1=\text{toward},
+\qquad
+0=\text{orthogonal},
+\qquad
+-1=\text{away}.
+\]
 
-The source atlas records:
+No continuous angle is inferred from the trit.
 
-Michael F. Atiyah, *Topological quantum field theory*, `Publications Mathematiques de l'IHES` 68 (1988), DOI `10.1007/BF02698547`.
+## 5. Attractor-projected amplitude
 
-The imported relationship is strictly bounded: cobordism, boundary, and compositional provenance for the finite pants analogy. Smooth topology, TQFT functoriality, Hilbert spaces, and physical field theory remain outside the theorem surface.
+For branch wave \(\psi_i\) and alignment trit \(g_i\), define
 
-## Central invariant
+\[
+\widetilde\psi_i=g_i\psi_i.
+\]
 
-```text
-A coarse split/recombine account is adequate only when it preserves the
-boundary, capacity, phase, path, residual, and provenance information needed
-for later reconstruction.
-```
+The attractor-projected resultant is
+
+\[
+\Psi_{A^*}=\sum_i\widetilde\psi_i.
+\]
+
+The coherent magnitude is
+
+\[
+I_{A^*}=\|\Psi_{A^*}\|^2.
+\]
+
+But squaring erases direction. Therefore the formalisation also retains signed flux along a fixed attractor axis \(e_{A^*}\):
+
+\[
+F_{A^*}=\langle e_{A^*},\Psi_{A^*}\rangle.
+\]
+
+Exact witnesses show:
+
+- two aligned unit branches have \(I_{A^*}=4\) and \(F_{A^*}=+2\);
+- two opposed unit branches also have \(I_{A^*}=4\), but \(F_{A^*}=-2\);
+- one aligned and one opposed branch cancel to zero;
+- an orthogonal branch contributes no projected flux.
+
+Therefore
+
+\[
+\boxed{
+\text{coherent magnitude alone does not determine attractor direction}.
+}
+\]
+
+## 6. Exact branch marginality
+
+For one branch \(\psi\) and the family of remaining branches \(\Psi_R\), the exact double-slit identity gives
+
+\[
+\|\psi+\Psi_R\|^2
+=
+\|\psi\|^2
++
+\|\Psi_R\|^2
++
+2\langle\psi,\Psi_R\rangle.
+\]
+
+The implementation proves the list form
+
+\[
+I(\psi::R)
+=
+\|\psi\|^2+I(R)
++
+\sum_{\chi\in R}2\langle\psi,\chi\rangle.
+\]
+
+Closing one slit therefore removes:
+
+1. the branch’s diagonal term;
+2. every cross term connecting it to the remaining family.
+
+So branch value is contextual:
+
+\[
+\boxed{
+\Delta I_\psi
+\neq
+\|\psi\|^2
+\quad\text{in general}.
+}
+\]
+
+The same branch may add constructive mass in one family and destructive mass in another.
+
+## 7. Pair-count complexity
+
+For \(n\) branches, the pair relation count satisfies the recurrence
+
+\[
+P(0)=0,
+\qquad
+P(n+1)=n+P(n).
+\]
+
+The finite regressions compute:
+
+\[
+P(3)=3,
+\qquad
+P(4)=6.
+\]
+
+This is the exact recursive form of
+
+\[
+P(n)=\binom n2.
+\]
+
+Even before higher-order contextual structure is added, branch-interaction bookkeeping grows quadratically.
+
+## 8. Which-path memory
+
+A path marker can suppress an interference term when two histories remain distinguishable.
+
+The finite marker relation has two states:
+
+\[
+M=\mathsf{indistinguishable}
+\quad\text{or}\quad
+M=\mathsf{distinguishable}.
+\]
+
+The retained cross term is
+
+\[
+I_{12}^{M}
+=
+\begin{cases}
+2\langle\psi_1,\psi_2\rangle,
+& M=\mathsf{indistinguishable},\\
+0,
+& M=\mathsf{distinguishable}.
+\end{cases}
+\]
+
+For two in-phase unit branches:
+
+\[
+I_{\rm indistinguishable}=4,
+\qquad
+I_{\rm distinguishable}=2.
+\]
+
+For opposite unit branches:
+
+\[
+I_{\rm indistinguishable}=0,
+\qquad
+I_{\rm distinguishable}=2.
+\]
+
+Thus path separation suppresses both constructive and destructive interference.
+
+This produces two opposite PNF errors.
+
+### Excessive path erasure
+
+Distinct histories are compressed as interchangeable. In the canonical in-phase witness, this creates two units of spurious constructive mass.
+
+### Excessive path separation
+
+Reusable common structure is stored as completely unrelated. In the same witness, this destroys two units of constructive mass.
+
+The memory invariant is therefore:
+
+\[
+\boxed{
+\text{preserve exactly the path distinctions that change future composition}.
+}
+\]
+
+## 9. Trauma-sensitive path transport
+
+A traumatic history may attach a persistent marker to a later route. The formal object records:
+
+- historical route;
+- current route;
+- transported marker relation;
+- whether current context was checked;
+- a provenance receipt.
+
+The carrier does not infer that:
+
+- path difference always means trauma;
+- a strong marker proves current danger;
+- a present branch is automatically unsafe;
+- a person has a diagnosis.
+
+The relevant distinction remains:
+
+\[
+\Delta_e(i,j,\Gamma)
+\quad\text{versus}\quad
+\Delta_e(i,j),
+\]
+
+that is, context-sensitive transport versus overgeneralised transport.
+
+## 10. Two distinct ternary geometries
+
+The attachments identify two mathematically different three-way arrangements.
+
+### Ordered relational geometry
+
+For aligned, open/orthogonal, and opposed states, use
+
+\[
+0,\frac\pi2,\pi.
+\]
+
+The existing integer-pair phase carrier represents these exactly as
+
+\[
+(1,0),
+(0,1),
+(-1,0).
+\]
+
+Their total is
+
+\[
+(0,1),
+\]
+
+so the intensity is
+
+\[
+1.
+\]
+
+This geometry is ordered relative to an input direction and does not symmetrically cancel.
+
+### Symmetric ternary geometry
+
+For three structurally symmetric alternatives, use the cubic roots of unity
+
+\[
+1,\omega,\omega^2,
+\qquad
+\omega^2+\omega+1=0.
+\]
+
+These are represented exactly in the Eisenstein lattice
+
+\[
+\mathbb Z[\omega].
+\]
+
+The norm is
+
+\[
+N(a+b\omega)=a^2-ab+b^2.
+\]
+
+The pair-interference form is
+
+\[
+B((a,b),(c,d))
+=
+2ac-ad-bc+2bd.
+\]
+
+The formalisation proves the polarization identity
+
+\[
+N(x+y)=N(x)+N(y)+B(x,y).
+\]
+
+For the three roots:
+
+\[
+N(1)=N(\omega)=N(\omega^2)=1,
+\]
+
+while every pair contributes
+
+\[
+B=-1.
+\]
+
+Hence
+
+\[
+3+(-1-1-1)=0,
+\]
+
+and
+
+\[
+\boxed{
+1+\omega+\omega^2=0
+}
+\]
+
+is realised exactly, without irrational floating-point approximations.
+
+The ordered and symmetric geometries must not be conflated.
+
+## 11. PNF geometric refinement
+
+A qualitative process family is not silently converted into geometry. A geometric refinement must supply:
+
+- the process-bearing branch family;
+- the quantitative selection portfolio;
+- the \(1\to n\) junction;
+- attractor-projected branches;
+- path markers;
+- the selected ternary geometry;
+- an exact split/recombine residual;
+- empirical-calibration flags;
+- provenance receipts.
+
+A sound PNF projection preserves:
+
+\[
+\text{coarse boundary}
++
+\text{live fine boundaries}
++
+\text{zero kind}
++
+\text{path markers}
++
+\text{reusable overlap}
++
+\text{capacity/deadline provenance}
++
+\text{split/recombine residual}.
+\]
+
+It does not infer continuous angles, numerical utilities, or physical phases from prose.
+
+## 12. Source boundaries
+
+The geometry source atlas records:
+
+- Michael F. Atiyah, *Topological quantum field theory*, DOI `10.1007/BF02698547`;
+- Michael V. Berry, *Quantal phase factors accompanying adiabatic changes*, DOI `10.1098/rspa.1984.0023`;
+- Berthold-Georg Englert, *Fringe Visibility and Which-Way Information: An Inequality*, DOI `10.1103/PhysRevLett.77.2154`.
+
+Their imported roles are deliberately bounded:
+
+- Atiyah supplies boundary, gluing, and composition vocabulary;
+- Berry supplies path-dependent phase provenance;
+- Englert supplies which-path distinguishability provenance.
+
+None establishes that a relational process is a physical quantum system.
+
+## 13. Strong synthesis
+
+The resulting architecture is
+
+\[
+\boxed{
+\begin{aligned}
+&\text{coarse proposition boundary}\\
+\to{}&\text{finite }1\to n\text{ branch junction}\\
+\to{}&\text{fine channels with capacity, phase, basin, and provenance}\\
+\to{}&\text{pairwise interference and contextual marginal value}\\
+\to{}&\text{attractor-projected resultant and signed flux}\\
+\to{}&\text{path-sensitive recombination}\\
+\to{}&\text{PNF memory retaining the residual needed for later composition}.
+\end{aligned}
+}
+\]
+
+The pants geometry supplies the branching topology. The wave carrier supplies non-additive interaction. The attractor projection supplies direction. The path marker supplies memory-sensitive coherence. The PNF layer determines which distinctions survive compression.
