@@ -17,6 +17,9 @@ sources=(
   DASHI/Computation/JacquardHelicalWeaveBridgeExact.agda
   DASHI/Topology/HelicalWeaveMappingTorusExact.agda
   DASHI/Reasoning/DistributedBraidGluingExact.agda
+  DASHI/Reasoning/AttractorAlignedBranchSelectionExact.agda
+  DASHI/Reasoning/ChildhoodReligiousCoercionExact.agda
+  DASHI/Reasoning/TraumaAttractorBranchRegulationExact.agda
   DASHI/Unified/ThreePhaseCrossPollinationExact.agda
   DASHI/Dynamics/KAMHypothesisCoreExact.agda
   DASHI/Physics/Moonshine/MoonshineTraceIndexedWeaveExact.agda
@@ -40,10 +43,7 @@ legacy_surfaces=(
 )
 
 for source in "${sources[@]}"; do
-  if [ ! -s "$source" ]; then
-    echo "missing or empty source $source" >&2
-    exit 1
-  fi
+  test -s "$source" || { echo "missing or empty source $source" >&2; exit 1; }
   if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|--allow-unsolved-metas|--no-termination-check|--no-positivity-check|--type-in-type|--omega-in-omega|--rewriting|--unsafe|TERMINATING|NON_COVERING|NO_POSITIVITY_CHECK|NO_UNIVERSE_CHECK|trustMe|primTrustMe|(^|[[:space:]])\?([[:space:];)]|$)' "$source"; then
     echo "forbidden trust escape or hole in $source" >&2
     exit 1
@@ -55,97 +55,55 @@ for source in "${sources[@]}"; do
 done
 
 for source in "${legacy_surfaces[@]}"; do
-  if [ ! -s "$source" ]; then
-    echo "missing legacy cross-pollination surface $source" >&2
-    exit 1
-  fi
+  test -s "$source" || { echo "missing legacy surface $source" >&2; exit 1; }
 done
 
 require_pattern() {
   local source="$1"
   local pattern="$2"
-  if ! grep -F "$pattern" "$source" >/dev/null; then
+  grep -F "$pattern" "$source" >/dev/null || {
     echo "missing required marker '$pattern' in $source" >&2
     exit 1
-  fi
+  }
 }
 
-indexed=DASHI/Core/IndexedWeaveHyperfabricExact.agda
-ssp=DASHI/Biology/SSPIndexedWeaveHyperfabricExact.agda
-upgrade=DASHI/Biology/SSPHyperfibreLawfulUpgradeExact.agda
-modular=DASHI/Biology/ModularCoarseFineAddressFibrationExact.agda
-integrated=DASHI/Biology/SSPIndexedWeaveModularIntegrationExact.agda
-binding=DASHI/Biology/LayeredBindingSystemExact.agda
-jacquard=DASHI/Computation/JacquardOperationalSemanticsExact.agda
-jacquard_helix=DASHI/Computation/JacquardHelicalWeaveBridgeExact.agda
-helix=DASHI/Topology/HelicalWeaveMappingTorusExact.agda
-distributed=DASHI/Reasoning/DistributedBraidGluingExact.agda
-three_phase=DASHI/Unified/ThreePhaseCrossPollinationExact.agda
-kam=DASHI/Dynamics/KAMHypothesisCoreExact.agda
-moonshine=DASHI/Physics/Moonshine/MoonshineTraceIndexedWeaveExact.agda
-ssp_moonshine=DASHI/Physics/Moonshine/SSPMoonshineTraceFibreIntegrationExact.agda
-klein=DASHI/Physics/Closure/KleinQuarticGenerationSymmetryExact.agda
-validation=DASHI/Biology/SSP15IndexedWeaveModularRound4Validation.agda
-top=DASHI/EverythingSSP15IndexedWeaveModularRound4.agda
+require_pattern DASHI/Core/IndexedWeaveHyperfabricExact.agda 'record IndexedWeave'
+require_pattern DASHI/Biology/SSPIndexedWeaveHyperfabricExact.agda 'composeOrientationAssoc'
+require_pattern DASHI/Biology/SSPHyperfibreLawfulUpgradeExact.agda 'legacyTransportAgrees'
+require_pattern DASHI/Biology/ModularCoarseFineAddressFibrationExact.agda 'canonicalFineAddressTenCoordinateEquivalence'
+require_pattern DASHI/Biology/ModularCoarseFineAddressFibrationExact.agda 'finiteHauptmodulFrickeInvariant'
+require_pattern DASHI/Biology/SSPIndexedWeaveModularIntegrationExact.agda 'canonicalSSPModularIndexedWeave'
+require_pattern DASHI/Biology/LayeredBindingSystemExact.agda 'coarseProjectionIsNotInjective'
+require_pattern DASHI/Computation/JacquardOperationalSemanticsExact.agda 'compilePreservesExecution'
+require_pattern DASHI/Computation/JacquardHelicalWeaveBridgeExact.agda 'phase0Warp2CrossingWord'
+require_pattern DASHI/Topology/HelicalWeaveMappingTorusExact.agda 'rotationHasOrderThree'
+require_pattern DASHI/Reasoning/DistributedBraidGluingExact.agda 'singleOwnerNonInjective'
+require_pattern DASHI/Unified/ThreePhaseCrossPollinationExact.agda 'sharedC3ShapeImpliesPhysicalIdentityIsFalse'
+require_pattern DASHI/Dynamics/KAMHypothesisCoreExact.agda 'KAMAuthority'
+require_pattern DASHI/Physics/Moonshine/MoonshineTraceIndexedWeaveExact.agda 'identityTransportRetainsHiddenTraceResidual'
+require_pattern DASHI/Physics/Moonshine/SSPMoonshineTraceFibreIntegrationExact.agda 'sameObservedTraceRemainsHiddenDistinctInEveryLane'
+require_pattern DASHI/Physics/Closure/KleinQuarticGenerationSymmetryExact.agda 'noFullySymmetricSelectedFactor'
 
-require_pattern "$indexed" 'record IndexedWeave'
-require_pattern "$indexed" 'transportComp'
-require_pattern "$indexed" 'Residual : Index → Set'
-require_pattern "$indexed" 'stateResidual'
-require_pattern "$ssp" 'composeOrientationAssoc'
-require_pattern "$ssp" 'canonicalSSPIndexedWeave'
-require_pattern "$ssp" 'inverseTwicePreservesEveryLaneState'
-require_pattern "$ssp" 'inverseTwiceComposesToForward'
-require_pattern "$ssp" 'inversePathRetainsTargetResidual'
-require_pattern "$upgrade" 'legacyTransportAgrees'
-require_pattern "$upgrade" 'legacyResidualAgrees'
-require_pattern "$upgrade" 'canonicalSSPHyperfibreLawfulUpgrade'
-require_pattern "$modular" 'jCoarseAddressDepth = 1'
-require_pattern "$modular" 'jFineAddressDepth = 10'
-require_pattern "$modular" 'jAbsoluteAddressDepth = 11'
-require_pattern "$modular" 'jAbsoluteStateCountFactors'
-require_pattern "$modular" 'FineAddress = FineSector → Harmonic.BalancedTrit'
-require_pattern "$modular" 'canonicalFineAddressTenCoordinateEquivalence'
-require_pattern "$modular" 'finiteHauptmodulFrickeInvariant'
-require_pattern "$modular" 'counterLiftIsFrickeOfDirectLift'
-require_pattern "$modular" 'finiteFrickePullbackPointwiseInvolutive'
-require_pattern "$integrated" 'canonicalSSPModularIndexedWeave'
-require_pattern "$integrated" 'integratedPathsPreserveCoarseBase'
-require_pattern "$integrated" 'fineAddressSurvivesLaneTransport'
-require_pattern "$integrated" 'inverseIntegratedPathRetainsInverseResidual'
-require_pattern "$binding" 'coarseProjectionIsNotInjective'
-require_pattern "$binding" 'bindingCanBePresentWhileDepthContinuityFails'
-require_pattern "$binding" 'boundaryDefectRepeatsAcrossSuperplies'
-require_pattern "$jacquard" 'compilePreservesExecution'
-require_pattern "$jacquard" 'compiledCrossingWordAgrees'
-require_pattern "$jacquard_helix" 'compileHelicalProgram'
-require_pattern "$jacquard_helix" 'phase0Warp2CrossingWord'
-require_pattern "$helix" 'rotationHasOrderThree'
-require_pattern "$helix" 'threeStepsReturnToSamePhase'
-require_pattern "$distributed" 'singleOwnerNonInjective'
-require_pattern "$distributed" 'rotationObservationEquivariant'
-require_pattern "$three_phase" 'phaseAgentRotationEquivariant'
-require_pattern "$three_phase" 'phaseFactorRotationEquivariant'
-require_pattern "$three_phase" 'factorSlotC3'
-require_pattern "$three_phase" 'sharedC3ShapeImpliesPhysicalIdentityIsFalse'
-require_pattern "$kam" '10.1002/cpa.3160350504'
-require_pattern "$kam" 'orderThreeRotationRefutesNoReturn'
-require_pattern "$kam" 'KAMAuthority'
-require_pattern "$moonshine" 'traceProjectionIsNonInjective'
-require_pattern "$moonshine" 'canonicalMoonshineTraceIndexedWeave'
-require_pattern "$moonshine" 'identityTransportRetainsHiddenTraceResidual'
-require_pattern "$ssp_moonshine" 'canonicalSSPMoonshineTraceIndexedWeave'
-require_pattern "$ssp_moonshine" 'sameObservedTraceRemainsHiddenDistinctInEveryLane'
-require_pattern "$ssp_moonshine" 'inverseLaneTransportRetainsHiddenTraceTag'
-require_pattern "$ssp_moonshine" 'MonsterSuppliesCanonicalCrossLaneCompatibilityIsFalse'
-require_pattern "$klein" 'noFullySymmetricSelectedFactor'
-require_pattern "$klein" 'receiptStillBlocksPhysicalCKMPromotion'
-require_pattern "$validation" 'import DASHI.Biology.SSPHyperfibreLawfulUpgradeExact'
-require_pattern "$validation" 'import DASHI.Biology.SSPIndexedWeaveModularIntegrationExact'
-require_pattern "$validation" 'import DASHI.Computation.JacquardHelicalWeaveBridgeExact'
-require_pattern "$validation" 'import DASHI.Unified.ThreePhaseCrossPollinationExact'
-require_pattern "$validation" 'import DASHI.Physics.Moonshine.SSPMoonshineTraceFibreIntegrationExact'
-require_pattern "$top" 'import DASHI.EverythingSSP15JCoarseFineRound3'
+branch=DASHI/Reasoning/AttractorAlignedBranchSelectionExact.agda
+coercion=DASHI/Reasoning/ChildhoodReligiousCoercionExact.agda
+trauma=DASHI/Reasoning/TraumaAttractorBranchRegulationExact.agda
+validation=DASHI/Biology/SSP15IndexedWeaveModularRound4Validation.agda
+
+require_pattern "$branch" 'moreOptionsCanWorsenReachableStructure'
+require_pattern "$branch" 'duplicateOptionsCanShareOneBlockedBasin'
+require_pattern "$branch" 'explorationCanBeRetainedWithoutPositiveDrift'
+require_pattern "$branch" 'feasibleLookingBranchCanInterfereWithDirectRoute'
+require_pattern "$coercion" 'complianceProjectionIsNonInjective'
+require_pattern "$coercion" 'silenceIsNotAssent'
+require_pattern "$coercion" 'restrictedRefusalAndPenaltyConstructCoercion'
+require_pattern "$coercion" 'religiousContentAloneDoesNotConstructCoercion'
+require_pattern "$coercion" 'retaliationConstructsInstitutionalBetrayal'
+require_pattern "$trauma" 'regulationOverridesHoardingForTrapBranch'
+require_pattern "$trauma" 'regulationOverridesPrematureClosureForExploration'
+require_pattern "$trauma" 'healthyRegulationIsContextSensitive'
+require_pattern "$validation" 'import DASHI.Reasoning.AttractorAlignedBranchSelectionExact'
+require_pattern "$validation" 'import DASHI.Reasoning.ChildhoodReligiousCoercionExact'
+require_pattern "$validation" 'import DASHI.Reasoning.TraumaAttractorBranchRegulationExact'
 
 python3 -m py_compile scripts/classify_agda_substance.py
 python3 scripts/classify_agda_substance.py --self-test
@@ -154,10 +112,6 @@ python3 scripts/classify_agda_substance.py \
   --fail-on-external \
   --output artifacts/ssp15-indexed-weave-substance.json \
   "${sources[@]}"
-
-# This second report is deliberately informational: legacy surfaces may expose
-# postulated or governance-only structure, and the point is to measure rather
-# than conceal that implementation shape.
 python3 scripts/classify_agda_substance.py \
   --output artifacts/cross-pollination-substance.json \
   "${legacy_surfaces[@]}"
