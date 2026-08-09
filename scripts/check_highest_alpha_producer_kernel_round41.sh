@@ -31,9 +31,10 @@ files=(
 )
 
 doc=Docs/support/reference/HighestAlphaProducerKernelRound41.md
+ymdoc=Docs/support/reference/YangMillsConcreteConstraintSZZRound41.md
 index=Docs/support/reference/YangMillsReferenceIndex.md
 
-for file in "${files[@]}" "$doc" "$index"; do
+for file in "${files[@]}" "$doc" "$ymdoc" "$index"; do
   test -f "$file"
 done
 
@@ -114,7 +115,11 @@ grep -q 'Mosco recovery' "$doc"
 grep -q 'raw Bernstein' "$doc"
 grep -q 'gauge-fixing component' "$doc"
 grep -q 'gauge-only Gram' "$doc"
+grep -q 'beta_DASHI = 4 beta_SZZ' "$ymdoc"
+grep -q '12 + 768 = 780' "$ymdoc"
+grep -q 'reduced-carrier trivialization' "$ymdoc"
 grep -Fq '(./HighestAlphaProducerKernelRound41.md)' "$index"
+grep -Fq '(./YangMillsConcreteConstraintSZZRound41.md)' "$index"
 
 scripts/run_agda29_parallel_check.sh \
   DASHI/Physics/HighestAlphaProducerKernelRound41Validation.agda
