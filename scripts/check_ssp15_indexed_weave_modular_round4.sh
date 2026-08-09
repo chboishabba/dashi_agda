@@ -20,6 +20,7 @@ sources=(
   DASHI/Unified/ThreePhaseCrossPollinationExact.agda
   DASHI/Dynamics/KAMHypothesisCoreExact.agda
   DASHI/Physics/Moonshine/MoonshineTraceIndexedWeaveExact.agda
+  DASHI/Physics/Moonshine/SSPMoonshineTraceFibreIntegrationExact.agda
   DASHI/Physics/Closure/KleinQuarticGenerationSymmetryExact.agda
   DASHI/Biology/SSP15IndexedWeaveModularRound4Validation.agda
   DASHI/EverythingSSP15IndexedWeaveModularRound4.agda
@@ -82,6 +83,7 @@ distributed=DASHI/Reasoning/DistributedBraidGluingExact.agda
 three_phase=DASHI/Unified/ThreePhaseCrossPollinationExact.agda
 kam=DASHI/Dynamics/KAMHypothesisCoreExact.agda
 moonshine=DASHI/Physics/Moonshine/MoonshineTraceIndexedWeaveExact.agda
+ssp_moonshine=DASHI/Physics/Moonshine/SSPMoonshineTraceFibreIntegrationExact.agda
 klein=DASHI/Physics/Closure/KleinQuarticGenerationSymmetryExact.agda
 validation=DASHI/Biology/SSP15IndexedWeaveModularRound4Validation.agda
 top=DASHI/EverythingSSP15IndexedWeaveModularRound4.agda
@@ -132,12 +134,17 @@ require_pattern "$kam" 'KAMAuthority'
 require_pattern "$moonshine" 'traceProjectionIsNonInjective'
 require_pattern "$moonshine" 'canonicalMoonshineTraceIndexedWeave'
 require_pattern "$moonshine" 'identityTransportRetainsHiddenTraceResidual'
+require_pattern "$ssp_moonshine" 'canonicalSSPMoonshineTraceIndexedWeave'
+require_pattern "$ssp_moonshine" 'sameObservedTraceRemainsHiddenDistinctInEveryLane'
+require_pattern "$ssp_moonshine" 'inverseLaneTransportRetainsHiddenTraceTag'
+require_pattern "$ssp_moonshine" 'MonsterSuppliesCanonicalCrossLaneCompatibilityIsFalse'
 require_pattern "$klein" 'noFullySymmetricSelectedFactor'
 require_pattern "$klein" 'receiptStillBlocksPhysicalCKMPromotion'
 require_pattern "$validation" 'import DASHI.Biology.SSPHyperfibreLawfulUpgradeExact'
 require_pattern "$validation" 'import DASHI.Biology.SSPIndexedWeaveModularIntegrationExact'
 require_pattern "$validation" 'import DASHI.Computation.JacquardHelicalWeaveBridgeExact'
 require_pattern "$validation" 'import DASHI.Unified.ThreePhaseCrossPollinationExact'
+require_pattern "$validation" 'import DASHI.Physics.Moonshine.SSPMoonshineTraceFibreIntegrationExact'
 require_pattern "$top" 'import DASHI.EverythingSSP15JCoarseFineRound3'
 
 python3 -m py_compile scripts/classify_agda_substance.py
