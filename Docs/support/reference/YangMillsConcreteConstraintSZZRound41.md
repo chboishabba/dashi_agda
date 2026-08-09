@@ -33,6 +33,21 @@ selectedBackgroundBlockAverageConstraintMatrixApplyExact :
 
 and `selectedBackgroundBlockAverageConstraintPhysicalExact` identifies this with the decoded physical SU(2) bond field.
 
+`BalabanSelectedBlockAverageSectionExact.agda` goes one step further. For an arbitrary twelve-row multiplier value `lambda`, it constructs the literal state
+
+```text
+R_avg(lambda)^a_mu(x) = (1/256) lambda(a,mu)
+```
+
+and proves
+
+```text
+selectedBlockAverageSectionExact :
+  L_avg (R_avg lambda) = lambda.
+```
+
+Thus the finite P33 average component is surjective and carries an explicit right inverse before coupling to the gauge rows. This is a genuine full-row-rank certificate for the average component, not a rank inference from the number twelve. The customary pointwise row-independence theorem still requires the finite row-delta carrier and remains explicit.
+
 This closes the exact finite P33 zero-mode block constraint. It does **not** pretend that the transported nonlinear CMP98 block-average derivative has thereby been reconstructed. The repository's existing `BalabanSU2CMP98LiteralLinearization` remains the separate multiscale formula to be connected when the Gate-I lane is lifted beyond the P33 finite carrier.
 
 Primary sources:
