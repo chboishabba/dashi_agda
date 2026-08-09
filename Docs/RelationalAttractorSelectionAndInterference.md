@@ -1,7 +1,7 @@
 # Attractor-Aligned Branch Selection and Finite Interference
 
 This note is the quantitative continuation of the relational process-bearing
-hyperfabric.  It separates five questions which a raw count of options cannot
+hyperfabric. It separates five questions which a raw count of options cannot
 answer:
 
 1. Can the branch be serviced?
@@ -21,7 +21,7 @@ attractor value exceeds its service, diversion, and interference burden.}
 
 ## 1. Benefit and burden ledgers
 
-For branch \(B_i\), retain:
+For branch \(B_i\), retain
 
 \[
 (g_i,u_i,c_i,d_i,b_i,r_i),
@@ -70,9 +70,9 @@ g_i^-=\max(-g_i,0),
 
 and similarly for positive and negative interaction mass.
 
-The Agda implementation avoids assuming a canonical subtraction operation over
-all relational values.  It compares two portfolios constructively by
-cross-addition:
+The sum over \(i<j\) is not taken over arbitrary string-labelled records. In the Agda implementation, portfolio interactions form an upper-triangular typed matrix indexed by the actual portfolio branch list. There is no diagonal cell, exactly one cell exists for each unordered pair of branch positions, and each cell is either empty or contains one typed `PairInteraction`. Consequently self-interactions, foreign endpoints, and duplicate entries for the same unordered pair cannot alter the ledger.
+
+The Agda implementation avoids assuming a canonical subtraction operation over all relational values. It compares two portfolios constructively by cross-addition:
 
 \[
 P\succ Q
@@ -94,12 +94,11 @@ The witness records the exact positive margin.
 
 ## 2. Exact finite counterexamples to branch monotonicity
 
-The canonical finite family contains branches \(A\), \(B\), a noise branch
-\(N\), an exploration branch \(E\), and a trap branch \(T\).
+The canonical finite family contains branches \(A\), \(B\), a noise branch \(N\), an exploration branch \(E\), and a trap branch \(T\).
 
 ### Individually useful branches can combine badly
 
-The individual ledgers are:
+The individual ledgers are
 
 \[
 A:(5,2),
@@ -109,8 +108,7 @@ B:(4,2),
 
 where each pair is `(benefit, burden)`.
 
-Both dominate the empty portfolio.  With constructive interaction of magnitude
-\(2\),
+Both dominate the empty portfolio. With constructive interaction of magnitude \(2\),
 
 \[
 A\cup B:(11,4),
@@ -124,7 +122,7 @@ With destructive interaction of magnitude \(8\),
 A\cup B:(9,12).
 \]
 
-Then \(A\) alone strictly dominates the pair.  Therefore:
+Then \(A\) alone strictly dominates the pair. Therefore
 
 \[
 \boxed{
@@ -146,7 +144,7 @@ Three branches are assigned distinct labels but the same destination basin:
 b_1=b_2=b_3=7.
 \]
 
-The implementation computes:
+The implementation computes
 
 \[
 N_{\mathrm{nominal}}=3,
@@ -154,7 +152,7 @@ N_{\mathrm{nominal}}=3,
 N_{\mathrm{effective}}=1.
 \]
 
-Thus:
+Thus
 
 \[
 \boxed{
@@ -176,12 +174,11 @@ u_E=4,
 c_E=1.
 \]
 
-It strictly dominates doing nothing because information can prune an
-infeasible region or establish a reusable constraint.
+It strictly dominates doing nothing because information can prune an infeasible region or establish a reusable constraint.
 
 ### Immediate utility can lead into a bad basin
 
-The trap branch has:
+The trap branch has
 
 \[
 r_T^{\mathrm{local}}=5,
@@ -209,27 +206,23 @@ The implemented candidate family compares:
 - \(A+B\) with constructive interaction;
 - \(A+B\) with destructive interaction.
 
-The constructive pair has the exact ledger:
+The constructive pair has the exact ledger
 
 \[
 (11,4)
 \]
 
-and is certified to dominate the other named candidates while remaining within
-capacity:
+and is certified to dominate the other named candidates while remaining within capacity:
 
 \[
 c_A+c_B=4\le 10.
 \]
 
-This is deliberately a finite candidate-family theorem.  It is not promoted to
-a claim that an empirical person's complete choice space has been measured or
-that one scalarization is morally canonical.
+This is deliberately a finite candidate-family theorem. It is not promoted to a claim that an empirical person's complete choice space has been measured or that one scalarization is morally canonical.
 
 ## 4. Geometric reading
 
-Let \(V_{A^\ast}\) be a value or Lyapunov-like function whose lower values are
-closer to the intended attractor.  A local branch direction \(v_i\) has drift
+Let \(V_{A^\ast}\) be a value or Lyapunov-like function whose lower values are closer to the intended attractor. A local branch direction \(v_i\) has drift
 
 \[
 g_i
@@ -243,9 +236,7 @@ Then:
 - \(g_i=0\): circulation or neutral direct drift;
 - \(g_i<0\): repulsion.
 
-The viability filter is separate.  A branch may be geometrically nameable but
-outside the agent's viable cone because of institutional, economic, temporal,
-or capacity constraints.
+The viability filter is separate. A branch may be geometrically nameable but outside the agent's viable cone because of institutional, economic, temporal, or capacity constraints.
 
 The `one waist to n legs` picture is a branching junction:
 
@@ -255,10 +246,7 @@ j_{\mathrm{coarse}}
 \{j_{\mathrm{fine},1},\ldots,j_{\mathrm{fine},n}\}.
 \]
 
-The waist carries the coarse proposition or goal.  Each leg carries a
-context-specific continuation.  Leg width can represent allocated service
-capacity, while its tangent and eventual basin represent local and global
-alignment.
+The waist carries the coarse proposition or goal. Each leg carries a context-specific continuation. Leg width can represent allocated service capacity, while its tangent and eventual basin represent local and global alignment.
 
 ## 5. Exact double-slit law
 
@@ -302,22 +290,9 @@ The Agda theorem proves for arbitrary integer-pair waves:
 }
 \]
 
-The cross term is the exact branch-interference contribution.  Its sign is
-transported into the optimizer by a dependent certificate:
+The cross term is the exact branch-interference contribution. Its sign is transported into a `PairInteraction` whose endpoints are the two actual `BranchMetric` values; it is not reconstructed later from labels.
 
-\[
-2\langle\psi,\chi\rangle>0\Rightarrow\mathsf{reinforcing},
-\qquad
-2\langle\psi,\chi\rangle=0\Rightarrow\mathsf{independent},
-\qquad
-2\langle\psi,\chi\rangle<0\Rightarrow\mathsf{interfering}.
-\]
-
-The certificate retains both the exact integer cross term and the optimizer's
-direction and magnitude, preventing the wave and portfolio layers from drifting
-into unrelated metaphors.
-
-Canonical witnesses include:
+Canonical witnesses include
 
 \[
 \|(1,0)+(1,0)\|^2=4,
@@ -331,8 +306,7 @@ Canonical witnesses include:
 \|(1,0)+(0,1)\|^2=2.
 \]
 
-These correspond respectively to constructive, destructive, and quadrature
-relations on the finite four-phase carrier.
+These correspond respectively to constructive, destructive, and quadrature relations on the finite four-phase carrier.
 
 ## 6. Exact n-slit law
 
@@ -360,7 +334,7 @@ P(\Psi)=
 \langle\psi_i,\psi_j\rangle.
 \]
 
-The generic Agda induction proves:
+The generic Agda induction proves
 
 \[
 \boxed{
@@ -372,7 +346,7 @@ D(\Psi)+P(\Psi).
 }
 \]
 
-The proof is not a stored receipt.  It uses:
+The proof uses:
 
 1. the exact double-slit polarization identity;
 2. distributivity of pair interference over a sum;
@@ -392,8 +366,7 @@ Consequently the contribution of a branch is contextual:
 \langle\psi_i,\psi_k\rangle.
 \]
 
-Closing one slit removes both its diagonal term and every cross term involving
-that slit.
+Closing one slit removes both its diagonal term and every cross term involving that slit.
 
 ## 7. Three-slit residual
 
@@ -411,7 +384,7 @@ I(\psi,\chi,\omega)
 \end{aligned}
 \]
 
-The integer-ring theorem proves:
+The integer-ring theorem proves
 
 \[
 \boxed{
@@ -419,16 +392,13 @@ I_3(\psi,\chi,\omega)=0
 }
 \]
 
-for all waves on this amplitude-squared carrier.  Therefore the finite carrier
-has diagonal and pairwise cross terms but no irreducible third-order term.
+for all waves on this amplitude-squared carrier. Therefore the finite carrier has diagonal and pairwise cross terms but no irreducible third-order term.
 
-This is the appropriate boundary for the relational analogy: branch
-interactions can be non-additive and pairwise phase-sensitive without claiming
-that cognition or family relationships are physical quantum systems.
+This is the appropriate boundary for the relational analogy: branch interactions can be non-additive and pairwise phase-sensitive without claiming that cognition or family relationships are physical quantum systems.
 
 ## 8. Integration with PNF memory and trauma
 
-A PNF branch memory should retain:
+A PNF branch memory should retain
 
 \[
 (\text{drift},\text{information},\text{cost},\text{basin},
@@ -461,8 +431,7 @@ or
 \text{premature pruning}.
 \]
 
-The correction is not `keep every option open`.  It is context-sensitive
-estimation of:
+The correction is not `keep every option open`. It is context-sensitive estimation of
 
 \[
 \text{viability}
@@ -489,5 +458,4 @@ The associated source atlas records:
 | Richard Bellman, *Dynamic Programming*, DOI `10.1515/9781400835386` | State-indexed continuation and finite policy comparison |
 | Rafael D. Sorkin, *Quantum Mechanics as Quantum Measure Theory*, DOI `10.1142/S021773239400294X` | Diagonal, pairwise, and higher-order interference hierarchy |
 
-None of these sources proves the empirical branch values assigned to a person.
-The exact theorems concern finite carriers and explicitly supplied weights.
+None of these sources proves the empirical branch values assigned to a person. The exact theorems concern finite carriers and explicitly supplied weights.
