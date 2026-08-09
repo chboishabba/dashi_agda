@@ -15,6 +15,8 @@ data IdentifierKind : Set where
 data SourceRole : Set where
   parapraxisHistoricalRole lexicalAccessRole speechErrorRole : SourceRole
   darvoResearchRole typedHyperfabricRole symbolicTransformRole : SourceRole
+  attractorStabilityRole viabilityGeometryRole : SourceRole
+  dynamicProgrammingRole interferenceHierarchyRole : SourceRole
 
 record SourceRecord : Set where
   constructor sourceRecord
@@ -101,6 +103,54 @@ dutaSheafHypergraphSource = sourceRecord
   "Supports a typed stalk, incidence and restriction-map carrier for higher-arity local-to-global relations."
   "No learning benchmark, neural identity claim or clinical inference is imported."
 
+lasalleAttractorSource : SourceRecord
+lasalleAttractorSource = sourceRecord
+  "Joseph P. LaSalle"
+  "Some Extensions of Liapunov's Second Method"
+  "IRE Transactions on Circuit Theory"
+  1960
+  doiIdentifier
+  "10.1109/TCT.1960.1086720"
+  attractorStabilityRole
+  "Supports using a decreasing value function and a region of attraction to distinguish local activity from return toward a desired invariant set."
+  "A relational goal is not asserted to be a literal autonomous differential-system attractor, and no empirical Lyapunov function is inferred from narrative data."
+
+aubinViabilitySource : SourceRecord
+aubinViabilitySource = sourceRecord
+  "Jean-Pierre Aubin"
+  "A Survey of Viability Theory"
+  "SIAM Journal on Control and Optimization"
+  1990
+  doiIdentifier
+  "10.1137/0328044"
+  viabilityGeometryRole
+  "Supports separating globally nameable states from trajectories that remain viable under state-dependent constraints and controls."
+  "A nominal option is not thereby proved feasible for a particular person, and viability is not identified with moral desirability."
+
+bellmanDynamicProgrammingSource : SourceRecord
+bellmanDynamicProgrammingSource = sourceRecord
+  "Richard Bellman"
+  "Dynamic Programming"
+  "Princeton University Press"
+  1957
+  doiIdentifier
+  "10.1515/9781400835386"
+  dynamicProgrammingRole
+  "Supports state-indexed finite policy comparison and the principle that a choice must be evaluated together with its continuation value."
+  "The repository does not claim a unique scalar utility for every relational value or that the finite witness portfolio solves an empirical person's life."
+
+sorkinQuantumMeasureSource : SourceRecord
+sorkinQuantumMeasureSource = sourceRecord
+  "Rafael D. Sorkin"
+  "Quantum Mechanics as Quantum Measure Theory"
+  "Modern Physics Letters A"
+  1994
+  doiIdentifier
+  "10.1142/S021773239400294X"
+  interferenceHierarchyRole
+  "Supports distinguishing diagonal, pairwise-interference and possible higher-order residual terms in multi-alternative intensity accounting."
+  "The relational branch model is not promoted to literal quantum mechanics, physical collapse, a Born rule, or quantum cognition."
+
 canonicalRelationalSources : List SourceRecord
 canonicalRelationalSources =
   freudPsychopathologySource
@@ -109,6 +159,10 @@ canonicalRelationalSources =
   ∷ harleyMacAndrewSource
   ∷ harseyFreydSource
   ∷ dutaSheafHypergraphSource
+  ∷ lasalleAttractorSource
+  ∷ aubinViabilitySource
+  ∷ bellmanDynamicProgrammingSource
+  ∷ sorkinQuantumMeasureSource
   ∷ []
 
 listCount : ∀ {A : Set} → List A → Nat
@@ -118,6 +172,6 @@ listCount (_ ∷ xs) = suc (listCount xs)
 canonicalRelationalSourceCount : Nat
 canonicalRelationalSourceCount = listCount canonicalRelationalSources
 
-canonicalRelationalSourceCountIsSix :
-  canonicalRelationalSourceCount ≡ 6
-canonicalRelationalSourceCountIsSix = refl
+canonicalRelationalSourceCountIsTen :
+  canonicalRelationalSourceCount ≡ 10
+canonicalRelationalSourceCountIsTen = refl
