@@ -22,6 +22,19 @@ sources=(
   DASHI/EverythingSSP15IndexedWeaveModularRound4.agda
 )
 
+legacy_surfaces=(
+  DASHI/Core/LoomEncoding.agda
+  DASHI/Physics/Moonshine/MoonshineCategoricalLoom.agda
+  DASHI/Physics/Closure/KleinQuarticQMReceipt.agda
+  DASHI/Physics/Closure/DHRIntertwinerPSL2F7TextureReceipt.agda
+  DASHI/Physics/Closure/CKMV3SpurionTextureFrontierReceipt.agda
+  DASHI/Physics/Closure/YukawaDHRIntertwinerCompatibility.agda
+  DASHI/Physics/Closure/CrossGateCompositionTheorems.agda
+  DASHI/Biology/SSPHyperfibreSymmetryTowerExact.agda
+  DASHI/Biology/SelfIndexingHyperfabricTetrationExact.agda
+  DASHI/Biology/SignedSSPFRACTRANWeaveExact.agda
+)
+
 for source in "${sources[@]}"; do
   if [ ! -s "$source" ]; then
     echo "missing or empty source $source" >&2
@@ -33,6 +46,13 @@ for source in "${sources[@]}"; do
   fi
   if grep -Pzo '\{!.*?!\}' "$source" >/dev/null; then
     echo "forbidden interaction hole in $source" >&2
+    exit 1
+  fi
+done
+
+for source in "${legacy_surfaces[@]}"; do
+  if [ ! -s "$source" ]; then
+    echo "missing legacy cross-pollination surface $source" >&2
     exit 1
   fi
 done
@@ -63,6 +83,7 @@ top=DASHI/EverythingSSP15IndexedWeaveModularRound4.agda
 require_pattern "$indexed" 'record IndexedWeave'
 require_pattern "$indexed" 'transportComp'
 require_pattern "$indexed" 'Residual : Index → Set'
+require_pattern "$indexed" 'stateResidual'
 require_pattern "$ssp" 'canonicalSSPIndexedWeave'
 require_pattern "$ssp" 'reverseTwicePreservesEveryLaneState'
 require_pattern "$ssp" 'reversePathRetainsTargetResidual'
@@ -86,8 +107,10 @@ require_pattern "$distributed" 'singleOwnerNonInjective'
 require_pattern "$distributed" 'rotationObservationEquivariant'
 require_pattern "$kam" '10.1002/cpa.3160350504'
 require_pattern "$kam" 'orderThreeRotationRefutesNoReturn'
+require_pattern "$kam" 'KAMAuthority'
 require_pattern "$moonshine" 'traceProjectionIsNonInjective'
 require_pattern "$moonshine" 'canonicalMoonshineTraceIndexedWeave'
+require_pattern "$moonshine" 'identityTransportRetainsHiddenTraceResidual'
 require_pattern "$klein" 'noFullySymmetricSelectedFactor'
 require_pattern "$klein" 'receiptStillBlocksPhysicalCKMPromotion'
 require_pattern "$validation" 'import DASHI.Biology.SSPIndexedWeaveModularIntegrationExact'
@@ -100,6 +123,13 @@ python3 scripts/classify_agda_substance.py \
   --fail-on-external \
   --output artifacts/ssp15-indexed-weave-substance.json \
   "${sources[@]}"
+
+# This second report is deliberately informational: legacy surfaces may expose
+# postulated or governance-only structure, and the point is to measure rather
+# than conceal that implementation shape.
+python3 scripts/classify_agda_substance.py \
+  --output artifacts/cross-pollination-substance.json \
+  "${legacy_surfaces[@]}"
 
 scripts/run_agda29_parallel_check.sh \
   DASHI/Biology/SSP15IndexedWeaveModularRound4Validation.agda \
