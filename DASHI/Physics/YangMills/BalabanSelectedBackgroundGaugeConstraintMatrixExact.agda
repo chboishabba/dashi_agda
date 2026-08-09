@@ -34,11 +34,12 @@ module DASHI.Physics.YangMills.BalabanSelectedBackgroundGaugeConstraintMatrixExa
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; _+_; _-_; _*_; -_)
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using
-  (cong; cong₂; sym; trans)
+  (cong; cong₂; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using (pair)
@@ -48,6 +49,7 @@ import DASHI.Physics.YangMills.BalabanFiniteRectangularRationalExact as Rect
 import DASHI.Physics.YangMills.BalabanP33FiniteKKTAdmissibleProjectorExact as KKT
 import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Coordinates
 import DASHI.Physics.YangMills.BalabanP33PhysicalFlatGaugeDivergenceIdentificationExact as FlatGauge
+import DASHI.Physics.YangMills.BalabanP33PeriodicFourDimensionalHodgeIdentityExact as Periodic
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionWilsonSecondVariationExact as Q
 import DASHI.Physics.YangMills.BalabanP33PhysicalRationalWilsonPlaquetteJetExact as Physical
 import DASHI.Physics.YangMills.BalabanP33QuaternionAdjointPerturbationExact as Adjoint
@@ -125,8 +127,7 @@ quaternionCoordinateScaleExact Coordinates.coordinateZ coefficient
     (Q.quat x0 x1 x2 x3) = ℚRing.solve-∀ coefficient x3
 
 decodedInsertion :
-  KKT.StateVector →
-  Gauge.Periodic.Axis4 → Gauge.Periodic.Site4 →
+  KKT.StateVector → Periodic.Axis4 → Periodic.Site4 →
   Q.RationalQuaternion
 decodedInsertion vector axis site =
   Gauge.insertionQuaternion
@@ -178,12 +179,11 @@ decodedInsertionPointwiseCong left right equal axis site =
 
 transportedDecoded :
   Physical.RationalSU2Background4 → KKT.StateVector →
-  Gauge.Periodic.Axis4 → Gauge.Periodic.Site4 →
-  Q.RationalQuaternion
+  Periodic.Axis4 → Periodic.Site4 → Q.RationalQuaternion
 transportedDecoded background vector axis site =
   Adjoint.adjointTransport
     (Gauge.backwardTransportUnit background axis site)
-    (decodedInsertion vector axis (Gauge.Periodic.shiftBackward axis site))
+    (decodedInsertion vector axis (Periodic.shiftBackward axis site))
 
 transportedDecodedZeroExact : ∀ background axis site →
   transportedDecoded background Linear.zeroVector axis site ≡ Q.zeroQ
@@ -193,7 +193,7 @@ transportedDecodedZeroExact background axis site =
       (Adjoint.adjointTransport
         (Gauge.backwardTransportUnit background axis site))
       (decodedInsertionZeroExact axis
-        (Gauge.Periodic.shiftBackward axis site)))
+        (Periodic.shiftBackward axis site)))
     (adjointTransportZeroExact
       (Gauge.backwardTransportUnit background axis site))
 
@@ -203,7 +203,7 @@ transportedDecodedAddExact : ∀ background left right axis site →
       Q.+q transportedDecoded background right axis site
 transportedDecodedAddExact background left right axis site =
   let
-    previous = Gauge.Periodic.shiftBackward axis site
+    previous = Periodic.shiftBackward axis site
     unit = Gauge.backwardTransportUnit background axis site
   in
   trans
@@ -220,7 +220,7 @@ transportedDecodedScaleExact : ∀ background coefficient vector axis site →
       (transportedDecoded background vector axis site)
 transportedDecodedScaleExact background coefficient vector axis site =
   let
-    previous = Gauge.Periodic.shiftBackward axis site
+    previous = Periodic.shiftBackward axis site
     unit = Gauge.backwardTransportUnit background axis site
   in
   trans
@@ -239,12 +239,11 @@ transportedDecodedPointwiseCong background left right equal axis site =
     (Adjoint.adjointTransport
       (Gauge.backwardTransportUnit background axis site))
     (decodedInsertionPointwiseCong left right equal axis
-      (Gauge.Periodic.shiftBackward axis site))
+      (Periodic.shiftBackward axis site))
 
 decodedBackwardTerm :
   Physical.RationalSU2Background4 → KKT.StateVector →
-  Coordinates.LieCoordinate3 →
-  Gauge.Periodic.Axis4 → Gauge.Periodic.Site4 → ℚ
+  Coordinates.LieCoordinate3 → Periodic.Axis4 → Periodic.Site4 → ℚ
 decodedBackwardTerm background vector coordinate axis site =
   vector (pair coordinate (pair axis site))
   - Gauge.quaternionCoordinate coordinate
@@ -310,7 +309,7 @@ sumRationalAddExact : ∀ {A : Set} values (left right : A → ℚ) →
   Sums.sumRational values (λ value → left value + right value)
   ≡ Sums.sumRational values left + Sums.sumRational values right
 sumRationalAddExact [] left right = ℚRing.solve []
-sumRationalAddExact (value Agda.Builtin.List.∷ values) left right
+sumRationalAddExact (value ∷ values) left right
   rewrite sumRationalAddExact values left right =
   ℚRing.solve-∀
     (left value) (right value)
