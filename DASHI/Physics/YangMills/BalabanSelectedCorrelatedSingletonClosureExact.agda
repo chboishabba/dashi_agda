@@ -46,7 +46,7 @@ import DASHI.Physics.YangMills.BalabanSelectedCorrelatedResidualOwnershipExact a
 
 record CorrelatedSingletonExtractionData
     (background : Physical.RationalSU2Background4)
-    (field : Coordinates.PhysicalSU2BondField4)
+    (bondField : Coordinates.PhysicalSU2BondField4)
     (plaquette : Physical.Plaquette4) : Set₁ where
   field
     FineVariation : Set
@@ -65,7 +65,7 @@ record CorrelatedSingletonExtractionData
     selectorConstantNonnegative : 0ℚ ≤ selectorConstant
     variationChargeBound :
       variationNormSq variation
-      ≤ selectorConstant * Wilson.plaquetteCrossCharge field plaquette
+      ≤ selectorConstant * Wilson.plaquetteCrossCharge bondField plaquette
 
     firstVariation : FineVariation → ℚ
     rawLocalization multiplierDefectPairing : ℚ
@@ -76,7 +76,7 @@ record CorrelatedSingletonExtractionData
     projectedVariationExact :
       firstVariation variation
       ≡ Partition.physicalPlaquetteWilsonLinearPart
-          background field plaquette
+          background bondField plaquette
         + Sign.canonicalProjectedSpillover
             rawLocalization multiplierDefectPairing
 
@@ -91,34 +91,35 @@ record CorrelatedSingletonExtractionData
 
     ownerBudgets :
       Ownership.CorrelatedOwnerBudgets correlatedFamily
-        (Wilson.plaquetteCrossCharge field plaquette)
+        (Wilson.plaquetteCrossCharge bondField plaquette)
 
 open CorrelatedSingletonExtractionData public
 
 selectedSingletonResidualBudgetExact :
-  ∀ {background field plaquette} →
+  ∀ {background bondField plaquette} →
   (dataSet : CorrelatedSingletonExtractionData
-    background field plaquette) →
+    background bondField plaquette) →
   Sign.canonicalProjectedSpillover
     (rawLocalization dataSet)
     (multiplierDefectPairing dataSet)
   ≤ Selector.remainingSingletonCoefficient
-      * Wilson.plaquetteCrossCharge field plaquette
-selectedSingletonResidualBudgetExact dataSet =
+      * Wilson.plaquetteCrossCharge bondField plaquette
+selectedSingletonResidualBudgetExact
+    {bondField = bondField} {plaquette = plaquette} dataSet =
   subst
     (λ lower →
       lower
       ≤ Selector.remainingSingletonCoefficient
-          * Wilson.plaquetteCrossCharge _ _)
+          * Wilson.plaquetteCrossCharge bondField plaquette)
     (correlatedResidualExact dataSet)
     (Ownership.correlatedResidualClosesSingletonBudget
       (exactCancellation dataSet)
       (ownerBudgets dataSet))
 
 correlatedSingletonExtractionWitness :
-  ∀ {background field plaquette} →
-  CorrelatedSingletonExtractionData background field plaquette →
-  Selector.SingletonExtractionWitness background field plaquette
+  ∀ {background bondField plaquette} →
+  CorrelatedSingletonExtractionData background bondField plaquette →
+  Selector.SingletonExtractionWitness background bondField plaquette
 correlatedSingletonExtractionWitness dataSet = record
   { Selector.SingletonExtractionWitness.FineVariation =
       FineVariation dataSet
@@ -157,41 +158,41 @@ correlatedSingletonExtractionWitness dataSet = record
       selectedSingletonResidualBudgetExact dataSet }
 
 selectedBackgroundSingletonLowerFromCorrelatedResidual :
-  ∀ {background field plaquette} →
+  ∀ {background bondField plaquette} →
   (dataSet : CorrelatedSingletonExtractionData
-    background field plaquette) →
+    background bondField plaquette) →
   - (Selector.remainingSingletonCoefficient
-      * Wilson.plaquetteCrossCharge field plaquette)
+      * Wilson.plaquetteCrossCharge bondField plaquette)
   ≤ Partition.physicalPlaquetteWilsonLinearPart
-      background field plaquette
+      background bondField plaquette
 selectedBackgroundSingletonLowerFromCorrelatedResidual dataSet =
   Selector.selectedBackgroundSingletonCurvatureLower
     (correlatedSingletonExtractionWitness dataSet)
 
 selectedBackgroundCorrelatedWilsonLower :
-  ∀ {background field plaquette} →
+  ∀ {background bondField plaquette} →
   Radius.RelaxedInverseLinkRadius background →
-  CorrelatedSingletonExtractionData background field plaquette →
+  CorrelatedSingletonExtractionData background bondField plaquette →
   - (Wilson.rhoOverThirtySix
-      * Wilson.plaquetteCrossCharge field plaquette)
+      * Wilson.plaquetteCrossCharge bondField plaquette)
   ≤ Split.physicalPlaquetteCorrelatedWilsonPart
-      background field plaquette
+      background bondField plaquette
 selectedBackgroundCorrelatedWilsonLower radius dataSet =
   Selector.selectedBackgroundCorrelatedWilsonLower
     radius (correlatedSingletonExtractionWitness dataSet)
 
 record SelectedCorrelatedSingletonSelector
     (background : Physical.RationalSU2Background4)
-    (field : Coordinates.PhysicalSU2BondField4) : Set₁ where
+    (bondField : Coordinates.PhysicalSU2BondField4) : Set₁ where
   field
     selectCorrelated : ∀ plaquette →
-      CorrelatedSingletonExtractionData background field plaquette
+      CorrelatedSingletonExtractionData background bondField plaquette
 open SelectedCorrelatedSingletonSelector public
 
 correlatedSelectorToPhysicalSelector :
-  ∀ {background field} →
-  SelectedCorrelatedSingletonSelector background field →
-  Selector.SelectedBackgroundVariationSelector background field
+  ∀ {background bondField} →
+  SelectedCorrelatedSingletonSelector background bondField →
+  Selector.SelectedBackgroundVariationSelector background bondField
 correlatedSelectorToPhysicalSelector selected = record
   { Selector.SelectedBackgroundVariationSelector.select = λ plaquette →
       correlatedSingletonExtractionWitness
