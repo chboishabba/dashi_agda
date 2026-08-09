@@ -22,6 +22,7 @@ on:
       - 'DASHI/Reasoning/**'
       - 'Docs/Relational*.md'
       - 'Docs/DevelopmentalAttunementPNFBridge.md'
+      - 'Docs/ParentChildJointCounsellingTemplate.md'
       - '.github/workflows/relational-flow-repair-atlas.yml'
   pull_request:
     paths:
@@ -44,6 +45,7 @@ on:
       - 'DASHI/Reasoning/**'
       - 'Docs/Relational*.md'
       - 'Docs/DevelopmentalAttunementPNFBridge.md'
+      - 'Docs/ParentChildJointCounsellingTemplate.md'
       - '.github/workflows/relational-flow-repair-atlas.yml'
 
 concurrency:
@@ -107,10 +109,13 @@ jobs:
               DASHI/Reasoning/RelationalTernaryPhaseGeometry.agda
               DASHI/Reasoning/RelationalBranchCobordismGeometry.agda
               DASHI/Reasoning/RelationalProcessMemoryHyperfabric.agda
+              DASHI/Reasoning/RelationalGeometricProcessIntegration.agda
               DASHI/Reasoning/DevelopmentalAttunementPNFBridge.agda
               DASHI/Reasoning/DevelopmentalExplanationWithdrawalExact.agda
               DASHI/Reasoning/RelationalFormalismSourceAtlas.agda
+              DASHI/Reasoning/RelationalBranchGeometrySourceAtlas.agda
               DASHI/Reasoning/RelationalRegression.agda
+              DASHI/Reasoning/RelationalBranchGeometryRegression.agda
               DASHI/Reasoning/RelationalEverything.agda
               DASHI/RelationalFlowRepairAtlas.agda
             )
