@@ -18,7 +18,10 @@ from pathlib import Path
 from typing import Iterable
 
 POSTULATE_RE = re.compile(r"(?m)^\s*postulate\b")
-HOLE_RE = re.compile(r"\{!.*?!\}|(?m)^\s*\?\s*(?:$|[;,)])", re.DOTALL)
+HOLE_RE = re.compile(
+    r"\{!.*?!\}|^\s*\?\s*(?:$|[;,)])",
+    re.MULTILINE | re.DOTALL,
+)
 UNSAFE_RE = re.compile(
     r"--allow-unsolved-metas|--no-termination-check|--no-positivity-check|"
     r"--type-in-type|--omega-in-omega|--unsafe|TERMINATING|NON_COVERING|"
@@ -139,10 +142,14 @@ xIsTrue = refl
     unsafe = """module Unsafe where
 postulate A : Set
 """
+    hole = """module Hole where
+value = {! unresolved !}
+"""
 
     proof_metrics = classify_text("proof.agda", proof)
     ledger_metrics = classify_text("ledger.agda", ledger)
     unsafe_metrics = classify_text("unsafe.agda", unsafe)
+    hole_metrics = classify_text("hole.agda", hole)
 
     assert proof_metrics.executable_equations >= 2
     assert proof_metrics.theorem_signatures >= 2
@@ -151,6 +158,8 @@ postulate A : Set
     assert ledger_metrics.bool_fields >= 1
     assert unsafe_metrics.category == "external-or-unsafe-interface"
     assert unsafe_metrics.postulates == 1
+    assert hole_metrics.category == "external-or-unsafe-interface"
+    assert hole_metrics.holes == 1
 
 
 def main() -> int:
