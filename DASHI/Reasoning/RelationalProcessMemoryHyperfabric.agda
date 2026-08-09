@@ -2,6 +2,7 @@ module DASHI.Reasoning.RelationalProcessMemoryHyperfabric where
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
+open import Data.Integer using (ℤ) renaming (_+_ to _+ℤ_)
 
 import DASHI.Cognition.PNF.EventAlgebra as PNF
 import DASHI.Reasoning.TypedHyperfabricCore as Hyperfabric
@@ -144,7 +145,7 @@ record QuantitativeFamilyRefinement : Set where
       Interference.coherentIntensity branchWaves
       ≡
       Interference.diagonalIntensity branchWaves
-      + Interference.allPairwiseInterference branchWaves
+      +ℤ Interference.allPairwiseInterference branchWaves
     portfolioAndWaveWeightsEmpiricallyCalibrated : Bool
     familyRefinementReceipt : String
 
