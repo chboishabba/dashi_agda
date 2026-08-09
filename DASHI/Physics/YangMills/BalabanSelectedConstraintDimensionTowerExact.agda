@@ -29,13 +29,16 @@ module DASHI.Physics.YangMills.BalabanSelectedConstraintDimensionTowerExact wher
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; _+_)
 open import Data.List.Base using (map; _++_; length)
 import Data.List.Properties as ListP
+open import Data.Rational.Base using (_*_)
 import Data.Rational.Properties as ℚP
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanFourDimensionalHaloOverlapExact as Count
+import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreCarrier as Block
+import DASHI.Physics.YangMills.BalabanPath4AxisAverageExact as Path4
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
 import DASHI.Physics.YangMills.BalabanConstructiveRationalMatrixInverseExact as Matrix
 import DASHI.Physics.YangMills.BalabanP33FiniteKKTAdmissibleProjectorExact as KKT
@@ -43,7 +46,6 @@ import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Co
 import DASHI.Physics.YangMills.BalabanP33PhysicalFlatGaugeDivergenceIdentificationExact as FlatGauge
 import DASHI.Physics.YangMills.BalabanP33PhysicalBackgroundGaugeFirstExact as Gauge
 import DASHI.Physics.YangMills.BalabanP33LiteralResidualKernelNumericalCalibrationExact as Calibration
-import DASHI.Physics.YangMills.BalabanP33PhysicalRationalWilsonPlaquetteJetExact as Physical
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundBlockAverageConstraintMatrixExact as Average
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundCombinedConstraintMatrixExact as Combined
 
@@ -63,8 +65,7 @@ selectedGaugeRowCount :
 selectedGaugeRowCount
   rewrite Count.lengthCartesian
     Coordinates.lieCoordinates3
-    (DASHI.Physics.YangMills.BalabanPhysicalBlockFibreCarrier.physicalBlockSites
-      DASHI.Physics.YangMills.BalabanPath4AxisAverageExact.side4)
+    (Block.physicalBlockSites Path4.side4)
   | Calibration.periodicSide4SiteCount = refl
 
 selectedCombinedConstraintRowCount :
@@ -112,20 +113,18 @@ selectedBackgroundConstraintGramSymmetric background left right =
     (λ column →
       Combined.selectedBackgroundLinearizedConstraintMatrix
         background left column
-      ℚ.* Combined.selectedBackgroundLinearizedConstraintMatrix
+      * Combined.selectedBackgroundLinearizedConstraintMatrix
         background right column)
     (λ column →
       Combined.selectedBackgroundLinearizedConstraintMatrix
         background right column
-      ℚ.* Combined.selectedBackgroundLinearizedConstraintMatrix
+      * Combined.selectedBackgroundLinearizedConstraintMatrix
         background left column)
     (λ column → ℚP.*-comm
       (Combined.selectedBackgroundLinearizedConstraintMatrix
         background left column)
       (Combined.selectedBackgroundLinearizedConstraintMatrix
         background right column))
-  where
-    import Data.Rational.Base as ℚ using (_*_)
 
 record SelectedReducedCarrierDimensionClaim : Set₁ where
   field
