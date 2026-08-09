@@ -14,22 +14,85 @@ module DASHI.Moonshine.MathieuStabilizerTowerExact where
 --
 -- DASHI CONTRIBUTION
 --
--- Formalize the exact order/index spine
+-- Record the textbook explanation of the Mathieu orders:
 --
---   8 --x9--> 72 --x10--> 720 --x11--> 7920 --x12--> 95040
+--   |M11| = 11 falling 4 = 11 * 10 * 9 * 8 = 7920
+--   |M12| = 12 falling 5 = 12 * 11 * 10 * 9 * 8 = 95040.
 --
--- as typed arithmetic stabilizer steps.  The arithmetic is internal and
--- exact.  The identification of these orders with successive point
--- stabilizers in the Mathieu actions is retained as source-bounded authority
--- rather than fabricated from cardinalities.  In particular, the order-eight
--- stabilizer is reported as quaternion Q8, not square-grid dihedral D4.
+-- These products are forced by sharp 4-transitivity and sharp
+-- 5-transitivity respectively.  They are not reconstructed from D4, a
+-- nine-cell grid, a divisor lattice, or numeral coincidences.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Set)
 open import DASHI.Core.Prelude
 
 ------------------------------------------------------------------------
--- Exact order spine.
+-- Falling factorials count ordered tuples of distinct points.
+------------------------------------------------------------------------
+
+fallingFactorial : Nat → Nat → Nat
+fallingFactorial n zero = 1
+fallingFactorial n (suc k) = n * fallingFactorial (n ∸ 1) k
+
+orderedDistinctFourTuplesOnEleven : Nat
+orderedDistinctFourTuplesOnEleven = fallingFactorial 11 4
+
+orderedDistinctFiveTuplesOnTwelve : Nat
+orderedDistinctFiveTuplesOnTwelve = fallingFactorial 12 5
+
+orderedDistinctFourTuplesOnElevenIs7920 :
+  orderedDistinctFourTuplesOnEleven ≡ 7920
+orderedDistinctFourTuplesOnElevenIs7920 = refl
+
+orderedDistinctFiveTuplesOnTwelveIs95040 :
+  orderedDistinctFiveTuplesOnTwelve ≡ 95040
+orderedDistinctFiveTuplesOnTwelveIs95040 = refl
+
+------------------------------------------------------------------------
+-- Sharp transitivity order principle.
+--
+-- A sharply k-transitive action is free and transitive on ordered distinct
+-- k-tuples.  Therefore each group element corresponds to exactly one image
+-- of a fixed ordered k-tuple, and the group order is n falling k.
+--
+-- This record stores the resulting order theorem as source-bounded data.  It
+-- does not manufacture the permutation action itself.
+------------------------------------------------------------------------
+
+record SharpTransitivityOrderWitness : Set where
+  constructor sharpTransitivityOrderWitness
+  field
+    pointCount : Nat
+    transitivityDegree : Nat
+    groupOrder : Nat
+    sharpOrderLaw :
+      groupOrder ≡ fallingFactorial pointCount transitivityDegree
+
+open SharpTransitivityOrderWitness public
+
+m11SharpFourOrderWitness : SharpTransitivityOrderWitness
+m11SharpFourOrderWitness =
+  sharpTransitivityOrderWitness 11 4 7920 refl
+
+m12SharpFiveOrderWitness : SharpTransitivityOrderWitness
+m12SharpFiveOrderWitness =
+  sharpTransitivityOrderWitness 12 5 95040 refl
+
+m11OrderFromSharpFourTransitivity :
+  groupOrder m11SharpFourOrderWitness ≡ 11 * 10 * 9 * 8
+m11OrderFromSharpFourTransitivity = refl
+
+m12OrderFromSharpFiveTransitivity :
+  groupOrder m12SharpFiveOrderWitness ≡ 12 * 11 * 10 * 9 * 8
+m12OrderFromSharpFiveTransitivity = refl
+
+------------------------------------------------------------------------
+-- Successive stabilizer orders.
+--
+-- Fixing one more entry of an ordered tuple divides the remaining sharp
+-- action by the number of available images.  Reading from the deepest
+-- stabilizer upward gives 8 -> 72 -> 720 -> 7920 -> 95040.
 ------------------------------------------------------------------------
 
 data MathieuLevel : Set where
@@ -47,10 +110,10 @@ record StabilizerStep : Set where
   field
     lowerLevel : MathieuLevel
     upperLevel : MathieuLevel
-    orbitSize : Nat
+    availableImages : Nat
     orderLaw :
       levelOrder upperLevel
-      ≡ orbitSize * levelOrder lowerLevel
+      ≡ availableImages * levelOrder lowerLevel
 
 open StabilizerStep public
 
@@ -66,141 +129,73 @@ step10To11 = stabilizerStep M10Level M11Level 11 refl
 step11To12 : StabilizerStep
 step11To12 = stabilizerStep M11Level M12Level 12 refl
 
-m11OrderAsSuccessiveOrbits : levelOrder M11Level ≡ 8 * 9 * 10 * 11
-m11OrderAsSuccessiveOrbits = refl
+m11OrderAsSuccessivePointChoices :
+  levelOrder M11Level ≡ 11 * 10 * 9 * 8
+m11OrderAsSuccessivePointChoices = refl
 
-m12OrderAsSuccessiveOrbits :
+m12OrderAsSuccessivePointChoices :
+  levelOrder M12Level ≡ 12 * 11 * 10 * 9 * 8
+m12OrderAsSuccessivePointChoices = refl
+
+m11OrderAsPreviousDisplayOrder :
+  levelOrder M11Level ≡ 8 * 9 * 10 * 11
+m11OrderAsPreviousDisplayOrder = refl
+
+m12OrderAsPreviousDisplayOrder :
   levelOrder M12Level ≡ 8 * 9 * 10 * 11 * 12
-m12OrderAsSuccessiveOrbits = refl
+m12OrderAsPreviousDisplayOrder = refl
 
-m9FromM8 : 72 ≡ 9 * 8
-m9FromM8 = refl
+threePointStabilizerOrderInM11 : Nat
+threePointStabilizerOrderInM11 = fallingFactorial 8 1
 
-m10FromM9 : 720 ≡ 10 * 72
-m10FromM9 = refl
-
-m11FromM10 : 7920 ≡ 11 * 720
-m11FromM10 = refl
-
-m12FromM11 : 95040 ≡ 12 * 7920
-m12FromM11 = refl
-
-m11Factorization : 7920 ≡ 8 * 9 * 10 * 11
-m11Factorization = refl
-
-m12Factorization : 95040 ≡ 8 * 9 * 10 * 11 * 12
-m12Factorization = refl
+threePointStabilizerOrderInM11IsEight :
+  threePointStabilizerOrderInM11 ≡ 8
+threePointStabilizerOrderInM11IsEight = refl
 
 ------------------------------------------------------------------------
--- Arithmetic witness only.
---
--- This record deliberately does not contain carriers, an action, a chosen
--- point, an inclusion, or finite-cardinality equivalences.  Those data are
--- required before promoting an order identity to a genuine orbit-stabilizer
--- construction.  Keeping the witness arithmetic-only prevents arbitrary
--- Sets plus unrelated Nat fields from masquerading as a group action.
+-- Anti-numerology boundary.
 ------------------------------------------------------------------------
 
-record OrbitStabilizerArithmeticWitness : Set where
-  constructor orbitStabilizerArithmeticWitness
-  field
-    totalOrder : Nat
-    stabilizerOrder : Nat
-    orbitOrder : Nat
-    orbitStabilizerOrderLaw : totalOrder ≡ orbitOrder * stabilizerOrder
+data SourceOfEight : Set where
+  remainingImagesAfterFixingThreePoints
+  squareGridDihedralOrder
+  unrelatedOrderEightObject : SourceOfEight
 
-open OrbitStabilizerArithmeticWitness public
+mathieuEightSource : SourceOfEight
+mathieuEightSource = remainingImagesAfterFixingThreePoints
 
-record MathieuStepArithmeticWitness (step : StabilizerStep) : Set where
-  constructor mathieuStepArithmeticWitness
-  field
-    witness : OrbitStabilizerArithmeticWitness
-    totalMatchesUpper :
-      totalOrder witness ≡ levelOrder (upperLevel step)
-    stabilizerMatchesLower :
-      stabilizerOrder witness ≡ levelOrder (lowerLevel step)
-    orbitMatchesStep :
-      orbitOrder witness ≡ orbitSize step
-
-open MathieuStepArithmeticWitness public
-
-stepArithmeticWitness :
-  (step : StabilizerStep) →
-  MathieuStepArithmeticWitness step
-stepArithmeticWitness step =
-  mathieuStepArithmeticWitness
-    (orbitStabilizerArithmeticWitness
-      (levelOrder (upperLevel step))
-      (levelOrder (lowerLevel step))
-      (orbitSize step)
-      (orderLaw step))
-    refl refl refl
-
-step8To9ArithmeticWitness : MathieuStepArithmeticWitness step8To9
-step8To9ArithmeticWitness = stepArithmeticWitness step8To9
-
-step9To10ArithmeticWitness : MathieuStepArithmeticWitness step9To10
-step9To10ArithmeticWitness = stepArithmeticWitness step9To10
-
-step10To11ArithmeticWitness : MathieuStepArithmeticWitness step10To11
-step10To11ArithmeticWitness = stepArithmeticWitness step10To11
-
-step11To12ArithmeticWitness : MathieuStepArithmeticWitness step11To12
-step11To12ArithmeticWitness = stepArithmeticWitness step11To12
-
-------------------------------------------------------------------------
--- Source authority and anti-numerology boundaries.
-------------------------------------------------------------------------
-
-data OrderEightShape : Set where
-  quaternionQ8 squareDihedralD4 unspecifiedOrderEight : OrderEightShape
-
-atlasReportedM8Shape : OrderEightShape
-atlasReportedM8Shape = quaternionQ8
-
-atlasReportedM8IsQuaternion : atlasReportedM8Shape ≡ quaternionQ8
-atlasReportedM8IsQuaternion = refl
-
-atlasReportedM8IsNotD4 : atlasReportedM8Shape ≡ squareDihedralD4 → ⊥
-atlasReportedM8IsNotD4 ()
-
-q8Order : Nat
-q8Order = 8
-
-d4Order : Nat
-d4Order = 8
-
-equalOrderDoesNotChooseShape : q8Order ≡ d4Order
-equalOrderDoesNotChooseShape = refl
+mathieuEightDoesNotComeFromD4 :
+  mathieuEightSource ≡ squareGridDihedralOrder → ⊥
+mathieuEightDoesNotComeFromD4 ()
 
 record MathieuTowerBoundary : Set where
   constructor mathieuTowerBoundary
   field
-    orderAndIndexArithmeticInternallyProved : Bool
-    orderAndIndexArithmeticInternallyProvedIsTrue :
-      orderAndIndexArithmeticInternallyProved ≡ true
-    actualGroupActionsConstructedHere : Bool
-    actualGroupActionsConstructedHereIsFalse :
-      actualGroupActionsConstructedHere ≡ false
-    arithmeticWitnessContainsActionLaws : Bool
-    arithmeticWitnessContainsActionLawsIsFalse :
-      arithmeticWitnessContainsActionLaws ≡ false
-    atlasPointStabilizerDataIsExternalAuthority : Bool
-    atlasPointStabilizerDataIsExternalAuthorityIsTrue :
-      atlasPointStabilizerDataIsExternalAuthority ≡ true
-    orderEightEqualityImpliesQ8IsD4 : Bool
-    orderEightEqualityImpliesQ8IsD4IsFalse :
-      orderEightEqualityImpliesQ8IsD4 ≡ false
-    towerProvesModularJIdentification : Bool
-    towerProvesModularJIdentificationIsFalse :
-      towerProvesModularJIdentification ≡ false
+    m11OrderForcedBySharpFourTransitivity : Bool
+    m11OrderForcedBySharpFourTransitivityIsTrue :
+      m11OrderForcedBySharpFourTransitivity ≡ true
+    m12OrderForcedBySharpFiveTransitivity : Bool
+    m12OrderForcedBySharpFiveTransitivityIsTrue :
+      m12OrderForcedBySharpFiveTransitivity ≡ true
+    factorEightComesFromD4GridSymmetry : Bool
+    factorEightComesFromD4GridSymmetryIsFalse :
+      factorEightComesFromD4GridSymmetry ≡ false
+    divisorLatticeNeededToDeriveOrders : Bool
+    divisorLatticeNeededToDeriveOrdersIsFalse :
+      divisorLatticeNeededToDeriveOrders ≡ false
+    actualPermutationActionsConstructedHere : Bool
+    actualPermutationActionsConstructedHereIsFalse :
+      actualPermutationActionsConstructedHere ≡ false
+    equalNumeralsImplySharedStructuralCause : Bool
+    equalNumeralsImplySharedStructuralCauseIsFalse :
+      equalNumeralsImplySharedStructuralCause ≡ false
 
 canonicalMathieuTowerBoundary : MathieuTowerBoundary
 canonicalMathieuTowerBoundary =
   mathieuTowerBoundary
     true refl
-    false refl
-    false refl
     true refl
+    false refl
+    false refl
     false refl
     false refl
