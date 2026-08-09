@@ -62,5 +62,5 @@ searchingIsNotEmptyCarrier =
   goalProcessState outcomeSearching memberOfGood
 
 explorationAndCirculationShareZeroOrientation :
-  orientation exploratoryValue ≡ orientation circulatingValue
+  branchOrientation exploratoryValue ≡ branchOrientation circulatingValue
 explorationAndCirculationShareZeroOrientation = refl
