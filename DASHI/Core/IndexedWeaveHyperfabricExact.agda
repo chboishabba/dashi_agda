@@ -9,7 +9,8 @@ open import DASHI.Core.Prelude
 -- that site.  Path i j is a typed weave from site i to site j, and transport
 -- is required to respect identities and composition.  Residuals remain
 -- indexed at the target, so a path cannot silently erase which fibre owns a
--- defect.
+-- defect.  Identity transport preserves the residual already carried by the
+-- state; it does not force every state residual to be zero.
 ------------------------------------------------------------------------
 
 record IndexedWeave
@@ -68,8 +69,10 @@ record IndexedWeave
 
     Residual : Index → Set
 
-    zeroResidual :
-      (index : Index) → Residual index
+    stateResidual :
+      (index : Index) →
+      State index →
+      Residual index
 
     residualAfter :
       {source target : Index} →
@@ -80,7 +83,8 @@ record IndexedWeave
     residualId :
       (index : Index) →
       (state : State index) →
-      residualAfter (idPath index) state ≡ zeroResidual index
+      residualAfter (idPath index) state
+      ≡ stateResidual index state
 
 open IndexedWeave public
 
@@ -147,6 +151,5 @@ record LawfulHyperfibreUpgrade
   constructor lawfulHyperfibreUpgrade
   field
     indexedWeave : IndexedWeave Index State
-    reading : Set
 
 open LawfulHyperfibreUpgrade public
