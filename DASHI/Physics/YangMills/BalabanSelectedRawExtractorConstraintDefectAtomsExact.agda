@@ -24,16 +24,16 @@ module DASHI.Physics.YangMills.BalabanSelectedRawExtractorConstraintDefectAtomsE
 -- replace the source or defect by scalar receipts.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base as ℚ using (ℚ; _*_)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Agda.Builtin.Equality using (_≡_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _*_)
+open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using (Empty)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
-import DASHI.Physics.YangMills.BalabanFiniteRectangularRationalExact as Rect
 import DASHI.Physics.YangMills.BalabanP33FiniteKKTAdmissibleProjectorExact as KKT
 import DASHI.Physics.YangMills.BalabanP33PhysicalRationalWilsonPlaquetteJetExact as Plaquette
 import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Physical
+import DASHI.Physics.YangMills.BalabanP33PlaquetteBoundaryProjectorExact as Boundary
 import DASHI.Physics.YangMills.BalabanSelectedRawExtractorConstraintDefectExact as Raw
 import DASHI.Physics.YangMills.BalabanWilsonBooleanFourCubeExact as Cube
 
@@ -86,8 +86,7 @@ record LiteralRawExtractorAtomData
   field
     atoms : SelectedConstraintAtomData
       projectorData firstVariationCovector
-      (DASHI.Physics.YangMills.BalabanP33PlaquetteBoundaryProjectorExact.rawPlaquetteSingletonExtractor
-        bondField plaquette)
+      (Boundary.rawPlaquetteSingletonExtractor bondField plaquette)
 open LiteralRawExtractorAtomData public
 
 literalRawDefectAtomReconstruction :
@@ -131,10 +130,10 @@ record ConstraintAtomSupport
     (collar : Multiplier → Set) : Set₁ where
   field
     sourceAtomOutsideZero : ∀ subset row →
-      (collar row → DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier.Empty) →
+      (collar row → Empty) →
       sourceAtom atoms subset row ≡ 0ℚ
     defectAtomOutsideZero : ∀ subset row →
-      (collar row → DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier.Empty) →
+      (collar row → Empty) →
       defectAtom atoms subset row ≡ 0ℚ
 open ConstraintAtomSupport public
 
