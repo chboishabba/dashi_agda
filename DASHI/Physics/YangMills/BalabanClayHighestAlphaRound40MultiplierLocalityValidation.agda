@@ -1,25 +1,11 @@
 module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound40MultiplierLocalityValidation where
 
 ------------------------------------------------------------------------
--- Cumulative Round Forty validation root.
+-- Round Forty validation root.
 --
--- Round 40 imports the complete Round-39 redundancy-safe KKT/Green lane and
--- adds the multiplier-locality and correlated-residual tranche:
---
--- * one canonical selected-variation sign convention;
--- * redundancy-invariant multiplier-defect pairing;
--- * exact restriction to the plaquette constraint collar;
--- * literal source/defect subset atoms and two-source Green contraction;
--- * pair-indexed Boolean/D4/orientation/collar ownership;
--- * Combes--Thomas for the multiplier Gram and complete KKT block constants;
--- * genuine two-sided finite KKT inversion from reduced coercivity;
--- * D4 covariance of Gram, pseudoinverse and Green pairing;
--- * generated physical owner optimization with a dual no-fit certificate;
--- * explicit selected-background coefficient-field authority;
--- * the terminal corrected-sign singleton and correlated-Wilson reducers.
+-- Imported cumulatively by the Round-39 root on this child branch so the
+-- existing pull-request workflow typechecks the complete new tranche.
 ------------------------------------------------------------------------
-
-import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound39PseudoinverseKKTValidation
 
 import DASHI.Physics.YangMills.BalabanSelectedVariationSignConventionExact as Sign
 import DASHI.Physics.YangMills.BalabanSelectedMultiplierPairingRedundancyInvariantExact
