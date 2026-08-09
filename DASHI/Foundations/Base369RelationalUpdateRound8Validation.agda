@@ -2,19 +2,12 @@ module DASHI.Foundations.Base369RelationalUpdateRound8Validation where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 
-open import DASHI.Foundations.SSPTritCarrier using
-  ( sspNegOne
-  ; sspZero
-  ; sspPosOne
-  )
-
-import DASHI.Foundations.Base369CalculationFibreClosureExact as Calculation
+import DASHI.Foundations.Base369CompletedRelationalDigitExact as Completed
 import DASHI.Foundations.Base369InteractionAppraisalCubeExact as Cube
 import DASHI.Foundations.Base369PointedAppraisalFibreExact as Pointed
 import DASHI.Foundations.Base369PropositionResponseTransportExact as Response
 import DASHI.Foundations.Base369RelationalFailureOperatorsExact as Failure
 import DASHI.Foundations.Base369SharedStateWeaveIntegrityExact as Weave
-import DASHI.Foundations.Base369RelationalUpdateKernelExact as Kernel
 
 interactionCubeHasTwentySevenStates :
   Cube.interactionStateCount ≡ 27
@@ -42,12 +35,12 @@ appraisalTimesMultiplicityIsSixtyFiveThousandSixHundredTen =
 
 ceasedConversationRemainsUncompleted :
   Weave.repairCompletion Weave.ceasedWithoutRepair
-  ≡ Weave.uninstantiated
+  ≡ Completed.uninstantiated
 ceasedConversationRemainsUncompleted = refl
 
 completedRepairCarriesCompletionWitness :
   Weave.repairCompletion Weave.completedRepair
-  ≡ Weave.instantiated
+  ≡ Completed.instantiated
 completedRepairCarriesCompletionWitness = refl
 
 behaviourProjectionIsNonInjective :
