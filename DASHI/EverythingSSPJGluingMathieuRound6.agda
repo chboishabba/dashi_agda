@@ -2,6 +2,7 @@ module DASHI.EverythingSSPJGluingMathieuRound6 where
 
 import DASHI.EverythingSSPModularCharacterProjectionRound5
 import DASHI.Biology.EisensteinNineRingInterferenceExact
+import DASHI.Biology.EisensteinThreeSixSymmetryExact
 import DASHI.Biology.HalfChartNineRingQuotientExact
 import DASHI.Biology.IndexedJExternalGluingExact
 import DASHI.Biology.IteratedPointedAttachmentSpiralExact
