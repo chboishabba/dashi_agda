@@ -35,6 +35,10 @@ record CanonicalGalerkinState (Mode : Set) : Set₁ where
     retained : Mode → Bool
 open CanonicalGalerkinState public
 
+ifRetained : Bool → ℚ → ℚ
+ifRetained true value = value
+ifRetained false value = 0ℚ
+
 velocityAtPositive :
   ∀ {Mode} → CanonicalGalerkinState Mode → Mode → ℚ
 velocityAtPositive state mode = coefficient state mode
@@ -68,14 +72,6 @@ retainedModesExact :
 retainedModesExact state mode with retained state mode
 ... | true = refl
 ... | false = refl
-  where
-  ifRetained : Bool → ℚ → ℚ
-  ifRetained true value = value
-  ifRetained false value = 0ℚ
-
-ifRetained : Bool → ℚ → ℚ
-ifRetained true value = value
-ifRetained false value = 0ℚ
 
 retainedPositiveLookupExact :
   ∀ {Mode} (state : CanonicalGalerkinState Mode) mode →
