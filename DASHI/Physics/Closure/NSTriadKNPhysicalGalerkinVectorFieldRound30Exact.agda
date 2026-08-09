@@ -92,7 +92,7 @@ physicalGalerkinOutputCoefficientTransverse :
     (Phase.coefficientValue coefficient)
   ≡ C3.complexZero F
 physicalGalerkinOutputCoefficientTransverse producer state coefficient member =
-  Phase.coefficientTransverse coefficient
+  Phase.transverse coefficient
 
 physicalGalerkinOutputNegativeCoefficientTransverse :
   ∀ {r}
