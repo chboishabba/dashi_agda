@@ -52,8 +52,8 @@ SingleOwnerCollision agent =
     (λ first →
       Σ CoherentSection
         (λ second →
-          observe agent first ≡ observe agent second
-          × first ≠ second))
+          (observe agent first ≡ observe agent second)
+          × (first ≠ second)))
 
 singleOwnerNonInjective :
   (agent : Agent) →
@@ -130,9 +130,9 @@ record DistributedBraid : Set₁ where
         (λ first →
           Σ GlobalSection
             (λ second →
-              localObservation holder first
-              ≡ localObservation holder second
-              × first ≠ second))
+              (localObservation holder first
+               ≡ localObservation holder second)
+              × (first ≠ second)))
 
 open DistributedBraid public
 
@@ -154,8 +154,8 @@ communalObjectNotRecoverableFromAnySingleHolder :
     (λ first →
       Σ (GlobalSection canonicalDistributedBraid)
         (λ second →
-          localObservation canonicalDistributedBraid holder first
-          ≡ localObservation canonicalDistributedBraid holder second
-          × first ≠ second))
+          (localObservation canonicalDistributedBraid holder first
+           ≡ localObservation canonicalDistributedBraid holder second)
+          × (first ≠ second)))
 communalObjectNotRecoverableFromAnySingleHolder =
   noSingleOwner canonicalDistributedBraid
