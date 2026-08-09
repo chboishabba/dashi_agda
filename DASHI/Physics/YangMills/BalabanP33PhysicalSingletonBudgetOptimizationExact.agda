@@ -27,12 +27,12 @@ module DASHI.Physics.YangMills.BalabanP33PhysicalSingletonBudgetOptimizationExac
 -- closed rather than being rescued by an arbitrary symbolic split.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; _+_; _*_; _≤_; _<_)
 import Data.Rational.Properties as ℚP
-import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using
+  (cong₂; subst; trans)
 open import Relation.Nullary.Negation using (¬_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
