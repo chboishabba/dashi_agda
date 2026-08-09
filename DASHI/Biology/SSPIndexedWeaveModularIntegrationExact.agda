@@ -14,7 +14,7 @@ import DASHI.Biology.ModularCoarseFineAddressFibrationExact as Modular
 -- fibre contains the ten-sector fine address together with the lane state.
 -- Typed paths may move between SSP lanes but must preserve the coarse base.
 -- Fine data are transported in the preserved base fibre, while the SSP state
--- follows the proved parity action.
+-- follows the proved three-orientation action.
 ------------------------------------------------------------------------
 
 SSPModularIndex : Set
@@ -97,13 +97,13 @@ transportIntegratedComposition
   rewrite SSPWeave.transportSSPComposition q p laneState = refl
 
 IntegratedResidual : SSPModularIndex → Set
-IntegratedResidual index = SSPWeave.LaneParity
+IntegratedResidual index = SSP.FibreOrientation
 
 integratedStateResidual :
   (index : SSPModularIndex) →
   IntegratedState index →
   IntegratedResidual index
-integratedStateResidual index state = SSPWeave.preserveParity
+integratedStateResidual index state = SSP.mediatedOrientation
 
 integratedResidualAfter :
   {source target : SSPModularIndex} →
@@ -111,7 +111,7 @@ integratedResidualAfter :
   IntegratedState source →
   IntegratedResidual target
 integratedResidualAfter (path , baseEquality) state =
-  SSPWeave.pathParity path
+  SSPWeave.pathOrientation path
 
 integratedResidualIdentity :
   (index : SSPModularIndex) →
@@ -154,3 +154,13 @@ fineAddressSurvivesLaneTransport :
   (state : IntegratedState source) →
   fst (transportIntegrated path state) ≡ fst state
 fineAddressSurvivesLaneTransport (path , refl) (fine , laneState) = refl
+
+inverseIntegratedPathRetainsInverseResidual :
+  {source target : SSPModularIndex} →
+  (baseEquality : snd source ≡ snd target) →
+  (state : IntegratedState source) →
+  integratedResidualAfter
+    (SSPWeave.lanePath SSP.inverseOrientation , baseEquality)
+    state
+  ≡ SSP.inverseOrientation
+inverseIntegratedPathRetainsInverseResidual refl state = refl
