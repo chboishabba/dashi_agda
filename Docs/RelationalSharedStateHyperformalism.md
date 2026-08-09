@@ -1,6 +1,6 @@
 # Relational Shared-State and Process-Bearing Response Formalism
 
-This document abstracts a recurring parent-child communication pattern without treating either role as a diagnosis or moral identity. The same structures may apply to other caregiving, dependent, familial, clinical, administrative, or institutional relationships.
+This document abstracts a recurring parent–child communication pattern without treating either role as a diagnosis or moral identity. The same structures may apply to other caregiving, dependent, familial, clinical, administrative, or institutional relationships.
 
 ## 1. Shared-state update
 
@@ -10,7 +10,18 @@ A conversation maintains a provisional shared state
 S_t=(O_t,C_t,P_t,Q_t,A_t,D_t,U_t,R_t),
 \]
 
-where the components record the current object, contributions, preferences, unresolved questions, assents and refusals, decision provenance, attributed future obligations, and unresolved ruptures.
+where the components record:
+
+- \(O_t\): current conversational object;
+- \(C_t\): contribution history;
+- \(P_t\): explicitly retained durable preferences, each with owner, scope, time, and provenance;
+- \(Q_t\): unresolved questions;
+- \(A_t\): recorded assents and refusals;
+- \(D_t\): decision kind and provenance;
+- \(U_t\): attributed future obligations;
+- \(R_t\): rupture status.
+
+A preference contribution does not automatically become a durable preference. Promotion into \(P_t\) requires an explicit retained state object.
 
 A contribution may be heard without being taken up:
 
@@ -18,7 +29,15 @@ A contribution may be heard without being taken up:
 \operatorname{Heard}(c)\not\Rightarrow\operatorname{Uptaken}(c).
 \]
 
-Uptake requires that the contribution retain its conversational role and remain available to constrain later responses, decisions, and historical accounts.
+The Agda `Uptaken c before after` type now requires an exact `ContributionTransition` witness:
+
+\[
+\operatorname{contributions}(after)
+=
+c::\operatorname{contributions}(before).
+\]
+
+Only after that state transition is proved does the uptake record describe whether the contribution retained its conversational role and constrained later responses and decision history. A bare report that something was heard cannot inhabit this retained-state guarantee.
 
 Object displacement occurs when a still-open contribution triggers an association, solution, preference, defensive reaction, or regulatory need which then replaces the jointly established object.
 
@@ -76,6 +95,21 @@ In particular,
 \not\Rightarrow
 \operatorname{Affirm}(\mathsf{Commit}(z)\mid\Gamma').
 \]
+
+Transport is represented at two levels.
+
+1. `ResponseTransportWitness source target` is an **assessment**. Its Boolean fields may explicitly report failed locality conditions.
+2. `AuthorisedResponseTransport source target` is the licensing type. It contains the assessment plus equality proofs that node, context, modality, scope, temporal validity, and any strengthened commitment requirement are all `true`.
+
+Therefore:
+
+\[
+\operatorname{TransportAssessment}
+\not\Rightarrow
+\operatorname{TransportAuthorised}.
+\]
+
+Only the proof-carrying authorised type may be supplied to the transport operation.
 
 A statement that an option *might be considered* can positively affirm branch liveness while leaving the option itself unresolved:
 
@@ -158,7 +192,16 @@ A behavioural allegation requires an actor, observable particular, context, affe
 
 ## 8. Partial family-name intrusion
 
-A partial competing name followed by immediate correction is not a composite nickname. The relevant sequence is:
+The base `CorrectedNameIntrusion` record is an **observation carrier**. It records the intended and competing referents, candidates, emitted fragment, final name, stage, contextual flags, and whether a composite label was reported. Because an observation may be uncertain or miscoded, this base record alone does not prove that the event was immediately corrected or non-composite.
+
+The stronger `ValidatedCorrectedNameIntrusion event` subtype requires proofs that:
+
+- `immediatelySelfCorrected event ≡ true`;
+- `deliberateCompositeLabelUsed event ≡ false`;
+- speaker, intended referent, and competing referent have the required distinct typed roles;
+- candidate roles agree with the intended and competing referents.
+
+Only after those proofs exist is the following sequence licensed as the coded classification:
 
 \[
 \text{intended name activation}
@@ -170,7 +213,7 @@ A partial competing name followed by immediate correction is not a composite nic
 \text{monitoring and correction}.
 \]
 
-For example, a parent frustrated with a child may begin producing a sibling's name and then correct to the child's name; a grandparent may similarly begin another descendant's name. The formal object is a *corrected name intrusion*, not a deliberate “relative-child” label.
+For example, a parent frustrated with a child may begin producing a sibling's name and then correct to the child's name; a grandparent may similarly begin another descendant's name. This is a corrected name intrusion only when the validation witness exists, and it is not thereby a deliberate “relative–child” composite label.
 
 Freud's parapraxis framework supplies historical provenance for asking whether slips can reflect structured association. Modern lexical-access and speech-error models supply a less motive-heavy account in terms of competing semantic, lexical, phonological, and affective activation.
 
@@ -214,6 +257,23 @@ Revocation changes which future transitions remain authorised; it does not erase
 \operatorname{ProcessStateErased}.
 \]
 
+Quantitative promotion is synchronized. A family refinement carries one authoritative list of branch refinements and proves:
+
+\[
+\begin{aligned}
+\text{qualitative branches}
+&=\operatorname{map}(\text{qualitativeBranch},R),\\
+\text{portfolio metrics}
+&=\operatorname{map}(\text{selectionMetric},R),\\
+\text{branch waves}
+&=\operatorname{map}(\text{branchWave},R).
+\end{aligned}
+\]
+
+Each branch refinement also proves metric identity/cost preservation and exact derivation of its wave from the branch's amplitude and phase. Foreign, missing, or duplicated metrics and waves therefore cannot inhabit the synchronized refinement type.
+
+Hyperformal incidence likewise requires a membership proof that the participant occurs in the branch's `assignedParticipants`; it is no longer true by construction for every participant–branch pair.
+
 ## 10. Feasibility filtration
 
 A named branch may be logically imaginable without being institutionally available, economically survivable, accessible to the agent, compatible with capacity, or temporally live.
@@ -239,7 +299,7 @@ More branches do not necessarily improve outcomes. A branch must be serviceable 
 
 Qualitatively, a branch may be aligned, orthogonal, opposed, or of unknown alignment. Pairs of branches may interfere constructively, neutrally, destructively, or incoherently through shared resources, incompatible requirements, conflicting provenance, or timing.
 
-The double-slit and n-slit analogy captures the non-additivity:
+The double-slit and \(n\)-slit analogy captures the non-additivity:
 
 \[
 \left|\sum_i a_i e^{i\phi_i}\right|^2
@@ -249,7 +309,7 @@ The double-slit and n-slit analogy captures the non-additivity:
 2\sum_{i<j}a_i a_j\cos(\phi_i-\phi_j).
 \]
 
-The formal Agda layer records qualitative phase and interference classes rather than claiming literal quantum dynamics. The analogy states that a branch's marginal value can depend on which other branches remain live.
+In the exact optimizer, the \(i<j\) condition is enforced structurally by an upper-triangular typed interaction matrix. There is no diagonal cell, there is exactly one cell per unordered branch-position pair, and a cell may contain at most one interaction. Arbitrary string endpoints, self-interactions, and repeated pair entries cannot contribute to the portfolio ledger.
 
 A useful branch family should:
 
@@ -273,7 +333,7 @@ A minimally corrigible relational process preserves:
 1. open conversational objects until answered, explicitly deferred, or withdrawn by their originator;
 2. exact proposition identity, context, modality, scope, and time;
 3. decision provenance;
-4. feeling-fact-allegation type separation;
+4. feeling–fact–allegation type separation;
 5. causal order;
 6. particularity of serious allegations;
 7. unresolved rupture status until bilateral repair;
@@ -287,5 +347,11 @@ The central law is:
 
 \[
 \boxed{
-\text{A response, memory, or obligation may not be transported beyond its typed node and history without an explicit witness.}
+\operatorname{Transport}(r,n\to n')
+\text{ is permitted only when }
+\operatorname{AuthorisedResponseTransport}(n,n')
+\text{ is inhabited.}
+}
 \]
+
+An assessment record, narrative similarity, or Boolean flag with failed requirements is not an authorisation witness.
