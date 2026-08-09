@@ -10,60 +10,34 @@ module DASHI.Foundations.Base369SharedStateWeaveIntegrityExact where
 -- process authorization from downstream obligation.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.List using (List)
 
-open import DASHI.Foundations.SSPTritCarrier using
-  ( SSPTrit
-  ; sspNegOne
-  ; sspZero
-  ; sspPosOne
-  )
+open import DASHI.Foundations.SSPTritCarrier using (SSPTrit; sspPosOne)
 open import DASHI.Foundations.Base369CompletedRelationalDigitExact using
-  ( CompletionBit
-  ; uninstantiated
-  ; instantiated
-  )
+  (CompletionBit; uninstantiated; instantiated)
 import DASHI.Foundations.Base369InteractionAppraisalCubeExact as Cube
 
-------------------------------------------------------------------------
--- Provenance-bearing calculation fibre.
-------------------------------------------------------------------------
-
 data BoundaryStatus : Set where
-  openBoundary
-  deferredBoundary
-  abandonedBySpeaker
-  displacedUnrepaired
-  resolvedBoundary : BoundaryStatus
+  openBoundary deferredBoundary abandonedBySpeaker displacedUnrepaired
+    resolvedBoundary : BoundaryStatus
 
-record CalculationFibre : Set where
+record CalculationFibre : Set₁ where
   constructor calculationFibre
   field
-    origin : Set
-    proposal : Set
-    path : Set
+    origin proposal path : Set
     interaction : Cube.OneRoundInteractionState
     openEnds : List BoundaryStatus
     completion : CompletionBit
 
 open CalculationFibre public
 
-------------------------------------------------------------------------
--- Shared conversational/process state.
-------------------------------------------------------------------------
-
-record SharedState : Set where
+record SharedState : Set₁ where
   constructor sharedState
   field
-    currentObject : Set
-    contributionCarrier : Set
-    preferenceCarrier : Set
-    unresolvedCarrier : Set
-    assentCarrier : Set
-    decisionProvenanceCarrier : Set
-    futureObligationCarrier : Set
+    currentObject contributionCarrier preferenceCarrier unresolvedCarrier : Set
+    assentCarrier decisionProvenanceCarrier futureObligationCarrier : Set
     ruptureCarrier : Set
 
 open SharedState public
@@ -74,13 +48,9 @@ record WeaveIntegrity
   (after : SharedState) : Set₁ where
   constructor weaveIntegrity
   field
-    contributionPreserved : Set
-    appraisalPreserved : Set
-    outcomeAgreementSeparated : Set
-    decisionProvenancePreserved : Set
-    openBoundariesPreserved : Set
-    noUnsupportedCarry : Set
-    repairCompletionWitnessed : Set
+    contributionPreserved appraisalPreserved : Set
+    outcomeAgreementSeparated decisionProvenancePreserved : Set
+    openBoundariesPreserved noUnsupportedCarry repairCompletionWitnessed : Set
 
 open WeaveIntegrity public
 
@@ -94,10 +64,6 @@ record ValidWeave : Set₁ where
 
 open ValidWeave public
 
-------------------------------------------------------------------------
--- Event occurrence does not imply agreement.
-------------------------------------------------------------------------
-
 record EventOccurred : Set where
   constructor eventOccurred
   field eventResult : SSPTrit
@@ -105,31 +71,23 @@ record EventOccurred : Set where
 record JointAgreement : Set where
   constructor jointAgreement
   field
-    assentA : SSPTrit
-    assentB : SSPTrit
+    assentA assentB : SSPTrit
     assentAIsPositive : assentA ≡ sspPosOne
     assentBIsPositive : assentB ≡ sspPosOne
 
 -- There is intentionally no function EventOccurred -> JointAgreement.
 
-------------------------------------------------------------------------
--- Consultation sensitivity.
-------------------------------------------------------------------------
-
 record Consultation : Set₁ where
   constructor consultation
   field
-    InputA : Set
-    InputB : Set
-    Decision : Set
+    InputA InputB Decision : Set
     decide : InputA → InputB → Decision
 
 open Consultation public
 
 record CausallySensitiveConsultation (c : Consultation) : Set₁ where
   constructor causallySensitiveConsultation
-  field
-    changedInputCanChangeDecision : Set
+  field changedInputCanChangeDecision : Set
 
 record PseudoConsultation (c : Consultation) : Set₁ where
   constructor pseudoConsultation
@@ -137,43 +95,29 @@ record PseudoConsultation (c : Consultation) : Set₁ where
     inputSolicited : Set
     decisionInsensitiveToA : Set
 
--- A pseudo-consultation records an interface event without a causal-uptake
--- witness.  It cannot be promoted to joint decision by this module.
-
-------------------------------------------------------------------------
--- Object displacement and queue preservation.
-------------------------------------------------------------------------
-
-record ActiveFibre : Set where
+record ActiveFibre : Set₁ where
   constructor activeFibre
   field
-    object : Set
-    contribution : Set
+    object contribution : Set
     boundary : BoundaryStatus
 
 open ActiveFibre public
 
-record DisplacementEvent : Set where
+record DisplacementEvent : Set₁ where
   constructor displacementEvent
   field
     interrupted : ActiveFibre
     replacementObject : Set
-    interruptedMarkedDisplaced :
-      boundary interrupted ≡ displacedUnrepaired
+    interruptedMarkedDisplaced : boundary interrupted ≡ displacedUnrepaired
 
 open DisplacementEvent public
 
-record PreservedQueue : Set where
+record PreservedQueue : Set₁ where
   constructor preservedQueue
   field
-    active : List ActiveFibre
-    deferred : List ActiveFibre
+    active deferred : List ActiveFibre
 
 open PreservedQueue public
-
-------------------------------------------------------------------------
--- Cessation versus completed repair.
-------------------------------------------------------------------------
 
 record RuptureState : Set where
   constructor ruptureState
@@ -197,10 +141,6 @@ completedRepairIsCompleted :
   repairCompletion completedRepair ≡ instantiated
 completedRepairIsCompleted = refl
 
-------------------------------------------------------------------------
--- Future-capacity capture and process authorization.
-------------------------------------------------------------------------
-
 record ProcessAuthorization : Set₁ where
   constructor processAuthorization
   field
@@ -216,28 +156,17 @@ record DownstreamCommitment (authorization : ProcessAuthorization) : Set₁ wher
     committedAct : Process authorization
     explicitWitness : Set
 
--- Authorization of the initial act does not construct DownstreamCommitment for
--- any descendant act.  A separate explicit witness is required.
-
-------------------------------------------------------------------------
--- Retrospective compression must retain dissent and unresolved boundaries.
-------------------------------------------------------------------------
-
 record MemoryProjection : Set₁ where
   constructor memoryProjection
   field
-    Source : Set
-    Narrative : Set
+    Source Narrative : Set
     project : Source → Narrative
 
 open MemoryProjection public
 
-record AgreementIntegrity
-  (projection : MemoryProjection) : Set₁ where
+record AgreementIntegrity (projection : MemoryProjection) : Set₁ where
   constructor agreementIntegrity
   field
-    dissentNotErased : Set
-    unresolvedNotCompleted : Set
-    attributedAssentExcluded : Set
+    dissentNotErased unresolvedNotCompleted attributedAssentExcluded : Set
 
 open AgreementIntegrity public
