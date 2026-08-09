@@ -32,7 +32,7 @@ open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_; _<_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 sumNine : ℚ → ℚ → ℚ → ℚ → ℚ → ℚ → ℚ → ℚ → ℚ → ℚ
 sumNine a b c d e f g h i =
@@ -102,6 +102,44 @@ viscositySlackPositive :
   ∀ packet → 0ℚ < viscositySlack packet
 viscositySlackPositive packet = strictSlackPositive packet
 
+pairedOwnerTotal : NineOwnerViscosityPacket → ℚ
+pairedOwnerTotal packet =
+  ((lowHighOwner packet + highLowOwner packet)
+    + (highHighGoodOwner packet + highHighBadOwner packet))
+  + ((commutatorOwner packet + tailOwner packet)
+    + (timeCutoffOwner packet + pressureOwner packet))
+  + transportOwner packet
+
+pairedCoefficientTotal : NineOwnerViscosityPacket → ℚ
+pairedCoefficientTotal packet =
+  ((lowHighCoefficient packet + highLowCoefficient packet)
+    + (highHighGoodCoefficient packet + highHighBadCoefficient packet))
+  + ((commutatorCoefficient packet + tailCoefficient packet)
+    + (timeCutoffCoefficient packet + pressureCoefficient packet))
+  + transportCoefficient packet
+
+ownerTotalPairedExact :
+  ∀ packet → ownerTotal packet ≡ pairedOwnerTotal packet
+ownerTotalPairedExact packet =
+  ℚRing.solve-∀
+    (lowHighOwner packet) (highLowOwner packet)
+    (highHighGoodOwner packet) (highHighBadOwner packet)
+    (commutatorOwner packet) (tailOwner packet)
+    (timeCutoffOwner packet) (pressureOwner packet)
+    (transportOwner packet)
+
+pairedCoefficientScaledExact :
+  ∀ packet →
+  pairedCoefficientTotal packet * dissipation packet
+  ≡ coefficientTotal packet * dissipation packet
+pairedCoefficientScaledExact packet =
+  ℚRing.solve-∀
+    (lowHighCoefficient packet) (highLowCoefficient packet)
+    (highHighGoodCoefficient packet) (highHighBadCoefficient packet)
+    (commutatorCoefficient packet) (tailCoefficient packet)
+    (timeCutoffCoefficient packet) (pressureCoefficient packet)
+    (transportCoefficient packet) (dissipation packet)
+
 ownerTotalBelowCoefficientTotal :
   ∀ packet →
   ownerTotal packet ≤ coefficientTotal packet * dissipation packet
@@ -119,16 +157,28 @@ ownerTotalBelowCoefficientTotal packet =
     secondFour = ℚP.+-mono-≤ third fourth
     firstEight = ℚP.+-mono-≤ firstFour secondFour
     allNine = ℚP.+-mono-≤ firstEight (transportUpper packet)
+
+    pairedBound :
+      pairedOwnerTotal packet
+      ≤ pairedCoefficientTotal packet * dissipation packet
+    pairedBound =
+      subst
+        (λ upper → pairedOwnerTotal packet ≤ upper)
+        (ℚRing.solve-∀
+          (lowHighCoefficient packet) (highLowCoefficient packet)
+          (highHighGoodCoefficient packet) (highHighBadCoefficient packet)
+          (commutatorCoefficient packet) (tailCoefficient packet)
+          (timeCutoffCoefficient packet) (pressureCoefficient packet)
+          (transportCoefficient packet) (dissipation packet))
+        allNine
   in
   subst
-    (λ upper → ownerTotal packet ≤ upper)
-    (ℚRing.solve-∀
-      (lowHighCoefficient packet) (highLowCoefficient packet)
-      (highHighGoodCoefficient packet) (highHighBadCoefficient packet)
-      (commutatorCoefficient packet) (tailCoefficient packet)
-      (timeCutoffCoefficient packet) (pressureCoefficient packet)
-      (transportCoefficient packet) (dissipation packet))
-    allNine
+    (λ lower → lower ≤ coefficientTotal packet * dissipation packet)
+    (sym (ownerTotalPairedExact packet))
+    (subst
+      (λ upper → pairedOwnerTotal packet ≤ upper)
+      (pairedCoefficientScaledExact packet)
+      pairedBound)
 
 coefficientTotalPlusSlackExact :
   ∀ packet → coefficientTotal packet + viscositySlack packet ≡ 1ℚ
