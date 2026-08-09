@@ -41,6 +41,21 @@ boundedHelpNode = Response.propositionNode
   ("final commitment unresolved" ∷ [])
   "root"
 
+boundedHelpAliasNode : Response.PropositionNode
+boundedHelpAliasNode = Response.propositionNode
+  "bounded-help-alias"
+  (Response.urgentContext
+    ∷ Response.sufficientCapacity
+    ∷ Response.boundedInstance
+    ∷ [])
+  Response.help
+  Response.considerModality
+  "current episode"
+  "one bounded instance"
+  []
+  ("final commitment unresolved" ∷ [])
+  "root-alias"
+
 boundedHelpDecision : Response.DecisionToken
 boundedHelpDecision = Response.decisionToken
   "decision-0"
@@ -66,6 +81,20 @@ openConsiderResponse = Response.actualResponse
   true
   true
   "explicit assent only to considering the bounded node"
+
+boundedHelpTransport :
+  Response.ResponseTransportWitness boundedHelpNode boundedHelpAliasNode
+boundedHelpTransport = Response.responseTransportWitness
+  refl refl refl refl refl refl refl
+  "semantic coordinates preserved; only node address changes"
+
+transportedOpenConsiderResponse : Response.ActualResponse
+transportedOpenConsiderResponse =
+  Response.transportResponse openConsiderResponse refl boundedHelpTransport
+
+transportedResponseTargetsAlias :
+  Response.node transportedOpenConsiderResponse ≡ boundedHelpAliasNode
+transportedResponseTargetsAlias = refl
 
 correctedFamilyNameSlip : Slip.CorrectedNameIntrusion
 correctedFamilyNameSlip = Slip.correctedNameIntrusion
@@ -152,6 +181,20 @@ sharedStateRequiresTransitionForUptake :
   ≡ true
 sharedStateRequiresTransitionForUptake = refl
 
+sharedStateRequiresDurablePreferenceTransition :
+  Shared.durablePreferenceRequiresExplicitTransition
+    Shared.canonicalSharedStateInvariants
+  ≡ true
+sharedStateRequiresDurablePreferenceTransition = refl
+
+futureObligationCarriesCommitmentEvidence :
+  {participant : Core.Participant} →
+  {obligation : String} →
+  (future : Shared.FutureObligation participant obligation) →
+  Shared.ExplicitCommitmentEvidence participant obligation
+futureObligationCarriesCommitmentEvidence =
+  Shared.futureObligationRequiresExplicitCommitment
+
 ------------------------------------------------------------------------
 -- Exact developmental-attunement regressions.
 ------------------------------------------------------------------------
@@ -235,6 +278,10 @@ withdrawalIsNotGloballyPromoted = refl
 ------------------------------------------------------------------------
 -- Exact attractor-selection regressions.
 ------------------------------------------------------------------------
+
+branchABeatsEmptyRegression :
+  Selection.StrictlyPreferred Selection.portfolioA Selection.emptyPortfolio
+branchABeatsEmptyRegression = Selection.strictlyPreferred 2 refl
 
 constructivePortfolioBeatsNoise :
   Selection.StrictlyPreferred
