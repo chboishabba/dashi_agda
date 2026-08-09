@@ -30,7 +30,7 @@ module DASHI.Physics.YangMills.BalabanSelectedCombinedConstraintFiniteKKTExact w
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _≤_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _*_; _≤_)
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -97,16 +97,16 @@ selectedCombinedConstraintGramQuadraticExact :
 selectedCombinedConstraintGramQuadraticExact background multiplier =
   trans
     (Sums.sumRationalCong
-      (Rows.selectedCombinedConstraintRows)
+      Rows.selectedCombinedConstraintRows
       (λ row →
         selectedCombinedConstraintGramApply background multiplier row
-        ℚ.* multiplier row)
+        * multiplier row)
       (λ row →
         Combined.selectedBackgroundCombinedConstraintApply background
           (selectedCombinedConstraintTransposeApply background multiplier) row
-        ℚ.* multiplier row)
+        * multiplier row)
       (λ row →
-        cong (ℚ._* multiplier row)
+        cong (_* multiplier row)
           (selectedCombinedConstraintGramActionExact
             background multiplier row)))
     (selectedCombinedConstraintAdjointExact background
