@@ -14,7 +14,8 @@ import DASHI.Core.AttributedSourceCore as Attr
 --
 -- Sources constrain vocabulary and candidate mechanisms.  They do not prove
 -- the motive, diagnosis, guilt, trauma status or causal history of any named
--- participant or family.
+-- participant or family.  Finite cobordism/path-marker sources live in the
+-- dedicated RelationalBranchGeometrySourceAtlas.
 ------------------------------------------------------------------------
 
 freudPsychopathologySource : Attr.AttributedSource
@@ -135,18 +136,6 @@ sorkinQuantumMeasureSource = Attr.mkDOISource
   "Supports separating diagonal, pairwise-interference and higher-order residual accounting; the relational branch model is not literal quantum mechanics, a Born rule or quantum cognition."
   Attr.publicAttribution
 
-atiyahTQFTSource : Attr.AttributedSource
-atiyahTQFTSource = Attr.mkDOISource
-  "Michael F. Atiyah"
-  "Topological quantum field theory"
-  "Publications Mathematiques de l'IHES"
-  "1988"
-  "10.1007/BF02698547"
-  "https://doi.org/10.1007/BF02698547"
-  Attr.academicArticleSource
-  "Supplies cobordism, boundary and composition provenance for the finite one-to-n pants carrier; no smooth cobordism, TQFT functor, Hilbert-space or physical field-theory claim is imported."
-  Attr.publicAttribution
-
 ivyLimitedBeddingSource : Attr.AttributedSource
 ivyLimitedBeddingSource = Attr.mkDOISource
   "Autumn S. Ivy; Kristen L. Brunson; Curt A. Sandman; Tallie Z. Baram"
@@ -219,7 +208,6 @@ canonicalRelationalSources =
   ∷ aubinViabilitySource
   ∷ bellmanDynamicProgrammingSource
   ∷ sorkinQuantumMeasureSource
-  ∷ atiyahTQFTSource
   ∷ ivyLimitedBeddingSource
   ∷ davisUnpredictableSignalsSource
   ∷ feldmanSynchronySource
@@ -229,17 +217,17 @@ canonicalRelationalSources =
 
 canonicalRelationalSourceAtlas : Attr.AttributedSourceAtlas
 canonicalRelationalSourceAtlas = Attr.mkSourceAtlas
-  "relational shared-state, developmental attunement and branch-geometry sources"
+  "relational shared-state, developmental attunement and branch-selection sources"
   "DASHI.Reasoning.RelationalFormalismSourceAtlas"
   canonicalRelationalSources
-  "Bounded provenance for lexical intrusion, defensive reversal, typed hyperfabric, PNF-preserving relational state, attractor/viability selection, branch interference and cobordism, developmental signal sequencing, synchrony and ADHD candidate mechanisms."
+  "Bounded provenance for lexical intrusion, defensive reversal, typed hyperfabric, PNF-preserving relational state, attractor/viability selection, branch interference, developmental signal sequencing, synchrony and ADHD candidate mechanisms."
 
 canonicalRelationalSourceCount : Nat
 canonicalRelationalSourceCount = Attr.sourceCount canonicalRelationalSources
 
-canonicalRelationalSourceCountIsSixteen :
-  canonicalRelationalSourceCount ≡ 16
-canonicalRelationalSourceCountIsSixteen = refl
+canonicalRelationalSourceCountIsFifteen :
+  canonicalRelationalSourceCount ≡ 15
+canonicalRelationalSourceCountIsFifteen = refl
 
 canonicalRelationalSourceAtlasDoesNotCreateAuthority :
   Attr.atlasCreatesAuthority canonicalRelationalSourceAtlas ≡ false
