@@ -174,18 +174,13 @@ foldAdmissibleRemainder initialHandler knownIntegralHandler
     (foldAdmissibleRemainder initialHandler knownIntegralHandler
       lowerOrderHandler dissipationHandler combine right)
 
-valueHandler :
-  ∀ {authority} →
-  (source : Source authority) → ℚ
-valueHandler {authority} source = value authority source
-
 admissibleRemainderEvaluationIsCanonical :
   ∀ {authority} (remainder : AdmissibleRemainder authority) →
   foldAdmissibleRemainder
-    (λ source _ → valueHandler source)
-    (λ source _ → valueHandler source)
-    (λ source _ → valueHandler source)
-    (λ source _ → valueHandler source)
+    (λ source _ → value authority source)
+    (λ source _ → value authority source)
+    (λ source _ → value authority source)
+    (λ source _ → value authority source)
     _+_ remainder
   ≡ evaluateRemainder remainder
 admissibleRemainderEvaluationIsCanonical
