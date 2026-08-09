@@ -45,6 +45,12 @@ c_{\mathrm{loc}}^{\mathrm{upper}}
 \frac{55}{18874368}.
 \]
 
+At the exact-rational interface this is the literal budget:
+
+```text
+55 / 18874368
+```
+
 The padding is assigned to the localization owner. The new theorem proves that increasing its coefficient by a nonnegative amount preserves the owner inequality, then constructs the exact existing `CorrelatedOwnerBudgets` record.
 
 Thus a generated interval computation may be consumed only after it supplies:
