@@ -13,6 +13,7 @@ sources=(
   DASHI/Foundations/Base369PropositionResponseTransportExact.agda
   DASHI/Foundations/Base369RelationalFailureOperatorsExact.agda
   DASHI/Foundations/Base369SharedStateWeaveIntegrityExact.agda
+  DASHI/Foundations/Base369TemporalProcessAuthorityExact.agda
   DASHI/Foundations/Base369RelationalUpdateKernelExact.agda
   DASHI/Foundations/Base369RelationalUpdateRound8Validation.agda
   DASHI/EverythingBase369RelationalUpdateRound8.agda
