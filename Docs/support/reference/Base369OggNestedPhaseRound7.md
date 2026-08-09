@@ -4,13 +4,13 @@ This tranche separates finite carrier theorems from still-open Monster/modular p
 
 ## Exact nonary square
 
-Every nonary digit has one high and one low base-three coordinate.  The implementation constructs a two-sided equivalence
+Every nonary digit has one high and one low base-three coordinate. The implementation constructs a two-sided equivalence
 
 ```text
-NonaryTruth  ~=  SSPTrit x SSPTrit
+NonaryTruth ~= SSPTrit x SSPTrit
 ```
 
-using the signed digit convention `0 -> sspZero`, `1 -> sspPosOne`, `2 -> sspNegOne`.  This is a carrier/address equivalence; it does not identify `Z/9Z` and `F_3^2` as groups or rings.
+using the signed digit convention `0 -> sspZero`, `1 -> sspPosOne`, `2 -> sspNegOne`. This is a carrier/address equivalence; it does not identify `Z/9Z` and `F_3^2` as groups or rings.
 
 The low coordinate gives the exact fibres
 
@@ -32,10 +32,12 @@ It proves:
 p = 3                  -> neutral low trit
 Ogg prime p > 3        -> nonneutral low trit
 r -> -r mod 9          -> SSP-trit polarity reversal
-existing unit orientation agrees with the SSP trit
+(complement mode, local orientation) -> canonical SSP residue trit
 ```
 
-This is generic coprimality geometry plus an exact typed bridge.  It does not explain why the fifteen Ogg primes are selected.
+The previous direct/counter orientation is local to each complement mode. Modes `18` and `45` use direct as positive and counter as negative; mode `27` uses the opposite convention. The pair consisting of mode and orientation, rather than orientation alone, recovers the global low residue trit.
+
+This is generic coprimality geometry plus an exact typed bridge. It does not explain why the fifteen Ogg primes are selected.
 
 ## Completion and overflow
 
@@ -48,7 +50,9 @@ instantiation/completion
 nesting scale
 ```
 
-The ordinary zero and completed nine share residue zero but have different completion coordinates.  A completed nine emits an uninstantiated zero at the next scale.  A dependent status family prevents the full raw product from being declared meaningful automatically.
+The ordinary zero and completed nine share residue zero but have different completion coordinates. A completed nine emits an uninstantiated zero at the next scale. A dependent status family prevents the full raw product from being declared meaningful automatically.
+
+`Base369PhaseCompletionAndNestedEvaluationExact.agda` then distinguishes a completed balanced phase fibre from its observation. Promotion retains the fine negative/neutral/positive sectors in the fibre while producing one coarser state. It keeps separate witnesses for empty zero, balanced evaluation zero and invariant neutral zero.
 
 ## Five modes, two phases, nine ordinary states plus completion
 
@@ -59,7 +63,9 @@ D4IrreducibleType x BinaryOrientation
   ~= PointedNonary10
 ```
 
-where `PointedNonary10` is nine ordinary states plus `completionJ`.  Identifying the two orientations of the distinguished `A1` mode gives a nine-state quotient.  This is a carrier model; no actual Monster 5-local action is asserted.
+where `PointedNonary10` is nine ordinary states plus `completionJ`. Identifying the two orientations of the distinguished `A1` mode gives a nine-state quotient. This is a carrier model; no actual Monster 5-local action is asserted.
+
+`MonsterFivePrimaryRelationalModelBoundaryExact.agda` states the smallest honest promotion contract. An observer from an actual Monster 5-local carrier must intertwine actual transport with transport on the nine-channel quotient. The entire actual carrier is not required to have nine states.
 
 ## One structured 3B carrier, two observers
 
@@ -72,7 +78,7 @@ identity evaluation = 53 + 3*65610 = 196883
 nontrivial phase evaluation = 53
 ```
 
-The conformal line gives `196884` at identity and trace `54` at 3B.  The complete regular fibres remain present in the fine carrier while contributing zero to the nontrivial phase observer.
+The conformal line gives `196884` at identity and trace `54` at 3B. The complete regular fibres remain present in the fine carrier while contributing zero to the nontrivial phase observer.
 
 ## Horizontal phase width versus vertical primary depth
 
@@ -96,7 +102,7 @@ For each odd Ogg prime, it proves the finite phase decomposition
 p = 1 + 2*((p-1)/2)
 ```
 
-as one fixed phase plus inverse-oriented pairs.
+as one fixed phase plus inverse-oriented pairs. Each proposed nested relational cell now carries an explicit `Fin p` phase coordinate as well as its local Base369 cell.
 
 ## Exact boundary
 
@@ -106,8 +112,9 @@ The following remain open and are not promoted:
 an actual Ogg-indexed nested Monster/modular eigencarrier
 Fricke reversal = eigencharacter inversion on one actual carrier
 D4 five-mode quotient = actual Monster 5-local representation
+an actual nine-channel observer on a Monster 5-local carrier
 Base369 trit observations = representation-theoretic irrep labels
 nonary carrier geometry = explanation of the Ogg list or genus zero
 ```
 
-The new typed boundary records exactly the data an actual nested carrier and Fricke/eigen inversion bridge must provide.
+The typed boundaries record exactly the data an actual nested carrier, Fricke/eigen inversion bridge and 5-local relational observer must provide.
