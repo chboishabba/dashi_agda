@@ -48,7 +48,7 @@ pairInterference : BranchWave → BranchWave → ℤ
 pairInterference ψ χ = (+ 2) * waveDot ψ χ
 
 ------------------------------------------------------------------------
--- Exact bridge from wave cross terms to optimizer interactions.
+-- Exact bridge from wave cross terms to typed optimizer interactions.
 ------------------------------------------------------------------------
 
 data SignedInteractionWitness :
@@ -89,12 +89,13 @@ classifySignedInteraction (-[1+ n ]) =
 record WaveBackedInteraction : Set where
   constructor waveBackedInteraction
   field
-    leftLabel rightLabel : String
+    leftMetric rightMetric : Selection.BranchMetric
     leftWave rightWave : BranchWave
     exactCrossTerm : ℤ
     crossTermReceipt : exactCrossTerm ≡ pairInterference leftWave rightWave
     classification : ClassifiedInteraction exactCrossTerm
-    optimizerInteraction : Selection.BranchInteraction
+    optimizerInteraction :
+      Selection.PairInteraction leftMetric rightMetric
     optimizerDirectionMatches :
       Selection.interactionDirection optimizerInteraction
       ≡ interactionDirection classification
@@ -105,19 +106,19 @@ record WaveBackedInteraction : Set where
 open WaveBackedInteraction public
 
 interactionFromWaves :
-  String → String → BranchWave → BranchWave → String →
+  (leftMetric rightMetric : Selection.BranchMetric) →
+  BranchWave → BranchWave → String →
   WaveBackedInteraction
-interactionFromWaves leftLabel rightLabel left right receipt
+interactionFromWaves leftMetric rightMetric left right receipt
   with classifySignedInteraction (pairInterference left right)
 ... | classifiedInteraction direction magnitude witness =
   waveBackedInteraction
-    leftLabel rightLabel
+    leftMetric rightMetric
     left right
     (pairInterference left right)
     refl
     (classifiedInteraction direction magnitude witness)
-    (Selection.branchInteraction
-      leftLabel rightLabel direction magnitude receipt)
+    (Selection.pairInteraction direction magnitude receipt)
     refl
     refl
 
@@ -182,10 +183,6 @@ pairInterferenceWithSum ψ (χ ∷ χs) =
 
 ------------------------------------------------------------------------
 -- Generic n-slit decomposition.
---
--- `nSlitExpansion` is the diagonal intensity plus every pairwise cross term.
--- The theorem proves that the coherent intensity of any finite branch list is
--- exactly this expansion on the integer-pair carrier.
 ------------------------------------------------------------------------
 
 nSlitExpansion : List BranchWave → ℤ
@@ -263,10 +260,6 @@ exactNSlitLaw ψs =
 
 ------------------------------------------------------------------------
 -- Third-order residual.
---
--- On an ordinary amplitude-squared carrier, the three-slit intensity contains
--- diagonal and pairwise terms only.  The Sorkin-style third-order residual is
--- therefore exactly zero.
 ------------------------------------------------------------------------
 
 thirdOrderResidual :
@@ -347,23 +340,23 @@ fourQuarterTurnsCancel = refl
 inPhaseInteractionCertificate : WaveBackedInteraction
 inPhaseInteractionCertificate =
   interactionFromWaves
-    "phase-zero-left" "phase-zero-right"
+    Selection.alignedBranchA Selection.alignedBranchB
     phase0 phase0
-    "positive cross term yields reinforcing optimizer interaction"
+    "positive cross term yields typed reinforcing optimizer interaction"
 
 oppositeInteractionCertificate : WaveBackedInteraction
 oppositeInteractionCertificate =
   interactionFromWaves
-    "phase-zero" "phase-two"
+    Selection.alignedBranchA Selection.alignedBranchB
     phase0 phase2
-    "negative cross term yields interfering optimizer interaction"
+    "negative cross term yields typed interfering optimizer interaction"
 
 quadratureInteractionCertificate : WaveBackedInteraction
 quadratureInteractionCertificate =
   interactionFromWaves
-    "phase-zero" "phase-one"
+    Selection.alignedBranchA Selection.alignedBranchB
     phase0 phase1
-    "zero cross term yields independent optimizer interaction"
+    "zero cross term yields typed independent optimizer interaction"
 
 inPhaseOptimizerDirectionIsReinforcing :
   Selection.interactionDirection
@@ -387,6 +380,7 @@ record BranchInterferenceAuthorityBoundary : Set where
   field
     exactFiniteIntegerPairAlgebra : Bool
     allFiniteCrossTermsRetained : Bool
+    waveInteractionsUseTypedOptimizerEndpoints : Bool
     thirdOrderResidualZeroOnCarrier : Bool
     literalQuantumDecisionDynamicsClaimed : Bool
     bornRuleOrPhysicalProbabilityClaimed : Bool
@@ -398,10 +392,11 @@ canonicalBranchInterferenceAuthorityBoundary :
 canonicalBranchInterferenceAuthorityBoundary = record
   { exactFiniteIntegerPairAlgebra = true
   ; allFiniteCrossTermsRetained = true
+  ; waveInteractionsUseTypedOptimizerEndpoints = true
   ; thirdOrderResidualZeroOnCarrier = true
   ; literalQuantumDecisionDynamicsClaimed = false
   ; bornRuleOrPhysicalProbabilityClaimed = false
   ; phaseHasUniquePsychologicalMeaning = false
   ; boundaryNote =
-      "The exact theorems concern the repository's finite integer-pair wave carrier. Relational phase denotes path compatibility or conflict by analogy; no Hilbert-space, Born-rule, quantum-cognition or physical-collapse claim is made."
+      "The exact theorems concern the repository's finite integer-pair wave carrier. Wave-backed interactions are indexed by the actual optimizer branch metrics. Relational phase denotes compatibility or conflict by analogy; no Hilbert-space, Born-rule, quantum-cognition or physical-collapse claim is made."
   }
