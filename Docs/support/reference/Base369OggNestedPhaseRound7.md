@@ -67,6 +67,28 @@ where `PointedNonary10` is nine ordinary states plus `completionJ`. Identifying 
 
 `MonsterFivePrimaryRelationalModelBoundaryExact.agda` states the smallest honest promotion contract. An observer from an actual Monster 5-local carrier must intertwine actual transport with transport on the nine-channel quotient. The entire actual carrier is not required to have nine states.
 
+## Exact C3 phase evaluation
+
+`MonsterC3CyclotomicEvaluationExact.agda` constructs the exact integer cyclotomic carrier
+
+```text
+a + b*zeta,  with  zeta^2 = -1-zeta.
+```
+
+It computes
+
+```text
+1 + zeta + zeta^2 = 0
+```
+
+and evaluates the literal 3B multiplicities
+
+```text
+(65663, 65610, 65610)
+```
+
+at a nontrivial generator to the residual cyclotomic value `(53,0)`. Thus the fine regular fibres are nonempty and present even when their selected phase evaluation vanishes.
+
 ## One structured 3B carrier, two observers
 
 `Monster3BBalancedRegularFibreExact.agda` organizes the certified 3B numbers as
