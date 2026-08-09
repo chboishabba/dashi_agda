@@ -19,12 +19,33 @@ data Heard : Core.Contribution → Set where
 data UptakeKind : Set where
   registeredOnly retainedRole constrainsLaterState : UptakeKind
 
+------------------------------------------------------------------------
+-- Exact contribution transition.
+--
+-- This relation binds the contribution and both state indices: the after-state
+-- must retain the new contribution immediately before the prior contribution
+-- history.  Other fields may change under a separately documented update, but
+-- an Uptaken value can no longer relate arbitrary before/after states.
+------------------------------------------------------------------------
+
+record ContributionTransition
+    (c : Core.Contribution)
+    (before after : Core.SharedState) : Set where
+  constructor contributionTransition
+  field
+    contributionHistoryTransition :
+      Core.contributions after ≡ c ∷ Core.contributions before
+    transitionReceipt : String
+
+open ContributionTransition public
+
 record Uptaken
     (c : Core.Contribution)
     (before after : Core.SharedState) : Set where
   constructor uptaken
   field
     registered : Heard c
+    stateTransition : ContributionTransition c before after
     retainedConversationalRole : Bool
     constrainsLaterResponses : Bool
     constrainsDecisionHistory : Bool
@@ -156,6 +177,7 @@ record SharedStateInvariants : Set where
     rupturePersistsUntilRepairWitness : Bool
     futureObligationsRequireExplicitCommitment : Bool
     careAndAccountabilityRemainDistinct : Bool
+    uptakeRequiresContributionTransition : Bool
 
 canonicalSharedStateInvariants : SharedStateInvariants
 canonicalSharedStateInvariants = record
@@ -167,6 +189,7 @@ canonicalSharedStateInvariants = record
   ; rupturePersistsUntilRepairWitness = true
   ; futureObligationsRequireExplicitCommitment = true
   ; careAndAccountabilityRemainDistinct = true
+  ; uptakeRequiresContributionTransition = true
   }
 
 record MinimalRepairProtocol : Set where
