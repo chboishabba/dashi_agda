@@ -73,8 +73,8 @@ missingBindingIsNotSeveredButBound :
 missingBindingIsNotSeveredButBound ()
 
 bindingCanBePresentWhileDepthContinuityFails :
-  medium severedButBoundState ≡ bindingPresent
-  × continuity severedButBoundState ≡ depthSevered
+  (medium severedButBoundState ≡ bindingPresent)
+  × (continuity severedButBoundState ≡ depthSevered)
 bindingCanBePresentWhileDepthContinuityFails = refl , refl
 
 coarseProjectionIsNotInjective :
@@ -82,7 +82,7 @@ coarseProjectionIsNotInjective :
     (λ first →
       Σ BindingState
         (λ second →
-          coarseProjection first ≡ coarseProjection second
+          (coarseProjection first ≡ coarseProjection second)
           × (first ≡ second → ⊥)))
 coarseProjectionIsNotInjective =
   intactState ,
