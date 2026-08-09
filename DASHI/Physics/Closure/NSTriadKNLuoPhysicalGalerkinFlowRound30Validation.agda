@@ -1,19 +1,11 @@
 module DASHI.Physics.Closure.NSTriadKNLuoPhysicalGalerkinFlowRound30Validation where
 
 ------------------------------------------------------------------------
--- Cumulative Round Thirty validation root.
+-- Round Thirty validation root.
 --
--- Imports the complete Round-29 dependent flow/owner tranche and adds:
---
--- * a genuinely dependent physical Galerkin vector-field codomain;
--- * a same-object physical/coordinate equivalence boundary;
--- * constructive transport of a real Picard--Lindelöf authority;
--- * exhaustive finite triad energy cancellation;
--- * differential and integrated viscous energy identities;
--- * the terminal no-finite-maximal-time Galerkin-flow reducer.
+-- Imported cumulatively by the Round-29 root on this child branch so the
+-- existing pull-request workflow typechecks the new tranche as well.
 ------------------------------------------------------------------------
-
-import DASHI.Physics.Closure.NSTriadKNLuoDependentFlowOwnerAnalysisRound29Validation
 
 import DASHI.Physics.Closure.NSTriadKNPhysicalGalerkinVectorFieldRound30Exact as Field
 import DASHI.Physics.Closure.NSTriadKNFinitePhysicalCoordinateEquivalenceRound30Exact as Coordinates
