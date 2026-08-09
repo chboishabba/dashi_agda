@@ -12,8 +12,6 @@ import DASHI.Reasoning.DefensiveReversalRepair as Repair
 import DASHI.Reasoning.IntergenerationalNameIntrusion as Slip
 import DASHI.Reasoning.AttractorAlignedBranchSelection as Selection
 import DASHI.Reasoning.RelationalBranchInterference as Interference
-import DASHI.Reasoning.RelationalTernaryPhaseGeometry as Ternary
-import DASHI.Reasoning.RelationalBranchCobordismGeometry as Cobordism
 import DASHI.Reasoning.RelationalProcessMemoryHyperfabric as Process
 import DASHI.Reasoning.DevelopmentalAttunementPNFBridge as Developmental
 import DASHI.Reasoning.DevelopmentalExplanationWithdrawalExact as DevelopmentalPolicy
@@ -95,7 +93,7 @@ considerNodeIsNotCommitNode :
 considerNodeIsNotCommitNode = refl
 
 sourceCountRegression :
-  Sources.canonicalRelationalSourceCount ≡ 16
+  Sources.canonicalRelationalSourceCount ≡ 15
 sourceCountRegression = refl
 
 processBoundaryRejectsMoreIsAlwaysBetter :
@@ -292,45 +290,3 @@ waveBridgeClassifiesQuadratureAsIndependent :
       Interference.quadratureInteractionCertificate)
   ≡ Selection.independent
 waveBridgeClassifiesQuadratureAsIndependent = refl
-
-------------------------------------------------------------------------
--- Exact ternary and branch-cobordism regressions.
-------------------------------------------------------------------------
-
-ternaryRootsCancelRegression :
-  Ternary.sumE
-    (Ternary.rootOne
-      ∷ Ternary.rootOmega
-      ∷ Ternary.rootOmegaSquared
-      ∷ [])
-  ≡ Ternary.zeroE
-ternaryRootsCancelRegression = Ternary.ternaryRootsCancel
-
-ternaryCancellationLedgerRegression :
-  (Ternary.normE Ternary.rootOne
-    +ℤ Ternary.normE Ternary.rootOmega
-    +ℤ Ternary.normE Ternary.rootOmegaSquared)
-  +ℤ
-  (Ternary.pairInterferenceE Ternary.rootOne Ternary.rootOmega
-    +ℤ Ternary.pairInterferenceE Ternary.rootOne Ternary.rootOmegaSquared
-    +ℤ Ternary.pairInterferenceE Ternary.rootOmega Ternary.rootOmegaSquared)
-  ≡ + 0
-ternaryCancellationLedgerRegression = Ternary.ternaryCancellationLedger
-
-composedCobordismHasThreeOutputs :
-  Cobordism.outputCount Cobordism.composedOneToThree ≡ 3
-composedCobordismHasThreeOutputs = Cobordism.composedOutputCountIsThree
-
-composedCobordismResidualIsZero :
-  Cobordism.splitRecombineResidual Cobordism.composedOneToThree
-  ≡ Interference.zeroWave
-composedCobordismResidualIsZero = Cobordism.composedResidualIsZero
-
-pathMarkerSuppressionRegression :
-  Cobordism.markedPairIntensity
-    Cobordism.distinguishablePaths
-    Interference.phase0
-    Interference.phase0
-  ≡ + 2
-pathMarkerSuppressionRegression =
-  Cobordism.distinguishableInPhaseIntensityIsTwo
