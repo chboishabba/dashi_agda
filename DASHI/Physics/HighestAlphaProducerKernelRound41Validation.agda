@@ -1,0 +1,12 @@
+module DASHI.Physics.HighestAlphaProducerKernelRound41Validation where
+
+import DASHI.Physics.Common.PhysicalProducerMaturityExact
+import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound40MultiplierLocalityValidation
+import DASHI.Physics.YangMills.BalabanSelectedOwnerBudgetSlackExact
+import DASHI.Physics.YangMills.BalabanSelectedCertifiedOwnerEnclosureExact
+import DASHI.Physics.YangMills.BalabanSelectedSinglePlaquetteWitnessExact
+import DASHI.Physics.YangMills.BalabanMoscoRecoveryGapTransferExact
+import DASHI.Physics.Closure.NSGalerkinSameObjectExact
+import DASHI.Physics.Closure.NSHHBadScaleGainFalsificationExact
+import DASHI.Physics.Closure.NSAdmissibleRemainderGrammarExact
+import DASHI.Physics.Closure.NSNineOwnerStrictSlackExact
