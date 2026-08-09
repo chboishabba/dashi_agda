@@ -2,7 +2,7 @@ module DASHI.Computation.JacquardHelicalWeaveBridgeExact where
 
 open import DASHI.Core.Prelude
 
-import Data.Fin as Fin
+import Data.Fin.Base as Fin
 import DASHI.Computation.JacquardOperationalSemanticsExact as Jacquard
 import DASHI.Topology.HelicalWeaveMappingTorusExact as Helix
 
