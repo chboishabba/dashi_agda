@@ -25,7 +25,7 @@ traceObservation hiddenStateB = tracePrefixA
 traceObservation hiddenStateC = tracePrefixB
 
 data HiddenTraceTag : Set where
-  tagA tagB tagC noTraceResidual : HiddenTraceTag
+  tagA tagB tagC : HiddenTraceTag
 
 hiddenTag : FiniteTraceState → HiddenTraceTag
 hiddenTag hiddenStateA = tagA
@@ -56,8 +56,8 @@ tagANotB : tagA ≡ tagB → ⊥
 tagANotB ()
 
 traceProjectionIsNonInjective :
-  traceObservation hiddenStateA ≡ traceObservation hiddenStateB
-  × hiddenStateA ≡ hiddenStateB → ⊥
+  (traceObservation hiddenStateA ≡ traceObservation hiddenStateB)
+  × (hiddenStateA ≡ hiddenStateB → ⊥)
 traceProjectionIsNonInjective = refl , hiddenStateANotB
 
 sameTraceFibreDifferentResidualTags :
@@ -80,7 +80,7 @@ _thenTrace_ :
   TracePath middle target →
   TracePath source middle →
   TracePath source target
-q thenTrace p = trans p q
+_thenTrace_ q p = trans p q
 
 tracePathIdLeft :
   {source target : TraceProfile} →
@@ -127,23 +127,32 @@ transportTraceComposition refl refl fibre = refl
 TraceResidual : TraceProfile → Set
 TraceResidual profile = HiddenTraceTag
 
-zeroTraceResidual :
-  (profile : TraceProfile) → TraceResidual profile
-zeroTraceResidual profile = noTraceResidual
+traceStateResidual :
+  (profile : TraceProfile) →
+  TraceFibre profile →
+  TraceResidual profile
+traceStateResidual profile fibre = hiddenTagOfFibre fibre
 
 traceResidualAfter :
   {source target : TraceProfile} →
   TracePath source target →
   TraceFibre source →
   TraceResidual target
-traceResidualAfter path fibre = noTraceResidual
+traceResidualAfter refl fibre = hiddenTagOfFibre fibre
 
 traceResidualIdentity :
   (profile : TraceProfile) →
   (fibre : TraceFibre profile) →
   traceResidualAfter (identityTracePath profile) fibre
-  ≡ zeroTraceResidual profile
+  ≡ traceStateResidual profile fibre
 traceResidualIdentity profile fibre = refl
+
+identityTransportRetainsHiddenTraceResidual :
+  hiddenTagOfFibre hiddenStateAInTraceA
+  ≡ traceResidualAfter
+      (identityTracePath tracePrefixA)
+      hiddenStateAInTraceA
+identityTransportRetainsHiddenTraceResidual = refl
 
 canonicalMoonshineTraceIndexedWeave :
   Indexed.IndexedWeave TraceProfile TraceFibre
@@ -159,7 +168,7 @@ canonicalMoonshineTraceIndexedWeave =
     ; transportId = transportTraceIdentity
     ; transportComp = transportTraceComposition
     ; Residual = TraceResidual
-    ; zeroResidual = zeroTraceResidual
+    ; stateResidual = traceStateResidual
     ; residualAfter = traceResidualAfter
     ; residualId = traceResidualIdentity
     }
@@ -168,12 +177,17 @@ record MoonshineTraceFibreBoundary : Set where
   constructor moonshineTraceFibreBoundary
   field
     boundedTraceProjectionIsNonInjective :
-      traceObservation hiddenStateA ≡ traceObservation hiddenStateB
-      × hiddenStateA ≡ hiddenStateB → ⊥
+      (traceObservation hiddenStateA ≡ traceObservation hiddenStateB)
+      × (hiddenStateA ≡ hiddenStateB → ⊥)
     boundedTraceResidualDistinguishes :
       hiddenTagOfFibre hiddenStateAInTraceA
       ≡ hiddenTagOfFibre hiddenStateBInTraceA
       → ⊥
+    identityRetainsResidual :
+      hiddenTagOfFibre hiddenStateAInTraceA
+      ≡ traceResidualAfter
+          (identityTracePath tracePrefixA)
+          hiddenStateAInTraceA
     actualMonsterRepresentationConstructed : Bool
     actualMonsterRepresentationConstructedIsFalse :
       actualMonsterRepresentationConstructed ≡ false
@@ -186,5 +200,6 @@ canonicalMoonshineTraceFibreBoundary =
   moonshineTraceFibreBoundary
     traceProjectionIsNonInjective
     sameTraceFibreDifferentResidualTags
+    identityTransportRetainsHiddenTraceResidual
     false refl
     false refl
