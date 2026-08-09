@@ -1,7 +1,7 @@
 module DASHI.Cognition.PNF.SparseFibredFrontier where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; zero)
 open import Data.Empty using (⊥)
 
 open import DASHI.Cognition.PNF.ComplexityArithmetic
@@ -214,11 +214,11 @@ open SparseFrontierCertificate public
 canonicalEmptySparseFrontierCertificate : SparseFrontierCertificate
 canonicalEmptySparseFrontierCertificate =
   sparseFrontierCertificate
-    zeroWorkers
-    zeroWorkers
-    zeroWorkers
-    (≤ᶜ-refl zeroWorkers)
-    (≤ᶜ-refl zeroWorkers)
+    zero
+    zero
+    zero
+    (≤ᶜ-refl zero)
+    (≤ᶜ-refl zero)
 
 record SparseFibredFrontierBoundary : Set where
   constructor sparseFibredFrontierBoundary
