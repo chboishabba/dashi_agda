@@ -10,6 +10,7 @@ bash scripts/check_ns_luo_indexed_gluing_resource_lattice_round32.sh
 files=(
   DASHI/Physics/Closure/NSTriadKNSameObjectLookupConsistencyRound33Exact.agda
   DASHI/Physics/Closure/NSTriadKNHHBadSharpDyadicGainRound33Exact.agda
+  DASHI/Physics/Closure/NSTriadKNHHBadNoScaleFreeGainRound33Exact.agda
   DASHI/Physics/Closure/NSTriadKNNineOwnerResourceReserveRound33Exact.agda
   DASHI/Physics/Closure/NSTriadKNLuoSameObjectSharpGainRound33Validation.agda
 )
@@ -40,6 +41,9 @@ checks=(
   'NSTriadKNHHBadSharpDyadicGainRound33Exact.agda:requiredHHBadGainCalibration'
   'NSTriadKNHHBadSharpDyadicGainRound33Exact.agda:requiredHHBadGainUnique'
   'NSTriadKNHHBadSharpDyadicGainRound33Exact.agda:physicalHHBadDyadicGainConstructed = false'
+  'NSTriadKNHHBadNoScaleFreeGainRound33Exact.agda:sameGainAtAdjacentShellsForcesZeroAllocation'
+  'NSTriadKNHHBadNoScaleFreeGainRound33Exact.agda:sameGainAtAdjacentShellsImpossible'
+  'NSTriadKNHHBadNoScaleFreeGainRound33Exact.agda:nonzeroAllocationRefutesScaleFreeExactCalibration'
   'NSTriadKNNineOwnerResourceReserveRound33Exact.agda:sumOwnerResourceEtaExact'
   'NSTriadKNNineOwnerResourceReserveRound33Exact.agda:nineOwnerResourceForbiddenZero'
   'NSTriadKNNineOwnerResourceReserveRound33Exact.agda:nineOwnerResourceReserveIdentity'
