@@ -14,6 +14,7 @@ import DASHI.Reasoning.AttractorAlignedBranchSelection as Selection
 import DASHI.Reasoning.RelationalBranchInterference as Interference
 import DASHI.Reasoning.RelationalProcessMemoryHyperfabric as Process
 import DASHI.Reasoning.DevelopmentalAttunementPNFBridge as Developmental
+import DASHI.Reasoning.DevelopmentalExplanationWithdrawalExact as DevelopmentalPolicy
 import DASHI.Reasoning.RelationalFormalismSourceAtlas as Sources
 
 parent : Core.Participant
@@ -160,6 +161,40 @@ developmentalFiniteTraceDoesNotDiagnose :
     Developmental.canonicalDevelopmentalAttunementAuthorityBoundary
   ≡ false
 developmentalFiniteTraceDoesNotDiagnose = refl
+
+------------------------------------------------------------------------
+-- Explanation and withdrawal regressions.
+------------------------------------------------------------------------
+
+explanationCannotConstructImpactErasure :
+  DevelopmentalPolicy.ExplanationErasesImpact → ⊥
+explanationCannotConstructImpactErasure =
+  DevelopmentalPolicy.explanationErasesImpactImpossible
+
+explanationCannotConstructRepairErasure :
+  DevelopmentalPolicy.ExplanationErasesRepair → ⊥
+explanationCannotConstructRepairErasure =
+  DevelopmentalPolicy.explanationErasesRepairImpossible
+
+attunedContinuationPreferredRegression :
+  Selection.StrictlyPreferred
+    DevelopmentalPolicy.attunedContinuePortfolio
+    DevelopmentalPolicy.protectiveWithdrawalPortfolio
+attunedContinuationPreferredRegression =
+  DevelopmentalPolicy.attunedContinuationBeatsWithdrawal
+
+protectiveWithdrawalPreferredUnderRepeatedDisplacementRegression :
+  Selection.StrictlyPreferred
+    DevelopmentalPolicy.protectiveWithdrawalPortfolio
+    DevelopmentalPolicy.repeatedDisplacementContinuePortfolio
+protectiveWithdrawalPreferredUnderRepeatedDisplacementRegression =
+  DevelopmentalPolicy.withdrawalBeatsRepeatedDisplacementContinuation
+
+withdrawalIsNotGloballyPromoted :
+  DevelopmentalPolicy.withdrawalIsAlwaysOptimal
+    DevelopmentalPolicy.canonicalExplanationWithdrawalAuthorityBoundary
+  ≡ false
+withdrawalIsNotGloballyPromoted = refl
 
 ------------------------------------------------------------------------
 -- Exact attractor-selection regressions.
