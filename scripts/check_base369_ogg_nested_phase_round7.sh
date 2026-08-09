@@ -13,6 +13,7 @@ sources=(
   DASHI/Foundations/Base369RelationalSymmetryRealisationExact.agda
   DASHI/Foundations/Base369PhaseCompletionAndNestedEvaluationExact.agda
   DASHI/Moonshine/MonsterOggNonarySSPTritBridgeExact.agda
+  DASHI/Moonshine/MonsterC3CyclotomicEvaluationExact.agda
   DASHI/Moonshine/Monster3BBalancedRegularFibreExact.agda
   DASHI/Moonshine/MonsterOggPrimaryDepthAndNestedEigenCarrierExact.agda
   DASHI/Moonshine/MonsterFivePrimaryRelationalModelBoundaryExact.agda
