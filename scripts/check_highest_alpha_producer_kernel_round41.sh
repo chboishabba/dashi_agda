@@ -15,6 +15,10 @@ files=(
   DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeConstraintStencilExact.agda
   DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeGramFiniteRangeExact.agda
   DASHI/Physics/YangMills/BalabanSelectedCombinedConstraintGluingExact.agda
+  DASHI/Physics/YangMills/BalabanSelectedBackgroundBlockAverageConstraintMatrixExact.agda
+  DASHI/Physics/YangMills/BalabanSelectedBackgroundCombinedConstraintMatrixExact.agda
+  DASHI/Physics/YangMills/BalabanSelectedConstraintDimensionTowerExact.agda
+  DASHI/Physics/YangMills/BalabanSZZStrongCouplingDecisionExact.agda
   DASHI/Physics/YangMills/BalabanSelectedOwnerBudgetSlackExact.agda
   DASHI/Physics/YangMills/BalabanSelectedCertifiedOwnerEnclosureExact.agda
   DASHI/Physics/YangMills/BalabanSelectedSinglePlaquetteWitnessExact.agda
@@ -55,6 +59,22 @@ grep -q 'selectedBackgroundGaugeGramOutsideRangeZero' DASHI/Physics/YangMills/Ba
 grep -q 'selectedBackgroundCombinedConstraintCommutesWithProjections' DASHI/Physics/YangMills/BalabanSelectedCombinedConstraintGluingExact.agda
 grep -q 'selectedBackgroundCombinedConstraintUnique' DASHI/Physics/YangMills/BalabanSelectedCombinedConstraintGluingExact.agda
 grep -q 'selectedConstraintOperatorLayerForced' DASHI/Physics/YangMills/BalabanSelectedCombinedConstraintGluingExact.agda
+
+grep -q 'selectedBackgroundBlockAverageConstraintMatrixExact' DASHI/Physics/YangMills/BalabanSelectedBackgroundBlockAverageConstraintMatrixExact.agda
+grep -q 'selectedBackgroundBlockAverageConstraintMatrixApplyExact' DASHI/Physics/YangMills/BalabanSelectedBackgroundBlockAverageConstraintMatrixExact.agda
+grep -q 'selectedBackgroundBlockAverageConstraintPhysicalExact' DASHI/Physics/YangMills/BalabanSelectedBackgroundBlockAverageConstraintMatrixExact.agda
+grep -q 'selectedBackgroundLinearizedConstraintMatrixExact' DASHI/Physics/YangMills/BalabanSelectedBackgroundCombinedConstraintMatrixExact.agda
+grep -q 'selectedBackgroundCombinedConstraintApplyExact' DASHI/Physics/YangMills/BalabanSelectedBackgroundCombinedConstraintMatrixExact.agda
+grep -q 'selectedBackgroundConstraintGramExact' DASHI/Physics/YangMills/BalabanSelectedBackgroundCombinedConstraintMatrixExact.agda
+grep -q 'selectedBackgroundConstraintGramOutsideRangeZero' DASHI/Physics/YangMills/BalabanSelectedBackgroundCombinedConstraintMatrixExact.agda
+grep -q 'selectedCombinedConstraintRowCount' DASHI/Physics/YangMills/BalabanSelectedConstraintDimensionTowerExact.agda
+grep -q 'selectedBackgroundConstraintGramSymmetric' DASHI/Physics/YangMills/BalabanSelectedConstraintDimensionTowerExact.agda
+grep -q 'szzDashiNormalizationExact' DASHI/Physics/YangMills/BalabanSZZStrongCouplingDecisionExact.agda
+grep -q 'szzSU2D4BakryEmeryFactorizationExact' DASHI/Physics/YangMills/BalabanSZZStrongCouplingDecisionExact.agda
+grep -q 'szzSU2D4StrongCouplingThresholdExact' DASHI/Physics/YangMills/BalabanSZZStrongCouplingDecisionExact.agda
+grep -q 'selectedBackgroundRadiusDoesNotImplySZZStrongCoupling' DASHI/Physics/YangMills/BalabanSZZStrongCouplingDecisionExact.agda
+grep -q 'selectedRGEffectiveBakryEmeryConstantPositive' DASHI/Physics/YangMills/BalabanSZZStrongCouplingDecisionExact.agda
+
 grep -q 'ownerBudgetSlack' DASHI/Physics/YangMills/BalabanSelectedOwnerBudgetSlackExact.agda
 grep -q 'slackCompletesLegacyOwnerBudget' DASHI/Physics/YangMills/BalabanSelectedOwnerBudgetSlackExact.agda
 grep -q 'certifiedEnclosuresToOwnerBounds' DASHI/Physics/YangMills/BalabanSelectedCertifiedOwnerEnclosureExact.agda
@@ -77,7 +97,10 @@ grep -q 'NoForbiddenDependency' DASHI/Physics/Closure/NSAdmissibleRemainderGramm
 grep -q 'nineOwnerAbsorptionWithSlack' DASHI/Physics/Closure/NSNineOwnerStrictSlackExact.agda
 
 grep -q '10.1007/BF01466594' DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeConstraintMatrixExact.agda
-grep -q '10.1007/BF01240355' DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeConstraintStencilExact.agda
+grep -q '10.1007/BF01211042' DASHI/Physics/YangMills/BalabanSelectedBackgroundBlockAverageConstraintMatrixExact.agda
+grep -q '10.1007/BF01240355' DASHI/Physics/YangMills/BalabanSelectedBackgroundCombinedConstraintMatrixExact.agda
+grep -q '10.1007/s00220-022-04609-1' DASHI/Physics/YangMills/BalabanSZZStrongCouplingDecisionExact.agda
+grep -q '10.1007/BFb0075847' DASHI/Physics/YangMills/BalabanSZZStrongCouplingDecisionExact.agda
 grep -q '10.1007/BF01646473' DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeGramFiniteRangeExact.agda
 grep -q '10.1007/BF01229381' DASHI/Physics/YangMills/BalabanSelectedSinglePlaquetteWitnessExact.agda
 grep -q '10.1137/1.9780898717716' DASHI/Physics/YangMills/BalabanSelectedCertifiedOwnerEnclosureExact.agda
