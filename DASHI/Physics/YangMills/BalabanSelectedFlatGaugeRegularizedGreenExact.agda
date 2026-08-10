@@ -40,7 +40,7 @@ module DASHI.Physics.YangMills.BalabanSelectedFlatGaugeRegularizedGreenExact whe
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _-_; _*_; -_)
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier as Torus
@@ -114,13 +114,12 @@ flatGaugeGramApplyExact multiplier coordinate site =
           Reindex.backwardDifference4 axis
             (Vec.literalNegativeForwardGradientScalar gauge axis) site)
         (λ axis →
-          ℚRing.solve-∀
-            (decoded coordinate (Torus.pair axis site))
-            (decoded coordinate
-              (Torus.pair axis (Reindex.shiftBackward4 axis site)))
-            (Vec.literalNegativeForwardGradientScalar gauge axis site)
-            (Vec.literalNegativeForwardGradientScalar gauge axis
-              (Reindex.shiftBackward4 axis site)))
+          cong₂ _-_
+            (FlatAdjoint.actualFlatGaugeAdjointPointwiseExact multiplier
+              (Torus.pair coordinate (Torus.pair axis site)))
+            (FlatAdjoint.actualFlatGaugeAdjointPointwiseExact multiplier
+              (Torus.pair coordinate
+                (Torus.pair axis (Reindex.shiftBackward4 axis site)))))
   in
   trans
     (FlatAdjoint.identityGaugeConstraintApplyExact state coordinate site)
