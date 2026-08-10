@@ -37,13 +37,15 @@ open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; _+_; _-_; _*_; _≤_; _/_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using
+  (cong; cong₂; subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as FiniteL2
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
 import DASHI.Physics.YangMills.BalabanConstructiveRationalMatrixInverseExact as Matrix
 import DASHI.Physics.YangMills.BalabanFiniteRectangularRationalExact as Rect
+import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
 
 oneHalf : ℚ
 oneHalf = + 1 / 2
@@ -62,7 +64,8 @@ pointwiseHalfMinusDefectLower reference defect =
     scaled :
       0ℚ ≤ oneHalf * (square * square)
     scaled =
-      ℚP.*-monoˡ-≤-nonNeg oneHalf nonnegative
+      Norm.scaleNonnegative oneHalf
+        (ℚP.nonNegative⁻¹ oneHalf) nonnegative
   in
   subst
     (λ difference → 0ℚ ≤ difference)
@@ -77,6 +80,17 @@ sumMonotone (index ∷ values) left right pointwise =
   ℚP.+-mono-≤
     (pointwise index)
     (sumMonotone values left right pointwise)
+
+sumSubtract : ∀ {Index : Set} (values : List Index) left right →
+  Sums.sumRational values (λ index → left index - right index)
+  ≡ Sums.sumRational values left - Sums.sumRational values right
+sumSubtract [] left right = ℚRing.solve []
+sumSubtract (index ∷ values) left right
+  rewrite sumSubtract values left right =
+  ℚRing.solve-∀
+    (left index) (right index)
+    (Sums.sumRational values left)
+    (Sums.sumRational values right)
 
 finiteVectorHalfMinusDefectLower :
   ∀ {Index}
@@ -112,20 +126,14 @@ finiteVectorHalfMinusDefectLower carrier reference defect =
       ≡ oneHalf * Rect.finiteNormSq carrier reference
           - Rect.finiteNormSq carrier defect
     leftExact =
-      let
-        scaledReference =
-          Sums.sumRationalScale oneHalf values
-            (λ index → reference index * reference index)
-
-        subtractFold =
-          Matrix.sumRationalSubtract values
-            (λ index → oneHalf * (reference index * reference index))
-            (λ index → defect index * defect index)
-      in
-      trans subtractFold
+      trans
+        (sumSubtract values
+          (λ index → oneHalf * (reference index * reference index))
+          (λ index → defect index * defect index))
         (cong
           (λ selected → selected - Rect.finiteNormSq carrier defect)
-          scaledReference)
+          (Sums.sumRationalScale oneHalf values
+            (λ index → reference index * reference index)))
   in
   subst
     (λ lower →
@@ -176,7 +184,8 @@ perturbedReducedFloor {carrier = carrier} dataSet multiplier =
       oneHalf * (referenceFloor dataSet * norm)
       ≤ oneHalf * Rect.finiteNormSq carrier ref
     refLower =
-      ℚP.*-monoˡ-≤-nonNeg oneHalf
+      Norm.scaleNonnegative oneHalf
+        (ℚP.nonNegative⁻¹ oneHalf)
         (referenceCoercive dataSet multiplier)
 
     defectUpperBound = defectUpper dataSet multiplier
@@ -220,7 +229,7 @@ perturbedReducedFloor {carrier = carrier} dataSet multiplier =
         (subst
           (λ upper →
             Rect.finiteNormSq carrier (Rect.vectorAdd ref def) ≤ upper)
-          fullExact
+          (sym fullExact)
           ℚP.≤-refl)))
 
 finiteReducedFloorPerturbationLevel : ProofLevel
