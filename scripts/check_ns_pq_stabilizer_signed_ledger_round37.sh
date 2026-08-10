@@ -13,6 +13,7 @@ files=(
   DASHI/Physics/Closure/NSTriadKNComPQInvolutionRound37Exact.agda
   DASHI/Physics/Closure/NSTriadKNDirectionalProjectorStabilizerRound37Exact.agda
   DASHI/Physics/Closure/NSTriadKNDirectionalProjectorDefectBridgeRound37Exact.agda
+  DASHI/Physics/Closure/NSTriadKNPhysicalProjectorDefectRound37Exact.agda
   DASHI/Physics/Closure/NSTriadKNFinitePVProjectorIncrementRound37Exact.agda
   DASHI/Physics/Closure/NSTriadKNHHBadScaleInvariantGeometryObstructionRound37Exact.agda
   DASHI/Physics/Closure/NSTriadKNHHBadEnergyNormalizedCoercivityRound37Exact.agda
@@ -34,7 +35,7 @@ for file in "${files[@]}"; do
   fi
 done
 
-# Concrete theorem markers.  These are deliberately mathematical statements,
+# Concrete theorem markers. These are deliberately mathematical statements,
 # not status-only receipts.
 grep -q 'commutatorIsCrossChannelDifference' DASHI/Physics/Closure/NSTriadKNComPQCrossChannelRound37Exact.agda
 grep -q 'commutatorNormSquaredCrossChannelExact' DASHI/Physics/Closure/NSTriadKNComPQCrossChannelRound37Exact.agda
@@ -42,6 +43,7 @@ grep -q 'involutionConjugatesCoarseToFine' DASHI/Physics/Closure/NSTriadKNComPQI
 grep -q 'projectorDefectIncrementFactorization' DASHI/Physics/Closure/NSTriadKNDirectionalProjectorStabilizerRound37Exact.agda
 grep -q 'rankOneProjectorNegationInvariant' DASHI/Physics/Closure/NSTriadKNDirectionalProjectorStabilizerRound37Exact.agda
 grep -q 'projectorDefectIsTwiceExistingDirectionalDefect' DASHI/Physics/Closure/NSTriadKNDirectionalProjectorDefectBridgeRound37Exact.agda
+grep -q 'physicalProjectorDefectIdentity' DASHI/Physics/Closure/NSTriadKNPhysicalProjectorDefectRound37Exact.agda
 grep -q 'finitePVProjectorIncrementIdentity' DASHI/Physics/Closure/NSTriadKNFinitePVProjectorIncrementRound37Exact.agda
 grep -q 'uniformDirectionOnlyFloorMustBeNonpositive' DASHI/Physics/Closure/NSTriadKNHHBadScaleInvariantGeometryObstructionRound37Exact.agda
 grep -q 'badEnergyCoercivityProducesInverseShellCharging' DASHI/Physics/Closure/NSTriadKNHHBadEnergyNormalizedCoercivityRound37Exact.agda
