@@ -81,14 +81,14 @@ lookupNegativeZeroFromOppositePositiveAbsent [] mode absent = refl
 lookupNegativeZeroFromOppositePositiveAbsent
     (head ∷ rest) mode absent
   with Output.modeEqual
-    (Z3.negateMode mode) (Phase.coefficientMode head)
+    (Z3.negateMode mode) (Phase.coefficientMode head) in oppositeHit
 ... | true = ⊥-elim (falseCannotEqualTrue (sym absent))
 ... | false
-  with Output.modeEqual mode (Phase.reconstructedNegativeMode head)
+  with Output.modeEqual mode (Phase.reconstructedNegativeMode head) in negativeHit
 ...   | true =
       ⊥-elim
         (falseCannotEqualTrue
-          (positiveAtNegationFromNegativeHit refl))
+          (positiveAtNegationFromNegativeHit negativeHit))
 ...   | false =
       lookupNegativeZeroFromOppositePositiveAbsent rest mode absent
 
@@ -162,11 +162,11 @@ literalVelocityReality :
   Reality.RealityCondition (Lookup.literalVelocityAt compatibility)
 literalVelocityReality {F = F} {state = state} compatibility mode
   with Lookup.positiveModeOccurs
-    (State.positiveOrbitCoefficients state) mode
+    (State.positiveOrbitCoefficients state) mode in positiveAtMode
 ... | true
   with Lookup.positiveModeOccursSound
     {coefficients = State.positiveOrbitCoefficients state}
-    {mode = mode} refl
+    {mode = mode} positiveAtMode
 ...   | hit =
       trans
         (literalVelocityNegativeOfPositiveHitExact compatibility hit)
@@ -176,16 +176,17 @@ literalVelocityReality {F = F} {state = state} compatibility mode
 ... | false
   with Lookup.positiveModeOccurs
     (State.positiveOrbitCoefficients state) (Z3.negateMode mode)
+      in positiveAtNegation
 ...   | true
   with Lookup.positiveModeOccursSound
     {coefficients = State.positiveOrbitCoefficients state}
-    {mode = Z3.negateMode mode} refl
+    {mode = Z3.negateMode mode} positiveAtNegation
 ...     | hit =
       let
-        positiveAtNegation :
+        positiveAtNegationExact :
           Lookup.literalVelocityAt compatibility (Z3.negateMode mode)
           ≡ literalVelocityAtPositiveHit compatibility hit
-        positiveAtNegation =
+        positiveAtNegationExact =
           literalVelocityPositiveHitExact compatibility hit
 
         originalAsNegative :
@@ -209,7 +210,7 @@ literalVelocityReality {F = F} {state = state} compatibility mode
             (C3.complex3ConjugateInvolutive
               (literalVelocityAtPositiveHit compatibility hit))
       in
-      trans positiveAtNegation (sym conjugatedOriginal)
+      trans positiveAtNegationExact (sym conjugatedOriginal)
 ...   | false =
       let
         noDoublePositive :
@@ -223,21 +224,22 @@ literalVelocityReality {F = F} {state = state} compatibility mode
               (Lookup.positiveModeOccurs
                 (State.positiveOrbitCoefficients state))
               (Symmetry.negateModeInvolutive mode))
-            refl
+            positiveAtMode
 
         negativeZero :
           Lookup.literalVelocityAt compatibility (Z3.negateMode mode)
           ≡ C3.complex3Zero F
         negativeZero =
           literalVelocityZeroIfNeitherPositive
-            compatibility (Z3.negateMode mode) refl noDoublePositive
+            compatibility (Z3.negateMode mode)
+            positiveAtNegation noDoublePositive
 
         originalZero :
           Lookup.literalVelocityAt compatibility mode
           ≡ C3.complex3Zero F
         originalZero =
           literalVelocityZeroIfNeitherPositive
-            compatibility mode refl refl
+            compatibility mode positiveAtMode positiveAtNegation
       in
       trans
         negativeZero
