@@ -5,10 +5,11 @@ module DASHI.Physics.Closure.NSTriadKNLuoStrainGramCutoffInvariantRound35Validat
 --
 -- The root imports Round 34 first, then the new concrete mathematics:
 -- polarized/cross-fibre strain Gram identities, finite interference
--- decomposition, fixed-cutoff support tangency, exact HH-bad shell-budget
--- gluing, the Com Gram reduction with a real six-three overlap candidate,
--- the permutation x reality factorization of the canonical triad action, the
--- vector-field commuting square, and the dual resource/scale no-go ledger.
+-- decomposition, fixed-cutoff support tangency, exact inverse-square/Leray
+-- reality laws, HH-bad shell-budget gluing, the Com Gram reduction with a
+-- real six-three overlap candidate, the permutation x reality factorization
+-- of the canonical triad action, the vector-field commuting square, and the
+-- dual resource/scale no-go ledger.
 ------------------------------------------------------------------------
 
 import DASHI.Physics.Closure.NSTriadKNLuoFourierStrainHHBadRound34Validation
@@ -16,6 +17,8 @@ import DASHI.Physics.Closure.NSTriadKNLuoFourierStrainHHBadRound34Validation
 import DASHI.Physics.Closure.NSTriadKNPeriodicFourierStrainGramRound35Exact as StrainGram
 import DASHI.Physics.Closure.NSTriadKNPeriodicFourierStrainInterferenceRound35Exact as StrainInterference
 import DASHI.Physics.Closure.NSTriadKNFixedCutoffSupportInvariantRound35Exact as CutoffInvariant
+import DASHI.Physics.Closure.NSTriadKNModeInverseSquareRealityRound35Exact as InverseReality
+import DASHI.Physics.Closure.NSTriadKNComplex3RealityLawsRound35Exact as RealityLaws
 import DASHI.Physics.Closure.NSTriadKNHHBadFiniteShellBudgetGluingRound35Exact as HHBadBudget
 import DASHI.Physics.Closure.NSTriadKNComGramInterferenceRound35Exact as ComGram
 import DASHI.Physics.Closure.NSTriadKNTriadS3RealityActionRound35Exact as TriadAction
@@ -60,6 +63,16 @@ fixedCutoffCompatibilityStillOpenRegression :
   CutoffInvariant.fixedCutoffSameObjectCompatibilityInvariantConstructed ≡ false
 fixedCutoffCompatibilityStillOpenRegression =
   CutoffInvariant.fixedCutoffSameObjectCompatibilityInvariantConstructedIsFalse
+
+inverseSquareRealityRegression :
+  InverseReality.modeInverseSquareRealityClosed ≡ true
+inverseSquareRealityRegression =
+  InverseReality.modeInverseSquareRealityClosedIsTrue
+
+lerayRealityRegression :
+  RealityLaws.complex3RealityLawsConstructed ≡ true
+lerayRealityRegression =
+  RealityLaws.complex3RealityLawsConstructedIsTrue
 
 hhBadBudgetGluingRegression :
   HHBadBudget.hhBadFiniteShellBudgetGluingClosed ≡ true
