@@ -2,6 +2,7 @@ module DASHI.Moonshine.SSPJProfiniteOrthogonalComplexityRound8Validation where
 
 open import DASHI.Core.Prelude
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ)
+import Data.Integer.Base as Int
 
 import DASHI.Moonshine.SSPJStratifiedQuotientRound7Validation
 import DASHI.Analysis.NormalizedFibreAveragingExact as Fibre
@@ -9,6 +10,7 @@ import DASHI.Analysis.WeightedCoarseFineOrthogonalExact as Orth
 import DASHI.Analysis.GlassesProjectionInvolutionExact as Glasses
 import DASHI.Foundations.FilteredExtensionSplittingExact as Filtered
 import DASHI.Foundations.ClaimScopeCertificateExact as Scope
+import DASHI.Foundations.StratifiedResolutionTowerExact as Tower
 import DASHI.Biology.IndexedJStratifiedMultiresolutionExact as J
 import DASHI.Biology.DecimalResidueTowerExact as Decimal
 import DASHI.Biology.DecimalCRTResolutionExact as CRT
@@ -132,15 +134,13 @@ validationCardinalFactorRoundTrip = CRT.cardinalFactorBackwardForward 2
 ------------------------------------------------------------------------
 
 validationDecimalResidueTowerRoundTripAt :
-  (history :
-    DASHI.Foundations.StratifiedResolutionTowerExact.InverseLimitPoint
-      TenAdic.residue10Tower)
+  (history : Tower.InverseLimitPoint TenAdic.residue10Tower)
   (r : Nat) →
-  DASHI.Foundations.StratifiedResolutionTowerExact.atResolution
+  Tower.atResolution
     (TenAdic.mapForwardHistory TenAdic.decimalResidueTowerEquivalence
       (TenAdic.mapBackwardHistory TenAdic.decimalResidueTowerEquivalence history))
     r
-  ≡ DASHI.Foundations.StratifiedResolutionTowerExact.atResolution history r
+  ≡ Tower.atResolution history r
 validationDecimalResidueTowerRoundTripAt =
   TenAdic.forwardBackwardHistoryAt TenAdic.decimalResidueTowerEquivalence
 
@@ -154,13 +154,13 @@ validationOccurrenceForgetsMultiplicity :
 validationOccurrenceForgetsMultiplicity = Defect.oneAndTwoHaveSamePresence
 
 validationSignedDefectSurvivesOccurrenceCollision :
-  1 Data.Integer.Base.⊖ 2 ≡ Data.Integer.Base.-[1+ 0 ]
+  1 Int.⊖ 2 ≡ Int.-[1+ 0 ]
 validationSignedDefectSurvivesOccurrenceCollision =
   Defect.oneAndTwoHaveNonzeroSignedDefect
 
 validationDefectSwap :
   ∀ {I} (A B : Defect.Multiplicity I) (i : I) →
-  Defect.delta B A i ≡ Data.Integer.Base.- (Defect.delta A B i)
+  Defect.delta B A i ≡ Int.- (Defect.delta A B i)
 validationDefectSwap = Defect.deltaSwap
 
 validationCandidatePolaritySwap :
