@@ -91,13 +91,48 @@ twoFiredWreathStepsReturn = W.localPermutationStepTwiceAt
 ------------------------------------------------------------------------
 -- Binary execution predicate versus triadic oriented residual.
 --
--- Two bits can encode all three local states, proving expressive sufficiency
--- for this finite carrier.  Nothing here proves equal local rule count, MDL,
--- transition cost, normal-form size or equivariance cost.
+-- One bit cannot injectively encode the repository's three local states.  Two
+-- bits can, and we prove both statements exactly.  This establishes the
+-- fixed-width local representational fact 1 bit < 1 trit <= 2 bits without
+-- pretending it determines global MDL, automaton-state, transition or
+-- equivariance cost.
 ------------------------------------------------------------------------
 
 data Bit : Set where
   bit0 bit1 : Bit
+
+Injective : ∀ {A B : Set} → (A → B) → Set
+Injective f = ∀ {x y} → f x ≡ f y → x ≡ y
+
+negativeNotNeutral : W.negativeState ≡ W.neutralState → ⊥
+negativeNotNeutral ()
+
+negativeNotPositive : W.negativeState ≡ W.positiveState → ⊥
+negativeNotPositive ()
+
+neutralNotPositive : W.neutralState ≡ W.positiveState → ⊥
+neutralNotPositive ()
+
+noTriStateIntoOneBit :
+  (f : W.TriState → Bit) → ¬ Injective f
+noTriStateIntoOneBit f
+  with f W.negativeState | f W.neutralState | f W.positiveState
+... | bit0 | bit0 | bit0 =
+  λ injective → negativeNotNeutral (injective refl)
+... | bit0 | bit0 | bit1 =
+  λ injective → negativeNotNeutral (injective refl)
+... | bit0 | bit1 | bit0 =
+  λ injective → negativeNotPositive (injective refl)
+... | bit0 | bit1 | bit1 =
+  λ injective → neutralNotPositive (injective refl)
+... | bit1 | bit0 | bit0 =
+  λ injective → neutralNotPositive (injective refl)
+... | bit1 | bit0 | bit1 =
+  λ injective → negativeNotPositive (injective refl)
+... | bit1 | bit1 | bit0 =
+  λ injective → negativeNotNeutral (injective refl)
+... | bit1 | bit1 | bit1 =
+  λ injective → negativeNotNeutral (injective refl)
 
 encodeTriState : W.TriState → Bit × Bit
 encodeTriState W.negativeState = bit0 , bit0
@@ -116,6 +151,14 @@ decodeEncodeTriState W.negativeState = refl
 decodeEncodeTriState W.neutralState = refl
 decodeEncodeTriState W.positiveState = refl
 
+encodeTriStateInjective : Injective encodeTriState
+encodeTriStateInjective {x} {y} encodedEqual =
+  trans
+    (sym (decodeEncodeTriState x))
+    (trans
+      (cong decodeTriState encodedEqual)
+      (decodeEncodeTriState y))
+
 executionPredicateIsBoolean : ControlledState → Bool
 executionPredicateIsBoolean state = anyEnabled (arithmeticState state)
 
@@ -130,6 +173,10 @@ record ControlledWreathClaimScope : Set where
     arithmeticControlledFiniteSymmetryConstructed : Bool
     arithmeticControlledFiniteSymmetryConstructedIsTrue :
       arithmeticControlledFiniteSymmetryConstructed ≡ true
+
+    oneBitInjectiveTriStateEncodingImpossible : Bool
+    oneBitInjectiveTriStateEncodingImpossibleIsTrue :
+      oneBitInjectiveTriStateEncodingImpossible ≡ true
 
     binaryEncodingOfThreeLocalStatesConstructed : Bool
     binaryEncodingOfThreeLocalStatesConstructedIsTrue :
@@ -150,6 +197,7 @@ record ControlledWreathClaimScope : Set where
 canonicalControlledWreathClaimScope : ControlledWreathClaimScope
 canonicalControlledWreathClaimScope =
   controlledWreathClaimScope
+    true refl
     true refl
     true refl
     false refl
