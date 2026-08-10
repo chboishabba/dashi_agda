@@ -2,7 +2,7 @@
 
 ## Runtime correspondence
 
-This formalisation corresponds to SensibLaw migrations 069–073. It extends the
+This formalisation corresponds to SensibLaw migrations 069–074. It extends the
 existing sparse-frontier model without creating a second semantic graph.
 
 The runtime path is:
@@ -33,17 +33,17 @@ Only `externalAuthority` has a `WorldCanonicalPermission` constructor. The
 empty-pattern theorems prove that local, document-derived and corpus-derived
 identity cannot by themselves assert a world-canonical entity.
 
-Identity evidence is also indexed by kind. Constructors exist for evidence
-such as apposition, proper-name expansion, title/role closure, uniquely resolved
-typed demands and external alignment. Deliberately no projection constructor
-exists for:
+Identity evidence is indexed by kind. Constructors exist for evidence such as
+apposition, proper-name expansion, title/role closure, uniquely resolved typed
+demands and external alignment. Deliberately no projection constructor exists
+for:
 
 ```text
 paragraphCoScopeEvidence
 lexicalProximityEvidence
 ```
 
-which yields the structural impossibility results:
+which yields:
 
 ```text
 IdentityProjectionPermission paragraphCoScopeEvidence -> bottom
@@ -53,24 +53,30 @@ IdentityProjectionPermission lexicalProximityEvidence -> bottom
 A canonical entity is therefore a base over which immutable local objects are
 fibred rather than a destructive merge target.
 
-`IdentityFibreMember` carries the admitted witness explicitly and requires
-proofs that the local fibre object equals the witness source and that the
-canonical entity identity equals the witness target. Fibre membership therefore
-cannot float free of its proof object.
+## Projection integrity
 
-## Candidate multiplicity
-
-Identity projection reuses the sparse frontier witness multiplicity:
+`IdentityProjection` is indexed by the **exact admitted witness**. Its unique
+constructor requires proofs that:
 
 ```text
-noWitness
-oneWitness
-severalWitnesses
+witnessCandidateCount = 1
+witnessAuthority = canonicalAuthority(witnessTargetEntity)
 ```
 
-`IdentityProjection` has a constructor only at `oneWitness`. No witness and
-ambiguous witnesses have empty elimination proofs, matching the PostgreSQL
-`resolved_unique` gate.
+and inhabits only the `oneWitness` multiplicity index. Therefore neither
+`noWitness` nor `severalWitnesses` can project identity, and authority agreement
+is part of the proof rather than an unrelated annotation.
+
+`IdentityFibreMember` carries that admitted witness explicitly and requires
+proofs that the local fibre object equals the witness source and that the
+canonical entity identity equals the witness target. Fibre membership cannot
+float free of its proof object.
+
+This mirrors SensibLaw migration 074, which enforces candidate-count-one and
+authority equality when an identity witness is marked accepted, repeats those
+conditions in the current projection view, supersedes invalid historical
+admissions, and purges stale Level-3 substitutions that are no longer backed by
+a valid projection.
 
 ## Proof-relevant substitution
 
@@ -83,12 +89,10 @@ ambiguous witnesses have empty elimination proofs, matching the PostgreSQL
 - proof that the source object matches the witness source; and
 - proof that the target entity matches the witness target.
 
-A derived argument similarly retains both the source object and the admitted
+A derived argument similarly retains both the source object and admitted
 witness. `IdentitySubstitutionDerivation` retains the original premise factor
-and carries an equality showing that the retained premise is the one named by
-the proof.
-
-This corresponds to the runtime rule:
+and carries equality showing that the retained premise is the one named by the
+proof.
 
 ```text
 F(surface argument = o)
@@ -108,7 +112,7 @@ A factor bridge is either:
   target the same canonical entity, and proof that their identity authority
   classes are equal.
 
-`FactorCompositionCandidate` additionally carries a numeric rank/limit witness.
+`FactorCompositionCandidate` also carries a numeric rank/limit witness.
 
 Composition permission is indexed by authority:
 
@@ -117,29 +121,26 @@ candidateOnlyAuthority
 explicitDomainRuleAuthority
 ```
 
-Only the explicit-domain-rule authority has a constructor. Therefore:
+Only explicit-domain-rule authority has a constructor. Therefore:
 
 ```text
 CompositionPermission candidateOnlyAuthority -> bottom
 ```
 
-and the `DerivedProposition factorComposition` constructor requires an
-`AdmittedFactorComposition`, which itself requires explicit rule permission.
-
-This proves the distinction between structural composability and semantic
-entailment: a shared participant, even under witnessed identity, cannot silently
-become a new proposition.
+and `DerivedProposition factorComposition` requires an
+`AdmittedFactorComposition` carrying explicit rule permission. Shared
+participants or witnessed identity alone cannot silently become entailments.
 
 ## Retraction correspondence
 
-SensibLaw migrations 072–073 recompute current document-derived witness
-admission and rebuild current Level-3 identity substitutions. Migration 073 also
-makes explicit external-authority witness admission and retraction immediately
-refresh the affected document's substitution and composition frontiers.
+SensibLaw migrations 072–073 recompute document-derived witness admission and
+rebuild current Level-3 identity substitutions. Explicit external-authority
+witness admission and retraction immediately refresh the affected document's
+substitution and composition frontiers.
 
-The Agda authority split makes that safe: local factors and witness evidence are
-separate values from the permission that admits them to a current projection.
-Retraction therefore does not require rewriting the local evidence object.
+The formal authority split makes that safe: immutable local evidence, witness
+evidence, and permission/admission are separate values. Retraction changes
+current authority rather than rewriting historical evidence.
 
 External-world alignment remains a distinct authority path. No local or
 corpus-derived constructor can manufacture `WorldCanonicalPermission`.
