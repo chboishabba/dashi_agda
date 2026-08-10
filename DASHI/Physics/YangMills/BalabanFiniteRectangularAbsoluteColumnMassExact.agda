@@ -31,7 +31,8 @@ module DASHI.Physics.YangMills.BalabanFiniteRectangularAbsoluteColumnMassExact w
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Data.Rational.Base as ℚ using (ℚ; _+_; _≤_; ∣_∣)
+open import Agda.Builtin.List using (List)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _≤_; ∣_∣)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
@@ -42,14 +43,13 @@ import DASHI.Physics.YangMills.BalabanP33FiniteWeightedSchurSquaredExact as Schu
 import DASHI.Physics.YangMills.BalabanFiniteRectangularAbsoluteMassExact as Mass
 
 squareColumnMass :
-  ∀ {Row : Set} →
-  Agda.Builtin.List.List Row → (Row → Row → ℚ) → Row → ℚ
+  ∀ {Row : Set} → List Row → (Row → Row → ℚ) → Row → ℚ
 squareColumnMass rows matrix column =
   Sums.sumRational rows (λ row → ∣ matrix row column ∣)
 
 transposeProductSwapExact :
   ∀ {Row Column : Set}
-    (columns : Agda.Builtin.List.List Column)
+    (columns : List Column)
     (left right : Mass.RectMatrix Row Column)
     row outputRow →
   Mass.transposeProduct columns left right row outputRow
@@ -60,8 +60,8 @@ transposeProductSwapExact columns left right row outputRow =
 
 transposeProductColumnMassAsSwappedRow :
   ∀ {Row Column : Set}
-    (rows : Agda.Builtin.List.List Row)
-    (columns : Agda.Builtin.List.List Column)
+    (rows : List Row)
+    (columns : List Column)
     (left right : Mass.RectMatrix Row Column)
     outputRow →
   squareColumnMass rows (Mass.transposeProduct columns left right) outputRow
@@ -74,8 +74,8 @@ transposeProductColumnMassAsSwappedRow rows columns left right outputRow =
 
 transposeProductColumnMassBound :
   ∀ {Row Column : Set}
-    (rows : Agda.Builtin.List.List Row)
-    (columns : Agda.Builtin.List.List Column)
+    (rows : List Row)
+    (columns : List Column)
     (left right : Mass.RectMatrix Row Column)
     (leftColumnBound : ℚ) outputRow →
   0ℚ ≤ leftColumnBound →
@@ -95,7 +95,7 @@ transposeProductColumnMassBound
       boundNonnegative leftColumnBounded)
 
 squareColumnMassAdd :
-  ∀ {Row : Set} (rows : Agda.Builtin.List.List Row)
+  ∀ {Row : Set} (rows : List Row)
     (left right : Row → Row → ℚ) column →
   squareColumnMass rows (λ i j → left i j + right i j) column
   ≤ squareColumnMass rows left column + squareColumnMass rows right column
@@ -114,7 +114,7 @@ squareColumnMassAdd rows left right column =
     pointwise
 
 squareColumnMassAdd3 :
-  ∀ {Row : Set} (rows : Agda.Builtin.List.List Row)
+  ∀ {Row : Set} (rows : List Row)
     (first second third : Row → Row → ℚ) column →
   squareColumnMass rows
     (λ i j → first i j + second i j + third i j) column
