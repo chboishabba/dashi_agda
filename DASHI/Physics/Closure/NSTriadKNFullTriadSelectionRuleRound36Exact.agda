@@ -81,7 +81,7 @@ open FullPhysicalTriadSelectionLaw public
 record FullyAdmissibleTriadHyperedge
     {cutoff : Nat}
     {sector : Lattice.ExactRetainedSectorLaw cutoff}
-    (law : FullPhysicalTriadSelectionLaw cutoff sector) : Set where
+    (law : FullPhysicalTriadSelectionLaw cutoff sector) : Set₁ where
   constructor fully-admissible-triad-hyperedge
   field
     triad : Lattice.LatticeTriad
