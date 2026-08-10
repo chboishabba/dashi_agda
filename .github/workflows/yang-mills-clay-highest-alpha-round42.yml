@@ -1,0 +1,52 @@
+name: Yang-Mills Clay highest-alpha round 42
+
+on:
+  push:
+    branches:
+      - 'agent/ym-clay-alpha-round42-master-reconciled-floor-recovery'
+  pull_request:
+    branches:
+      - master
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: self-hosted
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Check master-reconciled physical YM tranche
+        id: check
+        shell: bash
+        run: |
+          set +e
+          (
+            set -euo pipefail
+            export AGDA_FLAKE="github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin"
+            export DASHI_REPO_ROOT="$GITHUB_WORKSPACE"
+            export DASHI_AGDA29_CACHE_ROOT="${RUNNER_TEMP:-/tmp}/dashi-agda29"
+            export AGDA_LOG_PATH="$GITHUB_WORKSPACE/round42-agda.log"
+            export AGDA_JOBS="${AGDA_JOBS:-4}"
+            bash scripts/check_yang_mills_clay_highest_alpha_round42.sh
+          ) > round42-check.log 2>&1
+          status=$?
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          tail -n 500 round42-check.log
+          exit 0
+      - name: Upload logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: round42-master-reconciled-ym-logs
+          path: |
+            round42-check.log
+            round42-agda.log
+          if-no-files-found: warn
+      - name: Fail on checker error
+        if: steps.check.outputs.status != '0'
+        run: exit 1
