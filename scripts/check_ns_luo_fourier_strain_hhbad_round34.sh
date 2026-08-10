@@ -13,6 +13,7 @@ files=(
   DASHI/Physics/Closure/NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact.agda
   DASHI/Physics/Closure/NSTriadKNConcretePhysicalGalerkinVectorFieldRound30Exact.agda
   DASHI/Physics/Closure/NSTriadKNCanonicalCutoffSameObjectSystemRound34Exact.agda
+  DASHI/Physics/Closure/NSTriadKNSafeCanonicalTriadOrbitQuotientRound34Exact.agda
   DASHI/Physics/Closure/NSTriadKNPeriodicFourierStrainMultiplierRound34Exact.agda
   DASHI/Physics/Closure/NSTriadKNPeriodicFourierStrainL2Round34Exact.agda
   DASHI/Physics/Closure/NSTriadKNHHBadSummableDyadicGainRound34Exact.agda
@@ -44,6 +45,10 @@ checks=(
   'NSTriadKNCanonicalCutoffSameObjectSystemRound34Exact.agda:canonicalPhysicalFiniteSystem'
   'NSTriadKNCanonicalCutoffSameObjectSystemRound34Exact.agda:canonicalSameCarrierSameObjectBuilder'
   'NSTriadKNCanonicalCutoffSameObjectSystemRound34Exact.agda:cutoffSameObjectFamilyConstructedForRawStateCarrier = false'
+  'NSTriadKNSafeCanonicalTriadOrbitQuotientRound34Exact.agda:partitionTriads'
+  'NSTriadKNSafeCanonicalTriadOrbitQuotientRound34Exact.agda:safeFullCutoffCanonicalTriadOrbitEnumeration'
+  'NSTriadKNSafeCanonicalTriadOrbitQuotientRound34Exact.agda:safeCanonicalTriadOrbitQuotientClosed = true'
+  'NSTriadKNSafeCanonicalTriadOrbitQuotientRound34Exact.agda:literalComplexThreeLegEnergyTransferConstructed = false'
   'NSTriadKNPeriodicFourierStrainMultiplierRound34Exact.agda:fourierStrainTraceFree'
   'NSTriadKNPeriodicFourierStrainMultiplierRound34Exact.agda:stretchingQuadraticFactorization'
   'NSTriadKNPeriodicFourierStrainMultiplierRound34Exact.agda:fourierStrainOwnModeActionVanishes'
@@ -59,6 +64,8 @@ checks=(
   'NSTriadKNLuoCriticalDissipationHHBadBridgeRound34Exact.agda:physicalHHBadGainToLuoDissipationLinkConstructed = false'
   'NSTriadKNComCotlarDyadicEnvelopeRound34Exact.agda:cotlarSymmetricMassClosedForm'
   'NSTriadKNComCotlarDyadicEnvelopeRound34Exact.agda:directRadiusBudgetPlusTailExact'
+  'NSTriadKNComCotlarDyadicEnvelopeRound34Exact.agda:quarterSymmetricMassClosedForm'
+  'NSTriadKNComCotlarDyadicEnvelopeRound34Exact.agda:quarterSymmetricMassPlusTail'
   'NSTriadKNComCotlarDyadicEnvelopeRound34Exact.agda:rootEnvelopeSquaresToProductEnvelope'
   'NSTriadKNComCotlarDyadicEnvelopeRound34Exact.agda:physicalTwoSidedComPairDecayConstructed = false'
   'NSTriadKNMurrayBishopGalerkinCoordinateSemanticsRound34Exact.agda:bishopBilinearAtomDifferenceFactorisation'
@@ -73,6 +80,10 @@ for check in "${checks[@]}"; do
 done
 
 # Provenance markers on genuinely imported mathematics.
+grep -q '10.1007/BF02547354' \
+  DASHI/Physics/Closure/NSTriadKNSafeCanonicalTriadOrbitQuotientRound34Exact.agda
+grep -q '10.7208/chicago/9780226115498.001.0001' \
+  DASHI/Physics/Closure/NSTriadKNSafeCanonicalTriadOrbitQuotientRound34Exact.agda
 grep -q '10.1080/03605309608821197' \
   DASHI/Physics/Closure/NSTriadKNPeriodicFourierStrainMultiplierRound34Exact.agda
 grep -q '10.1007/BF01240221' \
@@ -92,6 +103,7 @@ grep -q 'does \*\*not\*\* add a terminal Clay wrapper' "$doc"
 grep -q 'total target mass is exactly' "$doc"
 grep -q 'limiting cutoff-independent mass `3C`' "$doc"
 grep -q 'rational physical trajectory' "$doc"
+grep -q 'termination pragma' "$doc"
 
 scripts/run_agda29_parallel_check.sh \
   DASHI/Physics/Closure/NSTriadKNLuoFourierStrainHHBadRound34Validation.agda
