@@ -45,7 +45,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base as ℚ using (ℚ; _+_; _-_; _*_)
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using
-  (cong; subst; sym; trans)
+  (cong; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using (pair)
@@ -157,6 +157,40 @@ explicitGaugeGramPerturbation background multiplier row =
   + gaugeDefectForwardApply background
       (Defect.gaugeAdjointDefectApply background multiplier) row
 
+backgroundGaugeGramSplitsAdjoint :
+  ∀ background multiplier row →
+  backgroundGaugeGramApply background multiplier row
+  ≡ backgroundGaugeConstraintApply background
+      (FlatAdjoint.actualFlatGaugeAdjoint multiplier) row
+    + backgroundGaugeConstraintApply background
+      (Defect.gaugeAdjointDefectApply background multiplier) row
+backgroundGaugeGramSplitsAdjoint background multiplier row =
+  let
+    pointwise : ∀ selected →
+      GaugeMatrix.selectedBackgroundGaugeConstraintMatrix background row selected
+        * BackgroundFloor.backgroundGaugeAdjoint background multiplier selected
+      ≡ GaugeMatrix.selectedBackgroundGaugeConstraintMatrix background row selected
+        * FlatAdjoint.actualFlatGaugeAdjoint multiplier selected
+        + GaugeMatrix.selectedBackgroundGaugeConstraintMatrix background row selected
+        * Defect.gaugeAdjointDefectApply background multiplier selected
+    pointwise selected
+      rewrite BackgroundFloor.backgroundGaugeAdjointSplits
+        background multiplier selected =
+      ℚRing.solve-∀
+        (GaugeMatrix.selectedBackgroundGaugeConstraintMatrix background row selected)
+        (FlatAdjoint.actualFlatGaugeAdjoint multiplier selected)
+        (Defect.gaugeAdjointDefectApply background multiplier selected)
+  in
+  trans
+    (Sums.sumRationalCong Coordinates.physicalSU2Coordinates4 _ _ pointwise)
+    (BackgroundFloor.sumRationalAddExact Coordinates.physicalSU2Coordinates4
+      (λ selected →
+        GaugeMatrix.selectedBackgroundGaugeConstraintMatrix background row selected
+        * FlatAdjoint.actualFlatGaugeAdjoint multiplier selected)
+      (λ selected →
+        GaugeMatrix.selectedBackgroundGaugeConstraintMatrix background row selected
+        * Defect.gaugeAdjointDefectApply background multiplier selected))
+
 backgroundGaugeGramDecomposition :
   ∀ background multiplier row →
   backgroundGaugeGramApply background multiplier row
@@ -167,23 +201,7 @@ backgroundGaugeGramDecomposition background multiplier row =
     flatAdjoint = FlatAdjoint.actualFlatGaugeAdjoint multiplier
     defectAdjoint = Defect.gaugeAdjointDefectApply background multiplier
 
-    replaceAdjoint :
-      backgroundGaugeGramApply background multiplier row
-      ≡ backgroundGaugeConstraintApply background
-          (Rect.vectorAdd flatAdjoint defectAdjoint) row
-    replaceAdjoint =
-      cong
-        (λ state → backgroundGaugeConstraintApply background state row)
-        (λ selected → BackgroundFloor.backgroundGaugeAdjointSplits
-          background multiplier selected)
-
-    splitInput :
-      backgroundGaugeConstraintApply background
-          (Rect.vectorAdd flatAdjoint defectAdjoint) row
-      ≡ backgroundGaugeConstraintApply background flatAdjoint row
-        + backgroundGaugeConstraintApply background defectAdjoint row
-    splitInput = backgroundGaugeConstraintAdd
-      background flatAdjoint defectAdjoint row
+    splitAdjoint = backgroundGaugeGramSplitsAdjoint background multiplier row
 
     splitFlatInput :
       backgroundGaugeConstraintApply background flatAdjoint row
@@ -197,25 +215,24 @@ backgroundGaugeGramDecomposition background multiplier row =
         + gaugeDefectForwardApply background defectAdjoint row
     splitDefectInput = backgroundGaugeConstraintSplits background defectAdjoint row
   in
-  trans replaceAdjoint
-    (trans splitInput
+  trans splitAdjoint
+    (trans
+      (cong
+        (λ rightTerm →
+          backgroundGaugeConstraintApply background flatAdjoint row + rightTerm)
+        splitDefectInput)
       (trans
         (cong
-          (λ rightTerm →
-            backgroundGaugeConstraintApply background flatAdjoint row + rightTerm)
-          splitDefectInput)
-        (trans
-          (cong
-            (λ leftTerm →
-              leftTerm
-              + (flatGaugeConstraintApply defectAdjoint row
-                + gaugeDefectForwardApply background defectAdjoint row))
-            splitFlatInput)
-          (ℚRing.solve-∀
-            (flatGaugeConstraintApply flatAdjoint row)
-            (flatGaugeConstraintApply defectAdjoint row)
-            (gaugeDefectForwardApply background flatAdjoint row)
-            (gaugeDefectForwardApply background defectAdjoint row))))))
+          (λ leftTerm →
+            leftTerm
+            + (flatGaugeConstraintApply defectAdjoint row
+              + gaugeDefectForwardApply background defectAdjoint row))
+          splitFlatInput)
+        (ℚRing.solve-∀
+          (flatGaugeConstraintApply flatAdjoint row)
+          (flatGaugeConstraintApply defectAdjoint row)
+          (gaugeDefectForwardApply background flatAdjoint row)
+          (gaugeDefectForwardApply background defectAdjoint row))))
 
 constantProjectionMatchesFlatMeanProjector :
   ∀ multiplier coordinate site →
