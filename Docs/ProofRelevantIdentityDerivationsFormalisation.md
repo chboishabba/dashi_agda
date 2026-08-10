@@ -2,7 +2,7 @@
 
 ## Runtime correspondence
 
-This formalisation corresponds to SensibLaw migrations 069–072. It extends the
+This formalisation corresponds to SensibLaw migrations 069–073. It extends the
 existing sparse-frontier model without creating a second semantic graph.
 
 The runtime path is:
@@ -132,11 +132,14 @@ become a new proposition.
 
 ## Retraction correspondence
 
-SensibLaw migration 072 recomputes current document-derived witness admission and
-rebuilds current Level-3 identity substitutions. The Agda authority split makes
-that safe: local factors and witness evidence are separate values from the
-permission that admits them to a current projection. Retraction therefore does
-not require rewriting the local evidence object.
+SensibLaw migrations 072–073 recompute current document-derived witness
+admission and rebuild current Level-3 identity substitutions. Migration 073 also
+makes explicit external-authority witness admission and retraction immediately
+refresh the affected document's substitution and composition frontiers.
+
+The Agda authority split makes that safe: local factors and witness evidence are
+separate values from the permission that admits them to a current projection.
+Retraction therefore does not require rewriting the local evidence object.
 
 External-world alignment remains a distinct authority path. No local or
 corpus-derived constructor can manufacture `WorldCanonicalPermission`.
