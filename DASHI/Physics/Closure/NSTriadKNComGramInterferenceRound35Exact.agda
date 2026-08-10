@@ -48,7 +48,7 @@ open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base as ℚ
   using (ℚ; 0ℚ; 1ℚ; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚP
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym)
 
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
 import DASHI.Physics.Closure.NSTriadKNLuoSixThreeCenteredCommutatorScaleExact as SixThree
@@ -170,12 +170,19 @@ sixThreeGramCell gap =
     SixThree.twoBranchSquaredGap gap
     ≤ 1ℚ * SixThree.twoBranchSquaredGap gap * 1ℚ
   pairExact =
+    let
+      productIdentity :
+        1ℚ * SixThree.twoBranchSquaredGap gap * 1ℚ
+        ≡ SixThree.twoBranchSquaredGap gap
+      productIdentity =
+        trans
+          (cong (_* 1ℚ)
+            (ℚP.*-identityˡ (SixThree.twoBranchSquaredGap gap)))
+          (ℚP.*-identityʳ (SixThree.twoBranchSquaredGap gap))
+    in
     subst
       (λ upper → SixThree.twoBranchSquaredGap gap ≤ upper)
-      (sym
-        (trans
-          (ℚP.*-identityˡ (SixThree.twoBranchSquaredGap gap))
-          (ℚP.*-identityʳ (SixThree.twoBranchSquaredGap gap))))
+      (sym productIdentity)
       ℚP.≤-refl
 
 sixThreeHalfDyadicGramCell : Nat → HalfDyadicGramCell
