@@ -19,6 +19,7 @@ files=(
   DASHI/Physics/Closure/NSTriadKNHHBadSummableDyadicGainRound34Exact.agda
   DASHI/Physics/Closure/NSTriadKNLuoCriticalDissipationHHBadBridgeRound34Exact.agda
   DASHI/Physics/Closure/NSTriadKNComCotlarDyadicEnvelopeRound34Exact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoSixThreeComCotlarBridgeRound34Exact.agda
   DASHI/Physics/Closure/NSTriadKNMurrayBishopGalerkinCoordinateSemanticsRound34Exact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFourierStrainHHBadRound34Validation.agda
 )
@@ -68,6 +69,10 @@ checks=(
   'NSTriadKNComCotlarDyadicEnvelopeRound34Exact.agda:quarterSymmetricMassPlusTail'
   'NSTriadKNComCotlarDyadicEnvelopeRound34Exact.agda:rootEnvelopeSquaresToProductEnvelope'
   'NSTriadKNComCotlarDyadicEnvelopeRound34Exact.agda:physicalTwoSidedComPairDecayConstructed = false'
+  'NSTriadKNLuoSixThreeComCotlarBridgeRound34Exact.agda:highLowRatioIsQuarterDyadic'
+  'NSTriadKNLuoSixThreeComCotlarBridgeRound34Exact.agda:sixThreeSquaredGapFitsCotlarHalf'
+  'NSTriadKNLuoSixThreeComCotlarBridgeRound34Exact.agda:sixThreeCotlarRadiusBudgetPlusTailExact'
+  'NSTriadKNLuoSixThreeComCotlarBridgeRound34Exact.agda:sixThreePhysicalOperatorPairDecayConstructed = false'
   'NSTriadKNMurrayBishopGalerkinCoordinateSemanticsRound34Exact.agda:bishopBilinearAtomDifferenceFactorisation'
   'NSTriadKNMurrayBishopGalerkinCoordinateSemanticsRound34Exact.agda:bishopFiniteGalerkinDifferenceFactorisation'
   'NSTriadKNMurrayBishopGalerkinCoordinateSemanticsRound34Exact.agda:physicalBishopCoordinateEquivalenceConstructed = false'
@@ -94,6 +99,10 @@ grep -q '10.1007/s00021-019-0411-z' \
   DASHI/Physics/Closure/NSTriadKNLuoCriticalDissipationHHBadBridgeRound34Exact.agda
 grep -q '10.1002/cpa.3160410704' \
   DASHI/Physics/Closure/NSTriadKNComCotlarDyadicEnvelopeRound34Exact.agda
+grep -q '10.1007/BF02099744' \
+  DASHI/Physics/Closure/NSTriadKNLuoSixThreeComCotlarBridgeRound34Exact.agda
+grep -q '10.1007/s00041-018-9612-8' \
+  DASHI/Physics/Closure/NSTriadKNLuoSixThreeComCotlarBridgeRound34Exact.agda
 grep -q '10.1007/978-3-642-61667-9' \
   DASHI/Physics/Closure/NSTriadKNMurrayBishopGalerkinCoordinateSemanticsRound34Exact.agda
 grep -q '10.48550/arXiv.2205.08354' \
@@ -102,6 +111,7 @@ grep -q '10.48550/arXiv.2205.08354' \
 grep -q 'does \*\*not\*\* add a terminal Clay wrapper' "$doc"
 grep -q 'total target mass is exactly' "$doc"
 grep -q 'limiting cutoff-independent mass `3C`' "$doc"
+grep -q 'candidate row budget `3/2`' "$doc"
 grep -q 'rational physical trajectory' "$doc"
 grep -q 'termination pragma' "$doc"
 
