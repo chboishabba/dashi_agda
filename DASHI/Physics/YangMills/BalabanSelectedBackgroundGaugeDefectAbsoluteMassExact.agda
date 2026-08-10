@@ -19,26 +19,17 @@ module DASHI.Physics.YangMills.BalabanSelectedBackgroundGaugeDefectAbsoluteMassE
 --
 -- DASHI CONTRIBUTION
 --
--- Convert the selected-radius squared column estimate for
+-- Convert the selected-radius squared column estimate for D_A=L_A-L_0 into
+-- a literal entrywise absolute bound.  At rho=1/8192,
 --
---   D_A = L_A - L_0
---
--- into a literal entrywise absolute bound, then combine it with the already
--- proved two-site-per-direction stencil.  At the configured relaxed radius
--- delta = 4 rho^2, rho = 1/8192,
---
---   D_A(row,column)^2 <= 16 delta = (1/1024)^2,
+--   D_A(row,column)^2 <= (1/1024)^2,
 --   |D_A(row,column)| <= 1/1024.
 --
--- Without using the sharper cancellation of the current-site term, the
--- existing stencil has at most 24 candidate columns per row and 6 candidate
--- rows per column.  Exact finite selector/Fubini algebra therefore gives
+-- The already-proved two-site spatial stencil then gives the conservative
+-- exact masses
 --
---   row absolute mass(D_A)    <= 24/1024 = 3/128,
---   column absolute mass(D_A) <=  6/1024 = 3/512.
---
--- These deliberately conservative bounds are already small enough for the
--- Green/Neumann contraction once combined with the exact flat Green l1 mass.
+--   rowMass(D_A)    <= 24/1024 = 3/128,
+--   columnMass(D_A) <=  6/1024 = 3/512.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -51,12 +42,11 @@ import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Data.Sum.Base using (inj₁; inj₂)
 open import Relation.Binary.PropositionalEquality using
-  (cong; subst; sym; trans)
+  (cong; cong₂; subst; sym; trans)
 open import Relation.Nullary.Decidable.Core using (yes; no)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
-open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using
-  (pair; cartesian)
+open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using (pair)
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as FiniteL2
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreCarrier as Block
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
@@ -68,7 +58,6 @@ import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Co
 import DASHI.Physics.YangMills.BalabanP33PeriodicFourDimensionalHodgeIdentityExact as Periodic
 import DASHI.Physics.YangMills.BalabanP33PhysicalPeriodicOpenReferenceBridgeExact as Bridge
 import DASHI.Physics.YangMills.BalabanP33PhysicalRationalWilsonPlaquetteJetExact as Physical
-import DASHI.Physics.YangMills.BalabanP33PhysicalBackgroundGaugeSignedLowerExact as Signed
 import DASHI.Physics.YangMills.BalabanP33PhysicalBackgroundGaugeParameterizedYoungExact as Relaxed
 import DASHI.Physics.YangMills.BalabanP33LiteralBondCellIncidenceExact as Incidence
 import DASHI.Physics.YangMills.BalabanPath4AxisAverageExact as Path4
@@ -89,12 +78,8 @@ defectColumnMassBound = + 3 / 512
 gaugeRows : List Defect.GaugeRow
 gaugeRows = Defect.gaugeRows
 
-physicalColumns : List Defect.GaugeColumn
+physicalColumns : List Coordinates.PhysicalSU2Coordinate4
 physicalColumns = Coordinates.physicalSU2Coordinates4
-
-------------------------------------------------------------------------
--- A selected entry is below its literal column square sum.
-------------------------------------------------------------------------
 
 gaugeDefectEntrySquareBelowColumnNorm :
   ∀ background row column →
@@ -121,15 +106,8 @@ gaugeDefectEntrySquareBelowColumnNorm background row column =
         (FiniteL2.squareNonnegative
           (Defect.gaugeDefectMatrix background candidate column))
 
-    selectedBelow :
-      Sums.sumRational (Basis.elements selector)
-        (λ candidate →
-          value candidate
-            * Basis.kronecker (Basis.decide selector) candidate row)
-      ≤ Sums.sumRational (Basis.elements selector) value
     selectedBelow = Schur.sumPointwiseBelow
       (Basis.elements selector) _ _ pointwise
-
     selectedExact = Basis.selectorExact selector value row
   in
   subst
@@ -188,8 +166,7 @@ squareBoundImpliesEntryAbsoluteBound value squareBound
 
     lowerProduct :
       entryMagnitude * entryMagnitude ≤ entryMagnitude * ∣ value ∣
-    lowerProduct =
-      ℚP.*-monoˡ-≤-nonNeg entryMagnitude magnitudeBelow
+    lowerProduct = ℚP.*-monoˡ-≤-nonNeg entryMagnitude magnitudeBelow
 
     absoluteSquareBelowMixed :
       ∣ value ∣ * ∣ value ∣ ≤ ∣ value ∣ * entryMagnitude
@@ -220,10 +197,6 @@ selectedGaugeDefectEntryAbsoluteBound background radius row column =
     (Defect.gaugeDefectMatrix background row column)
     (selectedGaugeDefectEntrySquareBound background radius row column)
 
-------------------------------------------------------------------------
--- The two-site stencil converted into a nonnegative absolute majorant.
-------------------------------------------------------------------------
-
 siteKronecker : Periodic.Site4 → Periodic.Site4 → ℚ
 siteKronecker = Basis.kronecker (Basis.decide Basis.site4FiniteSelector)
 
@@ -243,8 +216,7 @@ siteSelectorScaledExact : ∀ coefficient target →
     (λ candidate → coefficient * siteKronecker candidate target)
   ≡ coefficient
 siteSelectorScaledExact coefficient target =
-  Basis.selectorExact Basis.site4FiniteSelector
-    (λ _ → coefficient) target
+  Basis.selectorExact Basis.site4FiniteSelector (λ _ → coefficient) target
 
 sumRationalAddExact : ∀ {A : Set} values (left right : A → ℚ) →
   Sums.sumRational values (λ value → left value + right value)
@@ -256,7 +228,7 @@ sumRationalAddExact (value ∷ values) left right
     (left value) (right value)
     (Sums.sumRational values left) (Sums.sumRational values right)
 
-defectStencilMajorant : Defect.GaugeRow → Defect.GaugeColumn → ℚ
+defectStencilMajorant : Defect.GaugeRow → Coordinates.PhysicalSU2Coordinate4 → ℚ
 defectStencilMajorant
     (pair rowCoordinate rowSite)
     (pair columnCoordinate (pair columnAxis columnSite)) =
@@ -301,7 +273,7 @@ selectedGaugeDefectEntryBelowStencilMajorant
   selectedGaugeDefectEntryAbsoluteBound background radius
     (pair rowCoordinate rowSite)
     (pair columnCoordinate (pair columnAxis rowSite))
-... | no _ | yes backwardEqual =
+... | no _ | yes _ =
   selectedGaugeDefectEntryAbsoluteBound background radius
     (pair rowCoordinate rowSite)
     (pair columnCoordinate (pair columnAxis columnSite))
@@ -321,28 +293,21 @@ selectedGaugeDefectEntryBelowStencilMajorant
       Stencil.selectedBackgroundGaugeConstraintMatrixOutsideStencilZero
         Physical.identityBackground row column outside
 
+    flatEntry = GaugeMatrix.selectedBackgroundGaugeConstraintMatrix
+      Physical.identityBackground row column
+
     defectZero : Defect.gaugeDefectMatrix background row column ≡ 0ℚ
     defectZero =
-      subst
-        (λ backgroundEntry →
-          backgroundEntry
-            - GaugeMatrix.selectedBackgroundGaugeConstraintMatrix
-                Physical.identityBackground row column
-          ≡ 0ℚ)
-        (sym backgroundZero)
-        (subst
-          (λ flatEntry → 0ℚ - flatEntry ≡ 0ℚ)
-          (sym flatZero)
+      trans
+        (cong (_- flatEntry) backgroundZero)
+        (trans
+          (cong (0ℚ -_) flatZero)
           (ℚRing.solve []))
   in
   subst
     (λ entry → ∣ entry ∣ ≤ 0ℚ)
     (sym defectZero)
     ℚP.≤-refl
-
-------------------------------------------------------------------------
--- Exact sums of the stencil majorant.
-------------------------------------------------------------------------
 
 rowSiteMajorantSumExact : ∀ axis rowSite →
   Sums.sumRational (Block.physicalBlockSites Path4.side4)
@@ -374,8 +339,7 @@ columnShiftedSiteMajorantSumExact : ∀ axis columnSite →
   Sums.sumRational (Block.physicalBlockSites Path4.side4)
     (λ rowSite →
       entryMagnitude
-        * siteKronecker columnSite
-            (Periodic.shiftBackward axis rowSite))
+        * siteKronecker columnSite (Periodic.shiftBackward axis rowSite))
   ≡ entryMagnitude
 columnShiftedSiteMajorantSumExact axis columnSite =
   let
@@ -384,33 +348,21 @@ columnShiftedSiteMajorantSumExact axis columnSite =
 
     symmetric :
       Sums.sumRational (Block.physicalBlockSites Path4.side4)
-        (λ rowSite →
-          entryMagnitude
-            * siteKronecker columnSite
-                (Periodic.shiftBackward axis rowSite))
+        (λ rowSite → entryMagnitude
+          * siteKronecker columnSite (Periodic.shiftBackward axis rowSite))
       ≡ Sums.sumRational (Block.physicalBlockSites Path4.side4)
         (λ rowSite → term (Periodic.shiftBackward axis rowSite))
     symmetric =
       Sums.sumRationalCong
         (Block.physicalBlockSites Path4.side4) _ _
-        (λ rowSite →
-          cong (entryMagnitude *_)
-            (siteKroneckerSymmetric columnSite
-              (Periodic.shiftBackward axis rowSite)))
+        (λ rowSite → cong (entryMagnitude *_)
+          (siteKroneckerSymmetric columnSite
+            (Periodic.shiftBackward axis rowSite)))
 
-    toPeriodic :
-      Sums.sumRational (Block.physicalBlockSites Path4.side4)
-        (λ rowSite → term (Periodic.shiftBackward axis rowSite))
-      ≡ Periodic.sumSites (λ rowSite → term (Periodic.shiftBackward axis rowSite))
     toPeriodic = sym
       (Bridge.sumSitesMatchesGlobalSiteSum
         (λ rowSite → term (Periodic.shiftBackward axis rowSite)))
-
     invariant = Periodic.sumSitesBackwardInvariant term axis
-
-    fromPeriodic :
-      Periodic.sumSites term
-      ≡ Sums.sumRational (Block.physicalBlockSites Path4.side4) term
     fromPeriodic = Bridge.sumSitesMatchesGlobalSiteSum term
   in
   trans symmetric
@@ -421,11 +373,9 @@ columnShiftedSiteMajorantSumExact axis columnSite =
 
 columnSiteMajorantSumExact : ∀ axis columnSite →
   Sums.sumRational (Block.physicalBlockSites Path4.side4)
-    (λ rowSite →
-      entryMagnitude
-        * (siteKronecker columnSite rowSite
-          + siteKronecker columnSite
-              (Periodic.shiftBackward axis rowSite)))
+    (λ rowSite → entryMagnitude
+      * (siteKronecker columnSite rowSite
+        + siteKronecker columnSite (Periodic.shiftBackward axis rowSite)))
   ≡ entryMagnitude + entryMagnitude
 columnSiteMajorantSumExact axis columnSite =
   trans
@@ -444,9 +394,8 @@ columnSiteMajorantSumExact axis columnSite =
         (trans
           (Sums.sumRationalCong
             (Block.physicalBlockSites Path4.side4) _ _
-            (λ rowSite →
-              cong (entryMagnitude *_)
-                (siteKroneckerSymmetric columnSite rowSite)))
+            (λ rowSite → cong (entryMagnitude *_)
+              (siteKroneckerSymmetric columnSite rowSite)))
           (siteSelectorScaledExact entryMagnitude columnSite))
         (columnShiftedSiteMajorantSumExact axis columnSite)))
 
@@ -463,36 +412,31 @@ defectStencilMajorantRowMassExact (pair rowCoordinate rowSite) =
         (λ _ → + 1 / 128)
         (λ columnCoordinate →
           trans
-            (Fubini.sumCartesian
-              Bridge.axes4 (Block.physicalBlockSites Path4.side4)
-              (λ cell →
-                defectStencilMajorant (pair rowCoordinate rowSite)
-                  (pair columnCoordinate cell)))
+            (Fubini.sumCartesian Bridge.axes4
+              (Block.physicalBlockSites Path4.side4)
+              (λ cell → defectStencilMajorant (pair rowCoordinate rowSite)
+                (pair columnCoordinate cell)))
             (trans
               (Sums.sumRationalCong Bridge.axes4 _
                 (λ _ → entryMagnitude + entryMagnitude)
                 (λ axis → rowSiteMajorantSumExact axis rowSite))
-              (ℚRing.solve [])))) )
+              (ℚRing.solve [])))))
       (ℚRing.solve []))
 
 defectStencilMajorantColumnMassExact : ∀ column →
-  Sums.sumRational gaugeRows
-    (λ row → defectStencilMajorant row column)
+  Sums.sumRational gaugeRows (λ row → defectStencilMajorant row column)
   ≡ defectColumnMassBound
 defectStencilMajorantColumnMassExact
     (pair columnCoordinate (pair columnAxis columnSite)) =
   trans
-    (Fubini.sumCartesian
-      Coordinates.lieCoordinates3
+    (Fubini.sumCartesian Coordinates.lieCoordinates3
       (Block.physicalBlockSites Path4.side4)
-      (λ row →
-        defectStencilMajorant row
-          (pair columnCoordinate (pair columnAxis columnSite))))
+      (λ row → defectStencilMajorant row
+        (pair columnCoordinate (pair columnAxis columnSite))))
     (trans
       (Sums.sumRationalCong Coordinates.lieCoordinates3 _
         (λ _ → entryMagnitude + entryMagnitude)
-        (λ rowCoordinate →
-          columnSiteMajorantSumExact columnAxis columnSite))
+        (λ rowCoordinate → columnSiteMajorantSumExact columnAxis columnSite))
       (ℚRing.solve []))
 
 selectedGaugeDefectAbsoluteRowMassBound :
@@ -503,15 +447,13 @@ selectedGaugeDefectAbsoluteRowMassBound :
   ≤ defectRowMassBound
 selectedGaugeDefectAbsoluteRowMassBound background radius row =
   let
-    pointwise = selectedGaugeDefectEntryBelowStencilMajorant
-      background radius row
-    summed = Schur.sumPointwiseBelow physicalColumns _ _ pointwise
+    summed = Schur.sumPointwiseBelow physicalColumns _ _
+      (selectedGaugeDefectEntryBelowStencilMajorant background radius row)
   in
   subst
     (λ upper →
       Mass.absoluteRectRowMass physicalColumns
-        (Defect.gaugeDefectMatrix background) row
-      ≤ upper)
+        (Defect.gaugeDefectMatrix background) row ≤ upper)
     (defectStencilMajorantRowMassExact row)
     summed
 
@@ -523,16 +465,14 @@ selectedGaugeDefectAbsoluteColumnMassBound :
   ≤ defectColumnMassBound
 selectedGaugeDefectAbsoluteColumnMassBound background radius column =
   let
-    pointwise = λ row →
-      selectedGaugeDefectEntryBelowStencilMajorant
-        background radius row column
-    summed = Schur.sumPointwiseBelow gaugeRows _ _ pointwise
+    summed = Schur.sumPointwiseBelow gaugeRows _ _
+      (λ row → selectedGaugeDefectEntryBelowStencilMajorant
+        background radius row column)
   in
   subst
     (λ upper →
       Mass.absoluteRectColumnMass gaugeRows
-        (Defect.gaugeDefectMatrix background) column
-      ≤ upper)
+        (Defect.gaugeDefectMatrix background) column ≤ upper)
     (defectStencilMajorantColumnMassExact column)
     summed
 
