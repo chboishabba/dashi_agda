@@ -47,6 +47,7 @@ module DASHI.Physics.Closure.NSTriadKNMurrayBishopGalerkinCoordinateSemanticsRou
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base as Rational using (ℚ; toℚᵘ)
+open import Data.Rational.Unnormalised as Unnormalised using (0ℚᵘ)
 
 import Real as BishopReal
 import RealProperties as BishopProperties
@@ -189,9 +190,7 @@ bishopFiniteGalerkinDifferenceFactorisation :
 bishopFiniteGalerkinDifferenceFactorisation [] state reference =
   let open BishopProperties.ℝ-Solver
   in solve 0
-      (Κ Data.Rational.Unnormalised.0ℚᵘ
-       ⊖ Κ Data.Rational.Unnormalised.0ℚᵘ
-       ⊜ Κ Data.Rational.Unnormalised.0ℚᵘ)
+      (Κ 0ℚᵘ ⊖ Κ 0ℚᵘ ⊜ Κ 0ℚᵘ)
       BishopProperties.≃-refl
 bishopFiniteGalerkinDifferenceFactorisation (atom ∷ rest) state reference =
   BishopProperties.≃-trans
