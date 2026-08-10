@@ -2,7 +2,7 @@
 
 ## Runtime correspondence
 
-This formalisation corresponds to SensibLaw migrations 069–071.  It extends the
+This formalisation corresponds to SensibLaw migrations 069–072. It extends the
 existing sparse-frontier model without creating a second semantic graph.
 
 The runtime path is:
@@ -29,13 +29,13 @@ corpusDerived
 externalAuthority
 ```
 
-Only `externalAuthority` has a `WorldCanonicalPermission` constructor.  The
+Only `externalAuthority` has a `WorldCanonicalPermission` constructor. The
 empty-pattern theorems prove that local, document-derived and corpus-derived
 identity cannot by themselves assert a world-canonical entity.
 
-Identity evidence is also indexed by kind.  Constructors exist for evidence
+Identity evidence is also indexed by kind. Constructors exist for evidence
 such as apposition, proper-name expansion, title/role closure, uniquely resolved
-typed demands and external alignment.  Deliberately no projection constructor
+typed demands and external alignment. Deliberately no projection constructor
 exists for:
 
 ```text
@@ -53,6 +53,11 @@ IdentityProjectionPermission lexicalProximityEvidence -> bottom
 A canonical entity is therefore a base over which immutable local objects are
 fibred rather than a destructive merge target.
 
+`IdentityFibreMember` carries the admitted witness explicitly and requires
+proofs that the local fibre object equals the witness source and that the
+canonical entity identity equals the witness target. Fibre membership therefore
+cannot float free of its proof object.
+
 ## Candidate multiplicity
 
 Identity projection reuses the sparse frontier witness multiplicity:
@@ -63,7 +68,7 @@ oneWitness
 severalWitnesses
 ```
 
-`IdentityProjection` has a constructor only at `oneWitness`.  No witness and
+`IdentityProjection` has a constructor only at `oneWitness`. No witness and
 ambiguous witnesses have empty elimination proofs, matching the PostgreSQL
 `resolved_unique` gate.
 
@@ -79,7 +84,7 @@ ambiguous witnesses have empty elimination proofs, matching the PostgreSQL
 - proof that the target entity matches the witness target.
 
 A derived argument similarly retains both the source object and the admitted
-witness.  `IdentitySubstitutionDerivation` retains the original premise factor
+witness. `IdentitySubstitutionDerivation` retains the original premise factor
 and carries an equality showing that the retained premise is the one named by
 the proof.
 
@@ -112,7 +117,7 @@ candidateOnlyAuthority
 explicitDomainRuleAuthority
 ```
 
-Only the explicit-domain-rule authority has a constructor.  Therefore:
+Only the explicit-domain-rule authority has a constructor. Therefore:
 
 ```text
 CompositionPermission candidateOnlyAuthority -> bottom
@@ -124,6 +129,17 @@ and the `DerivedProposition factorComposition` constructor requires an
 This proves the distinction between structural composability and semantic
 entailment: a shared participant, even under witnessed identity, cannot silently
 become a new proposition.
+
+## Retraction correspondence
+
+SensibLaw migration 072 recomputes current document-derived witness admission and
+rebuilds current Level-3 identity substitutions. The Agda authority split makes
+that safe: local factors and witness evidence are separate values from the
+permission that admits them to a current projection. Retraction therefore does
+not require rewriting the local evidence object.
+
+External-world alignment remains a distinct authority path. No local or
+corpus-derived constructor can manufacture `WorldCanonicalPermission`.
 
 ## Aggregate
 
