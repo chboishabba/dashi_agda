@@ -13,6 +13,8 @@ files=(
   DASHI/Physics/Closure/NSTriadKNFixedCutoffSupportInvariantRound35Exact.agda
   DASHI/Physics/Closure/NSTriadKNModeInverseSquareRealityRound35Exact.agda
   DASHI/Physics/Closure/NSTriadKNComplex3RealityLawsRound35Exact.agda
+  DASHI/Physics/Closure/NSTriadKNOrderedInteractionRealityRound35Exact.agda
+  DASHI/Physics/Closure/NSTriadKNPhysicalOutputFiberConjugationRound35Exact.agda
   DASHI/Physics/Closure/NSTriadKNHHBadFiniteShellBudgetGluingRound35Exact.agda
   DASHI/Physics/Closure/NSTriadKNComGramInterferenceRound35Exact.agda
   DASHI/Physics/Closure/NSTriadKNTriadS3RealityActionRound35Exact.agda
@@ -54,6 +56,14 @@ checks=(
   'NSTriadKNComplex3RealityLawsRound35Exact.agda:lerayProjectModeEven'
   'NSTriadKNComplex3RealityLawsRound35Exact.agda:lerayProjectConjugation'
   'NSTriadKNComplex3RealityLawsRound35Exact.agda:canonicalCorrectComplex3RealityLaws'
+  'NSTriadKNOrderedInteractionRealityRound35Exact.agda:orderedVelocityInteractionReality'
+  'NSTriadKNOrderedInteractionRealityRound35Exact.agda:projectedOrderedTermConjugateTriad'
+  'NSTriadKNOrderedInteractionRealityRound35Exact.agda:orderedInteractionRealityClosed = true'
+  'NSTriadKNOrderedInteractionRealityRound35Exact.agda:summedProjectedNonlinearityRealityConstructed = false'
+  'NSTriadKNPhysicalOutputFiberConjugationRound35Exact.agda:conjugateFiberRepresentative'
+  'NSTriadKNPhysicalOutputFiberConjugationRound35Exact.agda:physicalOutputFiberLabelledConjugationBijection'
+  'NSTriadKNPhysicalOutputFiberConjugationRound35Exact.agda:physicalOutputFiberConjugationBijectionClosed = true'
+  'NSTriadKNPhysicalOutputFiberConjugationRound35Exact.agda:outputFiberConjugationListPermutationConstructed = false'
   'NSTriadKNHHBadFiniteShellBudgetGluingRound35Exact.agda:canonicalFiniteShellBudgetGluing'
   'NSTriadKNHHBadFiniteShellBudgetGluingRound35Exact.agda:boundaryBudgetHalves'
   'NSTriadKNHHBadFiniteShellBudgetGluingRound35Exact.agda:cutoffAdvanceConservesTotalBudget'
@@ -82,26 +92,18 @@ for check in "${checks[@]}"; do
 done
 
 # Provenance markers on imported mathematics.
-grep -q '10.1512/iumj.1993.42.42034' \
-  DASHI/Physics/Closure/NSTriadKNPeriodicFourierStrainGramRound35Exact.agda
-grep -q '10.1080/03605309608821197' \
-  DASHI/Physics/Closure/NSTriadKNPeriodicFourierStrainInterferenceRound35Exact.agda
-grep -q '10.1007/BF02547354' \
-  DASHI/Physics/Closure/NSTriadKNFixedCutoffSupportInvariantRound35Exact.agda
-grep -q '10.1007/BF02547354' \
-  DASHI/Physics/Closure/NSTriadKNModeInverseSquareRealityRound35Exact.agda
-grep -q '10.1090/chel/343' \
-  DASHI/Physics/Closure/NSTriadKNComplex3RealityLawsRound35Exact.agda
-grep -q '10.1007/s00021-019-0411-z' \
-  DASHI/Physics/Closure/NSTriadKNHHBadFiniteShellBudgetGluingRound35Exact.agda
-grep -q '10.1002/cpa.3160410704' \
-  DASHI/Physics/Closure/NSTriadKNComGramInterferenceRound35Exact.agda
-grep -q '10.7208/chicago/9780226115498.001.0001' \
-  DASHI/Physics/Closure/NSTriadKNTriadS3RealityActionRound35Exact.agda
-grep -q '10.1007/978-3-642-61667-9' \
-  DASHI/Physics/Closure/NSTriadKNVectorFieldIndexedGluingRound35Exact.agda
-grep -q '10.1007/978-3-642-16830-7' \
-  DASHI/Physics/Closure/NSTriadKNDualResourceScaleLedgerRound35Exact.agda
+grep -q '10.1512/iumj.1993.42.42034' DASHI/Physics/Closure/NSTriadKNPeriodicFourierStrainGramRound35Exact.agda
+grep -q '10.1080/03605309608821197' DASHI/Physics/Closure/NSTriadKNPeriodicFourierStrainInterferenceRound35Exact.agda
+grep -q '10.1007/BF02547354' DASHI/Physics/Closure/NSTriadKNFixedCutoffSupportInvariantRound35Exact.agda
+grep -q '10.1007/BF02547354' DASHI/Physics/Closure/NSTriadKNModeInverseSquareRealityRound35Exact.agda
+grep -q '10.1090/chel/343' DASHI/Physics/Closure/NSTriadKNComplex3RealityLawsRound35Exact.agda
+grep -q '10.1007/BF02547354' DASHI/Physics/Closure/NSTriadKNOrderedInteractionRealityRound35Exact.agda
+grep -q '10.1090/chel/343' DASHI/Physics/Closure/NSTriadKNPhysicalOutputFiberConjugationRound35Exact.agda
+grep -q '10.1007/s00021-019-0411-z' DASHI/Physics/Closure/NSTriadKNHHBadFiniteShellBudgetGluingRound35Exact.agda
+grep -q '10.1002/cpa.3160410704' DASHI/Physics/Closure/NSTriadKNComGramInterferenceRound35Exact.agda
+grep -q '10.7208/chicago/9780226115498.001.0001' DASHI/Physics/Closure/NSTriadKNTriadS3RealityActionRound35Exact.agda
+grep -q '10.1007/978-3-642-61667-9' DASHI/Physics/Closure/NSTriadKNVectorFieldIndexedGluingRound35Exact.agda
+grep -q '10.1007/978-3-642-16830-7' DASHI/Physics/Closure/NSTriadKNDualResourceScaleLedgerRound35Exact.agda
 
 grep -q 'cross-fibre interference' "$doc"
 grep -q 'fixed-cutoff support' "$doc"
@@ -110,6 +112,8 @@ grep -q 'operator-realisation' "$doc"
 grep -q 'Bishop-real' "$doc"
 grep -q 'scale-free' "$doc"
 grep -q 'inverse-square evenness' "$doc"
+grep -q 'ordered nonlinear interaction' "$doc"
+grep -q 'labelled output-fibre conjugation' "$doc"
 
 scripts/run_agda29_parallel_check.sh \
   DASHI/Physics/Closure/NSTriadKNLuoStrainGramCutoffInvariantRound35Validation.agda
