@@ -31,16 +31,19 @@ module DASHI.Physics.YangMills.BalabanSelectedBackgroundFlatGreenPerturbationTwo
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Empty using (⊥-elim)
 open import Data.Rational.Base as ℚ using (ℚ; _*_; _≤_; ∣_∣)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Relation.Nullary.Decidable.Core using (yes; no)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using (pair)
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
 import DASHI.Physics.YangMills.BalabanP33PhysicalCoordinateBasisExact as Basis
 import DASHI.Physics.YangMills.BalabanSide4ScalarGreenConvolutionExact as Green
+import DASHI.Physics.YangMills.BalabanSide4TranslationDifferenceExact as Difference
 import DASHI.Physics.YangMills.BalabanFiniteRectangularAbsoluteMassExact as RowMass
 import DASHI.Physics.YangMills.BalabanFiniteRectangularAbsoluteColumnMassExact as ColumnMass
 import DASHI.Physics.YangMills.BalabanSelectedFlatGaugeConstraintAbsoluteMassExact as FlatMass
@@ -49,7 +52,6 @@ import DASHI.Physics.YangMills.BalabanSelectedBackgroundGaugePerturbationFiniteR
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundGaugeGramPerturbationAbsoluteMassExact as PerturbationMass
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundGaugeGramPerturbationTwoSidedMassExact as TwoSidedE
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundFlatGreenPerturbationContractionExact as Contraction
-import DASHI.Physics.YangMills.BalabanP33PhysicalRationalWilsonPlaquetteJetExact as Physical
 import DASHI.Physics.YangMills.BalabanP33PhysicalBackgroundGaugeParameterizedYoungExact as Relaxed
 
 GaugeRow = Contraction.GaugeRow
@@ -59,16 +61,14 @@ lieKroneckerSymmetric : ∀ left right →
   Contraction.lieKronecker left right ≡ Contraction.lieKronecker right left
 lieKroneckerSymmetric left right
   with Basis.decide Basis.lieCoordinateFiniteSelector left right
-... | Relation.Nullary.Decidable.Core.yes refl
+... | yes refl
     with Basis.decide Basis.lieCoordinateFiniteSelector right right
-...   | Relation.Nullary.Decidable.Core.yes _ = refl
-...   | Relation.Nullary.Decidable.Core.no different =
-      Data.Empty.⊥-elim (different refl)
-... | Relation.Nullary.Decidable.Core.no different
+...   | yes _ = refl
+...   | no different = ⊥-elim (different refl)
+... | no different
     with Basis.decide Basis.lieCoordinateFiniteSelector right left
-...   | Relation.Nullary.Decidable.Core.yes equality =
-      Data.Empty.⊥-elim (different (sym equality))
-...   | Relation.Nullary.Decidable.Core.no _ = refl
+...   | yes equality = ⊥-elim (different (sym equality))
+...   | no _ = refl
 
 flatGreenKernelSymmetric : ∀ left right →
   Contraction.flatGreenKernelMatrix left right
@@ -82,9 +82,7 @@ flatGreenKernelSymmetric
   in
   trans
     (cong
-      (_* Green.scalarGreenKernel
-          (DASHI.Physics.YangMills.BalabanSide4TranslationDifferenceExact.subtractSite4
-            leftSite rightSite))
+      (_* Green.scalarGreenKernel (Difference.subtractSite4 leftSite rightSite))
       lieSym)
     (cong
       (Contraction.lieKronecker leftCoordinate rightCoordinate *_)
