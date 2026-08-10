@@ -14,9 +14,10 @@ module DASHI.Biology.DecimalCRTResolutionExact where
 --   3. the stronger arithmetic Chinese-remainder equivalence, coherent with
 --      the residue-reduction maps.
 --
--- (1) and (2) are constructed below.  (3) is represented by a precise
--- CoherentCRTSystem interface, so later inverse-limit theorems can require the
--- actual CRT structure rather than silently promote a mere cardinal bijection.
+-- (1) and (2) are constructed below.  For (3), the actual forward arithmetic
+-- residue map x |-> (x mod 2^r, x mod 5^r) is constructed explicitly, and a
+-- CoherentCRTSystem must provide its inverse plus the reduction-coherence laws.
+-- This is intentionally stronger than a same-cardinality bijection.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -54,6 +55,10 @@ reduceProduct25 (two , five) =
 
 tenPowerFactor : (r : Nat) → 10 ^ r ≡ 2 ^ r * 5 ^ r
 tenPowerFactor r = NatP.^-distribʳ-* r 2 5
+
+tenPowerFactorSwapped : (r : Nat) → 10 ^ r ≡ 5 ^ r * 2 ^ r
+tenPowerFactorSwapped r =
+  trans (tenPowerFactor r) (NatP.*-comm (2 ^ r) (5 ^ r))
 
 cardinalFactorForward :
   (r : Nat) → Residue10 r → ProductResidue25 r
@@ -111,17 +116,45 @@ canonicalFiniteCardinalFactorization r =
     (cardinalFactorForwardBackward r)
 
 ------------------------------------------------------------------------
+-- Canonical arithmetic residue projections.
+--
+-- These maps really are the two remainder coordinates: the casts expose
+-- 10^r as a multiple of the target modulus and `Fin.remainder` performs the
+-- canonical finite remainder map.
+------------------------------------------------------------------------
+
+canonicalResidue2 :
+  (r : Nat) → Residue10 r → Residue2 r
+canonicalResidue2 r x =
+  Fin.remainder (2 ^ r) (Fin.cast (tenPowerFactorSwapped r) x)
+
+canonicalResidue5 :
+  (r : Nat) → Residue10 r → Residue5 r
+canonicalResidue5 r x =
+  Fin.remainder (5 ^ r) (Fin.cast (tenPowerFactor r) x)
+
+canonicalCRTForward :
+  (r : Nat) → Residue10 r → ProductResidue25 r
+canonicalCRTForward r x =
+  canonicalResidue2 r x , canonicalResidue5 r x
+
+------------------------------------------------------------------------
 -- Arithmetic CRT data is deliberately a stronger type.
 --
--- A genuine instance must provide finite-level inverse maps AND prove they
--- commute with the canonical residue reductions.  This prevents the arbitrary
--- mixed-radix cardinal bijection above from being mislabeled as the CRT map.
+-- A genuine stage must use the canonical arithmetic residue map, provide an
+-- inverse to it, and a coherent system must additionally commute with the
+-- canonical residue reductions.  Therefore an arbitrary mixed-radix cardinal
+-- bijection cannot inhabit this type unless it is proved equal to the actual
+-- residue-pair map.
 ------------------------------------------------------------------------
 
 record CRTStage (r : Nat) : Set where
   constructor crtStage
   field
     crtForward : Residue10 r → ProductResidue25 r
+    crtForwardIsCanonicalResidues :
+      (x : Residue10 r) → crtForward x ≡ canonicalCRTForward r x
+
     crtBackward : ProductResidue25 r → Residue10 r
     crtBackwardForward :
       (x : Residue10 r) → crtBackward (crtForward x) ≡ x
@@ -158,14 +191,23 @@ record DecimalCRTClaimScope : Set where
     finiteSetBijectionConstructedIsTrue :
       finiteSetBijectionConstructed ≡ true
 
+    canonicalArithmeticForwardResiduesConstructed : Bool
+    canonicalArithmeticForwardResiduesConstructedIsTrue :
+      canonicalArithmeticForwardResiduesConstructed ≡ true
+
     arbitraryCardinalBijectionCalledArithmeticCRT : Bool
     arbitraryCardinalBijectionCalledArithmeticCRTIsFalse :
       arbitraryCardinalBijectionCalledArithmeticCRT ≡ false
 
-    coherentArithmeticCRTRequiresExplicitStructure : Bool
-    coherentArithmeticCRTRequiresExplicitStructureIsTrue :
-      coherentArithmeticCRTRequiresExplicitStructure ≡ true
+    coherentArithmeticCRTRequiresExplicitInverseAndLaws : Bool
+    coherentArithmeticCRTRequiresExplicitInverseAndLawsIsTrue :
+      coherentArithmeticCRTRequiresExplicitInverseAndLaws ≡ true
 
 canonicalDecimalCRTClaimScope : DecimalCRTClaimScope
 canonicalDecimalCRTClaimScope =
-  decimalCRTClaimScope true refl true refl false refl true refl
+  decimalCRTClaimScope
+    true refl
+    true refl
+    true refl
+    false refl
+    true refl
