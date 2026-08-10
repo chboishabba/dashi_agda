@@ -18,6 +18,7 @@ sources=(
   DASHI/Biology/SignedMultiplicityObstructionExact.agda
   DASHI/Biology/FRACTRANWreathControlledSymmetryExact.agda
   DASHI/Biology/SpectralReachabilityComplexityExact.agda
+  DASHI/Biology/SignedWreathReachabilityBridgeExact.agda
   DASHI/Culture/SignedMultiplicityYinYangBridgeExact.agda
   DASHI/Culture/BeliefFibreReplicationExact.agda
   DASHI/Moonshine/SSPJProfiniteOrthogonalComplexityRound8Validation.agda
@@ -54,6 +55,7 @@ tenadic=DASHI/Biology/TenAdicInverseLimitBridge.agda
 defect=DASHI/Biology/SignedMultiplicityObstructionExact.agda
 controlled=DASHI/Biology/FRACTRANWreathControlledSymmetryExact.agda
 complexity=DASHI/Biology/SpectralReachabilityComplexityExact.agda
+integration=DASHI/Biology/SignedWreathReachabilityBridgeExact.agda
 yinyang=DASHI/Culture/SignedMultiplicityYinYangBridgeExact.agda
 belief=DASHI/Culture/BeliefFibreReplicationExact.agda
 validation=DASHI/Moonshine/SSPJProfiniteOrthogonalComplexityRound8Validation.agda
@@ -78,6 +80,8 @@ require_pattern "$decimal" 'encodeDecodeResidue'
 require_pattern "$decimal" 'encodePrefixCompatible'
 require_pattern "$crt" 'tenPowerFactor'
 require_pattern "$crt" 'cardinalFactorBackwardForward'
+require_pattern "$crt" 'canonicalCRTForward'
+require_pattern "$crt" 'crtForwardIsCanonicalResidues'
 require_pattern "$crt" 'record CoherentCRTSystem'
 require_pattern "$tenadic" 'record TowerEquivalence'
 require_pattern "$tenadic" 'decimalResidueTowerEquivalence'
@@ -87,11 +91,15 @@ require_pattern "$defect" 'oneAndTwoHaveSamePresence'
 require_pattern "$defect" 'oneAndTwoHaveNonzeroSignedDefect'
 require_pattern "$defect" 'twistedAntiSymmetry'
 require_pattern "$controlled" 'controlledStep'
-require_pattern "$controlled" 'decodeEncodeTriState'
+require_pattern "$controlled" 'noTriStateIntoOneBit'
+require_pattern "$controlled" 'encodeTriStateInjective'
 require_pattern "$complexity" 'invariantSeparatesNoReach'
 require_pattern "$complexity" 'reachPotentialBound'
 require_pattern "$complexity" 'record ComplexityIndexedCarrier'
 require_pattern "$complexity" 'record FibreWitnessProblem'
+require_pattern "$integration" 'defectPreservedAlongReach'
+require_pattern "$integration" 'signedDefectSeparatesNoReach'
+require_pattern "$integration" 'orientationSeparatesNoReach'
 require_pattern "$yinyang" 'swapMultiplicityReversesCandidatePolarity'
 require_pattern "$belief" 'beliefLiesInTransitionFibre'
 require_pattern "$validation" 'validationFibreMassIsOne'
@@ -101,6 +109,7 @@ require_pattern "$validation" 'validationOccurrenceForgetsMultiplicity'
 require_pattern "$validation" 'validationControlledWreathLeft'
 require_pattern "$validation" 'validationPotentialBudget'
 require_pattern "$top" 'import DASHI.EverythingSSPJStratifiedQuotientRound7'
+require_pattern "$top" 'import DASHI.Biology.SignedWreathReachabilityBridgeExact'
 
 mkdir -p artifacts
 python3 scripts/classify_agda_substance.py \
