@@ -2,7 +2,9 @@ module DASHI.Cognition.PNF.ReferenceModeOutcomes where
 
 open import Data.Empty using (⊥)
 
-open import DASHI.Cognition.PNF.SparseFibredFrontier
+open import DASHI.Cognition.PNF.DemandResolutionState using (ResolvedTarget)
+open import DASHI.Cognition.PNF.SparseFibredFrontier using
+  (WitnessMultiplicity; noWitness; oneWitness; severalWitnesses)
 
 ------------------------------------------------------------------------
 -- Reference mode is semantic evidence carried by the typed demand. Candidate
