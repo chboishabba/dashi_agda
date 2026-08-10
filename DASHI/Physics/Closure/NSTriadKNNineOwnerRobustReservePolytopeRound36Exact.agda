@@ -28,18 +28,23 @@ module DASHI.Physics.Closure.NSTriadKNNineOwnerRobustReservePolytopeRound36Exact
 --
 --   sum_i eta_i <= sum_i u_i < 1.
 --
--- Hence every allocation represented by the box has a strict viscosity
--- reserve; closure is not tied to one brittle point.  The physical task is to
--- construct such a box from the nine owner producer constants.  No numerical
--- or analytic optimizer is postulated here.
+-- It also makes the proposed optimization language precise without importing
+-- an analytic optimizer.  An abstract admissible-budget polytope can carry a
+-- uniform strict envelope, a critical feasible witness, or a proof that it is
+-- infeasible.  Thus the proof architecture distinguishes robustly positive,
+-- merely critical, and empty feasible regions instead of conflating them.
+--
+-- The physical task is to construct the nine owner producer constraints and a
+-- strict envelope.  No numerical or analytic optimizer is postulated here.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Primitive using (Level; lsuc)
+open import Data.Empty using (⊥)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _≤_; _<_)
 import Data.Rational.Properties as ℚP
-open import Relation.Binary.PropositionalEquality using (cong)
 
 import DASHI.Physics.Closure.NSTriadKNAdmissibleOwnerTaxLanguageRound28Exact as Owner
 
@@ -106,6 +111,70 @@ actualViscosityReserve :
     (estimates : List (Owner.AdmissibleOwnerEstimate environment)) → ℚ
 actualViscosityReserve estimates = 1ℚ - Owner.sumEta estimates
 
+------------------------------------------------------------------------
+-- Region-level optimization language.
+------------------------------------------------------------------------
+
+record AdmissibleBudgetPolytope (parameterLevel : Level) :
+    Set (lsuc parameterLevel) where
+  field
+    Parameter : Set parameterLevel
+    Feasible : Parameter → Set parameterLevel
+    etaTotal : Parameter → ℚ
+
+open AdmissibleBudgetPolytope public
+
+record UniformPositiveReserve
+    {parameterLevel}
+    (polytope : AdmissibleBudgetPolytope parameterLevel) :
+    Set parameterLevel where
+  field
+    strictEnvelope : ℚ
+    everyFeasibleBelowEnvelope : ∀ point →
+      Feasible polytope point → etaTotal polytope point ≤ strictEnvelope
+    envelopeBelowOne : strictEnvelope < 1ℚ
+
+open UniformPositiveReserve public
+
+uniformReserveForcesEveryFeasiblePointStrict :
+  ∀ {parameterLevel}
+    {polytope : AdmissibleBudgetPolytope parameterLevel} →
+  UniformPositiveReserve polytope →
+  ∀ point → Feasible polytope point → etaTotal polytope point < 1ℚ
+uniformReserveForcesEveryFeasiblePointStrict certificate point feasible =
+  ℚP.≤-<-trans
+    (everyFeasibleBelowEnvelope certificate point feasible)
+    (envelopeBelowOne certificate)
+
+record CriticalReserveWitness
+    {parameterLevel}
+    (polytope : AdmissibleBudgetPolytope parameterLevel) :
+    Set parameterLevel where
+  field
+    criticalPoint : Parameter polytope
+    criticalFeasible : Feasible polytope criticalPoint
+    criticalTotal : etaTotal polytope criticalPoint ≡ 1ℚ
+
+open CriticalReserveWitness public
+
+InfeasibleBudgetPolytope :
+  ∀ {parameterLevel} →
+  AdmissibleBudgetPolytope parameterLevel → Set parameterLevel
+InfeasibleBudgetPolytope polytope =
+  ∀ point → Feasible polytope point → ⊥
+
+data ReserveGeometry
+    {parameterLevel}
+    (polytope : AdmissibleBudgetPolytope parameterLevel) :
+    Set (lsuc parameterLevel) where
+  robustlyPositive : UniformPositiveReserve polytope → ReserveGeometry polytope
+  critical : CriticalReserveWitness polytope → ReserveGeometry polytope
+  infeasible : InfeasibleBudgetPolytope polytope → ReserveGeometry polytope
+
+------------------------------------------------------------------------
+-- Literal nine-owner specialization.
+------------------------------------------------------------------------
+
 record RobustNineOwnerBudgetPolytope
     {environment : Owner.TaxEnvironment}
     (family : Owner.NineOwnerEstimateFamily environment) : Set where
@@ -131,12 +200,19 @@ robustNineOwnerReserveFloor polytope =
 robustOwnerReservePolytopeAlgebraClosed : Bool
 robustOwnerReservePolytopeAlgebraClosed = true
 
+reserveGeometryClassificationTyped : Bool
+reserveGeometryClassificationTyped = true
+
 physicalRobustNineOwnerBudgetPolytopeConstructed : Bool
 physicalRobustNineOwnerBudgetPolytopeConstructed = false
 
 robustOwnerReservePolytopeAlgebraClosedIsTrue :
   robustOwnerReservePolytopeAlgebraClosed ≡ true
 robustOwnerReservePolytopeAlgebraClosedIsTrue = refl
+
+reserveGeometryClassificationTypedIsTrue :
+  reserveGeometryClassificationTyped ≡ true
+reserveGeometryClassificationTypedIsTrue = refl
 
 physicalRobustNineOwnerBudgetPolytopeConstructedIsFalse :
   physicalRobustNineOwnerBudgetPolytopeConstructed ≡ false
