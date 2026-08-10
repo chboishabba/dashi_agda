@@ -24,13 +24,17 @@ files=(
   DASHI/Physics/YangMills/BalabanSelectedGaugeStabilizerStratificationExact.agda
   DASHI/Physics/YangMills/BalabanSelectedFlatGaugeBasedSectionExact.agda
   DASHI/Physics/YangMills/BalabanSelectedFlatGaugeSectionAsymmetryExact.agda
+  DASHI/Physics/YangMills/BalabanBasedGaugeActionFreeExact.agda
   DASHI/Physics/YangMills/BalabanSelectedFlatGaugeAdjointGramFloorExact.agda
   DASHI/Physics/YangMills/BalabanFiniteRectangularTransposeFrobeniusExact.agda
   DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeAdjointDefectExact.agda
   DASHI/Physics/YangMills/BalabanFiniteReducedFloorPerturbationExact.agda
+  DASHI/Physics/YangMills/BalabanFiniteRelativeFormPerturbationExact.agda
   DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeReducedFloorExact.agda
   DASHI/Physics/YangMills/BalabanSelectedGaugeMeanDecompositionExact.agda
   DASHI/Physics/YangMills/BalabanSelectedBackgroundRegularizedGaugeFloorExact.agda
+  DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeRelativeFormExact.agda
+  DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeRelativeSmallnessExact.agda
   DASHI/Physics/YangMills/BalabanSelectedFlatGaugeRegularizedGreenExact.agda
   DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeOperatorDecompositionExact.agda
   DASHI/Physics/YangMills/BalabanMoscoRecoveryGapTransferExact.agda
@@ -61,17 +65,27 @@ grep -q 'basedRepresentativeUniqueInClass' DASHI/Physics/YangMills/BalabanSelect
 grep -q 'actualFlatGaugeAdjointBasedInvariant' DASHI/Physics/YangMills/BalabanSelectedFlatGaugeBasedSectionExact.agda
 grep -q 'basedSectionNotIdentityOnUnreducedCarrier' DASHI/Physics/YangMills/BalabanSelectedFlatGaugeSectionAsymmetryExact.agda
 grep -q 'unitConstantEquivalentToZeroBasedRepresentative' DASHI/Physics/YangMills/BalabanSelectedFlatGaugeSectionAsymmetryExact.agda
+grep -q 'selectedBasedGaugeStabilizerTrivial' DASHI/Physics/YangMills/BalabanBasedGaugeActionFreeExact.agda
+grep -q 'basedGaugeActionIsotropyTrivial' DASHI/Physics/YangMills/BalabanBasedGaugeActionFreeExact.agda
 grep -q 'actualFlatGaugeAdjointPointwiseExact' DASHI/Physics/YangMills/BalabanSelectedFlatGaugeAdjointGramFloorExact.agda
 grep -q 'actualFlatGaugeGramReducedFloor' DASHI/Physics/YangMills/BalabanSelectedFlatGaugeAdjointGramFloorExact.agda
 grep -q 'transposeFrobeniusBound' DASHI/Physics/YangMills/BalabanFiniteRectangularTransposeFrobeniusExact.agda
 grep -q 'gaugeAdjointDefectSelectedRadiusBound' DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeAdjointDefectExact.agda
 grep -q 'perturbedReducedFloor' DASHI/Physics/YangMills/BalabanFiniteReducedFloorPerturbationExact.agda
+grep -q 'finiteVectorQuarterFiveDifferenceUpper' DASHI/Physics/YangMills/BalabanFiniteRelativeFormPerturbationExact.agda
+grep -q 'finiteVectorQuarterFiveDifferenceLower' DASHI/Physics/YangMills/BalabanFiniteRelativeFormPerturbationExact.agda
 grep -q 'selectedBackgroundGaugeAdjointReducedFloor' DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeReducedFloorExact.agda
 grep -q 'selectedBackgroundGaugeReducedFloor = + 29 / 1024' DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeReducedFloorExact.agda
 grep -q 'multiplierMeanPythagoras' DASHI/Physics/YangMills/BalabanSelectedGaugeMeanDecompositionExact.agda
 grep -q 'centeredMultiplierReduced' DASHI/Physics/YangMills/BalabanSelectedGaugeMeanDecompositionExact.agda
 grep -q 'regularizedGaugeFloor = + 29 / 2048' DASHI/Physics/YangMills/BalabanSelectedBackgroundRegularizedGaugeFloorExact.agda
 grep -q 'selectedBackgroundRegularizedGaugeFloor' DASHI/Physics/YangMills/BalabanSelectedBackgroundRegularizedGaugeFloorExact.agda
+grep -q 'relativePerturbationCoefficient = + 31 / 64' DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeRelativeFormExact.agda
+grep -q 'selectedBackgroundGaugePerturbationRelativeFormBound' DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeRelativeFormExact.agda
+grep -q 'selectedBackgroundRegularizedGaugeRelativeFloor' DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeRelativeFormExact.agda
+grep -q 'selectedBackgroundRegularizedGaugeFloorThirtyThreeOver1024' DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeRelativeFormExact.agda
+grep -q 'relativePerturbationSlack = + 33 / 64' DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeRelativeSmallnessExact.agda
+grep -q 'selectedBackgroundBasedGaugePerturbationSmall' DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeRelativeSmallnessExact.agda
 grep -q 'regularizedFlatGaugeGreenLeftInverse' DASHI/Physics/YangMills/BalabanSelectedFlatGaugeRegularizedGreenExact.agda
 grep -q 'regularizedFlatGaugeGreenRightInverse' DASHI/Physics/YangMills/BalabanSelectedFlatGaugeRegularizedGreenExact.agda
 grep -q 'selectedBackgroundBasedGaugeOperatorDecomposition' DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeOperatorDecompositionExact.agda
@@ -81,6 +95,12 @@ grep -q 'vacuumOrthogonalRecoveryTransfersUniformGap' DASHI/Physics/YangMills/Ba
 grep -q '10.1007/BF01646473' DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugePerturbationFiniteRangeExact.agda
 grep -q '10.1007/BF01466594' DASHI/Physics/YangMills/BalabanSelectedGaugeStabilizerStratificationExact.agda
 grep -q '10.1007/978-3-319-13467-3' DASHI/Physics/YangMills/BalabanSelectedFlatGaugeSectionAsymmetryExact.agda
+grep -q '10.1007/BF01466594' DASHI/Physics/YangMills/BalabanBasedGaugeActionFreeExact.agda
+grep -q '10.1007/978-3-319-13467-3' DASHI/Physics/YangMills/BalabanBasedGaugeActionFreeExact.agda
+grep -q '10.1007/978-3-642-66282-9' DASHI/Physics/YangMills/BalabanFiniteRelativeFormPerturbationExact.agda
+grep -q '10.1017/CBO9781139020411' DASHI/Physics/YangMills/BalabanFiniteRelativeFormPerturbationExact.agda
+grep -q '10.1007/BF01240355' DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeRelativeFormExact.agda
+grep -q '10.1007/978-3-642-66282-9' DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeRelativeSmallnessExact.agda
 grep -q '10.1007/BF01240355' DASHI/Physics/YangMills/BalabanSelectedBackgroundRegularizedGaugeFloorExact.agda
 grep -q '10.1007/978-3-642-66282-9' DASHI/Physics/YangMills/BalabanSelectedBackgroundRegularizedGaugeFloorExact.agda
 grep -q '10.1007/BF01215223' DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeOperatorDecompositionExact.agda
