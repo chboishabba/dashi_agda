@@ -28,7 +28,7 @@ module DASHI.Physics.YangMills.BalabanSelectedFlatGaugeSectionAsymmetryExact whe
 -- stabilizer-stratification theorem explicitly forbid that shortcut.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; 1ℚ; _<_; _/_)
 import Data.Rational.Properties as ℚP
@@ -54,7 +54,7 @@ unitConstantBasedAtBaseZero =
 
 unitConstantAtBaseOne :
   unitConstantMultiplier (pair Coordinates.coordinateX Based.baseSite) ≡ 1ℚ
-unitConstantAtBaseOne = Agda.Builtin.Equality.refl
+unitConstantAtBaseOne = refl
 
 zeroLessOne : 0ℚ < 1ℚ
 zeroLessOne = toWitness {a? = 0ℚ <? 1ℚ} _
