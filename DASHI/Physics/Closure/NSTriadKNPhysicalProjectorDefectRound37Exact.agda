@@ -41,9 +41,9 @@ module DASHI.Physics.Closure.NSTriadKNPhysicalProjectorDefectRound37Exact where
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
-open import Data.Rational.Base using (ℚ; _*_)
+open import Data.Rational.Base using (ℚ; 1ℚ; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Physics.Closure.NSTriadKNRationalLerayProjectionExact as V
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
@@ -66,11 +66,74 @@ dotMeaning left right = refl
 
 toProjectorUnit :
   (vector : Gram.Vec3) →
-  Gram.normSquared vector ≡ Projector.one →
+  Gram.normSquared vector ≡ 1ℚ →
   Projector.UnitDirection
 toProjectorUnit vector unit =
   Projector.unit-direction
     (toProjectorVector vector)
     (trans (normMeaning vector) unit)
-  where
-  Projector.one = _
+
+leftProjectorDirection :
+  Gram.UnitDirectionPair → Projector.UnitDirection
+leftProjectorDirection pair =
+  toProjectorUnit (Gram.left pair) (Gram.leftUnit pair)
+
+rightProjectorDirection :
+  Gram.UnitDirectionPair → Projector.UnitDirection
+rightProjectorDirection pair =
+  toProjectorUnit (Gram.right pair) (Gram.rightUnit pair)
+
+projectorDefectForGramPair : Gram.UnitDirectionPair → ℚ
+projectorDefectForGramPair pair =
+  Projector.unitProjectorDefectSquared
+    (leftProjectorDirection pair)
+    (rightProjectorDirection pair)
+
+projectorDefectForGramPairExact : ∀ pair →
+  projectorDefectForGramPair pair
+  ≡ Projector.two * Gram.directionalDefect pair
+projectorDefectForGramPairExact pair =
+  trans
+    (Projector.unitProjectorDefectExact
+      (leftProjectorDirection pair)
+      (rightProjectorDirection pair))
+    (solve (Gram.dot (Gram.left pair) (Gram.right pair) ∷ []))
+
+amplitudeWeightedProjectorDefect :
+  Physical.PhysicalVorticityPair → ℚ
+amplitudeWeightedProjectorDefect pair =
+  L2.square (Physical.leftAmplitude pair)
+  * L2.square (Physical.rightAmplitude pair)
+  * projectorDefectForGramPair (Physical.directions pair)
+
+physicalProjectorDefectIdentity : ∀ pair →
+  amplitudeWeightedProjectorDefect pair
+  ≡
+  Projector.two
+    * Gram.crossNormSquared
+        (Physical.leftVorticity pair)
+        (Physical.rightVorticity pair)
+physicalProjectorDefectIdentity pair =
+  trans
+    (cong
+      (λ defect →
+        L2.square (Physical.leftAmplitude pair)
+        * L2.square (Physical.rightAmplitude pair)
+        * defect)
+      (projectorDefectForGramPairExact (Physical.directions pair)))
+    (trans
+      (solve
+        ( L2.square (Physical.leftAmplitude pair)
+        ∷ L2.square (Physical.rightAmplitude pair)
+        ∷ Gram.directionalDefect (Physical.directions pair)
+        ∷ []))
+      (cong
+        (Projector.two *_)
+        (sym (Physical.physicalDirectionalDefectIdentity pair))))
+
+physicalProjectorDefectBridgeClosed : Bool
+physicalProjectorDefectBridgeClosed = true
+
+physicalProjectorDefectBridgeClosedIsTrue :
+  physicalProjectorDefectBridgeClosed ≡ true
+physicalProjectorDefectBridgeClosedIsTrue = refl
