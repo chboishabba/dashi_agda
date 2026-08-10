@@ -19,12 +19,13 @@ module DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30E
 --     = -nu |k|^2 u(k)
 --       + sum_{p+q=k} -i P_k[(u(p) dot q)u(q)]
 --
--- from the repository's exhaustive physical output fibre.  Assuming only
--- that the input retained velocity is transverse, the diagonal viscous term,
--- the exhaustive projected nonlinear fold, and their sum are proved
--- transverse.  Mapping this coefficient over the literal retained mode list
--- constructs a `ReconstructedPhysicalState`; the nonzero-mode proof is
--- transported from the concrete Galerkin system rather than resupplied.
+-- from the repository's exhaustive physical output fibre.  The physical
+-- wrapper now carries the literal nonzero proof for every retained mode,
+-- rather than attempting to extract such a theorem from an uninhabited
+-- `zeroModeExcluded : Set` marker in the older audit carrier.  Assuming the
+-- retained velocity is transverse, the viscous term, projected nonlinear
+-- fold, and their sum are transverse.  Mapping the coefficient over the
+-- literal retained modes constructs a ReconstructedPhysicalState.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Level; lsuc)
@@ -48,8 +49,12 @@ record PhysicalFiniteComplex3GalerkinSystem
     {r : Level}
     (F : C3.RealField r) : Set (lsuc r) where
   field
-    finiteSystem : Audit.FiniteComplex3GalerkinSystem F
+    finiteSystem : Audit.FiniteComplex3GalerkinSystem F _ _
     viscosity : C3.Carrier F
+
+    retainedModeNonzero : ∀ mode →
+      mode Cube.∈ Audit.modes finiteSystem →
+      Z3.NonZeroMode mode
 
     retainedVelocityTransverse : ∀ mode →
       mode Cube.∈ Audit.modes finiteSystem →
@@ -134,7 +139,7 @@ literalViscousQuadraticCoefficientTransverse
     (literalViscousCoefficientTransverse physicalSystem mode member)
     (Nonlinear.projectedNonlinearityTransverseExact
       (finiteSystem physicalSystem) mode
-      (Audit.modeNonzero (finiteSystem physicalSystem) mode member))
+      (retainedModeNonzero physicalSystem mode member))
 
 literalTransverseCoefficient :
   ∀ {r} {F : C3.RealField r}
@@ -190,7 +195,7 @@ mappedCoefficientModeNonzero physicalSystem (mode ∷ rest)
     sourceIncluded coefficient (State.here coefficientExact) =
   subst Z3.NonZeroMode
     (sym (cong Phase.coefficientMode coefficientExact))
-    (Audit.modeNonzero (finiteSystem physicalSystem) mode
+    (retainedModeNonzero physicalSystem mode
       (sourceIncluded mode (Cube.here refl)))
 mappedCoefficientModeNonzero physicalSystem (mode ∷ rest)
     sourceIncluded coefficient (State.there member) =
