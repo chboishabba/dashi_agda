@@ -17,19 +17,17 @@ module DASHI.Physics.Closure.NSTriadKNFullTriadSelectionRuleRound36Exact where
 -- A genuinely active Fourier transition must simultaneously carry
 --
 --   1. exact momentum closure,
---   2. cutoff/retained-sector membership,
+--   2. exact cutoff-shell plus retained-sector membership,
 --   3. transversality,
 --   4. Fourier-reality compatibility,
 --   5. nonzero physical coupling.
 --
--- The retained-sector law supplies (1)-(2).  This module leaves the three
--- genuinely physical predicates abstract but requires their invariance under
--- the already-proved S3 relabelling and C2 reality action.  It then proves
--- that all twelve factored actions preserve the full five-part admissibility
--- package.  Stabilizers remain allowed.
---
--- This gives F4/HH-bad a typed active-transition subgraph without pretending
--- that momentum closure alone implies nonzero interaction strength.
+-- The first two are now carried by the repository's full
+-- `RetainedTriadMember`, not by the retained-sector Boolean alone.  The three
+-- genuinely physical predicates remain abstract but must be covariant under
+-- the already-proved S3 relabelling and C2 reality action.  The full
+-- admissibility package is transported under all twelve factored actions.
+-- Stabilizers remain allowed.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -85,7 +83,7 @@ record FullyAdmissibleTriadHyperedge
   constructor fully-admissible-triad-hyperedge
   field
     triad : Lattice.LatticeTriad
-    retained : Lattice.retained? sector triad ≡ true
+    retainedMember : Lattice.RetainedTriadMember cutoff sector triad
     transverse : Transverse law triad
     realityCompatible : RealityCompatible law triad
     nonzeroCoupling : NonzeroCoupling law triad
@@ -97,36 +95,34 @@ fullyAdmissibleMomentumClosure :
     (edge : FullyAdmissibleTriadHyperedge
       {cutoff = cutoff} {sector = sector} law) →
   Lattice.zeroSum? (triad edge) ≡ true
-fullyAdmissibleMomentumClosure {sector = sector} edge =
-  Lattice.zeroSumRequired sector (triad edge) (retained edge)
+fullyAdmissibleMomentumClosure edge =
+  Hyper.zeroSumFromMember (retainedMember edge)
 
-permutationRetained :
+permutationMember :
   ∀ {cutoff sector}
     (permutation : Action.PermutationAction6)
     (triad : Lattice.LatticeTriad) →
-  Lattice.retained? sector triad ≡ true →
-  Lattice.retained? sector (Action.applyPermutation permutation triad) ≡ true
-permutationRetained {cutoff} {sector} permutation triad retainedProof =
+  Lattice.RetainedTriadMember cutoff sector triad →
+  Lattice.RetainedTriadMember
+    cutoff sector (Action.applyPermutation permutation triad)
+permutationMember {cutoff} {sector} permutation triad member =
   let
     edge : Hyper.RetainedTriadHyperedge cutoff sector
-    edge = Hyper.retained-triad-hyperedge triad retainedProof
+    edge = Hyper.retained-triad-hyperedge triad member
 
     moved : Hyper.RetainedTriadHyperedge cutoff sector
     moved = Hyper.applyPermutationEdge permutation edge
   in
   subst
-    (λ selected → Lattice.retained? sector selected ≡ true)
+    (Lattice.RetainedTriadMember cutoff sector)
     (Hyper.applyPermutationEdgeTriadExact permutation edge)
-    (Hyper.retained moved)
+    (Hyper.retainedMember moved)
 
-realityRetained :
+realityMember :
   ∀ {cutoff sector} (triad : Lattice.LatticeTriad) →
-  Lattice.retained? sector triad ≡ true →
-  Lattice.retained? sector (Lattice.triadNeg triad) ≡ true
-realityRetained {sector = sector} triad retainedProof =
-  Hyper.retained
-    (Hyper.realityEdge
-      (Hyper.retained-triad-hyperedge triad retainedProof))
+  Lattice.RetainedTriadMember cutoff sector triad →
+  Lattice.RetainedTriadMember cutoff sector (Lattice.triadNeg triad)
+realityMember = Hyper.realityRetainedMember
 
 applyPermutationFullyAdmissible :
   ∀ {cutoff sector law} →
@@ -137,7 +133,7 @@ applyPermutationFullyAdmissible :
 applyPermutationFullyAdmissible {law = law} permutation edge =
   fully-admissible-triad-hyperedge
     (Action.applyPermutation permutation (triad edge))
-    (permutationRetained permutation (triad edge) (retained edge))
+    (permutationMember permutation (triad edge) (retainedMember edge))
     (transversePermutation law permutation (triad edge) (transverse edge))
     (realityPermutation law permutation (triad edge) (realityCompatible edge))
     (couplingPermutation law permutation (triad edge) (nonzeroCoupling edge))
@@ -150,7 +146,7 @@ applyRealityFullyAdmissible :
 applyRealityFullyAdmissible {law = law} edge =
   fully-admissible-triad-hyperedge
     (Lattice.triadNeg (triad edge))
-    (realityRetained (triad edge) (retained edge))
+    (realityMember (triad edge) (retainedMember edge))
     (transverseReality law (triad edge) (transverse edge))
     (realityReality law (triad edge) (realityCompatible edge))
     (couplingReality law (triad edge) (nonzeroCoupling edge))
@@ -168,15 +164,32 @@ applyFactoredFullyAdmissible permutation Action.reality edge =
   applyRealityFullyAdmissible
     (applyPermutationFullyAdmissible permutation edge)
 
-fullFivePartSelectionRuleClosed : Bool
-fullFivePartSelectionRuleClosed = true
+record FullFivePartSelectionClosure
+    (cutoff : Nat)
+    (sector : Lattice.ExactRetainedSectorLaw cutoff)
+    (law : FullPhysicalTriadSelectionLaw cutoff sector) : Set₁ where
+  field
+    factoredPreservesAdmissibility :
+      Action.PermutationAction6 →
+      Action.RealityAction2 →
+      FullyAdmissibleTriadHyperedge law →
+      FullyAdmissibleTriadHyperedge law
+
+    everyAdmissibleEdgeHasMomentumClosure :
+      (edge : FullyAdmissibleTriadHyperedge law) →
+      Lattice.zeroSum? (triad edge) ≡ true
+
+open FullFivePartSelectionClosure public
+
+canonicalFullFivePartSelectionClosure :
+  ∀ cutoff sector law → FullFivePartSelectionClosure cutoff sector law
+canonicalFullFivePartSelectionClosure cutoff sector law = record
+  { factoredPreservesAdmissibility = applyFactoredFullyAdmissible
+  ; everyAdmissibleEdgeHasMomentumClosure = fullyAdmissibleMomentumClosure
+  }
 
 physicalFullTriadSelectionLawConstructed : Bool
 physicalFullTriadSelectionLawConstructed = false
-
-fullFivePartSelectionRuleClosedIsTrue :
-  fullFivePartSelectionRuleClosed ≡ true
-fullFivePartSelectionRuleClosedIsTrue = refl
 
 physicalFullTriadSelectionLawConstructedIsFalse :
   physicalFullTriadSelectionLawConstructed ≡ false
