@@ -16,6 +16,7 @@ files=(
   DASHI/Physics/Closure/NSTriadKNPeriodicFourierStrainMultiplierRound34Exact.agda
   DASHI/Physics/Closure/NSTriadKNPeriodicFourierStrainL2Round34Exact.agda
   DASHI/Physics/Closure/NSTriadKNHHBadSummableDyadicGainRound34Exact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoCriticalDissipationHHBadBridgeRound34Exact.agda
   DASHI/Physics/Closure/NSTriadKNComCotlarDyadicEnvelopeRound34Exact.agda
   DASHI/Physics/Closure/NSTriadKNMurrayBishopGalerkinCoordinateSemanticsRound34Exact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFourierStrainHHBadRound34Validation.agda
@@ -51,6 +52,11 @@ checks=(
   'NSTriadKNHHBadSummableDyadicGainRound34Exact.agda:requiredGainPrefixClosedForm'
   'NSTriadKNHHBadSummableDyadicGainRound34Exact.agda:requiredGainPrefixPlusTail'
   'NSTriadKNHHBadSummableDyadicGainRound34Exact.agda:physicalHHBadGainProfileProduced = false'
+  'NSTriadKNLuoCriticalDissipationHHBadBridgeRound34Exact.agda:criticalTargetTimesRawRatio'
+  'NSTriadKNLuoCriticalDissipationHHBadBridgeRound34Exact.agda:criticalDissipationAbsorbsRawHHBadRatio'
+  'NSTriadKNLuoCriticalDissipationHHBadBridgeRound34Exact.agda:criticalDissipationControlsPhysicalHHBadGain'
+  'NSTriadKNLuoCriticalDissipationHHBadBridgeRound34Exact.agda:physicalLuoCriticalDissipationEstimateConstructed = false'
+  'NSTriadKNLuoCriticalDissipationHHBadBridgeRound34Exact.agda:physicalHHBadGainToLuoDissipationLinkConstructed = false'
   'NSTriadKNComCotlarDyadicEnvelopeRound34Exact.agda:cotlarSymmetricMassClosedForm'
   'NSTriadKNComCotlarDyadicEnvelopeRound34Exact.agda:directRadiusBudgetPlusTailExact'
   'NSTriadKNComCotlarDyadicEnvelopeRound34Exact.agda:rootEnvelopeSquaresToProductEnvelope'
@@ -73,6 +79,8 @@ grep -q '10.1007/BF01240221' \
   DASHI/Physics/Closure/NSTriadKNPeriodicFourierStrainMultiplierRound34Exact.agda
 grep -q '10.1007/s00021-019-0411-z' \
   DASHI/Physics/Closure/NSTriadKNHHBadSummableDyadicGainRound34Exact.agda
+grep -q '10.1007/s00021-019-0411-z' \
+  DASHI/Physics/Closure/NSTriadKNLuoCriticalDissipationHHBadBridgeRound34Exact.agda
 grep -q '10.1002/cpa.3160410704' \
   DASHI/Physics/Closure/NSTriadKNComCotlarDyadicEnvelopeRound34Exact.agda
 grep -q '10.1007/978-3-642-61667-9' \
