@@ -5,6 +5,7 @@ on:
     branches: ['agent/ssp15-j-stratified-quotient-multiresolution-round7']
   pull_request:
     branches:
+      - 'agent/ssp15-j-stratified-quotient-multiresolution-round7'
       - 'agent/ssp15-j-gluing-mathieu-interference-round6'
       - 'master'
     paths:
