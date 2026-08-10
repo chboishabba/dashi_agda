@@ -121,6 +121,15 @@ gaugePerturbationQuadratic background multiplier =
   backgroundRegularizedGaugeEnergy background multiplier
   - flatRegularizedGaugeEnergy multiplier
 
+flatPlusPerturbationExact : ∀ background multiplier →
+  flatRegularizedGaugeEnergy multiplier
+    + gaugePerturbationQuadratic background multiplier
+  ≡ backgroundRegularizedGaugeEnergy background multiplier
+flatPlusPerturbationExact background multiplier =
+  ℚRing.solve-∀
+    (flatRegularizedGaugeEnergy multiplier)
+    (backgroundRegularizedGaugeEnergy background multiplier)
+
 centeredForwardDifferenceExact :
   ∀ multiplier coordinate axis site →
   Periodic.forwardDifference axis
@@ -230,14 +239,20 @@ flatRegularizedGaugeFloorOneSixteenth multiplier =
 
     rightExact : rEnergy + cNorm ≡ flatRegularizedGaugeEnergy multiplier
     rightExact = sym (flatRegularizedMeanExact multiplier)
+
+    normalized :
+      LDL.oneSixteenth * rNorm + LDL.oneSixteenth * cNorm
+      ≤ flatRegularizedGaugeEnergy multiplier
+    normalized =
+      subst
+        (λ upper →
+          LDL.oneSixteenth * rNorm + LDL.oneSixteenth * cNorm ≤ upper)
+        rightExact combined
   in
   subst
     (λ lower → lower ≤ flatRegularizedGaugeEnergy multiplier)
-    leftExact
-    (subst
-      (λ upper →
-        LDL.oneSixteenth * rNorm + LDL.oneSixteenth * cNorm ≤ upper)
-      rightExact combined)
+    (sym leftExact)
+    normalized
 
 flatAdjointEnergyBelowRegularized : ∀ multiplier →
   KKT.stateNormSq (FlatAdjoint.actualFlatGaugeAdjoint multiplier)
@@ -476,7 +491,6 @@ selectedBackgroundRegularizedGaugeRelativeFloor :
 selectedBackgroundRegularizedGaugeRelativeFloor background radius multiplier =
   let
     q0 = flatRegularizedGaugeEnergy multiplier
-    qA = backgroundRegularizedGaugeEnergy background multiplier
     perturb = gaugePerturbationQuadratic background multiplier
     lower = selectedBackgroundGaugePerturbationRelativeFormLower
       background radius multiplier
@@ -489,16 +503,17 @@ selectedBackgroundRegularizedGaugeRelativeFloor background radius multiplier =
       ≡ relativeLowerCoefficient * q0
     leftExact = ℚRing.solve-∀ q0
 
-    rightExact : q0 + perturb ≡ qA
-    rightExact = ℚRing.solve-∀ q0 qA
+    normalized :
+      relativeLowerCoefficient * q0 ≤ q0 + perturb
+    normalized =
+      subst
+        (λ lowerValue → lowerValue ≤ q0 + perturb)
+        leftExact combined
   in
   subst
-    (λ lowerValue → lowerValue ≤ qA)
-    leftExact
-    (subst
-      (λ upperValue →
-        q0 + (- (relativePerturbationCoefficient * q0)) ≤ upperValue)
-      rightExact combined)
+    (λ upperValue → relativeLowerCoefficient * q0 ≤ upperValue)
+    (flatPlusPerturbationExact background multiplier)
+    normalized
 
 selectedBackgroundRegularizedGaugeRelativeUpper :
   ∀ background → Relaxed.RelaxedInverseLinkRadius background →
@@ -508,7 +523,6 @@ selectedBackgroundRegularizedGaugeRelativeUpper :
 selectedBackgroundRegularizedGaugeRelativeUpper background radius multiplier =
   let
     q0 = flatRegularizedGaugeEnergy multiplier
-    qA = backgroundRegularizedGaugeEnergy background multiplier
     perturb = gaugePerturbationQuadratic background multiplier
     upper = selectedBackgroundGaugePerturbationRelativeFormUpper
       background radius multiplier
@@ -516,20 +530,21 @@ selectedBackgroundRegularizedGaugeRelativeUpper background radius multiplier =
     combined : q0 + perturb ≤ q0 + relativePerturbationCoefficient * q0
     combined = ℚP.+-monoˡ-≤ q0 upper
 
-    leftExact : q0 + perturb ≡ qA
-    leftExact = ℚRing.solve-∀ q0 qA
-
     rightExact :
       q0 + relativePerturbationCoefficient * q0
       ≡ relativeUpperCoefficient * q0
     rightExact = ℚRing.solve-∀ q0
+
+    normalized : q0 + perturb ≤ relativeUpperCoefficient * q0
+    normalized =
+      subst
+        (λ upperValue → q0 + perturb ≤ upperValue)
+        rightExact combined
   in
   subst
     (λ lowerValue → lowerValue ≤ relativeUpperCoefficient * q0)
-    leftExact
-    (subst
-      (λ upperValue → q0 + perturb ≤ upperValue)
-      rightExact combined)
+    (flatPlusPerturbationExact background multiplier)
+    normalized
 
 selectedBackgroundRegularizedGaugeFloorThirtyThreeOver1024 :
   ∀ background → Relaxed.RelaxedInverseLinkRadius background →
