@@ -1,9 +1,10 @@
 module DASHI.Cognition.PNF.ProofRelevantFactorDerivations where
 
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
 
+open import DASHI.Cognition.PNF.ComplexityArithmetic
 open import DASHI.Cognition.PNF.NumericAuthority
 open import DASHI.Cognition.PNF.ProofRelevantIdentityFibres
 
@@ -27,6 +28,13 @@ record IdentitySubstitutionProof : Set where
     substitutionSourceObject : ObjectId
     substitutionTargetEntity : CanonicalEntity
     substitutionWitness : AdmittedIdentityWitness
+    sourceMatchesWitness :
+      substitutionSourceObject ≡
+        witnessSourceObject (admittedWitness substitutionWitness)
+    targetMatchesWitness :
+      canonicalEntityIdentity substitutionTargetEntity ≡
+        canonicalEntityIdentity
+          (witnessTargetEntity (admittedWitness substitutionWitness))
 
 open IdentitySubstitutionProof public
 
@@ -37,6 +45,13 @@ record WitnessedDerivedArgument : Set where
     derivedArgumentSourceObject : ObjectId
     derivedArgumentEntity : CanonicalEntity
     derivedArgumentProof : AdmittedIdentityWitness
+    derivedSourceMatchesProof :
+      derivedArgumentSourceObject ≡
+        witnessSourceObject (admittedWitness derivedArgumentProof)
+    derivedEntityMatchesProof :
+      canonicalEntityIdentity derivedArgumentEntity ≡
+        canonicalEntityIdentity
+          (witnessTargetEntity (admittedWitness derivedArgumentProof))
 
 open WitnessedDerivedArgument public
 
@@ -53,13 +68,33 @@ open IdentitySubstitutionDerivation public
 
 ------------------------------------------------------------------------
 -- Shared objects or shared admitted entity fibres establish only structural
--- composability.  A composition candidate has no constructor for semantic
--- proposition admission.  An explicit domain rule is a separate authority.
+-- composability.  Distinct local objects may bridge through identity only when
+-- accepted witnesses land on the same entity at the same authority class.
 ------------------------------------------------------------------------
+
+record WitnessedEntityBridge : Set where
+  constructor witnessedEntityBridgeProof
+  field
+    bridgeEntity : CanonicalEntity
+    leftIdentityWitness : AdmittedIdentityWitness
+    rightIdentityWitness : AdmittedIdentityWitness
+    leftTargetsBridge :
+      canonicalEntityIdentity
+        (witnessTargetEntity (admittedWitness leftIdentityWitness))
+        ≡ canonicalEntityIdentity bridgeEntity
+    rightTargetsBridge :
+      canonicalEntityIdentity
+        (witnessTargetEntity (admittedWitness rightIdentityWitness))
+        ≡ canonicalEntityIdentity bridgeEntity
+    sameIdentityAuthority :
+      witnessAuthority (admittedWitness leftIdentityWitness)
+        ≡ witnessAuthority (admittedWitness rightIdentityWitness)
+
+open WitnessedEntityBridge public
 
 data CompositionBridge : Set where
   localObjectBridge : ObjectId → CompositionBridge
-  witnessedEntityBridge : CanonicalEntity → AdmittedIdentityWitness → CompositionBridge
+  witnessedEntityBridge : WitnessedEntityBridge → CompositionBridge
 
 record FactorCompositionCandidate : Set where
   constructor factorCompositionCandidate
@@ -69,6 +104,7 @@ record FactorCompositionCandidate : Set where
     leftBridgeRole rightBridgeRole : Nat
     bridge : CompositionBridge
     candidateRank candidateLimit : Nat
+    candidateRespectsBound : candidateRank ≤ᶜ candidateLimit
 
 open FactorCompositionCandidate public
 
