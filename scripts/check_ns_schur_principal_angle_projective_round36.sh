@@ -15,6 +15,7 @@ files=(
   DASHI/Physics/Closure/NSTriadKNShellBudgetProjectiveLedgerRound36Exact.agda
   DASHI/Physics/Closure/NSTriadKNNineOwnerRobustReservePolytopeRound36Exact.agda
   DASHI/Physics/Closure/NSTriadKNTriadSelectionRuleHypergraphRound36Exact.agda
+  DASHI/Physics/Closure/NSTriadKNFullTriadSelectionRuleRound36Exact.agda
   DASHI/Physics/Closure/NSTriadKNBishopSetoidCoordinateGluingRound36Exact.agda
   DASHI/Physics/Closure/NSTriadKNSchurPrincipalAngleProjectiveRound36Validation.agda
 )
@@ -50,12 +51,19 @@ checks=(
   'NSTriadKNShellBudgetProjectiveLedgerRound36Exact.agda:shellCutoffLimitPreservesOwnerLedgerConstructed = false'
   'NSTriadKNNineOwnerRobustReservePolytopeRound36Exact.agda:etaTotalBelowEnvelope'
   'NSTriadKNNineOwnerRobustReservePolytopeRound36Exact.agda:robustActualEtaTotalStrict'
+  'NSTriadKNNineOwnerRobustReservePolytopeRound36Exact.agda:UniformPositiveReserve'
+  'NSTriadKNNineOwnerRobustReservePolytopeRound36Exact.agda:CriticalReserveWitness'
+  'NSTriadKNNineOwnerRobustReservePolytopeRound36Exact.agda:ReserveGeometry'
   'NSTriadKNNineOwnerRobustReservePolytopeRound36Exact.agda:RobustNineOwnerBudgetPolytope'
   'NSTriadKNNineOwnerRobustReservePolytopeRound36Exact.agda:physicalRobustNineOwnerBudgetPolytopeConstructed = false'
   'NSTriadKNTriadSelectionRuleHypergraphRound36Exact.agda:retainedEdgeMomentumClosure'
   'NSTriadKNTriadSelectionRuleHypergraphRound36Exact.agda:applyFactoredEdge'
   'NSTriadKNTriadSelectionRuleHypergraphRound36Exact.agda:factoredActionPreservesMomentumClosure'
   'NSTriadKNTriadSelectionRuleHypergraphRound36Exact.agda:physicalCouplingSelectionLawConstructed = false'
+  'NSTriadKNFullTriadSelectionRuleRound36Exact.agda:FullPhysicalTriadSelectionLaw'
+  'NSTriadKNFullTriadSelectionRuleRound36Exact.agda:fullyAdmissibleMomentumClosure'
+  'NSTriadKNFullTriadSelectionRuleRound36Exact.agda:applyFactoredFullyAdmissible'
+  'NSTriadKNFullTriadSelectionRuleRound36Exact.agda:physicalFullTriadSelectionLawConstructed = false'
   'NSTriadKNBishopSetoidCoordinateGluingRound36Exact.agda:BishopAssignmentsEquivalent'
   'NSTriadKNBishopSetoidCoordinateGluingRound36Exact.agda:BishopPhysicalCoordinateEquivalence'
   'NSTriadKNBishopSetoidCoordinateGluingRound36Exact.agda:bishopForwardVectorFieldSquare'
@@ -78,6 +86,7 @@ grep -q '10.1002/cpa.3160410704' DASHI/Physics/Closure/NSTriadKNComCoarseFineNat
 grep -q '10.1007/978-3-642-16830-7' DASHI/Physics/Closure/NSTriadKNShellBudgetProjectiveLedgerRound36Exact.agda
 grep -q '10.1007/s00021-019-0411-z' DASHI/Physics/Closure/NSTriadKNNineOwnerRobustReservePolytopeRound36Exact.agda
 grep -q '10.7208/chicago/9780226115498.001.0001' DASHI/Physics/Closure/NSTriadKNTriadSelectionRuleHypergraphRound36Exact.agda
+grep -q '10.7208/chicago/9780226115498.001.0001' DASHI/Physics/Closure/NSTriadKNFullTriadSelectionRuleRound36Exact.agda
 grep -q '10.1007/978-3-642-61667-9' DASHI/Physics/Closure/NSTriadKNBishopSetoidCoordinateGluingRound36Exact.agda
 grep -q '10.48550/arXiv.2205.08354' DASHI/Physics/Closure/NSTriadKNBishopSetoidCoordinateGluingRound36Exact.agda
 
@@ -87,6 +96,7 @@ grep -q 'coarse/fine naturality defect' "$doc"
 grep -q 'projective ledger' "$doc"
 grep -q 'region, not a point' "$doc"
 grep -q 'proof-bearing hypergraph' "$doc"
+grep -q 'five-part' "$doc"
 grep -q 'Bishop-real setoid' "$doc"
 
 scripts/run_agda29_parallel_check.sh \
