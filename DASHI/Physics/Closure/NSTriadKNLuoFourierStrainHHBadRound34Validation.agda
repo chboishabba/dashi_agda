@@ -22,6 +22,7 @@ import DASHI.Physics.Closure.NSTriadKNPeriodicFourierStrainL2Round34Exact as Str
 import DASHI.Physics.Closure.NSTriadKNHHBadSummableDyadicGainRound34Exact as HHBad
 import DASHI.Physics.Closure.NSTriadKNLuoCriticalDissipationHHBadBridgeRound34Exact as LuoHHBad
 import DASHI.Physics.Closure.NSTriadKNComCotlarDyadicEnvelopeRound34Exact as Com
+import DASHI.Physics.Closure.NSTriadKNLuoSixThreeComCotlarBridgeRound34Exact as SixThreeCom
 import DASHI.Physics.Closure.NSTriadKNMurrayBishopGalerkinCoordinateSemanticsRound34Exact as Bishop
 
 open import Agda.Builtin.Bool using (true; false)
@@ -121,6 +122,16 @@ physicalComDecayStillOpenRegression :
   Com.physicalTwoSidedComPairDecayConstructed ≡ false
 physicalComDecayStillOpenRegression =
   Com.physicalTwoSidedComPairDecayConstructedIsFalse
+
+sixThreeCotlarCandidateRegression :
+  SixThreeCom.sixThreeScalarCotlarCandidateClosed ≡ true
+sixThreeCotlarCandidateRegression =
+  SixThreeCom.sixThreeScalarCotlarCandidateClosedIsTrue
+
+sixThreeOperatorRealisationStillOpenRegression :
+  SixThreeCom.sixThreePhysicalOperatorPairDecayConstructed ≡ false
+sixThreeOperatorRealisationStillOpenRegression =
+  SixThreeCom.sixThreePhysicalOperatorPairDecayConstructedIsFalse
 
 bishopCoordinateSemanticsRegression :
   Bishop.murrayBishopGalerkinPolynomialSemanticsClosed ≡ true
