@@ -60,10 +60,13 @@ open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using (pair)
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as FiniteL2
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreCarrier as Block
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
+import DASHI.Physics.YangMills.BalabanPath4AxisAverageExact as Path4
 import DASHI.Physics.YangMills.BalabanP33FiniteWeightedSchurSquaredExact as Schur
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
+import DASHI.Physics.YangMills.BalabanFiniteRectangularRationalExact as Rect
 import DASHI.Physics.YangMills.BalabanP33FiniteKKTAdmissibleProjectorExact as KKT
 import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Coordinates
+import DASHI.Physics.YangMills.BalabanP33PhysicalRationalWilsonPlaquetteJetExact as Physical
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundGaugeConstraintMatrixExact as GaugeMatrix
 import DASHI.Physics.YangMills.BalabanSelectedFlatGaugeAdjointGramFloorExact as FlatAdjoint
 import DASHI.Physics.YangMills.BalabanSelectedFlatGaugeReducedFloorExact as FlatFloor
@@ -190,7 +193,7 @@ backgroundAdjointMeanSplit background multiplier selected =
 
 backgroundAdjointMeanNormExact : ∀ background multiplier →
   KKT.stateNormSq
-    (KKT.stateVectorAdd
+    (Rect.vectorAdd
       (BackgroundFloor.backgroundGaugeAdjoint
         background (Mean.centeredMultiplier multiplier))
       (BackgroundFloor.backgroundGaugeAdjoint
@@ -224,11 +227,11 @@ centeredBackgroundAdjointLower background radius multiplier =
     background radius (centeredSelected multiplier)
 
 fieldNormNonnegative : ∀ field →
-  0ℚ ≤ Sums.sumRational (Block.physicalBlockSites Block.side4)
+  0ℚ ≤ Sums.sumRational (Block.physicalBlockSites Path4.side4)
     (λ site → field site * field site)
 fieldNormNonnegative field =
   Schur.sumNonnegative
-    (Block.physicalBlockSites Block.side4)
+    (Block.physicalBlockSites Path4.side4)
     (λ site → field site * field site)
     (λ site → FiniteL2.squareNonnegative (field site))
 
@@ -268,7 +271,7 @@ backgroundAdjointNormFromMeanPerturbation background multiplier =
   ℚP.≤-trans raw
     (subst
       (λ upper →
-        KKT.stateNormSq (KKT.stateVectorAdd centeredAdjoint constantAdjoint)
+        KKT.stateNormSq (Rect.vectorAdd centeredAdjoint constantAdjoint)
         ≤ upper)
       (sym (backgroundAdjointMeanNormExact background multiplier))
       ℚP.≤-refl)
@@ -337,13 +340,18 @@ preRegularizedLower background radius multiplier =
 constantCoefficientUpper : ℚ
 constantCoefficientUpper = (+ 1 / 1) - constantDefectCoefficient
 
+constantCoefficientDifferenceExact :
+  constantCoefficientUpper - regularizedGaugeFloor
+  ≡ + 2013 / 2048
+constantCoefficientDifferenceExact = ℚRing.solve []
+
 regularizedBelowConstantCoefficient :
   regularizedGaugeFloor ≤ constantCoefficientUpper
 regularizedBelowConstantCoefficient =
   Norm.nonnegativeDifferenceImpliesBelow
     (subst
       (λ difference → 0ℚ ≤ difference)
-      (sym (ℚRing.solve []))
+      (sym constantCoefficientDifferenceExact)
       (ℚP.nonNegative⁻¹ (+ 2013 / 2048)))
 
 regularizedConstantPartComparison : ∀ multiplier →
@@ -354,17 +362,26 @@ regularizedConstantPartComparison : ∀ multiplier →
 regularizedConstantPartComparison multiplier =
   let
     cNorm = FlatFloor.gaugeMultiplierNormSq (Mean.constantProjection multiplier)
+    scaled :
+      cNorm * regularizedGaugeFloor ≤ cNorm * constantCoefficientUpper
     scaled = Norm.scaleNonnegative cNorm
       (gaugeMultiplierNormNonnegative (Mean.constantProjection multiplier))
       regularizedBelowConstantCoefficient
+
+    leftCommute :
+      regularizedGaugeFloor * cNorm ≡ cNorm * regularizedGaugeFloor
+    leftCommute = ℚRing.solve-∀ cNorm
+
+    rightCommute :
+      cNorm * constantCoefficientUpper ≡ constantCoefficientUpper * cNorm
+    rightCommute = ℚRing.solve-∀ cNorm
   in
   subst
-    (λ lower →
-      lower ≤ constantCoefficientUpper * cNorm)
-    (ℚRing.solve-∀ cNorm)
+    (λ upper → regularizedGaugeFloor * cNorm ≤ upper)
+    rightCommute
     (subst
-      (λ upper → cNorm * regularizedGaugeFloor ≤ upper)
-      (ℚRing.solve-∀ cNorm)
+      (λ lower → lower ≤ cNorm * constantCoefficientUpper)
+      (sym leftCommute)
       scaled)
 
 regularizedGaugeEnergy :
@@ -373,16 +390,12 @@ regularizedGaugeEnergy background multiplier =
   KKT.stateNormSq
     (BackgroundFloor.backgroundGaugeAdjoint background multiplier)
   + FlatFloor.gaugeMultiplierNormSq (Mean.constantProjection multiplier)
-  where
-  import DASHI.Physics.YangMills.BalabanP33PhysicalRationalWilsonPlaquetteJetExact as Physical
 
 selectedBackgroundRegularizedGaugeFloor :
   ∀ background → Relaxed.RelaxedInverseLinkRadius background →
   ∀ multiplier →
   regularizedGaugeFloor * FlatFloor.gaugeMultiplierNormSq multiplier
-  ≤ KKT.stateNormSq
-      (BackgroundFloor.backgroundGaugeAdjoint background multiplier)
-    + FlatFloor.gaugeMultiplierNormSq (Mean.constantProjection multiplier)
+  ≤ regularizedGaugeEnergy background multiplier
 selectedBackgroundRegularizedGaugeFloor background radius multiplier =
   let
     rNorm = FlatFloor.gaugeMultiplierNormSq (Mean.centeredMultiplier multiplier)
@@ -430,7 +443,7 @@ selectedBackgroundRegularizedGaugeFloor background radius multiplier =
         (ℚRing.solve-∀ rNorm cNorm)
   in
   subst
-    (λ lower → lower ≤ fullEnergy + cNorm)
+    (λ lower → lower ≤ regularizedGaugeEnergy background multiplier)
     (sym splitLower)
     (ℚP.≤-trans coefficientCompare normalizedAdd)
 
