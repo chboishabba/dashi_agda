@@ -32,16 +32,19 @@ module DASHI.Physics.YangMills.BalabanSelectedBackgroundGaugeGramPerturbationTwo
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Data.Rational.Base as ℚ using (ℚ; _+_; _*_; _≤_)
+open import Data.Rational.Base as ℚ using (ℚ; _+_; _*_; _≤_; ∣_∣)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
 import DASHI.Physics.YangMills.BalabanP33PhysicalRationalWilsonPlaquetteJetExact as Physical
 import DASHI.Physics.YangMills.BalabanP33PhysicalBackgroundGaugeParameterizedYoungExact as Relaxed
 import DASHI.Physics.YangMills.BalabanFiniteRectangularAbsoluteMassExact as RowMass
 import DASHI.Physics.YangMills.BalabanFiniteRectangularAbsoluteColumnMassExact as ColumnMass
+import DASHI.Physics.YangMills.BalabanSelectedFlatGaugeAdjointGramFloorExact as Flat
+import DASHI.Physics.YangMills.BalabanSelectedBackgroundGaugeAdjointDefectExact as Defect
 import DASHI.Physics.YangMills.BalabanSelectedFlatGaugeConstraintAbsoluteMassExact as FlatMass
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundGaugeDefectAbsoluteMassExact as DefectMass
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundGaugePerturbationFiniteRangeExact as Perturbation
@@ -54,9 +57,9 @@ thirdColumnTermBound = + 9 / 65536
 
 gaugeRows = DefectMass.gaugeRows
 physicalColumns = DefectMass.physicalColumns
-flatMatrix = FlatMass.Flat.identityGaugeConstraintMatrix
+flatMatrix = Flat.identityGaugeConstraintMatrix
 
-defectMatrix background = DefectMass.Defect.gaugeDefectMatrix background
+defectMatrix background = Defect.gaugeDefectMatrix background
 
 firstPerturbationTermColumnMassBound :
   ∀ background → Relaxed.RelaxedInverseLinkRadius background →
@@ -205,8 +208,7 @@ selectedGaugeGramPerturbationAbsoluteColumnMassBound background radius column =
       ≡ ColumnMass.squareColumnMass gaugeRows
         (PerturbationMass.explicitThreeTermPerturbation background) column
     identify =
-      DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact.sumRationalCong
-        gaugeRows _ _
+      Sums.sumRationalCong gaugeRows _ _
         (λ row → cong ∣_∣
           (PerturbationMass.gaugeGramPerturbationThreeTermExact
             background row column))
