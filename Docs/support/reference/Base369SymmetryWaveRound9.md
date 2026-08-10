@@ -30,7 +30,7 @@ Depth6 = Horizon3 x Horizon3
 Depth9 = Depth6 x Horizon3
 ```
 
-with projection-after-extension theorems.  Refining from 3 to 6 or from 6 to 9 retains the earlier state.
+with projection-after-extension theorems. Refining from 3 to 6 or from 6 to 9 retains the earlier state.
 
 The same module constructs a literal attractive-dead-end witness:
 
@@ -58,7 +58,7 @@ CoarseFine11 Coarse Fine = one coarse value + ten fine values
 
 and the coordinate count is proved equal to 11.
 
-Inside the coarse semantic channel, `NominalActual A` may independently distinguish declared and realised state.  A concrete witness has
+Inside the coarse semantic channel, `NominalActual A` may independently distinguish declared and realised state. A concrete witness has
 
 ```text
 nominal coarse = positive
@@ -68,19 +68,32 @@ all fine slots = adverse.
 
 Therefore the `1+10` resolution decomposition and the `declared/actual` two-channel distinction coexist without being identified.
 
-## 4. Depth-wise addresses and exact local-versus-propagated symmetry
+## 4. Depth-wise addresses and finite ultrametric geometry
 
-`Base369AddressSymmetryAndBranchGeometryExact.agda` retains the dependent address-transport and operator/propagation equivariance interfaces and adds an exact finite prefix-depth function for ternary trajectories.
-
-For every finite ternary path `a`,
+`Base369AddressSymmetryAndBranchGeometryExact.agda` retains dependent address transport and operator/propagation equivariance and adds an exact finite prefix-depth function for ternary trajectories. For every finite ternary path `a`,
 
 ```text
 sharedPrefixDepth a a = depth(a).
 ```
 
-This is the discrete exponent needed for the usual 3-adic-style statement that longer common prefixes represent finer address agreement.  Round 9 does **not** claim a completed p-adic field or a real-valued metric implementation.
+`Base369PrefixUltrametricExact.agda` then formalises the stronger threshold relation
 
-The module also constructs a local swap-equivariant operator and a context-sensitive propagation for which the corresponding propagated square provably fails to commute.  Local symmetry therefore does not erase authority/capacity/context asymmetry.
+```text
+PrefixAgree k x y
+```
+
+meaning that two addresses share their first `k` trits. It proves:
+
+```text
+full-depth reflexivity
+symmetry
+PrefixAgree k x y -> PrefixAgree k y z -> PrefixAgree k x z
+agreement at k+1 -> agreement at k
+```
+
+The third theorem is the exact finite non-Archimedean/ultrametric threshold law: a fixed-depth prefix ball is an equivalence class. This is the discrete structure underlying the usual `3^{-k}` prefix-distance intuition without fabricating a real-valued metric or a completed p-adic field.
+
+The address-symmetry module also constructs a local swap-equivariant operator and context-sensitive propagation for which the corresponding propagated square provably fails to commute. Local symmetry therefore does not erase authority/capacity/context asymmetry.
 
 ## 5. Tree, DAG and braid are distinct projections
 
@@ -122,7 +135,7 @@ boundary state
 
 and an indexed exact stepwise correspondence.
 
-A computable discrepancy sums mismatches across these fibres.  The file constructs two one-step trajectories whose bare trit projections are identical while their enhanced discrepancy is exactly 1 because servicing cost differs.
+A computable discrepancy sums mismatches across these fibres. The file constructs two one-step trajectories whose bare trit projections are identical while their enhanced discrepancy is exactly 1 because servicing cost differs.
 
 Thus
 
@@ -143,9 +156,9 @@ The module also gives a time-local quotient example: two nominal histories occup
 `Base369ProcessBranchAttractorExact.agda` now contains a concrete duplicate-branch quotient:
 
 ```text
-nominal branches     = 2
+nominal branches      = 2
 effective orbit count = 1
-operational copies    = 2.
+operational copies     = 2
 ```
 
 This formalises the distinction between dynamical redundancy and operational redundancy.
@@ -157,9 +170,9 @@ gain = attractor + information + independent robustness + constructive interacti
 loss = servicing + diversion + interference + redundancy
 ```
 
-where a positive branch-addition certificate carries an exact natural-number slack.  The concrete example has total gain 7, total loss 3, and strict slack 4 expressed as `suc 3`.
+where a positive branch-addition certificate carries an exact natural-number slack. The concrete example has total gain 7, total loss 3, and strict slack 4 expressed as `suc 3`.
 
-A second witness fits within finite servicing capacity while an aligned and an adverse direction cancel to the neutral trit.  Therefore capacity sufficiency alone does not entail attractor progress.
+A second witness fits within finite servicing capacity while an aligned and an adverse direction cancel to the neutral trit. Therefore capacity sufficiency alone does not entail attractor progress.
 
 ## 8. Continuous and wave-valued carriers are preserved, not discretised away
 
@@ -170,7 +183,7 @@ SymbolicCoding Carrier
 EncodedState coding
 ```
 
-where an encoded state stores both the exact carrier state and its SSP-trit observer value.  The theorem
+where an encoded state stores both the exact carrier state and its SSP-trit observer value. The theorem
 
 ```text
 decode (encode coding x) = x
@@ -196,13 +209,13 @@ It also gives a structural coarse/fine witness with positive coarse observation 
 - Jean-Pierre Serre, **A Course in Arithmetic**, Graduate Texts in Mathematics 7, Springer. DOI: `10.1007/978-1-4684-9884-4`.
 - Ingrid Daubechies, **Ten Lectures on Wavelets**, CBMS-NSF Regional Conference Series in Applied Mathematics 61, SIAM, 1992. DOI: `10.1137/1.9781611970104`.
 
-The sources support the standard braid, p-adic and wavelet background.  The Base369 synthesis and its typed interfaces are repository-original constructions.
+The sources support the standard braid, p-adic and wavelet background. The Base369 synthesis and its typed interfaces are repository-original constructions.
 
 ## Explicit non-promotions
 
 Round 9 does not claim that:
 
-- the discrete prefix exponent is itself a completed 3-adic analytic theory;
+- the finite prefix relation is itself a completed 3-adic analytic theory;
 - the finite discrepancy is the real-valued exponential similarity kernel;
 - a ternary symbolic coding makes an arbitrary payload discrete;
 - a tree, DAG or braid is the unique global ontology;
