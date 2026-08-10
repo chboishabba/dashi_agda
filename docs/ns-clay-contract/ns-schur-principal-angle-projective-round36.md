@@ -139,13 +139,15 @@ The branch proves automatically
 sum_i eta_i <= sum_i u_i < 1.
 ```
 
-and specializes the construction to the repository's literal `NineOwnerEstimateFamily`. The abstract feasible-region layer now also distinguishes the three outcomes suggested by the continuation analysis: `robustlyPositive` when a uniform strict envelope lies below one, `critical` when a feasible point has total exactly one, and `infeasible` when no point satisfies the producer constraints. This is the proof-theoretic version of optimizing the residual viscosity reserve without pretending an infimum or numerical optimizer has already been constructed.
+and specializes the construction to the repository's literal `NineOwnerEstimateFamily`. The abstract feasible-region layer also distinguishes the three outcomes suggested by the continuation analysis: `robustlyPositive` when a uniform strict envelope lies below one, `critical` when a feasible point has total exactly one, and `infeasible` when no point satisfies the producer constraints. This is the proof-theoretic version of optimizing the residual viscosity reserve without pretending an infimum or numerical optimizer has already been constructed.
 
-## Triad selection rules are a proof-bearing hypergraph
+## Triad selection rules are a cutoff-complete proof-bearing hypergraph
 
-A retained triad is now an actual hyperedge carrying membership in the existing `ExactRetainedSectorLaw`. Every edge therefore has exact zero momentum. The Round-35 `S3 x C2(reality)` action is lifted to hyperedges, and all twelve factored actions preserve retention and momentum closure while allowing stabilizers.
+A retained triad edge now carries the repository's full `RetainedTriadMember`, not merely a sector Boolean. This includes exact-shell membership for the left, right, and output modes, exact zero momentum, and retained-sector membership. Consequently a zero-sum triad outside the fixed cutoff cannot be admitted.
 
-The follow-on `FullPhysicalTriadSelectionLaw` packages the full five-part active-transition test from the analysis: exact momentum closure, retained cutoff membership, transversality, Fourier-reality compatibility, and nonzero physical coupling. The last three remain genuine physical predicates, but their permutation/reality covariance is explicit, and `applyFactoredFullyAdmissible` proves that all twelve factored actions preserve the complete admissibility package. Thus F4/HH-bad can later count or weight genuinely active transition orbits rather than every nominal shell pair.
+Round 35's `S3 x C2(reality)` action is lifted to those full members. Cycle and swap transport the three shell witnesses by permutation. Round 36 additionally proves `inExactShellNeg`, so Fourier reality transports shell membership as well as the sector predicate. `RetainedHypergraphActionClosure` is inhabited closure evidence for all twelve factored actions; there is no direct `Bool=true` theorem receipt.
+
+The follow-on `FullPhysicalTriadSelectionLaw` packages the full five-part active-transition test: exact momentum closure, exact cutoff/retained membership, transversality, Fourier-reality compatibility, and nonzero physical coupling. The last three remain genuine physical predicates, but their permutation/reality covariance is explicit. `FullFivePartSelectionClosure` proves that all twelve factored actions preserve the complete package. Thus F4/HH-bad can later count or weight genuinely active transition orbits rather than every nominal shell pair.
 
 ## F2: the complete-real coordinate seam is now typed correctly
 
@@ -162,8 +164,14 @@ F_phys(decode coordinates)
 
 This removes the rational/completeness type mismatch without quotienting constructive-real equality by an unsafe axiom. The actual Fourier-state/Bishop-assignment codec and real Picard--Lindelof authority remain physical/analytic producers.
 
+## Validation hardening
+
+The Round-36 checker first executes the repaired Round-35 checker. It rejects holes, postulates, unsafe termination/positivity escapes, `funext`, `Properties.WithK`, `unique⇒irrelevant`, and module-local `--with-K`. Its cumulative Agda invocation goes through `scripts/agda29_without_k_wrapper.sh`, which supplies the global `--without-K` option to the same pinned Agda binary used by the repository checker.
+
+The proof markers for the selection-rule tranche now require the actual shell-negation theorem, full `RetainedTriadMember` fields, and inhabited closure records. The unresolved physical producer markers remain false.
+
 ## Exact frontier after this round
 
-The most informative new decision is negative and now quantitative: the mode-principal-angle HH-good route is blocked by a uniform `7/16` two-channel Gram-energy floor, not merely by one exceptional orthogonal pair. The two live HH-bad inverse-scale mechanisms are explicit and mutually checkable: one-derivative Schur elimination or a dissipative bad-stratum floor. `Com` is reduced to the literal operator realization of an exact increment/naturality defect. The finite shell and owner-budget limits now have coherent algebraic carriers; the nine-owner region has a robust/critical/infeasible classification; the active triad subgraph carries all five physical selection requirements; and the finite-flow lane has a type-correct Bishop-real setoid seam rather than a rational surrogate.
+The most informative new decision is negative and now quantitative: the mode-principal-angle HH-good route is blocked by a uniform `7/16` two-channel Gram-energy floor, not merely by one exceptional orthogonal pair. The two live HH-bad inverse-scale mechanisms are explicit and mutually checkable: one-derivative Schur elimination or a dissipative bad-stratum floor. `Com` is reduced to the literal operator realization of an exact increment/naturality defect. The finite shell and owner-budget limits now have coherent algebraic carriers; the nine-owner region has a robust/critical/infeasible classification; the active triad subgraph is cutoff-complete and carries all five physical selection requirements; and the finite-flow lane has a type-correct Bishop-real setoid seam rather than a rational surrogate.
 
-None of these results is promoted to unconditional Navier–Stokes regularity. The physical PDE producers, actual Bishop-state coordinate codec, real Picard--Lindelof instance, actual transversality/reality/nonzero-coupling selection predicates, nine actual owner estimates, cutoff limits, compactness and continuation remain required.
+None of these results is promoted to unconditional Navier--Stokes regularity. The physical PDE producers, actual Bishop-state coordinate codec, real Picard--Lindelof instance, actual transversality/reality/nonzero-coupling selection predicates, nine actual owner estimates, cutoff limits, compactness and continuation remain required.
