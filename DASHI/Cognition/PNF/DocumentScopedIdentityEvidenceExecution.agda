@@ -30,8 +30,13 @@ data AnchorRoute : ExactSupportAvailability → Set where
   exactTokenSupportRoute : AnchorRoute exactSupportPresent
   spanFallbackRoute : AnchorRoute exactSupportAbsent
 
-fallbackWithExactSupportForbidden : AnchorRoute exactSupportPresent → Set
-fallbackWithExactSupportForbidden exactTokenSupportRoute = Set
+data SpanFallbackPermission : ExactSupportAvailability → Set where
+  fallbackOnlyWhenExactSupportAbsent :
+    SpanFallbackPermission exactSupportAbsent
+
+fallbackWithExactSupportForbidden :
+  SpanFallbackPermission exactSupportPresent → ⊥
+fallbackWithExactSupportForbidden ()
 
 record DocumentCarrier : Set where
   constructor documentCarrier
@@ -95,6 +100,8 @@ record IdentityEvidenceExecutionBoundary : Set where
   constructor identityEvidenceExecutionBoundary
   field
     corpusAnchorDenied : AnchorEvaluation corpusGlobal → ⊥
+    fallbackDeniedWhenExactSupportExists :
+      SpanFallbackPermission exactSupportPresent → ⊥
     refreshTransaction : SemanticRefreshTransactionScope
 
 open IdentityEvidenceExecutionBoundary public
@@ -103,4 +110,5 @@ canonicalIdentityEvidenceExecutionBoundary : IdentityEvidenceExecutionBoundary
 canonicalIdentityEvidenceExecutionBoundary =
   identityEvidenceExecutionBoundary
     corpusGlobalAnchorForbidden
+    fallbackWithExactSupportForbidden
     documentRefreshTransaction
