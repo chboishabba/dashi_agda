@@ -31,9 +31,9 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Agda.Builtin.Nat using (Nat; suc)
-open import Data.Rational.Base using (ℚ; _-_; _*_)
+open import Data.Rational.Base using (ℚ; _+_; _-_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Physics.Closure.NSTriadKNHHBadSharpDyadicGainRound33Exact as Sharp
 import DASHI.Physics.Closure.NSTriadKNHHBadFiniteShellBudgetGluingRound35Exact as Budget
@@ -89,18 +89,35 @@ successorInternalProjectsBack eta shell =
         - internal (canonicalLedger eta shell)
       ≡ boundary (canonicalLedger eta (suc shell))
     incrementAsBoundary = trans increment (sym boundaryGain)
+
+    exposeIncrement :
+      internal (canonicalLedger eta (suc shell))
+        - boundary (canonicalLedger eta (suc shell))
+      ≡
+      internal (canonicalLedger eta shell)
+        + (internal (canonicalLedger eta (suc shell))
+          - internal (canonicalLedger eta shell))
+        - boundary (canonicalLedger eta (suc shell))
+    exposeIncrement =
+      solve
+        ( internal (canonicalLedger eta (suc shell))
+        ∷ internal (canonicalLedger eta shell)
+        ∷ boundary (canonicalLedger eta (suc shell))
+        ∷ [])
   in
   trans
-    (cong
-      (λ delta →
-        internal (canonicalLedger eta shell)
-        + delta
-        - boundary (canonicalLedger eta (suc shell)))
-      (sym incrementAsBoundary))
-    (solve
-      ( internal (canonicalLedger eta shell)
-      ∷ boundary (canonicalLedger eta (suc shell))
-      ∷ []))
+    exposeIncrement
+    (trans
+      (cong
+        (λ delta →
+          internal (canonicalLedger eta shell)
+          + delta
+          - boundary (canonicalLedger eta (suc shell)))
+        incrementAsBoundary)
+      (solve
+        ( internal (canonicalLedger eta shell)
+        ∷ boundary (canonicalLedger eta (suc shell))
+        ∷ [])))
 
 coarsenCanonicalSuccessor : ∀ eta shell →
   coarsenLedger (canonicalLedger eta (suc shell))
