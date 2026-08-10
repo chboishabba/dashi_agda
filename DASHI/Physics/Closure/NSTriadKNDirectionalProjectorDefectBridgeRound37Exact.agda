@@ -35,7 +35,8 @@ module DASHI.Physics.Closure.NSTriadKNDirectionalProjectorDefectBridgeRound37Exa
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _*_; _≤_; nonNegative)
+open import Data.Rational.Base using
+  (ℚ; 0ℚ; 1ℚ; _*_; _-_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚP
 open ℚP using (_≤?_)
 open import Data.Rational.Tactic.RingSolver using (solve)
@@ -82,8 +83,6 @@ existingDirectionalDefectMeaning left right =
     (defectDotMeaning
       (Projector.vector left)
       (Projector.vector right))
-  where
-  open import Data.Rational.Base using (_-_)
 
 projectorDefectIsTwiceExistingDirectionalDefect : ∀ left right →
   Projector.unitProjectorDefectSquared left right
