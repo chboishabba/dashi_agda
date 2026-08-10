@@ -118,13 +118,13 @@ The branch proves automatically
 sum_i eta_i <= sum_i u_i < 1.
 ```
 
-and specializes the construction to the repository's literal `NineOwnerEstimateFamily`. Thus a future physical proof can certify a region of admissible allocations rather than one brittle tuned point. The physical upper envelopes are not fabricated here.
+and specializes the construction to the repository's literal `NineOwnerEstimateFamily`. The abstract feasible-region layer now also distinguishes the three outcomes suggested by the continuation analysis: `robustlyPositive` when a uniform strict envelope lies below one, `critical` when a feasible point has total exactly one, and `infeasible` when no point satisfies the producer constraints. This is the proof-theoretic version of optimizing the residual viscosity reserve without pretending an infimum or numerical optimizer has already been constructed.
 
 ## Triad selection rules are a proof-bearing hypergraph
 
 A retained triad is now an actual hyperedge carrying membership in the existing `ExactRetainedSectorLaw`. Every edge therefore has exact zero momentum. The Round-35 `S3 x C2(reality)` action is lifted to hyperedges, and all twelve factored actions preserve retention and momentum closure while allowing stabilizers.
 
-Nonzero interaction strength is deliberately represented by a separate `PhysicalCouplingSelectionLaw`: momentum closure and cutoff membership do not imply nonzero coupling.
+The follow-on `FullPhysicalTriadSelectionLaw` packages the full five-part active-transition test from the analysis: exact momentum closure, retained cutoff membership, transversality, Fourier-reality compatibility, and nonzero physical coupling. The last three remain genuine physical predicates, but their permutation/reality covariance is explicit, and `applyFactoredFullyAdmissible` proves that all twelve factored actions preserve the complete admissibility package. Thus F4/HH-bad can later count or weight genuinely active transition orbits rather than every nominal shell pair.
 
 ## F2: the complete-real coordinate seam is now typed correctly
 
@@ -143,6 +143,6 @@ This removes the rational/completeness type mismatch without quotienting constru
 
 ## Exact frontier after this round
 
-The most informative new decision is negative: the simplest mode-principal-angle HH-good route is eliminated. The two live HH-bad inverse-scale mechanisms are now explicit and mutually checkable: one-derivative Schur elimination or a dissipative bad-stratum floor. `Com` is reduced to the literal operator realization of an exact increment/naturality defect. The finite shell and owner-budget limits now have coherent algebraic carriers, and the finite-flow lane now has a type-correct Bishop-real setoid seam rather than a rational surrogate.
+The most informative new decision is negative: the simplest mode-principal-angle HH-good route is eliminated. The two live HH-bad inverse-scale mechanisms are now explicit and mutually checkable: one-derivative Schur elimination or a dissipative bad-stratum floor. `Com` is reduced to the literal operator realization of an exact increment/naturality defect. The finite shell and owner-budget limits now have coherent algebraic carriers; the nine-owner region has a robust/critical/infeasible classification; the active triad subgraph carries all five physical selection requirements; and the finite-flow lane has a type-correct Bishop-real setoid seam rather than a rational surrogate.
 
-None of these results is promoted to unconditional Navier–Stokes regularity. The physical PDE producers, actual Bishop-state coordinate codec, real Picard--Lindelof instance, nine actual owner estimates, cutoff limits, compactness and continuation remain required.
+None of these results is promoted to unconditional Navier–Stokes regularity. The physical PDE producers, actual Bishop-state coordinate codec, real Picard--Lindelof instance, actual transversality/reality/nonzero-coupling selection predicates, nine actual owner estimates, cutoff limits, compactness and continuation remain required.
