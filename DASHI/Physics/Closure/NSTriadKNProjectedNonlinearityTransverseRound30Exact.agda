@@ -13,15 +13,15 @@ module DASHI.Physics.Closure.NSTriadKNProjectedNonlinearityTransverseRound30Exac
 --
 -- DASHI CONTRIBUTION
 --
--- Apply the newly proved literal Leray-output transversality theorem to the
--- repository's actual exhaustive output fibre.  Every ordered interaction
+-- Apply the literal Leray-output transversality theorem to the repository's
+-- actual exhaustive output fibre.  Every ordered interaction
 --
 --   -i P_k[(u_p dot q)u_q]
 --
 -- is transverse at its certified output mode, and finite additivity then
 -- proves that the complete projected nonlinear coefficient is transverse.
--- This is a concrete theorem about `projectedNonlinearity`; it does not take a
--- separately supplied nonlinear field or a `LerayHermitianCutset` receipt.
+-- The embedding E and inverse-square datum I remain explicit indices of the
+-- same finite system throughout; they cannot be silently resupplied.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Level)
@@ -105,7 +105,9 @@ transverseAdd {F = F} modeVector left right leftZero rightZero =
 
 projectedOrderedTermTransverse :
   ∀ {r} {F : C3.RealField r}
-    (system : Audit.FiniteComplex3GalerkinSystem F)
+    {E : C3.IntegerEmbedding F}
+    {I : C3.ModeInverseSquare F E}
+    (system : Audit.FiniteComplex3GalerkinSystem F E I)
     (output : Z3.FourierMode) →
   Z3.NonZeroMode output →
   (incidence : Physical.PhysicalTriadIncidence) →
@@ -157,7 +159,9 @@ projectedOrderedTermTransverse {F = F} system output nonzero incidence outputExa
 
 sumProjectedTermsTransverse :
   ∀ {r} {F : C3.RealField r}
-    (system : Audit.FiniteComplex3GalerkinSystem F)
+    {E : C3.IntegerEmbedding F}
+    {I : C3.ModeInverseSquare F E}
+    (system : Audit.FiniteComplex3GalerkinSystem F E I)
     (output : Z3.FourierMode) →
   Z3.NonZeroMode output →
   (incidences : List Physical.PhysicalTriadIncidence) →
@@ -182,7 +186,9 @@ sumProjectedTermsTransverse system output nonzero (head ∷ tail)
 
 projectedNonlinearityTransverseExact :
   ∀ {r} {F : C3.RealField r}
-    (system : Audit.FiniteComplex3GalerkinSystem F)
+    {E : C3.IntegerEmbedding F}
+    {I : C3.ModeInverseSquare F E}
+    (system : Audit.FiniteComplex3GalerkinSystem F E I)
     (output : Z3.FourierMode) →
   Z3.NonZeroMode output →
   C3.bilinearDot3
