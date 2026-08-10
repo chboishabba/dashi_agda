@@ -15,6 +15,11 @@ files=(
   DASHI/Physics/Closure/NSTriadKNComplex3RealityLawsRound35Exact.agda
   DASHI/Physics/Closure/NSTriadKNOrderedInteractionRealityRound35Exact.agda
   DASHI/Physics/Closure/NSTriadKNPhysicalOutputFiberConjugationRound35Exact.agda
+  DASHI/Physics/Closure/NSTriadKNPhysicalOutputFiberPermutationRound35Exact.agda
+  DASHI/Physics/Closure/NSTriadKNSummedProjectedNonlinearityRealityRound35Exact.agda
+  DASHI/Physics/Closure/NSTriadKNViscousRealityRound35Exact.agda
+  DASHI/Physics/Closure/NSTriadKNCanonicalVelocityRealityRound35Exact.agda
+  DASHI/Physics/Closure/NSTriadKNFixedCutoffSameObjectInvariantRound35Exact.agda
   DASHI/Physics/Closure/NSTriadKNHHBadFiniteShellBudgetGluingRound35Exact.agda
   DASHI/Physics/Closure/NSTriadKNComGramInterferenceRound35Exact.agda
   DASHI/Physics/Closure/NSTriadKNTriadS3RealityActionRound35Exact.agda
@@ -47,7 +52,6 @@ checks=(
   'NSTriadKNFixedCutoffSupportInvariantRound35Exact.agda:positiveLiteralOutputCoefficients'
   'NSTriadKNFixedCutoffSupportInvariantRound35Exact.agda:fixedSupportDerivativeModesExact'
   'NSTriadKNFixedCutoffSupportInvariantRound35Exact.agda:derivativeInSameCutoffSupportFibre'
-  'NSTriadKNFixedCutoffSupportInvariantRound35Exact.agda:fixedCutoffSameObjectCompatibilityInvariantConstructed = false'
   'NSTriadKNModeInverseSquareRealityRound35Exact.agda:normSquaredEven'
   'NSTriadKNModeInverseSquareRealityRound35Exact.agda:inverseNormSquaredEven'
   'NSTriadKNModeInverseSquareRealityRound35Exact.agda:rightInverseUnique'
@@ -59,11 +63,27 @@ checks=(
   'NSTriadKNOrderedInteractionRealityRound35Exact.agda:orderedVelocityInteractionReality'
   'NSTriadKNOrderedInteractionRealityRound35Exact.agda:projectedOrderedTermConjugateTriad'
   'NSTriadKNOrderedInteractionRealityRound35Exact.agda:orderedInteractionRealityClosed = true'
-  'NSTriadKNOrderedInteractionRealityRound35Exact.agda:summedProjectedNonlinearityRealityConstructed = false'
   'NSTriadKNPhysicalOutputFiberConjugationRound35Exact.agda:conjugateFiberRepresentative'
   'NSTriadKNPhysicalOutputFiberConjugationRound35Exact.agda:physicalOutputFiberLabelledConjugationBijection'
   'NSTriadKNPhysicalOutputFiberConjugationRound35Exact.agda:physicalOutputFiberConjugationBijectionClosed = true'
-  'NSTriadKNPhysicalOutputFiberConjugationRound35Exact.agda:outputFiberConjugationListPermutationConstructed = false'
+  'NSTriadKNPhysicalOutputFiberPermutationRound35Exact.agda:physicalIncidenceCanonical'
+  'NSTriadKNPhysicalOutputFiberPermutationRound35Exact.agda:canonicalConjugateInjective'
+  'NSTriadKNPhysicalOutputFiberPermutationRound35Exact.agda:canonicalConjugateOutputFiberPermutation'
+  'NSTriadKNPhysicalOutputFiberPermutationRound35Exact.agda:outputFiberConjugationListPermutationClosed = true'
+  'NSTriadKNSummedProjectedNonlinearityRealityRound35Exact.agda:sumVectorsRespPermutation'
+  'NSTriadKNSummedProjectedNonlinearityRealityRound35Exact.agda:canonicalConjugateTermReality'
+  'NSTriadKNSummedProjectedNonlinearityRealityRound35Exact.agda:projectedNonlinearityReality'
+  'NSTriadKNSummedProjectedNonlinearityRealityRound35Exact.agda:summedProjectedNonlinearityRealityClosed = true'
+  'NSTriadKNViscousRealityRound35Exact.agda:literalViscousCoefficientReality'
+  'NSTriadKNViscousRealityRound35Exact.agda:literalViscousQuadraticCoefficientReality'
+  'NSTriadKNViscousRealityRound35Exact.agda:literalViscousRealityClosed = true'
+  'NSTriadKNCanonicalVelocityRealityRound35Exact.agda:lookupNegativeZeroFromOppositePositiveAbsent'
+  'NSTriadKNCanonicalVelocityRealityRound35Exact.agda:literalVelocityReality'
+  'NSTriadKNCanonicalVelocityRealityRound35Exact.agda:canonicalVelocityRealityClosed = true'
+  'NSTriadKNFixedCutoffSameObjectInvariantRound35Exact.agda:canonicalLiteralRHSReality'
+  'NSTriadKNFixedCutoffSameObjectInvariantRound35Exact.agda:fixedSupportDerivativeCompatibleState'
+  'NSTriadKNFixedCutoffSameObjectInvariantRound35Exact.agda:derivativeCutoffSameObjectDatum'
+  'NSTriadKNFixedCutoffSameObjectInvariantRound35Exact.agda:fixedCutoffSameObjectVectorFieldInvariantClosed = true'
   'NSTriadKNHHBadFiniteShellBudgetGluingRound35Exact.agda:canonicalFiniteShellBudgetGluing'
   'NSTriadKNHHBadFiniteShellBudgetGluingRound35Exact.agda:boundaryBudgetHalves'
   'NSTriadKNHHBadFiniteShellBudgetGluingRound35Exact.agda:cutoffAdvanceConservesTotalBudget'
@@ -99,6 +119,11 @@ grep -q '10.1007/BF02547354' DASHI/Physics/Closure/NSTriadKNModeInverseSquareRea
 grep -q '10.1090/chel/343' DASHI/Physics/Closure/NSTriadKNComplex3RealityLawsRound35Exact.agda
 grep -q '10.1007/BF02547354' DASHI/Physics/Closure/NSTriadKNOrderedInteractionRealityRound35Exact.agda
 grep -q '10.1090/chel/343' DASHI/Physics/Closure/NSTriadKNPhysicalOutputFiberConjugationRound35Exact.agda
+grep -q '10.1007/BF02547354' DASHI/Physics/Closure/NSTriadKNPhysicalOutputFiberPermutationRound35Exact.agda
+grep -q '10.1090/chel/343' DASHI/Physics/Closure/NSTriadKNSummedProjectedNonlinearityRealityRound35Exact.agda
+grep -q '10.1007/BF02547354' DASHI/Physics/Closure/NSTriadKNViscousRealityRound35Exact.agda
+grep -q '10.1090/chel/343' DASHI/Physics/Closure/NSTriadKNCanonicalVelocityRealityRound35Exact.agda
+grep -q '10.1007/BF02547354' DASHI/Physics/Closure/NSTriadKNFixedCutoffSameObjectInvariantRound35Exact.agda
 grep -q '10.1007/s00021-019-0411-z' DASHI/Physics/Closure/NSTriadKNHHBadFiniteShellBudgetGluingRound35Exact.agda
 grep -q '10.1002/cpa.3160410704' DASHI/Physics/Closure/NSTriadKNComGramInterferenceRound35Exact.agda
 grep -q '10.7208/chicago/9780226115498.001.0001' DASHI/Physics/Closure/NSTriadKNTriadS3RealityActionRound35Exact.agda
@@ -114,6 +139,7 @@ grep -q 'scale-free' "$doc"
 grep -q 'inverse-square evenness' "$doc"
 grep -q 'ordered nonlinear interaction' "$doc"
 grep -q 'labelled output-fibre conjugation' "$doc"
+grep -q 'same-object cutoff carrier' "$doc"
 
 scripts/run_agda29_parallel_check.sh \
   DASHI/Physics/Closure/NSTriadKNLuoStrainGramCutoffInvariantRound35Validation.agda
