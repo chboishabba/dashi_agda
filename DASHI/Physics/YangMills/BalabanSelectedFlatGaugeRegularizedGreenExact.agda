@@ -43,13 +43,14 @@ import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
-open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using (pair)
+import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier as Torus
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
+import DASHI.Physics.YangMills.BalabanPath4AxisAverageExact as Path4
+import DASHI.Physics.YangMills.BalabanConfiguredSide4PeriodicReindexingExact as Reindex
 import DASHI.Physics.YangMills.BalabanConfiguredSide4PeriodicVectorCalculusExact as Vec
 import DASHI.Physics.YangMills.BalabanPath4SU2ConfiguredScalarReductionExact as Scalar
 import DASHI.Physics.YangMills.BalabanSide4ScalarGreenConvolutionExact as Green
 import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Coordinates
-import DASHI.Physics.YangMills.BalabanP33PhysicalFlatGaugeDivergenceIdentificationExact as FlatGauge
 import DASHI.Physics.YangMills.BalabanSelectedFlatGaugeAdjointGramFloorExact as FlatAdjoint
 
 GaugeMultiplier : Set
@@ -70,27 +71,26 @@ negativeGradientDivergenceIsLocalLaplacian : ∀ gauge site →
   ≡ Scalar.siteLocalLaplacian gauge site
 negativeGradientDivergenceIsLocalLaplacian gauge site =
   Sums.sumRationalCong
-    (DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier.allCyclicIndices
-      DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier.four)
+    (Torus.allCyclicIndices Torus.four)
     (λ axis →
-      Vec.backwardDifference4 axis
+      Reindex.backwardDifference4 axis
         (Vec.literalNegativeForwardGradientScalar gauge axis) site)
     (λ axis →
       (gauge site + gauge site)
-      - (gauge (Vec.shiftForward4 axis site)
-        + gauge (Vec.shiftBackward4 axis site)))
+      - (gauge (Reindex.shiftForward4 axis site)
+        + gauge (Reindex.shiftBackward4 axis site)))
     (λ axis →
       trans
         (ℚRing.solve-∀
-          (Vec.backwardDifference4 axis
-            (Vec.forwardDifference4 axis gauge) site))
+          (Reindex.backwardDifference4 axis
+            (Reindex.forwardDifference4 axis gauge) site))
         (trans
           (cong -_
             (Vec.backwardForwardDifferenceCommutes axis axis gauge site))
           (Scalar.negativeForwardBackwardStencil axis gauge site)))
 
 flatGaugeGramApplyExact : ∀ multiplier coordinate site →
-  flatGaugeGramApply multiplier (pair coordinate site)
+  flatGaugeGramApply multiplier (Torus.pair coordinate site)
   ≡ Scalar.siteLocalLaplacian
       (FlatAdjoint.multiplierField multiplier coordinate) site
 flatGaugeGramApplyExact multiplier coordinate site =
@@ -99,36 +99,28 @@ flatGaugeGramApplyExact multiplier coordinate site =
     decoded = Coordinates.decodePhysicalSU2 state
     gauge = FlatAdjoint.multiplierField multiplier coordinate
 
-    decodedFieldToNegativeGradient : ∀ axis current →
-      decoded coordinate (pair axis current)
-      ≡ Vec.literalNegativeForwardGradientScalar gauge axis current
-    decodedFieldToNegativeGradient axis current =
-      FlatAdjoint.actualFlatGaugeAdjointPointwiseExact multiplier
-        (pair coordinate (pair axis current))
-
     divergenceCong :
       Vec.literalPeriodicDivergenceScalar
-        (λ axis current → decoded coordinate (pair axis current)) site
+        (λ axis current → decoded coordinate (Torus.pair axis current)) site
       ≡ Vec.literalPeriodicDivergenceScalar
         (Vec.literalNegativeForwardGradientScalar gauge) site
     divergenceCong =
       Sums.sumRationalCong
-        (DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier.allCyclicIndices
-          DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier.four)
+        (Torus.allCyclicIndices Torus.four)
         (λ axis →
-          Vec.backwardDifference4 axis
-            (λ current → decoded coordinate (pair axis current)) site)
+          Reindex.backwardDifference4 axis
+            (λ current → decoded coordinate (Torus.pair axis current)) site)
         (λ axis →
-          Vec.backwardDifference4 axis
+          Reindex.backwardDifference4 axis
             (Vec.literalNegativeForwardGradientScalar gauge axis) site)
         (λ axis →
           ℚRing.solve-∀
-            (decoded coordinate (pair axis site))
+            (decoded coordinate (Torus.pair axis site))
             (decoded coordinate
-              (pair axis (Vec.shiftBackward4 axis site)))
+              (Torus.pair axis (Reindex.shiftBackward4 axis site)))
             (Vec.literalNegativeForwardGradientScalar gauge axis site)
             (Vec.literalNegativeForwardGradientScalar gauge axis
-              (Vec.shiftBackward4 axis site)))
+              (Reindex.shiftBackward4 axis site)))
   in
   trans
     (FlatAdjoint.identityGaugeConstraintApplyExact state coordinate site)
@@ -140,8 +132,8 @@ flatGaugeGramApplyExact multiplier coordinate site =
 ------------------------------------------------------------------------
 
 flatGaugeMeanProjector : GaugeMultiplier → GaugeMultiplier
-flatGaugeMeanProjector multiplier (pair coordinate site) =
-  DASHI.Physics.YangMills.BalabanPath4AxisAverageExact.average0123
+flatGaugeMeanProjector multiplier (Torus.pair coordinate site) =
+  Path4.average0123
     (FlatAdjoint.multiplierField multiplier coordinate) site
 
 regularizedFlatGaugeGramApply : GaugeMultiplier → GaugeMultiplier
@@ -149,12 +141,12 @@ regularizedFlatGaugeGramApply multiplier row =
   flatGaugeGramApply multiplier row + flatGaugeMeanProjector multiplier row
 
 regularizedFlatGaugeGramIsConfiguredSiteOperator : ∀ multiplier coordinate site →
-  regularizedFlatGaugeGramApply multiplier (pair coordinate site)
+  regularizedFlatGaugeGramApply multiplier (Torus.pair coordinate site)
   ≡ Green.configuredSiteOperator
       (FlatAdjoint.multiplierField multiplier coordinate) site
 regularizedFlatGaugeGramIsConfiguredSiteOperator multiplier coordinate site =
   cong
-    (_+ DASHI.Physics.YangMills.BalabanPath4AxisAverageExact.average0123
+    (_+ Path4.average0123
       (FlatAdjoint.multiplierField multiplier coordinate) site)
     (flatGaugeGramApplyExact multiplier coordinate site)
 
@@ -163,14 +155,14 @@ regularizedFlatGaugeGramIsConfiguredSiteOperator multiplier coordinate site =
 ------------------------------------------------------------------------
 
 regularizedFlatGaugeGreen : GaugeMultiplier → GaugeMultiplier
-regularizedFlatGaugeGreen source (pair coordinate site) =
+regularizedFlatGaugeGreen source (Torus.pair coordinate site) =
   Green.scalarGreen
     (FlatAdjoint.multiplierField source coordinate) site
 
 regularizedFlatGaugeGreenRightInverse : ∀ source coordinate site →
   regularizedFlatGaugeGramApply
-    (regularizedFlatGaugeGreen source) (pair coordinate site)
-  ≡ source (pair coordinate site)
+    (regularizedFlatGaugeGreen source) (Torus.pair coordinate site)
+  ≡ source (Torus.pair coordinate site)
 regularizedFlatGaugeGreenRightInverse source coordinate site =
   trans
     (regularizedFlatGaugeGramIsConfiguredSiteOperator
@@ -180,8 +172,8 @@ regularizedFlatGaugeGreenRightInverse source coordinate site =
 
 regularizedFlatGaugeGreenLeftInverse : ∀ source coordinate site →
   regularizedFlatGaugeGreen
-    (regularizedFlatGaugeGramApply source) (pair coordinate site)
-  ≡ source (pair coordinate site)
+    (regularizedFlatGaugeGramApply source) (Torus.pair coordinate site)
+  ≡ source (Torus.pair coordinate site)
 regularizedFlatGaugeGreenLeftInverse source coordinate site =
   let
     gauge = FlatAdjoint.multiplierField source coordinate
@@ -202,11 +194,11 @@ record RegularizedFlatGaugeGreenCertificate : Set where
     operator : GaugeMultiplier → GaugeMultiplier
     green : GaugeMultiplier → GaugeMultiplier
     inverseLeftPointwise : ∀ source coordinate site →
-      green (operator source) (pair coordinate site)
-      ≡ source (pair coordinate site)
+      green (operator source) (Torus.pair coordinate site)
+      ≡ source (Torus.pair coordinate site)
     inverseRightPointwise : ∀ source coordinate site →
-      operator (green source) (pair coordinate site)
-      ≡ source (pair coordinate site)
+      operator (green source) (Torus.pair coordinate site)
+      ≡ source (Torus.pair coordinate site)
 open RegularizedFlatGaugeGreenCertificate public
 
 regularizedFlatGaugeGreenCertificate : RegularizedFlatGaugeGreenCertificate
