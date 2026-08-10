@@ -22,12 +22,13 @@ files=(
 )
 
 doc=docs/ns-clay-contract/ns-schur-principal-angle-projective-round36.md
+no_k_wrapper=scripts/agda29_without_k_wrapper.sh
 
-for file in "${files[@]}" "$doc"; do
+for file in "${files[@]}" "$doc" "$no_k_wrapper"; do
   test -f "$file"
 done
 
-if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|\{!|!\}|\{\-#[[:space:]]*(TERMINATING|NO_TERMINATION_CHECK)|allow-unsolved-metas|--no-positivity-check|--no-termination-check|NON_COVERING|--type-in-type|trustMe|primTrustMe|funext|Properties\.WithK|unique⇒irrelevant' "${files[@]}"; then
+if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|\{!|!\}|\{\-#[[:space:]]*(TERMINATING|NO_TERMINATION_CHECK)|allow-unsolved-metas|--no-positivity-check|--no-termination-check|--with-K|NON_COVERING|--type-in-type|trustMe|primTrustMe|funext|Properties\.WithK|unique⇒irrelevant' "${files[@]}"; then
   echo "round thirty-six contains a hole, postulate, unsafe/K escape, trust primitive, proof-irrelevance shortcut, or extensionality shortcut" >&2
   exit 1
 fi
@@ -64,13 +65,18 @@ checks=(
   'NSTriadKNNineOwnerRobustReservePolytopeRound36Exact.agda:ReserveGeometry'
   'NSTriadKNNineOwnerRobustReservePolytopeRound36Exact.agda:RobustNineOwnerBudgetPolytope'
   'NSTriadKNNineOwnerRobustReservePolytopeRound36Exact.agda:physicalRobustNineOwnerBudgetPolytopeConstructed = false'
-  'NSTriadKNTriadSelectionRuleHypergraphRound36Exact.agda:retainedEdgeMomentumClosure'
-  'NSTriadKNTriadSelectionRuleHypergraphRound36Exact.agda:applyFactoredEdge'
+  'NSTriadKNTriadSelectionRuleHypergraphRound36Exact.agda:inExactShellNeg'
+  'NSTriadKNTriadSelectionRuleHypergraphRound36Exact.agda:realityRetainedMember'
+  'NSTriadKNTriadSelectionRuleHypergraphRound36Exact.agda:retainedMember : Lattice.RetainedTriadMember'
   'NSTriadKNTriadSelectionRuleHypergraphRound36Exact.agda:factoredActionPreservesMomentumClosure'
+  'NSTriadKNTriadSelectionRuleHypergraphRound36Exact.agda:canonicalRetainedHypergraphActionClosure'
+  'NSTriadKNTriadSelectionRuleHypergraphRound36Exact.agda:activeMember : Lattice.RetainedTriadMember'
   'NSTriadKNTriadSelectionRuleHypergraphRound36Exact.agda:physicalCouplingSelectionLawConstructed = false'
   'NSTriadKNFullTriadSelectionRuleRound36Exact.agda:FullPhysicalTriadSelectionLaw'
+  'NSTriadKNFullTriadSelectionRuleRound36Exact.agda:retainedMember : Lattice.RetainedTriadMember'
   'NSTriadKNFullTriadSelectionRuleRound36Exact.agda:fullyAdmissibleMomentumClosure'
   'NSTriadKNFullTriadSelectionRuleRound36Exact.agda:applyFactoredFullyAdmissible'
+  'NSTriadKNFullTriadSelectionRuleRound36Exact.agda:canonicalFullFivePartSelectionClosure'
   'NSTriadKNFullTriadSelectionRuleRound36Exact.agda:physicalFullTriadSelectionLawConstructed = false'
   'NSTriadKNBishopSetoidCoordinateGluingRound36Exact.agda:BishopAssignmentsEquivalent'
   'NSTriadKNBishopSetoidCoordinateGluingRound36Exact.agda:BishopPhysicalCoordinateEquivalence'
@@ -110,5 +116,7 @@ grep -q 'proof-bearing hypergraph' "$doc"
 grep -q 'five-part' "$doc"
 grep -q 'Bishop-real setoid' "$doc"
 
-scripts/run_agda29_parallel_check.sh \
-  DASHI/Physics/Closure/NSTriadKNSchurPrincipalAngleProjectiveRound36Validation.agda
+chmod u+x "$no_k_wrapper"
+AGDA_BIN="$root/$no_k_wrapper" \
+  scripts/run_agda29_parallel_check.sh \
+    DASHI/Physics/Closure/NSTriadKNSchurPrincipalAngleProjectiveRound36Validation.agda
