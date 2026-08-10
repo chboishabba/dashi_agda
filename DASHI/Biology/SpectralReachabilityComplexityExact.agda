@@ -86,8 +86,8 @@ reachPotentialBound :
     {n x y} → ReachIn Step n x y →
   potential pot y
   ≤ potential pot x + n * perStepCost pot
-reachPotentialBound pot reachZero
-  rewrite NatP.+-identityʳ (potential pot _) = NatP.≤-refl
+reachPotentialBound pot {x = x} reachZero
+  rewrite NatP.+-identityʳ (potential pot x) = NatP.≤-refl
 reachPotentialBound pot {n = suc n} {x = x} {y = z}
   (reachStep {y = y} step rest) =
   begin
