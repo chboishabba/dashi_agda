@@ -126,8 +126,23 @@ A retained triad is now an actual hyperedge carrying membership in the existing 
 
 Nonzero interaction strength is deliberately represented by a separate `PhysicalCouplingSelectionLaw`: momentum closure and cutoff membership do not imply nonzero coupling.
 
+## F2: the complete-real coordinate seam is now typed correctly
+
+The old Round-30 coordinate interface uses rational assignments. That is the right exact syntax for rational Galerkin coefficients, but it is not the complete trajectory carrier required by Picard--Lindelof. Round 34 already interpreted the same polynomial syntax on Murray--Bishop constructive reals, whose equality is a setoid relation rather than Agda propositional equality.
+
+`NSTriadKNBishopSetoidCoordinateGluingRound36Exact` therefore defines the correct Bishop-real setoid coordinate equivalence. It requires genuine encode/decode round trips in the physical-state setoid and pointwise Bishop equality, plus coordinate reflection back to state equality. For any literal Galerkin representation it proves both faces of the vector-field square:
+
+```text
+encode(F_phys state) ~= F_coord(encode state),
+
+F_phys(decode coordinates)
+  ~=State decode(F_coord coordinates).
+```
+
+This removes the rational/completeness type mismatch without quotienting constructive-real equality by an unsafe axiom. The actual Fourier-state/Bishop-assignment codec and real Picard--Lindelof authority remain physical/analytic producers.
+
 ## Exact frontier after this round
 
-The most informative new decision is negative: the simplest mode-principal-angle HH-good route is eliminated. The two live HH-bad inverse-scale mechanisms are now explicit and mutually checkable: one-derivative Schur elimination or a dissipative bad-stratum floor. `Com` is reduced to the literal operator realization of an exact increment/naturality defect. The finite shell and owner-budget limits now have coherent algebraic carriers.
+The most informative new decision is negative: the simplest mode-principal-angle HH-good route is eliminated. The two live HH-bad inverse-scale mechanisms are now explicit and mutually checkable: one-derivative Schur elimination or a dissipative bad-stratum floor. `Com` is reduced to the literal operator realization of an exact increment/naturality defect. The finite shell and owner-budget limits now have coherent algebraic carriers, and the finite-flow lane now has a type-correct Bishop-real setoid seam rather than a rational surrogate.
 
-None of these results is promoted to unconditional Navier–Stokes regularity. The physical PDE producers, complete-real finite flow, nine actual owner estimates, cutoff limits, compactness and continuation remain required.
+None of these results is promoted to unconditional Navier–Stokes regularity. The physical PDE producers, actual Bishop-state coordinate codec, real Picard--Lindelof instance, nine actual owner estimates, cutoff limits, compactness and continuation remain required.
