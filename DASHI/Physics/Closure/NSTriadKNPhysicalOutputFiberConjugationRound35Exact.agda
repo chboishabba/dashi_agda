@@ -14,15 +14,20 @@ module DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiberConjugationRound35Exact
 -- DASHI CONTRIBUTION
 --
 -- Prove the exact finite reindexing relation required after the local
--- nonlinear reality calculation.  Conjugating every retained incidence sends
--- the literal output fibre at k into the literal output fibre at -k; applying
--- conjugation again returns the same lattice p/q/k labels.  Thus the two
--- output fibres are in bijection at the physical-incidence level.
+-- nonlinear reality calculation.  The physical enumeration is deliberately
+-- proof-bearing: completeness returns a listed representative with the same
+-- p/q/k labels, not propositional equality of incidence records with possibly
+-- different resonance proofs.  Round 35 respects that design.
 --
--- This module deliberately proves the membership/bijection theorem first.  It
--- does not silently identify the two lists positionwise: the concrete cutoff
--- enumeration has an order, while Fourier reality only supplies a finite
--- permutation.  Turning this bijection into the corresponding finite-sum
+-- For every literal output-fibre member at k we construct a member of the
+-- output fibre at -k whose p/q/k labels are exactly the conjugates of the
+-- source labels.  Repeating the construction in the reverse direction gives
+-- the inverse labelled relation.  This is the correct carrier bijection for
+-- finite-sum reindexing because `projectedOrderedTerm` depends only on p,q,k
+-- and the velocity at p,q.
+--
+-- The module does not silently identify the two lists positionwise.  Turning
+-- this labelled representative bijection into the corresponding finite-list
 -- permutation is the remaining combinatorial step for summed nonlinear
 -- reality.
 ------------------------------------------------------------------------
@@ -31,7 +36,8 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Product using (_×_; _,_)
+open import Agda.Primitive using (Set)
+open import Data.Product using (Σ; _,_; _×_)
 open import Relation.Binary.PropositionalEquality using
   (cong; subst; sym; trans)
 
@@ -61,29 +67,6 @@ physicalOutputFiberMemberEnumeration :
   τ Cube.∈ Physical.physicalTriadEnumeration cutoff
 physicalOutputFiberMemberEnumeration = filterOutputMemberOriginal
 
-conjugateOutputEquality :
-  ∀ {output} (τ : Physical.PhysicalTriadIncidence) →
-  Physical.k τ ≡ output →
-  Physical.k (Symmetry.conjugateTriad τ) ≡ Z3.negateMode output
-conjugateOutputEquality τ outputEquality =
-  trans
-    (Symmetry.conjugateTriadK τ)
-    (cong Z3.negateMode outputEquality)
-
-conjugateFiberMember :
-  ∀ {cutoff output τ} →
-  τ Cube.∈ Output.physicalOutputFiber cutoff output →
-  Symmetry.conjugateTriad τ
-    Cube.∈ Output.physicalOutputFiber cutoff (Z3.negateMode output)
-conjugateFiberMember {cutoff} {output} {τ} member =
-  Output.physicalOutputFiberComplete
-    (EnumerationClosure.listedConjugateHasRepresentative listed)
-    (conjugateOutputEquality τ
-      (Output.physicalOutputFiberSound member))
-  where
-  listed : τ Cube.∈ Physical.physicalTriadEnumeration cutoff
-  listed = physicalOutputFiberMemberEnumeration member
-
 record SameIncidenceLabels
     (left right : Physical.PhysicalTriadIncidence) : Set where
   constructor same-incidence-labels
@@ -94,56 +77,110 @@ record SameIncidenceLabels
 
 open SameIncidenceLabels public
 
-doubleConjugateLabels :
-  (τ : Physical.PhysicalTriadIncidence) →
-  SameIncidenceLabels
-    (Symmetry.conjugateTriad (Symmetry.conjugateTriad τ)) τ
-doubleConjugateLabels τ = same-incidence-labels
-  (Symmetry.sameP (Symmetry.conjugateTriadInvolutiveOnLattice τ))
-  (Symmetry.sameQ (Symmetry.conjugateTriadInvolutiveOnLattice τ))
-  (Symmetry.sameK (Symmetry.conjugateTriadInvolutiveOnLattice τ))
+labelsFromEnumerationHit :
+  ∀ {cutoff τ} →
+  (hit : Physical.PhysicalTriadEnumerationHit cutoff τ) →
+  SameIncidenceLabels (Physical.representative hit) τ
+labelsFromEnumerationHit hit = same-incidence-labels
+  (Physical.sameP hit)
+  (Physical.sameQ hit)
+  (Physical.sameK hit)
 
-record OutputFiberConjugationBijection
+conjugateOutputEquality :
+  ∀ {output} (τ : Physical.PhysicalTriadIncidence) →
+  Physical.k τ ≡ output →
+  Physical.k (Symmetry.conjugateTriad τ) ≡ Z3.negateMode output
+conjugateOutputEquality τ outputEquality =
+  trans
+    (Symmetry.conjugateTriadK τ)
+    (cong Z3.negateMode outputEquality)
+
+record ConjugateRepresentative
+    (cutoff : Nat) (output : Z3.FourierMode)
+    (source : Physical.PhysicalTriadIncidence) : Set where
+  field
+    representative : Physical.PhysicalTriadIncidence
+    representativeMember :
+      representative Cube.∈
+        Output.physicalOutputFiber cutoff (Z3.negateMode output)
+    labelsConjugate :
+      SameIncidenceLabels representative (Symmetry.conjugateTriad source)
+
+open ConjugateRepresentative public
+
+conjugateFiberRepresentative :
+  ∀ {cutoff output source} →
+  source Cube.∈ Output.physicalOutputFiber cutoff output →
+  ConjugateRepresentative cutoff output source
+conjugateFiberRepresentative {cutoff} {output} {source} member = record
+  { representative = Physical.representative hit
+  ; representativeMember =
+      Output.physicalOutputFiberComplete
+        (Physical.representativeListed hit)
+        (trans
+          (Physical.sameK hit)
+          (conjugateOutputEquality source
+            (Output.physicalOutputFiberSound member)))
+  ; labelsConjugate = labelsFromEnumerationHit hit
+  }
+  where
+  listed : source Cube.∈ Physical.physicalTriadEnumeration cutoff
+  listed = physicalOutputFiberMemberEnumeration member
+
+  hit : Physical.PhysicalTriadEnumerationHit
+      cutoff (Symmetry.conjugateTriad source)
+  hit = EnumerationClosure.listedConjugateHasRepresentative listed
+
+reverseConjugateFiberRepresentative :
+  ∀ {cutoff output source} →
+  source Cube.∈
+    Output.physicalOutputFiber cutoff (Z3.negateMode output) →
+  Σ Physical.PhysicalTriadIncidence
+    (λ representative →
+      (representative Cube.∈ Output.physicalOutputFiber cutoff output)
+      × SameIncidenceLabels representative (Symmetry.conjugateTriad source))
+reverseConjugateFiberRepresentative {cutoff} {output} {source} member =
+  let
+    forward = conjugateFiberRepresentative member
+
+    targetMember :
+      representative forward Cube.∈ Output.physicalOutputFiber cutoff output
+    targetMember =
+      subst
+        (λ selectedOutput →
+          representative forward Cube.∈
+            Output.physicalOutputFiber cutoff selectedOutput)
+        (Symmetry.negateModeInvolutive output)
+        (representativeMember forward)
+  in
+  representative forward , targetMember , labelsConjugate forward
+
+record OutputFiberLabelledConjugationBijection
     (cutoff : Nat) (output : Z3.FourierMode) : Set where
   field
     forward :
-      ∀ {τ} →
-      τ Cube.∈ Output.physicalOutputFiber cutoff output →
-      Symmetry.conjugateTriad τ
-        Cube.∈ Output.physicalOutputFiber cutoff (Z3.negateMode output)
+      ∀ {source} →
+      source Cube.∈ Output.physicalOutputFiber cutoff output →
+      ConjugateRepresentative cutoff output source
 
     backward :
-      ∀ {σ} →
-      σ Cube.∈ Output.physicalOutputFiber cutoff (Z3.negateMode output) →
-      Symmetry.conjugateTriad σ
-        Cube.∈ Output.physicalOutputFiber cutoff output
+      ∀ {source} →
+      source Cube.∈
+        Output.physicalOutputFiber cutoff (Z3.negateMode output) →
+      Σ Physical.PhysicalTriadIncidence
+        (λ representative →
+          (representative Cube.∈ Output.physicalOutputFiber cutoff output)
+          × SameIncidenceLabels representative
+              (Symmetry.conjugateTriad source))
 
-    forwardBackwardLabels :
-      ∀ τ → SameIncidenceLabels
-        (Symmetry.conjugateTriad (Symmetry.conjugateTriad τ)) τ
+open OutputFiberLabelledConjugationBijection public
 
-open OutputFiberConjugationBijection public
-
-physicalOutputFiberConjugationBijection :
+physicalOutputFiberLabelledConjugationBijection :
   (cutoff : Nat) (output : Z3.FourierMode) →
-  OutputFiberConjugationBijection cutoff output
-physicalOutputFiberConjugationBijection cutoff output = record
-  { forward = conjugateFiberMember
-  ; backward = λ {σ} member →
-      let
-        first :
-          Symmetry.conjugateTriad σ
-            Cube.∈ Output.physicalOutputFiber cutoff
-              (Z3.negateMode (Z3.negateMode output))
-        first = conjugateFiberMember member
-      in
-      subst
-        (λ selectedOutput →
-          Symmetry.conjugateTriad σ
-            Cube.∈ Output.physicalOutputFiber cutoff selectedOutput)
-        (Symmetry.negateModeInvolutive output)
-        first
-  ; forwardBackwardLabels = doubleConjugateLabels
+  OutputFiberLabelledConjugationBijection cutoff output
+physicalOutputFiberLabelledConjugationBijection cutoff output = record
+  { forward = conjugateFiberRepresentative
+  ; backward = reverseConjugateFiberRepresentative
   }
 
 physicalOutputFiberConjugationBijectionClosed : Bool
