@@ -62,8 +62,10 @@ open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Rational.Base using
   (ℚ; 0ℚ; _+_; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚP
+open ℚP using (_≤?_)
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
+open import Relation.Nullary.Decidable.Core using (toWitness)
 
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
 import DASHI.Physics.Closure.NSTriadKNHHBadSharpDyadicGainRound33Exact as Sharp
@@ -72,12 +74,18 @@ import DASHI.Physics.Closure.NSTriadKNHHBadSharpDyadicGainRound33Exact as Sharp
 -- Positivity of the dyadic scales used by the ordered-field transport.
 ------------------------------------------------------------------------
 
+twoNonnegative : 0ℚ ≤ Sharp.two
+twoNonnegative = toWitness {a? = 0ℚ ≤? Sharp.two} _
+
+halfNonnegative : 0ℚ ≤ Sharp.half
+halfNonnegative = toWitness {a? = 0ℚ ≤? Sharp.half} _
+
 dyadicScaleNonnegative : ∀ shell → 0ℚ ≤ Sharp.dyadicScale shell
 dyadicScaleNonnegative zero = ℚP.≤-refl
 dyadicScaleNonnegative (suc shell) =
   let
     instance
-      twoNN = nonNegative (toWitnessTwo)
+      twoNN = nonNegative twoNonnegative
       shellNN = nonNegative (dyadicScaleNonnegative shell)
       productNN =
         ℚP.nonNeg*nonNeg⇒nonNeg
@@ -85,9 +93,6 @@ dyadicScaleNonnegative (suc shell) =
   in
   ℚP.nonNegative⁻¹
     (Sharp.two * Sharp.dyadicScale shell)
-  where
-  toWitnessTwo : 0ℚ ≤ Sharp.two
-  toWitnessTwo = ℚP.≤-reflexive refl
 
 rawRatioNonnegative : ∀ shell → 0ℚ ≤ Sharp.rawHHBadRatio shell
 rawRatioNonnegative shell =
@@ -100,9 +105,6 @@ rawRatioNonnegative shell =
           Sharp.two (Sharp.dyadicScale shell)
   in
   ℚP.nonNegative⁻¹ (Sharp.rawHHBadRatio shell)
-  where
-  twoNonnegative : 0ℚ ≤ Sharp.two
-  twoNonnegative = ℚP.≤-reflexive refl
 
 ------------------------------------------------------------------------
 -- Exact Luo-critical target at one dyadic shell.
@@ -198,7 +200,7 @@ criticalDissipationAbsorbsRawHHBadRatio
   in
   subst
     (λ lower → lower ≤ eta * viscosity)
-    (sym leftMeaning)
+    leftMeaning
     (subst
       (λ upper →
         Sharp.two
@@ -207,9 +209,6 @@ criticalDissipationAbsorbsRawHHBadRatio
       rightMeaning
       doubled)
   where
-  twoNonnegative : 0ℚ ≤ Sharp.two
-  twoNonnegative = ℚP.≤-reflexive refl
-
   productNonnegative :
     0ℚ ≤ Sharp.dyadicScale shell * localizedDissipation cell
   productNonnegative =
@@ -235,9 +234,6 @@ criticalDissipationAbsorbsRawHHBadRatio
         productNN = ℚP.nonNeg*nonNeg⇒nonNeg eta Sharp.half
     in
     ℚP.nonNegative⁻¹ (eta * Sharp.half)
-    where
-    halfNonnegative : 0ℚ ≤ Sharp.half
-    halfNonnegative = ℚP.≤-reflexive refl
 
   targetNonnegative : 0ℚ ≤ eta * Sharp.half * viscosity
   targetNonnegative =
