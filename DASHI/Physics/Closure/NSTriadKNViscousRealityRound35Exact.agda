@@ -117,11 +117,11 @@ literalViscousQuadraticCoefficientReality :
   Reality.RealityCondition
     (Coefficient.literalViscousQuadraticCoefficient physicalSystem)
 literalViscousQuadraticCoefficientReality
-    physicalSystem velocityReality nonlinearReality mode =
+    physicalSystem velocityReality summedReality mode =
   trans
     (cong₂ C3.complex3Add
       (literalViscousCoefficientReality physicalSystem velocityReality mode)
-      (nonlinearReality nonlinearReality mode))
+      (nonlinearReality summedReality mode))
     (sym
       (Additive.complex3ConjugateAdd
         (Coefficient.literalViscousCoefficient physicalSystem mode)
