@@ -32,7 +32,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _-_; -_)
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using (pair)
@@ -64,7 +64,8 @@ BasedGaugeMultiplier multiplier =
 
 basedRepresentativeAtBase : ∀ multiplier coordinate →
   basedRepresentative multiplier (pair coordinate baseSite) ≡ 0ℚ
-basedRepresentativeAtBase multiplier coordinate = ℚRing.solve-∀
+basedRepresentativeAtBase multiplier coordinate =
+  ℚRing.solve-∀ (componentBaseValue multiplier coordinate)
 
 basedRepresentativeIsBased : ∀ multiplier →
   BasedGaugeMultiplier (basedRepresentative multiplier)
@@ -86,7 +87,8 @@ flatConstantGaugeEquivalentRefl : ∀ multiplier →
 flatConstantGaugeEquivalentRefl multiplier =
   flatConstantGaugeEquivalent
     (λ _ → 0ℚ)
-    (λ coordinate site → sym (ℚRing.solve-∀))
+    (λ coordinate site →
+      ℚRing.solve-∀ (multiplier (pair coordinate site)))
 
 flatConstantGaugeEquivalentSym : ∀ {left right} →
   FlatConstantGaugeEquivalent left right →
@@ -95,36 +97,41 @@ flatConstantGaugeEquivalentSym {left} {right} equivalent =
   flatConstantGaugeEquivalent
     (λ coordinate → - constantShift equivalent coordinate)
     (λ coordinate site →
-      let shifted = pointwiseShift equivalent coordinate site
-      in trans
-        (sym
-          (cong
-            (λ value → value - constantShift equivalent coordinate)
-            shifted))
-        (ℚRing.solve-∀
-          (left (pair coordinate site))
-          (constantShift equivalent coordinate)))
+      let
+        shifted = pointwiseShift equivalent coordinate site
+        leftValue = left (pair coordinate site)
+        shiftValue = constantShift equivalent coordinate
+        algebra : leftValue ≡ (leftValue + shiftValue) + (- shiftValue)
+        algebra = ℚRing.solve-∀ leftValue shiftValue
+      in
+      subst
+        (λ replacement →
+          leftValue ≡ replacement + (- shiftValue))
+        (sym shifted)
+        algebra)
 
 flatConstantGaugeEquivalentTrans : ∀ {first middle last} →
   FlatConstantGaugeEquivalent first middle →
   FlatConstantGaugeEquivalent middle last →
   FlatConstantGaugeEquivalent first last
-flatConstantGaugeEquivalentTrans firstMiddle middleLast =
+flatConstantGaugeEquivalentTrans {first} firstMiddle middleLast =
   flatConstantGaugeEquivalent
     (λ coordinate →
       constantShift firstMiddle coordinate
       + constantShift middleLast coordinate)
     (λ coordinate site →
+      let
+        firstValue = first (pair coordinate site)
+        firstShift = constantShift firstMiddle coordinate
+        secondShift = constantShift middleLast coordinate
+      in
       trans
         (pointwiseShift middleLast coordinate site)
         (trans
           (cong
-            (_+ constantShift middleLast coordinate)
+            (_+ secondShift)
             (pointwiseShift firstMiddle coordinate site))
-          (ℚRing.solve-∀
-            (FlatConstantGaugeEquivalent.constantShift firstMiddle coordinate)
-            (FlatConstantGaugeEquivalent.constantShift middleLast coordinate)
-            _)))
+          (ℚRing.solve-∀ firstValue firstShift secondShift)))
 
 originalEquivalentToBased : ∀ multiplier →
   FlatConstantGaugeEquivalent multiplier (basedRepresentative multiplier)
@@ -161,26 +168,30 @@ basedRepresentativeUniqueInClass :
 basedRepresentativeUniqueInClass
     original candidate candidateBased equivalent coordinate site =
   let
-    shift = constantShift equivalent coordinate
+    shiftValue = constantShift equivalent coordinate
     originalBase = componentBaseValue original coordinate
 
     atBase :
       candidate (pair coordinate baseSite)
-      ≡ originalBase + shift
+      ≡ originalBase + shiftValue
     atBase = pointwiseShift equivalent coordinate baseSite
 
     candidateZero : candidate (pair coordinate baseSite) ≡ 0ℚ
     candidateZero = candidateBased coordinate
 
-    shiftExact : shift ≡ - originalBase
+    sumZero : originalBase + shiftValue ≡ 0ℚ
+    sumZero = trans (sym atBase) candidateZero
+
+    shiftedSumZero :
+      (originalBase + shiftValue) - originalBase
+      ≡ 0ℚ - originalBase
+    shiftedSumZero = cong (λ total → total - originalBase) sumZero
+
+    shiftExact : shiftValue ≡ - originalBase
     shiftExact =
-      let
-        sumZero : originalBase + shift ≡ 0ℚ
-        sumZero = trans (sym atBase) candidateZero
-      in
       trans
-        (sym (ℚRing.solve-∀ originalBase shift))
-        (cong (λ total → total - originalBase) sumZero)
+        (ℚRing.solve-∀ originalBase shiftValue)
+        (trans shiftedSumZero (ℚRing.solve-∀ originalBase))
   in
   trans
     (pointwiseShift equivalent coordinate site)
