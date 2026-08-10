@@ -52,6 +52,20 @@ outsideIsNotInverse = refl
 inverseIsInverse : isInverse memberOfInverse ≡ true
 inverseIsInverse = refl
 
+isGoodCollapsesInverseAndExterior :
+  isGood memberOfInverse ≡ isGood notMemberOfEither
+isGoodCollapsesInverseAndExterior = refl
+
+data Empty : Set where
+
+inverseAndExteriorRemainDistinct :
+  memberOfInverse ≡ notMemberOfEither → Empty
+inverseAndExteriorRemainDistinct ()
+
+-- Therefore `not member of Good` cannot be used as a proof of membership in
+-- the semantic inverse class: the same Boolean output is inhabited by the
+-- exterior/non-classified state.
+
 ------------------------------------------------------------------------
 -- The zero coordinate remains compact while its fibre records why it is zero.
 ------------------------------------------------------------------------
