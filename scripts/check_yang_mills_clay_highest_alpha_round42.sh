@@ -37,6 +37,13 @@ files=(
   DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeRelativeSmallnessExact.agda
   DASHI/Physics/YangMills/BalabanSelectedFlatGaugeRegularizedGreenExact.agda
   DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeOperatorDecompositionExact.agda
+  DASHI/Physics/YangMills/BalabanSelectedFlatGaugeGreenAbsoluteMassExact.agda
+  DASHI/Physics/YangMills/BalabanFiniteRectangularAbsoluteMassExact.agda
+  DASHI/Physics/YangMills/BalabanSelectedFlatGaugeConstraintAbsoluteMassExact.agda
+  DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeDefectAbsoluteMassExact.agda
+  DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeGramPerturbationAbsoluteMassExact.agda
+  DASHI/Physics/YangMills/BalabanSelectedBackgroundFlatGreenPerturbationContractionExact.agda
+  DASHI/Physics/YangMills/BalabanSelectedBackgroundRationalCombesThomasWeightExact.agda
   DASHI/Physics/YangMills/BalabanMoscoRecoveryGapTransferExact.agda
   DASHI/Physics/YangMills/BalabanVacuumOrthogonalMoscoRecoveryExact.agda
   DASHI/Physics/YangMills/BalabanClayHighestAlphaRound42MasterReconciledValidation.agda
@@ -90,6 +97,26 @@ grep -q 'regularizedFlatGaugeGreenLeftInverse' DASHI/Physics/YangMills/BalabanSe
 grep -q 'regularizedFlatGaugeGreenRightInverse' DASHI/Physics/YangMills/BalabanSelectedFlatGaugeRegularizedGreenExact.agda
 grep -q 'selectedBackgroundBasedGaugeOperatorDecomposition' DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeOperatorDecompositionExact.agda
 grep -q 'explicitGaugeGramPerturbation' DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeOperatorDecompositionExact.agda
+grep -q 'scalarGreenAbsoluteMassExact' DASHI/Physics/YangMills/BalabanSelectedFlatGaugeGreenAbsoluteMassExact.agda
+grep -q 'scalarGreenAbsoluteMassBelowSeventeenSixteenths' DASHI/Physics/YangMills/BalabanSelectedFlatGaugeGreenAbsoluteMassExact.agda
+grep -q 'transposeProductRowMassBound' DASHI/Physics/YangMills/BalabanFiniteRectangularAbsoluteMassExact.agda
+grep -q 'selectedFlatGaugeAbsoluteRowMassBound' DASHI/Physics/YangMills/BalabanSelectedFlatGaugeConstraintAbsoluteMassExact.agda
+grep -q 'selectedFlatGaugeAbsoluteColumnMassBound' DASHI/Physics/YangMills/BalabanSelectedFlatGaugeConstraintAbsoluteMassExact.agda
+grep -q 'selectedGaugeDefectEntryAbsoluteBound' DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeDefectAbsoluteMassExact.agda
+grep -q 'selectedGaugeDefectAbsoluteRowMassBound' DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeDefectAbsoluteMassExact.agda
+grep -q 'selectedGaugeDefectAbsoluteColumnMassBound' DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeDefectAbsoluteMassExact.agda
+grep -q 'gaugeGramPerturbationThreeTermExact' DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeGramPerturbationAbsoluteMassExact.agda
+grep -q 'perturbationRowMassBound = + 6153 / 65536' DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeGramPerturbationAbsoluteMassExact.agda
+grep -q 'selectedGaugeGramPerturbationAbsoluteRowMassBound' DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeGramPerturbationAbsoluteMassExact.agda
+grep -q 'flatGreenKernelActsExactly' DASHI/Physics/YangMills/BalabanSelectedBackgroundFlatGreenPerturbationContractionExact.agda
+grep -q 'greenPerturbationContractionBound = + 104601 / 1048576' DASHI/Physics/YangMills/BalabanSelectedBackgroundFlatGreenPerturbationContractionExact.agda
+grep -q 'selectedBackgroundFlatGreenPerturbationOneTenthContraction' DASHI/Physics/YangMills/BalabanSelectedBackgroundFlatGreenPerturbationContractionExact.agda
+grep -q 'selectedBackgroundFlatGreenPerturbationHalfContraction' DASHI/Physics/YangMills/BalabanSelectedBackgroundFlatGreenPerturbationContractionExact.agda
+grep -q 'coordinateWeightInverseExact' DASHI/Physics/YangMills/BalabanSelectedBackgroundRationalCombesThomasWeightExact.agda
+grep -q 'gaugeWeightInverseExact' DASHI/Physics/YangMills/BalabanSelectedBackgroundRationalCombesThomasWeightExact.agda
+grep -q 'weightedContractionBound = + 686287161 / 4294967296' DASHI/Physics/YangMills/BalabanSelectedBackgroundRationalCombesThomasWeightExact.agda
+grep -q 'selectedBackgroundWeightedGreenPerturbationOneSixthContraction' DASHI/Physics/YangMills/BalabanSelectedBackgroundRationalCombesThomasWeightExact.agda
+grep -q 'selectedBackgroundWeightedGreenPerturbationHalfContraction' DASHI/Physics/YangMills/BalabanSelectedBackgroundRationalCombesThomasWeightExact.agda
 grep -q 'vacuumOrthogonalRecoveryTransfersUniformGap' DASHI/Physics/YangMills/BalabanVacuumOrthogonalMoscoRecoveryExact.agda
 
 grep -q '10.1007/BF01646473' DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugePerturbationFiniteRangeExact.agda
@@ -104,6 +131,13 @@ grep -q '10.1007/978-3-642-66282-9' DASHI/Physics/YangMills/BalabanSelectedBackg
 grep -q '10.1007/BF01240355' DASHI/Physics/YangMills/BalabanSelectedBackgroundRegularizedGaugeFloorExact.agda
 grep -q '10.1007/978-3-642-66282-9' DASHI/Physics/YangMills/BalabanSelectedBackgroundRegularizedGaugeFloorExact.agda
 grep -q '10.1007/BF01215223' DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeOperatorDecompositionExact.agda
+grep -q '10.1007/BF01646473' DASHI/Physics/YangMills/BalabanSelectedFlatGaugeGreenAbsoluteMassExact.agda
+grep -q '10.1017/CBO9781139020411' DASHI/Physics/YangMills/BalabanFiniteRectangularAbsoluteMassExact.agda
+grep -q '10.1007/BF01215223' DASHI/Physics/YangMills/BalabanSelectedFlatGaugeConstraintAbsoluteMassExact.agda
+grep -q '10.1007/BF01466594' DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeDefectAbsoluteMassExact.agda
+grep -q '10.1007/BF01646473' DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeGramPerturbationAbsoluteMassExact.agda
+grep -q '10.1007/BF01646473' DASHI/Physics/YangMills/BalabanSelectedBackgroundFlatGreenPerturbationContractionExact.agda
+grep -q '10.1007/BF01646473' DASHI/Physics/YangMills/BalabanSelectedBackgroundRationalCombesThomasWeightExact.agda
 grep -q '10.1016/0001-8708(69)90009-7' DASHI/Physics/YangMills/BalabanMoscoRecoveryGapTransferExact.agda
 grep -q '10.4310/cag.2003.v11.n4.a1' DASHI/Physics/YangMills/BalabanVacuumOrthogonalMoscoRecoveryExact.agda
 
