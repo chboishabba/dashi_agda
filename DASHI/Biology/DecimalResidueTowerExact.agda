@@ -18,6 +18,7 @@ module DASHI.Biology.DecimalResidueTowerExact where
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
+open import Relation.Binary.PropositionalEquality using (cong₂)
 
 import Data.Fin.Base as Fin
 import Data.Fin.Properties as FinP
