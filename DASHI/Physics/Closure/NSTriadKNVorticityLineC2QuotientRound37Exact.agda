@@ -28,11 +28,11 @@ module DASHI.Physics.Closure.NSTriadKNVorticityLineC2QuotientRound37Exact where
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
-open import Data.Rational.Base using (0ℚ; -_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans)
+open import Relation.Binary.PropositionalEquality using (cong₂)
 
 import DASHI.Physics.Closure.NSTriadKNRationalLerayProjectionExact as V
+import DASHI.Physics.Closure.NSTriadKNLuoAngularStrainDisplayedFormulaZeroExact as Matrix
 import DASHI.Physics.Closure.NSTriadKNDirectionalProjectorStabilizerRound37Exact as Projector
 
 data Orientation : Set where
@@ -85,12 +85,12 @@ record VorticityLine : Set where
 
 open VorticityLine public
 
-lineProjector : VorticityLine → Projector.Matrix.Matrix3
+lineProjector : VorticityLine → Matrix.Matrix3
 lineProjector line =
   Projector.rankOneProjector (Projector.vector (representative line))
 
 -- A representative change by the C2 action changes only the fibre coordinate;
--- the coarse line projector is definitionally/propositionally unchanged.
+-- the coarse line projector is propositionally unchanged.
 changeRepresentative : Orientation → VorticityLine → VorticityLine
 changeRepresentative orientation line =
   vorticity-line (orientUnit orientation (representative line))
