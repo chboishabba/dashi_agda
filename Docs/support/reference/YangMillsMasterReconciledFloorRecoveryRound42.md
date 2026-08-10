@@ -134,6 +134,27 @@ Here `K_0^reg` is exactly the operator inverted by the existing Fourier Green;
 `E_A` is computed from the actual selected gauge-defect matrix rather than
 supplied as an unrelated perturbation receipt.
 
+## The regularizer cancels: `E_A` is still local
+
+A possible concern with the fixed regularizer is that `P_const` is spatially
+nonlocal. `BalabanSelectedBackgroundGaugePerturbationFiniteRangeExact` removes
+that obstruction exactly.
+
+Because the same `P_const` is added to both the flat and selected-background
+Gram,
+
+`(K_A + P_const) - (K_0 + P_const) = K_A - K_0`.
+
+`regularizerCancelsFromBackgroundDifference` proves this entrywise. The actual
+selected-background and flat Gram matrices already share the same literal
+finite row stencil, so
+
+`regularizedGaugeGramDifferenceOutsideRangeZero`
+
+proves that every perturbation entry between disjoint gauge-row stencils is
+exactly zero. Thus the `E_A` entering the Green expansion is local. The next
+problem is quantitative weighted smallness, not restoration of locality.
+
 ## Continuum lower-gap route
 
 `vacuumOrthogonalRecoveryTransfersUniformGap` lifts the corrected Mosco-upper
@@ -147,19 +168,17 @@ operator merely to preserve a quadratic-form lower gap.
 The finite gauge problem is now narrower than at the start of Round 42. We have
 an exact flat quotient section, an exact proof that the physical stabilizer is
 stratified, a strict selected-background regularized floor on all 768
-multipliers, an explicit flat Green, and the exact physical decomposition
-`K_A^reg = K_0^reg + E_A`.
+multipliers, an explicit flat Green, the exact physical decomposition
+`K_A^reg = K_0^reg + E_A`, and exact finite range of `E_A`.
 
-The nearest genuine analytic task is therefore no longer generic pseudoinverse
-machinery. It is the sharp, locality-aware estimate on the *displayed* `E_A`
-needed to show a weighted contraction such as
+The nearest genuine analytic task is therefore the sharp weighted estimate on
+the displayed local `E_A` needed to show
 
-`||G_0 E_A||_mu < 1`,
+`||G_0 E_A||_mu < 1`
 
-without paying for the nonlocal constant projector in a way that destroys the
-kernel-decay argument. Once that estimate is proved, the existing finite
-Neumann/Combes–Thomas machinery can construct the background Green and its
-exponential decay.
+or an equivalent localized-parametrix contraction. Once that estimate is
+proved, the existing finite Neumann/Combes–Thomas machinery can construct the
+background Green and its exponential decay.
 
 The nonlinear physical statement that a chosen based/global/tree gauge is a
 section of the actual selected variational orbit is still separate. It must be
