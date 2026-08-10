@@ -22,11 +22,15 @@ files=(
   DASHI/Physics/YangMills/BalabanSelectedCombinedConstraintRowCarrierExact.agda
   DASHI/Physics/YangMills/BalabanSelectedCombinedConstraintFiniteKKTExact.agda
   DASHI/Physics/YangMills/BalabanSelectedConstraintDimensionTowerExact.agda
+  DASHI/Physics/YangMills/BalabanSelectedFlatGaugeReducedFloorExact.agda
+  DASHI/Physics/YangMills/BalabanSelectedGaugeRedundancyHolonomyGuardExact.agda
+  DASHI/Physics/YangMills/BalabanFiniteReducedFloorPerturbationExact.agda
   DASHI/Physics/YangMills/BalabanSZZStrongCouplingDecisionExact.agda
   DASHI/Physics/YangMills/BalabanSelectedOwnerBudgetSlackExact.agda
   DASHI/Physics/YangMills/BalabanSelectedCertifiedOwnerEnclosureExact.agda
   DASHI/Physics/YangMills/BalabanSelectedSinglePlaquetteWitnessExact.agda
   DASHI/Physics/YangMills/BalabanMoscoRecoveryGapTransferExact.agda
+  DASHI/Physics/YangMills/BalabanVacuumOrthogonalMoscoRecoveryExact.agda
   DASHI/Physics/Closure/NSGalerkinSameObjectExact.agda
   DASHI/Physics/Closure/NSHHBadScaleGainFalsificationExact.agda
   DASHI/Physics/Closure/NSAdmissibleRemainderGrammarExact.agda
@@ -87,6 +91,13 @@ grep -q 'selectedCombinedConstraintGramQuadraticExact' DASHI/Physics/YangMills/B
 grep -q 'selectedCombinedConstraintGramQuadraticNonnegative' DASHI/Physics/YangMills/BalabanSelectedCombinedConstraintFiniteKKTExact.agda
 grep -q 'selectedCombinedConstraintRowCount' DASHI/Physics/YangMills/BalabanSelectedConstraintDimensionTowerExact.agda
 grep -q 'selectedBackgroundConstraintGramSymmetric' DASHI/Physics/YangMills/BalabanSelectedConstraintDimensionTowerExact.agda
+
+grep -q 'flatGaugeReducedPoincare' DASHI/Physics/YangMills/BalabanSelectedFlatGaugeReducedFloorExact.agda
+grep -q 'nearIdentityInsideRelaxedRadius' DASHI/Physics/YangMills/BalabanSelectedGaugeRedundancyHolonomyGuardExact.agda
+grep -q 'flatConstantRedundancyNotAutomaticallyTransported' DASHI/Physics/YangMills/BalabanSelectedGaugeRedundancyHolonomyGuardExact.agda
+grep -q 'finiteVectorHalfMinusDefectLower' DASHI/Physics/YangMills/BalabanFiniteReducedFloorPerturbationExact.agda
+grep -q 'perturbedReducedFloor' DASHI/Physics/YangMills/BalabanFiniteReducedFloorPerturbationExact.agda
+
 grep -q 'szzDashiNormalizationExact' DASHI/Physics/YangMills/BalabanSZZStrongCouplingDecisionExact.agda
 grep -q 'szzSU2D4BakryEmeryFactorizationExact' DASHI/Physics/YangMills/BalabanSZZStrongCouplingDecisionExact.agda
 grep -q 'szzSU2D4StrongCouplingThresholdExact' DASHI/Physics/YangMills/BalabanSZZStrongCouplingDecisionExact.agda
@@ -100,6 +111,7 @@ grep -q 'LiteralSelectedPlaquetteWitness' DASHI/Physics/YangMills/BalabanSelecte
 grep -q 'literalSelectedPlaquetteWitnessToCorrelatedExtractionData' DASHI/Physics/YangMills/BalabanSelectedSinglePlaquetteWitnessExact.agda
 grep -q 'recoveryStepTransfersUniformGap' DASHI/Physics/YangMills/BalabanMoscoRecoveryGapTransferExact.agda
 grep -q 'liminfOnlyCounterexampleLimitGapWouldBeOneBelowZero' DASHI/Physics/YangMills/BalabanMoscoRecoveryGapTransferExact.agda
+grep -q 'vacuumOrthogonalRecoveryTransfersUniformGap' DASHI/Physics/YangMills/BalabanVacuumOrthogonalMoscoRecoveryExact.agda
 
 grep -q 'physicalStateRepresentsEncoding' DASHI/Physics/Closure/NSGalerkinSameObjectExact.agda
 grep -q 'encodingRepresentsCoefficientFunction' DASHI/Physics/Closure/NSGalerkinSameObjectExact.agda
@@ -115,6 +127,9 @@ grep -q 'NoForbiddenDependency' DASHI/Physics/Closure/NSAdmissibleRemainderGramm
 grep -q 'nineOwnerAbsorptionWithSlack' DASHI/Physics/Closure/NSNineOwnerStrictSlackExact.agda
 
 grep -q '10.1007/BF01466594' DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeConstraintMatrixExact.agda
+grep -q '10.1007/BF01466594' DASHI/Physics/YangMills/BalabanSelectedFlatGaugeReducedFloorExact.agda
+grep -q '10.1007/978-3-319-13467-3' DASHI/Physics/YangMills/BalabanSelectedGaugeRedundancyHolonomyGuardExact.agda
+grep -q '10.1007/978-3-642-66282-9' DASHI/Physics/YangMills/BalabanFiniteReducedFloorPerturbationExact.agda
 grep -q '10.1007/BF01211042' DASHI/Physics/YangMills/BalabanSelectedBackgroundBlockAverageConstraintMatrixExact.agda
 grep -q '10.1007/BF01240355' DASHI/Physics/YangMills/BalabanSelectedBackgroundCombinedConstraintMatrixExact.agda
 grep -q '10.1007/s00220-022-04609-1' DASHI/Physics/YangMills/BalabanSZZStrongCouplingDecisionExact.agda
@@ -123,6 +138,7 @@ grep -q '10.1007/BF01646473' DASHI/Physics/YangMills/BalabanSelectedBackgroundGa
 grep -q '10.1007/BF01229381' DASHI/Physics/YangMills/BalabanSelectedSinglePlaquetteWitnessExact.agda
 grep -q '10.1137/1.9780898717716' DASHI/Physics/YangMills/BalabanSelectedCertifiedOwnerEnclosureExact.agda
 grep -q '10.1016/0001-8708(69)90009-7' DASHI/Physics/YangMills/BalabanMoscoRecoveryGapTransferExact.agda
+grep -q '10.1016/0001-8708(69)90009-7' DASHI/Physics/YangMills/BalabanVacuumOrthogonalMoscoRecoveryExact.agda
 grep -q '10.1007/s00021-019-0411-z' DASHI/Physics/Closure/NSHHBadScaleGainFalsificationExact.agda
 grep -q '10.1007/BF01212349' DASHI/Physics/Closure/NSAdmissibleRemainderGrammarExact.agda
 
