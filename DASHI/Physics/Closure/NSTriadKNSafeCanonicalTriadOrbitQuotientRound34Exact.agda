@@ -22,12 +22,9 @@ module DASHI.Physics.Closure.NSTriadKNSafeCanonicalTriadOrbitQuotientRound34Exac
 --
 -- Here recursion is strictly structural on the original input list.  The
 -- recursive result is a proof-carrying `OrbitRepresentativePartition` whose
--- representatives are:
---
---   * a subset of the processed list;
---   * covering every processed triad modulo the 12-element
---     permutation/reality orbit;
---   * pairwise separated modulo that orbit.
+-- representatives are a subset of the processed list, cover every processed
+-- triad modulo the 12-element permutation/reality orbit, and are pairwise
+-- orbit-separated.
 --
 -- Inserting one new triad performs a decidable orbit lookup.  If an existing
 -- representative is found, coverage is extended.  Otherwise the triad is
@@ -50,7 +47,7 @@ import Data.Integer.Properties as ℤP
 open import Data.List.Base using (List; []; _∷_)
 open import Data.List.Membership.Propositional using (_∈_)
 open import Data.List.Relation.Unary.Any using (here; there)
-open import Data.Product using (Σ; _,_; _×_; proj₁; proj₂)
+open import Data.Product using (Σ; _,_; _×_)
 open import Relation.Nullary using (Dec; yes; no)
 open import Relation.Binary.PropositionalEquality using
   (cong; subst; sym; trans)
@@ -345,7 +342,7 @@ lookupOrbit candidate (head ∷ tail)
         false≢true
           (trans
             (sym orbitResult)
-            (sameOrbitComplete candidate representative
+            (sameOrbitComplete candidate head
               (subst
                 (Orbit.SameCanonicalTriadOrbit candidate)
                 equality same)))
@@ -387,7 +384,7 @@ insertHead :
   {tail : List Lattice.LatticeTriad} →
   OrbitRepresentativePartition tail →
   OrbitRepresentativePartition (head ∷ tail)
-insertHead head partition
+insertHead head {tail} partition
   with lookupOrbit head (representatives partition)
 ... | orbit-hit representative representativeMember same =
   orbit-representative-partition
@@ -398,7 +395,7 @@ insertHead head partition
     (separate partition)
   where
   coverHeadOrTail :
-    ∀ triad → triad ∈ head ∷ _ →
+    ∀ triad → triad ∈ head ∷ tail →
     Σ Lattice.LatticeTriad
       (λ selected →
         (selected ∈ representatives partition) ×
@@ -424,13 +421,13 @@ insertHead head partition
   subsetHeadOrTail :
     ∀ representative →
     representative ∈ head ∷ representatives partition →
-    representative ∈ head ∷ _
+    representative ∈ head ∷ tail
   subsetHeadOrTail representative (here equality) = here equality
   subsetHeadOrTail representative (there member) =
     there (representativeSubset partition representative member)
 
   coverHeadOrTail :
-    ∀ triad → triad ∈ head ∷ _ →
+    ∀ triad → triad ∈ head ∷ tail →
     Σ Lattice.LatticeTriad
       (λ representative →
         (representative ∈ head ∷ representatives partition) ×
@@ -541,12 +538,9 @@ attachedRetained cutoff [] retained representative ()
 attachedRetained cutoff (triad ∷ rest) retained representative
     (here equality) =
   subst
-    (Orbit.FullCutoffZeroSumTriad cutoff ∘ Energy.triad)
+    (λ selected → Orbit.FullCutoffZeroSumTriad cutoff (Energy.triad selected))
     (sym equality)
     (retained triad (here refl))
-  where
-  _∘_ : ∀ {A B C : Set} → (B → C) → (A → B) → A → C
-  (f ∘ g) x = f (g x)
 attachedRetained cutoff (triad ∷ rest) retained representative
     (there member) =
   attachedRetained cutoff rest
@@ -567,7 +561,7 @@ attachedUnderlyingMember cutoff (triad ∷ rest) retained representative
     (here equality) =
   subst
     (λ selected → selected ∈ triad ∷ rest)
-    (cong Energy.triad equality)
+    (sym (cong Energy.triad equality))
     (here refl)
 attachedUnderlyingMember cutoff (triad ∷ rest) retained representative
     (there member) =
