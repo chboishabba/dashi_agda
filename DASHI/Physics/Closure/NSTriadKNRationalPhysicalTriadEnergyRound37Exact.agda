@@ -45,6 +45,7 @@ open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
+import DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier as Cube
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadOrbitConstruction as Orbit
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
@@ -140,7 +141,7 @@ literalCutoffTriadPowerSumZero E I cutoff velocity reality divergenceFree =
 
 literalCutoffTriadEnumerationDuplicateFree :
   ∀ cutoff →
-  Physical.NoDuplicates (Physical.physicalTriadEnumeration cutoff)
+  Cube.NoDuplicates (Physical.physicalTriadEnumeration cutoff)
 literalCutoffTriadEnumerationDuplicateFree =
   Physical.physicalTriadEnumerationNoDuplicates
 
