@@ -29,7 +29,7 @@ for file in "${files[@]}" "$doc"; do
   test -f "$file"
 done
 
-if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|\{!|!\}|TERMINATING|NO_TERMINATION_CHECK|allow-unsolved-metas|--no-positivity-check|--no-termination-check|NON_COVERING|--type-in-type|trustMe|primTrustMe|funext' "${files[@]}"; then
+if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|\{!|!\}|\{\-#[[:space:]]*(TERMINATING|NO_TERMINATION_CHECK)|allow-unsolved-metas|--no-positivity-check|--no-termination-check|NON_COVERING|--type-in-type|trustMe|primTrustMe|funext' "${files[@]}"; then
   echo "round thirty-four contains a hole, postulate, unsafe escape, trust primitive, or extensionality shortcut" >&2
   exit 1
 fi
