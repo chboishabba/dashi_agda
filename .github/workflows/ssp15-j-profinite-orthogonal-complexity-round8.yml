@@ -1,0 +1,73 @@
+name: SSP15 indexed-j profinite orthogonal complexity round 8
+
+on:
+  push:
+    branches: ['agent/ssp15-j-profinite-orthogonal-complexity-round8']
+  pull_request:
+    branches:
+      - 'agent/ssp15-j-profinite-orthogonal-complexity-round8'
+      - 'agent/ssp15-j-stratified-quotient-multiresolution-round7'
+      - 'agent/ssp15-j-gluing-mathieu-interference-round6'
+      - 'master'
+    paths:
+      - 'DASHI/Analysis/NormalizedFibreAveragingExact.agda'
+      - 'DASHI/Analysis/WeightedCoarseFineOrthogonalExact.agda'
+      - 'DASHI/Analysis/GlassesProjectionInvolutionExact.agda'
+      - 'DASHI/Foundations/FilteredExtensionSplittingExact.agda'
+      - 'DASHI/Foundations/ClaimScopeCertificateExact.agda'
+      - 'DASHI/Biology/DecimalResidueTowerExact.agda'
+      - 'DASHI/Biology/DecimalCRTResolutionExact.agda'
+      - 'DASHI/Biology/TenAdicInverseLimitBridge.agda'
+      - 'DASHI/Biology/SignedMultiplicityObstructionExact.agda'
+      - 'DASHI/Biology/FRACTRANWreathControlledSymmetryExact.agda'
+      - 'DASHI/Biology/SpectralReachabilityComplexityExact.agda'
+      - 'DASHI/Culture/SignedMultiplicityYinYangBridgeExact.agda'
+      - 'DASHI/Culture/BeliefFibreReplicationExact.agda'
+      - 'DASHI/Moonshine/SSPJProfiniteOrthogonalComplexityRound8Validation.agda'
+      - 'DASHI/EverythingSSPJProfiniteOrthogonalComplexityRound8.agda'
+      - 'Docs/support/reference/SSP15JProfiniteOrthogonalComplexityRound8.md'
+      - 'scripts/check_ssp15_j_profinite_orthogonal_complexity_round8.sh'
+      - 'scripts/check_ssp15_j_stratified_quotient_multiresolution_round7.sh'
+      - 'scripts/classify_agda_substance.py'
+      - 'scripts/run_agda29_parallel_check.sh'
+      - '.github/workflows/ssp15-j-profinite-orthogonal-complexity-round8.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  AGDA_FLAKE: github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin
+  AGDA_JOBS: '2'
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 100
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Install Nix
+        uses: cachix/install-nix-action@630ae543ea3a38a9a4166f03376c02c50f408342 # v31
+      - name: Cache pinned Agda environment
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: ${{ runner.temp }}/dashi-agda29
+          key: ${{ runner.os }}-agda29-86a1179c1f886da773dc53be920bcca5d876884e
+          restore-keys: |
+            ${{ runner.os }}-agda29-
+      - name: Check indexed-j profinite orthogonal complexity
+        shell: bash
+        run: |
+          set -euo pipefail
+          export DASHI_REPO_ROOT="$GITHUB_WORKSPACE"
+          export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
+          bash scripts/check_ssp15_j_profinite_orthogonal_complexity_round8.sh
+      - name: Upload substance audit
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: ssp15-j-profinite-orthogonal-complexity-round8
+          path: artifacts/ssp15-j-profinite-orthogonal-complexity-round8.json
+          if-no-files-found: ignore
