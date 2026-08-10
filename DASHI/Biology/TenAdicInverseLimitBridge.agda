@@ -24,6 +24,7 @@ module DASHI.Biology.TenAdicInverseLimitBridge where
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
+open import Relation.Binary.PropositionalEquality using (cong₂)
 
 import DASHI.Foundations.StratifiedResolutionTowerExact as Tower
 import DASHI.Biology.IndexedJStratifiedMultiresolutionExact as J
