@@ -21,6 +21,7 @@ on:
       - 'DASHI/Biology/SignedMultiplicityObstructionExact.agda'
       - 'DASHI/Biology/FRACTRANWreathControlledSymmetryExact.agda'
       - 'DASHI/Biology/SpectralReachabilityComplexityExact.agda'
+      - 'DASHI/Biology/SignedWreathReachabilityBridgeExact.agda'
       - 'DASHI/Culture/SignedMultiplicityYinYangBridgeExact.agda'
       - 'DASHI/Culture/BeliefFibreReplicationExact.agda'
       - 'DASHI/Moonshine/SSPJProfiniteOrthogonalComplexityRound8Validation.agda'
