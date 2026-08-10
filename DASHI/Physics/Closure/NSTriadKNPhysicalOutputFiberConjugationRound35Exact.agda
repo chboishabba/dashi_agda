@@ -30,8 +30,10 @@ module DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiberConjugationRound35Exact
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Product using (_×_; _,_)
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Relation.Binary.PropositionalEquality using
+  (cong; subst; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier as Cube
@@ -39,6 +41,25 @@ import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadSymmetry as Symmetry
 import DASHI.Physics.Closure.NSTriadKNPhysicalSymmetryEnumerationClosure as EnumerationClosure
 import DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber as Output
+
+filterOutputMemberOriginal :
+  ∀ {output items τ} →
+  τ Cube.∈ Output.filterOutput output items →
+  τ Cube.∈ items
+filterOutputMemberOriginal {items = []} ()
+filterOutputMemberOriginal {output} {items = head ∷ tail} {τ} member
+  with Output.modeEqual (Physical.k head) output
+... | true with member
+...   | Cube.here equality = Cube.here equality
+...   | Cube.there rest =
+      Cube.there (filterOutputMemberOriginal rest)
+... | false = Cube.there (filterOutputMemberOriginal member)
+
+physicalOutputFiberMemberEnumeration :
+  ∀ {cutoff output τ} →
+  τ Cube.∈ Output.physicalOutputFiber cutoff output →
+  τ Cube.∈ Physical.physicalTriadEnumeration cutoff
+physicalOutputFiberMemberEnumeration = filterOutputMemberOriginal
 
 conjugateOutputEquality :
   ∀ {output} (τ : Physical.PhysicalTriadIncidence) →
@@ -61,11 +82,7 @@ conjugateFiberMember {cutoff} {output} {τ} member =
       (Output.physicalOutputFiberSound member))
   where
   listed : τ Cube.∈ Physical.physicalTriadEnumeration cutoff
-  listed =
-    Output.filterOutputMemberOriginal
-      output
-      (Physical.physicalTriadEnumeration cutoff)
-      member
+  listed = physicalOutputFiberMemberEnumeration member
 
 record SameIncidenceLabels
     (left right : Physical.PhysicalTriadIncidence) : Set where
@@ -120,11 +137,12 @@ physicalOutputFiberConjugationBijection cutoff output = record
               (Z3.negateMode (Z3.negateMode output))
         first = conjugateFiberMember member
       in
-      Output.filterOutputComplete
+      subst
+        (λ selectedOutput →
+          Symmetry.conjugateTriad σ
+            Cube.∈ Output.physicalOutputFiber cutoff selectedOutput)
+        (Symmetry.negateModeInvolutive output)
         first
-        (trans
-          (Output.physicalOutputFiberSound first)
-          (Symmetry.negateModeInvolutive output))
   ; forwardBackwardLabels = doubleConjugateLabels
   }
 
