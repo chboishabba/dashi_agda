@@ -1,6 +1,5 @@
 module DASHI.Cognition.PNF.ProofRelevantIdentityFibres where
 
-open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
@@ -127,19 +126,26 @@ record AdmittedIdentityWitness : Set where
 open AdmittedIdentityWitness public
 
 ------------------------------------------------------------------------
--- Candidate multiplicity remains indexed exactly as in sparse frontier
--- resolution.  Only the unique-witness branch has an identity projection.
+-- Projection is indexed by the exact admitted witness.  The unique constructor
+-- requires the runtime integrity conditions directly: candidate count is one
+-- and witness authority equals the target entity authority.  Multiplicity is
+-- therefore not a disconnected annotation on an otherwise admissible proof.
 ------------------------------------------------------------------------
 
-data IdentityProjection : WitnessMultiplicity → Set where
+data IdentityProjection
+  (witness : AdmittedIdentityWitness) : WitnessMultiplicity → Set where
   uniqueIdentityProjection :
-    AdmittedIdentityWitness → IdentityProjection oneWitness
+    witnessCandidateCount (admittedWitness witness) ≡ 1 →
+    witnessAuthority (admittedWitness witness) ≡
+      canonicalAuthority (witnessTargetEntity (admittedWitness witness)) →
+    IdentityProjection witness oneWitness
 
-noWitnessCannotProjectIdentity : IdentityProjection noWitness → ⊥
+noWitnessCannotProjectIdentity :
+  ∀ {witness} → IdentityProjection witness noWitness → ⊥
 noWitnessCannotProjectIdentity ()
 
 ambiguousWitnessesCannotProjectIdentity :
-  IdentityProjection severalWitnesses → ⊥
+  ∀ {witness} → IdentityProjection witness severalWitnesses → ⊥
 ambiguousWitnessesCannotProjectIdentity ()
 
 record IdentityFibreMember : Set where
@@ -148,7 +154,7 @@ record IdentityFibreMember : Set where
     fibreLocalObject : ObjectId
     fibreEntity : CanonicalEntity
     fibreWitness : AdmittedIdentityWitness
-    fibreProjection : IdentityProjection oneWitness
+    fibreProjection : IdentityProjection fibreWitness oneWitness
     fibreSourceMatchesWitness :
       fibreLocalObject ≡ witnessSourceObject (admittedWitness fibreWitness)
     fibreEntityMatchesWitness :
