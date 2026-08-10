@@ -147,7 +147,14 @@ record IdentityFibreMember : Set where
   field
     fibreLocalObject : ObjectId
     fibreEntity : CanonicalEntity
+    fibreWitness : AdmittedIdentityWitness
     fibreProjection : IdentityProjection oneWitness
+    fibreSourceMatchesWitness :
+      fibreLocalObject ≡ witnessSourceObject (admittedWitness fibreWitness)
+    fibreEntityMatchesWitness :
+      canonicalEntityIdentity fibreEntity ≡
+        canonicalEntityIdentity
+          (witnessTargetEntity (admittedWitness fibreWitness))
 
 open IdentityFibreMember public
 
