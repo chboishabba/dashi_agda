@@ -23,7 +23,7 @@ module DASHI.Physics.Closure.NSTriadKNComCotlarDyadicEnvelopeRound34Exact where
 --
 -- DASHI CONTRIBUTION
 --
--- Quantify two exact rational cross-shell targets.
+-- Quantify exact rational cross-shell targets.
 --
 -- Direct Round-30 target:
 --
@@ -43,10 +43,19 @@ module DASHI.Physics.Closure.NSTriadKNComCotlarDyadicEnvelopeRound34Exact where
 -- The exact rational square-root envelope is C 2^-|q-r| because
 -- (2^-d)^2 = 4^-d.  This avoids hiding an irrational square-root convention.
 --
--- Neither target is asserted physically here.  The physical theorem remains
--- the two-sided operator estimate for the literal commutator family.  What is
--- now fixed exactly is the decay strength, finite row mass and tail budget that
--- such a theorem must deliver.
+-- Luo's scalar flux argument naturally contains the stronger quarter-decay
+-- kernel 4^-distance.  Its direct symmetric mass is also computed exactly:
+--
+--   1 + 2 sum_{d=1}^R 4^-d
+--     = 5/3 - (2/3) 4^-R,
+--
+-- with limiting mass 5/3.  This does not promote Luo's scalar flux estimate
+-- into the two-sided operator pair-product theorem, but it records the exact
+-- summability reserve available if that stronger decay survives the operator
+-- realization.
+--
+-- Neither operator target is asserted physically here.  The remaining theorem
+-- is still the two-sided estimate for the literal commutator family.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -60,9 +69,11 @@ open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 import DASHI.Physics.Closure.NSTriadKNHHBadSharpDyadicGainRound33Exact as Dyadic
 
-quarter three : ℚ
+quarter three fiveThirds twoThirds : ℚ
 quarter = Int.+ 1 / 4
 three = Int.+ 3 / 1
+fiveThirds = Int.+ 5 / 3
+twoThirds = Int.+ 2 / 3
 
 quarterDecay : Nat → ℚ
 quarterDecay zero = 1ℚ
@@ -106,6 +117,33 @@ cotlarSymmetricMassPlusTail radius =
       (λ mass → mass + Dyadic.two * dyadicWeight radius)
       (cotlarSymmetricMassClosedForm radius))
     (ℚRing.solve-∀ (dyadicWeight radius))
+
+quarterSymmetricMass : Nat → ℚ
+quarterSymmetricMass zero = 1ℚ
+quarterSymmetricMass (suc radius) =
+  quarterSymmetricMass radius
+  + Dyadic.two * quarterDecay (suc radius)
+
+quarterSymmetricMassClosedForm :
+  ∀ radius →
+  quarterSymmetricMass radius
+  ≡ fiveThirds - twoThirds * quarterDecay radius
+quarterSymmetricMassClosedForm zero = ℚRing.solve []
+quarterSymmetricMassClosedForm (suc radius)
+  rewrite quarterSymmetricMassClosedForm radius =
+  ℚRing.solve-∀ (quarterDecay radius)
+
+quarterSymmetricMassPlusTail :
+  ∀ radius →
+  quarterSymmetricMass radius
+    + twoThirds * quarterDecay radius
+  ≡ fiveThirds
+quarterSymmetricMassPlusTail radius =
+  trans
+    (cong
+      (λ mass → mass + twoThirds * quarterDecay radius)
+      (quarterSymmetricMassClosedForm radius))
+    (ℚRing.solve-∀ (quarterDecay radius))
 
 directEnvelope : ℚ → Nat → ℚ
 directEnvelope constant distance =
