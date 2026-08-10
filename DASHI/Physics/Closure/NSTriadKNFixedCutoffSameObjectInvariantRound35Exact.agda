@@ -37,6 +37,7 @@ module DASHI.Physics.Closure.NSTriadKNFixedCutoffSameObjectInvariantRound35Exact
 -- F2/F3 still construct and integrate that vector field on Bishop reals.
 ------------------------------------------------------------------------
 
+open import Agda.Primitive using (lsuc)
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
@@ -191,7 +192,7 @@ derivativeCutoffSameObjectDatum datum =
 record FixedCutoffSameObjectVectorFieldInvariant
     {r} (F : C3.RealField r) (E : C3.IntegerEmbedding F)
     {state : State.ReconstructedPhysicalState F E}
-    (datum : Cutoff.CutoffSameObjectDatum F E state) : Set (Agda.Primitive.lsuc r) where
+    (datum : Cutoff.CutoffSameObjectDatum F E state) : Set (lsuc r) where
   field
     derivativeState : State.ReconstructedPhysicalState F E
     derivativeExact :
