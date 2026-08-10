@@ -1,16 +1,17 @@
 module DASHI.Cognition.PNF.DocumentScopedIdentityEvidenceExecution where
 
-open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 open import Data.Nat using (ℕ; _≤_)
 
 ------------------------------------------------------------------------
--- Migration 081 execution contract.
+-- Migrations 081 and 083 execution contract.
 --
--- Identity evidence is still judged by the proof-relevant epistemic layer, but
--- execution is document-scoped before any minimum-span/window reduction occurs.
--- The document anchor is computed once and evidence lanes are fibres over that
--- shared carrier.  No constructor permits corpus-global anchor evaluation.
+-- Identity evidence is judged by the proof-relevant epistemic layer, while
+-- execution is document-scoped before any minimum-span reduction occurs. Exact
+-- object-token support is the primary observation bridge; span containment is a
+-- fallback only when exact support is absent. Evidence lanes are fibres over one
+-- shared document anchor carrier. No constructor permits corpus-global anchor
+-- evaluation or fallback in the presence of exact support.
 ------------------------------------------------------------------------
 
 data Scope : Set where
@@ -21,6 +22,16 @@ data AnchorEvaluation : Scope → Set where
 
 corpusGlobalAnchorForbidden : AnchorEvaluation corpusGlobal → ⊥
 corpusGlobalAnchorForbidden ()
+
+data ExactSupportAvailability : Set where
+  exactSupportPresent exactSupportAbsent : ExactSupportAvailability
+
+data AnchorRoute : ExactSupportAvailability → Set where
+  exactTokenSupportRoute : AnchorRoute exactSupportPresent
+  spanFallbackRoute : AnchorRoute exactSupportAbsent
+
+fallbackWithExactSupportForbidden : AnchorRoute exactSupportPresent → Set
+fallbackWithExactSupportForbidden exactTokenSupportRoute = Set
 
 record DocumentCarrier : Set where
   constructor documentCarrier
@@ -43,8 +54,8 @@ open DocumentAnchorCarrier public
 data EvidenceLane : Set where
   appositionLane properNameLane aliasLane : EvidenceLane
 
--- All parser-evidence lanes consume the same document anchor carrier.  This is
--- the formal counterpart of SQL MATERIALIZED doc_anchor in migration 081.
+-- All parser-evidence lanes consume the same document anchor carrier. This is
+-- the formal counterpart of SQL MATERIALIZED doc_anchor.
 record EvidenceFibre
   (carrier : DocumentCarrier)
   (anchor : DocumentAnchorCarrier carrier)
@@ -64,8 +75,7 @@ record SharedAnchorExecution (carrier : DocumentCarrier) : Set where
 open SharedAnchorExecution public
 
 -- Work is bounded by the selected document carrier rather than the corpus
--- carrier.  The theorem intentionally states a structural bound, not a wall-time
--- claim: the runtime still needs empirical query-plan validation.
+-- carrier. The theorem intentionally states a structural bound, not wall time.
 record DocumentScopedWorkBound
   (selected corpus : DocumentCarrier) : Set where
   constructor documentScopedWorkBound
@@ -76,13 +86,21 @@ record DocumentScopedWorkBound
 
 open DocumentScopedWorkBound public
 
+-- Semantic refresh transactions are document scoped. This mirrors the runtime
+-- runner releasing locks and committing/retracting proof state per document.
+data SemanticRefreshTransactionScope : Set where
+  documentRefreshTransaction : SemanticRefreshTransactionScope
+
 record IdentityEvidenceExecutionBoundary : Set where
   constructor identityEvidenceExecutionBoundary
   field
     corpusAnchorDenied : AnchorEvaluation corpusGlobal → ⊥
+    refreshTransaction : SemanticRefreshTransactionScope
 
 open IdentityEvidenceExecutionBoundary public
 
 canonicalIdentityEvidenceExecutionBoundary : IdentityEvidenceExecutionBoundary
 canonicalIdentityEvidenceExecutionBoundary =
-  identityEvidenceExecutionBoundary corpusGlobalAnchorForbidden
+  identityEvidenceExecutionBoundary
+    corpusGlobalAnchorForbidden
+    documentRefreshTransaction
