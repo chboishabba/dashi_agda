@@ -128,3 +128,11 @@ validationFiniteBifiltrationDoesNotProveLimitInterchange :
     Bif.canonicalJ369BifiltrationBoundary
   ≡ false
 validationFiniteBifiltrationDoesNotProveLimitInterchange = refl
+
+------------------------------------------------------------------------
+-- Validation-trigger theorem: this lives only on the temporary v2 branch.
+------------------------------------------------------------------------
+
+validationTriggerRetainsSecondDecimalCut :
+  J.retainedResolutionCount 10 2 ≡ 111
+validationTriggerRetainsSecondDecimalCut = J.decimalRetained2
