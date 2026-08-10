@@ -273,7 +273,7 @@ backgroundAdjointNormFromMeanPerturbation background multiplier =
       (λ upper →
         KKT.stateNormSq (Rect.vectorAdd centeredAdjoint constantAdjoint)
         ≤ upper)
-      (sym (backgroundAdjointMeanNormExact background multiplier))
+      (backgroundAdjointMeanNormExact background multiplier)
       ℚP.≤-refl)
 
 centeredHalfLower :
