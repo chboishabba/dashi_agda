@@ -10,6 +10,7 @@ sources=(
   DASHI/Foundations/Base369SignedMembershipExact.agda
   DASHI/Foundations/Base369LayeredAttractorAndCoarseFineExact.agda
   DASHI/Foundations/Base369AddressSymmetryAndBranchGeometryExact.agda
+  DASHI/Foundations/Base369PrefixUltrametricExact.agda
   DASHI/Foundations/Base369ProcessBranchAttractorExact.agda
   DASHI/Foundations/Base369StepStateSymmetryQuotientExact.agda
   DASHI/Foundations/Base369WaveContinuousSymbolicCodingExact.agda
@@ -39,6 +40,7 @@ required_markers=(
   'attractiveDeadEnd369'
   'coarseFineCoordinateCountIs11'
   'sharedPrefixDepthSelf'
+  'prefixUltrametricThreshold'
   'threeStrandBraidRelation'
   'propagatedSymmetryBrokenAtWitness'
   'beneficialBudgetExampleHasPositiveMargin'
