@@ -54,7 +54,7 @@ import DASHI.Physics.Closure.NSTriadKNLuoCriticalDissipationHHBadBridgeRound34Ex
 import DASHI.Physics.Closure.NSTriadKNHHBadEnergyNormalizedCoercivityRound37Exact as Normalized
 
 oneNonnegative : 0ℚ ≤ 1ℚ
-oneNonnegative = ℚP.≤-refl
+oneNonnegative = toWitness {a? = 0ℚ ≤? 1ℚ} _
 
 oneBelowTwo : 1ℚ ≤ Sharp.two
 oneBelowTwo = toWitness {a? = 1ℚ ≤? Sharp.two} _
