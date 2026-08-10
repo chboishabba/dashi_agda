@@ -12,6 +12,7 @@ files=(
   DASHI/Physics/Closure/NSTriadKNDirectionalProjectorStabilizerRound37Exact.agda
   DASHI/Physics/Closure/NSTriadKNDirectionalProjectorDefectBridgeRound37Exact.agda
   DASHI/Physics/Closure/NSTriadKNPhysicalProjectorDefectRound37Exact.agda
+  DASHI/Physics/Closure/NSTriadKNVorticityLineC2QuotientRound37Exact.agda
   DASHI/Physics/Closure/NSTriadKNFinitePVProjectorIncrementRound37Exact.agda
   DASHI/Physics/Closure/NSTriadKNHHBadScaleInvariantGeometryObstructionRound37Exact.agda
   DASHI/Physics/Closure/NSTriadKNHHBadEnergyNormalizedCoercivityRound37Exact.agda
@@ -41,6 +42,7 @@ grep -q 'projectorDefectIncrementFactorization' DASHI/Physics/Closure/NSTriadKND
 grep -q 'rankOneProjectorNegationInvariant' DASHI/Physics/Closure/NSTriadKNDirectionalProjectorStabilizerRound37Exact.agda
 grep -q 'projectorDefectIsTwiceExistingDirectionalDefect' DASHI/Physics/Closure/NSTriadKNDirectionalProjectorDefectBridgeRound37Exact.agda
 grep -q 'physicalProjectorDefectIdentity' DASHI/Physics/Closure/NSTriadKNPhysicalProjectorDefectRound37Exact.agda
+grep -q 'projectorDefectRepresentativeInvariant' DASHI/Physics/Closure/NSTriadKNVorticityLineC2QuotientRound37Exact.agda
 grep -q 'finitePVProjectorIncrementIdentity' DASHI/Physics/Closure/NSTriadKNFinitePVProjectorIncrementRound37Exact.agda
 grep -q 'uniformDirectionOnlyFloorMustBeNonpositive' DASHI/Physics/Closure/NSTriadKNHHBadScaleInvariantGeometryObstructionRound37Exact.agda
 grep -q 'badEnergyCoercivityProducesInverseShellCharging' DASHI/Physics/Closure/NSTriadKNHHBadEnergyNormalizedCoercivityRound37Exact.agda
