@@ -1,0 +1,1 @@
+module DASHI.Physics.Closure.NSTriadKNPeriodicFourierStrainGramRound35Exact where
