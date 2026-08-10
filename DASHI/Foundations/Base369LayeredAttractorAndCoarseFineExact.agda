@@ -24,6 +24,8 @@ open import Base369 using
 open import DASHI.Foundations.Base369SignedMembershipExact using
   ( NominalActual
   ; nominalActual
+  ; nominal
+  ; actual
   )
 
 record Horizon3 : Set where
@@ -227,12 +229,12 @@ declaredPositiveRealisedAdverse11 =
     (λ _ → tri-low)
 
 nominalSideIsPositive :
-  NominalActual.nominal (coarseSemanticPair declaredPositiveRealisedAdverse11)
+  nominal (coarseSemanticPair declaredPositiveRealisedAdverse11)
   ≡ tri-high
 nominalSideIsPositive = refl
 
 actualSideIsAdverse :
-  NominalActual.actual (coarseSemanticPair declaredPositiveRealisedAdverse11)
+  actual (coarseSemanticPair declaredPositiveRealisedAdverse11)
   ≡ tri-low
 actualSideIsAdverse = refl
 
