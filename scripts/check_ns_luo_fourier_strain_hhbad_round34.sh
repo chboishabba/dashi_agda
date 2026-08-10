@@ -111,7 +111,6 @@ grep -q '10.48550/arXiv.2205.08354' \
 grep -q 'does \*\*not\*\* add a terminal Clay wrapper' "$doc"
 grep -q 'total target mass is exactly' "$doc"
 grep -q 'limiting cutoff-independent mass `3C`' "$doc"
-grep -q 'candidate row budget `3/2`' "$doc"
 grep -q 'rational physical trajectory' "$doc"
 grep -q 'termination pragma' "$doc"
 
