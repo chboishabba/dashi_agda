@@ -3,41 +3,50 @@ module DASHI.Physics.Closure.NSTriadKNComCotlarDyadicEnvelopeRound34Exact where
 ------------------------------------------------------------------------
 -- PRIMARY SOURCES / CONTEXT
 --
+-- Authors: Mischa Cotlar; Elias M. Stein.
+-- Title: "A unified theory of Hilbert transforms and ergodic theorems".
+-- Proceedings of the Symposium on Ergodic Theory, 1955.
+-- DOI: not assigned to the cited historical conference article.
+--
 -- Authors: Hajer Bahouri; Jean-Yves Chemin; Raphael Danchin.
 -- Title: "Fourier Analysis and Nonlinear Partial Differential Equations".
--- Grundlehren der mathematischen Wissenschaften 343, Springer, 2011.
 -- DOI: 10.1007/978-3-642-16830-7.
+--
+-- Authors: Tosio Kato; Gustavo Ponce.
+-- Title: "Commutator Estimates and the Euler and Navier-Stokes Equations".
+-- DOI: 10.1002/cpa.3160410704.
 --
 -- Author: Xiaoyutao Luo.
 -- Title: "A Beale--Kato--Majda Criterion with Optimal Frequency and
 -- Temporal Localization".
--- Journal of Mathematical Fluid Mechanics 21 (2019), article 1.
 -- DOI: 10.1007/s00021-019-0411-z.
 --
 -- DASHI CONTRIBUTION
 --
--- Make the two-sided almost-orthogonality target exact over Q.  Cotlar--Stein
--- summation consumes square roots of pair-product bounds.  To avoid hiding an
--- irrational square-root convention, use the stronger rational target
+-- Quantify two exact rational cross-shell targets.
 --
---   ||T_q^* T_r|| , ||T_q T_r^*||
---      <= C^2 * 4^(-|q-r|).
+-- Direct Round-30 target:
 --
--- Its exact square-root envelope is
+--   ||T_q^* T_r|| , ||T_q T_r^*|| <= C 2^(-|q-r|).
 --
---   C * 2^(-|q-r|),
+-- Its symmetric shell-distance mass through radius R is
 --
--- because (2^-d)^2 = 4^-d.  The symmetric finite Cotlar mass through shell
--- distance R is proved exactly:
+--   C (1 + 2 sum_{d=1}^R 2^-d)
+--     = C (3 - 2 * 2^-R),
 --
---   1 + 2 * sum_{d=1}^R 2^-d
---     = 3 - 2 * 2^-R,
+-- with exact limiting mass 3 C.
 --
--- hence the cutoff-independent limiting mass is 3.
+-- Textbook square-root target:
 --
--- This does not prove the physical pair-product estimate.  It replaces the
--- vague "some summable decay" target by a concrete rational certificate whose
--- summation constant and tail are exact and cutoff-independent.
+--   ||T_q^* T_r|| , ||T_q T_r^*|| <= C^2 4^(-|q-r|).
+--
+-- The exact rational square-root envelope is C 2^-|q-r| because
+-- (2^-d)^2 = 4^-d.  This avoids hiding an irrational square-root convention.
+--
+-- Neither target is asserted physically here.  The physical theorem remains
+-- the two-sided operator estimate for the literal commutator family.  What is
+-- now fixed exactly is the decay strength, finite row mass and tail budget that
+-- such a theorem must deliver.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -45,7 +54,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 import Data.Integer.Base as Int
 open import Data.Rational.Base using
-  (ℚ; 1ℚ; _/_; _+_; _-_; _*_; _≤_)
+  (ℚ; 1ℚ; _/_; _+_; _*_; _≤_)
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
@@ -81,7 +90,7 @@ cotlarSymmetricMassClosedForm :
   ∀ radius →
   cotlarSymmetricMass radius
   ≡ three - Dyadic.two * dyadicWeight radius
-cotlarSymmetricMassClosedForm zero = refl
+cotlarSymmetricMassClosedForm zero = ℚRing.solve []
 cotlarSymmetricMassClosedForm (suc radius)
   rewrite cotlarSymmetricMassClosedForm radius =
   ℚRing.solve-∀ (dyadicWeight radius)
@@ -98,13 +107,51 @@ cotlarSymmetricMassPlusTail radius =
       (cotlarSymmetricMassClosedForm radius))
     (ℚRing.solve-∀ (dyadicWeight radius))
 
-rootEnvelope : ℚ → Nat → ℚ
-rootEnvelope constant distance =
+directEnvelope : ℚ → Nat → ℚ
+directEnvelope constant distance =
   constant * dyadicWeight distance
+
+directRadiusBudget : ℚ → Nat → ℚ
+directRadiusBudget constant radius =
+  constant * cotlarSymmetricMass radius
+
+directRadiusBudgetPlusTailExact :
+  ∀ constant radius →
+  directRadiusBudget constant radius
+    + constant * Dyadic.two * dyadicWeight radius
+  ≡ constant * three
+directRadiusBudgetPlusTailExact constant radius =
+  trans
+    (ℚRing.solve-∀
+      constant
+      (cotlarSymmetricMass radius)
+      (dyadicWeight radius))
+    (trans
+      (cong
+        (constant *_)
+        (cotlarSymmetricMassPlusTail radius))
+      (ℚRing.solve-∀ constant))
+
+record PhysicalTwoSidedDirectDyadicDatum : Set where
+  constructor physical-two-sided-direct-dyadic-datum
+  field
+    shellDistance : Nat
+    constant : ℚ
+    leftProductNorm rightProductNorm : ℚ
+
+    leftDirectUpper :
+      leftProductNorm ≤ directEnvelope constant shellDistance
+    rightDirectUpper :
+      rightProductNorm ≤ directEnvelope constant shellDistance
+
+open PhysicalTwoSidedDirectDyadicDatum public
 
 productEnvelope : ℚ → Nat → ℚ
 productEnvelope constant distance =
   constant * constant * quarterDecay distance
+
+rootEnvelope : ℚ → Nat → ℚ
+rootEnvelope = directEnvelope
 
 rootEnvelopeSquaresToProductEnvelope :
   ∀ constant distance →
@@ -117,53 +164,38 @@ rootEnvelopeSquaresToProductEnvelope constant distance =
       (constant * constant *_)
       (dyadicWeightSquareIsQuarterDecay distance))
 
-record PhysicalTwoSidedPairProductDatum : Set where
-  constructor physical-two-sided-pair-product-datum
+record PhysicalTwoSidedSquareRootDatum : Set where
+  constructor physical-two-sided-square-root-datum
   field
-    shellDistance : Nat
-    constant : ℚ
-    leftProductNorm rightProductNorm : ℚ
+    squareRootShellDistance : Nat
+    squareRootConstant : ℚ
+    squareRootLeftProductNorm squareRootRightProductNorm : ℚ
 
-    leftPairProductUpper :
-      leftProductNorm ≤ productEnvelope constant shellDistance
-    rightPairProductUpper :
-      rightProductNorm ≤ productEnvelope constant shellDistance
+    leftSquareProductUpper :
+      squareRootLeftProductNorm
+      ≤ productEnvelope squareRootConstant squareRootShellDistance
+    rightSquareProductUpper :
+      squareRootRightProductNorm
+      ≤ productEnvelope squareRootConstant squareRootShellDistance
 
-open PhysicalTwoSidedPairProductDatum public
+open PhysicalTwoSidedSquareRootDatum public
 
-pairProductRootBudget :
-  PhysicalTwoSidedPairProductDatum → ℚ
-pairProductRootBudget datum =
-  rootEnvelope (constant datum) (shellDistance datum)
+squareRootBudget : PhysicalTwoSidedSquareRootDatum → ℚ
+squareRootBudget datum =
+  rootEnvelope
+    (squareRootConstant datum)
+    (squareRootShellDistance datum)
 
-pairProductRootBudgetSquareExact :
+squareRootBudgetSquareExact :
   ∀ datum →
-  pairProductRootBudget datum * pairProductRootBudget datum
-  ≡ productEnvelope (constant datum) (shellDistance datum)
-pairProductRootBudgetSquareExact datum =
+  squareRootBudget datum * squareRootBudget datum
+  ≡ productEnvelope
+      (squareRootConstant datum)
+      (squareRootShellDistance datum)
+squareRootBudgetSquareExact datum =
   rootEnvelopeSquaresToProductEnvelope
-    (constant datum) (shellDistance datum)
-
-cotlarRadiusBudget : ℚ → Nat → ℚ
-cotlarRadiusBudget constant radius =
-  constant * cotlarSymmetricMass radius
-
-cotlarRadiusBudgetPlusTailExact :
-  ∀ constant radius →
-  cotlarRadiusBudget constant radius
-    + constant * Dyadic.two * dyadicWeight radius
-  ≡ constant * three
-cotlarRadiusBudgetPlusTailExact constant radius =
-  trans
-    (ℚRing.solve-∀
-      constant
-      (cotlarSymmetricMass radius)
-      (dyadicWeight radius))
-    (trans
-      (cong
-        (constant *_)
-        (cotlarSymmetricMassPlusTail radius))
-      (ℚRing.solve-∀ constant))
+    (squareRootConstant datum)
+    (squareRootShellDistance datum)
 
 rationalCotlarDyadicEnvelopeClosed : Bool
 rationalCotlarDyadicEnvelopeClosed = true
