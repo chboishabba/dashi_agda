@@ -29,7 +29,8 @@ module DASHI.Physics.Closure.NSTriadKNTriadS3RealityActionRound35Exact where
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Primitive using (Set)
-open import Data.Product using (Σ; _,_; proj₁; proj₂)
+open import Data.List.Membership.Propositional using (_∈_)
+open import Data.Product using (Σ; _,_; _×_; proj₁; proj₂)
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 import DASHI.Physics.Closure.NSTriadKNExactLatticeShellTriads as Lattice
@@ -149,8 +150,6 @@ factoredWitnessImpliesCanonicalOrbit {τ} {σ}
       (λ selected → selected ∈ Orbit.canonicalOrbitMembers σ)
       (sym (factoredActionExact permutation realityChoice σ))
       (Safe.actionInOrbit (flattenAction permutation realityChoice) σ))
-  where
-  open import Data.List.Membership.Propositional using (_∈_)
 
 canonicalOrbitImpliesFactoredWitness :
   ∀ {τ σ} →
