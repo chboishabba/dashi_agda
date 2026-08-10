@@ -1,0 +1,35 @@
+name: Yang-Mills Clay highest-alpha Round 42 extension
+
+on:
+  push:
+    branches:
+      - agent/ym-clay-alpha-round42-master-reconciled-floor-recovery
+  pull_request:
+    branches:
+      - master
+    paths:
+      - 'DASHI/Physics/YangMills/BalabanFiniteRectangularAbsoluteColumnMassExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeGramPerturbationTwoSidedMassExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanSelectedBackgroundFlatGreenPerturbationTwoSidedContractionExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanFiniteMatrixL1ContractionExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanSelectedBackgroundResidualPowerDecayExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanSelectedBackgroundRationalWeightedPowerDecayExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanClayHighestAlphaRound42MasterReconciledValidation.agda'
+      - 'scripts/check_yang_mills_clay_highest_alpha_round42_extension.sh'
+      - '.github/workflows/yang-mills-clay-highest-alpha-round42-extension.yml'
+
+jobs:
+  round42-green-extension:
+    runs-on: self-hosted
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          submodules: recursive
+
+      - name: Validate Round 42 Green extension
+        shell: bash
+        run: |
+          chmod +x scripts/check_yang_mills_clay_highest_alpha_round42_extension.sh
+          AGDA_JOBS=1 bash scripts/check_yang_mills_clay_highest_alpha_round42_extension.sh
