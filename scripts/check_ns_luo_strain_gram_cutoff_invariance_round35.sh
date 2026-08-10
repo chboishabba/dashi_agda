@@ -34,8 +34,8 @@ for file in "${files[@]}" "$doc"; do
   test -f "$file"
 done
 
-if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|\{!|!\}|\{\-#[[:space:]]*(TERMINATING|NO_TERMINATION_CHECK)|allow-unsolved-metas|--no-positivity-check|--no-termination-check|NON_COVERING|--type-in-type|trustMe|primTrustMe|funext' "${files[@]}"; then
-  echo "round thirty-five contains a hole, postulate, unsafe escape, trust primitive, or extensionality shortcut" >&2
+if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|\{!|!\}|\{\-#[[:space:]]*(TERMINATING|NO_TERMINATION_CHECK)|allow-unsolved-metas|--no-positivity-check|--no-termination-check|NON_COVERING|--type-in-type|trustMe|primTrustMe|funext|Properties\.WithK|unique⇒irrelevant' "${files[@]}"; then
+  echo "round thirty-five contains a hole, postulate, unsafe/K escape, trust primitive, proof-irrelevance shortcut, or extensionality shortcut" >&2
   exit 1
 fi
 
@@ -68,6 +68,8 @@ checks=(
   'NSTriadKNPhysicalOutputFiberConjugationRound35Exact.agda:physicalOutputFiberConjugationBijectionClosed = true'
   'NSTriadKNPhysicalOutputFiberPermutationRound35Exact.agda:physicalIncidenceCanonical'
   'NSTriadKNPhysicalOutputFiberPermutationRound35Exact.agda:canonicalConjugateInjective'
+  'NSTriadKNPhysicalOutputFiberPermutationRound35Exact.agda:removeAtPermutation'
+  'NSTriadKNPhysicalOutputFiberPermutationRound35Exact.agda:uniqueMembershipEquivalenceToPermutation'
   'NSTriadKNPhysicalOutputFiberPermutationRound35Exact.agda:canonicalConjugateOutputFiberPermutation'
   'NSTriadKNPhysicalOutputFiberPermutationRound35Exact.agda:outputFiberConjugationListPermutationClosed = true'
   'NSTriadKNSummedProjectedNonlinearityRealityRound35Exact.agda:sumVectorsRespPermutation'
@@ -90,6 +92,8 @@ checks=(
   'NSTriadKNHHBadFiniteShellBudgetGluingRound35Exact.agda:canonicalShellBudgetTransferStep'
   'NSTriadKNHHBadFiniteShellBudgetGluingRound35Exact.agda:physicalHHBadShellBudgetProduced = false'
   'NSTriadKNComGramInterferenceRound35Exact.agda:outerContractionsRemove'
+  'NSTriadKNComGramInterferenceRound35Exact.agda:sixThreeGramCell : (gap : Nat) → GramInterferenceCell gap'
+  'NSTriadKNComGramInterferenceRound35Exact.agda:sixThreeHalfDyadicGramCell : (gap : Nat) → HalfDyadicGramCell gap'
   'NSTriadKNComGramInterferenceRound35Exact.agda:sixThreeGramCandidatePairDecay'
   'NSTriadKNComGramInterferenceRound35Exact.agda:physicalComFirstPairDecayFromGram'
   'NSTriadKNComGramInterferenceRound35Exact.agda:physicalComPairProductGramRealizationConstructed = false'
