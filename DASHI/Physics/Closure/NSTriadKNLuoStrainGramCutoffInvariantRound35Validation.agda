@@ -4,24 +4,28 @@ module DASHI.Physics.Closure.NSTriadKNLuoStrainGramCutoffInvariantRound35Validat
 -- Round Thirty-Five cumulative Navier--Stokes validation root.
 --
 -- The root imports Round 34 first, then the new concrete mathematics:
--- polarized/cross-fibre strain Gram identities, finite interference
--- decomposition, fixed-cutoff support tangency, exact inverse-square/Leray
--- reality laws, the literal ordered nonlinear reality theorem, the labelled
--- conjugation bijection of physical output fibres, HH-bad shell-budget
--- gluing, the Com Gram reduction with a real six-three overlap candidate,
--- the permutation x reality factorization of the canonical triad action, the
--- vector-field commuting square, and the dual resource/scale no-go ledger.
+-- polarized/cross-fibre strain Gram identities, finite interference,
+-- fixed-cutoff support tangency, the complete finite Fourier-reality chain
+-- through output-fibre permutation and summed nonlinear reality, full
+-- same-object cutoff-carrier invariance, HH-bad shell-budget gluing, the Com
+-- Gram reduction, permutation x reality triad actions, the vector-field
+-- commuting square, and the dual resource/scale no-go ledger.
 ------------------------------------------------------------------------
 
 import DASHI.Physics.Closure.NSTriadKNLuoFourierStrainHHBadRound34Validation
 
 import DASHI.Physics.Closure.NSTriadKNPeriodicFourierStrainGramRound35Exact as StrainGram
 import DASHI.Physics.Closure.NSTriadKNPeriodicFourierStrainInterferenceRound35Exact as StrainInterference
-import DASHI.Physics.Closure.NSTriadKNFixedCutoffSupportInvariantRound35Exact as CutoffInvariant
+import DASHI.Physics.Closure.NSTriadKNFixedCutoffSupportInvariantRound35Exact as CutoffSupport
 import DASHI.Physics.Closure.NSTriadKNModeInverseSquareRealityRound35Exact as InverseReality
 import DASHI.Physics.Closure.NSTriadKNComplex3RealityLawsRound35Exact as RealityLaws
 import DASHI.Physics.Closure.NSTriadKNOrderedInteractionRealityRound35Exact as InteractionReality
 import DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiberConjugationRound35Exact as FiberReality
+import DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiberPermutationRound35Exact as FiberPermutation
+import DASHI.Physics.Closure.NSTriadKNSummedProjectedNonlinearityRealityRound35Exact as SummedReality
+import DASHI.Physics.Closure.NSTriadKNViscousRealityRound35Exact as ViscousReality
+import DASHI.Physics.Closure.NSTriadKNCanonicalVelocityRealityRound35Exact as VelocityReality
+import DASHI.Physics.Closure.NSTriadKNFixedCutoffSameObjectInvariantRound35Exact as SameObjectInvariant
 import DASHI.Physics.Closure.NSTriadKNHHBadFiniteShellBudgetGluingRound35Exact as HHBadBudget
 import DASHI.Physics.Closure.NSTriadKNComGramInterferenceRound35Exact as ComGram
 import DASHI.Physics.Closure.NSTriadKNTriadS3RealityActionRound35Exact as TriadAction
@@ -34,13 +38,11 @@ open import Agda.Builtin.Equality using (_≡_)
 
 strainGramRegression :
   StrainGram.periodicFourierStrainGramClosed ≡ true
-strainGramRegression =
-  StrainGram.periodicFourierStrainGramClosedIsTrue
+strainGramRegression = StrainGram.periodicFourierStrainGramClosedIsTrue
 
 crossFibreFormulaRegression :
   StrainGram.crossFibreStrainInterferenceFormulaClosed ≡ true
-crossFibreFormulaRegression =
-  StrainGram.crossFibreStrainInterferenceFormulaClosedIsTrue
+crossFibreFormulaRegression = StrainGram.crossFibreStrainInterferenceFormulaClosedIsTrue
 
 physicalHHGoodStillOpenRegression :
   StrainGram.physicalHHGoodCrossFibreEstimateConstructed ≡ false
@@ -57,50 +59,58 @@ physicalInterferenceDecayStillOpenRegression :
 physicalInterferenceDecayStillOpenRegression =
   StrainInterference.physicalCrossFibreInterferenceDecayConstructedIsFalse
 
-fixedCutoffTangencyRegression :
-  CutoffInvariant.fixedCutoffSupportTangencyClosed ≡ true
-fixedCutoffTangencyRegression =
-  CutoffInvariant.fixedCutoffSupportTangencyClosedIsTrue
-
-fixedCutoffCompatibilityStillOpenRegression :
-  CutoffInvariant.fixedCutoffSameObjectCompatibilityInvariantConstructed ≡ false
-fixedCutoffCompatibilityStillOpenRegression =
-  CutoffInvariant.fixedCutoffSameObjectCompatibilityInvariantConstructedIsFalse
+fixedCutoffSupportRegression :
+  CutoffSupport.fixedCutoffSupportTangencyClosed ≡ true
+fixedCutoffSupportRegression = CutoffSupport.fixedCutoffSupportTangencyClosedIsTrue
 
 inverseSquareRealityRegression :
   InverseReality.modeInverseSquareRealityClosed ≡ true
-inverseSquareRealityRegression =
-  InverseReality.modeInverseSquareRealityClosedIsTrue
+inverseSquareRealityRegression = InverseReality.modeInverseSquareRealityClosedIsTrue
 
 lerayRealityRegression :
   RealityLaws.complex3RealityLawsConstructed ≡ true
-lerayRealityRegression =
-  RealityLaws.complex3RealityLawsConstructedIsTrue
+lerayRealityRegression = RealityLaws.complex3RealityLawsConstructedIsTrue
 
 orderedInteractionRealityRegression :
   InteractionReality.orderedInteractionRealityClosed ≡ true
-orderedInteractionRealityRegression =
-  InteractionReality.orderedInteractionRealityClosedIsTrue
-
-summedNonlinearityRealityStillOpenRegression :
-  InteractionReality.summedProjectedNonlinearityRealityConstructed ≡ false
-summedNonlinearityRealityStillOpenRegression =
-  InteractionReality.summedProjectedNonlinearityRealityConstructedIsFalse
+orderedInteractionRealityRegression = InteractionReality.orderedInteractionRealityClosedIsTrue
 
 outputFiberConjugationRegression :
   FiberReality.physicalOutputFiberConjugationBijectionClosed ≡ true
 outputFiberConjugationRegression =
   FiberReality.physicalOutputFiberConjugationBijectionClosedIsTrue
 
-outputFiberPermutationStillOpenRegression :
-  FiberReality.outputFiberConjugationListPermutationConstructed ≡ false
-outputFiberPermutationStillOpenRegression =
-  FiberReality.outputFiberConjugationListPermutationConstructedIsFalse
+outputFiberPermutationRegression :
+  FiberPermutation.outputFiberConjugationListPermutationClosed ≡ true
+outputFiberPermutationRegression =
+  FiberPermutation.outputFiberConjugationListPermutationClosedIsTrue
+
+summedNonlinearityRealityRegression :
+  SummedReality.summedProjectedNonlinearityRealityClosed ≡ true
+summedNonlinearityRealityRegression =
+  SummedReality.summedProjectedNonlinearityRealityClosedIsTrue
+
+viscousRealityRegression :
+  ViscousReality.literalViscousRealityClosed ≡ true
+viscousRealityRegression = ViscousReality.literalViscousRealityClosedIsTrue
+
+wholeCoefficientRealityRegression :
+  ViscousReality.wholeCoefficientRealityReducedToSummedNonlinearity ≡ true
+wholeCoefficientRealityRegression =
+  ViscousReality.wholeCoefficientRealityReducedToSummedNonlinearityIsTrue
+
+canonicalVelocityRealityRegression :
+  VelocityReality.canonicalVelocityRealityClosed ≡ true
+canonicalVelocityRealityRegression = VelocityReality.canonicalVelocityRealityClosedIsTrue
+
+fixedCutoffSameObjectInvariantRegression :
+  SameObjectInvariant.fixedCutoffSameObjectVectorFieldInvariantClosed ≡ true
+fixedCutoffSameObjectInvariantRegression =
+  SameObjectInvariant.fixedCutoffSameObjectVectorFieldInvariantClosedIsTrue
 
 hhBadBudgetGluingRegression :
   HHBadBudget.hhBadFiniteShellBudgetGluingClosed ≡ true
-hhBadBudgetGluingRegression =
-  HHBadBudget.hhBadFiniteShellBudgetGluingClosedIsTrue
+hhBadBudgetGluingRegression = HHBadBudget.hhBadFiniteShellBudgetGluingClosedIsTrue
 
 physicalHHBadBudgetStillOpenRegression :
   HHBadBudget.physicalHHBadShellBudgetProduced ≡ false
@@ -109,13 +119,11 @@ physicalHHBadBudgetStillOpenRegression =
 
 comGramReductionRegression :
   ComGram.comGramInterferenceReductionClosed ≡ true
-comGramReductionRegression =
-  ComGram.comGramInterferenceReductionClosedIsTrue
+comGramReductionRegression = ComGram.comGramInterferenceReductionClosedIsTrue
 
 sixThreeGramCandidateRegression :
   ComGram.sixThreeGramCandidateClosed ≡ true
-sixThreeGramCandidateRegression =
-  ComGram.sixThreeGramCandidateClosedIsTrue
+sixThreeGramCandidateRegression = ComGram.sixThreeGramCandidateClosedIsTrue
 
 physicalComGramStillOpenRegression :
   ComGram.physicalComPairProductGramRealizationConstructed ≡ false
@@ -129,8 +137,7 @@ triadActionFactorizationRegression =
 
 vectorFieldGluingRegression :
   VectorGluing.vectorFieldIndexedGluingClosed ≡ true
-vectorFieldGluingRegression =
-  VectorGluing.vectorFieldIndexedGluingClosedIsTrue
+vectorFieldGluingRegression = VectorGluing.vectorFieldIndexedGluingClosedIsTrue
 
 physicalBishopSquareStillOpenRegression :
   VectorGluing.physicalBishopVectorFieldIndexedGluingConstructed ≡ false
@@ -139,8 +146,7 @@ physicalBishopSquareStillOpenRegression =
 
 dualLedgerRegression :
   DualLedger.dualResourceScaleLedgerClosed ≡ true
-dualLedgerRegression =
-  DualLedger.dualResourceScaleLedgerClosedIsTrue
+dualLedgerRegression = DualLedger.dualResourceScaleLedgerClosedIsTrue
 
 missingInverseScaleNoGoRegression :
   DualLedger.hhBadMissingInverseScaleFailsClosed ≡ true
@@ -148,8 +154,8 @@ missingInverseScaleNoGoRegression =
   DualLedger.hhBadMissingInverseScaleFailsClosedIsTrue
 
 -- Round 34 already typed the physical bad gain as a subsection of one
--- localized dissipation cell.  Preserve that exact interface rather than
--- duplicating it under a new name in Round 35.
+-- localized dissipation cell. Preserve that exact interface rather than
+-- duplicating it under a new name.
 hhBadDissipationSectionInterface :
   ∀ {eta viscosity shell}
     (cell : LuoHHBad.LuoCriticalDissipationCell eta viscosity shell) → Set
