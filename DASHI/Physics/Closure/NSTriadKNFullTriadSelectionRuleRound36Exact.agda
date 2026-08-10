@@ -35,7 +35,6 @@ module DASHI.Physics.Closure.NSTriadKNFullTriadSelectionRuleRound36Exact where
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Agda.Primitive using (Set₁)
 open import Relation.Binary.PropositionalEquality using (subst)
 
 import DASHI.Physics.Closure.NSTriadKNExactLatticeShellTriads as Lattice
