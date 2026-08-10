@@ -49,7 +49,6 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; -_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
 record SplitState : Set where
   constructor split-state
@@ -62,7 +61,10 @@ stateExt : ∀ {left right : SplitState} →
   coarse left ≡ coarse right →
   detail left ≡ detail right →
   left ≡ right
-stateExt {split-state ._ ._} {split-state _ _} refl refl = refl
+stateExt
+  {split-state leftCoarse leftDetail}
+  {split-state .leftCoarse .leftDetail}
+  refl refl = refl
 
 zeroState : SplitState
 zeroState = split-state 0ℚ 0ℚ
