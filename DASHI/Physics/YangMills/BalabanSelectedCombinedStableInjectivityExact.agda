@@ -39,8 +39,11 @@ open import Relation.Nullary.Decidable.Core using (toWitness)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as FiniteL2
+import DASHI.Physics.YangMills.BalabanFiniteSumFubiniExact as Fubini
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
 import DASHI.Physics.YangMills.BalabanP33FiniteKKTAdmissibleProjectorExact as KKT
+import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Coordinates
+import DASHI.Physics.YangMills.BalabanP33PhysicalRationalWilsonPlaquetteJetExact as Physical
 import DASHI.Physics.YangMills.BalabanP33PhysicalBackgroundGaugeParameterizedYoungExact as Relaxed
 import DASHI.Physics.YangMills.BalabanSelectedCombinedStableMultiplierFloorExact as Stable
 
@@ -74,7 +77,7 @@ selectedCombinedStableFloorReciprocalExact :
 selectedCombinedStableFloorReciprocalExact = ℚRing.solve []
 
 record LiteralCombinedAdjointKernel
-    (background : Stable.Physical.RationalSU2Background4)
+    (background : Physical.RationalSU2Background4)
     (selected : Stable.StableCombinedMultiplier) : Set where
   field
     pointwiseZero : ∀ coordinate →
@@ -86,7 +89,9 @@ literalCombinedAdjointKernelNormZero :
   LiteralCombinedAdjointKernel background selected →
   KKT.stateNormSq (Stable.literalCombinedAdjoint background selected) ≡ 0ℚ
 literalCombinedAdjointKernelNormZero background selected kernel =
-  KKT.stateNormPointwiseCong (pointwiseZero kernel)
+  trans
+    (KKT.stateNormPointwiseCong (pointwiseZero kernel))
+    (Fubini.sumRationalZero Coordinates.physicalSU2Coordinates4)
 
 selectedCombinedStableAdjointKernelNormZero :
   ∀ background → Relaxed.RelaxedInverseLinkRadius background →
