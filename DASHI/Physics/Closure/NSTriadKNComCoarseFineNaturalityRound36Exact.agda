@@ -91,31 +91,21 @@ coarseFineNaturalityDefectIsIncrementSum :
 coarseFineNaturalityDefectIsIncrementSum outputVelocity [] = solve []
 coarseFineNaturalityDefectIsIncrementSum outputVelocity (sample ∷ rest) =
   trans
+    (solve
+      ( kernelWeight sample
+      ∷ fibreVelocity sample
+      ∷ differentiatedSignal sample
+      ∷ outputVelocity
+      ∷ projectTransport rest
+      ∷ projectSignal rest
+      ∷ []))
     (cong
-      (λ tailDifference →
+      (λ tailDefect →
         kernelWeight sample
-          * (fibreVelocity sample * differentiatedSignal sample)
-        + projectTransport rest
-        - outputVelocity
-          * (kernelWeight sample * differentiatedSignal sample
-            + projectSignal rest))
-      refl)
-    (trans
-      (cong
-        (λ tailDefect →
-          kernelWeight sample
-            * ((fibreVelocity sample - outputVelocity)
-              * differentiatedSignal sample)
-          + tailDefect)
-        (coarseFineNaturalityDefectIsIncrementSum outputVelocity rest))
-      (solve
-        ( kernelWeight sample
-        ∷ fibreVelocity sample
-        ∷ differentiatedSignal sample
-        ∷ outputVelocity
-        ∷ projectTransport rest
-        ∷ projectSignal rest
-        ∷ []))))
+          * ((fibreVelocity sample - outputVelocity)
+            * differentiatedSignal sample)
+        + tailDefect)
+      (coarseFineNaturalityDefectIsIncrementSum outputVelocity rest))
 
 constantVelocitySamples :
   ℚ → List CenteredTransportSample → List CenteredTransportSample
