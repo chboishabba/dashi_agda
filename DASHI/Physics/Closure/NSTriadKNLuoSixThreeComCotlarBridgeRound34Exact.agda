@@ -43,11 +43,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoSixThreeComCotlarBridgeRound34Exact whe
 -- Its full symmetric Cotlar shell mass therefore has the exact finite-radius
 -- conservation law
 --
---   budget_R + 2^-R = 3/2,
---
--- because the generic tail at C=1/2 is exactly 2^-R.  Thus the shell
--- arithmetic needed by the successful finite-exponent commutator route fits
--- inside a cutoff-independent candidate row budget 3/2.
+--   budget_R + 2^-R = 3/2.
 --
 -- The theorem is deliberately scalar: it does not identify these coefficients
 -- with ||T_q^* T_r|| or ||T_q T_r^*||.  The remaining physical `Com` producer
@@ -64,6 +60,7 @@ open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
 
 import DASHI.Physics.Closure.NSTriadKNLuoSixThreeCenteredCommutatorScaleExact as SixThree
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteHighLowDerivativeRatioExact as HL
+import DASHI.Physics.Closure.NSTriadKNRationalFiniteGeometricEnvelope as Geo
 import DASHI.Physics.Closure.NSTriadKNComCotlarDyadicEnvelopeRound34Exact as Cotlar
 import DASHI.Physics.Closure.NSTriadKNHHBadSharpDyadicGainRound33Exact as Dyadic
 
@@ -71,14 +68,19 @@ half threeHalves : ℚ
 half = Int.+ 1 / 2
 threeHalves = Int.+ 3 / 2
 
+halfPowerIsDyadicWeight :
+  ∀ gap →
+  Geo.pow HL.half gap ≡ Cotlar.dyadicWeight gap
+halfPowerIsDyadicWeight zero = refl
+halfPowerIsDyadicWeight (suc gap)
+  rewrite halfPowerIsDyadicWeight gap = refl
+
 highLowRatioIsQuarterDyadic :
   ∀ gap →
   HL.highLowDerivativeRatio gap
   ≡ HL.quarter * Cotlar.dyadicWeight gap
-highLowRatioIsQuarterDyadic zero = refl
-highLowRatioIsQuarterDyadic (suc gap)
-  rewrite highLowRatioIsQuarterDyadic gap =
-  ℚRing.solve-∀ (Cotlar.dyadicWeight gap)
+highLowRatioIsQuarterDyadic gap =
+  cong (HL.quarter *_) (halfPowerIsDyadicWeight gap)
 
 weakTwiceDirectEnvelopeExact :
   ∀ gap →
