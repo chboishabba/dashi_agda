@@ -13,6 +13,8 @@ files=(
   DASHI/Physics/Closure/NSTriadKNDirectionalProjectorDefectBridgeRound37Exact.agda
   DASHI/Physics/Closure/NSTriadKNPhysicalProjectorDefectRound37Exact.agda
   DASHI/Physics/Closure/NSTriadKNVorticityLineC2QuotientRound37Exact.agda
+  DASHI/Physics/Closure/NSTriadKNVortexStretchingGeometricFactorRound37Exact.agda
+  DASHI/Physics/Closure/NSTriadKNVortexStretchingDirectionalBoundRound37Exact.agda
   DASHI/Physics/Closure/NSTriadKNFinitePVProjectorIncrementRound37Exact.agda
   DASHI/Physics/Closure/NSTriadKNHHBadScaleInvariantGeometryObstructionRound37Exact.agda
   DASHI/Physics/Closure/NSTriadKNHHBadEnergyNormalizedCoercivityRound37Exact.agda
@@ -43,6 +45,8 @@ grep -q 'rankOneProjectorNegationInvariant' DASHI/Physics/Closure/NSTriadKNDirec
 grep -q 'projectorDefectIsTwiceExistingDirectionalDefect' DASHI/Physics/Closure/NSTriadKNDirectionalProjectorDefectBridgeRound37Exact.agda
 grep -q 'physicalProjectorDefectIdentity' DASHI/Physics/Closure/NSTriadKNPhysicalProjectorDefectRound37Exact.agda
 grep -q 'projectorDefectRepresentativeInvariant' DASHI/Physics/Closure/NSTriadKNVorticityLineC2QuotientRound37Exact.agda
+grep -q 'stretchingScalarMisalignmentFactor' DASHI/Physics/Closure/NSTriadKNVortexStretchingGeometricFactorRound37Exact.agda
+grep -q 'stretchingSquareControlledByCrossMisalignment' DASHI/Physics/Closure/NSTriadKNVortexStretchingDirectionalBoundRound37Exact.agda
 grep -q 'finitePVProjectorIncrementIdentity' DASHI/Physics/Closure/NSTriadKNFinitePVProjectorIncrementRound37Exact.agda
 grep -q 'uniformDirectionOnlyFloorMustBeNonpositive' DASHI/Physics/Closure/NSTriadKNHHBadScaleInvariantGeometryObstructionRound37Exact.agda
 grep -q 'badEnergyCoercivityProducesInverseShellCharging' DASHI/Physics/Closure/NSTriadKNHHBadEnergyNormalizedCoercivityRound37Exact.agda
@@ -62,6 +66,8 @@ grep -q '10.1007/BF02547354' DASHI/Physics/Closure/NSTriadKNRationalPhysicalTria
 
 grep -q 'physicalComCrossChannelOperatorRealizationConstructed = false' DASHI/Physics/Closure/NSTriadKNComPQCrossChannelRound37Exact.agda
 grep -q 'periodicPVProjectorDefectEstimateConstructed = false' DASHI/Physics/Closure/NSTriadKNDirectionalProjectorStabilizerRound37Exact.agda
+grep -q 'periodicPVStretchingEstimateConstructed = false' DASHI/Physics/Closure/NSTriadKNVortexStretchingGeometricFactorRound37Exact.agda
+grep -q 'periodicPVDirectionalOwnerBoundConstructed = false' DASHI/Physics/Closure/NSTriadKNVortexStretchingDirectionalBoundRound37Exact.agda
 grep -q 'literalPeriodicStrainKernelZeroMassConstructed = false' DASHI/Physics/Closure/NSTriadKNFinitePVProjectorIncrementRound37Exact.agda
 grep -q 'physicalHHBadEnergyCoercivityConstructed = false' DASHI/Physics/Closure/NSTriadKNHHBadEnergyNormalizedCoercivityRound37Exact.agda
 grep -q 'physicalHHBadGainLinkedToBadEnergyConstructed = false' DASHI/Physics/Closure/NSTriadKNHHBadStandardShellCoercivityRound37Exact.agda
