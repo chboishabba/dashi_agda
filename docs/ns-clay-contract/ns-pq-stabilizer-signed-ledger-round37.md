@@ -1,6 +1,6 @@
-# NS Round 37 — P/Q channels, stabilizer defect, scale-compatible HH-bad coercivity
+# NS Round 37 — P/Q channels, line-projector geometry, and scale-compatible HH-bad coercivity
 
-Round 37 takes the shortest-path cut after Round 36 and tests the new quotient/stabilizer proposals as concrete mathematics.  The main outcome is not merely additional structure: one proposed HH-bad interpretation is ruled out by scaling, its viable normalized replacement is identified, and the HH-good stabilizer language is proved to be exactly the repository's existing directional defect in a better quotient coordinate.
+Round 37 takes the shortest-path cut after Round 36 and tests the quotient/stabilizer proposals as concrete mathematics.  The main outcome is not merely additional structure: one proposed HH-bad interpretation is ruled out by scaling, its viable energy-weighted replacement is identified, the easy part of that replacement is discharged by ordinary shell viscosity, and the HH-good stabilizer language is proved to be exactly the repository's existing directional defect on the correct unoriented quotient.
 
 ## 1. Com lives entirely in the P/Q cross channels
 
@@ -90,13 +90,29 @@ The new bridge proves exactly
 
 hence the projector/stabilizer defect lies in `[0,2]` and is not a new free parameter.  It is the same directional coherence invariant expressed on the correct unoriented line quotient.  This is useful because Round 36 already ruled out Fourier wave-vector angle as the HH-good smallness source.
 
-A finite principal-value skeleton is also now exact.  For weighted line projectors with zero kernel mass,
+The physical amplitude weights are preserved as well.  Combining the projector identity with the existing physical vorticity theorem gives
+
+```text
+omega_x = a xi,
+omega_y = b eta
+
+=>
+
+a^2 b^2 ||Pi_xi-Pi_eta||_F^2
+  = 2 |omega_x cross omega_y|^2.
+```
+
+Thus the projector formulation is not merely normalized angular language: it is exactly compatible with the amplitude-weighted interaction that must enter the strain estimate.
+
+The orientation quotient itself is now literal.  A two-element action changes a unit representative by `xi -> -xi`; applying it twice returns the original vector, the rank-one projector is invariant on every such orbit, and the projector defect is invariant under independent sign changes of either representative.  This gives the quotient proposal a concrete NS realization as the vorticity-line `C2` quotient.
+
+A finite principal-value skeleton is also exact.  For weighted line projectors with zero kernel mass,
 
 ```text
 sum_y K_y = 0,
 ```
 
-we prove coordinatewise
+we prove coordinatewise and matrixwise
 
 ```text
 sum_y K_y Pi_y
@@ -107,7 +123,7 @@ Thus the surviving A3/A4 chain is now sharply typed:
 
 ```text
 literal periodic strain kernel zero-mass/PV cancellation
-  -> projector increments
+  -> amplitude-weighted projector increments
   -> existing Theta directional defect
   -> explicit cross-fibre strain term
   -> HH-good owner estimate.
@@ -115,7 +131,7 @@ literal periodic strain kernel zero-mass/PV cancellation
 
 The first and last analytic arrows remain physical theorems; the finite cancellation/projector geometry in the middle is closed.
 
-## 3. Direction-only HH-bad floors are impossible by amplitude scaling
+## 3. Direction-only HH-bad absolute floors fail by amplitude scaling
 
 Round 36 showed that a floor of the form
 
@@ -130,9 +146,9 @@ would yield exactly
 occupation_q nu <= charge_q lambda_q^-1.
 ```
 
-The stabilizer proposal suggested deriving the floor merely from being outside an alignment-compatible stratum.  Round 37 proves that this cannot work if the occupation is unweighted and the dissipation is quadratic.
+The stabilizer proposal suggested deriving an absolute floor merely from being outside an alignment-compatible stratum.  Round 37 tests that scale-invariant formulation and proves that it cannot work when dissipation is quadratic.
 
-A direction-only bad witness keeps its unit direction and bad-geometry evidence when its amplitude is rescaled.  If
+A direction-only bad witness keeps its direction and bad-geometry evidence when its amplitude is rescaled.  If
 
 ```text
 D(a) = W a^2,
@@ -145,17 +161,17 @@ D(s a) = s^2 D(a),
 D(a/2) = (1/4) D(a).
 ```
 
-Setting amplitude to zero preserves the direction-only bad classification but makes `D=0`.  Consequently any uniform absolute floor inferred from that geometric classification alone must satisfy
+In the tested direction-only carrier, setting amplitude to zero preserves the geometric classification but makes `D=0`.  Consequently any uniform amplitude-independent absolute floor inferred from that classification alone must satisfy
 
 ```text
 floor <= 0.
 ```
 
-This is a real architecture-level no-go.  A positive HH-bad floor must contain a scale-breaking quantity: amplitude/energy normalization, an amplitude-weighted occupation, or another hypothesis that does not survive arbitrary amplitude reduction.
+The conclusion is deliberately narrow but decisive: a positive HH-bad dissipation quantum cannot come from scale-invariant direction/stabilizer mismatch alone.  The theorem does not rule out an energy-normalized coercivity ratio, an amplitude-weighted occupation, or another scale-breaking physical hypothesis.
 
-## 4. The viable HH-bad theorem is energy-normalized coercivity
+## 4. The viable HH-bad quantity is energy-weighted coercivity
 
-The attachment's ratio formulation survives the no-go.  Let `E_bad` be bad-shell energy occupation and `C_bad` its localized dissipation charge.  The correct physical target is
+Let `E_bad` be bad-shell energy occupation and `C_bad` its localized dissipation charge.  The scale-compatible target is
 
 ```text
 E_bad (nu_eff lambda_q) <= C_bad,
@@ -164,12 +180,12 @@ E_bad (nu_eff lambda_q) <= C_bad,
 which is the division-free form of
 
 ```text
-D_bad / E_bad >= nu_eff lambda_q
+C_bad / E_bad >= nu_eff lambda_q
 ```
 
 when `E_bad` is nonzero.
 
-Round 37 packages this as `BadEnergyCoercivityCell`, constructs the Round-36 `BadStratumDissipationFloor` with
+Round 37 packages this as `BadEnergyCoercivityCell`, constructs the Round-36 floor cell with
 
 ```text
 occupation = E_bad,
@@ -183,7 +199,31 @@ and therefore derives
 E_bad nu_eff <= C_bad lambda_q^-1.
 ```
 
-Simultaneous nonnegative rescaling of `E_bad` and `C_bad` preserves the coercivity inequality.  This is the key correction: **A6 should now target localized energy-normalized bad coercivity, not a positive absolute price for direction-only bad membership.**
+Simultaneous nonnegative rescaling of `E_bad` and `C_bad` preserves the coercivity inequality.  This repairs the scale defect of an absolute direction-only floor.
+
+### 4a. The elementary shell-coercivity part is already closed
+
+The new audit then asks whether even this normalized inequality is genuinely difficult.  For the exact dyadic scale `lambda_q=2^q`, Round 37 proves
+
+```text
+1 <= lambda_q <= lambda_q^2.
+```
+
+Hence the full shell viscous charge
+
+```text
+C_full = E_bad nu_eff lambda_q^2
+```
+
+automatically obeys
+
+```text
+E_bad (nu_eff lambda_q) <= C_full,
+```
+
+and therefore produces the same inverse-shell charging theorem.
+
+This is an important narrowing of A6.  **Ordinary shell viscosity already supplies the normalized coercive rate if the HH-bad owner is allowed to charge the corresponding full shell dissipation.**  The hard physical theorem is therefore not `lambda_q <= lambda_q^2` in disguise.  It is the same-object localization/allocation statement showing that the actual HH-bad owner charge contains the required share of shell viscosity and that the physical bad gain/occupation is linked to the same `E_bad` quantity.  Separately, the older Luo critical-absorption route still requires its upper smallness condition on the localized defect/dissipation quantity; the lower coercivity statement here does not prove that upper smallness estimate.
 
 ## 5. The crossing/variation mechanism is now an exact finite theorem
 
@@ -201,7 +241,7 @@ repeatedCost delta crossings
   <= positiveVariation.
 ```
 
-`repeatedCost` is the constructive version of `N_bad * delta`; no informal Nat-to-real multiplication is needed.  The remaining A8 theorem is now only the physical instantiation: show that every actual HH-bad entrance pays the hysteretic jump and prove the cutoff-uniform positive-variation bound.
+`repeatedCost` is the constructive version of `N_bad * delta`; no informal Nat-to-real multiplication is needed.  The remaining A8 theorem is the physical instantiation: show that every actual HH-bad entrance pays the hysteretic jump and prove the cutoff-uniform positive-variation bound.
 
 ## 6. Signed owner information is retained before the positive tax
 
@@ -278,7 +318,7 @@ proves that **no** feasible allocation can have strict reserve.  A certified min
 
 ## 9. F4 is narrower than the stale Round-30 marker suggests
 
-The repository already contains exact physical C^3 three-leg cancellation from resonance, Fourier reality and divergence-free transversality, plus literal duplicate-free cutoff triad enumeration.  Round 37 specializes that theorem to the exact rational carrier and proves
+The repository already contains exact physical `C^3` three-leg cancellation from resonance, Fourier reality and divergence-free transversality, plus literal duplicate-free cutoff triad enumeration.  Round 37 specializes that theorem to the exact rational carrier and proves
 
 ```text
 threeLegPower(tau) = 0
@@ -290,7 +330,9 @@ for every physical triad and therefore
 sum_{tau in physicalTriadEnumeration N} threeLegPower(tau) = 0.
 ```
 
-No caller-supplied cancellation witness is used.  The remaining F4 seam is now explicitly the same-object/multiplicity theorem equating the Galerkin nonlinear power with this enumerated three-leg fold.  The local physical cancellation itself is no longer the mathematical unknown.
+No caller-supplied cancellation witness is used.  The remaining F4 seam is explicitly the same-object/multiplicity theorem equating the complete Galerkin nonlinear power with this enumerated three-leg fold.  The local physical cancellation itself is no longer the mathematical unknown.
+
+A second repository audit found that `NSTriadKNFiniteComplexFourierDynamics` already derives its zero-sum modal-transfer conservation from local complex algebra via `physicalSixTermComplexFactorizationFromLocalAlgebra` and `physicalModalTriadTransferConservationFromLocalAlgebra`; therefore the stale `complexSixTermFactorizationPhysicalClosed = false` marker should not be interpreted as the mathematical frontier.  The actual unresolved F4 issue is the global enumeration/fold identification and concrete authority wiring, not local six-term cancellation.
 
 ## 10. Classification remains a scoped property edge
 
@@ -300,11 +342,10 @@ No caller-supplied cancellation witness is used.  The remaining F4 seam is now e
 
 The next three analytic targets are now more precise than at the start of the round:
 
-1. **A6 — physical HH-bad energy coercivity:** prove, on the actual localized bad energy,
-   `E_bad(q) (nu_eff lambda_q) <= C_bad(q)` with enough uniform coefficient to feed the inverse-shell owner budget.  Direction-only absolute floors should no longer be pursued.
+1. **A6 — HH-bad localization/allocation, not elementary coercivity:** prove that the actual HH-bad energy/gain is represented by the energy quantity used in the coercivity cell and that its owner charge receives enough of the literal shell viscous dissipation.  Keep this distinct from the older Luo upper critical-smallness hypothesis, which remains a separate physical estimate.
 2. **A1 — physical Com cross-channel realization:** identify the literal shell `P_q T Q_q` and `Q_q T P_q` maps with the Round-35 Gram cells / two Cotlar pair products and prove the half-dyadic decay uniformly in cutoff.
-3. **A3/A4 — periodic PV projector increment theorem:** prove the literal torus strain kernel's PV zero-mass/cancellation representation and estimate its projector-increment integral by the existing `Theta` directional defect plus admissible kernel/tail terms.
+3. **A3/A4 — periodic PV projector increment theorem:** prove the literal torus strain kernel's PV zero-mass/cancellation representation and estimate its amplitude-weighted projector-increment integral by the existing `Theta` defect plus admissible kernel/tail terms.
 
-In parallel, the finite lane should finish the Galerkin-power/enumerated-fold identity, Bishop-state codec/Picard--Lindelof authority, time integration and global finite flow.  After the physical owner coefficients are available, the certified reserve optimizer provides an immediate falsification test for whether the nine-owner feasible region intersects `sum eta_i < 1`.
+In parallel, the finite lane should finish the Galerkin-power/enumerated-fold same-object identity, Bishop-state codec/Picard--Lindelof authority, time integration and global finite flow.  After the physical owner coefficients are available, the certified reserve optimizer gives an immediate falsification test for whether the nine-owner feasible region intersects `sum eta_i < 1`.
 
 No module in this round promotes these finite/algebraic results to unconditional Navier--Stokes regularity.
