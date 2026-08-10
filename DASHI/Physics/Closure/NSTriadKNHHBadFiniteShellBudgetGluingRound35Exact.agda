@@ -34,8 +34,7 @@ module DASHI.Physics.Closure.NSTriadKNHHBadFiniteShellBudgetGluingRound35Exact w
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; suc)
-open import Data.Rational.Base using (ℚ; _+_)
-open import Relation.Binary.PropositionalEquality using (trans)
+open import Data.Rational.Base using (ℚ; _+_; _-_; _*_)
 
 import DASHI.Physics.Closure.NSTriadKNHHBadSharpDyadicGainRound33Exact as Sharp
 import DASHI.Physics.Closure.NSTriadKNHHBadSummableDyadicGainRound34Exact as Sum
