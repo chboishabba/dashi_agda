@@ -151,7 +151,7 @@ sixThreeOverlapNonnegative gap =
     (SixThree.strongBranchSquaredNonnegative gap)
     (SixThree.weakBranchSquaredNonnegative gap)
 
-sixThreeGramCell : Nat → GramInterferenceCell
+sixThreeGramCell : (gap : Nat) → GramInterferenceCell gap
 sixThreeGramCell gap =
   gram-interference-cell
     1ℚ
@@ -185,7 +185,7 @@ sixThreeGramCell gap =
       (sym productIdentity)
       ℚP.≤-refl
 
-sixThreeHalfDyadicGramCell : Nat → HalfDyadicGramCell
+sixThreeHalfDyadicGramCell : (gap : Nat) → HalfDyadicGramCell gap
 sixThreeHalfDyadicGramCell gap =
   half-dyadic-gram-cell
     (sixThreeGramCell gap)
