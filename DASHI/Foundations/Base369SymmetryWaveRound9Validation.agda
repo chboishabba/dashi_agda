@@ -7,6 +7,7 @@ open import Base369 using (TriTruth; tri-low; tri-mid; tri-high)
 import DASHI.Foundations.Base369SignedMembershipExact as Signed
 import DASHI.Foundations.Base369LayeredAttractorAndCoarseFineExact as Layered
 import DASHI.Foundations.Base369AddressSymmetryAndBranchGeometryExact as Geometry
+import DASHI.Foundations.Base369PrefixUltrametricExact as Prefix
 import DASHI.Foundations.Base369ProcessBranchAttractorExact as Branch
 import DASHI.Foundations.Base369StepStateSymmetryQuotientExact as Step
 import DASHI.Foundations.Base369WaveContinuousSymbolicCodingExact as Wave
@@ -38,6 +39,14 @@ prefixDepthIsSelfDepth :
   {n : Nat} → (address : Geometry.TritPath n) →
   Geometry.sharedPrefixDepth address address ≡ n
 prefixDepthIsSelfDepth = Geometry.sharedPrefixDepthSelf
+
+prefixAgreementHasUltrametricThresholdLaw :
+  {n k : Nat} →
+  {left middle right : Geometry.TritPath n} →
+  Prefix.PrefixAgree k left middle →
+  Prefix.PrefixAgree k middle right →
+  Prefix.PrefixAgree k left right
+prefixAgreementHasUltrametricThresholdLaw = Prefix.prefixUltrametricThreshold
 
 braidRelationValidated :
   {A : Set} → (x : Geometry.Triple A) →
