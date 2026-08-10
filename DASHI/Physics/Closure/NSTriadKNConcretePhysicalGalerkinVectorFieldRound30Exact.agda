@@ -200,8 +200,8 @@ concreteOutputModesNonzero builder state coefficient member =
   let
     witness = concreteOutputCoefficientWitness
       builder state coefficient member
-    sourceNonzero = Audit.modeNonzero
-      (Coefficient.finiteSystem (physicalSystemAt builder state))
+    sourceNonzero = Coefficient.retainedModeNonzero
+      (physicalSystemAt builder state)
       (sourceMode witness)
       (sourceMembership witness)
   in
