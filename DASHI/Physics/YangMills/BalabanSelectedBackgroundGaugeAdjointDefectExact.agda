@@ -48,7 +48,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Integer.Base using (+_)
 open import Data.List.Base using (length)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_; _/_)
+  (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_; _/_; NonNegative)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using
@@ -60,12 +60,10 @@ import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as FiniteL2
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreCarrier as Block
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
 import DASHI.Physics.YangMills.BalabanFiniteSumFubiniExact as Fubini
-import DASHI.Physics.YangMills.BalabanP33FiniteWeightedSchurSquaredExact as Schur
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
 import DASHI.Physics.YangMills.BalabanFiniteRectangularTransposeFrobeniusExact as Transpose
 import DASHI.Physics.YangMills.BalabanFiniteLinearFunctionalCoordinatesExact as Linear
 import DASHI.Physics.YangMills.BalabanPath4AxisAverageExact as Path4
-import DASHI.Physics.YangMills.BalabanPath4PhysicalVarianceDecompositionExact as Variance
 import DASHI.Physics.YangMills.BalabanP33LiteralResidualKernelNumericalCalibrationExact as Count
 import DASHI.Physics.YangMills.BalabanP33PhysicalCoordinateBasisExact as Basis
 import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Coordinates
@@ -73,16 +71,16 @@ import DASHI.Physics.YangMills.BalabanP33FiniteKKTAdmissibleProjectorExact as KK
 import DASHI.Physics.YangMills.BalabanP33PhysicalRationalWilsonPlaquetteJetExact as Physical
 import DASHI.Physics.YangMills.BalabanP33PeriodicFourDimensionalHodgeIdentityExact as Periodic
 import DASHI.Physics.YangMills.BalabanP33PhysicalPeriodicOpenReferenceBridgeExact as Bridge
+import DASHI.Physics.YangMills.BalabanP33PhysicalFlatGaugeDivergenceIdentificationExact as FlatGauge
 import DASHI.Physics.YangMills.BalabanP33PhysicalBackgroundGaugeFirstExact as GaugeFirst
 import DASHI.Physics.YangMills.BalabanP33PhysicalBackgroundGaugeDefectNormSquaredExact as Pointwise
 import DASHI.Physics.YangMills.BalabanP33PhysicalBackgroundGaugeGlobalDefectExact as Global
-import DASHI.Physics.YangMills.BalabanP33PhysicalBackgroundGaugeSignedLowerExact as Signed
 import DASHI.Physics.YangMills.BalabanP33PhysicalBackgroundGaugeParameterizedYoungExact as Relaxed
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundGaugeConstraintMatrixExact as GaugeMatrix
 import DASHI.Physics.YangMills.BalabanSelectedCombinedConstraintRowCarrierExact as Rows
 
 GaugeRow : Set
-GaugeRow = Pointwise.Gauge.GaugeCoordinate4
+GaugeRow = FlatGauge.GaugeCoordinate4
 
 GaugeMultiplier : Set
 GaugeMultiplier = GaugeRow → ℚ
@@ -268,7 +266,7 @@ basisDecodedNormSqOne column =
     encodedNormExact =
       Sums.sumRationalCong Coordinates.physicalSU2Coordinates4 _ _
         (λ coordinate →
-          cong₂ FiniteL2._*_
+          cong₂ _*_
             (Coordinates.encodeAfterDecodePointwise
               (Basis.physicalBasis column) coordinate)
             (Coordinates.encodeAfterDecodePointwise
@@ -292,20 +290,38 @@ gaugeDefectColumnBound background delta deltaNonnegative radius column =
     field = Coordinates.decodePhysicalSU2 (Basis.physicalBasis column)
     raw = Global.globalGaugeDerivativeDefectUniformBound
       background field delta deltaNonnegative radius
+
+    normalized :
+      Global.globalGaugeDerivativeDefectEnergy background field
+      ≤ sixteenDelta delta
+    normalized =
+      subst
+        (λ norm →
+          Global.globalGaugeDerivativeDefectEnergy background field
+          ≤ (+ 16 / 1) * delta * norm)
+        (basisDecodedNormSqOne column)
+        (subst
+          (λ upper →
+            Global.globalGaugeDerivativeDefectEnergy background field ≤ upper)
+          (ℚRing.solve-∀ delta)
+          raw)
   in
   subst
     (λ left → left ≤ sixteenDelta delta)
     (sym (gaugeDefectColumnNormSqExact background column))
-    (subst
-      (λ norm →
-        Global.globalGaugeDerivativeDefectEnergy background field
-        ≤ (+ 16 / 1) * delta * norm)
-      (basisDecodedNormSqOne column)
-      (subst
-        (λ upper →
-          Global.globalGaugeDerivativeDefectEnergy background field ≤ upper)
-        (ℚRing.solve-∀ delta)
-        raw))
+    normalized
+
+sixteenDeltaNonnegative : ∀ delta →
+  0ℚ ≤ delta → 0ℚ ≤ sixteenDelta delta
+sixteenDeltaNonnegative delta deltaNonnegative =
+  let
+    instance
+      sixteenNN : NonNegative (+ 16 / 1)
+      sixteenNN = ℚ.nonNegative (ℚP.nonNegative⁻¹ (+ 16 / 1))
+      deltaNN : NonNegative delta
+      deltaNN = ℚ.nonNegative deltaNonnegative
+  in
+  ℚP.nonNegative⁻¹ (sixteenDelta delta)
 
 ------------------------------------------------------------------------
 -- Exact transpose bound.
@@ -322,8 +338,7 @@ gaugeDefectColumnData background delta deltaNonnegative radius = record
   ; Transpose.RectangularColumnBound.matrix = gaugeDefectMatrix background
   ; Transpose.RectangularColumnBound.columnBound = sixteenDelta delta
   ; Transpose.RectangularColumnBound.columnBoundNonnegative =
-      Norm.productNonnegative (+ 16 / 1) delta
-        (ℚP.nonNegative⁻¹ (+ 16 / 1)) deltaNonnegative
+      sixteenDeltaNonnegative delta deltaNonnegative
   ; Transpose.RectangularColumnBound.columnBounded =
       gaugeDefectColumnBound background delta deltaNonnegative radius
   }
