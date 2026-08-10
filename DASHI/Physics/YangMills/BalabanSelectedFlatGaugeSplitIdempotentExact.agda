@@ -29,6 +29,7 @@ module DASHI.Physics.YangMills.BalabanSelectedFlatGaugeSplitIdempotentExact wher
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Rational.Base as ℚ using (0ℚ)
+import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (sym; trans)
 open import Relation.Nullary.Negation.Core using (¬_)
 
@@ -65,8 +66,7 @@ selectedBasedGaugeProjectionFixesBased :
   ≡ multiplier (pair coordinate site)
 selectedBasedGaugeProjectionFixesBased multiplier based coordinate site
   rewrite based coordinate =
-  Data.Rational.Tactic.RingSolver.solve-∀
-    (multiplier (pair coordinate site))
+  ℚRing.solve-∀ (multiplier (pair coordinate site))
 
 selectedBasedGaugeProjectionFixedImpliesBased :
   ∀ multiplier →
