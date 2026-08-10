@@ -13,6 +13,7 @@ import DASHI.Biology.TenAdicInverseLimitBridge
 import DASHI.Biology.SignedMultiplicityObstructionExact
 import DASHI.Biology.FRACTRANWreathControlledSymmetryExact
 import DASHI.Biology.SpectralReachabilityComplexityExact
+import DASHI.Biology.SignedWreathReachabilityBridgeExact
 import DASHI.Culture.SignedMultiplicityYinYangBridgeExact
 import DASHI.Culture.BeliefFibreReplicationExact
 import DASHI.Moonshine.SSPJProfiniteOrthogonalComplexityRound8Validation
