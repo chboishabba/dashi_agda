@@ -33,7 +33,7 @@ open import Agda.Builtin.List using ([]; _∷_)
 open import Agda.Builtin.Nat using (Nat; suc)
 open import Data.Rational.Base using (ℚ; _+_; _-_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 import DASHI.Physics.Closure.NSTriadKNHHBadSharpDyadicGainRound33Exact as Sharp
 import DASHI.Physics.Closure.NSTriadKNHHBadFiniteShellBudgetGluingRound35Exact as Budget
@@ -76,6 +76,15 @@ successorBoundaryDoublesBack eta shell =
     (solve
       (boundary (canonicalLedger eta shell) ∷ []))
 
+nextGainIsSuccessorBoundary : ∀ eta shell →
+  Sharp.requiredHHBadGain eta (suc shell)
+  ≡ boundary (canonicalLedger eta (suc shell))
+nextGainIsSuccessorBoundary eta shell =
+  solve
+    ( eta
+    ∷ Sharp.inverseDyadicScale (suc shell)
+    ∷ [])
+
 successorInternalProjectsBack : ∀ eta shell →
   internal (canonicalLedger eta (suc shell))
     - boundary (canonicalLedger eta (suc shell))
@@ -83,12 +92,12 @@ successorInternalProjectsBack : ∀ eta shell →
 successorInternalProjectsBack eta shell =
   let
     increment = Budget.internalBudgetIncrementIsNextGain eta shell
-    boundaryGain = Budget.boundaryBudgetEqualsNextGain eta (suc shell)
     incrementAsBoundary :
       internal (canonicalLedger eta (suc shell))
         - internal (canonicalLedger eta shell)
       ≡ boundary (canonicalLedger eta (suc shell))
-    incrementAsBoundary = trans increment (sym boundaryGain)
+    incrementAsBoundary =
+      trans increment (nextGainIsSuccessorBoundary eta shell)
 
     exposeIncrement :
       internal (canonicalLedger eta (suc shell))
