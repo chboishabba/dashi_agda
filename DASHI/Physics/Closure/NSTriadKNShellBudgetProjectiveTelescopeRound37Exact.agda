@@ -40,7 +40,7 @@ open import Agda.Builtin.Nat using (Nat; suc)
 open import Data.Nat.Base using (_+_)
 open import Data.Rational.Base using (ℚ; 1ℚ; _+_; _-_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 import DASHI.Physics.Closure.NSTriadKNHHBadSharpDyadicGainRound33Exact as Sharp
 import DASHI.Physics.Closure.NSTriadKNHHBadFiniteShellBudgetGluingRound35Exact as Budget
@@ -101,7 +101,12 @@ oneStepInternalAdvanceIsTransferredGain : ∀ eta shell →
   internalAdvance eta shell (suc 0)
   ≡ Sharp.requiredHHBadGain eta (suc shell)
 oneStepInternalAdvanceIsTransferredGain eta shell =
-  Budget.internalBudgetIncrementIsNextGain eta shell
+  trans
+    (internalAdvanceTelescope eta shell (suc 0))
+    (solve
+      ( eta
+      ∷ Sharp.inverseDyadicScale (suc shell)
+      ∷ []))
 
 projectiveShellTelescopeClosed : Bool
 projectiveShellTelescopeClosed = true
