@@ -61,6 +61,7 @@ open import Relation.Binary.PropositionalEquality using
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using
   (CyclicIndex; four; zeroᵢ; sucᵢ; pair)
+import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreCarrier as Block
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
 import DASHI.Physics.YangMills.BalabanP33FiniteWeightedSchurSquaredExact as Schur
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
@@ -69,6 +70,7 @@ import DASHI.Physics.YangMills.BalabanSide4TranslationDifferenceExact as Differe
 import DASHI.Physics.YangMills.BalabanP33FiniteCombesThomasConjugationExact as CT
 import DASHI.Physics.YangMills.BalabanFiniteRectangularAbsoluteMassExact as Mass
 import DASHI.Physics.YangMills.BalabanSelectedFlatGaugeConstraintAbsoluteMassExact as FlatMass
+import DASHI.Physics.YangMills.BalabanSelectedBackgroundGaugeGramPerturbationAbsoluteMassExact as PerturbationMass
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundFlatGreenPerturbationContractionExact as Contraction
 import DASHI.Physics.YangMills.BalabanP33PhysicalRationalWilsonPlaquetteJetExact as Physical
 import DASHI.Physics.YangMills.BalabanP33PhysicalBackgroundGaugeParameterizedYoungExact as Relaxed
@@ -170,7 +172,7 @@ multiplyBounds : ∀ left leftBound right rightBound →
 multiplyBounds left leftBound right rightBound
     leftNonnegative leftBoundNonnegative rightNonnegative leftBelow rightBelow =
   ℚP.≤-trans
-    (Contraction.PerturbationMass.rightScaleMonotone
+    (PerturbationMass.rightScaleMonotone
       right left leftBound rightNonnegative leftBelow)
     (Norm.scaleNonnegative leftBound leftBoundNonnegative rightBelow)
 
@@ -178,14 +180,12 @@ multiplyBounds left leftBound right rightBound
 -- Four-dimensional product profile.
 ------------------------------------------------------------------------
 
-siteDecayWeight :
-  DASHI.Physics.YangMills.BalabanPhysicalBlockFibreCarrier.PhysicalBlockL 4 → ℚ
+siteDecayWeight : Block.PhysicalBlockL 4 → ℚ
 siteDecayWeight (pair (pair x0 x1) (pair x2 x3)) =
   (coordinateDecay x0 * coordinateDecay x1)
     * (coordinateDecay x2 * coordinateDecay x3)
 
-siteGrowthWeight :
-  DASHI.Physics.YangMills.BalabanPhysicalBlockFibreCarrier.PhysicalBlockL 4 → ℚ
+siteGrowthWeight : Block.PhysicalBlockL 4 → ℚ
 siteGrowthWeight (pair (pair x0 x1) (pair x2 x3)) =
   (coordinateGrowth x0 * coordinateGrowth x1)
     * (coordinateGrowth x2 * coordinateGrowth x3)
@@ -407,7 +407,7 @@ weightedEntryAbsoluteUpper root kernel row column =
       (ℚP.0≤∣p∣ k) (gaugeInverseWeightNonnegative root column)
 
     removeWeight : w * (∣ k ∣ * iw) ≤ 1ℚ * (∣ k ∣ * iw)
-    removeWeight = Contraction.PerturbationMass.rightScaleMonotone
+    removeWeight = PerturbationMass.rightScaleMonotone
       (∣ k ∣ * iw) w 1ℚ innerNonnegative (gaugeWeightBelowOne root row)
 
     enlargeInverse : ∣ k ∣ * iw ≤ ∣ k ∣ * siteGrowthEnvelope
@@ -492,7 +492,7 @@ selectedBackgroundWeightedGreenPerturbationAbsoluteRowMassBound
     raw = weightedRowMassUpper root
       (Contraction.flatGreenTimesPerturbationKernel background) row
 
-    scaled = Contraction.PerturbationMass.rightScaleMonotone
+    scaled = PerturbationMass.rightScaleMonotone
       siteGrowthEnvelope
       (Mass.squareRowMass gaugeRows
         (Contraction.flatGreenTimesPerturbationKernel background) row)
