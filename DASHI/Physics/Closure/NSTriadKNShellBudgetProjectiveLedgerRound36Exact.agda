@@ -40,7 +40,7 @@ open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Nat.Base using (_+_)
 open import Data.Rational.Base using (ℚ; _+_; _*_)
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Physics.Closure.NSTriadKNHHBadSharpDyadicGainRound33Exact as Sharp
 import DASHI.Physics.Closure.NSTriadKNHHBadFiniteShellBudgetGluingRound35Exact as Budget
@@ -95,8 +95,6 @@ shadowTotalsCoherent eta coarse steps =
   trans
     (shadowTotalExact eta (coarse + steps))
     (sym (shadowTotalExact eta coarse))
-  where
-  open import Relation.Binary.PropositionalEquality using (sym)
 
 record CoherentShellBudgetLedger (eta : ℚ) : Set where
   constructor coherent-shell-budget-ledger
