@@ -1,11 +1,12 @@
 module DASHI.Cognition.PNF.IdentityEvidenceProduction where
 
+open import Agda.Builtin.Equality using (_≡_)
 open import Data.Empty using (⊥)
 
 open import DASHI.Cognition.PNF.ProofRelevantIdentityFibres
 
 ------------------------------------------------------------------------
--- Parser evidence is stratified before identity admission.  Candidate evidence
+-- Parser evidence is stratified before identity admission. Candidate evidence
 -- may be useful without carrying permission to establish a document identity.
 ------------------------------------------------------------------------
 
@@ -42,7 +43,7 @@ lexicalSimilarityCannotBootstrapIdentity ()
 
 ------------------------------------------------------------------------
 -- Name expansion may become admissible only by transporting an already
--- admitted target identity.  This corresponds to the runtime corroboration gate
+-- admitted target identity. This corresponds to the runtime corroboration gate
 -- rather than treating document-unique surname evidence as proof by itself.
 ------------------------------------------------------------------------
 
@@ -55,8 +56,8 @@ record CorroboratedNameExpansion : Set where
 
 open CorroboratedNameExpansion public
 
--- Parser-token -> local-object anchoring is itself fail-closed.  It is a bridge
--- from observation to local object, not a claim that two objects are identical.
+-- Parser-token -> local-object anchoring is fail-closed. It is a bridge from
+-- observation to local object, not a claim that two objects are identical.
 data ParserObjectAnchorMultiplicity : Set where
   noLocalObject oneLocalObject severalLocalObjects : ParserObjectAnchorMultiplicity
 
