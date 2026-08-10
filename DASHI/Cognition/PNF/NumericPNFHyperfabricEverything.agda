@@ -18,6 +18,7 @@ open import DASHI.Cognition.PNF.ProofRelevantIdentityFibres public
 open import DASHI.Cognition.PNF.IdentityEvidenceProduction public
 open import DASHI.Cognition.PNF.DocumentScopedIdentityEvidenceExecution public
 open import DASHI.Cognition.PNF.ProofRelevantFactorDerivations public
+open import DASHI.Cognition.PNF.BoundedFactorCompositionExecution public
 open import DASHI.Cognition.PNF.DirectDemandLookup public
 open import DASHI.Cognition.PNF.SetBasedDemandPlanning public
 open import DASHI.Cognition.PNF.NumericPNFCompilation public
