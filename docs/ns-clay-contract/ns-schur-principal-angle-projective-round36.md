@@ -51,9 +51,7 @@ Thus the zero-point/residual-floor idea is not merely interpretive: a genuine lo
 
 ## HH-good: mode principal angles alone are refuted
 
-Round 35 showed that `sqrt(2) S_k` is isometric on each transverse vorticity fibre. Round 36 tests whether separation of the wave-vector directions alone can make the cross-fibre Gram small.
-
-The exact witness is
+Round 35 showed that `sqrt(2) S_k` is isometric on each transverse vorticity fibre. Round 36 first tests separation of wave-vector directions with the exact orthogonal witness
 
 ```text
 k = e1,
@@ -61,13 +59,36 @@ l = e2,
 omega = eta = e3.
 ```
 
-Then `k dot l = 0`, `e3` is transverse to both modes, and each normalized same-fibre Gram is one, yet
+Here `k dot l = 0`, `e3` is transverse to both modes, and each normalized same-fibre Gram is one, yet
 
 ```text
 2 <S_e1 e3, S_e2 e3>_F = -1.
 ```
 
-Hence orthogonal mode directions can still have unit-magnitude normalized strain-fibre correlation. A bound depending only on the angle between `k` and `l` cannot be the missing HH-good smallness theorem. The surviving high-alpha route must use additional physical structure: periodic principal-value cancellation, increments, vorticity-direction coherence, spatial localization, shell localization, or a combination of these.
+The stronger `NSTriadKNStrainFibreCoherenceBarrierRound36Exact` then treats every rational planar unit pair
+
+```text
+k = e1,
+l = (c,s,0),
+c^2+s^2 = 1.
+```
+
+Using the adapted transverse bases `e2,e3` and `(-s,c,0),e3`, the normalized cross-fibre Gram matrix is diagonal with channels
+
+```text
+c,
+c^2-s^2,
+```
+
+and the mixed entries are exactly zero. Their squared channel energy satisfies the completion-of-squares identity
+
+```text
+c^2 + (c^2-s^2)^2
+  = 7/16 + (2(c^2-3/8))^2
+  >= 7/16.
+```
+
+So this is stronger than one counterexample: even with adapted polarizations, the two-channel cross-fibre coherence has a uniform positive floor. A mode-angle-only principal-angle argument cannot make the whole strain interference arbitrarily small. The surviving high-alpha route must use additional physical structure: periodic principal-value cancellation, increments, vorticity-direction coherence, spatial localization, shell localization, or a combination of these.
 
 ## Com: exact coarse/fine naturality defect
 
@@ -143,6 +164,6 @@ This removes the rational/completeness type mismatch without quotienting constru
 
 ## Exact frontier after this round
 
-The most informative new decision is negative: the simplest mode-principal-angle HH-good route is eliminated. The two live HH-bad inverse-scale mechanisms are now explicit and mutually checkable: one-derivative Schur elimination or a dissipative bad-stratum floor. `Com` is reduced to the literal operator realization of an exact increment/naturality defect. The finite shell and owner-budget limits now have coherent algebraic carriers; the nine-owner region has a robust/critical/infeasible classification; the active triad subgraph carries all five physical selection requirements; and the finite-flow lane has a type-correct Bishop-real setoid seam rather than a rational surrogate.
+The most informative new decision is negative and now quantitative: the mode-principal-angle HH-good route is blocked by a uniform `7/16` two-channel Gram-energy floor, not merely by one exceptional orthogonal pair. The two live HH-bad inverse-scale mechanisms are explicit and mutually checkable: one-derivative Schur elimination or a dissipative bad-stratum floor. `Com` is reduced to the literal operator realization of an exact increment/naturality defect. The finite shell and owner-budget limits now have coherent algebraic carriers; the nine-owner region has a robust/critical/infeasible classification; the active triad subgraph carries all five physical selection requirements; and the finite-flow lane has a type-correct Bishop-real setoid seam rather than a rational surrogate.
 
 None of these results is promoted to unconditional Navier–Stokes regularity. The physical PDE producers, actual Bishop-state coordinate codec, real Picard--Lindelof instance, actual transversality/reality/nonzero-coupling selection predicates, nine actual owner estimates, cutoff limits, compactness and continuation remain required.
