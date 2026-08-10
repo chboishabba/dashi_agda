@@ -10,35 +10,21 @@ module DASHI.Physics.Closure.NSTriadKNCanonicalCutoffSameObjectSystemRound34Exac
 --
 -- Author: Roger Temam.
 -- Title: "Navier-Stokes Equations: Theory and Numerical Analysis".
--- AMS Chelsea, 2001 reprint.
 -- DOI: 10.1090/chel/343.
 --
 -- DASHI CONTRIBUTION
 --
--- Repair the last hidden quantifier in the finite Galerkin producer.  Round 33
--- proved that an arbitrary ReconstructedPhysicalState need not define a
--- function of Fourier mode: duplicate positive representatives and overlap
--- between positive and reconstructed-negative sheets must agree.  A physical
--- finite system also needs an actual cutoff.
+-- Round 33 showed that an arbitrary ReconstructedPhysicalState does not by
+-- itself determine a Fourier function: duplicate positive representatives and
+-- positive/negative sheet overlaps must agree.  A physical finite system also
+-- needs one actual cutoff.  This module constructs the finite system from the
+-- exact strengthened datum carrying both facts.
 --
--- This module therefore constructs the finite system on the exact strengthened
--- datum carrying both facts:
---
---   * same-object coefficient compatibility;
---   * reconstructed retained modes are exactly the nonzero part of the
---     concrete max-coordinate cutoff cube.
---
--- From those data, the velocity is the executable Round-33 lookup, the triads
--- are the literal exhaustive physicalTriadEnumeration, every retained mode is
--- proved nonzero, and every retained velocity coefficient is proved transverse.
--- The construction then inhabits PhysicalFiniteComplex3GalerkinSystem.
---
--- A family of such strengthened data produces the existing Round-31
--- SameCarrierSameObjectGalerkinBuilder.  No unrelated finite system can be
--- substituted.  The remaining physical producer is therefore explicit:
--- construct the cutoff-compatible strengthened state family used by the ODE,
--- rather than asking the weaker raw state type to carry information it does
--- not contain.
+-- The velocity is the executable Round-33 lookup, retained modes are exactly
+-- the nonzero part of the concrete max-coordinate cutoff cube, and triads are
+-- the exhaustive physicalTriadEnumeration.  Every retained mode is proved
+-- nonzero and every retained velocity coefficient is proved transverse.
+-- A family of these data produces the existing Round-31 same-object builder.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Level; lsuc)
@@ -61,10 +47,6 @@ import DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30E
 import DASHI.Physics.Closure.NSTriadKNSameCarrierSameObjectRound31Exact as Same
 import DASHI.Physics.Closure.NSTriadKNSameObjectLookupConsistencyRound33Exact as Lookup
 
-------------------------------------------------------------------------
--- Literal nonzero cutoff support.
-------------------------------------------------------------------------
-
 removeZero : List Z3.FourierMode → List Z3.FourierMode
 removeZero [] = []
 removeZero (mode ∷ rest)
@@ -74,10 +56,6 @@ removeZero (mode ∷ rest)
 
 nonzeroCutoffModes : Nat → List Z3.FourierMode
 nonzeroCutoffModes cutoff = removeZero (Cube.cutoffModes cutoff)
-
-------------------------------------------------------------------------
--- The reconstructed state modes are literally positive/negative orbit pairs.
-------------------------------------------------------------------------
 
 orbitModes :
   ∀ {r} {F : C3.RealField r} {E : C3.IntegerEmbedding F} →
@@ -106,7 +84,7 @@ reconstructedModeNonzero {F = F} {E = E} state mode member =
     (λ coefficient coefficientMember → coefficientMember)
     mode
     (subst
-      (mode Cube.∈_)
+      (λ modes → mode Cube.∈ modes)
       (reconstructedStateModesExact state)
       member)
   where
@@ -152,7 +130,7 @@ canonicalVelocityTransverseOnRetained
     (λ coefficient coefficientMember → coefficientMember)
     mode
     (subst
-      (mode Cube.∈_)
+      (λ modes → mode Cube.∈ modes)
       (reconstructedStateModesExact state)
       member)
   where
@@ -229,10 +207,6 @@ canonicalVelocityTransverseOnRetained
         include tailCoefficient (State.there tailMembership))
       selected tailMember
 
-------------------------------------------------------------------------
--- The strengthened same-object datum.
-------------------------------------------------------------------------
-
 record CutoffSameObjectDatum
     {r} (F : C3.RealField r) (E : C3.IntegerEmbedding F)
     (state : State.ReconstructedPhysicalState F E) : Set (lsuc r) where
@@ -242,7 +216,6 @@ record CutoffSameObjectDatum
     cutoff : Nat
     inverseSquare : C3.ModeInverseSquare F E
     viscosity : C3.Carrier F
-
     retainedModesAreLiteralNonzeroCutoff :
       Same.reconstructedStateModes state ≡ nonzeroCutoffModes cutoff
 
@@ -251,9 +224,9 @@ open CutoffSameObjectDatum public
 canonicalAuditFiniteSystem :
   ∀ {r} {F : C3.RealField r} {E : C3.IntegerEmbedding F}
     {state : State.ReconstructedPhysicalState F E} →
-  CutoffSameObjectDatum F E state →
-  Audit.FiniteComplex3GalerkinSystem F E (inverseSquare _)
-canonicalAuditFiniteSystem {state = state} datum = record
+  (datum : CutoffSameObjectDatum F E state) →
+  Audit.FiniteComplex3GalerkinSystem F E (inverseSquare datum)
+canonicalAuditFiniteSystem {F = F} {E = E} {state = state} datum = record
   { Audit.FiniteComplex3GalerkinSystem.cutoff = cutoff datum
   ; Audit.FiniteComplex3GalerkinSystem.modes = Same.reconstructedStateModes state
   ; Audit.FiniteComplex3GalerkinSystem.triads =
@@ -281,7 +254,7 @@ canonicalPhysicalFiniteSystem :
     {state : State.ReconstructedPhysicalState F E} →
   CutoffSameObjectDatum F E state →
   Coefficient.PhysicalFiniteComplex3GalerkinSystem F
-canonicalPhysicalFiniteSystem {F = F} {E = E} {state = state} datum = record
+canonicalPhysicalFiniteSystem {E = E} {state = state} datum = record
   { Coefficient.PhysicalFiniteComplex3GalerkinSystem.physicalEmbedding = E
   ; Coefficient.PhysicalFiniteComplex3GalerkinSystem.physicalInverseSquare =
       inverseSquare datum
@@ -339,10 +312,6 @@ canonicalFiniteSystemRetainedModesExact :
     (Coefficient.finiteSystem (canonicalPhysicalFiniteSystem datum))
   ≡ Same.reconstructedStateModes state
 canonicalFiniteSystemRetainedModesExact datum = refl
-
-------------------------------------------------------------------------
--- A family of strengthened data closes the existing Round-31 builder.
-------------------------------------------------------------------------
 
 record CutoffSameObjectFamily
     {r} (F : C3.RealField r) (E : C3.IntegerEmbedding F) : Set (lsuc r) where
