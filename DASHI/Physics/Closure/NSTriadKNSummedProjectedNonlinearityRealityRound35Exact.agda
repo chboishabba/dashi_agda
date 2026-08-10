@@ -35,9 +35,9 @@ module DASHI.Physics.Closure.NSTriadKNSummedProjectedNonlinearityRealityRound35E
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
+import Data.List.Base as ListBase
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 import Data.List.Relation.Binary.Permutation.Propositional as Perm
-import Data.List.Relation.Binary.Permutation.Propositional.Properties as PermP
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
@@ -62,7 +62,7 @@ sumVectorsRespPermutation :
 sumVectorsRespPermutation Perm.refl = refl
 sumVectorsRespPermutation (Perm.prep x xs↭ys) =
   cong (C3.complex3Add x) (sumVectorsRespPermutation xs↭ys)
-sumVectorsRespPermutation {F = F}
+sumVectorsRespPermutation
     (Perm.swap {xs = xs} x y xs↭ys) =
   trans
     (sym (Algebra.complex3AddAssociative x y (Audit.sumVectors xs)))
@@ -115,7 +115,7 @@ complex3ConjugateZero {F = F}
 sumVectorsConjugate :
   ∀ {r} {F : C3.RealField r}
     (values : List (C3.Complex3 F)) →
-  Audit.sumVectors (Data.List.Base.map C3.complex3Conjugate values)
+  Audit.sumVectors (ListBase.map C3.complex3Conjugate values)
   ≡ C3.complex3Conjugate (Audit.sumVectors values)
 sumVectorsConjugate [] = sym complex3ConjugateZero
 sumVectorsConjugate (value ∷ values) =
@@ -166,7 +166,7 @@ sumCanonicalConjugateTermsReality :
   (incidences : List Physical.PhysicalTriadIncidence) →
   Audit.sumVectors
     (Audit.mapTriadTerms system
-      (Data.List.Base.map FibrePerm.canonicalConjugate incidences))
+      (ListBase.map FibrePerm.canonicalConjugate incidences))
   ≡ C3.complex3Conjugate
       (Audit.sumVectors (Audit.mapTriadTerms system incidences))
 sumCanonicalConjugateTermsReality system velocityReality [] =
@@ -194,12 +194,12 @@ projectedNonlinearityReality :
     (system : Audit.FiniteComplex3GalerkinSystem F E I) →
   Reality.RealityCondition (Audit.velocity system) →
   Reality.RealityCondition (Audit.projectedNonlinearity system)
-projectedNonlinearityReality {F = F} system velocityReality output =
+projectedNonlinearityReality system velocityReality output =
   let
     source = Audit.concreteTriadsAt system output
 
     carrierPermutation :
-      Data.List.Base.map FibrePerm.canonicalConjugate source
+      ListBase.map FibrePerm.canonicalConjugate source
         Perm.↭
       Audit.concreteTriadsAt system (Z3.negateMode output)
     carrierPermutation =
@@ -208,7 +208,7 @@ projectedNonlinearityReality {F = F} system velocityReality output =
 
     termPermutation :
       Audit.mapTriadTerms system
-        (Data.List.Base.map FibrePerm.canonicalConjugate source)
+        (ListBase.map FibrePerm.canonicalConjugate source)
         Perm.↭
       Audit.mapTriadTerms system
         (Audit.concreteTriadsAt system (Z3.negateMode output))
