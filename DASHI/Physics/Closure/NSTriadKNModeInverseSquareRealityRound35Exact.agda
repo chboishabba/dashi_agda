@@ -34,7 +34,7 @@ module DASHI.Physics.Closure.NSTriadKNModeInverseSquareRealityRound35Exact where
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
-open import Data.Integer.Base using (ℤ)
+open import Data.Integer.Base using (ℤ; -_)
 open import Relation.Binary.PropositionalEquality using
   (cong; cong₂; subst; sym; trans; module ≡-Reasoning)
 open import Relation.Nullary using (yes; no)
