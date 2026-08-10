@@ -56,12 +56,11 @@ module DASHI.Physics.Closure.NSTriadKNLuoSixThreeComCotlarBridgeRound34Exact whe
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
 import Data.Integer.Base as Int
-open import Data.Rational.Base using (ℚ; _/_; _*_; _≤_)
-import Data.Rational.Properties as ℚP
+open import Data.Rational.Base using (ℚ; _/_; _+_; _*_; _≤_)
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (subst; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
 
 import DASHI.Physics.Closure.NSTriadKNLuoSixThreeCenteredCommutatorScaleExact as SixThree
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteHighLowDerivativeRatioExact as HL
@@ -72,24 +71,12 @@ half threeHalves : ℚ
 half = Int.+ 1 / 2
 threeHalves = Int.+ 3 / 2
 
-weakTwiceIsHalfDyadic :
-  ∀ gap →
-  SixThree.two * SixThree.weakBranchSquaredGap gap
-  ≡ Cotlar.directEnvelope half gap
-weakTwiceIsHalfDyadic gap =
-  ℚRing.solve-∀
-    (HL.highLowDerivativeRatio gap)
-    (Cotlar.dyadicWeight gap)
-
--- The previous identity needs the literal definitions aligned.  This separate
--- theorem records that the high--low ratio is quarter times the same dyadic
--- weight used by Round 34.
 highLowRatioIsQuarterDyadic :
   ∀ gap →
   HL.highLowDerivativeRatio gap
   ≡ HL.quarter * Cotlar.dyadicWeight gap
 highLowRatioIsQuarterDyadic zero = refl
-highLowRatioIsQuarterDyadic (Agda.Builtin.Nat.suc gap)
+highLowRatioIsQuarterDyadic (suc gap)
   rewrite highLowRatioIsQuarterDyadic gap =
   ℚRing.solve-∀ (Cotlar.dyadicWeight gap)
 
@@ -99,17 +86,10 @@ weakTwiceDirectEnvelopeExact :
   ≡ Cotlar.directEnvelope half gap
 weakTwiceDirectEnvelopeExact gap =
   trans
-    (congTwoWeak gap)
-    (ℚRing.solve-∀ (Cotlar.dyadicWeight gap))
-  where
-  congTwoWeak :
-    ∀ selectedGap →
-    SixThree.two * SixThree.weakBranchSquaredGap selectedGap
-    ≡ SixThree.two * (HL.quarter * Cotlar.dyadicWeight selectedGap)
-  congTwoWeak selectedGap =
-    Relation.Binary.PropositionalEquality.cong
+    (cong
       (SixThree.two *_)
-      (highLowRatioIsQuarterDyadic selectedGap)
+      (highLowRatioIsQuarterDyadic gap))
+    (ℚRing.solve-∀ (Cotlar.dyadicWeight gap))
 
 sixThreeSquaredGapFitsCotlarHalf :
   ∀ gap →
