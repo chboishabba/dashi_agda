@@ -36,7 +36,7 @@ module DASHI.Physics.Closure.NSTriadKNTriadSelectionRuleHypergraphRound36Exact w
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Relation.Binary.PropositionalEquality using (trans)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Physics.Closure.NSTriadKNExactLatticeShellTriads as Lattice
 import DASHI.Physics.Closure.NSTriadKNTriadS3RealityActionRound35Exact as Action
@@ -148,10 +148,13 @@ factoredActionPreservesMomentumClosure :
   Lattice.zeroSum?
     (Action.applyFactoredAction permutation realityChoice (triad edge))
   ≡ true
-factoredActionPreservesMomentumClosure permutation realityChoice edge
-  rewrite ← applyFactoredEdgeTriadExact permutation realityChoice edge =
-  retainedEdgeMomentumClosure
-    (applyFactoredEdge permutation realityChoice edge)
+factoredActionPreservesMomentumClosure permutation realityChoice edge =
+  trans
+    (sym
+      (cong Lattice.zeroSum?
+        (applyFactoredEdgeTriadExact permutation realityChoice edge)))
+    (retainedEdgeMomentumClosure
+      (applyFactoredEdge permutation realityChoice edge))
 
 record PhysicalCouplingSelectionLaw
     (cutoff : Nat)
