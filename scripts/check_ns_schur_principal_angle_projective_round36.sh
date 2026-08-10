@@ -11,6 +11,7 @@ files=(
   DASHI/Physics/Closure/NSTriadKNHHBadSchurInverseScaleRound36Exact.agda
   DASHI/Physics/Closure/NSTriadKNHHBadDissipativeFloorChargingRound36Exact.agda
   DASHI/Physics/Closure/NSTriadKNStrainPrincipalAngleCounterexampleRound36Exact.agda
+  DASHI/Physics/Closure/NSTriadKNStrainFibreCoherenceBarrierRound36Exact.agda
   DASHI/Physics/Closure/NSTriadKNComCoarseFineNaturalityRound36Exact.agda
   DASHI/Physics/Closure/NSTriadKNShellBudgetProjectiveLedgerRound36Exact.agda
   DASHI/Physics/Closure/NSTriadKNNineOwnerRobustReservePolytopeRound36Exact.agda
@@ -42,6 +43,13 @@ checks=(
   'NSTriadKNStrainPrincipalAngleCounterexampleRound36Exact.agda:modeDirectionsOrthogonal'
   'NSTriadKNStrainPrincipalAngleCounterexampleRound36Exact.agda:orthogonalModesUnitCrossCoherence'
   'NSTriadKNStrainPrincipalAngleCounterexampleRound36Exact.agda:principalAngleModeSeparationAloneRefuted = true'
+  'NSTriadKNStrainFibreCoherenceBarrierRound36Exact.agda:tangentChannelExact'
+  'NSTriadKNStrainFibreCoherenceBarrierRound36Exact.agda:normalChannelExact'
+  'NSTriadKNStrainFibreCoherenceBarrierRound36Exact.agda:leftTangentRightNormalChannelZero'
+  'NSTriadKNStrainFibreCoherenceBarrierRound36Exact.agda:leftNormalRightTangentChannelZero'
+  'NSTriadKNStrainFibreCoherenceBarrierRound36Exact.agda:channelEnergyExact'
+  'NSTriadKNStrainFibreCoherenceBarrierRound36Exact.agda:channelEnergyUniformFloor'
+  'NSTriadKNStrainFibreCoherenceBarrierRound36Exact.agda:modeAngleOnlyHHGoodMechanismRefuted = true'
   'NSTriadKNComCoarseFineNaturalityRound36Exact.agda:coarseFineNaturalityDefectIsIncrementSum'
   'NSTriadKNComCoarseFineNaturalityRound36Exact.agda:constantVelocityNaturalitySquareCommutes'
   'NSTriadKNComCoarseFineNaturalityRound36Exact.agda:literalComPairProductRealizationConstructed = false'
@@ -82,6 +90,8 @@ grep -q '10.48550/arXiv.math-ph/0505008' DASHI/Physics/Closure/NSTriadKNHHBadSch
 grep -q '10.48550/arXiv.2403.09800' DASHI/Physics/Closure/NSTriadKNHHBadSchurInverseScaleRound36Exact.agda
 grep -q '10.1007/s00021-019-0411-z' DASHI/Physics/Closure/NSTriadKNHHBadDissipativeFloorChargingRound36Exact.agda
 grep -q '10.1512/iumj.1993.42.42034' DASHI/Physics/Closure/NSTriadKNStrainPrincipalAngleCounterexampleRound36Exact.agda
+grep -q '10.1512/iumj.1993.42.42034' DASHI/Physics/Closure/NSTriadKNStrainFibreCoherenceBarrierRound36Exact.agda
+grep -q '10.1080/03605309608821197' DASHI/Physics/Closure/NSTriadKNStrainFibreCoherenceBarrierRound36Exact.agda
 grep -q '10.1002/cpa.3160410704' DASHI/Physics/Closure/NSTriadKNComCoarseFineNaturalityRound36Exact.agda
 grep -q '10.1007/978-3-642-16830-7' DASHI/Physics/Closure/NSTriadKNShellBudgetProjectiveLedgerRound36Exact.agda
 grep -q '10.1007/s00021-019-0411-z' DASHI/Physics/Closure/NSTriadKNNineOwnerRobustReservePolytopeRound36Exact.agda
@@ -92,6 +102,7 @@ grep -q '10.48550/arXiv.2205.08354' DASHI/Physics/Closure/NSTriadKNBishopSetoidC
 
 grep -q 'one-derivative Schur' "$doc"
 grep -q 'mode principal angles alone are refuted' "$doc"
+grep -q 'uniform positive floor' "$doc"
 grep -q 'coarse/fine naturality defect' "$doc"
 grep -q 'projective ledger' "$doc"
 grep -q 'region, not a point' "$doc"
