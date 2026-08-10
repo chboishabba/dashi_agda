@@ -19,9 +19,7 @@ module DASHI.Physics.YangMills.BalabanSelectedBackgroundFlatGreenPerturbationCon
 --
 -- DASHI CONTRIBUTION
 --
--- This is the quantitative Neumann estimate that the Round-42 roadmap had
--- reduced the selected-background Green problem to.  On the literal 768-row
--- multiplier carrier, write
+-- On the literal 768-row multiplier carrier,
 --
 --   K_A^reg = K_0^reg + E_A,   G_0 = (K_0^reg)^-1.
 --
@@ -34,16 +32,16 @@ module DASHI.Physics.YangMills.BalabanSelectedBackgroundFlatGreenPerturbationCon
 --      = 104601/1048576
 --      < 1/10 < 1/2.
 --
--- This is not a form-only estimate: it is an absolute matrix-kernel bound for
--- the literal G_0 E_A product.  The remaining exponential-decay step is to
--- insert a spatial weight (or an equivalent Combes--Thomas conjugation) while
--- retaining a contraction margin.
+-- `flatGreenKernelActsExactly` proves that the matrix called G_0 below is the
+-- repository's existing exact componentwise Fourier Green, not an unrelated
+-- comparison kernel.  E_A is the literal selected Gram difference.  The next
+-- analytic step is weighted/conjugated smallness for exponential decay.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_; _/_; ∣_∣)
+  (ℚ; 0ℚ; _+_; _-_; _*_; _≤_; _/_; ∣_∣)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using
@@ -58,7 +56,7 @@ import DASHI.Physics.YangMills.BalabanP33FiniteWeightedSchurSquaredExact as Schu
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
 import DASHI.Physics.YangMills.BalabanP33PhysicalCoordinateBasisExact as Basis
 import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Coordinates
-import DASHI.Physics.YangMills.BalabanP33PhysicalPeriodicOpenReferenceBridgeExact as Bridge
+import DASHI.Physics.YangMills.BalabanP33PhysicalFlatGaugeDivergenceIdentificationExact as FlatGauge
 import DASHI.Physics.YangMills.BalabanPath4AxisAverageExact as Path4
 import DASHI.Physics.YangMills.BalabanSide4ScalarGreenKernelComputed as Kernel
 import DASHI.Physics.YangMills.BalabanSide4ScalarGreenConvolutionExact as Green
@@ -73,10 +71,10 @@ import DASHI.Physics.YangMills.BalabanP33PhysicalRationalWilsonPlaquetteJetExact
 import DASHI.Physics.YangMills.BalabanP33PhysicalBackgroundGaugeParameterizedYoungExact as Relaxed
 import DASHI.Physics.YangMills.BalabanFiniteRectangularAbsoluteMassExact as Mass
 
-GaugeRow = Flat.GaugeMultiplier
+GaugeRow : Set
+GaugeRow = FlatGauge.GaugeCoordinate4
 
 gaugeRows = FlatMass.flatRows
-
 lieKronecker = FlatMass.lieKronecker
 
 flatGreenKernelMatrix : GaugeRow → GaugeRow → ℚ
@@ -86,6 +84,70 @@ flatGreenKernelMatrix
   lieKronecker inputCoordinate outputCoordinate
     * Kernel.scalarGreenKernel
         (Difference.subtractSite4 outputSite inputSite)
+
+flatGreenKernelApply : Flat.GaugeMultiplier → Flat.GaugeMultiplier
+flatGreenKernelApply source output =
+  Sums.sumRational gaugeRows
+    (λ input → flatGreenKernelMatrix output input * source input)
+
+flatGreenKernelCoordinateActionExact :
+  ∀ source outputCoordinate outputSite inputCoordinate →
+  Sums.sumRational (Block.physicalBlockSites Path4.side4)
+    (λ inputSite →
+      flatGreenKernelMatrix (pair outputCoordinate outputSite)
+        (pair inputCoordinate inputSite)
+      * source (pair inputCoordinate inputSite))
+  ≡ lieKronecker inputCoordinate outputCoordinate
+      * Green.scalarGreen
+          (Flat.multiplierField source inputCoordinate) outputSite
+flatGreenKernelCoordinateActionExact
+    source outputCoordinate outputSite inputCoordinate =
+  let
+    lie = lieKronecker inputCoordinate outputCoordinate
+  in
+  trans
+    (Sums.sumRationalCong
+      (Block.physicalBlockSites Path4.side4) _ _
+      (λ inputSite → ℚRing.solve-∀ lie
+        (Kernel.scalarGreenKernel
+          (Difference.subtractSite4 outputSite inputSite))
+        (source (pair inputCoordinate inputSite))))
+    (Sums.sumRationalScale lie
+      (Block.physicalBlockSites Path4.side4)
+      (λ inputSite →
+        Kernel.scalarGreenKernel
+          (Difference.subtractSite4 outputSite inputSite)
+        * source (pair inputCoordinate inputSite)))
+
+flatGreenKernelActsExactly : ∀ source outputCoordinate outputSite →
+  flatGreenKernelApply source (pair outputCoordinate outputSite)
+  ≡ FlatGreen.regularizedFlatGaugeGreen source
+      (pair outputCoordinate outputSite)
+flatGreenKernelActsExactly source outputCoordinate outputSite =
+  let
+    value = λ inputCoordinate →
+      Green.scalarGreen (Flat.multiplierField source inputCoordinate) outputSite
+  in
+  trans
+    (Fubini.sumCartesian Coordinates.lieCoordinates3
+      (Block.physicalBlockSites Path4.side4)
+      (λ input →
+        flatGreenKernelMatrix (pair outputCoordinate outputSite) input
+          * source input))
+    (trans
+      (Sums.sumRationalCong Coordinates.lieCoordinates3 _
+        (λ inputCoordinate →
+          lieKronecker inputCoordinate outputCoordinate * value inputCoordinate)
+        (flatGreenKernelCoordinateActionExact
+          source outputCoordinate outputSite))
+      (trans
+        (Sums.sumRationalCong Coordinates.lieCoordinates3 _ _
+          (λ inputCoordinate →
+            ℚP.*-comm
+              (lieKronecker inputCoordinate outputCoordinate)
+              (value inputCoordinate)))
+        (Basis.selectorExact Basis.lieCoordinateFiniteSelector
+          value outputCoordinate)))
 
 lieKroneckerAbsoluteExact : ∀ left right →
   ∣ lieKronecker left right ∣ ≡ lieKronecker left right
@@ -117,10 +179,9 @@ translatedGreenAbsoluteMassExact rowSite =
         (Block.physicalBlockSites Path4.side4) _ _
         (λ inputSite →
           cong ∣_∣ (Green.kernelColumnSymmetry rowSite inputSite))
-
-    translated = Difference.siteSumSubtractInvariant rowSite absoluteKernel
   in
-  trans symmetric translated
+  trans symmetric
+    (Difference.siteSumSubtractInvariant rowSite absoluteKernel)
 
 flatGreenKernelCoordinateMassExact : ∀ outputCoordinate outputSite inputCoordinate →
   Sums.sumRational (Block.physicalBlockSites Path4.side4)
@@ -133,30 +194,19 @@ flatGreenKernelCoordinateMassExact : ∀ outputCoordinate outputSite inputCoordi
 flatGreenKernelCoordinateMassExact outputCoordinate outputSite inputCoordinate =
   let
     lie = lieKronecker inputCoordinate outputCoordinate
-
-    distribute :
-      Sums.sumRational (Block.physicalBlockSites Path4.side4)
-        (λ inputSite →
-          ∣ lie * Kernel.scalarGreenKernel
-              (Difference.subtractSite4 outputSite inputSite) ∣)
-      ≡ Sums.sumRational (Block.physicalBlockSites Path4.side4)
-        (λ inputSite →
-          lie * ∣ Kernel.scalarGreenKernel
-              (Difference.subtractSite4 outputSite inputSite) ∣)
-    distribute =
-      Sums.sumRationalCong
-        (Block.physicalBlockSites Path4.side4) _ _
-        (λ inputSite →
-          trans
-            (Schur.absoluteProductExact lie
-              (Kernel.scalarGreenKernel
-                (Difference.subtractSite4 outputSite inputSite)))
-            (cong
-              (_* ∣ Kernel.scalarGreenKernel
-                    (Difference.subtractSite4 outputSite inputSite) ∣)
-              (lieKroneckerAbsoluteExact inputCoordinate outputCoordinate)))
   in
-  trans distribute
+  trans
+    (Sums.sumRationalCong
+      (Block.physicalBlockSites Path4.side4) _ _
+      (λ inputSite →
+        trans
+          (Schur.absoluteProductExact lie
+            (Kernel.scalarGreenKernel
+              (Difference.subtractSite4 outputSite inputSite)))
+          (cong
+            (_* ∣ Kernel.scalarGreenKernel
+                  (Difference.subtractSite4 outputSite inputSite) ∣)
+            (lieKroneckerAbsoluteExact inputCoordinate outputCoordinate))))
     (trans
       (Sums.sumRationalScale lie
         (Block.physicalBlockSites Path4.side4)
@@ -301,6 +351,9 @@ selectedBackgroundFlatGreenPerturbationHalfContraction
     (selectedBackgroundFlatGreenPerturbationOneTenthContraction
       background radius row)
     oneTenthBelowOneHalf
+
+selectedFlatGaugeGreenKernelIdentificationLevel : ProofLevel
+selectedFlatGaugeGreenKernelIdentificationLevel = machineChecked
 
 selectedBackgroundFlatGreenPerturbationContractionLevel : ProofLevel
 selectedBackgroundFlatGreenPerturbationContractionLevel = machineChecked
