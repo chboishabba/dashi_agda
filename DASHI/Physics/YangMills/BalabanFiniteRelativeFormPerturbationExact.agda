@@ -38,7 +38,7 @@ open import Data.Rational.Base as ℚ using
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using
-  (cong₂; subst; sym; trans)
+  (cong; cong₂; subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as FiniteL2
@@ -250,13 +250,11 @@ finiteVectorQuarterFiveDifferenceLower carrier reference defect =
           + five * Rect.finiteNormSq carrier defect)
     leftExact =
       trans
-        (Sums.sumRationalNeg values
+        (Sums.sumRationalNegate values
           (λ index →
             oneQuarter * (reference index * reference index)
               + five * (defect index * defect index)))
-        (cong₂ _-_
-          (ℚRing.solve [])
-          leftInsideExact)
+        (cong -_ leftInsideExact)
 
     rightExact :
       Sums.sumRational values
