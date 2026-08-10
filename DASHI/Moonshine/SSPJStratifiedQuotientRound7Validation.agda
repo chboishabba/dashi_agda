@@ -128,3 +128,13 @@ validationFiniteBifiltrationDoesNotProveLimitInterchange :
     Bif.canonicalJ369BifiltrationBoundary
   ≡ false
 validationFiniteBifiltrationDoesNotProveLimitInterchange = refl
+
+------------------------------------------------------------------------
+-- Validation-trigger theorem: deliberately substantive but redundant.
+-- It creates a PR-visible check run against the Round-7 workflow without
+-- changing the Round-7 implementation branch itself.
+------------------------------------------------------------------------
+
+validationTriggerRetainsFirstDecimalCut :
+  J.retainedResolutionCount 10 1 ≡ 11
+validationTriggerRetainsFirstDecimalCut = J.decimalRetained1
