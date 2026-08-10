@@ -16,6 +16,7 @@ import DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30E
 import DASHI.Physics.Closure.NSTriadKNConcretePhysicalGalerkinVectorFieldRound30Exact as PhysicalField
 
 import DASHI.Physics.Closure.NSTriadKNCanonicalCutoffSameObjectSystemRound34Exact as Cutoff
+import DASHI.Physics.Closure.NSTriadKNSafeCanonicalTriadOrbitQuotientRound34Exact as SafeOrbit
 import DASHI.Physics.Closure.NSTriadKNPeriodicFourierStrainMultiplierRound34Exact as Strain
 import DASHI.Physics.Closure.NSTriadKNPeriodicFourierStrainL2Round34Exact as StrainL2
 import DASHI.Physics.Closure.NSTriadKNHHBadSummableDyadicGainRound34Exact as HHBad
@@ -55,6 +56,16 @@ rawStateFamilyStillOpenRegression :
   Cutoff.cutoffSameObjectFamilyConstructedForRawStateCarrier ≡ false
 rawStateFamilyStillOpenRegression =
   Cutoff.cutoffSameObjectFamilyConstructedForRawStateCarrierIsFalse
+
+safeTriadOrbitQuotientRegression :
+  SafeOrbit.safeCanonicalTriadOrbitQuotientClosed ≡ true
+safeTriadOrbitQuotientRegression =
+  SafeOrbit.safeCanonicalTriadOrbitQuotientClosedIsTrue
+
+literalThreeLegTransferStillOpenRegression :
+  SafeOrbit.literalComplexThreeLegEnergyTransferConstructed ≡ false
+literalThreeLegTransferStillOpenRegression =
+  SafeOrbit.literalComplexThreeLegEnergyTransferConstructedIsFalse
 
 fourierStrainRegression :
   Strain.periodicFourierStrainMultiplierExactClosed ≡ true
