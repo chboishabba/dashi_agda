@@ -48,7 +48,7 @@ open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base as ℚ
   using (ℚ; 0ℚ; 1ℚ; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚP
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
 import DASHI.Physics.Closure.NSTriadKNLuoSixThreeCenteredCommutatorScaleExact as SixThree
