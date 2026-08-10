@@ -6,12 +6,13 @@ open import Data.Empty using (⊥)
 open import DASHI.Cognition.PNF.ComplexityArithmetic
 
 ------------------------------------------------------------------------
--- Migration 082 execution contract.
+-- Migrations 082 and 084 execution contract.
 --
--- Retained composition candidates are bounded before materialisation. If the
--- structural pair carrier is larger than the retained budget, runtime records an
--- overflow receipt. Overflow is execution evidence only; it cannot itself reject
--- a semantic relation or license a derived proposition.
+-- Retained composition candidates are bounded before materialisation, and the
+-- raw-pair LIMIT is applied before candidate ranking. If the structural pair
+-- carrier is larger than the retained budget, runtime records an overflow
+-- receipt. Overflow is execution evidence only; it cannot itself reject a
+-- semantic relation or license a derived proposition.
 ------------------------------------------------------------------------
 
 record CompositionEnumeration : Set where
