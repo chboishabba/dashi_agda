@@ -11,6 +11,8 @@ files=(
   DASHI/Physics/Closure/NSTriadKNPeriodicFourierStrainGramRound35Exact.agda
   DASHI/Physics/Closure/NSTriadKNPeriodicFourierStrainInterferenceRound35Exact.agda
   DASHI/Physics/Closure/NSTriadKNFixedCutoffSupportInvariantRound35Exact.agda
+  DASHI/Physics/Closure/NSTriadKNModeInverseSquareRealityRound35Exact.agda
+  DASHI/Physics/Closure/NSTriadKNComplex3RealityLawsRound35Exact.agda
   DASHI/Physics/Closure/NSTriadKNHHBadFiniteShellBudgetGluingRound35Exact.agda
   DASHI/Physics/Closure/NSTriadKNComGramInterferenceRound35Exact.agda
   DASHI/Physics/Closure/NSTriadKNTriadS3RealityActionRound35Exact.agda
@@ -44,6 +46,14 @@ checks=(
   'NSTriadKNFixedCutoffSupportInvariantRound35Exact.agda:fixedSupportDerivativeModesExact'
   'NSTriadKNFixedCutoffSupportInvariantRound35Exact.agda:derivativeInSameCutoffSupportFibre'
   'NSTriadKNFixedCutoffSupportInvariantRound35Exact.agda:fixedCutoffSameObjectCompatibilityInvariantConstructed = false'
+  'NSTriadKNModeInverseSquareRealityRound35Exact.agda:normSquaredEven'
+  'NSTriadKNModeInverseSquareRealityRound35Exact.agda:inverseNormSquaredEven'
+  'NSTriadKNModeInverseSquareRealityRound35Exact.agda:rightInverseUnique'
+  'NSTriadKNModeInverseSquareRealityRound35Exact.agda:canonicalEvenModeInverseSquare'
+  'NSTriadKNComplex3RealityLawsRound35Exact.agda:lerayCorrectionModeEven'
+  'NSTriadKNComplex3RealityLawsRound35Exact.agda:lerayProjectModeEven'
+  'NSTriadKNComplex3RealityLawsRound35Exact.agda:lerayProjectConjugation'
+  'NSTriadKNComplex3RealityLawsRound35Exact.agda:canonicalCorrectComplex3RealityLaws'
   'NSTriadKNHHBadFiniteShellBudgetGluingRound35Exact.agda:canonicalFiniteShellBudgetGluing'
   'NSTriadKNHHBadFiniteShellBudgetGluingRound35Exact.agda:boundaryBudgetHalves'
   'NSTriadKNHHBadFiniteShellBudgetGluingRound35Exact.agda:cutoffAdvanceConservesTotalBudget'
@@ -78,6 +88,10 @@ grep -q '10.1080/03605309608821197' \
   DASHI/Physics/Closure/NSTriadKNPeriodicFourierStrainInterferenceRound35Exact.agda
 grep -q '10.1007/BF02547354' \
   DASHI/Physics/Closure/NSTriadKNFixedCutoffSupportInvariantRound35Exact.agda
+grep -q '10.1007/BF02547354' \
+  DASHI/Physics/Closure/NSTriadKNModeInverseSquareRealityRound35Exact.agda
+grep -q '10.1090/chel/343' \
+  DASHI/Physics/Closure/NSTriadKNComplex3RealityLawsRound35Exact.agda
 grep -q '10.1007/s00021-019-0411-z' \
   DASHI/Physics/Closure/NSTriadKNHHBadFiniteShellBudgetGluingRound35Exact.agda
 grep -q '10.1002/cpa.3160410704' \
@@ -95,6 +109,7 @@ grep -q 'internal budget plus boundary budget' "$doc"
 grep -q 'operator-realisation' "$doc"
 grep -q 'Bishop-real' "$doc"
 grep -q 'scale-free' "$doc"
+grep -q 'inverse-square evenness' "$doc"
 
 scripts/run_agda29_parallel_check.sh \
   DASHI/Physics/Closure/NSTriadKNLuoStrainGramCutoffInvariantRound35Validation.agda
