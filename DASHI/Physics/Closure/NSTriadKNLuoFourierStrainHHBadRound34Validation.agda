@@ -19,6 +19,7 @@ import DASHI.Physics.Closure.NSTriadKNCanonicalCutoffSameObjectSystemRound34Exac
 import DASHI.Physics.Closure.NSTriadKNPeriodicFourierStrainMultiplierRound34Exact as Strain
 import DASHI.Physics.Closure.NSTriadKNPeriodicFourierStrainL2Round34Exact as StrainL2
 import DASHI.Physics.Closure.NSTriadKNHHBadSummableDyadicGainRound34Exact as HHBad
+import DASHI.Physics.Closure.NSTriadKNLuoCriticalDissipationHHBadBridgeRound34Exact as LuoHHBad
 import DASHI.Physics.Closure.NSTriadKNComCotlarDyadicEnvelopeRound34Exact as Com
 import DASHI.Physics.Closure.NSTriadKNMurrayBishopGalerkinCoordinateSemanticsRound34Exact as Bishop
 
@@ -84,6 +85,21 @@ physicalHHBadProfileStillOpenRegression :
   HHBad.physicalHHBadGainProfileProduced ≡ false
 physicalHHBadProfileStillOpenRegression =
   HHBad.physicalHHBadGainProfileProducedIsFalse
+
+luoCriticalDissipationCalibrationRegression :
+  LuoHHBad.luoCriticalDissipationCalibrationClosed ≡ true
+luoCriticalDissipationCalibrationRegression =
+  LuoHHBad.luoCriticalDissipationCalibrationClosedIsTrue
+
+physicalLuoDissipationStillOpenRegression :
+  LuoHHBad.physicalLuoCriticalDissipationEstimateConstructed ≡ false
+physicalLuoDissipationStillOpenRegression =
+  LuoHHBad.physicalLuoCriticalDissipationEstimateConstructedIsFalse
+
+physicalGainLinkStillOpenRegression :
+  LuoHHBad.physicalHHBadGainToLuoDissipationLinkConstructed ≡ false
+physicalGainLinkStillOpenRegression =
+  LuoHHBad.physicalHHBadGainToLuoDissipationLinkConstructedIsFalse
 
 cotlarEnvelopeRegression :
   Com.rationalCotlarDyadicEnvelopeClosed ≡ true
