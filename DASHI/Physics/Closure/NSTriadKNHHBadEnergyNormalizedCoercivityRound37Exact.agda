@@ -40,9 +40,12 @@ module DASHI.Physics.Closure.NSTriadKNHHBadEnergyNormalizedCoercivityRound37Exac
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using ([]; _∷_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ; 0ℚ; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚP
+open import Data.Rational.Tactic.RingSolver using (solve)
+open import Relation.Binary.PropositionalEquality using (subst)
 
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
 import DASHI.Physics.Closure.NSTriadKNHHBadSharpDyadicGainRound33Exact as Sharp
@@ -172,7 +175,12 @@ rescaleBadEnergyCell {effectiveViscosity} {shell} scaling cell =
     let
       factorNN = factorNonnegative scaling
       chargeNN = chargeNonnegative cell
-      scaled =
+      raw :
+        factor scaling
+          * (badEnergy cell
+            * (effectiveViscosity * Sharp.dyadicScale shell))
+        ≤ factor scaling * dissipationCharge cell
+      raw =
         L2.nonnegativeProductMonotone
           factorNN
           coerciveLeftNN
@@ -180,8 +188,25 @@ rescaleBadEnergyCell {effectiveViscosity} {shell} scaling cell =
           chargeNN
           ℚP.≤-refl
           (localizedCoercivity cell)
+      leftMeaning :
+        factor scaling
+          * (badEnergy cell
+            * (effectiveViscosity * Sharp.dyadicScale shell))
+        ≡
+        (factor scaling * badEnergy cell)
+          * (effectiveViscosity * Sharp.dyadicScale shell)
+      leftMeaning =
+        solve
+          ( factor scaling
+          ∷ badEnergy cell
+          ∷ effectiveViscosity
+          ∷ Sharp.dyadicScale shell
+          ∷ [])
     in
-    scaled
+    subst
+      (λ lower → lower ≤ factor scaling * dissipationCharge cell)
+      leftMeaning
+      raw
 
 hhBadEnergyNormalizedCoercivityBridgeClosed : Bool
 hhBadEnergyNormalizedCoercivityBridgeClosed = true
