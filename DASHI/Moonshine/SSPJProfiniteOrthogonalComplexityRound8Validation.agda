@@ -3,6 +3,7 @@ module DASHI.Moonshine.SSPJProfiniteOrthogonalComplexityRound8Validation where
 open import DASHI.Core.Prelude
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ)
 import Data.Integer.Base as Int
+open Int using (_⊖_; -[1+_]; -_)
 
 import DASHI.Moonshine.SSPJStratifiedQuotientRound7Validation
 import DASHI.Analysis.NormalizedFibreAveragingExact as Fibre
@@ -154,13 +155,13 @@ validationOccurrenceForgetsMultiplicity :
 validationOccurrenceForgetsMultiplicity = Defect.oneAndTwoHaveSamePresence
 
 validationSignedDefectSurvivesOccurrenceCollision :
-  1 Int.⊖ 2 ≡ Int.-[1+ 0 ]
+  1 ⊖ 2 ≡ -[1+ 0 ]
 validationSignedDefectSurvivesOccurrenceCollision =
   Defect.oneAndTwoHaveNonzeroSignedDefect
 
 validationDefectSwap :
   ∀ {I} (A B : Defect.Multiplicity I) (i : I) →
-  Defect.delta B A i ≡ Int.- (Defect.delta A B i)
+  Defect.delta B A i ≡ - (Defect.delta A B i)
 validationDefectSwap = Defect.deltaSwap
 
 validationCandidatePolaritySwap :
