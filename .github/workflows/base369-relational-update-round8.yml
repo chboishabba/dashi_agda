@@ -1,0 +1,56 @@
+name: Base369 relational update round 8
+
+on:
+  push:
+    branches: ['agent/monster-3b-central-character-inertia-round5']
+  pull_request:
+    branches:
+      - 'master'
+      - 'agent/monster-3b-orbifold-local-module-round4'
+      - 'agent/monster-3b-central-character-inertia-round5'
+    paths:
+      - 'DASHI/Foundations/Base369CalculationFibreClosureExact.agda'
+      - 'DASHI/Foundations/Base369InteractionAppraisalCubeExact.agda'
+      - 'DASHI/Foundations/Base369PointedAppraisalFibreExact.agda'
+      - 'DASHI/Foundations/Base369PropositionResponseTransportExact.agda'
+      - 'DASHI/Foundations/Base369RelationalFailureOperatorsExact.agda'
+      - 'DASHI/Foundations/Base369SharedStateWeaveIntegrityExact.agda'
+      - 'DASHI/Foundations/Base369TemporalProcessAuthorityExact.agda'
+      - 'DASHI/Foundations/Base369RelationalUpdateKernelExact.agda'
+      - 'DASHI/Foundations/Base369RelationalUpdateRound8Validation.agda'
+      - 'DASHI/EverythingBase369RelationalUpdateRound8.agda'
+      - 'scripts/check_base369_relational_update_round8.sh'
+      - '.github/workflows/base369-relational-update-round8.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  AGDA_FLAKE: github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin
+  AGDA_JOBS: '2'
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
+      - name: Cache pinned Agda environment
+        uses: actions/cache@v4
+        with:
+          path: ${{ runner.temp }}/dashi-agda29
+          key: ${{ runner.os }}-agda29-86a1179c1f886da773dc53be920bcca5d876884e
+          restore-keys: |
+            ${{ runner.os }}-agda29-
+      - name: Check Base369 relational update tranche
+        shell: bash
+        run: |
+          set -euo pipefail
+          export DASHI_REPO_ROOT="$GITHUB_WORKSPACE"
+          export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
+          bash scripts/check_base369_relational_update_round8.sh
