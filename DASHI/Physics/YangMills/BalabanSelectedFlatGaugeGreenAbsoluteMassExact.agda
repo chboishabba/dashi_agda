@@ -69,13 +69,16 @@ seventeenSixteenths = + 17 / 16
 scalarGreenAbsoluteMassExactValueBelowSeventeenSixteenths :
   scalarGreenAbsoluteMassExactValue ≤ seventeenSixteenths
 scalarGreenAbsoluteMassExactValueBelowSeventeenSixteenths =
+  let
+    slackExact :
+      seventeenSixteenths - scalarGreenAbsoluteMassExactValue
+      ≡ + 2083 / 71680
+    slackExact = ℚRing.solve []
+  in
   Norm.nonnegativeDifferenceImpliesBelow
     (subst
       (λ difference → 0ℚ ≤ difference)
-      (sym
-        (ℚRing.solve [] :
-          seventeenSixteenths - scalarGreenAbsoluteMassExactValue
-          ≡ + 2083 / 71680))
+      (sym slackExact)
       (ℚP.nonNegative⁻¹ (+ 2083 / 71680)))
 
 scalarGreenAbsoluteMassBelowSeventeenSixteenths :
