@@ -43,7 +43,7 @@ open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; _+_; _-_; _*_; -_)
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using
-  (cong; subst; sym; trans)
+  (cong; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
@@ -222,11 +222,11 @@ selectedMultiplierOfKernelIsZero :
   LinearizedConstraintKernel {background} state →
   ∀ row → selectedMultiplierFromState certificate state row ≡ 0ℚ
 selectedMultiplierOfKernelIsZero
-    certificate state inKernel row =
+    {background} certificate state inKernel row =
   let
     inverse = Matrix.inverseMatrix certificate
     source = λ selected →
-      Combined.selectedBackgroundCombinedConstraintApply _ state selected
+      Combined.selectedBackgroundCombinedConstraintApply background state selected
 
     actionCong :
       Matrix.applyMatrix Rows.selectedCombinedConstraintRowCarrier inverse source row
