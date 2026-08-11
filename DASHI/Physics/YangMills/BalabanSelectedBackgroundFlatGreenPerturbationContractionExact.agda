@@ -46,6 +46,7 @@ import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using
   (cong; subst; sym; trans)
+open import Relation.Nullary.Decidable.Core using (yes; no)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using (pair)
@@ -278,20 +279,28 @@ contractionBoundExactProduct = ℚRing.solve []
 contractionBoundBelowOneTenth :
   greenPerturbationContractionBound ≤ oneTenth
 contractionBoundBelowOneTenth =
+  let
+    slackExact :
+      oneTenth - greenPerturbationContractionBound
+      ≡ contractionSlackToOneTenth
+    slackExact = ℚRing.solve []
+  in
   Norm.nonnegativeDifferenceImpliesBelow
     (subst
       (λ difference → 0ℚ ≤ difference)
-      (sym (ℚRing.solve [] :
-        oneTenth - greenPerturbationContractionBound
-        ≡ contractionSlackToOneTenth))
+      (sym slackExact)
       (ℚP.nonNegative⁻¹ contractionSlackToOneTenth))
 
 oneTenthBelowOneHalf : oneTenth ≤ + 1 / 2
 oneTenthBelowOneHalf =
+  let
+    slackExact : (+ 1 / 2) - oneTenth ≡ + 2 / 5
+    slackExact = ℚRing.solve []
+  in
   Norm.nonnegativeDifferenceImpliesBelow
     (subst
       (λ difference → 0ℚ ≤ difference)
-      (sym (ℚRing.solve [] : (+ 1 / 2) - oneTenth ≡ + 2 / 5))
+      (sym slackExact)
       (ℚP.nonNegative⁻¹ (+ 2 / 5)))
 
 selectedBackgroundFlatGreenPerturbationAbsoluteRowMassBound :
