@@ -31,11 +31,11 @@ module DASHI.Physics.Closure.NSTriadKNPhysicalTransportMatrixSkewRound40Exact wh
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-import Data.Integer.Properties as Int
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadSymmetry as Symmetry
+import DASHI.Physics.Closure.NSTriadKNPhysicalTriadOrbitConstruction as Orbit
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNComplex3RealityPhaseAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNPhysicalTransportCoefficientSkewRound40Exact as Coeff
@@ -53,17 +53,16 @@ reverseResonance :
   ∀ {input output}
     (entry : PhysicalTransportMatrixEntry input output) →
   Z3.addMode (Z3.negateMode (advector entry)) output ≡ input
-reverseResonance
-    {input = Z3.mode qx qy qz}
-    {output = Z3.mode kx ky kz}
-    (physical-transport-matrix-entry
-      (Z3.mode mx my mz) resonance)
-  with resonance
-... | refl =
-  Symmetry.modeExt
-    (Int.+-inverseˡ qx mx)
-    (Int.+-inverseˡ qy my)
-    (Int.+-inverseˡ qz mz)
+reverseResonance {input} {output} entry =
+  trans
+    (Symmetry.addModeCommutative
+      (Z3.negateMode (advector entry)) output)
+    (trans
+      (cong
+        (λ selected →
+          Z3.addMode selected (Z3.negateMode (advector entry)))
+        (sym (resonance entry)))
+      (Orbit.addNegateLeft (advector entry) input))
 
 reverseEntry :
   ∀ {input output} →
