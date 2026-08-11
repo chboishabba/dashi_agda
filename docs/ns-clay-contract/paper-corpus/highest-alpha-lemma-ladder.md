@@ -2,314 +2,298 @@
 
 [Back to the paper-corpus overview](README.md)
 
-The terminal theorem type and final composition are present. The highest-alpha work is the shortest dependency chain that can inhabit the physical inputs without adding a non-Clay hypothesis.
+The literal Fefferman periodic theorem type and terminal composition are present. This page lists the shortest dependency chain that could inhabit the physical inputs without adding a non-Clay hypothesis.
 
-## A. Target and local continuation
-
-### L0 — Literal Fefferman periodic alternative (B) — exact target
-
-For every `ν > 0` and every smooth divergence-free unit-periodic datum `u0` on `T3`, with zero force, construct smooth unit-periodic `u,p` for all `t ≥ 0` satisfying
+Round 27 inserts concrete projector, involution, state/dual, commutator, common-core and Plücker lemmas before the open analytic taxes. The central physical theorem remains unchanged:
 
 ```text
-∂t u + (u·∇)u = ν Δu - ∇p,
-∇·u = 0,
-u(0) = u0.
+cutoff-uniform positive nonlinear production
+  <= eta * viscous dissipation + admissible remainder,
+eta < 1.
 ```
 
-Pressure periodicity is explicit. Mean zero, uniqueness and a separate periodic energy hypothesis are not added.
+## A. Official target and reduction
+
+### L0 — Literal Fefferman periodic alternative B — exact target
+
+For every positive viscosity and every smooth divergence-free unit-periodic datum on `T3`, with zero force, construct global smooth periodic velocity and pressure satisfying Navier–Stokes, incompressibility and the initial condition. Pressure periodicity is explicit. Mean zero, uniqueness and a separate energy-equality hypothesis are not added.
 
 ### L1 — Mean centering and Galilean restoration — reducer checked
 
-Construct the spatial mean `m`, centered datum `v0=u0-m`, and prove
+Construct the spatial mean `m`, solve for `v0=u0-m`, and prove
 
 ```text
 u(x,t)=v(x-mt,t)+m,
 p(x,t)=q(x-mt,t)
 ```
 
-preserves the zero-force equation, smoothness, divergence, periodicity and initial trace.
+preserves the literal target.
 
-### L2 — Local critical well-posedness, maximal time and restart — reducer/classical interface checked
+### L2 — Critical local theory, maximal time and restart — classical interface checked
 
-For a selected critical space, construct a maximal strong solution and prove that a finite bound on the critical norm near `T*` supplies local existence beyond `T*`.
+A bounded critical norm near a hypothetical finite maximal time must provide an extension beyond it.
 
-## B. Actual finite PDE and shell geometry
+## B. Finite physical PDE
 
-### L3 — Periodic divergence-free Fourier/Galerkin carrier — algebraic invariants checked; finite ODE open
+### M1 — Sharp finite shell-projector algebra — checked exact in Round 27
 
-Round 25 certifies the literal cutoff modes, resonant triads, duplicate-free output fibres, reality closure, Leray coefficient and coefficientwise physical/Fourier equivalence.
-
-Round 26 adds:
-
-- a coordinate syntax in which every finite Galerkin RHS atom is linear or bilinear and has degree at most two;
-- the exact finite difference factorization `xy-uv=(x-u)y+u(y-v)`;
-- a positive-orbit phase-space surface reconstructing negative modes by conjugation;
-- a proof that conjugate reconstruction preserves transversality on the exact Complex3 carrier;
-- a rational six-term energy audit normal form;
-- direct reuse of the repository’s actual Complex3 three-leg cancellation theorem for the signed Leray coefficient.
-
-The remaining L3 producer is now purely finite-dimensional analysis:
+For the literal shell index define `Pq(k)` as its Kronecker indicator. Prove:
 
 ```text
-choose the literal finite normed real coordinate space;
-prove the polynomial vector field is locally Lipschitz on bounded balls;
-apply Picard–Lindelöf;
-derive the finite ODE energy identity from the physical triad theorem;
-use that identity to prove global finite-dimensional existence.
+Pq^2=Pq,
+Pq Pr=0 for q!=r,
+finite shell resolution on the cutoff carrier,
+commutation with diagonal multipliers,
+covariance under shell-preserving mode maps.
 ```
 
-No ODE theorem is claimed merely from the degree-two syntax.
+Smooth Littlewood–Paley operator bounds remain open.
 
-### L4 — Exhaustive physical Bony/commutator support theorem — checked exact in Round 25
+### M2 — Fourier reality involution — checked exact algebra in Round 27
 
-Every literal cutoff `Z³` resonant triad is assigned uniquely to one of
+Define
 
 ```text
-HH, LH, HL, CC.
+J u(k)=conjugate(u(-k)).
 ```
 
-The differentiated commutator is the fifth class `Com`; there is no unnamed remainder. The output fibre recomposes exactly and the fixed support collars do not depend on final cutoffs.
-
-### L5 — Signed finite filtered-vorticity and critical shell ledger — source bridge checked; time evolution open
-
-Round 26 proves a finite signed weighted identity with separate coordinates
+Prove `J^2=id`, equivalence of `Ju=u` with Fourier reality, and the generic theorem
 
 ```text
-HH, LH, HL, CC, Com, lower boundary, upper boundary.
+F(Ju)=J(Fu)  and  Ju=u  =>  J(Fu)=Fu.
 ```
 
-Positive parts are not inserted into the identity. It also proves the division-free critical weight relation
+Diagonal reality-compatible multipliers are instantiated. Equivariance of the full nonlinear Galerkin field remains open.
 
-```text
-weight · vorticityEnergy
-= criticalVelocityWeight · velocityEnergy
-```
+### L3 — Literal finite Galerkin flow — materially narrowed; analytic instance open
 
-from the declared frequency-square meanings.
+Already checked:
 
-`NSTriadKNLuoPhysicalSignedShellCellRound26Exact.agda` now forces the five signed source coordinates from the literal Round 25 physical output fibre. Given
-
-```text
-energyRate + dissipation
-= fiveSourceTotal + lowerBoundary + upperBoundary,
-```
-
-it constructs the signed critical shell cell, so `HH`, `LH`, `HL`, `CC` and `Com` cannot be supplied independently.
+- cutoff modes and duplicate-free resonant output fibres;
+- exact Leray coefficient and physical/Fourier coefficient equality;
+- linear/bilinear coordinate syntax of degree at most two;
+- `xy-uv=(x-u)y+u(y-v)` for every finite coordinate sum;
+- reality reconstruction and conjugate transversality;
+- physical three-leg triad energy cancellation;
+- M2’s fixed-point/equivariance criterion.
 
 Still required:
 
 ```text
-construct the time-dependent Galerkin solution;
-derive the shell energy balance and both boundary families from that solution;
-prove uniform critical norm equivalence for the fixed dyadic partition.
+full viscous-plus-convolution vector field maps the finite carrier to itself;
+finite normed local-Lipschitz bound;
+Picard–Lindelöf;
+time-dependent physical energy identity;
+global finite-dimensional existence.
 ```
 
-The homogeneous critical route explicitly excludes the zero mode; L1/L22 restore arbitrary periodic means.
+### L4 — Exhaustive physical support — checked exact in Round 25
+
+Every literal resonant triad belongs uniquely to `HH`, `LH`, `HL` or `CC`; the differentiated commutator is the fifth class `Com`. There is no unnamed remainder.
+
+### L5 — Physical signed filtered-vorticity shell balance — algebraic destination checked; evolution open
+
+Round 26 supplies a signed weighted ledger and forces its five source coordinates from the literal output fibre. M1 now supplies exact sharp finite projectors. Still required:
+
+```text
+derive the time-dependent shell equation from the Galerkin trajectory;
+construct lower and upper cutoff-boundary atoms;
+prove cutoff-uniform critical shell norm equivalence.
+```
 
 ### L6 — Pair-input-frequency diffusion coercivity — checked exact algebra
 
-For each interaction cell with input eigenvalues `λL,λR` and shell floor `κ`, prove
+Damping remains attached to both input frequencies before a high–high product collapses to a low output.
+
+## C. Operator and geometric precursors
+
+### M3 — State/dual translation–multiplier commutator — checked exact in Round 27
+
+Fourier states and multiplier/test symbols are different types. For translation by `ell`:
 
 ```text
-κ ≤ λL,
-κ ≤ λR
-⇒
-2νκ A ≤ ν(λL+λR)A.
+M_m T_ell u - T_ell M_m u
+  = M_(m-tau_ell m) T_ell u.
 ```
 
-The damping remains attached to both inputs before a high–high product collapses to low or zero output frequency.
+Pointwise the signed symbol is `(m(k)-m(k-ell))u(k-ell)`. No early absolute value is introduced.
 
-## C. Load-bearing nonlinear estimates
+### M4 — Centred five-source probe — checked exact in Round 27
+
+For `Fi=base+delta_i`, prove division-free:
+
+```text
+5(w dot F)
+ = (sum w) aug(F)
+   + sum_i (5w_i-sum w) delta_i.
+```
+
+Uniform weights see only total production; centred weights expose source imbalance.
+
+### M5 — Maximal uniform viscosity core — checked exact algebra in Round 27
+
+For the nine unique tax owners, an allocation decomposition satisfies
+
+```text
+allocation(owner)=commonCore+residual(owner).
+```
+
+If a canonical owner has zero residual, its common core dominates every competing common core for the same allocation vector. Physical allocations remain open.
+
+### M6 — Physical triad Plücker/Gram geometry — checked exact in Round 27
+
+For each physical triad:
+
+```text
+|p cross q|^2=|p|^2|q|^2-(p dot q)^2.
+```
+
+Swapping inputs reverses orientation and preserves squared area. No vector normalization or division is used.
+
+## D. Load-bearing physical estimates
 
 ### L7 — Duplicate-free physical tax ledger — ownership checked; coefficients open
 
-Round 26 defines unique tax owners
+Each positive-production atom has exactly one owner:
 
 ```text
-HH-good, HH-bad, LH, HL, CC, Com, kernel, tail, boundary
+HH-good, HH-bad, LH, HL, CC, Com, kernel, tail, boundary.
 ```
 
-and proves that erasing ownership reconstructs the original total exactly. This is the analytic analogue of Round 25’s duplicate-free support theorem.
-
-Each owner must now prove a physical estimate
+Every owner must prove
 
 ```text
-Fi⁺ ≤ ηi D + Ai + Bi Xint
+Fi+ <= eta_i D + A_i(T) + B_i integral(X),
 ```
 
-with constants independent of shell `q`, shell cutoff `Q`, Galerkin cutoff `N` and finite maximal time `T*`.
+uniformly in shell, shell cutoff, Galerkin cutoff and hypothetical maximal time.
 
-Every remainder must be classified as
+### L8 — Periodic principal-value strain kernel and Calderón–Zygmund estimate — open
+
+Construct the periodic strain distribution, principal-value cancellation, spherical moments, smooth periodic remainder and the norm/difference estimates needed for high–high depletion.
+
+### L9 — Signed low-advection operator tax — M3 checked; quantitative theorem open
+
+Prove a cutoff-independent estimate for
 
 ```text
-data-controlled, time-integrable, small, telescoping
+sum_q 2^-q |<[Pq,u_low dot grad] omega_near-q,omega_q>|
+  <= eta_Com D + A_Com(T) + B_Com integral(X).
 ```
 
-and ultimately reduced to the Grönwall-admissible shape
+The already-failed absolute Schur route must be replaced by a sign-preserving square-function, almost-orthogonality or `TT*` argument.
+
+### L10 — Directional high–high near-field tax — division-free algebra and M6 checked; physical inequality open
+
+Use the periodic kernel and unnormalised cross-product defect to obtain
 
 ```text
-R = A_T + B · integratedCriticalEnergy.
+(Fq_HH,near)+ <= C_HH d_q D_q + named remainder.
 ```
 
-A finite but cutoff-dependent remainder is not admissible.
+The zero denominator branch is explicit.
 
-### L8 — Periodic principal-value strain kernel and Calderón–Zygmund control — open
+### L11 — Directional defect evolution — open
 
-Construct the periodic Biot–Savart/strain distribution, prove principal-value cancellation, actual spherical moments, the smooth periodic remainder and required `Lp`/difference estimates. Convert the polynomial vorticity cross-product defect into a quantitatively integrable near-field tax.
-
-### L9 — Continuum increment-to-diffusion coercivity — division-free algebra checked; physical inequality open
-
-Round 26 stores
+Derive from the physical PDE:
 
 ```text
-A = d² Z,
-Z M = D²
+dAq/dt + c0 nu 2^(2q) Aq
+ <= G_adv + G_stretch + G_subgrid + G_kernel + G_tail.
 ```
 
-and proves
+Every source receives one tax owner.
+
+### L12 — Hysteretic bad-excursion and amplitude tax — finite charge checked; PDE budget open
+
+Round 26 proves entry gaps are paid by positive variation. Still required are a cutoff-uniform positive-variation estimate and an amplitude estimate strong enough to tax production on bad intervals.
+
+### L13 — Lower interaction taxes and dissipation-range split — open
+
+Close `LH`, `HL` and `CC`, and derive rather than assume the dynamic high-mode viscosity condition and critical low-frequency reservoir.
+
+### L14 — Far-field, commutator and cutoff-tail summability — open
+
+All residual families must be uniformly integrable or vanish in the nested limits. Any geometric tail ratio must satisfy one cutoff-independent `rho<1`.
+
+## E. Strict critical budget
+
+### L15 — Strict maximal-core/unique-owner viscosity margin — central bottleneck
+
+Instantiate M5 with physical allocations and prove
 
 ```text
-A M = d² D²,
-Z=0 ⇒ A=0.
+eta_total
+ = eta_HH-good + eta_HH-bad + eta_LH + eta_HL + eta_CC
+   + eta_Com + eta_kernel + eta_tail + eta_boundary
+ < 1.
 ```
 
-No quotient by a possibly vanishing denominator is introduced.
+No term may be hidden or counted twice.
 
-Still required: order, nonnegativity and continuum convolution estimates yielding a one-sided scale-uniform bound of the physical HH transfer by `dD` plus named residuals.
+### L16 — Uniform finite critical estimate — reducer checked once L7–L15 exist
 
-### L10 — Far-field annular packing or Carleson estimate — open
-
-Prove the annular/far-field sum is critically summable with constants independent of cutoffs. A flux-decay statement is useful only after it controls the same continuation norm.
-
-### L11 — Low transport, commutator and subgrid-stress estimate — physical identity stack checked; quantitative tax open
-
-Round 26 fixes the derivative-placement name `LowAdvectsHigh` and reuses the repository’s exact periodic stack:
+Derive uniformly in final cutoffs:
 
 ```text
-self-tested transport cancellation;
-projected shell commutator energy identity;
-signed multiplier-difference kernel;
-pointwise mean-value reduction.
+X_N,Q(t)+(1-eta_total)D_N,Q(0,t)
+ <= X_N,Q(0)+A(t)+B integral_0^t X_N,Q.
 ```
 
-It also proves the finite physical-space kernel increment identity and exact first-moment rescaling.
+### L17 — Non-circular Grönwall — reducer checked
 
-The next theorem is the physical bound
+Obtain a finite critical bound without placing the target supremum, BKM integral or an equivalent continuation criterion on the uncontrolled side.
+
+## F. Infinite limits and global continuation
+
+### L18 — Shell cutoff limit — open analytic producer
+
+Recover the full shell sum and every named source/tax family.
+
+### L19 — Galerkin cutoff limit — open analytic producer
+
+Obtain strong enough compactness to identify the quadratic term and initial trace while retaining
 
 ```text
-Σq 2^{-q}|⟨[P_q,a_low·∇]b_q,b_q⟩|
-≤ ηCom D + C Xint + RCom
+u in L-infinity_t H^(1/2)_x intersect L2_t H^(3/2)_x.
 ```
 
-with cutoff-independent constants. The existing absolute Schur reconnaissance is too large; a sign-preserving or orthogonal operator estimate is the highest-alpha fork.
+### L20 — Absorbed-budget lower semicontinuity — reducer checked
 
-### L12 — Hysteretic positive-variation estimate — finite charge checked; PDE budget open
+Absorption occurs before weak convergence and the positive margin survives the limit.
 
-Round 26 proves for explicit hysteretic entries
+### L21 — Critical-to-Serrin bridge and periodic continuation — open physical instance
+
+Prove
 
 ```text
-before+h ≤ after
-⇒
-h ≤ after-before,
+L-infinity H^(1/2) intersect L2 H^(3/2)
+  -> L4 H1 -> L4 L6,
 ```
 
-and hence
+then instantiate periodic Prodi–Serrin continuation.
+
+### L22 — Smooth bootstrap, pressure recovery and Galilean uncentering — open analytic instances
+
+Recover smooth periodic pressure and restore arbitrary periodic mean.
+
+### L23 — Literal Fefferman witness — checked terminal reducer
+
+Once the physical inputs above are inhabited, the existing composition constructs the exact periodic Clay witness. No additional terminal wrapper is required.
+
+## Highest-alpha priority after Round 27
+
+The immediate order is:
 
 ```text
-sum(entry gaps) ≤ sum(positive rises).
+1. full nonlinear reality/transversality equivariance;
+2. finite local Lipschitz, Picard–Lindelöf, energy identity and global finite flow;
+3. physical time-dependent signed shell balance using M1;
+4. first cutoff-independent signed operator tax using M3;
+5. periodic strain/CZ plus M6 high–high tax;
+6. bad-excursion amplitude and remaining source/tail taxes;
+7. physical M5 allocation and L15 eta_total<1;
+8. limits, Serrin continuation, smooth pressure and literal witness.
 ```
 
-Still required: a scale-uniform PDE bound on the full positive variation and the associated bad-state amplitude. Bare component count or empirical residence time is insufficient.
-
-### L13 — Dissipation-wavenumber high-mode condition and critical low reservoir — open
-
-Derive dynamically, rather than assume,
-
-```text
-amplitudeq ≤ c ν λq²
-```
-
-on high modes, and prove the remaining low-mode reservoir is integrable in the critical budget. Raw three-dimensional Bernstein scaling is one frequency power too large.
-
-### L14 — Uniform residual-tail ratio — open
-
-For every far-field, commutator and cutoff tail, construct an actual ratio
-
-```text
-0 ≤ ρ < 1
-```
-
-uniform in all cutoffs, then apply the checked geometric-series transport.
-
-## D. One strict critical budget
-
-### L15 — Strict total viscosity margin — open and central bottleneck
-
-Use the unique ownership ledger to sum each coefficient exactly once:
-
-```text
-ηtotal = ηHH-good + ηHH-bad + ηLH + ηHL + ηCC + ηCom
-         + ηkernel + ηtail + ηboundary
-< 1.
-```
-
-No source may be hidden in a generic residual or charged under two owners. This is the most concentrated highest-alpha target.
-
-### L16 — Uniform integrated critical inequality — reducer checked once L7–L15 exist
-
-Derive uniformly in `Q,N`:
-
-```text
-XQ,N(t) + (1-ηtotal) DQ,N(0,t)
-≤ XQ,N(0) + A(t) + B ∫₀ᵗ XQ,N(s) ds.
-```
-
-### L17 — Non-circular continuous Grönwall — reducer checked
-
-Obtain a finite critical bound on every finite interval without placing the target critical supremum, BKM integral or equivalent continuation criterion on the right.
-
-## E. Infinite cutoffs and restart
-
-### L18 — Shell cutoff `Q→∞` — open analytic producer
-
-Prove convergence strong enough to recover the complete shell sum and all named signed source identities and tax allocations.
-
-### L19 — Galerkin cutoff `N→∞` — open analytic producer
-
-Pass to a physical periodic solution with enough strong convergence for the nonlinear term, initial trace and critical norm.
-
-### L20 — Lower semicontinuity and absorbed-budget preservation — reducer checked
-
-The positive dissipation and strict margin must survive the limit. Absorption occurs before taking weak limits.
-
-### L21 — Pressure/smoothness recovery and critical restart — open physical instance
-
-Recover smooth periodic pressure, bootstrap the velocity, and use the bounded critical norm to contradict finite maximal time.
-
-### L22 — Uncenter arbitrary periodic data — open analytic instance of L1
-
-Construct the continuum mean and verify the Galilean transformation on the physical carrier.
-
-### L23 — Literal Fefferman witness and audit composition — checked reducer
-
-The existing end-to-end theorem converts the physical path inputs into the exact periodic Clay witness. No additional terminal receipt is needed.
-
-## Highest-alpha priority after Round 26
-
-The immediate sequence is:
-
-```text
-L3 finite normed ODE and global finite existence;
-L5 physical time-dependent signed shell balance;
-L11 first cutoff-independent low-advection/Com tax;
-L8–L10 and L12–L14 remaining physical taxes;
-L15 strict unique-owner viscosity certificate.
-```
-
-The bottleneck remains
-
-```text
-physical L7 coefficients → L15 ηtotal<1.
-```
-
-A result counts as progress only when it inhabits a physical cutoff-independent estimate, completes a required analytic instance, or supplies a finite quantified counterexample that removes a false route.
+The single highest-value theorem remains `UniformCriticalNonlinearityAbsorption` with a cutoff-independent coefficient strictly below one. A result counts as progress only when it completes a physical producer, produces a uniform coefficient, or supplies a quantified counterexample eliminating a route.
