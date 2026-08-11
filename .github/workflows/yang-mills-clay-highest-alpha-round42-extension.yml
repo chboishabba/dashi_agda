@@ -1,36 +1,17 @@
 name: Yang-Mills Clay highest-alpha Round 42 extension
 
+# SECURITY BOUNDARY
+#
+# The self-hosted Agda runner executes checked-out repository code.  Therefore
+# this workflow is intentionally restricted to pushes on the trusted Round-42
+# development branch and is NOT triggered by pull_request events.  The open PR
+# still receives the resulting commit status because its head is this branch,
+# without allowing arbitrary PR checkout content to execute on the shared
+# self-hosted runner.
 on:
   push:
     branches:
       - agent/ym-clay-alpha-round42-master-reconciled-floor-recovery
-  pull_request:
-    branches:
-      - master
-    paths:
-      - 'DASHI/Physics/YangMills/BalabanFiniteRectangularRationalExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanFiniteRectangularAbsoluteColumnMassExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeGramPerturbationTwoSidedMassExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanSelectedBackgroundFlatGreenPerturbationTwoSidedContractionExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanFiniteMatrixL1ContractionExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanSelectedBackgroundResidualPowerDecayExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanSelectedBackgroundRationalWeightedPowerDecayExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanFiniteStrictContractionReopeningExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanSelectedBackgroundResidualReopeningExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanFiniteRationalInjectiveInverseExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanSelectedBackgroundFiniteRationalReopeningExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugePerturbationActionExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanSelectedBackgroundResidualActionExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeGreenFiniteExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeGreenDecayExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanBasedPathGaugeSectionExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanSelectedCombinedConstraintTangentProjectorExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanSelectedCombinedConstraintRawGramNoGoExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanSelectedCombinedConstraintTangentProjectorBoundaryExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanFiniteRGObservableReopeningExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanClayHighestAlphaRound42MasterReconciledValidation.agda'
-      - 'scripts/check_yang_mills_clay_highest_alpha_round42_extension.sh'
-      - '.github/workflows/yang-mills-clay-highest-alpha-round42-extension.yml'
 
 jobs:
   round42-green-extension:
