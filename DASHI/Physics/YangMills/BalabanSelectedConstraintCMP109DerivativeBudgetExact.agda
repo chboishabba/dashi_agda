@@ -48,14 +48,11 @@ module DASHI.Physics.YangMills.BalabanSelectedConstraintCMP109DerivativeBudgetEx
 -- selected nonlinear block-average map at that background.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base as ℚ using (ℚ; _*_; _≤_)
-import Data.Rational.Properties as ℚP
-import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
-import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as FiniteL2
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
 import DASHI.Physics.YangMills.BalabanP33CMP109DerivativeDifferencePrimitiveExact as Primitive
 import DASHI.Physics.YangMills.BalabanP33PhysicalRationalWilsonPlaquetteJetExact as Physical
@@ -63,6 +60,7 @@ import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Co
 import DASHI.Physics.YangMills.BalabanP33PhysicalBackgroundGaugeParameterizedYoungExact as Relaxed
 import DASHI.Physics.YangMills.BalabanCMP109SelectedBlockAverageIFTBridgeExact as CMP109
 import DASHI.Physics.YangMills.BalabanSelectedBlockAverageReferenceEntryBudgetExact as AverageBudget
+import DASHI.Physics.YangMills.BalabanFiniteRectangularSchurSquaredExact as RectSchur
 import DASHI.Physics.YangMills.BalabanSelectedConstraintDerivativeSectorBudgetExact as Sector
 import DASHI.Physics.YangMills.BalabanSelectedGaugeDerivativeTwoBackgroundVariationExact as GaugeVariation
 import DASHI.Physics.YangMills.BalabanSelectedCombinedProjectionNormExact as ProjectionNorm
@@ -80,7 +78,7 @@ averageVariationFromPrimitives left right field row =
       (CMP109.primitiveReferenceDifferenceMatrix left)
       (CMP109.primitiveReferenceDifferenceMatrix right)
   in
-  AverageBudget.RectSchur.rectApply AverageBudget.columns matrix vector row
+  RectSchur.rectApply AverageBudget.columns matrix vector row
 
 averageVariationNormIsRectangularNorm :
   ∀ {LeftOperator RightOperator}
@@ -88,24 +86,22 @@ averageVariationNormIsRectangularNorm :
     (right : Primitive.CMP109DerivativeDifferencePrimitive RightOperator CMP109.Cell)
     field →
   Sector.averageVariationNormSq (averageVariationFromPrimitives left right field)
-  ≡ AverageBudget.RectSchur.rectVectorNormSq AverageBudget.rows
-      (AverageBudget.RectSchur.rectApply AverageBudget.columns
+  ≡ RectSchur.rectVectorNormSq AverageBudget.rows
+      (RectSchur.rectApply AverageBudget.columns
         (AverageBudget.twoBackgroundMatrix
           (CMP109.primitiveReferenceDifferenceMatrix left)
           (CMP109.primitiveReferenceDifferenceMatrix right))
         (Coordinates.encodePhysicalSU2 field))
 averageVariationNormIsRectangularNorm left right field =
-  Sums.sumRationalCong AverageBudget.rows _ _
-    (λ row → Agda.Builtin.Equality.refl)
+  Sums.sumRationalCong AverageBudget.rows _ _ (λ row → refl)
 
 encodedFieldRectangularNormExact : ∀ field →
-  AverageBudget.RectSchur.rectVectorNormSq AverageBudget.columns
+  RectSchur.rectVectorNormSq AverageBudget.columns
     (Coordinates.encodePhysicalSU2 field)
   ≡ Coordinates.physicalSU2BondNormSq field
 encodedFieldRectangularNormExact field =
   trans
-    (Sums.sumRationalCong AverageBudget.columns _ _
-      (λ coordinate → Agda.Builtin.Equality.refl))
+    (Sums.sumRationalCong AverageBudget.columns _ _ (λ coordinate → refl))
     (Coordinates.encodePhysicalSU2NormSqExact field)
 
 cmp109AverageVariationFitsSectorBudget :
@@ -132,8 +128,8 @@ cmp109AverageVariationFitsSectorBudget
     (sym (averageVariationNormIsRectangularNorm left right field))
     (subst
       (λ upper →
-        AverageBudget.RectSchur.rectVectorNormSq AverageBudget.rows
-          (AverageBudget.RectSchur.rectApply AverageBudget.columns
+        RectSchur.rectVectorNormSq AverageBudget.rows
+          (RectSchur.rectApply AverageBudget.columns
             (AverageBudget.twoBackgroundMatrix
               (CMP109.primitiveReferenceDifferenceMatrix left)
               (CMP109.primitiveReferenceDifferenceMatrix right))
