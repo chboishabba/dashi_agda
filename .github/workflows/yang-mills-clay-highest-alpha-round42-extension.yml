@@ -45,6 +45,5 @@ jobs:
       - name: Validate Round 42 Green extension
         shell: bash
         run: |
-          chmod +x scripts/check_yang_mills_clay_highest-alpha-round42-extension.sh || true
           chmod +x scripts/check_yang_mills_clay_highest_alpha_round42_extension.sh
           AGDA_JOBS=1 bash scripts/check_yang_mills_clay_highest_alpha_round42_extension.sh
