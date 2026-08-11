@@ -26,7 +26,7 @@ module DASHI.Physics.Closure.NSTriadKNComSixThreeSingleChannelRound41Exact where
 -- identify the literal odd P/Q pair product with the existing six-three Gram
 -- pair product.
 --
--- This module makes that reduction exact.  One equality
+-- One equality
 --
 --   physical U_q^* U_r product
 --     = pairProduct (sixThreeGramCell |q-r|)
@@ -40,14 +40,17 @@ module DASHI.Physics.Closure.NSTriadKNComSixThreeSingleChannelRound41Exact where
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
+open import Data.Rational.Base using (ℚ; _≤_)
 
+import DASHI.Physics.Closure.NSTriadKNComCotlarDyadicEnvelopeRound34Exact as Cotlar
+import DASHI.Physics.Closure.NSTriadKNLuoSixThreeComCotlarBridgeRound34Exact as Bridge
 import DASHI.Physics.Closure.NSTriadKNComGramInterferenceRound35Exact as Gram
 import DASHI.Physics.Closure.NSTriadKNComSingleGramReductionRound40Exact as Single
 
 record PhysicalComSixThreeSameObject : Set where
   field
-    firstPhysicalPairProduct : Nat → Nat → Data.Rational.Base.ℚ
-    secondPhysicalPairProduct : Nat → Nat → Data.Rational.Base.ℚ
+    firstPhysicalPairProduct : Nat → Nat → ℚ
+    secondPhysicalPairProduct : Nat → Nat → ℚ
     shellDistance : Nat → Nat → Nat
 
     pairProductsCoincide : ∀ q r →
@@ -78,10 +81,7 @@ sixThreeFirstPhysicalPairDecay :
   (physical : PhysicalComSixThreeSameObject) →
   ∀ q r →
   firstPhysicalPairProduct physical q r
-  Data.Rational.Base.≤
-  DASHI.Physics.Closure.NSTriadKNComCotlarDyadicEnvelopeRound34Exact.directEnvelope
-    DASHI.Physics.Closure.NSTriadKNLuoSixThreeComCotlarBridgeRound34Exact.half
-    (shellDistance physical q r)
+  ≤ Cotlar.directEnvelope Bridge.half (shellDistance physical q r)
 sixThreeFirstPhysicalPairDecay physical =
   Single.singleChannelFirstPairDecay
     (singleChannelGramFromSixThreeSameObject physical)
@@ -90,10 +90,7 @@ sixThreeSecondPhysicalPairDecay :
   (physical : PhysicalComSixThreeSameObject) →
   ∀ q r →
   secondPhysicalPairProduct physical q r
-  Data.Rational.Base.≤
-  DASHI.Physics.Closure.NSTriadKNComCotlarDyadicEnvelopeRound34Exact.directEnvelope
-    DASHI.Physics.Closure.NSTriadKNLuoSixThreeComCotlarBridgeRound34Exact.half
-    (shellDistance physical q r)
+  ≤ Cotlar.directEnvelope Bridge.half (shellDistance physical q r)
 sixThreeSecondPhysicalPairDecay physical =
   Single.singleChannelSecondPairDecay
     (singleChannelGramFromSixThreeSameObject physical)
