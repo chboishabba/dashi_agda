@@ -97,7 +97,7 @@ rootedLoopGaugeFamily :
     (Covariance.DirectedGaugeField4 N group)
     (LatticePath4 {N} base base)
     (Transport.Carrier group) Lie Scalar averageAxioms
-rootedLoopGaugeFamily group rootedPaths dataSet = record
+rootedLoopGaugeFamily group {base = base} rootedPaths dataSet = record
   { Average.GaugeCovariantPathFamily.paths = loops dataSet
   ; Average.GaugeCovariantPathFamily.holonomy =
       λ gaugeField path →
@@ -109,11 +109,11 @@ rootedLoopGaugeFamily group rootedPaths dataSet = record
           (Covariance.gaugeTransformBond group gauge gaugeField) path
   ; Average.GaugeCovariantPathFamily.leftGauge =
       λ gaugeField →
-        Rooted.rootedGaugeFunction group rootedPaths gaugeField _
+        Rooted.rootedGaugeFunction group rootedPaths gaugeField base
   ; Average.GaugeCovariantPathFamily.rightGauge =
       λ gaugeField →
         Transport.inverse group
-          (Rooted.rootedGaugeFunction group rootedPaths gaugeField _)
+          (Rooted.rootedGaugeFunction group rootedPaths gaugeField base)
   ; Average.GaugeCovariantPathFamily.transformedHolonomyGaugeCovariant =
       λ gaugeField path →
         Covariance.pathTransportGaugeCovariant
