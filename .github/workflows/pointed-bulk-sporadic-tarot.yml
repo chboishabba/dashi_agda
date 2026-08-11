@@ -4,16 +4,40 @@ on:
   push:
     branches:
       - 'agent/moonshine-pointed-bulk-sporadic-tarot'
+      - 'agent/jmd-sporadic-tarot-v2-correspondence'
+      - 'agent/sporadic-stage-symmetry-euler-totalisation'
   pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
     paths:
+      - 'DASHI/Core/Optional.agda'
+      - 'DASHI/Core/ListExact.agda'
       - 'DASHI/Biology/PointedTernaryBulkExact.agda'
       - 'DASHI/Biology/DecimalTenTernaryPresentationExact.agda'
       - 'DASHI/Biology/ThreeSixNineMoonshineScaleExact.agda'
       - 'DASHI/Biology/ReducedFiftyThreeOrbitCandidateExact.agda'
+      - 'DASHI/Biology/SporadicSignedFiftyThreeTarotProjectionExact.agda'
       - 'DASHI/Biology/SporadicTarotDependencyExact.agda'
+      - 'DASHI/Biology/TarotCarrierExact.agda'
+      - 'DASHI/Biology/JMDSporadicTarotV2CorrespondenceExact.agda'
+      - 'DASHI/Biology/JMDSporadicTarotOrdinalTotalisationExact.agda'
+      - 'DASHI/Biology/StageSymmetrySSP15BridgeExact.agda'
+      - 'DASHI/Biology/StageSymmetrySSP15SpectrumExact.agda'
+      - 'DASHI/Biology/ImageHexagramSSP15MDLExact.agda'
+      - 'DASHI/Biology/SporadicStageSymmetryTarotRegression.agda'
       - 'DASHI/Biology/PointedBulkReducedMoonshineBoundary.agda'
       - 'DASHI/Biology/PointedBulkSporadicTarotSourceAtlas.agda'
       - 'DASHI/Biology/PointedBulkSporadicTarotEverything.agda'
+      - 'DASHI/Foundations/BalancedTernaryStageSymmetryExact.agda'
+      - 'DASHI/Foundations/BalancedTernaryAmplitudeClosureExact.agda'
+      - 'DASHI/Foundations/BalancedTernaryUltrametricExact.agda'
+      - 'DASHI/Foundations/StageSymmetryCarrierTowerExact.agda'
+      - 'DASHI/Foundations/CounterpositionOrderedJoinExact.agda'
+      - 'DASHI/Foundations/DialecticSheetFrameSelectorExact.agda'
+      - 'DASHI/Foundations/FrameWitnessFibreMDLExact.agda'
+      - 'DASHI/Foundations/DialecticCubieTetralemmaExact.agda'
+      - 'DASHI/Foundations/SecondRevolutionJankoTarotExact.agda'
+      - 'DASHI/Moonshine/DepthTwoNonaryResidueFibreExact.agda'
+      - 'DASHI/Moonshine/EulerMonsterMeaningSeparationExact.agda'
       - 'DASHI/Governance/CabarlahTraumaProjectionBridgeExact.agda'
       - 'DASHI/Governance/Everything.agda'
       - 'DASHI/PointedBulkSporadicTarotCabarlahBoundary.agda'
@@ -21,6 +45,8 @@ on:
       - 'DASHI/EverythingPointedBulkSporadicTarot.agda'
       - 'Docs/support/reference/PointedBulkSporadicTarotCabarlah.md'
       - 'Docs/support/reference/ThreeSixNineMoonshineScaleLedger.md'
+      - 'Docs/support/reference/SporadicStageSymmetryEulerTotalisation.md'
+      - 'Docs/support/reference/StageAmplitudeWitnessSSP15DepthTwo.md'
       - 'scripts/check_pointed_bulk_sporadic_tarot.sh'
       - '.github/workflows/pointed-bulk-sporadic-tarot.yml'
   workflow_dispatch:
@@ -47,7 +73,7 @@ jobs:
           test -x "$agda_bin"
           "$agda_bin" --version
           printf 'AGDA_BIN=%s\n' "$agda_bin" >> "$GITHUB_ENV"
-      - name: Check pointed bulk, reduced-53 candidate, Tarot, and Cabarlah bridge
+      - name: Check amplitudes, counterpositions, witness fibres, SSP15 spectra, residues, and Tarot boundaries
         env:
           DASHI_REPO_ROOT: ${{ github.workspace }}
           DASHI_AGDA29_EPHEMERAL: '1'
@@ -77,4 +103,4 @@ jobs:
 
           gh pr comment "$pr_number" \
             --repo "$GITHUB_REPOSITORY" \
-            --body "Pointed bulk / sporadic Tarot / Cabarlah Agda kernel check ${CHECK_STATUS} on ${GITHUB_SHA} (workflow run ${GITHUB_RUN_ID})."
+            --body "Pointed bulk / amplitude / counterposition / witness-fibre / SSP15 / depth-two Agda kernel check ${CHECK_STATUS} on ${GITHUB_SHA} (workflow run ${GITHUB_RUN_ID})."
