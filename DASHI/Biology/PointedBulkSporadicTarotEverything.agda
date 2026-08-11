@@ -5,5 +5,7 @@ import DASHI.Biology.DecimalTenTernaryPresentationExact
 import DASHI.Biology.ThreeSixNineMoonshineScaleExact
 import DASHI.Biology.ReducedFiftyThreeOrbitCandidateExact
 import DASHI.Biology.SporadicTarotDependencyExact
+import DASHI.Biology.TarotCarrierExact
+import DASHI.Biology.JMDSporadicTarotV2CorrespondenceExact
 import DASHI.Biology.PointedBulkReducedMoonshineBoundary
 import DASHI.Biology.PointedBulkSporadicTarotSourceAtlas
