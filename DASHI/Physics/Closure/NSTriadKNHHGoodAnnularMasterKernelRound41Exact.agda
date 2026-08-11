@@ -13,11 +13,6 @@ module DASHI.Physics.Closure.NSTriadKNHHGoodAnnularMasterKernelRound41Exact wher
 -- the Navier-Stokes Equations".
 -- DOI: 10.1512/iumj.1993.42.42034.
 --
--- Author: Elias M. Stein.
--- Title: "Singular Integrals and Differentiability Properties of Functions".
--- Princeton University Press, 1970.
--- DOI: 10.1515/9781400883882.
---
 -- DASHI CONTRIBUTION
 --
 -- Round 40 correctly isolated the remaining HH-good kernel theorem as the
@@ -40,12 +35,11 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _≤_; nonNegative)
+open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
 
-import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
 import DASHI.Physics.Closure.NSTriadKNLuoBadCoherenceWeightedMarkovExact as Threshold
 import DASHI.Physics.Closure.NSTriadKNHHGoodPeriodizedKernelUniformRound40Exact as Periodized
 
@@ -101,20 +95,6 @@ finiteScaledKernelMassInvariant scale (mass ∷ rest)
 ------------------------------------------------------------------------
 -- Finite periodization triangle theorem.
 ------------------------------------------------------------------------
-
-sumNonnegative :
-  ∀ values →
-  ((value : ℚ) → value ∈ values → 0ℚ ≤ value) →
-  0ℚ ≤ sumMass values
-sumNonnegative [] allNN = ℚP.≤-refl
-sumNonnegative (value ∷ rest) allNN =
-  L2.addNonnegative
-    (allNN value here)
-    (sumNonnegative rest (λ selected member → allNN selected (there member)))
-  where
-  data _∈_ {A : Set} (x : A) : List A → Set where
-    here : ∀ {xs} → x ∈ (x ∷ xs)
-    there : ∀ {y xs} → x ∈ xs → x ∈ (y ∷ xs)
 
 record FinitePeriodizationCell : Set where
   field
