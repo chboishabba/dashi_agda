@@ -40,11 +40,11 @@ module DASHI.Physics.Closure.NSTriadKNPhysicalIncidenceLatticeBridgeRound38Exact
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+import Data.Integer.Base as ℤ
 import Data.Integer.Properties as ℤP
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
-import DASHI.Physics.Closure.NSTriadKNIntegerFourierModeAddExact as Z3Add
 import DASHI.Physics.Closure.NSTriadKNExactLatticeShellTriads as Lattice
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 
@@ -79,9 +79,9 @@ latticeAdd :
   Lattice.LatticeMode3 → Lattice.LatticeMode3 → Lattice.LatticeMode3
 latticeAdd left right =
   Lattice.mkLatticeMode3
-    (Lattice.k₁ left Data.Integer.Base.+ Lattice.k₁ right)
-    (Lattice.k₂ left Data.Integer.Base.+ Lattice.k₂ right)
-    (Lattice.k₃ left Data.Integer.Base.+ Lattice.k₃ right)
+    (Lattice.k₁ left ℤ.+ Lattice.k₁ right)
+    (Lattice.k₂ left ℤ.+ Lattice.k₂ right)
+    (Lattice.k₃ left ℤ.+ Lattice.k₃ right)
 
 fourierToLatticeNegation : ∀ mode →
   fourierToLattice (Z3.negateMode mode)
@@ -117,10 +117,13 @@ physicalIncidenceConjugateOutputMeaning : ∀ tau →
   ≡ Lattice.modeNeg (fourierToLattice (Physical.k tau))
 physicalIncidenceConjugateOutputMeaning tau = refl
 
+latticeZeroMode : Lattice.LatticeMode3
+latticeZeroMode =
+  Lattice.mkLatticeMode3 (ℤ.+ 0) (ℤ.+ 0) (ℤ.+ 0)
+
 physicalIncidenceTriadSumZero : ∀ tau →
   Lattice.triadSum (physicalIncidenceAsZeroSumTriad tau)
-  ≡ Lattice.mkLatticeMode3 (Data.Integer.Base.+ 0)
-      (Data.Integer.Base.+ 0) (Data.Integer.Base.+ 0)
+  ≡ latticeZeroMode
 physicalIncidenceTriadSumZero
     (Physical.physicalTriad
       (Z3.mode px py pz)
@@ -131,13 +134,13 @@ physicalIncidenceTriadSumZero
 ... | xRes | yRes | zRes =
   latticeModeExt
     (trans
-      (cong (λ value → value Data.Integer.Base.+ (Data.Integer.Base.- kx)) xRes)
+      (cong (λ value → value ℤ.+ (ℤ.- kx)) xRes)
       (ℤP.+-inverseʳ kx))
     (trans
-      (cong (λ value → value Data.Integer.Base.+ (Data.Integer.Base.- ky)) yRes)
+      (cong (λ value → value ℤ.+ (ℤ.- ky)) yRes)
       (ℤP.+-inverseʳ ky))
     (trans
-      (cong (λ value → value Data.Integer.Base.+ (Data.Integer.Base.- kz)) zRes)
+      (cong (λ value → value ℤ.+ (ℤ.- kz)) zRes)
       (ℤP.+-inverseʳ kz))
 
 physicalIncidenceZeroSumBoolean : ∀ tau →
