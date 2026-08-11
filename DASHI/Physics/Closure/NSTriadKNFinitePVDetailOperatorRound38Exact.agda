@@ -30,6 +30,7 @@ module DASHI.Physics.Closure.NSTriadKNFinitePVDetailOperatorRound38Exact where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base using (ℚ; 0ℚ; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
@@ -41,14 +42,14 @@ import DASHI.Physics.Closure.NSTriadKNFinitePVProjectorIncrementRound37Exact as 
 weightedConstantCoordinate :
   (Matrix.Matrix3 → ℚ) →
   Projector.UnitDirection →
-  Agda.Builtin.List.List PV.KernelDirectionSample → ℚ
+  List PV.KernelDirectionSample → ℚ
 weightedConstantCoordinate coordinate base samples =
   coordinate (Projector.rankOneProjector (Projector.vector base))
     * PV.sumWeights samples
 
 weightedConstantProjectorSum :
   Projector.UnitDirection →
-  Agda.Builtin.List.List PV.KernelDirectionSample → Matrix.Matrix3
+  List PV.KernelDirectionSample → Matrix.Matrix3
 weightedConstantProjectorSum base samples =
   Matrix.matrix3
     (weightedConstantCoordinate Matrix.m11 base samples)
@@ -90,20 +91,19 @@ zeroMassKernelAnnihilatesConstantProjector base samples zeroMass =
       (solve
         (coordinate
           (Projector.rankOneProjector (Projector.vector base)) ∷ []))
-    where open import Agda.Builtin.List using (_∷_; [])
 
 coarseProjectorOperator :
   Projector.UnitDirection →
-  Agda.Builtin.List.List PV.KernelDirectionSample → Matrix.Matrix3
+  List PV.KernelDirectionSample → Matrix.Matrix3
 coarseProjectorOperator = weightedConstantProjectorSum
 
 detailProjectorOperator :
   Projector.UnitDirection →
-  Agda.Builtin.List.List PV.KernelDirectionSample → Matrix.Matrix3
+  List PV.KernelDirectionSample → Matrix.Matrix3
 detailProjectorOperator = PV.weightedProjectorIncrementSum
 
 kernelProjectorOperator :
-  Agda.Builtin.List.List PV.KernelDirectionSample → Matrix.Matrix3
+  List PV.KernelDirectionSample → Matrix.Matrix3
 kernelProjectorOperator = PV.weightedProjectorSum
 
 kernelFactorsThroughProjectorDetail :
@@ -115,7 +115,7 @@ kernelFactorsThroughProjectorDetail = PV.finitePVProjectorIncrementIdentity
 
 record FinitePVDetailFactorization
     (base : Projector.UnitDirection)
-    (samples : Agda.Builtin.List.List PV.KernelDirectionSample) : Set where
+    (samples : List PV.KernelDirectionSample) : Set where
   constructor finite-pv-detail-factorization
   field
     zeroMass : PV.ZeroMassKernel samples
