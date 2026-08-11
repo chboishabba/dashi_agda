@@ -41,7 +41,6 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as FiniteL2
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
 import DASHI.Physics.YangMills.BalabanFiniteSumFubiniExact as Fubini
-import DASHI.Physics.YangMills.BalabanFiniteRectangularRationalExact as Rect
 import DASHI.Physics.YangMills.BalabanP33FiniteWeightedSchurSquaredExact as Schur
 
 RectMatrix : Set → Set → Set
@@ -83,34 +82,6 @@ rectAbsoluteMajorantApply columns matrix vector row =
   Sums.sumRational columns
     (λ column → ∣ matrix row column ∣ * ∣ vector column ∣)
 
-rectMatrixApplyAbsoluteBound :
-  ∀ {Row Column : Set}
-    (columns : List Column)
-    (matrix : RectMatrix Row Column)
-    (vector : Vector Column)
-    row →
-  ∣ Rect.applyRectangular
-      (record
-        { Rect.Matrix.FiniteRationalCoordinates.coordinates = columns
-        ; Rect.Matrix.FiniteRationalCoordinates.delta = λ _ _ → 0ℚ
-        ; Rect.Matrix.FiniteRationalCoordinates.deltaActsAsIdentity = λ _ _ →
-            Agda.Builtin.Equality.refl
-        })
-      matrix vector row ∣
-  ≤ rectAbsoluteMajorantApply columns matrix vector row
-rectMatrixApplyAbsoluteBound columns matrix vector row =
-  subst
-    (λ upper →
-      ∣ Sums.sumRational columns
-          (λ column → matrix row column * vector column) ∣
-      ≤ upper)
-    (Schur.sumAbsoluteProductsExact columns (matrix row) vector)
-    (Schur.sumAbsoluteTriangle columns
-      (λ column → matrix row column * vector column))
-
--- The previous theorem only needs the coordinate list, but constructing a
--- dummy finite-coordinate record is unnecessarily awkward for consumers.
--- Expose the literal sum version used by all later proofs.
 rectApply :
   ∀ {Row Column : Set} →
   List Column → RectMatrix Row Column → Vector Column → Row → ℚ
