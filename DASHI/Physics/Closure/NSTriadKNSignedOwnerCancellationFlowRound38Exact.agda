@@ -35,10 +35,10 @@ module DASHI.Physics.Closure.NSTriadKNSignedOwnerCancellationFlowRound38Exact wh
 --
 --   tax_before = L = (L - tau) + tau = tax_after + tau.
 --
--- Thus a proved pre-tax cancellation edge can strictly improve the viscosity
--- reserve without changing total signed production.  No arbitrary cross-owner
--- transfer is licensed: the eventual nine-owner network must exhibit a
--- physical identity for every edge it uses.
+-- Each physical edge also names its source and target in the repository's
+-- literal nine-owner type.  No arbitrary cross-owner transfer is licensed:
+-- every edge admitted to the eventual network must carry a proved physical
+-- identity for that specific owner pair.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -49,6 +49,8 @@ open import Data.Rational.Base using
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (subst; subst₂)
+
+import DASHI.Physics.Closure.NSTriadKNLuoDuplicateFreeTaxOwnershipRound26Exact as Tax
 
 record AdmissibleTwoOwnerCancellationFlow : Set where
   constructor admissible-two-owner-cancellation-flow
@@ -137,6 +139,7 @@ positiveTaxCannotIncrease flow =
 
 record PhysicalCancellationEdge : Set₁ where
   field
+    sourceOwner targetOwner : Tax.TaxOwner
     flow : AdmissibleTwoOwnerCancellationFlow
     PhysicalEdgeIdentity : Set
     physicalEdgeIdentity : PhysicalEdgeIdentity
@@ -154,6 +157,13 @@ physicalCancellationEdgeDoesNotIncreaseTax :
   positiveTaxAfter (flow edge) ≤ positiveTaxBefore (flow edge)
 physicalCancellationEdgeDoesNotIncreaseTax edge =
   positiveTaxCannotIncrease (flow edge)
+
+physicalCancellationEdgeTaxSavingExact :
+  (edge : PhysicalCancellationEdge) →
+  positiveTaxBefore (flow edge)
+  ≡ positiveTaxAfter (flow edge) + transfer (flow edge)
+physicalCancellationEdgeTaxSavingExact edge =
+  positiveTaxDecreaseExact (flow edge)
 
 signedOwnerCancellationFlowClosed : Bool
 signedOwnerCancellationFlowClosed = true
