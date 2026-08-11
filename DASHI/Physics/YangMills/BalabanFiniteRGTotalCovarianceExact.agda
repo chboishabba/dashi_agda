@@ -37,7 +37,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base as ℚ using
   (ℚ; _+_; _-_; _*_)
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
@@ -136,12 +136,13 @@ finiteRGTotalCovariance :
       (Reopen.transportObservable step right)
     + Reopen.coarseExpectation step
         (conditionalCovariance step left right)
-finiteRGTotalCovariance step left right =
+finiteRGTotalCovariance {Coarse = Coarse} step left right =
   let
     transportedLeft = Reopen.transportObservable step left
     transportedRight = Reopen.transportObservable step right
     transportedProduct = Reopen.transportComposite step left right
-    coarseProduct : Reopen.Observable _
+
+    coarseProduct : Reopen.Observable Coarse
     coarseProduct coarse = transportedLeft coarse * transportedRight coarse
 
     productMoment =
