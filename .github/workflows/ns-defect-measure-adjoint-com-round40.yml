@@ -13,8 +13,12 @@ on:
     paths:
       - 'DASHI/Physics/Closure/NSTriadKN*Round40Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNDefectMeasureAdjointComRound40Validation.agda'
+      - 'DASHI/Physics/Closure/NSTriadKN*Round41Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNDefectDensityAnnularComRound41Validation.agda'
       - 'scripts/check_ns_defect_measure_adjoint_com_round40.sh'
+      - 'scripts/check_ns_defect_density_annular_com_round41.sh'
       - '.github/workflows/ns-defect-measure-adjoint-com-round40.yml'
+      - '.github/workflows/ns-defect-density-annular-com-round41.yml'
   workflow_dispatch:
 
 jobs:
@@ -22,13 +26,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Validate Round40 hard-math tranche
+      - name: Validate Round40 and stacked Round41 hard-math tranche
         run: bash scripts/check_ns_defect_measure_adjoint_com_round40.sh
       - name: Upload checker logs
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: ns-round40-checker-logs
+          name: ns-round40-round41-checker-logs
           path: |
             .agda-check-logs
             *.log
