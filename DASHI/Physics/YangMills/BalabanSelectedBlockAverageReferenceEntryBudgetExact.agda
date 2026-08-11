@@ -58,13 +58,14 @@ open import Agda.Builtin.List using (List)
 open import Data.Integer.Base using (+_)
 open import Data.List.Base using (length)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; _+_; _-_; _*_; _≤_; _/_; ∣_∣)
+  (ℚ; 0ℚ; _+_; _-_; _*_; -_; _≤_; _/_; ∣_∣; NonNegative)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using
   (cong; subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as FiniteL2
 import DASHI.Physics.YangMills.BalabanFourDimensionalHaloOverlapExact as Count
 import DASHI.Physics.YangMills.BalabanFiniteFibreAverageExact as Fibre
 import DASHI.Physics.YangMills.BalabanP33FiniteWeightedSchurSquaredExact as Schur
@@ -73,7 +74,7 @@ import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Ph
 import DASHI.Physics.YangMills.BalabanP33PhysicalBackgroundGaugeFirstExact as Gauge
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundBlockAverageConstraintMatrixExact as Average
 import DASHI.Physics.YangMills.BalabanP33LiteralResidualKernelNumericalCalibrationExact as Calibration
-import DASHI.Physics.YangMills.BalabanSelectedConstraintDerivativeSectorBudgetExact as Sector
+import DASHI.Physics.YangMills.BalabanSelectedGaugeDerivativeTwoBackgroundVariationExact as GaugeVariation
 
 Row : Set
 Row = Average.SelectedBlockAverageRow4
@@ -120,7 +121,7 @@ blockAverageBudgetSlack = + 3135 / 262144
 
 blockAverageCoefficientPlusSlackExact :
   blockAverageSchurSquaredCoefficient + blockAverageBudgetSlack
-  ≡ Sector.GaugeVariation.blockAverageDerivativeRemainingSquaredBudget
+  ≡ GaugeVariation.blockAverageDerivativeRemainingSquaredBudget
 blockAverageCoefficientPlusSlackExact = ℚRing.solve []
 
 blockAverageBudgetSlackNonnegative : 0ℚ ≤ blockAverageBudgetSlack
@@ -261,7 +262,7 @@ selectedBlockAverageTwoBackgroundFitsIFTBudget :
     (RectSchur.rectApply columns
       (twoBackgroundMatrix leftReferenceDifference rightReferenceDifference)
       vector)
-  ≤ Sector.GaugeVariation.blockAverageDerivativeRemainingSquaredBudget
+  ≤ GaugeVariation.blockAverageDerivativeRemainingSquaredBudget
       * RectSchur.rectVectorNormSq columns vector
 selectedBlockAverageTwoBackgroundFitsIFTBudget left right vector leftBound rightBound =
   let
@@ -270,14 +271,11 @@ selectedBlockAverageTwoBackgroundFitsIFTBudget left right vector leftBound right
     norm = RectSchur.rectVectorNormSq columns vector
     normNonnegative =
       Schur.sumNonnegative columns _
-        (λ column →
-          FiniteL2.squareNonnegative (vector column))
-      where
-      import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as FiniteL2
+        (λ column → FiniteL2.squareNonnegative (vector column))
 
     coefficientBelow :
       blockAverageSchurSquaredCoefficient
-      ≤ Sector.GaugeVariation.blockAverageDerivativeRemainingSquaredBudget
+      ≤ GaugeVariation.blockAverageDerivativeRemainingSquaredBudget
     coefficientBelow =
       subst
         (λ upper → blockAverageSchurSquaredCoefficient ≤ upper)
@@ -289,7 +287,7 @@ selectedBlockAverageTwoBackgroundFitsIFTBudget left right vector leftBound right
           (ℚP.+-mono-≤ ℚP.≤-refl blockAverageBudgetSlackNonnegative))
 
     instance
-      normNN : ℚ.NonNegative norm
+      normNN : NonNegative norm
       normNN = ℚ.nonNegative normNonnegative
   in
   ℚP.≤-trans base
