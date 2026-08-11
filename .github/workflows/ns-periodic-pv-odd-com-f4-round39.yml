@@ -1,0 +1,27 @@
+name: NS Round39 periodic PV odd Com F4
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Physics/Closure/NSTriadKN*Round39Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPeriodicPVOddComF4Round39Validation.agda'
+      - 'scripts/check_ns_periodic_pv_odd_com_f4_round39.sh'
+      - '.github/workflows/ns-periodic-pv-odd-com-f4-round39.yml'
+  workflow_dispatch:
+
+jobs:
+  agda-round39:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate Round39 hard-math tranche
+        run: bash scripts/check_ns_periodic_pv_odd_com_f4_round39.sh
+      - name: Upload checker logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ns-round39-checker-logs
+          path: |
+            .agda-check-logs
+            *.log
+          if-no-files-found: ignore
