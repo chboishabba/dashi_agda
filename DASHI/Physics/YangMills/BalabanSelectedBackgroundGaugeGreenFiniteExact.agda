@@ -46,7 +46,7 @@ module DASHI.Physics.YangMills.BalabanSelectedBackgroundGaugeGreenFiniteExact wh
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base as ℚ using (ℚ; _+_; _*_)
+open import Data.Rational.Base as ℚ using (ℚ; _+_; _-_; _*_)
 open import Relation.Binary.PropositionalEquality using
   (cong; cong₂; sym; trans)
 
