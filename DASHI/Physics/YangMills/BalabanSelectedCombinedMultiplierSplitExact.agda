@@ -40,12 +40,14 @@ module DASHI.Physics.YangMills.BalabanSelectedCombinedMultiplierSplitExact where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _-_; _*_)
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using (pair)
 import DASHI.Physics.YangMills.BalabanPath4PhysicalFibreMatchExact as Indices
+import DASHI.Physics.YangMills.BalabanPath4AxisAverageExact as Path4
 import DASHI.Physics.YangMills.BalabanPath4GlobalAverageExact as GlobalAverage
+import DASHI.Physics.YangMills.BalabanPhysicalAxisPartitionExact as Partition
 import DASHI.Physics.YangMills.BalabanP33PeriodicFourDimensionalHodgeIdentityExact as Periodic
 import DASHI.Physics.YangMills.BalabanP33PhysicalPeriodicOpenReferenceBridgeExact as Bridge
 import DASHI.Physics.YangMills.BalabanPath4PhysicalVarianceDecompositionExact as Variance
@@ -88,16 +90,8 @@ scalarMeanZeroFromGlobalMeanZero field meanZero =
     (cong (GlobalAverage.oneTwoFiftySix *_)
       (Bridge.sumSitesMatchesGlobalSiteSum field))
     (trans
-      (symGlobalMean field)
+      (sym (GlobalAverage.average0123EqualsGlobalMean field baseSite))
       (meanZero baseSite))
-  where
-  symGlobalMean : ∀ selectedField →
-    GlobalAverage.oneTwoFiftySix
-      * DASHI.Physics.YangMills.BalabanPhysicalAxisPartitionExact.globalSiteSum selectedField
-    ≡ GlobalAverage.average0123 selectedField baseSite
-  symGlobalMean selectedField =
-    Relation.Binary.PropositionalEquality.sym
-      (GlobalAverage.average0123EqualsGlobalMean selectedField baseSite)
 
 reducedCoordinateMeanZero :
   ∀ multiplier → FlatFloor.FlatGaugeReducedMultiplier multiplier →
