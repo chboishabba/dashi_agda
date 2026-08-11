@@ -178,25 +178,23 @@ amplitudeQuarticWeight pair =
   * L2.square (Physical.rightAmplitude pair)
   * L2.square (Physical.rightAmplitude pair)
 
+productNonnegative : ∀ {left right : ℚ} →
+  0ℚ ≤ left → 0ℚ ≤ right → 0ℚ ≤ left * right
+productNonnegative {left} {right} leftNN rightNN =
+  subst
+    (λ lower → lower ≤ left * right)
+    (solve [])
+    (L2.nonnegativeProductMonotone
+      ℚP.≤-refl ℚP.≤-refl leftNN rightNN leftNN rightNN)
+
 amplitudeQuarticWeightNonnegative : ∀ pair →
   0ℚ ≤ amplitudeQuarticWeight pair
 amplitudeQuarticWeightNonnegative pair =
-  L2.nonnegativeProductMonotone
-    (L2.nonnegativeProductMonotone
+  productNonnegative
+    (productNonnegative
       (L2.squareNonnegative (Physical.leftAmplitude pair))
-      (L2.squareNonnegative (Physical.rightAmplitude pair))
-      (L2.squareNonnegative (Physical.leftAmplitude pair))
-      (L2.squareNonnegative (Physical.rightAmplitude pair))
-      ℚP.≤-refl ℚP.≤-refl)
+      (L2.squareNonnegative (Physical.rightAmplitude pair)))
     (L2.squareNonnegative (Physical.rightAmplitude pair))
-    (L2.nonnegativeProductMonotone
-      (L2.squareNonnegative (Physical.leftAmplitude pair))
-      (L2.squareNonnegative (Physical.rightAmplitude pair))
-      (L2.squareNonnegative (Physical.leftAmplitude pair))
-      (L2.squareNonnegative (Physical.rightAmplitude pair))
-      ℚP.≤-refl ℚP.≤-refl)
-    (L2.squareNonnegative (Physical.rightAmplitude pair))
-    ℚP.≤-refl ℚP.≤-refl
 
 goodPhysicalStretchingThresholdBound :
   ∀ theta parameter →
