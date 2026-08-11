@@ -7,12 +7,13 @@ module DASHI.Physics.Closure.NSTriadKNDefectDensityAnnularComRound41Validation w
 -- * direct construction of the Round-39 inverse-shell density certificate;
 -- * exact single-channel Com energy and six-three Gram same-object reduction;
 -- * a cutoff-multiplicity falsification gate for Hilbert--Schmidt shortcuts;
--- * one time-integrated directional-defect budget feeding both HH strata;
+-- * one full classified directional-defect budget feeding both HH strata;
 -- * finite layer-cake decomposition of the same E*Theta defect measure;
 -- * exact shell-law consequences of the symbolic HH threshold optimizer;
 -- * annular master-kernel scaling/Jacobian and finite periodization algebra;
--- * square-root-free Young absorption closing the HH-good owner once the
---   physical weighted-local-mass <= critical*dissipation factorization lands;
+-- * a degree-six versus degree-four no-go rejecting the raw W <= X D shortcut;
+-- * square-root-free Young absorption after the scale-compatible
+--   W <= E0 * X * D data-energy factorization;
 -- * exact batch accounting for dual-pressure proof sensitivity.
 
 open import DASHI.Physics.Closure.NSTriadKNDefectMeasureAdjointComRound40Validation
@@ -26,5 +27,6 @@ open import DASHI.Physics.Closure.NSTriadKNHHDirectionalDefectSharedBudgetRound4
 open import DASHI.Physics.Closure.NSTriadKNHHDirectionalLayerCakeRound41Exact
 open import DASHI.Physics.Closure.NSTriadKNHHThresholdScaleLawRound41Exact
 open import DASHI.Physics.Closure.NSTriadKNHHGoodAnnularMasterKernelRound41Exact
+open import DASHI.Physics.Closure.NSTriadKNHHGoodLocalMassScalingNoGoRound41Exact
 open import DASHI.Physics.Closure.NSTriadKNHHGoodSquaredYoungOwnerRound41Exact
 open import DASHI.Physics.Closure.NSTriadKNNineOwnerDualPressureBatchRound41Exact
