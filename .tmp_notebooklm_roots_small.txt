@@ -1,0 +1,7 @@
+/home/c/Documents/code/dashi_agda/DASHI/Core
+/home/c/Documents/code/dashi_agda/DASHI/Unified
+/home/c/Documents/code/dashi_agda/DASHI/Ontology
+/home/c/Documents/code/dashi_agda/DASHI/Physics/YangMills
+/home/c/Documents/code/dashi_agda/THE-ERIKSSON-PROGRAMME/YangMills
+/home/c/Documents/code/dashi_agda/THE-ERIKSSON-PROGRAMME/docs
+/home/c/Documents/code/dashi_agda/THE-ERIKSSON-PROGRAMME/scripts

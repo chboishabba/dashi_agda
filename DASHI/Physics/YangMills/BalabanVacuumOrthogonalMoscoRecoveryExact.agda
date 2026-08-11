@@ -143,8 +143,11 @@ physicalVacuumGapAfterRecovery :
 physicalVacuumGapAfterRecovery system = record
   { limitGap = vacuumOrthogonalRecoveryTransfersUniformGap system }
 
+-- Deliberately left conditional until a pinned Agda-2.9 kernel run is observed
+-- for the cumulative Round-42 root.  The theorem term above is explicit; this
+-- metadata must not outrun validation.
 vacuumOrthogonalMoscoRecoveryLevel : ProofLevel
-vacuumOrthogonalMoscoRecoveryLevel = machineChecked
+vacuumOrthogonalMoscoRecoveryLevel = conditional
 
 physicalVacuumRecoveryProducerLevel : ProofLevel
 physicalVacuumRecoveryProducerLevel = conditional

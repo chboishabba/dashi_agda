@@ -66,11 +66,22 @@ pointwiseHalfMinusDefectLower reference defect =
     scaled =
       Norm.scaleNonnegative oneHalf
         (ℚP.nonNegative⁻¹ oneHalf) nonnegative
+
+    differenceExact :
+      (reference + defect) * (reference + defect)
+        - (oneHalf * (reference * reference) - defect * defect)
+      ≡ oneHalf * (square * square)
+    differenceExact = ℚRing.solve-∀ reference defect
+
+    differenceNonnegative :
+      0ℚ ≤
+        (reference + defect) * (reference + defect)
+          - (oneHalf * (reference * reference) - defect * defect)
+    differenceNonnegative =
+      subst (λ difference → 0ℚ ≤ difference)
+        (sym differenceExact) scaled
   in
-  subst
-    (λ difference → 0ℚ ≤ difference)
-    (ℚRing.solve-∀ reference defect)
-    scaled
+  Norm.nonnegativeDifferenceImpliesBelow differenceNonnegative
 
 sumMonotone : ∀ {Index : Set} (values : List Index) left right →
   (∀ index → left index ≤ right index) →
