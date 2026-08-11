@@ -4,9 +4,11 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
+open import Data.Integer using (ℤ)
 
 import DASHI.Biology.SSP369JResolutionBifiltrationExact as Horizon
 import DASHI.Reasoning.AttractorAlignedBranchSelection as Selection
+import DASHI.Reasoning.RelationalBranchInterference as Interference
 import DASHI.Cognition.PNF.ProofRelevantIdentityFibres as Identity
 
 ------------------------------------------------------------------------
@@ -23,6 +25,12 @@ import DASHI.Cognition.PNF.ProofRelevantIdentityFibres as Identity
 --
 -- 3/6/9 counts evidence-coordinate slots.  It does NOT constrain candidate
 -- fibre cardinality; each coordinate may range over an arbitrary Candidate.
+--
+-- The ternary direction is also not primitive.  Each coordinate retains a fine
+-- signed interaction value and the existing exact classification witness that
+-- coarsens it to reinforcing / independent / interfering.  A richer continuous
+-- application may refine the fine phase carrier further, but the coarse sign
+-- must still be derived rather than independently assigned.
 ------------------------------------------------------------------------
 
 data EvidenceFamily : Set where
@@ -36,10 +44,24 @@ record EvidenceCoordinate
   constructor evidenceCoordinate
   field
     candidate : Candidate
-    phaseDirection : Selection.InteractionDirection
-    phaseMagnitude : Nat
+    fineSignedEvidence : ℤ
+    phaseClassification :
+      Interference.ClassifiedInteraction fineSignedEvidence
 
 open EvidenceCoordinate public
+
+phaseDirection :
+  ∀ {Candidate family} →
+  EvidenceCoordinate Candidate family →
+  Selection.InteractionDirection
+phaseDirection coordinate =
+  Interference.interactionDirection (phaseClassification coordinate)
+
+phaseMagnitude :
+  ∀ {Candidate family} →
+  EvidenceCoordinate Candidate family → Nat
+phaseMagnitude coordinate =
+  Interference.interactionMagnitude (phaseClassification coordinate)
 
 H3Evidence : Set → Set
 H3Evidence Candidate =
@@ -120,6 +142,9 @@ record EvidenceHorizon369Boundary : Set where
     relationalHorizonEqualsResolutionDepth : Bool
     relationalHorizonEqualsResolutionDepthIsFalse :
       relationalHorizonEqualsResolutionDepth ≡ false
+    coarsePhaseAssignedWithoutFineSignedWitness : Bool
+    coarsePhaseAssignedWithoutFineSignedWitnessIsFalse :
+      coarsePhaseAssignedWithoutFineSignedWitness ≡ false
     h9AutomaticallyPromotesExternalIdentity : Bool
     h9AutomaticallyPromotesExternalIdentityIsFalse :
       h9AutomaticallyPromotesExternalIdentity ≡ false
@@ -132,6 +157,7 @@ open EvidenceHorizon369Boundary public
 canonicalEvidenceHorizon369Boundary : EvidenceHorizon369Boundary
 canonicalEvidenceHorizon369Boundary =
   evidenceHorizon369Boundary
+    false refl
     false refl
     false refl
     false refl
