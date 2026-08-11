@@ -28,7 +28,7 @@ module DASHI.Physics.Closure.NSTriadKNComZ2GradingRound38Exact where
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
-open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; -_)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_; -_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 
 import DASHI.Physics.Closure.NSTriadKNComPQCrossChannelRound37Exact as PQ
@@ -116,7 +116,6 @@ gradingCommutatorIsTwicePCommutator
       ( PQ.coarseToFine transport
       ∷ PQ.fineToFine transport
       ∷ x ∷ y ∷ []))
-  where open import Data.Rational.Base using (1ℚ)
 
 evenTransportCommutesWithCoarseProjection : ∀ transport state →
   PQ.commutator (evenTransport transport) state ≡ PQ.zeroState
