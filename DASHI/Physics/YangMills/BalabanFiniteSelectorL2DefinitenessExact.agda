@@ -21,6 +21,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; 1ℚ; _*_; _≤_; 1/_; ≢-nonZero)
 import Data.Rational.Properties as ℚP
+open ℚP using (_≟_)
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 open import Relation.Nullary.Decidable.Core using (yes; no)
@@ -88,7 +89,7 @@ finiteSelectorCoordinateSquareBelowNorm selector vector target =
 rationalSquareZeroImpliesZero : ∀ value →
   value * value ≡ 0ℚ → value ≡ 0ℚ
 rationalSquareZeroImpliesZero value squareZero
-  with value ℚP.≟ 0ℚ
+  with value ≟ 0ℚ
 ... | yes valueZero = valueZero
 ... | no valueNonzero =
   let
