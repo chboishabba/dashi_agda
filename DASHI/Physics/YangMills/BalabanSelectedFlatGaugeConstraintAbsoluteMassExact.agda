@@ -36,7 +36,7 @@ module DASHI.Physics.YangMills.BalabanSelectedFlatGaugeConstraintAbsoluteMassExa
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; -_; _≤_; ∣_∣)
+  (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; -_; _≤_; _/_; ∣_∣)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Data.Sum.Base using (_⊎_; inj₁; inj₂)
@@ -162,9 +162,13 @@ kroneckerDifferenceAbsoluteBound .1ℚ .1ℚ .0ℚ
     (inj₂ refl) (inj₂ refl) (inj₁ refl) = ℚP.≤-refl
 kroneckerDifferenceAbsoluteBound .1ℚ .1ℚ .1ℚ
     (inj₂ refl) (inj₂ refl) (inj₂ refl) =
+  let
+    twiceExact : 1ℚ * (1ℚ + 1ℚ) ≡ + 2 / 1
+    twiceExact = ℚRing.solve []
+  in
   subst
     (λ upper → 0ℚ ≤ upper)
-    (sym (ℚRing.solve [] : 1ℚ * (1ℚ + 1ℚ) ≡ + 2 / 1))
+    (sym twiceExact)
     (ℚP.nonNegative⁻¹ (+ 2 / 1))
 
 kroneckerBit : ∀ {A : Set} selector left right →
