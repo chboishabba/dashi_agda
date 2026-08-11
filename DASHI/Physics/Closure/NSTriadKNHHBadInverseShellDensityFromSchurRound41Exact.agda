@@ -44,7 +44,6 @@ open import Data.Rational.Base using (ℚ; 0ℚ; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚP
 open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
 
-import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
 import DASHI.Physics.Closure.NSTriadKNHHBadSharpDyadicGainRound33Exact as Sharp
 import DASHI.Physics.Closure.NSTriadKNHHBadDissipativeFloorChargingRound36Exact as Floor
 import DASHI.Physics.Closure.NSTriadKNHHBadRestrictedGainDensityRound39Exact as Gain
@@ -78,19 +77,19 @@ record OneDerivativeInverseShellDensityCertificate
 
 open OneDerivativeInverseShellDensityCertificate public
 
-inverseShellTarget :
+schurInverseShellTarget :
   ∀ {effectiveViscosity density shell} →
   OneDerivativeInverseShellDensityCertificate
     effectiveViscosity density shell → ℚ
-inverseShellTarget {shell = shell} certificate =
+schurInverseShellTarget {shell = shell} certificate =
   scaleFreeConstant certificate * Sharp.inverseDyadicScale shell
 
-inverseShellTargetNonnegative :
+schurInverseShellTargetNonnegative :
   ∀ {effectiveViscosity density shell}
     (certificate : OneDerivativeInverseShellDensityCertificate
       effectiveViscosity density shell) →
-  0ℚ ≤ inverseShellTarget certificate
-inverseShellTargetNonnegative {shell = shell} certificate =
+  0ℚ ≤ schurInverseShellTarget certificate
+schurInverseShellTargetNonnegative {shell = shell} certificate =
   let
     inverseNN = Floor.inverseDyadicScaleNonnegative shell
     instance
@@ -102,12 +101,13 @@ inverseShellTargetNonnegative {shell = shell} certificate =
   ℚP.nonNegative⁻¹
     (scaleFreeConstant certificate * Sharp.inverseDyadicScale shell)
 
-densityBelowInverseShellTarget :
+densityBelowSchurInverseShellTarget :
   ∀ {effectiveViscosity density shell}
     (certificate : OneDerivativeInverseShellDensityCertificate
       effectiveViscosity density shell) →
-  density ≤ inverseShellTarget certificate
-densityBelowInverseShellTarget {density = density} {shell = shell} certificate =
+  density ≤ schurInverseShellTarget certificate
+densityBelowSchurInverseShellTarget
+    {density = density} {shell = shell} certificate =
   let
     factorization = factorization certificate
     coefficient = OneD.normalizedTwoDerivativeSchurMagnitude
@@ -145,7 +145,7 @@ densityBelowInverseShellTarget {density = density} {shell = shell} certificate =
     densityMeaning = trans (densitySameObject certificate) physicalAtSelectedShell
   in
   subst
-    (λ lower → lower ≤ inverseShellTarget certificate)
+    (λ lower → lower ≤ schurInverseShellTarget certificate)
     (sym densityMeaning)
     coefficientScaled
 
@@ -158,9 +158,10 @@ asRound39InverseShellCertificate
     {effectiveViscosity} {density} {shell} certificate = record
   { density = density
   ; densityNonnegative = densityNonnegative certificate
-  ; inverseShellTarget = inverseShellTarget certificate
-  ; inverseShellTargetNonnegative = inverseShellTargetNonnegative certificate
-  ; densityBelowInverseShellTarget = densityBelowInverseShellTarget certificate
+  ; inverseShellTarget = schurInverseShellTarget certificate
+  ; inverseShellTargetNonnegative = schurInverseShellTargetNonnegative certificate
+  ; densityBelowInverseShellTarget =
+      densityBelowSchurInverseShellTarget certificate
   ; cells = cells certificate
   }
 
