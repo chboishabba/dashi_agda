@@ -268,6 +268,7 @@ selectedBackgroundResidualIdentityPlusInjective
     background radius left right equal =
   let
     difference = Reopen.vectorDifference left right
+    differenceNorm = L1.vectorL1 Contraction.gaugeRows difference
 
     equation :
       UnweightedReopeningEquation background difference Reopen.zeroVector
@@ -277,15 +278,32 @@ selectedBackgroundResidualIdentityPlusInjective
     residualOneTenth = Residual.residualOneStepL1Contraction
       background radius difference
 
+    scaledCoefficient :
+      differenceNorm * Contraction.oneTenth
+      ≤ differenceNorm * Reopen.oneSixth
+    scaledCoefficient =
+      Norm.scaleNonnegative differenceNorm
+        (Reopen.vectorL1Nonnegative Contraction.gaugeRows difference)
+        oneTenthBelowOneSixth
+
+    scaledCoefficientReordered :
+      Contraction.oneTenth * differenceNorm
+      ≤ Reopen.oneSixth * differenceNorm
+    scaledCoefficientReordered =
+      subst
+        (λ lower → lower ≤ Reopen.oneSixth * differenceNorm)
+        (ℚP.*-comm differenceNorm Contraction.oneTenth)
+        (subst
+          (λ upper → differenceNorm * Contraction.oneTenth ≤ upper)
+          (ℚP.*-comm differenceNorm Reopen.oneSixth)
+          scaledCoefficient)
+
     residualOneSixth :
       L1.vectorL1 Contraction.gaugeRows
         (Residual.residualApply background difference)
-      ≤ Reopen.oneSixth * L1.vectorL1 Contraction.gaugeRows difference
-    residualOneSixth = ℚP.≤-trans residualOneTenth
-      (Norm.scaleNonnegative
-        (L1.vectorL1 Contraction.gaugeRows difference)
-        (Reopen.vectorL1Nonnegative Contraction.gaugeRows difference)
-        oneTenthBelowOneSixth)
+      ≤ Reopen.oneSixth * differenceNorm
+    residualOneSixth =
+      ℚP.≤-trans residualOneTenth scaledCoefficientReordered
 
     differenceZero : ∀ row → difference row ≡ 0ℚ
     differenceZero =
