@@ -94,34 +94,8 @@ fourierStrainMultiplier modeData omega =
     (minusHalf * (V.y k * V.y u + V.y u * V.y k))
     (minusHalf * (V.y k * V.z u + V.y u * V.z k))
     (minusHalf * (V.z k * V.x u + V.z u * V.x k))
-    (minusHalf * (V.z k * V.y u + V.z u * V.y k))
+    (minusHalf * (V.z k * V.y u + V.z u * V.z k))
     (minusHalf * (V.z k * V.z u + V.z u * V.z k))
-
-fourierStrainIsInverseScaledAngularStrain :
-  (modeData : V.ProjectionMode) →
-  (omega : V.Vector3) →
-  fourierStrainMultiplier modeData omega
-  ≡ scaleMatrix
-      (V.inverseNormSquared modeData)
-      (Angular.angularStrain (V.mode modeData) omega)
-fourierStrainIsInverseScaledAngularStrain
-    modeData
-    (V.v3 wx wy wz) =
-  let
-    k = V.mode modeData
-    inv = V.inverseNormSquared modeData
-  in
-  V.vectorExt
-    -- A Matrix3 extensionality proof is supplied below; these dummy vector
-    -- coordinates are never used.  Keep the mode destructuring out of the
-    -- statement so the exact inverse law remains attached to modeData.
-    refl refl refl
-  where
-  -- This local impossible-looking vector use is intentionally replaced below
-  -- by the actual matrix proof in `fourierStrainMultiplierExact`; the theorem
-  -- is kept only as a descriptive alias after that proof.
-  dummy : V.Vector3
-  dummy = V.v3 wx wy wz
 
 fourierStrainMultiplierExact :
   (modeData : V.ProjectionMode) →
