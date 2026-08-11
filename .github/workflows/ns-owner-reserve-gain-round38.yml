@@ -1,0 +1,23 @@
+name: NS Round38 owner reserve gain
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Physics/Closure/NSTriadKNSignedOwnerCancellationFlowRound38Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNSignedOwnerCancellationNetworkRound38Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNSignedOwnerReserveGainRound38Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNSignedOwnerNetworkRound38Validation.agda'
+      - '.github/workflows/ns-owner-reserve-gain-round38.yml'
+  workflow_dispatch:
+
+jobs:
+  agda-owner-reserve:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Typecheck cumulative Round38 owner reserve gain
+        run: |
+          chmod +x scripts/agda29_without_k_wrapper.sh
+          AGDA_BIN="$PWD/scripts/agda29_without_k_wrapper.sh" \
+            scripts/run_agda29_parallel_check.sh \
+            DASHI.Physics.Closure.NSTriadKNSignedOwnerNetworkRound38Validation
