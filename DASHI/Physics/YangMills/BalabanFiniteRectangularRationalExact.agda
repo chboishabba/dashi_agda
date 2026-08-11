@@ -259,23 +259,18 @@ rectangularAdjointExact rowCarrier columnCarrier matrix vector multiplier =
               (matrix row column * vector column) * multiplier row))
       ≡ Sums.sumRational columns
           (λ column →
-            Sums.sumRational rows
-              (λ row → matrix row column * multiplier row)
-              * vector column)
+            vector column
+            * Sums.sumRational rows
+                (λ row → matrix row column * multiplier row))
     reorder = Sums.sumRationalCong columns _ _
       (λ column →
         trans
           (Sums.sumRationalCong rows _ _
             (λ row → ℚRing.solve-∀
               (matrix row column) (vector column) (multiplier row)))
-          (trans
-            (Sums.sumRationalScale
-              (vector column) rows
-              (λ row → matrix row column * multiplier row))
-            (ℚP.*-comm
-              (vector column)
-              (Sums.sumRational rows
-                (λ row → matrix row column * multiplier row)))))
+          (Sums.sumRationalScale
+            (vector column) rows
+            (λ row → matrix row column * multiplier row)))
   in
   trans expandLeft (trans swap reorder)
 
