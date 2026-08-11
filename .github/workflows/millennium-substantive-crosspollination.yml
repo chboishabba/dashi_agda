@@ -1,0 +1,102 @@
+name: Millennium substantive cross-pollination
+
+on:
+  push:
+    branches:
+      - 'agent/millennium-crosspollination-rh-hodge-bsd-pnp-poincare-voa'
+    paths:
+      - 'DASHI/Analysis/RiemannMaassMoonshineCrossPollinationExact.agda'
+      - 'DASHI/Moonshine/TrivialRationalGradedVertexAlgebraExact.agda'
+      - 'DASHI/Moonshine/GradedVertexOperatorAlgebraBoundary.agda'
+      - 'DASHI/Moonshine/MonsterGradedVOABridgeExact.agda'
+      - 'DASHI/Mathematics/NumberTheory/**'
+      - 'DASHI/Mathematics/AlgebraicGeometry/**'
+      - 'DASHI/Mathematics/Arithmetic/**'
+      - 'DASHI/Mathematics/Complexity/**'
+      - 'DASHI/Mathematics/Topology/RoundThreeSphereRicciFlowExact.agda'
+      - 'DASHI/Mathematics/Topology/PoincareGeometrizationExactBoundary.agda'
+      - 'DASHI/Mathematics/Topology/QuaternionS3PoincareCrossPollination.agda'
+      - 'DASHI/Mathematics/CrossPollination/MillenniumSubstantiveCrossPollination*.agda'
+      - 'DASHI/EverythingMillenniumSubstantiveCrossPollination.agda'
+      - 'scripts/check_millennium_substantive_crosspollination.sh'
+      - '.github/workflows/millennium-substantive-crosspollination.yml'
+  pull_request:
+    branches:
+      - 'agent/hurwitz-hopf-noether-millennium-crosspollination'
+    paths:
+      - 'DASHI/Analysis/RiemannMaassMoonshineCrossPollinationExact.agda'
+      - 'DASHI/Moonshine/TrivialRationalGradedVertexAlgebraExact.agda'
+      - 'DASHI/Moonshine/GradedVertexOperatorAlgebraBoundary.agda'
+      - 'DASHI/Moonshine/MonsterGradedVOABridgeExact.agda'
+      - 'DASHI/Mathematics/NumberTheory/**'
+      - 'DASHI/Mathematics/AlgebraicGeometry/**'
+      - 'DASHI/Mathematics/Arithmetic/**'
+      - 'DASHI/Mathematics/Complexity/**'
+      - 'DASHI/Mathematics/Topology/RoundThreeSphereRicciFlowExact.agda'
+      - 'DASHI/Mathematics/Topology/PoincareGeometrizationExactBoundary.agda'
+      - 'DASHI/Mathematics/Topology/QuaternionS3PoincareCrossPollination.agda'
+      - 'DASHI/Mathematics/CrossPollination/MillenniumSubstantiveCrossPollination*.agda'
+      - 'DASHI/EverythingMillenniumSubstantiveCrossPollination.agda'
+      - 'scripts/check_millennium_substantive_crosspollination.sh'
+      - '.github/workflows/millennium-substantive-crosspollination.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  statuses: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Check substantive Millennium cross-pollination
+        id: check
+        shell: bash
+        run: |
+          set +e
+          (
+            set -euo pipefail
+            export AGDA_FLAKE="github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin"
+            export DASHI_REPO_ROOT="$GITHUB_WORKSPACE"
+            export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
+            export AGDA_LOG_PATH="$GITHUB_WORKSPACE/millennium-substantive-agda.log"
+            export AGDA_JOBS=4
+            bash scripts/check_millennium_substantive_crosspollination.sh
+          ) > millennium-substantive-check.log 2>&1
+          status=$?
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          tail -n 600 millennium-substantive-check.log
+          exit 0
+      - name: Upload logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: millennium-substantive-logs
+          path: |
+            millennium-substantive-check.log
+            millennium-substantive-agda.log
+          if-no-files-found: warn
+      - name: Publish checker status
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          CHECK_STATUS: ${{ steps.check.outputs.status }}
+        shell: bash
+        run: |
+          state=success
+          description='Substantive Millennium Agda checker passed'
+          if [[ "$CHECK_STATUS" != '0' ]]; then
+            state=failure
+            description='Substantive Millennium Agda checker failed'
+          fi
+          gh api --method POST \
+            "repos/${GITHUB_REPOSITORY}/statuses/${GITHUB_SHA}" \
+            -f state="$state" \
+            -f context='millennium-substantive-agda' \
+            -f description="$description"
+      - name: Fail on checker error
+        if: steps.check.outputs.status != '0'
+        run: exit 1

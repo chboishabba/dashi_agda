@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - 'agent/ym-clay-uniformity-routes-round28'
+      - 'agent/ym-clay-alpha-round29-unified-gates-countermodels'
     paths:
       - 'DASHI/Physics/Common/**'
       - 'DASHI/Physics/YangMills/**'

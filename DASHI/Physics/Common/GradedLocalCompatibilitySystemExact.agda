@@ -21,8 +21,8 @@ module DASHI.Physics.Common.GradedLocalCompatibilitySystemExact where
 -- A domain-neutral carrier for the exact common architecture used by the
 -- Moonshine/VOA, Navier--Stokes shell and Yang--Mills RG lanes:
 -- graded states, local operations, declared output grades, separating probes,
--- compatibility defects and defect transport.  The observation carrier is
--- separate from the state carrier.  No theorem identifies the concrete notions
+-- compatibility defects and defect transport. The observation carrier is
+-- separate from the state carrier. No theorem identifies the concrete notions
 -- of locality in those three domains.
 ------------------------------------------------------------------------
 
