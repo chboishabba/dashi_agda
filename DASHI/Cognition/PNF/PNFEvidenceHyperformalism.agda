@@ -13,6 +13,7 @@ import DASHI.Analysis.GlassesProjectionInvolutionExact as Glasses
 import DASHI.Reasoning.RelationalTernaryPhaseGeometry as Phase
 import DASHI.Reasoning.RelationalBranchInterference as Interference
 import DASHI.Biology.TraumaPsychogeographicMetricExact as TraumaMetric
+import DASHI.Biology.ReachableSectorEntropyExact as ReachabilityReference
 
 import DASHI.Cognition.PNF.ReopenableEvidenceFibre as Reopenable
 import DASHI.Cognition.PNF.EvidenceHorizon369 as Horizon
@@ -70,6 +71,20 @@ record PNFEvidenceHyperformalism
 open PNFEvidenceHyperformalism public
 
 ------------------------------------------------------------------------
+-- Exact complementary-reading reference by direct reuse.
+--
+-- GlassesSystem is already generic in its coarse Base.  Instantiating Base with
+-- Candidate gives an exact *two-point fibre observable* model over every
+-- candidate base, retaining its existing P, Q and J with J^2=I, JPJ=Q and
+-- JQJ=P.  This is the repository's adversarial/complementary-view reference;
+-- it remains a two-point rational fibre and is not promoted to a theorem about
+-- every semantic hyperfibre.
+------------------------------------------------------------------------
+
+module ComplementaryReadingReference {Candidate : Set} =
+  Glasses.GlassesSystem {Base = Candidate}
+
+------------------------------------------------------------------------
 -- Exact repository reference spine.
 --
 -- The finite two-point averaging and Glasses P/Q/J theorems remain exact
@@ -88,6 +103,7 @@ record ExistingReferenceSpine : Set where
     branchInterferenceBoundary : Interference.BranchInterferenceAuthorityBoundary
     typedHyperfabricBoundary : Hyperfabric.TypedHyperfabricAuthorityBoundary
     pathAccessibilityBoundary : TraumaMetric.TraumaPsychogeographicBoundary
+    reachableSectorBoundary : ReachabilityReference.ReachableSectorBoundary
 
 open ExistingReferenceSpine public
 
@@ -100,6 +116,7 @@ canonicalExistingReferenceSpine =
     Interference.canonicalBranchInterferenceAuthorityBoundary
     Hyperfabric.canonicalTypedHyperfabricAuthorityBoundary
     TraumaMetric.canonicalTraumaPsychogeographicBoundary
+    ReachabilityReference.canonicalReachableSectorBoundary
 
 -- The finite P/Q/J reference is not automatically a universal semantic
 -- decomposition for arbitrary fibres; an application must construct the needed
