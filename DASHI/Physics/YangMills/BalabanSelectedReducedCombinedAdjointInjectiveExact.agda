@@ -172,13 +172,20 @@ averageNormZeroFromCombinedZero :
   Floor.averageMultiplierNormSq selected ≡ 0ℚ
 averageNormZeroFromCombinedZero selected combinedZero =
   let
-    averageBelowCombined :
-      Floor.averageMultiplierNormSq selected
-      ≤ Floor.reducedCombinedMultiplierNormSq selected
-    averageBelowCombined =
-      ℚP.+-monoʳ-≤
-        (Floor.averageMultiplierNormSq selected)
+    average = Floor.averageMultiplierNormSq selected
+    rawAverageBelowCombined :
+      average + 0ℚ ≤ Floor.reducedCombinedMultiplierNormSq selected
+    rawAverageBelowCombined =
+      ℚP.+-monoʳ-≤ average
         (Floor.gaugeMultiplierNormNonnegative selected)
+
+    averageBelowCombined :
+      average ≤ Floor.reducedCombinedMultiplierNormSq selected
+    averageBelowCombined =
+      subst
+        (λ lower → lower ≤ Floor.reducedCombinedMultiplierNormSq selected)
+        (ℚP.+-identityʳ average)
+        rawAverageBelowCombined
 
     averageBelowZero : Floor.averageMultiplierNormSq selected ≤ 0ℚ
     averageBelowZero = subst
