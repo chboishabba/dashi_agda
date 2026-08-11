@@ -19,6 +19,7 @@ import DASHI.Governance.TransitionResidual
 import DASHI.Governance.RevolutionarySourceAtlas
 import DASHI.Governance.RevolutionaryPracticeBraid
 import DASHI.Governance.TraumaMemorySublationBoundary
+import DASHI.Governance.CabarlahTraumaProjectionBridgeExact
 import DASHI.Governance.ComparativeCrisisClimateAtlas
 import DASHI.Governance.RevolutionaryAdjunctRegression
 import DASHI.Governance.Sudan.RCEPPSourceBoundary
