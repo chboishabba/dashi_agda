@@ -27,6 +27,7 @@ open import DASHI.Cognition.PNF.ProofRelevantFactorDerivations public
 open import DASHI.Cognition.PNF.BoundedFactorCompositionExecution public
 open import DASHI.Cognition.PNF.BoundedExecutionCarrier public
 open import DASHI.Cognition.PNF.ParserArgumentSupportGluing public
+open import DASHI.Cognition.PNF.ContextualRepresentationOrbit public
 open import DASHI.Cognition.PNF.IdentityProofUtility public
 open import DASHI.Cognition.PNF.EvidenceClassificationEdge public
 open import DASHI.Cognition.PNF.EvidenceHorizon369 public
