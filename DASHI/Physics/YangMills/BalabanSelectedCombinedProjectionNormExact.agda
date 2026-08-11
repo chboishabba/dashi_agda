@@ -37,7 +37,8 @@ open import Agda.Builtin.Equality using (_≡_)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using
+  (cong; cong₂; subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
@@ -167,12 +168,16 @@ selectedProjectionNormSqBelowRaw multiplier =
       Rows.selectedCombinedConstraintRowCarrier
       (Projection.selectedConstantComplement multiplier)
 
+    addComplement :
+      projectedNorm + 0ℚ ≤ projectedNorm + complementNorm
+    addComplement = ℚP.+-mono-≤ ℚP.≤-refl complementNonnegative
+
     belowSum : projectedNorm ≤ projectedNorm + complementNorm
     belowSum =
       subst
-        (λ selected → projectedNorm ≤ selected)
-        (ℚRing.solve-∀ projectedNorm complementNorm)
-        (ℚP.+-mono-≤ ℚP.≤-refl complementNonnegative)
+        (λ lower → lower ≤ projectedNorm + complementNorm)
+        (ℚP.+-identityʳ projectedNorm)
+        addComplement
   in
   subst
     (λ upper → projectedNorm ≤ upper)
