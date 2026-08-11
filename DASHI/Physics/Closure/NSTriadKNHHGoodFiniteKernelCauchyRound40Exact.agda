@@ -51,10 +51,10 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base using
-  (ℚ; 0ℚ; _+_; _*_; _≤_; nonNegative)
+  (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; subst; sym)
 
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteWeightedCauchyExact as Cauchy
@@ -115,6 +115,33 @@ weightedLocalMass :
 weightedLocalMass [] = 0ℚ
 weightedLocalMass (sample ∷ rest) =
   kernelMagnitude sample * localWeight sample + weightedLocalMass rest
+
+kernelMassNonnegative :
+  ∀ {parameter}
+    (samples : List (HHGoodKernelSample parameter)) →
+  0ℚ ≤ kernelMass samples
+kernelMassNonnegative [] = ℚP.≤-refl
+kernelMassNonnegative (sample ∷ rest) =
+  L2.addNonnegative
+    (kernelMagnitudeNonnegative sample)
+    (kernelMassNonnegative rest)
+
+weightedLocalMassNonnegative :
+  ∀ {parameter}
+    (samples : List (HHGoodKernelSample parameter)) →
+  0ℚ ≤ weightedLocalMass samples
+weightedLocalMassNonnegative [] = ℚP.≤-refl
+weightedLocalMassNonnegative (sample ∷ rest) =
+  L2.addNonnegative
+    (let
+      instance
+        kNN = nonNegative (kernelMagnitudeNonnegative sample)
+        wNN = nonNegative (localWeightNonnegative sample)
+        pNN = ℚP.nonNeg*nonNeg⇒nonNeg
+          (kernelMagnitude sample) (localWeight sample)
+     in ℚP.nonNegative⁻¹
+          (kernelMagnitude sample * localWeight sample))
+    (weightedLocalMassNonnegative rest)
 
 leftEnergyIsKernelMass :
   ∀ {parameter} (samples : List (HHGoodKernelSample parameter)) →
@@ -190,17 +217,23 @@ finiteKernelWeightedCauchy :
   L2.square (weightedStretch samples)
   ≤ kernelMass samples * weightedStretchSquareMass samples
 finiteKernelWeightedCauchy samples =
+  let
+    raw = Cauchy.finiteWeightedCauchy (mapWeightedPairs samples)
+    upperChanged =
+      subst
+        (λ upper →
+          L2.square (Cauchy.weightedPairing (mapWeightedPairs samples))
+          ≤ upper)
+        (cong₂ _*_
+          (leftEnergyIsKernelMass samples)
+          (rightEnergyIsStretchSquareMass samples))
+        raw
+  in
   subst
     (λ lower →
       lower ≤ kernelMass samples * weightedStretchSquareMass samples)
-    (pairingIsWeightedStretch samples)
-    (subst
-      (λ upper →
-        L2.square (Cauchy.weightedPairing (mapWeightedPairs samples)) ≤ upper)
-      (cong₂ _*_
-        (leftEnergyIsKernelMass samples)
-        (rightEnergyIsStretchSquareMass samples))
-      (Cauchy.finiteWeightedCauchy (mapWeightedPairs samples)))
+    (cong L2.square (pairingIsWeightedStretch samples))
+    upperChanged
 
 finiteHHGoodKernelThresholdBound :
   ∀ {parameter}
@@ -211,20 +244,13 @@ finiteHHGoodKernelThresholdBound :
 finiteHHGoodKernelThresholdBound {parameter} samples =
   let
     cauchy = finiteKernelWeightedCauchy samples
-    massNN : 0ℚ ≤ kernelMass samples
-    massNN =
-      subst
-        (λ value → 0ℚ ≤ value)
-        (sym (leftEnergyIsKernelMass samples))
-        (Cauchy.leftEnergyNonnegative (mapWeightedPairs samples))
-
     local = weightedStretchSquareBelowThresholdLocalMass samples
     scaled :
       kernelMass samples * weightedStretchSquareMass samples
       ≤ kernelMass samples
           * (Threshold.threshold parameter * weightedLocalMass samples)
     scaled =
-      let instance massNNI = nonNegative massNN
+      let instance massNNI = nonNegative (kernelMassNonnegative samples)
       in ℚP.*-monoˡ-≤-nonNeg (kernelMass samples) local
   in
   ℚP.≤-trans cauchy scaled
@@ -255,11 +281,9 @@ finiteHHGoodUniformKernelBound {parameter} {samples} certificate =
       0ℚ ≤ Threshold.threshold parameter * weightedLocalMass samples
     thresholdLocalNN =
       let
-        localNN : 0ℚ ≤ weightedLocalMass samples
-        localNN = localMassNonnegative samples
         instance
           thresholdNNI = nonNegative (Threshold.thresholdNonnegative parameter)
-          localNNI = nonNegative localNN
+          localNNI = nonNegative (weightedLocalMassNonnegative samples)
           productNNI = ℚP.nonNeg*nonNeg⇒nonNeg
             (Threshold.threshold parameter) (weightedLocalMass samples)
       in
@@ -278,23 +302,6 @@ finiteHHGoodUniformKernelBound {parameter} {samples} certificate =
         (kernelMassBelowUniformConstant certificate)
   in
   ℚP.≤-trans first second
-  where
-  localMassNonnegative :
-    ∀ {parameter}
-      (items : List (HHGoodKernelSample parameter)) →
-    0ℚ ≤ weightedLocalMass items
-  localMassNonnegative [] = ℚP.≤-refl
-  localMassNonnegative (sample ∷ rest) =
-    L2.addNonnegative
-      (let
-        instance
-          kNN = nonNegative (kernelMagnitudeNonnegative sample)
-          wNN = nonNegative (localWeightNonnegative sample)
-          pNN = ℚP.nonNeg*nonNeg⇒nonNeg
-            (kernelMagnitude sample) (localWeight sample)
-       in ℚP.nonNegative⁻¹
-            (kernelMagnitude sample * localWeight sample))
-      (localMassNonnegative rest)
 
 hhGoodFiniteKernelCauchyClosed : Bool
 hhGoodFiniteKernelCauchyClosed = true
