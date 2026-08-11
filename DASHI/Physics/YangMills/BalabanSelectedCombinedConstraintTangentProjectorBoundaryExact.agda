@@ -33,14 +33,12 @@ module DASHI.Physics.YangMills.BalabanSelectedCombinedConstraintTangentProjector
 open import Relation.Nullary.Negation.Core using (¬_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
-import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreCarrier as Block
-import DASHI.Physics.YangMills.BalabanPath4AxisAverageExact as Path4
+import DASHI.Physics.YangMills.BalabanP33PhysicalRationalWilsonPlaquetteJetExact as Physical
 import DASHI.Physics.YangMills.BalabanSelectedCombinedConstraintTangentProjectorExact as Projector
 import DASHI.Physics.YangMills.BalabanSelectedCombinedConstraintRawGramNoGoExact as NoGo
 
 selectedFlatRawCombinedGramInverseImpossible :
-  ∀ site → ¬ Projector.FullGramInverseCertificate
-    DASHI.Physics.YangMills.BalabanP33PhysicalRationalWilsonPlaquetteJetExact.identityBackground
+  ∀ site → ¬ Projector.FullGramInverseCertificate Physical.identityBackground
 selectedFlatRawCombinedGramInverseImpossible =
   NoGo.rawCombinedFlatGramHasNoTwoSidedInverse
 
