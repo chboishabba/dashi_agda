@@ -26,29 +26,26 @@ module DASHI.Physics.YangMills.BalabanSelectedPhysicalTangentHessianExact where
 --
 --       DF_A[h] = 0,   DQ_A[h] = 0.
 --
--- Hence the two residual first-norm terms vanish *for the same h*, and the
+-- Hence the two residual first-norm terms vanish for the same h, and the
 -- literal total second variation is exactly the Wilson action second variation.
 -- Therefore the existing 1/32 lower bound descends to the physical Wilson
 -- Hessian itself on the linearized constraint kernel.
 --
--- This theorem is deliberately independent of a Lagrange multiplier.  For an
--- equality-constrained curve C(gamma(t))=0, differentiating twice gives
--- DC_A[gamma''(0)] + D2C_A[h,h]=0; the stationarity multiplier accounts for
--- this curvature when one computes the second derivative along the manifold.
--- The present statement is the simpler penalty-to-action identity on vectors
--- whose literal first residuals vanish, and is exactly what the current
--- finite-coercivity construction can justify without silently changing the
--- functional being differentiated.
+-- This theorem does not identify the nonlinear tangent space by itself.  That
+-- remains the quantitative implicit-function/orbit theorem.  It proves the
+-- exact algebraic implication needed once those physical tangent first-zero
+-- witnesses are supplied.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _*_; _≤_)
-open import Relation.Binary.PropositionalEquality using (cong; cong₂; subst; sym; trans)
+open import Agda.Builtin.Equality using (_≡_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _*_; _≤_)
+import Data.Rational.Tactic.RingSolver as ℚRing
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; subst; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Coordinates
-import DASHI.Physics.YangMills.BalabanP33PhysicalRationalWilsonPlaquetteJetExact as Physical
 import DASHI.Physics.YangMills.BalabanP33LiteralGaugeConstraintSecondVariationExact as Jets
+import DASHI.Physics.YangMills.BalabanP33PhysicalBackgroundGaugeResidualExact as GaugeResidual
 import DASHI.Physics.YangMills.BalabanP33PhysicalBackgroundGaugeParameterizedYoungExact as Relaxed
 import DASHI.Physics.YangMills.BalabanP33PhysicalWilsonSignedGlobalExact as WilsonGlobal
 import DASHI.Physics.YangMills.BalabanP33Path4SignedRemainderCoercivityExact as P33
@@ -74,9 +71,11 @@ residualFirstNormSquaredZero residual tangent =
     (λ _ → 0ℚ)
     (Jets.coordinates residual)
     (λ index →
-      cong₂ _*_
-        (firstZero tangent index)
-        (firstZero tangent index))
+      trans
+        (cong₂ _*_
+          (firstZero tangent index)
+          (firstZero tangent index))
+        (ℚRing.solve []))
 
 record SelectedPhysicalConstraintTangent
     {Perturbation ConstraintIndex : Set}
@@ -117,40 +116,22 @@ selectedTangentTotalEqualsWilson model h tangent =
     blockFirstNormZero = residualFirstNormSquaredZero
       (Jets.constraintResidual dataSet) (blockConstraintFirstZero tangent)
 
-    atExact = Jets.literalTotalSecondVariationAtExactBackground dataSet
-      (Selected.meanZero model h `seqGaugeExact` model h)
-      (Selected.constraintExact model h)
+    gaugeExact :
+      Jets.ExactResidualBackground (Jets.gaugeResidual dataSet)
+    gaugeExact = GaugeResidual.backgroundGaugeResidualExact
+      (Selected.backgroundOf model h) (Selected.physicalFieldOf model h)
+
+    exactCollapse = Jets.literalTotalSecondVariationAtExactBackground
+      dataSet gaugeExact (Selected.constraintExact model h)
   in
-  trans atExact
+  trans exactCollapse
     (trans
       (cong
         (λ residualTerms → Jets.wilsonSecondVariation dataSet + residualTerms)
         (trans
           (cong₂ _+_ gaugeFirstNormZero blockFirstNormZero)
-          (zeroPlusZero)))
-      (wilsonPlusZero dataSet))
-  where
-    seqGaugeExact :
-      ∀ {Perturbation ConstraintIndex}
-        (meanZeroWitness : Selected.meanZero model h) →
-        (selectedModel : Selected.SelectedBackgroundPerturbationModel
-          Perturbation ConstraintIndex) →
-        (selectedH : Perturbation) →
-      Jets.ExactResidualBackground
-        (Jets.gaugeResidual
-          (Selected.selectedLiteralSecondVariation selectedModel selectedH))
-    seqGaugeExact meanZeroWitness selectedModel selectedH =
-      DASHI.Physics.YangMills.BalabanP33PhysicalBackgroundGaugeResidualExact.backgroundGaugeResidualExact
-        (Selected.backgroundOf selectedModel selectedH)
-        (Selected.physicalFieldOf selectedModel selectedH)
-
-    zeroPlusZero : 0ℚ + 0ℚ ≡ 0ℚ
-    zeroPlusZero = refl
-
-    wilsonPlusZero : ∀ dataSet →
-      Jets.wilsonSecondVariation dataSet + 0ℚ
-      ≡ Jets.wilsonSecondVariation dataSet
-    wilsonPlusZero dataSet = refl
+          (ℚRing.solve [])))
+      (ℚRing.solve-∀ (Jets.wilsonSecondVariation dataSet)))
 
 selectedPhysicalWilsonHessianOneThirtySecond :
   ∀ {Perturbation ConstraintIndex}
