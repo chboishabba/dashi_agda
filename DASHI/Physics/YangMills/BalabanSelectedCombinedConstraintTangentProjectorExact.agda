@@ -21,28 +21,24 @@ module DASHI.Physics.YangMills.BalabanSelectedCombinedConstraintTangentProjector
 --
 -- Construct the physical tangent projector from the ACTUAL 780-row selected
 -- constraint, not from the separate 768-row gauge-only Green.  Given a
--- proof-relevant two-sided inverse of
---
---       K_A = L_A L_A^*
---
--- on the complete selected multiplier carrier, define
+-- proof-relevant two-sided inverse of K_A=L_A L_A^* on the complete selected
+-- multiplier carrier, define
 --
 --       Pi_A = I - L_A^* K_A^-1 L_A.
 --
--- Finite matrix algebra proves
+-- Finite matrix algebra proves L_A Pi_A=0, Pi_A fixes ker(L_A), Pi_A^2=Pi_A,
+-- and therefore
 --
---       L_A Pi_A = 0,
---       Pi_A h = h  for L_A h = 0,
---       Pi_A^2 = Pi_A.
+--       h in ker(L_A)  <=>  Pi_A h = h.
 --
--- Thus im(Pi_A)=ker(L_A) on this literal finite carrier.  The module does not
--- confuse the gauge-only regularized inverse with this full combined Gram
--- inverse.  Constructing the latter (or a correct Schur reduction to it) is a
--- separate physical producer.
+-- The module deliberately does not use the gauge-only regularized inverse as a
+-- substitute for the full 780-row inverse.  Constructing the latter, or a
+-- correct Schur reduction to it, remains a separate physical producer.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Data.Product.Base using (_×_; _,_)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; _+_; _-_; _*_; -_)
 import Data.Rational.Tactic.RingSolver as ℚRing
@@ -52,8 +48,10 @@ open import Relation.Binary.PropositionalEquality using
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
 import DASHI.Physics.YangMills.BalabanFiniteSumFubiniExact as Fubini
+import DASHI.Physics.YangMills.BalabanFiniteRectangularRationalExact as Rect
 import DASHI.Physics.YangMills.BalabanConstructiveRationalMatrixInverseExact as Matrix
 import DASHI.Physics.YangMills.BalabanP33FiniteKKTAdmissibleProjectorExact as KKT
+import DASHI.Physics.YangMills.BalabanP33PhysicalRationalWilsonPlaquetteJetExact as Physical
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundCombinedConstraintMatrixExact as Combined
 import DASHI.Physics.YangMills.BalabanSelectedCombinedConstraintRowCarrierExact as Rows
 import DASHI.Physics.YangMills.BalabanSelectedCombinedConstraintFiniteKKTExact as SelectedKKT
@@ -86,31 +84,39 @@ combinedConstraintDifferenceExact background left right row =
     matrix = Combined.selectedBackgroundLinearizedConstraintMatrix background
     leftTerm = λ column → matrix row column * left column
     rightTerm = λ column → matrix row column * right column
-
-    expanded = Sums.sumRationalCong
+  in
+  trans
+    (Sums.sumRationalCong
       (Matrix.coordinates KKT.physicalStateCarrier) _ _
       (λ column → ℚRing.solve-∀
-        (matrix row column) (left column) (right column))
-
-    split = Fubini.sumRationalAdd
-      (Matrix.coordinates KKT.physicalStateCarrier)
-      leftTerm (λ column → - rightTerm column)
-
-    negate = Sums.sumRationalNegate
-      (Matrix.coordinates KKT.physicalStateCarrier) rightTerm
-  in
-  trans expanded
-    (trans split
+        (matrix row column) (left column) (right column)))
+    (trans
+      (Fubini.sumRationalAdd
+        (Matrix.coordinates KKT.physicalStateCarrier)
+        leftTerm (λ column → - rightTerm column))
       (trans
         (cong
           (Sums.sumRational
             (Matrix.coordinates KKT.physicalStateCarrier) leftTerm +_)
-          negate)
+          (Sums.sumRationalNegate
+            (Matrix.coordinates KKT.physicalStateCarrier) rightTerm))
         (ℚRing.solve-∀
           (Sums.sumRational
             (Matrix.coordinates KKT.physicalStateCarrier) leftTerm)
           (Sums.sumRational
             (Matrix.coordinates KKT.physicalStateCarrier) rightTerm))))
+
+combinedConstraintRespectsPointwise :
+  ∀ background left right →
+  (∀ coordinate → left coordinate ≡ right coordinate) →
+  ∀ row →
+  Combined.selectedBackgroundCombinedConstraintApply background left row
+  ≡ Combined.selectedBackgroundCombinedConstraintApply background right row
+combinedConstraintRespectsPointwise background left right pointwise row =
+  let matrix = Combined.selectedBackgroundLinearizedConstraintMatrix background in
+  Sums.sumRationalCong
+    (Matrix.coordinates KKT.physicalStateCarrier) _ _
+    (λ coordinate → cong (matrix row coordinate *_) (pointwise coordinate))
 
 matrixApplyZeroExact :
   ∀ {Index : Set}
@@ -129,9 +135,8 @@ selectedAdjointZeroExact :
     background zeroMultiplier coordinate ≡ 0ℚ
 selectedAdjointZeroExact background coordinate =
   let
-    transpose =
-      DASHI.Physics.YangMills.BalabanFiniteRectangularRationalExact.transposeRectangular
-        (Combined.selectedBackgroundLinearizedConstraintMatrix background)
+    transpose = Rect.transposeRectangular
+      (Combined.selectedBackgroundLinearizedConstraintMatrix background)
   in
   trans
     (Sums.sumRationalCong Rows.selectedCombinedConstraintRows _ (λ _ → 0ℚ)
@@ -139,23 +144,19 @@ selectedAdjointZeroExact background coordinate =
     (sumZero Rows.selectedCombinedConstraintRows)
 
 FullGramInverseCertificate :
-  PhysicalBackground → Set₁
-FullGramInverseCertificate = λ background →
+  Physical.RationalSU2Background4 → Set₁
+FullGramInverseCertificate background =
   Matrix.RationalMatrixInverseCertificate
     Rows.selectedCombinedConstraintRowCarrier
     (Combined.selectedBackgroundConstraintGram background)
-  where
-  open import DASHI.Physics.YangMills.BalabanP33PhysicalRationalWilsonPlaquetteJetExact
-    using (RationalSU2Background4)
-  PhysicalBackground = RationalSU2Background4
 
 selectedMultiplierFromState :
   ∀ {background} → FullGramInverseCertificate background →
   StateVector → MultiplierVector
-selectedMultiplierFromState certificate state =
+selectedMultiplierFromState {background} certificate state =
   Matrix.applyMatrix Rows.selectedCombinedConstraintRowCarrier
     (Matrix.inverseMatrix certificate)
-    (Combined.selectedBackgroundCombinedConstraintApply _ state)
+    (Combined.selectedBackgroundCombinedConstraintApply background state)
 
 selectedNormalCorrection :
   ∀ {background} → FullGramInverseCertificate background →
@@ -182,22 +183,12 @@ selectedNormalConstraintEqualsSource
   let
     source = Combined.selectedBackgroundCombinedConstraintApply background state
     multiplier = selectedMultiplierFromState certificate state
-
-    toGram :
-      Combined.selectedBackgroundCombinedConstraintApply background
-        (selectedNormalCorrection certificate state) row
-      ≡ SelectedKKT.selectedCombinedConstraintGramApply
-          background multiplier row
-    toGram = sym
-      (SelectedKKT.selectedCombinedConstraintGramActionExact
-        background multiplier row)
-
-    inverseRight :
-      SelectedKKT.selectedCombinedConstraintGramApply background multiplier row
-      ≡ source row
-    inverseRight = Matrix.matrixInverseRightExact certificate source row
   in
-  trans toGram inverseRight
+  trans
+    (sym
+      (SelectedKKT.selectedCombinedConstraintGramActionExact
+        background multiplier row))
+    (Matrix.matrixInverseRightExact certificate source row)
 
 selectedPhysicalTangentProjectorInKernel :
   ∀ {background}
@@ -231,14 +222,11 @@ selectedMultiplierOfKernelIsZero :
   LinearizedConstraintKernel {background} state →
   ∀ row → selectedMultiplierFromState certificate state row ≡ 0ℚ
 selectedMultiplierOfKernelIsZero
-    {background} certificate state inKernel row =
+    certificate state inKernel row =
   let
-    source = Combined.selectedBackgroundCombinedConstraintApply background state
-
-    sourceCong : ∀ selected → source selected ≡ zeroMultiplier selected
-    sourceCong selected = inKernel selected
-
     inverse = Matrix.inverseMatrix certificate
+    source = λ selected →
+      Combined.selectedBackgroundCombinedConstraintApply _ state selected
 
     actionCong :
       Matrix.applyMatrix Rows.selectedCombinedConstraintRowCarrier inverse source row
@@ -246,11 +234,10 @@ selectedMultiplierOfKernelIsZero
           zeroMultiplier row
     actionCong =
       Sums.sumRationalCong Rows.selectedCombinedConstraintRows _ _
-        (λ column → cong (inverse row column *_) (sourceCong column))
+        (λ column → cong (inverse row column *_) (inKernel column))
   in
   trans actionCong
-    (matrixApplyZeroExact
-      Rows.selectedCombinedConstraintRowCarrier inverse row)
+    (matrixApplyZeroExact Rows.selectedCombinedConstraintRowCarrier inverse row)
 
 selectedNormalCorrectionOfKernelZero :
   ∀ {background}
@@ -264,20 +251,13 @@ selectedNormalCorrectionOfKernelZero
     multiplier = selectedMultiplierFromState certificate state
     multiplierZero = selectedMultiplierOfKernelIsZero
       certificate state inKernel
-
-    transpose =
-      DASHI.Physics.YangMills.BalabanFiniteRectangularRationalExact.transposeRectangular
-        (Combined.selectedBackgroundLinearizedConstraintMatrix background)
-
-    replace :
-      SelectedKKT.selectedCombinedConstraintTransposeApply background multiplier coordinate
-      ≡ SelectedKKT.selectedCombinedConstraintTransposeApply
-          background zeroMultiplier coordinate
-    replace =
-      Sums.sumRationalCong Rows.selectedCombinedConstraintRows _ _
-        (λ row → cong (transpose coordinate row *_) (multiplierZero row))
+    transpose = Rect.transposeRectangular
+      (Combined.selectedBackgroundLinearizedConstraintMatrix background)
   in
-  trans replace (selectedAdjointZeroExact background coordinate)
+  trans
+    (Sums.sumRationalCong Rows.selectedCombinedConstraintRows _ _
+      (λ row → cong (transpose coordinate row *_) (multiplierZero row)))
+    (selectedAdjointZeroExact background coordinate)
 
 selectedPhysicalTangentProjectorFixesKernel :
   ∀ {background}
@@ -312,18 +292,24 @@ selectedLinearizedConstraintKernelIffProjectorFixed :
   ∀ {background}
     (certificate : FullGramInverseCertificate background)
     state →
-  (LinearizedConstraintKernel {background} state)
-  × (∀ coordinate →
+  (LinearizedConstraintKernel {background} state →
+    ∀ coordinate →
       selectedPhysicalTangentProjector certificate state coordinate
       ≡ state coordinate)
-selectedLinearizedConstraintKernelIffProjectorFixed certificate state =
-  let
-    projectedKernel = selectedPhysicalTangentProjectorInKernel certificate state
-  in
-  projectedKernel ,
-    selectedPhysicalTangentProjectorFixesKernel certificate state projectedKernel
-  where
-    open import Data.Product.Base using (_×_; _,_)
+  × ((∀ coordinate →
+      selectedPhysicalTangentProjector certificate state coordinate
+      ≡ state coordinate) →
+    LinearizedConstraintKernel {background} state)
+selectedLinearizedConstraintKernelIffProjectorFixed
+    {background} certificate state =
+  selectedPhysicalTangentProjectorFixesKernel certificate state ,
+  λ fixed row →
+    trans
+      (combinedConstraintRespectsPointwise
+        background state
+        (selectedPhysicalTangentProjector certificate state)
+        (λ coordinate → sym (fixed coordinate)) row)
+      (selectedPhysicalTangentProjectorInKernel certificate state row)
 
 selectedFullConstraintTangentProjectorLevel : ProofLevel
 selectedFullConstraintTangentProjectorLevel = machineChecked
