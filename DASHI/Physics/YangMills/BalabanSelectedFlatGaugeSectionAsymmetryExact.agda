@@ -16,7 +16,7 @@ module DASHI.Physics.YangMills.BalabanSelectedFlatGaugeSectionAsymmetryExact whe
 -- DASHI CONTRIBUTION
 --
 -- Exhibit the asymmetry of the flat gauge quotient/section concretely.  The
--- based section maps a nonzero constant gauge multiplier to the zero
+-- based section maps a nonzero constant gauge multiplier pointwise to the zero
 -- representative.  Hence selecting a representative after quotienting is not
 -- the identity on the unreduced carrier: information along the redundant
 -- constant direction has really been discarded.
@@ -29,9 +29,11 @@ module DASHI.Physics.YangMills.BalabanSelectedFlatGaugeSectionAsymmetryExact whe
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using ([])
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; 1ℚ; _<_; _/_)
 import Data.Rational.Properties as ℚP
+import Data.Rational.Tactic.RingSolver as ℚRing
 open ℚP using (_<?_)
 open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
 open import Relation.Nullary.Decidable.Core using (toWitness)
@@ -45,12 +47,19 @@ import DASHI.Physics.YangMills.BalabanSelectedFlatGaugeBasedSectionExact as Base
 unitConstantMultiplier : Based.GaugeMultiplier
 unitConstantMultiplier row = 1ℚ
 
+unitConstantBasedRepresentativePointwiseZero :
+  ∀ coordinate site →
+  Based.basedRepresentative unitConstantMultiplier (pair coordinate site)
+  ≡ 0ℚ
+unitConstantBasedRepresentativePointwiseZero coordinate site = ℚRing.solve []
+
 unitConstantBasedAtBaseZero :
   Based.basedRepresentative unitConstantMultiplier
     (pair Coordinates.coordinateX Based.baseSite)
   ≡ 0ℚ
 unitConstantBasedAtBaseZero =
-  Based.basedRepresentativeAtBase unitConstantMultiplier Coordinates.coordinateX
+  unitConstantBasedRepresentativePointwiseZero
+    Coordinates.coordinateX Based.baseSite
 
 unitConstantAtBaseOne :
   unitConstantMultiplier (pair Coordinates.coordinateX Based.baseSite) ≡ 1ℚ
