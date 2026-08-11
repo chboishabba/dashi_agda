@@ -4,7 +4,7 @@ set -euo pipefail
 root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$root"
 
-bash scripts/check_ns_periodic_pv_odd_com_f4_round39.sh
+DASHI_SKIP_ROUND40=1 bash scripts/check_ns_periodic_pv_odd_com_f4_round39.sh
 
 files=(
   DASHI/Physics/Closure/NSTriadKNHHUnifiedDirectionalDefectRound40Exact.agda
