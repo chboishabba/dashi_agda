@@ -1,0 +1,74 @@
+name: Monster 3B actual kernel character round 4
+
+on:
+  push:
+    branches: ['agent/monster-3b-actual-kernel-character-round4']
+  pull_request:
+    branches:
+      - 'agent/monster-3b-orbifold-local-module-round4'
+      - 'agent/monster-3b-actual-kernel-character-round4'
+    paths:
+      - 'DASHI/Moonshine/Monster3BKernelCharacterCriterionExact.agda'
+      - 'DASHI/Moonshine/Monster3BActualKernelCharacterPromotionExact.agda'
+      - 'DASHI/Moonshine/Monster3BFiniteHeisenbergCommutantExact.agda'
+      - 'DASHI/Moonshine/Monster3BFiniteHeisenbergProjectionNoGoExact.agda'
+      - 'DASHI/Moonshine/Monster3BFiniteStoneVonNeumannMultiplicityExact.agda'
+      - 'DASHI/Moonshine/Monster3BMultiplicityEvaluationExact.agda'
+      - 'DASHI/Moonshine/Monster3BActualMultiplicityEvaluationFromRecognitionExact.agda'
+      - 'DASHI/Moonshine/Monster3BMultiplicityCharacterSafeReconstructionExact.agda'
+      - 'DASHI/Moonshine/Monster3BActualKernelCharacterRound4Validation.agda'
+      - 'scripts/monster_3b_actual_kernel_structure.g'
+      - 'scripts/render_monster_3b_actual_kernel_certificate.py'
+      - 'scripts/check_monster_3b_actual_kernel_character_round4.sh'
+      - 'Docs/support/reference/Monster3BActualKernelCharacterRound4.md'
+      - '.github/workflows/monster-3b-actual-kernel-character-round4.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  actual-kernel-character:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
+
+      - name: Install GAP, CTblLib, AtlasRep, and Browse
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            gap \
+            gap-ctbllib \
+            gap-atlasrep \
+            gap-browse \
+            python3
+
+      - name: Run actual-kernel and Agda checker
+        shell: bash
+        run: |
+          set -euo pipefail
+          export AGDA_FLAKE='github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin'
+          export DASHI_REPO_ROOT="$GITHUB_WORKSPACE"
+          export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
+          export AGDA_LOG_PATH="$RUNNER_TEMP/monster-3b-round4-agda.log"
+          AGDA_JOBS=2 bash scripts/check_monster_3b_actual_kernel_character_round4.sh
+
+      - name: Upload actual-kernel certificates
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: monster-3b-actual-kernel-character-round4
+          path: |
+            build/monster_3b_normalizer_restriction.json
+            build/monster_3b_actual_kernel_structure.json
+            build/monster_3b_actual_kernel_character_certificate.json
+            build/generated/DASHI/Moonshine/Generated/Monster3BActualKernelCertificate.agda
+          if-no-files-found: warn
