@@ -73,8 +73,8 @@ import DASHI.Physics.YangMills.BalabanSelectedGaugeDerivativeTwoBackgroundVariat
 AverageVariation : Set
 AverageVariation = Average.SelectedBlockAverageRow4 → ℚ
 
-GaugeVariation : Set
-GaugeVariation = FlatGauge.GaugeCoordinate4 → ℚ
+GaugeSectorVariation : Set
+GaugeSectorVariation = FlatGauge.GaugeCoordinate4 → ℚ
 
 RawVariation : Set
 RawVariation = Combined.SelectedConstraintRow4 → ℚ
@@ -85,13 +85,13 @@ averageVariationNormSq variation =
     (Basis.elements AverageRows.selectedBlockAverageRowFiniteSelector)
     (λ row → variation row * variation row)
 
-gaugeVariationNormSq : GaugeVariation → ℚ
+gaugeVariationNormSq : GaugeSectorVariation → ℚ
 gaugeVariationNormSq variation =
   Sums.sumRational
     (Basis.elements Rows.selectedGaugeRowFiniteSelector)
     (λ row → variation row * variation row)
 
-combineDerivativeSectors : AverageVariation → GaugeVariation → RawVariation
+combineDerivativeSectors : AverageVariation → GaugeSectorVariation → RawVariation
 combineDerivativeSectors average gauge (Combined.averageConstraintRow row) = average row
 combineDerivativeSectors average gauge (Combined.gaugeConstraintRow row) = gauge row
 
@@ -123,7 +123,7 @@ combinedDerivativeSectorNormExact average gauge =
 literalGaugeTwoBackgroundVariation :
   Physical.RationalSU2Background4 →
   Physical.RationalSU2Background4 →
-  Coordinates.PhysicalSU2BondField4 → GaugeVariation
+  Coordinates.PhysicalSU2BondField4 → GaugeSectorVariation
 literalGaugeTwoBackgroundVariation left right field (pair coordinate site) =
   Gauge.backgroundGaugeFirst left field (pair coordinate site)
   - Gauge.backgroundGaugeFirst right field (pair coordinate site)
