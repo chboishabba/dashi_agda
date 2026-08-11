@@ -234,7 +234,7 @@ physicalStateAdvectorWitness :
   (advector input output : Z3.FourierMode) →
   Z3.addMode advector input ≡ output →
   ResonantRealDivergenceFreeAdvector E advector input output
-physicalStateAdvectorWitness {F = F} {E = E}
+physicalStateAdvectorWitness {E = E}
     velocity reality divergenceFree advector input output resonance = record
   { coefficient = velocity advector
   ; negativeCoefficient = velocity (Z3.negateMode advector)
@@ -251,15 +251,15 @@ physicalVelocityTransportCoefficientSkew :
   ∀ {r} {F : C3.RealField r}
     {E : C3.IntegerEmbedding F}
     (velocity : Z3.FourierMode → C3.Complex3 F) →
-  Audit.RealityCondition velocity →
-  Audit.DivergenceFreeCondition E velocity →
+  (reality : Audit.RealityCondition velocity) →
+  (divergenceFree : Audit.DivergenceFreeCondition E velocity) →
   (advector input output : Z3.FourierMode) →
   (resonance : Z3.addMode advector input ≡ output) →
-  let witness = physicalStateAdvectorWitness
-        velocity _ _ advector input output resonance
-  in
-  C3.complexConjugate (reverseCoefficient witness)
-  ≡ C3.complexNegate (forwardCoefficient witness)
+  C3.complexConjugate
+    (transportCoefficient E output
+      (velocity (Z3.negateMode advector)))
+  ≡ C3.complexNegate
+      (transportCoefficient E input (velocity advector))
 physicalVelocityTransportCoefficientSkew
     velocity reality divergenceFree advector input output resonance =
   physicalTransportCoefficientSkew
