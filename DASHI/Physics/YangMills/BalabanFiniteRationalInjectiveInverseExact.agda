@@ -15,10 +15,10 @@ module DASHI.Physics.YangMills.BalabanFiniteRationalInjectiveInverseExact where
 -- or adj(A)/det(A) once det(A) != 0).
 --
 -- This module does not disguise that standard theorem as new Yang--Mills
--- analysis.  It isolates it as the one imported finite-linear-algebra authority
+-- analysis.  It isolates exactly one imported finite-linear-algebra authority
 -- between the machine-checked strict-contraction injectivity proof and the
--- repository's already-existing rational inverse certificate consumer.
--- Everything specific to the selected physical matrix is proved elsewhere.
+-- repository's existing rational inverse-certificate consumer.  Everything
+-- specific to the selected physical matrix is proved in the selected module.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
@@ -47,38 +47,5 @@ record FiniteRationalInjectiveInverseAuthority : Set₁ where
 
 open FiniteRationalInjectiveInverseAuthority public
 
-------------------------------------------------------------------------
--- Once an inverse certificate exists, its action is unique pointwise.  This is
--- proved here rather than imported.
-------------------------------------------------------------------------
-
-inverseActionUnique :
-  ∀ {Index : Set}
-    {carrier : Matrix.FiniteRationalCoordinates Index}
-    {matrix : Matrix.RationalMatrix Index}
-    (first second : Matrix.RationalMatrixInverseCertificate carrier matrix) →
-  ∀ source row →
-  Matrix.applyMatrix carrier (Matrix.inverseMatrix first) source row
-  ≡ Matrix.applyMatrix carrier (Matrix.inverseMatrix second) source row
-inverseActionUnique {carrier = carrier} {matrix = matrix}
-    first second source row =
-  let
-    secondSource =
-      Matrix.applyMatrix carrier (Matrix.inverseMatrix second) source
-  in
-  trans
-    (cong
-      (λ value →
-        Matrix.applyMatrix carrier (Matrix.inverseMatrix first) value row)
-      (sym (Matrix.matrixInverseRightExact second source row)))
-    (trans
-      (Matrix.matrixInverseLeftExact first secondSource row)
-      refl)
-  where
-    open import Relation.Binary.PropositionalEquality using (cong; trans)
-
 finiteRationalInjectiveInverseAuthorityLevel : ProofLevel
 finiteRationalInjectiveInverseAuthorityLevel = standardImported
-
-finiteRationalInverseUniquenessLevel : ProofLevel
-finiteRationalInverseUniquenessLevel = machineChecked
