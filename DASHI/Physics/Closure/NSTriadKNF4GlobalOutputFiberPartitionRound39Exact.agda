@@ -16,7 +16,7 @@ module DASHI.Physics.Closure.NSTriadKNF4GlobalOutputFiberPartitionRound39Exact w
 -- Close the remaining finite F4 combinatorics on the literal physical cutoff.
 -- Every enumerated triad has exactly one output k in `Cube.cutoffModes N`.
 -- The output fibres are individually duplicate-free and fibres at distinct
--- outputs are disjoint.  Therefore concatenating all literal output fibres is
+-- outputs are disjoint. Therefore concatenating all literal output fibres is
 -- an exact K-free permutation of the complete physical triad enumeration.
 --
 -- Combining that permutation with Round 39's per-output same-object theorem
@@ -29,19 +29,19 @@ module DASHI.Physics.Closure.NSTriadKNF4GlobalOutputFiberPartitionRound39Exact w
 -- under the existing reality and divergence-free conditions.
 --
 -- This closes the finite nonlinear energy-cancellation theorem on the actual
--- projected Galerkin coefficient.  A separate system field called `modes`
--- is no longer needed to state the physical energy sum: the canonical literal
--- cutoff list is used directly.
+-- projected Galerkin coefficient. The canonical literal cutoff list is used
+-- directly, so no opaque system mode-list equality is needed.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Empty using (⊥)
 import Data.List.Relation.Binary.Permutation.Propositional as Perm
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_)
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Data.Rational.Tactic.RingSolver using (solve)
+open import Data.Sum.Base using (inj₁; inj₂)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; subst; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier as Cube
@@ -74,8 +74,8 @@ concatFiberMemberOriginal :
 concatFiberMemberOriginal {outputs = []} ()
 concatFiberMemberOriginal {cutoff} {output ∷ rest} member
   with Cube.memberAppendCases member
-... | Data.Sum.Base.inj₁ inHead = Fibre.filterOutputMemberOriginal inHead
-... | Data.Sum.Base.inj₂ inRest = concatFiberMemberOriginal inRest
+... | inj₁ inHead = Fibre.filterOutputMemberOriginal inHead
+... | inj₂ inRest = concatFiberMemberOriginal inRest
 
 concatFiberMemberOutputListed :
   ∀ {cutoff outputs tau} →
@@ -84,9 +84,9 @@ concatFiberMemberOutputListed :
 concatFiberMemberOutputListed {outputs = []} ()
 concatFiberMemberOutputListed {cutoff} {output ∷ rest} member
   with Cube.memberAppendCases member
-... | Data.Sum.Base.inj₁ inHead =
+... | inj₁ inHead =
   Cube.here (Output.physicalOutputFiberSound inHead)
-... | Data.Sum.Base.inj₂ inRest =
+... | inj₂ inRest =
   Cube.there (concatFiberMemberOutputListed inRest)
 
 outputMemberGivesConcatFiberMember :
@@ -178,43 +178,37 @@ foldAppend value [] right = refl
 foldAppend value (tau ∷ rest) right =
   trans
     (cong (value tau +_) (foldAppend value rest right))
-    (Data.Rational.Tactic.RingSolver.solve
+    (solve
       (value tau ∷ Round38.foldPower value rest ∷ Round38.foldPower value right ∷ []))
+
+sumProjectedPairings :
+  {E : C3.IntegerEmbedding F} →
+  {I : C3.ModeInverseSquare F E} →
+  Equation.FiniteComplex3GalerkinSystem F E I →
+  List Z3.FourierMode → ℚ
+sumProjectedPairings system [] = 0ℚ
+sumProjectedPairings system (output ∷ rest) =
+  OutputPairing.realHermitianPower
+    (Equation.velocity system output)
+    (Equation.projectedNonlinearity system output)
+  + sumProjectedPairings system rest
 
 literalCutoffProjectedEnergyPairing :
   {E : C3.IntegerEmbedding F} →
   {I : C3.ModeInverseSquare F E} →
   Equation.FiniteComplex3GalerkinSystem F E I → ℚ
 literalCutoffProjectedEnergyPairing system =
-  sumModes (Cube.cutoffModes (Equation.cutoff system))
-  where
-  sumModes : List Z3.FourierMode → ℚ
-  sumModes [] = 0ℚ
-  sumModes (output ∷ rest) =
-    OutputPairing.realHermitianPower
-      (Equation.velocity system output)
-      (Equation.projectedNonlinearity system output)
-    + sumModes rest
+  sumProjectedPairings system (Cube.cutoffModes (Equation.cutoff system))
 
 sumProjectedPairingsEqualsConcatFiberFold :
   {E : C3.IntegerEmbedding F} →
   {I : C3.ModeInverseSquare F E} →
   (system : Equation.FiniteComplex3GalerkinSystem F E I) →
   (outputs : List Z3.FourierMode) →
-  let
-    value = λ tau → Round38.orderedPower E I tau (Equation.velocity system)
-  in
-  sumModes outputs
-  ≡ Round38.foldPower value
+  sumProjectedPairings system outputs
+  ≡ Round38.foldPower
+      (λ tau → Round38.orderedPower E I tau (Equation.velocity system))
       (concatOutputFibers (Equation.cutoff system) outputs)
-  where
-  sumModes : List Z3.FourierMode → ℚ
-  sumModes [] = 0ℚ
-  sumModes (output ∷ rest) =
-    OutputPairing.realHermitianPower
-      (Equation.velocity system output)
-      (Equation.projectedNonlinearity system output)
-    + sumModes rest
 sumProjectedPairingsEqualsConcatFiberFold system [] = refl
 sumProjectedPairingsEqualsConcatFiberFold {E} {I} system (output ∷ rest) =
   let
