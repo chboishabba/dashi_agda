@@ -43,12 +43,13 @@ module DASHI.Physics.Closure.NSTriadKNHHGoodLocalMassScalingNoGoRound41Exact whe
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; zero; suc; _*_; _≤_)
+open import Agda.Builtin.Nat using (Nat; _*_; _≤_)
 open import Data.Empty using (⊥)
-open import Data.Nat.Base using (_<_)
+open import Data.Nat.Base using (_<_; z≤n; s≤s)
 import Data.Nat.Properties as NatP
 open import Data.Nat.Solver using (module +-*-Solver)
 open +-*-Solver using (solve; _:*_; _:=_)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import DASHI.Physics.Closure.NSTriadKNCubicQuadraticUniformGapNoGo as NoGo
 
@@ -98,7 +99,7 @@ hhGoodLocalMassScaling = record
 
 unitLocalMassPositive :
   0 < hhGoodDegreeSixLocalMass 1
-unitLocalMassPositive = NatP.s≤s NatP.z≤n
+unitLocalMassPositive = s≤s z≤n
 
 rawHHGoodLocalMassQuadraticProductRefuted :
   (constant : Nat) →
@@ -122,10 +123,8 @@ rawUnitCoefficientShortcutRefuted uniformBound =
     (λ z →
       subst
         (λ upper → hhGoodDegreeSixLocalMass z ≤ upper)
-        (NatP.*-identityˡ (hhGoodDegreeFourCriticalDissipation z))
+        (sym (NatP.*-identityˡ (hhGoodDegreeFourCriticalDissipation z)))
         (uniformBound z))
-  where
-  open import Relation.Binary.PropositionalEquality using (subst)
 
 hhGoodRawLocalMassQuadraticProductNoGoClosed : Bool
 hhGoodRawLocalMassQuadraticProductNoGoClosed = true
