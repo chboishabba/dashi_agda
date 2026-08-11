@@ -24,39 +24,38 @@ module DASHI.Physics.Closure.NSTriadKNHHGoodSquaredYoungOwnerRound41Exact where
 --
 --   P^2 <= C_strain delta W.
 --
--- The attached continuation suggested that if the physical local mass has the
--- critical factorization W <= X D, then Young should close the owner.  This
--- file proves that implication *without introducing square roots*.
+-- If the physical local mass has the critical factorization W <= X D, then
+-- Young closes the owner.  This file proves that implication without adding
+-- a square-root primitive.
 --
 -- For every positive epsilon with exact inverse epsilon^-1,
 --
---   P^2 <= K X D,
---   K = C_strain delta,
+--   P^2 <= K X D,        K = C_strain delta,
 --
 -- implies
 --
 --   P <= epsilon D + (K / (4 epsilon)) X.
 --
--- The key square-root-free identity is
+-- The square-root-free bridge is
 --
 --   K X D <= (epsilon D + K X/(4 epsilon))^2,
 --
--- followed by exact reflection of square order on rational scalars.  Thus the
--- formerly vague `physicalHHGoodTimeDissipationAbsorption` is not a separate
--- analytic theorem once W <= X D is established.  The remaining physical
--- HH-good seams are the literal annular strain-kernel realization, sample-mass
--- identification, and this local-mass factorization.
+-- followed by reflection of square order on rational scalars.  Therefore the
+-- formerly vague physical HH-good time/dissipation absorption is not an
+-- independent analytic leaf once W <= X D has been proved on the literal
+-- shell samples.
 ------------------------------------------------------------------------
 
+open import Agda.Primitive using (Level; lsuc)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using ([]; _∷_)
+open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.Nat using (Nat)
 import Data.Integer.Base as Int
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; 1ℚ; _/_; _+_; _-_; _*_; _≤_
   ; NonNegative; NonZero; Positive; nonNegative)
 import Data.Rational.Properties as ℚP
-open ℚP using (_≡?_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Data.Sum.Base using (inj₁; inj₂)
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
@@ -92,7 +91,7 @@ nonnegativeSquareReflectsOrder :
 nonnegativeSquareReflectsOrder x bound xNN boundNN squares
   with ℚP.≤-total x bound
 ... | inj₁ x≤bound = x≤bound
-... | inj₂ bound≤x with x ≡? 0ℚ
+... | inj₂ bound≤x with ℚP._≡?_ x 0ℚ
 ...   | yes xZero =
   subst (λ selected → selected ≤ bound) (sym xZero) boundNN
 ...   | no xNonzero =
@@ -379,13 +378,13 @@ hhGoodOwnerFromSquaredYoung {environment} {parameter} input =
       (hhGoodSquaredYoungAbsorption input)
 
 record PeriodizedHHGoodYoungInput
-    {st}
+    {st : Level}
     {TorusPoint : Set st}
     (environment : Owner.TaxEnvironment)
     (kernelTheorem : Periodized.PeriodizedAnnularStrainKernelL1Theorem TorusPoint)
-    (shell : Agda.Builtin.Nat.Nat)
+    (shell : Nat)
     (parameter : Threshold.PositiveThreshold)
-    (samples : Agda.Builtin.List.List (Good.HHGoodKernelSample parameter)) : Set where
+    (samples : List (Good.HHGoodKernelSample parameter)) : Set (lsuc st) where
   field
     identification :
       Periodized.PhysicalStrainShellKernelMassIdentification
@@ -400,7 +399,7 @@ record PeriodizedHHGoodYoungInput
 open PeriodizedHHGoodYoungInput public
 
 periodizedHHGoodOwnerFromLocalMassFactorization :
-  ∀ {st} {TorusPoint : Set st}
+  ∀ {st : Level} {TorusPoint : Set st}
     {environment kernelTheorem shell parameter samples} →
   PeriodizedHHGoodYoungInput
     environment kernelTheorem shell parameter samples →
