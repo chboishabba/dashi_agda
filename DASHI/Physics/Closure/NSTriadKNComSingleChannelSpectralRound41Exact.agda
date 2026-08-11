@@ -44,6 +44,7 @@ open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
 import DASHI.Physics.Closure.NSTriadKNComPQCrossChannelRound37Exact as PQ
+import DASHI.Physics.Closure.NSTriadKNComCrossChannelRoundTripRound39Exact as Round39
 import DASHI.Physics.Closure.NSTriadKNComAdjointCollapseRound40Exact as Collapse
 
 stateNormSquaredNonnegative :
@@ -123,7 +124,7 @@ singleChannelZeroForcesCommutatorZeroEnergy {transport} skew zeroChannel state
 commutatorSquareSingleChannelReused :
   ∀ {transport} →
   Collapse.SkewAdjointTransport2 transport →
-  DASHI.Physics.Closure.NSTriadKNComCrossChannelRoundTripRound39Exact.composeTransport
+  Round39.composeTransport
     (Collapse.commutatorTransport transport)
     (Collapse.commutatorTransport transport)
   ≡ PQ.linear-transport2
