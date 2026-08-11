@@ -1,0 +1,81 @@
+name: NS Luo filtered defect excursion round 21
+
+on:
+  push:
+    branches:
+      - 'agent/ns-luo-filtered-defect-excursion-round21'
+    paths:
+      - 'DASHI/Physics/Closure/**'
+      - 'docs/ns-luo-filtered-defect-excursion-round21.md'
+      - 'scripts/check_ns_luo_filtered_defect_excursion_round21.sh'
+      - '.github/workflows/ns-luo-filtered-defect-excursion-round21.yml'
+  pull_request:
+    branches:
+      - 'agent/ns-luo-nemgro-physical-audit-round20'
+      - 'agent/ns-luo-filtered-defect-excursion-round21'
+    paths:
+      - 'DASHI/Physics/Closure/**'
+      - 'docs/ns-luo-filtered-defect-excursion-round21.md'
+      - 'scripts/check_ns_luo_filtered_defect_excursion_round21.sh'
+      - '.github/workflows/ns-luo-filtered-defect-excursion-round21.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  statuses: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Check filtered defect excursion round twenty-one
+        id: check
+        shell: bash
+        run: |
+          set +e
+          (
+            set -euo pipefail
+            export AGDA_FLAKE="github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin"
+            export DASHI_REPO_ROOT="$GITHUB_WORKSPACE"
+            export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
+            export AGDA_LOG_PATH="$GITHUB_WORKSPACE/ns-round21-agda.log"
+            export AGDA_JOBS=4
+            bash scripts/check_ns_luo_filtered_defect_excursion_round21.sh
+          ) > ns-round21-check.log 2>&1
+          status=$?
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          tail -n 600 ns-round21-check.log
+          exit 0
+      - name: Upload logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ns-round21-logs
+          path: |
+            ns-round21-check.log
+            ns-round21-agda.log
+          if-no-files-found: warn
+      - name: Publish checker status
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          CHECK_STATUS: ${{ steps.check.outputs.status }}
+        shell: bash
+        run: |
+          state=success
+          description='NS round 21 Agda checker passed'
+          if [[ "$CHECK_STATUS" != '0' ]]; then
+            state=failure
+            description='NS round 21 Agda checker failed'
+          fi
+          gh api --method POST \
+            "repos/${GITHUB_REPOSITORY}/statuses/${GITHUB_SHA}" \
+            -f state="$state" \
+            -f context='ns-round21-agda' \
+            -f description="$description"
+      - name: Fail on checker error
+        if: steps.check.outputs.status != '0'
+        run: exit 1
