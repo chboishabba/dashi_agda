@@ -50,13 +50,14 @@ module DASHI.Physics.YangMills.BalabanSelectedReducedNormalCorrectionBoundExact 
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Integer.Base using (+_)
+import Data.List.Base as List
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; _+_; _*_; _≤_; _/_)
 import Data.Rational.Properties as ℚP
 open ℚP using (_≤?_)
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using
-  (cong; subst; sym; trans)
+  (cong; cong₂; subst; sym; trans)
 open import Relation.Nullary.Decidable.Core using (toWitness)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -75,7 +76,6 @@ import DASHI.Physics.YangMills.BalabanSelectedBlockAverageRowCarrierExact as Ave
 import DASHI.Physics.YangMills.BalabanSelectedCombinedConstraintFiniteKKTExact as RawKKT
 import DASHI.Physics.YangMills.BalabanSelectedCombinedMultiplierSplitExact as Split
 import DASHI.Physics.YangMills.BalabanSelectedCombinedProjectionOrthogonalityExact as Projection
-import DASHI.Physics.YangMills.BalabanSelectedCombinedProjectionCongruenceExact as ProjectionCong
 import DASHI.Physics.YangMills.BalabanSelectedReducedCombinedConstraintFloorExact as Floor
 import DASHI.Physics.YangMills.BalabanSelectedPaddedReducedNormalInverseExact as ReducedInverse
 import DASHI.Physics.YangMills.BalabanFiniteScaledYoungDotExact as Young
@@ -98,6 +98,33 @@ selectedFloorNonnegative = toWitness {a? = 0ℚ ≤? selectedFloor} _
 selectedHalfFloorReciprocalNonnegative : 0ℚ ≤ selectedHalfFloorReciprocal
 selectedHalfFloorReciprocalNonnegative =
   toWitness {a? = 0ℚ ≤? selectedHalfFloorReciprocal} _
+
+------------------------------------------------------------------------
+-- Congruence helpers.
+------------------------------------------------------------------------
+
+finiteNormSqCong :
+  ∀ {Index}
+    (carrier : Matrix.FiniteRationalCoordinates Index)
+    left right →
+  (∀ index → left index ≡ right index) →
+  Rect.finiteNormSq carrier left ≡ Rect.finiteNormSq carrier right
+finiteNormSqCong carrier left right pointwise =
+  Sums.sumRationalCong (Matrix.coordinates carrier) _ _
+    (λ index → cong₂ _*_ (pointwise index) (pointwise index))
+
+transposeApplyRespectsPointwise : ∀ background left right →
+  (∀ row → left row ≡ right row) →
+  ∀ coordinate →
+  RawKKT.selectedCombinedConstraintTransposeApply background left coordinate
+  ≡ RawKKT.selectedCombinedConstraintTransposeApply background right coordinate
+transposeApplyRespectsPointwise background left right pointwise coordinate =
+  let
+    transpose = Rect.transposeRectangular
+      (Combined.selectedBackgroundLinearizedConstraintMatrix background)
+  in
+  Sums.sumRationalCong Rows.selectedCombinedConstraintRows _ _
+    (λ row → cong (transpose coordinate row *_) (pointwise row))
 
 ------------------------------------------------------------------------
 -- Dot congruence and the orthogonal-projection identity <Pz,x>=<z,x> for
@@ -201,44 +228,38 @@ rawReducedNormExact multiplier =
   let
     projected = Projection.selectedReducedProjection multiplier
     selected = Split.reduceSelectedMultiplier multiplier
+    averageValues = Basis.elements AverageRows.selectedBlockAverageRowFiniteSelector
+    gaugeValues = Basis.elements Rows.selectedGaugeRowFiniteSelector
 
     splitRows = Fubini.sumRationalAppend
-      (Data.List.Base.map Combined.averageConstraintRow
-        (Basis.elements AverageRows.selectedBlockAverageRowFiniteSelector))
-      (Data.List.Base.map Combined.gaugeConstraintRow
-        (Basis.elements Rows.selectedGaugeRowFiniteSelector))
+      (List.map Combined.averageConstraintRow averageValues)
+      (List.map Combined.gaugeConstraintRow gaugeValues)
       (λ row → projected row * projected row)
 
     averageMap = Fubini.sumRationalMap Combined.averageConstraintRow
-      (Basis.elements AverageRows.selectedBlockAverageRowFiniteSelector)
-      (λ row → projected row * projected row)
+      averageValues (λ row → projected row * projected row)
 
     gaugeMap = Fubini.sumRationalMap Combined.gaugeConstraintRow
-      (Basis.elements Rows.selectedGaugeRowFiniteSelector)
-      (λ row → projected row * projected row)
+      gaugeValues (λ row → projected row * projected row)
+
+    averageExact :
+      Sums.sumRational averageValues
+        (λ row → projected (Combined.averageConstraintRow row)
+          * projected (Combined.averageConstraintRow row))
+      ≡ Floor.averageMultiplierNormSq selected
+    averageExact = Sums.sumRationalCong averageValues _ _ (λ row → refl)
+
+    gaugeExact :
+      Sums.sumRational gaugeValues
+        (λ row → projected (Combined.gaugeConstraintRow row)
+          * projected (Combined.gaugeConstraintRow row))
+      ≡ Floor.gaugeMultiplierNormSq selected
+    gaugeExact = Sums.sumRationalCong gaugeValues _ _ (λ row → refl)
   in
   trans splitRows
     (trans
-      (cong
-        (λ averagePart → averagePart
-          + Sums.sumRational
-              (Basis.elements Rows.selectedGaugeRowFiniteSelector)
-              (λ row → projected (Combined.gaugeConstraintRow row)
-                * projected (Combined.gaugeConstraintRow row)))
-        averageMap)
-      (trans
-        (cong
-          (λ averagePart → averagePart
-            + Sums.sumRational
-                (Basis.elements Rows.selectedGaugeRowFiniteSelector)
-                (λ row → projected (Combined.gaugeConstraintRow row)
-                  * projected (Combined.gaugeConstraintRow row)))
-          refl)
-        (trans
-          (cong
-            (Floor.averageMultiplierNormSq selected +_)
-            gaugeMap)
-          refl)))
+      (cong₂ _+_ averageMap gaugeMap)
+      (cong₂ _+_ averageExact gaugeExact))
 
 rawNormOfReducedSourceExact : ∀ source →
   ReducedInverse.ReducedSource source →
@@ -248,7 +269,7 @@ rawNormOfReducedSourceExact : ∀ source →
 rawNormOfReducedSourceExact source sourceReduced =
   trans
     (sym
-      (Rect.finiteNormSqCong Rows.selectedCombinedConstraintRowCarrier
+      (finiteNormSqCong Rows.selectedCombinedConstraintRowCarrier
         (Projection.selectedReducedProjection source) source sourceReduced))
     (rawReducedNormExact source)
 
@@ -326,16 +347,10 @@ selectedReducedSolutionFloor background radius certificate source sourceReduced 
     outputPointwise : ∀ coordinate →
       Floor.selectedReducedCombinedAdjoint background selected coordinate
       ≡ RawKKT.selectedCombinedConstraintTransposeApply background x coordinate
-    outputPointwise coordinate =
-      RawKKT.transposeApplyRespectsPointwise background
-        (Split.reopenReducedMultiplier selected) x
-        (λ row →
-          trans
-            (Split.reopenReduceProjectionIdempotent x row)
-            (xReduced row))
-        coordinate
+    outputPointwise = transposeApplyRespectsPointwise background
+      (Split.reopenReducedMultiplier selected) x xReduced
 
-    outputNormExact = Rect.finiteNormSqCong StateCarrier.physicalStateCarrier
+    outputNormExact = finiteNormSqCong StateCarrier.physicalStateCarrier
       (Floor.selectedReducedCombinedAdjoint background selected)
       (RawKKT.selectedCombinedConstraintTransposeApply background x)
       outputPointwise
@@ -372,8 +387,6 @@ selectedReducedSolutionNormBound
     xNorm = rawMultiplierNormSq x
     yNorm = rawMultiplierNormSq source
     pairing = Rect.finiteDot Rows.selectedCombinedConstraintRowCarrier source x
-    outputNorm = Rect.finiteNormSq StateCarrier.physicalStateCarrier
-      (RawKKT.selectedCombinedConstraintTransposeApply background x)
 
     pairingExact = selectedReducedSolutionPairingExact
       background certificate source sourceReduced
@@ -411,8 +424,6 @@ selectedReducedNormalCorrectionBound
     xNorm = rawMultiplierNormSq x
     yNorm = rawMultiplierNormSq source
     pairing = Rect.finiteDot Rows.selectedCombinedConstraintRowCarrier source x
-    outputNorm = Rect.finiteNormSq StateCarrier.physicalStateCarrier
-      (RawKKT.selectedCombinedConstraintTransposeApply background x)
 
     pairingExact = selectedReducedSolutionPairingExact
       background certificate source sourceReduced
@@ -426,8 +437,7 @@ selectedReducedNormalCorrectionBound
     replaceX :
       (selectedFloor * selectedFloor) * xNorm + yNorm
       ≤ yNorm + yNorm
-    replaceX =
-      ℚP.+-mono-≤ xBound ℚP.≤-refl
+    replaceX = ℚP.+-mono-≤ xBound ℚP.≤-refl
 
     twiceFloorPairingBelow :
       (+ 2 / 1) * selectedFloor * pairing ≤ yNorm + yNorm
