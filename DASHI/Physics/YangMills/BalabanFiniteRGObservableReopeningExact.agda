@@ -6,14 +6,14 @@ module DASHI.Physics.YangMills.BalabanFiniteRGObservableReopeningExact where
 -- P. K. Mitter,
 -- "The Exact Renormalization Group", Encyclopedia of Mathematical Physics
 -- (Elsevier, 2006), arXiv:math-ph/0505008.
--- No DOI is used here; the persistent source identifier is math-ph/0505008.
+-- Persistent identifier: arXiv:math-ph/0505008.
 --
 -- Tadeusz Bałaban,
 -- "Renormalization Group Approach to Lattice Gauge Field Theories. I:
 -- Generation of Effective Actions in a Small Field Approximation and a
 -- Coupling Constant Renormalization in Four Dimensions",
 -- Communications in Mathematical Physics 109 (1987), 249--301.
--- No DOI is asserted in this module.
+-- DOI: 10.1007/BF01215223.
 --
 -- DASHI CONTRIBUTION
 --
@@ -119,21 +119,28 @@ finiteRGObservableExpectationPreserved step observable =
       ≡ Sums.sumRational (fineStates step) expandedFine
     expand = Sums.sumRationalCong (fineStates step) _ _
       (λ fine →
+        let
+          disintegrated = Sums.sumRational (coarseStates step)
+            (λ coarse →
+              coarseWeight step coarse * reopeningKernel step coarse fine)
+        in
         trans
           (cong (_* observable fine) (disintegrationExact step fine))
           (trans
-            (sym
-              (Sums.sumRationalScale
-                (observable fine)
-                (coarseStates step)
-                (λ coarse →
-                  coarseWeight step coarse
-                    * reopeningKernel step coarse fine)))
-            (Sums.sumRationalCong (coarseStates step) _ _
-              (λ coarse → ℚRing.solve-∀
-                (coarseWeight step coarse)
-                (reopeningKernel step coarse fine)
-                (observable fine)))))
+            (ℚP.*-comm disintegrated (observable fine))
+            (trans
+              (sym
+                (Sums.sumRationalScale
+                  (observable fine)
+                  (coarseStates step)
+                  (λ coarse →
+                    coarseWeight step coarse
+                      * reopeningKernel step coarse fine)))
+              (Sums.sumRationalCong (coarseStates step) _ _
+                (λ coarse → ℚRing.solve-∀
+                  (coarseWeight step coarse)
+                  (reopeningKernel step coarse fine)
+                  (observable fine))))))
 
     swap :
       Sums.sumRational (fineStates step) expandedFine
