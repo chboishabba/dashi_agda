@@ -27,8 +27,8 @@ module DASHI.Physics.Closure.NSTriadKNComHilbertSchmidtMultiplicityRound41Exact 
 --
 -- Consequently any proposed cutoff-uniform Hilbert--Schmidt bound must also
 -- uniformly bound the accumulated multiplicity floor.  Adding a new channel
--- with a positive floor increases that compulsory mass by exactly that floor.
--- No finite-rank/HS shortcut is therefore accepted merely because every fixed
+-- with a positive floor increases that compulsory mass by at least the chosen
+-- witness.  No finite-rank/HS shortcut is accepted merely because every fixed
 -- Galerkin matrix has finite rank.
 ------------------------------------------------------------------------
 
@@ -97,9 +97,9 @@ record PositiveAddedChannel (cell : HSChannelCell) : Set where
 open PositiveAddedChannel public
 
 addingPositiveChannelForcesAtLeastWitnessIncrease :
-  ∀ {cell rest} →
-  PositiveAddedChannel cell →
-  positiveWitness _ + compulsoryMultiplicityFloor rest
+  ∀ {cell rest}
+    (witness : PositiveAddedChannel cell) →
+  positiveWitness witness + compulsoryMultiplicityFloor rest
   ≤ compulsoryMultiplicityFloor (cell ∷ rest)
 addingPositiveChannelForcesAtLeastWitnessIncrease {cell} {rest} witness =
   ℚP.+-mono-≤
