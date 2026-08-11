@@ -6,10 +6,11 @@ module DASHI.Physics.Closure.NSTriadKNDefectMeasureAdjointComRound40Validation w
 -- and HH-bad, reuse of the mature weighted-defect rarity transfer, exact
 -- B/delta owner scaling, symbolic threshold optimization, shell-dependent
 -- threshold diagnostics, PV cancellation before residual scalarization,
--- finite shell-kernel Cauchy with a uniform periodized L1 constant, literal
--- modal and matrix-entry skew-adjoint transport, the resulting one-channel Com
--- collapse, reconstruction of the mature Round-35 two-face Gram interface from
--- one physical Gram cell, and exact Farkas-certificate sensitivity.
+-- exact order-zero strain homogeneity, finite shell-kernel Cauchy with a
+-- uniform annular periodized L1 constant, literal modal and matrix-entry
+-- skew-adjoint transport, the resulting one-channel Com collapse,
+-- reconstruction of the mature Round-35 two-face Gram interface from one
+-- physical Gram cell, and exact Farkas-certificate sensitivity.
 
 open import DASHI.Physics.Closure.NSTriadKNPeriodicPVOddComF4Round39Validation
 
@@ -22,6 +23,7 @@ open import DASHI.Physics.Closure.NSTriadKNHHAnalyticThresholdOptimizerRound40Ex
 open import DASHI.Physics.Closure.NSTriadKNHHSquaredThresholdRepresentationRound40Exact
 open import DASHI.Physics.Closure.NSTriadKNHHScaleDependentThresholdRound40Exact
 open import DASHI.Physics.Closure.NSTriadKNHHGoodPVResidualOrderRound40Exact
+open import DASHI.Physics.Closure.NSTriadKNFourierStrainScaleInvariantRound40Exact
 open import DASHI.Physics.Closure.NSTriadKNHHGoodFiniteKernelCauchyRound40Exact
 open import DASHI.Physics.Closure.NSTriadKNHHGoodPeriodizedKernelUniformRound40Exact
 open import DASHI.Physics.Closure.NSTriadKNPhysicalTransportCoefficientSkewRound40Exact
