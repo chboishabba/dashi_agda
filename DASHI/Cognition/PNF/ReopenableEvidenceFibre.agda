@@ -6,6 +6,7 @@ open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.FibreRestrictionCore as Fibre
+import DASHI.Core.TypedDependencyCore as Dependency
 import DASHI.Reasoning.AttractorAlignedBranchSelection as Selection
 import DASHI.Cognition.PNF.BoundedExecutionCarrier as Bounded
 
@@ -117,36 +118,30 @@ interferingPhaseCannotRefute ()
 ------------------------------------------------------------------------
 -- Corrective reachability.
 --
--- A suppressed or execution-pruned candidate may remain semantically live.
--- Reopening is represented by an explicit finite evidence path.  The path is
--- typed independently of semantic refutation: low accessibility is not a proof
--- of impossibility.  Terminalisation is therefore represented by the *absence
--- of a supplied CorrectivePath*, never inferred from suppression alone.
+-- TypedDependencyCore already supplies the generic state/action carrier with
+-- proof-bearing precondition, postcondition and dependency receipt.  We reuse
+-- that exact carrier here and add only the finite reflexive/transitive closure
+-- needed to witness reopening.  A suppressed or execution-pruned candidate may
+-- therefore remain semantically live and later become accessible through a
+-- sequence of admissible evidence actions.
 ------------------------------------------------------------------------
-
-record EvidenceTransitionSystem
-    (Candidate Evidence : Set) : Set₁ where
-  field
-    Step : Evidence → Candidate → Candidate → Set
-
-open EvidenceTransitionSystem public
 
 data CorrectivePath
     {Candidate Evidence : Set}
-    (system : EvidenceTransitionSystem Candidate Evidence)
+    (system : Dependency.DependentActionSystem Candidate Evidence)
     : Candidate → Candidate → Set where
   pathRefl :
     ∀ {x} → CorrectivePath system x x
   pathStep :
-    ∀ {before after target}
+    ∀ {before target}
       (evidence : Evidence) →
-      Step system evidence before after →
-      CorrectivePath system after target →
+      (admissible : Dependency.AdmissibleAction system before evidence) →
+      CorrectivePath system (Dependency.after admissible) target →
       CorrectivePath system before target
 
 record ReopeningWitness
     {Candidate Evidence : Set}
-    (system : EvidenceTransitionSystem Candidate Evidence)
+    (system : Dependency.DependentActionSystem Candidate Evidence)
     (candidate liveState : Candidate) : Set where
   constructor reopeningWitness
   field
@@ -183,6 +178,9 @@ record ReopenableEvidenceBoundary : Set where
     semanticRefutationRequiresIndexedEvidence : Bool
     semanticRefutationRequiresIndexedEvidenceIsTrue :
       semanticRefutationRequiresIndexedEvidence ≡ true
+    correctiveReachabilityReusesTypedActionSystem : Bool
+    correctiveReachabilityReusesTypedActionSystemIsTrue :
+      correctiveReachabilityReusesTypedActionSystem ≡ true
 
 open ReopenableEvidenceBoundary public
 
@@ -192,5 +190,6 @@ canonicalReopenableEvidenceBoundary =
     interferingPhaseCannotRefute
     reweightingAloneCannotRefute
     Bounded.executionOverflowHasNoSemanticPermission
+    true refl
     true refl
     true refl
