@@ -13,32 +13,30 @@ module DASHI.Physics.YangMills.BalabanSelectedFlatGaugeAdjointGramFloorExact whe
 -- Communications in Mathematical Physics 99 (1985), 389--434.
 -- DOI: 10.1007/BF01240355.
 --
--- Roger A. Horn; Charles R. Johnson,
--- "Matrix Analysis", second edition, Cambridge University Press, 2012.
--- DOI: 10.1017/CBO9781139020411.
---
 -- DASHI CONTRIBUTION
 --
--- Identify the transpose of the *actual selected gauge-constraint matrix* at
--- the identity background.  It is not supplied as a compatible-looking
--- gradient: finite adjointness plus the literal periodic summation-by-parts
--- theorem force it pointwise to be the negative forward gradient.
+-- Identify the literal transpose of the selected flat gauge-constraint matrix
+-- with the negative periodic gradient on each Lie-coordinate multiplier field.
+-- This makes the already-checked periodic Poincare theorem a theorem about the
+-- actual finite matrix used by the selected KKT system, rather than about a
+-- parallel abstract difference operator.
 --
--- On the componentwise mean-zero multiplier sector this gives the concrete
--- Gram lower bound
+-- On the componentwise-mean-zero multiplier section:
 --
---   (1/16) ||lambda||^2 <= ||L_gauge,0^* lambda||^2
---                         = <lambda,K_gauge,0 lambda>.
+--   ||L_0^* lambda||^2
+--     = ||grad lambda||^2
+--     >= (1/16) ||lambda||^2.
 --
--- The proof uses the repository's literal 768-row gauge carrier and 3072-state
--- carrier.  The periodic wrap edges are retained and proved nonnegative.  No
--- row deletion, rank-by-dimension argument, abstract Hilbert adjoint, or
--- assumed Poincare constant is used.
+-- The proof is exact on the side-four rational carrier.  It still does not say
+-- that the flat constant sector is the kernel at every background; that is the
+-- separate holonomy/stabilizer seam handled elsewhere.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List; []; _∷_)
+open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_; -_)
+  (ℚ; 0ℚ; _+_; _-_; _*_; _≤_; -_; _/_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using
@@ -46,572 +44,478 @@ open import Relation.Binary.PropositionalEquality using
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using
-  (pair; allCyclicIndices; four)
-import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as FiniteL2
+  (pair; map)
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreCarrier as Block
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
 import DASHI.Physics.YangMills.BalabanFiniteSumFubiniExact as Fubini
-import DASHI.Physics.YangMills.BalabanConstructiveRationalMatrixInverseExact as Matrix
 import DASHI.Physics.YangMills.BalabanFiniteRectangularRationalExact as Rect
-import DASHI.Physics.YangMills.BalabanFiniteLinearFunctionalCoordinatesExact as Linear
-import DASHI.Physics.YangMills.BalabanPath4AxisAverageExact as Path4
-import DASHI.Physics.YangMills.BalabanPath4GlobalPoincareExact as Poincare
-import DASHI.Physics.YangMills.BalabanP33LiteralBondCellIncidenceExact as Cell
 import DASHI.Physics.YangMills.BalabanP33PhysicalCoordinateBasisExact as Basis
+import DASHI.Physics.YangMills.BalabanP33FiniteKKTAdmissibleProjectorExact as StateCarrier
 import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Coordinates
-import DASHI.Physics.YangMills.BalabanP33FiniteKKTAdmissibleProjectorExact as KKT
 import DASHI.Physics.YangMills.BalabanP33PhysicalRationalWilsonPlaquetteJetExact as Physical
+import DASHI.Physics.YangMills.BalabanP33LiteralBondCellIncidenceExact as Incidence
 import DASHI.Physics.YangMills.BalabanP33PeriodicFourDimensionalHodgeIdentityExact as Periodic
-import DASHI.Physics.YangMills.BalabanP33PhysicalPeriodicOpenReferenceBridgeExact as Bridge
-import DASHI.Physics.YangMills.BalabanP33PhysicalFlatGaugeDivergenceIdentificationExact as FlatGauge
-import DASHI.Physics.YangMills.BalabanP33PhysicalBackgroundGaugeFirstExact as GaugeFirst
+import DASHI.Physics.YangMills.BalabanPath4AxisAverageExact as Path4
+import DASHI.Physics.YangMills.BalabanPath4GlobalAverageExact as GlobalAverage
+import DASHI.Physics.YangMills.BalabanPath4GlobalPoincareExact as Poincare
+import DASHI.Physics.YangMills.BalabanPath4PhysicalComponentPoincareExact as ComponentPoincare
+import DASHI.Physics.YangMills.BalabanP33FiniteWeightedSchurSquaredExact as WeightedSchur
+import DASHI.Physics.YangMills.BalabanPath4GeneratedLDLCertificate as LDL
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundGaugeConstraintMatrixExact as GaugeMatrix
-import DASHI.Physics.YangMills.BalabanSelectedCombinedConstraintRowCarrierExact as Rows
-import DASHI.Physics.YangMills.BalabanSelectedFlatGaugeReducedFloorExact as FlatFloor
-
-------------------------------------------------------------------------
--- Literal 768-row gauge carrier.
-------------------------------------------------------------------------
-
-selectedFlatGaugeRowCarrier :
-  Matrix.FiniteRationalCoordinates FlatGauge.GaugeCoordinate4
-selectedFlatGaugeRowCarrier = record
-  { Matrix.FiniteRationalCoordinates.coordinates =
-      Basis.elements Rows.selectedGaugeRowFiniteSelector
-  ; Matrix.FiniteRationalCoordinates.delta =
-      λ row column →
-        Basis.kronecker
-          (Basis.decide Rows.selectedGaugeRowFiniteSelector)
-          column row
-  ; Matrix.FiniteRationalCoordinates.deltaActsAsIdentity =
-      λ vector row →
-        trans
-          (Sums.sumRationalCong
-            (Basis.elements Rows.selectedGaugeRowFiniteSelector)
-            (λ column →
-              Basis.kronecker
-                (Basis.decide Rows.selectedGaugeRowFiniteSelector)
-                column row
-              * vector column)
-            (λ column →
-              vector column
-              * Basis.kronecker
-                  (Basis.decide Rows.selectedGaugeRowFiniteSelector)
-                  column row)
-            (λ column → ℚRing.solve-∀
-              (Basis.kronecker
-                (Basis.decide Rows.selectedGaugeRowFiniteSelector)
-                column row)
-              (vector column)))
-          (Basis.selectorExact
-            Rows.selectedGaugeRowFiniteSelector vector row)
-  }
+import DASHI.Physics.YangMills.BalabanSelectedCombinedConstraintRowCarrierExact as RowCarrier
+import DASHI.Physics.YangMills.BalabanSelectedFlatGaugeReducedFloorExact as Reduced
 
 GaugeMultiplier : Set
-GaugeMultiplier = FlatGauge.GaugeCoordinate4 → ℚ
+GaugeMultiplier = RowCarrier.GaugeMultiplier
 
-identityGaugeConstraintMatrix :
-  Rect.RectangularMatrix FlatGauge.GaugeCoordinate4 KKT.State
-identityGaugeConstraintMatrix =
-  GaugeMatrix.selectedBackgroundGaugeConstraintMatrix Physical.identityBackground
+GaugeRow : Set
+GaugeRow = RowCarrier.GaugeRow
 
-identityGaugeConstraintApply :
-  KKT.StateVector → GaugeMultiplier
-identityGaugeConstraintApply =
-  Rect.applyRectangular KKT.physicalStateCarrier identityGaugeConstraintMatrix
+gaugeRows : List GaugeRow
+gaugeRows = Basis.elements RowCarrier.selectedGaugeRowFiniteSelector
 
-identityGaugeConstraintApplyExact :
-  ∀ vector coordinate site →
-  identityGaugeConstraintApply vector (pair coordinate site)
-  ≡ FlatGauge.flatGaugeFirst
-      (Coordinates.decodePhysicalSU2 vector) (pair coordinate site)
-identityGaugeConstraintApplyExact vector coordinate site =
-  trans
-    (GaugeMatrix.selectedBackgroundGaugeConstraintMatrixApplyExact
-      Physical.identityBackground vector (pair coordinate site))
-    (GaugeFirst.identityBackgroundGaugeFirstIsPeriodicDivergence
-      (Coordinates.decodePhysicalSU2 vector) coordinate site)
+physicalCoordinates : List Coordinates.PhysicalSU2Coordinate4
+physicalCoordinates = Coordinates.physicalSU2Coordinates4
 
-actualFlatGaugeAdjoint : GaugeMultiplier → KKT.StateVector
+multiplierField : GaugeMultiplier → Coordinates.LieCoordinate → Periodic.Site4 → ℚ
+multiplierField multiplier coordinate site = multiplier (pair coordinate site)
+
+------------------------------------------------------------------------
+-- Literal flat matrix entry = incidence coefficient with identity adjoint.
+------------------------------------------------------------------------
+
+identityAdjointEntryExact :
+  ∀ row column →
+  GaugeMatrix.selectedBackgroundGaugeConstraintMatrix
+    Physical.identityBackground row column
+  ≡ GaugeMatrix.incidenceCoefficient row column
+identityAdjointEntryExact row column =
+  GaugeMatrix.selectedGaugeConstraintAtIdentityRecoversIncidence row column
+
+------------------------------------------------------------------------
+-- Exact transpose action is the negative periodic gradient.
+------------------------------------------------------------------------
+
+actualFlatGaugeAdjoint : GaugeMultiplier → StateCarrier.StateVector
 actualFlatGaugeAdjoint multiplier =
-  Rect.applyRectangular selectedFlatGaugeRowCarrier
-    (Rect.transposeRectangular identityGaugeConstraintMatrix)
+  Rect.applyRectangular gaugeRows
+    (Rect.transposeRectangular
+      (GaugeMatrix.selectedBackgroundGaugeConstraintMatrix
+        Physical.identityBackground))
     multiplier
 
-------------------------------------------------------------------------
--- Literal negative periodic gradient candidate.
-------------------------------------------------------------------------
+coordinateAxisField :
+  GaugeMultiplier → Coordinates.LieCoordinate → Periodic.Axis4 → Periodic.Site4 → ℚ
+coordinateAxisField multiplier coordinate axis site =
+  actualFlatGaugeAdjoint multiplier
+    (pair coordinate (pair axis site))
 
-multiplierField :
-  GaugeMultiplier → Coordinates.LieCoordinate3 → Periodic.ScalarField
-multiplierField multiplier coordinate site =
-  multiplier (pair coordinate site)
+currentIncidenceCoefficient : GaugeRow → GaugeRow → ℚ
+currentIncidenceCoefficient (pair rowCoordinate rowSite)
+    (pair columnCoordinate columnSite) =
+  GaugeMatrix.lieKronecker rowCoordinate columnCoordinate
+    * GaugeMatrix.siteKronecker rowSite columnSite
 
-stateBondField :
-  KKT.StateVector → Coordinates.LieCoordinate3 → Periodic.BondField4
-stateBondField vector coordinate axis site =
-  vector (pair coordinate (pair axis site))
+backwardIncidenceCoefficient :
+  Periodic.Axis4 → GaugeRow → GaugeRow → ℚ
+backwardIncidenceCoefficient axis
+    (pair rowCoordinate rowSite)
+    (pair columnCoordinate columnSite) =
+  GaugeMatrix.lieKronecker rowCoordinate columnCoordinate
+    * GaugeMatrix.siteKronecker
+        (Periodic.shiftBackward axis rowSite) columnSite
 
-flatNegativeGradientState : GaugeMultiplier → KKT.StateVector
-flatNegativeGradientState multiplier
-    (pair coordinate (pair axis site)) =
-  - Periodic.forwardDifference axis
+incidenceSplitsCurrentMinusBackward :
+  ∀ rowCoordinate rowSite columnCoordinate columnAxis columnSite →
+  GaugeMatrix.incidenceCoefficient
+      (pair rowCoordinate rowSite)
+      (pair columnCoordinate (pair columnAxis columnSite))
+  ≡
+  currentIncidenceCoefficient
+      (pair rowCoordinate rowSite) (pair columnCoordinate columnSite)
+  - backwardIncidenceCoefficient columnAxis
+      (pair rowCoordinate rowSite) (pair columnCoordinate columnSite)
+incidenceSplitsCurrentMinusBackward rowCoordinate rowSite
+    columnCoordinate columnAxis columnSite = refl
+
+currentIncidenceSumExact :
+  ∀ multiplier coordinate site →
+  Sums.sumRational gaugeRows
+    (λ row →
+      currentIncidenceCoefficient row (pair coordinate site) * multiplier row)
+  ≡ multiplier (pair coordinate site)
+currentIncidenceSumExact multiplier coordinate site =
+  RowCarrier.selectedGaugeRowSelectorExact
+    (λ row → multiplier row)
+    (pair coordinate site)
+
+backwardIncidenceSumExact :
+  ∀ multiplier coordinate axis site →
+  Sums.sumRational gaugeRows
+    (λ row →
+      backwardIncidenceCoefficient axis row (pair coordinate site)
+        * multiplier row)
+  ≡ multiplier (pair coordinate (Periodic.shiftForward axis site))
+backwardIncidenceSumExact multiplier coordinate axis site =
+  let target = pair coordinate (Periodic.shiftForward axis site) in
+  trans
+    (Sums.sumRationalCong gaugeRows _
+      (λ row →
+        RowCarrier.gaugeKronecker row target * multiplier row)
+      (λ { (pair rowCoordinate rowSite) →
+        cong (_* multiplier (pair rowCoordinate rowSite))
+          (cong (GaugeMatrix.lieKronecker rowCoordinate coordinate *_)
+            (GaugeMatrix.siteKroneckerShiftBackwardForwardExact
+              rowSite site axis)) }))
+    (RowCarrier.selectedGaugeRowSelectorExact
+      (λ row → multiplier row) target)
+
+actualFlatGaugeAdjointPointwiseExact :
+  ∀ multiplier coordinate axis site →
+  actualFlatGaugeAdjoint multiplier
+    (pair coordinate (pair axis site))
+  ≡ - Periodic.forwardDifference axis
       (multiplierField multiplier coordinate) site
-
-------------------------------------------------------------------------
--- Scalar periodic summation by parts in the exact orientation required by L*.
-------------------------------------------------------------------------
-
-periodicAxisNegativeGradientAdjoint :
-  ∀ axis field gauge →
-  Periodic.fieldInner field
-    (λ site → - Periodic.forwardDifference axis gauge site)
-  ≡ Periodic.fieldInner
-      (Periodic.backwardDifference axis field) gauge
-periodicAxisNegativeGradientAdjoint axis field gauge =
+actualFlatGaugeAdjointPointwiseExact multiplier coordinate axis site =
   let
-    forward = Periodic.forwardDifference axis gauge
-    backward = Periodic.backwardDifference axis field
+    column = pair coordinate (pair axis site)
+    currentTerm = λ row →
+      currentIncidenceCoefficient row (pair coordinate site) * multiplier row
+    backwardTerm = λ row →
+      backwardIncidenceCoefficient axis row (pair coordinate site) * multiplier row
 
-    moveMinus :
-      Periodic.fieldInner field (λ site → - forward site)
-      ≡ - Periodic.fieldInner forward field
-    moveMinus =
-      trans
-        (Periodic.sumSitesCong _ _ (λ site →
-          ℚRing.solve-∀ (field site) (forward site)))
-        (Periodic.sumSitesNeg (λ site → forward site * field site))
+    split :
+      actualFlatGaugeAdjoint multiplier column
+      ≡ Sums.sumRational gaugeRows
+          (λ row → currentTerm row - backwardTerm row)
+    split = Sums.sumRationalCong gaugeRows _ _
+      (λ row →
+        trans
+          (cong (_* multiplier row)
+            (trans
+              (identityAdjointEntryExact row column)
+              (caseIncidence row)))
+          (ℚRing.solve-∀
+            (currentIncidenceCoefficient row (pair coordinate site))
+            (backwardIncidenceCoefficient axis row (pair coordinate site))
+            (multiplier row)))
+      where
+        caseIncidence : ∀ row →
+          GaugeMatrix.incidenceCoefficient row column
+          ≡ currentIncidenceCoefficient row (pair coordinate site)
+            - backwardIncidenceCoefficient axis row (pair coordinate site)
+        caseIncidence (pair rowCoordinate rowSite) =
+          incidenceSplitsCurrentMinusBackward
+            rowCoordinate rowSite coordinate axis site
 
-    integrationByParts :
-      Periodic.fieldInner forward field
-      ≡ - Periodic.fieldInner gauge backward
-    integrationByParts = Periodic.summationByParts axis gauge field
+    distribute :
+      Sums.sumRational gaugeRows
+        (λ row → currentTerm row - backwardTerm row)
+      ≡ Sums.sumRational gaugeRows currentTerm
+        - Sums.sumRational gaugeRows backwardTerm
+    distribute = Fubini.sumRationalSubtract gaugeRows currentTerm backwardTerm
+
+    currentExact = currentIncidenceSumExact multiplier coordinate site
+    backwardExact = backwardIncidenceSumExact multiplier coordinate axis site
   in
-  trans moveMinus
-    (trans
-      (cong -_ integrationByParts)
+  trans split
+    (trans distribute
       (trans
-        (ℚRing.solve-∀ (Periodic.fieldInner gauge backward))
-        (Periodic.fieldInnerSymmetric gauge backward)))
-
-fieldInnerFourSumLeft : ∀ first second third fourth gauge →
-  Periodic.fieldInner
-    (Periodic.fieldSum4 first second third fourth) gauge
-  ≡ Periodic.fieldInner first gauge
-    + (Periodic.fieldInner second gauge
-    + (Periodic.fieldInner third gauge
-    + Periodic.fieldInner fourth gauge))
-fieldInnerFourSumLeft first second third fourth gauge =
-  trans
-    (Periodic.sumSitesCong _ _ (λ site →
-      ℚRing.solve-∀
-        (first site) (second site) (third site) (fourth site)
-        (gauge site)))
-    (trans
-      (Periodic.sumSitesAdd
-        (λ site → first site * gauge site)
-        (λ site →
-          second site * gauge site
-          + (third site * gauge site + fourth site * gauge site)))
-      (cong
-        (Periodic.fieldInner first gauge +_)
-        (trans
-          (Periodic.sumSitesAdd
-            (λ site → second site * gauge site)
-            (λ site → third site * gauge site + fourth site * gauge site))
-          (cong
-            (Periodic.fieldInner second gauge +_)
-            (Periodic.sumSitesAdd
-              (λ site → third site * gauge site)
-              (λ site → fourth site * gauge site))))))
-
-axisBackwardPairingFold : ∀ field gauge →
-  Sums.sumRational GaugeFirst.axes4
-    (λ axis →
-      Periodic.fieldInner
-        (Periodic.backwardDifference axis (field axis)) gauge)
-  ≡ Periodic.fieldInner (Periodic.periodicDivergence field) gauge
-axisBackwardPairingFold field gauge =
-  trans
-    (ℚRing.solve-∀
-      (Periodic.fieldInner
-        (Periodic.backwardDifference Periodic.axis0 (field Periodic.axis0)) gauge)
-      (Periodic.fieldInner
-        (Periodic.backwardDifference Periodic.axis1 (field Periodic.axis1)) gauge)
-      (Periodic.fieldInner
-        (Periodic.backwardDifference Periodic.axis2 (field Periodic.axis2)) gauge)
-      (Periodic.fieldInner
-        (Periodic.backwardDifference Periodic.axis3 (field Periodic.axis3)) gauge))
-    (sym
-      (fieldInnerFourSumLeft
-        (Periodic.backwardDifference Periodic.axis0 (field Periodic.axis0))
-        (Periodic.backwardDifference Periodic.axis1 (field Periodic.axis1))
-        (Periodic.backwardDifference Periodic.axis2 (field Periodic.axis2))
-        (Periodic.backwardDifference Periodic.axis3 (field Periodic.axis3))
-        gauge))
+        (cong₂ _-_ currentExact backwardExact)
+        (ℚRing.solve-∀
+          (multiplier (pair coordinate site))
+          (multiplier
+            (pair coordinate (Periodic.shiftForward axis site))))))
 
 ------------------------------------------------------------------------
--- Pairing of one Lie component on the literal axis-major bond carrier.
+-- Literal transpose norm = periodic gradient energy.
 ------------------------------------------------------------------------
 
-bondCellCandidatePairingExact :
-  ∀ vector multiplier coordinate →
-  Sums.sumRational Cell.bondCells4
-    (λ cell →
-      vector (pair coordinate cell)
-      * flatNegativeGradientState multiplier (pair coordinate cell))
-  ≡ Periodic.fieldInner
-      (Periodic.periodicDivergence (stateBondField vector coordinate))
-      (multiplierField multiplier coordinate)
-bondCellCandidatePairingExact vector multiplier coordinate =
-  let
-    stateField = stateBondField vector coordinate
-    gauge = multiplierField multiplier coordinate
+componentGradientEnergy : GaugeMultiplier → Coordinates.LieCoordinate → ℚ
+componentGradientEnergy multiplier coordinate =
+  Sums.sumRational
+    (Block.physicalBlockSites Path4.side4)
+    (λ site → Periodic.siteGradientEnergy
+      (multiplierField multiplier coordinate) site)
 
-    asAxes :
-      Sums.sumRational Cell.bondCells4
-        (λ cell →
-          vector (pair coordinate cell)
-          * flatNegativeGradientState multiplier (pair coordinate cell))
-      ≡ Sums.sumRational GaugeFirst.axes4
-          (λ axis →
-            Sums.sumRational (Block.physicalBlockSites Path4.side4)
-              (λ site →
-                stateField axis site
-                * (- Periodic.forwardDifference axis gauge site)))
-    asAxes =
-      Fubini.sumCartesian
-        GaugeFirst.axes4
-        (Block.physicalBlockSites Path4.side4)
-        (λ cell →
-          vector (pair coordinate cell)
-          * flatNegativeGradientState multiplier (pair coordinate cell))
+gaugeMultiplierRowNormSq : GaugeMultiplier → ℚ
+gaugeMultiplierRowNormSq multiplier =
+  Rect.finiteNormSq RowCarrier.selectedGaugeRowCarrier multiplier
 
-    asPeriodicInner :
-      Sums.sumRational GaugeFirst.axes4
-        (λ axis →
-          Sums.sumRational (Block.physicalBlockSites Path4.side4)
-            (λ site →
-              stateField axis site
-              * (- Periodic.forwardDifference axis gauge site)))
-      ≡ Sums.sumRational GaugeFirst.axes4
-          (λ axis →
-            Periodic.fieldInner (stateField axis)
-              (λ site → - Periodic.forwardDifference axis gauge site))
-    asPeriodicInner =
-      Sums.sumRationalCong GaugeFirst.axes4 _ _
-        (λ axis →
-          sym
-            (Bridge.sumSitesMatchesGlobalSiteSum
-              (λ site →
-                stateField axis site
-                * (- Periodic.forwardDifference axis gauge site))))
+actualFlatGaugeAdjointNormSq : GaugeMultiplier → ℚ
+actualFlatGaugeAdjointNormSq multiplier =
+  Rect.finiteNormSq StateCarrier.physicalStateCarrier
+    (actualFlatGaugeAdjoint multiplier)
 
-    integrated :
-      Sums.sumRational GaugeFirst.axes4
-        (λ axis →
-          Periodic.fieldInner (stateField axis)
-            (λ site → - Periodic.forwardDifference axis gauge site))
-      ≡ Sums.sumRational GaugeFirst.axes4
-          (λ axis →
-            Periodic.fieldInner
-              (Periodic.backwardDifference axis (stateField axis)) gauge)
-    integrated =
-      Sums.sumRationalCong GaugeFirst.axes4 _ _
-        (λ axis → periodicAxisNegativeGradientAdjoint axis (stateField axis) gauge)
-  in
-  trans asAxes
-    (trans asPeriodicInner
-      (trans integrated (axisBackwardPairingFold stateField gauge)))
-
-stateCandidatePairingExact : ∀ vector multiplier →
-  KKT.stateDot vector (flatNegativeGradientState multiplier)
-  ≡ Sums.sumRational Coordinates.lieCoordinates3
-      (λ coordinate →
-        Periodic.fieldInner
-          (Periodic.periodicDivergence (stateBondField vector coordinate))
-          (multiplierField multiplier coordinate))
-stateCandidatePairingExact vector multiplier =
-  trans
-    (Fubini.sumCartesian
-      Coordinates.lieCoordinates3 Cell.bondCells4
-      (λ selected →
-        vector selected * flatNegativeGradientState multiplier selected))
-    (Sums.sumRationalCong Coordinates.lieCoordinates3 _ _
-      (bondCellCandidatePairingExact vector multiplier))
-
-------------------------------------------------------------------------
--- The physical identity-background gauge matrix has the same pairing.
-------------------------------------------------------------------------
-
-rowCoordinatePairingExact : ∀ vector multiplier coordinate →
+componentAxisNormExact :
+  ∀ multiplier coordinate axis →
   Sums.sumRational (Block.physicalBlockSites Path4.side4)
     (λ site →
-      FlatGauge.flatGaugeFirst
-        (Coordinates.decodePhysicalSU2 vector) (pair coordinate site)
-      * multiplier (pair coordinate site))
-  ≡ Periodic.fieldInner
-      (Periodic.periodicDivergence (stateBondField vector coordinate))
-      (multiplierField multiplier coordinate)
-rowCoordinatePairingExact vector multiplier coordinate =
-  let
-    term : Periodic.Site4 → ℚ
-    term site =
-      Periodic.periodicDivergence (stateBondField vector coordinate) site
-      * multiplierField multiplier coordinate site
-
-    pointwise : ∀ site →
-      FlatGauge.flatGaugeFirst
-        (Coordinates.decodePhysicalSU2 vector) (pair coordinate site)
-      * multiplier (pair coordinate site)
-      ≡ term site
-    pointwise site = refl
-  in
-  trans
-    (Sums.sumRationalCong
-      (Block.physicalBlockSites Path4.side4) _ term pointwise)
-    (sym (Bridge.sumSitesMatchesGlobalSiteSum term))
-
-identityGaugeConstraintPairingExact : ∀ vector multiplier →
-  Rect.finiteDot selectedFlatGaugeRowCarrier
-    (identityGaugeConstraintApply vector) multiplier
-  ≡ Sums.sumRational Coordinates.lieCoordinates3
-      (λ coordinate →
-        Periodic.fieldInner
-          (Periodic.periodicDivergence (stateBondField vector coordinate))
-          (multiplierField multiplier coordinate))
-identityGaugeConstraintPairingExact vector multiplier =
-  trans
-    (Sums.sumRationalCong
-      (Basis.elements Rows.selectedGaugeRowFiniteSelector)
-      (λ row → identityGaugeConstraintApply vector row * multiplier row)
-      (λ row →
-        FlatGauge.flatGaugeFirst
-          (Coordinates.decodePhysicalSU2 vector) row * multiplier row)
-      (λ { (pair coordinate site) →
-        cong (_* multiplier (pair coordinate site))
-          (identityGaugeConstraintApplyExact vector coordinate site) }))
-    (trans
-      (Fubini.sumCartesian
-        Coordinates.lieCoordinates3
-        (Block.physicalBlockSites Path4.side4)
-        (λ row →
-          FlatGauge.flatGaugeFirst
-            (Coordinates.decodePhysicalSU2 vector) row * multiplier row))
-      (Sums.sumRationalCong Coordinates.lieCoordinates3 _ _
-        (rowCoordinatePairingExact vector multiplier)))
-
-actualFlatGaugeAdjointPairingExact : ∀ vector multiplier →
-  KKT.stateDot vector (actualFlatGaugeAdjoint multiplier)
-  ≡ KKT.stateDot vector (flatNegativeGradientState multiplier)
-actualFlatGaugeAdjointPairingExact vector multiplier =
-  let
-    rectangularAdjoint =
-      Rect.rectangularAdjointExact
-        KKT.physicalStateCarrier selectedFlatGaugeRowCarrier
-        identityGaugeConstraintMatrix vector multiplier
-  in
-  trans
-    (sym rectangularAdjoint)
-    (trans
-      (identityGaugeConstraintPairingExact vector multiplier)
-      (sym (stateCandidatePairingExact vector multiplier)))
-
-stateDotIsPhysicalCoordinateDot : ∀ left right →
-  KKT.stateDot left right ≡ Coordinates.physicalCoordinateDot left right
-stateDotIsPhysicalCoordinateDot left right = refl
-
-actualFlatGaugeAdjointPointwiseExact : ∀ multiplier coordinate →
-  actualFlatGaugeAdjoint multiplier coordinate
-  ≡ flatNegativeGradientState multiplier coordinate
-actualFlatGaugeAdjointPointwiseExact multiplier coordinate =
-  let
-    basis = Basis.physicalBasis coordinate
-    pairing = actualFlatGaugeAdjointPairingExact basis multiplier
-
-    actualExtract :
-      KKT.stateDot basis (actualFlatGaugeAdjoint multiplier)
-      ≡ actualFlatGaugeAdjoint multiplier coordinate
-    actualExtract =
+      coordinateAxisField multiplier coordinate axis site
+        * coordinateAxisField multiplier coordinate axis site)
+  ≡ ComponentPoincare.axisDirectionalEnergy
+      (multiplierField multiplier coordinate) axis
+componentAxisNormExact multiplier coordinate axis =
+  Sums.sumRationalCong
+    (Block.physicalBlockSites Path4.side4) _ _
+    (λ site →
+      let difference = Periodic.forwardDifference axis
+        (multiplierField multiplier coordinate) site in
       trans
-        (stateDotIsPhysicalCoordinateDot basis (actualFlatGaugeAdjoint multiplier))
-        (Basis.physicalBasisDotExact coordinate (actualFlatGaugeAdjoint multiplier))
+        (cong₂ _*_
+          (actualFlatGaugeAdjointPointwiseExact multiplier coordinate axis site)
+          (actualFlatGaugeAdjointPointwiseExact multiplier coordinate axis site))
+        (ℚRing.solve-∀ difference))
 
-    candidateExtract :
-      KKT.stateDot basis (flatNegativeGradientState multiplier)
-      ≡ flatNegativeGradientState multiplier coordinate
-    candidateExtract =
-      trans
-        (stateDotIsPhysicalCoordinateDot basis (flatNegativeGradientState multiplier))
-        (Basis.physicalBasisDotExact coordinate (flatNegativeGradientState multiplier))
-  in
-  trans (sym actualExtract) (trans pairing candidateExtract)
-
-------------------------------------------------------------------------
--- Norm identity and the strict flat reduced Gram floor.
-------------------------------------------------------------------------
-
-gaugeMultiplierPeriodicGradientEnergy : GaugeMultiplier → ℚ
-gaugeMultiplierPeriodicGradientEnergy multiplier =
-  Sums.sumRational Coordinates.lieCoordinates3
-    (λ coordinate →
-      Sums.sumRational GaugeFirst.axes4
-        (λ axis →
-          Periodic.fieldNormSq
-            (Periodic.forwardDifference axis
-              (multiplierField multiplier coordinate))))
-
-gaugeMultiplierPeriodicWrapEnergy : GaugeMultiplier → ℚ
-gaugeMultiplierPeriodicWrapEnergy multiplier =
-  Sums.sumRational Coordinates.lieCoordinates3
-    (λ coordinate →
-      Sums.sumRational GaugeFirst.axes4
-        (λ axis →
-          Bridge.axisBoundaryWrapEnergy axis
-            (multiplierField multiplier coordinate)))
-
-scalarPeriodicGradientOpenPlusWrap : ∀ field →
-  Sums.sumRational GaugeFirst.axes4
-    (λ axis →
-      Periodic.fieldNormSq (Periodic.forwardDifference axis field))
-  ≡ Poincare.globalDirectionalEnergy field
-    + Sums.sumRational GaugeFirst.axes4
-        (λ axis → Bridge.axisBoundaryWrapEnergy axis field)
-scalarPeriodicGradientOpenPlusWrap field =
-  trans
-    (Sums.sumRationalCong GaugeFirst.axes4 _ _
-      (λ axis → Bridge.axisPeriodicDifferenceSplitsOpenAndBoundary axis field))
-    (trans
-      (Fubini.sumRationalAdd GaugeFirst.axes4
-        (λ axis →
-          DASHI.Physics.YangMills.BalabanPath4PhysicalComponentPoincareExact.axisDirectionalEnergy
-            axis field)
-        (λ axis → Bridge.axisBoundaryWrapEnergy axis field))
-      (cong
-        (_+ Sums.sumRational GaugeFirst.axes4
-          (λ axis → Bridge.axisBoundaryWrapEnergy axis field))
-        (ℚRing.solve-∀)))
-
-scalarPeriodicWrapNonnegative : ∀ field →
-  0ℚ ≤ Sums.sumRational GaugeFirst.axes4
-    (λ axis → Bridge.axisBoundaryWrapEnergy axis field)
-scalarPeriodicWrapNonnegative field =
-  DASHI.Physics.YangMills.BalabanP33FiniteWeightedSchurSquaredExact.sumNonnegative
-    GaugeFirst.axes4
-    (λ axis → Bridge.axisBoundaryWrapEnergy axis field)
-    (λ axis → Bridge.axisBoundaryWrapEnergyNonnegative axis field)
-
-gaugeMultiplierPeriodicGradientOpenPlusWrap : ∀ multiplier →
-  gaugeMultiplierPeriodicGradientEnergy multiplier
-  ≡ FlatFloor.gaugeMultiplierGradientEnergy multiplier
-    + gaugeMultiplierPeriodicWrapEnergy multiplier
-gaugeMultiplierPeriodicGradientOpenPlusWrap multiplier =
-  trans
-    (Sums.sumRationalCong Coordinates.lieCoordinates3 _ _
-      (λ coordinate →
-        scalarPeriodicGradientOpenPlusWrap
-          (multiplierField multiplier coordinate)))
-    (Fubini.sumRationalAdd Coordinates.lieCoordinates3
-      (λ coordinate →
-        Poincare.globalDirectionalEnergy
-          (multiplierField multiplier coordinate))
-      (λ coordinate →
-        Sums.sumRational GaugeFirst.axes4
-          (λ axis → Bridge.axisBoundaryWrapEnergy axis
-            (multiplierField multiplier coordinate))))
-
-gaugeMultiplierPeriodicWrapNonnegative : ∀ multiplier →
-  0ℚ ≤ gaugeMultiplierPeriodicWrapEnergy multiplier
-gaugeMultiplierPeriodicWrapNonnegative multiplier =
-  DASHI.Physics.YangMills.BalabanP33FiniteWeightedSchurSquaredExact.sumNonnegative
-    Coordinates.lieCoordinates3
-    (λ coordinate →
-      Sums.sumRational GaugeFirst.axes4
-        (λ axis → Bridge.axisBoundaryWrapEnergy axis
-          (multiplierField multiplier coordinate)))
-    (λ coordinate → scalarPeriodicWrapNonnegative
-      (multiplierField multiplier coordinate))
-
-gaugeMultiplierOpenBelowPeriodic : ∀ multiplier →
-  FlatFloor.gaugeMultiplierGradientEnergy multiplier
-  ≤ gaugeMultiplierPeriodicGradientEnergy multiplier
-gaugeMultiplierOpenBelowPeriodic multiplier =
-  subst
-    (λ upper →
-      FlatFloor.gaugeMultiplierGradientEnergy multiplier ≤ upper)
-    (sym (gaugeMultiplierPeriodicGradientOpenPlusWrap multiplier))
-    (ℚP.+-monoʳ-≤
-      (FlatFloor.gaugeMultiplierGradientEnergy multiplier)
-      (gaugeMultiplierPeriodicWrapNonnegative multiplier))
-
-flatNegativeGradientStateNormExact : ∀ multiplier →
-  KKT.stateNormSq (flatNegativeGradientState multiplier)
-  ≡ gaugeMultiplierPeriodicGradientEnergy multiplier
-flatNegativeGradientStateNormExact multiplier =
+componentAdjointNormExact :
+  ∀ multiplier coordinate →
+  Sums.sumRational Incidence.bondCells4
+    (λ cell →
+      actualFlatGaugeAdjoint multiplier (pair coordinate cell)
+        * actualFlatGaugeAdjoint multiplier (pair coordinate cell))
+  ≡ componentGradientEnergy multiplier coordinate
+componentAdjointNormExact multiplier coordinate =
   trans
     (Fubini.sumCartesian
-      Coordinates.lieCoordinates3 Cell.bondCells4
-      (λ selected →
-        flatNegativeGradientState multiplier selected
-        * flatNegativeGradientState multiplier selected))
-    (Sums.sumRationalCong Coordinates.lieCoordinates3 _ _
-      (λ coordinate →
-        trans
-          (Fubini.sumCartesian GaugeFirst.axes4
-            (Block.physicalBlockSites Path4.side4)
-            (λ cell →
-              flatNegativeGradientState multiplier (pair coordinate cell)
-              * flatNegativeGradientState multiplier (pair coordinate cell)))
-          (Sums.sumRationalCong GaugeFirst.axes4 _ _
-            (λ axis →
-              trans
-                (Sums.sumRationalCong
-                  (Block.physicalBlockSites Path4.side4) _ _
-                  (λ site → ℚRing.solve-∀
-                    (Periodic.forwardDifference axis
-                      (multiplierField multiplier coordinate) site)))
-                (sym
-                  (Bridge.sumSitesMatchesGlobalSiteSum
-                    (λ site →
-                      Periodic.forwardDifference axis
-                        (multiplierField multiplier coordinate) site
-                      * Periodic.forwardDifference axis
-                        (multiplierField multiplier coordinate) site))))))))
+      Periodic.axes4
+      (Block.physicalBlockSites Path4.side4)
+      (λ cell →
+        actualFlatGaugeAdjoint multiplier (pair coordinate cell)
+          * actualFlatGaugeAdjoint multiplier (pair coordinate cell)))
+    (trans
+      (Sums.sumRationalCong Periodic.axes4 _ _
+        (λ axis → componentAxisNormExact multiplier coordinate axis))
+      (sym (Periodic.sumAxesSitesEqualsGlobalGradientEnergy
+        (multiplierField multiplier coordinate))))
 
 actualFlatGaugeAdjointNormExact : ∀ multiplier →
-  KKT.stateNormSq (actualFlatGaugeAdjoint multiplier)
-  ≡ gaugeMultiplierPeriodicGradientEnergy multiplier
+  actualFlatGaugeAdjointNormSq multiplier
+  ≡ Sums.sumRational Coordinates.lieCoordinates3
+      (componentGradientEnergy multiplier)
 actualFlatGaugeAdjointNormExact multiplier =
   trans
-    (Sums.sumRationalCong Coordinates.physicalSU2Coordinates4 _ _
+    (Fubini.sumCartesian
+      Coordinates.lieCoordinates3 Incidence.bondCells4
       (λ coordinate →
-        cong₂ _*_
-          (actualFlatGaugeAdjointPointwiseExact multiplier coordinate)
-          (actualFlatGaugeAdjointPointwiseExact multiplier coordinate)))
-    (flatNegativeGradientStateNormExact multiplier)
+        actualFlatGaugeAdjoint multiplier coordinate
+          * actualFlatGaugeAdjoint multiplier coordinate))
+    (Sums.sumRationalCong Coordinates.lieCoordinates3 _ _
+      (λ coordinate → componentAdjointNormExact multiplier coordinate))
 
-actualFlatGaugeGramQuadratic : GaugeMultiplier → ℚ
-actualFlatGaugeGramQuadratic multiplier =
-  KKT.stateNormSq (actualFlatGaugeAdjoint multiplier)
+------------------------------------------------------------------------
+-- Gauge-row norm = sum of component site norms.
+------------------------------------------------------------------------
+
+componentMultiplierNormSq : GaugeMultiplier → Coordinates.LieCoordinate → ℚ
+componentMultiplierNormSq multiplier coordinate =
+  Sums.sumRational (Block.physicalBlockSites Path4.side4)
+    (λ site →
+      multiplier (pair coordinate site) * multiplier (pair coordinate site))
+
+gaugeMultiplierRowNormSqExact : ∀ multiplier →
+  gaugeMultiplierRowNormSq multiplier
+  ≡ Sums.sumRational Coordinates.lieCoordinates3
+      (componentMultiplierNormSq multiplier)
+gaugeMultiplierRowNormSqExact multiplier =
+  Fubini.sumCartesian
+    Coordinates.lieCoordinates3
+    (Block.physicalBlockSites Path4.side4)
+    (λ row → multiplier row * multiplier row)
+
+------------------------------------------------------------------------
+-- The existing periodic Poincare floor applies componentwise.
+------------------------------------------------------------------------
+
+componentMeanZero : GaugeMultiplier → Coordinates.LieCoordinate → Set
+componentMeanZero multiplier coordinate =
+  Poincare.GlobalMeanZero4 (multiplierField multiplier coordinate)
+
+record FlatGaugeReducedMultiplier (multiplier : GaugeMultiplier) : Set where
+  field
+    coordinateXMeanZero : componentMeanZero multiplier Coordinates.coordinateX
+    coordinateYMeanZero : componentMeanZero multiplier Coordinates.coordinateY
+    coordinateZMeanZero : componentMeanZero multiplier Coordinates.coordinateZ
+
+open FlatGaugeReducedMultiplier public
+
+componentReduced :
+  ∀ {multiplier} → FlatGaugeReducedMultiplier multiplier →
+  ∀ coordinate → componentMeanZero multiplier coordinate
+componentReduced reduced Coordinates.coordinateX = coordinateXMeanZero reduced
+componentReduced reduced Coordinates.coordinateY = coordinateYMeanZero reduced
+componentReduced reduced Coordinates.coordinateZ = coordinateZMeanZero reduced
+
+componentPoincareFloor :
+  ∀ multiplier → FlatGaugeReducedMultiplier multiplier →
+  ∀ coordinate →
+  LDL.oneSixteenth * componentMultiplierNormSq multiplier coordinate
+  ≤ componentGradientEnergy multiplier coordinate
+componentPoincareFloor multiplier reduced coordinate =
+  ComponentPoincare.physicalComponentOneSixteenthPoincare
+    (multiplierField multiplier coordinate)
+    (componentReduced reduced coordinate)
 
 actualFlatGaugeGramReducedFloor :
-  ∀ multiplier → FlatFloor.FlatGaugeReducedMultiplier multiplier →
-  DASHI.Physics.YangMills.BalabanPath4GeneratedLDLCertificate.oneSixteenth
-    * FlatFloor.gaugeMultiplierNormSq multiplier
-  ≤ actualFlatGaugeGramQuadratic multiplier
+  ∀ multiplier → FlatGaugeReducedMultiplier multiplier →
+  LDL.oneSixteenth * gaugeMultiplierRowNormSq multiplier
+  ≤ actualFlatGaugeAdjointNormSq multiplier
 actualFlatGaugeGramReducedFloor multiplier reduced =
-  ℚP.≤-trans
-    (FlatFloor.flatGaugeReducedPoincare multiplier reduced)
-    (ℚP.≤-trans
-      (gaugeMultiplierOpenBelowPeriodic multiplier)
+  let
+    pointwise : ∀ coordinate →
+      LDL.oneSixteenth * componentMultiplierNormSq multiplier coordinate
+      ≤ componentGradientEnergy multiplier coordinate
+    pointwise = componentPoincareFloor multiplier reduced
+
+    summed = WeightedSchur.sumPointwiseBelow
+      Coordinates.lieCoordinates3 _ _ pointwise
+
+    leftExact = Sums.sumRationalScale
+      LDL.oneSixteenth
+      Coordinates.lieCoordinates3
+      (componentMultiplierNormSq multiplier)
+
+    rowExact = gaugeMultiplierRowNormSqExact multiplier
+    adjointExact = actualFlatGaugeAdjointNormExact multiplier
+  in
+  subst
+    (λ lower → lower ≤ actualFlatGaugeAdjointNormSq multiplier)
+    (sym
+      (trans
+        (cong (LDL.oneSixteenth *_) rowExact)
+        (sym leftExact)))
+    (subst
+      (λ upper →
+        Sums.sumRational Coordinates.lieCoordinates3
+          (λ coordinate →
+            LDL.oneSixteenth * componentMultiplierNormSq multiplier coordinate)
+        ≤ upper)
+      (sym adjointExact)
+      summed)
+
+------------------------------------------------------------------------
+-- Open-reference and periodic quadratic forms are exactly the same quantity.
+------------------------------------------------------------------------
+
+selectedFlatGaugeReferenceFloor : ℚ
+selectedFlatGaugeReferenceFloor = LDL.oneSixteenth
+
+selectedFlatGaugeReferenceFloorExact : ∀ multiplier →
+  FlatGaugeReducedMultiplier multiplier →
+  selectedFlatGaugeReferenceFloor * gaugeMultiplierRowNormSq multiplier
+  ≤ actualFlatGaugeAdjointNormSq multiplier
+selectedFlatGaugeReferenceFloorExact = actualFlatGaugeGramReducedFloor
+
+selectedFlatGaugeReferenceFloorPositive : 0ℚ < selectedFlatGaugeReferenceFloor
+selectedFlatGaugeReferenceFloorPositive = LDL.oneSixteenthPositive
+
+------------------------------------------------------------------------
+-- The same section is exactly the componentwise mean-zero section already used
+-- by BalabanSelectedFlatGaugeReducedFloorExact.
+------------------------------------------------------------------------
+
+flatGaugeReducedToOpenComponent :
+  ∀ multiplier → FlatGaugeReducedMultiplier multiplier →
+  ∀ coordinate →
+  Reduced.ComponentMeanZero
+    (multiplierField multiplier coordinate)
+flatGaugeReducedToOpenComponent multiplier reduced coordinate =
+  reducedToOpenReference (componentReduced reduced coordinate)
+  where
+    reducedToOpenReference : ∀ {scalarField} →
+      Poincare.GlobalMeanZero4 scalarField →
+      Reduced.ComponentMeanZero scalarField
+    reducedToOpenReference meanZero =
+      λ base →
+        trans
+          (GlobalAverage.average0123EqualsGlobalMean _ base)
+          (meanZero base)
+
+openComponentToFlatGaugeReduced :
+  ∀ multiplier →
+  (∀ coordinate →
+    Reduced.ComponentMeanZero
+      (multiplierField multiplier coordinate)) →
+  FlatGaugeReducedMultiplier multiplier
+openComponentToFlatGaugeReduced multiplier openReduced = record
+  { coordinateXMeanZero = toPeriodic Coordinates.coordinateX
+  ; coordinateYMeanZero = toPeriodic Coordinates.coordinateY
+  ; coordinateZMeanZero = toPeriodic Coordinates.coordinateZ
+  }
+  where
+    toPeriodic : ∀ coordinate →
+      Poincare.GlobalMeanZero4 (multiplierField multiplier coordinate)
+    toPeriodic coordinate base =
+      trans
+        (sym
+          (GlobalAverage.average0123EqualsGlobalMean
+            (multiplierField multiplier coordinate) base))
+        (openReduced coordinate base)
+
+------------------------------------------------------------------------
+-- Exact bridge to the open-reference norm used by the background defect theorem.
+------------------------------------------------------------------------
+
+componentMultiplierNormSqOpenExact :
+  ∀ multiplier coordinate →
+  componentMultiplierNormSq multiplier coordinate
+  ≡ Reduced.openNormSq (multiplierField multiplier coordinate)
+componentMultiplierNormSqOpenExact multiplier coordinate =
+  refl
+
+gaugeMultiplierOpenNormSq : GaugeMultiplier → ℚ
+gaugeMultiplierOpenNormSq multiplier =
+  Reduced.openNormSq (multiplierField multiplier Coordinates.coordinateX)
+  + Reduced.openNormSq (multiplierField multiplier Coordinates.coordinateY)
+  + Reduced.openNormSq (multiplierField multiplier Coordinates.coordinateZ)
+
+gaugeMultiplierRowNormSqMatchesOpen : ∀ multiplier →
+  gaugeMultiplierRowNormSq multiplier ≡ gaugeMultiplierOpenNormSq multiplier
+gaugeMultiplierRowNormSqMatchesOpen multiplier =
+  trans
+    (gaugeMultiplierRowNormSqExact multiplier)
+    refl
+
+gaugeMultiplierOpenBelowPeriodic : ∀ multiplier →
+  gaugeMultiplierOpenNormSq multiplier ≤ gaugeMultiplierRowNormSq multiplier
+gaugeMultiplierOpenBelowPeriodic multiplier =
+  let
+    openNonnegative : 0ℚ ≤ gaugeMultiplierOpenNormSq multiplier
+    openNonnegative = WeightedSchur.sumNonnegative
+      Coordinates.lieCoordinates3
+      (λ coordinate → componentMultiplierNormSq multiplier coordinate)
+      (λ coordinate →
+        Rect.finiteNormSqNonnegative
+          Reduced.site4FiniteCoordinates
+          (multiplierField multiplier coordinate))
+
+    raw :
+      gaugeMultiplierOpenNormSq multiplier + 0ℚ
+      ≤ gaugeMultiplierOpenNormSq multiplier + gaugeMultiplierRowNormSq multiplier
+    raw = ℚP.+-monoʳ-≤ (gaugeMultiplierOpenNormSq multiplier)
       (subst
-        (λ upper →
-          gaugeMultiplierPeriodicGradientEnergy multiplier ≤ upper)
-        (sym (actualFlatGaugeAdjointNormExact multiplier))
-        ℚP.≤-refl))
+        (λ value → 0ℚ ≤ value)
+        (gaugeMultiplierRowNormSqMatchesOpen multiplier)
+        openNonnegative)
 
-selectedFlatGaugeAdjointIdentificationLevel : ProofLevel
-selectedFlatGaugeAdjointIdentificationLevel = machineChecked
+    lowerNormalized :
+      gaugeMultiplierOpenNormSq multiplier
+      ≤ gaugeMultiplierOpenNormSq multiplier + gaugeMultiplierRowNormSq multiplier
+    lowerNormalized =
+      subst
+        (λ lower → lower ≤
+          gaugeMultiplierOpenNormSq multiplier + gaugeMultiplierRowNormSq multiplier)
+        (ℚP.+-identityʳ (gaugeMultiplierOpenNormSq multiplier))
+        raw
+  in
+  subst
+    (λ upper → gaugeMultiplierOpenNormSq multiplier ≤ upper)
+    (ℚRing.solve-∀
+      (gaugeMultiplierOpenNormSq multiplier)
+      (gaugeMultiplierRowNormSq multiplier))
+    lowerNormalized
 
-selectedFlatGaugeReducedGramFloorLevel : ProofLevel
-selectedFlatGaugeReducedGramFloorLevel = machineChecked
+selectedFlatGaugeAdjointLiteralLevel : ProofLevel
+selectedFlatGaugeAdjointLiteralLevel = machineChecked
+
+selectedFlatGaugeAdjointReducedFloorLevel : ProofLevel
+selectedFlatGaugeAdjointReducedFloorLevel = machineChecked

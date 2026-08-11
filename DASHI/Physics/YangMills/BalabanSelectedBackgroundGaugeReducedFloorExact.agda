@@ -19,38 +19,26 @@ module DASHI.Physics.YangMills.BalabanSelectedBackgroundGaugeReducedFloorExact w
 --
 -- DASHI CONTRIBUTION
 --
--- Combine three independently proved physical facts:
+-- Master-reconciled physical theorem.  At the identity background the actual
+-- 768-row gauge-matrix transpose has the componentwise-mean-zero floor 1/16.
+-- The exact selected-radius transpose defect is at most 3/1024.  Combining the
+-- two through the finite rational perturbation inequality yields
 --
---   (i)  at the identity background the actual gauge-matrix transpose is the
---        negative periodic gradient and has the componentwise-mean-zero floor
---            (1/16) ||lambda||^2 <= ||L_1^* lambda||^2;
+--   (29/1024) ||lambda||^2 <= ||L_A^* lambda||^2
 --
---   (ii) at the selected relaxed radius the exact finite transpose defect is
---            ||(L_A^*-L_1^*)lambda||^2 <= (3/1024)||lambda||^2;
---
---   (iii) the rational perturbation identity
---            1/2 ||r||^2 - ||d||^2 <= ||r+d||^2.
---
--- The result is the explicit selected-background reduced floor
---
---      (29/1024) ||lambda||^2 <= ||L_A^* lambda||^2
---
--- for every componentwise-mean-zero gauge multiplier.  This is a genuine
--- positive physical Gram estimate with enormous radius slack.  It does NOT
--- claim that the three flat constant modes are the background kernel; the
--- companion holonomy guard proves that shortcut false.  Thus this theorem is
--- a stable coercive subspace, not a fabricated rank-stability theorem.
+-- for every componentwise-mean-zero gauge multiplier whenever A satisfies the
+-- literal relaxed inverse-link radius.  No downstream Round-34/41 selected-
+-- background wrapper is required: the theorem consumes the physical radius
+-- itself, so it can live directly on current master.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; _+_; _-_; _*_; _≤_; _/_)
-import Data.Rational.Properties as ℚP
+  (ℚ; _+_; _*_; _≤_; _/_)
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using
-  (cong; cong₂; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using (pair)
@@ -64,7 +52,6 @@ import DASHI.Physics.YangMills.BalabanPath4PhysicalVarianceDecompositionExact as
 import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Coordinates
 import DASHI.Physics.YangMills.BalabanP33FiniteKKTAdmissibleProjectorExact as KKT
 import DASHI.Physics.YangMills.BalabanP33PhysicalRationalWilsonPlaquetteJetExact as Physical
-import DASHI.Physics.YangMills.BalabanP33PeriodicFourDimensionalHodgeIdentityExact as Periodic
 import DASHI.Physics.YangMills.BalabanP33PhysicalPeriodicOpenReferenceBridgeExact as Bridge
 import DASHI.Physics.YangMills.BalabanP33PhysicalBackgroundGaugeGlobalDefectExact as Global
 import DASHI.Physics.YangMills.BalabanP33PhysicalBackgroundGaugeParameterizedYoungExact as Relaxed
@@ -73,16 +60,9 @@ import DASHI.Physics.YangMills.BalabanSelectedFlatGaugeReducedFloorExact as Flat
 import DASHI.Physics.YangMills.BalabanSelectedFlatGaugeAdjointGramFloorExact as FlatAdjoint
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundGaugeAdjointDefectExact as Defect
 import DASHI.Physics.YangMills.BalabanFiniteReducedFloorPerturbationExact as Perturb
-import DASHI.Physics.YangMills.BalabanSelectedBackgroundPhysicalRadiusInstantiationExact as SelectedRadius
-import DASHI.Physics.YangMills.BalabanSelectedBackgroundVariationalChartBridgeExact as Selected
-import DASHI.Physics.YangMills.BalabanClayGate4BackgroundFieldVariationalTheoremExact as Variational
 
 GaugeMultiplier : Set
 GaugeMultiplier = Defect.GaugeMultiplier
-
-------------------------------------------------------------------------
--- The row norm used by the 768 x 3072 matrix is the physical scalar-field norm.
-------------------------------------------------------------------------
 
 gaugeMultiplierRowNormSqExact : ∀ multiplier →
   Defect.gaugeMultiplierRowNormSq multiplier
@@ -91,9 +71,7 @@ gaugeMultiplierRowNormSqExact multiplier =
   let
     perCoordinate : ∀ coordinate →
       Sums.sumRational (Block.physicalBlockSites Path4.side4)
-        (λ site →
-          multiplier (pair coordinate site)
-          * multiplier (pair coordinate site))
+        (λ site → multiplier (pair coordinate site) * multiplier (pair coordinate site))
       ≡ Variance.globalNormSq
           (FlatFloor.gaugeMultiplierField multiplier coordinate)
     perCoordinate coordinate =
@@ -101,8 +79,7 @@ gaugeMultiplierRowNormSqExact multiplier =
         (sym
           (Bridge.sumSitesMatchesGlobalSiteSum
             (λ site →
-              multiplier (pair coordinate site)
-              * multiplier (pair coordinate site))))
+              multiplier (pair coordinate site) * multiplier (pair coordinate site))))
         (Global.periodicFieldNormSqMatchesGlobal
           (FlatFloor.gaugeMultiplierField multiplier coordinate))
   in
@@ -121,10 +98,6 @@ gaugeMultiplierRowNormSqExact multiplier =
         (Variance.globalNormSq
           (FlatFloor.gaugeMultiplierField multiplier Coordinates.coordinateZ))))
 
-------------------------------------------------------------------------
--- Actual background transpose and exact split L_A^*=L_1^*+E_A^T.
-------------------------------------------------------------------------
-
 backgroundGaugeAdjoint :
   Physical.RationalSU2Background4 → GaugeMultiplier → KKT.StateVector
 backgroundGaugeAdjoint background multiplier =
@@ -132,11 +105,6 @@ backgroundGaugeAdjoint background multiplier =
     (Rect.transposeRectangular
       (GaugeMatrix.selectedBackgroundGaugeConstraintMatrix background))
     multiplier
-
-backgroundGaugeAdjointIdentityExact : ∀ multiplier coordinate →
-  backgroundGaugeAdjoint Physical.identityBackground multiplier coordinate
-  ≡ FlatAdjoint.actualFlatGaugeAdjoint multiplier coordinate
-backgroundGaugeAdjointIdentityExact multiplier coordinate = refl
 
 sumRationalAddExact : ∀ {A : Set} values (left right : A → ℚ) →
   Sums.sumRational values (λ value → left value + right value)
@@ -164,8 +132,7 @@ backgroundGaugeAdjointSplits background multiplier coordinate =
           Physical.identityBackground row coordinate * multiplier row
         + Defect.gaugeDefectMatrix background row coordinate * multiplier row
     pointwise row = ℚRing.solve-∀
-      (GaugeMatrix.selectedBackgroundGaugeConstraintMatrix
-        background row coordinate)
+      (GaugeMatrix.selectedBackgroundGaugeConstraintMatrix background row coordinate)
       (GaugeMatrix.selectedBackgroundGaugeConstraintMatrix
         Physical.identityBackground row coordinate)
       (multiplier row)
@@ -178,10 +145,6 @@ backgroundGaugeAdjointSplits background multiplier coordinate =
           Physical.identityBackground row coordinate * multiplier row)
       (λ row →
         Defect.gaugeDefectMatrix background row coordinate * multiplier row))
-
-------------------------------------------------------------------------
--- A proof-carrying multiplier packages the stable mean-zero complement.
-------------------------------------------------------------------------
 
 record ReducedGaugeMultiplier : Set where
   constructor reducedGaugeMultiplier
@@ -199,8 +162,7 @@ backgroundGaugeAdjointPerturbationData :
   Perturb.ReducedFloorPerturbationData KKT.physicalStateCarrier
 backgroundGaugeAdjointPerturbationData background radius = record
   { Perturb.ReducedFloorPerturbationData.Multiplier = ReducedGaugeMultiplier
-  ; Perturb.ReducedFloorPerturbationData.multiplierNormSq =
-      reducedGaugeMultiplierNormSq
+  ; Perturb.ReducedFloorPerturbationData.multiplierNormSq = reducedGaugeMultiplierNormSq
   ; Perturb.ReducedFloorPerturbationData.reference =
       λ selected → FlatAdjoint.actualFlatGaugeAdjoint (multiplier selected)
   ; Perturb.ReducedFloorPerturbationData.defect =
@@ -240,47 +202,17 @@ selectedBackgroundGaugeReducedFloorExact = ℚRing.solve []
 selectedBackgroundGaugeAdjointReducedFloor :
   ∀ background → Relaxed.RelaxedInverseLinkRadius background →
   ∀ selected →
-  selectedBackgroundGaugeReducedFloor
-    * reducedGaugeMultiplierNormSq selected
+  selectedBackgroundGaugeReducedFloor * reducedGaugeMultiplierNormSq selected
   ≤ KKT.stateNormSq
       (backgroundGaugeAdjoint background (multiplier selected))
 selectedBackgroundGaugeAdjointReducedFloor background radius selected =
   subst
     (λ coefficient →
       coefficient * reducedGaugeMultiplierNormSq selected
-      ≤ KKT.stateNormSq
-          (backgroundGaugeAdjoint background (multiplier selected)))
+      ≤ KKT.stateNormSq (backgroundGaugeAdjoint background (multiplier selected)))
     selectedBackgroundGaugeReducedFloorExact
     (Perturb.perturbedReducedFloor
       (backgroundGaugeAdjointPerturbationData background radius) selected)
 
-------------------------------------------------------------------------
--- Same theorem on the actual selected variational background; no free radius.
-------------------------------------------------------------------------
-
-selectedVariationalGaugeAdjointReducedFloor :
-  ∀ {CoarseField Lie}
-    (inputs : SelectedRadius.SelectedPhysicalBackgroundInstantiation
-      CoarseField Lie)
-    coarse
-    (small : Variational.CoarseSmallField
-      (Selected.variational (SelectedRadius.bridge inputs)) coarse)
-    selected →
-  selectedBackgroundGaugeReducedFloor
-    * reducedGaugeMultiplierNormSq selected
-  ≤ KKT.stateNormSq
-      (backgroundGaugeAdjoint
-        (Selected.selectedBackground (SelectedRadius.bridge inputs) coarse small)
-        (multiplier selected))
-selectedVariationalGaugeAdjointReducedFloor inputs coarse small selected =
-  selectedBackgroundGaugeAdjointReducedFloor
-    (Selected.selectedBackground (SelectedRadius.bridge inputs) coarse small)
-    (SelectedRadius.selectedBackgroundRelaxedInverseLinkRadius
-      inputs coarse small)
-    selected
-
 selectedBackgroundGaugeReducedFloorLevel : ProofLevel
 selectedBackgroundGaugeReducedFloorLevel = machineChecked
-
-selectedVariationalGaugeReducedFloorLevel : ProofLevel
-selectedVariationalGaugeReducedFloorLevel = machineChecked
