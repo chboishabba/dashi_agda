@@ -15,6 +15,12 @@ import DASHI.Physics.Closure.NSTriadKNExactSignedGalerkinCoefficient as Signed
 
 ------------------------------------------------------------------------
 -- Literal finite velocity state and projected Galerkin nonlinearity.
+--
+-- The integer embedding E and inverse-square datum I are parameters of the
+-- record rather than replaceable fields.  Round 30 consumes them through the
+-- exact projections `integerEmbedding` and `inverseSquare` below.  Making
+-- these projections explicit repairs the same-object API without permitting a
+-- caller to resupply incompatible Fourier geometry.
 ------------------------------------------------------------------------
 
 record FiniteComplex3GalerkinSystem
@@ -41,11 +47,66 @@ record FiniteComplex3GalerkinSystem
 
 open FiniteComplex3GalerkinSystem public
 
+integerEmbedding :
+  ∀ {r} {F : C3.RealField r}
+    {E : C3.IntegerEmbedding F}
+    {I : C3.ModeInverseSquare F E} →
+  FiniteComplex3GalerkinSystem F E I → C3.IntegerEmbedding F
+integerEmbedding {E = E} system = E
+
+inverseSquare :
+  ∀ {r} {F : C3.RealField r}
+    {E : C3.IntegerEmbedding F}
+    {I : C3.ModeInverseSquare F E} →
+  (system : FiniteComplex3GalerkinSystem F E I) →
+  C3.ModeInverseSquare F (integerEmbedding system)
+inverseSquare {I = I} system = I
+
+velocityAt :
+  ∀ {r} {F : C3.RealField r}
+    {E : C3.IntegerEmbedding F}
+    {I : C3.ModeInverseSquare F E} →
+  FiniteComplex3GalerkinSystem F E I →
+  Z3.FourierMode → C3.Complex3 F
+velocityAt = velocity
+
+galerkinLaws :
+  ∀ {r} {F : C3.RealField r}
+    {E : C3.IntegerEmbedding F}
+    {I : C3.ModeInverseSquare F E} →
+  FiniteComplex3GalerkinSystem F E I →
+  Signed.VelocityGalerkinLaws
+    Z3.FourierMode (C3.Complex3 F) (C3.Complex F)
+galerkinLaws {F = F} {E = E} {I = I} system =
+  C3.complex3VelocityGalerkinLaws F E I
+
 sumVectors :
   ∀ {r} {F : C3.RealField r} →
   List (C3.Complex3 F) → C3.Complex3 F
 sumVectors {F = F} [] = C3.complex3Zero F
 sumVectors (x ∷ xs) = C3.complex3Add x (sumVectors xs)
+
+-- Round-30 compatibility name.  There is one finite summation operation, not
+-- a second dynamically supplied fold.
+sumComplex3 :
+  ∀ {r} (F : C3.RealField r) →
+  List (C3.Complex3 F) → C3.Complex3 F
+sumComplex3 F = sumVectors
+
+projectedOrderedTerm :
+  ∀ {r} {F : C3.RealField r}
+    {E : C3.IntegerEmbedding F}
+    {I : C3.ModeInverseSquare F E} →
+  FiniteComplex3GalerkinSystem F E I →
+  Physical.PhysicalTriadIncidence → C3.Complex3 F
+projectedOrderedTerm {F = F} {E = E} {I = I} system incidence =
+  Signed.orderedVelocityInteraction
+    (C3.complex3VelocityGalerkinLaws F E I)
+    (Physical.k incidence)
+    (Physical.p incidence)
+    (Physical.q incidence)
+    (velocity system (Physical.p incidence))
+    (velocity system (Physical.q incidence))
 
 mapTriadTerms :
   ∀ {r} {F : C3.RealField r}
@@ -55,14 +116,8 @@ mapTriadTerms :
   List Physical.PhysicalTriadIncidence →
   List (C3.Complex3 F)
 mapTriadTerms system [] = []
-mapTriadTerms {F = F} {E} {I} system (τ ∷ rest) =
-  Signed.orderedVelocityInteraction
-    (C3.complex3VelocityGalerkinLaws F E I)
-    (Physical.k τ)
-    (Physical.p τ)
-    (Physical.q τ)
-    (velocity system (Physical.p τ))
-    (velocity system (Physical.q τ))
+mapTriadTerms system (τ ∷ rest) =
+  projectedOrderedTerm system τ
   ∷ mapTriadTerms system rest
 
 concreteTriadsAt :
