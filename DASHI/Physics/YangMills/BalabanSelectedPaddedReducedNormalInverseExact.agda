@@ -49,7 +49,7 @@ module DASHI.Physics.YangMills.BalabanSelectedPaddedReducedNormalInverseExact wh
 -- For every reduced source y=P y, solve K~_A x=y and return P x.  Applying P
 -- to the equation and using P C=0 proves
 --
---       P K_A P (P K~_A^-1 y) = y.
+--       P K_A (P K~_A^-1 y) = y.
 --
 -- Hence this is an honest right inverse of the reduced normal operator, which
 -- is exactly what the physical tangent normal correction needs.  No inverse of
@@ -81,6 +81,7 @@ import DASHI.Physics.YangMills.BalabanSelectedCombinedConstraintRowCarrierExact 
 import DASHI.Physics.YangMills.BalabanSelectedCombinedConstraintFiniteKKTExact as RawKKT
 import DASHI.Physics.YangMills.BalabanSelectedCombinedMultiplierSplitExact as Split
 import DASHI.Physics.YangMills.BalabanSelectedCombinedProjectionOrthogonalityExact as Projection
+import DASHI.Physics.YangMills.BalabanSelectedCombinedProjectionCongruenceExact as ProjectionCong
 import DASHI.Physics.YangMills.BalabanSelectedReducedCombinedConstraintFloorExact as Floor
 import DASHI.Physics.YangMills.BalabanSelectedReducedCombinedAdjointInjectiveExact as Injective
 
@@ -95,6 +96,9 @@ selectedReducedProjection = Projection.selectedReducedProjection
 
 selectedConstantComplement : RawMultiplier → RawMultiplier
 selectedConstantComplement = Projection.selectedConstantComplement
+
+minusOne : ℚ
+minusOne = - (+ 1 / 1)
 
 ------------------------------------------------------------------------
 -- Raw Gram pointwise congruence and linearity.
@@ -149,7 +153,7 @@ gramZeroExact background row =
     (Fubini.sumRationalZero Rows.selectedCombinedConstraintRows)
 
 ------------------------------------------------------------------------
--- The padded normal endomorphism and its exact rational linearity.
+-- The padded normal endomorphism and exact rational linearity.
 ------------------------------------------------------------------------
 
 selectedPaddedReducedNormalApply :
@@ -159,36 +163,31 @@ selectedPaddedReducedNormalApply background multiplier row =
       (selectedReducedProjection multiplier) row
   + selectedConstantComplement multiplier row
 
+selectedProjectionZero : ∀ row →
+  selectedReducedProjection zeroRawMultiplier row ≡ 0ℚ
+selectedProjectionZero row =
+  trans
+    (Projection.selectedProjectionScaleExact 0ℚ zeroRawMultiplier row)
+    (ℚRing.solve-∀ (selectedReducedProjection zeroRawMultiplier row))
+
+selectedComplementZero : ∀ row →
+  selectedConstantComplement zeroRawMultiplier row ≡ 0ℚ
+selectedComplementZero row =
+  trans
+    (Projection.selectedComplementScaleExact 0ℚ zeroRawMultiplier row)
+    (ℚRing.solve-∀ (selectedConstantComplement zeroRawMultiplier row))
+
 selectedPaddedReducedNormalZeroExact : ∀ background row →
   selectedPaddedReducedNormalApply background zeroRawMultiplier row ≡ 0ℚ
 selectedPaddedReducedNormalZeroExact background row =
-  let
-    projectionZero : selectedReducedProjection zeroRawMultiplier row ≡ 0ℚ
-    projectionZero =
-      trans
-        (Projection.selectedProjectionScaleExact 0ℚ zeroRawMultiplier row)
-        (ℚRing.solve-∀ (selectedReducedProjection zeroRawMultiplier row))
-
-    complementZero : selectedConstantComplement zeroRawMultiplier row ≡ 0ℚ
-    complementZero =
-      trans
-        (Projection.selectedComplementScaleExact 0ℚ zeroRawMultiplier row)
-        (ℚRing.solve-∀ (selectedConstantComplement zeroRawMultiplier row))
-  in
   trans
     (cong₂ _+_
       (trans
         (gramRespectsPointwise background
           (selectedReducedProjection zeroRawMultiplier) zeroRawMultiplier
-          (λ selected →
-            trans
-              (Projection.selectedProjectionScaleExact
-                0ℚ zeroRawMultiplier selected)
-              (ℚRing.solve-∀
-                (selectedReducedProjection zeroRawMultiplier selected)))
-          row)
+          selectedProjectionZero row)
         (gramZeroExact background row))
-      complementZero)
+      (selectedComplementZero row))
     (ℚRing.solve [])
 
 selectedPaddedReducedNormalAddExact : ∀ background left right row →
@@ -251,46 +250,12 @@ selectedPaddedReducedNormalRespectsPointwise : ∀ background left right →
   selectedPaddedReducedNormalApply background left row
   ≡ selectedPaddedReducedNormalApply background right row
 selectedPaddedReducedNormalRespectsPointwise background left right pointwise row =
-  let
-    projectionCong : ∀ selected →
-      selectedReducedProjection left selected
-      ≡ selectedReducedProjection right selected
-    projectionCong selected =
-      trans
-        (sym
-          (Projection.selectedProjectionAddExact
-            right (Projection.rawScale 0ℚ left) selected))
-        (trans
-          (cong
-            (λ source → selectedReducedProjection source selected)
-            (pointwiseRaw selected))
-          (Projection.selectedProjectionAddExact
-            left (Projection.rawScale 0ℚ right) selected))
-      where
-        pointwiseRaw : ∀ selected →
-          Projection.rawAdd right (Projection.rawScale 0ℚ left) selected
-          ≡ Projection.rawAdd left (Projection.rawScale 0ℚ right) selected
-        pointwiseRaw selected =
-          trans
-            (ℚRing.solve-∀ (right selected) (left selected))
-            (trans (pointwise selected)
-              (sym (ℚRing.solve-∀ (left selected) (right selected))))
-
-    complementCong : selectedConstantComplement left row
-      ≡ selectedConstantComplement right row
-    complementCong =
-      trans
-        (sym
-          (Projection.selectedProjectionComplementReconstruct left row))
-        (trans
-          (pointwise row)
-          (Projection.selectedProjectionComplementReconstruct right row))
-  in
   cong₂ _+_
     (gramRespectsPointwise background
       (selectedReducedProjection left) (selectedReducedProjection right)
-      projectionCong row)
-    complementCong
+      (ProjectionCong.selectedProjectionRespectsPointwise left right pointwise)
+      row)
+    (ProjectionCong.selectedComplementRespectsPointwise left right pointwise row)
 
 selectedPaddedReducedNormalEndomorphism :
   Physical.RationalSU2Background4 →
@@ -374,24 +339,28 @@ projectionAdjointNormZeroFromPaddedZero background multiplier paddedZero =
         + Rect.finiteDot Rows.selectedCombinedConstraintRowCarrier complement projected
     splitDot = finiteDotAddLeftExact gram complement projected
 
+    crossZero :
+      Rect.finiteDot Rows.selectedCombinedConstraintRowCarrier complement projected
+      ≡ 0ℚ
     crossZero = Projection.selectedComplementProjectionOrthogonal multiplier multiplier
+
+    sumZero :
+      Rect.finiteDot Rows.selectedCombinedConstraintRowCarrier gram projected
+        + Rect.finiteDot Rows.selectedCombinedConstraintRowCarrier complement projected
+      ≡ 0ℚ
+    sumZero = trans (sym splitDot) paddedDotZero
+
+    removeZero :
+      Rect.finiteDot Rows.selectedCombinedConstraintRowCarrier gram projected + 0ℚ
+      ≡ Rect.finiteDot Rows.selectedCombinedConstraintRowCarrier gram projected
+    removeZero = ℚRing.solve-∀
+      (Rect.finiteDot Rows.selectedCombinedConstraintRowCarrier gram projected)
 
     gramDotZero :
       Rect.finiteDot Rows.selectedCombinedConstraintRowCarrier gram projected ≡ 0ℚ
     gramDotZero =
-      let
-        sumZero :
-          Rect.finiteDot Rows.selectedCombinedConstraintRowCarrier gram projected
-            + Rect.finiteDot Rows.selectedCombinedConstraintRowCarrier complement projected
-          ≡ 0ℚ
-        sumZero = trans (sym splitDot) paddedDotZero
-      in
       trans
-        (sym (ℚRing.solve-∀
-          (Rect.finiteDot Rows.selectedCombinedConstraintRowCarrier gram projected) :
-          Rect.finiteDot Rows.selectedCombinedConstraintRowCarrier gram projected
-          + 0ℚ
-          ≡ Rect.finiteDot Rows.selectedCombinedConstraintRowCarrier gram projected))
+        (sym removeZero)
         (trans
           (cong
             (Rect.finiteDot Rows.selectedCombinedConstraintRowCarrier gram projected +_)
@@ -440,6 +409,9 @@ projectionReducedNormZeroFromPaddedZero background radius multiplier paddedZero 
       ≡ Floor.reducedCombinedMultiplierNormSq selected
     leftExact = ℚRing.solve-∀ (Floor.reducedCombinedMultiplierNormSq selected)
 
+    rightExact : Injective.reciprocalReducedFloor * 0ℚ ≡ 0ℚ
+    rightExact = ℚRing.solve []
+
     normBelowZero : Floor.reducedCombinedMultiplierNormSq selected ≤ 0ℚ
     normBelowZero =
       subst
@@ -451,7 +423,7 @@ projectionReducedNormZeroFromPaddedZero background radius multiplier paddedZero 
               * (Floor.selectedBackgroundReducedCombinedFloor
                   * Floor.reducedCombinedMultiplierNormSq selected)
             ≤ upper)
-          (ℚRing.solve []) scaled)
+          rightExact scaled)
   in
   ℚP.≤-antisym normBelowZero
     (Injective.combinedMultiplierNormNonnegative selected)
@@ -467,19 +439,18 @@ projectionPointwiseZeroFromPaddedZero
     selected = Split.reduceSelectedMultiplier multiplier
     combinedZero = projectionReducedNormZeroFromPaddedZero
       background radius multiplier paddedZero
-    averageZero = Injective.averageNormZeroFromCombinedZero selected combinedZero
+    averageNormZero = Injective.averageNormZeroFromCombinedZero selected combinedZero
   in
-  Injective.averageNormZeroPointwise selected averageZero row
+  Injective.averageNormZeroPointwise selected averageNormZero row
 projectionPointwiseZeroFromPaddedZero
-    background radius multiplier paddedZero
-    (Combined.gaugeConstraintRow row) =
+    background radius multiplier paddedZero (Combined.gaugeConstraintRow row) =
   let
     selected = Split.reduceSelectedMultiplier multiplier
     combinedZero = projectionReducedNormZeroFromPaddedZero
       background radius multiplier paddedZero
-    gaugeZero = Injective.gaugeNormZeroFromCombinedZero selected combinedZero
+    gaugeNormZero = Injective.gaugeNormZeroFromCombinedZero selected combinedZero
   in
-  Injective.gaugeNormZeroPointwise selected gaugeZero row
+  Injective.gaugeNormZeroPointwise selected gaugeNormZero row
 
 paddedHomogeneousKernelTrivial :
   ∀ background → Relaxed.RelaxedInverseLinkRadius background →
@@ -501,15 +472,22 @@ paddedHomogeneousKernelTrivial background radius multiplier paddedZero row =
           projectionZero row)
         (gramZeroExact background row)
 
+    equation :
+      RawKKT.selectedCombinedConstraintGramApply background
+          (selectedReducedProjection multiplier) row
+        + selectedConstantComplement multiplier row
+      ≡ 0ℚ
+    equation = paddedZero row
+
+    insertZero :
+      0ℚ + selectedConstantComplement multiplier row
+      ≡ selectedConstantComplement multiplier row
+    insertZero = ℚRing.solve-∀ (selectedConstantComplement multiplier row)
+
     complementZero : selectedConstantComplement multiplier row ≡ 0ℚ
     complementZero =
-      let
-        equation = paddedZero row
-      in
       trans
-        (sym (ℚRing.solve-∀ (selectedConstantComplement multiplier row) :
-          0ℚ + selectedConstantComplement multiplier row
-          ≡ selectedConstantComplement multiplier row))
+        (sym insertZero)
         (trans
           (cong (_+ selectedConstantComplement multiplier row)
             (sym gramProjectionZero))
@@ -531,34 +509,38 @@ selectedPaddedReducedNormalInjective :
     (selectedPaddedReducedNormalEndomorphism background)
 selectedPaddedReducedNormalInjective background radius left right equal row =
   let
-    difference = Projection.rawAdd left (Projection.rawScale (- (+ 1 / 1)) right)
+    difference = Projection.rawAdd left (Projection.rawScale minusOne right)
 
     differenceEquation : ∀ selected →
       selectedPaddedReducedNormalApply background difference selected ≡ 0ℚ
     differenceEquation selected =
       trans
         (selectedPaddedReducedNormalAddExact background
-          left (Projection.rawScale (- (+ 1 / 1)) right) selected)
+          left (Projection.rawScale minusOne right) selected)
         (trans
           (cong
             (selectedPaddedReducedNormalApply background left selected +_)
             (selectedPaddedReducedNormalScaleExact background
-              (- (+ 1 / 1)) right selected))
+              minusOne right selected))
           (trans
             (cong
-              (λ rightValue →
-                selectedPaddedReducedNormalApply background left selected
-                + (- (+ 1 / 1)) * rightValue)
-              (sym (equal selected)))
+              (λ leftValue →
+                leftValue
+                  + minusOne
+                    * selectedPaddedReducedNormalApply background right selected)
+              (equal selected))
             (ℚRing.solve-∀
-              (selectedPaddedReducedNormalApply background left selected))))
+              (selectedPaddedReducedNormalApply background right selected))))
 
     differenceZero = paddedHomogeneousKernelTrivial
       background radius difference differenceEquation
+
+    reconstructLeft :
+      (left row + minusOne * right row) + right row ≡ left row
+    reconstructLeft = ℚRing.solve-∀ (left row) (right row)
   in
   trans
-    (sym (ℚRing.solve-∀ (left row) (right row) :
-      (left row + (- (+ 1 / 1)) * right row) + right row ≡ left row))
+    (sym reconstructLeft)
     (trans
       (cong (_+ right row) (differenceZero row))
       (ℚRing.solve-∀ (right row)))
@@ -595,18 +577,17 @@ selectedPaddedReducedNormalInverseApply background certificate =
     (Matrix.inverseMatrix certificate)
 
 ------------------------------------------------------------------------
--- Restriction of the padded inverse is a right inverse for P K_A P.
+-- Restriction of the padded inverse is a right inverse for the reduced normal.
 ------------------------------------------------------------------------
 
 ReducedSource : RawMultiplier → Set
 ReducedSource source = ∀ row → selectedReducedProjection source row ≡ source row
 
-selectedProjectedReducedNormalApply :
+selectedReducedCombinedGramApply :
   Physical.RationalSU2Background4 → RawMultiplier → RawMultiplier
-selectedProjectedReducedNormalApply background multiplier =
+selectedReducedCombinedGramApply background multiplier =
   selectedReducedProjection
-    (RawKKT.selectedCombinedConstraintGramApply background
-      (selectedReducedProjection multiplier))
+    (RawKKT.selectedCombinedConstraintGramApply background multiplier)
 
 selectedReducedNormalInverseApply :
   ∀ background →
@@ -618,57 +599,14 @@ selectedReducedNormalInverseApply background certificate source =
   selectedReducedProjection
     (selectedPaddedReducedNormalInverseApply background certificate source)
 
-projectionRespectsPointwise : ∀ left right →
-  (∀ row → left row ≡ right row) →
-  ∀ row → selectedReducedProjection left row ≡ selectedReducedProjection right row
-projectionRespectsPointwise left right pointwise row =
-  let
-    difference = Projection.rawAdd left (Projection.rawScale (- (+ 1 / 1)) right)
-    differenceProjection :
-      selectedReducedProjection difference row
-      ≡ selectedReducedProjection left row
-        + (- (+ 1 / 1)) * selectedReducedProjection right row
-    differenceProjection =
-      trans
-        (Projection.selectedProjectionAddExact
-          left (Projection.rawScale (- (+ 1 / 1)) right) row)
-        (cong
-          (selectedReducedProjection left row +_)
-          (Projection.selectedProjectionScaleExact (- (+ 1 / 1)) right row))
-
-    differenceRawZero : difference row ≡ 0ℚ
-    differenceRawZero =
-      trans
-        (cong
-          (λ leftValue → leftValue + (- (+ 1 / 1)) * right row)
-          (pointwise row))
-        (ℚRing.solve-∀ (right row))
-  in
-  trans
-    (sym (ℚRing.solve-∀
-      (selectedReducedProjection left row)
-      (selectedReducedProjection right row) :
-      selectedReducedProjection left row
-      ≡ (selectedReducedProjection left row
-          + (- (+ 1 / 1)) * selectedReducedProjection right row)
-        + selectedReducedProjection right row))
-    (trans
-      (cong (_+ selectedReducedProjection right row)
-        (trans (sym differenceProjection)
-          (trans
-            (cong (λ source → selectedReducedProjection source row)
-              (rawPointwiseZero difference differenceRawZero))
-            (projectionZero row))))
-      (ℚRing.solve-∀ (selectedReducedProjection right row)))
-  where
-    rawPointwiseZero : ∀ vector → vector row ≡ 0ℚ → vector ≡ vector
-    rawPointwiseZero vector zero = refl
-
-    projectionZero : ∀ selected → selectedReducedProjection zeroRawMultiplier selected ≡ 0ℚ
-    projectionZero selected =
-      trans
-        (Projection.selectedProjectionScaleExact 0ℚ zeroRawMultiplier selected)
-        (ℚRing.solve-∀ (selectedReducedProjection zeroRawMultiplier selected))
+selectedReducedNormalInverseIsReduced :
+  ∀ background certificate source row →
+  selectedReducedProjection
+    (selectedReducedNormalInverseApply background certificate source) row
+  ≡ selectedReducedNormalInverseApply background certificate source row
+selectedReducedNormalInverseIsReduced background certificate source row =
+  Projection.selectedProjectionIdempotent
+    (selectedPaddedReducedNormalInverseApply background certificate source) row
 
 selectedReducedCombinedGramRightInverse :
   ∀ background
@@ -678,7 +616,7 @@ selectedReducedCombinedGramRightInverse :
     source →
   ReducedSource source →
   ∀ row →
-  selectedProjectedReducedNormalApply background
+  selectedReducedCombinedGramApply background
       (selectedReducedNormalInverseApply background certificate source) row
   ≡ source row
 selectedReducedCombinedGramRightInverse background certificate source sourceReduced row =
@@ -686,6 +624,8 @@ selectedReducedCombinedGramRightInverse background certificate source sourceRedu
     fullSolution = selectedPaddedReducedNormalInverseApply
       background certificate source
     reducedSolution = selectedReducedProjection fullSolution
+    gram = RawKKT.selectedCombinedConstraintGramApply background reducedSolution
+    complement = selectedConstantComplement fullSolution
 
     fullEquation : ∀ selected →
       selectedPaddedReducedNormalApply background fullSolution selected
@@ -701,42 +641,25 @@ selectedReducedCombinedGramRightInverse background certificate source sourceRedu
       selectedReducedProjection
         (selectedPaddedReducedNormalApply background fullSolution) row
       ≡ selectedReducedProjection source row
-    projectEquation = projectionRespectsPointwise
+    projectEquation = ProjectionCong.selectedProjectionRespectsPointwise
       (selectedPaddedReducedNormalApply background fullSolution)
       source fullEquation row
 
     complementKilled :
-      selectedReducedProjection (selectedConstantComplement fullSolution) row ≡ 0ℚ
+      selectedReducedProjection complement row ≡ 0ℚ
     complementKilled = Projection.selectedProjectionOfComplementZero fullSolution row
 
     projectedPaddedSplits :
       selectedReducedProjection
         (selectedPaddedReducedNormalApply background fullSolution) row
-      ≡ selectedProjectedReducedNormalApply background reducedSolution row
+      ≡ selectedReducedCombinedGramApply background reducedSolution row
     projectedPaddedSplits =
-      let
-        gram = RawKKT.selectedCombinedConstraintGramApply background reducedSolution
-        padded = Rect.vectorAdd gram (selectedConstantComplement fullSolution)
-      in
       trans
-        (Projection.selectedProjectionAddExact
-          gram (selectedConstantComplement fullSolution) row)
+        (Projection.selectedProjectionAddExact gram complement row)
         (trans
-          (cong₂ _+_
-            (cong
-              (λ sourceVector → selectedReducedProjection sourceVector row)
-              (gramRespectsPointwise background
-                (selectedReducedProjection fullSolution)
-                reducedSolution
-                (selectedProjectionIdempotentPointwise fullSolution)))
-            complementKilled)
+          (cong₂ _+_ refl complementKilled)
           (ℚRing.solve-∀
-            (selectedProjectedReducedNormalApply background reducedSolution row)))
-      where
-        selectedProjectionIdempotentPointwise : ∀ multiplier selected →
-          selectedReducedProjection (selectedReducedProjection multiplier) selected
-          ≡ selectedReducedProjection multiplier selected
-        selectedProjectionIdempotentPointwise = Projection.selectedProjectionIdempotent
+            (selectedReducedCombinedGramApply background reducedSolution row)))
   in
   trans
     (sym projectedPaddedSplits)
