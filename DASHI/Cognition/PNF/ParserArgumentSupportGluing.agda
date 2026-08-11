@@ -1,11 +1,13 @@
 module DASHI.Cognition.PNF.ParserArgumentSupportGluing where
 
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Nat using (Nat; suc)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 open import DASHI.Cognition.PNF.NumericAuthority
 import DASHI.Core.TypedDependencyCore as Dependency
+import DASHI.Foundations.StratifiedResolutionTowerExact as Resolution
 import DASHI.Physics.Closure.NSTriadKNIndexedGluingRound32Exact as Gluing
 import DASHI.Cognition.PNF.ProofRelevantIdentityFibres as Identity
 
@@ -73,6 +75,38 @@ supportWitnessFromGluing projection gluing provenance scope =
     scope
 
 ------------------------------------------------------------------------
+-- Resolution naturality.
+--
+-- The parser and argument carriers may have different resolution towers.  A
+-- valid multiscale support map must commute with both projection systems:
+--
+--   S_r (project_P x) = project_A (S_(r+1) x).
+--
+-- This is the exact form of the coarse/fine support condition discussed in the
+-- ITIR sampling notes.  If an application cannot construct this witness, it has
+-- not established lossless/natural support transport at that resolution.
+------------------------------------------------------------------------
+
+record ParserArgumentResolutionNaturality
+    (parserTower argumentTower : Resolution.ResolutionTower) : Set₁ where
+  constructor parserArgumentResolutionNaturality
+  field
+    supportAtResolution :
+      (r : Nat) →
+      Resolution.Carrier parserTower r →
+      Resolution.Carrier argumentTower r
+    supportCommutesWithCoarsening :
+      ∀ {r}
+        (fineParser : Resolution.Carrier parserTower (suc r)) →
+      supportAtResolution r
+        (Resolution.project parserTower fineParser)
+      ≡
+      Resolution.project argumentTower
+        (supportAtResolution (suc r) fineParser)
+
+open ParserArgumentResolutionNaturality public
+
+------------------------------------------------------------------------
 -- Authority boundary: support/gluing alone cannot create identity.
 ------------------------------------------------------------------------
 
@@ -122,6 +156,8 @@ record ParserArgumentSupportBoundary : Set where
       (projection : ParserArgumentProjection) → Set
     identityAcrossSeamRequiresProofAtBothEnds :
       (projection : ParserArgumentProjection) → Set
+    multiscaleSupportRequiresNaturalityWitness :
+      (parserTower argumentTower : Resolution.ResolutionTower) → Set
 
 open ParserArgumentSupportBoundary public
 
@@ -131,3 +167,4 @@ canonicalParserArgumentSupportBoundary =
     supportAloneCannotCreateIdentity
     ParserArgumentGluing
     SupportAlignedIdentity
+    ParserArgumentResolutionNaturality
