@@ -6,6 +6,7 @@ import DASHI.Core.RelationalHypervoxelBraidCore
 import DASHI.Education.RelationalEducationGateAlgebra
 import DASHI.Governance.RelationalFlowGateAlgebra
 import DASHI.Biology.PredictiveMetastabilityTraumaBridge
+import DASHI.Cognition.PNF.TraumaMemoryHypervoxelBridge
 import DASHI.Culture.PatternMindReciprocityLoveBridge
 import DASHI.Culture.SemioticPhallicLackAmalekBridge
 import DASHI.Culture.IntersectionalPowerValueFolkModelBoundary
@@ -13,3 +14,4 @@ import DASHI.Governance.CyberneticClinicalInstitutionalRepairBridge
 import DASHI.Governance.InstitutionalContinuityRepairArithmetic
 import DASHI.Governance.MedicalCannabisPresenceImpairmentBoundary
 import DASHI.FullRelationalFlowRepairHyperfabric
+import DASHI.Reasoning.RelationalEverything
