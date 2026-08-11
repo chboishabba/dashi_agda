@@ -1,0 +1,71 @@
+name: SSP15 indexed-j gluing and Mathieu interference round 6
+
+on:
+  push:
+    branches: ['agent/ssp15-j-gluing-mathieu-interference-round6']
+  pull_request:
+    branches:
+      - 'agent/ssp15-j-gluing-mathieu-interference-round6'
+      - 'agent/ssp15-modular-character-projection-round5'
+      - 'master'
+    paths:
+      - 'DASHI/Biology/EisensteinNineRingInterferenceExact.agda'
+      - 'DASHI/Biology/EisensteinThreeSixSymmetryExact.agda'
+      - 'DASHI/Biology/HalfChartNineRingQuotientExact.agda'
+      - 'DASHI/Biology/IndexedJExternalGluingExact.agda'
+      - 'DASHI/Biology/IteratedPointedAttachmentSpiralExact.agda'
+      - 'DASHI/Moonshine/MathieuDivisorLatticeExact.agda'
+      - 'DASHI/Moonshine/MathieuDivisorPathInterferenceExact.agda'
+      - 'DASHI/Moonshine/MathieuJTransportIntegrationExact.agda'
+      - 'DASHI/Moonshine/MathieuStabilizerTowerExact.agda'
+      - 'DASHI/Moonshine/Monster196884FibreInterferenceExact.agda'
+      - 'DASHI/Moonshine/SSPJGluingMathieuRound6Validation.agda'
+      - 'DASHI/EverythingSSPJGluingMathieuRound6.agda'
+      - 'scripts/check_ssp15_j_gluing_mathieu_interference_round6.sh'
+      - 'scripts/check_ssp15_modular_character_projection_round5.sh'
+      - 'scripts/classify_agda_substance.py'
+      - 'scripts/run_agda29_parallel_check.sh'
+      - 'Docs/support/reference/SSP15JGluingMathieuInterferenceRound6.md'
+      - 'Docs/support/reference/SSP15MathieuDivisorPathInterferenceExact.md'
+      - 'Docs/support/reference/SSP15MathieuTowerArithmeticWitnessBoundary.md'
+      - '.github/workflows/ssp15-j-gluing-mathieu-interference-round6.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  AGDA_FLAKE: github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin
+  AGDA_JOBS: '2'
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 100
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Install Nix
+        uses: cachix/install-nix-action@630ae543ea3a38a9a4166f03376c02c50f408342 # v31
+      - name: Cache pinned Agda environment
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: ${{ runner.temp }}/dashi-agda29
+          key: ${{ runner.os }}-agda29-86a1179c1f886da773dc53be920bcca5d876884e
+          restore-keys: |
+            ${{ runner.os }}-agda29-
+      - name: Check indexed-j gluing and Mathieu interference
+        shell: bash
+        run: |
+          set -euo pipefail
+          export DASHI_REPO_ROOT="$GITHUB_WORKSPACE"
+          export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
+          bash scripts/check_ssp15_j_gluing_mathieu_interference_round6.sh
+      - name: Upload substance audit
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: ssp15-j-gluing-mathieu-interference-round6
+          path: artifacts/ssp15-j-gluing-mathieu-interference-round6.json
+          if-no-files-found: ignore
