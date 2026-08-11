@@ -33,7 +33,8 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_; _++_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Data.Rational.Tactic.RingSolver using (solve)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier as Cube
@@ -117,9 +118,16 @@ foldAppend :
   ∀ {A : Set} (value : A → ℚ) left right →
   foldRational value (left ++ right)
   ≡ foldRational value left + foldRational value right
-foldAppend value [] right = refl
+foldAppend value [] right =
+  solve (foldRational value right ∷ [])
 foldAppend value (x ∷ xs) right =
-  cong (value x +_) (foldAppend value xs right)
+  trans
+    (cong (value x +_) (foldAppend value xs right))
+    (solve
+      ( value x
+      ∷ foldRational value xs
+      ∷ foldRational value right
+      ∷ []))
 
 flattenFibres : ∀ {A : Set} → List (List A) → List A
 flattenFibres [] = []
@@ -158,11 +166,8 @@ pushforwardAlongExactFibrePartition :
   ≡ foldFibreTotals value (fibres partition)
 pushforwardAlongExactFibrePartition value partition =
   trans
-    (cong (foldRational value) (symmetry (flattenMeaning partition)))
+    (cong (foldRational value) (sym (flattenMeaning partition)))
     (finiteFibrePushforward value (fibres partition))
-  where
-  symmetry : ∀ {X : Set} {a b : X} → a ≡ b → b ≡ a
-  symmetry refl = refl
 
 physicalTriadOrbitActionOnCutoffClosed : Bool
 physicalTriadOrbitActionOnCutoffClosed = true
