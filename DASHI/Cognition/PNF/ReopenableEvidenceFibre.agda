@@ -2,6 +2,7 @@ module DASHI.Cognition.PNF.ReopenableEvidenceFibre where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.FibreRestrictionCore as Fibre
@@ -58,6 +59,27 @@ record SeparatedCandidateState (Candidate : Set) : Set where
     semanticAdmissibility : SemanticAdmissibility
 
 open SeparatedCandidateState public
+
+------------------------------------------------------------------------
+-- Soft evidence reweights an arbitrary candidate fibre without changing its
+-- semantic support.  The Weight carrier is application-supplied: counts,
+-- rationals, constructive reals, log weights, or another exact representation
+-- may be used.  Reweighting is therefore strictly weaker than refutation.
+------------------------------------------------------------------------
+
+record EvidenceReweighting (Candidate Weight : Set) : Set where
+  constructor evidenceReweighting
+  field
+    beforeWeight : Candidate → Weight
+    afterWeight : Candidate → Weight
+    reweightingReceipt : String
+
+open EvidenceReweighting public
+
+data ReweightingRefutationPermission : Set where
+
+reweightingAloneCannotRefute : ReweightingRefutationPermission → ⊥
+reweightingAloneCannotRefute ()
 
 -- Balanced/signed phase is evidence geometry, not refutation authority.  Reuse
 -- the existing interaction directions rather than creating another ternary
@@ -136,6 +158,8 @@ record ReopenableEvidenceBoundary : Set where
   field
     negativePhaseIsNotRefutation :
       PhaseRefutationPermission Selection.interfering → ⊥
+    reweightingIsNotRefutation :
+      ReweightingRefutationPermission → ⊥
     executionOverflowIsNotSemanticAuthority :
       Bounded.OverflowSemanticPermission Bounded.executionEvidenceOnly → ⊥
     suppressionAndRefutationAreDifferentTypes : Bool
@@ -148,5 +172,6 @@ canonicalReopenableEvidenceBoundary : ReopenableEvidenceBoundary
 canonicalReopenableEvidenceBoundary =
   reopenableEvidenceBoundary
     interferingPhaseCannotRefute
+    reweightingAloneCannotRefute
     Bounded.executionOverflowHasNoSemanticPermission
     true refl
