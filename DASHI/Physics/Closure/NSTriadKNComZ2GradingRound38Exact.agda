@@ -74,11 +74,27 @@ transportAdd left right =
     (PQ.coarseToFine left + PQ.coarseToFine right)
     (PQ.fineToFine left + PQ.fineToFine right)
 
+transportExt : ∀ {left right : PQ.LinearTransport2} →
+  PQ.coarseToCoarse left ≡ PQ.coarseToCoarse right →
+  PQ.fineToCoarse left ≡ PQ.fineToCoarse right →
+  PQ.coarseToFine left ≡ PQ.coarseToFine right →
+  PQ.fineToFine left ≡ PQ.fineToFine right →
+  left ≡ right
+transportExt
+  {PQ.linear-transport2 a b c d}
+  {PQ.linear-transport2 .a .b .c .d}
+  refl refl refl refl = refl
+
 transportEvenOddDecomposition : ∀ transport →
   transportAdd (evenTransport transport) (oddTransport transport)
   ≡ transport
 transportEvenOddDecomposition
-    (PQ.linear-transport2 a b c d) = refl
+    (PQ.linear-transport2 a b c d) =
+  transportExt
+    (solve (a ∷ []))
+    (solve (b ∷ []))
+    (solve (c ∷ []))
+    (solve (d ∷ []))
 
 applyEvenOddDecomposition : ∀ transport state →
   PQ.applyTransport transport state
