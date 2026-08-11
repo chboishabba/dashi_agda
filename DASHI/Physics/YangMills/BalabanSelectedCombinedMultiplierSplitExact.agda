@@ -83,14 +83,14 @@ baseSite =
     (pair Indices.index0 Indices.index0)
 
 scalarMeanZeroFromGlobalMeanZero :
-  ∀ field → Variance.GlobalMeanZero4 field →
-  Mean.scalarMean field ≡ 0ℚ
-scalarMeanZeroFromGlobalMeanZero field meanZero =
+  ∀ scalarField → Variance.GlobalMeanZero4 scalarField →
+  Mean.scalarMean scalarField ≡ 0ℚ
+scalarMeanZeroFromGlobalMeanZero scalarField meanZero =
   trans
     (cong (GlobalAverage.oneTwoFiftySix *_)
-      (Bridge.sumSitesMatchesGlobalSiteSum field))
+      (Bridge.sumSitesMatchesGlobalSiteSum scalarField))
     (trans
-      (sym (GlobalAverage.average0123EqualsGlobalMean field baseSite))
+      (sym (GlobalAverage.average0123EqualsGlobalMean scalarField baseSite))
       (meanZero baseSite))
 
 reducedCoordinateMeanZero :
