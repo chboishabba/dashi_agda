@@ -1,0 +1,102 @@
+name: Frontier Hodge automorphic spectral round two
+
+on:
+  push:
+    branches:
+      - 'agent/frontier-hodge-automorphic-spectral-crosspollination'
+    paths:
+      - 'DASHI/Mathematics/LinearAlgebra/RationalThreeWayHodgeCoordinateUniquenessExact.agda'
+      - 'DASHI/Mathematics/AlgebraicGeometry/ProjectiveSpaceHodgeBasisExact.agda'
+      - 'DASHI/Mathematics/Complexity/GenericFiniteRunTableauExact.agda'
+      - 'DASHI/Moonshine/FiniteDifferentialVertexAlgebraExact.agda'
+      - 'DASHI/Moonshine/SquareZeroDifferentialVertexAlgebraBridgeExact.agda'
+      - 'DASHI/Moonshine/RankOneHeisenbergFockWindowExact.agda'
+      - 'DASHI/Physics/Constructive/FiniteReflectionPositivityExact.agda'
+      - 'DASHI/Physics/Constructive/FiniteProductClusteringDenominatorClearedExact.agda'
+      - 'DASHI/Physics/Constructive/FinitePolymerKPBudgetExact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsFiniteConstructiveLadderExact.agda'
+      - 'DASHI/Mathematics/CrossPollination/FrontierProductiveCompletionRound2GateExact.agda'
+      - 'DASHI/Mathematics/CrossPollination/FrontierHodgeAutomorphicSpectralRound2Validation.agda'
+      - 'DASHI/EverythingFrontierHodgeAutomorphicSpectralRound2.agda'
+      - 'scripts/check_frontier_hodge_automorphic_spectral_round2.sh'
+      - '.github/workflows/frontier-hodge-automorphic-spectral-round2.yml'
+  pull_request:
+    branches:
+      - 'agent/millennium-crosspollination-rh-hodge-bsd-pnp-poincare-voa'
+    paths:
+      - 'DASHI/Mathematics/LinearAlgebra/RationalThreeWayHodgeCoordinateUniquenessExact.agda'
+      - 'DASHI/Mathematics/AlgebraicGeometry/ProjectiveSpaceHodgeBasisExact.agda'
+      - 'DASHI/Mathematics/Complexity/GenericFiniteRunTableauExact.agda'
+      - 'DASHI/Moonshine/FiniteDifferentialVertexAlgebraExact.agda'
+      - 'DASHI/Moonshine/SquareZeroDifferentialVertexAlgebraBridgeExact.agda'
+      - 'DASHI/Moonshine/RankOneHeisenbergFockWindowExact.agda'
+      - 'DASHI/Physics/Constructive/FiniteReflectionPositivityExact.agda'
+      - 'DASHI/Physics/Constructive/FiniteProductClusteringDenominatorClearedExact.agda'
+      - 'DASHI/Physics/Constructive/FinitePolymerKPBudgetExact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsFiniteConstructiveLadderExact.agda'
+      - 'DASHI/Mathematics/CrossPollination/FrontierProductiveCompletionRound2GateExact.agda'
+      - 'DASHI/Mathematics/CrossPollination/FrontierHodgeAutomorphicSpectralRound2Validation.agda'
+      - 'DASHI/EverythingFrontierHodgeAutomorphicSpectralRound2.agda'
+      - 'scripts/check_frontier_hodge_automorphic_spectral_round2.sh'
+      - '.github/workflows/frontier-hodge-automorphic-spectral-round2.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  statuses: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Check hardened frontier round two
+        id: check
+        shell: bash
+        run: |
+          set +e
+          (
+            set -euo pipefail
+            export AGDA_FLAKE="github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin"
+            export DASHI_REPO_ROOT="$GITHUB_WORKSPACE"
+            export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
+            export AGDA_LOG_PATH="$GITHUB_WORKSPACE/frontier-round2-agda.log"
+            export AGDA_JOBS=4
+            bash scripts/check_frontier_hodge_automorphic_spectral_round2.sh
+          ) > frontier-round2-check.log 2>&1
+          status=$?
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          tail -n 800 frontier-round2-check.log
+          exit 0
+      - name: Upload logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontier-round2-logs
+          path: |
+            frontier-round2-check.log
+            frontier-round2-agda.log
+          if-no-files-found: warn
+      - name: Publish checker status
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          CHECK_STATUS: ${{ steps.check.outputs.status }}
+        shell: bash
+        run: |
+          state=success
+          description='Hardened frontier round-two Agda checker passed'
+          if [[ "$CHECK_STATUS" != '0' ]]; then
+            state=failure
+            description='Hardened frontier round-two Agda checker failed'
+          fi
+          gh api --method POST \
+            "repos/${GITHUB_REPOSITORY}/statuses/${GITHUB_SHA}" \
+            -f state="$state" \
+            -f context='frontier-hodge-automorphic-spectral-round2-agda' \
+            -f description="$description"
+      - name: Fail on checker error
+        if: steps.check.outputs.status != '0'
+        run: exit 1
