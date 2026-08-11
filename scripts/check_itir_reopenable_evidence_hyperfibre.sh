@@ -35,18 +35,28 @@ fi
 
 required_markers=(
   'executionOverflowHasNoSemanticPermission'
+  'measuredBoundedExecutionCarrier'
   'reopenExact'
+  'semanticRefutationRequiresIndexedEvidenceIsTrue'
+  'correctiveReachabilityReusesTypedActionSystemIsTrue'
   'supportAloneCannotCreateIdentity'
+  'coarsePhaseAssignedWithoutFineSignedWitnessIsFalse'
+  'coarsenThenProject6to3EqualsProjectThenCoarsen'
+  'coarsenThenProject9to6EqualsProjectThenCoarsen'
   'h9PresenceAloneCannotPromoteWorldIdentity'
   'regexHasNoSemanticAuthority'
+  'outputDoesNotExceedInput'
   'queryCommutationIsClassicalNyquistTheoremIsFalse'
+  'neighbourhoodProposalCannotAdmitIdentity'
   'externalCandidateAloneCannotPromoteWorldIdentity'
   'identityProofDoesNotImplyFactorApplicability'
   'candidateClassificationCannotPromoteIdentity'
   'inductivePreferenceCannotProjectScalarIdentity'
   'sharedSurfaceDoesNotIdentifyOccurrences'
   'finiteReferenceDoesNotPromoteUniversalPQJ'
+  'ComplementaryReadingReference'
   'expectedConstantEqualityClaimRequiresContract'
+  'prefixPartitionClaimRequiresContract'
 )
 
 for marker in "${required_markers[@]}"; do
