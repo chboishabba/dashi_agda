@@ -56,11 +56,12 @@ open import Data.List.Membership.Propositional.Properties using (∈-map⁺; ∈
 import Data.List.Relation.Unary.Unique.Propositional as Unique
 import Data.List.Relation.Unary.Unique.Propositional.Properties as UniqueP
 import Data.List.Relation.Binary.Permutation.Propositional as Perm
-open import Data.Product using (Σ; _,_)
+open import Data.Product using (_,_)
 open import Data.Rational.Base using (ℚ; 0ℚ; _/_; _+_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
+import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier as Cube
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadSymmetry as Symmetry
@@ -140,9 +141,9 @@ representativeExact :
   ∀ {cutoff tau} →
   (hit : Physical.PhysicalTriadEnumerationHit cutoff tau) →
   Physical.representative hit ≡ tau
-representativeExact hit =
+representativeExact {tau = tau} hit =
   KFree.physicalIncidenceExtPQ
-    (Physical.representative hit) _
+    (Physical.representative hit) tau
     (Physical.sameP hit)
     (Physical.sameQ hit)
 
@@ -208,60 +209,60 @@ swapTriadMember {cutoff} {tau} member =
 mappedPEnergyLegForward : ∀ {cutoff tau} →
   tau ∈ map Orbit.pEnergyLeg (Physical.physicalTriadEnumeration cutoff) →
   tau ∈ Physical.physicalTriadEnumeration cutoff
-mappedPEnergyLegForward member with ∈-map⁻ Orbit.pEnergyLeg member
+mappedPEnergyLegForward {cutoff} member with ∈-map⁻ Orbit.pEnergyLeg member
 ... | source , sourceMember , sourceMaps =
   subst
-    (λ chosen → chosen ∈ Physical.physicalTriadEnumeration _)
+    (λ chosen → chosen ∈ Physical.physicalTriadEnumeration cutoff)
     sourceMaps
     (pEnergyLegMember sourceMember)
 
 mappedPEnergyLegBackward : ∀ {cutoff tau} →
   tau ∈ Physical.physicalTriadEnumeration cutoff →
   tau ∈ map Orbit.pEnergyLeg (Physical.physicalTriadEnumeration cutoff)
-mappedPEnergyLegBackward {tau = tau} member =
+mappedPEnergyLegBackward {cutoff} {tau} member =
   subst
     (λ chosen → chosen ∈ map Orbit.pEnergyLeg
-      (Physical.physicalTriadEnumeration _))
+      (Physical.physicalTriadEnumeration cutoff))
     (pEnergyLegInvolutiveExact tau)
     (∈-map⁺ Orbit.pEnergyLeg (pEnergyLegMember member))
 
 mappedQEnergyLegForward : ∀ {cutoff tau} →
   tau ∈ map Orbit.qEnergyLeg (Physical.physicalTriadEnumeration cutoff) →
   tau ∈ Physical.physicalTriadEnumeration cutoff
-mappedQEnergyLegForward member with ∈-map⁻ Orbit.qEnergyLeg member
+mappedQEnergyLegForward {cutoff} member with ∈-map⁻ Orbit.qEnergyLeg member
 ... | source , sourceMember , sourceMaps =
   subst
-    (λ chosen → chosen ∈ Physical.physicalTriadEnumeration _)
+    (λ chosen → chosen ∈ Physical.physicalTriadEnumeration cutoff)
     sourceMaps
     (qEnergyLegMember sourceMember)
 
 mappedQEnergyLegBackward : ∀ {cutoff tau} →
   tau ∈ Physical.physicalTriadEnumeration cutoff →
   tau ∈ map Orbit.qEnergyLeg (Physical.physicalTriadEnumeration cutoff)
-mappedQEnergyLegBackward {tau = tau} member =
+mappedQEnergyLegBackward {cutoff} {tau} member =
   subst
     (λ chosen → chosen ∈ map Orbit.qEnergyLeg
-      (Physical.physicalTriadEnumeration _))
+      (Physical.physicalTriadEnumeration cutoff))
     (qEnergyLegInvolutiveExact tau)
     (∈-map⁺ Orbit.qEnergyLeg (qEnergyLegMember member))
 
 mappedSwapForward : ∀ {cutoff tau} →
   tau ∈ map Symmetry.swapTriad (Physical.physicalTriadEnumeration cutoff) →
   tau ∈ Physical.physicalTriadEnumeration cutoff
-mappedSwapForward member with ∈-map⁻ Symmetry.swapTriad member
+mappedSwapForward {cutoff} member with ∈-map⁻ Symmetry.swapTriad member
 ... | source , sourceMember , sourceMaps =
   subst
-    (λ chosen → chosen ∈ Physical.physicalTriadEnumeration _)
+    (λ chosen → chosen ∈ Physical.physicalTriadEnumeration cutoff)
     sourceMaps
     (swapTriadMember sourceMember)
 
 mappedSwapBackward : ∀ {cutoff tau} →
   tau ∈ Physical.physicalTriadEnumeration cutoff →
   tau ∈ map Symmetry.swapTriad (Physical.physicalTriadEnumeration cutoff)
-mappedSwapBackward {tau = tau} member =
+mappedSwapBackward {cutoff} {tau} member =
   subst
     (λ chosen → chosen ∈ map Symmetry.swapTriad
-      (Physical.physicalTriadEnumeration _))
+      (Physical.physicalTriadEnumeration cutoff))
     (swapTriadInvolutiveExact tau)
     (∈-map⁺ Symmetry.swapTriad (swapTriadMember member))
 
@@ -332,7 +333,8 @@ foldPermutationInvariant :
 foldPermutationInvariant value Perm.refl = refl
 foldPermutationInvariant value (Perm.prep x permutation) =
   cong (value x +_) (foldPermutationInvariant value permutation)
-foldPermutationInvariant value (Perm.swap x y permutation) =
+foldPermutationInvariant value
+    (Perm.swap {ys = ys} x y permutation) =
   trans
     (cong
       (λ tail → value x + (value y + tail))
@@ -340,7 +342,7 @@ foldPermutationInvariant value (Perm.swap x y permutation) =
     (solve
       ( value x
       ∷ value y
-      ∷ foldPower value _
+      ∷ foldPower value ys
       ∷ []))
 foldPermutationInvariant value (Perm.trans first second) =
   trans
@@ -352,19 +354,19 @@ foldPermutationInvariant value (Perm.trans first second) =
 ------------------------------------------------------------------------
 
 orderedPower :
-  C3.IntegerEmbedding F →
-  (I : C3.ModeInverseSquare F _) →
-  (Physical.PhysicalTriadIncidence) →
-  (DASHI.Physics.Closure.NSIntegerFourierLattice.FourierMode → C3.Complex3 F) →
+  (E : C3.IntegerEmbedding F) →
+  C3.ModeInverseSquare F E →
+  Physical.PhysicalTriadIncidence →
+  (Z3.FourierMode → C3.Complex3 F) →
   ℚ
 orderedPower E I tau velocity =
   C3.real (Audit.orderedSignedTransferAt E I tau velocity)
 
 orderedPairPower :
-  C3.IntegerEmbedding F →
-  (I : C3.ModeInverseSquare F _) →
+  (E : C3.IntegerEmbedding F) →
+  C3.ModeInverseSquare F E →
   Physical.PhysicalTriadIncidence →
-  (DASHI.Physics.Closure.NSIntegerFourierLattice.FourierMode → C3.Complex3 F) →
+  (Z3.FourierMode → C3.Complex3 F) →
   ℚ
 orderedPairPower E I tau velocity =
   C3.real (Audit.orderedPairSignedTransferAt E I tau velocity)
@@ -373,7 +375,7 @@ orderedPairPowerIsOrderedPlusSwap :
   (E : C3.IntegerEmbedding F) →
   (I : C3.ModeInverseSquare F E) →
   (tau : Physical.PhysicalTriadIncidence) →
-  (velocity : DASHI.Physics.Closure.NSIntegerFourierLattice.FourierMode → C3.Complex3 F) →
+  (velocity : Z3.FourierMode → C3.Complex3 F) →
   orderedPairPower E I tau velocity
   ≡ orderedPower E I tau velocity
     + orderedPower E I (Symmetry.swapTriad tau) velocity
@@ -385,7 +387,7 @@ threeLegPowerIsPairOrbitSum :
   (E : C3.IntegerEmbedding F) →
   (I : C3.ModeInverseSquare F E) →
   (tau : Physical.PhysicalTriadIncidence) →
-  (velocity : DASHI.Physics.Closure.NSIntegerFourierLattice.FourierMode → C3.Complex3 F) →
+  (velocity : Z3.FourierMode → C3.Complex3 F) →
   TriadPower.literalThreeLegPower E I tau velocity
   ≡ orderedPairPower E I tau velocity
     + orderedPairPower E I (Orbit.pEnergyLeg tau) velocity
@@ -395,21 +397,21 @@ threeLegPowerIsPairOrbitSum E I tau velocity = refl
 orderedFold :
   (E : C3.IntegerEmbedding F) →
   (I : C3.ModeInverseSquare F E) →
-  (DASHI.Physics.Closure.NSIntegerFourierLattice.FourierMode → C3.Complex3 F) →
+  (Z3.FourierMode → C3.Complex3 F) →
   List Physical.PhysicalTriadIncidence → ℚ
 orderedFold E I velocity = foldPower (λ tau → orderedPower E I tau velocity)
 
 pairFold :
   (E : C3.IntegerEmbedding F) →
   (I : C3.ModeInverseSquare F E) →
-  (DASHI.Physics.Closure.NSIntegerFourierLattice.FourierMode → C3.Complex3 F) →
+  (Z3.FourierMode → C3.Complex3 F) →
   List Physical.PhysicalTriadIncidence → ℚ
 pairFold E I velocity = foldPower (λ tau → orderedPairPower E I tau velocity)
 
 pPairFold qPairFold swapOrderedFold :
   (E : C3.IntegerEmbedding F) →
   (I : C3.ModeInverseSquare F E) →
-  (DASHI.Physics.Closure.NSIntegerFourierLattice.FourierMode → C3.Complex3 F) →
+  (Z3.FourierMode → C3.Complex3 F) →
   List Physical.PhysicalTriadIncidence → ℚ
 pPairFold E I velocity =
   foldPower (λ tau → orderedPairPower E I (Orbit.pEnergyLeg tau) velocity)
@@ -421,7 +423,7 @@ swapOrderedFold E I velocity =
 pairFoldPEnergyInvariant :
   (E : C3.IntegerEmbedding F) →
   (I : C3.ModeInverseSquare F E) →
-  (velocity : DASHI.Physics.Closure.NSIntegerFourierLattice.FourierMode → C3.Complex3 F) →
+  (velocity : Z3.FourierMode → C3.Complex3 F) →
   (cutoff : Nat) →
   pPairFold E I velocity (Physical.physicalTriadEnumeration cutoff)
   ≡ pairFold E I velocity (Physical.physicalTriadEnumeration cutoff)
@@ -438,7 +440,7 @@ pairFoldPEnergyInvariant E I velocity cutoff =
 pairFoldQEnergyInvariant :
   (E : C3.IntegerEmbedding F) →
   (I : C3.ModeInverseSquare F E) →
-  (velocity : DASHI.Physics.Closure.NSIntegerFourierLattice.FourierMode → C3.Complex3 F) →
+  (velocity : Z3.FourierMode → C3.Complex3 F) →
   (cutoff : Nat) →
   qPairFold E I velocity (Physical.physicalTriadEnumeration cutoff)
   ≡ pairFold E I velocity (Physical.physicalTriadEnumeration cutoff)
@@ -455,7 +457,7 @@ pairFoldQEnergyInvariant E I velocity cutoff =
 orderedFoldSwapInvariant :
   (E : C3.IntegerEmbedding F) →
   (I : C3.ModeInverseSquare F E) →
-  (velocity : DASHI.Physics.Closure.NSIntegerFourierLattice.FourierMode → C3.Complex3 F) →
+  (velocity : Z3.FourierMode → C3.Complex3 F) →
   (cutoff : Nat) →
   swapOrderedFold E I velocity (Physical.physicalTriadEnumeration cutoff)
   ≡ orderedFold E I velocity (Physical.physicalTriadEnumeration cutoff)
@@ -472,7 +474,7 @@ orderedFoldSwapInvariant E I velocity cutoff =
 pairFoldDecomposition :
   (E : C3.IntegerEmbedding F) →
   (I : C3.ModeInverseSquare F E) →
-  (velocity : DASHI.Physics.Closure.NSIntegerFourierLattice.FourierMode → C3.Complex3 F) →
+  (velocity : Z3.FourierMode → C3.Complex3 F) →
   (items : List Physical.PhysicalTriadIncidence) →
   pairFold E I velocity items
   ≡ orderedFold E I velocity items + swapOrderedFold E I velocity items
@@ -499,7 +501,7 @@ pairFoldDecomposition E I velocity (tau ∷ rest) =
 pairFoldIsDoubleOrderedOnEnumeration :
   (E : C3.IntegerEmbedding F) →
   (I : C3.ModeInverseSquare F E) →
-  (velocity : DASHI.Physics.Closure.NSIntegerFourierLattice.FourierMode → C3.Complex3 F) →
+  (velocity : Z3.FourierMode → C3.Complex3 F) →
   (cutoff : Nat) →
   pairFold E I velocity (Physical.physicalTriadEnumeration cutoff)
   ≡ orderedFold E I velocity (Physical.physicalTriadEnumeration cutoff)
@@ -515,7 +517,7 @@ pairFoldIsDoubleOrderedOnEnumeration E I velocity cutoff =
 threeLegFoldDecomposition :
   (E : C3.IntegerEmbedding F) →
   (I : C3.ModeInverseSquare F E) →
-  (velocity : DASHI.Physics.Closure.NSIntegerFourierLattice.FourierMode → C3.Complex3 F) →
+  (velocity : Z3.FourierMode → C3.Complex3 F) →
   (items : List Physical.PhysicalTriadIncidence) →
   TriadPower.sumLiteralTriadPower E I velocity items
   ≡ pairFold E I velocity items
@@ -550,7 +552,7 @@ sixFold value = value + value + value + value + value + value
 literalThreeLegFoldIsSixOrderedFold :
   (E : C3.IntegerEmbedding F) →
   (I : C3.ModeInverseSquare F E) →
-  (velocity : DASHI.Physics.Closure.NSIntegerFourierLattice.FourierMode → C3.Complex3 F) →
+  (velocity : Z3.FourierMode → C3.Complex3 F) →
   (cutoff : Nat) →
   TriadPower.sumLiteralTriadPower E I velocity
     (Physical.physicalTriadEnumeration cutoff)
@@ -569,23 +571,31 @@ literalThreeLegFoldIsSixOrderedFold E I velocity cutoff =
         + qPairFold E I velocity enumeration
     decomposition = threeLegFoldDecomposition E I velocity enumeration
 
+    stepP :
+      pairTotal
+        + pPairFold E I velocity enumeration
+        + qPairFold E I velocity enumeration
+      ≡ pairTotal + pairTotal + qPairFold E I velocity enumeration
+    stepP =
+      cong
+        (λ pairP → pairTotal + pairP
+          + qPairFold E I velocity enumeration)
+        (pairFoldPEnergyInvariant E I velocity cutoff)
+
+    stepQ :
+      pairTotal + pairTotal + qPairFold E I velocity enumeration
+      ≡ pairTotal + pairTotal + pairTotal
+    stepQ =
+      cong
+        (λ pairQ → pairTotal + pairTotal + pairQ)
+        (pairFoldQEnergyInvariant E I velocity cutoff)
+
     allPairTotals :
       pairTotal
         + pPairFold E I velocity enumeration
         + qPairFold E I velocity enumeration
       ≡ pairTotal + pairTotal + pairTotal
-    allPairTotals =
-      cong
-        (λ pairP → pairTotal + pairP
-          + qPairFold E I velocity enumeration)
-        (pairFoldPEnergyInvariant E I velocity cutoff)
-      `transLocal`
-      cong
-        (λ pairQ → pairTotal + pairTotal + pairQ)
-        (pairFoldQEnergyInvariant E I velocity cutoff)
-      where
-      infixr 2 _`transLocal`_
-      _`transLocal`_ = trans
+    allPairTotals = trans stepP stepQ
 
     pairTwice : pairTotal ≡ orderedTotal + orderedTotal
     pairTwice = pairFoldIsDoubleOrderedOnEnumeration E I velocity cutoff
@@ -617,7 +627,7 @@ literalOrderedGalerkinIncidencePowerZero :
   (E : C3.IntegerEmbedding F) →
   (I : C3.ModeInverseSquare F E) →
   (cutoff : Nat) →
-  (velocity : DASHI.Physics.Closure.NSIntegerFourierLattice.FourierMode → C3.Complex3 F) →
+  (velocity : Z3.FourierMode → C3.Complex3 F) →
   Audit.RealityCondition velocity →
   Audit.DivergenceFreeCondition E velocity →
   orderedFold E I velocity (Physical.physicalTriadEnumeration cutoff)
