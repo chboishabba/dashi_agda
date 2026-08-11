@@ -23,14 +23,13 @@ module DASHI.Physics.YangMills.BalabanFiniteRectangularRationalExact where
 -- infinite sum is used.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.Equality using (_≡_)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; _+_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using
-  (cong; subst; sym; trans)
+  (cong; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
@@ -143,13 +142,18 @@ applyComposeRectangularExact
     expandProducts = Sums.sumRationalCong columns _ _
       (λ column →
         trans
-          (sym
-            (Sums.sumRationalScale
-              (vector column) middles
-              (λ middle → left row middle * right middle column)))
-          (Sums.sumRationalCong middles _ _
-            (λ middle → ℚP.*-assoc
-              (left row middle) (right middle column) (vector column))))
+          (ℚP.*-comm
+            (Sums.sumRational middles
+              (λ middle → left row middle * right middle column))
+            (vector column))
+          (trans
+            (sym
+              (Sums.sumRationalScale
+                (vector column) middles
+                (λ middle → left row middle * right middle column)))
+            (Sums.sumRationalCong middles _ _
+              (λ middle → ℚRing.solve-∀
+                (left row middle) (right middle column) (vector column)))))
 
     swap :
       Sums.sumRational columns
@@ -181,9 +185,9 @@ applyComposeRectangularExact
       (λ middle →
         trans
           (Sums.sumRationalCong columns _ _
-            (λ column → sym
-              (ℚP.*-assoc
-                (left row middle) (right middle column) (vector column))))
+            (λ column →
+              ℚP.*-assoc
+                (left row middle) (right middle column) (vector column)))
           (Sums.sumRationalScale
             (left row middle) columns
             (λ column → right middle column * vector column)))
@@ -219,11 +223,18 @@ rectangularAdjointExact rowCarrier columnCarrier matrix vector multiplier =
     expandLeft = Sums.sumRationalCong rows _ _
       (λ row →
         trans
-          (sym
-            (Sums.sumRationalScale
-              (multiplier row) columns
-              (λ column → matrix row column * vector column)))
-          refl)
+          (ℚP.*-comm
+            (Sums.sumRational columns
+              (λ column → matrix row column * vector column))
+            (multiplier row))
+          (trans
+            (sym
+              (Sums.sumRationalScale
+                (multiplier row) columns
+                (λ column → matrix row column * vector column)))
+            (Sums.sumRationalCong columns _ _
+              (λ column → ℚRing.solve-∀
+                (multiplier row) (matrix row column) (vector column)))))
 
     swap :
       Sums.sumRational rows
