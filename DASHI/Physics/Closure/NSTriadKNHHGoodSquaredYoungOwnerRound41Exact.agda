@@ -20,30 +20,27 @@ module DASHI.Physics.Closure.NSTriadKNHHGoodSquaredYoungOwnerRound41Exact where
 --
 -- DASHI CONTRIBUTION
 --
--- Round 40 reduced the HH-good shell estimate to the exact squared form
+-- Round 40 reduced the HH-good shell estimate to
 --
 --   P^2 <= C_strain delta W.
 --
--- If the physical local mass has the critical factorization W <= X D, then
--- Young closes the owner.  This file proves that implication without adding
--- a square-root primitive.
+-- A tempting Round-41 shortcut was W <= X D.  The companion scaling-no-go
+-- module rejects that as a universal arbitrary-data bound: Round 38's literal
+-- local weight a^2 b^4 is degree six in amplitude whereas X D is only degree
+-- four.  The scale-compatible correction retains one additional quadratic
+-- resource E0, intended to be the data-controlled L2 energy (or an equivalent
+-- already-controlled amplitude factor):
 --
--- For every positive epsilon with exact inverse epsilon^-1,
+--   W <= E0 X D.
 --
---   P^2 <= K X D,        K = C_strain delta,
+-- This file proves the remaining Young algebra without square roots.  For
+-- every positive epsilon,
 --
--- implies
+--   P <= epsilon D
+--        + [ C_strain delta E0 / (4 epsilon) ] X.
 --
---   P <= epsilon D + (K / (4 epsilon)) X.
---
--- The square-root-free bridge is
---
---   K X D <= (epsilon D + K X/(4 epsilon))^2,
---
--- followed by reflection of square order on rational scalars.  Therefore the
--- formerly vague physical HH-good time/dissipation absorption is not an
--- independent analytic leaf once W <= X D has been proved on the literal
--- shell samples.
+-- Thus the physical HH-good problem is sharpened to proving a data-weighted
+-- local-mass factorization, not the false raw W <= X D shortcut.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Level; lsuc)
@@ -53,7 +50,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
 import Data.Integer.Base as Int
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; 1ℚ; _/_; _+_; _-_; _*_; _≤_
+  (ℚ; 0ℚ; _/_; _+_; _-_; _*_; _≤_
   ; NonNegative; NonZero; Positive; nonNegative)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
@@ -99,13 +96,10 @@ nonnegativeSquareReflectsOrder x bound xNN boundNN squares
     instance
       xNonnegative : NonNegative x
       xNonnegative = ℚ.nonNegative xNN
-
       boundNonnegative : NonNegative bound
       boundNonnegative = ℚ.nonNegative boundNN
-
       xNonZero : NonZero x
       xNonZero = ℚ.≢-nonZero xNonzero
-
       xPositive : Positive x
       xPositive = ℚP.nonNeg∧nonZero⇒pos x
 
@@ -128,8 +122,7 @@ squareBoundWithNonnegativeUpperImpliesUpper scalar bound boundNN squareBound
   with ℚP.≤-total scalar 0ℚ
 ... | inj₁ scalar≤zero = ℚP.≤-trans scalar≤zero boundNN
 ... | inj₂ zero≤scalar =
-  nonnegativeSquareReflectsOrder
-    scalar bound zero≤scalar boundNN squareBound
+  nonnegativeSquareReflectsOrder scalar bound zero≤scalar boundNN squareBound
 
 fourProductBelowSquareSum : ∀ left right →
   four * left * right ≤ L2.square (left + right)
@@ -140,22 +133,13 @@ fourProductBelowSquareSum left right =
       four * left * right + 0ℚ
       ≤ four * left * right + L2.square (left - right)
     base = ℚP.+-monoʳ-≤ (four * left * right) gapNN
-
-    leftMeaning :
-      four * left * right + 0ℚ ≡ four * left * right
-    leftMeaning = solve (left ∷ right ∷ [])
-
-    rightMeaning :
-      four * left * right + L2.square (left - right)
-      ≡ L2.square (left + right)
-    rightMeaning = solve (left ∷ right ∷ [])
   in
   subst
     (λ lower → lower ≤ L2.square (left + right))
-    leftMeaning
+    (solve (left ∷ right ∷ []))
     (subst
       (λ upper → four * left * right + 0ℚ ≤ upper)
-      rightMeaning
+      (solve (left ∷ right ∷ []))
       base)
 
 kernelThresholdFactor :
@@ -163,28 +147,32 @@ kernelThresholdFactor :
 kernelThresholdFactor kernelConstant parameter =
   kernelConstant * Threshold.threshold parameter
 
+effectiveKernelConstant : ℚ → ℚ → ℚ
+effectiveKernelConstant kernelConstant dataEnergyFactor =
+  kernelConstant * dataEnergyFactor
+
 youngCriticalCoefficient :
   Threshold.PositiveThreshold → ℚ → Threshold.PositiveThreshold → ℚ
-youngCriticalCoefficient viscositySplit kernelConstant parameter =
+youngCriticalCoefficient viscositySplit effectiveKernel parameter =
   quarter
   * Threshold.thresholdInverse viscositySplit
-  * kernelThresholdFactor kernelConstant parameter
+  * kernelThresholdFactor effectiveKernel parameter
 
 youngUpper :
   Threshold.PositiveThreshold → ℚ → Threshold.PositiveThreshold →
   ℚ → ℚ → ℚ
-youngUpper viscositySplit kernelConstant parameter critical dissipation =
+youngUpper viscositySplit effectiveKernel parameter critical dissipation =
   Threshold.threshold viscositySplit * dissipation
-  + youngCriticalCoefficient viscositySplit kernelConstant parameter * critical
+  + youngCriticalCoefficient viscositySplit effectiveKernel parameter * critical
 
 youngUpperNonnegative :
-  ∀ viscositySplit kernelConstant parameter critical dissipation →
-  0ℚ ≤ kernelConstant →
+  ∀ viscositySplit effectiveKernel parameter critical dissipation →
+  0ℚ ≤ effectiveKernel →
   0ℚ ≤ critical →
   0ℚ ≤ dissipation →
   0ℚ ≤ youngUpper
-      viscositySplit kernelConstant parameter critical dissipation
-youngUpperNonnegative viscositySplit kernelConstant parameter
+      viscositySplit effectiveKernel parameter critical dissipation
+youngUpperNonnegative viscositySplit effectiveKernel parameter
     critical dissipation kernelNN criticalNN dissNN =
   let
     epsilonNN = Threshold.thresholdNonnegative viscositySplit
@@ -192,7 +180,6 @@ youngUpperNonnegative viscositySplit kernelConstant parameter
     deltaNN = Threshold.thresholdNonnegative parameter
     quarterNN : 0ℚ ≤ quarter
     quarterNN = ℚP.nonNegative⁻¹ quarter
-
     kNN = multiplyNonnegative kernelNN deltaNN
     coeffNN = multiplyNonnegative
       (multiplyNonnegative quarterNN epsilonInvNN) kNN
@@ -202,19 +189,19 @@ youngUpperNonnegative viscositySplit kernelConstant parameter
     (multiplyNonnegative coeffNN criticalNN)
 
 youngFactorProductExact :
-  ∀ viscositySplit kernelConstant parameter critical dissipation →
+  ∀ viscositySplit effectiveKernel parameter critical dissipation →
   four
     * (Threshold.threshold viscositySplit * dissipation)
-    * (youngCriticalCoefficient viscositySplit kernelConstant parameter
+    * (youngCriticalCoefficient viscositySplit effectiveKernel parameter
         * critical)
-  ≡ kernelThresholdFactor kernelConstant parameter
+  ≡ kernelThresholdFactor effectiveKernel parameter
       * critical * dissipation
-youngFactorProductExact viscositySplit kernelConstant parameter
+youngFactorProductExact viscositySplit effectiveKernel parameter
     critical dissipation =
   let
     epsilon = Threshold.threshold viscositySplit
     epsilonInv = Threshold.thresholdInverse viscositySplit
-    K = kernelThresholdFactor kernelConstant parameter
+    K = kernelThresholdFactor effectiveKernel parameter
 
     regroup :
       four * (epsilon * dissipation)
@@ -230,39 +217,40 @@ youngFactorProductExact viscositySplit kernelConstant parameter
       (solve (K ∷ critical ∷ dissipation ∷ [])))
 
 kernelCriticalDissipationBelowYoungSquare :
-  ∀ viscositySplit kernelConstant parameter critical dissipation →
-  kernelThresholdFactor kernelConstant parameter * critical * dissipation
+  ∀ viscositySplit effectiveKernel parameter critical dissipation →
+  kernelThresholdFactor effectiveKernel parameter * critical * dissipation
   ≤ L2.square
-      (youngUpper viscositySplit kernelConstant parameter critical dissipation)
-kernelCriticalDissipationBelowYoungSquare viscositySplit kernelConstant
+      (youngUpper viscositySplit effectiveKernel parameter critical dissipation)
+kernelCriticalDissipationBelowYoungSquare viscositySplit effectiveKernel
     parameter critical dissipation =
   let
     left = Threshold.threshold viscositySplit * dissipation
-    right = youngCriticalCoefficient viscositySplit kernelConstant parameter
+    right = youngCriticalCoefficient viscositySplit effectiveKernel parameter
       * critical
-    generic = fourProductBelowSquareSum left right
   in
   subst
     (λ lower →
       lower
       ≤ L2.square
-          (youngUpper viscositySplit kernelConstant parameter
+          (youngUpper viscositySplit effectiveKernel parameter
             critical dissipation))
-    (sym (youngFactorProductExact viscositySplit kernelConstant parameter
+    (sym (youngFactorProductExact viscositySplit effectiveKernel parameter
       critical dissipation))
-    generic
+    (fourProductBelowSquareSum left right)
 
-record HHGoodSquaredYoungInput
+record HHGoodDataEnergyYoungInput
     (environment : Owner.TaxEnvironment)
     (parameter : Threshold.PositiveThreshold) : Set where
   field
     positiveProduction : ℚ
     kernelConstant : ℚ
     weightedLocalMass : ℚ
+    dataEnergyFactor : ℚ
     viscositySplit : Threshold.PositiveThreshold
 
     kernelConstantNonnegative : 0ℚ ≤ kernelConstant
     weightedLocalMassNonnegative : 0ℚ ≤ weightedLocalMass
+    dataEnergyFactorNonnegative : 0ℚ ≤ dataEnergyFactor
     criticalNonnegative : 0ℚ ≤ Owner.integralCritical environment
     dissipationNonnegative : 0ℚ ≤ Owner.dissipation environment
 
@@ -271,90 +259,115 @@ record HHGoodSquaredYoungInput
       ≤ kernelConstant
           * (Threshold.threshold parameter * weightedLocalMass)
 
-    localMassBelowCriticalTimesDissipation :
+    localMassBelowDataCriticalDissipation :
       weightedLocalMass
-      ≤ Owner.integralCritical environment * Owner.dissipation environment
+      ≤ dataEnergyFactor
+          * Owner.integralCritical environment
+          * Owner.dissipation environment
 
-open HHGoodSquaredYoungInput public
+open HHGoodDataEnergyYoungInput public
 
-hhGoodSquaredYoungAbsorption :
+hhGoodDataEnergyYoungAbsorption :
   ∀ {environment parameter}
-    (input : HHGoodSquaredYoungInput environment parameter) →
+    (input : HHGoodDataEnergyYoungInput environment parameter) →
   positiveProduction input
   ≤ Threshold.threshold (viscositySplit input)
       * Owner.dissipation environment
     + youngCriticalCoefficient
-        (viscositySplit input) (kernelConstant input) parameter
+        (viscositySplit input)
+        (effectiveKernelConstant
+          (kernelConstant input) (dataEnergyFactor input))
+        parameter
         * Owner.integralCritical environment
-hhGoodSquaredYoungAbsorption {environment} {parameter} input =
+hhGoodDataEnergyYoungAbsorption {environment} {parameter} input =
   let
-    K = kernelThresholdFactor (kernelConstant input) parameter
+    C = kernelConstant input
+    E0 = dataEnergyFactor input
+    effective = effectiveKernelConstant C E0
+    baseK = kernelThresholdFactor C parameter
+    targetK = kernelThresholdFactor effective parameter
     critical = Owner.integralCritical environment
     dissipation = Owner.dissipation environment
 
-    KNN = multiplyNonnegative
+    baseKNN = multiplyNonnegative
       (kernelConstantNonnegative input)
       (Threshold.thresholdNonnegative parameter)
 
+    effectiveNN = multiplyNonnegative
+      (kernelConstantNonnegative input)
+      (dataEnergyFactorNonnegative input)
+
     localScaled :
-      K * weightedLocalMass input
-      ≤ K * (critical * dissipation)
+      baseK * weightedLocalMass input
+      ≤ baseK * (E0 * critical * dissipation)
     localScaled =
-      let instance KNNI = nonNegative KNN
-      in ℚP.*-monoˡ-≤-nonNeg K
-        (localMassBelowCriticalTimesDissipation input)
+      let instance baseKNNI = nonNegative baseKNN
+      in ℚP.*-monoˡ-≤-nonNeg baseK
+        (localMassBelowDataCriticalDissipation input)
+
+    squareToBase :
+      L2.square (positiveProduction input)
+      ≤ baseK * weightedLocalMass input
+    squareToBase =
+      subst
+        (λ upper → L2.square (positiveProduction input) ≤ upper)
+        (solve
+          ( C
+          ∷ Threshold.threshold parameter
+          ∷ weightedLocalMass input
+          ∷ []))
+        (squaredProductionBound input)
+
+    normalizedLocal :
+      baseK * (E0 * critical * dissipation)
+      ≡ targetK * critical * dissipation
+    normalizedLocal = solve
+      ( C ∷ E0 ∷ Threshold.threshold parameter
+      ∷ critical ∷ dissipation ∷ [])
 
     squareToProduct :
       L2.square (positiveProduction input)
-      ≤ K * critical * dissipation
+      ≤ targetK * critical * dissipation
     squareToProduct =
-      ℚP.≤-trans
+      ℚP.≤-trans squareToBase
         (subst
-          (λ upper → L2.square (positiveProduction input) ≤ upper)
-          (solve
-            ( kernelConstant input
-            ∷ Threshold.threshold parameter
-            ∷ weightedLocalMass input
-            ∷ []))
-          (squaredProductionBound input))
-        (subst
-          (λ upper → K * weightedLocalMass input ≤ upper)
-          (solve (K ∷ critical ∷ dissipation ∷ []))
+          (λ upper → baseK * weightedLocalMass input ≤ upper)
+          normalizedLocal
           localScaled)
 
     productToYoungSquare =
       kernelCriticalDissipationBelowYoungSquare
-        (viscositySplit input) (kernelConstant input) parameter
-        critical dissipation
+        (viscositySplit input) effective parameter critical dissipation
 
     squareToYoungSquare = ℚP.≤-trans squareToProduct productToYoungSquare
 
     youngNN = youngUpperNonnegative
-      (viscositySplit input) (kernelConstant input) parameter
-      critical dissipation
-      (kernelConstantNonnegative input)
+      (viscositySplit input) effective parameter critical dissipation
+      effectiveNN
       (criticalNonnegative input)
       (dissipationNonnegative input)
   in
   squareBoundWithNonnegativeUpperImpliesUpper
     (positiveProduction input)
-    (youngUpper (viscositySplit input) (kernelConstant input) parameter
-      critical dissipation)
+    (youngUpper (viscositySplit input) effective parameter critical dissipation)
     youngNN
     squareToYoungSquare
 
-hhGoodOwnerFromSquaredYoung :
+hhGoodOwnerFromDataEnergyYoung :
   ∀ {environment parameter} →
-  HHGoodSquaredYoungInput environment parameter →
+  HHGoodDataEnergyYoungInput environment parameter →
   Owner.AdmissibleOwnerEstimate environment
-hhGoodOwnerFromSquaredYoung {environment} {parameter} input =
+hhGoodOwnerFromDataEnergyYoung {environment} {parameter} input =
   Owner.admissible-owner-estimate
     Tax.HH-good
     (positiveProduction input)
     (Threshold.threshold (viscositySplit input))
     0ℚ
     (youngCriticalCoefficient
-      (viscositySplit input) (kernelConstant input) parameter)
+      (viscositySplit input)
+      (effectiveKernelConstant
+        (kernelConstant input) (dataEnergyFactor input))
+      parameter)
     ownerBound
   where
   ownerBound :
@@ -363,7 +376,10 @@ hhGoodOwnerFromSquaredYoung {environment} {parameter} input =
         * Owner.dissipation environment
       + 0ℚ
       + youngCriticalCoefficient
-          (viscositySplit input) (kernelConstant input) parameter
+          (viscositySplit input)
+          (effectiveKernelConstant
+            (kernelConstant input) (dataEnergyFactor input))
+          parameter
           * Owner.integralCritical environment
   ownerBound =
     subst
@@ -372,12 +388,15 @@ hhGoodOwnerFromSquaredYoung {environment} {parameter} input =
         ( Threshold.threshold (viscositySplit input)
         ∷ Owner.dissipation environment
         ∷ youngCriticalCoefficient
-            (viscositySplit input) (kernelConstant input) parameter
+            (viscositySplit input)
+            (effectiveKernelConstant
+              (kernelConstant input) (dataEnergyFactor input))
+            parameter
         ∷ Owner.integralCritical environment
         ∷ [])))
-      (hhGoodSquaredYoungAbsorption input)
+      (hhGoodDataEnergyYoungAbsorption input)
 
-record PeriodizedHHGoodYoungInput
+record PeriodizedHHGoodDataEnergyYoungInput
     {st : Level}
     {TorusPoint : Set st}
     (environment : Owner.TaxEnvironment)
@@ -389,51 +408,60 @@ record PeriodizedHHGoodYoungInput
     identification :
       Periodized.PhysicalStrainShellKernelMassIdentification
         kernelTheorem shell parameter samples
+    dataEnergyFactor : ℚ
+    dataEnergyFactorNonnegative : 0ℚ ≤ dataEnergyFactor
     viscositySplit : Threshold.PositiveThreshold
     criticalNonnegative : 0ℚ ≤ Owner.integralCritical environment
     dissipationNonnegative : 0ℚ ≤ Owner.dissipation environment
-    localMassBelowCriticalTimesDissipation :
+    localMassBelowDataCriticalDissipation :
       Good.weightedLocalMass samples
-      ≤ Owner.integralCritical environment * Owner.dissipation environment
+      ≤ dataEnergyFactor
+          * Owner.integralCritical environment
+          * Owner.dissipation environment
 
-open PeriodizedHHGoodYoungInput public
+open PeriodizedHHGoodDataEnergyYoungInput public
 
-periodizedHHGoodOwnerFromLocalMassFactorization :
+periodizedHHGoodOwnerFromDataEnergyFactorization :
   ∀ {st : Level} {TorusPoint : Set st}
     {environment kernelTheorem shell parameter samples} →
-  PeriodizedHHGoodYoungInput
+  PeriodizedHHGoodDataEnergyYoungInput
     environment kernelTheorem shell parameter samples →
   Owner.AdmissibleOwnerEstimate environment
-periodizedHHGoodOwnerFromLocalMassFactorization
+periodizedHHGoodOwnerFromDataEnergyFactorization
     {kernelTheorem = kernelTheorem}
     {parameter = parameter}
     {samples = samples} physical =
-  hhGoodOwnerFromSquaredYoung record
+  hhGoodOwnerFromDataEnergyYoung record
     { positiveProduction = Good.weightedStretch samples
     ; kernelConstant =
         Periodized.masterAnnularStrainKernelL1Norm kernelTheorem
     ; weightedLocalMass = Good.weightedLocalMass samples
+    ; dataEnergyFactor = dataEnergyFactor physical
     ; viscositySplit = viscositySplit physical
     ; kernelConstantNonnegative =
         Periodized.masterAnnularStrainKernelL1Nonnegative kernelTheorem
     ; weightedLocalMassNonnegative = Good.weightedLocalMassNonnegative samples
+    ; dataEnergyFactorNonnegative = dataEnergyFactorNonnegative physical
     ; criticalNonnegative = criticalNonnegative physical
     ; dissipationNonnegative = dissipationNonnegative physical
     ; squaredProductionBound =
         Periodized.periodizedHHGoodShellBound (identification physical)
-    ; localMassBelowCriticalTimesDissipation =
-        localMassBelowCriticalTimesDissipation physical
+    ; localMassBelowDataCriticalDissipation =
+        localMassBelowDataCriticalDissipation physical
     }
 
-hhGoodSquaredYoungOwnerReductionClosed : Bool
-hhGoodSquaredYoungOwnerReductionClosed = true
+hhGoodDataEnergyYoungOwnerReductionClosed : Bool
+hhGoodDataEnergyYoungOwnerReductionClosed = true
 
-physicalHHGoodWeightedLocalMassFactorizationConstructed : Bool
-physicalHHGoodWeightedLocalMassFactorizationConstructed = false
+rawHHGoodQuadraticProductShortcutRejected : Bool
+rawHHGoodQuadraticProductShortcutRejected = true
 
-physicalHHGoodTimeDissipationAbsorptionNoLongerIndependent : Bool
-physicalHHGoodTimeDissipationAbsorptionNoLongerIndependent = true
+physicalHHGoodDataWeightedLocalMassFactorizationConstructed : Bool
+physicalHHGoodDataWeightedLocalMassFactorizationConstructed = false
 
-hhGoodSquaredYoungOwnerReductionClosedIsTrue :
-  hhGoodSquaredYoungOwnerReductionClosed ≡ true
-hhGoodSquaredYoungOwnerReductionClosedIsTrue = refl
+physicalHHGoodTimeDissipationStillRequiresDataEnergyOrEquivalentGain : Bool
+physicalHHGoodTimeDissipationStillRequiresDataEnergyOrEquivalentGain = true
+
+hhGoodDataEnergyYoungOwnerReductionClosedIsTrue :
+  hhGoodDataEnergyYoungOwnerReductionClosed ≡ true
+hhGoodDataEnergyYoungOwnerReductionClosedIsTrue = refl
