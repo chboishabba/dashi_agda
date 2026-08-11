@@ -2,9 +2,12 @@
 """Render a fail-closed Agda certificate from the GAP/CTblLib MN3B result.
 
 The GAP producer proves classwise reconstruction against the stored MN3B -> M
-fusion before writing JSON.  This renderer independently validates the numeric
-schema, total contribution, 3B trace and eigenspace multiplicities, then emits
-an Agda module whose arithmetic consequences are kernel checked.
+fusion, identifies the unique normal class union of order 3^13, and computes the
+full-character average over that actual extraspecial kernel before writing JSON.
+This renderer independently validates the numeric schema, all class rows, total
+contribution, 3B trace, eigenspace multiplicities, kernel order and averaging
+identity, then emits an Agda module whose arithmetic consequences are kernel
+checkable.
 """
 
 from __future__ import annotations
@@ -18,6 +21,7 @@ EXPECTED_DEGREE = 196883
 EXPECTED_TRACE = 53
 EXPECTED_INVARIANT = 65663
 EXPECTED_NONTRIVIAL = 65610
+EXPECTED_KERNEL_ORDER = 3**13
 
 
 def require_int(payload: dict[str, Any], key: str) -> int:
@@ -27,9 +31,13 @@ def require_int(payload: dict[str, Any], key: str) -> int:
     return value
 
 
+def require_true(payload: dict[str, Any], key: str) -> None:
+    if payload.get(key) is not True:
+        raise ValueError(f"{key} must be true")
+
+
 def validate(payload: dict[str, Any]) -> dict[str, int]:
-    if payload.get("classwise_reconstruction") is not True:
-        raise ValueError("GAP did not certify classwise reconstruction")
+    require_true(payload, "classwise_reconstruction")
 
     degree = require_int(payload, "monster_character_degree")
     reconstructed = require_int(payload, "reconstructed_degree")
@@ -80,6 +88,85 @@ def validate(payload: dict[str, Any]) -> dict[str, int]:
     if contribution_sum != degree:
         raise ValueError("constituent contributions do not reconstruct degree")
 
+    kernel_order = require_int(payload, "extraspecial_kernel_order")
+    kernel_class_count = require_int(payload, "extraspecial_kernel_class_count")
+    kernel_class_size_sum = require_int(
+        payload, "extraspecial_kernel_class_size_sum"
+    )
+    kernel_invariant_numerator = require_int(
+        payload, "extraspecial_kernel_invariant_numerator"
+    )
+    kernel_invariant_dimension = require_int(
+        payload, "extraspecial_kernel_invariant_dimension"
+    )
+    require_true(payload, "extraspecial_kernel_contains_central_3b")
+    require_true(payload, "extraspecial_kernel_all_nonidentity_orders_three")
+
+    if kernel_order != EXPECTED_KERNEL_ORDER:
+        raise ValueError("extraspecial kernel order is not 3^13")
+    if kernel_class_size_sum != kernel_order:
+        raise ValueError("extraspecial kernel class sizes do not sum to its order")
+    if kernel_invariant_dimension < 0:
+        raise ValueError("extraspecial kernel invariant dimension is negative")
+    if kernel_invariant_numerator != kernel_order * kernel_invariant_dimension:
+        raise ValueError("extraspecial kernel averaging identity failed")
+
+    kernel_positions = payload.get("extraspecial_kernel_class_positions")
+    if not isinstance(kernel_positions, list):
+        raise ValueError("extraspecial_kernel_class_positions must be a list")
+    if any(not isinstance(value, int) or isinstance(value, bool)
+           for value in kernel_positions):
+        raise ValueError("kernel class positions must be integers")
+    if len(kernel_positions) != kernel_class_count:
+        raise ValueError("kernel class-position count mismatch")
+    if sorted(set(kernel_positions)) != kernel_positions:
+        raise ValueError("kernel class positions must be strictly sorted")
+    if 1 not in kernel_positions or central_class not in kernel_positions:
+        raise ValueError("kernel class carrier misses identity or central 3B")
+
+    kernel_rows = payload.get("extraspecial_kernel_classes")
+    if not isinstance(kernel_rows, list):
+        raise ValueError("extraspecial_kernel_classes must be a list")
+    if len(kernel_rows) != kernel_class_count:
+        raise ValueError("kernel class-row count mismatch")
+
+    row_positions: list[int] = []
+    row_size_sum = 0
+    row_trace_numerator = 0
+    identity_rows = 0
+    central_rows = 0
+    for row in kernel_rows:
+        if not isinstance(row, dict):
+            raise ValueError("kernel class row must be an object")
+        position = require_int(row, "position")
+        size = require_int(row, "size")
+        order = require_int(row, "order")
+        class_trace = require_int(row, "trace")
+        if position <= 0 or size <= 0:
+            raise ValueError("kernel class position and size must be positive")
+        if order not in (1, 3):
+            raise ValueError("kernel class order must be one or three")
+        if order == 1:
+            identity_rows += 1
+            if position != 1 or size != 1 or class_trace != degree:
+                raise ValueError("invalid identity row in kernel class data")
+        if position == central_class:
+            central_rows += 1
+            if order != 3 or size != 2 or class_trace != trace:
+                raise ValueError("invalid central 3B row in kernel class data")
+        row_positions.append(position)
+        row_size_sum += size
+        row_trace_numerator += size * class_trace
+
+    if row_positions != kernel_positions:
+        raise ValueError("kernel rows and class-position list disagree")
+    if identity_rows != 1 or central_rows != 1:
+        raise ValueError("kernel rows must contain one identity and one central row")
+    if row_size_sum != kernel_order:
+        raise ValueError("kernel row sizes do not reconstruct kernel order")
+    if row_trace_numerator != kernel_invariant_numerator:
+        raise ValueError("kernel row traces do not reconstruct averaging numerator")
+
     return {
         "degree": degree,
         "trace": trace,
@@ -92,6 +179,12 @@ def validate(payload: dict[str, Any]) -> dict[str, int]:
         "contribution_sum": contribution_sum,
         "weighted_checksum": weighted_checksum,
         "source_class_count": require_int(payload, "source_class_count"),
+        "kernel_order": kernel_order,
+        "kernel_class_count": kernel_class_count,
+        "kernel_class_size_sum": kernel_class_size_sum,
+        "kernel_position_checksum": sum(kernel_positions),
+        "kernel_invariant_numerator": kernel_invariant_numerator,
+        "kernel_invariant_dimension": kernel_invariant_dimension,
     }
 
 
@@ -100,9 +193,13 @@ def agda_module(values: dict[str, int], payload: dict[str, Any]) -> str:
     target = str(payload.get("target_table", "MN3B")).replace('"', "")
     return f'''module DASHI.Moonshine.Generated.Monster3BRestrictionCertificate where
 
--- GENERATED FILE.  Source: GAP + CTblLib stored class fusion.
--- The producer checked nonnegative integral multiplicities and equality on
--- every MN3B conjugacy-class value before emitting the JSON consumed here.
+-- GENERATED FILE.  Source: GAP + CTblLib stored class fusion and ordinary
+-- character-table normal-subgroup data.
+--
+-- The producer checked nonnegative integral multiplicities, equality on every
+-- MN3B conjugacy-class value, and the unique normal class union of order 3^13.
+-- This certificate concerns the full restricted 196883-dimensional character.
+-- It does not split the zeta and zeta^2 sectors or construct their intertwiner.
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -170,6 +267,42 @@ contributionCertificate = refl
 
 centralClassSizeCertificate : centralThreeBClassSize ≡ 2
 centralClassSizeCertificate = refl
+
+extraspecialKernelOrder : Nat
+extraspecialKernelOrder = {values['kernel_order']}
+
+extraspecialKernelClassCount : Nat
+extraspecialKernelClassCount = {values['kernel_class_count']}
+
+extraspecialKernelClassSizeSum : Nat
+extraspecialKernelClassSizeSum = {values['kernel_class_size_sum']}
+
+extraspecialKernelClassPositionChecksum : Nat
+extraspecialKernelClassPositionChecksum = {values['kernel_position_checksum']}
+
+extraspecialKernelInvariantNumerator : Nat
+extraspecialKernelInvariantNumerator = {values['kernel_invariant_numerator']}
+
+extraspecialKernelInvariantDimension : Nat
+extraspecialKernelInvariantDimension = {values['kernel_invariant_dimension']}
+
+extraspecialKernelContainsCentralThreeB : Bool
+extraspecialKernelContainsCentralThreeB = true
+
+extraspecialKernelAllNonidentityOrdersThree : Bool
+extraspecialKernelAllNonidentityOrdersThree = true
+
+extraspecialKernelOrderCertificate : extraspecialKernelOrder ≡ 1594323
+extraspecialKernelOrderCertificate = refl
+
+extraspecialKernelClassSizeCertificate :
+  extraspecialKernelClassSizeSum ≡ extraspecialKernelOrder
+extraspecialKernelClassSizeCertificate = refl
+
+extraspecialKernelAveragingCertificate :
+  extraspecialKernelInvariantNumerator
+  ≡ extraspecialKernelOrder * extraspecialKernelInvariantDimension
+extraspecialKernelAveragingCertificate = refl
 '''
 
 
