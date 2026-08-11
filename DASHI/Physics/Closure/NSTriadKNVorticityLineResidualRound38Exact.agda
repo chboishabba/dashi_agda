@@ -84,11 +84,12 @@ lineResidualDescendsToLineQuotient :
   ∀ {target left right} →
   SameModuloTargetLine target left right →
   lineResidual target right ≡ lineResidual target left
-lineResidualDescendsToLineQuotient witness =
+lineResidualDescendsToLineQuotient
+    {target} {left} {right} witness =
   trans
-    (cong (lineResidual _) (rightIsParallelShift witness))
+    (cong (lineResidual target) (rightIsParallelShift witness))
     (lineResidualIgnoresParallelComponent
-      (shiftAmount witness) _ _)
+      (shiftAmount witness) target left)
 
 stretchingIgnoresParallelSourceComponent :
   ∀ amount theta source target →
@@ -112,13 +113,15 @@ stretchingDescendsToSourceLineQuotient :
   SameModuloTargetLine target source shifted →
   Stretch.stretchingScalar theta shifted target
   ≡ Stretch.stretchingScalar theta source target
-stretchingDescendsToSourceLineQuotient theta witness =
+stretchingDescendsToSourceLineQuotient
+    theta {source} {target} {shifted} witness =
   trans
     (cong
-      (λ actualSource → Stretch.stretchingScalar theta actualSource _)
+      (λ actualSource →
+        Stretch.stretchingScalar theta actualSource target)
       (rightIsParallelShift witness))
     (stretchingIgnoresParallelSourceComponent
-      (shiftAmount witness) theta _ _)
+      (shiftAmount witness) theta source target)
 
 vorticityLineResidualQuotientClosed : Bool
 vorticityLineResidualQuotientClosed = true
