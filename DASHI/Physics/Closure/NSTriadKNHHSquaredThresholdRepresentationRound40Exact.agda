@@ -39,7 +39,9 @@ module DASHI.Physics.Closure.NSTriadKNHHSquaredThresholdRepresentationRound40Exa
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Rational.Base using (ℚ; _*_)
+open import Data.Rational.Tactic.RingSolver using (solve)
 
 import DASHI.Physics.Closure.NSTriadKNLuoBadCoherenceWeightedMarkovExact as Threshold
 import DASHI.Physics.Closure.NSTriadKNHHAnalyticThresholdOptimizerRound40Exact as Opt
@@ -86,11 +88,7 @@ goodSquaredThresholdMeaning :
     * Threshold.threshold (directionalParameter representation)
 goodSquaredThresholdMeaning A representation
   rewrite deltaIsScaleSquared representation =
-  Data.Rational.Tactic.RingSolver.solve
-    (A ∷ Threshold.threshold (scale representation) ∷ [])
-  where
-  open import Agda.Builtin.List using ([]; _∷_)
-  import Data.Rational.Tactic.RingSolver
+  solve (A ∷ Threshold.threshold (scale representation) ∷ [])
 
 hhSquaredThresholdRepresentationTyped : Bool
 hhSquaredThresholdRepresentationTyped = true
