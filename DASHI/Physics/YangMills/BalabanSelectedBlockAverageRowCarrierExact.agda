@@ -23,6 +23,7 @@ module DASHI.Physics.YangMills.BalabanSelectedBlockAverageRowCarrierExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using ([])
 open import Data.Rational.Base as ℚ using (ℚ; _*_)
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
