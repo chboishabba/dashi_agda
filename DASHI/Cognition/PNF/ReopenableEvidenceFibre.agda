@@ -36,9 +36,9 @@ open ReopenableFibreExtension public
 -- Three propositions that must never be collapsed into one status field.
 --
 -- Suppression is evidential/attention weighting; execution retention is an
--- implementation frontier; semantic admissibility is a truth-conditional
--- property.  No constructor below promotes either of the first two into the
--- third.
+-- implementation frontier; semantic refutation requires an application-supplied
+-- evidence-indexed proof.  No constructor promotes either of the first two into
+-- the third.
 ------------------------------------------------------------------------
 
 data SuppressionState : Set where
@@ -47,16 +47,31 @@ data SuppressionState : Set where
 data ExecutionRetention : Set where
   retainedForExecution prunedFromExecution : ExecutionRetention
 
-data SemanticAdmissibility : Set where
-  semanticallyOpen semanticallyRefuted : SemanticAdmissibility
+record RefutationSystem (Candidate Evidence : Set) : Set₁ where
+  field
+    Refutes : Evidence → Candidate → Set
 
-record SeparatedCandidateState (Candidate : Set) : Set where
+open RefutationSystem public
+
+data SemanticAdmissibility
+    {Candidate Evidence : Set}
+    (system : RefutationSystem Candidate Evidence)
+    (candidate : Candidate) : Set where
+  semanticallyOpen : SemanticAdmissibility system candidate
+  semanticallyRefuted :
+    (evidence : Evidence) →
+    Refutes system evidence candidate →
+    SemanticAdmissibility system candidate
+
+record SeparatedCandidateState
+    {Candidate Evidence : Set}
+    (system : RefutationSystem Candidate Evidence) : Set where
   constructor separatedCandidateState
   field
     candidate : Candidate
     suppression : SuppressionState
     executionRetention : ExecutionRetention
-    semanticAdmissibility : SemanticAdmissibility
+    semanticAdmissibility : SemanticAdmissibility system candidate
 
 open SeparatedCandidateState public
 
@@ -165,6 +180,9 @@ record ReopenableEvidenceBoundary : Set where
     suppressionAndRefutationAreDifferentTypes : Bool
     suppressionAndRefutationAreDifferentTypesIsTrue :
       suppressionAndRefutationAreDifferentTypes ≡ true
+    semanticRefutationRequiresIndexedEvidence : Bool
+    semanticRefutationRequiresIndexedEvidenceIsTrue :
+      semanticRefutationRequiresIndexedEvidence ≡ true
 
 open ReopenableEvidenceBoundary public
 
@@ -174,4 +192,5 @@ canonicalReopenableEvidenceBoundary =
     interferingPhaseCannotRefute
     reweightingAloneCannotRefute
     Bounded.executionOverflowHasNoSemanticPermission
+    true refl
     true refl
