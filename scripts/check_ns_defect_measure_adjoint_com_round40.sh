@@ -10,6 +10,7 @@ files=(
   DASHI/Physics/Closure/NSTriadKNHHUnifiedDirectionalDefectRound40Exact.agda
   DASHI/Physics/Closure/NSTriadKNHHBadDefectMeasureGainRound40Exact.agda
   DASHI/Physics/Closure/NSTriadKNHHBadDefectOwnerScalingRound40Exact.agda
+  DASHI/Physics/Closure/NSTriadKNHHDirectionalDefectDissipationRound40Exact.agda
   DASHI/Physics/Closure/NSTriadKNHHAnalyticThresholdOptimizerRound40Exact.agda
   DASHI/Physics/Closure/NSTriadKNHHSquaredThresholdRepresentationRound40Exact.agda
   DASHI/Physics/Closure/NSTriadKNHHScaleDependentThresholdRound40Exact.agda
@@ -39,6 +40,8 @@ grep -q 'physicalCrossResidualDensityEqualsDefectDensity' DASHI/Physics/Closure/
 grep -q 'badMassControlledBySameDefect' DASHI/Physics/Closure/NSTriadKNHHUnifiedDirectionalDefectRound40Exact.agda
 grep -q 'thresholdTimesBadGainBelowDefectCharge' DASHI/Physics/Closure/NSTriadKNHHBadDefectMeasureGainRound40Exact.agda
 grep -q 'badGainBelowBOverDeltaDissipation' DASHI/Physics/Closure/NSTriadKNHHBadDefectOwnerScalingRound40Exact.agda
+grep -q 'weightedDefectMassBelowBadEnergyMass' DASHI/Physics/Closure/NSTriadKNHHDirectionalDefectDissipationRound40Exact.agda
+grep -q 'finiteBadGainBelowRestrictedDissipationWithInverseThreshold' DASHI/Physics/Closure/NSTriadKNHHDirectionalDefectDissipationRound40Exact.agda
 
 # Exact analytic threshold optimization, explicit delta=r^2 bridge, and
 # shell-dependent diagnostic.
@@ -90,6 +93,7 @@ grep -q '10.1007/978-3-642-16830-7' DASHI/Physics/Closure/NSTriadKNHHGoodPeriodi
 grep -q 'physicalTimeIntegratedDirectionalDefectEstimateConstructed = false' DASHI/Physics/Closure/NSTriadKNHHUnifiedDirectionalDefectRound40Exact.agda
 grep -q 'physicalDirectionalDefectOwnerRateConstructed = false' DASHI/Physics/Closure/NSTriadKNHHBadDefectMeasureGainRound40Exact.agda
 grep -q 'physicalTimeIntegratedDefectOwnerRateConstructed = false' DASHI/Physics/Closure/NSTriadKNHHBadDefectOwnerScalingRound40Exact.agda
+grep -q 'physicalHHBadInverseShellDensityStillRequired = true' DASHI/Physics/Closure/NSTriadKNHHDirectionalDefectDissipationRound40Exact.agda
 grep -q 'physicalHHConstantsFitBalancedScalingConstructed = false' DASHI/Physics/Closure/NSTriadKNHHAnalyticThresholdOptimizerRound40Exact.agda
 grep -q 'physicalSquaredDirectionalThresholdConstructed = false' DASHI/Physics/Closure/NSTriadKNHHSquaredThresholdRepresentationRound40Exact.agda
 grep -q 'physicalShellHHConstantsConstructed = false' DASHI/Physics/Closure/NSTriadKNHHScaleDependentThresholdRound40Exact.agda
