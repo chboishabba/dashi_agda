@@ -141,8 +141,8 @@ thresholdTimesBadEnergyContributionBelowBadDefect
     {parameter} cell with region cell
 ... | goodRegion =
   subst
-    (λ right → 0ℚ ≤ right)
-    (sym (solve []))
+    (λ left → left ≤ 0ℚ)
+    (sym (solve (Threshold.threshold parameter ∷ [])))
     ℚP.≤-refl
 ... | badRegion =
   let
