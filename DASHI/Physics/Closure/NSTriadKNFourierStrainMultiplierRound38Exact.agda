@@ -94,7 +94,7 @@ fourierStrainMultiplier modeData omega =
     (minusHalf * (V.y k * V.y u + V.y u * V.y k))
     (minusHalf * (V.y k * V.z u + V.y u * V.z k))
     (minusHalf * (V.z k * V.x u + V.z u * V.x k))
-    (minusHalf * (V.z k * V.y u + V.z u * V.z k))
+    (minusHalf * (V.z k * V.y u + V.z u * V.y k))
     (minusHalf * (V.z k * V.z u + V.z u * V.z k))
 
 fourierStrainMultiplierExact :
