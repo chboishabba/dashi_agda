@@ -25,6 +25,8 @@ on:
       - 'DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeGreenDecayExact.agda'
       - 'DASHI/Physics/YangMills/BalabanBasedPathGaugeSectionExact.agda'
       - 'DASHI/Physics/YangMills/BalabanSelectedCombinedConstraintTangentProjectorExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanSelectedCombinedConstraintRawGramNoGoExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanSelectedCombinedConstraintTangentProjectorBoundaryExact.agda'
       - 'DASHI/Physics/YangMills/BalabanFiniteRGObservableReopeningExact.agda'
       - 'DASHI/Physics/YangMills/BalabanClayHighestAlphaRound42MasterReconciledValidation.agda'
       - 'scripts/check_yang_mills_clay_highest_alpha_round42_extension.sh'
@@ -43,5 +45,6 @@ jobs:
       - name: Validate Round 42 Green extension
         shell: bash
         run: |
+          chmod +x scripts/check_yang_mills_clay_highest-alpha-round42-extension.sh || true
           chmod +x scripts/check_yang_mills_clay_highest_alpha_round42_extension.sh
           AGDA_JOBS=1 bash scripts/check_yang_mills_clay_highest_alpha_round42_extension.sh
