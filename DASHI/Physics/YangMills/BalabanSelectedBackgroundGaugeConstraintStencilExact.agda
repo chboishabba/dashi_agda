@@ -24,6 +24,7 @@ module DASHI.Physics.YangMills.BalabanSelectedBackgroundGaugeConstraintStencilEx
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using ([])
 open import Data.Empty using (⊥; ⊥-elim)
 open import Data.Rational.Base as ℚ using (0ℚ)
 import Data.Rational.Tactic.RingSolver as ℚRing
