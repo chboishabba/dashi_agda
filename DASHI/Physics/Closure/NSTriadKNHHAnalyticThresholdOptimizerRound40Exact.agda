@@ -142,12 +142,11 @@ balanceSolvesBadTax {A} {B} balance =
       ≡ hhBadTax B (selectedScale balance)
     rightNormalize = solve (B ∷ rinv ∷ [])
   in
-  sym
+  trans
+    (sym rightNormalize)
     (trans
-      (sym rightNormalize)
-      (trans
-        (sym scaledBalance)
-        (trans leftFactor leftNormalize)))
+      (sym scaledBalance)
+      (trans leftFactor leftNormalize))
 
 selectedTaxClosedForm :
   ∀ {A B}
@@ -198,7 +197,7 @@ balanceSolvesB {A} {B} balance =
       rightMeaning : half * (two * B) ≡ B
       rightMeaning = solve (B ∷ [])
   in
-  sym (trans (sym rightMeaning) (trans (sym scaled) leftMeaning))
+  trans (sym rightMeaning) (trans (sym scaled) leftMeaning)
 
 factorizedGapNonnegative :
   ∀ {A B}
