@@ -31,6 +31,7 @@ module DASHI.Physics.YangMills.BalabanSelectedBackgroundGaugeRelativeSmallnessEx
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.List using ([])
 open import Data.Integer.Base using (+_)
 open import Data.Rational using (ℚ; 0ℚ; 1ℚ; _+_; _<_; Positive; _/_)
 import Data.Rational.Properties as ℚP
