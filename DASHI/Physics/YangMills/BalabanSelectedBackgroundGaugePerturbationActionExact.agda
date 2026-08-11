@@ -31,12 +31,13 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base as ℚ using (ℚ; _+_; _-_; _*_)
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using
-  (cong; trans)
+  (cong; cong₂; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
 import DASHI.Physics.YangMills.BalabanFiniteReducedFloorPerturbationExact as Difference
 import DASHI.Physics.YangMills.BalabanFiniteRectangularRationalExact as Rect
+import DASHI.Physics.YangMills.BalabanConstructiveRationalMatrixInverseExact as Matrix
 import DASHI.Physics.YangMills.BalabanP33FiniteKKTAdmissibleProjectorExact as KKT
 import DASHI.Physics.YangMills.BalabanP33PhysicalRationalWilsonPlaquetteJetExact as Physical
 import DASHI.Physics.YangMills.BalabanSelectedFlatGaugeAdjointGramFloorExact as FlatAdjoint
@@ -44,7 +45,6 @@ import DASHI.Physics.YangMills.BalabanSelectedFlatGaugeRegularizedGreenExact as 
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundGaugeConstraintMatrixExact as GaugeMatrix
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundGaugeGramFiniteRangeExact as Gram
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundGaugePerturbationFiniteRangeExact as Perturbation
-import DASHI.Physics.YangMills.BalabanSelectedBackgroundGaugeReducedFloorExact as BackgroundFloor
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundGaugeOperatorDecompositionExact as Operator
 
 GaugeMultiplier : Set
@@ -88,7 +88,7 @@ selectedGaugeGramPerturbationDifferenceExact :
     - selectedGaugeGramMatrixApply Physical.identityBackground multiplier row
 selectedGaugeGramPerturbationDifferenceExact background multiplier row =
   let
-    rows = Rect.Matrix.coordinates FlatAdjoint.selectedFlatGaugeRowCarrier
+    rows = Matrix.coordinates FlatAdjoint.selectedFlatGaugeRowCarrier
     backgroundGram = Gram.selectedBackgroundGaugeGram background
     flatGram = Gram.selectedBackgroundGaugeGram Physical.identityBackground
 
@@ -125,8 +125,6 @@ selectedGaugeGramPerturbationActsAsExplicitEA background multiplier row =
         (ℚRing.solve-∀
           (FlatGreen.flatGaugeGramApply multiplier row)
           (Operator.explicitGaugeGramPerturbation background multiplier row))))
-  where
-    open import Relation.Binary.PropositionalEquality using (cong₂)
 
 selectedGaugeGramMatrixActionLevel : ProofLevel
 selectedGaugeGramMatrixActionLevel = machineChecked
