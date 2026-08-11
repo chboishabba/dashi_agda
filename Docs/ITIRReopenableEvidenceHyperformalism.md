@@ -2,32 +2,46 @@
 
 ## Purpose
 
-This note consolidates the current ITIR / numeric-PNF evidence architecture onto
-existing DASHI mathematics.  It deliberately avoids parallel implementations of
-fibres, hyperfabrics, balanced/ternary phase, P/Q/J, 3/6/9, resolution towers,
-identity fibres, or indexed gluing.
+This note consolidates the ITIR / numeric-PNF evidence architecture onto the
+existing DASHI mathematical spine.  The governing rule is **reuse before new
+abstraction**: fibres, hyperfabrics, P/Q/J, 3/6/9, multiscale residual codecs,
+signed interference, symmetry/orbits, identity fibres, dependency witnesses,
+resolution towers and indexed gluing are imported rather than reimplemented.
 
-The target distinction is:
+The post-tokenisation target is increasingly numeric:
 
 ```text
-fine semantic / representational carrier
-        |
-        | projection + retained receipt
-        v
-coarse execution surface
-        |
-        +-- signed/phase evidence reweights candidates
-        +-- bounded execution may prune active work
-        +-- hard proof may refute a candidate
+source text / provenance boundary
         |
         v
-proof-carrying local identity / factor derivation
+numeric token occurrences and lexical fibres
+        |
+        v
+representation/support gluing
+        |
+        v
+reopenable evidence hyperfibre
+        |
+        +-- signed fine evidence -> coarse phase observation
+        +-- H3 -> H6 -> H9 relational horizon
+        +-- soft reweighting / path-dependent accessibility
+        +-- bounded execution + overflow / omitted-mass receipt
+        +-- inductive preference, still unresolved
+        |
+        v
+proof-relevant local identity
+        |
+        v
+factor applicability / Level-3 substitution
+        |
+        v
+local temporal-role model
         |
         v
 optional external/world alignment
 ```
 
-The three operations in the middle are different propositions.  In particular:
+The architecture is fail-closed about promotion.  In particular:
 
 ```text
 currently suppressed
@@ -35,21 +49,19 @@ currently suppressed
 != semantically refuted.
 ```
 
-A negative/interfering phase is not a proof of impossibility, and an execution
-overflow receipt is not a semantic rejection.
+Semantic refutation itself is proof-bearing and indexed by evidence.
 
-## Reused repository spine
+## Existing repository spine reused
 
-The tranche imports or specialises the following existing objects.
+### Fibre restriction, receipt and reopening
 
-### Fibre restriction and reopening
+`DASHI.Core.FibreRestrictionCore` already gives the central authority boundary:
+evidence can restrict a projected fibre without recovering the fine carrier and
+without promoting truth.
 
-`DASHI.Core.FibreRestrictionCore` already proves the architectural boundary:
-evidence may restrict a projected fibre without recovering the hidden carrier
-or promoting truth.
-
-`DASHI.Cognition.PNF.ReopenableEvidenceFibre` adds only the missing optional
-receipt/reopening datum:
+`DASHI.Cognition.PNF.ReopenableEvidenceFibre` adds only the optional exact
+provenance receipt required when an application can reconstruct the same fine
+state:
 
 ```text
 receipt : Carrier -> Receipt
@@ -57,22 +69,28 @@ reopen  : Surface -> Receipt -> Carrier
 reopen(project x, receipt x) = x.
 ```
 
-This is the ITIR form of provenance-bearing coarse-graining.  It does not assert
-that every quotient in mathematics or every runtime compression has a section.
+This is not a theorem that every quotient splits.  It is a proof obligation for
+runtime compressions that claim exact reopening.
 
-### P/Q/J reference
+Soft evidence uses `EvidenceReweighting`.  It changes application-supplied
+weights but has no refutation constructor.  `SemanticAdmissibility` instead
+requires a `RefutationSystem` and an explicit `Refutes evidence candidate`
+witness before `semanticallyRefuted` can be constructed.
 
-`DASHI.Analysis.NormalizedFibreAveragingExact` supplies an exact finite
-probability-fibre model with
+Corrective reachability reuses
+`DASHI.Core.TypedDependencyCore.DependentActionSystem` and its proof-bearing
+`AdmissibleAction` with precondition, postcondition and dependency receipt.
+`CorrectivePath` is only the reflexive/transitive PNF closure over those existing
+admissible actions.
 
-```text
-P^2 = P
-Q   = I - P
-P + Q reconstructs the fine observable.
-```
+## Exact P/Q/J reference, not universal promotion
 
-`DASHI.Analysis.GlassesProjectionInvolutionExact` supplies the exact finite
-involution
+`DASHI.Analysis.NormalizedFibreAveragingExact` supplies the exact finite
+normalised fibre reference with `P^2=P`, `Q=I-P`, orthogonality and exact
+coarse/residual reconstruction.
+
+`DASHI.Analysis.GlassesProjectionInvolutionExact` supplies the exact generic-base
+two-point fibre model with
 
 ```text
 J^2 = I
@@ -80,33 +98,47 @@ J P J = Q
 J Q J = P.
 ```
 
-The new PNF aggregate imports those exact claim boundaries as reference.  It
-does **not** promote the two-point rational model to a universal semantic P/Q/J
-theorem.  An application must construct the corresponding projector/residual
-laws on its real carrier before using them authoritatively.
+`PNFEvidenceHyperformalism` reuses it directly as
+`ComplementaryReadingReference {Candidate}`.  It is a concrete adversarial /
+complementary-view reference, not a theorem that every semantic hyperfibre has a
+P/Q/J decomposition.  `UniversalSemanticPQJPermission` is constructorless.
 
-### Hyperformal incidence and interference
+## Hyperformal incidence and phase/interference
 
 `DASHI.Reasoning.TypedHyperfabricCore` remains the higher-arity incidence,
 stalk, restriction, provenance and obstruction carrier.
 
-`DASHI.Reasoning.RelationalBranchInterference` remains the exact finite
-integer-pair n-branch interference algebra, and
-`DASHI.Reasoning.RelationalTernaryPhaseGeometry` remains the exact Eisenstein
-`Z[omega]` symmetric ternary phase reference.  No literal quantum cognition or
-Born-probability claim is introduced.
-
-### 3 / 6 / 9
-
-`DASHI.Biology.SSP369JResolutionBifiltrationExact` already establishes the
-structural reading used here:
+`DASHI.Reasoning.RelationalBranchInterference` remains the exact finite signed
+interference reference.  `EvidenceHorizon369.EvidenceCoordinate` therefore
+stores
 
 ```text
-3/6/9 = cumulative coordinate / relational horizon
-r     = independent representation resolution.
+fineSignedEvidence : Z
+phaseClassification : ClassifiedInteraction fineSignedEvidence
 ```
 
-The PNF specialisation is:
+and derives `reinforcing / independent / interfering` and magnitude from that
+existing classification witness.  The coarse ternary direction cannot be
+assigned independently of its fine signed receipt.
+
+`DASHI.Reasoning.RelationalTernaryPhaseGeometry` remains the exact Eisenstein
+phase reference.  No literal quantum-cognition or Born-probability claim is
+introduced.  A later application may supply a continuous or constructive-real
+fine field, but must separately prove how its coarse signed observation maps to
+this reference structure.
+
+## 3 / 6 / 9 is relational accumulation, not branching factor
+
+The structural source is
+`DASHI.Biology.SSP369JResolutionBifiltrationExact`:
+
+```text
+H3 = one three-coordinate block
+H6 = H3 + a second three-coordinate block
+H9 = H6 + a third three-coordinate block.
+```
+
+The PNF evidence specialisation is:
 
 ```text
 H3 = local structural evidence
@@ -114,37 +146,164 @@ H6 = H3 + discourse / temporal evidence
 H9 = H6 + external / authority evidence.
 ```
 
-The candidate fibre itself may have arbitrary cardinality or richer geometry.
-3/6/9 counts evidence-coordinate slots, not candidate branches.
+The candidate fibre can have arbitrary cardinality or richer geometry.  3/6/9
+counts accumulated evidence-coordinate slots, not possible referents.
 
-`DASHI.Foundations.Base369BinaryTernaryRefinement` remains the separate exact
-2^a 3^b refinement lattice.  Neither that lattice nor the H3/H6/H9 horizon is
-silently identified with every semantic resolution problem.
+Relational horizon and representational resolution remain independent axes.
+`EvidenceHorizon369` now works over **any existing**
+`StratifiedResolutionTowerExact.ResolutionTower` and proves the finite commuting
+squares
+
+```text
+project6to3 (coarsenH6 x) = coarsenH3 (project6to3 x)
+project9to6 (coarsenH9 x) = coarsenH6 (project9to6 x).
+```
+
+Thus increasing relational horizon and coarsening representation commute at the
+formal interface.  This does not prove interchange of any infinite limits.
+
+`Base369BinaryTernaryRefinement` remains the separate exact `2^a 3^b`
+refinement lattice and is not identified with every semantic resolution tower.
 
 ## Parser/name support is not identity
 
-The real-corpus identity benchmark exposed a large mismatch between admitted
-identity projections and factor-bearing identity projections.  The missing seam
-is formalised in `ParserArgumentSupportGluing` as
+The real-corpus benchmark exposed many admitted identity projections but very
+few factor-bearing identity projections.  The missing structural seam is
+formalised in `ParserArgumentSupportGluing`:
 
 ```text
-parser/name representation --support/gluing--> argument-bearing PNF ObjectId.
+parser/name representation --support/gluing--> argument-bearing PNF object.
 ```
 
 It reuses:
 
-- `DASHI.Core.TypedDependencyCore.DependencyWitness` for proposition-local
-  source/target/provenance/scope;
-- `NSTriadKNIndexedGluingRound32Exact.IndexedGluing` for the exact external to
-  internal representation seam.
+- `TypedDependencyCore.DependencyWitness` for proposition-local source, target,
+  provenance and scope;
+- the generic `IndexedGluing` proof from the merged indexed-gluing spine.
 
-There is no constructor from structural support to identity.  Transporting an
-identity comparison across the seam requires admitted identity witnesses at
-both ends and a proof that they land on the same canonical entity.
+There is no constructor from support to identity.
+
+For multiscale carriers the stronger requirement is now explicit:
+
+```text
+S_r(project_P x) = project_A(S_(r+1) x).
+```
+
+`ParserArgumentResolutionNaturality` must be supplied when support is claimed to
+transport coherently across parser and argument resolution towers.  Identity
+comparison across a support seam still requires independently admitted identity
+witnesses at both ends that land on the same canonical entity.
+
+## Contextual representation orbits and stabilizers
+
+`ContextualRepresentationOrbit` reuses `MultiscaleMDL.SymmetryAction` and
+`OrbitRelated` rather than defining a second canonicalisation/group-action
+system.
+
+A contextual orbit witness adds only numeric scope, region and provenance.  A
+`ContextualStabilizerWitness` explicitly permits fixed representatives; no free
+action or full orbit cardinality is assumed.  Surface/title/pronoun
+representations may therefore be orbit-related in a witnessed context without
+being flattened into entity identity.  Orbit relation has no identity-promotion
+constructor.
+
+## Numeric occurrence fibres
+
+`NumericOccurrenceFibre` wraps the existing `SpacyNumericProjection` rows.
+Repeated strings remain distinct occurrences:
+
+```text
+he_1 != he_2
+```
+
+while both can project to the same surface or lemma fibre key.  Multiplicity is
+therefore occurrence/fibre cardinality, not the magnitude of one semantic
+incidence coefficient.
+
+## Token storage: exact codec first, optimal layout only by evidence
+
+`NumericTokenStorageReference` keeps the authoritative post-tokenisation hot
+stream numeric (`List SymbolId`) and separates storage coding from semantic
+identity.
+
+A `LosslessTokenStreamCodec` must prove
+
+```text
+decode(encode(stream)) = stream.
+```
+
+When storage has a real coarse/fine tower, the module reuses
+`DASHI.Core.MultiscaleMDL.ResidualCodec`, `split`, `join`, `join-split` and
+`MDLCost`.  The existing MDL boundary already separates exact reconstruction
+from an entropy model, Kraft admissibility, residual-entropy bounds and
+rate-distortion optimality.
+
+Accordingly, balanced-ternary packing, CRT packing, dictionary packing or any
+other number-theoretic layout is **not** declared physically optimal by algebra
+alone.  Hot random-access storage and cold/archive storage may have different
+objectives; `StorageMeasurement` and `StorageComparisonReceipt` carry bytes,
+lookup work and decode work without promoting one benchmark into a global
+optimality theorem.
+
+## PostgreSQL lexical retrieval is a first-class optimisation surface
+
+The PNF lexical coordinates are deliberately separate:
+
+```text
+exact surface SymbolId
+parser lemma observation
+retrieval lexeme SymbolId(s).
+```
+
+A PostgreSQL full-text lexeme is not definitionally equal to a parser lemma.
+Full-text normalization/stemming is a retrieval projection and may be more
+aggressive because it proposes candidate neighbourhoods rather than asserting
+semantic identity.
+
+`LexicalRetrievalProjection` represents PostgreSQL FTS, numeric cue automata and
+vector neighbourhoods as retrieval producers.  `RetrievalReductionReceipt`
+records input and output candidate counts with `output <= input`, so a product
+feature earns hot-path use by measurable reduction rather than decoration.
+
+Reference:
+
+- PostgreSQL, *12.6 Dictionaries*:
+  https://www.postgresql.org/docs/current/textsearch-dictionaries.html
+
+Full-text state remains a derived retrieval surface rather than canonical token
+occurrence geometry.
+
+### Regex boundary
+
+Governed multi-token cue phrases are exact finite words over `SymbolId` after
+tokenisation:
+
+```text
+NumericCueWord = List SymbolId.
+```
+
+A runtime may compile those words to a trie, DFA, Aho-Corasick machine or other
+integer-token matcher.  The Agda contract deliberately does not privilege the
+implementation.  Regex has no semantic-authority constructor.
+
+## Inductive preference is not deductive resolution
+
+`InductiveDemandPreference` reuses the existing `DemandState` machine.  A
+preferred candidate may have an evidence margin and coverage receipt while the
+demand remains `openDemand`.
+
+Scalar identity continues to require the existing exact permission:
+
+```text
+singular reference + exactly one witness -> scalar identity.
+```
+
+This is the formal home for discourse-level inductive preference without
+promoting ranking into proof.
 
 ## Identity proof existence is not factor utility
 
-`IdentityProofUtility` separates
+`IdentityProofUtility` separates:
 
 ```text
 admitted identity projection
@@ -152,32 +311,22 @@ factor-bearing identity projection
 Level-3 identity substitution.
 ```
 
-A valid identity is not rejected merely because no current factor uses it.
-Factor applicability requires an independent factor-participation witness.  Only
-then is the existing `IdentitySubstitutionProof` constructible.
+A valid identity is not rejected because no current factor uses it.
+`FactorApplicableIdentity` requires an independent `FactorParticipation`
+witness; only then is the existing `IdentitySubstitutionProof` constructible.
 
-This is the formal target for interpreting corpus funnels such as
+`EvidenceCoverageAudit` supplies the empirical receipt shape for the next corpus
+round without changing semantics:
 
-```text
-identity projections -> factor-bearing projections -> Level-3 substitutions
-```
+- identity/factor intersection at sentence, paragraph, adaptive and document
+  levels;
+- the existing `SparseFrontierCertificate` for boundary reduction;
+- typed-demand funnel: generated -> has candidate -> unique -> admitted identity
+  -> factor substitution;
+- admitted witness rows versus distinct source/target identity propositions.
 
-without weakening identity admission to increase the final number.
-
-## Inductive preference is not deductive resolution
-
-`InductiveDemandPreference` reuses the existing `DemandState` machine.  A
-preferred candidate may carry a margin and evidence-coverage receipt, but it
-still inhabits `openDemand`.
-
-Scalar identity continues to require the existing exact path:
-
-```text
-singular reference + exactly one witness -> scalar identity permission.
-```
-
-This gives ITIR a place to represent discourse-level inductive reasoning without
-turning ranking into proof.
+Counts never promote semantic truth, and low factor coverage does not invalidate
+an otherwise sound identity proof.
 
 ## Local chronology before world alignment
 
@@ -187,191 +336,125 @@ turning ranking into proof.
 (entity, role, temporal cell, evidence).
 ```
 
-Two different local entities may therefore occupy the same role in ordered
-cells.  A GWB corpus can establish Reagan-as-President and Bush-as-President
-through local chronology without first consulting Wikidata.
+Different local entities can occupy the same role in ordered cells.  The GWB
+tranche can therefore establish Reagan-as-President and Bush-as-President from
+local chronology without requiring Wikidata to create that timeline.
 
-External/world alignment is a later proof-relevant fibre.  A candidate external
-entity does not become world identity by lexical or vector similarity; promotion
-still requires the existing `externalAlignmentEvidence` and
-`externalAuthority` witness path from `ProofRelevantIdentityFibres`.
-
-## Numeric occurrence fibres
-
-The hot PNF carrier already has numeric token, sentence, symbol, factor, object
-and demand IDs.  `NumericOccurrenceFibre` therefore wraps rather than replaces
-`SpacyNumericProjection`.
-
-Repeated tokens remain distinct occurrences:
-
-```text
-he_1 != he_2
-```
-
-while both may project to the same surface/lemma fibre key.  Multiplicity is the
-number of occurrence members in a fibre, not a larger semantic incidence
-coefficient.
-
-No claim is made that balanced-ternary packing, CRT packing, or another
-number-theoretic layout is automatically the physically optimal PostgreSQL row
-representation.  Physical layout is a benchmarked execution decision; exact
-numeric carrier structure and storage encoding remain separate obligations.
-
-## PostgreSQL lexical retrieval
-
-PostgreSQL full-text search dictionaries normalize tokens to lexemes; Snowball
-provides stemming and Ispell provides dictionary normalization.  ITIR should use
-that product capability aggressively when it reduces retrieval work, while
-keeping its authority boundary explicit.
-
-The PNF lexical coordinates are therefore distinct:
-
-```text
-exact surface SymbolId
-parser lemma observation
-retrieval lexeme SymbolId(s).
-```
-
-A PostgreSQL retrieval lexeme is not definitionally equal to a parser lemma.
-Full-text normalization is a retrieval projection and may be more aggressive.
-
-Reference:
-
-- PostgreSQL 18, *12.6 Dictionaries*:
-  https://www.postgresql.org/docs/18/textsearch-dictionaries.html
-
-`tsvector`/full-text state is treated as a derived retrieval surface, not the
-canonical token-occurrence geometry.  Authoritative occurrence position remains
-in the numeric token carrier.
-
-### Regex boundary
-
-Semantic cue phrases are represented after tokenisation as exact finite words
-of `SymbolId`:
-
-```text
-NumericCueWord = List SymbolId.
-```
-
-A runtime may compile governed cue words into a trie, DFA, Aho-Corasick machine,
-or another efficient integer-token matcher.  The Agda contract intentionally
-does not privilege one implementation.  Regex has no direct semantic promotion
-constructor.
+External alignment is later and proof-relevant.  An external candidate does not
+become world identity through lexical or vector similarity; promotion still
+uses the existing `externalAlignmentEvidence` and `externalAuthority` witness
+path from `ProofRelevantIdentityFibres`.
 
 ## Sampling, aliasing and coarse/fine lookup
 
 `SemanticSamplingLookupGeometry` reuses
 `StratifiedResolutionTowerExact.ResolutionTower` and formalises only the exact
-condition needed from the Nyquist analogy:
+condition required from the Nyquist/Shannon analogy:
 
 ```text
-fineQuery x = coarseQuery(project x)
+fineQuery x = coarseQuery(project x).
 ```
 
-for every fine state at a declared sufficient resolution.
-
 An `AliasingWitness` is two distinct fine states with the same coarse shadow.
-This makes the semantic question precise without claiming a classical Fourier
-bandlimit or Shannon sampling theorem for language.
+This makes “resolution sufficient for this query” exact without claiming a
+classical Fourier bandlimit or Shannon sampling theorem for language.
 
-Sampling sufficiency and description-length optimality are separate.  A
+Sampling sufficiency and description-length optimality remain separate.  A
 representation may be sufficient but inefficient; an MDL optimum may be too
 coarse if it aliases query-relevant distinctions.
 
-## Lookup geometry
+## Lookup geometry and PostgreSQL probe contracts
 
-`DirectDemandLookup` now separates three supplied storage-engine contracts:
+`DirectDemandLookup` now owns one typed probe spine:
 
 ```text
-exact equality / hash-style      -> expected constant-budget contract
-ordered tree / B-tree-style      -> logarithmic contract
-prefix / partition geometry      -> explicit prefix bound.
+exact equality/hash-style      -> expected constant-budget contract
+ordered tree/B-tree-style      -> logarithmic contract
+prefix/partition geometry      -> explicit prefix-bound contract.
 ```
 
-These are contracts, not unconditional PostgreSQL complexity theorems.  A real
-runtime should instantiate them from an observed query plan / benchmark receipt.
+These are supplied storage-engine receipts, not unconditional PostgreSQL
+complexity theorems.  Runtime plans/benchmarks must instantiate them.
 
-PostgreSQL exposes B-tree, hash, GiST, SP-GiST and GIN index families with
-different operator/query geometries.  Reference:
+Reference:
 
 - PostgreSQL, *11.2 Index Types*:
   https://www.postgresql.org/docs/current/indexes-types.html
 
-The dual semantic address is therefore:
-
-```text
-exact numeric lookup key + structured geometric address.
-```
-
-Exact equality, prefix/ultrametric neighbourhood, temporal interval and fuzzy
-proposal need not use the same physical index.
+The semantic address can therefore carry both an exact numeric lookup key and a
+structured geometric coordinate.  Equality, prefix/ultrametric neighbourhood,
+temporal interval and fuzzy proposal do not need the same physical index.
 
 A prefix/resolution tower is not called p-adic by theorem unless the application
-also constructs the compatible modular arithmetic required for p-adic algebra.
+also constructs compatible modular arithmetic.
 
-## Continuous / vector proposal geometry
+## Continuous/vector proposal geometry
 
-A continuous or floating-point coordinate is an evaluation/search view, not the
-canonical semantic object.  Approximate neighbourhood retrieval can therefore
-propose an active fibre, followed by exact numeric constraints and proof-bearing
-resolution.
+A floating-point or continuous coordinate is an evaluation/search view, not the
+canonical semantic object.  `NeighbourhoodProposalReceipt` therefore places
+vector/continuous neighbourhood search below the authority boundary: it proposes
+a bounded active fibre and explicitly requires exact downstream checking.
 
-The pgvector project supports exact nearest-neighbour search as well as
-approximate HNSW/IVFFlat indexing.  In ITIR this capability belongs strictly to
-candidate generation; approximate retrieval has no identity-promotion
-constructor.
+The pgvector project is an appropriate runtime candidate for this proposal
+layer; approximate retrieval has no identity-promotion constructor.
 
 Reference:
 
 - pgvector project:
   https://github.com/pgvector/pgvector
 
-## Bounded execution and omitted mass
+This tranche does **not** manufacture a constructive-real continuous semantic
+field merely because the discrete signed/interference reference admits such an
+interpretation.  A future continuous instance must supply its carrier, metric or
+phase field and its coarse-observation theorem explicitly.
 
-`BoundedExecutionCarrier` consolidates the pattern independently present in
+## Bounded execution, omitted mass and causal-cone narrowing
+
+`BoundedExecutionCarrier` consolidates the common structure already present in
 proper-name enumeration and factor composition:
 
 ```text
 semantic possibility count
 retained execution count
 execution limit
-overflow/coverage receipt.
+coverage / overflow receipt.
 ```
 
-It bridges the existing runtime-specific enumeration records rather than
-replacing them.
-
-An optional generic `SplitMeasureReceipt` records
+Overflow has no semantic authority.  `MeasuredBoundedExecutionCarrier` adds an
+application-supplied `SplitMeasureReceipt`:
 
 ```text
-retained mass + omitted mass = total mass
+retained mass + omitted mass = total mass.
 ```
 
-on an application-supplied mass algebra.  It does not manufacture a probability
-measure or Born rule.  This is the natural place for future causal-cone / beam
-reweighting receipts where a branch can leave the active frontier without being
-refuted.
+No probability measure or Born rule is manufactured.  This is the exact slot
+for future causal-cone / beam reweighting receipts: a branch may become low
+weight or leave the active frontier while remaining semantically possible and
+reopenable under later evidence.
 
 ## Authority summary
 
-The reference spine enforces:
+The reference spine now enforces:
 
 ```text
-support/gluing       != identity
-retrieval rank        != semantic admission
-inductive preference != deductive resolution
-negative phase        != refutation
-execution pruning     != refutation
-overflow              != semantic rejection
-role identity         != person identity
-local entity          != world entity
-H9 authority evidence != automatic world promotion
-prefix geometry       != automatically p-adic
-query sufficiency     != classical Nyquist theorem
-finite P/Q/J model    != universal semantic P/Q/J theorem.
+support/gluing        != identity
+orbit relation         != identity
+retrieval rank         != semantic admission
+inductive preference  != deductive resolution
+negative phase         != refutation
+soft reweighting       != refutation
+execution pruning      != refutation
+overflow               != semantic rejection
+role identity          != person identity
+local entity           != world entity
+H9 authority evidence  != automatic world promotion
+prefix geometry        != automatically p-adic
+query commutation      != classical Nyquist theorem
+number-theory packing  != storage optimality
+finite P/Q/J reference != universal semantic P/Q/J theorem.
 ```
 
-The intended runtime direction is increasingly pure numeric execution after
-tokenisation, with text retained for source/provenance/presentation and with
-PostgreSQL-native retrieval/index products used wherever measurement shows they
+The intended runtime direction is pure numeric execution wherever possible after
+tokenisation, with source text retained for provenance/presentation and with
+PostgreSQL-native retrieval/index products used whenever measurement shows they
 reduce work without crossing these authority boundaries.
