@@ -17,3 +17,6 @@ import DASHI.Physics.Closure.NSTriadKNAffineOwnerCostOptimizationRound29Exact
 import DASHI.Physics.Closure.NSTriadKNBoundaryVanishingClassificationRound29Exact
 import DASHI.Physics.Closure.NSTriadKNCriticalCompactnessSerrinRound29Exact
 import DASHI.Physics.Closure.NSTriadKNLuoHighestAlphaRound29Exact
+
+-- Child-branch cumulative validation.
+import DASHI.Physics.Closure.NSTriadKNLuoPhysicalGalerkinFlowRound30Validation

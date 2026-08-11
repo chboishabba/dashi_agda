@@ -105,7 +105,7 @@ positiveCoefficientLerayFixed E I coefficient =
     E I
     (Phase.coefficientMode coefficient)
     (Phase.coefficientValue coefficient)
-    (Phase.coefficientTransverse coefficient)
+    (Phase.transverse coefficient)
 
 negativeCoefficientLerayFixed :
   ∀ {r} {F : C3.RealField r}
