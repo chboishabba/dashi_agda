@@ -71,7 +71,7 @@ asGaugeCovariantPathFamily {geometry = geometry} {point = point} dataSet = recor
       transformedHolonomy dataSet
   ; leftGauge = leftGauge dataSet
   ; rightGauge = rightGauge dataSet
-  ; pathHolonomyGaugeCovariant =
+  ; transformedHolonomyGaugeCovariant =
       pathHolonomyGaugeCovariant dataSet
   ; pathFamilySmallDiameter =
       contourHolonomiesSmallDiameter dataSet
