@@ -47,10 +47,8 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚP
-open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (subst)
 
-import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
 import DASHI.Physics.Closure.NSTriadKNLuoBadCoherenceWeightedMarkovExact as Threshold
 import DASHI.Physics.Closure.NSTriadKNAdmissibleOwnerTaxLanguageRound28Exact as Owner
 import DASHI.Physics.Closure.NSTriadKNHHUnifiedDirectionalDefectRound40Exact as Defect
@@ -144,13 +142,16 @@ goodSquareBelowScaledSharedBudget {parameter = parameter} {budget} good =
         * Defect.weightedDirectionalDefectMass (badCells budget)
       ≡ scale * Defect.weightedDirectionalDefectMass (badCells budget)
     lowerMeaning = refl
-  in
-  ℚP.≤-trans
-    (goodSquareBelowDefect good)
-    (subst
-      (λ lower → lower ≤ scale * defectBudgetRight budget)
+
+    first :
+      goodProductionSquare good
+      ≤ scale * Defect.weightedDirectionalDefectMass (badCells budget)
+    first = subst
+      (λ upper → goodProductionSquare good ≤ upper)
       lowerMeaning
-      scaledDefect)
+      (goodSquareBelowDefect good)
+  in
+  ℚP.≤-trans first scaledDefect
 
 sharedDirectionalDefectBudgetClosed : Bool
 sharedDirectionalDefectBudgetClosed = true
