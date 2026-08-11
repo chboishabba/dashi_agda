@@ -13,6 +13,8 @@ open import DASHI.Cognition.PNF.IdentityEvidenceProduction
 -- Proper-name expansion is candidate evidence only. Runtime enumerates a
 -- bounded representative target carrier per standalone proper-name mention and
 -- records overflow when the family carrier is larger than the execution budget.
+-- The semantic possibility count remains the full observed family cardinality;
+-- bounded representation never means omitted targets were semantically rejected.
 -- A token already embedded in a PERSON span is not a standalone surname source.
 ------------------------------------------------------------------------
 
