@@ -38,7 +38,7 @@ module DASHI.Physics.YangMills.BalabanFiniteRGObservableReopeningExact where
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List)
 open import Data.Empty using (⊥)
-open import Data.Rational.Base as ℚ using (ℚ; 1ℚ; _*_; _+_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; 1ℚ; _*_; _+_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
@@ -60,14 +60,12 @@ record FiniteRGReopeningStep (Fine Coarse : Set) : Set₁ where
     coarseWeight : Coarse → ℚ
     reopeningKernel : Coarse → Fine → ℚ
 
-    -- Concrete quotient provenance: nonzero reopening mass may only live on
-    -- the declared fibre.
     FibreSupport : Coarse → Fine → Set
     fibreSupportProjects : ∀ {coarse fine} →
       FibreSupport coarse fine → project fine ≡ coarse
     reopeningOffFibreZero : ∀ coarse fine →
       (FibreSupport coarse fine → ⊥) →
-      reopeningKernel coarse fine ≡ ℚ.0ℚ
+      reopeningKernel coarse fine ≡ 0ℚ
 
     reopeningNormalized : ∀ coarse →
       Sums.sumRational fineStates (reopeningKernel coarse) ≡ 1ℚ
