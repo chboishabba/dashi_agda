@@ -1,0 +1,17 @@
+module DASHI.Physics.Closure.NSTriadKNResidualTransportOwnerFlowRound38Validation where
+
+-- Round 38 is stacked on the complete Round-37 validation root.  The imports
+-- below are only the new hard-math tranche: line-residual HH-good geometry,
+-- finite PV detail factorization, Z2-graded Com transport, evidence-indexed
+-- HH-bad dissipation and occupation/crossing control, physically witnessed
+-- pre-tax cancellation flow, and the F4 orbit-fibre pushforward.
+open import DASHI.Physics.Closure.NSTriadKNPQStabilizerSignedLedgerRound37Validation
+
+open import DASHI.Physics.Closure.NSTriadKNVorticityLineResidualRound38Exact
+open import DASHI.Physics.Closure.NSTriadKNVorticityLineOrthogonalResidualRound38Exact
+open import DASHI.Physics.Closure.NSTriadKNFinitePVDetailOperatorRound38Exact
+open import DASHI.Physics.Closure.NSTriadKNComZ2GradingRound38Exact
+open import DASHI.Physics.Closure.NSTriadKNHHBadRestrictedDissipationRound38Exact
+open import DASHI.Physics.Closure.NSTriadKNHHBadOccupationCrossingRound38Exact
+open import DASHI.Physics.Closure.NSTriadKNSignedOwnerCancellationFlowRound38Exact
+open import DASHI.Physics.Closure.NSTriadKNPhysicalTriadOrbitFibreRound38Exact
