@@ -214,20 +214,20 @@ GaugeActionIsotropy :
   ∀ {N : Nat} {{_ : NonZero N}}
     (group : Transport.GroupStructure) →
     Covariance.DirectedGaugeField4 N group → Set
-GaugeActionIsotropy group field = GaugeActionArrow group field field
+GaugeActionIsotropy group gaugeField = GaugeActionArrow group gaugeField gaugeField
 
 basedGaugeActionIsotropyTrivial :
   ∀ {N : Nat} {{_ : NonZero N}}
     (group : Transport.GroupStructure)
     (base : Cube4 N)
-    (field : Covariance.DirectedGaugeField4 N group) →
+    (gaugeField : Covariance.DirectedGaugeField4 N group) →
   ConnectedFromBase base →
-  ∀ (isotropy : GaugeActionIsotropy group field) →
+  ∀ (isotropy : GaugeActionIsotropy group gaugeField) →
   BasedGaugeFunction group base (gauge isotropy) →
   ∀ site → gauge isotropy site ≡ Transport.unit group
-basedGaugeActionIsotropyTrivial group base field connected isotropy based =
+basedGaugeActionIsotropyTrivial group base gaugeField connected isotropy based =
   selectedBasedGaugeStabilizerTrivial
-    group base (gauge isotropy) field connected based (actionExact isotropy)
+    group base (gauge isotropy) gaugeField connected based (actionExact isotropy)
 
 selectedBasedGaugePathFreenessLevel : ProofLevel
 selectedBasedGaugePathFreenessLevel = machineChecked
