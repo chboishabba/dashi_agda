@@ -17,7 +17,7 @@ module DASHI.Physics.YangMills.BalabanBasedPathGaugeSectionExact where
 --
 -- Construct an actual finite based/path gauge section, with the gauge-group
 -- arrow retained as provenance.  A rooted path system chooses one path from a
--- base site to every site.  For a field U define
+-- base site to every site.  For a gauge field U define
 --
 --       g_U(x) = transport_U(base -> x).
 --
@@ -67,9 +67,9 @@ RadialGaugeField :
     {base : Cube4 N} →
   RootedPathSystem base →
   Covariance.DirectedGaugeField4 N group → Set
-RadialGaugeField group paths field =
+RadialGaugeField group paths gaugeField =
   ∀ site →
-  Covariance.directedPathTransport group field (pathTo paths site)
+  Covariance.directedPathTransport group gaugeField (pathTo paths site)
   ≡ Transport.unit group
 
 rootedGaugeFunction :
@@ -79,20 +79,20 @@ rootedGaugeFunction :
     (paths : RootedPathSystem base) →
   Covariance.DirectedGaugeField4 N group →
   Covariance.GaugeFunction4 N group
-rootedGaugeFunction group paths field site =
-  Covariance.directedPathTransport group field (pathTo paths site)
+rootedGaugeFunction group paths gaugeField site =
+  Covariance.directedPathTransport group gaugeField (pathTo paths site)
 
 rootedGaugeFunctionBased :
   ∀ {N : Nat} {{_ : NonZero N}}
     (group : Transport.GroupStructure)
     {base : Cube4 N}
     (paths : RootedPathSystem base)
-    (field : Covariance.DirectedGaugeField4 N group) →
-  Free.BasedGaugeFunction group base (rootedGaugeFunction group paths field)
-rootedGaugeFunctionBased group paths field =
+    (gaugeField : Covariance.DirectedGaugeField4 N group) →
+  Free.BasedGaugeFunction group base (rootedGaugeFunction group paths gaugeField)
+rootedGaugeFunctionBased group paths gaugeField =
   subst
     (λ path →
-      Covariance.directedPathTransport group field path
+      Covariance.directedPathTransport group gaugeField path
       ≡ Transport.unit group)
     (sym (pathAtBase paths))
     refl
@@ -104,28 +104,28 @@ rootedGaugeRepresentative :
     (paths : RootedPathSystem base) →
   Covariance.DirectedGaugeField4 N group →
   Covariance.DirectedGaugeField4 N group
-rootedGaugeRepresentative group paths field =
+rootedGaugeRepresentative group paths gaugeField =
   Covariance.gaugeTransformBond group
-    (rootedGaugeFunction group paths field) field
+    (rootedGaugeFunction group paths gaugeField) gaugeField
 
 rootedGaugeRepresentativeRadial :
   ∀ {N : Nat} {{_ : NonZero N}}
     (group : Transport.GroupStructure)
     {base : Cube4 N}
     (paths : RootedPathSystem base)
-    (field : Covariance.DirectedGaugeField4 N group) →
+    (gaugeField : Covariance.DirectedGaugeField4 N group) →
   RadialGaugeField group paths
-    (rootedGaugeRepresentative group paths field)
-rootedGaugeRepresentativeRadial group {base = base} paths field site =
+    (rootedGaugeRepresentative group paths gaugeField)
+rootedGaugeRepresentativeRadial group {base = base} paths gaugeField site =
   let
-    gauge = rootedGaugeFunction group paths field
-    transport = Covariance.directedPathTransport group field (pathTo paths site)
+    gauge = rootedGaugeFunction group paths gaugeField
+    transport = Covariance.directedPathTransport group gaugeField (pathTo paths site)
 
     covariance = Covariance.pathTransportGaugeCovariant
-      group gauge field (pathTo paths site)
+      group gauge gaugeField (pathTo paths site)
 
     baseIsUnit : gauge base ≡ Transport.unit group
-    baseIsUnit = rootedGaugeFunctionBased group paths field
+    baseIsUnit = rootedGaugeFunctionBased group paths gaugeField
 
     simplify :
       Transport.multiply group
@@ -168,17 +168,17 @@ rootedGaugeOrbitLift :
     (group : Transport.GroupStructure)
     {base : Cube4 N}
     (paths : RootedPathSystem base)
-    (field : Covariance.DirectedGaugeField4 N group) →
-  BasedGaugeOrbitLift group paths field
-rootedGaugeOrbitLift group paths field = record
-  { representative = rootedGaugeRepresentative group paths field
+    (gaugeField : Covariance.DirectedGaugeField4 N group) →
+  BasedGaugeOrbitLift group paths gaugeField
+rootedGaugeOrbitLift group paths gaugeField = record
+  { representative = rootedGaugeRepresentative group paths gaugeField
   ; gaugeArrow = record
-      { Free.GaugeActionArrow.gauge = rootedGaugeFunction group paths field
+      { Free.GaugeActionArrow.gauge = rootedGaugeFunction group paths gaugeField
       ; Free.GaugeActionArrow.actionExact = λ bond → refl
       }
-  ; arrowIsBased = rootedGaugeFunctionBased group paths field
+  ; arrowIsBased = rootedGaugeFunctionBased group paths gaugeField
   ; representativeInRootedSlice =
-      rootedGaugeRepresentativeRadial group paths field
+      rootedGaugeRepresentativeRadial group paths gaugeField
   }
 
 pathTransportRespectsField :
@@ -275,11 +275,11 @@ identityGaugeTransformExact :
   ∀ {N : Nat} {{_ : NonZero N}}
     (group : Transport.GroupStructure)
     (gauge : Covariance.GaugeFunction4 N group)
-    (field : Covariance.DirectedGaugeField4 N group) →
+    (gaugeField : Covariance.DirectedGaugeField4 N group) →
   (∀ site → gauge site ≡ Transport.unit group) →
   ∀ bond →
-  Covariance.gaugeTransformBond group gauge field bond ≡ field bond
-identityGaugeTransformExact group gauge field gaugeUnit bond =
+  Covariance.gaugeTransformBond group gauge gaugeField bond ≡ gaugeField bond
+identityGaugeTransformExact group gauge gaugeField gaugeUnit bond =
   trans
     (cong₂ (Transport.multiply group)
       (gaugeUnit (source bond))
@@ -290,12 +290,12 @@ identityGaugeTransformExact group gauge field gaugeUnit bond =
       (cong
         (Transport.multiply group (Transport.unit group))
         (cong
-          (Transport.multiply group (field bond))
+          (Transport.multiply group (gaugeField bond))
           (Free.inverseUnitExact group)))
       (trans
         (Transport.unitLeft group
-          (Transport.multiply group (field bond) (Transport.unit group)))
-        (Transport.unitRight group (field bond))))
+          (Transport.multiply group (gaugeField bond) (Transport.unit group)))
+        (Transport.unitRight group (gaugeField bond))))
 
 rootedGaugeRepresentativeUniqueInBasedOrbit :
   ∀ {N : Nat} {{_ : NonZero N}}
