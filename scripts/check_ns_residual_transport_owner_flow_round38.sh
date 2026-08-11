@@ -9,6 +9,7 @@ bash scripts/check_ns_pq_stabilizer_signed_ledger_round37.sh
 files=(
   DASHI/Physics/Closure/NSTriadKNVorticityLineResidualRound38Exact.agda
   DASHI/Physics/Closure/NSTriadKNVorticityLineOrthogonalResidualRound38Exact.agda
+  DASHI/Physics/Closure/NSTriadKNHHGoodPhysicalThresholdStretchingRound38Exact.agda
   DASHI/Physics/Closure/NSTriadKNFinitePVDetailOperatorRound38Exact.agda
   DASHI/Physics/Closure/NSTriadKNPeriodicPVZeroMassFourierCriterionRound38Exact.agda
   DASHI/Physics/Closure/NSTriadKNComZ2GradingRound38Exact.agda
@@ -28,11 +29,13 @@ for file in "${files[@]}"; do
   fi
 done
 
-# HH-good residual and PV detail mathematics.
+# HH-good residual, physical threshold gain and PV detail mathematics.
 grep -q 'lineResidualIgnoresParallelComponent' DASHI/Physics/Closure/NSTriadKNVorticityLineResidualRound38Exact.agda
 grep -q 'stretchingDescendsToSourceLineQuotient' DASHI/Physics/Closure/NSTriadKNVorticityLineResidualRound38Exact.agda
 grep -q 'lineResidualNormSquaredExact' DASHI/Physics/Closure/NSTriadKNVorticityLineOrthogonalResidualRound38Exact.agda
 grep -q 'stretchingSquareControlledByLineDetail' DASHI/Physics/Closure/NSTriadKNVorticityLineOrthogonalResidualRound38Exact.agda
+grep -q 'stretchingSquarePhysicalDirectionalDefect' DASHI/Physics/Closure/NSTriadKNHHGoodPhysicalThresholdStretchingRound38Exact.agda
+grep -q 'goodPhysicalStretchingThresholdBound' DASHI/Physics/Closure/NSTriadKNHHGoodPhysicalThresholdStretchingRound38Exact.agda
 grep -q 'zeroMassKernelAnnihilatesConstantProjector' DASHI/Physics/Closure/NSTriadKNFinitePVDetailOperatorRound38Exact.agda
 grep -q 'kernelFactorsThroughProjectorDetail' DASHI/Physics/Closure/NSTriadKNFinitePVDetailOperatorRound38Exact.agda
 grep -q 'zeroModeMultiplierForcesKernelMassZero' DASHI/Physics/Closure/NSTriadKNPeriodicPVZeroMassFourierCriterionRound38Exact.agda
@@ -67,6 +70,7 @@ grep -q 'literalOrderedGalerkinIncidencePowerZero' DASHI/Physics/Closure/NSTriad
 # Source metadata on load-bearing modules.
 grep -q '10.1512/iumj.1993.42.42034' DASHI/Physics/Closure/NSTriadKNVorticityLineResidualRound38Exact.agda
 grep -q '10.1080/03605309608821197' DASHI/Physics/Closure/NSTriadKNVorticityLineOrthogonalResidualRound38Exact.agda
+grep -q '10.1007/s00021-019-0411-z' DASHI/Physics/Closure/NSTriadKNHHGoodPhysicalThresholdStretchingRound38Exact.agda
 grep -q '10.1007/BF02099744' DASHI/Physics/Closure/NSTriadKNFinitePVDetailOperatorRound38Exact.agda
 grep -q '10.1007/978-3-642-16830-7' DASHI/Physics/Closure/NSTriadKNPeriodicPVZeroMassFourierCriterionRound38Exact.agda
 grep -q '10.1002/cpa.3160410704' DASHI/Physics/Closure/NSTriadKNComZ2GradingRound38Exact.agda
@@ -77,6 +81,7 @@ grep -q '10.1007/BF02547354' DASHI/Physics/Closure/NSTriadKNPhysicalGalerkinInci
 grep -q '10.1090/chel/343' DASHI/Physics/Closure/NSTriadKNPhysicalGalerkinIncidencePermutationRound38Exact.agda
 
 # Keep every still-physical analytic producer fail-closed.
+grep -q 'periodicPVHHGoodOwnerEstimateConstructed = false' DASHI/Physics/Closure/NSTriadKNHHGoodPhysicalThresholdStretchingRound38Exact.agda
 grep -q 'literalPeriodicPVDetailFactorizationConstructed = false' DASHI/Physics/Closure/NSTriadKNFinitePVDetailOperatorRound38Exact.agda
 grep -q 'literalPhysicalStrainKernelCharacterRealizationConstructed = false' DASHI/Physics/Closure/NSTriadKNPeriodicPVZeroMassFourierCriterionRound38Exact.agda
 grep -q 'physicalOddTransportGramRealizationConstructed = false' DASHI/Physics/Closure/NSTriadKNComZ2GradingRound38Exact.agda
