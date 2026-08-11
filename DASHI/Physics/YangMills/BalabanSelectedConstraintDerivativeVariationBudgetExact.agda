@@ -41,14 +41,17 @@ module DASHI.Physics.YangMills.BalabanSelectedConstraintDerivativeVariationBudge
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Integer.Base using (+_)
-open import Data.Rational.Base as ℚ using (ℚ; _*_; _≤_; _/_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _*_; _≤_; _/_)
 import Data.Rational.Properties as ℚP
+open ℚP using (_≤?_)
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Nullary.Decidable.Core using (toWitness)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanFiniteRectangularRationalExact as Rect
 import DASHI.Physics.YangMills.BalabanConstructiveRationalMatrixInverseExact as Matrix
+import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
 import DASHI.Physics.YangMills.BalabanP33FiniteKKTAdmissibleProjectorExact as StateCarrier
 import DASHI.Physics.YangMills.BalabanP33PhysicalRationalWilsonPlaquetteJetExact as Physical
 import DASHI.Physics.YangMills.BalabanP33PhysicalBackgroundGaugeParameterizedYoungExact as Relaxed
@@ -68,6 +71,11 @@ derivativeVariationSquaredCoefficient = + 29 / 2048
 
 halfContractionSquaredCoefficient : ℚ
 halfContractionSquaredCoefficient = + 1 / 2
+
+derivativeVariationSquaredCoefficientNonnegative :
+  0ℚ ≤ derivativeVariationSquaredCoefficient
+derivativeVariationSquaredCoefficientNonnegative =
+  toWitness {a? = 0ℚ ≤? derivativeVariationSquaredCoefficient} _
 
 derivativeVariationBudgetExact :
   derivativeVariationSquaredCoefficient * Bound.selectedFloorReciprocal
@@ -121,8 +129,8 @@ selectedDerivativeVariationComposedWithNormalUpper
     correctionBound = selectedNormalCorrectionFromSourceBound
       background radius certificate source sourceReduced
 
-    scaled = ℚP.*-monoʳ-≤-nonNeg
-      derivativeVariationSquaredCoefficient correctionBound
+    scaled = Norm.scaleNonnegative derivativeVariationSquaredCoefficient
+      derivativeVariationSquaredCoefficientNonnegative correctionBound
 
     composed :
       Bound.rawMultiplierNormSq (variation correction)
