@@ -31,13 +31,15 @@ module DASHI.Physics.YangMills.BalabanFiniteStrictContractionReopeningExact wher
 --
 --      ||x||_1 <= (6/5) ||y||_1.
 --
--- In particular the homogeneous equation has zero l1 norm.  This is the
--- hard quantitative part of the finite inverse argument and is independent of
--- any completeness assumption or infinite sum.
+-- In particular the homogeneous equation has zero l1 norm.  A proof-bearing
+-- finite selector then turns zero l1 norm into pointwise zero, so strict
+-- contraction supplies genuine kernel triviality on a complete finite carrier.
+-- This is the hard quantitative part of finite reopening and uses neither a
+-- completeness assumption nor an infinite sum.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using (List)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; -_; _≤_; _/_; ∣_∣)
@@ -45,11 +47,13 @@ import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using
   (cong; subst; sym; trans)
+open import Relation.Nullary.Decidable.Core using (yes; no)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
 import DASHI.Physics.YangMills.BalabanP33FiniteWeightedSchurSquaredExact as Schur
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
+import DASHI.Physics.YangMills.BalabanP33PhysicalCoordinateBasisExact as Basis
 import DASHI.Physics.YangMills.BalabanFiniteMatrixL1ContractionExact as L1
 import DASHI.Physics.YangMills.BalabanFiniteRectangularAbsoluteMassExact as Mass
 
@@ -251,6 +255,80 @@ vectorL1Nonnegative indices vector =
   Schur.sumNonnegative indices (λ index → ∣ vector index ∣)
     (λ index → ℚP.0≤∣p∣ (vector index))
 
+selectorFactorBelowAbsolute :
+  ∀ {Index : Set}
+    (selector : Basis.FiniteSelector Index)
+    (vector : Vector Index) target candidate →
+  ∣ vector candidate ∣
+    * Basis.kronecker (Basis.decide selector) candidate target
+  ≤ ∣ vector candidate ∣
+selectorFactorBelowAbsolute selector vector target candidate
+  with Basis.decide selector candidate target
+... | yes refl =
+  subst
+    (λ left → left ≤ ∣ vector target ∣)
+    (ℚRing.solve-∀ (∣ vector target ∣) :
+      ∣ vector target ∣ * 1ℚ ≡ ∣ vector target ∣)
+    ℚP.≤-refl
+... | no _ =
+  subst
+    (λ left → left ≤ ∣ vector candidate ∣)
+    (ℚRing.solve-∀ (∣ vector candidate ∣) :
+      ∣ vector candidate ∣ * 0ℚ ≡ 0ℚ)
+    (ℚP.0≤∣p∣ (vector candidate))
+
+finiteSelectorCoordinateBelowL1 :
+  ∀ {Index : Set}
+    (selector : Basis.FiniteSelector Index)
+    (vector : Vector Index) target →
+  ∣ vector target ∣
+  ≤ L1.vectorL1 (Basis.elements selector) vector
+finiteSelectorCoordinateBelowL1 selector vector target =
+  let
+    selected :
+      Sums.sumRational (Basis.elements selector)
+        (λ candidate →
+          ∣ vector candidate ∣
+          * Basis.kronecker (Basis.decide selector) candidate target)
+      ≤ Sums.sumRational (Basis.elements selector)
+          (λ candidate → ∣ vector candidate ∣)
+    selected = Schur.sumPointwiseBelow
+      (Basis.elements selector) _ _
+      (selectorFactorBelowAbsolute selector vector target)
+
+    exact :
+      Sums.sumRational (Basis.elements selector)
+        (λ candidate →
+          ∣ vector candidate ∣
+          * Basis.kronecker (Basis.decide selector) candidate target)
+      ≡ ∣ vector target ∣
+    exact = Basis.selectorExact selector (λ candidate → ∣ vector candidate ∣) target
+  in
+  subst
+    (λ lower → lower ≤ L1.vectorL1 (Basis.elements selector) vector)
+    exact selected
+
+finiteSelectorL1ZeroPointwise :
+  ∀ {Index : Set}
+    (selector : Basis.FiniteSelector Index)
+    (vector : Vector Index) →
+  L1.vectorL1 (Basis.elements selector) vector ≡ 0ℚ →
+  ∀ target → vector target ≡ 0ℚ
+finiteSelectorL1ZeroPointwise selector vector normZero target =
+  let
+    absoluteBelowNorm = finiteSelectorCoordinateBelowL1 selector vector target
+
+    absoluteBelowZero : ∣ vector target ∣ ≤ 0ℚ
+    absoluteBelowZero = subst
+      (λ upper → ∣ vector target ∣ ≤ upper)
+      normZero absoluteBelowNorm
+
+    absoluteZero : ∣ vector target ∣ ≡ 0ℚ
+    absoluteZero = ℚP.≤-antisym
+      absoluteBelowZero (ℚP.0≤∣p∣ (vector target))
+  in
+  ℚP.∣p∣≡0⇒p≡0 (vector target) absoluteZero
+
 oneSixthHomogeneousReopeningZeroNorm :
   ∀ {Index : Set}
     (indices : List Index)
@@ -279,8 +357,26 @@ oneSixthHomogeneousReopeningZeroNorm
   in
   ℚP.≤-antisym upperZero (vectorL1Nonnegative indices solution)
 
+oneSixthHomogeneousReopeningPointwiseZero :
+  ∀ {Index : Set}
+    (selector : Basis.FiniteSelector Index)
+    (residual : Vector Index → Vector Index)
+    solution →
+  IdentityPlusResidualEquation residual solution zeroVector →
+  L1.vectorL1 (Basis.elements selector) (residual solution)
+    ≤ oneSixth * L1.vectorL1 (Basis.elements selector) solution →
+  ∀ target → solution target ≡ 0ℚ
+oneSixthHomogeneousReopeningPointwiseZero
+    selector residual solution equation residualContraction =
+  finiteSelectorL1ZeroPointwise selector solution
+    (oneSixthHomogeneousReopeningZeroNorm
+      (Basis.elements selector) residual solution equation residualContraction)
+
 finiteStrictContractionReopeningLevel : ProofLevel
 finiteStrictContractionReopeningLevel = machineChecked
 
 finiteOneSixthReopeningSixFifthsLevel : ProofLevel
 finiteOneSixthReopeningSixFifthsLevel = machineChecked
+
+finiteSelectorL1DefinitenessLevel : ProofLevel
+finiteSelectorL1DefinitenessLevel = machineChecked
