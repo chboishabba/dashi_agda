@@ -2,9 +2,11 @@ module DASHI.Cognition.PNF.LexicalRetrievalProjection where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
 open import Data.List.Base using (List; []; _∷_)
 
+open import DASHI.Cognition.PNF.ComplexityArithmetic
 open import DASHI.Cognition.PNF.NumericAuthority
 import DASHI.Cognition.PNF.SpacyNumericProjection as Spacy
 
@@ -39,6 +41,25 @@ record LexicalRetrievalProjection : Set where
     retrievalLexemes : List SymbolId
 
 open LexicalRetrievalProjection public
+
+------------------------------------------------------------------------
+-- Retrieval optimisation receipt.
+--
+-- PostgreSQL FTS, a numeric cue automaton, or a vector proposal earns a place
+-- in the hot path when it measurably reduces the candidate frontier.  The
+-- receipt is deliberately independent of semantic authority.
+------------------------------------------------------------------------
+
+record RetrievalReductionReceipt : Set where
+  constructor retrievalReductionReceipt
+  field
+    reductionProducer : RetrievalProducer
+    inputCandidateCount : Nat
+    outputCandidateCount : Nat
+    outputDoesNotExceedInput :
+      outputCandidateCount ≤ᶜ inputCandidateCount
+
+open RetrievalReductionReceipt public
 
 ------------------------------------------------------------------------
 -- Numeric cue language.
