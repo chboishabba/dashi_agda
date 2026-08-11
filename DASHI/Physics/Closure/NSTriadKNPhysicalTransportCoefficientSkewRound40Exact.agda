@@ -39,17 +39,21 @@ module DASHI.Physics.Closure.NSTriadKNPhysicalTransportCoefficientSkewRound40Exa
 --
 -- This is exactly the entrywise condition T*=-T required by Round 40's Com
 -- adjoint collapse.  It is proved on the repository's literal Complex3 and
--- integer Fourier carriers with no continuum integration authority.
+-- integer Fourier carriers with no continuum integration authority.  The
+-- final theorem below consumes the repository's actual `RealityCondition` and
+-- `DivergenceFreeCondition`, so the coefficient witness cannot be supplied
+-- independently of the physical velocity state.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (cong; cong₂; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNComplex3FieldAlgebra as Algebra
 import DASHI.Physics.Closure.NSTriadKNComplex3AlgebraLaws as Laws
+import DASHI.Physics.Closure.NSTriadKNComplex3RealityPhaseAudit as Audit
 
 modeDot :
   ∀ {r} {F : C3.RealField r} →
@@ -220,6 +224,47 @@ physicalTransportCoefficientSkew {F = F} {E = E}
         (Algebra.complexNegateMultiplyLeft
           (C3.complexI F)
           (modeDot E input (coefficient witness)))))
+
+physicalStateAdvectorWitness :
+  ∀ {r} {F : C3.RealField r}
+    {E : C3.IntegerEmbedding F}
+    (velocity : Z3.FourierMode → C3.Complex3 F) →
+  Audit.RealityCondition velocity →
+  Audit.DivergenceFreeCondition E velocity →
+  (advector input output : Z3.FourierMode) →
+  Z3.addMode advector input ≡ output →
+  ResonantRealDivergenceFreeAdvector E advector input output
+physicalStateAdvectorWitness {F = F} {E = E}
+    velocity reality divergenceFree advector input output resonance = record
+  { coefficient = velocity advector
+  ; negativeCoefficient = velocity (Z3.negateMode advector)
+  ; resonance = resonance
+  ; divergenceFree =
+      trans
+        (Algebra.bilinearDotCommutative
+          (C3.modeVector E advector) (velocity advector))
+        (divergenceFree advector)
+  ; reality = reality advector
+  }
+
+physicalVelocityTransportCoefficientSkew :
+  ∀ {r} {F : C3.RealField r}
+    {E : C3.IntegerEmbedding F}
+    (velocity : Z3.FourierMode → C3.Complex3 F) →
+  Audit.RealityCondition velocity →
+  Audit.DivergenceFreeCondition E velocity →
+  (advector input output : Z3.FourierMode) →
+  (resonance : Z3.addMode advector input ≡ output) →
+  let witness = physicalStateAdvectorWitness
+        velocity _ _ advector input output resonance
+  in
+  C3.complexConjugate (reverseCoefficient witness)
+  ≡ C3.complexNegate (forwardCoefficient witness)
+physicalVelocityTransportCoefficientSkew
+    velocity reality divergenceFree advector input output resonance =
+  physicalTransportCoefficientSkew
+    (physicalStateAdvectorWitness
+      velocity reality divergenceFree advector input output resonance)
 
 physicalTransportCoefficientSkewClosed : Bool
 physicalTransportCoefficientSkewClosed = true
