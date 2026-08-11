@@ -1,298 +1,239 @@
 # NS Round 41 — defect density, annular master kernel, and one-channel Com
 
-Round 41 continues the shortest post-Round-40 Navier–Stokes cut.  It does not
-add another terminal Clay wrapper and it does not promote an abstract
-inequality into a physical PDE theorem merely because the algebra downstream
-is now closed.
+Round 41 continues the shortest post-Round-40 Navier–Stokes cut. It advances
+hard finite/same-object mathematics and keeps genuinely physical PDE producers
+fail-closed. No unconditional Navier–Stokes regularity theorem is claimed.
 
-## 1. HH-bad: the inverse-shell source is now an exact magnitude theorem
+## HH-bad: exact inverse-shell source
 
-Round 36 had only the signed scale valuation.  Round 41 evaluates the actual
-rational dyadic magnitude using
-
-```text
-lambda_q = 2^q,
-mu_q     = 2^-q,
-mu_q lambda_q = 1.
-```
-
-With exactly one derivative-bearing off-diagonal factor,
+Round 36 had only the signed scale valuation. Round 41 evaluates the exact
+dyadic magnitude with `lambda_q=2^q`, `mu_q=2^-q`:
 
 ```text
 (L lambda_q) (nu^-1 mu_q^2) R
-  = L nu^-1 R mu_q.
-```
+  = (L nu^-1 R) mu_q,
 
-Hence one inverse dyadic power appears exactly.  If both couplings spend one
-derivative,
-
-```text
 (L lambda_q) (nu^-1 mu_q^2) (R lambda_q)
-  = L nu^-1 R,
+  = L nu^-1 R.
 ```
 
-and the inverse shell factor disappears.  This makes the old scale diagnostic
-a literal same-object falsification gate: once the physical gain integrand is
-identified, its derivative placement decides whether this Schur route can
-possibly close.
+Exactly one derivative-bearing side of the parabolic inverse supplies the
+required inverse shell power. Two derivative-bearing sides are scale-free.
+This is now a literal falsification gate rather than a dimensional slogan.
 
-The new inverse-shell adapter then proves that if
+If the physical restricted gain density is the same object as
 
 ```text
-physical density = (L nu^-1 R) 2^-q,
+C_q = (L nu^-1 R) 2^-q
+```
+
+and the scale-free coefficient satisfies
+
+```text
 0 <= L nu^-1 R <= C_bad,
 ```
 
-then
+then Round 41 proves
 
 ```text
-density <= C_bad 2^-q
+C_q <= C_bad 2^-q
 ```
 
-and directly constructs the existing Round-39
-`InverseShellRestrictedGainDensity` object from supplied physical restricted
-gain cells.  No further inverse-shell allocation algebra is needed.
+and directly constructs Round 39's `InverseShellRestrictedGainDensity`
+certificate. The remaining HH-bad work is therefore the physical same-object
+factorization/coefficient bound plus Luo's separate localized critical-
+dissipation smallness.
 
-Still physical:
+## Com: one cross channel controls the full commutator
 
-```text
-physicalHHBadGainDensitySchurSameObject
-physicalHHBadScaleFreeCoefficientBound
-physicalLuoCriticalDissipationSmallness
-```
-
-If the literal gain has two derivative-bearing couplings and no different
-signed/increment mechanism removes one derivative, this route fails rather
-than being repaired by owner bookkeeping.
-
-## 2. `Com`: exact full energy equals one cross-channel square
-
-Round 40 proved skew adjunction and `V=-U*`.  Round 41 proves on the exact
-P/Q carrier
+Round 40 proved `V=-U*`. Round 41 proves on the exact P/Q carrier
 
 ```text
 ||[P,T](x,y)||^2 = b^2 (x^2+y^2),
 ```
 
-where `b` is the single surviving fine-to-coarse coefficient.  Thus a bound on
-one channel square controls the entire commutator energy with no spectral
-square-root theorem.
+where `b` is the single surviving cross-resolution coefficient. A one-channel
+square envelope therefore controls the full commutator energy.
 
-Round 35 already contains the concrete centered `(L6,L3)` six-three Gram cell
-and its half-dyadic overlap.  Round 41 therefore reduces the physical Com seam
-to one equality:
+The repository already has the centered `(L6,L3)` six-three Gram cell and its
+half-dyadic overlap. The remaining physical Com theorem is narrowed to
 
 ```text
 literal odd P/Q pair product
   = pairProduct (sixThreeGramCell shellDistance).
 ```
 
-That equality plus the existing adjoint-face equality constructs the mature
-`PhysicalComSingleChannelGramRealization`, which reconstructs both Round-35
-pair-product estimates automatically.
+That one equality constructs Round 40's single-channel Gram realization and
+therefore both mature Round-35 Cotlar pair decays.
 
-A finite-rank Hilbert–Schmidt shortcut is also made falsifiable.  If retained
-channels carry compulsory squared floors `f_i`, then
+A Hilbert–Schmidt shortcut is also made falsifiable. Any compulsory per-channel
+squared floors sum below `HS^2`, so cutoff-uniform HS control must really
+control multiplicity; fixed-cutoff finite rank is not enough.
 
-```text
-sum f_i <= HS^2.
-```
+## One full directional-defect measure owns both HH strata
 
-Therefore a cutoff-uniform HS proof must control the accumulated multiplicity
-floor.  Fixed-cutoff finite rank by itself is not evidence of a uniform
-operator estimate.
-
-Still physical:
+Round 41 uses a full classified physical carrier, not merely the bad
+restriction. Each cell carries one vorticity pair, nonnegative energy, a
+`goodRegion` or `badRegion` tag, and evidence for the corresponding threshold
+inequality. Define
 
 ```text
-physicalOddPQProductEqualsSixThreeGram
+D_dir      = sum_all  E_i Theta_i,
+D_dir_good = sum_good E_i Theta_i,
+D_dir_bad  = sum_bad  E_i Theta_i,
+E_bad      = sum_bad  E_i.
 ```
 
-or another literal one-channel envelope with the same cutoff-uniform decay.
-
-## 3. One HH directional-defect budget can feed both strata
-
-Round 40 proved that both good depletion and bad occupation use
+Then exactly
 
 ```text
-Theta = 1 - (xi.eta)^2,
-D_dir = sum E_i Theta_i.
+D_dir = D_dir_good + D_dir_bad,
+delta E_bad <= D_dir_bad <= D_dir.
 ```
 
-Round 41 packages one physical owner-shaped estimate
+Consequently one physical estimate
 
 ```text
 D_dir <= eta D + A + B X
 ```
 
-and proves immediately
+controls bad occupation while the good stratum remains an exact component of
+the same measure. A finite rational layer-cake theorem also reconstructs
+`E Theta` from threshold-slice masses.
 
-```text
-delta E_bad <= eta D + A + B X.
-```
+## Exact threshold scale diagnostics
 
-Any good quantity satisfying
-
-```text
-P_good^2 <= C delta D_dir
-```
-
-is controlled by the same budget.  This formalizes the proposed view that
-HH-good and HH-bad are two consumers of one defect measure, not independent
-sources requiring independent evolution theories.
-
-A finite rational layer-cake theorem also proves exactly that if threshold
-slice widths reconstruct `Theta`, then their energy-weighted slice masses
-reconstruct `E Theta`.  This is the constructive finite analogue of
-
-```text
-Theta = integral_0^1 1_{Theta>s} ds.
-```
-
-The continuum/shell-time physical defect estimate remains open.
-
-## 4. Threshold scale law is now exact
-
-Round 40 proved the exact optimizer for
+For the Round-40 optimizer
 
 ```text
 f_q(r)=A_q r + B_q r^-2,
-A_q r_q^3 = 2 B_q.
+A_q r_q^3 = 2 B_q,
 ```
 
-Round 41 proves two useful scale diagnostics without a cube-root primitive.
+Round 41 proves:
 
-If
+- if `A_q=w_q A_0` and `B_q=w_q B_0` with the same nonnegative shell factor,
+  one balanced base scale works at every shell;
+- if `A` is fixed and `B` is divided by eight, the balanced `r` is divided by
+  two and `delta=r^2` is divided by four.
 
-```text
-A_q = w_q A_0,
-B_q = w_q B_0,
-```
+Thus scale independence of the physical threshold is a theorem to be derived
+from the physical constants, not a standing assumption.
 
-with the same nonnegative shell factor, then one balanced base scale is
-balanced at every shell and a scale-independent threshold is constructed.
+## HH-good annular master-kernel algebra
 
-If `A` is unchanged but `B` is divided by eight, a balanced scale is divided
-by two and
-
-```text
-delta=(r^2)
-```
-
-is divided by four.  Thus physical `A_q,B_q` immediately reveal whether a
-global threshold is compatible with the proof.
-
-## 5. HH-good: time absorption is no longer an independent theorem
-
-The annular-kernel theorem is split into the correct same-object steps.
-
-For an order-zero annular master kernel the exact Jacobian ledger proves
-
-```text
-r^3 mass r^-3 = mass.
-```
-
-A finite periodization triangle theorem proves torus mass cannot exceed the
-sum of Euclidean lift masses.  `AnnularMasterKernelL1Package` then requires the
-remaining continuum same-object identifications:
+For the correct matrix-valued annular strain multiplier, Round 41 separates the
+remaining same-object theorem into:
 
 ```text
 literal annular multiplier = literal strain multiplier;
-master kernel = inverse Fourier transform of that multiplier;
-annular cutoff is smooth and compact away from zero;
-master kernel is L1 by the resulting decay;
-periodization formula is the canonical torus one.
+master kernel = its inverse Fourier transform;
+K_q(x)=r^3 K(r x);
+master kernel is L1;
+canonical torus periodization.
 ```
 
-Once inhabited, it constructs Round 40's
+The exact Jacobian ledger proves `r^3 mass r^-3 = mass`, and finite
+periodization proves the torus mass is bounded by the lifted Euclidean mass.
+Once the continuum same-object package is inhabited it constructs Round 40's
 `PeriodizedAnnularStrainKernelL1Theorem` directly.
 
-More importantly, Round 41 proves the suggested Young absorption without
-square roots.  If the already-proved shell estimate gives
+## Important falsification: raw `W <= X D` is too low-degree
+
+The continuation proposal suggested testing whether Round 40's
+`weightedLocalMass` might obey
 
 ```text
-P^2 <= C_strain delta W
+W <= C X D
 ```
 
-and the physical shell samples satisfy
+with a fixed amplitude-independent constant. Inspecting the literal Round-38
+weight shows
 
 ```text
-W <= X D,
+W ~ a^2 b^4,
 ```
 
-then for every positive `epsilon`, exactly
+which is degree six under common amplitude scaling. The critical energy and
+dissipation are quadratic, so `X D` is only degree four. Round 41 instantiates
+the repository's exact cubic-versus-quadratic no-go and proves that no fixed
+coefficient can make the raw degree-six quantity uniformly bounded by the
+degree-four product for arbitrary amplitudes.
+
+The raw shortcut is therefore **rejected**, not assumed.
+
+The scale-compatible repair retains one further quadratic controlled resource,
+for example the data-controlled L2 energy `E0`:
 
 ```text
-P <= epsilon D + (C_strain delta)/(4 epsilon) X.
+W <= E0 X D.
 ```
 
-The proof uses
+This has the correct degree. Given that physical factorization and the already
+proved shell estimate
 
 ```text
-4ab <= (a+b)^2
+P^2 <= C_strain delta W,
 ```
 
-and rational square-order reflection.  Therefore
-`physicalHHGoodTimeDissipationAbsorption` is no longer a separate research
-leaf.  The remaining HH-good physical seams are now only:
+Round 41 proves square-root-free Young absorption
 
 ```text
-physicalAnnularMasterKernelSameObjectPackage
-physicalStrainShellKernelMassIdentification
-physicalHHGoodWeightedLocalMassFactorization  -- W <= X D
-smooth periodic correction remainder
+P <= epsilon D
+     + [ C_strain delta E0 / (4 epsilon) ] X.
 ```
 
-The existing `periodizedHHGoodOwnerFromLocalMassFactorization` then constructs
-the literal `HH-good` owner.
+So HH-good is now narrowed honestly to:
 
-## 6. Dual pressure is now a batch proof-search instrument
+```text
+physical annular master-kernel same-object package;
+physical strain-shell sample/mass identification;
+physical data-weighted local-mass factorization W <= E0 X D
+  (or another scale-compatible time/amplitude gain);
+smooth torus correction.
+```
 
-Round 40 exposed fixed-certificate pressures `p_j=lambda_j b_j`.  Round 41
-proves for any finite batch of certified improvements
+## Dual pressure as a proof-search instrument
+
+For any finite batch of Round-40 dual-pressure improvements, Round 41 proves
 
 ```text
 newPressureTotal + savingTotal = oldPressureTotal,
 savingTotal >= 0.
 ```
 
-This gives exact rational sensitivity information as soon as provisional
-physical constants are known.  It is explicitly not called a derivative of
-the optimized reserve.
+This gives exact rational sensitivity of the current Farkas obstruction once
+provisional physical constants are available. It is not called a derivative
+of the optimized reserve.
 
 ## Revised shortest physical cut
-
-The finite/algebraic frontier is now narrower than Round 40:
 
 ```text
 HH-bad:
   literal bad gain -> one-derivative same-object factorization
   -> scale-free coefficient bound
-  -> existing inverse-shell gain certificate
+  -> existing inverse-shell certificate
   + Luo localized critical-dissipation smallness
   -> HH-bad owner
 
 Com:
-  literal odd P/Q pair product
-  -> exact equality to existing six-three Gram pair product
-  -> existing one-channel/two-face Cotlar machinery
+  literal odd P/Q product
+  -> equality to existing six-three Gram product
+  -> existing single-channel/two-face Cotlar machinery
   -> Com owner
 
 HH-good:
-  literal annular strain multiplier/master-kernel identification
+  literal annular strain master-kernel identification
   -> physical shell-kernel sample/mass identification
-  -> W <= X D on the physical shell/time carrier
+  -> scale-compatible W <= E0 X D (or equivalent physical gain)
   -> square-root-free Young owner
   + smooth torus remainder
   -> HH-good owner
 ```
 
-Only after these three physical owners exist should the remaining six lower-risk
-owners be instantiated and the threshold-aware nine-owner primal/dual reserve
-test be run.  A certified `sum eta < 1` advances to the prepared canonical
-physical leaves and maximal-time tail.  An exact Farkas certificate forcing
+Only after these three physical owners exist should the six lower-risk owners
+be instantiated and the threshold-aware nine-owner primal/dual reserve test be
+run. A certified `sum eta < 1` advances to the prepared canonical physical
+leaves and maximal-time tail. An exact Farkas certificate forcing
 `sum eta >= 1` is an architecture failure and should trigger redesign rather
 than further tuning.
-
-No unconditional three-dimensional Navier–Stokes regularity theorem is claimed
-by this tranche.
