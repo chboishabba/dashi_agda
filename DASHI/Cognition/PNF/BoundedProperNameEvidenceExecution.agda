@@ -10,7 +10,7 @@ open import DASHI.Cognition.PNF.IdentityEvidenceProduction
 ------------------------------------------------------------------------
 -- SensibLaw migration 085 execution contract.
 --
--- Proper-name expansion is candidate evidence only.  Runtime enumerates a
+-- Proper-name expansion is candidate evidence only. Runtime enumerates a
 -- bounded representative target carrier per standalone proper-name mention and
 -- records overflow when the family carrier is larger than the execution budget.
 -- A token already embedded in a PERSON span is not a standalone surname source.
@@ -49,10 +49,20 @@ record BoundedProperNameCandidate : Set where
 open BoundedProperNameCandidate public
 
 ------------------------------------------------------------------------
--- Overflow witnesses incomplete execution enumeration, not semantic rejection
--- and not identity authority.  There is deliberately no constructor granting an
--- identity-admission permission from an overflow receipt.
+-- Overflow witnesses incomplete execution enumeration, not a smaller semantic
+-- possibility space. There is deliberately no constructor granting identity
+-- authority from an overflow receipt.
 ------------------------------------------------------------------------
+
+data ProperNameEnumerationCoverage : Set where
+  completeEnumeration boundedRepresentativeEnumeration :
+    ProperNameEnumerationCoverage
+
+record ProperNameOverflowReceipt : Set where
+  constructor properNameOverflowReceipt
+  field
+    enumeration : ProperNameTargetEnumeration
+    coverage : ProperNameEnumerationCoverage
 
 data ProperNameOverflowAuthority : Set where
   properNameExecutionEvidenceOnly : ProperNameOverflowAuthority
@@ -62,12 +72,6 @@ data ProperNameOverflowIdentityPermission : ProperNameOverflowAuthority → Set 
 properNameOverflowCannotAdmitIdentity :
   ProperNameOverflowIdentityPermission properNameExecutionEvidenceOnly → ⊥
 properNameOverflowCannotAdmitIdentity ()
-
-record ProperNameOverflowReceipt : Set where
-  constructor properNameOverflowReceipt
-  field
-    enumeration : ProperNameTargetEnumeration
-    overflowAuthority : ProperNameOverflowAuthority
 
 open ProperNameOverflowReceipt public
 
