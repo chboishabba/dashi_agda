@@ -29,23 +29,13 @@ module DASHI.Physics.Closure.NSTriadKNLuoUniformCommutatorTaxRound27Exact where
 -- This is a literal finite coefficient theorem.  The continuum L2/Linfinity
 -- operator estimate and the physical shell evolution remain separate analytic
 -- producers.
-------------------------------------------------------------------------
+-------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-import Data.Integer.Base as Int
-open import Data.Rational.Base using (ℚ; _/_; _+_; _*_)
-open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
-
-zeroQ : ℚ
-zeroQ = Int.+ 0 / 1
-
-oneQ : ℚ
-oneQ = Int.+ 1 / 1
+open import DASHI.Data.RationalExact using (ℚ; oneQ; _*_)
 
 record DyadicCommutatorTaxCell : Set where
-  constructor dyadic-commutator-tax-cell
   field
     inverseScale : ℚ
     directScale : ℚ
@@ -54,7 +44,6 @@ record DyadicCommutatorTaxCell : Set where
     motherFirstMoment : ℚ
     lowGradientMagnitude : ℚ
     motherHighGradientMagnitude : ℚ
-    testedShellMagnitude : ℚ
 
 open DyadicCommutatorTaxCell public
 
