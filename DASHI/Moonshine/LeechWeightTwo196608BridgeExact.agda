@@ -29,10 +29,10 @@ module DASHI.Moonshine.LeechWeightTwo196608BridgeExact where
 -- DASHI.Biology.ExceptionalLatticeGrokkingProtocolExact already records the
 -- Leech rank 24 and its 196560 minimal vectors as benchmark data.
 --
--- DASHI CONTRIBUTION
+-- DASHI CONTRIBUTION AND AUTHORITY CORRECTION
 --
--- The integer 196608 is an exact coordinate subtotal inside the rank-24
--- lattice-VOA weight-two count:
+-- The integer 196608 is retained as a basis-dependent coordinate subtotal in
+-- the unorbifolded rank-24 lattice-VOA weight-two count:
 --
 --   196608 = 196560 + 24 + 24.
 --
@@ -42,15 +42,18 @@ module DASHI.Moonshine.LeechWeightTwo196608BridgeExact where
 --
 --   196884 = 196608 + 276.
 --
--- The conformal vector lies in the diagonal symmetric-square sector, not in
--- the off-diagonal 276-sector.  Therefore the geometrically correct quotient
--- bookkeeping is
+-- This is not the published FLM orbifold-sector decomposition.  The sourced
+-- split 196884 = 98580 + 98304 is formalized separately in
+-- MoonshineOrbifoldWeightTwoDecompositionExact.  The conformal vector lies in
+-- the diagonal symmetric-square coordinate sector, so the corresponding
+-- basis-dependent quotient arithmetic is
 --
 --   196883 = (196608 - 1) + 276
 --          = 196560 + 24 + 23 + 276.
 --
 -- The numerically equivalent identity 196883=196608+275 is retained only as
--- arithmetic; it is not promoted to an off-diagonal 275-dimensional subspace.
+-- arithmetic; it is not promoted to an off-diagonal 275-dimensional subspace,
+-- an orbifold summand, or a Monster-invariant filtration.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -117,7 +120,7 @@ subtotalPlusOffDiagonalIsWeightTwo :
 subtotalPlusOffDiagonalIsWeightTwo = refl
 
 ------------------------------------------------------------------------
--- Conformal-line quotient in the correct diagonal sector.
+-- Conformal-line quotient in the chosen diagonal coordinate sector.
 ------------------------------------------------------------------------
 
 conformalLineDimension : Nat
@@ -203,15 +206,19 @@ moonshineMinusLeechMinimalCount = refl
 record LeechCoordinateBoundary : Set where
   constructor leechCoordinateBoundary
   field
-    exactWeightTwoCountingIdentity : Bool
-    exactWeightTwoCountingIdentityIsTrue :
-      exactWeightTwoCountingIdentity ≡ true
-    conformalLinePlacedInDiagonalSector : Bool
-    conformalLinePlacedInDiagonalSectorIsTrue :
-      conformalLinePlacedInDiagonalSector ≡ true
+    exactWeightTwoCountingWitness :
+      leechWeightTwoDimension ≡ 196884
+    coordinateSubtotalWitness :
+      leechCoordinateSubtotal ≡ 196608
+    conformalLineCoordinateQuotientWitness :
+      coordinateSubtotalAfterConformalQuotient + offDiagonalQuadraticCount
+      ≡ monsterNontrivialDegree
     diagonalOffDiagonalSplitDependsOnBasis : Bool
     diagonalOffDiagonalSplitDependsOnBasisIsTrue :
       diagonalOffDiagonalSplitDependsOnBasis ≡ true
+    coordinateChartIsPublishedFLMOrbifoldDecomposition : Bool
+    coordinateChartIsPublishedFLMOrbifoldDecompositionIsFalse :
+      coordinateChartIsPublishedFLMOrbifoldDecomposition ≡ false
     numerical275IsCanonicalSubspace : Bool
     numerical275IsCanonicalSubspaceIsFalse :
       numerical275IsCanonicalSubspace ≡ false
@@ -225,9 +232,11 @@ record LeechCoordinateBoundary : Set where
 canonicalLeechCoordinateBoundary : LeechCoordinateBoundary
 canonicalLeechCoordinateBoundary =
   leechCoordinateBoundary
+    leechWeightTwoDimensionIs196884
+    leechCoordinateSubtotalIs196608
+    quotientedSubtotalPlusOffDiagonalIsMonsterDegree
     true refl
-    true refl
-    true refl
+    false refl
     false refl
     false refl
     false refl
