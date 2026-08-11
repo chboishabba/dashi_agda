@@ -1,0 +1,95 @@
+name: NS Luo dependent flow owner analysis round 29
+
+on:
+  push:
+    branches:
+      - 'agent/ns-luo-dependent-flow-and-owner-analysis-round29'
+    paths:
+      - 'DASHI/Physics/Closure/**'
+      - 'DASHI/Papers/NavierStokes/**'
+      - 'docs/ns-clay-contract/**'
+      - 'scripts/check_ns_luo_dependent_flow_owner_analysis_round29.sh'
+      - 'scripts/check_ns_luo_physical_carrier_partition_round28.sh'
+      - 'scripts/check_ns_luo_projector_operator_core_round27.sh'
+      - 'scripts/run_agda29_parallel_check.sh'
+      - '.github/workflows/ns-luo-dependent-flow-owner-analysis-round29.yml'
+  pull_request:
+    branches:
+      - 'agent/ns-luo-physical-carrier-partition-round28'
+      - 'agent/ns-luo-dependent-flow-and-owner-analysis-round29'
+    paths:
+      - 'DASHI/Physics/Closure/**'
+      - 'DASHI/Papers/NavierStokes/**'
+      - 'docs/ns-clay-contract/**'
+      - 'scripts/check_ns_luo_dependent_flow_owner_analysis_round29.sh'
+      - 'scripts/check_ns_luo_physical_carrier_partition_round28.sh'
+      - 'scripts/check_ns_luo_projector_operator_core_round27.sh'
+      - 'scripts/run_agda29_parallel_check.sh'
+      - '.github/workflows/ns-luo-dependent-flow-owner-analysis-round29.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  statuses: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Check dependent flow and owner analysis tranche
+        id: check
+        shell: bash
+        run: |
+          set +e
+          (
+            set -euo pipefail
+            export AGDA_FLAKE="github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin"
+            export DASHI_REPO_ROOT="$GITHUB_WORKSPACE"
+            export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
+            export AGDA_LOG_PATH="$GITHUB_WORKSPACE/ns-round29-agda.log"
+            export AGDA_JOBS=4
+            bash scripts/check_ns_luo_dependent_flow_owner_analysis_round29.sh
+          ) > ns-round29-check.log 2>&1
+          status=$?
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          tail -n 900 ns-round29-check.log
+          exit 0
+
+      - name: Upload logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ns-round29-logs
+          path: |
+            ns-round29-check.log
+            ns-round29-agda.log
+          if-no-files-found: warn
+
+      - name: Publish checker status
+        if: always() && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository)
+        env:
+          GH_TOKEN: ${{ github.token }}
+          CHECK_STATUS: ${{ steps.check.outputs.status }}
+          TARGET_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        shell: bash
+        run: |
+          state=success
+          description='NS round 29 dependent-flow and owner-analysis checks passed'
+          if [[ "$CHECK_STATUS" != '0' ]]; then
+            state=failure
+            description='NS round 29 dependent-flow or owner-analysis checks failed'
+          fi
+          gh api --method POST \
+            "repos/${GITHUB_REPOSITORY}/statuses/${TARGET_SHA}" \
+            -f state="$state" \
+            -f context='ns-round29-dependent-flow-owner-analysis-agda' \
+            -f description="$description" \
+            || echo "status publication skipped" >&2
+
+      - name: Fail on checker error
+        if: steps.check.outputs.status != '0'
+        run: exit 1
