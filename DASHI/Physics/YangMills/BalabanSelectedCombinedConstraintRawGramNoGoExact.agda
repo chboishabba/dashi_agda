@@ -37,7 +37,7 @@ module DASHI.Physics.YangMills.BalabanSelectedCombinedConstraintRawGramNoGoExact
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.List using (List; []; _∷_; map)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; 1ℚ; _+_; _*_; _<_)
 import Data.Rational.Properties as ℚP
@@ -48,8 +48,7 @@ open import Relation.Nullary.Negation.Core using (¬_)
 open import Relation.Nullary.Decidable.Core using (toWitness)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
-open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using
-  (pair; map)
+open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using (pair)
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
 import DASHI.Physics.YangMills.BalabanFiniteSumFubiniExact as Fubini
 import DASHI.Physics.YangMills.BalabanConstructiveRationalMatrixInverseExact as Matrix
@@ -63,6 +62,7 @@ import DASHI.Physics.YangMills.BalabanSelectedCombinedConstraintRowCarrierExact 
 import DASHI.Physics.YangMills.BalabanSelectedCombinedConstraintFiniteKKTExact as KKT
 import DASHI.Physics.YangMills.BalabanSelectedBlockAverageRowCarrierExact as AverageRows
 import DASHI.Physics.YangMills.BalabanSelectedFlatGaugeAdjointGramFloorExact as FlatAdjoint
+import DASHI.Physics.YangMills.BalabanSelectedFlatGaugeReducedFloorExact as FlatGauge
 
 SelectedMultiplier : Set
 SelectedMultiplier = KKT.SelectedMultiplierVector
@@ -98,7 +98,7 @@ sumZero (_ ∷ values) rewrite sumZero values = refl
 averageRows : List AverageRows.SelectedBlockAverageRow
 averageRows = Basis.elements AverageRows.selectedBlockAverageRowFiniteSelector
 
-gaugeRows : List Rows.FlatGauge.GaugeCoordinate4
+gaugeRows : List FlatGauge.GaugeCoordinate4
 gaugeRows = Basis.elements Rows.selectedGaugeRowFiniteSelector
 
 averageTransposePartZero : ∀ stateCoordinate →
