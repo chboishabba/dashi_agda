@@ -19,8 +19,8 @@ module DASHI.Physics.YangMills.BalabanSelectedCombinedProjectionCongruenceExact 
 -- congruence bridge needed by the finite padded normal inverse.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_)
-open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using (pair)
@@ -76,8 +76,7 @@ selectedComplementRespectsPointwise : ∀ left right →
   Projection.selectedConstantComplement left row
   ≡ Projection.selectedConstantComplement right row
 selectedComplementRespectsPointwise left right pointwise
-    (Combined.averageConstraintRow row) =
-  Agda.Builtin.Equality.refl
+    (Combined.averageConstraintRow row) = refl
 selectedComplementRespectsPointwise left right pointwise
     (Combined.gaugeConstraintRow (pair coordinate site)) =
   scalarConstantRespectsPointwise
