@@ -27,17 +27,23 @@ module DASHI.Physics.YangMills.BalabanSelectedBackgroundResidualActionExact wher
 -- not merely to a kernel with matching coefficients.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base as ℚ using (ℚ; _*_)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier as Torus
+import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreCarrier as Block
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
+import DASHI.Physics.YangMills.BalabanPath4AxisAverageExact as Path4
+import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Coordinates
 import DASHI.Physics.YangMills.BalabanFiniteRectangularRationalExact as Rect
+import DASHI.Physics.YangMills.BalabanSide4ScalarGreenConvolutionExact as ScalarGreen
 import DASHI.Physics.YangMills.BalabanSelectedFlatGaugeAdjointGramFloorExact as FlatAdjoint
 import DASHI.Physics.YangMills.BalabanSelectedFlatGaugeRegularizedGreenExact as FlatGreen
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundGaugePerturbationFiniteRangeExact as Perturbation
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundGaugePerturbationActionExact as PerturbationAction
+import DASHI.Physics.YangMills.BalabanSelectedBackgroundGaugeOperatorDecompositionExact as Operator
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundFlatGreenPerturbationContractionExact as Contraction
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundResidualPowerDecayExact as Residual
 
@@ -100,34 +106,29 @@ selectedResidualActsAsFlatGreenPerturbation background multiplier row =
     ≡ FlatGreen.regularizedFlatGaugeGreen
         (PerturbationAction.selectedGaugeGramPerturbationApply
           background multiplier) selected
-  caseRow (DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier.pair coordinate site) =
+  caseRow (Torus.pair coordinate site) =
     Contraction.flatGreenKernelActsExactly
       (PerturbationAction.selectedGaugeGramPerturbationApply background multiplier)
       coordinate site
 
 selectedResidualActsAsExplicitFlatGreenEA :
   ∀ background multiplier
-    (coordinate : DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact.LieCoordinate3)
-    (site : DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier.PhysicalBlockL
-      DASHI.Physics.YangMills.BalabanPath4AxisAverageExact.side4) →
-  Residual.residualApply background multiplier
-      (DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier.pair coordinate site)
+    (coordinate : Coordinates.LieCoordinate3)
+    (site : Block.PhysicalBlockL Path4.side4) →
+  Residual.residualApply background multiplier (Torus.pair coordinate site)
   ≡ FlatGreen.regularizedFlatGaugeGreen
-      (λ row →
-        DASHI.Physics.YangMills.BalabanSelectedBackgroundGaugeOperatorDecompositionExact.explicitGaugeGramPerturbation
-          background multiplier row)
-      (DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier.pair coordinate site)
+      (λ row → Operator.explicitGaugeGramPerturbation background multiplier row)
+      (Torus.pair coordinate site)
 selectedResidualActsAsExplicitFlatGreenEA background multiplier coordinate site =
   let
-    row = DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier.pair coordinate site
+    row = Torus.pair coordinate site
     pointwise = PerturbationAction.selectedGaugeGramPerturbationActsAsExplicitEA
       background multiplier
   in
   trans
     (selectedResidualActsAsFlatGreenPerturbation background multiplier row)
-    (DASHI.Physics.YangMills.BalabanSide4ScalarGreenConvolutionExact.scalarGreenRespectsPointwise
-      (λ current → pointwise
-        (DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier.pair coordinate current))
+    (ScalarGreen.scalarGreenRespectsPointwise
+      (λ current → pointwise (Torus.pair coordinate current))
       site)
 
 selectedResidualActionLevel : ProofLevel
