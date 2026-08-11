@@ -2,7 +2,7 @@ module DASHI.Cognition.PNF.NumericTokenStorageReference where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; suc)
 open import Data.Empty using (⊥)
 open import Data.List.Base using (List)
 
@@ -53,7 +53,7 @@ open MultiscaleTokenStorageReference public
 multiscaleStorageJoinSplitExact :
   (reference : MultiscaleTokenStorageReference) →
   ∀ {j}
-    (x : MDL.Carrier (tower reference) (Agda.Builtin.Nat.suc j)) →
+    (x : MDL.Carrier (tower reference) (suc j)) →
   MDL.join (codec reference) (MDL.split (codec reference) x) ≡ x
 multiscaleStorageJoinSplitExact reference x =
   MDL.join-split (codec reference) x
