@@ -1,0 +1,19 @@
+name: NS Round38 owner cancellation network
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Physics/Closure/NSTriadKNSignedOwnerCancellationFlowRound38Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNSignedOwnerCancellationNetworkRound38Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNResidualTransportOwnerFlowRound38Validation.agda'
+      - 'scripts/check_ns_owner_cancellation_network_round38.sh'
+      - '.github/workflows/ns-owner-cancellation-network-round38.yml'
+  workflow_dispatch:
+
+jobs:
+  agda-owner-network:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate cumulative Round38 owner cancellation network
+        run: bash scripts/check_ns_owner_cancellation_network_round38.sh
