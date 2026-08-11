@@ -1,6 +1,7 @@
 module DASHI.Cognition.PNF.ContextualRepresentationOrbit where
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Bool using (Bool; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
@@ -67,8 +68,10 @@ orbitRelationAloneCannotPromoteIdentity ()
 record ContextualRepresentationOrbitBoundary : Set where
   constructor contextualRepresentationOrbitBoundary
   field
-    orbitCoreIsReused : Set₁
-    freeActionAssumed : Set
+    orbitCoreIsReused : Bool
+    orbitCoreIsReusedIsTrue : orbitCoreIsReused ≡ Agda.Builtin.Bool.true
+    freeActionAssumed : Bool
+    freeActionAssumedIsFalse : freeActionAssumed ≡ false
     orbitRelationPromotesIdentity : OrbitIdentityPromotionPermission → ⊥
 
 open ContextualRepresentationOrbitBoundary public
@@ -77,6 +80,6 @@ canonicalContextualRepresentationOrbitBoundary :
   ContextualRepresentationOrbitBoundary
 canonicalContextualRepresentationOrbitBoundary =
   contextualRepresentationOrbitBoundary
-    MDL.MultiscaleCarrier
-    ⊥
+    Agda.Builtin.Bool.true refl
+    false refl
     orbitRelationAloneCannotPromoteIdentity
