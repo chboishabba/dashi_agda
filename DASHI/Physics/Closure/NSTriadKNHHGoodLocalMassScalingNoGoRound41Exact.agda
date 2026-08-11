@@ -16,29 +16,33 @@ module DASHI.Physics.Closure.NSTriadKNHHGoodLocalMassScalingNoGoRound41Exact whe
 --
 -- Round 38's literal HH-good local weight is
 --
---   a^2 b^4.
+--   W(a,b) = a^2 b^4.
 --
--- Under common amplitude rescaling a,b -> s a,s b this is degree six.  The
--- proposed shortcut from the continuation analysis,
+-- This file first proves that statement's *actual physical scaling* on the
+-- repository's `PhysicalVorticityPair`: common amplitude rescaling
 --
---   weightedLocalMass <= C * criticalEnergy * dissipation,
+--   (a,b) -> (s a, s b)
 --
--- would compare that degree-six quantity against a product of two quadratic
--- energies, hence degree four, with one amplitude-independent coefficient C.
+-- multiplies the exact `amplitudeQuarticWeight` by
 --
--- The repository already contains the generic theorem that a positive cubic
--- quantity in an energy-amplitude variable cannot admit a fixed quadratic
--- majorant at every amplitude.  Here we instantiate it exactly with
+--   (s^2)^3 = s^6.
 --
---   z = amplitude^2,
---   W(z) = z^3,          -- physical degree six
---   X D(z) = z^2.       -- physical degree four
+-- The proposed shortcut
 --
--- Thus *no fixed amplitude-independent constant* C can make W <= C X D
--- uniformly for arbitrary data.  This rejects the raw W<=XD shortcut before
--- any owner budget is tuned.  A successful HH-good route must retain another
--- quadratic resource, e.g. the data-controlled L2 energy, a time-localized
--- gain, or an equivalent physical amplitude factor.
+--   W <= C * criticalEnergy * dissipation
+--
+-- would compare that degree-six quantity with a product of two quadratic
+-- resources, hence degree four, using one amplitude-independent constant C.
+-- The repository already has a general cubic-vs-quadratic scaling no-go.  We
+-- instantiate it in the energy-amplitude variable z=s^2:
+--
+--   W(z)=z^3,       X D(z)=z^2.
+--
+-- Therefore no fixed amplitude-independent coefficient can make the raw
+-- degree-six local mass uniformly bounded by the degree-four product for
+-- arbitrary amplitude.  A successful HH-good route must retain one further
+-- quadratic controlled resource (for example initial L2 energy), a genuine
+-- time-localized gain, or another physically equivalent source of degree two.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
@@ -49,9 +53,52 @@ open import Data.Nat.Base using (_<_; z≤n; s≤s)
 import Data.Nat.Properties as NatP
 open import Data.Nat.Solver using (module +-*-Solver)
 open +-*-Solver using (solve; _:*_; _:=_)
+open import Data.Rational.Base using (ℚ)
+import Data.Rational.Base as Rat
+import Data.Rational.Tactic.RingSolver as RatRing
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
+import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
+import DASHI.Physics.Closure.NSTriadKNLuoPhysicalDirectionalDefectExact as Physical
+import DASHI.Physics.Closure.NSTriadKNHHGoodPhysicalThresholdStretchingRound38Exact as Good
 import DASHI.Physics.Closure.NSTriadKNCubicQuadraticUniformGapNoGo as NoGo
+
+------------------------------------------------------------------------
+-- Same-object scaling on the literal Round-38 physical amplitude weight.
+------------------------------------------------------------------------
+
+scalePhysicalPair :
+  ℚ → Physical.PhysicalVorticityPair → Physical.PhysicalVorticityPair
+scalePhysicalPair scalar pair =
+  Physical.physical-vorticity-pair
+    (Rat._*_ scalar (Physical.leftAmplitude pair))
+    (Rat._*_ scalar (Physical.rightAmplitude pair))
+    (Physical.directions pair)
+
+literalAmplitudeWeightCommonScale :
+  ∀ scalar pair →
+  Good.amplitudeQuarticWeight (scalePhysicalPair scalar pair)
+  ≡
+  Rat._*_
+    (Rat._*_
+      (L2.square scalar)
+      (L2.square scalar))
+    (Rat._*_
+      (L2.square scalar)
+      (Good.amplitudeQuarticWeight pair))
+literalAmplitudeWeightCommonScale scalar pair =
+  RatRing.solve
+    ( scalar
+    ∷ Physical.leftAmplitude pair
+    ∷ Physical.rightAmplitude pair
+    ∷ [])
+
+literalAmplitudeWeightHasDegreeSix : Bool
+literalAmplitudeWeightHasDegreeSix = true
+
+------------------------------------------------------------------------
+-- Degree-six versus degree-four uniform-bound no-go.
+------------------------------------------------------------------------
 
 energyAmplitudeScale : Nat → Nat → Nat
 energyAmplitudeScale factor z = factor * z
