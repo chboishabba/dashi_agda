@@ -41,7 +41,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _*_; _≤_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
 
 import DASHI.Physics.Closure.NSTriadKNRationalLerayProjectionExact as V
 import DASHI.Physics.Closure.NSTriadKNFourierBiotSavartExact as BS
@@ -91,18 +91,18 @@ lineResidualNormSquaredExact {target} {source} decomposition =
           (λ pairing →
             V.normSquared (detail decomposition) * V.normSquared target
               - pairing * pairing)
-          (V.dotCommutative
-            (detail decomposition) target
-            (detailTransverse decomposition)))
+          detailDotTargetZero)
         (solve
           ( V.normSquared target
           ∷ V.normSquared (detail decomposition)
           ∷ []))))
   where
-  -- The rational vector carrier has symmetric dot product.  Spell the
-  -- orientation transport out locally to keep the decomposition field in the
-  -- target.detail order used by the quotient interpretation.
-  module Dummy where
+  detailDotTargetZero :
+    V.dot (detail decomposition) target ≡ 0ℚ
+  detailDotTargetZero =
+    trans
+      (V.dotCommutative (detail decomposition) target)
+      (detailTransverse decomposition)
 
 stretchingSquareControlledByLineDetail :
   ∀ theta {source target} →
@@ -118,7 +118,7 @@ stretchingSquareControlledByLineDetail theta {source} {target}
     raw = Bound.stretchingSquareControlledByCrossMisalignment
       theta source target thetaUnit
   in
-  Relation.Binary.PropositionalEquality.subst
+  subst
     (λ residualNorm →
       L2.square (Stretch.stretchingScalar theta source target)
       ≤ V.normSquared target * residualNorm)
