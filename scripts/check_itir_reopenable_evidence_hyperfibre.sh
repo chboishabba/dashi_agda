@@ -8,6 +8,7 @@ files=(
   DASHI/Cognition/PNF/BoundedExecutionCarrier.agda
   DASHI/Cognition/PNF/ReopenableEvidenceFibre.agda
   DASHI/Cognition/PNF/ParserArgumentSupportGluing.agda
+  DASHI/Cognition/PNF/ContextualRepresentationOrbit.agda
   DASHI/Cognition/PNF/EvidenceHorizon369.agda
   DASHI/Cognition/PNF/LexicalRetrievalProjection.agda
   DASHI/Cognition/PNF/NumericTokenStorageReference.agda
@@ -42,6 +43,9 @@ required_markers=(
   'semanticRefutationRequiresIndexedEvidenceIsTrue'
   'correctiveReachabilityReusesTypedActionSystemIsTrue'
   'supportAloneCannotCreateIdentity'
+  'supportCommutesWithCoarsening'
+  'orbitRelationAloneCannotPromoteIdentity'
+  'freeActionAssumedIsFalse'
   'coarsePhaseAssignedWithoutFineSignedWitnessIsFalse'
   'coarsenThenProject6to3EqualsProjectThenCoarsen'
   'coarsenThenProject9to6EqualsProjectThenCoarsen'
