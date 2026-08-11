@@ -7,7 +7,9 @@ module DASHI.Physics.Closure.NSTriadKNDefectMeasureAdjointComRound40Validation w
 -- shell-dependent threshold diagnostics, PV cancellation before residual
 -- scalarization, finite shell-kernel Cauchy with a uniform periodized L1
 -- constant, literal modal and matrix-entry skew-adjoint transport, the
--- resulting one-channel Com collapse, and exact Farkas-certificate sensitivity.
+-- resulting one-channel Com collapse, reconstruction of the mature Round-35
+-- two-face Gram interface from one physical Gram cell, and exact Farkas-
+-- certificate sensitivity.
 
 open import DASHI.Physics.Closure.NSTriadKNPeriodicPVOddComF4Round39Validation
 
@@ -24,4 +26,5 @@ open import DASHI.Physics.Closure.NSTriadKNHHGoodPeriodizedKernelUniformRound40E
 open import DASHI.Physics.Closure.NSTriadKNPhysicalTransportCoefficientSkewRound40Exact
 open import DASHI.Physics.Closure.NSTriadKNPhysicalTransportMatrixSkewRound40Exact
 open import DASHI.Physics.Closure.NSTriadKNComAdjointCollapseRound40Exact
+open import DASHI.Physics.Closure.NSTriadKNComSingleGramReductionRound40Exact
 open import DASHI.Physics.Closure.NSTriadKNNineOwnerDualSensitivityRound40Exact
