@@ -39,24 +39,30 @@ module DASHI.Physics.YangMills.BalabanSelectedBackgroundResidualReopeningExact w
 --
 --   ||x||_1 <= (6/5)||y||_1.
 --
--- The corresponding homogeneous equations have zero l1 norm.  Thus both
--- reopenings have explicit positive slack before any finite-dimensional
--- inverse theorem is invoked.
+-- The residual operators are proved linear under finite subtraction.  Combining
+-- this with the complete selected gauge-row Kronecker selector upgrades the
+-- homogeneous zero-norm result to pointwise kernel triviality.  Thus both
+-- I+R_A and its rationally weighted conjugate are genuinely injective finite
+-- rational endomorphisms, with explicit reopening slack.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_; _/_)
+  (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; -_; _≤_; _/_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using
-  (cong; subst; trans)
+  (cong; cong₂; subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
+import DASHI.Physics.YangMills.BalabanP33PhysicalCoordinateBasisExact as Basis
 import DASHI.Physics.YangMills.BalabanFiniteMatrixL1ContractionExact as L1
+import DASHI.Physics.YangMills.BalabanFiniteRectangularAbsoluteMassExact as Mass
 import DASHI.Physics.YangMills.BalabanFiniteStrictContractionReopeningExact as Reopen
+import DASHI.Physics.YangMills.BalabanSelectedCombinedConstraintRowCarrierExact as Rows
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundFlatGreenPerturbationContractionExact as Contraction
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundResidualPowerDecayExact as Residual
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundRationalWeightedPowerDecayExact as Weighted
@@ -65,6 +71,58 @@ import DASHI.Physics.YangMills.BalabanP33PhysicalBackgroundGaugeParameterizedYou
 
 GaugeVector : Set
 GaugeVector = Contraction.GaugeRow → ℚ
+
+gaugeRowSelector : Basis.FiniteSelector Contraction.GaugeRow
+gaugeRowSelector = Rows.selectedGaugeRowFiniteSelector
+
+------------------------------------------------------------------------
+-- Finite matrix action respects subtraction exactly.
+------------------------------------------------------------------------
+
+applyKernelDifferenceExact :
+  ∀ {Index : Set} indices kernel
+    (left right : Index → ℚ) row →
+  L1.applyKernel indices kernel (Reopen.vectorDifference left right) row
+  ≡ L1.applyKernel indices kernel left row
+    - L1.applyKernel indices kernel right row
+applyKernelDifferenceExact indices kernel left right row =
+  let
+    leftTerm = λ column → kernel row column * left column
+    rightTerm = λ column → kernel row column * right column
+
+    expand :
+      L1.applyKernel indices kernel (Reopen.vectorDifference left right) row
+      ≡ Sums.sumRational indices
+          (λ column → leftTerm column + - rightTerm column)
+    expand = Sums.sumRationalCong indices _ _
+      (λ column → ℚRing.solve-∀
+        (kernel row column) (left column) (right column))
+
+    split :
+      Sums.sumRational indices
+        (λ column → leftTerm column + - rightTerm column)
+      ≡ Sums.sumRational indices leftTerm
+        + Sums.sumRational indices (λ column → - rightTerm column)
+    split = Mass.sumAddExact indices leftTerm (λ column → - rightTerm column)
+
+    negate :
+      Sums.sumRational indices (λ column → - rightTerm column)
+      ≡ - Sums.sumRational indices rightTerm
+    negate = Sums.sumRationalNegate indices rightTerm
+  in
+  trans expand
+    (trans split
+      (trans
+        (cong
+          (Sums.sumRational indices leftTerm +_)
+          negate)
+        (ℚRing.solve-∀
+          (Sums.sumRational indices leftTerm)
+          (Sums.sumRational indices rightTerm))))
+
+------------------------------------------------------------------------
+-- Unweighted reopening: 1/10 residual, 10/9 inverse bound.
+------------------------------------------------------------------------
 
 unweightedIdentityPlusResidualApply :
   Physical.RationalSU2Background4 → GaugeVector → GaugeVector
@@ -143,6 +201,110 @@ selectedBackgroundResidualReopeningTenNinths
     (λ lower → lower ≤ tenNinths * yNorm)
     leftExact scaled
 
+unweightedResidualDifferenceExact :
+  ∀ background left right row →
+  Residual.residualApply background (Reopen.vectorDifference left right) row
+  ≡ Residual.residualApply background left row
+    - Residual.residualApply background right row
+unweightedResidualDifferenceExact background left right row =
+  applyKernelDifferenceExact
+    Contraction.gaugeRows
+    (Contraction.flatGreenTimesPerturbationKernel background)
+    left right row
+
+unweightedDifferenceSolvesHomogeneous :
+  ∀ background left right →
+  (∀ row →
+    unweightedIdentityPlusResidualApply background left row
+    ≡ unweightedIdentityPlusResidualApply background right row) →
+  UnweightedReopeningEquation background
+    (Reopen.vectorDifference left right) Reopen.zeroVector
+unweightedDifferenceSolvesHomogeneous background left right equal row =
+  let
+    residualDifference =
+      unweightedResidualDifferenceExact background left right row
+
+    leftValue = unweightedIdentityPlusResidualApply background left row
+    rightValue = unweightedIdentityPlusResidualApply background right row
+
+    rearrange :
+      (left row - right row)
+        + (Residual.residualApply background left row
+          - Residual.residualApply background right row)
+      ≡ leftValue - rightValue
+    rearrange = ℚRing.solve-∀
+      (left row) (right row)
+      (Residual.residualApply background left row)
+      (Residual.residualApply background right row)
+
+    equalZero : leftValue - rightValue ≡ 0ℚ
+    equalZero = trans
+      (cong (_- rightValue) (equal row))
+      (ℚRing.solve-∀ rightValue)
+  in
+  trans
+    (cong
+      ((left row - right row) +_)
+      residualDifference)
+    (trans rearrange equalZero)
+
+oneTenthBelowOneSixth : Contraction.oneTenth ≤ Reopen.oneSixth
+oneTenthBelowOneSixth =
+  Norm.nonnegativeDifferenceImpliesBelow
+    (subst
+      (λ value → 0ℚ ≤ value)
+      (sym (ℚRing.solve [] :
+        Reopen.oneSixth - Contraction.oneTenth ≡ + 1 / 15))
+      (ℚP.nonNegative⁻¹ (+ 1 / 15)))
+
+selectedBackgroundResidualIdentityPlusInjective :
+  ∀ background → Relaxed.RelaxedInverseLinkRadius background →
+  ∀ left right →
+  (∀ row →
+    unweightedIdentityPlusResidualApply background left row
+    ≡ unweightedIdentityPlusResidualApply background right row) →
+  ∀ row → left row ≡ right row
+selectedBackgroundResidualIdentityPlusInjective
+    background radius left right equal =
+  let
+    difference = Reopen.vectorDifference left right
+
+    equation :
+      UnweightedReopeningEquation background difference Reopen.zeroVector
+    equation = unweightedDifferenceSolvesHomogeneous
+      background left right equal
+
+    residualOneTenth = Residual.residualOneStepL1Contraction
+      background radius difference
+
+    residualOneSixth :
+      L1.vectorL1 Contraction.gaugeRows
+        (Residual.residualApply background difference)
+      ≤ Reopen.oneSixth * L1.vectorL1 Contraction.gaugeRows difference
+    residualOneSixth = ℚP.≤-trans residualOneTenth
+      (Norm.scaleNonnegative
+        (L1.vectorL1 Contraction.gaugeRows difference)
+        (Reopen.vectorL1Nonnegative Contraction.gaugeRows difference)
+        oneTenthBelowOneSixth)
+
+    differenceZero : ∀ row → difference row ≡ 0ℚ
+    differenceZero =
+      Reopen.oneSixthHomogeneousReopeningPointwiseZero
+        gaugeRowSelector (Residual.residualApply background)
+        difference equation residualOneSixth
+  in
+  λ row →
+    trans
+      (sym (ℚRing.solve-∀ (left row) (right row) :
+        (left row - right row) + right row ≡ left row))
+      (trans
+        (cong (_+ right row) (differenceZero row))
+        (ℚRing.solve-∀ (right row) : 0ℚ + right row ≡ right row))
+
+------------------------------------------------------------------------
+-- Rational Combes--Thomas reopening: 1/6 residual, 6/5 inverse bound.
+------------------------------------------------------------------------
+
 weightedIdentityPlusResidualApply :
   Contraction.GaugeRow → Physical.RationalSU2Background4 →
   GaugeVector → GaugeVector
@@ -193,11 +355,99 @@ selectedBackgroundWeightedResidualHomogeneousZeroNorm
     (Weighted.weightedResidualOneStepL1Contraction
       background radius root solution)
 
+weightedResidualDifferenceExact :
+  ∀ root background left right row →
+  Weighted.weightedResidualApply root background
+      (Reopen.vectorDifference left right) row
+  ≡ Weighted.weightedResidualApply root background left row
+    - Weighted.weightedResidualApply root background right row
+weightedResidualDifferenceExact root background left right row =
+  applyKernelDifferenceExact
+    Contraction.gaugeRows
+    (Weighted.Weight.weightedSelectedBackgroundResidual root background)
+    left right row
+
+weightedDifferenceSolvesHomogeneous :
+  ∀ root background left right →
+  (∀ row →
+    weightedIdentityPlusResidualApply root background left row
+    ≡ weightedIdentityPlusResidualApply root background right row) →
+  WeightedReopeningEquation root background
+    (Reopen.vectorDifference left right) Reopen.zeroVector
+weightedDifferenceSolvesHomogeneous root background left right equal row =
+  let
+    residualDifference =
+      weightedResidualDifferenceExact root background left right row
+
+    leftValue = weightedIdentityPlusResidualApply root background left row
+    rightValue = weightedIdentityPlusResidualApply root background right row
+
+    rearrange :
+      (left row - right row)
+        + (Weighted.weightedResidualApply root background left row
+          - Weighted.weightedResidualApply root background right row)
+      ≡ leftValue - rightValue
+    rearrange = ℚRing.solve-∀
+      (left row) (right row)
+      (Weighted.weightedResidualApply root background left row)
+      (Weighted.weightedResidualApply root background right row)
+
+    equalZero : leftValue - rightValue ≡ 0ℚ
+    equalZero = trans
+      (cong (_- rightValue) (equal row))
+      (ℚRing.solve-∀ rightValue)
+  in
+  trans
+    (cong
+      ((left row - right row) +_)
+      residualDifference)
+    (trans rearrange equalZero)
+
+selectedBackgroundWeightedResidualIdentityPlusInjective :
+  ∀ background → Relaxed.RelaxedInverseLinkRadius background →
+  ∀ root left right →
+  (∀ row →
+    weightedIdentityPlusResidualApply root background left row
+    ≡ weightedIdentityPlusResidualApply root background right row) →
+  ∀ row → left row ≡ right row
+selectedBackgroundWeightedResidualIdentityPlusInjective
+    background radius root left right equal =
+  let
+    difference = Reopen.vectorDifference left right
+
+    equation :
+      WeightedReopeningEquation root background difference Reopen.zeroVector
+    equation = weightedDifferenceSolvesHomogeneous
+      root background left right equal
+
+    differenceZero : ∀ row → difference row ≡ 0ℚ
+    differenceZero =
+      Reopen.oneSixthHomogeneousReopeningPointwiseZero
+        gaugeRowSelector
+        (Weighted.weightedResidualApply root background)
+        difference equation
+        (Weighted.weightedResidualOneStepL1Contraction
+          background radius root difference)
+  in
+  λ row →
+    trans
+      (sym (ℚRing.solve-∀ (left row) (right row) :
+        (left row - right row) + right row ≡ left row))
+      (trans
+        (cong (_+ right row) (differenceZero row))
+        (ℚRing.solve-∀ (right row) : 0ℚ + right row ≡ right row))
+
 selectedBackgroundGreenUnweightedSlackLevel : ProofLevel
 selectedBackgroundGreenUnweightedSlackLevel = machineChecked
 
 selectedBackgroundGreenWeightedSlackLevel : ProofLevel
 selectedBackgroundGreenWeightedSlackLevel = machineChecked
+
+selectedBackgroundResidualIdentityPlusInjectiveLevel : ProofLevel
+selectedBackgroundResidualIdentityPlusInjectiveLevel = machineChecked
+
+selectedBackgroundWeightedResidualIdentityPlusInjectiveLevel : ProofLevel
+selectedBackgroundWeightedResidualIdentityPlusInjectiveLevel = machineChecked
 
 selectedBackgroundWeightedReopeningSixFifthsLevel : ProofLevel
 selectedBackgroundWeightedReopeningSixFifthsLevel = machineChecked
