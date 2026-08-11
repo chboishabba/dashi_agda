@@ -40,7 +40,7 @@ open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst; trans)
+open import Relation.Binary.PropositionalEquality using (subst)
 
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
 import DASHI.Physics.Closure.NSTriadKNHHBadRestrictedDissipationRound38Exact as Bad
@@ -133,9 +133,11 @@ finiteRestrictedGainDensityBound :
     (densityNN : 0ℚ ≤ density)
     (cells : List (RestrictedGainDensityCell effectiveViscosity density shell)) →
   sumCellGain cells ≤ density * sumCellViscousCharge cells
-finiteRestrictedGainDensityBound densityNN [] =
-  subst (λ upper → 0ℚ ≤ upper) (solve (density ∷ [])) ℚP.≤-refl
-  where density = _
+finiteRestrictedGainDensityBound {density = density} densityNN [] =
+  subst
+    (λ upper → 0ℚ ≤ upper)
+    (solve (density ∷ []))
+    ℚP.≤-refl
 finiteRestrictedGainDensityBound
     {effectiveViscosity} {density} {shell}
     densityNN (cell ∷ rest) =
