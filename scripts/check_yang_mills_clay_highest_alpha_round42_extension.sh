@@ -26,6 +26,8 @@ files=(
   DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeGreenDecayExact.agda
   DASHI/Physics/YangMills/BalabanBasedPathGaugeSectionExact.agda
   DASHI/Physics/YangMills/BalabanSelectedCombinedConstraintTangentProjectorExact.agda
+  DASHI/Physics/YangMills/BalabanSelectedCombinedConstraintRawGramNoGoExact.agda
+  DASHI/Physics/YangMills/BalabanSelectedCombinedConstraintTangentProjectorBoundaryExact.agda
   DASHI/Physics/YangMills/BalabanFiniteRGObservableReopeningExact.agda
 )
 
@@ -65,6 +67,10 @@ grep -q 'rootedGaugeOrbitLift' DASHI/Physics/YangMills/BalabanBasedPathGaugeSect
 grep -q 'rootedGaugeRepresentativeUniqueInBasedOrbit' DASHI/Physics/YangMills/BalabanBasedPathGaugeSectionExact.agda
 grep -q 'selectedPhysicalTangentProjectorInKernel' DASHI/Physics/YangMills/BalabanSelectedCombinedConstraintTangentProjectorExact.agda
 grep -q 'selectedPhysicalTangentProjectorIdempotent' DASHI/Physics/YangMills/BalabanSelectedCombinedConstraintTangentProjectorExact.agda
+grep -q 'rawFlatRedundancyGramZero' DASHI/Physics/YangMills/BalabanSelectedCombinedConstraintRawGramNoGoExact.agda
+grep -q 'rawCombinedFlatGramHasNoTwoSidedInverse' DASHI/Physics/YangMills/BalabanSelectedCombinedConstraintRawGramNoGoExact.agda
+grep -q 'selectedFlatRawCombinedGramInverseImpossible' DASHI/Physics/YangMills/BalabanSelectedCombinedConstraintTangentProjectorBoundaryExact.agda
+grep -q 'selectedReducedOrBasedProjectorStillRequiredLevel = conditional' DASHI/Physics/YangMills/BalabanSelectedCombinedConstraintTangentProjectorBoundaryExact.agda
 grep -q 'finiteRGObservableExpectationPreserved' DASHI/Physics/YangMills/BalabanFiniteRGObservableReopeningExact.agda
 grep -q 'finiteRGCompositeExpectationPreserved' DASHI/Physics/YangMills/BalabanFiniteRGObservableReopeningExact.agda
 
@@ -84,6 +90,8 @@ grep -q '10.1007/BF01240355' DASHI/Physics/YangMills/BalabanSelectedBackgroundGa
 grep -q '10.1007/BF01646473' DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeGreenDecayExact.agda
 grep -q '10.1007/BF01466594' DASHI/Physics/YangMills/BalabanBasedPathGaugeSectionExact.agda
 grep -q '10.1007/BF01229381' DASHI/Physics/YangMills/BalabanSelectedCombinedConstraintTangentProjectorExact.agda
+grep -q '10.1007/BF01466594' DASHI/Physics/YangMills/BalabanSelectedCombinedConstraintRawGramNoGoExact.agda
+grep -q '10.1007/BF01229381' DASHI/Physics/YangMills/BalabanSelectedCombinedConstraintTangentProjectorBoundaryExact.agda
 grep -q 'math-ph/0505008' DASHI/Physics/YangMills/BalabanFiniteRGObservableReopeningExact.agda
 
 scripts/run_agda29_parallel_check.sh \
