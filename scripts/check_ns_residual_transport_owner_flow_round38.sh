@@ -17,6 +17,7 @@ files=(
   DASHI/Physics/Closure/NSTriadKNHHBadRestrictedDissipationRound38Exact.agda
   DASHI/Physics/Closure/NSTriadKNHHBadOccupationCrossingRound38Exact.agda
   DASHI/Physics/Closure/NSTriadKNSignedOwnerCancellationFlowRound38Exact.agda
+  DASHI/Physics/Closure/NSTriadKNPhysicalIncidenceLatticeBridgeRound38Exact.agda
   DASHI/Physics/Closure/NSTriadKNPhysicalTriadOrbitFibreRound38Exact.agda
   DASHI/Physics/Closure/NSTriadKNPhysicalGalerkinIncidencePermutationRound38Exact.agda
   DASHI/Physics/Closure/NSTriadKNResidualTransportOwnerFlowRound38Validation.agda
@@ -57,10 +58,15 @@ grep -q 'restrictedBadViscosityProducesInverseShellCharging' DASHI/Physics/Closu
 grep -q 'occupationThresholdCostBound' DASHI/Physics/Closure/NSTriadKNHHBadOccupationCrossingRound38Exact.agda
 grep -q 'twoCoordinateBadRegionControl' DASHI/Physics/Closure/NSTriadKNHHBadOccupationCrossingRound38Exact.agda
 
-# Signed pre-tax flow and F4 orbit/incidence mathematics.
+# Signed pre-tax flow and F4 carrier/orbit/incidence mathematics.
 grep -q 'cancellationFlowConservesSignedTotal' DASHI/Physics/Closure/NSTriadKNSignedOwnerCancellationFlowRound38Exact.agda
 grep -q 'positiveTaxDecreaseExact' DASHI/Physics/Closure/NSTriadKNSignedOwnerCancellationFlowRound38Exact.agda
 grep -q 'physicalCancellationEdgeTaxSavingExact' DASHI/Physics/Closure/NSTriadKNSignedOwnerCancellationFlowRound38Exact.agda
+grep -q 'fourierLatticeRoundtrip' DASHI/Physics/Closure/NSTriadKNPhysicalIncidenceLatticeBridgeRound38Exact.agda
+grep -q 'latticeFourierRoundtrip' DASHI/Physics/Closure/NSTriadKNPhysicalIncidenceLatticeBridgeRound38Exact.agda
+grep -q 'physicalIncidenceConjugateOutputMeaning' DASHI/Physics/Closure/NSTriadKNPhysicalIncidenceLatticeBridgeRound38Exact.agda
+grep -q 'physicalIncidenceTriadSumZero' DASHI/Physics/Closure/NSTriadKNPhysicalIncidenceLatticeBridgeRound38Exact.agda
+grep -q 'physicalIncidenceZeroSumBoolean' DASHI/Physics/Closure/NSTriadKNPhysicalIncidenceLatticeBridgeRound38Exact.agda
 grep -q 'pEnergyLegPreservesCutoff' DASHI/Physics/Closure/NSTriadKNPhysicalTriadOrbitFibreRound38Exact.agda
 grep -q 'qEnergyLegPreservesCutoff' DASHI/Physics/Closure/NSTriadKNPhysicalTriadOrbitFibreRound38Exact.agda
 grep -q 'finiteFibrePushforward' DASHI/Physics/Closure/NSTriadKNPhysicalTriadOrbitFibreRound38Exact.agda
@@ -80,6 +86,8 @@ grep -q '10.1007/BF02099744' DASHI/Physics/Closure/NSTriadKNFinitePVDetailOperat
 grep -q '10.1007/978-3-642-16830-7' DASHI/Physics/Closure/NSTriadKNPeriodicPVZeroMassFourierCriterionRound38Exact.agda
 grep -q '10.1002/cpa.3160410704' DASHI/Physics/Closure/NSTriadKNComZ2GradingRound38Exact.agda
 grep -q '10.1007/s00021-019-0411-z' DASHI/Physics/Closure/NSTriadKNHHBadRestrictedDissipationRound38Exact.agda
+grep -q '10.1007/978-3-642-16830-7' DASHI/Physics/Closure/NSTriadKNPhysicalIncidenceLatticeBridgeRound38Exact.agda
+grep -q '10.1007/BF02547354' DASHI/Physics/Closure/NSTriadKNPhysicalIncidenceLatticeBridgeRound38Exact.agda
 grep -q '10.1007/BF02547354' DASHI/Physics/Closure/NSTriadKNPhysicalTriadOrbitFibreRound38Exact.agda
 grep -q '10.1090/chel/343' DASHI/Physics/Closure/NSTriadKNPhysicalTriadOrbitFibreRound38Exact.agda
 grep -q '10.1007/BF02547354' DASHI/Physics/Closure/NSTriadKNPhysicalGalerkinIncidencePermutationRound38Exact.agda
