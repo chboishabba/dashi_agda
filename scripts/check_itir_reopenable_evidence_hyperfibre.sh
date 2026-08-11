@@ -17,6 +17,7 @@ files=(
   DASHI/Cognition/PNF/EvidenceClassificationEdge.agda
   DASHI/Cognition/PNF/InductiveDemandPreference.agda
   DASHI/Cognition/PNF/NumericOccurrenceFibre.agda
+  DASHI/Cognition/PNF/EvidenceCoverageAudit.agda
   DASHI/Cognition/PNF/PNFEvidenceHyperformalism.agda
   DASHI/Cognition/PNF/DirectDemandLookup.agda
   DASHI/Cognition/PNF/NumericPNFHyperfabricEverything.agda
@@ -57,6 +58,9 @@ required_markers=(
   'candidateClassificationCannotPromoteIdentity'
   'inductivePreferenceCannotProjectScalarIdentity'
   'sharedSurfaceDoesNotIdentifyOccurrences'
+  'distinctPropositionsWithinWitnessRows'
+  'factorStageWithinAdmittedStage'
+  'lowCoverageInvalidatesAnOtherwiseValidIdentityProofIsFalse'
   'finiteReferenceDoesNotPromoteUniversalPQJ'
   'ComplementaryReadingReference'
   'expectedConstantEqualityClaimRequiresContract'
