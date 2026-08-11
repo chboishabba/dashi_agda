@@ -17,29 +17,21 @@ module DASHI.Physics.Closure.NSTriadKNPeriodicKernelNearSmoothSplitRound39Exact 
 -- DASHI CONTRIBUTION
 --
 -- Round 38 reduced the HH-good problem to the literal periodic strain/PV
--- operator.  The efficient analytic route is not to estimate the torus kernel
+-- operator. The efficient analytic route is not to estimate the torus kernel
 -- monolithically: split its physical weight into a near singular piece and a
--- smooth periodic correction while keeping the *same* torus, Haar integral
--- and characters.
+-- smooth periodic correction while keeping the same torus, Haar integral and
+-- characters.
 --
--- This module proves the exact algebra that such a split must satisfy.  If
---
---   K = K_near + K_smooth
---
--- pointwise, then for every Fourier mode and every weighted increment,
+-- If K = K_near + K_smooth pointwise, this module proves exactly
 --
 --   Khat = Khat_near + Khat_smooth,
 --   mass K = mass K_near + mass K_smooth,
 --   Delta_K = Delta_near + Delta_smooth.
 --
--- Thus a future physical theorem
---
---   K_T3 = chi K_R3^hom + R_T3
---
--- can feed the singular HH-good owner estimate and the harmless smooth
--- remainder estimate separately without changing conventions or introducing
--- an independent Fourier carrier.  Existence/smoothness of that literal
--- physical decomposition remains a genuine A3 analytic producer.
+-- Thus a future physical theorem K_T3 = chi K_R3^hom + R_T3 can feed the
+-- singular HH-good owner estimate and the harmless smooth remainder estimate
+-- separately without changing conventions. Existence/smoothness of that
+-- literal physical decomposition remains a genuine A3 analytic producer.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Level; lsuc)
@@ -48,7 +40,6 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
-import DASHI.Physics.Closure.NSTriadKNComplex3FieldAlgebra as Algebra
 import DASHI.Physics.Closure.NSTriadKNComplexCommutativeRingExact as Ring
 import DASHI.Physics.Closure.NSTriadKNLuoComplexLinearIntegralWeightedIncrementExact as Integral
 import DASHI.Physics.Closure.NSTriadKNLuoPeriodicComplexCharacterMultiplierExact as Periodic
@@ -114,17 +105,17 @@ transformIntegrandSplit :
     (C3.complexMultiply
       (smoothWeight split point)
       (Periodic.character full mode point))
-transformIntegrandSplit split mode point =
+transformIntegrandSplit {full = full} split mode point =
   trans
     (cong
       (λ weight →
         C3.complexMultiply weight
-          (Periodic.character _ mode point))
+          (Periodic.character full mode point))
       (weightSplit split point))
     (Ring.complexDistributeRight
       (nearWeight split point)
       (smoothWeight split point)
-      (Periodic.character _ mode point))
+      (Periodic.character full mode point))
 
 periodicKernelTransformSplits :
   ∀ {r} {F : C3.RealField r}
