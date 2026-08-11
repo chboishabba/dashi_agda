@@ -16,6 +16,7 @@ files=(
   DASHI/Physics/Closure/NSTriadKNHHSquaredThresholdRepresentationRound40Exact.agda
   DASHI/Physics/Closure/NSTriadKNHHScaleDependentThresholdRound40Exact.agda
   DASHI/Physics/Closure/NSTriadKNHHGoodPVResidualOrderRound40Exact.agda
+  DASHI/Physics/Closure/NSTriadKNFourierStrainScaleInvariantRound40Exact.agda
   DASHI/Physics/Closure/NSTriadKNHHGoodFiniteKernelCauchyRound40Exact.agda
   DASHI/Physics/Closure/NSTriadKNHHGoodPeriodizedKernelUniformRound40Exact.agda
   DASHI/Physics/Closure/NSTriadKNPhysicalTransportCoefficientSkewRound40Exact.agda
@@ -35,7 +36,7 @@ for file in "${files[@]}"; do
 done
 
 # Unified HH directional defect: good and bad are complementary uses of the
-# same E*Theta measure, with no differentiated Boolean mask.  Reuse the mature
+# same E*Theta measure, with no differentiated Boolean mask. Reuse the mature
 # normalized weighted-defect -> bad-mass rarity transfer rather than duplicate it.
 grep -q 'thresholdTimesBadEnergyBelowDirectionalDefect' DASHI/Physics/Closure/NSTriadKNHHUnifiedDirectionalDefectRound40Exact.agda
 grep -q 'thresholdTimesScaledBadChargeBelowScaledDefect' DASHI/Physics/Closure/NSTriadKNHHUnifiedDirectionalDefectRound40Exact.agda
@@ -58,12 +59,17 @@ grep -q 'badTaxUsesLiteralDeltaInverse' DASHI/Physics/Closure/NSTriadKNHHSquared
 grep -q 'finiteSelectedScalesMinimize' DASHI/Physics/Closure/NSTriadKNHHScaleDependentThresholdRound40Exact.agda
 grep -q 'commonScaleMinimizesFiniteShellTax' DASHI/Physics/Closure/NSTriadKNHHScaleDependentThresholdRound40Exact.agda
 
-# HH-good mandatory order: PV cancellation -> residual -> shell-localized
-# weighted Cauchy -> uniform periodized kernel constant -> time absorption.
+# HH-good mandatory order: PV cancellation -> residual -> exact order-zero
+# strain symbol -> shell-localized weighted Cauchy -> annular periodized kernel
+# constant -> time absorption.
 grep -q 'zeroMassKillsConstantShift' DASHI/Physics/Closure/NSTriadKNHHGoodPVResidualOrderRound40Exact.agda
 grep -q 'pvCancellationThenResidual' DASHI/Physics/Closure/NSTriadKNHHGoodPVResidualOrderRound40Exact.agda
+grep -q 'inverseSquareCancellation' DASHI/Physics/Closure/NSTriadKNFourierStrainScaleInvariantRound40Exact.agda
+grep -q 'angularStrainScaleMode' DASHI/Physics/Closure/NSTriadKNFourierStrainScaleInvariantRound40Exact.agda
+grep -q 'fourierStrainMultiplierScaleInvariant' DASHI/Physics/Closure/NSTriadKNFourierStrainScaleInvariantRound40Exact.agda
 grep -q 'finiteHHGoodKernelThresholdBound' DASHI/Physics/Closure/NSTriadKNHHGoodFiniteKernelCauchyRound40Exact.agda
 grep -q 'finiteHHGoodUniformKernelBound' DASHI/Physics/Closure/NSTriadKNHHGoodFiniteKernelCauchyRound40Exact.agda
+grep -q 'strainOrderZeroHomogeneityReused' DASHI/Physics/Closure/NSTriadKNHHGoodPeriodizedKernelUniformRound40Exact.agda
 grep -q 'periodizedHHGoodShellBound' DASHI/Physics/Closure/NSTriadKNHHGoodPeriodizedKernelUniformRound40Exact.agda
 
 # Literal Fourier transport skew: resonance + reality + divergence-free move the
@@ -97,13 +103,15 @@ grep -q 'headImprovementReducesCertificateLower' DASHI/Physics/Closure/NSTriadKN
 grep -q '10.1512/iumj.1993.42.42034' DASHI/Physics/Closure/NSTriadKNHHUnifiedDirectionalDefectRound40Exact.agda
 grep -q '10.1512/iumj.1993.42.42034' DASHI/Physics/Closure/NSTriadKNHHPhysicalDefectRarityTransferRound40Exact.agda
 grep -q '10.1512/iumj.1993.42.42034' DASHI/Physics/Closure/NSTriadKNLuoBadCoherenceWeightedDefectTransferExact.agda
+grep -q '10.1007/BF01240221' DASHI/Physics/Closure/NSTriadKNFourierStrainScaleInvariantRound40Exact.agda
+grep -q '10.1007/978-3-642-16830-7' DASHI/Physics/Closure/NSTriadKNFourierStrainScaleInvariantRound40Exact.agda
 grep -q '10.1007/s00021-019-0411-z' DASHI/Physics/Closure/NSTriadKNHHBadDefectMeasureGainRound40Exact.agda
 grep -q '10.1002/cpa.3160410704' DASHI/Physics/Closure/NSTriadKNPhysicalTransportCoefficientSkewRound40Exact.agda
 grep -q '10.1090/chel/343' DASHI/Physics/Closure/NSTriadKNComAdjointCollapseRound40Exact.agda
 grep -q '10.1007/978-3-642-16830-7' DASHI/Physics/Closure/NSTriadKNHHGoodPeriodizedKernelUniformRound40Exact.agda
 grep -q '10.1002/cpa.3160410704' DASHI/Physics/Closure/NSTriadKNComSingleGramReductionRound40Exact.agda
 
-# Keep genuinely physical PDE/time producers honest.  Algebraic/fixed-finite
+# Keep genuinely physical PDE/time producers honest. Algebraic/fixed-finite
 # advances above are intentionally true; the continuum/time owner is not.
 grep -q 'physicalTimeIntegratedDirectionalDefectEstimateConstructed = false' DASHI/Physics/Closure/NSTriadKNHHUnifiedDirectionalDefectRound40Exact.agda
 grep -q 'physicalNormalizedWeightedDefectEnvelopeConstructed = false' DASHI/Physics/Closure/NSTriadKNHHPhysicalDefectRarityTransferRound40Exact.agda
@@ -115,6 +123,7 @@ grep -q 'physicalSquaredDirectionalThresholdConstructed = false' DASHI/Physics/C
 grep -q 'physicalShellHHConstantsConstructed = false' DASHI/Physics/Closure/NSTriadKNHHScaleDependentThresholdRound40Exact.agda
 grep -q 'physicalHHGoodSingularNearShellTimeBoundConstructed = false' DASHI/Physics/Closure/NSTriadKNHHGoodPVResidualOrderRound40Exact.agda
 grep -q 'physicalShellLocalizedStrainKernelSamplesConstructed = false' DASHI/Physics/Closure/NSTriadKNHHGoodFiniteKernelCauchyRound40Exact.agda
+grep -q 'physicalAnnularStrainKernelL1TheoremConstructed = false' DASHI/Physics/Closure/NSTriadKNHHGoodPeriodizedKernelUniformRound40Exact.agda
 grep -q 'physicalStrainShellKernelMassIdentificationConstructed = false' DASHI/Physics/Closure/NSTriadKNHHGoodPeriodizedKernelUniformRound40Exact.agda
 grep -q 'physicalLowTransportGlobalMatrixSkewAdjointConstructed = false' DASHI/Physics/Closure/NSTriadKNPhysicalTransportCoefficientSkewRound40Exact.agda
 grep -q 'physicalOddPQBlockToRound35GramConstructed = false' DASHI/Physics/Closure/NSTriadKNPhysicalTransportMatrixSkewRound40Exact.agda
