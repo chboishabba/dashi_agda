@@ -4,8 +4,8 @@ module DASHI.Physics.Closure.NSTriadKNResidualTransportOwnerFlowRound38Validatio
 -- below are only the new hard-math tranche: line-residual HH-good geometry,
 -- finite/periodic PV cancellation reductions, Z2-graded Com transport,
 -- evidence-indexed HH-bad dissipation and occupation/crossing control,
--- physically witnessed pre-tax cancellation flow, and the F4 orbit-fibre
--- pushforward.
+-- physically witnessed pre-tax cancellation flow, and the F4 orbit/fibre plus
+-- ordered-incidence permutation cancellation.
 open import DASHI.Physics.Closure.NSTriadKNPQStabilizerSignedLedgerRound37Validation
 
 open import DASHI.Physics.Closure.NSTriadKNVorticityLineResidualRound38Exact
@@ -17,3 +17,4 @@ open import DASHI.Physics.Closure.NSTriadKNHHBadRestrictedDissipationRound38Exac
 open import DASHI.Physics.Closure.NSTriadKNHHBadOccupationCrossingRound38Exact
 open import DASHI.Physics.Closure.NSTriadKNSignedOwnerCancellationFlowRound38Exact
 open import DASHI.Physics.Closure.NSTriadKNPhysicalTriadOrbitFibreRound38Exact
+open import DASHI.Physics.Closure.NSTriadKNPhysicalGalerkinIncidencePermutationRound38Exact
