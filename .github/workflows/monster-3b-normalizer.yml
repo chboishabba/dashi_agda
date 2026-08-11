@@ -1,0 +1,84 @@
+name: monster-3b-normalizer
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'DASHI/Moonshine/Monster3B*.agda'
+      - 'DASHI/Moonshine/LeechWeightTwo196608BridgeExact.agda'
+      - 'DASHI/Moonshine/MonsterThreeLocalE8LeechBridgeExact.agda'
+      - 'DASHI/Moonshine/MonsterYangMills196608CrossLaneExact.agda'
+      - 'scripts/monster_3b_*'
+      - 'scripts/check_monster_3b_*'
+      - 'scripts/render_monster_3b_certificate.py'
+      - '.github/workflows/monster-3b-normalizer.yml'
+  push:
+    branches:
+      - agent/monster-3b-normalizer-dashboard
+    paths:
+      - 'DASHI/Moonshine/Monster3B*.agda'
+      - 'DASHI/Moonshine/LeechWeightTwo196608BridgeExact.agda'
+      - 'DASHI/Moonshine/MonsterThreeLocalE8LeechBridgeExact.agda'
+      - 'DASHI/Moonshine/MonsterYangMills196608CrossLaneExact.agda'
+      - 'scripts/monster_3b_*'
+      - 'scripts/check_monster_3b_*'
+      - 'scripts/render_monster_3b_certificate.py'
+      - '.github/workflows/monster-3b-normalizer.yml'
+
+concurrency:
+  group: monster-3b-normalizer-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  exact-restriction-model-and-kernel:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install GAP and CTblLib
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gap gap-character-tables
+
+      - name: Install Python plotting dependencies
+        run: python -m pip install --disable-pip-version-check numpy matplotlib
+
+      - name: Install Agda and standard library
+        uses: wenkokke/setup-agda@v2
+        with:
+          agda-version: '2.6.4.3'
+          agda-stdlib-version: '2.1'
+
+      - name: Report computational versions
+        run: |
+          gap -q <<'GAP'
+          LoadPackage("ctbllib");
+          Print("GAP ", GAPInfo.Version, "\n");
+          Print("CTblLib ", InstalledPackageVersion("ctbllib"), "\n");
+          QUIT;
+          GAP
+          python --version
+          agda --version
+
+      - name: Run the Monster 3B highest-alpha checker
+        env:
+          MPLBACKEND: Agg
+        run: bash scripts/check_monster_3b_normalizer_dashboard.sh
+
+      - name: Upload restriction and structural certificates
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: monster-3b-normalizer-certificates
+          path: |
+            build/monster_3b_normalizer_restriction.json
+            build/monster_3b_heisenberg_model_certificate.json
+            build/monster_3b_dashboard/elementary_abelian_two_plane_certificate.json
+            build/generated/DASHI/Moonshine/Generated/Monster3BRestrictionCertificate.agda
+            build/monster_3b_dashboard/*.png
+          if-no-files-found: error
