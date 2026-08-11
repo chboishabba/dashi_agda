@@ -95,9 +95,11 @@ targetNormSquaredExact pair =
       (Physical.scaledNormSquared
         (Physical.rightAmplitude pair)
         (Gram.right (Physical.directions pair)))
-      (cong
-        (L2.square (Physical.rightAmplitude pair) *_)
-        (Gram.rightUnit (Physical.directions pair))))
+      (trans
+        (cong
+          (L2.square (Physical.rightAmplitude pair) *_)
+          (Gram.rightUnit (Physical.directions pair)))
+        (solve (L2.square (Physical.rightAmplitude pair) ∷ []))))
 
 sourceTargetCrossSquaredExact : ∀ pair →
   V.normSquared (BS.cross (sourceVector pair) (targetVector pair))
