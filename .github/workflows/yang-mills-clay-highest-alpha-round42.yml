@@ -1,12 +1,16 @@
 name: Yang-Mills Clay highest-alpha round 42
 
+# SECURITY BOUNDARY
+#
+# This workflow executes checked-out repository scripts on a shared self-hosted
+# Agda runner.  It therefore runs only for pushes to the trusted Round-42
+# development branch (or an explicit trusted workflow_dispatch), never for
+# pull_request checkout content.  The branch-push check still attaches to the
+# PR head commit without allowing arbitrary PR code to execute on the runner.
 on:
   push:
     branches:
       - 'agent/ym-clay-alpha-round42-master-reconciled-floor-recovery'
-  pull_request:
-    branches:
-      - master
   workflow_dispatch:
 
 permissions:
