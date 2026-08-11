@@ -52,7 +52,7 @@ open import Data.Rational.Base using
   (ℚ; 0ℚ; _+_; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym)
 
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
 import DASHI.Physics.Closure.NSTriadKNHHBadSharpDyadicGainRound33Exact as Sharp
@@ -108,29 +108,11 @@ toRestrictedGainCell :
   ∀ {parameter effectiveViscosity density shell} →
   PhysicalBadGainDefectCell parameter effectiveViscosity density shell →
   Gain.RestrictedGainDensityCell effectiveViscosity density shell
-toRestrictedGainCell
-    {effectiveViscosity} {density} {shell} cell =
+toRestrictedGainCell cell =
   Gain.restricted-gain-density-cell
     (toRawBadGainSample cell)
-    (subst
-      (λ value → 0ℚ ≤ value)
-      (sym
-        (solve
-          ( Defect.energy (directionalCell cell)
-          ∷ effectiveViscosity
-          ∷ Sharp.dyadicScale shell
-          ∷ [])))
-      (viscousChargeNonnegative cell))
-    (subst
-      (λ upper → rawGain cell ≤ upper)
-      (sym
-        (solve
-          ( density
-          ∷ Defect.energy (directionalCell cell)
-          ∷ effectiveViscosity
-          ∷ Sharp.dyadicScale shell
-          ∷ [])))
-      (densityBound cell))
+    (viscousChargeNonnegative cell)
+    (densityBound cell)
 
 mapRestrictedGainCells :
   ∀ {parameter effectiveViscosity density shell} →
@@ -205,11 +187,11 @@ finitePhysicalBadGainDensityBound :
   sumPhysicalBadGain cells
   ≤ density
       * Gain.sumCellViscousCharge (mapRestrictedGainCells cells)
-finitePhysicalBadGainDensityBound densityNN cells =
+finitePhysicalBadGainDensityBound {density = density} densityNN cells =
   subst
     (λ lower →
       lower
-      ≤ _ * Gain.sumCellViscousCharge (mapRestrictedGainCells cells))
+      ≤ density * Gain.sumCellViscousCharge (mapRestrictedGainCells cells))
     (sym (sumPhysicalBadGainMatchesRound39 cells))
     (Gain.finiteRestrictedGainDensityBound
       densityNN (mapRestrictedGainCells cells))
