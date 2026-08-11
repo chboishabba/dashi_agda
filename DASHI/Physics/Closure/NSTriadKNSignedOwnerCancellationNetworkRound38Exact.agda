@@ -38,7 +38,7 @@ open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _≤_)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 import DASHI.Physics.Closure.NSTriadKNSignedOwnerCancellationFlowRound38Exact as Flow
 
@@ -108,7 +108,7 @@ pathTaxSavingExact :
     (path : PhysicalCancellationPath initialTax finalTax) →
   initialTax ≡ finalTax + pathTransferTotal path
 pathTaxSavingExact (done tax) = solve (tax ∷ [])
-pathTaxSavingExact (step current rest) =
+pathTaxSavingExact {finalTax = finalTax} (step current rest) =
   trans
     (globalCancellationStepSavingExact current)
     (trans
@@ -116,7 +116,7 @@ pathTaxSavingExact (step current rest) =
         (λ after → after + globalStepTransfer current)
         (pathTaxSavingExact rest))
       (solve
-        ( _ ∷ globalStepTransfer current
+        ( finalTax ∷ globalStepTransfer current
         ∷ pathTransferTotal rest
         ∷ [])))
 
