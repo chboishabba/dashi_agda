@@ -4,6 +4,7 @@ open import DASHI.Cognition.PNF.ComplexityArithmetic public
 open import DASHI.Cognition.PNF.NumericAuthority public
 open import DASHI.Cognition.PNF.SpacyNumericProjection public
 open import DASHI.Cognition.PNF.NumericOccurrenceFibre public
+open import DASHI.Cognition.PNF.NumericTokenStorageReference public
 open import DASHI.Cognition.PNF.LexicalRetrievalProjection public
 open import DASHI.Cognition.PNF.NumericHyperfabric public
 open import DASHI.Cognition.PNF.DemandResolutionState public
