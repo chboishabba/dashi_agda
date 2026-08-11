@@ -1,0 +1,148 @@
+module DASHI.Physics.Closure.NSTriadKNLuoCamlinTemporalLiftNoGoExact where
+
+------------------------------------------------------------------------
+-- SOURCE UNDER AUDIT
+--
+-- Author: Jeffrey Camlin.
+-- Title: "Global Regularity for Navier-Stokes on T3 via Bounded
+-- Vorticity-Response Functionals".
+-- DOI: 10.63968/post-bio-ai-epistemics.v1n2.012.
+-- Status: independent publication; not used as proof authority.
+--
+-- AUDITED STEPS
+--
+-- (1) A family of bounds C(T), one for each finite horizon T, does not supply
+--     one constant uniform for all horizons.
+--
+-- (2) Given an independently proved equality between an original integral and
+--     its time-reparameterized form, every property depending only on that
+--     integral value transports in both directions.  This generic transport
+--     does not construct Camlin's concrete time map or prove the BKM
+--     change-of-variables identity; those remain explicit open producers.
+--
+-- (3) The scalar superlinear drift used in the proposed Galerkin estimate is
+--     not globally dissipative.  On square amplitudes y=s^2, the algebraic gap
+--
+--       y^(3/2) - a y = s^3 - a s^2
+--
+--     equals s^2 at s=a+1 and is therefore nonnegative for every rational a.
+--     Strict positivity requires a separate proof that a+1 is nonzero; no
+--     unrestricted strict-positivity claim is made here.
+------------------------------------------------------------------------
+
+open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Data.Empty using (⊥)
+open import Data.Product.Base using (Σ; _,_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _≤_)
+open import Data.Unit using (⊤)
+open import Relation.Binary.PropositionalEquality using (_≡_; subst; sym)
+open import Relation.Nullary.Negation using (¬_)
+
+import DASHI.Physics.Closure.NSTriadKNLuoBadAmplitudeBernsteinScalingNoGoExact as Scaling
+
+infix 4 _≤ⁿ_
+
+data _≤ⁿ_ : Nat → Nat → Set where
+  zero≤ : ∀ {n} → zero ≤ⁿ n
+  suc≤suc : ∀ {m n} → m ≤ⁿ n → suc m ≤ⁿ suc n
+
+≤ⁿ-refl : ∀ n → n ≤ⁿ n
+≤ⁿ-refl zero = zero≤
+≤ⁿ-refl (suc n) = suc≤suc (≤ⁿ-refl n)
+
+notSucLeSelf : ∀ n → ¬ (suc n ≤ⁿ n)
+notSucLeSelf zero ()
+notSucLeSelf (suc n) (suc≤suc proof) =
+  notSucLeSelf n proof
+
+FiniteHorizonBoundFamily : Set
+FiniteHorizonBoundFamily =
+  (horizon : Nat) → Σ Nat (λ bound → horizon ≤ⁿ bound)
+
+finiteHorizonBoundsExist : FiniteHorizonBoundFamily
+finiteHorizonBoundsExist horizon =
+  horizon , ≤ⁿ-refl horizon
+
+GlobalUniformHorizonBound : Set
+GlobalUniformHorizonBound =
+  Σ Nat (λ bound → (horizon : Nat) → horizon ≤ⁿ bound)
+
+finiteHorizonFamilyDoesNotYieldGlobalUniformBound :
+  ¬ GlobalUniformHorizonBound
+finiteHorizonFamilyDoesNotYieldGlobalUniformBound
+  (bound , dominatesEveryHorizon) =
+  notSucLeSelf bound (dominatesEveryHorizon (suc bound))
+
+record ExactIntegralChangeOfVariables : Set₁ where
+  field
+    IntegralValue : Set
+    originalIntegral : IntegralValue
+    transformedIntegral : IntegralValue
+    transformedEqualsOriginal :
+      transformedIntegral ≡ originalIntegral
+
+open ExactIntegralChangeOfVariables public
+
+integralPropertyPreservedBackward :
+  (change : ExactIntegralChangeOfVariables) →
+  (Property : IntegralValue change → Set) →
+  Property (transformedIntegral change) →
+  Property (originalIntegral change)
+integralPropertyPreservedBackward change Property transformedProperty =
+  subst Property
+    (transformedEqualsOriginal change)
+    transformedProperty
+
+integralPropertyPreservedForward :
+  (change : ExactIntegralChangeOfVariables) →
+  (Property : IntegralValue change → Set) →
+  Property (originalIntegral change) →
+  Property (transformedIntegral change)
+integralPropertyPreservedForward change Property originalProperty =
+  subst Property
+    (sym (transformedEqualsOriginal change))
+    originalProperty
+
+bkmDivergenceCannotBeRemovedBySuppliedExactTimeChange :
+  (change : ExactIntegralChangeOfVariables) →
+  (Diverges : IntegralValue change → Set) →
+  Diverges (originalIntegral change) →
+  Diverges (transformedIntegral change)
+bkmDivergenceCannotBeRemovedBySuppliedExactTimeChange =
+  integralPropertyPreservedForward
+
+bkmFinitenessCannotBeCreatedBySuppliedExactTimeChange :
+  (change : ExactIntegralChangeOfVariables) →
+  (Finite : IntegralValue change → Set) →
+  Finite (transformedIntegral change) →
+  Finite (originalIntegral change)
+bkmFinitenessCannotBeCreatedBySuppliedExactTimeChange =
+  integralPropertyPreservedBackward
+
+superlinearDriftGapIdentityAtCoefficientPlusOne :
+  (coefficient : ℚ) →
+  Scaling.bernsteinAmplitudeGap coefficient
+  ≡ Scaling.shellDiffusionSquared (Scaling.counterScale coefficient)
+superlinearDriftGapIdentityAtCoefficientPlusOne =
+  Scaling.bernsteinSupercriticalGapIdentity
+
+superlinearDriftGapNonnegativeAtCoefficientPlusOne :
+  (coefficient : ℚ) →
+  0ℚ ≤ Scaling.bernsteinAmplitudeGap coefficient
+superlinearDriftGapNonnegativeAtCoefficientPlusOne =
+  Scaling.bernsteinGapNonnegative
+
+record CamlinAuditBoundary : Set where
+  constructor camlinAuditBoundary
+  field
+    finiteHorizonQuantifierGapProved : Set
+    genericIntegralEqualityTransportProved : Set
+    concreteCamlinTimeMapAndBKMEqualityProved : Set
+    superlinearDriftGapIdentityReused : Set
+    unrestrictedStrictDriftPositivityProved : Set
+    uniformGlobalVorticityBoundProduced : Set
+    unconditionalClayConclusionProduced : Set
+
+canonicalCamlinAuditBoundary : CamlinAuditBoundary
+canonicalCamlinAuditBoundary =
+  camlinAuditBoundary ⊤ ⊤ ⊥ ⊤ ⊥ ⊥ ⊥
