@@ -28,44 +28,40 @@ module DASHI.Physics.YangMills.BalabanSelectedConstraintDerivativeSectorBudgetEx
 --
 --   ||D F_U-D F_A||^2 <= (1/262144) ||h||^2.
 --
--- Hence the block-average sector may consume
---
---   3711/262144,
---
--- and the two coefficients add exactly to 29/2048.  We prove that the raw
--- tagged-row norm is exactly the sum of the twelve average-row square and the
--- 768 gauge-row square.  The exact Pythagorean theorem for the mean-zero
--- projection then shows the reduced constraint derivative costs no additional
--- norm constant:
+-- Hence the block-average sector may consume 3711/262144, and the two
+-- coefficients add exactly to 29/2048.  The raw tagged-row norm is exactly the
+-- sum of the twelve average-row square and the 768 gauge-row square.  The
+-- exact Pythagorean theorem for the mean-zero projection then shows
 --
 --   ||P(delta Q,delta F)||^2 <= ||(delta Q,delta F)||^2.
 --
--- Therefore only the concrete nonlinear block-average derivative variation
--- with coefficient 3711/262144 remains before the existing half-contractive
--- Newton budget can be consumed.
+-- Thus the only physical derivative estimate still missing is the nonlinear
+-- block-average derivative variation with coefficient 3711/262144.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
-  (ℚ; _+_; _*_; _≤_; _/_)
+  (ℚ; _+_; _-_; _*_; _≤_; _/_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; cong₂; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using
+  (cong; cong₂; subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using (pair; map)
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreCarrier as Block
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
 import DASHI.Physics.YangMills.BalabanFiniteSumFubiniExact as Fubini
-import DASHI.Physics.YangMills.BalabanFiniteRectangularRationalExact as Rect
 import DASHI.Physics.YangMills.BalabanP33PhysicalCoordinateBasisExact as Basis
 import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Coordinates
 import DASHI.Physics.YangMills.BalabanP33PeriodicFourDimensionalHodgeIdentityExact as Periodic
 import DASHI.Physics.YangMills.BalabanP33PhysicalPeriodicOpenReferenceBridgeExact as Bridge
+import DASHI.Physics.YangMills.BalabanPath4AxisAverageExact as Path4
 import DASHI.Physics.YangMills.BalabanP33PhysicalRationalWilsonPlaquetteJetExact as Physical
 import DASHI.Physics.YangMills.BalabanP33PhysicalBackgroundGaugeFirstExact as Gauge
 import DASHI.Physics.YangMills.BalabanP33PhysicalBackgroundGaugeParameterizedYoungExact as Relaxed
+import DASHI.Physics.YangMills.BalabanP33PhysicalFlatGaugeDivergenceIdentificationExact as FlatGauge
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundBlockAverageConstraintMatrixExact as Average
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundCombinedConstraintMatrixExact as Combined
 import DASHI.Physics.YangMills.BalabanSelectedBlockAverageRowCarrierExact as AverageRows
@@ -78,7 +74,7 @@ AverageVariation : Set
 AverageVariation = Average.SelectedBlockAverageRow4 → ℚ
 
 GaugeVariation : Set
-GaugeVariation = Rows.GaugeRow → ℚ
+GaugeVariation = FlatGauge.GaugeCoordinate4 → ℚ
 
 RawVariation : Set
 RawVariation = Combined.SelectedConstraintRow4 → ℚ
@@ -159,7 +155,7 @@ literalGaugeVariationNormExact left right field =
       gaugeVariationNormSq (literalGaugeTwoBackgroundVariation left right field)
       ≡ Sums.sumRational Coordinates.lieCoordinates3
           (λ coordinate →
-            Sums.sumRational (Block.physicalBlockSites Periodic.four)
+            Sums.sumRational (Block.physicalBlockSites Path4.side4)
               (λ site →
                 GaugeVariation.gaugeDerivativeTwoBackgroundCoordinate
                   left right field coordinate site
@@ -167,7 +163,7 @@ literalGaugeVariationNormExact left right field =
                     left right field coordinate site))
     afterCartesian =
       Fubini.sumCartesian Coordinates.lieCoordinates3
-        (Block.physicalBlockSites Periodic.four)
+        (Block.physicalBlockSites Path4.side4)
         (λ row →
           literalGaugeTwoBackgroundVariation left right field row
             * literalGaugeTwoBackgroundVariation left right field row)
@@ -175,7 +171,7 @@ literalGaugeVariationNormExact left right field =
     toPeriodic :
       Sums.sumRational Coordinates.lieCoordinates3
         (λ coordinate →
-          Sums.sumRational (Block.physicalBlockSites Periodic.four)
+          Sums.sumRational (Block.physicalBlockSites Path4.side4)
             (λ site →
               GaugeVariation.gaugeDerivativeTwoBackgroundCoordinate
                 left right field coordinate site
@@ -277,21 +273,19 @@ selectedReducedCombinedDerivativeVariationUpper
           sectorUpper)
 
     projectedUpper = ℚP.≤-trans projectedBelowRaw rawUpper
+    coefficientExact =
+      trans
+        (ℚP.+-comm
+          GaugeVariation.blockAverageDerivativeRemainingSquaredBudget
+          GaugeVariation.gaugeDerivativeTwoBackgroundSquaredCoefficient)
+        GaugeVariation.gaugePlusBlockBudgetExact
   in
   subst
     (λ coefficient →
       ProjectionNorm.rawMultiplierNormSq
         (Projection.selectedReducedProjection combined)
       ≤ coefficient * norm)
-    (ℚP.+-comm
-      GaugeVariation.blockAverageDerivativeRemainingSquaredBudget
-      GaugeVariation.gaugeDerivativeTwoBackgroundSquaredCoefficient
-      ∙ GaugeVariation.gaugePlusBlockBudgetExact)
-    projectedUpper
-  where
-    infixr 2 _∙_
-    _∙_ : ∀ {a b c : ℚ} → a ≡ b → b ≡ c → a ≡ c
-    _∙_ = trans
+    coefficientExact projectedUpper
 
 selectedConstraintRawSectorNormSplitLevel : ProofLevel
 selectedConstraintRawSectorNormSplitLevel = machineChecked
