@@ -47,19 +47,19 @@ open import Data.Rational.Base as ℚ using
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using
-  (cong; subst; sym; trans)
+  (cong; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
 import DASHI.Physics.YangMills.BalabanFiniteRectangularAbsoluteMassExact as Mass
+import DASHI.Physics.YangMills.BalabanFiniteMatrixL1ContractionExact as L1
+import DASHI.Physics.YangMills.BalabanFiniteStrictContractionReopeningExact as Strict
 import DASHI.Physics.YangMills.BalabanConstructiveRationalMatrixInverseExact as Matrix
 import DASHI.Physics.YangMills.BalabanFiniteRationalInjectiveInverseExact as FiniteInverse
 import DASHI.Physics.YangMills.BalabanP33PhysicalCoordinateBasisExact as Basis
 import DASHI.Physics.YangMills.BalabanSelectedCombinedConstraintRowCarrierExact as Rows
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundFlatGreenPerturbationContractionExact as Contraction
-import DASHI.Physics.YangMills.BalabanSelectedBackgroundResidualPowerDecayExact as Residual
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundRationalCombesThomasWeightExact as Weight
-import DASHI.Physics.YangMills.BalabanSelectedBackgroundRationalWeightedPowerDecayExact as Weighted
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundResidualReopeningExact as Reopening
 import DASHI.Physics.YangMills.BalabanP33PhysicalRationalWilsonPlaquetteJetExact as Physical
 import DASHI.Physics.YangMills.BalabanP33PhysicalBackgroundGaugeParameterizedYoungExact as Relaxed
@@ -198,11 +198,8 @@ selectedResidualInverseTenNinths :
     gaugeFiniteCoordinates (selectedResidualIdentityPlusMatrix background)) →
   ∀ source →
   let solution = selectedResidualInverseApply background certificate source in
-  DASHI.Physics.YangMills.BalabanFiniteMatrixL1ContractionExact.vectorL1
-      Contraction.gaugeRows solution
-  ≤ Reopening.tenNinths
-      * DASHI.Physics.YangMills.BalabanFiniteMatrixL1ContractionExact.vectorL1
-          Contraction.gaugeRows source
+  L1.vectorL1 Contraction.gaugeRows solution
+  ≤ Reopening.tenNinths * L1.vectorL1 Contraction.gaugeRows source
 selectedResidualInverseTenNinths background radius certificate source =
   let
     solution = selectedResidualInverseApply background certificate source
@@ -288,11 +285,8 @@ selectedWeightedResidualInverseSixFifths :
   let solution =
         selectedWeightedResidualInverseApply root background certificate source
   in
-  DASHI.Physics.YangMills.BalabanFiniteMatrixL1ContractionExact.vectorL1
-      Contraction.gaugeRows solution
-  ≤ DASHI.Physics.YangMills.BalabanFiniteStrictContractionReopeningExact.sixFifths
-      * DASHI.Physics.YangMills.BalabanFiniteMatrixL1ContractionExact.vectorL1
-          Contraction.gaugeRows source
+  L1.vectorL1 Contraction.gaugeRows solution
+  ≤ Strict.sixFifths * L1.vectorL1 Contraction.gaugeRows source
 selectedWeightedResidualInverseSixFifths
     background radius root certificate source =
   let
