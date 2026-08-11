@@ -45,8 +45,8 @@ module DASHI.Physics.YangMills.BalabanSelectedBackgroundGaugeGreenFiniteExact wh
 -- its proved right-inverse gives a=b.  No Neumann limit is introduced.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_)
-open import Data.Rational.Base as ℚ using (ℚ; _+_)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Rational.Base as ℚ using (ℚ; _+_; _*_)
 open import Relation.Binary.PropositionalEquality using
   (cong; cong₂; sym; trans)
 
@@ -54,16 +54,17 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier as Torus
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
 import DASHI.Physics.YangMills.BalabanConstructiveRationalMatrixInverseExact as Matrix
+import DASHI.Physics.YangMills.BalabanConfiguredSide4PeriodicReindexingExact as Reindex
+import DASHI.Physics.YangMills.BalabanConfiguredSide4PeriodicVectorCalculusExact as Vec
+import DASHI.Physics.YangMills.BalabanPath4GlobalAverageExact as GlobalAverage
+import DASHI.Physics.YangMills.BalabanSide4ScalarGreenKernelComputed as Kernel
 import DASHI.Physics.YangMills.BalabanSide4ScalarGreenConvolutionExact as ScalarGreen
 import DASHI.Physics.YangMills.BalabanSelectedFlatGaugeAdjointGramFloorExact as FlatAdjoint
 import DASHI.Physics.YangMills.BalabanSelectedFlatGaugeRegularizedGreenExact as FlatGreen
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundGaugeOperatorDecompositionExact as Operator
-import DASHI.Physics.YangMills.BalabanSelectedBackgroundGaugePerturbationActionExact as PerturbationAction
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundResidualActionExact as ResidualAction
-import DASHI.Physics.YangMills.BalabanSelectedBackgroundResidualPowerDecayExact as Residual
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundResidualReopeningExact as Reopening
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundFiniteRationalReopeningExact as FiniteReopen
-import DASHI.Physics.YangMills.BalabanSelectedBackgroundFlatGreenPerturbationContractionExact as Contraction
 import DASHI.Physics.YangMills.BalabanP33PhysicalRationalWilsonPlaquetteJetExact as Physical
 
 GaugeMultiplier : Set
@@ -172,7 +173,7 @@ matrixApplyRespectsPointwise :
   ≡ Matrix.applyMatrix carrier matrix right row
 matrixApplyRespectsPointwise carrier matrix left right pointwise row =
   Sums.sumRationalCong (Matrix.coordinates carrier) _ _
-    (λ column → cong (matrix row column ScalarGreen.*_) (pointwise column))
+    (λ column → cong (matrix row column *_) (pointwise column))
 
 selectedBackgroundGaugeGreenLeftInverse :
   ∀ background
@@ -225,21 +226,15 @@ configuredSiteOperatorRespectsPointwise pointwise row =
       (λ axis → cong₂ _-_
         (cong₂ _+_ (pointwise row) (pointwise row))
         (cong₂ _+_
-          (pointwise
-            (DASHI.Physics.YangMills.BalabanConfiguredSide4PeriodicReindexingExact.shiftForward4 axis row))
-          (pointwise
-            (DASHI.Physics.YangMills.BalabanConfiguredSide4PeriodicReindexingExact.shiftBackward4 axis row)))))
+          (pointwise (Reindex.shiftForward4 axis row))
+          (pointwise (Reindex.shiftBackward4 axis row)))))
     (trans
-      (DASHI.Physics.YangMills.BalabanPath4GlobalAverageExact.average0123EqualsGlobalMean
-        left row)
+      (GlobalAverage.average0123EqualsGlobalMean left row)
       (trans
         (cong
-          (DASHI.Physics.YangMills.BalabanSide4ScalarGreenKernelComputed.oneTwoFiftySix ScalarGreen.*_)
-          (DASHI.Physics.YangMills.BalabanConfiguredSide4PeriodicVectorCalculusExact.siteSum4Cong
-            left right pointwise))
-        (sym
-          (DASHI.Physics.YangMills.BalabanPath4GlobalAverageExact.average0123EqualsGlobalMean
-            right row))))
+          (Kernel.oneTwoFiftySix *_)
+          (Vec.siteSum4Cong left right pointwise))
+        (sym (GlobalAverage.average0123EqualsGlobalMean right row))))
 
 regularizedFlatGaugeGreenInjective :
   ∀ left right →
