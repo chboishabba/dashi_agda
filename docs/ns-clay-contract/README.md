@@ -2,96 +2,124 @@
 
 This directory is the normalized entry point for the periodic Navier–Stokes Clay route.
 
-## Answer to the three questions
+## Current answer
 
-### 1. Was the true Clay requirement already implemented?
+### Is the true Clay requirement represented?
 
-Not exactly before Round 23.
+Yes. Round 23 added a literal formal target for Fefferman’s periodic alternative B, including positive viscosity, three dimensions, zero forcing, smooth divergence-free periodic initial data, global smooth velocity and pressure, and the pressure-periodicity erratum.
 
-The repository already had a strong submission-shaped interface and a long terminal composition. It correctly kept the Clay promotion flag false. However, the older interface was not a literal transcription of Fefferman’s periodic alternative (B): it added a mean-zero datum requirement and pair uniqueness, while it did not expose positive viscosity, three spatial dimensions, zero forcing, velocity periodicity and the pressure-periodicity erratum as separate clauses.
+Mean zero is not a Clay precondition. It is a reduction handled by a separate centering and Galilean-restoration theorem. Uniqueness and a separate energy-equality condition are not inserted into the official target.
 
-Round 23 adds the literal theorem type in `NSTriadKNFeffermanPeriodicClayStatementExact.agda`. It removes the extra mean-zero and uniqueness requirements and lists every official precondition and postcondition separately. Constructing the theorem type is complete; inhabiting it for the physical carrier remains open.
+### Is there a single in-repository path?
 
-### 2. Is there enough repository content to identify a path?
+Yes. The terminal composition is present. The remaining work is not another theorem wrapper; it is inhabiting the physical analytic producers:
 
-Yes. There is now a single explicit composition rather than several overlapping terminal stories.
+1. construct the literal finite Galerkin flow;
+2. derive its filtered-vorticity shell balance;
+3. prove cutoff-uniform taxes for every physical source;
+4. obtain one strict viscosity margin;
+5. pass shell and Galerkin cutoffs;
+6. derive critical/Serrin continuation;
+7. recover smooth periodic pressure;
+8. restore arbitrary periodic mean and inhabit the literal target.
 
-The in-repository route is:
+The dependency-ordered version is the [highest-alpha lemma ladder](paper-corpus/highest-alpha-lemma-ladder.md).
 
-1. finite Galerkin filtered-vorticity equation and critical enstrophy identity;
-2. pair-input-frequency defect damping;
-3. uniform taxation of all physical forcing classes;
-4. strict viscosity margin and Grönwall;
-5. shell and Galerkin cutoff limits;
-6. critical restart past a hypothetical finite maximal time;
-7. smooth velocity and pressure recovery;
-8. legacy-to-literal Clay witness adapter;
-9. Galilean restoration from centered data to arbitrary periodic data.
+## Implemented rounds
 
-The reducers for steps 2, 4, the order-theoretic part of 5, the contradiction logic in 6, and the terminal composition are present. The open mathematics is concentrated in the physical estimates and analytic limit producers listed in [requirements.md](requirements.md).
+### Round 24 — claimed-paper corpus and audits
 
-Round 24 adds a broad [claimed-paper corpus](paper-corpus/README.md), including low-authority and claimed-solution papers. Each source is mapped to its first load-bearing physical lemma, and exact countermodels are retained where a displayed implication fails.
+The [claimed-paper corpus](paper-corpus/README.md) includes peer-reviewed, arXiv, repository, independent and web claims. Sources enter only at their first load-bearing lemma. Valid local results are retained even when a terminal implication fails, and exact countermodels document recurrent failure modes.
 
-Round 25 closes the discrete support part of that path. The [literal physical carrier and five-class support tranche](physical-carrier-support-round25.md) proves duplicate-free output fibres, the low-low-to-far-high obstruction, exhaustive and unique physical triad classification, and exact `HH+LH+HL+CC+Com` recomposition after evaluating the appended `Com` cell with a mode-indexed commutator functional. L4 is checked exact.
+### Round 25 — literal physical carrier and support
 
-Round 26 adds the [finite Galerkin and critical-tax tranche](galerkin-critical-ledger-round26.md). It proves:
+The [physical carrier and support tranche](physical-carrier-support-round25.md) proves:
 
-- literal degree-two coordinate algebra and finite difference factorisation;
-- reality-by-construction and exact conjugate transversality;
-- reuse of the physical Complex3 triad-energy cancellation theorem;
+- complete duplicate-free physical output fibres;
+- low–low-to-far-high exclusion;
+- exhaustive and unique `HH/LH/HL/CC` triad classification;
+- a separate differentiated `Com` source;
+- exact `HH+LH+HL+CC+Com` recomposition with no generic remainder.
+
+### Round 26 — signed critical ledger and unique tax ownership
+
+The [finite Galerkin and critical-tax tranche](galerkin-critical-ledger-round26.md) proves:
+
+- degree-two Galerkin coordinate syntax and exact finite difference factorisation;
+- reality reconstruction and conjugate transversality;
+- physical triad-energy cancellation;
 - a signed weighted critical shell ledger;
-- a bridge forcing the Round 25 physical five-source fibre into each signed shell cell;
-- the exact projected low-transport commutator and signed multiplier-difference stack;
-- division-free high–high normalization;
-- hysteretic positive-variation charge;
-- named remainder classes and duplicate-free tax ownership.
+- a bridge forcing literal physical sources into the shell ledger;
+- low-transport cancellation and finite signed commutator identities;
+- division-free high–high normalisation;
+- hysteretic entry charge;
+- named remainder classes;
+- duplicate-free tax ownership.
 
-These advances constrain how the remaining estimates may be proved; they do not supply finite normed Picard–Lindelöf, time-dependent shell balances, or cutoff-independent analytic coefficients.
+It does not prove finite Picard–Lindelöf, the physical time-dependent shell balance, cutoff-uniform taxes or a strict viscosity margin.
 
-### 3. What are the preconditions, postconditions and invariants?
+### Round 27 — projectors, operators, centred probes and maximal core
 
-They are defined in [requirements.md](requirements.md) and formalized by `NSTriadKNLuoClayPrePostInvariantContractRound23Exact.agda`.
+The [projector/operator/core tranche](projector-operator-core-round27.md) imports useful finite harmonic-analysis architecture from the Monster projector lane without asserting a physical relationship between the subjects. It proves:
 
-The dependency-ordered statement of the remaining mathematics is in the [highest-alpha lemma ladder](paper-corpus/highest-alpha-lemma-ladder.md).
+- sharp finite shell-projector idempotence, disjointness and resolution;
+- shell covariance and diagonal multiplier commutation;
+- Fourier reality as the fixed-point set of an involution;
+- a generic equivariant-vector-field preservation theorem;
+- diagonal multiplier reality equivariance;
+- distinct state and multiplier/test carriers;
+- the exact signed translation–multiplier commutator;
+- the division-free centred five-source probe identity;
+- a maximal common viscosity-core theorem under exact owner reconstructions;
+- physical-triad Plücker/Gram geometry;
+- a reproducible finite certificate pipeline.
+
+These are exact mathematical lemmas. They do not supply the full nonlinear vector-field equivariance, finite ODE theorem, physical source estimates or strict coefficient below one.
+
+## Preconditions, postconditions and invariants
+
+The normalized contract is in [requirements.md](requirements.md) and formalized by `NSTriadKNLuoClayPrePostInvariantContractRound23Exact.agda`.
+
+Every load-bearing physical estimate must preserve:
+
+```text
+uniformity in shell q, shell cutoff Q, Galerkin cutoff N and finite T*;
+critical Navier–Stokes scaling;
+full source exhaustiveness;
+unique tax ownership;
+no uncontrolled target critical norm, BKM norm or Serrin norm on the right;
+no assumed alignment, small data or finite residence;
+absorption before weak limits;
+strict total viscosity coefficient below one.
+```
 
 ## ZKP orchestration frame
 
-- **O — Organization:** `DASHI/Physics/Closure`, the paper-facing theorem interfaces, validation scripts and this documentation surface.
-- **R — Requirement:** Fefferman periodic alternative (B), including the pressure-periodicity erratum.
-- **C — Code:** Round 22 finite Galerkin and defect modules; Round 23 literal contract, adapter and Galilean reduction; Round 24 claimed-paper corpus and normalized ladder; Round 25 literal carrier certificate and physical support closure; Round 26 exact finite Galerkin invariants, physical signed-shell assembly and tax ownership.
-- **S — State:** theorem type, terminal reducers, L4 physical support, conjugate transversality, physical triad cancellation, physical source-coordinate bridge and finite tax-partition algebra implemented; the physical theorem remains uninhabited.
-- **L — Lattice:** finite PDE → signed critical ledger → duplicate-free physical taxes → strict absorption → nested limits → restart → smooth global witness → literal Clay witness.
-- **P — Proposal:** work only on physical producers that move a clause from `physicalProducerOpen` to `checkedExact`/`checkedReducer`, or source audits that rigorously falsify a proposed producer.
-- **G — Goal:** inhabit the literal periodic Fefferman statement for every positive viscosity and every smooth divergence-free periodic datum.
-- **F — Gap function:** count of load-bearing open producers, weighted first by scaling correctness, then cutoff uniformity, then strict viscosity margin.
+- **O — Organization:** `DASHI/Physics/Closure`, paper-facing interfaces, validation scripts and this documentation surface.
+- **R — Requirement:** literal Fefferman periodic alternative B.
+- **C — Code:** Rounds 23–27 target, corpus, physical support, signed ledger, projectors, operators, geometry and tax accounting.
+- **S — State:** exact target and extensive finite algebra are implemented; the cutoff-uniform physical absorption theorem is uninhabited.
+- **L — Lattice:** finite flow → physical shell ledger → unique source taxes → strict absorption → limits → Serrin continuation → smooth global witness.
+- **P — Proposal:** advance only physical producers, exact supporting lemmas, or quantified falsifications.
+- **G — Goal:** inhabit the literal periodic theorem for every positive viscosity and smooth divergence-free periodic datum.
+- **F — Gap function:** open physical producers weighted first by scaling correctness, cutoff uniformity and strict viscosity margin.
 
-## Updated plan and roadmap
+## Active, non-overlapping lanes
 
-The target theorem is literal, mean zero is a reduction rather than a Clay precondition, physical support is tied to the actual cutoff `Z³` carrier, and tax ownership is explicit.
+1. Full nonlinear Galerkin reality/transversality equivariance.
+2. Finite normed local Lipschitz, Picard–Lindelöf, energy identity and global finite existence.
+3. Physical time-dependent filtered-vorticity shell balance using the sharp projectors.
+4. Signed low-advection multiplier/operator estimate and first uniform class tax.
+5. Periodic principal-value strain kernel and Calderón–Zygmund bounds.
+6. Division-free directional high–high estimate and defect evolution.
+7. Positive-variation and bad-excursion amplitude budgets.
+8. Lower interaction, far-field, commutator and cutoff-tail taxes.
+9. Physical owner allocations and strict maximal-core viscosity margin.
+10. Shell/Galerkin compactness, critical-to-Serrin continuation, pressure and Galilean recovery.
+11. Claimed-paper discovery and falsification mapped to lanes 1–10.
+12. Documentation and verification only after substantive mathematical changes.
 
-- Frame all further work around the literal periodic Fefferman statement.
-- Search broadly, including unconventional, unreviewed and incorrect papers.
-- Preserve valid local lemmas even when a terminal proof fails.
-- Keep exact signed identities separate from positive-production taxes.
-- Assign every taxable atom and every remainder exactly once.
-- Keep one non-overlapping lane for each open physical producer.
-- Do not assign work to terminal composition, nested-limit logic or restart contradiction unless a concrete defect is found; those lanes are held.
-- Verify every returned lane against scaling, cutoff uniformity, source exhaustiveness, non-circularity, duplicate ownership and viscosity budget.
-- Refine only when at least one load-bearing clause changes state, or when a proposed route is falsified by a quantified counterexample.
-
-The disjoint development lanes are now:
-
-1. Finite normed Galerkin Picard–Lindelöf and global finite existence.
-2. Physical derivation of the time-dependent signed critical shell ledger from the literal Galerkin solution.
-3. Low-advection signed multiplier/operator estimate and first cutoff-independent class tax.
-4. Hysteretic positive-variation PDE estimate and bad-excursion amplitude budget.
-5. Dissipation-wavenumber high-mode condition and low-frequency critical reservoir.
-6. Periodic principal-value kernel, sphere integration and Calderón–Zygmund estimates.
-7. Continuum filter-increment-to-diffusion coercivity and division-free high–high tax.
-8. Uniform residual-tail ratios and strict combined coefficient.
-9. Analytic shell/Galerkin convergence, local critical restart, pressure recovery and Galilean invariance.
-10. Claimed-paper discovery, source preservation, falsification and crosswalk to lanes 1–9.
-11. Documentation, diagrams, change control and verification after substantive lanes return.
+Terminal composition is held unless a concrete defect is found.
 
 ## Architecture and verification
 
@@ -99,9 +127,24 @@ The disjoint development lanes are now:
 - [Verification and quality gates](verification.md)
 - [Governance and standards alignment](governance.md)
 - [Claimed-paper corpus and audits](paper-corpus/README.md)
-- [Round 25 physical carrier and support closure](physical-carrier-support-round25.md)
+- [Round 25 physical carrier and support](physical-carrier-support-round25.md)
 - [Round 26 finite Galerkin and critical-tax ledger](galerkin-critical-ledger-round26.md)
+- [Round 27 projector/operator/core tranche](projector-operator-core-round27.md)
 
 ## Scope boundary
 
-Round 26 does not claim global regularity, a completed finite normed L3 ODE instance, physical time-dependent shell balances, classwise cutoff-uniform nonlinear taxes, a strict viscosity margin, successful Agda kernel validation, successful GitHub Actions, publication readiness or Clay acceptance. It proves finite algebra and accounting needed to make later analytic failures localizable: reality/transversality, physical triad cancellation, signed critical recomposition, physical source-coordinate forcing, finite commutator increments, division-free HH normalization, positive-variation entry charge, named remainders and duplicate-free tax ownership.
+Round 27 does not claim:
+
+- global regularity;
+- a completed finite Picard–Lindelöf instance;
+- a physical time-dependent shell balance;
+- smooth Littlewood–Paley bounds;
+- any cutoff-uniform nonlinear tax;
+- the periodic singular-kernel estimate;
+- physical viscosity allocations;
+- a strict total coefficient below one;
+- successful shell/Galerkin limits;
+- successful Agda kernel validation or GitHub Actions;
+- publication readiness or Clay acceptance.
+
+The current highest-value target remains `UniformCriticalNonlinearityAbsorption`, with a cutoff-independent coefficient strictly below one.
