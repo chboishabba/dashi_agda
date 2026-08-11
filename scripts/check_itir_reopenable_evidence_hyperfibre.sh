@@ -10,6 +10,7 @@ files=(
   DASHI/Cognition/PNF/ParserArgumentSupportGluing.agda
   DASHI/Cognition/PNF/EvidenceHorizon369.agda
   DASHI/Cognition/PNF/LexicalRetrievalProjection.agda
+  DASHI/Cognition/PNF/NumericTokenStorageReference.agda
   DASHI/Cognition/PNF/SemanticSamplingLookupGeometry.agda
   DASHI/Cognition/PNF/TemporalRoleWorldAlignment.agda
   DASHI/Cognition/PNF/IdentityProofUtility.agda
@@ -46,6 +47,9 @@ required_markers=(
   'h9PresenceAloneCannotPromoteWorldIdentity'
   'regexHasNoSemanticAuthority'
   'outputDoesNotExceedInput'
+  'decodeEncode'
+  'multiscaleStorageJoinSplitExact'
+  'numberTheoryAloneDoesNotSelectPhysicalLayout'
   'queryCommutationIsClassicalNyquistTheoremIsFalse'
   'neighbourhoodProposalCannotAdmitIdentity'
   'externalCandidateAloneCannotPromoteWorldIdentity'
