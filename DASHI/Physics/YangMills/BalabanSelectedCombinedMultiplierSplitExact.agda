@@ -40,15 +40,14 @@ module DASHI.Physics.YangMills.BalabanSelectedCombinedMultiplierSplitExact where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _-_; _*_)
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using (pair)
 import DASHI.Physics.YangMills.BalabanPath4PhysicalFibreMatchExact as Indices
-import DASHI.Physics.YangMills.BalabanPath4AxisAverageExact as Path4
 import DASHI.Physics.YangMills.BalabanPath4GlobalAverageExact as GlobalAverage
-import DASHI.Physics.YangMills.BalabanConfiguredSide4PeriodicReindexingExact as Reindex
 import DASHI.Physics.YangMills.BalabanP33PeriodicFourDimensionalHodgeIdentityExact as Periodic
+import DASHI.Physics.YangMills.BalabanP33PhysicalPeriodicOpenReferenceBridgeExact as Bridge
 import DASHI.Physics.YangMills.BalabanPath4PhysicalVarianceDecompositionExact as Variance
 import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Coordinates
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundBlockAverageConstraintMatrixExact as Average
@@ -81,21 +80,24 @@ baseSite =
   pair (pair Indices.index0 Indices.index0)
     (pair Indices.index0 Indices.index0)
 
-periodicSumEqualsConfiguredSiteSum : ∀ field →
-  Periodic.sumSites field ≡ Reindex.siteSum4 field
-periodicSumEqualsConfiguredSiteSum field =
-  trans refl (sym (Reindex.siteSumAsCoordinates field))
-
 scalarMeanZeroFromGlobalMeanZero :
   ∀ field → Variance.GlobalMeanZero4 field →
   Mean.scalarMean field ≡ 0ℚ
 scalarMeanZeroFromGlobalMeanZero field meanZero =
   trans
     (cong (GlobalAverage.oneTwoFiftySix *_)
-      (periodicSumEqualsConfiguredSiteSum field))
+      (Bridge.sumSitesMatchesGlobalSiteSum field))
     (trans
-      (sym (GlobalAverage.average0123EqualsGlobalMean field baseSite))
+      (symGlobalMean field)
       (meanZero baseSite))
+  where
+  symGlobalMean : ∀ selectedField →
+    GlobalAverage.oneTwoFiftySix
+      * DASHI.Physics.YangMills.BalabanPhysicalAxisPartitionExact.globalSiteSum selectedField
+    ≡ GlobalAverage.average0123 selectedField baseSite
+  symGlobalMean selectedField =
+    Relation.Binary.PropositionalEquality.sym
+      (GlobalAverage.average0123EqualsGlobalMean selectedField baseSite)
 
 reducedCoordinateMeanZero :
   ∀ multiplier → FlatFloor.FlatGaugeReducedMultiplier multiplier →
