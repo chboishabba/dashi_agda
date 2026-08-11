@@ -7,6 +7,7 @@ open import Data.Empty using (⊥)
 
 import DASHI.Cognition.PNF.DemandResolutionState as Demand
 import DASHI.Cognition.PNF.ReferenceModeOutcomes as Reference
+import DASHI.Cognition.PNF.SparseFibredFrontier as Sparse
 
 ------------------------------------------------------------------------
 -- Inductive preference is a ranking over an unresolved candidate fibre.
@@ -46,7 +47,7 @@ inductivePreferenceCannotProjectScalarIdentity ()
 existingDeductivePermission :
   Reference.ScalarIdentityPermission
     Reference.singularReference
-    DASHI.Cognition.PNF.SparseFibredFrontier.oneWitness
+    Sparse.oneWitness
 existingDeductivePermission =
   Reference.singularUniqueMayProjectScalarIdentity
 
