@@ -24,7 +24,7 @@ module DASHI.Physics.YangMills.BalabanFiniteLinearEndomorphismMatrixExact where
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Rational.Base using (ℚ)
-open import Relation.Binary.PropositionalEquality using (trans)
+open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanConstructiveRationalMatrixInverseExact as Matrix
@@ -105,21 +105,11 @@ endomorphismInjectiveImpliesMatrixInjective endomorphism injective left right eq
   injective left right
     (λ coordinate →
       trans
-        (symExact left coordinate)
-        (trans (equal coordinate) (exactRight right coordinate)))
+        (sym (endomorphismMatrixActsExactly endomorphism left coordinate))
+        (trans
+          (equal coordinate)
+          (endomorphismMatrixActsExactly endomorphism right coordinate)))
     row
-  where
-    symExact : ∀ vector coordinate →
-      operator endomorphism vector coordinate
-      ≡ Matrix.applyMatrix _ (endomorphismMatrix endomorphism) vector coordinate
-    symExact vector coordinate =
-      Relation.Binary.PropositionalEquality.sym
-        (endomorphismMatrixActsExactly endomorphism vector coordinate)
-
-    exactRight : ∀ vector coordinate →
-      Matrix.applyMatrix _ (endomorphismMatrix endomorphism) vector coordinate
-      ≡ operator endomorphism vector coordinate
-    exactRight = endomorphismMatrixActsExactly endomorphism
 
 finiteLinearEndomorphismMatrixLevel : ProofLevel
 finiteLinearEndomorphismMatrixLevel = machineChecked
