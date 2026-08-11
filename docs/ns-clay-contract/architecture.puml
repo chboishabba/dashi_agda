@@ -2,7 +2,7 @@
 ' C4-style component view without a remote include.
 ' Parent document: README.md
 
-title DASHI periodic Navier–Stokes Clay contract and paper-audit route
+title DASHI periodic Navier–Stokes Clay contract and physical support route
 
 skinparam componentStyle rectangle
 skinparam wrapWidth 220
@@ -17,13 +17,16 @@ package "Official requirement boundary" {
 
 package "Claim corpus and falsification" {
   component "Broad claimed-paper corpus\npeer-reviewed, arXiv, repositories, web" as Corpus <<Source registry>>
-  component "Exact countermodels\nadditive floor, horizon quantifier, time change" as NoGo <<Checked exact>>
+  component "Exact countermodels\nadditive floor, horizon quantifier, cascade and scope" as NoGo <<Checked exact>>
   component "Claim-family to first physical lemma crosswalk" as Crosswalk <<Checked reducer>>
 }
 
-package "Finite analytic system" {
-  component "Finite Galerkin PDE\nfiltered vorticity and enstrophy" as Galerkin <<Component>>
-  component "Directional defect evolution\npair-input-frequency damping" as Defect <<Component>>
+package "Finite physical system" {
+  component "Literal cutoff Z3 carrier\ncomplete duplicate-free output fibres" as Carrier <<Checked exact>>
+  component "Physical HH/LH/HL/CC support\nCom separated, no residual" as Support <<Checked exact>>
+  component "Finite Galerkin ODE existence\nand constraint propagation" as FiniteODE <<Open producer>>
+  component "Filtered vorticity and enstrophy" as Galerkin <<Checked exact algebra>>
+  component "Pair-input-frequency damping" as Defect <<Checked exact algebra>>
   component "Five-source physical taxation" as Tax <<Open producer>>
   component "Strict viscosity certificate" as Margin <<Open producer>>
 }
@@ -43,7 +46,7 @@ package "Submission adaptation system" {
 }
 
 package "Assurance system" {
-  component "Round 24 cumulative Agda root" as AgdaRoot <<Verification>>
+  component "Round 25 cumulative Agda root" as AgdaRoot <<Verification>>
   component "Static no-hole, source and link checker" as Checker <<Verification>>
   component "Change, risk and traceability record" as Governance <<Governance>>
 }
@@ -54,6 +57,10 @@ NoGo --> Crosswalk : reject or narrow false routes
 Crosswalk --> Tax : assign physical producer lane
 Crosswalk --> Margin : assign strict-budget lane
 
+Carrier --> Support : actual resonant output fibres
+Carrier --> FiniteODE : finite coefficient carrier
+FiniteODE --> Galerkin : time-dependent finite solution
+Support --> Galerkin : exact five-source partition
 Galerkin --> Defect : actual Fourier cells
 Defect --> Tax : five named source terms
 Tax --> Margin : explicit viscosity allocations
@@ -67,11 +74,13 @@ Adapter --> Galilean : centered literal witness
 Galilean --> Literal : arbitrary periodic datum
 Literal --> ClayTarget : inhabits exact theorem type
 
-AgdaRoot ..> Corpus : imports
-AgdaRoot ..> NoGo : imports
-AgdaRoot ..> Crosswalk : imports
-AgdaRoot ..> Galerkin : imports through Round 23
-AgdaRoot ..> Defect : imports through Round 23
+AgdaRoot ..> Corpus : imports through Round 24
+AgdaRoot ..> NoGo : imports through Round 24
+AgdaRoot ..> Crosswalk : imports through Round 24
+AgdaRoot ..> Carrier : imports
+AgdaRoot ..> Support : imports
+AgdaRoot ..> Galerkin : imports
+AgdaRoot ..> Defect : imports
 AgdaRoot ..> Gronwall : imports through Round 23
 AgdaRoot ..> Limits : imports through Round 23
 AgdaRoot ..> Restart : imports through Round 23
@@ -88,9 +97,15 @@ The search is not declared exhaustive.
 Claimed conclusion is never proof authority.
 end note
 
+note right of Support
+L4 is checked exact.
+Every actual triad is classified uniquely;
+no generic remainder constructor exists.
+end note
+
 note right of Tax
 Open: uniform physical bounds in q, Q and N.
-No generic remainder is permitted.
+Support exhaustiveness does not imply small coefficients.
 end note
 
 note right of Galilean
