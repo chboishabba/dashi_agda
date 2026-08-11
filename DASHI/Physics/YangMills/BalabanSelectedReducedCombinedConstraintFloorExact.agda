@@ -64,6 +64,7 @@ open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; _+_; _-_; _*_; _≤_; -_; _/_)
 import Data.Rational.Properties as ℚP
+open ℚP using (_≤?_)
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using
   (cong; cong₂; subst; sym; trans)
@@ -75,20 +76,20 @@ open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreCarrier as Block
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
 import DASHI.Physics.YangMills.BalabanFiniteSumFubiniExact as Fubini
+import DASHI.Physics.YangMills.BalabanConstructiveRationalMatrixInverseExact as Matrix
 import DASHI.Physics.YangMills.BalabanFiniteRectangularRationalExact as Rect
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
+import DASHI.Physics.YangMills.BalabanP33PhysicalCoordinateBasisExact as Basis
 import DASHI.Physics.YangMills.BalabanPath4AxisAverageExact as Path4
 import DASHI.Physics.YangMills.BalabanPath4GeneratedLDLCertificate as LDL
 import DASHI.Physics.YangMills.BalabanP33PeriodicFourDimensionalHodgeIdentityExact as Periodic
 import DASHI.Physics.YangMills.BalabanP33PhysicalPeriodicOpenReferenceBridgeExact as Bridge
-import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Coordinates
 import DASHI.Physics.YangMills.BalabanP33FiniteKKTAdmissibleProjectorExact as StateCarrier
 import DASHI.Physics.YangMills.BalabanP33PhysicalRationalWilsonPlaquetteJetExact as Physical
 import DASHI.Physics.YangMills.BalabanP33PhysicalBackgroundGaugeParameterizedYoungExact as Relaxed
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundBlockAverageConstraintMatrixExact as Average
 import DASHI.Physics.YangMills.BalabanSelectedBlockAverageSectionExact as AverageSection
 import DASHI.Physics.YangMills.BalabanSelectedBlockAverageRowCarrierExact as AverageRows
-import DASHI.Physics.YangMills.BalabanSelectedBackgroundGaugeConstraintMatrixExact as GaugeMatrix
 import DASHI.Physics.YangMills.BalabanSelectedFlatGaugeReducedFloorExact as FlatFloor
 import DASHI.Physics.YangMills.BalabanSelectedFlatGaugeAdjointGramFloorExact as FlatAdjoint
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundGaugeAdjointDefectExact as Defect
@@ -103,14 +104,7 @@ ReducedMultiplier : Set
 ReducedMultiplier = Split.SelectedReducedCombinedMultiplier
 
 averageRows : List Average.SelectedBlockAverageRow4
-averageRows =
-  DASHI.Physics.YangMills.BalabanP33PhysicalCoordinateBasisExact.elements
-    AverageRows.selectedBlockAverageRowFiniteSelector
-
-gaugeRows : List FlatAdjoint.GaugeMultiplier
--- The previous type is intentionally not used as a carrier: a gauge row is an
--- index, not a multiplier.  Keep the literal row list below via Defect.gaugeRows.
-gaugeRows = []
+averageRows = Basis.elements AverageRows.selectedBlockAverageRowFiniteSelector
 
 ------------------------------------------------------------------------
 -- Reduced multiplier norm and the three pieces of the selected adjoint.
@@ -184,7 +178,8 @@ gaugeTaggedTransposePart :
   StateCarrier.State → ℚ
 gaugeTaggedTransposePart background selected stateCoordinate =
   Sums.sumRational
-    (map Combined.gaugeConstraintRow Defect.gaugeRows)
+    (map Combined.gaugeConstraintRow
+      (Basis.elements RawRows.selectedGaugeRowFiniteSelector))
     (λ row →
       Rect.transposeRectangular
         (Combined.selectedBackgroundLinearizedConstraintMatrix background)
@@ -213,7 +208,8 @@ gaugeTaggedTransposePartExact :
 gaugeTaggedTransposePartExact background selected stateCoordinate =
   trans
     (Fubini.sumRationalMap
-      Combined.gaugeConstraintRow Defect.gaugeRows
+      Combined.gaugeConstraintRow
+      (Basis.elements RawRows.selectedGaugeRowFiniteSelector)
       (λ row →
         Rect.transposeRectangular
           (Combined.selectedBackgroundLinearizedConstraintMatrix background)
@@ -229,7 +225,8 @@ selectedReducedCombinedAdjointSameObject background selected stateCoordinate =
   trans
     (Fubini.sumRationalAppend
       (map Combined.averageConstraintRow averageRows)
-      (map Combined.gaugeConstraintRow Defect.gaugeRows)
+      (map Combined.gaugeConstraintRow
+        (Basis.elements RawRows.selectedGaugeRowFiniteSelector))
       (λ row →
         Rect.transposeRectangular
           (Combined.selectedBackgroundLinearizedConstraintMatrix background)
@@ -379,7 +376,7 @@ averageAdjointNormExact selected =
 oneSixteenthBelowSiteCount :
   LDL.oneSixteenth ≤ AverageSection.siteCount
 oneSixteenthBelowSiteCount =
-  toWitness {a? = LDL.oneSixteenth ℚP.≤? AverageSection.siteCount} _
+  toWitness {a? = LDL.oneSixteenth ≤? AverageSection.siteCount} _
 
 averageMultiplierNormNonnegative : ∀ selected →
   0ℚ ≤ averageMultiplierNormSq selected
@@ -433,14 +430,14 @@ averageAdjointOneSixteenthFloor selected =
 
 finiteNormSqAddExpansion :
   ∀ {Index : Set}
-    (carrier : DASHI.Physics.YangMills.BalabanConstructiveRationalMatrixInverseExact.FiniteRationalCoordinates Index)
+    (carrier : Matrix.FiniteRationalCoordinates Index)
     left right →
   Rect.finiteNormSq carrier (Rect.vectorAdd left right)
   ≡ Rect.finiteNormSq carrier left + Rect.finiteNormSq carrier right
     + (+ 2 / 1) * Rect.finiteDot carrier left right
 finiteNormSqAddExpansion carrier left right =
   let
-    values = DASHI.Physics.YangMills.BalabanConstructiveRationalMatrixInverseExact.coordinates carrier
+    values = Matrix.coordinates carrier
   in
   trans
     (Sums.sumRationalCong values _ _
@@ -562,7 +559,7 @@ gaugeNormBelowCombinedNorm selected =
 selectedDefectCoefficientNonnegative :
   0ℚ ≤ Defect.selectedAdjointDefectCoefficient
 selectedDefectCoefficientNonnegative =
-  ℚP.nonNegative⁻¹ Defect.selectedAdjointDefectCoefficient
+  toWitness {a? = 0ℚ ≤? Defect.selectedAdjointDefectCoefficient} _
 
 selectedCombinedGaugeDefectUpper :
   ∀ background → Relaxed.RelaxedInverseLinkRadius background →
@@ -576,13 +573,12 @@ selectedCombinedGaugeDefectUpper background radius selected =
     gauge = Split.gaugeMultiplier selected
     raw = Defect.gaugeAdjointDefectSelectedRadiusBound background radius gauge
 
-    gaugeNormExact = GaugeReduced.gaugeMultiplierRowNormSqExact gauge
     toGaugeNorm =
       subst
         (λ upper →
           Defect.gaugeAdjointDefectNormSq background gauge
           ≤ Defect.selectedAdjointDefectCoefficient * upper)
-        gaugeNormExact raw
+        (GaugeReduced.gaugeMultiplierRowNormSqExact gauge) raw
 
     extend = Norm.scaleNonnegative Defect.selectedAdjointDefectCoefficient
       selectedDefectCoefficientNonnegative
