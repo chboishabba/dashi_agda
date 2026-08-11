@@ -6,7 +6,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoBadCoherenceWeightedDefectTransferExact
 -- Authors: Peter Constantin; Charles Fefferman.
 -- Title: "Direction of Vorticity and the Problem of Global Regularity for
 -- the Navier--Stokes Equations".
--- DOI: 10.1512/iumj.1993.42.42014.
+-- DOI: 10.1512/iumj.1993.42.42034.
 --
 -- Author: Zoran Grujić.
 -- Title: "A Geometric Measure-Type Regularity Criterion for Solutions to the
