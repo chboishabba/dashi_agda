@@ -39,7 +39,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _-_; -_; _≤_)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Binary.PropositionalEquality using (cong₂; subst; sym; trans)
 
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
 import DASHI.Physics.Closure.NSTriadKNNineOwnerDualNoGoRound39Exact as Dual
@@ -94,15 +94,27 @@ sumSavingNonnegative (cell ∷ rest) =
 batchPressureConservation : ∀ cells →
   sumNewPressure cells + sumSaving cells ≡ sumOldPressure cells
 batchPressureConservation [] = refl
-batchPressureConservation (cell ∷ rest)
-  rewrite batchPressureConservation rest
-        | newPlusSavingEqualsOld cell =
-  solve
-    ( oldPressure cell
-    ∷ sumOldPressure rest
-    ∷ sumNewPressure rest
-    ∷ sumSaving rest
-    ∷ [])
+batchPressureConservation (cell ∷ rest) =
+  let
+    regroup :
+      (newPressure cell + sumNewPressure rest)
+      + (saving cell + sumSaving rest)
+      ≡
+      (newPressure cell + saving cell)
+      + (sumNewPressure rest + sumSaving rest)
+    regroup = solve
+      ( newPressure cell ∷ saving cell
+      ∷ sumNewPressure rest ∷ sumSaving rest ∷ [])
+
+    combine :
+      (newPressure cell + saving cell)
+      + (sumNewPressure rest + sumSaving rest)
+      ≡ oldPressure cell + sumOldPressure rest
+    combine = cong₂ _+_
+      (newPlusSavingEqualsOld cell)
+      (batchPressureConservation rest)
+  in
+  trans regroup combine
 
 batchNewPressureCannotExceedOld : ∀ cells →
   sumNewPressure cells ≤ sumOldPressure cells
