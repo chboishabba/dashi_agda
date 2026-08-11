@@ -25,8 +25,10 @@ for file in "${files[@]}"; do
   test -f "$file" || { echo "missing required file: $file" >&2; exit 1; }
 done
 
-# Fail closed on the trust escapes used by the other DASHI validation tranches.
-if grep -nE '(postulate|\{!|!\}|\?($|[^A-Za-z0-9_])|TERMINATING|NON_TERMINATING|NO_POSITIVITY_CHECK|--allow-unsolved-metas|--type-in-type|--with-K)' "${files[@]}"; then
+# Fail closed on explicit trust escapes / hole blocks.  Bare question marks are
+# left to Agda itself because '?' is ordinary prose in comments and a grep-only
+# check cannot distinguish those safely.
+if grep -nE '(postulate|\{!|!\}|TERMINATING|NON_TERMINATING|NO_POSITIVITY_CHECK|--allow-unsolved-metas|--type-in-type|--with-K)' "${files[@]}"; then
   echo "unsafe or unfinished Agda construct found in ITIR reopenable-evidence tranche" >&2
   exit 1
 fi
