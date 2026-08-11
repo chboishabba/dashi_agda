@@ -240,38 +240,38 @@ selectedReducedCombinedAdjointSameObject background selected stateCoordinate =
 -- Periodic gradient has exactly zero block average.
 ------------------------------------------------------------------------
 
-sumSitesForwardDifferenceZero : ∀ axis field →
-  Periodic.sumSites (Periodic.forwardDifference axis field) ≡ 0ℚ
-sumSitesForwardDifferenceZero axis field =
+sumSitesForwardDifferenceZero : ∀ axis scalarField →
+  Periodic.sumSites (Periodic.forwardDifference axis scalarField) ≡ 0ℚ
+sumSitesForwardDifferenceZero axis scalarField =
   trans
     (Periodic.sumSitesSubtract
-      (λ site → field (Periodic.shiftForward axis site)) field)
+      (λ site → scalarField (Periodic.shiftForward axis site)) scalarField)
     (trans
-      (cong (_- Periodic.sumSites field)
-        (Periodic.sumSitesForwardInvariant field axis))
-      (ℚRing.solve-∀ (Periodic.sumSites field)))
+      (cong (_- Periodic.sumSites scalarField)
+        (Periodic.sumSitesForwardInvariant scalarField axis))
+      (ℚRing.solve-∀ (Periodic.sumSites scalarField)))
 
-sumSitesNegativeForwardDifferenceZero : ∀ axis field →
+sumSitesNegativeForwardDifferenceZero : ∀ axis scalarField →
   Periodic.sumSites
-    (λ site → - Periodic.forwardDifference axis field site)
+    (λ site → - Periodic.forwardDifference axis scalarField site)
   ≡ 0ℚ
-sumSitesNegativeForwardDifferenceZero axis field =
+sumSitesNegativeForwardDifferenceZero axis scalarField =
   trans
-    (Periodic.sumSitesNeg (Periodic.forwardDifference axis field))
+    (Periodic.sumSitesNeg (Periodic.forwardDifference axis scalarField))
     (trans
-      (cong -_ (sumSitesForwardDifferenceZero axis field))
+      (cong -_ (sumSitesForwardDifferenceZero axis scalarField))
       (ℚRing.solve []))
 
-physicalSiteSumNegativeForwardDifferenceZero : ∀ axis field →
+physicalSiteSumNegativeForwardDifferenceZero : ∀ axis scalarField →
   Sums.sumRational (Block.physicalBlockSites Path4.side4)
-    (λ site → - Periodic.forwardDifference axis field site)
+    (λ site → - Periodic.forwardDifference axis scalarField site)
   ≡ 0ℚ
-physicalSiteSumNegativeForwardDifferenceZero axis field =
+physicalSiteSumNegativeForwardDifferenceZero axis scalarField =
   trans
     (sym
       (Bridge.sumSitesMatchesGlobalSiteSum
-        (λ site → - Periodic.forwardDifference axis field site)))
-    (sumSitesNegativeForwardDifferenceZero axis field)
+        (λ site → - Periodic.forwardDifference axis scalarField site)))
+    (sumSitesNegativeForwardDifferenceZero axis scalarField)
 
 flatGaugeAdjointBlockAverageZero : ∀ selected row →
   Average.selectedBackgroundBlockAverageConstraintApply
@@ -548,13 +548,21 @@ backgroundCombinedSplits background selected stateCoordinate =
 gaugeNormBelowCombinedNorm : ∀ selected →
   gaugeMultiplierNormSq selected ≤ reducedCombinedMultiplierNormSq selected
 gaugeNormBelowCombinedNorm selected =
+  let
+    gauge = gaugeMultiplierNormSq selected
+    raw : gauge + 0ℚ ≤ gauge + averageMultiplierNormSq selected
+    raw = ℚP.+-monoʳ-≤ gauge (averageMultiplierNormNonnegative selected)
+    normalized : gauge ≤ gauge + averageMultiplierNormSq selected
+    normalized =
+      subst
+        (λ lower → lower ≤ gauge + averageMultiplierNormSq selected)
+        (ℚP.+-identityʳ gauge)
+        raw
+  in
   subst
-    (λ upper → gaugeMultiplierNormSq selected ≤ upper)
-    (ℚP.+-comm
-      (gaugeMultiplierNormSq selected) (averageMultiplierNormSq selected))
-    (ℚP.+-monoʳ-≤
-      (gaugeMultiplierNormSq selected)
-      (averageMultiplierNormNonnegative selected))
+    (λ upper → gauge ≤ upper)
+    (ℚP.+-comm gauge (averageMultiplierNormSq selected))
+    normalized
 
 selectedDefectCoefficientNonnegative :
   0ℚ ≤ Defect.selectedAdjointDefectCoefficient
