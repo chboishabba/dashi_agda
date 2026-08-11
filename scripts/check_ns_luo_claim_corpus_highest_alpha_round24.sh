@@ -1,0 +1,176 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$root"
+export AGDA_JOBS="${AGDA_JOBS:-1}"
+
+bash scripts/check_ns_luo_clay_contract_round23.sh
+
+files=(
+  DASHI/Physics/Closure/NSTriadKNLuoClaimedSolutionCorpusRound24Exact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoAbuGhuwalehAdditiveFloorNoGoExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoCamlinTemporalLiftNoGoExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoFiniteCascadeSpeedFluxNoGoExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoRestrictedClassDoesNotYieldClayBExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoClaimRouteCrosswalkRound24Exact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoHighestAlphaClayLemmaLadderRound24Exact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoClaimCorpusHighestAlphaRound24Validation.agda
+  DASHI/Papers/NavierStokes/ClaimCorpusHighestAlphaRound24.agda
+  DASHI/Papers/NavierStokes/CurrentTheoremInterfaceRound24.agda
+)
+
+docs=(
+  docs/ns-clay-contract/README.md
+  docs/ns-clay-contract/architecture.puml
+  docs/ns-clay-contract/paper-corpus/README.md
+  docs/ns-clay-contract/paper-corpus/audit-matrix.md
+  docs/ns-clay-contract/paper-corpus/highest-alpha-lemma-ladder.md
+  docs/ns-clay-contract/paper-corpus/verification.md
+)
+
+for file in "${files[@]}" "${docs[@]}"; do
+  test -f "$file"
+done
+
+audit_targets=("${files[@]}" "${docs[@]}")
+
+if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|\{!|!\}|TERMINATING|NO_TERMINATION_CHECK|allow-unsolved-metas|--no-positivity-check|--no-termination-check|NON_COVERING|--type-in-type|trustMe|primTrustMe|TODO|FIXME' "${audit_targets[@]}"; then
+  echo "round twenty-four contains a hole, unsafe escape, trust primitive, or placeholder" >&2
+  exit 1
+fi
+
+corpus=DASHI/Physics/Closure/NSTriadKNLuoClaimedSolutionCorpusRound24Exact.agda
+source_markers=(
+  '10.5281/zenodo.19559087'
+  '10.20944/preprints202603.1889.v1'
+  '10.14293/PR2199.003375.v1'
+  '10.63968/post-bio-ai-epistemics.v1n2.012'
+  '10.5281/zenodo.21194906'
+  '10.5281/zenodo.19632058'
+  '10.2139/ssrn.6557718'
+  '10.48550/arXiv.2606.27560'
+  '2605.01875'
+  '2605.01873'
+  '2601.15685'
+  '10.3390/math14091410'
+  '10.20944/preprints202603.1591.v1'
+  '10.20944/preprints202604.2068.v1'
+  'global-regularity-for-the-3d-incompressible-navier-stokes-equations-via-emergent-nonlinear-vorticity-dissipation'
+  'NEMGRO'
+  '18963533'
+  '10.31224/5814'
+  '10.5281/zenodo.19601371'
+  '10.5281/zenodo.21263877'
+  '10.5281/zenodo.19180827'
+)
+for marker in "${source_markers[@]}"; do
+  grep -q "$marker" "$corpus"
+done
+grep -q 'claimedSolutionCorpusRound24' "$corpus"
+grep -q 'allCorpusSourcesAreProofAuthorities = false' "$corpus"
+grep -q 'corpusSearchIsDeclaredExhaustive = false' "$corpus"
+
+abu=DASHI/Physics/Closure/NSTriadKNLuoAbuGhuwalehAdditiveFloorNoGoExact.agda
+grep -q 'counterDissipativeStep' "$abu"
+grep -q 'counterUpperComparison' "$abu"
+grep -q 'pureStrictDecayConclusionFalse' "$abu"
+grep -q 'canonicalAdditiveFloorNoGoWitness' "$abu"
+
+camlin=DASHI/Physics/Closure/NSTriadKNLuoCamlinTemporalLiftNoGoExact.agda
+grep -q 'finiteHorizonBoundsExist' "$camlin"
+grep -q 'finiteHorizonFamilyDoesNotYieldGlobalUniformBound' "$camlin"
+grep -q 'bkmDivergenceCannotBeRemovedBySuppliedExactTimeChange' "$camlin"
+grep -q 'bkmFinitenessCannotBeCreatedBySuppliedExactTimeChange' "$camlin"
+grep -q 'superlinearDriftGapIdentityAtCoefficientPlusOne' "$camlin"
+grep -q 'superlinearDriftGapNonnegativeAtCoefficientPlusOne' "$camlin"
+grep -q 'concreteCamlinTimeMapAndBKMEqualityProved' "$camlin"
+grep -q 'unrestrictedStrictDriftPositivityProved' "$camlin"
+
+cascade=DASHI/Physics/Closure/NSTriadKNLuoFiniteCascadeSpeedFluxNoGoExact.agda
+grep -q 'reciprocalCascadeIdentity' "$cascade"
+grep -q 'unitFluxAllowedByCascadeBound' "$cascade"
+grep -q 'unitFluxIsNotStrictlyBelowItsBound' "$cascade"
+grep -q 'canonicalFiniteCascadeSpeedNoGoWitness' "$cascade"
+
+restricted=DASHI/Physics/Closure/NSTriadKNLuoRestrictedClassDoesNotYieldClayBExact.agda
+grep -q 'restrictedSymmetryTheoremHolds' "$restricted"
+grep -q 'restrictedSymmetryDoesNotLogicallyYieldUniversalTheorem' "$restricted"
+grep -q 'canonicalRestrictedClassScopeWitness' "$restricted"
+
+crosswalk=DASHI/Physics/Closure/NSTriadKNLuoClaimRouteCrosswalkRound24Exact.agda
+grep -q 'firstLoadBearingNode' "$crosswalk"
+grep -q 'abuClaimEntersAtStrictMargin' "$crosswalk"
+grep -q 'abuPacketClaimEntersAtUniformFiveSourceTax' "$crosswalk"
+grep -q 'camlinClaimEntersAtNonCircularGronwall' "$crosswalk"
+grep -q 'permanaClaimEntersAtPeriodicKernel' "$crosswalk"
+grep -q 'higginsClaimEntersAtFarFieldPacking' "$crosswalk"
+grep -q 'aksmanClaimEntersAtDissipationRange' "$crosswalk"
+grep -q 'cavazziniRestrictedClaimEntersAtFullCarrier' "$crosswalk"
+
+ladder=DASHI/Physics/Closure/NSTriadKNLuoHighestAlphaClayLemmaLadderRound24Exact.agda
+ladder_nodes=(
+  L0_literalFeffermanPeriodicAlternativeB
+  L1_periodicMeanCenteringAndGalileanRestoration
+  L2_localCriticalWellPosednessMaximalTimeRestart
+  L3_periodicDivergenceFreeGalerkinFourierCarrier
+  L4_exhaustiveBonyAndCommutatorSupportPartition
+  L5_finiteFilteredVorticityEnstrophyIdentity
+  L6_pairInputFrequencyDiffusionCoercivity
+  L7_fivePhysicalSourceBoundsUniformInCutoffs
+  L8_periodicPrincipalValueStrainKernelSphereCancellationCZ
+  L9_continuumIncrementToDiffusionCoercivity
+  L10_farFieldAnnularPackingOrCarlesonBound
+  L11_criticalCommutatorAndSubgridStressBound
+  L12_hystereticPositiveVariationBound
+  L13_dissipationWavenumberHighModeAndLowReservoirBound
+  L14_uniformGeometricResidualTailRatio
+  L15_strictTotalViscosityTaxBelowOne
+  L16_uniformIntegratedCriticalEnergyInequality
+  L17_continuousGronwallWithoutTargetNormOnRight
+  L18_shellCutoffConvergence
+  L19_galerkinCutoffConvergenceStrongEnoughForNonlinearity
+  L20_lowerSemicontinuityPreservesAbsorbedBudget
+  L21_pressureSmoothnessRecoveryAndCriticalRestart
+  L22_arbitraryMeanGalileanUncentering
+  L23_literalFeffermanWitnessAndAuditComposition
+)
+[[ "${#ladder_nodes[@]}" -eq 24 ]]
+for node in "${ladder_nodes[@]}"; do
+  grep -q "$node" "$ladder"
+done
+grep -q 'highestAlphaPathInputsGiveLiteralClayB' "$ladder"
+grep -A4 '^claimedPaperCorpusCannotSupplyAuthorityWithoutAudit' "$ladder" | grep -q '≡ false'
+grep -A4 '^highestAlphaPhysicalProducersRemainOpen' "$ladder" | grep -q '≡ false'
+grep -A4 '^highestAlphaUnconditionalClayPromotionRemainsFalse' "$ladder" | grep -q '≡ false'
+
+paper=DASHI/Papers/NavierStokes/ClaimCorpusHighestAlphaRound24.agda
+grep -q 'canonicalClaimCorpusHighestAlphaRound24Status' "$paper"
+grep -q 'claimCorpusIsNotProofAuthority' "$paper"
+grep -q 'finiteCascadeFluxNoGo' "$paper"
+grep -q 'restrictedClassScopeNoGo' "$paper"
+grep -A4 '^concreteCamlinBKMChangeOfVariablesRemainsOpen' "$paper" | grep -q '≡ false'
+grep -A4 '^unrestrictedStrictDriftPositivityRemainsOpen' "$paper" | grep -q '≡ false'
+grep -A4 '^physicalProducersRemainOpen' "$paper" | grep -q '≡ false'
+grep -A4 '^clayPromotionRemainsFalse' "$paper" | grep -q '≡ false'
+
+current=DASHI/Papers/NavierStokes/CurrentTheoremInterfaceRound24.agda
+grep -q 'canonicalCurrentNSPaperTheoremInterfaceRound24' "$current"
+grep -q 'currentLiteralTargetImplemented' "$current"
+grep -A4 '^currentPhysicalProducersOpen' "$current" | grep -q '≡ false'
+grep -A4 '^currentClayPromotionFalse' "$current" | grep -q '≡ false'
+
+grep -q '\[Claimed-paper corpus and audits\](paper-corpus/README.md)' docs/ns-clay-contract/README.md
+grep -q '\[Audit matrix\](audit-matrix.md)' docs/ns-clay-contract/paper-corpus/README.md
+grep -q '\[Highest-alpha lemma ladder\](highest-alpha-lemma-ladder.md)' docs/ns-clay-contract/paper-corpus/README.md
+grep -q '\[Verification phase\](verification.md)' docs/ns-clay-contract/paper-corpus/README.md
+grep -q '\[Back to the paper-corpus overview\](README.md)' docs/ns-clay-contract/paper-corpus/audit-matrix.md
+grep -q '\[Back to the paper-corpus overview\](README.md)' docs/ns-clay-contract/paper-corpus/highest-alpha-lemma-ladder.md
+grep -q '\[Back to the paper-corpus overview\](README.md)' docs/ns-clay-contract/paper-corpus/verification.md
+
+grep -q '^@startuml' docs/ns-clay-contract/architecture.puml
+grep -q '^@enduml' docs/ns-clay-contract/architecture.puml
+grep -q 'Claim corpus and falsification' docs/ns-clay-contract/architecture.puml
+
+scripts/run_agda29_parallel_check.sh \
+  DASHI/Physics/Closure/NSTriadKNLuoClaimCorpusHighestAlphaRound24Validation.agda
