@@ -17,47 +17,256 @@ module DASHI.Physics.Closure.NSTriadKNHHDirectionalDefectSharedBudgetRound41Exac
 --
 -- DASHI CONTRIBUTION
 --
--- Round 40 showed that HH-good depletion and HH-bad occupation are two uses
--- of the same energy-weighted directional defect.  This file makes the next
--- proposed step exact: one physical time-integrated bound on
+-- Round 40 showed that HH-good depletion and HH-bad occupation are
+-- complementary strata of the same directional defect
 --
---   D_dir = sum E_i Theta_i
+--   Theta = 1 - (xi . eta)^2.
 --
--- can feed both sides of the HH split.
+-- Round 41 now puts both strata on one *full classified measure*, rather than
+-- calling the bad restriction itself the common measure.  Every physical cell
+-- owns one vorticity pair, one nonnegative energy weight, one good/bad tag and
+-- evidence for the corresponding threshold inequality.  From those same
+-- cells we define
 --
--- If
+--   D_dir       = sum_all E_i Theta_i,
+--   D_dir^good  = sum_good E_i Theta_i,
+--   D_dir^bad   = sum_bad E_i Theta_i,
+--   E_bad       = sum_bad E_i.
 --
---   D_dir <= alpha D + A + B X,
+-- and prove exactly
 --
--- then the existing weighted Markov theorem immediately gives
+--   D_dir = D_dir^good + D_dir^bad,
+--   delta E_bad <= D_dir^bad <= D_dir.
 --
---   delta E_bad <= alpha D + A + B X.
+-- Therefore one physical time-integrated estimate
 --
--- Any HH-good quantity whose square is bounded by
+--   D_dir <= alpha D + A + B X
 --
---   C delta D_dir
---
--- is simultaneously bounded by C delta times the same owner-shaped right
--- hand side.  No second defect evolution, no differentiated classifier, and
--- no independently selected bad occupation measure is introduced.
+-- controls bad occupation while the good stratum remains an exact component
+-- of the same measure.  No differentiated classifier and no independently
+-- selected bad occupation measure is introduced.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using (List)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚP
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Data.Rational.Tactic.RingSolver using (solve)
+open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
 
+import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
+import DASHI.Physics.Closure.NSTriadKNLuoDirectionalDefectGramExact as Gram
+import DASHI.Physics.Closure.NSTriadKNLuoPhysicalDirectionalDefectExact as Physical
 import DASHI.Physics.Closure.NSTriadKNLuoBadCoherenceWeightedMarkovExact as Threshold
 import DASHI.Physics.Closure.NSTriadKNAdmissibleOwnerTaxLanguageRound28Exact as Owner
-import DASHI.Physics.Closure.NSTriadKNHHUnifiedDirectionalDefectRound40Exact as Defect
+
+data DirectionalRegion : Set where
+  goodRegion badRegion : DirectionalRegion
+
+RegionEvidence :
+  Threshold.PositiveThreshold →
+  Physical.PhysicalVorticityPair →
+  DirectionalRegion → Set
+RegionEvidence parameter pair goodRegion =
+  Gram.directionalDefect (Physical.directions pair)
+  ≤ Threshold.threshold parameter
+RegionEvidence parameter pair badRegion =
+  Threshold.threshold parameter
+  ≤ Gram.directionalDefect (Physical.directions pair)
+
+record ClassifiedDirectionalEnergyCell
+    (parameter : Threshold.PositiveThreshold) : Set where
+  constructor classified-directional-energy-cell
+  field
+    pair : Physical.PhysicalVorticityPair
+    energy : ℚ
+    energyNonnegative : 0ℚ ≤ energy
+    region : DirectionalRegion
+    regionEvidence : RegionEvidence parameter pair region
+
+open ClassifiedDirectionalEnergyCell public
+
+cellDefect :
+  ∀ {parameter} → ClassifiedDirectionalEnergyCell parameter → ℚ
+cellDefect cell =
+  energy cell * Gram.directionalDefect (Physical.directions (pair cell))
+
+badEnergyContribution :
+  ∀ {parameter} → ClassifiedDirectionalEnergyCell parameter → ℚ
+badEnergyContribution cell with region cell
+... | goodRegion = 0ℚ
+... | badRegion = energy cell
+
+badDefectContribution :
+  ∀ {parameter} → ClassifiedDirectionalEnergyCell parameter → ℚ
+badDefectContribution cell with region cell
+... | goodRegion = 0ℚ
+... | badRegion = cellDefect cell
+
+goodDefectContribution :
+  ∀ {parameter} → ClassifiedDirectionalEnergyCell parameter → ℚ
+goodDefectContribution cell with region cell
+... | goodRegion = cellDefect cell
+... | badRegion = 0ℚ
+
+cellDefectNonnegative :
+  ∀ {parameter} (cell : ClassifiedDirectionalEnergyCell parameter) →
+  0ℚ ≤ cellDefect cell
+cellDefectNonnegative cell =
+  let
+    thetaNN = Gram.directionalDefectNonnegative
+      (Physical.directions (pair cell))
+    instance
+      energyNNI = nonNegative (energyNonnegative cell)
+      thetaNNI = nonNegative thetaNN
+      productNNI = ℚP.nonNeg*nonNeg⇒nonNeg
+        (energy cell)
+        (Gram.directionalDefect (Physical.directions (pair cell)))
+  in
+  ℚP.nonNegative⁻¹ (cellDefect cell)
+
+badDefectContributionBelowCellDefect :
+  ∀ {parameter} (cell : ClassifiedDirectionalEnergyCell parameter) →
+  badDefectContribution cell ≤ cellDefect cell
+badDefectContributionBelowCellDefect cell with region cell
+... | goodRegion = cellDefectNonnegative cell
+... | badRegion = ℚP.≤-refl
+
+thresholdTimesBadEnergyContributionBelowBadDefect :
+  ∀ {parameter} (cell : ClassifiedDirectionalEnergyCell parameter) →
+  Threshold.threshold parameter * badEnergyContribution cell
+  ≤ badDefectContribution cell
+thresholdTimesBadEnergyContributionBelowBadDefect
+    {parameter} cell with region cell
+... | goodRegion =
+  subst
+    (λ right → 0ℚ ≤ right)
+    (sym (solve []))
+    ℚP.≤-refl
+... | badRegion =
+  let
+    evidence = regionEvidence cell
+    scaled :
+      energy cell * Threshold.threshold parameter
+      ≤ energy cell * Gram.directionalDefect (Physical.directions (pair cell))
+    scaled =
+      let instance energyNNI = nonNegative (energyNonnegative cell)
+      in ℚP.*-monoˡ-≤-nonNeg (energy cell) evidence
+
+    leftMeaning :
+      energy cell * Threshold.threshold parameter
+      ≡ Threshold.threshold parameter * energy cell
+    leftMeaning = solve (energy cell ∷ Threshold.threshold parameter ∷ [])
+  in
+  subst
+    (λ lower → lower ≤ cellDefect cell)
+    leftMeaning
+    scaled
+
+totalDirectionalDefectMass :
+  ∀ {parameter} → List (ClassifiedDirectionalEnergyCell parameter) → ℚ
+totalDirectionalDefectMass [] = 0ℚ
+totalDirectionalDefectMass (cell ∷ rest) =
+  cellDefect cell + totalDirectionalDefectMass rest
+
+badDirectionalDefectMass :
+  ∀ {parameter} → List (ClassifiedDirectionalEnergyCell parameter) → ℚ
+badDirectionalDefectMass [] = 0ℚ
+badDirectionalDefectMass (cell ∷ rest) =
+  badDefectContribution cell + badDirectionalDefectMass rest
+
+goodDirectionalDefectMass :
+  ∀ {parameter} → List (ClassifiedDirectionalEnergyCell parameter) → ℚ
+goodDirectionalDefectMass [] = 0ℚ
+goodDirectionalDefectMass (cell ∷ rest) =
+  goodDefectContribution cell + goodDirectionalDefectMass rest
+
+badEnergyMass :
+  ∀ {parameter} → List (ClassifiedDirectionalEnergyCell parameter) → ℚ
+badEnergyMass [] = 0ℚ
+badEnergyMass (cell ∷ rest) =
+  badEnergyContribution cell + badEnergyMass rest
+
+classifiedDefectSplitsGoodBad :
+  ∀ {parameter}
+    (cells : List (ClassifiedDirectionalEnergyCell parameter)) →
+  totalDirectionalDefectMass cells
+  ≡ goodDirectionalDefectMass cells + badDirectionalDefectMass cells
+classifiedDefectSplitsGoodBad [] = solve []
+classifiedDefectSplitsGoodBad (cell ∷ rest) with region cell
+... | goodRegion
+  rewrite classifiedDefectSplitsGoodBad rest =
+  solve
+    ( cellDefect cell
+    ∷ goodDirectionalDefectMass rest
+    ∷ badDirectionalDefectMass rest
+    ∷ [])
+... | badRegion
+  rewrite classifiedDefectSplitsGoodBad rest =
+  solve
+    ( cellDefect cell
+    ∷ goodDirectionalDefectMass rest
+    ∷ badDirectionalDefectMass rest
+    ∷ [])
+
+badDefectMassBelowTotalDefect :
+  ∀ {parameter}
+    (cells : List (ClassifiedDirectionalEnergyCell parameter)) →
+  badDirectionalDefectMass cells ≤ totalDirectionalDefectMass cells
+badDefectMassBelowTotalDefect [] = ℚP.≤-refl
+badDefectMassBelowTotalDefect (cell ∷ rest) =
+  ℚP.+-mono-≤
+    (badDefectContributionBelowCellDefect cell)
+    (badDefectMassBelowTotalDefect rest)
+
+thresholdTimesBadEnergyBelowBadDefect :
+  ∀ {parameter}
+    (cells : List (ClassifiedDirectionalEnergyCell parameter)) →
+  Threshold.threshold parameter * badEnergyMass cells
+  ≤ badDirectionalDefectMass cells
+thresholdTimesBadEnergyBelowBadDefect {parameter} [] =
+  subst (λ left → left ≤ 0ℚ)
+    (solve (Threshold.threshold parameter ∷ []))
+    ℚP.≤-refl
+thresholdTimesBadEnergyBelowBadDefect {parameter} (cell ∷ rest) =
+  let
+    local = thresholdTimesBadEnergyContributionBelowBadDefect cell
+    tail = thresholdTimesBadEnergyBelowBadDefect rest
+    added = ℚP.+-mono-≤ local tail
+
+    leftMeaning :
+      Threshold.threshold parameter
+        * (badEnergyContribution cell + badEnergyMass rest)
+      ≡
+      Threshold.threshold parameter * badEnergyContribution cell
+      + Threshold.threshold parameter * badEnergyMass rest
+    leftMeaning = solve
+      ( Threshold.threshold parameter
+      ∷ badEnergyContribution cell
+      ∷ badEnergyMass rest
+      ∷ [])
+  in
+  subst
+    (λ lower → lower ≤ badDirectionalDefectMass (cell ∷ rest))
+    (sym leftMeaning)
+    added
+
+thresholdTimesBadEnergyBelowTotalDefect :
+  ∀ {parameter}
+    (cells : List (ClassifiedDirectionalEnergyCell parameter)) →
+  Threshold.threshold parameter * badEnergyMass cells
+  ≤ totalDirectionalDefectMass cells
+thresholdTimesBadEnergyBelowTotalDefect cells =
+  ℚP.≤-trans
+    (thresholdTimesBadEnergyBelowBadDefect cells)
+    (badDefectMassBelowTotalDefect cells)
 
 record PhysicalDirectionalDefectBudget
     (environment : Owner.TaxEnvironment)
     (parameter : Threshold.PositiveThreshold) : Set where
   field
-    badCells : List (Defect.PhysicalBadDirectionalEnergyCell parameter)
+    cells : List (ClassifiedDirectionalEnergyCell parameter)
     eta dataRemainder criticalCoefficient : ℚ
 
     etaNonnegative : 0ℚ ≤ eta
@@ -67,7 +276,7 @@ record PhysicalDirectionalDefectBudget
     integralCriticalNonnegative : 0ℚ ≤ Owner.integralCritical environment
 
     timeIntegratedDirectionalDefectBound :
-      Defect.weightedDirectionalDefectMass badCells
+      totalDirectionalDefectMass cells
       ≤ eta * Owner.dissipation environment
         + dataRemainder
         + criticalCoefficient * Owner.integralCritical environment
@@ -85,12 +294,11 @@ defectBudgetRight {environment} budget =
 thresholdBadEnergyBelowSharedBudget :
   ∀ {environment parameter}
     (budget : PhysicalDirectionalDefectBudget environment parameter) →
-  Threshold.threshold parameter
-    * Defect.badEnergyMass (badCells budget)
+  Threshold.threshold parameter * badEnergyMass (cells budget)
   ≤ defectBudgetRight budget
 thresholdBadEnergyBelowSharedBudget budget =
   ℚP.≤-trans
-    (Defect.thresholdTimesBadEnergyBelowDirectionalDefect (badCells budget))
+    (thresholdTimesBadEnergyBelowTotalDefect (cells budget))
     (timeIntegratedDirectionalDefectBound budget)
 
 record HHGoodUseOfDirectionalDefect
@@ -104,9 +312,21 @@ record HHGoodUseOfDirectionalDefect
     goodSquareBelowDefect :
       goodProductionSquare
       ≤ coefficient * Threshold.threshold parameter
-          * Defect.weightedDirectionalDefectMass (badCells budget)
+          * goodDirectionalDefectMass (cells budget)
 
 open HHGoodUseOfDirectionalDefect public
+
+goodDefectMassBelowTotalDefect :
+  ∀ {parameter}
+    (cells : List (ClassifiedDirectionalEnergyCell parameter)) →
+  goodDirectionalDefectMass cells ≤ totalDirectionalDefectMass cells
+goodDefectMassBelowTotalDefect [] = ℚP.≤-refl
+goodDefectMassBelowTotalDefect (cell ∷ rest) with region cell
+... | goodRegion =
+  ℚP.+-mono-≤ ℚP.≤-refl (goodDefectMassBelowTotalDefect rest)
+... | badRegion =
+  ℚP.+-mono-≤ (cellDefectNonnegative cell)
+    (goodDefectMassBelowTotalDefect rest)
 
 goodSquareBelowScaledSharedBudget :
   ∀ {environment parameter}
@@ -129,32 +349,34 @@ goodSquareBelowScaledSharedBudget {parameter = parameter} {budget} good =
       in
       ℚP.nonNegative⁻¹ scale
 
-    scaledDefect :
-      scale * Defect.weightedDirectionalDefectMass (badCells budget)
+    goodToTotal :
+      scale * goodDirectionalDefectMass (cells budget)
+      ≤ scale * totalDirectionalDefectMass (cells budget)
+    goodToTotal =
+      let instance scaleNNI = nonNegative scaleNN
+      in ℚP.*-monoˡ-≤-nonNeg scale
+        (goodDefectMassBelowTotalDefect (cells budget))
+
+    totalToBudget :
+      scale * totalDirectionalDefectMass (cells budget)
       ≤ scale * defectBudgetRight budget
-    scaledDefect =
+    totalToBudget =
       let instance scaleNNI = nonNegative scaleNN
       in ℚP.*-monoˡ-≤-nonNeg scale
         (timeIntegratedDirectionalDefectBound budget)
 
-    lowerMeaning :
-      coefficient good * Threshold.threshold parameter
-        * Defect.weightedDirectionalDefectMass (badCells budget)
-      ≡ scale * Defect.weightedDirectionalDefectMass (badCells budget)
-    lowerMeaning = refl
-
     first :
       goodProductionSquare good
-      ≤ scale * Defect.weightedDirectionalDefectMass (badCells budget)
-    first = subst
-      (λ upper → goodProductionSquare good ≤ upper)
-      lowerMeaning
-      (goodSquareBelowDefect good)
+      ≤ scale * goodDirectionalDefectMass (cells budget)
+    first = goodSquareBelowDefect good
   in
-  ℚP.≤-trans first scaledDefect
+  ℚP.≤-trans first (ℚP.≤-trans goodToTotal totalToBudget)
 
 sharedDirectionalDefectBudgetClosed : Bool
 sharedDirectionalDefectBudgetClosed = true
+
+classifiedDirectionalDefectPartitionClosed : Bool
+classifiedDirectionalDefectPartitionClosed = true
 
 physicalTimeIntegratedDirectionalDefectBudgetConstructed : Bool
 physicalTimeIntegratedDirectionalDefectBudgetConstructed = false
@@ -162,3 +384,7 @@ physicalTimeIntegratedDirectionalDefectBudgetConstructed = false
 sharedDirectionalDefectBudgetClosedIsTrue :
   sharedDirectionalDefectBudgetClosed ≡ true
 sharedDirectionalDefectBudgetClosedIsTrue = refl
+
+classifiedDirectionalDefectPartitionClosedIsTrue :
+  classifiedDirectionalDefectPartitionClosed ≡ true
+classifiedDirectionalDefectPartitionClosedIsTrue = refl
