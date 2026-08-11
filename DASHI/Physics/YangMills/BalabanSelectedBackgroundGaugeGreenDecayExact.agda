@@ -34,8 +34,7 @@ module DASHI.Physics.YangMills.BalabanSelectedBackgroundGaugeGreenDecayExact whe
 --
 -- Coordinate extraction and exact untwisting give
 --
---       |G_A(root,target)|
---          <= 3 * w_root(target),
+--       |G_A(root,target)| <= 3 * w_root(target),
 --
 -- where on the configured side-four torus
 --
@@ -65,6 +64,7 @@ import DASHI.Physics.YangMills.BalabanFiniteStrictContractionReopeningExact as S
 import DASHI.Physics.YangMills.BalabanFiniteRationalInjectiveInverseExact as FiniteInverse
 import DASHI.Physics.YangMills.BalabanConstructiveRationalMatrixInverseExact as Matrix
 import DASHI.Physics.YangMills.BalabanSelectedFlatGaugeGreenAbsoluteMassExact as GreenMass
+import DASHI.Physics.YangMills.BalabanSelectedBackgroundGaugeGramPerturbationAbsoluteMassExact as PerturbationMass
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundFlatGreenPerturbationContractionExact as Contraction
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundFlatGreenPerturbationTwoSidedContractionExact as TwoSided
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundRationalCombesThomasWeightExact as Weight
@@ -72,7 +72,6 @@ import DASHI.Physics.YangMills.BalabanSelectedBackgroundRationalWeightedPowerDec
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundResidualPowerDecayExact as Residual
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundResidualReopeningExact as Reopening
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundFiniteRationalReopeningExact as FiniteReopen
-import DASHI.Physics.YangMills.BalabanP33PhysicalRationalWilsonPlaquetteJetExact as Physical
 import DASHI.Physics.YangMills.BalabanP33PhysicalBackgroundGaugeParameterizedYoungExact as Relaxed
 
 GaugeRow : Set
@@ -238,8 +237,7 @@ rawScaledGreenColumnEntryExact background certificate root target row =
         (inverse row middle)
         (Contraction.flatGreenKernelMatrix middle target)
         coefficient))
-    (DASHI.Physics.YangMills.BalabanConstructiveRationalMatrixInverseExact.sumRationalRightScale
-      Contraction.gaugeRows term coefficient)
+    (Matrix.sumRationalRightScale Contraction.gaugeRows term coefficient)
 
 tiltedGreenColumnEntryExact :
   ∀ background certificate root target row →
@@ -318,14 +316,13 @@ tiltedFlatColumnL1BelowTwo root target =
     weightedMass = Weighted.weightedColumnMassUpper
       root Contraction.flatGreenKernelMatrix target
 
-    rawScaled =
-      DASHI.Physics.YangMills.BalabanSelectedBackgroundGaugeGramPerturbationAbsoluteMassExact.rightScaleMonotone
-        Weight.siteGrowthEnvelope
-        (ColumnMass.squareColumnMass Contraction.gaugeRows
-          Contraction.flatGreenKernelMatrix target)
-        GreenMass.seventeenSixteenths
-        (ℚP.nonNegative⁻¹ Weight.siteGrowthEnvelope)
-        (TwoSided.selectedFlatGaugeGreenAbsoluteColumnMassBound target)
+    rawScaled = PerturbationMass.rightScaleMonotone
+      Weight.siteGrowthEnvelope
+      (ColumnMass.squareColumnMass Contraction.gaugeRows
+        Contraction.flatGreenKernelMatrix target)
+      GreenMass.seventeenSixteenths
+      (ℚP.nonNegative⁻¹ Weight.siteGrowthEnvelope)
+      (TwoSided.selectedFlatGaugeGreenAbsoluteColumnMassBound target)
 
     toNamed :
       ColumnMass.squareColumnMass Contraction.gaugeRows
@@ -421,12 +418,12 @@ selectedBackgroundGaugeGreenRationalExponentialDecayWithCertificate
       background radius certificate root target root)
 
 selectedBackgroundGaugeGreenExponentialDecay :
-  FiniteInverse.FiniteRationalInjectiveInverseAuthority →
-  ∀ background → Relaxed.RelaxedInverseLinkRadius background →
+  (authority : FiniteInverse.FiniteRationalInjectiveInverseAuthority) →
+  ∀ background → (radius : Relaxed.RelaxedInverseLinkRadius background) →
   ∀ root target →
   let certificate =
         FiniteReopen.selectedResidualIdentityPlusRationalInverse
-          _ background _
+          authority background radius
   in
   ∣ selectedBackgroundGaugeGreenKernel background certificate root target ∣
   ≤ three * Weight.gaugeWeight root target
