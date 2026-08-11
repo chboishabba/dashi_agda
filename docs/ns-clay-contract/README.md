@@ -32,6 +32,8 @@ The reducers for steps 2, 4, the order-theoretic part of 5, the contradiction lo
 
 Round 24 adds a broad [claimed-paper corpus](paper-corpus/README.md), including low-authority and claimed-solution papers. Each source is mapped to its first load-bearing physical lemma, and exact countermodels are retained where a displayed implication fails.
 
+Round 25 closes the discrete support part of that path. The [literal physical carrier and five-class support tranche](physical-carrier-support-round25.md) proves duplicate-free output fibres, the low-low-to-far-high obstruction, exhaustive and unique physical triad classification, and exact `HH+LH+HL+CC+Com` recomposition after evaluating the appended `Com` cell with a mode-indexed commutator functional. L4 is now checked exact; L3 is narrowed to finite-dimensional continuum ODE existence and constraint propagation.
+
 ### 3. What are the preconditions, postconditions and invariants?
 
 They are defined in [requirements.md](requirements.md) and formalized by `NSTriadKNLuoClayPrePostInvariantContractRound23Exact.agda`.
@@ -42,16 +44,16 @@ The dependency-ordered statement of the remaining mathematics is in the [highest
 
 - **O — Organization:** `DASHI/Physics/Closure`, the paper-facing theorem interfaces, validation scripts and this documentation surface.
 - **R — Requirement:** Fefferman periodic alternative (B), including the pressure-periodicity erratum.
-- **C — Code:** Round 22 finite Galerkin and defect modules; Round 23 literal contract, adapter and Galilean reduction; Round 24 claimed-paper corpus, no-go modules and normalized lemma ladder.
-- **S — State:** theorem type and terminal reducers implemented; physical theorem uninhabited.
+- **C — Code:** Round 22 finite Galerkin and defect modules; Round 23 literal contract, adapter and Galilean reduction; Round 24 claimed-paper corpus and normalized ladder; Round 25 literal carrier certificate and physical support closure.
+- **S — State:** theorem type, terminal reducers and L4 physical support implemented; the physical theorem remains uninhabited.
 - **L — Lattice:** finite PDE → critical tax → strict absorption → nested limits → restart → smooth global witness → literal Clay witness.
-- **P — Proposal:** freeze that dependency lattice and work only on physical producers that move a clause from `physicalProducerOpen` to `checkedReducer`, or source audits that rigorously falsify a proposed producer.
+- **P — Proposal:** work only on physical producers that move a clause from `physicalProducerOpen` to `checkedExact`/`checkedReducer`, or source audits that rigorously falsify a proposed producer.
 - **G — Goal:** inhabit the literal periodic Fefferman statement for every positive viscosity and every smooth divergence-free periodic datum.
 - **F — Gap function:** count of load-bearing open producers, weighted first by scaling correctness, then cutoff uniformity, then strict viscosity margin.
 
 ## Updated plan and roadmap
 
-The architecture materially changed in Round 23: the target theorem is literal and the mean-zero restriction is a reduction step rather than a Clay precondition. Round 24 does not alter the terminal architecture; it normalizes claimed papers into auditable producer lanes.
+The target theorem is literal, mean zero is a reduction rather than a Clay precondition, and physical support is now tied to the actual cutoff `Z³` carrier.
 
 - Frame all further work around the literal periodic Fefferman statement.
 - Search broadly, including unconventional, unreviewed and incorrect papers.
@@ -59,12 +61,11 @@ The architecture materially changed in Round 23: the target theorem is literal a
 - Keep one non-overlapping lane for each open physical producer.
 - Do not assign work to terminal composition, nested-limit logic or restart contradiction unless a concrete defect is found; those lanes are held.
 - Verify every returned lane against scaling, cutoff uniformity, source exhaustiveness, non-circularity and viscosity budget.
-- Refine only when at least one load-bearing clause changes from `physicalProducerOpen` to `checkedReducer`, or when a proposed route is falsified by a quantified counterexample.
-- Stop refinement when no clause state improves and no narrower falsifiable producer is identified.
+- Refine only when at least one load-bearing clause changes state, or when a proposed route is falsified by a quantified counterexample.
 
-The disjoint development lanes are:
+The disjoint development lanes are now:
 
-1. Fourier/Galerkin cell enumeration and Bony support exhaustiveness.
+1. Finite-dimensional continuum Galerkin ODE existence and propagation of reality/transversality on the exact carrier.
 2. Five physical source estimates uniform in shell and Galerkin cutoffs.
 3. Hysteretic positive-variation estimate.
 4. Dissipation-wavenumber high-mode condition and low-frequency critical reservoir.
@@ -81,7 +82,8 @@ The disjoint development lanes are:
 - [Verification and quality gates](verification.md)
 - [Governance and standards alignment](governance.md)
 - [Claimed-paper corpus and audits](paper-corpus/README.md)
+- [Round 25 physical carrier and support closure](physical-carrier-support-round25.md)
 
 ## Scope boundary
 
-This round does not claim global regularity, an exhaustive literature search, a successful Agda kernel check, a successful GitHub Actions run, publication readiness or Clay acceptance. It establishes the exact target, the shortest auditable path, and a formal process for harvesting or falsifying every discovered route.
+Round 25 does not claim global regularity, completed L3 ODE analysis, classwise cutoff-uniform nonlinear taxes, a strict viscosity margin, successful Agda kernel validation, successful GitHub Actions, publication readiness or Clay acceptance. It makes one substantive ladder promotion—L4 to checked exact—and narrows L3 to its genuine analytic remainder.
