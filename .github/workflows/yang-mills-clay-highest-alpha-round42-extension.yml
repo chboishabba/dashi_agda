@@ -8,12 +8,20 @@ on:
     branches:
       - master
     paths:
+      - 'DASHI/Physics/YangMills/BalabanFiniteRectangularRationalExact.agda'
       - 'DASHI/Physics/YangMills/BalabanFiniteRectangularAbsoluteColumnMassExact.agda'
       - 'DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeGramPerturbationTwoSidedMassExact.agda'
       - 'DASHI/Physics/YangMills/BalabanSelectedBackgroundFlatGreenPerturbationTwoSidedContractionExact.agda'
       - 'DASHI/Physics/YangMills/BalabanFiniteMatrixL1ContractionExact.agda'
       - 'DASHI/Physics/YangMills/BalabanSelectedBackgroundResidualPowerDecayExact.agda'
       - 'DASHI/Physics/YangMills/BalabanSelectedBackgroundRationalWeightedPowerDecayExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanFiniteStrictContractionReopeningExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanSelectedBackgroundResidualReopeningExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanFiniteRationalInjectiveInverseExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanSelectedBackgroundFiniteRationalReopeningExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanBasedPathGaugeSectionExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanSelectedCombinedConstraintTangentProjectorExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanFiniteRGObservableReopeningExact.agda'
       - 'DASHI/Physics/YangMills/BalabanClayHighestAlphaRound42MasterReconciledValidation.agda'
       - 'scripts/check_yang_mills_clay_highest_alpha_round42_extension.sh'
       - '.github/workflows/yang-mills-clay-highest-alpha-round42-extension.yml'
