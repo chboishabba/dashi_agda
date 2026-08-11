@@ -1,0 +1,67 @@
+name: tarot-symbolic-hyperfabric
+
+on:
+  push:
+    branches:
+      - 'agent/tarot-symbolic-hyperfabric'
+  pull_request:
+    paths:
+      - 'DASHI/Biology/Tarot*'
+      - 'Docs/support/reference/TarotSymbolicHyperfabricFormalisation.md'
+      - 'scripts/check_tarot_symbolic_hyperfabric.sh'
+      - '.github/workflows/tarot-symbolic-hyperfabric.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
+jobs:
+  agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
+      - name: Resolve repository Agda toolchain
+        shell: bash
+        run: |
+          set -euo pipefail
+          package="$(nix build --no-link --print-out-paths .#agda-with-dashi-deps)"
+          agda_bin="$package/bin/agda"
+          test -x "$agda_bin"
+          "$agda_bin" --version
+          printf 'AGDA_BIN=%s\n' "$agda_bin" >> "$GITHUB_ENV"
+      - name: Check tarot symbolic hyperfabric
+        env:
+          DASHI_REPO_ROOT: ${{ github.workspace }}
+          DASHI_AGDA29_EPHEMERAL: '1'
+          AGDA_LOG_PATH: ${{ runner.temp }}/tarot-symbolic-hyperfabric-agda.log
+        run: bash scripts/check_tarot_symbolic_hyperfabric.sh
+      - name: Report kernel-check status to the active pull request
+        if: always() && github.event_name == 'push'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          CHECK_STATUS: ${{ job.status }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          pr_number="$(
+            gh pr list \
+              --repo "$GITHUB_REPOSITORY" \
+              --head "$GITHUB_REF_NAME" \
+              --state open \
+              --json number \
+              --jq '.[0].number // empty'
+          )"
+
+          if [[ -z "$pr_number" ]]; then
+            echo "No open pull request found for $GITHUB_REF_NAME; skipping comment."
+            exit 0
+          fi
+
+          gh pr comment "$pr_number" \
+            --repo "$GITHUB_REPOSITORY" \
+            --body "Tarot symbolic-hyperfabric Agda kernel check ${CHECK_STATUS} on ${GITHUB_SHA} (workflow run ${GITHUB_RUN_ID})."
