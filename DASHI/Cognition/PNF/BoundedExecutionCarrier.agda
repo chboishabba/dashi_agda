@@ -83,6 +83,16 @@ record SplitMeasureReceipt
 
 open SplitMeasureReceipt public
 
+record MeasuredBoundedExecutionCarrier
+    (Candidate Mass : Set)
+    (_⊕_ : Mass → Mass → Mass) : Set where
+  constructor measuredBoundedExecutionCarrier
+  field
+    boundedCarrier : BoundedExecutionCarrier Candidate
+    measureReceipt : SplitMeasureReceipt Mass _⊕_
+
+open MeasuredBoundedExecutionCarrier public
+
 ------------------------------------------------------------------------
 -- Existing runtime-specific bounded carriers embed into the generic shape.
 -- This is intentionally a bridge, not a replacement of the existing theorem
