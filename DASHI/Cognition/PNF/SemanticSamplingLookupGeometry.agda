@@ -8,7 +8,6 @@ open import Data.Empty using (⊥)
 import DASHI.Foundations.StratifiedResolutionTowerExact as Resolution
 import DASHI.Cognition.PNF.DirectDemandLookup as Direct
 import DASHI.Cognition.PNF.BoundedExecutionCarrier as Bounded
-open import DASHI.Cognition.PNF.ComplexityArithmetic
 open import DASHI.Cognition.PNF.NumericAuthority
 
 ------------------------------------------------------------------------
@@ -63,56 +62,18 @@ record DualLookupAddress (GeometricAddress : Set) : Set where
 open DualLookupAddress public
 
 data ProbeGeometry : Set where
-  exactEqualityProbe orderedTreeProbe prefixProbe neighbourhoodProposal :
-    ProbeGeometry
+  storageProbe : Direct.ProbeStrategy → ProbeGeometry
+  neighbourhoodProposal : ProbeGeometry
 
-------------------------------------------------------------------------
--- Storage-engine contracts.
---
--- Expected-constant equality lookup and logarithmic ordered lookup are explicit
--- supplied contracts, not theorems about PostgreSQL proved by Agda.  The old
--- DirectDemandLookup.ProbeContract remains the authoritative ordered/logarithmic
--- contract and is wrapped rather than replaced.
-------------------------------------------------------------------------
+-- Reuse DirectDemandLookup's contracts literally.
+ExpectedConstantEqualityProbeContract : Set
+ExpectedConstantEqualityProbeContract = Direct.ExpectedConstantProbeContract
 
-record ExpectedConstantEqualityProbeContract : Set where
-  constructor expectedConstantEqualityProbeContract
-  field
-    equalityProbeCost : Nat
-    constantBudget : Nat
-    equalityProbeWithinBudget : equalityProbeCost ≤ᶜ constantBudget
+OrderedTreeProbeContract : Set
+OrderedTreeProbeContract = Direct.ProbeContract
 
-open ExpectedConstantEqualityProbeContract public
-
-record OrderedTreeProbeContract : Set where
-  constructor orderedTreeProbeContract
-  field
-    directProbeContract : Direct.ProbeContract
-
-open OrderedTreeProbeContract public
-
-orderedTreeProbeCost : OrderedTreeProbeContract → Nat
-orderedTreeProbeCost contract =
-  Direct.probeCost (directProbeContract contract)
-
-orderedTreeProbeBound : OrderedTreeProbeContract → Nat
-orderedTreeProbeBound contract =
-  Direct.logarithmicProbeBound (directProbeContract contract)
-
-orderedTreeProbeWithinBound :
-  (contract : OrderedTreeProbeContract) →
-  orderedTreeProbeCost contract ≤ᶜ orderedTreeProbeBound contract
-orderedTreeProbeWithinBound contract =
-  Direct.probeWithinLogarithmicBound (directProbeContract contract)
-
-record PrefixProbeContract : Set where
-  constructor prefixProbeContract
-  field
-    prefixProbeCost : Nat
-    prefixProbeBound : Nat
-    prefixProbeWithinBound : prefixProbeCost ≤ᶜ prefixProbeBound
-
-open PrefixProbeContract public
+PrefixProbeContract : Set
+PrefixProbeContract = Direct.PrefixProbeContract
 
 ------------------------------------------------------------------------
 -- Approximate/continuous neighbourhood geometry is proposal-only.
