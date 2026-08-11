@@ -46,44 +46,47 @@ open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using
   (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚP
+open ℚP using (_≤?_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Nullary.Decidable.Core using (toWitness)
 
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
 import DASHI.Physics.Closure.NSTriadKNLuoDirectionalDefectGramExact as Gram
+import DASHI.Physics.Closure.NSTriadKNLuoPhysicalDirectionalDefectExact as Physical
 import DASHI.Physics.Closure.NSTriadKNLuoBadCoherenceWeightedMarkovExact as Threshold
+import DASHI.Physics.Closure.NSTriadKNHHBadSharpDyadicGainRound33Exact as Sharp
 import DASHI.Physics.Closure.NSTriadKNHHUnifiedDirectionalDefectRound40Exact as Defect
 import DASHI.Physics.Closure.NSTriadKNHHBadDefectMeasureGainRound40Exact as Gain
 import DASHI.Physics.Closure.NSTriadKNHHBadDefectOwnerScalingRound40Exact as Scaling
+
+oneNonnegative : 0ℚ ≤ 1ℚ
+oneNonnegative = toWitness {a? = 0ℚ ≤? 1ℚ} _
 
 weightedDefectMassBelowBadEnergyMass :
   ∀ {parameter}
     (cells : List (Defect.PhysicalBadDirectionalEnergyCell parameter)) →
   Defect.weightedDirectionalDefectMass cells
   ≤ Defect.badEnergyMass cells
-weightedDefectMassBelowBadEnergyMass {parameter} [] = ℚP.≤-refl
-weightedDefectMassBelowBadEnergyMass {parameter} (cell ∷ rest) =
+weightedDefectMassBelowBadEnergyMass [] = ℚP.≤-refl
+weightedDefectMassBelowBadEnergyMass (cell ∷ rest) =
   let
-    pairData = Defect.pair cell
-    theta = Gram.directionalDefect
-      (DASHI.Physics.Closure.NSTriadKNLuoPhysicalDirectionalDefectExact.directions pairData)
+    directions = Physical.directions (Defect.pair cell)
+    theta = Gram.directionalDefect directions
+
+    multiplied :
+      Defect.energy cell * theta ≤ Defect.energy cell * 1ℚ
+    multiplied =
+      L2.nonnegativeProductMonotone
+        (Defect.energyNonnegative cell)
+        (Gram.directionalDefectNonnegative directions)
+        (Defect.energyNonnegative cell)
+        oneNonnegative
+        ℚP.≤-refl
+        (Gram.directionalDefectAtMostOne directions)
 
     local : Defect.energy cell * theta ≤ Defect.energy cell
     local =
-      let
-        multiplied :
-          Defect.energy cell * theta ≤ Defect.energy cell * 1ℚ
-        multiplied =
-          L2.nonnegativeProductMonotone
-            (Defect.energyNonnegative cell)
-            (Gram.directionalDefectNonnegative
-              (DASHI.Physics.Closure.NSTriadKNLuoPhysicalDirectionalDefectExact.directions pairData))
-            (Defect.energyNonnegative cell)
-            ℚP.0≤1
-            ℚP.≤-refl
-            (Gram.directionalDefectAtMostOne
-              (DASHI.Physics.Closure.NSTriadKNLuoPhysicalDirectionalDefectExact.directions pairData))
-      in
       subst
         (λ upper → Defect.energy cell * theta ≤ upper)
         (solve (Defect.energy cell ∷ []))
@@ -103,6 +106,33 @@ scaledWeightedDefectBelowScaledBadEnergy factor factorNN cells =
   in ℚP.*-monoˡ-≤-nonNeg factor
       (weightedDefectMassBelowBadEnergyMass cells)
 
+sumPhysicalBadGainNonnegative :
+  ∀ {parameter effectiveViscosity density shell}
+    (cells : List (Gain.PhysicalBadGainDefectCell
+      parameter effectiveViscosity density shell)) →
+  0ℚ ≤ Gain.sumPhysicalBadGain cells
+sumPhysicalBadGainNonnegative [] = ℚP.≤-refl
+sumPhysicalBadGainNonnegative (cell ∷ rest) =
+  L2.addNonnegative
+    (Gain.rawGainNonnegative cell)
+    (sumPhysicalBadGainNonnegative rest)
+
+shellViscousFactorNonnegative :
+  ∀ effectiveViscosity shell →
+  0ℚ ≤ effectiveViscosity →
+  0ℚ ≤ Gain.shellViscousFactor effectiveViscosity shell
+shellViscousFactorNonnegative effectiveViscosity shell viscosityNN =
+  let
+    scaleSquareNN = L2.squareNonnegative (Sharp.dyadicScale shell)
+    instance
+      viscosityNNI = nonNegative viscosityNN
+      scaleNNI = nonNegative scaleSquareNN
+      productNNI = ℚP.nonNeg*nonNeg⇒nonNeg
+        effectiveViscosity
+        (Sharp.dyadicScale shell * Sharp.dyadicScale shell)
+  in
+  ℚP.nonNegative⁻¹ (Gain.shellViscousFactor effectiveViscosity shell)
+
 finiteBadGainBelowRestrictedDissipationWithInverseThreshold :
   ∀ {parameter effectiveViscosity density shell} →
   0ℚ ≤ density →
@@ -121,19 +151,8 @@ finiteBadGainBelowRestrictedDissipationWithInverseThreshold
     factor = Gain.shellViscousFactor effectiveViscosity shell
 
     factorNN : 0ℚ ≤ factor
-    factorNN =
-      let
-        scaleSquareNN = L2.squareNonnegative
-          (DASHI.Physics.Closure.NSTriadKNHHBadSharpDyadicGainRound33Exact.dyadicScale shell)
-        instance
-          viscosityNNI = nonNegative viscosityNN
-          scaleNNI = nonNegative scaleSquareNN
-          productNNI = ℚP.nonNeg*nonNeg⇒nonNeg
-            effectiveViscosity
-            (DASHI.Physics.Closure.NSTriadKNHHBadSharpDyadicGainRound33Exact.dyadicScale shell
-              * DASHI.Physics.Closure.NSTriadKNHHBadSharpDyadicGainRound33Exact.dyadicScale shell)
-      in
-      ℚP.nonNegative⁻¹ factor
+    factorNN = shellViscousFactorNonnegative
+      effectiveViscosity shell viscosityNN
 
     densityFactorNN : 0ℚ ≤ density * factor
     densityFactorNN =
@@ -166,6 +185,10 @@ finiteBadGainBelowRestrictedDissipationWithInverseThreshold
           (weightedDefectMassBelowBadEnergyMass
             (Gain.mapDirectionalCells cells))
 
+    defectNN = Defect.weightedDirectionalDefectMassNonnegative
+      (Gain.mapDirectionalCells cells)
+    energyNN = Defect.badEnergyNonnegative (Gain.mapDirectionalCells cells)
+
     rate : Scaling.BadDefectOwnerRate parameter
     rate = record
       { badGain = Gain.sumPhysicalBadGain cells
@@ -175,12 +198,9 @@ finiteBadGainBelowRestrictedDissipationWithInverseThreshold
       ; dissipation = density * factor
           * Defect.badEnergyMass (Gain.mapDirectionalCells cells)
       ; defectRate = 1ℚ
-      ; badGainNonnegative =
-          Gain.sumPhysicalBadGainNonnegative cells
+      ; badGainNonnegative = sumPhysicalBadGainNonnegative cells
       ; defectChargeNonnegative =
           let
-            defectNN = Defect.weightedDirectionalDefectMassNonnegative
-              (Gain.mapDirectionalCells cells)
             instance
               dfNN = nonNegative densityFactorNN
               defectNNI = nonNegative defectNN
@@ -194,8 +214,6 @@ finiteBadGainBelowRestrictedDissipationWithInverseThreshold
                     (Gain.mapDirectionalCells cells))
       ; dissipationNonnegative =
           let
-            energyNN = Defect.badEnergyNonnegative
-              (Gain.mapDirectionalCells cells)
             instance
               dfNN = nonNegative densityFactorNN
               energyNNI = nonNegative energyNN
@@ -205,7 +223,7 @@ finiteBadGainBelowRestrictedDissipationWithInverseThreshold
           in ℚP.nonNegative⁻¹
               ((density * factor)
                 * Defect.badEnergyMass (Gain.mapDirectionalCells cells))
-      ; defectRateNonnegative = ℚP.0≤1
+      ; defectRateNonnegative = oneNonnegative
       ; thresholdTimesGainBelowDefect = thresholdGain
       ; defectBelowRateTimesDissipation =
           subst
@@ -223,15 +241,24 @@ finiteBadGainBelowRestrictedDissipationWithInverseThreshold
       }
 
     result = Scaling.badGainBelowBOverDeltaDissipation rate
-  in
-  subst
-    (λ upper → Gain.sumPhysicalBadGain cells ≤ upper)
-    (solve
+
+    targetMeaning :
+      Threshold.thresholdInverse parameter * 1ℚ
+        * (density * factor
+          * Defect.badEnergyMass (Gain.mapDirectionalCells cells))
+      ≡ Threshold.thresholdInverse parameter
+          * density * factor
+          * Defect.badEnergyMass (Gain.mapDirectionalCells cells)
+    targetMeaning = solve
       ( Threshold.thresholdInverse parameter
       ∷ density
       ∷ factor
       ∷ Defect.badEnergyMass (Gain.mapDirectionalCells cells)
-      ∷ []))
+      ∷ [])
+  in
+  subst
+    (λ upper → Gain.sumPhysicalBadGain cells ≤ upper)
+    targetMeaning
     result
 
 hhDirectionalDefectDissipationDominationClosed : Bool
