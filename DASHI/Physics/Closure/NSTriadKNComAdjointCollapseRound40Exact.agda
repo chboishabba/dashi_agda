@@ -128,7 +128,8 @@ skewAdjointPairingIdentity {transport} skew left right =
     (transportTransposeIsAdjoint transport left right)
     (trans
       (cong
-        (statePairing left ∘ PQ.applyTransport)
+        (λ selected →
+          statePairing left (PQ.applyTransport selected right))
         (transposeIsNegative skew))
       (solve
         ( PQ.coarseToCoarse transport
@@ -138,9 +139,6 @@ skewAdjointPairingIdentity {transport} skew left right =
         ∷ PQ.coarse left ∷ PQ.detail left
         ∷ PQ.coarse right ∷ PQ.detail right
         ∷ [])))
-  where
-  _∘_ : ∀ {A B C : Set} → (B → C) → (A → B) → A → C
-  (f ∘ g) x = f (g x)
 
 skewAdjointForcesCrossChannelsNegativeAdjoints :
   ∀ {transport} →
@@ -168,7 +166,7 @@ lowerChannelIsNegativeUpperAdjoint {transport} skew =
   Grading.transportExt
     refl
     refl
-    (sym cross)
+    cross
     refl
 
 commutatorTransport : PQ.LinearTransport2 → PQ.LinearTransport2
@@ -237,20 +235,13 @@ commutatorSquareSingleGram :
       (PQ.fineToCoarse transport * PQ.fineToCoarse transport)
       0ℚ 0ℚ
       (PQ.fineToCoarse transport * PQ.fineToCoarse transport)
-commutatorSquareSingleGram {transport} skew =
-  let cross = skewAdjointForcesCrossChannelsNegativeAdjoints skew
-  in
+commutatorSquareSingleGram {transport} skew
+  rewrite skewAdjointForcesCrossChannelsNegativeAdjoints skew =
   Grading.transportExt
-    (solve
-      (PQ.fineToCoarse transport ∷ PQ.coarseToFine transport ∷ []))
-    (solve
-      (PQ.fineToCoarse transport ∷ PQ.coarseToFine transport ∷ []))
-    (solve
-      (PQ.fineToCoarse transport ∷ PQ.coarseToFine transport ∷ []))
-    (trans
-      (solve
-        (PQ.fineToCoarse transport ∷ PQ.coarseToFine transport ∷ []))
-      refl)
+    (solve (PQ.fineToCoarse transport ∷ []))
+    (solve (PQ.fineToCoarse transport ∷ []))
+    (solve (PQ.fineToCoarse transport ∷ []))
+    (solve (PQ.fineToCoarse transport ∷ []))
 
 ------------------------------------------------------------------------
 -- Z2 audit invariant: odd transport switches grade and nothing else.
