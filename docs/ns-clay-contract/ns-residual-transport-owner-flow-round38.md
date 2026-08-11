@@ -5,6 +5,7 @@ Round 38 implements the concrete highest-alpha consequences of the Round-37 shor
 The outcome is a sharper frontier:
 
 - HH-good stretching descends through the source-vorticity quotient modulo the target vorticity line, with `w cross v` as the division-free residual;
+- for a physical amplitude-weighted good pair, the good directional threshold is now proved directly inside the corrected nonlinear strain scalar: `|stretch|^2 <= delta a^2 b^4`;
 - a finite zero-mass PV operator annihilates the coarse constant projector and factors through projector detail;
 - periodic kernel zero mass is reduced to the already-formalized zero-Fourier-mode criterion, so it is not an independent assumption once the literal strain-kernel realization exists;
 - `Com` is exactly the oriented odd part of a `Z2`-graded transport;
@@ -15,7 +16,7 @@ The outcome is a sharper frontier:
 
 None of these finite/algebraic results is promoted to unconditional periodic Navier--Stokes regularity.
 
-## 1. HH-good depends only on the vorticity-line residual
+## 1. HH-good depends only on the vorticity-line residual, and the good threshold already reaches stretching
 
 Define
 
@@ -65,12 +66,35 @@ Combining that with the existing pointwise directional-depletion theorem gives, 
   <= |v|^4 |d|^2.
 ```
 
-Thus the source component parallel to the target line is exactly invisible to stretching. The remaining HH-good theorem is an analytic estimate on the transported detail.
+Round 38 then pushes this through the *actual good threshold* on the repository's physical amplitude-weighted vorticity pair. If
+
+```text
+omega_s = a xi,
+omega_t = b eta,
+Theta(xi,eta) <= delta,
+```
+
+then the exact physical defect identity gives
+
+```text
+|omega_s cross omega_t|^2 = a^2 b^2 Theta,
+|omega_t|^2 = b^2,
+```
+
+and the new theorem `goodPhysicalStretchingThresholdBound` proves
+
+```text
+|omega_t . S_theta(omega_s) omega_t|^2
+  <= delta * a^2 * b^4.
+```
+
+So neither the local geometric factor nor the good-set small parameter remains an A3/A4 mystery. The remaining HH-good theorem is now specifically the periodic PV/shell/time integration of this already-thresholded physical nonlinear quantity.
 
 Sources:
 
 - Peter Constantin and Charles Fefferman, *Direction of Vorticity and the Problem of Global Regularity for the Navier--Stokes Equations*, DOI `10.1512/iumj.1993.42.42034`.
 - Peter Constantin, Charles Fefferman and Andrew J. Majda, *Geometric Constraints on Potentially Singular Solutions for the 3-D Euler Equations*, DOI `10.1080/03605309608821197`.
+- Xiaoyutao Luo, *A Beale--Kato--Majda Criterion with Optimal Frequency and Temporal Localization*, DOI `10.1007/s00021-019-0411-z`, arXiv DOI `10.48550/arXiv.1803.05569`.
 
 ## 2. PV cancellation is a detail factorization, and periodic zero mass has a Fourier criterion
 
@@ -289,7 +313,7 @@ literal physical carrier
 
 ## Revised highest-alpha frontier
 
-1. **A3/A4 — literal periodic PV detail realization:** realize the torus strain kernel on the physical solution, prove its zero-mode multiplier and hence zero mass, identify the PV/detail representation, then integrate the exact `|v|^4 |detail|^2` depletion with uniform shell constants to obtain `physicalHHGoodOwnerEstimate`.
+1. **A3/A4 — literal periodic PV detail realization:** realize the torus strain kernel on the physical solution, prove its zero-mode multiplier and hence zero mass, identify the PV/detail representation, then integrate the already-thresholded `|stretch|^2 <= delta a^2 b^4` inequality with uniform shell constants to obtain `physicalHHGoodOwnerEstimate`.
 2. **A6/A8 — physical restricted HH-bad gain:** identify the trajectory bad mask, prove gain against the restricted viscous charge, prove the separate Luo upper critical-smallness estimate, and close integrated-defect/positive-variation bounds if switching is used.
 3. **A1/A2 — physical odd-transport Gram realization:** identify the literal shell odd transport with the two Round-35 Gram/Cotlar pair products. The even transport is algebraically irrelevant.
 4. **F4 — one same-object equality remains:** prove the actual Galerkin convection/energy pairing equals the now-cancelled ordered physical-incidence fold.
