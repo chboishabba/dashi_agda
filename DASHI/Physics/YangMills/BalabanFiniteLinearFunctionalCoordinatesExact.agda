@@ -19,7 +19,7 @@ module DASHI.Physics.YangMills.BalabanFiniteLinearFunctionalCoordinatesExact whe
 -- selected-background gauge derivative into a rectangular KKT matrix.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _*_)
 import Data.Rational.Tactic.RingSolver as ℚRing
