@@ -2,11 +2,12 @@ module DASHI.Cognition.PNF.EvidenceHorizon369 where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; suc)
 open import Data.Empty using (⊥)
 open import Data.Integer using (ℤ)
 
 import DASHI.Biology.SSP369JResolutionBifiltrationExact as Horizon
+import DASHI.Foundations.StratifiedResolutionTowerExact as Resolution
 import DASHI.Reasoning.AttractorAlignedBranchSelection as Selection
 import DASHI.Reasoning.RelationalBranchInterference as Interference
 import DASHI.Cognition.PNF.ProofRelevantIdentityFibres as Identity
@@ -63,6 +64,14 @@ phaseMagnitude :
 phaseMagnitude coordinate =
   Interference.interactionMagnitude (phaseClassification coordinate)
 
+mapEvidenceCandidate :
+  ∀ {A B family} →
+  (A → B) →
+  EvidenceCoordinate A family →
+  EvidenceCoordinate B family
+mapEvidenceCandidate f (evidenceCoordinate candidate value classification) =
+  evidenceCoordinate (f candidate) value classification
+
 H3Evidence : Set → Set
 H3Evidence Candidate =
   Horizon.Triple (EvidenceCoordinate Candidate localStructuralEvidence)
@@ -92,6 +101,69 @@ project6to3 = localStructural
 
 project9to6 : ∀ {Candidate} → H9Evidence Candidate → H6Evidence Candidate
 project9to6 = firstSix
+
+------------------------------------------------------------------------
+-- Generic resolution × relational-horizon bifiltration.
+--
+-- Unlike the concrete decimal-address witness in SSP369, this bridge accepts
+-- any existing ResolutionTower.  Candidate coordinates live at the tower's
+-- current resolution.  Coarsening changes only the candidate coordinate and
+-- preserves the exact signed evidence/classification receipt.  Forgetting a
+-- 3-coordinate relational block commutes definitionally with coarsening.
+------------------------------------------------------------------------
+
+H3AtResolution : Resolution.ResolutionTower → Nat → Set
+H3AtResolution tower r = H3Evidence (Resolution.Carrier tower r)
+
+H6AtResolution : Resolution.ResolutionTower → Nat → Set
+H6AtResolution tower r = H6Evidence (Resolution.Carrier tower r)
+
+H9AtResolution : Resolution.ResolutionTower → Nat → Set
+H9AtResolution tower r = H9Evidence (Resolution.Carrier tower r)
+
+coarsenH3 :
+  ∀ {tower r} →
+  H3AtResolution tower (suc r) →
+  H3AtResolution tower r
+coarsenH3 {tower} =
+  Horizon.mapTriple
+    (mapEvidenceCandidate (Resolution.project tower))
+
+coarsenH6 :
+  ∀ {tower r} →
+  H6AtResolution tower (suc r) →
+  H6AtResolution tower r
+coarsenH6 {tower} (h6Evidence firstBlock secondBlock) =
+  h6Evidence
+    (coarsenH3 {tower = tower} firstBlock)
+    (Horizon.mapTriple
+      (mapEvidenceCandidate (Resolution.project tower))
+      secondBlock)
+
+coarsenH9 :
+  ∀ {tower r} →
+  H9AtResolution tower (suc r) →
+  H9AtResolution tower r
+coarsenH9 {tower} (h9Evidence firstSixBlock thirdBlock) =
+  h9Evidence
+    (coarsenH6 {tower = tower} firstSixBlock)
+    (Horizon.mapTriple
+      (mapEvidenceCandidate (Resolution.project tower))
+      thirdBlock)
+
+coarsenThenProject6to3EqualsProjectThenCoarsen :
+  ∀ {tower r} (x : H6AtResolution tower (suc r)) →
+  project6to3 (coarsenH6 {tower = tower} x)
+  ≡ coarsenH3 {tower = tower} (project6to3 x)
+coarsenThenProject6to3EqualsProjectThenCoarsen
+    (h6Evidence firstBlock secondBlock) = refl
+
+coarsenThenProject9to6EqualsProjectThenCoarsen :
+  ∀ {tower r} (x : H9AtResolution tower (suc r)) →
+  project9to6 (coarsenH9 {tower = tower} x)
+  ≡ coarsenH6 {tower = tower} (project9to6 x)
+coarsenThenProject9to6EqualsProjectThenCoarsen
+    (h9Evidence firstSixBlock thirdBlock) = refl
 
 ------------------------------------------------------------------------
 -- The horizon projection forgets evidence coordinates; it does not assert
@@ -128,9 +200,6 @@ worldIdentityStillUsesExistingAuthority =
 
 ------------------------------------------------------------------------
 -- Relational horizon and representation resolution are explicitly independent.
--- This is a PNF claim boundary, reusing the interpretation already proved by
--- SSP369JResolutionBifiltrationExact rather than constructing another
--- resolution tower.
 ------------------------------------------------------------------------
 
 record EvidenceHorizon369Boundary : Set where
@@ -145,6 +214,9 @@ record EvidenceHorizon369Boundary : Set where
     coarsePhaseAssignedWithoutFineSignedWitness : Bool
     coarsePhaseAssignedWithoutFineSignedWitnessIsFalse :
       coarsePhaseAssignedWithoutFineSignedWitness ≡ false
+    finiteResolutionHorizonSquaresCommute : Bool
+    finiteResolutionHorizonSquaresCommuteIsTrue :
+      finiteResolutionHorizonSquaresCommute ≡ true
     h9AutomaticallyPromotesExternalIdentity : Bool
     h9AutomaticallyPromotesExternalIdentityIsFalse :
       h9AutomaticallyPromotesExternalIdentity ≡ false
@@ -160,5 +232,6 @@ canonicalEvidenceHorizon369Boundary =
     false refl
     false refl
     false refl
+    true refl
     false refl
     false refl
