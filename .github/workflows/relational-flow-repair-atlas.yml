@@ -5,9 +5,11 @@ on:
     paths:
       - 'DASHI/RelationalFlowRepairAtlas.agda'
       - 'DASHI/FullRelationalFlowRepairHyperfabric.agda'
+      - 'DASHI/Core/AttributedSourceCore.agda'
       - 'DASHI/Core/CompiledInversePlusOneCore.agda'
       - 'DASHI/Core/RelationalFlowResidualComposition.agda'
       - 'DASHI/Core/RelationalHypervoxelBraidCore.agda'
+      - 'DASHI/Cognition/PNF/TraumaMemoryHypervoxelBridge.agda'
       - 'DASHI/Education/RelationalEducationGateAlgebra.agda'
       - 'DASHI/Governance/RelationalFlowGateAlgebra.agda'
       - 'DASHI/Biology/PredictiveMetastabilityTraumaBridge.agda'
@@ -17,14 +19,20 @@ on:
       - 'DASHI/Governance/CyberneticClinicalInstitutionalRepairBridge.agda'
       - 'DASHI/Governance/InstitutionalContinuityRepairArithmetic.agda'
       - 'DASHI/Governance/MedicalCannabisPresenceImpairmentBoundary.agda'
+      - 'DASHI/Reasoning/**'
+      - 'Docs/Relational*.md'
+      - 'Docs/DevelopmentalAttunementPNFBridge.md'
+      - 'Docs/ParentChildJointCounsellingTemplate.md'
       - '.github/workflows/relational-flow-repair-atlas.yml'
   pull_request:
     paths:
       - 'DASHI/RelationalFlowRepairAtlas.agda'
       - 'DASHI/FullRelationalFlowRepairHyperfabric.agda'
+      - 'DASHI/Core/AttributedSourceCore.agda'
       - 'DASHI/Core/CompiledInversePlusOneCore.agda'
       - 'DASHI/Core/RelationalFlowResidualComposition.agda'
       - 'DASHI/Core/RelationalHypervoxelBraidCore.agda'
+      - 'DASHI/Cognition/PNF/TraumaMemoryHypervoxelBridge.agda'
       - 'DASHI/Education/RelationalEducationGateAlgebra.agda'
       - 'DASHI/Governance/RelationalFlowGateAlgebra.agda'
       - 'DASHI/Biology/PredictiveMetastabilityTraumaBridge.agda'
@@ -34,6 +42,10 @@ on:
       - 'DASHI/Governance/CyberneticClinicalInstitutionalRepairBridge.agda'
       - 'DASHI/Governance/InstitutionalContinuityRepairArithmetic.agda'
       - 'DASHI/Governance/MedicalCannabisPresenceImpairmentBoundary.agda'
+      - 'DASHI/Reasoning/**'
+      - 'Docs/Relational*.md'
+      - 'Docs/DevelopmentalAttunementPNFBridge.md'
+      - 'Docs/ParentChildJointCounsellingTemplate.md'
       - '.github/workflows/relational-flow-repair-atlas.yml'
 
 concurrency:
@@ -72,12 +84,14 @@ jobs:
             export AGDA_LOG_PATH="$GITHUB_WORKSPACE/agda-relational-flow-repair-check.log"
             export AGDA_JOBS=3
             targets=(
+              DASHI/Core/AttributedSourceCore.agda
               DASHI/Core/CompiledInversePlusOneCore.agda
               DASHI/Core/RelationalFlowResidualComposition.agda
               DASHI/Core/RelationalHypervoxelBraidCore.agda
               DASHI/Education/RelationalEducationGateAlgebra.agda
               DASHI/Governance/RelationalFlowGateAlgebra.agda
               DASHI/Biology/PredictiveMetastabilityTraumaBridge.agda
+              DASHI/Cognition/PNF/TraumaMemoryHypervoxelBridge.agda
               DASHI/Culture/PatternMindReciprocityLoveBridge.agda
               DASHI/Culture/SemioticPhallicLackAmalekBridge.agda
               DASHI/Culture/IntersectionalPowerValueFolkModelBoundary.agda
@@ -85,6 +99,24 @@ jobs:
               DASHI/Governance/InstitutionalContinuityRepairArithmetic.agda
               DASHI/Governance/MedicalCannabisPresenceImpairmentBoundary.agda
               DASHI/FullRelationalFlowRepairHyperfabric.agda
+              DASHI/Reasoning/RelationalStateCore.agda
+              DASHI/Reasoning/RelationalSharedStateUpdate.agda
+              DASHI/Reasoning/ConditionalResponseTree.agda
+              DASHI/Reasoning/DefensiveReversalRepair.agda
+              DASHI/Reasoning/IntergenerationalNameIntrusion.agda
+              DASHI/Reasoning/AttractorAlignedBranchSelection.agda
+              DASHI/Reasoning/RelationalBranchInterference.agda
+              DASHI/Reasoning/RelationalTernaryPhaseGeometry.agda
+              DASHI/Reasoning/RelationalBranchCobordismGeometry.agda
+              DASHI/Reasoning/RelationalProcessMemoryHyperfabric.agda
+              DASHI/Reasoning/RelationalGeometricProcessIntegration.agda
+              DASHI/Reasoning/DevelopmentalAttunementPNFBridge.agda
+              DASHI/Reasoning/DevelopmentalExplanationWithdrawalExact.agda
+              DASHI/Reasoning/RelationalFormalismSourceAtlas.agda
+              DASHI/Reasoning/RelationalBranchGeometrySourceAtlas.agda
+              DASHI/Reasoning/RelationalRegression.agda
+              DASHI/Reasoning/RelationalBranchGeometryRegression.agda
+              DASHI/Reasoning/RelationalEverything.agda
               DASHI/RelationalFlowRepairAtlas.agda
             )
             scripts/run_agda29_parallel_check.sh "${targets[@]}"
