@@ -152,9 +152,9 @@ selectedBackgroundBlockAverageConstraintMatrixApplyExact vector row =
 
 physicalSelectedBlockAverage :
   Coordinates.PhysicalSU2BondField4 → SelectedBlockAverageRow4 → ℚ
-physicalSelectedBlockAverage field (pair coordinate axis) =
+physicalSelectedBlockAverage bondField (pair coordinate axis) =
   Sums.sumRational (Block.physicalBlockSites Path4.side4)
-    (λ site → field coordinate (pair site axis))
+    (λ site → bondField coordinate (pair site axis))
 
 selectedBackgroundBlockAverageConstraintPhysicalExact :
   ∀ vector row →
