@@ -9,12 +9,20 @@ export AGDA_JOBS="${AGDA_JOBS:-1}"
 bash scripts/check_yang_mills_clay_highest_alpha_round42.sh
 
 files=(
+  DASHI/Physics/YangMills/BalabanFiniteRectangularRationalExact.agda
   DASHI/Physics/YangMills/BalabanFiniteRectangularAbsoluteColumnMassExact.agda
   DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeGramPerturbationTwoSidedMassExact.agda
   DASHI/Physics/YangMills/BalabanSelectedBackgroundFlatGreenPerturbationTwoSidedContractionExact.agda
   DASHI/Physics/YangMills/BalabanFiniteMatrixL1ContractionExact.agda
   DASHI/Physics/YangMills/BalabanSelectedBackgroundResidualPowerDecayExact.agda
   DASHI/Physics/YangMills/BalabanSelectedBackgroundRationalWeightedPowerDecayExact.agda
+  DASHI/Physics/YangMills/BalabanFiniteStrictContractionReopeningExact.agda
+  DASHI/Physics/YangMills/BalabanSelectedBackgroundResidualReopeningExact.agda
+  DASHI/Physics/YangMills/BalabanFiniteRationalInjectiveInverseExact.agda
+  DASHI/Physics/YangMills/BalabanSelectedBackgroundFiniteRationalReopeningExact.agda
+  DASHI/Physics/YangMills/BalabanBasedPathGaugeSectionExact.agda
+  DASHI/Physics/YangMills/BalabanSelectedCombinedConstraintTangentProjectorExact.agda
+  DASHI/Physics/YangMills/BalabanFiniteRGObservableReopeningExact.agda
 )
 
 for file in "${files[@]}"; do
@@ -26,6 +34,8 @@ if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|\{!|!\}|TERMINATING|NO_TERM
   exit 1
 fi
 
+grep -q 'applyComposeRectangularExact' DASHI/Physics/YangMills/BalabanFiniteRectangularRationalExact.agda
+grep -q 'rectangularAdjointExact' DASHI/Physics/YangMills/BalabanFiniteRectangularRationalExact.agda
 grep -q 'transposeProductColumnMassBound' DASHI/Physics/YangMills/BalabanFiniteRectangularAbsoluteColumnMassExact.agda
 grep -q 'selectedGaugeGramPerturbationAbsoluteColumnMassBound' DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeGramPerturbationTwoSidedMassExact.agda
 grep -q 'selectedBackgroundFlatGreenPerturbationColumnOneTenthContraction' DASHI/Physics/YangMills/BalabanSelectedBackgroundFlatGreenPerturbationTwoSidedContractionExact.agda
@@ -33,13 +43,33 @@ grep -q 'applyKernelL1Bound' DASHI/Physics/YangMills/BalabanFiniteMatrixL1Contra
 grep -q 'selectedBackgroundResidualPowerL1Decay' DASHI/Physics/YangMills/BalabanSelectedBackgroundResidualPowerDecayExact.agda
 grep -q 'selectedBackgroundWeightedGreenPerturbationColumnOneSixthContraction' DASHI/Physics/YangMills/BalabanSelectedBackgroundRationalWeightedPowerDecayExact.agda
 grep -q 'selectedBackgroundWeightedResidualPowerL1Decay' DASHI/Physics/YangMills/BalabanSelectedBackgroundRationalWeightedPowerDecayExact.agda
+grep -q 'oneSixthReopeningBound' DASHI/Physics/YangMills/BalabanFiniteStrictContractionReopeningExact.agda
+grep -q 'oneSixthHomogeneousReopeningPointwiseZero' DASHI/Physics/YangMills/BalabanFiniteStrictContractionReopeningExact.agda
+grep -q 'selectedBackgroundResidualIdentityPlusInjective' DASHI/Physics/YangMills/BalabanSelectedBackgroundResidualReopeningExact.agda
+grep -q 'selectedBackgroundWeightedResidualReopeningSixFifths' DASHI/Physics/YangMills/BalabanSelectedBackgroundResidualReopeningExact.agda
+grep -q 'finiteSquareInjectiveImpliesRationalInverse' DASHI/Physics/YangMills/BalabanFiniteRationalInjectiveInverseExact.agda
+grep -q 'selectedResidualIdentityPlusMatrixInjective' DASHI/Physics/YangMills/BalabanSelectedBackgroundFiniteRationalReopeningExact.agda
+grep -q 'selectedWeightedResidualInverseSixFifths' DASHI/Physics/YangMills/BalabanSelectedBackgroundFiniteRationalReopeningExact.agda
+grep -q 'rootedGaugeOrbitLift' DASHI/Physics/YangMills/BalabanBasedPathGaugeSectionExact.agda
+grep -q 'rootedGaugeRepresentativeUniqueInBasedOrbit' DASHI/Physics/YangMills/BalabanBasedPathGaugeSectionExact.agda
+grep -q 'selectedPhysicalTangentProjectorInKernel' DASHI/Physics/YangMills/BalabanSelectedCombinedConstraintTangentProjectorExact.agda
+grep -q 'selectedPhysicalTangentProjectorIdempotent' DASHI/Physics/YangMills/BalabanSelectedCombinedConstraintTangentProjectorExact.agda
+grep -q 'finiteRGObservableExpectationPreserved' DASHI/Physics/YangMills/BalabanFiniteRGObservableReopeningExact.agda
+grep -q 'finiteRGCompositeExpectationPreserved' DASHI/Physics/YangMills/BalabanFiniteRGObservableReopeningExact.agda
 
+grep -q '10.1017/CBO9781139020411' DASHI/Physics/YangMills/BalabanFiniteRectangularRationalExact.agda
 grep -q '10.1017/CBO9781139020411' DASHI/Physics/YangMills/BalabanFiniteRectangularAbsoluteColumnMassExact.agda
 grep -q '10.1007/BF01646473' DASHI/Physics/YangMills/BalabanSelectedBackgroundGaugeGramPerturbationTwoSidedMassExact.agda
 grep -q '10.1007/BF01646473' DASHI/Physics/YangMills/BalabanSelectedBackgroundFlatGreenPerturbationTwoSidedContractionExact.agda
 grep -q '10.1017/CBO9781139020411' DASHI/Physics/YangMills/BalabanFiniteMatrixL1ContractionExact.agda
 grep -q '10.1007/978-3-642-66282-9' DASHI/Physics/YangMills/BalabanSelectedBackgroundResidualPowerDecayExact.agda
 grep -q '10.1007/BF01646473' DASHI/Physics/YangMills/BalabanSelectedBackgroundRationalWeightedPowerDecayExact.agda
+grep -q '10.1007/978-3-642-66282-9' DASHI/Physics/YangMills/BalabanFiniteStrictContractionReopeningExact.agda
+grep -q '10.1007/BF01240355' DASHI/Physics/YangMills/BalabanSelectedBackgroundResidualReopeningExact.agda
+grep -q '10.1017/CBO9781139020411' DASHI/Physics/YangMills/BalabanFiniteRationalInjectiveInverseExact.agda
+grep -q '10.1007/BF01466594' DASHI/Physics/YangMills/BalabanBasedPathGaugeSectionExact.agda
+grep -q '10.1007/BF01229381' DASHI/Physics/YangMills/BalabanSelectedCombinedConstraintTangentProjectorExact.agda
+grep -q 'math-ph/0505008' DASHI/Physics/YangMills/BalabanFiniteRGObservableReopeningExact.agda
 
 scripts/run_agda29_parallel_check.sh \
   DASHI/Physics/YangMills/BalabanClayHighestAlphaRound42MasterReconciledValidation.agda
