@@ -33,7 +33,7 @@ grep -q 'oneDerivativeSchurNormalizesToInverseShell' DASHI/Physics/Closure/NSTri
 grep -q 'oneDerivativeDensityTimesShellIsScaleFree' DASHI/Physics/Closure/NSTriadKNHHBadOneDerivativeGainRound41Exact.agda
 grep -q 'twoDerivativeSchurNormalizesToScaleFree' DASHI/Physics/Closure/NSTriadKNHHBadOneDerivativeGainRound41Exact.agda
 grep -q 'physicalOneDerivativeFactorizationExposesInverseShell' DASHI/Physics/Closure/NSTriadKNHHBadOneDerivativeGainRound41Exact.agda
-grep -q 'densityBelowInverseShellTarget' DASHI/Physics/Closure/NSTriadKNHHBadInverseShellDensityFromSchurRound41Exact.agda
+grep -q 'densityBelowSchurInverseShellTarget' DASHI/Physics/Closure/NSTriadKNHHBadInverseShellDensityFromSchurRound41Exact.agda
 grep -q 'asRound39InverseShellCertificate' DASHI/Physics/Closure/NSTriadKNHHBadInverseShellDensityFromSchurRound41Exact.agda
 
 grep -q 'commutatorNormSquaredSingleChannelExact' DASHI/Physics/Closure/NSTriadKNComSingleChannelSpectralRound41Exact.agda
