@@ -37,29 +37,26 @@ module DASHI.Physics.YangMills.BalabanSelectedCombinedConstraintRawGramNoGoExact
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using ([]; _∷_)
-open import Data.Integer.Base using (+_)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; 1ℚ; _+_; _*_; _<_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using
-  (cong; subst; sym; trans)
+  (cong; cong₂; subst; sym; trans)
 open import Relation.Nullary.Negation.Core using (¬_)
 open import Relation.Nullary.Decidable.Core using (toWitness)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using
-  (pair; map; _++_)
-import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreCarrier as Block
+  (pair; map)
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
 import DASHI.Physics.YangMills.BalabanFiniteSumFubiniExact as Fubini
 import DASHI.Physics.YangMills.BalabanConstructiveRationalMatrixInverseExact as Matrix
 import DASHI.Physics.YangMills.BalabanFiniteRectangularRationalExact as Rect
-import DASHI.Physics.YangMills.BalabanPath4AxisAverageExact as Path4
-import DASHI.Physics.YangMills.BalabanP33PeriodicFourDimensionalHodgeIdentityExact as Periodic
+import DASHI.Physics.YangMills.BalabanP33PhysicalCoordinateBasisExact as Basis
+import DASHI.Physics.YangMills.BalabanP33FiniteKKTAdmissibleProjectorExact as StateCarrier
 import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Coordinates
-import DASHI.Physics.YangMills.BalabanP33PhysicalFlatGaugeDivergenceIdentificationExact as FlatGauge
 import DASHI.Physics.YangMills.BalabanP33PhysicalRationalWilsonPlaquetteJetExact as Physical
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundCombinedConstraintMatrixExact as Combined
 import DASHI.Physics.YangMills.BalabanSelectedCombinedConstraintRowCarrierExact as Rows
@@ -84,12 +81,6 @@ rawFlatRedundancyGaugeCoordinateExact : ∀ gaugeRow →
   rawFlatRedundancyMultiplier (Combined.gaugeConstraintRow gaugeRow) ≡ 1ℚ
 rawFlatRedundancyGaugeCoordinateExact gaugeRow = refl
 
-constantGaugeForwardDifferenceZero : ∀ axis site →
-  Periodic.forwardDifference axis
-    (FlatAdjoint.multiplierField unitGaugeMultiplier Coordinates.coordinateX) site
-  ≡ 0ℚ
-constantGaugeForwardDifferenceZero axis site = ℚRing.solve []
-
 actualFlatGaugeAdjointUnitZero : ∀ stateCoordinate →
   FlatAdjoint.actualFlatGaugeAdjoint unitGaugeMultiplier stateCoordinate ≡ 0ℚ
 actualFlatGaugeAdjointUnitZero
@@ -99,15 +90,20 @@ actualFlatGaugeAdjointUnitZero
       unitGaugeMultiplier (pair coordinate (pair axis site)))
     (ℚRing.solve [])
 
-sumZero : ∀ {A : Set} (values : Agda.Builtin.List.List A) →
+sumZero : ∀ {A : Set} (values : List A) →
   Sums.sumRational values (λ _ → 0ℚ) ≡ 0ℚ
 sumZero [] = refl
 sumZero (_ ∷ values) rewrite sumZero values = refl
 
+averageRows : List AverageRows.SelectedBlockAverageRow
+averageRows = Basis.elements AverageRows.selectedBlockAverageRowFiniteSelector
+
+gaugeRows : List Rows.FlatGauge.GaugeCoordinate4
+gaugeRows = Basis.elements Rows.selectedGaugeRowFiniteSelector
+
 averageTransposePartZero : ∀ stateCoordinate →
   Sums.sumRational
-    (map Combined.averageConstraintRow
-      (Rows.Basis.elements AverageRows.selectedBlockAverageRowFiniteSelector))
+    (map Combined.averageConstraintRow averageRows)
     (λ row →
       Rect.transposeRectangular
         (Combined.selectedBackgroundLinearizedConstraintMatrix
@@ -118,8 +114,7 @@ averageTransposePartZero : ∀ stateCoordinate →
 averageTransposePartZero stateCoordinate =
   trans
     (Fubini.sumRationalMap
-      Combined.averageConstraintRow
-      (Rows.Basis.elements AverageRows.selectedBlockAverageRowFiniteSelector)
+      Combined.averageConstraintRow averageRows
       (λ row →
         Rect.transposeRectangular
           (Combined.selectedBackgroundLinearizedConstraintMatrix
@@ -127,20 +122,16 @@ averageTransposePartZero stateCoordinate =
           stateCoordinate row
         * rawFlatRedundancyMultiplier row))
     (trans
-      (Sums.sumRationalCong
-        (Rows.Basis.elements AverageRows.selectedBlockAverageRowFiniteSelector)
-        _ (λ _ → 0ℚ)
+      (Sums.sumRationalCong averageRows _ (λ _ → 0ℚ)
         (λ row → ℚRing.solve-∀
           (Combined.selectedBackgroundLinearizedConstraintMatrix
             Physical.identityBackground
             (Combined.averageConstraintRow row) stateCoordinate)))
-      (sumZero
-        (Rows.Basis.elements AverageRows.selectedBlockAverageRowFiniteSelector)))
+      (sumZero averageRows))
 
 gaugeTransposePartEqualsFlatAdjoint : ∀ stateCoordinate →
   Sums.sumRational
-    (map Combined.gaugeConstraintRow
-      (Rows.Basis.elements Rows.selectedGaugeRowFiniteSelector))
+    (map Combined.gaugeConstraintRow gaugeRows)
     (λ row →
       Rect.transposeRectangular
         (Combined.selectedBackgroundLinearizedConstraintMatrix
@@ -151,18 +142,14 @@ gaugeTransposePartEqualsFlatAdjoint : ∀ stateCoordinate →
 gaugeTransposePartEqualsFlatAdjoint stateCoordinate =
   trans
     (Fubini.sumRationalMap
-      Combined.gaugeConstraintRow
-      (Rows.Basis.elements Rows.selectedGaugeRowFiniteSelector)
+      Combined.gaugeConstraintRow gaugeRows
       (λ row →
         Rect.transposeRectangular
           (Combined.selectedBackgroundLinearizedConstraintMatrix
             Physical.identityBackground)
           stateCoordinate row
         * rawFlatRedundancyMultiplier row))
-    (Sums.sumRationalCong
-      (Rows.Basis.elements Rows.selectedGaugeRowFiniteSelector)
-      _ _
-      (λ gaugeRow → refl))
+    (Sums.sumRationalCong gaugeRows _ _ (λ gaugeRow → refl))
 
 rawFlatRedundancyTransposeZero : ∀ stateCoordinate →
   KKT.selectedCombinedConstraintTransposeApply
@@ -171,10 +158,8 @@ rawFlatRedundancyTransposeZero : ∀ stateCoordinate →
 rawFlatRedundancyTransposeZero stateCoordinate =
   trans
     (Fubini.sumRationalAppend
-      (map Combined.averageConstraintRow
-        (Rows.Basis.elements AverageRows.selectedBlockAverageRowFiniteSelector))
-      (map Combined.gaugeConstraintRow
-        (Rows.Basis.elements Rows.selectedGaugeRowFiniteSelector))
+      (map Combined.averageConstraintRow averageRows)
+      (map Combined.gaugeConstraintRow gaugeRows)
       (λ row →
         Rect.transposeRectangular
           (Combined.selectedBackgroundLinearizedConstraintMatrix
@@ -189,8 +174,6 @@ rawFlatRedundancyTransposeZero stateCoordinate =
         (cong (0ℚ +_)
           (actualFlatGaugeAdjointUnitZero stateCoordinate))
         (ℚRing.solve [])))
-  where
-  open import Relation.Binary.PropositionalEquality using (cong₂)
 
 combinedConstraintOfZeroState : ∀ row →
   Combined.selectedBackgroundCombinedConstraintApply Physical.identityBackground
@@ -199,15 +182,12 @@ combinedConstraintOfZeroState : ∀ row →
 combinedConstraintOfZeroState row =
   trans
     (Sums.sumRationalCong
-      (Matrix.coordinates
-        DASHI.Physics.YangMills.BalabanP33FiniteKKTAdmissibleProjectorExact.physicalStateCarrier)
+      (Matrix.coordinates StateCarrier.physicalStateCarrier)
       _ (λ _ → 0ℚ)
       (λ coordinate → ℚRing.solve-∀
         (Combined.selectedBackgroundLinearizedConstraintMatrix
           Physical.identityBackground row coordinate)))
-    (sumZero
-      (Matrix.coordinates
-        DASHI.Physics.YangMills.BalabanP33FiniteKKTAdmissibleProjectorExact.physicalStateCarrier))
+    (sumZero (Matrix.coordinates StateCarrier.physicalStateCarrier))
 
 rawFlatRedundancyGramZero : ∀ row →
   KKT.selectedCombinedConstraintGramApply
@@ -218,25 +198,15 @@ rawFlatRedundancyGramZero row =
     (KKT.selectedCombinedConstraintGramActionExact
       Physical.identityBackground rawFlatRedundancyMultiplier row)
     (trans
-      (CombinedConstraintRespectsPointwise row)
+      (Sums.sumRationalCong
+        (Matrix.coordinates StateCarrier.physicalStateCarrier)
+        _ _
+        (λ coordinate →
+          cong
+            (Combined.selectedBackgroundLinearizedConstraintMatrix
+              Physical.identityBackground row coordinate *_)
+            (rawFlatRedundancyTransposeZero coordinate)))
       (combinedConstraintOfZeroState row))
-  where
-  CombinedConstraintRespectsPointwise : ∀ row →
-    Combined.selectedBackgroundCombinedConstraintApply Physical.identityBackground
-      (KKT.selectedCombinedConstraintTransposeApply
-        Physical.identityBackground rawFlatRedundancyMultiplier) row
-    ≡ Combined.selectedBackgroundCombinedConstraintApply Physical.identityBackground
-      (λ _ → 0ℚ) row
-  CombinedConstraintRespectsPointwise selected =
-    Sums.sumRationalCong
-      (Matrix.coordinates
-        DASHI.Physics.YangMills.BalabanP33FiniteKKTAdmissibleProjectorExact.physicalStateCarrier)
-      _ _
-      (λ coordinate →
-        cong
-          (Combined.selectedBackgroundLinearizedConstraintMatrix
-            Physical.identityBackground selected coordinate *_)
-          (rawFlatRedundancyTransposeZero coordinate))
 
 rawFlatRedundancyNotZero :
   ∀ site → ¬ (∀ row → rawFlatRedundancyMultiplier row ≡ zeroSelectedMultiplier row)
