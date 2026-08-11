@@ -99,3 +99,12 @@ AGDA_BIN="$root/scripts/agda29_without_k_wrapper.sh" \
   DASHI.Physics.Closure.NSTriadKNPeriodicPVOddComF4Round39Validation
 
 echo "Round39 periodic-PV/odd-Com/F4 checks passed"
+
+# Stacked-branch bridge: the Round-39 workflow exists on the base branch, so it
+# is the reliable PR-triggered CI entry point for a new Round-40 workflow file
+# that is not yet present on the base.  The environment guard prevents the
+# Round-40 checker from recursively re-entering itself when it cascades Round 39.
+if [[ "${DASHI_SKIP_ROUND40:-0}" != "1" \
+      && -f scripts/check_ns_defect_measure_adjoint_com_round40.sh ]]; then
+  DASHI_SKIP_ROUND40=1 bash scripts/check_ns_defect_measure_adjoint_com_round40.sh
+fi
