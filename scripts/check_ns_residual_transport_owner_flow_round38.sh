@@ -16,6 +16,7 @@ files=(
   DASHI/Physics/Closure/NSTriadKNHHBadOccupationCrossingRound38Exact.agda
   DASHI/Physics/Closure/NSTriadKNSignedOwnerCancellationFlowRound38Exact.agda
   DASHI/Physics/Closure/NSTriadKNPhysicalTriadOrbitFibreRound38Exact.agda
+  DASHI/Physics/Closure/NSTriadKNPhysicalGalerkinIncidencePermutationRound38Exact.agda
   DASHI/Physics/Closure/NSTriadKNResidualTransportOwnerFlowRound38Validation.agda
 )
 
@@ -50,13 +51,18 @@ grep -q 'restrictedBadViscosityProducesInverseShellCharging' DASHI/Physics/Closu
 grep -q 'occupationThresholdCostBound' DASHI/Physics/Closure/NSTriadKNHHBadOccupationCrossingRound38Exact.agda
 grep -q 'twoCoordinateBadRegionControl' DASHI/Physics/Closure/NSTriadKNHHBadOccupationCrossingRound38Exact.agda
 
-# Signed pre-tax flow and F4 orbit fibres.
+# Signed pre-tax flow and F4 orbit/incidence mathematics.
 grep -q 'cancellationFlowConservesSignedTotal' DASHI/Physics/Closure/NSTriadKNSignedOwnerCancellationFlowRound38Exact.agda
 grep -q 'positiveTaxDecreaseExact' DASHI/Physics/Closure/NSTriadKNSignedOwnerCancellationFlowRound38Exact.agda
 grep -q 'physicalCancellationEdgeTaxSavingExact' DASHI/Physics/Closure/NSTriadKNSignedOwnerCancellationFlowRound38Exact.agda
 grep -q 'pEnergyLegPreservesCutoff' DASHI/Physics/Closure/NSTriadKNPhysicalTriadOrbitFibreRound38Exact.agda
 grep -q 'qEnergyLegPreservesCutoff' DASHI/Physics/Closure/NSTriadKNPhysicalTriadOrbitFibreRound38Exact.agda
 grep -q 'finiteFibrePushforward' DASHI/Physics/Closure/NSTriadKNPhysicalTriadOrbitFibreRound38Exact.agda
+grep -q 'pEnergyLegEnumerationPermutation' DASHI/Physics/Closure/NSTriadKNPhysicalGalerkinIncidencePermutationRound38Exact.agda
+grep -q 'qEnergyLegEnumerationPermutation' DASHI/Physics/Closure/NSTriadKNPhysicalGalerkinIncidencePermutationRound38Exact.agda
+grep -q 'swapTriadEnumerationPermutation' DASHI/Physics/Closure/NSTriadKNPhysicalGalerkinIncidencePermutationRound38Exact.agda
+grep -q 'literalThreeLegFoldIsSixOrderedFold' DASHI/Physics/Closure/NSTriadKNPhysicalGalerkinIncidencePermutationRound38Exact.agda
+grep -q 'literalOrderedGalerkinIncidencePowerZero' DASHI/Physics/Closure/NSTriadKNPhysicalGalerkinIncidencePermutationRound38Exact.agda
 
 # Source metadata on load-bearing modules.
 grep -q '10.1512/iumj.1993.42.42034' DASHI/Physics/Closure/NSTriadKNVorticityLineResidualRound38Exact.agda
@@ -67,6 +73,8 @@ grep -q '10.1002/cpa.3160410704' DASHI/Physics/Closure/NSTriadKNComZ2GradingRoun
 grep -q '10.1007/s00021-019-0411-z' DASHI/Physics/Closure/NSTriadKNHHBadRestrictedDissipationRound38Exact.agda
 grep -q '10.1007/BF02547354' DASHI/Physics/Closure/NSTriadKNPhysicalTriadOrbitFibreRound38Exact.agda
 grep -q '10.1090/chel/343' DASHI/Physics/Closure/NSTriadKNPhysicalTriadOrbitFibreRound38Exact.agda
+grep -q '10.1007/BF02547354' DASHI/Physics/Closure/NSTriadKNPhysicalGalerkinIncidencePermutationRound38Exact.agda
+grep -q '10.1090/chel/343' DASHI/Physics/Closure/NSTriadKNPhysicalGalerkinIncidencePermutationRound38Exact.agda
 
 # Keep every still-physical analytic producer fail-closed.
 grep -q 'literalPeriodicPVDetailFactorizationConstructed = false' DASHI/Physics/Closure/NSTriadKNFinitePVDetailOperatorRound38Exact.agda
@@ -78,6 +86,7 @@ grep -q 'physicalHHBadIntegratedDefectBoundConstructed = false' DASHI/Physics/Cl
 grep -q 'physicalHHBadPositiveVariationBoundConstructed = false' DASHI/Physics/Closure/NSTriadKNHHBadOccupationCrossingRound38Exact.agda
 grep -q 'physicalNineOwnerCancellationNetworkConstructed = false' DASHI/Physics/Closure/NSTriadKNSignedOwnerCancellationFlowRound38Exact.agda
 grep -q 'literalGalerkinOrbitFibrePartitionConstructed = false' DASHI/Physics/Closure/NSTriadKNPhysicalTriadOrbitFibreRound38Exact.agda
+grep -q 'literalConvectionPairingEqualsOrderedIncidenceFoldConstructed = false' DASHI/Physics/Closure/NSTriadKNPhysicalGalerkinIncidencePermutationRound38Exact.agda
 
 chmod +x scripts/agda29_without_k_wrapper.sh
 AGDA_BIN="$root/scripts/agda29_without_k_wrapper.sh" \
