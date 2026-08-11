@@ -35,6 +35,8 @@ module DASHI.Physics.Closure.NSTriadKNHHPhysicalDefectRarityTransferRound40Exact
 -- defect envelope itself.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ; _*_; _≤_)
@@ -95,12 +97,12 @@ physicalBadMassVanishingFromWeightedDefectEnvelope family rarityVanishing =
   Transfer.badMassVanishingFromWeightedDefectEnvelope
     (asDynamicBadCellFamily family) rarityVanishing
 
-hhPhysicalDefectRarityTransferClosed : Agda.Builtin.Bool.Bool
-hhPhysicalDefectRarityTransferClosed = Agda.Builtin.Bool.true
+hhPhysicalDefectRarityTransferClosed : Bool
+hhPhysicalDefectRarityTransferClosed = true
 
-physicalNormalizedWeightedDefectEnvelopeConstructed : Agda.Builtin.Bool.Bool
-physicalNormalizedWeightedDefectEnvelopeConstructed = Agda.Builtin.Bool.false
+physicalNormalizedWeightedDefectEnvelopeConstructed : Bool
+physicalNormalizedWeightedDefectEnvelopeConstructed = false
 
 hhPhysicalDefectRarityTransferClosedIsTrue :
-  hhPhysicalDefectRarityTransferClosed ≡ Agda.Builtin.Bool.true
-hhPhysicalDefectRarityTransferClosedIsTrue = Agda.Builtin.Equality.refl
+  hhPhysicalDefectRarityTransferClosed ≡ true
+hhPhysicalDefectRarityTransferClosedIsTrue = refl
