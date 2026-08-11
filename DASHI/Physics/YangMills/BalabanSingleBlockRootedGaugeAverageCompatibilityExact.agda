@@ -19,8 +19,8 @@ module DASHI.Physics.YangMills.BalabanSingleBlockRootedGaugeAverageCompatibility
 -- block average.  The existing rooted path section constructs a genuine fine
 -- gauge function g_U with g_U(root)=1.  Whenever the concrete nonlinear block
 -- average restricts fine gauge transformations by evaluation at that same
--- root, the rooted section is therefore *automatically coarse anchored*.
--- The exact block-average covariance theorem then gives
+-- root, the rooted section is therefore automatically coarse anchored.  The
+-- exact block-average covariance theorem then gives
 --
 --       Q(U^{g_U}) = Q(U)
 --
@@ -34,6 +34,7 @@ module DASHI.Physics.YangMills.BalabanSingleBlockRootedGaugeAverageCompatibility
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Nat using (Nat)
 open import Relation.Binary.PropositionalEquality using (trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -45,7 +46,7 @@ import DASHI.Physics.YangMills.BalabanBlockAnchoredGaugeAverageCompatibilityExac
 record RootRestrictionData
     {G Block CoarseField Algebra : Set}
     (group : Gauge.GroupStructure G)
-    {N : Agda.Builtin.Nat.Nat}
+    {N : Nat}
     (paths : Rooted.RootedPathSystem N)
     (bundle : Average.CovariantBlockAverageData
       (Gauge.BondField N G)
@@ -61,7 +62,7 @@ open RootRestrictionData public
 rootCoarseIdentityData :
   ∀ {G Block CoarseField Algebra : Set}
     (group : Gauge.GroupStructure G)
-    {N : Agda.Builtin.Nat.Nat}
+    {N : Nat}
     (paths : Rooted.RootedPathSystem N)
     (bundle : Average.CovariantBlockAverageData
       (Gauge.BondField N G)
@@ -79,21 +80,22 @@ rootCoarseIdentityData group paths bundle unitActs = record
 rootedGaugeFunctionCoarseAnchored :
   ∀ {G Block CoarseField Algebra : Set}
     (group : Gauge.GroupStructure G)
-    {N : Agda.Builtin.Nat.Nat}
+    {N : Nat}
     (paths : Rooted.RootedPathSystem N)
     (bundle : Average.CovariantBlockAverageData
       (Gauge.BondField N G)
       (Gauge.GaugeFunction N G)
       Block CoarseField G Algebra)
     (restriction : RootRestrictionData group paths bundle)
+    (unitActs : ∀ coarseField →
+      Average.coarseGaugeAction bundle (Gauge.GroupStructure.unit group) coarseField
+      ≡ coarseField)
     gaugeField →
   Anchored.CoarseAnchoredGauge bundle
-    (rootCoarseIdentityData group paths bundle
-      (λ coarseField →
-        Average.coarseGaugeAction bundle (Gauge.GroupStructure.unit group) coarseField
-          ≡ coarseField))
+    (rootCoarseIdentityData group paths bundle unitActs)
     (Rooted.rootedGaugeFunction group paths gaugeField)
-rootedGaugeFunctionCoarseAnchored group paths bundle restriction gaugeField =
+rootedGaugeFunctionCoarseAnchored
+    group paths bundle restriction unitActs gaugeField =
   trans
     (restrictGaugeIsRootEvaluation restriction
       (Rooted.rootedGaugeFunction group paths gaugeField))
@@ -102,7 +104,7 @@ rootedGaugeFunctionCoarseAnchored group paths bundle restriction gaugeField =
 record RootedSingleBlockAverageData
     {G Block CoarseField Algebra : Set}
     (group : Gauge.GroupStructure G)
-    {N : Agda.Builtin.Nat.Nat}
+    {N : Nat}
     (paths : Rooted.RootedPathSystem N)
     (bundle : Average.CovariantBlockAverageData
       (Gauge.BondField N G)
@@ -119,7 +121,7 @@ open RootedSingleBlockAverageData public
 rootedGaugeRepresentativePreservesBlockAverage :
   ∀ {G Block CoarseField Algebra : Set}
     (group : Gauge.GroupStructure G)
-    {N : Agda.Builtin.Nat.Nat}
+    {N : Nat}
     (paths : Rooted.RootedPathSystem N)
     (bundle : Average.CovariantBlockAverageData
       (Gauge.BondField N G)
@@ -138,10 +140,9 @@ rootedGaugeRepresentativePreservesBlockAverage
 
     anchored : Anchored.CoarseAnchoredGauge bundle identityData
       (Rooted.rootedGaugeFunction group paths gaugeField)
-    anchored = trans
-      (restrictGaugeIsRootEvaluation (rootRestriction data)
-        (Rooted.rootedGaugeFunction group paths gaugeField))
-      (Rooted.rootedGaugeFunctionBased group paths gaugeField)
+    anchored = rootedGaugeFunctionCoarseAnchored
+      group paths bundle (rootRestriction data)
+      (unitActsTrivially data) gaugeField
   in
   Anchored.blockAverageFixedByCoarseIdentityGauge
     bundle identityData block
