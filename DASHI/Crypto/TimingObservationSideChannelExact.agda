@@ -62,7 +62,7 @@ timingSplitGivesObservationSplit split =
 
 ------------------------------------------------------------------------
 -- Timing can reveal much less than the hidden state and still reveal the
--- desired/protected result.  This is the timing analogue of public secret-label
+-- desired/protected result. This is the timing analogue of public secret-label
 -- factorisation: a decoder maps elapsed-time observation to a protected outcome.
 ------------------------------------------------------------------------
 
@@ -77,15 +77,13 @@ record TimingOutcomeFactorisation (system : TimedPublicSystem) : Set₁ where
       decodeRuntime (runtime system hidden chosenQuery) ≡ protectedOutcome hidden
 open TimingOutcomeFactorisation public
 
--- Thus a side channel need not identify the key: it is already consequential
--- when it factors a protected predicate/result.
 TimingRevealsOutcome :
   ∀ {system : TimedPublicSystem} →
   TimingOutcomeFactorisation system → Set
-TimingRevealsOutcome factorisation =
+TimingRevealsOutcome {system} factorisation =
   ∀ hidden →
     decodeRuntime factorisation
-      (runtime _ hidden (chosenQuery factorisation)) ≡
+      (runtime system hidden (chosenQuery factorisation)) ≡
     protectedOutcome factorisation hidden
 
 timingFactorisationRevealsOutcome :
