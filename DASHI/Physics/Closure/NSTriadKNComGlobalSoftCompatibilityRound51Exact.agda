@@ -20,19 +20,23 @@ module DASHI.Physics.Closure.NSTriadKNComGlobalSoftCompatibilityRound51Exact whe
 --   c_Com / epsilon,   c_Com = 133/1024.
 --
 -- If a downstream consumer requires this coefficient <= Bcrit, positivity of
--- epsilon rewrites the compatibility condition without division as
+-- epsilon implies the division-free minimum-split condition
 --
 --   c_Com <= Bcrit * epsilon.
 --
--- Thus a global continuation theorem may impose a minimum admissible soft split
--- even though the local owner floor is zero.  This module records that seam
--- explicitly so the final reserve audit cannot confuse local softness with
--- globally arbitrary epsilon.
+-- Round 51 DERIVES that condition from the coefficient cap; it is not another
+-- field supplied by the caller.  Thus global continuation compatibility can
+-- force a positive minimum soft split even while the local owner hard floor is
+-- zero.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base using (ℚ; 0ℚ; _*_; _≤_)
+open import Agda.Builtin.List using ([]; _∷_)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _*_; _≤_; nonNegative)
+import Data.Rational.Properties as ℚP
+open import Data.Rational.Tactic.RingSolver using (solve)
+open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
 
 import DASHI.Physics.Closure.NSTriadKNLuoBadCoherenceWeightedMarkovExact as Threshold
 import DASHI.Physics.Closure.NSTriadKNComExplicitSoftCoefficientRound50Exact as Com
@@ -46,11 +50,61 @@ record GlobalComRecursionCompatibility
     explicitCoefficientFitsCap :
       Com.explicitComCriticalCoefficient split ≤ criticalCoefficientCap
 
-    clearedMinimumSplitCondition :
-      Com.oneThousandTwentyFourth133
-      ≤ criticalCoefficientCap * Threshold.threshold split
-
 open GlobalComRecursionCompatibility public
+
+explicitCoefficientTimesSplitIsNumerator :
+  (split : Threshold.PositiveThreshold) →
+  Com.explicitComCriticalCoefficient split * Threshold.threshold split
+  ≡ Com.oneThousandTwentyFourth133
+explicitCoefficientTimesSplitIsNumerator split =
+  let
+    regroup :
+      (Com.oneThousandTwentyFourth133 * Threshold.thresholdInverse split)
+        * Threshold.threshold split
+      ≡ Com.oneThousandTwentyFourth133
+        * (Threshold.thresholdInverse split * Threshold.threshold split)
+    regroup = solve
+      ( Com.oneThousandTwentyFourth133
+      ∷ Threshold.thresholdInverse split
+      ∷ Threshold.threshold split
+      ∷ [])
+
+    cancel :
+      Com.oneThousandTwentyFourth133
+        * (Threshold.thresholdInverse split * Threshold.threshold split)
+      ≡ Com.oneThousandTwentyFourth133 * 1ℚ
+    cancel =
+      cong (Com.oneThousandTwentyFourth133 *_)
+        (Threshold.inverseMeaning split)
+
+    finish :
+      Com.oneThousandTwentyFourth133 * 1ℚ
+      ≡ Com.oneThousandTwentyFourth133
+    finish = ℚP.*-identityʳ Com.oneThousandTwentyFourth133
+  in trans regroup (trans cancel finish)
+
+clearedMinimumSplitCondition :
+  ∀ {split} →
+  GlobalComRecursionCompatibility split →
+  Com.oneThousandTwentyFourth133
+  ≤ criticalCoefficientCap _ * Threshold.threshold split
+clearedMinimumSplitCondition {split} compatible =
+  let
+    scaled :
+      Com.explicitComCriticalCoefficient split * Threshold.threshold split
+      ≤ criticalCoefficientCap compatible * Threshold.threshold split
+    scaled =
+      let instance splitNNI =
+        nonNegative (Threshold.thresholdNonnegative split)
+      in ℚP.*-monoʳ-≤-nonNeg
+        (Threshold.threshold split)
+        (explicitCoefficientFitsCap compatible)
+  in
+  subst
+    (λ left → left
+      ≤ criticalCoefficientCap compatible * Threshold.threshold split)
+    (explicitCoefficientTimesSplitIsNumerator split)
+    scaled
 
 record ComGlobalSoftSplitRequirement : Set where
   field
