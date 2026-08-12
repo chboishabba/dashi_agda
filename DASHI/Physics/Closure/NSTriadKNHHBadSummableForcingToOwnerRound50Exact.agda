@@ -17,26 +17,31 @@ module DASHI.Physics.Closure.NSTriadKNHHBadSummableForcingToOwnerRound50Exact wh
 -- DASHI CONTRIBUTION
 --
 -- Make the Round-50 fallback route a real consumer path rather than a side
--- lemma.  If the literal normalized gain-density coefficient is the SAME
+-- lemma. If the literal normalized gain-density coefficient is the SAME
 -- profile C_q that obeys borderline inheritance plus a bounded forcing prefix,
 -- then the ceiling
 --
 --   M_sum = C_0 + B_force
 --
--- feeds directly into the existing selected-threshold HH-bad owner.  Thus
--- strict uniform alpha<1 is not required by the owner architecture itself.
+-- feeds directly into the existing selected-threshold HH-bad owner, with the
+-- exact tax
+--
+--   eta_HHb = 2 M_sum.
+--
+-- Thus strict uniform alpha<1 is not required by the owner architecture itself.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Nat using (Nat; zero)
-open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _≤_; nonNegative)
+open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _≤_)
 import Data.Rational.Properties as ℚP
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import DASHI.Physics.Closure.NSTriadKNLuoBadCoherenceWeightedMarkovExact as Threshold
 import DASHI.Physics.Closure.NSTriadKNAdmissibleOwnerTaxLanguageRound28Exact as Owner
+import DASHI.Physics.Closure.NSTriadKNHHBadSharpDyadicGainRound33Exact as Sharp
 import DASHI.Physics.Closure.NSTriadKNHHBadRestrictedGainDensityRound39Exact as Gain
 import DASHI.Physics.Closure.NSTriadKNHHBadOneDerivativeFactorizationRound44Exact as Factor
 import DASHI.Physics.Closure.NSTriadKNHHBadRestrictedChargeSubchargeRound44Exact as Subcharge
@@ -144,6 +149,19 @@ physicalHHBadOwnerFromSummableForcing :
 physicalHHBadOwnerFromSummableForcing input =
   Selected.physicalHHBadOwnerFromOneSelectedThreshold
     (asPhysicalSelectedThresholdProfile input)
+
+physicalHHBadSummableOwnerEtaExact :
+  ∀ {environment effectiveViscosity summableInput}
+    (input : PhysicalSummableForcingHHBadOwnerInput
+      environment effectiveViscosity summableInput) →
+  ∀ shell →
+  Owner.eta (physicalHHBadOwnerFromSummableForcing input shell)
+  ≡ Sharp.two * summableCeiling summableInput
+physicalHHBadSummableOwnerEtaExact input shell =
+  Profile.physicalHHBadOwnerEtaIsTwiceProfileCeiling
+    (Selected.selectedThresholdToPhysicalRound45Profile
+      (asPhysicalSelectedThresholdProfile input))
+    shell
 
 summableForcingRouteFeedsMatureHHBadOwner : Bool
 summableForcingRouteFeedsMatureHHBadOwner = true
