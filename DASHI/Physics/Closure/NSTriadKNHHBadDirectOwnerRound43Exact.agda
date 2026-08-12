@@ -47,8 +47,10 @@ open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using
   (ℚ; 0ℚ; 1ℚ; _*_; _+_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚP
+open ℚP using (_≤?_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Nullary.Decidable.Core using (toWitness)
 
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
 import DASHI.Physics.Closure.NSTriadKNLuoDuplicateFreeTaxOwnershipRound26Exact as Tax
@@ -90,7 +92,7 @@ requiredHHBadGainNonnegative eta shell etaNN =
   let
     muNN = Floor.inverseDyadicScaleNonnegative shell
     halfNN : 0ℚ ≤ Sharp.half
-    halfNN = ℚP.nonNegative⁻¹ Sharp.half
+    halfNN = toWitness {a? = 0ℚ ≤? Sharp.half} _
     instance
       etaNNI = nonNegative etaNN
       halfNNI = nonNegative halfNN
@@ -150,9 +152,9 @@ record DirectHHBadOwnerInput
 open DirectHHBadOwnerInput public
 
 physicalHHBadDirectAbsorption :
-  ∀ {environment effectiveViscosity eta shell} →
-  DirectHHBadOwnerInput environment effectiveViscosity eta shell →
-  Gain.sumCellGain (Gain.cells (densityCertificate _))
+  ∀ {environment effectiveViscosity eta shell}
+    (input : DirectHHBadOwnerInput environment effectiveViscosity eta shell) →
+  Gain.sumCellGain (Gain.cells (densityCertificate input))
   ≤ eta * Owner.dissipation environment
 physicalHHBadDirectAbsorption
     {environment} {effectiveViscosity} {eta} {shell} input =
