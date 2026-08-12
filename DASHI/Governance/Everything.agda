@@ -28,6 +28,7 @@ import DASHI.Governance.RevolutionaryAdjunctRegression
 import DASHI.Governance.ProvenancePolicyTransport
 import DASHI.Governance.ProvenanceRestitutionBoundary
 import DASHI.Governance.QuotientDefectResidualRouting
+import DASHI.Governance.GovernanceQuotientCoreBridge
 import DASHI.Governance.SelectiveMultiResidualRouting
 import DASHI.Governance.TraumaWeightingTerminalisationLift
 import DASHI.Governance.AsymmetricReflectionPropositionLocality
