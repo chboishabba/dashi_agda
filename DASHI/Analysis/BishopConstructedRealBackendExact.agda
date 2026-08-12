@@ -86,12 +86,10 @@ bishopImportedAlgebraOrderPackaging = record
   ; absCong = BishopProperties.∣-∣-cong
   ; leResp = λ left right proof →
       BishopProperties.≤-respʳ-≃ right
-        (BishopProperties.≤-respˡ-≃
-          (BishopProperties.≃-symm left) proof)
+        (BishopProperties.≤-respˡ-≃ left proof)
   ; ltResp = λ left right proof →
       BishopProperties.<-respʳ-≃ right
-        (BishopProperties.<-respˡ-≃
-          (BishopProperties.≃-symm left) proof)
+        (BishopProperties.<-respˡ-≃ left proof)
   ; orderedFieldLaws = ⊤
   }
 
