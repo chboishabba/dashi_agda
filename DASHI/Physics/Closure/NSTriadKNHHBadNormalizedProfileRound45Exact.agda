@@ -49,6 +49,7 @@ open import Relation.Binary.PropositionalEquality using (subst; sym)
 import DASHI.Physics.Closure.NSTriadKNLuoDuplicateFreeTaxOwnershipRound26Exact as Tax
 import DASHI.Physics.Closure.NSTriadKNAdmissibleOwnerTaxLanguageRound28Exact as Owner
 import DASHI.Physics.Closure.NSTriadKNHHBadSharpDyadicGainRound33Exact as Sharp
+import DASHI.Physics.Closure.NSTriadKNLuoCriticalDissipationHHBadBridgeRound34Exact as LuoBridge
 import DASHI.Physics.Closure.NSTriadKNHHBadRestrictedGainDensityRound39Exact as Gain
 import DASHI.Physics.Closure.NSTriadKNHHBadOneDerivativeFactorizationRound44Exact as Factor
 import DASHI.Physics.Closure.NSTriadKNHHBadRestrictedChargeSubchargeRound44Exact as Subcharge
@@ -83,14 +84,11 @@ canonicalHHBadEtaNonnegative :
     (profile : UniformHHBadNormalizedProfile effectiveViscosity) →
   0ℚ ≤ canonicalHHBadEta profile
 canonicalHHBadEtaNonnegative profile =
-  let
-    twoNN : 0ℚ ≤ Sharp.two
-    twoNN = ℚP.nonNegative⁻¹ Sharp.two
-    instance
-      twoNNI = nonNegative twoNN
-      ceilingNNI = nonNegative (profileCeilingNonnegative profile)
-      productNNI =
-        ℚP.nonNeg*nonNeg⇒nonNeg Sharp.two (profileCeiling profile)
+  let instance
+    twoNNI = nonNegative LuoBridge.twoNonnegative
+    ceilingNNI = nonNegative (profileCeilingNonnegative profile)
+    productNNI =
+      ℚP.nonNeg*nonNeg⇒nonNeg Sharp.two (profileCeiling profile)
   in
   ℚP.nonNegative⁻¹ (canonicalHHBadEta profile)
 
