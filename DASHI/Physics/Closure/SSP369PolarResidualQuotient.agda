@@ -1,10 +1,10 @@
 module DASHI.Physics.Closure.SSP369PolarResidualQuotient where
 
-open import Agda.Builtin.Bool using (false; true)
+open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Product using (_,_)
 open import Data.Unit using (⊤; tt)
 
-import DASHI.Biology.TernaryCantorWheelDiffusionExact as Cantor
 import DASHI.Biology.TriadicKernelLiftQuotientExact as Triadic
 import DASHI.Core.FibreRestrictionCore as Fibre
 import DASHI.Core.ProvenanceBearingQuotient as Quotient
@@ -13,10 +13,6 @@ import DASHI.Physics.Closure.SSPPrimeLane369DepthWheelCantorBridge as Wheel
 
 ------------------------------------------------------------------------
 -- Exact reopening of the existing residual-bearing 9 -> 6 projection.
---
--- The codomain is not the six-state polar carrier alone. It is the existing
--- PolarProjectionResult = polar cell + zero-branch residual.  The residual
--- retains phase, so every full ternary phase cell is reconstructible exactly.
 ------------------------------------------------------------------------
 
 reopenPolarResult : Address.PolarProjectionResult → Wheel.FullPhaseCell
