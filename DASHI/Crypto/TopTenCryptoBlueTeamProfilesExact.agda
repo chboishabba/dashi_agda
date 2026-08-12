@@ -20,14 +20,17 @@ module DASHI.Crypto.TopTenCryptoBlueTeamProfilesExact where
 -- Yoav Nir and Adam Langley, RFC 8439, "ChaCha20 and Poly1305 for IETF
 -- Protocols". DOI: 10.17487/RFC8439.
 --
--- Kathleen Moriarty et al., RFC 8017, "PKCS #1: RSA Cryptography
--- Specifications Version 2.2". DOI: 10.17487/RFC8017.
+-- Kathleen Moriarty, Burt Kaliski, Jakob Jonsson, Andreas Rusch,
+-- RFC 8017, "PKCS #1: RSA Cryptography Specifications Version 2.2".
+-- DOI: 10.17487/RFC8017.
 --
 -- Whitfield Diffie and Martin E. Hellman, "New Directions in Cryptography",
 -- IEEE Trans. Inf. Theory 22(6), 1976. DOI: 10.1109/TIT.1976.1055638.
 --
 -- Adam Langley, Mike Hamburg, Sean Turner, RFC 7748, "Elliptic Curves for
--- Security". DOI: 10.17487/RFC7748.
+-- Security". DOI: 10.17487/RFC7748.  The X25519 profile below follows RFC
+-- 7748's special input semantics and therefore tracks all-zero shared-secret
+-- handling rather than importing generic Weierstrass-point validation rules.
 --
 -- Taher ElGamal, "A Public Key Cryptosystem and a Signature Scheme Based on
 -- Discrete Logarithms", IEEE Trans. Inf. Theory 31(4), 1985.
@@ -46,7 +49,6 @@ module DASHI.Crypto.TopTenCryptoBlueTeamProfilesExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Agda.Builtin.Nat using (Nat)
 open import Data.List.Base using (length)
 
 ------------------------------------------------------------------------
@@ -110,6 +112,7 @@ data AttackSurface : Set where
   paddingOrValidityOracle
   discreteLogShortcut
   publicElementValidation
+  allZeroSharedSecretOutcome
   ephemeralReuse
   componentKEMFailure
   componentKDFFailure
@@ -162,8 +165,8 @@ diffieHellmanProfile =
 x25519Profile : BlueTeamProfile
 x25519Profile =
   blueTeamProfile x25519 ellipticCurveKeyAgreement refl false
-    (discreteLogShortcut ∷ publicElementValidation ∷ ephemeralReuse ∷
-     computationalModelShift ∷ [])
+    (discreteLogShortcut ∷ allZeroSharedSecretOutcome ∷ ephemeralReuse ∷
+     contextBindingFailure ∷ computationalModelShift ∷ [])
 
 elGamalProfile : BlueTeamProfile
 elGamalProfile =
