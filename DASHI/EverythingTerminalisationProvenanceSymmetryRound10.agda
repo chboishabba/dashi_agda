@@ -25,11 +25,12 @@ import DASHI.Foundations.DepthWheelMacroBranchingExact
 import DASHI.Cognition.PNF.MemoryCommandSeparationExact
 
 -- Cryptographic reopening, concrete noisy-fibre witness, statewise key tests,
--- and security dependency / attack-factorisation formalism.
+-- public-only transcript invariance, and security dependency/attack formalism.
 import DASHI.Crypto.ReopeningArchitectureExact
 import DASHI.Crypto.MLKEMNoisyReopeningExact
 import DASHI.Crypto.KEMStateContractExact
 import DASHI.Crypto.MLWEKeyStateResidualExact
+import DASHI.Crypto.PassiveEncapsulationFibreInvariantExact
 import DASHI.Crypto.PublicSecretFactorisationAttackExact
 import DASHI.Crypto.MLKEMSecurityDependencyGraphExact
 
