@@ -51,6 +51,7 @@ open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
+import DASHI.Physics.YangMills.BalabanFiniteSumFubiniExact as Fubini
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
 import DASHI.Physics.YangMills.BalabanP33FiniteWeightedSchurSquaredExact as Schur
 import DASHI.Physics.YangMills.BalabanFiniteRectangularSchurSquaredExact as RectSchur
@@ -130,19 +131,35 @@ matrixAddColumnMassBound :
 matrixAddColumnMassBound left right leftBound rightBound column
     leftMass rightMass =
   let
+    pointwise :
+      RectSchur.rectAbsoluteColumnMass Physical.lieCoordinates3
+        (matrixAdd left right) column
+      ≤ Sums.sumRational Physical.lieCoordinates3
+          (λ row → ∣ left row column ∣ + ∣ right row column ∣)
+    pointwise =
+      Schur.sumPointwiseBelow Physical.lieCoordinates3 _ _
+        (λ row → ℚP.∣p+q∣≤∣p∣+∣q∣
+          (left row column) (right row column))
+
+    split :
+      Sums.sumRational Physical.lieCoordinates3
+        (λ row → ∣ left row column ∣ + ∣ right row column ∣)
+      ≡ RectSchur.rectAbsoluteColumnMass Physical.lieCoordinates3 left column
+        + RectSchur.rectAbsoluteColumnMass Physical.lieCoordinates3 right column
+    split = Fubini.sumRationalAdd Physical.lieCoordinates3
+      (λ row → ∣ left row column ∣)
+      (λ row → ∣ right row column ∣)
+
     triangle :
       RectSchur.rectAbsoluteColumnMass Physical.lieCoordinates3
         (matrixAdd left right) column
       ≤ RectSchur.rectAbsoluteColumnMass Physical.lieCoordinates3 left column
         + RectSchur.rectAbsoluteColumnMass Physical.lieCoordinates3 right column
-    triangle =
-      trans
-        (Schur.sumPointwiseBelow Physical.lieCoordinates3 _ _
-          (λ row → ℚP.∣p+q∣≤∣p∣+∣q∣
-            (left row column) (right row column)))
-        (Sums.sumRationalCong Physical.lieCoordinates3 _ _
-          (λ row → ℚRing.solve-∀
-            ∣ left row column ∣ ∣ right row column ∣))
+    triangle = subst
+      (λ upper →
+        RectSchur.rectAbsoluteColumnMass Physical.lieCoordinates3
+          (matrixAdd left right) column ≤ upper)
+      split pointwise
   in
   ℚP.≤-trans triangle (ℚP.+-mono-≤ leftMass rightMass)
 
