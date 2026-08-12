@@ -41,13 +41,14 @@ module DASHI.Physics.YangMills.BalabanCMP109FederbushResidualMassTelescopeExact 
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; _+_; _*_; _≤_; _/_; ∣_∣)
+  (ℚ; 0ℚ; _+_; _-_; _*_; _≤_; _/_; ∣_∣)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
+open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
+import DASHI.Physics.YangMills.BalabanFiniteSumFubiniExact as Fubini
 import DASHI.Physics.YangMills.BalabanP33FiniteWeightedSchurSquaredExact as Schur
 import DASHI.Physics.YangMills.BalabanFiniteRectangularSchurSquaredExact as RectSchur
 import DASHI.Physics.YangMills.BalabanFiniteMatrixL1ContractionExact as L1
@@ -60,12 +61,6 @@ import DASHI.Physics.YangMills.BalabanP33CMP109LocalLeafCalibrationExact as Cali
 
 matrixColumn : Jacobian.Lie3Matrix → Physical.LieCoordinate3 → Jacobian.Lie3Vector
 matrixColumn matrix column row = matrix row column
-
-composeColumnIsApply : ∀ outer inner column row →
-  Component.matrixCompose outer inner row column
-  ≡ L1.applyKernel Physical.lieCoordinates3 outer
-      (matrixColumn inner column) row
-composeColumnIsApply outer inner column row = refl
 
 composeColumnMassBound :
   ∀ outer inner logBound transportBound column →
@@ -81,40 +76,26 @@ composeColumnMassBound :
 composeColumnMassBound outer inner logBound transportBound column
     logNonnegative outerColumns innerColumn =
   let
+    action :
+      L1.vectorL1 Physical.lieCoordinates3
+        (L1.applyKernel Physical.lieCoordinates3 outer
+          (matrixColumn inner column))
+      ≤ logBound
+          * L1.vectorL1 Physical.lieCoordinates3 (matrixColumn inner column)
     action = L1.applyKernelL1Bound
       Physical.lieCoordinates3 outer (matrixColumn inner column)
       logBound logNonnegative outerColumns
 
-    innerMeaning :
-      L1.vectorL1 Physical.lieCoordinates3 (matrixColumn inner column)
-      ≡ RectSchur.rectAbsoluteColumnMass Physical.lieCoordinates3 inner column
-    innerMeaning = refl
-
-    actionMeaning :
-      L1.vectorL1 Physical.lieCoordinates3
-        (L1.applyKernel Physical.lieCoordinates3 outer
-          (matrixColumn inner column))
-      ≡ RectSchur.rectAbsoluteColumnMass Physical.lieCoordinates3
-          (Component.matrixCompose outer inner) column
-    actionMeaning = refl
+    actionAsColumn :
+      RectSchur.rectAbsoluteColumnMass Physical.lieCoordinates3
+        (Component.matrixCompose outer inner) column
+      ≤ logBound
+          * RectSchur.rectAbsoluteColumnMass Physical.lieCoordinates3 inner column
+    actionAsColumn = action
 
     scaledInner = Norm.scaleNonnegative logBound logNonnegative innerColumn
   in
-  ℚP.≤-trans
-    (subst
-      (λ lower → lower
-        ≤ logBound
-          * RectSchur.rectAbsoluteColumnMass
-              Physical.lieCoordinates3 inner column)
-      actionMeaning
-      (subst
-        (λ upper →
-          L1.vectorL1 Physical.lieCoordinates3
-            (L1.applyKernel Physical.lieCoordinates3 outer
-              (matrixColumn inner column))
-          ≤ logBound * upper)
-        innerMeaning action))
-    scaledInner
+  ℚP.≤-trans actionAsColumn scaledInner
 
 residualColumnTriangle : ∀ jacobian transport column →
   RectSchur.rectAbsoluteColumnMass Physical.lieCoordinates3
@@ -125,20 +106,42 @@ residualColumnTriangle : ∀ jacobian transport column →
     + RectSchur.rectAbsoluteColumnMass Physical.lieCoordinates3
       (Component.transportResidual transport) column
 residualColumnTriangle jacobian transport column =
-  Schur.sumPointwiseBelow Physical.lieCoordinates3 _ _
-    (λ row →
+  let
+    leftMatrix = Component.matrixCompose
+      (Component.logJacobianResidual jacobian) transport
+    rightMatrix = Component.transportResidual transport
+
+    pointwise : ∀ row →
+      ∣ Component.componentResidual jacobian transport row column ∣
+      ≤ ∣ leftMatrix row column ∣ + ∣ rightMatrix row column ∣
+    pointwise row =
       subst
         (λ value →
-          ∣ value ∣
-          ≤ ∣ Component.matrixCompose
-                (Component.logJacobianResidual jacobian) transport row column ∣
-            + ∣ Component.transportResidual transport row column ∣)
-        (Component.componentResidualTelescopeExact
-          jacobian transport row column)
+          ∣ value ∣ ≤ ∣ leftMatrix row column ∣ + ∣ rightMatrix row column ∣)
+        (sym (Component.componentResidualTelescopeExact
+          jacobian transport row column))
         (ℚP.∣p+q∣≤∣p∣+∣q∣
-          (Component.matrixCompose
-            (Component.logJacobianResidual jacobian) transport row column)
-          (Component.transportResidual transport row column)))
+          (leftMatrix row column) (rightMatrix row column))
+
+    raw = Schur.sumPointwiseBelow Physical.lieCoordinates3 _ _ pointwise
+
+    split :
+      Sums.sumRational Physical.lieCoordinates3
+        (λ row → ∣ leftMatrix row column ∣ + ∣ rightMatrix row column ∣)
+      ≡ RectSchur.rectAbsoluteColumnMass Physical.lieCoordinates3
+          leftMatrix column
+        + RectSchur.rectAbsoluteColumnMass Physical.lieCoordinates3
+          rightMatrix column
+    split = Fubini.sumRationalAdd Physical.lieCoordinates3
+      (λ row → ∣ leftMatrix row column ∣)
+      (λ row → ∣ rightMatrix row column ∣)
+  in
+  subst
+    (λ upper →
+      RectSchur.rectAbsoluteColumnMass Physical.lieCoordinates3
+        (Component.componentResidual jacobian transport) column
+      ≤ upper)
+    split raw
 
 componentResidualColumnMassBound :
   ∀ jacobian transport logBound transportNormBound transportDefectBound column →
@@ -181,15 +184,10 @@ selectedFederbushResidualBudgetExact = ℚRing.solve []
 
 selectedFederbushResidualFitsQuarter :
   selectedFederbushComponentResidualBudget ≤ Quarter.oneQuarter
-selectedFederbushResidualFitsQuarter = ℚP.nonNegative⁻¹
-  (Quarter.oneQuarter - selectedFederbushComponentResidualBudget)
-  |>gap
-  where
-  infixl 0 _|>gap
-  _|>gap :
-    0ℚ ≤ Quarter.oneQuarter - selectedFederbushComponentResidualBudget →
-    selectedFederbushComponentResidualBudget ≤ Quarter.oneQuarter
-  _|>gap proof = Norm.nonnegativeDifferenceImpliesBelow proof
+selectedFederbushResidualFitsQuarter =
+  Norm.nonnegativeDifferenceImpliesBelow
+    (ℚP.nonNegative⁻¹
+      (Quarter.oneQuarter - selectedFederbushComponentResidualBudget))
 
 selectedComponentResidualColumnQuarter :
   ∀ jacobian transport column →
