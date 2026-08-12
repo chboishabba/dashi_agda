@@ -11,12 +11,6 @@ import DASHI.Cognition.PNF.ProofRelevantIdentityFibres as Identity
 
 ------------------------------------------------------------------------
 -- Local temporal-role fibre.
---
--- A title/role denotes an entity only relative to a supported temporal cell.
--- Multiple entities may occupy the same role in ordered/disjoint cells without
--- contradiction.  This is the formal shape needed for a GWB tranche in which
--- Reagan and Bush can both be locally supported as "President" at different
--- times before any Wikidata/world alignment exists.
 ------------------------------------------------------------------------
 
 record TemporalCell : Set where
@@ -69,6 +63,32 @@ record RoleTimeCandidate
 open RoleTimeCandidate public
 
 ------------------------------------------------------------------------
+-- Locally unique resolution.
+--
+-- Uniqueness is over the document/corpus role-time carrier, not over external
+-- world entities.  This is sufficient to resolve "the President" inside an
+-- anchored local chronology while still leaving Wikidata alignment optional.
+------------------------------------------------------------------------
+
+record ResolvedRoleTimeDemand (demand : RoleTimeDemand) : Set₁ where
+  constructor resolvedRoleTimeDemand
+  field
+    selectedOccupancy : RoleOccupancy
+    selectedIsCandidate : RoleTimeCandidate demand selectedOccupancy
+    locallyUniqueEntity :
+      (other : RoleOccupancy) →
+      RoleTimeCandidate demand other →
+      Identity.canonicalEntityIdentity (occupant other)
+      ≡ Identity.canonicalEntityIdentity (occupant selectedOccupancy)
+
+open ResolvedRoleTimeDemand public
+
+resolvedLocalRoleEntity :
+  ∀ {demand} →
+  ResolvedRoleTimeDemand demand → Identity.CanonicalEntity
+resolvedLocalRoleEntity resolution = occupant (selectedOccupancy resolution)
+
+------------------------------------------------------------------------
 -- Local role resolution and external authority alignment are independent.
 ------------------------------------------------------------------------
 
@@ -94,12 +114,6 @@ data ExternalCandidatePromotionPermission : Set where
 externalCandidateAloneCannotPromoteWorldIdentity :
   ExternalCandidatePromotionPermission → ⊥
 externalCandidateAloneCannotPromoteWorldIdentity ()
-
-------------------------------------------------------------------------
--- A promoted world alignment must travel through the existing proof-relevant
--- identity machinery.  The witness must explicitly be external-alignment
--- evidence and target an external-authority canonical entity.
-------------------------------------------------------------------------
 
 record AdmittedWorldAlignment : Set where
   constructor admittedWorldAlignment
@@ -143,6 +157,9 @@ record TemporalRoleWorldAlignmentBoundary : Set where
     externalWorldPromotionStillProofRelevant : Bool
     externalWorldPromotionStillProofRelevantIsTrue :
       externalWorldPromotionStillProofRelevant ≡ true
+    localRoleTimeResolutionExistsAsSeparateType : Bool
+    localRoleTimeResolutionExistsAsSeparateTypeIsTrue :
+      localRoleTimeResolutionExistsAsSeparateType ≡ true
 
 open TemporalRoleWorldAlignmentBoundary public
 
@@ -152,4 +169,5 @@ canonicalTemporalRoleWorldAlignmentBoundary =
     false refl
     false refl
     false refl
+    true refl
     true refl
