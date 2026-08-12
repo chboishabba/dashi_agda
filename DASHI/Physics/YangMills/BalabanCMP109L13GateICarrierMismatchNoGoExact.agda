@@ -29,8 +29,8 @@ module DASHI.Physics.YangMills.BalabanCMP109L13GateICarrierMismatchNoGoExact whe
 -- than merely replacing DQ while silently reusing a 3072-coordinate inverse.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat; _*_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -46,11 +46,11 @@ l13ScalarCoordinateCount = 342732
 
 sideFourCoordinateArithmetic :
   sideFourScalarCoordinateCount ≡ 3 * (4 * sideFourSiteCount)
-sideFourCoordinateArithmetic = Agda.Builtin.Equality.refl
+sideFourCoordinateArithmetic = refl
 
 l13CoordinateArithmetic :
   l13ScalarCoordinateCount ≡ 3 * (4 * l13SiteCount)
-l13CoordinateArithmetic = Agda.Builtin.Equality.refl
+l13CoordinateArithmetic = refl
 
 data Empty : Set where
 
