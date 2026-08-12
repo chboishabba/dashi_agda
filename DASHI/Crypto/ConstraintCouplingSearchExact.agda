@@ -2,19 +2,48 @@ module DASHI.Crypto.ConstraintCouplingSearchExact where
 
 ------------------------------------------------------------------------
 -- CONSTRAINT COUPLING / SEPARATOR SEARCH
---
--- This is a finite abstraction of the graph induced by shared variables across
--- local residual constraints.  It proves three boundaries:
---   * disconnected components compose constructively;
---   * merely being connected is not a hardness theorem;
---   * a supplied bounded separator yields an explicit dynamic-programming work
---     formula.  No universal treewidth theorem is claimed here.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; _+_; _*_)
+open import Data.Empty using (⊥)
 open import Data.Product using (_×_; _,_)
+
+------------------------------------------------------------------------
+-- Explicit coupling graph.  Vertices are local residual coordinates; an edge
+-- means the corresponding constraints share information that reconciliation
+-- must respect.
+------------------------------------------------------------------------
+
+record ConstraintCouplingGraph : Set₁ where
+  constructor constraintCouplingGraph
+  field
+    Vertex : Set
+    Coupled : Vertex → Vertex → Set
+open ConstraintCouplingGraph public
+
+data Side : Set where leftSide rightSide : Side
+
+record DisconnectedCut (graph : ConstraintCouplingGraph) : Set₁ where
+  constructor disconnectedCut
+  field
+    side : Vertex graph → Side
+    noCrossEdge : ∀ {u v} →
+      Coupled graph u v →
+      side u ≡ side v
+open DisconnectedCut public
+
+-- A literal cross-edge refutes a claimed disconnected cut when its endpoints
+-- are proved to lie on opposite sides.
+record CrossEdgeWitness (graph : ConstraintCouplingGraph) : Set where
+  constructor crossEdgeWitness
+  field
+    u v : Vertex graph
+    edge : Coupled graph u v
+    differentSides : ∀ (cut : DisconnectedCut graph) →
+      side cut u ≡ side cut v → ⊥
+open CrossEdgeWitness public
 
 record DisconnectedTwoComponentProblem : Set₁ where
   constructor disconnectedTwoComponentProblem
@@ -22,7 +51,6 @@ record DisconnectedTwoComponentProblem : Set₁ where
     Left Right : Set
     ValidL : Left → Set
     ValidR : Right → Set
-
 open DisconnectedTwoComponentProblem public
 
 GlobalDisconnected :
@@ -36,7 +64,7 @@ disconnectedSearchFactors :
 disconnectedSearchFactors left right = left , right
 
 ------------------------------------------------------------------------
--- Connectedness alone is not hardness.  Equality couples two Bool variables,
+-- Connectedness alone is not hardness. Equality couples two Bool variables,
 -- yet (false,false) is an immediate satisfying witness.
 ------------------------------------------------------------------------
 
@@ -54,9 +82,9 @@ connectedConstraintHasEasyWitness : ConnectedBoolWitness
 connectedConstraintHasEasyWitness = connectedBoolWitness false false eq-false
 
 ------------------------------------------------------------------------
--- Separator certificate.  Rather than smuggling a complete treewidth theorem
--- into a small formal layer, the application supplies a separator-state count
--- and the work to solve each side conditioned on one separator state.
+-- Separator certificate. A full graph-theoretic treewidth theorem is not
+-- smuggled in: the application supplies the separator-state count and the
+-- conditioned work on each side. This is the exact finite DP seam.
 ------------------------------------------------------------------------
 
 record BoundedSeparatorSearchCertificate : Set where
@@ -66,7 +94,6 @@ record BoundedSeparatorSearchCertificate : Set where
     leftWorkPerState : Nat
     rightWorkPerState : Nat
     reconcileWorkPerState : Nat
-
 open BoundedSeparatorSearchCertificate public
 
 separatorDPBound : BoundedSeparatorSearchCertificate → Nat
@@ -76,8 +103,6 @@ separatorDPBound certificate =
    rightWorkPerState certificate +
    reconcileWorkPerState certificate)
 
--- A width-like bound becomes useful only through a proof-bearing certificate
--- connecting it to the actual separator state count.
 record WidthBoundedSeparator : Set where
   constructor widthBoundedSeparator
   field
@@ -85,12 +110,7 @@ record WidthBoundedSeparator : Set where
     stateAlphabetSize : Nat
     suppliedStateBound : Nat
     separatorSearch : BoundedSeparatorSearchCertificate
-
 open WidthBoundedSeparator public
-
-------------------------------------------------------------------------
--- Coupling can restore the full bottleneck after excellent local compression.
-------------------------------------------------------------------------
 
 record ReconciliationRestoresBottleneck : Set where
   constructor reconciliationRestoresBottleneck
@@ -100,5 +120,4 @@ record ReconciliationRestoresBottleneck : Set where
     reconciliationWork : Nat
     combinedWork : Nat
     exactAccounting : combinedWork ≡ localWork + reconciliationWork
-
 open ReconciliationRestoresBottleneck public
