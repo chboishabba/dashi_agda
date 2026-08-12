@@ -34,7 +34,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _-_; _*_)
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
@@ -182,16 +182,6 @@ resolventDifferenceExact matrixU inverseU matrixV inverseV invU invV row column 
     assoc1 = matrixComposeAssociative
       inverseU (Variation.matrixDifference matrixV matrixU) inverseV row column
 
-    splitInner :
-      Component.matrixCompose
-        (Variation.matrixDifference matrixV matrixU) inverseV
-      row column
-      ≡ Variation.matrixDifference
-          (Component.matrixCompose matrixV inverseV)
-          (Component.matrixCompose matrixU inverseV)
-          row column
-    splitInner = Variation.composeDifferenceLeft matrixV matrixU inverseV row column
-
     liftSplit :
       Component.matrixCompose inverseU
         (Component.matrixCompose
@@ -202,7 +192,9 @@ resolventDifferenceExact matrixU inverseU matrixV inverseV invU invV row column 
             (Component.matrixCompose matrixV inverseV)
             (Component.matrixCompose matrixU inverseV))
           row column
-    liftSplit = leftComposeCong inverseU _ _ splitInner row column
+    liftSplit = leftComposeCong inverseU _ _
+      (λ r c → Variation.composeDifferenceLeft matrixV matrixU inverseV r c)
+      row column
 
     splitOuter :
       Component.matrixCompose inverseU
