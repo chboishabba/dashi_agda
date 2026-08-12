@@ -11,6 +11,7 @@ module DASHI.Crypto.AlgorithmRelativeRecoveryCostExact where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; _+_; _*_)
 open import Data.Nat.Base using (_≤_; z≤n; s≤s)
+open import Data.Product using (_×_; _,_)
 
 record RecoveryArchitecture : Set where
   constructor recoveryArchitecture
@@ -49,6 +50,9 @@ open ComputationalImprovement public
 -- Exact regressions.
 ------------------------------------------------------------------------
 
+one≤two : 1 ≤ 2
+one≤two = s≤s z≤n
+
 beneficialBefore : RecoveryArchitecture
 beneficialBefore = recoveryArchitecture 2 7 6
 
@@ -56,7 +60,7 @@ beneficialAfter : RecoveryArchitecture
 beneficialAfter = recoveryArchitecture 1 7 6
 
 beneficialComparison : ObservationCostComparison
-beneficialComparison = observationCostComparison beneficialBefore beneficialAfter (s≤s (s≤s z≤n))
+beneficialComparison = observationCostComparison beneficialBefore beneficialAfter one≤two
 
 beneficialCostDrop : ComputationalImprovement beneficialComparison
 beneficialCostDrop = computationalImprovement 7 refl
@@ -71,14 +75,12 @@ adverseAfter : RecoveryArchitecture
 adverseAfter = recoveryArchitecture 1 1 10
 
 adverseComparison : ObservationCostComparison
-adverseComparison = observationCostComparison adverseBefore adverseAfter (s≤s (s≤s z≤n))
+adverseComparison = observationCostComparison adverseBefore adverseAfter one≤two
 
 candidateShrinkButCostRises :
   totalRecoveryCost adverseBefore ≡ 2
   × totalRecoveryCost adverseAfter ≡ 11
 candidateShrinkButCostRises = refl , refl
-  where
-  open import Data.Product using (_×_; _,_)
 
 ------------------------------------------------------------------------
 -- Search-cost information measure: the theorem-bearing object is an exact
