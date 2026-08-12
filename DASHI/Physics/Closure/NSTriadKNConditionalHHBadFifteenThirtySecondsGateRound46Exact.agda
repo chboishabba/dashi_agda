@@ -33,9 +33,8 @@ open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
 import Data.Integer.Base as Int
-open import Data.Product.Base using (_×_; _,_)
 open import Data.Rational.Base using
-  (ℚ; 0ℚ; 1ℚ; _+_; _*_; -_; _≤_; _<_ ; positive)
+  (ℚ; 0ℚ; 1ℚ; _+_; _*_; -_; _≤_; _<_; positive)
 import Data.Rational.Properties as ℚP
 open ℚP using (_<?_)
 open import Data.Rational.Tactic.RingSolver using (solve)
@@ -44,6 +43,15 @@ open import Relation.Nullary.Decidable.Core using (toWitness)
 
 import DASHI.Physics.Closure.NSTriadKNHHBadSharpDyadicGainRound33Exact as Sharp
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteCriticalFourClassClosureExact as Critical
+
+record _↔_ (A B : Set) : Set where
+  constructor iff
+  field
+    forward : A → B
+    backward : B → A
+
+open _↔_ public
+infix 2 _↔_
 
 oneSixteenth fifteenSixteenths fifteenThirtySeconds : ℚ
 oneSixteenth = Int.+ 1 / 16
@@ -151,24 +159,11 @@ ceilingBelowFifteenThirtySecondsImpliesFloorStrict ceiling ceilingStrict =
 conditionalFloorStrictIffFifteenThirtySeconds :
   ∀ ceiling →
   (conditionalIrreducibleFloor ceiling < 1ℚ)
-  × (ceiling < fifteenThirtySeconds)
+  ↔ (ceiling < fifteenThirtySeconds)
 conditionalFloorStrictIffFifteenThirtySeconds ceiling =
-  -- The pair stores both directions as functions by eta-expansion below.
-  -- A dedicated logical iff record would add no information to the frontier.
-  let
-    leftWitness : conditionalIrreducibleFloor ceiling < 1ℚ →
-      ceiling < fifteenThirtySeconds
-    leftWitness = floorStrictImpliesCeilingBelowFifteenThirtySeconds ceiling
-
-    rightWitness : ceiling < fifteenThirtySeconds →
-      conditionalIrreducibleFloor ceiling < 1ℚ
-    rightWitness = ceilingBelowFifteenThirtySecondsImpliesFloorStrict ceiling
-  in
-  -- This theorem name is retained for discoverability; the actual reusable
-  -- equivalence directions are the two function theorems immediately above.
-  -- There is no canonical inhabitant of either strict inequality without a
-  -- physical C_* proof, so no false witness is manufactured here.
-  λ { }
+  iff
+    (floorStrictImpliesCeilingBelowFifteenThirtySeconds ceiling)
+    (ceilingBelowFifteenThirtySecondsImpliesFloorStrict ceiling)
 
 conditionalFifteenThirtySecondsMilestoneExposed : Bool
 conditionalFifteenThirtySecondsMilestoneExposed = true
