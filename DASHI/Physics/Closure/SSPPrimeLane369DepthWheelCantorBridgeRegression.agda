@@ -1,6 +1,6 @@
 module DASHI.Physics.Closure.SSPPrimeLane369DepthWheelCantorBridgeRegression where
 
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_)
 
 import DASHI.Foundations.SSPPrimeLane369Refinement as Ref
 import DASHI.Physics.Closure.SSPPrimeLane369DepthWheelCantorBridge as Wheel
@@ -33,14 +33,12 @@ regression-full-phase-carrier-count :
 regression-full-phase-carrier-count = Wheel.fullPhaseAtlasCount
 
 regression-canonical-369-address-is-phase-zero :
-  Wheel.PhaseTagged369Address.phase Wheel.canonicalThreeSixNineTaggedAddress
-  ≡ Wheel.phase-0
+  Wheel.phase Wheel.canonicalThreeSixNineTaggedAddress ≡ Wheel.phase-0
 regression-canonical-369-address-is-phase-zero =
   Wheel.canonicalThreeSixNineTaggedPhaseIsZero
 
 regression-existing-depth-bridge-closes-one-wheel :
-  Wheel.SSPPrimeLane369DepthWheelCantorBridge.refinementWheelPhase
-    Wheel.canonicalThreeSixNineDepthWheelCantorBridge
+  Wheel.refinementWheelPhase Wheel.canonicalThreeSixNineDepthWheelCantorBridge
   ≡ Wheel.phase-0
 regression-existing-depth-bridge-closes-one-wheel =
   Wheel.canonicalThreeSixNineWheelPhaseIsZero
