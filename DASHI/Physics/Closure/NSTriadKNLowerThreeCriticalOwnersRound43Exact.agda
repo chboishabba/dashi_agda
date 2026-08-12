@@ -38,10 +38,13 @@ module DASHI.Physics.Closure.NSTriadKNLowerThreeCriticalOwnersRound43Exact where
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚP
+open ℚP using (_≤?_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Nullary.Decidable.Core using (toWitness)
 
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
 import DASHI.Physics.Closure.NSTriadKNLuoDuplicateFreeTaxOwnershipRound26Exact as Tax
@@ -186,31 +189,31 @@ comparableBelowTotal input =
       target
       addRest)
 
+oneSixtyFourthNonnegative : 0ℚ ≤ Critical.oneSixtyFourth
+oneSixtyFourthNonnegative =
+  toWitness {a? = 0ℚ ≤? Critical.oneSixtyFourth} _
+
 classBelowGlobalDissipationAtOneSixtyFourth :
   ∀ {environment}
     (input : PhysicalLowerThreeCriticalOwnerInput environment)
     (production : ℚ) →
   production ≤ Bony.totalInteraction (Critical.budget (closureData input)) →
-  production ≤ Critical.Critical.oneSixtyFourth * Owner.dissipation environment
+  production ≤ Critical.oneSixtyFourth * Owner.dissipation environment
 classBelowGlobalDissipationAtOneSixtyFourth {environment} input production classBelow =
   let
     closure = closureData input
     b = Critical.budget closure
     totalBound :
       Bony.totalInteraction b
-      ≤ Critical.Critical.oneSixtyFourth * Bony.shellEnergy b
+      ≤ Critical.oneSixtyFourth * Bony.shellEnergy b
     totalBound = Critical.criticalFourClassTerminalClosure closure
 
     scaledShell :
-      Critical.Critical.oneSixtyFourth * Bony.shellEnergy b
-      ≤ Critical.Critical.oneSixtyFourth * Owner.dissipation environment
+      Critical.oneSixtyFourth * Bony.shellEnergy b
+      ≤ Critical.oneSixtyFourth * Owner.dissipation environment
     scaledShell =
-      let
-        cNN : 0ℚ ≤ Critical.Critical.oneSixtyFourth
-        cNN = ℚP.nonNegative⁻¹ Critical.Critical.oneSixtyFourth
-        instance cNNI = nonNegative cNN
-      in
-      ℚP.*-monoˡ-≤-nonNeg Critical.Critical.oneSixtyFourth
+      let instance cNNI = nonNegative oneSixtyFourthNonnegative
+      in ℚP.*-monoˡ-≤-nonNeg Critical.oneSixtyFourth
         (shellEnergyBelowDissipation input)
   in
   ℚP.≤-trans classBelow (ℚP.≤-trans totalBound scaledShell)
@@ -223,7 +226,7 @@ physicalLHOwnerEstimate {environment} input =
   Owner.admissible-owner-estimate
     Tax.LH
     (Bony.lowHigh b)
-    Critical.Critical.oneSixtyFourth
+    Critical.oneSixtyFourth
     0ℚ 0ℚ
     ownerBound
   where
@@ -232,12 +235,12 @@ physicalLHOwnerEstimate {environment} input =
     input (Bony.lowHigh b) (lowHighBelowTotal input)
   ownerBound :
     Bony.lowHigh b
-    ≤ Critical.Critical.oneSixtyFourth * Owner.dissipation environment
+    ≤ Critical.oneSixtyFourth * Owner.dissipation environment
       + 0ℚ + 0ℚ * Owner.integralCritical environment
   ownerBound = subst
     (λ upper → Bony.lowHigh b ≤ upper)
     (sym (solve
-      (Critical.Critical.oneSixtyFourth ∷ Owner.dissipation environment ∷ [])))
+      (Critical.oneSixtyFourth ∷ Owner.dissipation environment ∷ [])))
     direct
 
 physicalHLOwnerEstimate :
@@ -248,7 +251,7 @@ physicalHLOwnerEstimate {environment} input =
   Owner.admissible-owner-estimate
     Tax.HL
     (Bony.highLow b)
-    Critical.Critical.oneSixtyFourth
+    Critical.oneSixtyFourth
     0ℚ 0ℚ
     ownerBound
   where
@@ -257,12 +260,12 @@ physicalHLOwnerEstimate {environment} input =
     input (Bony.highLow b) (highLowBelowTotal input)
   ownerBound :
     Bony.highLow b
-    ≤ Critical.Critical.oneSixtyFourth * Owner.dissipation environment
+    ≤ Critical.oneSixtyFourth * Owner.dissipation environment
       + 0ℚ + 0ℚ * Owner.integralCritical environment
   ownerBound = subst
     (λ upper → Bony.highLow b ≤ upper)
     (sym (solve
-      (Critical.Critical.oneSixtyFourth ∷ Owner.dissipation environment ∷ [])))
+      (Critical.oneSixtyFourth ∷ Owner.dissipation environment ∷ [])))
     direct
 
 physicalCCOwnerEstimate :
@@ -273,7 +276,7 @@ physicalCCOwnerEstimate {environment} input =
   Owner.admissible-owner-estimate
     Tax.CC
     (Bony.comparable b)
-    Critical.Critical.oneSixtyFourth
+    Critical.oneSixtyFourth
     0ℚ 0ℚ
     ownerBound
   where
@@ -282,12 +285,12 @@ physicalCCOwnerEstimate {environment} input =
     input (Bony.comparable b) (comparableBelowTotal input)
   ownerBound :
     Bony.comparable b
-    ≤ Critical.Critical.oneSixtyFourth * Owner.dissipation environment
+    ≤ Critical.oneSixtyFourth * Owner.dissipation environment
       + 0ℚ + 0ℚ * Owner.integralCritical environment
   ownerBound = subst
     (λ upper → Bony.comparable b ≤ upper)
     (sym (solve
-      (Critical.Critical.oneSixtyFourth ∷ Owner.dissipation environment ∷ [])))
+      (Critical.oneSixtyFourth ∷ Owner.dissipation environment ∷ [])))
     direct
 
 lowerThreeCriticalOwnerExtractionClosed : Bool
