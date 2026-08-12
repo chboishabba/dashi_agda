@@ -11,7 +11,7 @@ module DASHI.Core.DynamicProjectionCompositionExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 record ActionDynamics (State Action : Set) : Set₁ where
   constructor actionDynamics
@@ -108,12 +108,10 @@ compositeEqualNowGivesEqualAfterTrace :
   ≡ project second (project first right) →
   project second (project first (runTrace dX actions left))
   ≡ project second (project first (runTrace dX actions right))
-compositeEqualNowGivesEqualAfterTrace first second actions same =
+compositeEqualNowGivesEqualAfterTrace
+  {dZ = dZ} first second actions {left} {right} same =
   trans
-    (compositeTraceCommutes first second actions _)
+    (compositeTraceCommutes first second actions left)
     (trans
-      (cong (runTrace _ actions) same)
-      (symmetry (compositeTraceCommutes first second actions _)))
-  where
-    symmetry : ∀ {A : Set} {x y : A} → x ≡ y → y ≡ x
-    symmetry refl = refl
+      (cong (runTrace dZ actions) same)
+      (sym (compositeTraceCommutes first second actions right)))
