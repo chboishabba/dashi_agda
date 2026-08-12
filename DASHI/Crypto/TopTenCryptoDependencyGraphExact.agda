@@ -14,7 +14,6 @@ module DASHI.Crypto.TopTenCryptoDependencyGraphExact where
 ------------------------------------------------------------------------
 
 open import Data.Empty using (⊥)
-open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Crypto.TopTenCryptoBlueTeamProfilesExact as Profile
 import DASHI.Crypto.CryptoUsageInvariantExact as Usage
@@ -123,32 +122,32 @@ breakContradictsHeld break held = break held
 record HPKESecurityContract : Set₁ where
   constructor hpkeSecurityContract
   field
-    kem : ObligationHolds kemComponentSecure
-    kdf : ObligationHolds kdfComponentSecure
-    aead : ObligationHolds aeadComponentSecure
-    context : ObligationHolds contextBound
+    hpkeKemEvidence : ObligationHolds kemComponentSecure
+    hpkeKdfEvidence : ObligationHolds kdfComponentSecure
+    hpkeAeadEvidence : ObligationHolds aeadComponentSecure
+    hpkeContextEvidence : ObligationHolds contextBound
 
 open HPKESecurityContract public
 
 kemBreakRefutesHPKE :
   ObligationBreak kemComponentSecure →
   HPKESecurityContract → ⊥
-kemBreakRefutesHPKE break contract = break (kem contract)
+kemBreakRefutesHPKE break contract = break (hpkeKemEvidence contract)
 
 kdfBreakRefutesHPKE :
   ObligationBreak kdfComponentSecure →
   HPKESecurityContract → ⊥
-kdfBreakRefutesHPKE break contract = break (kdf contract)
+kdfBreakRefutesHPKE break contract = break (hpkeKdfEvidence contract)
 
 aeadBreakRefutesHPKE :
   ObligationBreak aeadComponentSecure →
   HPKESecurityContract → ⊥
-aeadBreakRefutesHPKE break contract = break (aead contract)
+aeadBreakRefutesHPKE break contract = break (hpkeAeadEvidence contract)
 
 contextBreakRefutesHPKE :
   ObligationBreak contextBound →
   HPKESecurityContract → ⊥
-contextBreakRefutesHPKE break contract = break (context contract)
+contextBreakRefutesHPKE break contract = break (hpkeContextEvidence contract)
 
 ------------------------------------------------------------------------
 -- QKD + symmetric follow-on: authenticated classical channel, parameter test,
@@ -158,10 +157,10 @@ contextBreakRefutesHPKE break contract = break (context contract)
 record QKDCompositeSecurityContract : Set₁ where
   constructor qkdCompositeSecurityContract
   field
-    authenticatedChannel : ObligationHolds classicalChannelAuthenticated
-    parameterTest : ObligationHolds quantumParameterTestSound
-    followOnCipher : ObligationHolds followOnSymmetricSecure
-    context : ObligationHolds contextBound
+    qkdAuthenticatedChannel : ObligationHolds classicalChannelAuthenticated
+    qkdParameterTest : ObligationHolds quantumParameterTestSound
+    qkdFollowOnCipher : ObligationHolds followOnSymmetricSecure
+    qkdContextEvidence : ObligationHolds contextBound
 
 open QKDCompositeSecurityContract public
 
@@ -169,19 +168,19 @@ unauthenticatedBreakRefutesQKDComposite :
   ObligationBreak classicalChannelAuthenticated →
   QKDCompositeSecurityContract → ⊥
 unauthenticatedBreakRefutesQKDComposite break contract =
-  break (authenticatedChannel contract)
+  break (qkdAuthenticatedChannel contract)
 
 parameterTestBreakRefutesQKDComposite :
   ObligationBreak quantumParameterTestSound →
   QKDCompositeSecurityContract → ⊥
 parameterTestBreakRefutesQKDComposite break contract =
-  break (parameterTest contract)
+  break (qkdParameterTest contract)
 
 followOnBreakRefutesQKDComposite :
   ObligationBreak followOnSymmetricSecure →
   QKDCompositeSecurityContract → ⊥
 followOnBreakRefutesQKDComposite break contract =
-  break (followOnCipher contract)
+  break (qkdFollowOnCipher contract)
 
 ------------------------------------------------------------------------
 -- Algebraic/public-key family boundary.  A public-secret factorisation is
