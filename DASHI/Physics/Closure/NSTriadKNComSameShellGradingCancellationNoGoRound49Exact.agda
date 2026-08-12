@@ -14,26 +14,21 @@ module DASHI.Physics.Closure.NSTriadKNComSameShellGradingCancellationNoGoRound49
 -- DASHI CONTRIBUTION
 --
 -- Audit the tempting Round-49 shortcut that the d=0 Com channel might vanish
--- from P/Q odd grading or skew-adjointness alone.  It does not.  On the exact
+-- from P/Q odd grading or skew-adjointness alone. It does not. On the exact
 -- two-channel carrier choose the skew off-diagonal transport
 --
 --        [ 0   1 ]
 --   T =  [       ].
 --        [ -1  0 ]
 --
--- It is purely odd and skew-adjoint, yet on the fine basis
---
---   [P,T](0,1) = (1,0)
---
--- and its squared norm is exactly 1.  Therefore any improvement of the
--- same-shell target 17/64 must use additional Fourier/shell structure; P/Q
--- grading and skew-adjointness alone cannot annihilate d=0.
+-- It is purely odd and skew-adjoint, yet [P,T](0,1)=(1,0) and its squared
+-- norm is exactly 1. Any improvement of the same-shell 17/64 target must use
+-- additional Fourier/shell structure.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using ([]; _∷_)
-open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; -_)
+open import Data.Rational.Base using (0ℚ; 1ℚ; -_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 
 import DASHI.Physics.Closure.NSTriadKNComPQCrossChannelRound37Exact as PQ
@@ -58,7 +53,8 @@ sameShellOddCommutatorNormSquaredOne :
   PQ.stateNormSquared
     (PQ.commutator sameShellSkewOddTransport PQ.fineBasis)
   ≡ 1ℚ
-sameShellOddCommutatorNormSquaredOne = solve []
+sameShellOddCommutatorNormSquaredOne
+  rewrite sameShellOddCommutatorOnFineBasis = solve []
 
 sameShellCancellationNotForcedByGradingAndSkew : Bool
 sameShellCancellationNotForcedByGradingAndSkew = true
