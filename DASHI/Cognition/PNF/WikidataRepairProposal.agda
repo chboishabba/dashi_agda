@@ -1,5 +1,17 @@
 module DASHI.Cognition.PNF.WikidataRepairProposal where
 
+------------------------------------------------------------------------
+-- REFERENCE / CONTEXT
+--
+-- Denny Vrandečić and Markus Krötzsch,
+-- "Wikidata: a free collaborative knowledgebase", Communications of the ACM
+-- 57(10) (2014), 78-85. DOI: 10.1145/2629489.
+--
+-- The reference describes Wikidata's collaborative data model.  The bounded
+-- repair-proposal semantics below are a DASHI/ITIR construction and are not
+-- claimed by that paper.
+------------------------------------------------------------------------
+
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 open import Data.Integer using (ℤ)
@@ -46,12 +58,6 @@ record RepairProposal : Set where
 
 open RepairProposal public
 
-------------------------------------------------------------------------
--- Direct adapter from a numeric predicate-role pressure witness.  The adapter
--- retains the exact signed pressure and originating factor; choosing a repair
--- operation remains an explicit policy decision.
-------------------------------------------------------------------------
-
 repairEvidenceFromRolePressure :
   ∀ {subject candidateType} →
   Pressure.NumericPredicateRolePressure subject candidateType →
@@ -66,10 +72,7 @@ repairEvidenceFromRolePressure pressure residual =
     (Pressure.pressureScope pressure)
 
 ------------------------------------------------------------------------
--- A domain projector emits a bounded carrier of proposals.  This is the exact
--- endpoint sketched in the Wikidata presentation: local pressure/residual
--- analysis narrows the repair surface for review rather than globally solving
--- or rewriting Wikidata.
+-- A domain projector emits a bounded carrier of proposals.
 ------------------------------------------------------------------------
 
 record DomainRepairProjector : Set₁ where
