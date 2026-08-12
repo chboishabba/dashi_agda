@@ -43,8 +43,9 @@ module DASHI.Physics.YangMills.BalabanCMP109SelectedConstraintFixedPointResidual
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.List using (List)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _*_; _≤_; _<_; _/_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _*_; _≤_)
 import Data.Rational.Properties as ℚP
+import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (_≡_; subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -56,19 +57,10 @@ import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as N
 record SelectedConstraintNormalFixedPoint (Index : Set) : Set₁ where
   field
     coordinates : List Index
-
-    -- Literal residual C(A+v), after applying the fixed selected normal
-    -- right-inverse convention used by the reopening equation.
     uncorrectedResidual : Reopen.Vector Index
-
-    -- Nonlinear normal remainder in the same coordinates.
     normalRemainder : Reopen.Vector Index → Reopen.Vector Index
-
-    -- The correction returned by the selected normal fixed-point solve.
     correction : Reopen.Vector Index
 
-    -- This is the fixed-point equation itself, not an independent norm
-    -- estimate on a separately supplied correction.
     correctionEquation :
       Reopen.IdentityPlusResidualEquation
         normalRemainder correction uncorrectedResidual
@@ -96,25 +88,15 @@ selectedConstraintFixedPointResidualBound fixedPoint =
 selectedConstraintQuarterContractionResidualBound =
   selectedConstraintFixedPointResidualBound
 
-------------------------------------------------------------------------
--- Epsilon formulation of the kernel-line little-o transfer.
---
--- `timeMagnitude` is |t| and `directionScale` is the fixed norm of h.  The
--- analytic Frechet theorem supplies the residual estimate for arbitrarily small
--- epsilon.  This theorem proves that the selected fixed-point correction uses
--- exactly the same epsilon estimate enlarged only by 4/3.
-------------------------------------------------------------------------
-
 selectedConstraintKernelLineCorrectionLittleO :
   ∀ {Index} (fixedPoint : SelectedConstraintNormalFixedPoint Index)
     epsilon timeMagnitude directionScale →
-  0ℚ ≤ L1.vectorL1 (coordinates fixedPoint) (uncorrectedResidual fixedPoint) →
   L1.vectorL1 (coordinates fixedPoint) (uncorrectedResidual fixedPoint)
     ≤ epsilon * timeMagnitude * directionScale →
   L1.vectorL1 (coordinates fixedPoint) (correction fixedPoint)
     ≤ (Quarter.fourThirds * epsilon) * timeMagnitude * directionScale
 selectedConstraintKernelLineCorrectionLittleO
-    fixedPoint epsilon timeMagnitude directionScale residualNN residualUpper =
+    fixedPoint epsilon timeMagnitude directionScale residualUpper =
   let
     fixedPointUpper = selectedConstraintFixedPointResidualBound fixedPoint
     scaledResidual =
@@ -129,8 +111,7 @@ selectedConstraintKernelLineCorrectionLittleO
           * L1.vectorL1 (coordinates fixedPoint)
               (uncorrectedResidual fixedPoint)
         ≤ upper)
-      (let open import Data.Rational.Tactic.RingSolver as ℚRing
-       in ℚRing.solve-∀ epsilon timeMagnitude directionScale)
+      (ℚRing.solve-∀ epsilon timeMagnitude directionScale)
       scaledResidual)
 
 selectedConstraintZeroResidualForcesZeroCorrection :
@@ -140,6 +121,16 @@ selectedConstraintZeroResidualForcesZeroCorrection :
 selectedConstraintZeroResidualForcesZeroCorrection fixedPoint residualZero =
   let
     upper = selectedConstraintFixedPointResidualBound fixedPoint
+    upperWithZeroSource :
+      L1.vectorL1 (coordinates fixedPoint) (correction fixedPoint)
+      ≤ Quarter.fourThirds * 0ℚ
+    upperWithZeroSource =
+      subst
+        (λ sourceNorm →
+          L1.vectorL1 (coordinates fixedPoint) (correction fixedPoint)
+          ≤ Quarter.fourThirds * sourceNorm)
+        residualZero upper
+
     upperZero :
       L1.vectorL1 (coordinates fixedPoint) (correction fixedPoint) ≤ 0ℚ
     upperZero =
@@ -147,15 +138,8 @@ selectedConstraintZeroResidualForcesZeroCorrection fixedPoint residualZero =
         (λ upperBound →
           L1.vectorL1 (coordinates fixedPoint) (correction fixedPoint)
           ≤ upperBound)
-        (let open import Data.Rational.Tactic.RingSolver as ℚRing
-         in ℚRing.solve-∀
-           (L1.vectorL1 (coordinates fixedPoint)
-             (uncorrectedResidual fixedPoint)))
-        (subst
-          (λ sourceNorm →
-            L1.vectorL1 (coordinates fixedPoint) (correction fixedPoint)
-            ≤ Quarter.fourThirds * sourceNorm)
-          residualZero upper)
+        (ℚRing.solve [] : Quarter.fourThirds * 0ℚ ≡ 0ℚ)
+        upperWithZeroSource
   in
   ℚP.≤-antisym upperZero
     (Reopen.vectorL1Nonnegative
