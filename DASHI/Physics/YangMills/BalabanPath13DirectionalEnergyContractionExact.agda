@@ -24,6 +24,7 @@ module DASHI.Physics.YangMills.BalabanPath13DirectionalEnergyContractionExact wh
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Integer.Base using (+_)
 open import Data.List.Base using (length)
@@ -263,11 +264,11 @@ axisDirectionalEnergyAsPredecessorSum axis field =
       sq (edgeDifferenceAtTransverse field axis predecessor transverse))
 
 sumRationalMonotone :
-  ∀ {A : Set} (values : Agda.Builtin.List.List A) (left right : A → ℚ) →
+  ∀ {A : Set} (values : List A) (left right : A → ℚ) →
   (∀ value → left value ≤ right value) →
   sumRational values left ≤ sumRational values right
-sumRationalMonotone Agda.Builtin.List.[] left right pointwise = ℚP.≤-refl
-sumRationalMonotone (Agda.Builtin.List._∷_ value values) left right pointwise =
+sumRationalMonotone [] left right pointwise = ℚP.≤-refl
+sumRationalMonotone (value ∷ values) left right pointwise =
   ℚP.+-mono-≤
     (pointwise value)
     (sumRationalMonotone values left right pointwise)
