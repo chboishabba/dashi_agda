@@ -19,31 +19,34 @@ module DASHI.Physics.Closure.NSTriadKNComSameAdjacentActiveRound47Exact where
 -- DASHI CONTRIBUTION
 --
 -- Round 46 proved exact width one for the concrete dyadic-hat support.  This
--- module gives the physical Com lane its smallest falsifiable active theorem:
--- after same-object identification with that support, only
+-- module gives the physical Com lane its smallest NON-CIRCULAR active theorem.
+-- Start from a support skeleton containing only the literal pair product,
+-- support Bool, distance, nonnegativity and off-support annihilation.  Then:
 --
---   d=0 : P(q,q)
---   d=1 : P(q,q+1), P(q+1,q)
+--   same-object hat identification
+-- + same-shell analytic bound
+-- + forward/reverse adjacent-shell analytic bounds
 --
--- need analytic bounds.  The exact six-three targets are also computed:
+-- construct the Round-45 `PhysicalOddPQBooleanSupportInput` itself.
+--
+-- Exact six-three targets:
 --
 --   g_6,3(0) = 17/64,
 --   g_6,3(1) = 65/512.
 --
--- Same-shell and adjacent-shell estimates remain separate hypotheses; no
--- generic q,r inequality is postulated.
+-- No generic q,r active inequality is assumed as input.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; true)
+open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 import Data.Integer.Base as Int
-open import Data.Rational.Base using (ℚ; _/_; _≤_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _/_; _≤_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst)
 
 import DASHI.Physics.Closure.NSTriadKNComBooleanSupportActiveReductionRound45Exact as BoolSupport
+import DASHI.Physics.Closure.NSTriadKNComSupportOverlapRound42Exact as Support
 import DASHI.Physics.Closure.NSTriadKNComDyadicHatWidthOneRound46Exact as HatWidth
 import DASHI.Physics.Closure.NSPeriodicNearShellOverlapCount as Hat
 import DASHI.Physics.Closure.NSTriadKNLuoSixThreeCenteredCommutatorScaleExact as SixThree
@@ -60,23 +63,38 @@ sixThreeAdjacentShellExact :
   SixThree.twoBranchSquaredGap (suc zero) ≡ adjacentShellTarget
 sixThreeAdjacentShellExact = solve []
 
+record PhysicalOddPQSupportSkeleton : Set where
+  field
+    physicalPairProduct : Nat → Nat → ℚ
+    shellDistance : Nat → Nat → Nat
+    supportActive : Nat → Nat → Bool
+
+    pairProductNonnegative : ∀ q r →
+      0ℚ ≤ physicalPairProduct q r
+
+    inactiveSupportAnnihilatesPairProduct : ∀ q r →
+      supportActive q r ≡ false →
+      physicalPairProduct q r ≡ 0ℚ
+
+open PhysicalOddPQSupportSkeleton public
+
 record PhysicalOddPQHatIdentification
-    (physical : BoolSupport.PhysicalOddPQBooleanSupportInput) : Set₁ where
+    (skeleton : PhysicalOddPQSupportSkeleton) : Set₁ where
   field
     commonHatSupport : Nat → Nat → Hat.DyadicHatSupport
     leftActiveInCommonHat : ∀ q r →
-      BoolSupport.supportActive physical q r ≡ true →
+      supportActive skeleton q r ≡ true →
       q HatWidth.∈ Hat.activeShells (commonHatSupport q r)
     rightActiveInCommonHat : ∀ q r →
-      BoolSupport.supportActive physical q r ≡ true →
+      supportActive skeleton q r ≡ true →
       r HatWidth.∈ Hat.activeShells (commonHatSupport q r)
 
 open PhysicalOddPQHatIdentification public
 
 activePairWithinOne :
-  ∀ {physical}
-    (identification : PhysicalOddPQHatIdentification physical) q r →
-  BoolSupport.supportActive physical q r ≡ true →
+  ∀ {skeleton}
+    (identification : PhysicalOddPQHatIdentification skeleton) q r →
+  supportActive skeleton q r ≡ true →
   HatWidth.WithinOne q r
 activePairWithinOne identification q r active =
   HatWidth.activeShellPairWithinOne
@@ -86,81 +104,100 @@ activePairWithinOne identification q r active =
     (rightActiveInCommonHat identification q r active)
 
 record SameAdjacentPhysicalComBounds
-    (physical : BoolSupport.PhysicalOddPQBooleanSupportInput)
-    (identification : PhysicalOddPQHatIdentification physical) : Set where
+    (skeleton : PhysicalOddPQSupportSkeleton)
+    (identification : PhysicalOddPQHatIdentification skeleton) : Set where
   field
-    sameShellDistance : ∀ q →
-      BoolSupport.shellDistance physical q q ≡ zero
+    sameShellDistance : ∀ q → shellDistance skeleton q q ≡ zero
     forwardAdjacentDistance : ∀ q →
-      BoolSupport.shellDistance physical q (suc q) ≡ suc zero
+      shellDistance skeleton q (suc q) ≡ suc zero
     backwardAdjacentDistance : ∀ q →
-      BoolSupport.shellDistance physical (suc q) q ≡ suc zero
+      shellDistance skeleton (suc q) q ≡ suc zero
 
     physicalComSameShellActiveBound : ∀ q →
-      BoolSupport.supportActive physical q q ≡ true →
-      BoolSupport.physicalPairProduct physical q q ≤ sameShellTarget
+      supportActive skeleton q q ≡ true →
+      physicalPairProduct skeleton q q ≤ sameShellTarget
 
     physicalComAdjacentShellActiveBound : ∀ q →
-      BoolSupport.supportActive physical q (suc q) ≡ true →
-      BoolSupport.physicalPairProduct physical q (suc q)
-      ≤ adjacentShellTarget
+      supportActive skeleton q (suc q) ≡ true →
+      physicalPairProduct skeleton q (suc q) ≤ adjacentShellTarget
 
     physicalComReverseAdjacentShellActiveBound : ∀ q →
-      BoolSupport.supportActive physical (suc q) q ≡ true →
-      BoolSupport.physicalPairProduct physical (suc q) q
-      ≤ adjacentShellTarget
+      supportActive skeleton (suc q) q ≡ true →
+      physicalPairProduct skeleton (suc q) q ≤ adjacentShellTarget
 
 open SameAdjacentPhysicalComBounds public
 
 sameShellBoundHitsSixThree :
-  ∀ {physical identification}
-    (bounds : SameAdjacentPhysicalComBounds physical identification) q →
-  BoolSupport.supportActive physical q q ≡ true →
-  BoolSupport.physicalPairProduct physical q q
-  ≤ SixThree.twoBranchSquaredGap
-      (BoolSupport.shellDistance physical q q)
+  ∀ {skeleton identification}
+    (bounds : SameAdjacentPhysicalComBounds skeleton identification) q →
+  supportActive skeleton q q ≡ true →
+  physicalPairProduct skeleton q q
+  ≤ SixThree.twoBranchSquaredGap (shellDistance skeleton q q)
 sameShellBoundHitsSixThree bounds q active
   rewrite sameShellDistance bounds q
         | sixThreeSameShellExact =
   physicalComSameShellActiveBound bounds q active
 
 forwardAdjacentBoundHitsSixThree :
-  ∀ {physical identification}
-    (bounds : SameAdjacentPhysicalComBounds physical identification) q →
-  BoolSupport.supportActive physical q (suc q) ≡ true →
-  BoolSupport.physicalPairProduct physical q (suc q)
-  ≤ SixThree.twoBranchSquaredGap
-      (BoolSupport.shellDistance physical q (suc q))
+  ∀ {skeleton identification}
+    (bounds : SameAdjacentPhysicalComBounds skeleton identification) q →
+  supportActive skeleton q (suc q) ≡ true →
+  physicalPairProduct skeleton q (suc q)
+  ≤ SixThree.twoBranchSquaredGap (shellDistance skeleton q (suc q))
 forwardAdjacentBoundHitsSixThree bounds q active
   rewrite forwardAdjacentDistance bounds q
         | sixThreeAdjacentShellExact =
   physicalComAdjacentShellActiveBound bounds q active
 
 backwardAdjacentBoundHitsSixThree :
-  ∀ {physical identification}
-    (bounds : SameAdjacentPhysicalComBounds physical identification) q →
-  BoolSupport.supportActive physical (suc q) q ≡ true →
-  BoolSupport.physicalPairProduct physical (suc q) q
-  ≤ SixThree.twoBranchSquaredGap
-      (BoolSupport.shellDistance physical (suc q) q)
+  ∀ {skeleton identification}
+    (bounds : SameAdjacentPhysicalComBounds skeleton identification) q →
+  supportActive skeleton (suc q) q ≡ true →
+  physicalPairProduct skeleton (suc q) q
+  ≤ SixThree.twoBranchSquaredGap (shellDistance skeleton (suc q) q)
 backwardAdjacentBoundHitsSixThree bounds q active
   rewrite backwardAdjacentDistance bounds q
         | sixThreeAdjacentShellExact =
   physicalComReverseAdjacentShellActiveBound bounds q active
 
 physicalComActiveBoundFromSameAdjacent :
-  ∀ {physical}
-    (identification : PhysicalOddPQHatIdentification physical)
-    (bounds : SameAdjacentPhysicalComBounds physical identification)
+  ∀ {skeleton}
+    (identification : PhysicalOddPQHatIdentification skeleton)
+    (bounds : SameAdjacentPhysicalComBounds skeleton identification)
     q r →
-  BoolSupport.supportActive physical q r ≡ true →
-  BoolSupport.physicalPairProduct physical q r
-  ≤ SixThree.twoBranchSquaredGap (BoolSupport.shellDistance physical q r)
+  supportActive skeleton q r ≡ true →
+  physicalPairProduct skeleton q r
+  ≤ SixThree.twoBranchSquaredGap (shellDistance skeleton q r)
 physicalComActiveBoundFromSameAdjacent identification bounds q r active
   with activePairWithinOne identification q r active
 ... | HatWidth.same q = sameShellBoundHitsSixThree bounds q active
 ... | HatWidth.next q = forwardAdjacentBoundHitsSixThree bounds q active
 ... | HatWidth.previous q = backwardAdjacentBoundHitsSixThree bounds q active
+
+physicalBooleanSupportInputFromSameAdjacent :
+  ∀ {skeleton}
+    (identification : PhysicalOddPQHatIdentification skeleton) →
+  SameAdjacentPhysicalComBounds skeleton identification →
+  BoolSupport.PhysicalOddPQBooleanSupportInput
+physicalBooleanSupportInputFromSameAdjacent {skeleton} identification bounds = record
+  { physicalPairProduct = physicalPairProduct skeleton
+  ; shellDistance = shellDistance skeleton
+  ; supportActive = supportActive skeleton
+  ; pairProductNonnegative = pairProductNonnegative skeleton
+  ; inactiveSupportAnnihilatesPairProduct =
+      inactiveSupportAnnihilatesPairProduct skeleton
+  ; activeSupportPairProductBelowSixThree =
+      physicalComActiveBoundFromSameAdjacent identification bounds
+  }
+
+physicalComEnvelopeFromSameAdjacent :
+  ∀ {skeleton}
+    (identification : PhysicalOddPQHatIdentification skeleton) →
+  SameAdjacentPhysicalComBounds skeleton identification →
+  Support.PhysicalComSupportOverlapEnvelope
+physicalComEnvelopeFromSameAdjacent identification bounds =
+  BoolSupport.physicalComBooleanSupportEnvelope
+    (physicalBooleanSupportInputFromSameAdjacent identification bounds)
 
 comActiveAnalysisReducedToSameAndAdjacent : Bool
 comActiveAnalysisReducedToSameAndAdjacent = true
