@@ -43,9 +43,9 @@ open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_; _<_; 1/_; positive; nonNegative)
+  (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_; _<_; 1/_; positive)
 import Data.Rational.Properties as ℚP
-open ℚP using (_≤?_; _<?_)
+open ℚP using (_<?_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (subst; subst₂; sym)
 open import Relation.Nullary.Decidable.Core using (toWitness)
@@ -56,6 +56,7 @@ import DASHI.Physics.Closure.NSTriadKNBonyTailOwnerRound44Exact as Tail
 import DASHI.Physics.Closure.NSTriadKNHHBadSharpDyadicGainRound33Exact as Sharp
 import DASHI.Physics.Closure.NSTriadKNHardSoftReserveRound45Exact as HardSoft
 import DASHI.Physics.Closure.NSTriadKNHardBaseNecessaryReserveRound45Exact as HardBase
+import DASHI.Physics.Closure.NSTriadKNFiveOwnerReserveReductionRound44Exact as Five
 
 halfPositive : 0ℚ < Sharp.half
 halfPositive = toWitness {a? = 0ℚ <? Sharp.half} _
@@ -212,13 +213,13 @@ canonicalHardSoftReserve core hardStrict = record
 strictNineOwnerBudgetFromHardBaseBelowOne :
   ∀ {environment}
     (core : HardSoft.HardSoftOwnerCore environment)
-    (tailInput : Tail.PhysicalTailCriticalOwnerInput environment) →
-  HardBase.hardBaseEtaTotal core < 1ℚ →
+    (tailInput : Tail.PhysicalTailCriticalOwnerInput environment)
+    (hardStrict : HardBase.hardBaseEtaTotal core < 1ℚ) →
   Owner.StrictAdmissibleOwnerBudget
     (Owner.nineOwnerList
-      (DASHI.Physics.Closure.NSTriadKNFiveOwnerReserveReductionRound44Exact.physicalNineOwnerEstimateFamily
+      (Five.physicalNineOwnerEstimateFamily
         (HardSoft.remainingOwnersAtSplit core
-          (halfMarginSplit core _))
+          (halfMarginSplit core hardStrict))
         tailInput))
 strictNineOwnerBudgetFromHardBaseBelowOne core tailInput hardStrict =
   HardSoft.strictPhysicalNineOwnerBudgetFromHardSoftReserve
