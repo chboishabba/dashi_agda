@@ -17,6 +17,7 @@ FILES=(
   DASHI/Crypto/FiniteMLWEVectorLabExact.agda
   DASHI/Crypto/FiniteMLWEGameRegressionExact.agda
   DASHI/Crypto/MLKEMFIPS203SourceExact.agda
+  DASHI/Crypto/MLKEMFIPS203SearchGeometryExact.agda
   DASHI/Crypto/BlueTeamAdversaryClosureRound16.agda
 )
 
@@ -47,6 +48,10 @@ grep -q 'params768CiphertextBytes' DASHI/Crypto/MLKEMFIPS203SourceExact.agda
 grep -q 'params1024CiphertextBytes' DASHI/Crypto/MLKEMFIPS203SourceExact.agda
 grep -q 'mismatchingCiphertextUsesFallback' DASHI/Crypto/MLKEMFIPS203SourceExact.agda
 grep -q 'canonicalFIPS203BlueTeamBoundary' DASHI/Crypto/MLKEMFIPS203SourceExact.agda
+grep -q 'secret512CoefficientCount' DASHI/Crypto/MLKEMFIPS203SearchGeometryExact.agda
+grep -q 'secret512SupportWidth' DASHI/Crypto/MLKEMFIPS203SearchGeometryExact.agda
+grep -q 'ciphertext1024Bits' DASHI/Crypto/MLKEMFIPS203SearchGeometryExact.agda
+grep -q 'matrixCouplingMustBeReconciledIsTrue' DASHI/Crypto/MLKEMFIPS203SearchGeometryExact.agda
 
 if command -v agda >/dev/null 2>&1; then
   agda -i . -i src DASHI/Crypto/BlueTeamAdversaryClosureRound16.agda
