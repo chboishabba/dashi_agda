@@ -38,15 +38,18 @@ module DASHI.Physics.Closure.NSTriadKNHHBadInheritedGeneratedLeakageRound48Exact
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using ([]; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Rational.Base using
-  (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; _<_; nonNegative)
+  (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; _<_)
 import Data.Rational.Properties as ℚP
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Data.Rational.Tactic.RingSolver using (solve)
+open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
 
 import DASHI.Physics.Closure.NSTriadKNLuoBadCoherenceWeightedMarkovExact as Threshold
 import DASHI.Physics.Closure.NSTriadKNHHBadSharpDyadicGainRound33Exact as Sharp
 import DASHI.Physics.Closure.NSTriadKNHHBadSelectedThresholdRecurrenceRound47Exact as Selected
+import DASHI.Physics.Closure.NSTriadKNHHBadDefectRecurrenceNormalizationRound46Exact as Defect
 
 record PhysicalSelectedThresholdDefectDecomposition : Set where
   field
@@ -110,18 +113,13 @@ componentBoundsGiveOneShellTransfer physical q =
       ≡ inherited physical q
         + (generated physical q + leakage physical q)
     sourceMeaning =
-      let open import Data.Rational.Tactic.RingSolver using (solve)
-      in
-      Relation.Binary.PropositionalEquality.trans
+      trans
         (successorDecomposition physical q)
         (solve
           ( inherited physical q
           ∷ generated physical q
           ∷ leakage physical q
           ∷ []))
-      where
-      open import Agda.Builtin.List using ([]; _∷_)
-      open import Relation.Binary.PropositionalEquality using (trans)
   in
   subst
     (λ source →
@@ -155,7 +153,7 @@ asSelectedThresholdDefectRecurrence physical = record
 selectedThresholdShellCeilingFromPhysicalDecomposition :
   (physical : PhysicalSelectedThresholdDefectDecomposition) →
   ∀ q →
-  DASHI.Physics.Closure.NSTriadKNHHBadDefectRecurrenceNormalizationRound46Exact.normalizedDefectProfile
+  Defect.normalizedDefectProfile
     (Selected.asPhysicalDefectRecurrence
       (asSelectedThresholdDefectRecurrence physical)) q
   ≤ ceiling physical
