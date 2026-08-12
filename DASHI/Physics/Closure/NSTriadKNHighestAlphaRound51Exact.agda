@@ -10,11 +10,15 @@ module DASHI.Physics.Closure.NSTriadKNHighestAlphaRound51Exact where
 -- HH-bad:
 --   * replaces normalized gain = defect profile by normalized gain <= profile;
 --   * proves the exact variable-coefficient discrete Green representation;
+--   * derives that recurrence directly from shell-dependent Duhamel
+--     inherited/generated/leakage estimates;
 --   * requires only a cutoff-uniform bound on the weighted forcing response;
---   * proves Round-50 raw prefix summability is a corollary with the same budget;
+--   * proves BOTH Round-50 raw prefix summability and uniform strict contraction
+--     are contained in the weighted-Green route;
 --   * proves a potential-drop estimate telescopes generated/leaked forcing;
 --   * feeds the weighted ceiling directly into the mature selected-threshold
---     owner and the same live hard gate.
+--     owner and the same live hard gate;
+--   * packages the literal variable-Duhamel -> owner -> H2 path directly.
 --
 -- Com:
 --   * separates same/adjacent Fourier geometry from whole-shell operator-norm
@@ -39,10 +43,14 @@ module DASHI.Physics.Closure.NSTriadKNHighestAlphaRound51Exact where
 import DASHI.Physics.Closure.NSTriadKNHighestAlphaRound50Exact
 import DASHI.Physics.Closure.NSTriadKNHHBadGainBelowDefectProfileRound51Exact
 import DASHI.Physics.Closure.NSTriadKNHHBadWeightedGreenForcingRound51Exact
+import DASHI.Physics.Closure.NSTriadKNHHBadContractiveToWeightedGreenRound51Exact
 import DASHI.Physics.Closure.NSTriadKNHHBadRawSummableToWeightedGreenRound51Exact
 import DASHI.Physics.Closure.NSTriadKNHHBadTelescopingForcingRound51Exact
+import DASHI.Physics.Closure.NSTriadKNHHBadVariableDuhamelToWeightedGreenRound51Exact
 import DASHI.Physics.Closure.NSTriadKNHHBadWeightedGreenToOwnerRound51Exact
 import DASHI.Physics.Closure.NSTriadKNHHBadWeightedGreenLiveGateRound51Exact
+import DASHI.Physics.Closure.NSTriadKNHHBadWeightedGreenClosureRound51Exact
+import DASHI.Physics.Closure.NSTriadKNHHBadVariableDuhamelClosureRound51Exact
 import DASHI.Physics.Closure.NSTriadKNComShellBlockMajorantRound51Exact
 import DASHI.Physics.Closure.NSTriadKNComGlobalSoftCompatibilityRound51Exact
 import DASHI.Physics.Closure.NSTriadKNGlobalEffectiveSoftFloorGateRound51Exact
