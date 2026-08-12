@@ -10,6 +10,7 @@ files=(
   DASHI/Core/DynamicalQuotientSafety.agda
   DASHI/Core/ProvenanceQuotientDynamics.agda
   DASHI/Core/PossibilityAccessibilitySupport.agda
+  DASHI/Core/FinePhaseObservation.agda
   DASHI/Foundations/DepthWheelGradedDynamics.agda
   DASHI/Cognition/PNF/BoundedExecutionCarrier.agda
   DASHI/Cognition/PNF/BoundedExecutionAdapters.agda
@@ -19,6 +20,7 @@ files=(
   DASHI/Cognition/PNF/ContextualRepresentationOrbit.agda
   DASHI/Cognition/PNF/EvidenceClassificationEdge.agda
   DASHI/Cognition/PNF/TypePressure.agda
+  DASHI/Cognition/PNF/EvidencePhaseObservationAdapter.agda
   DASHI/Cognition/PNF/EvidenceHorizon369.agda
   DASHI/Cognition/PNF/EvidenceDepthWheelOrthogonality.agda
   DASHI/Cognition/PNF/LexicalRetrievalProjection.agda
@@ -37,6 +39,7 @@ files=(
   DASHI/Cognition/PNF/NumericPNFHyperfabricEverything.agda
   DASHI/Cognition/PNF/DepthWheelMemoryHyperfabric.agda
   DASHI/Cognition/PNF/DepthWheelMemoryPhaseGeometry.agda
+  DASHI/Cognition/PNF/DepthWheelMemoryGradedAdapter.agda
   DASHI/Physics/Closure/SSPPrimeLane369DepthWheelCantorBridge.agda
   DASHI/Physics/Closure/SSPPrimeLane369DepthAddressWheel.agda
   DASHI/Geometry/SSP369DepthWheelUltrametric.agda
@@ -63,6 +66,9 @@ required_markers=(
   'ReopenableButDynamicallyUnsafe'
   'CorrectiveReachability'
   'PossibilityAccessibilitySupport'
+  'PhaseObservationSystem'
+  'coarsePhaseDoesNotReconstructFineEvidence'
+  'evidenceCoordinatePhaseObservation'
   'executionOverflowHasNoSemanticPermission'
   'ReopenableExecutionPartition'
   'residualExecutionStateCannotRejectSemantics'
@@ -83,6 +89,8 @@ required_markers=(
   'coarsenThenProject9to6EqualsProjectThenCoarsen'
   'horizonExpansionCommutesWithDepthAdvance'
   'constantGradedWheel'
+  'gradedMemoryLearningSystem'
+  'phase0OneWheelUnderlyingState'
   'gradeMayBeForgottenWithoutSafetyProofIsFalse'
   'h9PresenceAloneCannotPromoteWorldIdentity'
   'regexHasNoSemanticAuthority'
