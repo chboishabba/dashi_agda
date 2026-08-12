@@ -11,13 +11,6 @@ import DASHI.Cognition.PNF.BoundedFactorCompositionExecution as Composition
 
 ------------------------------------------------------------------------
 -- Generic bounded-execution carrier.
---
--- The proper-name and factor-composition lanes independently discovered the
--- same execution pattern: the semantic possibility carrier may be larger than
--- the materialised execution frontier.  A bounded representation therefore
--- carries the full observed possibility count, a retained-count budget and an
--- overflow/coverage receipt.  None of these execution facts is semantic
--- rejection or semantic authority.
 ------------------------------------------------------------------------
 
 record BoundedEnumeration : Set where
@@ -55,8 +48,6 @@ open GenericOverflowReceipt public
 data OverflowSemanticAuthority : Set where
   executionEvidenceOnly : OverflowSemanticAuthority
 
--- Deliberately constructorless.  Truncating the execution frontier cannot by
--- itself reject an omitted semantic possibility or license a semantic claim.
 data OverflowSemanticPermission : OverflowSemanticAuthority → Set where
 
 executionOverflowHasNoSemanticPermission :
@@ -65,11 +56,6 @@ executionOverflowHasNoSemanticPermission ()
 
 ------------------------------------------------------------------------
 -- Optional measure/mass receipt.
---
--- Mass is deliberately abstract.  An application may instantiate it with
--- rationals, constructive reals, counts, log weights, or another exact carrier.
--- This layer only records the supplied split law; it does not manufacture a
--- probability measure or Born rule.
 ------------------------------------------------------------------------
 
 record SplitMeasureReceipt
@@ -94,9 +80,51 @@ record MeasuredBoundedExecutionCarrier
 open MeasuredBoundedExecutionCarrier public
 
 ------------------------------------------------------------------------
+-- Explicit semantic P/Q execution partition.
+--
+-- This strengthens the count-only carrier for search/beam implementations.
+-- P is the currently active execution surface; Q is the residual semantic
+-- region.  Q remains semantically possible and carries a reopening receipt.
+-- Refutation is deliberately absent from this type.
+------------------------------------------------------------------------
+
+record ReopenableExecutionPartition (Candidate : Set) : Set₁ where
+  constructor reopenableExecutionPartition
+  field
+    activeCarrier : BoundedExecutionCarrier Candidate
+    SemanticallyPossible : Candidate → Set
+    Active : Candidate → Set
+    Residual : Candidate → Set
+    activeImpliesPossible :
+      ∀ {candidate} → Active candidate → SemanticallyPossible candidate
+    residualImpliesPossible :
+      ∀ {candidate} → Residual candidate → SemanticallyPossible candidate
+    activeResidualDisjoint :
+      ∀ {candidate} → Active candidate → Residual candidate → ⊥
+    ReopenReceipt : Set
+    residualReceipt :
+      ∀ {candidate} → Residual candidate → ReopenReceipt
+
+open ReopenableExecutionPartition public
+
+record MeasuredReopenableExecutionPartition
+    (Candidate Mass : Set)
+    (_⊕_ : Mass → Mass → Mass) : Set₁ where
+  constructor measuredReopenableExecutionPartition
+  field
+    partition : ReopenableExecutionPartition Candidate
+    massReceipt : SplitMeasureReceipt Mass _⊕_
+
+open MeasuredReopenableExecutionPartition public
+
+data ResidualSemanticRejectionPermission : Set where
+
+residualExecutionStateCannotRejectSemantics :
+  ResidualSemanticRejectionPermission → ⊥
+residualExecutionStateCannotRejectSemantics ()
+
+------------------------------------------------------------------------
 -- Existing runtime-specific bounded carriers embed into the generic shape.
--- This is intentionally a bridge, not a replacement of the existing theorem
--- names consumed by the SensibLaw correspondence.
 ------------------------------------------------------------------------
 
 properNameEnumerationAsGeneric :
@@ -122,9 +150,13 @@ record BoundedExecutionAuthorityBoundary : Set where
   field
     overflowCannotPromoteSemantics :
       OverflowSemanticPermission executionEvidenceOnly → ⊥
+    residualCannotBecomeSemanticRejection :
+      ResidualSemanticRejectionPermission → ⊥
 
 open BoundedExecutionAuthorityBoundary public
 
 canonicalBoundedExecutionAuthorityBoundary : BoundedExecutionAuthorityBoundary
 canonicalBoundedExecutionAuthorityBoundary =
-  boundedExecutionAuthorityBoundary executionOverflowHasNoSemanticPermission
+  boundedExecutionAuthorityBoundary
+    executionOverflowHasNoSemanticPermission
+    residualExecutionStateCannotRejectSemantics
