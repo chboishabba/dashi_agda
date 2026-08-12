@@ -76,11 +76,13 @@ import DASHI.Crypto.TopTenCryptoStateContractMatrixExact
 import DASHI.Crypto.TopTenCryptoObservationSurfacesExact
 import DASHI.Crypto.TopTenCryptoDependencyGraphExact
 
--- Round-15 verification -> search frontier: local residual decomposition,
--- invertible transform boundary, coupling/separator costs, adaptive fibre
--- shrinkage, threshold partitions, timing observations, ML-KEM local-search
--- obligations, and the ten-candidate comparative controls.
+-- Round-15 verification -> search frontier.
 import DASHI.Crypto.CryptoLocalConstraintSearchRound15
+
+-- Round-16 blue-team closure: both the fundamental search-geometry programme
+-- and the hidden-dependent observation programme meet in algorithm-relative
+-- protected-label recovery cost.
+import DASHI.Crypto.BlueTeamAdversaryClosureRound16
 
 -- Exact arithmetic transport / semantic-promotion boundary.
 import DASHI.Arithmetic.PrimeSupportTransportTaxiMoonshineExact
