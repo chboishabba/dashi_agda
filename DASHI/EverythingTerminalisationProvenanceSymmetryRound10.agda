@@ -50,12 +50,7 @@ import DASHI.Cognition.PNF.WikidataTypePressureMiniWorldExact
 -- Memory/content separation.
 import DASHI.Cognition.PNF.MemoryCommandSeparationExact
 
--- Narrative/cultural stress tests: proposition-local provenance, independent
--- evidence lineage, E/P/R/Q/K/I/A conflict state and hidden-fibre candidate
--- reconstruction, four consumer planes, phase-sensitive diss-track updates,
--- finite MDL transmission asymmetry, audience amplification without evidence
--- promotion, and provenance-sensitive membership boundaries whose coarse
--- inside/outside sign cannot determine action.
+-- Narrative/cultural stress tests.
 import DASHI.Cognition.PNF.NarrativeClaimProvenanceExact
 import DASHI.Cognition.PNF.NarrativeConflictStateExact
 import DASHI.Cognition.PNF.DissTrackNarrativeDynamicsExact
@@ -64,10 +59,7 @@ import DASHI.Cognition.PNF.NarrativeMDLReplicationExact
 import DASHI.Cognition.PNF.NarrativeAmplificationWithoutEvidencePromotionExact
 import DASHI.Cognition.PNF.CulturalMembershipBoundaryExact
 
--- Cryptographic reopening, concrete noisy-fibre witness, statewise key tests,
--- public-only transcript invariance, active observation refinement, exact reuse
--- leakage, top-ten profiles/state contracts/observation surfaces, public
--- candidate tests, and the dependency/attack graph.
+-- Cryptographic reopening and the earlier state-contract / observation spine.
 import DASHI.Crypto.ReopeningArchitectureExact
 import DASHI.Crypto.MLKEMNoisyReopeningExact
 import DASHI.Crypto.KEMStateContractExact
@@ -83,6 +75,12 @@ import DASHI.Crypto.TopTenCryptoBlueTeamProfilesExact
 import DASHI.Crypto.TopTenCryptoStateContractMatrixExact
 import DASHI.Crypto.TopTenCryptoObservationSurfacesExact
 import DASHI.Crypto.TopTenCryptoDependencyGraphExact
+
+-- Round-15 verification -> search frontier: local residual decomposition,
+-- invertible transform boundary, coupling/separator costs, adaptive fibre
+-- shrinkage, threshold partitions, timing observations, ML-KEM local-search
+-- obligations, and the ten-candidate comparative controls.
+import DASHI.Crypto.CryptoLocalConstraintSearchRound15
 
 -- Exact arithmetic transport / semantic-promotion boundary.
 import DASHI.Arithmetic.PrimeSupportTransportTaxiMoonshineExact
