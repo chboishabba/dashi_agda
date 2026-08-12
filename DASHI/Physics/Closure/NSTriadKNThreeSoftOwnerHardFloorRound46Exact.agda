@@ -180,10 +180,9 @@ threeSoftEtaTotalExact core floorStrict
         | hhBadEtaExact core
         | boundaryEtaZero core =
   solve
-    ( softSplitValue core
-    ∷ hhBadProfileCeiling core
+    ( hhBadProfileCeiling core
     ∷ Critical.oneSixtyFourth
-    ∷ irreducibleMargin core
+    ∷ irreducibleEtaFloor core
     ∷ [])
 
 halfMarginLessThanMargin :
@@ -234,13 +233,9 @@ threeSoftRemainingViscosityExact :
     (floorStrict : irreducibleEtaFloor core < 1ℚ) →
   1ℚ - Five.fiveOwnerEtaTotal (threeSoftRemainingOwners core floorStrict)
   ≡ Sharp.half * irreducibleMargin core
-threeSoftRemainingViscosityExact core floorStrict =
-  subst
-    (λ total →
-      1ℚ - Five.fiveOwnerEtaTotal (threeSoftRemainingOwners core floorStrict)
-      ≡ 1ℚ - total)
-    (threeSoftEtaTotalExact core floorStrict)
-    (solve (irreducibleEtaFloor core ∷ irreducibleMargin core ∷ []))
+threeSoftRemainingViscosityExact core floorStrict
+  rewrite threeSoftEtaTotalExact core floorStrict =
+  solve (irreducibleEtaFloor core ∷ [])
 
 hhBadEtaNonnegative :
   ∀ {environment} (core : ThreeSoftOwnerCore environment) →
