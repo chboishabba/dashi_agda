@@ -92,7 +92,7 @@ Round 40 proves the literal Fourier strain multiplier is order zero:
 S_(r k)(omega) = S_k(omega).
 ```
 
-Round 42 now places this beside the exact Biot–Savart scaling on the *same scaled projection mode*:
+Round 42 places this beside the exact Biot–Savart scaling on the same scaled projection mode:
 
 ```text
 |B_(r k) omega|^2 = r^-2 |B_k omega|^2,
@@ -101,7 +101,7 @@ S_(r k)(omega)     = S_k(omega).
 
 Hence the already-absolute-valued order-zero strain multiplier/kernel does not contain the missing `r^-2` factor. A kinetic-energy repair must recover the inverse derivative before/outside that order-zero kernel estimate.
 
-## 3. HH-good positive route: parabolic time localization exactly recovers the kinetic scale
+## 3. HH-good positive route: the parabolic window recovers the kinetic scale
 
 The pointwise kinetic route fails, but Luo's terminal window has the exact parabolic scale
 
@@ -133,21 +133,46 @@ then
 sum_i dt_i omega_i^2 <= c E0.
 ```
 
-This is `NSTriadKNHHGoodParabolicWindowKineticRecoveryRound42Exact`.
+`NSTriadKNHHGoodParabolicWindowKineticRecoveryRound42Exact` proves this exactly.
 
-So the current highest-alpha HH-good route is no longer “find some mysterious extra quadratic resource”. A concrete candidate exists:
+Round 42 then carries the same cancellation through the literal amplitude allocation. If, on the same time cells,
 
 ```text
-pointwise kinetic -> costs lambda_q^2
-parabolic time window -> returns lambda_q^-2
-net localized cost -> E0.
+omega_i^2 <= lambda_q^2 E0,
+Q_i <= Q,
+sum_i dt_i <= c lambda_q^-2,
 ```
 
-The remaining physical theorem is to identify the actual HH-good time integral with this positive parabolic-window measure **while preserving the quartic core, PV cancellation, shell localization, and directional threshold ordering**. No continuum time-integral theorem is assumed by the finite reduction.
+then
+
+```text
+sum_i dt_i omega_i^2 Q_i <= c E0 Q.
+```
+
+And if the common quartic envelope obeys
+
+```text
+Q <= integralCritical * dissipation,
+```
+
+then `NSTriadKNHHGoodParabolicAmplitudeAllocationRound42Exact` proves
+
+```text
+sum_i dt_i omega_i^2 Q_i
+  <= c E0 * integralCritical * dissipation.
+```
+
+This is the concrete repaired version of the false pointwise `W<=E0 X D` shortcut. The remaining physical theorem is to identify the actual HH-good terminal-window integral with these positive cells after the mandatory
+
+```text
+PV cancellation -> residual -> shell localization -> directional threshold
+```
+
+ordering, and to prove the quartic envelope on that same object. The annular strain-kernel/sample identity and smooth torus correction remain separate physical seams.
 
 ## 4. Keep the HH-good Young split until the reserve stage
 
-For the abstract localized quadratic factor,
+For the localized quadratic factor,
 
 ```text
 P <= epsilon D + (C delta E_quad)/(4 epsilon) X,
@@ -172,43 +197,88 @@ k . u_q = p . u_q
 
 from resonance and divergence freedom.
 
-The decisive diagnostic is also exact:
+The two-factor diagnostic is also exact:
 
 ```text
 (k.u_p)(k.u_q) = (q.u_p)(p.u_q).
 ```
 
-Therefore if the literal bad-gain symbol contains two independent derivative-bearing contractions, incompressibility alone leaves two derivative factors. The Round-41 inverse-shell route must be justified by the literal bad-gain symbol containing only one genuine derivative factor, or by an upstream exact cancellation/defect subtraction that removes the other. If neither occurs, this branch is falsified.
+Therefore incompressibility can relocate an output derivative but cannot turn two genuine derivative-bearing factors into one.
 
-## 6. HH-bad: the reserve constant is explicit
+## 6. HH-bad stronger same-object audit: the literal vorticity nonlinearity is order zero
 
-Round 33 has
-
-```text
-R_q = 2 lambda_q.
-```
-
-The Round-41 one-derivative certificate has
+The repository already contains the actual finite Fourier vorticity interaction
 
 ```text
-c_q = C_q lambda_q^-1.
+F(p,r) = (omega_p.r) u_r - (u_p.r) omega_r,
+u_p = |p|^-2 (p cross omega_p).
 ```
 
-Round 42 proves exactly
+Round 42 now scales the *literal object*, not the schematic Schur expression. Under common positive rational frequency scaling
+
+```text
+p -> s p,
+r -> s r,
+```
+
+with vorticity amplitudes fixed, it proves exactly
+
+```text
+u_(s p) = s^-1 u_p,
+F(s p,s r) = F(p,r).
+```
+
+Both the ordered and symmetrized vorticity interactions are invariant. Pairing them with a fixed output vorticity is invariant as well:
+
+```text
+omega_k . F(s p,s r) = omega_k . F(p,r).
+```
+
+So the raw vorticity convolution and its fixed-output enstrophy-production scalar carry **no net common HH derivative**. The explicit derivative in the vorticity equation is already cancelled by the Biot–Savart inverse derivative.
+
+This materially sharpens the HH-bad frontier. The Round-33 growth
+
+```text
+R_q = 2 lambda_q
+```
+
+belongs to the later half-kernel/Bernstein bounding lane; it is not the scaling of the literal vorticity convolution itself. Consequently the next same-object theorem must trace
+
+```text
+literal vorticity interaction
+  -> shell/source/curvature/energy normalization
+  -> RawBadGainSample.rawGain
+```
+
+before assigning a one-derivative inverse-shell Schur cost. If that trace never reintroduces one net `lambda_q`, the current inverse-shell compensation architecture should be simplified/redesigned rather than imposed on the raw dynamics.
+
+## 7. HH-bad conditional reserve constant, if the later lane really has one derivative
+
+If the same-object trace above does produce the Round-41 one-derivative density
+
+```text
+c_q = C_q lambda_q^-1,
+```
+
+then Round 42 composes it exactly with the Round-33 raw bounded-lane ratio
+
+```text
+R_q = 2 lambda_q
+```
+
+to prove
 
 ```text
 c_q R_q = 2 C_q.
 ```
 
-If `C_q <= C_bad`, the raw shell-growth neutralization cost is at most `2 C_bad`.
-
-The directional bad-set threshold contributes the separate `delta^-1` cost, so the actual bounded HH-bad reserve coefficient is
+If `C_q <= C_bad`, the raw shell-growth neutralization cost is at most `2 C_bad`. The directional bad-set threshold contributes the separate `delta^-1` cost, so the actual bounded HH-bad reserve coefficient is
 
 ```text
 eta_HHb <= 2 C_bad / delta.
 ```
 
-The Round-40 symbolic optimizer therefore has
+The Round-40 symbolic optimizer therefore has conditional bad constant
 
 ```text
 B = 2 C_bad
@@ -221,9 +291,9 @@ A r^3 = 4 C_bad,
 delta = r^2.
 ```
 
-`NSTriadKNHHOneDerivativeThresholdOptimizerRound42Exact` reuses the existing Round-40 global-minimum theorem with this coefficient.
+`NSTriadKNHHOneDerivativeThresholdOptimizerRound42Exact` reuses the existing Round-40 global-minimum theorem with this coefficient. These constants are now explicitly conditional on the missing same-object bridge; they are not attributed to the raw vorticity interaction.
 
-## 7. Master directional defect: threshold profile and packing reduction
+## 8. Master directional defect: threshold profile and packing reduction
 
 Round 41 proved on one full classified carrier
 
@@ -270,9 +340,9 @@ bounds sum to
 sum_box G_box^2 <= C_good delta P.
 ```
 
-No physical Carleson estimate is asserted. A genuine theorem will need an actual stopping/packing family rather than uncontrolled repeated boxes.
+No physical Carleson estimate is asserted. A genuine theorem needs an actual stopping/packing family rather than uncontrolled repeated boxes.
 
-## 8. Com: support overlap is enough
+## 9. Com: support overlap is enough
 
 Round 41 asked for the exact model equality
 
@@ -302,9 +372,9 @@ plus the adjoint-face equality already supplied by skew adjunction. No additiona
 
 ## Revised falsification / implementation order
 
-1. **HH-bad literal symbol audit** — prove one genuine derivative factor after all exact cancellations, or falsify the inverse-shell route.
+1. **HH-bad same-object shell audit** — trace the literal scale-invariant vorticity interaction into the actual bad gain and determine exactly where, if anywhere, the Round-33 `lambda_q` growth re-enters. Apply the one-derivative Schur lane only if that trace justifies it.
 2. **Com support-overlap theorem** — prove the literal `U_q^* U_r` support/product bound and construct the Com owner.
-3. **HH-good parabolic physical realization** — annular strain-kernel/sample identification, kinetic-to-vorticity `lambda_q^2` allocation inside the actual `lambda_q^-2` terminal window, residual quartic estimate, and smooth torus correction.
+3. **HH-good parabolic physical realization** — annular strain-kernel/sample identification, kinetic-to-vorticity `lambda_q^2` inside the actual `lambda_q^-2` terminal window, residual quartic envelope, and smooth torus correction.
 4. Instantiate the six lower-risk owners.
 5. Run the exact threshold/Young-aware nine-owner primal/dual reserve test.
 
