@@ -35,9 +35,9 @@ module DASHI.Physics.YangMills.BalabanCMP109FederbushComponentResidualExact wher
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base as ℚ using (ℚ; _+_; _-_; _*_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _-_; _*_)
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact using
@@ -45,6 +45,7 @@ open import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact using
 open import DASHI.Physics.YangMills.BalabanFiniteSumFubiniExact using
   (sumRationalAdd)
 import DASHI.Physics.YangMills.BalabanPhysicalSU2FiniteCoordinatesExact as Physical
+import DASHI.Physics.YangMills.BalabanPhysicalSU2RationalMatrixCoordinatesExact as Coordinates
 import DASHI.Physics.YangMills.BalabanCMP109FederbushNormalizedJacobianExact as Jacobian
 
 matrixCompose : Jacobian.Lie3Matrix → Jacobian.Lie3Matrix → Jacobian.Lie3Matrix
@@ -68,9 +69,9 @@ matrixComposeAddLeft left right inner row column =
 matrixComposeIdentityLeft : ∀ matrix row column →
   matrixCompose Jacobian.identity3 matrix row column ≡ matrix row column
 matrixComposeIdentityLeft matrix row column =
-  Jacobian.Coordinates.deltaSumIdentity
-    Jacobian.Coordinates.lieCoordinateDecidableEquality
-    Jacobian.Coordinates.lieCoordinatesDuplicateFree
+  Coordinates.deltaSumIdentity
+    Coordinates.lieCoordinateDecidableEquality
+    Coordinates.lieCoordinatesDuplicateFree
     row
     (Jacobian.lieCoordinateComplete row)
     (λ middle → matrix middle column)
@@ -78,9 +79,9 @@ matrixComposeIdentityLeft matrix row column =
 matrixComposeIdentityRight : ∀ matrix row column →
   matrixCompose matrix Jacobian.identity3 row column ≡ matrix row column
 matrixComposeIdentityRight matrix row column =
-  Jacobian.Coordinates.deltaSumIdentity
-    Jacobian.Coordinates.lieCoordinateDecidableEquality
-    Jacobian.Coordinates.lieCoordinatesDuplicateFree
+  Coordinates.deltaSumIdentity
+    Coordinates.lieCoordinateDecidableEquality
+    Coordinates.lieCoordinatesDuplicateFree
     column
     (Jacobian.lieCoordinateComplete column)
     (matrix row)
@@ -147,7 +148,7 @@ componentResidualTelescopeExact jacobian transport row column =
 
 identityComponentResidualZero : ∀ row column →
   componentResidual Jacobian.identity3 Jacobian.identity3 row column
-  ≡ Data.Rational.0ℚ
+  ≡ 0ℚ
 identityComponentResidualZero row column =
   trans
     (cong (_- Jacobian.identity3 row column)
