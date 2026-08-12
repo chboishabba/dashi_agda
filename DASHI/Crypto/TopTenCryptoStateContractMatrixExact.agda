@@ -29,7 +29,7 @@ data Precondition : Set where
   groupParametersAccepted
   peerElementAccepted
   ephemeralExponentFresh
-  ellipticInputAccepted
+  x25519InputHandledPerRFC7748
   elGamalRandomnessFresh
   hpkeSuiteAndModeBound
   mlKemEncodedKeyAccepted
@@ -51,6 +51,7 @@ data Invariant : Set where
   publicOperationDoesNotExposeProtectedInverse
   secretAgreementNotPubliclyDerived
   publicElementValidationPreserved
+  x25519AllZeroSharedSecretHandled
   ephemeralStateNotReused
   hpkeComponentBoundariesPreserved
   contextBindingPreserved
@@ -105,10 +106,10 @@ dhContract = candidateStateContract Profile.diffieHellman
 
 x25519Contract : CandidateStateContract
 x25519Contract = candidateStateContract Profile.x25519
-  (ellipticInputAccepted ∷ ephemeralExponentFresh ∷ [])
+  (x25519InputHandledPerRFC7748 ∷ ephemeralExponentFresh ∷ [])
   (sharedSecretAgrees ∷ [])
-  (secretAgreementNotPubliclyDerived ∷ publicElementValidationPreserved ∷
-   ephemeralStateNotReused ∷ [])
+  (secretAgreementNotPubliclyDerived ∷ x25519AllZeroSharedSecretHandled ∷
+   contextBindingPreserved ∷ ephemeralStateNotReused ∷ [])
 
 elGamalContract : CandidateStateContract
 elGamalContract = candidateStateContract Profile.elGamal
