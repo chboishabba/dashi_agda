@@ -53,20 +53,22 @@ module DASHI.Physics.Closure.NSTriadKNHHBadLiteralVorticityInteractionScalingRou
 --       = (s^-1)(s) (u_p.r) omega_r.
 --
 -- Both ordered terms are therefore exactly scale invariant, and so are their
--- difference and the symmetrized physical coefficient.
+-- difference, the symmetrized physical coefficient, and pairing either with
+-- a fixed output vorticity.
 --
 -- This is a strong same-object diagnostic: the literal vorticity convolution
--- is order zero in common HH frequency scale.  Therefore any `one derivative`
--- appearing in the Round-41 restricted-gain density must come from a later
--- shell/source/energy normalization, not from the raw vorticity interaction
--- itself.  The remaining HH-bad task is to identify that later normalization
--- exactly before assigning the inverse-shell Schur cost.
+-- and its fixed-output production scalar are order zero in common HH frequency
+-- scale.  Therefore any `one derivative` appearing in the Round-41 restricted
+-- gain density must come from a later shell/source/energy normalization, not
+-- from the raw vorticity interaction itself.  The remaining HH-bad task is to
+-- identify that later normalization exactly before assigning the inverse-shell
+-- Schur cost.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
-open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _*_; -_)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; -_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
@@ -130,23 +132,36 @@ scaledNonzeroVorticityMode scale mode =
   k = Biot.wavevector mode
   omega = Biot.vorticity mode
   inv = Biot.inverseRadiusSquared mode
+  radiusSquared = Gram.normSquared k
 
   scaledInverseLaw :
     Gram.normSquared (scaleVec r k) * (inv * rinv * rinv) ≡ 1ℚ
   scaledInverseLaw =
-    trans
-      (cong (_* (inv * rinv * rinv)) (normSquaredScale r k))
-      (trans
-        (solve (r ∷ rinv ∷ Gram.normSquared k ∷ inv ∷ []))
-        (trans
-          (cong₂ _*_
-            (Biot.inverseRadiusLaw mode)
-            (trans
-              (solve (r ∷ rinv ∷ []))
-              (cong₂ _*_
-                (Threshold.inverseMeaning scale)
-                (Threshold.inverseMeaning scale))))
-          (solve [])))
+    let
+      exposeScaledNorm :
+        Gram.normSquared (scaleVec r k) * (inv * rinv * rinv)
+        ≡ (r * r * radiusSquared) * (inv * rinv * rinv)
+      exposeScaledNorm =
+        cong (_* (inv * rinv * rinv)) (normSquaredScale r k)
+
+      regroup :
+        (r * r * radiusSquared) * (inv * rinv * rinv)
+        ≡ (radiusSquared * inv) * (rinv * r) * (rinv * r)
+      regroup = solve (r ∷ rinv ∷ radiusSquared ∷ inv ∷ [])
+
+      cancelRadius :
+        (radiusSquared * inv) * (rinv * r) * (rinv * r)
+        ≡ 1ℚ * (rinv * r) * (rinv * r)
+      cancelRadius =
+        cong (λ reciprocal → reciprocal * (rinv * r) * (rinv * r))
+          (Biot.inverseRadiusLaw mode)
+
+      cancelScale :
+        1ℚ * (rinv * r) * (rinv * r) ≡ 1ℚ
+      cancelScale rewrite Threshold.inverseMeaning scale = solve []
+    in
+    trans exposeScaledNorm
+      (trans regroup (trans cancelRadius cancelScale))
 
   scaledTransverse :
     Gram.dot (scaleVec r k) omega ≡ 0ℚ
@@ -283,6 +298,16 @@ scaledStretchTermInvariant scale left right =
     rinv = Threshold.thresholdInverse scale
     coefficient = Gram.dot (Biot.vorticity left) (Biot.wavevector right)
     velocity = Conv.velocityCarrier right
+
+    coefficientCancel :
+      (r * coefficient) * rinv ≡ coefficient
+    coefficientCancel =
+      trans
+        (solve (r ∷ rinv ∷ coefficient ∷ []))
+        (trans
+          (cong (λ reciprocal → coefficient * reciprocal)
+            (Threshold.inverseMeaning scale))
+          (solve (coefficient ∷ [])))
   in
   trans
     (cong₂ scaleVec
@@ -290,15 +315,7 @@ scaledStretchTermInvariant scale left right =
       (scaledVelocityCarrier scale right))
     (trans
       (scaleVecCompose (r * coefficient) rinv velocity)
-      (trans
-        (cong (λ scalar → scaleVec scalar velocity)
-          (trans
-            (solve (r ∷ rinv ∷ coefficient ∷ []))
-            (trans
-              (cong (λ reciprocal → coefficient * reciprocal)
-                (Threshold.inverseMeaning scale))
-              (solve (coefficient ∷ [])))))
-        refl))
+      (cong (λ scalar → scaleVec scalar velocity) coefficientCancel))
 
 scaledTransportTermInvariant : ∀ scale left right →
   scaleVec
@@ -327,20 +344,9 @@ orderedVorticityInteractionScaleInvariant scale left right =
   stretch = scaledStretchTermInvariant scale left right
   transport = scaledTransportTermInvariant scale left right
 
-  componentX =
-    cong₂ _-_
-      (cong Gram.x stretch)
-      (cong Gram.x transport)
-
-  componentY =
-    cong₂ _-_
-      (cong Gram.y stretch)
-      (cong Gram.y transport)
-
-  componentZ =
-    cong₂ _-_
-      (cong Gram.z stretch)
-      (cong Gram.z transport)
+  componentX = cong₂ _-_ (cong Gram.x stretch) (cong Gram.x transport)
+  componentY = cong₂ _-_ (cong Gram.y stretch) (cong Gram.y transport)
+  componentZ = cong₂ _-_ (cong Gram.z stretch) (cong Gram.z transport)
 
 symmetrizedVorticityInteractionScaleInvariant : ∀ scale left right →
   Conv.symmetrizedVorticityInteraction
@@ -358,8 +364,41 @@ symmetrizedVorticityInteractionScaleInvariant scale left right =
   componentY = cong₂ _+_ (cong Gram.y first) (cong Gram.y second)
   componentZ = cong₂ _+_ (cong Gram.z first) (cong Gram.z second)
 
+orderedEnstrophyProduction :
+  Gram.Vec3 → Biot.NonzeroVorticityMode → Biot.NonzeroVorticityMode → ℚ
+orderedEnstrophyProduction outputVorticity left right =
+  Gram.dot outputVorticity (Conv.orderedVorticityInteraction left right)
+
+symmetrizedEnstrophyProduction :
+  Gram.Vec3 → Biot.NonzeroVorticityMode → Biot.NonzeroVorticityMode → ℚ
+symmetrizedEnstrophyProduction outputVorticity left right =
+  Gram.dot outputVorticity (Conv.symmetrizedVorticityInteraction left right)
+
+orderedEnstrophyProductionScaleInvariant :
+  ∀ outputVorticity scale left right →
+  orderedEnstrophyProduction outputVorticity
+    (scaledNonzeroVorticityMode scale left)
+    (scaledNonzeroVorticityMode scale right)
+  ≡ orderedEnstrophyProduction outputVorticity left right
+orderedEnstrophyProductionScaleInvariant outputVorticity scale left right =
+  cong (Gram.dot outputVorticity)
+    (orderedVorticityInteractionScaleInvariant scale left right)
+
+symmetrizedEnstrophyProductionScaleInvariant :
+  ∀ outputVorticity scale left right →
+  symmetrizedEnstrophyProduction outputVorticity
+    (scaledNonzeroVorticityMode scale left)
+    (scaledNonzeroVorticityMode scale right)
+  ≡ symmetrizedEnstrophyProduction outputVorticity left right
+symmetrizedEnstrophyProductionScaleInvariant outputVorticity scale left right =
+  cong (Gram.dot outputVorticity)
+    (symmetrizedVorticityInteractionScaleInvariant scale left right)
+
 literalVorticityInteractionCommonHHScaleInvariant : Bool
 literalVorticityInteractionCommonHHScaleInvariant = true
+
+literalEnstrophyProductionCommonHHScaleInvariant : Bool
+literalEnstrophyProductionCommonHHScaleInvariant = true
 
 rawVorticityInteractionCarriesNoNetCommonHHDerivative : Bool
 rawVorticityInteractionCarriesNoNetCommonHHDerivative = true
@@ -370,3 +409,7 @@ hhBadOneDerivativeMustEnterAfterRawVorticityConvolution = true
 literalVorticityInteractionCommonHHScaleInvariantIsTrue :
   literalVorticityInteractionCommonHHScaleInvariant ≡ true
 literalVorticityInteractionCommonHHScaleInvariantIsTrue = refl
+
+literalEnstrophyProductionCommonHHScaleInvariantIsTrue :
+  literalEnstrophyProductionCommonHHScaleInvariant ≡ true
+literalEnstrophyProductionCommonHHScaleInvariantIsTrue = refl
