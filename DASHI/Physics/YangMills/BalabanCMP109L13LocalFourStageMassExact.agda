@@ -39,10 +39,11 @@ open import Data.Rational.Base as ℚ using
   (ℚ; _+_; _*_; _≤_; _/_; ∣_∣)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
+import DASHI.Physics.YangMills.BalabanFiniteSumFubiniExact as Fubini
 import DASHI.Physics.YangMills.BalabanP33FiniteWeightedSchurSquaredExact as Schur
 import DASHI.Physics.YangMills.BalabanFiniteRectangularSchurSquaredExact as RectSchur
 import DASHI.Physics.YangMills.BalabanCMP109L13NormalizedDerivativeSchurBudgetExact as L13
@@ -102,7 +103,7 @@ rowMassAddUpper columns left right row leftBound rightBound leftUpper rightUpper
         (λ column → ∣ left row column ∣ + ∣ right row column ∣)
       ≡ RectSchur.rectAbsoluteRowMass columns left row
         + RectSchur.rectAbsoluteRowMass columns right row
-    split = Sums.sumRationalAdd columns
+    split = Fubini.sumRationalAdd columns
       (λ column → ∣ left row column ∣)
       (λ column → ∣ right row column ∣)
   in
@@ -140,7 +141,7 @@ columnMassAddUpper rows left right column leftBound rightBound leftUpper rightUp
         (λ row → ∣ left row column ∣ + ∣ right row column ∣)
       ≡ RectSchur.rectAbsoluteColumnMass rows left column
         + RectSchur.rectAbsoluteColumnMass rows right column
-    split = Sums.sumRationalAdd rows
+    split = Fubini.sumRationalAdd rows
       (λ row → ∣ left row column ∣)
       (λ row → ∣ right row column ∣)
   in
