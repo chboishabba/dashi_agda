@@ -12,6 +12,9 @@ module DASHI.Physics.Closure.NSTriadKNHighestAlphaRound47Exact where
 --   at this seam;
 -- * at a selected delta_* the physical target is exactly one shell recurrence
 --   with base O(delta_*), contraction alpha<1 and forcing beta<=(1-alpha)M;
+-- * the selected recurrence now reaches the mature HH-bad owner once the
+--   literal normalized gain density is identified with that same normalized
+--   defect observable and the unmasked charge is below physical dissipation;
 -- * if global threshold-uniformity is later required, one shared recurrence
 --   triple (M,alpha,beta) is sufficient, while a positive superlevel floor plus
 --   arbitrarily small admissible thresholds obstructs it;
@@ -37,6 +40,7 @@ import DASHI.Physics.Closure.NSTriadKNHHBadRestrictedThresholdDomainRound47Exact
 import DASHI.Physics.Closure.NSTriadKNHHBadUniformRecurrenceFamilyRound47Exact
 import DASHI.Physics.Closure.NSTriadKNHHBadSingleThresholdSufficesRound47Exact
 import DASHI.Physics.Closure.NSTriadKNHHBadSelectedThresholdRecurrenceRound47Exact
+import DASHI.Physics.Closure.NSTriadKNHHBadSelectedRecurrenceToOwnerRound47Exact
 import DASHI.Physics.Closure.NSTriadKNComSameAdjacentActiveRound47Exact
 import DASHI.Physics.Closure.NSTriadKNMixedCriticalYoungSoftRound47Exact
 import DASHI.Physics.Closure.NSTriadKNPreAbsorptionTaxClassifierRound47Exact
