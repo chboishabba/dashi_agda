@@ -35,6 +35,7 @@ module DASHI.Physics.YangMills.BalabanCMP109FederbushQuarterReopeningExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.List using (List)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; _/_)
 import Data.Rational.Properties as ℚP
@@ -61,7 +62,7 @@ fourThirdsTimesThreeQuartersExact = ℚRing.solve []
 
 oneQuarterReopeningBound :
   ∀ {Index : Set}
-    (indices : Agda.Builtin.List.List Index)
+    (indices : List Index)
     (residual : Reopen.Vector Index → Reopen.Vector Index)
     solution source →
   Reopen.IdentityPlusResidualEquation residual solution source →
@@ -110,7 +111,7 @@ oneQuarterReopeningBound
 
 oneQuarterHomogeneousZeroNorm :
   ∀ {Index : Set}
-    (indices : Agda.Builtin.List.List Index)
+    (indices : List Index)
     (residual : Reopen.Vector Index → Reopen.Vector Index)
     solution →
   Reopen.IdentityPlusResidualEquation residual solution Reopen.zeroVector →
