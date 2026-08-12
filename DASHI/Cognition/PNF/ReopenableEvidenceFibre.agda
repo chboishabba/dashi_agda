@@ -5,6 +5,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
+import DASHI.Core.AdmissibleReachability as Reachability
 import DASHI.Core.FibreRestrictionCore as Fibre
 import DASHI.Core.ProvenanceBearingQuotient as Quotient
 import DASHI.Core.TypedDependencyCore as Dependency
@@ -13,9 +14,6 @@ import DASHI.Cognition.PNF.BoundedExecutionCarrier as Bounded
 
 ------------------------------------------------------------------------
 -- PNF compatibility name for the repository-wide canonical quotient core.
---
--- There is deliberately no second reopenable-fibre record here.  The PNF
--- layer instantiates the canonical Core.ProvenanceBearingQuotient directly.
 ------------------------------------------------------------------------
 
 ReopenableFibreExtension :
@@ -94,24 +92,14 @@ interferingPhaseCannotRefute :
 interferingPhaseCannotRefute ()
 
 ------------------------------------------------------------------------
--- Corrective reachability over the existing proof-bearing action system.
---
--- This compatibility path remains here for current PNF consumers; the generic
--- action-trace / quotient-safety theorem lives in Core.DynamicalQuotientSafety.
+-- Corrective reachability is now literally the canonical Core closure.
 ------------------------------------------------------------------------
 
-data CorrectivePath
-    {Candidate Evidence : Set}
-    (system : Dependency.DependentActionSystem Candidate Evidence)
-    : Candidate → Candidate → Set where
-  pathRefl :
-    ∀ {x} → CorrectivePath system x x
-  pathStep :
-    ∀ {before target}
-      (evidence : Evidence) →
-      (admissible : Dependency.AdmissibleAction system before evidence) →
-      CorrectivePath system (Dependency.after admissible) target →
-      CorrectivePath system before target
+CorrectivePath :
+  ∀ {Candidate Evidence : Set} →
+  Dependency.DependentActionSystem Candidate Evidence →
+  Candidate → Candidate → Set
+CorrectivePath = Reachability.Reachable
 
 record ReopeningWitness
     {Candidate Evidence : Set}
@@ -157,6 +145,9 @@ record ReopenableEvidenceBoundary : Set where
       semanticRefutationRequiresIndexedEvidence ≡ true
     canonicalQuotientCoreReused : Bool
     canonicalQuotientCoreReusedIsTrue : canonicalQuotientCoreReused ≡ true
+    canonicalReachabilityCoreReused : Bool
+    canonicalReachabilityCoreReusedIsTrue :
+      canonicalReachabilityCoreReused ≡ true
 
 open ReopenableEvidenceBoundary public
 
@@ -167,6 +158,7 @@ canonicalReopenableEvidenceBoundary =
     reweightingAloneCannotRefute
     Bounded.executionOverflowHasNoSemanticPermission
     Quotient.projectionReceiptCannotEraseSemantics
+    true refl
     true refl
     true refl
     true refl
