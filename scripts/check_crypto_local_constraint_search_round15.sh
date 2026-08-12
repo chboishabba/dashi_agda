@@ -42,6 +42,8 @@ grep -q 'ConstraintCouplingGraph' DASHI/Crypto/ConstraintCouplingSearchExact.agd
 grep -q 'disconnectedSearchFactors' DASHI/Crypto/ConstraintCouplingSearchExact.agda
 grep -q 'connectedConstraintHasEasyWitness' DASHI/Crypto/ConstraintCouplingSearchExact.agda
 grep -q 'separatorDPBound' DASHI/Crypto/ConstraintCouplingSearchExact.agda
+grep -q 'boundedWidthDPBound' DASHI/Crypto/ConstraintCouplingSearchExact.agda
+grep -q '10.1137/0608024' DASHI/Crypto/ConstraintCouplingSearchExact.agda
 grep -q 'reconciledLocalSolutionsGiveGlobal' DASHI/Crypto/SearchFactorisationExact.agda
 grep -q 'genericReconciliationBound' DASHI/Crypto/SearchFactorisationExact.agda
 grep -q 'functionalReconciliationBound' DASHI/Crypto/SearchFactorisationExact.agda
@@ -57,6 +59,7 @@ grep -q '10.1007/3-540-68697-5_9' DASHI/Crypto/TimingObservationSideChannelExact
 grep -q 'collapseCertificateGivesCandidateSearch' DASHI/Crypto/MLKEMLocalSearchGeometryExact.agda
 grep -q '10.6028/NIST.FIPS.203' DASHI/Crypto/MLKEMLocalSearchGeometryExact.agda
 grep -q 'allSearchControlsCount' DASHI/Crypto/TopTenSearchGeometryControlsExact.agda
+grep -q 'allRuntimeAugmentedControlsCount' DASHI/Crypto/TopTenSearchGeometryControlsExact.agda
 
 if command -v agda >/dev/null 2>&1; then
   agda -i . -i src DASHI/EverythingTerminalisationProvenanceSymmetryRound10.agda
