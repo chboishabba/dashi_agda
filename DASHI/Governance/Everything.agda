@@ -16,12 +16,32 @@ import DASHI.Governance.LocalGlobalCouncilGluing
 import DASHI.Governance.RelationalMandateFibre
 import DASHI.Governance.SituatedConstituency
 import DASHI.Governance.TransitionResidual
+import DASHI.Governance.EmancipatoryTransitionSafety
 import DASHI.Governance.RevolutionarySourceAtlas
 import DASHI.Governance.RevolutionaryPracticeBraid
 import DASHI.Governance.TraumaMemorySublationBoundary
 import DASHI.Governance.CabarlahTraumaProjectionBridgeExact
 import DASHI.Governance.ComparativeCrisisClimateAtlas
 import DASHI.Governance.RevolutionaryAdjunctRegression
+
+-- Provenance-bearing quotient / policy-routing / corrective-reachability lane.
+import DASHI.Governance.ProvenancePolicyTransport
+import DASHI.Governance.ProvenanceRestitutionBoundary
+import DASHI.Governance.QuotientDefectResidualRouting
+import DASHI.Governance.SelectiveMultiResidualRouting
+import DASHI.Governance.TraumaWeightingTerminalisationLift
+import DASHI.Governance.AsymmetricReflectionPropositionLocality
+import DASHI.Governance.CorrectiveReachabilityEquivariance
+import DASHI.Governance.RelationPolicyTransportComposition
+import DASHI.Governance.DomainIndexedPeaceSubjectCarrier
+import DASHI.Governance.TransitionGovernanceOperatorAdapter
+
+-- Source-bounded/symbolic application surfaces.  These do not promote the
+-- generic structural operators into empirical motive, guilt, or ideology.
+import DASHI.Governance.AmalekProvenanceRoleBinding
+import DASHI.Governance.PopulistPlutocraticDualProjection
+import DASHI.Governance.IranUS2026RestitutionObservation
+
 import DASHI.Governance.Sudan.RCEPPSourceBoundary
 import DASHI.Governance.Sudan.RCEPPInstitutionalSurface
 import DASHI.Governance.Sudan.RCEPPPromotionBoundary
