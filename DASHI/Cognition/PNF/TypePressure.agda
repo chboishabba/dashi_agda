@@ -37,24 +37,38 @@ open TypePressureContribution public
 pressureClassification :
   ∀ {Subject CandidateType Evidence}
     {subject : Subject}
-    {candidateType : CandidateType} →
-  TypePressureContribution {Evidence = Evidence} subject candidateType →
-  Interference.ClassifiedInteraction
-    (signedPressure (TypePressureContribution {Evidence = Evidence} subject candidateType))
+    {candidateType : CandidateType}
+    (contribution :
+      TypePressureContribution
+        {Subject = Subject}
+        {CandidateType = CandidateType}
+        {Evidence = Evidence}
+        subject candidateType) →
+  Interference.ClassifiedInteraction (signedPressure contribution)
 pressureClassification contribution =
   Interference.classifySignedInteraction (signedPressure contribution)
 
 pressureDirection :
-  ∀ {Subject CandidateType Evidence subject candidateType} →
-  TypePressureContribution {Subject} {CandidateType} {Evidence}
+  ∀ {Subject CandidateType Evidence}
+    {subject : Subject}
+    {candidateType : CandidateType} →
+  TypePressureContribution
+    {Subject = Subject}
+    {CandidateType = CandidateType}
+    {Evidence = Evidence}
     subject candidateType →
   Selection.InteractionDirection
 pressureDirection contribution =
   Interference.interactionDirection (pressureClassification contribution)
 
 pressureMagnitude :
-  ∀ {Subject CandidateType Evidence subject candidateType} →
-  TypePressureContribution {Subject} {CandidateType} {Evidence}
+  ∀ {Subject CandidateType Evidence}
+    {subject : Subject}
+    {candidateType : CandidateType} →
+  TypePressureContribution
+    {Subject = Subject}
+    {CandidateType = CandidateType}
+    {Evidence = Evidence}
     subject candidateType → Nat
 pressureMagnitude contribution =
   Interference.interactionMagnitude (pressureClassification contribution)
@@ -63,7 +77,12 @@ sumPressure :
   ∀ {Subject CandidateType Evidence}
     {subject : Subject}
     {candidateType : CandidateType} →
-  List (TypePressureContribution {Evidence = Evidence} subject candidateType) → ℤ
+  List
+    (TypePressureContribution
+      {Subject = Subject}
+      {CandidateType = CandidateType}
+      {Evidence = Evidence}
+      subject candidateType) → ℤ
 sumPressure [] = + 0
 sumPressure (contribution ∷ rest) =
   signedPressure contribution + sumPressure rest
@@ -75,20 +94,36 @@ record TypePressureEnvelope
   constructor typePressureEnvelope
   field
     contributions :
-      List (TypePressureContribution {Evidence = Evidence} subject candidateType)
+      List
+        (TypePressureContribution
+          {Subject = Subject}
+          {CandidateType = CandidateType}
+          {Evidence = Evidence}
+          subject candidateType)
 
 open TypePressureEnvelope public
 
 envelopePressure :
-  ∀ {Subject CandidateType Evidence subject candidateType} →
-  TypePressureEnvelope {Subject} {CandidateType} {Evidence}
+  ∀ {Subject CandidateType Evidence}
+    {subject : Subject}
+    {candidateType : CandidateType} →
+  TypePressureEnvelope
+    {Subject = Subject}
+    {CandidateType = CandidateType}
+    {Evidence = Evidence}
     subject candidateType → ℤ
 envelopePressure envelope = sumPressure (contributions envelope)
 
 envelopeClassification :
-  ∀ {Subject CandidateType Evidence subject candidateType}
-    (envelope : TypePressureEnvelope {Subject} {CandidateType} {Evidence}
-      subject candidateType) →
+  ∀ {Subject CandidateType Evidence}
+    {subject : Subject}
+    {candidateType : CandidateType}
+    (envelope :
+      TypePressureEnvelope
+        {Subject = Subject}
+        {CandidateType = CandidateType}
+        {Evidence = Evidence}
+        subject candidateType) →
   Interference.ClassifiedInteraction (envelopePressure envelope)
 envelopeClassification envelope =
   Interference.classifySignedInteraction (envelopePressure envelope)
@@ -107,7 +142,11 @@ record PredicateRolePressure
     predicate : Predicate
     role : Role
     contribution :
-      TypePressureContribution {Evidence = Evidence} subject candidateType
+      TypePressureContribution
+        {Subject = Subject}
+        {CandidateType = CandidateType}
+        {Evidence = Evidence}
+        subject candidateType
 
 open PredicateRolePressure public
 
@@ -125,10 +164,9 @@ record NumericPredicateRolePressure
 open NumericPredicateRolePressure public
 
 numericRolePressureClassification :
-  ∀ {subject candidateType} →
-  NumericPredicateRolePressure subject candidateType →
-  Interference.ClassifiedInteraction
-    (signedRolePressure (NumericPredicateRolePressure subject candidateType))
+  ∀ {subject candidateType}
+    (pressure : NumericPredicateRolePressure subject candidateType) →
+  Interference.ClassifiedInteraction (signedRolePressure pressure)
 numericRolePressureClassification pressure =
   Interference.classifySignedInteraction (signedRolePressure pressure)
 
@@ -141,17 +179,17 @@ data TypePressurePromotionPermission : Set where
 pressureAloneCannotAssertType : TypePressurePromotionPermission → ⊥
 pressureAloneCannotAssertType ()
 
-record TypePressureBoundary : Set where
+record TypePressureBoundary : Set₁ where
   constructor typePressureBoundary
   field
-    pressureRequiresFineSignedEvidence :
-      ∀ {Subject CandidateType Evidence subject candidateType} →
-      TypePressureContribution {Subject} {CandidateType} {Evidence}
-        subject candidateType → ℤ
     pressureCannotPromoteType : TypePressurePromotionPermission → ⊥
+    signedClassifierReused :
+      (value : ℤ) → Interference.ClassifiedInteraction value
 
 open TypePressureBoundary public
 
 canonicalTypePressureBoundary : TypePressureBoundary
 canonicalTypePressureBoundary =
-  typePressureBoundary signedPressure pressureAloneCannotAssertType
+  typePressureBoundary
+    pressureAloneCannotAssertType
+    Interference.classifySignedInteraction
