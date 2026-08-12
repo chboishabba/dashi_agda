@@ -8,11 +8,14 @@ import DASHI.Core.AdmissibleReachability
 import DASHI.Core.DynamicalQuotientSafety
 import DASHI.Core.ProvenanceQuotientDynamics
 import DASHI.Core.PossibilityAccessibilitySupport
+import DASHI.Core.FinePhaseObservation
 import DASHI.Foundations.DepthWheelGradedDynamics
 import DASHI.Cognition.PNF.BoundedExecutionAdapters
 import DASHI.Cognition.PNF.SupportClassificationIdentitySpine
 import DASHI.Cognition.PNF.TypePressure
+import DASHI.Cognition.PNF.EvidencePhaseObservationAdapter
 import DASHI.Cognition.PNF.EvidenceDepthWheelOrthogonality
+import DASHI.Cognition.PNF.DepthWheelMemoryGradedAdapter
 import DASHI.Cognition.PNF.WikidataRepairProposal
 import DASHI.Cognition.PNF.TerminalisationDefectRegression
 import DASHI.Cognition.PNF.SemanticSamplingDynamicSafety
