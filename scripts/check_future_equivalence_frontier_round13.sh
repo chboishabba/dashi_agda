@@ -34,6 +34,7 @@ done
 grep -q 'futureEquivalentRefl' DASHI/Core/FutureObservationLanguageQuotientExact.agda
 grep -q 'futureEquivalentSym' DASHI/Core/FutureObservationLanguageQuotientExact.agda
 grep -q 'futureEquivalentTrans' DASHI/Core/FutureObservationLanguageQuotientExact.agda
+grep -q 'exactSummaryCertifiesFutureLanguageSafety' DASHI/Core/FutureObservationLanguageQuotientExact.agda
 grep -q 'safeProjectionKernelFactorsThroughFutureEquivalence' DASHI/Core/FutureObservationLanguageQuotientExact.agda
 grep -q 'sectionedSafeProjectionFactors' DASHI/Core/FutureObservationLanguageQuotientExact.agda
 
