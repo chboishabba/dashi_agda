@@ -25,6 +25,9 @@ FILES=(
   DASHI/Cognition/PNF/MemoryCommandSeparationExact.agda
   DASHI/Crypto/ReopeningArchitectureExact.agda
   DASHI/Crypto/MLKEMNoisyReopeningExact.agda
+  DASHI/Crypto/KEMStateContractExact.agda
+  DASHI/Crypto/PublicSecretFactorisationAttackExact.agda
+  DASHI/Crypto/MLKEMSecurityDependencyGraphExact.agda
   DASHI/Arithmetic/PrimeSupportTransportTaxiMoonshineExact.agda
   DASHI/EverythingTerminalisationProvenanceSymmetryRound10.agda
 )
@@ -53,6 +56,15 @@ grep -q 'extinctionIsMemoryCommandSeparation' DASHI/Cognition/PNF/MemoryCommandS
 grep -q 'ModelRelativeReopening' DASHI/Crypto/ReopeningArchitectureExact.agda
 grep -q 'toyPublicCollision' DASHI/Crypto/MLKEMNoisyReopeningExact.agda
 grep -q '10.6028/NIST.FIPS.203' DASHI/Crypto/MLKEMNoisyReopeningExact.agda
+grep -q 'generatedAgreement' DASHI/Crypto/KEMStateContractExact.agda
+grep -q 'CandidateKeyTest' DASHI/Crypto/KEMStateContractExact.agda
+grep -q 'KeyConfirmationContract' DASHI/Crypto/KEMStateContractExact.agda
+grep -q 'fullInversionImpliesSecretRecovery' DASHI/Crypto/PublicSecretFactorisationAttackExact.agda
+grep -q 'exactRecoveryLeaksEveryPredicate' DASHI/Crypto/PublicSecretFactorisationAttackExact.agda
+grep -q 'factorisationImpliesExactRecovery' DASHI/Crypto/PublicSecretFactorisationAttackExact.agda
+grep -q 'publicFactorisationBreaksNoRecovery' DASHI/Crypto/MLKEMSecurityDependencyGraphExact.agda
+grep -q 'implicitRejectionRouteHidden' DASHI/Crypto/MLKEMSecurityDependencyGraphExact.agda
+grep -q 'candidateKeyTestingSeparatedFromCandidateSearch' DASHI/Crypto/MLKEMSecurityDependencyGraphExact.agda
 grep -q 'taxiEarns196883' DASHI/Arithmetic/PrimeSupportTransportTaxiMoonshineExact.agda
 grep -q 'allThreeLaneSourcesEarnTargetSupport' DASHI/Arithmetic/PrimeSupportTransportTaxiMoonshineExact.agda
 grep -q 'chooseTwelveThreeIs220' DASHI/Arithmetic/PrimeSupportTransportTaxiMoonshineExact.agda
