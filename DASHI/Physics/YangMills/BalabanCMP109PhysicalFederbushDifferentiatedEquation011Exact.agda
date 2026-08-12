@@ -222,8 +222,8 @@ differenceZeroImpliesRightEqualsLeft left right differenceZero =
   trans
     (ℚRing.solve-∀ left right)
     (trans
-      (cong (right +_) differenceZero)
-      (ℚRing.solve-∀ left right))
+      (cong (left -_) differenceZero)
+      (ℚRing.solve-∀ left))
 
 physicalFederbushDifferentiatedEquation011Exact :
   ∀ {Index} (dataSet : PhysicalFederbushEquation011Differential Index) →
