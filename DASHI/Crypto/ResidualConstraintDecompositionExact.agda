@@ -16,6 +16,37 @@ record _↔_ (A B : Set) : Set where
         backward : B → A
 open _↔_ public
 
+------------------------------------------------------------------------
+-- Indexed family form: global plausibility is all local tests plus one explicit
+-- reconciliation seam.  This is the natural target for coefficient blocks,
+-- NTT coordinates, CRT lanes, or other finite local views once a same-object
+-- bridge is actually proved.
+------------------------------------------------------------------------
+
+record IndexedResidualSystem : Set₁ where
+  constructor indexedResidualSystem
+  field
+    Hidden Index : Set
+    Local : Index → Set
+    ρ : (i : Index) → Hidden → Local i
+    LocalPlausible : (i : Index) → Local i → Set
+    ReconcileAll : Hidden → Set
+    GlobalPlausible : Hidden → Set
+    globalPlausibleIffIndexed : ∀ hidden →
+      GlobalPlausible hidden ↔
+      ((∀ i → LocalPlausible i (ρ i hidden)) × ReconcileAll hidden)
+open IndexedResidualSystem public
+
+indexedGlobalImpliesEveryLocal :
+  ∀ {system : IndexedResidualSystem} {hidden} →
+  GlobalPlausible system hidden →
+  ∀ i → LocalPlausible system i (ρ system i hidden)
+indexedGlobalImpliesEveryLocal {system} {hidden} global i =
+  localProof i
+  where
+  decomposition = forward (globalPlausibleIffIndexed system hidden) global
+  localProof = Data.Product.proj₁ decomposition
+
 record TwoLocalResidualSystem : Set₁ where
   constructor twoLocalResidualSystem
   field
@@ -43,7 +74,7 @@ globalImpliesEachLocal {system} {hidden} global with
 
 ------------------------------------------------------------------------
 -- Numeric score layer: local scores can be exact while a coupling penalty
--- remains.  This is the score analogue of local predicates + reconciliation.
+-- remains. This is the score analogue of local predicates + reconciliation.
 ------------------------------------------------------------------------
 
 record AdditiveResidualScore : Set₁ where
