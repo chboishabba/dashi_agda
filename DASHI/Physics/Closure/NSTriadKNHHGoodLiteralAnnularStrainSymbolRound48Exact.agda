@@ -40,9 +40,9 @@ open import Data.Rational.Base using (ℚ)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 import DASHI.Physics.Closure.NSTriadKNRationalLerayProjectionExact as V
+import DASHI.Physics.Closure.NSTriadKNLuoAngularStrainDisplayedFormulaZeroExact as Matrix
 import DASHI.Physics.Closure.NSTriadKNFourierStrainMultiplierRound38Exact as Strain
 import DASHI.Physics.Closure.NSTriadKNFourierStrainScaleInvariantRound40Exact as Scale
-import DASHI.Physics.Closure.NSTriadKNLuoBadCoherenceWeightedMarkovExact as Threshold
 
 record LiteralAnnularStrainCutoff : Set₁ where
   field
@@ -56,8 +56,7 @@ open LiteralAnnularStrainCutoff public
 
 literalAnnularStrainSymbol :
   LiteralAnnularStrainCutoff →
-  V.ProjectionMode → V.Vec3 →
-  DASHI.Physics.Closure.NSTriadKNLuoAngularStrainDisplayedFormulaZeroExact.Matrix3
+  V.ProjectionMode → V.Vector3 → Matrix.Matrix3
 literalAnnularStrainSymbol cutoff modeData omega =
   Strain.scaleMatrix
     (cutoffWeight cutoff modeData)
