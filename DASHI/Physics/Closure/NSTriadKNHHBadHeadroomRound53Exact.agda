@@ -40,10 +40,11 @@ module DASHI.Physics.Closure.NSTriadKNHHBadHeadroomRound53Exact where
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
+open import Agda.Builtin.Nat using (Nat; suc)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import DASHI.Physics.Closure.NSTriadKNHHBadShellBarrierRound52Exact as Barrier
 import DASHI.Physics.Closure.NSTriadKNHHBadBarrierToOwnerRound52Exact as OwnerBarrier
@@ -91,7 +92,7 @@ differenceNonnegativeToLe {a} {b} zero≤difference =
 headroom :
   ∀ {input} →
   OwnerBarrier.UniformShellBarrier input →
-  Agda.Builtin.Nat.Nat → ℚ
+  Nat → ℚ
 headroom uniform q =
   OwnerBarrier.ceiling uniform
   - Barrier.barrier (OwnerBarrier.supersolution uniform) q
@@ -107,7 +108,7 @@ headroomNonnegative uniform q =
 headroomPaymentRHS :
   ∀ {input} →
   OwnerBarrier.UniformShellBarrier input →
-  Agda.Builtin.Nat.Nat → ℚ
+  Nat → ℚ
 headroomPaymentRHS {input} uniform q =
   (1ℚ - Barrier.alpha input q) * OwnerBarrier.ceiling uniform
   + Barrier.alpha input q * headroom uniform q
@@ -115,10 +116,9 @@ headroomPaymentRHS {input} uniform q =
 barrierSlack :
   ∀ {input} →
   OwnerBarrier.UniformShellBarrier input →
-  Agda.Builtin.Nat.Nat → ℚ
+  Nat → ℚ
 barrierSlack {input} uniform q =
-  Barrier.barrier (OwnerBarrier.supersolution uniform)
-    (Agda.Builtin.Nat.suc q)
+  Barrier.barrier (OwnerBarrier.supersolution uniform) (suc q)
   - (Barrier.alpha input q
       * Barrier.barrier (OwnerBarrier.supersolution uniform) q
       + Barrier.forcing input q)
@@ -126,10 +126,10 @@ barrierSlack {input} uniform q =
 headroomSlack :
   ∀ {input} →
   OwnerBarrier.UniformShellBarrier input →
-  Agda.Builtin.Nat.Nat → ℚ
+  Nat → ℚ
 headroomSlack {input} uniform q =
   headroomPaymentRHS uniform q
-  - (Barrier.forcing input q + headroom uniform (Agda.Builtin.Nat.suc q))
+  - (Barrier.forcing input q + headroom uniform (suc q))
 
 headroomSlackIsBarrierSlack :
   ∀ {input}
@@ -140,8 +140,7 @@ headroomSlackIsBarrierSlack {input} uniform q =
     ( OwnerBarrier.ceiling uniform
     ∷ Barrier.alpha input q
     ∷ Barrier.barrier (OwnerBarrier.supersolution uniform) q
-    ∷ Barrier.barrier (OwnerBarrier.supersolution uniform)
-        (Agda.Builtin.Nat.suc q)
+    ∷ Barrier.barrier (OwnerBarrier.supersolution uniform) (suc q)
     ∷ Barrier.forcing input q
     ∷ [])
 
@@ -161,15 +160,13 @@ headroomSlackNonnegative :
 headroomSlackNonnegative uniform q =
   subst
     (0ℚ ≤_)
-    (Relation.Binary.PropositionalEquality.sym
-      (headroomSlackIsBarrierSlack uniform q))
+    (sym (headroomSlackIsBarrierSlack uniform q))
     (barrierSlackNonnegative uniform q)
 
 headroomEvolution :
   ∀ {input}
     (uniform : OwnerBarrier.UniformShellBarrier input) q →
-  Barrier.forcing input q
-    + headroom uniform (Agda.Builtin.Nat.suc q)
+  Barrier.forcing input q + headroom uniform (suc q)
   ≤ headroomPaymentRHS uniform q
 headroomEvolution uniform q =
   differenceNonnegativeToLe (headroomSlackNonnegative uniform q)
