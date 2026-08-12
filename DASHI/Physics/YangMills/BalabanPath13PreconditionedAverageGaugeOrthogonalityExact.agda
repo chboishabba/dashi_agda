@@ -30,10 +30,10 @@ module DASHI.Physics.YangMills.BalabanPath13PreconditionedAverageGaugeOrthogonal
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _-_; _*_; -_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _-_; _*_; -_)
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using
-  (cong; trans)
+  (cong; trans; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier
@@ -44,9 +44,22 @@ open import DASHI.Physics.YangMills.BalabanPhysicalAxisPartitionExact
 import DASHI.Physics.YangMills.BalabanPath13PhysicalFibreMatchExact as Match
 import DASHI.Physics.YangMills.BalabanPath13NormalizedAxisAverageExact as Side13
 import DASHI.Physics.YangMills.BalabanPhysicalSU2FiniteCoordinatesExact as Physical
+import DASHI.Physics.YangMills.BalabanClayGate4CMP109MinimalAdmissibleRepositoryScaleExact as Minimal
 import DASHI.Physics.YangMills.BalabanCMP109L13BlockAverageAdjointFloorExact as Average
 import DASHI.Physics.YangMills.BalabanCMP109L13ConstraintRowPreconditionerExact as Precondition
 import DASHI.Physics.YangMills.BalabanPath13FlatGaugeAdjointMatrixExact as Flat
+
+shiftForwardInsertAxis13 :
+  ∀ axis coordinate transverse →
+  Flat.shiftForward13 axis (insertAxis axis coordinate transverse)
+  ≡ insertAxis axis (Flat.cyclicNext coordinate) transverse
+shiftForwardInsertAxis13 zeroᵢ coordinate (pair x1 (pair x2 x3)) = refl
+shiftForwardInsertAxis13 (sucᵢ zeroᵢ) coordinate
+    (pair x0 (pair x2 x3)) = refl
+shiftForwardInsertAxis13 (sucᵢ (sucᵢ zeroᵢ)) coordinate
+    (pair x0 (pair x1 x3)) = refl
+shiftForwardInsertAxis13 (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) coordinate
+    (pair x0 (pair x1 x2)) = refl
 
 periodicForwardDifferenceFibreSum13 :
   ∀ field axis transverse →
@@ -98,7 +111,7 @@ periodicForwardDifferenceGlobalSum13 field axis =
                   (λ target →
                     field target
                     - field (insertAxis axis coordinate transverse))
-                  (Flat.shiftForwardInsertAxis13 axis coordinate transverse)))
+                  (shiftForwardInsertAxis13 axis coordinate transverse)))
             (periodicForwardDifferenceFibreSum13 field axis transverse)))
       (zeroSum (physicalTransverseCoordinates Side13.side13)))
   where
@@ -163,31 +176,33 @@ preconditionedAverageGaugeInnerExactZero alpha gamma =
               (sumRationalCong
                 (allCyclicIndices four) _ (λ _ → 0ℚ)
                 (λ axis →
+                  let
+                    coefficient =
+                      Precondition.oneHundredSixtyNine
+                      * Minimal.siteWeightℚ
+                      * alpha (pair coordinate axis)
+                  in
                   trans
                     (sumRationalCong
                       (physicalBlockSites Side13.side13) _ _
                       (λ site →
                         trans
                           (cong
-                            (Precondition.oneHundredSixtyNine
-                              * Average.Minimal.siteWeightℚ
-                              * alpha (pair coordinate axis) *_)
+                            (coefficient *_)
                             (Flat.flatGaugeAdjointPointwiseExact
                               gamma coordinate axis site))
                           (ℚRing.solve-∀
                             Precondition.oneHundredSixtyNine
-                            Average.Minimal.siteWeightℚ
+                            Minimal.siteWeightℚ
                             (alpha (pair coordinate axis))
                             (Flat.forwardDifference13 axis
                               (Flat.multiplierField13 gamma coordinate) site))))
                     (constantTimesPeriodicDifferenceSumZero13
-                      (Precondition.oneHundredSixtyNine
-                        * Average.Minimal.siteWeightℚ
-                        * alpha (pair coordinate axis))
+                      coefficient
                       (Flat.multiplierField13 gamma coordinate)
                       axis)))
-              (zeroAxes))))
-      (zeroCoordinates)))
+              zeroAxes)))
+      zeroCoordinates))
   where
   zeroAxes :
     sumRational (allCyclicIndices four) (λ _ → 0ℚ) ≡ 0ℚ
