@@ -11,7 +11,7 @@ import DASHI.Physics.Closure.NSA7ResidualDepletionGronwallBoundary as A7
 import DASHI.Physics.Closure.NSA8FullLocalDefectMonotonicityBoundary as A8
 import DASHI.Physics.Closure.NSA9CKNBKMClosureBoundary as A9
 import DASHI.Physics.Closure.NSFinalStateReceipt as Final
-import DASHI.Physics.Closure.NSTriadKNHighestAlphaRound46Exact
+import DASHI.Physics.Closure.NSTriadKNHighestAlphaRound47Exact
 import DASHI.Papers.NavierStokes.ClayContractRound23 as Clay23
 
 ------------------------------------------------------------------------
@@ -25,12 +25,12 @@ import DASHI.Papers.NavierStokes.ClayContractRound23 as Clay23
 -- unconditional promotion remain false.
 --
 -- The current theorem-bearing highest-alpha aggregate is imported as well, so
--- DASHI.Everything (which imports this interface) reaches the Round-46 exact
+-- DASHI.Everything (which imports this interface) reaches the Round-47 exact
 -- reductions without promoting their unresolved physical producer boundaries.
 
 paperInterfaceStatement : String
 paperInterfaceStatement =
-  "Paper-facing NS interface: A6/A7/A8/A9 closure receipts, the current Round-46 exact highest-alpha aggregate, and the literal Round 23 Fefferman periodic contract are imported; the target surface is visible while unresolved physical producer inhabitation, Clay Navier-Stokes and terminal promotion remain false."
+  "Paper-facing NS interface: A6/A7/A8/A9 closure receipts, the current Round-47 exact highest-alpha aggregate, and the literal Round 23 Fefferman periodic contract are imported; the target surface is visible while unresolved physical producer inhabitation, Clay Navier-Stokes and terminal promotion remain false."
 
 record NSPaperTheoremStatus : Setω where
   field
