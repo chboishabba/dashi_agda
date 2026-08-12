@@ -28,17 +28,18 @@ module DASHI.Physics.Closure.NSTriadKNHHBadTwoRouteLiveGateRound50Exact where
 --
 --   T = 15/32 - (tau_Com + tau_kernel)/2,
 --
--- hence H2<1.  This prevents the convenient uniform-alpha hypothesis from
--- becoming an accidental necessity of the formal architecture.
+-- hence H2<1. If Com and kernel are soft, the summable route is exactly
+--
+--   C0 + B_force < 15/32.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base using (ℚ; 1ℚ; _<_)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _<_)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import DASHI.Physics.Closure.NSTriadKNHardGateHierarchyRound47Exact as Gate
 import DASHI.Physics.Closure.NSTriadKNHHBadLiveBudgetTargetRound48Exact as Live
-import DASHI.Physics.Closure.NSTriadKNHHBadDirectLiveBudgetRound49Exact as Direct
 import DASHI.Physics.Closure.NSTriadKNHHBadSummableForcingRound50Exact as Sum
 import DASHI.Physics.Closure.NSTriadKNHHBadSummableForcingToOwnerRound50Exact as SumOwner
 
@@ -66,6 +67,42 @@ summableForcingImpliesH2Strict input =
     (comFloor input)
     (kernelFloor input)
     (summableCeilingBelowLiveTarget input)
+
+record SoftComKernelSummableForcingInput : Set where
+  field
+    summableInput : Sum.BorderlineSummableForcing
+    prefixSummable : Sum.PrefixSummable summableInput
+    basePlusForcingBelowFifteenThirtySeconds :
+      SumOwner.summableCeiling summableInput < Live.fifteenThirtySeconds
+
+open SoftComKernelSummableForcingInput public
+
+softComKernelSummableLiveInput :
+  SoftComKernelSummableForcingInput → SummableForcingLiveBudgetInput
+softComKernelSummableLiveInput input = record
+  { summableInput = SoftComKernelSummableForcingInput.summableInput input
+  ; prefixSummable = SoftComKernelSummableForcingInput.prefixSummable input
+  ; comFloor = 0ℚ
+  ; kernelFloor = 0ℚ
+  ; summableCeilingBelowLiveTarget =
+      subst
+        (λ upper →
+          SumOwner.summableCeiling
+            (SoftComKernelSummableForcingInput.summableInput input)
+          < upper)
+        (sym Live.allowableWithSoftComAndKernel)
+        (basePlusForcingBelowFifteenThirtySeconds input)
+  }
+
+softComKernelSummableForcingImpliesH0Strict :
+  (input : SoftComKernelSummableForcingInput) →
+  Gate.hardGateH2
+    (SumOwner.summableCeiling
+      (SoftComKernelSummableForcingInput.summableInput input))
+    0ℚ 0ℚ
+  < 1ℚ
+softComKernelSummableForcingImpliesH0Strict input =
+  summableForcingImpliesH2Strict (softComKernelSummableLiveInput input)
 
 data HHBadLiveRoute : Set where
   strictContraction summableForcing : HHBadLiveRoute
