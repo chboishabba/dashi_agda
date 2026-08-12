@@ -15,32 +15,29 @@ module DASHI.Physics.Closure.NSTriadKNHHBadDuhamelDefectReductionRound49Exact wh
 -- DASHI CONTRIBUTION
 --
 -- Interpret Round 48's inherited/generated/leakage split as the exact consumer
--- shape of a shell-localized Duhamel decomposition.  Generic heat contraction
--- of vorticity is deliberately insufficient.  The load-bearing physical theorem
--- is named explicitly: the directional-defect functional itself must contract
--- after the inherited heat evolution.  If supplied, one heat unit gives exactly
--- the alpha/2 inherited term already consumed by the selected recurrence.
+-- shape of a shell-localized Duhamel decomposition. Generic heat contraction
+-- of vorticity is deliberately insufficient. The load-bearing physical theorem
+-- is the contraction of the directional-defect functional itself.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Rational.Base using (ℚ; _*_; _≤_)
 
 import DASHI.Physics.Closure.NSTriadKNHHBadHeatSemigroupHalfRound48Exact as HeatHalf
 import DASHI.Physics.Closure.NSTriadKNHHBadInheritedGeneratedLeakageRound48Exact as Three
+import DASHI.Physics.Closure.NSTriadKNLuoFiniteDyadicHeatDampingExact as Heat
+import DASHI.Physics.Closure.NSTriadKNHHBadSharpDyadicGainRound33Exact as Sharp
 
 record PhysicalDirectionalDefectDuhamelInput : Set where
   field
     decomposition : Three.PhysicalSelectedThresholdDefectDecomposition
 
-    -- This is intentionally about the nonlinear directional-defect quantity,
-    -- not merely the L2 norm of the heat-evolved vorticity.
     physicalDirectionalDefectHeatContraction : ∀ q →
       Three.inherited decomposition q
       ≤ Three.alpha decomposition * Three.defectRate decomposition q
-        * DASHI.Physics.Closure.NSTriadKNLuoFiniteDyadicHeatDampingExact.heatDamping
-            (Agda.Builtin.Nat.suc Agda.Builtin.Nat.zero)
+        * Heat.heatDamping (suc zero)
 
 open PhysicalDirectionalDefectDuhamelInput public
 
@@ -49,7 +46,7 @@ inheritedHalfFromDirectionalDefectHeatContraction :
   ∀ q →
   Three.inherited (decomposition physical) q
   ≤ Three.alpha (decomposition physical)
-    * DASHI.Physics.Closure.NSTriadKNHHBadSharpDyadicGainRound33Exact.half
+    * Sharp.half
     * Three.defectRate (decomposition physical) q
 inheritedHalfFromDirectionalDefectHeatContraction physical q =
   HeatHalf.oneHeatUnitInheritanceGivesRequiredHalf record
