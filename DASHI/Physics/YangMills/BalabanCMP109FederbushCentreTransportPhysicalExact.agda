@@ -42,13 +42,14 @@ open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using (_+_; _*_; _≤_; _/_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionWilsonSecondVariationExact as Q
 import DASHI.Physics.YangMills.BalabanP33PhysicalRationalWilsonPlaquetteJetExact as Physical
 import DASHI.Physics.YangMills.BalabanP33QuaternionFourFactorTelescopeExact as Four
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
+import DASHI.Physics.YangMills.BalabanP33FiniteWeightedSchurSquaredExact as Schur
 import DASHI.Physics.YangMills.BalabanP33QuaternionAdjointPerturbationExact as Adjoint
 import DASHI.Physics.YangMills.BalabanCMP109QuaternionAdjointTwoBackgroundExact as TwoAd
 
@@ -174,10 +175,12 @@ centreTransportDifferenceNormSqBound
       (relativeProductUnit u' v' u'Unit v'Unit)
     relativeBound = relativeProductDifferenceNormSqBound
       u v u' v' vUnit u'Unit
-    scaleNN = ℚP.nonNegative⁻¹ ((+ 4 / 1) * Norm.normSq value)
-    scaledRelative = Norm.scaleNonnegative
-      ((+ 4 / 1) * Norm.normSq value)
-      scaleNN relativeBound
+    scale = (+ 4 / 1) * Norm.normSq value
+    scaleNN = Schur.productNonnegative
+      (+ 4 / 1) (Norm.normSq value)
+      (ℚP.nonNegative⁻¹ (+ 4 / 1))
+      (Norm.normSqNonnegative value)
+    scaledRelative = Norm.scaleNonnegative scale scaleNN relativeBound
   in
   ℚP.≤-trans adjointBound
     (subst
