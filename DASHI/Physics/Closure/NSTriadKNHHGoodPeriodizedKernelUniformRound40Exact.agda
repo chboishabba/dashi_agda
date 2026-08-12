@@ -27,15 +27,14 @@ module DASHI.Physics.Closure.NSTriadKNHHGoodPeriodizedKernelUniformRound40Exact 
 -- multiplier.  Round 40 therefore makes the required standard annular
 -- multiplier theorem explicit instead of hiding a false same-object equality.
 --
--- For the shell-localized strain symbol
+-- Round 40 separately proves on the exact rational strain carrier that
 --
---   phi_q(k) |k|^{-2} S_ang(k),
+--   S_{r k}(omega) = S_k(omega)
 --
--- the angular factor is homogeneous of degree zero away from k=0 and phi_q is
--- smooth annular.  Standard Fourier multiplier/scaling theory gives a fixed
--- Euclidean master kernel L1 norm, and periodization preserves a shell-uniform
--- torus L1 bound.  That imported analytic theorem is represented below by
--- `PeriodizedAnnularStrainKernelL1Theorem`.
+-- for every positive rational scale r.  Consequently homogeneity of degree
+-- zero is no longer an imported analytic field here.  The remaining standard
+-- analysis is only: smooth annular localization, L1 integrability of the fixed
+-- Euclidean master kernel, and the periodization bound.
 --
 -- The only DASHI same-object seam is then honest:
 --
@@ -46,9 +45,7 @@ module DASHI.Physics.Closure.NSTriadKNHHGoodPeriodizedKernelUniformRound40Exact 
 --   |good shell stretching|^2
 --     <= C_strain * delta * weightedLocalMass
 --
--- uniformly in shell.  The remaining physical/PDE work is constructing this
--- standard annular strain-kernel realization on the literal torus carrier and
--- feeding the weighted local mass into time/dissipation absorption.
+-- uniformly in shell.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Level; lsuc)
@@ -62,6 +59,7 @@ open import Relation.Binary.PropositionalEquality using (subst; sym)
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
 import DASHI.Physics.Closure.NSTriadKNLuoBadCoherenceWeightedMarkovExact as Threshold
 import DASHI.Physics.Closure.NSTriadKNHHGoodFiniteKernelCauchyRound40Exact as Good
+import DASHI.Physics.Closure.NSTriadKNFourierStrainScaleInvariantRound40Exact as Scale
 
 record PeriodizedAnnularStrainKernelL1Theorem
     {st : Level}
@@ -80,10 +78,6 @@ record PeriodizedAnnularStrainKernelL1Theorem
     AnnularCutoffSmoothAndCompactlySupportedAwayFromZero : Set st
     annularCutoffSmoothAndCompactlySupportedAwayFromZero :
       AnnularCutoffSmoothAndCompactlySupportedAwayFromZero
-
-    StrainAngularMultiplierHomogeneousDegreeZero : Set st
-    strainAngularMultiplierHomogeneousDegreeZero :
-      StrainAngularMultiplierHomogeneousDegreeZero
 
     MasterAnnularStrainKernelIsL1 : Set st
     masterAnnularStrainKernelIsL1 : MasterAnnularStrainKernelIsL1
@@ -139,6 +133,9 @@ periodizedHHGoodShellBound identification =
   Good.finiteHHGoodUniformKernelBound
     (uniformCertificateFromPeriodizedStrainKernel identification)
 
+strainOrderZeroHomogeneityReused : Bool
+strainOrderZeroHomogeneityReused = Scale.fourierStrainOrderZeroHomogeneityClosed
+
 hhGoodPeriodizedKernelUniformBridgeClosed : Bool
 hhGoodPeriodizedKernelUniformBridgeClosed = true
 
@@ -147,6 +144,11 @@ physicalAnnularStrainKernelL1TheoremConstructed = false
 
 physicalStrainShellKernelMassIdentificationConstructed : Bool
 physicalStrainShellKernelMassIdentificationConstructed = false
+
+strainOrderZeroHomogeneityReusedIsTrue :
+  strainOrderZeroHomogeneityReused ≡ true
+strainOrderZeroHomogeneityReusedIsTrue =
+  Scale.fourierStrainOrderZeroHomogeneityClosedIsTrue
 
 hhGoodPeriodizedKernelUniformBridgeClosedIsTrue :
   hhGoodPeriodizedKernelUniformBridgeClosed ≡ true

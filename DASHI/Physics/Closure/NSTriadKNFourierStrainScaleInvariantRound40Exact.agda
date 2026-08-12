@@ -45,9 +45,9 @@ module DASHI.Physics.Closure.NSTriadKNFourierStrainScaleInvariantRound40Exact wh
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
-open import Data.Rational.Base using (ℚ; 1ℚ; _*_) 
+open import Data.Rational.Base using (ℚ; 1ℚ; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
 import DASHI.Physics.Closure.NSTriadKNRationalLerayProjectionExact as V
 import DASHI.Physics.Closure.NSTriadKNLuoAngularStrainDisplayedFormulaZeroExact as Matrix
@@ -60,6 +60,24 @@ normSquaredScale : ∀ scalar value →
   ≡ scalar * scalar * V.normSquared value
 normSquaredScale scalar (V.v3 x y z) =
   solve (scalar ∷ x ∷ y ∷ z ∷ [])
+
+inverseSquareCancellation :
+  (scale : Threshold.PositiveThreshold) →
+  (Threshold.thresholdInverse scale * Threshold.thresholdInverse scale)
+    * (Threshold.threshold scale * Threshold.threshold scale)
+  ≡ 1ℚ
+inverseSquareCancellation scale =
+  let
+    r = Threshold.threshold scale
+    rinv = Threshold.thresholdInverse scale
+  in
+  trans
+    (solve (rinv ∷ r ∷ []))
+    (trans
+      (cong₂ _*_
+        (Threshold.inverseMeaning scale)
+        (Threshold.inverseMeaning scale))
+      (solve []))
 
 scaledProjectionMode :
   Threshold.PositiveThreshold → V.ProjectionMode → V.ProjectionMode
@@ -80,11 +98,17 @@ scaledProjectionMode scale modeData =
     (inv * rinv * rinv)
       * V.normSquared (V.scale r (V.mode modeData))
     ≡ 1ℚ
-  inverseScaled
-    rewrite normSquaredScale r (V.mode modeData)
-          | V.inverseLaw modeData
-          | Threshold.inverseMeaning scale =
-    solve []
+  inverseScaled =
+    trans
+      (cong ((inv * rinv * rinv) *_)
+        (normSquaredScale r (V.mode modeData)))
+      (trans
+        (solve (inv ∷ rinv ∷ r ∷ n2 ∷ []))
+        (trans
+          (cong₂ _*_
+            (V.inverseLaw modeData)
+            (inverseSquareCancellation scale))
+          (solve [])))
 
 scaledProjectionModeMode : ∀ scale modeData →
   V.mode (scaledProjectionMode scale modeData)
@@ -150,34 +174,18 @@ scaledAngularCancellation scale modeData omega =
   in
   trans
     (cong
-      (Strain.scaleMatrix
-        (inv * rinv * rinv))
+      (Strain.scaleMatrix (inv * rinv * rinv))
       (angularStrainScaleMode r (V.mode modeData) omega))
     (trans
       (scaleMatrixCompose (inv * rinv * rinv) (r * r) angular)
-      (matrixScalarCancellation scale inv angular))
-  where
-  matrixScalarCancellation :
-    ∀ scale inv matrix →
-    Strain.scaleMatrix
-      ((inv * Threshold.thresholdInverse scale
-        * Threshold.thresholdInverse scale)
-        * (Threshold.threshold scale * Threshold.threshold scale))
-      matrix
-    ≡ Strain.scaleMatrix inv matrix
-  matrixScalarCancellation scale inv
-      (Matrix.matrix3 m11 m12 m13 m21 m22 m23 m31 m32 m33)
-    rewrite Threshold.inverseMeaning scale =
-    Matrix.matrixExt
-      (solve (inv ∷ m11 ∷ []))
-      (solve (inv ∷ m12 ∷ []))
-      (solve (inv ∷ m13 ∷ []))
-      (solve (inv ∷ m21 ∷ []))
-      (solve (inv ∷ m22 ∷ []))
-      (solve (inv ∷ m23 ∷ []))
-      (solve (inv ∷ m31 ∷ []))
-      (solve (inv ∷ m32 ∷ []))
-      (solve (inv ∷ m33 ∷ []))
+      (cong
+        (λ scalar → Strain.scaleMatrix scalar angular)
+        (trans
+          (solve (inv ∷ rinv ∷ r ∷ []))
+          (trans
+            (cong (inv *_)
+              (inverseSquareCancellation scale))
+            (solve (inv ∷ []))))))
 
 fourierStrainMultiplierScaleInvariant :
   ∀ scale modeData omega →
