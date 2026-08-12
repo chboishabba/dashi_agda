@@ -34,10 +34,10 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Rational.Base using
-  (ℚ; 0ℚ; _+_; _-_; _≤_)
+  (ℚ; 0ℚ; _+_; _-_; -_; _≤_)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (subst; subst₂; sym)
 
 import DASHI.Physics.Closure.NSTriadKNHHBadSummableForcingRound50Exact as Sum
 
@@ -89,13 +89,28 @@ prefixBelowInitialPotential :
   Sum.forcingPrefix input n ≤ potential telescoping zero
 prefixBelowInitialPotential input telescoping n =
   let
+    negPotentialBelowZero :
+      - potential telescoping n ≤ 0ℚ
+    negPotentialBelowZero =
+      ℚP.neg-mono-≤ (potentialNonnegative telescoping n)
+
+    shifted :
+      potential telescoping zero + (- potential telescoping n)
+      ≤ potential telescoping zero + 0ℚ
+    shifted =
+      ℚP.+-monoʳ-≤
+        (potential telescoping zero)
+        negPotentialBelowZero
+
     dropBelowInitial :
       potential telescoping zero - potential telescoping n
       ≤ potential telescoping zero
     dropBelowInitial =
-      ℚP.+-monoʳ-≤
-        (potential telescoping zero)
-        (ℚP.neg-mono-≤ (potentialNonnegative telescoping n))
+      subst₂ _≤_
+        (solve
+          (potential telescoping zero ∷ potential telescoping n ∷ []))
+        (solve (potential telescoping zero ∷ []))
+        shifted
   in
   ℚP.≤-trans
     (prefixBelowPotentialDrop input telescoping n)
@@ -113,8 +128,6 @@ telescopingPotentialToPrefixSummable input telescoping budgetExact = record
         (sym budgetExact)
         (prefixBelowInitialPotential input telescoping n)
   }
-  where
-  open import Relation.Binary.PropositionalEquality using (sym)
 
 telescopingGeneratedLeakageClosesRawForcingRoute : Bool
 telescopingGeneratedLeakageClosesRawForcingRoute = true
