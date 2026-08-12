@@ -39,7 +39,7 @@ open import Data.List.Base using (map; _++_)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
 
 import DASHI.Physics.Closure.NSTriadKNHHBadShellBarrierRound52Exact as Barrier
 
@@ -138,15 +138,10 @@ profileBelowExactVariationOfConstants :
   ≤ survivalProduct input n * Barrier.profile input zero
     + forcingGreenResponse input n
 profileBelowExactVariationOfConstants input n =
-  let
-    belowCanonical :
-      Barrier.profile input n ≤ Barrier.canonicalResponse input n
-    belowCanonical = Barrier.profileBelowCanonicalResponse input n
-  in
-  Relation.Binary.PropositionalEquality.subst
+  subst
     (Barrier.profile input n ≤_)
     (canonicalResponseVariationOfConstants input n)
-    belowCanonical
+    (Barrier.profileBelowCanonicalResponse input n)
 
 forcingGreenResponseNonnegative :
   (input : Barrier.GeneralHHBadRecurrence) →
