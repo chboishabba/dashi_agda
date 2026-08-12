@@ -96,6 +96,13 @@ boundedBadCostIsOptimizerBadTax representation certificate =
   in
   trans boundedMeaning (sym physicalBadMeaning)
 
+balanceRightIsFourCbad :
+  ∀ Cbad →
+  Opt.two * oneDerivativeBadOptimizerConstant Cbad
+  ≡ Sharp.two * (Sharp.two * Cbad)
+balanceRightIsFourCbad Cbad =
+  solve (Opt.two ∷ Sharp.two ∷ Cbad ∷ [])
+
 record OneDerivativeBalancedHHThreshold
     {effectiveViscosity density : ℚ} {shell : Nat}
     (A : ℚ)
@@ -109,9 +116,25 @@ record OneDerivativeBalancedHHThreshold
         * Opt.scaleValue selectedScale
         * Opt.scaleValue selectedScale
         * Opt.scaleValue selectedScale
-      ≡ Sharp.two * (Sharp.two * Density.scaleFreeConstant certificate)
+      ≡ Opt.two * oneDerivativeBadOptimizerConstant
+          (Density.scaleFreeConstant certificate)
 
 open OneDerivativeBalancedHHThreshold public
+
+physicalCubicBalanceIsFourCbad :
+  ∀ {effectiveViscosity density : ℚ} {shell : Nat} {A : ℚ}
+    {certificate : Density.OneDerivativeInverseShellDensityCertificate
+      effectiveViscosity density shell} →
+  (balance : OneDerivativeBalancedHHThreshold A certificate) →
+  A
+    * Opt.scaleValue (selectedScale balance)
+    * Opt.scaleValue (selectedScale balance)
+    * Opt.scaleValue (selectedScale balance)
+  ≡ Sharp.two * (Sharp.two * Density.scaleFreeConstant certificate)
+physicalCubicBalanceIsFourCbad {certificate = certificate} balance =
+  trans
+    (physicalCubicBalance balance)
+    (balanceRightIsFourCbad (Density.scaleFreeConstant certificate))
 
 asRound40BalancedThreshold :
   ∀ {effectiveViscosity density : ℚ} {shell : Nat} {A : ℚ}
