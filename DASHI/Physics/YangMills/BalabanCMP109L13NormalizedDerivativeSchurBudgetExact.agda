@@ -37,21 +37,25 @@ module DASHI.Physics.YangMills.BalabanCMP109L13NormalizedDerivativeSchurBudgetEx
 --
 -- The theorem is independent of the number of state coordinates.  The only
 -- cardinality used is the literal equation-(0.12) normalization
--- (1/28561)*|B|=1.  This is the intended source-faithful replacement for the
--- obsolete per-entry 1/65536 blanket route.
+-- (1/28561)*|B|=1.  This is the source-faithful replacement for the obsolete
+-- per-entry 1/65536 blanket route.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List)
+import Data.List.Base as List
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; 1ℚ; _*_; _≤_; _/_)
+  (ℚ; 0ℚ; 1ℚ; _*_; _≤_; _/_; NonNegative)
 import Data.Rational.Properties as ℚP
 open ℚP using (_≤?_)
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 open import Relation.Nullary.Decidable.Core using (toWitness)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as FiniteL2
+import DASHI.Physics.YangMills.BalabanFiniteFibreAverageExact as Fibre
+import DASHI.Physics.YangMills.BalabanP33FiniteWeightedSchurSquaredExact as Schur
 import DASHI.Physics.YangMills.BalabanFiniteNormalizedKernelSchurExact as Normalized
 import DASHI.Physics.YangMills.BalabanFiniteRectangularSchurSquaredExact as RectSchur
 import DASHI.Physics.YangMills.BalabanSelectedGaugeDerivativeTwoBackgroundVariationExact as GaugeVariation
@@ -68,6 +72,10 @@ l13NormalizedBudgetSlack = + 237503 / 16777216
 
 localMassNonnegative : 0ℚ ≤ localTwoBackgroundMass
 localMassNonnegative = toWitness {a? = 0ℚ ≤? localTwoBackgroundMass} _
+
+minimalSiteWeightNonnegative : 0ℚ ≤ Minimal.siteWeightℚ
+minimalSiteWeightNonnegative =
+  toWitness {a? = 0ℚ ≤? Minimal.siteWeightℚ} _
 
 l13NormalizedSchurCoefficientExact :
   localTwoBackgroundMass * localTwoBackgroundMass
@@ -93,7 +101,7 @@ l13NormalizedSchurFitsIFTBudget =
     (subst
       (λ lower → lower
         ≤ l13NormalizedSchurCoefficient + l13NormalizedBudgetSlack)
-      (ℚP.+-identityʳ l13NormalizedSchurCoefficient)
+      (sym (ℚP.+-identityʳ l13NormalizedSchurCoefficient))
       (ℚP.+-mono-≤ ℚP.≤-refl l13NormalizedBudgetSlackNonnegative))
 
 ------------------------------------------------------------------------
@@ -101,9 +109,8 @@ l13NormalizedSchurFitsIFTBudget =
 --
 -- `samples` is the literal L=13 block-site list.  `normalization` is discharged
 -- by the equation-(0.12) instance from block cardinality 28561 together with
--- `Minimal.minimalSiteWeightIsReciprocal`; it is kept as a named argument here
--- so this reusable theorem does not normalize a 28561-step Nat cast by
--- reduction.
+-- `Minimal.minimalSiteWeightIsReciprocal`; it is kept named here so this
+-- reusable theorem does not normalize a 28561-step Nat cast by reduction.
 ------------------------------------------------------------------------
 
 selectedCMP109L13DerivativeSchurMassBudget :
@@ -113,10 +120,7 @@ selectedCMP109L13DerivativeSchurMassBudget :
     (localDifferenceKernel :
       Normalized.KernelFamily Sample Row Column)
     vector →
-  Minimal.siteWeightℚ
-    * DASHI.Physics.YangMills.BalabanFiniteFibreAverageExact.natAsRational
-        (Data.List.Base.length samples)
-    ≡ 1ℚ →
+  Minimal.siteWeightℚ * Fibre.natAsRational (List.length samples) ≡ 1ℚ →
   (∀ sample row →
     RectSchur.rectAbsoluteRowMass columns
       (localDifferenceKernel sample) row
@@ -147,7 +151,7 @@ selectedCMP109L13DerivativeSchurMassBudget
     (Normalized.normalizedKernelSchurSquared
       Minimal.siteWeightℚ samples rows columns localDifferenceKernel vector
       localTwoBackgroundMass localTwoBackgroundMass
-      (ℚP.nonNegative⁻¹ Minimal.siteWeightℚ)
+      minimalSiteWeightNonnegative
       normalization
       localMassNonnegative localMassNonnegative
       localRows localColumns)
@@ -159,10 +163,7 @@ selectedCMP109L13DerivativeFitsRemainingIFTBudget :
     (localDifferenceKernel :
       Normalized.KernelFamily Sample Row Column)
     vector →
-  Minimal.siteWeightℚ
-    * DASHI.Physics.YangMills.BalabanFiniteFibreAverageExact.natAsRational
-        (Data.List.Base.length samples)
-    ≡ 1ℚ →
+  Minimal.siteWeightℚ * Fibre.natAsRational (List.length samples) ≡ 1ℚ →
   (∀ sample row →
     RectSchur.rectAbsoluteRowMass columns
       (localDifferenceKernel sample) row
@@ -186,6 +187,11 @@ selectedCMP109L13DerivativeFitsRemainingIFTBudget
       samples rows columns localDifferenceKernel vector
       normalization localRows localColumns
     norm = RectSchur.rectVectorNormSq columns vector
+    normNonnegative = Schur.sumNonnegative columns _
+      (λ column → FiniteL2.squareNonnegative (vector column))
+    instance
+      normNN : NonNegative norm
+      normNN = ℚ.nonNegative normNonnegative
   in
   ℚP.≤-trans base
     (ℚP.*-monoʳ-≤-nonNeg norm l13NormalizedSchurFitsIFTBudget)
