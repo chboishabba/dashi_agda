@@ -28,10 +28,18 @@ module DASHI.Physics.YangMills.BalabanCMP109L13AllCoarseAnchorsExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier as Carrier
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109MinimalAdmissibleRepositoryScaleExact as Minimal
+
+infixr 4 _×_
+record _×_ (A B : Set) : Set where
+  constructor _,_
+  field
+    first : A
+    second : B
 
 record CoarseGaugeAnchorData (Gauge Group : Set) : Set₁ where
   field
@@ -99,19 +107,9 @@ BothEndpointsAnchored :
   CoarseGaugeAnchorData Gauge Group → Gauge →
   Minimal.RepositoryCoarseBond → Set
 BothEndpointsAnchored dataSet gauge coarseBond =
-  (coarseGauge dataSet gauge
-      (DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier.first coarseBond)
-    ≡ identity dataSet)
+  (coarseGauge dataSet gauge (Carrier.first coarseBond) ≡ identity dataSet)
   ×
-  (coarseGauge dataSet gauge
-      (DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier.second coarseBond)
-    ≡ identity dataSet)
-  where
-    infixr 4 _×_
-    record _×_ (A B : Set) : Set where
-      constructor _,_
-      field first : A
-            second : B
+  (coarseGauge dataSet gauge (Carrier.second coarseBond) ≡ identity dataSet)
 
 originAnchorImpliesEveryBondEndpointsAnchored :
   ∀ {Gauge Group}
@@ -123,16 +121,8 @@ originAnchorImpliesEveryBondEndpointsAnchored dataSet gauge originAnchor coarseB
   let
     allAnchors = originAnchorImpliesAllCoarseAnchors dataSet gauge originAnchor
   in
-  allAnchors
-    (DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier.first coarseBond)
-  , allAnchors
-      (DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier.second coarseBond)
-  where
-    infixr 4 _×_
-    record _×_ (A B : Set) : Set where
-      constructor _,_
-      field first : A
-            second : B
+  allAnchors (Carrier.first coarseBond)
+  , allAnchors (Carrier.second coarseBond)
 
 cmp109L13OriginAllCoarseAnchorEquivalenceLevel : ProofLevel
 cmp109L13OriginAllCoarseAnchorEquivalenceLevel = machineChecked
