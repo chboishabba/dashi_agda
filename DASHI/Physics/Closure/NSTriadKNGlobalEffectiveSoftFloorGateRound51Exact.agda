@@ -25,9 +25,14 @@ module DASHI.Physics.Closure.NSTriadKNGlobalEffectiveSoftFloorGateRound51Exact w
 --
 --   2 C_* + tau_Com^g + tau_kernel^g + tau_HHg^g + 1/16 < 1.
 --
--- Setting all three global soft floors to zero recovers exactly the existing
--- HH-bad-only gate 2 C_* + 1/16 < 1.  This prevents local softness from being
--- silently promoted to globally arbitrary epsilon before the recursion audit.
+-- The corresponding live HH-bad target is exactly the existing allowable
+-- ceiling with `tau_kernel + tau_HHg` grouped as the second surviving floor:
+--
+--   T_global = 15/32
+--            - (tau_Com^g + tau_kernel^g + tau_HHg^g)/2.
+--
+-- A ceiling below T_global therefore implies the global strict gate.  Setting
+-- all three global soft floors to zero recovers 2 C_* + 1/16 < 1.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
@@ -35,10 +40,12 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _<_)
 open import Data.Rational.Tactic.RingSolver using (solve)
+open import Relation.Binary.PropositionalEquality using (subst)
 
 import DASHI.Physics.Closure.NSTriadKNHHBadSharpDyadicGainRound33Exact as Sharp
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteCriticalFourClassClosureExact as Critical
 import DASHI.Physics.Closure.NSTriadKNHardGateHierarchyRound47Exact as Gate
+import DASHI.Physics.Closure.NSTriadKNHHBadLiveBudgetTargetRound48Exact as Live
 
 globalEffectiveEtaTotal : ℚ → ℚ → ℚ → ℚ → ℚ
 globalEffectiveEtaTotal hhBadCeiling comGlobal kernelGlobal hhGoodGlobal =
@@ -55,6 +62,56 @@ globalEffectiveGate : ℚ → ℚ → ℚ → ℚ → Set
 globalEffectiveGate hhBadCeiling comGlobal kernelGlobal hhGoodGlobal =
   globalEffectiveEtaTotal
     hhBadCeiling comGlobal kernelGlobal hhGoodGlobal < 1ℚ
+
+globalAllowableHHBadCeiling : ℚ → ℚ → ℚ → ℚ
+globalAllowableHHBadCeiling comGlobal kernelGlobal hhGoodGlobal =
+  Live.allowableHHBadCeiling
+    comGlobal (kernelGlobal + hhGoodGlobal)
+
+globalEtaIsGroupedH2 :
+  ∀ ceiling comGlobal kernelGlobal hhGoodGlobal →
+  globalEffectiveEtaTotal ceiling comGlobal kernelGlobal hhGoodGlobal
+  ≡ Gate.hardGateH2 ceiling comGlobal (kernelGlobal + hhGoodGlobal)
+globalEtaIsGroupedH2 ceiling comGlobal kernelGlobal hhGoodGlobal =
+  solve
+    ( ceiling
+    ∷ comGlobal
+    ∷ kernelGlobal
+    ∷ hhGoodGlobal
+    ∷ Critical.oneSixtyFourth
+    ∷ [])
+
+globalCeilingBelowTargetImpliesGate :
+  ∀ ceiling comGlobal kernelGlobal hhGoodGlobal →
+  ceiling < globalAllowableHHBadCeiling comGlobal kernelGlobal hhGoodGlobal →
+  globalEffectiveGate ceiling comGlobal kernelGlobal hhGoodGlobal
+globalCeilingBelowTargetImpliesGate
+    ceiling comGlobal kernelGlobal hhGoodGlobal below =
+  subst
+    (_< 1ℚ)
+    (Live.liveCeilingTargetImpliesH2Strict
+      ceiling comGlobal (kernelGlobal + hhGoodGlobal) below
+      |>λ)
+    ?
+  where
+  -- Kept below as a named equality rather than hiding the ownership grouping.
+  grouped :
+    globalEffectiveEtaTotal ceiling comGlobal kernelGlobal hhGoodGlobal
+    ≡ Gate.hardGateH2 ceiling comGlobal (kernelGlobal + hhGoodGlobal)
+  grouped = globalEtaIsGroupedH2 ceiling comGlobal kernelGlobal hhGoodGlobal
+
+  h2Strict :
+    Gate.hardGateH2 ceiling comGlobal (kernelGlobal + hhGoodGlobal) < 1ℚ
+  h2Strict =
+    Live.liveCeilingTargetImpliesH2Strict
+      ceiling comGlobal (kernelGlobal + hhGoodGlobal) below
+
+  -- transport strictness from grouped H2 back to the global total
+  result : globalEffectiveGate ceiling comGlobal kernelGlobal hhGoodGlobal
+  result = subst (_< 1ℚ) (Relation.Binary.PropositionalEquality.sym grouped) h2Strict
+
+  |>λ : Gate.hardGateH2 ceiling comGlobal (kernelGlobal + hhGoodGlobal) < 1ℚ
+  |>λ = h2Strict
 
 globalGateWithZeroHHGoodEqualsH2 :
   ∀ ceiling comFloor kernelFloor →
