@@ -1,63 +1,10 @@
 name: Numeric PNF hyperfabric Agda check
 
+# This tranche is intentionally manual-only while GitHub Actions quota is
+# constrained.  Re-enable push/pull_request triggers in a later integration PR
+# when CI budget is available.
 on:
-  push:
-    paths:
-      - 'DASHI/Cognition/PNF/ComplexityArithmetic.agda'
-      - 'DASHI/Cognition/PNF/NumericAuthority.agda'
-      - 'DASHI/Cognition/PNF/SpacyNumericProjection.agda'
-      - 'DASHI/Cognition/PNF/NumericHyperfabric.agda'
-      - 'DASHI/Cognition/PNF/DemandResolutionState.agda'
-      - 'DASHI/Cognition/PNF/AdjacentReconciliationWork.agda'
-      - 'DASHI/Cognition/PNF/OrderedWorldParserLookahead.agda'
-      - 'DASHI/Cognition/PNF/WorkConservingPersistence.agda'
-      - 'DASHI/Cognition/PNF/BoundedMDLPlanner.agda'
-      - 'DASHI/Cognition/PNF/BoundedInterfaceSketch.agda'
-      - 'DASHI/Cognition/PNF/ParentInterfaceReduction.agda'
-      - 'DASHI/Cognition/PNF/SparseFibredFrontier.agda'
-      - 'DASHI/Cognition/PNF/SparseFrontierConstraints.agda'
-      - 'DASHI/Cognition/PNF/ProofRelevantIdentityFibres.agda'
-      - 'DASHI/Cognition/PNF/ProofRelevantFactorDerivations.agda'
-      - 'DASHI/Cognition/PNF/DirectDemandLookup.agda'
-      - 'DASHI/Cognition/PNF/SetBasedDemandPlanning.agda'
-      - 'DASHI/Cognition/PNF/NumericPNFCompilation.agda'
-      - 'DASHI/Cognition/PNF/NumericPNFRegression.agda'
-      - 'DASHI/Cognition/PNF/NumericPNFHyperfabricEverything.agda'
-      - 'Docs/NumericPNFHyperfabricFormalisation.md'
-      - 'Docs/WorkConservingPersistenceFormalisation.md'
-      - 'Docs/SparseFibredFrontierFormalisation.md'
-      - 'Docs/SparseFrontierConstraintsFormalisation.md'
-      - 'Docs/ProofRelevantIdentityDerivationsFormalisation.md'
-      - '.github/workflows/numeric-pnf-hyperfabric.yml'
-  pull_request:
-    types: [opened, synchronize, reopened, ready_for_review]
-    paths:
-      - 'DASHI/Cognition/PNF/ComplexityArithmetic.agda'
-      - 'DASHI/Cognition/PNF/NumericAuthority.agda'
-      - 'DASHI/Cognition/PNF/SpacyNumericProjection.agda'
-      - 'DASHI/Cognition/PNF/NumericHyperfabric.agda'
-      - 'DASHI/Cognition/PNF/DemandResolutionState.agda'
-      - 'DASHI/Cognition/PNF/AdjacentReconciliationWork.agda'
-      - 'DASHI/Cognition/PNF/OrderedWorldParserLookahead.agda'
-      - 'DASHI/Cognition/PNF/WorkConservingPersistence.agda'
-      - 'DASHI/Cognition/PNF/BoundedMDLPlanner.agda'
-      - 'DASHI/Cognition/PNF/BoundedInterfaceSketch.agda'
-      - 'DASHI/Cognition/PNF/ParentInterfaceReduction.agda'
-      - 'DASHI/Cognition/PNF/SparseFibredFrontier.agda'
-      - 'DASHI/Cognition/PNF/SparseFrontierConstraints.agda'
-      - 'DASHI/Cognition/PNF/ProofRelevantIdentityFibres.agda'
-      - 'DASHI/Cognition/PNF/ProofRelevantFactorDerivations.agda'
-      - 'DASHI/Cognition/PNF/DirectDemandLookup.agda'
-      - 'DASHI/Cognition/PNF/SetBasedDemandPlanning.agda'
-      - 'DASHI/Cognition/PNF/NumericPNFCompilation.agda'
-      - 'DASHI/Cognition/PNF/NumericPNFRegression.agda'
-      - 'DASHI/Cognition/PNF/NumericPNFHyperfabricEverything.agda'
-      - 'Docs/NumericPNFHyperfabricFormalisation.md'
-      - 'Docs/WorkConservingPersistenceFormalisation.md'
-      - 'Docs/SparseFibredFrontierFormalisation.md'
-      - 'Docs/SparseFrontierConstraintsFormalisation.md'
-      - 'Docs/ProofRelevantIdentityDerivationsFormalisation.md'
-      - '.github/workflows/numeric-pnf-hyperfabric.yml'
+  workflow_dispatch:
 
 concurrency:
   group: numeric-pnf-hyperfabric-${{ github.ref }}
@@ -79,7 +26,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ${{ runner.temp }}/dashi-agda29
-          key: numeric-pnf-hyperfabric-agda29-${{ runner.os }}-86a1179-${{ hashFiles('scripts/run_agda29_parallel_check.sh') }}
+          key: numeric-pnf-hyperfabric-agda29-${{ runner.os }}-86a1179-${{ hashFiles('scripts/run_agda29_parallel_check.sh', 'scripts/check_itir_reopenable_evidence_hyperfibre.sh') }}
       - name: Check numeric PNF hyperfabric with Agda 2.9
         id: focused
         shell: bash
@@ -91,8 +38,7 @@ jobs:
             export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
             export AGDA_LOG_PATH="$GITHUB_WORKSPACE/agda-numeric-pnf-hyperfabric-check.log"
             export AGDA_JOBS=2
-            scripts/run_agda29_parallel_check.sh \
-              DASHI/Cognition/PNF/NumericPNFHyperfabricEverything.agda
+            bash scripts/check_itir_reopenable_evidence_hyperfibre.sh
           ) > agda-numeric-pnf-hyperfabric-check.log 2>&1
           status=$?
           echo "status=$status" >> "$GITHUB_OUTPUT"

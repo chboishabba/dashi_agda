@@ -44,6 +44,10 @@ aiFeedbackAuthors =
   ∷ "Yan Li"
   ∷ []
 
+humourFrameworkAuthors : List String
+humourFrameworkAuthors =
+  "Alice Brown" ∷ "Josephine Pryce" ∷ "Anja Pabel" ∷ []
+
 voiceAgencyAuthors : List String
 voiceAgencyAuthors = "Alice Brown" ∷ "Megan Kimber" ∷ []
 
@@ -91,6 +95,21 @@ aiFeedbackPaper =
     "58-76"
     "MVP feasibility evidence that manually OEF-labelled feedback can train an NLP/deep-learning classifier and aggregate visualisation surface."
     "Classification remains a bounded proxy: not student meaning, complete voice, individual truth, equity, causal redesign effect, or pedagogical authority."
+    true refl
+
+humourFrameworkPaper : PaperReference
+humourFrameworkPaper =
+  mkPaperReference
+    "online-humour-engagement-framework-2025"
+    "Considerations for integrating humour as a strategy to heighten online student engagement and learning in higher education: An emerging framework"
+    humourFrameworkAuthors
+    "no DOI assigned"
+    "Higher Education Research and Development Society of Australasia (HERDSA) Conference"
+    2025
+    "conference program"
+    "64"
+    "Develops an emerging seven-consideration framework for integrating humour into online higher-education teaching, including rationale, presenter, audience/context, content, technical delivery, humour type and feedback."
+    "The bibliographic row anchors the HERDSA 2025 conference item. The richer seven-consideration formalisation is source-bound to the supplied manuscript/draft and is not promoted here to a claim of peer-reviewed empirical validation or student co-construction."
     true refl
 
 voiceAgencyPaper : PaperReference
@@ -186,6 +205,7 @@ partnershipBarriersPaper =
 canonicalEducationCorpusPapers : List PaperReference
 canonicalEducationCorpusPapers =
   aiFeedbackPaper
+  ∷ humourFrameworkPaper
   ∷ voiceAgencyPaper
   ∷ onlineSupportStrategiesPaper
   ∷ ecologyOfDataPaper
@@ -215,4 +235,4 @@ canonicalEducationCorpusSourceRegistry =
     canonicalEducationCorpusPapers refl
     true refl
     true refl
-    "Seven source-bound papers are retained with verified title, author, DOI and venue metadata. Paper claims, cross-paper inferences, and DASHI extensions remain distinct promotion levels."
+    "Eight source-bound papers/items are retained with title, author, DOI-or-explicit-no-DOI, venue and boundary metadata. Paper claims, cross-paper inferences, and DASHI extensions remain distinct promotion levels."
