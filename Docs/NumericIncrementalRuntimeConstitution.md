@@ -1,43 +1,85 @@
-# Numeric incremental runtime constitution
+# Numeric incremental ITIR runtime constitution
 
-This tranche sharpens the canonical ITIR/PNF reference for the runtime after spaCy has emitted token observations.
+This note records the runtime-economy constitution layered on the canonical ITIR / PNF branch. It is deliberately an implementation reference: Python/PostgreSQL is expected to instantiate these boundaries rather than invent parallel semantic authority.
 
-## Post-tokenisation law
+## Runtime reference stack
 
-Ordinary semantic execution is numeric. Human strings are boundary data for ingestion, exact quotation, external protocols, or rendering. Regex has no semantic-hot-path authority. Finite cue languages should be compiled over `SymbolId` streams; the runtime may use a trie/DFA/Aho-Corasick implementation, but must earn any complexity claim with a work receipt.
+The immediate runtime reference is the combination of:
 
-Reference motivation: Alfred V. Aho and Margaret J. Corasick, *Efficient string matching: an aid to bibliographic search*, Communications of the ACM 18(6), 1975, DOI `10.1145/360825.360855`. The paper motivates the finite-state matching strategy; it is not proof authority for a particular runtime implementation.
+- canonical reopenable PNF / dynamic-safety core on PR #521;
+- future-observation quotient, exact/relevant residual, dynamic composition, path-dependence, finite optimal residual and concrete spoken/Wikidata examples on PR #530;
+- query-factorisation sufficiency and policy-relative projection safety on PR #531;
+- numeric/incremental execution economy on PR #533 (this branch).
+
+These are sibling theorem surfaces, not permission to duplicate them in Python.
+
+## Numeric hot path
+
+After parser observation, ordinary semantic execution is numeric. Text is an explicit ingestion/external/rendering boundary. Regex has no semantic-hot-path permission. Finite lexical cue languages may be compiled to numeric trie/DFA/Aho-Corasick-style machines; runtime complexity remains an empirical receipt rather than an Agda theorem about a particular implementation.
+
+The parser output is treated as a compiled numeric observation tape. `NumericTokenStorageReference` now distinguishes a mere SymbolId stream from the full committed `SpacyNumericProjection.NumericTokenRow` tape. Packed/delta/varint/bit-coded storage is permitted only through an exact lossless tape codec:
+
+`decodeTape (encodeTape tape) = tape`.
+
+A low integer value does not by itself imply narrower PostgreSQL storage. Physical compactness and lookup/decode cost must be measured.
+
+## Contextual world fibres
+
+A lexical label owns a fibre of cached world candidates; it is not globally rewritten into one external entity. Candidate context requirements and mention-local observations are separate carriers.
+
+A context-qualified attachment now requires the positive witness:
+
+`required(candidate) subset-of observed(mention)`.
+
+Failure to construct that witness is unresolved context, not refutation. Signed/ternary context-axis evidence may support, remain neutral toward, or contradict a candidate, but contextual preference has no world-identity promotion permission. Existing proof-producing external-alignment machinery remains the authority seam.
+
+## Lazy H3 / H6 / H9
+
+Logical horizon staging is not enough. H6 consumes exactly the unresolved H3 residual and H9 exactly unresolved H6. Ordinary evidence updates recompute the reverse-dependency frontier rather than rescanning a whole document or corpus.
+
+The companion query/policy safety theorems on PR #531 provide the stronger application criterion for what counts as settled for a particular consumer. Python should therefore eventually stop at the cheapest horizon sufficient for the authorised query/policy, while keeping the underlying demand reopenable when a broader consumer can expose the hidden distinction.
 
 ## Corpus learning economy
 
-Compilation of recurring-domain material should become cheaper as proof-bearing lexical/entity/world structure accumulates. `CorpusLearningEconomy` proves a monotone declared work bound when fixed numeric work is unchanged and unresolved-resolution work does not increase. Wall-clock improvement still requires runtime measurement; cache size alone proves nothing.
+The monotone work theorem is conditional on a controlled repeated workload. Equal token count is only a throughput normalisation and does not prove workload identity. `CorpusReuseReceipt` therefore carries an opaque runtime `workloadId`, and cross-receipt comparison requires exact workload identity plus token-carrier equality.
 
-## External/world cache
+Chronological document order alone proves nothing about learning improvement: an unrelated later book may be intrinsically harder than an earlier note. The intended empirical comparison is repeated/controlled task families under an enlarged proof-bearing reusable context.
 
-A local lexical label owns a candidate fibre, not one globally fixed world entity. Mention-local context selects among cached candidates. Reusing the candidate list is cheap; a previous attachment does not force future mentions of the same surface label to the same world object.
+## Frequency-adaptive codes
 
-## Relative 8-way refinement
+Canonical `SymbolId` is stable semantic identity. Frequency-adaptive physical codes are a rebuildable storage/index projection; common symbols may receive low codes without rewriting canonical foreign keys. Their physical benefit must be earned through measured encoded bytes and lookup/decode work.
 
-Three binary refinement coordinates give exactly eight relative child states. A parent-relative child step therefore needs only an eight-state digit in the abstract. This does not imply that an entire provenance-bearing PNF cell is one byte: the complete address, receipts, and local semantic payload remain separate and physical layout must be measured.
+## Hot/cold execution
 
-## Lazy horizons and incremental closure
-
-H6 work receives exactly the unresolved H3 residual; H9 receives exactly the unresolved H6 residual. New evidence wakes the reverse-dependency frontier rather than rescanning a document or corpus in the normal path.
-
-Absence of evidence is not contradiction evidence. Zero evidence count has no refutation constructor.
-
-## Hot/cold projection
-
-Append-only history remains authority. A materialized hot current-state projection is allowed only as a rebuildable projection of that history.
-
-## Frequency-adaptive physical codes
-
-Frequent symbols may receive compact physical codes, but canonical `SymbolId` is independent of the codebook. Re-ranking physical codes cannot change semantic identity. A claim that frequent coding is physically better must be measured.
-
-## Workload units
-
-Tokens are the primary cross-document denominator because notes, chats, articles, chapters, books, and other documents have radically different coarse sizes. Coarse units remain useful for scheduling/batching, but document count alone is not a comparable throughput measure.
+Append-only semantic history remains authority. Materialized hot current state is allowed only as an exactly rebuildable projection of that history. The implementation verifier must establish extensional equality in both directions; stale extra hot rows are not permitted merely because every latest-history row is present.
 
 ## Structural support
 
-Parser-to-argument support is required to remain sparse. The runtime must measure support fanout and should key the seam on numeric region/token/object coordinates rather than constructing broad token-object cross products.
+Parser-to-argument support is a sparse numeric seam with measured fanout. An unbounded token x object cross product is not a permitted implementation of that seam. Narrowing should precede joins, and bounded output does not justify unbounded intermediate work.
+
+## Relative octant address
+
+Three binary refinement coordinates give eight relative child states, requiring three bits for one relative octant digit. This does not imply that a complete provenance-bearing PNF cell fits in one byte. Relative address, semantic payload, and reopening provenance remain separate obligations.
+
+## Performance boundary
+
+Tokens are the primary cross-document throughput denominator after tokenisation; note/article/book counts are not directly comparable. Parser dominance and affine scaling are runtime-supplied receipts on identified workloads. The target is to make post-parser semantics much cheaper than spaCy, never to satisfy the ratio by slowing spaCy.
+
+## Freeze-point for the next SensibLaw pass
+
+The runtime should now be able to point each major shortcut at a theorem/boundary:
+
+- contextual world narrowing -> context requirement witness + preference != proof;
+- horizon stopping -> query/policy sufficiency + reopenability;
+- residual minimisation -> exact vs relevant residual / finite certified-safe selector;
+- incremental wakeups -> reverse dependency / future-observation relevance;
+- corpus reuse -> same-workload learning economy;
+- packed storage -> exact numeric observation-tape reconstruction;
+- current-state materialisation -> exact rebuild from append-only authority;
+- semantic cue scanning -> numeric automaton, no regex authority.
+
+If a Python/PostgreSQL optimisation cannot identify its corresponding boundary, either the runtime shortcut is unsound or the formal reference is genuinely missing a seam.
+
+## Validation boundary
+
+This branch's fail-closed checker requires the new contextual matching, workload-comparability, and full observation-tape markers. No GitHub Actions / CI or CodeRabbit run is requested. Until a local/pinned Agda run succeeds, the branch remains source/signature-audited rather than kernel-certified.
