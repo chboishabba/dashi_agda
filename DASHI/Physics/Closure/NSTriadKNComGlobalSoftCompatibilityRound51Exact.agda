@@ -84,10 +84,10 @@ explicitCoefficientTimesSplitIsNumerator split =
   in trans regroup (trans cancel finish)
 
 clearedMinimumSplitCondition :
-  ∀ {split} →
-  GlobalComRecursionCompatibility split →
+  ∀ {split}
+    (compatible : GlobalComRecursionCompatibility split) →
   Com.oneThousandTwentyFourth133
-  ≤ criticalCoefficientCap _ * Threshold.threshold split
+  ≤ criticalCoefficientCap compatible * Threshold.threshold split
 clearedMinimumSplitCondition {split} compatible =
   let
     scaled :
