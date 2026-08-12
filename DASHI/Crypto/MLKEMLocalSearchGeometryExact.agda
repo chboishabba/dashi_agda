@@ -3,24 +3,22 @@ module DASHI.Crypto.MLKEMLocalSearchGeometryExact where
 ------------------------------------------------------------------------
 -- ML-KEM / MLWE LOCAL SEARCH GEOMETRY INTERFACE
 --
--- This module composes the existing candidate-residual test with the new exact
--- transform/search-factorisation boundaries.  It deliberately stops before a
--- false claim that FIPS-203 NTT coordinates are independently searchable.
---
 -- National Institute of Standards and Technology,
 -- "Module-Lattice-Based Key-Encapsulation Mechanism Standard", FIPS 203,
 -- 2024. DOI: 10.6028/NIST.FIPS.203.
 --
 -- Oded Regev, "On lattices, learning with errors, random linear codes, and
 -- cryptography", STOC 2005. DOI: 10.1145/1060590.1060603.
+--
+-- This composes the existing candidate-residual test with exact transformed
+-- coordinates, but deliberately does not assert that FIPS-203 NTT coordinates
+-- are independently searchable.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_)
-open import Data.Product using (_×_; _,_)
+open import Data.Product using (_×_; _,_; proj₁; proj₂)
 
 import DASHI.Crypto.MLWEKeyStateResidualExact as MLWE
 import DASHI.Crypto.TransformLocalFibreGeometryExact as Transform
-import DASHI.Crypto.SearchFactorisationExact as Search
 
 record MLWELocalCoordinateBridge
     (state : MLWE.NoisyLinearKeyState) : Set₁ where
@@ -34,23 +32,14 @@ record MLWELocalCoordinateBridge
     LocalSmall₁ : Local₁ → Set
     Coupling : Local₀ → Local₁ → Set
 
-    -- This is the exact obligation that would have to be discharged against
-    -- the concrete ML-KEM residual representation before local testing is used
-    -- as an actual cryptanalytic decomposition.
     smallResidualFactors : ∀ error →
       MLWE.Small state error →
       let coordinates = Transform.encode transform (residualToCarrier error)
           locals = splitResidual coordinates
-      in LocalSmall₀ (Data.Product.proj₁ locals) ×
-         (LocalSmall₁ (Data.Product.proj₂ locals) ×
-          Coupling (Data.Product.proj₁ locals) (Data.Product.proj₂ locals))
+      in LocalSmall₀ (proj₁ locals) ×
+         (LocalSmall₁ (proj₂ locals) × Coupling (proj₁ locals) (proj₂ locals))
 
 open MLWELocalCoordinateBridge public
-
-------------------------------------------------------------------------
--- Search-asymmetry dependency graph: cheap residual testing is already known;
--- efficient local enumeration and efficient reconciliation are extra evidence.
-------------------------------------------------------------------------
 
 record MLWESearchCollapseCertificate
     (state : MLWE.NoisyLinearKeyState)
@@ -80,6 +69,5 @@ collapseCertificateGivesCandidateSearch certificate =
       (enumerate₀ certificate public) (enumerate₁ certificate public))
     (recoveredCandidatePlausible certificate)
 
--- Important boundary: CandidateSearch only returns a plausible secret.  Exact
--- identification still requires a uniqueness theorem such as the repository's
--- UniqueResidualIdentification.  Plausibility alone is not key recovery.
+-- CandidateSearch returns a plausible secret only. Exact identification still
+-- requires a uniqueness theorem such as UniqueResidualIdentification.
