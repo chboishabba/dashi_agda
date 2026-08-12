@@ -26,9 +26,7 @@ module DASHI.Physics.Closure.NSTriadKNMixedCriticalYoungSoftRound47Exact where
 --
 --   P <= epsilon D + A + (epsilon^{-1}/4) C X.
 --
--- Hence the owner is Young-soft and contributes no hard viscosity floor.  This
--- theorem is mechanism-level: Com/kernel only become soft after their genuine
--- physical estimates instantiate this mixed endpoint.
+-- Hence the owner is Young-soft and contributes no hard viscosity floor.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
@@ -36,11 +34,11 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
 import Data.Integer.Base as Int
 open import Data.Rational.Base using
-  (ℚ; 0ℚ; _/_; _+_; _*_; _≤_; nonNegative)
+  (ℚ; 0ℚ; 1ℚ; _/_; _+_; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚP
 open ℚP using (_≤?_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (subst; cong; trans)
 open import Relation.Nullary.Decidable.Core using (toWitness)
 
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
@@ -81,10 +79,26 @@ quarterYoungFromSplit split = record
   quarterInverseLaw :
     4 * Threshold.threshold split
       * (quarter * Threshold.thresholdInverse split) ≡ 1ℚ
-  quarterInverseLaw
-    rewrite Threshold.inverseMeaning split = solve []
-    where
-    open import Data.Rational.Base using (1ℚ)
+  quarterInverseLaw =
+    let
+      delta = Threshold.threshold split
+      inverse = Threshold.thresholdInverse split
+
+      regroup :
+        4 * delta * (quarter * inverse)
+        ≡ (4 * quarter) * (inverse * delta)
+      regroup = solve (delta ∷ inverse ∷ quarter ∷ [])
+
+      cancel :
+        (4 * quarter) * (inverse * delta)
+        ≡ (4 * quarter) * 1ℚ
+      cancel = cong ((4 * quarter) *_)
+        (Threshold.inverseMeaning split)
+
+      finish : (4 * quarter) * 1ℚ ≡ 1ℚ
+      finish = solve []
+    in
+    trans regroup (trans cancel finish)
 
 record MixedCriticalPreAbsorption
     (environment : Owner.TaxEnvironment)
