@@ -16,6 +16,7 @@ module DASHI.Cognition.PNF.SpokenTelescopeConsumerProjectionExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.DynamicProjectionCompositionExact as Dynamic
@@ -118,8 +119,6 @@ futureObservationSeparatesParses :
       (continueToHolderQuestion ∷ []) possessionState)
   → ⊥
 futureObservationSeparatesParses ()
-  where
-    open import Agda.Builtin.List using ([]; _∷_)
 
 ------------------------------------------------------------------------
 -- Reopenable residual: the coarse "John was seen" answer plus the retained
