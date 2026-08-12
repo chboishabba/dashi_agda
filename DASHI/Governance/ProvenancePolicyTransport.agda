@@ -55,27 +55,39 @@ record PropositionLocalPolicy
 open PropositionLocalPolicy public
 
 ------------------------------------------------------------------------
--- Collective-guilt transport is never manufactured by group adjacency.
+-- Group membership and responsibility are separate relations.
 ------------------------------------------------------------------------
 
-record CollectiveMembershipBoundary
+record CollectiveMembershipSystem
     (S : ProvenancePolicySystem) : Set₁ where
   field
     Group : Set
     member : Actor S → Group → Set
     Responsible : Actor S → Set
-    MembershipAloneTransfersResponsibility : Set
+    ResponsibilityTransfer : Actor S → Actor S → Set
+
+open CollectiveMembershipSystem public
+
+-- A safety certificate says that mere shared membership cannot manufacture a
+-- responsibility-transfer witness.  This is separate from the violation type
+-- below, which remains perfectly inhabitable for systems that do exhibit such
+-- a transfer.
+record CollectiveMembershipBoundary
+    (S : ProvenancePolicySystem)
+    (B : CollectiveMembershipSystem S) : Set₁ where
+  field
     membershipAloneCannotTransfer :
-      MembershipAloneTransfersResponsibility → ⊥
+      ∀ {source target group} →
+      member B source group →
+      member B target group →
+      Responsible B source →
+      ResponsibilityTransfer B source target →
+      ⊥
 
 open CollectiveMembershipBoundary public
 
 ------------------------------------------------------------------------
 -- Defeater/revision liveness.
---
--- This does not require every defeater to reverse a classification.  It
--- requires a proposition-level witness when an application claims a
--- classification is genuinely revisable under a named defeater.
 ------------------------------------------------------------------------
 
 record DefeaterLive
@@ -114,15 +126,28 @@ record WeaponisationWitness (S : ProvenancePolicySystem) : Set₁ where
 
 record CollectiveGuiltWitness
     (S : ProvenancePolicySystem)
-    (B : CollectiveMembershipBoundary S) : Set₁ where
+    (B : CollectiveMembershipSystem S) : Set₁ where
   field
     source target : Actor S
     group : Group B
     sourceMember : member B source group
     targetMember : member B target group
     sourceResponsible : Responsible B source
-    inheritedTransferAttempt :
-      MembershipAloneTransfersResponsibility B
+    inheritedTransfer : ResponsibilityTransfer B source target
+
+open CollectiveGuiltWitness public
+
+collectiveGuiltWitnessContradictsBoundary :
+  ∀ {S B} →
+  CollectiveMembershipBoundary S B →
+  CollectiveGuiltWitness S B →
+  ⊥
+collectiveGuiltWitnessContradictsBoundary boundary witness =
+  membershipAloneCannotTransfer boundary
+    (sourceMember witness)
+    (targetMember witness)
+    (sourceResponsible witness)
+    (inheritedTransfer witness)
 
 record AsymmetricRoutingWitness (S : ProvenancePolicySystem) : Set₁ where
   field
@@ -147,7 +172,8 @@ record AsymmetricRoutingWitness (S : ProvenancePolicySystem) : Set₁ where
 record AntifascisticCertificate (S : ProvenancePolicySystem) : Set₁ where
   field
     localPolicy : PropositionLocalPolicy S
-    collectiveBoundary : CollectiveMembershipBoundary S
+    membershipSystem : CollectiveMembershipSystem S
+    collectiveBoundary : CollectiveMembershipBoundary S membershipSystem
     ReopeningReceipt : Set
     reopeningReceipt : Actor S → ReopeningReceipt
     CounterevidenceCase : Set
