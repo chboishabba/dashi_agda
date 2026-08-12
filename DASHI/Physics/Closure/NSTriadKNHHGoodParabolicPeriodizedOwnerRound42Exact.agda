@@ -36,8 +36,11 @@ module DASHI.Physics.Closure.NSTriadKNHHGoodParabolicPeriodizedOwnerRound42Exact
 -- parabolic recovery are supplied, the existing Round-41 Young constructor
 -- returns the literal HH-good owner with effective quadratic factor `c E0`.
 --
--- Thus the remaining physical HH-good seam is no longer an unspecified
--- `W<=E0XD` premise.  It is exactly:
+-- The Round-41 Young input also requires nonnegativity of the physical
+-- critical and dissipation resources.  Those are kept as explicit fields;
+-- they are not inferred circularly from the quartic inequality.
+--
+-- Thus the remaining physical HH-good seam is exactly:
 --
 --   (1) periodized annular strain-kernel/sample identification;
 --   (2) actual terminal-window cells with total mass <= c lambda_q^-2;
@@ -47,7 +50,7 @@ module DASHI.Physics.Closure.NSTriadKNHHGoodParabolicPeriodizedOwnerRound42Exact
 --       `weightedLocalMass` after PV/residual/shell/threshold ordering.
 ------------------------------------------------------------------------
 
-open import Agda.Primitive using (Level)
+open import Agda.Primitive using (Level; lsuc)
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
@@ -70,7 +73,7 @@ record PeriodizedParabolicHHGoodInput
     (kernelTheorem : Periodized.PeriodizedAnnularStrainKernelL1Theorem TorusPoint)
     (shell : Nat)
     (parameter : Threshold.PositiveThreshold)
-    (samples : List (Good.HHGoodKernelSample parameter)) : Set (Level.suc st) where
+    (samples : List (Good.HHGoodKernelSample parameter)) : Set (lsuc st) where
   field
     kernelIdentification :
       Periodized.PhysicalStrainShellKernelMassIdentification
@@ -88,21 +91,33 @@ record PeriodizedParabolicHHGoodInput
           (Parabolic.cells
             (Parabolic.recovery parabolicCriticalRecovery))
 
+    criticalNonnegative : 0ℚ ≤ Owner.integralCritical environment
+    dissipationNonnegative : 0ℚ ≤ Owner.dissipation environment
     viscositySplit : Threshold.PositiveThreshold
 
 open PeriodizedParabolicHHGoodInput public
 
 effectiveParabolicDataFactor :
-  ∀ {st TorusPoint environment kernelTheorem shell parameter samples} →
+  ∀ {st : Level} {TorusPoint : Set st}
+    {environment : Owner.TaxEnvironment}
+    {kernelTheorem : Periodized.PeriodizedAnnularStrainKernelL1Theorem TorusPoint}
+    {shell : Nat}
+    {parameter : Threshold.PositiveThreshold}
+    {samples : List (Good.HHGoodKernelSample parameter)} →
   PeriodizedParabolicHHGoodInput
-    {st} {TorusPoint} environment kernelTheorem shell parameter samples → ℚ
+    environment kernelTheorem shell parameter samples → ℚ
 effectiveParabolicDataFactor input =
   windowConstant input * dataEnergy input
 
 effectiveParabolicDataFactorNonnegative :
-  ∀ {st TorusPoint environment kernelTheorem shell parameter samples}
+  ∀ {st : Level} {TorusPoint : Set st}
+    {environment : Owner.TaxEnvironment}
+    {kernelTheorem : Periodized.PeriodizedAnnularStrainKernelL1Theorem TorusPoint}
+    {shell : Nat}
+    {parameter : Threshold.PositiveThreshold}
+    {samples : List (Good.HHGoodKernelSample parameter)}
     (input : PeriodizedParabolicHHGoodInput
-      {st} {TorusPoint} environment kernelTheorem shell parameter samples) →
+      environment kernelTheorem shell parameter samples) →
   0ℚ ≤ effectiveParabolicDataFactor input
 effectiveParabolicDataFactorNonnegative input =
   let
@@ -118,9 +133,14 @@ effectiveParabolicDataFactorNonnegative input =
   ℚP.nonNegative⁻¹ (effectiveParabolicDataFactor input)
 
 weightedLocalMassBelowParabolicCriticalDissipation :
-  ∀ {st TorusPoint environment kernelTheorem shell parameter samples}
+  ∀ {st : Level} {TorusPoint : Set st}
+    {environment : Owner.TaxEnvironment}
+    {kernelTheorem : Periodized.PeriodizedAnnularStrainKernelL1Theorem TorusPoint}
+    {shell : Nat}
+    {parameter : Threshold.PositiveThreshold}
+    {samples : List (Good.HHGoodKernelSample parameter)}
     (input : PeriodizedParabolicHHGoodInput
-      {st} {TorusPoint} environment kernelTheorem shell parameter samples) →
+      environment kernelTheorem shell parameter samples) →
   Good.weightedLocalMass samples
   ≤ effectiveParabolicDataFactor input
       * Owner.integralCritical environment
@@ -150,46 +170,25 @@ periodizedHHGoodOwnerFromParabolicKineticRecovery :
   PeriodizedParabolicHHGoodInput
     environment kernelTheorem shell parameter samples →
   Owner.AdmissibleOwnerEstimate environment
-periodizedHHGoodOwnerFromParabolicKineticRecovery
-    {environment = environment}
-    {kernelTheorem = kernelTheorem}
-    {shell = shell}
-    {parameter = parameter}
-    {samples = samples}
-    input =
+periodizedHHGoodOwnerFromParabolicKineticRecovery input =
   Young.periodizedHHGoodOwnerFromDataEnergyFactorization record
     { identification = kernelIdentification input
     ; dataEnergyFactor = effectiveParabolicDataFactor input
     ; dataEnergyFactorNonnegative =
         effectiveParabolicDataFactorNonnegative input
     ; viscositySplit = viscositySplit input
-    ; criticalNonnegative =
-        Young.criticalNonnegative
-          (Young.periodizedDataEnergyYoungInput record
-            { identification = kernelIdentification input
-            ; dataEnergyFactor = effectiveParabolicDataFactor input
-            ; dataEnergyFactorNonnegative =
-                effectiveParabolicDataFactorNonnegative input
-            ; viscositySplit = viscositySplit input
-            ; criticalNonnegative =
-                Parabolic.quarticEnvelopeBelowCriticalDissipation
-                  (parabolicCriticalRecovery input)
-                |> impossiblePlaceholder
-            ; dissipationNonnegative = impossiblePlaceholder
-            ; localMassBelowDataCriticalDissipation =
-                weightedLocalMassBelowParabolicCriticalDissipation input
-            })
-    ; dissipationNonnegative = impossiblePlaceholder
+    ; criticalNonnegative = criticalNonnegative input
+    ; dissipationNonnegative = dissipationNonnegative input
     ; localMassBelowDataCriticalDissipation =
         weightedLocalMassBelowParabolicCriticalDissipation input
     }
 
--- The Round-41 Young input requires nonnegativity of the global critical and
--- dissipation resources independently of the quartic bound.  These are genuine
--- properties of the physical tax environment, not consequences of
--- `Q <= X D`; therefore they must remain explicit in the same-object input.
--- The placeholder above is intentionally rejected below by replacing this
--- provisional declaration in the next commit with explicit fields.
+hhGoodParabolicPeriodizedOwnerReductionClosed : Bool
+hhGoodParabolicPeriodizedOwnerReductionClosed = true
 
-hhGoodParabolicPeriodizedOwnerReductionDesigned : Bool
-hhGoodParabolicPeriodizedOwnerReductionDesigned = true
+physicalHHGoodOwnerNowReducedToParabolicSameObjectInput : Bool
+physicalHHGoodOwnerNowReducedToParabolicSameObjectInput = true
+
+hhGoodParabolicPeriodizedOwnerReductionClosedIsTrue :
+  hhGoodParabolicPeriodizedOwnerReductionClosed ≡ true
+hhGoodParabolicPeriodizedOwnerReductionClosedIsTrue = refl
