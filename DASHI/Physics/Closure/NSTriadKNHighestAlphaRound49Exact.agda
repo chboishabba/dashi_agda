@@ -12,6 +12,7 @@ module DASHI.Physics.Closure.NSTriadKNHighestAlphaRound49Exact where
 --     direct strict recurrence targets C0<T and beta<(1-alpha)T,
 --     exact equivalence with existence of an admissible ceiling M<T,
 --     explicit division-free interpolation to such an M,
+--     exact quarter/eighth selected-threshold candidates,
 --     inherited domination rather than equality,
 --     and the directional-defect Duhamel/heat-contraction seam;
 --
@@ -41,6 +42,7 @@ open import DASHI.Physics.Closure.NSTriadKNHHBadStrictTargetInterpolationRound49
 open import DASHI.Physics.Closure.NSTriadKNHHBadCeilingExistenceIffStrictTargetsRound49Exact
 open import DASHI.Physics.Closure.NSTriadKNHHBadDirectTargetToSelectedRecurrenceRound49Exact
 open import DASHI.Physics.Closure.NSTriadKNHHBadDirectLiveBudgetRound49Exact
+open import DASHI.Physics.Closure.NSTriadKNHHBadSimpleRationalThresholdsRound49Exact
 open import DASHI.Physics.Closure.NSTriadKNHHBadInheritedDominationRound49Exact
 open import DASHI.Physics.Closure.NSTriadKNHHBadDuhamelDefectReductionRound49Exact
 open import DASHI.Physics.Closure.NSTriadKNComBandwidthOnePreYoungRound49Exact
