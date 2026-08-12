@@ -7,18 +7,12 @@ open import Data.Integer using (ℤ; +_; _+_)
 open import Data.List.Base using (List; []; _∷_)
 
 open import DASHI.Cognition.PNF.NumericAuthority
+import DASHI.Core.ClassificationEdge as Classification
 import DASHI.Reasoning.AttractorAlignedBranchSelection as Selection
 import DASHI.Reasoning.RelationalBranchInterference as Interference
 
 ------------------------------------------------------------------------
 -- Predicate participation induces type pressure; it does not assert a type.
---
--- This is the formal seam behind the Wikidata presentation's order:
---
---   role binding -> soft type pressure -> validation/alignment.
---
--- Signed pressure remains fine integer evidence.  Reinforcing / independent /
--- interfering is derived by the existing exact signed-interaction classifier.
 ------------------------------------------------------------------------
 
 record TypePressureContribution
@@ -129,8 +123,7 @@ envelopeClassification envelope =
   Interference.classifySignedInteraction (envelopePressure envelope)
 
 ------------------------------------------------------------------------
--- Predicate-role specialization: the observed relation explains why the type
--- pressure exists, but still does not grant world/type authority.
+-- Predicate-role specialization.
 ------------------------------------------------------------------------
 
 record PredicateRolePressure
@@ -169,6 +162,45 @@ numericRolePressureClassification :
   Interference.ClassifiedInteraction (signedRolePressure pressure)
 numericRolePressureClassification pressure =
   Interference.classifySignedInteraction (signedRolePressure pressure)
+
+------------------------------------------------------------------------
+-- Soft-type classification adapter.
+--
+-- Type pressure can create a revisable classification edge in the generic
+-- classification carrier.  The edge records why the type is plausible; it is
+-- still not a type assertion and cannot manufacture identity or ontology truth.
+------------------------------------------------------------------------
+
+record NumericTypePressureEvidence : Set where
+  constructor numericTypePressureEvidence
+  field
+    pressureFactor : FactorId
+    pressureRole : SymbolId
+    pressureResidual : ℤ
+
+open NumericTypePressureEvidence public
+
+TypePressureClassificationEdge : Set
+TypePressureClassificationEdge =
+  Classification.ClassificationEdge
+    ObjectId SymbolId NumericTypePressureEvidence
+
+classificationEdgeFromTypePressure :
+  ∀ {subject candidateType} →
+  NumericPredicateRolePressure subject candidateType →
+  Nat →
+  TypePressureClassificationEdge
+classificationEdgeFromTypePressure pressure revision =
+  Classification.classificationEdge
+    _
+    _
+    (numericTypePressureEvidence
+      (factor pressure)
+      (roleSymbol pressure)
+      (signedRolePressure pressure))
+    revision
+    (pressureProvenance pressure)
+    (pressureScope pressure)
 
 ------------------------------------------------------------------------
 -- Authority boundary.
