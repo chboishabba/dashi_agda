@@ -10,11 +10,11 @@ import DASHI.Reasoning.RelationalBranchInterference as Interference
 ------------------------------------------------------------------------
 -- Generic fine -> coarse observation.
 --
--- The coarse phase is derived from the fine carrier.  It is not an independent
+-- The coarse phase is derived from the fine carrier. It is not an independent
 -- mutable truth value, and the interface deliberately supplies no inverse.
 ------------------------------------------------------------------------
 
-record PhaseObservationSystem (Fine Coarse : Set) : Set₁ where
+record PhaseObservationSystem (Fine Coarse : Set) : Set where
   constructor phaseObservationSystem
   field
     observePhase : Fine → Coarse
