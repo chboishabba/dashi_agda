@@ -22,15 +22,21 @@ module DASHI.Physics.Closure.NSTriadKNHHBadVariableDuhamelClosureRound51Exact wh
 -- domination by that profile, and the existing charge domination, construct the
 -- mature HH-bad owner and strict live H2 gate.  No intermediate uniform-alpha
 -- or raw-summability theorem is required.
+--
+-- The owner and gate are forced to use the SAME weighted ceiling, so a caller
+-- cannot prove the live inequality with one Green budget while taxing a larger
+-- or unrelated one.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base using (ℚ; 1ℚ; _<_)
+open import Data.Rational.Base using (ℚ; 1ℚ; _*_; _<_)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 import DASHI.Physics.Closure.NSTriadKNAdmissibleOwnerTaxLanguageRound28Exact as Owner
 import DASHI.Physics.Closure.NSTriadKNHardGateHierarchyRound47Exact as Gate
+import DASHI.Physics.Closure.NSTriadKNHHBadSharpDyadicGainRound33Exact as Sharp
 import DASHI.Physics.Closure.NSTriadKNHHBadLiveBudgetTargetRound48Exact as Target
 import DASHI.Physics.Closure.NSTriadKNHHBadWeightedGreenForcingRound51Exact as Green
 import DASHI.Physics.Closure.NSTriadKNHHBadWeightedGreenToOwnerRound51Exact as GreenOwner
@@ -66,6 +72,20 @@ physicalVariableDuhamelHHBadOwner :
 physicalVariableDuhamelHHBadOwner input =
   GreenOwner.physicalHHBadOwnerFromWeightedGreen
     (physicalOwnerInput input)
+
+physicalVariableDuhamelHHBadEtaUsesLiveCeiling :
+  ∀ {environment effectiveViscosity}
+    (input : PhysicalVariableDuhamelClosureInput
+      environment effectiveViscosity) shell →
+  Owner.eta (physicalVariableDuhamelHHBadOwner input shell)
+  ≡ Sharp.two * GreenOwner.weightedGreenCeiling (weightedBound input)
+physicalVariableDuhamelHHBadEtaUsesLiveCeiling input shell =
+  trans
+    (GreenOwner.physicalHHBadWeightedGreenOwnerEtaExact
+      (physicalOwnerInput input) shell)
+    (cong (Sharp.two *_)
+      (cong GreenOwner.weightedGreenCeiling
+        (ownerUsesSameWeightedBound input)))
 
 physicalVariableDuhamelGateStrict :
   ∀ {environment effectiveViscosity}
