@@ -13,6 +13,7 @@ module DASHI.Crypto.ComputationalCandidateFibreExact where
 -- cryptography", STOC 2005. DOI: 10.1145/1060590.1060603.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
@@ -95,12 +96,13 @@ open ModelRelativeInversionCost public
 record ComputationalFibreBoundary : Set where
   constructor computationalFibreBoundary
   field
-    injectiveImpliesEfficientInverse : Agda.Builtin.Bool.Bool
-    injectiveImpliesEfficientInverseIsFalse : injectiveImpliesEfficientInverse ≡ Agda.Builtin.Bool.false
-    plausibleCandidateMeansExactPreimage : Agda.Builtin.Bool.Bool
-    plausibleCandidateMeansExactPreimageIsFalse : plausibleCandidateMeansExactPreimage ≡ Agda.Builtin.Bool.false
+    injectiveImpliesEfficientInverse : Bool
+    injectiveImpliesEfficientInverseIsFalse :
+      injectiveImpliesEfficientInverse ≡ false
+    plausibleCandidateMeansExactPreimage : Bool
+    plausibleCandidateMeansExactPreimageIsFalse :
+      plausibleCandidateMeansExactPreimage ≡ false
 
-open import Agda.Builtin.Bool using (Bool; false)
 open ComputationalFibreBoundary public
 
 canonicalComputationalFibreBoundary : ComputationalFibreBoundary
