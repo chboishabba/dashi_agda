@@ -7,31 +7,71 @@ open import Data.Empty using (⊥)
 
 open import DASHI.Cognition.PNF.NumericAuthority
 import DASHI.Cognition.PNF.ProofRelevantIdentityFibres as Identity
-import DASHI.Core.TypedDependencyCore as Dependency
+import DASHI.Core.ClassificationEdge as Core
 import DASHI.Reasoning.AttractorAlignedBranchSelection as Selection
 
 ------------------------------------------------------------------------
--- Classification/reference edges are proposition-local dependencies, not
--- rewrites of the subject's identity.  They carry evidence, revision,
--- provenance and scope so a later interpretation can supersede the edge while
--- the source occurrence remains stable.
+-- Entity-candidate classification is an instance of the canonical revisable
+-- classification edge. The subject occurrence remains stable when an edge is
+-- revised or superseded.
 ------------------------------------------------------------------------
 
-record CandidateClassificationRelation
-    (subject : ObjectId)
-    (candidate : Identity.CanonicalEntity) : Set where
-  constructor candidateClassificationRelation
+record CandidateClassificationEvidence : Set where
+  constructor candidateClassificationEvidence
   field
-    evidenceFactor : FactorId
-    phaseDirection : Selection.InteractionDirection
-    phaseMagnitude : Nat
-    classificationRevision : Nat
+    factorEvidence : FactorId
+    candidatePhaseDirection : Selection.InteractionDirection
+    candidatePhaseMagnitude : Nat
 
-open CandidateClassificationRelation public
+open CandidateClassificationEvidence public
+
+CandidateClassificationRelation :
+  ObjectId → Identity.CanonicalEntity → Set
+CandidateClassificationRelation subject candidate =
+  Core.ClassificationRelation
+    {Subject = ObjectId}
+    {Target = Identity.CanonicalEntity}
+    {Evidence = CandidateClassificationEvidence}
+    subject candidate
+
+candidateClassificationRelation :
+  ∀ {subject candidate} →
+  FactorId → Selection.InteractionDirection → Nat → Nat →
+  CandidateClassificationRelation subject candidate
+candidateClassificationRelation factor direction magnitude revision =
+  Core.classificationRelation
+    (candidateClassificationEvidence factor direction magnitude)
+    revision
+
+evidenceFactor :
+  ∀ {subject candidate} →
+  CandidateClassificationRelation subject candidate → FactorId
+evidenceFactor relation = factorEvidence (Core.classificationEvidence relation)
+
+phaseDirection :
+  ∀ {subject candidate} →
+  CandidateClassificationRelation subject candidate →
+  Selection.InteractionDirection
+phaseDirection relation =
+  candidatePhaseDirection (Core.classificationEvidence relation)
+
+phaseMagnitude :
+  ∀ {subject candidate} →
+  CandidateClassificationRelation subject candidate → Nat
+phaseMagnitude relation =
+  candidatePhaseMagnitude (Core.classificationEvidence relation)
+
+classificationRevision :
+  ∀ {subject candidate} →
+  CandidateClassificationRelation subject candidate → Nat
+classificationRevision = Core.classificationRevision
 
 CandidateClassificationEdge : Set
 CandidateClassificationEdge =
-  Dependency.DependencyWitness CandidateClassificationRelation
+  Core.ClassificationEdge
+    ObjectId
+    Identity.CanonicalEntity
+    CandidateClassificationEvidence
 
 revisedCandidateClassificationEdge :
   (subject : ObjectId) →
@@ -41,12 +81,11 @@ revisedCandidateClassificationEdge :
   CandidateClassificationEdge
 revisedCandidateClassificationEdge
     subject candidate factor direction magnitude revision provenance scope =
-  Dependency.dependencyWitness
+  Core.classificationEdge
     subject
     candidate
-    (candidateClassificationRelation factor direction magnitude revision)
-    Dependency.epistemicLayer
-    Dependency.optionalDependency
+    (candidateClassificationEvidence factor direction magnitude)
+    revision
     provenance
     scope
 
@@ -80,6 +119,7 @@ record ClassificationEdgeBoundary : Set where
       CandidateClassificationIdentityPermission → ⊥
     deductiveIdentityReusesExistingFibreMember : Set
     classificationCarriesExplicitRevision : Set
+    canonicalClassificationCoreReused : Set
 
 open ClassificationEdgeBoundary public
 
@@ -89,3 +129,4 @@ canonicalClassificationEdgeBoundary =
     candidateClassificationCannotPromoteIdentity
     DeductiveIdentityEdge
     Nat
+    Core.ClassificationEdge
