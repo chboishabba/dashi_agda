@@ -3,7 +3,9 @@ module DASHI.Cognition.PNF.RuntimeThroughputConstitution where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
+open import Data.List.Base using (List; []; _∷_)
 
 open import DASHI.Cognition.PNF.ComplexityArithmetic
 
@@ -18,6 +20,7 @@ open import DASHI.Cognition.PNF.ComplexityArithmetic
 record StageCostReceipt : Set where
   constructor stageCostReceipt
   field
+    workloadId : String
     inputUnits : Nat
     outputUnits : Nat
     workUnits : Nat
@@ -27,12 +30,11 @@ record StageCostReceipt : Set where
 open StageCostReceipt public
 
 ------------------------------------------------------------------------
--- Explicit affine-work envelope.
+-- Explicit affine-work point receipt.
 --
 -- The semantic unit is application-selected: tokens, demands, bounded
--- candidates, interface rows, or another measured carrier.  This receipt is
--- the formal place to reject hidden quadratic/superlinear materialisation when
--- the runtime claims a stage is work-bounded by its chosen carrier.
+-- candidates, interface rows, or another measured carrier.  One observation
+-- only certifies one point; archive-scale claims use the non-empty series below.
 ------------------------------------------------------------------------
 
 record AffineWorkReceipt (stage : StageCostReceipt) : Set where
@@ -69,6 +71,12 @@ record ParserDominatedOptimisationReceipt
     postParserAfter : StageCostReceipt
     observedDominanceFactor : Nat
 
+    -- Comparisons only mean anything for the same corpus/document workload.
+    sameParserWorkload :
+      workloadId parserBefore ≡ workloadId parserAfter
+    samePostParserWorkload :
+      workloadId parserAfter ≡ workloadId postParserAfter
+
     -- We do not earn parser dominance by deliberately making the parser worse.
     parserElapsedNotIncreased :
       elapsedUnits parserAfter ≤ᶜ elapsedUnits parserBefore
@@ -89,25 +97,42 @@ record ParserDominatedOptimisationReceipt
 open ParserDominatedOptimisationReceipt public
 
 ------------------------------------------------------------------------
--- Corpus/archive scale receipt.
---
--- This does not assert that all semantic algorithms are globally linear.  It
--- records an explicit measured work envelope relative to the carrier that the
--- implementation claims should control the stage.  If a pairwise surface is
--- necessary, it must first be represented in that carrier or separately
--- bounded before materialisation.
+-- Non-empty archive/corpus scaling series.
 ------------------------------------------------------------------------
+
+record ScalePoint : Set where
+  constructor scalePoint
+  field
+    scaleWorkloadId : String
+    representedCarrierUnits : Nat
+    measuredPostParserWorkUnits : Nat
+    measuredElapsedUnits : Nat
+    measuredPeakMemoryUnits : Nat
+
+open ScalePoint public
+
+data AllWithinAffine
+    (slope intercept : Nat) : List ScalePoint → Set where
+  affineNil : AllWithinAffine slope intercept []
+  affineCons :
+    ∀ {point rest} →
+    measuredPostParserWorkUnits point
+      ≤ᶜ ((slope *ᶜ representedCarrierUnits point) +ᶜ intercept) →
+    AllWithinAffine slope intercept rest →
+    AllWithinAffine slope intercept (point ∷ rest)
 
 record ArchiveScaleReceipt : Set where
   constructor archiveScaleReceipt
   field
-    representedCarrierUnits : Nat
-    measuredPostParserWorkUnits : Nat
+    firstObservation : ScalePoint
+    remainingObservations : List ScalePoint
     envelopeSlope : Nat
     envelopeIntercept : Nat
-    postParserWorkWithinDeclaredEnvelope :
-      measuredPostParserWorkUnits
-      ≤ᶜ ((envelopeSlope *ᶜ representedCarrierUnits) +ᶜ envelopeIntercept)
+    allObservedPointsWithinDeclaredEnvelope :
+      AllWithinAffine
+        envelopeSlope
+        envelopeIntercept
+        (firstObservation ∷ remainingObservations)
 
 open ArchiveScaleReceipt public
 
@@ -130,6 +155,9 @@ record RuntimeThroughputBoundary : Set where
     parserMayBeArtificiallySlowedToMeetTarget : Bool
     parserMayBeArtificiallySlowedToMeetTargetIsFalse :
       parserMayBeArtificiallySlowedToMeetTarget ≡ false
+    singleBenchmarkPointProvesScaling : Bool
+    singleBenchmarkPointProvesScalingIsFalse :
+      singleBenchmarkPointProvesScaling ≡ false
     unboundedIntermediateWorkMayHideBehindBoundedOutput : Bool
     unboundedIntermediateWorkMayHideBehindBoundedOutputIsFalse :
       unboundedIntermediateWorkMayHideBehindBoundedOutput ≡ false
@@ -145,6 +173,7 @@ canonicalRuntimeThroughputBoundary : RuntimeThroughputBoundary
 canonicalRuntimeThroughputBoundary =
   runtimeThroughputBoundary
     true refl
+    false refl
     false refl
     false refl
     false refl
