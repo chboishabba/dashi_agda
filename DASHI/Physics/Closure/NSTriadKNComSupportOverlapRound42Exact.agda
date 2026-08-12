@@ -51,6 +51,7 @@ module DASHI.Physics.Closure.NSTriadKNComSupportOverlapRound42Exact where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using ([]; _∷_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚP
