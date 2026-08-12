@@ -122,21 +122,21 @@ lowHighBelowTotal :
 lowHighBelowTotal input =
   let
     b = Critical.budget (closureData input)
-    addRest :
-      Bony.lowHigh b + 0ℚ
-      ≤ Bony.lowHigh b
-        + (Bony.highLow b + Bony.comparable b + Bony.highHighToLow b)
+    rest = Bony.highLow b + Bony.comparable b + Bony.highHighToLow b
+    addRest : Bony.lowHigh b + 0ℚ ≤ Bony.lowHigh b + rest
     addRest = ℚP.+-monoʳ-≤ (Bony.lowHigh b)
       (remainingAfterLHNonnegative input)
+    target : Bony.lowHigh b + rest ≡ Bony.totalInteraction b
+    target = solve
+      ( Bony.lowHigh b ∷ Bony.highLow b
+      ∷ Bony.comparable b ∷ Bony.highHighToLow b ∷ [])
   in
   subst
     (λ lower → lower ≤ Bony.totalInteraction b)
     (solve (Bony.lowHigh b ∷ []))
     (subst
       (λ upper → Bony.lowHigh b + 0ℚ ≤ upper)
-      (sym (solve
-        ( Bony.lowHigh b ∷ Bony.highLow b
-        ∷ Bony.comparable b ∷ Bony.highHighToLow b ∷ [])))
+      target
       addRest)
 
 highLowBelowTotal :
