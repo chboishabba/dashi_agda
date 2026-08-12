@@ -40,7 +40,7 @@ module DASHI.Physics.YangMills.BalabanSelectedBackgroundGaugeAdjointDefectSchurE
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Integer.Base using (+_)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _*_; _≤_; _/_)
+open import Data.Rational.Base as ℚ using (ℚ; _*_; _≤_; _/_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (subst)
@@ -49,12 +49,14 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanFiniteRectangularSchurSquaredExact as RectSchur
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundGaugeAdjointDefectExact as Defect
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundGaugeDefectAbsoluteMassExact as Mass
+import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Coordinates
+import DASHI.Physics.YangMills.BalabanP33FiniteKKTAdmissibleProjectorExact as KKT
 import DASHI.Physics.YangMills.BalabanP33PhysicalRationalWilsonPlaquetteJetExact as Physical
 import DASHI.Physics.YangMills.BalabanP33PhysicalBackgroundGaugeParameterizedYoungExact as Relaxed
 
 transposeGaugeDefectMatrix :
   Physical.RationalSU2Background4 →
-  Defect.KKT.State → Defect.GaugeRow → ℚ
+  KKT.State → Defect.GaugeRow → ℚ
 transposeGaugeDefectMatrix background column row =
   Defect.gaugeDefectMatrix background row column
 
@@ -83,7 +85,7 @@ transposeRowsBounded background radius column =
 transposeColumnsBounded :
   ∀ background → Relaxed.RelaxedInverseLinkRadius background →
   ∀ row →
-  RectSchur.rectAbsoluteColumnMass Defect.Coordinates.physicalSU2Coordinates4
+  RectSchur.rectAbsoluteColumnMass Coordinates.physicalSU2Coordinates4
     (transposeGaugeDefectMatrix background) row
   ≤ transposeColumnMassBound
 transposeColumnsBounded background radius row =
@@ -99,7 +101,7 @@ selectedGaugeAdjointDefectSchurBound :
 selectedGaugeAdjointDefectSchurBound background radius multiplier =
   let
     raw = RectSchur.finiteRectangularSchurSquared
-      Defect.Coordinates.physicalSU2Coordinates4
+      Coordinates.physicalSU2Coordinates4
       Defect.gaugeRows
       (transposeGaugeDefectMatrix background)
       multiplier
