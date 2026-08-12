@@ -6,6 +6,8 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Biology.EducationCorpusSourceRegistry as Sources
 import DASHI.Biology.OEFAIFeedbackFormalisationFull as AI
+import DASHI.Biology.HumourOnlineEngagementFramework as Humour
+import DASHI.Biology.HumourEpistemicAgencyHyperfabricBridge as HumourAgency
 import DASHI.Biology.StudentVoiceEpistemicAgencyBridge as Voice
 import DASHI.Biology.StudentIdentifiedSupportStrategiesBridge as Strategies
 import DASHI.Biology.EcologyOfDataHyperfabricBridge as Ecology
@@ -19,8 +21,12 @@ import DASHI.Biology.CrossPaperDialecticalDevelopment as Development
 -- This aggregate preserves each source paper as its own fibre, while exposing
 -- typed cross-paper relations and DASHI extensions.  It does not flatten the
 -- corpus into one claimed theory or promote any author/paper to authority.
+--
+-- The humour/agency bridge lives in Set1 because its governance and plural
+-- dynamic-safety fields themselves quantify over typed relations.
+------------------------------------------------------------------------
 
-record AliceBrownCorpusLoom : Set where
+record AliceBrownCorpusLoom : Set₁ where
   constructor mkAliceBrownCorpusLoom
   field
     sourceRegistry : Sources.EducationCorpusSourceRegistry
@@ -30,6 +36,16 @@ record AliceBrownCorpusLoom : Set where
     aiFeedbackFormalisation : AI.OEFAIFeedbackFormalisationFull
     aiFeedbackFormalisationIsCanonical :
       aiFeedbackFormalisation ≡ AI.canonicalOEFAIFeedbackFormalisationFull
+
+    humourFramework : Humour.HumourFrameworkSourceSurface
+    humourFrameworkIsCanonical :
+      humourFramework ≡ Humour.canonicalHumourFrameworkSourceSurface
+
+    humourEpistemicAgencyBridge :
+      HumourAgency.HumourEpistemicAgencyHyperfabricBridge
+    humourEpistemicAgencyBridgeIsCanonical :
+      humourEpistemicAgencyBridge
+      ≡ HumourAgency.canonicalHumourEpistemicAgencyHyperfabricBridge
 
     studentVoiceAgencyBridge : Voice.StudentVoiceEpistemicAgencyBridge
     studentVoiceAgencyBridgeIsCanonical :
@@ -76,6 +92,10 @@ record AliceBrownCorpusLoom : Set where
     agencyAndCustodianshipGovernDownstreamUseIsTrue :
       agencyAndCustodianshipGovernDownstreamUse ≡ true
 
+    humourSourcePreservedBeforeDialecticalCorrection : Bool
+    humourSourcePreservedBeforeDialecticalCorrectionIsTrue :
+      humourSourcePreservedBeforeDialecticalCorrection ≡ true
+
     corpusLoomCandidateOnly : Bool
     corpusLoomCandidateOnlyIsTrue : corpusLoomCandidateOnly ≡ true
 
@@ -88,6 +108,8 @@ canonicalAliceBrownCorpusLoom =
   mkAliceBrownCorpusLoom
     Sources.canonicalEducationCorpusSourceRegistry refl
     AI.canonicalOEFAIFeedbackFormalisationFull refl
+    Humour.canonicalHumourFrameworkSourceSurface refl
+    HumourAgency.canonicalHumourEpistemicAgencyHyperfabricBridge refl
     Voice.canonicalStudentVoiceEpistemicAgencyBridge refl
     Strategies.canonicalStudentIdentifiedSupportStrategiesBridge refl
     Ecology.canonicalEcologyOfDataHyperfabricBridge refl
@@ -100,8 +122,9 @@ canonicalAliceBrownCorpusLoom =
     true refl
     true refl
     true refl
-    "Corpus-level candidate loom: the OEF/AI paper supplies scalable proxy classification; voice/agency supplies epistemic-participation gates; online-support research supplies student-identified +1 families; ecology-of-data supplies person-place custodianship; dyslexia allyship research supplies plural observer and proximity fibres; and the interpretive-coding interface exposes the common human/machine mediation layer. Source claims, cross-paper inferences, DASHI extensions and future empirical tests remain distinct."
+    true refl
+    "Corpus-level candidate loom: the OEF/AI paper supplies scalable proxy classification; the source-bound humour paper supplies a seven-consideration teacher-side pedagogical framework; the humour/agency hyperfabric bridge exposes constitutive governance, strict intersectional carrier expansion, conditional-normalisation and plural-dynamic-safety boundaries without rewriting the source; voice/agency supplies epistemic-participation gates; online-support research supplies student-identified +1 families; ecology-of-data supplies person-place custodianship; dyslexia allyship research supplies plural observer and proximity fibres; and the interpretive-coding interface exposes the common human/machine mediation layer. Source claims, cross-paper inferences, DASHI extensions and future empirical tests remain distinct."
 
 canonicalCorpusLoomSourceCountReading : String
 canonicalCorpusLoomSourceCountReading =
-  "seven source-bound papers with title, authors, DOI, venue and boundary metadata"
+  "eight source-bound papers/items with title, authors, DOI-or-explicit-no-DOI, venue and boundary metadata"

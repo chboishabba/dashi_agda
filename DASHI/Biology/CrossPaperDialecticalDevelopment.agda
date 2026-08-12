@@ -24,6 +24,7 @@ data ClaimRegister : Set where
 data DevelopmentStage : Set where
   engagementFibreStage : DevelopmentStage
   scalableFeedbackClassificationStage : DevelopmentStage
+  teacherDesignedHumourFrameworkStage : DevelopmentStage
   ecologicalContextRestorationStage : DevelopmentStage
   epistemicAgencyRedistributionStage : DevelopmentStage
   studentIdentifiedSupportStage : DevelopmentStage
@@ -35,6 +36,7 @@ canonicalDevelopmentStages : List DevelopmentStage
 canonicalDevelopmentStages =
   engagementFibreStage
   ∷ scalableFeedbackClassificationStage
+  ∷ teacherDesignedHumourFrameworkStage
   ∷ ecologicalContextRestorationStage
   ∷ epistemicAgencyRedistributionStage
   ∷ studentIdentifiedSupportStage
@@ -46,6 +48,8 @@ canonicalDevelopmentStages =
 stageName : DevelopmentStage → String
 stageName engagementFibreStage = "name overlapping engagement fibres"
 stageName scalableFeedbackClassificationStage = "scale feedback classification"
+stageName teacherDesignedHumourFrameworkStage =
+  "construct teacher-designed seven-consideration humour framework"
 stageName ecologicalContextRestorationStage = "restore person-place ecology"
 stageName epistemicAgencyRedistributionStage = "redistribute epistemic agency"
 stageName studentIdentifiedSupportStage = "route student-identified support candidates"
@@ -61,6 +65,7 @@ data CrossPaperRelationKind : Set where
   suppliesCandidateHandles : CrossPaperRelationKind
   addsObserverFibre : CrossPaperRelationKind
   suppliesGovernanceGate : CrossPaperRelationKind
+  exposesProjectionBoundary : CrossPaperRelationKind
   proposesEmpiricalFollowUp : CrossPaperRelationKind
 
 record CrossPaperRelation : Set where
@@ -88,6 +93,30 @@ aiToVoiceRelation =
     crossPaperInference
     "The later voice/agency critique can govern the earlier feedback-classification pipeline by requiring student participation beyond passive data provision."
     "The relation is a corpus synthesis; it does not imply that the 2024 paper was invalid or that the 2026 paper empirically tests the classifier."
+    true refl
+
+humourToVoiceRelation : CrossPaperRelation
+humourToVoiceRelation =
+  mkCrossPaperRelation
+    "teacher-designed humour framework to constitutive epistemic agency"
+    Sources.humourFrameworkPaper
+    Sources.voiceAgencyPaper
+    correctsExtractiveRisk
+    crossPaperInference
+    "The seven humour considerations are preserved as a useful teacher-side pedagogical projection while the later Brown/Kimber distinction asks which inquiry decisions students may shape before they are reduced to audience or feedback roles."
+    "The later paper does not invalidate the humour framework or empirically test it; the governance relation is a DASHI cross-paper synthesis."
+    true refl
+
+humourToEcologyRelation : CrossPaperRelation
+humourToEcologyRelation =
+  mkCrossPaperRelation
+    "audience/context descriptor to situated person-place ecology"
+    Sources.humourFrameworkPaper
+    Sources.ecologyOfDataPaper
+    restoresEcologicalContext
+    crossPaperInference
+    "Audience/context can be recharted from a flat demographic descriptor into a relational person-place surface carrying teacher, peer, institutional, life-context and intersectional relations."
+    "The ecology paper does not claim a humour-specific causal model, and omitted context cannot be reconstructed from feedback alone."
     true refl
 
 aiToEcologyRelation : CrossPaperRelation
@@ -153,6 +182,8 @@ advocacyToLensRelation =
 canonicalCrossPaperRelations : List CrossPaperRelation
 canonicalCrossPaperRelations =
   aiToVoiceRelation
+  ∷ humourToVoiceRelation
+  ∷ humourToEcologyRelation
   ∷ aiToEcologyRelation
   ∷ aiToSupportRelation
   ∷ voiceToSupportRelation
@@ -194,4 +225,4 @@ canonicalCrossPaperDialecticalDevelopment =
     true refl
     true refl
     true refl
-    "The corpus is represented as a developmental braid: engagement vocabulary, scalable classification, ecological restoration, epistemic participation, student-identified support, multi-observer allyship, co-designed enactment and evidence-return recharting. This ordering is a DASHI cross-paper synthesis and remains open to empirical testing."
+    "The corpus is represented as a developmental braid: engagement vocabulary, scalable classification, a teacher-designed humour framework, ecological restoration, epistemic participation, student-identified support, multi-observer allyship, co-designed enactment and evidence-return recharting. The humour framework is sublated rather than erased: its seven practical considerations remain useful while later papers expose the governance, observer and contextual distinctions suppressed by a teacher-side projection. This ordering is a DASHI cross-paper synthesis and remains open to empirical testing."
