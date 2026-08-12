@@ -17,6 +17,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Empty using (⊥)
 open import Data.Nat.Base using (_+_; _≤_; z≤n; s≤s)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 import DASHI.Cognition.PNF.ConstraintPhaseFrustrationExact as Constraint
 import DASHI.Physics.Closure.SSPPrimeLane369DepthWheelCantorBridge as Wheel
@@ -65,58 +66,36 @@ phaseEqTrueImpliesEqual Wheel.phase-2 Wheel.phase-2 refl = refl
 
 triangleUnsatisfiable :
   (assignment : TriangleAssignment) → TriangleSatisfied assignment → ⊥
-triangleUnsatisfiable assignment satisfied
-  with phaseA assignment | phaseB assignment | phaseC assignment
-... | Wheel.phase-0 | Wheel.phase-0 | Wheel.phase-0 =
-  noPhaseIsItsOwnNext Wheel.phase-0
-    (phaseEqTrueImpliesEqual Wheel.phase-1 Wheel.phase-0 (caNext satisfied))
-... | Wheel.phase-0 | Wheel.phase-0 | Wheel.phase-1 =
-  phaseEqTrueImpliesEqual Wheel.phase-0 Wheel.phase-1 (bcSame satisfied) |> impossible01
-... | Wheel.phase-0 | Wheel.phase-0 | Wheel.phase-2 =
-  phaseEqTrueImpliesEqual Wheel.phase-0 Wheel.phase-2 (bcSame satisfied) |> impossible02
-... | Wheel.phase-0 | Wheel.phase-1 | c =
-  phaseEqTrueImpliesEqual Wheel.phase-0 Wheel.phase-1 (abSame satisfied) |> impossible01
-... | Wheel.phase-0 | Wheel.phase-2 | c =
-  phaseEqTrueImpliesEqual Wheel.phase-0 Wheel.phase-2 (abSame satisfied) |> impossible02
-... | Wheel.phase-1 | Wheel.phase-0 | c =
-  phaseEqTrueImpliesEqual Wheel.phase-1 Wheel.phase-0 (abSame satisfied) |> impossible10
-... | Wheel.phase-1 | Wheel.phase-1 | Wheel.phase-0 =
-  phaseEqTrueImpliesEqual Wheel.phase-1 Wheel.phase-0 (bcSame satisfied) |> impossible10
-... | Wheel.phase-1 | Wheel.phase-1 | Wheel.phase-1 =
-  noPhaseIsItsOwnNext Wheel.phase-1
-    (phaseEqTrueImpliesEqual Wheel.phase-2 Wheel.phase-1 (caNext satisfied))
-... | Wheel.phase-1 | Wheel.phase-1 | Wheel.phase-2 =
-  phaseEqTrueImpliesEqual Wheel.phase-1 Wheel.phase-2 (bcSame satisfied) |> impossible12
-... | Wheel.phase-1 | Wheel.phase-2 | c =
-  phaseEqTrueImpliesEqual Wheel.phase-1 Wheel.phase-2 (abSame satisfied) |> impossible12
-... | Wheel.phase-2 | Wheel.phase-0 | c =
-  phaseEqTrueImpliesEqual Wheel.phase-2 Wheel.phase-0 (abSame satisfied) |> impossible20
-... | Wheel.phase-2 | Wheel.phase-1 | c =
-  phaseEqTrueImpliesEqual Wheel.phase-2 Wheel.phase-1 (abSame satisfied) |> impossible21
-... | Wheel.phase-2 | Wheel.phase-2 | Wheel.phase-0 =
-  phaseEqTrueImpliesEqual Wheel.phase-2 Wheel.phase-0 (bcSame satisfied) |> impossible20
-... | Wheel.phase-2 | Wheel.phase-2 | Wheel.phase-1 =
-  phaseEqTrueImpliesEqual Wheel.phase-2 Wheel.phase-1 (bcSame satisfied) |> impossible21
-... | Wheel.phase-2 | Wheel.phase-2 | Wheel.phase-2 =
-  noPhaseIsItsOwnNext Wheel.phase-2
-    (phaseEqTrueImpliesEqual Wheel.phase-0 Wheel.phase-2 (caNext satisfied))
+triangleUnsatisfiable assignment satisfied =
+  noPhaseIsItsOwnNext
+    (phaseA assignment)
+    nextAEqualsA
   where
-    infixl 0 _|>_
-    _|>_ : ∀ {A B : Set} → A → (A → B) → B
-    value |> f = f value
+    aEqualsB : phaseA assignment ≡ phaseB assignment
+    aEqualsB =
+      phaseEqTrueImpliesEqual
+        (phaseA assignment) (phaseB assignment) (abSame satisfied)
 
-    impossible01 : Wheel.phase-0 ≡ Wheel.phase-1 → ⊥
-    impossible01 ()
-    impossible02 : Wheel.phase-0 ≡ Wheel.phase-2 → ⊥
-    impossible02 ()
-    impossible10 : Wheel.phase-1 ≡ Wheel.phase-0 → ⊥
-    impossible10 ()
-    impossible12 : Wheel.phase-1 ≡ Wheel.phase-2 → ⊥
-    impossible12 ()
-    impossible20 : Wheel.phase-2 ≡ Wheel.phase-0 → ⊥
-    impossible20 ()
-    impossible21 : Wheel.phase-2 ≡ Wheel.phase-1 → ⊥
-    impossible21 ()
+    bEqualsC : phaseB assignment ≡ phaseC assignment
+    bEqualsC =
+      phaseEqTrueImpliesEqual
+        (phaseB assignment) (phaseC assignment) (bcSame satisfied)
+
+    aEqualsC : phaseA assignment ≡ phaseC assignment
+    aEqualsC = trans aEqualsB bEqualsC
+
+    nextCEqualsA :
+      Wheel.nextDepthWheelPhase (phaseC assignment) ≡ phaseA assignment
+    nextCEqualsA =
+      phaseEqTrueImpliesEqual
+        (Wheel.nextDepthWheelPhase (phaseC assignment))
+        (phaseA assignment)
+        (caNext satisfied)
+
+    nextAEqualsA :
+      Wheel.nextDepthWheelPhase (phaseA assignment) ≡ phaseA assignment
+    nextAEqualsA =
+      trans (cong Wheel.nextDepthWheelPhase aEqualsC) nextCEqualsA
 
 triangleFrustration : TriangleAssignment → Nat
 triangleFrustration assignment =
