@@ -61,7 +61,8 @@ data SummableDecayBudget :
 
   prependBudget :
     ∀ {fine coarse : ℚ}
-      {remainder : ℚ} {exact}
+      {remainder : ℚ}
+      {exact : fine ≡ coarse + remainder}
       {tail : Telescope.ExactCovarianceChain coarse}
       {decay tailAmplitude localAmplitude} →
     SummableDecayBudget tail decay tailAmplitude →
