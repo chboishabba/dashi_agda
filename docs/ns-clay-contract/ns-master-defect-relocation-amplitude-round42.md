@@ -18,44 +18,97 @@ W(a,b) = a^2 b^4,
 
 because the two sides have different amplitude degree.
 
-Round 42 now factors the *actual* monomial in the only two natural quadratic-energy ways:
+Round 42 now factors the *actual* monomial in the only two natural quadratic ways:
 
 ```text
 a^2 b^4 = a^2 (b^2 b^2),
 a^2 b^4 = b^2 (a^2 b^2).
 ```
 
-`HHGoodAmplitudeAllocation` lets the physical proof choose the leg that is genuinely controlled by the data energy `E0`.  It then proves, samplewise and after the real kernel weights are summed,
+`HHGoodAmplitudeAllocation` lets the physical proof choose a quadratic leg `E_quad`.  It proves, samplewise and after the actual kernel weights are summed,
 
 ```text
-weightedLocalMass <= E0 * weightedQuarticCore.
+weightedLocalMass <= E_quad * weightedQuarticCore.
 ```
 
-A single remaining physical estimate
+A second physical estimate
 
 ```text
 weightedQuarticCore <= integralCritical * dissipation
 ```
 
-therefore yields the required
+therefore yields
 
 ```text
-weightedLocalMass <= E0 * integralCritical * dissipation.
+weightedLocalMass <= E_quad * integralCritical * dissipation.
 ```
 
-`periodizedHHGoodOwnerFromLiteralAmplitudeAllocation` feeds this result directly into the Round-41 periodized Young owner.  Thus the HH-good data-energy seam is no longer one opaque degree-six inequality: it is two same-object physical questions.
+`periodizedHHGoodOwnerFromLiteralAmplitudeAllocation` feeds this result directly into the Round-41 periodized Young owner.  Thus the HH-good amplitude seam is no longer one opaque degree-six inequality: it is two same-object physical questions.
 
-1. Which amplitude square is bounded by the actual data energy?
+1. Which vorticity-amplitude square is controlled by a compatible quadratic resource?
 2. Does the corresponding residual quartic core obey the actual critical-times-dissipation bound?
+
+### Important correction: bare kinetic energy `E0` is not that resource
+
+The vorticity amplitudes `a,b` are not velocity amplitudes.  The repository's exact Biot--Savart theorem gives on every transverse nonzero Fourier mode
+
+```text
+|u_k|^2 = |k|^-2 |omega_k|^2,
+```
+
+and Round 42 now rearranges this exactly to
+
+```text
+|omega_k|^2 = |k|^2 |u_k|^2.
+```
+
+Therefore a modewise kinetic-energy bound
+
+```text
+|u_k|^2 <= E0
+```
+
+only gives
+
+```text
+|omega_k|^2 <= |k|^2 E0,
+```
+
+not the shell-independent bound `|omega_k|^2 <= E0` tentatively suggested in Round 41.
+
+This is not merely a scaling warning.  The exact rational example
+
+```text
+k=(2,0,0),
+omega=(0,0,-2),
+u=B_k omega=(0,1,0)
+```
+
+has
+
+```text
+|u|^2=1,
+|omega|^2=4.
+```
+
+`NSTriadKNHHGoodKineticEnergyAllocationNoGoRound42Exact` formally refutes the bare kinetic-energy allocation.
+
+So the viable HH-good repair must now do one of the following:
+
+- use a genuinely controlled quadratic vorticity/enstrophy-type resource with the right uniformity;
+- recover an exact `|k|^-2` (or shell-equivalent) compensation in the residual quartic/kernel factor;
+- or obtain an equivalent time-localized gain.
+
+The amplitude-allocation algebra remains valid, but calling its factor the conserved kinetic `E0` without this compensation is false.
 
 The annular strain-kernel/sample identification and smooth torus correction remain separate physical seams.
 
 ## 2. Keep the HH-good Young split until the reserve stage
 
-The Round-41 owner has
+The Round-41 owner has the abstract form
 
 ```text
-P <= epsilon D + (C delta E0)/(4 epsilon) X.
+P <= epsilon D + (C delta E_quad)/(4 epsilon) X.
 ```
 
 Round 42 proves directly from the exact `PositiveThreshold` inverse law that
@@ -211,7 +264,7 @@ The highest-information order is now:
 
 1. **HH-bad symbol audit** — prove one genuine derivative factor after all exact cancellations, or falsify the inverse-shell route.
 2. **Com support-overlap theorem** — prove the literal `U_q^* U_r` support/product bound and construct the Com owner.
-3. **HH-good physical factorization** — identify annular strain samples, select the data-energy amplitude leg, prove the residual quartic `<= X D`, and close the smooth torus correction.
+3. **HH-good physical factorization** — identify annular strain samples, recover a *compatible* quadratic resource or inverse-shell compensation for one vorticity amplitude square, prove the residual quartic bound, and close the smooth torus correction.
 4. Instantiate the six lower-risk owners.
 5. Run the exact threshold/Young-aware nine-owner primal/dual reserve test.
 
