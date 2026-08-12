@@ -71,8 +71,7 @@ shellViscousFactorNonnegative effectiveViscosity shell viscosityNN =
       0ℚ ≤ Sharp.dyadicScale shell * Sharp.dyadicScale shell
     scaleSquareNN =
       let instance
-        leftNN = nonNegative scaleNN
-        rightNN = nonNegative scaleNN
+        scaleNNI = nonNegative scaleNN
         squareNN =
           ℚP.nonNeg*nonNeg⇒nonNeg
             (Sharp.dyadicScale shell) (Sharp.dyadicScale shell)
