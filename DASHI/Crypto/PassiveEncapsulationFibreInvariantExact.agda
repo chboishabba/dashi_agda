@@ -16,8 +16,9 @@ module DASHI.Crypto.PassiveEncapsulationFibreInvariantExact where
 -- 2025. DOI: 10.6028/NIST.SP.800-227.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_)
-open import Relation.Binary.PropositionalEquality using (cong)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List; []; _∷_)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂)
 
 record PublicOnlyEncapsulation : Set₁ where
   constructor publicOnlyEncapsulation
@@ -38,12 +39,6 @@ samePublicKeySameHonestCiphertext :
 samePublicKeySameHonestCiphertext {system} samePublic coins =
   cong (λ public → encapsulateCiphertext system public coins) samePublic
 
-------------------------------------------------------------------------
--- A transcript of honest encapsulations is likewise public-fibre invariant.
-------------------------------------------------------------------------
-
-open import Agda.Builtin.List using (List; []; _∷_)
-
 honestTranscript :
   (system : PublicOnlyEncapsulation) →
   PublicKey system →
@@ -61,11 +56,8 @@ samePublicKeySameHonestTranscript :
   ∀ coins →
   honestTranscript system (derivePublic system left) coins
   ≡ honestTranscript system (derivePublic system right) coins
-samePublicKeySameHonestTranscript {system} samePublic [] =
-  refl
+samePublicKeySameHonestTranscript {system} samePublic [] = refl
 samePublicKeySameHonestTranscript {system} samePublic (coin ∷ coins) =
   cong₂ _∷_
     (samePublicKeySameHonestCiphertext samePublic coin)
     (samePublicKeySameHonestTranscript samePublic coins)
-  where
-    open import Relation.Binary.PropositionalEquality using (cong₂)
