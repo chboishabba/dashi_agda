@@ -30,9 +30,10 @@ module DASHI.Physics.YangMills.BalabanCMP109FederbushNormalizedResidualReopening
 --
 --      ||x||_1 <= (4/3)||y||_1,
 --
--- and the homogeneous kernel is pointwise trivial on the explicit three-Lie-
--- coordinate selector.  This is a determinant-free inverse theorem; only the
--- physical local R_j mass producer remains to be connected to J_j T_j-I.
+-- and the homogeneous kernel is pointwise trivial on the repository's literal
+-- three-coordinate SU(2) selector.  This is a determinant-free inverse
+-- theorem; only the physical local R_j mass producer remains to be connected
+-- to J_j T_j-I.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -41,13 +42,13 @@ open import Data.List.Base using (length)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
-open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanFiniteFibreAverageExact as Fibre
 import DASHI.Physics.YangMills.BalabanFiniteNormalizedKernelSchurExact as Normalized
 import DASHI.Physics.YangMills.BalabanFiniteRectangularSchurSquaredExact as RectSchur
 import DASHI.Physics.YangMills.BalabanFiniteMatrixL1ContractionExact as L1
+import DASHI.Physics.YangMills.BalabanFiniteStrictContractionReopeningExact as Reopen
 import DASHI.Physics.YangMills.BalabanCMP109FederbushNormalizedJacobianExact as Jacobian
 import DASHI.Physics.YangMills.BalabanCMP109FederbushQuarterReopeningExact as Quarter
 import DASHI.Physics.YangMills.BalabanPhysicalSU2FiniteCoordinatesExact as Physical
@@ -134,7 +135,8 @@ normalizedFederbushEquation :
   ∀ {Index} → FederbushQuarterResidualData Index →
   Jacobian.Lie3Vector → Jacobian.Lie3Vector → Set
 normalizedFederbushEquation dataSet solution source =
-  ∀ row → identityPlusNormalizedResidual dataSet solution row ≡ source row
+  Reopen.IdentityPlusResidualEquation
+    (normalizedResidualAction dataSet) solution source
 
 normalizedFederbushSolutionL1FourThirds :
   ∀ {Index} (dataSet : FederbushQuarterResidualData Index)
@@ -149,39 +151,16 @@ normalizedFederbushSolutionL1FourThirds dataSet solution source equation =
     solution source equation
     (normalizedResidualActionL1Quarter dataSet solution)
 
-record Lie3Selector : Set₁ where
-  field
-    selector : Basis.FiniteSelector Physical.LieCoordinate3
-    selectorElementsExact :
-      Basis.elements selector ≡ Physical.lieCoordinates3
-
-open Lie3Selector public
-
 normalizedFederbushHomogeneousKernelTrivial :
-  ∀ {Index} (dataSet : FederbushQuarterResidualData Index)
-    (coordinates : Lie3Selector) solution →
-  normalizedFederbushEquation dataSet solution (λ _ → 0ℚ) →
+  ∀ {Index} (dataSet : FederbushQuarterResidualData Index) solution →
+  normalizedFederbushEquation dataSet solution Reopen.zeroVector →
   ∀ coordinate → solution coordinate ≡ 0ℚ
-normalizedFederbushHomogeneousKernelTrivial dataSet coordinates solution equation =
-  let
-    selectedEquation :
-      Quarter.Reopen.IdentityPlusResidualEquation
-        (normalizedResidualAction dataSet) solution Quarter.Reopen.zeroVector
-    selectedEquation = equation
-
-    selectedContraction :
-      L1.vectorL1 (Basis.elements (selector coordinates))
-        (normalizedResidualAction dataSet solution)
-      ≤ Quarter.oneQuarter
-        * L1.vectorL1 (Basis.elements (selector coordinates)) solution
-    selectedContraction
-      rewrite selectorElementsExact coordinates =
-      normalizedResidualActionL1Quarter dataSet solution
-  in
+normalizedFederbushHomogeneousKernelTrivial dataSet solution equation =
   Quarter.oneQuarterHomogeneousPointwiseZero
-    (selector coordinates)
+    Basis.lieCoordinateFiniteSelector
     (normalizedResidualAction dataSet)
-    solution selectedEquation selectedContraction
+    solution equation
+    (normalizedResidualActionL1Quarter dataSet solution)
 
 cmp109FederbushNormalizedResidualColumnMassLevel : ProofLevel
 cmp109FederbushNormalizedResidualColumnMassLevel = machineChecked
