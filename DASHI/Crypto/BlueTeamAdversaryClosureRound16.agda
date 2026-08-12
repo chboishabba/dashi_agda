@@ -24,6 +24,7 @@ import DASHI.Crypto.FiniteSecurityGameBoundaryExact
 import DASHI.Crypto.FiniteMLWEVectorLabExact
 import DASHI.Crypto.FiniteMLWEGameRegressionExact
 import DASHI.Crypto.MLKEMFIPS203SourceExact
+import DASHI.Crypto.MLKEMFIPS203SearchGeometryExact
 
 -- Existing theorem-bearing search/observation machinery reused rather than
 -- duplicated.
