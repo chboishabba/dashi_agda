@@ -1,15 +1,11 @@
 module DASHI.Core.ReopenableProjectionComposition where
 
-open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Product using (_×_; _,_)
+open import Agda.Builtin.Equality using (_≡_)
+open import Data.Product using (_×_; _,_; proj₁; proj₂)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 ------------------------------------------------------------------------
 -- Exact composition law for projection + receipt + reopening.
---
--- This is the small algebraic core behind composing provenance-bearing
--- quotients.  It deliberately contains no semantic authority: a receipt is
--- only enough information to reconstruct the fine state.
 ------------------------------------------------------------------------
 
 record ExactReopenableProjection (X Y : Set) : Set₁ where
@@ -23,20 +19,6 @@ record ExactReopenableProjection (X Y : Set) : Set₁ where
 
 open ExactReopenableProjection public
 
-record ComposedReceipt
-    {X Y Z : Set}
-    (first : ExactReopenableProjection X Y)
-    (second : ExactReopenableProjection Y Z)
-    (x : X) : Set where
-  constructor composedReceipt
-  field
-    firstReceipt : Receipt first
-    secondReceipt : Receipt second
-
-------------------------------------------------------------------------
--- A uniform receipt type is the product of both residual channels.
-------------------------------------------------------------------------
-
 composeExactReopenableProjection :
   ∀ {X Y Z} →
   ExactReopenableProjection X Y →
@@ -49,8 +31,8 @@ composeExactReopenableProjection first second =
     (λ x → receipt first x , receipt second (project first x))
     (λ z receipts →
       reopen first
-        (reopen second z (Data.Product.proj₂ receipts))
-        (Data.Product.proj₁ receipts))
+        (reopen second z (proj₂ receipts))
+        (proj₁ receipts))
     λ x →
       trans
         (cong
@@ -63,14 +45,15 @@ composeExactReopenableProjection first second =
 --
 --   delta_21(x) = (delta_1(x), delta_2(pi_1 x)).
 --
--- No theorem here claims this pair is *minimal*.  Minimal sufficient residual
--- is a separate optimisation/order problem.
+-- No theorem here claims this pair is minimal.  Minimal sufficient residual
+-- is a separate optimisation/order problem, represented without pretending a
+-- global minimiser exists.
 ------------------------------------------------------------------------
 
-record ResidualSufficiencyOrder (Receipt : Set) : Set₁ where
+record ResidualSufficiencyOrder (R : Set) : Set₁ where
   field
-    _≤receipt_ : Receipt → Receipt → Set
-    reflexive : (r : Receipt) → r ≤receipt r
+    _≤receipt_ : R → R → Set
+    reflexive : (r : R) → _≤receipt_ r r
 
 open ResidualSufficiencyOrder public
 
@@ -85,6 +68,6 @@ record MinimalSufficientResidual
     minimal :
       (other : Receipt projection) →
       Sufficient other →
-      candidate ≤receipt other
+      ResidualSufficiencyOrder._≤receipt_ order candidate other
 
 open MinimalSufficientResidual public
