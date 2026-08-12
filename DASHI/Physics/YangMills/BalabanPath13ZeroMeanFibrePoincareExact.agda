@@ -25,6 +25,7 @@ module DASHI.Physics.YangMills.BalabanPath13ZeroMeanFibrePoincareExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
 open import Data.Integer.Base using (+_)
 open import Data.Rational using (ℚ; 0ℚ; _*_; _≤_; _/_; Positive)
 import Data.Rational.Properties as ℚP
@@ -39,7 +40,7 @@ open import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact
 import DASHI.Physics.YangMills.BalabanPath13GeneratedLDLCertificate as Generated
 import DASHI.Physics.YangMills.BalabanPath13PhysicalFibreMatchExact as Physical13
 
-side13 : Agda.Builtin.Nat.Nat
+side13 : Nat
 side13 = 13
 
 oneHundredSixtyNine : ℚ
