@@ -8,11 +8,14 @@ import DASHI.Core.AdmissibleReachability
 import DASHI.Core.DynamicalQuotientSafety
 import DASHI.Core.ProvenanceQuotientDynamics
 import DASHI.Core.PossibilityAccessibilitySupport
+import DASHI.Core.ConsumerIndexedRelevanceMeasure
+import DASHI.Core.ConsumerProjectionSufficiency
 import DASHI.Core.FinePhaseObservation
 import DASHI.Core.RelationalHorizon369
 import DASHI.Core.StructuralSupportEdge
 import DASHI.Core.ClassificationEdge
 import DASHI.Foundations.DepthWheelGradedDynamics
+import DASHI.Foundations.CantorConsumerRelevanceReference
 import DASHI.Physics.Closure.SSP369PolarResidualQuotient
 import DASHI.Cognition.PNF.BoundedExecutionAdapters
 import DASHI.Cognition.PNF.SupportClassificationIdentitySpine
@@ -23,9 +26,11 @@ import DASHI.Cognition.PNF.DepthWheelMemoryGradedAdapter
 import DASHI.Cognition.PNF.WikidataRepairProposal
 import DASHI.Cognition.PNF.TerminalisationDefectRegression
 import DASHI.Cognition.PNF.PNFResidualTerminalisationRegression
+import DASHI.Cognition.PNF.RelevanceMassDynamicSafetyRegression
 import DASHI.Cognition.PNF.SemanticSamplingDynamicSafety
 
 open import DASHI.Cognition.PNF.ComplexityArithmetic public
+open import DASHI.Cognition.PNF.RuntimeThroughputConstitution public
 open import DASHI.Cognition.PNF.NumericAuthority public
 open import DASHI.Cognition.PNF.SpacyNumericProjection public
 open import DASHI.Cognition.PNF.NumericOccurrenceFibre public
