@@ -32,7 +32,7 @@ module DASHI.Physics.YangMills.BalabanCMP109FederbushCentreTransportColumnMassEx
 --
 --   N((T-T') e_j) <= 8 delta^2.
 --
--- Each individual matrix entry therefore has square <= 8 delta^2 <
+-- Each individual matrix entry therefore has square <= 8 delta^2 <=
 -- (3 delta)^2, so its absolute value is <= 3 delta.  There are exactly three
 -- Lie rows, hence every absolute column mass satisfies
 --
@@ -209,6 +209,14 @@ transportBasisDifferenceNormSq u v u' v' delta chart column =
             (Norm.normSq (Four._-q_ v v')))
           scaled)))
 
+eightBelowNine : (+ 8 / 1 : ℚ) ≤ + 9 / 1
+eightBelowNine =
+  Norm.nonnegativeDifferenceImpliesBelow
+    (subst
+      (λ selected → 0ℚ ≤ selected)
+      (ℚRing.solve [])
+      (ℚP.nonNegative⁻¹ (+ 1 / 1)))
+
 transportMatrixEntryAbsoluteBound :
   ∀ u v u' v' delta →
   CentreTransportChartPair u v u' v' delta →
@@ -238,30 +246,50 @@ transportMatrixEntryAbsoluteBound u v u' v' delta chart row column =
       (imaginaryCoordinateSquareBelowNorm row qDifference)
       (transportBasisDifferenceNormSq u v u' v' delta chart column)
 
+    scaledEightNine :
+      (delta * delta) * (+ 8 / 1)
+      ≤ (delta * delta) * (+ 9 / 1)
+    scaledEightNine = Norm.scaleNonnegative (delta * delta)
+      (FiniteL2.squareNonnegative delta) eightBelowNine
+
+    eightDeltaBelowNineDelta :
+      (+ 8 / 1) * (delta * delta)
+      ≤ (+ 9 / 1) * (delta * delta)
+    eightDeltaBelowNineDelta =
+      subst
+        (λ lower → lower ≤ (+ 9 / 1) * (delta * delta))
+        (ℚP.*-comm (delta * delta) (+ 8 / 1))
+        (subst
+          (λ upper → (delta * delta) * (+ 8 / 1) ≤ upper)
+          (ℚP.*-comm (delta * delta) (+ 9 / 1))
+          scaledEightNine)
+
     belowNine :
       Matrix.imaginaryCoordinate row qDifference
         * Matrix.imaginaryCoordinate row qDifference
       ≤ (three * delta) * (three * delta)
     belowNine = ℚP.≤-trans coordinateSquare
-      (Norm.scaleNonnegative (delta * delta)
-        (FiniteL2.squareNonnegative delta)
-        (ℚP.nonNegative⁻¹ (+ 8 / 9)))
+      (subst
+        (λ upper → (+ 8 / 1) * (delta * delta) ≤ upper)
+        (ℚRing.solve-∀ delta)
+        eightDeltaBelowNineDelta)
+
+    instance
+      deltaPositiveInstance : Positive delta
+      deltaPositiveInstance = ℚ.positive (deltaPositive chart)
+
+      threeDeltaPositiveInstance : Positive (three * delta)
+      threeDeltaPositiveInstance = ℚP.pos*pos⇒pos three delta
 
     threeDeltaPositive : 0ℚ < three * delta
-    threeDeltaPositive = ℚP.pos*pos⇒pos three (deltaPositive chart)
+    threeDeltaPositive = ℚP.positive⁻¹ (three * delta)
   in
   subst
     (λ selected → ∣ selected ∣ ≤ three * delta)
     (sym entryExact)
     (squareBoundImpliesAbsoluteBound
       (Matrix.imaginaryCoordinate row qDifference)
-      (three * delta) threeDeltaPositive
-      (subst
-        (λ upper →
-          Matrix.imaginaryCoordinate row qDifference
-            * Matrix.imaginaryCoordinate row qDifference ≤ upper)
-        (ℚRing.solve-∀ delta)
-        belowNine))
+      (three * delta) threeDeltaPositive belowNine)
 
 transportMatrixColumnMassBound :
   ∀ u v u' v' delta →
