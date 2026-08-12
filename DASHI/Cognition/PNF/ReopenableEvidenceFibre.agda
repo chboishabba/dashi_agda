@@ -6,40 +6,24 @@ open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.FibreRestrictionCore as Fibre
+import DASHI.Core.ProvenanceBearingQuotient as Quotient
 import DASHI.Core.TypedDependencyCore as Dependency
 import DASHI.Reasoning.AttractorAlignedBranchSelection as Selection
 import DASHI.Cognition.PNF.BoundedExecutionCarrier as Bounded
 
 ------------------------------------------------------------------------
--- Reopenable extension of the repository's existing FibreRestrictionCore.
+-- PNF compatibility name for the repository-wide canonical quotient core.
 --
--- FibreRestrictionCore already states the crucial epistemic boundary:
--- evidence may restrict a projected fibre without recovering the hidden
--- carrier and without promoting truth.  This extension adds exactly the datum
--- needed by ITIR's provenance-bearing quotient reading: a receipt sufficient
--- to reopen the *same* fine carrier when the application supplies one.
+-- There is deliberately no second reopenable-fibre record here.  The PNF
+-- layer instantiates the canonical Core.ProvenanceBearingQuotient directly.
 ------------------------------------------------------------------------
 
-record ReopenableFibreExtension
-    (core : Fibre.FibreRestrictionCore) : Set₁ where
-  constructor reopenableFibreExtension
-  field
-    Receipt : Set
-    receipt : Fibre.Carrier core → Receipt
-    reopen : Fibre.Surface core → Receipt → Fibre.Carrier core
-    reopenExact :
-      (x : Fibre.Carrier core) →
-      reopen (Fibre.project core x) (receipt x) ≡ x
-
-open ReopenableFibreExtension public
+ReopenableFibreExtension :
+  (core : Fibre.FibreRestrictionCore) → Set₁
+ReopenableFibreExtension = Quotient.ProvenanceBearingQuotient
 
 ------------------------------------------------------------------------
 -- Three propositions that must never be collapsed into one status field.
---
--- Suppression is evidential/attention weighting; execution retention is an
--- implementation frontier; semantic refutation requires an application-supplied
--- evidence-indexed proof.  No constructor promotes either of the first two into
--- the third.
 ------------------------------------------------------------------------
 
 data SuppressionState : Set where
@@ -78,9 +62,7 @@ open SeparatedCandidateState public
 
 ------------------------------------------------------------------------
 -- Soft evidence reweights an arbitrary candidate fibre without changing its
--- semantic support.  The Weight carrier is application-supplied: counts,
--- rationals, constructive reals, log weights, or another exact representation
--- may be used.  Reweighting is therefore strictly weaker than refutation.
+-- semantic support.  Weight is application-supplied.
 ------------------------------------------------------------------------
 
 record EvidenceReweighting (Candidate Weight : Set) : Set where
@@ -97,10 +79,6 @@ data ReweightingRefutationPermission : Set where
 reweightingAloneCannotRefute : ReweightingRefutationPermission → ⊥
 reweightingAloneCannotRefute ()
 
--- Balanced/signed phase is evidence geometry, not refutation authority.  Reuse
--- the existing interaction directions rather than creating another ternary
--- alphabet: reinforcing / independent / interfering are the exact qualitative
--- signs already derived from the repository's wave-backed interaction layer.
 data PhaseRefutationPermission : Selection.InteractionDirection → Set where
 
 reinforcingPhaseCannotRefute :
@@ -116,14 +94,10 @@ interferingPhaseCannotRefute :
 interferingPhaseCannotRefute ()
 
 ------------------------------------------------------------------------
--- Corrective reachability.
+-- Corrective reachability over the existing proof-bearing action system.
 --
--- TypedDependencyCore already supplies the generic state/action carrier with
--- proof-bearing precondition, postcondition and dependency receipt.  We reuse
--- that exact carrier here and add only the finite reflexive/transitive closure
--- needed to witness reopening.  A suppressed or execution-pruned candidate may
--- therefore remain semantically live and later become accessible through a
--- sequence of admissible evidence actions.
+-- This compatibility path remains here for current PNF consumers; the generic
+-- action-trace / quotient-safety theorem lives in Core.DynamicalQuotientSafety.
 ------------------------------------------------------------------------
 
 data CorrectivePath
@@ -150,7 +124,7 @@ record ReopeningWitness
 open ReopeningWitness public
 
 ------------------------------------------------------------------------
--- Bounded execution is kept subordinate to semantic possibility.
+-- Bounded execution is subordinate to semantic possibility.
 ------------------------------------------------------------------------
 
 record ReopenableBoundedFrontier (Candidate : Set) : Set where
@@ -172,15 +146,17 @@ record ReopenableEvidenceBoundary : Set where
       ReweightingRefutationPermission → ⊥
     executionOverflowIsNotSemanticAuthority :
       Bounded.OverflowSemanticPermission Bounded.executionEvidenceOnly → ⊥
+    projectionResidualIsNotErasure :
+      Quotient.ProjectionSemanticErasurePermission
+        Quotient.projectionReceiptOnly → ⊥
     suppressionAndRefutationAreDifferentTypes : Bool
     suppressionAndRefutationAreDifferentTypesIsTrue :
       suppressionAndRefutationAreDifferentTypes ≡ true
     semanticRefutationRequiresIndexedEvidence : Bool
     semanticRefutationRequiresIndexedEvidenceIsTrue :
       semanticRefutationRequiresIndexedEvidence ≡ true
-    correctiveReachabilityReusesTypedActionSystem : Bool
-    correctiveReachabilityReusesTypedActionSystemIsTrue :
-      correctiveReachabilityReusesTypedActionSystem ≡ true
+    canonicalQuotientCoreReused : Bool
+    canonicalQuotientCoreReusedIsTrue : canonicalQuotientCoreReused ≡ true
 
 open ReopenableEvidenceBoundary public
 
@@ -190,6 +166,7 @@ canonicalReopenableEvidenceBoundary =
     interferingPhaseCannotRefute
     reweightingAloneCannotRefute
     Bounded.executionOverflowHasNoSemanticPermission
+    Quotient.projectionReceiptCannotEraseSemantics
     true refl
     true refl
     true refl
