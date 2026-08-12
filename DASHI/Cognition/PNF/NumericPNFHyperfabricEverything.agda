@@ -1,13 +1,21 @@
 module DASHI.Cognition.PNF.NumericPNFHyperfabricEverything where
 
--- Generic theorem cores are imported qualified to avoid polluting the public
--- numeric-PNF namespace with competing field names.
+-- Generic/cross-cutting theorem modules stay qualified so common record field
+-- names do not pollute the public numeric-PNF namespace. Importing them here
+-- still places them on the aggregate validation/dependency surface.
 import DASHI.Core.ProvenanceBearingQuotient
 import DASHI.Core.AdmissibleReachability
 import DASHI.Core.DynamicalQuotientSafety
 import DASHI.Core.ProvenanceQuotientDynamics
 import DASHI.Core.PossibilityAccessibilitySupport
 import DASHI.Foundations.DepthWheelGradedDynamics
+import DASHI.Cognition.PNF.BoundedExecutionAdapters
+import DASHI.Cognition.PNF.SupportClassificationIdentitySpine
+import DASHI.Cognition.PNF.TypePressure
+import DASHI.Cognition.PNF.EvidenceDepthWheelOrthogonality
+import DASHI.Cognition.PNF.WikidataRepairProposal
+import DASHI.Cognition.PNF.TerminalisationDefectRegression
+import DASHI.Cognition.PNF.SemanticSamplingDynamicSafety
 
 open import DASHI.Cognition.PNF.ComplexityArithmetic public
 open import DASHI.Cognition.PNF.NumericAuthority public
@@ -35,23 +43,16 @@ open import DASHI.Cognition.PNF.BoundedProperNameEvidenceExecution public
 open import DASHI.Cognition.PNF.ProofRelevantFactorDerivations public
 open import DASHI.Cognition.PNF.BoundedFactorCompositionExecution public
 open import DASHI.Cognition.PNF.BoundedExecutionCarrier public
-open import DASHI.Cognition.PNF.BoundedExecutionAdapters public
 open import DASHI.Cognition.PNF.ParserArgumentSupportGluing public
-open import DASHI.Cognition.PNF.SupportClassificationIdentitySpine public
 open import DASHI.Cognition.PNF.ContextualRepresentationOrbit public
 open import DASHI.Cognition.PNF.IdentityProofUtility public
 open import DASHI.Cognition.PNF.EvidenceClassificationEdge public
-open import DASHI.Cognition.PNF.TypePressure public
 open import DASHI.Cognition.PNF.EvidenceHorizon369 public
-open import DASHI.Cognition.PNF.EvidenceDepthWheelOrthogonality public
 open import DASHI.Cognition.PNF.ReopenableEvidenceFibre public
 open import DASHI.Cognition.PNF.PNFEvidenceHyperformalism public
 open import DASHI.Cognition.PNF.TemporalRoleWorldAlignment public
-open import DASHI.Cognition.PNF.WikidataRepairProposal public
 open import DASHI.Cognition.PNF.DirectDemandLookup public
 open import DASHI.Cognition.PNF.SemanticSamplingLookupGeometry public
-open import DASHI.Cognition.PNF.TerminalisationDefectRegression public
-open import DASHI.Cognition.PNF.SemanticSamplingDynamicSafety public
 open import DASHI.Cognition.PNF.SetBasedDemandPlanning public
 open import DASHI.Cognition.PNF.NumericPNFCompilation public
 open import DASHI.Cognition.PNF.NumericPNFRegression public
