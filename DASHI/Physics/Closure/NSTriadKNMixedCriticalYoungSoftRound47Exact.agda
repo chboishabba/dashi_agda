@@ -31,16 +31,17 @@ module DASHI.Physics.Closure.NSTriadKNMixedCriticalYoungSoftRound47Exact where
 -- physical estimates instantiate this mixed endpoint.
 ------------------------------------------------------------------------
 
-open import Agda.Primitive using (Level)
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
 import Data.Integer.Base as Int
 open import Data.Rational.Base using
-  (ℚ; 0ℚ; _+_; _*_; _≤_; nonNegative)
+  (ℚ; 0ℚ; _/_; _+_; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚP
+open ℚP using (_≤?_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Nullary.Decidable.Core using (toWitness)
 
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
 import DASHI.Physics.Closure.NSTriadKNLuoBadCoherenceWeightedMarkovExact as Threshold
@@ -52,6 +53,9 @@ import DASHI.Physics.Closure.NSTriadKNHHGoodYoungSoftTaxRound45Exact as Soft
 quarter : ℚ
 quarter = Int.+ 1 / 4
 
+quarterNonnegative : 0ℚ ≤ quarter
+quarterNonnegative = toWitness {a? = 0ℚ ≤? quarter} _
+
 quarterYoungFromSplit :
   Threshold.PositiveThreshold → Young.QuarterYoungParameter
 quarterYoungFromSplit split = record
@@ -62,14 +66,11 @@ quarterYoungFromSplit split = record
   ; quarterInverseLaw = quarterInverseLaw
   }
   where
-  quarterNN : 0ℚ ≤ quarter
-  quarterNN = ℚP.<⇒≤ (ℚP.positive⁻¹ quarter)
-
   quarterInverseNN :
     0ℚ ≤ quarter * Threshold.thresholdInverse split
   quarterInverseNN =
     let instance
-      quarterNNI = nonNegative quarterNN
+      quarterNNI = nonNegative quarterNonnegative
       inverseNNI = nonNegative (Threshold.thresholdInverseNonnegative split)
       productNNI =
         ℚP.nonNeg*nonNeg⇒nonNeg
@@ -82,6 +83,8 @@ quarterYoungFromSplit split = record
       * (quarter * Threshold.thresholdInverse split) ≡ 1ℚ
   quarterInverseLaw
     rewrite Threshold.inverseMeaning split = solve []
+    where
+    open import Data.Rational.Base using (1ℚ)
 
 record MixedCriticalPreAbsorption
     (environment : Owner.TaxEnvironment)
