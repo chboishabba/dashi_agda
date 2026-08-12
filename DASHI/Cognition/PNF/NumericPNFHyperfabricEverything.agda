@@ -10,6 +10,8 @@ import DASHI.Core.ProvenanceQuotientDynamics
 import DASHI.Core.PossibilityAccessibilitySupport
 import DASHI.Core.FinePhaseObservation
 import DASHI.Core.RelationalHorizon369
+import DASHI.Core.StructuralSupportEdge
+import DASHI.Core.ClassificationEdge
 import DASHI.Foundations.DepthWheelGradedDynamics
 import DASHI.Physics.Closure.SSP369PolarResidualQuotient
 import DASHI.Cognition.PNF.BoundedExecutionAdapters
