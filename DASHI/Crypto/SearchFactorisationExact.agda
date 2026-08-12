@@ -2,10 +2,6 @@ module DASHI.Crypto.SearchFactorisationExact where
 
 ------------------------------------------------------------------------
 -- SEARCH FACTORISATION
---
--- A global verifier may factor into local predicates plus reconciliation, but
--- a simple additive search bound is justified only when reconciliation avoids
--- a Cartesian-product search.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -32,7 +28,6 @@ record FactorizedSearchProblem : Set₁ where
     globalFactorisation : ∀ h →
       Global h ↔
       (LocalL (ρL h) × (LocalR (ρR h) × Reconcile (ρL h) (ρR h)))
-
 open FactorizedSearchProblem public
 
 record LocalSolutions (problem : FactorizedSearchProblem) : Set₁ where
@@ -65,15 +60,14 @@ transport₂ :
   a ≡ a' → b ≡ b' → P a b → P a' b'
 transport₂ refl refl proof = proof
 
--- Main constructive theorem: local enumeration is enough only once we also
--- possess compatible local witnesses and an assembly map back to the hidden
--- carrier.
+-- Main constructive theorem: compatible local witnesses become a global witness
+-- only when an assembly map back to the hidden carrier is also supplied.
 reconciledLocalSolutionsGiveGlobal :
-  ∀ {problem : FactorizedSearchProblem} →
-  Assembly problem →
-  (solutions : ReconciledLocalSolutions problem) →
+  ∀ {problem : FactorizedSearchProblem}
+    (assemblyMap : Assembly problem)
+    (solutions : ReconciledLocalSolutions problem) →
   Global problem
-    (assemble _
+    (assemble assemblyMap
       (leftSolution (locals solutions))
       (rightSolution (locals solutions)))
 reconciledLocalSolutionsGiveGlobal {problem} assemblyMap solutions =
