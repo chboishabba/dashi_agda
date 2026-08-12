@@ -21,14 +21,9 @@ module DASHI.Physics.YangMills.BalabanCMP109FederbushNormalizedJacobianExact whe
 --
 -- Put the differentiated Federbush equation into the conditioning-normalized
 -- form required by the physical equation-(0.11) solve.  For a finite contour
--- family J and component matrices
+-- family J and component matrices K_j = J_j T_j, define
 --
---       K_j = J_j T_j,
---
--- define
---
---       Abar = w sum_j K_j,
---       w |J| = 1.
+--       Abar = w sum_j K_j,        w |J| = 1.
 --
 -- If every reference K_j is the identity, Abar is exactly the identity.  More
 -- generally, if K_j = I + R_j then
@@ -43,17 +38,19 @@ module DASHI.Physics.YangMills.BalabanCMP109FederbushNormalizedJacobianExact whe
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.List.Base using (length)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _-_)
+open import Data.Rational.Base as ℚ using (ℚ; 1ℚ; _+_; _*_; _-_)
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
+open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using
+  (_∈_; here; there)
 open import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact using
-  (natAsRational; sumRational; sumRationalCong; sumRationalScale)
+  (natAsRational; sumRational; sumRationalCong)
 open import DASHI.Physics.YangMills.BalabanFiniteFibreAverageExact using
   (sumRationalConstant)
 open import DASHI.Physics.YangMills.BalabanFiniteSumFubiniExact using
-  (sumRationalAdd; sumRationalSubtract)
+  (sumRationalAdd)
 import DASHI.Physics.YangMills.BalabanPhysicalSU2FiniteCoordinatesExact as Physical
 import DASHI.Physics.YangMills.BalabanPhysicalSU2RationalMatrixCoordinatesExact as Coordinates
 
@@ -172,6 +169,12 @@ matrixApply matrix vector row =
   sumRational Physical.lieCoordinates3
     (λ column → matrix row column * vector column)
 
+lieCoordinateComplete :
+  ∀ row → row ∈ Physical.lieCoordinates3
+lieCoordinateComplete Physical.coordinateX = here
+lieCoordinateComplete Physical.coordinateY = there here
+lieCoordinateComplete Physical.coordinateZ = there (there here)
+
 identity3ActsExactly : ∀ vector row →
   matrixApply identity3 vector row ≡ vector row
 identity3ActsExactly vector row =
@@ -179,7 +182,7 @@ identity3ActsExactly vector row =
     Coordinates.lieCoordinateDecidableEquality
     Coordinates.lieCoordinatesDuplicateFree
     row
-    (Coordinates.complete Coordinates.lieCoordinateFinite row)
+    (lieCoordinateComplete row)
     vector
 
 normalizedReferenceJacobianActsExactly :
