@@ -18,22 +18,23 @@ module DASHI.Physics.Closure.NSTriadKNComBandwidthOnePreYoungRound49Exact where
 -- DASHI CONTRIBUTION
 --
 -- Once common-hat support makes the physical shell graph bandwidth one, the
--- owner route no longer needs generic Cotlar summability.  Round 48 already
--- proves the complete active row constant
+-- owner route no longer needs generic Cotlar summability. Round 48 proves
 --
---   17/64 + 2(65/512) = 133/256.
+--   17/64 + 2(65/512) = 133/256 < 1,
 --
--- This module isolates the sole Hilbert-space statement still needed:
--- the literal odd P/Q action has squared output bounded by its physical
--- bandwidth-one row mass times the critical energy.  Combined with the
--- physical mixed pairing endpoint, this constructs the existing Round-48
--- Young-soft Com family directly.
+-- leaving the exact row complement 123/256.  The only load-bearing
+-- Hilbert-space theorem retained here is that the literal odd P/Q action has
+-- squared output bounded by its physical bandwidth-one row mass times the
+-- critical energy. The existing mixed Young endpoint then makes Com soft.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using ([]; _∷_)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base using (ℚ; 0ℚ; _*_; _≤_)
+import Data.Integer.Base as Int
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _/_; _-_; _*_; _≤_)
+open import Data.Rational.Tactic.RingSolver using (solve)
 
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
 import DASHI.Physics.Closure.NSTriadKNAdmissibleOwnerTaxLanguageRound28Exact as Owner
@@ -42,6 +43,12 @@ import DASHI.Physics.Closure.NSTriadKNComSameAdjacentActiveRound47Exact as Activ
 import DASHI.Physics.Closure.NSTriadKNComThreeChannelRowMassRound48Exact as Row
 import DASHI.Physics.Closure.NSTriadKNComRowMassYoungSoftRound48Exact as SoftRow
 import DASHI.Physics.Closure.NSTriadKNHHGoodYoungSoftTaxRound45Exact as Soft
+
+rowComplement : ℚ
+rowComplement = Int.+ 123 / 256
+
+rowComplementExact : 1ℚ - Row.threeChannelTarget ≡ rowComplement
+rowComplementExact = solve []
 
 record PhysicalBandwidthOneComEndpoint
     (environment : Owner.TaxEnvironment)
