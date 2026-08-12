@@ -40,7 +40,10 @@ module DASHI.Physics.YangMills.BalabanCMP109BishopPrincipalLogSymmetricCoefficie
 ------------------------------------------------------------------------
 
 open import Data.Integer.Base using (+_)
-open import Data.Rational.Unnormalised as ℚ using (ℚᵘ; _/_)
+open import Data.Rational.Unnormalised as ℚ using (ℚᵘ; _≤_; _/_)
+import Data.Rational.Unnormalised.Properties as ℚP
+open ℚP using (_≤?_)
+open import Relation.Nullary.Decidable.Core using (toWitness)
 
 import Real as BishopReal
 import RealProperties as BishopProperties
@@ -138,6 +141,11 @@ zeroCaseSymmetricCoefficientIsOne {value = value} inputs valueZero =
       ⊜ Κ (+ 1 / 1))
     valueZero
 
+twentyThreeTwentyFourthBelowOne :
+  twentyThreeTwentyFourth ≤ (+ 1 / 1)
+twentyThreeTwentyFourthBelowOne =
+  toWitness {a? = twentyThreeTwentyFourth ≤? (+ 1 / 1)} _
+
 zeroCaseSymmetricCoefficientAboveTwentyThreeTwentyFourth :
   ∀ {dataSet value}
     (inputs : Concrete.ConcreteHalfBallSeriesInputs dataSet value)
@@ -152,8 +160,7 @@ zeroCaseSymmetricCoefficientAboveTwentyThreeTwentyFourth inputs valueZero =
       (zeroCaseSymmetricCoefficientIsOne inputs valueZero))
     (BishopProperties.p≤q⇒p⋆≤q⋆
       twentyThreeTwentyFourth (+ 1 / 1)
-      (Data.Rational.Unnormalised.Properties.≤-refl-or-<
-        twentyThreeTwentyFourth (+ 1 / 1)))
+      twentyThreeTwentyFourthBelowOne)
 
 principalLogSymmetricCoefficientAboveTwentyThreeTwentyFourth :
   ∀ {dataSet value}
