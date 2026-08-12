@@ -38,6 +38,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Sigma using (Σ; _,_; fst; snd)
+open import Data.Product.Base using (_×_)
 open import Data.Rational.Base using (ℚ; 0ℚ; _*_; _≤_; _<_)
 import Data.Rational.Properties as ℚP
 open import Relation.Nullary.Negation using (¬_)
@@ -54,10 +55,6 @@ record ThresholdDefectFamily : Set₁ where
 
 open ThresholdDefectFamily public
 
--- Strong form of "the admissible domain reaches arbitrarily close to zero"
--- that is exactly what the no-go proof consumes: for any finite multiplicative
--- coefficient and any positive target floor, some admissible delta makes
--- delta*coefficient smaller than the floor.
 record MultiplicativelyArbitrarilySmall
     (family : ThresholdDefectFamily) : Set₁ where
   field
@@ -69,9 +66,6 @@ record MultiplicativelyArbitrarilySmall
 
 open MultiplicativelyArbitrarilySmall public
 
--- Minimal positive-floor hypothesis.  A monotone superlevel-set construction
--- with a nonzero delta->0 limit would imply a statement of this shape, but that
--- analytic implication remains a future physical theorem.
 record PositiveDefectFloor
     (family : ThresholdDefectFamily) : Set where
   field
@@ -137,8 +131,6 @@ globalLinearDeltaEnvelopeNoGo family small positiveFloor global =
   in
   ℚP.<-irrefl refl impossible
 
--- Three-way interpretation of the audit.  This is documentation-level data,
--- not a trichotomy theorem about the physical carrier.
 data DeltaUniformityRegime : Set where
   thresholdBoundedAwayFromZero : DeltaUniformityRegime
   arbitrarySmallThresholdPotentialNoGo : DeltaUniformityRegime
