@@ -9,6 +9,7 @@ open import Data.Empty using (⊥)
 import DASHI.Core.FibreRestrictionCore as Fibre
 import DASHI.Core.PossibilityAccessibilitySupport as Axes
 import DASHI.Core.ProvenanceBearingQuotient as Quotient
+import DASHI.Core.ConsumerIndexedRelevanceMeasure as Relevance
 import DASHI.Reasoning.TypedHyperfabricCore as Hyperfabric
 import DASHI.Analysis.NormalizedFibreAveragingExact as Averaging
 import DASHI.Analysis.GlassesProjectionInvolutionExact as Glasses
@@ -57,6 +58,27 @@ record PNFEvidenceHyperformalism
 
 open PNFEvidenceHyperformalism public
 
+------------------------------------------------------------------------
+-- Optional consumer-indexed relevance accounting.
+--
+-- This wrapper does not reinterpret the base hyperformalism as a probability
+-- space.  A caller chooses candidate-weight, represented-provenance, or
+-- consumer/task relevance semantics explicitly through the measure's massKind.
+------------------------------------------------------------------------
+
+record MeasuredPNFEvidenceHyperformalism
+    (Vertex Edge Candidate Consumer Region Mass : Set) : Set₁ where
+  constructor measuredPNFEvidenceHyperformalism
+  field
+    baseHyperformalism : PNFEvidenceHyperformalism Vertex Edge Candidate
+    relevanceMeasure :
+      Relevance.ConsumerIndexedRelevanceMeasure Consumer Region Mass
+    consumer : Consumer
+    relevanceAccounting :
+      Relevance.OpenWorldMassAccounting relevanceMeasure consumer
+
+open MeasuredPNFEvidenceHyperformalism public
+
 module ComplementaryReadingReference {Candidate : Set} =
   Glasses.GlassesSystem {Base = Candidate}
 
@@ -71,6 +93,7 @@ record ExistingReferenceSpine : Set where
     pathAccessibilityBoundary : TraumaMetric.TraumaPsychogeographicBoundary
     reachableSectorBoundary : ReachabilityReference.ReachableSectorBoundary
     provenanceQuotientBoundary : Quotient.ProvenanceBearingQuotientBoundary
+    consumerRelevanceBoundary : Relevance.ConsumerIndexedRelevanceBoundary
 
 open ExistingReferenceSpine public
 
@@ -85,6 +108,7 @@ canonicalExistingReferenceSpine =
     TraumaMetric.canonicalTraumaPsychogeographicBoundary
     ReachabilityReference.canonicalReachableSectorBoundary
     Quotient.canonicalProvenanceBearingQuotientBoundary
+    Relevance.canonicalConsumerIndexedRelevanceBoundary
 
 data UniversalSemanticPQJPermission : Set where
 
@@ -107,12 +131,16 @@ record PNFEvidenceHyperformalismBoundary : Set where
     reopenableQuotientCoreDuplicated : Bool
     reopenableQuotientCoreDuplicatedIsFalse :
       reopenableQuotientCoreDuplicated ≡ false
+    normalizedRelevanceMassEqualsWorldTruth : Bool
+    normalizedRelevanceMassEqualsWorldTruthIsFalse :
+      normalizedRelevanceMassEqualsWorldTruth ≡ false
 
 open PNFEvidenceHyperformalismBoundary public
 
 canonicalPNFEvidenceHyperformalismBoundary : PNFEvidenceHyperformalismBoundary
 canonicalPNFEvidenceHyperformalismBoundary =
   pnfEvidenceHyperformalismBoundary
+    false refl
     false refl
     false refl
     false refl
