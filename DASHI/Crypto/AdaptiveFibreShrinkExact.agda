@@ -6,7 +6,7 @@ module DASHI.Crypto.AdaptiveFibreShrinkExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Bool using (Bool; false; true)
-open import Agda.Builtin.Nat using (Nat; _*_)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
 open import Data.Empty using (⊥)
 
 import DASHI.Crypto.ChosenCiphertextObservationRefinementExact as Obs
@@ -45,6 +45,29 @@ record EliminationStep (system : Obs.ObservationSystem) : Set where
 
 open EliminationStep public
 
+------------------------------------------------------------------------
+-- Repeated strict shrinkage is tracked independently from the hidden carrier's
+-- finiteness proof.  Each count step witnesses removal of at least one live
+-- candidate by the exact equation before = suc after.  A chain indexed by n
+-- therefore contains n certified strict refinements.
+------------------------------------------------------------------------
+
+record StrictCountRefinement : Set where
+  constructor strictCountRefinement
+  field
+    before after : Nat
+    oneOrMoreRemoved : before ≡ suc after
+
+open StrictCountRefinement public
+
+data StrictShrinkChain : Nat → Set where
+  emptyChain : StrictShrinkChain zero
+  _then_ : ∀ {n} → StrictCountRefinement → StrictShrinkChain n → StrictShrinkChain (suc n)
+
+------------------------------------------------------------------------
+-- Exact two-candidate finite harness: one leaked bit shrinks 2 candidates to 1.
+------------------------------------------------------------------------
+
 data QueryOne : Set where ask : QueryOne
 
 bitObservation : Obs.ObservationSystem
@@ -67,3 +90,15 @@ afterCandidateCount = 1
 
 oneSplitShrinksTwoToOne : beforeCandidateCount ≡ 2 * afterCandidateCount
 oneSplitShrinksTwoToOne = refl
+
+boolCountStrict : StrictCountRefinement
+boolCountStrict = strictCountRefinement 2 1 refl
+
+oneStepShrinkChain : StrictShrinkChain 1
+oneStepShrinkChain = boolCountStrict then emptyChain
+
+-- Two independent certified eliminations can be recorded as a two-step chain;
+-- the chain type itself does not pretend the steps apply to the same finite
+-- candidate population unless the caller also supplies that semantic bridge.
+twoStepShrinkChain : StrictShrinkChain 2
+twoStepShrinkChain = boolCountStrict then (boolCountStrict then emptyChain)
