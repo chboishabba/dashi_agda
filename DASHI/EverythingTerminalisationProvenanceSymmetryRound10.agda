@@ -82,5 +82,10 @@ import DASHI.Crypto.TopTenCryptoDependencyGraphExact
 -- obligations, and the ten-candidate comparative controls.
 import DASHI.Crypto.CryptoLocalConstraintSearchRound15
 
+-- Round-16 blue-team closure: canonical adversary observations, finite fibre
+-- cardinality, protected-label recovery, indexed reconciliation cost, finite
+-- game boundary, concrete 2x2 modular MLWE lab, and FIPS-203 source surface.
+import DASHI.Crypto.BlueTeamAdversaryClosureRound16
+
 -- Exact arithmetic transport / semantic-promotion boundary.
 import DASHI.Arithmetic.PrimeSupportTransportTaxiMoonshineExact
