@@ -20,6 +20,7 @@ FILES=(
   DASHI/Crypto/PriorScoreSearchFactorisationExact.agda
   DASHI/Crypto/PublicFactoredObservationTraceInvariantExact.agda
   DASHI/Crypto/AlgorithmRelativeRecoveryCostExact.agda
+  DASHI/Crypto/InvertibleTransformPriorCouplingRegressionExact.agda
   DASHI/Crypto/FiniteMLWEVectorLabExact.agda
   DASHI/Crypto/FiniteMLWEGameRegressionExact.agda
   DASHI/Crypto/FiniteMLWEPriorScoreSearchRegressionExact.agda
@@ -59,6 +60,9 @@ grep -q 'samePublicSameTrace' DASHI/Crypto/PublicFactoredObservationTraceInvaria
 grep -q 'samePublicSameAdaptiveTwoRoundTranscript' DASHI/Crypto/PublicFactoredObservationTraceInvariantExact.agda
 grep -q 'candidateShrinkButCostRises' DASHI/Crypto/AlgorithmRelativeRecoveryCostExact.agda
 grep -q 'algorithmRelativeInformationGain' DASHI/Crypto/AlgorithmRelativeRecoveryCostExact.agda
+grep -q 'decodeEncode' DASHI/Crypto/InvertibleTransformPriorCouplingRegressionExact.agda
+grep -q 'encodeDecode' DASHI/Crypto/InvertibleTransformPriorCouplingRegressionExact.agda
+grep -q 'crossMarginalsNotJointlyReachable' DASHI/Crypto/InvertibleTransformPriorCouplingRegressionExact.agda
 grep -q 'public22CandidateCount' DASHI/Crypto/FiniteMLWEVectorLabExact.agda
 grep -q 'afterFirstBitFalseCount' DASHI/Crypto/FiniteMLWEVectorLabExact.agda
 grep -q 'noExactSecretRecoveryFromPublic22' DASHI/Crypto/FiniteMLWEVectorLabExact.agda
