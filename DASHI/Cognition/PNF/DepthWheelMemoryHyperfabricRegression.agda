@@ -1,6 +1,7 @@
 module DASHI.Cognition.PNF.DepthWheelMemoryHyperfabricRegression where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+import Data.Empty as Empty
 
 import DASHI.Cognition.PNF.DepthWheelMemoryHyperfabric as WheelMemory
 import DASHI.Cognition.PNF.MemoryFibre as Memory
@@ -30,7 +31,7 @@ reinforcedStepPreservesEvent = refl
 reinforcedStepChangesFullMemory :
   WheelMemory.memory (WheelMemory.target reinforcedStep)
   ≡ WheelMemory.memory alignedRoot →
-  Data.Empty.⊥
+  Empty.⊥
 reinforcedStepChangesFullMemory =
   WheelMemory.depthZeroAdvanceChangesFullMemory
     WheelMemory.reinforcementUpdate
