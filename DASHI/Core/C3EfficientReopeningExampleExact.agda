@@ -55,7 +55,7 @@ c3EfficientRecoverableFamily =
 
 c3ReopeningVerifiesExactly : ∀ x →
   ERQ.verifies c3WitnessProblem x
-    (ERQ.reopenWitness c3WitnessRecoverableQuotient
-      (ERQ.project c3WitnessRecoverableQuotient x)
-      (ERQ.receipt c3WitnessRecoverableQuotient x))
+    (ERQ.WitnessRecoverableQuotient.reopenWitness c3WitnessRecoverableQuotient
+      (ERQ.WitnessRecoverableQuotient.project c3WitnessRecoverableQuotient x)
+      (ERQ.WitnessRecoverableQuotient.receipt c3WitnessRecoverableQuotient x))
 c3ReopeningVerifiesExactly x = refl
