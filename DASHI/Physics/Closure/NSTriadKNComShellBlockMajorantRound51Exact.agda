@@ -32,7 +32,7 @@ module DASHI.Physics.Closure.NSTriadKNComShellBlockMajorantRound51Exact where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; suc)
 open import Data.Rational.Base using (ℚ; 0ℚ; _≤_)
 import Data.Rational.Properties as ℚP
 
@@ -68,12 +68,12 @@ shellBlockForwardAdjacentBound :
     (majorant : PhysicalShellBlockOperatorMajorant skeleton)
     (bounds : Active.SameAdjacentPhysicalComBounds skeleton identification)
     q →
-  Active.supportActive skeleton q (Agda.Builtin.Nat.suc q) ≡ true →
-  shellBlockOperatorNorm majorant q (Agda.Builtin.Nat.suc q)
+  Active.supportActive skeleton q (suc q) ≡ true →
+  shellBlockOperatorNorm majorant q (suc q)
   ≤ Active.adjacentShellTarget
 shellBlockForwardAdjacentBound majorant bounds q active =
   ℚP.≤-trans
-    (physicalPairProductMajorizesWholeShellBlock majorant q (Agda.Builtin.Nat.suc q))
+    (physicalPairProductMajorizesWholeShellBlock majorant q (suc q))
     (Active.physicalComAdjacentShellActiveBound bounds q active)
 
 shellBlockReverseAdjacentBound :
@@ -81,12 +81,12 @@ shellBlockReverseAdjacentBound :
     (majorant : PhysicalShellBlockOperatorMajorant skeleton)
     (bounds : Active.SameAdjacentPhysicalComBounds skeleton identification)
     q →
-  Active.supportActive skeleton (Agda.Builtin.Nat.suc q) q ≡ true →
-  shellBlockOperatorNorm majorant (Agda.Builtin.Nat.suc q) q
+  Active.supportActive skeleton (suc q) q ≡ true →
+  shellBlockOperatorNorm majorant (suc q) q
   ≤ Active.adjacentShellTarget
 shellBlockReverseAdjacentBound majorant bounds q active =
   ℚP.≤-trans
-    (physicalPairProductMajorizesWholeShellBlock majorant (Agda.Builtin.Nat.suc q) q)
+    (physicalPairProductMajorizesWholeShellBlock majorant (suc q) q)
     (Active.physicalComReverseAdjacentShellActiveBound bounds q active)
 
 record PerIncidenceOnlyMajorant
