@@ -23,19 +23,21 @@ module DASHI.Physics.Closure.NSTriadKNTaxKindClassificationRound46Exact where
 --               positive rational split, with eta exactly that split;
 --   Hard      : a proved positive floor is part of the physical theorem.
 --
--- The classification is intentionally proof-relevant.  In particular Com and
--- kernel are NOT assigned a kind here: their physical pre-absorption estimates
--- must first decide which constructor is justified.
+-- The classification is intentionally proof-relevant.  HH-good is classified
+-- Young-soft from the existing producer family.  Boundary is classified Zero
+-- from the Round-45 exact physical cancellation theorem.  Com and kernel are
+-- NOT assigned a kind here: their physical pre-absorption estimates must first
+-- decide which constructor is justified.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base using (ℚ; 0ℚ; _≤_; _<_)
 
-import DASHI.Physics.Closure.NSTriadKNLuoBadCoherenceWeightedMarkovExact as Threshold
 import DASHI.Physics.Closure.NSTriadKNLuoDuplicateFreeTaxOwnershipRound26Exact as Tax
 import DASHI.Physics.Closure.NSTriadKNAdmissibleOwnerTaxLanguageRound28Exact as Owner
 import DASHI.Physics.Closure.NSTriadKNHHGoodYoungSoftTaxRound45Exact as Soft
+import DASHI.Physics.Closure.NSTriadKNBoundaryZeroTaxOwnerRound45Exact as Boundary
 
 data TaxKind : Set where
   ZeroTax YoungSoftTax HardTax : TaxKind
@@ -112,8 +114,28 @@ hhGoodClassification :
   TaxClassification environment Tax.HH-good
 hhGoodClassification = youngSoftClassification
 
+physicalBoundaryZeroCertificate :
+  ∀ {environment} →
+  Boundary.PhysicalBoundaryZeroTaxInput environment →
+  ZeroTaxCertificate environment Tax.boundary
+physicalBoundaryZeroCertificate input = record
+  { estimate = Boundary.physicalBoundaryZeroTaxOwnerEstimate input
+  ; ownerExact = Boundary.physicalBoundaryOwnerIdentity input
+  ; etaZero = Boundary.physicalBoundaryEtaZero input
+  }
+
+physicalBoundaryClassification :
+  ∀ {environment} →
+  Boundary.PhysicalBoundaryZeroTaxInput environment →
+  TaxClassification environment Tax.boundary
+physicalBoundaryClassification input =
+  zeroClassification (physicalBoundaryZeroCertificate input)
+
 taxKindClassificationLanguageClosed : Bool
 taxKindClassificationLanguageClosed = true
+
+boundaryClassifiedAsExactZeroTax : Bool
+boundaryClassifiedAsExactZeroTax = true
 
 comTaxKindRequiresPhysicalPreAbsorptionTheorem : Bool
 comTaxKindRequiresPhysicalPreAbsorptionTheorem = true
@@ -124,3 +146,7 @@ kernelTaxKindRequiresPhysicalPreAbsorptionTheorem = true
 taxKindClassificationLanguageClosedIsTrue :
   taxKindClassificationLanguageClosed ≡ true
 taxKindClassificationLanguageClosedIsTrue = refl
+
+boundaryClassifiedAsExactZeroTaxIsTrue :
+  boundaryClassifiedAsExactZeroTax ≡ true
+boundaryClassifiedAsExactZeroTaxIsTrue = refl
