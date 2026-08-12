@@ -17,6 +17,7 @@ module DASHI.Crypto.BlueTeamAdversaryClosureRound16 where
 ------------------------------------------------------------------------
 
 import DASHI.Crypto.BlueTeamAdversaryObservationExact
+import DASHI.Crypto.BlueTeamThreatModelExact
 import DASHI.Crypto.FiniteCandidateFibreCardinalityExact
 import DASHI.Crypto.TranscriptProtectedLabelExact
 import DASHI.Crypto.IndexedSearchCostExact
