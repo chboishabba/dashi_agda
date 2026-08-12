@@ -30,11 +30,11 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.List.Base using (length)
-open import Data.Rational using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_)
+open import Data.Rational using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using
-  (cong; cong₂; subst; sym; trans)
+  (cong; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier
@@ -88,6 +88,30 @@ normalizedAverageOfConstant {L} dataSet value =
       (trans
         (cong (_* value) (normalized dataSet))
         (ℚP.*-identityˡ value)))
+
+sumOfAverageConstant :
+  ∀ {L} (dataSet : NormalizedAxisAverageData L) total →
+  sumRational (allCyclicIndices L)
+    (λ _ → weight dataSet * total)
+  ≡ total
+sumOfAverageConstant {L} dataSet total =
+  trans
+    (sumRationalConstant
+      (allCyclicIndices L) (weight dataSet * total))
+    (trans
+      (sym
+        (ℚP.*-assoc
+          (natAsRational (length (allCyclicIndices L)))
+          (weight dataSet) total))
+      (trans
+        (cong
+          (_* total)
+          (trans
+            (ℚP.*-comm
+              (natAsRational (length (allCyclicIndices L)))
+              (weight dataSet))
+            (normalized dataSet)))
+        (ℚP.*-identityˡ total)))
 
 coefficientDoubleSumSwap :
   ∀ coefficient {A B : Set} (left : List A) (right : List B)
@@ -225,7 +249,8 @@ axisCenteringFibreSumZero :
   ≡ 0ℚ
 axisCenteringFibreSumZero {L} dataSet siteF axis transverse =
   let
-    averageValue = weight dataSet * physicalFibreSum siteF axis transverse
+    total = physicalFibreSum siteF axis transverse
+    averageValue = weight dataSet * total
     centeredPointwise : ∀ coordinate →
       axisCentering dataSet siteF axis
         (insertAxis axis coordinate transverse)
@@ -239,8 +264,7 @@ axisCenteringFibreSumZero {L} dataSet siteF axis transverse =
       sumRational (allCyclicIndices L)
         (λ coordinate →
           siteF (insertAxis axis coordinate transverse) - averageValue)
-      ≡ physicalFibreSum siteF axis transverse
-        - sumRational (allCyclicIndices L) (λ _ → averageValue)
+      ≡ total - sumRational (allCyclicIndices L) (λ _ → averageValue)
     sumToDifference = sumRationalSubtract
       (allCyclicIndices L)
       (λ coordinate → siteF (insertAxis axis coordinate transverse))
@@ -257,12 +281,8 @@ axisCenteringFibreSumZero {L} dataSet siteF axis transverse =
       centeredPointwise)
     (trans sumToDifference
       (trans
-        (cong
-          (λ averagedTotal →
-            physicalFibreSum siteF axis transverse - averagedTotal)
-          (sym
-            (normalizedAverageOfConstant dataSet
-              (physicalFibreSum siteF axis transverse))))
+        (cong (λ averagedTotal → total - averagedTotal)
+          (sumOfAverageConstant dataSet total))
         (ℚRing.solve-∀)))
 
 ------------------------------------------------------------------------
@@ -299,7 +319,17 @@ partitionAverageLeftMatchesProductInner :
       (toAxisFibreField axis right)
 partitionAverageLeftMatchesProductInner {L} dataSet axis left right =
   sumRationalCong
-    (physicalTransverseCoordinates L) _ _ (λ transverse →
+    (physicalTransverseCoordinates L)
+    (λ transverse →
+      sumRational (allCyclicIndices L) (λ coordinate →
+        axisAverage dataSet left axis (insertAxis axis coordinate transverse)
+        * right (insertAxis axis coordinate transverse)))
+    (λ transverse →
+      sumRational (allCyclicIndices L) (λ coordinate →
+        fibreAverageProjection (weight dataSet) (allCyclicIndices L)
+          (toAxisFibreField axis left) transverse coordinate
+        * toAxisFibreField axis right transverse coordinate))
+    (λ transverse →
       sumRationalCong (allCyclicIndices L) _ _ (λ coordinate →
         cong
           (λ x → x * right (insertAxis axis coordinate transverse))
@@ -318,7 +348,17 @@ partitionAverageRightMatchesProductInner :
         (toAxisFibreField axis right))
 partitionAverageRightMatchesProductInner {L} dataSet axis left right =
   sumRationalCong
-    (physicalTransverseCoordinates L) _ _ (λ transverse →
+    (physicalTransverseCoordinates L)
+    (λ transverse →
+      sumRational (allCyclicIndices L) (λ coordinate →
+        left (insertAxis axis coordinate transverse)
+        * axisAverage dataSet right axis (insertAxis axis coordinate transverse)))
+    (λ transverse →
+      sumRational (allCyclicIndices L) (λ coordinate →
+        toAxisFibreField axis left transverse coordinate
+        * fibreAverageProjection (weight dataSet) (allCyclicIndices L)
+            (toAxisFibreField axis right) transverse coordinate))
+    (λ transverse →
       sumRationalCong (allCyclicIndices L) _ _ (λ coordinate →
         cong
           (λ x → left (insertAxis axis coordinate transverse) * x)
