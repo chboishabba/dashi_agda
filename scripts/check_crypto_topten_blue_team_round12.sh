@@ -13,6 +13,7 @@ FILES=(
   DASHI/Crypto/ChosenCiphertextObservationRefinementExact.agda
   DASHI/Crypto/CryptoUsageInvariantExact.agda
   DASHI/Crypto/XorReuseLeakExact.agda
+  DASHI/Crypto/PublicCandidateTestingExact.agda
   DASHI/Crypto/TopTenCryptoBlueTeamProfilesExact.agda
   DASHI/Crypto/TopTenCryptoStateContractMatrixExact.agda
   DASHI/Crypto/TopTenCryptoObservationSurfacesExact.agda
@@ -39,18 +40,24 @@ grep -q 'rightCandidateRejectedByLeftObservation' DASHI/Crypto/ChosenCiphertextO
 grep -q 'reuseContradictsUniqueness' DASHI/Crypto/CryptoUsageInvariantExact.agda
 grep -q 'unauthenticatedChannelNotQKDReady' DASHI/Crypto/CryptoUsageInvariantExact.agda
 grep -q 'sameKeystreamRevealsPlaintextRelation' DASHI/Crypto/XorReuseLeakExact.agda
+grep -q 'trueHiddenStatePassesForwardTest' DASHI/Crypto/PublicCandidateTestingExact.agda
+grep -q 'candidateMatchUniqueUnderInjectivity' DASHI/Crypto/PublicCandidateTestingExact.agda
+grep -q 'trueMessageAndCoinsPassReencryptionTest' DASHI/Crypto/PublicCandidateTestingExact.agda
 grep -q 'allTenCount' DASHI/Crypto/TopTenCryptoBlueTeamProfilesExact.agda
 grep -q 'allProfilesCount' DASHI/Crypto/TopTenCryptoBlueTeamProfilesExact.agda
+grep -q 'allZeroSharedSecretOutcome' DASHI/Crypto/TopTenCryptoBlueTeamProfilesExact.agda
 grep -q 'mlKemIsKEMNotDirectEncryption' DASHI/Crypto/TopTenCryptoBlueTeamProfilesExact.agda
 grep -q 'qkdIsDistributionNotDirectEncryption' DASHI/Crypto/TopTenCryptoBlueTeamProfilesExact.agda
 grep -q 'allContractsCount' DASHI/Crypto/TopTenCryptoStateContractMatrixExact.agda
 grep -q 'padUniformSecretAndOneUse' DASHI/Crypto/TopTenCryptoStateContractMatrixExact.agda
+grep -q 'x25519AllZeroSharedSecretHandled' DASHI/Crypto/TopTenCryptoStateContractMatrixExact.agda
 grep -q 'mlKemProtectedLabelNotPubliclyFactored' DASHI/Crypto/TopTenCryptoStateContractMatrixExact.agda
 grep -q 'qkdClassicalChannelAuthenticated' DASHI/Crypto/TopTenCryptoStateContractMatrixExact.agda
 grep -q 'coverageCount' DASHI/Crypto/TopTenCryptoObservationSurfacesExact.agda
 grep -q 'rsaValidityOutcome' DASHI/Crypto/TopTenCryptoObservationSurfacesExact.agda
 grep -q 'mlKemDownstream' DASHI/Crypto/TopTenCryptoObservationSurfacesExact.agda
 grep -q 'qkdStatistics' DASHI/Crypto/TopTenCryptoObservationSurfacesExact.agda
+grep -q 'x25519AllZeroSharedSecretHandled' DASHI/Crypto/TopTenCryptoDependencyGraphExact.agda
 grep -q 'kemBreakRefutesHPKE' DASHI/Crypto/TopTenCryptoDependencyGraphExact.agda
 grep -q 'unauthenticatedBreakRefutesQKDComposite' DASHI/Crypto/TopTenCryptoDependencyGraphExact.agda
 grep -q 'publicSecretFactorisationCutsAsymmetry' DASHI/Crypto/TopTenCryptoDependencyGraphExact.agda
@@ -64,6 +71,7 @@ grep -q 'publicFactorisationBreaksNoRecovery' DASHI/Crypto/MLKEMSecurityDependen
 grep -q '10.6028/NIST.FIPS.197-upd1' DASHI/Crypto/TopTenCryptoBlueTeamProfilesExact.agda
 grep -q '10.17487/RFC8439' DASHI/Crypto/TopTenCryptoBlueTeamProfilesExact.agda
 grep -q '10.17487/RFC8017' DASHI/Crypto/TopTenCryptoBlueTeamProfilesExact.agda
+grep -q '10.17487/RFC7748' DASHI/Crypto/TopTenCryptoBlueTeamProfilesExact.agda
 grep -q '10.17487/RFC9180' DASHI/Crypto/TopTenCryptoBlueTeamProfilesExact.agda
 grep -q '10.6028/NIST.FIPS.203' DASHI/Crypto/TopTenCryptoBlueTeamProfilesExact.agda
 
