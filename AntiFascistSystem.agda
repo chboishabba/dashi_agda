@@ -4,7 +4,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Nat using (_≤_)
 open import Data.Nat.Properties using (≤-refl)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
 
 ------------------------------------------------------------------------
 -- Legacy antifascist core, repaired.
@@ -39,13 +39,10 @@ open Invertible public
 invertibleInjective :
   (u : Invertible) →
   ∀ {x y} → U u x ≡ U u y → x ≡ y
-invertibleInjective u equality =
+invertibleInjective u {x} {y} equality =
   trans
-    (left u _)
-    (trans (cong (U⁻¹ u) equality) (sym (left u _)))
-  where
-  sym : ∀ {A : Set} {a b : A} → a ≡ b → b ≡ a
-  sym refl = refl
+    (sym (left u x))
+    (trans (cong (U⁻¹ u) equality) (left u y))
 
 record DistinctionPreserving (u : Invertible) : Set where
   field
