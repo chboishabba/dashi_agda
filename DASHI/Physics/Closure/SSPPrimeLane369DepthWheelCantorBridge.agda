@@ -1,5 +1,6 @@
 module DASHI.Physics.Closure.SSPPrimeLane369DepthWheelCantorBridge where
 
+open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
@@ -279,17 +280,13 @@ canonicalThreeSixNineWheelPhaseIsZero = refl
 record DepthWheelBoundary : Set where
   constructor depthWheelBoundary
   field
-    depthWheelEqualsFixedDepthTritRotation : Agda.Builtin.Bool.Bool
+    depthWheelEqualsFixedDepthTritRotation : Bool
     depthWheelEqualsFixedDepthTritRotationIsFalse :
-      depthWheelEqualsFixedDepthTritRotation ≡ Agda.Builtin.Bool.false
-    fullNineHasCanonicalRetractionToPolarSixWithoutZeroPolicy :
-      Agda.Builtin.Bool.Bool
+      depthWheelEqualsFixedDepthTritRotation ≡ false
+    fullNineHasCanonicalRetractionToPolarSixWithoutZeroPolicy : Bool
     fullNineHasCanonicalRetractionToPolarSixWithoutZeroPolicyIsFalse :
-      fullNineHasCanonicalRetractionToPolarSixWithoutZeroPolicy
-      ≡ Agda.Builtin.Bool.false
+      fullNineHasCanonicalRetractionToPolarSixWithoutZeroPolicy ≡ false
 
 canonicalDepthWheelBoundary : DepthWheelBoundary
 canonicalDepthWheelBoundary =
-  depthWheelBoundary
-    Agda.Builtin.Bool.false refl
-    Agda.Builtin.Bool.false refl
+  depthWheelBoundary false refl false refl
