@@ -14,12 +14,19 @@ import DASHI.Core.FiniteC3OrbitStabilizerExact
 import DASHI.Core.C3OrbitProvenanceQuotientExact
 import DASHI.Core.EfficientRecoverableQuotientExact
 import DASHI.Core.C3EfficientReopeningExampleExact
+import DASHI.Core.RecoverableQuotientCompositionExact
+import DASHI.Core.MinimalDynamicResidualExact
+import DASHI.Core.ApproximateMDLResidualBudgetExact
 
 -- C3-graded provenance dynamics and an exact phase-erasure no-go witness.
 import DASHI.Core.GradedProvenanceDynamicalSystemExact
 import DASHI.Core.HiddenPhaseDynamicInsufficiencyExact
 import DASHI.Cognition.PNF.CoupledDepthPhaseFrustrationExact
+import DASHI.Cognition.PNF.ConstraintPhaseFrustrationExact
+import DASHI.Cognition.PNF.PhasedRelationalLatticeExact
+import DASHI.Cognition.PNF.IndependentWheelMemoryGradeExact
 import DASHI.Foundations.DepthWheelMacroBranchingExact
+import DASHI.Foundations.CantorUnitMassDynamicBridgeExact
 
 -- Memory/content separation.
 import DASHI.Cognition.PNF.MemoryCommandSeparationExact
