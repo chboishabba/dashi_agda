@@ -7,6 +7,7 @@ open import Data.Empty using (⊥)
 open import Data.List.Base using (List)
 
 open import DASHI.Cognition.PNF.NumericAuthority
+import DASHI.Cognition.PNF.SpacyNumericProjection as Parser
 import DASHI.Core.MultiscaleMDL as MDL
 
 ------------------------------------------------------------------------
@@ -32,6 +33,41 @@ record LosslessTokenStreamCodec (Encoded : Set) : Set where
       decode (encode stream) ≡ stream
 
 open LosslessTokenStreamCodec public
+
+------------------------------------------------------------------------
+-- Full compiled numeric observation tape.
+--
+-- A SymbolId stream is not enough to reconstruct parser structure.  The runtime
+-- target for the packed execution representation is the complete committed
+-- numeric spaCy observation carrier: token/sentence identity, offsets, orth,
+-- lemma observation, POS/tag/dependency annotations, morphology, and committed
+-- dependency head.  A packed/delta/varint/bit-coded representation is permitted
+-- only when it reconstructs this tape exactly.
+------------------------------------------------------------------------
+
+NumericObservationTape : Set
+NumericObservationTape = List Parser.NumericTokenRow
+
+record LosslessNumericObservationTapeCodec (Encoded : Set) : Set where
+  constructor losslessNumericObservationTapeCodec
+  field
+    encodeTape : NumericObservationTape → Encoded
+    decodeTape : Encoded → NumericObservationTape
+    decodeEncodeTape :
+      (tape : NumericObservationTape) →
+      decodeTape (encodeTape tape) ≡ tape
+
+open LosslessNumericObservationTapeCodec public
+
+record NumericObservationTapeMeasurement : Set where
+  constructor numericObservationTapeMeasurement
+  field
+    tokenRows : Nat
+    encodedBytes : Nat
+    randomAccessWork : Nat
+    sequentialDecodeWork : Nat
+
+open NumericObservationTapeMeasurement public
 
 ------------------------------------------------------------------------
 -- Reuse the existing multiscale residual/MDL spine when storage has an actual
@@ -91,6 +127,8 @@ data StorageOptimalityPermission : Set where
 
 data NumberTheoreticLayoutAuthority : Set where
 
+data LowPhysicalCodeAutomaticallyUsesFewerPostgresBytes : Set where
+
 measurementDoesNotProveGlobalStorageOptimality :
   StorageOptimalityPermission → ⊥
 measurementDoesNotProveGlobalStorageOptimality ()
@@ -98,6 +136,10 @@ measurementDoesNotProveGlobalStorageOptimality ()
 numberTheoryAloneDoesNotSelectPhysicalLayout :
   NumberTheoreticLayoutAuthority → ⊥
 numberTheoryAloneDoesNotSelectPhysicalLayout ()
+
+lowCodeValueAloneDoesNotProveNarrowerPostgresStorage :
+  LowPhysicalCodeAutomaticallyUsesFewerPostgresBytes → ⊥
+lowCodeValueAloneDoesNotProveNarrowerPostgresStorage ()
 
 record NumericTokenStorageBoundary : Set where
   constructor numericTokenStorageBoundary
@@ -117,6 +159,15 @@ record NumericTokenStorageBoundary : Set where
     entropyOptimalityRequiresSeparateModel : Bool
     entropyOptimalityRequiresSeparateModelIsTrue :
       entropyOptimalityRequiresSeparateModel ≡ true
+    fullNumericObservationTapeMayBePacked : Bool
+    fullNumericObservationTapeMayBePackedIsTrue :
+      fullNumericObservationTapeMayBePacked ≡ true
+    packedObservationTapeMustReconstructExactly : Bool
+    packedObservationTapeMustReconstructExactlyIsTrue :
+      packedObservationTapeMustReconstructExactly ≡ true
+    lowPhysicalIntegerValueAloneImpliesNarrowerDatabaseStorage : Bool
+    lowPhysicalIntegerValueAloneImpliesNarrowerDatabaseStorageIsFalse :
+      lowPhysicalIntegerValueAloneImpliesNarrowerDatabaseStorage ≡ false
 
 open NumericTokenStorageBoundary public
 
@@ -128,3 +179,6 @@ canonicalNumericTokenStorageBoundary =
     false refl
     false refl
     true refl
+    true refl
+    true refl
+    false refl
