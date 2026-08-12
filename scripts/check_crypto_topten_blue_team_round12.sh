@@ -14,6 +14,7 @@ FILES=(
   DASHI/Crypto/CryptoUsageInvariantExact.agda
   DASHI/Crypto/XorReuseLeakExact.agda
   DASHI/Crypto/TopTenCryptoBlueTeamProfilesExact.agda
+  DASHI/Crypto/TopTenCryptoObservationSurfacesExact.agda
   DASHI/Crypto/TopTenCryptoDependencyGraphExact.agda
   DASHI/Crypto/KEMStateContractExact.agda
   DASHI/Crypto/MLWEKeyStateResidualExact.agda
@@ -41,6 +42,10 @@ grep -q 'allTenCount' DASHI/Crypto/TopTenCryptoBlueTeamProfilesExact.agda
 grep -q 'allProfilesCount' DASHI/Crypto/TopTenCryptoBlueTeamProfilesExact.agda
 grep -q 'mlKemIsKEMNotDirectEncryption' DASHI/Crypto/TopTenCryptoBlueTeamProfilesExact.agda
 grep -q 'qkdIsDistributionNotDirectEncryption' DASHI/Crypto/TopTenCryptoBlueTeamProfilesExact.agda
+grep -q 'coverageCount' DASHI/Crypto/TopTenCryptoObservationSurfacesExact.agda
+grep -q 'rsaValidityOutcome' DASHI/Crypto/TopTenCryptoObservationSurfacesExact.agda
+grep -q 'mlKemDownstream' DASHI/Crypto/TopTenCryptoObservationSurfacesExact.agda
+grep -q 'qkdStatistics' DASHI/Crypto/TopTenCryptoObservationSurfacesExact.agda
 grep -q 'kemBreakRefutesHPKE' DASHI/Crypto/TopTenCryptoDependencyGraphExact.agda
 grep -q 'unauthenticatedBreakRefutesQKDComposite' DASHI/Crypto/TopTenCryptoDependencyGraphExact.agda
 grep -q 'publicSecretFactorisationCutsAsymmetry' DASHI/Crypto/TopTenCryptoDependencyGraphExact.agda
