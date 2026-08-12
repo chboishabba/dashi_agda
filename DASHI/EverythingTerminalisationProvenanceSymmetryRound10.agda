@@ -51,11 +51,13 @@ import DASHI.Cognition.PNF.WikidataTypePressureMiniWorldExact
 import DASHI.Cognition.PNF.MemoryCommandSeparationExact
 
 -- Narrative/cultural stress tests: proposition-local provenance, independent
--- evidence lineage, four consumer planes, phase-sensitive diss-track updates,
+-- evidence lineage, E/P/R/Q/K/I/A conflict state and hidden-fibre candidate
+-- reconstruction, four consumer planes, phase-sensitive diss-track updates,
 -- finite MDL transmission asymmetry, audience amplification without evidence
 -- promotion, and provenance-sensitive membership boundaries whose coarse
 -- inside/outside sign cannot determine action.
 import DASHI.Cognition.PNF.NarrativeClaimProvenanceExact
+import DASHI.Cognition.PNF.NarrativeConflictStateExact
 import DASHI.Cognition.PNF.DissTrackNarrativeDynamicsExact
 import DASHI.Cognition.PNF.ConsumerIndexedNarrativeProjectionExact
 import DASHI.Cognition.PNF.NarrativeMDLReplicationExact
