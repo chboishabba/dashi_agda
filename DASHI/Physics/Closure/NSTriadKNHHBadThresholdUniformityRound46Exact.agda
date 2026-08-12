@@ -35,12 +35,11 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ; 0ℚ; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚP
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Binary.PropositionalEquality using (cong)
 
 import DASHI.Physics.Closure.NSTriadKNLuoBadCoherenceWeightedMarkovExact as Threshold
 import DASHI.Physics.Closure.NSTriadKNHHBadSharpDyadicGainRound33Exact as Sharp
 import DASHI.Physics.Closure.NSTriadKNLuoCriticalDissipationHHBadBridgeRound34Exact as Scale
-import DASHI.Physics.Closure.NSTriadKNHHBadOneDerivativeFactorizationRound44Exact as Factor
 
 record ThresholdIndexedHHBadProfiles : Set₁ where
   field
@@ -105,12 +104,9 @@ indexedEtaEqualsUniformEta :
     parameter →
   thresholdIndexedCanonicalEta indexed parameter
   ≡ thresholdUniformCanonicalEta (uniform proof)
-indexedEtaEqualsUniformEta proof parameter =
-  subst
-    (λ ceiling → Sharp.two * thresholdCeiling _ parameter
-      ≡ Sharp.two * ceiling)
+indexedEtaEqualsUniformEta {indexed} proof parameter =
+  cong (Sharp.two *_)
     (thresholdCeilingExact proof parameter)
-    refl
 
 hhBadThresholdDependenceMadeExplicit : Bool
 hhBadThresholdDependenceMadeExplicit = true
