@@ -16,6 +16,7 @@ import DASHI.Cognition.PNF.DepthWheelMemoryGradedAdapter
 import DASHI.Foundations.DepthWheelGradedDynamics
 import DASHI.Physics.Closure.SSPPrimeLane369DepthWheelCantorBridge
 import DASHI.Physics.Closure.SSPPrimeLane369DepthAddressWheel
+import DASHI.Physics.Closure.SSP369PolarResidualQuotient
 import DASHI.Geometry.SSP369DepthWheelUltrametric
 import DASHI.Geometry.SSP369DepthWheelUltrametricRegression
 import DASHI.Cognition.PNF.ExtractorBoundary
