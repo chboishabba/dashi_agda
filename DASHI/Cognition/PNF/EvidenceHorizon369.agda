@@ -6,32 +6,23 @@ open import Agda.Builtin.Nat using (Nat; suc)
 open import Data.Empty using (⊥)
 open import Data.Integer using (ℤ)
 
-import DASHI.Biology.SSP369JResolutionBifiltrationExact as Horizon
+import DASHI.Biology.SSP369JResolutionBifiltrationExact as Existing
+import DASHI.Core.RelationalHorizon369 as Generic
 import DASHI.Foundations.StratifiedResolutionTowerExact as Resolution
 import DASHI.Reasoning.AttractorAlignedBranchSelection as Selection
 import DASHI.Reasoning.RelationalBranchInterference as Interference
 import DASHI.Cognition.PNF.ProofRelevantIdentityFibres as Identity
 
 ------------------------------------------------------------------------
--- PNF specialisation of the existing 3/6/9 cumulative-coordinate pattern.
---
--- The existing SSP369 bifiltration establishes the structural reading:
--- H3 = one three-coordinate block, H6 = H3 + a second block, H9 = H6 + a
--- third block, with relational horizon independent of representation
--- resolution.  We reuse its generic Triple and specialise the three blocks:
+-- PNF specialisation of the canonical cumulative 3/6/9 horizon.
 --
 --   H3 : local structural evidence
 --   H6 : H3 + discourse/temporal evidence
 --   H9 : H6 + external/authority evidence
 --
--- 3/6/9 counts evidence-coordinate slots.  It does NOT constrain candidate
--- fibre cardinality; each coordinate may range over an arbitrary Candidate.
---
--- The ternary direction is also not primitive.  Each coordinate retains a fine
--- signed interaction value and the existing exact classification witness that
--- coarsens it to reinforcing / independent / interfering.  A richer continuous
--- application may refine the fine phase carrier further, but the coarse sign
--- must still be derived rather than independently assigned.
+-- Candidate cardinality is unrestricted. Each coordinate retains exact signed
+-- evidence; its coarse reinforcing/independent/interfering phase is derived by
+-- the existing RelationalBranchInterference classifier.
 ------------------------------------------------------------------------
 
 data EvidenceFamily : Set where
@@ -74,42 +65,65 @@ mapEvidenceCandidate f (evidenceCoordinate candidate value classification) =
 
 H3Evidence : Set → Set
 H3Evidence Candidate =
-  Horizon.Triple (EvidenceCoordinate Candidate localStructuralEvidence)
+  Generic.Horizon3 (EvidenceCoordinate Candidate localStructuralEvidence)
 
-record H6Evidence (Candidate : Set) : Set where
-  constructor h6Evidence
-  field
-    localStructural : H3Evidence Candidate
-    discourseTemporal :
-      Horizon.Triple
-        (EvidenceCoordinate Candidate discourseTemporalEvidence)
+H6Evidence : Set → Set
+H6Evidence Candidate =
+  Generic.Horizon6
+    (EvidenceCoordinate Candidate localStructuralEvidence)
+    (EvidenceCoordinate Candidate discourseTemporalEvidence)
 
-open H6Evidence public
+H9Evidence : Set → Set
+H9Evidence Candidate =
+  Generic.Horizon9
+    (EvidenceCoordinate Candidate localStructuralEvidence)
+    (EvidenceCoordinate Candidate discourseTemporalEvidence)
+    (EvidenceCoordinate Candidate externalAuthorityEvidence)
 
-record H9Evidence (Candidate : Set) : Set where
-  constructor h9Evidence
-  field
-    firstSix : H6Evidence Candidate
-    externalAuthority :
-      Horizon.Triple
-        (EvidenceCoordinate Candidate externalAuthorityEvidence)
+------------------------------------------------------------------------
+-- Compatibility constructors/accessors for the pre-consolidation PNF names.
+------------------------------------------------------------------------
 
-open H9Evidence public
+h6Evidence :
+  ∀ {Candidate} →
+  H3Evidence Candidate →
+  Existing.Triple (EvidenceCoordinate Candidate discourseTemporalEvidence) →
+  H6Evidence Candidate
+h6Evidence = Generic.horizon6
+
+localStructural : ∀ {Candidate} → H6Evidence Candidate → H3Evidence Candidate
+localStructural = Generic.first3
+
+discourseTemporal :
+  ∀ {Candidate} →
+  H6Evidence Candidate →
+  Existing.Triple (EvidenceCoordinate Candidate discourseTemporalEvidence)
+discourseTemporal = Generic.second3
+
+h9Evidence :
+  ∀ {Candidate} →
+  H6Evidence Candidate →
+  Existing.Triple (EvidenceCoordinate Candidate externalAuthorityEvidence) →
+  H9Evidence Candidate
+h9Evidence = Generic.horizon9
+
+firstSix : ∀ {Candidate} → H9Evidence Candidate → H6Evidence Candidate
+firstSix = Generic.first6
+
+externalAuthority :
+  ∀ {Candidate} →
+  H9Evidence Candidate →
+  Existing.Triple (EvidenceCoordinate Candidate externalAuthorityEvidence)
+externalAuthority = Generic.third3
 
 project6to3 : ∀ {Candidate} → H6Evidence Candidate → H3Evidence Candidate
-project6to3 = localStructural
+project6to3 = Generic.project6to3
 
 project9to6 : ∀ {Candidate} → H9Evidence Candidate → H6Evidence Candidate
-project9to6 = firstSix
+project9to6 = Generic.project9to6
 
 ------------------------------------------------------------------------
 -- Generic resolution × relational-horizon bifiltration.
---
--- Unlike the concrete decimal-address witness in SSP369, this bridge accepts
--- any existing ResolutionTower.  Candidate coordinates live at the tower's
--- current resolution.  Coarsening changes only the candidate coordinate and
--- preserves the exact signed evidence/classification receipt.  Forgetting a
--- 3-coordinate relational block commutes definitionally with coarsening.
 ------------------------------------------------------------------------
 
 H3AtResolution : Resolution.ResolutionTower → Nat → Set
@@ -126,50 +140,45 @@ coarsenH3 :
   H3AtResolution tower (suc r) →
   H3AtResolution tower r
 coarsenH3 {tower} =
-  Horizon.mapTriple
+  Existing.mapTriple
     (mapEvidenceCandidate (Resolution.project tower))
 
 coarsenH6 :
   ∀ {tower r} →
   H6AtResolution tower (suc r) →
   H6AtResolution tower r
-coarsenH6 {tower} (h6Evidence firstBlock secondBlock) =
+coarsenH6 {tower} x =
   h6Evidence
-    (coarsenH3 {tower = tower} firstBlock)
-    (Horizon.mapTriple
+    (coarsenH3 {tower = tower} (localStructural x))
+    (Existing.mapTriple
       (mapEvidenceCandidate (Resolution.project tower))
-      secondBlock)
+      (discourseTemporal x))
 
 coarsenH9 :
   ∀ {tower r} →
   H9AtResolution tower (suc r) →
   H9AtResolution tower r
-coarsenH9 {tower} (h9Evidence firstSixBlock thirdBlock) =
+coarsenH9 {tower} x =
   h9Evidence
-    (coarsenH6 {tower = tower} firstSixBlock)
-    (Horizon.mapTriple
+    (coarsenH6 {tower = tower} (firstSix x))
+    (Existing.mapTriple
       (mapEvidenceCandidate (Resolution.project tower))
-      thirdBlock)
+      (externalAuthority x))
 
 coarsenThenProject6to3EqualsProjectThenCoarsen :
   ∀ {tower r} (x : H6AtResolution tower (suc r)) →
   project6to3 (coarsenH6 {tower = tower} x)
   ≡ coarsenH3 {tower = tower} (project6to3 x)
-coarsenThenProject6to3EqualsProjectThenCoarsen
-    (h6Evidence firstBlock secondBlock) = refl
+coarsenThenProject6to3EqualsProjectThenCoarsen x = refl
 
 coarsenThenProject9to6EqualsProjectThenCoarsen :
   ∀ {tower r} (x : H9AtResolution tower (suc r)) →
   project9to6 (coarsenH9 {tower = tower} x)
   ≡ coarsenH6 {tower = tower} (project9to6 x)
-coarsenThenProject9to6EqualsProjectThenCoarsen
-    (h9Evidence firstSixBlock thirdBlock) = refl
+coarsenThenProject9to6EqualsProjectThenCoarsen x = refl
 
 ------------------------------------------------------------------------
--- The horizon projection forgets evidence coordinates; it does not assert
--- their falsity.  This mirrors the existing 369 depth projection and the PNF
--- coarse/fine rule that omitted detail remains a residual rather than a
--- semantic rejection.
+-- Horizon omission is not refutation.
 ------------------------------------------------------------------------
 
 data HorizonOmissionAuthority : Set where
@@ -182,9 +191,7 @@ horizonProjectionCannotRefute :
 horizonProjectionCannotRefute ()
 
 ------------------------------------------------------------------------
--- External/authority evidence is present at H9 but still does not itself grant
--- world-canonical identity.  World promotion continues to require the existing
--- ProofRelevantIdentityFibres external-authority permission/witness path.
+-- External/authority evidence at H9 still does not grant world identity.
 ------------------------------------------------------------------------
 
 data H9WorldPromotionPermission : Set where
@@ -197,10 +204,6 @@ worldIdentityStillUsesExistingAuthority :
   Identity.WorldCanonicalPermission Identity.externalAuthority
 worldIdentityStillUsesExistingAuthority =
   Identity.externalAuthorityMayNameWorldEntity
-
-------------------------------------------------------------------------
--- Relational horizon and representation resolution are explicitly independent.
-------------------------------------------------------------------------
 
 record EvidenceHorizon369Boundary : Set where
   constructor evidenceHorizon369Boundary
@@ -223,6 +226,9 @@ record EvidenceHorizon369Boundary : Set where
     omittedHorizonCoordinateIsRefuted : Bool
     omittedHorizonCoordinateIsRefutedIsFalse :
       omittedHorizonCoordinateIsRefuted ≡ false
+    genericRelationalHorizonCoreReused : Bool
+    genericRelationalHorizonCoreReusedIsTrue :
+      genericRelationalHorizonCoreReused ≡ true
 
 open EvidenceHorizon369Boundary public
 
@@ -235,3 +241,4 @@ canonicalEvidenceHorizon369Boundary =
     true refl
     false refl
     false refl
+    true refl
