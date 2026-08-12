@@ -3,6 +3,7 @@ module DASHI.Cognition.PNF.CorpusLearningEconomy where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 open import DASHI.Cognition.PNF.ComplexityArithmetic
@@ -12,7 +13,10 @@ open import DASHI.Cognition.PNF.ComplexityArithmetic
 --
 -- This is an upper-bound theorem, not a promise about wall-clock time.  The
 -- runtime must demonstrate that an enlarged reusable context actually reduces
--- unresolved lookup/resolution work for the same token workload.
+-- unresolved lookup/resolution work for the SAME identified workload/task.
+-- Equal token counts are a throughput normalisation condition, not workload
+-- identity: two unrelated 20k-token documents may have very different semantic
+-- difficulty.
 ------------------------------------------------------------------------
 
 record CompilationWork : Set where
@@ -47,21 +51,24 @@ learningCannotIncreaseDeclaredWorkBound {before} {after} step
       (fixedNumericWork before)
 
 ------------------------------------------------------------------------
--- A stronger runtime target: when at least one formerly unresolved unit is
--- reused and fixed work is unchanged, the declared work bound should strictly
--- improve.  The tiny local arithmetic kernel does not define strict order, so
--- the runtime records the before/after totals and the non-increase theorem above
--- remains the proof-level invariant.
+-- Comparable repeated-workload receipt.
+--
+-- workloadId is an opaque runtime identity for the controlled workload.  In the
+-- implementation this should be derived from the numeric observation/task/
+-- compiler-configuration carrier, not guessed from token count.  The same
+-- workload identity plus exact token equality makes the before/after learning
+-- comparison meaningful; chronological document order alone does not.
 ------------------------------------------------------------------------
 
 record CorpusReuseReceipt : Set where
   constructor corpusReuseReceipt
   field
-    tokenWorkloadUnits : Nat
+    workloadId : String
+    beforeTokenWorkloadUnits : Nat
+    afterTokenWorkloadUnits : Nat
+    sameTokenWorkload : afterTokenWorkloadUnits ≡ beforeTokenWorkloadUnits
     before : CompilationWork
     after : CompilationWork
-    sameTokenWorkload : Nat
-    sameTokenWorkloadIsExact : sameTokenWorkload ≡ tokenWorkloadUnits
     learningStep : ReuseLearningStep before after
     reusedLexicalUnits : Nat
     reusedEntityUnits : Nat
@@ -69,11 +76,36 @@ record CorpusReuseReceipt : Set where
 
 open CorpusReuseReceipt public
 
+record CorpusReuseComparison : Set where
+  constructor corpusReuseComparison
+  field
+    beforeReceipt : CorpusReuseReceipt
+    afterReceipt : CorpusReuseReceipt
+    sameIdentifiedWorkload :
+      workloadId beforeReceipt ≡ workloadId afterReceipt
+    sameBeforeTokenCarrier :
+      beforeTokenWorkloadUnits beforeReceipt
+      ≡ beforeTokenWorkloadUnits afterReceipt
+
+open CorpusReuseComparison public
+
 data CacheSizeAloneProvesRuntimeImprovement : Set where
+
+data TokenCountAloneProvesComparableWorkload : Set where
+
+data ChronologicalOrderProvesLearningImprovement : Set where
 
 cacheSizeAloneDoesNotProveRuntimeImprovement :
   CacheSizeAloneProvesRuntimeImprovement → ⊥
 cacheSizeAloneDoesNotProveRuntimeImprovement ()
+
+tokenCountAloneDoesNotProveComparableWorkload :
+  TokenCountAloneProvesComparableWorkload → ⊥
+tokenCountAloneDoesNotProveComparableWorkload ()
+
+chronologicalOrderAloneDoesNotProveLearningImprovement :
+  ChronologicalOrderProvesLearningImprovement → ⊥
+chronologicalOrderAloneDoesNotProveLearningImprovement ()
 
 record CorpusLearningBoundary : Set where
   constructor corpusLearningBoundary
@@ -87,9 +119,20 @@ record CorpusLearningBoundary : Set where
     repeatedDomainWorkShouldBeMonotoneNonIncreasing : Bool
     repeatedDomainWorkShouldBeMonotoneNonIncreasingIsTrue :
       repeatedDomainWorkShouldBeMonotoneNonIncreasing ≡ true
+    equalTokenCountAloneMakesWorkloadsComparable : Bool
+    equalTokenCountAloneMakesWorkloadsComparableIsFalse :
+      equalTokenCountAloneMakesWorkloadsComparable ≡ false
+    chronologicalDocumentOrderProvesLearningImprovement : Bool
+    chronologicalDocumentOrderProvesLearningImprovementIsFalse :
+      chronologicalDocumentOrderProvesLearningImprovement ≡ false
 
 open CorpusLearningBoundary public
 
 canonicalCorpusLearningBoundary : CorpusLearningBoundary
 canonicalCorpusLearningBoundary =
-  corpusLearningBoundary true refl false refl true refl
+  corpusLearningBoundary
+    true refl
+    false refl
+    true refl
+    false refl
+    false refl
