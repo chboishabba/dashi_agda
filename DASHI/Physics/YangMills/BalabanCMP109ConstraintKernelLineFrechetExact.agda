@@ -45,6 +45,7 @@ record ConstraintFrechetKernelLine
 
     base direction : State
     scalarAction : ℚ → State → State
+    scalarActionOnConstraint : ℚ → Constraint → Constraint
 
     constraintAtBaseZero :
       Frechet.function expansion base ≡ Frechet.zero constraint
@@ -56,8 +57,6 @@ record ConstraintFrechetKernelLine
       Frechet.derivative expansion base (scalarAction scalar direction)
       ≡ scalarActionOnConstraint scalar
           (Frechet.derivative expansion base direction)
-
-    scalarActionOnConstraint : ℚ → Constraint → Constraint
 
     scalarZeroConstraint : ∀ scalar →
       scalarActionOnConstraint scalar (Frechet.zero constraint)
