@@ -26,8 +26,6 @@ module DASHI.Physics.Closure.NSTriadKNHHBadSelectedThresholdRecurrenceRound47Exa
 --   beta <= (1-alpha) M.
 --
 -- Then C_q = delta_*^(-1) 2^q B_q obeys C_q <= M for every shell.
--- This is the shortest shell-recursive target unless a later consumer really
--- requires cross-threshold uniformity.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
@@ -72,7 +70,8 @@ record SelectedThresholdDefectRecurrence : Set where
 open SelectedThresholdDefectRecurrence public
 
 asPhysicalDefectRecurrence :
-  SelectedThresholdDefectRecurrence → Defect.PhysicalDefectShellRecurrence
+  (selected : SelectedThresholdDefectRecurrence) →
+  Defect.PhysicalDefectShellRecurrence (parameter selected)
 asPhysicalDefectRecurrence selected = record
   { defectRate = defectRate selected
   ; alpha = alpha selected
