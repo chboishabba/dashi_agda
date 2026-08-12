@@ -11,10 +11,6 @@ import DASHI.Core.ClassificationEdge as Classification
 import DASHI.Reasoning.AttractorAlignedBranchSelection as Selection
 import DASHI.Reasoning.RelationalBranchInterference as Interference
 
-------------------------------------------------------------------------
--- Predicate participation induces type pressure; it does not assert a type.
-------------------------------------------------------------------------
-
 record TypePressureContribution
     {Subject CandidateType Evidence : Set}
     (subject : Subject)
@@ -122,10 +118,6 @@ envelopeClassification :
 envelopeClassification envelope =
   Interference.classifySignedInteraction (envelopePressure envelope)
 
-------------------------------------------------------------------------
--- Predicate-role specialization.
-------------------------------------------------------------------------
-
 record PredicateRolePressure
     {Subject CandidateType Predicate Role Evidence : Set}
     (subject : Subject)
@@ -163,14 +155,6 @@ numericRolePressureClassification :
 numericRolePressureClassification pressure =
   Interference.classifySignedInteraction (signedRolePressure pressure)
 
-------------------------------------------------------------------------
--- Soft-type classification adapter.
---
--- Type pressure can create a revisable classification edge in the generic
--- classification carrier.  The edge records why the type is plausible; it is
--- still not a type assertion and cannot manufacture identity or ontology truth.
-------------------------------------------------------------------------
-
 record NumericTypePressureEvidence : Set where
   constructor numericTypePressureEvidence
   field
@@ -190,10 +174,10 @@ classificationEdgeFromTypePressure :
   NumericPredicateRolePressure subject candidateType →
   Nat →
   TypePressureClassificationEdge
-classificationEdgeFromTypePressure pressure revision =
+classificationEdgeFromTypePressure {subject} {candidateType} pressure revision =
   Classification.classificationEdge
-    _
-    _
+    subject
+    candidateType
     (numericTypePressureEvidence
       (factor pressure)
       (roleSymbol pressure)
@@ -201,10 +185,6 @@ classificationEdgeFromTypePressure pressure revision =
     revision
     (pressureProvenance pressure)
     (pressureScope pressure)
-
-------------------------------------------------------------------------
--- Authority boundary.
-------------------------------------------------------------------------
 
 data TypePressurePromotionPermission : Set where
 
