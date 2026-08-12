@@ -24,11 +24,9 @@ module DASHI.Physics.Closure.NSTriadKNHHGoodParabolicAmplitudeAllocationRound42E
 -- lambda_q^2 cost of controlling one vorticity square by kinetic energy is
 -- cancelled by a terminal window of total mass O(lambda_q^-2).
 --
--- The HH-good local mass, however, is not just that selected square: it is the
--- selected square times the residual quartic core.  This file carries the
--- parabolic cancellation through that exact product.
---
--- For nonnegative time cells assume
+-- The HH-good local mass is the selected square times the residual quartic
+-- core.  This file carries the parabolic cancellation through that exact
+-- product.  For nonnegative time cells assume
 --
 --   omega_i^2 <= lambda_q^2 E0,
 --   Q_i <= Q,
@@ -38,19 +36,15 @@ module DASHI.Physics.Closure.NSTriadKNHHGoodParabolicAmplitudeAllocationRound42E
 --
 --   sum_i dt_i omega_i^2 Q_i <= c E0 Q.
 --
--- If the common quartic envelope itself satisfies
---
---   Q <= X D,
---
--- the desired time-localized degree-six factorization follows:
+-- If the common quartic envelope satisfies Q <= X D, then
 --
 --   sum_i dt_i omega_i^2 Q_i <= c E0 X D.
 --
 -- This is a concrete repaired version of the false pointwise `W<=E0 X D`
--- shortcut.  The remaining physical work is now sharply same-object:
--- construct the actual terminal-window cells after PV/shell localization and
--- prove a cutoff-uniform quartic envelope (or a stronger replacement).  The
--- algebra here does not assert that such a supremum/envelope is available.
+-- shortcut.  The remaining physical work is sharply same-object: construct
+-- the actual terminal-window cells after PV/shell localization and prove a
+-- cutoff-uniform quartic envelope (or a stronger replacement).  No continuum
+-- time-integration or supremum theorem is fabricated here.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -62,7 +56,6 @@ import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
-import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
 import DASHI.Physics.Closure.NSTriadKNAdmissibleOwnerTaxLanguageRound28Exact as Owner
 import DASHI.Physics.Closure.NSTriadKNHHGoodParabolicWindowKineticRecoveryRound42Exact as Window
 
@@ -101,58 +94,25 @@ localizedAmplitudeQuarticMass (cell ∷ rest) =
   + localizedAmplitudeQuarticMass rest
 
 localAmplitudeQuarticBelowUniformEnvelope :
-  ∀ {shell dataEnergy quarticEnvelope}
-    (envelopeNN : 0ℚ ≤ quarticEnvelope)
-    (cell : ParabolicAmplitudeCell shell dataEnergy quarticEnvelope) →
+  ∀ {shell dataEnergy quarticEnvelope} →
+  0ℚ ≤ dataEnergy →
+  0ℚ ≤ quarticEnvelope →
+  (cell : ParabolicAmplitudeCell shell dataEnergy quarticEnvelope) →
   timeWeight cell * selectedVorticitySquare cell * quarticCore cell
   ≤
   timeWeight cell
     * (Window.frequencySquare shell * dataEnergy)
     * quarticEnvelope
 localAmplitudeQuarticBelowUniformEnvelope
-    {shell} {dataEnergy} {quarticEnvelope} envelopeNN cell =
+    {shell} {dataEnergy} dataEnergyNN envelopeNN cell =
   let
-    weightNN = timeWeightNonnegative cell
-    omegaNN = selectedVorticitySquareNonnegative cell
-    frequencyEnergyNN : 0ℚ ≤ Window.frequencySquare shell * dataEnergy
-    frequencyEnergyNN =
-      let
-        -- The physical record below always supplies nonnegative dataEnergy.
-        -- Here this nonnegativity is recovered from the vorticity upper bound
-        -- only after multiplication, so the monotone step is split differently:
-        -- first scale the vorticity inequality by the nonnegative time weight;
-        -- then scale the quartic inequality by that nonnegative product.
-        instance weightNNI = nonNegative weightNN
-      in
-      ℚP.≤-trans 0ℚ≤weightedOmega weightedUpper
-      where
-      0ℚ≤weightedOmega :
-        0ℚ ≤ timeWeight cell * selectedVorticitySquare cell
-      0ℚ≤weightedOmega =
-        let
-          instance
-            weightNNI = nonNegative weightNN
-            omegaNNI = nonNegative omegaNN
-            productNNI = ℚP.nonNeg*nonNeg⇒nonNeg
-              (timeWeight cell) (selectedVorticitySquare cell)
-        in
-        ℚP.nonNegative⁻¹
-          (timeWeight cell * selectedVorticitySquare cell)
-
-      weightedUpper :
-        timeWeight cell * selectedVorticitySquare cell
-        ≤ timeWeight cell * (Window.frequencySquare shell * dataEnergy)
-      weightedUpper =
-        let instance weightNNI = nonNegative weightNN
-        in ℚP.*-monoˡ-≤-nonNeg (timeWeight cell)
-            (vorticitySquareBelowFrequencyKinetic cell)
-
     weightedOmegaUpper :
       timeWeight cell * selectedVorticitySquare cell
       ≤ timeWeight cell * (Window.frequencySquare shell * dataEnergy)
     weightedOmegaUpper =
-      let instance weightNNI = nonNegative weightNN
-      in ℚP.*-monoˡ-≤-nonNeg (timeWeight cell)
+      let instance weightNN = nonNegative (timeWeightNonnegative cell)
+      in ℚP.*-monoˡ-≤-nonNeg
+          (timeWeight cell)
           (vorticitySquareBelowFrequencyKinetic cell)
 
     leftScale :
@@ -161,8 +121,34 @@ localAmplitudeQuarticBelowUniformEnvelope
       (timeWeight cell * (Window.frequencySquare shell * dataEnergy))
         * quarticCore cell
     leftScale =
-      let instance coreNNI = nonNegative (quarticCoreNonnegative cell)
+      let instance coreNN = nonNegative (quarticCoreNonnegative cell)
       in ℚP.*-monoʳ-≤-nonNeg (quarticCore cell) weightedOmegaUpper
+
+    frequencyEnergyNN :
+      0ℚ ≤ Window.frequencySquare shell * dataEnergy
+    frequencyEnergyNN =
+      let
+        instance
+          frequencyNN = nonNegative (Window.frequencySquareNonnegative shell)
+          energyNN = nonNegative dataEnergyNN
+          productNN = ℚP.nonNeg*nonNeg⇒nonNeg
+            (Window.frequencySquare shell) dataEnergy
+      in
+      ℚP.nonNegative⁻¹ (Window.frequencySquare shell * dataEnergy)
+
+    weightedFrequencyEnergyNN :
+      0ℚ ≤ timeWeight cell * (Window.frequencySquare shell * dataEnergy)
+    weightedFrequencyEnergyNN =
+      let
+        instance
+          weightNN = nonNegative (timeWeightNonnegative cell)
+          frequencyEnergyNNI = nonNegative frequencyEnergyNN
+          productNN = ℚP.nonNeg*nonNeg⇒nonNeg
+            (timeWeight cell)
+            (Window.frequencySquare shell * dataEnergy)
+      in
+      ℚP.nonNegative⁻¹
+        (timeWeight cell * (Window.frequencySquare shell * dataEnergy))
 
     rightScale :
       (timeWeight cell * (Window.frequencySquare shell * dataEnergy))
@@ -171,15 +157,10 @@ localAmplitudeQuarticBelowUniformEnvelope
       (timeWeight cell * (Window.frequencySquare shell * dataEnergy))
         * quarticEnvelope
     rightScale =
-      let
-        prefixNN :
-          0ℚ ≤ timeWeight cell * (Window.frequencySquare shell * dataEnergy)
-        prefixNN = frequencyEnergyNN
-        instance prefixNNI = nonNegative prefixNN
-      in
-      ℚP.*-monoˡ-≤-nonNeg
-        (timeWeight cell * (Window.frequencySquare shell * dataEnergy))
-        (quarticCoreBelowEnvelope cell)
+      let instance prefixNN = nonNegative weightedFrequencyEnergyNN
+      in ℚP.*-monoˡ-≤-nonNeg
+          (timeWeight cell * (Window.frequencySquare shell * dataEnergy))
+          (quarticCoreBelowEnvelope cell)
   in
   ℚP.≤-trans leftScale rightScale
 
@@ -205,33 +186,45 @@ localizedAmplitudeQuarticBelowFrequencyEnvelopeTimeMass :
   ≤
   Window.frequencySquare shell * dataEnergy * quarticEnvelope
     * amplitudeTimeMass (cells recovery)
-localizedAmplitudeQuarticBelowFrequencyEnvelopeTimeMass recovery =
+localizedAmplitudeQuarticBelowFrequencyEnvelopeTimeMass
+    {shell} {dataEnergy} {quarticEnvelope = quarticEnvelope} recovery =
   go (cells recovery)
   where
   go :
-    ∀ selected →
+    (selected : List (ParabolicAmplitudeCell shell dataEnergy quarticEnvelope)) →
     localizedAmplitudeQuarticMass selected
-    ≤ Window.frequencySquare _ * _ * _ * amplitudeTimeMass selected
+    ≤ Window.frequencySquare shell * dataEnergy * quarticEnvelope
+        * amplitudeTimeMass selected
   go [] =
     subst
       (λ upper → 0ℚ ≤ upper)
       (solve
-        ( Window.frequencySquare _
-        ∷ dataEnergy _
-        ∷ quarticEnvelope _
+        ( Window.frequencySquare shell
+        ∷ dataEnergy
+        ∷ quarticEnvelope
         ∷ []))
       ℚP.≤-refl
   go (cell ∷ rest) =
     let
       local = localAmplitudeQuarticBelowUniformEnvelope
-        (quarticEnvelopeNonnegative recovery) cell
+        (dataEnergyNonnegative recovery)
+        (quarticEnvelopeNonnegative recovery)
+        cell
       tail = go rest
       added = ℚP.+-mono-≤ local tail
+
+      rightMeaning :
+        timeWeight cell * (Window.frequencySquare shell * dataEnergy)
+          * quarticEnvelope
+        + Window.frequencySquare shell * dataEnergy * quarticEnvelope
+          * amplitudeTimeMass rest
+        ≡ Window.frequencySquare shell * dataEnergy * quarticEnvelope
+          * amplitudeTimeMass (cell ∷ rest)
       rightMeaning = solve
         ( timeWeight cell
-        ∷ Window.frequencySquare _
-        ∷ dataEnergy _
-        ∷ quarticEnvelope _
+        ∷ Window.frequencySquare shell
+        ∷ dataEnergy
+        ∷ quarticEnvelope
         ∷ amplitudeTimeMass rest
         ∷ [])
     in
