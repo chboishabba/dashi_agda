@@ -27,6 +27,7 @@ module DASHI.Physics.Closure.NSTriadKNHHBadRestrictedThresholdDomainRound47Exact
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
+open import Data.Product.Base using (_×_)
 open import Data.Rational.Base using (ℚ; 0ℚ; _*_; _≤_; _<_; nonNegative)
 import Data.Rational.Properties as ℚP
 
