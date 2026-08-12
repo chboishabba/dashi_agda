@@ -19,7 +19,8 @@ module DASHI.Physics.Closure.NSTriadKNHHBadInverseShellOwnerCostRound42Exact whe
 --
 --   R_q = 2 lambda_q,
 --
--- so the unique exact gain calibrating an owner coefficient eta is
+-- so the unique exact gain calibrating a pre-threshold shell coefficient eta
+-- is
 --
 --   (eta/2) lambda_q^-1.
 --
@@ -34,15 +35,20 @@ module DASHI.Physics.Closure.NSTriadKNHHBadInverseShellOwnerCostRound42Exact whe
 --
 --   c_q R_q = 2 C_q
 --
--- exactly.  Therefore the induced HH-bad viscosity tax is not merely O(C): it
--- is exactly 2 C before any scale-free majorization.  If C_q <= C_bad, then
+-- exactly.  Thus the *raw-ratio neutralization cost* is exactly 2 C_q before
+-- scale-free majorization, and C_q <= C_bad gives
 --
 --   c_q R_q <= 2 C_bad.
 --
--- This number should be fed directly into the nine-owner reserve optimizer.
--- In particular, a physical proof of the inverse-shell power is insufficient
--- unless the scale-free coefficient is also small enough that its doubled
--- owner cost fits the global viscosity budget.
+-- IMPORTANT: 2 C_bad is not yet the final HH-bad owner viscosity tax.  The
+-- directional bad-set threshold contributes the separate delta^-1 factor
+-- already proved in Round 40.  The companion
+-- `NSTriadKNHHBadThresholdedOwnerCostRound42Exact` composes both mechanisms and
+-- gives the actual reserve coefficient 2 C_bad / delta.
+--
+-- This file therefore isolates the exact cost of the inverse-shell mechanism
+-- itself.  A proof of the inverse shell power is still useless if the physical
+-- scale-free C_bad is too large after the threshold tax is restored.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
@@ -171,11 +177,22 @@ inverseShellDensityFitsOwnerEta certificate eta doubledConstantBelowEta =
     (inverseShellDensityRawRatioBelowDoubledConstant certificate)
     doubledConstantBelowEta
 
+exactHHBadRawRatioCostFromOneDerivativeDensityClosed : Bool
+exactHHBadRawRatioCostFromOneDerivativeDensityClosed = true
+
+physicalHHBadRawRatioNeutralizationNeedsDoubledScaleFreeConstant : Bool
+physicalHHBadRawRatioNeutralizationNeedsDoubledScaleFreeConstant = true
+
+-- Backward-compatible names retained for the stacked Round-42 consumer.  They
+-- refer only to the pre-threshold raw-ratio cost; the thresholded companion is
+-- the actual nine-owner coefficient.
 exactHHBadOwnerCostFromOneDerivativeDensityClosed : Bool
-exactHHBadOwnerCostFromOneDerivativeDensityClosed = true
+exactHHBadOwnerCostFromOneDerivativeDensityClosed =
+  exactHHBadRawRatioCostFromOneDerivativeDensityClosed
 
 physicalHHBadReserveNowNeedsDoubledScaleFreeConstant : Bool
-physicalHHBadReserveNowNeedsDoubledScaleFreeConstant = true
+physicalHHBadReserveNowNeedsDoubledScaleFreeConstant =
+  physicalHHBadRawRatioNeutralizationNeedsDoubledScaleFreeConstant
 
 exactHHBadOwnerCostFromOneDerivativeDensityClosedIsTrue :
   exactHHBadOwnerCostFromOneDerivativeDensityClosed ≡ true
