@@ -29,16 +29,20 @@ module DASHI.Physics.YangMills.BalabanPath13PreconditionedFlatCombinedFloorExact
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Data.Rational.Base as ℚ using (ℚ; _+_; _*_; _≤_)
+open import Data.Rational.Base as ℚ using
+  (ℚ; 0ℚ; _+_; _-_; _*_; _≤_; _/_; NonNegative)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using
-  (cong; subst; sym; trans)
+  (subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact using
   (sumRational; sumRationalCong)
 open import DASHI.Physics.YangMills.BalabanBoolean4BlockPoincareExact using (sq)
+import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as FiniteL2
+import DASHI.Physics.YangMills.BalabanP33FiniteWeightedSchurSquaredExact as Schur
+import DASHI.Physics.YangMills.BalabanPhysicalBlockAverageConstraintMatrixExact as BlockAverage
 import DASHI.Physics.YangMills.BalabanPhysicalSU2FiniteCoordinatesExact as Physical
 import DASHI.Physics.YangMills.BalabanPath13NormalizedAxisAverageExact as Side13
 import DASHI.Physics.YangMills.BalabanPath13GeneratedLDLCertificate as LDL
@@ -80,6 +84,28 @@ stateDotSymmetric13 left right =
     (Physical.physicalSU2Coordinates Side13.side13) _ _
     (λ state → ℚRing.solve-∀ (left state) (right state))
 
+finiteSumExpand :
+  ∀ {A : Set} (values : Agda.Builtin.List.List A)
+    (left right : A → ℚ) →
+  sumRational values
+    (λ value →
+      sq (left value)
+      + (left value * right value + right value * left value)
+      + sq (right value))
+  ≡ sumRational values (λ value → sq (left value))
+    + (sumRational values (λ value → left value * right value)
+      + sumRational values (λ value → right value * left value))
+    + sumRational values (λ value → sq (right value))
+finiteSumExpand Agda.Builtin.List.[] left right = ℚRing.solve []
+finiteSumExpand (Agda.Builtin.List._∷_ value values) left right
+  rewrite finiteSumExpand values left right =
+  ℚRing.solve-∀
+    (left value) (right value)
+    (sumRational values (λ current → sq (left current)))
+    (sumRational values (λ current → left current * right current))
+    (sumRational values (λ current → right current * left current))
+    (sumRational values (λ current → sq (right current)))
+
 combinedNormPythagoras13 : ∀ multiplier →
   combinedAdjointNormSq13 multiplier
   ≡ Average.stateNormSq
@@ -105,14 +131,16 @@ combinedNormPythagoras13 multiplier =
           (Physical.physicalSU2Coordinates Side13.side13) _ _
           (λ state →
             ℚRing.solve-∀ (averageVector state) (gaugeVector state)))
-        (sumFourTerms averageVector gaugeVector)
+        (finiteSumExpand
+          (Physical.physicalSU2Coordinates Side13.side13)
+          averageVector gaugeVector)
 
-    firstCrossZero : stateDot13 averageVector gaugeVector ≡ Data.Rational.0ℚ
+    firstCrossZero : stateDot13 averageVector gaugeVector ≡ 0ℚ
     firstCrossZero =
       Orthogonal.preconditionedAverageGaugeInnerExactZero
         (averageMultiplier multiplier) (gaugeMultiplier multiplier)
 
-    secondCrossZero : stateDot13 gaugeVector averageVector ≡ Data.Rational.0ℚ
+    secondCrossZero : stateDot13 gaugeVector averageVector ≡ 0ℚ
     secondCrossZero =
       trans
         (stateDotSymmetric13 gaugeVector averageVector)
@@ -130,7 +158,7 @@ combinedNormPythagoras13 multiplier =
       (subst
         (λ secondCross →
           Average.stateNormSq averageVector
-          + (Data.Rational.0ℚ + secondCross)
+          + (0ℚ + secondCross)
           + Flat.flatGaugeAdjointNormSq13 (gaugeMultiplier multiplier)
           ≡ Average.stateNormSq averageVector
             + Flat.flatGaugeAdjointNormSq13 (gaugeMultiplier multiplier))
@@ -138,44 +166,6 @@ combinedNormPythagoras13 multiplier =
         (ℚRing.solve-∀
           (Average.stateNormSq averageVector)
           (Flat.flatGaugeAdjointNormSq13 (gaugeMultiplier multiplier)))))
-  where
-  sumFourTerms : ∀ averageVector gaugeVector →
-    sumRational (Physical.physicalSU2Coordinates Side13.side13)
-      (λ state →
-        sq (averageVector state)
-        + (averageVector state * gaugeVector state
-          + gaugeVector state * averageVector state)
-        + sq (gaugeVector state))
-    ≡ Average.stateNormSq averageVector
-      + (stateDot13 averageVector gaugeVector
-        + stateDot13 gaugeVector averageVector)
-      + Average.stateNormSq gaugeVector
-  sumFourTerms averageVector gaugeVector =
-    finiteSumExpand
-      (Physical.physicalSU2Coordinates Side13.side13)
-      averageVector gaugeVector
-
-  finiteSumExpand :
-    ∀ {A : Set} (values : Agda.Builtin.List.List A)
-      (left right : A → ℚ) →
-    sumRational values
-      (λ value →
-        sq (left value)
-        + (left value * right value + right value * left value)
-        + sq (right value))
-    ≡ sumRational values (λ value → sq (left value))
-      + (sumRational values (λ value → left value * right value)
-        + sumRational values (λ value → right value * left value))
-      + sumRational values (λ value → sq (right value))
-  finiteSumExpand Agda.Builtin.List.[] left right = ℚRing.solve []
-  finiteSumExpand (Agda.Builtin.List._∷_ value values) left right
-    rewrite finiteSumExpand values left right =
-    ℚRing.solve-∀
-      (left value) (right value)
-      (sumRational values (λ current → sq (left current)))
-      (sumRational values (λ current → left current * right current))
-      (sumRational values (λ current → right current * left current))
-      (sumRational values (λ current → sq (right current)))
 
 record ReducedCombinedMultiplier13 (multiplier : CombinedMultiplier13) : Set where
   field
@@ -188,36 +178,41 @@ oneEighteenthBelowOne : ∀ value →
   0ℚ ≤ value → LDL.oneEighteenth * value ≤ value
 oneEighteenthBelowOne value nonnegative =
   let
+    coefficient : ℚ
+    coefficient = + 17 / 18
+
+    instance
+      coefficientNN : NonNegative coefficient
+      coefficientNN = ℚ.nonNegative (ℚP.nonNegative⁻¹ coefficient)
+
+    scaledNonnegative : 0ℚ ≤ coefficient * value
+    scaledNonnegative =
+      ℚP.*-monoʳ-≤-nonNeg value nonnegative
+
     differenceNonnegative :
       0ℚ ≤ value - LDL.oneEighteenth * value
     differenceNonnegative =
       subst
         (λ candidate → 0ℚ ≤ candidate)
         (ℚRing.solve-∀ value)
-        (scaleNonnegative value nonnegative)
+        scaledNonnegative
   in
-  differenceImpliesBelow differenceNonnegative
-  where
-  scaleNonnegative : ∀ value → 0ℚ ≤ value →
-    0ℚ ≤ (+ 17 / 18) * value
-  scaleNonnegative current currentNonnegative =
-    let
-      instance
-        coefficientNN : ℚ.NonNegative (+ 17 / 18)
-        coefficientNN = ℚ.nonNegative (ℚP.nonNegative⁻¹ (+ 17 / 18))
-    in
-    ℚP.*-monoʳ-≤-nonNeg current currentNonnegative
+  ℚP.≤-trans
+    (subst
+      (λ candidate → LDL.oneEighteenth * value ≤ candidate)
+      (sym (ℚRing.solve-∀ LDL.oneEighteenth value))
+      ℚP.≤-refl)
+    (subst
+      (λ candidate → LDL.oneEighteenth * value ≤ candidate)
+      (ℚRing.solve-∀ LDL.oneEighteenth value)
+      (ℚP.+-monoˡ-≤ (LDL.oneEighteenth * value) differenceNonnegative))
 
-  differenceImpliesBelow : ∀ {left right : ℚ} →
-    0ℚ ≤ right - left → left ≤ right
-  differenceImpliesBelow {left} {right} nonnegative =
-    ℚP.≤-trans
-      (subst (λ candidate → left ≤ candidate)
-        (sym (ℚRing.solve-∀ left)) ℚP.≤-refl)
-      (subst
-        (λ candidate → left ≤ candidate)
-        (ℚRing.solve-∀ left right)
-        (ℚP.+-monoˡ-≤ left nonnegative))
+averageRowNormNonnegative : ∀ multiplier →
+  0ℚ ≤ Average.rowNormSq multiplier
+averageRowNormNonnegative multiplier =
+  Schur.sumNonnegative BlockAverage.selectedBlockAverageRows
+    (λ row → sq (multiplier row))
+    (λ row → FiniteL2.squareNonnegative (multiplier row))
 
 preconditionedFlatCombinedFloor13 :
   ∀ multiplier → ReducedCombinedMultiplier13 multiplier →
@@ -233,11 +228,6 @@ preconditionedFlatCombinedFloor13 multiplier reduced =
     gaugeFloor =
       GaugeFloor.flatGaugeAdjointPoincareFloor13
         (gaugeMultiplier multiplier) (gaugeReduced reduced)
-    alphaNonnegative =
-      Average.Schur.sumNonnegative Average.BlockAverage.selectedBlockAverageRows
-        (λ row → sq (averageMultiplier multiplier row))
-        (λ row → Average.FiniteL2.squareNonnegative
-          (averageMultiplier multiplier row))
   in
   subst
     (λ upper →
@@ -256,7 +246,8 @@ preconditionedFlatCombinedFloor13 multiplier reduced =
             + Flat.flatGaugeAdjointNormSq13 (gaugeMultiplier multiplier))
         (ℚRing.solve-∀ LDL.oneEighteenth alphaNorm gammaNorm)
         (ℚP.+-mono-≤
-          (oneEighteenthBelowOne alphaNorm alphaNonnegative)
+          (oneEighteenthBelowOne alphaNorm
+            (averageRowNormNonnegative (averageMultiplier multiplier)))
           gaugeFloor)))
 
 path13PreconditionedFlatCombinedFloorLevel : ProofLevel
