@@ -7,17 +7,16 @@ module DASHI.Crypto.MLKEMNTTLocalPriorCouplingExact where
 -- "Module-Lattice-Based Key-Encapsulation Mechanism Standard",
 -- FIPS 203, 2024. DOI: 10.6028/NIST.FIPS.203.
 --
--- FIPS 203 factors X^256+1 into 128 quadratic factors over Z_q.  Multiplication
+-- FIPS 203 factors X^256+1 into 128 quadratic factors over Z_q. Multiplication
 -- in T_q is independent across those 128 degree-one residue coordinates.
 -- However K-PKE samples s,e from a small-coefficient distribution in R_q
--- before applying the NTT.  Therefore local NTT algebra does not by itself
--- prove that the *prior / smallness predicate* factors into independent NTT
--- search lanes.  This file makes that missing theorem explicit.
+-- before applying the NTT. Therefore local NTT algebra does not by itself
+-- prove that the prior/smallness predicate factors into independent NTT lanes.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; _*_)
 open import Data.Empty using (⊥)
 open import Data.Product using (_×_; _,_)
 
@@ -29,16 +28,10 @@ coefficientsPerNTTCoordinate = 2
 
 nttArrayCoefficientCount : Nat
 nttArrayCoefficientCount =
-  nttQuadraticCoordinateCount Data.Nat.Base.* coefficientsPerNTTCoordinate
-  where
-  import Data.Nat.Base
+  nttQuadraticCoordinateCount * coefficientsPerNTTCoordinate
 
 nttArrayCoefficientCountIs256 : nttArrayCoefficientCount ≡ 256
 nttArrayCoefficientCountIs256 = refl
-
-------------------------------------------------------------------------
--- Exact transform plus source-domain prior.
-------------------------------------------------------------------------
 
 record ExactPriorTransform : Set₁ where
   constructor exactPriorTransform
@@ -62,10 +55,6 @@ sourcePriorTransportedExactly :
 sourcePriorTransportedExactly transform source prior
   rewrite decodeEncode transform source = prior
 
-------------------------------------------------------------------------
--- Local target-coordinate plausibility is a separate decomposition theorem.
-------------------------------------------------------------------------
-
 record TwoTargetLocalPriorFactorisation
     (transform : ExactPriorTransform) : Set₁ where
   constructor twoTargetLocalPriorFactorisation
@@ -82,11 +71,6 @@ record TwoTargetLocalPriorFactorisation
       (Prior₁ (local₁ target) × Reconcile (local₀ target) (local₁ target))
 
 open TwoTargetLocalPriorFactorisation public
-
-------------------------------------------------------------------------
--- Finite regression: exact transform/local coordinates can be perfectly easy
--- while the prior remains entirely in reconciliation.
-------------------------------------------------------------------------
 
 record BitPair : Set where
   constructor bitPair
@@ -125,10 +109,6 @@ crossedLocalsEachPass = refl , refl
 
 crossedLocalsFailReconciliation : EqualBits false true → ⊥
 crossedLocalsFailReconciliation ()
-
-------------------------------------------------------------------------
--- FIPS-facing boundary.
-------------------------------------------------------------------------
 
 record NTTSearchBoundary : Set where
   constructor nttSearchBoundary
