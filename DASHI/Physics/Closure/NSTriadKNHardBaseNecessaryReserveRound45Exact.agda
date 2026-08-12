@@ -33,10 +33,10 @@ module DASHI.Physics.Closure.NSTriadKNHardBaseNecessaryReserveRound45Exact where
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
-open import Data.Rational.Base using (ℚ; 1ℚ; _+_; _≤_; _<_)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _≤_; _<_)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 open import Relation.Nullary.Negation using (¬_)
 
 import DASHI.Physics.Closure.NSTriadKNLuoBadCoherenceWeightedMarkovExact as Threshold
@@ -91,9 +91,6 @@ hardBaseBelowFullTotal core split =
       (λ upper → 0ℚ + base ≤ upper)
       (sym (hardSoftTotalIsSplitPlusHardBase core split))
       add)
-  where
-  open import Data.Rational.Base using (0ℚ)
-  open import Relation.Binary.PropositionalEquality using (sym)
 
 strictReserveImpliesHardBaseStrict :
   ∀ {environment}
