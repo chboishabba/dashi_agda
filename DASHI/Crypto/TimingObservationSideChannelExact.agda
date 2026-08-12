@@ -9,17 +9,12 @@ module DASHI.Crypto.TimingObservationSideChannelExact where
 --
 -- Andres Freund's 2024 xz/liblzma investigation is included as engineering
 -- provenance: anomalous CPU/runtime behaviour around sshd helped expose the
--- compromised library path.  No DOI is asserted for the oss-security report.
---
--- Timing is treated exactly like any other observation: if it varies inside a
--- public fibre, it can refine that fibre.  This module does not assert that any
--- named conforming cryptographic implementation has such a split.
+-- compromised library path. No DOI is asserted for the oss-security report.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
-open import Relation.Binary.PropositionalEquality using (cong)
 
 import DASHI.Crypto.ChosenCiphertextObservationRefinementExact as Obs
 
@@ -29,7 +24,6 @@ record TimedPublicSystem : Set₁ where
     Hidden Public Query : Set
     project : Hidden → Public
     runtime : Hidden → Query → Nat
-
 open TimedPublicSystem public
 
 record FibreConstantTiming (system : TimedPublicSystem) : Set₁ where
@@ -38,7 +32,6 @@ record FibreConstantTiming (system : TimedPublicSystem) : Set₁ where
     sameRuntime : ∀ {left right} →
       project system left ≡ project system right →
       ∀ q → runtime system left q ≡ runtime system right q
-
 open FibreConstantTiming public
 
 record TimingSplit (system : TimedPublicSystem) : Set where
@@ -48,17 +41,14 @@ record TimingSplit (system : TimedPublicSystem) : Set where
     samePublic : project system left ≡ project system right
     query : Query system
     runtimeDiffers : runtime system left query ≡ runtime system right query → ⊥
-
 open TimingSplit public
 
 timingSplitRefutesFibreConstant :
   ∀ {system : TimedPublicSystem} →
   TimingSplit system → FibreConstantTiming system → ⊥
 timingSplitRefutesFibreConstant split constant =
-  runtimeDiffers split
-    (sameRuntime constant (samePublic split) (query split))
+  runtimeDiffers split (sameRuntime constant (samePublic split) (query split))
 
--- Runtime itself is an observation system.
 timingObservationSystem : TimedPublicSystem → Obs.ObservationSystem
 timingObservationSystem system =
   Obs.observationSystem (Hidden system) (Query system) Nat (runtime system)
@@ -71,8 +61,42 @@ timingSplitGivesObservationSplit split =
     (left split) (right split) (query split) (runtimeDiffers split)
 
 ------------------------------------------------------------------------
--- Coarsened/bucketed timing remains security-relevant whenever the bucket is
--- still able to distinguish two states in the same public fibre.
+-- Timing can reveal much less than the hidden state and still reveal the
+-- desired/protected result.  This is the timing analogue of public secret-label
+-- factorisation: a decoder maps elapsed-time observation to a protected outcome.
+------------------------------------------------------------------------
+
+record TimingOutcomeFactorisation (system : TimedPublicSystem) : Set₁ where
+  constructor timingOutcomeFactorisation
+  field
+    Outcome : Set
+    protectedOutcome : Hidden system → Outcome
+    chosenQuery : Query system
+    decodeRuntime : Nat → Outcome
+    outcomeFactorsThroughTiming : ∀ hidden →
+      decodeRuntime (runtime system hidden chosenQuery) ≡ protectedOutcome hidden
+open TimingOutcomeFactorisation public
+
+-- Thus a side channel need not identify the key: it is already consequential
+-- when it factors a protected predicate/result.
+TimingRevealsOutcome :
+  ∀ {system : TimedPublicSystem} →
+  TimingOutcomeFactorisation system → Set
+TimingRevealsOutcome factorisation =
+  ∀ hidden →
+    decodeRuntime factorisation
+      (runtime _ hidden (chosenQuery factorisation)) ≡
+    protectedOutcome factorisation hidden
+
+timingFactorisationRevealsOutcome :
+  ∀ {system : TimedPublicSystem}
+    (factorisation : TimingOutcomeFactorisation system) →
+  TimingRevealsOutcome factorisation
+timingFactorisationRevealsOutcome factorisation =
+  outcomeFactorsThroughTiming factorisation
+
+------------------------------------------------------------------------
+-- Coarsened/bucketed timing can still split a fibre.
 ------------------------------------------------------------------------
 
 record BucketedTimingSplit (system : TimedPublicSystem) : Set₁ where
@@ -86,14 +110,9 @@ record BucketedTimingSplit (system : TimedPublicSystem) : Set₁ where
     bucketDiffers :
       bucket (runtime system left query) ≡
       bucket (runtime system right query) → ⊥
-
 open BucketedTimingSplit public
 
--- Constant-time at this abstraction means constancy on every public fibre, not
--- merely "usually similar" wall-clock time.
 record TimingInvariant (system : TimedPublicSystem) : Set₁ where
   constructor timingInvariant
-  field
-    publicFibreConstant : FibreConstantTiming system
-
+  field publicFibreConstant : FibreConstantTiming system
 open TimingInvariant public
