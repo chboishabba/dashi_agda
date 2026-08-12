@@ -10,24 +10,26 @@ module DASHI.Physics.Closure.NSTriadKNHHBadCeilingExistenceIffStrictTargetsRound
 --
 -- DASHI CONTRIBUTION
 --
--- Close the numerical quantifier elimination exactly.  For nonnegative
--- C0,alpha,beta and alpha<1, the following two proof-relevant packages are
+-- Close the numerical quantifier elimination exactly. For nonnegative
+-- C0,alpha,beta and alpha<1, the following proof-relevant packages are
 -- interconvertible:
 --
 --   exists M<T with C0<=M and beta<=(1-alpha)M;
 --
 --   C0<T and beta<(1-alpha)T.
 --
--- The forward direction is monotonicity.  The reverse direction uses the
--- explicit division-free minimum-slack construction from Round 49.  Thus M is
--- not an independent PDE parameter and need not appear in the physical gate.
+-- The reverse direction uses the explicit division-free minimum-slack
+-- construction from Round 49. M is not an independent PDE parameter.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Rational.Base using
-  (ℚ; 0ℚ; 1ℚ; _-_; _*_; _≤_; _<_; positive)
+  (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; -_; _≤_; _<_; positive)
 import Data.Rational.Properties as ℚP
+open import Data.Rational.Tactic.RingSolver using (solve)
+open import Relation.Binary.PropositionalEquality using (subst₂)
 
 import DASHI.Physics.Closure.NSTriadKNHHBadStrictTargetInterpolationRound49Exact as Interp
 
@@ -45,6 +47,16 @@ record AdmissibleCeilingBelowTarget : Set where
 
 open AdmissibleCeilingBelowTarget public
 
+gapPositiveFromAlphaStrict : ∀ a → a < 1ℚ → 0ℚ < 1ℚ - a
+gapPositiveFromAlphaStrict a aStrict =
+  let
+    shifted = ℚP.+-monoʳ-< (- a) aStrict
+    leftMeaning : a + (- a) ≡ 0ℚ
+    leftMeaning = solve (a ∷ [])
+    rightMeaning : 1ℚ + (- a) ≡ 1ℚ - a
+    rightMeaning = solve (a ∷ [])
+  in subst₂ _<_ leftMeaning rightMeaning shifted
+
 admissibleCeilingGivesStrictTargets :
   AdmissibleCeilingBelowTarget → Interp.StrictHHBadTarget
 admissibleCeilingGivesStrictTargets witness = record
@@ -60,44 +72,19 @@ admissibleCeilingGivesStrictTargets witness = record
   ; forcingStrict = forcingStrictTarget
   }
   where
-  strictDataForGap : Interp.StrictHHBadTarget
-  strictDataForGap = record
-    { base = base witness
-    ; alpha = alpha witness
-    ; beta = beta witness
-    ; target = target witness
-    ; baseNonnegative = baseNonnegative witness
-    ; alphaNonnegative = alphaNonnegative witness
-    ; betaNonnegative = betaNonnegative witness
-    ; alphaStrict = alphaStrict witness
-    ; baseStrict = ℚP.≤-<-trans (baseBelowCeiling witness) (ceilingStrict witness)
-    ; forcingStrict = forcingPlaceholder
-    }
-    where
-    forcingPlaceholder : beta witness < (1ℚ - alpha witness) * target witness
-    forcingPlaceholder =
-      let
-        gap = 1ℚ - alpha witness
-        gapPositive : 0ℚ < gap
-        gapPositive =
-          let open import Agda.Builtin.List using ([]; _∷_)
-              open import Data.Rational.Tactic.RingSolver using (solve)
-              open import Relation.Binary.PropositionalEquality using (subst₂)
-          in
-          subst₂ _<_
-            (solve (alpha witness ∷ []))
-            (solve (alpha witness ∷ []))
-            (ℚP.+-monoʳ-< (- alpha witness) (alphaStrict witness))
+  gap = 1ℚ - alpha witness
 
-        scaled : gap * ceiling witness < gap * target witness
-        scaled =
-          let instance gapPosI = positive gapPositive
-          in ℚP.*-monoʳ-<-pos gap (ceilingStrict witness)
-      in
-      ℚP.≤-<-trans (forcingFitsCeiling witness) scaled
+  scaledCeilingStrict :
+    gap * ceiling witness < gap * target witness
+  scaledCeilingStrict =
+    let instance gapPosI = positive
+          (gapPositiveFromAlphaStrict (alpha witness) (alphaStrict witness))
+    in ℚP.*-monoʳ-<-pos gap (ceilingStrict witness)
 
-  forcingStrictTarget : beta witness < (1ℚ - alpha witness) * target witness
-  forcingStrictTarget = Interp.forcingStrict strictDataForGap
+  forcingStrictTarget :
+    beta witness < (1ℚ - alpha witness) * target witness
+  forcingStrictTarget =
+    ℚP.≤-<-trans (forcingFitsCeiling witness) scaledCeilingStrict
 
 strictTargetsGiveAdmissibleCeiling :
   Interp.StrictHHBadTarget → AdmissibleCeilingBelowTarget
