@@ -1,103 +1,105 @@
 module DASHI.Governance.RelationPolicyTransportComposition where
 
 open import Data.Empty using (⊥)
+import DASHI.Core.PropositionLocalRelationTransport as Core
 import DASHI.Governance.AsymmetricReflectionPropositionLocality as Orbit
 import DASHI.Governance.ProvenancePolicyTransport as Policy
 
 ------------------------------------------------------------------------
--- Typed relation-path -> policy relevance composition.
+-- Governance adapter over the canonical proposition-local relation core.
 --
--- Reachability in an elite/social/political graph is not inheritance of an
--- arbitrary proposition.  A two-edge path can enter policy only through an
--- explicit proposition-specific transport licence and an independently
--- supplied proposition-local support witness.
+-- DASHI.Core.PropositionLocalRelationTransport already owns typed two-step
+-- paths, proposition-specific TransportLicence, LicensedPathClaim, and the
+-- unlicensed-path impossibility theorem.  This module does not duplicate those
+-- objects; it only connects a licensed relational claim to proposition-local
+-- policy routing.
 ------------------------------------------------------------------------
 
-record TwoStepRelationPath (R : Orbit.RelationalOrbitSystem) : Set₁ where
-  field
-    source middle target : Orbit.Actor R
-    firstKind secondKind : Orbit.RelationKind
-    firstEdge : Orbit.Related R firstKind source middle
-    secondEdge : Orbit.Related R secondKind middle target
-
-open TwoStepRelationPath public
-
-record PropositionTransportLicence
-    (R : Orbit.RelationalOrbitSystem)
-    (path : TwoStepRelationPath R) : Set₁ where
+record OrbitRelationCoreAdapter
+    (R : Orbit.RelationalOrbitSystem) : Set₁ where
   field
     Proposition : Set
-    proposition : Proposition
-    LicenceEvidence : Set
-    licenceEvidence : LicenceEvidence
+    Evidence : Set
+    Provenance : Set
+    supports : Evidence → Proposition → Set
+    provenanceOf : Evidence → Provenance
 
-open PropositionTransportLicence public
+open OrbitRelationCoreAdapter public
+
+orbitCore :
+  (R : Orbit.RelationalOrbitSystem) →
+  OrbitRelationCoreAdapter R →
+  Core.TypedRelationSystem
+orbitCore R A =
+  record
+    { Node = Orbit.Actor R
+    ; Relation = Orbit.RelationKind
+    ; Proposition = Proposition A
+    ; Evidence = Evidence A
+    ; Provenance = Provenance A
+    ; Edge = Orbit.Related R
+    ; supports = supports A
+    ; provenanceOf = provenanceOf A
+    }
 
 ------------------------------------------------------------------------
--- Bridge a relational actor into an existing provenance-policy system.  The
--- bridge itself conveys no guilt, knowledge, facilitation, or participation.
+-- Bridge a core relational node into an existing provenance-policy system.
+-- The bridge itself conveys no guilt, knowledge, facilitation, or
+-- participation.
 ------------------------------------------------------------------------
 
 record RelationPolicyBridge
-    (R : Orbit.RelationalOrbitSystem)
+    (G : Core.TypedRelationSystem)
     (S : Policy.ProvenancePolicySystem) : Set₁ where
   field
-    policyActor : Orbit.Actor R → Policy.Actor S
+    policyActor : Core.Node G → Policy.Actor S
     localPolicy : Policy.PropositionLocalPolicy S
 
 open RelationPolicyBridge public
 
 ------------------------------------------------------------------------
--- Closed constructor surface: path-derived policy relevance can only be built
--- by presenting a path, its proposition-specific licence, current evidence,
--- and a support-locality witness for the resulting routed action.
+-- A path-derived policy relevance witness consumes the canonical
+-- LicensedPathClaim.  Therefore relation-pair + proposition transport evidence
+-- has already been supplied before the downstream policy layer is entered.
 ------------------------------------------------------------------------
 
-data PathPolicyRelevance
-    {R : Orbit.RelationalOrbitSystem}
+data LicensedPathPolicyRelevance
+    {G : Core.TypedRelationSystem}
     {S : Policy.ProvenancePolicySystem}
-    (B : RelationPolicyBridge R S) : Set₁ where
-  licensedPath :
-    (path : TwoStepRelationPath R) →
-    (licence : PropositionTransportLicence R path) →
+    (B : RelationPolicyBridge G S) : Set₁ where
+  licensedPolicyRoute :
+    ∀ {source middle target first second} →
+    (path : Core.TwoStepPath G source middle target first second) →
+    (proposition : Core.Proposition G) →
+    Core.LicensedPathClaim G path proposition →
     (evidence : Policy.PresentEvidence S) →
     Policy.ActionSupport (localPolicy B)
-      (policyActor B (target path))
+      (policyActor B target)
       (Policy.route S
-        (Policy.provenance S (policyActor B (target path)))
+        (Policy.provenance S (policyActor B target))
         evidence
-        (Policy.classify S evidence (policyActor B (target path)))) →
-    PathPolicyRelevance B
+        (Policy.classify S evidence (policyActor B target))) →
+    LicensedPathPolicyRelevance B
 
 ------------------------------------------------------------------------
--- Explicit non-promotion types.  These intentionally have no constructors:
--- neither graph connectivity nor kinship/social adjacency manufactures the
--- missing proposition licence.
+-- Connectivity alone still cannot authorise policy.  This is intentionally a
+-- separate promotion boundary from the canonical core's
+-- UnlicensedPathPromotion, because a licensed proposition is still not by
+-- itself a policy action.
 ------------------------------------------------------------------------
-
-data PathAutomaticallyInheritsProposition
-    {R : Orbit.RelationalOrbitSystem}
-    (path : TwoStepRelationPath R) : Set where
-
-pathDoesNotAutomaticallyInheritProposition :
-  ∀ {R} {path : TwoStepRelationPath R} →
-  PathAutomaticallyInheritsProposition path → ⊥
-pathDoesNotAutomaticallyInheritProposition ()
 
 data ConnectivityAutomaticallyAuthorisesPolicy
-    {R : Orbit.RelationalOrbitSystem}
+    {G : Core.TypedRelationSystem}
     {S : Policy.ProvenancePolicySystem}
-    (B : RelationPolicyBridge R S)
-    (path : TwoStepRelationPath R) : Set where
+    (B : RelationPolicyBridge G S) : Set where
 
 connectivityDoesNotAutomaticallyAuthorisePolicy :
-  ∀ {R S} {B : RelationPolicyBridge R S}
-    {path : TwoStepRelationPath R} →
-  ConnectivityAutomaticallyAuthorisesPolicy B path → ⊥
+  ∀ {G S} {B : RelationPolicyBridge G S} →
+  ConnectivityAutomaticallyAuthorisesPolicy B → ⊥
 connectivityDoesNotAutomaticallyAuthorisePolicy ()
 
 ------------------------------------------------------------------------
 -- Special-purpose names are deliberately absent: Epstein/network, kinship,
 -- nationality, ethnicity, party, military, and organisational applications
--- must all instantiate the same relation-pair + proposition licence interface.
+-- all instantiate the same canonical relation-pair + proposition licence.
 ------------------------------------------------------------------------
