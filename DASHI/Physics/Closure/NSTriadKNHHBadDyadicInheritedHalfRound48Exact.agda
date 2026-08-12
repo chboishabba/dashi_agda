@@ -46,7 +46,7 @@ open import Data.Rational.Base using
   (ℚ; 0ℚ; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Binary.PropositionalEquality using (subst)
 
 import DASHI.Physics.Closure.NSTriadKNLuoBadCoherenceWeightedMarkovExact as Threshold
 import DASHI.Physics.Closure.NSTriadKNHHBadSharpDyadicGainRound33Exact as Sharp
@@ -174,9 +174,9 @@ constantScaleFreeCoefficientGivesExactHalf :
   ≡ Sharp.half
     * (Threshold.threshold parameter
       * Sharp.inverseDyadicScale q * coefficientValue)
-constantScaleFreeCoefficientGivesExactHalf coefficientValue q =
+constantScaleFreeCoefficientGivesExactHalf {parameter} coefficientValue q =
   solve
-    ( Threshold.threshold _
+    ( Threshold.threshold parameter
     ∷ Sharp.inverseDyadicScale q
     ∷ coefficientValue
     ∷ [])
