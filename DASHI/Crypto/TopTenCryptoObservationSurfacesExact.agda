@@ -10,7 +10,7 @@ module DASHI.Crypto.TopTenCryptoObservationSurfacesExact where
 -- standardized implementation exposes them.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.List.Base using (length)
@@ -26,6 +26,7 @@ data ObservationDependency : Set where
 
 data ObservationKind : Set where
   ciphertextTranscript
+  publicKeyAgreementTranscript
   authenticationAcceptReject
   paddingValidityOutcome
   sessionKeyConfirmation
@@ -68,13 +69,13 @@ rsaValidityOutcome : ObservationSurface
 rsaValidityOutcome = observationSurface Profile.rsaOaep paddingValidityOutcome hiddenDependent true refl
 
 dhPublic : ObservationSurface
-dhPublic = observationSurface Profile.diffieHellman ciphertextTranscript publicOnly true refl
+dhPublic = observationSurface Profile.diffieHellman publicKeyAgreementTranscript publicOnly true refl
 
 dhElementAcceptance : ObservationSurface
 dhElementAcceptance = observationSurface Profile.diffieHellman publicElementAcceptance hiddenDependent true refl
 
 x25519Public : ObservationSurface
-x25519Public = observationSurface Profile.x25519 ciphertextTranscript publicOnly true refl
+x25519Public = observationSurface Profile.x25519 publicKeyAgreementTranscript publicOnly true refl
 
 x25519Confirmation : ObservationSurface
 x25519Confirmation = observationSurface Profile.x25519 sessionKeyConfirmation hiddenDependent true refl
