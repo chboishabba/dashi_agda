@@ -71,9 +71,9 @@ record ThresholdUniformDefectRecurrenceFamily : Set where
 open ThresholdUniformDefectRecurrenceFamily public
 
 recurrenceAtThreshold :
-  ThresholdUniformDefectRecurrenceFamily →
-  Threshold.PositiveThreshold →
-  Defect.PhysicalDefectShellRecurrence
+  (family : ThresholdUniformDefectRecurrenceFamily) →
+  (parameter : Threshold.PositiveThreshold) →
+  Defect.PhysicalDefectShellRecurrence parameter
 recurrenceAtThreshold family parameter = record
   { defectRate = defectRate family parameter
   ; alpha = alpha family
