@@ -32,9 +32,14 @@ for f in "${FILES[@]}"; do
   fi
 done
 
+grep -q 'globalPlausibleIffIndexed' DASHI/Crypto/ResidualConstraintDecompositionExact.agda
+grep -q 'indexedGlobalImpliesEveryLocal' DASHI/Crypto/ResidualConstraintDecompositionExact.agda
 grep -q 'globalPlausibleIffLocal' DASHI/Crypto/ResidualConstraintDecompositionExact.agda
+grep -q 'globalScoreIsLocalPlusCoupling' DASHI/Crypto/ResidualConstraintDecompositionExact.agda
 grep -q 'localTestabilityDoesNotGiveIndependentSolvability' DASHI/Crypto/ResidualConstraintDecompositionExact.agda
 grep -q 'exactTransformPreservesDistinctness' DASHI/Crypto/TransformLocalFibreGeometryExact.agda
+grep -q 'ConstraintCouplingGraph' DASHI/Crypto/ConstraintCouplingSearchExact.agda
+grep -q 'disconnectedSearchFactors' DASHI/Crypto/ConstraintCouplingSearchExact.agda
 grep -q 'connectedConstraintHasEasyWitness' DASHI/Crypto/ConstraintCouplingSearchExact.agda
 grep -q 'separatorDPBound' DASHI/Crypto/ConstraintCouplingSearchExact.agda
 grep -q 'reconciledLocalSolutionsGiveGlobal' DASHI/Crypto/SearchFactorisationExact.agda
@@ -42,9 +47,12 @@ grep -q 'genericReconciliationBound' DASHI/Crypto/SearchFactorisationExact.agda
 grep -q 'functionalReconciliationBound' DASHI/Crypto/SearchFactorisationExact.agda
 grep -q 'strictRefinementFromSplit' DASHI/Crypto/AdaptiveFibreShrinkExact.agda
 grep -q 'oneSplitShrinksTwoToOne' DASHI/Crypto/AdaptiveFibreShrinkExact.agda
+grep -q 'StrictShrinkChain' DASHI/Crypto/AdaptiveFibreShrinkExact.agda
+grep -q 'twoStepShrinkChain' DASHI/Crypto/AdaptiveFibreShrinkExact.agda
 grep -q 'twoLossyBitsJointlyRecover' DASHI/Crypto/ThresholdPartitionGeometryExact.agda
 grep -q 'timingSplitRefutesFibreConstant' DASHI/Crypto/TimingObservationSideChannelExact.agda
 grep -q 'timingSplitGivesObservationSplit' DASHI/Crypto/TimingObservationSideChannelExact.agda
+grep -q 'timingFactorisationRevealsOutcome' DASHI/Crypto/TimingObservationSideChannelExact.agda
 grep -q '10.1007/3-540-68697-5_9' DASHI/Crypto/TimingObservationSideChannelExact.agda
 grep -q 'collapseCertificateGivesCandidateSearch' DASHI/Crypto/MLKEMLocalSearchGeometryExact.agda
 grep -q '10.6028/NIST.FIPS.203' DASHI/Crypto/MLKEMLocalSearchGeometryExact.agda
