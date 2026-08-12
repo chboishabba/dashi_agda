@@ -145,7 +145,8 @@ weightedLocalMassBelowParabolicCriticalDissipation :
   ≤ effectiveParabolicDataFactor input
       * Owner.integralCritical environment
       * Owner.dissipation environment
-weightedLocalMassBelowParabolicCriticalDissipation input =
+weightedLocalMassBelowParabolicCriticalDissipation
+    {environment = environment} input =
   let
     physical =
       Parabolic.localizedHHGoodMassBelowParabolicKineticCriticalDissipation
@@ -155,8 +156,8 @@ weightedLocalMassBelowParabolicCriticalDissipation input =
     (λ lower →
       lower
       ≤ effectiveParabolicDataFactor input
-          * Owner.integralCritical _
-          * Owner.dissipation _)
+          * Owner.integralCritical environment
+          * Owner.dissipation environment)
     (sym (weightedLocalMassIsLocalizedParabolicMass input))
     physical
 
