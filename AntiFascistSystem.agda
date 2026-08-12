@@ -3,6 +3,7 @@ module AntiFascistSystem where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Nat using (_≤_)
+open import Data.Nat.Properties using (≤-refl)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 ------------------------------------------------------------------------
@@ -57,7 +58,7 @@ rankPreservationImpliesNonincrease :
   DistinctionPreserving u →
   ∀ s → distinctionRank (U u s) ≤ distinctionRank s
 rankPreservationImpliesNonincrease u preservation s
-  rewrite rankPreserved preservation s = Data.Nat.≤-refl
+  rewrite rankPreserved preservation s = ≤-refl
 
 ------------------------------------------------------------------------
 -- Boundary.
