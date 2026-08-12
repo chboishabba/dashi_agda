@@ -1,29 +1,10 @@
 name: Numeric PNF hyperfabric Agda check
 
+# This tranche is intentionally manual-only while GitHub Actions quota is
+# constrained.  Re-enable push/pull_request triggers in a later integration PR
+# when CI budget is available.
 on:
-  push:
-    paths:
-      - 'DASHI/Cognition/PNF/**'
-      - 'Docs/NumericPNFHyperfabricFormalisation.md'
-      - 'Docs/WorkConservingPersistenceFormalisation.md'
-      - 'Docs/SparseFibredFrontierFormalisation.md'
-      - 'Docs/SparseFrontierConstraintsFormalisation.md'
-      - 'Docs/ProofRelevantIdentityDerivationsFormalisation.md'
-      - 'Docs/ITIRReopenableEvidenceHyperformalism.md'
-      - 'scripts/check_itir_reopenable_evidence_hyperfibre.sh'
-      - '.github/workflows/numeric-pnf-hyperfabric.yml'
-  pull_request:
-    types: [opened, synchronize, reopened, ready_for_review]
-    paths:
-      - 'DASHI/Cognition/PNF/**'
-      - 'Docs/NumericPNFHyperfabricFormalisation.md'
-      - 'Docs/WorkConservingPersistenceFormalisation.md'
-      - 'Docs/SparseFibredFrontierFormalisation.md'
-      - 'Docs/SparseFrontierConstraintsFormalisation.md'
-      - 'Docs/ProofRelevantIdentityDerivationsFormalisation.md'
-      - 'Docs/ITIRReopenableEvidenceHyperformalism.md'
-      - 'scripts/check_itir_reopenable_evidence_hyperfibre.sh'
-      - '.github/workflows/numeric-pnf-hyperfabric.yml'
+  workflow_dispatch:
 
 concurrency:
   group: numeric-pnf-hyperfabric-${{ github.ref }}
