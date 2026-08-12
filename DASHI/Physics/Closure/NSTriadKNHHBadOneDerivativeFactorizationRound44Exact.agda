@@ -19,51 +19,42 @@ module DASHI.Physics.Closure.NSTriadKNHHBadOneDerivativeFactorizationRound44Exac
 --
 --   g_q = C_q 2^{-q}
 --
--- followed by a shell-uniform bound on C_q.  The factorization itself does
--- not need to remain an analytic obligation.  For the literal Round-39 density
--- define, on the same certificate,
+-- followed by a shell-uniform bound on C_q.  The factorization itself is
+-- algebraic.  For any literal Round-39 density g_q define
 --
 --   C_q := g_q 2^q.
 --
--- The exact dyadic reciprocal law proves constructively
---
---   C_q 2^{-q} = g_q.
---
--- Hence the only genuinely analytic HH-bad scalar obligation is now the
--- scale-free coefficient bound C_q <= eta/2 (or any sharper target).  From
--- that bound and nonnegativity of 2^{-q}, this module reconstructs the exact
--- mature inverse-shell target required by Round 39.
+-- The exact dyadic reciprocal law gives C_q 2^{-q} = g_q.  Therefore the only
+-- genuinely analytic scalar obligation is C_q <= eta/2 (or a sharper bound).
+-- This file starts *before* InverseShellRestrictedGainDensity, so the argument
+-- is non-circular: a scale-free coefficient bound constructs the mature
+-- Round-39 inverse-shell certificate rather than assuming it.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using ([]; _∷_)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base using (ℚ; _*_; _≤_; nonNegative)
+open import Data.Rational.Base using (ℚ; 0ℚ; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
 
 import DASHI.Physics.Closure.NSTriadKNHHBadSharpDyadicGainRound33Exact as Sharp
 import DASHI.Physics.Closure.NSTriadKNHHBadDissipativeFloorChargingRound36Exact as Floor
 import DASHI.Physics.Closure.NSTriadKNHHBadRestrictedGainDensityRound39Exact as Gain
 
-scaleFreeDensityCoefficient :
-  ∀ {effectiveViscosity shell} →
-  Gain.InverseShellRestrictedGainDensity effectiveViscosity shell → ℚ
-scaleFreeDensityCoefficient {shell = shell} certificate =
-  Gain.density certificate * Sharp.dyadicScale shell
+scaleFreeDensityCoefficient : ℚ → Nat → ℚ
+scaleFreeDensityCoefficient density shell =
+  density * Sharp.dyadicScale shell
 
 physicalHHBadGainDensityEqualsOneDerivativeFactorization :
-  ∀ {effectiveViscosity shell}
-    (certificate :
-      Gain.InverseShellRestrictedGainDensity effectiveViscosity shell) →
-  scaleFreeDensityCoefficient certificate * Sharp.inverseDyadicScale shell
-  ≡ Gain.density certificate
-physicalHHBadGainDensityEqualsOneDerivativeFactorization
-    {shell = shell} certificate =
+  ∀ density shell →
+  scaleFreeDensityCoefficient density shell
+    * Sharp.inverseDyadicScale shell
+  ≡ density
+physicalHHBadGainDensityEqualsOneDerivativeFactorization density shell =
   let
-    density = Gain.density certificate
     lambda = Sharp.dyadicScale shell
     mu = Sharp.inverseDyadicScale shell
     regroup :
@@ -75,28 +66,29 @@ physicalHHBadGainDensityEqualsOneDerivativeFactorization
       (cong (density *_) (Sharp.inverseDyadicReciprocal shell))
       (solve (density ∷ [])))
 
-record ScaleFreeHHBadCoefficientBound
-    {effectiveViscosity : ℚ}
-    (eta : ℚ)
-    (shell : Nat)
-    (certificate :
-      Gain.InverseShellRestrictedGainDensity effectiveViscosity shell) : Set where
+record PhysicalHHBadOneDerivativeDensityInput
+    (effectiveViscosity eta : ℚ)
+    (shell : Nat) : Set where
   field
-    coefficientBelowHalfEta :
-      scaleFreeDensityCoefficient certificate ≤ eta * Sharp.half
+    density : ℚ
+    densityNonnegative : 0ℚ ≤ density
+    cells : List
+      (Gain.RestrictedGainDensityCell effectiveViscosity density shell)
 
-open ScaleFreeHHBadCoefficientBound public
+    physicalHHBadScaleFreeCoefficientBound :
+      scaleFreeDensityCoefficient density shell ≤ eta * Sharp.half
+
+open PhysicalHHBadOneDerivativeDensityInput public
 
 physicalHHBadScaleFreeCoefficientBoundImpliesDensityTarget :
   ∀ {effectiveViscosity eta shell}
-    (certificate :
-      Gain.InverseShellRestrictedGainDensity effectiveViscosity shell) →
-  ScaleFreeHHBadCoefficientBound eta shell certificate →
-  Gain.density certificate ≤ Sharp.requiredHHBadGain eta shell
+    (input : PhysicalHHBadOneDerivativeDensityInput
+      effectiveViscosity eta shell) →
+  density input ≤ Sharp.requiredHHBadGain eta shell
 physicalHHBadScaleFreeCoefficientBoundImpliesDensityTarget
-    {eta = eta} {shell = shell} certificate coefficientBound =
+    {eta = eta} {shell = shell} input =
   let
-    coefficient = scaleFreeDensityCoefficient certificate
+    coefficient = scaleFreeDensityCoefficient (density input) shell
     mu = Sharp.inverseDyadicScale shell
     muNN = Floor.inverseDyadicScaleNonnegative shell
 
@@ -105,11 +97,12 @@ physicalHHBadScaleFreeCoefficientBoundImpliesDensityTarget
     scaled =
       let instance muNNI = nonNegative muNN
       in ℚP.*-monoʳ-≤-nonNeg mu
-        (coefficientBelowHalfEta coefficientBound)
+        (physicalHHBadScaleFreeCoefficientBound input)
 
-    leftMeaning : coefficient * mu ≡ Gain.density certificate
+    leftMeaning : coefficient * mu ≡ density input
     leftMeaning =
-      physicalHHBadGainDensityEqualsOneDerivativeFactorization certificate
+      physicalHHBadGainDensityEqualsOneDerivativeFactorization
+        (density input) shell
 
     rightMeaning :
       (eta * Sharp.half) * mu ≡ Sharp.requiredHHBadGain eta shell
@@ -122,6 +115,24 @@ physicalHHBadScaleFreeCoefficientBoundImpliesDensityTarget
       (λ upper → coefficient * mu ≤ upper)
       rightMeaning
       scaled)
+
+asRound39InverseShellCertificate :
+  ∀ {effectiveViscosity eta shell} →
+  PhysicalHHBadOneDerivativeDensityInput effectiveViscosity eta shell →
+  Gain.InverseShellRestrictedGainDensity effectiveViscosity shell
+asRound39InverseShellCertificate
+    {eta = eta} {shell = shell} input = record
+  { density = density input
+  ; densityNonnegative = densityNonnegative input
+  ; inverseShellTarget = Sharp.requiredHHBadGain eta shell
+  ; inverseShellTargetNonnegative =
+      ℚP.≤-trans
+        (densityNonnegative input)
+        (physicalHHBadScaleFreeCoefficientBoundImpliesDensityTarget input)
+  ; densityBelowInverseShellTarget =
+      physicalHHBadScaleFreeCoefficientBoundImpliesDensityTarget input
+  ; cells = cells input
+  }
 
 physicalHHBadFactorizationIsAlgebraicNotAnalytic : Bool
 physicalHHBadFactorizationIsAlgebraicNotAnalytic = true
