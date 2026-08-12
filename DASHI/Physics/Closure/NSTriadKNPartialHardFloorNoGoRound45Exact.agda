@@ -32,15 +32,17 @@ module DASHI.Physics.Closure.NSTriadKNPartialHardFloorNoGoRound45Exact where
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _≤_; _<_)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Binary.PropositionalEquality using (subst)
 open import Relation.Nullary.Negation using (¬_)
 
 import DASHI.Physics.Closure.NSTriadKNLuoBadCoherenceWeightedMarkovExact as Threshold
 import DASHI.Physics.Closure.NSTriadKNAdmissibleOwnerTaxLanguageRound28Exact as Owner
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteCriticalFourClassClosureExact as Critical
+import DASHI.Physics.Closure.NSTriadKNHHBadSharpDyadicGainRound33Exact as Sharp
 import DASHI.Physics.Closure.NSTriadKNHardSoftReserveRound45Exact as HardSoft
 
 fourBonyTax : ℚ
@@ -58,7 +60,7 @@ record PartialHardFloorCertificate
 
     hhBadFloorBelowActual :
       hhBadFloor
-      ≤ HardSoft.Sharp.two * HardSoft.hhBadProfileCeiling core
+      ≤ Sharp.two * HardSoft.hhBadProfileCeiling core
 
     comFloorBelowActual :
       comFloor ≤ Owner.eta (HardSoft.comEstimate core)
@@ -73,14 +75,15 @@ open PartialHardFloorCertificate public
 
 actualHardBaseDominatesFloors :
   ∀ {environment}
-    {core : HardSoft.HardSoftOwnerCore environment} →
-  PartialHardFloorCertificate core →
-  hhBadFloor _ + comFloor _ + kernelFloor _ + fourBonyTax
-  ≤ HardSoft.Sharp.two * HardSoft.hhBadProfileCeiling core
+    (core : HardSoft.HardSoftOwnerCore environment) →
+    (certificate : PartialHardFloorCertificate core) →
+  hhBadFloor certificate + comFloor certificate
+    + kernelFloor certificate + fourBonyTax
+  ≤ Sharp.two * HardSoft.hhBadProfileCeiling core
     + Owner.eta (HardSoft.comEstimate core)
     + Owner.eta (HardSoft.kernelEstimate core)
     + fourBonyTax
-actualHardBaseDominatesFloors certificate =
+actualHardBaseDominatesFloors core certificate =
   let
     first = ℚP.+-mono-≤
       (hhBadFloorBelowActual certificate)
@@ -93,10 +96,9 @@ actualHardBaseDominatesFloors certificate =
   subst
     (λ lower →
       lower
-      ≤ HardSoft.Sharp.two
-          * HardSoft.hhBadProfileCeiling _
-        + Owner.eta (HardSoft.comEstimate _)
-        + Owner.eta (HardSoft.kernelEstimate _)
+      ≤ Sharp.two * HardSoft.hhBadProfileCeiling core
+        + Owner.eta (HardSoft.comEstimate core)
+        + Owner.eta (HardSoft.kernelEstimate core)
         + fourBonyTax)
     (solve
       ( hhBadFloor certificate
@@ -110,9 +112,9 @@ actualHardBaseDominatesFloors certificate =
           + fourBonyTax
         ≤ upper)
       (solve
-        ( HardSoft.Sharp.two * HardSoft.hhBadProfileCeiling _
-        ∷ Owner.eta (HardSoft.comEstimate _)
-        ∷ Owner.eta (HardSoft.kernelEstimate _)
+        ( Sharp.two * HardSoft.hhBadProfileCeiling core
+        ∷ Owner.eta (HardSoft.comEstimate core)
+        ∷ Owner.eta (HardSoft.kernelEstimate core)
         ∷ fourBonyTax
         ∷ []))
       third)
@@ -125,14 +127,14 @@ partialFloorsForceTotalAtLeastOne :
   1ℚ ≤ HardSoft.hardSoftEtaTotal core split
 partialFloorsForceTotalAtLeastOne core split certificate =
   let
-    floorToBase = actualHardBaseDominatesFloors certificate
+    floorToBase = actualHardBaseDominatesFloors core certificate
 
     withEpsilon :
       0ℚ
         + (hhBadFloor certificate + comFloor certificate
           + kernelFloor certificate + fourBonyTax)
       ≤ Threshold.threshold split
-        + (HardSoft.Sharp.two * HardSoft.hhBadProfileCeiling core
+        + (Sharp.two * HardSoft.hhBadProfileCeiling core
           + Owner.eta (HardSoft.comEstimate core)
           + Owner.eta (HardSoft.kernelEstimate core)
           + fourBonyTax)
@@ -160,7 +162,7 @@ partialFloorsForceTotalAtLeastOne core split certificate =
             ≤ upper)
           (solve
             ( Threshold.threshold split
-            ∷ HardSoft.Sharp.two * HardSoft.hhBadProfileCeiling core
+            ∷ Sharp.two * HardSoft.hhBadProfileCeiling core
             ∷ Owner.eta (HardSoft.comEstimate core)
             ∷ Owner.eta (HardSoft.kernelEstimate core)
             ∷ Critical.oneSixtyFourth
