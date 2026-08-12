@@ -31,6 +31,7 @@ files=(
   DASHI/Cognition/PNF/SemanticSamplingLookupGeometry.agda
   DASHI/Cognition/PNF/SemanticSamplingDynamicSafety.agda
   DASHI/Cognition/PNF/TerminalisationDefectRegression.agda
+  DASHI/Cognition/PNF/PNFResidualTerminalisationRegression.agda
   DASHI/Cognition/PNF/TemporalRoleWorldAlignment.agda
   DASHI/Cognition/PNF/WikidataRepairProposal.agda
   DASHI/Cognition/PNF/IdentityProofUtility.agda
@@ -53,8 +54,6 @@ for file in "${files[@]}"; do
   test -f "$file" || { echo "missing required file: $file" >&2; exit 1; }
 done
 
-# Fail closed on explicit trust escapes / hole blocks. Bare question marks are
-# left to Agda itself because '?' is ordinary prose in comments.
 if grep -nE '(postulate|\{!|!\}|TERMINATING|NON_TERMINATING|NO_POSITIVITY_CHECK|--allow-unsolved-metas|--type-in-type|--with-K)' "${files[@]}"; then
   echo "unsafe or unfinished Agda construct found in ITIR reopenable-evidence tranche" >&2
   exit 1
@@ -117,6 +116,7 @@ required_markers=(
   'depthPhaseTerminalisationDefect'
   'extinctionActionTerminalisationDefect'
   'residualProjectionTerminalisationDefect'
+  'resolvedPNFResidualTerminalisationDefect'
   'ResolvedRoleTimeDemand'
   'localRoleResolutionDoesNotRequireWorldAuthority'
   'externalCandidateAloneCannotPromoteWorldIdentity'
