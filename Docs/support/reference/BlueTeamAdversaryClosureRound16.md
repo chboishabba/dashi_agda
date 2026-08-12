@@ -68,6 +68,18 @@ It records the exact global constants `n=256`, `q=3329`, approved parameter tupl
 
 The boundary also records source requirements: K-PKE is not approved stand-alone; internal derandomized interfaces are not application-facing; the implicit-rejection flag may not be returned; every decapsulation ciphertext is checked; the encapsulation key may be public; the decapsulation key remains private; and FIPS conformance alone does not prove a secure implementation.
 
+### 6.1 FIPS search-carrier geometry
+
+`MLKEMFIPS203SearchGeometryExact` extracts the finite carrier dimensions that matter to defensive cryptanalysis without turning them into fake security estimates.
+
+- secret/error/public-vector coefficient counts are exactly `512`, `768`, and `1024` across the three approved parameter sets;
+- the coefficient support widths implied by `eta1` are exactly `7`, `5`, and `5`, giving the explicit product support carriers `7^512`, `5^768`, and `5^1024` as finite *support* enumerations rather than attack costs;
+- the public `k×k` matrix contains `4`, `9`, or `16` polynomial entries;
+- K-PKE ciphertexts expose exactly `6144`, `8704`, and `12544` compressed bits, matching the standard byte sizes;
+- each public module equation sums across `k` secret-polynomial coordinates, so a local-coordinate attack must still discharge a reconciliation/coupling theorem rather than merely observing that an NTT representation exists.
+
+The claim boundary explicitly rejects `support carrier size = security strength` and `NTT coordinates = independently searchable lanes`.
+
 ## 7. Defensive cryptanalysis frontier
 
 The remaining research question is now sharply typed:
