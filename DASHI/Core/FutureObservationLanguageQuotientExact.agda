@@ -15,6 +15,7 @@ module DASHI.Core.FutureObservationLanguageQuotientExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
+open import Relation.Binary.PropositionalEquality using (sym)
 
 import DASHI.Core.AdmissibleReachability as Reachability
 import DASHI.Core.TypedDependencyCore as Dependency
@@ -26,11 +27,6 @@ record LogicalIff (A B : Set) : Set where
     backward : B → A
 
 open LogicalIff public
-
-------------------------------------------------------------------------
--- A trace-indexed observation is inhabited exactly when some admissible
--- execution of that trace reaches a state exposing that observation.
-------------------------------------------------------------------------
 
 data FutureObservation
     {State Action Observation : Set}
@@ -44,10 +40,6 @@ data FutureObservation
     Reachability.Executes system actions start after →
     project after ≡ observation →
     FutureObservation system project start actions observation
-
-------------------------------------------------------------------------
--- Canonical future language equivalence.
-------------------------------------------------------------------------
 
 record FutureObservationEquivalent
     {State Action Observation : Set}
@@ -108,16 +100,6 @@ futureEquivalentTrans leftMiddle middleRight =
 
 ------------------------------------------------------------------------
 -- Kernel-level universal property.
---
--- A projection is future-language safe exactly when every pair it collapses
--- already belongs to FutureObservationEquivalent.  Thus its kernel is a
--- subrelation of the canonical future-equivalence relation.  Equivalently,
--- FutureObservationEquivalent is the largest relation that may be collapsed
--- without identifying states with distinct consumer-visible future languages.
---
--- This is the constructive relation-level form of the "coarsest safe
--- quotient" theorem.  We deliberately do not manufacture a set quotient:
--- an extensional quotient presentation is a separate representation choice.
 ------------------------------------------------------------------------
 
 record FutureLanguageSafeProjection
@@ -156,9 +138,7 @@ safeProjectionKernelFactorsThroughFutureEquivalence safe =
   kernelSubrelation (kernelContainedInFutureEquivalence safe)
 
 ------------------------------------------------------------------------
--- A presentation of the canonical quotient may be supplied by an application
--- when it has a finite code, setoid quotient, trie, automaton state, etc.
--- Equality in that presentation must characterize future equivalence exactly.
+-- Concrete quotient presentations.
 ------------------------------------------------------------------------
 
 record FutureEquivalencePresentation
@@ -179,3 +159,56 @@ record FutureEquivalencePresentation
       classOf left ≡ classOf right
 
 open FutureEquivalencePresentation public
+
+------------------------------------------------------------------------
+-- Actual factorization when a coarse projection supplies a section.
+--
+-- In intensional Agda, an arbitrary quotient map does not construct a choice
+-- of representative.  If an application has an explicit section, however,
+-- no choice principle is needed: send each coarse value to the future class of
+-- its chosen representative.  Safety makes that definition independent of the
+-- fine state from which the coarse value arose.
+------------------------------------------------------------------------
+
+record SectionedProjection
+    {State Coarse : Set}
+    (coarsen : State → Coarse) : Set₁ where
+  constructor sectionedProjection
+  field
+    section : Coarse → State
+    sectionRightInverse :
+      (coarse : Coarse) → coarsen (section coarse) ≡ coarse
+
+open SectionedProjection public
+
+record FactorizationThroughFutureQuotient
+    {State Action Observation Coarse : Set}
+    {system : Dependency.DependentActionSystem State Action}
+    {project : State → Observation}
+    {coarsen : State → Coarse}
+    (presentation : FutureEquivalencePresentation system project) : Set₁ where
+  constructor factorizationThroughFutureQuotient
+  field
+    factor : Coarse → QuotientCode presentation
+    factorizes :
+      (state : State) →
+      classOf presentation state ≡ factor (coarsen state)
+
+open FactorizationThroughFutureQuotient public
+
+sectionedSafeProjectionFactors :
+  ∀ {State Action Observation Coarse}
+    {system : Dependency.DependentActionSystem State Action}
+    {project : State → Observation}
+    {coarsen : State → Coarse}
+    (presentation : FutureEquivalencePresentation system project) →
+  FutureLanguageSafeProjection system project coarsen →
+  SectionedProjection coarsen →
+  FactorizationThroughFutureQuotient presentation
+sectionedSafeProjectionFactors presentation safe sectioned =
+  factorizationThroughFutureQuotient
+    (λ coarse → classOf presentation (section sectioned coarse))
+    (λ state →
+      classEqualityComplete presentation
+        (kernelContainedInFutureEquivalence safe
+          (sym (sectionRightInverse sectioned (coarsen state)))))
