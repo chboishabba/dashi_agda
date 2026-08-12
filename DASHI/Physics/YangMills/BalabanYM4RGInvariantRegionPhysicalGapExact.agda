@@ -32,18 +32,16 @@ module DASHI.Physics.YangMills.BalabanYM4RGInvariantRegionPhysicalGapExact where
 --
 --   m_phys = mu_lattice * inverseSpacing.
 --
--- This module also proves a concrete no-go regression: positivity of the
--- lattice-unit decay exponent by itself does not imply a positive physical
--- mass.  A state with mu_lattice=1 and inverseSpacing=0 has strictly positive
--- lattice decay but physical mass exactly zero.  Therefore a one-scale
--- covariance contraction can never be promoted to the Clay mass-gap endpoint
--- without the explicit physical-unit bridge.
+-- This module also proves a concrete no-go regression: a unit lattice-decay
+-- exponent can coexist with exactly zero physical mass when the physical-unit
+-- conversion factor is zero.  Therefore a one-scale covariance contraction
+-- can never be promoted to the Clay mass-gap endpoint without an explicit
+-- physical-unit bridge and a uniform positive physical lower bound.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; 1ℚ; _*_; _≤_; _<_; _/_)
+  (ℚ; 0ℚ; 1ℚ; _*_; _≤_; _<_)
 import Data.Rational.Tactic.RingSolver as ℚRing
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -158,10 +156,9 @@ latticeDecayOnlyCounterexample : YM4RGState
 latticeDecayOnlyCounterexample =
   rgState 0ℚ 0ℚ 0ℚ 0ℚ 1ℚ 0ℚ
 
-latticeDecayOnlyCounterexamplePositive :
-  0ℚ < latticeDecayExponent latticeDecayOnlyCounterexample
-latticeDecayOnlyCounterexamplePositive =
-  ℚ.*<* 0 1
+latticeDecayOnlyCounterexampleHasUnitLatticeExponent :
+  latticeDecayExponent latticeDecayOnlyCounterexample ≡ 1ℚ
+latticeDecayOnlyCounterexampleHasUnitLatticeExponent = refl
 
 latticeDecayOnlyCounterexamplePhysicalMassZero :
   physicalDecayMass latticeDecayOnlyCounterexample ≡ 0ℚ
