@@ -20,7 +20,8 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Empty using (⊥)
 open import Data.Product using (_×_; _,_)
-open import Relation.Binary.PropositionalEquality using (sym; trans)
+open import Data.Unit using (⊤; tt)
+open import Relation.Binary.PropositionalEquality using (sym)
 
 record ObservationSystem : Set₁ where
   constructor observationSystem
@@ -47,7 +48,7 @@ CompatibleWithSample system candidate sample =
 ConsistentWith :
   (system : ObservationSystem) →
   Hidden system → List (ObservationSample system) → Set
-ConsistentWith system candidate [] = Set
+ConsistentWith system candidate [] = ⊤
 ConsistentWith system candidate (sample ∷ rest) =
   CompatibleWithSample system candidate sample
   × ConsistentWith system candidate rest
@@ -58,6 +59,11 @@ refinementIsMonotone :
   ConsistentWith system candidate (sample ∷ transcript) →
   ConsistentWith system candidate transcript
 refinementIsMonotone (_ , rest) = rest
+
+emptyTranscriptAdmitsEveryCandidate :
+  ∀ {system} (candidate : Hidden system) →
+  ConsistentWith system candidate []
+emptyTranscriptAdmitsEveryCandidate candidate = tt
 
 honestSample :
   (system : ObservationSystem) →
