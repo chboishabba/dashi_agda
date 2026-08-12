@@ -16,6 +16,7 @@ module DASHI.Core.DynamicalQuotientSafety where
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List)
 open import Data.Empty using (⊥)
+open import Relation.Binary.PropositionalEquality using (cong)
 
 import DASHI.Core.TypedDependencyCore as Dependency
 import DASHI.Core.AdmissibleReachability as Reachability
@@ -39,6 +40,30 @@ record DynamicConsumerSafety
       project leftAfter ≡ project rightAfter
 
 open DynamicConsumerSafety public
+
+------------------------------------------------------------------------
+-- Safety is closed under further consumer observation.
+--
+-- If a fine-to-mid projection is trace-congruent, no deterministic view of
+-- that mid surface can reintroduce a distinction the safe quotient proved
+-- dynamically irrelevant.  This is the compositional law needed by stacks of
+-- consumer-specific projections.
+------------------------------------------------------------------------
+
+postcomposeDynamicConsumerSafety :
+  ∀ {State Action Mid Observation}
+    {system : Dependency.DependentActionSystem State Action}
+    {project : State → Mid} →
+  DynamicConsumerSafety system project →
+  (observe : Mid → Observation) →
+  DynamicConsumerSafety system (λ state → observe (project state))
+postcomposeDynamicConsumerSafety safety observe =
+  dynamicConsumerSafety λ same leftRun rightRun →
+    cong observe
+      (traceCongruence safety
+        same
+        leftRun
+        rightRun)
 
 ------------------------------------------------------------------------
 -- Terminalisation defect.
@@ -75,6 +100,25 @@ terminalisationDefectContradictsSafety safety defect =
       (sameCurrentObservation defect)
       (leftExecution defect)
       (rightExecution defect))
+
+------------------------------------------------------------------------
+-- An unsafe collapse and an unreopenable collapse are deliberately different
+-- notions.  TerminalisationDefect detects future-visible collapse; a separate
+-- receipt/reopening layer decides whether the hidden distinction remains
+-- recoverable.
+------------------------------------------------------------------------
+
+record UnreopenableDynamicCollapse
+    {State Action Observation : Set}
+    (system : Dependency.DependentActionSystem State Action)
+    (project : State → Observation) : Set₁ where
+  field
+    dynamicDefect : TerminalisationDefect system project
+    ReopeningReceipt : Set
+    MissingReopeningWitness : Set
+    missingReopeningWitness : MissingReopeningWitness
+
+open UnreopenableDynamicCollapse public
 
 ------------------------------------------------------------------------
 -- Safety is explicitly consumer-relative.
