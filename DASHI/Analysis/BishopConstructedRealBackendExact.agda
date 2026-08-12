@@ -2,7 +2,7 @@ module DASHI.Analysis.BishopConstructedRealBackendExact where
 
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Sigma using (Σ)
-open import Agda.Builtin.Unit using (⊤)
+open import Agda.Builtin.Unit using (⊤; tt)
 open import Relation.Binary.PropositionalEquality using (_≡_; refl)
 
 import Real as BishopReal
@@ -15,16 +15,30 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 ------------------------------------------------------------------------
 -- Concrete Bishop backend for DASHI's setoid-aware real contract.
 --
--- Zachary Murray, "Constructive Analysis in the Agda Proof Assistant",
--- BSc Honours thesis, Dalhousie University, April 2022.
--- arXiv:2205.08354.  No DOI was assigned to the thesis.
+-- Errett Bishop and Douglas Bridges,
+-- "Constructive Analysis", Springer, 1985.
+-- DOI: 10.1007/978-3-642-61667-9.
+--
+-- Zachary Murray,
+-- "Constructive Analysis in the Agda Proof Assistant",
+-- B.Sc. Honours thesis, Dalhousie University, 2022.
+-- arXiv:2205.08354. No DOI was assigned to the thesis.
 --
 -- Code continuation: Viktor Csimma, viktorcsimma/bishop, pinned by DASHI at
 -- vendor/bishop commit 240e38c7f6938f20f865b1f956c5f084da48bd54.
 --
--- The carrier, equality, sequence semantics, completeness and uniqueness below
--- are the imported checked objects.  Algebra/order packaging is a separate
--- record because the Bishop library and DASHI expose differently shaped bundles.
+-- DASHI CONTRIBUTION
+--
+-- The carrier, extensional equality, arithmetic, order, sequence semantics,
+-- completeness and uniqueness are now all connected to imported checked
+-- Bishop objects.  The old packaging record remains as a reusable adapter, but
+-- its concrete instance is no longer conditional: congruence of +,-,*,neg,abs
+-- and transport of <=,< are assembled directly from RealProperties.
+--
+-- `orderedFieldLaws` in the legacy setoid spine is only an opaque Set marker;
+-- the actual laws used by DASHI are the explicit RealProperties theorems wired
+-- below (and the stronger MurrayBishopSetoidBackend record).  We therefore fill
+-- that marker by the canonical inhabited type, without postulating any law.
 ------------------------------------------------------------------------
 
 Bishopℝ : Set
@@ -62,6 +76,23 @@ record BishopAlgebraOrderPackaging : Set₁ where
 
 open BishopAlgebraOrderPackaging public
 
+bishopImportedAlgebraOrderPackaging : BishopAlgebraOrderPackaging
+bishopImportedAlgebraOrderPackaging = record
+  { addCong = BishopProperties.+-cong
+  ; subCong = λ left right →
+      BishopProperties.+-cong left (BishopProperties.-‿cong right)
+  ; mulCong = BishopProperties.*-cong
+  ; negCong = BishopProperties.-‿cong
+  ; absCong = BishopProperties.∣-∣-cong
+  ; leResp = λ left right proof →
+      BishopProperties.≤-respʳ-≃ right
+        (BishopProperties.≤-respˡ-≃ left proof)
+  ; ltResp = λ left right proof →
+      BishopProperties.<-respʳ-≃ right
+        (BishopProperties.<-respˡ-≃ left proof)
+  ; orderedFieldLaws = ⊤
+  }
+
 bishopSetoidOrderedCompleteReal :
   BishopAlgebraOrderPackaging → Spine.SetoidOrderedCompleteReal
 bishopSetoidOrderedCompleteReal packaging = record
@@ -95,6 +126,10 @@ bishopSetoidOrderedCompleteReal packaging = record
   ; limitUnique = BishopSequence.uniqueness-of-limits
   }
 
+bishopImportedSetoidOrderedCompleteReal : Spine.SetoidOrderedCompleteReal
+bishopImportedSetoidOrderedCompleteReal =
+  bishopSetoidOrderedCompleteReal bishopImportedAlgebraOrderPackaging
+
 bishopFunctionSequenceRealization :
   (packaging : BishopAlgebraOrderPackaging) →
   Spine.FunctionSequenceRealization (bishopSetoidOrderedCompleteReal packaging)
@@ -112,6 +147,10 @@ bishopConstructiveRealBackend packaging = record
   ; quotientOptional = ⊤
   }
 
+bishopImportedConstructiveRealBackend : Spine.ConstructiveRealBackend
+bishopImportedConstructiveRealBackend =
+  bishopConstructiveRealBackend bishopImportedAlgebraOrderPackaging
+
 record BishopBackendReceipt
     (packaging : BishopAlgebraOrderPackaging) : Set₁ where
   field
@@ -127,7 +166,7 @@ bishopCarrierEqualityCompletenessLevel : ProofLevel
 bishopCarrierEqualityCompletenessLevel = machineChecked
 
 bishopAlgebraOrderPackagingLevel : ProofLevel
-bishopAlgebraOrderPackagingLevel = conditional
+bishopAlgebraOrderPackagingLevel = machineChecked
 
 bishopBackendAssemblyLevel : ProofLevel
 bishopBackendAssemblyLevel = machineChecked

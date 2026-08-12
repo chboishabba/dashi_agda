@@ -167,7 +167,7 @@ averagedContourGaugeCovariant
   trans
     (cong (average averageAxioms)
       (mapCongPointwise
-        (pathHolonomyGaugeCovariant family field)
+        (transformedHolonomyGaugeCovariant family field)
         (paths family)))
     (averageBiTranslate averageAxioms
       (leftGauge family field)

@@ -1,23 +1,23 @@
-name: Yang-Mills Clay highest-alpha Round 42 extension
+name: Yang-Mills Clay highest-alpha cumulative extension
 
 # SECURITY BOUNDARY
 #
 # The self-hosted Agda runner executes checked-out repository code.  Therefore
-# this workflow is intentionally restricted to pushes on the trusted Round-42
-# development branch and is NOT triggered by pull_request events.  The open PR
-# still receives the resulting commit status because its head is this branch,
-# without allowing arbitrary PR checkout content to execute on the shared
-# self-hosted runner.
+# this workflow is intentionally restricted to pushes on trusted development
+# branches and is NOT triggered by pull_request events.  An open PR can still
+# receive the resulting head-commit status without allowing arbitrary PR
+# checkout content to execute on the shared self-hosted runner.
 on:
   push:
     branches:
       - agent/ym-clay-alpha-round42-master-reconciled-floor-recovery
+      - agent/ym-clay-alpha-round44-nonlinear-geometry-covariance
 
 permissions:
   contents: read
 
 jobs:
-  round42-green-extension:
+  cumulative-green-extension:
     runs-on: self-hosted
     timeout-minutes: 120
     steps:
@@ -27,7 +27,7 @@ jobs:
           submodules: recursive
           persist-credentials: false
 
-      - name: Validate Round 42 Green extension
+      - name: Validate cumulative Yang-Mills extension
         shell: bash
         run: |
           set -euo pipefail
