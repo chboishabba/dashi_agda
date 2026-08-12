@@ -1,5 +1,6 @@
 module DASHI.Governance.ProvenanceRestitutionBoundary where
 
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 open import DASHI.Governance.ProvenancePolicyTransport
 
@@ -29,7 +30,6 @@ record PropositionLocalRestitution (D : DamageRepairSystem) : Set₁ where
     repair : Repair D
     repairIsLocal : repair ≡ repairClaim D damage injured source
 
-open import Agda.Builtin.Equality using (_≡_; refl)
 open PropositionLocalRestitution public
 
 ------------------------------------------------------------------------
