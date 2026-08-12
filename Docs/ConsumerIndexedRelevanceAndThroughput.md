@@ -53,7 +53,7 @@ current PNF carrier = latent world object
 
 Both attempted promotions are constructorless in Agda.
 
-## Open-world accounting
+## Open-world accounting and world coverage
 
 The core accounting object retains three regions:
 
@@ -79,8 +79,24 @@ This is the preferred PNF reading of normalization.  Even when a runtime says
 mass_C(A) = unitMass
 ```
 
-that remains a statement about the chosen consumer/model.  World coverage is a
-separate epistemic problem.
+that remains a statement about the chosen consumer/model.
+
+World completeness is represented separately by:
+
+```text
+WorldCoverageSystem
+WorldCoverageWitness
+```
+
+whose application supplies a relation of the form
+
+```text
+Coverage_C(model, world).
+```
+
+No normalized relevance measure can construct that witness.  In many PNF uses
+there is no available `World` carrier at all, which is exactly why model-relative
+normalization must remain epistemically weaker.
 
 ## Cantor/refinement reference
 
@@ -204,11 +220,12 @@ after the NLP parser must justify itself as a tightly bounded/indexed operation.
 `DASHI.Cognition.PNF.RuntimeThroughputConstitution` therefore adds empirical
 receipts rather than pretending Agda proves PostgreSQL timings.
 
-### Stage receipt
+### Stage receipt and workload identity
 
-Each measured stage can record:
+Each measured stage records:
 
 ```text
+workload id
 input units
 output units
 work units
@@ -216,9 +233,13 @@ elapsed units
 peak-memory units.
 ```
 
+Before/after parser timings and parser/post-parser timings may only be compared
+when their workload identifiers are proved equal.  This blocks a fast small
+sample from being compared with a slower large one and called an optimisation.
+
 ### Explicit work envelope
 
-A claimed work-bounded stage supplies:
+A single claimed work-bounded point may supply:
 
 ```text
 work <= slope * representedCarrier + intercept.
@@ -227,15 +248,21 @@ work <= slope * representedCarrier + intercept.
 The represented carrier is application chosen: tokens, unresolved demands,
 bounded candidates, interface rows, or another justified execution carrier.
 
-This prevents a bounded output from hiding an unbounded intermediate join/sort
-surface.
+A single point does **not** prove scaling.  `ArchiveScaleReceipt` therefore
+requires a non-empty scaling series and an `AllWithinAffine` witness showing
+every observed point lies inside the declared envelope.
+
+This does not magically establish asymptotic complexity; it is the exact
+receipt expected from the runtime benchmark series before the implementation
+may describe that observed range as fitting the declared work envelope.
 
 ### Parser-dominance receipt
 
 A runtime target supplies a minimum dominance factor `k`.  A successful
-optimisation receipt proves both:
+optimisation receipt proves:
 
 ```text
+same workload before/after
 parser_after <= parser_before
 ```
 
@@ -243,6 +270,7 @@ for elapsed/work units, so parser dominance was not obtained by making spaCy
 slower; and
 
 ```text
+same workload parser/post-parser
 k * post_parser_after <= parser_after.
 ```
 
@@ -256,12 +284,28 @@ because everything after spaCy is blazing fast.
 The factor is deliberately not hard-coded in Agda.  Benchmark policy chooses it
 and the runtime must earn the receipt.
 
-### Archive-scale receipt
+### Why this matters for lifetime-scale corpora
 
-For whole-corpus work, the runtime can additionally record an affine work
-envelope relative to the semantic carrier that is supposed to control the
-stage.  Pairwise or higher-order work is acceptable only when that execution
-surface is explicitly represented/bounded before materialisation.
+The practical target is that once a text has paid the relatively expensive NLP
+observation cost, the rest of the semantic compiler mostly performs:
+
+```text
+integer-key probes
+small sparse joins
+set-based updates
+bounded candidate enumeration
+incremental reopening
+local fixed-point closure
+one ordered publication.
+```
+
+Expensive whole-document or whole-corpus recomputation should be recovery/audit
+behaviour, not the ordinary response to new evidence.
+
+Pairwise or higher-order work is acceptable only when that execution surface is
+explicitly represented or bounded before ranking/materialisation.  A `LIMIT`
+after a quadratic join does not satisfy the constitution merely because the
+returned row count is small.
 
 Performance receipts have no semantic authority.
 
@@ -294,6 +338,7 @@ The combined constitutional target is:
 ```text
 preserve all consumer-relevant distinctions,
 retain explicit ignorance,
+separate model normalization from world coverage,
 prove dynamic safety before forgetting hidden state,
 and make every post-parser operation cheap enough to disappear beneath parsing.
 ```
