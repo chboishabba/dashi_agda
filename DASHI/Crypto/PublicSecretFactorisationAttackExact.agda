@@ -12,7 +12,7 @@ module DASHI.Crypto.PublicSecretFactorisationAttackExact where
 open import Agda.Builtin.Bool using (Bool)
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Empty using (⊥)
-open import Relation.Binary.PropositionalEquality using (cong)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 record SecretLabelledProjection : Set₁ where
   constructor secretLabelledProjection
@@ -35,6 +35,43 @@ record ExactPublicSecretRecovery
     factors : ∀ fine → recover (project system fine) ≡ secretLabel system fine
 
 open ExactPublicSecretRecovery public
+
+------------------------------------------------------------------------
+-- SECRET-LABELLED FIBRE TEST
+--
+-- If one public fibre contains two fine states carrying genuinely different
+-- protected labels, then no deterministic exact public recovery function can
+-- exist on that fibre.  This is stronger than the vague statement "the fibre
+-- is broad": the relevant question is whether the secret label is constant on
+-- every public fibre.
+------------------------------------------------------------------------
+
+record SecretLabelFibreSplit
+    (system : SecretLabelledProjection) : Set where
+  constructor secretLabelFibreSplit
+  field
+    left right : Fine system
+    samePublic : project system left ≡ project system right
+    secretLabelsDiffer :
+      secretLabel system left ≡ secretLabel system right → ⊥
+
+open SecretLabelFibreSplit public
+
+fibreSplitRefutesExactPublicRecovery :
+  ∀ {system} →
+  SecretLabelFibreSplit system →
+  ExactPublicSecretRecovery system → ⊥
+fibreSplitRefutesExactPublicRecovery {system} split recovery =
+  secretLabelsDiffer split secretEquality
+  where
+    secretEquality :
+      secretLabel system (left split) ≡ secretLabel system (right split)
+    secretEquality =
+      trans
+        (sym (factors recovery (left split)))
+        (trans
+          (cong (recover recovery) (samePublic split))
+          (factors recovery (right split)))
 
 ------------------------------------------------------------------------
 -- Full inversion is strictly stronger than needed for a KEM break at this
@@ -111,6 +148,14 @@ factorisationImpliesExactRecovery factorisation =
   exactPublicSecretRecovery
     (λ public → decode factorisation (quotient factorisation public))
     (factorLaw factorisation)
+
+fibreSplitRefutesPublicSecretFactorisation :
+  ∀ {system} →
+  SecretLabelFibreSplit system →
+  PublicSecretFactorisation system → ⊥
+fibreSplitRefutesPublicSecretFactorisation split factorisation =
+  fibreSplitRefutesExactPublicRecovery split
+    (factorisationImpliesExactRecovery factorisation)
 
 ------------------------------------------------------------------------
 -- Boundary: exact public recovery is already a break of the secret-labelled
