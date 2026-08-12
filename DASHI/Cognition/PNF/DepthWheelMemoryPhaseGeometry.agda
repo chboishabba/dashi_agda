@@ -2,6 +2,7 @@ module DASHI.Cognition.PNF.DepthWheelMemoryPhaseGeometry where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
+open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 
 import Ultrametric as UMetric
@@ -22,7 +23,7 @@ phaseToTrit Wheel.phase-1 = BT.zero
 phaseToTrit Wheel.phase-2 = BT.pos
 
 pulledBackPhaseDistance :
-  Wheel.DepthWheelPhase → Wheel.DepthWheelPhase → Agda.Builtin.Nat.Nat
+  Wheel.DepthWheelPhase → Wheel.DepthWheelPhase → Nat
 pulledBackPhaseDistance left right =
   TernaryMetric.dT (phaseToTrit left) (phaseToTrit right)
 
@@ -42,12 +43,12 @@ phaseDistanceMatchesMemoryGeometry Wheel.phase-2 Wheel.phase-2 = refl
 
 phaseUltrametric : UMetric.Ultrametric Wheel.DepthWheelPhase
 phaseUltrametric = record
-  { UMetric.Ultrametric.d = pulledBackPhaseDistance
-  ; UMetric.Ultrametric.id-zero =
+  { d = pulledBackPhaseDistance
+  ; id-zero =
       λ phase → TernaryMetric.id-zeroT (phaseToTrit phase)
-  ; UMetric.Ultrametric.symmetric =
+  ; symmetric =
       λ left right → TernaryMetric.symT (phaseToTrit left) (phaseToTrit right)
-  ; UMetric.Ultrametric.ultratriangle =
+  ; ultratriangle =
       λ left middle right →
         TernaryMetric.ultraT
           (phaseToTrit left)
@@ -65,21 +66,18 @@ reinforcementExistingLearningBridge :
   List Learning.WeightedTransition →
   List Learning.WeightedTransition →
   MemoryWheel.ExistingLearningWheelBridge
-reinforcementExistingLearningBridge source publicLabel oldGraph newGraph = record
-  { MemoryWheel.ExistingLearningWheelBridge.wheelTransition =
-      MemoryWheel.reinforcementWheelTransition source
-  ; MemoryWheel.ExistingLearningWheelBridge.learningReceipt =
-      Learning.reinforcementReceipt (MemoryWheel.memory source)
-  ; MemoryWheel.ExistingLearningWheelBridge.fibreUpdate =
-      FibreLearning.reweightWithinFibre
-        (MemoryWheel.memory source)
-        publicLabel
-        oldGraph
-        newGraph
-  ; MemoryWheel.ExistingLearningWheelBridge.receiptBeforeMatchesWheelSource = refl
-  ; MemoryWheel.ExistingLearningWheelBridge.receiptAfterMatchesFibreAfter = refl
-  ; MemoryWheel.ExistingLearningWheelBridge.fibreRememberedPNFPreserved = refl
-  }
+reinforcementExistingLearningBridge source publicLabel oldGraph newGraph =
+  MemoryWheel.existingLearningWheelBridge
+    (MemoryWheel.reinforcementWheelTransition source)
+    (Learning.reinforcementReceipt (MemoryWheel.memory source))
+    (FibreLearning.reweightWithinFibre
+      (MemoryWheel.memory source)
+      publicLabel
+      oldGraph
+      newGraph)
+    refl
+    refl
+    refl
 
 extinctionExistingLearningBridge :
   (source : MemoryWheel.WheelMemoryFibre) →
@@ -87,18 +85,15 @@ extinctionExistingLearningBridge :
   List Learning.WeightedTransition →
   List Learning.WeightedTransition →
   MemoryWheel.ExistingLearningWheelBridge
-extinctionExistingLearningBridge source publicLabel oldGraph newGraph = record
-  { MemoryWheel.ExistingLearningWheelBridge.wheelTransition =
-      MemoryWheel.extinctionWheelTransition source
-  ; MemoryWheel.ExistingLearningWheelBridge.learningReceipt =
-      Learning.extinctionReceipt (MemoryWheel.memory source)
-  ; MemoryWheel.ExistingLearningWheelBridge.fibreUpdate =
-      FibreLearning.rewireWithinFibre
-        (MemoryWheel.memory source)
-        publicLabel
-        oldGraph
-        newGraph
-  ; MemoryWheel.ExistingLearningWheelBridge.receiptBeforeMatchesWheelSource = refl
-  ; MemoryWheel.ExistingLearningWheelBridge.receiptAfterMatchesFibreAfter = refl
-  ; MemoryWheel.ExistingLearningWheelBridge.fibreRememberedPNFPreserved = refl
-  }
+extinctionExistingLearningBridge source publicLabel oldGraph newGraph =
+  MemoryWheel.existingLearningWheelBridge
+    (MemoryWheel.extinctionWheelTransition source)
+    (Learning.extinctionReceipt (MemoryWheel.memory source))
+    (FibreLearning.rewireWithinFibre
+      (MemoryWheel.memory source)
+      publicLabel
+      oldGraph
+      newGraph)
+    refl
+    refl
+    refl
