@@ -19,17 +19,21 @@ module DASHI.Physics.Closure.NSTriadKNBoundaryFiveLocalLimitsRound47Exact where
 --   strong convergence;
 --   dominated convergence.
 --
--- Once those five equalities are supplied, this module packages them into the
--- old `AllBoundarySubtypesVanish`, after which Round 45 gives an exact zero-tax
--- owner automatically.
+-- Once those five equalities are supplied, this module constructs the old
+-- `AllBoundarySubtypesVanish`, the Round-45 physical zero-tax input, and the
+-- final admissible boundary owner with eta = 0.  No further quantitative
+-- boundary optimization remains after these five local propositions.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
-open import Data.Rational.Base using (0ℚ)
+open import Data.Rational.Base using (ℚ; 0ℚ; _≤_)
 
 import DASHI.Physics.Closure.NSTriadKNBoundaryVanishingClassificationRound29Exact as Boundary
+import DASHI.Physics.Closure.NSTriadKNBoundaryZeroTaxOwnerRound45Exact as Zero
+import DASHI.Physics.Closure.NSTriadKNAdmissibleOwnerTaxLanguageRound28Exact as Owner
+import DASHI.Physics.Closure.NSTriadKNLuoDuplicateFreeTaxOwnershipRound26Exact as Tax
 
 record FivePhysicalBoundaryLocalLimits
     (atoms : List Boundary.BoundaryAtom) : Set where
@@ -70,6 +74,54 @@ fiveLocalLimitsForceBoundaryTotalZero :
 fiveLocalLimitsForceBoundaryTotalZero {atoms} limits =
   Boundary.classifiedBoundaryTotalVanishes atoms
     (fiveLocalLimitsToExistingBoundaryCertificate limits)
+
+record PhysicalBoundaryFiveLocalOwnerInput
+    (environment : Owner.TaxEnvironment) : Set where
+  field
+    atoms : List Boundary.BoundaryAtom
+    physicalBoundaryProduction : ℚ
+    physicalBoundaryProductionNonnegative :
+      0ℚ ≤ physicalBoundaryProduction
+    physicalBoundaryProductionIsClassifiedTotal :
+      physicalBoundaryProduction ≡ Boundary.boundaryTotal atoms
+    fiveLocalLimits : FivePhysicalBoundaryLocalLimits atoms
+
+open PhysicalBoundaryFiveLocalOwnerInput public
+
+asRound45BoundaryZeroTaxInput :
+  ∀ {environment} →
+  PhysicalBoundaryFiveLocalOwnerInput environment →
+  Zero.PhysicalBoundaryZeroTaxInput environment
+asRound45BoundaryZeroTaxInput input = record
+  { atoms = atoms input
+  ; physicalBoundaryProduction = physicalBoundaryProduction input
+  ; physicalBoundaryProductionNonnegative =
+      physicalBoundaryProductionNonnegative input
+  ; physicalBoundaryProductionIsClassifiedTotal =
+      physicalBoundaryProductionIsClassifiedTotal input
+  ; allPhysicalBoundarySubtypesVanish =
+      fiveLocalLimitsToExistingBoundaryCertificate (fiveLocalLimits input)
+  }
+
+physicalBoundaryOwnerFromFiveLocalLimits :
+  ∀ {environment} →
+  PhysicalBoundaryFiveLocalOwnerInput environment →
+  Owner.AdmissibleOwnerEstimate environment
+physicalBoundaryOwnerFromFiveLocalLimits input =
+  Zero.physicalBoundaryZeroTaxOwnerEstimate
+    (asRound45BoundaryZeroTaxInput input)
+
+physicalBoundaryOwnerFromFiveLocalLimitsIdentity :
+  ∀ {environment}
+    (input : PhysicalBoundaryFiveLocalOwnerInput environment) →
+  Owner.owner (physicalBoundaryOwnerFromFiveLocalLimits input) ≡ Tax.boundary
+physicalBoundaryOwnerFromFiveLocalLimitsIdentity input = refl
+
+physicalBoundaryOwnerFromFiveLocalLimitsEtaZero :
+  ∀ {environment}
+    (input : PhysicalBoundaryFiveLocalOwnerInput environment) →
+  Owner.eta (physicalBoundaryOwnerFromFiveLocalLimits input) ≡ 0ℚ
+physicalBoundaryOwnerFromFiveLocalLimitsEtaZero input = refl
 
 boundaryCompletionReducedToFiveLocalLimits : Bool
 boundaryCompletionReducedToFiveLocalLimits = true
