@@ -2,15 +2,6 @@ module DASHI.Core.FutureObservationLanguageQuotientExact where
 
 ------------------------------------------------------------------------
 -- CANONICAL FUTURE-OBSERVATION EQUIVALENCE
---
--- DependentActionSystem is intentionally proof-bearing and may be
--- nondeterministic.  Therefore the canonical consumer semantics is not a
--- hidden deterministic step function.  It is the complete language of
--- observations reachable under each action trace.
---
--- Two states are future-equivalent exactly when those trace-indexed
--- observation languages coincide.  This is an honest equivalence relation
--- without choice, function extensionality, or a determinism axiom.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -138,6 +129,56 @@ safeProjectionKernelFactorsThroughFutureEquivalence safe =
   kernelSubrelation (kernelContainedInFutureEquivalence safe)
 
 ------------------------------------------------------------------------
+-- Exact future summaries give an application-facing way to certify safety.
+-- A summary describes the complete trace-indexed observation language from a
+-- coarse code.  If every fine state's future language is exactly equivalent to
+-- the summary of its coarse value, equal coarse values are automatically
+-- future-equivalent.
+------------------------------------------------------------------------
+
+record ExactFutureLanguageSummary
+    {State Action Observation Coarse : Set}
+    (system : Dependency.DependentActionSystem State Action)
+    (project : State → Observation)
+    (coarsen : State → Coarse) : Set₁ where
+  constructor exactFutureLanguageSummary
+  field
+    SummaryLanguage : Coarse → List Action → Observation → Set
+    summaryExact :
+      (state : State) →
+      (actions : List Action) →
+      (observation : Observation) →
+      LogicalIff
+        (FutureObservation system project state actions observation)
+        (SummaryLanguage (coarsen state) actions observation)
+
+open ExactFutureLanguageSummary public
+
+exactSummaryCertifiesFutureLanguageSafety :
+  ∀ {State Action Observation Coarse}
+    {system : Dependency.DependentActionSystem State Action}
+    {project : State → Observation}
+    {coarsen : State → Coarse} →
+  ExactFutureLanguageSummary system project coarsen →
+  FutureLanguageSafeProjection system project coarsen
+exactSummaryCertifiesFutureLanguageSafety summary =
+  futureLanguageSafeProjection certify
+  where
+    certify :
+      ∀ {left right} →
+      coarsen left ≡ coarsen right →
+      FutureObservationEquivalent system project left right
+    certify {left} {right} refl =
+      futureObservationEquivalent λ actions observation →
+        logicalIff
+          (λ witness →
+            backward (summaryExact summary right actions observation)
+              (forward (summaryExact summary left actions observation) witness))
+          (λ witness →
+            backward (summaryExact summary left actions observation)
+              (forward (summaryExact summary right actions observation) witness))
+
+------------------------------------------------------------------------
 -- Concrete quotient presentations.
 ------------------------------------------------------------------------
 
@@ -159,16 +200,6 @@ record FutureEquivalencePresentation
       classOf left ≡ classOf right
 
 open FutureEquivalencePresentation public
-
-------------------------------------------------------------------------
--- Actual factorization when a coarse projection supplies a section.
---
--- In intensional Agda, an arbitrary quotient map does not construct a choice
--- of representative.  If an application has an explicit section, however,
--- no choice principle is needed: send each coarse value to the future class of
--- its chosen representative.  Safety makes that definition independent of the
--- fine state from which the coarse value arose.
-------------------------------------------------------------------------
 
 record SectionedProjection
     {State Coarse : Set}
