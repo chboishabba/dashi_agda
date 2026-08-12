@@ -38,10 +38,11 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Rational.Base using
-  (ℚ; 0ℚ; _+_; _*_; _≤_; nonNegative)
+  (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong; cong₂; subst; trans)
+open import Relation.Binary.PropositionalEquality using
+  (cong; cong₂; subst; sym; trans)
 
 import DASHI.Physics.Closure.NSTriadKNLuoBadCoherenceWeightedMarkovExact as Threshold
 import DASHI.Physics.Closure.NSTriadKNHHBadSharpDyadicGainRound33Exact as Sharp
@@ -59,7 +60,7 @@ record PhysicalVariableDefectDuhamel : Set where
     generatedNonnegative : ∀ q → 0ℚ ≤ generated q
     leakageNonnegative : ∀ q → 0ℚ ≤ leakage q
     alphaNonnegative : ∀ q → 0ℚ ≤ alpha q
-    alphaAtMostOne : ∀ q → alpha q ≤ Data.Rational.Base.1ℚ
+    alphaAtMostOne : ∀ q → alpha q ≤ 1ℚ
     forcingNonnegative : ∀ q → 0ℚ ≤ forcing q
 
     successorDecomposition : ∀ q →
@@ -136,7 +137,7 @@ componentBoundsGiveVariableShellTransfer physical q =
       ≤ alpha physical q * Sharp.half * defectRate physical q
         + Threshold.threshold (parameter physical)
           * Sharp.inverseDyadicScale (suc q) * forcing physical q)
-    sourceMeaning
+    (sym sourceMeaning)
     summed
 
 normalizedInheritedIdentity :
@@ -175,20 +176,19 @@ normalizedForcingIdentity physical q =
 
     cancelThreshold :
       (inverse * threshold) * (inverseDyadic * dyadic) * beta
-      ≡ Data.Rational.Base.1ℚ * (inverseDyadic * dyadic) * beta
+      ≡ 1ℚ * (inverseDyadic * dyadic) * beta
     cancelThreshold =
       cong (λ product → product * (inverseDyadic * dyadic) * beta)
         (Threshold.inverseMeaning (parameter physical))
 
     cancelDyadic :
-      Data.Rational.Base.1ℚ * (inverseDyadic * dyadic) * beta
-      ≡ Data.Rational.Base.1ℚ * Data.Rational.Base.1ℚ * beta
+      1ℚ * (inverseDyadic * dyadic) * beta
+      ≡ 1ℚ * 1ℚ * beta
     cancelDyadic =
-      cong (λ product → Data.Rational.Base.1ℚ * product * beta)
+      cong (λ product → 1ℚ * product * beta)
         (Sharp.inverseDyadicReciprocal (suc q))
 
-    finish :
-      Data.Rational.Base.1ℚ * Data.Rational.Base.1ℚ * beta ≡ beta
+    finish : 1ℚ * 1ℚ * beta ≡ beta
     finish = solve (beta ∷ [])
   in trans regroup (trans cancelThreshold (trans cancelDyadic finish))
 
