@@ -1,15 +1,11 @@
 module DASHI.Cognition.PNF.DepthWheelMemoryGradedAdapter where
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 import DASHI.Cognition.PNF.DepthWheelMemoryHyperfabric as MemoryWheel
 import DASHI.Foundations.DepthWheelGradedDynamics as Graded
 import DASHI.Physics.Closure.SSPPrimeLane369DepthWheelCantorBridge as Wheel
-
-------------------------------------------------------------------------
--- Existing WheelMemoryFibre indexed by its proven depth-wheel grade.
-------------------------------------------------------------------------
 
 record MemoryAtGrade (grade : Wheel.DepthWheelPhase) : Set where
   constructor memoryAtGrade
@@ -31,10 +27,6 @@ advanceAtGrade update source =
       (MemoryWheel.advanceMovesPhase update (state source))
       (cong Wheel.nextDepthWheelPhase (stateHasGrade source)))
 
-------------------------------------------------------------------------
--- A three-phase learning program is therefore a literal GradedDepthWheelSystem.
-------------------------------------------------------------------------
-
 gradedMemoryLearningSystem :
   MemoryWheel.ThreePhaseLearningProgram →
   Graded.GradedDepthWheelSystem
@@ -53,4 +45,4 @@ phase0OneWheelUnderlyingState :
       (gradedMemoryLearningSystem program)
       source)
   ≡ MemoryWheel.runOneLearningWheel program (state source)
-phase0OneWheelUnderlyingState program source = Agda.Builtin.Equality.refl
+phase0OneWheelUnderlyingState program source = refl
