@@ -37,7 +37,7 @@ module DASHI.Physics.YangMills.BalabanCMP109CanonicalNormalCorrectionExact where
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _-_; _≤_)
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong₂; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanFiniteMatrixL1ContractionExact as L1
@@ -128,8 +128,14 @@ quarterContractiveNormalCorrectionUnique problem left right leftSol rightSol coo
       (solutionDifferenceEquation problem left right leftSol rightSol)
       (solutionDifferenceQuarterBound problem left right)
       coordinate
+    l = left coordinate
+    r = right coordinate
   in
-  ℚRing.solve-∀ (left coordinate) (right coordinate) differenceZero
+  trans
+    (sym (ℚRing.solve-∀ l r : (l - r) + r ≡ l))
+    (trans
+      (cong (_+ r) differenceZero)
+      (ℚRing.solve-∀ r : 0ℚ + r ≡ r))
 
 ------------------------------------------------------------------------
 -- Canonical parameterized correction.
