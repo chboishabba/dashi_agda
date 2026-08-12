@@ -9,6 +9,8 @@ module DASHI.Physics.Closure.NSTriadKNHighestAlphaRound50Exact where
 --
 -- HH-bad:
 --   * exposes zeta = 1-alpha as the genuine normalized depletion margin;
+--   * proves that a bare heat-half with alpha=1 cannot support any strictly
+--     positive constant forcing in the invariant-ceiling mechanism;
 --   * rewrites the direct gate as C0<T and beta<zeta*T;
 --   * adds a second physical doorway: nonexpansive inheritance plus a uniformly
 --     bounded forcing prefix, giving C_q <= C_0+B_force;
@@ -29,6 +31,7 @@ module DASHI.Physics.Closure.NSTriadKNHighestAlphaRound50Exact where
 
 import DASHI.Physics.Closure.NSTriadKNHighestAlphaRound49Exact
 import DASHI.Physics.Closure.NSTriadKNHHBadZetaMarginRound50Exact
+import DASHI.Physics.Closure.NSTriadKNHHBadHeatHalfPositiveForcingNoGoRound50Exact
 import DASHI.Physics.Closure.NSTriadKNHHBadZetaDirectLiveBudgetRound50Exact
 import DASHI.Physics.Closure.NSTriadKNHHBadSummableForcingRound50Exact
 import DASHI.Physics.Closure.NSTriadKNHHBadNonexpansiveSummableForcingRound50Exact
