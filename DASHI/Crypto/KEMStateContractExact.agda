@@ -15,10 +15,13 @@ module DASHI.Crypto.KEMStateContractExact where
 --
 -- This module treats a KEM as a state machine with explicit preconditions,
 -- postconditions and invariants.  It does not model implementation leakage.
+-- Agreement is a trace predicate rather than an axiom for every seed/coin pair:
+-- lattice KEMs may have a nonzero (negligible) decapsulation-failure probability.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Product using (_×_; _,_; proj₁; proj₂)
+open import Data.Empty using (⊥)
 
 record KEMStateMachine : Set₁ where
   constructor kemStateMachine
@@ -44,13 +47,35 @@ record KEMStateMachine : Set₁ where
       ∀ {pk} → ValidPublicKey pk → ∀ coins →
       ValidCiphertext (proj₁ (encapsulate pk coins))
 
-    generatedAgreement :
-      ∀ seed coins →
+    GeneratedAgreement : KeyGenSeed → EncapsCoins → Set
+
+    generatedAgreementImpliesKeyEquality :
+      ∀ {seed coins} → GeneratedAgreement seed coins →
       let pair = keyGen seed in
       let result = encapsulate (proj₁ pair) coins in
       decapsulate (proj₂ pair) (proj₁ result) ≡ proj₂ result
 
 open KEMStateMachine public
+
+record TotalGeneratedAgreement (machine : KEMStateMachine) : Set₁ where
+  constructor totalGeneratedAgreement
+  field
+    everyGeneratedTraceAgrees :
+      ∀ seed coins → GeneratedAgreement machine seed coins
+
+open TotalGeneratedAgreement public
+
+record GeneratedAgreementFailure (machine : KEMStateMachine) : Set₁ where
+  constructor generatedAgreementFailure
+  field
+    seed : KeyGenSeed machine
+    coins : EncapsCoins machine
+    generatedKeysDiffer :
+      let pair = keyGen machine seed in
+      let result = encapsulate machine (proj₁ pair) coins in
+      decapsulate machine (proj₂ pair) (proj₁ result) ≡ proj₂ result → ⊥
+
+open GeneratedAgreementFailure public
 
 ------------------------------------------------------------------------
 -- Decapsulation-route state.
