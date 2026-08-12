@@ -24,7 +24,7 @@ module DASHI.Physics.YangMills.BalabanCMP109QuaternionAdjointTwoBackgroundExact 
 -- contour product telescope.  For unit rational quaternions P,Q,
 --
 --   Ad_P X - Ad_Q X
---    = (P-Q) X P^-1 + Q X (P^-1-Q^-1),
+--    = (P-Q) X P^-1 + Q X(P^-1-Q^-1),
 --
 -- and therefore, with the repository's square-root-free quaternion norm,
 --
@@ -37,9 +37,10 @@ module DASHI.Physics.YangMills.BalabanCMP109QuaternionAdjointTwoBackgroundExact 
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Integer.Base using (+_)
-open import Data.Rational.Base as ℚ using (ℚ; _*_; _≤_; _/_)
+open import Data.Rational.Base as ℚ using (ℚ; _+_; _*_; _≤_; _/_)
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using
+  (cong; cong₂; subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionWilsonSecondVariationExact as Q
@@ -169,9 +170,6 @@ unitAdjointDifferenceNormSqBound p q value pUnit qUnit =
       ≤ (+ 4 / 1) * Norm.normSq (Four._-q_ p q) * Norm.normSq value)
     (sym (adjointDifferenceFactorizationExact p q value))
     factorizedBound
-  where
-  open import Data.Rational.Base using (_+_)
-  open import Relation.Binary.PropositionalEquality using (cong₂)
 
 cmp109QuaternionAdjointTwoBackgroundIdentityLevel : ProofLevel
 cmp109QuaternionAdjointTwoBackgroundIdentityLevel = machineChecked
