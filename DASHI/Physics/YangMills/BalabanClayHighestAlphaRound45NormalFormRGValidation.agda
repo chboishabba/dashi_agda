@@ -9,6 +9,7 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound45NormalFormRGValidat
 ------------------------------------------------------------------------
 
 import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound42MasterReconciledValidation
+import DASHI.Physics.YangMills.BalabanCMP109PrincipalLogIdentityRegressionExact
 import DASHI.Physics.YangMills.BalabanCMP109PrintedEquation012FirstOrderNormalFormExact
 import DASHI.Physics.YangMills.BalabanCMP109FederbushFrechetReopeningExact
 import DASHI.Physics.YangMills.BalabanCMP109KernelLineEventualReopeningDomainExact
