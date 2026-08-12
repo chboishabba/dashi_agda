@@ -37,19 +37,26 @@ module DASHI.Physics.Closure.NSTriadKNHHBadAmplitudeHomogeneityRound43Exact wher
 --   P(a omega_k,a omega_p,a omega_r) = a^3 P(omega_k,omega_p,omega_r),
 --   D(a omega_k) = a^2 D(omega_k).
 --
--- Hence the production/dissipation ratio is degree +1 in amplitude.  The
--- Round-42 inverse-square frequency gain can close HH-bad only after a genuine
--- amplitude/critical/geometric producer controls this extra factor.  This is a
--- mathematical obstruction, not a bookkeeping issue, and prevents us from
--- falsely promoting the frequency-scaling theorem to a uniform owner bound.
+-- Hence the production/dissipation ratio is degree +1 in amplitude.  More
+-- sharply, a base estimate P <= C D transports to common amplitude a only as
+--
+--   P_a <= (a C) D_a,
+--
+-- not with the same C.  The Round-42 inverse-square frequency gain can close
+-- HH-bad only after a genuine amplitude/critical/geometric producer controls
+-- this extra factor.  This is a mathematical obstruction, not a bookkeeping
+-- issue, and prevents us from falsely promoting the frequency-scaling theorem
+-- to a uniform owner bound.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
-open import Data.Rational.Base using (ℚ; 0ℚ; _*_; _+_; _-_; -_)
+open import Data.Rational.Base using
+  (ℚ; 0ℚ; _*_; _+_; _-_; -_; _≤_; nonNegative)
+import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans)
+open import Relation.Binary.PropositionalEquality using (cong; trans; subst; sym)
 
 import DASHI.Physics.Closure.NSTriadKNLuoDirectionalDefectGramExact as Gram
 import DASHI.Physics.Closure.NSTriadKNLuoPhysicalDirectionalDefectExact as Physical
@@ -288,6 +295,80 @@ viscousChargeAmplitudeQuadratic viscosity amplitude mode =
       (cong (viscosity * k2 *_) normScale)
       regroup)
 
+commonAmplitudeBoundNeedsLinearCoefficient :
+  ∀ viscosity coefficient amplitude outputVorticity left right outputMode →
+  0ℚ ≤ amplitude →
+  Literal.orderedEnstrophyProduction outputVorticity left right
+    ≤ coefficient * Diss.viscousEnstrophyCharge viscosity outputMode →
+  Literal.orderedEnstrophyProduction
+      (scaleVec amplitude outputVorticity)
+      (amplitudeScaledMode amplitude left)
+      (amplitudeScaledMode amplitude right)
+  ≤
+  (amplitude * coefficient)
+    * Diss.viscousEnstrophyCharge viscosity
+        (amplitudeScaledMode amplitude outputMode)
+commonAmplitudeBoundNeedsLinearCoefficient
+    viscosity coefficient amplitude outputVorticity left right outputMode
+    amplitudeNN baseBound =
+  let
+    production = Literal.orderedEnstrophyProduction outputVorticity left right
+    dissipation = Diss.viscousEnstrophyCharge viscosity outputMode
+    cube = amplitude * amplitude * amplitude
+
+    squareNN : 0ℚ ≤ amplitude * amplitude
+    squareNN =
+      let instance amplitudeNNI = nonNegative amplitudeNN
+      in ℚP.nonNegative⁻¹ (amplitude * amplitude)
+
+    cubeNN : 0ℚ ≤ cube
+    cubeNN =
+      let
+        instance
+          squareNNI = nonNegative squareNN
+          amplitudeNNI = nonNegative amplitudeNN
+          cubeNNI = ℚP.nonNeg*nonNeg⇒nonNeg
+            (amplitude * amplitude) amplitude
+      in
+      ℚP.nonNegative⁻¹ cube
+
+    scaledBase : cube * production ≤ cube * (coefficient * dissipation)
+    scaledBase =
+      let instance cubeNNI = nonNegative cubeNN
+      in ℚP.*-monoˡ-≤-nonNeg cube baseBound
+
+    leftMeaning :
+      Literal.orderedEnstrophyProduction
+        (scaleVec amplitude outputVorticity)
+        (amplitudeScaledMode amplitude left)
+        (amplitudeScaledMode amplitude right)
+      ≡ cube * production
+    leftMeaning = commonAmplitudeProductionCubic
+      amplitude outputVorticity left right
+
+    rightMeaning :
+      (amplitude * coefficient)
+        * Diss.viscousEnstrophyCharge viscosity
+            (amplitudeScaledMode amplitude outputMode)
+      ≡ cube * (coefficient * dissipation)
+    rightMeaning =
+      trans
+        (cong ((amplitude * coefficient) *_)
+          (viscousChargeAmplitudeQuadratic viscosity amplitude outputMode))
+        (solve (amplitude ∷ coefficient ∷ dissipation ∷ []))
+  in
+  subst
+    (λ lower →
+      lower
+      ≤ (amplitude * coefficient)
+        * Diss.viscousEnstrophyCharge viscosity
+            (amplitudeScaledMode amplitude outputMode))
+    (sym leftMeaning)
+    (subst
+      (λ upper → cube * production ≤ upper)
+      (sym rightMeaning)
+      scaledBase)
+
 literalProductionAmplitudeDegree : Bool
 literalProductionAmplitudeDegree = true
 
@@ -296,6 +377,9 @@ viscousChargeAmplitudeDegree = true
 
 frequencyInverseSquareDoesNotRemoveAmplitudeFactor : Bool
 frequencyInverseSquareDoesNotRemoveAmplitudeFactor = true
+
+amplitudeCorrectedCoefficientTransportClosed : Bool
+amplitudeCorrectedCoefficientTransportClosed = true
 
 literalProductionAmplitudeDegreeIsTrue :
   literalProductionAmplitudeDegree ≡ true
@@ -308,3 +392,7 @@ viscousChargeAmplitudeDegreeIsTrue = refl
 frequencyInverseSquareDoesNotRemoveAmplitudeFactorIsTrue :
   frequencyInverseSquareDoesNotRemoveAmplitudeFactor ≡ true
 frequencyInverseSquareDoesNotRemoveAmplitudeFactorIsTrue = refl
+
+amplitudeCorrectedCoefficientTransportClosedIsTrue :
+  amplitudeCorrectedCoefficientTransportClosed ≡ true
+amplitudeCorrectedCoefficientTransportClosedIsTrue = refl
