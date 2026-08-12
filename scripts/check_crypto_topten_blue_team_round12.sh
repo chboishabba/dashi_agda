@@ -24,11 +24,12 @@ FILES=(
   DASHI/Crypto/PublicSecretFactorisationAttackExact.agda
   DASHI/Crypto/MLKEMSecurityDependencyGraphExact.agda
   DASHI/EverythingTerminalisationProvenanceSymmetryRound10.agda
+  Docs/support/reference/CryptoBlueTeamStateContractsRound12.md
 )
 
 for f in "${FILES[@]}"; do
   test -s "$f"
-  if grep -nE '\b(postulate|{-# *OPTIONS +--allow-unsolved-metas|unsafe|primTrustMe)\b|\?|{!!}' "$f"; then
+  if [[ "$f" == *.agda ]] && grep -nE '\b(postulate|{-# *OPTIONS +--allow-unsolved-metas|unsafe|primTrustMe)\b|\?|{!!}' "$f"; then
     echo "fail-closed scan rejected $f" >&2
     exit 1
   fi
@@ -74,6 +75,7 @@ grep -q '10.17487/RFC8017' DASHI/Crypto/TopTenCryptoBlueTeamProfilesExact.agda
 grep -q '10.17487/RFC7748' DASHI/Crypto/TopTenCryptoBlueTeamProfilesExact.agda
 grep -q '10.17487/RFC9180' DASHI/Crypto/TopTenCryptoBlueTeamProfilesExact.agda
 grep -q '10.6028/NIST.FIPS.203' DASHI/Crypto/TopTenCryptoBlueTeamProfilesExact.agda
+grep -q 'same public fibre' Docs/support/reference/CryptoBlueTeamStateContractsRound12.md
 
 if command -v agda >/dev/null 2>&1; then
   agda -i . -i src DASHI/EverythingTerminalisationProvenanceSymmetryRound10.agda
