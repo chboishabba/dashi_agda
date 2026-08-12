@@ -25,18 +25,14 @@ module DASHI.Physics.Closure.NSTriadKNHHBadSelectedRecurrenceToOwnerRound47Exact
 -- coefficient 2^q g_q.  They must be the SAME physical object before the
 -- recurrence can pay the HH-bad tax.
 --
--- This module isolates precisely that bridge.  If literal Round-39 cells have
--- density g_q and one proves
+-- If literal Round-39 cells have density g_q and one proves
 --
 --   2^q g_q = delta_*^(-1) 2^q B_q,
 --
--- shell by shell, then the selected recurrence ceiling M immediately constructs
--- the Round-47 selected-threshold owner profile.  Adding the already-isolated
--- unmasked-charge <= physical-dissipation theorem then constructs the mature
--- HH-bad owner at every shell with eta = 2M.
---
--- No equality between defect rate and gain density is postulated globally; it
--- is an explicit physical same-object input.
+-- shell by shell, the selected recurrence ceiling M constructs the Round-47
+-- selected-threshold owner profile.  Adding the already-isolated unmasked
+-- charge <= physical-dissipation theorem constructs the mature HH-bad owner at
+-- every shell with eta = 2M.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -44,12 +40,13 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ; 0ℚ; _≤_)
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import DASHI.Physics.Closure.NSTriadKNAdmissibleOwnerTaxLanguageRound28Exact as Owner
 import DASHI.Physics.Closure.NSTriadKNHHBadRestrictedGainDensityRound39Exact as Gain
 import DASHI.Physics.Closure.NSTriadKNHHBadOneDerivativeFactorizationRound44Exact as Factor
 import DASHI.Physics.Closure.NSTriadKNHHBadRestrictedChargeSubchargeRound44Exact as Subcharge
+import DASHI.Physics.Closure.NSTriadKNHHBadDefectRecurrenceNormalizationRound46Exact as Defect
 import DASHI.Physics.Closure.NSTriadKNHHBadSelectedThresholdRecurrenceRound47Exact as Recurrence
 import DASHI.Physics.Closure.NSTriadKNHHBadSingleThresholdSufficesRound47Exact as Selected
 import DASHI.Physics.Closure.NSTriadKNHHBadNormalizedProfileRound45Exact as Profile
@@ -67,7 +64,7 @@ record SelectedRecurrenceLiteralDensityBridge
 
     normalizedDensityIsNormalizedDefect : ∀ shell →
       Factor.scaleFreeDensityCoefficient (density shell) shell
-      ≡ DASHI.Physics.Closure.NSTriadKNHHBadDefectRecurrenceNormalizationRound46Exact.normalizedDefectProfile
+      ≡ Defect.normalizedDefectProfile
           (Recurrence.asPhysicalDefectRecurrence recurrence) shell
 
 open SelectedRecurrenceLiteralDensityBridge public
@@ -86,7 +83,7 @@ selectedRecurrenceToOwnerProfile {recurrence = recurrence} bridge = record
   ; normalizedCoefficientBelowSelectedCeiling = λ shell →
       subst
         (λ normalized → normalized ≤ Recurrence.ceiling recurrence)
-        (normalizedDensityIsNormalizedDefect bridge shell)
+        (sym (normalizedDensityIsNormalizedDefect bridge shell))
         (Recurrence.selectedThresholdUniformShellCeiling recurrence shell)
   }
 
