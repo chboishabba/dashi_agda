@@ -41,10 +41,11 @@ open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_; _<_ ; nonNegative)
+open import Data.Rational.Base using
+  (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_; _<_; nonNegative)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Binary.PropositionalEquality using (subst)
 
 record ContractiveProfileRecurrence : Set where
   field
@@ -65,12 +66,6 @@ record ContractiveProfileRecurrence : Set where
       beta ≤ (1ℚ - alpha) * ceiling
 
 open ContractiveProfileRecurrence public
-
-oneMinusAlphaNonnegative :
-  (data : ContractiveProfileRecurrence) →
-  0ℚ ≤ 1ℚ - alpha data
-oneMinusAlphaNonnegative data =
-  ℚP.<⇒≤ (ℚP.-positiveˡ (alphaStrict data))
 
 recurrenceStepPreservesCeiling :
   (data : ContractiveProfileRecurrence) →
