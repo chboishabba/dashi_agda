@@ -11,6 +11,7 @@ fi
 
 FILES=(
   DASHI/Cognition/PNF/NarrativeClaimProvenanceExact.agda
+  DASHI/Cognition/PNF/NarrativeConflictStateExact.agda
   DASHI/Cognition/PNF/DissTrackNarrativeDynamicsExact.agda
   DASHI/Cognition/PNF/ConsumerIndexedNarrativeProjectionExact.agda
   DASHI/Cognition/PNF/NarrativeMDLReplicationExact.agda
@@ -30,6 +31,10 @@ done
 grep -q 'replicationDoesNotCreateIndependentEvidence' DASHI/Cognition/PNF/NarrativeClaimProvenanceExact.agda
 grep -q 'signalReplicationRaisesSalience' DASHI/Cognition/PNF/NarrativeClaimProvenanceExact.agda
 grep -q 'rhetoricalUpdatePreservesFact' DASHI/Cognition/PNF/NarrativeClaimProvenanceExact.agda
+
+grep -q 'audienceUpdatePreservesResidual' DASHI/Cognition/PNF/NarrativeConflictStateExact.agda
+grep -q 'sameProjectionDoesNotChooseReconstruction' DASHI/Cognition/PNF/NarrativeConflictStateExact.agda
+grep -q 'VerifiedReconstruction' DASHI/Cognition/PNF/NarrativeConflictStateExact.agda
 
 grep -q 'familyToMeet' DASHI/Cognition/PNF/DissTrackNarrativeDynamicsExact.agda
 grep -q 'phaseCaptureChangesPublicState' DASHI/Cognition/PNF/DissTrackNarrativeDynamicsExact.agda
