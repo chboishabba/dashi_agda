@@ -10,7 +10,9 @@ module DASHI.Crypto.PublicSecretFactorisationAttackExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool)
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_)
+open import Data.Empty using (⊥)
+open import Relation.Binary.PropositionalEquality using (cong)
 
 record SecretLabelledProjection : Set₁ where
   constructor secretLabelledProjection
@@ -55,14 +57,7 @@ fullInversionImpliesSecretRecovery :
 fullInversionImpliesSecretRecovery {system} inversion =
   exactPublicSecretRecovery
     (λ public → secretLabel system (invert inversion public))
-    proof
-  where
-    proof : ∀ fine →
-      secretLabel system (invert inversion (project system fine))
-      ≡ secretLabel system fine
-    proof fine =
-      let open import Relation.Binary.PropositionalEquality using (cong)
-      in cong (secretLabel system) (inverseOnImage inversion fine)
+    (λ fine → cong (secretLabel system) (inverseOnImage inversion fine))
 
 ------------------------------------------------------------------------
 -- Partial leakage can be weaker than exact key recovery.  A protected Boolean
@@ -88,14 +83,7 @@ exactRecoveryLeaksEveryPredicate :
 exactRecoveryLeaksEveryPredicate {system} recovery predicate =
   publicPredicateLeak
     (λ public → predicate (recover recovery public))
-    proof
-  where
-    proof : ∀ fine →
-      predicate (recover recovery (project system fine))
-      ≡ predicate (secretLabel system fine)
-    proof fine =
-      let open import Relation.Binary.PropositionalEquality using (cong)
-      in cong predicate (factors recovery fine)
+    (λ fine → cong predicate (factors recovery fine))
 
 ------------------------------------------------------------------------
 -- A factorisation may pass through any smaller/intermediate quotient Z.  This
@@ -133,6 +121,6 @@ record SecretAsymmetryBoundary
     (system : SecretLabelledProjection) : Set₁ where
   constructor secretAsymmetryBoundary
   field
-    exactPublicRecoveryForbidden : ExactPublicSecretRecovery system → Set
+    exactPublicRecoveryForbidden : ExactPublicSecretRecovery system → ⊥
 
 open SecretAsymmetryBoundary public
