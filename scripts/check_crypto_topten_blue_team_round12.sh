@@ -32,7 +32,7 @@ for f in "${FILES[@]}"; do
 done
 
 grep -q 'refinementIsMonotone' DASHI/Crypto/ChosenCiphertextObservationRefinementExact.agda
-grep -q 'secretIndependentSampleCannotSeparate' DASHI/Crypto/ChosenCiphertextObservationRefinementExact.agda
+grep -q 'samePublicFibreCannotBeSplitByPublicFactoredObservation' DASHI/Crypto/ChosenCiphertextObservationRefinementExact.agda
 grep -q 'rightCandidateRejectedByLeftObservation' DASHI/Crypto/ChosenCiphertextObservationRefinementExact.agda
 grep -q 'reuseContradictsUniqueness' DASHI/Crypto/CryptoUsageInvariantExact.agda
 grep -q 'unauthenticatedChannelNotQKDReady' DASHI/Crypto/CryptoUsageInvariantExact.agda
@@ -40,14 +40,22 @@ grep -q 'sameKeystreamRevealsPlaintextRelation' DASHI/Crypto/XorReuseLeakExact.a
 grep -q 'allTenCount' DASHI/Crypto/TopTenCryptoBlueTeamProfilesExact.agda
 grep -q 'allProfilesCount' DASHI/Crypto/TopTenCryptoBlueTeamProfilesExact.agda
 grep -q 'mlKemIsKEMNotDirectEncryption' DASHI/Crypto/TopTenCryptoBlueTeamProfilesExact.agda
+grep -q 'qkdIsDistributionNotDirectEncryption' DASHI/Crypto/TopTenCryptoBlueTeamProfilesExact.agda
 grep -q 'kemBreakRefutesHPKE' DASHI/Crypto/TopTenCryptoDependencyGraphExact.agda
 grep -q 'unauthenticatedBreakRefutesQKDComposite' DASHI/Crypto/TopTenCryptoDependencyGraphExact.agda
 grep -q 'publicSecretFactorisationCutsAsymmetry' DASHI/Crypto/TopTenCryptoDependencyGraphExact.agda
 grep -q 'GeneratedAgreementFailure' DASHI/Crypto/KEMStateContractExact.agda
 grep -q 'trueSecretPassesResidualTest' DASHI/Crypto/MLWEKeyStateResidualExact.agda
 grep -q 'samePublicKeySameHonestTranscript' DASHI/Crypto/PassiveEncapsulationFibreInvariantExact.agda
-grep -q 'factorisationImpliesExactRecovery' DASHI/Crypto/PublicSecretFactorisationAttackExact.agda
+grep -q 'fibreSplitRefutesExactPublicRecovery' DASHI/Crypto/PublicSecretFactorisationAttackExact.agda
+grep -q 'fibreSplitRefutesPublicSecretFactorisation' DASHI/Crypto/PublicSecretFactorisationAttackExact.agda
 grep -q 'publicFactorisationBreaksNoRecovery' DASHI/Crypto/MLKEMSecurityDependencyGraphExact.agda
+
+grep -q '10.6028/NIST.FIPS.197-upd1' DASHI/Crypto/TopTenCryptoBlueTeamProfilesExact.agda
+grep -q '10.17487/RFC8439' DASHI/Crypto/TopTenCryptoBlueTeamProfilesExact.agda
+grep -q '10.17487/RFC8017' DASHI/Crypto/TopTenCryptoBlueTeamProfilesExact.agda
+grep -q '10.17487/RFC9180' DASHI/Crypto/TopTenCryptoBlueTeamProfilesExact.agda
+grep -q '10.6028/NIST.FIPS.203' DASHI/Crypto/TopTenCryptoBlueTeamProfilesExact.agda
 
 if command -v agda >/dev/null 2>&1; then
   agda -i . -i src DASHI/EverythingTerminalisationProvenanceSymmetryRound10.agda
