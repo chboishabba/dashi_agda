@@ -19,27 +19,31 @@ import DASHI.Core.MinimalDynamicResidualExact
 import DASHI.Core.FiniteOptimalResidualSelectorExact
 import DASHI.Core.ApproximateMDLResidualBudgetExact
 
--- Canonical future semantics, dynamic factorisation/composition, and
--- provenance-conditioned accessibility.
+-- Canonical future semantics, dynamic factorisation/composition, residuals over
+-- the future quotient, and provenance-conditioned accessibility.
 import DASHI.Core.FutureObservationLanguageQuotientExact
+import DASHI.Core.FutureQuotientResidualExact
 import DASHI.Core.DynamicProjectionCompositionExact
 import DASHI.Core.PathDependentAccessibilityExact
 
--- C3-graded provenance dynamics and an exact phase-erasure no-go witness.
+-- C3-graded provenance dynamics and exact phase/frustration witnesses.
 import DASHI.Core.GradedProvenanceDynamicalSystemExact
 import DASHI.Core.HiddenPhaseDynamicInsufficiencyExact
 import DASHI.Cognition.PNF.CoupledDepthPhaseFrustrationExact
 import DASHI.Cognition.PNF.ConstraintPhaseFrustrationExact
 import DASHI.Cognition.PNF.ConstraintNetworkObstructionExact
+import DASHI.Cognition.PNF.RestrictedConstraintMetastabilityExact
 import DASHI.Cognition.PNF.PhasedRelationalLatticeExact
 import DASHI.Cognition.PNF.PhasedRelationalEvidencePropagationExact
 import DASHI.Cognition.PNF.IndependentWheelMemoryGradeExact
 import DASHI.Foundations.DepthWheelMacroBranchingExact
 import DASHI.Foundations.DepthWheelStroboscopicContractionExact
 import DASHI.Foundations.CantorUnitMassDynamicBridgeExact
+import DASHI.Foundations.CantorCylinderMassExact
 
 -- Concrete semantic/ontology consumers.
 import DASHI.Cognition.PNF.SpokenTelescopeConsumerProjectionExact
+import DASHI.Cognition.PNF.SpokenTelescopeFutureEquivalenceExact
 import DASHI.Cognition.PNF.ExactVsRelevantResidualExact
 import DASHI.Cognition.PNF.WikidataTypePressureMiniWorldExact
 
