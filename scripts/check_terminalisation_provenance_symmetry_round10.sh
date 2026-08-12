@@ -27,6 +27,7 @@ FILES=(
   DASHI/Crypto/MLKEMNoisyReopeningExact.agda
   DASHI/Crypto/KEMStateContractExact.agda
   DASHI/Crypto/MLWEKeyStateResidualExact.agda
+  DASHI/Crypto/PassiveEncapsulationFibreInvariantExact.agda
   DASHI/Crypto/PublicSecretFactorisationAttackExact.agda
   DASHI/Crypto/MLKEMSecurityDependencyGraphExact.agda
   DASHI/Arithmetic/PrimeSupportTransportTaxiMoonshineExact.agda
@@ -62,6 +63,7 @@ grep -q 'CandidateKeyTest' DASHI/Crypto/KEMStateContractExact.agda
 grep -q 'KeyConfirmationContract' DASHI/Crypto/KEMStateContractExact.agda
 grep -q 'trueSecretPassesResidualTest' DASHI/Crypto/MLWEKeyStateResidualExact.agda
 grep -q 'UniqueResidualIdentification' DASHI/Crypto/MLWEKeyStateResidualExact.agda
+grep -q 'samePublicKeySameHonestTranscript' DASHI/Crypto/PassiveEncapsulationFibreInvariantExact.agda
 grep -q 'fullInversionImpliesSecretRecovery' DASHI/Crypto/PublicSecretFactorisationAttackExact.agda
 grep -q 'exactRecoveryLeaksEveryPredicate' DASHI/Crypto/PublicSecretFactorisationAttackExact.agda
 grep -q 'factorisationImpliesExactRecovery' DASHI/Crypto/PublicSecretFactorisationAttackExact.agda
