@@ -54,6 +54,7 @@ grep -q 'ModelRelativeReopening' DASHI/Crypto/ReopeningArchitectureExact.agda
 grep -q 'toyPublicCollision' DASHI/Crypto/MLKEMNoisyReopeningExact.agda
 grep -q '10.6028/NIST.FIPS.203' DASHI/Crypto/MLKEMNoisyReopeningExact.agda
 grep -q 'taxiEarns196883' DASHI/Arithmetic/PrimeSupportTransportTaxiMoonshineExact.agda
+grep -q 'allThreeLaneSourcesEarnTargetSupport' DASHI/Arithmetic/PrimeSupportTransportTaxiMoonshineExact.agda
 grep -q 'chooseTwelveThreeIs220' DASHI/Arithmetic/PrimeSupportTransportTaxiMoonshineExact.agda
 grep -q 'arithmeticLandingDoesNotConstructMoonshine' DASHI/Arithmetic/PrimeSupportTransportTaxiMoonshineExact.agda
 
