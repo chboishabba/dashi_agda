@@ -1,5 +1,18 @@
 module DASHI.Core.DynamicalQuotientSafety where
 
+------------------------------------------------------------------------
+-- REFERENCE / MOTIVATION
+--
+-- Patrick Cousot and Radhia Cousot,
+-- "Abstract interpretation: a unified lattice model for static analysis of
+-- programs by construction or approximation of fixpoints", POPL 1977,
+-- pp. 238-252. DOI: 10.1145/512950.512973.
+--
+-- The reference motivates abstraction/concrete-semantics separation.  The
+-- consumer-relative trace-congruence theorem below is the DASHI construction;
+-- the citation is not used as proof authority for this exact formulation.
+------------------------------------------------------------------------
+
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List)
 open import Data.Empty using (⊥)
@@ -9,10 +22,6 @@ import DASHI.Core.AdmissibleReachability as Reachability
 
 ------------------------------------------------------------------------
 -- Dynamic quotient safety.
---
--- A consumer projection is safe for a transition language precisely when
--- projected equality is a congruence for every same-action admissible trace.
--- This is stronger than merely answering one present-time query correctly.
 ------------------------------------------------------------------------
 
 record DynamicConsumerSafety
@@ -33,10 +42,6 @@ open DynamicConsumerSafety public
 
 ------------------------------------------------------------------------
 -- Terminalisation defect.
---
--- The consumer currently identifies two fine states, but the same admissible
--- continuation makes their consumer-visible futures differ.  Therefore the
--- forgotten distinction remained causally relevant to that consumer.
 ------------------------------------------------------------------------
 
 record TerminalisationDefect
@@ -72,8 +77,7 @@ terminalisationDefectContradictsSafety safety defect =
       (rightExecution defect))
 
 ------------------------------------------------------------------------
--- Safety is explicitly consumer-relative: another projection may need to
--- retain more provenance even on the same fine carrier and action system.
+-- Safety is explicitly consumer-relative.
 ------------------------------------------------------------------------
 
 record ConsumerRelativeSafetyBoundary : Set₁ where
