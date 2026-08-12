@@ -5,8 +5,8 @@ module DASHI.Physics.YangMills.BalabanCMP109FederbushFrechetReopeningExact where
 --
 -- Paul Federbush,
 -- "A Phase Cell Approach to Yang-Mills Theory. IV. The Choice of Variables",
--- Communications in Mathematical Physics 87 (1982), 529--545.
--- DOI: 10.1007/BF01208273.
+-- Communications in Mathematical Physics 114 (1988), 317--343.
+-- DOI: 10.1007/BF01225039.
 --
 -- Tadeusz Bałaban,
 -- "Averaging Operations for Lattice Gauge Theories",
