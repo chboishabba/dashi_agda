@@ -7,42 +7,46 @@ import DASHI.Core.TypedDependencyCore as Dependency
 ------------------------------------------------------------------------
 -- Canonical structural support / realisation edge.
 --
--- The evidence payload states why one representation structurally supports
--- another.  The edge carries provenance/scope through DependencyWitness and
--- grants no identity authority.
+-- Support evidence is endpoint-dependent: an exact seam proof may mention both
+-- source and target.  Therefore the core reuses the existing dependent
+-- `Relation : Source -> Target -> Set` shape directly rather than flattening
+-- evidence into an unindexed payload.
 ------------------------------------------------------------------------
 
-record StructuralSupportRelation
-    {Source Target Evidence : Set}
-    (source : Source)
-    (target : Target) : Set where
-  constructor structuralSupportRelation
-  field
-    supportEvidence : Evidence
-
-open StructuralSupportRelation public
-
 StructuralSupportEdge :
-  (Source Target Evidence : Set) → Set
-StructuralSupportEdge Source Target Evidence =
-  Dependency.DependencyWitness
-    (StructuralSupportRelation
-      {Source = Source}
-      {Target = Target}
-      {Evidence = Evidence})
+  ∀ {Source Target : Set} →
+  (Relation : Source → Target → Set) → Set
+StructuralSupportEdge Relation = Dependency.DependencyWitness Relation
 
-structuralSupportEdge :
-  ∀ {Source Target Evidence} →
+structuralSupportEdgeAt :
+  ∀ {Source Target}
+    {Relation : Source → Target → Set} →
+  Dependency.DependencyLayer →
+  Dependency.DependencyNecessity →
   (source : Source) →
   (target : Target) →
-  Evidence → String → String →
-  StructuralSupportEdge Source Target Evidence
-structuralSupportEdge source target evidence provenance scope =
+  Relation source target →
+  String → String →
+  StructuralSupportEdge Relation
+structuralSupportEdgeAt layer necessity source target evidence provenance scope =
   Dependency.dependencyWitness
     source
     target
-    (structuralSupportRelation evidence)
-    Dependency.structuralLayer
-    Dependency.requiredDependency
+    evidence
+    layer
+    necessity
     provenance
     scope
+
+structuralSupportEdge :
+  ∀ {Source Target}
+    {Relation : Source → Target → Set} →
+  (source : Source) →
+  (target : Target) →
+  Relation source target →
+  String → String →
+  StructuralSupportEdge Relation
+structuralSupportEdge =
+  structuralSupportEdgeAt
+    Dependency.structuralLayer
+    Dependency.requiredDependency
