@@ -1,6 +1,8 @@
 module DASHI.Governance.CorrectiveReachabilityEquivariance where
 
 open import Data.Empty using (⊥)
+import DASHI.Core.AdmissibleReachability as Reach
+import DASHI.Core.TypedDependencyCore as Dependency
 import DASHI.Governance.AsymmetricReflectionPropositionLocality as Reflection
 
 ------------------------------------------------------------------------
@@ -48,11 +50,6 @@ record RoleEquivariantCorrectiveAccess
 
 open RoleEquivariantCorrectiveAccess public
 
-------------------------------------------------------------------------
--- Constructive asymmetry witness: a corresponding correction is reachable for
--- the outside actor while the matched inside route is blocked.
-------------------------------------------------------------------------
-
 record AsymmetricCorrectiveAccessWitness
     {C : Reflection.CorrectiveReachabilitySystem}
     (L : PairedCorrectiveLanguage C) : Set₁ where
@@ -74,6 +71,52 @@ roleEquivarianceRefutesCorrectiveAsymmetry :
   AsymmetricCorrectiveAccessWitness L →
   ⊥
 roleEquivarianceRefutesCorrectiveAsymmetry equivariance witness =
+  insideBlocked witness
+    (outsideToInside equivariance (outsidePath witness))
+
+------------------------------------------------------------------------
+-- Canonical proof-bearing reachability instance.
+--
+-- DASHI.Core.AdmissibleReachability owns reflexive/transitive reachability over
+-- TypedDependencyCore.  The governance theorem below therefore compares real
+-- admissible state-transition paths rather than introducing another closure.
+------------------------------------------------------------------------
+
+record CanonicalCorrectivePair : Set₁ where
+  field
+    State : Set
+    Action : Set
+    system : Dependency.DependentActionSystem State Action
+    insideSuppressed insideLive : State
+    outsideSuppressed outsideLive : State
+
+open CanonicalCorrectivePair public
+
+record CanonicalRoleEquivariantCorrectiveAccess
+    (P : CanonicalCorrectivePair) : Set₁ where
+  field
+    outsideToInside :
+      Reach.Reachable (system P) (outsideSuppressed P) (outsideLive P) →
+      Reach.Reachable (system P) (insideSuppressed P) (insideLive P)
+
+open CanonicalRoleEquivariantCorrectiveAccess public
+
+record CanonicalAsymmetricCorrectiveAccess
+    (P : CanonicalCorrectivePair) : Set₁ where
+  field
+    outsidePath :
+      Reach.Reachable (system P) (outsideSuppressed P) (outsideLive P)
+    insideBlocked :
+      Reach.Reachable (system P) (insideSuppressed P) (insideLive P) → ⊥
+
+open CanonicalAsymmetricCorrectiveAccess public
+
+canonicalRoleEquivarianceRefutesAsymmetry :
+  ∀ {P} →
+  CanonicalRoleEquivariantCorrectiveAccess P →
+  CanonicalAsymmetricCorrectiveAccess P →
+  ⊥
+canonicalRoleEquivarianceRefutesAsymmetry equivariance witness =
   insideBlocked witness
     (outsideToInside equivariance (outsidePath witness))
 
