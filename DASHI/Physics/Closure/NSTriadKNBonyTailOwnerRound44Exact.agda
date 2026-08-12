@@ -67,9 +67,12 @@ otherThreeNonnegative :
   ∀ {environment}
     (input : PhysicalTailCriticalOwnerInput environment) →
   0ℚ ≤
-    Bony.lowHigh b + Bony.highLow b + Bony.comparable b
-  where
-  b = Critical.budget (Lower.closureData (lowerInput input))
+    Bony.lowHigh
+      (Critical.budget (Lower.closureData (lowerInput input)))
+    + Bony.highLow
+      (Critical.budget (Lower.closureData (lowerInput input)))
+    + Bony.comparable
+      (Critical.budget (Lower.closureData (lowerInput input)))
 otherThreeNonnegative input =
   L2.addNonnegative
     (L2.addNonnegative
@@ -80,9 +83,10 @@ otherThreeNonnegative input =
 highHighToLowBelowTotal :
   ∀ {environment}
     (input : PhysicalTailCriticalOwnerInput environment) →
-  Bony.highHighToLow b ≤ Bony.totalInteraction b
-  where
-  b = Critical.budget (Lower.closureData (lowerInput input))
+  Bony.highHighToLow
+      (Critical.budget (Lower.closureData (lowerInput input)))
+  ≤ Bony.totalInteraction
+      (Critical.budget (Lower.closureData (lowerInput input)))
 highHighToLowBelowTotal input =
   let
     b = Critical.budget (Lower.closureData (lowerInput input))
@@ -111,7 +115,7 @@ physicalTailBelowGlobalDissipationAtOneSixtyFourth :
     (input : PhysicalTailCriticalOwnerInput environment) →
   physicalTailProduction input
   ≤ Critical.oneSixtyFourth * Owner.dissipation environment
-physicalTailBelowGlobalDissipationAtOneSixtyFourth input =
+physicalTailBelowGlobalDissipationAtOneSixtyFourth {environment} input =
   let
     lower = lowerInput input
     hhBound = Lower.classBelowGlobalDissipationAtOneSixtyFourth
@@ -122,7 +126,7 @@ physicalTailBelowGlobalDissipationAtOneSixtyFourth input =
   subst
     (λ production →
       production
-      ≤ Critical.oneSixtyFourth * Owner.dissipation _)
+      ≤ Critical.oneSixtyFourth * Owner.dissipation environment)
     (highHighToLowIsPhysicalTail input)
     hhBound
 
