@@ -45,6 +45,8 @@ module DASHI.Physics.YangMills.BalabanCMP109FederbushFrechetReopeningExact where
 open import Agda.Builtin.List using (List)
 open import Data.Rational.Base as ℚ using (ℚ; _*_; _≤_)
 import Data.Rational.Properties as ℚP
+import Data.Rational.Tactic.RingSolver as ℚRing
+open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanFiniteMatrixL1ContractionExact as L1
@@ -95,8 +97,15 @@ federbushFrechetLittleOTransfer equation epsilon inputMagnitude sourceUpper =
     reopeningUpper = federbushFrechetErrorFourThirdsBound equation
     scaled = Norm.scaleNonnegative Quarter.fourThirds
       (ℚP.nonNegative⁻¹ Quarter.fourThirds) sourceUpper
+    normalized = subst
+      (λ upper →
+        Quarter.fourThirds
+          * L1.vectorL1 (coordinates equation) (sourceRemainder equation)
+        ≤ upper)
+      (ℚRing.solve-∀ Quarter.fourThirds epsilon inputMagnitude)
+      scaled
   in
-  ℚP.≤-trans reopeningUpper scaled
+  ℚP.≤-trans reopeningUpper normalized
 
 cmp109FederbushFrechetSameReopeningLevel : ProofLevel
 cmp109FederbushFrechetSameReopeningLevel = machineChecked
