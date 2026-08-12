@@ -20,7 +20,7 @@ module DASHI.Physics.YangMills.BalabanCMP109ConstraintKernelLineFrechetExact whe
 --
 --   C(A+v) = C(A) + DC(A)[v] + r_A(v),
 --
--- C(A)=0, and h is in ker DC(A), then linearity on the scalar line gives
+-- C(A)=0, and h is in ker DC(A), then scalar-line linearity gives
 --
 --   C(A+t h) = r_A(t h).
 --
@@ -29,106 +29,97 @@ module DASHI.Physics.YangMills.BalabanCMP109ConstraintKernelLineFrechetExact whe
 -- correction argument.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _*_)
-import Data.Rational.Tactic.RingSolver as ℚRing
+open import Agda.Builtin.Equality using (_≡_)
+open import Data.Rational.Base as ℚ using (ℚ)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayGate4FiniteDimensionalFrechetChainProductExact as Frechet
-import DASHI.Physics.YangMills.BalabanFiniteStrictContractionReopeningExact as Reopen
-
-vectorAdd : ∀ {Index : Set} → Reopen.Vector Index → Reopen.Vector Index → Reopen.Vector Index
-vectorAdd left right index = left index + right index
-
-vectorScale : ∀ {Index : Set} → ℚ → Reopen.Vector Index → Reopen.Vector Index
-vectorScale scalar vector index = scalar * vector index
-
-vectorAddAssociative :
-  ∀ {Index : Set} (left middle right : Reopen.Vector Index) →
-  vectorAdd (vectorAdd left middle) right ≡ vectorAdd left (vectorAdd middle right)
-vectorAddAssociative left middle right =
-  refl
-
-vectorAdditiveCarrier : ∀ {Index : Set} → Frechet.AdditiveCarrier (Reopen.Vector Index)
-vectorAdditiveCarrier = record
-  { Frechet.AdditiveCarrier.zero = Reopen.zeroVector
-  ; Frechet.AdditiveCarrier.add = vectorAdd
-  ; Frechet.AdditiveCarrier.addAssociative = vectorAddAssociative
-  }
 
 record ConstraintFrechetKernelLine
-    (StateIndex ConstraintIndex : Set) : Set₁ where
+    (State Constraint : Set)
+    (state : Frechet.AdditiveCarrier State)
+    (constraint : Frechet.AdditiveCarrier Constraint) : Set₁ where
   field
-    expansion : Frechet.ExactFirstOrderExpansion
-      (vectorAdditiveCarrier {StateIndex})
-      (vectorAdditiveCarrier {ConstraintIndex})
+    expansion : Frechet.ExactFirstOrderExpansion state constraint
 
-    base : Reopen.Vector StateIndex
-    direction : Reopen.Vector StateIndex
+    base direction : State
+    scalarAction : ℚ → State → State
 
-    constraintAtBaseZero : ∀ row →
-      Frechet.function expansion base row ≡ 0ℚ
+    constraintAtBaseZero :
+      Frechet.function expansion base ≡ Frechet.zero constraint
 
-    kernelDirection : ∀ row →
-      Frechet.derivative expansion base direction row ≡ 0ℚ
+    kernelDirection :
+      Frechet.derivative expansion base direction ≡ Frechet.zero constraint
 
-    derivativeScalesOnKernelLine : ∀ scalar row →
-      Frechet.derivative expansion base (vectorScale scalar direction) row
-      ≡ scalar * Frechet.derivative expansion base direction row
+    derivativeScalesOnKernelLine : ∀ scalar →
+      Frechet.derivative expansion base (scalarAction scalar direction)
+      ≡ scalarActionOnConstraint scalar
+          (Frechet.derivative expansion base direction)
+
+    scalarActionOnConstraint : ℚ → Constraint → Constraint
+
+    scalarZeroConstraint : ∀ scalar →
+      scalarActionOnConstraint scalar (Frechet.zero constraint)
+      ≡ Frechet.zero constraint
+
+    addZeroCollapse : ∀ value →
+      Frechet.add constraint (Frechet.zero constraint)
+        (Frechet.add constraint (Frechet.zero constraint) value)
+      ≡ value
 
 open ConstraintFrechetKernelLine public
 
 kernelLineDerivativeZero :
-  ∀ {StateIndex ConstraintIndex}
-    (line : ConstraintFrechetKernelLine StateIndex ConstraintIndex)
-    scalar row →
+  ∀ {State Constraint state constraint}
+    (line : ConstraintFrechetKernelLine State Constraint state constraint)
+    scalar →
   Frechet.derivative (expansion line) (base line)
-    (vectorScale scalar (direction line)) row
-  ≡ 0ℚ
-kernelLineDerivativeZero line scalar row =
+    (scalarAction line scalar (direction line))
+  ≡ Frechet.zero constraint
+kernelLineDerivativeZero line scalar =
   trans
-    (derivativeScalesOnKernelLine line scalar row)
+    (derivativeScalesOnKernelLine line scalar)
     (trans
-      (cong (scalar *_) (kernelDirection line row))
-      (ℚRing.solve []))
+      (cong (scalarActionOnConstraint line scalar)
+        (kernelDirection line))
+      (scalarZeroConstraint line scalar))
 
 selectedConstraintKernelLineResidualIsFrechetRemainder :
-  ∀ {StateIndex ConstraintIndex}
-    (line : ConstraintFrechetKernelLine StateIndex ConstraintIndex)
-    scalar row →
+  ∀ {State Constraint state constraint}
+    (line : ConstraintFrechetKernelLine State Constraint state constraint)
+    scalar →
   Frechet.function (expansion line)
-    (vectorAdd (base line) (vectorScale scalar (direction line))) row
+    (Frechet.add state (base line)
+      (scalarAction line scalar (direction line)))
   ≡ Frechet.remainder (expansion line) (base line)
-      (vectorScale scalar (direction line)) row
-selectedConstraintKernelLineResidualIsFrechetRemainder line scalar row =
+      (scalarAction line scalar (direction line))
+selectedConstraintKernelLineResidualIsFrechetRemainder
+    {constraint = constraint} line scalar =
   let
-    increment = vectorScale scalar (direction line)
+    increment = scalarAction line scalar (direction line)
+    selectedRemainder = Frechet.remainder (expansion line) (base line) increment
     expanded = Frechet.incrementExpansion (expansion line) (base line) increment
   in
-  trans
-    (cong (λ vector → vector row) expanded)
+  trans expanded
     (trans
       (cong
         (λ baseValue →
-          vectorAdd baseValue
-            (vectorAdd
+          Frechet.add constraint baseValue
+            (Frechet.add constraint
               (Frechet.derivative (expansion line) (base line) increment)
-              (Frechet.remainder (expansion line) (base line) increment)) row)
-        (constraintAtBaseZero line row))
+              selectedRemainder))
+        (constraintAtBaseZero line))
       (trans
         (cong
           (λ derivativeValue →
-            0ℚ + (derivativeValue
-              + Frechet.remainder (expansion line) (base line) increment row))
-          (kernelLineDerivativeZero line scalar row))
-        (ℚRing.solve-∀
-          (Frechet.remainder (expansion line) (base line) increment row))))
+            Frechet.add constraint (Frechet.zero constraint)
+              (Frechet.add constraint derivativeValue selectedRemainder))
+          (kernelLineDerivativeZero line scalar))
+        (addZeroCollapse line selectedRemainder)))
 
 cmp109ConstraintKernelLineFirstOrderCancellationLevel : ProofLevel
 cmp109ConstraintKernelLineFirstOrderCancellationLevel = machineChecked
 
--- The only analytic datum after this theorem is the little-o property of the
--- remainder of the literal constraint expansion at the selected background.
 cmp109ConstraintKernelLineNeedsOnlyFrechetRemainderLevel : ProofLevel
 cmp109ConstraintKernelLineNeedsOnlyFrechetRemainderLevel = machineChecked
