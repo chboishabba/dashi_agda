@@ -18,6 +18,7 @@ module DASHI.Crypto.BlueTeamAdversaryClosureRound16 where
 
 import DASHI.Crypto.BlueTeamAdversaryObservationExact
 import DASHI.Crypto.BlueTeamThreatModelExact
+import DASHI.Crypto.ComputationalCandidateFibreExact
 import DASHI.Crypto.FiniteCandidateFibreCardinalityExact
 import DASHI.Crypto.TranscriptProtectedLabelExact
 import DASHI.Crypto.IndexedSearchCostExact
@@ -60,9 +61,12 @@ record Round16ClaimBoundary : Set where
     protectedLabelRecoveryIsSufficientBreakWitness : Bool
     protectedLabelRecoveryIsSufficientBreakWitnessIsTrue :
       protectedLabelRecoveryIsSufficientBreakWitness ≡ true
+    exactPublicFibreMustBeBroadForComputationalHardness : Bool
+    exactPublicFibreMustBeBroadForComputationalHardnessIsFalse :
+      exactPublicFibreMustBeBroadForComputationalHardness ≡ false
 
 open Round16ClaimBoundary public
 
 canonicalRound16ClaimBoundary : Round16ClaimBoundary
 canonicalRound16ClaimBoundary =
-  round16ClaimBoundary false refl false refl false refl true refl true refl
+  round16ClaimBoundary false refl false refl false refl true refl true refl false refl
