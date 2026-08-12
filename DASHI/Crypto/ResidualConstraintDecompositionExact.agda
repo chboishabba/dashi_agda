@@ -8,7 +8,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; _+_)
 open import Data.Empty using (⊥)
-open import Data.Product using (_×_; _,_)
+open import Data.Product using (_×_; _,_; proj₁)
 
 record _↔_ (A B : Set) : Set where
   constructor iff
@@ -45,7 +45,7 @@ indexedGlobalImpliesEveryLocal {system} {hidden} global i =
   localProof i
   where
   decomposition = forward (globalPlausibleIffIndexed system hidden) global
-  localProof = Data.Product.proj₁ decomposition
+  localProof = proj₁ decomposition
 
 record TwoLocalResidualSystem : Set₁ where
   constructor twoLocalResidualSystem
