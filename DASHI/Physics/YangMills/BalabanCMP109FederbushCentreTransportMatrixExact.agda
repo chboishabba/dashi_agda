@@ -28,11 +28,12 @@ module DASHI.Physics.YangMills.BalabanCMP109FederbushCentreTransportMatrixExact 
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; 1ℚ; _+_; _*_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_)
 import Data.Rational.Tactic.RingSolver as ℚRing
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionWilsonSecondVariationExact as Q
+import DASHI.Physics.YangMills.BalabanP33QuaternionFourFactorTelescopeExact as Four
 import DASHI.Physics.YangMills.BalabanPhysicalSU2FiniteCoordinatesExact as Physical
 import DASHI.Physics.YangMills.BalabanCMP109FederbushNormalizedJacobianExact as Jacobian
 import DASHI.Physics.YangMills.BalabanCMP109FederbushCentreTransportPhysicalExact as Transport
@@ -103,7 +104,7 @@ centreTransportMatrixDifferenceEntryExact :
   centreTransportMatrix u v row column
     - centreTransportMatrix u' v' row column
   ≡ imaginaryCoordinate row
-      (DASHI.Physics.YangMills.BalabanP33QuaternionFourFactorTelescopeExact._-q_
+      (Four._-q_
         (Transport.centreTransportAction u v (basisQuaternion column))
         (Transport.centreTransportAction u' v' (basisQuaternion column)))
 centreTransportMatrixDifferenceEntryExact
@@ -130,8 +131,6 @@ centreTransportMatrixDifferenceEntryExact
     Physical.coordinateZ column =
   ℚRing.solve-∀
     u0 u1 u2 u3 v0 v1 v2 v3 p0 p1 p2 p3 q0 q1 q2 q3
-  where
-  open import Data.Rational.Base using (_-_)
 
 cmp109FederbushCentreTransportMatrixIdentificationLevel : ProofLevel
 cmp109FederbushCentreTransportMatrixIdentificationLevel = machineChecked
