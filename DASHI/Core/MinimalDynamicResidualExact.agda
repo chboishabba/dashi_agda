@@ -4,17 +4,20 @@ module DASHI.Core.MinimalDynamicResidualExact where
 -- MINIMAL RESIDUAL FOR THE HIDDEN-PHASE COUNTEREXAMPLE
 --
 -- The existing HiddenPhaseDynamicInsufficiencyExact proves that the visible
--- Bool alone is not dynamically sufficient.  Here we show that retaining only
--- the C3 phase is already enough to reopen the complete finite state exactly.
+-- Bool alone is not dynamically sufficient.  Here we prove a stronger static
+-- no-go as well: no reopening function of the visible Bool alone can exactly
+-- reconstruct every fine hidden-phase state.  Retaining only the C3 phase is
+-- sufficient to reopen every state exactly.
 --
--- Hence, in the explicit two-tier family {no residual, phase residual}, the
--- one-cell phase receipt is the minimal sufficient/reopenable choice.
+-- Thus zero residual is impossible for exact reopening in this finite model,
+-- while one three-valued phase coordinate suffices.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Empty using (⊥)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Core.GradedProvenanceDynamicalSystemExact as GP
 import DASHI.Core.HiddenPhaseDynamicInsufficiencyExact as Hidden
@@ -51,6 +54,40 @@ phaseResidualSystem =
     reopenFromVisibleAndPhase
     phaseReceiptReopensExactly
 
+------------------------------------------------------------------------
+-- Zero-residual no-go: one visible Bool cannot exactly reopen both states
+-- that expose false while occupying distinct phases.
+------------------------------------------------------------------------
+
+record VisibleOnlyExactReopening : Set₁ where
+  constructor visibleOnlyExactReopening
+  field
+    reopenVisibleOnly :
+      Bool → GP.PackedState Hidden.hiddenPhaseWheel
+    reopenVisibleOnlyExact :
+      (x : GP.PackedState Hidden.hiddenPhaseWheel) →
+      reopenVisibleOnly (GP.observe Hidden.hiddenPhaseSystem x) ≡ x
+
+open VisibleOnlyExactReopening public
+
+phaseZeroNotPhaseOne : Wheel.phase-0 ≡ Wheel.phase-1 → ⊥
+phaseZeroNotPhaseOne ()
+
+noVisibleOnlyExactReopening : VisibleOnlyExactReopening → ⊥
+noVisibleOnlyExactReopening reopening =
+  phaseZeroNotPhaseOne
+    (cong GP.grade sameFineState)
+  where
+    sameFineState : Hidden.leftState ≡ Hidden.rightState
+    sameFineState =
+      trans
+        (sym (reopenVisibleOnlyExact reopening Hidden.leftState))
+        (reopenVisibleOnlyExact reopening Hidden.rightState)
+
+------------------------------------------------------------------------
+-- Explicit residual-cost tiering.
+------------------------------------------------------------------------
+
 data ResidualTier : Set where
   noResidual : ResidualTier
   phaseResidual : ResidualTier
@@ -59,13 +96,6 @@ tierCost : ResidualTier → Nat
 tierCost noResidual = zero
 tierCost phaseResidual = suc zero
 
-data FutureSufficientTier : ResidualTier → Set where
-  phaseResidualIsSufficient : FutureSufficientTier phaseResidual
-
-noResidualCannotBeCertifiedSufficient :
-  FutureSufficientTier noResidual → ⊥
-noResidualCannotBeCertifiedSufficient ()
-
 phaseResidualCostIsOne : tierCost phaseResidual ≡ 1
 phaseResidualCostIsOne = refl
 
@@ -73,14 +103,20 @@ visibleOnlyHasDynamicDefect :
   GP.DynamicInsufficiencyWitness Hidden.hiddenPhaseSystem
 visibleOnlyHasDynamicDefect = Hidden.hiddenPhaseIsDynamicallyRelevant
 
-record MinimalResidualCertificate : Set where
+record MinimalResidualCertificate : Set₁ where
   constructor minimalResidualCertificate
   field
     selected : ResidualTier
-    selectedIsSufficient : FutureSufficientTier selected
     selectedCost : Nat
     selectedCostExact : selectedCost ≡ tierCost selected
-    zeroTierImpossible : FutureSufficientTier noResidual → ⊥
+    exactReopeningWithSelectedResidual :
+      (x : GP.PackedState Hidden.hiddenPhaseWheel) →
+      reopenFromVisibleAndPhase
+        (GP.observe Hidden.hiddenPhaseSystem x)
+        (GP.grade x)
+      ≡ x
+    zeroResidualExactReopeningImpossible :
+      VisibleOnlyExactReopening → ⊥
 
 open MinimalResidualCertificate public
 
@@ -88,7 +124,7 @@ hiddenPhaseMinimalResidual : MinimalResidualCertificate
 hiddenPhaseMinimalResidual =
   minimalResidualCertificate
     phaseResidual
-    phaseResidualIsSufficient
     1
     refl
-    noResidualCannotBeCertifiedSufficient
+    phaseReceiptReopensExactly
+    noVisibleOnlyExactReopening
