@@ -1,6 +1,7 @@
 module DASHI.Cognition.PNF.EvidenceClassificationEdge where
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Bool using (Bool; true)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
@@ -119,7 +120,9 @@ record ClassificationEdgeBoundary : Set where
       CandidateClassificationIdentityPermission → ⊥
     deductiveIdentityReusesExistingFibreMember : Set
     classificationCarriesExplicitRevision : Set
-    canonicalClassificationCoreReused : Set
+    canonicalClassificationCoreReused : Bool
+    canonicalClassificationCoreReusedIsTrue :
+      canonicalClassificationCoreReused ≡ true
 
 open ClassificationEdgeBoundary public
 
@@ -129,4 +132,4 @@ canonicalClassificationEdgeBoundary =
     candidateClassificationCannotPromoteIdentity
     DeductiveIdentityEdge
     Nat
-    Core.ClassificationEdge
+    true refl
