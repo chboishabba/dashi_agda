@@ -92,6 +92,35 @@ record ClosedAccountingResiduals
 open ClosedAccountingResiduals public
 
 ------------------------------------------------------------------------
+-- World/model coverage is a completely separate application-supplied relation.
+--
+-- In many PNF uses no World carrier is available.  When a caller does have a
+-- meaningful latent/world comparison it must supply the coverage relation and
+-- witness explicitly; normalized model mass cannot manufacture one.
+------------------------------------------------------------------------
+
+record WorldCoverageSystem
+    (Consumer Model World : Set) : Set₁ where
+  constructor worldCoverageSystem
+  field
+    Covers : Consumer → Model → World → Set
+
+open WorldCoverageSystem public
+
+record WorldCoverageWitness
+    {Consumer Model World : Set}
+    (system : WorldCoverageSystem Consumer Model World)
+    (consumer : Consumer)
+    (model : Model)
+    (world : World) : Set₁ where
+  constructor worldCoverageWitness
+  field
+    coverageEvidence : Covers system consumer model world
+    coverageReceipt : String
+
+open WorldCoverageWitness public
+
+------------------------------------------------------------------------
 -- Authority boundaries.
 ------------------------------------------------------------------------
 
@@ -116,6 +145,9 @@ record ConsumerIndexedRelevanceBoundary : Set where
     outsideModelResidualIsRepresentable : Bool
     outsideModelResidualIsRepresentableIsTrue :
       outsideModelResidualIsRepresentable ≡ true
+    worldCoverageRequiresSeparateWitness : Bool
+    worldCoverageRequiresSeparateWitnessIsTrue :
+      worldCoverageRequiresSeparateWitness ≡ true
     normalizedMassIsWorldTruth : Bool
     normalizedMassIsWorldTruthIsFalse : normalizedMassIsWorldTruth ≡ false
     normalizedCandidateCarrierIsKnownComplete : Bool
@@ -131,6 +163,7 @@ open ConsumerIndexedRelevanceBoundary public
 canonicalConsumerIndexedRelevanceBoundary : ConsumerIndexedRelevanceBoundary
 canonicalConsumerIndexedRelevanceBoundary =
   consumerIndexedRelevanceBoundary
+    true refl
     true refl
     true refl
     false refl
