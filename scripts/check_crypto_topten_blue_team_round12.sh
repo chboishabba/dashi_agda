@@ -14,6 +14,7 @@ FILES=(
   DASHI/Crypto/CryptoUsageInvariantExact.agda
   DASHI/Crypto/XorReuseLeakExact.agda
   DASHI/Crypto/TopTenCryptoBlueTeamProfilesExact.agda
+  DASHI/Crypto/TopTenCryptoStateContractMatrixExact.agda
   DASHI/Crypto/TopTenCryptoObservationSurfacesExact.agda
   DASHI/Crypto/TopTenCryptoDependencyGraphExact.agda
   DASHI/Crypto/KEMStateContractExact.agda
@@ -42,6 +43,10 @@ grep -q 'allTenCount' DASHI/Crypto/TopTenCryptoBlueTeamProfilesExact.agda
 grep -q 'allProfilesCount' DASHI/Crypto/TopTenCryptoBlueTeamProfilesExact.agda
 grep -q 'mlKemIsKEMNotDirectEncryption' DASHI/Crypto/TopTenCryptoBlueTeamProfilesExact.agda
 grep -q 'qkdIsDistributionNotDirectEncryption' DASHI/Crypto/TopTenCryptoBlueTeamProfilesExact.agda
+grep -q 'allContractsCount' DASHI/Crypto/TopTenCryptoStateContractMatrixExact.agda
+grep -q 'padUniformSecretAndOneUse' DASHI/Crypto/TopTenCryptoStateContractMatrixExact.agda
+grep -q 'mlKemProtectedLabelNotPubliclyFactored' DASHI/Crypto/TopTenCryptoStateContractMatrixExact.agda
+grep -q 'qkdClassicalChannelAuthenticated' DASHI/Crypto/TopTenCryptoStateContractMatrixExact.agda
 grep -q 'coverageCount' DASHI/Crypto/TopTenCryptoObservationSurfacesExact.agda
 grep -q 'rsaValidityOutcome' DASHI/Crypto/TopTenCryptoObservationSurfacesExact.agda
 grep -q 'mlKemDownstream' DASHI/Crypto/TopTenCryptoObservationSurfacesExact.agda
