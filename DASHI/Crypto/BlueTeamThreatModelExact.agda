@@ -9,10 +9,12 @@ module DASHI.Crypto.BlueTeamThreatModelExact where
 -- their proofs.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Bool using (Bool)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
+open import Data.Nat.Base using (_≤_)
 
 import DASHI.Crypto.BlueTeamAdversaryObservationExact as Observation
 import DASHI.Crypto.TranscriptProtectedLabelExact as Label
@@ -26,9 +28,8 @@ record BlueTeamThreatModel : Set₁ where
     observe : Hidden → Query → ObservationValue
     protected : Hidden → ProtectedLabel
     queryCost : Query → Nat
-    initialCandidateMask : List Agda.Builtin.Bool.Bool
+    initialCandidateMask : List Bool
 
-open import Agda.Builtin.Bool
 open BlueTeamThreatModel public
 
 asObservationSystem : BlueTeamThreatModel → Observation.BlueTeamAdversarySystem
@@ -53,9 +54,9 @@ asPublicLabelSystem model =
 record PublicProtectedLabelSplit (model : BlueTeamThreatModel) : Set where
   constructor publicProtectedLabelSplit
   field
-    left right : Hidden model
-    samePublic : project model left ≡ project model right
-    labelsDiffer : protected model left ≡ protected model right → ⊥
+    labelLeft labelRight : Hidden model
+    labelSamePublic : project model labelLeft ≡ project model labelRight
+    labelsDiffer : protected model labelLeft ≡ protected model labelRight → ⊥
 
 open PublicProtectedLabelSplit public
 
@@ -65,7 +66,10 @@ asTranscriptLabelSplit :
   Label.TranscriptLabelFibreSplit (asPublicLabelSystem model)
 asTranscriptLabelSplit split =
   Label.transcriptLabelFibreSplit
-    (left split) (right split) (samePublic split) (labelsDiffer split)
+    (labelLeft split)
+    (labelRight split)
+    (labelSamePublic split)
+    (labelsDiffer split)
 
 publicProtectedLabelSplitRefutesExactRecovery :
   ∀ {model : BlueTeamThreatModel} →
@@ -93,10 +97,10 @@ asPublicFactored factored =
 record ThreatObservationSplit (model : BlueTeamThreatModel) : Set where
   constructor threatObservationSplit
   field
-    left right : Hidden model
-    samePublic : project model left ≡ project model right
-    query : Query model
-    differs : observe model left query ≡ observe model right query → ⊥
+    obsLeft obsRight : Hidden model
+    obsSamePublic : project model obsLeft ≡ project model obsRight
+    obsQuery : Query model
+    obsDiffers : observe model obsLeft obsQuery ≡ observe model obsRight obsQuery → ⊥
 
 open ThreatObservationSplit public
 
@@ -106,7 +110,11 @@ asHiddenDependentSplit :
   Observation.HiddenDependentSplit (asObservationSystem model)
 asHiddenDependentSplit split =
   Observation.hiddenDependentSplit
-    (left split) (right split) (samePublic split) (query split) (differs split)
+    (obsLeft split)
+    (obsRight split)
+    (obsSamePublic split)
+    (obsQuery split)
+    (obsDiffers split)
 
 publicFactoredThreatObservationCannotSplit :
   ∀ {model : BlueTeamThreatModel} →
@@ -128,10 +136,7 @@ open CandidateRefinement public
 candidateRefinementCannotIncrease :
   ∀ {model : BlueTeamThreatModel}
     (refinement : CandidateRefinement model) →
-  Fibre.liveCount (afterMask refinement)
-  Data.Nat.Base.≤
+  Fibre.liveCount (afterMask refinement) ≤
   Fibre.liveCount (initialCandidateMask model)
 candidateRefinementCannotIncrease refinement =
   Fibre.refinementCannotIncreaseCardinality (refines refinement)
-  where
-  import Data.Nat.Base
