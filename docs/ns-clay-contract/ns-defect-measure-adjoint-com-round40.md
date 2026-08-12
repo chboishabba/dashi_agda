@@ -1,121 +1,126 @@
-# NS Round 40 — unified HH defect measure, shell-localized PV, and one-channel Com
+# NS Round 40 — unified HH defect measure, annular PV localization, and one-channel Com
 
-Round 40 tests the strongest concrete post-Round-39 hypotheses before attempting more downstream continuation packaging. The tranche deliberately reuses mature repository mathematics where it already exists: the weighted Markov bad-set estimate, exact directional-defect Gram identity, official hard-projector self-adjointness, the finite weighted Cauchy theorem, and the standard periodized dyadic-kernel L1 authority. The new work is the same-object bridge into the physical Navier--Stokes carriers and the resulting sharper owner geometry.
+Round 40 implements the strongest concrete post-Round-39 hypotheses before any further continuation packaging. It reuses mature repository mathematics where it actually matches the physical object, and rejects attractive same-object identifications when they do not.
 
-No unconditional Navier--Stokes regularity theorem is claimed. The physical shell/time owner rates and the final odd-P/Q-to-Gram realization remain explicit fail-closed seams.
+No unconditional Navier--Stokes regularity theorem is claimed. Physical shell/time owner rates and the final same-object odd-P/Q-to-Gram realization remain explicit fail-closed seams.
 
-## 1. HH-good and HH-bad are complementary strata of one defect
+## 1. One energy-weighted directional defect controls both HH strata
 
-The directional defect is
+For
 
 ```text
 Theta(xi,eta) = 1 - (xi.eta)^2 = |xi cross eta|^2,
-0 <= Theta <= 1.
+0 <= Theta <= 1,
 ```
 
-The repository already had the abstract weighted Markov theorem
-
-```text
-delta * badWeightMass <= weightedDefectMass.
-```
-
-Round 40 instantiates it on actual physical vorticity pairs and physical energy weights. For bad cells,
+the existing weighted Markov theorem is now instantiated on actual physical vorticity pairs. On bad cells,
 
 ```text
 delta * E_bad <= sum_i E_i Theta_i.
 ```
 
-The same quantity is exactly the weighted squared cross-residual by the physical directional-defect identity. Thus the good set and bad set are now visibly two uses of one measure:
+The same quantity is exactly the energy-weighted squared cross residual. Thus
 
 ```text
-Theta <= delta     -> HH-good stretching depletion,
-Theta >= delta     -> bad occupation controlled by E*Theta.
+Theta <= delta  -> HH-good stretching depletion,
+Theta >= delta  -> HH-bad occupation controlled by E*Theta.
 ```
 
 No derivative of the Boolean classifier is introduced.
 
-Round 40 also connects the same defect to the Round-39 same-object bad-gain cells. If the physical gain density satisfies the required local charge estimate, then
+The new physical cells also feed the existing normalized weighted-defect rarity transfer. A physical envelope
+
+```text
+weightedDefectMass_q <= delta_q rarity_q
+```
+
+now directly gives
+
+```text
+badMass_q <= rarity_q,
+rarity_q -> 0  =>  badMass_q -> 0.
+```
+
+There is therefore no new abstract defect-evolution layer to build; the remaining producer is the physical normalized weighted-defect envelope itself.
+
+The same cells connect to Round-39 restricted bad gain. Round 40 proves
 
 ```text
 delta * Gain_bad
   <= density * nu * lambda_q^2 * sum_i E_i Theta_i.
 ```
 
-Since `Theta <= 1`, the exact finite theorem further gives
+Since `Theta <= 1`,
 
 ```text
 sum_i E_i Theta_i <= sum_i E_i,
 ```
 
-and therefore
+and exact inverse-threshold cancellation gives
 
 ```text
-Gain_bad
-  <= delta^{-1} * density * D_bad.
+Gain_bad <= delta^-1 * density * D_bad.
 ```
 
-This proves the inverse-threshold dependence algebraically. The remaining hard HH-bad theorem is the physical shell/time density with the inverse-dyadic gain required by the existing Round-33 obstruction, together with Luo's separate upper critical-dissipation smallness.
+Thus the hard HH-bad work has narrowed to the physical inverse-shell gain-density factor required by the existing Round-33 obstruction, plus Luo's separate upper critical-dissipation smallness.
 
-Sources: Constantin--Fefferman, DOI `10.1512/iumj.1993.42.42034`; Luo, DOI `10.1007/s00021-019-0411-z`.
+Sources: Constantin--Fefferman, DOI `10.1512/iumj.1993.42.42034`; Grujic, DOI `10.1088/0951-7715/26/1/289`; Luo, DOI `10.1007/s00021-019-0411-z`.
 
-## 2. The A sqrt(delta) + B/delta optimizer is exact when the physical scaling has that form
+## 2. Exact threshold optimization, including shell-dependent diagnostics
 
-Write the positive rational threshold scale as `r` and represent the physical classifier threshold by
+Represent the physical classifier threshold by a positive rational scale `r`:
 
 ```text
 delta = r^2,
-delta^{-1} = r^{-2}.
+delta^-1 = r^-2.
 ```
 
-Then the proposed HH tax becomes
+If the physical HH taxes really take the complementary form
 
 ```text
-f(r) = A r + B r^{-2}.
+f(r) = A r + B r^-2,
 ```
 
-Rather than formalize real differentiation or cube roots merely to optimize this one expression, Round 40 proves an exact rational global-minimum certificate. If
+Round 40 proves a global rational minimum without calculus. Any positive rational `r` satisfying
 
 ```text
-A r^3 = 2 B,
+A r^3 = 2 B
 ```
 
-then for every positive rational `x`,
+obeys, for every positive rational `x`,
 
 ```text
-f(r) <= f(x).
+f(r) <= f(x),
 ```
 
-The proof uses the exact factorization
+using
 
 ```text
-2 x^2 (f(x)-f(r))
-  = A (x-r)^2 (2x+r) >= 0.
+2 x^2 (f(x)-f(r)) = A (x-r)^2 (2x+r) >= 0.
 ```
 
 At the balanced point,
 
 ```text
-B r^{-2} = (1/2) A r,
+B r^-2 = (1/2) A r,
 f(r) = (3/2) A r.
 ```
 
-If the physical constants do not admit an exact rational balanced scale, the more general Round-39 certified threshold optimizer remains the fallback.
+If exact rational balance is unavailable, Round 39's generic certified optimizer remains the correct fallback.
 
-## 3. Scale-dependent thresholds are a diagnostic, not an assumption
+The same theorem is lifted shellwise to `A_q,B_q,r_q`. A scale-independent threshold is recovered only if the physical certificates prove all selected `r_q` coincide.
 
-Round 40 also allows shellwise physical constants `A_q`, `B_q` and shellwise positive scales `r_q`. If
+## 3. HH-good enforces PV cancellation before scalarization
+
+A fixed angle threshold does not regularize the unsmoothed `|x-y|^-3` strain kernel. Round 40 therefore makes the proof order exact:
 
 ```text
-A_q r_q^3 = 2 B_q,
+PV cancellation
+ -> preserve w cross v residual
+ -> shell localization
+ -> directional threshold
+ -> weighted Cauchy / viscous absorption.
 ```
-
-then each `r_q` is a global minimizer for its shell. The pointwise theorem is lifted to arbitrary finite shell lists.
-
-If the physical certificates later prove all selected `r_q` are equal, the common global threshold minimizes the whole finite HH tax. Thus scale independence can be recovered as a theorem rather than imposed before the scale laws are known.
-
-## 4. HH-good now has the correct PV -> residual -> shell -> threshold order
-
-A fixed coherence threshold by itself does not regularize the unsmoothed `|x-y|^-3` strain kernel. Round 40 therefore formalizes the order in which the existing cancellations must be consumed.
 
 For zero-mass finite kernel weights,
 
@@ -123,74 +128,60 @@ For zero-mass finite kernel weights,
 sum_i w_i = 0
 ```
 
-implies an arbitrary constant source is killed before residual scalarization:
+kills an arbitrary constant source before taking the line residual, and then
 
 ```text
-sum_i w_i (s_i+c) = sum_i w_i s_i.
-```
-
-The vorticity-line residual then commutes with the already-cancelled weighted sum:
-
-```text
-delta_v(sum_i w_i (s_i+c))
+delta_v(sum_i w_i(s_i+c))
   = sum_i w_i delta_v(s_i).
 ```
 
-Hence the cross-product residual is preserved through PV cancellation instead of being replaced prematurely by `|w||v|`.
-
-The next finite step is also closed. For nonnegative shell-localized kernel magnitudes `k_i` and good stretching scalars satisfying
+For nonnegative shell-localized kernel magnitudes `k_i` and good stretching scalars satisfying
 
 ```text
 s_i^2 <= delta W_i,
 ```
 
-weighted Cauchy gives
+exact weighted Cauchy gives
 
 ```text
 (sum_i k_i s_i)^2
-  <= (sum_i k_i)(sum_i k_i s_i^2)
   <= delta (sum_i k_i)(sum_i k_i W_i).
 ```
 
-The repository already contains the standard periodized dyadic-kernel theorem
+## 4. The Fourier strain multiplier is now proved order zero
+
+Round 38 had
 
 ```text
-||K_q^T||_L1 <= ||check chi||_L1 = C_chi
+S_k = |k|^-2 S_ang(k).
 ```
 
-uniformly in `q`. Once the actual strain-shell sample mass is identified with that literal periodized-kernel L1 norm, Round 40 therefore gives
+Round 40 proves directly on the rational projection-mode carrier that for every positive rational scale `r`,
+
+```text
+S_ang(r k) = r^2 S_ang(k),
+|r k|^-2 = r^-2 |k|^-2,
+S_{r k}(omega) = S_k(omega).
+```
+
+The scaled projection mode is proved to satisfy the exact inverse-norm law. Thus degree-zero homogeneity is no longer an imported analytic assumption.
+
+This audit also caught an important false shortcut. The repository's existing `PeriodizedDyadicKernelL1Theorem` describes Luo's **scalar radial low-pass kernel**. It is not literally the matrix-valued shell-localized strain kernel. Round 40 therefore does **not** identify them.
+
+The remaining standard analytic theorem is stated honestly as an annular strain-kernel authority: smooth compact support away from zero, L1 integrability of the fixed Euclidean master kernel, and shell-uniform torus periodization. Once the literal strain-shell sample mass is identified with that kernel L1 norm,
 
 ```text
 |good shell stretching|^2
-  <= C_chi * delta * weightedLocalMass.
+  <= C_strain * delta * weightedLocalMass
 ```
 
-This is a sharper A3/A4 frontier than absolute integration of the full singular kernel. The remaining same-object/PDE seams are:
+follows from the already-proved finite Cauchy theorem.
 
-```text
-physicalShellLocalizedStrainKernelSamples
-physicalStrainShellKernelMassIdentification
-physicalHHGoodTimeDissipationAbsorption
-physicalHHGoodSmoothPeriodicCorrectionBound
-```
+Sources: Beale--Kato--Majda, DOI `10.1007/BF01240221`; Constantin--Fefferman, DOI `10.1512/iumj.1993.42.42034`; Bahouri--Chemin--Danchin, DOI `10.1007/978-3-642-16830-7`.
 
-followed by the already-built Round-39 near/smooth HH-good owner reducer.
+## 5. Physical incompressible transport is skew-adjoint entry by entry
 
-Sources: Constantin--Fefferman, DOI `10.1512/iumj.1993.42.42034`; Constantin--E--Titi, DOI `10.1007/BF02099744`; Bahouri--Chemin--Danchin, DOI `10.1007/978-3-642-16830-7`; Luo, DOI `10.1007/s00021-019-0411-z`.
-
-## 5. Com collapses to one cross channel under physical skew adjunction
-
-Round 39 proved
-
-```text
-U = PTQ,
-V = QTP,
-U^2 = V^2 = 0.
-```
-
-The official finite hard projector is already self-adjoint in the repository's Hermitian/Parseval development. Round 40 tests the stronger structural property of the actual incompressible transport rather than the optional `J` symmetry.
-
-For a physical Fourier transport matrix entry with
+For an actual physical Fourier transport entry with
 
 ```text
 m + q = k,
@@ -202,74 +193,85 @@ reality and divergence freedom give
 ```text
 u_-m = conjugate(u_m),
 m.u_m = 0,
-k.u_m = q.u_m,
+k.u_m = q.u_m.
 ```
 
-and Round 40 proves the literal coefficient identity
+Round 40 proves
 
 ```text
-conjugate(c(q,k)) = - c(k,q).
+conjugate(c(q,k)) = -c(k,q).
 ```
 
-The reverse resonance `-m+k=q` is also proved on the exact integer lattice, and the result is promoted to the actual matrix-entry statement
+The reverse resonance `-m+k=q` is proved on the exact integer lattice, and the theorem is promoted to the physical matrix-entry statement
 
 ```text
-conjugate T(q,k) = - T(k,q).
+conjugate T(q,k) = -T(k,q).
 ```
 
-Thus the physical low transport is pointwise skew-adjoint on the finite Fourier carrier. On the exact P/Q two-channel algebra this implies
+The official hard projector is already self-adjoint. Therefore on the exact P/Q carrier,
 
 ```text
-V = - U*,
+U = PTQ,
+V = QTP = -U*,
 [P,T] = U + U*,
 [P,T]^* = [P,T],
-[P,T]^2 = diag(UU*, U*U).
+[P,T]^2 = diag(UU*,U*U).
 ```
 
-The two Gram faces are therefore the two sides of one cross-channel operator, not independent physical estimates. Round 40 also proves the audit invariant
+Round 40 also proves the grading audit invariant
 
 ```text
-Gamma T_odd = - T_odd Gamma,
+Gamma T_odd = -T_odd Gamma.
 ```
 
-so any diagonal `P->P` or `Q->Q` contribution attributed to `Com` before a later identification is an algebraic red flag.
+## 6. The Round-35 two-face Cotlar input reduces to one physical Gram cell
 
-The remaining A1/A2 seam is now narrowly:
+Round 35 asks for two physical pair-product Gram cells. Round 40 adds
 
 ```text
-physicalOddPQBlockToRound35Gram
+PhysicalComSingleChannelGramRealization
 ```
 
-or equivalently the single-channel `physicalOddTransportSingleGramRealization`; after that the existing half-dyadic Cotlar estimate should be consumed rather than reproved.
+with one Gram cell, one exact product identification, one half-dyadic overlap estimate, and the adjoint-face equality. It constructs the existing mature
 
-Sources: Kato--Ponce, DOI `10.1002/cpa.3160410704`; Temam, DOI `10.1090/chel/343`; Bahouri--Chemin--Danchin, DOI `10.1007/978-3-642-16830-7`.
+```text
+PhysicalComPairProductGramRealization
+```
 
-## 6. The dual reserve certificate is now also a sensitivity diagnostic
+via
 
-Round 39 proved the exact Farkas no-go theorem. Round 40 decomposes its lower obstruction as
+```text
+fullRound35GramRealizationFromSingleChannel
+```
+
+and both Round-35 pair decays follow automatically.
+
+Thus A1/A2 no longer needs two independent analytic estimates. The remaining same-object theorem is the literal odd P/Q physical block = one Round-35 `GramInterferenceCell`, together with the adjoint-face equality supplied by the physical operator semantics.
+
+Sources: Kato--Ponce, DOI `10.1002/cpa.3160410704`; Temam, DOI `10.1090/chel/343`; Cotlar--Stein historical conference source, no DOI assigned.
+
+## 7. Farkas dual pressure is an exact sensitivity diagnostic
+
+Round 39's dual no-go certificate satisfies
 
 ```text
 combinedLower = sum_j lambda_j b_j.
 ```
 
-Each exact rational quantity
+Round 40 exposes each exact contribution
 
 ```text
 pressure_j = lambda_j b_j
 ```
 
-therefore records that constraint's current contribution to the dual obstruction. Removing or improving a constraint has an exact corresponding change in the certificate lower bound.
-
-This is not claimed to be a derivative of the optimal value. It is an exact sensitivity diagnostic for the current certificate and can guide proof effort before all nine physical owner constants have landed.
-
-Source: Gyula Farkas, *Theorie der einfachen Ungleichungen* (1902), no DOI assigned to the historical article.
+and proves exact head-removal/improvement laws. This is not claimed to be a derivative of the optimum; it is a rigorous decomposition of the current rational obstruction and can guide proof effort before all nine owner constants land.
 
 ## Revised shortest frontier after Round 40
 
-F4 remains closed. The three decisive physical packages have narrowed again:
+F4 remains closed. The decisive physical packages are now:
 
-1. **HH-good / A3-A4:** identify the actual shell-localized strain kernel with the periodized L1 carrier, prove the time/dissipation bound for the resulting weighted local mass, and bound the smooth periodic correction. PV cancellation and the finite shell Cauchy/depletion step are already exact.
-2. **HH-bad / A6-A8:** prove the physical gain-density inverse-shell factor required by the Round-33 scaling obstruction and Luo's separate upper critical-dissipation smallness. The bad occupation, defect measure, restricted dissipation and exact `delta^{-1}` owner scaling are already connected on the same samples.
-3. **Com / A1-A2:** identify the literal odd P/Q matrix block with the existing Round-35 single Gram channel. Projection self-adjointness and physical transport skew-adjointness no longer need independent assumptions.
+1. **HH-good / A3-A4:** construct the standard smooth-annular periodized strain-kernel L1 theorem on the literal torus carrier; identify the physical shell samples with it; prove the time/dissipation absorption and smooth periodic correction. PV cancellation, residual preservation, order-zero homogeneity, and finite shell Cauchy are already exact.
+2. **HH-bad / A6-A8:** prove the physical inverse-shell gain-density factor and Luo's separate upper critical-dissipation smallness. Bad occupation, weighted-defect rarity transfer, restricted dissipation, and exact `delta^-1` scaling are already same-object.
+3. **Com / A1-A2:** identify the literal odd P/Q block with one Round-35 Gram cell. Physical transport skew-adjointness and the reduction from one Gram cell to the mature two-face Cotlar input are already exact.
 
-Then instantiate the remaining six lower-risk owners and run the joint threshold/primal/dual reserve test. A strict rational primal certificate `sum eta < 1` advances to the existing `CanonicalAnalyticPhysicalLeaves` route; an exact dual certificate forcing `sum eta >= 1` rejects the architecture before downstream continuation work.
+Then instantiate the six lower-risk owners and run the threshold-aware exact primal/dual reserve test. A strict rational primal certificate `sum eta < 1` advances to the existing `CanonicalAnalyticPhysicalLeaves` route; an exact dual certificate forcing `sum eta >= 1` rejects the architecture before downstream continuation work.
