@@ -17,6 +17,14 @@ open import DASHI.Cognition.PNF.NumericAuthority
 -- execution is over numeric ids / finite numeric coordinates.  Human strings
 -- remain boundary material.  Regex is allowed at ingestion/boundary adapters,
 -- but has no semantic-authority constructor.
+--
+-- Algorithmic reference / motivation for finite multi-pattern automata:
+-- Alfred V. Aho and Margaret J. Corasick,
+-- "Efficient string matching: an aid to bibliographic search",
+-- Communications of the ACM 18(6), 333-340 (1975),
+-- DOI 10.1145/360825.360855.
+-- This citation motivates the runtime strategy; it is not proof authority for
+-- any particular implementation or measured complexity receipt below.
 ------------------------------------------------------------------------
 
 data TextBoundaryReason : Set where
