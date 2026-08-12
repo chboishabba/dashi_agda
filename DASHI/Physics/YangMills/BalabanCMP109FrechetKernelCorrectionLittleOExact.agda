@@ -43,11 +43,13 @@ module DASHI.Physics.YangMills.BalabanCMP109FrechetKernelCorrectionLittleOExact 
 -- necessary for tangent=kernel.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; _+_; _*_; _≤_; _/_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
+open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
@@ -82,7 +84,8 @@ frechetResidualToLittleOCorrection
       (ℚP.nonNegative⁻¹ Quarter.fourThirds) residualUpper
   in
   ℚP.≤-trans correctionUpper
-    (ℚP.≤-respʳ-≡
+    (subst
+      (λ upper → Quarter.fourThirds * residual ≤ upper)
       (reopeningPreservesLittleOBudgetExact
         epsilon timeMagnitude directionScale)
       scaled)
