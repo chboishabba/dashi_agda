@@ -23,12 +23,15 @@ module DASHI.Physics.YangMills.BalabanNormalizedFourAxisMartingaleExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational using (ℚ; 0ℚ; _+_; _-_)
+open import Agda.Builtin.List using (List; []; _∷_)
+open import Data.Rational using (ℚ; 0ℚ; _+_; _-_; _*_)
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Relation.Binary.PropositionalEquality using
+  (cong; cong₂; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier
+open import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreCarrier
 open import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact
 import DASHI.Physics.YangMills.BalabanNormalizedAxisAverageExact as Average
 import DASHI.Physics.YangMills.BalabanNormalizedAxisAverageNormContractionExact as Norm
@@ -71,29 +74,26 @@ GlobalMeanZero :
   ∀ {L} → Average.NormalizedAxisAverageData L → SiteField L → Set
 GlobalMeanZero dataSet field = ∀ site → average0123 dataSet field site ≡ 0ℚ
 
+sumZero : ∀ {A : Set} (values : List A) →
+  sumRational values (λ _ → 0ℚ) ≡ 0ℚ
+sumZero [] = refl
+sumZero (value ∷ values) rewrite sumZero values = refl
+
 terminalNormZero :
   ∀ {L} (dataSet : Average.NormalizedAxisAverageData L)
     (field : SiteField L) → GlobalMeanZero dataSet field →
   Norm.globalNormSq (average0123 dataSet field) ≡ 0ℚ
 terminalNormZero {L} dataSet field meanZero =
   trans
-    (DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact.sumRationalCong
-      (DASHI.Physics.YangMills.BalabanPhysicalBlockFibreCarrier.physicalBlockSites L)
+    (sumRationalCong
+      (physicalBlockSites L)
       (λ site → average0123 dataSet field site * average0123 dataSet field site)
       (λ _ → 0ℚ)
       (λ site →
         trans
-          (cong (λ value → value * average0123 dataSet field site)
-            (meanZero site))
-          (cong (0ℚ +_) refl)))
-    (zeroSum (DASHI.Physics.YangMills.BalabanPhysicalBlockFibreCarrier.physicalBlockSites L))
-  where
-  zeroSum : ∀ {A : Set} (values : Agda.Builtin.List.List A) →
-    DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact.sumRational values
-      (λ _ → 0ℚ) ≡ 0ℚ
-  zeroSum Agda.Builtin.List.[] = refl
-  zeroSum (Agda.Builtin.List._∷_ value values)
-    rewrite zeroSum values = refl
+          (cong₂ _*_ (meanZero site) (meanZero site))
+          (ℚRing.solve [])))
+    (sumZero (physicalBlockSites L))
 
 fourAxisVarianceWithTerminal :
   ∀ {L} (dataSet : Average.NormalizedAxisAverageData L)
