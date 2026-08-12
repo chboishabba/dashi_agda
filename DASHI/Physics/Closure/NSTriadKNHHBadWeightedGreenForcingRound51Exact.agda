@@ -41,12 +41,13 @@ module DASHI.Physics.Closure.NSTriadKNHHBadWeightedGreenForcingRound51Exact wher
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using ([]; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Rational.Base using
-  (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; _<_ ; nonNegative)
+  (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; _<_; nonNegative)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 record VariableGreenRecurrence : Set where
   field
@@ -98,14 +99,13 @@ survivalProductAtMostOne input (suc n) =
         (alpha input n)
         (survivalProductAtMostOne input n)
 
-    second : alpha input n * 1ℚ ≤ 1ℚ * 1ℚ
+    second : alpha input n * 1ℚ ≤ 1ℚ
     second =
-      let instance oneNNI = nonNegative ℚP.0≤1
-      in ℚP.*-monoʳ-≤-nonNeg 1ℚ (alphaAtMostOne input n)
-  in
-  ℚP.≤-trans first
-    (ℚP.≤-trans second
-      (subst (1ℚ ≤_) (solve []) ℚP.≤-refl))
+      subst
+        (λ left → left ≤ 1ℚ)
+        (sym (ℚP.*-identityʳ (alpha input n)))
+        (alphaAtMostOne input n)
+  in ℚP.≤-trans first second
 
 weightedGreenResponseNonnegative :
   (input : VariableGreenRecurrence) →
@@ -192,12 +192,11 @@ profileBelowBasePlusWeightedBudget :
   profile input n ≤ profile input zero + weightedBudget bound
 profileBelowBasePlusWeightedBudget input bound n =
   let
-    baseNN = profileNonnegative input zero
     productBaseBelowBase :
       survivalProduct input n * profile input zero
       ≤ 1ℚ * profile input zero
     productBaseBelowBase =
-      let instance baseNNI = nonNegative baseNN
+      let instance baseNNI = nonNegative (profileNonnegative input zero)
       in ℚP.*-monoʳ-≤-nonNeg
         (profile input zero)
         (survivalProductAtMostOne input n)
