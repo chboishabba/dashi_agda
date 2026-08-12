@@ -12,6 +12,7 @@ import DASHI.Cognition.PNF.TraumaMemoryHypervoxelBridge
 import DASHI.Cognition.PNF.DepthWheelMemoryHyperfabric
 import DASHI.Cognition.PNF.DepthWheelMemoryPhaseGeometry
 import DASHI.Cognition.PNF.DepthWheelMemoryHyperfabricRegression
+import DASHI.Cognition.PNF.DepthWheelMemoryGradedAdapter
 import DASHI.Foundations.DepthWheelGradedDynamics
 import DASHI.Physics.Closure.SSPPrimeLane369DepthWheelCantorBridge
 import DASHI.Physics.Closure.SSPPrimeLane369DepthAddressWheel
