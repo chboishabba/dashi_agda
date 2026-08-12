@@ -13,6 +13,7 @@ module DASHI.Cognition.PNF.ConstraintNetworkObstructionExact where
 -- exact obstruction/minimum theorem, not a biological claim.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Empty using (⊥)
