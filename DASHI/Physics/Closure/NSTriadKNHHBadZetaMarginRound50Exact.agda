@@ -39,7 +39,7 @@ open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _-_; _*_; _<_)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 zetaFromAlpha : ℚ → ℚ
 zetaFromAlpha alpha = 1ℚ - alpha
@@ -70,7 +70,7 @@ forcingTargetFromZeta :
 forcingTargetFromZeta zeta beta target proof =
   subst
     (λ factor → beta < factor * target)
-    (zetaAlphaRoundTrip zeta)
+    (sym (zetaAlphaRoundTrip zeta))
     proof
 
 hhBadDyadicHalfIsScaleCompensationNotNormalizedContraction : Bool
