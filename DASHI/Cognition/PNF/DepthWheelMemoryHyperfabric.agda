@@ -6,7 +6,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
-open import Data.Nat using (_+_; _*_ ; _≤_)
+open import Data.Nat using (_+_; _*_; _≤_)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 import DASHI.Cognition.PNF.EventAlgebra as PNF
@@ -44,10 +44,6 @@ import DASHI.Physics.Closure.SSPPrimeLane369DepthWheelCantorBridge as Wheel
 
 ------------------------------------------------------------------------
 -- Memory-preserving updates.
---
--- The repository already distinguishes semantic identity from valuation,
--- salience, action weight and phase.  Package precisely the updates that carry
--- a proof that remembered PNF identity is unchanged.
 
 record MemoryPreservingUpdate : Set₁ where
   constructor memoryPreservingUpdate
@@ -86,11 +82,6 @@ extinctionUpdate =
 
 ------------------------------------------------------------------------
 -- C3-graded memory fibre.
---
--- MemoryFibre.phase remains backward-compatible as Nat.  This wrapper makes a
--- stronger local statement: for a particular refinement depth, that Nat is the
--- ordinal of the canonical depth-wheel phase.  No global rewrite of the older
--- MemoryFibre API is required.
 
 record WheelMemoryFibre : Set where
   constructor wheelMemoryFibre
@@ -138,10 +129,6 @@ alignedDepthZeroPhaseIsZero memory = refl
 
 ------------------------------------------------------------------------
 -- One elementary graded learning step.
---
--- First apply an existing memory-preserving learning operation, then align its
--- phase to the next refinement depth.  Thus semantic identity is invariant
--- while the full memory state may move in the hidden learning fibre.
 
 advancePreservingUpdate :
   MemoryPreservingUpdate →
@@ -204,7 +191,7 @@ mkWheelLearningTransition update source =
     refl
 
 ------------------------------------------------------------------------
--- Existing named learning receipts embedded into the graded lane.
+-- Existing named learning operations embedded into the graded lane.
 
 revaluationWheelTransition :
   Nat → WheelMemoryFibre → WheelLearningTransition
@@ -242,13 +229,9 @@ extinctionWheelPreservesRememberedPNF source =
 
 ------------------------------------------------------------------------
 -- Same public PNF does not imply same full memory state.
---
--- At depth zero, every graded source has phase 0 and every one-step target has
--- phase 1.  Hence a memory-preserving update can preserve EventPNF exactly while
--- the full MemoryFibre is provably unequal.
 
-zeroNotOne : zero ≡ suc zero → ⊥
-zeroNotOne ()
+oneNotZero : suc zero ≡ zero → ⊥
+oneNotZero ()
 
 depthZeroAdvanceChangesFullMemory :
   (update : MemoryPreservingUpdate) →
@@ -257,8 +240,7 @@ depthZeroAdvanceChangesFullMemory :
   ≡ memory (alignMemoryAtDepth raw 0) →
   ⊥
 depthZeroAdvanceChangesFullMemory update raw equality =
-  zeroNotOne
-    (cong Memory.phase equality)
+  oneNotZero (cong Memory.phase equality)
 
 depthZeroAdvancePreservesPublicPNF :
   (update : MemoryPreservingUpdate) →
@@ -271,10 +253,6 @@ depthZeroAdvancePreservesPublicPNF update raw =
 
 ------------------------------------------------------------------------
 -- One complete learning wheel.
---
--- The three update operators may differ.  Only preservation of remembered PNF
--- is required locally.  Their composite advances depth by three, returns to the
--- same C3 grade, and preserves the remembered EventPNF.
 
 record ThreePhaseLearningProgram : Set₁ where
   constructor threePhaseLearningProgram
@@ -333,8 +311,6 @@ canonicalRevalueHabituateReinforceWheel value =
 
 ------------------------------------------------------------------------
 -- Existing LearningReceipt and FibreLearningUpdate remain live dependencies.
--- A bridge requires their actual source/target equality rather than treating a
--- Bool receipt as propositional equality.
 
 record ExistingLearningWheelBridge : Set₁ where
   constructor existingLearningWheelBridge
@@ -352,11 +328,6 @@ record ExistingLearningWheelBridge : Set₁ where
 
 ------------------------------------------------------------------------
 -- Hyperfabric cross-fibre phase geometry.
---
--- A trauma/body-memory channel is a fibre label.  Different fibres may carry
--- the same semantic event while occupying different C3 phases.  The following
--- finite frustration functional is an abstract mismatch cost only; it is not a
--- biological spin model and cannot diagnose trauma.
 
 phaseDistance :
   Wheel.DepthWheelPhase → Wheel.DepthWheelPhase → Nat
@@ -413,9 +384,7 @@ fabricPhaseFrustration (coupling ∷ rest) =
   couplingFrustration coupling + fabricPhaseFrustration rest
 
 ------------------------------------------------------------------------
--- Link a wheel-graded learning fibre back to an actual site of the existing
--- trauma-memory hypervoxel.  Learning depth is intentionally separate from the
--- spatial hypervoxel depth, with only an explicit bound connecting them.
+-- Link back to an actual site of the existing trauma-memory hypervoxel.
 
 record DepthWheelHypervoxelSite (rank depth : Nat) : Set₁ where
   constructor depthWheelHypervoxelSite
@@ -441,6 +410,19 @@ hypervoxelSiteAlignmentPreservesPNF :
   ≡ Memory.rememberedEvent (Memory.current (sourceVersionedMemory siteBridge))
 hypervoxelSiteAlignmentPreservesPNF siteBridge
   rewrite gradedMemoryIsAlignedCurrent siteBridge = refl
+
+hypervoxelSiteAlignmentPreservesSitePNF :
+  ∀ {rank depth}
+    (siteBridge : DepthWheelHypervoxelSite rank depth) →
+  publicMemoryProjection (gradedMemory siteBridge)
+  ≡ Memory.rememberedEvent
+      (Memory.current
+        (Trauma.PNFMemoryHypervoxel.memoryAt
+          (carrier siteBridge)
+          (site siteBridge)))
+hypervoxelSiteAlignmentPreservesSitePNF siteBridge
+  rewrite gradedMemoryIsAlignedCurrent siteBridge
+        | sourceVersionedMemoryMatchesSite siteBridge = refl
 
 ------------------------------------------------------------------------
 -- Authority boundary.
