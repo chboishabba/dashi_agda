@@ -8,8 +8,10 @@ module DASHI.Crypto.ReopeningArchitectureExact where
 -- Discrete Logarithms on a Quantum Computer", SIAM J. Comput. 26(5), 1997.
 -- DOI: 10.1137/S0097539795293172.
 --
--- NIST FIPS 203, "Module-Lattice-Based Key-Encapsulation Mechanism Standard",
--- 2024. Standards document; no DOI asserted here.
+-- National Institute of Standards and Technology; Gorjan Alagic, Quynh Dang,
+-- Dustin Moody, Angela Robinson, Hamilton Silberg, Daniel Smith-Tone,
+-- "Module-Lattice-Based Key-Encapsulation Mechanism Standard", FIPS 203,
+-- 2024. DOI: 10.6028/NIST.FIPS.203.
 --
 -- This module formalises only the shared structural distinction used in DASHI:
 -- reversible authorised reopening versus computationally unavailable reopening
