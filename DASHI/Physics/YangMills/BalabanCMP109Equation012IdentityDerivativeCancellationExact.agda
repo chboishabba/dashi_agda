@@ -34,15 +34,14 @@ module DASHI.Physics.YangMills.BalabanCMP109Equation012IdentityDerivativeCancell
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Data.List.Base using (length)
 open import Data.Rational using (ℚ; 1ℚ; _+_; _-_; _*_)
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact using
-  (natAsRational; sumRational; sumRationalScale)
-open import DASHI.Physics.YangMills.BalabanFiniteFibreAverageExact using
-  (sumRationalConstant)
+  (natAsRational; sumRational)
 open import DASHI.Physics.YangMills.BalabanFiniteSumFubiniExact using
   (sumRationalAdd)
 
@@ -91,14 +90,14 @@ sumRelativeSplitsCoarse :
   sumRational fines
     (relativeReferenceDerivative source crossing target coarse)
   ≡ sumRational fines (threePathDerivative source crossing target)
-    - natAsRational (Data.List.Base.length fines) * coarse
+    - natAsRational (length fines) * coarse
 sumRelativeSplitsCoarse [] source crossing target coarse = ℚRing.solve []
 sumRelativeSplitsCoarse (fine ∷ fines) source crossing target coarse
   rewrite sumRelativeSplitsCoarse fines source crossing target coarse =
   ℚRing.solve-∀
     (source fine) (crossing fine) (target fine) coarse
     (sumRational fines (threePathDerivative source crossing target))
-    (natAsRational (Data.List.Base.length fines))
+    (natAsRational (length fines))
 
 normalizedCoarseCancellation :
   ∀ weight count coarse →
@@ -112,7 +111,7 @@ normalizedCoarseCancellation weight count coarse normalized pathSum
 equation012IdentityDerivativeCancellation :
   ∀ {Fine : Set}
     weight (fines : List Fine) source crossing target coarse →
-  weight * natAsRational (Data.List.Base.length fines) ≡ 1ℚ →
+  weight * natAsRational (length fines) ≡ 1ℚ →
   referenceEquation012Derivative
     weight fines source crossing target coarse
   ≡ weight * sumRational fines
@@ -123,7 +122,7 @@ equation012IdentityDerivativeCancellation
     (cong (λ total → weight * total + coarse)
       (sumRelativeSplitsCoarse fines source crossing target coarse))
     (normalizedCoarseCancellation
-      weight (natAsRational (Data.List.Base.length fines)) coarse
+      weight (natAsRational (length fines)) coarse
       normalized
       (sumRational fines (threePathDerivative source crossing target)))
 
