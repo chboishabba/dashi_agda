@@ -13,9 +13,11 @@ FILES=(
   DASHI/Core/TerminalisationArchitectureExact.agda
   DASHI/Core/SelfSealingTerminalisationExact.agda
   DASHI/Core/PropositionIndependenceExact.agda
+  DASHI/Core/TerminalisationMasterArchitectureExact.agda
   DASHI/Core/FiniteC3OrbitStabilizerExact.agda
   DASHI/Core/C3OrbitProvenanceQuotientExact.agda
   DASHI/Core/EfficientRecoverableQuotientExact.agda
+  DASHI/Core/C3EfficientReopeningExampleExact.agda
   DASHI/Cognition/PNF/MemoryCommandSeparationExact.agda
   DASHI/Crypto/ReopeningArchitectureExact.agda
   DASHI/EverythingTerminalisationProvenanceSymmetryRound10.agda
@@ -30,9 +32,12 @@ for f in "${FILES[@]}"; do
 done
 
 grep -q 'selfSealingContradictsCorrectiveReopening' DASHI/Core/SelfSealingTerminalisationExact.agda
+grep -q 'closedTerminalRegionContradictsAntiTerminalisation' DASHI/Core/TerminalisationMasterArchitectureExact.agda
 grep -q 'orbitStabilizerFixedCardinality' DASHI/Core/FiniteC3OrbitStabilizerExact.agda
+grep -q 'c3SymmetryEnhancementReceipt' DASHI/Core/FiniteC3OrbitStabilizerExact.agda
 grep -q 'c3OrbitProvenanceBearingQuotient' DASHI/Core/C3OrbitProvenanceQuotientExact.agda
 grep -q 'EfficientRecoverableFamily' DASHI/Core/EfficientRecoverableQuotientExact.agda
+grep -q 'c3EfficientRecoverableFamily' DASHI/Core/C3EfficientReopeningExampleExact.agda
 grep -q 'extinctionIsMemoryCommandSeparation' DASHI/Cognition/PNF/MemoryCommandSeparationExact.agda
 grep -q 'ModelRelativeReopening' DASHI/Crypto/ReopeningArchitectureExact.agda
 
