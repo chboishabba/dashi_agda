@@ -65,6 +65,7 @@ open import Relation.Nullary.Decidable.Core using (toWitness)
 
 import DASHI.Physics.Closure.NSTriadKNHHBadSharpDyadicGainRound33Exact as Sharp
 import DASHI.Physics.Closure.NSTriadKNHHBadDissipativeFloorChargingRound36Exact as Floor
+import DASHI.Physics.Closure.NSTriadKNLuoCriticalDissipationHHBadBridgeRound34Exact as Bridge
 
 halfBelowOne : Sharp.half ≤ 1ℚ
 halfBelowOne = toWitness {a? = Sharp.half ℚP.≤? 1ℚ} _
@@ -178,13 +179,9 @@ inverseSquareGainSatisfiesRound33CalibrationEnvelope
     ratioNN : 0ℚ ≤ Sharp.rawHHBadRatio shell
     ratioNN =
       let
-        -- rawHHBadRatio = 2 * lambda_q; both factors are nonnegative.
-        twoNN = ℚP.nonNegative⁻¹ Sharp.two
-        scaleNN =
-          DASHI.Physics.Closure.NSTriadKNLuoCriticalDissipationHHBadBridgeRound34Exact.dyadicScaleNonnegative shell
         instance
-          twoNNI = nonNegative twoNN
-          scaleNNI = nonNegative scaleNN
+          twoNNI = nonNegative Bridge.twoNonnegative
+          scaleNNI = nonNegative (Bridge.dyadicScaleNonnegative shell)
           productNNI = ℚP.nonNeg*nonNeg⇒nonNeg
             Sharp.two (Sharp.dyadicScale shell)
       in
