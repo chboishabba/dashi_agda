@@ -65,38 +65,43 @@ weightedGreenBelowRawPrefix input (suc n) =
       Green.alpha green n * Green.weightedGreenResponse green n
       ≤ Green.weightedGreenResponse green n
     alphaTimesGreenBelowGreen =
-      let instance greenNNI =
-        nonNegative (Green.weightedGreenResponseNonnegative green n)
-          
-          
-      scaled :
-        Green.alpha green n * Green.weightedGreenResponse green n
-        ≤ 1ℚ * Green.weightedGreenResponse green n
-      scaled = ℚP.*-monoʳ-≤-nonNeg
-        (Green.weightedGreenResponse green n)
-        (Green.alphaAtMostOne green n)
+      let
+        instance
+          greenNNI = nonNegative (Green.weightedGreenResponseNonnegative green n)
+        scaled :
+          Green.alpha green n * Green.weightedGreenResponse green n
+          ≤ 1ℚ * Green.weightedGreenResponse green n
+        scaled = ℚP.*-monoʳ-≤-nonNeg
+          (Green.weightedGreenResponse green n)
+          (Green.alphaAtMostOne green n)
       in
       subst
         (Green.alpha green n * Green.weightedGreenResponse green n ≤_)
         (solve (Green.weightedGreenResponse green n ∷ []))
         scaled
 
+    sameForcingLe :
+      Green.forcing green n ≤ Sum.forcing raw n
+    sameForcingLe =
+      subst
+        (λ left → left ≤ Sum.forcing raw n)
+        (sameForcing input n)
+        ℚP.≤-refl
+
     oneStep :
       Green.alpha green n * Green.weightedGreenResponse green n
         + Green.forcing green n
-      ≤ Green.weightedGreenResponse green n + Green.forcing green n
-    oneStep = ℚP.+-mono-≤ alphaTimesGreenBelowGreen ℚP.≤-refl
+      ≤ Green.weightedGreenResponse green n + Sum.forcing raw n
+    oneStep =
+      ℚP.+-mono-≤ alphaTimesGreenBelowGreen sameForcingLe
 
     inherited :
-      Green.weightedGreenResponse green n + Green.forcing green n
+      Green.weightedGreenResponse green n + Sum.forcing raw n
       ≤ Sum.forcingPrefix raw n + Sum.forcing raw n
     inherited =
       ℚP.+-mono-≤
         (weightedGreenBelowRawPrefix input n)
-        (subst
-          (Green.forcing green n ≤_)
-          (sameForcing input n)
-          ℚP.≤-refl)
+        ℚP.≤-refl
   in
   ℚP.≤-trans oneStep inherited
 
