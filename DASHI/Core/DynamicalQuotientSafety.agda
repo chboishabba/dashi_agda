@@ -42,26 +42,31 @@ record DynamicConsumerSafety
 open DynamicConsumerSafety public
 
 ------------------------------------------------------------------------
--- Safety is closed under further consumer observation.
+-- Composition warning and valid theorem.
 --
--- If a fine-to-mid projection is trace-congruent, no deterministic view of
--- that mid surface can reintroduce a distinction the safe quotient proved
--- dynamically irrelevant.  This is the compositional law needed by stacks of
--- consumer-specific projections.
+-- Dynamic safety is NOT closed under arbitrary post-composition.  A coarser
+-- observer may identify two current mid-states whose future observations later
+-- diverge.  Post-composition is safe without another dynamical proof when the
+-- observer is injective; genuinely coarser second quotients require their own
+-- congruence theorem.
 ------------------------------------------------------------------------
 
-postcomposeDynamicConsumerSafety :
+Injective : ∀ {A B : Set} → (A → B) → Set
+Injective f = ∀ {x y} → f x ≡ f y → x ≡ y
+
+postcomposeInjectiveObservationSafety :
   ∀ {State Action Mid Observation}
     {system : Dependency.DependentActionSystem State Action}
     {project : State → Mid} →
   DynamicConsumerSafety system project →
   (observe : Mid → Observation) →
+  Injective observe →
   DynamicConsumerSafety system (λ state → observe (project state))
-postcomposeDynamicConsumerSafety safety observe =
+postcomposeInjectiveObservationSafety safety observe observeInjective =
   dynamicConsumerSafety λ same leftRun rightRun →
     cong observe
       (traceCongruence safety
-        same
+        (observeInjective same)
         leftRun
         rightRun)
 
@@ -102,11 +107,21 @@ terminalisationDefectContradictsSafety safety defect =
       (rightExecution defect))
 
 ------------------------------------------------------------------------
--- An unsafe collapse and an unreopenable collapse are deliberately different
--- notions.  TerminalisationDefect detects future-visible collapse; a separate
--- receipt/reopening layer decides whether the hidden distinction remains
--- recoverable.
+-- Unsafe collapse versus terminalising/unreopenable collapse.
 ------------------------------------------------------------------------
+
+record ReopeningScheme
+    {State Observation : Set}
+    (project : State → Observation) : Set₁ where
+  field
+    Receipt : Set
+    receipt : State → Receipt
+    reopen : Observation → Receipt → State
+    reopenExact :
+      (state : State) →
+      reopen (project state) (receipt state) ≡ state
+
+open ReopeningScheme public
 
 record UnreopenableDynamicCollapse
     {State Action Observation : Set}
@@ -114,9 +129,11 @@ record UnreopenableDynamicCollapse
     (project : State → Observation) : Set₁ where
   field
     dynamicDefect : TerminalisationDefect system project
-    ReopeningReceipt : Set
-    MissingReopeningWitness : Set
-    missingReopeningWitness : MissingReopeningWitness
+    AdmissibleReceiptCarrier : Set → Set
+    noAdmissibleExactReopening :
+      (scheme : ReopeningScheme project) →
+      AdmissibleReceiptCarrier (Receipt scheme) →
+      ⊥
 
 open UnreopenableDynamicCollapse public
 
