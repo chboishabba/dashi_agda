@@ -36,9 +36,11 @@ module DASHI.Physics.YangMills.BalabanCMP109FederbushNormalizedVariationExact wh
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List)
 open import Data.List.Base using (length)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_)
+open import Data.Rational.Base as ℚ using
+  (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_; ∣_∣)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
@@ -217,26 +219,36 @@ normalizedFederbushJacobianDifferenceColumnBound :
   ≤ federbushVariationBudget dataSet
 normalizedFederbushJacobianDifferenceColumnBound dataSet column =
   let
-    exact = normalizedComponentJacobianDifferenceExact
-      (weight dataSet) (indices dataSet)
-      (jacobianU dataSet) (transportU dataSet)
-      (jacobianV dataSet) (transportV dataSet)
-    bound = normalizedFederbushVariationColumnBound dataSet column
-  in
-  RectSchur.rectAbsoluteColumnMassCong
-    Physical.lieCoordinates3
-    (Variation.matrixDifference
+    leftMatrix = Variation.matrixDifference
       (normalizedComponentJacobian
         (weight dataSet) (indices dataSet)
         (jacobianU dataSet) (transportU dataSet))
       (normalizedComponentJacobian
         (weight dataSet) (indices dataSet)
-        (jacobianV dataSet) (transportV dataSet)))
-    (normalizedComponentVariation
+        (jacobianV dataSet) (transportV dataSet))
+    rightMatrix = normalizedComponentVariation
       (weight dataSet) (indices dataSet)
       (jacobianU dataSet) (transportU dataSet)
-      (jacobianV dataSet) (transportV dataSet))
-    column exact bound
+      (jacobianV dataSet) (transportV dataSet)
+    massExact :
+      RectSchur.rectAbsoluteColumnMass Physical.lieCoordinates3
+        leftMatrix column
+      ≡ RectSchur.rectAbsoluteColumnMass Physical.lieCoordinates3
+        rightMatrix column
+    massExact =
+      Sums.sumRationalCong Physical.lieCoordinates3 _ _
+        (λ row →
+          cong ∣_∣
+            (normalizedComponentJacobianDifferenceExact
+              (weight dataSet) (indices dataSet)
+              (jacobianU dataSet) (transportU dataSet)
+              (jacobianV dataSet) (transportV dataSet)
+              row column))
+  in
+  subst
+    (λ lower → lower ≤ federbushVariationBudget dataSet)
+    (sym massExact)
+    (normalizedFederbushVariationColumnBound dataSet column)
 
 cmp109FederbushNormalizedVariationExactLevel : ProofLevel
 cmp109FederbushNormalizedVariationExactLevel = machineChecked
