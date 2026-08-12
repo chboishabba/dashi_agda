@@ -11,6 +11,7 @@ files=(
   DASHI/Core/ProvenanceQuotientDynamics.agda
   DASHI/Core/PossibilityAccessibilitySupport.agda
   DASHI/Core/FinePhaseObservation.agda
+  DASHI/Core/RelationalHorizon369.agda
   DASHI/Foundations/DepthWheelGradedDynamics.agda
   DASHI/Cognition/PNF/BoundedExecutionCarrier.agda
   DASHI/Cognition/PNF/BoundedExecutionAdapters.agda
@@ -42,6 +43,7 @@ files=(
   DASHI/Cognition/PNF/DepthWheelMemoryGradedAdapter.agda
   DASHI/Physics/Closure/SSPPrimeLane369DepthWheelCantorBridge.agda
   DASHI/Physics/Closure/SSPPrimeLane369DepthAddressWheel.agda
+  DASHI/Physics/Closure/SSP369PolarResidualQuotient.agda
   DASHI/Geometry/SSP369DepthWheelUltrametric.agda
 )
 
@@ -60,6 +62,8 @@ required_markers=(
   'ProvenanceBearingQuotient'
   'reopenExact'
   'projectionReceiptCannotEraseSemantics'
+  'reopenPolarProjectExact'
+  'polarResidualQuotient'
   'DynamicConsumerSafety'
   'TerminalisationDefect'
   'terminalisationDefectContradictsSafety'
@@ -69,6 +73,8 @@ required_markers=(
   'PhaseObservationSystem'
   'coarsePhaseDoesNotReconstructFineEvidence'
   'evidenceCoordinatePhaseObservation'
+  'RelationalHorizon369Boundary'
+  'genericRelationalHorizonCoreReusedIsTrue'
   'executionOverflowHasNoSemanticPermission'
   'ReopenableExecutionPartition'
   'residualExecutionStateCannotRejectSemantics'
