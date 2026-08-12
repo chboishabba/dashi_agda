@@ -10,6 +10,7 @@ fi
 
 FILES=(
   DASHI/Crypto/BlueTeamAdversaryObservationExact.agda
+  DASHI/Crypto/BlueTeamThreatModelExact.agda
   DASHI/Crypto/FiniteCandidateFibreCardinalityExact.agda
   DASHI/Crypto/TranscriptProtectedLabelExact.agda
   DASHI/Crypto/IndexedSearchCostExact.agda
@@ -30,6 +31,9 @@ for f in "${FILES[@]}"; do
 done
 
 grep -q 'publicFactoredCannotSplitSamePublicFibre' DASHI/Crypto/BlueTeamAdversaryObservationExact.agda
+grep -q 'publicProtectedLabelSplitRefutesExactRecovery' DASHI/Crypto/BlueTeamThreatModelExact.agda
+grep -q 'publicFactoredThreatObservationCannotSplit' DASHI/Crypto/BlueTeamThreatModelExact.agda
+grep -q 'candidateRefinementCannotIncrease' DASHI/Crypto/BlueTeamThreatModelExact.agda
 grep -q 'refinementCannotIncreaseCardinality' DASHI/Crypto/FiniteCandidateFibreCardinalityExact.agda
 grep -q 'canonicalTwoToOneShrink' DASHI/Crypto/FiniteCandidateFibreCardinalityExact.agda
 grep -q 'transcriptLabelSplitRefutesExactRecovery' DASHI/Crypto/TranscriptProtectedLabelExact.agda
