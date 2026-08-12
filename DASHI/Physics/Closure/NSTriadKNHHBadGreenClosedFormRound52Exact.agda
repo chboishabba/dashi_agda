@@ -22,8 +22,13 @@ module DASHI.Physics.Closure.NSTriadKNHHBadGreenClosedFormRound52Exact where
 --
 --   sum_{k<n} beta_k prod_{k<j<n} alpha_j.
 --
--- The recursive theorem below is deliberately list-based: it is constructive,
--- finite, and avoids importing a separate finite-product/indexed-sum library.
+-- With A_0=1 and A_(n+1)=alpha_n A_n, the canonical response satisfies the
+-- exact variation-of-constants identity
+--
+--   R_n = A_n C_0 + G_n.
+--
+-- None of these identities assumes alpha_q <= 1; transient amplification is
+-- preserved rather than erased by a premature nonexpansive majorant.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
@@ -31,7 +36,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.List.Base using (map; _++_)
-open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _≤_; nonNegative)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
@@ -72,6 +77,12 @@ forcingGreenResponse input (suc n) =
   Barrier.alpha input n * forcingGreenResponse input n
   + Barrier.forcing input n
 
+survivalProduct :
+  Barrier.GeneralHHBadRecurrence → Nat → ℚ
+survivalProduct input zero = 1ℚ
+survivalProduct input (suc n) =
+  Barrier.alpha input n * survivalProduct input n
+
 weightedForcingTermsSumExact :
   (input : Barrier.GeneralHHBadRecurrence) →
   ∀ n →
@@ -98,6 +109,45 @@ weightedForcingTermsSumExact input (suc n) =
           ∷ Barrier.forcing input n
           ∷ []))))
 
+canonicalResponseVariationOfConstants :
+  (input : Barrier.GeneralHHBadRecurrence) →
+  ∀ n →
+  Barrier.canonicalResponse input n
+  ≡ survivalProduct input n * Barrier.profile input zero
+    + forcingGreenResponse input n
+canonicalResponseVariationOfConstants input zero =
+  solve (Barrier.profile input zero ∷ [])
+canonicalResponseVariationOfConstants input (suc n) =
+  trans
+    (cong
+      (λ previous →
+        Barrier.alpha input n * previous + Barrier.forcing input n)
+      (canonicalResponseVariationOfConstants input n))
+    (solve
+      ( Barrier.alpha input n
+      ∷ survivalProduct input n
+      ∷ Barrier.profile input zero
+      ∷ forcingGreenResponse input n
+      ∷ Barrier.forcing input n
+      ∷ []))
+
+profileBelowExactVariationOfConstants :
+  (input : Barrier.GeneralHHBadRecurrence) →
+  ∀ n →
+  Barrier.profile input n
+  ≤ survivalProduct input n * Barrier.profile input zero
+    + forcingGreenResponse input n
+profileBelowExactVariationOfConstants input n =
+  let
+    belowCanonical :
+      Barrier.profile input n ≤ Barrier.canonicalResponse input n
+    belowCanonical = Barrier.profileBelowCanonicalResponse input n
+  in
+  Relation.Binary.PropositionalEquality.subst
+    (Barrier.profile input n ≤_)
+    (canonicalResponseVariationOfConstants input n)
+    belowCanonical
+
 forcingGreenResponseNonnegative :
   (input : Barrier.GeneralHHBadRecurrence) →
   ∀ n → 0ℚ ≤ forcingGreenResponse input n
@@ -118,8 +168,8 @@ forcingGreenResponseNonnegative input (suc n) =
 finiteGreenClosedFormConstructed : Bool
 finiteGreenClosedFormConstructed = true
 
-closedFormNeedsNoAlphaAtMostOne : Bool
-closedFormNeedsNoAlphaAtMostOne = true
+exactVariationOfConstantsNeedsNoAlphaAtMostOne : Bool
+exactVariationOfConstantsNeedsNoAlphaAtMostOne = true
 
 finiteGreenClosedFormConstructedIsTrue :
   finiteGreenClosedFormConstructed ≡ true
