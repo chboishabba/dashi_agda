@@ -3,15 +3,15 @@ module DASHI.Crypto.SearchFactorisationExact where
 ------------------------------------------------------------------------
 -- SEARCH FACTORISATION
 --
--- The central theorem-bearing boundary for verification -> search.  A global
--- verifier may factor into local predicates plus reconciliation, but a simple
--- additive search bound is justified only when reconciliation itself avoids a
--- Cartesian-product search.
+-- A global verifier may factor into local predicates plus reconciliation, but
+-- a simple additive search bound is justified only when reconciliation avoids
+-- a Cartesian-product search.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; _+_; _*_)
 open import Data.Product using (_×_; _,_)
+open import Relation.Binary.PropositionalEquality using (sym; subst)
 
 record _↔_ (A B : Set) : Set where
   constructor iff
@@ -42,7 +42,6 @@ record LocalSolutions (problem : FactorizedSearchProblem) : Set₁ where
     rightSolution : Right problem
     leftValid : LocalL problem leftSolution
     rightValid : LocalR problem rightSolution
-
 open LocalSolutions public
 
 record ReconciledLocalSolutions (problem : FactorizedSearchProblem) : Set₁ where
@@ -50,23 +49,58 @@ record ReconciledLocalSolutions (problem : FactorizedSearchProblem) : Set₁ whe
   field
     locals : LocalSolutions problem
     compatible : Reconcile problem (leftSolution locals) (rightSolution locals)
-
 open ReconciledLocalSolutions public
 
--- Application-supplied assembly is the constructive seam from local coordinates
--- back to a hidden state.  It is not implied by local verification alone.
 record Assembly (problem : FactorizedSearchProblem) : Set₁ where
   constructor assembly
   field
     assemble : Left problem → Right problem → Hidden problem
     ρL-assemble : ∀ l r → ρL problem (assemble l r) ≡ l
     ρR-assemble : ∀ l r → ρR problem (assemble l r) ≡ r
-
 open Assembly public
 
+transport₂ :
+  ∀ {A B : Set} {P : A → B → Set}
+    {a a' : A} {b b' : B} →
+  a ≡ a' → b ≡ b' → P a b → P a' b'
+transport₂ refl refl proof = proof
+
+-- Main constructive theorem: local enumeration is enough only once we also
+-- possess compatible local witnesses and an assembly map back to the hidden
+-- carrier.
+reconciledLocalSolutionsGiveGlobal :
+  ∀ {problem : FactorizedSearchProblem} →
+  Assembly problem →
+  (solutions : ReconciledLocalSolutions problem) →
+  Global problem
+    (assemble _
+      (leftSolution (locals solutions))
+      (rightSolution (locals solutions)))
+reconciledLocalSolutionsGiveGlobal {problem} assemblyMap solutions =
+  from (globalFactorisation problem hidden)
+    (leftProof , (rightProof , couplingProof))
+  where
+  l = leftSolution (locals solutions)
+  r = rightSolution (locals solutions)
+  hidden = assemble assemblyMap l r
+
+  leftEq : ρL problem hidden ≡ l
+  leftEq = ρL-assemble assemblyMap l r
+
+  rightEq : ρR problem hidden ≡ r
+  rightEq = ρR-assemble assemblyMap l r
+
+  leftProof : LocalL problem (ρL problem hidden)
+  leftProof = subst (LocalL problem) (sym leftEq) (leftValid (locals solutions))
+
+  rightProof : LocalR problem (ρR problem hidden)
+  rightProof = subst (LocalR problem) (sym rightEq) (rightValid (locals solutions))
+
+  couplingProof : Reconcile problem (ρL problem hidden) (ρR problem hidden)
+  couplingProof = transport₂ (sym leftEq) (sym rightEq) (compatible solutions)
+
 ------------------------------------------------------------------------
--- Cost laws.  Nat expressions are exact accounting formulas, not claims about
--- any concrete cryptosystem until its enumerators/reconciler instantiate them.
+-- Exact cost accounting.
 ------------------------------------------------------------------------
 
 genericReconciliationBound : Nat → Nat → Nat → Nat → Nat → Nat
@@ -82,7 +116,6 @@ record GenericSearchCost : Set where
     localLeftCost localRightCost : Nat
     survivingLeft survivingRight : Nat
     reconcilePerPairCost : Nat
-
 open GenericSearchCost public
 
 totalGenericCost : GenericSearchCost → Nat
@@ -96,11 +129,8 @@ record FunctionalReconciliation : Set₁ where
   field
     Left Right : Set
     mate : Left → Right
-
 open FunctionalReconciliation public
 
--- Crucial boundary: T_L + T_R + T_C is a valid architecture only when the
--- reconciliation route is supplied without enumerating all n_L*n_R pairs.
 record AdditiveSearchCertificate : Set where
   constructor additiveSearchCertificate
   field
@@ -108,7 +138,6 @@ record AdditiveSearchCertificate : Set where
     certifiedTotal : Nat
     exactTotal : certifiedTotal ≡
       functionalReconciliationBound localLeftCost localRightCost reconcileCost
-
 open AdditiveSearchCertificate public
 
 additiveCertificate : ∀ T-L T-R T-C → AdditiveSearchCertificate
