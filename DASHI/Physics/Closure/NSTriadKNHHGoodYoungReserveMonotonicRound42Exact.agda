@@ -53,7 +53,7 @@ open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
 
 import DASHI.Physics.Closure.NSTriadKNLuoBadCoherenceWeightedMarkovExact as Threshold
 import DASHI.Physics.Closure.NSTriadKNHHGoodSquaredYoungOwnerRound41Exact as Young
@@ -110,7 +110,7 @@ positiveThresholdInverseAntitone smaller larger thresholdOrder =
   in
   subst
     (λ lower → lower ≤ smallInv)
-    (sym leftMeaning)
+    leftMeaning
     (subst
       (λ upper → smallInv * (largeInv * small) ≤ upper)
       rightMeaning
