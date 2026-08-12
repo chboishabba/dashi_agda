@@ -25,7 +25,7 @@ record ParserRepresentation : Set where
 
 open ParserRepresentation public
 
-record ParserArgumentProjection : Set₁ where
+record ParserArgumentProjection : Set where
   constructor parserArgumentProjection
   field
     projectArgument : ParserRepresentation → ObjectId
