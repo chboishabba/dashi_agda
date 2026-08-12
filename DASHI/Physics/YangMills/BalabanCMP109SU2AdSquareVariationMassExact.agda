@@ -34,18 +34,20 @@ open import Agda.Builtin.Equality using (_≡_)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _*_; _≤_; ∣_∣)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
+import DASHI.Physics.YangMills.BalabanFiniteSumFubiniExact as Fubini
 import DASHI.Physics.YangMills.BalabanP33FiniteWeightedSchurSquaredExact as Schur
 import DASHI.Physics.YangMills.BalabanFiniteRectangularSchurSquaredExact as RectSchur
 import DASHI.Physics.YangMills.BalabanPhysicalSU2FiniteCoordinatesExact as Physical
+import DASHI.Physics.YangMills.BalabanCMP109FederbushNormalizedJacobianExact as Jacobian
 import DASHI.Physics.YangMills.BalabanCMP109FederbushComponentResidualExact as Component
 import DASHI.Physics.YangMills.BalabanCMP109FederbushComponentVariationExact as Variation
 import DASHI.Physics.YangMills.BalabanCMP109FederbushResidualMassTelescopeExact as Mass
 
-adSquare : Component.Jacobian.Lie3Matrix → Component.Jacobian.Lie3Matrix
+adSquare : Jacobian.Lie3Matrix → Jacobian.Lie3Matrix
 adSquare ad = Component.matrixCompose ad ad
 
 adSquareDifferenceExact : ∀ adX adY row column →
@@ -142,11 +144,10 @@ adSquareVariationColumnMassBound
         (λ row → ∣ first row column ∣ + ∣ second row column ∣)
       ≡ RectSchur.rectAbsoluteColumnMass Physical.lieCoordinates3 first column
         + RectSchur.rectAbsoluteColumnMass Physical.lieCoordinates3 second column
-    split =
-      DASHI.Physics.YangMills.BalabanFiniteSumFubiniExact.sumRationalAdd
-        Physical.lieCoordinates3
-        (λ row → ∣ first row column ∣)
-        (λ row → ∣ second row column ∣)
+    split = Fubini.sumRationalAdd
+      Physical.lieCoordinates3
+      (λ row → ∣ first row column ∣)
+      (λ row → ∣ second row column ∣)
 
     triangle = subst
       (λ upper →
