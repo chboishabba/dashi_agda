@@ -16,29 +16,21 @@ module DASHI.Physics.Closure.NSTriadKNHHBadDirectSlackGateRound49Exact where
 --
 -- DASHI CONTRIBUTION
 --
--- Eliminate the HH-bad ceiling M as a free numerical parameter.  Carry one
--- positive rational live-gate slack s and define
---
---   M := T - s.
---
--- The physical obligations become
---
---   C_0 <= T-s,
---   beta <= (1-alpha)(T-s),
---
--- together with the selected-threshold recurrence.  This constructs the
--- mature Round-47 recurrence witness definitionally and proves M<T.  It also
--- exposes the direct strict targets C_0<T and beta<(1-alpha)T.
+-- Eliminate the HH-bad ceiling M as a free numerical parameter. Carry one
+-- positive rational live-gate slack s and define M := T-s. The physical
+-- obligations become C_0 <= T-s and beta <= (1-alpha)(T-s), together with
+-- the selected-threshold recurrence. The mature Round-47 recurrence witness
+-- is then constructed definitionally and M<T is proved exactly.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Rational.Base using
-  (ℚ; 0ℚ; 1ℚ; _-_; _*_; _≤_; _<_; positive)
+  (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_; _<_; positive)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (subst₂)
 
 import DASHI.Physics.Closure.NSTriadKNLuoBadCoherenceWeightedMarkovExact as Threshold
 import DASHI.Physics.Closure.NSTriadKNHHBadSharpDyadicGainRound33Exact as Sharp
@@ -81,10 +73,18 @@ liveCeilingStrictlyBelowTarget :
   (gate : DirectLiveHHBadSlackGate) →
   liveCeiling gate < target gate
 liveCeilingStrictlyBelowTarget gate =
-  subst
-    (λ left → left < target gate)
-    (solve (target gate ∷ margin gate ∷ []))
-    (marginPositive gate)
+  let
+    shifted :
+      0ℚ + liveCeiling gate < margin gate + liveCeiling gate
+    shifted = ℚP.+-monoʳ-< (liveCeiling gate) (marginPositive gate)
+
+    leftMeaning : 0ℚ + liveCeiling gate ≡ liveCeiling gate
+    leftMeaning = solve (target gate ∷ margin gate ∷ [])
+
+    rightMeaning : margin gate + liveCeiling gate ≡ target gate
+    rightMeaning = solve (target gate ∷ margin gate ∷ [])
+  in
+  subst₂ _<_ leftMeaning rightMeaning shifted
 
 asSelectedThresholdRecurrence :
   DirectLiveHHBadSlackGate → Selected.SelectedThresholdDefectRecurrence
@@ -114,7 +114,7 @@ baseStrictTarget gate =
     ceilingToTarget : delta * liveCeiling gate < delta * target gate
     ceilingToTarget =
       let instance deltaPos = positive (Threshold.thresholdPositive (parameter gate))
-      in ℚP.*-monoˡ-<-pos delta (liveCeilingStrictlyBelowTarget gate)
+      in ℚP.*-monoʳ-<-pos delta (liveCeilingStrictlyBelowTarget gate)
   in
   ℚP.≤-<-trans (baseBelowLiveSlack gate) ceilingToTarget
 
@@ -127,7 +127,7 @@ forcingStrictTarget gate =
     scaled : gap * liveCeiling gate < gap * target gate
     scaled =
       let instance gapPos = positive (gapPositive gate)
-      in ℚP.*-monoˡ-<-pos gap (liveCeilingStrictlyBelowTarget gate)
+      in ℚP.*-monoʳ-<-pos gap (liveCeilingStrictlyBelowTarget gate)
   in
   ℚP.≤-<-trans (forcingBelowLiveSlack gate) scaled
 
