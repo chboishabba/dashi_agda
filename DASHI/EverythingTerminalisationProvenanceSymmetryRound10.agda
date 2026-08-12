@@ -52,12 +52,14 @@ import DASHI.Cognition.PNF.MemoryCommandSeparationExact
 
 -- Narrative/cultural stress tests: proposition-local provenance, independent
 -- evidence lineage, four consumer planes, phase-sensitive diss-track updates,
--- finite MDL transmission asymmetry, and provenance-sensitive membership
--- boundaries whose coarse inside/outside sign cannot determine action.
+-- finite MDL transmission asymmetry, audience amplification without evidence
+-- promotion, and provenance-sensitive membership boundaries whose coarse
+-- inside/outside sign cannot determine action.
 import DASHI.Cognition.PNF.NarrativeClaimProvenanceExact
 import DASHI.Cognition.PNF.DissTrackNarrativeDynamicsExact
 import DASHI.Cognition.PNF.ConsumerIndexedNarrativeProjectionExact
 import DASHI.Cognition.PNF.NarrativeMDLReplicationExact
+import DASHI.Cognition.PNF.NarrativeAmplificationWithoutEvidencePromotionExact
 import DASHI.Cognition.PNF.CulturalMembershipBoundaryExact
 
 -- Cryptographic reopening, concrete noisy-fibre witness, statewise key tests,
