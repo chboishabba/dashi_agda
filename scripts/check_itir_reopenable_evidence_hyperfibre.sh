@@ -10,11 +10,14 @@ files=(
   DASHI/Core/DynamicalQuotientSafety.agda
   DASHI/Core/ProvenanceQuotientDynamics.agda
   DASHI/Core/PossibilityAccessibilitySupport.agda
+  DASHI/Core/ConsumerIndexedRelevanceMeasure.agda
+  DASHI/Core/ConsumerProjectionSufficiency.agda
   DASHI/Core/FinePhaseObservation.agda
   DASHI/Core/RelationalHorizon369.agda
   DASHI/Core/StructuralSupportEdge.agda
   DASHI/Core/ClassificationEdge.agda
   DASHI/Foundations/DepthWheelGradedDynamics.agda
+  DASHI/Foundations/CantorConsumerRelevanceReference.agda
   DASHI/Cognition/PNF/BoundedExecutionCarrier.agda
   DASHI/Cognition/PNF/BoundedExecutionAdapters.agda
   DASHI/Cognition/PNF/ReopenableEvidenceFibre.agda
@@ -32,6 +35,7 @@ files=(
   DASHI/Cognition/PNF/SemanticSamplingDynamicSafety.agda
   DASHI/Cognition/PNF/TerminalisationDefectRegression.agda
   DASHI/Cognition/PNF/PNFResidualTerminalisationRegression.agda
+  DASHI/Cognition/PNF/RelevanceMassDynamicSafetyRegression.agda
   DASHI/Cognition/PNF/TemporalRoleWorldAlignment.agda
   DASHI/Cognition/PNF/WikidataRepairProposal.agda
   DASHI/Cognition/PNF/IdentityProofUtility.agda
@@ -40,6 +44,7 @@ files=(
   DASHI/Cognition/PNF/EvidenceCoverageAudit.agda
   DASHI/Cognition/PNF/PNFEvidenceHyperformalism.agda
   DASHI/Cognition/PNF/DirectDemandLookup.agda
+  DASHI/Cognition/PNF/RuntimeThroughputConstitution.agda
   DASHI/Cognition/PNF/NumericPNFHyperfabricEverything.agda
   DASHI/Cognition/PNF/DepthWheelMemoryHyperfabric.agda
   DASHI/Cognition/PNF/DepthWheelMemoryPhaseGeometry.agda
@@ -71,6 +76,16 @@ required_markers=(
   'ReopenableButDynamicallyUnsafe'
   'CorrectiveReachability'
   'PossibilityAccessibilitySupport'
+  'ConsumerIndexedRelevanceMeasure'
+  'OpenWorldMassAccounting'
+  'normalizedMassCannotAssertWorldTruth'
+  'candidateWeightsSummingToUnitCannotProveUniverseComplete'
+  'ConsumerMassCertificate'
+  'ConsumerSafeCompression'
+  'MassSufficientButDynamicallyUnsafe'
+  'fullTaskMassStillCannotSupplyDynamicSafety'
+  'cantorStageRetainsUnitRelevanceMass'
+  'depthThreeCountsDiffer'
   'PhaseObservationSystem'
   'coarsePhaseDoesNotReconstructFineEvidence'
   'evidenceCoordinatePhaseObservation'
@@ -83,6 +98,7 @@ required_markers=(
   'classificationEdgeFromTypePressure'
   'executionOverflowHasNoSemanticPermission'
   'ReopenableExecutionPartition'
+  'ConsumerMeasuredReopenableExecutionPartition'
   'residualExecutionStateCannotRejectSemantics'
   'properNameCarrierAsGeneric'
   'compositionCarrierAsGeneric'
@@ -129,8 +145,14 @@ required_markers=(
   'lowCoverageInvalidatesAnOtherwiseValidIdentityProofIsFalse'
   'finiteReferenceDoesNotPromoteUniversalPQJ'
   'ComplementaryReadingReference'
+  'normalizedRelevanceMassEqualsWorldTruthIsFalse'
   'expectedConstantEqualityClaimRequiresContract'
   'prefixPartitionClaimRequiresContract'
+  'ParserDominatedOptimisationReceipt'
+  'parserElapsedNotIncreased'
+  'postParserElapsedDominated'
+  'ArchiveScaleReceipt'
+  'performanceReceiptCannotPromoteSemantics'
 )
 
 for marker in "${required_markers[@]}"; do
