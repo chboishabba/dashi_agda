@@ -30,7 +30,7 @@ open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
 import Data.Integer.Base as Int
-open import Data.Rational.Base using (ℚ; _+_; _*_; _/_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _/_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 
 import DASHI.Physics.Closure.NSTriadKNHHBadSharpDyadicGainRound33Exact as Sharp
@@ -64,14 +64,10 @@ h2WithZeroComIsH1 :
   ∀ ceiling kernelFloor →
   hardGateH2 ceiling 0ℚ kernelFloor ≡ hardGateH1 ceiling kernelFloor
 h2WithZeroComIsH1 ceiling kernelFloor = solve []
-  where
-  open import Data.Rational.Base using (0ℚ)
 
 h1WithZeroKernelIsH0 :
   ∀ ceiling → hardGateH1 ceiling 0ℚ ≡ hardGateH0 ceiling
 h1WithZeroKernelIsH0 ceiling = solve []
-  where
-  open import Data.Rational.Base using (0ℚ)
 
 h0ClosedForm :
   ∀ ceiling → hardGateH0 ceiling ≡ Sharp.two * ceiling + oneSixteenth
