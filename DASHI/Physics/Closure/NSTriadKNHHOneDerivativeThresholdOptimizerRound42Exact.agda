@@ -37,16 +37,18 @@ module DASHI.Physics.Closure.NSTriadKNHHOneDerivativeThresholdOptimizerRound42Ex
 --
 -- is literally the Round-42 bounded thresholded HH-bad cost.  Thus once the
 -- physical good coefficient A and scale-free C_bad are known, the threshold
--- optimizer has no hidden coefficient left.
+-- optimizer has no hidden bad-side coefficient left.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
+open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ; 0ℚ; _*_; _≤_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (sym; trans)
 
+import DASHI.Physics.Closure.NSTriadKNLuoBadCoherenceWeightedMarkovExact as Threshold
 import DASHI.Physics.Closure.NSTriadKNHHBadSharpDyadicGainRound33Exact as Sharp
 import DASHI.Physics.Closure.NSTriadKNHHAnalyticThresholdOptimizerRound40Exact as Opt
 import DASHI.Physics.Closure.NSTriadKNHHSquaredThresholdRepresentationRound40Exact as Squared
@@ -62,7 +64,7 @@ oneDerivativeBadOptimizerConstantNonnegative Cbad CbadNN =
   Opt.mulNonnegative Opt.twoNonnegative CbadNN
 
 boundedBadCostIsOptimizerBadTax :
-  ∀ {effectiveViscosity density shell}
+  ∀ {effectiveViscosity density : ℚ} {shell : Nat}
     (representation : Squared.SquaredDirectionalThreshold)
     (certificate : Density.OneDerivativeInverseShellDensityCertificate
       effectiveViscosity density shell) →
@@ -75,12 +77,8 @@ boundedBadCostIsOptimizerBadTax :
 boundedBadCostIsOptimizerBadTax representation certificate =
   let
     Cbad = Density.scaleFreeConstant certificate
-    deltaInverse =
-      DASHI.Physics.Closure.NSTriadKNLuoBadCoherenceWeightedMarkovExact.thresholdInverse
-        (Squared.directionalParameter representation)
-    scaleInverse =
-      DASHI.Physics.Closure.NSTriadKNLuoBadCoherenceWeightedMarkovExact.thresholdInverse
-        (Squared.scale representation)
+    deltaInverse = Threshold.thresholdInverse
+      (Squared.directionalParameter representation)
 
     physicalBadMeaning :
       Squared.physicalBadTaxAtSquaredThreshold
@@ -99,13 +97,12 @@ boundedBadCostIsOptimizerBadTax representation certificate =
   trans boundedMeaning (sym physicalBadMeaning)
 
 record OneDerivativeBalancedHHThreshold
-    {effectiveViscosity density shell : _}
+    {effectiveViscosity density : ℚ} {shell : Nat}
     (A : ℚ)
     (certificate : Density.OneDerivativeInverseShellDensityCertificate
       effectiveViscosity density shell) : Set where
   field
-    selectedScale :
-      DASHI.Physics.Closure.NSTriadKNLuoBadCoherenceWeightedMarkovExact.PositiveThreshold
+    selectedScale : Threshold.PositiveThreshold
     A-nonnegative : 0ℚ ≤ A
     physicalCubicBalance :
       A
@@ -117,7 +114,7 @@ record OneDerivativeBalancedHHThreshold
 open OneDerivativeBalancedHHThreshold public
 
 asRound40BalancedThreshold :
-  ∀ {effectiveViscosity density shell A}
+  ∀ {effectiveViscosity density : ℚ} {shell : Nat} {A : ℚ}
     {certificate : Density.OneDerivativeInverseShellDensityCertificate
       effectiveViscosity density shell} →
   OneDerivativeBalancedHHThreshold A certificate →
@@ -135,12 +132,11 @@ asRound40BalancedThreshold {certificate = certificate} balance =
     (physicalCubicBalance balance)
 
 oneDerivativeBalancedThresholdIsGlobalMinimum :
-  ∀ {effectiveViscosity density shell A}
+  ∀ {effectiveViscosity density : ℚ} {shell : Nat} {A : ℚ}
     {certificate : Density.OneDerivativeInverseShellDensityCertificate
       effectiveViscosity density shell} →
   (balance : OneDerivativeBalancedHHThreshold A certificate) →
-  (candidate :
-    DASHI.Physics.Closure.NSTriadKNLuoBadCoherenceWeightedMarkovExact.PositiveThreshold) →
+  (candidate : Threshold.PositiveThreshold) →
   Opt.combinedHHTax
       A
       (oneDerivativeBadOptimizerConstant
