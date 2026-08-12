@@ -90,10 +90,59 @@ targetPrimeProduct : 47 * 59 * 71 ≡ 196883
 targetPrimeProduct = refl
 
 ------------------------------------------------------------------------
+-- Universal valuation/support-coordinate form.
+--
+-- Instead of tying the theorem to one integer multiplication order, represent
+-- a squarefree three-lane support directly.  The three lane replacements are
+-- then definitionally a transport from arbitrary denominator coordinates to
+-- the fixed target coordinates (47,59,71).  Any concrete family of source
+-- triples satisfying the disjoint-support/FRACTRAN applicability conditions is
+-- an instance of this stronger coordinate theorem.
+------------------------------------------------------------------------
+
+record PrimeSupport3 : Set where
+  constructor support3
+  field
+    lane0 lane1 lane2 : Nat
+
+open PrimeSupport3 public
+
+replaceLane0 : Nat → PrimeSupport3 → PrimeSupport3
+replaceLane0 numerator (support3 d0 d1 d2) = support3 numerator d1 d2
+
+replaceLane1 : Nat → PrimeSupport3 → PrimeSupport3
+replaceLane1 numerator (support3 d0 d1 d2) = support3 d0 numerator d2
+
+replaceLane2 : Nat → PrimeSupport3 → PrimeSupport3
+replaceLane2 numerator (support3 d0 d1 d2) = support3 d0 d1 numerator
+
+threeLaneTransport : Nat → Nat → Nat → PrimeSupport3 → PrimeSupport3
+threeLaneTransport n0 n1 n2 state =
+  replaceLane2 n2 (replaceLane1 n1 (replaceLane0 n0 state))
+
+threeLaneTransportForgetsSourceCoordinates :
+  (d0 d1 d2 n0 n1 n2 : Nat) →
+  threeLaneTransport n0 n1 n2 (support3 d0 d1 d2)
+  ≡ support3 n0 n1 n2
+threeLaneTransportForgetsSourceCoordinates d0 d1 d2 n0 n1 n2 = refl
+
+allThreeLaneSourcesEarnTargetSupport :
+  (d0 d1 d2 : Nat) →
+  threeLaneTransport 47 59 71 (support3 d0 d1 d2)
+  ≡ support3 47 59 71
+allThreeLaneSourcesEarnTargetSupport d0 d1 d2 = refl
+
+taxiSupportTransport :
+  threeLaneTransport 47 59 71 (support3 7 13 19)
+  ≡ support3 47 59 71
+taxiSupportTransport = refl
+
+------------------------------------------------------------------------
 -- Exact combinatorial cardinality behind C(12,3)=220.
--- This proves the count independently of any particular list of twelve
--- denominators.  A concrete imported enumeration can reuse this cardinality
--- theorem without guessing its twelve-element source set here.
+-- Together with allThreeLaneSourcesEarnTargetSupport, this means any concrete
+-- twelve-element family whose selected triples are admitted as three-lane
+-- source supports inherits the same fixed target support.  The file does not
+-- guess which twelve denominators an external Lean enumeration used.
 ------------------------------------------------------------------------
 
 choose : Nat → Nat → Nat
