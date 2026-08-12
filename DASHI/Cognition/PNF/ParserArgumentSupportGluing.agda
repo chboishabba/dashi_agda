@@ -1,11 +1,13 @@
 module DASHI.Cognition.PNF.ParserArgumentSupportGluing where
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Bool using (Bool; true)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; suc)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 open import DASHI.Cognition.PNF.NumericAuthority
+import DASHI.Core.StructuralSupportEdge as SupportCore
 import DASHI.Core.TypedDependencyCore as Dependency
 import DASHI.Foundations.StratifiedResolutionTowerExact as Resolution
 import DASHI.Physics.Closure.NSTriadKNIndexedGluingRound32Exact as Gluing
@@ -13,12 +15,6 @@ import DASHI.Cognition.PNF.ProofRelevantIdentityFibres as Identity
 
 ------------------------------------------------------------------------
 -- Parser/name representation -> argument-bearing PNF object.
---
--- The repo already has generic IndexedGluing: an external presentation may be
--- transported to the literal internal carrier only with an exact seam witness.
--- Here the external presentation is a numeric parser occurrence/object and the
--- internal carrier is an argument-bearing PNF ObjectId.  This is representation
--- support, not entity identity.
 ------------------------------------------------------------------------
 
 record ParserRepresentation : Set where
@@ -56,7 +52,7 @@ open ParserArgumentSupportRelation public
 
 ParserArgumentSupportWitness : ParserArgumentProjection → Set
 ParserArgumentSupportWitness projection =
-  Dependency.DependencyWitness
+  SupportCore.StructuralSupportEdge
     (ParserArgumentSupportRelation projection)
 
 supportWitnessFromGluing :
@@ -65,26 +61,17 @@ supportWitnessFromGluing :
   String → String →
   ParserArgumentSupportWitness projection
 supportWitnessFromGluing projection gluing provenance scope =
-  Dependency.dependencyWitness
+  SupportCore.structuralSupportEdgeAt
+    Dependency.relationalLayer
+    Dependency.requiredDependency
     (Gluing.externalBase gluing)
     (Gluing.internalBase gluing)
     (parserArgumentSupportRelation (Gluing.glueExact gluing))
-    Dependency.relationalLayer
-    Dependency.requiredDependency
     provenance
     scope
 
 ------------------------------------------------------------------------
 -- Resolution naturality.
---
--- The parser and argument carriers may have different resolution towers.  A
--- valid multiscale support map must commute with both projection systems:
---
---   S_r (project_P x) = project_A (S_(r+1) x).
---
--- This is the exact form of the coarse/fine support condition discussed in the
--- ITIR sampling notes.  If an application cannot construct this witness, it has
--- not established lossless/natural support transport at that resolution.
 ------------------------------------------------------------------------
 
 record ParserArgumentResolutionNaturality
@@ -118,7 +105,7 @@ supportAloneCannotCreateIdentity ()
 ------------------------------------------------------------------------
 -- If identity is to be transported across a representation seam, both ends
 -- must already carry admitted identity proofs landing on the same canonical
--- entity.  The structural support witness can explain why the representations
+-- entity. The structural support witness can explain why the representations
 -- should be compared; it does not manufacture either proof.
 ------------------------------------------------------------------------
 
@@ -158,6 +145,9 @@ record ParserArgumentSupportBoundary : Set where
       (projection : ParserArgumentProjection) → Set
     multiscaleSupportRequiresNaturalityWitness :
       (parserTower argumentTower : Resolution.ResolutionTower) → Set
+    canonicalStructuralSupportCoreReused : Bool
+    canonicalStructuralSupportCoreReusedIsTrue :
+      canonicalStructuralSupportCoreReused ≡ true
 
 open ParserArgumentSupportBoundary public
 
@@ -168,3 +158,4 @@ canonicalParserArgumentSupportBoundary =
     ParserArgumentGluing
     SupportAlignedIdentity
     ParserArgumentResolutionNaturality
+    true refl
