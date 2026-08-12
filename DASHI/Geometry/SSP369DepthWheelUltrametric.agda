@@ -4,7 +4,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; suc)
 open import Data.Nat using (_∸_)
 open import Data.Vec using (Vec; []; _∷_)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong)
 
 import DASHI.Foundations.SSPPrimeLane369Refinement as Ref
 import DASHI.Foundations.SSPPrimeLaneUnitAction as Action
@@ -155,15 +155,9 @@ p7RefinementAddressWheelIsometry :
     (Wheel.p7AddressWheel left)
     (Wheel.p7AddressWheel right)
   ≡ refinementAddressDistance left right
-p7RefinementAddressWheelIsometry left right =
-  trans
-    (cong
-      (λ pair → U369.distance
-        (Data.Product.proj₁ pair)
-        (Data.Product.proj₂ pair))
-      (Data.Product.,-cong
-        (refAddressWheelCommutesWithAdapter left)
-        (refAddressWheelCommutesWithAdapter right)))
-    (distanceWheelInvariant
-      (refAddressToMetricAddress left)
-      (refAddressToMetricAddress right))
+p7RefinementAddressWheelIsometry left right
+  rewrite refAddressWheelCommutesWithAdapter left
+        | refAddressWheelCommutesWithAdapter right =
+  distanceWheelInvariant
+    (refAddressToMetricAddress left)
+    (refAddressToMetricAddress right)
