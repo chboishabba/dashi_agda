@@ -2,18 +2,6 @@ module DASHI.Crypto.BlueTeamAdversaryClosureRound16 where
 
 ------------------------------------------------------------------------
 -- ROUND 16: BLUE-TEAM ADVERSARY / OBSERVATION / FIBRE / SEARCH / GAME CLOSURE
---
--- The cumulative crypto lane now has one explicit path:
---
--- candidate test
---   -> observation refinement
---   -> finite candidate cardinality
---   -> local/reconciliation search accounting
---   -> protected-label recovery boundary
---   -> finite distinguishing-game boundary.
---
--- This is defensive cryptanalytic infrastructure. It does not assert a break
--- of ML-KEM or any other standardized primitive.
 ------------------------------------------------------------------------
 
 import DASHI.Crypto.BlueTeamAdversaryObservationExact
@@ -30,6 +18,7 @@ import DASHI.Crypto.AlgorithmRelativeRecoveryCostExact
 import DASHI.Crypto.FiniteMLWEVectorLabExact
 import DASHI.Crypto.FiniteMLWEGameRegressionExact
 import DASHI.Crypto.FiniteMLWEPriorScoreSearchRegressionExact
+import DASHI.Crypto.InvertibleTransformPriorCouplingRegressionExact
 import DASHI.Crypto.MLKEMFIPS203SourceExact
 import DASHI.Crypto.MLKEMFIPS203SearchGeometryExact
 import DASHI.Crypto.MLKEMNTTLocalPriorCouplingExact
@@ -62,8 +51,7 @@ record Round16ClaimBoundary : Set where
     round16ClaimsMLKEMBroken : Bool
     round16ClaimsMLKEMBrokenIsFalse : round16ClaimsMLKEMBroken ≡ false
     observationSplitRequiresWitness : Bool
-    observationSplitRequiresWitnessIsTrue :
-      observationSplitRequiresWitness ≡ true
+    observationSplitRequiresWitnessIsTrue : observationSplitRequiresWitness ≡ true
     protectedLabelRecoveryIsSufficientBreakWitness : Bool
     protectedLabelRecoveryIsSufficientBreakWitnessIsTrue :
       protectedLabelRecoveryIsSufficientBreakWitness ≡ true
