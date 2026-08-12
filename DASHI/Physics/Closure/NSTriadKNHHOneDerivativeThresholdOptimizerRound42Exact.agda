@@ -100,8 +100,7 @@ balanceRightIsFourCbad :
   ∀ Cbad →
   Opt.two * oneDerivativeBadOptimizerConstant Cbad
   ≡ Sharp.two * (Sharp.two * Cbad)
-balanceRightIsFourCbad Cbad =
-  solve (Opt.two ∷ Sharp.two ∷ Cbad ∷ [])
+balanceRightIsFourCbad Cbad = refl
 
 record OneDerivativeBalancedHHThreshold
     {effectiveViscosity density : ℚ} {shell : Nat}
