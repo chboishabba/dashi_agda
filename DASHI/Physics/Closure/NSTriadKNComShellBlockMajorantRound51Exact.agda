@@ -28,12 +28,20 @@ module DASHI.Physics.Closure.NSTriadKNComShellBlockMajorantRound51Exact where
 -- shell-block operator norm, not merely one Fourier incidence.  Once that
 -- identification is supplied, the same d=0 and d=1 constants transfer to the
 -- block norm without a hidden counting factor.
+--
+-- A second record quantifies the fallback if only
+--
+--   blockNorm <= multiplicity * pairProduct
+--
+-- is available.  Then every active constant inherits that same multiplicity.
+-- Thus any hidden mode-counting loss is visible before 133/256 is used as a
+-- literal L2 coefficient.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; suc)
-open import Data.Rational.Base using (ℚ; 0ℚ; _≤_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚP
 
 import DASHI.Physics.Closure.NSTriadKNComSameAdjacentActiveRound47Exact as Active
@@ -88,6 +96,89 @@ shellBlockReverseAdjacentBound majorant bounds q active =
   ℚP.≤-trans
     (physicalPairProductMajorizesWholeShellBlock majorant (suc q) q)
     (Active.physicalComReverseAdjacentShellActiveBound bounds q active)
+
+record PhysicalShellBlockMultiplicityMajorant
+    (skeleton : Active.PhysicalOddPQSupportSkeleton) : Set where
+  field
+    shellBlockNorm : Nat → Nat → ℚ
+    shellBlockNormNonnegative : ∀ q r → 0ℚ ≤ shellBlockNorm q r
+    multiplicity : ℚ
+    multiplicityNonnegative : 0ℚ ≤ multiplicity
+
+    blockBelowMultiplicityTimesPair : ∀ q r →
+      shellBlockNorm q r
+      ≤ multiplicity * Active.physicalPairProduct skeleton q r
+
+open PhysicalShellBlockMultiplicityMajorant public
+
+multiplicitySameShellBound :
+  ∀ {skeleton identification}
+    (majorant : PhysicalShellBlockMultiplicityMajorant skeleton)
+    (bounds : Active.SameAdjacentPhysicalComBounds skeleton identification)
+    q →
+  Active.supportActive skeleton q q ≡ true →
+  shellBlockNorm majorant q q
+  ≤ multiplicity majorant * Active.sameShellTarget
+multiplicitySameShellBound majorant bounds q active =
+  let
+    scaledPair :
+      multiplicity majorant * Active.physicalPairProduct skeleton q q
+      ≤ multiplicity majorant * Active.sameShellTarget
+    scaledPair =
+      let instance multiplicityNNI = nonNegative (multiplicityNonnegative majorant)
+      in ℚP.*-monoˡ-≤-nonNeg
+        (multiplicity majorant)
+        (Active.physicalComSameShellActiveBound bounds q active)
+  in
+  ℚP.≤-trans
+    (blockBelowMultiplicityTimesPair majorant q q)
+    scaledPair
+
+multiplicityForwardAdjacentBound :
+  ∀ {skeleton identification}
+    (majorant : PhysicalShellBlockMultiplicityMajorant skeleton)
+    (bounds : Active.SameAdjacentPhysicalComBounds skeleton identification)
+    q →
+  Active.supportActive skeleton q (suc q) ≡ true →
+  shellBlockNorm majorant q (suc q)
+  ≤ multiplicity majorant * Active.adjacentShellTarget
+multiplicityForwardAdjacentBound majorant bounds q active =
+  let
+    scaledPair :
+      multiplicity majorant * Active.physicalPairProduct skeleton q (suc q)
+      ≤ multiplicity majorant * Active.adjacentShellTarget
+    scaledPair =
+      let instance multiplicityNNI = nonNegative (multiplicityNonnegative majorant)
+      in ℚP.*-monoˡ-≤-nonNeg
+        (multiplicity majorant)
+        (Active.physicalComAdjacentShellActiveBound bounds q active)
+  in
+  ℚP.≤-trans
+    (blockBelowMultiplicityTimesPair majorant q (suc q))
+    scaledPair
+
+multiplicityReverseAdjacentBound :
+  ∀ {skeleton identification}
+    (majorant : PhysicalShellBlockMultiplicityMajorant skeleton)
+    (bounds : Active.SameAdjacentPhysicalComBounds skeleton identification)
+    q →
+  Active.supportActive skeleton (suc q) q ≡ true →
+  shellBlockNorm majorant (suc q) q
+  ≤ multiplicity majorant * Active.adjacentShellTarget
+multiplicityReverseAdjacentBound majorant bounds q active =
+  let
+    scaledPair :
+      multiplicity majorant * Active.physicalPairProduct skeleton (suc q) q
+      ≤ multiplicity majorant * Active.adjacentShellTarget
+    scaledPair =
+      let instance multiplicityNNI = nonNegative (multiplicityNonnegative majorant)
+      in ℚP.*-monoˡ-≤-nonNeg
+        (multiplicity majorant)
+        (Active.physicalComReverseAdjacentShellActiveBound bounds q active)
+  in
+  ℚP.≤-trans
+    (blockBelowMultiplicityTimesPair majorant (suc q) q)
+    scaledPair
 
 record PerIncidenceOnlyMajorant
     (skeleton : Active.PhysicalOddPQSupportSkeleton) : Set where
