@@ -12,7 +12,10 @@ module DASHI.Physics.Closure.NSTriadKNHighestAlphaRound46Exact where
 -- * an explicit distinction between threshold-indexed and threshold-uniform
 --   HH-bad profile ceilings;
 -- * literal Com off-support annihilation by empty physical triad incidence;
--- * finite active shell-distance reduction once exact support width is known;
+-- * exact width one for the repository's concrete dyadic-hat support, leaving
+--   only the same-object odd-P/Q identification before that width is physical;
+-- * finite active shell-distance reduction once exact physical support width
+--   is known;
 -- * proof-relevant zero / Young-soft / hard tax classification;
 -- * the conditional three-soft theorem reducing the finite viscosity gate to
 --   HH-bad plus the fixed Bony 1/16 floor if Com and kernel are later proved
@@ -31,6 +34,7 @@ import DASHI.Physics.Closure.NSTriadKNHHBadVariableProfileRecurrenceRound46Exact
 import DASHI.Physics.Closure.NSTriadKNHHBadDefectRecurrenceNormalizationRound46Exact
 import DASHI.Physics.Closure.NSTriadKNHHBadThresholdUniformityRound46Exact
 import DASHI.Physics.Closure.NSTriadKNComIncidenceOffSupportRound46Exact
+import DASHI.Physics.Closure.NSTriadKNComDyadicHatWidthOneRound46Exact
 import DASHI.Physics.Closure.NSTriadKNComFiniteActiveDistanceRound46Exact
 import DASHI.Physics.Closure.NSTriadKNTaxKindClassificationRound46Exact
 import DASHI.Physics.Closure.NSTriadKNThreeSoftOwnerHardFloorRound46Exact
