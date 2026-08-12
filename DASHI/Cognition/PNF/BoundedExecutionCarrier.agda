@@ -8,6 +8,7 @@ open import Data.List.Base using (List; length)
 open import DASHI.Cognition.PNF.ComplexityArithmetic
 import DASHI.Cognition.PNF.BoundedProperNameEvidenceExecution as ProperName
 import DASHI.Cognition.PNF.BoundedFactorCompositionExecution as Composition
+import DASHI.Core.ConsumerIndexedRelevanceMeasure as Relevance
 
 ------------------------------------------------------------------------
 -- Generic bounded-execution carrier.
@@ -56,6 +57,10 @@ executionOverflowHasNoSemanticPermission ()
 
 ------------------------------------------------------------------------
 -- Optional measure/mass receipt.
+--
+-- This legacy two-way receipt remains useful when the represented universe is
+-- closed for a particular calculation.  Consumer-indexed/open-world accounting
+-- is provided below without changing existing callers.
 ------------------------------------------------------------------------
 
 record SplitMeasureReceipt
@@ -116,6 +121,28 @@ record MeasuredReopenableExecutionPartition
     massReceipt : SplitMeasureReceipt Mass _⊕_
 
 open MeasuredReopenableExecutionPartition public
+
+------------------------------------------------------------------------
+-- Consumer-indexed/open-world mass accounting for bounded execution.
+--
+-- This is the runtime form of "active beam P + semantic residual Q + explicit
+-- outside-model ignorance".  The region interpretation is application-supplied
+-- so candidate sets, provenance distinctions, or task-relevance regions can all
+-- instantiate the same carrier without pretending they are probabilities.
+------------------------------------------------------------------------
+
+record ConsumerMeasuredReopenableExecutionPartition
+    (Candidate Consumer Region Mass : Set) : Set₁ where
+  constructor consumerMeasuredReopenableExecutionPartition
+  field
+    partition : ReopenableExecutionPartition Candidate
+    relevanceMeasure :
+      Relevance.ConsumerIndexedRelevanceMeasure Consumer Region Mass
+    consumer : Consumer
+    openWorldAccounting :
+      Relevance.OpenWorldMassAccounting relevanceMeasure consumer
+
+open ConsumerMeasuredReopenableExecutionPartition public
 
 data ResidualSemanticRejectionPermission : Set where
 
