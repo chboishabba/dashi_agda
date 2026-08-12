@@ -12,7 +12,7 @@ module DASHI.Crypto.BlueTeamAdversaryClosureRound16 where
 --   -> protected-label recovery boundary
 --   -> finite distinguishing-game boundary.
 --
--- This is defensive cryptanalytic infrastructure.  It does not assert a break
+-- This is defensive cryptanalytic infrastructure. It does not assert a break
 -- of ML-KEM or any other standardized primitive.
 ------------------------------------------------------------------------
 
@@ -23,10 +23,16 @@ import DASHI.Crypto.FiniteCandidateFibreCardinalityExact
 import DASHI.Crypto.TranscriptProtectedLabelExact
 import DASHI.Crypto.IndexedSearchCostExact
 import DASHI.Crypto.FiniteSecurityGameBoundaryExact
+import DASHI.Crypto.FiniteAdvantageAccountingExact
+import DASHI.Crypto.PriorScoreSearchFactorisationExact
+import DASHI.Crypto.PublicFactoredObservationTraceInvariantExact
+import DASHI.Crypto.AlgorithmRelativeRecoveryCostExact
 import DASHI.Crypto.FiniteMLWEVectorLabExact
 import DASHI.Crypto.FiniteMLWEGameRegressionExact
+import DASHI.Crypto.FiniteMLWEPriorScoreSearchRegressionExact
 import DASHI.Crypto.MLKEMFIPS203SourceExact
 import DASHI.Crypto.MLKEMFIPS203SearchGeometryExact
+import DASHI.Crypto.MLKEMNTTLocalPriorCouplingExact
 
 -- Existing theorem-bearing search/observation machinery reused rather than
 -- duplicated.
@@ -64,9 +70,16 @@ record Round16ClaimBoundary : Set where
     exactPublicFibreMustBeBroadForComputationalHardness : Bool
     exactPublicFibreMustBeBroadForComputationalHardnessIsFalse :
       exactPublicFibreMustBeBroadForComputationalHardness ≡ false
+    invertibleNTTAloneCollapsesSearch : Bool
+    invertibleNTTAloneCollapsesSearchIsFalse :
+      invertibleNTTAloneCollapsesSearch ≡ false
+    candidateShrinkAloneProvesCostReduction : Bool
+    candidateShrinkAloneProvesCostReductionIsFalse :
+      candidateShrinkAloneProvesCostReduction ≡ false
 
 open Round16ClaimBoundary public
 
 canonicalRound16ClaimBoundary : Round16ClaimBoundary
 canonicalRound16ClaimBoundary =
-  round16ClaimBoundary false refl false refl false refl true refl true refl false refl
+  round16ClaimBoundary
+    false refl false refl false refl true refl true refl false refl false refl false refl
