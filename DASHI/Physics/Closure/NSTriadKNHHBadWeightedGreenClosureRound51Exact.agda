@@ -38,10 +38,11 @@ module DASHI.Physics.Closure.NSTriadKNHHBadWeightedGreenClosureRound51Exact wher
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base using (ℚ; _<_)
+open import Data.Rational.Base using (ℚ; 1ℚ; _<_)
 
 import DASHI.Physics.Closure.NSTriadKNAdmissibleOwnerTaxLanguageRound28Exact as Owner
 import DASHI.Physics.Closure.NSTriadKNHardGateHierarchyRound47Exact as Gate
+import DASHI.Physics.Closure.NSTriadKNHHBadLiveBudgetTargetRound48Exact as Target
 import DASHI.Physics.Closure.NSTriadKNHHBadWeightedGreenForcingRound51Exact as Green
 import DASHI.Physics.Closure.NSTriadKNHHBadWeightedGreenToOwnerRound51Exact as GreenOwner
 import DASHI.Physics.Closure.NSTriadKNHHBadWeightedGreenLiveGateRound51Exact as Live
@@ -57,8 +58,7 @@ record PhysicalWeightedGreenHHBadClosureInput
     ceilingBelowLiveTarget :
       GreenOwner.weightedGreenCeiling
         (GreenOwner.weightedBound physicalOwnerInput)
-      < DASHI.Physics.Closure.NSTriadKNHHBadLiveBudgetTargetRound48Exact.allowableHHBadCeiling
-          comFloor kernelFloor
+      < Target.allowableHHBadCeiling comFloor kernelFloor
 
 open PhysicalWeightedGreenHHBadClosureInput public
 
@@ -80,10 +80,11 @@ physicalWeightedGreenHHBadGateStrict :
       (GreenOwner.weightedBound (physicalOwnerInput input)))
     (comFloor input)
     (kernelFloor input)
-  < Data.Rational.Base.1ℚ
-physicalWeightedGreenHHBadGateStrict input =
+  < 1ℚ
+physicalWeightedGreenHHBadGateStrict
+    {recurrenceInput = recurrence} input =
   Live.weightedGreenImpliesH2Strict record
-    { recurrenceInput = _
+    { recurrenceInput = recurrence
     ; weightedBound = GreenOwner.weightedBound (physicalOwnerInput input)
     ; comFloor = comFloor input
     ; kernelFloor = kernelFloor input
