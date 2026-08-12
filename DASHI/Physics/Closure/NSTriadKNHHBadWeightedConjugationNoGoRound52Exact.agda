@@ -32,10 +32,13 @@ module DASHI.Physics.Closure.NSTriadKNHHBadWeightedConjugationNoGoRound52Exact w
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using ([]; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Rational.Base using
   (ℚ; 0ℚ; _*_; _≤_; _<_; nonNegative)
 import Data.Rational.Properties as ℚP
+open import Data.Rational.Tactic.RingSolver using (solve)
+open import Relation.Binary.PropositionalEquality using (subst)
 
 rationalPower : ℚ → Nat → ℚ
 rationalPower rho zero = Data.Rational.Base.1ℚ
@@ -57,7 +60,10 @@ weightBelowGeometricEnvelope :
   weight candidate n
   ≤ rationalPower (rho candidate) n * weight candidate zero
 weightBelowGeometricEnvelope candidate zero =
-  ℚP.≤-refl
+  subst
+    (weight candidate zero ≤_)
+    (solve (weight candidate zero ∷ []))
+    ℚP.≤-refl
 weightBelowGeometricEnvelope candidate (suc n) =
   let
     inherited :
@@ -69,10 +75,22 @@ weightBelowGeometricEnvelope candidate (suc n) =
       in ℚP.*-monoˡ-≤-nonNeg
         (rho candidate)
         (weightBelowGeometricEnvelope candidate n)
+
+    chained :
+      weight candidate (suc n)
+      ≤ rho candidate
+        * (rationalPower (rho candidate) n * weight candidate zero)
+    chained =
+      ℚP.≤-trans (weightRatioBound candidate n) inherited
   in
-  ℚP.≤-trans
-    (weightRatioBound candidate n)
-    inherited
+  subst
+    (weight candidate (suc n) ≤_)
+    (solve
+      ( rho candidate
+      ∷ rationalPower (rho candidate) n
+      ∷ weight candidate zero
+      ∷ []))
+    chained
 
 record UnweightedControlPreservingWeight
     (candidate : ConjugatingWeight) : Set where
