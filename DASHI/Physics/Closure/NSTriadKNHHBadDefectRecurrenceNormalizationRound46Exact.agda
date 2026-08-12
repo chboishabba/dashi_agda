@@ -41,10 +41,11 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Agda.Builtin.Nat using (Nat; suc)
 open import Data.Rational.Base using
-  (ℚ; 0ℚ; _+_; _*_; _≤_; nonNegative)
+  (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using
+  (subst; sym; trans; cong; cong₂)
 
 import DASHI.Physics.Closure.NSTriadKNLuoBadCoherenceWeightedMarkovExact as Threshold
 import DASHI.Physics.Closure.NSTriadKNHHBadSharpDyadicGainRound33Exact as Sharp
@@ -104,9 +105,9 @@ normalizedFirstTermIdentity :
   normalizationFactor recurrence (suc q)
     * (alpha recurrence * Sharp.half * defectRate recurrence q)
   ≡ alpha recurrence * normalizedDefectProfile recurrence q
-normalizedFirstTermIdentity recurrence q =
+normalizedFirstTermIdentity {parameter} recurrence q =
   solve
-    ( Threshold.thresholdInverse _
+    ( Threshold.thresholdInverse parameter
     ∷ Sharp.dyadicScale q
     ∷ alpha recurrence
     ∷ defectRate recurrence q
@@ -120,10 +121,38 @@ normalizedForcingIdentity :
       * Sharp.inverseDyadicScale (suc q)
       * beta recurrence)
   ≡ beta recurrence
-normalizedForcingIdentity {parameter} recurrence q
-  rewrite Threshold.inverseMeaning parameter
-        | Sharp.inverseDyadicReciprocal (suc q) =
-  solve (beta recurrence ∷ [])
+normalizedForcingIdentity {parameter} recurrence q =
+  let
+    inverse = Threshold.thresholdInverse parameter
+    threshold = Threshold.threshold parameter
+    dyadic = Sharp.dyadicScale (suc q)
+    inverseDyadic = Sharp.inverseDyadicScale (suc q)
+    forcing = beta recurrence
+
+    regroup :
+      (inverse * dyadic)
+        * (threshold * inverseDyadic * forcing)
+      ≡ (inverse * threshold) * (inverseDyadic * dyadic) * forcing
+    regroup = solve (inverse ∷ threshold ∷ dyadic ∷ inverseDyadic ∷ forcing ∷ [])
+
+    cancelThreshold :
+      (inverse * threshold) * (inverseDyadic * dyadic) * forcing
+      ≡ 1ℚ * (inverseDyadic * dyadic) * forcing
+    cancelThreshold =
+      cong (λ product → product * (inverseDyadic * dyadic) * forcing)
+        (Threshold.inverseMeaning parameter)
+
+    cancelDyadic :
+      1ℚ * (inverseDyadic * dyadic) * forcing
+      ≡ 1ℚ * 1ℚ * forcing
+    cancelDyadic =
+      cong (λ product → 1ℚ * product * forcing)
+        (Sharp.inverseDyadicReciprocal (suc q))
+
+    finish : 1ℚ * 1ℚ * forcing ≡ forcing
+    finish = solve (forcing ∷ [])
+  in
+  trans regroup (trans cancelThreshold (trans cancelDyadic finish))
 
 normalizedDefectRecurrence :
   ∀ {parameter}
@@ -131,7 +160,7 @@ normalizedDefectRecurrence :
   normalizedDefectProfile recurrence (suc q)
   ≤ alpha recurrence * normalizedDefectProfile recurrence q
     + beta recurrence
-normalizedDefectRecurrence recurrence q =
+normalizedDefectRecurrence {parameter} recurrence q =
   let
     factor = normalizationFactor recurrence (suc q)
     factorNN = normalizationFactorNonnegative recurrence (suc q)
@@ -140,27 +169,32 @@ normalizedDefectRecurrence recurrence q =
       factor * defectRate recurrence (suc q)
       ≤ factor
         * (alpha recurrence * Sharp.half * defectRate recurrence q
-          + Threshold.threshold _
+          + Threshold.threshold parameter
             * Sharp.inverseDyadicScale (suc q) * beta recurrence)
     scaled =
       let instance factorNNI = nonNegative factorNN
       in ℚP.*-monoˡ-≤-nonNeg factor
         (oneShellDefectTransfer recurrence q)
 
+    leftMeaning :
+      factor * defectRate recurrence (suc q)
+      ≡ normalizedDefectProfile recurrence (suc q)
+    leftMeaning = refl
+
     distribute :
       factor
         * (alpha recurrence * Sharp.half * defectRate recurrence q
-          + Threshold.threshold _
+          + Threshold.threshold parameter
             * Sharp.inverseDyadicScale (suc q) * beta recurrence)
       ≡
       factor * (alpha recurrence * Sharp.half * defectRate recurrence q)
-      + factor * (Threshold.threshold _
+      + factor * (Threshold.threshold parameter
         * Sharp.inverseDyadicScale (suc q) * beta recurrence)
     distribute = solve
       ( factor
       ∷ alpha recurrence
       ∷ defectRate recurrence q
-      ∷ Threshold.threshold _
+      ∷ Threshold.threshold parameter
       ∷ Sharp.inverseDyadicScale (suc q)
       ∷ beta recurrence
       ∷ [])
@@ -168,25 +202,25 @@ normalizedDefectRecurrence recurrence q =
     rhsIdentity :
       factor
         * (alpha recurrence * Sharp.half * defectRate recurrence q
-          + Threshold.threshold _
+          + Threshold.threshold parameter
             * Sharp.inverseDyadicScale (suc q) * beta recurrence)
       ≡ alpha recurrence * normalizedDefectProfile recurrence q
         + beta recurrence
     rhsIdentity =
       trans distribute
-        (trans
-          (cong₂ _+_
-            (normalizedFirstTermIdentity recurrence q)
-            (normalizedForcingIdentity recurrence q))
-          refl)
+        (cong₂ _+_
+          (normalizedFirstTermIdentity recurrence q)
+          (normalizedForcingIdentity recurrence q))
   in
   subst
-    (λ right →
-      normalizedDefectProfile recurrence (suc q) ≤ right)
-    rhsIdentity
-    scaled
-  where
-  open import Relation.Binary.PropositionalEquality using (cong₂)
+    (λ left → left
+      ≤ alpha recurrence * normalizedDefectProfile recurrence q
+        + beta recurrence)
+    leftMeaning
+    (subst
+      (λ right → factor * defectRate recurrence (suc q) ≤ right)
+      rhsIdentity
+      scaled)
 
 hhBadDefectRecurrenceNormalizationClosed : Bool
 hhBadDefectRecurrenceNormalizationClosed = true
