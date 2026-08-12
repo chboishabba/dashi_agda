@@ -16,7 +16,11 @@ module DASHI.Physics.Closure.NSTriadKNHighestAlphaRound46Exact where
 -- * proof-relevant zero / Young-soft / hard tax classification;
 -- * the conditional three-soft theorem reducing the finite viscosity gate to
 --   HH-bad plus the fixed Bony 1/16 floor if Com and kernel are later proved
---   Young-soft from their physical pre-absorption estimates.
+--   Young-soft from their physical pre-absorption estimates;
+-- * the corresponding exact conditional milestone C_* < 15/32;
+-- * an explicit continuation-spine audit showing critical coefficients do not
+--   enter the residual-viscosity gate, while preserving the downstream
+--   majorant seam where their magnitude may still matter.
 --
 -- No unresolved physical producer is promoted here.
 ------------------------------------------------------------------------
@@ -30,3 +34,5 @@ import DASHI.Physics.Closure.NSTriadKNComIncidenceOffSupportRound46Exact
 import DASHI.Physics.Closure.NSTriadKNComFiniteActiveDistanceRound46Exact
 import DASHI.Physics.Closure.NSTriadKNTaxKindClassificationRound46Exact
 import DASHI.Physics.Closure.NSTriadKNThreeSoftOwnerHardFloorRound46Exact
+import DASHI.Physics.Closure.NSTriadKNConditionalHHBadFifteenThirtySecondsGateRound46Exact
+import DASHI.Physics.Closure.NSTriadKNHHGoodFiniteCoefficientContinuationAuditRound46Exact
