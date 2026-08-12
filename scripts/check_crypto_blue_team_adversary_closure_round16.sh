@@ -59,6 +59,7 @@ grep -q 'scoreFactorisationImpliesCheapSearchIsFalse' DASHI/Crypto/PriorScoreSea
 grep -q 'samePublicSameTrace' DASHI/Crypto/PublicFactoredObservationTraceInvariantExact.agda
 grep -q 'samePublicSameAdaptiveTwoRoundTranscript' DASHI/Crypto/PublicFactoredObservationTraceInvariantExact.agda
 grep -q 'candidateShrinkButCostRises' DASHI/Crypto/AlgorithmRelativeRecoveryCostExact.agda
+grep -q 'beneficialCostDrop' DASHI/Crypto/AlgorithmRelativeRecoveryCostExact.agda
 grep -q 'algorithmRelativeInformationGain' DASHI/Crypto/AlgorithmRelativeRecoveryCostExact.agda
 grep -q 'decodeEncode' DASHI/Crypto/InvertibleTransformPriorCouplingRegressionExact.agda
 grep -q 'encodeDecode' DASHI/Crypto/InvertibleTransformPriorCouplingRegressionExact.agda
@@ -83,6 +84,8 @@ grep -q 'matrixCouplingMustBeReconciledIsTrue' DASHI/Crypto/MLKEMFIPS203SearchGe
 grep -q 'nttQuadraticCoordinateCount' DASHI/Crypto/MLKEMNTTLocalPriorCouplingExact.agda
 grep -q 'crossedLocalsFailReconciliation' DASHI/Crypto/MLKEMNTTLocalPriorCouplingExact.agda
 grep -q 'localAlgebraAloneCollapsesSearchIsFalse' DASHI/Crypto/MLKEMNTTLocalPriorCouplingExact.agda
+grep -q 'invertibleNTTAloneCollapsesSearchIsFalse' DASHI/Crypto/BlueTeamAdversaryClosureRound16.agda
+grep -q 'candidateShrinkAloneProvesCostReductionIsFalse' DASHI/Crypto/BlueTeamAdversaryClosureRound16.agda
 
 if command -v agda >/dev/null 2>&1; then
   agda -i . -i src DASHI/Crypto/BlueTeamAdversaryClosureRound16.agda
