@@ -16,12 +16,9 @@ module DASHI.Physics.Closure.NSTriadKNHHBadUniformRecurrenceFamilyRound47Exact w
 --
 -- DASHI CONTRIBUTION
 --
--- This is the exact Round-47 criterion for a genuine threshold-independent
--- normalized HH-bad ceiling.  A single set of physical recurrence data
---
---   M, alpha, beta
---
--- shared by every admissible threshold is sufficient if
+-- Exact criterion for a genuinely threshold-independent normalized HH-bad
+-- ceiling.  A single set of recurrence data M, alpha, beta shared by every
+-- threshold is sufficient if
 --
 --   B_0(delta) <= delta M,
 --   B_(q+1)(delta) <= (alpha/2) B_q(delta)
@@ -29,23 +26,18 @@ module DASHI.Physics.Closure.NSTriadKNHHBadUniformRecurrenceFamilyRound47Exact w
 --   alpha < 1,
 --   beta <= (1-alpha) M.
 --
--- The theorem then derives
---
---   delta^(-1) 2^q B_q(delta) <= M
---
--- for every threshold and shell.  This isolates the three genuinely physical
--- failure points: base shell, contraction, or forcing.
+-- Then delta^(-1) 2^q B_q(delta) <= M for every threshold and shell.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
-open import Agda.Builtin.Nat using (Nat; zero)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Rational.Base using
-  (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_; _<_; nonNegative)
+  (ℚ; 0ℚ; 1ℚ; _-_; _*_; _≤_; _<_; nonNegative)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Binary.PropositionalEquality using (subst; cong; trans)
 
 import DASHI.Physics.Closure.NSTriadKNLuoBadCoherenceWeightedMarkovExact as Threshold
 import DASHI.Physics.Closure.NSTriadKNHHBadSharpDyadicGainRound33Exact as Sharp
@@ -69,10 +61,10 @@ record ThresholdUniformDefectRecurrenceFamily : Set where
       ≤ Threshold.threshold parameter * ceiling
 
     oneShellTransfer : ∀ parameter q →
-      defectRate parameter (Agda.Builtin.Nat.suc q)
+      defectRate parameter (suc q)
       ≤ alpha * Sharp.half * defectRate parameter q
         + Threshold.threshold parameter
-          * Sharp.inverseDyadicScale (Agda.Builtin.Nat.suc q) * beta
+          * Sharp.inverseDyadicScale (suc q) * beta
 
     forcingFitsCeiling : beta ≤ (1ℚ - alpha) * ceiling
 
@@ -106,18 +98,26 @@ normalizedBaseBelowCeiling family parameter =
 
     scaled : inverse * base ≤ inverse * (delta * M)
     scaled =
-      let instance inverseNNI = nonNegative (Threshold.thresholdInverseNonnegative parameter)
-      in ℚP.*-monoˡ-≤-nonNeg inverse (baseLinearInThreshold family parameter)
+      let instance inverseNNI =
+        nonNegative (Threshold.thresholdInverseNonnegative parameter)
+      in ℚP.*-monoˡ-≤-nonNeg inverse
+        (baseLinearInThreshold family parameter)
+
+    rightRegroup : inverse * (delta * M) ≡ (inverse * delta) * M
+    rightRegroup = solve (inverse ∷ delta ∷ M ∷ [])
+
+    rightMeaning : inverse * (delta * M) ≡ M
+    rightMeaning =
+      trans rightRegroup
+        (trans
+          (cong (_* M) (Threshold.inverseMeaning parameter))
+          (solve (M ∷ [])))
 
     leftMeaning :
       inverse * base
       ≡ Defect.normalizedDefectProfile
           (recurrenceAtThreshold family parameter) zero
     leftMeaning = solve (inverse ∷ base ∷ [])
-
-    rightMeaning : inverse * (delta * M) ≡ M
-    rightMeaning rewrite Threshold.inverseMeaning parameter =
-      solve (M ∷ [])
   in
   subst
     (λ left → left ≤ M)
