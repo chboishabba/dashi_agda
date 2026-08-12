@@ -3,6 +3,7 @@ module DASHI.Cognition.PNF.EvidenceDepthWheelOrthogonality where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
+import DASHI.Core.RelationalHorizon369 as Horizon
 import DASHI.Cognition.PNF.EvidenceHorizon369 as Evidence
 import DASHI.Physics.Closure.SSPPrimeLane369DepthWheelCantorBridge as Wheel
 import DASHI.Reasoning.AttractorAlignedBranchSelection as Selection
@@ -11,18 +12,15 @@ import DASHI.Reasoning.AttractorAlignedBranchSelection as Selection
 -- Relational horizon and refinement-wheel phase are independent coordinates.
 ------------------------------------------------------------------------
 
-data RelationalHorizon : Set where
-  horizon3 horizon6 horizon9 : RelationalHorizon
-
-nextRelationalHorizon : RelationalHorizon → RelationalHorizon
-nextRelationalHorizon horizon3 = horizon6
-nextRelationalHorizon horizon6 = horizon9
-nextRelationalHorizon horizon9 = horizon9
+nextRelationalHorizon : Horizon.HorizonLevel → Horizon.HorizonLevel
+nextRelationalHorizon Horizon.H3 = Horizon.H6
+nextRelationalHorizon Horizon.H6 = Horizon.H9
+nextRelationalHorizon Horizon.H9 = Horizon.H9
 
 record HorizonDepthCoordinate : Set where
   constructor horizonDepthCoordinate
   field
-    relationalHorizon : RelationalHorizon
+    relationalHorizon : Horizon.HorizonLevel
     refinementPhase : Wheel.DepthWheelPhase
 
 open HorizonDepthCoordinate public
@@ -46,8 +44,7 @@ horizonExpansionCommutesWithDepthAdvance :
 horizonExpansionCommutesWithDepthAdvance coordinate = refl
 
 ------------------------------------------------------------------------
--- Evidence sign/phase is a third, differently typed coordinate.  It is the
--- coarse classification of signed evidence, not the refinement-wheel grade.
+-- Evidence sign/phase is a third, differently typed coordinate.
 ------------------------------------------------------------------------
 
 record EvidenceDepthPhaseCoordinate : Set where
@@ -55,7 +52,7 @@ record EvidenceDepthPhaseCoordinate : Set where
   field
     evidenceDirection : Selection.InteractionDirection
     depthPhase : Wheel.DepthWheelPhase
-    horizon : RelationalHorizon
+    horizon : Horizon.HorizonLevel
 
 open EvidenceDepthPhaseCoordinate public
 
@@ -73,8 +70,8 @@ record EvidenceDepthWheelBoundary : Set where
     horizonAndDepthActionsCommute : Bool
     horizonAndDepthActionsCommuteIsTrue :
       horizonAndDepthActionsCommute ≡ true
-    existingH369CarrierReused : Bool
-    existingH369CarrierReusedIsTrue : existingH369CarrierReused ≡ true
+    canonicalHorizonCoreReused : Bool
+    canonicalHorizonCoreReusedIsTrue : canonicalHorizonCoreReused ≡ true
 
 open EvidenceDepthWheelBoundary public
 
@@ -87,7 +84,5 @@ canonicalEvidenceDepthWheelBoundary =
     true refl
     true refl
 
--- Type-level reference to the existing specialised H3/H6/H9 carrier.  This is
--- deliberately not redefined by the orthogonality module.
 ExistingH3 : Set → Set
 ExistingH3 = Evidence.H3Evidence
