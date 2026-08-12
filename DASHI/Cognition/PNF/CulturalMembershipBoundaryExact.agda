@@ -22,6 +22,7 @@ module DASHI.Cognition.PNF.CulturalMembershipBoundaryExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
+open import Relation.Binary.PropositionalEquality using (trans; sym)
 
 ------------------------------------------------------------------------
 -- Keep provenance, membership move, and action projection independent.
@@ -95,6 +96,31 @@ coarseSignDoesNotDetermineAction ()
 coarseSignDoesNotDetermineProvenance :
   provenance kendrickCulturalBoundary ≡ provenance stateEnforcementBoundary → ⊥
 coarseSignDoesNotDetermineProvenance ()
+
+------------------------------------------------------------------------
+-- Stronger factorisation theorem: there is no single action projection that
+-- factors through the coarse inside/outside sign for all three model roles.
+-- This is the exact dynamic-sufficiency obstruction behind the statement that
+-- two "us/them" classifiers need not license equivalent downstream actions.
+------------------------------------------------------------------------
+
+record SignActionFactorisation : Set where
+  constructor signActionFactorisation
+  field
+    coarseAction : CoarseBoundarySign → ActionProjection
+    factors :
+      (operator : BoundaryOperator) →
+      coarseAction (sign operator) ≡ action operator
+
+open SignActionFactorisation public
+
+coarseBoundaryCannotDetermineAllActions :
+  SignActionFactorisation → ⊥
+coarseBoundaryCannotDetermineAllActions factorisation =
+  coarseSignDoesNotDetermineAction
+    (trans
+      (sym (factors factorisation kendrickCulturalBoundary))
+      (factors factorisation stateEnforcementBoundary))
 
 ------------------------------------------------------------------------
 -- Threatened, planned, and actual enforcement are separate states.
