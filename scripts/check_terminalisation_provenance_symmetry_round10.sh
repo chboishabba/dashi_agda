@@ -18,8 +18,14 @@ FILES=(
   DASHI/Core/C3OrbitProvenanceQuotientExact.agda
   DASHI/Core/EfficientRecoverableQuotientExact.agda
   DASHI/Core/C3EfficientReopeningExampleExact.agda
+  DASHI/Core/GradedProvenanceDynamicalSystemExact.agda
+  DASHI/Core/HiddenPhaseDynamicInsufficiencyExact.agda
+  DASHI/Cognition/PNF/CoupledDepthPhaseFrustrationExact.agda
+  DASHI/Foundations/DepthWheelMacroBranchingExact.agda
   DASHI/Cognition/PNF/MemoryCommandSeparationExact.agda
   DASHI/Crypto/ReopeningArchitectureExact.agda
+  DASHI/Crypto/MLKEMNoisyReopeningExact.agda
+  DASHI/Arithmetic/PrimeSupportTransportTaxiMoonshineExact.agda
   DASHI/EverythingTerminalisationProvenanceSymmetryRound10.agda
 )
 
@@ -38,8 +44,18 @@ grep -q 'c3SymmetryEnhancementReceipt' DASHI/Core/FiniteC3OrbitStabilizerExact.a
 grep -q 'c3OrbitProvenanceBearingQuotient' DASHI/Core/C3OrbitProvenanceQuotientExact.agda
 grep -q 'EfficientRecoverableFamily' DASHI/Core/EfficientRecoverableQuotientExact.agda
 grep -q 'c3EfficientRecoverableFamily' DASHI/Core/C3EfficientReopeningExampleExact.agda
+grep -q 'dynamicInsufficiencyContradictsSufficiency' DASHI/Core/GradedProvenanceDynamicalSystemExact.agda
+grep -q 'noPhaseErasingCoarseStep' DASHI/Core/HiddenPhaseDynamicInsufficiencyExact.agda
+grep -q 'synchronisedAttainsGlobalLowerBound' DASHI/Cognition/PNF/CoupledDepthPhaseFrustrationExact.agda
+grep -q 'polarOneWheelIs8' DASHI/Foundations/DepthWheelMacroBranchingExact.agda
+grep -q 'ternaryOneWheelIs27' DASHI/Foundations/DepthWheelMacroBranchingExact.agda
 grep -q 'extinctionIsMemoryCommandSeparation' DASHI/Cognition/PNF/MemoryCommandSeparationExact.agda
 grep -q 'ModelRelativeReopening' DASHI/Crypto/ReopeningArchitectureExact.agda
+grep -q 'toyPublicCollision' DASHI/Crypto/MLKEMNoisyReopeningExact.agda
+grep -q '10.6028/NIST.FIPS.203' DASHI/Crypto/MLKEMNoisyReopeningExact.agda
+grep -q 'taxiEarns196883' DASHI/Arithmetic/PrimeSupportTransportTaxiMoonshineExact.agda
+grep -q 'chooseTwelveThreeIs220' DASHI/Arithmetic/PrimeSupportTransportTaxiMoonshineExact.agda
+grep -q 'arithmeticLandingDoesNotConstructMoonshine' DASHI/Arithmetic/PrimeSupportTransportTaxiMoonshineExact.agda
 
 if command -v agda >/dev/null 2>&1; then
   agda -i . -i src DASHI/EverythingTerminalisationProvenanceSymmetryRound10.agda
