@@ -1,6 +1,6 @@
 module DASHI.Core.FinePhaseObservation where
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 open import Data.Integer using (ℤ)
 
@@ -56,4 +56,4 @@ observeIntegerPhase :
   (value : ℤ) →
   ObservedPhase integerSignedPhaseSystem value
 observeIntegerPhase value =
-  observedPhase (integerPhaseDirection value) Agda.Builtin.Equality.refl
+  observedPhase (integerPhaseDirection value) refl
