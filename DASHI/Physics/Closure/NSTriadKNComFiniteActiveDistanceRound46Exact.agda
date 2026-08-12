@@ -36,9 +36,10 @@ open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥; ⊥-elim)
 open import Data.Nat.Base using (_≤_; _<_)
 import Data.Nat.Properties as NatP
-open import Data.Rational.Base using (ℚ)
+open import Data.Rational.Base using (ℚ; 0ℚ)
 
 import DASHI.Physics.Closure.NSTriadKNComBooleanSupportActiveReductionRound45Exact as BoolSupport
+import DASHI.Physics.Closure.NSTriadKNLuoSixThreeCenteredCommutatorScaleExact as SixThree
 
 record FiniteComSupportWidth
     (physical : BoolSupport.PhysicalOddPQBooleanSupportInput) : Set where
@@ -82,8 +83,6 @@ farDistancePairProductExactlyZero :
 farDistancePairProductExactlyZero physical width q r far =
   BoolSupport.inactiveSupportAnnihilatesPairProduct physical q r
     (farDistanceSupportInactive physical width q r far)
-  where
-  open import Data.Rational.Base using (0ℚ)
 
 record FiniteActiveDistanceComProblem
     (physical : BoolSupport.PhysicalOddPQBooleanSupportInput) : Set where
@@ -93,7 +92,7 @@ record FiniteActiveDistanceComProblem
       BoolSupport.shellDistance physical q r ≤ maxActiveDistance width →
       BoolSupport.supportActive physical q r ≡ true →
       BoolSupport.physicalPairProduct physical q r
-      ≤ DASHI.Physics.Closure.NSTriadKNLuoSixThreeCenteredCommutatorScaleExact.twoBranchSquaredGap
+      ≤ SixThree.twoBranchSquaredGap
           (BoolSupport.shellDistance physical q r)
 
 open FiniteActiveDistanceComProblem public
