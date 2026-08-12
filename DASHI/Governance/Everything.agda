@@ -35,6 +35,7 @@ import DASHI.Governance.CorrectiveReachabilityEquivariance
 import DASHI.Governance.RelationPolicyTransportComposition
 import DASHI.Governance.DomainIndexedPeaceSubjectCarrier
 import DASHI.Governance.TransitionGovernanceOperatorAdapter
+import DASHI.Governance.MiddleEastProvenancePolicyRouting
 
 -- Source-bounded/symbolic application surfaces.  These do not promote the
 -- generic structural operators into empirical motive, guilt, or ideology.
