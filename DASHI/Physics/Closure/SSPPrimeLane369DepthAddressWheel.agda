@@ -4,8 +4,8 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Data.Product using (_×_; _,_; proj₁; proj₂)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Data.Product using (_×_; _,_)
+open import Relation.Binary.PropositionalEquality using (trans)
 
 import DASHI.Biology.TernaryCantorWheelDiffusionExact as Cantor
 import DASHI.Biology.TriadicKernelLiftQuotientExact as Triadic
@@ -17,13 +17,9 @@ import DASHI.TrackedPrimes as Tracked
 
 ------------------------------------------------------------------------
 -- Quotient/remainder-style wheel coordinate.
---
--- completedWheels is the quotient by one full period; residualPhase is the
--- depth residue.  The representation is recursive rather than postulating a
--- division theorem, so the phase law is executable on every Nat.
 
 record WheelDepthCoordinate : Set where
-  constructor wheelDepthCoordinate
+  constructor mkWheelDepthCoordinate
   field
     completedWheels : Nat
     residualPhase : Wheel.DepthWheelPhase
@@ -31,15 +27,15 @@ record WheelDepthCoordinate : Set where
 open WheelDepthCoordinate public
 
 advanceWheelDepthCoordinate : WheelDepthCoordinate → WheelDepthCoordinate
-advanceWheelDepthCoordinate (wheelDepthCoordinate q Wheel.phase-0) =
-  wheelDepthCoordinate q Wheel.phase-1
-advanceWheelDepthCoordinate (wheelDepthCoordinate q Wheel.phase-1) =
-  wheelDepthCoordinate q Wheel.phase-2
-advanceWheelDepthCoordinate (wheelDepthCoordinate q Wheel.phase-2) =
-  wheelDepthCoordinate (suc q) Wheel.phase-0
+advanceWheelDepthCoordinate (mkWheelDepthCoordinate q Wheel.phase-0) =
+  mkWheelDepthCoordinate q Wheel.phase-1
+advanceWheelDepthCoordinate (mkWheelDepthCoordinate q Wheel.phase-1) =
+  mkWheelDepthCoordinate q Wheel.phase-2
+advanceWheelDepthCoordinate (mkWheelDepthCoordinate q Wheel.phase-2) =
+  mkWheelDepthCoordinate (suc q) Wheel.phase-0
 
 wheelDepthCoordinate : Nat → WheelDepthCoordinate
-wheelDepthCoordinate zero = wheelDepthCoordinate zero Wheel.phase-0
+wheelDepthCoordinate zero = mkWheelDepthCoordinate zero Wheel.phase-0
 wheelDepthCoordinate (suc d) =
   advanceWheelDepthCoordinate (wheelDepthCoordinate d)
 
@@ -49,19 +45,19 @@ wheelCoordinatePhaseMatchesDepth :
 wheelCoordinatePhaseMatchesDepth zero = refl
 wheelCoordinatePhaseMatchesDepth (suc d)
   with wheelDepthCoordinate d | wheelCoordinatePhaseMatchesDepth d
-... | wheelDepthCoordinate q Wheel.phase-0 | refl = refl
-... | wheelDepthCoordinate q Wheel.phase-1 | refl = refl
-... | wheelDepthCoordinate q Wheel.phase-2 | refl = refl
+... | mkWheelDepthCoordinate q Wheel.phase-0 | refl = refl
+... | mkWheelDepthCoordinate q Wheel.phase-1 | refl = refl
+... | mkWheelDepthCoordinate q Wheel.phase-2 | refl = refl
 
 advanceCoordinateThree :
   (c : WheelDepthCoordinate) →
   advanceWheelDepthCoordinate
     (advanceWheelDepthCoordinate
       (advanceWheelDepthCoordinate c))
-  ≡ wheelDepthCoordinate (suc (completedWheels c)) (residualPhase c)
-advanceCoordinateThree (wheelDepthCoordinate q Wheel.phase-0) = refl
-advanceCoordinateThree (wheelDepthCoordinate q Wheel.phase-1) = refl
-advanceCoordinateThree (wheelDepthCoordinate q Wheel.phase-2) = refl
+  ≡ mkWheelDepthCoordinate (suc (completedWheels c)) (residualPhase c)
+advanceCoordinateThree (mkWheelDepthCoordinate q Wheel.phase-0) = refl
+advanceCoordinateThree (mkWheelDepthCoordinate q Wheel.phase-1) = refl
+advanceCoordinateThree (mkWheelDepthCoordinate q Wheel.phase-2) = refl
 
 threeTimes : Nat → Nat
 threeTimes zero = zero
@@ -79,7 +75,7 @@ phaseAtThreeTimes (suc q) =
 coordinateAtThreeTimes :
   (q : Nat) →
   wheelDepthCoordinate (threeTimes q)
-  ≡ wheelDepthCoordinate q Wheel.phase-0
+  ≡ mkWheelDepthCoordinate q Wheel.phase-0
 coordinateAtThreeTimes zero = refl
 coordinateAtThreeTimes (suc q)
   rewrite coordinateAtThreeTimes q = refl
@@ -90,21 +86,21 @@ phaseOrdinal Wheel.phase-1 = 1
 phaseOrdinal Wheel.phase-2 = 2
 
 threeCoordinateIsOneWheel :
-  wheelDepthCoordinate 3 ≡ wheelDepthCoordinate 1 Wheel.phase-0
+  wheelDepthCoordinate 3 ≡ mkWheelDepthCoordinate 1 Wheel.phase-0
 threeCoordinateIsOneWheel = refl
 
 sixCoordinateIsTwoWheels :
-  wheelDepthCoordinate 6 ≡ wheelDepthCoordinate 2 Wheel.phase-0
+  wheelDepthCoordinate 6 ≡ mkWheelDepthCoordinate 2 Wheel.phase-0
 sixCoordinateIsTwoWheels = refl
 
 nineCoordinateIsThreeWheels :
-  wheelDepthCoordinate 9 ≡ wheelDepthCoordinate 3 Wheel.phase-0
+  wheelDepthCoordinate 9 ≡ mkWheelDepthCoordinate 3 Wheel.phase-0
 nineCoordinateIsThreeWheels = refl
 
 ------------------------------------------------------------------------
 -- One complete refinement wheel has the already-checked depth-three branch
 -- multiplicities: 2^3 for the polar/Cantor restriction and 3^3 for the full
--- ternary carrier.  These aliases deliberately reuse the existing proofs.
+-- ternary carrier.
 
 polarOneWheelBranchMultiplicity : Cantor.polarAddressCount 3 ≡ 8
 polarOneWheelBranchMultiplicity = Cantor.polarDepthThreeCount
@@ -114,10 +110,6 @@ fullOneWheelBranchMultiplicity = Cantor.ternaryDepthThreeCount
 
 ------------------------------------------------------------------------
 -- Residual-bearing polar projection.
---
--- There is no canonical total 9 -> 6 retraction because the zero trit has no
--- polar image.  Rather than choosing a branch, keep zero as an explicit
--- residual.  On the embedded polar carrier this is a genuine left inverse.
 
 data PolarProjectionResult : Set where
   projectedPolar : Wheel.PolarPhaseCell → PolarProjectionResult
@@ -144,8 +136,7 @@ zeroProjectionRetainsPhase phase = refl
 
 ------------------------------------------------------------------------
 -- The depth wheel and the existing 3/6/9 address wheel are independent local
--- C3 actions.  Their product is a nine-cell phase torus; because each action
--- touches only one coordinate, they commute definitionally.
+-- C3 actions.  Their product is a nine-cell phase torus.
 
 DepthAddressPhaseCell : Set
 DepthAddressPhaseCell = Ref.Lane369Digit × Wheel.DepthWheelPhase
@@ -204,8 +195,7 @@ depthAddressPhaseAtlasCount = refl
 ------------------------------------------------------------------------
 -- Actual tree action: the canonical p7 generator rotates every 369 digit and
 -- has order three on every finite refinement address.  The imported tree
--- theorem already proves that the same action preserves depth and commutes
--- with prefix truncation.
+-- theorem already proves depth and prefix preservation.
 
 p7AddressWheel :
   ∀ {d : Nat} → Ref.Lane369Address d → Ref.Lane369Address d
@@ -242,9 +232,7 @@ p7AddressWheelPreservesTaggedDepthPhase :
 p7AddressWheelPreservesTaggedDepthPhase address = refl
 
 ------------------------------------------------------------------------
--- Equivariance of one refinement step under the address wheel.  This is the
--- concrete skew-product seam: rotating an already-refined address is the same
--- as rotating its parent and the newly attached digit together.
+-- Equivariance of one refinement step under the address wheel.
 
 p7AddressWheelRefinementEquivariant :
   ∀ {d : Nat}
@@ -258,8 +246,8 @@ p7AddressWheelRefinementEquivariant parent digit = refl
 
 ------------------------------------------------------------------------
 -- Boundary: commuting local product actions are proved above.  No claim is
--- made here that every future phase-dependent refinement law factors as that
--- direct product; a state-dependent cocycle remains a stronger structure.
+-- made that every future phase-dependent refinement law factors as that direct
+-- product; a state-dependent cocycle remains a stronger structure.
 
 record DepthAddressWheelBoundary : Set where
   constructor depthAddressWheelBoundary
