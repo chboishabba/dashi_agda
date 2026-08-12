@@ -25,11 +25,11 @@ module DASHI.Physics.YangMills.BalabanNormalizedAxisAverageNormContractionExact 
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Rational using (ℚ; 0ℚ; _+_; _-_; _*_; _≤_)
+open import Data.Rational using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using
-  (cong₂; subst; sym; trans)
+  (cong; cong₂; subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanBoolean4BlockPoincareExact using
@@ -37,6 +37,7 @@ open import DASHI.Physics.YangMills.BalabanBoolean4BlockPoincareExact using
 open import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreCarrier
 open import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact
 open import DASHI.Physics.YangMills.BalabanPhysicalAxisPartitionExact
+open import DASHI.Physics.YangMills.BalabanFiniteSumFubiniExact
 import DASHI.Physics.YangMills.BalabanNormalizedAxisAverageExact as Average
 
 FieldEqual : ∀ {L} → SiteField L → SiteField L → Set
@@ -88,6 +89,14 @@ globalNormRespectsPointwise {L} {left} {right} equality =
     (λ site → right site * right site)
     (λ site → cong₂ _*_ (equality site) (equality site))
 
+sumRationalSubtractLocal :
+  ∀ {A : Set} (values : List A) (f g : A → ℚ) →
+  sumRational values (λ value → f value - g value)
+  ≡ sumRational values f - sumRational values g
+sumRationalSubtractLocal [] f g = ℚRing.solve-∀
+sumRationalSubtractLocal (value ∷ values) f g
+  rewrite sumRationalSubtractLocal values f g = ℚRing.solve-∀
+
 innerSubtractLeft :
   ∀ {L} (left right test : SiteField L) →
   globalBlockInner (subtractField left right) test
@@ -103,14 +112,6 @@ innerSubtractLeft {L} left right test =
       (physicalBlockSites L)
       (λ site → left site * test site)
       (λ site → right site * test site))
-  where
-  sumRationalSubtractLocal :
-    ∀ {A : Set} (values : List A) (f g : A → ℚ) →
-    sumRational values (λ value → f value - g value)
-    ≡ sumRational values f - sumRational values g
-  sumRationalSubtractLocal [] f g = ℚRing.solve-∀
-  sumRationalSubtractLocal (value ∷ values) f g
-    rewrite sumRationalSubtractLocal values f g = ℚRing.solve-∀
 
 innerRespectsRightPointwise :
   ∀ {L} (left : SiteField L) {right right′ : SiteField L} →
@@ -121,9 +122,7 @@ innerRespectsRightPointwise {L} left {right} {right′} equality =
     (physicalBlockSites L)
     (λ site → left site * right site)
     (λ site → left site * right′ site)
-    (λ site →
-      Relation.Binary.PropositionalEquality.cong
-        (λ value → left site * value) (equality site))
+    (λ site → cong (λ value → left site * value) (equality site))
 
 axisAverageFixedPointwise :
   ∀ {L} (dataSet : Average.NormalizedAxisAverageData L)
@@ -148,14 +147,14 @@ residualOrthogonalToAverage dataSet field axis =
       field (Average.axisAverage dataSet field axis)
       (Average.axisAverage dataSet field axis))
     (trans
-      (Relation.Binary.PropositionalEquality.cong
+      (cong
         (λ value →
           globalBlockInner field (Average.axisAverage dataSet field axis)
           - value)
         (Average.axisAverageSelfAdjoint dataSet axis field
           (Average.axisAverage dataSet field axis)))
       (trans
-        (Relation.Binary.PropositionalEquality.cong
+        (cong
           (λ value →
             globalBlockInner field (Average.axisAverage dataSet field axis)
             - value)
@@ -178,14 +177,14 @@ twoFieldSquareExpansion {L} left right =
         + (1ℚ + 1ℚ) * (left site * right site))
       (λ site → ℚRing.solve-∀))
     (trans
-      (DASHI.Physics.YangMills.BalabanFiniteSumFubiniExact.sumRationalAdd
+      (sumRationalAdd
         (physicalBlockSites L)
         (λ site → sq (left site))
         (λ site → sq (right site)
           + (1ℚ + 1ℚ) * (left site * right site)))
       (trans
         (cong₂ _+_ refl
-          (DASHI.Physics.YangMills.BalabanFiniteSumFubiniExact.sumRationalAdd
+          (sumRationalAdd
             (physicalBlockSites L)
             (λ site → sq (right site))
             (λ site → (1ℚ + 1ℚ) * (left site * right site))))
@@ -226,7 +225,7 @@ axisAveragePythagoras dataSet field axis =
         (axisResidual dataSet field axis)
         (Average.axisAverage dataSet field axis))
       (trans
-        (Relation.Binary.PropositionalEquality.cong
+        (cong
           (λ cross →
             globalNormSq (axisResidual dataSet field axis)
             + globalNormSq (Average.axisAverage dataSet field axis)
