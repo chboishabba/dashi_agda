@@ -21,54 +21,23 @@ module DASHI.Physics.Closure.NSTriadKNHHBadDyadicThreeMechanismToClosureRound48E
 -- DASHI CONTRIBUTION
 --
 -- Compose the actual Round-48 HH-bad research surface all the way to the
--- mature owner.  The caller must supply only genuinely physical statements:
---
--- * selected-threshold three-mechanism shell transport;
--- * literal normalized gain-density = normalized defect, shell by shell;
--- * viscosity nonnegativity;
--- * ordinary unmasked cell charge <= physical dissipation.
---
--- The dyadic 1/2, recurrence induction, inverse-shell certificate and owner
--- eta = 2M are all derived internally.
+-- mature owner.  The packet owns the selected-threshold three-mechanism shell
+-- transport together with the Round-47 same-object density/charge producer on
+-- the definitionally identical recurrence.  Therefore the dyadic 1/2,
+-- recurrence induction, inverse-shell certificate and owner eta = 2M are all
+-- derived internally.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base using (ℚ; 0ℚ; _≤_)
+open import Data.Rational.Base using (ℚ)
 
 import DASHI.Physics.Closure.NSTriadKNAdmissibleOwnerTaxLanguageRound28Exact as Owner
 import DASHI.Physics.Closure.NSTriadKNHHBadDyadicThreeMechanismRecurrenceRound48Exact as Three
 import DASHI.Physics.Closure.NSTriadKNHHBadSelectedRecurrenceToOwnerRound47Exact as ToOwner
 import DASHI.Physics.Closure.NSTriadKNHHBadSelectedClosureWitnessRound48Exact as Closure
 
-record PhysicalDyadicSelectedHHBadClosureInput
-    (environment : Owner.TaxEnvironment)
-    (effectiveViscosity : ℚ) : Set₁ where
-  field
-    transfer : Three.PhysicalDyadicThreeMechanismTransfer
-
-    densityBridge :
-      ToOwner.SelectedRecurrenceLiteralDensityBridge
-        effectiveViscosity
-        (Three.asSelectedThresholdDefectRecurrence transfer)
-
-    viscosityNonnegative : 0ℚ ≤ effectiveViscosity
-
-    unmaskedChargeBelowPhysicalDissipation :
-      ToOwner.PhysicalSelectedRecurrenceHHBadOwnerInput.unmaskedChargeBelowPhysicalDissipation
-        (record
-          { densityBridge = densityBridge
-          ; viscosityNonnegative = viscosityNonnegative
-          ; unmaskedChargeBelowPhysicalDissipation =
-              unmaskedChargeBelowPhysicalDissipation
-          })
-
-open PhysicalDyadicSelectedHHBadClosureInput public
-
--- The self-reference above would be circular if used as a constructor.  The
--- actual constructor surface below therefore receives the already-existing
--- Round-47 physical owner input directly, with definitional recurrence match.
 record PhysicalDyadicSelectedHHBadClosurePacket
     (environment : Owner.TaxEnvironment)
     (effectiveViscosity : ℚ) : Set₁ where
@@ -87,10 +56,8 @@ physicalDyadicSelectedClosureWitness :
   Closure.SelectedHHBadClosureWitness environment effectiveViscosity
 physicalDyadicSelectedClosureWitness input = record
   { recurrence =
-      Three.asSelectedThresholdDefectRecurrence
-        (PhysicalDyadicSelectedHHBadClosurePacket.transfer input)
-  ; physicalOwnerInput =
-      PhysicalDyadicSelectedHHBadClosurePacket.physicalOwnerInput input
+      Three.asSelectedThresholdDefectRecurrence (transfer input)
+  ; physicalOwnerInput = physicalOwnerInput input
   }
 
 physicalDyadicSelectedHHBadOwner :
