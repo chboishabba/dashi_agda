@@ -35,6 +35,7 @@ import DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier as Cube
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Triad
 import DASHI.Physics.Closure.NSTriadKNLuoSixThreeCenteredCommutatorScaleExact as SixThree
 import DASHI.Physics.Closure.NSTriadKNComBooleanSupportActiveReductionRound45Exact as BoolSupport
+import DASHI.Physics.Closure.NSTriadKNComSupportOverlapRound42Exact as Support
 
 incidenceWeightSum :
   (Triad.PhysicalTriadIncidence → ℚ) →
@@ -116,7 +117,7 @@ physicalIncidenceBooleanSupportInput physical = record
 
 physicalComEnvelopeFromIncidenceSupport :
   PhysicalComIncidenceSupportInput →
-  DASHI.Physics.Closure.NSTriadKNComSupportOverlapRound42Exact.PhysicalComSupportOverlapEnvelope
+  Support.PhysicalComSupportOverlapEnvelope
 physicalComEnvelopeFromIncidenceSupport physical =
   BoolSupport.physicalComBooleanSupportEnvelope
     (physicalIncidenceBooleanSupportInput physical)
