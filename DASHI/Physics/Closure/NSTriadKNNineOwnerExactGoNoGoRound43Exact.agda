@@ -32,7 +32,7 @@ module DASHI.Physics.Closure.NSTriadKNNineOwnerExactGoNoGoRound43Exact where
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
-open import Data.Rational.Base using (1ℚ; _<_)
+open import Data.Rational.Base using (1ℚ; _≤_; _<_)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
@@ -104,8 +104,6 @@ dualNoGoRefutesStrictPhysicalBudget family certificate feasible budget =
     impossible = ℚP.≤-<-trans lower strict
   in
   ℚP.<-irrefl refl impossible
-  where
-  open import Data.Rational.Base using (_≤_)
 
 nineOwnerPrimalDualCarrierIdentificationClosed : Bool
 nineOwnerPrimalDualCarrierIdentificationClosed = true
