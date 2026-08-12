@@ -14,6 +14,7 @@ import DASHI.Physics.Closure.NSFinalStateReceipt as Final
 import DASHI.Physics.Closure.NSTriadKNHighestAlphaRound47Exact
 import DASHI.Physics.Closure.NSTriadKNHighestAlphaRound50Exact
 import DASHI.Physics.Closure.NSTriadKNHighestAlphaRound51Exact
+import DASHI.Physics.Closure.NSTriadKNHighestAlphaRound52Exact
 import DASHI.Papers.NavierStokes.ClayContractRound23 as Clay23
 
 ------------------------------------------------------------------------
@@ -26,15 +27,15 @@ import DASHI.Papers.NavierStokes.ClayContractRound23 as Clay23
 -- surface: the target theorem type is represented, but physical producers and
 -- unconditional promotion remain false.
 --
--- The theorem-bearing Round-47, Round-50 and Round-51 highest-alpha aggregates
--- are imported so DASHI.Everything reaches the direct/summable/weighted-Green
--- HH-bad gates, bandwidth-one Com multiplicity audit, global soft-floor audit,
--- and exact-norm HH-good continuum seam without changing any terminal status
--- bit.
+-- The theorem-bearing Round-47, Round-50, Round-51 and Round-52 highest-alpha
+-- aggregates are imported so DASHI.Everything reaches the shell-barrier HH-bad
+-- master consumer, exact finite Green expansion, Com output-fibre/multiplicity
+-- audit, downstream cap audit and kernel pre-tax reduction without changing any
+-- terminal status bit.
 
 paperInterfaceStatement : String
 paperInterfaceStatement =
-  "Paper-facing NS interface: A6/A7/A8/A9 closure receipts, the Round-47, Round-50 and Round-51 exact highest-alpha aggregates, and the literal Round 23 Fefferman periodic contract are imported; the target surface is visible while unresolved physical producer inhabitation, Clay Navier-Stokes and terminal promotion remain false."
+  "Paper-facing NS interface: A6/A7/A8/A9 closure receipts, the Round-47, Round-50, Round-51 and Round-52 exact highest-alpha aggregates, and the literal Round 23 Fefferman periodic contract are imported; the target surface is visible while unresolved physical producer inhabitation, Clay Navier-Stokes and terminal promotion remain false."
 
 record NSPaperTheoremStatus : Setω where
   field
