@@ -162,13 +162,28 @@ sum_i dt_i omega_i^2 Q_i
   <= c E0 * integralCritical * dissipation.
 ```
 
-This is the concrete repaired version of the false pointwise `W<=E0 X D` shortcut. The remaining physical theorem is to identify the actual HH-good terminal-window integral with these positive cells after the mandatory
+The bridge is now carried all the way to the literal owner. `PeriodizedParabolicHHGoodInput` requires the periodized annular strain-kernel/sample identification, the actual parabolic recovery, nonnegativity of the physical critical/dissipation resources, and one same-object equality
+
+```text
+weightedLocalMass
+  = localizedAmplitudeQuarticMass.
+```
+
+Then
+
+```text
+periodizedHHGoodOwnerFromParabolicKineticRecovery
+```
+
+constructs the literal `HH-good` `AdmissibleOwnerEstimate`, with effective quadratic factor `c E0`, using the existing Round-41 Young theorem. There is no remaining abstract `W<=E0XD` premise.
+
+The physical work is therefore to inhabit that same-object input after the mandatory
 
 ```text
 PV cancellation -> residual -> shell localization -> directional threshold
 ```
 
-ordering, and to prove the quartic envelope on that same object. The annular strain-kernel/sample identity and smooth torus correction remain separate physical seams.
+ordering, together with the annular strain-kernel realization and smooth torus correction.
 
 ## 4. Keep the HH-good Young split until the reserve stage
 
@@ -214,7 +229,7 @@ F(p,r) = (omega_p.r) u_r - (u_p.r) omega_r,
 u_p = |p|^-2 (p cross omega_p).
 ```
 
-Round 42 now scales the *literal object*, not the schematic Schur expression. Under common positive rational frequency scaling
+Round 42 scales the *literal object*, not the schematic Schur expression. Under common positive rational frequency scaling
 
 ```text
 p -> s p,
@@ -242,25 +257,84 @@ This materially sharpens the HH-bad frontier. The Round-33 growth
 R_q = 2 lambda_q
 ```
 
-belongs to the later half-kernel/Bernstein bounding lane; it is not the scaling of the literal vorticity convolution itself. Consequently the next same-object theorem must trace
+belongs to the later half-kernel/Bernstein bounding lane; it is not the scaling of the literal vorticity convolution itself.
+
+## 7. Direct literal production versus viscous charge gives an inverse square
+
+Round 42 next compares the same literal production with
 
 ```text
-literal vorticity interaction
-  -> shell/source/curvature/energy normalization
-  -> RawBadGainSample.rawGain
+D_k = nu |k|^2 |omega_k|^2.
 ```
 
-before assigning a one-derivative inverse-shell Schur cost. If that trace never reintroduces one net `lambda_q`, the current inverse-shell compensation architecture should be simplified/redesigned rather than imposed on the raw dynamics.
+Under `k -> r k`, fixed vorticity,
 
-## 7. HH-bad conditional reserve constant, if the later lane really has one derivative
+```text
+production_(r k) = production_k,
+D_(r k)          = r^2 D_k.
+```
 
-If the same-object trace above does produce the Round-41 one-derivative density
+Hence a base-scale inequality
+
+```text
+P <= C D
+```
+
+transports exactly as
+
+```text
+P_r <= C r^-2 D_r.
+```
+
+This is stronger by one inverse power than the `r^-1` gain demanded by the Round-33 half-kernel/Bernstein calibration.
+
+`NSTriadKNHHBadInverseSquareBeatsRequiredGainRound42Exact` then proves on the exact dyadic rationals that, writing `mu_q=2^-q`,
+
+```text
+0 <= mu_q <= 1,
+mu_q^2 <= mu_q.
+```
+
+Therefore if the shell-independent base coefficient satisfies
+
+```text
+0 <= C,
+C <= eta/2,
+```
+
+then
+
+```text
+C mu_q^2 <= requiredHHBadGain eta q
+```
+
+and consequently
+
+```text
+(C mu_q^2) * rawHHBadRatio q <= eta.
+```
+
+So **if the actual restricted bad gain is same-object with this literal production/dissipation lane**, the mature Round-33 scale obstruction is already beaten and the one-derivative Schur compensation is unnecessary.
+
+The highest-alpha HH-bad seam has therefore changed again: locate the precise map
+
+```text
+literal vorticity production / viscous charge
+  -> shell/source/half-kernel/curvature normalization
+  -> RawBadGainSample.rawGain.
+```
+
+If that map preserves the inverse-square lane, use it. If it provably loses exactly one inverse power, the conditional one-derivative Schur lane below remains the fallback. If it loses more, redesign.
+
+## 8. Conditional one-derivative HH-bad reserve constant
+
+If the same-object trace instead produces the Round-41 one-derivative density
 
 ```text
 c_q = C_q lambda_q^-1,
 ```
 
-then Round 42 composes it exactly with the Round-33 raw bounded-lane ratio
+then Round 42 composes it exactly with the Round-33 bounded-lane ratio
 
 ```text
 R_q = 2 lambda_q
@@ -291,9 +365,9 @@ A r^3 = 4 C_bad,
 delta = r^2.
 ```
 
-`NSTriadKNHHOneDerivativeThresholdOptimizerRound42Exact` reuses the existing Round-40 global-minimum theorem with this coefficient. These constants are now explicitly conditional on the missing same-object bridge; they are not attributed to the raw vorticity interaction.
+`NSTriadKNHHOneDerivativeThresholdOptimizerRound42Exact` reuses the existing Round-40 global-minimum theorem with this coefficient. These constants are explicitly conditional on the missing same-object bridge; they are not attributed to the raw vorticity interaction.
 
-## 8. Master directional defect: threshold profile and packing reduction
+## 9. Master directional defect: threshold profile and packing reduction
 
 Round 41 proved on one full classified carrier
 
@@ -342,7 +416,7 @@ sum_box G_box^2 <= C_good delta P.
 
 No physical Carleson estimate is asserted. A genuine theorem needs an actual stopping/packing family rather than uncontrolled repeated boxes.
 
-## 9. Com: support overlap is enough
+## 10. Com: support overlap is enough
 
 Round 41 asked for the exact model equality
 
@@ -372,9 +446,9 @@ plus the adjoint-face equality already supplied by skew adjunction. No additiona
 
 ## Revised falsification / implementation order
 
-1. **HH-bad same-object shell audit** — trace the literal scale-invariant vorticity interaction into the actual bad gain and determine exactly where, if anywhere, the Round-33 `lambda_q` growth re-enters. Apply the one-derivative Schur lane only if that trace justifies it.
+1. **HH-bad same-object gain trace** — map the literal order-zero production and inverse-square production/dissipation estimate into the actual restricted `rawGain`. Determine exactly whether the half-kernel/Bernstein lane unnecessarily loses one inverse scale.
 2. **Com support-overlap theorem** — prove the literal `U_q^* U_r` support/product bound and construct the Com owner.
-3. **HH-good parabolic physical realization** — annular strain-kernel/sample identification, kinetic-to-vorticity `lambda_q^2` inside the actual `lambda_q^-2` terminal window, residual quartic envelope, and smooth torus correction.
+3. **HH-good parabolic same-object input** — annular strain-kernel/sample identification, actual terminal window, kinetic-to-vorticity `lambda_q^2`, quartic envelope, equality with `weightedLocalMass`, and smooth torus correction; then invoke `periodizedHHGoodOwnerFromParabolicKineticRecovery`.
 4. Instantiate the six lower-risk owners.
 5. Run the exact threshold/Young-aware nine-owner primal/dual reserve test.
 
