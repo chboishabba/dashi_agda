@@ -2,12 +2,6 @@ module DASHI.Cognition.PNF.PhasedRelationalEvidencePropagationExact where
 
 ------------------------------------------------------------------------
 -- PHASED RELATIONAL EVIDENCE PROPAGATION
---
--- Concrete finite witness for the Wikidata/phased-lattice claim: a node can
--- retain the same identity and process phase while its semantic/evidence phase
--- changes solely because a wider relational horizon contributes new typed
--- evidence.  The fine signed pressure remains the retained carrier; the
--- semantic phase is its coarse observation.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -21,10 +15,6 @@ import DASHI.Core.RelationalHorizon369 as Horizon
 import DASHI.Physics.Closure.SSPPrimeLane369DepthWheelCantorBridge as Wheel
 import DASHI.Reasoning.AttractorAlignedBranchSelection as Selection
 
-------------------------------------------------------------------------
--- Small typed carrier.
-------------------------------------------------------------------------
-
 data Node : Set where
   eventNode : Node
 
@@ -34,11 +24,20 @@ data CandidateType : Set where
 data Evidence : Set where
   secondHopRoleEvidence : Evidence
 
-emptyPressure : Pressure.TypePressureEnvelope eventNode editionLike
+emptyPressure :
+  Pressure.TypePressureEnvelope
+    {Subject = Node}
+    {CandidateType = CandidateType}
+    {Evidence = Evidence}
+    eventNode editionLike
 emptyPressure = Pressure.typePressureEnvelope []
 
 secondHopPositivePressure :
-  Pressure.TypePressureContribution eventNode editionLike
+  Pressure.TypePressureContribution
+    {Subject = Node}
+    {CandidateType = CandidateType}
+    {Evidence = Evidence}
+    eventNode editionLike
 secondHopPositivePressure =
   Pressure.typePressureContribution
     secondHopRoleEvidence
@@ -46,11 +45,21 @@ secondHopPositivePressure =
     "second-hop predicate-role support"
     "finite phased-lattice regression"
 
-expandedPressure : Pressure.TypePressureEnvelope eventNode editionLike
+expandedPressure :
+  Pressure.TypePressureEnvelope
+    {Subject = Node}
+    {CandidateType = CandidateType}
+    {Evidence = Evidence}
+    eventNode editionLike
 expandedPressure =
   Lattice.prependEvidence secondHopPositivePressure emptyPressure
 
-localCell : Lattice.PhasedLatticeCell eventNode editionLike
+localCell :
+  Lattice.PhasedLatticeCell
+    {Subject = Node}
+    {CandidateType = CandidateType}
+    {Evidence = Evidence}
+    eventNode editionLike
 localCell =
   Lattice.phasedLatticeCell
     0
@@ -60,7 +69,12 @@ localCell =
     Selection.independent
     refl
 
-expandedCell : Lattice.PhasedLatticeCell eventNode editionLike
+expandedCell :
+  Lattice.PhasedLatticeCell
+    {Subject = Node}
+    {CandidateType = CandidateType}
+    {Evidence = Evidence}
+    eventNode editionLike
 expandedCell =
   Lattice.phasedLatticeCell
     0
@@ -85,11 +99,6 @@ processPhaseUnchangedAcrossEvidenceExpansion = refl
 resolutionUnchangedAcrossEvidenceExpansion :
   Lattice.resolutionDepth localCell ≡ Lattice.resolutionDepth expandedCell
 resolutionUnchangedAcrossEvidenceExpansion = refl
-
-------------------------------------------------------------------------
--- The evidence phase changes because the retained pressure envelope changed,
--- not because process phase or node identity changed.
-------------------------------------------------------------------------
 
 data SemanticPhaseEquality : Set where
 
