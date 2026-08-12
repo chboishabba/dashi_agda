@@ -22,6 +22,7 @@ import DASHI.Cognition.PNF.EvidenceDepthWheelOrthogonality
 import DASHI.Cognition.PNF.DepthWheelMemoryGradedAdapter
 import DASHI.Cognition.PNF.WikidataRepairProposal
 import DASHI.Cognition.PNF.TerminalisationDefectRegression
+import DASHI.Cognition.PNF.PNFResidualTerminalisationRegression
 import DASHI.Cognition.PNF.SemanticSamplingDynamicSafety
 
 open import DASHI.Cognition.PNF.ComplexityArithmetic public
