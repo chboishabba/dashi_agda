@@ -38,7 +38,8 @@ module DASHI.Physics.Closure.NSTriadKNHardSoftReserveRound45Exact where
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
-open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_; _<_ ; nonNegative)
+open import Data.Rational.Base using
+  (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_; _<_; nonNegative)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
@@ -50,6 +51,7 @@ import DASHI.Physics.Closure.NSTriadKNLuoFiniteCriticalFourClassClosureExact as 
 import DASHI.Physics.Closure.NSTriadKNBonyTailOwnerRound44Exact as Tail
 import DASHI.Physics.Closure.NSTriadKNFiveOwnerReserveReductionRound44Exact as Five
 import DASHI.Physics.Closure.NSTriadKNHHBadSharpDyadicGainRound33Exact as Sharp
+import DASHI.Physics.Closure.NSTriadKNLuoCriticalDissipationHHBadBridgeRound34Exact as LuoBridge
 import DASHI.Physics.Closure.NSTriadKNHHGoodYoungSoftTaxRound45Exact as Soft
 
 record HardSoftOwnerCore
@@ -84,12 +86,10 @@ hhBadEtaNonnegative :
   0ℚ ≤ Owner.eta (hhBadEstimate core)
 hhBadEtaNonnegative core =
   let
-    twoNN : 0ℚ ≤ Sharp.two
-    twoNN = ℚP.nonNegative⁻¹ Sharp.two
     productNN : 0ℚ ≤ Sharp.two * hhBadProfileCeiling core
     productNN =
       let instance
-        twoNNI = nonNegative twoNN
+        twoNNI = nonNegative LuoBridge.twoNonnegative
         ceilingNNI = nonNegative (hhBadProfileCeilingNonnegative core)
         productNNI =
           ℚP.nonNeg*nonNeg⇒nonNeg Sharp.two (hhBadProfileCeiling core)
