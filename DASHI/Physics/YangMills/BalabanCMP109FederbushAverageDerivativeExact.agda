@@ -41,13 +41,13 @@ module DASHI.Physics.YangMills.BalabanCMP109FederbushAverageDerivativeExact wher
 --
 -- Thus the derivative of equation (0.11) is reduced to the already isolated
 -- principal-log differential plus one finite average-Jacobian inverse.  At the
--- identity reference, J_j=T_j=I, the formula collapses exactly to the ordinary
--- arithmetic mean.  No derivative oracle for M remains at the algebraic layer.
+-- identity reference the formula target is the ordinary arithmetic mean; its
+-- physical identification is intentionally a separate instantiation theorem.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -74,8 +74,6 @@ record LinearOperatorAlgebra (V : Set) : Set₁ where
     addZeroRight : ∀ vector → add vector zero ≡ vector
     addAssoc : ∀ a b c → add (add a b) c ≡ add a (add b c)
 
-    subtractAsAddNegative : ∀ left right → Set
-
 open LinearOperatorAlgebra public
 
 sumVectors : ∀ {V} → LinearOperatorAlgebra V → List V → V
@@ -91,16 +89,6 @@ sumOperators algebra (operator ∷ operators) =
 map : ∀ {A B : Set} → (A → B) → List A → List B
 map function [] = []
 map function (value ∷ values) = function value ∷ map function values
-
-zipWith : ∀ {A B C : Set} → (A → B → C) → List A → List B → List C
-zipWith function [] rights = []
-zipWith function lefts [] = []
-zipWith function (left ∷ lefts) (right ∷ rights) =
-  function left right ∷ zipWith function lefts rights
-
-applyOperators : ∀ {V} →
-  LinearOperatorAlgebra V → List (Endomorphism V) → List V → List V
-applyOperators algebra = zipWith (λ operator vector → operator vector)
 
 sumOperatorActsAsSum :
   ∀ {V} (algebra : LinearOperatorAlgebra V)
@@ -123,10 +111,10 @@ record FederbushLinearizationData
     logJacobian : Index → Endomorphism V
     outputTransport : Index → Endomorphism V
     inputVariation : Index → V
+    averageVariation : V
 
     -- Exact linearized Federbush equation after differentiating
     -- sum log(U_j V^-1)=0 in the selected left trivialization.
-    averageVariation : V
     linearizedFederbush :
       sumVectors algebra
         (map
@@ -138,19 +126,8 @@ record FederbushLinearizationData
           indices)
       ≡ zero algebra
 
-    jacobianLinearOnDifference : ∀ index input output →
-      logJacobian index (subtract algebra input output)
-      ≡ subtract algebra
-          (logJacobian index input)
-          (logJacobian index output)
-
-    outputComposition : ∀ index vector →
-      logJacobian index (outputTransport index vector)
-      ≡ compose algebra
-          (logJacobian index) (outputTransport index) vector
-
-    -- Finite distributivity theorem specialized to this family.  It is
-    -- typically discharged by the selected vector-space implementation.
+    -- This is the finite distributivity/linearity collection step.  In a
+    -- concrete vector space it is proved from linearity of J_j and T_j.
     linearizedEquationCollects :
       linearizedFederbush →
       sumOperators algebra
@@ -167,21 +144,23 @@ open FederbushLinearizationData public
 averageJacobian :
   ∀ {Index V algebra indices} →
   FederbushLinearizationData {Index} {V} algebra indices → Endomorphism V
-averageJacobian {algebra = algebra} dataSet =
+averageJacobian {algebra = algebra} {indices = indices} dataSet =
   sumOperators algebra
     (map
       (λ index →
         compose algebra
           (logJacobian dataSet index)
           (outputTransport dataSet index))
-      _)
+      indices)
 
 averageSource :
   ∀ {Index V algebra indices} →
   FederbushLinearizationData {Index} {V} algebra indices → V
-averageSource {algebra = algebra} dataSet =
+averageSource {algebra = algebra} {indices = indices} dataSet =
   sumVectors algebra
-    (map (λ index → logJacobian dataSet index (inputVariation dataSet index)) _)
+    (map
+      (λ index → logJacobian dataSet index (inputVariation dataSet index))
+      indices)
 
 record FederbushAverageJacobianInverse
     {Index V : Set}
@@ -210,15 +189,15 @@ federbushAverageDerivativeSolved dataSet inverseData =
       (linearizedFederbush dataSet)
   in
   trans
-    (symmetryStep
-      (inverseAfterJacobian inverseData (averageVariation dataSet)))
+    (sym (inverseAfterJacobian inverseData (averageVariation dataSet)))
     (cong (inverse inverseData) collected)
-  where
-  symmetryStep : ∀ {left right : V} → left ≡ right → right ≡ left
-  symmetryStep refl = refl
 
 ------------------------------------------------------------------------
--- Identity-reference specialization.
+-- Identity-reference target.  The physical reference theorem will prove that
+-- all J_j and T_j are identities and that the inverse of the n-fold identity
+-- sum is multiplication by 1/n.  We keep that numerical normalization outside
+-- this algebraic solver so the n=13 and contour-cardinality witnesses cannot be
+-- silently conflated.
 ------------------------------------------------------------------------
 
 record IdentityReferenceAverageData
@@ -228,24 +207,21 @@ record IdentityReferenceAverageData
   field
     scalarMultiply : Scalar → V → V
     reciprocalCount : Scalar
-
     inputVariation : Index → V
     averageVariation : V
-
-    allLogJacobiansIdentity : Index → Endomorphism V
-    allLogJacobiansIdentity index = identityOperator algebra
-
-    allOutputTransportsIdentity : Index → Endomorphism V
-    allOutputTransportsIdentity index = identityOperator algebra
-
-    arithmeticMean : V
-    arithmeticMean =
-      scalarMultiply reciprocalCount
-        (sumVectors algebra (map inputVariation indices))
-
-    identityReferenceDerivative : averageVariation ≡ arithmeticMean
+    identityReferenceDerivative :
+      averageVariation
+      ≡ scalarMultiply reciprocalCount
+          (sumVectors algebra (map inputVariation indices))
 
 open IdentityReferenceAverageData public
+
+arithmeticMean :
+  ∀ {Index V Scalar algebra indices} →
+  IdentityReferenceAverageData {Index} {V} {Scalar} algebra indices → V
+arithmeticMean {algebra = algebra} {indices = indices} dataSet =
+  scalarMultiply dataSet (reciprocalCount dataSet)
+    (sumVectors algebra (map (inputVariation dataSet) indices))
 
 identityReferenceFederbushDerivativeIsArithmeticMean :
   ∀ {Index V Scalar algebra indices}
