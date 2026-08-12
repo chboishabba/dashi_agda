@@ -46,6 +46,8 @@ import RealProperties as BishopProperties
 import Inverse as BishopInverse
 
 import DASHI.Physics.YangMills.BalabanBishopConcreteSineCosineInterlacingExact as Concrete
+import DASHI.Physics.YangMills.BalabanP33BishopTaylorPolynomialFormExact as Low
+import DASHI.Physics.YangMills.BalabanP33BishopInverseDexpNumeratorExact as Numerator
 import DASHI.Physics.YangMills.BalabanP33BishopInverseDexpCoefficientExact as Cross
 import DASHI.Physics.YangMills.BalabanP33BishopInverseDexpPositiveDenominatorExact as Positive
 import DASHI.Physics.YangMills.BalabanP33BishopInverseDexpActualEndpointModulusExact as Endpoint
@@ -94,7 +96,7 @@ positiveCoefficientEndpointModulus :
 positiveCoefficientEndpointModulus {dataSet} {value} inputs valuePositive =
   let
     denominator = Cross.inverseDexpDenominator dataSet value
-    numerator = Endpoint.Numerator.inverseDexpNumerator dataSet value
+    numerator = Numerator.inverseDexpNumerator dataSet value
     denominatorNonzero = Positive.positiveDenominatorNonzero inputs valuePositive
     denominatorPositive = Positive.inverseDexpDenominatorPositive inputs valuePositive
     denominatorInverse = BishopInverse._⁻¹ denominator denominatorNonzero
@@ -119,14 +121,12 @@ positiveCoefficientEndpointModulus {dataSet} {value} inputs valuePositive =
         (coefficientEndpointDefect inputs valuePositive)
     leftCancel =
       let open BishopProperties.ℝ-Solver
-      in solve 4
-        (λ n d dinv beta →
+      in solve 3
+        (λ n d dinv →
           ((n ⊖ (Κ (+ 1 / 12) ⊗ d)) ⊗ dinv)
-          ⊜ (beta ⊖ Κ (+ 1 / 12)))
-        BishopProperties.≃-refl
-        numerator denominator denominatorInverse
-        (Positive.inverseDexpCoefficientPositive inputs valuePositive)
+          ⊜ ((n ⊗ dinv) ⊖ Κ (+ 1 / 12)))
         denominatorCancellation
+        numerator denominator denominatorInverse
 
     rightCancel :
       BishopReal._≃_
@@ -140,9 +140,8 @@ positiveCoefficientEndpointModulus {dataSet} {value} inputs valuePositive =
         (λ t d dinv →
           (((Κ (+ 1 / 100) ⊗ (t ⊗ t)) ⊗ d) ⊗ dinv)
           ⊜ (Κ (+ 1 / 100) ⊗ (t ⊗ t)))
-        BishopProperties.≃-refl
-        value denominator denominatorInverse
         denominatorCancellation
+        value denominator denominatorInverse
 
     upper =
       BishopProperties.≤-respʳ-≃ rightCancel
@@ -151,7 +150,7 @@ positiveCoefficientEndpointModulus {dataSet} {value} inputs valuePositive =
     coefficientBounds =
       Positive.positiveInverseDexpCoefficientBounds inputs valuePositive
     lower =
-      Cross.nonnegativeDifferenceGivesOrder
+      Low.orderGivesNonnegativeDifference
         (Positive.coefficientAboveOneTwelfth coefficientBounds)
   in record
     { defectNonnegative = lower
