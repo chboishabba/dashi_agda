@@ -16,17 +16,32 @@ import DASHI.Core.EfficientRecoverableQuotientExact
 import DASHI.Core.C3EfficientReopeningExampleExact
 import DASHI.Core.RecoverableQuotientCompositionExact
 import DASHI.Core.MinimalDynamicResidualExact
+import DASHI.Core.FiniteOptimalResidualSelectorExact
 import DASHI.Core.ApproximateMDLResidualBudgetExact
+
+-- Canonical future semantics, dynamic factorisation/composition, and
+-- provenance-conditioned accessibility.
+import DASHI.Core.FutureObservationLanguageQuotientExact
+import DASHI.Core.DynamicProjectionCompositionExact
+import DASHI.Core.PathDependentAccessibilityExact
 
 -- C3-graded provenance dynamics and an exact phase-erasure no-go witness.
 import DASHI.Core.GradedProvenanceDynamicalSystemExact
 import DASHI.Core.HiddenPhaseDynamicInsufficiencyExact
 import DASHI.Cognition.PNF.CoupledDepthPhaseFrustrationExact
 import DASHI.Cognition.PNF.ConstraintPhaseFrustrationExact
+import DASHI.Cognition.PNF.ConstraintNetworkObstructionExact
 import DASHI.Cognition.PNF.PhasedRelationalLatticeExact
+import DASHI.Cognition.PNF.PhasedRelationalEvidencePropagationExact
 import DASHI.Cognition.PNF.IndependentWheelMemoryGradeExact
 import DASHI.Foundations.DepthWheelMacroBranchingExact
+import DASHI.Foundations.DepthWheelStroboscopicContractionExact
 import DASHI.Foundations.CantorUnitMassDynamicBridgeExact
+
+-- Concrete semantic/ontology consumers.
+import DASHI.Cognition.PNF.SpokenTelescopeConsumerProjectionExact
+import DASHI.Cognition.PNF.ExactVsRelevantResidualExact
+import DASHI.Cognition.PNF.WikidataTypePressureMiniWorldExact
 
 -- Memory/content separation.
 import DASHI.Cognition.PNF.MemoryCommandSeparationExact
