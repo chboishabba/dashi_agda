@@ -3,14 +3,15 @@ module DASHI.Physics.Closure.NSTriadKNHighestAlphaRound49Exact where
 ------------------------------------------------------------------------
 -- HIGHEST-ALPHA PERIODIC NAVIER-STOKES AGGREGATE — ROUND 49
 --
--- This module intentionally imports theorem-bearing reductions only.  It does
+-- This module intentionally imports theorem-bearing reductions only. It does
 -- not promote any unresolved physical producer or any Clay terminal claim.
 --
 -- Round 49 concentrates the frontier on:
 --
 --   HH-bad:
 --     direct strict recurrence targets C0<T and beta<(1-alpha)T,
---     explicit division-free interpolation to a ceiling M<T,
+--     exact equivalence with existence of an admissible ceiling M<T,
+--     explicit division-free interpolation to such an M,
 --     inherited domination rather than equality,
 --     and the directional-defect Duhamel/heat-contraction seam;
 --
@@ -37,6 +38,7 @@ open import DASHI.Physics.Closure.NSTriadKNHHGoodLiteralAnnularStrainSymbolRound
 
 open import DASHI.Physics.Closure.NSTriadKNHHBadDirectSlackGateRound49Exact
 open import DASHI.Physics.Closure.NSTriadKNHHBadStrictTargetInterpolationRound49Exact
+open import DASHI.Physics.Closure.NSTriadKNHHBadCeilingExistenceIffStrictTargetsRound49Exact
 open import DASHI.Physics.Closure.NSTriadKNHHBadDirectTargetToSelectedRecurrenceRound49Exact
 open import DASHI.Physics.Closure.NSTriadKNHHBadDirectLiveBudgetRound49Exact
 open import DASHI.Physics.Closure.NSTriadKNHHBadInheritedDominationRound49Exact
