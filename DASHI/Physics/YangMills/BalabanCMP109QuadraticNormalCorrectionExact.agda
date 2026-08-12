@@ -55,11 +55,11 @@ oneHalf twoThirds : ℚ
 oneHalf = + 1 / 2
 twoThirds = + 2 / 3
 
-quadraticResidualBudget : ℚ → ℚ → ℚ → ℚ → ℚ
+quadraticResidualBudget : ℚ → ℚ → ℚ → ℚ
 quadraticResidualBudget lipschitz time directionNormSq =
   oneHalf * lipschitz * (time * time) * directionNormSq
 
-quadraticCorrectionBudget : ℚ → ℚ → ℚ → ℚ → ℚ
+quadraticCorrectionBudget : ℚ → ℚ → ℚ → ℚ
 quadraticCorrectionBudget lipschitz time directionNormSq =
   twoThirds * lipschitz * (time * time) * directionNormSq
 
