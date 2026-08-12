@@ -123,6 +123,36 @@ exterminatoryCommandImportImpossible :
 exterminatoryCommandImportImpossible ()
 
 ------------------------------------------------------------------------
+-- The dangerous contemporary composition is represented as four separately
+-- witnessed stages.  Possessing an ancient source receipt does not construct
+-- any later stage.  In particular there is no function
+--
+-- AmalekProvenance -> ContemporaryAction.
+------------------------------------------------------------------------
+
+record AmalekPromotionChain (Actor : Set) : Set₁ where
+  field
+    binding : AmalekRoleBinding Actor
+    command : CommandTransport binding
+    Group : Set
+    groupOf : Actor → Group
+    CollectivePropagationEvidence : Set
+    collectivePropagationEvidence : CollectivePropagationEvidence
+    TerminalisationEvidence : Set
+    terminalisationEvidence : TerminalisationEvidence
+
+open AmalekPromotionChain public
+
+data ProvenanceAutomaticallyBuildsPromotionChain
+    {Actor : Set}
+    (p : AmalekProvenance) : Set where
+
+provenanceDoesNotAutomaticallyBuildPromotionChain :
+  ∀ {Actor} {p : AmalekProvenance} →
+  ProvenanceAutomaticallyBuildsPromotionChain {Actor} p → ⊥
+provenanceDoesNotAutomaticallyBuildPromotionChain ()
+
+------------------------------------------------------------------------
 -- Canonical source receipts.  These record provenance labels only; this
 -- module does not attempt a theological adjudication or modern identification.
 ------------------------------------------------------------------------
