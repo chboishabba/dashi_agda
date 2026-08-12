@@ -40,8 +40,7 @@ open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base using (ℚ; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚP
-open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym)
 
 import DASHI.Physics.Closure.NSTriadKNLuoBadCoherenceWeightedMarkovExact as Threshold
 import DASHI.Physics.Closure.NSTriadKNHHBadSharpDyadicGainRound33Exact as Sharp
@@ -105,7 +104,7 @@ thresholdedDensityRawRatioBelowBoundedCost :
 thresholdedDensityRawRatioBelowBoundedCost parameter certificate =
   subst
     (λ lower → lower ≤ boundedThresholdedHHBadCost parameter certificate)
-    (thresholdedDensityRawRatioExact parameter certificate)
+    (sym (thresholdedDensityRawRatioExact parameter certificate))
     (actualThresholdedCostBelowBoundedCost parameter certificate)
 
 thresholdedHHBadCostFitsEta :
