@@ -12,6 +12,8 @@ files=(
   DASHI/Core/PossibilityAccessibilitySupport.agda
   DASHI/Core/FinePhaseObservation.agda
   DASHI/Core/RelationalHorizon369.agda
+  DASHI/Core/StructuralSupportEdge.agda
+  DASHI/Core/ClassificationEdge.agda
   DASHI/Foundations/DepthWheelGradedDynamics.agda
   DASHI/Cognition/PNF/BoundedExecutionCarrier.agda
   DASHI/Cognition/PNF/BoundedExecutionAdapters.agda
@@ -75,6 +77,11 @@ required_markers=(
   'evidenceCoordinatePhaseObservation'
   'RelationalHorizon369Boundary'
   'genericRelationalHorizonCoreReusedIsTrue'
+  'StructuralSupportEdge'
+  'canonicalStructuralSupportCoreReusedIsTrue'
+  'ClassificationEdge'
+  'canonicalClassificationCoreReusedIsTrue'
+  'classificationEdgeFromTypePressure'
   'executionOverflowHasNoSemanticPermission'
   'ReopenableExecutionPartition'
   'residualExecutionStateCannotRejectSemantics'
