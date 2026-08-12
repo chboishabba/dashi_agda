@@ -6,8 +6,8 @@ module DASHI.Crypto.ChosenCiphertextObservationRefinementExact where
 -- Blue-team abstraction for active protocol observations.  An observation
 -- need not recover the hidden state to be security-relevant: it may merely
 -- eliminate candidate hidden states.  This module proves the exact monotonic
--- refinement law and distinguishes secret-independent observations from
--- observations that split a hidden fibre.
+-- refinement law and distinguishes public-factored observations from hidden-
+-- dependent observations that split a fibre.
 --
 -- Motivation / protocol reference:
 -- Gorjan Alagic, Elaine Barker, Lily Chen, Dustin Moody, Angela Robinson,
@@ -21,7 +21,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Empty using (⊥)
 open import Data.Product using (_×_; _,_)
 open import Data.Unit using (⊤; tt)
-open import Relation.Binary.PropositionalEquality using (sym)
+open import Relation.Binary.PropositionalEquality using (cong; sym)
 
 record ObservationSystem : Set₁ where
   constructor observationSystem
@@ -98,6 +98,35 @@ secretIndependentSampleCannotSeparate :
   CompatibleWithSample system candidate (honestSample system actual q)
 secretIndependentSampleCannotSeparate independent actual candidate q =
   sameObservation independent candidate actual q
+
+------------------------------------------------------------------------
+-- Stronger and more useful: observations factoring only through an already-
+-- public projection cannot distinguish two hidden states inside the same
+-- public fibre.  Any new fibre split therefore requires a hidden-dependent
+-- oracle/outcome or genuinely new public state.
+------------------------------------------------------------------------
+
+record PublicFactoredObservation : Set₁ where
+  constructor publicFactoredObservation
+  field
+    Hidden Public Query Observation : Set
+    project : Hidden → Public
+    answer : Public → Query → Observation
+
+open PublicFactoredObservation public
+
+publicObserve :
+  (system : PublicFactoredObservation) →
+  Hidden system → Query system → Observation system
+publicObserve system hidden q = answer system (project system hidden) q
+
+samePublicFibreCannotBeSplitByPublicFactoredObservation :
+  ∀ {system : PublicFactoredObservation}
+    {left right : Hidden system} →
+  project system left ≡ project system right →
+  ∀ q → publicObserve system left q ≡ publicObserve system right q
+samePublicFibreCannotBeSplitByPublicFactoredObservation {system} samePublic q =
+  cong (λ public → answer system public q) samePublic
 
 ------------------------------------------------------------------------
 -- Exact split witness: two hidden states agree at the prior public surface but
