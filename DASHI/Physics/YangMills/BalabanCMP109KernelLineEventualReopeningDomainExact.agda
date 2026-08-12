@@ -41,6 +41,7 @@ import Data.Rational.Properties as ℚP
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanCMP109FederbushQuarterReopeningExact as Quarter
+import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
 
 LittleOBudget : ℚ → ℚ → ℚ → ℚ
 LittleOBudget epsilon timeMagnitude directionScale =
@@ -84,8 +85,8 @@ littleOBudgetCorrectionUpper :
 littleOBudgetCorrectionUpper correctionNorm residualNorm epsilon timeMagnitude directionScale
     correctionUpper residualUpper =
   ℚP.≤-trans correctionUpper
-    (Quarter.scaleFourThirdsMonotone residualNorm
-      (LittleOBudget epsilon timeMagnitude directionScale)
+    (Norm.scaleNonnegative Quarter.fourThirds
+      (ℚP.nonNegative⁻¹ Quarter.fourThirds)
       residualUpper)
 
 ------------------------------------------------------------------------
