@@ -7,18 +7,27 @@ module DASHI.Arithmetic.PrimeSupportTransportTaxiMoonshineExact where
 -- boundary explicit: reaching the integer 196883 does not by itself construct
 -- a Monster representation or a moonshine theorem.
 --
--- Historical provenance:
+-- Representation/moonshine provenance:
+-- J. H. Conway and S. P. Norton, "Monstrous Moonshine", Bulletin of the London
+-- Mathematical Society 11 (1979), 308-339.
+-- DOI: 10.1112/blms/11.3.308.
+--
+-- Robert L. Griess Jr. and Stephen D. Smith,
+-- "Minimal dimensions for modular representations of the monster",
+-- Communications in Algebra 22 (1994), 6279-6294.
+-- DOI: 10.1080/00927879408825189.
+--
+-- Historical taxicab provenance:
 -- Srinivasa Ramanujan / G. H. Hardy: 1729 is the least positive integer
 -- expressible as a sum of two positive cubes in two distinct ways.
---
--- Monster/moonshine provenance is intentionally not promoted by the arithmetic
--- trace alone.  A separate typed representation-theoretic witness is required.
+-- No DOI is asserted for the historical anecdote.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Nat.Base using (_+_; _*_)
+open import Data.Empty using (⊥)
 
 cube : Nat → Nat
 cube n = n * n * n
@@ -83,8 +92,8 @@ targetPrimeProduct = refl
 ------------------------------------------------------------------------
 -- Exact combinatorial cardinality behind C(12,3)=220.
 -- This proves the count independently of any particular list of twelve
--- denominators.  Importing a concrete Lean enumeration into Agda can then use
--- this as the cardinality regression without guessing which twelve were used.
+-- denominators.  A concrete imported enumeration can reuse this cardinality
+-- theorem without guessing its twelve-element source set here.
 ------------------------------------------------------------------------
 
 choose : Nat → Nat → Nat
@@ -105,7 +114,7 @@ data ArithmeticLandingAuthority : Set where
 data MoonshinePromotion : ArithmeticLandingAuthority → Set where
 
 arithmeticLandingDoesNotConstructMoonshine :
-  MoonshinePromotion arithmeticLandingOnly → Set
+  MoonshinePromotion arithmeticLandingOnly → ⊥
 arithmeticLandingDoesNotConstructMoonshine ()
 
 record TaxiMoonshineBoundary : Set where
