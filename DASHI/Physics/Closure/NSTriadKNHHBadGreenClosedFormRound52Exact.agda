@@ -33,6 +33,7 @@ open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.List.Base using (map; _++_)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚP
+open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 import DASHI.Physics.Closure.NSTriadKNHHBadShellBarrierRound52Exact as Barrier
@@ -43,19 +44,19 @@ sumℚ (x ∷ xs) = x + sumℚ xs
 
 sumAppend :
   ∀ xs ys → sumℚ (xs ++ ys) ≡ sumℚ xs + sumℚ ys
-sumAppend [] ys = ℚP.sym (ℚP.+-identityˡ (sumℚ ys))
+sumAppend [] ys = solve (sumℚ ys ∷ [])
 sumAppend (x ∷ xs) ys =
   trans
     (cong (x +_) (sumAppend xs ys))
-    (ℚP.+-assoc x (sumℚ xs) (sumℚ ys))
+    (solve (x ∷ sumℚ xs ∷ sumℚ ys ∷ []))
 
 sumScaled :
   ∀ a xs → sumℚ (map (a *_) xs) ≡ a * sumℚ xs
-sumScaled a [] = ℚP.sym (ℚP.*-zeroʳ a)
+sumScaled a [] = solve (a ∷ [])
 sumScaled a (x ∷ xs) =
   trans
     (cong (a * x +_) (sumScaled a xs))
-    (ℚP.sym (ℚP.*-distribˡ-+ a x (sumℚ xs)))
+    (solve (a ∷ x ∷ sumℚ xs ∷ []))
 
 weightedForcingTerms :
   Barrier.GeneralHHBadRecurrence → Nat → List ℚ
@@ -91,9 +92,11 @@ weightedForcingTermsSumExact input (suc n) =
             Barrier.alpha input n * previous
             + sumℚ (Barrier.forcing input n ∷ []))
           (weightedForcingTermsSumExact input n))
-        (cong
-          (Barrier.alpha input n * forcingGreenResponse input n +_)
-          (ℚP.+-identityʳ (Barrier.forcing input n)))))
+        (solve
+          ( Barrier.alpha input n
+          ∷ forcingGreenResponse input n
+          ∷ Barrier.forcing input n
+          ∷ []))))
 
 forcingGreenResponseNonnegative :
   (input : Barrier.GeneralHHBadRecurrence) →
