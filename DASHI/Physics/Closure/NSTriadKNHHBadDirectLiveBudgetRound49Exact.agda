@@ -14,22 +14,16 @@ module DASHI.Physics.Closure.NSTriadKNHHBadDirectLiveBudgetRound49Exact where
 --
 -- DASHI CONTRIBUTION
 --
--- Push the live hard gate all the way onto physical recurrence data.  For
---
---   T = 15/32 - (tau_Com + tau_kernel)/2,
---
--- it is enough to prove directly
---
---   C_0 < T,
---   beta < (1-alpha)T.
---
--- Round 49 constructs M<T internally and Round 48 then proves H2(M)<1.
--- If Com and kernel are both soft, this specializes to T=15/32.
+-- Push the live hard gate all the way onto physical recurrence data. For
+-- T = 15/32 - (tau_Com + tau_kernel)/2 it is enough to prove directly
+-- C_0<T and beta<(1-alpha)T. Round 49 constructs M<T internally and
+-- Round 48 then proves H2(M)<1.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base using (ℚ; 1ℚ; _+_; _-_; _*_; _<_; _≤_)
+open import Agda.Builtin.Nat using (zero)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _-_; _*_; _<_) 
 
 import DASHI.Physics.Closure.NSTriadKNLuoBadCoherenceWeightedMarkovExact as Threshold
 import DASHI.Physics.Closure.NSTriadKNHHBadDefectRecurrenceNormalizationRound46Exact as Defect
@@ -45,7 +39,7 @@ record PhysicalDirectLiveBudgetInput
     comFloor kernelFloor : ℚ
 
     normalizedBaseBelowLiveTarget :
-      Defect.normalizedDefectProfile physicalRecurrence Agda.Builtin.Nat.zero
+      Defect.normalizedDefectProfile physicalRecurrence zero
       < Live.allowableHHBadCeiling comFloor kernelFloor
 
     forcingBelowLiveTarget :
@@ -94,10 +88,7 @@ directRecurrenceDataImpliesH2Strict input =
     (derivedLiveCeilingBelowAllowance input)
 
 softComKernelTargetIsFifteenThirtySeconds :
-  Live.allowableHHBadCeiling
-    DASHI.Physics.Closure.NSTriadKNHHBadSharpDyadicGainRound33Exact.zero
-    DASHI.Physics.Closure.NSTriadKNHHBadSharpDyadicGainRound33Exact.zero
-  ≡ Live.fifteenThirtySeconds
+  Live.allowableHHBadCeiling 0ℚ 0ℚ ≡ Live.fifteenThirtySeconds
 softComKernelTargetIsFifteenThirtySeconds = Live.allowableWithSoftComAndKernel
 
 hhBadHardGateNowConsumesDirectRecurrenceTargets : Bool
