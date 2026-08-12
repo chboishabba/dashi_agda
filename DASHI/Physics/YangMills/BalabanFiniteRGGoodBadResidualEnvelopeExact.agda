@@ -213,8 +213,9 @@ finiteRGGoodBadAbsoluteCovarianceUpper :
 finiteRGGoodBadAbsoluteCovarianceUpper (terminal value) =
   subst
     (λ upper → ∣ value ∣ ≤ upper)
-    (ℚRing.solve-∀ ∣ value ∣ :
-      ∣ value ∣ + 0ℚ + 0ℚ ≡ ∣ value ∣)
+    (sym
+      (ℚRing.solve-∀ ∣ value ∣ :
+        ∣ value ∣ + 0ℚ + 0ℚ ≡ ∣ value ∣))
     ℚP.≤-refl
 finiteRGGoodBadAbsoluteCovarianceUpper
     (prepend {fine} {coarse} remainder good exceptional
