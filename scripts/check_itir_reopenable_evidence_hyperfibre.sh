@@ -45,6 +45,15 @@ files=(
   DASHI/Cognition/PNF/PNFEvidenceHyperformalism.agda
   DASHI/Cognition/PNF/DirectDemandLookup.agda
   DASHI/Cognition/PNF/RuntimeThroughputConstitution.agda
+  DASHI/Cognition/PNF/NumericHotPathConstitution.agda
+  DASHI/Cognition/PNF/CorpusLearningEconomy.agda
+  DASHI/Cognition/PNF/ContextualWorldCache.agda
+  DASHI/Cognition/PNF/RelativeOctantAddressReference.agda
+  DASHI/Cognition/PNF/LazyHorizonIncrementalExecution.agda
+  DASHI/Cognition/PNF/FrequencyAdaptiveSymbolCode.agda
+  DASHI/Cognition/PNF/HotColdExecutionProjection.agda
+  DASHI/Cognition/PNF/WorkloadGranularityReference.agda
+  DASHI/Cognition/PNF/StructuralSupportSelectivity.agda
   DASHI/Cognition/PNF/NumericPNFHyperfabricEverything.agda
   DASHI/Cognition/PNF/DepthWheelMemoryHyperfabric.agda
   DASHI/Cognition/PNF/DepthWheelMemoryPhaseGeometry.agda
@@ -127,6 +136,10 @@ required_markers=(
   'regexHasNoSemanticAuthority'
   'outputDoesNotExceedInput'
   'decodeEncode'
+  'LosslessNumericObservationTapeCodec'
+  'decodeEncodeTape'
+  'packedObservationTapeMustReconstructExactlyIsTrue'
+  'lowCodeValueAloneDoesNotProveNarrowerPostgresStorage'
   'multiscaleStorageJoinSplitExact'
   'numberTheoryAloneDoesNotSelectPhysicalLayout'
   'queryCommutationIsClassicalNyquistTheoremIsFalse'
@@ -161,6 +174,29 @@ required_markers=(
   'postParserElapsedDominated'
   'ArchiveScaleReceipt'
   'performanceReceiptCannotPromoteSemantics'
+  'regexCannotEnterSemanticHotPath'
+  'NumericAutomatonReceipt'
+  'workWithinLinearPlusMatches'
+  'learningCannotIncreaseDeclaredWorkBound'
+  'cacheSizeAloneDoesNotProveRuntimeImprovement'
+  'tokenCountAloneDoesNotProveComparableWorkload'
+  'chronologicalOrderAloneDoesNotProveLearningImprovement'
+  'ContextRequirementsSatisfied'
+  'contextRequirementsSatisfied'
+  'contextPreferenceCannotPromoteWorldIdentity'
+  'cachedLabelCannotPromoteOneWorldEntity'
+  'missingContextDoesNotRefuteCandidate'
+  'decodeEncodeOctant'
+  'oneOctantDigitDoesNotProveOneByteWholeCell'
+  'h6ConsumesExactlyH3Residual'
+  'h9ConsumesExactlyH6Residual'
+  'recomputedExactlyAffected'
+  'absenceOfEvidenceCannotRefute'
+  'frequencyRankCannotChangeSemanticIdentity'
+  'maintainedEqualsRebuilt'
+  'tokensArePrimaryCrossDocumentScaleIsTrue'
+  'StructuralSupportFanoutReceipt'
+  'supportMayBeBuiltAsUnboundedTokenObjectCrossProductIsFalse'
 )
 
 for marker in "${required_markers[@]}"; do
