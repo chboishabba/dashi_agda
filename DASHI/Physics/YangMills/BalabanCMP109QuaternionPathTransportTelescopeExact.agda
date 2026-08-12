@@ -38,6 +38,8 @@ module DASHI.Physics.YangMills.BalabanCMP109QuaternionPathTransportTelescopeExac
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Data.List.Base using (length)
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
@@ -74,9 +76,12 @@ oneStepProductDifferenceExact
     (ℚRing.solve-∀ a0 a1 a2 a3 b0 b1 b2 b3 p0 p1 p2 p3 q0 q1 q2 q3)
     (ℚRing.solve-∀ a0 a1 a2 a3 b0 b1 b2 b3 p0 p1 p2 p3 q0 q1 q2 q3)
 
+sucInjective : ∀ {m n : Nat} → suc m ≡ suc n → m ≡ n
+sucInjective refl = refl
+
 pathProductDifferenceTelescopeExact :
   ∀ left right →
-  Agda.Builtin.List.length left ≡ Agda.Builtin.List.length right →
+  length left ≡ length right →
   Four._-q_ (pathProduct left) (pathProduct right)
   ≡ pathDifferenceTelescope left right
 pathProductDifferenceTelescopeExact [] [] refl =
@@ -93,7 +98,7 @@ pathProductDifferenceTelescopeExact (u ∷ us) (v ∷ vs) lengthEqual =
         ((Four._-q_ u v) Q.*q pathProduct us)
         Q.+q (v Q.*q tailDifference))
       (pathProductDifferenceTelescopeExact us vs
-        (Agda.Builtin.Nat.suc-injective lengthEqual)))
+        (sucInjective lengthEqual)))
 
 cmp109QuaternionPathProductTelescopeLevel : ProofLevel
 cmp109QuaternionPathProductTelescopeLevel = machineChecked
