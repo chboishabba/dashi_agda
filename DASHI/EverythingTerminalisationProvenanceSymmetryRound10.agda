@@ -33,7 +33,7 @@ import DASHI.Cognition.PNF.MemoryCommandSeparationExact
 
 -- Cryptographic reopening, concrete noisy-fibre witness, statewise key tests,
 -- public-only transcript invariance, active observation refinement, exact reuse
--- leakage, top-ten profiles, and security dependency/attack formalism.
+-- leakage, top-ten profiles/observation surfaces, and dependency/attack graph.
 import DASHI.Crypto.ReopeningArchitectureExact
 import DASHI.Crypto.MLKEMNoisyReopeningExact
 import DASHI.Crypto.KEMStateContractExact
@@ -45,6 +45,7 @@ import DASHI.Crypto.ChosenCiphertextObservationRefinementExact
 import DASHI.Crypto.CryptoUsageInvariantExact
 import DASHI.Crypto.XorReuseLeakExact
 import DASHI.Crypto.TopTenCryptoBlueTeamProfilesExact
+import DASHI.Crypto.TopTenCryptoObservationSurfacesExact
 import DASHI.Crypto.TopTenCryptoDependencyGraphExact
 
 -- Exact arithmetic transport / semantic-promotion boundary.
