@@ -32,6 +32,7 @@ data SecurityObligation : Set where
   paddingValidityNotObservable
   discreteLogHard
   publicElementAcceptedOnlyIfValid
+  x25519AllZeroSharedSecretHandled
   ephemeralFresh
   kemComponentSecure
   kdfComponentSecure
@@ -68,8 +69,9 @@ data DependsOn : Profile.CryptoCandidate → SecurityObligation → Set where
   dhModel : DependsOn Profile.diffieHellman attackerModelWithinAssumedBoundary
 
   xDlog : DependsOn Profile.x25519 discreteLogHard
-  xValidate : DependsOn Profile.x25519 publicElementAcceptedOnlyIfValid
+  xAllZero : DependsOn Profile.x25519 x25519AllZeroSharedSecretHandled
   xFresh : DependsOn Profile.x25519 ephemeralFresh
+  xContext : DependsOn Profile.x25519 contextBound
   xModel : DependsOn Profile.x25519 attackerModelWithinAssumedBoundary
 
   elgDlog : DependsOn Profile.elGamal discreteLogHard
