@@ -8,7 +8,7 @@ import DASHI.Core.TypedDependencyCore as Dependency
 -- Canonical structural support / realisation edge.
 --
 -- Support evidence is endpoint-dependent: an exact seam proof may mention both
--- source and target.  Therefore the core reuses the existing dependent
+-- source and target. Therefore the core reuses the existing dependent
 -- `Relation : Source -> Target -> Set` shape directly rather than flattening
 -- evidence into an unindexed payload.
 ------------------------------------------------------------------------
@@ -22,19 +22,19 @@ structuralSupportEdgeAt :
   ∀ {Source Target}
     {Relation : Source → Target → Set} →
   Dependency.DependencyLayer →
-  Dependency.DependencyNecessity →
+  Dependency.DependencyDisposition →
   (source : Source) →
   (target : Target) →
   Relation source target →
   String → String →
   StructuralSupportEdge Relation
-structuralSupportEdgeAt layer necessity source target evidence provenance scope =
+structuralSupportEdgeAt layer disposition source target evidence provenance scope =
   Dependency.dependencyWitness
     source
     target
     evidence
     layer
-    necessity
+    disposition
     provenance
     scope
 
