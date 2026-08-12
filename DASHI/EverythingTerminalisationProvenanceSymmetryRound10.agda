@@ -32,7 +32,8 @@ import DASHI.Foundations.CantorUnitMassDynamicBridgeExact
 import DASHI.Cognition.PNF.MemoryCommandSeparationExact
 
 -- Cryptographic reopening, concrete noisy-fibre witness, statewise key tests,
--- public-only transcript invariance, and security dependency/attack formalism.
+-- public-only transcript invariance, active observation refinement, exact reuse
+-- leakage, top-ten profiles, and security dependency/attack formalism.
 import DASHI.Crypto.ReopeningArchitectureExact
 import DASHI.Crypto.MLKEMNoisyReopeningExact
 import DASHI.Crypto.KEMStateContractExact
@@ -40,6 +41,11 @@ import DASHI.Crypto.MLWEKeyStateResidualExact
 import DASHI.Crypto.PassiveEncapsulationFibreInvariantExact
 import DASHI.Crypto.PublicSecretFactorisationAttackExact
 import DASHI.Crypto.MLKEMSecurityDependencyGraphExact
+import DASHI.Crypto.ChosenCiphertextObservationRefinementExact
+import DASHI.Crypto.CryptoUsageInvariantExact
+import DASHI.Crypto.XorReuseLeakExact
+import DASHI.Crypto.TopTenCryptoBlueTeamProfilesExact
+import DASHI.Crypto.TopTenCryptoDependencyGraphExact
 
 -- Exact arithmetic transport / semantic-promotion boundary.
 import DASHI.Arithmetic.PrimeSupportTransportTaxiMoonshineExact
