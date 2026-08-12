@@ -9,7 +9,9 @@ import DASHI.Core.DynamicalQuotientSafety
 import DASHI.Core.ProvenanceQuotientDynamics
 import DASHI.Core.PossibilityAccessibilitySupport
 import DASHI.Core.FinePhaseObservation
+import DASHI.Core.RelationalHorizon369
 import DASHI.Foundations.DepthWheelGradedDynamics
+import DASHI.Physics.Closure.SSP369PolarResidualQuotient
 import DASHI.Cognition.PNF.BoundedExecutionAdapters
 import DASHI.Cognition.PNF.SupportClassificationIdentitySpine
 import DASHI.Cognition.PNF.TypePressure
