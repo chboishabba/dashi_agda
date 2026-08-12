@@ -18,7 +18,7 @@ Thus composition does not silently discard the intermediate residual.
 
 ### Minimal sufficient residual: hidden phase
 
-`DASHI.Core.MinimalDynamicResidualExact` reuses the existing hidden-phase dynamic-insufficiency counterexample. Boolean observation alone is dynamically unsafe, but the pair `(visible Bool, C3 phase)` reopens the complete packed state exactly. In the explicit two-tier family `{no residual, phase residual}`, the zero tier has no sufficiency constructor and the phase tier has cost one. This is a finite exact minimal-residual witness, not a general global minimization theorem.
+`DASHI.Core.MinimalDynamicResidualExact` reuses the existing hidden-phase dynamic-insufficiency counterexample. Boolean observation alone is dynamically unsafe, and the stronger `noVisibleOnlyExactReopening` theorem proves that no function of the visible Boolean alone can exactly reconstruct every hidden-phase fine state. By contrast, `(visible Bool, C3 phase)` reopens every packed state exactly. Therefore zero residual is impossible for exact reopening in this finite model, while one three-valued phase coordinate suffices. This is an exact finite minimal-residual result, not a general global minimization theorem.
 
 ### Cantor unit mass is not truth
 
