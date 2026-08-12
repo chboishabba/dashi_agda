@@ -39,14 +39,15 @@ module DASHI.Physics.YangMills.BalabanCMP109FederbushTrivializationCoherenceExac
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Data.List.Base using (length)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 1ℚ; _+_; _-_; _*_)
+  (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_)
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact using
-  (sumRational)
+  (natAsRational; sumRational)
 import DASHI.Physics.YangMills.BalabanPhysicalSU2FiniteCoordinatesExact as Physical
 import DASHI.Physics.YangMills.BalabanCMP109FederbushNormalizedJacobianExact as Jacobian
 
@@ -81,10 +82,7 @@ record FederbushTrivializationData (Index : Set) : Set₁ where
   field
     indices : List Index
     weight : ℚ
-    normalizedWeight :
-      weight * DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact.natAsRational
-        (Data.List.Base.length indices)
-      ≡ 1ℚ
+    normalizedWeight : weight * natAsRational (length indices) ≡ 1ℚ
 
     logJacobian : Index → Jacobian.Lie3Matrix
     centreTransport : Index → Jacobian.Lie3Matrix
@@ -223,7 +221,7 @@ federbushOutputInverseDerivativeTrivializationExact J T vector coordinate =
 federbushImplicitDerivativeEquationExact :
   ∀ {Index} (dataSet : FederbushTrivializationData Index) centre →
   (∀ coordinate → normalizedFederbushLinearizedResidual dataSet centre coordinate
-      ≡ Data.Rational.0ℚ) →
+      ≡ 0ℚ) →
   ∀ coordinate →
   normalizedCentreJacobianApply dataSet centre coordinate
   ≡ normalizedInputForcing dataSet coordinate
@@ -232,9 +230,28 @@ federbushImplicitDerivativeEquationExact dataSet centre residualZero coordinate 
     split = federbushInputDerivativeTrivializationExact
       dataSet centre coordinate
     zero = residualZero coordinate
+    differenceZero :
+      normalizedInputForcing dataSet coordinate
+        - normalizedCentreJacobianApply dataSet centre coordinate
+      ≡ 0ℚ
+    differenceZero = trans (sym split) zero
+
+    translated = cong
+      (_+ normalizedCentreJacobianApply dataSet centre coordinate)
+      differenceZero
+
+    reduced :
+      normalizedInputForcing dataSet coordinate
+      ≡ normalizedCentreJacobianApply dataSet centre coordinate
+    reduced = trans
+      (ℚRing.solve-∀
+        (normalizedInputForcing dataSet coordinate)
+        (normalizedCentreJacobianApply dataSet centre coordinate))
+      (trans translated
+        (ℚRing.solve-∀
+          (normalizedCentreJacobianApply dataSet centre coordinate)))
   in
-  ℚRing.solve
-    (split ∷ zero ∷ [])
+  sym reduced
 
 cmp109FederbushInputTrivializationLevel : ProofLevel
 cmp109FederbushInputTrivializationLevel = machineChecked
