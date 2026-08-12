@@ -2,11 +2,26 @@
 
 This tranche closes the defensive candidate-test → observation → fibre → search → protected-label → finite-game chain. It is cryptanalytic infrastructure, not a claim that ML-KEM or another standardized primitive is broken.
 
-## 1. Canonical observation model
+## 1. Canonical threat/observation model
 
 `DASHI.Crypto.BlueTeamAdversaryObservationExact` defines a hidden state, public projection, adversarial query, and observation. `PublicFactored` proves that if an observation factors entirely through already-public state, then two hidden states in the same public fibre receive the same observation for every query. `HiddenDependentSplit` is the opposite constructive witness. `publicFactoredCannotSplitSamePublicFibre` proves the two cannot coexist.
 
+`BlueTeamThreatModelExact` composes public state, hidden state, query, observation, protected output, per-query cost, and a finite candidate mask in one object. Its adapters reuse the observation and protected-label cores. It proves three central defensive facts on the composed carrier: public protected-label splits refute exact public recovery; public-factored observations cannot be hidden-dependent split witnesses; and candidate refinement cannot increase finite candidate count.
+
 This unifies passive ciphertexts, accept/reject state, timing, protocol outcomes, and physical observations under one rule: a new observation matters only if it separates states that the prior public surface identified.
+
+### Exact preimage fibre versus computational candidate fibre
+
+`ComputationalCandidateFibreExact` records an important correction to the quotient metaphor. MLWE hardness does **not** require the true public map to be mathematically many-to-one on the intended hidden carrier. An injective public map may still lack an efficient inverse in a chosen computational model. Separately, a cheap plausibility test may admit candidates that are not exact preimages.
+
+Thus DASHI now distinguishes:
+
+- exact fibre: `publish(h)=p`;
+- computational/epistemic candidate fibre: `Plausible(p,h)`;
+- an actual inversion algorithm;
+- model-relative inversion cost.
+
+Injectivity proves exact-fibre uniqueness, not efficient inversion. Residual plausibility proves candidate admission, not exact key recovery.
 
 ## 2. Exact finite fibre cardinality
 
@@ -97,7 +112,7 @@ A concrete advance must therefore supply at least one of:
 - a local residual decomposition with cheap candidate enumeration **and** cheap reconciliation;
 - a model-relative search improvement that changes the actual work bound.
 
-Conversely, blue-team evidence can refute whole attack families by proving observations public-factored, protected labels nonconstant on observation fibres, or reconciliation costs that restore the full search bottleneck.
+Conversely, blue-team evidence can refute whole attack families by proving observations public-factored, proving protected labels nonconstant on relevant observation fibres, distinguishing plausibility from exact preimage membership, or showing reconciliation costs restore the full search bottleneck.
 
 ## Validation boundary
 
