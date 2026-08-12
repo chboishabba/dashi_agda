@@ -2,6 +2,7 @@ module DASHI.Cognition.PNF.RelevanceMassDynamicSafetyRegression where
 
 open import Agda.Builtin.Equality using (refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 open import DASHI.Cognition.PNF.ComplexityArithmetic
