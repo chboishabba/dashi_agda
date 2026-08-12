@@ -11,26 +11,28 @@ import DASHI.Physics.Closure.NSA7ResidualDepletionGronwallBoundary as A7
 import DASHI.Physics.Closure.NSA8FullLocalDefectMonotonicityBoundary as A8
 import DASHI.Physics.Closure.NSA9CKNBKMClosureBoundary as A9
 import DASHI.Physics.Closure.NSFinalStateReceipt as Final
-import DASHI.Physics.Closure.NSTriadKNHighestAlphaRound45Exact
+import DASHI.Physics.Closure.NSTriadKNHighestAlphaRound47Exact
+import DASHI.Physics.Closure.NSTriadKNHighestAlphaRound50Exact
 import DASHI.Papers.NavierStokes.ClayContractRound23 as Clay23
 
 ------------------------------------------------------------------------
 -- Paper-facing Navier-Stokes theorem/status interface.
 --
 -- This module is a thin, non-promoting wrapper over the current closure
--- receipts.  It intentionally exports theorem-status fields suitable for a
--- paper spine while preserving the Clay terminal boundary as false.  Round 23
--- adds the literal Fefferman periodic contract as a canonical fail-closed
+-- receipts. It intentionally exports theorem-status fields suitable for a
+-- paper spine while preserving the Clay terminal boundary as false. Round 23
+-- carries the literal Fefferman periodic contract as a canonical fail-closed
 -- surface: the target theorem type is represented, but physical producers and
 -- unconditional promotion remain false.
 --
--- The current theorem-bearing highest-alpha aggregate is imported as well, so
--- DASHI.Everything (which imports this interface) reaches the Round-45 exact
--- modules without promoting their unresolved physical producer boundaries.
+-- The theorem-bearing Round-47 and Round-50 highest-alpha aggregates are
+-- imported so DASHI.Everything reaches the direct/summable HH-bad gates,
+-- bandwidth-one Com reduction and exact-norm HH-good continuum seam without
+-- changing any terminal status bit.
 
 paperInterfaceStatement : String
 paperInterfaceStatement =
-  "Paper-facing NS interface: A6/A7/A8/A9 closure receipts, the current exact highest-alpha aggregate, and the literal Round 23 Fefferman periodic contract are imported; the target surface is visible while unresolved physical producer inhabitation, Clay Navier-Stokes and terminal promotion remain false."
+  "Paper-facing NS interface: A6/A7/A8/A9 closure receipts, the Round-47 and Round-50 exact highest-alpha aggregates, and the literal Round 23 Fefferman periodic contract are imported; the target surface is visible while unresolved physical producer inhabitation, Clay Navier-Stokes and terminal promotion remain false."
 
 record NSPaperTheoremStatus : Setω where
   field
