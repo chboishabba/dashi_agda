@@ -33,9 +33,10 @@ open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; _+_; _-_; -_; _≤_; ∣_∣)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
 import DASHI.Physics.YangMills.BalabanFiniteRectangularSchurSquaredExact as RectSchur
 import DASHI.Physics.YangMills.BalabanPhysicalSU2FiniteCoordinatesExact as Physical
 import DASHI.Physics.YangMills.BalabanCMP109FederbushNormalizedJacobianExact as Jacobian
@@ -153,8 +154,7 @@ adDifferenceColumnBound x0 x1 x2 y0 y1 y2 delta difference column =
       ≡ RectSchur.rectAbsoluteColumnMass Physical.lieCoordinates3
         (adMatrix (x0 - y0) (x1 - y1) (x2 - y2)) column
     exactMass =
-      DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact.sumRationalCong
-        Physical.lieCoordinates3 _ _
+      Sums.sumRationalCong Physical.lieCoordinates3 _ _
         (λ row → cong ∣_∣
           (adMatrixDifferenceExact x0 x1 x2 y0 y1 y2 row column))
 
