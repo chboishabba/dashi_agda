@@ -23,7 +23,8 @@ module DASHI.Crypto.MLKEMNoisyReopeningExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Product using (_×_; _,_)
+open import Data.Nat.Base using (_+_; _*_)
+open import Data.Product using (_×_; _,_; proj₁; proj₂)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.FibreRestrictionCore as Fibre
@@ -84,14 +85,11 @@ toyNoisyObservation =
     _+_
     (λ s e → 2 * s + e)
     (λ s e → refl)
-  where
-    open import Data.Nat.Base using (_+_; _*_)
 
 toyPublicCollision : PublicFibreCollision toyNoisyObservation
 toyPublicCollision =
   publicFibreCollision 0 1 2 0 refl distinct
   where
-    open import Data.Nat.Base using (zero; suc)
     distinct : (0 ≡ 1 × 2 ≡ 0) → ⊥
     distinct ((), second)
 
@@ -106,13 +104,11 @@ toyCore =
     (Nat × Nat)
     Nat
     Nat
-    (λ pair → 2 * Data.Product.proj₁ pair + Data.Product.proj₂ pair)
+    (λ pair → 2 * proj₁ pair + proj₂ pair)
     (λ surface → Nat × Nat)
     (λ evidence surface → Nat × Nat)
     true
     false
-  where
-    open import Data.Nat.Base using (_+_; _*_)
 
 toyNoisyProvenanceQuotient : Quotient.ProvenanceBearingQuotient toyCore
 toyNoisyProvenanceQuotient =
@@ -139,8 +135,7 @@ record CorrectKEM : Set₁ where
     correctness :
       ∀ secret coins →
       let result = encapsulate (derivePublic secret) coins in
-      decapsulate secret (Data.Product.proj₁ result)
-      ≡ Data.Product.proj₂ result
+      decapsulate secret (proj₁ result) ≡ proj₂ result
 
 open CorrectKEM public
 
