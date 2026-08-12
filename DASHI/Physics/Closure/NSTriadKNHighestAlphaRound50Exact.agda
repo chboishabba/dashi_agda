@@ -23,16 +23,16 @@ module DASHI.Physics.Closure.NSTriadKNHighestAlphaRound50Exact where
 --   * requires the analytic master-kernel L1 theorem in one explicit tensor
 --     norm, preventing a silent operator/Frobenius/entrywise norm switch.
 --
--- Primary source metadata lives in the imported modules.  No Clay/terminal
+-- Primary source metadata lives in the imported modules. No Clay/terminal
 -- status is changed here.
 ------------------------------------------------------------------------
 
-open import DASHI.Physics.Closure.NSTriadKNHighestAlphaRound49Exact
-open import DASHI.Physics.Closure.NSTriadKNHHBadZetaMarginRound50Exact
-open import DASHI.Physics.Closure.NSTriadKNHHBadZetaDirectLiveBudgetRound50Exact
-open import DASHI.Physics.Closure.NSTriadKNHHBadSummableForcingRound50Exact
-open import DASHI.Physics.Closure.NSTriadKNHHBadNonexpansiveSummableForcingRound50Exact
-open import DASHI.Physics.Closure.NSTriadKNHHBadSummableForcingToOwnerRound50Exact
-open import DASHI.Physics.Closure.NSTriadKNHHBadTwoRouteLiveGateRound50Exact
-open import DASHI.Physics.Closure.NSTriadKNComExplicitSoftCoefficientRound50Exact
-open import DASHI.Physics.Closure.NSTriadKNHHGoodExactTensorKernelNormRound50Exact
+import DASHI.Physics.Closure.NSTriadKNHighestAlphaRound49Exact
+import DASHI.Physics.Closure.NSTriadKNHHBadZetaMarginRound50Exact
+import DASHI.Physics.Closure.NSTriadKNHHBadZetaDirectLiveBudgetRound50Exact
+import DASHI.Physics.Closure.NSTriadKNHHBadSummableForcingRound50Exact
+import DASHI.Physics.Closure.NSTriadKNHHBadNonexpansiveSummableForcingRound50Exact
+import DASHI.Physics.Closure.NSTriadKNHHBadSummableForcingToOwnerRound50Exact
+import DASHI.Physics.Closure.NSTriadKNHHBadTwoRouteLiveGateRound50Exact
+import DASHI.Physics.Closure.NSTriadKNComExplicitSoftCoefficientRound50Exact
+import DASHI.Physics.Closure.NSTriadKNHHGoodExactTensorKernelNormRound50Exact
