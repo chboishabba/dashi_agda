@@ -40,7 +40,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _<_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import DASHI.Physics.Closure.NSTriadKNHHBadSharpDyadicGainRound33Exact as Sharp
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteCriticalFourClassClosureExact as Critical
@@ -89,29 +89,10 @@ globalCeilingBelowTargetImpliesGate
     ceiling comGlobal kernelGlobal hhGoodGlobal below =
   subst
     (_< 1ℚ)
+    (sym (globalEtaIsGroupedH2
+      ceiling comGlobal kernelGlobal hhGoodGlobal))
     (Live.liveCeilingTargetImpliesH2Strict
-      ceiling comGlobal (kernelGlobal + hhGoodGlobal) below
-      |>λ)
-    ?
-  where
-  -- Kept below as a named equality rather than hiding the ownership grouping.
-  grouped :
-    globalEffectiveEtaTotal ceiling comGlobal kernelGlobal hhGoodGlobal
-    ≡ Gate.hardGateH2 ceiling comGlobal (kernelGlobal + hhGoodGlobal)
-  grouped = globalEtaIsGroupedH2 ceiling comGlobal kernelGlobal hhGoodGlobal
-
-  h2Strict :
-    Gate.hardGateH2 ceiling comGlobal (kernelGlobal + hhGoodGlobal) < 1ℚ
-  h2Strict =
-    Live.liveCeilingTargetImpliesH2Strict
-      ceiling comGlobal (kernelGlobal + hhGoodGlobal) below
-
-  -- transport strictness from grouped H2 back to the global total
-  result : globalEffectiveGate ceiling comGlobal kernelGlobal hhGoodGlobal
-  result = subst (_< 1ℚ) (Relation.Binary.PropositionalEquality.sym grouped) h2Strict
-
-  |>λ : Gate.hardGateH2 ceiling comGlobal (kernelGlobal + hhGoodGlobal) < 1ℚ
-  |>λ = h2Strict
+      ceiling comGlobal (kernelGlobal + hhGoodGlobal) below)
 
 globalGateWithZeroHHGoodEqualsH2 :
   ∀ ceiling comFloor kernelFloor →
