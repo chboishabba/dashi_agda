@@ -31,7 +31,10 @@ module DASHI.Physics.Closure.NSTriadKNGlobalGateIffRound53Exact where
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base using (ℚ; _+_; _<_)
+open import Agda.Builtin.List using ([])
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _<_)
+open import Data.Rational.Tactic.RingSolver using (solve)
+open import Relation.Binary.PropositionalEquality using (subst)
 
 import DASHI.Physics.Closure.NSTriadKNGlobalEffectiveSoftFloorGateRound51Exact as Global
 import DASHI.Physics.Closure.NSTriadKNHHBadLiveBudgetTargetRound48Exact as Live
@@ -83,14 +86,22 @@ globalGateStrictIffLiveCeilingTarget
     (λ gate → _↔_.forward h2Iff (toH2 gate))
     (λ target → fromH2 (_↔_.backward h2Iff target))
 
+globalZeroSoftTargetIsFifteenThirtySeconds :
+  Global.globalAllowableHHBadCeiling 0ℚ 0ℚ 0ℚ
+  ≡ Live.fifteenThirtySeconds
+globalZeroSoftTargetIsFifteenThirtySeconds = solve []
+
 zeroSoftGlobalGateStrictIffFifteenThirtySeconds :
   ∀ ceiling →
   Global.globalEffectiveGate ceiling 0ℚ 0ℚ 0ℚ
   ↔ (ceiling < Live.fifteenThirtySeconds)
-zeroSoftGlobalGateStrictIffFifteenThirtySeconds ceiling
-  rewrite Global.globalAllowableHHBadCeiling 0ℚ 0ℚ 0ℚ
-        | Live.allowableWithSoftComAndKernel =
-  globalGateStrictIffLiveCeilingTarget ceiling 0ℚ 0ℚ 0ℚ
+zeroSoftGlobalGateStrictIffFifteenThirtySeconds ceiling =
+  subst
+    (λ target →
+      Global.globalEffectiveGate ceiling 0ℚ 0ℚ 0ℚ
+      ↔ (ceiling < target))
+    globalZeroSoftTargetIsFifteenThirtySeconds
+    (globalGateStrictIffLiveCeilingTarget ceiling 0ℚ 0ℚ 0ℚ)
 
 globalGateTargetIsExactNotMerelySufficient : Bool
 globalGateTargetIsExactNotMerelySufficient = true
