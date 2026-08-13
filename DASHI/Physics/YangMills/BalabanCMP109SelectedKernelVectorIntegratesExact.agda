@@ -34,6 +34,7 @@ import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
 
 fourThirds : ℚ
 fourThirds = + 4 / 3
@@ -58,8 +59,9 @@ canonicalKernelCurveCorrectionLittleO :
 canonicalKernelCurveCorrectionLittleO
     timeMagnitude residualMagnitude correctionMagnitude epsilon data =
   let
-    scaled = ℚP.*-monoˡ-≤-nonNeg
-      fourThirds (residualLittleOAtScale data)
+    scaled = Norm.scaleNonnegative fourThirds
+      (ℚP.nonNegative⁻¹ fourThirds)
+      (residualLittleOAtScale data)
     chained = ℚP.≤-trans (canonicalCorrectionFourThirds data) scaled
   in
   subst
