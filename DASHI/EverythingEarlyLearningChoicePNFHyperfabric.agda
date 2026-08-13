@@ -1,0 +1,10 @@
+module DASHI.EverythingEarlyLearningChoicePNFHyperfabric where
+
+open import DASHI.Education.RelationalEducationGateAlgebra public
+open import DASHI.Education.EarlyLearningChoicePNFHyperfabricBridge public
+open import DASHI.Education.RoseContextLearningSourceBoundary public
+open import DASHI.Core.IntersectionalNonFactorability public
+open import DASHI.Cognition.PNF.MemoryFibre public
+open import DASHI.Cognition.PNF.LearningAlgebra public
+open import DASHI.Cognition.PNF.FibreLearningDynamics public
+open import DASHI.Cognition.PNF.TraumaMemoryHypervoxelBridge public
