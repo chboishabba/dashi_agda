@@ -31,14 +31,14 @@ module DASHI.Physics.Closure.NSTriadKNHHBadPhysicalIdentificationRound53Exact wh
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base using (ℚ; _≤_)
+open import Data.Rational.Base using (_≤_)
 
 import DASHI.Physics.Closure.NSTriadKNAdmissibleOwnerTaxLanguageRound28Exact as Owner
 import DASHI.Physics.Closure.NSTriadKNHHBadGainBelowDefectProfileRound51Exact as GainDefect
 import DASHI.Physics.Closure.NSTriadKNHHBadOneDerivativeFactorizationRound44Exact as Factor
 import DASHI.Physics.Closure.NSTriadKNHHBadSummableForcingRound50Exact as Sum
 import DASHI.Physics.Closure.NSTriadKNHHBadRestrictedChargeSubchargeRound44Exact as Charge
+import DASHI.Physics.Closure.NSTriadKNHHBadRestrictedGainDensityRound39Exact as Gain
 
 physicalHHBadGainBelowDefectProfile :
   ∀ {effectiveViscosity summableInput}
@@ -57,7 +57,7 @@ physicalHHBadUnmaskedChargeBelowDissipation :
       environment effectiveViscosity eta shell) →
   Charge.sumCellUnmaskedViscousCharge
     effectiveViscosity shell
-    (Charge.Gain.cells (Charge.densityCertificate input))
+    (Gain.cells (Charge.densityCertificate input))
   ≤ Owner.dissipation environment
 physicalHHBadUnmaskedChargeBelowDissipation input =
   Charge.unmaskedChargeBelowPhysicalDissipation input
@@ -66,8 +66,8 @@ physicalHHBadRestrictedChargeBelowDissipation :
   ∀ {environment effectiveViscosity eta shell}
     (input : Charge.HHBadFullChargeDominationInput
       environment effectiveViscosity eta shell) →
-  Charge.Gain.sumCellViscousCharge
-    (Charge.Gain.cells (Charge.densityCertificate input))
+  Gain.sumCellViscousCharge
+    (Gain.cells (Charge.densityCertificate input))
   ≤ Owner.dissipation environment
 physicalHHBadRestrictedChargeBelowDissipation =
   Charge.restrictedChargeBelowPhysicalDissipation
