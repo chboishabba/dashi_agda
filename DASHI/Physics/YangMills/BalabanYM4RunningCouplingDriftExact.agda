@@ -35,7 +35,7 @@ open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using (ℚ; _+_; _-_; _*_; _≤_; _/_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
@@ -56,32 +56,42 @@ inverseCouplingRobustPositiveDrift current next betaStep error recurrence errorF
     scaled = Norm.scaleNonnegative oneHalf
       (ℚP.nonNegative⁻¹ oneHalf) errorFits
 
-    errorBelowHalfStep :
-      error ≤ oneHalf * betaStep
+    errorBelowHalfStep : error ≤ oneHalf * betaStep
     errorBelowHalfStep =
       subst
         (λ lower → lower ≤ oneHalf * betaStep)
         (ℚRing.solve-∀ error)
         scaled
 
-    sumBelowStep :
-      error + oneHalf * betaStep ≤ betaStep
-    sumBelowStep =
+    plusHalf :
+      error + oneHalf * betaStep
+      ≤ oneHalf * betaStep + oneHalf * betaStep
+    plusHalf = ℚP.+-mono-≤ errorBelowHalfStep ℚP.≤-refl
+
+    halfPlusErrorBelowStep :
+      oneHalf * betaStep + error ≤ betaStep
+    halfPlusErrorBelowStep =
       subst
-        (λ upper →
-          error + oneHalf * betaStep ≤ upper)
-        (ℚRing.solve-∀ betaStep)
-        (ℚP.+-monoʳ-≤
-          (oneHalf * betaStep)
-          errorBelowHalfStep)
+        (λ lower → lower ≤ betaStep)
+        (ℚRing.solve-∀ error betaStep)
+        (subst
+          (λ upper → error + oneHalf * betaStep ≤ upper)
+          (ℚRing.solve-∀ betaStep)
+          plusHalf)
+
+    halfPlusErrorBelowCorrectedPlusError :
+      oneHalf * betaStep + error
+      ≤ (betaStep - error) + error
+    halfPlusErrorBelowCorrectedPlusError =
+      subst
+        (λ upper → oneHalf * betaStep + error ≤ upper)
+        (sym (ℚRing.solve-∀ betaStep error))
+        halfPlusErrorBelowStep
 
     halfStepBelowCorrected :
       oneHalf * betaStep ≤ betaStep - error
     halfStepBelowCorrected =
-      subst
-        (λ left → left ≤ betaStep)
-        (ℚRing.solve-∀ error betaStep)
-        sumBelowStep
+      ℚP.+-cancelʳ-≤ error halfPlusErrorBelowCorrectedPlusError
 
     translated :
       current + oneHalf * betaStep
