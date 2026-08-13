@@ -1,20 +1,15 @@
 module DASHI.Core.FiniteFuturePartitionCanonicalBridgeExact where
 
 open import DASHI.Core.Prelude
-open import Agda.Builtin.String using (String)
 
 import DASHI.Core.AdmissibleReachability as Reachability
 import DASHI.Core.FiniteFuturePartitionRefinementExact as Partition
+import DASHI.Core.FutureEquivalenceCurrentObservationExact as Current
 import DASHI.Core.FutureObservationLanguageQuotientExact as Future
 import DASHI.Core.TypedDependencyCore as Dependency
 
 ------------------------------------------------------------------------
 -- CANONICAL BRIDGE FOR THE COMPUTED FINITE QUOTIENT
---
--- FiniteFuturePartitionRefinementExact computes a stable deterministic code.
--- This module proves that code is safe for the repository's canonical,
--- proof-bearing future-observation relation rather than only for a parallel
--- custom trace semantics.
 ------------------------------------------------------------------------
 
 record ExactStepPost
@@ -68,7 +63,7 @@ executionTargetIsRun
 ... | refl = executionTargetIsRun rest
 
 ------------------------------------------------------------------------
--- Every stable-code equality is a canonical future-observation equivalence.
+-- Stable refined-code equality implies canonical future equivalence.
 ------------------------------------------------------------------------
 
 stableCodeEqualityImpliesCanonicalFutureEquivalent :
@@ -116,8 +111,59 @@ stableCodeEqualityImpliesCanonicalFutureEquivalent {left} {right} codeEqual =
         (trans (traceObservationEqual actions) observationProof)
 
 ------------------------------------------------------------------------
--- A concrete future-equivalence presentation can therefore use the stable
--- refined code directly as its quotient code.
+-- Conversely, canonical future equivalence determines both fields of the
+-- one-step refined code: present observation by the empty trace, and next
+-- observation by the singleton `advance` trace.
+------------------------------------------------------------------------
+
+futureEquivalentImpliesNextObservationEqual :
+  {left right : Partition.State} →
+  Future.FutureObservationEquivalent
+    partitionSystem Partition.observe left right →
+  Partition.observe (Partition.step Partition.advance left)
+  ≡ Partition.observe (Partition.step Partition.advance right)
+futureEquivalentImpliesNextObservationEqual {left} {right} equivalent
+  with Future.forward
+    (Future.sameFutureLanguage equivalent
+      (Partition.advance ∷ [])
+      (Partition.observe (Partition.step Partition.advance left)))
+    leftNextWitness
+  where
+    leftNextWitness :
+      Future.FutureObservation
+        partitionSystem Partition.observe left
+        (Partition.advance ∷ [])
+        (Partition.observe (Partition.step Partition.advance left))
+    leftNextWitness =
+      Future.futureObservation
+        (Partition.step Partition.advance left)
+        (canonicalExecutes (Partition.advance ∷ []) left)
+        refl
+... | Future.futureObservation after execution observationProof
+  with executionTargetIsRun execution
+... | refl = sym observationProof
+
+refinedCodeCongruence :
+  ∀ {left right : Partition.State} →
+  Partition.observe left ≡ Partition.observe right →
+  Partition.observe (Partition.step Partition.advance left)
+    ≡ Partition.observe (Partition.step Partition.advance right) →
+  Partition.refineCode left ≡ Partition.refineCode right
+refinedCodeCongruence refl refl = refl
+
+canonicalFutureEquivalentImpliesStableCodeEquality :
+  {left right : Partition.State} →
+  Future.FutureObservationEquivalent
+    partitionSystem Partition.observe left right →
+  Partition.refineCode left ≡ Partition.refineCode right
+canonicalFutureEquivalentImpliesStableCodeEquality equivalent =
+  refinedCodeCongruence
+    (Current.futureEquivalentImpliesCurrentObservationEqual equivalent)
+    (futureEquivalentImpliesNextObservationEqual equivalent)
+
+------------------------------------------------------------------------
+-- The computed stable code is therefore an exact presentation of the
+-- repository's canonical future-equivalence quotient for this machine.
 ------------------------------------------------------------------------
 
 stableRefinementPresentation :
@@ -127,82 +173,4 @@ stableRefinementPresentation =
     Partition.RefinedCode
     Partition.refineCode
     stableCodeEqualityImpliesCanonicalFutureEquivalent
-    complete
-  where
-    complete :
-      ∀ {left right} →
-      Future.FutureObservationEquivalent
-        partitionSystem Partition.observe left right →
-      Partition.refineCode left ≡ Partition.refineCode right
-    complete {Partition.source} {Partition.source} equivalent = refl
-    complete {Partition.source} {Partition.memo} equivalent =
-      ⊥-elim (sourceMemoContradiction equivalent)
-    complete {Partition.source} {Partition.twin} equivalent =
-      ⊥-elim (sourceTwinContradiction equivalent)
-    complete {Partition.source} {Partition.accepting} equivalent =
-      ⊥-elim (currentContradiction equivalent)
-    complete {Partition.memo} {Partition.source} equivalent =
-      ⊥-elim (sourceMemoContradiction (Future.futureEquivalentSym equivalent))
-    complete {Partition.memo} {Partition.memo} equivalent = refl
-    complete {Partition.memo} {Partition.twin} equivalent = refl
-    complete {Partition.memo} {Partition.accepting} equivalent =
-      ⊥-elim (currentContradiction equivalent)
-    complete {Partition.twin} {Partition.source} equivalent =
-      ⊥-elim (sourceTwinContradiction (Future.futureEquivalentSym equivalent))
-    complete {Partition.twin} {Partition.memo} equivalent = refl
-    complete {Partition.twin} {Partition.twin} equivalent = refl
-    complete {Partition.twin} {Partition.accepting} equivalent =
-      ⊥-elim (currentContradiction equivalent)
-    complete {Partition.accepting} {Partition.source} equivalent =
-      ⊥-elim (currentContradiction (Future.futureEquivalentSym equivalent))
-    complete {Partition.accepting} {Partition.memo} equivalent =
-      ⊥-elim (currentContradiction (Future.futureEquivalentSym equivalent))
-    complete {Partition.accepting} {Partition.twin} equivalent =
-      ⊥-elim (currentContradiction (Future.futureEquivalentSym equivalent))
-    complete {Partition.accepting} {Partition.accepting} equivalent = refl
-
-    currentContradiction :
-      ∀ {left right} →
-      Future.FutureObservationEquivalent partitionSystem Partition.observe left right →
-      Partition.observe left ≡ Partition.observe right → ⊥
-    currentContradiction equivalent impossible = impossible impossible
-
-    sourceMemoContradiction :
-      Future.FutureObservationEquivalent
-        partitionSystem Partition.observe Partition.source Partition.memo → ⊥
-    sourceMemoContradiction equivalent =
-      impossible
-        (Future.forward
-          (Future.sameFutureLanguage equivalent
-            (Partition.advance ∷ []) true)
-          sourceReachesTrue)
-      where
-        sourceReachesTrue :
-          Future.FutureObservation
-            partitionSystem Partition.observe Partition.source
-            (Partition.advance ∷ []) true
-        sourceReachesTrue =
-          Future.futureObservation
-            Partition.accepting
-            (canonicalExecutes (Partition.advance ∷ []) Partition.source)
-            refl
-
-        impossible :
-          Future.FutureObservation
-            partitionSystem Partition.observe Partition.memo
-            (Partition.advance ∷ []) true → ⊥
-        impossible
-          (Future.futureObservation after execution observationProof)
-          with executionTargetIsRun execution
-        ... | refl = falseTrueImpossible observationProof
-          where
-            falseTrueImpossible : false ≡ true → ⊥
-            falseTrueImpossible ()
-
-    sourceTwinContradiction :
-      Future.FutureObservationEquivalent
-        partitionSystem Partition.observe Partition.source Partition.twin → ⊥
-    sourceTwinContradiction equivalent =
-      sourceMemoContradiction
-        (Future.futureEquivalentTrans equivalent
-          (stableCodeEqualityImpliesCanonicalFutureEquivalent refl))
+    canonicalFutureEquivalentImpliesStableCodeEquality
