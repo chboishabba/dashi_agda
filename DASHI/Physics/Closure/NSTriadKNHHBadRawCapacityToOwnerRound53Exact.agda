@@ -36,11 +36,17 @@ module DASHI.Physics.Closure.NSTriadKNHHBadRawCapacityToOwnerRound53Exact where
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base using (ℚ; 0ℚ; _≤_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _*_; _≤_)
 
 import DASHI.Physics.Closure.NSTriadKNAdmissibleOwnerTaxLanguageRound28Exact as Owner
 import DASHI.Physics.Closure.NSTriadKNHHBadRawVariableCapacityRound53Exact as Raw
 import DASHI.Physics.Closure.NSTriadKNHHBadBarrierToOwnerRound52Exact as ToOwner
+import DASHI.Physics.Closure.NSTriadKNHHBadRestrictedChargeSubchargeRound44Exact as Subcharge
+import DASHI.Physics.Closure.NSTriadKNHHBadRestrictedGainDensityRound39Exact as Gain
+import DASHI.Physics.Closure.NSTriadKNHHBadOneDerivativeFactorizationRound44Exact as Factor
+import DASHI.Physics.Closure.NSTriadKNHHBadNormalizedProfileRound45Exact as Profile
+import DASHI.Physics.Closure.NSTriadKNHHBadSingleThresholdSufficesRound47Exact as Selected
+import DASHI.Physics.Closure.NSTriadKNHHBadSharpDyadicGainRound33Exact as Sharp
 
 record UniformRawVariableCapacity
     (physical : Raw.PhysicalGeneralVariableDefectDuhamel) : Set where
@@ -78,12 +84,12 @@ record PhysicalRawCapacityHHBadOwnerInput
     viscosityNonnegative : 0ℚ ≤ effectiveViscosity
 
     unmaskedChargeBelowPhysicalDissipation : ∀ shell →
-      DASHI.Physics.Closure.NSTriadKNHHBadRestrictedChargeSubchargeRound44Exact.sumCellUnmaskedViscousCharge
+      Subcharge.sumCellUnmaskedViscousCharge
         effectiveViscosity shell
-        (DASHI.Physics.Closure.NSTriadKNHHBadRestrictedGainDensityRound39Exact.cells
-          (DASHI.Physics.Closure.NSTriadKNHHBadOneDerivativeFactorizationRound44Exact.asRound39InverseShellCertificate
-            (DASHI.Physics.Closure.NSTriadKNHHBadNormalizedProfileRound45Exact.canonicalOneDerivativeDensityAtShell
-              (DASHI.Physics.Closure.NSTriadKNHHBadSingleThresholdSufficesRound47Exact.selectedThresholdToRound45Profile
+        (Gain.cells
+          (Factor.asRound39InverseShellCertificate
+            (Profile.canonicalOneDerivativeDensityAtShell
+              (Selected.selectedThresholdToRound45Profile
                 (ToOwner.barrierToSelectedProfile
                   literalGainBridge
                   (rawCapacityAsUniformShellBarrier uniformCapacity)))
@@ -119,8 +125,7 @@ physicalRawCapacityOwnerEtaExact :
       environment effectiveViscosity physical) →
   ∀ shell →
   Owner.eta (physicalHHBadOwnerFromRawVariableCapacity input shell)
-  ≡ DASHI.Physics.Closure.NSTriadKNHHBadSharpDyadicGainRound33Exact.two
-      * ceiling (uniformCapacity input)
+  ≡ Sharp.two * ceiling (uniformCapacity input)
 physicalRawCapacityOwnerEtaExact input shell =
   ToOwner.physicalBarrierOwnerEtaExact
     (asRound52PhysicalBarrierOwnerInput input)
