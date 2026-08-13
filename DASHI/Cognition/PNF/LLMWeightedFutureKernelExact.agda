@@ -2,17 +2,13 @@ module DASHI.Cognition.PNF.LLMWeightedFutureKernelExact where
 
 open import DASHI.Core.Prelude
 
+import DASHI.Cognition.PNF.LLMWeightedFutureQuotientExact as Weighted
 import DASHI.Core.AdmissibleReachability as Reachability
 import DASHI.Core.FutureObservationLanguageQuotientExact as Future
 import DASHI.Core.TypedDependencyCore as Dependency
 
 ------------------------------------------------------------------------
 -- Finite weighted analogue of a language-model output kernel.
---
--- We retain integer weights rather than importing probability analysis.  Equal
--- current next-token kernels may still hide states with different kernels after
--- an admissible continuation.  This is the weighted counterpart of the
--- deterministic future-language quotient.
 ------------------------------------------------------------------------
 
 record BinaryWeightKernel : Set where
@@ -126,6 +122,42 @@ sameCurrentKernelDoesNotImplyWeightedFutureEquivalence equivalent =
       (Future.sameFutureLanguage equivalent
         extendTrace (binaryWeightKernel 2 0))
       leftFutureKernelObservation)
+
+------------------------------------------------------------------------
+-- Instantiation of the generic weighted future quotient.
+------------------------------------------------------------------------
+
+outcomeWeight : BinaryWeightKernel → Bool → Nat
+outcomeWeight kernel false = zeroWeight kernel
+outcomeWeight kernel true = oneWeight kernel
+
+traceWeight : KernelState → List KernelAction → Bool → Nat
+traceWeight state [] outcome = outcomeWeight (kernelObservation state) outcome
+traceWeight state (extendContext ∷ rest) outcome =
+  traceWeight (advanceKernelState state) rest outcome
+
+canonicalWeightedKernel :
+  Weighted.WeightedFutureKernel KernelState KernelAction Bool
+canonicalWeightedKernel = Weighted.weightedFutureKernel traceWeight
+
+currentFalseWeightAgrees :
+  traceWeight leftBefore [] false ≡ traceWeight rightBefore [] false
+currentFalseWeightAgrees = refl
+
+currentTrueWeightAgrees :
+  traceWeight leftBefore [] true ≡ traceWeight rightBefore [] true
+currentTrueWeightAgrees = refl
+
+futureFalseWeightsSeparate :
+  traceWeight leftBefore extendTrace false
+  ≡ traceWeight rightBefore extendTrace false → ⊥
+futureFalseWeightsSeparate ()
+
+sameCurrentKernelDoesNotImplyCanonicalWeightedFutureEquivalence :
+  Weighted.WeightedFutureEquivalent canonicalWeightedKernel leftBefore rightBefore → ⊥
+sameCurrentKernelDoesNotImplyCanonicalWeightedFutureEquivalence equivalent =
+  futureFalseWeightsSeparate
+    (Weighted.sameWeightedFuture equivalent extendTrace false)
 
 ------------------------------------------------------------------------
 -- Boundary: integer weights are a finite kernel surface, not a claim of
