@@ -4,9 +4,6 @@ open import DASHI.Core.Prelude
 
 ------------------------------------------------------------------------
 -- FINITE FUTURE-SIGNATURE PARTITION REFINEMENT
---
--- The canonical future quotient is not only characterised abstractly here: a
--- deterministic finite example is actually refined to its stable future code.
 ------------------------------------------------------------------------
 
 DepthEquivalent :
@@ -15,10 +12,11 @@ DepthEquivalent :
   (State → Observation) →
   (Action → State → State) →
   State → State → Set
-DepthEquivalent zero observe step left right = observe left ≡ observe right
-DepthEquivalent (suc depth) observe step left right =
+DepthEquivalent {Action = Action} zero observe step left right =
+  observe left ≡ observe right
+DepthEquivalent {Action = Action} (suc depth) observe step left right =
   (observe left ≡ observe right)
-  × ((action : _) →
+  × ((action : Action) →
       DepthEquivalent depth observe step
         (step action left) (step action right))
 
@@ -72,21 +70,18 @@ open RefinedCode public
 refineCode : State → RefinedCode
 refineCode state = refinedCode (observe state) (observe (step advance state))
 
--- Current observation merges source and memo.
 currentPartitionStillTooCoarse : observe source ≡ observe memo
 currentPartitionStillTooCoarse = refl
 
--- One refinement separates them because their next observations differ.
 firstRefinementSeparatesSourceAndMemo :
   refineCode source ≡ refineCode memo → ⊥
 firstRefinementSeparatesSourceAndMemo ()
 
--- memo and twin are behaviourally identical forever.
 refinementKeepsMemoAndTwinTogether : refineCode memo ≡ refineCode twin
 refinementKeepsMemoAndTwinTogether = refl
 
--- After one step every state is at a fixed point.
-stepIsFixedAfterOne : (state : State) → step advance (step advance state) ≡ step advance state
+stepIsFixedAfterOne : (state : State) →
+  step advance (step advance state) ≡ step advance state
 stepIsFixedAfterOne source = refl
 stepIsFixedAfterOne memo = refl
 stepIsFixedAfterOne twin = refl
@@ -106,28 +101,19 @@ runAfterFirstStable :
   (state : State) →
   run (advance ∷ rest) state ≡ step advance state
 runAfterFirstStable rest state =
-  trans
-    (cong (run rest) refl)
-    (runFromFixed rest (step advance state) (stepIsFixedAfterOne state))
+  runFromFixed rest (step advance state) (stepIsFixedAfterOne state)
 
 stableCodeDeterminesEveryTraceObservation :
   {left right : State} →
   refineCode left ≡ refineCode right →
   (actions : List Action) →
   observe (run actions left) ≡ observe (run actions right)
-stableCodeDeterminesEveryTraceObservation {left} {right} codeEqual []
-  with codeEqual
-... | refl = refl
+stableCodeDeterminesEveryTraceObservation codeEqual [] =
+  cong currentObservation codeEqual
 stableCodeDeterminesEveryTraceObservation {left} {right} codeEqual (advance ∷ rest)
   rewrite runAfterFirstStable rest left
-        | runAfterFirstStable rest right
-  with codeEqual
-... | refl = refl
-
-------------------------------------------------------------------------
--- Therefore the one-step refined code is already a concrete presentation of
--- the complete deterministic future-observation quotient for this system.
-------------------------------------------------------------------------
+        | runAfterFirstStable rest right =
+  cong nextObservation codeEqual
 
 stableRefinementIsFutureSafe :
   {left right : State} →
@@ -135,3 +121,10 @@ stableRefinementIsFutureSafe :
   (actions : List Action) →
   observe (run actions left) ≡ observe (run actions right)
 stableRefinementIsFutureSafe = stableCodeDeterminesEveryTraceObservation
+
+------------------------------------------------------------------------
+-- In this finite machine the refinement stabilizes after one strict split:
+-- source separates from memo/twin, while memo and twin remain one canonical
+-- future class.  The stable code therefore computes the maximally safe
+-- deterministic quotient for this example.
+------------------------------------------------------------------------
