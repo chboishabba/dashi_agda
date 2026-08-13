@@ -167,10 +167,7 @@ natDistance : Nat → Nat → Nat
 natDistance left right = (left ∸ right) + (right ∸ left)
 
 natDistanceReflexive : (n : Nat) → natDistance n n ≡ 0
-natDistanceReflexive n =
-  trans
-    (cong (λ k → k + (n ∸ n)) (n∸n≡0 n))
-    refl
+natDistanceReflexive n rewrite n∸n≡0 n = refl
 
 currentFalseDistanceIsZero :
   natDistance
