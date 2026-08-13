@@ -37,10 +37,12 @@ module DASHI.Physics.YangMills.BalabanP33UniformSelectedMinimizerPairEnclosureEx
 -- cancellation before majorisation.
 ------------------------------------------------------------------------
 
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _*_; _≤_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _*_; _≤_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanSelectedCorrelatedResidualOwnershipExact as Ownership
+import DASHI.Physics.YangMills.BalabanSelectedCorrelatedResidualBoundsExact as Bounds
+import DASHI.Physics.YangMills.BalabanSelectedBackgroundVariationSelectorExact as Selector
 import DASHI.Physics.YangMills.BalabanP33CertifiedPlaquettePairEnvelopeExact as PairEnvelope
 
 record UniformSelectedRegionPairEnclosure (Configuration : Set) : Set₁ where
@@ -63,14 +65,12 @@ record UniformSelectedRegionPairEnclosure (Configuration : Set) : Set₁ where
     localizationTransportUpperAt : ∀ configuration →
       InCertifiedRegion configuration →
       PairEnvelope.RationalSignedUpperEnclosure
-        (DASHI.Physics.YangMills.BalabanSelectedCorrelatedResidualBoundsExact.rawLocalizationSpillover
-          (familyAt configuration))
+        (Bounds.rawLocalizationSpillover (familyAt configuration))
 
     nearFarGreenUpperAt : ∀ configuration →
       InCertifiedRegion configuration →
       PairEnvelope.RationalSignedUpperEnclosure
-        (DASHI.Physics.YangMills.BalabanSelectedCorrelatedResidualBoundsExact.selectedMultiplierDefectContribution
-          (familyAt configuration))
+        (Bounds.selectedMultiplierDefectContribution (familyAt configuration))
 
     localizationCertificateAt : ∀ configuration inRegion →
       PairEnvelope.upper (localizationTransportUpperAt configuration inRegion)
@@ -82,7 +82,7 @@ record UniformSelectedRegionPairEnclosure (Configuration : Set) : Set₁ where
 
     coefficientTotalFits :
       localizationPairCoefficient + multiplierPairCoefficient
-      ≤ DASHI.Physics.YangMills.BalabanSelectedBackgroundVariationSelectorExact.remainingSingletonCoefficient
+      ≤ Selector.remainingSingletonCoefficient
 
 open UniformSelectedRegionPairEnclosure public
 
@@ -117,7 +117,7 @@ selectedMinimizerResidualClosesFromUniformRegion :
     (uniform : UniformSelectedRegionPairEnclosure Configuration) →
   Ownership.correlatedResidualTotal
       (familyAt uniform (selectedMinimizer uniform))
-  ≤ DASHI.Physics.YangMills.BalabanSelectedBackgroundVariationSelectorExact.remainingSingletonCoefficient
+  ≤ Selector.remainingSingletonCoefficient
       * chargeAt uniform (selectedMinimizer uniform)
 selectedMinimizerResidualClosesFromUniformRegion uniform =
   PairEnvelope.certifiedPairEnvelopeClosesResidual
