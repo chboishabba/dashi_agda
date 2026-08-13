@@ -16,20 +16,36 @@ module DASHI.Physics.Closure.NSTriadKNKernelLiteralResidualRound55Exact where
 -- Title: "Fourier Analysis and Nonlinear Partial Differential Equations".
 -- DOI: 10.1007/978-3-642-16830-7.
 --
+-- Author: Xiaoyutao Luo.
+-- Title: "A Beale--Kato--Majda Criterion with Optimal Frequency and Temporal
+-- Localization".
+-- DOI: 10.1007/s00021-019-0411-z.
+-- arXiv DOI: 10.48550/arXiv.1803.05569.
+--
 -- DASHI CONTRIBUTION
 --
--- Define the literal kernel term as the residual of the signed localized
--- identity AFTER already-owned pieces have been removed.  A residual split
--- carries duplicate + cancelling + independent contributions.  When the
--- cancellation is exact and the independent residual is zero, this file
--- constructs the Round-51 literal kernel constituent, the Round-52 pre-tax
--- reduction and the Round-53 structural zero-tax witness without any positive
--- kernel estimate.
+-- Round 55 introduced the signed residual split.  Round 56 removes a subtle
+-- circularity in that first version: `independent = 0` is NO LONGER a field of
+-- the residual split itself.  The raw literal residual may genuinely contain a
+-- surviving independent kernel.  Exact signed cancellation is performed first,
+-- and only a separate `IndependentZeroBranch` witness can promote the kernel to
+-- the Round-53 structural zero-tax route.
+--
+-- Hence the binary physical test is now real:
+--
+--   literal residual = duplicate + independent,
+--
+-- and `literal residual != duplicate` mechanically forces
+-- `independent != 0`.  This makes K_independent=0 falsifiable rather than
+-- encoding it in the datatype.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Empty using (⊥)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_)
+open import Data.Rational.Tactic.RingSolver using (solve)
+open import Relation.Binary.PropositionalEquality using (_≢_; cong; trans)
 
 import DASHI.Physics.Closure.NSTriadKNSignedConstituentTreeRound28Exact as Signed
 import DASHI.Physics.Closure.NSTriadKNLuoDuplicateFreeTaxOwnershipRound26Exact as Tax
@@ -42,7 +58,6 @@ record LiteralKernelResidualSplit : Set where
   field
     duplicateOwned cancelLeft cancelRight independent : ℚ
     cancellation : cancelLeft + cancelRight ≡ 0ℚ
-    independentZero : independent ≡ 0ℚ
 
 open LiteralKernelResidualSplit public
 
@@ -50,6 +65,9 @@ literalKernelResidual : LiteralKernelResidualSplit → ℚ
 literalKernelResidual split =
   duplicateOwned split + (cancelLeft split + cancelRight split) + independent split
 
+-- Until the independent remainder is proved zero, the conservative ownership
+-- outcome is `independentKernel`.  Deduplication is represented separately by
+-- the pre-tax reduction below.
 literalKernelInstantiation :
   LiteralKernelResidualSplit → Literal.PhysicalKernelConstituentInstantiation
 literalKernelInstantiation split = record
@@ -60,7 +78,7 @@ literalKernelInstantiation split = record
   ; sourceIsKernelSource = refl
   ; ownerIsKernel = refl
   ; signedContributionIsLiteralKernel = refl
-  ; ownershipOutcome = Literal.duplicateExistingOwner
+  ; ownershipOutcome = Literal.independentKernel
   }
 
 literalKernelReduction :
@@ -74,24 +92,65 @@ literalKernelReduction split = record
   ; cancellationIsExactZero = cancellation split
   }
 
+literalKernelAfterCancellation :
+  (split : LiteralKernelResidualSplit) →
+  literalKernelResidual split ≡ duplicateOwned split + independent split
+literalKernelAfterCancellation split =
+  PreTax.literalAfterCancellation (literalKernelReduction split)
+
+record IndependentZeroBranch (split : LiteralKernelResidualSplit) : Set where
+  field
+    independentZero : independent split ≡ 0ℚ
+
+open IndependentZeroBranch public
+
 literalKernelIndependentZero :
   ∀ {environment : Owner.TaxEnvironment}
     (split : LiteralKernelResidualSplit) →
+  IndependentZeroBranch split →
   Zero.PhysicalIndependentKernelZero environment
     (literalKernelInstantiation split)
     (literalKernelReduction split)
-literalKernelIndependentZero split = record
-  { independentRemainderIsZero = independentZero split }
+literalKernelIndependentZero split zeroBranch = record
+  { independentRemainderIsZero = independentZero zeroBranch }
 
-literalKernelAfterCancellation :
+literalKernelEqualsDuplicateOnZeroBranch :
   (split : LiteralKernelResidualSplit) →
+  IndependentZeroBranch split →
   literalKernelResidual split ≡ duplicateOwned split
-literalKernelAfterCancellation split
-  rewrite cancellation split | independentZero split = refl
+literalKernelEqualsDuplicateOnZeroBranch split zeroBranch =
+  trans
+    (literalKernelAfterCancellation split)
+    (trans
+      (cong (duplicateOwned split +_) (independentZero zeroBranch))
+      (solve (duplicateOwned split ∷ [])))
+  where
+  open import Agda.Builtin.List using (_∷_; [])
 
-kernelResidualZeroBranchConstructed : Bool
-kernelResidualZeroBranchConstructed = true
+nonDuplicateLiteralForcesIndependentNonzero :
+  (split : LiteralKernelResidualSplit) →
+  literalKernelResidual split ≢ duplicateOwned split →
+  independent split ≢ 0ℚ
+nonDuplicateLiteralForcesIndependentNonzero split differs independentIsZero =
+  differs
+    (trans
+      (literalKernelAfterCancellation split)
+      (trans
+        (cong (duplicateOwned split +_) independentIsZero)
+        (solve (duplicateOwned split ∷ []))))
+  where
+  open import Agda.Builtin.List using (_∷_; [])
 
-kernelResidualZeroBranchConstructedIsTrue :
-  kernelResidualZeroBranchConstructed ≡ true
-kernelResidualZeroBranchConstructedIsTrue = refl
+zeroIndependentBranchIsSeparatePhysicalObligation : Bool
+zeroIndependentBranchIsSeparatePhysicalObligation = true
+
+kernelResidualCancellationBeforePositivity : Bool
+kernelResidualCancellationBeforePositivity = true
+
+zeroIndependentBranchIsSeparatePhysicalObligationIsTrue :
+  zeroIndependentBranchIsSeparatePhysicalObligation ≡ true
+zeroIndependentBranchIsSeparatePhysicalObligationIsTrue = refl
+
+kernelResidualCancellationBeforePositivityIsTrue :
+  kernelResidualCancellationBeforePositivity ≡ true
+kernelResidualCancellationBeforePositivityIsTrue = refl
