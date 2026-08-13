@@ -31,9 +31,8 @@ module DASHI.Physics.YangMills.BalabanCMP98Lie3L1NormTransportExact where
 --
 -- provided |X|_op <= ||coords X||_1.  Composing with the existing 4/3
 -- Federbush reopening gives 96, not 32, unless a sharper SAME-NORM equation
--- (38) estimate is proved directly in the Lie3 l1 carrier.
---
--- This module makes that norm seam explicit and machine-checks all constants.
+-- (38) estimate is proved directly in the Lie3 l1 carrier.  The constant 96 is
+-- still quadratic and therefore gives the required little-o statement.
 ------------------------------------------------------------------------
 
 open import Data.Integer.Base using (+_)
@@ -210,6 +209,24 @@ federbushFourThirdsTurns72Into96
       (ℚRing.solve-∀ inputMagnitude)
       scaled)
 
+quadratic96ImpliesLittleO :
+  ∀ nonlinearError inputMagnitude epsilon →
+  0ℚ ≤ inputMagnitude →
+  nonlinearError ≤ ninetySix * (inputMagnitude * inputMagnitude) →
+  ninetySix * inputMagnitude ≤ epsilon →
+  nonlinearError ≤ epsilon * inputMagnitude
+quadratic96ImpliesLittleO
+    nonlinearError inputMagnitude epsilon inputNN quadratic small =
+  let
+    scaled = Norm.scaleNonnegative inputMagnitude inputNN small
+  in
+  ℚP.≤-trans quadratic
+    (subst
+      (λ upper →
+        ninetySix * (inputMagnitude * inputMagnitude) ≤ upper)
+      (ℚRing.solve-∀ inputMagnitude epsilon)
+      scaled)
+
 cmp98OperatorToLie3L1TransportLevel : ProofLevel
 cmp98OperatorToLie3L1TransportLevel = machineChecked
 
@@ -218,3 +235,6 @@ cmp98OperatorBoundConservative72Level = machineChecked
 
 cmp109FederbushConservative96Level : ProofLevel
 cmp109FederbushConservative96Level = machineChecked
+
+cmp109FederbushConservative96LittleOLevel : ProofLevel
+cmp109FederbushConservative96LittleOLevel = machineChecked
