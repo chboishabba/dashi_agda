@@ -10,11 +10,13 @@ if [[ -x "$BASE_CHECKER" ]]; then
 fi
 
 FILES=(
+  DASHI/Core/FutureEquivalenceCurrentObservationExact.agda
   DASHI/Cognition/PNF/MultiResolutionAttentionFutureSufficiencyExact.agda
   DASHI/Cognition/PNF/LLMCompressionAccessibilityDefectsExact.agda
   DASHI/Cognition/PNF/LLMCantorMultiResolutionBridgeExact.agda
   DASHI/Cognition/PNF/LLMGrokkingLearningFutureExact.agda
   DASHI/Cognition/PNF/GrokkingMeasureStrataExact.agda
+  DASHI/Cognition/PNF/GrokkingEquivalenceStrataExact.agda
   DASHI/Cognition/PNF/GrokkingTaskCharacterPhaseExact.agda
   DASHI/Cognition/PNF/LLMStabilitySufficiencySeparationExact.agda
   DASHI/Cognition/PNF/LLMWeightedFutureQuotientExact.agda
@@ -36,6 +38,8 @@ for f in "${FILES[@]}"; do
   fi
 done
 
+grep -q 'futureEquivalentImpliesCurrentObservationEqual' DASHI/Core/FutureEquivalenceCurrentObservationExact.agda
+
 grep -q 'factorizationCertifiesMultiResolutionFutureSufficiency' DASHI/Cognition/PNF/MultiResolutionAttentionFutureSufficiencyExact.agda
 grep -q 'csaCompressionRateExact' DASHI/Cognition/PNF/MultiResolutionAttentionFutureSufficiencyExact.agda
 grep -q 'hcaCompressionRateExact' DASHI/Cognition/PNF/MultiResolutionAttentionFutureSufficiencyExact.agda
@@ -51,6 +55,9 @@ grep -q 'sameTrainingFitDoesNotImplyLearningFutureEquivalence' DASHI/Cognition/P
 grep -q 'progressResidualSeparatesStates' DASHI/Cognition/PNF/LLMGrokkingLearningFutureExact.agda
 grep -q 'trainingUnitDoesNotImplyTaskUnit' DASHI/Cognition/PNF/GrokkingMeasureStrataExact.agda
 grep -q 'latentMechanismUnitCanPrecedeVisibleTaskUnit' DASHI/Cognition/PNF/GrokkingMeasureStrataExact.agda
+grep -q 'learningFutureImpliesTask' DASHI/Cognition/PNF/GrokkingEquivalenceStrataExact.agda
+grep -q 'currentTaskEquivalenceDoesNotImplyLearningFuture' DASHI/Cognition/PNF/GrokkingEquivalenceStrataExact.agda
+grep -q 'trainingEquivalenceDoesNotImplyTaskEquivalence' DASHI/Cognition/PNF/GrokkingEquivalenceStrataExact.agda
 grep -q 'c3CharacterCompositionExact' DASHI/Cognition/PNF/GrokkingTaskCharacterPhaseExact.agda
 grep -q 'phaseOnePlusPhaseTwoWrapsToZero' DASHI/Cognition/PNF/GrokkingTaskCharacterPhaseExact.agda
 
