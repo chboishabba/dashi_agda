@@ -77,22 +77,26 @@ relativeFactorThroughReference :
     (relative group reference right)
   ≡ relative group left right
 relativeFactorThroughReference group left reference right =
+  let
+    inner :
+      Telescope.multiply (kernel group) (inverse group reference)
+        (Telescope.multiply (kernel group) reference (inverse group right))
+      ≡ inverse group right
+    inner =
+      trans
+        (sym (associative group
+          (inverse group reference) reference (inverse group right)))
+        (trans
+          (cong
+            (λ selected →
+              Telescope.multiply (kernel group) selected (inverse group right))
+            (inverseLeft group reference))
+          (identityLeft group (inverse group right)))
+  in
   trans
     (associative group
-      (relative group left reference)
-      reference
-      (inverse group right))
-    (trans
-      (cong
-        (λ middle →
-          Telescope.multiply (kernel group) left
-            (Telescope.multiply (kernel group) middle (inverse group right)))
-        (inverseLeft group reference))
-      (trans
-        (cong
-          (Telescope.multiply (kernel group) left)
-          (identityLeft group (inverse group right)))
-        refl))
+      left (inverse group reference) (relative group reference right))
+    (cong (Telescope.multiply (kernel group) left) inner)
 
 relativeDefectTriangleThroughReference :
   ∀ {Unitary} (group : UnitaryDefectGroup Unitary) left reference right →
