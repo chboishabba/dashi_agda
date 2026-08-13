@@ -31,12 +31,13 @@ module DASHI.Physics.Closure.NSTriadKNHHBadRawVariableCapacityRound53Exact where
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
-open import Agda.Builtin.Nat using (Nat; suc)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Rational.Base using
-  (ℚ; 0ℚ; _+_; _-_; _*_; _≤_; nonNegative)
+  (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong₂; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using
+  (cong; cong₂; subst; sym; trans)
 
 import DASHI.Physics.Closure.NSTriadKNLuoBadCoherenceWeightedMarkovExact as Threshold
 import DASHI.Physics.Closure.NSTriadKNHHBadSharpDyadicGainRound33Exact as Sharp
@@ -169,22 +170,19 @@ normalizedForcingIdentity physical q =
 
     cancelThreshold :
       (inverse * threshold) * (inverseDyadic * dyadic) * beta
-      ≡ 1 Data.Rational.Base./ 1 * (inverseDyadic * dyadic) * beta
+      ≡ 1ℚ * (inverseDyadic * dyadic) * beta
     cancelThreshold =
-      cong₂ (λ product rest → product * rest * beta)
+      cong (λ product → product * (inverseDyadic * dyadic) * beta)
         (Threshold.inverseMeaning (parameter physical))
-        refl
 
     cancelDyadic :
-      (1 Data.Rational.Base./ 1) * (inverseDyadic * dyadic) * beta
-      ≡ (1 Data.Rational.Base./ 1) * (1 Data.Rational.Base./ 1) * beta
+      1ℚ * (inverseDyadic * dyadic) * beta
+      ≡ 1ℚ * 1ℚ * beta
     cancelDyadic =
-      cong₂ (λ left product → left * product * beta)
-        refl
+      cong (λ product → 1ℚ * product * beta)
         (Sharp.inverseDyadicReciprocal (suc q))
 
-    finish :
-      (1 Data.Rational.Base./ 1) * (1 Data.Rational.Base./ 1) * beta ≡ beta
+    finish : 1ℚ * 1ℚ * beta ≡ beta
     finish = solve (beta ∷ [])
   in trans regroup (trans cancelThreshold (trans cancelDyadic finish))
 
@@ -261,7 +259,7 @@ record RawVariableCapacity
   field
     capacity : Nat → ℚ
     capacityNonnegative : ∀ q → 0ℚ ≤ capacity q
-    baseBelowCapacity : normalizedDefect physical 0 ≤ capacity 0
+    baseBelowCapacity : normalizedDefect physical zero ≤ capacity zero
     capacityInvariant : ∀ q →
       alpha physical q * capacity q + forcing physical q
       ≤ capacity (suc q)
@@ -295,7 +293,7 @@ record RawHeadroomCapacity
     headroom : Nat → ℚ
     capacityNonnegative : ∀ q → 0ℚ ≤ ceiling - headroom q
     baseBelowHeadroomCapacity :
-      normalizedDefect physical 0 ≤ ceiling - headroom 0
+      normalizedDefect physical zero ≤ ceiling - headroom zero
     headroomUpdate : ∀ q →
       forcing physical q + headroom (suc q)
       ≤ (ceiling - alpha physical q * ceiling)
@@ -310,32 +308,34 @@ headroomUpdateIsCapacityInvariant :
   ≤ ceiling headroomData - headroom headroomData (suc q)
 headroomUpdateIsCapacityInvariant {physical} headroomData q =
   let
-    shifted = headroomUpdate headroomData q
-    -- This is exactly the rearrangement
-    -- beta + d_(q+1) <= (1-alpha) C + alpha d_q
-    -- iff alpha(C-d_q)+beta <= C-d_(q+1).
+    alphaQ = alpha physical q
+    c = ceiling headroomData
+    d = headroom headroomData q
+    dNext = headroom headroomData (suc q)
+    beta = forcing physical q
+    shift = alphaQ * c - alphaQ * d - dNext
+
+    shifted :
+      shift + (beta + dNext)
+      ≤ shift + ((c - alphaQ * c) + alphaQ * d)
+    shifted = ℚP.+-monoʳ-≤ shift (headroomUpdate headroomData q)
+
+    leftMeaning :
+      shift + (beta + dNext)
+      ≡ alphaQ * (c - d) + beta
+    leftMeaning = solve (alphaQ ∷ c ∷ d ∷ dNext ∷ beta ∷ [])
+
+    rightMeaning :
+      shift + ((c - alphaQ * c) + alphaQ * d)
+      ≡ c - dNext
+    rightMeaning = solve (alphaQ ∷ c ∷ d ∷ dNext ∷ [])
   in
   subst
-    (λ left →
-      left ≤ ceiling headroomData - headroom headroomData (suc q))
-    (solve
-      ( alpha physical q
-      ∷ ceiling headroomData
-      ∷ headroom headroomData q
-      ∷ forcing physical q
-      ∷ []))
+    (λ left → left ≤ c - dNext)
+    leftMeaning
     (subst
-      (λ right →
-        alpha physical q * ceiling headroomData
-          - alpha physical q * headroom headroomData q
-          + forcing physical q
-        ≤ right)
-      (solve
-        ( alpha physical q
-        ∷ ceiling headroomData
-        ∷ headroom headroomData q
-        ∷ headroom headroomData (suc q)
-        ∷ []))
+      (λ right → shift + (beta + dNext) ≤ right)
+      rightMeaning
       shifted)
 
 rawHeadroomAsVariableCapacity :
