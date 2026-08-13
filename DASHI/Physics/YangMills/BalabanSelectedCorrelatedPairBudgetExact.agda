@@ -29,7 +29,8 @@ module DASHI.Physics.YangMills.BalabanSelectedCorrelatedPairBudgetExact where
 -- No absolute value is inserted between the two members of either pair.
 ------------------------------------------------------------------------
 
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _*_; _≤_)
+open import Data.Rational.Base as ℚ using
+  (ℚ; 0ℚ; _+_; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (subst)
@@ -71,7 +72,7 @@ pairCoefficientsTimesChargeFit :
 pairCoefficientsTimesChargeFit {charge = charge} budgets =
   let
     instance
-      chargeNN = ℚ.nonNegative (chargeNonnegative budgets)
+      chargeNN = nonNegative (chargeNonnegative budgets)
   in
   ℚP.*-monoʳ-≤-nonNeg charge (pairCoefficientTotalFits budgets)
 
