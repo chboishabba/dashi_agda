@@ -84,6 +84,19 @@ physicalComAdjacentShellGramBlockBound sameObject bounds q active =
     (pairProductIsGramBlock sameObject q (suc q))
     (Active.physicalComAdjacentShellActiveBound bounds q active)
 
+physicalComReverseAdjacentShellGramBlockBound :
+  ∀ {skeleton identification}
+    (sameObject : PhysicalComGramBlockIdentification skeleton)
+    (bounds : Active.SameAdjacentPhysicalComBounds skeleton identification)
+    q →
+  Active.supportActive skeleton (suc q) q ≡ true →
+  gramBlockNorm sameObject (suc q) q ≤ Active.adjacentShellTarget
+physicalComReverseAdjacentShellGramBlockBound sameObject bounds q active =
+  subst
+    (_≤ Active.adjacentShellTarget)
+    (pairProductIsGramBlock sameObject (suc q) q)
+    (Active.physicalComReverseAdjacentShellActiveBound bounds q active)
+
 record PhysicalComOperatorBlockIdentification
     (skeleton : Active.PhysicalOddPQSupportSkeleton) : Set where
   field
@@ -116,6 +129,18 @@ physicalComAdjacentShellOperatorBlockBound sameObject bounds q active =
   ℚP.≤-trans
     (pairProductMajorizesOperatorBlock sameObject q (suc q))
     (Active.physicalComAdjacentShellActiveBound bounds q active)
+
+physicalComReverseAdjacentShellOperatorBlockBound :
+  ∀ {skeleton identification}
+    (sameObject : PhysicalComOperatorBlockIdentification skeleton)
+    (bounds : Active.SameAdjacentPhysicalComBounds skeleton identification)
+    q →
+  Active.supportActive skeleton (suc q) q ≡ true →
+  operatorBlockNorm sameObject (suc q) q ≤ Active.adjacentShellTarget
+physicalComReverseAdjacentShellOperatorBlockBound sameObject bounds q active =
+  ℚP.≤-trans
+    (pairProductMajorizesOperatorBlock sameObject (suc q) q)
+    (Active.physicalComReverseAdjacentShellActiveBound bounds q active)
 
 round47ConstantsCurrentlyTypeAsPairGramScalars : Bool
 round47ConstantsCurrentlyTypeAsPairGramScalars = true
