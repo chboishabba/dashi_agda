@@ -30,8 +30,9 @@ open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Rational.Base using (ℚ; 1ℚ; _+_; _-_; _*_; _≤_)
+import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Binary.PropositionalEquality using (subst)
 
 capacityFromHeadroom : ℚ → ℚ → ℚ
 capacityFromHeadroom ceiling depletion = ceiling - depletion
@@ -53,40 +54,33 @@ headroomBudgetImpliesCapacitySupersolution :
 headroomBudgetImpliesCapacitySupersolution
     alpha beta ceiling depletionNow depletionNext budget =
   let
-    lhsEquality :
-      alpha * capacityFromHeadroom ceiling depletionNow + beta
-      ≡ beta + alpha * ceiling - alpha * depletionNow
-    lhsEquality = solve (alpha ∷ beta ∷ ceiling ∷ depletionNow ∷ [])
+    shift = alpha * ceiling - alpha * depletionNow - depletionNext
 
-    rhsShifted :
-      beta + alpha * ceiling - alpha * depletionNow
-      ≤ ceiling - depletionNext
-    rhsShifted =
-      let
-        shifted =
-          Data.Rational.Properties.+-monoʳ-≤
-            (alpha * ceiling - alpha * depletionNow - depletionNext)
-            budget
-      in
-      subst
-        (λ left → left ≤ ceiling - depletionNext)
-        (solve
-          ( beta ∷ depletionNext ∷ alpha ∷ ceiling
-          ∷ depletionNow ∷ []))
-        (subst
-          (λ right →
-            beta + depletionNext
-              + (alpha * ceiling - alpha * depletionNow - depletionNext)
-            ≤ right)
-          (solve
-            ( alpha ∷ beta ∷ ceiling ∷ depletionNow
-            ∷ depletionNext ∷ []))
-          shifted)
+    shifted :
+      shift + (beta + depletionNext)
+      ≤ shift + ((1ℚ - alpha) * ceiling + alpha * depletionNow)
+    shifted = ℚP.+-monoʳ-≤ shift budget
+
+    leftMeaning :
+      shift + (beta + depletionNext)
+      ≡ alpha * capacityFromHeadroom ceiling depletionNow + beta
+    leftMeaning =
+      solve (alpha ∷ beta ∷ ceiling ∷ depletionNow ∷ depletionNext ∷ [])
+
+    rightMeaning :
+      shift + ((1ℚ - alpha) * ceiling + alpha * depletionNow)
+      ≡ capacityFromHeadroom ceiling depletionNext
+    rightMeaning =
+      solve (alpha ∷ ceiling ∷ depletionNow ∷ depletionNext ∷ [])
   in
   subst
     (λ left → left ≤ capacityFromHeadroom ceiling depletionNext)
-    lhsEquality
-    rhsShifted
+    leftMeaning
+    (subst
+      (λ right →
+        shift + (beta + depletionNext) ≤ right)
+      rightMeaning
+      shifted)
 
 capacitySupersolutionImpliesHeadroomBudget :
   ∀ alpha beta ceiling depletionNow depletionNext →
@@ -95,27 +89,48 @@ capacitySupersolutionImpliesHeadroomBudget :
 capacitySupersolutionImpliesHeadroomBudget
     alpha beta ceiling depletionNow depletionNext capacity =
   let
-    shifted =
-      Data.Rational.Properties.+-monoʳ-≤
-        (depletionNext + alpha * depletionNow)
-        capacity
+    shift = depletionNext - alpha * ceiling + alpha * depletionNow
+
+    shifted :
+      shift
+        + (alpha * capacityFromHeadroom ceiling depletionNow + beta)
+      ≤ shift + capacityFromHeadroom ceiling depletionNext
+    shifted = ℚP.+-monoʳ-≤ shift capacity
+
+    leftMeaning :
+      shift
+        + (alpha * capacityFromHeadroom ceiling depletionNow + beta)
+      ≡ beta + depletionNext
+    leftMeaning =
+      solve (alpha ∷ beta ∷ ceiling ∷ depletionNow ∷ depletionNext ∷ [])
+
+    rightMeaning :
+      shift + capacityFromHeadroom ceiling depletionNext
+      ≡ (1ℚ - alpha) * ceiling + alpha * depletionNow
+    rightMeaning =
+      solve (alpha ∷ ceiling ∷ depletionNow ∷ depletionNext ∷ [])
   in
   subst
     (λ left →
       left ≤ (1ℚ - alpha) * ceiling + alpha * depletionNow)
-    (sym (solve
-      (alpha ∷ beta ∷ ceiling ∷ depletionNow ∷ depletionNext ∷ [])))
+    leftMeaning
     (subst
       (λ right →
-        alpha * capacityFromHeadroom ceiling depletionNow + beta
-          + (depletionNext + alpha * depletionNow)
+        shift
+          + (alpha * capacityFromHeadroom ceiling depletionNow + beta)
         ≤ right)
-      (solve
-        (alpha ∷ beta ∷ ceiling ∷ depletionNow ∷ depletionNext ∷ []))
+      rightMeaning
       shifted)
 
 headroomCriterionIsExact : Bool
 headroomCriterionIsExact = true
 
+transientAlphaAboveOneAllowedByCriterion : Bool
+transientAlphaAboveOneAllowedByCriterion = true
+
 headroomCriterionIsExactIsTrue : headroomCriterionIsExact ≡ true
 headroomCriterionIsExactIsTrue = refl
+
+transientAlphaAboveOneAllowedByCriterionIsTrue :
+  transientAlphaAboveOneAllowedByCriterion ≡ true
+transientAlphaAboveOneAllowedByCriterionIsTrue = refl
