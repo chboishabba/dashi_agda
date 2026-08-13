@@ -6,6 +6,7 @@ import DASHI.EverythingLLMMultiResolutionRound17
 -- Round-18 quantitative/canonical compression frontier.
 import DASHI.Cognition.PNF.RationalProbabilityFutureKernelExact
 import DASHI.Core.FiniteFuturePartitionRefinementExact
+import DASHI.Core.FiniteFuturePartitionCanonicalBridgeExact
 import DASHI.Core.ResidualFibreLowerBoundExact
 import DASHI.Core.ResidualBitLowerBoundThreeExact
 import DASHI.Cognition.PNF.ModularFourierGrokkingC3Exact
