@@ -6,7 +6,7 @@ module DASHI.Physics.YangMills.Balaban1989CompleteDensityToCombinedRGExact where
 -- Tadeusz Bałaban,
 -- "Convergent Renormalization Expansions for Lattice Gauge Theories",
 -- Communications in Mathematical Physics 119 (1988), 243--285.
--- DOI: 10.1007/BF01217916.
+-- DOI: 10.1007/BF01217741.
 --
 -- Tadeusz Bałaban,
 -- "Large Field Renormalization. II. Localization, Exponentiation, and Bounds
