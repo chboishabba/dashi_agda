@@ -17,9 +17,17 @@ module DASHI.Physics.YangMills.BalabanYM4UniformCoercivityPerturbationExact wher
 --
 -- Quantitative RG1c perturbation lemma.  Starting from the selected physical
 -- constrained-Hessian floor 1/32, any same-carrier quadratic-form variation
--- costing at most 1/64 of ||h||^2 leaves a uniform 1/64 floor.  This is the
--- exact amount of background-uniformity the Combes--Thomas lane needs; one
--- does not have to reconstruct the selected coercivity proof at each RG state.
+-- costing at most 1/64 of ||h||^2 leaves a uniform 1/64 floor.
+--
+-- Round 53 also exposes the preferred LOCAL route.  If the plaquette Hessian
+-- decomposition yields an aggregate Lipschitz estimate
+--
+--   variation <= (L_H * radius * overlap) ||h||^2
+--
+-- then the entire all-background coercivity theorem reduces to the scalar
+-- invariant-region compatibility condition
+--
+--   L_H * radius * overlap <= 1/64.
 ------------------------------------------------------------------------
 
 open import Data.Integer.Base using (+_)
@@ -92,15 +100,63 @@ uniformOneSixtyFourthFloor
     (sym floorDifferenceExact)
     currentBound
 
+------------------------------------------------------------------------
+-- Local plaquette-Lipschitz route.
+------------------------------------------------------------------------
+
+record LocalHessianRadiusBudget
+    (normSq perturbationMagnitude : ℚ) : Set where
+  field
+    localLipschitz backgroundRadius overlap : ℚ
+
+    aggregateLocalVariation :
+      perturbationMagnitude
+      ≤ ((localLipschitz * backgroundRadius) * overlap) * normSq
+
+    radiusCompatibility :
+      (localLipschitz * backgroundRadius) * overlap
+      ≤ perturbationAllowance
+
+open LocalHessianRadiusBudget public
+
+localRadiusBudgetGivesOneSixtyFourthVariation :
+  ∀ normSq perturbationMagnitude →
+  0ℚ ≤ normSq →
+  LocalHessianRadiusBudget normSq perturbationMagnitude →
+  perturbationMagnitude ≤ perturbationAllowance * normSq
+localRadiusBudgetGivesOneSixtyFourthVariation
+    normSq perturbationMagnitude normNonnegative data =
+  ℚP.≤-trans
+    (aggregateLocalVariation data)
+    (ℚP.*-monoʳ-≤-nonNeg normSq (radiusCompatibility data))
+
+localRadiusBudgetClosesUniformCoercivity :
+  ∀ normSq referenceQuadratic currentQuadratic perturbationMagnitude →
+  0ℚ ≤ normSq →
+  selectedFloor * normSq ≤ referenceQuadratic →
+  referenceQuadratic - perturbationMagnitude ≤ currentQuadratic →
+  LocalHessianRadiusBudget normSq perturbationMagnitude →
+  uniformFloor * normSq ≤ currentQuadratic
+localRadiusBudgetClosesUniformCoercivity
+    normSq referenceQuadratic currentQuadratic perturbationMagnitude
+    normNonnegative referenceBound currentBound localBudget =
+  uniformOneSixtyFourthFloor
+    normSq referenceQuadratic currentQuadratic perturbationMagnitude
+    record
+      { referenceFloor = referenceBound
+      ; perturbationSmall =
+          localRadiusBudgetGivesOneSixtyFourthVariation
+            normSq perturbationMagnitude normNonnegative localBudget
+      ; currentAboveReferenceMinusPerturbation = currentBound
+      }
+
 ym4UniformCoercivityPerturbationArithmeticLevel : ProofLevel
 ym4UniformCoercivityPerturbationArithmeticLevel = machineChecked
 
--- Remaining physical RG1c leaf: on every admissible generated background A,
--- prove the same-carrier form estimate
---
---   |<h,(H_A-H_ref)h>| <= (1/64)||h||^2.
---
--- Combined with the existing selected 1/32 floor this module yields the
--- uniform 1/64 floor consumed by the physical Combes--Thomas theorem.
-ym4PhysicalHessianVariationOneSixtyFourthLevel : ProofLevel
-ym4PhysicalHessianVariationOneSixtyFourthLevel = conditional
+ym4LocalHessianRadiusCompatibilityLevel : ProofLevel
+ym4LocalHessianRadiusCompatibilityLevel = machineChecked
+
+-- Remaining physical RG1c leaf: prove the literal Wilson-Hessian local
+-- Lipschitz/overlap decomposition and verify L_H * r_RG * overlap <= 1/64.
+ym4PhysicalLocalHessianRadiusBudgetLevel : ProofLevel
+ym4PhysicalLocalHessianRadiusBudgetLevel = conditional
