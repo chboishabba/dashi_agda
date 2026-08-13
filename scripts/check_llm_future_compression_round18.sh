@@ -12,6 +12,7 @@ fi
 FILES=(
   DASHI/Cognition/PNF/RationalProbabilityFutureKernelExact.agda
   DASHI/Core/FiniteFuturePartitionRefinementExact.agda
+  DASHI/Core/FiniteFuturePartitionCanonicalBridgeExact.agda
   DASHI/Core/ResidualFibreLowerBoundExact.agda
   DASHI/Core/ResidualBitLowerBoundThreeExact.agda
   DASHI/Cognition/PNF/ModularFourierGrokkingC3Exact.agda
@@ -39,6 +40,8 @@ grep -q 'probabilityDataProcessing' DASHI/Cognition/PNF/RationalProbabilityFutur
 
 grep -q 'depthEquivalentMonotone' DASHI/Core/FiniteFuturePartitionRefinementExact.agda
 grep -q 'stableRefinementIsFutureSafe' DASHI/Core/FiniteFuturePartitionRefinementExact.agda
+grep -q 'stableRefinementPresentation' DASHI/Core/FiniteFuturePartitionCanonicalBridgeExact.agda
+grep -q 'canonicalFutureEquivalentImpliesStableCodeEquality' DASHI/Core/FiniteFuturePartitionCanonicalBridgeExact.agda
 
 grep -q 'exactResidualInjectiveOnEveryFibre' DASHI/Core/ResidualFibreLowerBoundExact.agda
 grep -q 'distinctFutureClassesForceDistinctResiduals' DASHI/Core/ResidualFibreLowerBoundExact.agda
