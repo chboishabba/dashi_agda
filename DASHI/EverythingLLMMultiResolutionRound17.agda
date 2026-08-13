@@ -10,4 +10,5 @@ import DASHI.Cognition.PNF.LLMCantorMultiResolutionBridgeExact
 import DASHI.Cognition.PNF.LLMGrokkingLearningFutureExact
 import DASHI.Cognition.PNF.LLMStabilitySufficiencySeparationExact
 import DASHI.Cognition.PNF.LLMWeightedFutureKernelExact
+import DASHI.Cognition.PNF.LSTMForgetGateFutureSafetyExact
 import DASHI.Core.StorageRecomputeResidualOptimizationExact
