@@ -8,10 +8,6 @@ import DASHI.Core.FutureEquivalenceCurrentObservationExact as Current
 import DASHI.Core.FutureObservationLanguageQuotientExact as Future
 import DASHI.Core.TypedDependencyCore as Dependency
 
-------------------------------------------------------------------------
--- CANONICAL BRIDGE FOR THE COMPUTED FINITE QUOTIENT
-------------------------------------------------------------------------
-
 record ExactStepPost
     (before : Partition.State)
     (action : Partition.Action)
@@ -62,10 +58,6 @@ executionTargetIsRun
   with afterIsStep (Dependency.postcondition admissible)
 ... | refl = executionTargetIsRun rest
 
-------------------------------------------------------------------------
--- Stable refined-code equality implies canonical future equivalence.
-------------------------------------------------------------------------
-
 stableCodeEqualityImpliesCanonicalFutureEquivalent :
   {left right : Partition.State} →
   Partition.refineCode left ≡ Partition.refineCode right →
@@ -110,11 +102,17 @@ stableCodeEqualityImpliesCanonicalFutureEquivalent {left} {right} codeEqual =
         (canonicalExecutes actions left)
         (trans (traceObservationEqual actions) observationProof)
 
-------------------------------------------------------------------------
--- Conversely, canonical future equivalence determines both fields of the
--- one-step refined code: present observation by the empty trace, and next
--- observation by the singleton `advance` trace.
-------------------------------------------------------------------------
+nextObservationWitness :
+  (state : Partition.State) →
+  Future.FutureObservation
+    partitionSystem Partition.observe state
+    (Partition.advance ∷ [])
+    (Partition.observe (Partition.step Partition.advance state))
+nextObservationWitness state =
+  Future.futureObservation
+    (Partition.step Partition.advance state)
+    (canonicalExecutes (Partition.advance ∷ []) state)
+    refl
 
 futureEquivalentImpliesNextObservationEqual :
   {left right : Partition.State} →
@@ -127,18 +125,7 @@ futureEquivalentImpliesNextObservationEqual {left} {right} equivalent
     (Future.sameFutureLanguage equivalent
       (Partition.advance ∷ [])
       (Partition.observe (Partition.step Partition.advance left)))
-    leftNextWitness
-  where
-    leftNextWitness :
-      Future.FutureObservation
-        partitionSystem Partition.observe left
-        (Partition.advance ∷ [])
-        (Partition.observe (Partition.step Partition.advance left))
-    leftNextWitness =
-      Future.futureObservation
-        (Partition.step Partition.advance left)
-        (canonicalExecutes (Partition.advance ∷ []) left)
-        refl
+    (nextObservationWitness left)
 ... | Future.futureObservation after execution observationProof
   with executionTargetIsRun execution
 ... | refl = sym observationProof
@@ -160,11 +147,6 @@ canonicalFutureEquivalentImpliesStableCodeEquality equivalent =
   refinedCodeCongruence
     (Current.futureEquivalentImpliesCurrentObservationEqual equivalent)
     (futureEquivalentImpliesNextObservationEqual equivalent)
-
-------------------------------------------------------------------------
--- The computed stable code is therefore an exact presentation of the
--- repository's canonical future-equivalence quotient for this machine.
-------------------------------------------------------------------------
 
 stableRefinementPresentation :
   Future.FutureEquivalencePresentation partitionSystem Partition.observe
