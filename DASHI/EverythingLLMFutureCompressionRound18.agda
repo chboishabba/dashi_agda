@@ -1,0 +1,18 @@
+module DASHI.EverythingLLMFutureCompressionRound18 where
+
+-- Cumulative theorem surface through round 17.
+import DASHI.EverythingLLMMultiResolutionRound17
+
+-- Round-18 quantitative/canonical compression frontier.
+import DASHI.Cognition.PNF.RationalProbabilityFutureKernelExact
+import DASHI.Core.FiniteFuturePartitionRefinementExact
+import DASHI.Core.ResidualFibreLowerBoundExact
+import DASHI.Core.ResidualBitLowerBoundThreeExact
+import DASHI.Cognition.PNF.ModularFourierGrokkingC3Exact
+import DASHI.Cognition.PNF.GrokkingCantorRefinementExact
+import DASHI.Cognition.PNF.DynamicMultiQueryMultiResolutionExact
+import DASHI.Core.ResidualObligationLatticeExact
+import DASHI.Cognition.PNF.LearningProvenanceFutureExact
+import DASHI.Cognition.PNF.OpticalTextCompressionPNFExact
+import DASHI.Cognition.PNF.MultimodalPhaseFutureEquivalenceExact
+import DASHI.Foundations.CantorProjectiveCylinderMeasureExact
