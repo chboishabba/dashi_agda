@@ -33,11 +33,11 @@ module DASHI.Physics.YangMills.BalabanCMP98MinimalContourSourceChartBudgetExact 
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.List using (List)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Integer.Base using (+_)
 open import Data.Nat.Base using (_≤_)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; _*_; _≤_; _<_; _/_)
+  (ℚ; 0ℚ; _-_; _*_; _≤_; _<_; _/_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (subst)
@@ -48,6 +48,10 @@ import DASHI.Physics.YangMills.BalabanP33CMP109MinimalPathStageBudgetExact as Pa
 import DASHI.Physics.YangMills.BalabanP33Path4SignedRemainderCoercivityExact as P33
 import DASHI.Physics.YangMills.BalabanCMP98SelectedSourceChartFromDefectExact as Chart
 import DASHI.Physics.YangMills.BalabanCMP98Equation38PrincipalLogQuadraticExact as Eq38
+
+listLength : ∀ {A : Set} → List A → Nat
+listLength [] = zero
+listLength (_ ∷ values) = suc (listLength values)
 
 perLinkOperatorDefectBudget : ℚ
 perLinkOperatorDefectBudget = (+ 2 / 1) * P33.p33SmallFieldRadius
@@ -80,7 +84,7 @@ perLinkOperatorDefectNonnegative = ℚP.nonNegative⁻¹ perLinkOperatorDefectBu
 finiteLength24DefectSum :
   ∀ {A : Set}
     (values : List A) →
-  PathBudget.Periodic.listLength values ≤ 24 →
+  listLength values ≤ 24 →
   (defect : A → ℚ) →
   (∀ value → defect value ≤ perLinkOperatorDefectBudget) →
   Sums.sumRational values defect ≤ length24OperatorDefectBudget
