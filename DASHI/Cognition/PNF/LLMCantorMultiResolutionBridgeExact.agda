@@ -46,10 +46,14 @@ roundThreeRetainedCount :
 roundThreeRetainedCount = refl
 
 roundThreeRetainedMassStillUnit :
+  Mass.totalNumerator
+    (retainedLayerUnitMass (canonicalCantorIndexedFutureSafeCompression 3))
+  ≡
+  Mass.commonDenominator
+    (retainedLayerUnitMass (canonicalCantorIndexedFutureSafeCompression 3))
+roundThreeRetainedMassStillUnit =
   Mass.normalizedUnitExact
     (retainedLayerUnitMass (canonicalCantorIndexedFutureSafeCompression 3))
-  ≡ refl
-roundThreeRetainedMassStillUnit = refl
 
 ------------------------------------------------------------------------
 -- Boundary: the record stores two proofs because neither proof entails the
