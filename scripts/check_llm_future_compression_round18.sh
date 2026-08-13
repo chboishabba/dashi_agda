@@ -5,8 +5,8 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 
 BASE_CHECKER="scripts/check_llm_multires_future_sufficiency_round17.sh"
-if [[ -x "$BASE_CHECKER" ]]; then
-  "$BASE_CHECKER"
+if [[ -f "$BASE_CHECKER" ]]; then
+  bash "$BASE_CHECKER"
 fi
 
 FILES=(
