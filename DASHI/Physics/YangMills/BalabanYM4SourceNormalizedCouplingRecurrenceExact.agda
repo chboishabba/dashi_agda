@@ -37,8 +37,9 @@ module DASHI.Physics.YangMills.BalabanYM4SourceNormalizedCouplingRecurrenceExact
 -- history-dependent beta coefficients.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Data.Product.Base using (_×_; _,_)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; _+_; _-_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
@@ -161,8 +162,6 @@ sourceNormalizedTwoSidedUVTube {trajectory} bounds depth =
       × (selected ≤ Sums.natAsRational depth * betaUpper bounds))
     (sym (inverseCouplingDifferenceIsBetaPartial trajectory depth))
     (betaPartialLower bounds depth , betaPartialUpper bounds depth)
-  where
-  open import Data.Product.Base using (_×_; _,_)
 
 ym4SourceNormalizedCouplingTelescopeLevel : ProofLevel
 ym4SourceNormalizedCouplingTelescopeLevel = machineChecked
