@@ -11,6 +11,7 @@ fi
 
 FILES=(
   DASHI/Cognition/PNF/RationalProbabilityFutureKernelExact.agda
+  DASHI/Cognition/PNF/RationalProbabilityFutureQuotientExact.agda
   DASHI/Core/FiniteFuturePartitionRefinementExact.agda
   DASHI/Core/FiniteFuturePartitionCanonicalBridgeExact.agda
   DASHI/Core/ResidualFibreLowerBoundExact.agda
@@ -22,6 +23,7 @@ FILES=(
   DASHI/Cognition/PNF/LearningProvenanceFutureExact.agda
   DASHI/Cognition/PNF/OpticalTextCompressionPNFExact.agda
   DASHI/Cognition/PNF/MultimodalPhaseFutureEquivalenceExact.agda
+  DASHI/Cognition/PNF/MultimodalPNFPhaseOrthogonalityExact.agda
   DASHI/Foundations/CantorProjectiveCylinderMeasureExact.agda
   DASHI/EverythingLLMFutureCompressionRound18.agda
 )
@@ -37,6 +39,9 @@ done
 grep -q 'totalVariationTriangle' DASHI/Cognition/PNF/RationalProbabilityFutureKernelExact.agda
 grep -q 'approxFutureErrorComposition' DASHI/Cognition/PNF/RationalProbabilityFutureKernelExact.agda
 grep -q 'probabilityDataProcessing' DASHI/Cognition/PNF/RationalProbabilityFutureKernelExact.agda
+grep -q 'probabilityFutureTrans' DASHI/Cognition/PNF/RationalProbabilityFutureQuotientExact.agda
+grep -q 'exactSummaryCertifiesProbabilityFutureSafety' DASHI/Cognition/PNF/RationalProbabilityFutureQuotientExact.agda
+grep -q 'safeProjectionToleranceMonotone' DASHI/Cognition/PNF/RationalProbabilityFutureQuotientExact.agda
 
 grep -q 'depthEquivalentMonotone' DASHI/Core/FiniteFuturePartitionRefinementExact.agda
 grep -q 'stableRefinementIsFutureSafe' DASHI/Core/FiniteFuturePartitionRefinementExact.agda
@@ -72,6 +77,8 @@ grep -q '10.48550/arXiv.2510.18234' DASHI/Cognition/PNF/OpticalTextCompressionPN
 
 grep -q 'modalityChangeCommutesWithTaskPhaseAdvance' DASHI/Cognition/PNF/MultimodalPhaseFutureEquivalenceExact.agda
 grep -q 'sameLatentImpliesCrossModalConsumerEquivalence' DASHI/Cognition/PNF/MultimodalPhaseFutureEquivalenceExact.agda
+grep -q 'modalityReencodingPreservesSemanticPhase' DASHI/Cognition/PNF/MultimodalPNFPhaseOrthogonalityExact.agda
+grep -q 'semanticPhaseChangesWithoutModalityChange' DASHI/Cognition/PNF/MultimodalPNFPhaseOrthogonalityExact.agda
 
 grep -q 'parentMassSplitsExactly' DASHI/Foundations/CantorProjectiveCylinderMeasureExact.agda
 grep -q 'canonicalPolarCylinderPremeasure' DASHI/Foundations/CantorProjectiveCylinderMeasureExact.agda
