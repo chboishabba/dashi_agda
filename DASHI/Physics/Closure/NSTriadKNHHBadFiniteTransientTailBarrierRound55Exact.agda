@@ -18,16 +18,11 @@ module DASHI.Physics.Closure.NSTriadKNHHBadFiniteTransientTailBarrierRound55Exac
 --
 -- Round 54 reduced HH-bad to the explicit least recurrence
 --   M_0=C_0, M_(q+1)=alpha_q M_q+beta_q.
--- This file removes the need for a global alpha_q<1 hypothesis.  Arbitrarily
--- large transient amplification is permitted on a finite prefix.  After a
--- selected tail index q0 it suffices to prove a uniform affine envelope
---
---   alpha_q <= a, beta_q <= b,  a C_* + b <= C_*.
---
--- Together with the finite-prefix check M_q<=C_* for q<=q0 this proves the
--- global bound M_q<=C_*.  This is the exact high-alpha form wanted by the
--- physical shell argument: finitely many bad shells are checked literally;
--- only the asymptotic tail needs a stationary barrier.
+-- This file permits arbitrarily large finite-prefix amplification.  After a
+-- selected q0 it suffices to prove
+--   alpha_q <= a, beta_q <= b, a C_* + b <= C_*.
+-- A complete Nat split/induction below then proves M_q<=C_* for every q; there
+-- is no residual "global barrier" witness and no global alpha_q<1 hypothesis.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
@@ -62,29 +57,51 @@ record TailAffineBarrier
 
 open TailAffineBarrier public
 
+data TailAt (start : Nat) : Nat → Set where
+  atStart : TailAt start start
+  atStep : ∀ {q} → TailAt start q → TailAt start (suc q)
+
+tailAtOrder : ∀ {start q} → TailAt start q → start Nat.≤ q
+tailAtOrder atStart = Nat.s≤s⁻¹ (Nat.s≤s Nat.z≤n)
+tailAtOrder (atStep witness) = Nat.≤-step (tailAtOrder witness)
+
+-- A total structural split of Nat at a selected boundary.  This is arithmetic,
+-- not an analytic assumption.
+data PrefixOrTail (start q : Nat) : Set where
+  prefix : q Nat.≤ start → PrefixOrTail start q
+  tail : TailAt start q → PrefixOrTail start q
+
+tailFromZero : ∀ q → TailAt zero q
+tailFromZero zero = atStart
+tailFromZero (suc q) = atStep (tailFromZero q)
+
+liftTailSuc : ∀ {start q} → TailAt start q → TailAt (suc start) (suc q)
+liftTailSuc atStart = atStart
+liftTailSuc (atStep witness) = atStep (liftTailSuc witness)
+
+splitPrefixOrTail : ∀ start q → PrefixOrTail start q
+splitPrefixOrTail zero q = tail (tailFromZero q)
+splitPrefixOrTail (suc start) zero = prefix Nat.z≤n
+splitPrefixOrTail (suc start) (suc q) with splitPrefixOrTail start q
+... | prefix proof = prefix (Nat.s≤s proof)
+... | tail witness = tail (liftTailSuc witness)
+
 scaleCapacityByAlphaTail :
   ∀ {physical} (barrier : TailAffineBarrier physical) q →
   q0 barrier Nat.≤ q →
   Minimal.minimalCapacity physical q ≤ ceiling barrier →
   Raw.alpha physical q * Minimal.minimalCapacity physical q
   ≤ alphaTail barrier * ceiling barrier
-scaleCapacityByAlphaTail {physical} barrier q tail current =
+scaleCapacityByAlphaTail {physical} barrier q tailOrder current =
   let
-    alphaStep :
-      Raw.alpha physical q * Minimal.minimalCapacity physical q
-      ≤ Raw.alpha physical q * ceiling barrier
     alphaStep =
       let instance alphaNN = nonNegative (Raw.alphaNonnegative physical q)
       in ℚP.*-monoˡ-≤-nonNeg (Raw.alpha physical q) current
-
-    ceilingStep :
-      Raw.alpha physical q * ceiling barrier
-      ≤ alphaTail barrier * ceiling barrier
     ceilingStep =
       let instance ceilingNN = nonNegative (ceilingNonnegative barrier)
       in ℚP.*-monoʳ-≤-nonNeg
         (ceiling barrier)
-        (alphaTailBound barrier q tail)
+        (alphaTailBound barrier q tailOrder)
   in
   ℚP.≤-trans alphaStep ceilingStep
 
@@ -93,43 +110,49 @@ tailStepPreservesCeiling :
   q0 barrier Nat.≤ q →
   Minimal.minimalCapacity physical q ≤ ceiling barrier →
   Minimal.minimalCapacity physical (suc q) ≤ ceiling barrier
-tailStepPreservesCeiling {physical} barrier q tail current =
-  let
-    inherited = scaleCapacityByAlphaTail barrier q tail current
-    forcing = forcingTailBound barrier q tail
-    summed = ℚP.+-mono-≤ inherited forcing
-  in
-  ℚP.≤-trans summed (tailAffineCloses barrier)
+tailStepPreservesCeiling {physical} barrier q tailOrder current =
+  ℚP.≤-trans
+    (ℚP.+-mono-≤
+      (scaleCapacityByAlphaTail barrier q tailOrder current)
+      (forcingTailBound barrier q tailOrder))
+    (tailAffineCloses barrier)
 
-record GlobalTailBarrierClosure
-    {physical : Raw.PhysicalGeneralVariableDefectDuhamel}
-    (barrier : TailAffineBarrier physical) : Set where
-  field
-    globalMinimalBelowCeiling : ∀ q →
-      Minimal.minimalCapacity physical q ≤ ceiling barrier
+tailCapacityBelow :
+  ∀ {physical} (barrier : TailAffineBarrier physical) {q} →
+  TailAt (q0 barrier) q →
+  Minimal.minimalCapacity physical q ≤ ceiling barrier
+tailCapacityBelow barrier atStart =
+  finitePrefixBelow barrier (q0 barrier) (tailAtOrder atStart)
+tailCapacityBelow barrier (atStep {q} witness) =
+  tailStepPreservesCeiling barrier q
+    (tailAtOrder witness)
+    (tailCapacityBelow barrier witness)
 
-open GlobalTailBarrierClosure public
+globalMinimalBelowCeiling :
+  ∀ {physical} (barrier : TailAffineBarrier physical) q →
+  Minimal.minimalCapacity physical q ≤ ceiling barrier
+globalMinimalBelowCeiling barrier q with splitPrefixOrTail (q0 barrier) q
+... | prefix proof = finitePrefixBelow barrier q proof
+... | tail witness = tailCapacityBelow barrier witness
 
 asUniformMinimalCapacity :
-  ∀ {physical} {barrier : TailAffineBarrier physical} →
-  GlobalTailBarrierClosure barrier →
-  Minimal.UniformMinimalCapacity physical
-asUniformMinimalCapacity {barrier = barrier} closure = record
+  ∀ {physical} → TailAffineBarrier physical → Minimal.UniformMinimalCapacity physical
+asUniformMinimalCapacity barrier = record
   { ceiling = ceiling barrier
   ; ceilingNonnegative = ceilingNonnegative barrier
-  ; minimalBelowCeiling = globalMinimalBelowCeiling closure
+  ; minimalBelowCeiling = globalMinimalBelowCeiling barrier
   }
 
 finiteTransientAmplificationPermitted : Bool
 finiteTransientAmplificationPermitted = true
 
-tailBarrierUsesOnlyAffineClosure : Bool
-tailBarrierUsesOnlyAffineClosure = true
+tailBarrierGlobalInductionClosed : Bool
+tailBarrierGlobalInductionClosed = true
 
 finiteTransientAmplificationPermittedIsTrue :
   finiteTransientAmplificationPermitted ≡ true
 finiteTransientAmplificationPermittedIsTrue = refl
 
-tailBarrierUsesOnlyAffineClosureIsTrue :
-  tailBarrierUsesOnlyAffineClosure ≡ true
-tailBarrierUsesOnlyAffineClosureIsTrue = refl
+tailBarrierGlobalInductionClosedIsTrue :
+  tailBarrierGlobalInductionClosed ≡ true
+tailBarrierGlobalInductionClosedIsTrue = refl
