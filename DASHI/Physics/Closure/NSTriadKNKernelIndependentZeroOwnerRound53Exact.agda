@@ -26,8 +26,11 @@ module DASHI.Physics.Closure.NSTriadKNKernelIndependentZeroOwnerRound53Exact whe
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base using (0ℚ)
+open import Agda.Builtin.List using ([]; _∷_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
+open import Data.Rational.Tactic.RingSolver using (solve)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import DASHI.Physics.Closure.NSTriadKNAdmissibleOwnerTaxLanguageRound28Exact as Owner
 import DASHI.Physics.Closure.NSTriadKNLuoDuplicateFreeTaxOwnershipRound26Exact as Tax
@@ -48,14 +51,28 @@ physicalKernelZeroOwner :
   ∀ {environment physical reduction} →
   PhysicalIndependentKernelZero environment physical reduction →
   Owner.AdmissibleOwnerEstimate environment
-physicalKernelZeroOwner zeroIndependent =
+physicalKernelZeroOwner {environment} zeroIndependent =
   Owner.admissible-owner-estimate
     Tax.kernel
     0ℚ
     0ℚ
     0ℚ
     0ℚ
-    ℚP.≤-refl
+    ownerBound
+  where
+  ownerBound :
+    0ℚ
+    ≤ 0ℚ * Owner.dissipation environment
+      + 0ℚ
+      + 0ℚ * Owner.integralCritical environment
+  ownerBound =
+    subst
+      (λ upper → 0ℚ ≤ upper)
+      (sym (solve
+        ( Owner.dissipation environment
+        ∷ Owner.integralCritical environment
+        ∷ [])))
+      ℚP.≤-refl
 
 physicalKernelZeroOwnerIdentity :
   ∀ {environment physical reduction}
