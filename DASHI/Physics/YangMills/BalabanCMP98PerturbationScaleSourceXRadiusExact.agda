@@ -27,10 +27,10 @@ module DASHI.Physics.YangMills.BalabanCMP98PerturbationScaleSourceXRadiusExact w
 
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; 1ℚ; _*_; _≤_; _/_; Positive)
+  (ℚ; 0ℚ; 1ℚ; _*_; _≤_; _<_; _/_; Positive)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanCMP98Equation38PrincipalLogQuadraticExact as Eq38
@@ -38,7 +38,7 @@ import DASHI.Physics.YangMills.BalabanCMP98Equation38PrincipalLogQuadraticExact 
 _twenty : ℚ
 _twenty = + 20 / 1
 
-twentyPositiveProof : 0ℚ ℚ.< _twenty
+twentyPositiveProof : 0ℚ < _twenty
 twentyPositiveProof = ℚP.positive⁻¹ _twenty
 
 instance
