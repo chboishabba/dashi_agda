@@ -36,6 +36,18 @@ import Data.Rational.Properties as ℚP
 open import Relation.Binary.PropositionalEquality using (subst)
 
 import DASHI.Physics.Closure.NSTriadKNComSameAdjacentActiveRound47Exact as Active
+import DASHI.Physics.Closure.NSTriadKNComDyadicHatWidthOneRound46Exact as HatWidth
+
+-- Requested paper-facing name for the already-sharp support theorem.  This is
+-- not an extra assumption: the Round-47 common-hat identification plus the
+-- Round-46 exact dyadic-hat width theorem literally imply |q-r| <= 1.
+physicalOddPQCommonHatSupport :
+  ∀ {skeleton}
+    (identification : Active.PhysicalOddPQHatIdentification skeleton)
+    q r →
+  Active.supportActive skeleton q r ≡ true →
+  HatWidth.WithinOne q r
+physicalOddPQCommonHatSupport = Active.activePairWithinOne
 
 record PhysicalComGramBlockIdentification
     (skeleton : Active.PhysicalOddPQSupportSkeleton) : Set where
