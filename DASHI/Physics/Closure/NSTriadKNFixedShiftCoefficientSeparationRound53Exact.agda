@@ -40,8 +40,9 @@ module DASHI.Physics.Closure.NSTriadKNFixedShiftCoefficientSeparationRound53Exac
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base using (ℚ; _+_; _*_)
-open import Relation.Binary.PropositionalEquality using (sym; trans)
+open import Data.Rational.Base using (ℚ; _+_; _*_; _≤_)
+import Data.Rational.Properties as ℚP
+open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
 
 import DASHI.Physics.Closure.NSTriadKNAdmissibleOwnerTaxLanguageRound28Exact as Owner
 import DASHI.Physics.Closure.NSTriadKNNineOwnerCriticalAbsorptionRound28Exact as Nine
@@ -112,8 +113,36 @@ ownerCriticalAggregateLivesInAdditiveCorrection {balances} {data} same shell =
     (sym (ownerRemainderIsFluxCorrection same shell))
     (ownerRemainderFormula (balances shell))
 
+record AdditiveCorrectionTargetCap
+    (balances : Nat → Nine.NineOwnerCriticalBalance)
+    (data : Fixed.FixedShiftRecursionPhysicalData)
+    (same : SameObjectOwnerToFixedShiftCorrection balances data) : Set where
+  field
+    correctionTarget : Nat → ℚ
+    physicalFluxCorrectionBelowTarget : ∀ shell →
+      Fixed.integratedFluxCorrection data shell ≤ correctionTarget shell
+
+open AdditiveCorrectionTargetCap public
+
+ownerAggregateRemainderBelowCorrectionTarget :
+  ∀ {balances data same} →
+  (cap : AdditiveCorrectionTargetCap balances data same) →
+  (shell : Nat) →
+  ownerAggregateDataRemainder (balances shell)
+    + ownerAggregateCriticalCoefficient (balances shell)
+      * Owner.integralCritical (Nine.environment (balances shell))
+  ≤ correctionTarget cap shell
+ownerAggregateRemainderBelowCorrectionTarget {balances} {data} {same} cap shell =
+  subst
+    (λ left → left ≤ correctionTarget cap shell)
+    (ownerCriticalAggregateLivesInAdditiveCorrection same shell)
+    (physicalFluxCorrectionBelowTarget cap shell)
+
 fixedShiftCoefficientSeparatedFromOwnerAggregate : Bool
 fixedShiftCoefficientSeparatedFromOwnerAggregate = true
+
+ownerBCoefficientsEnterDownstreamOnlyThroughTheirAggregate : Bool
+ownerBCoefficientsEnterDownstreamOnlyThroughTheirAggregate = true
 
 remainingBCapQuestionMovedToCorrectionComparison : Bool
 remainingBCapQuestionMovedToCorrectionComparison = true
@@ -124,6 +153,10 @@ physicalOwnerToFluxCorrectionSameObjectConstructed = false
 fixedShiftCoefficientSeparatedFromOwnerAggregateIsTrue :
   fixedShiftCoefficientSeparatedFromOwnerAggregate ≡ true
 fixedShiftCoefficientSeparatedFromOwnerAggregateIsTrue = refl
+
+ownerBCoefficientsEnterDownstreamOnlyThroughTheirAggregateIsTrue :
+  ownerBCoefficientsEnterDownstreamOnlyThroughTheirAggregate ≡ true
+ownerBCoefficientsEnterDownstreamOnlyThroughTheirAggregateIsTrue = refl
 
 remainingBCapQuestionMovedToCorrectionComparisonIsTrue :
   remainingBCapQuestionMovedToCorrectionComparison ≡ true
