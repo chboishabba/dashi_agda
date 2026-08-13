@@ -10,30 +10,21 @@ module DASHI.Physics.YangMills.BalabanCMP98Equation38PrincipalLogQuadraticExact 
 --
 -- SOURCE LOCATION / NORMALIZATION
 --
--- Around equations (34)--(38), Bałaban writes the differential of BCH through
--- g^{-1}(ad_Z) and Taylor-expands the nonidentity logarithm.  Equation (38)
--- has the source shape
+-- Equations (34)--(38), p. 23.  Bałaban writes
 --
 --   (1/i) log (exp(iX) exp(iY))
---     = Y + g^{-1}(-i ad_Y) X + Psi(X;Y),
+--     = Y + g^{-1}(-i ad_Y) X + Psi(X;Y)
 --
--- with |Psi(X;Y)| <= O(1)|X|^2 on the regular principal-log chart; the paper
--- explicitly notes that O(1)=24 may be used on the stated small neighbourhood
--- (in particular with |Y| <= 1/2 and X sufficiently small).
+-- and explicitly states that the absolute constant O(1)=24 may be used on
 --
--- DASHI CONTRIBUTION
+--   |X| <= 1/20,     |Y| <= 1/12.
 --
--- Encode that actual source quadratic estimate rather than another anonymous
--- differentiability receipt.  The proof below is the exact epsilon conversion:
---
---       |Psi| <= 24 |X|^2
---       24 |X| <= epsilon
---       -----------------
---       |Psi| <= epsilon |X|.
---
--- The left/right printed convention is NOT silently identified here.  The
--- caller supplies the exact Round-47 first-order object for the convention it
--- uses; this module only controls the magnitude of that SAME remainder.
+-- This module records those literal source radii rather than the earlier
+-- vague "sufficiently small" interface, and proves the exact conversion from
+-- the quadratic source bound to the epsilon/little-o form consumed by CMP109.
+-- The source norm is Bałaban's matrix norm; any later identification with the
+-- repository Lie-3 l1 carrier must be supplied by the same-coordinate physical
+-- producer, never silently by norm equivalence.
 ------------------------------------------------------------------------
 
 open import Data.Integer.Base using (+_)
@@ -44,6 +35,22 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 sourceQuadraticConstant : ℚ
 sourceQuadraticConstant = + 24 / 1
+
+sourceXRadius : ℚ
+sourceXRadius = + 1 / 20
+
+sourceYRadius : ℚ
+sourceYRadius = + 1 / 12
+
+record Equation38SourceChart
+    (inputMagnitude baseMagnitude : ℚ) : Set where
+  field
+    inputNonnegative : 0ℚ ≤ inputMagnitude
+    baseNonnegative : 0ℚ ≤ baseMagnitude
+    inputInsideSourceChart : inputMagnitude ≤ sourceXRadius
+    baseInsideSourceChart : baseMagnitude ≤ sourceYRadius
+
+open Equation38SourceChart public
 
 record Equation38QuadraticRemainder
     (inputMagnitude remainderMagnitude : ℚ) : Set where
@@ -65,6 +72,20 @@ equation38RemainderLittleOEpsilon inputMagnitude remainderMagnitude epsilon data
   ℚP.≤-trans
     (sourceQuadraticBound data)
     (ℚP.*-monoʳ-≤-nonNeg inputMagnitude small)
+
+-- A useful exact threshold specialization: if |X| <= epsilon/24, the source
+-- remainder is epsilon |X|-small.  The division itself is left to callers so
+-- no positivity side condition on epsilon is hidden in this theorem.
+equation38RemainderLittleOFromTwentyFourTimesInput :
+  ∀ inputMagnitude remainderMagnitude epsilon →
+  Equation38QuadraticRemainder inputMagnitude remainderMagnitude →
+  sourceQuadraticConstant * inputMagnitude ≤ epsilon →
+  remainderMagnitude ≤ epsilon * inputMagnitude
+equation38RemainderLittleOFromTwentyFourTimesInput =
+  equation38RemainderLittleOEpsilon
+
+cmp98Equation38SourceChartLevel : ProofLevel
+cmp98Equation38SourceChartLevel = machineChecked
 
 cmp98Equation38QuadraticRemainderLevel : ProofLevel
 cmp98Equation38QuadraticRemainderLevel = machineChecked
