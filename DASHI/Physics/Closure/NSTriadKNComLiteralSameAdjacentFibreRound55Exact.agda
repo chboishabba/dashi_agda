@@ -37,6 +37,7 @@ open import Data.Rational.Base using (ℚ; _+_; _≤_; _/_)
 import Data.Integer.Base as Int
 open import Data.Rational.Tactic.RingSolver using (solve)
 import Data.Rational.Properties as ℚP
+open import Relation.Binary.PropositionalEquality using (subst)
 
 import DASHI.Physics.Closure.NSTriadKNComSameAdjacentActiveRound47Exact as Active
 import DASHI.Physics.Closure.NSTriadKNComThreeChannelRowMassRound48Exact as Row
@@ -74,7 +75,7 @@ wholeBandwidthOneMassBelow133Over256 masses =
           (forwardAdjacentMassBelow masses))
         (reverseAdjacentMassBelow masses)
   in
-  Relation.Binary.PropositionalEquality.subst
+  subst
     (λ upper → wholeBandwidthOneMass masses ≤ upper)
     targetArithmetic
     summed
