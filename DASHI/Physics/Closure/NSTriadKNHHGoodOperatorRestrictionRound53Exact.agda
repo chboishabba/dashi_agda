@@ -31,7 +31,7 @@ module DASHI.Physics.Closure.NSTriadKNHHGoodOperatorRestrictionRound53Exact wher
 -- latter remains the substantive physical/analytic producer.
 ------------------------------------------------------------------------
 
-open import Agda.Primitive using (Level; lsuc)
+open import Agda.Primitive using (Level; lsuc; _⊔_)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
@@ -40,7 +40,7 @@ import DASHI.Physics.Closure.NSTriadKNLuoAngularStrainDisplayedFormulaZeroExact 
 import DASHI.Physics.Closure.NSTriadKNHHGoodLiteralAnnularStrainSymbolRound48Exact as Literal
 
 infix 4 _≗_
-_≗_ : ∀ {a b} {A : Set a} {B : Set b} → (A → B) → (A → B) → Set (a Agda.Primitive.⊔ b)
+_≗_ : ∀ {a b} {A : Set a} {B : Set b} → (A → B) → (A → B) → Set (a ⊔ b)
 f ≗ g = ∀ x → f x ≡ g x
 
 literalAnnularStrainOperator :
