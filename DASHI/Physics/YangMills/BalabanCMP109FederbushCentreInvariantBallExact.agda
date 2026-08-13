@@ -39,7 +39,7 @@ module DASHI.Physics.YangMills.BalabanCMP109FederbushCentreInvariantBallExact wh
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Rational.Base as ℚ using (ℚ; _≤_)
-open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayGate4QuantitativeImplicitFunctionCommonExact as QIF
@@ -62,6 +62,9 @@ record FederbushInvariantBallRealization
     ballRadiusIsSelectedContourRadius :
       QIF.radius (QIF.contractionBall dataSet input)
       ≡ Budget.length24OperatorDefectBudget
+
+    metricOrderIsRational : ∀ left right →
+      QIF.LessEqual (QIF.metric dataSet) left right ≡ (left ≤ right)
 
     metricDistanceIsRelativeOperatorDefect : ∀ value →
       QIF.distance (QIF.metric dataSet) value reference
@@ -120,11 +123,22 @@ implicitCentreInsideSelectedContourRadius
               selectedRadius)
           (ballRadiusIsSelectedContourRadius realization)
           distanceBound)
+
+    rationalDistanceBound :
+      QIF.distance (QIF.metric dataSet) centre reference
+      ≤ Budget.length24OperatorDefectBudget
+    rationalDistanceBound =
+      subst
+        (λ proposition → proposition)
+        (metricOrderIsRational realization
+          (QIF.distance (QIF.metric dataSet) centre reference)
+          Budget.length24OperatorDefectBudget)
+        referenceDistanceBound
   in
   subst
     (λ selected → selected ≤ Budget.length24OperatorDefectBudget)
     (metricDistanceIsRelativeOperatorDefect realization centre)
-    referenceDistanceBound
+    rationalDistanceBound
 
 cmp109FederbushCentreInvariantBallExtractionLevel : ProofLevel
 cmp109FederbushCentreInvariantBallExtractionLevel = machineChecked
