@@ -34,15 +34,6 @@ record CertifiedPlan : Set where
 
 open CertifiedPlan public
 
-record OptimalCertifiedPlan (weight : Nat) (chosen : CertifiedPlan) : Set where
-  constructor optimalCertifiedPlan
-  field
-    noMoreExpensive :
-      (candidate : CertifiedPlan) →
-      weightedCost weight (plan chosen) ≤ weightedCost weight (plan candidate)
-
-open OptimalCertifiedPlan public
-
 ------------------------------------------------------------------------
 -- Finite cache/recompute family.
 -- Costs are an exact toy model, not measurements from DeepSeek-V4.
@@ -58,9 +49,6 @@ strategyPlan zeroCache = reopeningPlan 0 3
 
 strategyIsSufficient : (strategy : CacheStrategy) → ReopeningSufficient (strategyPlan strategy)
 strategyIsSufficient strategy = reopeningSufficient
-
-certifiedStrategy : CacheStrategy → CertifiedPlan
-certifiedStrategy strategy = certifiedPlan (strategyPlan strategy) (strategyIsSufficient strategy)
 
 unitWeight : Nat
 unitWeight = 1
@@ -79,16 +67,28 @@ checkpointNoWorseThanAnyStrategy :
   weightedCost unitWeight (strategyPlan periodicCheckpoint)
   ≤ weightedCost unitWeight (strategyPlan strategy)
 checkpointNoWorseThanAnyStrategy fullCache =
-  s≤s (s≤s (s≤s z≤n))
+  s≤s (s≤s z≤n)
 checkpointNoWorseThanAnyStrategy periodicCheckpoint = ≤-refl
 checkpointNoWorseThanAnyStrategy zeroCache =
-  s≤s (s≤s (s≤s z≤n))
+  s≤s (s≤s z≤n)
+
+record OptimalInStrategyFamily (weight : Nat) (chosen : CacheStrategy) : Set where
+  constructor optimalInStrategyFamily
+  field
+    sufficientChosen : ReopeningSufficient (strategyPlan chosen)
+    noMoreExpensive :
+      (candidate : CacheStrategy) →
+      weightedCost weight (strategyPlan chosen)
+      ≤ weightedCost weight (strategyPlan candidate)
+
+open OptimalInStrategyFamily public
 
 checkpointIsOptimalInFiniteFamily :
-  (strategy : CacheStrategy) →
-  weightedCost unitWeight (strategyPlan periodicCheckpoint)
-  ≤ weightedCost unitWeight (strategyPlan strategy)
-checkpointIsOptimalInFiniteFamily = checkpointNoWorseThanAnyStrategy
+  OptimalInStrategyFamily unitWeight periodicCheckpoint
+checkpointIsOptimalInFiniteFamily =
+  optimalInStrategyFamily
+    (strategyIsSufficient periodicCheckpoint)
+    checkpointNoWorseThanAnyStrategy
 
 ------------------------------------------------------------------------
 -- Trade-off boundary: minimal storage need not minimize deployment cost.
