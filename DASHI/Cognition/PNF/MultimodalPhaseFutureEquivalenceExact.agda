@@ -7,11 +7,6 @@ import DASHI.Physics.Closure.SSPPrimeLane369DepthWheelCantorBridge as Wheel
 
 ------------------------------------------------------------------------
 -- MULTIMODAL REPRESENTATION PHASE VS TASK / DYNAMICAL PHASE
---
--- Text, visual and latent encodings are physical representation modalities.
--- The C3/task-character phase is a separate dynamical coordinate.  Changing
--- modality need not change the consumer-visible future class, and advancing a
--- task phase need not change modality.
 ------------------------------------------------------------------------
 
 record MultimodalPhaseCoordinate : Set where
@@ -79,12 +74,12 @@ sameLatentImpliesCrossModalConsumerEquivalence :
   encodeText system text ≡ encodeVisual system visual →
   (query : Query) →
   observeText system query text ≡ observeVisual system query visual
-sameLatentImpliesCrossModalConsumerEquivalence system latentEqual query =
+sameLatentImpliesCrossModalConsumerEquivalence system {text} {visual} latentEqual query =
   trans
-    (textFactors system query _)
+    (textFactors system query text)
     (trans
       (cong (observeLatent system query) latentEqual)
-      (sym (visualFactors system query _)))
+      (sym (visualFactors system query visual)))
 
 ------------------------------------------------------------------------
 -- Consequence: modality/token representation may change while the declared
