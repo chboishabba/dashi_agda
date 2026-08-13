@@ -5,6 +5,7 @@ import DASHI.EverythingLLMMultiResolutionRound17
 
 -- Round-18 quantitative/canonical compression frontier.
 import DASHI.Cognition.PNF.RationalProbabilityFutureKernelExact
+import DASHI.Cognition.PNF.RationalProbabilityFutureQuotientExact
 import DASHI.Core.FiniteFuturePartitionRefinementExact
 import DASHI.Core.FiniteFuturePartitionCanonicalBridgeExact
 import DASHI.Core.ResidualFibreLowerBoundExact
@@ -16,4 +17,5 @@ import DASHI.Core.ResidualObligationLatticeExact
 import DASHI.Cognition.PNF.LearningProvenanceFutureExact
 import DASHI.Cognition.PNF.OpticalTextCompressionPNFExact
 import DASHI.Cognition.PNF.MultimodalPhaseFutureEquivalenceExact
+import DASHI.Cognition.PNF.MultimodalPNFPhaseOrthogonalityExact
 import DASHI.Foundations.CantorProjectiveCylinderMeasureExact
