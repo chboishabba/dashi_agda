@@ -17,6 +17,7 @@ import DASHI.Physics.Closure.NSTriadKNHighestAlphaRound51Exact
 import DASHI.Physics.Closure.NSTriadKNHighestAlphaRound52Exact
 import DASHI.Physics.Closure.NSTriadKNHighestAlphaRound53Exact
 import DASHI.Physics.Closure.NSTriadKNHighestAlphaRound54Exact
+import DASHI.Physics.Closure.NSTriadKNHighestAlphaRound55Exact
 import DASHI.Papers.NavierStokes.ClayContractRound23 as Clay23
 
 ------------------------------------------------------------------------
@@ -29,17 +30,16 @@ import DASHI.Papers.NavierStokes.ClayContractRound23 as Clay23
 -- surface: the target theorem type is represented, but physical producers and
 -- unconditional promotion remain false.
 --
--- The theorem-bearing Round-47, Round-50, Round-51, Round-52, Round-53 and
--- Round-54 highest-alpha aggregates are imported so DASHI.Everything reaches
--- the shell-barrier HH-bad consumer, the canonical least variable capacity,
--- the exact fixed-shift additive correction headroom and aggregate B cap, the
--- corrected Com squared endpoint and literal physical output-fibre Schur
--- reduction, the kernel structural zero-tax branch, and the canonical
--- HH-good/boundary seams without changing any terminal status bit.
+-- Round55 imports the six A--F cutset modules: finite-transient HH-bad tail
+-- barrier, literal same/adjacent Com fibre assembly, canonical owner-defined
+-- flux correction, kernel residual dedup/cancellation, same-object HH-good
+-- master-kernel certificate, and literal-zero boundary atom recursion.  The
+-- terminal Clay bit remains false: none of these imports converts an unproved
+-- physical analytic inequality into a theorem by fiat.
 
 paperInterfaceStatement : String
 paperInterfaceStatement =
-  "Paper-facing NS interface: A6/A7/A8/A9 closure receipts, the Round-47, Round-50, Round-51, Round-52, Round-53 and Round-54 exact highest-alpha aggregates, and the literal Round 23 Fefferman periodic contract are imported; Round54 exposes the exact fixed-shift correction capacity, aggregate soft-owner B budget, canonical least HH-bad capacity and literal whole-output-fibre Schur reduction while unresolved physical producer inhabitation, Clay Navier-Stokes and terminal promotion remain false."
+  "Paper-facing NS interface: A6/A7/A8/A9 closure receipts, Round-47/50/51/52/53/54/55 highest-alpha aggregates, and the literal Round 23 Fefferman periodic contract are imported; Round55 wires the A-F physical cutset while unresolved literal analytic producer inhabitation, Clay Navier-Stokes and terminal promotion remain false."
 
 record NSPaperTheoremStatus : Setω where
   field
@@ -89,15 +89,13 @@ record NSPaperTheoremStatus : Setω where
     finalStateStatementIsCanonical :
       Final.statement finalStateReceipt ≡ Final.nsFinalStateStatement
 
-    a6TheoremProved :
-      Bool
+    a6TheoremProved : Bool
     a6TheoremProvedMatchesReceipt :
       a6TheoremProved ≡ A6.A6TheoremProved
     a6TheoremProvedIsTrue :
       a6TheoremProved ≡ true
 
-    a6ResidualNonpositiveProved :
-      Bool
+    a6ResidualNonpositiveProved : Bool
     a6ResidualNonpositiveMatchesReceipt :
       a6ResidualNonpositiveProved ≡ A6.residualNonpositiveProved
     a6ResidualNonpositiveIsTrue :
@@ -145,16 +143,14 @@ record NSPaperTheoremStatus : Setω where
     finalTerminalStillFalse :
       Final.terminalClaimPromoted finalStateReceipt ≡ false
 
-    clayTerminalPromotion :
-      Bool
+    clayTerminalPromotion : Bool
     clayTerminalPromotionMatchesFinal :
       clayTerminalPromotion
         ≡ Final.terminalClaimPromoted finalStateReceipt
     clayTerminalPromotionIsFalse :
       clayTerminalPromotion ≡ false
 
-    statement :
-      String
+    statement : String
     statementIsCanonical :
       statement ≡ paperInterfaceStatement
 
@@ -163,122 +159,72 @@ open NSPaperTheoremStatus public
 canonicalNSPaperTheoremStatus : NSPaperTheoremStatus
 canonicalNSPaperTheoremStatus =
   record
-    { a6TheoremLadderReceipt =
-        A6.canonicalNSA6TheoremLadderBoundary
-    ; a6TheoremLadderReceiptIsCanonical =
-        refl
-    ; a6BonyRepairReceipt =
-        A6Bony.canonicalNSBonyParaproductA6RepairBoundary
-    ; a6BonyRepairReceiptIsCanonical =
-        refl
-    ; a7ResidualDepletionReceipt =
-        A7.canonicalNSA7ResidualDepletionGronwallBoundary
-    ; a7ResidualDepletionReceiptIsCanonical =
-        refl
-    ; a8LocalDefectReceipt =
-        A8.canonicalNSA8FullLocalDefectMonotonicityBoundary
-    ; a8LocalDefectReceiptIsCanonical =
-        refl
-    ; a9CKNBKMReceipt =
-        A9.canonicalNSA9CKNBKMClosureBoundary
-    ; a9CKNBKMReceiptIsCanonical =
-        refl
-    ; clayContractRound23 =
-        Clay23.canonicalNSClayContractRound23Status
-    ; clayContractRound23IsCanonical =
-        refl
-    ; clayLiteralTargetImplemented =
-        Clay23.literalTargetIsImplemented
-    ; clayPhysicalProducersStillOpen =
-        Clay23.physicalProducersRemainOpen
-    ; clayRound23PromotionStillFalse =
-        Clay23.clayPromotionRemainsFalse
-    ; finalStateReceipt =
-        Final.canonicalNSFinalStateReceipt
-    ; finalStateStatementIsCanonical =
-        refl
-    ; a6TheoremProved =
-        A6.A6TheoremProved
-    ; a6TheoremProvedMatchesReceipt =
-        refl
-    ; a6TheoremProvedIsTrue =
-        refl
-    ; a6ResidualNonpositiveProved =
-        A6.residualNonpositiveProved
-    ; a6ResidualNonpositiveMatchesReceipt =
-        refl
-    ; a6ResidualNonpositiveIsTrue =
-        refl
-    ; a6LocalDefectMonotonicityStillFalse =
-        refl
-    ; a6CKNBKMClosureStillFalse =
-        refl
-    ; a6ClayStillFalse =
-        refl
-    ; a6TerminalStillFalse =
-        refl
-    ; a6BonyRepairPromoted =
-        refl
-    ; a6BonyClayStillFalse =
-        refl
-    ; a6BonyTerminalStillFalse =
-        refl
-    ; a7ResidualDepletionProved =
-        A7.A7ResidualDepletionGronwallProvedIsTrue
-    ; a7ClayStillFalse =
-        A7.NSClayPromotedFromA7IsFalse
-    ; a7TerminalStillFalse =
-        A7.TerminalPromotionFromA7IsFalse
-    ; a8FullLocalDefectMonotonicityProved =
-        A8.A8FullLocalDefectMonotonicityProvedIsTrue
-    ; a8ClayStillFalse =
-        A8.NSClayPromotedFromA8IsFalse
-    ; a8TerminalStillFalse =
-        A8.TerminalPromotionFromA8IsFalse
-    ; a9CKNBKMClosureProved =
-        A9.A9CKNBKMClosureProvedIsTrue
-    ; a9ClayStillFalse =
-        A9.NSClayPromotedFromA9IsFalse
-    ; a9TerminalStillFalse =
-        A9.TerminalPromotionFromA9IsFalse
-    ; finalClayStillFalse =
-        refl
-    ; finalTerminalStillFalse =
-        refl
-    ; clayTerminalPromotion =
-        Final.terminalClaimPromoted Final.canonicalNSFinalStateReceipt
-    ; clayTerminalPromotionMatchesFinal =
-        refl
-    ; clayTerminalPromotionIsFalse =
-        Final.nsFinalStateKeepsTerminalFalse
-    ; statement =
-        paperInterfaceStatement
-    ; statementIsCanonical =
-        refl
+    { a6TheoremLadderReceipt = A6.canonicalNSA6TheoremLadderBoundary
+    ; a6TheoremLadderReceiptIsCanonical = refl
+    ; a6BonyRepairReceipt = A6Bony.canonicalNSBonyParaproductA6RepairBoundary
+    ; a6BonyRepairReceiptIsCanonical = refl
+    ; a7ResidualDepletionReceipt = A7.canonicalNSA7ResidualDepletionGronwallBoundary
+    ; a7ResidualDepletionReceiptIsCanonical = refl
+    ; a8LocalDefectReceipt = A8.canonicalNSA8FullLocalDefectMonotonicityBoundary
+    ; a8LocalDefectReceiptIsCanonical = refl
+    ; a9CKNBKMReceipt = A9.canonicalNSA9CKNBKMClosureBoundary
+    ; a9CKNBKMReceiptIsCanonical = refl
+    ; clayContractRound23 = Clay23.canonicalNSClayContractRound23Status
+    ; clayContractRound23IsCanonical = refl
+    ; clayLiteralTargetImplemented = Clay23.literalTargetIsImplemented
+    ; clayPhysicalProducersStillOpen = Clay23.physicalProducersRemainOpen
+    ; clayRound23PromotionStillFalse = Clay23.clayPromotionRemainsFalse
+    ; finalStateReceipt = Final.canonicalNSFinalStateReceipt
+    ; finalStateStatementIsCanonical = refl
+    ; a6TheoremProved = A6.A6TheoremProved
+    ; a6TheoremProvedMatchesReceipt = refl
+    ; a6TheoremProvedIsTrue = refl
+    ; a6ResidualNonpositiveProved = A6.residualNonpositiveProved
+    ; a6ResidualNonpositiveMatchesReceipt = refl
+    ; a6ResidualNonpositiveIsTrue = refl
+    ; a6LocalDefectMonotonicityStillFalse = refl
+    ; a6CKNBKMClosureStillFalse = refl
+    ; a6ClayStillFalse = refl
+    ; a6TerminalStillFalse = refl
+    ; a6BonyRepairPromoted = refl
+    ; a6BonyClayStillFalse = refl
+    ; a6BonyTerminalStillFalse = refl
+    ; a7ResidualDepletionProved = A7.A7ResidualDepletionGronwallProvedIsTrue
+    ; a7ClayStillFalse = A7.NSClayPromotedFromA7IsFalse
+    ; a7TerminalStillFalse = A7.TerminalPromotionFromA7IsFalse
+    ; a8FullLocalDefectMonotonicityProved = A8.A8FullLocalDefectMonotonicityProvedIsTrue
+    ; a8ClayStillFalse = A8.NSClayPromotedFromA8IsFalse
+    ; a8TerminalStillFalse = A8.TerminalPromotionFromA8IsFalse
+    ; a9CKNBKMClosureProved = A9.A9CKNBKMClosureProvedIsTrue
+    ; a9ClayStillFalse = A9.NSClayPromotedFromA9IsFalse
+    ; a9TerminalStillFalse = A9.TerminalPromotionFromA9IsFalse
+    ; finalClayStillFalse = refl
+    ; finalTerminalStillFalse = refl
+    ; clayTerminalPromotion = Final.terminalClaimPromoted Final.canonicalNSFinalStateReceipt
+    ; clayTerminalPromotionMatchesFinal = refl
+    ; clayTerminalPromotionIsFalse = Final.nsFinalStateKeepsTerminalFalse
+    ; statement = paperInterfaceStatement
+    ; statementIsCanonical = refl
     }
 
 nsPaperInterfaceClayFalse :
   Final.clayNavierStokesPromoted
     (finalStateReceipt canonicalNSPaperTheoremStatus)
   ≡ false
-nsPaperInterfaceClayFalse =
-  refl
+nsPaperInterfaceClayFalse = refl
 
 nsPaperInterfaceTerminalFalse :
   clayTerminalPromotion canonicalNSPaperTheoremStatus ≡ false
-nsPaperInterfaceTerminalFalse =
-  Final.nsFinalStateKeepsTerminalFalse
+nsPaperInterfaceTerminalFalse = Final.nsFinalStateKeepsTerminalFalse
 
 nsPaperLiteralClayTargetImplemented :
   Clay23.literalFeffermanPeriodicStatementImplemented
     (clayContractRound23 canonicalNSPaperTheoremStatus)
   ≡ true
-nsPaperLiteralClayTargetImplemented =
-  Clay23.literalTargetIsImplemented
+nsPaperLiteralClayTargetImplemented = Clay23.literalTargetIsImplemented
 
 nsPaperRound23PhysicalProducersOpen :
   Clay23.physicalProducersInhabited
     (clayContractRound23 canonicalNSPaperTheoremStatus)
   ≡ false
-nsPaperRound23PhysicalProducersOpen =
-  Clay23.physicalProducersRemainOpen
+nsPaperRound23PhysicalProducersOpen = Clay23.physicalProducersRemainOpen
