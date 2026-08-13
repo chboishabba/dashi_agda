@@ -65,6 +65,7 @@ grep -q 'ApproximateWeightedFutureEquivalent' DASHI/Cognition/PNF/LLMWeightedFut
 
 grep -q 'sameCurrentKernelDoesNotImplyCanonicalWeightedFutureEquivalence' DASHI/Cognition/PNF/LLMWeightedFutureKernelExact.agda
 grep -q 'allDisplayedKernelsHaveWeightTwo' DASHI/Cognition/PNF/LLMWeightedFutureKernelExact.agda
+grep -q 'futureNotWithinUnitTolerance' DASHI/Cognition/PNF/LLMWeightedFutureKernelExact.agda
 
 grep -q 'canonicalContextWindowTerminalisation' DASHI/Cognition/PNF/LLMContextWindowTerminalisationExact.agda
 grep -q 'reopenContextExact' DASHI/Cognition/PNF/LLMContextWindowTerminalisationExact.agda
