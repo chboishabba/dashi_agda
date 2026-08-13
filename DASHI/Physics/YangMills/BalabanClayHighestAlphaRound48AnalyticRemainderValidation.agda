@@ -7,8 +7,9 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound48AnalyticRemainderVa
 -- Round-47 source-producer root with Bałaban CMP98 equation-(38)'s explicit
 -- quadratic principal-log remainder and same-coordinate producer, the generic
 -- quantitative nonidentity estimate and same-object equation-(0.11) transfer,
--- the canonical kernel-curve o(t) estimate, and the certified owner-enclosure
--- plaquette path.
+-- the canonical kernel-curve o(t) estimate, and both certified owner-enclosure
+-- paths, including the existing P33 interval certificate directly into the
+-- literal selected plaquette family.
 ------------------------------------------------------------------------
 
 import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound47PhysicalProducerValidation
@@ -19,3 +20,4 @@ import DASHI.Physics.YangMills.BalabanCMP109PrincipalLogNonidentityQuantitativeP
 import DASHI.Physics.YangMills.BalabanCMP109Federbush011NonidentityRemainderTransferExact
 import DASHI.Physics.YangMills.BalabanCMP109SelectedKernelCurveLittleOExact
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundCertifiedOwnerPlaquetteExact
+import DASHI.Physics.YangMills.BalabanP33CertifiedPlaquetteEnvelopeToLiteralFamilyExact
