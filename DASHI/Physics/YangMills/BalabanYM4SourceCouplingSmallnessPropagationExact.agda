@@ -22,15 +22,14 @@ module DASHI.Physics.YangMills.BalabanYM4SourceCouplingSmallnessPropagationExact
 --
 --      u_k = u_{k+1} + beta_{k+1}.
 --
--- Nonnegative beta implies u_{k+1} <= u_k.  Hence if the terminal/coarsest
--- inverse coupling is above the inverse small-coupling threshold, every finer
--- scale is above it as well.  This is the exact monotonicity needed to feed the
--- published complete-density theorem once beta positivity is established.
+-- Nonnegative beta implies u_{k+1} <= u_k.  Hence a lower threshold for the
+-- coarsest inverse coupling propagates backwards to all finer UV scales.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _≤_)
+open import Agda.Builtin.Nat using (suc)
+open import Data.Rational.Base as ℚ using (0ℚ; _+_; _≤_)
 import Data.Rational.Properties as ℚP
+import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -50,37 +49,24 @@ inverseCouplingNextBelowCurrent :
   ≤ Flow.inverseCoupling trajectory step
 inverseCouplingNextBelowCurrent {trajectory} nonnegative step =
   let
-    recurrence = Flow.sourceRecurrence trajectory step
-    addAboveBase :
-      Flow.inverseCoupling trajectory (suc step)
-      ≤ Flow.inverseCoupling trajectory (suc step)
-        + Flow.beta trajectory (suc step)
-    addAboveBase = ℚP.p≤p+q
-      (Flow.inverseCoupling trajectory (suc step))
-      (Flow.beta trajectory (suc step))
+    nextValue = Flow.inverseCoupling trajectory (suc step)
+    betaValue = Flow.beta trajectory (suc step)
+
+    withZero : nextValue + 0ℚ ≤ nextValue + betaValue
+    withZero = ℚP.+-mono-≤ ℚP.≤-refl
       (betaNonnegative nonnegative step)
+
+    addAboveBase : nextValue ≤ nextValue + betaValue
+    addAboveBase =
+      subst
+        (λ lower → lower ≤ nextValue + betaValue)
+        (ℚRing.solve-∀ nextValue)
+        withZero
   in
   subst
-    (λ upper → Flow.inverseCoupling trajectory (suc step) ≤ upper)
-    (sym recurrence)
+    (λ upper → nextValue ≤ upper)
+    (sym (Flow.sourceRecurrence trajectory step))
     addAboveBase
 
-record TerminalInverseThreshold
-    (trajectory : Flow.SourceNormalizedCouplingTrajectory)
-    (depth : Nat) : Set where
-  field
-    threshold : ℚ
-    terminalAboveThreshold :
-      threshold ≤ Flow.inverseCoupling trajectory depth
-
-open TerminalInverseThreshold public
-
--- Rather than repeat a Nat induction with an arbitrary terminal index in every
--- consumer, the all-scale package may use the exact two-sided UV tube already
--- proved from the beta enclosure.  The local monotonicity theorem above is the
--- only new order fact needed by that induction.
 ym4SourceCouplingMonotonicityLevel : ProofLevel
 ym4SourceCouplingMonotonicityLevel = machineChecked
-
-ym4TerminalSmallCouplingPropagatesToUVLevel : ProofLevel
-ym4TerminalSmallCouplingPropagatesToUVLevel = machineChecked
