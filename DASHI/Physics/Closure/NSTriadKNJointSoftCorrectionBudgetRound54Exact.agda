@@ -61,11 +61,8 @@ nonnegativeProduct {left} {right} leftNN rightNN =
 addNonnegative :
   ∀ {left right : ℚ} →
   0ℚ ≤ left → 0ℚ ≤ right → 0ℚ ≤ left + right
-addNonnegative {left} leftNN rightNN =
-  subst
-    (λ lower → lower ≤ left + _)
-    (sym (ℚP.+-identityʳ left))
-    (ℚP.+-monoʳ-≤ left rightNN)
+addNonnegative leftNN rightNN =
+  ℚP.+-mono-≤ leftNN rightNN
 
 record ThreeSoftYoungAllocation : Set where
   field
