@@ -14,8 +14,15 @@ FILES=(
   DASHI/Cognition/PNF/LLMCompressionAccessibilityDefectsExact.agda
   DASHI/Cognition/PNF/LLMCantorMultiResolutionBridgeExact.agda
   DASHI/Cognition/PNF/LLMGrokkingLearningFutureExact.agda
+  DASHI/Cognition/PNF/GrokkingMeasureStrataExact.agda
+  DASHI/Cognition/PNF/GrokkingTaskCharacterPhaseExact.agda
   DASHI/Cognition/PNF/LLMStabilitySufficiencySeparationExact.agda
+  DASHI/Cognition/PNF/LLMWeightedFutureQuotientExact.agda
   DASHI/Cognition/PNF/LLMWeightedFutureKernelExact.agda
+  DASHI/Cognition/PNF/LLMContextWindowTerminalisationExact.agda
+  DASHI/Cognition/PNF/LLMResidualHierarchyExact.agda
+  DASHI/Cognition/PNF/NeuralProposalEvidenceBoundaryExact.agda
+  DASHI/Cognition/PNF/NeuralBottleneckResidualFutureSafetyExact.agda
   DASHI/Cognition/PNF/LSTMForgetGateFutureSafetyExact.agda
   DASHI/Core/StorageRecomputeResidualOptimizationExact.agda
   DASHI/EverythingLLMMultiResolutionRound17.agda
@@ -42,13 +49,33 @@ grep -q 'roundThreeRetainedMassStillUnit' DASHI/Cognition/PNF/LLMCantorMultiReso
 
 grep -q 'sameTrainingFitDoesNotImplyLearningFutureEquivalence' DASHI/Cognition/PNF/LLMGrokkingLearningFutureExact.agda
 grep -q 'progressResidualSeparatesStates' DASHI/Cognition/PNF/LLMGrokkingLearningFutureExact.agda
+grep -q 'trainingUnitDoesNotImplyTaskUnit' DASHI/Cognition/PNF/GrokkingMeasureStrataExact.agda
+grep -q 'latentMechanismUnitCanPrecedeVisibleTaskUnit' DASHI/Cognition/PNF/GrokkingMeasureStrataExact.agda
+grep -q 'c3CharacterCompositionExact' DASHI/Cognition/PNF/GrokkingTaskCharacterPhaseExact.agda
+grep -q 'phaseOnePlusPhaseTwoWrapsToZero' DASHI/Cognition/PNF/GrokkingTaskCharacterPhaseExact.agda
 
 grep -q 'nonExpansiveComposition' DASHI/Cognition/PNF/LLMStabilitySufficiencySeparationExact.agda
 grep -q 'stableMapCannotCarryConsumerObservation' DASHI/Cognition/PNF/LLMStabilitySufficiencySeparationExact.agda
 grep -q 'exactRepresentationPreservesNonzeroDistance' DASHI/Cognition/PNF/LLMStabilitySufficiencySeparationExact.agda
 
-grep -q 'sameCurrentKernelDoesNotImplyWeightedFutureEquivalence' DASHI/Cognition/PNF/LLMWeightedFutureKernelExact.agda
+grep -q 'weightedFutureRefl' DASHI/Cognition/PNF/LLMWeightedFutureQuotientExact.agda
+grep -q 'weightedFutureTrans' DASHI/Cognition/PNF/LLMWeightedFutureQuotientExact.agda
+grep -q 'exactSummaryCertifiesWeightedFutureSafety' DASHI/Cognition/PNF/LLMWeightedFutureQuotientExact.agda
+grep -q 'ApproximateWeightedFutureEquivalent' DASHI/Cognition/PNF/LLMWeightedFutureQuotientExact.agda
+
+grep -q 'sameCurrentKernelDoesNotImplyCanonicalWeightedFutureEquivalence' DASHI/Cognition/PNF/LLMWeightedFutureKernelExact.agda
 grep -q 'allDisplayedKernelsHaveWeightTwo' DASHI/Cognition/PNF/LLMWeightedFutureKernelExact.agda
+
+grep -q 'canonicalContextWindowTerminalisation' DASHI/Cognition/PNF/LLMContextWindowTerminalisationExact.agda
+grep -q 'reopenContextExact' DASHI/Cognition/PNF/LLMContextWindowTerminalisationExact.agda
+grep -q 'computeResidualCollidesAcrossSemanticDifference' DASHI/Cognition/PNF/LLMResidualHierarchyExact.agda
+grep -q 'semanticResidualCollidesAcrossProvenanceDifference' DASHI/Cognition/PNF/LLMResidualHierarchyExact.agda
+grep -q 'provenanceResidualReopensExact' DASHI/Cognition/PNF/LLMResidualHierarchyExact.agda
+
+grep -q 'proposalToTypePressure' DASHI/Cognition/PNF/NeuralProposalEvidenceBoundaryExact.agda
+grep -q 'neuralPressureCannotPromoteOntologyType' DASHI/Cognition/PNF/NeuralProposalEvidenceBoundaryExact.agda
+grep -q 'latentEqualityDoesNotImplyFutureSafety' DASHI/Cognition/PNF/NeuralBottleneckResidualFutureSafetyExact.agda
+grep -q 'reopenBottleneckWithResidualExact' DASHI/Cognition/PNF/NeuralBottleneckResidualFutureSafetyExact.agda
 
 grep -q 'forgettingCurrentEqualityIsNotFutureSafety' DASHI/Cognition/PNF/LSTMForgetGateFutureSafetyExact.agda
 grep -q 'reopenForgetWithMemoryResidualExact' DASHI/Cognition/PNF/LSTMForgetGateFutureSafetyExact.agda
