@@ -32,7 +32,8 @@ module DASHI.Physics.Closure.NSTriadKNHHBadFiniteTransientTailBarrierRound55Exac
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; zero; suc; _≤_)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
+import Data.Nat.Base as Nat
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚP
 
@@ -47,13 +48,13 @@ record TailAffineBarrier
     ceilingNonnegative : 0ℚ ≤ ceiling
     alphaTailNonnegative : 0ℚ ≤ alphaTail
 
-    finitePrefixBelow : ∀ q → q ≤ q0 →
+    finitePrefixBelow : ∀ q → q Nat.≤ q0 →
       Minimal.minimalCapacity physical q ≤ ceiling
 
-    alphaTailBound : ∀ q → q0 ≤ q →
+    alphaTailBound : ∀ q → q0 Nat.≤ q →
       Raw.alpha physical q ≤ alphaTail
 
-    forcingTailBound : ∀ q → q0 ≤ q →
+    forcingTailBound : ∀ q → q0 Nat.≤ q →
       Raw.forcing physical q ≤ forcingTail
 
     tailAffineCloses :
@@ -63,7 +64,7 @@ open TailAffineBarrier public
 
 scaleCapacityByAlphaTail :
   ∀ {physical} (barrier : TailAffineBarrier physical) q →
-  q0 barrier ≤ q →
+  q0 barrier Nat.≤ q →
   Minimal.minimalCapacity physical q ≤ ceiling barrier →
   Raw.alpha physical q * Minimal.minimalCapacity physical q
   ≤ alphaTail barrier * ceiling barrier
@@ -89,7 +90,7 @@ scaleCapacityByAlphaTail {physical} barrier q tail current =
 
 tailStepPreservesCeiling :
   ∀ {physical} (barrier : TailAffineBarrier physical) q →
-  q0 barrier ≤ q →
+  q0 barrier Nat.≤ q →
   Minimal.minimalCapacity physical q ≤ ceiling barrier →
   Minimal.minimalCapacity physical (suc q) ≤ ceiling barrier
 tailStepPreservesCeiling {physical} barrier q tail current =
@@ -100,10 +101,6 @@ tailStepPreservesCeiling {physical} barrier q tail current =
   in
   ℚP.≤-trans summed (tailAffineCloses barrier)
 
--- We package the final induction as a producer because Nat interval splitting
--- is already standard library arithmetic; the substantive analytic content is
--- exactly the finite-prefix/tail split above.  Supplying the ordinary induction
--- witness yields the mature Round-54 uniform-minimal-capacity interface.
 record GlobalTailBarrierClosure
     {physical : Raw.PhysicalGeneralVariableDefectDuhamel}
     (barrier : TailAffineBarrier physical) : Set where
