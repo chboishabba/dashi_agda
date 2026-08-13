@@ -30,11 +30,19 @@ The source-derived architecture coordinates record CSA as medium-resolution/narr
 
 `LLMCantorMultiResolutionBridgeExact` combines two independent certificates: finite Cantor polar-layer unit mass at arbitrary depth and multi-resolution consumer future sufficiency. Unit mass is accounting; future sufficiency is a separate factorization theorem.
 
-### Learning/grokking future inequivalence and measure strata
+### Learning/grokking future inequivalence, measure strata, and strict quotient hierarchy
 
 `LLMGrokkingLearningFutureExact` constructs two learner states with identical training fit and identical current generalization observation. A retained algorithmic-progress coordinate distinguishes them before the behavioural observable moves. After one admissible continuation, only the structured state generalizes.
 
 `GrokkingMeasureStrataExact` makes the indexed-unit lesson explicit: the memorizer has unit training mass while task mass remains zero, and the structured state can already have unit mechanism mass while the visible task mass is still zero. Thus `1_train`, `1_task`, and `1_mechanism` are distinct finite normalizations.
+
+`FutureEquivalenceCurrentObservationExact` proves generically that complete future equivalence implies equality of the present consumer observation because the empty trace belongs to the future language.
+
+`GrokkingEquivalenceStrataExact` then proves the finite strict hierarchy
+
+`learning-future equivalence => current-task equivalence => training-fit equivalence`,
+
+with counterexamples to both converses. The pre-transition memorizer/structured pair has the same current task observation but different learning futures; the post-transition pair retains equal training fit while current task behaviour differs.
 
 ### Task symmetry / character phase
 
@@ -46,7 +54,7 @@ The source-derived architecture coordinates record CSA as medium-resolution/narr
 
 It also exposes an approximate epsilon interface parameterized by an explicit distance. No total variation/KL theorem is asserted until genuine probability measures exist.
 
-`LLMWeightedFutureKernelExact` now instantiates this generic quotient and proves that equal current next-token kernels do not imply equal complete weighted future kernels.
+`LLMWeightedFutureKernelExact` instantiates this generic quotient. Equal current next-token kernels have equal current outcome weights but distinct future weights after context extension. With the explicit finite distance `|a-b|` encoded by two truncated differences, the future pair has distance 2 and therefore cannot satisfy unit-tolerance approximate future equivalence.
 
 ### Context-window terminalisation and external reopening
 
@@ -82,10 +90,11 @@ The combined theorem surface now separates:
 
 1. what is retained;
 2. what is accessible for the present query;
-3. what the consumer can distinguish over all futures;
-4. what is needed for compute-only, semantic, or provenance reopening;
-5. what unit mass means under training, task, mechanism, or Cantor accounting;
-6. what task symmetry actually induces a valid phase/character carrier.
+3. what the consumer can distinguish now;
+4. what the consumer can distinguish over all deterministic or weighted futures;
+5. what is needed for compute-only, semantic, or provenance reopening;
+6. what unit mass means under training, task, mechanism, or Cantor accounting;
+7. what task symmetry actually induces a valid phase/character carrier.
 
 The canonical safety question is therefore no longer `did current output change?`, but whether the retained representation kernel is contained in the declared deterministic or weighted future-equivalence relation.
 
