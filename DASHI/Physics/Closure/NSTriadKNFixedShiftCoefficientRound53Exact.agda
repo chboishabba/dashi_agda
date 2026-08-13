@@ -35,8 +35,8 @@ module DASHI.Physics.Closure.NSTriadKNFixedShiftCoefficientRound53Exact where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base using (ℚ; _+_; _*_; _<_)
-open import Relation.Binary.PropositionalEquality using (cong)
+open import Data.Rational.Base using (ℚ; 1ℚ; _+_; _*_; _<_)
+open import Relation.Binary.PropositionalEquality using (trans; sym)
 
 import DASHI.Physics.Closure.NSTriadKNAdmissibleOwnerTaxLanguageRound28Exact as Tax
 import DASHI.Physics.Closure.NSTriadKNNineOwnerCriticalAbsorptionRound28Exact as Nine
@@ -93,37 +93,14 @@ aggregateRedistributionLeavesAffineCoefficientUnchanged :
   AffineAggregateFixedShiftFormula.recursionCoefficient physicalLeft
     ≡ AffineAggregateFixedShiftFormula.recursionCoefficient physicalRight
 aggregateRedistributionLeavesAffineCoefficientUnchanged
-    physicalLeft physicalRight rhoSame weightSame aggregateSame =
-  let
-    leftFormula =
-      AffineAggregateFixedShiftFormula.physicalFixedShiftRecursionCoefficientFormula
-        physicalLeft
-    rightFormula =
-      AffineAggregateFixedShiftFormula.physicalFixedShiftRecursionCoefficientFormula
-        physicalRight
-
-    formulaSame :
-      rho0 physicalLeft
-        + ownerWeight physicalLeft * ownerAggregateCriticalCoefficient _
-      ≡
-      rho0 physicalRight
-        + ownerWeight physicalRight * ownerAggregateCriticalCoefficient _
-    formulaSame =
-      cong
-        (λ triple →
-          let r = Data.Product.proj₁ triple
-              rest = Data.Product.proj₂ triple
-              w = Data.Product.proj₁ rest
-              b = Data.Product.proj₂ rest
-          in r + w * b)
-        (Data.Product.Σ-≡,≡→≡ rhoSame
-          (Data.Product.Σ-≡,≡→≡ weightSame aggregateSame))
-  in
-  Relation.Binary.PropositionalEquality.trans
-    leftFormula
-    (Relation.Binary.PropositionalEquality.trans
-      formulaSame
-      (Relation.Binary.PropositionalEquality.sym rightFormula))
+    physicalLeft physicalRight rhoSame weightSame aggregateSame
+  rewrite rhoSame | weightSame | aggregateSame =
+  trans
+    (AffineAggregateFixedShiftFormula.physicalFixedShiftRecursionCoefficientFormula
+      physicalLeft)
+    (sym
+      (AffineAggregateFixedShiftFormula.physicalFixedShiftRecursionCoefficientFormula
+        physicalRight))
 
 record FixedShiftStrictGate
     {balance : Nine.NineOwnerCriticalBalance}
