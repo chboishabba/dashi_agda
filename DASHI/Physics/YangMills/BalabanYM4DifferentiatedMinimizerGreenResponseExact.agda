@@ -21,24 +21,26 @@ module DASHI.Physics.YangMills.BalabanYM4DifferentiatedMinimizerGreenResponseExa
 --
 --       H deltaA + s = 0
 --
--- and G is a LEFT inverse of H on the selected tangent carrier, finite matrix
--- algebra gives
+-- and G is a LEFT inverse of H on the selected finite tangent carrier, finite
+-- Fubini/distributivity gives G(H v)=v, hence
 --
 --       deltaA = - G s.
 --
--- This is the precise bridge from the differentiated minimizer equation to the
--- already-proved physical Combes--Thomas remote-response estimate.  No implicit
--- function theorem and no new inverse construction are hidden here.
+-- No function extensionality postulate, implicit-function theorem, or new
+-- inverse construction is used.  This is the algebraic bridge to the already
+-- proved physical Combes--Thomas remote-response estimate.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _*_; -_)
+import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
+import DASHI.Physics.YangMills.BalabanFiniteSumFubiniExact as Fubini
 
 Vector : Set → Set
 Vector Index = Index → ℚ
@@ -50,9 +52,6 @@ matrixApply :
   ∀ {Index : Set} → List Index → Matrix Index → Vector Index → Vector Index
 matrixApply indices matrix vector row =
   Sums.sumRational indices (λ column → matrix row column * vector column)
-
-identityEntry : ∀ {Index : Set} → (Index → Index → ℚ) → Set
-identityEntry delta = ∀ row column → delta row column ≡ delta row column
 
 LeftInverse :
   ∀ {Index : Set} →
@@ -72,12 +71,24 @@ record FiniteIdentityAction (Index : Set) : Set₁ where
 
 open FiniteIdentityAction public
 
-matrixApplyZero :
-  ∀ {Index : Set} indices (matrix : Matrix Index) row →
-  matrixApply indices matrix (λ _ → 0ℚ) row ≡ 0ℚ
-matrixApplyZero [] matrix row = refl
-matrixApplyZero (_ ∷ indices) matrix row
-  rewrite matrixApplyZero indices matrix row = ℚRing.solve []
+sumRightScale :
+  ∀ {Index : Set} coefficient (values : List Index) (term : Index → ℚ) →
+  Sums.sumRational values (λ value → term value * coefficient)
+  ≡ Sums.sumRational values term * coefficient
+sumRightScale coefficient values term =
+  trans
+    (Sums.sumRationalCong values _ _
+      (λ value → ℚP.*-comm (term value) coefficient))
+    (trans
+      (Sums.sumRationalScale coefficient values term)
+      (ℚP.*-comm coefficient (Sums.sumRational values term)))
+
+scaleSumOnRight :
+  ∀ {Index : Set} coefficient (values : List Index) (term : Index → ℚ) →
+  coefficient * Sums.sumRational values term
+  ≡ Sums.sumRational values (λ value → coefficient * term value)
+scaleSumOnRight coefficient values term =
+  sym (Sums.sumRationalScale coefficient values term)
 
 matrixApplyNegate :
   ∀ {Index : Set} indices (matrix : Matrix Index) vector row →
@@ -87,15 +98,7 @@ matrixApplyNegate [] matrix vector row = refl
 matrixApplyNegate (column ∷ columns) matrix vector row
   rewrite matrixApplyNegate columns matrix vector row = ℚRing.solve []
 
-matrixApplyAdd :
-  ∀ {Index : Set} indices (matrix : Matrix Index) left right row →
-  matrixApply indices matrix (λ index → left index + right index) row
-  ≡ matrixApply indices matrix left row + matrixApply indices matrix right row
-matrixApplyAdd [] matrix left right row = refl
-matrixApplyAdd (column ∷ columns) matrix left right row
-  rewrite matrixApplyAdd columns matrix left right row = ℚRing.solve []
-
-matrixApplyComposition :
+matrixApplyCompositionExpand :
   ∀ {Index : Set} indices (left right : Matrix Index) vector row →
   matrixApply indices left (matrixApply indices right vector) row
   ≡ Sums.sumRational indices
@@ -103,22 +106,77 @@ matrixApplyComposition :
         Sums.sumRational indices
           (λ middle → left row middle * right middle column)
         * vector column)
-matrixApplyComposition [] left right vector row = refl
-matrixApplyComposition (middle ∷ middles) left right vector row =
-  -- finite Fubini/distributivity; delegate to the repository's exact sum
-  -- algebra rather than any analytic convergence theorem.
+matrixApplyCompositionExpand indices left right vector row =
   let
-    open import DASHI.Physics.YangMills.BalabanFiniteSumFubiniExact
-      using (sumSwap)
+    expandInner :
+      Sums.sumRational indices
+        (λ middle →
+          left row middle * matrixApply indices right vector middle)
+      ≡ Sums.sumRational indices
+          (λ middle →
+            Sums.sumRational indices
+              (λ column →
+                left row middle * (right middle column * vector column)))
+    expandInner = Sums.sumRationalCong indices _ _
+      (λ middle →
+        scaleSumOnRight
+          (left row middle)
+          indices
+          (λ column → right middle column * vector column))
+
+    swap :
+      Sums.sumRational indices
+        (λ middle →
+          Sums.sumRational indices
+            (λ column →
+              left row middle * (right middle column * vector column)))
+      ≡ Sums.sumRational indices
+          (λ column →
+            Sums.sumRational indices
+              (λ middle →
+                left row middle * (right middle column * vector column)))
+    swap = Fubini.sumSwap indices indices
+      (λ middle column →
+        left row middle * (right middle column * vector column))
+
+    factorColumn : ∀ column →
+      Sums.sumRational indices
+        (λ middle →
+          left row middle * (right middle column * vector column))
+      ≡ Sums.sumRational indices
+          (λ middle → left row middle * right middle column)
+        * vector column
+    factorColumn column =
+      trans
+        (Sums.sumRationalCong indices _ _
+          (λ middle → ℚP.*-assoc
+            (left row middle) (right middle column) (vector column)))
+        (sumRightScale
+          (vector column) indices
+          (λ middle → left row middle * right middle column))
   in
+  trans expandInner
+    (trans swap
+      (Sums.sumRationalCong indices _ _ factorColumn))
+
+greenAfterHessianFromLeftInverse :
+  ∀ {Index}
+    (finite : FiniteIdentityAction Index)
+    (hessian green : Matrix Index) →
+  LeftInverse (indices finite) (identity finite) green hessian →
+  ∀ vector row →
+  matrixApply (indices finite) green
+    (matrixApply (indices finite) hessian vector) row
+  ≡ vector row
+greenAfterHessianFromLeftInverse finite hessian green leftInverse vector row =
   trans
-    (Sums.sumRationalCong (middle ∷ middles) _ _
-      (λ selected →
-        trans
-          (cong (left row selected *_)
-            (refl {x = matrixApply (middle ∷ middles) right vector selected}))
-          (refl)))
-    (ℚRing.solve [])
+    (matrixApplyCompositionExpand
+      (indices finite) green hessian vector row)
+    (trans
+      (Sums.sumRationalCong (indices finite) _ _
+        (λ column →
+          cong (_* vector column) (leftInverse row column)))
+      (identityActs finite vector row))
 
 record DifferentiatedMinimizerSystem (Index : Set) : Set₁ where
   field
@@ -134,19 +192,6 @@ record DifferentiatedMinimizerSystem (Index : Set) : Set₁ where
 
 open DifferentiatedMinimizerSystem public
 
--- The next theorem uses a directly supplied composition action equality.  This
--- keeps the load-bearing proof independent of any representation-specific
--- finite Fubini convention while still making the required algebra explicit.
-record DifferentiatedMinimizerCompositionLaw
-    {Index : Set} (system : DifferentiatedMinimizerSystem Index) : Set₁ where
-  field
-    greenAfterHessian : ∀ vector row →
-      matrixApply (indices (finite system)) (green system)
-        (matrixApply (indices (finite system)) (hessian system) vector) row
-      ≡ vector row
-
-open DifferentiatedMinimizerCompositionLaw public
-
 hessianResponseIsNegativeSource :
   ∀ {Index} (system : DifferentiatedMinimizerSystem Index) row →
   matrixApply (indices (finite system)) (hessian system) (deltaA system) row
@@ -154,43 +199,53 @@ hessianResponseIsNegativeSource :
 hessianResponseIsNegativeSource system row =
   let
     equation = differentiatedEulerLagrange system row
+    h = matrixApply (indices (finite system))
+          (hessian system) (deltaA system) row
+    s = source system row
   in
   trans
-    (cong
-      (λ selected → selected - source system row)
-      equation)
-    (ℚRing.solve-∀ (source system row))
+    (sym (ℚRing.solve-∀ h s : h ≡ (h + s) - s))
+    (trans
+      (cong (_- s) equation)
+      (ℚRing.solve-∀ s))
+
+greenAppliedToHessianResponse :
+  ∀ {Index} (system : DifferentiatedMinimizerSystem Index) row →
+  matrixApply (indices (finite system)) (green system)
+    (matrixApply (indices (finite system))
+      (hessian system) (deltaA system)) row
+  ≡ matrixApply (indices (finite system)) (green system)
+      (λ coordinate → - source system coordinate) row
+greenAppliedToHessianResponse system row =
+  Sums.sumRationalCong
+    (indices (finite system)) _ _
+    (λ column →
+      cong ((green system row column) *_)
+        (hessianResponseIsNegativeSource system column))
 
 differentiatedMinimizerGreenResponse :
   ∀ {Index}
     (system : DifferentiatedMinimizerSystem Index) →
-  DifferentiatedMinimizerCompositionLaw system →
   ∀ row →
   deltaA system row
   ≡ - matrixApply (indices (finite system))
       (green system) (source system) row
-differentiatedMinimizerGreenResponse system composition row =
+differentiatedMinimizerGreenResponse system row =
   trans
-    (sym (greenAfterHessian composition (deltaA system) row))
+    (sym
+      (greenAfterHessianFromLeftInverse
+        (finite system) (hessian system) (green system)
+        (greenLeftInverse system) (deltaA system) row))
     (trans
-      (cong
-        (matrixApply (indices (finite system)) (green system))
-        (funextResponse system))
+      (greenAppliedToHessianResponse system row)
       (matrixApplyNegate
         (indices (finite system)) (green system) (source system) row))
-  where
-  postulate
-    funextResponse :
-      ∀ {Index} (selected : DifferentiatedMinimizerSystem Index) →
-      matrixApply (indices (finite selected))
-        (hessian selected) (deltaA selected)
-      ≡ (λ coordinate → - source selected coordinate)
 
 ym4DifferentiatedMinimizerResponseAlgebraLevel : ProofLevel
 ym4DifferentiatedMinimizerResponseAlgebraLevel = machineChecked
 
--- The pointwise-to-function extensionality step is constructive in Agda only
--- when the chosen function-extensionality policy is supplied by the physical
--- carrier.  The physical equation itself remains the true RG1d producer.
-ym4DifferentiatedMinimizerPhysicalEquationLevel : ProofLevel
-ym4DifferentiatedMinimizerPhysicalEquationLevel = conditional
+-- Remaining RG1d physical inputs are now only the literal identification of
+-- H, G, deltaA and s with the differentiated selected minimizer, plus remote
+-- support of s.  The response identity itself is no longer conditional.
+ym4DifferentiatedMinimizerPhysicalIdentificationLevel : ProofLevel
+ym4DifferentiatedMinimizerPhysicalIdentificationLevel = conditional
