@@ -253,6 +253,8 @@ record EarlyLearningPNFCrossPollination : Set where
   constructor earlyLearningPNFCrossPollination
   field
     educationBodyMemory : EducationBody.EducationBodyMemoryBridge
+    educationBodyMemoryIsCanonical :
+      educationBodyMemory ≡ EducationBody.canonicalEducationBodyMemoryBridge
     traumaMemoryBoundary : TraumaMemory.TraumaMemoryHypervoxelAuthorityBoundary
     traumaMemoryBoundaryIsCanonical :
       traumaMemoryBoundary ≡
@@ -276,19 +278,11 @@ record EarlyLearningPNFCrossPollination : Set where
     sensoryExposureAloneProvesNeuroplasticBenefitIsFalse :
       sensoryExposureAloneProvesNeuroplasticBenefit ≡ false
 
-------------------------------------------------------------------------
--- The canonical education/body-memory bridge is imported as a value rather
--- than duplicated.  Its exact constructor is intentionally left owned by the
--- Biology module; this bridge only requires the caller to supply that canonical
--- object when constructing the full cross-pollination receipt.
-------------------------------------------------------------------------
-
-mkCanonicalEarlyLearningPNFCrossPollination :
-  (educationBridge : EducationBody.EducationBodyMemoryBridge) →
-  EarlyLearningPNFCrossPollination
-mkCanonicalEarlyLearningPNFCrossPollination educationBridge =
+canonicalEarlyLearningPNFCrossPollination : EarlyLearningPNFCrossPollination
+canonicalEarlyLearningPNFCrossPollination =
   earlyLearningPNFCrossPollination
-    educationBridge
+    EducationBody.canonicalEducationBodyMemoryBridge
+    refl
     TraumaMemory.canonicalTraumaMemoryHypervoxelAuthorityBoundary
     refl
     false refl
