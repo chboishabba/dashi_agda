@@ -18,20 +18,26 @@ module DASHI.Physics.Closure.NSTriadKNHHBadFiniteTransientTailBarrierRound55Exac
 --
 -- Round 54 reduced HH-bad to the explicit least recurrence
 --   M_0=C_0, M_(q+1)=alpha_q M_q+beta_q.
--- This file permits arbitrarily large finite-prefix amplification.  After a
--- selected q0 it suffices to prove
---   alpha_q <= a, beta_q <= b, a C_* + b <= C_*.
--- A complete Nat split/induction below then proves M_q<=C_* for every q; there
--- is no residual "global barrier" witness and no global alpha_q<1 hypothesis.
+-- Round 55 permits arbitrarily large finite-prefix amplification.  Round 56
+-- sharpens the asymptotic test further: a varying shellwise depletion
+--
+--   alpha_q = 1-sigma_q,   beta_q <= sigma_q C_*
+--
+-- preserves C_* directly.  Thus no uniform tail contraction constant is
+-- required once the literal NS Duhamel terms are in hand.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using ([]; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 import Data.Nat.Base as Nat
 import Data.Nat.Properties as NatP
-open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _≤_; nonNegative)
+open import Data.Rational.Base using
+  (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚP
+open import Data.Rational.Tactic.RingSolver using (solve)
+open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
 
 import DASHI.Physics.Closure.NSTriadKNHHBadRawVariableCapacityRound53Exact as Raw
 import DASHI.Physics.Closure.NSTriadKNHHBadMinimalCapacityRound54Exact as Minimal
@@ -142,11 +148,112 @@ asUniformMinimalCapacity barrier = record
   ; minimalBelowCeiling = globalMinimalBelowCeiling barrier
   }
 
+------------------------------------------------------------------------
+-- ROUND 56: variable shellwise depletion test.
+------------------------------------------------------------------------
+
+record ShellwiseDepletionTail
+    (physical : Raw.PhysicalGeneralVariableDefectDuhamel) : Set where
+  field
+    depletionStart : Nat
+    depletionCeiling : ℚ
+    sigma : Nat → ℚ
+
+    depletionCeilingNonnegative : 0ℚ ≤ depletionCeiling
+    sigmaNonnegative : ∀ q → 0ℚ ≤ sigma q
+
+    finiteDepletionPrefixBelow : ∀ q → q Nat.≤ depletionStart →
+      Minimal.minimalCapacity physical q ≤ depletionCeiling
+
+    alphaIsOneMinusSigma : ∀ q → depletionStart Nat.≤ q →
+      Raw.alpha physical q ≡ 1ℚ - sigma q
+
+    forcingBelowDepletion : ∀ q → depletionStart Nat.≤ q →
+      Raw.forcing physical q ≤ sigma q * depletionCeiling
+
+open ShellwiseDepletionTail public
+
+scaleCapacityByPhysicalAlpha :
+  ∀ {physical} (depletion : ShellwiseDepletionTail physical) q →
+  Minimal.minimalCapacity physical q ≤ depletionCeiling depletion →
+  Raw.alpha physical q * Minimal.minimalCapacity physical q
+  ≤ Raw.alpha physical q * depletionCeiling depletion
+scaleCapacityByPhysicalAlpha {physical} depletion q current =
+  let instance alphaNN = nonNegative (Raw.alphaNonnegative physical q)
+  in ℚP.*-monoˡ-≤-nonNeg (Raw.alpha physical q) current
+
+depletionBalanceIdentity :
+  ∀ {physical} (depletion : ShellwiseDepletionTail physical) q →
+  depletionStart depletion Nat.≤ q →
+  Raw.alpha physical q * depletionCeiling depletion
+    + sigma depletion q * depletionCeiling depletion
+  ≡ depletionCeiling depletion
+depletionBalanceIdentity {physical} depletion q tailOrder =
+  trans
+    (cong
+      (λ alphaQ →
+        alphaQ * depletionCeiling depletion
+          + sigma depletion q * depletionCeiling depletion)
+      (alphaIsOneMinusSigma depletion q tailOrder))
+    (solve (sigma depletion q ∷ depletionCeiling depletion ∷ []))
+
+depletionStepPreservesCeiling :
+  ∀ {physical} (depletion : ShellwiseDepletionTail physical) q →
+  depletionStart depletion Nat.≤ q →
+  Minimal.minimalCapacity physical q ≤ depletionCeiling depletion →
+  Minimal.minimalCapacity physical (suc q) ≤ depletionCeiling depletion
+depletionStepPreservesCeiling {physical} depletion q tailOrder current =
+  let
+    inherited = scaleCapacityByPhysicalAlpha depletion q current
+    produced = forcingBelowDepletion depletion q tailOrder
+    summed = ℚP.+-mono-≤ inherited produced
+  in
+  subst
+    (λ upper →
+      Minimal.minimalCapacity physical (suc q) ≤ upper)
+    (depletionBalanceIdentity depletion q tailOrder)
+    summed
+
+depletionTailBelow :
+  ∀ {physical} (depletion : ShellwiseDepletionTail physical) {q} →
+  TailAt (depletionStart depletion) q →
+  Minimal.minimalCapacity physical q ≤ depletionCeiling depletion
+depletionTailBelow depletion atStart =
+  finiteDepletionPrefixBelow depletion
+    (depletionStart depletion) NatP.≤-refl
+depletionTailBelow depletion (atStep {q} witness) =
+  depletionStepPreservesCeiling depletion q
+    (tailAtOrder witness)
+    (depletionTailBelow depletion witness)
+
+globalMinimalBelowDepletionCeiling :
+  ∀ {physical} (depletion : ShellwiseDepletionTail physical) q →
+  Minimal.minimalCapacity physical q ≤ depletionCeiling depletion
+globalMinimalBelowDepletionCeiling depletion q
+  with splitPrefixOrTail (depletionStart depletion) q
+... | prefix proof = finiteDepletionPrefixBelow depletion q proof
+... | tail witness = depletionTailBelow depletion witness
+
+depletionAsUniformMinimalCapacity :
+  ∀ {physical} →
+  ShellwiseDepletionTail physical → Minimal.UniformMinimalCapacity physical
+depletionAsUniformMinimalCapacity depletion = record
+  { ceiling = depletionCeiling depletion
+  ; ceilingNonnegative = depletionCeilingNonnegative depletion
+  ; minimalBelowCeiling = globalMinimalBelowDepletionCeiling depletion
+  }
+
 finiteTransientAmplificationPermitted : Bool
 finiteTransientAmplificationPermitted = true
 
 tailBarrierGlobalInductionClosed : Bool
 tailBarrierGlobalInductionClosed = true
+
+shellwiseDepletionCapacityClosed : Bool
+shellwiseDepletionCapacityClosed = true
+
+noUniformTailContractionConstantRequired : Bool
+noUniformTailContractionConstantRequired = true
 
 finiteTransientAmplificationPermittedIsTrue :
   finiteTransientAmplificationPermitted ≡ true
@@ -155,3 +262,11 @@ finiteTransientAmplificationPermittedIsTrue = refl
 tailBarrierGlobalInductionClosedIsTrue :
   tailBarrierGlobalInductionClosed ≡ true
 tailBarrierGlobalInductionClosedIsTrue = refl
+
+shellwiseDepletionCapacityClosedIsTrue :
+  shellwiseDepletionCapacityClosed ≡ true
+shellwiseDepletionCapacityClosedIsTrue = refl
+
+noUniformTailContractionConstantRequiredIsTrue :
+  noUniformTailContractionConstantRequired ≡ true
+noUniformTailContractionConstantRequiredIsTrue = refl
