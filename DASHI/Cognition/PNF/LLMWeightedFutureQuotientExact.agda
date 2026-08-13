@@ -166,19 +166,19 @@ exactImpliesApproximateAtZero :
     {left right : State} →
   WeightedFutureEquivalent kernel left right →
   ApproximateWeightedFutureEquivalent kernel distance 0 left right
-exactImpliesApproximateAtZero distance distanceReflexive equivalent =
-  approximateWeightedFutureEquivalent λ actions outcome →
-    subst
-      (λ rightWeight →
-        distance
-          (weight kernel _ actions outcome)
-          rightWeight
-        ≤ 0)
-      (sameWeightedFuture equivalent actions outcome)
-      (subst
-        (λ d → d ≤ 0)
-        (sym (distanceReflexive (weight kernel _ actions outcome)))
-        z≤n)
+exactImpliesApproximateAtZero {kernel = kernel} distance distanceReflexive equivalent =
+  approximateWeightedFutureEquivalent bound
+  where
+    bound :
+      (actions : List _) →
+      (outcome : _) →
+      distance
+        (weight kernel _ actions outcome)
+        (weight kernel _ actions outcome)
+      ≤ 0
+    bound actions outcome with sameWeightedFuture equivalent actions outcome
+    ... | refl with distanceReflexive (weight kernel _ actions outcome)
+    ...   | refl = z≤n
 
 ------------------------------------------------------------------------
 -- Boundary: this is a weighted kernel quotient.  A later analytic layer may
