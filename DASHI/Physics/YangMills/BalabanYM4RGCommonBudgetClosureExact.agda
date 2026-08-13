@@ -110,16 +110,17 @@ coupledOneStepPreservesAnalyticRegion :
   RG.InYM4RGInvariantRegion parameters current →
   CoupledOneStepAnalyticBounds parameters current next →
   RG.InYM4RGInvariantRegion parameters next
-coupledOneStepPreservesAnalyticRegion currentRegion estimates = record
+coupledOneStepPreservesAnalyticRegion
+    {parameters} {current} {next} currentRegion estimates = record
   { RG.InYM4RGInvariantRegion.couplingControlled =
       couplingNextControlled estimates
   ; RG.InYM4RGInvariantRegion.smallFieldControlled =
       smallFieldContractionFitsCap
         (contraction estimates)
-        (RG.smallFieldPolymerNorm _)
-        (RG.smallFieldPolymerNorm _)
+        (RG.smallFieldPolymerNorm current)
+        (RG.smallFieldPolymerNorm next)
         (error estimates)
-        (RG.smallFieldCap _)
+        (RG.smallFieldCap parameters)
         (contractionNonnegative estimates)
         (contractionAtMostOne estimates)
         (RG.smallFieldControlled currentRegion)
