@@ -33,8 +33,9 @@ module DASHI.Physics.Closure.NSTriadKNHHBadRawVariableCapacityRound53Exact where
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _≤_; _<_)
+import Data.Rational.Properties as ℚP
 
 import DASHI.Physics.Closure.NSTriadKNHHBadShellBarrierRound52Exact as Barrier
 
@@ -44,10 +45,10 @@ record RawVariableCapacityInvariant
     capacity : Nat → ℚ
     capacityNonnegative : ∀ q → 0ℚ ≤ capacity q
     baseBelowCapacity :
-      Barrier.profile input 0 ≤ capacity 0
+      Barrier.profile input zero ≤ capacity zero
     capacityStep : ∀ q →
       Barrier.alpha input q * capacity q + Barrier.forcing input q
-      ≤ capacity (Agda.Builtin.Nat.suc q)
+      ≤ capacity (suc q)
     ceiling : ℚ
     capacityBelowCeiling : ∀ q → capacity q < ceiling
 
@@ -69,7 +70,7 @@ physicalHHBadRawVariableCapacityInvariant :
   (invariant : RawVariableCapacityInvariant input) →
   ∀ q → Barrier.profile input q < ceiling invariant
 physicalHHBadRawVariableCapacityInvariant {input} invariant q =
-  Data.Rational.Properties.≤-<-trans
+  ℚP.≤-<-trans
     (Barrier.profileBelowAnyShellBarrier input
       (variableCapacityAsShellSupersolution invariant) q)
     (capacityBelowCeiling invariant q)
@@ -83,7 +84,7 @@ record RawConstantCapacityInvariant
     constantCapacity : ℚ
     constantCapacityNonnegative : 0ℚ ≤ constantCapacity
     baseBelowConstantCapacity :
-      Barrier.profile input 0 ≤ constantCapacity
+      Barrier.profile input zero ≤ constantCapacity
     constantCapacityStep : ∀ q →
       Barrier.alpha input q * constantCapacity + Barrier.forcing input q
       ≤ constantCapacity
