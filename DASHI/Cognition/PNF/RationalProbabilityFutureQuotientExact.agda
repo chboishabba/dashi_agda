@@ -89,10 +89,6 @@ exactSummaryCertifiesProbabilityFutureSafety summary =
           (summaryExact summary left actions)
           (sym (summaryExact summary right actions))
 
-------------------------------------------------------------------------
--- Approximate safety and monotonicity in the tolerated future distortion.
-------------------------------------------------------------------------
-
 record ApproxProbabilityFutureSafeProjection
     {State Action Coarse : Set}
     (kernel : Probability.RationalProbabilityFutureKernel State Action)
@@ -113,20 +109,21 @@ exactImpliesApproximateAtZero :
     {left right : State} →
   Probability.ProbabilityFutureEquivalent kernel left right →
   Probability.ApproxProbabilityFutureEquivalent kernel 0ℚ left right
-exactImpliesApproximateAtZero {kernel = kernel} {left = left} {right = right} exact =
-  Probability.approxProbabilityFutureEquivalent λ actions →
-    subst
-      (λ rightDistribution →
-        Probability.totalVariation
-          (Probability.distribution kernel left actions)
-          rightDistribution
-        ≤ 0ℚ)
-      (Probability.sameDistributionForEveryTrace exact actions)
-      (subst
-        (λ distance → distance ≤ 0ℚ)
-        (sym (Probability.totalVariationRefl
-          (Probability.distribution kernel left actions)))
-        ℚₚ.≤-refl)
+exactImpliesApproximateAtZero {kernel = kernel} {left = left} exact =
+  Probability.approxProbabilityFutureEquivalent bound
+  where
+    bound :
+      (actions : List _) →
+      Probability.totalVariation
+        (Probability.distribution kernel left actions)
+        (Probability.distribution kernel _ actions)
+      ≤ 0ℚ
+    bound actions
+      with Probability.sameDistributionForEveryTrace exact actions
+    ... | refl
+      rewrite Probability.totalVariationRefl
+        (Probability.distribution kernel left actions) =
+      ℚₚ.≤-refl
 
 toleranceMonotone :
   ∀ {State Action}
