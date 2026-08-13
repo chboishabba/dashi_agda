@@ -30,7 +30,6 @@ module DASHI.Physics.Closure.NSTriadKNKernelLiteralResidualRound55Exact where
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 import DASHI.Physics.Closure.NSTriadKNSignedConstituentTreeRound28Exact as Signed
 import DASHI.Physics.Closure.NSTriadKNLuoDuplicateFreeTaxOwnershipRound26Exact as Tax
@@ -61,7 +60,7 @@ literalKernelInstantiation split = record
   ; sourceIsKernelSource = refl
   ; ownerIsKernel = refl
   ; signedContributionIsLiteralKernel = refl
-  ; ownershipOutcome = Literal.exactZero
+  ; ownershipOutcome = Literal.duplicateExistingOwner
   }
 
 literalKernelReduction :
