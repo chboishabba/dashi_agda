@@ -39,7 +39,8 @@ module DASHI.Physics.YangMills.BalabanP33CertifiedPlaquettePairEnvelopeExact whe
 -- opposing signs.
 ------------------------------------------------------------------------
 
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _≤_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _*_; _≤_)
+import Data.Rational.Properties as ℚP
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanSelectedCorrelatedResidualOwnershipExact as Ownership
@@ -89,11 +90,11 @@ certifiedPairEnvelopeToBudgets certificate = record
   ; Pair.CorrelatedPairBudgets.multiplierPairCoefficient =
       multiplierPairCoefficient certificate
   ; Pair.CorrelatedPairBudgets.localizationPairUpper =
-      ℚ.≤-trans
+      ℚP.≤-trans
         (sound (localizationTransport certificate))
         (localizationCertificate certificate)
   ; Pair.CorrelatedPairBudgets.multiplierPairUpper =
-      ℚ.≤-trans
+      ℚP.≤-trans
         (sound (nearFarGreen certificate))
         (multiplierCertificate certificate)
   ; Pair.CorrelatedPairBudgets.pairCoefficientTotalFits =
