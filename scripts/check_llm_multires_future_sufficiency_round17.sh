@@ -5,8 +5,8 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 
 BASE_CHECKER="scripts/check_future_residual_cantor_metastability_round14.sh"
-if [[ -x "$BASE_CHECKER" ]]; then
-  "$BASE_CHECKER"
+if [[ -f "$BASE_CHECKER" ]]; then
+  bash "$BASE_CHECKER"
 fi
 
 FILES=(
