@@ -10,10 +10,6 @@ import DASHI.Analysis.CanonicalRationalMetric as Metric
 
 ------------------------------------------------------------------------
 -- NORMALIZED RATIONAL PROBABILITY KERNELS
---
--- Unlike the earlier Nat-weight surface, every binary distribution here is a
--- genuine normalized rational probability vector: both masses are nonnegative
--- and sum exactly to one.
 ------------------------------------------------------------------------
 
 record BinaryProbability : Set where
@@ -32,10 +28,6 @@ record RationalProbabilityFutureKernel (State Action : Set) : Set₁ where
     distribution : State → List Action → BinaryProbability
 
 open RationalProbabilityFutureKernel public
-
-------------------------------------------------------------------------
--- Total variation for a binary law: 1/2 times the L1 difference.
-------------------------------------------------------------------------
 
 totalVariation : BinaryProbability → BinaryProbability → ℚ
 totalVariation left right =
@@ -121,10 +113,6 @@ record ApproxProbabilityFutureEquivalent
 
 open ApproxProbabilityFutureEquivalent public
 
-------------------------------------------------------------------------
--- Quantitative composition: epsilon errors add.
-------------------------------------------------------------------------
-
 approxFutureErrorComposition :
   ∀ {State Action}
     {kernel : RationalProbabilityFutureKernel State Action}
@@ -133,20 +121,22 @@ approxFutureErrorComposition :
   ApproxProbabilityFutureEquivalent kernel epsilon₁ left middle →
   ApproxProbabilityFutureEquivalent kernel epsilon₂ middle right →
   ApproxProbabilityFutureEquivalent kernel (epsilon₁ + epsilon₂) left right
-approxFutureErrorComposition {kernel = kernel} leftMiddle middleRight =
+approxFutureErrorComposition
+  {kernel = kernel} {left = left} {middle = middle} {right = right}
+  leftMiddle middleRight =
   approxProbabilityFutureEquivalent λ actions →
     ℚₚ.≤-trans
       (totalVariationTriangle
-        (distribution kernel _ actions)
-        (distribution kernel _ actions)
-        (distribution kernel _ actions))
+        (distribution kernel left actions)
+        (distribution kernel middle actions)
+        (distribution kernel right actions))
       (ℚₚ.+-mono-≤
         (futureTVBound leftMiddle actions)
         (futureTVBound middleRight actions))
 
 ------------------------------------------------------------------------
 -- Data processing under an explicitly non-expansive stochastic/post-processing
--- map.  This is the exact finite total-variation form of the PNF requirement.
+-- map.
 ------------------------------------------------------------------------
 
 record TVNonExpansivePostprocess : Set₁ where
@@ -177,15 +167,17 @@ probabilityDataProcessing :
   ApproxProbabilityFutureEquivalent kernel epsilon left right →
   ApproxProbabilityFutureEquivalent
     (postprocessedKernel processor kernel) epsilon left right
-probabilityDataProcessing {kernel = kernel} processor approximate =
+probabilityDataProcessing
+  {kernel = kernel} {left = left} {right = right}
+  processor approximate =
   approxProbabilityFutureEquivalent λ actions →
     ℚₚ.≤-trans
       (tvNonExpansive processor
-        (distribution kernel _ actions)
-        (distribution kernel _ actions))
+        (distribution kernel left actions)
+        (distribution kernel right actions))
       (futureTVBound approximate actions)
 
 ------------------------------------------------------------------------
--- Boundary: this is genuine finite rational probability semantics.  It is not
--- yet a sigma-additive probability measure on an infinite token/trace space.
+-- Boundary: genuine finite rational probability semantics, not yet a
+-- sigma-additive probability measure on an infinite token/trace space.
 ------------------------------------------------------------------------
