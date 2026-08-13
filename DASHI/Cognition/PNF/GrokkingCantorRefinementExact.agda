@@ -6,11 +6,6 @@ import DASHI.Foundations.CantorCylinderMassExact as Cantor
 
 ------------------------------------------------------------------------
 -- GROKKING / CANTOR REFINEMENT, NOT IDENTIFICATION
---
--- This module formalizes the shared structural pattern only: training support
--- can remain fully accounted for while latent mechanism mass appears before
--- visible task coverage, and representational support complexity can shrink as
--- task coverage rises.  It does not identify grokking with the Cantor function.
 ------------------------------------------------------------------------
 
 data LearningStage : Set where
@@ -49,7 +44,7 @@ latentMechanismPrecedesVisibleTaskCoverage = refl , refl
 
 supportComplexityDropsDuringCircuitFormation :
   supportComplexity circuitFormationStage < supportComplexity memorizationStage
-supportComplexityDropsDuringCircuitFormation = s≤s (s≤s z≤n)
+supportComplexityDropsDuringCircuitFormation = s≤s (s≤s (s≤s z≤n))
 
 supportComplexityDropsDuringCleanup :
   supportComplexity cleanupStage < supportComplexity circuitFormationStage
@@ -66,8 +61,7 @@ compressionAndGeneralizationCanMoveTogether =
   supportComplexityDropsDuringCleanup , taskCoverageRisesAtCleanup
 
 ------------------------------------------------------------------------
--- Cantor accounting stays a separate certificate.  Every finite polar layer
--- retains normalized cylinder mass one, independently of the grokking stage.
+-- Cantor accounting stays a separate certificate.
 ------------------------------------------------------------------------
 
 record CantorIndexedLearningStage : Set where
@@ -80,12 +74,11 @@ open CantorIndexedLearningStage public
 
 cantorLayerRemainsUnitAtEveryLearningStage :
   (indexed : CantorIndexedLearningStage) →
-  Cantor.layerNumerator (cantorDepth indexed)
-  ≡ Cantor.layerDenominator (cantorDepth indexed)
+  Cantor.totalNumerator (Cantor.polarLayerHasUnitMass (cantorDepth indexed))
+  ≡ Cantor.commonDenominator (Cantor.polarLayerHasUnitMass (cantorDepth indexed))
 cantorLayerRemainsUnitAtEveryLearningStage indexed =
-  Cantor.layerMassIsUnit (cantorDepth indexed)
+  Cantor.normalizedUnitExact (Cantor.polarLayerHasUnitMass (cantorDepth indexed))
 
 ------------------------------------------------------------------------
--- Thus `1_training`, `1_Cantor`, `1_mechanism`, and `1_task` remain explicitly
--- indexed notions.  No theorem promotes one unit certificate into another.
+-- Thus 1_training, 1_Cantor, 1_mechanism, and 1_task remain indexed notions.
 ------------------------------------------------------------------------
