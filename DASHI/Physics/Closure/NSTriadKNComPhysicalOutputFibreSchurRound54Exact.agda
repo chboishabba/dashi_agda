@@ -26,6 +26,7 @@ module DASHI.Physics.Closure.NSTriadKNComPhysicalOutputFibreSchurRound54Exact wh
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ; 0ℚ; _≤_; ∣_∣)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
@@ -37,7 +38,7 @@ import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
 
 record PhysicalOutputFibreKernel
-    (cutoff : Agda.Builtin.Nat.Nat)
+    (cutoff : Nat)
     (output : Z3.FourierMode) : Set₁ where
   field
     kernel : Triad.PhysicalTriadIncidence → ℚ
