@@ -32,6 +32,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; suc)
 open import Data.Rational.Base using (ℚ; _≤_)
+import Data.Rational.Properties as ℚP
 open import Relation.Binary.PropositionalEquality using (subst)
 
 import DASHI.Physics.Closure.NSTriadKNComSameAdjacentActiveRound47Exact as Active
@@ -88,7 +89,7 @@ physicalComSameShellOperatorBlockBound :
   Active.supportActive skeleton q q ≡ true →
   operatorBlockNorm sameObject q q ≤ Active.sameShellTarget
 physicalComSameShellOperatorBlockBound sameObject bounds q active =
-  Data.Rational.Properties.≤-trans
+  ℚP.≤-trans
     (pairProductMajorizesOperatorBlock sameObject q q)
     (Active.physicalComSameShellActiveBound bounds q active)
 
@@ -100,7 +101,7 @@ physicalComAdjacentShellOperatorBlockBound :
   Active.supportActive skeleton q (suc q) ≡ true →
   operatorBlockNorm sameObject q (suc q) ≤ Active.adjacentShellTarget
 physicalComAdjacentShellOperatorBlockBound sameObject bounds q active =
-  Data.Rational.Properties.≤-trans
+  ℚP.≤-trans
     (pairProductMajorizesOperatorBlock sameObject q (suc q))
     (Active.physicalComAdjacentShellActiveBound bounds q active)
 
