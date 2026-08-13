@@ -44,6 +44,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanP33PhysicalRationalWilsonPlaquetteJetExact as Physical
 import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Coordinates
 import DASHI.Physics.YangMills.BalabanP33PhysicalWilsonSignedGlobalExact as Wilson
+import DASHI.Physics.YangMills.BalabanSelectedBackgroundVariationSelectorExact as Selector
 import DASHI.Physics.YangMills.BalabanSelectedCorrelatedResidualAuthorityExact as Authority
 import DASHI.Physics.YangMills.BalabanSelectedCorrelatedSingletonClosureExact as Closure
 import DASHI.Physics.YangMills.BalabanSelectedOwnerBudgetSlackExact as Slack
@@ -76,19 +77,19 @@ intervalCertificateToSlackBounds certificate =
 
     paddedIsRemaining :
       Slack.ownerCoefficientTotal loc tr near far + pad
-      ≡ Producer.Selector.remainingSingletonCoefficient
+      ≡ Selector.remainingSingletonCoefficient
     paddedIsRemaining =
       let
         raw = Envelope.certifiedBudgetIdentity certificate
       in
       subst
-        (λ left → left ≡ Producer.Selector.remainingSingletonCoefficient)
+        (λ left → left ≡ Selector.remainingSingletonCoefficient)
         (ℚRing.solve-∀ loc tr near far pad)
         raw
 
     totalFits :
       Slack.ownerCoefficientTotal loc tr near far
-      ≤ Producer.Selector.remainingSingletonCoefficient
+      ≤ Selector.remainingSingletonCoefficient
     totalFits = subst
       (λ upper → Slack.ownerCoefficientTotal loc tr near far ≤ upper)
       paddedIsRemaining totalBelowPadded
@@ -133,10 +134,11 @@ physicalIntervalSingletonToLiteralWitness :
   PhysicalIntervalSingleton background bondField plaquette →
   Plaquette.LiteralSelectedPlaquetteWitness background bondField plaquette
 physicalIntervalSingletonToLiteralWitness data =
-  Producer.correlatedSingletonWithSlackToLiteralWitness record
-    { Producer.CorrelatedSingletonWithSlack.extraction = extraction data
-    ; Producer.CorrelatedSingletonWithSlack.ownerBounds =
-        intervalCertificateToSlackBounds (intervalCertificate data) }
+  Producer.correlatedSingletonWithSlackToLiteralWitness
+    (record
+      { Producer.CorrelatedSingletonWithSlack.extraction = extraction data
+      ; Producer.CorrelatedSingletonWithSlack.ownerBounds =
+          intervalCertificateToSlackBounds (intervalCertificate data) })
 
 record PhysicalIntervalSingletonFamily
     (background : Physical.RationalSU2Background4)
