@@ -16,6 +16,7 @@ FILES=(
   DASHI/Cognition/PNF/LLMGrokkingLearningFutureExact.agda
   DASHI/Cognition/PNF/LLMStabilitySufficiencySeparationExact.agda
   DASHI/Cognition/PNF/LLMWeightedFutureKernelExact.agda
+  DASHI/Cognition/PNF/LSTMForgetGateFutureSafetyExact.agda
   DASHI/Core/StorageRecomputeResidualOptimizationExact.agda
   DASHI/EverythingLLMMultiResolutionRound17.agda
 )
@@ -42,11 +43,16 @@ grep -q 'roundThreeRetainedMassStillUnit' DASHI/Cognition/PNF/LLMCantorMultiReso
 grep -q 'sameTrainingFitDoesNotImplyLearningFutureEquivalence' DASHI/Cognition/PNF/LLMGrokkingLearningFutureExact.agda
 grep -q 'progressResidualSeparatesStates' DASHI/Cognition/PNF/LLMGrokkingLearningFutureExact.agda
 
+grep -q 'nonExpansiveComposition' DASHI/Cognition/PNF/LLMStabilitySufficiencySeparationExact.agda
 grep -q 'stableMapCannotCarryConsumerObservation' DASHI/Cognition/PNF/LLMStabilitySufficiencySeparationExact.agda
 grep -q 'exactRepresentationPreservesNonzeroDistance' DASHI/Cognition/PNF/LLMStabilitySufficiencySeparationExact.agda
 
 grep -q 'sameCurrentKernelDoesNotImplyWeightedFutureEquivalence' DASHI/Cognition/PNF/LLMWeightedFutureKernelExact.agda
 grep -q 'allDisplayedKernelsHaveWeightTwo' DASHI/Cognition/PNF/LLMWeightedFutureKernelExact.agda
+
+grep -q 'forgettingCurrentEqualityIsNotFutureSafety' DASHI/Cognition/PNF/LSTMForgetGateFutureSafetyExact.agda
+grep -q 'reopenForgetWithMemoryResidualExact' DASHI/Cognition/PNF/LSTMForgetGateFutureSafetyExact.agda
+grep -q '10.1162/neco.1997.9.8.1735' DASHI/Cognition/PNF/LSTMForgetGateFutureSafetyExact.agda
 
 grep -q 'checkpointIsOptimalInFiniteFamily' DASHI/Core/StorageRecomputeResidualOptimizationExact.agda
 grep -q 'zeroCacheNotCheaperThanCheckpoint' DASHI/Core/StorageRecomputeResidualOptimizationExact.agda
