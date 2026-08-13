@@ -26,6 +26,8 @@ module DASHI.Physics.Closure.NSTriadKNHighestAlphaRound54Exact where
 -- Com:
 --   * specializes the machine-checked finite rectangular Schur theorem to a
 --     fixed output Fourier fibre;
+--   * instantiates that theorem on the repository's literal
+--     `physicalOutputFiber cutoff k` triad list;
 --   * proves coherent same-output collisions are controlled by the WHOLE
 --     absolute fibre mass, with no post-hoc triad cardinality factor;
 --   * leaves only the literal d=0,1 fibre-mass estimates and common-hat
@@ -44,6 +46,7 @@ import DASHI.Physics.Closure.NSTriadKNJointGlobalFeasibilityRound54Exact
 import DASHI.Physics.Closure.NSTriadKNHHBadMinimalCapacityRound54Exact
 import DASHI.Physics.Closure.NSTriadKNHHBadMinimalCapacityToOwnerRound54Exact
 import DASHI.Physics.Closure.NSTriadKNComFixedOutputFibreSchurRound54Exact
+import DASHI.Physics.Closure.NSTriadKNComPhysicalOutputFibreSchurRound54Exact
 import DASHI.Physics.Closure.NSTriadKNKernelIndependentZeroOwnerRound53Exact
 import DASHI.Physics.Closure.NSTriadKNHHGoodContinuumRestrictionRound49Exact
 import DASHI.Physics.Closure.NSTriadKNHHGoodAnnularMasterKernelRound41Exact
