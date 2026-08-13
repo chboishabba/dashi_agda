@@ -36,10 +36,11 @@ module DASHI.Physics.YangMills.BalabanYM4DifferentiatedMinimizerRemoteLocalityEx
 -- identification and the later integration along an admissible background path.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_)
-open import Data.Rational.Base as ℚ using (ℚ; _*_; _≤_; -_; ∣_∣)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _*_; _≤_; -_; ∣_∣)
 import Data.Rational.Properties as ℚP
-open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
+open import Data.Sum.Base using (_⊎_)
+open import Relation.Binary.PropositionalEquality using (subst; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Physical
@@ -67,7 +68,7 @@ physicalDifferentiatedMinimizerRemoteUpper :
     (data : PhysicalDifferentiatedMinimizerResponse hessian green)
     q →
   (∀ target →
-    source data target ≡ + 0 / 1
+    source data target ≡ 0ℚ
     ⊎ CT.physicalWeight (CT.geometry (resolvent data)) target ≤ q) →
   ∣ deltaA data (CT.root (CT.geometry (resolvent data))) ∣
   ≤ (Survival.p33InverseScale * q) * Response.sourceL1 (source data)
