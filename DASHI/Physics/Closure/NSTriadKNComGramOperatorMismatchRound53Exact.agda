@@ -43,12 +43,14 @@ module DASHI.Physics.Closure.NSTriadKNComGramOperatorMismatchRound53Exact where
 -- same-object theorem.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; true)
+open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using ([]; _∷_)
-open import Data.Rational.Base using (ℚ; _*_; _≤_; _<_; _/_)
-open import Data.Rational.Tactic.RingSolver using (solve)
 import Data.Integer.Base as Int
+open import Data.Rational.Base using (ℚ; _/_; _*_; _≤_; _<_)
+import Data.Rational.Properties as ℚP
+open ℚP using (_≤?_; _<?_)
+open import Data.Rational.Tactic.RingSolver using (solve)
+open import Relation.Nullary.Decidable.Core using (toWitness)
 
 half quarter : ℚ
 half = Int.+ 1 / 2
@@ -58,15 +60,11 @@ halfSquaredIsQuarter : half * half ≡ quarter
 halfSquaredIsQuarter = solve []
 
 halfSquaredBelowQuarter : half * half ≤ quarter
-halfSquaredBelowQuarter rewrite halfSquaredIsQuarter =
-  Data.Rational.Properties.≤-refl
-  where
-  import Data.Rational.Properties
+halfSquaredBelowQuarter rewrite halfSquaredIsQuarter = ℚP.≤-refl
 
 quarterStrictlyBelowHalf : quarter < half
-quarterStrictlyBelowHalf = Data.Rational.Properties.*<*
-  where
-  import Data.Rational.Properties
+quarterStrictlyBelowHalf =
+  toWitness {a? = quarter <? half} _
 
 record SquaredGramMajorantWitness : Set where
   field
@@ -86,8 +84,6 @@ counterexampleUnsquaredPromotionFails :
   gramBound counterexampleWitness < blockNorm counterexampleWitness
 counterexampleUnsquaredPromotionFails = quarterStrictlyBelowHalf
 
--- The repository must choose one of these physical meanings before reusing the
--- six-three constants as literal shell-operator coefficients.
 data ComConstantMeaning : Set where
   wholeBlockNormMajorant : ComConstantMeaning
   gramProductMajorant : ComConstantMeaning
