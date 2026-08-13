@@ -22,102 +22,33 @@ module DASHI.Physics.YangMills.BalabanCMP109FederbushBarycentreRadiusExact where
 --
 -- DASHI CONTRIBUTION
 --
--- A source-independent radius theorem for the final G1 centre estimate.
--- Suppose every selected contour lies within radius r of one reference R and
--- V minimizes the finite squared-distance energy
+-- Record the high-slack Karcher-centre route to the final G1 chart without
+-- pretending that the source identification has already been checked.
+-- For a finite family contained in a geodesically convex r-ball, the standard
+-- centre-of-mass comparison gives a 2r radius bound for the minimizing centre.
+-- At the literal selected contour radius r = 3/256,
 --
---      E(Z) = sum_j d(U_j,Z)^2.
+--        2r = 3/128 = 18/768 < 23/768,
 --
--- Then d(V,R) <= 2r.  Indeed E(V) <= E(R) <= n r^2.  If d(V,R)>2r,
--- triangle inequality gives d(U_j,V)>r for every j, hence E(V)>n r^2, a
--- contradiction.
+-- while 23/768 is the full remaining operator-defect allowance before the
+-- CMP98 1/24 source threshold is exhausted.
 --
--- At the physical radius r=3/256 this gives d(V,R)<=3/128.  Round 52's
--- maximal chart allowance is 23/768, and
---
---      3/128 = 18/768 < 23/768.
---
--- Thus the final G1 geometry has positive slack.  The remaining source-specific
--- identification is to prove that Bałaban's local Federbush solution of
--- sum log(U_j V^-1)=0 is the unique Karcher minimizer in this convex chart,
--- and to compare its geodesic distance with the operator-defect carrier.
+-- The exact rational comparison below is machine algebra.  The geometric
+-- centre-of-mass radius theorem is standard imported mathematics.  The only
+-- source-specific G1 seam left on this route is identification of Bałaban's
+-- local solution of sum_j log(U_j V^-1)=0 with that unique convex Karcher
+-- centre, together with the SU(2) geodesic/operator-defect comparison in the
+-- selected chart.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Integer.Base using (+_)
-open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; _+_; _*_; _≤_; _<_; _/_)
+open import Data.Rational.Base as ℚ using (ℚ; _*_; _≤_; _/_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
-import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
 import DASHI.Physics.YangMills.BalabanCMP98MinimalContourSourceChartBudgetExact as Budget
 import DASHI.Physics.YangMills.BalabanCMP109FederbushCentreMaximalChartBudgetExact as Maximal
-
-square : ℚ → ℚ
-square value = value * value
-
-record FiniteSquaredDistanceBarycentre
-    (Point : Set)
-    (points : List Point)
-    (reference centre : Point)
-    (radius : ℚ) : Set₁ where
-  field
-    distance : Point → Point → ℚ
-
-    distanceNonnegative : ∀ left right → 0ℚ ≤ distance left right
-    triangle : ∀ left middle right →
-      distance left right ≤ distance left middle + distance middle right
-
-    pointInside : ∀ point →
-      distance point reference ≤ radius
-
-    energy : Point → ℚ
-    energyMeaning : ∀ candidate →
-      energy candidate
-      ≡ Sums.sumRational points
-          (λ point → square (distance point candidate))
-
-    centreMinimizes : energy centre ≤ energy reference
-
-    referenceEnergyUpper :
-      energy reference
-      ≤ Sums.natAsRational (listLength points) * square radius
-
-    -- Finite strict comparison: if centre were farther than 2r, every point
-    -- would be farther than r from the centre and the energy would exceed the
-    -- reference upper bound.  This is the only order-theoretic strict step;
-    -- it follows from the triangle inequality and finite summation.
-    farCentreForcesEnergyStrict :
-      (+ 2 / 1) * radius < distance centre reference →
-      Sums.natAsRational (listLength points) * square radius < energy centre
-
-  where
-  listLength : ∀ {A : Set} → List A → Agda.Builtin.Nat.Nat
-  listLength [] = Agda.Builtin.Nat.zero
-  listLength (_ ∷ rest) = Agda.Builtin.Nat.suc (listLength rest)
-
-open FiniteSquaredDistanceBarycentre public
-
-barycentreWithinTwiceRadius :
-  ∀ {Point points reference centre radius} →
-  FiniteSquaredDistanceBarycentre Point points reference centre radius →
-  distance _ centre reference ≤ (+ 2 / 1) * radius
-barycentreWithinTwiceRadius data =
-  let
-    notFar : ¬ ((+ 2 / 1) * _ < distance data _ _)
-    notFar far =
-      let
-        tooLarge = farCentreForcesEnergyStrict data far
-        upperCentre = ℚP.≤-trans (centreMinimizes data) (referenceEnergyUpper data)
-      in
-      ℚP.<⇒≱ tooLarge upperCentre
-  in
-  ℚP.≰⇒> notFar
-  where
-  open import Relation.Nullary.Negation using (¬_)
 
 selectedTwiceContourRadius : ℚ
 selectedTwiceContourRadius = (+ 2 / 1) * Budget.length24OperatorDefectBudget
@@ -133,14 +64,18 @@ selectedTwiceContourFitsMaximalCentreAllowance =
     (ℚP.positive⁻¹
       (Maximal.centreMaximalAllowance - selectedTwiceContourRadius))
 
-cmp109FiniteBarycentreTwiceRadiusLevel : ProofLevel
-cmp109FiniteBarycentreTwiceRadiusLevel = machineChecked
-
 cmp109SelectedTwiceRadiusFitsMaximalChartLevel : ProofLevel
 cmp109SelectedTwiceRadiusFitsMaximalChartLevel = machineChecked
 
+-- Standard finite Riemannian centre-of-mass result in a strongly convex ball.
+cmp109FiniteKarcherCentreTwiceRadiusLevel : ProofLevel
+cmp109FiniteKarcherCentreTwiceRadiusLevel = standardImported
+
+-- These two declarations are deliberately not promoted by the generic Karcher
+-- theorem.  They are the literal Bałaban/SU(2) source identifications still to
+-- be instantiated on the selected contour family.
 cmp109FederbushKarcherIdentificationLevel : ProofLevel
-cmp109FederbushKarcherIdentificationLevel = standardImported
+cmp109FederbushKarcherIdentificationLevel = conditional
 
 cmp109FederbushGeodesicToOperatorDefectComparisonLevel : ProofLevel
 cmp109FederbushGeodesicToOperatorDefectComparisonLevel = conditional
