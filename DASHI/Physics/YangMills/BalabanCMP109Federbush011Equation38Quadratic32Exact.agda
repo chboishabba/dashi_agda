@@ -26,14 +26,13 @@ module DASHI.Physics.YangMills.BalabanCMP109Federbush011Equation38Quadratic32Exa
 --
 --   ||e||_1 <= (4/3) ||r_source||_1.
 --
--- Therefore the nonlinear Federbush correction satisfies the sharp composed
--- bound used by the selected kernel-curve consumer
+-- Therefore the nonlinear Federbush correction satisfies the exact composed
+-- estimate
 --
 --   ||e||_1 <= 32 ||dU||_1^2.
 --
--- This is not an asymptotic receipt: it is the exact arithmetic consequence of
--- the source constant 24 and the physical reopening constant 4/3 on the SAME
--- source remainder owned by equation (0.11).
+-- This is the same literal source remainder owned by equation (0.11); no
+-- independent derivative or residual object is introduced.
 ------------------------------------------------------------------------
 
 open import Data.Integer.Base using (+_)
@@ -76,30 +75,6 @@ equation38FederbushPhysicalErrorQuadratic32
       ≤ upper)
     (ℚRing.solve-∀ inputMagnitude)
     raw
-
-equation38FederbushPhysicalErrorLittleO32 :
-  ∀ {Index} (equation : Frechet.FederbushFrechetErrorEquation Index)
-    inputMagnitude sourceMagnitude epsilon →
-  Physical.Equation38FederbushSourceData
-    Index equation inputMagnitude sourceMagnitude →
-  composedQuadraticConstant * inputMagnitude ≤ epsilon →
-  L1.vectorL1
-      (Frechet.coordinates equation)
-      (Frechet.error equation)
-    ≤ epsilon * inputMagnitude
-equation38FederbushPhysicalErrorLittleO32
-    equation inputMagnitude sourceMagnitude epsilon data small =
-  Physical.equation38FederbushPhysicalErrorLittleO
-    equation inputMagnitude sourceMagnitude
-    ((+ 3 / 4) * epsilon)
-    data
-    (subst
-      (λ upper → Eq38.sourceQuadraticConstant * inputMagnitude ≤ upper)
-      (ℚRing.solve-∀ epsilon)
-      (subst
-        (λ lower → lower ≤ epsilon)
-        (ℚRing.solve-∀ inputMagnitude)
-        small))
 
 cmp109Federbush011Equation38Quadratic32Level : ProofLevel
 cmp109Federbush011Equation38Quadratic32Level = machineChecked
