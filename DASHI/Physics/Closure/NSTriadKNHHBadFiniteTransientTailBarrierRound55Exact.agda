@@ -29,6 +29,7 @@ open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 import Data.Nat.Base as Nat
+import Data.Nat.Properties as NatP
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚP
 
@@ -62,11 +63,9 @@ data TailAt (start : Nat) : Nat → Set where
   atStep : ∀ {q} → TailAt start q → TailAt start (suc q)
 
 tailAtOrder : ∀ {start q} → TailAt start q → start Nat.≤ q
-tailAtOrder atStart = Nat.s≤s⁻¹ (Nat.s≤s Nat.z≤n)
-tailAtOrder (atStep witness) = Nat.≤-step (tailAtOrder witness)
+tailAtOrder atStart = NatP.≤-refl
+tailAtOrder (atStep witness) = NatP.≤-step (tailAtOrder witness)
 
--- A total structural split of Nat at a selected boundary.  This is arithmetic,
--- not an analytic assumption.
 data PrefixOrTail (start q : Nat) : Set where
   prefix : q Nat.≤ start → PrefixOrTail start q
   tail : TailAt start q → PrefixOrTail start q
@@ -122,7 +121,7 @@ tailCapacityBelow :
   TailAt (q0 barrier) q →
   Minimal.minimalCapacity physical q ≤ ceiling barrier
 tailCapacityBelow barrier atStart =
-  finitePrefixBelow barrier (q0 barrier) (tailAtOrder atStart)
+  finitePrefixBelow barrier (q0 barrier) NatP.≤-refl
 tailCapacityBelow barrier (atStep {q} witness) =
   tailStepPreservesCeiling barrier q
     (tailAtOrder witness)
