@@ -9,4 +9,5 @@ import DASHI.Cognition.PNF.LLMCompressionAccessibilityDefectsExact
 import DASHI.Cognition.PNF.LLMCantorMultiResolutionBridgeExact
 import DASHI.Cognition.PNF.LLMGrokkingLearningFutureExact
 import DASHI.Cognition.PNF.LLMStabilitySufficiencySeparationExact
+import DASHI.Cognition.PNF.LLMWeightedFutureKernelExact
 import DASHI.Core.StorageRecomputeResidualOptimizationExact
