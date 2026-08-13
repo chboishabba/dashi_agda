@@ -19,3 +19,4 @@ import DASHI.Cognition.PNF.OpticalTextCompressionPNFExact
 import DASHI.Cognition.PNF.MultimodalPhaseFutureEquivalenceExact
 import DASHI.Cognition.PNF.MultimodalPNFPhaseOrthogonalityExact
 import DASHI.Foundations.CantorProjectiveCylinderMeasureExact
+import DASHI.Foundations.CantorAmbientWidthDecayExact
