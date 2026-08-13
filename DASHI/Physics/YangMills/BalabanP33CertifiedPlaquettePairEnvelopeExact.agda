@@ -43,6 +43,7 @@ open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanSelectedBackgroundVariationSelectorExact as Selector
 import DASHI.Physics.YangMills.BalabanSelectedCorrelatedResidualOwnershipExact as Ownership
 import DASHI.Physics.YangMills.BalabanSelectedCorrelatedResidualBoundsExact as Bounds
 import DASHI.Physics.YangMills.BalabanSelectedCorrelatedPairBudgetExact as Pair
@@ -74,7 +75,7 @@ record CertifiedCorrelatedPairEnvelope
 
     coefficientTotalFits :
       localizationPairCoefficient + multiplierPairCoefficient
-      ≤ Pair.Selector.remainingSingletonCoefficient
+      ≤ Selector.remainingSingletonCoefficient
 
     chargeNonnegative : 0ℚ ≤ charge
 
@@ -108,7 +109,7 @@ certifiedPairEnvelopeClosesResidual :
   Ownership.ExactCorrelatedCancellation family →
   CertifiedCorrelatedPairEnvelope family charge →
   Ownership.correlatedResidualTotal family
-  ≤ Pair.Selector.remainingSingletonCoefficient * charge
+  ≤ Selector.remainingSingletonCoefficient * charge
 certifiedPairEnvelopeClosesResidual cancellation certificate =
   Pair.correlatedPairBudgetsCloseResidual cancellation
     (certifiedPairEnvelopeToBudgets certificate)
