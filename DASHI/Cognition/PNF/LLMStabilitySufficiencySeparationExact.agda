@@ -9,6 +9,35 @@ open import DASHI.Core.Prelude
 -- attention/KV compression sufficiency; it does not formalize mHC numerics.
 ------------------------------------------------------------------------
 
+record NonExpansive
+    {X : Set}
+    (distance : X → X → Nat)
+    (map : X → X) : Set where
+  constructor nonExpansive
+  field
+    bound :
+      (x y : X) →
+      distance (map x) (map y) ≤ distance x y
+
+open NonExpansive public
+
+nonExpansiveComposition :
+  ∀ {X : Set}
+    {distance : X → X → Nat}
+    {f g : X → X} →
+  NonExpansive distance f →
+  NonExpansive distance g →
+  NonExpansive distance (λ x → g (f x))
+nonExpansiveComposition fStable gStable =
+  nonExpansive λ x y →
+    ≤-trans
+      (bound gStable (f x) (f y))
+      (bound fStable x y)
+
+------------------------------------------------------------------------
+-- Concrete separation witness.
+------------------------------------------------------------------------
+
 data TwoState : Set where
   leftState rightState : TwoState
 
@@ -77,6 +106,7 @@ exactRepresentationIsNotZeroContractingAtDistinctPair ()
 
 ------------------------------------------------------------------------
 -- Therefore:
+--   non-expansive/stable maps compose;
 --   non-expansive/stable does not imply consumer sufficiency;
 --   consumer sufficiency does not imply strict contraction.
 ------------------------------------------------------------------------
