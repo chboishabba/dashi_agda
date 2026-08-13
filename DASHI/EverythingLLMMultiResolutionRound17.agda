@@ -8,7 +8,14 @@ import DASHI.Cognition.PNF.MultiResolutionAttentionFutureSufficiencyExact
 import DASHI.Cognition.PNF.LLMCompressionAccessibilityDefectsExact
 import DASHI.Cognition.PNF.LLMCantorMultiResolutionBridgeExact
 import DASHI.Cognition.PNF.LLMGrokkingLearningFutureExact
+import DASHI.Cognition.PNF.GrokkingMeasureStrataExact
+import DASHI.Cognition.PNF.GrokkingTaskCharacterPhaseExact
 import DASHI.Cognition.PNF.LLMStabilitySufficiencySeparationExact
+import DASHI.Cognition.PNF.LLMWeightedFutureQuotientExact
 import DASHI.Cognition.PNF.LLMWeightedFutureKernelExact
+import DASHI.Cognition.PNF.LLMContextWindowTerminalisationExact
+import DASHI.Cognition.PNF.LLMResidualHierarchyExact
+import DASHI.Cognition.PNF.NeuralProposalEvidenceBoundaryExact
+import DASHI.Cognition.PNF.NeuralBottleneckResidualFutureSafetyExact
 import DASHI.Cognition.PNF.LSTMForgetGateFutureSafetyExact
 import DASHI.Core.StorageRecomputeResidualOptimizationExact
