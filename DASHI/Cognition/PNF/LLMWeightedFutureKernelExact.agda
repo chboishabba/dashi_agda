@@ -160,6 +160,43 @@ sameCurrentKernelDoesNotImplyCanonicalWeightedFutureEquivalence equivalent =
     (Weighted.sameWeightedFuture equivalent extendTrace false)
 
 ------------------------------------------------------------------------
+-- Concrete approximate-future witness.
+------------------------------------------------------------------------
+
+natDistance : Nat → Nat → Nat
+natDistance left right = (left ∸ right) + (right ∸ left)
+
+natDistanceReflexive : (n : Nat) → natDistance n n ≡ 0
+natDistanceReflexive n =
+  trans
+    (cong (λ k → k + (n ∸ n)) (n∸n≡0 n))
+    refl
+
+currentFalseDistanceIsZero :
+  natDistance
+    (traceWeight leftBefore [] false)
+    (traceWeight rightBefore [] false)
+  ≡ 0
+currentFalseDistanceIsZero = refl
+
+futureFalseDistanceIsTwo :
+  natDistance
+    (traceWeight leftBefore extendTrace false)
+    (traceWeight rightBefore extendTrace false)
+  ≡ 2
+futureFalseDistanceIsTwo = refl
+
+futureNotWithinUnitTolerance :
+  Weighted.ApproximateWeightedFutureEquivalent
+    canonicalWeightedKernel natDistance 1 leftBefore rightBefore → ⊥
+futureNotWithinUnitTolerance approximate =
+  impossible
+    (Weighted.weightedFutureWithinTolerance approximate extendTrace false)
+  where
+    impossible : 2 ≤ 1 → ⊥
+    impossible ()
+
+------------------------------------------------------------------------
 -- Boundary: integer weights are a finite kernel surface, not a claim of
 -- calibrated probabilities or stochastic-process measure theory.
 ------------------------------------------------------------------------
