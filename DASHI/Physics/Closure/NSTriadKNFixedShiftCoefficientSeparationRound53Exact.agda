@@ -40,7 +40,8 @@ module DASHI.Physics.Closure.NSTriadKNFixedShiftCoefficientSeparationRound53Exac
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base using (ℚ; _+_; _*_; _≤_)
+open import Data.Rational.Base using (ℚ; _+_; _*_)
+open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 import DASHI.Physics.Closure.NSTriadKNAdmissibleOwnerTaxLanguageRound28Exact as Owner
 import DASHI.Physics.Closure.NSTriadKNNineOwnerCriticalAbsorptionRound28Exact as Nine
@@ -106,17 +107,11 @@ ownerCriticalAggregateLivesInAdditiveCorrection :
   ≡ ownerAggregateDataRemainder (balances shell)
       + ownerAggregateCriticalCoefficient (balances shell)
         * Owner.integralCritical (Nine.environment (balances shell))
-ownerCriticalAggregateLivesInAdditiveCorrection same shell =
-  let
-    left = ownerRemainderIsFluxCorrection same shell
-    right = ownerRemainderFormula ( _ )
-  in
-  trans (sym left) right
-  where
-  open import Relation.Binary.PropositionalEquality using (sym; trans)
+ownerCriticalAggregateLivesInAdditiveCorrection {balances} {data} same shell =
+  trans
+    (sym (ownerRemainderIsFluxCorrection same shell))
+    (ownerRemainderFormula (balances shell))
 
--- The coefficient formula is independent of the owner-balance argument by
--- construction: the balance is not an input to the coefficient function.
 fixedShiftCoefficientSeparatedFromOwnerAggregate : Bool
 fixedShiftCoefficientSeparatedFromOwnerAggregate = true
 
