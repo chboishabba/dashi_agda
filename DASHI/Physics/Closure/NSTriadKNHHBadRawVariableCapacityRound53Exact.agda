@@ -65,15 +65,23 @@ variableCapacityAsShellSupersolution invariant = record
   ; barrierSupersolution = capacityStep invariant
   }
 
+variableCapacityAsBoundedBarrier :
+  ∀ {input} →
+  (invariant : RawVariableCapacityInvariant input) →
+  Barrier.BoundedShellBarrierBelowTarget input
+variableCapacityAsBoundedBarrier invariant = record
+  { supersolution = variableCapacityAsShellSupersolution invariant
+  ; target = ceiling invariant
+  ; barrierStrictlyBelowTarget = capacityBelowCeiling invariant
+  }
+
 physicalHHBadRawVariableCapacityInvariant :
   ∀ {input} →
   (invariant : RawVariableCapacityInvariant input) →
   ∀ q → Barrier.profile input q < ceiling invariant
-physicalHHBadRawVariableCapacityInvariant {input} invariant q =
-  ℚP.≤-<-trans
-    (Barrier.profileBelowAnyShellBarrier input
-      (variableCapacityAsShellSupersolution invariant) q)
-    (capacityBelowCeiling invariant q)
+physicalHHBadRawVariableCapacityInvariant {input} invariant =
+  Barrier.profileStrictlyBelowBarrierTarget input
+    (variableCapacityAsBoundedBarrier invariant)
 
 -- Constant capacity is now only a corollary surface.  The physical producer may
 -- choose this when its Duhamel calculation really gives a uniform invariant
