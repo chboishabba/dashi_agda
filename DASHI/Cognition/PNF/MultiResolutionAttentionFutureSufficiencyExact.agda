@@ -34,16 +34,28 @@ record AttentionProfile : Set where
   field
     resolution : RepresentationResolution
     accessibility : AccessibilityBreadth
+    compressionRate : Nat
+    localWindow : Nat
 
 open AttentionProfile public
 
--- Type-separated architecture profiles: these record the two independent axes,
--- not performance or semantic authority.
+-- The rates/windows are the reported DeepSeek-V4 configurations abstracted to
+-- integer architecture coordinates.  They are evidence about the paper's
+-- design, not semantic-sufficiency certificates.
 csaProfile : AttentionProfile
-csaProfile = attentionProfile mediumResolution narrowAccessibility
+csaProfile = attentionProfile mediumResolution narrowAccessibility 4 128
 
 hcaProfile : AttentionProfile
-hcaProfile = attentionProfile coarseResolution broadAccessibility
+hcaProfile = attentionProfile coarseResolution broadAccessibility 128 128
+
+csaCompressionRateExact : compressionRate csaProfile ≡ 4
+csaCompressionRateExact = refl
+
+hcaCompressionRateExact : compressionRate hcaProfile ≡ 128
+hcaCompressionRateExact = refl
+
+sharedLocalWindowExact : localWindow csaProfile ≡ localWindow hcaProfile
+sharedLocalWindowExact = refl
 
 csaAndHcaDifferInResolution : resolution csaProfile ≡ resolution hcaProfile → ⊥
 csaAndHcaDifferInResolution ()
