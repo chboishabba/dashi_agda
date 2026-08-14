@@ -70,11 +70,13 @@ crossModalUpdateGeometryBound :
     (runUpdates (dynamics system) queries (encodeText system text))
     (runUpdates (dynamics system) queries (encodeVisual system visual))
   ≤ eta
-crossModalUpdateGeometryBound system initialBound queries =
+crossModalUpdateGeometryBound
+  {text = text} {visual = visual}
+  system initialBound queries =
   ≤-trans
     (finiteTraceNonExpansive (dynamics system) queries
-      (encodeText system _)
-      (encodeVisual system _))
+      (encodeText system text)
+      (encodeVisual system visual))
     initialBound
 
 record DynamicGeometricEquivalenceCertificate
