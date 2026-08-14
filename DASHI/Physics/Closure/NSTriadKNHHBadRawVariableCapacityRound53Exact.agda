@@ -201,8 +201,9 @@ normalizedRecurrence physical q =
           + Threshold.threshold (parameter physical)
             * Sharp.inverseDyadicScale (suc q) * forcing physical q)
     scaled =
-      let instance factorNNI =
-        nonNegative (normalizationFactorNonnegative physical (suc q))
+      let instance
+        factorNNI =
+          nonNegative (normalizationFactorNonnegative physical (suc q))
       in ℚP.*-monoˡ-≤-nonNeg factor (componentTransfer physical q)
 
     rhsMeaning :
