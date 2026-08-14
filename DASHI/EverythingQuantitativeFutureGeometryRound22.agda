@@ -40,12 +40,14 @@ import DASHI.Cognition.PNF.FutureGeometryEmbeddingExact
 import DASHI.Cognition.PNF.RateFutureTransitionParetoExact
 
 ------------------------------------------------------------------------
--- Round 22E: expected fibre rate, dynamic multimodality and runtime geometry.
+-- Round 22E: expected fibre rate, dynamic multimodality, runtime geometry and
+-- stochastic future quotient/lumpability.
 ------------------------------------------------------------------------
 import DASHI.Cognition.PNF.GenericExpectedFibreRateExact
 import DASHI.Cognition.PNF.DynamicMultimodalTransitionGeometryExact
 import DASHI.Cognition.PNF.CacheUpdateReopenGeometryExact
 import DASHI.Cognition.PNF.StableProbabilisticObservationFutureBridgeExact
+import DASHI.Cognition.PNF.RationalMarkovLumpingFutureExact
 
 ------------------------------------------------------------------------
 -- Round 22F: Cantor finite-clopen premeasure extension.
@@ -53,7 +55,8 @@ import DASHI.Cognition.PNF.StableProbabilisticObservationFutureBridgeExact
 import DASHI.Foundations.CantorFiniteClopenPremeasureExact
 
 -- Boundary: this aggregate is theorem-bearing but no Agda kernel-clean claim is
--- made unless it is checked by an available Agda executable.  It also does not
--- claim full stochastic-transition bisimulation, continuum PNP/PDE well-
--- posedness, empirical universal morphogenetic control, or sigma-additive
--- Cantor measure extension.
+-- made unless it is checked by an available Agda executable.  It does not claim
+-- continuum PNP/PDE well-posedness, empirical universal morphogenetic control,
+-- or sigma-additive Cantor measure extension.  Markov lumping is proved as an
+-- operator-factorization theorem; concrete stochastic kernels still own the
+-- positivity/normalization and coarse-class aggregation obligations.
