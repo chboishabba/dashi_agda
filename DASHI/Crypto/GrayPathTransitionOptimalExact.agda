@@ -3,11 +3,10 @@ module DASHI.Crypto.GrayPathTransitionOptimalExact where
 ------------------------------------------------------------------------
 -- PATH TRANSITION GEOMETRY AND GRAY OPTIMALITY
 --
--- For a finite path, any injective code must assign distinct codewords to the
--- endpoints of each edge, hence every edge has positive code distance.  The
--- abstract lower-bound theorem below records that positive edge costs sum to at
--- least the number of path edges.  A concrete 2-bit Gray embedding of P4 attains
--- the bound exactly, whereas ordinary binary incurs one extra transition unit.
+-- Every distinct-code transition has positive Hamming cost, so any finite path
+-- with m edges costs at least m.  A unit-edge realization attains that lower
+-- bound.  The P4 Gray embedding is the concrete two-bit instance; ordinary
+-- binary incurs one extra transition unit.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -16,6 +15,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Data.Nat.Base using (_≤_; z≤n; s≤s)
 open import Data.Nat.Properties using (+-mono-≤)
+open import Relation.Binary.PropositionalEquality using (cong; subst)
 
 sum : List Nat → Nat
 sum [] = 0
@@ -38,6 +38,39 @@ sumAtLeastLength : ∀ {costs} → PositiveCostList costs → length costs ≤ s
 sumAtLeastLength empty = z≤n
 sumAtLeastLength (cons one≤cost restPositive) =
   +-mono-≤ one≤cost (sumAtLeastLength restPositive)
+
+------------------------------------------------------------------------
+-- General unit-edge path realization.
+------------------------------------------------------------------------
+
+unitCosts : Nat → List Nat
+unitCosts zero = []
+unitCosts (suc n) = suc zero ∷ unitCosts n
+
+unitCostsLength : ∀ n → length (unitCosts n) ≡ n
+unitCostsLength zero = refl
+unitCostsLength (suc n) = cong suc (unitCostsLength n)
+
+unitCostsSum : ∀ n → sum (unitCosts n) ≡ n
+unitCostsSum zero = refl
+unitCostsSum (suc n) = cong suc (unitCostsSum n)
+
+unitCostsPositive : ∀ n → PositiveCostList (unitCosts n)
+unitCostsPositive zero = empty
+unitCostsPositive (suc n) = cons (s≤s z≤n) (unitCostsPositive n)
+
+positivePathCostAtLeastEdgeCount :
+  ∀ {costs n} →
+  PositiveCostList costs →
+  length costs ≡ n →
+  n ≤ sum costs
+positivePathCostAtLeastEdgeCount {costs} {n} positive edgeCount =
+  subst (λ m → m ≤ sum costs) edgeCount
+    (sumAtLeastLength positive)
+
+unitPathAttainsLowerBound : ∀ n → sum (unitCosts n) ≡ length (unitCosts n)
+unitPathAttainsLowerBound zero = refl
+unitPathAttainsLowerBound (suc n) = cong suc (unitPathAttainsLowerBound n)
 
 ------------------------------------------------------------------------
 -- Two-bit Hamming metric.
