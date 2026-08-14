@@ -9,11 +9,8 @@ module DASHI.Cognition.PNF.FutureSufficientInvariantSubspaceExact where
 --   (1) dynamics close in the latent carrier: E(F_a x) = M_a(E x);
 --   (2) the consumer observation factors through E.
 --
--- These two laws imply that equality of latent codes is preserved through every
--- finite action trace and therefore lies inside the canonical future-observation
--- equivalence.  This is the exact deterministic core of the proposed
--- "future-sufficient invariant observable subspace" idea; no vector-space or
--- spectral assumptions are needed for the theorem itself.
+-- These laws imply that equality of latent codes is preserved through every
+-- finite action trace and therefore lies inside canonical future equivalence.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -34,12 +31,10 @@ record FutureSufficientInvariantRepresentation
     decodeObservation : Latent → Observation
     actionLabel : Action → String
 
-    -- Dynamical simplicity / invariant latent carrier.
     intertwines :
       (action : Action) (state : State) →
       encode (step action state) ≡ latentStep action (encode state)
 
-    -- Consumer sufficiency at the present state.
     observationFactors :
       (state : State) →
       observe state ≡ decodeObservation (encode state)
@@ -89,28 +84,22 @@ latentKernelImpliesTraceObservationEquality :
   encode representation left ≡ encode representation right →
   Bridge.TraceEquivalent
     (observe representation) (step representation) left right
-latentKernelImpliesTraceObservationEquality representation codeEqual actions =
+latentKernelImpliesTraceObservationEquality
+  representation {left = left} {right = right} codeEqual actions =
   trans
     (observationFactors representation
-      (Refinement.run (step representation) actions _))
+      (Refinement.run (step representation) actions left))
     (trans
       (cong (decodeObservation representation)
-        (runEncodingIntertwines representation actions _))
+        (runEncodingIntertwines representation actions left))
       (trans
         (cong (decodeObservation representation)
           (latentEqualityPreservedByTrace representation actions codeEqual))
         (trans
           (cong (decodeObservation representation)
-            (sym (runEncodingIntertwines representation actions _)))
+            (sym (runEncodingIntertwines representation actions right)))
           (sym (observationFactors representation
-            (Refinement.run (step representation) actions _))))))
-
-------------------------------------------------------------------------
--- MAIN THEOREM
---
--- ker(E) is contained in canonical future equivalence whenever the latent
--- dynamics close and the declared consumer observation factors through E.
-------------------------------------------------------------------------
+            (Refinement.run (step representation) actions right))))))
 
 invariantSufficientKernelIsFutureSafe :
   ∀ {State Action Observation Latent}
@@ -141,7 +130,6 @@ invariantRepresentationIsFutureLanguageSafeProjection representation =
 
 ------------------------------------------------------------------------
 -- Boundary: "subspace" here means a dynamics-closed latent carrier.  A later
--- linear/spectral owner may additionally prove that Latent is a vector space,
--- that each latentStep is linear, or that the coordinates diagonalize an
--- operator.  Future safety itself needs only the two factorization laws above.
+-- linear/spectral owner may prove vector-space structure or diagonalization;
+-- future safety itself needs only closure plus consumer factorization.
 ------------------------------------------------------------------------
