@@ -9,13 +9,13 @@ module DASHI.Crypto.MLKEMNTTDataflowCouplingExact where
 -- 2024. DOI: 10.6028/NIST.FIPS.203.
 --
 -- FIPS 203 Algorithm 9 has seven butterfly stages with lengths
--- 128,64,32,16,8,4,2.  Equation (4.12) represents one NTT polynomial as 128
+-- 128,64,32,16,8,4,2. Equation (4.12) represents one NTT polynomial as 128
 -- quadratic residues; each scalar coefficient of a quadratic residue is a
 -- linear combination of one parity class of 128 source coefficients.
 --
 -- This module records the exact structural consequence needed for blue-team
 -- search analysis: local multiplication in T_q does not imply a local source
--- prior.  Each public scalar NTT coordinate structurally sees 128 source
+-- prior. Each public scalar NTT coordinate structurally sees 128 source
 -- coefficients per secret polynomial, and a complete quadratic coordinate
 -- pair sees all 256 coefficients of each secret polynomial.
 ------------------------------------------------------------------------
@@ -26,6 +26,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
 open import Data.List.Base using (length)
 open import Data.Empty using (⊥)
+open import Data.Nat.Base using (_<_; z≤n; s≤s)
 
 ------------------------------------------------------------------------
 -- Algorithm-9 butterfly-stage arithmetic.
@@ -46,11 +47,26 @@ sevenStageScalarDependencyWidth : dependencyWidthAfterStages 7 ≡ 128
 sevenStageScalarDependencyWidth = refl
 
 ------------------------------------------------------------------------
+-- Exact bounded index for the 128 quadratic coordinates / parity positions.
+------------------------------------------------------------------------
+
+record Index128 : Set where
+  constructor index128
+  field
+    value : Nat
+    within128 : value < 128
+
+open Index128 public
+
+zeroIndex128 : Index128
+zeroIndex128 = index128 0 (s≤s z≤n)
+
+------------------------------------------------------------------------
 -- Source parity classes and scalar target coordinates.
 --
 -- Reducing f modulo X^2-gamma sends even source powers to the constant part
--- and odd source powers to the linear part.  There are 128 coefficients in
--- either parity class.
+-- and odd source powers to the linear part. There are exactly 128 coefficients
+-- in either parity class.
 ------------------------------------------------------------------------
 
 data ResidueComponent : Set where
@@ -59,7 +75,7 @@ data ResidueComponent : Set where
 record NTTScalarCoordinate : Set where
   constructor scalarCoordinate
   field
-    residueIndex : Nat
+    residueIndex : Index128
     component : ResidueComponent
 
 open NTTScalarCoordinate public
@@ -67,7 +83,7 @@ open NTTScalarCoordinate public
 record SourceCoefficient : Set where
   constructor sourceCoefficient
   field
-    parityIndex : Nat
+    parityIndex : Index128
     sourceComponent : ResidueComponent
 
 open SourceCoefficient public
@@ -98,9 +114,9 @@ constantCoordinatesShareSource : ∀ i j →
     (scalarCoordinate j constantPart)
 constantCoordinatesShareSource i j =
   sharesSourceDependency
-    (sourceCoefficient 0 constantPart)
-    (constantDependency i 0)
-    (constantDependency j 0)
+    (sourceCoefficient zeroIndex128 constantPart)
+    (constantDependency i zeroIndex128)
+    (constantDependency j zeroIndex128)
 
 linearCoordinatesShareSource : ∀ i j →
   SharesSourceDependency
@@ -108,9 +124,9 @@ linearCoordinatesShareSource : ∀ i j →
     (scalarCoordinate j linearPart)
 linearCoordinatesShareSource i j =
   sharesSourceDependency
-    (sourceCoefficient 0 linearPart)
-    (linearDependency i 0)
-    (linearDependency j 0)
+    (sourceCoefficient zeroIndex128 linearPart)
+    (linearDependency i zeroIndex128)
+    (linearDependency j zeroIndex128)
 
 crossComponentsDoNotShareSource : ∀ i j →
   SharesSourceDependency
@@ -136,7 +152,7 @@ quadraticCoordinateSeesWholePolynomial = refl
 -- K-PKE public-vector dependence across module dimension k.
 --
 -- A scalar public coordinate sums over k secret-polynomial coordinates in
--- t-hat = A-hat o s-hat + e-hat.  Structurally, therefore, one scalar target
+-- t-hat = A-hat o s-hat + e-hat. Structurally, therefore, one scalar target
 -- coordinate can depend on 128*k source-domain secret coefficients; the pair
 -- forming one quadratic residue can depend on all 256*k source coefficients.
 ------------------------------------------------------------------------
