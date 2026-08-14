@@ -19,6 +19,8 @@ import DASHI.Biology.Physical.FinitePNPFreeEnergyDissipationExact
 import DASHI.Biology.Physical.FiniteMorphogeneticBasinControlExact
 import DASHI.Biology.Physical.PlanarianControlCalibrationExact
 import DASHI.Biology.Physical.BDNACalibratedHelicalGeometryExact
+import DASHI.Geometry.RigidMotionSemidirectProductExact
+import DASHI.Biology.Physical.BDNAStepSE3CompositionExact
 
 ------------------------------------------------------------------------
 -- Round 22C: exact C3^3 cyclotomic Fourier analysis.
@@ -59,4 +61,6 @@ import DASHI.Foundations.CantorFiniteClopenPremeasureExact
 -- continuum PNP/PDE well-posedness, empirical universal morphogenetic control,
 -- or sigma-additive Cantor measure extension.  Markov lumping is proved as an
 -- operator-factorization theorem; concrete stochastic kernels still own the
--- positivity/normalization and coarse-class aggregation obligations.
+-- positivity/normalization and coarse-class aggregation obligations.  The SE(3)
+-- owner proves the semidirect-product group law from supplied SO(3)/translation
+-- action laws; empirical base-step-to-matrix calibration remains a producer.
