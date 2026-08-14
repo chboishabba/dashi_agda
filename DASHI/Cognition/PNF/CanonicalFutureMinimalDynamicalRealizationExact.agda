@@ -45,7 +45,7 @@ record CanonicalFutureDynamicalRealization
       (Bridge.deterministicSystem step label) observe) : Set₁ where
   constructor canonicalFutureDynamicalRealization
   field
-    sectioned : Future.SectionedProjection (Future.classOf presentation)
+    quotientSectioned : Future.SectionedProjection (Future.classOf presentation)
     quotientStep :
       Action → Future.QuotientCode presentation → Future.QuotientCode presentation
     actionDescends :
@@ -119,11 +119,6 @@ canonicalEncodingCommutesWithTrace
     (cong (runQuotient realization actions)
       (actionDescends realization action state))
 
-------------------------------------------------------------------------
--- MINIMALITY: every sectioned future-safe representation maps onto the
--- canonical future quotient.
-------------------------------------------------------------------------
-
 record SectionedFutureSafeRepresentation
     {State Action Observation Coarse : Set}
     {step : Action → State → State}
@@ -134,7 +129,7 @@ record SectionedFutureSafeRepresentation
   field
     safe : Future.FutureLanguageSafeProjection
       (Bridge.deterministicSystem step label) observe coarsen
-    sectioned : Future.SectionedProjection coarsen
+    coarseSectioned : Future.SectionedProjection coarsen
 
 open SectionedFutureSafeRepresentation public
 
@@ -151,7 +146,7 @@ canonicalQuotientFactorsEverySectionedSafeRepresentation :
   Future.FactorizationThroughFutureQuotient presentation
 canonicalQuotientFactorsEverySectionedSafeRepresentation presentation candidate =
   Future.sectionedSafeProjectionFactors
-    presentation (safe candidate) (sectioned candidate)
+    presentation (safe candidate) (coarseSectioned candidate)
 
 invariantRepresentationFactorsOntoCanonicalQuotient :
   ∀ {State Action Observation Latent}
