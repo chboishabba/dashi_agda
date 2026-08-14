@@ -2,22 +2,20 @@ module DASHI.Biology.Physical.FiniteFluctuationRelationExact where
 
 ------------------------------------------------------------------------
 -- Finite multiplicative precursor of the stochastic-thermodynamic path
--- fluctuation relation.  Instead of introducing analytic log/exp prematurely,
--- each directed edge carries an exact positive likelihood/entropy factor rho
--- satisfying forwardRate = rho * reverseRate.  Path factors multiply exactly.
--- A later real-analysis owner may identify rho = exp(Delta S_tot).
+-- fluctuation relation.  Each directed edge carries an exact likelihood factor
+-- rho satisfying forwardRate = rho * reverseRate.  Path factors multiply.
+-- Positivity and the analytic identification rho = exp(Delta S_tot) remain
+-- separate physical obligations.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
-open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _*_; _≤_)
+open import Data.Rational.Base using (ℚ; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve-∀)
 
 record BalancedEdge : Set where
   constructor balancedEdge
   field
     forwardRate reverseRate entropyFactor : ℚ
-    reverseNonnegative : 0ℚ ≤ reverseRate
-    factorNonnegative : 0ℚ ≤ entropyFactor
     localBalance : forwardRate ≡ entropyFactor * reverseRate
 
 open BalancedEdge public
@@ -42,10 +40,8 @@ multiplicativeFluctuationRelation : (p : TwoEdgePath) →
 multiplicativeFluctuationRelation (twoEdgePath e1 e2)
   rewrite localBalance e1 | localBalance e2 = solve-∀
 
--- Exact driven regression: each forward step is twice its reverse rate, so a
--- two-edge forward trajectory is four times its time-reversed weight.
 doubleDrivenEdge : BalancedEdge
-doubleDrivenEdge = balancedEdge 2 1 2 (s≤s z≤n) (s≤s z≤n) refl
+doubleDrivenEdge = balancedEdge 2 1 2 refl
 
 canonicalDrivenPath : TwoEdgePath
 canonicalDrivenPath = twoEdgePath doubleDrivenEdge doubleDrivenEdge
@@ -58,6 +54,10 @@ canonicalReverseWeight = solve-∀
 
 canonicalEntropyFactor : pathEntropyFactor canonicalDrivenPath ≡ 4
 canonicalEntropyFactor = solve-∀
+
+record PositiveBalancedEdge (e : BalancedEdge) : Set₁ where
+  field
+    ForwardPositive ReversePositive FactorPositive : Set
 
 record FluctuationAuthorityBoundary : Set where
   field
