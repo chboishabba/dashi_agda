@@ -1,15 +1,6 @@
 name: Minimal kernel algebra Agda check
 
 on:
-  push:
-    branches: [master]
-    paths:
-      - 'DASHI/Core/MinimalKernelAlgebra.agda'
-      - 'DASHI/Core/MinimalKernelAlgebraTests.agda'
-      - 'DASHI/Core/Base369UltrametricContraction.agda'
-      - 'DASHI/Geometry/SSP369Ultrametric.agda'
-      - 'Docs/MinimalKernelAlgebra.md'
-      - '.github/workflows/minimal-kernel-algebra.yml'
   pull_request:
     paths:
       - 'DASHI/Core/MinimalKernelAlgebra.agda'
@@ -20,7 +11,7 @@ on:
       - '.github/workflows/minimal-kernel-algebra.yml'
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:

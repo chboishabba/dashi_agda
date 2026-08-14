@@ -1,13 +1,6 @@
 name: Epistemic gap boundary Agda check
 
 on:
-  push:
-    branches: [master]
-    paths:
-      - 'DASHI/Foundations/EpistemicGapBoundary.agda'
-      - 'DASHI/Foundations/EpistemicGapBoundaryTests.agda'
-      - 'Docs/EpistemicGapBoundary.md'
-      - '.github/workflows/epistemic-gap-boundary.yml'
   pull_request:
     paths:
       - 'DASHI/Foundations/EpistemicGapBoundary.agda'
@@ -16,7 +9,7 @@ on:
       - '.github/workflows/epistemic-gap-boundary.yml'
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:

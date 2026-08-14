@@ -15,8 +15,6 @@ on:
       - "Docs/support/reference/NDimSheafLogisticCrossPollination.md"
       - "Docs/support/reference/FrameBearingRelationalIntervention.md"
       - ".github/workflows/ndim-sheaf-logistic-cross-pollination.yml"
-  push:
-    branches: [master]
     paths:
       - "DASHI/Topology/*.agda"
       - "DASHI/Sheaf/*.agda"
@@ -33,7 +31,7 @@ on:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:

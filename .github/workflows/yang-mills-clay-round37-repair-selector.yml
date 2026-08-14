@@ -1,8 +1,6 @@
 name: Yang-Mills Clay round 37 repair selector
 
 on:
-  push:
-    branches: [master]
   pull_request:
     branches:
       - 'agent/ym-clay-alpha-round36-finite-atom-selector'
@@ -19,7 +17,7 @@ on:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:

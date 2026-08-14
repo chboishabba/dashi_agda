@@ -1,25 +1,6 @@
 name: Shor RSA quantum join
 
 on:
-  push:
-    branches: [master]
-    paths:
-      - 'DASHI/Algebra/Quantum/FiniteQuantumRegister.agda'
-      - 'DASHI/Algebra/Quantum/QuantumFourierTransformFinite.agda'
-      - 'DASHI/Algebra/Quantum/GeneralShor.agda'
-      - 'DASHI/Algebra/Quantum/DASHIShorProductiveJoin.agda'
-      - 'DASHI/Algebra/Quantum/DASHIQuantumComputationProgram.agda'
-      - 'DASHI/Crypto/FiniteFactorArithmetic.agda'
-      - 'DASHI/Crypto/ShorOrderFinding.agda'
-      - 'DASHI/Crypto/ShorFactoring.agda'
-      - 'DASHI/Crypto/ShorDiscreteLog.agda'
-      - 'DASHI/Crypto/RSAShorVulnerabilityBridge.agda'
-      - 'DASHI/Crypto/ShorConcreteExamples.agda'
-      - 'DASHI/Crypto/ShorProgram.agda'
-      - 'scripts/shor_order_finding_audit.py'
-      - 'scripts/tests/test_shor_order_finding_audit.py'
-      - 'docs/shor_rsa_quantum_join.md'
-      - '.github/workflows/shor-rsa-quantum-join.yml'
   pull_request:
     paths:
       - 'DASHI/Algebra/Quantum/FiniteQuantumRegister.agda'
@@ -40,7 +21,7 @@ on:
       - '.github/workflows/shor-rsa-quantum-join.yml'
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:

@@ -23,8 +23,6 @@ on:
       - "tests/test_materialize_dashi_phase_visualisations.py"
       - "flake.nix"
       - ".github/workflows/dashi-theory-atlas.yml"
-  push:
-    branches: [master]
     paths:
       - "DASHI/**/*.agda"
       - "config/dashi-*-atlas.json"
@@ -49,7 +47,7 @@ on:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:

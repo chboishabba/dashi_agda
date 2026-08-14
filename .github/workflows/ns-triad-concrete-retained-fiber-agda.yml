@@ -1,17 +1,6 @@
 name: NS triad physical frontier Agda
 
 on:
-  push:
-    branches: [master]
-    paths:
-      - 'DASHI/Physics/Closure/NSTriadKN*.agda'
-      - 'scripts/ns_triad_signed_frontier_lab.py'
-      - 'scripts/check_ns_triad_completion_identities.py'
-      - 'scripts/check_ns_triad_clay_frontier.py'
-      - 'scripts/run_agda29_parallel_check.sh'
-      - 'flake.nix'
-      - 'flake.lock'
-      - '.github/workflows/ns-triad-concrete-retained-fiber-agda.yml'
   pull_request:
     paths:
       - 'DASHI/Physics/Closure/NSTriadKN*.agda'
@@ -26,7 +15,7 @@ on:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:

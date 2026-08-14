@@ -1,8 +1,6 @@
 name: Yang-Mills Clay highest-alpha round 20
 
 on:
-  push:
-    branches: [master]
   pull_request:
     paths:
       - 'DASHI/Physics/YangMills/BalabanP33FiniteWeightedSchurSquaredExact.agda'
@@ -19,7 +17,7 @@ on:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:

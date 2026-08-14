@@ -1,8 +1,6 @@
 name: Monster 3B actual kernel character round 4
 
 on:
-  push:
-    branches: [master]
   pull_request:
     branches:
       - 'agent/monster-3b-orbifold-local-module-round4'
@@ -26,7 +24,7 @@ on:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:

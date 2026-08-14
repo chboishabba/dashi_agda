@@ -1,43 +1,6 @@
 name: Relational flow repair atlas Agda check
 
 on:
-  push:
-    branches: [master]
-    paths:
-      - 'DASHI/RelationalFlowRepairAtlas.agda'
-      - 'DASHI/FullRelationalFlowRepairHyperfabric.agda'
-      - 'DASHI/ChildAuthorityTraumaHyperfabric.agda'
-      - 'DASHI/Core/AttributedSourceCore.agda'
-      - 'DASHI/Core/CompiledInversePlusOneCore.agda'
-      - 'DASHI/Core/RelationalFlowResidualComposition.agda'
-      - 'DASHI/Core/RelationalHypervoxelBraidCore.agda'
-      - 'DASHI/Cognition/PNF/TraumaMemoryHypervoxelBridge.agda'
-      - 'DASHI/Education/RelationalEducationGateAlgebra.agda'
-      - 'DASHI/Governance/RelationalFlowGateAlgebra.agda'
-      - 'DASHI/Biology/PredictiveMetastabilityTraumaBridge.agda'
-      - 'DASHI/Biology/ChildAuthorityTraumaSourceAtlas.agda'
-      - 'DASHI/Biology/DirectedPortfolioSourceAtlas.agda'
-      - 'DASHI/Biology/TraumaMemoryAttractorPortfolio.agda'
-      - 'DASHI/Biology/DirectedAttractorPortfolioCalculus.agda'
-      - 'DASHI/Biology/DirectedBranchPolicyControl.agda'
-      - 'DASHI/Biology/FiniteBranchPortfolioOptimisation.agda'
-      - 'DASHI/Culture/PatternMindReciprocityLoveBridge.agda'
-      - 'DASHI/Culture/SemioticPhallicLackAmalekBridge.agda'
-      - 'DASHI/Culture/AmalekAuthorityProjectionBoundary.agda'
-      - 'DASHI/Culture/IntersectionalPowerValueFolkModelBoundary.agda'
-      - 'DASHI/Governance/CyberneticClinicalInstitutionalRepairBridge.agda'
-      - 'DASHI/Governance/InstitutionalContinuityRepairArithmetic.agda'
-      - 'DASHI/Governance/MedicalCannabisPresenceImpairmentBoundary.agda'
-      - 'DASHI/Governance/GuardedPropositionResponseTree.agda'
-      - 'DASHI/Governance/DependentAuthorityCoercionKernel.agda'
-      - 'DASHI/Governance/DiachronicDelegatedAuthorityBoundary.agda'
-      - 'DASHI/Governance/ChildReligiousCoercionResearchBridge.agda'
-      - 'DASHI/Reasoning/**'
-      - 'Docs/Relational*.md'
-      - 'Docs/DevelopmentalAttunementPNFBridge.md'
-      - 'Docs/ParentChildJointCounsellingTemplate.md'
-      - 'Docs/ChildAuthorityTraumaHyperformalism.md'
-      - '.github/workflows/relational-flow-repair-atlas.yml'
   pull_request:
     paths:
       - 'DASHI/RelationalFlowRepairAtlas.agda'
@@ -76,7 +39,7 @@ on:
       - '.github/workflows/relational-flow-repair-atlas.yml'
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:

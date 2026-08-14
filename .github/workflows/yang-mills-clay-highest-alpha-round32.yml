@@ -1,14 +1,6 @@
 name: Yang Mills highest alpha round 32 Clay contract and invariants
 
 on:
-  push:
-    branches: [master]
-    paths:
-      - 'DASHI/Physics/YangMills/**'
-      - 'Docs/support/reference/YangMillsClayContractRound32.md'
-      - 'Docs/support/reference/YangMillsReferenceIndex.md'
-      - 'scripts/check_yang_mills_clay_highest_alpha_round32.sh'
-      - '.github/workflows/yang-mills-clay-highest-alpha-round32.yml'
   pull_request:
     branches:
       - 'agent/ym-clay-alpha-round31-group-rates-allbeta-audit'
@@ -22,7 +14,7 @@ on:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:

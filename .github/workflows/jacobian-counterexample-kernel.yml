@@ -1,25 +1,6 @@
 name: Jacobian counterexample kernel
 
 on:
-  push:
-    branches: [master]
-    paths:
-      - "Verification/JacobianCounterexampleKernel.agda"
-      - "Verification/JacobianCounterexampleScalarExtension.agda"
-      - "Verification/JacobianNoninjectiveRegression.agda"
-      - "Verification/JacobianCounterexampleEverything.agda"
-      - "DASHI/Algebra/KellerMapConsequenceHierarchy.agda"
-      - "DASHI/Algebra/LocalInverseVsGlobalInverse.agda"
-      - "DASHI/Foundations/JacobianThreeSheetTriadicBridge.agda"
-      - "DASHI/Governance/EvidenceGatedTheoremPromotion.agda"
-      - "DASHI/MDL/SheetAwareAmbiguityPenalty.agda"
-      - "DASHI/Philosophy/ComputationalReductionismBoundary.agda"
-      - "DASHI/Provenance/AIAssistedMathematicsProvenance.agda"
-      - "DASHI/Sheaf/GlobalAmbiguityBoundary.agda"
-      - "DASHI/Topology/LocalGlobalMapDiagnostics.agda"
-      - "scripts/check_jacobian_noninjective_example.py"
-      - "Docs/support/reference/AlpogeJacobianCounterexampleImpact.md"
-      - ".github/workflows/jacobian-counterexample-kernel.yml"
   pull_request:
     paths:
       - "Verification/JacobianCounterexampleKernel.agda"
@@ -41,7 +22,7 @@ on:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:

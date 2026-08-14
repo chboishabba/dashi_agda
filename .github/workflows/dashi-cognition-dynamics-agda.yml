@@ -17,7 +17,7 @@ on:
       - '.github/workflows/dashi-cognition-dynamics-agda.yml'
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:

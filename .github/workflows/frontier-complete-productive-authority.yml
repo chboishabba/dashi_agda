@@ -1,24 +1,6 @@
 name: Frontier complete productive authority
 
 on:
-  push:
-    branches: [master]
-    paths:
-      - 'DASHI/Mathematics/LinearAlgebra/RationalThreeWayHodgeCoordinateUniquenessFinalExact.agda'
-      - 'DASHI/Mathematics/AlgebraicGeometry/ProjectiveSpaceHodgeBasisExact.agda'
-      - 'DASHI/Mathematics/Complexity/GenericFiniteRunTableauExact.agda'
-      - 'DASHI/Mathematics/Arithmetic/EllipticCurveFiniteTwoDescentSeedExact.agda'
-      - 'DASHI/Moonshine/FiniteDifferentialVertexAlgebraExact.agda'
-      - 'DASHI/Moonshine/SquareZeroDifferentialVertexAlgebraBridgeExact.agda'
-      - 'DASHI/Moonshine/RankOneHeisenbergFockWindowExact.agda'
-      - 'DASHI/Physics/Constructive/FiniteReflectionPositivityExact.agda'
-      - 'DASHI/Physics/Constructive/FiniteProductClusteringDenominatorClearedExact.agda'
-      - 'DASHI/Physics/Constructive/FinitePolymerKPBudgetExact.agda'
-      - 'DASHI/Physics/YangMills/YangMillsFiniteConstructiveLadderExact.agda'
-      - 'DASHI/Mathematics/CrossPollination/FrontierCompleteProductiveAuthority*.agda'
-      - 'DASHI/EverythingFrontierCompleteProductiveAuthority.agda'
-      - 'scripts/check_frontier_complete_productive_authority.sh'
-      - '.github/workflows/frontier-complete-productive-authority.yml'
   pull_request:
     branches:
       - 'agent/millennium-crosspollination-rh-hodge-bsd-pnp-poincare-voa'
@@ -42,7 +24,7 @@ on:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:

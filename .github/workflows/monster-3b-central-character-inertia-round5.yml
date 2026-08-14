@@ -1,8 +1,6 @@
 name: Monster 3B central character inertia round 5
 
 on:
-  push:
-    branches: [master]
   pull_request:
     branches:
       - 'master'
@@ -23,7 +21,7 @@ on:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:

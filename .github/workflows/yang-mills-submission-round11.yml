@@ -1,21 +1,6 @@
 name: Yang-Mills submission round eleven
 
 on:
-  push:
-    branches: [master]
-    paths:
-      - 'DASHI/Physics/YangMills/BalabanBishopConfiguredTermIdentificationExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanBishopFullHalfBallParityChartExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanStepVPolynomialDirectRatioExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanP06PeriodicSupportBridgeExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanP06DiameterComplexityAuditExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanP11LightweightCanonicalPaymentExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanP33P10Gate4DependencySpineExact.agda'
-      - 'DASHI/Physics/YangMills/YangMillsFixedLatticeToContinuumDependencySpineExact.agda'
-      - 'DASHI/Physics/YangMills/YangMillsSubmissionRound11*.agda'
-      - 'DASHI/Physics/YangMills/BalabanClayConstructiveProducerSubmissionRound11Advance.agda'
-      - 'scripts/check_yang_mills_submission_round11.sh'
-      - '.github/workflows/yang-mills-submission-round11.yml'
   pull_request:
     paths:
       - 'DASHI/Physics/YangMills/BalabanBishopConfiguredTermIdentificationExact.agda'
@@ -34,7 +19,7 @@ on:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:

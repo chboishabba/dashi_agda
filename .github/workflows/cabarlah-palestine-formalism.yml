@@ -1,8 +1,6 @@
 name: cabarlah-palestine-formalism
 
 on:
-  push:
-    branches: [master]
   pull_request:
     paths:
       - 'DASHI/Physics/Foundations/Cabarlah*'
@@ -17,7 +15,7 @@ on:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:

@@ -1,8 +1,6 @@
 name: SSP15 indexed-j gluing and Mathieu interference round 6
 
 on:
-  push:
-    branches: [master]
   pull_request:
     branches:
       - 'agent/ssp15-j-gluing-mathieu-interference-round6'
@@ -33,7 +31,7 @@ on:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:

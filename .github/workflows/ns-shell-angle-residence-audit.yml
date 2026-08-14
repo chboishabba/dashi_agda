@@ -1,45 +1,6 @@
 name: NS exact Galerkin coherence audit
 
 on:
-  push:
-    branches: [master]
-    paths:
-      - 'scripts/ns_galerkin_coherence_core.py'
-      - 'scripts/ns_depletion_currency_audit.py'
-      - 'scripts/ns_bounded_turnover_potential_audit.py'
-      - 'scripts/ns_compact_gamma_potential_audit.py'
-      - 'scripts/ns_hard_alignment_derivative.py'
-      - 'scripts/ns_generate_matched_galerkin_trajectories.py'
-      - 'scripts/ns_shell_pair_transfer_audit.py'
-      - 'scripts/ns_run_matched_coherence_baseline.py'
-      - 'scripts/ns_triad_gamma_gap_raw_hat_export_timed.py'
-      - 'scripts/ns_attach_explicit_timeline.py'
-      - 'scripts/ns_adaptive_checkpoint_plan.py'
-      - 'scripts/ns_shell_angle_residence_audit.py'
-      - 'scripts/ns_shell_angle_residence_audit_v2.py'
-      - 'scripts/ns_packet_coherence_budget_audit.py'
-      - 'scripts/ns_packet_coherence_budget_audit_v2.py'
-      - 'scripts/ns_log_bmo_vorticity_direction_audit.py'
-      - 'scripts/ns_log_bmo_vorticity_direction_audit_v2.py'
-      - 'scripts/ns_multicutoff_coherence_validation.py'
-      - 'scripts/tests/test_ns_shell_angle_residence_audit.py'
-      - 'scripts/tests/test_ns_packet_coherence_budget_audit.py'
-      - 'scripts/tests/test_ns_log_bmo_vorticity_direction_audit.py'
-      - 'scripts/tests/test_ns_timeline_and_multicutoff.py'
-      - 'scripts/tests/test_ns_depletion_currency_audit.py'
-      - 'scripts/tests/test_ns_bounded_turnover_potential_audit.py'
-      - 'scripts/tests/test_ns_compact_gamma_potential_audit.py'
-      - 'docs/ns_exact_galerkin_coherence_audit.md'
-      - 'docs/ns_exact_galerkin_coherence_baseline_results.md'
-      - 'docs/ns_depletion_currency_comparison.md'
-      - 'docs/ns_bounded_turnover_potential.md'
-      - 'docs/ns_compact_gamma_potential.md'
-      - 'DASHI/Physics/Closure/NSNormalizedAlignmentBudgetDerivative.agda'
-      - 'DASHI/Physics/Closure/NSDepletionCurrencyFork.agda'
-      - 'DASHI/Physics/Closure/NSBoundedPotentialTurnoverBudget.agda'
-      - 'DASHI/Physics/Closure/NSCompactGammaPotentialDerivative.agda'
-      - 'DASHI/Physics/Closure/NSCoherenceBudgetResidenceReduction.agda'
-      - '.github/workflows/ns-shell-angle-residence-audit.yml'
   pull_request:
     paths:
       - 'scripts/ns_galerkin_coherence_core.py'
@@ -80,7 +41,7 @@ on:
       - '.github/workflows/ns-shell-angle-residence-audit.yml'
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:

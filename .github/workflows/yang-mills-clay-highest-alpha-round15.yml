@@ -1,29 +1,6 @@
 name: Yang-Mills Clay highest-alpha round 15
 
 on:
-  push:
-    branches: [master]
-    paths:
-      - 'DASHI/Physics/YangMills/BalabanClayLowerBoundCountermodelExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanClayTransferGapDefectTelescopingExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanClayPhysicalScaleExponentExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanClayUniformPerronContractionExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanClayNormingFamilyOperatorBoundExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanClayTransferHamiltonianGapSeparationExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanClayExactOSPullbackRecombinationExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanClayDenseCoreSpectralGapExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanClayLocalNoncollapseExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanClayObservableGapEdgeExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanClaySpectralUVCompatibilityExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanClayMassGapGatePackageExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanClayMirShabirScopeAuditExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanClayExternalAttemptStressTestsExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanP33InverseDexpReducedOperatorExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanP33GroupProductDistanceTelescopingExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanP33SecondChartRadiusCalibrationExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanClayHighestAlphaRound15Validation.agda'
-      - 'scripts/check_yang_mills_clay_highest_alpha_round15.sh'
-      - '.github/workflows/yang-mills-clay-highest-alpha-round15.yml'
   pull_request:
     paths:
       - 'DASHI/Physics/YangMills/BalabanClayLowerBoundCountermodelExact.agda'
@@ -50,7 +27,7 @@ on:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:

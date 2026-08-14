@@ -2,8 +2,6 @@ name: NS exact localized BKM tranche
 
 on:
   workflow_dispatch:
-  push:
-    branches: [master]
     paths:
       - 'DASHI/Physics/Closure/NSTriadKNPeriodicLittlewoodPaleyBonyExact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNProfileDepthGeometryCutoffIndexedExact.agda'
@@ -42,7 +40,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:

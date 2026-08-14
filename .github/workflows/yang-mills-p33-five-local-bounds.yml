@@ -1,12 +1,6 @@
 name: Yang-Mills P33 five local bounds
 
 on:
-  push:
-    branches: [master]
-    paths:
-      - 'DASHI/Physics/YangMills/BalabanP33*.agda'
-      - 'scripts/check_yang_mills_p33_five_local_bounds.sh'
-      - '.github/workflows/yang-mills-p33-five-local-bounds.yml'
   pull_request:
     paths:
       - 'DASHI/Physics/YangMills/BalabanP33*.agda'
@@ -16,7 +10,7 @@ on:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:

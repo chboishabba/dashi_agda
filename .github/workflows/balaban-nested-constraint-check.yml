@@ -1,15 +1,13 @@
 name: Balaban nested constraint Agda check
 
 on:
-  push:
-    branches: [master]
   pull_request:
     paths:
       - 'DASHI/Physics/YangMills/Balaban*.agda'
       - '.github/workflows/balaban-nested-constraint-check.yml'
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:

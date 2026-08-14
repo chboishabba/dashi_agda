@@ -1,21 +1,6 @@
 name: Ternary Golay cross-pollination
 
 on:
-  push:
-    branches: [master]
-    paths:
-      - 'DASHI/Foundations/TernaryGolay/**'
-      - 'DASHI/Foundations/UBP/ExternalRepositoryProvenance.agda'
-      - 'DASHI/Foundations/UBP/SourceAtlas.agda'
-      - 'DASHI/Foundations/UBP/YIntervalCertificate.agda'
-      - 'DASHI/Foundations/UBP/Pi50ConvergentTable.agda'
-      - 'DASHI/Foundations/UBP/LeechValidMoveSet.agda'
-      - 'DASHI/Foundations/UBP/MOGGolayCharacterisationBoundary.agda'
-      - 'DASHI/Foundations/UBP/NRCIModelParameterBoundary.agda'
-      - 'Docs/support/reference/TernaryGolayCrossPollination.md'
-      - 'scripts/check_ternary_golay_cross_pollination.py'
-      - 'scripts/check_explicit_ternary_golay.py'
-      - '.github/workflows/ternary-golay-cross-pollination.yml'
   pull_request:
     paths:
       - 'DASHI/Foundations/TernaryGolay/**'
@@ -34,7 +19,7 @@ on:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:

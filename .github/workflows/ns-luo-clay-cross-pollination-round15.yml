@@ -1,15 +1,6 @@
 name: NS Luo Clay cross-pollination round 15
 
 on:
-  push:
-    branches: [master]
-    paths:
-      - 'DASHI/Physics/Common/**'
-      - 'DASHI/Physics/Closure/**'
-      - 'scripts/check_ns_luo_clay_cross_pollination_round15.sh'
-      - 'scripts/check_ns_luo_commutator_continuum_round14.sh'
-      - 'scripts/run_agda29_parallel_check.sh'
-      - '.github/workflows/ns-luo-clay-cross-pollination-round15.yml'
   pull_request:
     paths:
       - 'DASHI/Physics/Common/**'
@@ -22,7 +13,7 @@ on:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:

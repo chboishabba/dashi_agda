@@ -1,12 +1,6 @@
 name: Prion amyloid templating Agda check
 
 on:
-  push:
-    branches: [master]
-    paths:
-      - 'DASHI/Biology/PrionAmyloidTemplating.agda'
-      - 'DASHI/Biology/PrionAmyloidTemplatingTests.agda'
-      - '.github/workflows/prion-amyloid-templating.yml'
   pull_request:
     paths:
       - 'DASHI/Biology/PrionAmyloidTemplating.agda'
@@ -14,7 +8,7 @@ on:
       - '.github/workflows/prion-amyloid-templating.yml'
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:

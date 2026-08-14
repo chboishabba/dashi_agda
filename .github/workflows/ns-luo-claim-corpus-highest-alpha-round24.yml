@@ -1,17 +1,6 @@
 name: NS Luo claimed-paper corpus round 24
 
 on:
-  push:
-    branches: [master]
-    paths:
-      - 'DASHI/Physics/Closure/**'
-      - 'DASHI/Papers/NavierStokes/**'
-      - 'docs/ns-clay-contract/**'
-      - 'scripts/check_ns_luo_claim_corpus_highest_alpha_round24.sh'
-      - 'scripts/check_ns_luo_clay_contract_round23.sh'
-      - 'scripts/check_ns_luo_galerkin_defect_diffusion_round22.sh'
-      - 'scripts/run_agda29_parallel_check.sh'
-      - '.github/workflows/ns-luo-claim-corpus-highest-alpha-round24.yml'
   pull_request:
     branches:
       - 'agent/ns-luo-clay-contract-round23'
@@ -29,7 +18,7 @@ on:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:
