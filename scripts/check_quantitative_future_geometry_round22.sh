@@ -41,9 +41,6 @@ FILES=(
 for f in "${FILES[@]}"; do
   test -s "$f"
 
-  # Scan source lines (not ordinary -- comments) for explicit trust escapes or
-  # unsolved holes.  This intentionally avoids rejecting mathematical prose
-  # containing words such as "unsafe" or punctuation such as question marks.
   if grep -vE '^[[:space:]]*--' "$f" \
       | grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|\{!!\}|--allow-unsolved-metas|primTrustMe'; then
     echo "fail-closed scan rejected $f" >&2
@@ -52,15 +49,15 @@ for f in "${FILES[@]}"; do
 done
 
 # Stochastic chemistry / committor.
-grep -q 'committorHarmonic' DASHI/Biology/Physical/FiniteStochasticReactionCommittorExact.agda
-grep -q 'generatorCommittorHarmonic' DASHI/Biology/Physical/FiniteChemicalMasterGeneratorExact.agda
+grep -q 'committorBackwardHarmonic' DASHI/Biology/Physical/FiniteStochasticReactionCommittorExact.agda
+grep -q 'committorGeneratorHarmonic' DASHI/Biology/Physical/FiniteChemicalMasterGeneratorExact.agda
 grep -q 'multiplicativeFluctuationRelation' DASHI/Biology/Physical/FiniteFluctuationRelationExact.agda
 grep -q 'sameTargetLawDoesNotDetermineHistory' DASHI/Biology/Physical/CommittorConsumerFutureStatisticExact.agda
 
 # Electrodiffusion / active energy / basin calibration.
 grep -q 'transportConservesAmount' DASHI/Biology/Physical/FiniteElectrodiffusiveMovingBoundaryExact.agda
 grep -q 'passiveDissipationLowersStoredEnergy' DASHI/Biology/Physical/FiniteElectrodiffusiveMovingBoundaryExact.agda
-grep -q 'passiveTransportLowersFreeEnergy' DASHI/Biology/Physical/FinitePNPFreeEnergyDissipationExact.agda
+grep -q 'passiveElectrodiffusionStrictlyDissipates' DASHI/Biology/Physical/FinitePNPFreeEnergyDissipationExact.agda
 grep -q 'strongPulseIsOneStepCostOptimal' DASHI/Biology/Physical/FiniteMorphogeneticBasinControlExact.agda
 grep -q 'parameterSweepSuccessfulCount' DASHI/Biology/Physical/PlanarianControlCalibrationExact.agda
 grep -q 'idealRiseTimesTurnIsPitch' DASHI/Biology/Physical/BDNACalibratedHelicalGeometryExact.agda
