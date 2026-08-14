@@ -17,6 +17,7 @@ import Data.Integer.Base as Int
 open import Data.Rational.Tactic.RingSolver using (solve)
 
 import DASHI.Physics.Closure.NSTriadKNComCommonHatSupportLeafRound58 as Hat
+import DASHI.Physics.Closure.NSTriadKNComDyadicHatWidthOneRound46Exact as HatWidth
 
 sameShellTarget adjacentShellTarget : ℚ
 sameShellTarget = Int.+ 17 / 64
@@ -52,3 +53,12 @@ record SameAdjacentNormalizedFibreMassBounds
       pairProduct realization (suc q) q ≤ adjacentShellTarget
 
 open SameAdjacentNormalizedFibreMassBounds public
+
+normalizedActivePairWithinOne :
+  {support : Hat.PhysicalOddPQCommonHatIdentification}
+  (realization : PhysicalNormalizedOddPQGramRealization support) →
+  ∀ q r →
+  Hat.supportActive support q r ≡ true →
+  HatWidth.WithinOne q r
+normalizedActivePairWithinOne {support = support} realization q r active =
+  Hat.commonHatWidthOne support q r active
