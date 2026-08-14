@@ -2,6 +2,8 @@ module DASHI.Core.GeneralResidualFibreCardinalityExact where
 
 open import DASHI.Core.Prelude
 open import Data.Fin.Base using (Fin)
+open import Data.Fin.Properties using (_≟_)
+open import Relation.Nullary.Decidable.Core using (yes; no)
 
 import DASHI.Core.ResidualFibreLowerBoundExact as Lower
 
@@ -45,20 +47,8 @@ residualInjectionFromFutureDistinctFibre :
     (fibre : FiniteFutureDistinctFibre k FutureEq coarsen) →
   Injective (λ index → residual (representative fibre index))
 residualInjectionFromFutureDistinctFibre safe fibre {left} {right} residualEqual =
-  equalOrContradiction left right
+  equalOrContradiction left right residualEqual
   where
-    sameCoarse :
-      coarsen (representative fibre left)
-      ≡ coarsen (representative fibre right)
-    sameCoarse =
-      trans
-        (inSameFibre fibre left)
-        (sym (inSameFibre fibre right))
-
-    futureEquivalent :
-      FutureEq (representative fibre left) (representative fibre right)
-    futureEquivalent = Lower.pairKernelFutureSafe safe sameCoarse residualEqual
-
     equalOrContradiction :
       (i j : Fin k) →
       residual (representative fibre i) ≡ residual (representative fibre j) →
