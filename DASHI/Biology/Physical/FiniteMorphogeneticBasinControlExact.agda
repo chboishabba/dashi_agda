@@ -2,21 +2,11 @@ module DASHI.Biology.Physical.FiniteMorphogeneticBasinControlExact where
 
 ------------------------------------------------------------------------
 -- Finite quantitative upgrade of GoalErrorDescentControllerExact.
---
--- The purpose is to make basin membership, reachability, intervention cost,
--- robustness depth and target-channel capacity explicit before any empirical
--- continuous-state calibration is supplied.  It is not a claim that a real
--- organ has four discrete states or that real control energy is measured by
--- this Nat cost.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
 
 import DASHI.Biology.Physical.GoalErrorDescentControllerExact as Descent
-
-------------------------------------------------------------------------
--- Basin geometry.
-------------------------------------------------------------------------
 
 data BasinState : Set where
   failed far near target : BasinState
@@ -42,7 +32,6 @@ targetFixed = refl
 failedOutsidePassiveBasin : repair2 failed ≢ target
 failedOutsidePassiveBasin ()
 
--- Number of certified passive steps to target in this finite regression.
 robustnessDepth : BasinState → Nat
 robustnessDepth target = 0
 robustnessDepth near = 1
@@ -51,10 +40,6 @@ robustnessDepth failed = 3
 
 nearMoreRobustThanFar : robustnessDepth near < robustnessDepth far
 nearMoreRobustThanFar = s≤s z≤n
-
-------------------------------------------------------------------------
--- Controlled reachability and exact minimal one-step intervention cost.
-------------------------------------------------------------------------
 
 data Intervention : Set where
   noControl mildPulse strongPulse : Intervention
@@ -90,19 +75,14 @@ strongTargeting = oneStepTargeting refl
 
 oneStepTargetingCostsAtLeastTwo :
   (u : Intervention) → OneStepTargeting u → 2 ≤ controlCost u
-oneStepTargetingCostsAtLeastTwo noControl ()
-oneStepTargetingCostsAtLeastTwo mildPulse ()
+oneStepTargetingCostsAtLeastTwo noControl (oneStepTargeting ())
+oneStepTargetingCostsAtLeastTwo mildPulse (oneStepTargeting ())
 oneStepTargetingCostsAtLeastTwo strongPulse p = ≤-refl
 
 strongPulseIsOneStepCostOptimal :
   (u : Intervention) → OneStepTargeting u →
   controlCost strongPulse ≤ controlCost u
 strongPulseIsOneStepCostOptimal = oneStepTargetingCostsAtLeastTwo
-
-------------------------------------------------------------------------
--- Two mild actions cost the same as one strong action but traverse a distinct
--- path.  Endpoint competence therefore does not identify microscopic policy.
-------------------------------------------------------------------------
 
 controlledTwice : Intervention → BasinState → BasinState
 controlledTwice u x = controlledStep u (controlledStep u x)
@@ -113,12 +93,6 @@ twoMildReachTarget = refl
 sameNominalCostDifferentControlPath :
   controlCost strongPulse ≡ controlCost mildPulse + controlCost mildPulse
 sameNominalCostDifferentControlPath = refl
-
-------------------------------------------------------------------------
--- Target-channel capacity: four explicitly distinguishable target basins have
--- an exact two-bit fixed-width code.  This is a lower-level finite capacity
--- regression, complementary to the existing 3-bit/eight-target theorem.
-------------------------------------------------------------------------
 
 data TargetBasin : Set where
   hand foot eye tail : TargetBasin
@@ -148,12 +122,6 @@ targetCodeExact hand = refl
 targetCodeExact foot = refl
 targetCodeExact eye = refl
 targetCodeExact tail = refl
-
-------------------------------------------------------------------------
--- Empirical calibration boundary.  Real basin geometry should eventually
--- replace these finite carriers with measured latent states, intervention
--- costs and success probabilities/committors.
-------------------------------------------------------------------------
 
 record BasinCalibrationInterface : Set₁ where
   field
