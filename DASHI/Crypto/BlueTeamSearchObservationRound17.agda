@@ -18,6 +18,7 @@ import DASHI.Crypto.BlueTeamAdversaryClosureRound16
 import DASHI.Crypto.MLKEMNTTDataflowCouplingExact
 import DASHI.Crypto.MLKEMNTTPriorCutNoGoExact
 import DASHI.Crypto.MLKEMNTTParityBlockPriorExact
+import DASHI.Crypto.MLKEMNTTCombinedCouplingConnectivityExact
 
 -- Observation acquisition and protocol-visible split surfaces.
 import DASHI.Crypto.ObservationAcquisitionCostExact
