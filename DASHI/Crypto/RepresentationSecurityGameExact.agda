@@ -82,16 +82,23 @@ fasterDoesNotMeanSafer :
   × worstObservationGain conservative ≡ 3
 fasterDoesNotMeanSafer = refl , (refl , (refl , refl))
 
+------------------------------------------------------------------------
+-- Claim boundary.  These Bool fields prevent the finite accounting regression
+-- from being promoted into a universal implementation theorem.
+------------------------------------------------------------------------
+
 record RepresentationSecurityBoundary : Set where
   constructor representationSecurityBoundary
   field
-    transitionOptimalImplIsAutomaticallyLeakageOptimal : Set
-    observationGainEqualsInformationBits : Set
+    finiteMinimaxRegressionIsUniversalOptimalityTheorem : Bool
+    finiteMinimaxRegressionIsUniversalOptimalityTheoremIsFalse :
+      finiteMinimaxRegressionIsUniversalOptimalityTheorem ≡ false
+    smallerHammingMovementIsAlwaysSafer : Bool
+    smallerHammingMovementIsAlwaysSaferIsFalse :
+      smallerHammingMovementIsAlwaysSafer ≡ false
 
 open RepresentationSecurityBoundary public
 
 canonicalRepresentationSecurityBoundary : RepresentationSecurityBoundary
 canonicalRepresentationSecurityBoundary =
-  representationSecurityBoundary
-    (transitionCost fastLocal ≡ transitionCost conservative)
-    (worstObservationGain fastLocal ≡ worstObservationGain conservative)
+  representationSecurityBoundary false refl false refl
