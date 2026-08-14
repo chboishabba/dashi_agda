@@ -272,6 +272,6 @@ c3CubeDirectConvolutionTheorem f g
 directEqualsSpectralConvolution : (f g : F.CubeSignal) →
   convolution3 f g ≡ F.spectralConvolution f g
 directEqualsSpectralConvolution f g =
-  sym (trans
+  trans
+    (sym (F.cubeFourierInversion (convolution3 f g)))
     (cong F.inverseFourier27 (c3CubeDirectConvolutionTheorem f g))
-    (F.cubeFourierInversion (convolution3 f g)))
