@@ -22,7 +22,7 @@ import DASHI.Crypto.FiniteMLWEVectorLabExact as Lab
 import DASHI.Crypto.FiniteMLWEPriorScoreSearchRegressionExact as LabSearch
 import DASHI.Crypto.KeyConfirmationObservationRefinementExact as Confirm
 import DASHI.Crypto.ObservationAcquisitionCostExact as Acquisition
-import DASHI.Crypto.AlgorithmRelativeRecoveryCostExact as Recovery
+import DASHI.Crypto.BlueTeamAdversaryObservationExact as Observation
 
 labConfirmationOutcome : Lab.HiddenState → Bool → Bool
 labConfirmationOutcome hidden presented =
@@ -49,6 +49,9 @@ labConfirmationSplit =
   different : true ≡ false → ⊥
   different ()
 
+labConfirmationIsHiddenDependent :
+  Observation.HiddenDependentSplit
+    (Confirm.asAdversarySystem labConfirmationSystem)
 labConfirmationIsHiddenDependent =
   Confirm.confirmationSplitGivesHiddenDependentObservation labConfirmationSplit
 
