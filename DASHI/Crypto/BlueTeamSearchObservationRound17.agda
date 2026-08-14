@@ -8,8 +8,9 @@ module DASHI.Crypto.BlueTeamSearchObservationRound17 where
 --   A. transported MLWE/NTT prior geometry and reconciliation;
 --   B. hidden-dependent observation refinement and net acquisition value.
 --
--- The tranche deliberately proves structural/cost statements rather than
--- promoting them into an ML-KEM break or a security proof.
+-- Round 17 now adds the third coordinate exposed by the future-quotient/Gray
+-- thread: candidate fibres carry a transition/search geometry, so equal rate or
+-- equal cardinality does not imply equal recovery cost.
 ------------------------------------------------------------------------
 
 import DASHI.Crypto.BlueTeamAdversaryClosureRound16
@@ -27,6 +28,13 @@ import DASHI.Crypto.KeyConfirmationObservationRefinementExact
 import DASHI.Crypto.MLKEMImplicitRejectProtocolObservationExact
 import DASHI.Crypto.MLKEMImplicitRejectTimingCompositionExact
 import DASHI.Crypto.FiniteMLWEConfirmationObservationExact
+
+-- Protected-label transition geometry / representation geometry.
+import DASHI.Crypto.ProtectedLabelSearchGeometryExact
+import DASHI.Crypto.GrayPathTransitionOptimalExact
+import DASHI.Crypto.FiniteMLWETransitionGeometryExact
+import DASHI.Crypto.FiniteGuessingProbabilityExact
+import DASHI.Crypto.RepresentationLeakageGeometryExact
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -52,9 +60,20 @@ record Round17ClaimBoundary : Set where
     connectedNTTGraphRulesOutConditionalSearch : Bool
     connectedNTTGraphRulesOutConditionalSearchIsFalse :
       connectedNTTGraphRulesOutConditionalSearch ≡ false
+    equalRateMeansEqualSearchGeometry : Bool
+    equalRateMeansEqualSearchGeometryIsFalse :
+      equalRateMeansEqualSearchGeometry ≡ false
+    statisticalGainMeansSearchCostGain : Bool
+    statisticalGainMeansSearchCostGainIsFalse :
+      statisticalGainMeansSearchCostGain ≡ false
+    betterTransitionGeometryMeansLessPhysicalLeakage : Bool
+    betterTransitionGeometryMeansLessPhysicalLeakageIsFalse :
+      betterTransitionGeometryMeansLessPhysicalLeakage ≡ false
 
 open Round17ClaimBoundary public
 
 canonicalRound17ClaimBoundary : Round17ClaimBoundary
 canonicalRound17ClaimBoundary =
-  round17ClaimBoundary false refl false refl false refl false refl false refl false refl
+  round17ClaimBoundary
+    false refl false refl false refl false refl false refl false refl
+    false refl false refl false refl
