@@ -60,9 +60,7 @@ oneHot Wave.positiveZero = basis2
 oneHot Wave.positiveOne = basis3
 
 ------------------------------------------------------------------------
--- State pushforward matrix for
---   -1 -> -0 -> +0 -> +1 -> +1.
--- In column-vector form the matrix has columns e1,e2,e3,e3.
+-- State pushforward matrix for -1 -> -0 -> +0 -> +1 -> +1.
 ------------------------------------------------------------------------
 
 pushWave : Vec4 → Vec4
@@ -90,9 +88,7 @@ pushWaveHomogeneous scalar (vec4 a b c d) =
   vec4PointwiseEqual solve-∀ solve-∀ solve-∀ solve-∀
 
 ------------------------------------------------------------------------
--- Observable pullback (Koopman matrix):
---   K f(x) = f(waveStep x).
--- Thus [a,b,c,d] -> [b,c,d,d].
+-- Observable pullback (Koopman matrix): K f(x) = f(waveStep x).
 ------------------------------------------------------------------------
 
 pullWave : Vec4 → Vec4
@@ -138,10 +134,8 @@ pushPullDuality : (stateMass observable : Vec4) →
 pushPullDuality (vec4 a b c d) (vec4 e f g h) = solve-∀
 
 ------------------------------------------------------------------------
--- The four canonical indicator coordinates are independent in the strongest
--- coordinatewise sense: a linear combination of the four basis vectors is
--- literally the coefficient vector.  Hence zero combination exposes every
--- coefficient as zero.
+-- Indicator-basis independence, stated pointwise to avoid relying on the
+-- definitional normalization behavior of rational multiplication by 0/1.
 ------------------------------------------------------------------------
 
 linearCombinationOfBasis : ℚ → ℚ → ℚ → ℚ → Vec4
@@ -149,9 +143,10 @@ linearCombinationOfBasis a b c d =
   scaleV a basis0 +V
   (scaleV b basis1 +V (scaleV c basis2 +V scaleV d basis3))
 
-basisCombinationIsCoefficientVector : (a b c d : ℚ) →
-  linearCombinationOfBasis a b c d ≡ vec4 a b c d
-basisCombinationIsCoefficientVector a b c d = refl
+basisCombinationCoordinates : (a b c d : ℚ) →
+  Vec4PointwiseEqual (linearCombinationOfBasis a b c d) (vec4 a b c d)
+basisCombinationCoordinates a b c d =
+  vec4PointwiseEqual solve-∀ solve-∀ solve-∀ solve-∀
 
 record CoefficientsZero (a b c d : ℚ) : Set where
   constructor coefficientsZero
@@ -164,8 +159,20 @@ record CoefficientsZero (a b c d : ℚ) : Set where
 basisIndependent : (a b c d : ℚ) →
   linearCombinationOfBasis a b c d ≡ zeroV →
   CoefficientsZero a b c d
-basisIndependent a b c d refl =
-  coefficientsZero refl refl refl refl
+basisIndependent a b c d combinationZero =
+  coefficientsZero
+    (trans
+      (sym (equal0 (basisCombinationCoordinates a b c d)))
+      (cong x0 combinationZero))
+    (trans
+      (sym (equal1 (basisCombinationCoordinates a b c d)))
+      (cong x1 combinationZero))
+    (trans
+      (sym (equal2 (basisCombinationCoordinates a b c d)))
+      (cong x2 combinationZero))
+    (trans
+      (sym (equal3 (basisCombinationCoordinates a b c d)))
+      (cong x3 combinationZero))
 
 ------------------------------------------------------------------------
 -- Boundary: this proves a natural exact 4D indicator/full-observable realization
