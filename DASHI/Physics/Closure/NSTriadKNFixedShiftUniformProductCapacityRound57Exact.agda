@@ -36,9 +36,13 @@ module DASHI.Physics.Closure.NSTriadKNFixedShiftUniformProductCapacityRound57Exa
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using ([]; _∷_)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base using (ℚ; 0ℚ; _-_; _*_; _≤_; _<_ ; nonNegative)
+open import Data.Rational.Base using
+  (ℚ; 0ℚ; _+_; _-_; _*_; _≤_; _<_; nonNegative)
 import Data.Rational.Properties as ℚP
+open import Data.Rational.Tactic.RingSolver using (solve)
+open import Relation.Binary.PropositionalEquality using (subst)
 
 import DASHI.Physics.Closure.NSTriadKNAdmissibleOwnerTaxLanguageRound28Exact as Owner
 import DASHI.Physics.Closure.NSTriadKNNineOwnerCriticalAbsorptionRound28Exact as Nine
@@ -123,7 +127,7 @@ uniformCoefficientPlusDataFitsFullCorrectionHeadroom
     addA = ℚP.+-monoʳ-≤ A productFits
 
     endpoint : A + (R - A) ≡ R
-    endpoint = ℚP.+-∸ A R
+    endpoint = solve (A ∷ R ∷ [])
   in
   subst (λ right → A + Bx ≤ right) endpoint addA
 
