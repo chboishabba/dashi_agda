@@ -23,7 +23,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoFiniteEightPointSixThreeHolderExact whe
 -- steps are diagonal <= product of sums and sum of squares <= square of sum.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Product.Base using (_×_; _,_; proj₁; proj₂)
 import Data.Integer.Base as Int
@@ -32,7 +32,7 @@ open import Data.Rational.Base using
 import Data.Rational.Properties as ℚₚ
 open ℚₚ using (_≤?_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
 open import Relation.Nullary.Decidable.Core using (toWitness)
 
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
@@ -54,6 +54,95 @@ sixtyFourNonnegative = toWitness {a? = 0ℚ ≤? sixtyFour} _
 
 cube : ℚ → ℚ
 cube value = value * value * value
+
+cubeMeaning :
+  (value : ℚ) → cube value ≡ value * value * value
+cubeMeaning value = refl
+
+threeMeaning :
+  three ≡ Int.+ 3 / 1
+threeMeaning = refl
+
+fourMeaning :
+  four ≡ Int.+ 4 / 1
+fourMeaning = refl
+
+sixteenMeaning :
+  sixteen ≡ Int.+ 16 / 1
+sixteenMeaning = refl
+
+sixtyFourMeaning :
+  sixtyFour ≡ Int.+ 64 / 1
+sixtyFourMeaning = refl
+
+fourPairEndpoint :
+  (x y z w : ℚ) →
+  four * (four * (x + y) + four * (z + w))
+    ≡ sixteen * (x + y + z + w)
+fourPairEndpoint x y z w
+  rewrite fourMeaning | sixteenMeaning
+  = solve (x ∷ y ∷ z ∷ w ∷ [])
+
+cubeFourSumReassociate :
+  (a b c d : ℚ) →
+  cube (a + b + c + d) ≡ cube ((a + b) + (c + d))
+cubeFourSumReassociate a b c d
+  rewrite cubeMeaning (a + b + c + d)
+        | cubeMeaning ((a + b) + (c + d))
+  = solve (a ∷ b ∷ c ∷ d ∷ [])
+
+eightEndpoint :
+  (a b c d e f g h : ℚ) →
+  four * (sixteen * (a + b + c + d) + sixteen * (e + f + g + h))
+    ≡ sixtyFour * (a + b + c + d + e + f + g + h)
+eightEndpoint a b c d e f g h
+  rewrite fourMeaning | sixteenMeaning | sixtyFourMeaning
+  = solve (a ∷ b ∷ c ∷ d ∷ e ∷ f ∷ g ∷ h ∷ [])
+
+cubeEightSumReassociate :
+  (a b c d e f g h : ℚ) →
+  cube (a + b + c + d + e + f + g + h)
+    ≡ cube ((a + b + c + d) + (e + f + g + h))
+cubeEightSumReassociate a b c d e f g h
+  rewrite cubeMeaning (a + b + c + d + e + f + g + h)
+        | cubeMeaning ((a + b + c + d) + (e + f + g + h))
+  = solve (a ∷ b ∷ c ∷ d ∷ e ∷ f ∷ g ∷ h ∷ [])
+
+l2SquareMeaning :
+  (value : ℚ) → L2.square value ≡ value * value
+l2SquareMeaning value = refl
+
+squareAddIdentity :
+  (value sumValue : ℚ) →
+  L2.square value + L2.square sumValue
+    + (value * sumValue + value * sumValue)
+  ≡ L2.square (value + sumValue)
+squareAddIdentity value sumValue
+  rewrite l2SquareMeaning value
+        | l2SquareMeaning sumValue
+        | l2SquareMeaning (value + sumValue)
+  = solve (value ∷ sumValue ∷ [])
+
+pairProductDistribute :
+  (left right leftRest rightRest : ℚ) →
+  left * right + leftRest * rightRest
+    + (left * rightRest + leftRest * right)
+  ≡ (left + leftRest) * (right + rightRest)
+pairProductDistribute left right leftRest rightRest =
+  solve (left ∷ right ∷ leftRest ∷ rightRest ∷ [])
+
+cubePairIdentityExpanded :
+  (left right : ℚ) →
+  cube (left + right)
+    + three * (left + right) * ((left - right) * (left - right))
+  ≡ four * (cube left + cube right)
+cubePairIdentityExpanded left right
+  rewrite cubeMeaning (left + right)
+        | cubeMeaning left
+        | cubeMeaning right
+        | threeMeaning
+        | fourMeaning
+  = solve (left ∷ right ∷ [])
 
 sixth : ℚ → ℚ
 sixth value = cube value * cube value
@@ -127,11 +216,22 @@ cubePairBound left right leftNN rightNN =
         (ℚₚ.+-identityʳ (cube (left + right)))
         (ℚₚ.+-monoʳ-≤ (cube (left + right)) defectNN)
 
+    squareMeaning :
+      L2.square (left - right) ≡ (left - right) * (left - right)
+    squareMeaning = refl
+
     identity :
       cube (left + right)
         + three * (left + right) * L2.square (left - right)
       ≡ four * (cube left + cube right)
-    identity = solve (left ∷ right ∷ [])
+    identity =
+      subst
+        (λ squareValue →
+          cube (left + right)
+            + three * (left + right) * squareValue
+          ≡ four * (cube left + cube right))
+        (sym squareMeaning)
+        (cubePairIdentityExpanded left right)
   in
   subst (λ upper → cube (left + right) ≤ upper) identity addDefect
 
@@ -160,11 +260,11 @@ fourValueCubeBound a b c d aNN bNN cNN dNN =
         * (four * (cube a + cube b)
           + four * (cube c + cube d))
       ≡ sixteen * (cube a + cube b + cube c + cube d)
-    endpoint = solve (cube a ∷ cube b ∷ cube c ∷ cube d ∷ [])
+    endpoint = fourPairEndpoint (cube a) (cube b) (cube c) (cube d)
 
     reassociate :
       cube (a + b + c + d) ≡ cube ((a + b) + (c + d))
-    reassociate = solve (a ∷ b ∷ c ∷ d ∷ [])
+    reassociate = cubeFourSumReassociate a b c d
   in
   subst
     (λ lower →
@@ -216,14 +316,14 @@ eightValueCubeBound a b c d e f g h
         * (cube a + cube b + cube c + cube d
           + cube e + cube f + cube g + cube h)
     endpoint =
-      solve
-        ( cube a ∷ cube b ∷ cube c ∷ cube d
-        ∷ cube e ∷ cube f ∷ cube g ∷ cube h ∷ [])
+      eightEndpoint
+        (cube a) (cube b) (cube c) (cube d)
+        (cube e) (cube f) (cube g) (cube h)
 
     reassociate :
       cube (a + b + c + d + e + f + g + h)
       ≡ cube (left4 + right4)
-    reassociate = solve (a ∷ b ∷ c ∷ d ∷ e ∷ f ∷ g ∷ h ∷ [])
+    reassociate = cubeEightSumReassociate a b c d e f g h
   in
   subst
     (λ lower →
@@ -303,7 +403,7 @@ squaresBelowSquareSum
       L2.square value + L2.square (sum values)
         + (value * sum values + value * sum values)
       ≡ L2.square (value + sum values)
-    endpoint = solve (value ∷ sum values ∷ [])
+    endpoint = squareAddIdentity value (sum values)
   in
   ℚₚ.≤-trans
     first
@@ -328,6 +428,33 @@ pairDiagonal : List Pair → ℚ
 pairDiagonal [] = 0ℚ
 pairDiagonal ((left , right) ∷ rest) =
   left * right + pairDiagonal rest
+
+eightPairDiagonalMeaning :
+  (x0 y0 x1 y1 x2 y2 x3 y3 x4 y4 x5 y5 x6 y6 x7 y7 : ℚ) →
+  x0 * y0 + x1 * y1 + x2 * y2 + x3 * y3
+    + x4 * y4 + x5 * y5 + x6 * y6 + x7 * y7
+  ≡ pairDiagonal
+      ( (x0 , y0) ∷ (x1 , y1) ∷ (x2 , y2) ∷ (x3 , y3)
+      ∷ (x4 , y4) ∷ (x5 , y5) ∷ (x6 , y6) ∷ (x7 , y7) ∷ [])
+eightPairDiagonalMeaning x0 y0 x1 y1 x2 y2 x3 y3
+    x4 y4 x5 y5 x6 y6 x7 y7 =
+  let
+    expanded :
+      x0 * y0 + x1 * y1 + x2 * y2 + x3 * y3
+        + x4 * y4 + x5 * y5 + x6 * y6 + x7 * y7
+      ≡ x0 * y0
+        + (x1 * y1
+          + (x2 * y2
+            + (x3 * y3
+              + (x4 * y4
+                + (x5 * y5
+                  + (x6 * y6
+                    + (x7 * y7 + pairDiagonal [])))))))
+    expanded = solve
+      ( x0 ∷ y0 ∷ x1 ∷ y1 ∷ x2 ∷ y2 ∷ x3 ∷ y3
+      ∷ x4 ∷ y4 ∷ x5 ∷ y5 ∷ x6 ∷ y6 ∷ x7 ∷ y7 ∷ [])
+  in
+  trans expanded refl
 
 data NonnegativePairs : List Pair → Set where
   nnp[] : NonnegativePairs []
@@ -403,8 +530,9 @@ pairDiagonalBelowProduct
       left * right + pairSumLeft rest * pairSumRight rest
         + (left * pairSumRight rest + pairSumLeft rest * right)
       ≡ (left + pairSumLeft rest) * (right + pairSumRight rest)
-    endpoint = solve
-      (left ∷ right ∷ pairSumLeft rest ∷ pairSumRight rest ∷ [])
+    endpoint =
+      pairProductDistribute
+        left right (pairSumLeft rest) (pairSumRight rest)
   in
   ℚₚ.≤-trans
     first
@@ -440,6 +568,26 @@ open EightSixThreeData public
 
 productSquare : ℚ → ℚ → ℚ
 productSquare a b = L2.square (a * b)
+
+productSquareMeaning :
+  (a b : ℚ) → productSquare a b ≡ L2.square (a * b)
+productSquareMeaning a b = refl
+
+sixthMeaning :
+  (value : ℚ) → sixth value ≡ cube value * cube value
+sixthMeaning value = refl
+
+cubeProductPairMeaning :
+  (a b : ℚ) → cube (productSquare a b) ≡ sixth a * sixth b
+cubeProductPairMeaning a b
+  rewrite productSquareMeaning a b
+        | cubeMeaning (L2.square (a * b))
+        | l2SquareMeaning (a * b)
+        | cubeMeaning a
+        | cubeMeaning b
+        | sixthMeaning a
+        | sixthMeaning b
+  = solve (a ∷ b ∷ [])
 
 productL2Squared : EightSixThreeData → ℚ
 productL2Squared dataSet =
@@ -525,7 +673,7 @@ sixthPairsNonnegative dataSet =
   (nnp∷
     (sixthNonnegative (a7 dataSet) (a7NN dataSet))
     (sixthNonnegative (b7 dataSet) (b7NN dataSet))
-    nnp[]))))))))
+    nnp[])))))))
 
 cubeProductSumMeaning :
   (dataSet : EightSixThreeData) →
@@ -538,20 +686,42 @@ cubeProductSumMeaning :
     + cube (productSquare (a6 dataSet) (b6 dataSet))
     + cube (productSquare (a7 dataSet) (b7 dataSet))
   ≡ pairDiagonal (sixthPairs dataSet)
-cubeProductSumMeaning dataSet =
-  solve
-    ( a0 dataSet ∷ a1 dataSet ∷ a2 dataSet ∷ a3 dataSet
-    ∷ a4 dataSet ∷ a5 dataSet ∷ a6 dataSet ∷ a7 dataSet
-    ∷ b0 dataSet ∷ b1 dataSet ∷ b2 dataSet ∷ b3 dataSet
-    ∷ b4 dataSet ∷ b5 dataSet ∷ b6 dataSet ∷ b7 dataSet ∷ [])
+cubeProductSumMeaning dataSet
+  rewrite cubeProductPairMeaning (a0 dataSet) (b0 dataSet)
+        | cubeProductPairMeaning (a1 dataSet) (b1 dataSet)
+        | cubeProductPairMeaning (a2 dataSet) (b2 dataSet)
+        | cubeProductPairMeaning (a3 dataSet) (b3 dataSet)
+        | cubeProductPairMeaning (a4 dataSet) (b4 dataSet)
+        | cubeProductPairMeaning (a5 dataSet) (b5 dataSet)
+        | cubeProductPairMeaning (a6 dataSet) (b6 dataSet)
+        | cubeProductPairMeaning (a7 dataSet) (b7 dataSet)
+  = eightPairDiagonalMeaning
+      (sixth (a0 dataSet)) (sixth (b0 dataSet))
+      (sixth (a1 dataSet)) (sixth (b1 dataSet))
+      (sixth (a2 dataSet)) (sixth (b2 dataSet))
+      (sixth (a3 dataSet)) (sixth (b3 dataSet))
+      (sixth (a4 dataSet)) (sixth (b4 dataSet))
+      (sixth (a5 dataSet)) (sixth (b5 dataSet))
+      (sixth (a6 dataSet)) (sixth (b6 dataSet))
+      (sixth (a7 dataSet)) (sixth (b7 dataSet))
 
 pairLeftMeaning :
   (dataSet : EightSixThreeData) →
   pairSumLeft (sixthPairs dataSet) ≡ lowSixthMass dataSet
 pairLeftMeaning dataSet =
-  solve
-    ( a0 dataSet ∷ a1 dataSet ∷ a2 dataSet ∷ a3 dataSet
-    ∷ a4 dataSet ∷ a5 dataSet ∷ a6 dataSet ∷ a7 dataSet ∷ [])
+  let
+    reassociate :
+      (x0 x1 x2 x3 x4 x5 x6 x7 : ℚ) →
+      x0 + (x1 + (x2 + (x3 + (x4 + (x5 + (x6 + x7))))))
+      ≡ x0 + x1 + x2 + x3 + x4 + x5 + x6 + x7
+    reassociate x0 x1 x2 x3 x4 x5 x6 x7 =
+      solve (x0 ∷ x1 ∷ x2 ∷ x3 ∷ x4 ∷ x5 ∷ x6 ∷ x7 ∷ [])
+  in
+  reassociate
+    (sixth (a0 dataSet)) (sixth (a1 dataSet))
+    (sixth (a2 dataSet)) (sixth (a3 dataSet))
+    (sixth (a4 dataSet)) (sixth (a5 dataSet))
+    (sixth (a6 dataSet)) (sixth (a7 dataSet))
 
 pairRightMeaning :
   (dataSet : EightSixThreeData) →
