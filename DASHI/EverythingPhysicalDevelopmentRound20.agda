@@ -12,8 +12,11 @@ import DASHI.Biology.Physical.ElectrochemicalMembranePowerExact
 import DASHI.Biology.Physical.SIBioelectricNetworkAdapterExact
 import DASHI.Biology.Physical.MechanochemicalMorphogenesisSIExact
 import DASHI.Biology.Physical.DevelopmentalGoalFactorizationExact
+import DASHI.Biology.Physical.GenomePhysicalParameterCompilerExact
 import DASHI.Biology.Physical.DevelopmentalHiddenStateFutureDefectExact
 import DASHI.Biology.Physical.PadicPhysicalParameterProjectionExact
+import DASHI.Biology.Physical.Harmonic369HelixLiftExact
 import DASHI.Biology.Physical.PhysicalOriginsLadderExact
 import DASHI.Biology.Physical.CellBrainTransducerBridgeExact
+import DASHI.Biology.Physical.DimensionalPhysicalDevelopmentalStateExact
 import DASHI.Biology.Physical.PhysicalDevelopmentalOperatorSystemExact
