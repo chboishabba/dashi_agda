@@ -19,6 +19,7 @@ import DASHI.Crypto.MLKEMNTTDataflowCouplingExact
 import DASHI.Crypto.MLKEMNTTPriorCutNoGoExact
 import DASHI.Crypto.MLKEMNTTParityBlockPriorExact
 import DASHI.Crypto.MLKEMNTTCombinedCouplingConnectivityExact
+import DASHI.Crypto.ConditionalReconciliationSearchExact
 
 -- Observation acquisition and protocol-visible split surfaces.
 import DASHI.Crypto.ObservationAcquisitionCostExact
@@ -48,9 +49,12 @@ record Round17ClaimBoundary : Set where
     candidateShrinkAloneIsNetAttackProgress : Bool
     candidateShrinkAloneIsNetAttackProgressIsFalse :
       candidateShrinkAloneIsNetAttackProgress ≡ false
+    connectedNTTGraphRulesOutConditionalSearch : Bool
+    connectedNTTGraphRulesOutConditionalSearchIsFalse :
+      connectedNTTGraphRulesOutConditionalSearch ≡ false
 
 open Round17ClaimBoundary public
 
 canonicalRound17ClaimBoundary : Round17ClaimBoundary
 canonicalRound17ClaimBoundary =
-  round17ClaimBoundary false refl false refl false refl false refl false refl
+  round17ClaimBoundary false refl false refl false refl false refl false refl false refl
