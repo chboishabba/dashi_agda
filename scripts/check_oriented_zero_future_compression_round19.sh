@@ -13,6 +13,8 @@ FILES=(
   DASHI/Cognition/PNF/OrientedZeroFutureQuotientExact.agda
   DASHI/Cognition/PNF/OrientedZeroCanonicalFutureExact.agda
   DASHI/Cognition/PNF/OrientedZeroPartitionRefinementExact.agda
+  DASHI/Cognition/PNF/OrientedZeroCanonicalPartitionPresentationExact.agda
+  DASHI/Cognition/PNF/OrientedZeroCertifiedCompilerExact.agda
   DASHI/Cognition/PNF/OrientedZeroBitMinimalityExact.agda
   DASHI/Cognition/PNF/OrientedZeroCeilLog2Exact.agda
   DASHI/Cognition/PNF/OrientedZeroConditionalResidualCardinalityExact.agda
@@ -23,6 +25,8 @@ FILES=(
   DASHI/Core/GeneralResidualFibreCardinalityExact.agda
   DASHI/Core/GenericFuturePartitionRefinementExact.agda
   DASHI/Core/FiniteRankedRefinementStabilizationExact.agda
+  DASHI/Core/StablePartitionCanonicalFutureBridgeExact.agda
+  DASHI/Core/CertifiedFiniteFutureQuotientCompilerExact.agda
   DASHI/Cognition/PNF/ApproximateMultimodalFutureEquivalenceExact.agda
   DASHI/Cognition/PNF/DynamicApproximateMultiResolutionErrorExact.agda
   DASHI/Cognition/PNF/SpectralGrokkingPhaseDynamicsExact.agda
@@ -43,12 +47,18 @@ grep -q 'zeroFibreSplitsUnderFutureRefinement' DASHI/Cognition/PNF/OrientedZeroF
 grep -q 'adaptiveResidualReopensExactly' DASHI/Cognition/PNF/OrientedZeroFutureQuotientExact.agda
 grep -q 'negativeZeroNotCanonicalFutureEquivalentPositiveZero' DASHI/Cognition/PNF/OrientedZeroCanonicalFutureExact.agda
 grep -q 'zeroPairSeparatedAtDepthOne' DASHI/Cognition/PNF/OrientedZeroPartitionRefinementExact.agda
+grep -q 'orientedZeroStableAtDepthOne' DASHI/Cognition/PNF/OrientedZeroCanonicalPartitionPresentationExact.agda
+grep -q 'depthOneExactlyCanonicalFuture' DASHI/Cognition/PNF/OrientedZeroCanonicalPartitionPresentationExact.agda
+grep -q 'compilerFindsDepthOne' DASHI/Cognition/PNF/OrientedZeroCertifiedCompilerExact.agda
+grep -q 'compilerReturnsCanonicalFutureExactness' DASHI/Cognition/PNF/OrientedZeroCertifiedCompilerExact.agda
+
 grep -q 'oneBitCannotEncodeFourWaveStatesExactly' DASHI/Cognition/PNF/OrientedZeroBitMinimalityExact.agda
 grep -q 'scalarPlusOneBitReopensExactly' DASHI/Cognition/PNF/OrientedZeroBitMinimalityExact.agda
 grep -q 'fourStateCeilLog2IsTwo' DASHI/Cognition/PNF/OrientedZeroCeilLog2Exact.agda
 grep -q 'zeroNeedsOneResidualBit' DASHI/Cognition/PNF/OrientedZeroConditionalResidualCardinalityExact.agda
 grep -q 'adaptiveDecodeEncodeExact' DASHI/Cognition/PNF/OrientedZeroConditionalResidualCardinalityExact.agda
 grep -q 'grayStrictlyImprovesPathDistortion' DASHI/Cognition/PNF/OrientedZeroGrayTransitionGeometryExact.agda
+grep -q 'grayStrictlyImprovesEqualRateDynamicObjective' DASHI/Cognition/PNF/OrientedZeroGrayTransitionGeometryExact.agda
 grep -q 'orientationAndProcessAdvanceCommute' DASHI/Cognition/PNF/OrientedZeroPhaseOrthogonalityExact.agda
 
 grep -q 'orientedResidualIsZeroDistortionOptimal' DASHI/Cognition/PNF/FutureRateDistortionOrientedZeroExact.agda
@@ -61,6 +71,8 @@ grep -q 'safeBitResidualRespectsCeilLog2' DASHI/Core/GeneralResidualFibreCardina
 grep -q 'refinementMonotone' DASHI/Core/GenericFuturePartitionRefinementExact.agda
 grep -q 'stablePersists' DASHI/Core/GenericFuturePartitionRefinementExact.agda
 grep -q 'rankedRefinementStabilizes' DASHI/Core/FiniteRankedRefinementStabilizationExact.agda
+grep -q 'stableRefinementExactlyCanonicalFuture' DASHI/Core/StablePartitionCanonicalFutureBridgeExact.agda
+grep -q 'compileFutureQuotient' DASHI/Core/CertifiedFiniteFutureQuotientCompilerExact.agda
 
 grep -q 'crossModalFutureDistortionBound' DASHI/Cognition/PNF/ApproximateMultimodalFutureEquivalenceExact.agda
 grep -q 'traceErrorBound' DASHI/Cognition/PNF/DynamicApproximateMultiResolutionErrorExact.agda
