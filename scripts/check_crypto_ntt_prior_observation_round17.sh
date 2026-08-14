@@ -12,6 +12,8 @@ FILES=(
   DASHI/Crypto/MLKEMNTTDataflowCouplingExact.agda
   DASHI/Crypto/MLKEMNTTPriorCutNoGoExact.agda
   DASHI/Crypto/MLKEMNTTParityBlockPriorExact.agda
+  DASHI/Crypto/MLKEMNTTCombinedCouplingConnectivityExact.agda
+  DASHI/Crypto/ConditionalReconciliationSearchExact.agda
   DASHI/Crypto/ObservationAcquisitionCostExact.agda
   DASHI/Crypto/KeyConfirmationObservationRefinementExact.agda
   DASHI/Crypto/MLKEMImplicitRejectProtocolObservationExact.agda
@@ -39,6 +41,11 @@ grep -q 'linearComponentHasNoNontrivialDisconnectedCut' DASHI/Crypto/MLKEMNTTPri
 grep -q 'targetPriorFactorsByParity' DASHI/Crypto/MLKEMNTTParityBlockPriorExact.agda
 grep -q 'mlKem1024TwoParityBlocksCoverSecret' DASHI/Crypto/MLKEMNTTParityBlockPriorExact.agda
 grep -q 'baseCaseOutput0UsesBoth' DASHI/Crypto/MLKEMNTTParityBlockPriorExact.agda
+grep -q 'allScalarCoordinatesConnectedWithinTwo' DASHI/Crypto/MLKEMNTTCombinedCouplingConnectivityExact.agda
+grep -q 'combinedCouplingHasNoNontrivialDisconnectedCut' DASHI/Crypto/MLKEMNTTCombinedCouplingConnectivityExact.agda
+grep -q 'leftCandidateGivesGlobal' DASHI/Crypto/ConditionalReconciliationSearchExact.agda
+grep -q 'conditionalThreeByFive' DASHI/Crypto/ConditionalReconciliationSearchExact.agda
+grep -q 'cartesianThreeByFive' DASHI/Crypto/ConditionalReconciliationSearchExact.agda
 grep -q 'cheapLabObservationNetGain' DASHI/Crypto/ObservationAcquisitionCostExact.agda
 grep -q 'expensiveLabObservationIsNetHarmful' DASHI/Crypto/ObservationAcquisitionCostExact.agda
 grep -q 'confirmationSplitGivesHiddenDependentObservation' DASHI/Crypto/KeyConfirmationObservationRefinementExact.agda
