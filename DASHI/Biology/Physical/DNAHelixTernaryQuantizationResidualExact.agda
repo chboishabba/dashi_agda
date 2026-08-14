@@ -14,6 +14,9 @@ open import DASHI.Core.Prelude
 import DASHI.Biology.Physical.DNAHelixDihedralExact as Helix
 import DASHI.Physics.Closure.SSPPrimeLane369DepthWheelCantorBridge as Wheel
 
+_≢_ : ∀ {A : Set} → A → A → Set
+x ≢ y = x ≡ y → ⊥
+
 Trit : Set
 Trit = Wheel.DepthWheelPhase
 
