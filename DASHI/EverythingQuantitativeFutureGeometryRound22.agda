@@ -36,6 +36,7 @@ import DASHI.Biology.Physical.Harmonic369HelixLiftExact
 ------------------------------------------------------------------------
 import DASHI.Cognition.PNF.TaskActionRepresentationGeometryExact
 import DASHI.Cognition.PNF.CyclotomicGrokkingActionLinearizationExact
+import DASHI.Cognition.PNF.GrokkingEquivarianceDefectGeometryExact
 import DASHI.Cognition.PNF.FinitePathTransitionOptimalityExact
 import DASHI.Cognition.PNF.WaveGrayLocalGlobalGeometryExact
 import DASHI.Cognition.PNF.FutureGeometryEmbeddingExact
