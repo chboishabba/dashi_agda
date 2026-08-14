@@ -12,12 +12,15 @@ module DASHI.Physics.Closure.NSTriadKNHighestAlphaRound57Exact where
 -- * one global positive fixed-shift correction cap below every shell capacity;
 -- * literal physical transport coefficients on actual output fibres;
 -- * literal hard-projector odd P/Q commutator coefficients and same-output
---   collision lists.
+--   collision lists;
+-- * exact velocity homogeneity of the raw literal Com kernel, preventing the
+--   dimensionless six-three constants from being misread as amplitude-free
+--   raw-entry estimates before normalized Gram realization.
 --
--- No physical Duhamel construction, Com fibre-mass bound, periodic kernel
--- source identification, continuum inverse-Fourier L1 theorem, or boundary
--- limiting atom is manufactured here.  All Clay/terminal promotion remains
--- fail-closed at the paper interface.
+-- No physical Duhamel construction, normalized Com Gram/fibre-mass bound,
+-- periodic kernel source identification, continuum inverse-Fourier L1 theorem,
+-- or boundary limiting atom is manufactured here.  All Clay/terminal promotion
+-- remains fail-closed at the paper interface.
 ------------------------------------------------------------------------
 
 import DASHI.Physics.Closure.NSTriadKNHighestAlphaRound55Exact
@@ -27,3 +30,4 @@ import DASHI.Physics.Closure.NSTriadKNHHBadLiteralComponentCapacityRound57Exact
 import DASHI.Physics.Closure.NSTriadKNFixedShiftUniformCorrectionCapacityRound57Exact
 import DASHI.Physics.Closure.NSTriadKNComLiteralOutputFibreKernelRound57Exact
 import DASHI.Physics.Closure.NSTriadKNComLiteralOddPQKernelRound57Exact
+import DASHI.Physics.Closure.NSTriadKNComLiteralKernelScalingRound57Exact
