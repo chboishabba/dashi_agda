@@ -5,6 +5,7 @@ import DASHI.EverythingOrientedZeroFutureCompressionRound19
 
 -- Round-20 physical biology / developmental operator tranche.
 import DASHI.Biology.Physical.SIBiologyDimensionsExact
+import DASHI.Biology.Physical.PhysicalBiologyDimensionAlgebraExact
 import DASHI.Biology.Physical.FiniteReactionDiffusionConservationExact
 import DASHI.Biology.Physical.ChemicalAffinityEntropyProductionExact
 import DASHI.Biology.Physical.CompartmentMembraneTransportExact
@@ -12,6 +13,7 @@ import DASHI.Biology.Physical.ElectrochemicalMembranePowerExact
 import DASHI.Biology.Physical.SIBioelectricNetworkAdapterExact
 import DASHI.Biology.Physical.MechanochemicalMorphogenesisSIExact
 import DASHI.Biology.Physical.DevelopmentalGoalFactorizationExact
+import DASHI.Biology.Physical.DevelopmentalGoalFamilyAttractorExact
 import DASHI.Biology.Physical.GenomePhysicalParameterCompilerExact
 import DASHI.Biology.Physical.DevelopmentalHiddenStateFutureDefectExact
 import DASHI.Biology.Physical.PadicPhysicalParameterProjectionExact
