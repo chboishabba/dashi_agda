@@ -9,7 +9,11 @@ module DASHI.Physics.Closure.NSTriadKNHighestAlphaRound57Exact where
 -- * parser-safe kernel residual split (no circular independent=0 premise);
 -- * literal generated+leakage HH-bad normalization and tail depletion test;
 -- * literal inherited-vs-generated HH-bad component headroom;
+-- * direct finite-transient HH-bad closure on those literal components, with
+--   no alpha/beta/sigma recurrence variables in the final physical target;
 -- * one global positive fixed-shift correction cap below every shell capacity;
+-- * a stronger division-free fixed-shift product capacity that removes the
+--   unconstructed critical-integral reciprocal from the actual consumer;
 -- * literal physical transport coefficients on actual output fibres;
 -- * literal hard-projector odd P/Q commutator coefficients and same-output
 --   collision lists;
@@ -27,7 +31,9 @@ import DASHI.Physics.Closure.NSTriadKNHighestAlphaRound55Exact
 import DASHI.Physics.Closure.NSTriadKNKernelLiteralResidualRound55Exact
 import DASHI.Physics.Closure.NSTriadKNHHBadLiteralNormalizedGenerationRound57Exact
 import DASHI.Physics.Closure.NSTriadKNHHBadLiteralComponentCapacityRound57Exact
+import DASHI.Physics.Closure.NSTriadKNHHBadLiteralComponentFiniteTransientRound57Exact
 import DASHI.Physics.Closure.NSTriadKNFixedShiftUniformCorrectionCapacityRound57Exact
+import DASHI.Physics.Closure.NSTriadKNFixedShiftUniformProductCapacityRound57Exact
 import DASHI.Physics.Closure.NSTriadKNComLiteralOutputFibreKernelRound57Exact
 import DASHI.Physics.Closure.NSTriadKNComLiteralOddPQKernelRound57Exact
 import DASHI.Physics.Closure.NSTriadKNComLiteralKernelScalingRound57Exact
