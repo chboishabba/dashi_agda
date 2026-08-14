@@ -71,25 +71,27 @@ composeLipschitz :
   (first : LipschitzRepresentation A B metricA metricB) →
   (second : LipschitzRepresentation B C metricB metricC) →
   LipschitzRepresentation A C metricA metricC
-composeLipschitz first second =
+composeLipschitz
+  {A = A} {B = B} {C = C}
+  {metricA = metricA} {metricB = metricB} {metricC = metricC}
+  first second =
   lipschitzRepresentation
     (λ x → encode second (encode first x))
     (constant second * constant first)
     proof
   where
-    proof : (left right : _) →
-      distance _
+    proof : (left right : A) →
+      distance metricC
         (encode second (encode first left))
         (encode second (encode first right))
-      ≤ (constant second * constant first) * distance _ left right
-    proof left right =
+      ≤ (constant second * constant first) * distance metricA left right
+    proof left right
+      rewrite *-assoc
+        (constant second) (constant first) (distance metricA left right) =
       ≤-trans
         (upperGeometryBound second (encode first left) (encode first right))
-        (≤-trans
-          (*-monoˡ-≤ (constant second)
-            (upperGeometryBound first left right))
-          (≤-reflexive (sym (*-assoc (constant second) (constant first)
-            (distance _ left right)))))
+        (*-monoˡ-≤ (constant second)
+          (upperGeometryBound first left right))
 
 ------------------------------------------------------------------------
 -- Geometry boundary: preserving one-step edges is weaker than a bi-Lipschitz
