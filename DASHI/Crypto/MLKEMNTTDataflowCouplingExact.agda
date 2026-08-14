@@ -10,14 +10,15 @@ module DASHI.Crypto.MLKEMNTTDataflowCouplingExact where
 --
 -- FIPS 203 Algorithm 9 has seven butterfly stages with lengths
 -- 128,64,32,16,8,4,2. Equation (4.12) represents one NTT polynomial as 128
--- quadratic residues; each scalar coefficient of a quadratic residue is a
+-- quadratic residues; each scalar coefficient of a *secret NTT residue* is a
 -- linear combination of one parity class of 128 source coefficients.
 --
--- This module records the exact structural consequence needed for blue-team
--- search analysis: local multiplication in T_q does not imply a local source
--- prior. Each public scalar NTT coordinate structurally sees 128 source
--- coefficients per secret polynomial, and a complete quadratic coordinate
--- pair sees all 256 coefficients of each secret polynomial.
+-- Important correction: a scalar coefficient of the PUBLIC noisy equation
+-- t-hat = A-hat o s-hat + e-hat is not restricted to one secret parity class.
+-- Algorithm 12 BaseCaseMultiply couples both local components, so either public
+-- scalar component can structurally depend on both 128-coefficient parity
+-- classes of each secret polynomial. Thus one public scalar equation can span
+-- all 256*k source secret coefficients, not merely 128*k.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -62,11 +63,7 @@ zeroIndex128 : Index128
 zeroIndex128 = index128 0 (s≤s z≤n)
 
 ------------------------------------------------------------------------
--- Source parity classes and scalar target coordinates.
---
--- Reducing f modulo X^2-gamma sends even source powers to the constant part
--- and odd source powers to the linear part. There are exactly 128 coefficients
--- in either parity class.
+-- Source parity classes and scalar SECRET-NTT target coordinates.
 ------------------------------------------------------------------------
 
 data ResidueComponent : Set where
@@ -137,51 +134,87 @@ crossComponentsDoNotShareSource i j
 crossComponentsDoNotShareSource i j
   (sharesSourceDependency (sourceCoefficient s linearPart) () _)
 
-sourceCoefficientsPerScalarNTTCoordinate : Nat
-sourceCoefficientsPerScalarNTTCoordinate = 128
+sourceCoefficientsPerSecretScalarNTTCoordinate : Nat
+sourceCoefficientsPerSecretScalarNTTCoordinate = 128
 
-sourceCoefficientsPerQuadraticNTTCoordinate : Nat
-sourceCoefficientsPerQuadraticNTTCoordinate =
-  2 * sourceCoefficientsPerScalarNTTCoordinate
+sourceCoefficientsPerSecretQuadraticNTTCoordinate : Nat
+sourceCoefficientsPerSecretQuadraticNTTCoordinate =
+  2 * sourceCoefficientsPerSecretScalarNTTCoordinate
 
-quadraticCoordinateSeesWholePolynomial :
-  sourceCoefficientsPerQuadraticNTTCoordinate ≡ 256
-quadraticCoordinateSeesWholePolynomial = refl
+secretQuadraticCoordinateSeesWholePolynomial :
+  sourceCoefficientsPerSecretQuadraticNTTCoordinate ≡ 256
+secretQuadraticCoordinateSeesWholePolynomial = refl
 
 ------------------------------------------------------------------------
--- K-PKE public-vector dependence across module dimension k.
+-- Secret representation widths versus PUBLIC equation widths.
+------------------------------------------------------------------------
+
+secretScalarSourceDependencyWidth : Nat → Nat
+secretScalarSourceDependencyWidth k =
+  k * sourceCoefficientsPerSecretScalarNTTCoordinate
+
+secretQuadraticSourceDependencyWidth : Nat → Nat
+secretQuadraticSourceDependencyWidth k =
+  k * sourceCoefficientsPerSecretQuadraticNTTCoordinate
+
+mlKem512SecretScalarSourceWidth : secretScalarSourceDependencyWidth 2 ≡ 256
+mlKem512SecretScalarSourceWidth = refl
+
+mlKem768SecretScalarSourceWidth : secretScalarSourceDependencyWidth 3 ≡ 384
+mlKem768SecretScalarSourceWidth = refl
+
+mlKem1024SecretScalarSourceWidth : secretScalarSourceDependencyWidth 4 ≡ 512
+mlKem1024SecretScalarSourceWidth = refl
+
+mlKem512SecretQuadraticSourceWidth : secretQuadraticSourceDependencyWidth 2 ≡ 512
+mlKem512SecretQuadraticSourceWidth = refl
+
+mlKem768SecretQuadraticSourceWidth : secretQuadraticSourceDependencyWidth 3 ≡ 768
+mlKem768SecretQuadraticSourceWidth = refl
+
+mlKem1024SecretQuadraticSourceWidth : secretQuadraticSourceDependencyWidth 4 ≡ 1024
+mlKem1024SecretQuadraticSourceWidth = refl
+
+------------------------------------------------------------------------
+-- Public equation recoupling.
 --
--- A scalar public coordinate sums over k secret-polynomial coordinates in
--- t-hat = A-hat o s-hat + e-hat. Structurally, therefore, one scalar target
--- coordinate can depend on 128*k source-domain secret coefficients; the pair
--- forming one quadratic residue can depend on all 256*k source coefficients.
+-- BaseCaseMultiply uses both local secret components to produce either output
+-- component. Therefore either scalar component of one public quadratic equation
+-- can depend on the entire 256-coefficient source polynomial for every secret
+-- module coordinate participating in that row.
 ------------------------------------------------------------------------
 
-publicScalarSourceDependencyWidth : Nat → Nat
-publicScalarSourceDependencyWidth k =
-  k * sourceCoefficientsPerScalarNTTCoordinate
+publicEquationScalarSourceDependencyWidth : Nat → Nat
+publicEquationScalarSourceDependencyWidth k =
+  k * sourceCoefficientsPerSecretQuadraticNTTCoordinate
 
-publicQuadraticSourceDependencyWidth : Nat → Nat
-publicQuadraticSourceDependencyWidth k =
-  2 * publicScalarSourceDependencyWidth k
+publicEquationQuadraticSourceDependencyWidth : Nat → Nat
+publicEquationQuadraticSourceDependencyWidth =
+  publicEquationScalarSourceDependencyWidth
 
-mlKem512ScalarSourceWidth : publicScalarSourceDependencyWidth 2 ≡ 256
-mlKem512ScalarSourceWidth = refl
+mlKem512PublicScalarSourceWidth :
+  publicEquationScalarSourceDependencyWidth 2 ≡ 512
+mlKem512PublicScalarSourceWidth = refl
 
-mlKem768ScalarSourceWidth : publicScalarSourceDependencyWidth 3 ≡ 384
-mlKem768ScalarSourceWidth = refl
+mlKem768PublicScalarSourceWidth :
+  publicEquationScalarSourceDependencyWidth 3 ≡ 768
+mlKem768PublicScalarSourceWidth = refl
 
-mlKem1024ScalarSourceWidth : publicScalarSourceDependencyWidth 4 ≡ 512
-mlKem1024ScalarSourceWidth = refl
+mlKem1024PublicScalarSourceWidth :
+  publicEquationScalarSourceDependencyWidth 4 ≡ 1024
+mlKem1024PublicScalarSourceWidth = refl
 
-mlKem512QuadraticSourceWidth : publicQuadraticSourceDependencyWidth 2 ≡ 512
-mlKem512QuadraticSourceWidth = refl
+mlKem512PublicQuadraticSourceWidth :
+  publicEquationQuadraticSourceDependencyWidth 2 ≡ 512
+mlKem512PublicQuadraticSourceWidth = refl
 
-mlKem768QuadraticSourceWidth : publicQuadraticSourceDependencyWidth 3 ≡ 768
-mlKem768QuadraticSourceWidth = refl
+mlKem768PublicQuadraticSourceWidth :
+  publicEquationQuadraticSourceDependencyWidth 3 ≡ 768
+mlKem768PublicQuadraticSourceWidth = refl
 
-mlKem1024QuadraticSourceWidth : publicQuadraticSourceDependencyWidth 4 ≡ 1024
-mlKem1024QuadraticSourceWidth = refl
+mlKem1024PublicQuadraticSourceWidth :
+  publicEquationQuadraticSourceDependencyWidth 4 ≡ 1024
+mlKem1024PublicQuadraticSourceWidth = refl
 
 ------------------------------------------------------------------------
 -- Claim boundary.
@@ -199,12 +232,15 @@ record NTTDataflowBoundary : Set where
     structuralSharedVariablesProveHardness : Bool
     structuralSharedVariablesProveHardnessIsFalse :
       structuralSharedVariablesProveHardness ≡ false
-    quadraticTargetCoordinateSpansWholeSourcePolynomial : Bool
-    quadraticTargetCoordinateSpansWholeSourcePolynomialIsTrue :
-      quadraticTargetCoordinateSpansWholeSourcePolynomial ≡ true
+    secretQuadraticCoordinateSpansWholeSourcePolynomial : Bool
+    secretQuadraticCoordinateSpansWholeSourcePolynomialIsTrue :
+      secretQuadraticCoordinateSpansWholeSourcePolynomial ≡ true
+    publicScalarEquationRecouplesBothParityBlocks : Bool
+    publicScalarEquationRecouplesBothParityBlocksIsTrue :
+      publicScalarEquationRecouplesBothParityBlocks ≡ true
 
 open NTTDataflowBoundary public
 
 canonicalNTTDataflowBoundary : NTTDataflowBoundary
 canonicalNTTDataflowBoundary =
-  nttDataflowBoundary false refl false refl false refl true refl
+  nttDataflowBoundary false refl false refl false refl true refl true refl
