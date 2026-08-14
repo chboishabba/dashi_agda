@@ -3,14 +3,6 @@ module DASHI.Core.FiniteRankedRefinementStabilizationExact where
 open import DASHI.Core.Prelude
 open import Relation.Nullary.Decidable.Core using (Dec; yes; no)
 
-------------------------------------------------------------------------
--- FINITE RANKED REFINEMENT STABILIZATION
---
--- Any decidable refinement process whose every unstable step strictly raises a
--- natural rank bounded by N must reach a fixed point within N steps.  For
--- partition refinement, rank is the number of blocks.
-------------------------------------------------------------------------
-
 record RankedRefinementProcess : Set₁ where
   constructor rankedRefinementProcess
   field
@@ -47,18 +39,14 @@ strictChainRankGrowth :
   StrictChain process length code →
   rank process code + length
   ≤ rank process (iterate process length code)
-strictChainRankGrowth process chainZero = ≤-refl
+strictChainRankGrowth process {code = code} chainZero =
+  ≤-reflexive (+-identityʳ (rank process code))
 strictChainRankGrowth process
   (chainStep {length = length} {code = code} firstStrict rest)
   rewrite +-suc (rank process code) length =
   ≤-trans
     (+-mono-≤ firstStrict ≤-refl)
     (strictChainRankGrowth process rest)
-
-------------------------------------------------------------------------
--- Search either finds a stable iterate within the supplied fuel or returns a
--- strict chain one step longer than the fuel.
-------------------------------------------------------------------------
 
 data SearchResult
     (process : RankedRefinementProcess)
