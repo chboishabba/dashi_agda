@@ -4,10 +4,9 @@ module DASHI.Cognition.PNF.SpectralResidualFutureDistortionExact where
 -- SPECTRAL / DYNAMICAL RESIDUAL FUTURE DISTORTION
 --
 -- Dropping modes is safe only relative to a consumer and a dynamical bound.
--- This finite exact theorem does not assume a particular Fourier basis: it says
--- that if omitted-mode magnitude upper-bounds consumer distortion and cannot
--- grow under admissible dynamics, then the entire future trace remains bounded
--- by the initial omitted residual.
+-- If omitted-mode magnitude upper-bounds consumer distortion and cannot grow
+-- under admissible dynamics, every future trace remains bounded by the initial
+-- omitted residual.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -20,17 +19,11 @@ record SpectralResidualApproximation
   field
     retain : State → Retained
     step : Action → State → State
-
-    -- Consumer error after erasing the omitted dynamical modes.
     consumerDistortion : State → Nat
-
-    -- Magnitude/budget of all discarded modes relevant to the certificate.
     residualMagnitude : State → Nat
-
     distortionControlledByResidual :
       (state : State) →
       consumerDistortion state ≤ residualMagnitude state
-
     residualNonIncreasing :
       (action : Action) (state : State) →
       residualMagnitude (step action state) ≤ residualMagnitude state
@@ -85,15 +78,17 @@ certifiedModeDropControlsEveryFutureTrace :
   consumerDistortion approximation
     (Refinement.run (step approximation) actions state)
   ≤ epsilon
-certifiedModeDropControlsEveryFutureTrace certificate actions =
+certifiedModeDropControlsEveryFutureTrace
+  {approximation = approximation} {state = state}
+  certificate actions =
   ≤-trans
-    (futureDistortionBoundedByInitialResidual _ actions _)
+    (futureDistortionBoundedByInitialResidual approximation actions state)
     (initialResidualWithinTolerance certificate)
 
 ------------------------------------------------------------------------
--- Concrete two-mode regression.  The retained coordinate stays exact while an
--- omitted transient mode decays 2 -> 1 -> 0.  Consumer error is exactly the
--- transient magnitude, so dropping it is globally certified at tolerance 2.
+-- Concrete regression: a discarded transient mode decays 2 -> 1 -> 0 while
+-- the retained code is constant.  The entire future consumer error is therefore
+-- certified by the initial residual budget 2.
 ------------------------------------------------------------------------
 
 data TransientState : Set where residual2 residual1 residual0 : TransientState
@@ -124,8 +119,8 @@ transientApproximation = spectralResidualApproximation
   where
     nonIncreasing : (action : Tick) (state : TransientState) →
       transientMagnitude (transientStep action state) ≤ transientMagnitude state
-    nonIncreasing tick residual2 = s≤s (s≤s z≤n)
-    nonIncreasing tick residual1 = s≤s z≤n
+    nonIncreasing tick residual2 = s≤s z≤n
+    nonIncreasing tick residual1 = z≤n
     nonIncreasing tick residual0 = ≤-refl
 
 initialTransientDropCertified :
@@ -140,8 +135,7 @@ transientDropFutureErrorNeverExceedsTwo =
   certifiedModeDropControlsEveryFutureTrace initialTransientDropCertified
 
 ------------------------------------------------------------------------
--- Boundary: a fast-decaying physical/spectral mode still needs a producer that
--- proves residualNonIncreasing in the chosen norm and that the declared
--- consumer distortion is controlled by that norm.  The theorem does not infer
--- those inequalities merely from an eigenvalue label.
+-- Boundary: a physical/spectral producer must prove residualNonIncreasing in
+-- its chosen norm and prove that consumer distortion is controlled by that
+-- residual.  Neither fact follows from an eigenvalue label alone.
 ------------------------------------------------------------------------
