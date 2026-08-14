@@ -13,22 +13,23 @@ module DASHI.Crypto.MLKEMButterflyStageLocalityInvariantExact where
 --   coefficient-local: 1 * (256*k),
 --   scalar-NTT-local: 128 * (2*k),
 --
--- both equal to 256*k.  Algorithm 9 exposes a stronger structural statement.
+-- both equal to 256*k. Algorithm 9 exposes a stronger structural statement.
 -- After j butterfly levels, one stage-local coordinate depends on 2^j source
 -- coefficients, while one such stage coordinate fans through the remaining
--- levels to 2^(7-j) final same-parity scalar NTT coordinates.  BaseCaseMultiply
+-- levels to 2^(7-j) final same-parity scalar NTT coordinates. BaseCaseMultiply
 -- lets each final secret scalar affect two public scalar outputs in each of k
--- rows.  Therefore every canonical butterfly-stage locality choice has
+-- rows. Therefore every canonical butterfly-stage locality choice has
 --
 --   priorWidth * publicFanout = 2^j * 2^(7-j) * 2*k = 256*k.
 --
 -- We prove this exactly for all eight canonical stages and all three approved
--- ML-KEM parameter sets.  This is a structural butterfly/dataflow invariant,
+-- ML-KEM parameter sets. This is a structural butterfly/dataflow invariant,
 -- not a universal Fourier uncertainty theorem and not a work-factor bound.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl; trans; sym)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; _*_)
+open import Relation.Binary.PropositionalEquality using (trans; sym)
 
 import DASHI.Crypto.MLKEMFIPS203SourceExact as FIPS
 
@@ -64,10 +65,6 @@ publicScalarFanout p stage =
 localityArea : FIPS.MLKEMParameters → ButterflyStage → Nat
 localityArea p stage =
   sourceSupportWidth stage * publicScalarFanout p stage
-
-------------------------------------------------------------------------
--- Exact approved-parameter invariants.
-------------------------------------------------------------------------
 
 mlKem512StageArea : ∀ stage → localityArea FIPS.params512 stage ≡ 512
 mlKem512StageArea sourceStage = refl
@@ -116,11 +113,6 @@ mlKem1024AllStagesEqual :
   localityArea FIPS.params1024 left ≡ localityArea FIPS.params1024 right
 mlKem1024AllStagesEqual left right =
   trans (mlKem1024StageArea left) (sym (mlKem1024StageArea right))
-
-------------------------------------------------------------------------
--- Endpoint recovery: Round 17's coefficient/NTT equality is the first/last
--- case of the stronger all-stage theorem.
-------------------------------------------------------------------------
 
 mlKem512EndpointAreasEqual :
   localityArea FIPS.params512 sourceStage ≡
