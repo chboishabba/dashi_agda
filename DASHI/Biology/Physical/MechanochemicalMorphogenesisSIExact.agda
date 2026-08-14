@@ -26,7 +26,7 @@ x ≢ y = x ≡ y → ⊥
 
 MassDensity : SI.Dimension
 MassDensity =
-  SI.dim (negsuc (suc zero)) (pos (suc zero))
+  SI.dim (negsuc (suc (suc zero))) (pos (suc zero))
     (pos zero) (pos zero) (pos zero) (pos zero) (pos zero)
 
 record TissueMechanicsSISignature : Set₁ where
