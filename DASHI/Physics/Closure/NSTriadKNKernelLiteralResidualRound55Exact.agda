@@ -38,10 +38,13 @@ module DASHI.Physics.Closure.NSTriadKNKernelLiteralResidualRound55Exact where
 -- and `literal residual != duplicate` mechanically forces
 -- `independent != 0`.  This makes K_independent=0 falsifiable rather than
 -- encoding it in the datatype.
+--
+-- Round 57 parser cleanup: List constructors are imported at module scope.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Empty using (⊥)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_)
 open import Data.Rational.Tactic.RingSolver using (solve)
@@ -124,8 +127,6 @@ literalKernelEqualsDuplicateOnZeroBranch split zeroBranch =
     (trans
       (cong (duplicateOwned split +_) (independentZero zeroBranch))
       (solve (duplicateOwned split ∷ [])))
-  where
-  open import Agda.Builtin.List using (_∷_; [])
 
 nonDuplicateLiteralForcesIndependentNonzero :
   (split : LiteralKernelResidualSplit) →
@@ -138,8 +139,6 @@ nonDuplicateLiteralForcesIndependentNonzero split differs independentIsZero =
       (trans
         (cong (duplicateOwned split +_) independentIsZero)
         (solve (duplicateOwned split ∷ []))))
-  where
-  open import Agda.Builtin.List using (_∷_; [])
 
 zeroIndependentBranchIsSeparatePhysicalObligation : Bool
 zeroIndependentBranchIsSeparatePhysicalObligation = true
