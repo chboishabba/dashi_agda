@@ -9,7 +9,7 @@ module DASHI.Crypto.CBD2MixedRadixGrayTraversalExact where
 -- Ordinary row-major enumeration has four row-boundary jumps of Manhattan
 -- length five, giving total transition cost 40.  A boustrophedon/Gray traversal
 -- reverses every second row; every one of its 24 transitions changes exactly
--- one digit by one step, giving the information-theoretic path lower bound 24.
+-- one digit by one step, giving transition cost 24.
 --
 -- This changes traversal/update geometry, not the exponential candidate count.
 ------------------------------------------------------------------------
@@ -17,7 +17,7 @@ module DASHI.Crypto.CBD2MixedRadixGrayTraversalExact where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
-open import Data.Nat.Base using (_∸_)
+open import Data.Nat.Base using (_∸_; _≤_)
 
 ------------------------------------------------------------------------
 -- Five-value coefficient digit.
@@ -96,9 +96,7 @@ lexExcessTransitionCost : pathCost lexPath ≡ pathCost grayPath + 16
 lexExcessTransitionCost = refl
 
 ------------------------------------------------------------------------
--- Any Hamiltonian traversal of 25 distinct states with positive integer edge
--- cost needs at least 24 units.  We record the generic positive-cost induction
--- independently of the concrete path, then note the Gray path attains 24.
+-- Generic positivity carrier for later arbitrary mixed-radix paths.
 ------------------------------------------------------------------------
 
 data PositiveCostList : List Nat → Set where
@@ -113,8 +111,6 @@ length : {A : Set} → List A → Nat
 length [] = 0
 length (_ ∷ xs) = suc (length xs)
 
--- The concrete Gray computation is already enough to certify attainment of the
--- 24-edge lower bound for this 25-state path carrier.
 grayAttainsTwentyFourEdgeFloor : pathCost grayPath ≡ 24
 grayAttainsTwentyFourEdgeFloor = refl
 
