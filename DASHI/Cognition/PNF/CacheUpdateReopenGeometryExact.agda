@@ -91,7 +91,7 @@ canonicalLocalStrictlyBetter :
   weightedObjective 1 1 1 1 (objectives localDelta)
   < weightedObjective 1 1 1 1 (objectives globalRewrite)
 canonicalLocalStrictlyBetter =
-  s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s z≤n)))))))))
+  s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s z≤n))))))))))
 
 ------------------------------------------------------------------------
 -- The numbers are a regression witness, not empirical DeepSeek/LLM cache
