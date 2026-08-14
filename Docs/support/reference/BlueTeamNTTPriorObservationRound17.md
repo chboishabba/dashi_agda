@@ -1,77 +1,31 @@
 # Blue-Team NTT Prior / Observation / Search Geometry — Round 17
 
-This tranche continues both remaining defensive crypto programmes simultaneously:
+This tranche continues the defensive MLWE/ML-KEM programme at the point where generic candidate-fibre machinery is no longer the main obstacle. The live questions are now concrete: conditional list size under actual FIPS coordinates, reconciliation/separator complexity, transition/update geometry of exhaustive verification, and the value of concrete observations after acquisition cost.
 
-1. determine whether MLWE/ML-KEM search becomes genuinely simpler in transformed coordinates;
-2. determine whether a protocol/implementation exposes a hidden-dependent observation that changes protected-label recovery cost.
+No ML-KEM break or security proof is claimed.
 
-Round 17 now adds a third coordinate from the future-quotient/Gray representation programme:
+## FIPS NTT dataflow and locality tradeoff
 
-3. candidate fibres carry **transition/search geometry**, so equal cardinality or equal storage rate does not imply equal recovery cost.
+`MLKEMNTTDataflowCouplingExact` follows NIST FIPS 203 Algorithm 9, equations (4.10)–(4.13), and BaseCaseMultiply in Algorithm 12. One scalar secret NTT component depends on a 128-coefficient parity class; one quadratic secret residue pair spans all 256 coefficients of its source polynomial. BaseCaseMultiply then recouples the two local components before the public equation is checked.
 
-It does not claim an ML-KEM break or security proof.
+`MLKEMCandidateMoveFanoutExact` turns that dependency around: a one-coefficient source move is potentially visible across `256*k` public-residual scalar coordinates.
 
-## FIPS NTT dataflow
+`MLKEMLocalityAreaInvariantExact` exposes a new representation-geometry identity. For the two canonical primitive move notions:
 
-`MLKEMNTTDataflowCouplingExact` follows NIST FIPS 203 Algorithm 9, equations (4.10)–(4.13), and BaseCaseMultiply in Algorithm 12.
+- coefficient-local: prior support `1`, public fanout `256*k`;
+- scalar-NTT-local: prior support `128`, public fanout `2*k`.
 
-Algorithm 9 has seven butterfly stages with lengths
+Hence their structural locality areas are exactly equal:
 
-`128, 64, 32, 16, 8, 4, 2`.
+`1*(256*k) = 128*(2*k) = 256*k`.
 
-The dependency width doubles seven times from one source coefficient to 128 source coefficients for one scalar **secret NTT representation** component. Reduction modulo a quadratic factor sends the 128 even source coefficients into the constant secret component and the 128 odd source coefficients into the linear secret component. Thus one secret quadratic residue pair structurally spans all 256 source coefficients of one secret polynomial.
-
-For module dimension `k`, the secret representation widths are therefore:
-
-- ML-KEM-512: scalar 256 across the two secret polynomials; quadratic pair 512;
-- ML-KEM-768: scalar 384; quadratic pair 768;
-- ML-KEM-1024: scalar 512; quadratic pair 1024.
-
-There is an important recoupling at the **public equation**. BaseCaseMultiply uses both local secret components to produce either output component. Consequently either scalar component of one public noisy equation can structurally depend on the complete `256*k` source-secret coefficient carrier.
-
-These are structural/dataflow widths, not claims of statistical dependence or hardness.
+For the approved parameter sets this area is exactly 512, 768, and 1024. This is not a universal uncertainty theorem, but it is an exact same-parameter manifestation of the prior-locality / verifier-locality tradeoff.
 
 Primary source: National Institute of Standards and Technology, *Module-Lattice-Based Key-Encapsulation Mechanism Standard*, FIPS 203 (2024), DOI `10.6028/NIST.FIPS.203`.
 
-## Candidate-move fanout: locality depends on the chosen search coordinates
+## Conditioned BaseCase equations and ambiguity
 
-`MLKEMCandidateMoveFanoutExact` turns the same dependency relation around and asks what happens when the search algorithm changes one **source coefficient**.
-
-A coefficient-local move is potentially visible in all 128 same-parity scalar NTT coordinates of its secret polynomial. After BaseCase multiplication across `k` public rows, one source-coordinate move can structurally fan out to `256*k` public-residual scalar coordinates:
-
-- ML-KEM-512: 512;
-- ML-KEM-768: 768;
-- ML-KEM-1024: 1024.
-
-This is the exact representation-geometry tradeoff: coefficient-local search moves are broad in NTT/public-residual space, while NTT-local moves are not automatically local under the CBD prior because that prior originates in coefficient space. Structural fanout is not equated with numerical change or runtime cost; cancellation/sparsity/caching require separate proofs.
-
-## No disconnected parity cut and combined connectivity
-
-`MLKEMNTTPriorCutNoGoExact` proves neither same-parity family admits a nontrivial source-variable-disjoint cut with both sides inhabited.
-
-`MLKEMNTTCombinedCouplingConnectivityExact` then adds BaseCase cross-component edges and proves every pair of scalar NTT nodes is connected by a path of length at most two. Hence the combined prior/verifier dataflow graph has no nontrivial disconnected cut.
-
-This is stronger than merely saying NTT is invertible. It rules out disconnected independent scalar search components at this dataflow level. It still does **not** establish statistical dependence, treewidth growth, or MLWE hardness.
-
-## Positive two-block prior factorisation, followed by verifier recoupling
-
-`MLKEMNTTParityBlockPriorExact` records the positive side. A coefficient-product source prior admits natural even/odd blocks:
-
-- 256 + 256 for ML-KEM-512;
-- 384 + 384 for ML-KEM-768;
-- 512 + 512 for ML-KEM-1024.
-
-But FIPS BaseCaseMultiply couples the local components:
-
-`c0 = a0*s0 + a1*s1*gamma`
-
-`c1 = a0*s1 + a1*s0`.
-
-So two-block prior factorisation does not produce two independent public-verifier problems.
-
-## Exact conditioned BaseCase residual equations
-
-`MLKEMBaseCaseConditionedResidualExact` closes the algebraic seam identified after the previous round. In any additive commutative group carrying the opaque BaseCase multiplication terms, conditioning `s0` and subtracting its known contribution gives exactly
+`MLKEMBaseCaseConditionedResidualExact` proves that conditioning `s0` leaves
 
 `c0 - a0*s0 = a1*s1*gamma + e0`
 
@@ -79,95 +33,94 @@ and
 
 `c1 - a1*s0 = a0*s1 + e1`.
 
-The proof needs only additive cancellation, so the identities instantiate in the modular quotient ring once its operations provide those laws. This is the exact theorem we needed before asking whether conditioning really halves search.
+The identities need only additive cancellation around the opaque multiplication terms. `ConditionedResidualAmbiguityRegressionExact` and `ConditionalMateAmbiguityExact` then show that simplification of the equation does not imply a unique remaining mate. `ConditionalReconciliationSearchExact` remains the positive seam: if a real conditional-mate theorem exists, one outer candidate can construct a global witness without Cartesian pairing.
 
-It does not. `ConditionedResidualAmbiguityRegressionExact` gives a finite Z/5 regression in which two distinct remaining secret bits both satisfy the post-conditioning small-residual test. `ConditionalMateAmbiguityExact` lifts that to a general theorem: two distinct plausible remaining candidates at one conditioned state refute a `UniqueConditionalMate` certificate.
+## Actual FIPS CBD2 local-list geometry
 
-Thus:
+The programme now contains source-faithful finite slices rather than only abstract transforms.
 
-`conditioning simplifies the equation != conditioning constructs the mate`.
+`MLKEMNTTActualCBD2ScalarCollisionExact` uses actual FIPS constants and proves that two distinct CBD2-supported source triples collide on the first constant NTT scalar. The multipliers at source degrees 0, 8 and 12 are `1`, `296`, and `2319`, and both
 
-The positive route remains `ConditionalReconciliationSearchExact`: if a real conditional mate theorem is supplied, one outer candidate plus an assembly map yields a genuine global witness. Its finite cost regression is `12` versus `30` for Cartesian pairing.
+`(-1,-1,+1)`
 
-## Search transition geometry
+and
 
-`ProtectedLabelSearchGeometryExact` upgrades a candidate fibre from a set into a search system carrying:
+`(+2,0,-2)`
 
-- hidden/public/protected-label carriers;
-- candidate membership;
-- admissible search edges;
-- a machine representation;
-- exact edge/update cost.
+map to scalar value `2022`.
 
-An observation update now changes candidate cardinality, graph cost, reconciliation cost and observation acquisition cost separately. The regression demonstrates that identical `8 -> 7` candidate shrinkage can either improve recovery geometry or make it worse.
+`MLKEMNTTActualCBD2SliceCouplingExact` independently shows a two-coefficient FIPS-constant slice whose transported joint support is non-Cartesian.
 
-`SearchGraphEmbeddingDistortionExact` defines an edge-weighted graph embedding cost. On the same four-state path, ordinary two-bit binary coding has transition distortion 4 while Gray coding has distortion 3.
+`MLKEMNTTActualCBD2TwoScalarRefinementExact` advances the collision to a genuine conditional-list calculation. For residue `i=2`, `gamma_2 = 17^65 = 2761 (mod 3329)` and the relevant weights are `1`, `296`, `1010`. The two old colliding sources map to 713 and 1311 respectively. Thus on this exact two-point CBD2 slice:
 
-`GrayPathTransitionOptimalExact` proves the general lower-bound schema: if every path edge has positive code cost, total cost is at least the number of edges. A unit-edge realization attains that bound. The P4 Gray path is the concrete two-bit instance and ordinary binary is strictly worse by one transition unit.
+- first scalar only: candidate list size 2;
+- first plus second scalar: candidate list size 1.
 
-## Finite MLWE representation geometry and incremental traversal
+This is local conditional-list geometry, not global ML-KEM key recovery.
 
-`FiniteMLWETransitionGeometryExact` maps the existing four-secret Z/5 MLWE lab onto this path geometry. The candidate carrier and two-bit rate are unchanged, while ordinary binary traversal costs 4 Hamming units and Gray traversal costs 3.
+## List-decoding language
 
-`IncrementalResidualTraversalExact` adds an explicit per-changed-coordinate update model. Under the declared finite architecture, binary traversal costs 15 work units and Gray traversal costs 12. The candidate set is identical; only the order/transition geometry changed.
+`FiniteMLWEListDecodingGeometryExact` recasts the existing 2x2 Z/5 MLWE lab as a finite list-decoding problem:
 
-This is the blue-team analogue of the representation result:
+`L(t,tau) = {s' : Score(t-A*s') <= tau}`.
 
-`same information != same computational geometry`.
+The exact score vector is `2,0,0,2`; therefore thresholds 0 and 1 give list size 2, while threshold 2 gives list size 4. Unique-decoding, small-list, and full-list regimes are kept separate from the later question of recovery work.
 
-## Rate / geometry / reopening Pareto carrier
+## Search transition geometry and mixed-radix Gray traversal
 
-`CryptoRepresentationParetoExact` keeps rate, transition cost, reopen cost and physical-observation cost as independent objective coordinates rather than imposing universal scalar weights. In the finite regression Gray and binary use the same two-bit rate, but Gray weakly dominates binary because its transition cost is lower.
+`ProtectedLabelSearchGeometryExact` upgrades a candidate fibre from a set into a system with admissible search edges, a machine representation, edge/update cost, reconciliation cost, and observation-induced geometry changes.
 
-`AdaptiveCandidateResidualWidthExact` makes the residual representation fibre-local: a two-candidate ambiguity needs one bit, while an identified one-candidate fibre needs zero residual bits.
+`GrayPathTransitionOptimalExact` and `SearchGraphEmbeddingDistortionExact` separate equal-rate encodings by transition geometry. `FiniteMLWETransitionGeometryExact` and `IncrementalResidualTraversalExact` carry that distinction into the finite MLWE lab.
 
-`ConditionalResidualRateExact` then supplies the finite expected-rate precursor. With an ambiguous one-bit fibre weighted once and an identified zero-bit fibre weighted three times, adaptive residual storage has bit-mass `1/4`; fixed one-bit storage has `4/4`. This is finite weighted accounting only, not yet Shannon entropy.
+`CBD2MixedRadixGrayTraversalExact` now uses the real five-value CBD2 coefficient alphabet. For a two-coefficient 5x5 carrier with 25 states:
 
-`FiniteGuessingProbabilityExact` separately keeps guessing/statistical improvement distinct from computational improvement. The same 2-to-1 statistical identification can coexist with an explicitly worse recovery cost.
+- ordinary row-major traversal has Manhattan transition cost 40;
+- boustrophedon / mixed-radix Gray traversal has cost 24.
 
-## Observation-induced separator geometry
+The candidate set is identical; only the traversal geometry changes. This is the finite precursor to incrementally maintaining `r(s)=t-A*s` while enumerating an unchanged exponential search space.
 
-`ObservationSeparatorGeometryExact` makes an important consequence explicit: the main value of an observation may be geometric rather than cardinality-based. Its finite regression removes only one candidate (`6 -> 5`) but collapses a separator-state search from 80 work units to 12 after observation acquisition, for a net gain of 68.
+## Observation value and separator geometry
 
-A real ML-KEM claim would need the same-object separator witness; this is exact accounting, not an asserted attack.
+`ObservationSeparatorGeometryExact` shows that observation value need not track candidate-count reduction: a finite observation removes one candidate but collapses separator work from 80 to 12 after acquisition cost.
 
-## Observation acquisition, confirmation, implicit rejection and timing
+`ObservationAcquisitionCostExact` compares `recovery-before` against `observation-cost + recovery-after`, so strict candidate shrink is not sufficient for attack progress.
 
-`ObservationAcquisitionCostExact` compares
+`AttackerObservationLanguageRefinementExact` gives the quotient-theoretic version: enlarging the admitted observation language can only refine attacker observational equivalence, and a newly admitted coordinate matters only with an explicit same-base-observation split witness.
 
-`recovery-before`
+## Representation-security minimax
 
-with
+`RepresentationSecurityGameExact` packages the cross-pollination between computational geometry and physical observation geometry. The finite blue-team objective is minimax-shaped: choose an implementation representation whose worst allowed observation gain is smallest.
 
-`observation-cost + recovery-after`.
+Its regression deliberately makes the faster representation worse under one side observation:
 
-On the finite MLWE regression, pre-observation recovery costs 13 and post-observation recovery costs 8. Acquisition cost 2 gives total 10 and net gain 3; acquisition cost 6 gives total 14 and is harmful by 1.
+- fast representation: transition cost 5, worst observation gain 20;
+- conservative representation: transition cost 8, worst observation gain 3.
 
-`KeyConfirmationObservationRefinementExact` treats externally visible confirmation as an observation only when a constructive same-public hidden-state split is supplied. Primary reference: Gorjan Alagic, Elaine Barker, Lily Chen, Dustin Moody, Angela Robinson, Hamilton Silberg, Noah Waller, *Recommendations for Key-Encapsulation Mechanisms*, NIST SP 800-227 (2025), DOI `10.6028/NIST.SP.800-227`.
+Thus transition-optimal representation is not automatically leakage-optimal representation.
 
-`MLKEMImplicitRejectProtocolObservationExact` separates internal Algorithm-18 route state from external observability. Different internal candidate/fallback routes can coexist with a constant public-factored observation. Directly exporting the route creates a hidden-dependent split. FIPS requires the comparison flag to remain secret intermediate data.
+`RepresentationLeakageGeometryExact` keeps the physical side-channel claim boundary explicit: different Hamming movement can define a different observation surface without implying that smaller movement is universally safer.
 
-`MLKEMImplicitRejectTimingCompositionExact` treats runtime as another observation coordinate. Route-dependent finite runtimes yield a timing split; constant public-fibre timing yields no timing split. Primary timing reference: Paul C. Kocher, *Timing Attacks on Implementations of Diffie-Hellman, RSA, DSS, and Other Systems*, CRYPTO 1996, DOI `10.1007/3-540-68697-5_9`.
+## Rate / guessing / recovery remain different coordinates
 
-## Representation geometry and physical leakage geometry
+`CryptoRepresentationParetoExact` retains rate, transition cost, reopening cost and observation cost as separate Pareto coordinates. `AdaptiveCandidateResidualWidthExact`, `ConditionalResidualRateExact`, and `FiniteGuessingProbabilityExact` keep fibre-local residual width, finite expected rate, guessing improvement, and computational recovery improvement distinct.
 
-`RepresentationLeakageGeometryExact` gives a cautious finite duality. Two implementations can encode the same logical transition with identical state count but different Hamming movement: the binary middle transition moves two bits, the Gray version one. If a physical model observes Hamming movement, representation choice changes the observation surface.
+The resulting hierarchy is deliberately strict:
 
-This does **not** say smaller Hamming movement is automatically safer. It proves only that computational transition geometry and physical observation geometry are not independent design questions.
+`rate reduction != guessing improvement != candidate shrink != search-cost improvement`.
 
-## Frontier after the geometry tranche
+## Frontier after this tranche
 
-The generic architecture is no longer the main obstacle. The shortest substantive questions are now:
+The shortest remaining mathematical targets are now concrete rather than architectural:
 
-1. instantiate the actual FIPS CBD/NTT conditioned residual system strongly enough to measure conditional survivor counts, rather than only structural dependency;
-2. determine whether any conditional/separator theorem survives the connected dataflow graph and genuinely lowers reconciliation cost;
-3. compare candidate traversal/update geometry in coefficient, NTT, and any alternative representations under the same candidate verifier;
-4. audit real protocol/implementation observations and require a same-public hidden-dependent split witness;
-5. value observations by total protected-label recovery cost **and** by how they alter search/separator geometry;
-6. move from finite weighted rates/guessing counts to explicit probabilistic min-entropy or game-advantage semantics only after the finite carrier is stable.
+1. enlarge the source-faithful CBD2 slices and compute conditional survivor/list-size profiles under increasing sets of actual FIPS NTT/public coordinates;
+2. determine whether those conditional lists admit low-cost mate reconstruction or bounded-separator reconciliation despite the connected dataflow graph;
+3. lift the finite locality-area identity toward a genuine support-spreading/no-simultaneous-locality theorem, without calling it a universal uncertainty principle until proved;
+4. generalize mixed-radix Gray incremental residual traversal from two coefficients to larger CBD blocks and compare exact verifier-update work across coefficient and NTT representations;
+5. measure any real protocol/implementation observation by the induced change in optimal protected-label recovery geometry after acquisition cost;
+6. move to probabilistic min-entropy / game-advantage semantics only once the finite conditional-list and cost carriers are stable.
 
 The working thesis is now:
 
-`protected-label quotient + candidate fibre + search graph + representation embedding + observation refinement + algorithm-relative recovery cost`.
+`protected-label quotient + conditional list + search graph + representation geometry + observation refinement + algorithm-relative recovery cost`.
 
 No GitHub Actions or CodeRabbit run is required by this tranche. `scripts/check_crypto_ntt_prior_observation_round17.sh` fail-closes the source surface and invokes the Round-17 aggregate when Agda is locally available. No kernel-clean claim is made without an observed typecheck.
