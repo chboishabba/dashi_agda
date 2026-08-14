@@ -11,6 +11,7 @@ module DASHI.Crypto.FiniteMLWETransitionGeometryExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; _+_)
+open import Data.Product using (_×_; _,_)
 
 import DASHI.Crypto.FiniteMLWEVectorLabExact as Lab
 import DASHI.Crypto.GrayPathTransitionOptimalExact as Gray
@@ -52,11 +53,6 @@ sameCandidatesSameRateDifferentTransitionCost =
 
 ------------------------------------------------------------------------
 -- Incremental residual update regression.
---
--- Candidate residuals are t-A*s'.  Along the one-bit Gray move s00 -> s01,
--- only one candidate coordinate changes; the resulting residual is exactly the
--- precomputed lab residual for s01.  The theorem is intentionally same-object
--- and finite rather than assuming a generic linear-update API.
 ------------------------------------------------------------------------
 
 residualAt00 : Lab.Error2
