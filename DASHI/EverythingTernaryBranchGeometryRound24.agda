@@ -9,9 +9,17 @@ import DASHI.EverythingOperatorFutureRealizationRound23
 ------------------------------------------------------------------------
 import DASHI.Topology.TernaryCylinderPantsGeometryExact
 
--- Boundary: Round 24A proves a finite combinatorial correspondence between
+------------------------------------------------------------------------
+-- Round 24B: iterate the one-step correspondence to every finite depth.
+------------------------------------------------------------------------
+import DASHI.Topology.TernaryPantsFrontierExact
+
+-- Boundary: Round 24 proves a finite combinatorial correspondence between
 -- ternary cylinder refinement and the existing exact 1 -> 3 pants outputs,
--- together with a discrete 3D voxel observation witness.  It does not claim a
--- smooth embedded surface, a p-adic/Euclidean isometry, or identity between the
--- totally disconnected ultrametric fibre and its connected geometric
--- thickening.  Those remain separate producer obligations.
+-- then upgrades it to an exact arbitrary-depth equivalence between SSP369
+-- addresses and paths of pants branch slots.  It also carries a discrete 3D
+-- voxel observation witness.  It does not claim a smooth embedded surface, a
+-- p-adic/Euclidean isometry, or identity between the totally disconnected
+-- ultrametric fibre and its connected geometric thickening.  A collision-free
+-- R3 graph embedding and smooth pants/tube thickening remain producer
+-- obligations.
