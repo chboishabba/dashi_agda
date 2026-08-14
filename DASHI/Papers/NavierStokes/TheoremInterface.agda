@@ -18,6 +18,7 @@ import DASHI.Physics.Closure.NSTriadKNHighestAlphaRound52Exact
 import DASHI.Physics.Closure.NSTriadKNHighestAlphaRound53Exact
 import DASHI.Physics.Closure.NSTriadKNHighestAlphaRound54Exact
 import DASHI.Physics.Closure.NSTriadKNHighestAlphaRound55Exact
+import DASHI.Physics.Closure.NSTriadKNHighestAlphaRound57Exact
 import DASHI.Papers.NavierStokes.ClayContractRound23 as Clay23
 
 ------------------------------------------------------------------------
@@ -30,16 +31,17 @@ import DASHI.Papers.NavierStokes.ClayContractRound23 as Clay23
 -- surface: the target theorem type is represented, but physical producers and
 -- unconditional promotion remain false.
 --
--- Round55 imports the six A--F cutset modules: finite-transient HH-bad tail
--- barrier, literal same/adjacent Com fibre assembly, canonical owner-defined
--- flux correction, kernel residual dedup/cancellation, same-object HH-good
--- master-kernel certificate, and literal-zero boundary atom recursion.  The
--- terminal Clay bit remains false: none of these imports converts an unproved
--- physical analytic inequality into a theorem by fiat.
+-- Round57 moves three critical seams onto literal source objects: actual
+-- generated+leaked HH-bad Duhamel components, the physical transport/hard-
+-- projector odd P/Q coefficient list on the exact finite output fibre, and a
+-- single positive fixed-shift critical-coefficient cap required to lie below
+-- every shell capacity.  It does not inhabit the remaining physical Duhamel,
+-- Com fibre-mass/common-hat, periodic kernel/boundary, or continuum Fourier-L1
+-- leaves.  Clay and terminal promotion therefore remain false.
 
 paperInterfaceStatement : String
 paperInterfaceStatement =
-  "Paper-facing NS interface: A6/A7/A8/A9 closure receipts, Round-47/50/51/52/53/54/55 highest-alpha aggregates, and the literal Round 23 Fefferman periodic contract are imported; Round55 wires the A-F physical cutset while unresolved literal analytic producer inhabitation, Clay Navier-Stokes and terminal promotion remain false."
+  "Paper-facing NS interface: A6/A7/A8/A9 closure receipts, Round-47/50/51/52/53/54/55/57 highest-alpha aggregates, and the literal Round 23 Fefferman periodic contract are imported; Round57 constructs literal HH-bad component normalization and literal odd-P/Q same-output collision coefficients, and exposes the required all-shell fixed-shift correction cap, while unresolved physical analytic producer inhabitation, Clay Navier-Stokes and terminal promotion remain false."
 
 record NSPaperTheoremStatus : Setω where
   field
