@@ -4,23 +4,19 @@ module DASHI.Cognition.PNF.CanonicalFutureMinimalDynamicalRealizationExact where
 -- CANONICAL FUTURE QUOTIENT -> MINIMAL DYNAMICAL REALIZATION
 --
 -- The canonical future quotient already answers which fine states may coincide.
--- The missing dynamical theorem is that deterministic actions descend to that
--- quotient.  Once a representative/section is supplied, every action induces a
--- well-defined quotient action, and every sectioned future-safe representation
--- factors onto the canonical quotient.  This is minimality in the information /
--- quotient order, not yet minimum vector-space dimension.
+-- Deterministic actions descend to those classes.  With a section, this yields
+-- a concrete quotient action, while every other sectioned future-safe
+-- representation factors onto the canonical quotient.  This is minimality in
+-- the exact information/quotient order, not yet minimum vector-space dimension.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
 import DASHI.Core.FutureObservationLanguageQuotientExact as Future
+import DASHI.Core.GenericFuturePartitionRefinementExact as Refinement
 import DASHI.Core.StablePartitionCanonicalFutureBridgeExact as Bridge
 import DASHI.Cognition.PNF.FutureSufficientInvariantSubspaceExact as Invariant
-
-------------------------------------------------------------------------
--- Future equivalence is a congruence for every deterministic action.
-------------------------------------------------------------------------
 
 futureEquivalentStepCongruence :
   ∀ {State Action Observation}
@@ -74,12 +70,12 @@ compileCanonicalQuotientDynamics
   canonicalFutureDynamicalRealization sectioned quotientStep proof
   where
     quotientStep :
-      _ → Future.QuotientCode presentation → Future.QuotientCode presentation
+      Action → Future.QuotientCode presentation → Future.QuotientCode presentation
     quotientStep action code =
       Future.classOf presentation
         (step action (Future.section sectioned code))
 
-    proof : (action : _) (state : _) →
+    proof : (action : Action) (state : State) →
       Future.classOf presentation (step action state)
       ≡ quotientStep action (Future.classOf presentation state)
     proof action state =
@@ -89,11 +85,6 @@ compileCanonicalQuotientDynamics
             (sym (Future.sectionRightInverse sectioned
               (Future.classOf presentation state))))
           action)
-
-------------------------------------------------------------------------
--- Quotient dynamics commute with the canonical encoder through arbitrary
--- finite action traces.
-------------------------------------------------------------------------
 
 runQuotient :
   ∀ {State Action Observation}
@@ -118,8 +109,7 @@ canonicalEncodingCommutesWithTrace :
     (realization : CanonicalFutureDynamicalRealization
       step label observe presentation)
     (actions : List Action) (state : State) →
-  Future.classOf presentation
-    (DASHI.Core.GenericFuturePartitionRefinementExact.run step actions state)
+  Future.classOf presentation (Refinement.run step actions state)
   ≡ runQuotient realization actions (Future.classOf presentation state)
 canonicalEncodingCommutesWithTrace realization [] state = refl
 canonicalEncodingCommutesWithTrace
@@ -130,12 +120,8 @@ canonicalEncodingCommutesWithTrace
       (actionDescends realization action state))
 
 ------------------------------------------------------------------------
--- MINIMALITY THEOREM
---
--- Any sectioned representation whose kernel is future-safe admits a map onto
--- the canonical quotient.  Thus it cannot identify two distinct canonical
--- future classes.  The canonical quotient is the coarsest exact realization in
--- this factorization order.
+-- MINIMALITY: every sectioned future-safe representation maps onto the
+-- canonical future quotient.
 ------------------------------------------------------------------------
 
 record SectionedFutureSafeRepresentation
@@ -167,12 +153,6 @@ canonicalQuotientFactorsEverySectionedSafeRepresentation presentation candidate 
   Future.sectionedSafeProjectionFactors
     presentation (safe candidate) (sectioned candidate)
 
-------------------------------------------------------------------------
--- Direct bridge from the invariant-representation theorem: if a dynamics-
--- closed representation has a section, it necessarily factors onto the
--- canonical future quotient.
-------------------------------------------------------------------------
-
 invariantRepresentationFactorsOntoCanonicalQuotient :
   ∀ {State Action Observation Latent}
     (representation :
@@ -193,9 +173,7 @@ invariantRepresentationFactorsOntoCanonicalQuotient
     sectioned
 
 ------------------------------------------------------------------------
--- This is the promised canonical-future-quotient -> minimal dynamical
--- realization theorem.  What remains for a finite executable "linear realization
--- compiler" is to choose/search an algebraic coordinate system for QuotientCode
--- and optimize its dimension/rate/geometry.  That optimization cannot make a
--- coarser exact state partition than the canonical quotient proved here.
+-- What remains for a finite executable *linear-coordinate* compiler is to
+-- search encodings of QuotientCode and optimize dimension/rate/geometry.  No
+-- exact future-safe candidate may use a coarser state partition than this one.
 ------------------------------------------------------------------------
