@@ -35,13 +35,13 @@ contextualParameter (physicalContext true)
 contextualParameter (physicalContext true)
   (coarse ∷ U369.digit9 ∷ []) = U369.digit9
 
-closed open : PhysicalContext
-closed = physicalContext false
-open = physicalContext true
+closedContext openContext : PhysicalContext
+closedContext = physicalContext false
+openContext = physicalContext true
 
 sameFineAddressDifferentContextChangesParameter :
-  contextualParameter closed Base.fineA
-  ≢ contextualParameter open Base.fineA
+  contextualParameter closedContext Base.fineA
+  ≢ contextualParameter openContext Base.fineA
 sameFineAddressDifferentContextChangesParameter = digit3≢digit6
 
 sameCoarsePrefixStillHidesParameterDifference :
@@ -49,8 +49,8 @@ sameCoarsePrefixStillHidesParameterDifference :
 sameCoarsePrefixStillHidesParameterDifference = Base.sameCoarsePadicPrefix
 
 closedContextFineParametersDiffer :
-  contextualParameter closed Base.fineA
-  ≢ contextualParameter closed Base.fineB
+  contextualParameter closedContext Base.fineA
+  ≢ contextualParameter closedContext Base.fineB
 closedContextFineParametersDiffer = Base.finePhysicalParametersDiffer
 
 record ContextDependentRepresentation
