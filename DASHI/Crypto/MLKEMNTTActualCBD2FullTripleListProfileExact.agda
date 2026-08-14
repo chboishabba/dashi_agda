@@ -12,7 +12,7 @@ module DASHI.Crypto.MLKEMNTTActualCBD2FullTripleListProfileExact where
 --
 --   (a,b,c) in {-2,-1,0,1,2}^3
 --
--- at source degrees 0,8,12.  The first two constant-component scalar maps use
+-- at source degrees 0,8,12. The first two constant-component scalar maps use
 -- the actual FIPS weights already derived in Round 17:
 --
 --   scalar0 = a + 296 b + 2319 c   mod 3329,
@@ -26,15 +26,15 @@ module DASHI.Crypto.MLKEMNTTActualCBD2FullTripleListProfileExact where
 --   * the joint pair (scalar0,scalar2) has zero colliding unordered pairs.
 --
 -- Thus, on this complete source-faithful 5^3 slice, the second actual FIPS
--- scalar resolves every collision left by the first.  This is a finite local
+-- scalar resolves every collision left by the first. This is a finite local
 -- decoding theorem, not an ML-KEM key-recovery result: the full scheme has a
 -- much larger secret/error carrier and many additional equations.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; false; true; _==_)
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_; _==_)
 open import DASHI.Foundations.Base369Nat using (_%_)
 
 q : Nat
@@ -43,7 +43,6 @@ q = 3329
 data D5 : Set where
   d0 d1 d2 d3 d4 : D5
 
--- Shifted digit names correspond to centered CBD2 values -2,-1,0,+1,+2.
 residue : D5 → Nat
 residue d0 = 3327
 residue d1 = 3328
@@ -67,131 +66,31 @@ scalar2 x =
 
 allTriples : List Triple
 allTriples =
-  triple d0 d0 d0 ∷
-  triple d0 d0 d1 ∷
-  triple d0 d0 d2 ∷
-  triple d0 d0 d3 ∷
-  triple d0 d0 d4 ∷
-  triple d0 d1 d0 ∷
-  triple d0 d1 d1 ∷
-  triple d0 d1 d2 ∷
-  triple d0 d1 d3 ∷
-  triple d0 d1 d4 ∷
-  triple d0 d2 d0 ∷
-  triple d0 d2 d1 ∷
-  triple d0 d2 d2 ∷
-  triple d0 d2 d3 ∷
-  triple d0 d2 d4 ∷
-  triple d0 d3 d0 ∷
-  triple d0 d3 d1 ∷
-  triple d0 d3 d2 ∷
-  triple d0 d3 d3 ∷
-  triple d0 d3 d4 ∷
-  triple d0 d4 d0 ∷
-  triple d0 d4 d1 ∷
-  triple d0 d4 d2 ∷
-  triple d0 d4 d3 ∷
-  triple d0 d4 d4 ∷
-  triple d1 d0 d0 ∷
-  triple d1 d0 d1 ∷
-  triple d1 d0 d2 ∷
-  triple d1 d0 d3 ∷
-  triple d1 d0 d4 ∷
-  triple d1 d1 d0 ∷
-  triple d1 d1 d1 ∷
-  triple d1 d1 d2 ∷
-  triple d1 d1 d3 ∷
-  triple d1 d1 d4 ∷
-  triple d1 d2 d0 ∷
-  triple d1 d2 d1 ∷
-  triple d1 d2 d2 ∷
-  triple d1 d2 d3 ∷
-  triple d1 d2 d4 ∷
-  triple d1 d3 d0 ∷
-  triple d1 d3 d1 ∷
-  triple d1 d3 d2 ∷
-  triple d1 d3 d3 ∷
-  triple d1 d3 d4 ∷
-  triple d1 d4 d0 ∷
-  triple d1 d4 d1 ∷
-  triple d1 d4 d2 ∷
-  triple d1 d4 d3 ∷
-  triple d1 d4 d4 ∷
-  triple d2 d0 d0 ∷
-  triple d2 d0 d1 ∷
-  triple d2 d0 d2 ∷
-  triple d2 d0 d3 ∷
-  triple d2 d0 d4 ∷
-  triple d2 d1 d0 ∷
-  triple d2 d1 d1 ∷
-  triple d2 d1 d2 ∷
-  triple d2 d1 d3 ∷
-  triple d2 d1 d4 ∷
-  triple d2 d2 d0 ∷
-  triple d2 d2 d1 ∷
-  triple d2 d2 d2 ∷
-  triple d2 d2 d3 ∷
-  triple d2 d2 d4 ∷
-  triple d2 d3 d0 ∷
-  triple d2 d3 d1 ∷
-  triple d2 d3 d2 ∷
-  triple d2 d3 d3 ∷
-  triple d2 d3 d4 ∷
-  triple d2 d4 d0 ∷
-  triple d2 d4 d1 ∷
-  triple d2 d4 d2 ∷
-  triple d2 d4 d3 ∷
-  triple d2 d4 d4 ∷
-  triple d3 d0 d0 ∷
-  triple d3 d0 d1 ∷
-  triple d3 d0 d2 ∷
-  triple d3 d0 d3 ∷
-  triple d3 d0 d4 ∷
-  triple d3 d1 d0 ∷
-  triple d3 d1 d1 ∷
-  triple d3 d1 d2 ∷
-  triple d3 d1 d3 ∷
-  triple d3 d1 d4 ∷
-  triple d3 d2 d0 ∷
-  triple d3 d2 d1 ∷
-  triple d3 d2 d2 ∷
-  triple d3 d2 d3 ∷
-  triple d3 d2 d4 ∷
-  triple d3 d3 d0 ∷
-  triple d3 d3 d1 ∷
-  triple d3 d3 d2 ∷
-  triple d3 d3 d3 ∷
-  triple d3 d3 d4 ∷
-  triple d3 d4 d0 ∷
-  triple d3 d4 d1 ∷
-  triple d3 d4 d2 ∷
-  triple d3 d4 d3 ∷
-  triple d3 d4 d4 ∷
-  triple d4 d0 d0 ∷
-  triple d4 d0 d1 ∷
-  triple d4 d0 d2 ∷
-  triple d4 d0 d3 ∷
-  triple d4 d0 d4 ∷
-  triple d4 d1 d0 ∷
-  triple d4 d1 d1 ∷
-  triple d4 d1 d2 ∷
-  triple d4 d1 d3 ∷
-  triple d4 d1 d4 ∷
-  triple d4 d2 d0 ∷
-  triple d4 d2 d1 ∷
-  triple d4 d2 d2 ∷
-  triple d4 d2 d3 ∷
-  triple d4 d2 d4 ∷
-  triple d4 d3 d0 ∷
-  triple d4 d3 d1 ∷
-  triple d4 d3 d2 ∷
-  triple d4 d3 d3 ∷
-  triple d4 d3 d4 ∷
-  triple d4 d4 d0 ∷
-  triple d4 d4 d1 ∷
-  triple d4 d4 d2 ∷
-  triple d4 d4 d3 ∷
-  triple d4 d4 d4 ∷ []
+  triple d0 d0 d0 ∷ triple d0 d0 d1 ∷ triple d0 d0 d2 ∷ triple d0 d0 d3 ∷ triple d0 d0 d4 ∷
+  triple d0 d1 d0 ∷ triple d0 d1 d1 ∷ triple d0 d1 d2 ∷ triple d0 d1 d3 ∷ triple d0 d1 d4 ∷
+  triple d0 d2 d0 ∷ triple d0 d2 d1 ∷ triple d0 d2 d2 ∷ triple d0 d2 d3 ∷ triple d0 d2 d4 ∷
+  triple d0 d3 d0 ∷ triple d0 d3 d1 ∷ triple d0 d3 d2 ∷ triple d0 d3 d3 ∷ triple d0 d3 d4 ∷
+  triple d0 d4 d0 ∷ triple d0 d4 d1 ∷ triple d0 d4 d2 ∷ triple d0 d4 d3 ∷ triple d0 d4 d4 ∷
+  triple d1 d0 d0 ∷ triple d1 d0 d1 ∷ triple d1 d0 d2 ∷ triple d1 d0 d3 ∷ triple d1 d0 d4 ∷
+  triple d1 d1 d0 ∷ triple d1 d1 d1 ∷ triple d1 d1 d2 ∷ triple d1 d1 d3 ∷ triple d1 d1 d4 ∷
+  triple d1 d2 d0 ∷ triple d1 d2 d1 ∷ triple d1 d2 d2 ∷ triple d1 d2 d3 ∷ triple d1 d2 d4 ∷
+  triple d1 d3 d0 ∷ triple d1 d3 d1 ∷ triple d1 d3 d2 ∷ triple d1 d3 d3 ∷ triple d1 d3 d4 ∷
+  triple d1 d4 d0 ∷ triple d1 d4 d1 ∷ triple d1 d4 d2 ∷ triple d1 d4 d3 ∷ triple d1 d4 d4 ∷
+  triple d2 d0 d0 ∷ triple d2 d0 d1 ∷ triple d2 d0 d2 ∷ triple d2 d0 d3 ∷ triple d2 d0 d4 ∷
+  triple d2 d1 d0 ∷ triple d2 d1 d1 ∷ triple d2 d1 d2 ∷ triple d2 d1 d3 ∷ triple d2 d1 d4 ∷
+  triple d2 d2 d0 ∷ triple d2 d2 d1 ∷ triple d2 d2 d2 ∷ triple d2 d2 d3 ∷ triple d2 d2 d4 ∷
+  triple d2 d3 d0 ∷ triple d2 d3 d1 ∷ triple d2 d3 d2 ∷ triple d2 d3 d3 ∷ triple d2 d3 d4 ∷
+  triple d2 d4 d0 ∷ triple d2 d4 d1 ∷ triple d2 d4 d2 ∷ triple d2 d4 d3 ∷ triple d2 d4 d4 ∷
+  triple d3 d0 d0 ∷ triple d3 d0 d1 ∷ triple d3 d0 d2 ∷ triple d3 d0 d3 ∷ triple d3 d0 d4 ∷
+  triple d3 d1 d0 ∷ triple d3 d1 d1 ∷ triple d3 d1 d2 ∷ triple d3 d1 d3 ∷ triple d3 d1 d4 ∷
+  triple d3 d2 d0 ∷ triple d3 d2 d1 ∷ triple d3 d2 d2 ∷ triple d3 d2 d3 ∷ triple d3 d2 d4 ∷
+  triple d3 d3 d0 ∷ triple d3 d3 d1 ∷ triple d3 d3 d2 ∷ triple d3 d3 d3 ∷ triple d3 d3 d4 ∷
+  triple d3 d4 d0 ∷ triple d3 d4 d1 ∷ triple d3 d4 d2 ∷ triple d3 d4 d3 ∷ triple d3 d4 d4 ∷
+  triple d4 d0 d0 ∷ triple d4 d0 d1 ∷ triple d4 d0 d2 ∷ triple d4 d0 d3 ∷ triple d4 d0 d4 ∷
+  triple d4 d1 d0 ∷ triple d4 d1 d1 ∷ triple d4 d1 d2 ∷ triple d4 d1 d3 ∷ triple d4 d1 d4 ∷
+  triple d4 d2 d0 ∷ triple d4 d2 d1 ∷ triple d4 d2 d2 ∷ triple d4 d2 d3 ∷ triple d4 d2 d4 ∷
+  triple d4 d3 d0 ∷ triple d4 d3 d1 ∷ triple d4 d3 d2 ∷ triple d4 d3 d3 ∷ triple d4 d3 d4 ∷
+  triple d4 d4 d0 ∷ triple d4 d4 d1 ∷ triple d4 d4 d2 ∷ triple d4 d4 d3 ∷ triple d4 d4 d4 ∷ []
 
 length : {A : Set} → List A → Nat
 length [] = 0
@@ -228,7 +127,6 @@ firstScalarCollisionPairCount = unorderedCollisionPairs sameFirst allTriples
 twoScalarCollisionPairCount : Nat
 twoScalarCollisionPairCount = unorderedCollisionPairs sameTwo allTriples
 
--- Exhaustive computation over all C(125,2) unordered pairs.
 firstScalarHasExactly16CollisionPairs :
   firstScalarCollisionPairCount ≡ 16
 firstScalarHasExactly16CollisionPairs = refl
@@ -252,9 +150,6 @@ actualCBD2TripleSliceProfile =
   exhaustiveTripleSliceProfile 125 16 0 refl refl refl
 
 ------------------------------------------------------------------------
--- Claim boundary.
---
--- Zero collision pairs is an exhaustive finite result for this selected
--- three-source-coefficient slice.  It does not say that two NTT coordinates
--- identify an entire ML-KEM polynomial, module secret, or protected label.
+-- Zero collision pairs is exhaustive for this selected 3-coefficient slice.
+-- It does not say two NTT coordinates identify an entire ML-KEM secret.
 ------------------------------------------------------------------------
