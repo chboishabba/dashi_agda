@@ -23,6 +23,7 @@ import DASHI.Crypto.MLKEMNTTParityBlockPriorExact
 import DASHI.Crypto.ObservationAcquisitionCostExact
 import DASHI.Crypto.KeyConfirmationObservationRefinementExact
 import DASHI.Crypto.MLKEMImplicitRejectProtocolObservationExact
+import DASHI.Crypto.MLKEMImplicitRejectTimingCompositionExact
 import DASHI.Crypto.FiniteMLWEConfirmationObservationExact
 
 open import Agda.Builtin.Bool using (Bool; false; true)
