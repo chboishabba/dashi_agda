@@ -92,45 +92,45 @@ unitBoundaryPeriodicMinusOpen = ℚRing.solve []
 
 physicalFibreWrapEnergy :
   SiteField side4 → Axis4 → Triple (CyclicIndex side4) → ℚ
-physicalFibreWrapEnergy field axis transverse =
+physicalFibreWrapEnergy fieldValue axis transverse =
   sq
-    (field (insertAxis axis index0 transverse)
-    - field (insertAxis axis index3 transverse))
+    (fieldValue (insertAxis axis index0 transverse)
+    - fieldValue (insertAxis axis index3 transverse))
 
 physicalFibrePeriodicEdgeEnergy :
   SiteField side4 → Axis4 → Triple (CyclicIndex side4) → ℚ
-physicalFibrePeriodicEdgeEnergy field axis transverse =
-  physicalFibreEdgeEnergy field axis transverse
-  + physicalFibreWrapEnergy field axis transverse
+physicalFibrePeriodicEdgeEnergy fieldValue axis transverse =
+  physicalFibreEdgeEnergy fieldValue axis transverse
+  + physicalFibreWrapEnergy fieldValue axis transverse
 
-physicalOpenFibreIsPathEnergy : ∀ field axis transverse →
-  physicalFibreEdgeEnergy field axis transverse
+physicalOpenFibreIsPathEnergy : ∀ fieldValue axis transverse →
+  physicalFibreEdgeEnergy fieldValue axis transverse
   ≡ openPathEnergy4
-      (field (insertAxis axis index0 transverse))
-      (field (insertAxis axis index1 transverse))
-      (field (insertAxis axis index2 transverse))
-      (field (insertAxis axis index3 transverse))
-physicalOpenFibreIsPathEnergy field axis transverse = refl
+      (fieldValue (insertAxis axis index0 transverse))
+      (fieldValue (insertAxis axis index1 transverse))
+      (fieldValue (insertAxis axis index2 transverse))
+      (fieldValue (insertAxis axis index3 transverse))
+physicalOpenFibreIsPathEnergy fieldValue axis transverse = refl
 
-physicalPeriodicFibreIsCycleEnergy : ∀ field axis transverse →
-  physicalFibrePeriodicEdgeEnergy field axis transverse
+physicalPeriodicFibreIsCycleEnergy : ∀ fieldValue axis transverse →
+  physicalFibrePeriodicEdgeEnergy fieldValue axis transverse
   ≡ periodicCycleEnergy4
-      (field (insertAxis axis index0 transverse))
-      (field (insertAxis axis index1 transverse))
-      (field (insertAxis axis index2 transverse))
-      (field (insertAxis axis index3 transverse))
-physicalPeriodicFibreIsCycleEnergy field axis transverse =
+      (fieldValue (insertAxis axis index0 transverse))
+      (fieldValue (insertAxis axis index1 transverse))
+      (fieldValue (insertAxis axis index2 transverse))
+      (fieldValue (insertAxis axis index3 transverse))
+physicalPeriodicFibreIsCycleEnergy fieldValue axis transverse =
   trans
     (cong
-      (_+ physicalFibreWrapEnergy field axis transverse)
-      (physicalOpenFibreIsPathEnergy field axis transverse))
+      (_+ physicalFibreWrapEnergy fieldValue axis transverse)
+      (physicalOpenFibreIsPathEnergy fieldValue axis transverse))
     refl
 
-physicalPeriodicFibreSplitsOpenAndWrap : ∀ field axis transverse →
-  physicalFibrePeriodicEdgeEnergy field axis transverse
-  ≡ physicalFibreEdgeEnergy field axis transverse
-    + physicalFibreWrapEnergy field axis transverse
-physicalPeriodicFibreSplitsOpenAndWrap field axis transverse = refl
+physicalPeriodicFibreSplitsOpenAndWrap : ∀ fieldValue axis transverse →
+  physicalFibrePeriodicEdgeEnergy fieldValue axis transverse
+  ≡ physicalFibreEdgeEnergy fieldValue axis transverse
+    + physicalFibreWrapEnergy fieldValue axis transverse
+physicalPeriodicFibreSplitsOpenAndWrap fieldValue axis transverse = refl
 
 openPathBoundaryConventionLevel : ProofLevel
 openPathBoundaryConventionLevel = machineChecked

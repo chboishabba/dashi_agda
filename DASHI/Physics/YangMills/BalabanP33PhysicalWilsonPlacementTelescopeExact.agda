@@ -180,9 +180,9 @@ physicalNamedPlacementAtom :
   Physical.Plaquette4 →
   Placement.PlaquetteSecondVariationPlacement4 →
   Q.RationalQuaternion
-physicalNamedPlacementAtom background field plaquette placement =
+physicalNamedPlacementAtom background fieldValue plaquette placement =
   let
-    dataSet = Physical.plaquetteJetData background field plaquette
+    dataSet = Physical.plaquetteJetData background fieldValue plaquette
   in
   Named.placementQuaternionAtom
     (Jets.link0 dataSet) (Jets.link1 dataSet)
@@ -193,18 +193,18 @@ physicalPlacementAtoms :
   Physical.RationalSU2Background4 →
   Coordinates.PhysicalSU2BondField4 →
   Physical.Plaquette4 → List Q.RationalQuaternion
-physicalPlacementAtoms background field plaquette =
-  map (physicalNamedPlacementAtom background field plaquette)
+physicalPlacementAtoms background fieldValue plaquette =
+  map (physicalNamedPlacementAtom background fieldValue plaquette)
     Placement.plaquetteSecondVariationPlacements4
 
 physicalPlacementAtomsMatchGeneratedProductRule :
-  ∀ background field plaquette →
-  physicalPlacementAtoms background field plaquette
+  ∀ background fieldValue plaquette →
+  physicalPlacementAtoms background fieldValue plaquette
   ≡ Q.secondVariationTerms
-      (Physical.plaquetteFactorJets background field plaquette)
-physicalPlacementAtomsMatchGeneratedProductRule background field plaquette =
+      (Physical.plaquetteFactorJets background fieldValue plaquette)
+physicalPlacementAtomsMatchGeneratedProductRule background fieldValue plaquette =
   let
-    dataSet = Physical.plaquetteJetData background field plaquette
+    dataSet = Physical.plaquetteJetData background fieldValue plaquette
   in
   Named.placementAtomsMatchGeneratedProductRule
     (Jets.link0 dataSet) (Jets.link1 dataSet)
@@ -216,20 +216,20 @@ physicalNamedPlacementDefect :
   Physical.Plaquette4 →
   Placement.PlaquetteSecondVariationPlacement4 →
   Q.RationalQuaternion
-physicalNamedPlacementDefect background field plaquette placement =
+physicalNamedPlacementDefect background fieldValue plaquette placement =
   Telescope._-q_
-    (physicalNamedPlacementAtom background field plaquette placement)
+    (physicalNamedPlacementAtom background fieldValue plaquette placement)
     (physicalNamedPlacementAtom
-      Physical.identityBackground field plaquette placement)
+      Physical.identityBackground fieldValue plaquette placement)
 
 physicalNamedPlacementDefectTelescopeExact :
-  ∀ background field plaquette placement →
-  physicalNamedPlacementDefect background field plaquette placement
+  ∀ background fieldValue plaquette placement →
+  physicalNamedPlacementDefect background fieldValue plaquette placement
   ≡
   let
-    backgroundData = Physical.plaquetteJetData background field plaquette
+    backgroundData = Physical.plaquetteJetData background fieldValue plaquette
     identityData =
-      Physical.plaquetteJetData Physical.identityBackground field plaquette
+      Physical.plaquetteJetData Physical.identityBackground fieldValue plaquette
 
     a0 = selectedFactor0 (Jets.link0 backgroundData) placement
     a1 = selectedFactor1 (Jets.link1 backgroundData) placement
@@ -243,26 +243,26 @@ physicalNamedPlacementDefectTelescopeExact :
   in
   Telescope.fourFactorTelescope a0 a1 a2 a3 b0 b1 b2 b3
 physicalNamedPlacementDefectTelescopeExact
-    background field plaquette placement
+    background fieldValue plaquette placement
   rewrite namedPlacementAtomIsSelectedProduct
-      (Jets.link0 (Physical.plaquetteJetData background field plaquette))
-      (Jets.link1 (Physical.plaquetteJetData background field plaquette))
-      (Jets.link2 (Physical.plaquetteJetData background field plaquette))
-      (Jets.link3 (Physical.plaquetteJetData background field plaquette))
+      (Jets.link0 (Physical.plaquetteJetData background fieldValue plaquette))
+      (Jets.link1 (Physical.plaquetteJetData background fieldValue plaquette))
+      (Jets.link2 (Physical.plaquetteJetData background fieldValue plaquette))
+      (Jets.link3 (Physical.plaquetteJetData background fieldValue plaquette))
       placement
         | namedPlacementAtomIsSelectedProduct
       (Jets.link0
         (Physical.plaquetteJetData
-          Physical.identityBackground field plaquette))
+          Physical.identityBackground fieldValue plaquette))
       (Jets.link1
         (Physical.plaquetteJetData
-          Physical.identityBackground field plaquette))
+          Physical.identityBackground fieldValue plaquette))
       (Jets.link2
         (Physical.plaquetteJetData
-          Physical.identityBackground field plaquette))
+          Physical.identityBackground fieldValue plaquette))
       (Jets.link3
         (Physical.plaquetteJetData
-          Physical.identityBackground field plaquette))
+          Physical.identityBackground fieldValue plaquette))
       placement =
   Telescope.fourFactorDifferenceTelescopeExact _ _ _ _ _ _ _ _
 
@@ -272,21 +272,21 @@ physicalPlacementWilsonScalarDefect :
   Physical.Plaquette4 →
   Placement.PlaquetteSecondVariationPlacement4 →
   ℚ
-physicalPlacementWilsonScalarDefect background field plaquette placement =
+physicalPlacementWilsonScalarDefect background fieldValue plaquette placement =
   Telescope.wilsonScalarDifference
-    (physicalNamedPlacementAtom background field plaquette placement)
+    (physicalNamedPlacementAtom background fieldValue plaquette placement)
     (physicalNamedPlacementAtom
-      Physical.identityBackground field plaquette placement)
+      Physical.identityBackground fieldValue plaquette placement)
 
 physicalPlacementWilsonScalarDefectTelescopeExact :
-  ∀ background field plaquette placement →
+  ∀ background fieldValue plaquette placement →
   physicalPlacementWilsonScalarDefect
-    background field plaquette placement
+    background fieldValue plaquette placement
   ≡
   let
-    backgroundData = Physical.plaquetteJetData background field plaquette
+    backgroundData = Physical.plaquetteJetData background fieldValue plaquette
     identityData =
-      Physical.plaquetteJetData Physical.identityBackground field plaquette
+      Physical.plaquetteJetData Physical.identityBackground fieldValue plaquette
 
     a0 = selectedFactor0 (Jets.link0 backgroundData) placement
     a1 = selectedFactor1 (Jets.link1 backgroundData) placement
@@ -301,26 +301,26 @@ physicalPlacementWilsonScalarDefectTelescopeExact :
   Telescope.wilsonScalar
     (Telescope.fourFactorTelescope a0 a1 a2 a3 b0 b1 b2 b3)
 physicalPlacementWilsonScalarDefectTelescopeExact
-    background field plaquette placement
+    background fieldValue plaquette placement
   rewrite namedPlacementAtomIsSelectedProduct
-      (Jets.link0 (Physical.plaquetteJetData background field plaquette))
-      (Jets.link1 (Physical.plaquetteJetData background field plaquette))
-      (Jets.link2 (Physical.plaquetteJetData background field plaquette))
-      (Jets.link3 (Physical.plaquetteJetData background field plaquette))
+      (Jets.link0 (Physical.plaquetteJetData background fieldValue plaquette))
+      (Jets.link1 (Physical.plaquetteJetData background fieldValue plaquette))
+      (Jets.link2 (Physical.plaquetteJetData background fieldValue plaquette))
+      (Jets.link3 (Physical.plaquetteJetData background fieldValue plaquette))
       placement
         | namedPlacementAtomIsSelectedProduct
       (Jets.link0
         (Physical.plaquetteJetData
-          Physical.identityBackground field plaquette))
+          Physical.identityBackground fieldValue plaquette))
       (Jets.link1
         (Physical.plaquetteJetData
-          Physical.identityBackground field plaquette))
+          Physical.identityBackground fieldValue plaquette))
       (Jets.link2
         (Physical.plaquetteJetData
-          Physical.identityBackground field plaquette))
+          Physical.identityBackground fieldValue plaquette))
       (Jets.link3
         (Physical.plaquetteJetData
-          Physical.identityBackground field plaquette))
+          Physical.identityBackground fieldValue plaquette))
       placement =
   Telescope.wilsonScalarDifferenceTelescopeExact _ _ _ _ _ _ _ _
 

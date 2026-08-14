@@ -23,120 +23,120 @@ open import DASHI.Physics.YangMills.BalabanPath4GeneratedLDLCertificate
 zeroMeanPath4Coordinates :
   SiteField fourSide → Axis4 → Triple (CyclicIndex fourSide) →
   Path4Coordinates
-zeroMeanPath4Coordinates field axis transverse =
+zeroMeanPath4Coordinates fieldValue axis transverse =
   path4Coordinates
-    (field (insertAxis axis index0 transverse))
-    (field (insertAxis axis index1 transverse))
-    (field (insertAxis axis index2 transverse))
+    (fieldValue (insertAxis axis index0 transverse))
+    (fieldValue (insertAxis axis index1 transverse))
+    (fieldValue (insertAxis axis index2 transverse))
 
 physicalFibre4SumExpansion :
-  ∀ field axis transverse →
-  physicalFibreSum field axis transverse
-  ≡ field (insertAxis axis index0 transverse)
-    + (field (insertAxis axis index1 transverse)
-    + (field (insertAxis axis index2 transverse)
-    + (field (insertAxis axis index3 transverse) + 0ℚ)))
-physicalFibre4SumExpansion field axis transverse = refl
+  ∀ fieldValue axis transverse →
+  physicalFibreSum fieldValue axis transverse
+  ≡ fieldValue (insertAxis axis index0 transverse)
+    + (fieldValue (insertAxis axis index1 transverse)
+    + (fieldValue (insertAxis axis index2 transverse)
+    + (fieldValue (insertAxis axis index3 transverse) + 0ℚ)))
+physicalFibre4SumExpansion fieldValue axis transverse = refl
 
 zeroMeanFourthCoordinate :
-  ∀ field axis transverse →
-  physicalFibreSum field axis transverse ≡ 0ℚ →
-  field (insertAxis axis index3 transverse)
-  ≡ lastCoordinate (zeroMeanPath4Coordinates field axis transverse)
-zeroMeanFourthCoordinate field axis transverse meanZero =
+  ∀ fieldValue axis transverse →
+  physicalFibreSum fieldValue axis transverse ≡ 0ℚ →
+  fieldValue (insertAxis axis index3 transverse)
+  ≡ lastCoordinate (zeroMeanPath4Coordinates fieldValue axis transverse)
+zeroMeanFourthCoordinate fieldValue axis transverse meanZero =
   isolateFourthFromZero
-    (field (insertAxis axis index0 transverse))
-    (field (insertAxis axis index1 transverse))
-    (field (insertAxis axis index2 transverse))
-    (field (insertAxis axis index3 transverse))
+    (fieldValue (insertAxis axis index0 transverse))
+    (fieldValue (insertAxis axis index1 transverse))
+    (fieldValue (insertAxis axis index2 transverse))
+    (fieldValue (insertAxis axis index3 transverse))
     (trans
-      (sym (physicalFibre4SumExpansion field axis transverse))
+      (sym (physicalFibre4SumExpansion fieldValue axis transverse))
       meanZero)
 
 physicalFibre4NormExpansion :
-  ∀ field axis transverse →
-  physicalFibreNormSq field axis transverse
-  ≡ sq (field (insertAxis axis index0 transverse))
-    + (sq (field (insertAxis axis index1 transverse))
-    + (sq (field (insertAxis axis index2 transverse))
-    + (sq (field (insertAxis axis index3 transverse)) + 0ℚ)))
-physicalFibre4NormExpansion field axis transverse = refl
+  ∀ fieldValue axis transverse →
+  physicalFibreNormSq fieldValue axis transverse
+  ≡ sq (fieldValue (insertAxis axis index0 transverse))
+    + (sq (fieldValue (insertAxis axis index1 transverse))
+    + (sq (fieldValue (insertAxis axis index2 transverse))
+    + (sq (fieldValue (insertAxis axis index3 transverse)) + 0ℚ)))
+physicalFibre4NormExpansion fieldValue axis transverse = refl
 
 physicalFibre4EnergyExpansion :
-  ∀ field axis transverse →
-  physicalFibreEdgeEnergy field axis transverse
+  ∀ fieldValue axis transverse →
+  physicalFibreEdgeEnergy fieldValue axis transverse
   ≡ sq
-      (field (insertAxis axis index1 transverse)
-      - field (insertAxis axis index0 transverse))
+      (fieldValue (insertAxis axis index1 transverse)
+      - fieldValue (insertAxis axis index0 transverse))
     + (sq
-        (field (insertAxis axis index2 transverse)
-        - field (insertAxis axis index1 transverse))
+        (fieldValue (insertAxis axis index2 transverse)
+        - fieldValue (insertAxis axis index1 transverse))
     + (sq
-        (field (insertAxis axis index3 transverse)
-        - field (insertAxis axis index2 transverse))
+        (fieldValue (insertAxis axis index3 transverse)
+        - fieldValue (insertAxis axis index2 transverse))
       + 0ℚ))
-physicalFibre4EnergyExpansion field axis transverse = refl
+physicalFibre4EnergyExpansion fieldValue axis transverse = refl
 
 zeroMeanPhysicalNormMatchesGenerated :
-  ∀ field axis transverse →
-  physicalFibreSum field axis transverse ≡ 0ℚ →
-  physicalFibreNormSq field axis transverse
-  ≡ path4NormSq (zeroMeanPath4Coordinates field axis transverse)
-zeroMeanPhysicalNormMatchesGenerated field axis transverse meanZero =
+  ∀ fieldValue axis transverse →
+  physicalFibreSum fieldValue axis transverse ≡ 0ℚ →
+  physicalFibreNormSq fieldValue axis transverse
+  ≡ path4NormSq (zeroMeanPath4Coordinates fieldValue axis transverse)
+zeroMeanPhysicalNormMatchesGenerated fieldValue axis transverse meanZero =
   trans
-    (physicalFibre4NormExpansion field axis transverse)
+    (physicalFibre4NormExpansion fieldValue axis transverse)
     (subst
       (λ fourth →
-        sq (field (insertAxis axis index0 transverse))
-        + (sq (field (insertAxis axis index1 transverse))
-        + (sq (field (insertAxis axis index2 transverse))
+        sq (fieldValue (insertAxis axis index0 transverse))
+        + (sq (fieldValue (insertAxis axis index1 transverse))
+        + (sq (fieldValue (insertAxis axis index2 transverse))
         + (sq fourth + 0ℚ)))
-        ≡ path4NormSq (zeroMeanPath4Coordinates field axis transverse))
-      (zeroMeanFourthCoordinate field axis transverse meanZero)
+        ≡ path4NormSq (zeroMeanPath4Coordinates fieldValue axis transverse))
+      (zeroMeanFourthCoordinate fieldValue axis transverse meanZero)
       (ℚRing.solve-∀))
 
 zeroMeanPhysicalEnergyMatchesGenerated :
-  ∀ field axis transverse →
-  physicalFibreSum field axis transverse ≡ 0ℚ →
-  physicalFibreEdgeEnergy field axis transverse
-  ≡ path4Energy (zeroMeanPath4Coordinates field axis transverse)
-zeroMeanPhysicalEnergyMatchesGenerated field axis transverse meanZero =
+  ∀ fieldValue axis transverse →
+  physicalFibreSum fieldValue axis transverse ≡ 0ℚ →
+  physicalFibreEdgeEnergy fieldValue axis transverse
+  ≡ path4Energy (zeroMeanPath4Coordinates fieldValue axis transverse)
+zeroMeanPhysicalEnergyMatchesGenerated fieldValue axis transverse meanZero =
   trans
-    (physicalFibre4EnergyExpansion field axis transverse)
+    (physicalFibre4EnergyExpansion fieldValue axis transverse)
     (subst
       (λ fourth →
         sq
-          (field (insertAxis axis index1 transverse)
-          - field (insertAxis axis index0 transverse))
+          (fieldValue (insertAxis axis index1 transverse)
+          - fieldValue (insertAxis axis index0 transverse))
         + (sq
-            (field (insertAxis axis index2 transverse)
-            - field (insertAxis axis index1 transverse))
+            (fieldValue (insertAxis axis index2 transverse)
+            - fieldValue (insertAxis axis index1 transverse))
         + (sq
-            (fourth - field (insertAxis axis index2 transverse))
+            (fourth - fieldValue (insertAxis axis index2 transverse))
           + 0ℚ))
-        ≡ path4Energy (zeroMeanPath4Coordinates field axis transverse))
-      (zeroMeanFourthCoordinate field axis transverse meanZero)
+        ≡ path4Energy (zeroMeanPath4Coordinates fieldValue axis transverse))
+      (zeroMeanFourthCoordinate fieldValue axis transverse meanZero)
       (ℚRing.solve-∀))
 
 zeroMeanPhysicalFibrePoincare :
-  ∀ field axis transverse →
-  physicalFibreSum field axis transverse ≡ 0ℚ →
-  oneSixteenth * physicalFibreNormSq field axis transverse
-  ≤ physicalFibreEdgeEnergy field axis transverse
-zeroMeanPhysicalFibrePoincare field axis transverse meanZero =
+  ∀ fieldValue axis transverse →
+  physicalFibreSum fieldValue axis transverse ≡ 0ℚ →
+  oneSixteenth * physicalFibreNormSq fieldValue axis transverse
+  ≤ physicalFibreEdgeEnergy fieldValue axis transverse
+zeroMeanPhysicalFibrePoincare fieldValue axis transverse meanZero =
   subst
     (λ energyValue →
-      oneSixteenth * physicalFibreNormSq field axis transverse
+      oneSixteenth * physicalFibreNormSq fieldValue axis transverse
       ≤ energyValue)
     (sym (zeroMeanPhysicalEnergyMatchesGenerated
-      field axis transverse meanZero))
+      fieldValue axis transverse meanZero))
     (subst
       (λ normValue →
         oneSixteenth * normValue
-        ≤ path4Energy (zeroMeanPath4Coordinates field axis transverse))
+        ≤ path4Energy (zeroMeanPath4Coordinates fieldValue axis transverse))
       (sym (zeroMeanPhysicalNormMatchesGenerated
-        field axis transverse meanZero))
-      (path4Poincare (zeroMeanPath4Coordinates field axis transverse)))
+        fieldValue axis transverse meanZero))
+      (path4Poincare (zeroMeanPath4Coordinates fieldValue axis transverse)))
 
 path4ZeroMeanPhysicalFibreMatchLevel : ProofLevel
 path4ZeroMeanPhysicalFibreMatchLevel = machineChecked

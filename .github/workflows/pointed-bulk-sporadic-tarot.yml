@@ -64,6 +64,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Install Nix
         uses: cachix/install-nix-action@v31
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
       - name: Resolve repository Agda toolchain
         shell: bash
         run: |

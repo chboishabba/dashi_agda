@@ -72,162 +72,162 @@ flatCurlEnergy : Physical.PhysicalSU2BondField4 → ℚ
 flatCurlEnergy = FlatWilson.flatWilsonEnergy
 
 flatDivergenceEnergy : Physical.PhysicalSU2BondField4 → ℚ
-flatDivergenceEnergy field =
+flatDivergenceEnergy fieldValue =
   Periodic.physicalPeriodicDivergenceEnergy
-    (Boundary.asPeriodicField field)
+    (Boundary.asPeriodicField fieldValue)
 
 boundaryEnergy : Physical.PhysicalSU2BondField4 → ℚ
 boundaryEnergy = Boundary.physicalBoundaryWrapEnergy
 
-flatWilsonDivergenceEqualsOpenReferencePlusBoundary : ∀ field →
-  flatCurlEnergy field + flatDivergenceEnergy field
-  ≡ PhysicalHodge.physicalReferenceDifferenceEnergy field
-    + boundaryEnergy field
-flatWilsonDivergenceEqualsOpenReferencePlusBoundary field =
+flatWilsonDivergenceEqualsOpenReferencePlusBoundary : ∀ fieldValue →
+  flatCurlEnergy fieldValue + flatDivergenceEnergy fieldValue
+  ≡ PhysicalHodge.physicalReferenceDifferenceEnergy fieldValue
+    + boundaryEnergy fieldValue
+flatWilsonDivergenceEqualsOpenReferencePlusBoundary fieldValue =
   trans
     (cong
-      (_+ flatDivergenceEnergy field)
-      (FlatWilson.flatWilsonEnergyIsPhysicalPeriodicCurl field))
-    (Boundary.physicalFlatHodgeWithBoundary field)
+      (_+ flatDivergenceEnergy fieldValue)
+      (FlatWilson.flatWilsonEnergyIsPhysicalPeriodicCurl fieldValue))
+    (Boundary.physicalFlatHodgeWithBoundary fieldValue)
   where
   open import Relation.Binary.PropositionalEquality using (cong)
 
 coupledRemainderWithBoundaryExact :
   ∀ {Plaquette GaugeIndex ConstraintIndex}
-    (field : Physical.PhysicalSU2BondField4)
+    (fieldValue : Physical.PhysicalSU2BondField4)
     (dataSet : Jets.LiteralPhysicalSecondVariation
       Plaquette GaugeIndex ConstraintIndex) →
   Jets.wilsonSecondVariation dataSet
     + Cancel.gaugeFirstEnergy dataSet
-    - PhysicalHodge.physicalReferenceDifferenceEnergy field
-  ≡ (Jets.wilsonSecondVariation dataSet - flatCurlEnergy field)
-    + (Cancel.gaugeFirstEnergy dataSet - flatDivergenceEnergy field)
-    + boundaryEnergy field
-coupledRemainderWithBoundaryExact field dataSet =
+    - PhysicalHodge.physicalReferenceDifferenceEnergy fieldValue
+  ≡ (Jets.wilsonSecondVariation dataSet - flatCurlEnergy fieldValue)
+    + (Cancel.gaugeFirstEnergy dataSet - flatDivergenceEnergy fieldValue)
+    + boundaryEnergy fieldValue
+coupledRemainderWithBoundaryExact fieldValue dataSet =
   let
     hodgeExact =
-      flatWilsonDivergenceEqualsOpenReferencePlusBoundary field
+      flatWilsonDivergenceEqualsOpenReferencePlusBoundary fieldValue
   in
   subst
     (λ selected →
       Jets.wilsonSecondVariation dataSet
         + Cancel.gaugeFirstEnergy dataSet
         - selected
-      ≡ (Jets.wilsonSecondVariation dataSet - flatCurlEnergy field)
-        + (Cancel.gaugeFirstEnergy dataSet - flatDivergenceEnergy field)
-        + boundaryEnergy field)
+      ≡ (Jets.wilsonSecondVariation dataSet - flatCurlEnergy fieldValue)
+        + (Cancel.gaugeFirstEnergy dataSet - flatDivergenceEnergy fieldValue)
+        + boundaryEnergy fieldValue)
     (ℚRing.solve-∀
-      (flatCurlEnergy field)
-      (flatDivergenceEnergy field)
-      (boundaryEnergy field))
+      (flatCurlEnergy fieldValue)
+      (flatDivergenceEnergy fieldValue)
+      (boundaryEnergy fieldValue))
     (subst
       (λ selected →
         Jets.wilsonSecondVariation dataSet
           + Cancel.gaugeFirstEnergy dataSet
-          - (flatCurlEnergy field + flatDivergenceEnergy field
-            - boundaryEnergy field)
+          - (flatCurlEnergy fieldValue + flatDivergenceEnergy fieldValue
+            - boundaryEnergy fieldValue)
         ≡ selected)
       (sym hodgeExact)
       (ℚRing.solve-∀
         (Jets.wilsonSecondVariation dataSet)
         (Cancel.gaugeFirstEnergy dataSet)
-        (flatCurlEnergy field)
-        (flatDivergenceEnergy field)
-        (boundaryEnergy field)))
+        (flatCurlEnergy fieldValue)
+        (flatDivergenceEnergy fieldValue)
+        (boundaryEnergy fieldValue)))
 
 boundaryAssistedSharpLower :
   ∀ {Plaquette GaugeIndex ConstraintIndex}
-    (field : Physical.PhysicalSU2BondField4)
+    (fieldValue : Physical.PhysicalSU2BondField4)
     (dataSet : Jets.LiteralPhysicalSecondVariation
       Plaquette GaugeIndex ConstraintIndex) →
-  - (Sharp.sharpSixteenAtomBudget * Physical.physicalSU2BondNormSq field)
-    ≤ Jets.wilsonSecondVariation dataSet - flatCurlEnergy field →
+  - (Sharp.sharpSixteenAtomBudget * Physical.physicalSU2BondNormSq fieldValue)
+    ≤ Jets.wilsonSecondVariation dataSet - flatCurlEnergy fieldValue →
   - (Budget.configuredGaugeHodgeBudget
-      * Physical.physicalSU2BondNormSq field)
-    ≤ Cancel.gaugeFirstEnergy dataSet - flatDivergenceEnergy field →
-  - (Budget.sharpWilsonGaugeBudget * Physical.physicalSU2BondNormSq field)
+      * Physical.physicalSU2BondNormSq fieldValue)
+    ≤ Cancel.gaugeFirstEnergy dataSet - flatDivergenceEnergy fieldValue →
+  - (Budget.sharpWilsonGaugeBudget * Physical.physicalSU2BondNormSq fieldValue)
     ≤ Jets.wilsonSecondVariation dataSet
       + Cancel.gaugeFirstEnergy dataSet
-      - PhysicalHodge.physicalReferenceDifferenceEnergy field
-boundaryAssistedSharpLower field dataSet wilsonLower gaugeLower =
+      - PhysicalHodge.physicalReferenceDifferenceEnergy fieldValue
+boundaryAssistedSharpLower fieldValue dataSet wilsonLower gaugeLower =
   let
     defectsLower :
       - (Budget.sharpWilsonGaugeBudget
-          * Physical.physicalSU2BondNormSq field)
-      ≤ (Jets.wilsonSecondVariation dataSet - flatCurlEnergy field)
-        + (Cancel.gaugeFirstEnergy dataSet - flatDivergenceEnergy field)
+          * Physical.physicalSU2BondNormSq fieldValue)
+      ≤ (Jets.wilsonSecondVariation dataSet - flatCurlEnergy fieldValue)
+        + (Cancel.gaugeFirstEnergy dataSet - flatDivergenceEnergy fieldValue)
     defectsLower =
       Budget.coupledSignedLowerFromSeparateBudgets
-        (Physical.physicalSU2BondNormSq field)
-        (Jets.wilsonSecondVariation dataSet - flatCurlEnergy field)
-        (Cancel.gaugeFirstEnergy dataSet - flatDivergenceEnergy field)
+        (Physical.physicalSU2BondNormSq fieldValue)
+        (Jets.wilsonSecondVariation dataSet - flatCurlEnergy fieldValue)
+        (Cancel.gaugeFirstEnergy dataSet - flatDivergenceEnergy fieldValue)
         wilsonLower gaugeLower
 
     instance
-      boundaryNN : NonNegative (boundaryEnergy field)
+      boundaryNN : NonNegative (boundaryEnergy fieldValue)
       boundaryNN = ℚ.nonNegative
-        (Boundary.physicalBoundaryWrapEnergyNonnegative field)
+        (Boundary.physicalBoundaryWrapEnergyNonnegative fieldValue)
 
     withBoundary :
       - (Budget.sharpWilsonGaugeBudget
-          * Physical.physicalSU2BondNormSq field)
-      ≤ (Jets.wilsonSecondVariation dataSet - flatCurlEnergy field)
-        + (Cancel.gaugeFirstEnergy dataSet - flatDivergenceEnergy field)
-        + boundaryEnergy field
+          * Physical.physicalSU2BondNormSq fieldValue)
+      ≤ (Jets.wilsonSecondVariation dataSet - flatCurlEnergy fieldValue)
+        + (Cancel.gaugeFirstEnergy dataSet - flatDivergenceEnergy fieldValue)
+        + boundaryEnergy fieldValue
     withBoundary =
       ℚP.≤-trans defectsLower
         (ℚP.p≤p+q
-          ((Jets.wilsonSecondVariation dataSet - flatCurlEnergy field)
-            + (Cancel.gaugeFirstEnergy dataSet - flatDivergenceEnergy field))
-          (boundaryEnergy field))
+          ((Jets.wilsonSecondVariation dataSet - flatCurlEnergy fieldValue)
+            + (Cancel.gaugeFirstEnergy dataSet - flatDivergenceEnergy fieldValue))
+          (boundaryEnergy fieldValue))
   in
   subst
     (λ upper →
       - (Budget.sharpWilsonGaugeBudget
-          * Physical.physicalSU2BondNormSq field)
+          * Physical.physicalSU2BondNormSq fieldValue)
       ≤ upper)
-    (sym (coupledRemainderWithBoundaryExact field dataSet))
+    (sym (coupledRemainderWithBoundaryExact fieldValue dataSet))
     withBoundary
 
 literalHessianCoerciveFromPhysicalWilsonGaugeDefects :
   ∀ {Plaquette GaugeIndex ConstraintIndex}
-    (field : Physical.PhysicalSU2BondField4)
+    (fieldValue : Physical.PhysicalSU2BondField4)
     (dataSet : Jets.LiteralPhysicalSecondVariation
       Plaquette GaugeIndex ConstraintIndex) →
-  PhysicalHodge.PhysicalBondComponentMeanZero field →
+  PhysicalHodge.PhysicalBondComponentMeanZero fieldValue →
   Jets.ExactResidualBackground (Jets.gaugeResidual dataSet) →
   Jets.ExactResidualBackground (Jets.constraintResidual dataSet) →
-  - (Sharp.sharpSixteenAtomBudget * Physical.physicalSU2BondNormSq field)
-    ≤ Jets.wilsonSecondVariation dataSet - flatCurlEnergy field →
+  - (Sharp.sharpSixteenAtomBudget * Physical.physicalSU2BondNormSq fieldValue)
+    ≤ Jets.wilsonSecondVariation dataSet - flatCurlEnergy fieldValue →
   - (Budget.configuredGaugeHodgeBudget
-      * Physical.physicalSU2BondNormSq field)
-    ≤ Cancel.gaugeFirstEnergy dataSet - flatDivergenceEnergy field →
-  P33.p33PhysicalFloor * Physical.physicalSU2BondNormSq field
+      * Physical.physicalSU2BondNormSq fieldValue)
+    ≤ Cancel.gaugeFirstEnergy dataSet - flatDivergenceEnergy fieldValue →
+  P33.p33PhysicalFloor * Physical.physicalSU2BondNormSq fieldValue
     ≤ Jets.literalTotalSecondVariation dataSet
 literalHessianCoerciveFromPhysicalWilsonGaugeDefects
-    field dataSet meanZero gaugeExact constraintExact
+    fieldValue dataSet meanZero gaugeExact constraintExact
     wilsonLower gaugeLower =
   let
     sharpLower =
       boundaryAssistedSharpLower
-        field dataSet wilsonLower gaugeLower
+        fieldValue dataSet wilsonLower gaugeLower
 
     physicalLower :
-      - (P33.p33PhysicalFloor * Physical.physicalSU2BondNormSq field)
+      - (P33.p33PhysicalFloor * Physical.physicalSU2BondNormSq fieldValue)
       ≤ Jets.wilsonSecondVariation dataSet
         + Cancel.gaugeFirstEnergy dataSet
-        - PhysicalHodge.physicalReferenceDifferenceEnergy field
+        - PhysicalHodge.physicalReferenceDifferenceEnergy fieldValue
     physicalLower =
       Budget.sharpCoupledLowerImpliesPhysicalSignedLower
-        (Physical.physicalSU2BondNormSq field)
+        (Physical.physicalSU2BondNormSq fieldValue)
         (Jets.wilsonSecondVariation dataSet
           + Cancel.gaugeFirstEnergy dataSet
-          - PhysicalHodge.physicalReferenceDifferenceEnergy field)
-        (Budget.physicalBondNormSqNonnegative field)
+          - PhysicalHodge.physicalReferenceDifferenceEnergy fieldValue)
+        (Budget.physicalBondNormSqNonnegative fieldValue)
         sharpLower
   in
   Cancel.literalHessianCoerciveFromWilsonGaugeHodgeDifference
-    field dataSet meanZero gaugeExact constraintExact physicalLower
+    fieldValue dataSet meanZero gaugeExact constraintExact physicalLower
 
 physicalFlatHodgeBoundaryReductionLevel : ProofLevel
 physicalFlatHodgeBoundaryReductionLevel = machineChecked

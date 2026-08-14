@@ -1,8 +1,80 @@
 #!/usr/bin/env bash
 set -euo pipefail
-
-JOBS="${AGDA_JOBS:-8}"
+JOBS="${AGDA_JOBS:-4}"
 AGDA_FLAKE="${AGDA_FLAKE:-/home/c/Documents/code/agda#debug.bin}"
+
+SESSION_NAME="${DASHI_TMUX_SESSION:-dashi_agda_check_$$}"
+WAIT_CHANNEL="dashi_wait_$$"
+STATUS_DIR="${DASHI_STATUS_DIR:-${XDG_CACHE_HOME:-/home/c/.cache}/dashi-agda29/status}"
+mkdir -p "$STATUS_DIR"
+STATUS_FILE="$(mktemp "$STATUS_DIR/status_XXXXXX.txt")"
+
+if [ -z "${TMUX:-}" ] && [ "${DASHI_NO_TMUX:-0}" != "1" ] && command -v tmux >/dev/null 2>&1; then
+  rm -f "$STATUS_FILE"
+  tmux kill-session -t "${SESSION_NAME}" 2>/dev/null || true
+
+  echo "Launching execution inside detached tmux session '${SESSION_NAME}' (waiting on channel ${WAIT_CHANNEL})..."
+
+  if ! tmux new-session -d -s "${SESSION_NAME}" \
+    "bash -lc '
+      set +e
+      DASHI_NO_TMUX=1 AGDA_JOBS=\"${JOBS}\" \"$0\" \"$@\"
+      rc=\$?
+      printf \"%s\\n\" \"\$rc\" > \"$STATUS_FILE\"
+      tmux wait-for -S \"${WAIT_CHANNEL}\"
+      if [ \"\$rc\" -ne 0 ] && [ \"\${DASHI_TMUX_KEEP_FAILED:-1}\" = \"1\" ]; then
+        echo
+        echo \"Agda check failed with status \$rc. Session retained for inspection: tmux attach -t ${SESSION_NAME}\"
+        exec bash
+      fi
+      exit \"\$rc\"
+    '"; then
+    printf '%s\n' "125" > "$STATUS_FILE"
+    rm -f "$STATUS_FILE"
+    echo "failed to launch tmux worker session '${SESSION_NAME}'" >&2
+    exit 125
+  fi
+
+  # Background sentinel: if the tmux session disappears (OOM kill, crash)
+  # before the worker signals, unblock the wait channel so we don't hang.
+  (
+    while tmux has-session -t "${SESSION_NAME}" 2>/dev/null; do
+      sleep 2
+    done
+    # Session is gone — give the worker a brief chance to publish its real
+    # status before recording the crash/disappearance sentinel.
+    for _ in 1 2 3 4 5; do
+      [ -s "$STATUS_FILE" ] && break
+      sleep 0.2
+    done
+    if [ ! -s "$STATUS_FILE" ]; then
+      STATUS_TMP="${STATUS_FILE}.tmp"
+      printf '%s\n' "137" > "$STATUS_TMP"
+      mv -f "$STATUS_TMP" "$STATUS_FILE"
+    fi
+    tmux wait-for -S "${WAIT_CHANNEL}" 2>/dev/null || true
+  ) &
+  SENTINEL_PID=$!
+
+  tmux wait-for "${WAIT_CHANNEL}" || true
+
+  # Clean up sentinel
+  kill "$SENTINEL_PID" 2>/dev/null || true
+  wait "$SENTINEL_PID" 2>/dev/null || true
+
+  if [ -s "$STATUS_FILE" ]; then
+    rc="$(cat "$STATUS_FILE")"
+    rm -f "$STATUS_FILE"
+    if [[ "$rc" =~ ^[0-9]+$ ]]; then
+      exit "$rc"
+    fi
+    echo "tmux worker recorded invalid exit status: ${rc@Q}" >&2
+    exit 125
+  fi
+
+  echo "tmux worker disappeared without recording an exit status" >&2
+  exit 125
+fi
 REPO_ROOT="${DASHI_REPO_ROOT:-/home/c/Documents/code/dashi_agda}"
 STDLIB_SRC="${AGDA_STDLIB_SRC_29:-${AGDA_STDLIB_SRC:-}}"
 STDLIB_REPO="${AGDA_STDLIB_REPO:-https://github.com/agda/agda-stdlib.git}"

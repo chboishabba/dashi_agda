@@ -108,61 +108,61 @@ terminalCoefficientScaledSplit = ℚRing.solve-∀
 
 literalHessianCoerciveAtTerminalCoefficient :
   ∀ {Plaquette GaugeIndex ConstraintIndex}
-    (field : Physical.PhysicalSU2BondField4)
+    (fieldValue : Physical.PhysicalSU2BondField4)
     (dataSet : Jets.LiteralPhysicalSecondVariation
       Plaquette GaugeIndex ConstraintIndex) →
-  PhysicalHodge.PhysicalBondComponentMeanZero field →
+  PhysicalHodge.PhysicalBondComponentMeanZero fieldValue →
   Jets.ExactResidualBackground (Jets.gaugeResidual dataSet) →
   Jets.ExactResidualBackground (Jets.constraintResidual dataSet) →
   - (Budget.sharpWilsonGaugeBudget
-      * Physical.physicalSU2BondNormSq field)
+      * Physical.physicalSU2BondNormSq fieldValue)
   ≤ Jets.wilsonSecondVariation dataSet
       + Cancel.gaugeFirstEnergy dataSet
-      - PhysicalHodge.physicalReferenceDifferenceEnergy field →
-  terminalPhysicalCoefficient * Physical.physicalSU2BondNormSq field
+      - PhysicalHodge.physicalReferenceDifferenceEnergy fieldValue →
+  terminalPhysicalCoefficient * Physical.physicalSU2BondNormSq fieldValue
   ≤ Jets.literalTotalSecondVariation dataSet
 literalHessianCoerciveAtTerminalCoefficient
-    field dataSet meanZero gaugeExact constraintExact coupledLower =
+    fieldValue dataSet meanZero gaugeExact constraintExact coupledLower =
   let
-    normSq = Physical.physicalSU2BondNormSq field
+    normSq = Physical.physicalSU2BondNormSq fieldValue
 
     matchedLower :
       - (Budget.sharpWilsonGaugeBudget * normSq)
-      ≤ Cancel.matchedSignedRemainder field dataSet
+      ≤ Cancel.matchedSignedRemainder fieldValue dataSet
     matchedLower =
       subst
         (λ remainder →
           - (Budget.sharpWilsonGaugeBudget * normSq) ≤ remainder)
         (sym
           (Cancel.constraintCancellationLeavesWilsonGaugeHodgeExact
-            field dataSet))
+            fieldValue dataSet))
         coupledLower
 
     referenceLower :
       LDL.oneSixteenth * normSq
-      ≤ Cancel.matchedReferenceEnergy field dataSet
+      ≤ Cancel.matchedReferenceEnergy fieldValue dataSet
     referenceLower =
       PhysicalHodge.physicalReferenceHodgeCoercivity
-        field (Cancel.constraintFirstEnergy dataSet)
+        fieldValue (Cancel.constraintFirstEnergy dataSet)
         meanZero (Cancel.constraintFirstEnergyNonnegative dataSet)
 
     summedLower :
       LDL.oneSixteenth * normSq
         + - (Budget.sharpWilsonGaugeBudget * normSq)
-      ≤ Cancel.matchedReferenceEnergy field dataSet
-        + Cancel.matchedSignedRemainder field dataSet
+      ≤ Cancel.matchedReferenceEnergy fieldValue dataSet
+        + Cancel.matchedSignedRemainder fieldValue dataSet
     summedLower = ℚP.+-mono-≤ referenceLower matchedLower
 
     terminalLower :
       terminalPhysicalCoefficient * normSq
-      ≤ Cancel.matchedReferenceEnergy field dataSet
-        + Cancel.matchedSignedRemainder field dataSet
+      ≤ Cancel.matchedReferenceEnergy fieldValue dataSet
+        + Cancel.matchedSignedRemainder fieldValue dataSet
     terminalLower =
       subst
         (λ lower →
           lower
-          ≤ Cancel.matchedReferenceEnergy field dataSet
-            + Cancel.matchedSignedRemainder field dataSet)
+          ≤ Cancel.matchedReferenceEnergy fieldValue dataSet
+            + Cancel.matchedSignedRemainder fieldValue dataSet)
         (sym (terminalCoefficientScaledSplit normSq))
         summedLower
 
@@ -172,7 +172,7 @@ literalHessianCoerciveAtTerminalCoefficient
     exactHessianLower =
       subst
         (λ upper → terminalPhysicalCoefficient * normSq ≤ upper)
-        (Cancel.matchedReferenceRecomposesExactHessian field dataSet)
+        (Cancel.matchedReferenceRecomposesExactHessian fieldValue dataSet)
         terminalLower
   in
   subst
@@ -184,23 +184,23 @@ literalHessianCoerciveAtTerminalCoefficient
 
 literalHessianCoerciveAtOneThirtySecond :
   ∀ {Plaquette GaugeIndex ConstraintIndex}
-    (field : Physical.PhysicalSU2BondField4)
+    (fieldValue : Physical.PhysicalSU2BondField4)
     (dataSet : Jets.LiteralPhysicalSecondVariation
       Plaquette GaugeIndex ConstraintIndex) →
-  PhysicalHodge.PhysicalBondComponentMeanZero field →
+  PhysicalHodge.PhysicalBondComponentMeanZero fieldValue →
   Jets.ExactResidualBackground (Jets.gaugeResidual dataSet) →
   Jets.ExactResidualBackground (Jets.constraintResidual dataSet) →
   - (Budget.sharpWilsonGaugeBudget
-      * Physical.physicalSU2BondNormSq field)
+      * Physical.physicalSU2BondNormSq fieldValue)
   ≤ Jets.wilsonSecondVariation dataSet
       + Cancel.gaugeFirstEnergy dataSet
-      - PhysicalHodge.physicalReferenceDifferenceEnergy field →
-  P33.p33PhysicalFloor * Physical.physicalSU2BondNormSq field
+      - PhysicalHodge.physicalReferenceDifferenceEnergy fieldValue →
+  P33.p33PhysicalFloor * Physical.physicalSU2BondNormSq fieldValue
   ≤ Jets.literalTotalSecondVariation dataSet
 literalHessianCoerciveAtOneThirtySecond
-    field dataSet meanZero gaugeExact constraintExact coupledLower =
+    fieldValue dataSet meanZero gaugeExact constraintExact coupledLower =
   let
-    normSq = Physical.physicalSU2BondNormSq field
+    normSq = Physical.physicalSU2BondNormSq fieldValue
 
     scaledFloor :
       P33.p33PhysicalFloor * normSq
@@ -209,13 +209,13 @@ literalHessianCoerciveAtOneThirtySecond
       let
         instance
           normNN : NonNegative normSq
-          normNN = ℚ.nonNegative (Budget.physicalBondNormSqNonnegative field)
+          normNN = ℚ.nonNegative (Budget.physicalBondNormSqNonnegative fieldValue)
       in
       ℚP.*-monoʳ-≤-nonNeg normSq oneThirtySecondBelowTerminalCoefficient
   in
   ℚP.≤-trans scaledFloor
     (literalHessianCoerciveAtTerminalCoefficient
-      field dataSet meanZero gaugeExact constraintExact coupledLower)
+      fieldValue dataSet meanZero gaugeExact constraintExact coupledLower)
 
 terminalPhysicalCoefficientLevel : ProofLevel
 terminalPhysicalCoefficientLevel = machineChecked

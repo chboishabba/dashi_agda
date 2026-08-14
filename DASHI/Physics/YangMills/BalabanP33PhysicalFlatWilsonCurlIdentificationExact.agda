@@ -53,72 +53,72 @@ import DASHI.Physics.YangMills.BalabanP33PeriodicFourDimensionalHodgeIdentityExa
 
 asPeriodicPhysicalField :
   Physical.PhysicalSU2BondField4 → Hodge4.PhysicalBondField4
-asPeriodicPhysicalField field coordinate axis site =
-  field coordinate (pair site axis)
+asPeriodicPhysicalField fieldValue coordinate axis site =
+  fieldValue coordinate (pair site axis)
 
 insertionAt :
   Physical.PhysicalSU2BondField4 →
   Axis4 → Hodge4.Site4 → Wilson.RationalVector3
-insertionAt field axis site =
+insertionAt fieldValue axis site =
   Wilson.vec3
-    (field Physical.coordinateX (pair site axis))
-    (field Physical.coordinateY (pair site axis))
-    (field Physical.coordinateZ (pair site axis))
+    (fieldValue Physical.coordinateX (pair site axis))
+    (fieldValue Physical.coordinateY (pair site axis))
+    (fieldValue Physical.coordinateZ (pair site axis))
 
 flatPlaquetteSecondVariation :
   Physical.PhysicalSU2BondField4 →
   Axis4 → Axis4 → Hodge4.Site4 → ℚ
-flatPlaquetteSecondVariation field left right site =
+flatPlaquetteSecondVariation fieldValue left right site =
   Wilson.flatOrientedPlaquetteSecondVariation
-    (insertionAt field left site)
-    (insertionAt field right (Hodge4.shiftForward left site))
-    (insertionAt field left (Hodge4.shiftForward right site))
-    (insertionAt field right site)
+    (insertionAt fieldValue left site)
+    (insertionAt fieldValue right (Hodge4.shiftForward left site))
+    (insertionAt fieldValue left (Hodge4.shiftForward right site))
+    (insertionAt fieldValue right site)
 
 plaquetteCurlCoordinate :
   Physical.PhysicalSU2BondField4 →
   Physical.LieCoordinate3 → Axis4 → Axis4 → Hodge4.Site4 → ℚ
-plaquetteCurlCoordinate field coordinate left right site =
+plaquetteCurlCoordinate fieldValue coordinate left right site =
   Hodge4.curlComponent left right
-    (asPeriodicPhysicalField field coordinate) site
+    (asPeriodicPhysicalField fieldValue coordinate) site
 
 flatPlaquetteSecondVariationIsPhysicalCurlSquare :
-  ∀ field left right site →
-  flatPlaquetteSecondVariation field left right site
+  ∀ fieldValue left right site →
+  flatPlaquetteSecondVariation fieldValue left right site
   ≡
-    plaquetteCurlCoordinate field Physical.coordinateX left right site
-      * plaquetteCurlCoordinate field Physical.coordinateX left right site
-    + plaquetteCurlCoordinate field Physical.coordinateY left right site
-      * plaquetteCurlCoordinate field Physical.coordinateY left right site
-    + plaquetteCurlCoordinate field Physical.coordinateZ left right site
-      * plaquetteCurlCoordinate field Physical.coordinateZ left right site
+    plaquetteCurlCoordinate fieldValue Physical.coordinateX left right site
+      * plaquetteCurlCoordinate fieldValue Physical.coordinateX left right site
+    + plaquetteCurlCoordinate fieldValue Physical.coordinateY left right site
+      * plaquetteCurlCoordinate fieldValue Physical.coordinateY left right site
+    + plaquetteCurlCoordinate fieldValue Physical.coordinateZ left right site
+      * plaquetteCurlCoordinate fieldValue Physical.coordinateZ left right site
 flatPlaquetteSecondVariationIsPhysicalCurlSquare
-    field left right site =
+    fieldValue left right site =
   trans
     (Wilson.flatPlaquetteWilsonIsCurlSquare
-      (insertionAt field left site)
-      (insertionAt field right (Hodge4.shiftForward left site))
-      (insertionAt field left (Hodge4.shiftForward right site))
-      (insertionAt field right site))
+      (insertionAt fieldValue left site)
+      (insertionAt fieldValue right (Hodge4.shiftForward left site))
+      (insertionAt fieldValue left (Hodge4.shiftForward right site))
+      (insertionAt fieldValue right site))
     (ℚRing.solve-∀
-      (field Physical.coordinateX (pair site left))
-      (field Physical.coordinateY (pair site left))
-      (field Physical.coordinateZ (pair site left))
-      (field Physical.coordinateX
+      (fieldValue Physical.coordinateX (pair site left))
+      (fieldValue Physical.coordinateY (pair site left))
+      (fieldValue Physical.coordinateZ (pair site left))
+      (fieldValue Physical.coordinateX
         (pair (Hodge4.shiftForward left site) right))
-      (field Physical.coordinateY
+      (fieldValue Physical.coordinateY
         (pair (Hodge4.shiftForward left site) right))
-      (field Physical.coordinateZ
+      (fieldValue Physical.coordinateZ
         (pair (Hodge4.shiftForward left site) right))
-      (field Physical.coordinateX
+      (fieldValue Physical.coordinateX
         (pair (Hodge4.shiftForward right site) left))
-      (field Physical.coordinateY
+      (fieldValue Physical.coordinateY
         (pair (Hodge4.shiftForward right site) left))
-      (field Physical.coordinateZ
+      (fieldValue Physical.coordinateZ
         (pair (Hodge4.shiftForward right site) left))
-      (field Physical.coordinateX (pair site right))
-      (field Physical.coordinateY (pair site right))
-      (field Physical.coordinateZ (pair site right)))
+      (fieldValue Physical.coordinateX (pair site right))
+      (fieldValue Physical.coordinateY (pair site right))
+      (fieldValue Physical.coordinateZ (pair site right)))
 
 ------------------------------------------------------------------------
 -- Six-pair physical sum.
@@ -126,135 +126,135 @@ flatPlaquetteSecondVariationIsPhysicalCurlSquare
 
 flatPlaquettePairEnergy :
   Physical.PhysicalSU2BondField4 → Axis4 → Axis4 → ℚ
-flatPlaquettePairEnergy field left right =
+flatPlaquettePairEnergy fieldValue left right =
   Hodge4.sumSites
-    (flatPlaquetteSecondVariation field left right)
+    (flatPlaquetteSecondVariation fieldValue left right)
 
 physicalPairCurlEnergy :
   Physical.PhysicalSU2BondField4 → Axis4 → Axis4 → ℚ
-physicalPairCurlEnergy field left right =
+physicalPairCurlEnergy fieldValue left right =
   Hodge4.fieldNormSq
     (Hodge4.curlComponent left right
-      (asPeriodicPhysicalField field Physical.coordinateX))
+      (asPeriodicPhysicalField fieldValue Physical.coordinateX))
   + Hodge4.fieldNormSq
     (Hodge4.curlComponent left right
-      (asPeriodicPhysicalField field Physical.coordinateY))
+      (asPeriodicPhysicalField fieldValue Physical.coordinateY))
   + Hodge4.fieldNormSq
     (Hodge4.curlComponent left right
-      (asPeriodicPhysicalField field Physical.coordinateZ))
+      (asPeriodicPhysicalField fieldValue Physical.coordinateZ))
 
-flatPlaquettePairEnergyIsPhysicalCurl : ∀ field left right →
-  flatPlaquettePairEnergy field left right
-  ≡ physicalPairCurlEnergy field left right
-flatPlaquettePairEnergyIsPhysicalCurl field left right =
+flatPlaquettePairEnergyIsPhysicalCurl : ∀ fieldValue left right →
+  flatPlaquettePairEnergy fieldValue left right
+  ≡ physicalPairCurlEnergy fieldValue left right
+flatPlaquettePairEnergyIsPhysicalCurl fieldValue left right =
   trans
     (Hodge4.sumSitesCong _ _
       (flatPlaquetteSecondVariationIsPhysicalCurlSquare
-        field left right))
+        fieldValue left right))
     (trans
       (Hodge4.sumSitesAdd
         (λ site →
-          plaquetteCurlCoordinate field Physical.coordinateX left right site
-          * plaquetteCurlCoordinate field Physical.coordinateX left right site)
+          plaquetteCurlCoordinate fieldValue Physical.coordinateX left right site
+          * plaquetteCurlCoordinate fieldValue Physical.coordinateX left right site)
         (λ site →
-          plaquetteCurlCoordinate field Physical.coordinateY left right site
-          * plaquetteCurlCoordinate field Physical.coordinateY left right site
-          + plaquetteCurlCoordinate field Physical.coordinateZ left right site
-          * plaquetteCurlCoordinate field Physical.coordinateZ left right site))
+          plaquetteCurlCoordinate fieldValue Physical.coordinateY left right site
+          * plaquetteCurlCoordinate fieldValue Physical.coordinateY left right site
+          + plaquetteCurlCoordinate fieldValue Physical.coordinateZ left right site
+          * plaquetteCurlCoordinate fieldValue Physical.coordinateZ left right site))
       (trans
         (cong
           (Hodge4.fieldNormSq
             (Hodge4.curlComponent left right
-              (asPeriodicPhysicalField field Physical.coordinateX)) +_)
+              (asPeriodicPhysicalField fieldValue Physical.coordinateX)) +_)
           (Hodge4.sumSitesAdd
             (λ site →
-              plaquetteCurlCoordinate field Physical.coordinateY left right site
-              * plaquetteCurlCoordinate field Physical.coordinateY left right site)
+              plaquetteCurlCoordinate fieldValue Physical.coordinateY left right site
+              * plaquetteCurlCoordinate fieldValue Physical.coordinateY left right site)
             (λ site →
-              plaquetteCurlCoordinate field Physical.coordinateZ left right site
-              * plaquetteCurlCoordinate field Physical.coordinateZ left right site)))
+              plaquetteCurlCoordinate fieldValue Physical.coordinateZ left right site
+              * plaquetteCurlCoordinate fieldValue Physical.coordinateZ left right site)))
         refl))
 
 flatWilsonEnergy : Physical.PhysicalSU2BondField4 → ℚ
-flatWilsonEnergy field =
-  flatPlaquettePairEnergy field Hodge4.axis0 Hodge4.axis1
-  + flatPlaquettePairEnergy field Hodge4.axis0 Hodge4.axis2
-  + flatPlaquettePairEnergy field Hodge4.axis0 Hodge4.axis3
-  + flatPlaquettePairEnergy field Hodge4.axis1 Hodge4.axis2
-  + flatPlaquettePairEnergy field Hodge4.axis1 Hodge4.axis3
-  + flatPlaquettePairEnergy field Hodge4.axis2 Hodge4.axis3
+flatWilsonEnergy fieldValue =
+  flatPlaquettePairEnergy fieldValue Hodge4.axis0 Hodge4.axis1
+  + flatPlaquettePairEnergy fieldValue Hodge4.axis0 Hodge4.axis2
+  + flatPlaquettePairEnergy fieldValue Hodge4.axis0 Hodge4.axis3
+  + flatPlaquettePairEnergy fieldValue Hodge4.axis1 Hodge4.axis2
+  + flatPlaquettePairEnergy fieldValue Hodge4.axis1 Hodge4.axis3
+  + flatPlaquettePairEnergy fieldValue Hodge4.axis2 Hodge4.axis3
 
-flatWilsonEnergyIsPhysicalPeriodicCurl : ∀ field →
-  flatWilsonEnergy field
-  ≡ Hodge4.physicalPeriodicCurlEnergy (asPeriodicPhysicalField field)
-flatWilsonEnergyIsPhysicalPeriodicCurl field
+flatWilsonEnergyIsPhysicalPeriodicCurl : ∀ fieldValue →
+  flatWilsonEnergy fieldValue
+  ≡ Hodge4.physicalPeriodicCurlEnergy (asPeriodicPhysicalField fieldValue)
+flatWilsonEnergyIsPhysicalPeriodicCurl fieldValue
   rewrite flatPlaquettePairEnergyIsPhysicalCurl
-    field Hodge4.axis0 Hodge4.axis1
+    fieldValue Hodge4.axis0 Hodge4.axis1
   | flatPlaquettePairEnergyIsPhysicalCurl
-    field Hodge4.axis0 Hodge4.axis2
+    fieldValue Hodge4.axis0 Hodge4.axis2
   | flatPlaquettePairEnergyIsPhysicalCurl
-    field Hodge4.axis0 Hodge4.axis3
+    fieldValue Hodge4.axis0 Hodge4.axis3
   | flatPlaquettePairEnergyIsPhysicalCurl
-    field Hodge4.axis1 Hodge4.axis2
+    fieldValue Hodge4.axis1 Hodge4.axis2
   | flatPlaquettePairEnergyIsPhysicalCurl
-    field Hodge4.axis1 Hodge4.axis3
+    fieldValue Hodge4.axis1 Hodge4.axis3
   | flatPlaquettePairEnergyIsPhysicalCurl
-    field Hodge4.axis2 Hodge4.axis3 =
+    fieldValue Hodge4.axis2 Hodge4.axis3 =
   ℚRing.solve-∀
     (Hodge4.fieldNormSq
       (Hodge4.curlComponent Hodge4.axis0 Hodge4.axis1
-        (asPeriodicPhysicalField field Physical.coordinateX)))
+        (asPeriodicPhysicalField fieldValue Physical.coordinateX)))
     (Hodge4.fieldNormSq
       (Hodge4.curlComponent Hodge4.axis0 Hodge4.axis2
-        (asPeriodicPhysicalField field Physical.coordinateX)))
+        (asPeriodicPhysicalField fieldValue Physical.coordinateX)))
     (Hodge4.fieldNormSq
       (Hodge4.curlComponent Hodge4.axis0 Hodge4.axis3
-        (asPeriodicPhysicalField field Physical.coordinateX)))
+        (asPeriodicPhysicalField fieldValue Physical.coordinateX)))
     (Hodge4.fieldNormSq
       (Hodge4.curlComponent Hodge4.axis1 Hodge4.axis2
-        (asPeriodicPhysicalField field Physical.coordinateX)))
+        (asPeriodicPhysicalField fieldValue Physical.coordinateX)))
     (Hodge4.fieldNormSq
       (Hodge4.curlComponent Hodge4.axis1 Hodge4.axis3
-        (asPeriodicPhysicalField field Physical.coordinateX)))
+        (asPeriodicPhysicalField fieldValue Physical.coordinateX)))
     (Hodge4.fieldNormSq
       (Hodge4.curlComponent Hodge4.axis2 Hodge4.axis3
-        (asPeriodicPhysicalField field Physical.coordinateX)))
+        (asPeriodicPhysicalField fieldValue Physical.coordinateX)))
     (Hodge4.fieldNormSq
       (Hodge4.curlComponent Hodge4.axis0 Hodge4.axis1
-        (asPeriodicPhysicalField field Physical.coordinateY)))
+        (asPeriodicPhysicalField fieldValue Physical.coordinateY)))
     (Hodge4.fieldNormSq
       (Hodge4.curlComponent Hodge4.axis0 Hodge4.axis2
-        (asPeriodicPhysicalField field Physical.coordinateY)))
+        (asPeriodicPhysicalField fieldValue Physical.coordinateY)))
     (Hodge4.fieldNormSq
       (Hodge4.curlComponent Hodge4.axis0 Hodge4.axis3
-        (asPeriodicPhysicalField field Physical.coordinateY)))
+        (asPeriodicPhysicalField fieldValue Physical.coordinateY)))
     (Hodge4.fieldNormSq
       (Hodge4.curlComponent Hodge4.axis1 Hodge4.axis2
-        (asPeriodicPhysicalField field Physical.coordinateY)))
+        (asPeriodicPhysicalField fieldValue Physical.coordinateY)))
     (Hodge4.fieldNormSq
       (Hodge4.curlComponent Hodge4.axis1 Hodge4.axis3
-        (asPeriodicPhysicalField field Physical.coordinateY)))
+        (asPeriodicPhysicalField fieldValue Physical.coordinateY)))
     (Hodge4.fieldNormSq
       (Hodge4.curlComponent Hodge4.axis2 Hodge4.axis3
-        (asPeriodicPhysicalField field Physical.coordinateY)))
+        (asPeriodicPhysicalField fieldValue Physical.coordinateY)))
     (Hodge4.fieldNormSq
       (Hodge4.curlComponent Hodge4.axis0 Hodge4.axis1
-        (asPeriodicPhysicalField field Physical.coordinateZ)))
+        (asPeriodicPhysicalField fieldValue Physical.coordinateZ)))
     (Hodge4.fieldNormSq
       (Hodge4.curlComponent Hodge4.axis0 Hodge4.axis2
-        (asPeriodicPhysicalField field Physical.coordinateZ)))
+        (asPeriodicPhysicalField fieldValue Physical.coordinateZ)))
     (Hodge4.fieldNormSq
       (Hodge4.curlComponent Hodge4.axis0 Hodge4.axis3
-        (asPeriodicPhysicalField field Physical.coordinateZ)))
+        (asPeriodicPhysicalField fieldValue Physical.coordinateZ)))
     (Hodge4.fieldNormSq
       (Hodge4.curlComponent Hodge4.axis1 Hodge4.axis2
-        (asPeriodicPhysicalField field Physical.coordinateZ)))
+        (asPeriodicPhysicalField fieldValue Physical.coordinateZ)))
     (Hodge4.fieldNormSq
       (Hodge4.curlComponent Hodge4.axis1 Hodge4.axis3
-        (asPeriodicPhysicalField field Physical.coordinateZ)))
+        (asPeriodicPhysicalField fieldValue Physical.coordinateZ)))
     (Hodge4.fieldNormSq
       (Hodge4.curlComponent Hodge4.axis2 Hodge4.axis3
-        (asPeriodicPhysicalField field Physical.coordinateZ)))
+        (asPeriodicPhysicalField fieldValue Physical.coordinateZ)))
 
 physicalFlatWilsonPlaquetteLevel : ProofLevel
 physicalFlatWilsonPlaquetteLevel = machineChecked

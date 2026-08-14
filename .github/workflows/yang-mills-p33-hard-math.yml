@@ -26,6 +26,7 @@ jobs:
         with:
           submodules: recursive
       - uses: cachix/install-nix-action@v27
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
       - name: Check exact LDL, SU2 geometry, Wilson/CMP109 channels and decay reductions
         run: |
           nix develop --command bash scripts/check_yang_mills_p33_hard_math.sh

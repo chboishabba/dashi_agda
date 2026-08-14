@@ -51,46 +51,46 @@ sharpWilsonCoefficientFromRho :
   ≡ Sharp.sharpSixteenAtomBudget
 sharpWilsonCoefficientFromRho = ℚRing.solve []
 
-physicalWilsonDefectIsBackgroundMinusFlat : ∀ background field →
-  Physical.physicalWilsonDefect background field
-  ≡ Physical.physicalWilsonSecondVariation background field
-      - Flat.flatWilsonEnergy field
-physicalWilsonDefectIsBackgroundMinusFlat background field =
+physicalWilsonDefectIsBackgroundMinusFlat : ∀ background fieldValue →
+  Physical.physicalWilsonDefect background fieldValue
+  ≡ Physical.physicalWilsonSecondVariation background fieldValue
+      - Flat.flatWilsonEnergy fieldValue
+physicalWilsonDefectIsBackgroundMinusFlat background fieldValue =
   trans refl
     (cong
-      (Physical.physicalWilsonSecondVariation background field -_)
-      (Physical.identityPhysicalWilsonIsFlatCurl field))
+      (Physical.physicalWilsonSecondVariation background fieldValue -_)
+      (Physical.identityPhysicalWilsonIsFlatCurl fieldValue))
 
 physicalWilsonLocalImpliesSharpDefect :
-  ∀ background field →
-  Global.PhysicalWilsonSignedLocal background field →
+  ∀ background fieldValue →
+  Global.PhysicalWilsonSignedLocal background fieldValue →
   - (Sharp.sharpSixteenAtomBudget
-      * Coordinates.physicalSU2BondNormSq field)
-  ≤ Physical.physicalWilsonSecondVariation background field
-      - Flat.flatWilsonEnergy field
-physicalWilsonLocalImpliesSharpDefect background field local =
+      * Coordinates.physicalSU2BondNormSq fieldValue)
+  ≤ Physical.physicalWilsonSecondVariation background fieldValue
+      - Flat.flatWilsonEnergy fieldValue
+physicalWilsonLocalImpliesSharpDefect background fieldValue local =
   let
     summed = Global.physicalWilsonSignedGlobalThirteenTwentyFourths
-      background field local
+      background fieldValue local
 
     sharpCoefficientLower :
       - (Sharp.sharpSixteenAtomBudget
-          * Coordinates.physicalSU2BondNormSq field)
-      ≤ Physical.physicalWilsonDefect background field
+          * Coordinates.physicalSU2BondNormSq fieldValue)
+      ≤ Physical.physicalWilsonDefect background fieldValue
     sharpCoefficientLower =
       subst
         (λ coefficient →
-          - (coefficient * Coordinates.physicalSU2BondNormSq field)
-          ≤ Physical.physicalWilsonDefect background field)
+          - (coefficient * Coordinates.physicalSU2BondNormSq fieldValue)
+          ≤ Physical.physicalWilsonDefect background fieldValue)
         sharpWilsonCoefficientFromRho
         summed
   in
   subst
     (λ upper →
       - (Sharp.sharpSixteenAtomBudget
-          * Coordinates.physicalSU2BondNormSq field)
+          * Coordinates.physicalSU2BondNormSq fieldValue)
       ≤ upper)
-    (physicalWilsonDefectIsBackgroundMinusFlat background field)
+    (physicalWilsonDefectIsBackgroundMinusFlat background fieldValue)
     sharpCoefficientLower
 
 samePhysicalPerturbationWLocalImpliesSharpDefect :

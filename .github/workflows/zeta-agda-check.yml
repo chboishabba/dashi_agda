@@ -30,6 +30,7 @@ jobs:
       - name: Install Nix
         uses: cachix/install-nix-action@v31
 
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
       - name: Typecheck zeta theorem surface directly
         run: |
           nix develop -c agda \

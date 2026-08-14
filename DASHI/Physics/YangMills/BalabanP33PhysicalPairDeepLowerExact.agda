@@ -76,52 +76,52 @@ sumMapScale scale (value ∷ values) term
 placementBudget :
   Coordinates.PhysicalSU2BondField4 → Physical.Plaquette4 →
   Placement.PlaquetteSecondVariationPlacement4 → ℚ
-placementBudget field plaquette placement =
+placementBudget fieldValue plaquette placement =
   let
-    n0 = PhysicalEnvelope.slotInsertionNorm field plaquette Placement.slot0
-    n1 = PhysicalEnvelope.slotInsertionNorm field plaquette Placement.slot1
-    n2 = PhysicalEnvelope.slotInsertionNorm field plaquette Placement.slot2
-    n3 = PhysicalEnvelope.slotInsertionNorm field plaquette Placement.slot3
+    n0 = PhysicalEnvelope.slotInsertionNorm fieldValue plaquette Placement.slot0
+    n1 = PhysicalEnvelope.slotInsertionNorm fieldValue plaquette Placement.slot1
+    n2 = PhysicalEnvelope.slotInsertionNorm fieldValue plaquette Placement.slot2
+    n3 = PhysicalEnvelope.slotInsertionNorm fieldValue plaquette Placement.slot3
   in Budget.placementYoungBudget placement n0 n1 n2 n3
 
 localInsertionCharge :
   Coordinates.PhysicalSU2BondField4 → Physical.Plaquette4 → ℚ
-localInsertionCharge field plaquette =
-  PhysicalEnvelope.slotInsertionNorm field plaquette Placement.slot0
-  + PhysicalEnvelope.slotInsertionNorm field plaquette Placement.slot1
-  + PhysicalEnvelope.slotInsertionNorm field plaquette Placement.slot2
-  + PhysicalEnvelope.slotInsertionNorm field plaquette Placement.slot3
+localInsertionCharge fieldValue plaquette =
+  PhysicalEnvelope.slotInsertionNorm fieldValue plaquette Placement.slot0
+  + PhysicalEnvelope.slotInsertionNorm fieldValue plaquette Placement.slot1
+  + PhysicalEnvelope.slotInsertionNorm fieldValue plaquette Placement.slot2
+  + PhysicalEnvelope.slotInsertionNorm fieldValue plaquette Placement.slot3
 
-placementBudgetSumExact : ∀ field plaquette →
+placementBudgetSumExact : ∀ fieldValue plaquette →
   NamedSum.sumMap Placement.plaquetteSecondVariationPlacements4
-    (placementBudget field plaquette)
-  ≡ (+ 4 / 1) * localInsertionCharge field plaquette
-placementBudgetSumExact field plaquette =
+    (placementBudget fieldValue plaquette)
+  ≡ (+ 4 / 1) * localInsertionCharge fieldValue plaquette
+placementBudgetSumExact fieldValue plaquette =
   let
-    n0 = PhysicalEnvelope.slotInsertionNorm field plaquette Placement.slot0
-    n1 = PhysicalEnvelope.slotInsertionNorm field plaquette Placement.slot1
-    n2 = PhysicalEnvelope.slotInsertionNorm field plaquette Placement.slot2
-    n3 = PhysicalEnvelope.slotInsertionNorm field plaquette Placement.slot3
+    n0 = PhysicalEnvelope.slotInsertionNorm fieldValue plaquette Placement.slot0
+    n1 = PhysicalEnvelope.slotInsertionNorm fieldValue plaquette Placement.slot1
+    n2 = PhysicalEnvelope.slotInsertionNorm fieldValue plaquette Placement.slot2
+    n3 = PhysicalEnvelope.slotInsertionNorm fieldValue plaquette Placement.slot3
   in Budget.sixteenPlacementBudgetExact n0 n1 n2 n3
 
-localChargeIsPlaquetteDiagonal : ∀ field site axes →
-  localInsertionCharge field (pair site axes)
-  ≡ Wilson.plaquetteDiagonalCharge field (pair site axes)
-localChargeIsPlaquetteDiagonal field site axes =
+localChargeIsPlaquetteDiagonal : ∀ fieldValue site axes →
+  localInsertionCharge fieldValue (pair site axes)
+  ≡ Wilson.plaquetteDiagonalCharge fieldValue (pair site axes)
+localChargeIsPlaquetteDiagonal fieldValue site axes =
   ℚRing.solve-∀
-    (Incidence.linkInsertionCharge field (Physical.pairLeft axes) site)
-    (Incidence.linkInsertionCharge field (Physical.pairRight axes)
+    (Incidence.linkInsertionCharge fieldValue (Physical.pairLeft axes) site)
+    (Incidence.linkInsertionCharge fieldValue (Physical.pairRight axes)
       (Periodic.shiftForward (Physical.pairLeft axes) site))
-    (Incidence.linkInsertionCharge field (Physical.pairLeft axes)
+    (Incidence.linkInsertionCharge fieldValue (Physical.pairLeft axes)
       (Periodic.shiftForward (Physical.pairRight axes) site))
-    (Incidence.linkInsertionCharge field (Physical.pairRight axes) site)
+    (Incidence.linkInsertionCharge fieldValue (Physical.pairRight axes) site)
 
 placementPairWilsonPart :
   Physical.RationalSU2Background4 → Coordinates.PhysicalSU2BondField4 →
   Physical.Plaquette4 → Placement.PlaquetteSecondVariationPlacement4 → ℚ
-placementPairWilsonPart background field plaquette placement =
+placementPairWilsonPart background fieldValue plaquette placement =
   let factors = Partition.physicalPlacementSelectedFactors
-        background field plaquette placement
+        background fieldValue plaquette placement
   in
   Telescope.wilsonScalar
     (Split.fourFactorPairPart
@@ -133,77 +133,77 @@ placementPairWilsonPart background field plaquette placement =
 physicalPlaquettePairWilsonPart :
   Physical.RationalSU2Background4 → Coordinates.PhysicalSU2BondField4 →
   Physical.Plaquette4 → ℚ
-physicalPlaquettePairWilsonPart background field plaquette =
+physicalPlaquettePairWilsonPart background fieldValue plaquette =
   NamedSum.sumMap Placement.plaquetteSecondVariationPlacements4
-    (placementPairWilsonPart background field plaquette)
+    (placementPairWilsonPart background fieldValue plaquette)
 
-placementPairLower : ∀ background field plaquette placement →
+placementPairLower : ∀ background fieldValue plaquette placement →
   Radius.RelaxedInverseLinkRadius background →
   - ((+ 6 / 1) * (Coeff.epsilon * Coeff.epsilon))
-      * placementBudget field plaquette placement
-  ≤ placementPairWilsonPart background field plaquette placement
-placementPairLower background field plaquette placement radius =
+      * placementBudget fieldValue plaquette placement
+  ≤ placementPairWilsonPart background fieldValue plaquette placement
+placementPairLower background fieldValue plaquette placement radius =
   let
     env = PhysicalEnvelope.physicalPlacementEnvelope
-      background field plaquette placement radius
-    n0 = PhysicalEnvelope.slotInsertionNorm field plaquette Placement.slot0
-    n1 = PhysicalEnvelope.slotInsertionNorm field plaquette Placement.slot1
-    n2 = PhysicalEnvelope.slotInsertionNorm field plaquette Placement.slot2
-    n3 = PhysicalEnvelope.slotInsertionNorm field plaquette Placement.slot3
+      background fieldValue plaquette placement radius
+    n0 = PhysicalEnvelope.slotInsertionNorm fieldValue plaquette Placement.slot0
+    n1 = PhysicalEnvelope.slotInsertionNorm fieldValue plaquette Placement.slot1
+    n2 = PhysicalEnvelope.slotInsertionNorm fieldValue plaquette Placement.slot2
+    n3 = PhysicalEnvelope.slotInsertionNorm fieldValue plaquette Placement.slot3
     averageExact = Charges.placementYoungBudgetIsChargeAverage
       placement n0 n1 n2 n3
   in
   subst
     (λ selected →
       - ((+ 6 / 1) * (Coeff.epsilon * Coeff.epsilon)) * selected
-      ≤ placementPairWilsonPart background field plaquette placement)
+      ≤ placementPairWilsonPart background fieldValue plaquette placement)
     (sym averageExact)
     (Pair.pairRemainderLower env)
 
-physicalPairLowerLocalCharge : ∀ background field plaquette →
+physicalPairLowerLocalCharge : ∀ background fieldValue plaquette →
   Radius.RelaxedInverseLinkRadius background →
   - Coeff.allPlacementPairCoefficient
-      * localInsertionCharge field plaquette
-  ≤ physicalPlaquettePairWilsonPart background field plaquette
-physicalPairLowerLocalCharge background field plaquette radius =
+      * localInsertionCharge fieldValue plaquette
+  ≤ physicalPlaquettePairWilsonPart background fieldValue plaquette
+physicalPairLowerLocalCharge background fieldValue plaquette radius =
   let
     summed = sumMapMonotone
       Placement.plaquetteSecondVariationPlacements4
       (λ placement →
         - ((+ 6 / 1) * (Coeff.epsilon * Coeff.epsilon))
-          * placementBudget field plaquette placement)
-      (placementPairWilsonPart background field plaquette)
-      (λ placement → placementPairLower background field plaquette placement radius)
+          * placementBudget fieldValue plaquette placement)
+      (placementPairWilsonPart background fieldValue plaquette)
+      (λ placement → placementPairLower background fieldValue plaquette placement radius)
     scale = - ((+ 6 / 1) * (Coeff.epsilon * Coeff.epsilon))
     sumExact = trans
       (sumMapScale scale Placement.plaquetteSecondVariationPlacements4
-        (placementBudget field plaquette))
+        (placementBudget fieldValue plaquette))
       (trans
-        (cong (scale *_) (placementBudgetSumExact field plaquette))
+        (cong (scale *_) (placementBudgetSumExact fieldValue plaquette))
         (ℚRing.solve-∀ Coeff.epsilon
-          (localInsertionCharge field plaquette)))
+          (localInsertionCharge fieldValue plaquette)))
   in
   subst
-    (λ lower → lower ≤ physicalPlaquettePairWilsonPart background field plaquette)
+    (λ lower → lower ≤ physicalPlaquettePairWilsonPart background fieldValue plaquette)
     sumExact summed
 
-physicalPairWilsonLower : ∀ background field site axes →
+physicalPairWilsonLower : ∀ background fieldValue site axes →
   Radius.RelaxedInverseLinkRadius background →
   - ((+ 1 / 256) * Coeff.rho
-      * Wilson.plaquetteCrossCharge field (pair site axes))
-  ≤ physicalPlaquettePairWilsonPart background field (pair site axes)
-physicalPairWilsonLower background field site axes radius =
+      * Wilson.plaquetteCrossCharge fieldValue (pair site axes))
+  ≤ physicalPlaquettePairWilsonPart background fieldValue (pair site axes)
+physicalPairWilsonLower background fieldValue site axes radius =
   let
     local = physicalPairLowerLocalCharge
-      background field (pair site axes) radius
-    diagonalExact = localChargeIsPlaquetteDiagonal field site axes
+      background fieldValue (pair site axes) radius
+    diagonalExact = localChargeIsPlaquetteDiagonal fieldValue site axes
     crossExact = Incidence.plaquetteCrossChargeIsThreeDiagonal
-      field (Physical.pairLeft axes) (Physical.pairRight axes) site
+      fieldValue (Physical.pairLeft axes) (Physical.pairRight axes) site
     coefficientExact :
       Coeff.allPlacementPairCoefficient
-        * localInsertionCharge field (pair site axes)
+        * localInsertionCharge fieldValue (pair site axes)
       ≡ (+ 1 / 256) * Coeff.rho
-          * Wilson.plaquetteCrossCharge field (pair site axes)
+          * Wilson.plaquetteCrossCharge fieldValue (pair site axes)
     coefficientExact =
       trans
         (cong (Coeff.allPlacementPairCoefficient *_)
@@ -211,84 +211,84 @@ physicalPairWilsonLower background field site axes radius =
         (subst
           (λ cross →
             Coeff.allPlacementPairCoefficient
-              * Wilson.plaquetteDiagonalCharge field (pair site axes)
+              * Wilson.plaquetteDiagonalCharge fieldValue (pair site axes)
             ≡ (+ 1 / 256) * Coeff.rho * cross)
           (sym crossExact)
           (ℚRing.solve-∀
-            (Wilson.plaquetteDiagonalCharge field (pair site axes))))
+            (Wilson.plaquetteDiagonalCharge fieldValue (pair site axes))))
   in
   subst
     (λ coefficient →
       - coefficient ≤ physicalPlaquettePairWilsonPart
-        background field (pair site axes))
+        background fieldValue (pair site axes))
     coefficientExact local
 
-placementDeepLower : ∀ background field plaquette placement →
+placementDeepLower : ∀ background fieldValue plaquette placement →
   Radius.RelaxedInverseLinkRadius background →
-  - Coeff.deepPlacementCoefficient * placementBudget field plaquette placement
-  ≤ Split.placementDeepWilsonRemainder background field plaquette placement
-placementDeepLower background field plaquette placement radius =
+  - Coeff.deepPlacementCoefficient * placementBudget fieldValue plaquette placement
+  ≤ Split.placementDeepWilsonRemainder background fieldValue plaquette placement
+placementDeepLower background fieldValue plaquette placement radius =
   let
     env = PhysicalEnvelope.physicalPlacementEnvelope
-      background field plaquette placement radius
-    n0 = PhysicalEnvelope.slotInsertionNorm field plaquette Placement.slot0
-    n1 = PhysicalEnvelope.slotInsertionNorm field plaquette Placement.slot1
-    n2 = PhysicalEnvelope.slotInsertionNorm field plaquette Placement.slot2
-    n3 = PhysicalEnvelope.slotInsertionNorm field plaquette Placement.slot3
+      background fieldValue plaquette placement radius
+    n0 = PhysicalEnvelope.slotInsertionNorm fieldValue plaquette Placement.slot0
+    n1 = PhysicalEnvelope.slotInsertionNorm fieldValue plaquette Placement.slot1
+    n2 = PhysicalEnvelope.slotInsertionNorm fieldValue plaquette Placement.slot2
+    n3 = PhysicalEnvelope.slotInsertionNorm fieldValue plaquette Placement.slot3
     averageExact = Charges.placementYoungBudgetIsChargeAverage
       placement n0 n1 n2 n3
   in
   subst
     (λ selected →
       - Coeff.deepPlacementCoefficient * selected
-      ≤ Split.placementDeepWilsonRemainder background field plaquette placement)
+      ≤ Split.placementDeepWilsonRemainder background fieldValue plaquette placement)
     (sym averageExact)
     (Deep.deepRemainderLower env)
 
-physicalDeepLowerCoefficient : ∀ background field plaquette →
+physicalDeepLowerCoefficient : ∀ background fieldValue plaquette →
   Radius.RelaxedInverseLinkRadius background →
-  - Coeff.allPlacementDeepCoefficient * localInsertionCharge field plaquette
-  ≤ Split.physicalPlaquetteDeepWilsonRemainder background field plaquette
-physicalDeepLowerCoefficient background field plaquette radius =
+  - Coeff.allPlacementDeepCoefficient * localInsertionCharge fieldValue plaquette
+  ≤ Split.physicalPlaquetteDeepWilsonRemainder background fieldValue plaquette
+physicalDeepLowerCoefficient background fieldValue plaquette radius =
   let
     summed = sumMapMonotone
       Placement.plaquetteSecondVariationPlacements4
       (λ placement →
-        - Coeff.deepPlacementCoefficient * placementBudget field plaquette placement)
-      (Split.placementDeepWilsonRemainder background field plaquette)
-      (λ placement → placementDeepLower background field plaquette placement radius)
+        - Coeff.deepPlacementCoefficient * placementBudget fieldValue plaquette placement)
+      (Split.placementDeepWilsonRemainder background fieldValue plaquette)
+      (λ placement → placementDeepLower background fieldValue plaquette placement radius)
     scale = - Coeff.deepPlacementCoefficient
     sumExact = trans
       (sumMapScale scale Placement.plaquetteSecondVariationPlacements4
-        (placementBudget field plaquette))
+        (placementBudget fieldValue plaquette))
       (trans
-        (cong (scale *_) (placementBudgetSumExact field plaquette))
+        (cong (scale *_) (placementBudgetSumExact fieldValue plaquette))
         (ℚRing.solve-∀ Coeff.deepPlacementCoefficient
-          (localInsertionCharge field plaquette)))
+          (localInsertionCharge fieldValue plaquette)))
   in
   subst
     (λ lower → lower ≤ Split.physicalPlaquetteDeepWilsonRemainder
-      background field plaquette)
+      background fieldValue plaquette)
     sumExact summed
 
-physicalDeepWilsonRemainderLower : ∀ background field site axes →
+physicalDeepWilsonRemainderLower : ∀ background fieldValue site axes →
   Radius.RelaxedInverseLinkRadius background →
   - (Wilson.rhoOverOneFortyFour
-      * Wilson.plaquetteDiagonalCharge field (pair site axes))
+      * Wilson.plaquetteDiagonalCharge fieldValue (pair site axes))
   ≤ Split.physicalPlaquetteDeepWilsonRemainder
-      background field (pair site axes)
-physicalDeepWilsonRemainderLower background field site axes radius =
+      background fieldValue (pair site axes)
+physicalDeepWilsonRemainderLower background fieldValue site axes radius =
   let
     local = physicalDeepLowerCoefficient
-      background field (pair site axes) radius
-    q = localInsertionCharge field (pair site axes)
+      background fieldValue (pair site axes) radius
+    q = localInsertionCharge fieldValue (pair site axes)
     qNN : 0ℚ ≤ q
     qNN =
       let
-        i0 = PhysicalEnvelope.slotInsertion field (pair site axes) Placement.slot0
-        i1 = PhysicalEnvelope.slotInsertion field (pair site axes) Placement.slot1
-        i2 = PhysicalEnvelope.slotInsertion field (pair site axes) Placement.slot2
-        i3 = PhysicalEnvelope.slotInsertion field (pair site axes) Placement.slot3
+        i0 = PhysicalEnvelope.slotInsertion fieldValue (pair site axes) Placement.slot0
+        i1 = PhysicalEnvelope.slotInsertion fieldValue (pair site axes) Placement.slot1
+        i2 = PhysicalEnvelope.slotInsertion fieldValue (pair site axes) Placement.slot2
+        i3 = PhysicalEnvelope.slotInsertion fieldValue (pair site axes) Placement.slot3
       in
       FiniteL2.addNonnegative
         (FiniteL2.addNonnegative
@@ -309,13 +309,13 @@ physicalDeepWilsonRemainderLower background field site axes radius =
       ≤ - (Coeff.allPlacementDeepCoefficient * q)
     negativeOrder = ℚP.neg-mono-≤ scaledCoefficient
 
-    diagonalExact = localChargeIsPlaquetteDiagonal field site axes
+    diagonalExact = localChargeIsPlaquetteDiagonal fieldValue site axes
   in
   subst
     (λ diagonal →
       - (Wilson.rhoOverOneFortyFour * diagonal)
       ≤ Split.physicalPlaquetteDeepWilsonRemainder
-          background field (pair site axes))
+          background fieldValue (pair site axes))
     diagonalExact
     (ℚP.≤-trans negativeOrder local)
 

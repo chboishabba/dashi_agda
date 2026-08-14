@@ -33,5 +33,6 @@ jobs:
         with:
           submodules: recursive
       - uses: cachix/install-nix-action@v27
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
       - name: Check Bishop, Step-V, P06/P11, P33-P10-Gate4 and global roots
         run: nix develop --command bash scripts/check_yang_mills_submission_round11.sh

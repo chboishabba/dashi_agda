@@ -2,12 +2,14 @@ module DASHI.Physics.YangMills.BalabanPath4AxisAverageNormContractionExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Rational using (ℚ; 0ℚ; _+_; _*_; _≤_)
+open import Data.Rational using (ℚ; 0ℚ; 1ℚ; _+_; _*_; -_; _≤_)
+open import Data.Rational.Literals
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong₂; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
+open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using (Axis4)
 open import DASHI.Physics.YangMills.BalabanBoolean4BlockPoincareExact using
   (sq; squareNonnegative; baseBelowBasePlusRemainder)
 open import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreCarrier
@@ -44,33 +46,48 @@ globalNormSqNonnegative siteField =
     (λ site → sq (siteField site))
     (λ site → squareNonnegative (siteField site))
 
+squareAddExact : ∀ a b →
+  (a + b) * (a + b) ≡ a * a + (b * b + 2 * (a * b))
+squareAddExact = ℚRing.solve-∀
+
+subtractAddCancel : ∀ a b → (a + - b) + b ≡ a
+subtractAddCancel = ℚRing.solve-∀
+
+addZeroCrossCancel : ∀ a b → a + (b + 2 * 0ℚ) ≡ a + b
+addZeroCrossCancel = ℚRing.solve-∀
+
+addCommute : ∀ a b → a + b ≡ b + a
+addCommute = ℚRing.solve-∀
+
 twoFieldSquareExpansion : ∀ left right →
   globalNormSq (addField left right)
   ≡ globalNormSq left
-    + (globalNormSq right + twoℚ * globalBlockInner left right)
+    + (globalNormSq right + 2 * globalBlockInner left right)
 twoFieldSquareExpansion left right =
   trans
     (sumRationalCong
       (physicalBlockSites side4)
-      (λ site → sq (left site + right site))
+      (λ site → (left site + right site) * (left site + right site))
       (λ site →
-        sq (left site)
-        + (sq (right site) + twoℚ * (left site * right site)))
-      (λ site → ℚRing.solve-∀))
+        left site * left site
+        + (right site * right site
+          + 2 * (left site * right site)))
+      (λ site → squareAddExact (left site) (right site)))
     (trans
       (sumRationalAdd
         (physicalBlockSites side4)
-        (λ site → sq (left site))
-        (λ site → sq (right site) + twoℚ * (left site * right site)))
-      (cong₂ _+_ refl
+        (λ site → left site * left site)
+        (λ site → right site * right site
+          + 2 * (left site * right site)))
+      (cong (globalNormSq left +_)
         (trans
           (sumRationalAdd
             (physicalBlockSites side4)
-            (λ site → sq (right site))
-            (λ site → twoℚ * (left site * right site)))
-          (cong₂ _+_ refl
+            (λ site → right site * right site)
+            (λ site → 2 * (left site * right site)))
+          (cong (globalNormSq right +_)
             (sumRationalScale
-              twoℚ
+              2
               (physicalBlockSites side4)
               (λ site → left site * right site))))))
 
@@ -82,7 +99,7 @@ axisResidualPlusAverage : ∀ siteField axis →
     (addField (axisResidual siteField axis) (axisAverage4 siteField axis))
     siteField
 axisResidualPlusAverage siteField axis site =
-  ℚRing.solve-∀
+  subtractAddCancel (siteField site) (axisAverage4 siteField axis site)
 
 axisAveragePythagoras : ∀ siteField axis →
   globalNormSq siteField
@@ -101,7 +118,7 @@ axisAveragePythagoras siteField axis =
   dropCross : ∀ current currentAxis →
     globalNormSq (axisResidual current currentAxis)
       + (globalNormSq (axisAverage4 current currentAxis)
-      + twoℚ * globalBlockInner
+      + 2 * globalBlockInner
           (axisResidual current currentAxis)
           (axisAverage4 current currentAxis))
     ≡ globalNormSq (axisResidual current currentAxis)
@@ -111,7 +128,9 @@ axisAveragePythagoras siteField axis =
       currentAxis current
       (axisAverage4 current currentAxis)
       (projectedFixedPointwise currentAxis current) =
-    ℚRing.solve-∀
+    addZeroCrossCancel
+      (globalNormSq (axisResidual current currentAxis))
+      (globalNormSq (axisAverage4 current currentAxis))
 
 axisAverageNormContraction : ∀ siteField axis →
   globalNormSq (axisAverage4 siteField axis) ≤ globalNormSq siteField
@@ -131,7 +150,9 @@ axisAverageNormContraction siteField axis =
   averageFirstPythagoras current currentAxis =
     trans
       (axisAveragePythagoras current currentAxis)
-      (ℚRing.solve-∀)
+      (addCommute
+        (globalNormSq (axisResidual current currentAxis))
+        (globalNormSq (axisAverage4 current currentAxis)))
 
 path4AxisAveragePythagorasLevel : ProofLevel
 path4AxisAveragePythagorasLevel = machineChecked

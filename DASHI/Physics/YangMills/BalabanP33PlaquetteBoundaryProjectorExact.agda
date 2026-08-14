@@ -161,19 +161,19 @@ rawPlaquetteSingletonExtractor :
   Coordinates.PhysicalSU2BondField4 →
   Physical.Plaquette4 →
   Projector.PhysicalVector
-rawPlaquetteSingletonExtractor field plaquette =
+rawPlaquetteSingletonExtractor fieldValue plaquette =
   plaquetteBoundaryProject plaquette
-    (Coordinates.encodePhysicalSU2 field)
+    (Coordinates.encodePhysicalSU2 fieldValue)
 
 rawPlaquetteSingletonExtractorLocal :
-  ∀ field plaquette →
+  ∀ fieldValue plaquette →
   Projector.PhysicalConstraintProjectorImage
     (plaquetteBoundaryMask plaquette)
-    (rawPlaquetteSingletonExtractor field plaquette)
-rawPlaquetteSingletonExtractorLocal field plaquette =
+    (rawPlaquetteSingletonExtractor fieldValue plaquette)
+rawPlaquetteSingletonExtractorLocal fieldValue plaquette =
   Projector.physicalCoordinateProjectLiesInImage
     (plaquetteBoundaryMask plaquette)
-    (Coordinates.encodePhysicalSU2 field)
+    (Coordinates.encodePhysicalSU2 fieldValue)
 
 plaquetteBoundaryProjectorIdempotent :
   ∀ plaquette vector coordinate →

@@ -57,29 +57,29 @@ backgroundGaugeComponentJet :
   Physical.RationalSU2Background4 →
   Coordinates.PhysicalSU2BondField4 →
   Flat.GaugeCoordinate4 → Jets.ScalarSecondJet
-backgroundGaugeComponentJet background field coordinate =
-  Jets.scalarJet 0ℚ (Gauge.backgroundGaugeFirst background field coordinate) 0ℚ
+backgroundGaugeComponentJet background fieldValue coordinate =
+  Jets.scalarJet 0ℚ (Gauge.backgroundGaugeFirst background fieldValue coordinate) 0ℚ
 
 backgroundGaugeResidual :
   Physical.RationalSU2Background4 →
   Coordinates.PhysicalSU2BondField4 →
   Jets.FiniteResidualSecondJet Flat.GaugeCoordinate4
-backgroundGaugeResidual background field = record
+backgroundGaugeResidual background fieldValue = record
   { Jets.FiniteResidualSecondJet.coordinates = Flat.flatGaugeCoordinates
   ; Jets.FiniteResidualSecondJet.componentJet =
-      backgroundGaugeComponentJet background field
+      backgroundGaugeComponentJet background fieldValue
   }
 
-backgroundGaugeResidualExact : ∀ background field →
-  Jets.ExactResidualBackground (backgroundGaugeResidual background field)
-backgroundGaugeResidualExact background field = record
+backgroundGaugeResidualExact : ∀ background fieldValue →
+  Jets.ExactResidualBackground (backgroundGaugeResidual background fieldValue)
+backgroundGaugeResidualExact background fieldValue = record
   { Jets.ExactResidualBackground.residualZero = λ _ → refl }
 
 backgroundGaugeResidualFirstNormSquared :
   Physical.RationalSU2Background4 →
   Coordinates.PhysicalSU2BondField4 → ℚ
-backgroundGaugeResidualFirstNormSquared background field =
-  Jets.residualFirstNormSquared (backgroundGaugeResidual background field)
+backgroundGaugeResidualFirstNormSquared background fieldValue =
+  Jets.residualFirstNormSquared (backgroundGaugeResidual background fieldValue)
 
 literalMapSumEqualsIndexedSum :
   ∀ {A : Set} (values : List A) (term : A → ℚ) →
@@ -90,20 +90,20 @@ literalMapSumEqualsIndexedSum (value ∷ values) term =
   cong (term value +_)
     (literalMapSumEqualsIndexedSum values term)
 
-backgroundGaugeFirstNormAsCoordinateSiteSum : ∀ background field →
-  backgroundGaugeResidualFirstNormSquared background field
+backgroundGaugeFirstNormAsCoordinateSiteSum : ∀ background fieldValue →
+  backgroundGaugeResidualFirstNormSquared background fieldValue
   ≡ Sums.sumRational Coordinates.lieCoordinates3
       (λ coordinate →
         Sums.sumRational (Block.physicalBlockSites Path4.side4)
           (λ site →
-            Gauge.backgroundGaugeFirst background field (pair coordinate site)
-            * Gauge.backgroundGaugeFirst background field (pair coordinate site)))
-backgroundGaugeFirstNormAsCoordinateSiteSum background field =
+            Gauge.backgroundGaugeFirst background fieldValue (pair coordinate site)
+            * Gauge.backgroundGaugeFirst background fieldValue (pair coordinate site)))
+backgroundGaugeFirstNormAsCoordinateSiteSum background fieldValue =
   let
     squareFirst : Flat.GaugeCoordinate4 → ℚ
     squareFirst coordinate =
-      Gauge.backgroundGaugeFirst background field coordinate
-      * Gauge.backgroundGaugeFirst background field coordinate
+      Gauge.backgroundGaugeFirst background fieldValue coordinate
+      * Gauge.backgroundGaugeFirst background fieldValue coordinate
   in
   trans
     (literalMapSumEqualsIndexedSum Flat.flatGaugeCoordinates squareFirst)
@@ -112,92 +112,92 @@ backgroundGaugeFirstNormAsCoordinateSiteSum background field =
       (Block.physicalBlockSites Path4.side4)
       squareFirst)
 
-backgroundGaugeCoordinateSiteSwap : ∀ background field →
+backgroundGaugeCoordinateSiteSwap : ∀ background fieldValue →
   Sums.sumRational Coordinates.lieCoordinates3
       (λ coordinate →
         Sums.sumRational (Block.physicalBlockSites Path4.side4)
           (λ site →
-            Gauge.backgroundGaugeFirst background field (pair coordinate site)
-            * Gauge.backgroundGaugeFirst background field (pair coordinate site)))
+            Gauge.backgroundGaugeFirst background fieldValue (pair coordinate site)
+            * Gauge.backgroundGaugeFirst background fieldValue (pair coordinate site)))
   ≡ Sums.sumRational (Block.physicalBlockSites Path4.side4)
-      (λ site → Signed.backgroundGaugePointEnergy background field site)
-backgroundGaugeCoordinateSiteSwap background field =
+      (λ site → Signed.backgroundGaugePointEnergy background fieldValue site)
+backgroundGaugeCoordinateSiteSwap background fieldValue =
   trans
     (Fubini.sumSwap
       Coordinates.lieCoordinates3
       (Block.physicalBlockSites Path4.side4)
       (λ coordinate site →
-        Gauge.backgroundGaugeFirst background field (pair coordinate site)
-        * Gauge.backgroundGaugeFirst background field (pair coordinate site)))
+        Gauge.backgroundGaugeFirst background fieldValue (pair coordinate site)
+        * Gauge.backgroundGaugeFirst background fieldValue (pair coordinate site)))
     (Sums.sumRationalCong
       (Block.physicalBlockSites Path4.side4)
       (λ site →
         Sums.sumRational Coordinates.lieCoordinates3
           (λ coordinate →
-            Gauge.backgroundGaugeFirst background field (pair coordinate site)
-            * Gauge.backgroundGaugeFirst background field (pair coordinate site)))
-      (Signed.backgroundGaugePointEnergy background field)
+            Gauge.backgroundGaugeFirst background fieldValue (pair coordinate site)
+            * Gauge.backgroundGaugeFirst background fieldValue (pair coordinate site)))
+      (Signed.backgroundGaugePointEnergy background fieldValue)
       (λ site → refl))
 
-backgroundGaugeGlobalSiteSumIsPeriodic : ∀ background field →
+backgroundGaugeGlobalSiteSumIsPeriodic : ∀ background fieldValue →
   Sums.sumRational (Block.physicalBlockSites Path4.side4)
-      (λ site → Signed.backgroundGaugePointEnergy background field site)
-  ≡ Signed.backgroundGaugeEnergy background field
-backgroundGaugeGlobalSiteSumIsPeriodic background field =
+      (λ site → Signed.backgroundGaugePointEnergy background fieldValue site)
+  ≡ Signed.backgroundGaugeEnergy background fieldValue
+backgroundGaugeGlobalSiteSumIsPeriodic background fieldValue =
   trans
     (Partition.globalSiteSumMatchesCoordinateSum4
-      (Signed.backgroundGaugePointEnergy background field))
+      (Signed.backgroundGaugePointEnergy background fieldValue))
     (sym
       (Global.periodicSumSitesMatchesCoordinateSum4
-        (Signed.backgroundGaugePointEnergy background field)))
+        (Signed.backgroundGaugePointEnergy background fieldValue)))
 
-backgroundGaugeResidualFirstNormIsEnergy : ∀ background field →
-  backgroundGaugeResidualFirstNormSquared background field
-  ≡ Signed.backgroundGaugeEnergy background field
-backgroundGaugeResidualFirstNormIsEnergy background field =
+backgroundGaugeResidualFirstNormIsEnergy : ∀ background fieldValue →
+  backgroundGaugeResidualFirstNormSquared background fieldValue
+  ≡ Signed.backgroundGaugeEnergy background fieldValue
+backgroundGaugeResidualFirstNormIsEnergy background fieldValue =
   trans
-    (backgroundGaugeFirstNormAsCoordinateSiteSum background field)
+    (backgroundGaugeFirstNormAsCoordinateSiteSum background fieldValue)
     (trans
-      (backgroundGaugeCoordinateSiteSwap background field)
-      (backgroundGaugeGlobalSiteSumIsPeriodic background field))
+      (backgroundGaugeCoordinateSiteSwap background fieldValue)
+      (backgroundGaugeGlobalSiteSumIsPeriodic background fieldValue))
 
-backgroundGaugeResidualSecondVariationIsEnergy : ∀ background field →
-  Jets.residualSecondVariation (backgroundGaugeResidual background field)
-  ≡ Signed.backgroundGaugeEnergy background field
-backgroundGaugeResidualSecondVariationIsEnergy background field =
+backgroundGaugeResidualSecondVariationIsEnergy : ∀ background fieldValue →
+  Jets.residualSecondVariation (backgroundGaugeResidual background fieldValue)
+  ≡ Signed.backgroundGaugeEnergy background fieldValue
+backgroundGaugeResidualSecondVariationIsEnergy background fieldValue =
   trans
     (Jets.residualSecondVariationAtExactBackground
-      (backgroundGaugeResidual background field)
-      (backgroundGaugeResidualExact background field))
-    (backgroundGaugeResidualFirstNormIsEnergy background field)
+      (backgroundGaugeResidual background fieldValue)
+      (backgroundGaugeResidualExact background fieldValue))
+    (backgroundGaugeResidualFirstNormIsEnergy background fieldValue)
 
 backgroundGaugeResidualSignedLowerSixtyFour :
-  ∀ background field →
+  ∀ background fieldValue →
   Signed.ConfiguredInverseLinkRadius background →
   - ((+ 64 / 1) * Signed.rho
-      * Coordinates.physicalSU2BondNormSq field)
+      * Coordinates.physicalSU2BondNormSq fieldValue)
   ≤ Jets.residualSecondVariation
-      (backgroundGaugeResidual background field)
+      (backgroundGaugeResidual background fieldValue)
       - Periodic.physicalPeriodicDivergenceEnergy
-          (Bridge.asPeriodicField field)
-backgroundGaugeResidualSignedLowerSixtyFour background field radius =
+          (Bridge.asPeriodicField fieldValue)
+backgroundGaugeResidualSignedLowerSixtyFour background fieldValue radius =
   let
     signed = Signed.backgroundGaugeSignedLowerSixtyFour
-      background field radius
+      background fieldValue radius
   in
   subst
     (λ left →
       - ((+ 64 / 1) * Signed.rho
-          * Coordinates.physicalSU2BondNormSq field)
+          * Coordinates.physicalSU2BondNormSq fieldValue)
       ≤ left - Periodic.physicalPeriodicDivergenceEnergy
-          (Bridge.asPeriodicField field))
-    (sym (backgroundGaugeResidualSecondVariationIsEnergy background field))
+          (Bridge.asPeriodicField fieldValue))
+    (sym (backgroundGaugeResidualSecondVariationIsEnergy background fieldValue))
     (subst
       (λ right →
         - ((+ 64 / 1) * Signed.rho
-            * Coordinates.physicalSU2BondNormSq field)
-        ≤ Signed.backgroundGaugeEnergy background field - right)
-      (Signed.flatGaugeEnergyIsPhysicalDivergence field)
+            * Coordinates.physicalSU2BondNormSq fieldValue)
+        ≤ Signed.backgroundGaugeEnergy background fieldValue - right)
+      (Signed.flatGaugeEnergyIsPhysicalDivergence fieldValue)
       signed)
 
 physicalBackgroundGaugeResidualLevel : ProofLevel

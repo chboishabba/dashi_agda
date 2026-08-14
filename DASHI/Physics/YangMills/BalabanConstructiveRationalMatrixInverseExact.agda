@@ -3,6 +3,7 @@ module DASHI.Physics.YangMills.BalabanConstructiveRationalMatrixInverseExact whe
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational using (ℚ; _*_; _≤_)
+import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
@@ -28,7 +29,7 @@ record FiniteRationalCoordinates (Index : Set) : Set₁ where
     delta : Index → Index → ℚ
 
     -- The concrete coordinate enumerator establishes the Kronecker action.
-    deltaActsAsIdentity : ∀ vector row →
+    deltaActsAsIdentity : ∀ (vector : Index → ℚ) (row : Index) →
       sumRational coordinates (λ column → delta row column * vector column)
       ≡ vector row
 
@@ -52,10 +53,11 @@ sumRationalRightScale :
   ∀ {A : Set} (values : List A) (term : A → ℚ) coefficient →
   sumRational values (λ value → term value * coefficient)
   ≡ sumRational values term * coefficient
-sumRationalRightScale [] term coefficient = ℚRing.solve-∀
+sumRationalRightScale [] term coefficient =
+  sym (ℚP.*-zeroˡ coefficient)
 sumRationalRightScale (value ∷ values) term coefficient
   rewrite sumRationalRightScale values term coefficient =
-  ℚRing.solve-∀
+  sym (ℚP.*-distribʳ-+ coefficient (term value) (sumRational values term))
 
 matrixProductActionExact :
   ∀ {Index}
@@ -105,7 +107,7 @@ matrixProductActionExact carrier left right vector row =
                 (left row middle * right middle column) * vector column)
               (λ column →
                 left row middle * (right middle column * vector column))
-              (λ column → ℚRing.solve-∀))
+              (λ column → ℚP.*-assoc (left row middle) (right middle column) (vector column)))
             (sumRationalScale
               (left row middle)
               (coordinates carrier)

@@ -34,5 +34,6 @@ jobs:
           submodules: recursive
           persist-credentials: false
       - uses: cachix/install-nix-action@v27
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
       - name: Check unscaled Poincare wall and terminal-scale gap pullback
         run: nix develop --command bash scripts/check_yang_mills_clay_highest_alpha_round23.sh

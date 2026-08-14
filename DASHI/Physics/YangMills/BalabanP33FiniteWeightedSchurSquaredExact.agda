@@ -41,6 +41,7 @@ module DASHI.Physics.YangMills.BalabanP33FiniteWeightedSchurSquaredExact where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Integer.Base using (+_)
+open import Data.Rational.Literals
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_; _/_; ∣_∣; NonNegative)
 import Data.Rational.Properties as ℚP
@@ -94,6 +95,9 @@ productNonnegative left right leftNonnegative rightNonnegative =
       leftNN = ℚ.nonNegative leftNonnegative
       rightNN : NonNegative right
       rightNN = ℚ.nonNegative rightNonnegative
+
+      productNN : NonNegative (left * right)
+      productNN = ℚP.nonNeg*nonNeg⇒nonNeg left right
   in
   ℚP.nonNegative⁻¹ (left * right)
 
@@ -153,6 +157,64 @@ weightedGramDefect (index ∷ indices) weight value =
   weightedCross (weight index) (value index) indices weight value
   + weightedGramDefect indices weight value
 
+emptyWeightSum : ∀ {Index : Set} (weight : Index → ℚ) →
+  weightSum [] weight ≡ 0ℚ
+emptyWeightSum weight = refl
+
+emptyWeightedValueSum : ∀ {Index : Set} (weight value : Index → ℚ) →
+  weightedValueSum [] weight value ≡ 0ℚ
+emptyWeightedValueSum weight value = refl
+
+emptyWeightedSquareSum : ∀ {Index : Set} (weight value : Index → ℚ) →
+  weightedSquareSum [] weight value ≡ 0ℚ
+emptyWeightedSquareSum weight value = refl
+
+zeroMinusZero : 0ℚ - 0ℚ ≡ 0ℚ
+zeroMinusZero = ℚRing.solve-∀
+
+squareUnfold : ∀ value → FiniteL2.square value ≡ value * value
+squareUnfold value = refl
+
+weightedCrossHeadExpansion : ∀ headWeight headValue weightValue value →
+  headWeight * weightValue
+    * ((headValue - value) * (headValue - value))
+  ≡ headWeight
+      * (headValue * headValue * weightValue
+        + weightValue * (value * value)
+        - ((+ 2 / 1) * headValue * (weightValue * value)))
+weightedCrossHeadExpansion = ℚRing.solve-∀
+
+weightedCrossStepAlgebra : ∀ headWeight headValue weightValue value
+    tailWeight tailSquare tailValue →
+  headWeight * weightValue
+    * ((headValue - value) * (headValue - value))
+    + headWeight
+      * (headValue * headValue * tailWeight + tailSquare
+        - ((+ 2 / 1) * headValue * tailValue))
+  ≡ headWeight
+      * (headValue * headValue * (weightValue + tailWeight)
+        + (weightValue * (value * value) + tailSquare)
+        - ((+ 2 / 1) * headValue * (weightValue * value + tailValue)))
+weightedCrossStepAlgebra = ℚRing.solve-∀
+
+consWeightSum : ∀ {Index : Set} (index : Index) (indices : List Index)
+    (weight : Index → ℚ) →
+  weightSum (index ∷ indices) weight ≡ weight index + weightSum indices weight
+consWeightSum index indices weight = refl
+
+consWeightedValueSum : ∀ {Index : Set} (index : Index) (indices : List Index)
+    (weight value : Index → ℚ) →
+  weightedValueSum (index ∷ indices) weight value
+    ≡ weight index * value index + weightedValueSum indices weight value
+consWeightedValueSum index indices weight value = refl
+
+consWeightedSquareSum : ∀ {Index : Set} (index : Index) (indices : List Index)
+    (weight value : Index → ℚ) →
+  weightedSquareSum (index ∷ indices) weight value
+    ≡ weight index * FiniteL2.square (value index)
+      + weightedSquareSum indices weight value
+consWeightedSquareSum index indices weight value = refl
+
 weightedCrossExpansion :
   ∀ {Index : Set}
     (headWeight headValue : ℚ)
@@ -164,26 +226,55 @@ weightedCrossExpansion :
         + weightedSquareSum indices weight value
         - ((+ 2 / 1) * headValue
           * weightedValueSum indices weight value))
-weightedCrossExpansion headWeight headValue [] weight value =
-  ℚRing.solve []
+weightedCrossExpansion headWeight headValue [] weight value
+  rewrite emptyWeightSum weight
+        | emptyWeightedSquareSum weight value
+        | emptyWeightedValueSum weight value
+        | ℚP.*-zeroʳ (FiniteL2.square headValue)
+        | ℚP.*-zeroʳ ((+ 2 / 1) * headValue)
+        | zeroMinusZero
+        | ℚP.+-identityʳ 0ℚ
+        | ℚP.*-zeroʳ headWeight = refl
 weightedCrossExpansion
     headWeight headValue (index ∷ indices) weight value
   rewrite weightedCrossExpansion
-    headWeight headValue indices weight value =
-  ℚRing.solve []
-
+    headWeight headValue indices weight value
+        | consWeightSum index indices weight
+        | consWeightedSquareSum index indices weight value
+        | consWeightedValueSum index indices weight value
+        | squareUnfold (headValue - value index)
+        | squareUnfold headValue
+        | squareUnfold (value index) =
+  weightedCrossStepAlgebra
+    headWeight headValue (weight index) (value index)
+    (weightSum indices weight)
+    (weightedSquareSum indices weight value)
+    (weightedValueSum indices weight value)
 weightedGramStepAlgebraic :
   ∀ headWeight headValue tailWeight tailValue tailSquare →
   (headWeight + tailWeight)
-    * (headWeight * FiniteL2.square headValue + tailSquare)
-  ≡ FiniteL2.square (headWeight * headValue + tailValue)
+    * (headWeight * (headValue * headValue) + tailSquare)
+  ≡ (headWeight * headValue + tailValue)
+      * (headWeight * headValue + tailValue)
     + headWeight
-      * (FiniteL2.square headValue * tailWeight
+      * ((headValue * headValue) * tailWeight
         + tailSquare
         - ((+ 2 / 1) * headValue * tailValue))
     + (tailWeight * tailSquare
-      - FiniteL2.square tailValue)
+      - tailValue * tailValue)
 weightedGramStepAlgebraic = ℚRing.solve-∀
+
+tailDefectAlgebra : ∀ square defect →
+  (square + defect) - square ≡ defect
+tailDefectAlgebra = ℚRing.solve-∀
+
+weightedGramFinalAlgebra : ∀ square cross defect →
+  square + cross + defect ≡ square + (cross + defect)
+weightedGramFinalAlgebra = ℚRing.solve-∀
+
+scaleAssoc : ∀ left right value →
+  left * (right * value) ≡ left * right * value
+scaleAssoc = ℚRing.solve-∀
 
 weightedTailDefectExact :
   ∀ tailWeight tailValue tailSquare tailDefect →
@@ -192,12 +283,11 @@ weightedTailDefectExact :
   tailWeight * tailSquare - FiniteL2.square tailValue
     ≡ tailDefect
 weightedTailDefectExact
-    tailWeight tailValue tailSquare tailDefect identity =
-  subst
-    (λ selected →
-      selected - FiniteL2.square tailValue ≡ tailDefect)
-    (sym identity)
-    (ℚRing.solve [])
+    tailWeight tailValue tailSquare tailDefect identity
+  rewrite squareUnfold tailValue =
+  trans
+    (cong (λ selected → selected - tailValue * tailValue) identity)
+    (tailDefectAlgebra (tailValue * tailValue) tailDefect)
 
 weightedGramIdentity :
   ∀ {Index : Set}
@@ -206,7 +296,13 @@ weightedGramIdentity :
   weightSum indices weight * weightedSquareSum indices weight value
   ≡ FiniteL2.square (weightedValueSum indices weight value)
     + weightedGramDefect indices weight value
-weightedGramIdentity [] weight value = ℚRing.solve []
+weightedGramIdentity [] weight value
+  rewrite emptyWeightSum weight
+        | emptyWeightedSquareSum weight value
+        | emptyWeightedValueSum weight value
+        | squareUnfold 0ℚ
+        | ℚP.*-zeroʳ 0ℚ
+        | ℚP.+-identityʳ 0ℚ = refl
 weightedGramIdentity (index ∷ indices) weight value =
   let
     headWeight = weight index
@@ -267,18 +363,26 @@ weightedGramIdentity (index ∷ indices) weight value =
         + weightedCross headWeight headValue indices weight value
         + tailDefect
     afterCross =
-      subst
+      cong
         (λ selected →
           FiniteL2.square (headWeight * headValue + tailValue)
-            + expandedCross + tailDefect
-          ≡ FiniteL2.square (headWeight * headValue + tailValue)
             + selected + tailDefect)
         (sym crossExact)
-        (ℚRing.solve [])
   in
   trans step
     (trans afterTail
-      (trans afterCross (ℚRing.solve [])))
+      (trans afterCross
+        (trans
+          (cong
+            (λ selected →
+              selected + weightedCross headWeight headValue indices weight value
+                + tailDefect)
+            (squareUnfold (headWeight * headValue + tailValue)))
+          (weightedGramFinalAlgebra
+            ((headWeight * headValue + tailValue)
+              * (headWeight * headValue + tailValue))
+            (weightedCross headWeight headValue indices weight value)
+            tailDefect))))
 
 weightedCrossNonnegative :
   ∀ {Index : Set}
@@ -436,12 +540,16 @@ sumAbsoluteTriangle :
   ≤ Sums.sumRational indices (λ index → ∣ term index ∣)
 sumAbsoluteTriangle [] term = ℚP.≤-refl
 sumAbsoluteTriangle (index ∷ indices) term =
+  let
+    headAbsoluteExact : ∣ term index ∣ ≤ ∣ term index ∣
+    headAbsoluteExact = ℚP.≤-refl
+  in
   ℚP.≤-trans
     (ℚP.∣p+q∣≤∣p∣+∣q∣
       (term index)
       (Sums.sumRational indices term))
     (ℚP.+-mono-≤
-      ℚP.≤-refl
+      headAbsoluteExact
       (sumAbsoluteTriangle indices term))
 
 sumAbsoluteProductsExact :
@@ -772,7 +880,7 @@ finiteSchurSquared
     (λ upper →
       vectorNormSq indices (matrixApply indices matrix vector)
       ≤ upper)
-    (ℚRing.solve-∀
+    (scaleAssoc
       rowBound columnBound (vectorNormSq indices vector))
     combined
 

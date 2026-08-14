@@ -51,54 +51,54 @@ import DASHI.Physics.YangMills.BalabanP33Path4SignedRemainderCoercivityExact as 
 
 record PhysicalPlaquetteLinearRemainderControl
     (background : Physical.RationalSU2Background4)
-    (field : Coordinates.PhysicalSU2BondField4) : Set₁ where
+    (fieldValue : Coordinates.PhysicalSU2BondField4) : Set₁ where
   field
     physicalLinearPart : Physical.Plaquette4 → ℚ
     physicalGroupedRemainder : Physical.Plaquette4 → ℚ
 
     physicalDecomposition : ∀ plaquette →
-      Physical.plaquetteWilsonSecondVariation background field plaquette
+      Physical.plaquetteWilsonSecondVariation background fieldValue plaquette
         - Physical.plaquetteWilsonSecondVariation
-            Physical.identityBackground field plaquette
+            Physical.identityBackground fieldValue plaquette
       ≡ physicalLinearPart plaquette
         + physicalGroupedRemainder plaquette
 
     selectedCurvatureLinearLower : ∀ plaquette →
       - (WilsonGlobal.rhoOverThirtySix
-          * WilsonGlobal.plaquetteCrossCharge field plaquette)
+          * WilsonGlobal.plaquetteCrossCharge fieldValue plaquette)
       ≤ physicalLinearPart plaquette
 
     groupedSixteenAtomRemainderLower : ∀ plaquette →
       - (WilsonGlobal.rhoOverOneFortyFour
-          * WilsonGlobal.plaquetteDiagonalCharge field plaquette)
+          * WilsonGlobal.plaquetteDiagonalCharge fieldValue plaquette)
       ≤ physicalGroupedRemainder plaquette
 
 open PhysicalPlaquetteLinearRemainderControl public
 
 physicalCorrelationInputsAt :
-  ∀ {background field} →
-  PhysicalPlaquetteLinearRemainderControl background field →
+  ∀ {background fieldValue} →
+  PhysicalPlaquetteLinearRemainderControl background fieldValue →
   Physical.Plaquette4 →
   Correlation.PhysicalSelectedCorrelationInputs
-physicalCorrelationInputsAt {background} {field} control plaquette =
+physicalCorrelationInputsAt {background} {fieldValue} control plaquette =
   Correlation.physicalSelectedCorrelationInputs
-    (Physical.plaquetteWilsonSecondVariation background field plaquette
+    (Physical.plaquetteWilsonSecondVariation background fieldValue plaquette
       - Physical.plaquetteWilsonSecondVariation
-          Physical.identityBackground field plaquette)
+          Physical.identityBackground fieldValue plaquette)
     (physicalLinearPart control plaquette)
     (physicalGroupedRemainder control plaquette)
     (WilsonGlobal.rhoOverThirtySix
-      * WilsonGlobal.plaquetteCrossCharge field plaquette)
+      * WilsonGlobal.plaquetteCrossCharge fieldValue plaquette)
     (WilsonGlobal.rhoOverOneFortyFour
-      * WilsonGlobal.plaquetteDiagonalCharge field plaquette)
+      * WilsonGlobal.plaquetteDiagonalCharge fieldValue plaquette)
     (physicalDecomposition control plaquette)
     (selectedCurvatureLinearLower control plaquette)
     (groupedSixteenAtomRemainderLower control plaquette)
 
 physicalLinearRemainderControlImpliesWLocal :
-  ∀ {background field} →
-  PhysicalPlaquetteLinearRemainderControl background field →
-  WilsonGlobal.PhysicalWilsonSignedLocal background field
+  ∀ {background fieldValue} →
+  PhysicalPlaquetteLinearRemainderControl background fieldValue →
+  WilsonGlobal.PhysicalWilsonSignedLocal background fieldValue
 physicalLinearRemainderControlImpliesWLocal control = record
   { WilsonGlobal.PhysicalWilsonSignedLocal.plaquetteLower = λ plaquette →
       Correlation.physicalInputsImplyWLocalScalar

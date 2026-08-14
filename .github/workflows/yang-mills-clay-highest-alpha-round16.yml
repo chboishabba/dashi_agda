@@ -24,5 +24,6 @@ jobs:
           submodules: recursive
           persist-credentials: false
       - uses: cachix/install-nix-action@v27
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
       - name: Check inverse-dexp, SU2 geometry, Duhamel, RG and cutoff mathematics
         run: nix develop --command bash scripts/check_yang_mills_clay_highest_alpha_round16.sh

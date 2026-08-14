@@ -63,49 +63,49 @@ correlatedSingletonWithSlackToLiteralWitness :
   ∀ {background bondField plaquette} →
   CorrelatedSingletonWithSlack background bondField plaquette →
   Plaquette.LiteralSelectedPlaquetteWitness background bondField plaquette
-correlatedSingletonWithSlackToLiteralWitness data = record
-  { Plaquette.LiteralSelectedPlaquetteWitness.Multiplier =
-      Closure.Multiplier (extraction data)
-  ; Plaquette.LiteralSelectedPlaquetteWitness.pseudoData =
-      Closure.pseudoData (extraction data)
-  ; Plaquette.LiteralSelectedPlaquetteWitness.firstVariationCovector =
-      Closure.firstVariationCovector (extraction data)
-  ; Plaquette.LiteralSelectedPlaquetteWitness.residualAuthority =
-      Closure.residualAuthority (extraction data)
-  ; Plaquette.LiteralSelectedPlaquetteWitness.FineVariation =
-      Closure.FineVariation (extraction data)
-  ; Plaquette.LiteralSelectedPlaquetteWitness.variation =
-      Closure.variation (extraction data)
-  ; Plaquette.LiteralSelectedPlaquetteWitness.GaugeAdmissible =
-      Closure.GaugeAdmissible (extraction data)
-  ; Plaquette.LiteralSelectedPlaquetteWitness.ConstraintTangent =
-      Closure.ConstraintTangent (extraction data)
-  ; Plaquette.LiteralSelectedPlaquetteWitness.SupportedNearPlaquette =
-      Closure.SupportedNearPlaquette (extraction data)
-  ; Plaquette.LiteralSelectedPlaquetteWitness.gaugeAdmissible =
-      Closure.gaugeAdmissible (extraction data)
-  ; Plaquette.LiteralSelectedPlaquetteWitness.constraintTangent =
-      Closure.constraintTangent (extraction data)
-  ; Plaquette.LiteralSelectedPlaquetteWitness.localSupport =
-      Closure.localSupport (extraction data)
-  ; Plaquette.LiteralSelectedPlaquetteWitness.variationNormSq =
-      Closure.variationNormSq (extraction data)
-  ; Plaquette.LiteralSelectedPlaquetteWitness.selectorConstant =
-      Closure.selectorConstant (extraction data)
-  ; Plaquette.LiteralSelectedPlaquetteWitness.selectorConstantNonnegative =
-      Closure.selectorConstantNonnegative (extraction data)
-  ; Plaquette.LiteralSelectedPlaquetteWitness.variationChargeBound =
-      Closure.variationChargeBound (extraction data)
-  ; Plaquette.LiteralSelectedPlaquetteWitness.firstVariation =
-      Closure.firstVariation (extraction data)
-  ; Plaquette.LiteralSelectedPlaquetteWitness.selectedEulerLagrangeStationary =
-      Closure.selectedEulerLagrangeStationary (extraction data)
-  ; Plaquette.LiteralSelectedPlaquetteWitness.projectedVariationExact =
-      Closure.projectedVariationExact (extraction data)
-  ; Plaquette.LiteralSelectedPlaquetteWitness.exactCancellation =
-      Closure.exactCancellation (extraction data)
-  ; Plaquette.LiteralSelectedPlaquetteWitness.ownerBounds =
-      ownerBounds data
+correlatedSingletonWithSlackToLiteralWitness witnessData = record
+  { Multiplier =
+      Closure.Multiplier (extraction witnessData)
+  ; pseudoData =
+      Closure.pseudoData (extraction witnessData)
+  ; firstVariationCovector =
+      Closure.firstVariationCovector (extraction witnessData)
+  ; residualAuthority =
+      Closure.residualAuthority (extraction witnessData)
+  ; FineVariation =
+      Closure.FineVariation (extraction witnessData)
+  ; variation =
+      Closure.variation (extraction witnessData)
+  ; GaugeAdmissible =
+      Closure.GaugeAdmissible (extraction witnessData)
+  ; ConstraintTangent =
+      Closure.ConstraintTangent (extraction witnessData)
+  ; SupportedNearPlaquette =
+      Closure.SupportedNearPlaquette (extraction witnessData)
+  ; gaugeAdmissible =
+      Closure.gaugeAdmissible (extraction witnessData)
+  ; constraintTangent =
+      Closure.constraintTangent (extraction witnessData)
+  ; localSupport =
+      Closure.localSupport (extraction witnessData)
+  ; variationNormSq =
+      Closure.variationNormSq (extraction witnessData)
+  ; selectorConstant =
+      Closure.selectorConstant (extraction witnessData)
+  ; selectorConstantNonnegative =
+      Closure.selectorConstantNonnegative (extraction witnessData)
+  ; variationChargeBound =
+      Closure.variationChargeBound (extraction witnessData)
+  ; firstVariation =
+      Closure.firstVariation (extraction witnessData)
+  ; selectedEulerLagrangeStationary =
+      Closure.selectedEulerLagrangeStationary (extraction witnessData)
+  ; projectedVariationExact =
+      Closure.projectedVariationExact (extraction witnessData)
+  ; exactCancellation =
+      Closure.exactCancellation (extraction witnessData)
+  ; ownerBounds =
+      ownerBounds witnessData
   }
 
 record CorrelatedSingletonFamilyWithSlack
@@ -122,7 +122,7 @@ correlatedSingletonFamilyWithSlackToLiteralFamily :
   CorrelatedSingletonFamilyWithSlack background bondField →
   Plaquette.LiteralSelectedPlaquetteFamily background bondField
 correlatedSingletonFamilyWithSlackToLiteralFamily family = record
-  { Plaquette.LiteralSelectedPlaquetteFamily.atPlaquette = λ plaquette →
+  { atPlaquette = λ plaquette →
       correlatedSingletonWithSlackToLiteralWitness
         (atPlaquette family plaquette) }
 

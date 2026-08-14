@@ -43,5 +43,6 @@ jobs:
           submodules: recursive
           persist-credentials: false
       - uses: cachix/install-nix-action@v27
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
       - name: Check rational Wilson, physical W9, periodic Hodge and boundary coercivity
         run: nix develop --command bash scripts/check_yang_mills_clay_highest_alpha_round22.sh
