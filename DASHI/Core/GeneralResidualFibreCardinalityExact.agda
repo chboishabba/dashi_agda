@@ -3,12 +3,17 @@ module DASHI.Core.GeneralResidualFibreCardinalityExact where
 open import DASHI.Core.Prelude
 open import Data.Fin.Base using (Fin)
 import Data.Fin.Properties as Finₚ
-open import Relation.Nullary.Decidable.Core using (yes; no)
 
 import DASHI.Core.ResidualFibreLowerBoundExact as Lower
 
 Injective : ∀ {A B : Set} → (A → B) → Set
 Injective f = ∀ {left right} → f left ≡ f right → left ≡ right
+
+------------------------------------------------------------------------
+-- A finite future-distinct fibre is enumerated by Fin k.  The strongest clean
+-- formulation of pairwise future distinction is extensional: if two enumerated
+-- representatives are future-equivalent, their indices were already equal.
+------------------------------------------------------------------------
 
 record FiniteFutureDistinctFibre
     {State Coarse : Set}
@@ -20,10 +25,10 @@ record FiniteFutureDistinctFibre
     representative : Fin k → State
     fibreClass : Coarse
     inSameFibre : (index : Fin k) → coarsen (representative index) ≡ fibreClass
-    pairwiseFutureDistinct :
+    futureEquivalentIndicesEqual :
       ∀ {left right} →
-      (left ≡ right → ⊥) →
-      FutureEq (representative left) (representative right) → ⊥
+      FutureEq (representative left) (representative right) →
+      left ≡ right
 
 open FiniteFutureDistinctFibre public
 
@@ -37,20 +42,10 @@ residualInjectionFromFutureDistinctFibre :
     (fibre : FiniteFutureDistinctFibre k FutureEq coarsen) →
   Injective (λ index → residual (representative fibre index))
 residualInjectionFromFutureDistinctFibre safe fibre {left} {right} residualEqual =
-  equalOrContradiction left right residualEqual
-  where
-    equalOrContradiction :
-      (i j : Fin k) →
-      residual (representative fibre i) ≡ residual (representative fibre j) →
-      i ≡ j
-    equalOrContradiction i j equality with Finₚ._≟_ i j
-    ... | yes indicesEqual = indicesEqual
-    ... | no indicesDifferent =
-      ⊥-elim
-        (pairwiseFutureDistinct fibre indicesDifferent
-          (Lower.pairKernelFutureSafe safe
-            (trans (inSameFibre fibre i) (sym (inSameFibre fibre j)))
-            equality))
+  futureEquivalentIndicesEqual fibre
+    (Lower.pairKernelFutureSafe safe
+      (trans (inSameFibre fibre left) (sym (inSameFibre fibre right)))
+      residualEqual)
 
 pow2 : Nat → Nat
 pow2 zero = 1
@@ -84,12 +79,6 @@ bitBudgetBelowClassCountIsImpossible :
 bitBudgetBelowClassCountIsImpossible safe fibre tooSmall =
   ≤⇒≯ (futureSafetyForBitWordsImpliesCapacityBound safe fibre) tooSmall
 
-------------------------------------------------------------------------
--- Certified ceil(log2 k).  We avoid tying the theorem to one executable
--- logarithm implementation: `leastCapacity` is exactly the defining universal
--- property of ceil-log2.
-------------------------------------------------------------------------
-
 record CeilLog2Certificate (k bits : Nat) : Set where
   constructor ceilLog2Certificate
   field
@@ -116,6 +105,6 @@ safeBitResidualRespectsCeilLog2 ceilCertificate safe fibre =
     (futureSafetyForBitWordsImpliesCapacityBound safe fibre)
 
 ------------------------------------------------------------------------
--- Every future-safe fixed-bit residual therefore obeys the exact capacity law
--- k <= 2^b and, for any certified least-capacity exponent, b >= ceil(log2 k).
+-- Every future-safe fixed-bit residual therefore obeys k <= 2^b and any
+-- certified least-capacity exponent gives b >= ceil(log2 k).
 ------------------------------------------------------------------------
