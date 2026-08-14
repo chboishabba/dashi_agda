@@ -1,13 +1,16 @@
 module DASHI.Cognition.PNF.OrientedZeroCertifiedCompilerExact where
 
 open import DASHI.Core.Prelude
-open import Relation.Nullary.Decidable.Core using (yes; no)
+open import Relation.Nullary.Decidable.Core using (Dec; yes; no)
 
+import DASHI.Cognition.PNF.OrientedZeroCanonicalFutureExact as Canonical
 import DASHI.Cognition.PNF.OrientedZeroCanonicalPartitionPresentationExact as Presentation
 import DASHI.Cognition.PNF.OrientedZeroFutureQuotientExact as Wave
 import DASHI.Core.CertifiedFiniteFutureQuotientCompilerExact as Compiler
 import DASHI.Core.FiniteRankedRefinementStabilizationExact as Ranked
+import DASHI.Core.FutureObservationLanguageQuotientExact as Future
 import DASHI.Core.GenericFuturePartitionRefinementExact as Refinement
+import DASHI.Core.StablePartitionCanonicalFutureBridgeExact as Bridge
 
 ------------------------------------------------------------------------
 -- EXECUTABLE TWO-STAGE PARTITION CODE
@@ -20,8 +23,7 @@ advanceCode : PartitionCode → PartitionCode
 advanceCode scalarPartition = orientedPartition
 advanceCode orientedPartition = orientedPartition
 
-stableCode? : (code : PartitionCode) →
-  Relation.Nullary.Decidable.Core.Dec (code ≡ advanceCode code)
+stableCode? : (code : PartitionCode) → Dec (code ≡ advanceCode code)
 stableCode? scalarPartition = no λ()
 stableCode? orientedPartition = yes refl
 
@@ -82,7 +84,7 @@ advanceCorrect orientedPartition left right =
 
 orientedZeroCompiler :
   Compiler.CertifiedPartitionRefiner
-    Wave.Wave4 Presentation.Canonical.Action Wave.Scalar3
+    Wave.Wave4 Canonical.Action Wave.Scalar3
 orientedZeroCompiler = Compiler.certifiedPartitionRefiner
   Wave.scalar
   Presentation.step
@@ -105,12 +107,12 @@ compilerReturnsCanonicalFutureExactness :
   (Refinement.RefinesToDepth
       (Compiler.stableDepth compiledOrientedZeroQuotient)
       Wave.scalar Presentation.step left right →
-    DASHI.Core.FutureObservationLanguageQuotientExact.FutureObservationEquivalent
-      (Compiler.Bridge.deterministicSystem Presentation.step Presentation.label)
+    Future.FutureObservationEquivalent
+      (Bridge.deterministicSystem Presentation.step Presentation.label)
       Wave.scalar left right)
   ×
-  (DASHI.Core.FutureObservationLanguageQuotientExact.FutureObservationEquivalent
-      (Compiler.Bridge.deterministicSystem Presentation.step Presentation.label)
+  (Future.FutureObservationEquivalent
+      (Bridge.deterministicSystem Presentation.step Presentation.label)
       Wave.scalar left right →
     Refinement.RefinesToDepth
       (Compiler.stableDepth compiledOrientedZeroQuotient)
