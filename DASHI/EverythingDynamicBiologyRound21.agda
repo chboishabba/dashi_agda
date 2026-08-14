@@ -19,6 +19,7 @@ import DASHI.Biology.Physical.ContextDependentPadicPhysicalMapExact
 import DASHI.Biology.Physical.MultiscaleSelfBoundaryExact
 import DASHI.Biology.Physical.DNAHelixDihedralExact
 import DASHI.Biology.Physical.DNASequenceHelixPositionExact
+import DASHI.Biology.Physical.DNAHelixTernaryQuantizationResidualExact
 import DASHI.Biology.Physical.DNAChemistryRegulatoryOperatorBridgeExact
 import DASHI.Biology.Physical.C3CubeFourier27Exact
 import DASHI.Biology.Physical.MorphogeneticControlFieldCapacityExact
