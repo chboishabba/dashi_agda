@@ -1,0 +1,18 @@
+module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound52PhysicalLeafReductionValidation where
+
+-- Round 52 validation root: reduce the remaining G1/G2/RG1c/RG1d/source-RG
+-- seams on top of merged Round 51 without invoking CI.
+
+open import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound51CentreKKTBetaValidation
+
+open import DASHI.Physics.YangMills.BalabanCMP109FederbushQuarterNewtonBudgetExact
+open import DASHI.Physics.YangMills.BalabanCMP109BishopKarcherFiveFourthSquaredExact
+
+open import DASHI.Physics.YangMills.BalabanP33JointSingletonBudgetExact
+open import DASHI.Physics.YangMills.BalabanP33JointCorrelatedResidualExact
+open import DASHI.Physics.YangMills.BalabanP33UniformJointResidualTransportExact
+open import DASHI.Physics.YangMills.BalabanSelectedCorrelatedJointSingletonClosureExact
+
+open import DASHI.Physics.YangMills.Balaban1989LiteralCombinedRGDictionaryExact
+open import DASHI.Physics.YangMills.BalabanYM4PlaquetteHessianOverlapExact
+open import DASHI.Physics.YangMills.BalabanYM4DifferentiatedKKTSourceSupportExact
