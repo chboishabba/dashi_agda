@@ -8,7 +8,8 @@ module DASHI.Physics.Closure.NSTriadKNHHBadNormalizedDuhamelLeafRound58 where
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Agda.Builtin.Nat using (Nat; suc)
-open import Data.Rational.Base using (ℚ; _*_; _+_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _*_; _+_; _≤_; nonNegative)
+import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
@@ -31,6 +32,33 @@ normalizedDefect physical q =
 normalizationFactor : Raw.PhysicalGeneralVariableDefectDuhamel → Nat → ℚ
 normalizationFactor physical q =
   Threshold.thresholdInverse (Raw.parameter physical) * Scale.dyadicScale q
+
+normalizationFactorNonnegative :
+  (physical : Raw.PhysicalGeneralVariableDefectDuhamel) →
+  ∀ q → 0ℚ ≤ normalizationFactor physical q
+normalizationFactorNonnegative physical q =
+  let instance
+    inverseNN = nonNegative
+      (Threshold.thresholdInverseNonnegative (Raw.parameter physical))
+    scaleNN = nonNegative (Scale.dyadicScaleNonnegative q)
+    productNN =
+      ℚP.nonNeg*nonNeg⇒nonNeg
+        (Threshold.thresholdInverse (Raw.parameter physical))
+        (Scale.dyadicScale q)
+  in ℚP.nonNegative⁻¹ (normalizationFactor physical q)
+
+normalizedDefectNonnegative :
+  (physical : Raw.PhysicalGeneralVariableDefectDuhamel) →
+  ∀ q → 0ℚ ≤ normalizedDefect physical q
+normalizedDefectNonnegative physical q =
+  let instance
+    factorNN = nonNegative (normalizationFactorNonnegative physical q)
+    defectNN = nonNegative (Raw.defectRateNonnegative physical q)
+    productNN =
+      ℚP.nonNeg*nonNeg⇒nonNeg
+        (normalizationFactor physical q)
+        (Raw.defectRate physical q)
+  in ℚP.nonNegative⁻¹ (normalizedDefect physical q)
 
 normalizedInherited :
   Raw.PhysicalGeneralVariableDefectDuhamel → Nat → ℚ
