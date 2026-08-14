@@ -29,11 +29,6 @@ record ProtectedLabelSearchGeometry : Set₁ where
 
 open ProtectedLabelSearchGeometry public
 
-------------------------------------------------------------------------
--- A concrete path witness carries the actual edge evidence and therefore an
--- exact cumulative update cost.
-------------------------------------------------------------------------
-
 record SearchStep
     (geometry : ProtectedLabelSearchGeometry)
     (public : Public geometry) : Set₁ where
@@ -48,17 +43,12 @@ open SearchStep public
 
 stepCost :
   ∀ {geometry public} → SearchStep geometry public → Nat
-stepCost step = edgeUpdateCost _ (edge step)
+stepCost {geometry} step = edgeUpdateCost geometry (edge step)
 
 pathCost :
   ∀ {geometry public} → List (SearchStep geometry public) → Nat
 pathCost [] = 0
 pathCost (step ∷ steps) = stepCost step + pathCost steps
-
-------------------------------------------------------------------------
--- Two representations may preserve the same candidate carrier and protected
--- labels while inducing different transition costs.
-------------------------------------------------------------------------
 
 record SameInformationDifferentGeometry : Set₁ where
   constructor sameInformationDifferentGeometry
@@ -72,10 +62,6 @@ record SameInformationDifferentGeometry : Set₁ where
     transitionCostA transitionCostB : Nat
 
 open SameInformationDifferentGeometry public
-
-------------------------------------------------------------------------
--- Observation refinement has to update geometry as well as candidate count.
-------------------------------------------------------------------------
 
 record GeometricObservationUpdate : Set where
   constructor geometricObservationUpdate
@@ -110,7 +96,7 @@ beneficialGeometryUpdate : GeometricObservationUpdate
 beneficialGeometryUpdate = geometricObservationUpdate 8 7 20 8 8 2
 
 beneficialGeometryGain : GeometryImprovement beneficialGeometryUpdate
-beneficialGeometryGain = geometryImprovement 18 refl
+beneficialGeometryGain = geometryImprovement 15 refl
 
 sameCountBadGeometry : GeometricObservationUpdate
 sameCountBadGeometry = geometricObservationUpdate 8 7 4 15 0 0
