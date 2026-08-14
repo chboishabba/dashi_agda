@@ -50,48 +50,21 @@ open import Data.List.Base using (map; _++_; length)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; -_)
 import Data.Rational.Tactic.RingSolver as ℚRing
+import Data.Rational.Properties as ℚP
 open import Relation.Binary.PropositionalEquality using
   (cong; cong₂; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
+open import DASHI.Physics.YangMills.BalabanP33RationalQuaternionCoreExact public
+open import DASHI.Physics.YangMills.BalabanP33RationalQuaternionAlgebraLawsExact public
+open import DASHI.Physics.YangMills.BalabanP33RationalQuaternionWilsonJetExact public
+open import DASHI.Physics.YangMills.BalabanP33RationalQuaternionFlatCurlIdentityExact public
 
 ------------------------------------------------------------------------
 -- Concrete rational quaternion algebra.
 ------------------------------------------------------------------------
 
-record RationalQuaternion : Set where
-  constructor quat
-  field
-    q0 q1 q2 q3 : ℚ
-
-open RationalQuaternion public
-
-zeroQ oneQ : RationalQuaternion
-zeroQ = quat 0ℚ 0ℚ 0ℚ 0ℚ
-oneQ = quat 1ℚ 0ℚ 0ℚ 0ℚ
-
-_+q_ : RationalQuaternion → RationalQuaternion → RationalQuaternion
-quat a0 a1 a2 a3 +q quat b0 b1 b2 b3 =
-  quat (a0 + b0) (a1 + b1) (a2 + b2) (a3 + b3)
-
-negQ : RationalQuaternion → RationalQuaternion
-negQ (quat a0 a1 a2 a3) = quat (- a0) (- a1) (- a2) (- a3)
-
-_*q_ : RationalQuaternion → RationalQuaternion → RationalQuaternion
-quat a0 a1 a2 a3 *q quat b0 b1 b2 b3 =
-  quat
-    (a0 * b0 - a1 * b1 - a2 * b2 - a3 * b3)
-    (a0 * b1 + a1 * b0 + a2 * b3 - a3 * b2)
-    (a0 * b2 - a1 * b3 + a2 * b0 + a3 * b1)
-    (a0 * b3 + a1 * b2 - a2 * b1 + a3 * b0)
-
-quaternionExt :
-  ∀ {left right} →
-  q0 left ≡ q0 right → q1 left ≡ q1 right →
-  q2 left ≡ q2 right → q3 left ≡ q3 right →
-  left ≡ right
-quaternionExt {quat _ _ _ _} {quat _ _ _ _} refl refl refl refl = refl
-
+{-
 quaternionAddAssociative : ∀ a b c →
   (a +q b) +q c ≡ a +q (b +q c)
 quaternionAddAssociative
@@ -99,25 +72,25 @@ quaternionAddAssociative
     (quat b0 b1 b2 b3)
     (quat c0 c1 c2 c3) =
   quaternionExt
-    (ℚRing.solve-∀ a0 b0 c0)
-    (ℚRing.solve-∀ a1 b1 c1)
-    (ℚRing.solve-∀ a2 b2 c2)
-    (ℚRing.solve-∀ a3 b3 c3)
+    (ℚP.+-assoc a0 b0 c0)
+    (ℚP.+-assoc a1 b1 c1)
+    (ℚP.+-assoc a2 b2 c2)
+    (ℚP.+-assoc a3 b3 c3)
 
 quaternionAddCommutative : ∀ a b → a +q b ≡ b +q a
 quaternionAddCommutative
     (quat a0 a1 a2 a3) (quat b0 b1 b2 b3) =
   quaternionExt
-    (ℚRing.solve-∀ a0 b0)
-    (ℚRing.solve-∀ a1 b1)
-    (ℚRing.solve-∀ a2 b2)
-    (ℚRing.solve-∀ a3 b3)
+    (ℚP.+-comm a0 b0)
+    (ℚP.+-comm a1 b1)
+    (ℚP.+-comm a2 b2)
+    (ℚP.+-comm a3 b3)
 
 quaternionAddZeroLeft : ∀ a → zeroQ +q a ≡ a
 quaternionAddZeroLeft (quat a0 a1 a2 a3) =
   quaternionExt
-    (ℚRing.solve-∀ a0) (ℚRing.solve-∀ a1)
-    (ℚRing.solve-∀ a2) (ℚRing.solve-∀ a3)
+    (ℚP.+-identityˡ a0) (ℚP.+-identityˡ a1)
+    (ℚP.+-identityˡ a2) (ℚP.+-identityˡ a3)
 
 quaternionAddZeroRight : ∀ a → a +q zeroQ ≡ a
 quaternionAddZeroRight a =
@@ -128,48 +101,178 @@ quaternionMultiplyDistributesLeft : ∀ a b c →
 quaternionMultiplyDistributesLeft
     (quat a0 a1 a2 a3)
     (quat b0 b1 b2 b3)
-    (quat c0 c1 c2 c3) =
+    (quat c0 c1 c2 c3)
+  rewrite q0Multiply (quat a0 a1 a2 a3)
+    (quat b0 b1 b2 b3 +q quat c0 c1 c2 c3)
+    | q0Multiply (quat a0 a1 a2 a3) (quat b0 b1 b2 b3)
+    | q0Multiply (quat a0 a1 a2 a3) (quat c0 c1 c2 c3)
+    | q1Multiply (quat a0 a1 a2 a3)
+      (quat b0 b1 b2 b3 +q quat c0 c1 c2 c3)
+    | q1Multiply (quat a0 a1 a2 a3) (quat b0 b1 b2 b3)
+    | q1Multiply (quat a0 a1 a2 a3) (quat c0 c1 c2 c3)
+    | q2Multiply (quat a0 a1 a2 a3)
+      (quat b0 b1 b2 b3 +q quat c0 c1 c2 c3)
+    | q2Multiply (quat a0 a1 a2 a3) (quat b0 b1 b2 b3)
+    | q2Multiply (quat a0 a1 a2 a3) (quat c0 c1 c2 c3)
+    | q3Multiply (quat a0 a1 a2 a3)
+      (quat b0 b1 b2 b3 +q quat c0 c1 c2 c3)
+    | q3Multiply (quat a0 a1 a2 a3) (quat b0 b1 b2 b3)
+    | q3Multiply (quat a0 a1 a2 a3) (quat c0 c1 c2 c3)
+    | q0Add (quat b0 b1 b2 b3) (quat c0 c1 c2 c3)
+    | q0Add
+      ((quat a0 a1 a2 a3) *q (quat b0 b1 b2 b3))
+      ((quat a0 a1 a2 a3) *q (quat c0 c1 c2 c3))
+    | q1Add (quat b0 b1 b2 b3) (quat c0 c1 c2 c3)
+    | q1Add
+      ((quat a0 a1 a2 a3) *q (quat b0 b1 b2 b3))
+      ((quat a0 a1 a2 a3) *q (quat c0 c1 c2 c3))
+    | q2Add (quat b0 b1 b2 b3) (quat c0 c1 c2 c3)
+    | q2Add
+      ((quat a0 a1 a2 a3) *q (quat b0 b1 b2 b3))
+      ((quat a0 a1 a2 a3) *q (quat c0 c1 c2 c3))
+    | q3Add (quat b0 b1 b2 b3) (quat c0 c1 c2 c3)
+    | q3Add
+      ((quat a0 a1 a2 a3) *q (quat b0 b1 b2 b3))
+      ((quat a0 a1 a2 a3) *q (quat c0 c1 c2 c3))
+    | q0Multiply (quat a0 a1 a2 a3) (quat b0 b1 b2 b3)
+    | q0Multiply (quat a0 a1 a2 a3) (quat c0 c1 c2 c3)
+    | q1Multiply (quat a0 a1 a2 a3) (quat b0 b1 b2 b3)
+    | q1Multiply (quat a0 a1 a2 a3) (quat c0 c1 c2 c3)
+    | q2Multiply (quat a0 a1 a2 a3) (quat b0 b1 b2 b3)
+    | q2Multiply (quat a0 a1 a2 a3) (quat c0 c1 c2 c3)
+    | q3Multiply (quat a0 a1 a2 a3) (quat b0 b1 b2 b3)
+    | q3Multiply (quat a0 a1 a2 a3) (quat c0 c1 c2 c3) =
   quaternionExt
-    (ℚRing.solve-∀ a0 a1 a2 a3 b0 b1 b2 b3 c0 c1 c2 c3)
-    (ℚRing.solve-∀ a0 a1 a2 a3 b0 b1 b2 b3 c0 c1 c2 c3)
-    (ℚRing.solve-∀ a0 a1 a2 a3 b0 b1 b2 b3 c0 c1 c2 c3)
-    (ℚRing.solve-∀ a0 a1 a2 a3 b0 b1 b2 b3 c0 c1 c2 c3)
+    (ℚRing.solve (a0 ∷ a1 ∷ a2 ∷ a3 ∷ b0 ∷ b1 ∷ b2 ∷ b3 ∷
+      c0 ∷ c1 ∷ c2 ∷ c3 ∷ []))
+    (ℚRing.solve (a0 ∷ a1 ∷ a2 ∷ a3 ∷ b0 ∷ b1 ∷ b2 ∷ b3 ∷
+      c0 ∷ c1 ∷ c2 ∷ c3 ∷ []))
+    (ℚRing.solve (a0 ∷ a1 ∷ a2 ∷ a3 ∷ b0 ∷ b1 ∷ b2 ∷ b3 ∷
+      c0 ∷ c1 ∷ c2 ∷ c3 ∷ []))
+    (ℚRing.solve (a0 ∷ a1 ∷ a2 ∷ a3 ∷ b0 ∷ b1 ∷ b2 ∷ b3 ∷
+      c0 ∷ c1 ∷ c2 ∷ c3 ∷ []))
 
 quaternionMultiplyDistributesRight : ∀ a b c →
   (a +q b) *q c ≡ (a *q c) +q (b *q c)
 quaternionMultiplyDistributesRight
     (quat a0 a1 a2 a3)
     (quat b0 b1 b2 b3)
-    (quat c0 c1 c2 c3) =
+    (quat c0 c1 c2 c3)
+  rewrite q0Multiply
+      (quat a0 a1 a2 a3 +q quat b0 b1 b2 b3)
+      (quat c0 c1 c2 c3)
+    | q0Multiply (quat a0 a1 a2 a3) (quat c0 c1 c2 c3)
+    | q0Multiply (quat b0 b1 b2 b3) (quat c0 c1 c2 c3)
+    | q1Multiply
+      (quat a0 a1 a2 a3 +q quat b0 b1 b2 b3)
+      (quat c0 c1 c2 c3)
+    | q1Multiply (quat a0 a1 a2 a3) (quat c0 c1 c2 c3)
+    | q1Multiply (quat b0 b1 b2 b3) (quat c0 c1 c2 c3)
+    | q2Multiply
+      (quat a0 a1 a2 a3 +q quat b0 b1 b2 b3)
+      (quat c0 c1 c2 c3)
+    | q2Multiply (quat a0 a1 a2 a3) (quat c0 c1 c2 c3)
+    | q2Multiply (quat b0 b1 b2 b3) (quat c0 c1 c2 c3)
+    | q3Multiply
+      (quat a0 a1 a2 a3 +q quat b0 b1 b2 b3)
+      (quat c0 c1 c2 c3)
+    | q3Multiply (quat a0 a1 a2 a3) (quat c0 c1 c2 c3)
+    | q3Multiply (quat b0 b1 b2 b3) (quat c0 c1 c2 c3)
+    | q0Add (quat a0 a1 a2 a3) (quat b0 b1 b2 b3)
+    | q0Add
+      ((quat a0 a1 a2 a3) *q (quat c0 c1 c2 c3))
+      ((quat b0 b1 b2 b3) *q (quat c0 c1 c2 c3))
+    | q1Add (quat a0 a1 a2 a3) (quat b0 b1 b2 b3)
+    | q1Add
+      ((quat a0 a1 a2 a3) *q (quat c0 c1 c2 c3))
+      ((quat b0 b1 b2 b3) *q (quat c0 c1 c2 c3))
+    | q2Add (quat a0 a1 a2 a3) (quat b0 b1 b2 b3)
+    | q2Add
+      ((quat a0 a1 a2 a3) *q (quat c0 c1 c2 c3))
+      ((quat b0 b1 b2 b3) *q (quat c0 c1 c2 c3))
+    | q3Add (quat a0 a1 a2 a3) (quat b0 b1 b2 b3)
+    | q3Add
+      ((quat a0 a1 a2 a3) *q (quat c0 c1 c2 c3))
+      ((quat b0 b1 b2 b3) *q (quat c0 c1 c2 c3))
+    | q0Multiply (quat a0 a1 a2 a3) (quat c0 c1 c2 c3)
+    | q0Multiply (quat b0 b1 b2 b3) (quat c0 c1 c2 c3)
+    | q1Multiply (quat a0 a1 a2 a3) (quat c0 c1 c2 c3)
+    | q1Multiply (quat b0 b1 b2 b3) (quat c0 c1 c2 c3)
+    | q2Multiply (quat a0 a1 a2 a3) (quat c0 c1 c2 c3)
+    | q2Multiply (quat b0 b1 b2 b3) (quat c0 c1 c2 c3)
+    | q3Multiply (quat a0 a1 a2 a3) (quat c0 c1 c2 c3)
+    | q3Multiply (quat b0 b1 b2 b3) (quat c0 c1 c2 c3) =
   quaternionExt
-    (ℚRing.solve-∀ a0 a1 a2 a3 b0 b1 b2 b3 c0 c1 c2 c3)
-    (ℚRing.solve-∀ a0 a1 a2 a3 b0 b1 b2 b3 c0 c1 c2 c3)
-    (ℚRing.solve-∀ a0 a1 a2 a3 b0 b1 b2 b3 c0 c1 c2 c3)
-    (ℚRing.solve-∀ a0 a1 a2 a3 b0 b1 b2 b3 c0 c1 c2 c3)
+    (ℚRing.solve (a0 ∷ a1 ∷ a2 ∷ a3 ∷ b0 ∷ b1 ∷ b2 ∷ b3 ∷
+      c0 ∷ c1 ∷ c2 ∷ c3 ∷ []))
+    (ℚRing.solve (a0 ∷ a1 ∷ a2 ∷ a3 ∷ b0 ∷ b1 ∷ b2 ∷ b3 ∷
+      c0 ∷ c1 ∷ c2 ∷ c3 ∷ []))
+    (ℚRing.solve (a0 ∷ a1 ∷ a2 ∷ a3 ∷ b0 ∷ b1 ∷ b2 ∷ b3 ∷
+      c0 ∷ c1 ∷ c2 ∷ c3 ∷ []))
+    (ℚRing.solve (a0 ∷ a1 ∷ a2 ∷ a3 ∷ b0 ∷ b1 ∷ b2 ∷ b3 ∷
+      c0 ∷ c1 ∷ c2 ∷ c3 ∷ []))
 
 quaternionMultiplyAssociative : ∀ a b c →
   (a *q b) *q c ≡ a *q (b *q c)
 quaternionMultiplyAssociative
     (quat a0 a1 a2 a3)
     (quat b0 b1 b2 b3)
-    (quat c0 c1 c2 c3) =
+    (quat c0 c1 c2 c3)
+  rewrite q0Multiply
+      ((quat a0 a1 a2 a3) *q (quat b0 b1 b2 b3))
+      (quat c0 c1 c2 c3)
+    | q0Multiply (quat a0 a1 a2 a3)
+      ((quat b0 b1 b2 b3) *q (quat c0 c1 c2 c3))
+    | q0Multiply (quat a0 a1 a2 a3) (quat b0 b1 b2 b3)
+    | q0Multiply (quat b0 b1 b2 b3) (quat c0 c1 c2 c3)
+    | q1Multiply
+      ((quat a0 a1 a2 a3) *q (quat b0 b1 b2 b3))
+      (quat c0 c1 c2 c3)
+    | q1Multiply (quat a0 a1 a2 a3)
+      ((quat b0 b1 b2 b3) *q (quat c0 c1 c2 c3))
+    | q1Multiply (quat a0 a1 a2 a3) (quat b0 b1 b2 b3)
+    | q1Multiply (quat b0 b1 b2 b3) (quat c0 c1 c2 c3)
+    | q2Multiply
+      ((quat a0 a1 a2 a3) *q (quat b0 b1 b2 b3))
+      (quat c0 c1 c2 c3)
+    | q2Multiply (quat a0 a1 a2 a3)
+      ((quat b0 b1 b2 b3) *q (quat c0 c1 c2 c3))
+    | q2Multiply (quat a0 a1 a2 a3) (quat b0 b1 b2 b3)
+    | q2Multiply (quat b0 b1 b2 b3) (quat c0 c1 c2 c3)
+    | q3Multiply
+      ((quat a0 a1 a2 a3) *q (quat b0 b1 b2 b3))
+      (quat c0 c1 c2 c3)
+    | q3Multiply (quat a0 a1 a2 a3)
+      ((quat b0 b1 b2 b3) *q (quat c0 c1 c2 c3))
+    | q3Multiply (quat a0 a1 a2 a3) (quat b0 b1 b2 b3)
+    | q3Multiply (quat b0 b1 b2 b3) (quat c0 c1 c2 c3) =
   quaternionExt
-    (ℚRing.solve-∀ a0 a1 a2 a3 b0 b1 b2 b3 c0 c1 c2 c3)
-    (ℚRing.solve-∀ a0 a1 a2 a3 b0 b1 b2 b3 c0 c1 c2 c3)
-    (ℚRing.solve-∀ a0 a1 a2 a3 b0 b1 b2 b3 c0 c1 c2 c3)
-    (ℚRing.solve-∀ a0 a1 a2 a3 b0 b1 b2 b3 c0 c1 c2 c3)
+    (ℚRing.solve (a0 ∷ a1 ∷ a2 ∷ a3 ∷ b0 ∷ b1 ∷ b2 ∷ b3 ∷
+      c0 ∷ c1 ∷ c2 ∷ c3 ∷ []))
+    (ℚRing.solve (a0 ∷ a1 ∷ a2 ∷ a3 ∷ b0 ∷ b1 ∷ b2 ∷ b3 ∷
+      c0 ∷ c1 ∷ c2 ∷ c3 ∷ []))
+    (ℚRing.solve (a0 ∷ a1 ∷ a2 ∷ a3 ∷ b0 ∷ b1 ∷ b2 ∷ b3 ∷
+      c0 ∷ c1 ∷ c2 ∷ c3 ∷ []))
+    (ℚRing.solve (a0 ∷ a1 ∷ a2 ∷ a3 ∷ b0 ∷ b1 ∷ b2 ∷ b3 ∷
+      c0 ∷ c1 ∷ c2 ∷ c3 ∷ []))
 
 quaternionMultiplyZeroRight : ∀ a → a *q zeroQ ≡ zeroQ
-quaternionMultiplyZeroRight (quat a0 a1 a2 a3) =
+quaternionMultiplyZeroRight (quat a0 a1 a2 a3)
+  rewrite q0Multiply (quat a0 a1 a2 a3) zeroQ
+    | q1Multiply (quat a0 a1 a2 a3) zeroQ
+    | q2Multiply (quat a0 a1 a2 a3) zeroQ
+    | q3Multiply (quat a0 a1 a2 a3) zeroQ =
   quaternionExt
-    (ℚRing.solve-∀ a0 a1 a2 a3)
-    (ℚRing.solve-∀ a0 a1 a2 a3)
-    (ℚRing.solve-∀ a0 a1 a2 a3)
-    (ℚRing.solve-∀ a0 a1 a2 a3)
+    (ℚRing.solve (a0 ∷ a1 ∷ a2 ∷ a3 ∷ []))
+    (ℚRing.solve (a0 ∷ a1 ∷ a2 ∷ a3 ∷ []))
+    (ℚRing.solve (a0 ∷ a1 ∷ a2 ∷ a3 ∷ []))
+    (ℚRing.solve (a0 ∷ a1 ∷ a2 ∷ a3 ∷ []))
+-}
 
 ------------------------------------------------------------------------
 -- Ordered product jets and the exact sixteen atoms.
 ------------------------------------------------------------------------
+{-
 
 record QuaternionFactorJet : Set where
   constructor factorJet
@@ -232,7 +335,7 @@ sumQuaternionMapLeftMultiply multiplier [] =
   sym (quaternionMultiplyZeroRight multiplier)
 sumQuaternionMapLeftMultiply multiplier (value ∷ values) =
   trans
-    (cong (multiplier *q value +q_)
+    (cong ((multiplier *q value) +q_)
       (sumQuaternionMapLeftMultiply multiplier values))
     (sym (quaternionMultiplyDistributesLeft
       multiplier value (sumQuaternion values)))
@@ -244,11 +347,11 @@ sumFirstVariationTermsExact [] = refl
 sumFirstVariationTermsExact (factor ∷ factors) =
   trans
     (cong
-      (factorFirst factor *q orderedValueProduct factors +q_)
+      ((factorFirst factor *q orderedValueProduct factors) +q_)
       (sumQuaternionMapLeftMultiply
         (factorValue factor) (firstVariationTerms factors)))
     (cong
-      (factorFirst factor *q orderedValueProduct factors +q_)
+      ((factorFirst factor *q orderedValueProduct factors) +q_)
       (cong (factorValue factor *q_)
         (sumFirstVariationTermsExact factors)))
 
@@ -296,7 +399,7 @@ sumSecondVariationTermsExact (factor ∷ factors) =
                 (cong (factorValue factor *q_)
                   (sumSecondVariationTermsExact factors)))))))
       (cong (diagonal +q_)
-        (sym (quaternionAddAssociative firstTerm firstTerm inherited)))))
+        (sym (quaternionAddAssociative firstTerm firstTerm inherited))))
 
 fourFactorJets :
   QuaternionFactorJet → QuaternionFactorJet →
@@ -337,12 +440,15 @@ scalarPartSumQuaternion [] = refl
 scalarPartSumQuaternion (value ∷ values) =
   cong (q0 value +_) (scalarPartSumQuaternion values)
 
+negativeAdd : ∀ x y → - (x + y) ≡ (- x) + (- y)
+negativeAdd = ℚRing.solve-∀
+
 negativeFiniteSum : ∀ values →
   - sumRational values ≡ sumRational (map -_ values)
 negativeFiniteSum [] = refl
 negativeFiniteSum (value ∷ values) =
   trans
-    (ℚRing.solve-∀ value (sumRational values))
+    (negativeAdd value (sumRational values))
     (cong ((- value) +_) (negativeFiniteSum values))
 
 wilsonAtomContribution : RationalQuaternion → ℚ
@@ -371,7 +477,7 @@ wilsonSecondVariationIsAtomSum : ∀ factors →
   ≡ wilsonSecondVariationAtomSum factors
 wilsonSecondVariationIsAtomSum factors =
   trans
-    (cong -_ (sym (sumSecondVariationTermsExact factors)))
+    (cong (λ q → - q0 q) (sym (sumSecondVariationTermsExact factors)))
     (trans
       (cong -_ (scalarPartSumQuaternion (secondVariationTerms factors)))
       (trans
@@ -390,10 +496,12 @@ fourLinkWilsonSecondVariationIsSixteenScalarAtoms
     first second third fourth =
   wilsonSecondVariationIsAtomSum
     (fourFactorJets first second third fourth)
+-}
 
 ------------------------------------------------------------------------
 -- Flat right-exponential plaquette: Wilson equals the curl square.
 ------------------------------------------------------------------------
+{-
 
 record RationalVector3 : Set where
   constructor vec3
@@ -410,6 +518,20 @@ vec3 x y z +v vec3 x' y' z' = vec3 (x + x') (y + y') (z + z')
 
 negV : RationalVector3 → RationalVector3
 negV (vec3 x y z) = vec3 (- x) (- y) (- z)
+
+vxAdd : ∀ a b → vx (a +v b) ≡ vx a + vx b
+vxAdd (vec3 x y z) (vec3 x' y' z') = refl
+vyAdd : ∀ a b → vy (a +v b) ≡ vy a + vy b
+vyAdd (vec3 x y z) (vec3 x' y' z') = refl
+vzAdd : ∀ a b → vz (a +v b) ≡ vz a + vz b
+vzAdd (vec3 x y z) (vec3 x' y' z') = refl
+
+vxNeg : ∀ a → vx (negV a) ≡ - vx a
+vxNeg (vec3 x y z) = refl
+vyNeg : ∀ a → vy (negV a) ≡ - vy a
+vyNeg (vec3 x y z) = refl
+vzNeg : ∀ a → vz (negV a) ≡ - vz a
+vzNeg (vec3 x y z) = refl
 
 pureQuaternion : RationalVector3 → RationalQuaternion
 pureQuaternion (vec3 x y z) = quat 0ℚ x y z
@@ -453,9 +575,28 @@ flatPlaquetteWilsonIsCurlSquare :
       (plaquetteCurlVector forward0 forward1 inverse2 inverse3)
 flatPlaquetteWilsonIsCurlSquare
     (vec3 x0 y0 z0) (vec3 x1 y1 z1)
-    (vec3 x2 y2 z2) (vec3 x3 y3 z3) =
-  ℚRing.solve-∀
-    x0 y0 z0 x1 y1 z1 x2 y2 z2 x3 y3 z3
+    (vec3 x2 y2 z2) (vec3 x3 y3 z3)
+  rewrite vxAdd (vec3 x0 y0 z0)
+      (vec3 x1 y1 z1 +v (negV (vec3 x2 y2 z2) +v negV (vec3 x3 y3 z3)))
+    | vxAdd (vec3 x1 y1 z1)
+      (negV (vec3 x2 y2 z2) +v negV (vec3 x3 y3 z3))
+    | vxAdd (negV (vec3 x2 y2 z2)) (negV (vec3 x3 y3 z3))
+    | vxNeg (vec3 x2 y2 z2) | vxNeg (vec3 x3 y3 z3)
+    | vyAdd (vec3 x0 y0 z0)
+      (vec3 x1 y1 z1 +v (negV (vec3 x2 y2 z2) +v negV (vec3 x3 y3 z3)))
+    | vyAdd (vec3 x1 y1 z1)
+      (negV (vec3 x2 y2 z2) +v negV (vec3 x3 y3 z3))
+    | vyAdd (negV (vec3 x2 y2 z2)) (negV (vec3 x3 y3 z3))
+    | vyNeg (vec3 x2 y2 z2) | vyNeg (vec3 x3 y3 z3)
+    | vzAdd (vec3 x0 y0 z0)
+      (vec3 x1 y1 z1 +v (negV (vec3 x2 y2 z2) +v negV (vec3 x3 y3 z3)))
+    | vzAdd (vec3 x1 y1 z1)
+      (negV (vec3 x2 y2 z2) +v negV (vec3 x3 y3 z3))
+    | vzAdd (negV (vec3 x2 y2 z2)) (negV (vec3 x3 y3 z3))
+    | vzNeg (vec3 x2 y2 z2) | vzNeg (vec3 x3 y3 z3) =
+  ℚRing.solve
+    (x0 ∷ y0 ∷ z0 ∷ x1 ∷ y1 ∷ z1 ∷
+     x2 ∷ y2 ∷ z2 ∷ x3 ∷ y3 ∷ z3 ∷ [])
 
 flatPlaquetteSixteenAtomsAreCurlSquare :
   ∀ forward0 forward1 inverse2 inverse3 →
@@ -472,6 +613,7 @@ flatPlaquetteSixteenAtomsAreCurlSquare
           forward0 forward1 inverse2 inverse3)))
     (flatPlaquetteWilsonIsCurlSquare
       forward0 forward1 inverse2 inverse3)
+-}
 
 rationalQuaternionRingLevel : ProofLevel
 rationalQuaternionRingLevel = machineChecked
