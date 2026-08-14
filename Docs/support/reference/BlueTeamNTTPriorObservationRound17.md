@@ -9,21 +9,25 @@ It does not claim an ML-KEM break or security proof.
 
 ## FIPS NTT dataflow
 
-`MLKEMNTTDataflowCouplingExact` follows NIST FIPS 203 Algorithm 9 and equations (4.10)–(4.13).
+`MLKEMNTTDataflowCouplingExact` follows NIST FIPS 203 Algorithm 9, equations (4.10)–(4.13), and BaseCaseMultiply in Algorithm 12.
 
 Algorithm 9 has seven butterfly stages with lengths
 
 `128, 64, 32, 16, 8, 4, 2`.
 
-The dependency width therefore doubles seven times from one source coefficient to 128 source coefficients for one scalar NTT residue component.
+The dependency width therefore doubles seven times from one source coefficient to 128 source coefficients for one scalar **secret NTT representation** component.
 
-Reduction modulo a quadratic factor sends the 128 even source coefficients into the constant component and the 128 odd source coefficients into the linear component. Thus one quadratic residue pair structurally spans all 256 source coefficients of a polynomial.
+Reduction modulo a quadratic factor sends the 128 even source coefficients into the constant secret component and the 128 odd source coefficients into the linear secret component. Thus one secret quadratic residue pair structurally spans all 256 source coefficients of one secret polynomial.
 
-For K-PKE module dimension `k`, one public scalar NTT coordinate structurally spans `128*k` source secret coefficients and one quadratic pair spans `256*k`. The exact approved counts are therefore:
+For module dimension `k`, the secret representation widths are therefore:
 
-- ML-KEM-512: scalar 256, quadratic pair 512;
+- ML-KEM-512: one secret scalar NTT component spans 256 source coefficients across the two secret polynomials; one secret quadratic pair spans all 512;
 - ML-KEM-768: scalar 384, quadratic pair 768;
 - ML-KEM-1024: scalar 512, quadratic pair 1024.
+
+There is an important additional recoupling at the **public equation**. BaseCaseMultiply uses both local secret components to produce either output component. Consequently, either scalar component of one public noisy equation can structurally depend on the entire 256-coefficient source polynomial for every secret module coordinate in that row. The public-equation scalar widths are therefore already 512, 768, and 1024 for ML-KEM-512/768/1024 respectively; pairing the two public scalar components does not double the source set again.
+
+This correction matters: the apparent scalar parity locality exists in the secret NTT representation, but FIPS multiplication recouples both parity blocks before the public equation is checked.
 
 These are structural/dataflow widths, not claims of statistical dependence or hardness.
 
