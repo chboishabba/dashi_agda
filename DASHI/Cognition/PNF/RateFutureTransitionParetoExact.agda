@@ -11,9 +11,11 @@ module DASHI.Cognition.PNF.RateFutureTransitionParetoExact where
 
 open import DASHI.Core.Prelude
 open import Data.Rational.Base using (ℚ; 0ℚ; _≤_)
+import Data.Rational.Properties as ℚₚ
 
 import DASHI.Cognition.PNF.FutureRateDistortionGenericExact as RD
 import DASHI.Cognition.PNF.OrientedZeroGrayTransitionGeometryExact as Wave
+import DASHI.Cognition.PNF.FinitePathTransitionOptimalityExact as Path
 
 record RepresentationGeometryFamily : Set₁ where
   constructor representationGeometryFamily
@@ -25,9 +27,6 @@ record RepresentationGeometryFamily : Set₁ where
     reopenCost : Candidate → Nat
 
 open RepresentationGeometryFamily public
-
-FutureFeasible : RepresentationGeometryFamily → ℚ → Set → Set
-FutureFeasible family epsilon _ = ⊤
 
 record RateOptimalAt
     (family : RepresentationGeometryFamily)
@@ -88,9 +87,9 @@ rateOptimalGivesRateDistortionOptimal :
   ∀ {family epsilon selected} →
   RateOptimalAt family epsilon selected →
   RD.OptimalAt (toRateDistortionFamily family) epsilon
-rateOptimalGivesRateDistortionOptimal optimum =
+rateOptimalGivesRateDistortionOptimal {selected = selected} optimum =
   RD.optimalAt
-    _
+    selected
     (selectedFutureFeasible optimum)
     (minimumRate optimum)
 
@@ -136,7 +135,7 @@ waveGrayStrictlyImprovesTransition = Wave.grayStrictlyImprovesPathDistortion
 
 waveGrayRateOptimalAtZero : RateOptimalAt waveFamily 0ℚ gray
 waveGrayRateOptimalAtZero = record
-  { selectedFutureFeasible = ≤-refl
+  { selectedFutureFeasible = ℚₚ.≤-refl
   ; minimumRate = minimum
   }
   where
@@ -157,7 +156,7 @@ waveGrayTransitionOptimalAtZero = record
       waveRate candidate ≡ waveRate gray →
       waveTransitionCost gray ≤ waveTransitionCost candidate
     minimum ordinaryBinary feasible sameRate =
-      Wave.waveGrayOptimalAgainstBinary
+      Path.waveGrayOptimalAgainstBinary
     minimum gray feasible sameRate = ≤-refl
 
 ------------------------------------------------------------------------
