@@ -83,8 +83,18 @@ open FiniteListProfile public
 public22ListProfile : FiniteListProfile
 public22ListProfile = finiteListProfile 2 2 4 refl refl refl
 
-------------------------------------------------------------------------
--- Boundary: a small decoding list is not yet cheap recovery.  Reconciliation,
--- representation transition geometry, and observation acquisition cost remain
--- separate work coordinates in the blue-team architecture.
-------------------------------------------------------------------------
+record ListDecodingBoundary : Set where
+  constructor listDecodingBoundary
+  field
+    smallListImpliesPolynomialRecovery : Bool
+    smallListImpliesPolynomialRecoveryIsFalse :
+      smallListImpliesPolynomialRecovery ≡ false
+    finiteRegressionIsAsymptoticMLWEListBound : Bool
+    finiteRegressionIsAsymptoticMLWEListBoundIsFalse :
+      finiteRegressionIsAsymptoticMLWEListBound ≡ false
+
+open ListDecodingBoundary public
+
+canonicalListDecodingBoundary : ListDecodingBoundary
+canonicalListDecodingBoundary =
+  listDecodingBoundary false refl false refl
