@@ -18,10 +18,13 @@ FILES=(
   DASHI/Biology/Physical/SIBioelectricNetworkAdapterExact.agda
   DASHI/Biology/Physical/MechanochemicalMorphogenesisSIExact.agda
   DASHI/Biology/Physical/DevelopmentalGoalFactorizationExact.agda
+  DASHI/Biology/Physical/GenomePhysicalParameterCompilerExact.agda
   DASHI/Biology/Physical/DevelopmentalHiddenStateFutureDefectExact.agda
   DASHI/Biology/Physical/PadicPhysicalParameterProjectionExact.agda
+  DASHI/Biology/Physical/Harmonic369HelixLiftExact.agda
   DASHI/Biology/Physical/PhysicalOriginsLadderExact.agda
   DASHI/Biology/Physical/CellBrainTransducerBridgeExact.agda
+  DASHI/Biology/Physical/DimensionalPhysicalDevelopmentalStateExact.agda
   DASHI/Biology/Physical/PhysicalDevelopmentalOperatorSystemExact.agda
   DASHI/EverythingPhysicalDevelopmentRound20.agda
 )
@@ -47,12 +50,17 @@ grep -q 'fieldGeometryChangesAnchor' DASHI/Biology/Physical/MechanochemicalMorph
 grep -q 'locationIsNotDeterminedByGenericHand' DASHI/Biology/Physical/DevelopmentalGoalFactorizationExact.agda
 grep -q 'ownerIsNotDeterminedByHandHere' DASHI/Biology/Physical/DevelopmentalGoalFactorizationExact.agda
 grep -q 'sameGenomeDifferentContextCanChangeOutcome' DASHI/Biology/Physical/DevelopmentalGoalFactorizationExact.agda
+grep -q 'contextChangesCompiledChannelParameter' DASHI/Biology/Physical/GenomePhysicalParameterCompilerExact.agda
+grep -q 'dnaUVStillExact' DASHI/Biology/Physical/GenomePhysicalParameterCompilerExact.agda
 grep -q 'morphologyOnlyDynamicDefect' DASHI/Biology/Physical/DevelopmentalHiddenStateFutureDefectExact.agda
 grep -q 'morphologyProjectionCannotBeDynamicallySafe' DASHI/Biology/Physical/DevelopmentalHiddenStateFutureDefectExact.agda
 grep -q 'finePhysicalParametersDiffer' DASHI/Biology/Physical/PadicPhysicalParameterProjectionExact.agda
+grep -q 'phaseTripleSixRoundTrip' DASHI/Biology/Physical/Harmonic369HelixLiftExact.agda
+grep -q 'sameCircularProjectionDifferentHistory' DASHI/Biology/Physical/Harmonic369HelixLiftExact.agda
 grep -q 'replicationAppearsBeforeAgency' DASHI/Biology/Physical/PhysicalOriginsLadderExact.agda
 grep -q 'damageCorrected' DASHI/Biology/Physical/PhysicalOriginsLadderExact.agda
 grep -q 'bioelectricNetworkAsStatefulTransducer' DASHI/Biology/Physical/CellBrainTransducerBridgeExact.agda
+grep -q 'zeroStateVoltageIsDimensionChecked' DASHI/Biology/Physical/DimensionalPhysicalDevelopmentalStateExact.agda
 grep -q 'physicalDevelopmentalStepFactorises' DASHI/Biology/Physical/PhysicalDevelopmentalOperatorSystemExact.agda
 grep -q 'chemicalSourceSurvivesDownstreamOperators' DASHI/Biology/Physical/PhysicalDevelopmentalOperatorSystemExact.agda
 grep -q 'morphologyOnlyFutureSafetyFails' DASHI/Biology/Physical/PhysicalDevelopmentalOperatorSystemExact.agda
