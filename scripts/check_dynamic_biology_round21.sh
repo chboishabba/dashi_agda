@@ -16,6 +16,7 @@ FILES=(
   DASHI/Biology/Physical/DynamicTopologyFutureDefectExact.agda
   DASHI/Biology/Physical/HierarchicalGoalConstraintCompilerExact.agda
   DASHI/Biology/Physical/GoalErrorDescentControllerExact.agda
+  DASHI/Biology/Physical/GraphGeneratingGoalControllerExact.agda
   DASHI/Biology/Physical/DevelopmentalMeasurementQuotientExact.agda
   DASHI/Biology/Physical/CoupledDevelopmentalOperatorStackExact.agda
   DASHI/Biology/Physical/ContextDependentPadicPhysicalMapExact.agda
@@ -48,6 +49,9 @@ grep -q 'leftHandHasDistinctTissueRefinements' DASHI/Biology/Physical/Hierarchic
 grep -q 'digitFieldHasDistinctCellPolicies' DASHI/Biology/Physical/HierarchicalGoalConstraintCompilerExact.agda
 grep -q 'positiveDefectStrictlyDecreases' DASHI/Biology/Physical/GoalErrorDescentControllerExact.agda
 grep -q 'severeRecovers' DASHI/Biology/Physical/GoalErrorDescentControllerExact.agda
+grep -q 'closedLoopFactorises' DASHI/Biology/Physical/GraphGeneratingGoalControllerExact.agda
+grep -q 'closedLoopHitsIntegratedConstraint' DASHI/Biology/Physical/GraphGeneratingGoalControllerExact.agda
+grep -q 'closedLoopFixesIntegratedState' DASHI/Biology/Physical/GraphGeneratingGoalControllerExact.agda
 
 grep -q 'phenotypeOnlyNotFutureSafe' DASHI/Biology/Physical/DevelopmentalMeasurementQuotientExact.agda
 grep -q 'canonicalSameMeasuredDifferentHidden' DASHI/Biology/Physical/DevelopmentalMeasurementQuotientExact.agda
