@@ -8,10 +8,6 @@ import DASHI.Core.FutureObservationLanguageQuotientExact as Future
 import DASHI.Core.GenericFuturePartitionRefinementExact as Refinement
 import DASHI.Core.TypedDependencyCore as Dependency
 
-------------------------------------------------------------------------
--- TOTAL DETERMINISTIC SYSTEM AS A PROOF-BEARING ACTION SYSTEM
-------------------------------------------------------------------------
-
 record ExactPost
     {State Action : Set}
     (step : Action → State → State)
@@ -78,17 +74,13 @@ executionTargetIsRun
   with afterIsStep (Dependency.postcondition admissible)
 ... | refl = executionTargetIsRun rest
 
-------------------------------------------------------------------------
--- Trace equivalence is the deterministic presentation of future language.
-------------------------------------------------------------------------
-
 TraceEquivalent :
   ∀ {State Action Observation : Set} →
   (State → Observation) →
   (Action → State → State) →
   State → State → Set
-TraceEquivalent observe step left right =
-  (actions : List _) →
+TraceEquivalent {Action = Action} observe step left right =
+  (actions : List Action) →
   observe (Refinement.run step actions left)
   ≡ observe (Refinement.run step actions right)
 
@@ -102,17 +94,19 @@ traceEquivalentImpliesCanonicalFutureEquivalent :
   Future.FutureObservationEquivalent
     (deterministicSystem step label) observe left right
 traceEquivalentImpliesCanonicalFutureEquivalent
-  {observe = observe} {step = step} {left = left} {right = right}
+  {Action = Action} {Observation = Observation}
+  {observe = observe} {step = step} {label = label}
+  {left = left} {right = right}
   traceEqual =
   Future.futureObservationEquivalent λ actions observation →
     Future.logicalIff (forwardWitness actions observation) (backwardWitness actions observation)
   where
     forwardWitness :
-      (actions : List _) → (observation : _) →
+      (actions : List Action) → (observation : Observation) →
       Future.FutureObservation
-        (deterministicSystem step _) observe left actions observation →
+        (deterministicSystem step label) observe left actions observation →
       Future.FutureObservation
-        (deterministicSystem step _) observe right actions observation
+        (deterministicSystem step label) observe right actions observation
     forwardWitness actions observation
       (Future.futureObservation after execution observed)
       with executionTargetIsRun execution
@@ -123,11 +117,11 @@ traceEquivalentImpliesCanonicalFutureEquivalent
         (trans (sym (traceEqual actions)) observed)
 
     backwardWitness :
-      (actions : List _) → (observation : _) →
+      (actions : List Action) → (observation : Observation) →
       Future.FutureObservation
-        (deterministicSystem step _) observe right actions observation →
+        (deterministicSystem step label) observe right actions observation →
       Future.FutureObservation
-        (deterministicSystem step _) observe left actions observation
+        (deterministicSystem step label) observe left actions observation
     backwardWitness actions observation
       (Future.futureObservation after execution observed)
       with executionTargetIsRun execution
@@ -147,7 +141,9 @@ canonicalFutureEquivalentImpliesTraceEquivalent :
     (deterministicSystem step label) observe left right →
   TraceEquivalent observe step left right
 canonicalFutureEquivalentImpliesTraceEquivalent
-  {observe = observe} {step = step} {left = left} {right = right}
+  {Observation = Observation}
+  {observe = observe} {step = step} {label = label}
+  {left = left} {right = right}
   equivalent actions =
   sym rightObservedAsLeft
   where
@@ -156,7 +152,7 @@ canonicalFutureEquivalentImpliesTraceEquivalent
 
     leftWitness :
       Future.FutureObservation
-        (deterministicSystem step _) observe left actions leftObservation
+        (deterministicSystem step label) observe left actions leftObservation
     leftWitness =
       Future.futureObservation
         (Refinement.run step actions left)
@@ -165,7 +161,7 @@ canonicalFutureEquivalentImpliesTraceEquivalent
 
     rightWitness :
       Future.FutureObservation
-        (deterministicSystem step _) observe right actions leftObservation
+        (deterministicSystem step label) observe right actions leftObservation
     rightWitness =
       Future.forward
         (Future.sameFutureLanguage equivalent actions leftObservation)
@@ -178,10 +174,6 @@ canonicalFutureEquivalentImpliesTraceEquivalent
       with executionTargetIsRun execution
     ... | refl = observed
 
-------------------------------------------------------------------------
--- Complete trace equality implies every finite refinement depth.
-------------------------------------------------------------------------
-
 traceEquivalentImpliesEveryDepth :
   ∀ {State Action Observation}
     {observe : State → Observation}
@@ -191,17 +183,11 @@ traceEquivalentImpliesEveryDepth :
   (depth : Nat) →
   Refinement.RefinesToDepth depth observe step left right
 traceEquivalentImpliesEveryDepth traceEqual zero = traceEqual []
-traceEquivalentImpliesEveryDepth
-  {step = step} {left = left} {right = right}
-  traceEqual (suc depth) =
+traceEquivalentImpliesEveryDepth traceEqual (suc depth) =
   traceEqual [] , λ action →
     traceEquivalentImpliesEveryDepth
       (λ rest → traceEqual (action ∷ rest))
       depth
-
-------------------------------------------------------------------------
--- Stabilized refinement implies every trace equality.
-------------------------------------------------------------------------
 
 dropLeadingDepth :
   ∀ {State Action Observation}
@@ -229,19 +215,6 @@ stableRefinementImpliesTraceEquivalent
     (dropLeadingDepth depth (length actions)
       (Refinement.stablePairLifts stable related (length actions)))
 
-------------------------------------------------------------------------
--- MAIN THEOREM: at a fixed point, the computed refinement relation is exactly
--- canonical future-observation equivalence.
-------------------------------------------------------------------------
-
-record LogicalIff (A B : Set₁) : Set₁ where
-  constructor logicalIff
-  field
-    forward : A → B
-    backward : B → A
-
-open LogicalIff public
-
 stableRefinementExactlyCanonicalFuture :
   ∀ {State Action Observation depth}
     {observe : State → Observation}
@@ -249,16 +222,19 @@ stableRefinementExactlyCanonicalFuture :
     {label : Action → String}
     (stable : Refinement.StableAt depth observe step)
     (left right : State) →
-  LogicalIff
-    (Refinement.RefinesToDepth depth observe step left right)
-    (Future.FutureObservationEquivalent
+  (Refinement.RefinesToDepth depth observe step left right →
+    Future.FutureObservationEquivalent
       (deterministicSystem step label) observe left right)
-stableRefinementExactlyCanonicalFuture stable left right =
-  logicalIff
-    (λ related →
-      traceEquivalentImpliesCanonicalFutureEquivalent
-        (stableRefinementImpliesTraceEquivalent stable related))
-    (λ equivalent →
-      traceEquivalentImpliesEveryDepth
-        (canonicalFutureEquivalentImpliesTraceEquivalent equivalent)
-        _)
+  ×
+  (Future.FutureObservationEquivalent
+      (deterministicSystem step label) observe left right →
+    Refinement.RefinesToDepth depth observe step left right)
+stableRefinementExactlyCanonicalFuture {depth = depth} stable left right =
+  (λ related →
+    traceEquivalentImpliesCanonicalFutureEquivalent
+      (stableRefinementImpliesTraceEquivalent stable related))
+  ,
+  (λ equivalent →
+    traceEquivalentImpliesEveryDepth
+      (canonicalFutureEquivalentImpliesTraceEquivalent equivalent)
+      depth)
