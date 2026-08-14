@@ -2,8 +2,7 @@ name: Yang-Mills Clay highest-alpha round 23
 
 on:
   push:
-    branches:
-      - 'agent/ym-clay-alpha-round23-volume-uniformity-terminal-scale'
+    branches: [master]
   pull_request:
     branches:
       - 'agent/ym-clay-alpha-round22-hodge-wilson-repair'
@@ -16,6 +15,11 @@ on:
       - 'scripts/check_yang_mills_clay_highest_alpha_round23.sh'
       - '.github/workflows/yang-mills-clay-highest-alpha-round23.yml'
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

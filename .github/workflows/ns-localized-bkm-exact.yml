@@ -3,8 +3,7 @@ name: NS exact localized BKM tranche
 on:
   workflow_dispatch:
   push:
-    branches:
-      - agent/balaban-primary-averaging-qstar
+    branches: [master]
     paths:
       - 'DASHI/Physics/Closure/NSTriadKNPeriodicLittlewoodPaleyBonyExact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNProfileDepthGeometryCutoffIndexedExact.agda'
@@ -43,7 +42,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: ns-localized-bkm-exact-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
   cancel-in-progress: true
 
 jobs:

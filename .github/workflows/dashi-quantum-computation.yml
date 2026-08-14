@@ -2,6 +2,7 @@ name: DASHI quantum computation bridge
 
 on:
   push:
+    branches: [master]
     paths:
       - 'DASHI/Algebra/Quantum/DASHIQuantumBridge.agda'
       - 'DASHI/Algebra/Quantum/DASHIHybridExecution.agda'
@@ -23,7 +24,7 @@ on:
       - '.github/workflows/dashi-quantum-computation.yml'
 
 concurrency:
-  group: dashi-quantum-computation-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
   cancel-in-progress: true
 
 permissions:

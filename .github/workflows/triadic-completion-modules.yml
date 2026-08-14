@@ -13,8 +13,7 @@ on:
       - "scripts/generate_triadic_depth_two_dft.py"
       - ".github/workflows/triadic-completion-modules.yml"
   push:
-    branches:
-      - agent/triadic-spectral-completion
+    branches: [master]
     paths:
       - "DASHI/Algebra/TriadicFiniteArithmeticLaws.agda"
       - "DASHI/Algebra/TriadicDepthTwoDFTGroupBridge.agda"
@@ -28,7 +27,7 @@ on:
   workflow_dispatch:
 
 concurrency:
-  group: triadic-completion-modules-${{ github.event.pull_request.number || github.ref }}
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
   cancel-in-progress: true
 
 jobs:

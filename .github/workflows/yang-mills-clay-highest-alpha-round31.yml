@@ -2,8 +2,7 @@ name: Yang Mills highest alpha round 31 group rates and all beta audit
 
 on:
   push:
-    branches:
-      - 'agent/ym-clay-alpha-round31-group-rates-allbeta-audit'
+    branches: [master]
     paths:
       - 'DASHI/Physics/YangMills/**'
       - 'scripts/check_yang_mills_clay_highest_alpha_round31.sh'
@@ -16,6 +15,11 @@ on:
       - 'scripts/check_yang_mills_clay_highest_alpha_round31.sh'
       - '.github/workflows/yang-mills-clay-highest-alpha-round31.yml'
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

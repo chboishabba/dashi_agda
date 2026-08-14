@@ -2,8 +2,7 @@ name: Trump psychogeography and bounded Yijing tests
 
 on:
   push:
-    branches:
-      - 'agent/trump-psychogeography-policy-hexagram'
+    branches: [master]
     paths:
       - 'DASHI/Biology/TrumpPsychogeograph*'
       - 'DASHI/Biology/TrumpPsychogeography*'
@@ -20,6 +19,11 @@ on:
       - 'scripts/check_trump_psychogeography.sh'
       - '.github/workflows/trump-psychogeography.yml'
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

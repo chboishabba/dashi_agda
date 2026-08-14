@@ -2,8 +2,7 @@ name: Yang Mills highest alpha round 32 Clay contract and invariants
 
 on:
   push:
-    branches:
-      - 'agent/ym-clay-alpha-round32-clay-contract-invariants'
+    branches: [master]
     paths:
       - 'DASHI/Physics/YangMills/**'
       - 'Docs/support/reference/YangMillsClayContractRound32.md'
@@ -20,6 +19,11 @@ on:
       - 'scripts/check_yang_mills_clay_highest_alpha_round32.sh'
       - '.github/workflows/yang-mills-clay-highest-alpha-round32.yml'
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

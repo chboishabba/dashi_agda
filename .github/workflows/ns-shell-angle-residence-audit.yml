@@ -2,6 +2,7 @@ name: NS exact Galerkin coherence audit
 
 on:
   push:
+    branches: [master]
     paths:
       - 'scripts/ns_galerkin_coherence_core.py'
       - 'scripts/ns_depletion_currency_audit.py'
@@ -79,7 +80,7 @@ on:
       - '.github/workflows/ns-shell-angle-residence-audit.yml'
 
 concurrency:
-  group: ns-exact-coherence-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
   cancel-in-progress: true
 
 permissions:

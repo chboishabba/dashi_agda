@@ -13,8 +13,7 @@ on:
       - 'scripts/render_monster_3b_certificate.py'
       - '.github/workflows/monster-3b-normalizer.yml'
   push:
-    branches:
-      - agent/monster-3b-normalizer-dashboard
+    branches: [master]
     paths:
       - 'DASHI/Moonshine/Monster3B*.agda'
       - 'DASHI/Moonshine/LeechWeightTwo196608BridgeExact.agda'
@@ -26,7 +25,7 @@ on:
       - '.github/workflows/monster-3b-normalizer.yml'
 
 concurrency:
-  group: monster-3b-normalizer-${{ github.event.pull_request.number || github.ref }}
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
   cancel-in-progress: true
 
 jobs:

@@ -29,6 +29,11 @@ on:
       - "scripts/governance_builtins_allowlist.txt"
       - ".github/workflows/braided-emotion-governance.yml"
 
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
 permissions:
   contents: read
 

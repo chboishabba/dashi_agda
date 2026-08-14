@@ -2,8 +2,7 @@ name: conscious-access-round3
 
 on:
   push:
-    branches:
-      - 'agent/conscious-access-round3-visual-morphogenesis'
+    branches: [master]
   pull_request:
     paths:
       - 'DASHI/Biology/PsychedelicVisualOperatorAlgebra.agda'
@@ -37,6 +36,11 @@ on:
       - 'scripts/check_conscious_access_round3.sh'
       - '.github/workflows/conscious-access-round3.yml'
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

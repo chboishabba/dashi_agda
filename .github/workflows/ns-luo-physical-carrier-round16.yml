@@ -2,8 +2,7 @@ name: NS Luo physical carrier round 16
 
 on:
   push:
-    branches:
-      - 'agent/ns-luo-physical-carrier-round16'
+    branches: [master]
     paths:
       - 'DASHI/Physics/Closure/**'
       - 'scripts/check_ns_luo_physical_carrier_round16.sh'
@@ -18,6 +17,11 @@ on:
       - 'scripts/run_agda29_parallel_check.sh'
       - '.github/workflows/ns-luo-physical-carrier-round16.yml'
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

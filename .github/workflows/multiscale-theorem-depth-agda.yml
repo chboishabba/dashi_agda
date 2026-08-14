@@ -17,7 +17,7 @@ on:
       - '.github/workflows/multiscale-theorem-depth-agda.yml'
 
 concurrency:
-  group: multiscale-depth-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
   cancel-in-progress: true
 
 permissions:

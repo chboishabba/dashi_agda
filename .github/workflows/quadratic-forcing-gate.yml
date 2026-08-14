@@ -2,6 +2,7 @@ name: Quadratic forcing gate Agda check
 
 on:
   push:
+    branches: [master]
     paths:
       - 'DASHI/Geometry/UniversalCanonicalQuotient.agda'
       - 'DASHI/Geometry/HilbertLorentzForcing.agda'
@@ -15,7 +16,7 @@ on:
       - '.github/workflows/quadratic-forcing-gate.yml'
 
 concurrency:
-  group: quadratic-forcing-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
   cancel-in-progress: true
 
 permissions:

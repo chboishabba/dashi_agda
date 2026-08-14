@@ -2,8 +2,7 @@ name: NS Luo unconditional absorption audit round 19
 
 on:
   push:
-    branches:
-      - 'agent/ns-luo-unconditional-absorption-audit-round19'
+    branches: [master]
     paths:
       - 'DASHI/Physics/Closure/**'
       - 'docs/ns-luo-unconditional-absorption-audit-round19.md'
@@ -18,6 +17,11 @@ on:
       - 'scripts/check_ns_luo_unconditional_absorption_round19.sh'
       - '.github/workflows/ns-luo-unconditional-absorption-round19.yml'
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

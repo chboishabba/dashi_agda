@@ -2,7 +2,7 @@ name: SSP15 indexed-j profinite orthogonal complexity round 8
 
 on:
   push:
-    branches: ['agent/ssp15-j-profinite-orthogonal-complexity-round8']
+    branches: [master]
   pull_request:
     branches:
       - 'agent/ssp15-j-profinite-orthogonal-complexity-round8'
@@ -33,6 +33,11 @@ on:
       - 'scripts/run_agda29_parallel_check.sh'
       - '.github/workflows/ssp15-j-profinite-orthogonal-complexity-round8.yml'
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

@@ -2,8 +2,7 @@ name: NS Luo hard-math round 5 check
 
 on:
   push:
-    branches:
-      - agent/ns-luo-hard-math-round5
+    branches: [master]
   pull_request:
     paths:
       - 'DASHI/Physics/Closure/NSTriadKNLuo*.agda'
@@ -11,7 +10,7 @@ on:
       - '.github/workflows/ns-luo-hard-math-round5-check.yml'
 
 concurrency:
-  group: ns-luo-round5-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
   cancel-in-progress: true
 
 permissions:

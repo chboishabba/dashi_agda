@@ -2,6 +2,7 @@ name: NS compact Gamma common-U net audit
 
 on:
   push:
+    branches: [master]
     paths:
       - 'scripts/ns_compact_gamma_common_u_net_audit.py'
       - 'scripts/tests/test_ns_compact_gamma_common_u_net_audit.py'
@@ -17,7 +18,7 @@ on:
       - '.github/workflows/ns-compact-gamma-common-u-net.yml'
 
 concurrency:
-  group: ns-compact-gamma-common-u-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
   cancel-in-progress: true
 
 permissions:

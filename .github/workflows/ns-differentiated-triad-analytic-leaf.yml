@@ -8,6 +8,7 @@ on:
       - 'docs/ns_differentiated_triad_analytic_leaf.md'
       - '.github/workflows/ns-differentiated-triad-analytic-leaf.yml'
   push:
+    branches: [master]
     paths:
       - 'DASHI/Physics/Closure/NSDifferentiatedTriadAnalyticLeaf.agda'
       - 'DASHI/Physics/Closure/NSPairIncidenceKernelProgram.agda'
@@ -15,7 +16,7 @@ on:
       - '.github/workflows/ns-differentiated-triad-analytic-leaf.yml'
 
 concurrency:
-  group: ns-differentiated-triad-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
   cancel-in-progress: true
 
 permissions:

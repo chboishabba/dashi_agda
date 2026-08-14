@@ -11,6 +11,11 @@ on:
       - "DASHI/Moonshine/ThompsonPenumbralSpecialization.agda"
       - ".github/workflows/penumbral-agda-check.yml"
 
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   penumbral-agda:
     runs-on: ubuntu-24.04

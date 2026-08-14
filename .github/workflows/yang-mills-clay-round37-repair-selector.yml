@@ -2,7 +2,7 @@ name: Yang-Mills Clay round 37 repair selector
 
 on:
   push:
-    branches: ['agent/ym-clay-alpha-round37-repair-selector']
+    branches: [master]
   pull_request:
     branches:
       - 'agent/ym-clay-alpha-round36-finite-atom-selector'
@@ -16,6 +16,11 @@ on:
       - 'scripts/check_yang_mills_clay_highest_alpha_round37.sh'
       - '.github/workflows/yang-mills-clay-round37-repair-selector.yml'
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

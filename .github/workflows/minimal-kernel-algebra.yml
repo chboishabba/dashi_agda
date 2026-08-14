@@ -2,6 +2,7 @@ name: Minimal kernel algebra Agda check
 
 on:
   push:
+    branches: [master]
     paths:
       - 'DASHI/Core/MinimalKernelAlgebra.agda'
       - 'DASHI/Core/MinimalKernelAlgebraTests.agda'
@@ -19,7 +20,7 @@ on:
       - '.github/workflows/minimal-kernel-algebra.yml'
 
 concurrency:
-  group: minimal-kernel-algebra-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
   cancel-in-progress: true
 
 permissions:

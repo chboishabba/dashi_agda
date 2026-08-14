@@ -11,6 +11,7 @@ on:
       - 'DASHI/Physics/Closure/NSFactorizedCrossShellProgram.agda'
       - '.github/workflows/ns-factorized-cross-shell.yml'
   push:
+    branches: [master]
     paths:
       - 'DASHI/Analysis/ThreeStageBoundComposition.agda'
       - 'DASHI/Analysis/WeightedKernelSchurTest.agda'
@@ -21,7 +22,7 @@ on:
       - '.github/workflows/ns-factorized-cross-shell.yml'
 
 concurrency:
-  group: ns-factorized-cross-shell-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
   cancel-in-progress: true
 
 permissions:

@@ -2,6 +2,7 @@ name: Thread completion frontier
 
 on:
   push:
+    branches: [master]
     paths:
       - "DASHI/Sheaf/FiniteTemporalClopenSheaf.agda"
       - "DASHI/Topology/FiniteBraidRhizomeCalculus.agda"
@@ -29,6 +30,11 @@ on:
       - "DASHI/EverythingThreadCompletion.agda"
       - "Docs/ThreadCompletionFrontier.md"
       - ".github/workflows/thread-completion-frontier.yml"
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   typecheck:

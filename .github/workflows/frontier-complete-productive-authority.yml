@@ -2,8 +2,7 @@ name: Frontier complete productive authority
 
 on:
   push:
-    branches:
-      - 'agent/frontier-hodge-automorphic-spectral-crosspollination'
+    branches: [master]
     paths:
       - 'DASHI/Mathematics/LinearAlgebra/RationalThreeWayHodgeCoordinateUniquenessFinalExact.agda'
       - 'DASHI/Mathematics/AlgebraicGeometry/ProjectiveSpaceHodgeBasisExact.agda'
@@ -40,6 +39,11 @@ on:
       - 'scripts/check_frontier_complete_productive_authority.sh'
       - '.github/workflows/frontier-complete-productive-authority.yml'
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

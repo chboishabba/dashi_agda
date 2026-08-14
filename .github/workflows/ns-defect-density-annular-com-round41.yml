@@ -2,8 +2,7 @@ name: NS Round41 defect density annular Com
 
 on:
   push:
-    branches:
-      - agent/ns-defect-density-annular-com-round41
+    branches: [master]
     paths:
       - 'DASHI/Physics/Closure/NSTriadKN*Round41Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNDefectDensityAnnularComRound41Validation.agda'
@@ -16,6 +15,11 @@ on:
       - 'scripts/check_ns_defect_density_annular_com_round41.sh'
       - '.github/workflows/ns-defect-density-annular-com-round41.yml'
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   agda-round41:

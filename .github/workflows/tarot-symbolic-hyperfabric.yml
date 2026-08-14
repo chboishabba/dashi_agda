@@ -2,8 +2,7 @@ name: tarot-symbolic-hyperfabric
 
 on:
   push:
-    branches:
-      - 'agent/tarot-symbolic-hyperfabric'
+    branches: [master]
   pull_request:
     paths:
       - 'DASHI/Biology/Tarot*'
@@ -11,6 +10,11 @@ on:
       - 'scripts/check_tarot_symbolic_hyperfabric.sh'
       - '.github/workflows/tarot-symbolic-hyperfabric.yml'
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

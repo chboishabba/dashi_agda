@@ -2,8 +2,7 @@ name: Yang-Mills Clay highest-alpha round 24
 
 on:
   push:
-    branches:
-      - 'agent/ym-clay-alpha-round24-wilson-schur-gap'
+    branches: [master]
   pull_request:
     branches:
       - 'agent/ym-clay-alpha-round23-terminal-scale-gap'
@@ -31,6 +30,11 @@ on:
       - 'scripts/check_yang_mills_clay_highest_alpha_round24.sh'
       - '.github/workflows/yang-mills-clay-highest-alpha-round24.yml'
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

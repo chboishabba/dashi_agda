@@ -9,6 +9,11 @@ on:
       - '.github/workflows/ns-periodic-pv-odd-com-f4-round39.yml'
   workflow_dispatch:
 
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   agda-round39:
     runs-on: ubuntu-latest
