@@ -11,6 +11,7 @@ module DASHI.Cognition.PNF.ControlledFutureSpectralRepresentationExact where
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
+open import Relation.Binary.PropositionalEquality using (subst)
 
 record ControlledInvariantRepresentation
     (State Control Latent Goal : Set) : Set₁ where
@@ -116,11 +117,10 @@ open LatentReachabilityCertificate public
 latentReachabilityCompilesToFineReachability :
   ∀ {State Control Latent Goal}
     {representation : ControlledInvariantRepresentation State Control Latent Goal}
-    {goal : Goal} {state : State} →
-  LatentReachabilityCertificate representation goal state →
+    {goal : Goal} {state : State}
+    (certificate : LatentReachabilityCertificate representation goal state) →
   FineTarget representation goal
-    (runFineControls representation
-      (controls _) state)
+    (runFineControls representation (controls certificate) state)
 latentReachabilityCompilesToFineReachability certificate =
   latentTargetAfterTraceImpliesFineTarget
     _ _ (controls certificate) _ (latentReachesGoal certificate)
