@@ -1,0 +1,21 @@
+module DASHI.EverythingOrientedZeroFutureCompressionRound19 where
+
+-- Cumulative theorem surface through round 18.
+import DASHI.EverythingLLMFutureCompressionRound18
+
+-- Round-19 oriented-zero / quantitative compression frontier.
+import DASHI.Cognition.PNF.OrientedZeroFutureQuotientExact
+import DASHI.Cognition.PNF.OrientedZeroCanonicalFutureExact
+import DASHI.Cognition.PNF.OrientedZeroPartitionRefinementExact
+import DASHI.Cognition.PNF.OrientedZeroBitMinimalityExact
+import DASHI.Cognition.PNF.OrientedZeroGrayTransitionGeometryExact
+import DASHI.Cognition.PNF.OrientedZeroPhaseOrthogonalityExact
+import DASHI.Cognition.PNF.FutureRateDistortionOrientedZeroExact
+import DASHI.Cognition.PNF.FutureRateDistortionGenericExact
+import DASHI.Core.GeneralResidualFibreCardinalityExact
+import DASHI.Core.GenericFuturePartitionRefinementExact
+import DASHI.Core.FiniteRankedRefinementStabilizationExact
+import DASHI.Cognition.PNF.ApproximateMultimodalFutureEquivalenceExact
+import DASHI.Cognition.PNF.DynamicApproximateMultiResolutionErrorExact
+import DASHI.Cognition.PNF.SpectralGrokkingPhaseDynamicsExact
+import DASHI.Cognition.PNF.FullLearningStateFutureQuotientExact
