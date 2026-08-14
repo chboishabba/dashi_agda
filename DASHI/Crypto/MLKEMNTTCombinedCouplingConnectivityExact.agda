@@ -15,14 +15,16 @@ module DASHI.Crypto.MLKEMNTTCombinedCouplingConnectivityExact where
 --      quadratic residue.
 --
 -- Their union yields a stronger structural theorem: every two scalar nodes in
--- the 256-entry NTT representation are connected by at most two coupling edges.
--- This rules out a disconnected decomposition of the combined prior/verifier
--- dataflow graph.  It does not prove a large treewidth, statistical dependence,
--- or cryptographic hardness.
+-- the 256-entry NTT representation are connected by at most two coupling edges,
+-- and therefore the combined graph has no nontrivial disconnected cut.
+--
+-- This is a dataflow theorem. It does not prove a large treewidth, statistical
+-- dependence, or cryptographic hardness.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Empty using (⊥)
 
 import DASHI.Crypto.MLKEMNTTDataflowCouplingExact as NTT
 
@@ -83,6 +85,59 @@ allScalarCoordinatesConnectedWithinTwo
   twoEdges
     (priorLinearEdge i j)
     (verifierCrossEdgeReverse j)
+
+------------------------------------------------------------------------
+-- No disconnected nontrivial cut.
+------------------------------------------------------------------------
+
+data Side : Set where
+  leftSide rightSide : Side
+
+record DisconnectedCut : Set₁ where
+  constructor disconnectedCut
+  field
+    side : NTT.NTTScalarCoordinate → Side
+    noLeftToRightEdge : ∀ {left right} →
+      side left ≡ leftSide →
+      side right ≡ rightSide →
+      CouplingEdge left right → ⊥
+
+open DisconnectedCut public
+
+record NontrivialCutWitness (cut : DisconnectedCut) : Set where
+  constructor nontrivialCutWitness
+  field
+    leftNode rightNode : NTT.NTTScalarCoordinate
+    leftReallyLeft : side cut leftNode ≡ leftSide
+    rightReallyRight : side cut rightNode ≡ rightSide
+
+open NontrivialCutWitness public
+
+pathCrossesCut :
+  ∀ (cut : DisconnectedCut)
+    {left right : NTT.NTTScalarCoordinate} →
+  side cut left ≡ leftSide →
+  side cut right ≡ rightSide →
+  ConnectedWithinTwo left right → ⊥
+pathCrossesCut cut leftSideProof rightSideProof (oneEdge edge) =
+  noLeftToRightEdge cut leftSideProof rightSideProof edge
+pathCrossesCut cut leftSideProof rightSideProof
+  (twoEdges {middle = middle} first second)
+  with side cut middle
+... | leftSide =
+  noLeftToRightEdge cut refl rightSideProof second
+... | rightSide =
+  noLeftToRightEdge cut leftSideProof refl first
+
+combinedCouplingHasNoNontrivialDisconnectedCut :
+  (cut : DisconnectedCut) → NontrivialCutWitness cut → ⊥
+combinedCouplingHasNoNontrivialDisconnectedCut cut witness =
+  pathCrossesCut cut
+    (leftReallyLeft witness)
+    (rightReallyRight witness)
+    (allScalarCoordinatesConnectedWithinTwo
+      (leftNode witness)
+      (rightNode witness))
 
 ------------------------------------------------------------------------
 -- Boundary.
