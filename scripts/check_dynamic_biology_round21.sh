@@ -23,7 +23,10 @@ FILES=(
   DASHI/Biology/Physical/MultiscaleSelfBoundaryExact.agda
   DASHI/Biology/Physical/DNAHelixDihedralExact.agda
   DASHI/Biology/Physical/DNASequenceHelixPositionExact.agda
+  DASHI/Biology/Physical/DNAChemistryRegulatoryOperatorBridgeExact.agda
   DASHI/Biology/Physical/C3CubeFourier27Exact.agda
+  DASHI/Biology/Physical/MorphogeneticControlFieldCapacityExact.agda
+  DASHI/Biology/Physical/IteratedAttractorScaleLiftExact.agda
   DASHI/EverythingDynamicBiologyRound21.agda
 )
 
@@ -68,9 +71,18 @@ grep -q 'uvComplementReflection' DASHI/Biology/Physical/DNAHelixDihedralExact.ag
 grep -q 'positionAdvanceCommutesWithPhaseRotation' DASHI/Biology/Physical/DNASequenceHelixPositionExact.agda
 grep -q 'embeddingCommutesWithAdvance' DASHI/Biology/Physical/DNASequenceHelixPositionExact.agda
 
+grep -q 'atEnergyIsZero' DASHI/Biology/Physical/DNAChemistryRegulatoryOperatorBridgeExact.agda
+grep -q 'gcEnergyIsTwo' DASHI/Biology/Physical/DNAChemistryRegulatoryOperatorBridgeExact.agda
+grep -q 'sameDNAEnergyDifferentContextChangesCellParameter' DASHI/Biology/Physical/DNAChemistryRegulatoryOperatorBridgeExact.agda
+
 grep -q 'cubeCharacterHomomorphism' DASHI/Biology/Physical/C3CubeFourier27Exact.agda
 grep -q 'cubeRoundTrip' DASHI/Biology/Physical/C3CubeFourier27Exact.agda
 grep -q 'cellRoundTrip' DASHI/Biology/Physical/C3CubeFourier27Exact.agda
+
+grep -q 'decodeEncodeExact' DASHI/Biology/Physical/MorphogeneticControlFieldCapacityExact.agda
+grep -q 'targetConstraintRoundTrip' DASHI/Biology/Physical/MorphogeneticControlFieldCapacityExact.agda
+grep -q 'junctionResidualRestoresExactTarget' DASHI/Biology/Physical/MorphogeneticControlFieldCapacityExact.agda
+grep -q 'multiscaleRepairReachesIntegratedOrgan' DASHI/Biology/Physical/IteratedAttractorScaleLiftExact.agda
 
 grep -q '10.1126/science.6801762' DASHI/Biology/Physical/PersistentCarrierTemplatingExact.agda
 grep -q '10.1038/171737a0' DASHI/Biology/Physical/DNAHelixDihedralExact.agda
