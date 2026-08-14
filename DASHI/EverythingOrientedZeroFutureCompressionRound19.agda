@@ -8,6 +8,8 @@ import DASHI.Cognition.PNF.OrientedZeroFutureQuotientExact
 import DASHI.Cognition.PNF.OrientedZeroCanonicalFutureExact
 import DASHI.Cognition.PNF.OrientedZeroPartitionRefinementExact
 import DASHI.Cognition.PNF.OrientedZeroBitMinimalityExact
+import DASHI.Cognition.PNF.OrientedZeroCeilLog2Exact
+import DASHI.Cognition.PNF.OrientedZeroConditionalResidualCardinalityExact
 import DASHI.Cognition.PNF.OrientedZeroGrayTransitionGeometryExact
 import DASHI.Cognition.PNF.OrientedZeroPhaseOrthogonalityExact
 import DASHI.Cognition.PNF.FutureRateDistortionOrientedZeroExact
@@ -19,3 +21,4 @@ import DASHI.Cognition.PNF.ApproximateMultimodalFutureEquivalenceExact
 import DASHI.Cognition.PNF.DynamicApproximateMultiResolutionErrorExact
 import DASHI.Cognition.PNF.SpectralGrokkingPhaseDynamicsExact
 import DASHI.Cognition.PNF.FullLearningStateFutureQuotientExact
+import DASHI.Foundations.CantorDyadicNullCoverExact
