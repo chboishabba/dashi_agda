@@ -18,10 +18,6 @@ module DASHI.Physics.Closure.NSTriadKNComLiteralKernelScalingRound57Exact where
 -- advecting velocity.  Therefore the source constants 17/64 and 65/512 cannot
 -- honestly be interpreted as amplitude-free bounds on these raw coefficients;
 -- they must arise only after the correct normalized Gram/energy realization.
---
--- The theorem below proves the exact homogeneity on the repository's literal
--- Complex3 carrier.  This is a positive same-object result, not a numerical
--- estimate and not a claim that the missing Gram realization is closed.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
@@ -45,6 +41,29 @@ scaledVelocity :
   Z3.FourierMode → C3.Complex3 F
 scaledVelocity scalar velocity mode =
   C3.complex3Scale scalar (velocity mode)
+
+zeroEqualsScalarTimesZero :
+  ∀ {r} {F : C3.RealField r} (scalar : C3.Complex F) →
+  C3.complexZero F
+  ≡ C3.complexMultiply scalar (C3.complexZero F)
+zeroEqualsScalarTimesZero {F = F} scalar =
+  R.solve 1
+    (λ scalar → R.0# R.⊜ scalar R.⊗ R.0#)
+    refl scalar
+  where module R = Ring.Solver F
+
+negateScaled :
+  ∀ {r} {F : C3.RealField r}
+    (scalar value : C3.Complex F) →
+  C3.complexNegate (C3.complexMultiply scalar value)
+  ≡ C3.complexMultiply scalar (C3.complexNegate value)
+negateScaled {F = F} scalar value =
+  R.solve 2
+    (λ scalar value →
+      R.⊝ (scalar R.⊗ value)
+      R.⊜ scalar R.⊗ (R.⊝ value))
+    refl scalar value
+  where module R = Ring.Solver F
 
 transportCoefficientHomogeneous :
   ∀ {r} {F : C3.RealField r}
@@ -97,35 +116,19 @@ literalOddPQEntryHomogeneous :
       (scaledVelocity scalar velocity) entry
   ≡ C3.complexMultiply scalar
       (Odd.literalOddPQEntryCoefficient model cutoff E velocity entry)
-literalOddPQEntryHomogeneous {r} model cutoff E scalar velocity {input} {output} entry
+literalOddPQEntryHomogeneous model cutoff E scalar velocity {input} {output} entry
   with LP.lowSelect model cutoff output | LP.lowSelect model cutoff input
-... | true | false = transportEntryCoefficientHomogeneous E scalar velocity entry
+... | true | false =
+  transportEntryCoefficientHomogeneous E scalar velocity entry
 ... | true | true =
-  symZero scalar
+  zeroEqualsScalarTimesZero scalar
 ... | false | true =
   trans
     (cong C3.complexNegate
       (transportEntryCoefficientHomogeneous E scalar velocity entry))
-    (R.solve 2
-      (λ scalar value →
-        R.⊝ (scalar R.⊗ value)
-        R.⊜ scalar R.⊗ (R.⊝ value))
-      refl scalar (Matrix.transportEntryCoefficient E velocity entry))
-  where module R = Ring.Solver (LP.realField model)
+    (negateScaled scalar (Matrix.transportEntryCoefficient E velocity entry))
 ... | false | false =
-  symZero scalar
-  where module R = Ring.Solver (LP.realField model)
-
-  where
-  symZero :
-    (scalar : C3.Complex (LP.realField model)) →
-    C3.complexZero (LP.realField model)
-    ≡ C3.complexMultiply scalar (C3.complexZero (LP.realField model))
-  symZero scalar =
-    R.solve 1
-      (λ scalar → R.0# R.⊜ scalar R.⊗ R.0#)
-      refl scalar
-    where module R = Ring.Solver (LP.realField model)
+  zeroEqualsScalarTimesZero scalar
 
 rawOddPQKernelIsVelocityHomogeneous : Bool
 rawOddPQKernelIsVelocityHomogeneous = true
