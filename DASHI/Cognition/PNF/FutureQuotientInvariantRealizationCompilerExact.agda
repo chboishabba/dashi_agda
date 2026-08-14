@@ -6,16 +6,13 @@ module DASHI.Cognition.PNF.FutureQuotientInvariantRealizationCompilerExact where
 -- The existing certified partition compiler computes a stable finite-depth
 -- relation and proves that it is exactly canonical future equivalence.  Given a
 -- concrete presentation/section of those classes, this module composes that
--- result with the canonical quotient-dynamics theorem.  The output therefore
--- contains both:
---
---   * a computed stable future partition with a finite rank bound; and
---   * the coarsest exact action system on the represented future classes.
+-- result with the canonical quotient-dynamics theorem.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
 
 import DASHI.Core.CertifiedFiniteFutureQuotientCompilerExact as Compiler
+import DASHI.Core.FiniteRankedRefinementStabilizationExact as Ranked
 import DASHI.Core.FutureObservationLanguageQuotientExact as Future
 import DASHI.Core.GenericFuturePartitionRefinementExact as Refinement
 import DASHI.Core.StablePartitionCanonicalFutureBridgeExact as Bridge
@@ -65,10 +62,7 @@ compileInvariantFutureRealization :
     (input : PresentedFiniteFutureCompiler State Action Observation) →
   CompiledInvariantFutureRealization input
 compileInvariantFutureRealization input =
-  compiledInvariantFutureRealization
-    quotient
-    dynamics
-    classBridge
+  compiledInvariantFutureRealization quotient dynamics classBridge
   where
     quotient : Compiler.CompiledFutureQuotient (compiler input)
     quotient = Compiler.compileFutureQuotient (compiler input)
@@ -81,7 +75,7 @@ compileInvariantFutureRealization input =
     dynamics = Minimal.compileCanonicalQuotientDynamics
       (presentation input) (sectionedPresentation input)
 
-    classBridge : (left right : _) →
+    classBridge : (left right : State) →
       Compiler.RelationIff
         (Refinement.RefinesToDepth
           (Compiler.stableDepth quotient)
@@ -100,17 +94,16 @@ compileInvariantFutureRealization input =
 compiledStableDepthIsBounded :
   ∀ {State Action Observation}
     {input : PresentedFiniteFutureCompiler State Action Observation} →
-  Compiler.stableDepth (quotientCertificate (compileInvariantFutureRealization input))
-  ≤ DASHI.Core.FiniteRankedRefinementStabilizationExact.rankBound
-      (Compiler.process (compiler input))
+  Compiler.stableDepth
+    (quotientCertificate (compileInvariantFutureRealization input))
+  ≤ Ranked.rankBound (Compiler.process (compiler input))
 compiledStableDepthIsBounded {input = input} =
   Compiler.depthBound
     (quotientCertificate (compileInvariantFutureRealization input))
 
 ------------------------------------------------------------------------
--- Boundary: the compiler now computes the canonical partition and its exact
--- quotient dynamics.  A further finite optimization may choose coordinates for
--- the quotient (bits, cyclotomic modes, Euclidean embeddings, etc.), but any
--- exact future-safe representation must factor onto this quotient and therefore
--- cannot legally erase one of its classes.
+-- Boundary: the compiler computes the canonical partition and its exact quotient
+-- dynamics.  A further finite optimization may choose coordinates for the
+-- quotient (bits, cyclotomic modes, Euclidean embeddings, etc.), but any exact
+-- future-safe representation must factor onto this quotient.
 ------------------------------------------------------------------------
