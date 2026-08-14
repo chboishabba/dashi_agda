@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 90
     env:
-      AGDA_JOBS: 4
+      AGDA_JOBS: 1
       AGDA_FLAKE: github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin
       DASHI_NO_TMUX: 1
     steps:
