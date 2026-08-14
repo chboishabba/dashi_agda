@@ -12,6 +12,7 @@ fi
 FILES=(
   DASHI/Biology/Physical/PersistentCarrierTemplatingExact.agda
   DASHI/Biology/Physical/CrossCarrierTemplatingFamilyExact.agda
+  DASHI/Biology/Physical/AbiogenesisInevitabilityBoundaryExact.agda
   DASHI/Biology/Physical/DynamicTissueGraphRewriteExact.agda
   DASHI/Biology/Physical/DynamicTopologyFutureDefectExact.agda
   DASHI/Biology/Physical/HierarchicalGoalConstraintCompilerExact.agda
@@ -42,6 +43,9 @@ grep -q 'prionTemplatingDoesNotPromoteAgency' DASHI/Biology/Physical/PersistentC
 grep -q 'sameGenomeDoesNotReconstructPersistentCarrier' DASHI/Biology/Physical/PersistentCarrierTemplatingExact.agda
 grep -q 'prionConformationTemplatesNormal' DASHI/Biology/Physical/CrossCarrierTemplatingFamilyExact.agda
 grep -q 'morphologicalTargetCanBeReimposed' DASHI/Biology/Physical/CrossCarrierTemplatingFamilyExact.agda
+grep -q 'drivenPersistenceDoesNotForceReplication' DASHI/Biology/Physical/AbiogenesisInevitabilityBoundaryExact.agda
+grep -q 'replicationAndVariationDoNotForceAgency' DASHI/Biology/Physical/AbiogenesisInevitabilityBoundaryExact.agda
+grep -q 'twoStepFastOutnumbersSlow' DASHI/Biology/Physical/AbiogenesisInevitabilityBoundaryExact.agda
 
 grep -q 'divisionChangesVertexCarrier' DASHI/Biology/Physical/DynamicTissueGraphRewriteExact.agda
 grep -q 'connectionChangesEdgeCarrier' DASHI/Biology/Physical/DynamicTissueGraphRewriteExact.agda
@@ -89,6 +93,8 @@ grep -q '10.1038/171737a0' DASHI/Biology/Physical/DNAHelixDihedralExact.agda
 grep -q '10.4103/1673-5374.165216' DASHI/Biology/Physical/GoalErrorDescentControllerExact.agda
 grep -q '10.1016/j.biosystems.2017.08.009' DASHI/Biology/Physical/HierarchicalGoalConstraintCompilerExact.agda
 grep -q '10.1007/s00018-023-04790-z' DASHI/Biology/Physical/MultiscaleSelfBoundaryExact.agda
+grep -q '10.1063/1.4818538' DASHI/Biology/Physical/AbiogenesisInevitabilityBoundaryExact.agda
+grep -q '10.1103/PhysRevE.100.022414' DASHI/Biology/Physical/AbiogenesisInevitabilityBoundaryExact.agda
 
 if command -v agda >/dev/null 2>&1; then
   agda -i . -i src DASHI/EverythingDynamicBiologyRound21.agda
