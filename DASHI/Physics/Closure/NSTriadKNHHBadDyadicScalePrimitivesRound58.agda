@@ -13,7 +13,6 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Rational.Base using (ℚ; 1ℚ; _/_; _*_)
 import Data.Integer.Base as Int
-import Data.Rational.Tactic.RingSolver as ℚRing
 
 half two : ℚ
 half = Int.+ 1 / 2
@@ -26,10 +25,3 @@ dyadicScale (suc shell) = two * dyadicScale shell
 inverseDyadicScale : Nat → ℚ
 inverseDyadicScale zero = 1ℚ
 inverseDyadicScale (suc shell) = half * inverseDyadicScale shell
-
-inverseDyadicReciprocal :
-  ∀ shell → inverseDyadicScale shell * dyadicScale shell ≡ 1ℚ
-inverseDyadicReciprocal zero = refl
-inverseDyadicReciprocal (suc shell)
-  rewrite inverseDyadicReciprocal shell =
-  ℚRing.solve []

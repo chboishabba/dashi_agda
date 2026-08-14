@@ -46,16 +46,7 @@ open import Relation.Binary.PropositionalEquality using (subst; cong; trans; sym
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteEightPointSixThreeHolderExact as Holder
 import DASHI.Physics.Closure.NSTriadKNLuoTerminalInteractionDepletionTransferExact as Limit
-
-record PositiveThreshold : Set where
-  constructor positive-threshold
-  field
-    threshold thresholdInverse : ℚ
-    thresholdPositive : 0ℚ < threshold
-    thresholdInverseNonnegative : 0ℚ ≤ thresholdInverse
-    inverseMeaning : thresholdInverse * threshold ≡ 1ℚ
-
-open PositiveThreshold public
+open import DASHI.Physics.Closure.NSTriadKNHHBadPositiveThresholdRound58 public
 
 thresholdNonnegative :
   (parameter : PositiveThreshold) →

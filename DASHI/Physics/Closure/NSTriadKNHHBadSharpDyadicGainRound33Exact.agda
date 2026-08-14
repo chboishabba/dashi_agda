@@ -50,6 +50,13 @@ open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 open import DASHI.Physics.Closure.NSTriadKNHHBadDyadicScalePrimitivesRound58 public
 
+inverseDyadicReciprocal :
+  ∀ shell → inverseDyadicScale shell * dyadicScale shell ≡ 1ℚ
+inverseDyadicReciprocal zero = refl
+inverseDyadicReciprocal (suc shell)
+  rewrite inverseDyadicReciprocal shell =
+  ℚRing.solve []
+
 rawHHBadRatio : Nat → ℚ
 rawHHBadRatio shell = two * dyadicScale shell
 
