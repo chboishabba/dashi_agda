@@ -1,31 +1,6 @@
 name: Frontier Hodge automorphic spectral cross-pollination
 
 on:
-  push:
-    branches: [master]
-    paths:
-      - 'DASHI/Mathematics/Topology/FiniteCochainComplexExact.agda'
-      - 'DASHI/Mathematics/LinearAlgebra/**'
-      - 'DASHI/Mathematics/NumberTheory/Finite*.agda'
-      - 'DASHI/Mathematics/Automorphic/**'
-      - 'DASHI/Mathematics/Arithmetic/EllipticCurveSmallPrimeFrobeniusExact.agda'
-      - 'DASHI/Mathematics/Arithmetic/SmallPrimeTruncatedEulerProductExact.agda'
-      - 'DASHI/Mathematics/Arithmetic/EllipticCurveTwoTorsionAndBadPrimeExact.agda'
-      - 'DASHI/Mathematics/AlgebraicGeometry/ProjectiveLineProductHodgeExact.agda'
-      - 'DASHI/Mathematics/Complexity/PSubsetNPTrivialCertificateExact.agda'
-      - 'DASHI/Mathematics/Complexity/MachineRunCertificateExact.agda'
-      - 'DASHI/Mathematics/Complexity/FiniteCookLevinTableauExact.agda'
-      - 'DASHI/Moonshine/SquareZeroDifferentialVertexAlgebraExact.agda'
-      - 'DASHI/Moonshine/RankOneFock*.agda'
-      - 'DASHI/Analysis/SharedFiniteSpectralCertificationExact.agda'
-      - 'DASHI/Physics/YangMills/FiniteAbelianGaugeHodgeExact.agda'
-      - 'DASHI/Physics/YangMills/YangMillsHodgeCoercivityFrontierExact.agda'
-      - 'DASHI/Physics/Closure/FiniteHodgePhysicsCrossPollinationExact.agda'
-      - 'DASHI/Physics/Closure/NavierStokesFiniteVorticityDepletionExact.agda'
-      - 'DASHI/Mathematics/CrossPollination/Frontier*.agda'
-      - 'DASHI/EverythingFrontierHodgeAutomorphicSpectralCrossPollination.agda'
-      - 'scripts/check_frontier_hodge_automorphic_spectral_crosspollination.sh'
-      - '.github/workflows/frontier-hodge-automorphic-spectral-crosspollination.yml'
   pull_request:
     branches:
       - 'agent/millennium-crosspollination-rh-hodge-bsd-pnp-poincare-voa'
@@ -56,7 +31,7 @@ on:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:

@@ -1,14 +1,6 @@
 name: NS Galerkin compactness limit
 
 on:
-  push:
-    branches: [master]
-    paths:
-      - 'DASHI/Physics/Closure/NSGalerkinCompactnessLimit.agda'
-      - 'DASHI/Physics/Closure/NSConcreteAubinLionsNonlinearLimitWitnesses.agda'
-      - 'docs/ns_galerkin_compactness_limit.md'
-      - 'docs/ns_concrete_aubin_lions_nonlinear_limit.md'
-      - '.github/workflows/ns-galerkin-compactness-limit.yml'
   pull_request:
     paths:
       - 'DASHI/Physics/Closure/NSGalerkinCompactnessLimit.agda'
@@ -18,7 +10,7 @@ on:
       - '.github/workflows/ns-galerkin-compactness-limit.yml'
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:

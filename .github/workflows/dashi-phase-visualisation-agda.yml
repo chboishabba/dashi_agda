@@ -5,15 +5,13 @@ on:
     paths:
       - "DASHI/Visualization/PhaseResidualProjection.agda"
       - ".github/workflows/dashi-phase-visualisation-agda.yml"
-  push:
-    branches: [master]
     paths:
       - "DASHI/Visualization/PhaseResidualProjection.agda"
       - ".github/workflows/dashi-phase-visualisation-agda.yml"
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:

@@ -1,16 +1,6 @@
 name: Quotient residual dynamics Agda check
 
 on:
-  push:
-    branches: [master]
-    paths:
-      - 'DASHI/Cognition/QuotientResidualDynamics.agda'
-      - 'DASHI/Cognition/QuotientResidualTheoremLadder.agda'
-      - 'DASHI/Cognition/QuotientResidualCategoricalLoom.agda'
-      - 'DASHI/Cognition/QuotientResidualApplicationBoundary.agda'
-      - 'DASHI/Cognition/QuotientResidualAll.agda'
-      - 'Docs/QuotientResidualDynamics.md'
-      - '.github/workflows/quotient-residual-dynamics.yml'
   pull_request:
     paths:
       - 'DASHI/Cognition/QuotientResidualDynamics.agda'
@@ -22,7 +12,7 @@ on:
       - '.github/workflows/quotient-residual-dynamics.yml'
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:

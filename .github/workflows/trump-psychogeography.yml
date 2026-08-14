@@ -1,14 +1,6 @@
 name: Trump psychogeography and bounded Yijing tests
 
 on:
-  push:
-    branches: [master]
-    paths:
-      - 'DASHI/Biology/TrumpPsychogeograph*'
-      - 'DASHI/Biology/TrumpPsychogeography*'
-      - 'Docs/support/reference/TrumpPsychogeographyYijing.md'
-      - 'scripts/check_trump_psychogeography.sh'
-      - '.github/workflows/trump-psychogeography.yml'
   pull_request:
     branches:
       - 'agent/conscious-access-round10-psychogeography-yijing-hyperfabric'
@@ -22,7 +14,7 @@ on:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:

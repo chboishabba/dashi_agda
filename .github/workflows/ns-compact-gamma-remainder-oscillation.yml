@@ -1,14 +1,6 @@
 name: NS compact Gamma remainder oscillation audit
 
 on:
-  push:
-    branches: [master]
-    paths:
-      - 'scripts/ns_compact_gamma_remainder_oscillation_audit.py'
-      - 'scripts/tests/test_ns_compact_gamma_remainder_oscillation_audit.py'
-      - 'DASHI/Physics/Closure/NSCompactGammaRemainderOscillationComposition.agda'
-      - 'docs/ns_compact_gamma_remainder_oscillation_audit.md'
-      - '.github/workflows/ns-compact-gamma-remainder-oscillation.yml'
   pull_request:
     paths:
       - 'scripts/ns_compact_gamma_remainder_oscillation_audit.py'
@@ -18,7 +10,7 @@ on:
       - '.github/workflows/ns-compact-gamma-remainder-oscillation.yml'
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:

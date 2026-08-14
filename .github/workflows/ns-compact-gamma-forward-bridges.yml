@@ -33,8 +33,6 @@ on:
       - 'DASHI/Physics/Closure/NSPairIncidenceKernelProgram.agda'
       - 'Docs/NSCompactGammaAnalyticSynthesis.md'
       - '.github/workflows/ns-compact-gamma-forward-bridges.yml'
-  push:
-    branches: [master]
     paths:
       - 'DASHI/Analysis/FiniteWeightedKernelTransport.agda'
       - 'DASHI/Physics/Closure/NSWall1CanonicalAmplitudeProfile.agda'
@@ -68,7 +66,7 @@ on:
       - '.github/workflows/ns-compact-gamma-forward-bridges.yml'
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:

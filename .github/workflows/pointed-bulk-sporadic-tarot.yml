@@ -1,8 +1,6 @@
 name: pointed-bulk-sporadic-tarot
 
 on:
-  push:
-    branches: [master]
   pull_request:
     types: [opened, synchronize, reopened, ready_for_review]
     paths:
@@ -50,7 +48,7 @@ on:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:

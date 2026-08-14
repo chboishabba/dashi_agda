@@ -1,8 +1,6 @@
 name: NS canonical finite Agda check
 
 on:
-  push:
-    branches: [master]
   pull_request:
     paths:
       - 'DASHI/Physics/Closure/NSTriadKNCanonical*.agda'
@@ -10,7 +8,7 @@ on:
       - '.github/workflows/ns-canonical-finite-check.yml'
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:

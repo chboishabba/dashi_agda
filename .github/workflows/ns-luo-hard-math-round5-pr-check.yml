@@ -10,7 +10,7 @@ on:
       - '.github/workflows/ns-luo-hard-math-round5-pr-check.yml'
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:

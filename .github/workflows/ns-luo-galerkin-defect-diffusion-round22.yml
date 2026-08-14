@@ -1,13 +1,6 @@
 name: NS Luo Galerkin defect diffusion round 22
 
 on:
-  push:
-    branches: [master]
-    paths:
-      - 'DASHI/Physics/Closure/**'
-      - 'docs/ns-luo-galerkin-defect-diffusion-round22.md'
-      - 'scripts/check_ns_luo_galerkin_defect_diffusion_round22.sh'
-      - '.github/workflows/ns-luo-galerkin-defect-diffusion-round22.yml'
   pull_request:
     branches:
       - 'agent/ns-luo-filtered-defect-excursion-round21'
@@ -21,7 +14,7 @@ on:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:

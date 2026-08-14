@@ -1,8 +1,6 @@
 name: conscious-access-round4
 
 on:
-  push:
-    branches: [master]
   pull_request:
     paths:
       - 'DASHI/Biology/TriadicKernelLiftQuotientExact.agda'
@@ -30,7 +28,7 @@ on:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:

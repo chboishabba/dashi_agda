@@ -1,8 +1,6 @@
 name: Stage Euler tree complement round 2
 
 on:
-  push:
-    branches: [master]
   pull_request:
     branches:
       - 'agent/sporadic-stage-symmetry-euler-totalisation'
@@ -20,7 +18,7 @@ on:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:

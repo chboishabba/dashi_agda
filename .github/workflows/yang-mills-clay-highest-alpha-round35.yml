@@ -1,14 +1,6 @@
 name: Yang Mills highest alpha round 35 plaquette curl
 
 on:
-  push:
-    branches: [master]
-    paths:
-      - 'DASHI/Physics/YangMills/**'
-      - 'Docs/support/reference/YangMillsPlaquetteCurlRound35.md'
-      - 'Docs/support/reference/YangMillsReferenceIndex.md'
-      - 'scripts/check_yang_mills_clay_highest_alpha_round35.sh'
-      - '.github/workflows/yang-mills-clay-highest-alpha-round35.yml'
   pull_request:
     branches:
       - 'agent/ym-clay-alpha-round34-physical-radius-wlocal'
@@ -22,7 +14,7 @@ on:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:

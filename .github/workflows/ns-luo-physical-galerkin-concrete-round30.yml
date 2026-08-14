@@ -1,14 +1,12 @@
 name: NS Luo concrete physical Galerkin round 30
 
 on:
-  push:
-    branches: [master]
   pull_request:
   workflow_dispatch:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:

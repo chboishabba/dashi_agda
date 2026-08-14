@@ -1,8 +1,6 @@
 name: Yang-Mills Clay highest-alpha round 26
 
 on:
-  push:
-    branches: [master]
   pull_request:
     branches:
       - 'agent/ym-clay-cross-pollination-round25'
@@ -20,7 +18,7 @@ on:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:

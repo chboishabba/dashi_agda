@@ -1,12 +1,6 @@
 name: Yang Mills highest alpha round 30 strong coupling functional route
 
 on:
-  push:
-    branches: [master]
-    paths:
-      - 'DASHI/Physics/YangMills/**'
-      - 'scripts/check_yang_mills_clay_highest_alpha_round30.sh'
-      - '.github/workflows/yang-mills-clay-highest-alpha-round30.yml'
   pull_request:
     branches:
       - 'agent/ym-clay-alpha-round29-unified-gates-countermodels'
@@ -18,7 +12,7 @@ on:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:

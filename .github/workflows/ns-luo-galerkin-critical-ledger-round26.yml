@@ -1,17 +1,6 @@
 name: NS Luo Galerkin critical ledger round 26
 
 on:
-  push:
-    branches: [master]
-    paths:
-      - 'DASHI/Physics/Closure/**'
-      - 'DASHI/Papers/NavierStokes/**'
-      - 'docs/ns-clay-contract/**'
-      - 'scripts/ns_round26_finite_tax_adversarial.py'
-      - 'scripts/check_ns_luo_galerkin_critical_ledger_round26.sh'
-      - 'scripts/check_ns_luo_physical_carrier_support_round25.sh'
-      - 'scripts/run_agda29_parallel_check.sh'
-      - '.github/workflows/ns-luo-galerkin-critical-ledger-round26.yml'
   pull_request:
     branches:
       - 'agent/ns-luo-physical-carrier-support-round25'
@@ -29,7 +18,7 @@ on:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:

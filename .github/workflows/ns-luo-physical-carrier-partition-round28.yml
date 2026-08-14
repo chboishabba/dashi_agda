@@ -1,16 +1,6 @@
 name: NS Luo physical carrier partition round 28
 
 on:
-  push:
-    branches: [master]
-    paths:
-      - 'DASHI/Physics/Closure/**'
-      - 'DASHI/Papers/NavierStokes/**'
-      - 'docs/ns-clay-contract/**'
-      - 'scripts/check_ns_luo_physical_carrier_partition_round28.sh'
-      - 'scripts/check_ns_luo_projector_operator_core_round27.sh'
-      - 'scripts/run_agda29_parallel_check.sh'
-      - '.github/workflows/ns-luo-physical-carrier-partition-round28.yml'
   pull_request:
     branches:
       - 'agent/ns-luo-projector-operator-core-round27'
@@ -27,7 +17,7 @@ on:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:

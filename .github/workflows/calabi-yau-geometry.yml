@@ -9,8 +9,6 @@ on:
       - "DASHI/Geometry/CalabiYauRegression.agda"
       - "Docs/support/reference/CalabiYauGeometry.md"
       - ".github/workflows/calabi-yau-geometry.yml"
-  push:
-    branches: [master]
     paths:
       - "DASHI/Geometry/ComplexManifold.agda"
       - "DASHI/Geometry/Kahler.agda"
@@ -21,7 +19,7 @@ on:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:

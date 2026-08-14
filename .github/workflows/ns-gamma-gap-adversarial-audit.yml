@@ -1,18 +1,6 @@
 name: NS gamma-gap adversarial audit
 
 on:
-  push:
-    branches: [master]
-    paths:
-      - 'scripts/ns_triad_gamma_gap_adversarial_audit.py'
-      - 'scripts/ns_triad_gamma_gap_core.py'
-      - 'scripts/ns_triad_gamma_gap_search.py'
-      - 'scripts/ns_triad_gamma_gap_transfer_carrier_refine.py'
-      - 'scripts/tests/test_ns_triad_gamma_gap_adversarial_audit.py'
-      - 'scripts/tests/test_ns_triad_gamma_gap_transfer_carrier_refine.py'
-      - 'scripts/data/examples/ns_triad_gamma_gap_example.json'
-      - 'docs/ns_triad_gamma_gap_adversarial_audit.md'
-      - '.github/workflows/ns-gamma-gap-adversarial-audit.yml'
   pull_request:
     paths:
       - 'scripts/ns_triad_gamma_gap_adversarial_audit.py'
@@ -27,7 +15,7 @@ on:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:

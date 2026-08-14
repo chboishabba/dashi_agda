@@ -1,19 +1,6 @@
 name: Exceptional Mathieu and real-backend frontier
 
 on:
-  push:
-    branches: [master]
-    paths:
-      - 'DASHI/Foundations/FiniteLinear/**'
-      - 'DASHI/Foundations/TernaryGolay/**'
-      - 'DASHI/Foundations/UBP/**'
-      - 'DASHI/Physics/Closure/NSTriadKNFiniteIncidenceSubspaceAdapter.agda'
-      - 'DASHI/Analysis/CubicalHoTTRealBackendBoundary.agda'
-      - 'Docs/support/reference/ExceptionalMathieuAndRealBackendFrontier.md'
-      - 'scripts/check_explicit_ternary_golay.py'
-      - 'scripts/check_finite_subspace_self_duality.py'
-      - 'scripts/check_exceptional_mathieu_frontier.py'
-      - '.github/workflows/exceptional-mathieu-frontier.yml'
   pull_request:
     paths:
       - 'DASHI/Foundations/FiniteLinear/**'
@@ -30,7 +17,7 @@ on:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:

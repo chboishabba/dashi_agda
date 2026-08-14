@@ -1,15 +1,6 @@
 name: Philosophy formalism
 
 on:
-  push:
-    branches: [master]
-    paths:
-      - "DASHI/Philosophy/**"
-      - "DASHI/EverythingPhilosophy.agda"
-      - "DASHI/EverythingPhilosophyClosure.agda"
-      - "Docs/PhilosophyReflexiveRelationalFormalism.md"
-      - "Docs/PhilosophyClosureLawsAndInstances.md"
-      - ".github/workflows/philosophy.yml"
   pull_request:
     paths:
       - "DASHI/Philosophy/**"
@@ -21,7 +12,7 @@ on:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:

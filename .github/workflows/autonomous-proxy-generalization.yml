@@ -1,14 +1,6 @@
 name: Autonomous proxy generalization Agda check
 
 on:
-  push:
-    branches: [master]
-    paths:
-      - 'DASHI/Physics/CFD/AutonomousProxyGeneralization.agda'
-      - 'DASHI/Physics/CFD/AutonomousProxyGeneralizationInstance.agda'
-      - 'DASHI/Physics/CFD/AutonomousProxyGeneralizationAll.agda'
-      - 'Docs/AutonomousProxyGeneralization.md'
-      - '.github/workflows/autonomous-proxy-generalization.yml'
   pull_request:
     paths:
       - 'DASHI/Physics/CFD/AutonomousProxyGeneralization.agda'
@@ -18,7 +10,7 @@ on:
       - '.github/workflows/autonomous-proxy-generalization.yml'
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:

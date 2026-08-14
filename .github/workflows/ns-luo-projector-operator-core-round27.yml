@@ -1,17 +1,6 @@
 name: NS Luo projector operator core round 27
 
 on:
-  push:
-    branches: [master]
-    paths:
-      - 'DASHI/Physics/Closure/**'
-      - 'DASHI/Papers/NavierStokes/**'
-      - 'docs/ns-clay-contract/**'
-      - 'scripts/ns_round27_projector_operator_certificate.py'
-      - 'scripts/check_ns_luo_projector_operator_core_round27.sh'
-      - 'scripts/check_ns_luo_galerkin_critical_ledger_round26.sh'
-      - 'scripts/run_agda29_parallel_check.sh'
-      - '.github/workflows/ns-luo-projector-operator-core-round27.yml'
   pull_request:
     branches:
       - 'agent/ns-luo-galerkin-critical-ledger-round26'
@@ -29,7 +18,7 @@ on:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:

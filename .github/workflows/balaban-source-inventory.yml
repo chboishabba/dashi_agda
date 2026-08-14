@@ -1,8 +1,6 @@
 name: Balaban source inventory
 
 on:
-  push:
-    branches: [master]
   pull_request:
     paths:
       - '.github/workflows/balaban-source-inventory.yml'
@@ -13,7 +11,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:

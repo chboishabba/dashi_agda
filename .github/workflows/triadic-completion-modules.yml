@@ -12,8 +12,6 @@ on:
       - "scripts/generate_triadic_arithmetic_laws.py"
       - "scripts/generate_triadic_depth_two_dft.py"
       - ".github/workflows/triadic-completion-modules.yml"
-  push:
-    branches: [master]
     paths:
       - "DASHI/Algebra/TriadicFiniteArithmeticLaws.agda"
       - "DASHI/Algebra/TriadicDepthTwoDFTGroupBridge.agda"
@@ -27,7 +25,7 @@ on:
   workflow_dispatch:
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:

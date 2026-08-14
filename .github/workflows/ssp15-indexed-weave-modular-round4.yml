@@ -1,8 +1,6 @@
 name: SSP15 indexed weave modular round 4
 
 on:
-  push:
-    branches: [master]
   pull_request:
     branches:
       - 'agent/ssp15-j-coarse-fine-round3'
@@ -36,7 +34,7 @@ on:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:

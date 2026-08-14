@@ -1,15 +1,6 @@
 name: First-witness vacuum Agda check
 
 on:
-  push:
-    branches: [master]
-    paths:
-      - 'DASHI/Foundations/TernaryTensorPower.agda'
-      - 'DASHI/Foundations/FirstWitnessConstraintAlgebra.agda'
-      - 'DASHI/Physics/Vacuum/FirstWitnessVacuumBridge.agda'
-      - 'DASHI/Physics/Vacuum/FirstWitnessVacuumAll.agda'
-      - 'Docs/FirstWitnessVacuumBridge.md'
-      - '.github/workflows/first-witness-vacuum.yml'
   pull_request:
     paths:
       - 'DASHI/Foundations/TernaryTensorPower.agda'
@@ -20,7 +11,7 @@ on:
       - '.github/workflows/first-witness-vacuum.yml'
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:

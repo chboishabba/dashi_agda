@@ -7,8 +7,6 @@ on:
       - "DASHI/Physics/YangMills/BalabanConcreteStepVSuppression.agda"
       - "DASHI/Physics/YangMills/BalabanStepVKPClosure.agda"
       - ".github/workflows/step-v-large-field.yml"
-  push:
-    branches: [master]
     paths:
       - "DASHI/Physics/YangMills/BalabanLargeFieldStepV.agda"
       - "DASHI/Physics/YangMills/BalabanConcreteStepVSuppression.agda"
@@ -17,7 +15,7 @@ on:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:

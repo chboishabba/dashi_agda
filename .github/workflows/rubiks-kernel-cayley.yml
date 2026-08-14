@@ -1,15 +1,6 @@
 name: Rubik kernel Cayley Agda check
 
 on:
-  push:
-    branches: [master]
-    paths:
-      - 'DASHI/Automata/KernelInternal.agda'
-      - 'DASHI/Puzzles/RubiksPhasicState.agda'
-      - 'DASHI/Puzzles/RubiksCayleyControlMetric.agda'
-      - 'DASHI/Puzzles/RubiksCayleyAll.agda'
-      - 'Docs/RubiksKernelCayleyPhasic.md'
-      - '.github/workflows/rubiks-kernel-cayley.yml'
   pull_request:
     paths:
       - 'DASHI/Automata/KernelInternal.agda'
@@ -20,7 +11,7 @@ on:
       - '.github/workflows/rubiks-kernel-cayley.yml'
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:

@@ -1,8 +1,6 @@
 name: Yang-Mills Clay highest-alpha round 24
 
 on:
-  push:
-    branches: [master]
   pull_request:
     branches:
       - 'agent/ym-clay-alpha-round23-terminal-scale-gap'
@@ -33,7 +31,7 @@ on:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:

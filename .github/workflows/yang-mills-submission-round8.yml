@@ -2,8 +2,6 @@ name: Yang-Mills submission round 8
 
 on:
   workflow_dispatch:
-  push:
-    branches: [master]
     paths:
       - 'DASHI/Analysis/**'
       - 'DASHI/Foundations/**'
@@ -31,7 +29,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:

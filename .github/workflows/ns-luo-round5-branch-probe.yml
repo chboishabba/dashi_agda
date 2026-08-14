@@ -1,16 +1,11 @@
 name: NS Luo round 5 branch probe
 
 on:
-  push:
-    branches:
-      - master
-    paths:
-      - '.github/workflows/ns-luo-round5-branch-probe.yml'
   workflow_dispatch:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:

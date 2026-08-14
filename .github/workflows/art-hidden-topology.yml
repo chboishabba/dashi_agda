@@ -1,15 +1,6 @@
 name: Art hidden topology Agda check
 
 on:
-  push:
-    branches: [master]
-    paths:
-      - 'DASHI/Topology/VisualPersistentHomologyCore.agda'
-      - 'DASHI/Interop/ArtTopologyGazeContactBridge.agda'
-      - 'DASHI/Interop/ArtHiddenTopologyEmpiricalBoundary.agda'
-      - 'DASHI/Interop/ArtHiddenTopologyStack.agda'
-      - 'Docs/ArtHiddenTopologyDASHI.md'
-      - '.github/workflows/art-hidden-topology.yml'
   pull_request:
     paths:
       - 'DASHI/Topology/VisualPersistentHomologyCore.agda'
@@ -20,7 +11,7 @@ on:
       - '.github/workflows/art-hidden-topology.yml'
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:

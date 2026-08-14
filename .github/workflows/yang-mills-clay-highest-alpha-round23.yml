@@ -1,8 +1,6 @@
 name: Yang-Mills Clay highest-alpha round 23
 
 on:
-  push:
-    branches: [master]
   pull_request:
     branches:
       - 'agent/ym-clay-alpha-round22-hodge-wilson-repair'
@@ -18,7 +16,7 @@ on:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:

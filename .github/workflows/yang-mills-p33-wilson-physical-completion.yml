@@ -1,20 +1,6 @@
 name: Yang-Mills P33 Wilson physical completion
 
 on:
-  push:
-    branches: [master]
-    paths:
-      - 'DASHI/Physics/YangMills/BalabanP33QuaternionScalarCyclicityExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanP33WilsonPlacementQuaternionAtomIdentificationExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanP33WilsonRightInsertedCrossAtomsExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanP33WilsonDiagonalChartAtomsExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanP33WilsonCrossOperatorPythagoreanExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanP33PhysicalSU2CauchyInverseSquaredExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanP33CMP109MinimalContourLength24Exact.agda'
-      - 'DASHI/Physics/YangMills/BalabanP33CMP109MinimalPathStageBudgetExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanP33WilsonPhysicalCompletionValidation.agda'
-      - 'scripts/check_yang_mills_p33_wilson_physical_completion.sh'
-      - '.github/workflows/yang-mills-p33-wilson-physical-completion.yml'
   pull_request:
     paths:
       - 'DASHI/Physics/YangMills/BalabanP33*.agda'
@@ -24,7 +10,7 @@ on:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:

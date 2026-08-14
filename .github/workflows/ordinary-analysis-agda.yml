@@ -1,8 +1,6 @@
 name: Ordinary analysis Agda
 
 on:
-  push:
-    branches: [master]
   pull_request:
     paths:
       - 'DASHI/Analysis/*.agda'
@@ -16,7 +14,7 @@ on:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:

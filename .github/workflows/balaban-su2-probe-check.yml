@@ -1,8 +1,6 @@
 name: Balaban SU2 carrier check
 
 on:
-  push:
-    branches: [master]
   pull_request:
     paths:
       - 'DASHI/Physics/YangMills/BalabanRealRingSolverProbe.agda'
@@ -10,7 +8,7 @@ on:
       - '.github/workflows/balaban-su2-probe-check.yml'
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:
