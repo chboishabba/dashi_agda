@@ -2,8 +2,7 @@ name: Yang Mills highest alpha round 35 plaquette curl
 
 on:
   push:
-    branches:
-      - 'agent/ym-clay-alpha-round35-plaquette-curl-stress'
+    branches: [master]
     paths:
       - 'DASHI/Physics/YangMills/**'
       - 'Docs/support/reference/YangMillsPlaquetteCurlRound35.md'
@@ -20,6 +19,11 @@ on:
       - 'scripts/check_yang_mills_clay_highest_alpha_round35.sh'
       - '.github/workflows/yang-mills-clay-highest-alpha-round35.yml'
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

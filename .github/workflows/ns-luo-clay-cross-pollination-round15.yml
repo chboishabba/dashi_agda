@@ -2,8 +2,7 @@ name: NS Luo Clay cross-pollination round 15
 
 on:
   push:
-    branches:
-      - 'agent/ns-luo-clay-cross-pollination-round15'
+    branches: [master]
     paths:
       - 'DASHI/Physics/Common/**'
       - 'DASHI/Physics/Closure/**'
@@ -20,6 +19,11 @@ on:
       - 'scripts/run_agda29_parallel_check.sh'
       - '.github/workflows/ns-luo-clay-cross-pollination-round15.yml'
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

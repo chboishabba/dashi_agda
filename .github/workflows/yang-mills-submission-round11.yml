@@ -2,8 +2,7 @@ name: Yang-Mills submission round eleven
 
 on:
   push:
-    branches:
-      - 'agent/ym-round11-ratio-p06-audit'
+    branches: [master]
     paths:
       - 'DASHI/Physics/YangMills/BalabanBishopConfiguredTermIdentificationExact.agda'
       - 'DASHI/Physics/YangMills/BalabanBishopFullHalfBallParityChartExact.agda'
@@ -32,6 +31,11 @@ on:
       - 'scripts/check_yang_mills_submission_round11.sh'
       - '.github/workflows/yang-mills-submission-round11.yml'
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   focused-agda:

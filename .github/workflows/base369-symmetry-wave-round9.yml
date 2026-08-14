@@ -2,7 +2,7 @@ name: Base369 symmetry wave round 9
 
 on:
   push:
-    branches: ['agent/monster-3b-central-character-inertia-round5']
+    branches: [master]
   pull_request:
     branches:
       - 'master'
@@ -22,6 +22,11 @@ on:
       - 'scripts/check_base369_symmetry_wave_round9.sh'
       - '.github/workflows/base369-symmetry-wave-round9.yml'
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

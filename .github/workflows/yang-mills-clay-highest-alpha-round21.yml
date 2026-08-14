@@ -2,8 +2,7 @@ name: Yang-Mills Clay highest-alpha round 21
 
 on:
   push:
-    branches:
-      - 'agent/ym-clay-alpha-round21-literal-hessian-cancellation'
+    branches: [master]
   pull_request:
     paths:
       - 'DASHI/Physics/YangMills/BalabanP33LiteralGaugeConstraintCancellationExact.agda'
@@ -13,6 +12,11 @@ on:
       - 'scripts/check_yang_mills_clay_highest_alpha_round21.sh'
       - '.github/workflows/yang-mills-clay-highest-alpha-round21.yml'
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

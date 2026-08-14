@@ -2,8 +2,7 @@ name: Ordinary analysis Agda
 
 on:
   push:
-    branches:
-      - agent/ordinary-analysis-concrete-rational
+    branches: [master]
   pull_request:
     paths:
       - 'DASHI/Analysis/*.agda'
@@ -14,6 +13,11 @@ on:
       - 'DASHI/Analysis/OrdinaryAnalysisBundle.agda'
       - '.github/workflows/ordinary-analysis-agda.yml'
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

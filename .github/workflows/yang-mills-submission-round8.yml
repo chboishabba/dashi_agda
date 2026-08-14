@@ -3,8 +3,7 @@ name: Yang-Mills submission round 8
 on:
   workflow_dispatch:
   push:
-    branches:
-      - agent/balaban-primary-averaging-qstar
+    branches: [master]
     paths:
       - 'DASHI/Analysis/**'
       - 'DASHI/Foundations/**'
@@ -32,7 +31,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: yang-mills-submission-round8-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
   cancel-in-progress: true
 
 jobs:

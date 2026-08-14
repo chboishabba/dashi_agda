@@ -2,7 +2,7 @@ name: NS Luo uniform commutator round 27
 
 on:
   push:
-    branches: ['agent/ns-luo-uniform-commutator-round27']
+    branches: [master]
   pull_request:
     branches:
       - 'agent/ns-luo-galerkin-critical-ledger-round26'
@@ -15,6 +15,11 @@ on:
       - 'scripts/check_ns_luo_uniform_commutator_round27.sh'
       - '.github/workflows/ns-luo-uniform-commutator-round27.yml'
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

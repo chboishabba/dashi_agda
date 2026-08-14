@@ -2,6 +2,7 @@ name: Category polis boundary Agda check
 
 on:
   push:
+    branches: [master]
     paths:
       - 'DASHI/Foundations/CategoryPolisBoundary.agda'
       - 'DASHI/Foundations/CategoryPolisBoundaryTests.agda'
@@ -13,7 +14,7 @@ on:
       - '.github/workflows/category-polis-boundary.yml'
 
 concurrency:
-  group: category-polis-boundary-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
   cancel-in-progress: true
 
 permissions:

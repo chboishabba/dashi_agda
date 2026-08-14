@@ -2,7 +2,7 @@ name: Monster 3B projector resolution round 3
 
 on:
   push:
-    branches: ['agent/monster-3b-projector-resolution-round3']
+    branches: [master]
   pull_request:
     branches:
       - 'agent/monster-3b-projector-core-round2'
@@ -15,6 +15,11 @@ on:
       - 'scripts/check_monster_3b_projector_resolution_round3.sh'
       - '.github/workflows/monster-3b-projector-resolution-round3.yml'
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

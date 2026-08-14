@@ -2,11 +2,14 @@ name: Highest-alpha cumulative validation through round 41
 
 on:
   push:
-    branches:
-      - 'agent/ym-clay-alpha-round40-multiplier-locality-correlated-singleton'
-      - 'agent/ym-ns-alpha-round41-physical-producer-kernel'
+    branches: [master]
   pull_request:
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

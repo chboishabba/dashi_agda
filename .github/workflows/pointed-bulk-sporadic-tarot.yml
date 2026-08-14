@@ -2,10 +2,7 @@ name: pointed-bulk-sporadic-tarot
 
 on:
   push:
-    branches:
-      - 'agent/moonshine-pointed-bulk-sporadic-tarot'
-      - 'agent/jmd-sporadic-tarot-v2-correspondence'
-      - 'agent/sporadic-stage-symmetry-euler-totalisation'
+    branches: [master]
   pull_request:
     types: [opened, synchronize, reopened, ready_for_review]
     paths:
@@ -50,6 +47,11 @@ on:
       - 'scripts/check_pointed_bulk_sporadic_tarot.sh'
       - '.github/workflows/pointed-bulk-sporadic-tarot.yml'
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

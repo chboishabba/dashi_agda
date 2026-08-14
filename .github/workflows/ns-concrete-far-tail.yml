@@ -2,6 +2,7 @@ name: NS concrete far-tail
 
 on:
   push:
+    branches: [master]
     paths:
       - "DASHI/Physics/Closure/NSCompactGammaConcreteFarTail*.agda"
       - ".github/workflows/ns-concrete-far-tail.yml"
@@ -9,6 +10,11 @@ on:
     paths:
       - "DASHI/Physics/Closure/NSCompactGammaConcreteFarTail*.agda"
       - ".github/workflows/ns-concrete-far-tail.yml"
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   typecheck:

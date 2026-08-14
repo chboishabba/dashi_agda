@@ -2,10 +2,14 @@ name: Yang-Mills harmonic cross-pollination round 27
 
 on:
   push:
-    branches:
-      - 'agent/ym-clay-harmonic-cross-pollination-round27'
+    branches: [master]
   pull_request:
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

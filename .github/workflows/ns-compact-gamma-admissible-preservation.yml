@@ -2,6 +2,7 @@ name: NS compact Gamma admissible preservation
 
 on:
   push:
+    branches: [master]
     paths:
       - 'DASHI/Physics/Closure/NSCompactGammaAdmissiblePreservation.agda'
       - 'DASHI/Physics/Closure/NSCompactGammaAdmissiblePreservationTest.agda'
@@ -15,7 +16,7 @@ on:
       - '.github/workflows/ns-compact-gamma-admissible-preservation.yml'
 
 concurrency:
-  group: ns-compact-gamma-admissible-preservation-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
   cancel-in-progress: true
 
 permissions:

@@ -2,8 +2,7 @@ name: Yang-Mills Clay highest-alpha round 14
 
 on:
   push:
-    branches:
-      - 'agent/ym-clay-alpha-round14'
+    branches: [master]
     paths:
       - 'DASHI/Physics/YangMills/BalabanP33BishopHigherOrderTaylorExact.agda'
       - 'DASHI/Physics/YangMills/BalabanP33BishopInverseDexpNumeratorExact.agda'
@@ -32,6 +31,11 @@ on:
       - 'scripts/check_yang_mills_clay_highest_alpha_round14.sh'
       - '.github/workflows/yang-mills-clay-highest-alpha-round14.yml'
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   focused-agda:

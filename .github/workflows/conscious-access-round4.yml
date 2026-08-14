@@ -2,8 +2,7 @@ name: conscious-access-round4
 
 on:
   push:
-    branches:
-      - 'agent/conscious-access-round4-padic-reasoning-field'
+    branches: [master]
   pull_request:
     paths:
       - 'DASHI/Biology/TriadicKernelLiftQuotientExact.agda'
@@ -28,6 +27,11 @@ on:
       - 'scripts/check_conscious_access_round4.sh'
       - '.github/workflows/conscious-access-round4.yml'
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

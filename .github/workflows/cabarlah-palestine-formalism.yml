@@ -2,8 +2,7 @@ name: cabarlah-palestine-formalism
 
 on:
   push:
-    branches:
-      - 'agent/cabarlah-palestine-provenance-formalism'
+    branches: [master]
   pull_request:
     paths:
       - 'DASHI/Physics/Foundations/Cabarlah*'
@@ -15,6 +14,11 @@ on:
       - 'scripts/check_cabarlah_palestine_formalism.sh'
       - '.github/workflows/cabarlah-palestine-formalism.yml'
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

@@ -2,6 +2,7 @@ name: Systemic crisis signal Agda check
 
 on:
   push:
+    branches: [master]
     paths:
       - 'DASHI/Economics/SystemicCrisisSignalKernel.agda'
       - 'DASHI/Economics/SystemicCrisisSignalKernelTests.agda'
@@ -27,7 +28,7 @@ on:
       - '.github/workflows/systemic-crisis-signal.yml'
 
 concurrency:
-  group: systemic-crisis-signal-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
   cancel-in-progress: true
 
 permissions:

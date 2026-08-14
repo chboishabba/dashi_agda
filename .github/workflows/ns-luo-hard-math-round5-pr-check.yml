@@ -10,7 +10,7 @@ on:
       - '.github/workflows/ns-luo-hard-math-round5-pr-check.yml'
 
 concurrency:
-  group: ns-luo-round5-pr-${{ github.event.pull_request.number }}
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
   cancel-in-progress: true
 
 permissions:

@@ -2,7 +2,7 @@ name: Monster 3B actual kernel character round 4
 
 on:
   push:
-    branches: ['agent/monster-3b-actual-kernel-character-round4']
+    branches: [master]
   pull_request:
     branches:
       - 'agent/monster-3b-orbifold-local-module-round4'
@@ -23,6 +23,11 @@ on:
       - 'Docs/support/reference/Monster3BActualKernelCharacterRound4.md'
       - '.github/workflows/monster-3b-actual-kernel-character-round4.yml'
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

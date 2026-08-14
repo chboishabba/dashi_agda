@@ -2,6 +2,7 @@ name: Philosophy formalism
 
 on:
   push:
+    branches: [master]
     paths:
       - "DASHI/Philosophy/**"
       - "DASHI/EverythingPhilosophy.agda"
@@ -17,6 +18,11 @@ on:
       - "Docs/PhilosophyReflexiveRelationalFormalism.md"
       - "Docs/PhilosophyClosureLawsAndInstances.md"
       - ".github/workflows/philosophy.yml"
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   typecheck:

@@ -2,8 +2,7 @@ name: Yang-Mills P33 Wilson physical completion
 
 on:
   push:
-    branches:
-      - 'agent/ym-round13-five-local-physical-bounds'
+    branches: [master]
     paths:
       - 'DASHI/Physics/YangMills/BalabanP33QuaternionScalarCyclicityExact.agda'
       - 'DASHI/Physics/YangMills/BalabanP33WilsonPlacementQuaternionAtomIdentificationExact.agda'
@@ -22,6 +21,11 @@ on:
       - 'scripts/check_yang_mills_p33_wilson_physical_completion.sh'
       - '.github/workflows/yang-mills-p33-wilson-physical-completion.yml'
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   focused-agda:

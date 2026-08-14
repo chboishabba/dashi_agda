@@ -2,6 +2,7 @@ name: Physical law recovery Agda check
 
 on:
   push:
+    branches: [master]
     paths:
       - 'DASHI/Physics/Laws/**/*.agda'
       - 'DASHI/Physics/Chemistry/*.agda'
@@ -13,7 +14,7 @@ on:
       - '.github/workflows/physical-law-recovery.yml'
 
 concurrency:
-  group: physical-law-recovery-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
   cancel-in-progress: true
 
 permissions:

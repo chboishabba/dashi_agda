@@ -2,6 +2,7 @@ name: NS transfer capture and Schur audit
 
 on:
   push:
+    branches: [master]
     paths:
       - 'scripts/ns_triad_transfer_rank_capture_curve.py'
       - 'scripts/ns_shell_angle_weighted_schur_audit.py'
@@ -19,6 +20,11 @@ on:
       - 'scripts/data/examples/ns_shell_angle_aggregate_example.json'
       - 'docs/ns_transfer_capture_and_shell_schur_audit.md'
       - '.github/workflows/ns-transfer-capture-schur-audit.yml'
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

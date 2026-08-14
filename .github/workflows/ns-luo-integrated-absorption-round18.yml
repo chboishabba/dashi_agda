@@ -2,8 +2,7 @@ name: NS Luo integrated absorption round 18
 
 on:
   push:
-    branches:
-      - 'agent/ns-luo-integrated-absorption-round18'
+    branches: [master]
     paths:
       - 'DASHI/Physics/Common/**'
       - 'DASHI/Physics/Closure/**'
@@ -18,6 +17,11 @@ on:
       - 'scripts/check_ns_luo_integrated_absorption_round18.sh'
       - '.github/workflows/ns-luo-integrated-absorption-round18.yml'
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

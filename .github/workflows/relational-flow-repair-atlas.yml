@@ -2,6 +2,7 @@ name: Relational flow repair atlas Agda check
 
 on:
   push:
+    branches: [master]
     paths:
       - 'DASHI/RelationalFlowRepairAtlas.agda'
       - 'DASHI/FullRelationalFlowRepairHyperfabric.agda'
@@ -75,7 +76,7 @@ on:
       - '.github/workflows/relational-flow-repair-atlas.yml'
 
 concurrency:
-  group: relational-flow-repair-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
   cancel-in-progress: true
 
 permissions:

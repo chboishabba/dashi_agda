@@ -3,8 +3,7 @@ name: NS Luo weighted-Schur continuation tranche
 on:
   workflow_dispatch:
   push:
-    branches:
-      - agent/balaban-primary-averaging-qstar
+    branches: [master]
     paths:
       - 'DASHI/Physics/Units/MechanicalDimensionExact.agda'
       - 'DASHI/Physics/Units/PhysicalNormalizationExact.agda'
@@ -59,7 +58,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: ns-luo-weighted-schur-flux-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
   cancel-in-progress: true
 
 jobs:

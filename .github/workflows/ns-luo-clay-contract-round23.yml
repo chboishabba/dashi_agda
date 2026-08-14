@@ -2,8 +2,7 @@ name: NS Luo Clay contract round 23
 
 on:
   push:
-    branches:
-      - 'agent/ns-luo-clay-contract-round23'
+    branches: [master]
     paths:
       - 'DASHI/Physics/Closure/**'
       - 'DASHI/Papers/NavierStokes/**'
@@ -21,6 +20,11 @@ on:
       - 'scripts/check_ns_luo_clay_contract_round23.sh'
       - '.github/workflows/ns-luo-clay-contract-round23.yml'
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

@@ -2,7 +2,7 @@ name: Stage Euler tree complement round 2
 
 on:
   push:
-    branches: ['agent/stage-euler-tree-complement-round2']
+    branches: [master]
   pull_request:
     branches:
       - 'agent/sporadic-stage-symmetry-euler-totalisation'
@@ -17,6 +17,11 @@ on:
       - 'scripts/check_stage_euler_tree_complement_round2.sh'
       - '.github/workflows/stage-euler-tree-complement-round2.yml'
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

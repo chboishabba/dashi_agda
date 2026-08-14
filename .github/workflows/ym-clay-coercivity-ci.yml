@@ -2,9 +2,7 @@ name: YM Clay coercivity clean Agda CI
 
 on:
   push:
-    branches:
-      - master
-      - 'agent/ym-*'
+    branches: [master]
     paths:
       - 'DASHI/Physics/YangMills/BalabanPath4*.agda'
       - 'DASHI/Physics/YangMills/BalabanPhysical*.agda'
@@ -35,6 +33,11 @@ on:
       - 'scripts/generate_path_physical_bridge.py'
       - '.github/workflows/ym-clay-coercivity-ci.yml'
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

@@ -2,8 +2,7 @@ name: YM exact quantitative certificates
 
 on:
   push:
-    branches:
-      - 'agent/ym-periodic-physical-closure'
+    branches: [master]
     paths:
       - 'DASHI/Physics/YangMills/BalabanBoolean4*.agda'
       - 'DASHI/Physics/YangMills/BalabanPath*.agda'
@@ -66,6 +65,11 @@ on:
       - 'scripts/generate_path_physical_bridge.py'
       - '.github/workflows/ym-boolean4-exact.yml'
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

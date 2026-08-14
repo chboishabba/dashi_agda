@@ -16,6 +16,7 @@ on:
       - 'scripts/data/outputs/check_ns_seven_analytic_leaf_ledger.json'
       - '.github/workflows/ns-frontier-reductions.yml'
   push:
+    branches: [master]
     paths:
       - 'DASHI/Physics/Closure/NSPeriodic*.agda'
       - 'DASHI/Physics/Closure/NSPairIncidenceKernelProgram.agda'
@@ -34,7 +35,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: ns-frontier-reductions-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
   cancel-in-progress: true
 
 jobs:

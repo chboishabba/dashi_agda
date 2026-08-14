@@ -2,6 +2,7 @@ name: Nonlinear exploded sparsity Agda check
 
 on:
   push:
+    branches: [master]
     paths:
       - 'DASHI/Core/MinimalKernelAlgebra.agda'
       - 'DASHI/Core/NonlinearExplodedSparsity.agda'
@@ -35,7 +36,7 @@ on:
       - '.github/workflows/nonlinear-exploded-sparsity.yml'
 
 concurrency:
-  group: nonlinear-exploded-sparsity-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
   cancel-in-progress: true
 
 permissions:

@@ -26,6 +26,11 @@ on:
       - '.github/workflows/zizek-pnf-formalism.yml'
   workflow_dispatch:
 
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   focused-agda:
     runs-on: ubuntu-latest
