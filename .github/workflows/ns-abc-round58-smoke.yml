@@ -10,7 +10,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: ns-abc-round58-${{ github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -21,7 +21,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          submodules: recursive
           fetch-depth: 1
 
       - uses: cachix/install-nix-action@v31
