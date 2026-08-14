@@ -87,7 +87,7 @@ oneStepCounts = refl , refl
 
 twoStepFastOutnumbersSlow :
   slow populationAfterTwo < fast populationAfterTwo
-twoStepFastOutnumbersSlow = s≤s (s≤s (s≤s z≤n))
+twoStepFastOutnumbersSlow = ≤-refl
 
 ------------------------------------------------------------------------
 -- Logical boundary: reachability/selection bias is not inevitability.
