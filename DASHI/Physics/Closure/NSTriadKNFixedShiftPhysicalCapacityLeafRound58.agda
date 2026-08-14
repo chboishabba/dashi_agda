@@ -13,6 +13,7 @@ open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ; 0ℚ; _-_; _*_; _≤_; _<_; nonNegative)
 import Data.Rational.Properties as ℚP
+open import Relation.Binary.PropositionalEquality using (trans)
 
 record PhysicalOwnerFluxBlockIdentification : Set₁ where
   field
@@ -26,6 +27,14 @@ record PhysicalOwnerFluxBlockIdentification : Set₁ where
       blockShiftCoefficient ≡ correctedShiftCoefficient
 
 open PhysicalOwnerFluxBlockIdentification public
+
+ownerRemainderIsBlockCorrection :
+  (identification : PhysicalOwnerFluxBlockIdentification) →
+  ∀ n → ownerRemainder identification n ≡ blockCorrection identification n
+ownerRemainderIsBlockCorrection identification n =
+  trans
+    (ownerToFlux identification n)
+    (physicalFluxCorrectionIsBlockCorrection identification n)
 
 correctionHeadroomAfterData :
   (correctionHeadroom dataRemainder : Nat → ℚ) → Nat → ℚ
