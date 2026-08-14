@@ -17,6 +17,9 @@ open import Data.List.Base using (List; []; _∷_)
 import DASHI.Biology.DNAChemistryCarrier as DNA
 import DASHI.Biology.DNAChemistryEnergyAlgebra as Energy
 
+_≢_ : ∀ {A : Set} → A → A → Set
+x ≢ y = x ≡ y → ⊥
+
 ------------------------------------------------------------------------
 -- A nontrivial exact operational energy model over the existing owner.
 ------------------------------------------------------------------------
