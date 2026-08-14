@@ -148,7 +148,8 @@ canonicalPassiveStep = activeEnergyStep 10 0 3 7 refl
 
 passiveDissipationLowersStoredEnergy :
   storedAfter canonicalPassiveStep < storedBefore canonicalPassiveStep
-passiveDissipationLowersStoredEnergy = s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s z≤n))))))
+passiveDissipationLowersStoredEnergy =
+  s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s z≤n)))))))
 
 canonicalActiveStep : ActiveEnergyStep
 canonicalActiveStep = activeEnergyStep 10 4 3 11 refl
