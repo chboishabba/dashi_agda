@@ -15,6 +15,7 @@ FILES=(
   DASHI/Crypto/MLKEMNTTCombinedCouplingConnectivityExact.agda
   DASHI/Crypto/MLKEMCandidateMoveFanoutExact.agda
   DASHI/Crypto/MLKEMLocalityAreaInvariantExact.agda
+  DASHI/Crypto/MLKEMButterflyStageLocalityInvariantExact.agda
   DASHI/Crypto/MLKEMBaseCaseConditionedResidualExact.agda
   DASHI/Crypto/ConditionedResidualAmbiguityRegressionExact.agda
   DASHI/Crypto/ConditionalMateAmbiguityExact.agda
@@ -22,6 +23,8 @@ FILES=(
   DASHI/Crypto/MLKEMNTTActualCBD2ScalarCollisionExact.agda
   DASHI/Crypto/MLKEMNTTActualCBD2SliceCouplingExact.agda
   DASHI/Crypto/MLKEMNTTActualCBD2TwoScalarRefinementExact.agda
+  DASHI/Crypto/MLKEMNTTActualCBD2FullTripleListProfileExact.agda
+  DASHI/Crypto/MLKEMNTTActualCBD2ConditionalListMassExact.agda
   DASHI/Crypto/FiniteMLWEListDecodingGeometryExact.agda
   DASHI/Crypto/ObservationAcquisitionCostExact.agda
   DASHI/Crypto/KeyConfirmationObservationRefinementExact.agda
@@ -58,8 +61,8 @@ grep -q 'algorithm9StageCount' DASHI/Crypto/MLKEMNTTDataflowCouplingExact.agda
 grep -q 'combinedCouplingHasNoNontrivialDisconnectedCut' DASHI/Crypto/MLKEMNTTCombinedCouplingConnectivityExact.agda
 grep -q 'mlKem1024PublicResidualMoveFanout' DASHI/Crypto/MLKEMCandidateMoveFanoutExact.agda
 grep -q 'mlKem512AreasEqual' DASHI/Crypto/MLKEMLocalityAreaInvariantExact.agda
-grep -q 'mlKem768AreasEqual' DASHI/Crypto/MLKEMLocalityAreaInvariantExact.agda
-grep -q 'mlKem1024AreasEqual' DASHI/Crypto/MLKEMLocalityAreaInvariantExact.agda
+grep -q 'mlKem1024StageArea' DASHI/Crypto/MLKEMButterflyStageLocalityInvariantExact.agda
+grep -q 'mlKem1024AllStagesEqual' DASHI/Crypto/MLKEMButterflyStageLocalityInvariantExact.agda
 grep -q 'conditionedResidual0' DASHI/Crypto/MLKEMBaseCaseConditionedResidualExact.agda
 grep -q 'conditionedResidual1' DASHI/Crypto/MLKEMBaseCaseConditionedResidualExact.agda
 grep -q 'conditionedEquationLeavesTwoPlausibleSecrets' DASHI/Crypto/ConditionedResidualAmbiguityRegressionExact.agda
@@ -67,9 +70,12 @@ grep -q 'noUniqueMateFromConditioningAlone' DASHI/Crypto/ConditionalMateAmbiguit
 grep -q 'leftCandidateGivesGlobal' DASHI/Crypto/ConditionalReconciliationSearchExact.agda
 grep -q 'actualCBD2SliceScalarCollision' DASHI/Crypto/MLKEMNTTActualCBD2ScalarCollisionExact.agda
 grep -q 'nonCartesianCBD2NTTSlice' DASHI/Crypto/MLKEMNTTActualCBD2SliceCouplingExact.agda
-grep -q 'gamma2Is2761' DASHI/Crypto/MLKEMNTTActualCBD2TwoScalarRefinementExact.agda
-grep -q 'oneScalarListSizeIs2' DASHI/Crypto/MLKEMNTTActualCBD2TwoScalarRefinementExact.agda
 grep -q 'twoScalarListSizeIs1' DASHI/Crypto/MLKEMNTTActualCBD2TwoScalarRefinementExact.agda
+grep -q 'allTriplesCountIs125' DASHI/Crypto/MLKEMNTTActualCBD2FullTripleListProfileExact.agda
+grep -q 'firstScalarHasExactly16CollisionPairs' DASHI/Crypto/MLKEMNTTActualCBD2FullTripleListProfileExact.agda
+grep -q 'twoActualScalarsHaveNoCollisionPair' DASHI/Crypto/MLKEMNTTActualCBD2FullTripleListProfileExact.agda
+grep -q 'firstScalarListMassIs157' DASHI/Crypto/MLKEMNTTActualCBD2ConditionalListMassExact.agda
+grep -q 'jointTwoScalarListMassIs125' DASHI/Crypto/MLKEMNTTActualCBD2ConditionalListMassExact.agda
 grep -q 'threshold0ListSize' DASHI/Crypto/FiniteMLWEListDecodingGeometryExact.agda
 grep -q 'threshold2ListSize' DASHI/Crypto/FiniteMLWEListDecodingGeometryExact.agda
 grep -q 'labConfirmationCost2NetGain' DASHI/Crypto/FiniteMLWEConfirmationObservationExact.agda
@@ -91,8 +97,8 @@ grep -q 'statisticalGainDoesNotImplySearchGain' DASHI/Crypto/FiniteGuessingProba
 grep -q 'sameLogicalTransitionDifferentPhysicalObservation' DASHI/Crypto/RepresentationLeakageGeometryExact.agda
 
 grep -q '10.6028/NIST.FIPS.203' DASHI/Crypto/MLKEMBaseCaseConditionedResidualExact.agda
-grep -q '10.6028/NIST.FIPS.203' DASHI/Crypto/MLKEMCandidateMoveFanoutExact.agda
-grep -q '10.6028/NIST.FIPS.203' DASHI/Crypto/MLKEMNTTActualCBD2TwoScalarRefinementExact.agda
+grep -q '10.6028/NIST.FIPS.203' DASHI/Crypto/MLKEMButterflyStageLocalityInvariantExact.agda
+grep -q '10.6028/NIST.FIPS.203' DASHI/Crypto/MLKEMNTTActualCBD2FullTripleListProfileExact.agda
 
 if command -v agda >/dev/null 2>&1; then
   agda -i . -i src DASHI/Crypto/BlueTeamSearchObservationRound17.agda
