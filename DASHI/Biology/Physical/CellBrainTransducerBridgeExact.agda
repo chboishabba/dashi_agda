@@ -1,6 +1,16 @@
 module DASHI.Biology.Physical.CellBrainTransducerBridgeExact where
 
 ------------------------------------------------------------------------
+-- SOURCE-FACING MOTIVATION
+--
+-- David Beniaguev, Idan Segev, Michael London,
+-- "Single cortical neurons as deep artificial neural networks",
+-- Neuron 109 (2021). DOI: 10.1016/j.neuron.2021.07.002.
+--
+-- Michael London and Michael Hausser,
+-- "Dendritic computation", Annual Review of Neuroscience 28 (2005),
+-- 503-532. DOI: 10.1146/annurev.neuro.28.061604.135703.
+--
 -- Brains are specialized cellular networks.  This bridge does not identify a
 -- tissue with an ANN; it proves that the existing bioelectric cell-network
 -- update has the same stateful-transducer signature already used by the brain
