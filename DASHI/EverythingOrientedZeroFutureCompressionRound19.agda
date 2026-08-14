@@ -7,6 +7,8 @@ import DASHI.EverythingLLMFutureCompressionRound18
 import DASHI.Cognition.PNF.OrientedZeroFutureQuotientExact
 import DASHI.Cognition.PNF.OrientedZeroCanonicalFutureExact
 import DASHI.Cognition.PNF.OrientedZeroPartitionRefinementExact
+import DASHI.Cognition.PNF.OrientedZeroCanonicalPartitionPresentationExact
+import DASHI.Cognition.PNF.OrientedZeroCertifiedCompilerExact
 import DASHI.Cognition.PNF.OrientedZeroBitMinimalityExact
 import DASHI.Cognition.PNF.OrientedZeroCeilLog2Exact
 import DASHI.Cognition.PNF.OrientedZeroConditionalResidualCardinalityExact
@@ -17,6 +19,8 @@ import DASHI.Cognition.PNF.FutureRateDistortionGenericExact
 import DASHI.Core.GeneralResidualFibreCardinalityExact
 import DASHI.Core.GenericFuturePartitionRefinementExact
 import DASHI.Core.FiniteRankedRefinementStabilizationExact
+import DASHI.Core.StablePartitionCanonicalFutureBridgeExact
+import DASHI.Core.CertifiedFiniteFutureQuotientCompilerExact
 import DASHI.Cognition.PNF.ApproximateMultimodalFutureEquivalenceExact
 import DASHI.Cognition.PNF.DynamicApproximateMultiResolutionErrorExact
 import DASHI.Cognition.PNF.SpectralGrokkingPhaseDynamicsExact
