@@ -10,11 +10,9 @@ module DASHI.Physics.Closure.NSTriadKNComNormalizedFibreMassLeafRound58 where
 
 open import Agda.Builtin.Bool using (true)
 open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.List using ([])
 open import Agda.Builtin.Nat using (Nat; suc)
-open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _/_; _≤_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _/_; _≤_)
 import Data.Integer.Base as Int
-open import Data.Rational.Tactic.RingSolver using (solve)
 
 import DASHI.Physics.Closure.NSTriadKNComCommonHatSupportLeafRound58 as Hat
 import DASHI.Physics.Closure.NSTriadKNComDyadicHatWidthOneRound46Exact as HatWidth
@@ -22,11 +20,6 @@ import DASHI.Physics.Closure.NSTriadKNComDyadicHatWidthOneRound46Exact as HatWid
 sameShellTarget adjacentShellTarget : ℚ
 sameShellTarget = Int.+ 17 / 64
 adjacentShellTarget = Int.+ 65 / 512
-
-normalizedBandwidthOneEndpoint :
-  sameShellTarget + adjacentShellTarget + adjacentShellTarget
-  ≡ Int.+ 133 / 256
-normalizedBandwidthOneEndpoint = solve []
 
 record PhysicalNormalizedOddPQGramRealization
     (support : Hat.PhysicalOddPQCommonHatIdentification) : Set₁ where
