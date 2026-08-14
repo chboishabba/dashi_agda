@@ -3,18 +3,17 @@ module DASHI.Crypto.MLKEMNTTPriorCutNoGoExact where
 ------------------------------------------------------------------------
 -- NO NONTRIVIAL DISCONNECTED CUT INSIDE ONE NTT PARITY FAMILY
 --
--- Builds on MLKEMNTTDataflowCouplingExact.  Every constant-part NTT scalar
+-- Builds on MLKEMNTTDataflowCouplingExact. Every constant-part NTT scalar
 -- coordinate structurally depends on every even source coefficient; every
 -- linear-part NTT scalar coordinate structurally depends on every odd source
--- coefficient.  Therefore a source-variable-disjoint decomposition cannot
+-- coefficient. Therefore a source-variable-disjoint decomposition cannot
 -- split one parity family into two inhabited sides.
 --
 -- This is a dataflow/separator no-go, not a statistical-independence theorem
 -- and not a cryptographic hardness theorem.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Equality using (_≡_)
 open import Data.Empty using (⊥)
 
 import DASHI.Crypto.MLKEMNTTDataflowCouplingExact as NTT
@@ -30,7 +29,7 @@ record DisconnectedComponentCut
     (component : NTT.ResidueComponent) : Set₁ where
   constructor disconnectedComponentCut
   field
-    side : Nat → Side
+    side : NTT.Index128 → Side
     noCrossSharedDependency : ∀ {i j} →
       side i ≡ leftSide →
       side j ≡ rightSide →
@@ -45,7 +44,7 @@ record NontrivialCutWitness
     (cut : DisconnectedComponentCut component) : Set where
   constructor nontrivialCutWitness
   field
-    leftIndex rightIndex : Nat
+    leftIndex rightIndex : NTT.Index128
     leftReallyLeft : side cut leftIndex ≡ leftSide
     rightReallyRight : side cut rightIndex ≡ rightSide
 
@@ -79,7 +78,7 @@ linearComponentHasNoNontrivialDisconnectedCut cut witness =
 ------------------------------------------------------------------------
 -- The useful blue-team conclusion is narrow: any NTT-based decomposition that
 -- claims source-variable-disjoint local prior lanes must cross or condition on
--- these globally shared parity families.  It may still admit a useful bounded
+-- these globally shared parity families. It may still admit a useful bounded
 -- separator under stronger structure, but disconnected factorisation is ruled
 -- out at this structural dependency level.
 ------------------------------------------------------------------------
