@@ -27,6 +27,7 @@ jobs:
         run: |
           set -euo pipefail
           export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
+          export DASHI_STATUS_DIR="$RUNNER_TEMP/dashi-status"
           export AGDA_LOG_PATH="$GITHUB_WORKSPACE/ym-rational-quaternion-split.log"
           scripts/run_agda29_parallel_check.sh \
             DASHI/Physics/YangMills/BalabanP33RationalQuaternionCoreExact.agda \
