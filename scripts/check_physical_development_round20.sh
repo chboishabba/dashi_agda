@@ -11,6 +11,7 @@ fi
 
 FILES=(
   DASHI/Biology/Physical/SIBiologyDimensionsExact.agda
+  DASHI/Biology/Physical/PhysicalBiologyDimensionAlgebraExact.agda
   DASHI/Biology/Physical/FiniteReactionDiffusionConservationExact.agda
   DASHI/Biology/Physical/ChemicalAffinityEntropyProductionExact.agda
   DASHI/Biology/Physical/CompartmentMembraneTransportExact.agda
@@ -18,6 +19,7 @@ FILES=(
   DASHI/Biology/Physical/SIBioelectricNetworkAdapterExact.agda
   DASHI/Biology/Physical/MechanochemicalMorphogenesisSIExact.agda
   DASHI/Biology/Physical/DevelopmentalGoalFactorizationExact.agda
+  DASHI/Biology/Physical/DevelopmentalGoalFamilyAttractorExact.agda
   DASHI/Biology/Physical/GenomePhysicalParameterCompilerExact.agda
   DASHI/Biology/Physical/DevelopmentalHiddenStateFutureDefectExact.agda
   DASHI/Biology/Physical/PadicPhysicalParameterProjectionExact.agda
@@ -39,6 +41,8 @@ done
 
 grep -q 'MolarFlux' DASHI/Biology/Physical/SIBiologyDimensionsExact.agda
 grep -q 'ForceDensity' DASHI/Biology/Physical/SIBiologyDimensionsExact.agda
+grep -q 'forceDensityMatchesDensityAcceleration' DASHI/Biology/Physical/PhysicalBiologyDimensionAlgebraExact.agda
+grep -q 'advectiveForceDensityMatchesPressureGradient' DASHI/Biology/Physical/PhysicalBiologyDimensionAlgebraExact.agda
 grep -q 'diffusionConservesTotal' DASHI/Biology/Physical/FiniteReactionDiffusionConservationExact.agda
 grep -q 'drivenStepBalance' DASHI/Biology/Physical/FiniteReactionDiffusionConservationExact.agda
 grep -q 'canonicalAffinityIsFour' DASHI/Biology/Physical/ChemicalAffinityEntropyProductionExact.agda
@@ -50,6 +54,8 @@ grep -q 'fieldGeometryChangesAnchor' DASHI/Biology/Physical/MechanochemicalMorph
 grep -q 'locationIsNotDeterminedByGenericHand' DASHI/Biology/Physical/DevelopmentalGoalFactorizationExact.agda
 grep -q 'ownerIsNotDeterminedByHandHere' DASHI/Biology/Physical/DevelopmentalGoalFactorizationExact.agda
 grep -q 'sameGenomeDifferentContextCanChangeOutcome' DASHI/Biology/Physical/DevelopmentalGoalFactorizationExact.agda
+grep -q 'sameHighLevelGoalHasDistinctFineRealisations' DASHI/Biology/Physical/DevelopmentalGoalFamilyAttractorExact.agda
+grep -q 'repairIsIdempotent' DASHI/Biology/Physical/DevelopmentalGoalFamilyAttractorExact.agda
 grep -q 'contextChangesCompiledChannelParameter' DASHI/Biology/Physical/GenomePhysicalParameterCompilerExact.agda
 grep -q 'dnaUVStillExact' DASHI/Biology/Physical/GenomePhysicalParameterCompilerExact.agda
 grep -q 'morphologyOnlyDynamicDefect' DASHI/Biology/Physical/DevelopmentalHiddenStateFutureDefectExact.agda
@@ -57,14 +63,17 @@ grep -q 'morphologyProjectionCannotBeDynamicallySafe' DASHI/Biology/Physical/Dev
 grep -q 'finePhysicalParametersDiffer' DASHI/Biology/Physical/PadicPhysicalParameterProjectionExact.agda
 grep -q 'phaseTripleSixRoundTrip' DASHI/Biology/Physical/Harmonic369HelixLiftExact.agda
 grep -q 'sameCircularProjectionDifferentHistory' DASHI/Biology/Physical/Harmonic369HelixLiftExact.agda
+grep -q 'helicalHistoriesRemainDistinct' DASHI/Biology/Physical/Harmonic369HelixLiftExact.agda
 grep -q 'replicationAppearsBeforeAgency' DASHI/Biology/Physical/PhysicalOriginsLadderExact.agda
 grep -q 'damageCorrected' DASHI/Biology/Physical/PhysicalOriginsLadderExact.agda
 grep -q 'bioelectricNetworkAsStatefulTransducer' DASHI/Biology/Physical/CellBrainTransducerBridgeExact.agda
 grep -q 'zeroStateVoltageIsDimensionChecked' DASHI/Biology/Physical/DimensionalPhysicalDevelopmentalStateExact.agda
 grep -q 'physicalDevelopmentalStepFactorises' DASHI/Biology/Physical/PhysicalDevelopmentalOperatorSystemExact.agda
 grep -q 'chemicalSourceSurvivesDownstreamOperators' DASHI/Biology/Physical/PhysicalDevelopmentalOperatorSystemExact.agda
+grep -q 'regulatoryAndElectricalOperatorsDoNotCommute' DASHI/Biology/Physical/PhysicalDevelopmentalOperatorSystemExact.agda
 grep -q 'morphologyOnlyFutureSafetyFails' DASHI/Biology/Physical/PhysicalDevelopmentalOperatorSystemExact.agda
 
+grep -q '10.1103/PhysRev.4.345' DASHI/Biology/Physical/PhysicalBiologyDimensionAlgebraExact.agda
 grep -q '10.1098/rstb.1952.0012' DASHI/Biology/Physical/FiniteReactionDiffusionConservationExact.agda
 grep -q '10.1113/jphysiol.1952.sp004764' DASHI/Biology/Physical/ElectrochemicalMembranePowerExact.agda
 grep -q '10.1038/191144a0' DASHI/Biology/Physical/CompartmentMembraneTransportExact.agda
