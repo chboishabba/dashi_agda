@@ -8,28 +8,23 @@ module DASHI.Crypto.MLKEMNTTActualCBD2SliceCouplingExact where
 -- "Module-Lattice-Based Key-Encapsulation Mechanism Standard", FIPS 203,
 -- 2024. DOI: 10.6028/NIST.FIPS.203.
 --
--- FIPS 203 fixes q=3329 and zeta=17, with zeta^128 = -1.  In the quadratic
--- factor formula, residue i=0 uses gamma0=zeta=17.  For i=1,
+-- FIPS 203 fixes q=3329 and zeta=17, with zeta^128 = -1. In the quadratic
+-- factor formula, residue i=0 uses gamma0=zeta=17. For i=1,
 -- BitRev7(1)=64, so gamma1=zeta^129=-zeta=3312 mod 3329.
 --
 -- Restrict one CBD2 polynomial to two even source coefficients and fix all
--- others to zero.  Writing centered digits x,y in {-2,-1,0,1,2}, the constant
+-- others to zero. Writing centered digits x,y in {-2,-1,0,1,2}, the constant
 -- parts of these first two quadratic residues are
 --
 --   u = x + 17 y,
---   v = x - 17 y              (over the centered integer lift; no wrap occurs).
+--   v = x - 17 y.
 --
--- After harmless translations into Nat, we use
+-- After a harmless translation into Nat, use
 --   U = xd + 17 yd,
---   V = xd + 17 (4-yd),
--- where xd,yd are the centered digits shifted into {0,1,2,3,4}.
---
--- U=0 is locally reachable and V=0 is locally reachable, but the crossed local
--- pair (U,V)=(0,0) is not in the joint image.  Thus an actual FIPS-constant
--- NTT slice already witnesses non-Cartesian transported CBD support.
---
--- This is a support-geometry theorem, not an ML-KEM attack or an independence
--- theorem for the full 256-coordinate distribution.
+--   V = xd + 17 (4-yd).
+-- U=0 and V=0 are each locally reachable, but (U,V)=(0,0) is not jointly
+-- reachable. This gives an actual FIPS-constant non-Cartesian transported-prior
+-- support witness on a source-faithful CBD2 slice.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -94,7 +89,7 @@ vZeroReachable : encodeV s04 ≡ 0
 vZeroReachable = refl
 
 ------------------------------------------------------------------------
--- U=0 uniquely identifies the source slice d0,d0 inside this 5x5 support.
+-- U=0 uniquely identifies d0,d0 inside this 5x5 support.
 ------------------------------------------------------------------------
 
 uZeroOnlyS00 : ∀ source → encodeU source ≡ 0 → source ≡ s00
@@ -157,20 +152,24 @@ crossedMarginalsNotJointlyReachable source equality =
   vImpossible = subst (λ selected → encodeV selected ≡ 0) sourceIs00 vEquality
 
 ------------------------------------------------------------------------
--- The two local marginal values exist independently, while their product point
--- does not belong to the transported joint support.
+-- Proof-bearing non-Cartesian support witness.
 ------------------------------------------------------------------------
 
 record NonCartesianSupportWitness : Set where
   constructor nonCartesianSupportWitness
   field
-    localUReachable : Set
-    localVReachable : Set
-    crossedPairImpossible : Set
+    uWitness vWitness : SourceSlice
+    localUReachable : encodeU uWitness ≡ 0
+    localVReachable : encodeV vWitness ≡ 0
+    crossedPairImpossible :
+      ∀ source → jointEncode source ≡ crossedMarginalPair → ⊥
+
+open NonCartesianSupportWitness public
 
 nonCartesianCBD2NTTSlice : NonCartesianSupportWitness
 nonCartesianCBD2NTTSlice =
   nonCartesianSupportWitness
-    (encodeU s00 ≡ 0)
-    (encodeV s04 ≡ 0)
-    ((source : SourceSlice) → jointEncode source ≡ crossedMarginalPair → ⊥)
+    s00 s04
+    uZeroReachable
+    vZeroReachable
+    crossedMarginalsNotJointlyReachable
