@@ -17,8 +17,10 @@ FILES=(
   DASHI/Cognition/PNF/GrokkingInvariantSubspaceSelectionExact.agda
   DASHI/Cognition/PNF/CanonicalFutureMinimalDynamicalRealizationExact.agda
   DASHI/Cognition/PNF/CanonicalFutureObservableAlgebraExact.agda
+  DASHI/Cognition/PNF/CanonicalFutureKoopmanLinearExact.agda
   DASHI/Cognition/PNF/FutureQuotientInvariantRealizationCompilerExact.agda
   DASHI/Cognition/PNF/OrientedZeroMinimalDynamicalRealizationExact.agda
+  DASHI/Cognition/PNF/OrientedZeroKoopmanMatrixExact.agda
   DASHI/EverythingOperatorFutureRealizationRound23.agda
 )
 
@@ -68,12 +70,25 @@ grep -q 'descendAfterLiftRecoversQuotientObservable' DASHI/Cognition/PNF/Canonic
 grep -q 'actionPullback' DASHI/Cognition/PNF/CanonicalFutureObservableAlgebraExact.agda
 grep -q 'finePullbackFactorsThroughQuotientPullback' DASHI/Cognition/PNF/CanonicalFutureObservableAlgebraExact.agda
 
+# Exact rational Koopman linearity on quotient observables.
+grep -q 'koopmanAdditive' DASHI/Cognition/PNF/CanonicalFutureKoopmanLinearExact.agda
+grep -q 'koopmanHomogeneous' DASHI/Cognition/PNF/CanonicalFutureKoopmanLinearExact.agda
+grep -q 'koopmanExactlyAdvancesFineObservation' DASHI/Cognition/PNF/CanonicalFutureKoopmanLinearExact.agda
+grep -q '10.1371/journal.pone.0150171' DASHI/Cognition/PNF/CanonicalFutureKoopmanLinearExact.agda
+
 # Finite compiler composition and oriented-zero regression.
 grep -q 'compileInvariantFutureRealization' DASHI/Cognition/PNF/FutureQuotientInvariantRealizationCompilerExact.agda
 grep -q 'stableRelationIffPresentedClass' DASHI/Cognition/PNF/FutureQuotientInvariantRealizationCompilerExact.agda
 grep -q 'compiledStableDepthIsBounded' DASHI/Cognition/PNF/FutureQuotientInvariantRealizationCompilerExact.agda
 grep -q 'waveQuotientStepIsFineStep' DASHI/Cognition/PNF/OrientedZeroMinimalDynamicalRealizationExact.agda
 grep -q 'compiledWaveStillFindsDepthOne' DASHI/Cognition/PNF/OrientedZeroMinimalDynamicalRealizationExact.agda
+
+# Concrete 4D state/observable matrix duality on the canonical Wave4 quotient.
+grep -q 'pushWaveOneHotIntertwines' DASHI/Cognition/PNF/OrientedZeroKoopmanMatrixExact.agda
+grep -q 'pullWaveIsKoopman' DASHI/Cognition/PNF/OrientedZeroKoopmanMatrixExact.agda
+grep -q 'pushPullDuality' DASHI/Cognition/PNF/OrientedZeroKoopmanMatrixExact.agda
+grep -q 'basisIndependent' DASHI/Cognition/PNF/OrientedZeroKoopmanMatrixExact.agda
+grep -q '10.1371/journal.pone.0150171' DASHI/Cognition/PNF/OrientedZeroKoopmanMatrixExact.agda
 
 if command -v agda >/dev/null 2>&1; then
   agda -i . -i src DASHI/EverythingOperatorFutureRealizationRound23.agda
