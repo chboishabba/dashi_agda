@@ -16,22 +16,19 @@ module DASHI.Physics.Closure.NSTriadKNHHBadLiteralNormalizedGenerationRound57Exa
 --
 -- ROUND 57 CONTRIBUTION
 --
--- Do not leave beta_q as a free diagnostic when the literal inherited /
--- generated / leakage carrier is already present.  Normalize the ACTUAL
--- generated+leakage contribution itself:
+-- Normalize the ACTUAL generated+leakage contribution itself:
 --
---   beta^lit_q := delta_*^{-1} 2^(q+1) (G_q + L_q).
+--   beta^lit_q := delta_*^{-1} 2^(q+1) (G_q + L_q),
 --
--- Then prove directly
+-- and prove directly
 --
 --   C_(q+1) <= alpha_q C_q + beta^lit_q.
 --
--- Consequently the tail theorem can consume the physically transparent
--- comparison
+-- Hence, after an arbitrary finite prefix, the physical tail comparison
 --
 --   beta^lit_q <= (1-alpha_q) C_*
 --
--- after an arbitrary finite prefix.  No abstract forcing majorant, uniform
+-- alone preserves the HH-bad ceiling.  No abstract forcing majorant, uniform
 -- contraction constant, or raw summability theorem is used in this lane.
 ------------------------------------------------------------------------
 
@@ -40,6 +37,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Agda.Builtin.Nat using (Nat; suc)
 import Data.Nat.Base as Nat
+import Data.Nat.Properties as NatP
 open import Data.Rational.Base using
   (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚP
@@ -164,9 +162,6 @@ record LiteralTailDepletion
     finitePrefixBelow : ∀ q → q Nat.≤ start →
       Raw.normalizedDefect physical q ≤ ceiling
 
-    -- This is the actual shellwise physical balance sought from Duhamel:
-    -- normalized generated+leaked defect is no larger than the capacity
-    -- replenished by inherited depletion.
     generatedLeakageBelowInheritedDepletion : ∀ q → start Nat.≤ q →
       literalNormalizedGeneration physical q
       ≤ (1ℚ - Raw.alpha physical q) * ceiling
@@ -220,7 +215,7 @@ literalTailBelow :
   Tail.TailAt (start depletion) q →
   Raw.normalizedDefect physical q ≤ ceiling depletion
 literalTailBelow depletion Tail.atStart =
-  finitePrefixBelow depletion (start depletion) Nat.≤-refl
+  finitePrefixBelow depletion (start depletion) NatP.≤-refl
 literalTailBelow depletion (Tail.atStep {q} witness) =
   literalTailStepPreservesCeiling depletion q
     (Tail.tailAtOrder witness)
