@@ -26,7 +26,7 @@ targetFixed = refl
 
 positiveDefectStrictlyDecreases :
   (n : Nat) → repairStep (suc n) < suc n
-positiveDefectStrictlyDecreases n = s≤s ≤-refl
+positiveDefectStrictlyDecreases n = ≤-refl
 
 repairTwice : Defect → Defect
 repairTwice x = repairStep (repairStep x)
