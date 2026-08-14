@@ -2,8 +2,7 @@ name: Conscious access round 8 VOA grade semantics
 
 on:
   push:
-    branches:
-      - 'agent/conscious-access-round8-voa-grade-semantics'
+    branches: [master]
     paths:
       - 'DASHI/Biology/**'
       - 'DASHI/Physics/Common/**'
@@ -18,6 +17,11 @@ on:
       - 'scripts/check_conscious_access_round8_voa_grade_semantics.sh'
       - '.github/workflows/conscious-access-round8-voa-grade-semantics.yml'
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

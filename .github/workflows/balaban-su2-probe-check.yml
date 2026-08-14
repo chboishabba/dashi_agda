@@ -2,10 +2,7 @@ name: Balaban SU2 carrier check
 
 on:
   push:
-    branches:
-      - codex/balaban-su2-quaternion-carrier
-      - codex/balaban-su2-quaternion-carrier-clean
-      - codex/balaban-su2-radial-inverse-family
+    branches: [master]
   pull_request:
     paths:
       - 'DASHI/Physics/YangMills/BalabanRealRingSolverProbe.agda'
@@ -13,7 +10,7 @@ on:
       - '.github/workflows/balaban-su2-probe-check.yml'
 
 concurrency:
-  group: balaban-su2-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
   cancel-in-progress: true
 
 permissions:

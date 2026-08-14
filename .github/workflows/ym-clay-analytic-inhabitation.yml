@@ -2,8 +2,7 @@ name: YM Clay analytic inhabitation
 
 on:
   push:
-    branches:
-      - 'agent/ym-periodic-physical-closure'
+    branches: [master]
     paths:
       - 'DASHI/Physics/YangMills/BalabanClayAnalyticConcreteDefinitions.agda'
       - 'DASHI/Physics/YangMills/BalabanExactPatchTransferCalculus.agda'
@@ -54,6 +53,11 @@ on:
       - 'scripts/check_ym_periodic_physical_closure.py'
       - '.github/workflows/ym-clay-analytic-inhabitation.yml'
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   focused-agda:

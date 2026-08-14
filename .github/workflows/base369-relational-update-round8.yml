@@ -2,7 +2,7 @@ name: Base369 relational update round 8
 
 on:
   push:
-    branches: ['agent/monster-3b-central-character-inertia-round5']
+    branches: [master]
   pull_request:
     branches:
       - 'master'
@@ -22,6 +22,11 @@ on:
       - 'scripts/check_base369_relational_update_round8.sh'
       - '.github/workflows/base369-relational-update-round8.yml'
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

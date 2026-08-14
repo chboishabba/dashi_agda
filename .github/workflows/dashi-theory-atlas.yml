@@ -47,6 +47,11 @@ on:
       - "flake.nix"
       - ".github/workflows/dashi-theory-atlas.yml"
 
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   typecheck-triadic-spectral:
     runs-on: ubuntu-latest

@@ -2,8 +2,7 @@ name: UBP epistemic lattice boundary
 
 on:
   push:
-    branches:
-      - agent/ubp-epistemic-lattice-boundary
+    branches: [master]
     paths:
       - 'DASHI/Foundations/UBP/**'
       - 'Docs/support/reference/UBPEpistemicLatticeBoundary.md'
@@ -16,6 +15,11 @@ on:
       - 'scripts/check_ubp_epistemic_lattice_boundary.py'
       - '.github/workflows/ubp-epistemic-lattice-boundary.yml'
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   focused-boundary:

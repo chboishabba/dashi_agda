@@ -11,6 +11,11 @@ on:
       - 'scripts/check_unification_round5.sh'
   workflow_dispatch:
 
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
 permissions:
   contents: read
 

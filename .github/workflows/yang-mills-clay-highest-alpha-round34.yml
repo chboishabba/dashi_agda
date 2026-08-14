@@ -2,8 +2,7 @@ name: Yang Mills highest alpha round 34 physical radius and W-local
 
 on:
   push:
-    branches:
-      - 'agent/ym-clay-alpha-round34-physical-radius-wlocal'
+    branches: [master]
     paths:
       - 'DASHI/Physics/YangMills/**'
       - 'Docs/support/reference/YangMillsPhysicalRadiusWLocalRound34.md'
@@ -20,6 +19,11 @@ on:
       - 'scripts/check_yang_mills_clay_highest_alpha_round34.sh'
       - '.github/workflows/yang-mills-clay-highest-alpha-round34.yml'
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

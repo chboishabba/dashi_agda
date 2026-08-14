@@ -2,8 +2,7 @@ name: NS Luo commutator continuum round 14
 
 on:
   push:
-    branches:
-      - 'agent/ns-luo-commutator-continuum-round14'
+    branches: [master]
     paths:
       - 'DASHI/Physics/Closure/**'
       - 'scripts/check_ns_luo_commutator_continuum_round14.sh'
@@ -18,6 +17,11 @@ on:
       - 'scripts/run_agda29_parallel_check.sh'
       - '.github/workflows/ns-luo-commutator-continuum-round14.yml'
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

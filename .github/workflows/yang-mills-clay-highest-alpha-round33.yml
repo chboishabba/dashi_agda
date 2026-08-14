@@ -2,8 +2,7 @@ name: Yang Mills highest alpha round 33 paper audit and all-group guards
 
 on:
   push:
-    branches:
-      - 'agent/ym-clay-alpha-round33-paper-audit-allgroups-scale'
+    branches: [master]
     paths:
       - 'DASHI/Physics/YangMills/**'
       - 'Docs/support/reference/YangMillsPaperAuditRound33.md'
@@ -20,6 +19,11 @@ on:
       - 'scripts/check_yang_mills_clay_highest_alpha_round33.sh'
       - '.github/workflows/yang-mills-clay-highest-alpha-round33.yml'
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

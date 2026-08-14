@@ -2,9 +2,7 @@ name: conscious-access-round5
 
 on:
   push:
-    branches:
-      - 'agent/conscious-access-round5-dashi-yijing-moonshine'
-      - 'agent/unification-round5-constants-dimension-matter-cosmology'
+    branches: [master]
   pull_request:
     paths:
       - 'DASHI/Biology/**'
@@ -20,6 +18,11 @@ on:
       - 'scripts/check_unification_round5.sh'
       - '.github/workflows/conscious-access-round5.yml'
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

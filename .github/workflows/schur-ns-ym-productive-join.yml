@@ -2,6 +2,7 @@ name: Schur NS YM productive join
 
 on:
   push:
+    branches: [master]
     paths:
       - 'DASHI/Analysis/BlockSchurStructure.agda'
       - 'DASHI/Analysis/BlockSchurCoercivity.agda'
@@ -25,7 +26,7 @@ on:
       - 'scripts/run_agda29_parallel_check.sh'
 
 concurrency:
-  group: schur-ns-ym-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
   cancel-in-progress: true
 
 permissions:

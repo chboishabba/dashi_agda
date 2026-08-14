@@ -31,6 +31,11 @@ on:
       - "Docs/support/reference/FrameBearingRelationalIntervention.md"
       - ".github/workflows/ndim-sheaf-logistic-cross-pollination.yml"
 
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   typecheck:
     runs-on: ubuntu-latest

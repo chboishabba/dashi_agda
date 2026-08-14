@@ -3,8 +3,7 @@ name: Physics scaling and limit spine
 on:
   workflow_dispatch:
   push:
-    branches:
-      - agent/balaban-primary-averaging-qstar
+    branches: [master]
     paths:
       - 'DASHI/Physics/Units/**'
       - 'DASHI/Physics/Limits/**'
@@ -45,7 +44,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: physics-scaling-limit-spine-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
   cancel-in-progress: true
 
 jobs:

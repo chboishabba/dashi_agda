@@ -2,8 +2,7 @@ name: conscious-access-network-of-networks
 
 on:
   push:
-    branches:
-      - 'agent/conscious-access-network-of-networks'
+    branches: [master]
     paths:
       - 'DASHI/Biology/StateDependentMultiplexTransducer.agda'
       - 'DASHI/Biology/ProductiveTransformCoherence.agda'
@@ -36,6 +35,11 @@ on:
       - 'scripts/check_conscious_access_network_of_networks.sh'
       - '.github/workflows/conscious-access-network-of-networks.yml'
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   agda:

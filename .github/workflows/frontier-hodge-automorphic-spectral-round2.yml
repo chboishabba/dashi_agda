@@ -2,8 +2,7 @@ name: Frontier Hodge automorphic spectral round two
 
 on:
   push:
-    branches:
-      - 'agent/frontier-hodge-automorphic-spectral-crosspollination'
+    branches: [master]
     paths:
       - 'DASHI/Mathematics/LinearAlgebra/RationalThreeWayHodgeCoordinateUniquenessExact.agda'
       - 'DASHI/Mathematics/AlgebraicGeometry/ProjectiveSpaceHodgeBasisExact.agda'
@@ -40,6 +39,11 @@ on:
       - 'scripts/check_frontier_hodge_automorphic_spectral_round2.sh'
       - '.github/workflows/frontier-hodge-automorphic-spectral-round2.yml'
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

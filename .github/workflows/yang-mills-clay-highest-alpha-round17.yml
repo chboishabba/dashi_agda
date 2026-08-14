@@ -2,8 +2,7 @@ name: Yang-Mills Clay highest-alpha round 17
 
 on:
   push:
-    branches:
-      - 'agent/ym-clay-alpha-round17-coupled-rg-duhamel'
+    branches: [master]
   pull_request:
     paths:
       - 'DASHI/Physics/YangMills/BalabanP33BishopInverseDexpActualEndpointModulusExact.agda'
@@ -15,6 +14,11 @@ on:
       - 'scripts/check_yang_mills_clay_highest_alpha_round17.sh'
       - '.github/workflows/yang-mills-clay-highest-alpha-round17.yml'
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

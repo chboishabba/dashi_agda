@@ -2,6 +2,7 @@ name: NS compact Gamma inward boundaries
 
 on:
   push:
+    branches: [master]
     paths:
       - 'DASHI/Physics/Closure/NSCompactGammaInwardBoundaryEstimates.agda'
       - 'DASHI/Physics/Closure/NSCompactGammaInwardBoundaryEstimatesTest.agda'
@@ -15,7 +16,7 @@ on:
       - '.github/workflows/ns-compact-gamma-inward-boundaries.yml'
 
 concurrency:
-  group: ns-compact-gamma-inward-boundaries-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
   cancel-in-progress: true
 
 permissions:

@@ -10,6 +10,11 @@ on:
       - '.github/workflows/ns-luo-terminal-geometry-round6.yml'
   workflow_dispatch:
 
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   check:
     runs-on: ubuntu-latest

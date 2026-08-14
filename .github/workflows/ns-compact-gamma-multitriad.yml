@@ -2,6 +2,7 @@ name: NS compact Gamma multi-triad audit
 
 on:
   push:
+    branches: [master]
     paths:
       - 'scripts/ns_compact_gamma_multitriad_evolved_audit.py'
       - 'scripts/tests/test_ns_compact_gamma_multitriad_evolved_audit.py'
@@ -17,7 +18,7 @@ on:
       - '.github/workflows/ns-compact-gamma-multitriad.yml'
 
 concurrency:
-  group: ns-compact-gamma-multitriad-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
   cancel-in-progress: true
 
 permissions:

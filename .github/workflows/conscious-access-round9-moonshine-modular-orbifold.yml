@@ -2,8 +2,7 @@ name: Conscious access round 9 Moonshine modular orbifold
 
 on:
   push:
-    branches:
-      - 'agent/conscious-access-round9-moonshine-modular-orbifold-lie'
+    branches: [master]
     paths:
       - 'DASHI/Biology/**'
       - 'scripts/check_conscious_access_round9_moonshine_modular_orbifold.sh'
@@ -16,6 +15,11 @@ on:
       - 'scripts/check_conscious_access_round9_moonshine_modular_orbifold.sh'
       - '.github/workflows/conscious-access-round9-moonshine-modular-orbifold.yml'
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

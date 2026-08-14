@@ -2,7 +2,7 @@ name: Base369 process hyperfabric round 6
 
 on:
   push:
-    branches: ['agent/monster-3b-central-character-inertia-round5']
+    branches: [master]
   pull_request:
     branches:
       - 'agent/monster-3b-orbifold-local-module-round4'
@@ -19,6 +19,11 @@ on:
       - 'scripts/check_base369_process_hyperfabric_round6.sh'
       - '.github/workflows/base369-process-hyperfabric-round6.yml'
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

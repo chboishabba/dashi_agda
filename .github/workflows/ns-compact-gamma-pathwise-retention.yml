@@ -2,6 +2,7 @@ name: NS compact Gamma pathwise retention
 
 on:
   push:
+    branches: [master]
     paths:
       - 'scripts/ns_compact_gamma_pathwise_retention_audit.py'
       - 'scripts/ns_compact_gamma_pathwise_retention_driver.py'
@@ -21,7 +22,7 @@ on:
       - '.github/workflows/ns-compact-gamma-pathwise-retention.yml'
 
 concurrency:
-  group: ns-compact-gamma-pathwise-retention-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
   cancel-in-progress: true
 
 permissions:

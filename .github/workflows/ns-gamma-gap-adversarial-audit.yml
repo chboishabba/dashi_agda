@@ -2,6 +2,7 @@ name: NS gamma-gap adversarial audit
 
 on:
   push:
+    branches: [master]
     paths:
       - 'scripts/ns_triad_gamma_gap_adversarial_audit.py'
       - 'scripts/ns_triad_gamma_gap_core.py'
@@ -23,6 +24,11 @@ on:
       - 'scripts/data/examples/ns_triad_gamma_gap_example.json'
       - 'docs/ns_triad_gamma_gap_adversarial_audit.md'
       - '.github/workflows/ns-gamma-gap-adversarial-audit.yml'
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

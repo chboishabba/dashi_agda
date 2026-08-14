@@ -2,8 +2,7 @@ name: NS Luo filtered defect excursion round 21
 
 on:
   push:
-    branches:
-      - 'agent/ns-luo-filtered-defect-excursion-round21'
+    branches: [master]
     paths:
       - 'DASHI/Physics/Closure/**'
       - 'docs/ns-luo-filtered-defect-excursion-round21.md'
@@ -19,6 +18,11 @@ on:
       - 'scripts/check_ns_luo_filtered_defect_excursion_round21.sh'
       - '.github/workflows/ns-luo-filtered-defect-excursion-round21.yml'
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

@@ -7,6 +7,11 @@ on:
       - '.github/workflows/dna-chemistry-sheet-codec-completion.yml'
   workflow_dispatch:
 
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   agda:
     runs-on: ubuntu-latest

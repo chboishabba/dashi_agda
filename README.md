@@ -3,6 +3,10 @@
 This repo is a formal-and-bridge workspace around the DASHI program.
 For a new serious reader, the important split is:
 
+Repository automation follows a resource-conscious, newest-run-wins policy:
+see [`.github/WORKFLOW_PHILOSOPHY.md`](.github/WORKFLOW_PHILOSOPHY.md) before
+adding or broadening a GitHub Actions workflow.
+
 - `proved`: the canonical Agda theorem spine and the specific closure claims it currently discharges
 - `bridge`: documents and modules that connect the formal spine to physics-facing interpretations without claiming full derivation
 - `packaging`: summary surfaces that assemble current lanes without strengthening theorems
