@@ -11,6 +11,8 @@ module DASHI.Biology.Physical.PhysicalDevelopmentalOperatorSystemExact where
 open import DASHI.Core.Prelude
 
 import DASHI.Biology.Physical.FiniteReactionDiffusionConservationExact as RD
+import DASHI.Biology.Physical.ChemicalAffinityEntropyProductionExact as Chemistry
+import DASHI.Biology.Physical.CompartmentMembraneTransportExact as Compartment
 import DASHI.Biology.Physical.ElectrochemicalMembranePowerExact as Power
 import DASHI.Biology.Physical.MechanochemicalMorphogenesisSIExact as Mech
 import DASHI.Biology.Physical.DevelopmentalGoalFactorizationExact as Goal
@@ -122,6 +124,8 @@ morphologyOnlyFutureSafetyFails = Future.morphologyProjectionCannotBeDynamically
 record PhysicalDevelopmentalOwners : Set₁ where
   field
     reactionDiffusionSI : RD.ReactionDiffusionSISignature
+    chemicalDissipationSI : Chemistry.ChemicalDissipationSISignature
+    membraneCompartmentSI : Compartment.MembraneCompartmentSISignature
     membranePowerSI : Power.MembranePowerSISignature
     tissueMechanicsSI : Mech.TissueMechanicsSISignature
     bioelectricSINetwork : Bioelectric.BioelectricNetwork
@@ -133,6 +137,8 @@ open PhysicalDevelopmentalOwners public
 canonicalPhysicalDevelopmentalOwners : PhysicalDevelopmentalOwners
 canonicalPhysicalDevelopmentalOwners = record
   { reactionDiffusionSI = RD.canonicalReactionDiffusionSISignature
+  ; chemicalDissipationSI = Chemistry.canonicalChemicalDissipationSISignature
+  ; membraneCompartmentSI = Compartment.canonicalMembraneCompartmentSISignature
   ; membranePowerSI = Power.canonicalMembranePowerSISignature
   ; tissueMechanicsSI = Mech.canonicalTissueMechanicsSISignature
   ; bioelectricSINetwork = BioSI.canonicalSIBioelectricNetwork
