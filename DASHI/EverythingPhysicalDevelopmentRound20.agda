@@ -1,0 +1,19 @@
+module DASHI.EverythingPhysicalDevelopmentRound20 where
+
+-- Cumulative theorem surface through oriented-zero / future compression round 19.
+import DASHI.EverythingOrientedZeroFutureCompressionRound19
+
+-- Round-20 physical biology / developmental operator tranche.
+import DASHI.Biology.Physical.SIBiologyDimensionsExact
+import DASHI.Biology.Physical.FiniteReactionDiffusionConservationExact
+import DASHI.Biology.Physical.ChemicalAffinityEntropyProductionExact
+import DASHI.Biology.Physical.CompartmentMembraneTransportExact
+import DASHI.Biology.Physical.ElectrochemicalMembranePowerExact
+import DASHI.Biology.Physical.SIBioelectricNetworkAdapterExact
+import DASHI.Biology.Physical.MechanochemicalMorphogenesisSIExact
+import DASHI.Biology.Physical.DevelopmentalGoalFactorizationExact
+import DASHI.Biology.Physical.DevelopmentalHiddenStateFutureDefectExact
+import DASHI.Biology.Physical.PadicPhysicalParameterProjectionExact
+import DASHI.Biology.Physical.PhysicalOriginsLadderExact
+import DASHI.Biology.Physical.CellBrainTransducerBridgeExact
+import DASHI.Biology.Physical.PhysicalDevelopmentalOperatorSystemExact
