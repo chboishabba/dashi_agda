@@ -10,7 +10,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: dashi-global-${{ github.ref }}
+  group: ns-abc-round58-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
