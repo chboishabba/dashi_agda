@@ -1,0 +1,44 @@
+module DASHI.Physics.Closure.NSTriadKNFixedShiftPhysicalCapacityLeafRound58 where
+
+------------------------------------------------------------------------
+-- Lightweight C-leaf.
+--
+-- The owner/flux and capacity statements are expressed over their literal
+-- Nat-indexed rational observables.  Concrete nine-owner and Luo fixed-shift
+-- records can be connected by an adapter, without making this analytic leaf
+-- import the complete consumer graph.
+------------------------------------------------------------------------
+
+open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Nat using (Nat)
+open import Data.Rational.Base using (ℚ; 0ℚ; _-_; _*_; _≤_; _<_) 
+
+record PhysicalOwnerFluxBlockIdentification : Set₁ where
+  field
+    ownerRemainder integratedFluxCorrection blockCorrection : Nat → ℚ
+    blockShiftCoefficient correctedShiftCoefficient : ℚ
+
+    ownerToFlux : ∀ n → ownerRemainder n ≡ integratedFluxCorrection n
+    physicalFluxCorrectionIsBlockCorrection :
+      ∀ n → integratedFluxCorrection n ≡ blockCorrection n
+    blockShiftCoefficientIsPhysical :
+      blockShiftCoefficient ≡ correctedShiftCoefficient
+
+open PhysicalOwnerFluxBlockIdentification public
+
+correctionHeadroomAfterData :
+  (correctionHeadroom dataRemainder : Nat → ℚ) → Nat → ℚ
+correctionHeadroomAfterData correctionHeadroom dataRemainder n =
+  correctionHeadroom n - dataRemainder n
+
+record UniformFixedShiftProductCapacity
+    (integralCritical correctionHeadroom dataRemainder : Nat → ℚ) : Set₁ where
+  field
+    uniformCoefficient : ℚ
+    uniformCoefficientPositive : 0ℚ < uniformCoefficient
+    criticalIntegralNonnegative : ∀ n → 0ℚ ≤ integralCritical n
+    uniformProductFitsEveryBlock : ∀ n →
+      uniformCoefficient * integralCritical n
+      ≤ correctionHeadroomAfterData correctionHeadroom dataRemainder n
+
+open UniformFixedShiftProductCapacity public
