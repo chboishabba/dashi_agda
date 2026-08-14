@@ -23,6 +23,9 @@ p1 = pos (suc zero)
 p2 : Int
 p2 = pos (suc (suc zero))
 
+p4 : Int
+p4 = pos (suc (suc (suc (suc zero))))
+
 n1 : Int
 n1 = negsuc zero
 
@@ -31,6 +34,9 @@ n2 = negsuc (suc zero)
 
 n3 : Int
 n3 = negsuc (suc (suc zero))
+
+n4 : Int
+n4 = negsuc (suc (suc (suc zero)))
 
 -- mol m^-2 s^-1
 MolarFlux : SI.Dimension
@@ -62,7 +68,7 @@ CurrentDensity = SI.dim n2 z z p1 z z z
 
 -- F m^-2 = kg^-1 m^-4 s^4 A^2
 CapacitancePerArea : SI.Dimension
-CapacitancePerArea = SI.dim (negsuc (suc (suc zero))) n1 (pos (suc (suc (suc (suc zero))))) p2 z z z
+CapacitancePerArea = SI.dim n4 n1 p4 p2 z z z
 
 -- J K^-1 s^-1 = kg m^2 s^-3 K^-1
 EntropyFlowRate : SI.Dimension
