@@ -2,8 +2,6 @@ module DASHI.Biology.Physical.C3CubeCyclotomicParsevalExact where
 
 ------------------------------------------------------------------------
 -- Exact Parseval/Plancherel closure for the unnormalised C3^3 DFT.
--- The transform convention in C3CubeCyclotomicFourierExact has no forward
--- 1/27 factor, so spectral energy is exactly 27 times state-space energy.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -73,10 +71,7 @@ swapXYPreservesEnergy
   (F.triple
     (F.triple a00 a01 a02)
     (F.triple a10 a11 a12)
-    (F.triple a20 a21 a22))
-  rewrite transposePreservesEnergy (F.triple a00 a10 a20)
-        | transposePreservesEnergy (F.triple a01 a11 a21)
-        | transposePreservesEnergy (F.triple a02 a12 a22) = solve-∀
+    (F.triple a20 a21 a22)) = solve-∀
 
 transformXMultipliesEnergyBy3 : (x : F.CubeSignal) →
   energy3 (F.transformX x) ≡ 3 * energy3 x
