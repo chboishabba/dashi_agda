@@ -16,7 +16,7 @@ module DASHI.Crypto.RepresentationSecurityGameExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; _+_)
 open import Data.Product using (_×_; _,_)
 
 record ObservationValue : Set where
@@ -36,14 +36,6 @@ record RepresentationSecurityProfile : Set where
     worstObservationGain : Nat
 
 open RepresentationSecurityProfile public
-
-------------------------------------------------------------------------
--- Two finite implementation geometries.
---
--- fastLocal has smaller transition cost but one strong side observation:
---   before 30 = acquisition 2 + after 8 + gain 20.
--- conservative has slower transitions but both observations have gain 3.
-------------------------------------------------------------------------
 
 fastObs0 fastObs1 : ObservationValue
 fastObs0 = observationValue 30 2 8 20 refl
@@ -70,11 +62,6 @@ fastWorstObservationGainIs20 = refl
 
 conservativeWorstObservationGainIs3 : worstObservationGain conservative ≡ 3
 conservativeWorstObservationGainIs3 = refl
-
-------------------------------------------------------------------------
--- The finite minimax winner under the observation-value objective is the
--- conservative representation even though it has slower transitions.
-------------------------------------------------------------------------
 
 data RepresentationChoice : Set where chooseFast chooseConservative : RepresentationChoice
 
