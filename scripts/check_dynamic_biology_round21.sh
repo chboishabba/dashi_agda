@@ -24,6 +24,7 @@ FILES=(
   DASHI/Biology/Physical/MultiscaleSelfBoundaryExact.agda
   DASHI/Biology/Physical/DNAHelixDihedralExact.agda
   DASHI/Biology/Physical/DNASequenceHelixPositionExact.agda
+  DASHI/Biology/Physical/DNAHelixTernaryQuantizationResidualExact.agda
   DASHI/Biology/Physical/DNAChemistryRegulatoryOperatorBridgeExact.agda
   DASHI/Biology/Physical/C3CubeFourier27Exact.agda
   DASHI/Biology/Physical/MorphogeneticControlFieldCapacityExact.agda
@@ -74,6 +75,9 @@ grep -q 'pairedSiteInvolutive' DASHI/Biology/Physical/DNAHelixDihedralExact.agda
 grep -q 'uvComplementReflection' DASHI/Biology/Physical/DNAHelixDihedralExact.agda
 grep -q 'positionAdvanceCommutesWithPhaseRotation' DASHI/Biology/Physical/DNASequenceHelixPositionExact.agda
 grep -q 'embeddingCommutesWithAdvance' DASHI/Biology/Physical/DNASequenceHelixPositionExact.agda
+grep -q 'reopenQuantizedPhaseExactly' DASHI/Biology/Physical/DNAHelixTernaryQuantizationResidualExact.agda
+grep -q 'p2p3CollapseToSameTrit' DASHI/Biology/Physical/DNAHelixTernaryQuantizationResidualExact.agda
+grep -q 'decodeEncodeExact' DASHI/Biology/Physical/DNAHelixTernaryQuantizationResidualExact.agda
 
 grep -q 'atEnergyIsZero' DASHI/Biology/Physical/DNAChemistryRegulatoryOperatorBridgeExact.agda
 grep -q 'gcEnergyIsTwo' DASHI/Biology/Physical/DNAChemistryRegulatoryOperatorBridgeExact.agda
