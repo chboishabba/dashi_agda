@@ -12,6 +12,7 @@ import DASHI.Cognition.PNF.OrientedZeroCertifiedCompilerExact
 import DASHI.Cognition.PNF.OrientedZeroBitMinimalityExact
 import DASHI.Cognition.PNF.OrientedZeroCeilLog2Exact
 import DASHI.Cognition.PNF.OrientedZeroConditionalResidualCardinalityExact
+import DASHI.Cognition.PNF.OrientedZeroExpectedResidualRateExact
 import DASHI.Cognition.PNF.OrientedZeroGrayTransitionGeometryExact
 import DASHI.Cognition.PNF.OrientedZeroPhaseOrthogonalityExact
 import DASHI.Cognition.PNF.FutureRateDistortionOrientedZeroExact
