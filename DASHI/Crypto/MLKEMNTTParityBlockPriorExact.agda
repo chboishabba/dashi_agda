@@ -8,19 +8,23 @@ module DASHI.Crypto.MLKEMNTTParityBlockPriorExact where
 -- "Module-Lattice-Based Key-Encapsulation Mechanism Standard", FIPS 203,
 -- 2024. DOI: 10.6028/NIST.FIPS.203.
 --
--- SamplePolyCBD samples source coefficients independently in R_q.  Reduction
--- modulo each quadratic factor sends even powers to the constant part and odd
--- powers to the linear part.  Thus, at the carrier/support level, a coefficient-
--- product prior admits a natural two-block split (even/odd source coefficients).
+-- SamplePolyCBD samples source coefficients independently in R_q. Reduction
+-- modulo each quadratic factor sends even source powers to the constant part
+-- and odd source powers to the linear part.  Hence a product source prior has a
+-- natural two-block even/odd transport.
 --
--- But FIPS BaseCaseMultiply (Algorithm 12) recombines the two components:
+-- FIPS BaseCaseMultiply (Algorithm 12) immediately recouples those target
+-- components:
 --   c0 = a0*b0 + a1*b1*gamma
 --   c1 = a0*b1 + a1*b0.
--- Hence the public noisy equations do not become two independent verifier
--- problems merely because the source prior admits two parity blocks.
+--
+-- Thus the useful positive decomposition is at most a two-block prior split at
+-- this level; it is not 128 independently searchable verifier lanes.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat; _*_)
 open import Data.Product using (_×_; _,_)
 
 ------------------------------------------------------------------------
@@ -69,11 +73,35 @@ sourcePriorMapsToProductTargetPrior transform even odd evenPrior oddPrior
   evenPrior , oddPrior
 
 ------------------------------------------------------------------------
+-- Exact source-block sizes across the approved module dimensions.
+------------------------------------------------------------------------
+
+parityBlockSourceCoefficientCount : Nat → Nat
+parityBlockSourceCoefficientCount k = k * 128
+
+totalSourceSecretCoefficientCount : Nat → Nat
+totalSourceSecretCoefficientCount k = 2 * parityBlockSourceCoefficientCount k
+
+mlKem512ParityBlockCount : parityBlockSourceCoefficientCount 2 ≡ 256
+mlKem512ParityBlockCount = refl
+
+mlKem768ParityBlockCount : parityBlockSourceCoefficientCount 3 ≡ 384
+mlKem768ParityBlockCount = refl
+
+mlKem1024ParityBlockCount : parityBlockSourceCoefficientCount 4 ≡ 512
+mlKem1024ParityBlockCount = refl
+
+mlKem512TwoParityBlocksCoverSecret : totalSourceSecretCoefficientCount 2 ≡ 512
+mlKem512TwoParityBlocksCoverSecret = refl
+
+mlKem768TwoParityBlocksCoverSecret : totalSourceSecretCoefficientCount 3 ≡ 768
+mlKem768TwoParityBlocksCoverSecret = refl
+
+mlKem1024TwoParityBlocksCoverSecret : totalSourceSecretCoefficientCount 4 ≡ 1024
+mlKem1024TwoParityBlocksCoverSecret = refl
+
+------------------------------------------------------------------------
 -- FIPS quadratic multiplication dependency.
---
--- The formulas are represented as dependency evidence rather than redoing
--- modular arithmetic here.  Both output components consume both secret/input
--- components, which is the exact reconciliation seam for a two-block prior.
 ------------------------------------------------------------------------
 
 data LocalComponent : Set where
@@ -99,25 +127,28 @@ baseCaseOutput0UsesBoth = outputUsesBothInputs c0Uses0 c0Uses1
 baseCaseOutput1UsesBoth : OutputUsesBothInputs component1
 baseCaseOutput1UsesBoth = outputUsesBothInputs c1Uses0 c1Uses1
 
+------------------------------------------------------------------------
+-- Claim boundary.
+------------------------------------------------------------------------
+
 record ParityPriorVerifierBoundary : Set where
   constructor parityPriorVerifierBoundary
   field
-    sourcePriorCanSplitIntoTwoParityBlocks : Set
-    baseCaseMultiplicationRecouplesBlocks : Set
+    paritySplitRequiresProductSourcePrior : Bool
+    paritySplitRequiresProductSourcePriorIsTrue :
+      paritySplitRequiresProductSourcePrior ≡ true
+    baseCaseMultiplicationRecouplesBothComponents : Bool
+    baseCaseMultiplicationRecouplesBothComponentsIsTrue :
+      baseCaseMultiplicationRecouplesBothComponents ≡ true
+    twoPriorBlocksMeanTwoIndependentVerifierProblems : Bool
+    twoPriorBlocksMeanTwoIndependentVerifierProblemsIsFalse :
+      twoPriorBlocksMeanTwoIndependentVerifierProblems ≡ false
+    parityFactorisationMeans128IndependentLanes : Bool
+    parityFactorisationMeans128IndependentLanesIsFalse :
+      parityFactorisationMeans128IndependentLanes ≡ false
 
 open ParityPriorVerifierBoundary public
 
 canonicalParityPriorVerifierBoundary : ParityPriorVerifierBoundary
 canonicalParityPriorVerifierBoundary =
-  parityPriorVerifierBoundary
-    (OutputUsesBothInputs component0)
-    (OutputUsesBothInputs component1)
-
-------------------------------------------------------------------------
--- Interpretation boundary:
---
--- * two parity blocks is a potentially useful prior factorisation;
--- * it is not 128 independently searchable NTT lanes;
--- * Algorithm-12 multiplication immediately creates a reconciliation relation
---   between the two local components inside every quadratic coordinate.
-------------------------------------------------------------------------
+  parityPriorVerifierBoundary true refl true refl false refl false refl
