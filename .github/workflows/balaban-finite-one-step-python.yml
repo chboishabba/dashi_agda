@@ -5,15 +5,13 @@ on:
     paths:
       - 'experiments/yang_mills/balaban_one_step/**'
       - '.github/workflows/balaban-finite-one-step-python.yml'
-  push:
-    branches: [master]
     paths:
       - 'experiments/yang_mills/balaban_one_step/**'
       - '.github/workflows/balaban-finite-one-step-python.yml'
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:

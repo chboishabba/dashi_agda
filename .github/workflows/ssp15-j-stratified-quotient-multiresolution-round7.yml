@@ -1,8 +1,6 @@
 name: SSP15 indexed-j stratified quotient multiresolution round 7
 
 on:
-  push:
-    branches: [master]
   pull_request:
     branches:
       - 'agent/ssp15-j-stratified-quotient-multiresolution-round7'
@@ -24,7 +22,7 @@ on:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:
@@ -44,6 +42,7 @@ jobs:
           persist-credentials: false
       - name: Install Nix
         uses: cachix/install-nix-action@630ae543ea3a38a9a4166f03376c02c50f408342 # v31
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
       - name: Cache pinned Agda environment
         uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:

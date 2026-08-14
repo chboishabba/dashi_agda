@@ -336,8 +336,9 @@ finiteRectangularSchurSquared
           * Sums.sumRational rows
               (rectRowWeightedEnergy columns matrix vector)
         ≤ upper)
-      (ℚRing.solve-∀ rowBound columnBound
-        (rectVectorNormSq columns vector))
+      (sym
+        (ℚP.*-assoc rowBound columnBound
+          (rectVectorNormSq columns vector)))
       scaledEnergyBound)
 
 finiteRectangularSchurSquaredLevel : ProofLevel

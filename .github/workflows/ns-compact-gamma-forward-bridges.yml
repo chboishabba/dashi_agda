@@ -33,8 +33,6 @@ on:
       - 'DASHI/Physics/Closure/NSPairIncidenceKernelProgram.agda'
       - 'Docs/NSCompactGammaAnalyticSynthesis.md'
       - '.github/workflows/ns-compact-gamma-forward-bridges.yml'
-  push:
-    branches: [master]
     paths:
       - 'DASHI/Analysis/FiniteWeightedKernelTransport.agda'
       - 'DASHI/Physics/Closure/NSWall1CanonicalAmplitudeProfile.agda'
@@ -68,7 +66,7 @@ on:
       - '.github/workflows/ns-compact-gamma-forward-bridges.yml'
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:
@@ -83,6 +81,7 @@ jobs:
       - uses: cachix/install-nix-action@v31
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
       - name: Restore Agda 2.9 shadow cache
         id: agda-cache
         uses: actions/cache/restore@v4

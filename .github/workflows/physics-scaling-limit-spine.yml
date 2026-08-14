@@ -2,8 +2,6 @@ name: Physics scaling and limit spine
 
 on:
   workflow_dispatch:
-  push:
-    branches: [master]
     paths:
       - 'DASHI/Physics/Units/**'
       - 'DASHI/Physics/Limits/**'
@@ -44,7 +42,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:

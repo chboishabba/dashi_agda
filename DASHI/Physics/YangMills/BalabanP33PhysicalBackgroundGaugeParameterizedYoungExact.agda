@@ -138,33 +138,33 @@ weightedDifferenceLower parameters flat defect =
       (weightedSquareNonnegative parameters flat defect))
 
 pointwiseGaugeEnergyDifferenceLower :
-  ∀ parameters background field site →
-  - (eta parameters * Signed.flatGaugePointEnergy field site)
+  ∀ parameters background fieldValue site →
+  - (eta parameters * Signed.flatGaugePointEnergy fieldValue site)
     - invEta parameters
-      * Signed.gaugeDefectPointEnergy background field site
-  ≤ Signed.backgroundGaugePointEnergy background field site
-    - Signed.flatGaugePointEnergy field site
-pointwiseGaugeEnergyDifferenceLower parameters background field site
+      * Signed.gaugeDefectPointEnergy background fieldValue site
+  ≤ Signed.backgroundGaugePointEnergy background fieldValue site
+    - Signed.flatGaugePointEnergy fieldValue site
+pointwiseGaugeEnergyDifferenceLower parameters background fieldValue site
   rewrite Signed.backgroundFirstIsFlatPlusDefect
-      background field Coordinates.coordinateX site
+      background fieldValue Coordinates.coordinateX site
         | Signed.backgroundFirstIsFlatPlusDefect
-      background field Coordinates.coordinateY site
+      background fieldValue Coordinates.coordinateY site
         | Signed.backgroundFirstIsFlatPlusDefect
-      background field Coordinates.coordinateZ site =
+      background fieldValue Coordinates.coordinateZ site =
   let
-    fx = Gauge.flatGaugeFirstFromAxes field
+    fx = Gauge.flatGaugeFirstFromAxes fieldValue
       (pair Coordinates.coordinateX site)
-    fy = Gauge.flatGaugeFirstFromAxes field
+    fy = Gauge.flatGaugeFirstFromAxes fieldValue
       (pair Coordinates.coordinateY site)
-    fz = Gauge.flatGaugeFirstFromAxes field
+    fz = Gauge.flatGaugeFirstFromAxes fieldValue
       (pair Coordinates.coordinateZ site)
 
     rx = Pointwise.backgroundGaugeDefectCoordinate
-      background field Coordinates.coordinateX site
+      background fieldValue Coordinates.coordinateX site
     ry = Pointwise.backgroundGaugeDefectCoordinate
-      background field Coordinates.coordinateY site
+      background fieldValue Coordinates.coordinateY site
     rz = Pointwise.backgroundGaugeDefectCoordinate
-      background field Coordinates.coordinateZ site
+      background fieldValue Coordinates.coordinateZ site
 
     combined =
       ℚP.+-mono-≤
@@ -178,10 +178,10 @@ pointwiseGaugeEnergyDifferenceLower parameters background field site
       lower
       ≤ Signed.coordinateSquareSum
           (λ coordinate →
-            Gauge.flatGaugeFirstFromAxes field (pair coordinate site)
+            Gauge.flatGaugeFirstFromAxes fieldValue (pair coordinate site)
             + Pointwise.backgroundGaugeDefectCoordinate
-                background field coordinate site)
-        - Signed.flatGaugePointEnergy field site)
+                background fieldValue coordinate site)
+        - Signed.flatGaugePointEnergy fieldValue site)
     (ℚRing.solve-∀
       (eta parameters) (invEta parameters)
       fx fy fz rx ry rz)
@@ -198,73 +198,73 @@ pointwiseGaugeEnergyDifferenceLower parameters background field site
       combined)
 
 backgroundGaugeEnergyDifferenceLower :
-  ∀ parameters background field →
-  - (eta parameters * Signed.flatGaugeEnergy field)
+  ∀ parameters background fieldValue →
+  - (eta parameters * Signed.flatGaugeEnergy fieldValue)
     - invEta parameters
-      * Global.globalGaugeDerivativeDefectEnergy background field
-  ≤ Signed.backgroundGaugeEnergy background field
-    - Signed.flatGaugeEnergy field
-backgroundGaugeEnergyDifferenceLower parameters background field =
+      * Global.globalGaugeDerivativeDefectEnergy background fieldValue
+  ≤ Signed.backgroundGaugeEnergy background fieldValue
+    - Signed.flatGaugeEnergy fieldValue
+backgroundGaugeEnergyDifferenceLower parameters background fieldValue =
   let
     raw =
       Global.sumSitesMonotone
         (λ site →
-          - (eta parameters * Signed.flatGaugePointEnergy field site)
+          - (eta parameters * Signed.flatGaugePointEnergy fieldValue site)
           - invEta parameters
-            * Signed.gaugeDefectPointEnergy background field site)
+            * Signed.gaugeDefectPointEnergy background fieldValue site)
         (λ site →
-          Signed.backgroundGaugePointEnergy background field site
-          - Signed.flatGaugePointEnergy field site)
+          Signed.backgroundGaugePointEnergy background fieldValue site
+          - Signed.flatGaugePointEnergy fieldValue site)
         (pointwiseGaugeEnergyDifferenceLower
-          parameters background field)
+          parameters background fieldValue)
 
     lowerExact :
       Periodic.sumSites
         (λ site →
-          - (eta parameters * Signed.flatGaugePointEnergy field site)
+          - (eta parameters * Signed.flatGaugePointEnergy fieldValue site)
           - invEta parameters
-            * Signed.gaugeDefectPointEnergy background field site)
-      ≡ - (eta parameters * Signed.flatGaugeEnergy field)
+            * Signed.gaugeDefectPointEnergy background fieldValue site)
+      ≡ - (eta parameters * Signed.flatGaugeEnergy fieldValue)
         - invEta parameters
-          * Global.globalGaugeDerivativeDefectEnergy background field
+          * Global.globalGaugeDerivativeDefectEnergy background fieldValue
     lowerExact =
       trans
         (Periodic.sumSitesSubtract
           (λ site →
-            - (eta parameters * Signed.flatGaugePointEnergy field site))
+            - (eta parameters * Signed.flatGaugePointEnergy fieldValue site))
           (λ site →
             invEta parameters
-              * Signed.gaugeDefectPointEnergy background field site))
+              * Signed.gaugeDefectPointEnergy background fieldValue site))
         (cong₂ _-_
           (trans
             (Periodic.sumSitesNeg
               (λ site →
-                eta parameters * Signed.flatGaugePointEnergy field site))
+                eta parameters * Signed.flatGaugePointEnergy fieldValue site))
             (cong -_
               (Periodic.sumSitesScale
-                (eta parameters) (Signed.flatGaugePointEnergy field))))
+                (eta parameters) (Signed.flatGaugePointEnergy fieldValue))))
           (Periodic.sumSitesScale
             (invEta parameters)
-            (Signed.gaugeDefectPointEnergy background field)))
+            (Signed.gaugeDefectPointEnergy background fieldValue)))
 
     upperExact =
       Periodic.sumSitesSubtract
-        (Signed.backgroundGaugePointEnergy background field)
-        (Signed.flatGaugePointEnergy field)
+        (Signed.backgroundGaugePointEnergy background fieldValue)
+        (Signed.flatGaugePointEnergy fieldValue)
   in
   subst
     (λ lower →
       lower
-      ≤ Signed.backgroundGaugeEnergy background field
-        - Signed.flatGaugeEnergy field)
+      ≤ Signed.backgroundGaugeEnergy background fieldValue
+        - Signed.flatGaugeEnergy fieldValue)
     lowerExact
     (subst
       (λ upper →
         Periodic.sumSites
           (λ site →
-            - (eta parameters * Signed.flatGaugePointEnergy field site)
+            - (eta parameters * Signed.flatGaugePointEnergy fieldValue site)
             - invEta parameters
-              * Signed.gaugeDefectPointEnergy background field site)
+              * Signed.gaugeDefectPointEnergy background fieldValue site)
         ≤ upper)
       upperExact raw)
 
@@ -274,30 +274,30 @@ parameterizedGaugeCoefficient parameters =
     * (eta parameters + invEta parameters * delta parameters)
 
 backgroundGaugeSignedLowerParameterized :
-  ∀ parameters background field →
+  ∀ parameters background fieldValue →
   Global.UniformInverseLinkDefectSq background (delta parameters) →
   - (parameterizedGaugeCoefficient parameters
-      * Coordinates.physicalSU2BondNormSq field)
-  ≤ Signed.backgroundGaugeEnergy background field
-    - Signed.flatGaugeEnergy field
+      * Coordinates.physicalSU2BondNormSq fieldValue)
+  ≤ Signed.backgroundGaugeEnergy background fieldValue
+    - Signed.flatGaugeEnergy fieldValue
 backgroundGaugeSignedLowerParameterized
-    parameters background field radius =
+    parameters background fieldValue radius =
   let
-    norm = Coordinates.physicalSU2BondNormSq field
+    norm = Coordinates.physicalSU2BondNormSq fieldValue
 
-    flatUpper : Signed.flatGaugeEnergy field ≤ (+ 16 / 1) * norm
+    flatUpper : Signed.flatGaugeEnergy fieldValue ≤ (+ 16 / 1) * norm
     flatUpper =
       subst
         (λ lower → lower ≤ (+ 16 / 1) * norm)
-        (sym (Signed.flatGaugeEnergyIsPhysicalDivergence field))
-        (Divergence.physicalPeriodicDivergenceUpper field)
+        (sym (Signed.flatGaugeEnergyIsPhysicalDivergence fieldValue))
+        (Divergence.physicalPeriodicDivergenceUpper fieldValue)
 
     defectUpper :
-      Global.globalGaugeDerivativeDefectEnergy background field
+      Global.globalGaugeDerivativeDefectEnergy background fieldValue
       ≤ (+ 16 / 1) * delta parameters * norm
     defectUpper =
       Global.globalGaugeDerivativeDefectUniformBound
-        background field
+        background fieldValue
         (delta parameters)
         (deltaNonnegative parameters)
         radius
@@ -333,7 +333,7 @@ backgroundGaugeSignedLowerParameterized
       ℚP.≤-refl)
     (ℚP.≤-trans combined
       (backgroundGaugeEnergyDifferenceLower
-        parameters background field))
+        parameters background fieldValue))
 
 ------------------------------------------------------------------------
 -- Relaxed radius sufficient for the configured -64 rho budget.
@@ -365,50 +365,50 @@ RelaxedInverseLinkRadius background =
   Global.UniformInverseLinkDefectSq background fourRhoSquare
 
 backgroundGaugeSignedLowerSixtyFourRelaxed :
-  ∀ background field →
+  ∀ background fieldValue →
   RelaxedInverseLinkRadius background →
   - ((+ 64 / 1) * Signed.rho
-      * Coordinates.physicalSU2BondNormSq field)
-  ≤ Signed.backgroundGaugeEnergy background field
-    - Signed.flatGaugeEnergy field
-backgroundGaugeSignedLowerSixtyFourRelaxed background field radius =
+      * Coordinates.physicalSU2BondNormSq fieldValue)
+  ≤ Signed.backgroundGaugeEnergy background fieldValue
+    - Signed.flatGaugeEnergy fieldValue
+backgroundGaugeSignedLowerSixtyFourRelaxed background fieldValue radius =
   subst
     (λ coefficient →
-      - (coefficient * Coordinates.physicalSU2BondNormSq field)
-      ≤ Signed.backgroundGaugeEnergy background field
-        - Signed.flatGaugeEnergy field)
+      - (coefficient * Coordinates.physicalSU2BondNormSq fieldValue)
+      ≤ Signed.backgroundGaugeEnergy background fieldValue
+        - Signed.flatGaugeEnergy fieldValue)
     relaxedCoefficientExact
     (backgroundGaugeSignedLowerParameterized
-      relaxedGaugeParameters background field radius)
+      relaxedGaugeParameters background fieldValue radius)
 
 backgroundGaugeResidualSignedLowerSixtyFourRelaxed :
-  ∀ background field →
+  ∀ background fieldValue →
   RelaxedInverseLinkRadius background →
   - ((+ 64 / 1) * Signed.rho
-      * Coordinates.physicalSU2BondNormSq field)
+      * Coordinates.physicalSU2BondNormSq fieldValue)
   ≤ Jets.residualSecondVariation
-      (Residual.backgroundGaugeResidual background field)
+      (Residual.backgroundGaugeResidual background fieldValue)
       - Periodic.physicalPeriodicDivergenceEnergy
-          (Bridge.asPeriodicField field)
+          (Bridge.asPeriodicField fieldValue)
 backgroundGaugeResidualSignedLowerSixtyFourRelaxed
-    background field radius =
+    background fieldValue radius =
   subst
     (λ left →
       - ((+ 64 / 1) * Signed.rho
-          * Coordinates.physicalSU2BondNormSq field)
+          * Coordinates.physicalSU2BondNormSq fieldValue)
       ≤ left - Periodic.physicalPeriodicDivergenceEnergy
-          (Bridge.asPeriodicField field))
+          (Bridge.asPeriodicField fieldValue))
     (sym
       (Residual.backgroundGaugeResidualSecondVariationIsEnergy
-        background field))
+        background fieldValue))
     (subst
       (λ right →
         - ((+ 64 / 1) * Signed.rho
-            * Coordinates.physicalSU2BondNormSq field)
-        ≤ Signed.backgroundGaugeEnergy background field - right)
-      (Signed.flatGaugeEnergyIsPhysicalDivergence field)
+            * Coordinates.physicalSU2BondNormSq fieldValue)
+        ≤ Signed.backgroundGaugeEnergy background fieldValue - right)
+      (Signed.flatGaugeEnergyIsPhysicalDivergence fieldValue)
       (backgroundGaugeSignedLowerSixtyFourRelaxed
-        background field radius))
+        background fieldValue radius))
 
 physicalGaugeParameterizedYoungLevel : ProofLevel
 physicalGaugeParameterizedYoungLevel = machineChecked

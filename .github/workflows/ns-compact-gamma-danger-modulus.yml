@@ -1,17 +1,6 @@
 name: NS compact Gamma danger expenditure modulus
 
 on:
-  push:
-    branches: [master]
-    paths:
-      - 'scripts/ns_compact_gamma_danger_expenditure_modulus_audit.py'
-      - 'scripts/ns_compact_gamma_retained_danger_modulus_audit.py'
-      - 'scripts/tests/test_ns_compact_gamma_danger_expenditure_modulus_audit.py'
-      - 'scripts/tests/test_ns_compact_gamma_retained_danger_modulus_audit.py'
-      - 'DASHI/Physics/Closure/NSCompactGammaBufferedDangerExpenditure.agda'
-      - 'DASHI/Physics/Closure/NSCompactGammaRetainedDangerExpenditure.agda'
-      - 'docs/ns_compact_gamma_danger_expenditure_modulus_audit.md'
-      - '.github/workflows/ns-compact-gamma-danger-modulus.yml'
   pull_request:
     paths:
       - 'scripts/ns_compact_gamma_danger_expenditure_modulus_audit.py'
@@ -24,7 +13,7 @@ on:
       - '.github/workflows/ns-compact-gamma-danger-modulus.yml'
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:
@@ -143,6 +132,7 @@ jobs:
       - uses: cachix/install-nix-action@v31
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
       - name: Restore Agda 2.9 shadow cache
         uses: actions/cache@v4
         with:

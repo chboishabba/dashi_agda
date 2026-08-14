@@ -111,43 +111,43 @@ flattenedEquation012Derivative :
   ∀ {Entry Base algebra}
     {leaves : Equation012DerivativeLeaves {Entry} {Base} algebra} →
   Equation012DerivativeDAG leaves → Entry
-flattenedEquation012Derivative dag =
-  endpointMultiplicationDifferential _
-    (coarseBase _)
-    (coarseDirectDerivative _)
-    (exponentialDifferential _
-      (coarseBase _)
-      (averageDifferential _
-        (principalLogDifferential _
-          (coarseBase _)
-          (relativeProductDifferential _
-            (sourceBase _) (crossingBase _) (targetBase _) (coarseBase _)
-            (sourceDerivative _) (crossingDerivative _)
-            (targetInverseDerivative _) (coarseInverseDerivative _)))))
+flattenedEquation012Derivative {algebra = algebra} {leaves = leaves} dag =
+  endpointMultiplicationDifferential algebra
+    (coarseBase leaves)
+    (coarseDirectDerivative leaves)
+    (exponentialDifferential algebra
+      (coarseBase leaves)
+      (averageDifferential algebra
+        (principalLogDifferential algebra
+          (coarseBase leaves)
+          (relativeProductDifferential algebra
+            (sourceBase leaves) (crossingBase leaves) (targetBase leaves) (coarseBase leaves)
+            (sourceDerivative leaves) (crossingDerivative leaves)
+            (targetInverseDerivative leaves) (coarseInverseDerivative leaves)))))
 
 outputDerivativeEqualsFlattenedDAG :
   ∀ {Entry Base algebra}
     {leaves : Equation012DerivativeLeaves {Entry} {Base} algebra}
     (dag : Equation012DerivativeDAG leaves) →
   outputDerivative dag ≡ flattenedEquation012Derivative dag
-outputDerivativeEqualsFlattenedDAG dag =
+outputDerivativeEqualsFlattenedDAG {algebra = algebra} {leaves = leaves} dag =
   trans
     (outputExact dag)
     (cong
-      (endpointMultiplicationDifferential _ (coarseBase _)
-        (coarseDirectDerivative _))
+      (endpointMultiplicationDifferential algebra (coarseBase leaves)
+        (coarseDirectDerivative leaves))
       (trans
         (exponentialExact dag)
         (cong
-          (exponentialDifferential _ (coarseBase _))
+          (exponentialDifferential algebra (coarseBase leaves))
           (trans
             (averageExact dag)
             (cong
-              (averageDifferential _)
+              (averageDifferential algebra)
               (trans
                 (logExact dag)
                 (cong
-                  (principalLogDifferential _ (coarseBase _))
+                  (principalLogDifferential algebra (coarseBase leaves))
                   (relativeProductExact dag))))))))
 
 ------------------------------------------------------------------------

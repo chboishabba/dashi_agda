@@ -144,9 +144,9 @@ matchedReferenceEnergy :
   Physical.PhysicalSU2BondField4 →
   Jets.LiteralPhysicalSecondVariation
     Plaquette GaugeIndex ConstraintIndex → ℚ
-matchedReferenceEnergy field dataSet =
+matchedReferenceEnergy fieldValue dataSet =
   PhysicalHodge.physicalReferenceHodgeEnergy
-    field (constraintFirstEnergy dataSet)
+    fieldValue (constraintFirstEnergy dataSet)
 
 matchedExactHessian :
   ∀ {Plaquette GaugeIndex ConstraintIndex} →
@@ -161,37 +161,37 @@ matchedSignedRemainder :
   Physical.PhysicalSU2BondField4 →
   Jets.LiteralPhysicalSecondVariation
     Plaquette GaugeIndex ConstraintIndex → ℚ
-matchedSignedRemainder field dataSet =
-  matchedExactHessian dataSet - matchedReferenceEnergy field dataSet
+matchedSignedRemainder fieldValue dataSet =
+  matchedExactHessian dataSet - matchedReferenceEnergy fieldValue dataSet
 
 constraintCancellationLeavesWilsonGaugeHodgeExact :
   ∀ {Plaquette GaugeIndex ConstraintIndex}
-    (field : Physical.PhysicalSU2BondField4)
+    (fieldValue : Physical.PhysicalSU2BondField4)
     (dataSet : Jets.LiteralPhysicalSecondVariation
       Plaquette GaugeIndex ConstraintIndex) →
-  matchedSignedRemainder field dataSet
+  matchedSignedRemainder fieldValue dataSet
   ≡ Jets.wilsonSecondVariation dataSet
       + gaugeFirstEnergy dataSet
-      - PhysicalHodge.physicalReferenceDifferenceEnergy field
-constraintCancellationLeavesWilsonGaugeHodgeExact field dataSet =
+      - PhysicalHodge.physicalReferenceDifferenceEnergy fieldValue
+constraintCancellationLeavesWilsonGaugeHodgeExact fieldValue dataSet =
   ℚRing.solve-∀
     (Jets.wilsonSecondVariation dataSet)
-    (PhysicalHodge.physicalReferenceDifferenceEnergy field)
+    (PhysicalHodge.physicalReferenceDifferenceEnergy fieldValue)
     (gaugeFirstEnergy dataSet)
     (constraintFirstEnergy dataSet)
 
 matchedReferenceRecomposesExactHessian :
   ∀ {Plaquette GaugeIndex ConstraintIndex}
-    (field : Physical.PhysicalSU2BondField4)
+    (fieldValue : Physical.PhysicalSU2BondField4)
     (dataSet : Jets.LiteralPhysicalSecondVariation
       Plaquette GaugeIndex ConstraintIndex) →
   P33.physicalHessianEnergy
-    (matchedReferenceEnergy field dataSet)
-    (matchedSignedRemainder field dataSet)
+    (matchedReferenceEnergy fieldValue dataSet)
+    (matchedSignedRemainder fieldValue dataSet)
   ≡ matchedExactHessian dataSet
-matchedReferenceRecomposesExactHessian field dataSet =
+matchedReferenceRecomposesExactHessian fieldValue dataSet =
   ℚRing.solve-∀
-    (matchedReferenceEnergy field dataSet)
+    (matchedReferenceEnergy fieldValue dataSet)
     (matchedExactHessian dataSet)
 
 literalTotalEqualsMatchedExactHessian :
@@ -270,72 +270,72 @@ physicalHalfFloorCancellationIdentity = ℚRing.solve-∀
 
 literalHessianCoerciveFromWilsonGaugeHodgeDifference :
   ∀ {Plaquette GaugeIndex ConstraintIndex}
-    (field : Physical.PhysicalSU2BondField4)
+    (fieldValue : Physical.PhysicalSU2BondField4)
     (dataSet : Jets.LiteralPhysicalSecondVariation
       Plaquette GaugeIndex ConstraintIndex) →
-  PhysicalHodge.PhysicalBondComponentMeanZero field →
+  PhysicalHodge.PhysicalBondComponentMeanZero fieldValue →
   Jets.ExactResidualBackground (Jets.gaugeResidual dataSet) →
   Jets.ExactResidualBackground (Jets.constraintResidual dataSet) →
-  - (P33.p33PhysicalFloor * Physical.physicalSU2BondNormSq field)
+  - (P33.p33PhysicalFloor * Physical.physicalSU2BondNormSq fieldValue)
     ≤ Jets.wilsonSecondVariation dataSet
         + gaugeFirstEnergy dataSet
-        - PhysicalHodge.physicalReferenceDifferenceEnergy field →
-  P33.p33PhysicalFloor * Physical.physicalSU2BondNormSq field
+        - PhysicalHodge.physicalReferenceDifferenceEnergy fieldValue →
+  P33.p33PhysicalFloor * Physical.physicalSU2BondNormSq fieldValue
     ≤ Jets.literalTotalSecondVariation dataSet
 literalHessianCoerciveFromWilsonGaugeHodgeDifference
-    field dataSet meanZero gaugeExact constraintExact coupledLower =
+    fieldValue dataSet meanZero gaugeExact constraintExact coupledLower =
   let
     matchedLower :
-      - (P33.p33PhysicalFloor * Physical.physicalSU2BondNormSq field)
-      ≤ matchedSignedRemainder field dataSet
+      - (P33.p33PhysicalFloor * Physical.physicalSU2BondNormSq fieldValue)
+      ≤ matchedSignedRemainder fieldValue dataSet
     matchedLower =
       subst
         (λ remainder →
-          - (P33.p33PhysicalFloor * Physical.physicalSU2BondNormSq field)
+          - (P33.p33PhysicalFloor * Physical.physicalSU2BondNormSq fieldValue)
           ≤ remainder)
         (sym (constraintCancellationLeavesWilsonGaugeHodgeExact
-          field dataSet))
+          fieldValue dataSet))
         coupledLower
 
     referenceLower :
-      LDL.oneSixteenth * Physical.physicalSU2BondNormSq field
-      ≤ matchedReferenceEnergy field dataSet
+      LDL.oneSixteenth * Physical.physicalSU2BondNormSq fieldValue
+      ≤ matchedReferenceEnergy fieldValue dataSet
     referenceLower =
       PhysicalHodge.physicalReferenceHodgeCoercivity
-        field (constraintFirstEnergy dataSet)
+        fieldValue (constraintFirstEnergy dataSet)
         meanZero (constraintFirstEnergyNonnegative dataSet)
 
     assembledLower :
-      P33.p33PhysicalFloor * Physical.physicalSU2BondNormSq field
+      P33.p33PhysicalFloor * Physical.physicalSU2BondNormSq fieldValue
       ≤ P33.physicalHessianEnergy
-          (matchedReferenceEnergy field dataSet)
-          (matchedSignedRemainder field dataSet)
+          (matchedReferenceEnergy fieldValue dataSet)
+          (matchedSignedRemainder fieldValue dataSet)
     assembledLower =
       subst
         (λ lower →
           lower
           ≤ P33.physicalHessianEnergy
-              (matchedReferenceEnergy field dataSet)
-              (matchedSignedRemainder field dataSet))
+              (matchedReferenceEnergy fieldValue dataSet)
+              (matchedSignedRemainder fieldValue dataSet))
         (sym
           (physicalHalfFloorCancellationIdentity
-            (Physical.physicalSU2BondNormSq field)))
+            (Physical.physicalSU2BondNormSq fieldValue)))
         (ℚP.+-mono-≤ referenceLower matchedLower)
 
     exactLower :
-      P33.p33PhysicalFloor * Physical.physicalSU2BondNormSq field
+      P33.p33PhysicalFloor * Physical.physicalSU2BondNormSq fieldValue
       ≤ matchedExactHessian dataSet
     exactLower =
       subst
         (λ upper →
-          P33.p33PhysicalFloor * Physical.physicalSU2BondNormSq field
+          P33.p33PhysicalFloor * Physical.physicalSU2BondNormSq fieldValue
           ≤ upper)
-        (matchedReferenceRecomposesExactHessian field dataSet)
+        (matchedReferenceRecomposesExactHessian fieldValue dataSet)
         assembledLower
   in
   subst
     (λ upper →
-      P33.p33PhysicalFloor * Physical.physicalSU2BondNormSq field
+      P33.p33PhysicalFloor * Physical.physicalSU2BondNormSq fieldValue
       ≤ upper)
     (sym (literalTotalEqualsMatchedExactHessian
       dataSet gaugeExact constraintExact))

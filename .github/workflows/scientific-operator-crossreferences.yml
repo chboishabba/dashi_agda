@@ -26,8 +26,6 @@ on:
       - 'DASHI/Biology/Everything.agda'
       - 'docs/scientific_operator_crossreferences.md'
       - '.github/workflows/scientific-operator-crossreferences.yml'
-  push:
-    branches: [master]
     paths:
       - 'DASHI/Analysis/FiniteOperatorReductionCore.agda'
       - 'DASHI/Analysis/StoichiometricConservation.agda'
@@ -53,7 +51,7 @@ on:
       - '.github/workflows/scientific-operator-crossreferences.yml'
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:
@@ -68,6 +66,7 @@ jobs:
       - uses: cachix/install-nix-action@v31
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
       - name: Check scientific operator bridges
         id: focused
         shell: bash

@@ -185,31 +185,31 @@ sharpCoupledLowerImpliesPhysicalSignedLower
 ------------------------------------------------------------------------
 
 scalarGlobalNormSqNonnegative :
-  ∀ field → 0ℚ ≤ Variance.globalNormSq field
-scalarGlobalNormSqNonnegative field =
+  ∀ fieldValue → 0ℚ ≤ Variance.globalNormSq fieldValue
+scalarGlobalNormSqNonnegative fieldValue =
   Schur.sumNonnegative
     (Block.physicalBlockSites Path4.side4)
-    (λ site → field site * field site)
-    (λ site → FiniteL2.squareNonnegative (field site))
+    (λ site → fieldValue site * fieldValue site)
+    (λ site → FiniteL2.squareNonnegative (fieldValue site))
 
 scalarBondNormSqNonnegative :
-  ∀ field → 0ℚ ≤ ScalarHodge.bondNormSq field
-scalarBondNormSqNonnegative field =
+  ∀ fieldValue → 0ℚ ≤ ScalarHodge.bondNormSq fieldValue
+scalarBondNormSqNonnegative fieldValue =
   Schur.sumNonnegative
     (Torus.allCyclicIndices Torus.four)
-    (λ axis → Variance.globalNormSq (ScalarHodge.bondComponent field axis))
+    (λ axis → Variance.globalNormSq (ScalarHodge.bondComponent fieldValue axis))
     (λ axis →
       scalarGlobalNormSqNonnegative
-        (ScalarHodge.bondComponent field axis))
+        (ScalarHodge.bondComponent fieldValue axis))
 
 physicalBondNormSqNonnegative :
-  ∀ field → 0ℚ ≤ Physical.physicalSU2BondNormSq field
-physicalBondNormSqNonnegative field =
+  ∀ fieldValue → 0ℚ ≤ Physical.physicalSU2BondNormSq fieldValue
+physicalBondNormSqNonnegative fieldValue =
   ℚP.+-mono-≤
     (ℚP.+-mono-≤
-      (scalarBondNormSqNonnegative (field Physical.coordinateX))
-      (scalarBondNormSqNonnegative (field Physical.coordinateY)))
-    (scalarBondNormSqNonnegative (field Physical.coordinateZ))
+      (scalarBondNormSqNonnegative (fieldValue Physical.coordinateX))
+      (scalarBondNormSqNonnegative (fieldValue Physical.coordinateY)))
+    (scalarBondNormSqNonnegative (fieldValue Physical.coordinateZ))
 
 ------------------------------------------------------------------------
 -- Exact Hodge decomposition of the coupled remainder.
@@ -246,56 +246,56 @@ physicalReferenceTurnsCoupledRemainderIntoLiteralOne
 
 literalHessianCoerciveFromSharpWilsonGaugeBudgets :
   ∀ {Plaquette GaugeIndex ConstraintIndex}
-    (field : Physical.PhysicalSU2BondField4)
+    (fieldValue : Physical.PhysicalSU2BondField4)
     (dataSet : Jets.LiteralPhysicalSecondVariation
       Plaquette GaugeIndex ConstraintIndex)
     flatCurlEnergy flatDivergenceEnergy →
-  PhysicalHodge.PhysicalBondComponentMeanZero field →
+  PhysicalHodge.PhysicalBondComponentMeanZero fieldValue →
   Jets.ExactResidualBackground (Jets.gaugeResidual dataSet) →
   Jets.ExactResidualBackground (Jets.constraintResidual dataSet) →
-  PhysicalHodge.physicalReferenceDifferenceEnergy field
+  PhysicalHodge.physicalReferenceDifferenceEnergy fieldValue
     ≡ flatCurlEnergy + flatDivergenceEnergy →
-  - (Sharp.sharpSixteenAtomBudget * Physical.physicalSU2BondNormSq field)
+  - (Sharp.sharpSixteenAtomBudget * Physical.physicalSU2BondNormSq fieldValue)
     ≤ Jets.wilsonSecondVariation dataSet - flatCurlEnergy →
-  - (configuredGaugeHodgeBudget * Physical.physicalSU2BondNormSq field)
+  - (configuredGaugeHodgeBudget * Physical.physicalSU2BondNormSq fieldValue)
     ≤ Cancel.gaugeFirstEnergy dataSet - flatDivergenceEnergy →
-  P33.p33PhysicalFloor * Physical.physicalSU2BondNormSq field
+  P33.p33PhysicalFloor * Physical.physicalSU2BondNormSq fieldValue
     ≤ Jets.literalTotalSecondVariation dataSet
 literalHessianCoerciveFromSharpWilsonGaugeBudgets
-    field dataSet flatCurlEnergy flatDivergenceEnergy
+    fieldValue dataSet flatCurlEnergy flatDivergenceEnergy
     meanZero gaugeExact constraintExact referenceExact
     wilsonLower gaugeLower =
   let
     splitLower :
-      - (sharpWilsonGaugeBudget * Physical.physicalSU2BondNormSq field)
+      - (sharpWilsonGaugeBudget * Physical.physicalSU2BondNormSq fieldValue)
       ≤ (Jets.wilsonSecondVariation dataSet - flatCurlEnergy)
         + (Cancel.gaugeFirstEnergy dataSet - flatDivergenceEnergy)
     splitLower =
       coupledSignedLowerFromSeparateBudgets
-        (Physical.physicalSU2BondNormSq field)
+        (Physical.physicalSU2BondNormSq fieldValue)
         (Jets.wilsonSecondVariation dataSet - flatCurlEnergy)
         (Cancel.gaugeFirstEnergy dataSet - flatDivergenceEnergy)
         wilsonLower gaugeLower
 
     coupledLower :
-      - (sharpWilsonGaugeBudget * Physical.physicalSU2BondNormSq field)
+      - (sharpWilsonGaugeBudget * Physical.physicalSU2BondNormSq fieldValue)
       ≤ Jets.wilsonSecondVariation dataSet
           + Cancel.gaugeFirstEnergy dataSet
-          - PhysicalHodge.physicalReferenceDifferenceEnergy field
+          - PhysicalHodge.physicalReferenceDifferenceEnergy fieldValue
     coupledLower =
       subst
         (λ upper →
-          - (sharpWilsonGaugeBudget * Physical.physicalSU2BondNormSq field)
+          - (sharpWilsonGaugeBudget * Physical.physicalSU2BondNormSq fieldValue)
           ≤ upper)
         (sym
           (physicalReferenceTurnsCoupledRemainderIntoLiteralOne
             (Jets.wilsonSecondVariation dataSet)
             (Cancel.gaugeFirstEnergy dataSet)
-            (PhysicalHodge.physicalReferenceDifferenceEnergy field)
+            (PhysicalHodge.physicalReferenceDifferenceEnergy fieldValue)
             flatCurlEnergy flatDivergenceEnergy referenceExact))
         (subst
           (λ upper →
-            - (sharpWilsonGaugeBudget * Physical.physicalSU2BondNormSq field)
+            - (sharpWilsonGaugeBudget * Physical.physicalSU2BondNormSq fieldValue)
             ≤ upper)
           (sym
             (coupledHodgeRemainderSplits
@@ -305,21 +305,21 @@ literalHessianCoerciveFromSharpWilsonGaugeBudgets
           splitLower)
 
     physicalLower :
-      - (P33.p33PhysicalFloor * Physical.physicalSU2BondNormSq field)
+      - (P33.p33PhysicalFloor * Physical.physicalSU2BondNormSq fieldValue)
       ≤ Jets.wilsonSecondVariation dataSet
           + Cancel.gaugeFirstEnergy dataSet
-          - PhysicalHodge.physicalReferenceDifferenceEnergy field
+          - PhysicalHodge.physicalReferenceDifferenceEnergy fieldValue
     physicalLower =
       sharpCoupledLowerImpliesPhysicalSignedLower
-        (Physical.physicalSU2BondNormSq field)
+        (Physical.physicalSU2BondNormSq fieldValue)
         (Jets.wilsonSecondVariation dataSet
           + Cancel.gaugeFirstEnergy dataSet
-          - PhysicalHodge.physicalReferenceDifferenceEnergy field)
-        (physicalBondNormSqNonnegative field)
+          - PhysicalHodge.physicalReferenceDifferenceEnergy fieldValue)
+        (physicalBondNormSqNonnegative fieldValue)
         coupledLower
   in
   Cancel.literalHessianCoerciveFromWilsonGaugeHodgeDifference
-    field dataSet meanZero gaugeExact constraintExact physicalLower
+    fieldValue dataSet meanZero gaugeExact constraintExact physicalLower
 
 sharpWilsonGaugeBudgetGapLevel : ProofLevel
 sharpWilsonGaugeBudgetGapLevel = machineChecked

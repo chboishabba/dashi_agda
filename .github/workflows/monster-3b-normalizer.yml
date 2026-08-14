@@ -12,8 +12,6 @@ on:
       - 'scripts/check_monster_3b_*'
       - 'scripts/render_monster_3b_certificate.py'
       - '.github/workflows/monster-3b-normalizer.yml'
-  push:
-    branches: [master]
     paths:
       - 'DASHI/Moonshine/Monster3B*.agda'
       - 'DASHI/Moonshine/LeechWeightTwo196608BridgeExact.agda'
@@ -25,7 +23,7 @@ on:
       - '.github/workflows/monster-3b-normalizer.yml'
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:

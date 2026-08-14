@@ -9,8 +9,6 @@ on:
       - "scripts/check_jacobian_noninjective_example.py"
       - "Docs/JacobianCounterexampleClosure.md"
       - ".github/workflows/jacobian-counterexample.yml"
-  push:
-    branches: [master]
     paths:
       - "DASHI/Algebra/Jacobian/**"
       - "DASHI/EverythingJacobianCounterexample.agda"
@@ -21,7 +19,7 @@ on:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:

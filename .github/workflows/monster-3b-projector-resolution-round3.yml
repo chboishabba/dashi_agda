@@ -1,8 +1,6 @@
 name: Monster 3B projector resolution round 3
 
 on:
-  push:
-    branches: [master]
   pull_request:
     branches:
       - 'agent/monster-3b-projector-core-round2'
@@ -18,7 +16,7 @@ on:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:

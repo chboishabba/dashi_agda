@@ -43,7 +43,7 @@ on:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -54,6 +54,7 @@ jobs:
       - name: Run fail-closed source audit
         run: python3 scripts/check_marx_differential_completion.py
       - uses: cachix/install-nix-action@v31
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
       - name: Typecheck focused bundle
         run: |
           nix develop --command agda -i . -l standard-library DASHI/Analysis/MarxDifferentialBundle.agda

@@ -1,7 +1,7 @@
 module DASHI.Physics.YangMills.BalabanP33RationalQuaternionFlatCurlIdentityExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using (List; _∷_)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _*_; -_)
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)

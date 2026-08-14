@@ -1,32 +1,6 @@
 name: YM Clay analytic inhabitation
 
 on:
-  push:
-    branches: [master]
-    paths:
-      - 'DASHI/Physics/YangMills/BalabanClayAnalyticConcreteDefinitions.agda'
-      - 'DASHI/Physics/YangMills/BalabanExactPatchTransferCalculus.agda'
-      - 'DASHI/Physics/YangMills/BalabanBulkPropagatorAnalyticInhabitation.agda'
-      - 'DASHI/Physics/YangMills/BalabanFiniteFourierHodgeReduction.agda'
-      - 'DASHI/Physics/YangMills/BalabanFiniteFourierHodgeReductionRegression.agda'
-      - 'DASHI/Physics/YangMills/BalabanPeriodic*.agda'
-      - 'DASHI/Physics/YangMills/BalabanPublishedAnalyticAuthorities.agda'
-      - 'DASHI/Physics/YangMills/BalabanPublishedAuthorityAdapters.agda'
-      - 'DASHI/Physics/YangMills/BalabanPublishedSourceTheoremAuthorities.agda'
-      - 'DASHI/Physics/YangMills/BalabanPublishedSourceTheoremRegression.agda'
-      - 'DASHI/Physics/YangMills/BalabanExactPublishedCarrierMatching.agda'
-      - 'DASHI/Physics/YangMills/BalabanExactPublishedCarrierMatchingRegression.agda'
-      - 'DASHI/Physics/YangMills/BalabanPublishedSourceToDashi.agda'
-      - 'DASHI/Physics/YangMills/BalabanOneStepAllScaleAnalyticInhabitation.agda'
-      - 'DASHI/Physics/YangMills/BalabanThermodynamicContinuumOSAnalyticInhabitation.agda'
-      - 'DASHI/Physics/YangMills/BalabanUniformPhysicalMassGapAnalyticInhabitation.agda'
-      - 'DASHI/Physics/YangMills/BalabanUnconditionalSolutionCertificate.agda'
-      - 'DASHI/Physics/YangMills/BalabanClayAnalyticInhabitationSpine.agda'
-      - 'DASHI/Physics/YangMills/ConstructiveYangMillsNextSurface.agda'
-      - 'scripts/check_ym_unconditional_gate.py'
-      - 'scripts/check_ym_periodic_fourier_foundation.py'
-      - 'scripts/check_ym_periodic_physical_closure.py'
-      - '.github/workflows/ym-clay-analytic-inhabitation.yml'
   pull_request:
     paths:
       - 'DASHI/Physics/YangMills/BalabanClayAnalyticConcreteDefinitions.agda'
@@ -56,7 +30,7 @@ on:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:

@@ -1,16 +1,6 @@
 name: RSA 15SSP fibre admissibility
 
 on:
-  push:
-    branches: [master]
-    paths:
-      - 'scripts/rsa_ssp_fibre_separation_benchmark.py'
-      - 'scripts/tests/test_rsa_ssp_fibre_separation.py'
-      - 'docs/rsa_ssp_fibre_admissibility.md'
-      - 'DASHI/Crypto/RSAFactorFibreCompatibilityCore.agda'
-      - 'DASHI/Crypto/RSA15SSPFibreAdmissibilityBoundary.agda'
-      - 'DASHI/Crypto/RSA15SSPFibreAdmissibilityRegression.agda'
-      - '.github/workflows/rsa-ssp-fibre-admissibility.yml'
   pull_request:
     paths:
       - 'scripts/rsa_ssp_fibre_separation_benchmark.py'
@@ -22,7 +12,7 @@ on:
       - '.github/workflows/rsa-ssp-fibre-admissibility.yml'
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:
@@ -83,6 +73,7 @@ jobs:
       - uses: cachix/install-nix-action@v31
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
       - name: Restore Agda 2.9 shadow cache
         uses: actions/cache@v4
         with:

@@ -1,8 +1,6 @@
 name: Base369 Ogg nested phase round 7
 
 on:
-  push:
-    branches: [master]
   pull_request:
     branches:
       - 'master'
@@ -27,7 +25,7 @@ on:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:
@@ -47,6 +45,7 @@ jobs:
           persist-credentials: false
       - name: Install Nix
         uses: cachix/install-nix-action@v31
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
       - name: Cache pinned Agda environment
         uses: actions/cache@v4
         with:

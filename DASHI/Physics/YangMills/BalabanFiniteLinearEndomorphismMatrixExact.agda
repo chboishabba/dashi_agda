@@ -57,14 +57,14 @@ rowFunctional :
   FiniteLinearEndomorphism carrier → Index →
   Linear.FiniteLinearFunctional carrier
 rowFunctional endomorphism row = record
-  { Linear.FiniteLinearFunctional.functional =
+  { functional =
       λ vector → operator endomorphism vector row
-  ; Linear.FiniteLinearFunctional.zeroExact = zeroExact endomorphism row
-  ; Linear.FiniteLinearFunctional.addExact =
+  ; zeroExact = zeroExact endomorphism row
+  ; addExact =
       λ left right → addExact endomorphism left right row
-  ; Linear.FiniteLinearFunctional.scaleExact =
+  ; scaleExact =
       λ coefficient vector → scaleExact endomorphism coefficient vector row
-  ; Linear.FiniteLinearFunctional.pointwiseCong =
+  ; pointwiseCong =
       λ left right pointwise → pointwiseCong endomorphism left right pointwise row
   }
 

@@ -1,13 +1,6 @@
 name: NS compact Gamma phase sweep
 
 on:
-  push:
-    branches: [master]
-    paths:
-      - 'scripts/ns_compact_gamma_potential_audit.py'
-      - 'scripts/ns_compact_gamma_adversarial_sweep.py'
-      - 'scripts/tests/test_ns_compact_gamma_adversarial_sweep.py'
-      - '.github/workflows/ns-compact-gamma-stress-sweep.yml'
   pull_request:
     paths:
       - 'scripts/ns_compact_gamma_potential_audit.py'
@@ -16,7 +9,7 @@ on:
       - '.github/workflows/ns-compact-gamma-stress-sweep.yml'
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:

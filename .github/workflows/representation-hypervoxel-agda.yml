@@ -34,7 +34,7 @@ on:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -55,6 +55,7 @@ jobs:
       - name: Run fail-closed RCEPP governance source audit
         run: python3 scripts/check_rcepp_governance_spine.py
       - uses: cachix/install-nix-action@630ae543ea3a38a9a4166f03376c02c50f408342 # v31
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
       - name: Typecheck focused representation regression
         run: |
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh \

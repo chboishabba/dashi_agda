@@ -89,21 +89,21 @@ scalarSum4SquareBound first second third fourth =
       (ℚRing.solve-∀ first second third fourth)
       raw)
 
-backwardDifferenceNormSqBound : ∀ axis field →
-  Periodic.fieldNormSq (Periodic.backwardDifference axis field)
-  ≤ (+ 4 / 1) * Periodic.fieldNormSq field
-backwardDifferenceNormSqBound axis field =
+backwardDifferenceNormSqBound : ∀ axis fieldValue →
+  Periodic.fieldNormSq (Periodic.backwardDifference axis fieldValue)
+  ≤ (+ 4 / 1) * Periodic.fieldNormSq fieldValue
+backwardDifferenceNormSqBound axis fieldValue =
   let
     pointwise : ∀ site →
-      Periodic.backwardDifference axis field site
-        * Periodic.backwardDifference axis field site
+      Periodic.backwardDifference axis fieldValue site
+        * Periodic.backwardDifference axis fieldValue site
       ≤ (+ 2 / 1)
-          * (field site * field site
-            + field (Periodic.shiftBackward axis site)
-              * field (Periodic.shiftBackward axis site))
+          * (fieldValue site * fieldValue site
+            + fieldValue (Periodic.shiftBackward axis site)
+              * fieldValue (Periodic.shiftBackward axis site))
     pointwise site =
       scalarDifferenceSquareBound
-        (field site) (field (Periodic.shiftBackward axis site))
+        (fieldValue site) (fieldValue (Periodic.shiftBackward axis site))
 
     raw = GlobalGauge.sumSitesMonotone _ _ pointwise
 
@@ -111,185 +111,185 @@ backwardDifferenceNormSqBound axis field =
       Periodic.sumSites
         (λ site →
           (+ 2 / 1)
-            * (field site * field site
-              + field (Periodic.shiftBackward axis site)
-                * field (Periodic.shiftBackward axis site)))
-      ≡ (+ 4 / 1) * Periodic.fieldNormSq field
+            * (fieldValue site * fieldValue site
+              + fieldValue (Periodic.shiftBackward axis site)
+                * fieldValue (Periodic.shiftBackward axis site)))
+      ≡ (+ 4 / 1) * Periodic.fieldNormSq fieldValue
     expanded =
       trans
         (Periodic.sumSitesScale (+ 2 / 1)
           (λ site →
-            field site * field site
-            + field (Periodic.shiftBackward axis site)
-              * field (Periodic.shiftBackward axis site)))
+            fieldValue site * fieldValue site
+            + fieldValue (Periodic.shiftBackward axis site)
+              * fieldValue (Periodic.shiftBackward axis site)))
         (trans
           (cong ((+ 2 / 1) *_)
             (Periodic.sumSitesAdd
-              (λ site → field site * field site)
+              (λ site → fieldValue site * fieldValue site)
               (λ site →
-                field (Periodic.shiftBackward axis site)
-                * field (Periodic.shiftBackward axis site))))
+                fieldValue (Periodic.shiftBackward axis site)
+                * fieldValue (Periodic.shiftBackward axis site))))
           (trans
             (cong
               (λ selected →
                 (+ 2 / 1)
-                  * (Periodic.fieldNormSq field + selected))
+                  * (Periodic.fieldNormSq fieldValue + selected))
               (Periodic.sumSitesBackwardInvariant
-                (λ site → field site * field site) axis))
-            (ℚRing.solve-∀ (Periodic.fieldNormSq field))))
+                (λ site → fieldValue site * fieldValue site) axis))
+            (ℚRing.solve-∀ (Periodic.fieldNormSq fieldValue))))
   in
   subst
     (λ upper →
-      Periodic.fieldNormSq (Periodic.backwardDifference axis field)
+      Periodic.fieldNormSq (Periodic.backwardDifference axis fieldValue)
       ≤ upper)
     expanded raw
 
 scalarBondNormSq : Periodic.BondField4 → ℚ
-scalarBondNormSq field =
-  Periodic.fieldNormSq (field Periodic.axis0)
-  + (Periodic.fieldNormSq (field Periodic.axis1)
-  + (Periodic.fieldNormSq (field Periodic.axis2)
-  + Periodic.fieldNormSq (field Periodic.axis3)))
+scalarBondNormSq fieldValue =
+  Periodic.fieldNormSq (fieldValue Periodic.axis0)
+  + (Periodic.fieldNormSq (fieldValue Periodic.axis1)
+  + (Periodic.fieldNormSq (fieldValue Periodic.axis2)
+  + Periodic.fieldNormSq (fieldValue Periodic.axis3)))
 
-periodicDivergencePointwiseSquareBound : ∀ field site →
-  Periodic.periodicDivergence field site
-    * Periodic.periodicDivergence field site
+periodicDivergencePointwiseSquareBound : ∀ fieldValue site →
+  Periodic.periodicDivergence fieldValue site
+    * Periodic.periodicDivergence fieldValue site
   ≤ (+ 4 / 1)
       * (
         Periodic.backwardDifference Periodic.axis0
-          (field Periodic.axis0) site
+          (fieldValue Periodic.axis0) site
         * Periodic.backwardDifference Periodic.axis0
-          (field Periodic.axis0) site
+          (fieldValue Periodic.axis0) site
       + Periodic.backwardDifference Periodic.axis1
-          (field Periodic.axis1) site
+          (fieldValue Periodic.axis1) site
         * Periodic.backwardDifference Periodic.axis1
-          (field Periodic.axis1) site
+          (fieldValue Periodic.axis1) site
       + Periodic.backwardDifference Periodic.axis2
-          (field Periodic.axis2) site
+          (fieldValue Periodic.axis2) site
         * Periodic.backwardDifference Periodic.axis2
-          (field Periodic.axis2) site
+          (fieldValue Periodic.axis2) site
       + Periodic.backwardDifference Periodic.axis3
-          (field Periodic.axis3) site
+          (fieldValue Periodic.axis3) site
         * Periodic.backwardDifference Periodic.axis3
-          (field Periodic.axis3) site)
-periodicDivergencePointwiseSquareBound field site =
+          (fieldValue Periodic.axis3) site)
+periodicDivergencePointwiseSquareBound fieldValue site =
   scalarSum4SquareBound
-    (Periodic.backwardDifference Periodic.axis0 (field Periodic.axis0) site)
-    (Periodic.backwardDifference Periodic.axis1 (field Periodic.axis1) site)
-    (Periodic.backwardDifference Periodic.axis2 (field Periodic.axis2) site)
-    (Periodic.backwardDifference Periodic.axis3 (field Periodic.axis3) site)
+    (Periodic.backwardDifference Periodic.axis0 (fieldValue Periodic.axis0) site)
+    (Periodic.backwardDifference Periodic.axis1 (fieldValue Periodic.axis1) site)
+    (Periodic.backwardDifference Periodic.axis2 (fieldValue Periodic.axis2) site)
+    (Periodic.backwardDifference Periodic.axis3 (fieldValue Periodic.axis3) site)
 
-periodicDivergenceEnergyBelowBackwardNorms : ∀ field →
-  Periodic.periodicDivergenceEnergy field
+periodicDivergenceEnergyBelowBackwardNorms : ∀ fieldValue →
+  Periodic.periodicDivergenceEnergy fieldValue
   ≤ (+ 4 / 1)
       * (
         Periodic.fieldNormSq
-          (Periodic.backwardDifference Periodic.axis0 (field Periodic.axis0))
+          (Periodic.backwardDifference Periodic.axis0 (fieldValue Periodic.axis0))
       + Periodic.fieldNormSq
-          (Periodic.backwardDifference Periodic.axis1 (field Periodic.axis1))
+          (Periodic.backwardDifference Periodic.axis1 (fieldValue Periodic.axis1))
       + Periodic.fieldNormSq
-          (Periodic.backwardDifference Periodic.axis2 (field Periodic.axis2))
+          (Periodic.backwardDifference Periodic.axis2 (fieldValue Periodic.axis2))
       + Periodic.fieldNormSq
-          (Periodic.backwardDifference Periodic.axis3 (field Periodic.axis3)))
-periodicDivergenceEnergyBelowBackwardNorms field =
+          (Periodic.backwardDifference Periodic.axis3 (fieldValue Periodic.axis3)))
+periodicDivergenceEnergyBelowBackwardNorms fieldValue =
   let
     raw = GlobalGauge.sumSitesMonotone _ _
-      (periodicDivergencePointwiseSquareBound field)
+      (periodicDivergencePointwiseSquareBound fieldValue)
 
     expanded =
       trans
         (Periodic.sumSitesScale (+ 4 / 1)
           (λ site →
             Periodic.backwardDifference Periodic.axis0
-              (field Periodic.axis0) site
+              (fieldValue Periodic.axis0) site
               * Periodic.backwardDifference Periodic.axis0
-                  (field Periodic.axis0) site
+                  (fieldValue Periodic.axis0) site
             + Periodic.backwardDifference Periodic.axis1
-              (field Periodic.axis1) site
+              (fieldValue Periodic.axis1) site
               * Periodic.backwardDifference Periodic.axis1
-                  (field Periodic.axis1) site
+                  (fieldValue Periodic.axis1) site
             + Periodic.backwardDifference Periodic.axis2
-              (field Periodic.axis2) site
+              (fieldValue Periodic.axis2) site
               * Periodic.backwardDifference Periodic.axis2
-                  (field Periodic.axis2) site
+                  (fieldValue Periodic.axis2) site
             + Periodic.backwardDifference Periodic.axis3
-              (field Periodic.axis3) site
+              (fieldValue Periodic.axis3) site
               * Periodic.backwardDifference Periodic.axis3
-                  (field Periodic.axis3) site))
+                  (fieldValue Periodic.axis3) site))
         (cong ((+ 4 / 1) *_)
           (trans
             (Periodic.sumSitesAdd
               (λ site →
                 Periodic.backwardDifference Periodic.axis0
-                  (field Periodic.axis0) site
+                  (fieldValue Periodic.axis0) site
                 * Periodic.backwardDifference Periodic.axis0
-                  (field Periodic.axis0) site)
+                  (fieldValue Periodic.axis0) site)
               (λ site →
                 Periodic.backwardDifference Periodic.axis1
-                  (field Periodic.axis1) site
+                  (fieldValue Periodic.axis1) site
                 * Periodic.backwardDifference Periodic.axis1
-                  (field Periodic.axis1) site
+                  (fieldValue Periodic.axis1) site
                 + Periodic.backwardDifference Periodic.axis2
-                  (field Periodic.axis2) site
+                  (fieldValue Periodic.axis2) site
                 * Periodic.backwardDifference Periodic.axis2
-                  (field Periodic.axis2) site
+                  (fieldValue Periodic.axis2) site
                 + Periodic.backwardDifference Periodic.axis3
-                  (field Periodic.axis3) site
+                  (fieldValue Periodic.axis3) site
                 * Periodic.backwardDifference Periodic.axis3
-                  (field Periodic.axis3) site))
+                  (fieldValue Periodic.axis3) site))
             (cong₂ _+_ refl
               (trans
                 (Periodic.sumSitesAdd
                   (λ site →
                     Periodic.backwardDifference Periodic.axis1
-                      (field Periodic.axis1) site
+                      (fieldValue Periodic.axis1) site
                     * Periodic.backwardDifference Periodic.axis1
-                      (field Periodic.axis1) site)
+                      (fieldValue Periodic.axis1) site)
                   (λ site →
                     Periodic.backwardDifference Periodic.axis2
-                      (field Periodic.axis2) site
+                      (fieldValue Periodic.axis2) site
                     * Periodic.backwardDifference Periodic.axis2
-                      (field Periodic.axis2) site
+                      (fieldValue Periodic.axis2) site
                     + Periodic.backwardDifference Periodic.axis3
-                      (field Periodic.axis3) site
+                      (fieldValue Periodic.axis3) site
                     * Periodic.backwardDifference Periodic.axis3
-                      (field Periodic.axis3) site))
+                      (fieldValue Periodic.axis3) site))
                 (cong₂ _+_ refl
                   (Periodic.sumSitesAdd
                     (λ site →
                       Periodic.backwardDifference Periodic.axis2
-                        (field Periodic.axis2) site
+                        (fieldValue Periodic.axis2) site
                       * Periodic.backwardDifference Periodic.axis2
-                        (field Periodic.axis2) site)
+                        (fieldValue Periodic.axis2) site)
                     (λ site →
                       Periodic.backwardDifference Periodic.axis3
-                        (field Periodic.axis3) site
+                        (fieldValue Periodic.axis3) site
                       * Periodic.backwardDifference Periodic.axis3
-                        (field Periodic.axis3) site)))))))
+                        (fieldValue Periodic.axis3) site)))))))
   in
   subst
-    (λ upper → Periodic.periodicDivergenceEnergy field ≤ upper)
+    (λ upper → Periodic.periodicDivergenceEnergy fieldValue ≤ upper)
     expanded raw
 
-periodicDivergenceUpper : ∀ field →
-  Periodic.periodicDivergenceEnergy field
-  ≤ (+ 16 / 1) * scalarBondNormSq field
-periodicDivergenceUpper field =
+periodicDivergenceUpper : ∀ fieldValue →
+  Periodic.periodicDivergenceEnergy fieldValue
+  ≤ (+ 16 / 1) * scalarBondNormSq fieldValue
+periodicDivergenceUpper fieldValue =
   let
-    first = periodicDivergenceEnergyBelowBackwardNorms field
+    first = periodicDivergenceEnergyBelowBackwardNorms fieldValue
 
     componentBounds =
       ℚP.+-mono-≤
         (ℚP.+-mono-≤
           (ℚP.+-mono-≤
             (backwardDifferenceNormSqBound
-              Periodic.axis0 (field Periodic.axis0))
+              Periodic.axis0 (fieldValue Periodic.axis0))
             (backwardDifferenceNormSqBound
-              Periodic.axis1 (field Periodic.axis1)))
+              Periodic.axis1 (fieldValue Periodic.axis1)))
           (backwardDifferenceNormSqBound
-            Periodic.axis2 (field Periodic.axis2)))
+            Periodic.axis2 (fieldValue Periodic.axis2)))
         (backwardDifferenceNormSqBound
-          Periodic.axis3 (field Periodic.axis3))
+          Periodic.axis3 (fieldValue Periodic.axis3))
 
     scaled =
       Norm.scaleNonnegative (+ 4 / 1)
@@ -298,23 +298,23 @@ periodicDivergenceUpper field =
     combined = ℚP.≤-trans first scaled
   in
   subst
-    (λ upper → Periodic.periodicDivergenceEnergy field ≤ upper)
+    (λ upper → Periodic.periodicDivergenceEnergy fieldValue ≤ upper)
     (ℚRing.solve-∀
-      (Periodic.fieldNormSq (field Periodic.axis0))
-      (Periodic.fieldNormSq (field Periodic.axis1))
-      (Periodic.fieldNormSq (field Periodic.axis2))
-      (Periodic.fieldNormSq (field Periodic.axis3)))
+      (Periodic.fieldNormSq (fieldValue Periodic.axis0))
+      (Periodic.fieldNormSq (fieldValue Periodic.axis1))
+      (Periodic.fieldNormSq (fieldValue Periodic.axis2))
+      (Periodic.fieldNormSq (fieldValue Periodic.axis3)))
     combined
 
 physicalPeriodicDivergenceUpper :
-  ∀ (field : Coordinates.PhysicalSU2BondField4) →
-  Periodic.physicalPeriodicDivergenceEnergy (Bridge.asPeriodicField field)
-  ≤ (+ 16 / 1) * Coordinates.physicalSU2BondNormSq field
-physicalPeriodicDivergenceUpper field =
+  ∀ (fieldValue : Coordinates.PhysicalSU2BondField4) →
+  Periodic.physicalPeriodicDivergenceEnergy (Bridge.asPeriodicField fieldValue)
+  ≤ (+ 16 / 1) * Coordinates.physicalSU2BondNormSq fieldValue
+physicalPeriodicDivergenceUpper fieldValue =
   let
-    xField = Bridge.asPeriodicField field Coordinates.coordinateX
-    yField = Bridge.asPeriodicField field Coordinates.coordinateY
-    zField = Bridge.asPeriodicField field Coordinates.coordinateZ
+    xField = Bridge.asPeriodicField fieldValue Coordinates.coordinateX
+    yField = Bridge.asPeriodicField fieldValue Coordinates.coordinateY
+    zField = Bridge.asPeriodicField fieldValue Coordinates.coordinateZ
 
     xBound = periodicDivergenceUpper xField
     yBound = periodicDivergenceUpper yField
@@ -326,45 +326,45 @@ physicalPeriodicDivergenceUpper field =
       (+ 16 / 1) * scalarBondNormSq xField
       + ((+ 16 / 1) * scalarBondNormSq yField
       + (+ 16 / 1) * scalarBondNormSq zField)
-      ≡ (+ 16 / 1) * GlobalGauge.periodicPhysicalBondNormSq field
+      ≡ (+ 16 / 1) * GlobalGauge.periodicPhysicalBondNormSq fieldValue
     toPeriodicPhysical
-      rewrite GlobalGauge.axisInsertionNormSqExact field Periodic.axis0
-            | GlobalGauge.axisInsertionNormSqExact field Periodic.axis1
-            | GlobalGauge.axisInsertionNormSqExact field Periodic.axis2
-            | GlobalGauge.axisInsertionNormSqExact field Periodic.axis3 =
+      rewrite GlobalGauge.axisInsertionNormSqExact fieldValue Periodic.axis0
+            | GlobalGauge.axisInsertionNormSqExact fieldValue Periodic.axis1
+            | GlobalGauge.axisInsertionNormSqExact fieldValue Periodic.axis2
+            | GlobalGauge.axisInsertionNormSqExact fieldValue Periodic.axis3 =
       ℚRing.solve-∀
         (Periodic.fieldNormSq
-          (λ site → field Coordinates.coordinateX (Periodic.pair site Periodic.axis0)))
+          (λ site → fieldValue Coordinates.coordinateX (Periodic.pair site Periodic.axis0)))
         (Periodic.fieldNormSq
-          (λ site → field Coordinates.coordinateX (Periodic.pair site Periodic.axis1)))
+          (λ site → fieldValue Coordinates.coordinateX (Periodic.pair site Periodic.axis1)))
         (Periodic.fieldNormSq
-          (λ site → field Coordinates.coordinateX (Periodic.pair site Periodic.axis2)))
+          (λ site → fieldValue Coordinates.coordinateX (Periodic.pair site Periodic.axis2)))
         (Periodic.fieldNormSq
-          (λ site → field Coordinates.coordinateX (Periodic.pair site Periodic.axis3)))
+          (λ site → fieldValue Coordinates.coordinateX (Periodic.pair site Periodic.axis3)))
         (Periodic.fieldNormSq
-          (λ site → field Coordinates.coordinateY (Periodic.pair site Periodic.axis0)))
+          (λ site → fieldValue Coordinates.coordinateY (Periodic.pair site Periodic.axis0)))
         (Periodic.fieldNormSq
-          (λ site → field Coordinates.coordinateY (Periodic.pair site Periodic.axis1)))
+          (λ site → fieldValue Coordinates.coordinateY (Periodic.pair site Periodic.axis1)))
         (Periodic.fieldNormSq
-          (λ site → field Coordinates.coordinateY (Periodic.pair site Periodic.axis2)))
+          (λ site → fieldValue Coordinates.coordinateY (Periodic.pair site Periodic.axis2)))
         (Periodic.fieldNormSq
-          (λ site → field Coordinates.coordinateY (Periodic.pair site Periodic.axis3)))
+          (λ site → fieldValue Coordinates.coordinateY (Periodic.pair site Periodic.axis3)))
         (Periodic.fieldNormSq
-          (λ site → field Coordinates.coordinateZ (Periodic.pair site Periodic.axis0)))
+          (λ site → fieldValue Coordinates.coordinateZ (Periodic.pair site Periodic.axis0)))
         (Periodic.fieldNormSq
-          (λ site → field Coordinates.coordinateZ (Periodic.pair site Periodic.axis1)))
+          (λ site → fieldValue Coordinates.coordinateZ (Periodic.pair site Periodic.axis1)))
         (Periodic.fieldNormSq
-          (λ site → field Coordinates.coordinateZ (Periodic.pair site Periodic.axis2)))
+          (λ site → fieldValue Coordinates.coordinateZ (Periodic.pair site Periodic.axis2)))
         (Periodic.fieldNormSq
-          (λ site → field Coordinates.coordinateZ (Periodic.pair site Periodic.axis3)))
+          (λ site → fieldValue Coordinates.coordinateZ (Periodic.pair site Periodic.axis3)))
   in
   subst
     (λ upper →
-      Periodic.physicalPeriodicDivergenceEnergy (Bridge.asPeriodicField field)
+      Periodic.physicalPeriodicDivergenceEnergy (Bridge.asPeriodicField fieldValue)
       ≤ upper)
     (trans toPeriodicPhysical
       (cong ((+ 16 / 1) *_)
-        (GlobalGauge.periodicPhysicalBondNormSqExact field)))
+        (GlobalGauge.periodicPhysicalBondNormSqExact fieldValue)))
     combined
 
 periodicBackwardDifferenceUpperLevel : ProofLevel

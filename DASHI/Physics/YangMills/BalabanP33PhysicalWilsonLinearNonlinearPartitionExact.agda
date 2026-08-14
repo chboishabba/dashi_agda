@@ -204,11 +204,11 @@ physicalPlacementSelectedFactors :
   Coordinates.PhysicalSU2BondField4 → Physical.Plaquette4 →
   Placement.PlaquetteSecondVariationPlacement4 →
   PlacementSelectedFactors
-physicalPlacementSelectedFactors background field plaquette placement =
+physicalPlacementSelectedFactors background fieldValue plaquette placement =
   let
-    backgroundData = Physical.plaquetteJetData background field plaquette
+    backgroundData = Physical.plaquetteJetData background fieldValue plaquette
     identityData =
-      Physical.plaquetteJetData Physical.identityBackground field plaquette
+      Physical.plaquetteJetData Physical.identityBackground fieldValue plaquette
   in
   record
     { a0 = Named.selectedFactor0 (Jets.link0 backgroundData) placement
@@ -225,9 +225,9 @@ placementLinearQuaternionDefect :
   Physical.RationalSU2Background4 →
   Coordinates.PhysicalSU2BondField4 → Physical.Plaquette4 →
   Placement.PlaquetteSecondVariationPlacement4 → Q.RationalQuaternion
-placementLinearQuaternionDefect background field plaquette placement =
+placementLinearQuaternionDefect background fieldValue plaquette placement =
   let factors = physicalPlacementSelectedFactors
-        background field plaquette placement
+        background fieldValue plaquette placement
   in
   fourFactorLinearPart
     (a0 factors) (a1 factors) (a2 factors) (a3 factors)
@@ -237,9 +237,9 @@ placementNonlinearQuaternionRemainder :
   Physical.RationalSU2Background4 →
   Coordinates.PhysicalSU2BondField4 → Physical.Plaquette4 →
   Placement.PlaquetteSecondVariationPlacement4 → Q.RationalQuaternion
-placementNonlinearQuaternionRemainder background field plaquette placement =
+placementNonlinearQuaternionRemainder background fieldValue plaquette placement =
   let factors = physicalPlacementSelectedFactors
-        background field plaquette placement
+        background fieldValue plaquette placement
   in
   fourFactorNonlinearRemainder
     (a0 factors) (a1 factors) (a2 factors) (a3 factors)
@@ -249,31 +249,31 @@ placementLinearWilsonPart :
   Physical.RationalSU2Background4 →
   Coordinates.PhysicalSU2BondField4 → Physical.Plaquette4 →
   Placement.PlaquetteSecondVariationPlacement4 → ℚ
-placementLinearWilsonPart background field plaquette placement =
+placementLinearWilsonPart background fieldValue plaquette placement =
   Telescope.wilsonScalar
-    (placementLinearQuaternionDefect background field plaquette placement)
+    (placementLinearQuaternionDefect background fieldValue plaquette placement)
 
 placementNonlinearWilsonRemainder :
   Physical.RationalSU2Background4 →
   Coordinates.PhysicalSU2BondField4 → Physical.Plaquette4 →
   Placement.PlaquetteSecondVariationPlacement4 → ℚ
-placementNonlinearWilsonRemainder background field plaquette placement =
+placementNonlinearWilsonRemainder background fieldValue plaquette placement =
   Telescope.wilsonScalar
     (placementNonlinearQuaternionRemainder
-      background field plaquette placement)
+      background fieldValue plaquette placement)
 
 physicalPlacementWilsonDefectLinearNonlinearExact :
-  ∀ background field plaquette placement →
+  ∀ background fieldValue plaquette placement →
   Named.physicalPlacementWilsonScalarDefect
-    background field plaquette placement
-  ≡ placementLinearWilsonPart background field plaquette placement
+    background fieldValue plaquette placement
+  ≡ placementLinearWilsonPart background fieldValue plaquette placement
     + placementNonlinearWilsonRemainder
-        background field plaquette placement
+        background fieldValue plaquette placement
 physicalPlacementWilsonDefectLinearNonlinearExact
-    background field plaquette placement =
+    background fieldValue plaquette placement =
   let
     factors = physicalPlacementSelectedFactors
-      background field plaquette placement
+      background fieldValue plaquette placement
 
     telescopeSplit = fourFactorTelescopeIsLinearPlusNonlinear
       (a0 factors) (a1 factors) (a2 factors) (a3 factors)
@@ -281,7 +281,7 @@ physicalPlacementWilsonDefectLinearNonlinearExact
   in
   trans
     (Named.physicalPlacementWilsonScalarDefectTelescopeExact
-      background field plaquette placement)
+      background fieldValue plaquette placement)
     (trans
       (cong Telescope.wilsonScalar telescopeSplit)
       (wilsonScalarAddExact
@@ -316,80 +316,80 @@ sumMapPointwiseAdd (value ∷ values) left right
 physicalPlaquetteWilsonLinearPart :
   Physical.RationalSU2Background4 →
   Coordinates.PhysicalSU2BondField4 → Physical.Plaquette4 → ℚ
-physicalPlaquetteWilsonLinearPart background field plaquette =
+physicalPlaquetteWilsonLinearPart background fieldValue plaquette =
   NamedSum.sumMap Placement.plaquetteSecondVariationPlacements4
-    (placementLinearWilsonPart background field plaquette)
+    (placementLinearWilsonPart background fieldValue plaquette)
 
 physicalPlaquetteGroupedNonlinearRemainder :
   Physical.RationalSU2Background4 →
   Coordinates.PhysicalSU2BondField4 → Physical.Plaquette4 → ℚ
-physicalPlaquetteGroupedNonlinearRemainder background field plaquette =
+physicalPlaquetteGroupedNonlinearRemainder background fieldValue plaquette =
   NamedSum.sumMap Placement.plaquetteSecondVariationPlacements4
-    (placementNonlinearWilsonRemainder background field plaquette)
+    (placementNonlinearWilsonRemainder background fieldValue plaquette)
 
 physicalPlacementDefectSumSplitsExact :
-  ∀ background field plaquette →
-  NamedSum.physicalPlacementWilsonDefectSum background field plaquette
-  ≡ physicalPlaquetteWilsonLinearPart background field plaquette
-    + physicalPlaquetteGroupedNonlinearRemainder background field plaquette
-physicalPlacementDefectSumSplitsExact background field plaquette =
+  ∀ background fieldValue plaquette →
+  NamedSum.physicalPlacementWilsonDefectSum background fieldValue plaquette
+  ≡ physicalPlaquetteWilsonLinearPart background fieldValue plaquette
+    + physicalPlaquetteGroupedNonlinearRemainder background fieldValue plaquette
+physicalPlacementDefectSumSplitsExact background fieldValue plaquette =
   trans
     (sumMapCong
       Placement.plaquetteSecondVariationPlacements4
       (Named.physicalPlacementWilsonScalarDefect
-        background field plaquette)
+        background fieldValue plaquette)
       (λ placement →
-        placementLinearWilsonPart background field plaquette placement
+        placementLinearWilsonPart background fieldValue plaquette placement
         + placementNonlinearWilsonRemainder
-            background field plaquette placement)
+            background fieldValue plaquette placement)
       (physicalPlacementWilsonDefectLinearNonlinearExact
-        background field plaquette))
+        background fieldValue plaquette))
     (sumMapPointwiseAdd
       Placement.plaquetteSecondVariationPlacements4
-      (placementLinearWilsonPart background field plaquette)
-      (placementNonlinearWilsonRemainder background field plaquette))
+      (placementLinearWilsonPart background fieldValue plaquette)
+      (placementNonlinearWilsonRemainder background fieldValue plaquette))
 
 physicalPlaquetteWilsonDefectLinearNonlinearExact :
-  ∀ background field plaquette →
-  Physical.plaquetteWilsonSecondVariation background field plaquette
+  ∀ background fieldValue plaquette →
+  Physical.plaquetteWilsonSecondVariation background fieldValue plaquette
     - Physical.plaquetteWilsonSecondVariation
-        Physical.identityBackground field plaquette
-  ≡ physicalPlaquetteWilsonLinearPart background field plaquette
-    + physicalPlaquetteGroupedNonlinearRemainder background field plaquette
-physicalPlaquetteWilsonDefectLinearNonlinearExact background field plaquette =
+        Physical.identityBackground fieldValue plaquette
+  ≡ physicalPlaquetteWilsonLinearPart background fieldValue plaquette
+    + physicalPlaquetteGroupedNonlinearRemainder background fieldValue plaquette
+physicalPlaquetteWilsonDefectLinearNonlinearExact background fieldValue plaquette =
   trans
     (sym
       (NamedSum.physicalPlacementWilsonDefectSumExact
-        background field plaquette))
-    (physicalPlacementDefectSumSplitsExact background field plaquette)
+        background fieldValue plaquette))
+    (physicalPlacementDefectSumSplitsExact background fieldValue plaquette)
 
 record CanonicalPhysicalWilsonBounds
     (background : Physical.RationalSU2Background4)
-    (field : Coordinates.PhysicalSU2BondField4) : Set₁ where
+    (fieldValue : Coordinates.PhysicalSU2BondField4) : Set₁ where
   field
     canonicalLinearLower : ∀ plaquette →
       - (WilsonGlobal.rhoOverThirtySix
-          * WilsonGlobal.plaquetteCrossCharge field plaquette)
-      ≤ physicalPlaquetteWilsonLinearPart background field plaquette
+          * WilsonGlobal.plaquetteCrossCharge fieldValue plaquette)
+      ≤ physicalPlaquetteWilsonLinearPart background fieldValue plaquette
 
     canonicalGroupedNonlinearLower : ∀ plaquette →
       - (WilsonGlobal.rhoOverOneFortyFour
-          * WilsonGlobal.plaquetteDiagonalCharge field plaquette)
-      ≤ physicalPlaquetteGroupedNonlinearRemainder background field plaquette
+          * WilsonGlobal.plaquetteDiagonalCharge fieldValue plaquette)
+      ≤ physicalPlaquetteGroupedNonlinearRemainder background fieldValue plaquette
 
 open CanonicalPhysicalWilsonBounds public
 
 canonicalBoundsAsRound34Control :
-  ∀ {background field} →
-  CanonicalPhysicalWilsonBounds background field →
-  WLocal.PhysicalPlaquetteLinearRemainderControl background field
-canonicalBoundsAsRound34Control {background} {field} bounds = record
+  ∀ {background fieldValue} →
+  CanonicalPhysicalWilsonBounds background fieldValue →
+  WLocal.PhysicalPlaquetteLinearRemainderControl background fieldValue
+canonicalBoundsAsRound34Control {background} {fieldValue} bounds = record
   { WLocal.PhysicalPlaquetteLinearRemainderControl.physicalLinearPart =
-      physicalPlaquetteWilsonLinearPart background field
+      physicalPlaquetteWilsonLinearPart background fieldValue
   ; WLocal.PhysicalPlaquetteLinearRemainderControl.physicalGroupedRemainder =
-      physicalPlaquetteGroupedNonlinearRemainder background field
+      physicalPlaquetteGroupedNonlinearRemainder background fieldValue
   ; WLocal.PhysicalPlaquetteLinearRemainderControl.physicalDecomposition =
-      physicalPlaquetteWilsonDefectLinearNonlinearExact background field
+      physicalPlaquetteWilsonDefectLinearNonlinearExact background fieldValue
   ; WLocal.PhysicalPlaquetteLinearRemainderControl.selectedCurvatureLinearLower =
       canonicalLinearLower bounds
   ; WLocal.PhysicalPlaquetteLinearRemainderControl.groupedSixteenAtomRemainderLower =
@@ -397,9 +397,9 @@ canonicalBoundsAsRound34Control {background} {field} bounds = record
   }
 
 canonicalBoundsImplyWLocal :
-  ∀ {background field} →
-  CanonicalPhysicalWilsonBounds background field →
-  WilsonGlobal.PhysicalWilsonSignedLocal background field
+  ∀ {background fieldValue} →
+  CanonicalPhysicalWilsonBounds background fieldValue →
+  WilsonGlobal.PhysicalWilsonSignedLocal background fieldValue
 canonicalBoundsImplyWLocal bounds =
   WLocal.physicalLinearRemainderControlImpliesWLocal
     (canonicalBoundsAsRound34Control bounds)

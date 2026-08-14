@@ -2,8 +2,6 @@ name: NS Luo physical analytic frontier
 
 on:
   workflow_dispatch:
-  push:
-    branches: [master]
     paths:
       - 'DASHI/Physics/Closure/NSTriadKNLuo*.agda'
       - 'scripts/check_ns_luo_physical_analytic_frontier.sh'
@@ -32,7 +30,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:

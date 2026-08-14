@@ -15,7 +15,7 @@ on:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -30,6 +30,7 @@ jobs:
       - name: Install Nix
         uses: cachix/install-nix-action@v31
 
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
       - name: Typecheck zeta theorem surface directly
         run: |
           nix develop -c agda \

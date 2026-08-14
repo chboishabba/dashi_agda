@@ -1,14 +1,6 @@
 name: Musical symmetry dynamics
 
 on:
-  push:
-    branches: [master]
-    paths:
-      - 'DASHI/Music/**'
-      - 'scripts/musical_symmetry_basin_diagnostic.py'
-      - 'scripts/tests/test_musical_symmetry_basin_diagnostic.py'
-      - 'docs/musical_symmetry_dynamics.md'
-      - '.github/workflows/musical-symmetry-dynamics.yml'
   pull_request:
     paths:
       - 'DASHI/Music/**'
@@ -19,7 +11,7 @@ on:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:
@@ -81,6 +73,7 @@ jobs:
       - uses: cachix/install-nix-action@v31
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
       - name: Restore Agda 2.9 shadow cache
         uses: actions/cache@v4
         with:

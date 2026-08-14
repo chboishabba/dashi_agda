@@ -26,7 +26,7 @@ on:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -45,6 +45,7 @@ jobs:
       - name: Run fail-closed source and arithmetic audit
         run: python3 scripts/check_logistic_adic_stage_spine.py
       - uses: cachix/install-nix-action@630ae543ea3a38a9a4166f03376c02c50f408342 # v31
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
       - name: Typecheck PNF trauma memory hypervoxel bridge
         run: |
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh \

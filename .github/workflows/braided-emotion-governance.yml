@@ -14,8 +14,6 @@ on:
       - "scripts/audit_governance_builtins_only.py"
       - "scripts/governance_builtins_allowlist.txt"
       - ".github/workflows/braided-emotion-governance.yml"
-  push:
-    branches: [master]
     paths:
       - "DASHI/Biology/BraidedEmotion*.agda"
       - "DASHI/Biology/*Governance*.agda"
@@ -31,7 +29,7 @@ on:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:

@@ -10,8 +10,6 @@ on:
       - 'DASHI/Physics/Closure/NSFactorizedSchurFrameGap.agda'
       - 'DASHI/Physics/Closure/NSFactorizedCrossShellProgram.agda'
       - '.github/workflows/ns-factorized-cross-shell.yml'
-  push:
-    branches: [master]
     paths:
       - 'DASHI/Analysis/ThreeStageBoundComposition.agda'
       - 'DASHI/Analysis/WeightedKernelSchurTest.agda'
@@ -22,7 +20,7 @@ on:
       - '.github/workflows/ns-factorized-cross-shell.yml'
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:
@@ -37,6 +35,7 @@ jobs:
       - uses: cachix/install-nix-action@v31
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
       - name: Check factorized cross-shell theorem
         id: focused
         shell: bash

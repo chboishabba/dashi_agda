@@ -1,14 +1,6 @@
 name: Frontier complete productive validation
 
 on:
-  push:
-    branches: [master]
-    paths:
-      - 'DASHI/Mathematics/Arithmetic/EllipticCurveFiniteTwoDescentSeedExact.agda'
-      - 'DASHI/Mathematics/CrossPollination/FrontierCompleteProductive*.agda'
-      - 'DASHI/EverythingFrontierCompleteProductiveValidation.agda'
-      - 'scripts/check_frontier_complete_productive_validation.sh'
-      - '.github/workflows/frontier-complete-productive-validation.yml'
   pull_request:
     branches:
       - 'agent/millennium-crosspollination-rh-hodge-bsd-pnp-poincare-voa'
@@ -22,7 +14,7 @@ on:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:

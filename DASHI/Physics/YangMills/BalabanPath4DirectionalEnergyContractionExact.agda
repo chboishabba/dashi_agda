@@ -65,145 +65,145 @@ replaceAxis axis coordinate site =
 
 edgeDifferenceField :
   SiteField side4 → Axis4 → CyclicIndex side3 → SiteField side4
-edgeDifferenceField field axis predecessor site =
-  field (replaceAxis axis (sucᵢ predecessor) site)
-  - field (replaceAxis axis (weakenIndex predecessor) site)
+edgeDifferenceField siteField axis predecessor site =
+  siteField (replaceAxis axis (sucᵢ predecessor) site)
+  - siteField (replaceAxis axis (weakenIndex predecessor) site)
 
 axisAverageCommutesWithDistinctEdgeDifference :
-  ∀ averageAxis differenceAxis field predecessor site →
+  ∀ averageAxis differenceAxis siteField predecessor site →
   averageAxis ≢ differenceAxis →
-  edgeDifferenceField (axisAverage4 field averageAxis)
+  edgeDifferenceField (axisAverage4 siteField averageAxis)
     differenceAxis predecessor site
-  ≡ axisAverage4 (edgeDifferenceField field differenceAxis predecessor)
+  ≡ axisAverage4 (edgeDifferenceField siteField differenceAxis predecessor)
       averageAxis site
 axisAverageCommutesWithDistinctEdgeDifference
-  zeroᵢ zeroᵢ field predecessor site distinct = emptyElim (distinct refl)
+  zeroᵢ zeroᵢ siteField predecessor site distinct = emptyElim (distinct refl)
 axisAverageCommutesWithDistinctEdgeDifference
-  zeroᵢ (sucᵢ zeroᵢ) field predecessor
+  zeroᵢ (sucᵢ zeroᵢ) siteField predecessor
   (pair (pair x0 x1) (pair x2 x3)) distinct = ℚRing.solve-∀
 axisAverageCommutesWithDistinctEdgeDifference
-  zeroᵢ (sucᵢ (sucᵢ zeroᵢ)) field predecessor
+  zeroᵢ (sucᵢ (sucᵢ zeroᵢ)) siteField predecessor
   (pair (pair x0 x1) (pair x2 x3)) distinct = ℚRing.solve-∀
 axisAverageCommutesWithDistinctEdgeDifference
-  zeroᵢ (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) field predecessor
+  zeroᵢ (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) siteField predecessor
   (pair (pair x0 x1) (pair x2 x3)) distinct = ℚRing.solve-∀
 axisAverageCommutesWithDistinctEdgeDifference
-  (sucᵢ zeroᵢ) zeroᵢ field predecessor
+  (sucᵢ zeroᵢ) zeroᵢ siteField predecessor
   (pair (pair x0 x1) (pair x2 x3)) distinct = ℚRing.solve-∀
 axisAverageCommutesWithDistinctEdgeDifference
-  (sucᵢ zeroᵢ) (sucᵢ zeroᵢ) field predecessor site distinct =
+  (sucᵢ zeroᵢ) (sucᵢ zeroᵢ) siteField predecessor site distinct =
   emptyElim (distinct refl)
 axisAverageCommutesWithDistinctEdgeDifference
-  (sucᵢ zeroᵢ) (sucᵢ (sucᵢ zeroᵢ)) field predecessor
+  (sucᵢ zeroᵢ) (sucᵢ (sucᵢ zeroᵢ)) siteField predecessor
   (pair (pair x0 x1) (pair x2 x3)) distinct = ℚRing.solve-∀
 axisAverageCommutesWithDistinctEdgeDifference
-  (sucᵢ zeroᵢ) (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) field predecessor
+  (sucᵢ zeroᵢ) (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) siteField predecessor
   (pair (pair x0 x1) (pair x2 x3)) distinct = ℚRing.solve-∀
 axisAverageCommutesWithDistinctEdgeDifference
-  (sucᵢ (sucᵢ zeroᵢ)) zeroᵢ field predecessor
+  (sucᵢ (sucᵢ zeroᵢ)) zeroᵢ siteField predecessor
   (pair (pair x0 x1) (pair x2 x3)) distinct = ℚRing.solve-∀
 axisAverageCommutesWithDistinctEdgeDifference
-  (sucᵢ (sucᵢ zeroᵢ)) (sucᵢ zeroᵢ) field predecessor
+  (sucᵢ (sucᵢ zeroᵢ)) (sucᵢ zeroᵢ) siteField predecessor
   (pair (pair x0 x1) (pair x2 x3)) distinct = ℚRing.solve-∀
 axisAverageCommutesWithDistinctEdgeDifference
   (sucᵢ (sucᵢ zeroᵢ)) (sucᵢ (sucᵢ zeroᵢ))
-  field predecessor site distinct = emptyElim (distinct refl)
+  siteField predecessor site distinct = emptyElim (distinct refl)
 axisAverageCommutesWithDistinctEdgeDifference
   (sucᵢ (sucᵢ zeroᵢ)) (sucᵢ (sucᵢ (sucᵢ zeroᵢ)))
-  field predecessor (pair (pair x0 x1) (pair x2 x3)) distinct =
+  siteField predecessor (pair (pair x0 x1) (pair x2 x3)) distinct =
   ℚRing.solve-∀
 axisAverageCommutesWithDistinctEdgeDifference
   (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) zeroᵢ
-  field predecessor (pair (pair x0 x1) (pair x2 x3)) distinct =
+  siteField predecessor (pair (pair x0 x1) (pair x2 x3)) distinct =
   ℚRing.solve-∀
 axisAverageCommutesWithDistinctEdgeDifference
   (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) (sucᵢ zeroᵢ)
-  field predecessor (pair (pair x0 x1) (pair x2 x3)) distinct =
+  siteField predecessor (pair (pair x0 x1) (pair x2 x3)) distinct =
   ℚRing.solve-∀
 axisAverageCommutesWithDistinctEdgeDifference
   (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) (sucᵢ (sucᵢ zeroᵢ))
-  field predecessor (pair (pair x0 x1) (pair x2 x3)) distinct =
+  siteField predecessor (pair (pair x0 x1) (pair x2 x3)) distinct =
   ℚRing.solve-∀
 axisAverageCommutesWithDistinctEdgeDifference
   (sucᵢ (sucᵢ (sucᵢ zeroᵢ)))
-  (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) field predecessor site distinct =
+  (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) siteField predecessor site distinct =
   emptyElim (distinct refl)
 
 edgeDifferenceAveragePointwise :
-  ∀ averageAxis differenceAxis field predecessor →
+  ∀ averageAxis differenceAxis siteField predecessor →
   averageAxis ≢ differenceAxis →
   FieldEqual
-    (edgeDifferenceField (axisAverage4 field averageAxis)
+    (edgeDifferenceField (axisAverage4 siteField averageAxis)
       differenceAxis predecessor)
-    (axisAverage4 (edgeDifferenceField field differenceAxis predecessor)
+    (axisAverage4 (edgeDifferenceField siteField differenceAxis predecessor)
       averageAxis)
-edgeDifferenceAveragePointwise averageAxis differenceAxis field predecessor distinct site =
+edgeDifferenceAveragePointwise averageAxis differenceAxis siteField predecessor distinct site =
   axisAverageCommutesWithDistinctEdgeDifference
-    averageAxis differenceAxis field predecessor site distinct
+    averageAxis differenceAxis siteField predecessor site distinct
 
 fixedPredecessorNormContraction :
-  ∀ averageAxis differenceAxis field predecessor →
+  ∀ averageAxis differenceAxis siteField predecessor →
   averageAxis ≢ differenceAxis →
   globalNormSq
-    (edgeDifferenceField (axisAverage4 field averageAxis)
+    (edgeDifferenceField (axisAverage4 siteField averageAxis)
       differenceAxis predecessor)
-  ≤ globalNormSq (edgeDifferenceField field differenceAxis predecessor)
+  ≤ globalNormSq (edgeDifferenceField siteField differenceAxis predecessor)
 fixedPredecessorNormContraction
-  averageAxis differenceAxis field predecessor distinct =
+  averageAxis differenceAxis siteField predecessor distinct =
   subst
     (λ leftNorm →
-      leftNorm ≤ globalNormSq (edgeDifferenceField field differenceAxis predecessor))
+      leftNorm ≤ globalNormSq (edgeDifferenceField siteField differenceAxis predecessor))
     (sym (globalNormRespectsPointwise
       (edgeDifferenceAveragePointwise
-        averageAxis differenceAxis field predecessor distinct)))
+        averageAxis differenceAxis siteField predecessor distinct)))
     (axisAverageNormContraction
-      (edgeDifferenceField field differenceAxis predecessor)
+      (edgeDifferenceField siteField differenceAxis predecessor)
       averageAxis)
 
 edgeDifferenceAtTransverse :
   SiteField side4 → Axis4 → CyclicIndex side3 →
   Triple (CyclicIndex side4) → ℚ
-edgeDifferenceAtTransverse field axis predecessor transverse =
-  field (insertAxis axis (sucᵢ predecessor) transverse)
-  - field (insertAxis axis (weakenIndex predecessor) transverse)
+edgeDifferenceAtTransverse siteField axis predecessor transverse =
+  siteField (insertAxis axis (sucᵢ predecessor) transverse)
+  - siteField (insertAxis axis (weakenIndex predecessor) transverse)
 
 edgeDifferenceOnInsertedAxis :
-  ∀ field axis predecessor coordinate transverse →
-  edgeDifferenceField field axis predecessor
+  ∀ siteField axis predecessor coordinate transverse →
+  edgeDifferenceField siteField axis predecessor
     (insertAxis axis coordinate transverse)
-  ≡ edgeDifferenceAtTransverse field axis predecessor transverse
-edgeDifferenceOnInsertedAxis field axis predecessor coordinate transverse
+  ≡ edgeDifferenceAtTransverse siteField axis predecessor transverse
+edgeDifferenceOnInsertedAxis siteField axis predecessor coordinate transverse
   rewrite extractInsertTransverse axis coordinate transverse = refl
 
 axisPredecessorEnergy :
   Axis4 → SiteField side4 → CyclicIndex side3 → ℚ
-axisPredecessorEnergy axis field predecessor =
+axisPredecessorEnergy axis siteField predecessor =
   sumRational (physicalTransverseCoordinates side4)
-    (λ transverse → sq (edgeDifferenceAtTransverse field axis predecessor transverse))
+    (λ transverse → sq (edgeDifferenceAtTransverse siteField axis predecessor transverse))
 
-fibreMultiplicityFour : ∀ field axis predecessor transverse →
+fibreMultiplicityFour : ∀ siteField axis predecessor transverse →
   sumRational (allCyclicIndices side4)
     (λ coordinate →
-      sq (edgeDifferenceField field axis predecessor
+      sq (edgeDifferenceField siteField axis predecessor
         (insertAxis axis coordinate transverse)))
-  ≡ fourℚ * sq (edgeDifferenceAtTransverse field axis predecessor transverse)
-fibreMultiplicityFour field axis predecessor transverse =
+  ≡ fourℚ * sq (edgeDifferenceAtTransverse siteField axis predecessor transverse)
+fibreMultiplicityFour siteField axis predecessor transverse =
   trans
     (sumRationalCong
       (allCyclicIndices side4)
       (λ coordinate →
-        sq (edgeDifferenceField field axis predecessor
+        sq (edgeDifferenceField siteField axis predecessor
           (insertAxis axis coordinate transverse)))
       (λ coordinate →
-        sq (edgeDifferenceAtTransverse field axis predecessor transverse))
+        sq (edgeDifferenceAtTransverse siteField axis predecessor transverse))
       (λ coordinate →
         cong sq (edgeDifferenceOnInsertedAxis
-          field axis predecessor coordinate transverse)))
+          siteField axis predecessor coordinate transverse)))
     (trans
       (sumRationalConstant
         (allCyclicIndices side4)
-        (sq (edgeDifferenceAtTransverse field axis predecessor transverse)))
-      (lengthFour field axis predecessor transverse))
+        (sq (edgeDifferenceAtTransverse siteField axis predecessor transverse)))
+      (lengthFour siteField axis predecessor transverse))
   where
   lengthFour : ∀ current currentAxis currentPredecessor currentTransverse →
     natAsRational (length (allCyclicIndices side4))
@@ -214,41 +214,41 @@ fibreMultiplicityFour field axis predecessor transverse =
   lengthFour current currentAxis currentPredecessor currentTransverse
     rewrite lengthAllCyclicIndices side4 = ℚRing.solve-∀
 
-globalEdgeDifferenceNormFourfold : ∀ field axis predecessor →
-  globalNormSq (edgeDifferenceField field axis predecessor)
-  ≡ fourℚ * axisPredecessorEnergy axis field predecessor
-globalEdgeDifferenceNormFourfold field axis predecessor =
+globalEdgeDifferenceNormFourfold : ∀ siteField axis predecessor →
+  globalNormSq (edgeDifferenceField siteField axis predecessor)
+  ≡ fourℚ * axisPredecessorEnergy axis siteField predecessor
+globalEdgeDifferenceNormFourfold siteField axis predecessor =
   trans
     (sym (axisPartitionSumMatchesGlobal axis
-      (λ site → sq (edgeDifferenceField field axis predecessor site))))
+      (λ site → sq (edgeDifferenceField siteField axis predecessor site))))
     (trans
       (sumRationalCong
         (physicalTransverseCoordinates side4)
         (λ transverse →
           sumRational (allCyclicIndices side4)
             (λ coordinate →
-              sq (edgeDifferenceField field axis predecessor
+              sq (edgeDifferenceField siteField axis predecessor
                 (insertAxis axis coordinate transverse))))
         (λ transverse →
           fourℚ * sq (edgeDifferenceAtTransverse
-            field axis predecessor transverse))
-        (fibreMultiplicityFour field axis predecessor))
+            siteField axis predecessor transverse))
+        (fibreMultiplicityFour siteField axis predecessor))
       (sumRationalScale
         fourℚ
         (physicalTransverseCoordinates side4)
         (λ transverse →
-          sq (edgeDifferenceAtTransverse field axis predecessor transverse))))
+          sq (edgeDifferenceAtTransverse siteField axis predecessor transverse))))
 
-axisDirectionalEnergyAsPredecessorSum : ∀ axis field →
-  axisDirectionalEnergy axis field
+axisDirectionalEnergyAsPredecessorSum : ∀ axis siteField →
+  axisDirectionalEnergy axis siteField
   ≡ sumRational (allCyclicIndices side3)
-      (axisPredecessorEnergy axis field)
-axisDirectionalEnergyAsPredecessorSum axis field =
+      (axisPredecessorEnergy axis siteField)
+axisDirectionalEnergyAsPredecessorSum axis siteField =
   sumSwap
     (physicalTransverseCoordinates side4)
     (allCyclicIndices side3)
     (λ transverse predecessor →
-      sq (edgeDifferenceAtTransverse field axis predecessor transverse))
+      sq (edgeDifferenceAtTransverse siteField axis predecessor transverse))
 
 sumRationalMonotone :
   ∀ {A : Set} (values : List A) (left right : A → ℚ) →
@@ -260,66 +260,66 @@ sumRationalMonotone (value ∷ values) left right pointwise =
     (pointwise value)
     (sumRationalMonotone values left right pointwise)
 
-predecessorNormSumExact : ∀ field axis →
+predecessorNormSumExact : ∀ siteField axis →
   sumRational (allCyclicIndices side3)
-    (λ predecessor → globalNormSq (edgeDifferenceField field axis predecessor))
-  ≡ fourℚ * axisDirectionalEnergy axis field
-predecessorNormSumExact field axis =
+    (λ predecessor → globalNormSq (edgeDifferenceField siteField axis predecessor))
+  ≡ fourℚ * axisDirectionalEnergy axis siteField
+predecessorNormSumExact siteField axis =
   trans
     (sumRationalCong
       (allCyclicIndices side3)
-      (λ predecessor → globalNormSq (edgeDifferenceField field axis predecessor))
-      (λ predecessor → fourℚ * axisPredecessorEnergy axis field predecessor)
-      (globalEdgeDifferenceNormFourfold field axis))
+      (λ predecessor → globalNormSq (edgeDifferenceField siteField axis predecessor))
+      (λ predecessor → fourℚ * axisPredecessorEnergy axis siteField predecessor)
+      (globalEdgeDifferenceNormFourfold siteField axis))
     (trans
       (sumRationalScale
         fourℚ
         (allCyclicIndices side3)
-        (axisPredecessorEnergy axis field))
+        (axisPredecessorEnergy axis siteField))
       (cong (fourℚ *_)
-        (sym (axisDirectionalEnergyAsPredecessorSum axis field))))
+        (sym (axisDirectionalEnergyAsPredecessorSum axis siteField))))
 
 fourTimesDirectionalEnergyContraction :
-  ∀ averageAxis differenceAxis field →
+  ∀ averageAxis differenceAxis siteField →
   averageAxis ≢ differenceAxis →
-  fourℚ * axisDirectionalEnergy differenceAxis (axisAverage4 field averageAxis)
-  ≤ fourℚ * axisDirectionalEnergy differenceAxis field
-fourTimesDirectionalEnergyContraction averageAxis differenceAxis field distinct =
+  fourℚ * axisDirectionalEnergy differenceAxis (axisAverage4 siteField averageAxis)
+  ≤ fourℚ * axisDirectionalEnergy differenceAxis siteField
+fourTimesDirectionalEnergyContraction averageAxis differenceAxis siteField distinct =
   subst
     (λ leftValue →
-      leftValue ≤ fourℚ * axisDirectionalEnergy differenceAxis field)
-    (predecessorNormSumExact (axisAverage4 field averageAxis) differenceAxis)
+      leftValue ≤ fourℚ * axisDirectionalEnergy differenceAxis siteField)
+    (predecessorNormSumExact (axisAverage4 siteField averageAxis) differenceAxis)
     (subst
       (λ rightValue →
         sumRational (allCyclicIndices side3)
           (λ predecessor →
             globalNormSq
-              (edgeDifferenceField (axisAverage4 field averageAxis)
+              (edgeDifferenceField (axisAverage4 siteField averageAxis)
                 differenceAxis predecessor))
         ≤ rightValue)
-      (predecessorNormSumExact field differenceAxis)
+      (predecessorNormSumExact siteField differenceAxis)
       (sumRationalMonotone
         (allCyclicIndices side3)
         (λ predecessor →
           globalNormSq
-            (edgeDifferenceField (axisAverage4 field averageAxis)
+            (edgeDifferenceField (axisAverage4 siteField averageAxis)
               differenceAxis predecessor))
         (λ predecessor →
-          globalNormSq (edgeDifferenceField field differenceAxis predecessor))
+          globalNormSq (edgeDifferenceField siteField differenceAxis predecessor))
         (λ predecessor →
           fixedPredecessorNormContraction
-            averageAxis differenceAxis field predecessor distinct)))
+            averageAxis differenceAxis siteField predecessor distinct)))
 
 distinctAxisDirectionalEnergyContraction :
-  ∀ averageAxis differenceAxis field →
+  ∀ averageAxis differenceAxis siteField →
   averageAxis ≢ differenceAxis →
-  axisDirectionalEnergy differenceAxis (axisAverage4 field averageAxis)
-  ≤ axisDirectionalEnergy differenceAxis field
+  axisDirectionalEnergy differenceAxis (axisAverage4 siteField averageAxis)
+  ≤ axisDirectionalEnergy differenceAxis siteField
 distinctAxisDirectionalEnergyContraction
-  averageAxis differenceAxis field distinct =
+  averageAxis differenceAxis siteField distinct =
   ℚP.*-cancelˡ-≤-pos fourℚ
     (fourTimesDirectionalEnergyContraction
-      averageAxis differenceAxis field distinct)
+      averageAxis differenceAxis siteField distinct)
 
 path4DistinctAxisDifferenceCommutationLevel : ProofLevel
 path4DistinctAxisDifferenceCommutationLevel = computed

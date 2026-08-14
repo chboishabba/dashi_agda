@@ -1,13 +1,6 @@
 name: Triadic closure tower Agda check
 
 on:
-  push:
-    branches: [master]
-    paths:
-      - 'DASHI/Core/TriadicClosureTower.agda'
-      - 'DASHI/Core/TriadicClosureTowerTests.agda'
-      - 'Docs/TriadicClosureTowers.md'
-      - '.github/workflows/triadic-closure-towers.yml'
   pull_request:
     paths:
       - 'DASHI/Core/TriadicClosureTower.agda'
@@ -16,7 +9,7 @@ on:
       - '.github/workflows/triadic-closure-towers.yml'
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:
@@ -32,6 +25,7 @@ jobs:
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
 
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
       - name: Restore Agda 2.9 shadow cache
         uses: actions/cache@v4
         with:

@@ -52,83 +52,83 @@ PhysicalField : Set
 PhysicalField = Physical.PhysicalSU2BondField4
 
 physicalReferenceDifferenceEnergy : PhysicalField → ℚ
-physicalReferenceDifferenceEnergy field =
+physicalReferenceDifferenceEnergy fieldValue =
   ScalarHodge.bondReferenceDifferenceEnergy
-    (field Physical.coordinateX)
+    (fieldValue Physical.coordinateX)
   + ScalarHodge.bondReferenceDifferenceEnergy
-    (field Physical.coordinateY)
+    (fieldValue Physical.coordinateY)
   + ScalarHodge.bondReferenceDifferenceEnergy
-    (field Physical.coordinateZ)
+    (fieldValue Physical.coordinateZ)
 
 PhysicalBondComponentMeanZero : PhysicalField → Set
-PhysicalBondComponentMeanZero field =
-  ScalarHodge.BondComponentMeanZero (field Physical.coordinateX)
-  × (ScalarHodge.BondComponentMeanZero (field Physical.coordinateY)
-  × ScalarHodge.BondComponentMeanZero (field Physical.coordinateZ))
+PhysicalBondComponentMeanZero fieldValue =
+  ScalarHodge.BondComponentMeanZero (fieldValue Physical.coordinateX)
+  × (ScalarHodge.BondComponentMeanZero (fieldValue Physical.coordinateY)
+  × ScalarHodge.BondComponentMeanZero (fieldValue Physical.coordinateZ))
 
 physicalReferenceDifferencePoincare :
-  ∀ field → PhysicalBondComponentMeanZero field →
-  LDL.oneSixteenth * Physical.physicalSU2BondNormSq field
-  ≤ physicalReferenceDifferenceEnergy field
-physicalReferenceDifferencePoincare field (meanX , (meanY , meanZ)) =
+  ∀ fieldValue → PhysicalBondComponentMeanZero fieldValue →
+  LDL.oneSixteenth * Physical.physicalSU2BondNormSq fieldValue
+  ≤ physicalReferenceDifferenceEnergy fieldValue
+physicalReferenceDifferencePoincare fieldValue (meanX , (meanY , meanZ)) =
   let
     boundX = ScalarHodge.path4BondDifferencePoincare
-      (field Physical.coordinateX) meanX
+      (fieldValue Physical.coordinateX) meanX
     boundY = ScalarHodge.path4BondDifferencePoincare
-      (field Physical.coordinateY) meanY
+      (fieldValue Physical.coordinateY) meanY
     boundZ = ScalarHodge.path4BondDifferencePoincare
-      (field Physical.coordinateZ) meanZ
+      (fieldValue Physical.coordinateZ) meanZ
 
     summed :
       LDL.oneSixteenth
-        * ScalarHodge.bondNormSq (field Physical.coordinateX)
+        * ScalarHodge.bondNormSq (fieldValue Physical.coordinateX)
       + LDL.oneSixteenth
-        * ScalarHodge.bondNormSq (field Physical.coordinateY)
+        * ScalarHodge.bondNormSq (fieldValue Physical.coordinateY)
       + LDL.oneSixteenth
-        * ScalarHodge.bondNormSq (field Physical.coordinateZ)
-      ≤ physicalReferenceDifferenceEnergy field
+        * ScalarHodge.bondNormSq (fieldValue Physical.coordinateZ)
+      ≤ physicalReferenceDifferenceEnergy fieldValue
     summed = ℚP.+-mono-≤
       (ℚP.+-mono-≤ boundX boundY) boundZ
   in
   subst
-    (λ lower → lower ≤ physicalReferenceDifferenceEnergy field)
+    (λ lower → lower ≤ physicalReferenceDifferenceEnergy fieldValue)
     (ℚRing.solve-∀
       LDL.oneSixteenth
-      (ScalarHodge.bondNormSq (field Physical.coordinateX))
-      (ScalarHodge.bondNormSq (field Physical.coordinateY))
-      (ScalarHodge.bondNormSq (field Physical.coordinateZ)))
+      (ScalarHodge.bondNormSq (fieldValue Physical.coordinateX))
+      (ScalarHodge.bondNormSq (fieldValue Physical.coordinateY))
+      (ScalarHodge.bondNormSq (fieldValue Physical.coordinateZ)))
     summed
 
 physicalReferenceHodgeEnergy : PhysicalField → ℚ → ℚ
-physicalReferenceHodgeEnergy field constraintPenalty =
-  physicalReferenceDifferenceEnergy field + constraintPenalty
+physicalReferenceHodgeEnergy fieldValue constraintPenalty =
+  physicalReferenceDifferenceEnergy fieldValue + constraintPenalty
 
 physicalReferenceBelowWithConstraint :
-  ∀ field constraintPenalty →
+  ∀ fieldValue constraintPenalty →
   0ℚ ≤ constraintPenalty →
-  physicalReferenceDifferenceEnergy field
-  ≤ physicalReferenceHodgeEnergy field constraintPenalty
-physicalReferenceBelowWithConstraint field constraintPenalty nonnegative =
+  physicalReferenceDifferenceEnergy fieldValue
+  ≤ physicalReferenceHodgeEnergy fieldValue constraintPenalty
+physicalReferenceBelowWithConstraint fieldValue constraintPenalty nonnegative =
   subst
     (λ lower →
-      lower ≤ physicalReferenceDifferenceEnergy field + constraintPenalty)
+      lower ≤ physicalReferenceDifferenceEnergy fieldValue + constraintPenalty)
     (sym (ℚP.+-identityʳ
-      (physicalReferenceDifferenceEnergy field)))
+      (physicalReferenceDifferenceEnergy fieldValue)))
     (ℚP.+-monoʳ-≤
-      (physicalReferenceDifferenceEnergy field) nonnegative)
+      (physicalReferenceDifferenceEnergy fieldValue) nonnegative)
 
 physicalReferenceHodgeCoercivity :
-  ∀ field constraintPenalty →
-  PhysicalBondComponentMeanZero field →
+  ∀ fieldValue constraintPenalty →
+  PhysicalBondComponentMeanZero fieldValue →
   0ℚ ≤ constraintPenalty →
-  LDL.oneSixteenth * Physical.physicalSU2BondNormSq field
-  ≤ physicalReferenceHodgeEnergy field constraintPenalty
+  LDL.oneSixteenth * Physical.physicalSU2BondNormSq fieldValue
+  ≤ physicalReferenceHodgeEnergy fieldValue constraintPenalty
 physicalReferenceHodgeCoercivity
-    field constraintPenalty meanZero constraintNonnegative =
+    fieldValue constraintPenalty meanZero constraintNonnegative =
   ℚP.≤-trans
-    (physicalReferenceDifferencePoincare field meanZero)
+    (physicalReferenceDifferencePoincare fieldValue meanZero)
     (physicalReferenceBelowWithConstraint
-      field constraintPenalty constraintNonnegative)
+      fieldValue constraintPenalty constraintNonnegative)
 
 physicalSU2HodgeReferenceLevel : ProofLevel
 physicalSU2HodgeReferenceLevel = machineChecked

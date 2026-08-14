@@ -1,38 +1,6 @@
 name: YM exact quantitative certificates
 
 on:
-  push:
-    branches: [master]
-    paths:
-      - 'DASHI/Physics/YangMills/BalabanBoolean4*.agda'
-      - 'DASHI/Physics/YangMills/BalabanPath*.agda'
-      - 'DASHI/Physics/YangMills/BalabanPhysical*.agda'
-      - 'DASHI/Physics/YangMills/BalabanFourAxis*.agda'
-      - 'DASHI/Physics/YangMills/BalabanCommutingProjectionMartingaleExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanFiniteEnumerationDistinctExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanConcreteRootedTracePolymer.agda'
-      - 'DASHI/Physics/YangMills/BalabanRationalLDLCertificate.agda'
-      - 'DASHI/Physics/YangMills/BalabanFourDimensional*.agda'
-      - 'DASHI/Physics/YangMills/BalabanSU2Adjoint*.agda'
-      - 'DASHI/Physics/YangMills/BalabanSU2Transport*.agda'
-      - 'DASHI/Physics/YangMills/BalabanDyadic*.agda'
-      - 'DASHI/Physics/YangMills/BalabanWilsonRGCoefficientCombinatoricsExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanNonlinearDifferenceIdentitiesExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanQuadraticOperatorPerturbationExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanMultilinearLipschitzCalculus.agda'
-      - 'DASHI/Physics/YangMills/BalabanCollarPatchResidualBudgetExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanRooted*.agda'
-      - 'DASHI/Physics/YangMills/BalabanTrace*.agda'
-      - 'DASHI/Physics/YangMills/BalabanRunningCouplingIterationExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanTerminal*.agda'
-      - 'DASHI/Physics/YangMills/BalabanClayAnalyticInhabitationSpine.agda'
-      - 'DASHI/Physics/YangMills/ConstructiveYangMillsNextSurface.agda'
-      - 'scripts/check_ym_boolean4_exact.py'
-      - 'scripts/check_ym_physical_progress.py'
-      - 'scripts/search_ym_quantitative_region.py'
-      - 'scripts/generate_path_poincare_sos.py'
-      - 'scripts/generate_path_physical_bridge.py'
-      - '.github/workflows/ym-boolean4-exact.yml'
   pull_request:
     paths:
       - 'DASHI/Physics/YangMills/BalabanBoolean4*.agda'
@@ -68,7 +36,7 @@ on:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:

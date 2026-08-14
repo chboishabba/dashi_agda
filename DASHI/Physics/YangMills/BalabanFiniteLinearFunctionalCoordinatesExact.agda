@@ -22,6 +22,7 @@ module DASHI.Physics.YangMills.BalabanFiniteLinearFunctionalCoordinatesExact whe
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _*_)
+import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
@@ -101,13 +102,15 @@ functionalOfListExpansion {carrier = carrier}
                   * vector selected))
           (scaleExact linear
             (vector column) (basisVector carrier column)))
-        (ℚRing.solve-∀
-          (functional linear (basisVector carrier column))
-          (vector column)
-          (Sums.sumRational columns
-            (λ selected →
-              functional linear (basisVector carrier selected)
-              * vector selected))))
+        (cong
+          (λ head → head
+            + Sums.sumRational columns
+                (λ selected →
+                  functional linear (basisVector carrier selected)
+                  * vector selected))
+          (ℚP.*-comm
+            (vector column)
+            (functional linear (basisVector carrier column))))))
 
 listExpansionPointwiseAsSum :
   ∀ {Index}
@@ -142,8 +145,7 @@ listExpansionIsVector carrier vector row =
           vector column * Matrix.delta carrier row column)
         (λ column →
           Matrix.delta carrier row column * vector column)
-        (λ column → ℚRing.solve-∀
-          (vector column) (Matrix.delta carrier row column)))
+        (λ column → ℚP.*-comm (vector column) (Matrix.delta carrier row column)))
       (Matrix.deltaActsAsIdentity carrier vector row))
 
 finiteLinearFunctionalCoordinateExpansion :

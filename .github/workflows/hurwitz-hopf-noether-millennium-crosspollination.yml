@@ -1,20 +1,6 @@
 name: Hurwitz Hopf Noether Millennium cross-pollination
 
 on:
-  push:
-    branches: [master]
-    paths:
-      - 'DASHI/EverythingHurwitzHopfNoetherCrossPollination.agda'
-      - 'DASHI/Mathematics/Algebra/**'
-      - 'DASHI/Mathematics/Symmetry/**'
-      - 'DASHI/Mathematics/Topology/**'
-      - 'DASHI/Mathematics/CrossPollination/**'
-      - 'DASHI/Physics/YangMills/YangMillsKleinNoetherGaugeInvariantBridgeExact.agda'
-      - 'DASHI/Physics/YangMills/YangMillsHurwitzHopfStructuralGateExact.agda'
-      - 'DASHI/Physics/Closure/NavierStokesKleinCriticalScalingExact.agda'
-      - 'DASHI/Physics/Closure/NavierStokesHopfNoetherContinuationGateExact.agda'
-      - 'scripts/check_hurwitz_hopf_noether_millennium_crosspollination.sh'
-      - '.github/workflows/hurwitz-hopf-noether-millennium-crosspollination.yml'
   pull_request:
     branches:
       - 'agent/ym-clay-alpha-round30-strong-coupling-functional-route'
@@ -34,7 +20,7 @@ on:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:

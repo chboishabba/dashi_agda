@@ -104,8 +104,9 @@ applyRectangularAddExact :
 applyRectangularAddExact carrier matrix left right row =
   trans
     (Sums.sumRationalCong (Matrix.coordinates carrier) _ _
-      (λ column → ℚRing.solve-∀
-        (matrix row column) (left column) (right column)))
+      (λ column →
+        ℚP.*-distribˡ-+
+          (matrix row column) (left column) (right column)))
     (Fubini.sumRationalAdd
       (Matrix.coordinates carrier)
       (λ column → matrix row column * left column)
@@ -152,8 +153,10 @@ applyComposeRectangularExact
                 (vector column) middles
                 (λ middle → left row middle * right middle column)))
             (Sums.sumRationalCong middles _ _
-              (λ middle → ℚRing.solve-∀
-                (left row middle) (right middle column) (vector column)))))
+              (λ middle →
+                ℚP.*-comm
+                  (vector column)
+                  (left row middle * right middle column)))))
 
     swap :
       Sums.sumRational columns
@@ -233,8 +236,10 @@ rectangularAdjointExact rowCarrier columnCarrier matrix vector multiplier =
                 (multiplier row) columns
                 (λ column → matrix row column * vector column)))
             (Sums.sumRationalCong columns _ _
-              (λ column → ℚRing.solve-∀
-                (multiplier row) (matrix row column) (vector column)))))
+              (λ column →
+                ℚP.*-comm
+                  (multiplier row)
+                  (matrix row column * vector column)))))
 
     swap :
       Sums.sumRational rows
@@ -266,8 +271,21 @@ rectangularAdjointExact rowCarrier columnCarrier matrix vector multiplier =
       (λ column →
         trans
           (Sums.sumRationalCong rows _ _
-            (λ row → ℚRing.solve-∀
-              (matrix row column) (vector column) (multiplier row)))
+            (λ row →
+              trans
+                (ℚP.*-assoc
+                  (matrix row column) (vector column) (multiplier row))
+                (trans
+                  (sym
+                    (ℚP.*-assoc
+                      (matrix row column) (vector column) (multiplier row)))
+                  (trans
+                    (cong
+                      (λ value → value * multiplier row)
+                      (ℚP.*-comm
+                        (matrix row column) (vector column)))
+                    (ℚP.*-assoc
+                      (vector column) (matrix row column) (multiplier row))))))
           (Sums.sumRationalScale
             (vector column) rows
             (λ row → matrix row column * multiplier row)))
