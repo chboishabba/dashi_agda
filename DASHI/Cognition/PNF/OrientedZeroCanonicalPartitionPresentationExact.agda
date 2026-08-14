@@ -5,6 +5,7 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Cognition.PNF.OrientedZeroCanonicalFutureExact as Canonical
 import DASHI.Cognition.PNF.OrientedZeroFutureQuotientExact as Wave
+import DASHI.Core.FutureObservationLanguageQuotientExact as Future
 import DASHI.Core.GenericFuturePartitionRefinementExact as Refinement
 import DASHI.Core.StablePartitionCanonicalFutureBridgeExact as Bridge
 
@@ -20,11 +21,6 @@ refinesRefl :
 refinesRefl zero state = refl
 refinesRefl (suc depth) state =
   refl , λ Canonical.tick → refinesRefl depth (Wave.waveStep state)
-
-------------------------------------------------------------------------
--- P1 is injective: current scalar + one-step scalar distinguishes all Wave4
--- states, including the two orientations inside the scalar-zero fibre.
-------------------------------------------------------------------------
 
 depthOneRefinementInjective :
   ∀ {left right : Wave.Wave4} →
@@ -61,10 +57,6 @@ depthOneRefinementInjective {Wave.positiveOne} {Wave.positiveZero} refined with 
 ... | ()
 depthOneRefinementInjective {Wave.positiveOne} {Wave.positiveOne} refined = refl
 
-------------------------------------------------------------------------
--- Hence depth one is already a refinement fixed point.
-------------------------------------------------------------------------
-
 orientedZeroStableAtDepthOne : Refinement.StableAt 1 Wave.scalar step
 orientedZeroStableAtDepthOne = Refinement.stableAt forward Refinement.refinementMonotone
   where
@@ -76,17 +68,13 @@ orientedZeroStableAtDepthOne = Refinement.stableAt forward Refinement.refinement
       with depthOneRefinementInjective refined
     ... | refl = refinesRefl 2 left
 
-------------------------------------------------------------------------
--- MAIN COMPUTATION: P1 is exactly the canonical future-observation quotient.
-------------------------------------------------------------------------
-
 depthOneExactlyCanonicalFuture :
   (left right : Wave.Wave4) →
   (Refinement.RefinesToDepth 1 Wave.scalar step left right →
-    DASHI.Core.FutureObservationLanguageQuotientExact.FutureObservationEquivalent
+    Future.FutureObservationEquivalent
       (Bridge.deterministicSystem step label) Wave.scalar left right)
   ×
-  (DASHI.Core.FutureObservationLanguageQuotientExact.FutureObservationEquivalent
+  (Future.FutureObservationEquivalent
       (Bridge.deterministicSystem step label) Wave.scalar left right →
     Refinement.RefinesToDepth 1 Wave.scalar step left right)
 depthOneExactlyCanonicalFuture =
