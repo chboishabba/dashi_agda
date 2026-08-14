@@ -1,0 +1,20 @@
+module DASHI.EverythingDynamicBiologyRound21 where
+
+-- Cumulative theorem surface through physical-development round 20.
+import DASHI.EverythingPhysicalDevelopmentRound20
+
+-- Round-21 persistent carriers, changing topology, hierarchical control,
+-- measurement quotients, DNA helix/dihedral geometry, and 27-cell characters.
+import DASHI.Biology.Physical.PersistentCarrierTemplatingExact
+import DASHI.Biology.Physical.CrossCarrierTemplatingFamilyExact
+import DASHI.Biology.Physical.DynamicTissueGraphRewriteExact
+import DASHI.Biology.Physical.DynamicTopologyFutureDefectExact
+import DASHI.Biology.Physical.HierarchicalGoalConstraintCompilerExact
+import DASHI.Biology.Physical.GoalErrorDescentControllerExact
+import DASHI.Biology.Physical.DevelopmentalMeasurementQuotientExact
+import DASHI.Biology.Physical.CoupledDevelopmentalOperatorStackExact
+import DASHI.Biology.Physical.ContextDependentPadicPhysicalMapExact
+import DASHI.Biology.Physical.MultiscaleSelfBoundaryExact
+import DASHI.Biology.Physical.DNAHelixDihedralExact
+import DASHI.Biology.Physical.DNASequenceHelixPositionExact
+import DASHI.Biology.Physical.C3CubeFourier27Exact
