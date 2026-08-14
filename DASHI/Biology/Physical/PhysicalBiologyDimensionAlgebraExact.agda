@@ -24,28 +24,30 @@ biologicalDiffusivityMechanicalDimension =
 
 diffusivityHasLengthSquaredPerTimeDimension :
   biologicalDiffusivityMechanicalDimension
-    ≡ Mechanical.lengthDimension Mechanical.⊗ᴰ Mechanical.velocityDimension
+    ≡ Mechanical._⊗ᴰ_ Mechanical.lengthDimension Mechanical.velocityDimension
 diffusivityHasLengthSquaredPerTimeDimension =
   sym Mechanical.viscosityMatchesLengthVelocity
 
 -- Force density has the same M-L-T dimension as a pressure gradient.
 biologicalForceDensityMechanicalDimension : Mechanical.MechanicalDimension
 biologicalForceDensityMechanicalDimension =
-  Mechanical.pressureDimension Mechanical.⊗ᴰ Mechanical.inverseLengthDimension
+  Mechanical._⊗ᴰ_ Mechanical.pressureDimension Mechanical.inverseLengthDimension
 
 -- Existing continuum dimensional theorem reused literally:
 --   pressure gradient = mass density * acceleration.
 forceDensityMatchesDensityAcceleration :
   biologicalForceDensityMechanicalDimension
-    ≡ Mechanical.massDensityDimension Mechanical.⊗ᴰ Mechanical.accelerationDimension
+    ≡ Mechanical._⊗ᴰ_
+        Mechanical.massDensityDimension Mechanical.accelerationDimension
 forceDensityMatchesDensityAcceleration =
   Mechanical.pressureGradientMatchesDensityAcceleration
 
 -- A velocity time derivative has acceleration dimension, so the inertial term
 -- rho * dv/dt matches the same force-density carrier.
 inertialForceDensityMatchesPressureGradient :
-  Mechanical.massDensityDimension Mechanical.⊗ᴰ
-    (Mechanical.velocityDimension Mechanical.⊗ᴰ Mechanical.frequencyDimension)
+  Mechanical._⊗ᴰ_
+    Mechanical.massDensityDimension
+    (Mechanical._⊗ᴰ_ Mechanical.velocityDimension Mechanical.frequencyDimension)
   ≡ biologicalForceDensityMechanicalDimension
 inertialForceDensityMatchesPressureGradient
   rewrite Mechanical.velocityTimeDerivativeIsAcceleration =
@@ -53,8 +55,9 @@ inertialForceDensityMatchesPressureGradient
 
 -- Advection v·grad(v) has acceleration dimension as well.
 advectiveForceDensityMatchesPressureGradient :
-  Mechanical.massDensityDimension Mechanical.⊗ᴰ
-    (Mechanical.velocityDimension Mechanical.⊗ᴰ Mechanical.velocityGradientDimension)
+  Mechanical._⊗ᴰ_
+    Mechanical.massDensityDimension
+    (Mechanical._⊗ᴰ_ Mechanical.velocityDimension Mechanical.velocityGradientDimension)
   ≡ biologicalForceDensityMechanicalDimension
 advectiveForceDensityMatchesPressureGradient
   rewrite Mechanical.advectionIsAcceleration =
