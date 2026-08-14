@@ -14,16 +14,11 @@ module DASHI.Physics.Closure.NSTriadKNComLiteralOutputFibreKernelRound57Exact wh
 --
 -- ROUND 57 CONTRIBUTION
 --
--- Construct the literal Fourier transport kernel on the ACTUAL finite output
--- fibre before taking absolute values.  For a resonant triad p+q=k, the
--- transport entry from input q to output k has advector p.  This is not an
--- invented kernel: it is exactly the coefficient already used by the physical
--- transport skew-adjoint theorem.
---
--- The still-open same-object seam is now narrower: project this literal kernel
--- to the physical odd P/Q cross channel and prove the common-hat / absolute
--- fibre-mass bounds.  Skewness itself is inherited here and must not be
--- reproved downstream.
+-- Construct the literal Fourier transport coefficient on the ACTUAL finite
+-- `physicalOutputFiber`.  For a resonant triad p+q=k, the transport entry from
+-- input q to output k has advector p, exactly as in the Round-40 physical skew
+-- theorem.  This is the pre-projection kernel; the odd P/Q restriction is
+-- constructed separately without reproving skewness.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -94,19 +89,23 @@ record LiteralPhysicalOutputFibreKernel
     reality : Audit.RealityCondition velocity
     divergenceFree : Audit.DivergenceFreeCondition E velocity
 
-  coefficient : Triad.PhysicalTriadIncidence → C3.Complex F
-  coefficient = literalTriadTransportCoefficient E velocity
-
 open LiteralPhysicalOutputFibreKernel public
+
+literalPhysicalOutputFibreCoefficient :
+  ∀ {r} {F : C3.RealField r}
+    {E : C3.IntegerEmbedding F}
+    {velocity : Z3.FourierMode → C3.Complex3 F}
+    {cutoff : Nat} {output : Z3.FourierMode} →
+  LiteralPhysicalOutputFibreKernel E velocity cutoff output →
+  Triad.PhysicalTriadIncidence → C3.Complex F
+literalPhysicalOutputFibreCoefficient {E = E} {velocity} physical =
+  literalTriadTransportCoefficient E velocity
 
 literalOutputFibreKernelUsesActualTriadEnumeration : Bool
 literalOutputFibreKernelUsesActualTriadEnumeration = true
 
 literalOutputFibreKernelSkewInherited : Bool
 literalOutputFibreKernelSkewInherited = true
-
-physicalOddPQProjectionOfLiteralFibreKernelConstructed : Bool
-physicalOddPQProjectionOfLiteralFibreKernelConstructed = false
 
 literalOutputFibreKernelUsesActualTriadEnumerationIsTrue :
   literalOutputFibreKernelUsesActualTriadEnumeration ≡ true
