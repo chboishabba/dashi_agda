@@ -20,7 +20,7 @@ For `a : Address n` and `d : Digit369`, Round 24 defines `appendDigit a d : Addr
 
 Thus the three child cylinders share the complete depth-`n` parent prefix independently of any Euclidean visualization.
 
-## Exact pants indexing
+## Exact one-step pants indexing
 
 The existing branch-cobordism carrier composes two `1 -> 2` junctions into an exact `1 -> 3` junction. Round 24 introduces `slot3`, `slot6`, `slot9` and exact two-way round trips
 
@@ -31,6 +31,30 @@ Those slots enumerate the three outputs of `composedOneToThree` in exact list or
 `CylinderPantsBridge parent` records the refined child, branch slot, and existing output channel for each digit. At depth one it directly reuses
 
 `prefixTwoToOne (refineOne parent digit) = parent`.
+
+## Arbitrary-depth frontier equivalence
+
+`TernaryPantsFrontierExact` iterates the one-step correspondence at the path level.
+
+A depth-`n` pants path is
+
+`PantsPath n = Vec BranchSlot n`.
+
+The module defines
+
+`addressToPantsPath : Address n -> PantsPath n`
+
+and
+
+`pantsPathToAddress : PantsPath n -> Address n`,
+
+and proves both round trips exactly for every finite `n`.
+
+Therefore the frontier of the repeated ternary pants-choice tree is indexed exactly by the SSP369 depth-`n` cylinder addresses. Refinement also commutes with path extension: appending a digit to a cylinder address is exactly the same finite operation as appending the corresponding pants branch slot.
+
+A concrete depth-three regression proves
+
+`[3,9,6] <-> [slot3,slot9,slot6]`.
 
 ## Discrete 3D observation
 
@@ -52,11 +76,13 @@ Atiyah supplies boundary/gluing/cobordism vocabulary only; no physical TQFT clai
 
 ## Next producer
 
-The next high-alpha layer is genuinely geometric rather than another correspondence record:
+The first two finite-combinatorial obligations are now closed: arbitrary-depth branch paths exist, and their depth-`n` frontier is exactly equivalent to `Address n`.
 
-1. recursively construct the finite ternary branch complex at arbitrary depth;
-2. prove its depth-`n` frontier is indexed exactly by `Address n`;
-3. construct a collision-free embedded graph in `R^3` preserving prefix ancestry;
-4. thicken each trivalent junction to an oriented pants/tube patch;
-5. prove gluing compatibility;
-6. only then establish quantitative distortion bounds between intrinsic ultrametric and extrinsic graph/Euclidean metrics.
+The remaining high-alpha layer is genuinely geometric:
+
+1. construct a collision-free embedded graph in `R^3` preserving prefix ancestry;
+2. thicken each trivalent junction to an oriented pants/tube patch;
+3. prove gluing compatibility of adjacent patches;
+4. only then establish quantitative distortion bounds between intrinsic ultrametric and extrinsic graph/Euclidean metrics.
+
+This keeps topology, embedding, thickening, and metric distortion as separate theorem surfaces rather than silently identifying them.
