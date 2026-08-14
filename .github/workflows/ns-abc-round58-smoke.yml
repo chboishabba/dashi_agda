@@ -2,6 +2,9 @@ name: NS A-B-C Round58 smoke typecheck
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - agent/ym-round52-source-dictionary-physical-leaves
 
 permissions:
   contents: read
