@@ -48,24 +48,7 @@ open import Data.Rational.Base as ℚ using
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
-half two : ℚ
-half = Int.+ 1 / 2
-two = Int.+ 2 / 1
-
-dyadicScale : Nat → ℚ
-dyadicScale zero = 1ℚ
-dyadicScale (suc shell) = two * dyadicScale shell
-
-inverseDyadicScale : Nat → ℚ
-inverseDyadicScale zero = 1ℚ
-inverseDyadicScale (suc shell) = half * inverseDyadicScale shell
-
-inverseDyadicReciprocal :
-  ∀ shell → inverseDyadicScale shell * dyadicScale shell ≡ 1ℚ
-inverseDyadicReciprocal zero = refl
-inverseDyadicReciprocal (suc shell)
-  rewrite inverseDyadicReciprocal shell =
-  ℚRing.solve []
+open import DASHI.Physics.Closure.NSTriadKNHHBadDyadicScalePrimitivesRound58 public
 
 rawHHBadRatio : Nat → ℚ
 rawHHBadRatio shell = two * dyadicScale shell
