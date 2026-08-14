@@ -7,6 +7,7 @@ import DASHI.EverythingPhysicalDevelopmentRound20
 -- measurement quotients, DNA helix/dihedral geometry, and 27-cell characters.
 import DASHI.Biology.Physical.PersistentCarrierTemplatingExact
 import DASHI.Biology.Physical.CrossCarrierTemplatingFamilyExact
+import DASHI.Biology.Physical.AbiogenesisInevitabilityBoundaryExact
 import DASHI.Biology.Physical.DynamicTissueGraphRewriteExact
 import DASHI.Biology.Physical.DynamicTopologyFutureDefectExact
 import DASHI.Biology.Physical.HierarchicalGoalConstraintCompilerExact
