@@ -115,6 +115,13 @@ opaqueObservationPublicFactored =
     (λ public ciphertext → false)
     (λ hidden ciphertext → refl)
 
+opaqueInternalDifferenceCannotBecomeObservableSplit :
+  ObservableRouteSplit opaqueRouteSurface → ⊥
+opaqueInternalDifferenceCannotBecomeObservableSplit split =
+  Observation.publicFactoredCannotSplitSamePublicFibre
+    opaqueObservationPublicFactored
+    (observableRouteSplitGivesHiddenDependentObservation split)
+
 directRouteSurface : RoutedProtocolSurface
 directRouteSurface =
   routedProtocolSurface
