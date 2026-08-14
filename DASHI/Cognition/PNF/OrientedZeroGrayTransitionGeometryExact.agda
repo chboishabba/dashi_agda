@@ -4,13 +4,6 @@ open import DASHI.Core.Prelude
 
 import DASHI.Cognition.PNF.OrientedZeroFutureQuotientExact as Wave
 
-------------------------------------------------------------------------
--- CODE LENGTH VS TRANSITION GEOMETRY
---
--- Binary and Gray encodings both use exactly two bits and reopen Wave4 exactly.
--- Their induced Hamming geometry differs along the physical phase path.
-------------------------------------------------------------------------
-
 bitDifference : Bool → Bool → Nat
 bitDifference false false = 0
 bitDifference false true = 1
@@ -74,6 +67,30 @@ grayStrictlyImprovesPathDistortion : grayPathDistortion < binaryPathDistortion
 grayStrictlyImprovesPathDistortion = s≤s (s≤s (s≤s (s≤s z≤n)))
 
 ------------------------------------------------------------------------
--- Therefore minimum description length alone does not determine the best code:
--- equal-rate exact encodings can have distinct dynamical transition geometry.
+-- Equal-rate second-order objective.
+------------------------------------------------------------------------
+
+fixedCodeRate : Nat
+fixedCodeRate = 2
+
+binaryRatePlusTransition : Nat
+binaryRatePlusTransition = fixedCodeRate + binaryPathDistortion
+
+grayRatePlusTransition : Nat
+grayRatePlusTransition = fixedCodeRate + grayPathDistortion
+
+binaryRatePlusTransitionIsSix : binaryRatePlusTransition ≡ 6
+binaryRatePlusTransitionIsSix = refl
+
+grayRatePlusTransitionIsFive : grayRatePlusTransition ≡ 5
+grayRatePlusTransitionIsFive = refl
+
+grayStrictlyImprovesEqualRateDynamicObjective :
+  grayRatePlusTransition < binaryRatePlusTransition
+grayStrictlyImprovesEqualRateDynamicObjective =
+  s≤s (s≤s (s≤s (s≤s (s≤s (s≤s z≤n)))))
+
+------------------------------------------------------------------------
+-- Minimum description length alone therefore does not determine the best exact
+-- code: equal-rate encodings may induce different dynamical geometry.
 ------------------------------------------------------------------------
