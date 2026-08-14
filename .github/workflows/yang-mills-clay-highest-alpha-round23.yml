@@ -1,8 +1,6 @@
 name: Yang-Mills Clay highest-alpha round 23
 
 on:
-  push:
-    branches: [master]
   pull_request:
     branches:
       - 'agent/ym-clay-alpha-round22-hodge-wilson-repair'
@@ -18,7 +16,7 @@ on:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:
@@ -36,5 +34,6 @@ jobs:
           submodules: recursive
           persist-credentials: false
       - uses: cachix/install-nix-action@v27
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
       - name: Check unscaled Poincare wall and terminal-scale gap pullback
         run: nix develop --command bash scripts/check_yang_mills_clay_highest_alpha_round23.sh

@@ -1,22 +1,6 @@
 name: YM Clay coercivity clean Agda CI
 
 on:
-  push:
-    branches: [master]
-    paths:
-      - 'DASHI/Physics/YangMills/BalabanPath4*.agda'
-      - 'DASHI/Physics/YangMills/BalabanPhysical*.agda'
-      - 'DASHI/Physics/YangMills/BalabanFinite*.agda'
-      - 'DASHI/Physics/YangMills/BalabanFourAxis*.agda'
-      - 'DASHI/Physics/YangMills/BalabanSU2*.agda'
-      - 'DASHI/Physics/YangMills/BalabanCommutingProjectionMartingaleExact.agda'
-      - 'DASHI/Physics/YangMills/ConstructiveYangMillsNextSurface.agda'
-      - 'DASHI/Physics/YangMills/BalabanPhysicalProgressLedger.agda'
-      - 'scripts/check_ym_boolean4_exact.py'
-      - 'scripts/check_ym_physical_progress.py'
-      - 'scripts/generate_path_poincare_sos.py'
-      - 'scripts/generate_path_physical_bridge.py'
-      - '.github/workflows/ym-clay-coercivity-ci.yml'
   pull_request:
     paths:
       - 'DASHI/Physics/YangMills/BalabanPath4*.agda'
@@ -36,7 +20,7 @@ on:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:

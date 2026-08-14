@@ -28,7 +28,7 @@ on:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -40,5 +40,6 @@ jobs:
         with:
           submodules: recursive
       - uses: cachix/install-nix-action@v27
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
       - name: Check constructive, critical, discourse, stage, dependency and authority boundaries
         run: nix develop --command bash scripts/check_pathologic_typed_dependency.sh

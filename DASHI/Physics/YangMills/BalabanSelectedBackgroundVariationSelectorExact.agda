@@ -66,7 +66,7 @@ remainingPlusPairIsCorrelated = ℚRing.solve []
 
 record SingletonExtractionWitness
     (background : Physical.RationalSU2Background4)
-    (field : Coordinates.PhysicalSU2BondField4)
+    (fieldValue : Coordinates.PhysicalSU2BondField4)
     (plaquette : Physical.Plaquette4) : Set₁ where
   field
     FineVariation : Set
@@ -85,7 +85,7 @@ record SingletonExtractionWitness
     selectorConstantNonnegative : 0ℚ ≤ selectorConstant
     variationChargeBound :
       variationNormSq variation
-      ≤ selectorConstant * Wilson.plaquetteCrossCharge field plaquette
+      ≤ selectorConstant * Wilson.plaquetteCrossCharge fieldValue plaquette
 
     firstVariation : FineVariation → ℚ
     extractionSpillover : ℚ
@@ -94,13 +94,13 @@ record SingletonExtractionWitness
     extractsLiteralSingleton :
       firstVariation variation
       ≡ Partition.physicalPlaquetteWilsonLinearPart
-          background field plaquette
+          background fieldValue plaquette
         + extractionSpillover
 
     spilloverUpper :
       extractionSpillover
       ≤ remainingSingletonCoefficient
-          * Wilson.plaquetteCrossCharge field plaquette
+          * Wilson.plaquetteCrossCharge fieldValue plaquette
 
 open SingletonExtractionWitness public
 
@@ -114,16 +114,16 @@ sumZeroImpliesLeftIsNegativeRight left right sumZero =
       (ℚRing.solve-∀ right))
 
 selectedBackgroundSingletonCurvatureLower :
-  ∀ {background field plaquette} →
-  SingletonExtractionWitness background field plaquette →
+  ∀ {background fieldValue plaquette} →
+  SingletonExtractionWitness background fieldValue plaquette →
   - (remainingSingletonCoefficient
-      * Wilson.plaquetteCrossCharge field plaquette)
+      * Wilson.plaquetteCrossCharge fieldValue plaquette)
   ≤ Partition.physicalPlaquetteWilsonLinearPart
-      background field plaquette
-selectedBackgroundSingletonCurvatureLower {background} {field} {plaquette} witness =
+      background fieldValue plaquette
+selectedBackgroundSingletonCurvatureLower {background} {fieldValue} {plaquette} witness =
   let
     singleton = Partition.physicalPlaquetteWilsonLinearPart
-      background field plaquette
+      background fieldValue plaquette
     spill = extractionSpillover witness
     balance : singleton + spill ≡ 0ℚ
     balance = trans
@@ -136,102 +136,102 @@ selectedBackgroundSingletonCurvatureLower {background} {field} {plaquette} witne
   subst
     (λ upper →
       - (remainingSingletonCoefficient
-          * Wilson.plaquetteCrossCharge field plaquette)
+          * Wilson.plaquetteCrossCharge fieldValue plaquette)
       ≤ upper)
     (sym singletonExact)
     reflected
 
-physicalCorrelatedIsSingletonPlusPair : ∀ background field plaquette →
-  Partition.physicalPlaquetteWilsonLinearPart background field plaquette
-    + FiniteAtoms.physicalPlaquettePairWilsonPart background field plaquette
-  ≡ Split.physicalPlaquetteCorrelatedWilsonPart background field plaquette
-physicalCorrelatedIsSingletonPlusPair background field plaquette =
+physicalCorrelatedIsSingletonPlusPair : ∀ background fieldValue plaquette →
+  Partition.physicalPlaquetteWilsonLinearPart background fieldValue plaquette
+    + FiniteAtoms.physicalPlaquettePairWilsonPart background fieldValue plaquette
+  ≡ Split.physicalPlaquetteCorrelatedWilsonPart background fieldValue plaquette
+physicalCorrelatedIsSingletonPlusPair background fieldValue plaquette =
   sym (Partition.sumMapPointwiseAdd
     Placement.plaquetteSecondVariationPlacements4
-    (Partition.placementLinearWilsonPart background field plaquette)
-    (FiniteAtoms.placementPairWilsonPart background field plaquette))
+    (Partition.placementLinearWilsonPart background fieldValue plaquette)
+    (FiniteAtoms.placementPairWilsonPart background fieldValue plaquette))
 
 casePlaquettePairLower :
-  ∀ background field plaquette →
+  ∀ background fieldValue plaquette →
   Radius.RelaxedInverseLinkRadius background →
   - ((Coeff.rho * (+ 1 / 256))
-      * Wilson.plaquetteCrossCharge field plaquette)
-  ≤ FiniteAtoms.physicalPlaquettePairWilsonPart background field plaquette
-casePlaquettePairLower background field (pair site axes) radius =
+      * Wilson.plaquetteCrossCharge fieldValue plaquette)
+  ≤ FiniteAtoms.physicalPlaquettePairWilsonPart background fieldValue plaquette
+casePlaquettePairLower background fieldValue (pair site axes) radius =
   subst
     (λ lower → lower ≤
       FiniteAtoms.physicalPlaquettePairWilsonPart
-        background field (pair site axes))
+        background fieldValue (pair site axes))
     (ℚRing.solve-∀ Coeff.rho
-      (Wilson.plaquetteCrossCharge field (pair site axes)))
-    (FiniteAtoms.physicalPairWilsonLower background field site axes radius)
+      (Wilson.plaquetteCrossCharge fieldValue (pair site axes)))
+    (FiniteAtoms.physicalPairWilsonLower background fieldValue site axes radius)
 
 selectedBackgroundCorrelatedWilsonLower :
-  ∀ {background field plaquette} →
+  ∀ {background fieldValue plaquette} →
   Radius.RelaxedInverseLinkRadius background →
-  SingletonExtractionWitness background field plaquette →
+  SingletonExtractionWitness background fieldValue plaquette →
   - (Wilson.rhoOverThirtySix
-      * Wilson.plaquetteCrossCharge field plaquette)
-  ≤ Split.physicalPlaquetteCorrelatedWilsonPart background field plaquette
-selectedBackgroundCorrelatedWilsonLower {background} {field} {plaquette}
+      * Wilson.plaquetteCrossCharge fieldValue plaquette)
+  ≤ Split.physicalPlaquetteCorrelatedWilsonPart background fieldValue plaquette
+selectedBackgroundCorrelatedWilsonLower {background} {fieldValue} {plaquette}
     radius witness =
   let
     singletonLower = selectedBackgroundSingletonCurvatureLower witness
-    pairLower = casePlaquettePairLower background field plaquette radius
+    pairLower = casePlaquettePairLower background fieldValue plaquette radius
     summed = ℚP.+-mono-≤ singletonLower pairLower
     lowerExact :
       - (remainingSingletonCoefficient
-          * Wilson.plaquetteCrossCharge field plaquette)
+          * Wilson.plaquetteCrossCharge fieldValue plaquette)
       + - ((Coeff.rho * (+ 1 / 256))
-          * Wilson.plaquetteCrossCharge field plaquette)
+          * Wilson.plaquetteCrossCharge fieldValue plaquette)
       ≡ - (Wilson.rhoOverThirtySix
-          * Wilson.plaquetteCrossCharge field plaquette)
+          * Wilson.plaquetteCrossCharge fieldValue plaquette)
     lowerExact = ℚRing.solve-∀
-      (Wilson.plaquetteCrossCharge field plaquette)
+      (Wilson.plaquetteCrossCharge fieldValue plaquette)
   in
   subst
     (λ lower → lower ≤
-      Split.physicalPlaquetteCorrelatedWilsonPart background field plaquette)
+      Split.physicalPlaquetteCorrelatedWilsonPart background fieldValue plaquette)
     lowerExact
     (subst
       (λ upper →
         - (remainingSingletonCoefficient
-            * Wilson.plaquetteCrossCharge field plaquette)
+            * Wilson.plaquetteCrossCharge fieldValue plaquette)
         + - ((Coeff.rho * (+ 1 / 256))
-            * Wilson.plaquetteCrossCharge field plaquette)
+            * Wilson.plaquetteCrossCharge fieldValue plaquette)
         ≤ upper)
-      (physicalCorrelatedIsSingletonPlusPair background field plaquette)
+      (physicalCorrelatedIsSingletonPlusPair background fieldValue plaquette)
       summed)
 
 record SelectedBackgroundVariationSelector
     (background : Physical.RationalSU2Background4)
-    (field : Coordinates.PhysicalSU2BondField4) : Set₁ where
+    (fieldValue : Coordinates.PhysicalSU2BondField4) : Set₁ where
   field
     select : ∀ plaquette →
-      SingletonExtractionWitness background field plaquette
+      SingletonExtractionWitness background fieldValue plaquette
 
 open SelectedBackgroundVariationSelector public
 
 selectorAndRadiusGiveRefinedBounds :
-  ∀ {background field} →
+  ∀ {background fieldValue} →
   Radius.RelaxedInverseLinkRadius background →
-  SelectedBackgroundVariationSelector background field →
-  Split.RefinedCanonicalPhysicalWilsonBounds background field
-selectorAndRadiusGiveRefinedBounds {background} {field} radius selector = record
+  SelectedBackgroundVariationSelector background fieldValue →
+  Split.RefinedCanonicalPhysicalWilsonBounds background fieldValue
+selectorAndRadiusGiveRefinedBounds {background} {fieldValue} radius selector = record
   { Split.RefinedCanonicalPhysicalWilsonBounds.correlatedLower =
       λ plaquette →
         selectedBackgroundCorrelatedWilsonLower radius (select selector plaquette)
   ; Split.RefinedCanonicalPhysicalWilsonBounds.deepRemainderLower =
       λ { (pair site axes) →
         FiniteAtoms.physicalDeepWilsonRemainderLower
-          background field site axes radius }
+          background fieldValue site axes radius }
   }
 
 selectorAndRadiusGivePhysicalWLocal :
-  ∀ {background field} →
+  ∀ {background fieldValue} →
   Radius.RelaxedInverseLinkRadius background →
-  SelectedBackgroundVariationSelector background field →
-  Wilson.PhysicalWilsonSignedLocal background field
+  SelectedBackgroundVariationSelector background fieldValue →
+  Wilson.PhysicalWilsonSignedLocal background fieldValue
 selectorAndRadiusGivePhysicalWLocal radius selector =
   Split.refinedBoundsImplyWLocal
     (selectorAndRadiusGiveRefinedBounds radius selector)

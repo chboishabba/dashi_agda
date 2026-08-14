@@ -375,12 +375,12 @@ BondField4 : Set
 BondField4 = Axis4 → ScalarField
 
 forwardDifference : Axis4 → ScalarField → ScalarField
-forwardDifference axis field site =
-  field (shiftForward axis site) - field site
+forwardDifference axis fieldValue site =
+  fieldValue (shiftForward axis site) - fieldValue site
 
 backwardDifference : Axis4 → ScalarField → ScalarField
-backwardDifference axis field site =
-  field site - field (shiftBackward axis site)
+backwardDifference axis fieldValue site =
+  fieldValue site - fieldValue (shiftBackward axis site)
 
 fieldSubtract : ScalarField → ScalarField → ScalarField
 fieldSubtract left right site = left site - right site
@@ -389,7 +389,7 @@ fieldInner : ScalarField → ScalarField → ℚ
 fieldInner left right = sumSites (λ site → left site * right site)
 
 fieldNormSq : ScalarField → ℚ
-fieldNormSq field = fieldInner field field
+fieldNormSq fieldValue = fieldInner fieldValue fieldValue
 
 fieldInnerSymmetric : ∀ left right →
   fieldInner left right ≡ fieldInner right left
@@ -427,96 +427,96 @@ shiftedProductReindex left right axis =
     (sym shiftedExact)
     (sumSitesForwardInvariant term axis)
 
-summationByParts : ∀ axis field test →
-  fieldInner (forwardDifference axis field) test
-  ≡ - fieldInner field (backwardDifference axis test)
-summationByParts axis field test =
+summationByParts : ∀ axis fieldValue test →
+  fieldInner (forwardDifference axis fieldValue) test
+  ≡ - fieldInner fieldValue (backwardDifference axis test)
+summationByParts axis fieldValue test =
   let
     expandedLeft :
-      fieldInner (forwardDifference axis field) test
+      fieldInner (forwardDifference axis fieldValue) test
       ≡ sumSites
-          (λ site → field (shiftForward axis site) * test site)
-        - fieldInner field test
+          (λ site → fieldValue (shiftForward axis site) * test site)
+        - fieldInner fieldValue test
     expandedLeft =
       trans
         (sumSitesCong _ _ (λ site →
           ℚRing.solve-∀
-            (field (shiftForward axis site))
-            (field site) (test site)))
+            (fieldValue (shiftForward axis site))
+            (fieldValue site) (test site)))
         (sumSitesSubtract
-          (λ site → field (shiftForward axis site) * test site)
-          (λ site → field site * test site))
+          (λ site → fieldValue (shiftForward axis site) * test site)
+          (λ site → fieldValue site * test site))
 
-    reindexed = shiftedProductReindex field test axis
+    reindexed = shiftedProductReindex fieldValue test axis
   in
   trans expandedLeft
     (trans
-      (cong (_- fieldInner field test) reindexed)
+      (cong (_- fieldInner fieldValue test) reindexed)
       (trans
         (ℚRing.solve-∀
-          (fieldInner field test)
+          (fieldInner fieldValue test)
           (sumSites
-            (λ site → field site * test (shiftBackward axis site))))
+            (λ site → fieldValue site * test (shiftBackward axis site))))
         (sym
           (trans
             (cong -_
               (trans
                 (sumSitesCong _ _ (λ site →
                   ℚRing.solve-∀
-                    (field site) (test site)
+                    (fieldValue site) (test site)
                     (test (shiftBackward axis site))))
                 (sumSitesSubtract
-                  (λ site → field site * test site)
+                  (λ site → fieldValue site * test site)
                   (λ site →
-                    field site * test (shiftBackward axis site)))))
+                    fieldValue site * test (shiftBackward axis site)))))
             (ℚRing.solve-∀
-              (fieldInner field test)
+              (fieldInner fieldValue test)
               (sumSites
                 (λ site →
-                  field site * test (shiftBackward axis site))))))))
+                  fieldValue site * test (shiftBackward axis site))))))))
 
-backwardForwardDifferenceCommute : ∀ backwardAxis forwardAxis field site →
+backwardForwardDifferenceCommute : ∀ backwardAxis forwardAxis fieldValue site →
   backwardDifference backwardAxis
-    (forwardDifference forwardAxis field) site
+    (forwardDifference forwardAxis fieldValue) site
   ≡ forwardDifference forwardAxis
-      (backwardDifference backwardAxis field) site
-backwardForwardDifferenceCommute backwardAxis forwardAxis field site =
+      (backwardDifference backwardAxis fieldValue) site
+backwardForwardDifferenceCommute backwardAxis forwardAxis fieldValue site =
   subst
     (λ mixedSite →
-      (field (shiftForward forwardAxis site) - field mixedSite)
-      - (field site - field (shiftBackward backwardAxis site))
+      (fieldValue (shiftForward forwardAxis site) - fieldValue mixedSite)
+      - (fieldValue site - fieldValue (shiftBackward backwardAxis site))
       ≡
-      (field (shiftForward forwardAxis site)
-        - field (shiftBackward backwardAxis
+      (fieldValue (shiftForward forwardAxis site)
+        - fieldValue (shiftBackward backwardAxis
             (shiftForward forwardAxis site)))
-      - (field site - field (shiftBackward backwardAxis site)))
+      - (fieldValue site - fieldValue (shiftBackward backwardAxis site)))
     (sym (backwardForwardShiftsCommute
       backwardAxis forwardAxis site))
     (ℚRing.solve-∀
-      (field (shiftForward forwardAxis site))
-      (field (shiftBackward backwardAxis
+      (fieldValue (shiftForward forwardAxis site))
+      (fieldValue (shiftBackward backwardAxis
         (shiftForward forwardAxis site)))
-      (field site)
-      (field (shiftBackward backwardAxis site)))
+      (fieldValue site)
+      (fieldValue (shiftBackward backwardAxis site)))
 
-forwardBackwardNormExact : ∀ axis field →
-  fieldNormSq (forwardDifference axis field)
-  ≡ fieldNormSq (backwardDifference axis field)
-forwardBackwardNormExact axis field =
+forwardBackwardNormExact : ∀ axis fieldValue →
+  fieldNormSq (forwardDifference axis fieldValue)
+  ≡ fieldNormSq (backwardDifference axis fieldValue)
+forwardBackwardNormExact axis fieldValue =
   let
     backwardAsShiftedForward : ∀ site →
-      backwardDifference axis field site
-      ≡ forwardDifference axis field (shiftBackward axis site)
+      backwardDifference axis fieldValue site
+      ≡ forwardDifference axis fieldValue (shiftBackward axis site)
     backwardAsShiftedForward site =
-      cong (_- field (shiftBackward axis site))
-        (cong field (shiftForwardBackward axis site))
+      cong (_- fieldValue (shiftBackward axis site))
+        (cong fieldValue (shiftForwardBackward axis site))
 
     backwardNormAsShift :
-      fieldNormSq (backwardDifference axis field)
+      fieldNormSq (backwardDifference axis fieldValue)
       ≡ sumSites
           (λ site →
-            forwardDifference axis field (shiftBackward axis site)
-            * forwardDifference axis field (shiftBackward axis site))
+            forwardDifference axis fieldValue (shiftBackward axis site)
+            * forwardDifference axis fieldValue (shiftBackward axis site))
     backwardNormAsShift =
       sumSitesCong _ _ (λ site →
         cong₂ _*_
@@ -526,67 +526,67 @@ forwardBackwardNormExact axis field =
   trans
     (sym (sumSitesBackwardInvariant
       (λ site →
-        forwardDifference axis field site
-        * forwardDifference axis field site) axis))
+        forwardDifference axis fieldValue site
+        * forwardDifference axis fieldValue site) axis))
     (sym backwardNormAsShift)
 
-mixedCrossIdentity : ∀ leftAxis rightAxis field →
+mixedCrossIdentity : ∀ leftAxis rightAxis fieldValue →
   fieldInner
-    (forwardDifference leftAxis (field rightAxis))
-    (forwardDifference rightAxis (field leftAxis))
+    (forwardDifference leftAxis (fieldValue rightAxis))
+    (forwardDifference rightAxis (fieldValue leftAxis))
   ≡ fieldInner
-      (backwardDifference leftAxis (field leftAxis))
-      (backwardDifference rightAxis (field rightAxis))
-mixedCrossIdentity leftAxis rightAxis field =
+      (backwardDifference leftAxis (fieldValue leftAxis))
+      (backwardDifference rightAxis (fieldValue rightAxis))
+mixedCrossIdentity leftAxis rightAxis fieldValue =
   let
-    B = backwardDifference leftAxis (field leftAxis)
+    B = backwardDifference leftAxis (fieldValue leftAxis)
     forwardB = forwardDifference rightAxis B
 
     first = summationByParts leftAxis
-      (field rightAxis)
-      (forwardDifference rightAxis (field leftAxis))
+      (fieldValue rightAxis)
+      (forwardDifference rightAxis (fieldValue leftAxis))
 
     commuteInside :
-      fieldInner (field rightAxis)
+      fieldInner (fieldValue rightAxis)
         (backwardDifference leftAxis
-          (forwardDifference rightAxis (field leftAxis)))
-      ≡ fieldInner (field rightAxis) forwardB
+          (forwardDifference rightAxis (fieldValue leftAxis)))
+      ≡ fieldInner (fieldValue rightAxis) forwardB
     commuteInside =
       fieldInnerCongRight
-        (field rightAxis)
+        (fieldValue rightAxis)
         (backwardDifference leftAxis
-          (forwardDifference rightAxis (field leftAxis)))
+          (forwardDifference rightAxis (fieldValue leftAxis)))
         forwardB
         (backwardForwardDifferenceCommute
-          leftAxis rightAxis (field leftAxis))
+          leftAxis rightAxis (fieldValue leftAxis))
 
-    second = summationByParts rightAxis B (field rightAxis)
+    second = summationByParts rightAxis B (fieldValue rightAxis)
   in
   trans first
     (trans
       (cong -_ commuteInside)
       (trans
-        (cong -_ (fieldInnerSymmetric (field rightAxis) forwardB))
+        (cong -_ (fieldInnerSymmetric (fieldValue rightAxis) forwardB))
         (trans
           (cong -_ second)
           (ℚRing.solve-∀
             (fieldInner B
-              (backwardDifference rightAxis (field rightAxis)))))))
+              (backwardDifference rightAxis (fieldValue rightAxis)))))))
 
-backwardNormIsForward : ∀ axis field →
-  fieldNormSq (backwardDifference axis field)
-  ≡ fieldNormSq (forwardDifference axis field)
-backwardNormIsForward axis field = sym (forwardBackwardNormExact axis field)
+backwardNormIsForward : ∀ axis fieldValue →
+  fieldNormSq (backwardDifference axis fieldValue)
+  ≡ fieldNormSq (forwardDifference axis fieldValue)
+backwardNormIsForward axis fieldValue = sym (forwardBackwardNormExact axis fieldValue)
 
-backwardCrossIsForward : ∀ leftAxis rightAxis field →
+backwardCrossIsForward : ∀ leftAxis rightAxis fieldValue →
   fieldInner
-    (backwardDifference leftAxis (field leftAxis))
-    (backwardDifference rightAxis (field rightAxis))
+    (backwardDifference leftAxis (fieldValue leftAxis))
+    (backwardDifference rightAxis (fieldValue rightAxis))
   ≡ fieldInner
-    (forwardDifference leftAxis (field rightAxis))
-    (forwardDifference rightAxis (field leftAxis))
-backwardCrossIsForward leftAxis rightAxis field =
-  sym (mixedCrossIdentity leftAxis rightAxis field)
+    (forwardDifference leftAxis (fieldValue rightAxis))
+    (forwardDifference rightAxis (fieldValue leftAxis))
+backwardCrossIsForward leftAxis rightAxis fieldValue =
+  sym (mixedCrossIdentity leftAxis rightAxis fieldValue)
 
 ------------------------------------------------------------------------
 -- Energy expansions.
@@ -768,187 +768,187 @@ normSum4Expansion first second third fourth =
             (fieldInner second fourth) (fieldInner third fourth)))))
 
 periodicGradientEnergy : BondField4 → ℚ
-periodicGradientEnergy field =
-  fieldNormSq (forwardDifference axis0 (field axis0))
-  + fieldNormSq (forwardDifference axis1 (field axis0))
-  + fieldNormSq (forwardDifference axis2 (field axis0))
-  + fieldNormSq (forwardDifference axis3 (field axis0))
-  + fieldNormSq (forwardDifference axis0 (field axis1))
-  + fieldNormSq (forwardDifference axis1 (field axis1))
-  + fieldNormSq (forwardDifference axis2 (field axis1))
-  + fieldNormSq (forwardDifference axis3 (field axis1))
-  + fieldNormSq (forwardDifference axis0 (field axis2))
-  + fieldNormSq (forwardDifference axis1 (field axis2))
-  + fieldNormSq (forwardDifference axis2 (field axis2))
-  + fieldNormSq (forwardDifference axis3 (field axis2))
-  + fieldNormSq (forwardDifference axis0 (field axis3))
-  + fieldNormSq (forwardDifference axis1 (field axis3))
-  + fieldNormSq (forwardDifference axis2 (field axis3))
-  + fieldNormSq (forwardDifference axis3 (field axis3))
+periodicGradientEnergy fieldValue =
+  fieldNormSq (forwardDifference axis0 (fieldValue axis0))
+  + fieldNormSq (forwardDifference axis1 (fieldValue axis0))
+  + fieldNormSq (forwardDifference axis2 (fieldValue axis0))
+  + fieldNormSq (forwardDifference axis3 (fieldValue axis0))
+  + fieldNormSq (forwardDifference axis0 (fieldValue axis1))
+  + fieldNormSq (forwardDifference axis1 (fieldValue axis1))
+  + fieldNormSq (forwardDifference axis2 (fieldValue axis1))
+  + fieldNormSq (forwardDifference axis3 (fieldValue axis1))
+  + fieldNormSq (forwardDifference axis0 (fieldValue axis2))
+  + fieldNormSq (forwardDifference axis1 (fieldValue axis2))
+  + fieldNormSq (forwardDifference axis2 (fieldValue axis2))
+  + fieldNormSq (forwardDifference axis3 (fieldValue axis2))
+  + fieldNormSq (forwardDifference axis0 (fieldValue axis3))
+  + fieldNormSq (forwardDifference axis1 (fieldValue axis3))
+  + fieldNormSq (forwardDifference axis2 (fieldValue axis3))
+  + fieldNormSq (forwardDifference axis3 (fieldValue axis3))
 
 curlComponent : Axis4 → Axis4 → BondField4 → ScalarField
-curlComponent left right field =
+curlComponent left right fieldValue =
   fieldSubtract
-    (forwardDifference left (field right))
-    (forwardDifference right (field left))
+    (forwardDifference left (fieldValue right))
+    (forwardDifference right (fieldValue left))
 
 periodicCurlEnergy : BondField4 → ℚ
-periodicCurlEnergy field =
-  fieldNormSq (curlComponent axis0 axis1 field)
-  + fieldNormSq (curlComponent axis0 axis2 field)
-  + fieldNormSq (curlComponent axis0 axis3 field)
-  + fieldNormSq (curlComponent axis1 axis2 field)
-  + fieldNormSq (curlComponent axis1 axis3 field)
-  + fieldNormSq (curlComponent axis2 axis3 field)
+periodicCurlEnergy fieldValue =
+  fieldNormSq (curlComponent axis0 axis1 fieldValue)
+  + fieldNormSq (curlComponent axis0 axis2 fieldValue)
+  + fieldNormSq (curlComponent axis0 axis3 fieldValue)
+  + fieldNormSq (curlComponent axis1 axis2 fieldValue)
+  + fieldNormSq (curlComponent axis1 axis3 fieldValue)
+  + fieldNormSq (curlComponent axis2 axis3 fieldValue)
 
 periodicDivergence : BondField4 → ScalarField
-periodicDivergence field =
+periodicDivergence fieldValue =
   fieldSum4
-    (backwardDifference axis0 (field axis0))
-    (backwardDifference axis1 (field axis1))
-    (backwardDifference axis2 (field axis2))
-    (backwardDifference axis3 (field axis3))
+    (backwardDifference axis0 (fieldValue axis0))
+    (backwardDifference axis1 (fieldValue axis1))
+    (backwardDifference axis2 (fieldValue axis2))
+    (backwardDifference axis3 (fieldValue axis3))
 
 periodicDivergenceEnergy : BondField4 → ℚ
-periodicDivergenceEnergy field = fieldNormSq (periodicDivergence field)
+periodicDivergenceEnergy fieldValue = fieldNormSq (periodicDivergence fieldValue)
 
-periodicCurlExpansion : ∀ field →
-  periodicCurlEnergy field
+periodicCurlExpansion : ∀ fieldValue →
+  periodicCurlEnergy fieldValue
   ≡
-    (fieldNormSq (forwardDifference axis0 (field axis1))
-      + fieldNormSq (forwardDifference axis1 (field axis0))
+    (fieldNormSq (forwardDifference axis0 (fieldValue axis1))
+      + fieldNormSq (forwardDifference axis1 (fieldValue axis0))
       - (+ 2 / 1) * fieldInner
-          (forwardDifference axis0 (field axis1))
-          (forwardDifference axis1 (field axis0)))
-    + (fieldNormSq (forwardDifference axis0 (field axis2))
-      + fieldNormSq (forwardDifference axis2 (field axis0))
+          (forwardDifference axis0 (fieldValue axis1))
+          (forwardDifference axis1 (fieldValue axis0)))
+    + (fieldNormSq (forwardDifference axis0 (fieldValue axis2))
+      + fieldNormSq (forwardDifference axis2 (fieldValue axis0))
       - (+ 2 / 1) * fieldInner
-          (forwardDifference axis0 (field axis2))
-          (forwardDifference axis2 (field axis0)))
-    + (fieldNormSq (forwardDifference axis0 (field axis3))
-      + fieldNormSq (forwardDifference axis3 (field axis0))
+          (forwardDifference axis0 (fieldValue axis2))
+          (forwardDifference axis2 (fieldValue axis0)))
+    + (fieldNormSq (forwardDifference axis0 (fieldValue axis3))
+      + fieldNormSq (forwardDifference axis3 (fieldValue axis0))
       - (+ 2 / 1) * fieldInner
-          (forwardDifference axis0 (field axis3))
-          (forwardDifference axis3 (field axis0)))
-    + (fieldNormSq (forwardDifference axis1 (field axis2))
-      + fieldNormSq (forwardDifference axis2 (field axis1))
+          (forwardDifference axis0 (fieldValue axis3))
+          (forwardDifference axis3 (fieldValue axis0)))
+    + (fieldNormSq (forwardDifference axis1 (fieldValue axis2))
+      + fieldNormSq (forwardDifference axis2 (fieldValue axis1))
       - (+ 2 / 1) * fieldInner
-          (forwardDifference axis1 (field axis2))
-          (forwardDifference axis2 (field axis1)))
-    + (fieldNormSq (forwardDifference axis1 (field axis3))
-      + fieldNormSq (forwardDifference axis3 (field axis1))
+          (forwardDifference axis1 (fieldValue axis2))
+          (forwardDifference axis2 (fieldValue axis1)))
+    + (fieldNormSq (forwardDifference axis1 (fieldValue axis3))
+      + fieldNormSq (forwardDifference axis3 (fieldValue axis1))
       - (+ 2 / 1) * fieldInner
-          (forwardDifference axis1 (field axis3))
-          (forwardDifference axis3 (field axis1)))
-    + (fieldNormSq (forwardDifference axis2 (field axis3))
-      + fieldNormSq (forwardDifference axis3 (field axis2))
+          (forwardDifference axis1 (fieldValue axis3))
+          (forwardDifference axis3 (fieldValue axis1)))
+    + (fieldNormSq (forwardDifference axis2 (fieldValue axis3))
+      + fieldNormSq (forwardDifference axis3 (fieldValue axis2))
       - (+ 2 / 1) * fieldInner
-          (forwardDifference axis2 (field axis3))
-          (forwardDifference axis3 (field axis2)))
-periodicCurlExpansion field
+          (forwardDifference axis2 (fieldValue axis3))
+          (forwardDifference axis3 (fieldValue axis2)))
+periodicCurlExpansion fieldValue
   rewrite normDifferenceExpansion
-    (forwardDifference axis0 (field axis1))
-    (forwardDifference axis1 (field axis0))
+    (forwardDifference axis0 (fieldValue axis1))
+    (forwardDifference axis1 (fieldValue axis0))
   | normDifferenceExpansion
-    (forwardDifference axis0 (field axis2))
-    (forwardDifference axis2 (field axis0))
+    (forwardDifference axis0 (fieldValue axis2))
+    (forwardDifference axis2 (fieldValue axis0))
   | normDifferenceExpansion
-    (forwardDifference axis0 (field axis3))
-    (forwardDifference axis3 (field axis0))
+    (forwardDifference axis0 (fieldValue axis3))
+    (forwardDifference axis3 (fieldValue axis0))
   | normDifferenceExpansion
-    (forwardDifference axis1 (field axis2))
-    (forwardDifference axis2 (field axis1))
+    (forwardDifference axis1 (fieldValue axis2))
+    (forwardDifference axis2 (fieldValue axis1))
   | normDifferenceExpansion
-    (forwardDifference axis1 (field axis3))
-    (forwardDifference axis3 (field axis1))
+    (forwardDifference axis1 (fieldValue axis3))
+    (forwardDifference axis3 (fieldValue axis1))
   | normDifferenceExpansion
-    (forwardDifference axis2 (field axis3))
-    (forwardDifference axis3 (field axis2)) = refl
+    (forwardDifference axis2 (fieldValue axis3))
+    (forwardDifference axis3 (fieldValue axis2)) = refl
 
-periodicDivergenceExpansion : ∀ field →
-  periodicDivergenceEnergy field
+periodicDivergenceExpansion : ∀ fieldValue →
+  periodicDivergenceEnergy fieldValue
   ≡
-    fieldNormSq (backwardDifference axis0 (field axis0))
-    + fieldNormSq (backwardDifference axis1 (field axis1))
-    + fieldNormSq (backwardDifference axis2 (field axis2))
-    + fieldNormSq (backwardDifference axis3 (field axis3))
+    fieldNormSq (backwardDifference axis0 (fieldValue axis0))
+    + fieldNormSq (backwardDifference axis1 (fieldValue axis1))
+    + fieldNormSq (backwardDifference axis2 (fieldValue axis2))
+    + fieldNormSq (backwardDifference axis3 (fieldValue axis3))
     + (+ 2 / 1) *
       (fieldInner
-        (backwardDifference axis0 (field axis0))
-        (backwardDifference axis1 (field axis1))
+        (backwardDifference axis0 (fieldValue axis0))
+        (backwardDifference axis1 (fieldValue axis1))
       + fieldInner
-        (backwardDifference axis0 (field axis0))
-        (backwardDifference axis2 (field axis2))
+        (backwardDifference axis0 (fieldValue axis0))
+        (backwardDifference axis2 (fieldValue axis2))
       + fieldInner
-        (backwardDifference axis0 (field axis0))
-        (backwardDifference axis3 (field axis3))
+        (backwardDifference axis0 (fieldValue axis0))
+        (backwardDifference axis3 (fieldValue axis3))
       + fieldInner
-        (backwardDifference axis1 (field axis1))
-        (backwardDifference axis2 (field axis2))
+        (backwardDifference axis1 (fieldValue axis1))
+        (backwardDifference axis2 (fieldValue axis2))
       + fieldInner
-        (backwardDifference axis1 (field axis1))
-        (backwardDifference axis3 (field axis3))
+        (backwardDifference axis1 (fieldValue axis1))
+        (backwardDifference axis3 (fieldValue axis3))
       + fieldInner
-        (backwardDifference axis2 (field axis2))
-        (backwardDifference axis3 (field axis3)))
-periodicDivergenceExpansion field =
+        (backwardDifference axis2 (fieldValue axis2))
+        (backwardDifference axis3 (fieldValue axis3)))
+periodicDivergenceExpansion fieldValue =
   normSum4Expansion
-    (backwardDifference axis0 (field axis0))
-    (backwardDifference axis1 (field axis1))
-    (backwardDifference axis2 (field axis2))
-    (backwardDifference axis3 (field axis3))
+    (backwardDifference axis0 (fieldValue axis0))
+    (backwardDifference axis1 (fieldValue axis1))
+    (backwardDifference axis2 (fieldValue axis2))
+    (backwardDifference axis3 (fieldValue axis3))
 
-periodicScalarHodgeIdentity : ∀ field →
-  periodicGradientEnergy field
-  ≡ periodicCurlEnergy field + periodicDivergenceEnergy field
-periodicScalarHodgeIdentity field
-  rewrite periodicCurlExpansion field
-        | periodicDivergenceExpansion field
-        | backwardNormIsForward axis0 (field axis0)
-        | backwardNormIsForward axis1 (field axis1)
-        | backwardNormIsForward axis2 (field axis2)
-        | backwardNormIsForward axis3 (field axis3)
-        | backwardCrossIsForward axis0 axis1 field
-        | backwardCrossIsForward axis0 axis2 field
-        | backwardCrossIsForward axis0 axis3 field
-        | backwardCrossIsForward axis1 axis2 field
-        | backwardCrossIsForward axis1 axis3 field
-        | backwardCrossIsForward axis2 axis3 field =
+periodicScalarHodgeIdentity : ∀ fieldValue →
+  periodicGradientEnergy fieldValue
+  ≡ periodicCurlEnergy fieldValue + periodicDivergenceEnergy fieldValue
+periodicScalarHodgeIdentity fieldValue
+  rewrite periodicCurlExpansion fieldValue
+        | periodicDivergenceExpansion fieldValue
+        | backwardNormIsForward axis0 (fieldValue axis0)
+        | backwardNormIsForward axis1 (fieldValue axis1)
+        | backwardNormIsForward axis2 (fieldValue axis2)
+        | backwardNormIsForward axis3 (fieldValue axis3)
+        | backwardCrossIsForward axis0 axis1 fieldValue
+        | backwardCrossIsForward axis0 axis2 fieldValue
+        | backwardCrossIsForward axis0 axis3 fieldValue
+        | backwardCrossIsForward axis1 axis2 fieldValue
+        | backwardCrossIsForward axis1 axis3 fieldValue
+        | backwardCrossIsForward axis2 axis3 fieldValue =
   ℚRing.solve-∀
-    (fieldNormSq (forwardDifference axis0 (field axis0)))
-    (fieldNormSq (forwardDifference axis1 (field axis0)))
-    (fieldNormSq (forwardDifference axis2 (field axis0)))
-    (fieldNormSq (forwardDifference axis3 (field axis0)))
-    (fieldNormSq (forwardDifference axis0 (field axis1)))
-    (fieldNormSq (forwardDifference axis1 (field axis1)))
-    (fieldNormSq (forwardDifference axis2 (field axis1)))
-    (fieldNormSq (forwardDifference axis3 (field axis1)))
-    (fieldNormSq (forwardDifference axis0 (field axis2)))
-    (fieldNormSq (forwardDifference axis1 (field axis2)))
-    (fieldNormSq (forwardDifference axis2 (field axis2)))
-    (fieldNormSq (forwardDifference axis3 (field axis2)))
-    (fieldNormSq (forwardDifference axis0 (field axis3)))
-    (fieldNormSq (forwardDifference axis1 (field axis3)))
-    (fieldNormSq (forwardDifference axis2 (field axis3)))
-    (fieldNormSq (forwardDifference axis3 (field axis3)))
+    (fieldNormSq (forwardDifference axis0 (fieldValue axis0)))
+    (fieldNormSq (forwardDifference axis1 (fieldValue axis0)))
+    (fieldNormSq (forwardDifference axis2 (fieldValue axis0)))
+    (fieldNormSq (forwardDifference axis3 (fieldValue axis0)))
+    (fieldNormSq (forwardDifference axis0 (fieldValue axis1)))
+    (fieldNormSq (forwardDifference axis1 (fieldValue axis1)))
+    (fieldNormSq (forwardDifference axis2 (fieldValue axis1)))
+    (fieldNormSq (forwardDifference axis3 (fieldValue axis1)))
+    (fieldNormSq (forwardDifference axis0 (fieldValue axis2)))
+    (fieldNormSq (forwardDifference axis1 (fieldValue axis2)))
+    (fieldNormSq (forwardDifference axis2 (fieldValue axis2)))
+    (fieldNormSq (forwardDifference axis3 (fieldValue axis2)))
+    (fieldNormSq (forwardDifference axis0 (fieldValue axis3)))
+    (fieldNormSq (forwardDifference axis1 (fieldValue axis3)))
+    (fieldNormSq (forwardDifference axis2 (fieldValue axis3)))
+    (fieldNormSq (forwardDifference axis3 (fieldValue axis3)))
     (fieldInner
-      (forwardDifference axis0 (field axis1))
-      (forwardDifference axis1 (field axis0)))
+      (forwardDifference axis0 (fieldValue axis1))
+      (forwardDifference axis1 (fieldValue axis0)))
     (fieldInner
-      (forwardDifference axis0 (field axis2))
-      (forwardDifference axis2 (field axis0)))
+      (forwardDifference axis0 (fieldValue axis2))
+      (forwardDifference axis2 (fieldValue axis0)))
     (fieldInner
-      (forwardDifference axis0 (field axis3))
-      (forwardDifference axis3 (field axis0)))
+      (forwardDifference axis0 (fieldValue axis3))
+      (forwardDifference axis3 (fieldValue axis0)))
     (fieldInner
-      (forwardDifference axis1 (field axis2))
-      (forwardDifference axis2 (field axis1)))
+      (forwardDifference axis1 (fieldValue axis2))
+      (forwardDifference axis2 (fieldValue axis1)))
     (fieldInner
-      (forwardDifference axis1 (field axis3))
-      (forwardDifference axis3 (field axis1)))
+      (forwardDifference axis1 (fieldValue axis3))
+      (forwardDifference axis3 (fieldValue axis1)))
     (fieldInner
-      (forwardDifference axis2 (field axis3))
-      (forwardDifference axis3 (field axis2)))
+      (forwardDifference axis2 (fieldValue axis3))
+      (forwardDifference axis3 (fieldValue axis2)))
 
 ------------------------------------------------------------------------
 -- Three-component physical SU(2) lift.
@@ -958,38 +958,38 @@ PhysicalBondField4 : Set
 PhysicalBondField4 = Physical.LieCoordinate3 → BondField4
 
 physicalPeriodicGradientEnergy : PhysicalBondField4 → ℚ
-physicalPeriodicGradientEnergy field =
-  periodicGradientEnergy (field Physical.coordinateX)
-  + periodicGradientEnergy (field Physical.coordinateY)
-  + periodicGradientEnergy (field Physical.coordinateZ)
+physicalPeriodicGradientEnergy fieldValue =
+  periodicGradientEnergy (fieldValue Physical.coordinateX)
+  + periodicGradientEnergy (fieldValue Physical.coordinateY)
+  + periodicGradientEnergy (fieldValue Physical.coordinateZ)
 
 physicalPeriodicCurlEnergy : PhysicalBondField4 → ℚ
-physicalPeriodicCurlEnergy field =
-  periodicCurlEnergy (field Physical.coordinateX)
-  + periodicCurlEnergy (field Physical.coordinateY)
-  + periodicCurlEnergy (field Physical.coordinateZ)
+physicalPeriodicCurlEnergy fieldValue =
+  periodicCurlEnergy (fieldValue Physical.coordinateX)
+  + periodicCurlEnergy (fieldValue Physical.coordinateY)
+  + periodicCurlEnergy (fieldValue Physical.coordinateZ)
 
 physicalPeriodicDivergenceEnergy : PhysicalBondField4 → ℚ
-physicalPeriodicDivergenceEnergy field =
-  periodicDivergenceEnergy (field Physical.coordinateX)
-  + periodicDivergenceEnergy (field Physical.coordinateY)
-  + periodicDivergenceEnergy (field Physical.coordinateZ)
+physicalPeriodicDivergenceEnergy fieldValue =
+  periodicDivergenceEnergy (fieldValue Physical.coordinateX)
+  + periodicDivergenceEnergy (fieldValue Physical.coordinateY)
+  + periodicDivergenceEnergy (fieldValue Physical.coordinateZ)
 
-physicalPeriodicHodgeIdentity : ∀ field →
-  physicalPeriodicGradientEnergy field
-  ≡ physicalPeriodicCurlEnergy field
-    + physicalPeriodicDivergenceEnergy field
-physicalPeriodicHodgeIdentity field
-  rewrite periodicScalarHodgeIdentity (field Physical.coordinateX)
-        | periodicScalarHodgeIdentity (field Physical.coordinateY)
-        | periodicScalarHodgeIdentity (field Physical.coordinateZ) =
+physicalPeriodicHodgeIdentity : ∀ fieldValue →
+  physicalPeriodicGradientEnergy fieldValue
+  ≡ physicalPeriodicCurlEnergy fieldValue
+    + physicalPeriodicDivergenceEnergy fieldValue
+physicalPeriodicHodgeIdentity fieldValue
+  rewrite periodicScalarHodgeIdentity (fieldValue Physical.coordinateX)
+        | periodicScalarHodgeIdentity (fieldValue Physical.coordinateY)
+        | periodicScalarHodgeIdentity (fieldValue Physical.coordinateZ) =
   ℚRing.solve-∀
-    (periodicCurlEnergy (field Physical.coordinateX))
-    (periodicCurlEnergy (field Physical.coordinateY))
-    (periodicCurlEnergy (field Physical.coordinateZ))
-    (periodicDivergenceEnergy (field Physical.coordinateX))
-    (periodicDivergenceEnergy (field Physical.coordinateY))
-    (periodicDivergenceEnergy (field Physical.coordinateZ))
+    (periodicCurlEnergy (fieldValue Physical.coordinateX))
+    (periodicCurlEnergy (fieldValue Physical.coordinateY))
+    (periodicCurlEnergy (fieldValue Physical.coordinateZ))
+    (periodicDivergenceEnergy (fieldValue Physical.coordinateX))
+    (periodicDivergenceEnergy (fieldValue Physical.coordinateY))
+    (periodicDivergenceEnergy (fieldValue Physical.coordinateZ))
 
 sideFourCyclicReindexLevel : ProofLevel
 sideFourCyclicReindexLevel = machineChecked

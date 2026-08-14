@@ -1,16 +1,6 @@
 name: NS compact Gamma replenishment absorption
 
 on:
-  push:
-    branches: [master]
-    paths:
-      - 'scripts/ns_compact_gamma_replenishment_audit.py'
-      - 'scripts/ns_compact_gamma_adversarial_sweep.py'
-      - 'scripts/ns_compact_gamma_potential_audit.py'
-      - 'scripts/tests/test_ns_compact_gamma_replenishment_audit.py'
-      - 'DASHI/Physics/Closure/NSCompactGammaReplenishmentAbsorption.agda'
-      - 'docs/ns_compact_gamma_replenishment_absorption.md'
-      - '.github/workflows/ns-compact-gamma-replenishment.yml'
   pull_request:
     paths:
       - 'scripts/ns_compact_gamma_replenishment_audit.py'
@@ -22,7 +12,7 @@ on:
       - '.github/workflows/ns-compact-gamma-replenishment.yml'
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:
@@ -82,6 +72,7 @@ jobs:
       - uses: cachix/install-nix-action@v31
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
       - name: Restore Agda 2.9 shadow cache
         uses: actions/cache@v4
         with:

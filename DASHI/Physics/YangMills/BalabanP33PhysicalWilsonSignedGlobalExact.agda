@@ -99,134 +99,134 @@ sumRationalLinear2 firstScale secondScale (value ∷ values) first second
 
 plaquetteDiagonalCharge :
   Coordinates.PhysicalSU2BondField4 → Physical.Plaquette4 → ℚ
-plaquetteDiagonalCharge field (pair site axes) =
-  Incidence.plaquetteDiagonalCharge field
+plaquetteDiagonalCharge fieldValue (pair site axes) =
+  Incidence.plaquetteDiagonalCharge fieldValue
     (Physical.pairLeft axes) (Physical.pairRight axes) site
 
 plaquetteCrossCharge :
   Coordinates.PhysicalSU2BondField4 → Physical.Plaquette4 → ℚ
-plaquetteCrossCharge field (pair site axes) =
-  Incidence.plaquetteCrossCharge field
+plaquetteCrossCharge fieldValue (pair site axes) =
+  Incidence.plaquetteCrossCharge fieldValue
     (Physical.pairLeft axes) (Physical.pairRight axes) site
 
 pairDiagonalFromPlaquettes :
   Coordinates.PhysicalSU2BondField4 → Physical.AxisPair6 → ℚ
-pairDiagonalFromPlaquettes field axes =
+pairDiagonalFromPlaquettes fieldValue axes =
   Sums.sumRational (Block.physicalBlockSites Path4.side4)
-    (λ site → plaquetteDiagonalCharge field (pair site axes))
+    (λ site → plaquetteDiagonalCharge fieldValue (pair site axes))
 
 pairCrossFromPlaquettes :
   Coordinates.PhysicalSU2BondField4 → Physical.AxisPair6 → ℚ
-pairCrossFromPlaquettes field axes =
+pairCrossFromPlaquettes fieldValue axes =
   Sums.sumRational (Block.physicalBlockSites Path4.side4)
-    (λ site → plaquetteCrossCharge field (pair site axes))
+    (λ site → plaquetteCrossCharge fieldValue (pair site axes))
 
-pairDiagonalFromPlaquettesExact : ∀ field axes →
-  pairDiagonalFromPlaquettes field axes
-  ≡ Incidence.pairDiagonalIncidence field
+pairDiagonalFromPlaquettesExact : ∀ fieldValue axes →
+  pairDiagonalFromPlaquettes fieldValue axes
+  ≡ Incidence.pairDiagonalIncidence fieldValue
       (Physical.pairLeft axes) (Physical.pairRight axes)
-pairDiagonalFromPlaquettesExact field axes =
+pairDiagonalFromPlaquettesExact fieldValue axes =
   trans
     (Partition.globalSiteSumMatchesCoordinateSum4
       (λ site →
-        Incidence.plaquetteDiagonalCharge field
+        Incidence.plaquetteDiagonalCharge fieldValue
           (Physical.pairLeft axes) (Physical.pairRight axes) site))
     refl
 
-pairCrossFromPlaquettesExact : ∀ field axes →
-  pairCrossFromPlaquettes field axes
-  ≡ Incidence.pairCrossIncidence field
+pairCrossFromPlaquettesExact : ∀ fieldValue axes →
+  pairCrossFromPlaquettes fieldValue axes
+  ≡ Incidence.pairCrossIncidence fieldValue
       (Physical.pairLeft axes) (Physical.pairRight axes)
-pairCrossFromPlaquettesExact field axes =
+pairCrossFromPlaquettesExact fieldValue axes =
   trans
     (Partition.globalSiteSumMatchesCoordinateSum4
       (λ site →
-        Incidence.plaquetteCrossCharge field
+        Incidence.plaquetteCrossCharge fieldValue
           (Physical.pairLeft axes) (Physical.pairRight axes) site))
     refl
 
 plaquetteDiagonalGlobal :
   Coordinates.PhysicalSU2BondField4 → ℚ
-plaquetteDiagonalGlobal field =
+plaquetteDiagonalGlobal fieldValue =
   Sums.sumRational Physical.plaquettes4
-    (plaquetteDiagonalCharge field)
+    (plaquetteDiagonalCharge fieldValue)
 
 plaquetteCrossGlobal :
   Coordinates.PhysicalSU2BondField4 → ℚ
-plaquetteCrossGlobal field =
+plaquetteCrossGlobal fieldValue =
   Sums.sumRational Physical.plaquettes4
-    (plaquetteCrossCharge field)
+    (plaquetteCrossCharge fieldValue)
 
-plaquetteDiagonalGlobalIsIncidence : ∀ field →
-  plaquetteDiagonalGlobal field
-  ≡ Incidence.physicalWilsonDiagonalIncidence field
-plaquetteDiagonalGlobalIsIncidence field =
+plaquetteDiagonalGlobalIsIncidence : ∀ fieldValue →
+  plaquetteDiagonalGlobal fieldValue
+  ≡ Incidence.physicalWilsonDiagonalIncidence fieldValue
+plaquetteDiagonalGlobalIsIncidence fieldValue =
   trans
     (Fubini.sumCartesian
       (Block.physicalBlockSites Path4.side4)
       Physical.axisPairs6
-      (plaquetteDiagonalCharge field))
+      (plaquetteDiagonalCharge fieldValue))
     (trans
       (Fubini.sumSwap
         (Block.physicalBlockSites Path4.side4)
         Physical.axisPairs6
-        (λ site axes → plaquetteDiagonalCharge field (pair site axes)))
+        (λ site axes → plaquetteDiagonalCharge fieldValue (pair site axes)))
       (trans
         (Sums.sumRationalCong
           Physical.axisPairs6
-          (pairDiagonalFromPlaquettes field)
+          (pairDiagonalFromPlaquettes fieldValue)
           (λ axes →
-            Incidence.pairDiagonalIncidence field
+            Incidence.pairDiagonalIncidence fieldValue
               (Physical.pairLeft axes) (Physical.pairRight axes))
-          (pairDiagonalFromPlaquettesExact field))
+          (pairDiagonalFromPlaquettesExact fieldValue))
         (ℚRing.solve-∀
-          (Incidence.pairDiagonalIncidence field
+          (Incidence.pairDiagonalIncidence fieldValue
             Periodic.axis0 Periodic.axis1)
-          (Incidence.pairDiagonalIncidence field
+          (Incidence.pairDiagonalIncidence fieldValue
             Periodic.axis0 Periodic.axis2)
-          (Incidence.pairDiagonalIncidence field
+          (Incidence.pairDiagonalIncidence fieldValue
             Periodic.axis0 Periodic.axis3)
-          (Incidence.pairDiagonalIncidence field
+          (Incidence.pairDiagonalIncidence fieldValue
             Periodic.axis1 Periodic.axis2)
-          (Incidence.pairDiagonalIncidence field
+          (Incidence.pairDiagonalIncidence fieldValue
             Periodic.axis1 Periodic.axis3)
-          (Incidence.pairDiagonalIncidence field
+          (Incidence.pairDiagonalIncidence fieldValue
             Periodic.axis2 Periodic.axis3))))
 
-plaquetteCrossGlobalIsIncidence : ∀ field →
-  plaquetteCrossGlobal field
-  ≡ Incidence.physicalWilsonCrossIncidence field
-plaquetteCrossGlobalIsIncidence field =
+plaquetteCrossGlobalIsIncidence : ∀ fieldValue →
+  plaquetteCrossGlobal fieldValue
+  ≡ Incidence.physicalWilsonCrossIncidence fieldValue
+plaquetteCrossGlobalIsIncidence fieldValue =
   trans
     (Fubini.sumCartesian
       (Block.physicalBlockSites Path4.side4)
       Physical.axisPairs6
-      (plaquetteCrossCharge field))
+      (plaquetteCrossCharge fieldValue))
     (trans
       (Fubini.sumSwap
         (Block.physicalBlockSites Path4.side4)
         Physical.axisPairs6
-        (λ site axes → plaquetteCrossCharge field (pair site axes)))
+        (λ site axes → plaquetteCrossCharge fieldValue (pair site axes)))
       (trans
         (Sums.sumRationalCong
           Physical.axisPairs6
-          (pairCrossFromPlaquettes field)
+          (pairCrossFromPlaquettes fieldValue)
           (λ axes →
-            Incidence.pairCrossIncidence field
+            Incidence.pairCrossIncidence fieldValue
               (Physical.pairLeft axes) (Physical.pairRight axes))
-          (pairCrossFromPlaquettesExact field))
+          (pairCrossFromPlaquettesExact fieldValue))
         (ℚRing.solve-∀
-          (Incidence.pairCrossIncidence field
+          (Incidence.pairCrossIncidence fieldValue
             Periodic.axis0 Periodic.axis1)
-          (Incidence.pairCrossIncidence field
+          (Incidence.pairCrossIncidence fieldValue
             Periodic.axis0 Periodic.axis2)
-          (Incidence.pairCrossIncidence field
+          (Incidence.pairCrossIncidence fieldValue
             Periodic.axis0 Periodic.axis3)
-          (Incidence.pairCrossIncidence field
+          (Incidence.pairCrossIncidence fieldValue
             Periodic.axis1 Periodic.axis2)
-          (Incidence.pairCrossIncidence field
+          (Incidence.pairCrossIncidence fieldValue
             Periodic.axis1 Periodic.axis3)
-          (Incidence.pairCrossIncidence field
+          (Incidence.pairCrossIncidence fieldValue
             Periodic.axis2 Periodic.axis3))))
 
 rhoOverThirtySix rhoOverOneFortyFour : ℚ
@@ -235,109 +235,109 @@ rhoOverOneFortyFour = (+ 1 / 144) * GaugeBudget.rho
 
 plaquetteWilsonBudget :
   Coordinates.PhysicalSU2BondField4 → Physical.Plaquette4 → ℚ
-plaquetteWilsonBudget field plaquette =
-  rhoOverThirtySix * plaquetteCrossCharge field plaquette
-  + rhoOverOneFortyFour * plaquetteDiagonalCharge field plaquette
+plaquetteWilsonBudget fieldValue plaquette =
+  rhoOverThirtySix * plaquetteCrossCharge fieldValue plaquette
+  + rhoOverOneFortyFour * plaquetteDiagonalCharge fieldValue plaquette
 
 record PhysicalWilsonSignedLocal
     (background : Physical.RationalSU2Background4)
-    (field : Coordinates.PhysicalSU2BondField4) : Set where
+    (fieldValue : Coordinates.PhysicalSU2BondField4) : Set where
   field
     plaquetteLower : ∀ plaquette →
-      - plaquetteWilsonBudget field plaquette
+      - plaquetteWilsonBudget fieldValue plaquette
       ≤ Physical.plaquetteWilsonSecondVariation
-          background field plaquette
+          background fieldValue plaquette
         - Physical.plaquetteWilsonSecondVariation
-          Physical.identityBackground field plaquette
+          Physical.identityBackground fieldValue plaquette
 
 open PhysicalWilsonSignedLocal public
 
-summedPlaquetteBudgetExact : ∀ field →
+summedPlaquetteBudgetExact : ∀ fieldValue →
   Sums.sumRational Physical.plaquettes4
-    (λ plaquette → - plaquetteWilsonBudget field plaquette)
-  ≡ - (rhoOverThirtySix * plaquetteCrossGlobal field
-      + rhoOverOneFortyFour * plaquetteDiagonalGlobal field)
-summedPlaquetteBudgetExact field =
+    (λ plaquette → - plaquetteWilsonBudget fieldValue plaquette)
+  ≡ - (rhoOverThirtySix * plaquetteCrossGlobal fieldValue
+      + rhoOverOneFortyFour * plaquetteDiagonalGlobal fieldValue)
+summedPlaquetteBudgetExact fieldValue =
   trans
     (Sums.sumRationalNegate
-      Physical.plaquettes4 (plaquetteWilsonBudget field))
+      Physical.plaquettes4 (plaquetteWilsonBudget fieldValue))
     (cong -_
       (sumRationalLinear2
         rhoOverThirtySix rhoOverOneFortyFour
         Physical.plaquettes4
-        (plaquetteCrossCharge field)
-        (plaquetteDiagonalCharge field)))
+        (plaquetteCrossCharge fieldValue)
+        (plaquetteDiagonalCharge fieldValue)))
 
-summedPlaquetteDefectExact : ∀ background field →
+summedPlaquetteDefectExact : ∀ background fieldValue →
   Sums.sumRational Physical.plaquettes4
     (λ plaquette →
-      Physical.plaquetteWilsonSecondVariation background field plaquette
+      Physical.plaquetteWilsonSecondVariation background fieldValue plaquette
       - Physical.plaquetteWilsonSecondVariation
-          Physical.identityBackground field plaquette)
-  ≡ Physical.physicalWilsonDefect background field
-summedPlaquetteDefectExact background field =
+          Physical.identityBackground fieldValue plaquette)
+  ≡ Physical.physicalWilsonDefect background fieldValue
+summedPlaquetteDefectExact background fieldValue =
   trans
     (sumRationalSubtract
       Physical.plaquettes4
-      (Physical.plaquetteWilsonSecondVariation background field)
+      (Physical.plaquetteWilsonSecondVariation background fieldValue)
       (Physical.plaquetteWilsonSecondVariation
-        Physical.identityBackground field))
+        Physical.identityBackground fieldValue))
     refl
 
 physicalWilsonSignedGlobalBeforeIncidence :
-  ∀ background field →
-  PhysicalWilsonSignedLocal background field →
-  - (rhoOverThirtySix * plaquetteCrossGlobal field
-      + rhoOverOneFortyFour * plaquetteDiagonalGlobal field)
-  ≤ Physical.physicalWilsonDefect background field
-physicalWilsonSignedGlobalBeforeIncidence background field local =
+  ∀ background fieldValue →
+  PhysicalWilsonSignedLocal background fieldValue →
+  - (rhoOverThirtySix * plaquetteCrossGlobal fieldValue
+      + rhoOverOneFortyFour * plaquetteDiagonalGlobal fieldValue)
+  ≤ Physical.physicalWilsonDefect background fieldValue
+physicalWilsonSignedGlobalBeforeIncidence background fieldValue local =
   let
     summed = sumRationalMonotone
       Physical.plaquettes4
-      (λ plaquette → - plaquetteWilsonBudget field plaquette)
+      (λ plaquette → - plaquetteWilsonBudget fieldValue plaquette)
       (λ plaquette →
-        Physical.plaquetteWilsonSecondVariation background field plaquette
+        Physical.plaquetteWilsonSecondVariation background fieldValue plaquette
         - Physical.plaquetteWilsonSecondVariation
-            Physical.identityBackground field plaquette)
+            Physical.identityBackground fieldValue plaquette)
       (plaquetteLower local)
   in
   subst
-    (λ lower → lower ≤ Physical.physicalWilsonDefect background field)
-    (sym (summedPlaquetteBudgetExact field))
+    (λ lower → lower ≤ Physical.physicalWilsonDefect background fieldValue)
+    (sym (summedPlaquetteBudgetExact fieldValue))
     (subst
       (λ upper →
         Sums.sumRational Physical.plaquettes4
-          (λ plaquette → - plaquetteWilsonBudget field plaquette)
+          (λ plaquette → - plaquetteWilsonBudget fieldValue plaquette)
         ≤ upper)
-      (summedPlaquetteDefectExact background field)
+      (summedPlaquetteDefectExact background fieldValue)
       summed)
 
-physicalWilsonGlobalCoefficientExact : ∀ field →
-  rhoOverThirtySix * plaquetteCrossGlobal field
-    + rhoOverOneFortyFour * plaquetteDiagonalGlobal field
+physicalWilsonGlobalCoefficientExact : ∀ fieldValue →
+  rhoOverThirtySix * plaquetteCrossGlobal fieldValue
+    + rhoOverOneFortyFour * plaquetteDiagonalGlobal fieldValue
   ≡ (+ 13 / 24) * GaugeBudget.rho
-      * Coordinates.physicalSU2BondNormSq field
-physicalWilsonGlobalCoefficientExact field
-  rewrite plaquetteCrossGlobalIsIncidence field
-        | plaquetteDiagonalGlobalIsIncidence field
-        | Incidence.physicalWilsonCrossIncidenceExact field
-        | Incidence.physicalWilsonDiagonalIncidenceExact field =
+      * Coordinates.physicalSU2BondNormSq fieldValue
+physicalWilsonGlobalCoefficientExact fieldValue
+  rewrite plaquetteCrossGlobalIsIncidence fieldValue
+        | plaquetteDiagonalGlobalIsIncidence fieldValue
+        | Incidence.physicalWilsonCrossIncidenceExact fieldValue
+        | Incidence.physicalWilsonDiagonalIncidenceExact fieldValue =
   ℚRing.solve-∀
-    (Coordinates.physicalSU2BondNormSq field)
+    (Coordinates.physicalSU2BondNormSq fieldValue)
 
 physicalWilsonSignedGlobalThirteenTwentyFourths :
-  ∀ background field →
-  PhysicalWilsonSignedLocal background field →
+  ∀ background fieldValue →
+  PhysicalWilsonSignedLocal background fieldValue →
   - ((+ 13 / 24) * GaugeBudget.rho
-      * Coordinates.physicalSU2BondNormSq field)
-  ≤ Physical.physicalWilsonDefect background field
+      * Coordinates.physicalSU2BondNormSq fieldValue)
+  ≤ Physical.physicalWilsonDefect background fieldValue
 physicalWilsonSignedGlobalThirteenTwentyFourths
-    background field local =
+    background fieldValue local =
   subst
     (λ coefficient →
-      - coefficient ≤ Physical.physicalWilsonDefect background field)
-    (physicalWilsonGlobalCoefficientExact field)
-    (physicalWilsonSignedGlobalBeforeIncidence background field local)
+      - coefficient ≤ Physical.physicalWilsonDefect background fieldValue)
+    (physicalWilsonGlobalCoefficientExact fieldValue)
+    (physicalWilsonSignedGlobalBeforeIncidence background fieldValue local)
 
 physicalWilsonWLocalToGlobalLevel : ProofLevel
 physicalWilsonWLocalToGlobalLevel = machineChecked

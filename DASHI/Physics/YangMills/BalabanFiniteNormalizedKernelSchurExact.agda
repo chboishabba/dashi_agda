@@ -79,7 +79,7 @@ normalizedFiniteAverageBelowUniformBound :
   ∀ {Sample : Set}
     weight (samples : List Sample) (term : Sample → ℚ) bound →
   0ℚ ≤ weight →
-  weight * Fibre.natAsRational (length samples) ≡ 1ℚ →
+  weight * Sums.natAsRational (length samples) ≡ 1ℚ →
   (∀ sample → term sample ≤ bound) →
   weight * Sums.sumRational samples term ≤ bound
 normalizedFiniteAverageBelowUniformBound
@@ -92,7 +92,7 @@ normalizedFiniteAverageBelowUniformBound
 
     constantExact :
       Sums.sumRational samples (λ _ → bound)
-      ≡ Fibre.natAsRational (length samples) * bound
+      ≡ Sums.natAsRational (length samples) * bound
     constantExact = Fibre.sumRationalConstant samples bound
 
     scaled :
@@ -102,17 +102,17 @@ normalizedFiniteAverageBelowUniformBound
 
     scaledConstant :
       weight * Sums.sumRational samples (λ _ → bound)
-      ≡ weight * (Fibre.natAsRational (length samples) * bound)
+      ≡ weight * (Sums.natAsRational (length samples) * bound)
     scaledConstant = cong (weight *_) constantExact
 
     normalizationExact :
-      weight * (Fibre.natAsRational (length samples) * bound)
+      weight * (Sums.natAsRational (length samples) * bound)
       ≡ bound
     normalizationExact =
       trans
         (sym
           (ℚP.*-assoc
-            weight (Fibre.natAsRational (length samples)) bound))
+            weight (Sums.natAsRational (length samples)) bound))
         (trans
           (cong (_* bound) normalization)
           (ℚP.*-identityˡ bound))
@@ -312,7 +312,7 @@ normalizedKernelRowMassBound :
     (kernels : KernelFamily Sample Row Column)
     rowBound row →
   0ℚ ≤ weight →
-  weight * Fibre.natAsRational (length samples) ≡ 1ℚ →
+  weight * Sums.natAsRational (length samples) ≡ 1ℚ →
   (∀ sample → RectSchur.rectAbsoluteRowMass columns (kernels sample) row ≤ rowBound) →
   RectSchur.rectAbsoluteRowMass columns
       (normalizedKernel weight samples kernels) row
@@ -335,7 +335,7 @@ normalizedKernelColumnMassBound :
     (kernels : KernelFamily Sample Row Column)
     columnBound column →
   0ℚ ≤ weight →
-  weight * Fibre.natAsRational (length samples) ≡ 1ℚ →
+  weight * Sums.natAsRational (length samples) ≡ 1ℚ →
   (∀ sample → RectSchur.rectAbsoluteColumnMass rows (kernels sample) column ≤ columnBound) →
   RectSchur.rectAbsoluteColumnMass rows
       (normalizedKernel weight samples kernels) column
@@ -362,7 +362,7 @@ normalizedKernelSchurSquared :
     (kernels : KernelFamily Sample Row Column)
     vector rowBound columnBound →
   0ℚ ≤ weight →
-  weight * Fibre.natAsRational (length samples) ≡ 1ℚ →
+  weight * Sums.natAsRational (length samples) ≡ 1ℚ →
   0ℚ ≤ rowBound → 0ℚ ≤ columnBound →
   (∀ sample row →
     RectSchur.rectAbsoluteRowMass columns (kernels sample) row ≤ rowBound) →

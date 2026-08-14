@@ -12,8 +12,6 @@ on:
       - 'scripts/data/outputs/ns_*.json'
       - 'scripts/data/outputs/check_ns_*.json'
       - '.github/workflows/ns-concrete-bernstein-envelope-domain.yml'
-  push:
-    branches: [master]
     paths:
       - 'DASHI/Physics/Closure/NSPairIncidenceKernelProgram.agda'
       - 'DASHI/Physics/Closure/NSCompactGamma*.agda'
@@ -26,7 +24,7 @@ on:
       - '.github/workflows/ns-concrete-bernstein-envelope-domain.yml'
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:
@@ -207,6 +205,7 @@ jobs:
       - uses: cachix/install-nix-action@v31
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
       - name: Check universal periodic-Fourier reductions and official completion program
         shell: bash
         run: |

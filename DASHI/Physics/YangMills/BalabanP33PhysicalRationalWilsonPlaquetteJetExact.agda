@@ -139,10 +139,10 @@ insertionAt = Flat.insertionAt
 positiveLinkJet :
   RationalSU2Background4 → Physical.PhysicalSU2BondField4 →
   Hodge4.Site4 → Axis4 → Wilson.QuaternionFactorJet
-positiveLinkJet background field site axis =
+positiveLinkJet background bondField site axis =
   let
     backgroundValue = link background (pair site axis)
-    insertion = Wilson.pureQuaternion (insertionAt field axis site)
+    insertion = Wilson.pureQuaternion (insertionAt bondField axis site)
   in
   Wilson.factorJet
     backgroundValue
@@ -152,10 +152,10 @@ positiveLinkJet background field site axis =
 inverseLinkJet :
   RationalSU2Background4 → Physical.PhysicalSU2BondField4 →
   Hodge4.Site4 → Axis4 → Wilson.QuaternionFactorJet
-inverseLinkJet background field site axis =
+inverseLinkJet background bondField site axis =
   let
     backgroundInverse = inverseLink background (pair site axis)
-    insertion = Wilson.pureQuaternion (insertionAt field axis site)
+    insertion = Wilson.pureQuaternion (insertionAt bondField axis site)
   in
   Wilson.factorJet
     backgroundInverse
@@ -197,24 +197,24 @@ plaquettes4 = cartesian (Block.physicalBlockSites Path4.side4) axisPairs6
 plaquetteJetData :
   RationalSU2Background4 → Physical.PhysicalSU2BondField4 →
   Plaquette4 → Jets.PlaquetteSecondJet
-plaquetteJetData background field (pair site axes) =
+plaquetteJetData background bondField (pair site axes) =
   let
     left = pairLeft axes
     right = pairRight axes
   in
   Jets.plaquetteJet
-    (positiveLinkJet background field site left)
-    (positiveLinkJet background field
+    (positiveLinkJet background bondField site left)
+    (positiveLinkJet background bondField
       (Hodge4.shiftForward left site) right)
-    (inverseLinkJet background field
+    (inverseLinkJet background bondField
       (Hodge4.shiftForward right site) left)
-    (inverseLinkJet background field site right)
+    (inverseLinkJet background bondField site right)
 
 plaquetteFactorJets :
   RationalSU2Background4 → Physical.PhysicalSU2BondField4 →
   Plaquette4 → List Wilson.QuaternionFactorJet
-plaquetteFactorJets background field plaquette =
-  let dataSet = plaquetteJetData background field plaquette
+plaquetteFactorJets background bondField plaquette =
+  let dataSet = plaquetteJetData background bondField plaquette
   in Wilson.fourFactorJets
       (Jets.link0 dataSet) (Jets.link1 dataSet)
       (Jets.link2 dataSet) (Jets.link3 dataSet)
@@ -222,129 +222,129 @@ plaquetteFactorJets background field plaquette =
 plaquetteWilsonSecondVariation :
   RationalSU2Background4 → Physical.PhysicalSU2BondField4 →
   Plaquette4 → ℚ
-plaquetteWilsonSecondVariation background field plaquette =
+plaquetteWilsonSecondVariation background bondField plaquette =
   Jets.plaquetteWilsonSecondVariation
-    (plaquetteJetData background field plaquette)
+    (plaquetteJetData background bondField plaquette)
 
 plaquetteWilsonAtomSum :
   RationalSU2Background4 → Physical.PhysicalSU2BondField4 →
   Plaquette4 → ℚ
-plaquetteWilsonAtomSum background field plaquette =
+plaquetteWilsonAtomSum background bondField plaquette =
   Wilson.wilsonSecondVariationAtomSum
-    (plaquetteFactorJets background field plaquette)
+    (plaquetteFactorJets background bondField plaquette)
 
-plaquetteWilsonIsSixteenAtoms : ∀ background field plaquette →
-  plaquetteWilsonSecondVariation background field plaquette
-  ≡ plaquetteWilsonAtomSum background field plaquette
-plaquetteWilsonIsSixteenAtoms background field plaquette =
+plaquetteWilsonIsSixteenAtoms : ∀ background bondField plaquette →
+  plaquetteWilsonSecondVariation background bondField plaquette
+  ≡ plaquetteWilsonAtomSum background bondField plaquette
+plaquetteWilsonIsSixteenAtoms background bondField plaquette =
   Jets.plaquetteWilsonIsSixteenAtomSum
-    (plaquetteJetData background field plaquette)
+    (plaquetteJetData background bondField plaquette)
 
 physicalWilsonSecondVariation :
   RationalSU2Background4 → Physical.PhysicalSU2BondField4 → ℚ
-physicalWilsonSecondVariation background field =
+physicalWilsonSecondVariation background bondField =
   Sums.sumRational plaquettes4
-    (plaquetteWilsonSecondVariation background field)
+    (plaquetteWilsonSecondVariation background bondField)
 
 physicalWilsonAtomSum :
   RationalSU2Background4 → Physical.PhysicalSU2BondField4 → ℚ
-physicalWilsonAtomSum background field =
+physicalWilsonAtomSum background bondField =
   Sums.sumRational plaquettes4
-    (plaquetteWilsonAtomSum background field)
+    (plaquetteWilsonAtomSum background bondField)
 
-physicalWilsonSecondVariationIsSixteenAtomSum : ∀ background field →
-  physicalWilsonSecondVariation background field
-  ≡ physicalWilsonAtomSum background field
-physicalWilsonSecondVariationIsSixteenAtomSum background field =
+physicalWilsonSecondVariationIsSixteenAtomSum : ∀ background bondField →
+  physicalWilsonSecondVariation background bondField
+  ≡ physicalWilsonAtomSum background bondField
+physicalWilsonSecondVariationIsSixteenAtomSum background bondField =
   Sums.sumRationalCong
     plaquettes4
-    (plaquetteWilsonSecondVariation background field)
-    (plaquetteWilsonAtomSum background field)
-    (plaquetteWilsonIsSixteenAtoms background field)
+    (plaquetteWilsonSecondVariation background bondField)
+    (plaquetteWilsonAtomSum background bondField)
+    (plaquetteWilsonIsSixteenAtoms background bondField)
 
 ------------------------------------------------------------------------
 -- Identity-background specialization to the concrete flat curl energy.
 ------------------------------------------------------------------------
 
-identityPlaquetteSecondVariationIsCurlSquare : ∀ field site axes →
+identityPlaquetteSecondVariationIsCurlSquare : ∀ bondField site axes →
   plaquetteWilsonSecondVariation
-    identityBackground field (pair site axes)
+    identityBackground bondField (pair site axes)
   ≡ Wilson.vectorNormSq
       (Wilson.plaquetteCurlVector
-        (insertionAt field (pairLeft axes) site)
-        (insertionAt field (pairRight axes)
+        (insertionAt bondField (pairLeft axes) site)
+        (insertionAt bondField (pairRight axes)
           (Hodge4.shiftForward (pairLeft axes) site))
-        (insertionAt field (pairLeft axes)
+        (insertionAt bondField (pairLeft axes)
           (Hodge4.shiftForward (pairRight axes) site))
-        (insertionAt field (pairRight axes) site))
+        (insertionAt bondField (pairRight axes) site))
 identityPlaquetteSecondVariationIsCurlSquare
-    field site axes =
+    bondField site axes =
   ℚRing.solve-∀
-    (field Physical.coordinateX (pair site (pairLeft axes)))
-    (field Physical.coordinateY (pair site (pairLeft axes)))
-    (field Physical.coordinateZ (pair site (pairLeft axes)))
-    (field Physical.coordinateX
+    (bondField Physical.coordinateX (pair site (pairLeft axes)))
+    (bondField Physical.coordinateY (pair site (pairLeft axes)))
+    (bondField Physical.coordinateZ (pair site (pairLeft axes)))
+    (bondField Physical.coordinateX
       (pair (Hodge4.shiftForward (pairLeft axes) site) (pairRight axes)))
-    (field Physical.coordinateY
+    (bondField Physical.coordinateY
       (pair (Hodge4.shiftForward (pairLeft axes) site) (pairRight axes)))
-    (field Physical.coordinateZ
+    (bondField Physical.coordinateZ
       (pair (Hodge4.shiftForward (pairLeft axes) site) (pairRight axes)))
-    (field Physical.coordinateX
+    (bondField Physical.coordinateX
       (pair (Hodge4.shiftForward (pairRight axes) site) (pairLeft axes)))
-    (field Physical.coordinateY
+    (bondField Physical.coordinateY
       (pair (Hodge4.shiftForward (pairRight axes) site) (pairLeft axes)))
-    (field Physical.coordinateZ
+    (bondField Physical.coordinateZ
       (pair (Hodge4.shiftForward (pairRight axes) site) (pairLeft axes)))
-    (field Physical.coordinateX (pair site (pairRight axes)))
-    (field Physical.coordinateY (pair site (pairRight axes)))
-    (field Physical.coordinateZ (pair site (pairRight axes)))
+    (bondField Physical.coordinateX (pair site (pairRight axes)))
+    (bondField Physical.coordinateY (pair site (pairRight axes)))
+    (bondField Physical.coordinateZ (pair site (pairRight axes)))
 
 identityPairEnergy :
   Physical.PhysicalSU2BondField4 → AxisPair6 → ℚ
-identityPairEnergy field axes =
+identityPairEnergy bondField axes =
   Sums.sumRational (Block.physicalBlockSites Path4.side4)
     (λ site →
       plaquetteWilsonSecondVariation
-        identityBackground field (pair site axes))
+        identityBackground bondField (pair site axes))
 
-identityPairEnergyIsFlatPair : ∀ field axes →
-  identityPairEnergy field axes
-  ≡ Flat.flatPlaquettePairEnergy field (pairLeft axes) (pairRight axes)
-identityPairEnergyIsFlatPair field axes =
+identityPairEnergyIsFlatPair : ∀ bondField axes →
+  identityPairEnergy bondField axes
+  ≡ Flat.flatPlaquettePairEnergy bondField (pairLeft axes) (pairRight axes)
+identityPairEnergyIsFlatPair bondField axes =
   trans
     (Sums.sumRationalCong
       (Block.physicalBlockSites Path4.side4)
       (λ site →
         plaquetteWilsonSecondVariation
-          identityBackground field (pair site axes))
+          identityBackground bondField (pair site axes))
       (λ site →
         Flat.flatPlaquetteSecondVariation
-          field (pairLeft axes) (pairRight axes) site)
+          bondField (pairLeft axes) (pairRight axes) site)
       (λ site →
         trans
-          (identityPlaquetteSecondVariationIsCurlSquare field site axes)
+          (identityPlaquetteSecondVariationIsCurlSquare bondField site axes)
           (sym
             (Wilson.flatPlaquetteWilsonIsCurlSquare
-              (Flat.insertionAt field (pairLeft axes) site)
-              (Flat.insertionAt field (pairRight axes)
+              (Flat.insertionAt bondField (pairLeft axes) site)
+              (Flat.insertionAt bondField (pairRight axes)
                 (Hodge4.shiftForward (pairLeft axes) site))
-              (Flat.insertionAt field (pairLeft axes)
+              (Flat.insertionAt bondField (pairLeft axes)
                 (Hodge4.shiftForward (pairRight axes) site))
-              (Flat.insertionAt field (pairRight axes) site)))))
+              (Flat.insertionAt bondField (pairRight axes) site)))))
     (trans
       (Partition.globalSiteSumMatchesCoordinateSum4
         (Flat.flatPlaquetteSecondVariation
-          field (pairLeft axes) (pairRight axes)))
+          bondField (pairLeft axes) (pairRight axes)))
       refl)
 
-identityPhysicalWilsonIsFlatCurl : ∀ field →
-  physicalWilsonSecondVariation identityBackground field
-  ≡ Flat.flatWilsonEnergy field
-identityPhysicalWilsonIsFlatCurl field =
+identityPhysicalWilsonIsFlatCurl : ∀ bondField →
+  physicalWilsonSecondVariation identityBackground bondField
+  ≡ Flat.flatWilsonEnergy bondField
+identityPhysicalWilsonIsFlatCurl bondField =
   trans
     (Fubini.sumCartesian
       (Block.physicalBlockSites Path4.side4) axisPairs6
-      (plaquetteWilsonSecondVariation identityBackground field))
+      (plaquetteWilsonSecondVariation identityBackground bondField))
     (trans
       (Sums.sumRationalCong
         (Block.physicalBlockSites Path4.side4)
@@ -352,58 +352,58 @@ identityPhysicalWilsonIsFlatCurl field =
           Sums.sumRational axisPairs6
             (λ axes →
               plaquetteWilsonSecondVariation
-                identityBackground field (pair site axes)))
+                identityBackground bondField (pair site axes)))
         (λ site →
           Sums.sumRational axisPairs6
             (λ axes →
               plaquetteWilsonSecondVariation
-                identityBackground field (pair site axes)))
+                identityBackground bondField (pair site axes)))
         (λ _ → refl))
       (trans
         (Fubini.sumSwap
           (Block.physicalBlockSites Path4.side4) axisPairs6
           (λ site axes →
             plaquetteWilsonSecondVariation
-              identityBackground field (pair site axes)))
+              identityBackground bondField (pair site axes)))
         (trans
           (Sums.sumRationalCong
             axisPairs6
-            (identityPairEnergy field)
+            (identityPairEnergy bondField)
             (λ axes →
-              Flat.flatPlaquettePairEnergy field
+              Flat.flatPlaquettePairEnergy bondField
                 (pairLeft axes) (pairRight axes))
-            (identityPairEnergyIsFlatPair field))
+            (identityPairEnergyIsFlatPair bondField))
           (ℚRing.solve-∀
-            (Flat.flatPlaquettePairEnergy field Hodge4.axis0 Hodge4.axis1)
-            (Flat.flatPlaquettePairEnergy field Hodge4.axis0 Hodge4.axis2)
-            (Flat.flatPlaquettePairEnergy field Hodge4.axis0 Hodge4.axis3)
-            (Flat.flatPlaquettePairEnergy field Hodge4.axis1 Hodge4.axis2)
-            (Flat.flatPlaquettePairEnergy field Hodge4.axis1 Hodge4.axis3)
-            (Flat.flatPlaquettePairEnergy field Hodge4.axis2 Hodge4.axis3))))))
+            (Flat.flatPlaquettePairEnergy bondField Hodge4.axis0 Hodge4.axis1)
+            (Flat.flatPlaquettePairEnergy bondField Hodge4.axis0 Hodge4.axis2)
+            (Flat.flatPlaquettePairEnergy bondField Hodge4.axis0 Hodge4.axis3)
+            (Flat.flatPlaquettePairEnergy bondField Hodge4.axis1 Hodge4.axis2)
+            (Flat.flatPlaquettePairEnergy bondField Hodge4.axis1 Hodge4.axis3)
+            (Flat.flatPlaquettePairEnergy bondField Hodge4.axis2 Hodge4.axis3)))))
 
 physicalWilsonDefect :
   RationalSU2Background4 → Physical.PhysicalSU2BondField4 → ℚ
-physicalWilsonDefect background field =
-  physicalWilsonSecondVariation background field
-  - physicalWilsonSecondVariation identityBackground field
+physicalWilsonDefect background bondField =
+  physicalWilsonSecondVariation background bondField
+  - physicalWilsonSecondVariation identityBackground bondField
 
-physicalWilsonDefectIsAtomDifference : ∀ background field →
-  physicalWilsonDefect background field
-  ≡ physicalWilsonAtomSum background field
-    - physicalWilsonAtomSum identityBackground field
-physicalWilsonDefectIsAtomDifference background field =
+physicalWilsonDefectIsAtomDifference : ∀ background bondField →
+  physicalWilsonDefect background bondField
+  ≡ physicalWilsonAtomSum background bondField
+    - physicalWilsonAtomSum identityBackground bondField
+physicalWilsonDefectIsAtomDifference background bondField =
   cong₂ _-_
-    (physicalWilsonSecondVariationIsSixteenAtomSum background field)
-    (physicalWilsonSecondVariationIsSixteenAtomSum identityBackground field)
+    (physicalWilsonSecondVariationIsSixteenAtomSum background bondField)
+    (physicalWilsonSecondVariationIsSixteenAtomSum identityBackground bondField)
 
-physicalWilsonDefectIsBackgroundMinusFlatCurl : ∀ background field →
-  physicalWilsonDefect background field
-  ≡ physicalWilsonSecondVariation background field
-    - Flat.flatWilsonEnergy field
-physicalWilsonDefectIsBackgroundMinusFlatCurl background field =
+physicalWilsonDefectIsBackgroundMinusFlatCurl : ∀ background bondField →
+  physicalWilsonDefect background bondField
+  ≡ physicalWilsonSecondVariation background bondField
+    - Flat.flatWilsonEnergy bondField
+physicalWilsonDefectIsBackgroundMinusFlatCurl background bondField =
   cong
-    (physicalWilsonSecondVariation background field -_)
-    (identityPhysicalWilsonIsFlatCurl field)
+    (physicalWilsonSecondVariation background bondField -_)
+    (identityPhysicalWilsonIsFlatCurl bondField)
 
 rationalSU2InverseLevel : ProofLevel
 rationalSU2InverseLevel = machineChecked

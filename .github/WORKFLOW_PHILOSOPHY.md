@@ -3,9 +3,9 @@
 CI is a shared resource, not an unlimited event sink. The repository's default
 automation mindset is:
 
-- Prefer the newest meaningful revision. Workflows should use concurrency so a
-  newer run for the same workflow and branch cancels stale queued or running
-  runs.
+- Prefer the newest meaningful revision. Workflows share one repository-wide
+  concurrency group per ref, so a newer run cancels stale queued or running
+  work across the workflow fan-out.
 - Trigger narrowly. Use `paths`, branch filters, and explicit event types when
   they express the workflow's real scope. Avoid running both `push` and
   `pull_request` validation for the same feature-branch update unless both are
@@ -18,11 +18,11 @@ automation mindset is:
 - Treat runner capacity and GitHub rate limits as design constraints. A green
   check is useful only if the repository can reach it predictably.
 
-The standard workflow-level policy is:
+The standard repository-wide policy is:
 
 ```yaml
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 ```
 

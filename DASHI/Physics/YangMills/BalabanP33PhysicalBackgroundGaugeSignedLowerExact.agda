@@ -109,31 +109,31 @@ sumSitesNonnegative term pointwise =
         sumIndex4Nonnegative _ (λ x3 →
           pointwise (pair (pair x0 x1) (pair x2 x3))))))
 
-axisInsertionNormSqNonnegative : ∀ field axis →
-  0ℚ ≤ Global.axisInsertionNormSq field axis
-axisInsertionNormSqNonnegative field axis =
+axisInsertionNormSqNonnegative : ∀ fieldValue axis →
+  0ℚ ≤ Global.axisInsertionNormSq fieldValue axis
+axisInsertionNormSqNonnegative fieldValue axis =
   sumSitesNonnegative _
     (λ site → Norm.normSqNonnegative
-      (Gauge.insertionQuaternion field axis site))
+      (Gauge.insertionQuaternion fieldValue axis site))
 
-periodicPhysicalBondNormSqNonnegative : ∀ field →
-  0ℚ ≤ Global.periodicPhysicalBondNormSq field
-periodicPhysicalBondNormSqNonnegative field =
+periodicPhysicalBondNormSqNonnegative : ∀ fieldValue →
+  0ℚ ≤ Global.periodicPhysicalBondNormSq fieldValue
+periodicPhysicalBondNormSqNonnegative fieldValue =
   FiniteL2.addNonnegative
-    (axisInsertionNormSqNonnegative field Periodic.axis0)
+    (axisInsertionNormSqNonnegative fieldValue Periodic.axis0)
     (FiniteL2.addNonnegative
-      (axisInsertionNormSqNonnegative field Periodic.axis1)
+      (axisInsertionNormSqNonnegative fieldValue Periodic.axis1)
       (FiniteL2.addNonnegative
-        (axisInsertionNormSqNonnegative field Periodic.axis2)
-        (axisInsertionNormSqNonnegative field Periodic.axis3)))
+        (axisInsertionNormSqNonnegative fieldValue Periodic.axis2)
+        (axisInsertionNormSqNonnegative fieldValue Periodic.axis3)))
 
-physicalBondNormSqNonnegative : ∀ field →
-  0ℚ ≤ Coordinates.physicalSU2BondNormSq field
-physicalBondNormSqNonnegative field =
+physicalBondNormSqNonnegative : ∀ fieldValue →
+  0ℚ ≤ Coordinates.physicalSU2BondNormSq fieldValue
+physicalBondNormSqNonnegative fieldValue =
   subst
     (λ selected → 0ℚ ≤ selected)
-    (Global.periodicPhysicalBondNormSqExact field)
-    (periodicPhysicalBondNormSqNonnegative field)
+    (Global.periodicPhysicalBondNormSqExact fieldValue)
+    (periodicPhysicalBondNormSqNonnegative fieldValue)
 
 ------------------------------------------------------------------------
 -- Literal gauge energies on the periodic physical carrier.
@@ -148,17 +148,17 @@ coordinateSquareSum values =
 backgroundGaugePointEnergy :
   Physical.RationalSU2Background4 →
   Coordinates.PhysicalSU2BondField4 → Periodic.Site4 → ℚ
-backgroundGaugePointEnergy background field site =
+backgroundGaugePointEnergy background fieldValue site =
   coordinateSquareSum
     (λ coordinate →
-      Gauge.backgroundGaugeFirst background field (pair coordinate site))
+      Gauge.backgroundGaugeFirst background fieldValue (pair coordinate site))
 
 flatGaugePointEnergy :
   Coordinates.PhysicalSU2BondField4 → Periodic.Site4 → ℚ
-flatGaugePointEnergy field site =
+flatGaugePointEnergy fieldValue site =
   coordinateSquareSum
     (λ coordinate →
-      Gauge.flatGaugeFirstFromAxes field (pair coordinate site))
+      Gauge.flatGaugeFirstFromAxes fieldValue (pair coordinate site))
 
 gaugeDefectPointEnergy :
   Physical.RationalSU2Background4 →
@@ -168,73 +168,73 @@ gaugeDefectPointEnergy = Pointwise.pointwiseGaugeDefectEnergy
 backgroundGaugeEnergy :
   Physical.RationalSU2Background4 →
   Coordinates.PhysicalSU2BondField4 → ℚ
-backgroundGaugeEnergy background field =
-  Periodic.sumSites (backgroundGaugePointEnergy background field)
+backgroundGaugeEnergy background fieldValue =
+  Periodic.sumSites (backgroundGaugePointEnergy background fieldValue)
 
 flatGaugeEnergy : Coordinates.PhysicalSU2BondField4 → ℚ
-flatGaugeEnergy field = Periodic.sumSites (flatGaugePointEnergy field)
+flatGaugeEnergy fieldValue = Periodic.sumSites (flatGaugePointEnergy fieldValue)
 
 flatGaugePointIsPeriodicDivergence :
-  ∀ field site →
-  flatGaugePointEnergy field site
+  ∀ fieldValue site →
+  flatGaugePointEnergy fieldValue site
   ≡
     Periodic.periodicDivergence
-      (Bridge.asPeriodicField field Coordinates.coordinateX) site
+      (Bridge.asPeriodicField fieldValue Coordinates.coordinateX) site
       * Periodic.periodicDivergence
-          (Bridge.asPeriodicField field Coordinates.coordinateX) site
+          (Bridge.asPeriodicField fieldValue Coordinates.coordinateX) site
     + Periodic.periodicDivergence
-        (Bridge.asPeriodicField field Coordinates.coordinateY) site
+        (Bridge.asPeriodicField fieldValue Coordinates.coordinateY) site
       * Periodic.periodicDivergence
-          (Bridge.asPeriodicField field Coordinates.coordinateY) site
+          (Bridge.asPeriodicField fieldValue Coordinates.coordinateY) site
     + Periodic.periodicDivergence
-        (Bridge.asPeriodicField field Coordinates.coordinateZ) site
+        (Bridge.asPeriodicField fieldValue Coordinates.coordinateZ) site
       * Periodic.periodicDivergence
-          (Bridge.asPeriodicField field Coordinates.coordinateZ) site
-flatGaugePointIsPeriodicDivergence field site
+          (Bridge.asPeriodicField fieldValue Coordinates.coordinateZ) site
+flatGaugePointIsPeriodicDivergence fieldValue site
   rewrite Gauge.flatGaugeFirstFromAxesIsPeriodicDivergence
-      field Coordinates.coordinateX site
+      fieldValue Coordinates.coordinateX site
         | Gauge.flatGaugeFirstFromAxesIsPeriodicDivergence
-      field Coordinates.coordinateY site
+      fieldValue Coordinates.coordinateY site
         | Gauge.flatGaugeFirstFromAxesIsPeriodicDivergence
-      field Coordinates.coordinateZ site =
+      fieldValue Coordinates.coordinateZ site =
   refl
 
-flatGaugeEnergyIsPhysicalDivergence : ∀ field →
-  flatGaugeEnergy field
+flatGaugeEnergyIsPhysicalDivergence : ∀ fieldValue →
+  flatGaugeEnergy fieldValue
   ≡ Periodic.physicalPeriodicDivergenceEnergy
-      (Bridge.asPeriodicField field)
-flatGaugeEnergyIsPhysicalDivergence field =
+      (Bridge.asPeriodicField fieldValue)
+flatGaugeEnergyIsPhysicalDivergence fieldValue =
   trans
     (Periodic.sumSitesCong _ _
-      (flatGaugePointIsPeriodicDivergence field))
+      (flatGaugePointIsPeriodicDivergence fieldValue))
     (trans
       (Periodic.sumSitesAdd
         (λ site →
           Periodic.periodicDivergence
-            (Bridge.asPeriodicField field Coordinates.coordinateX) site
+            (Bridge.asPeriodicField fieldValue Coordinates.coordinateX) site
           * Periodic.periodicDivergence
-            (Bridge.asPeriodicField field Coordinates.coordinateX) site)
+            (Bridge.asPeriodicField fieldValue Coordinates.coordinateX) site)
         (λ site →
           Periodic.periodicDivergence
-            (Bridge.asPeriodicField field Coordinates.coordinateY) site
+            (Bridge.asPeriodicField fieldValue Coordinates.coordinateY) site
             * Periodic.periodicDivergence
-              (Bridge.asPeriodicField field Coordinates.coordinateY) site
+              (Bridge.asPeriodicField fieldValue Coordinates.coordinateY) site
           + Periodic.periodicDivergence
-              (Bridge.asPeriodicField field Coordinates.coordinateZ) site
+              (Bridge.asPeriodicField fieldValue Coordinates.coordinateZ) site
             * Periodic.periodicDivergence
-              (Bridge.asPeriodicField field Coordinates.coordinateZ) site))
+              (Bridge.asPeriodicField fieldValue Coordinates.coordinateZ) site))
       (cong₂ _+_ refl
         (Periodic.sumSitesAdd
           (λ site →
             Periodic.periodicDivergence
-              (Bridge.asPeriodicField field Coordinates.coordinateY) site
+              (Bridge.asPeriodicField fieldValue Coordinates.coordinateY) site
             * Periodic.periodicDivergence
-              (Bridge.asPeriodicField field Coordinates.coordinateY) site)
+              (Bridge.asPeriodicField fieldValue Coordinates.coordinateY) site)
           (λ site →
             Periodic.periodicDivergence
-              (Bridge.asPeriodicField field Coordinates.coordinateZ) site
+              (Bridge.asPeriodicField fieldValue Coordinates.coordinateZ) site
             * Periodic.periodicDivergence
-              (Bridge.asPeriodicField field Coordinates.coordinateZ) site))))
+              (Bridge.asPeriodicField fieldValue Coordinates.coordinateZ) site))))
 
 ------------------------------------------------------------------------
 -- Weighted scalar Young inequality at the configured rational radius.
@@ -260,43 +260,43 @@ weightedGaugeDifferenceLower flat defect =
       (weightedGaugeSquareNonnegative flat defect))
 
 backgroundFirstIsFlatPlusDefect :
-  ∀ background field coordinate site →
-  Gauge.backgroundGaugeFirst background field (pair coordinate site)
-  ≡ Gauge.flatGaugeFirstFromAxes field (pair coordinate site)
+  ∀ background fieldValue coordinate site →
+  Gauge.backgroundGaugeFirst background fieldValue (pair coordinate site)
+  ≡ Gauge.flatGaugeFirstFromAxes fieldValue (pair coordinate site)
     + Pointwise.backgroundGaugeDefectCoordinate
-        background field coordinate site
-backgroundFirstIsFlatPlusDefect background field coordinate site =
+        background fieldValue coordinate site
+backgroundFirstIsFlatPlusDefect background fieldValue coordinate site =
   ℚRing.solve-∀
-    (Gauge.backgroundGaugeFirst background field (pair coordinate site))
-    (Gauge.flatGaugeFirstFromAxes field (pair coordinate site))
+    (Gauge.backgroundGaugeFirst background fieldValue (pair coordinate site))
+    (Gauge.flatGaugeFirstFromAxes fieldValue (pair coordinate site))
 
 pointwiseGaugeEnergyDifferenceLower :
-  ∀ background field site →
-  - (rho * flatGaugePointEnergy field site)
-    - invRho * gaugeDefectPointEnergy background field site
-  ≤ backgroundGaugePointEnergy background field site
-    - flatGaugePointEnergy field site
-pointwiseGaugeEnergyDifferenceLower background field site
+  ∀ background fieldValue site →
+  - (rho * flatGaugePointEnergy fieldValue site)
+    - invRho * gaugeDefectPointEnergy background fieldValue site
+  ≤ backgroundGaugePointEnergy background fieldValue site
+    - flatGaugePointEnergy fieldValue site
+pointwiseGaugeEnergyDifferenceLower background fieldValue site
   rewrite backgroundFirstIsFlatPlusDefect
-      background field Coordinates.coordinateX site
+      background fieldValue Coordinates.coordinateX site
         | backgroundFirstIsFlatPlusDefect
-      background field Coordinates.coordinateY site
+      background fieldValue Coordinates.coordinateY site
         | backgroundFirstIsFlatPlusDefect
-      background field Coordinates.coordinateZ site =
+      background fieldValue Coordinates.coordinateZ site =
   let
-    fx = Gauge.flatGaugeFirstFromAxes field
+    fx = Gauge.flatGaugeFirstFromAxes fieldValue
       (pair Coordinates.coordinateX site)
-    fy = Gauge.flatGaugeFirstFromAxes field
+    fy = Gauge.flatGaugeFirstFromAxes fieldValue
       (pair Coordinates.coordinateY site)
-    fz = Gauge.flatGaugeFirstFromAxes field
+    fz = Gauge.flatGaugeFirstFromAxes fieldValue
       (pair Coordinates.coordinateZ site)
 
     rx = Pointwise.backgroundGaugeDefectCoordinate
-      background field Coordinates.coordinateX site
+      background fieldValue Coordinates.coordinateX site
     ry = Pointwise.backgroundGaugeDefectCoordinate
-      background field Coordinates.coordinateY site
+      background fieldValue Coordinates.coordinateY site
     rz = Pointwise.backgroundGaugeDefectCoordinate
-      background field Coordinates.coordinateZ site
+      background fieldValue Coordinates.coordinateZ site
 
     combined =
       ℚP.+-mono-≤
@@ -310,10 +310,10 @@ pointwiseGaugeEnergyDifferenceLower background field site
       lower
       ≤ coordinateSquareSum
           (λ coordinate →
-            Gauge.flatGaugeFirstFromAxes field (pair coordinate site)
+            Gauge.flatGaugeFirstFromAxes fieldValue (pair coordinate site)
             + Pointwise.backgroundGaugeDefectCoordinate
-                background field coordinate site)
-        - flatGaugePointEnergy field site)
+                background fieldValue coordinate site)
+        - flatGaugePointEnergy fieldValue site)
     (ℚRing.solve-∀ fx fy fz rx ry rz)
     (subst
       (λ upper →
@@ -324,68 +324,68 @@ pointwiseGaugeEnergyDifferenceLower background field site
       (ℚRing.solve-∀ fx fy fz rx ry rz)
       combined)
 
-backgroundGaugeEnergyDifferenceLower : ∀ background field →
-  - (rho * flatGaugeEnergy field)
-    - invRho * Global.globalGaugeDerivativeDefectEnergy background field
-  ≤ backgroundGaugeEnergy background field - flatGaugeEnergy field
-backgroundGaugeEnergyDifferenceLower background field =
+backgroundGaugeEnergyDifferenceLower : ∀ background fieldValue →
+  - (rho * flatGaugeEnergy fieldValue)
+    - invRho * Global.globalGaugeDerivativeDefectEnergy background fieldValue
+  ≤ backgroundGaugeEnergy background fieldValue - flatGaugeEnergy fieldValue
+backgroundGaugeEnergyDifferenceLower background fieldValue =
   let
     raw :
       Periodic.sumSites
         (λ site →
-          - (rho * flatGaugePointEnergy field site)
-          - invRho * gaugeDefectPointEnergy background field site)
+          - (rho * flatGaugePointEnergy fieldValue site)
+          - invRho * gaugeDefectPointEnergy background fieldValue site)
       ≤ Periodic.sumSites
           (λ site →
-            backgroundGaugePointEnergy background field site
-            - flatGaugePointEnergy field site)
+            backgroundGaugePointEnergy background fieldValue site
+            - flatGaugePointEnergy fieldValue site)
     raw =
       Global.sumSitesMonotone _ _
-        (pointwiseGaugeEnergyDifferenceLower background field)
+        (pointwiseGaugeEnergyDifferenceLower background fieldValue)
 
     lowerExact :
       Periodic.sumSites
         (λ site →
-          - (rho * flatGaugePointEnergy field site)
-          - invRho * gaugeDefectPointEnergy background field site)
-      ≡ - (rho * flatGaugeEnergy field)
-        - invRho * Global.globalGaugeDerivativeDefectEnergy background field
+          - (rho * flatGaugePointEnergy fieldValue site)
+          - invRho * gaugeDefectPointEnergy background fieldValue site)
+      ≡ - (rho * flatGaugeEnergy fieldValue)
+        - invRho * Global.globalGaugeDerivativeDefectEnergy background fieldValue
     lowerExact =
       trans
         (Periodic.sumSitesSubtract
-          (λ site → - (rho * flatGaugePointEnergy field site))
-          (λ site → invRho * gaugeDefectPointEnergy background field site))
+          (λ site → - (rho * flatGaugePointEnergy fieldValue site))
+          (λ site → invRho * gaugeDefectPointEnergy background fieldValue site))
         (cong₂ _-_
           (trans
             (Periodic.sumSitesNeg
-              (λ site → rho * flatGaugePointEnergy field site))
+              (λ site → rho * flatGaugePointEnergy fieldValue site))
             (cong -_
               (Periodic.sumSitesScale rho
-                (flatGaugePointEnergy field))))
+                (flatGaugePointEnergy fieldValue))))
           (Periodic.sumSitesScale invRho
-            (gaugeDefectPointEnergy background field)))
+            (gaugeDefectPointEnergy background fieldValue)))
 
     upperExact :
       Periodic.sumSites
         (λ site →
-          backgroundGaugePointEnergy background field site
-          - flatGaugePointEnergy field site)
-      ≡ backgroundGaugeEnergy background field - flatGaugeEnergy field
+          backgroundGaugePointEnergy background fieldValue site
+          - flatGaugePointEnergy fieldValue site)
+      ≡ backgroundGaugeEnergy background fieldValue - flatGaugeEnergy fieldValue
     upperExact =
       Periodic.sumSitesSubtract
-        (backgroundGaugePointEnergy background field)
-        (flatGaugePointEnergy field)
+        (backgroundGaugePointEnergy background fieldValue)
+        (flatGaugePointEnergy fieldValue)
   in
   subst
     (λ lower →
-      lower ≤ backgroundGaugeEnergy background field - flatGaugeEnergy field)
+      lower ≤ backgroundGaugeEnergy background fieldValue - flatGaugeEnergy fieldValue)
     lowerExact
     (subst
       (λ upper →
         Periodic.sumSites
           (λ site →
-            - (rho * flatGaugePointEnergy field site)
-            - invRho * gaugeDefectPointEnergy background field site)
+            - (rho * flatGaugePointEnergy fieldValue site)
+            - invRho * gaugeDefectPointEnergy background fieldValue site)
         ≤ upper)
       upperExact raw)
 
@@ -405,46 +405,46 @@ negativeScaleAntimono scale scaleNonnegative leftBelowRight =
     (Norm.scaleNonnegative scale scaleNonnegative leftBelowRight)
 
 backgroundGaugeSignedLowerThirtyTwo :
-  ∀ background field →
+  ∀ background fieldValue →
   ConfiguredInverseLinkRadius background →
-  - ((+ 32 / 1) * rho * Coordinates.physicalSU2BondNormSq field)
-  ≤ backgroundGaugeEnergy background field - flatGaugeEnergy field
-backgroundGaugeSignedLowerThirtyTwo background field radius =
+  - ((+ 32 / 1) * rho * Coordinates.physicalSU2BondNormSq fieldValue)
+  ≤ backgroundGaugeEnergy background fieldValue - flatGaugeEnergy fieldValue
+backgroundGaugeSignedLowerThirtyTwo background fieldValue radius =
   let
-    norm = Coordinates.physicalSU2BondNormSq field
+    norm = Coordinates.physicalSU2BondNormSq fieldValue
 
-    flatUpper : flatGaugeEnergy field ≤ (+ 16 / 1) * norm
+    flatUpper : flatGaugeEnergy fieldValue ≤ (+ 16 / 1) * norm
     flatUpper =
       subst
         (λ lower → lower ≤ (+ 16 / 1) * norm)
-        (sym (flatGaugeEnergyIsPhysicalDivergence field))
-        (Divergence.physicalPeriodicDivergenceUpper field)
+        (sym (flatGaugeEnergyIsPhysicalDivergence fieldValue))
+        (Divergence.physicalPeriodicDivergenceUpper fieldValue)
 
     defectUpper :
-      Global.globalGaugeDerivativeDefectEnergy background field
+      Global.globalGaugeDerivativeDefectEnergy background fieldValue
       ≤ (+ 16 / 1) * rhoSquare * norm
     defectUpper =
       Global.globalGaugeDerivativeDefectUniformBound
-        background field rhoSquare rhoSquareNonnegative radius
+        background fieldValue rhoSquare rhoSquareNonnegative radius
 
     negativeFlat :
       - (rho * ((+ 16 / 1) * norm))
-      ≤ - (rho * flatGaugeEnergy field)
+      ≤ - (rho * flatGaugeEnergy fieldValue)
     negativeFlat = negativeScaleAntimono rho rhoNonnegative flatUpper
 
     negativeDefect :
       - (invRho * ((+ 16 / 1) * rhoSquare * norm))
       ≤ - (invRho
-        * Global.globalGaugeDerivativeDefectEnergy background field)
+        * Global.globalGaugeDerivativeDefectEnergy background fieldValue)
     negativeDefect =
       negativeScaleAntimono invRho invRhoNonnegative defectUpper
 
     combinedNegative :
       - (rho * ((+ 16 / 1) * norm))
         - invRho * ((+ 16 / 1) * rhoSquare * norm)
-      ≤ - (rho * flatGaugeEnergy field)
+      ≤ - (rho * flatGaugeEnergy fieldValue)
         - invRho
-          * Global.globalGaugeDerivativeDefectEnergy background field
+          * Global.globalGaugeDerivativeDefectEnergy background fieldValue
     combinedNegative = ℚP.+-mono-≤ negativeFlat negativeDefect
 
     algebra :
@@ -468,16 +468,16 @@ backgroundGaugeSignedLowerThirtyTwo background field radius =
   in
   ℚP.≤-trans algebraLower
     (ℚP.≤-trans combinedNegative
-      (backgroundGaugeEnergyDifferenceLower background field))
+      (backgroundGaugeEnergyDifferenceLower background fieldValue))
 
 backgroundGaugeSignedLowerSixtyFour :
-  ∀ background field →
+  ∀ background fieldValue →
   ConfiguredInverseLinkRadius background →
-  - ((+ 64 / 1) * rho * Coordinates.physicalSU2BondNormSq field)
-  ≤ backgroundGaugeEnergy background field - flatGaugeEnergy field
-backgroundGaugeSignedLowerSixtyFour background field radius =
+  - ((+ 64 / 1) * rho * Coordinates.physicalSU2BondNormSq fieldValue)
+  ≤ backgroundGaugeEnergy background fieldValue - flatGaugeEnergy fieldValue
+backgroundGaugeSignedLowerSixtyFour background fieldValue radius =
   let
-    norm = Coordinates.physicalSU2BondNormSq field
+    norm = Coordinates.physicalSU2BondNormSq fieldValue
 
     weakerToStronger :
       - ((+ 64 / 1) * rho * norm)
@@ -490,10 +490,10 @@ backgroundGaugeSignedLowerSixtyFour background field radius =
           (Norm.scaleNonnegative
             ((+ 32 / 1) * rho)
             (ℚP.nonNegative⁻¹ ((+ 32 / 1) * rho))
-            (physicalBondNormSqNonnegative field)))
+            (physicalBondNormSqNonnegative fieldValue)))
   in
   ℚP.≤-trans weakerToStronger
-    (backgroundGaugeSignedLowerThirtyTwo background field radius)
+    (backgroundGaugeSignedLowerThirtyTwo background fieldValue radius)
 
 physicalGaugeWeightedYoungLevel : ProofLevel
 physicalGaugeWeightedYoungLevel = machineChecked

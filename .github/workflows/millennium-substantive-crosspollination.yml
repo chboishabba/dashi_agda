@@ -1,24 +1,6 @@
 name: Millennium substantive cross-pollination
 
 on:
-  push:
-    branches: [master]
-    paths:
-      - 'DASHI/Analysis/RiemannMaassMoonshineCrossPollinationExact.agda'
-      - 'DASHI/Moonshine/TrivialRationalGradedVertexAlgebraExact.agda'
-      - 'DASHI/Moonshine/GradedVertexOperatorAlgebraBoundary.agda'
-      - 'DASHI/Moonshine/MonsterGradedVOABridgeExact.agda'
-      - 'DASHI/Mathematics/NumberTheory/**'
-      - 'DASHI/Mathematics/AlgebraicGeometry/**'
-      - 'DASHI/Mathematics/Arithmetic/**'
-      - 'DASHI/Mathematics/Complexity/**'
-      - 'DASHI/Mathematics/Topology/RoundThreeSphereRicciFlowExact.agda'
-      - 'DASHI/Mathematics/Topology/PoincareGeometrizationExactBoundary.agda'
-      - 'DASHI/Mathematics/Topology/QuaternionS3PoincareCrossPollination.agda'
-      - 'DASHI/Mathematics/CrossPollination/MillenniumSubstantiveCrossPollination*.agda'
-      - 'DASHI/EverythingMillenniumSubstantiveCrossPollination.agda'
-      - 'scripts/check_millennium_substantive_crosspollination.sh'
-      - '.github/workflows/millennium-substantive-crosspollination.yml'
   pull_request:
     branches:
       - 'agent/hurwitz-hopf-noether-millennium-crosspollination'
@@ -42,7 +24,7 @@ on:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:

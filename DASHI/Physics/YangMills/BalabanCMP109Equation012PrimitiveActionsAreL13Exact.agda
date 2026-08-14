@@ -74,67 +74,67 @@ record Equation012PrimitiveActionData
 open Equation012PrimitiveActionData public
 
 sourcePrimitiveActionIsL13 :
-  ∀ {Direction Entry} (data : Equation012PrimitiveActionData Direction Entry) h →
-  sourcePrinted data h ≡ sourceL13 data h
-sourcePrimitiveActionIsL13 data h =
-  trans (sourcePrintedIsDAG data h) (sourceDAGIsL13 data h)
+  ∀ {Direction Entry} (actions : Equation012PrimitiveActionData Direction Entry) h →
+  sourcePrinted actions h ≡ sourceL13 actions h
+sourcePrimitiveActionIsL13 actions h =
+  trans (sourcePrintedIsDAG actions h) (sourceDAGIsL13 actions h)
 
 crossingPrimitiveActionIsL13 :
-  ∀ {Direction Entry} (data : Equation012PrimitiveActionData Direction Entry) h →
-  crossingPrinted data h ≡ crossingL13 data h
-crossingPrimitiveActionIsL13 data h =
-  trans (crossingPrintedIsDAG data h) (crossingDAGIsL13 data h)
+  ∀ {Direction Entry} (actions : Equation012PrimitiveActionData Direction Entry) h →
+  crossingPrinted actions h ≡ crossingL13 actions h
+crossingPrimitiveActionIsL13 actions h =
+  trans (crossingPrintedIsDAG actions h) (crossingDAGIsL13 actions h)
 
 targetReversePrimitiveActionIsL13 :
-  ∀ {Direction Entry} (data : Equation012PrimitiveActionData Direction Entry) h →
-  targetReversePrinted data h ≡ targetReverseL13 data h
-targetReversePrimitiveActionIsL13 data h =
-  trans (targetReversePrintedIsDAG data h) (targetReverseDAGIsL13 data h)
+  ∀ {Direction Entry} (actions : Equation012PrimitiveActionData Direction Entry) h →
+  targetReversePrinted actions h ≡ targetReverseL13 actions h
+targetReversePrimitiveActionIsL13 actions h =
+  trans (targetReversePrintedIsDAG actions h) (targetReverseDAGIsL13 actions h)
 
 coarseInversePrimitiveActionIsL13 :
-  ∀ {Direction Entry} (data : Equation012PrimitiveActionData Direction Entry) h →
-  coarseInversePrinted data h ≡ coarseInverseL13 data h
-coarseInversePrimitiveActionIsL13 data h =
-  trans (coarseInversePrintedIsDAG data h) (coarseInverseDAGIsL13 data h)
+  ∀ {Direction Entry} (actions : Equation012PrimitiveActionData Direction Entry) h →
+  coarseInversePrinted actions h ≡ coarseInverseL13 actions h
+coarseInversePrimitiveActionIsL13 actions h =
+  trans (coarseInversePrintedIsDAG actions h) (coarseInverseDAGIsL13 actions h)
 
 principalLogPrimitiveActionIsL13 :
-  ∀ {Direction Entry} (data : Equation012PrimitiveActionData Direction Entry) h →
-  principalLogPrinted data h ≡ principalLogL13 data h
-principalLogPrimitiveActionIsL13 data h =
-  trans (principalLogPrintedIsDAG data h) (principalLogDAGIsL13 data h)
+  ∀ {Direction Entry} (actions : Equation012PrimitiveActionData Direction Entry) h →
+  principalLogPrinted actions h ≡ principalLogL13 actions h
+principalLogPrimitiveActionIsL13 actions h =
+  trans (principalLogPrintedIsDAG actions h) (principalLogDAGIsL13 actions h)
 
 finiteAveragePrimitiveActionIsL13 :
-  ∀ {Direction Entry} (data : Equation012PrimitiveActionData Direction Entry) h →
-  finiteAveragePrinted data h ≡ finiteAverageL13 data h
-finiteAveragePrimitiveActionIsL13 data h =
-  trans (finiteAveragePrintedIsDAG data h) (finiteAverageDAGIsL13 data h)
+  ∀ {Direction Entry} (actions : Equation012PrimitiveActionData Direction Entry) h →
+  finiteAveragePrinted actions h ≡ finiteAverageL13 actions h
+finiteAveragePrimitiveActionIsL13 actions h =
+  trans (finiteAveragePrintedIsDAG actions h) (finiteAverageDAGIsL13 actions h)
 
 exponentialPrimitiveActionIsL13 :
-  ∀ {Direction Entry} (data : Equation012PrimitiveActionData Direction Entry) h →
-  exponentialPrinted data h ≡ exponentialL13 data h
-exponentialPrimitiveActionIsL13 data h =
-  trans (exponentialPrintedIsDAG data h) (exponentialDAGIsL13 data h)
+  ∀ {Direction Entry} (actions : Equation012PrimitiveActionData Direction Entry) h →
+  exponentialPrinted actions h ≡ exponentialL13 actions h
+exponentialPrimitiveActionIsL13 actions h =
+  trans (exponentialPrintedIsDAG actions h) (exponentialDAGIsL13 actions h)
 
 endpointProductPrimitiveActionIsL13 :
-  ∀ {Direction Entry} (data : Equation012PrimitiveActionData Direction Entry) h →
-  endpointProductPrinted data h ≡ endpointProductL13 data h
-endpointProductPrimitiveActionIsL13 data h =
-  trans (endpointProductPrintedIsDAG data h) (endpointProductDAGIsL13 data h)
+  ∀ {Direction Entry} (actions : Equation012PrimitiveActionData Direction Entry) h →
+  endpointProductPrinted actions h ≡ endpointProductL13 actions h
+endpointProductPrimitiveActionIsL13 actions h =
+  trans (endpointProductPrintedIsDAG actions h) (endpointProductDAGIsL13 actions h)
 
 record Equation012PrimitiveActionBundle
     (Direction Entry : Set) : Set₁ where
   field
-    data : Equation012PrimitiveActionData Direction Entry
+    actions : Equation012PrimitiveActionData Direction Entry
 
 open Equation012PrimitiveActionBundle public
 
 printedEquation012DerivativeActionIsL13 :
   ∀ {Direction Entry}
     (bundle : Equation012PrimitiveActionBundle Direction Entry) h →
-  endpointProductPrinted (data bundle) h
-  ≡ endpointProductL13 (data bundle) h
+  endpointProductPrinted (actions bundle) h
+  ≡ endpointProductL13 (actions bundle) h
 printedEquation012DerivativeActionIsL13 bundle h =
-  endpointProductPrimitiveActionIsL13 (data bundle) h
+  endpointProductPrimitiveActionIsL13 (actions bundle) h
 
 cmp109Equation012PrimitivePointwiseIdentificationLevel : ProofLevel
 cmp109Equation012PrimitivePointwiseIdentificationLevel = machineChecked

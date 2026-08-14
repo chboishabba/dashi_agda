@@ -56,102 +56,102 @@ import DASHI.Physics.YangMills.BalabanP33WilsonPlaquetteSecondVariationPlacement
 linkInsertionCharge :
   Coordinates.PhysicalSU2BondField4 →
   Periodic.Axis4 → Periodic.Site4 → ℚ
-linkInsertionCharge field axis site =
-  Norm.normSq (Gauge.insertionQuaternion field axis site)
+linkInsertionCharge fieldValue axis site =
+  Norm.normSq (Gauge.insertionQuaternion fieldValue axis site)
 
 plaquetteSlotCharge :
   Coordinates.PhysicalSU2BondField4 →
   Periodic.Axis4 → Periodic.Axis4 → Periodic.Site4 →
   Placement.PlaquetteLinkSlot4 → ℚ
-plaquetteSlotCharge field left right site Placement.slot0 =
-  linkInsertionCharge field left site
-plaquetteSlotCharge field left right site Placement.slot1 =
-  linkInsertionCharge field right (Periodic.shiftForward left site)
-plaquetteSlotCharge field left right site Placement.slot2 =
-  linkInsertionCharge field left (Periodic.shiftForward right site)
-plaquetteSlotCharge field left right site Placement.slot3 =
-  linkInsertionCharge field right site
+plaquetteSlotCharge fieldValue left right site Placement.slot0 =
+  linkInsertionCharge fieldValue left site
+plaquetteSlotCharge fieldValue left right site Placement.slot1 =
+  linkInsertionCharge fieldValue right (Periodic.shiftForward left site)
+plaquetteSlotCharge fieldValue left right site Placement.slot2 =
+  linkInsertionCharge fieldValue left (Periodic.shiftForward right site)
+plaquetteSlotCharge fieldValue left right site Placement.slot3 =
+  linkInsertionCharge fieldValue right site
 
 plaquetteDiagonalCharge :
   Coordinates.PhysicalSU2BondField4 →
   Periodic.Axis4 → Periodic.Axis4 → Periodic.Site4 → ℚ
-plaquetteDiagonalCharge field left right site =
+plaquetteDiagonalCharge fieldValue left right site =
   Sums.sumRational Placement.plaquetteLinkSlots4
-    (plaquetteSlotCharge field left right site)
+    (plaquetteSlotCharge fieldValue left right site)
 
 orderedCrossCharge :
   Coordinates.PhysicalSU2BondField4 →
   Periodic.Axis4 → Periodic.Axis4 → Periodic.Site4 →
   Placement.OrderedDistinctSlotPair4 → ℚ
-orderedCrossCharge field left right site pair =
+orderedCrossCharge fieldValue left right site pair =
   (+ 1 / 2)
-    * (plaquetteSlotCharge field left right site
+    * (plaquetteSlotCharge fieldValue left right site
         (Placement.orderedPairFirst pair)
-      + plaquetteSlotCharge field left right site
+      + plaquetteSlotCharge fieldValue left right site
         (Placement.orderedPairSecond pair))
 
 plaquetteCrossCharge :
   Coordinates.PhysicalSU2BondField4 →
   Periodic.Axis4 → Periodic.Axis4 → Periodic.Site4 → ℚ
-plaquetteCrossCharge field left right site =
+plaquetteCrossCharge fieldValue left right site =
   Sums.sumRational Placement.orderedDistinctSlotPairs4
-    (orderedCrossCharge field left right site)
+    (orderedCrossCharge fieldValue left right site)
 
-plaquetteDiagonalChargeExpanded : ∀ field left right site →
-  plaquetteDiagonalCharge field left right site
-  ≡ linkInsertionCharge field left site
-    + linkInsertionCharge field right (Periodic.shiftForward left site)
-    + linkInsertionCharge field left (Periodic.shiftForward right site)
-    + linkInsertionCharge field right site
-plaquetteDiagonalChargeExpanded field left right site =
+plaquetteDiagonalChargeExpanded : ∀ fieldValue left right site →
+  plaquetteDiagonalCharge fieldValue left right site
+  ≡ linkInsertionCharge fieldValue left site
+    + linkInsertionCharge fieldValue right (Periodic.shiftForward left site)
+    + linkInsertionCharge fieldValue left (Periodic.shiftForward right site)
+    + linkInsertionCharge fieldValue right site
+plaquetteDiagonalChargeExpanded fieldValue left right site =
   ℚRing.solve-∀
-    (linkInsertionCharge field left site)
-    (linkInsertionCharge field right (Periodic.shiftForward left site))
-    (linkInsertionCharge field left (Periodic.shiftForward right site))
-    (linkInsertionCharge field right site)
+    (linkInsertionCharge fieldValue left site)
+    (linkInsertionCharge fieldValue right (Periodic.shiftForward left site))
+    (linkInsertionCharge fieldValue left (Periodic.shiftForward right site))
+    (linkInsertionCharge fieldValue right site)
 
-plaquetteCrossChargeIsThreeDiagonal : ∀ field left right site →
-  plaquetteCrossCharge field left right site
-  ≡ (+ 3 / 1) * plaquetteDiagonalCharge field left right site
-plaquetteCrossChargeIsThreeDiagonal field left right site =
+plaquetteCrossChargeIsThreeDiagonal : ∀ fieldValue left right site →
+  plaquetteCrossCharge fieldValue left right site
+  ≡ (+ 3 / 1) * plaquetteDiagonalCharge fieldValue left right site
+plaquetteCrossChargeIsThreeDiagonal fieldValue left right site =
   ℚRing.solve-∀
-    (plaquetteSlotCharge field left right site Placement.slot0)
-    (plaquetteSlotCharge field left right site Placement.slot1)
-    (plaquetteSlotCharge field left right site Placement.slot2)
-    (plaquetteSlotCharge field left right site Placement.slot3)
+    (plaquetteSlotCharge fieldValue left right site Placement.slot0)
+    (plaquetteSlotCharge fieldValue left right site Placement.slot1)
+    (plaquetteSlotCharge fieldValue left right site Placement.slot2)
+    (plaquetteSlotCharge fieldValue left right site Placement.slot3)
 
 pairDiagonalIncidence :
   Coordinates.PhysicalSU2BondField4 →
   Periodic.Axis4 → Periodic.Axis4 → ℚ
-pairDiagonalIncidence field left right =
-  Periodic.sumSites (plaquetteDiagonalCharge field left right)
+pairDiagonalIncidence fieldValue left right =
+  Periodic.sumSites (plaquetteDiagonalCharge fieldValue left right)
 
 pairCrossIncidence :
   Coordinates.PhysicalSU2BondField4 →
   Periodic.Axis4 → Periodic.Axis4 → ℚ
-pairCrossIncidence field left right =
-  Periodic.sumSites (plaquetteCrossCharge field left right)
+pairCrossIncidence fieldValue left right =
+  Periodic.sumSites (plaquetteCrossCharge fieldValue left right)
 
-pairDiagonalIncidenceRaw : ∀ field left right →
-  pairDiagonalIncidence field left right
-  ≡ Global.axisInsertionNormSq field left
-    + Global.axisInsertionNormSq field right
-    + Global.axisInsertionNormSq field left
-    + Global.axisInsertionNormSq field right
-pairDiagonalIncidenceRaw field left right =
+pairDiagonalIncidenceRaw : ∀ fieldValue left right →
+  pairDiagonalIncidence fieldValue left right
+  ≡ Global.axisInsertionNormSq fieldValue left
+    + Global.axisInsertionNormSq fieldValue right
+    + Global.axisInsertionNormSq fieldValue left
+    + Global.axisInsertionNormSq fieldValue right
+pairDiagonalIncidenceRaw fieldValue left right =
   let
-    leftTerm = linkInsertionCharge field left
-    rightTerm = linkInsertionCharge field right
+    leftTerm = linkInsertionCharge fieldValue left
+    rightTerm = linkInsertionCharge fieldValue right
 
     expanded =
       Periodic.sumSitesCong
-        (plaquetteDiagonalCharge field left right)
+        (plaquetteDiagonalCharge fieldValue left right)
         (λ site →
           leftTerm site
           + rightTerm (Periodic.shiftForward left site)
           + leftTerm (Periodic.shiftForward right site)
           + rightTerm site)
-        (plaquetteDiagonalChargeExpanded field left right)
+        (plaquetteDiagonalChargeExpanded fieldValue left right)
 
     split0 =
       Periodic.sumSitesAdd
@@ -188,111 +188,111 @@ pairDiagonalIncidenceRaw field left right =
               (Periodic.sumSites leftTerm)
               (Periodic.sumSites rightTerm))))))
 
-pairDiagonalIncidenceExact : ∀ field left right →
-  pairDiagonalIncidence field left right
+pairDiagonalIncidenceExact : ∀ fieldValue left right →
+  pairDiagonalIncidence fieldValue left right
   ≡ (+ 2 / 1)
-      * (Global.axisInsertionNormSq field left
-        + Global.axisInsertionNormSq field right)
-pairDiagonalIncidenceExact field left right =
+      * (Global.axisInsertionNormSq fieldValue left
+        + Global.axisInsertionNormSq fieldValue right)
+pairDiagonalIncidenceExact fieldValue left right =
   trans
-    (pairDiagonalIncidenceRaw field left right)
+    (pairDiagonalIncidenceRaw fieldValue left right)
     (ℚRing.solve-∀
-      (Global.axisInsertionNormSq field left)
-      (Global.axisInsertionNormSq field right))
+      (Global.axisInsertionNormSq fieldValue left)
+      (Global.axisInsertionNormSq fieldValue right))
 
-pairCrossIncidenceIsThreeDiagonal : ∀ field left right →
-  pairCrossIncidence field left right
-  ≡ (+ 3 / 1) * pairDiagonalIncidence field left right
-pairCrossIncidenceIsThreeDiagonal field left right =
+pairCrossIncidenceIsThreeDiagonal : ∀ fieldValue left right →
+  pairCrossIncidence fieldValue left right
+  ≡ (+ 3 / 1) * pairDiagonalIncidence fieldValue left right
+pairCrossIncidenceIsThreeDiagonal fieldValue left right =
   trans
     (Periodic.sumSitesCong
-      (plaquetteCrossCharge field left right)
+      (plaquetteCrossCharge fieldValue left right)
       (λ site →
-        (+ 3 / 1) * plaquetteDiagonalCharge field left right site)
-      (plaquetteCrossChargeIsThreeDiagonal field left right))
+        (+ 3 / 1) * plaquetteDiagonalCharge fieldValue left right site)
+      (plaquetteCrossChargeIsThreeDiagonal fieldValue left right))
     (Periodic.sumSitesScale
-      (+ 3 / 1) (plaquetteDiagonalCharge field left right))
+      (+ 3 / 1) (plaquetteDiagonalCharge fieldValue left right))
 
 physicalWilsonDiagonalIncidence :
   Coordinates.PhysicalSU2BondField4 → ℚ
-physicalWilsonDiagonalIncidence field =
-  pairDiagonalIncidence field Periodic.axis0 Periodic.axis1
-  + pairDiagonalIncidence field Periodic.axis0 Periodic.axis2
-  + pairDiagonalIncidence field Periodic.axis0 Periodic.axis3
-  + pairDiagonalIncidence field Periodic.axis1 Periodic.axis2
-  + pairDiagonalIncidence field Periodic.axis1 Periodic.axis3
-  + pairDiagonalIncidence field Periodic.axis2 Periodic.axis3
+physicalWilsonDiagonalIncidence fieldValue =
+  pairDiagonalIncidence fieldValue Periodic.axis0 Periodic.axis1
+  + pairDiagonalIncidence fieldValue Periodic.axis0 Periodic.axis2
+  + pairDiagonalIncidence fieldValue Periodic.axis0 Periodic.axis3
+  + pairDiagonalIncidence fieldValue Periodic.axis1 Periodic.axis2
+  + pairDiagonalIncidence fieldValue Periodic.axis1 Periodic.axis3
+  + pairDiagonalIncidence fieldValue Periodic.axis2 Periodic.axis3
 
 physicalWilsonCrossIncidence :
   Coordinates.PhysicalSU2BondField4 → ℚ
-physicalWilsonCrossIncidence field =
-  pairCrossIncidence field Periodic.axis0 Periodic.axis1
-  + pairCrossIncidence field Periodic.axis0 Periodic.axis2
-  + pairCrossIncidence field Periodic.axis0 Periodic.axis3
-  + pairCrossIncidence field Periodic.axis1 Periodic.axis2
-  + pairCrossIncidence field Periodic.axis1 Periodic.axis3
-  + pairCrossIncidence field Periodic.axis2 Periodic.axis3
+physicalWilsonCrossIncidence fieldValue =
+  pairCrossIncidence fieldValue Periodic.axis0 Periodic.axis1
+  + pairCrossIncidence fieldValue Periodic.axis0 Periodic.axis2
+  + pairCrossIncidence fieldValue Periodic.axis0 Periodic.axis3
+  + pairCrossIncidence fieldValue Periodic.axis1 Periodic.axis2
+  + pairCrossIncidence fieldValue Periodic.axis1 Periodic.axis3
+  + pairCrossIncidence fieldValue Periodic.axis2 Periodic.axis3
 
-physicalWilsonDiagonalIncidencePeriodicExact : ∀ field →
-  physicalWilsonDiagonalIncidence field
-  ≡ (+ 6 / 1) * Global.periodicPhysicalBondNormSq field
-physicalWilsonDiagonalIncidencePeriodicExact field
-  rewrite pairDiagonalIncidenceExact field Periodic.axis0 Periodic.axis1
-        | pairDiagonalIncidenceExact field Periodic.axis0 Periodic.axis2
-        | pairDiagonalIncidenceExact field Periodic.axis0 Periodic.axis3
-        | pairDiagonalIncidenceExact field Periodic.axis1 Periodic.axis2
-        | pairDiagonalIncidenceExact field Periodic.axis1 Periodic.axis3
-        | pairDiagonalIncidenceExact field Periodic.axis2 Periodic.axis3 =
+physicalWilsonDiagonalIncidencePeriodicExact : ∀ fieldValue →
+  physicalWilsonDiagonalIncidence fieldValue
+  ≡ (+ 6 / 1) * Global.periodicPhysicalBondNormSq fieldValue
+physicalWilsonDiagonalIncidencePeriodicExact fieldValue
+  rewrite pairDiagonalIncidenceExact fieldValue Periodic.axis0 Periodic.axis1
+        | pairDiagonalIncidenceExact fieldValue Periodic.axis0 Periodic.axis2
+        | pairDiagonalIncidenceExact fieldValue Periodic.axis0 Periodic.axis3
+        | pairDiagonalIncidenceExact fieldValue Periodic.axis1 Periodic.axis2
+        | pairDiagonalIncidenceExact fieldValue Periodic.axis1 Periodic.axis3
+        | pairDiagonalIncidenceExact fieldValue Periodic.axis2 Periodic.axis3 =
   ℚRing.solve-∀
-    (Global.axisInsertionNormSq field Periodic.axis0)
-    (Global.axisInsertionNormSq field Periodic.axis1)
-    (Global.axisInsertionNormSq field Periodic.axis2)
-    (Global.axisInsertionNormSq field Periodic.axis3)
+    (Global.axisInsertionNormSq fieldValue Periodic.axis0)
+    (Global.axisInsertionNormSq fieldValue Periodic.axis1)
+    (Global.axisInsertionNormSq fieldValue Periodic.axis2)
+    (Global.axisInsertionNormSq fieldValue Periodic.axis3)
 
-physicalWilsonDiagonalIncidenceExact : ∀ field →
-  physicalWilsonDiagonalIncidence field
-  ≡ (+ 6 / 1) * Coordinates.physicalSU2BondNormSq field
-physicalWilsonDiagonalIncidenceExact field =
+physicalWilsonDiagonalIncidenceExact : ∀ fieldValue →
+  physicalWilsonDiagonalIncidence fieldValue
+  ≡ (+ 6 / 1) * Coordinates.physicalSU2BondNormSq fieldValue
+physicalWilsonDiagonalIncidenceExact fieldValue =
   trans
-    (physicalWilsonDiagonalIncidencePeriodicExact field)
+    (physicalWilsonDiagonalIncidencePeriodicExact fieldValue)
     (cong ((+ 6 / 1) *_)
-      (Global.periodicPhysicalBondNormSqExact field))
+      (Global.periodicPhysicalBondNormSqExact fieldValue))
 
-physicalWilsonCrossIncidenceIsThreeDiagonal : ∀ field →
-  physicalWilsonCrossIncidence field
-  ≡ (+ 3 / 1) * physicalWilsonDiagonalIncidence field
-physicalWilsonCrossIncidenceIsThreeDiagonal field
+physicalWilsonCrossIncidenceIsThreeDiagonal : ∀ fieldValue →
+  physicalWilsonCrossIncidence fieldValue
+  ≡ (+ 3 / 1) * physicalWilsonDiagonalIncidence fieldValue
+physicalWilsonCrossIncidenceIsThreeDiagonal fieldValue
   rewrite pairCrossIncidenceIsThreeDiagonal
-      field Periodic.axis0 Periodic.axis1
+      fieldValue Periodic.axis0 Periodic.axis1
         | pairCrossIncidenceIsThreeDiagonal
-      field Periodic.axis0 Periodic.axis2
+      fieldValue Periodic.axis0 Periodic.axis2
         | pairCrossIncidenceIsThreeDiagonal
-      field Periodic.axis0 Periodic.axis3
+      fieldValue Periodic.axis0 Periodic.axis3
         | pairCrossIncidenceIsThreeDiagonal
-      field Periodic.axis1 Periodic.axis2
+      fieldValue Periodic.axis1 Periodic.axis2
         | pairCrossIncidenceIsThreeDiagonal
-      field Periodic.axis1 Periodic.axis3
+      fieldValue Periodic.axis1 Periodic.axis3
         | pairCrossIncidenceIsThreeDiagonal
-      field Periodic.axis2 Periodic.axis3 =
+      fieldValue Periodic.axis2 Periodic.axis3 =
   ℚRing.solve-∀
-    (pairDiagonalIncidence field Periodic.axis0 Periodic.axis1)
-    (pairDiagonalIncidence field Periodic.axis0 Periodic.axis2)
-    (pairDiagonalIncidence field Periodic.axis0 Periodic.axis3)
-    (pairDiagonalIncidence field Periodic.axis1 Periodic.axis2)
-    (pairDiagonalIncidence field Periodic.axis1 Periodic.axis3)
-    (pairDiagonalIncidence field Periodic.axis2 Periodic.axis3)
+    (pairDiagonalIncidence fieldValue Periodic.axis0 Periodic.axis1)
+    (pairDiagonalIncidence fieldValue Periodic.axis0 Periodic.axis2)
+    (pairDiagonalIncidence fieldValue Periodic.axis0 Periodic.axis3)
+    (pairDiagonalIncidence fieldValue Periodic.axis1 Periodic.axis2)
+    (pairDiagonalIncidence fieldValue Periodic.axis1 Periodic.axis3)
+    (pairDiagonalIncidence fieldValue Periodic.axis2 Periodic.axis3)
 
-physicalWilsonCrossIncidenceExact : ∀ field →
-  physicalWilsonCrossIncidence field
-  ≡ (+ 18 / 1) * Coordinates.physicalSU2BondNormSq field
-physicalWilsonCrossIncidenceExact field =
+physicalWilsonCrossIncidenceExact : ∀ fieldValue →
+  physicalWilsonCrossIncidence fieldValue
+  ≡ (+ 18 / 1) * Coordinates.physicalSU2BondNormSq fieldValue
+physicalWilsonCrossIncidenceExact fieldValue =
   trans
-    (physicalWilsonCrossIncidenceIsThreeDiagonal field)
+    (physicalWilsonCrossIncidenceIsThreeDiagonal fieldValue)
     (trans
       (cong ((+ 3 / 1) *_)
-        (physicalWilsonDiagonalIncidenceExact field))
+        (physicalWilsonDiagonalIncidenceExact fieldValue))
       (ℚRing.solve-∀
-        (Coordinates.physicalSU2BondNormSq field)))
+        (Coordinates.physicalSU2BondNormSq fieldValue)))
 
 physicalWilsonLocalChargeEnumerationLevel : ProofLevel
 physicalWilsonLocalChargeEnumerationLevel = machineChecked

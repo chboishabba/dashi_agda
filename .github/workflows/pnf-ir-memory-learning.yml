@@ -1,19 +1,6 @@
 name: PNF IR memory learning Agda check
 
 on:
-  push:
-    branches: [master]
-    paths:
-      - 'DASHI/Cognition/PNF/**'
-      - 'DASHI/Cognition/Utterance/All.agda'
-      - 'DASHI/Foundations/InverseLimitClopenRefinement.agda'
-      - 'DASHI/Foundations/DerivedCoarseDynamics.agda'
-      - 'DASHI/NumberTheory/ThreeAdicCompletionCutset.agda'
-      - 'DASHI/Empirical/PNFMeasurementIdentifiability.agda'
-      - 'DASHI/Geometry/CalabiYauPhysicalProducerCutset.agda'
-      - 'DASHI/Geometry/QuinticThreefoldCandidate.agda'
-      - 'Docs/PNFIRMemoryLearning.md'
-      - '.github/workflows/pnf-ir-memory-learning.yml'
   pull_request:
     types: [opened, synchronize, reopened, ready_for_review]
     paths:
@@ -29,7 +16,7 @@ on:
       - '.github/workflows/pnf-ir-memory-learning.yml'
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:
@@ -44,6 +31,7 @@ jobs:
       - uses: cachix/install-nix-action@v31
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
       - name: Restore Agda 2.9 shadow cache
         uses: actions/cache@v4
         with:

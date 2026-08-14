@@ -188,9 +188,9 @@ placementPairQuaternionPart :
   Physical.RationalSU2Background4 →
   Coordinates.PhysicalSU2BondField4 → Physical.Plaquette4 →
   Placement.PlaquetteSecondVariationPlacement4 → Q.RationalQuaternion
-placementPairQuaternionPart background field plaquette placement =
+placementPairQuaternionPart background fieldValue plaquette placement =
   let factors = Partition.physicalPlacementSelectedFactors
-        background field plaquette placement
+        background fieldValue plaquette placement
   in
   fourFactorPairPart
     (Partition.a0 factors) (Partition.a1 factors)
@@ -202,9 +202,9 @@ placementDeepQuaternionRemainder :
   Physical.RationalSU2Background4 →
   Coordinates.PhysicalSU2BondField4 → Physical.Plaquette4 →
   Placement.PlaquetteSecondVariationPlacement4 → Q.RationalQuaternion
-placementDeepQuaternionRemainder background field plaquette placement =
+placementDeepQuaternionRemainder background fieldValue plaquette placement =
   let factors = Partition.physicalPlacementSelectedFactors
-        background field plaquette placement
+        background fieldValue plaquette placement
   in
   fourFactorDeepRemainder
     (Partition.a0 factors) (Partition.a1 factors)
@@ -216,33 +216,33 @@ placementCorrelatedWilsonPart :
   Physical.RationalSU2Background4 →
   Coordinates.PhysicalSU2BondField4 → Physical.Plaquette4 →
   Placement.PlaquetteSecondVariationPlacement4 → ℚ
-placementCorrelatedWilsonPart background field plaquette placement =
-  Partition.placementLinearWilsonPart background field plaquette placement
+placementCorrelatedWilsonPart background fieldValue plaquette placement =
+  Partition.placementLinearWilsonPart background fieldValue plaquette placement
   + Telescope.wilsonScalar
-      (placementPairQuaternionPart background field plaquette placement)
+      (placementPairQuaternionPart background fieldValue plaquette placement)
 
 placementDeepWilsonRemainder :
   Physical.RationalSU2Background4 →
   Coordinates.PhysicalSU2BondField4 → Physical.Plaquette4 →
   Placement.PlaquetteSecondVariationPlacement4 → ℚ
-placementDeepWilsonRemainder background field plaquette placement =
+placementDeepWilsonRemainder background fieldValue plaquette placement =
   Telescope.wilsonScalar
-    (placementDeepQuaternionRemainder background field plaquette placement)
+    (placementDeepQuaternionRemainder background fieldValue plaquette placement)
 
 physicalPlacementWilsonDefectCorrelatedDeepExact :
-  ∀ background field plaquette placement →
-  Partition.placementLinearWilsonPart background field plaquette placement
+  ∀ background fieldValue plaquette placement →
+  Partition.placementLinearWilsonPart background fieldValue plaquette placement
     + Partition.placementNonlinearWilsonRemainder
-        background field plaquette placement
-  ≡ placementCorrelatedWilsonPart background field plaquette placement
-    + placementDeepWilsonRemainder background field plaquette placement
+        background fieldValue plaquette placement
+  ≡ placementCorrelatedWilsonPart background fieldValue plaquette placement
+    + placementDeepWilsonRemainder background fieldValue plaquette placement
 physicalPlacementWilsonDefectCorrelatedDeepExact
-    background field plaquette placement =
+    background fieldValue plaquette placement =
   let
     factors = Partition.physicalPlacementSelectedFactors
-      background field plaquette placement
+      background fieldValue plaquette placement
     linear = Partition.placementLinearWilsonPart
-      background field plaquette placement
+      background fieldValue plaquette placement
     pair = fourFactorPairPart
       (Partition.a0 factors) (Partition.a1 factors)
       (Partition.a2 factors) (Partition.a3 factors)
@@ -268,103 +268,103 @@ physicalPlacementWilsonDefectCorrelatedDeepExact
       linear (Telescope.wilsonScalar pair) (Telescope.wilsonScalar deep))
 
 placementWilsonDefectCorrelatedDeepExact :
-  ∀ background field plaquette placement →
-  Partition.placementLinearWilsonPart background field plaquette placement
+  ∀ background fieldValue plaquette placement →
+  Partition.placementLinearWilsonPart background fieldValue plaquette placement
     + Partition.placementNonlinearWilsonRemainder
-        background field plaquette placement
-  ≡ placementCorrelatedWilsonPart background field plaquette placement
-    + placementDeepWilsonRemainder background field plaquette placement
+        background fieldValue plaquette placement
+  ≡ placementCorrelatedWilsonPart background fieldValue plaquette placement
+    + placementDeepWilsonRemainder background fieldValue plaquette placement
 placementWilsonDefectCorrelatedDeepExact =
   physicalPlacementWilsonDefectCorrelatedDeepExact
 
 physicalPlaquetteCorrelatedWilsonPart :
   Physical.RationalSU2Background4 →
   Coordinates.PhysicalSU2BondField4 → Physical.Plaquette4 → ℚ
-physicalPlaquetteCorrelatedWilsonPart background field plaquette =
+physicalPlaquetteCorrelatedWilsonPart background fieldValue plaquette =
   NamedSum.sumMap Placement.plaquetteSecondVariationPlacements4
-    (placementCorrelatedWilsonPart background field plaquette)
+    (placementCorrelatedWilsonPart background fieldValue plaquette)
 
 physicalPlaquetteDeepWilsonRemainder :
   Physical.RationalSU2Background4 →
   Coordinates.PhysicalSU2BondField4 → Physical.Plaquette4 → ℚ
-physicalPlaquetteDeepWilsonRemainder background field plaquette =
+physicalPlaquetteDeepWilsonRemainder background fieldValue plaquette =
   NamedSum.sumMap Placement.plaquetteSecondVariationPlacements4
-    (placementDeepWilsonRemainder background field plaquette)
+    (placementDeepWilsonRemainder background fieldValue plaquette)
 
 physicalPlaquetteCanonicalSplitRefinesExact :
-  ∀ background field plaquette →
-  Partition.physicalPlaquetteWilsonLinearPart background field plaquette
+  ∀ background fieldValue plaquette →
+  Partition.physicalPlaquetteWilsonLinearPart background fieldValue plaquette
     + Partition.physicalPlaquetteGroupedNonlinearRemainder
-        background field plaquette
-  ≡ physicalPlaquetteCorrelatedWilsonPart background field plaquette
-    + physicalPlaquetteDeepWilsonRemainder background field plaquette
-physicalPlaquetteCanonicalSplitRefinesExact background field plaquette =
+        background fieldValue plaquette
+  ≡ physicalPlaquetteCorrelatedWilsonPart background fieldValue plaquette
+    + physicalPlaquetteDeepWilsonRemainder background fieldValue plaquette
+physicalPlaquetteCanonicalSplitRefinesExact background fieldValue plaquette =
   trans
     (sym
       (Partition.sumMapPointwiseAdd
         Placement.plaquetteSecondVariationPlacements4
-        (Partition.placementLinearWilsonPart background field plaquette)
+        (Partition.placementLinearWilsonPart background fieldValue plaquette)
         (Partition.placementNonlinearWilsonRemainder
-          background field plaquette)))
+          background fieldValue plaquette)))
     (trans
       (Partition.sumMapCong
         Placement.plaquetteSecondVariationPlacements4
         (λ placement →
           Partition.placementLinearWilsonPart
-            background field plaquette placement
+            background fieldValue plaquette placement
           + Partition.placementNonlinearWilsonRemainder
-            background field plaquette placement)
+            background fieldValue plaquette placement)
         (λ placement →
-          placementCorrelatedWilsonPart background field plaquette placement
-          + placementDeepWilsonRemainder background field plaquette placement)
+          placementCorrelatedWilsonPart background fieldValue plaquette placement
+          + placementDeepWilsonRemainder background fieldValue plaquette placement)
         (physicalPlacementWilsonDefectCorrelatedDeepExact
-          background field plaquette))
+          background fieldValue plaquette))
       (Partition.sumMapPointwiseAdd
         Placement.plaquetteSecondVariationPlacements4
-        (placementCorrelatedWilsonPart background field plaquette)
-        (placementDeepWilsonRemainder background field plaquette)))
+        (placementCorrelatedWilsonPart background fieldValue plaquette)
+        (placementDeepWilsonRemainder background fieldValue plaquette)))
 
 physicalPlaquetteWilsonDefectCorrelatedDeepExact :
-  ∀ background field plaquette →
-  Physical.plaquetteWilsonSecondVariation background field plaquette
+  ∀ background fieldValue plaquette →
+  Physical.plaquetteWilsonSecondVariation background fieldValue plaquette
     - Physical.plaquetteWilsonSecondVariation
-        Physical.identityBackground field plaquette
-  ≡ physicalPlaquetteCorrelatedWilsonPart background field plaquette
-    + physicalPlaquetteDeepWilsonRemainder background field plaquette
-physicalPlaquetteWilsonDefectCorrelatedDeepExact background field plaquette =
+        Physical.identityBackground fieldValue plaquette
+  ≡ physicalPlaquetteCorrelatedWilsonPart background fieldValue plaquette
+    + physicalPlaquetteDeepWilsonRemainder background fieldValue plaquette
+physicalPlaquetteWilsonDefectCorrelatedDeepExact background fieldValue plaquette =
   trans
     (Partition.physicalPlaquetteWilsonDefectLinearNonlinearExact
-      background field plaquette)
+      background fieldValue plaquette)
     (physicalPlaquetteCanonicalSplitRefinesExact
-      background field plaquette)
+      background fieldValue plaquette)
 
 record RefinedCanonicalPhysicalWilsonBounds
     (background : Physical.RationalSU2Background4)
-    (field : Coordinates.PhysicalSU2BondField4) : Set₁ where
+    (fieldValue : Coordinates.PhysicalSU2BondField4) : Set₁ where
   field
     correlatedLower : ∀ plaquette →
       - (WilsonGlobal.rhoOverThirtySix
-          * WilsonGlobal.plaquetteCrossCharge field plaquette)
-      ≤ physicalPlaquetteCorrelatedWilsonPart background field plaquette
+          * WilsonGlobal.plaquetteCrossCharge fieldValue plaquette)
+      ≤ physicalPlaquetteCorrelatedWilsonPart background fieldValue plaquette
 
     deepRemainderLower : ∀ plaquette →
       - (WilsonGlobal.rhoOverOneFortyFour
-          * WilsonGlobal.plaquetteDiagonalCharge field plaquette)
-      ≤ physicalPlaquetteDeepWilsonRemainder background field plaquette
+          * WilsonGlobal.plaquetteDiagonalCharge fieldValue plaquette)
+      ≤ physicalPlaquetteDeepWilsonRemainder background fieldValue plaquette
 
 open RefinedCanonicalPhysicalWilsonBounds public
 
 refinedBoundsAsRound34Control :
-  ∀ {background field} →
-  RefinedCanonicalPhysicalWilsonBounds background field →
-  WLocal.PhysicalPlaquetteLinearRemainderControl background field
-refinedBoundsAsRound34Control {background} {field} bounds = record
+  ∀ {background fieldValue} →
+  RefinedCanonicalPhysicalWilsonBounds background fieldValue →
+  WLocal.PhysicalPlaquetteLinearRemainderControl background fieldValue
+refinedBoundsAsRound34Control {background} {fieldValue} bounds = record
   { WLocal.PhysicalPlaquetteLinearRemainderControl.physicalLinearPart =
-      physicalPlaquetteCorrelatedWilsonPart background field
+      physicalPlaquetteCorrelatedWilsonPart background fieldValue
   ; WLocal.PhysicalPlaquetteLinearRemainderControl.physicalGroupedRemainder =
-      physicalPlaquetteDeepWilsonRemainder background field
+      physicalPlaquetteDeepWilsonRemainder background fieldValue
   ; WLocal.PhysicalPlaquetteLinearRemainderControl.physicalDecomposition =
-      physicalPlaquetteWilsonDefectCorrelatedDeepExact background field
+      physicalPlaquetteWilsonDefectCorrelatedDeepExact background fieldValue
   ; WLocal.PhysicalPlaquetteLinearRemainderControl.selectedCurvatureLinearLower =
       correlatedLower bounds
   ; WLocal.PhysicalPlaquetteLinearRemainderControl.groupedSixteenAtomRemainderLower =
@@ -372,9 +372,9 @@ refinedBoundsAsRound34Control {background} {field} bounds = record
   }
 
 refinedBoundsImplyWLocal :
-  ∀ {background field} →
-  RefinedCanonicalPhysicalWilsonBounds background field →
-  WilsonGlobal.PhysicalWilsonSignedLocal background field
+  ∀ {background fieldValue} →
+  RefinedCanonicalPhysicalWilsonBounds background fieldValue →
+  WilsonGlobal.PhysicalWilsonSignedLocal background fieldValue
 refinedBoundsImplyWLocal bounds =
   WLocal.physicalLinearRemainderControlImpliesWLocal
     (refinedBoundsAsRound34Control bounds)

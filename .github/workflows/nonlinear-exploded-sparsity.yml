@@ -1,23 +1,6 @@
 name: Nonlinear exploded sparsity Agda check
 
 on:
-  push:
-    branches: [master]
-    paths:
-      - 'DASHI/Core/MinimalKernelAlgebra.agda'
-      - 'DASHI/Core/NonlinearExplodedSparsity.agda'
-      - 'DASHI/Core/NonlinearExplodedSparsityTests.agda'
-      - 'DASHI/Core/FiniteWeightedThresholdGraph.agda'
-      - 'DASHI/Core/QuantitativeNonlinearSparsity.agda'
-      - 'DASHI/Core/ExplodedGraphGeometry.agda'
-      - 'DASHI/Core/ThresholdKernelRenormalisation.agda'
-      - 'DASHI/Core/L1Separation.agda'
-      - 'DASHI/Core/ThresholdCSPCores.agda'
-      - 'DASHI/Core/BiologicalEvidenceBridge.agda'
-      - 'DASHI/Core/HemibrainRunCertificates.agda'
-      - 'Docs/NonlinearExplodedSparsity.md'
-      - 'Docs/HemibrainNonlinearSparsityBridge.md'
-      - '.github/workflows/nonlinear-exploded-sparsity.yml'
   pull_request:
     paths:
       - 'DASHI/Core/MinimalKernelAlgebra.agda'
@@ -36,7 +19,7 @@ on:
       - '.github/workflows/nonlinear-exploded-sparsity.yml'
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:
@@ -52,6 +35,7 @@ jobs:
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
 
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
       - name: Restore Agda 2.9 shadow cache
         uses: actions/cache@v4
         with:

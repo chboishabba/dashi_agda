@@ -1,14 +1,6 @@
 name: NS Luo Clay contract round 23
 
 on:
-  push:
-    branches: [master]
-    paths:
-      - 'DASHI/Physics/Closure/**'
-      - 'DASHI/Papers/NavierStokes/**'
-      - 'docs/ns-clay-contract/**'
-      - 'scripts/check_ns_luo_clay_contract_round23.sh'
-      - '.github/workflows/ns-luo-clay-contract-round23.yml'
   pull_request:
     branches:
       - 'agent/ns-luo-galerkin-defect-diffusion-round22'
@@ -23,7 +15,7 @@ on:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:

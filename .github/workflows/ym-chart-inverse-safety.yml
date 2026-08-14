@@ -8,8 +8,6 @@ on:
       - 'DASHI/Physics/YangMills/ConstructiveYangMillsNextSurface.agda'
       - 'scripts/check_ym_chart_inverse_safety.py'
       - '.github/workflows/ym-chart-inverse-safety.yml'
-  push:
-    branches: [master]
     paths:
       - 'DASHI/Physics/YangMills/BalabanRestrictedFluctuationCoordinateBijection.agda'
       - 'DASHI/Physics/YangMills/BalabanFiniteConstrainedInverseApplicability.agda'
@@ -20,7 +18,7 @@ on:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:

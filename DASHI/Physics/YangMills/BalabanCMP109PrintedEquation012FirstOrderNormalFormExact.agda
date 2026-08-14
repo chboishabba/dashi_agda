@@ -51,6 +51,7 @@ module DASHI.Physics.YangMills.BalabanCMP109PrintedEquation012FirstOrderNormalFo
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -75,16 +76,16 @@ open FirstOrderSameObjectData public
 
 printedEquation012FirstOrderNormalFormExact :
   ∀ {Output Direction}
-    (data : FirstOrderSameObjectData Output Direction)
+    (d : FirstOrderSameObjectData Output Direction)
     (h : Direction) →
-  printedPerturbed data h
-  ≡ add data
-      (add data (printedBase data) (l13DerivativeAction data h))
-      (remainder data h)
-printedEquation012FirstOrderNormalFormExact data h
-  with printedFrechetExpansionExact data h
-     | semanticDerivativeIsL13Action data h
-... | refl | refl = refl
+  printedPerturbed d h
+  ≡ add d
+      (add d (printedBase d) (l13DerivativeAction d h))
+      (remainder d h)
+printedEquation012FirstOrderNormalFormExact d h =
+  trans (printedFrechetExpansionExact d h)
+    (cong (λ sem → add d (add d (printedBase d) sem) (remainder d h))
+          (semanticDerivativeIsL13Action d h))
 
 record PrintedEquation012NormalFormAuthority
     (Output Direction : Set) : Set₂ where
@@ -144,15 +145,16 @@ open IdentityPointLogRegression public
 
 principalLogExpIdentityFirstOrderRegression :
   ∀ {Lie Output}
-    (data : IdentityPointLogRegression Lie Output)
+    (d : IdentityPointLogRegression Lie Output)
     (xi : Lie) →
-  principalLogAfterExp data xi
-  ≡ add data (embed data xi) (remainder data xi)
-principalLogExpIdentityFirstOrderRegression data xi
-  with frechetExpansion data xi
-     | derivativeIsIdentity data xi
-     | zeroLeft data (embed data xi)
-... | refl | refl | refl = refl
+  principalLogAfterExp d xi
+  ≡ add d (embed d xi) (remainder d xi)
+principalLogExpIdentityFirstOrderRegression d xi =
+  trans (frechetExpansion d xi)
+    (trans (cong (λ ld → add d (add d (zero d) ld) (remainder d xi))
+                 (derivativeIsIdentity d xi))
+           (cong (λ z → add d z (remainder d xi))
+                 (zeroLeft d (embed d xi))))
 
 cmp109PrintedEquation012FirstOrderNormalFormLevel : ProofLevel
 cmp109PrintedEquation012FirstOrderNormalFormLevel = machineChecked

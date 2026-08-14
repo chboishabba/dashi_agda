@@ -12,7 +12,7 @@ on:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -24,5 +24,6 @@ jobs:
         with:
           submodules: recursive
       - uses: cachix/install-nix-action@v27
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
       - name: Check round-nine parity, P06/P11, Step-V and SI roots
         run: nix develop --command bash scripts/check_yang_mills_submission_round9.sh

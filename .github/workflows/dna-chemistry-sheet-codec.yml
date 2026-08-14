@@ -5,15 +5,13 @@ on:
     paths:
       - 'Ontology/DNA/**'
       - '.github/workflows/dna-chemistry-sheet-codec.yml'
-  push:
-    branches: [master]
     paths:
       - 'Ontology/DNA/**'
       - '.github/workflows/dna-chemistry-sheet-codec.yml'
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -23,6 +21,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: cachix/install-nix-action@v31
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
       - name: Typecheck focused surface
         run: |
           nix develop --command agda -i . -l standard-library Ontology/DNA/ChemistrySheetCodecRegression.agda

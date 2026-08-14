@@ -25,8 +25,6 @@ on:
       - 'DASHI/Physics/Closure/NSPairIncidenceKernelProgram.agda'
       - 'docs/ns_pair_incidence_kernel_schur.md'
       - '.github/workflows/ns-pair-incidence-kernel-schur.yml'
-  push:
-    branches: [master]
     paths:
       - 'DASHI/Analysis/WeightedKernelSchurTest.agda'
       - 'DASHI/Analysis/FiniteWeightedKernelSums.agda'
@@ -52,7 +50,7 @@ on:
       - '.github/workflows/ns-pair-incidence-kernel-schur.yml'
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:
@@ -67,6 +65,7 @@ jobs:
       - uses: cachix/install-nix-action@v31
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
       - name: Check pair-incidence Schur chain
         id: focused
         shell: bash

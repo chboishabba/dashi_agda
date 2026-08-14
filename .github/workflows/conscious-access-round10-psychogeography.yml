@@ -1,13 +1,6 @@
 name: Conscious access round 10 psychogeography
 
 on:
-  push:
-    branches: [master]
-    paths:
-      - 'DASHI/Biology/**'
-      - 'Docs/support/reference/PsychogeographyYijingHyperfabric.md'
-      - 'scripts/check_conscious_access_round10_psychogeography.sh'
-      - '.github/workflows/conscious-access-round10-psychogeography.yml'
   pull_request:
     branches:
       - 'agent/conscious-access-round9-moonshine-modular-orbifold-lie'
@@ -20,7 +13,7 @@ on:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:

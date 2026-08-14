@@ -1,13 +1,6 @@
 name: NS Luo NEMGRO physical audit round 20
 
 on:
-  push:
-    branches: [master]
-    paths:
-      - 'DASHI/Physics/Closure/**'
-      - 'docs/ns-luo-nemgro-*-round20.md'
-      - 'scripts/check_ns_luo_nemgro_physical_audit_round20.sh'
-      - '.github/workflows/ns-luo-nemgro-physical-audit-round20.yml'
   pull_request:
     branches:
       - 'agent/ns-luo-unconditional-absorption-audit-round19'
@@ -21,7 +14,7 @@ on:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:

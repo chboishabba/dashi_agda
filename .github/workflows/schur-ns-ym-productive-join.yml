@@ -1,18 +1,6 @@
 name: Schur NS YM productive join
 
 on:
-  push:
-    branches: [master]
-    paths:
-      - 'DASHI/Analysis/BlockSchurStructure.agda'
-      - 'DASHI/Analysis/BlockSchurCoercivity.agda'
-      - 'DASHI/Physics/YangMills/BalabanSchurGenericInstance.agda'
-      - 'DASHI/Physics/Closure/NSShellSchurInstance.agda'
-      - 'DASHI/Physics/Closure/NSCrossShellSchurBound.agda'
-      - 'DASHI/Physics/SchurNSYMProductiveJoin.agda'
-      - 'docs/schur_ns_ym_productive_join.md'
-      - '.github/workflows/schur-ns-ym-productive-join.yml'
-      - 'scripts/run_agda29_parallel_check.sh'
   pull_request:
     paths:
       - 'DASHI/Analysis/BlockSchurStructure.agda'
@@ -26,7 +14,7 @@ on:
       - 'scripts/run_agda29_parallel_check.sh'
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:
@@ -41,6 +29,7 @@ jobs:
       - uses: cachix/install-nix-action@v31
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
       - name: Restore Agda 2.9 shadow cache
         uses: actions/cache@v4
         with:

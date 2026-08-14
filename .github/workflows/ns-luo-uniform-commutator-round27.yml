@@ -1,8 +1,6 @@
 name: NS Luo uniform commutator round 27
 
 on:
-  push:
-    branches: [master]
   pull_request:
     branches:
       - 'agent/ns-luo-galerkin-critical-ledger-round26'
@@ -18,7 +16,7 @@ on:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:

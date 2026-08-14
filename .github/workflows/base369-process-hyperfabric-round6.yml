@@ -1,8 +1,6 @@
 name: Base369 process hyperfabric round 6
 
 on:
-  push:
-    branches: [master]
   pull_request:
     branches:
       - 'agent/monster-3b-orbifold-local-module-round4'
@@ -22,7 +20,7 @@ on:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:
@@ -42,6 +40,7 @@ jobs:
           persist-credentials: false
       - name: Install Nix
         uses: cachix/install-nix-action@v31
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
       - name: Cache pinned Agda environment
         uses: actions/cache@v4
         with:

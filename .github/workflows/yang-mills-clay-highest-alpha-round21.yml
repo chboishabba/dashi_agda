@@ -1,8 +1,6 @@
 name: Yang-Mills Clay highest-alpha round 21
 
 on:
-  push:
-    branches: [master]
   pull_request:
     paths:
       - 'DASHI/Physics/YangMills/BalabanP33LiteralGaugeConstraintCancellationExact.agda'
@@ -15,7 +13,7 @@ on:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:
@@ -33,5 +31,6 @@ jobs:
           submodules: recursive
           persist-credentials: false
       - uses: cachix/install-nix-action@v27
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
       - name: Check cancellation, same-h adapter and Wilson promotion
         run: nix develop --command bash scripts/check_yang_mills_clay_highest_alpha_round21.sh

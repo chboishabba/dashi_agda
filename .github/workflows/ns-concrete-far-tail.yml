@@ -1,11 +1,6 @@
 name: NS concrete far-tail
 
 on:
-  push:
-    branches: [master]
-    paths:
-      - "DASHI/Physics/Closure/NSCompactGammaConcreteFarTail*.agda"
-      - ".github/workflows/ns-concrete-far-tail.yml"
   pull_request:
     paths:
       - "DASHI/Physics/Closure/NSCompactGammaConcreteFarTail*.agda"
@@ -13,7 +8,7 @@ on:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:

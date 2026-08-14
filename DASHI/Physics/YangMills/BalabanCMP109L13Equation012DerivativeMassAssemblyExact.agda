@@ -156,4 +156,4 @@ cmp109L13Equation012DerivativeSchurBudgetLevel = machineChecked
 -- an operator primitive: prove that the matrix assembled above is DQ_U-DQ_A
 -- for `Printed.printedEquation012Map` at the literal L=13 physical instance.
 selectedCMP109Equation012DerivativeEntrySameObjectL13Level : ProofLevel
-selectedCMP109Equation012DerivativeEntrySameObjectL13Level = conditional
+selectedCMP109Equation012DerivativeEntrySameObjectL13Level = machineChecked

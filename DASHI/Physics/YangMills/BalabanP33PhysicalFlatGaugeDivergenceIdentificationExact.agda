@@ -52,30 +52,30 @@ flatGaugeCoordinates =
 
 flatGaugeFirst :
   Physical.PhysicalSU2BondField4 → GaugeCoordinate4 → ℚ
-flatGaugeFirst field (pair coordinate site) =
-  Periodic.periodicDivergence (Bridge.asPeriodicField field coordinate) site
+flatGaugeFirst fieldValue (pair coordinate site) =
+  Periodic.periodicDivergence (Bridge.asPeriodicField fieldValue coordinate) site
 
 flatGaugeComponentJet :
   Physical.PhysicalSU2BondField4 → GaugeCoordinate4 → Jets.ScalarSecondJet
-flatGaugeComponentJet field coordinate =
-  Jets.scalarJet 0ℚ (flatGaugeFirst field coordinate) 0ℚ
+flatGaugeComponentJet fieldValue coordinate =
+  Jets.scalarJet 0ℚ (flatGaugeFirst fieldValue coordinate) 0ℚ
 
 flatGaugeResidual :
   Physical.PhysicalSU2BondField4 →
   Jets.FiniteResidualSecondJet GaugeCoordinate4
-flatGaugeResidual field = record
+flatGaugeResidual fieldValue = record
   { Jets.FiniteResidualSecondJet.coordinates = flatGaugeCoordinates
-  ; Jets.FiniteResidualSecondJet.componentJet = flatGaugeComponentJet field
+  ; Jets.FiniteResidualSecondJet.componentJet = flatGaugeComponentJet fieldValue
   }
 
-flatGaugeBackgroundExact : ∀ field →
-  Jets.ExactResidualBackground (flatGaugeResidual field)
-flatGaugeBackgroundExact field = record
+flatGaugeBackgroundExact : ∀ fieldValue →
+  Jets.ExactResidualBackground (flatGaugeResidual fieldValue)
+flatGaugeBackgroundExact fieldValue = record
   { Jets.ExactResidualBackground.residualZero = λ _ → refl }
 
 flatGaugeFirstNormSquared : Physical.PhysicalSU2BondField4 → ℚ
-flatGaugeFirstNormSquared field =
-  Jets.residualFirstNormSquared (flatGaugeResidual field)
+flatGaugeFirstNormSquared fieldValue =
+  Jets.residualFirstNormSquared (flatGaugeResidual fieldValue)
 
 literalMapSumEqualsIndexedSum :
   ∀ {A : Set} (values : List A) (term : A → ℚ) →
@@ -86,21 +86,21 @@ literalMapSumEqualsIndexedSum (value ∷ values) term =
   cong (term value +_)
     (literalMapSumEqualsIndexedSum values term)
 
-flatGaugeFirstNormAsCoordinateSiteSum : ∀ field →
-  flatGaugeFirstNormSquared field
+flatGaugeFirstNormAsCoordinateSiteSum : ∀ fieldValue →
+  flatGaugeFirstNormSquared fieldValue
   ≡ Sums.sumRational Physical.lieCoordinates3
       (λ coordinate →
         Sums.sumRational (Block.physicalBlockSites Path4.side4)
           (λ site →
             Periodic.periodicDivergence
-              (Bridge.asPeriodicField field coordinate) site
+              (Bridge.asPeriodicField fieldValue coordinate) site
             * Periodic.periodicDivergence
-              (Bridge.asPeriodicField field coordinate) site))
-flatGaugeFirstNormAsCoordinateSiteSum field =
+              (Bridge.asPeriodicField fieldValue coordinate) site))
+flatGaugeFirstNormAsCoordinateSiteSum fieldValue =
   let
     squareFirst : GaugeCoordinate4 → ℚ
     squareFirst coordinate =
-      flatGaugeFirst field coordinate * flatGaugeFirst field coordinate
+      flatGaugeFirst fieldValue coordinate * flatGaugeFirst fieldValue coordinate
   in
   trans
     (literalMapSumEqualsIndexedSum flatGaugeCoordinates squareFirst)
@@ -109,22 +109,22 @@ flatGaugeFirstNormAsCoordinateSiteSum field =
       (Block.physicalBlockSites Path4.side4)
       squareFirst)
 
-flatGaugeFirstNormIsPeriodicDivergence : ∀ field →
-  flatGaugeFirstNormSquared field
+flatGaugeFirstNormIsPeriodicDivergence : ∀ fieldValue →
+  flatGaugeFirstNormSquared fieldValue
   ≡ Periodic.physicalPeriodicDivergenceEnergy
-      (Bridge.asPeriodicField field)
-flatGaugeFirstNormIsPeriodicDivergence field =
-  flatGaugeFirstNormAsCoordinateSiteSum field
+      (Bridge.asPeriodicField fieldValue)
+flatGaugeFirstNormIsPeriodicDivergence fieldValue =
+  flatGaugeFirstNormAsCoordinateSiteSum fieldValue
 
-flatGaugeSecondVariationIsPeriodicDivergence : ∀ field →
-  Jets.residualSecondVariation (flatGaugeResidual field)
+flatGaugeSecondVariationIsPeriodicDivergence : ∀ fieldValue →
+  Jets.residualSecondVariation (flatGaugeResidual fieldValue)
   ≡ Periodic.physicalPeriodicDivergenceEnergy
-      (Bridge.asPeriodicField field)
-flatGaugeSecondVariationIsPeriodicDivergence field =
+      (Bridge.asPeriodicField fieldValue)
+flatGaugeSecondVariationIsPeriodicDivergence fieldValue =
   trans
     (Jets.residualSecondVariationAtExactBackground
-      (flatGaugeResidual field) (flatGaugeBackgroundExact field))
-    (flatGaugeFirstNormIsPeriodicDivergence field)
+      (flatGaugeResidual fieldValue) (flatGaugeBackgroundExact fieldValue))
+    (flatGaugeFirstNormIsPeriodicDivergence fieldValue)
 
 physicalFlatGaugeJetLevel : ProofLevel
 physicalFlatGaugeJetLevel = machineChecked

@@ -24,54 +24,54 @@ open import DASHI.Physics.YangMills.BalabanPath4PhysicalVarianceDecompositionExa
 ------------------------------------------------------------------------
 
 axisFibreNormSum : Axis4 → SiteField side4 → ℚ
-axisFibreNormSum axis field =
+axisFibreNormSum axis fieldValue =
   sumRational (physicalTransverseCoordinates side4)
-    (physicalFibreNormSq field axis)
+    (physicalFibreNormSq fieldValue axis)
 
 axisDirectionalEnergy : Axis4 → SiteField side4 → ℚ
-axisDirectionalEnergy axis field =
+axisDirectionalEnergy axis fieldValue =
   sumRational (physicalTransverseCoordinates side4)
-    (physicalFibreEdgeEnergy field axis)
+    (physicalFibreEdgeEnergy fieldValue axis)
 
-axisFibreNormSumIsPartition : ∀ axis field →
-  axisFibreNormSum axis field
-  ≡ axisPartitionSum axis (λ site → sq (field site))
-axisFibreNormSumIsPartition axis field = refl
+axisFibreNormSumIsPartition : ∀ axis fieldValue →
+  axisFibreNormSum axis fieldValue
+  ≡ axisPartitionSum axis (λ site → sq (fieldValue site))
+axisFibreNormSumIsPartition axis fieldValue = refl
 
-axisFibreNormSumMatchesGlobal : ∀ axis field →
-  axisFibreNormSum axis field ≡ globalNormSq field
-axisFibreNormSumMatchesGlobal axis field =
+axisFibreNormSumMatchesGlobal : ∀ axis fieldValue →
+  axisFibreNormSum axis fieldValue ≡ globalNormSq fieldValue
+axisFibreNormSumMatchesGlobal axis fieldValue =
   trans
-    (axisFibreNormSumIsPartition axis field)
-    (axisPartitionSumMatchesGlobal axis (λ site → sq (field site)))
+    (axisFibreNormSumIsPartition axis fieldValue)
+    (axisPartitionSumMatchesGlobal axis (λ site → sq (fieldValue site)))
 
 sumZeroMeanFibrePoincare :
-  ∀ axis field (transverses : List (Triple (CyclicIndex side4))) →
+  ∀ axis fieldValue (transverses : List (Triple (CyclicIndex side4))) →
   (∀ transverse → transverse ∈ transverses →
-    physicalFibreSum field axis transverse ≡ 0ℚ) →
+    physicalFibreSum fieldValue axis transverse ≡ 0ℚ) →
   sumRational transverses
     (λ transverse →
-      oneSixteenth * physicalFibreNormSq field axis transverse)
+      oneSixteenth * physicalFibreNormSq fieldValue axis transverse)
   ≤ sumRational transverses
-      (physicalFibreEdgeEnergy field axis)
-sumZeroMeanFibrePoincare axis field [] zeroMean = ℚP.≤-refl
-sumZeroMeanFibrePoincare axis field (transverse ∷ transverses) zeroMean =
+      (physicalFibreEdgeEnergy fieldValue axis)
+sumZeroMeanFibrePoincare axis fieldValue [] zeroMean = ℚP.≤-refl
+sumZeroMeanFibrePoincare axis fieldValue (transverse ∷ transverses) zeroMean =
   ℚP.+-mono-≤
-    (zeroMeanPhysicalFibrePoincare field axis transverse
+    (zeroMeanPhysicalFibrePoincare fieldValue axis transverse
       (zeroMean transverse here))
-    (sumZeroMeanFibrePoincare axis field transverses
+    (sumZeroMeanFibrePoincare axis fieldValue transverses
       (λ current membership → zeroMean current (there membership)))
 
 axisZeroMeanGlobalPoincare :
-  ∀ axis field →
-  (∀ transverse → physicalFibreSum field axis transverse ≡ 0ℚ) →
-  oneSixteenth * globalNormSq field
-  ≤ axisDirectionalEnergy axis field
-axisZeroMeanGlobalPoincare axis field zeroMean =
+  ∀ axis fieldValue →
+  (∀ transverse → physicalFibreSum fieldValue axis transverse ≡ 0ℚ) →
+  oneSixteenth * globalNormSq fieldValue
+  ≤ axisDirectionalEnergy axis fieldValue
+axisZeroMeanGlobalPoincare axis fieldValue zeroMean =
   subst
-    (λ leftValue → leftValue ≤ axisDirectionalEnergy axis field)
-    (scaledGlobalNormIsFibreFold axis field)
-    (sumZeroMeanFibrePoincare axis field
+    (λ leftValue → leftValue ≤ axisDirectionalEnergy axis fieldValue)
+    (scaledGlobalNormIsFibreFold axis fieldValue)
+    (sumZeroMeanFibrePoincare axis fieldValue
       (physicalTransverseCoordinates side4)
       (λ transverse membership → zeroMean transverse))
   where
@@ -95,83 +95,83 @@ axisZeroMeanGlobalPoincare axis field zeroMean =
 -- The four martingales are zero mean in their own coordinate direction.
 ------------------------------------------------------------------------
 
-martingale0FibreMeanZero : ∀ field transverse →
-  physicalFibreSum (martingaleField0 field) zeroᵢ transverse ≡ 0ℚ
-martingale0FibreMeanZero field =
-  axisCentering4FibreSumZero field zeroᵢ
+martingale0FibreMeanZero : ∀ fieldValue transverse →
+  physicalFibreSum (martingaleField0 fieldValue) zeroᵢ transverse ≡ 0ℚ
+martingale0FibreMeanZero fieldValue =
+  axisCentering4FibreSumZero fieldValue zeroᵢ
 
-martingale1FibreMeanZero : ∀ field transverse →
-  physicalFibreSum (martingaleField1 field) (sucᵢ zeroᵢ) transverse ≡ 0ℚ
-martingale1FibreMeanZero field =
-  axisCentering4FibreSumZero (average0 field) (sucᵢ zeroᵢ)
+martingale1FibreMeanZero : ∀ fieldValue transverse →
+  physicalFibreSum (martingaleField1 fieldValue) (sucᵢ zeroᵢ) transverse ≡ 0ℚ
+martingale1FibreMeanZero fieldValue =
+  axisCentering4FibreSumZero (average0 fieldValue) (sucᵢ zeroᵢ)
 
-martingale2FibreMeanZero : ∀ field transverse →
-  physicalFibreSum (martingaleField2 field)
+martingale2FibreMeanZero : ∀ fieldValue transverse →
+  physicalFibreSum (martingaleField2 fieldValue)
     (sucᵢ (sucᵢ zeroᵢ)) transverse ≡ 0ℚ
-martingale2FibreMeanZero field =
-  axisCentering4FibreSumZero (average01 field)
+martingale2FibreMeanZero fieldValue =
+  axisCentering4FibreSumZero (average01 fieldValue)
     (sucᵢ (sucᵢ zeroᵢ))
 
-martingale3FibreMeanZero : ∀ field transverse →
-  physicalFibreSum (martingaleField3 field)
+martingale3FibreMeanZero : ∀ fieldValue transverse →
+  physicalFibreSum (martingaleField3 fieldValue)
     (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) transverse ≡ 0ℚ
-martingale3FibreMeanZero field =
-  axisCentering4FibreSumZero (average012 field)
+martingale3FibreMeanZero fieldValue =
+  axisCentering4FibreSumZero (average012 fieldValue)
     (sucᵢ (sucᵢ (sucᵢ zeroᵢ)))
 
-martingale0Poincare : ∀ field →
-  oneSixteenth * globalNormSq (martingaleField0 field)
-  ≤ axisDirectionalEnergy zeroᵢ (martingaleField0 field)
-martingale0Poincare field =
-  axisZeroMeanGlobalPoincare zeroᵢ (martingaleField0 field)
-    (martingale0FibreMeanZero field)
+martingale0Poincare : ∀ fieldValue →
+  oneSixteenth * globalNormSq (martingaleField0 fieldValue)
+  ≤ axisDirectionalEnergy zeroᵢ (martingaleField0 fieldValue)
+martingale0Poincare fieldValue =
+  axisZeroMeanGlobalPoincare zeroᵢ (martingaleField0 fieldValue)
+    (martingale0FibreMeanZero fieldValue)
 
-martingale1Poincare : ∀ field →
-  oneSixteenth * globalNormSq (martingaleField1 field)
-  ≤ axisDirectionalEnergy (sucᵢ zeroᵢ) (martingaleField1 field)
-martingale1Poincare field =
-  axisZeroMeanGlobalPoincare (sucᵢ zeroᵢ) (martingaleField1 field)
-    (martingale1FibreMeanZero field)
+martingale1Poincare : ∀ fieldValue →
+  oneSixteenth * globalNormSq (martingaleField1 fieldValue)
+  ≤ axisDirectionalEnergy (sucᵢ zeroᵢ) (martingaleField1 fieldValue)
+martingale1Poincare fieldValue =
+  axisZeroMeanGlobalPoincare (sucᵢ zeroᵢ) (martingaleField1 fieldValue)
+    (martingale1FibreMeanZero fieldValue)
 
-martingale2Poincare : ∀ field →
-  oneSixteenth * globalNormSq (martingaleField2 field)
-  ≤ axisDirectionalEnergy (sucᵢ (sucᵢ zeroᵢ)) (martingaleField2 field)
-martingale2Poincare field =
+martingale2Poincare : ∀ fieldValue →
+  oneSixteenth * globalNormSq (martingaleField2 fieldValue)
+  ≤ axisDirectionalEnergy (sucᵢ (sucᵢ zeroᵢ)) (martingaleField2 fieldValue)
+martingale2Poincare fieldValue =
   axisZeroMeanGlobalPoincare (sucᵢ (sucᵢ zeroᵢ))
-    (martingaleField2 field) (martingale2FibreMeanZero field)
+    (martingaleField2 fieldValue) (martingale2FibreMeanZero fieldValue)
 
-martingale3Poincare : ∀ field →
-  oneSixteenth * globalNormSq (martingaleField3 field)
+martingale3Poincare : ∀ fieldValue →
+  oneSixteenth * globalNormSq (martingaleField3 fieldValue)
   ≤ axisDirectionalEnergy (sucᵢ (sucᵢ (sucᵢ zeroᵢ)))
-    (martingaleField3 field)
-martingale3Poincare field =
+    (martingaleField3 fieldValue)
+martingale3Poincare fieldValue =
   axisZeroMeanGlobalPoincare (sucᵢ (sucᵢ (sucᵢ zeroᵢ)))
-    (martingaleField3 field) (martingale3FibreMeanZero field)
+    (martingaleField3 fieldValue) (martingale3FibreMeanZero fieldValue)
 
 martingaleDirectionalEnergySum : SiteField side4 → ℚ
-martingaleDirectionalEnergySum field =
-  axisDirectionalEnergy zeroᵢ (martingaleField0 field)
-  + (axisDirectionalEnergy (sucᵢ zeroᵢ) (martingaleField1 field)
+martingaleDirectionalEnergySum fieldValue =
+  axisDirectionalEnergy zeroᵢ (martingaleField0 fieldValue)
+  + (axisDirectionalEnergy (sucᵢ zeroᵢ) (martingaleField1 fieldValue)
   + (axisDirectionalEnergy (sucᵢ (sucᵢ zeroᵢ))
-      (martingaleField2 field)
+      (martingaleField2 fieldValue)
   + axisDirectionalEnergy (sucᵢ (sucᵢ (sucᵢ zeroᵢ)))
-      (martingaleField3 field)))
+      (martingaleField3 fieldValue)))
 
 path4MartingalePoincareBeforeEnergyContraction :
-  ∀ field → GlobalMeanZero4 field →
-  oneSixteenth * globalNormSq field
-  ≤ martingaleDirectionalEnergySum field
-path4MartingalePoincareBeforeEnergyContraction field meanZero =
+  ∀ fieldValue → GlobalMeanZero4 fieldValue →
+  oneSixteenth * globalNormSq fieldValue
+  ≤ martingaleDirectionalEnergySum fieldValue
+path4MartingalePoincareBeforeEnergyContraction fieldValue meanZero =
   subst
-    (λ leftValue → leftValue ≤ martingaleDirectionalEnergySum field)
-    (scaledVarianceDecomposition field meanZero)
+    (λ leftValue → leftValue ≤ martingaleDirectionalEnergySum fieldValue)
+    (scaledVarianceDecomposition fieldValue meanZero)
     (ℚP.+-mono-≤
-      (martingale0Poincare field)
+      (martingale0Poincare fieldValue)
       (ℚP.+-mono-≤
-        (martingale1Poincare field)
+        (martingale1Poincare fieldValue)
         (ℚP.+-mono-≤
-          (martingale2Poincare field)
-          (martingale3Poincare field))))
+          (martingale2Poincare fieldValue)
+          (martingale3Poincare fieldValue))))
   where
   scaledVarianceDecomposition : ∀ current → GlobalMeanZero4 current →
     oneSixteenth * globalNormSq current

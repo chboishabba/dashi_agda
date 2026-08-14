@@ -92,16 +92,16 @@ insertionQuaternion :
   Coordinates.PhysicalSU2BondField4 →
   Periodic.Axis4 → Periodic.Site4 →
   Q.RationalQuaternion
-insertionQuaternion field axis site =
-  Q.pureQuaternion (FlatField.insertionAt field axis site)
+insertionQuaternion fieldValue axis site =
+  Q.pureQuaternion (FlatField.insertionAt fieldValue axis site)
 
 insertionQuaternionCoordinateExact :
-  ∀ field coordinate axis site →
-  quaternionCoordinate coordinate (insertionQuaternion field axis site)
-  ≡ field coordinate (pair site axis)
-insertionQuaternionCoordinateExact field Coordinates.coordinateX axis site = refl
-insertionQuaternionCoordinateExact field Coordinates.coordinateY axis site = refl
-insertionQuaternionCoordinateExact field Coordinates.coordinateZ axis site = refl
+  ∀ fieldValue coordinate axis site →
+  quaternionCoordinate coordinate (insertionQuaternion fieldValue axis site)
+  ≡ fieldValue coordinate (pair site axis)
+insertionQuaternionCoordinateExact fieldValue Coordinates.coordinateX axis site = refl
+insertionQuaternionCoordinateExact fieldValue Coordinates.coordinateY axis site = refl
+insertionQuaternionCoordinateExact fieldValue Coordinates.coordinateZ axis site = refl
 
 backwardTransportUnit :
   Physical.RationalSU2Background4 →
@@ -116,10 +116,10 @@ transportedPreviousInsertion :
   Coordinates.PhysicalSU2BondField4 →
   Periodic.Axis4 → Periodic.Site4 →
   Q.RationalQuaternion
-transportedPreviousInsertion background field axis site =
+transportedPreviousInsertion background fieldValue axis site =
   Adjoint.adjointTransport
     (backwardTransportUnit background axis site)
-    (insertionQuaternion field axis
+    (insertionQuaternion fieldValue axis
       (Periodic.shiftBackward axis site))
 
 backgroundBackwardTerm :
@@ -127,53 +127,53 @@ backgroundBackwardTerm :
   Coordinates.PhysicalSU2BondField4 →
   Coordinates.LieCoordinate3 →
   Periodic.Axis4 → Periodic.Site4 → ℚ
-backgroundBackwardTerm background field coordinate axis site =
-  field coordinate (pair site axis)
+backgroundBackwardTerm background fieldValue coordinate axis site =
+  fieldValue coordinate (pair site axis)
   - quaternionCoordinate coordinate
-      (transportedPreviousInsertion background field axis site)
+      (transportedPreviousInsertion background fieldValue axis site)
 
 flatBackwardTerm :
   Coordinates.PhysicalSU2BondField4 →
   Coordinates.LieCoordinate3 →
   Periodic.Axis4 → Periodic.Site4 → ℚ
-flatBackwardTerm field coordinate axis site =
-  field coordinate (pair site axis)
-  - field coordinate
+flatBackwardTerm fieldValue coordinate axis site =
+  fieldValue coordinate (pair site axis)
+  - fieldValue coordinate
       (pair (Periodic.shiftBackward axis site) axis)
 
 backgroundGaugeFirst :
   Physical.RationalSU2Background4 →
   Coordinates.PhysicalSU2BondField4 →
   FlatGauge.GaugeCoordinate4 → ℚ
-backgroundGaugeFirst background field (pair coordinate site) =
+backgroundGaugeFirst background fieldValue (pair coordinate site) =
   Sums.sumRational axes4
     (λ axis →
-      backgroundBackwardTerm background field coordinate axis site)
+      backgroundBackwardTerm background fieldValue coordinate axis site)
 
 flatGaugeFirstFromAxes :
   Coordinates.PhysicalSU2BondField4 →
   FlatGauge.GaugeCoordinate4 → ℚ
-flatGaugeFirstFromAxes field (pair coordinate site) =
+flatGaugeFirstFromAxes fieldValue (pair coordinate site) =
   Sums.sumRational axes4
-    (λ axis → flatBackwardTerm field coordinate axis site)
+    (λ axis → flatBackwardTerm fieldValue coordinate axis site)
 
 flatGaugeFirstFromAxesIsPeriodicDivergence :
-  ∀ field coordinate site →
-  flatGaugeFirstFromAxes field (pair coordinate site)
-  ≡ FlatGauge.flatGaugeFirst field (pair coordinate site)
-flatGaugeFirstFromAxesIsPeriodicDivergence field coordinate site =
+  ∀ fieldValue coordinate site →
+  flatGaugeFirstFromAxes fieldValue (pair coordinate site)
+  ≡ FlatGauge.flatGaugeFirst fieldValue (pair coordinate site)
+flatGaugeFirstFromAxesIsPeriodicDivergence fieldValue coordinate site =
   ℚRing.solve-∀
-    (field coordinate (pair site Periodic.axis0))
-    (field coordinate
+    (fieldValue coordinate (pair site Periodic.axis0))
+    (fieldValue coordinate
       (pair (Periodic.shiftBackward Periodic.axis0 site) Periodic.axis0))
-    (field coordinate (pair site Periodic.axis1))
-    (field coordinate
+    (fieldValue coordinate (pair site Periodic.axis1))
+    (fieldValue coordinate
       (pair (Periodic.shiftBackward Periodic.axis1 site) Periodic.axis1))
-    (field coordinate (pair site Periodic.axis2))
-    (field coordinate
+    (fieldValue coordinate (pair site Periodic.axis2))
+    (fieldValue coordinate
       (pair (Periodic.shiftBackward Periodic.axis2 site) Periodic.axis2))
-    (field coordinate (pair site Periodic.axis3))
-    (field coordinate
+    (fieldValue coordinate (pair site Periodic.axis3))
+    (fieldValue coordinate
       (pair (Periodic.shiftBackward Periodic.axis3 site) Periodic.axis3))
 
 identityAdjointCoordinateExact :
@@ -192,77 +192,77 @@ identityAdjointCoordinateExact Coordinates.coordinateZ
   ℚRing.solve-∀ x0 x1 x2 x3
 
 identityBackgroundBackwardTermExact :
-  ∀ field coordinate axis site →
+  ∀ fieldValue coordinate axis site →
   backgroundBackwardTerm
-    Physical.identityBackground field coordinate axis site
-  ≡ flatBackwardTerm field coordinate axis site
-identityBackgroundBackwardTermExact field coordinate axis site =
+    Physical.identityBackground fieldValue coordinate axis site
+  ≡ flatBackwardTerm fieldValue coordinate axis site
+identityBackgroundBackwardTermExact fieldValue coordinate axis site =
   let
     previousSite = Periodic.shiftBackward axis site
-    previousInsertion = insertionQuaternion field axis previousSite
+    previousInsertion = insertionQuaternion fieldValue axis previousSite
 
     transportedExact :
       quaternionCoordinate coordinate
         (Adjoint.adjointTransport Q.oneQ previousInsertion)
-      ≡ field coordinate (pair previousSite axis)
+      ≡ fieldValue coordinate (pair previousSite axis)
     transportedExact =
       trans
         (identityAdjointCoordinateExact coordinate previousInsertion)
         (insertionQuaternionCoordinateExact
-          field coordinate axis previousSite)
+          fieldValue coordinate axis previousSite)
   in
   cong
-    (field coordinate (pair site axis) -_)
+    (fieldValue coordinate (pair site axis) -_)
     transportedExact
 
 identityBackgroundGaugeFirstIsFlatAxes :
-  ∀ field coordinate site →
+  ∀ fieldValue coordinate site →
   backgroundGaugeFirst
-    Physical.identityBackground field (pair coordinate site)
-  ≡ flatGaugeFirstFromAxes field (pair coordinate site)
-identityBackgroundGaugeFirstIsFlatAxes field coordinate site =
+    Physical.identityBackground fieldValue (pair coordinate site)
+  ≡ flatGaugeFirstFromAxes fieldValue (pair coordinate site)
+identityBackgroundGaugeFirstIsFlatAxes fieldValue coordinate site =
   Sums.sumRationalCong
     axes4
     (λ axis →
       backgroundBackwardTerm
-        Physical.identityBackground field coordinate axis site)
-    (λ axis → flatBackwardTerm field coordinate axis site)
+        Physical.identityBackground fieldValue coordinate axis site)
+    (λ axis → flatBackwardTerm fieldValue coordinate axis site)
     (λ axis →
       identityBackgroundBackwardTermExact
-        field coordinate axis site)
+        fieldValue coordinate axis site)
 
 identityBackgroundGaugeFirstIsPeriodicDivergence :
-  ∀ field coordinate site →
+  ∀ fieldValue coordinate site →
   backgroundGaugeFirst
-    Physical.identityBackground field (pair coordinate site)
-  ≡ FlatGauge.flatGaugeFirst field (pair coordinate site)
-identityBackgroundGaugeFirstIsPeriodicDivergence field coordinate site =
+    Physical.identityBackground fieldValue (pair coordinate site)
+  ≡ FlatGauge.flatGaugeFirst fieldValue (pair coordinate site)
+identityBackgroundGaugeFirstIsPeriodicDivergence fieldValue coordinate site =
   trans
-    (identityBackgroundGaugeFirstIsFlatAxes field coordinate site)
-    (flatGaugeFirstFromAxesIsPeriodicDivergence field coordinate site)
+    (identityBackgroundGaugeFirstIsFlatAxes fieldValue coordinate site)
+    (flatGaugeFirstFromAxesIsPeriodicDivergence fieldValue coordinate site)
 
 axisAdjointDefect :
   Physical.RationalSU2Background4 →
   Coordinates.PhysicalSU2BondField4 →
   Periodic.Axis4 → Periodic.Site4 →
   Q.RationalQuaternion
-axisAdjointDefect background field axis site =
+axisAdjointDefect background fieldValue axis site =
   Adjoint.adjointDefect
     (backwardTransportUnit background axis site)
-    (insertionQuaternion field axis
+    (insertionQuaternion fieldValue axis
       (Periodic.shiftBackward axis site))
 
 axisAdjointDefectFactorizationExact :
-  ∀ background field axis site →
-  axisAdjointDefect background field axis site
+  ∀ background fieldValue axis site →
+  axisAdjointDefect background fieldValue axis site
   ≡ Adjoint.adjointDefectFactorization
       (backwardTransportUnit background axis site)
-      (insertionQuaternion field axis
+      (insertionQuaternion fieldValue axis
         (Periodic.shiftBackward axis site))
-axisAdjointDefectFactorizationExact background field axis site =
+axisAdjointDefectFactorizationExact background fieldValue axis site =
   Adjoint.adjointDefectFactorizationExact
     (backwardTransportUnit background axis site)
-    (insertionQuaternion field axis
+    (insertionQuaternion fieldValue axis
       (Periodic.shiftBackward axis site))
 
 axisAdjointDefectCoordinate :
@@ -270,27 +270,27 @@ axisAdjointDefectCoordinate :
   Coordinates.PhysicalSU2BondField4 →
   Coordinates.LieCoordinate3 →
   Periodic.Axis4 → Periodic.Site4 → ℚ
-axisAdjointDefectCoordinate background field coordinate axis site =
+axisAdjointDefectCoordinate background fieldValue coordinate axis site =
   quaternionCoordinate coordinate
-    (axisAdjointDefect background field axis site)
+    (axisAdjointDefect background fieldValue axis site)
 
 backgroundMinusFlatAxisExact :
-  ∀ background field coordinate axis site →
-  backgroundBackwardTerm background field coordinate axis site
-    - flatBackwardTerm field coordinate axis site
+  ∀ background fieldValue coordinate axis site →
+  backgroundBackwardTerm background fieldValue coordinate axis site
+    - flatBackwardTerm fieldValue coordinate axis site
   ≡ - axisAdjointDefectCoordinate
-      background field coordinate axis site
-backgroundMinusFlatAxisExact background field coordinate axis site =
+      background fieldValue coordinate axis site
+backgroundMinusFlatAxisExact background fieldValue coordinate axis site =
   let
     previousSite = Periodic.shiftBackward axis site
     unit = backwardTransportUnit background axis site
-    previousInsertion = insertionQuaternion field axis previousSite
+    previousInsertion = insertionQuaternion fieldValue axis previousSite
     transported = Adjoint.adjointTransport unit previousInsertion
 
     defectCoordinateExact :
-      axisAdjointDefectCoordinate background field coordinate axis site
+      axisAdjointDefectCoordinate background fieldValue coordinate axis site
       ≡ quaternionCoordinate coordinate transported
-        - field coordinate (pair previousSite axis)
+        - fieldValue coordinate (pair previousSite axis)
     defectCoordinateExact =
       trans
         (quaternionCoordinateSubtractExact
@@ -298,44 +298,44 @@ backgroundMinusFlatAxisExact background field coordinate axis site =
         (cong
           (quaternionCoordinate coordinate transported -_)
           (insertionQuaternionCoordinateExact
-            field coordinate axis previousSite))
+            fieldValue coordinate axis previousSite))
   in
   subst
     (λ defectValue →
-      backgroundBackwardTerm background field coordinate axis site
-        - flatBackwardTerm field coordinate axis site
+      backgroundBackwardTerm background fieldValue coordinate axis site
+        - flatBackwardTerm fieldValue coordinate axis site
       ≡ - defectValue)
     (sym defectCoordinateExact)
     (ℚRing.solve-∀
-      (field coordinate (pair site axis))
+      (fieldValue coordinate (pair site axis))
       (quaternionCoordinate coordinate transported)
-      (field coordinate (pair previousSite axis)))
+      (fieldValue coordinate (pair previousSite axis)))
 
 backgroundGaugeFirstMinusFlatExact :
-  ∀ background field coordinate site →
-  backgroundGaugeFirst background field (pair coordinate site)
-    - flatGaugeFirstFromAxes field (pair coordinate site)
+  ∀ background fieldValue coordinate site →
+  backgroundGaugeFirst background fieldValue (pair coordinate site)
+    - flatGaugeFirstFromAxes fieldValue (pair coordinate site)
   ≡ -
     Sums.sumRational axes4
       (λ axis →
         axisAdjointDefectCoordinate
-          background field coordinate axis site)
+          background fieldValue coordinate axis site)
 backgroundGaugeFirstMinusFlatExact
-    background field coordinate site =
+    background fieldValue coordinate site =
   let
     backgroundTerm =
       λ axis →
-        backgroundBackwardTerm background field coordinate axis site
+        backgroundBackwardTerm background fieldValue coordinate axis site
     flatTerm =
-      λ axis → flatBackwardTerm field coordinate axis site
+      λ axis → flatBackwardTerm fieldValue coordinate axis site
     defectTerm =
       λ axis →
         axisAdjointDefectCoordinate
-          background field coordinate axis site
+          background fieldValue coordinate axis site
 
     distributeDifference :
-      backgroundGaugeFirst background field (pair coordinate site)
-        - flatGaugeFirstFromAxes field (pair coordinate site)
+      backgroundGaugeFirst background fieldValue (pair coordinate site)
+        - flatGaugeFirstFromAxes fieldValue (pair coordinate site)
       ≡ Sums.sumRational axes4
           (λ axis → backgroundTerm axis - flatTerm axis)
     distributeDifference =
@@ -360,7 +360,7 @@ backgroundGaugeFirstMinusFlatExact
         (λ axis → - defectTerm axis)
         (λ axis →
           backgroundMinusFlatAxisExact
-            background field coordinate axis site)
+            background fieldValue coordinate axis site)
   in
   trans distributeDifference
     (trans pointwiseDefects

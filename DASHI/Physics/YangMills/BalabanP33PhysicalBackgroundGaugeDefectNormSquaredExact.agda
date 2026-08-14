@@ -54,24 +54,24 @@ axisDefect0 axisDefect1 axisDefect2 axisDefect3 :
   Physical.RationalSU2Background4 →
   Coordinates.PhysicalSU2BondField4 →
   Periodic.Site4 → Q.RationalQuaternion
-axisDefect0 background field site =
-  Gauge.axisAdjointDefect background field Periodic.axis0 site
-axisDefect1 background field site =
-  Gauge.axisAdjointDefect background field Periodic.axis1 site
-axisDefect2 background field site =
-  Gauge.axisAdjointDefect background field Periodic.axis2 site
-axisDefect3 background field site =
-  Gauge.axisAdjointDefect background field Periodic.axis3 site
+axisDefect0 background fieldValue site =
+  Gauge.axisAdjointDefect background fieldValue Periodic.axis0 site
+axisDefect1 background fieldValue site =
+  Gauge.axisAdjointDefect background fieldValue Periodic.axis1 site
+axisDefect2 background fieldValue site =
+  Gauge.axisAdjointDefect background fieldValue Periodic.axis2 site
+axisDefect3 background fieldValue site =
+  Gauge.axisAdjointDefect background fieldValue Periodic.axis3 site
 
 axisDefectSum :
   Physical.RationalSU2Background4 →
   Coordinates.PhysicalSU2BondField4 →
   Periodic.Site4 → Q.RationalQuaternion
-axisDefectSum background field site =
-  axisDefect0 background field site Q.+q
-    (axisDefect1 background field site Q.+q
-      (axisDefect2 background field site Q.+q
-        axisDefect3 background field site))
+axisDefectSum background fieldValue site =
+  axisDefect0 background fieldValue site Q.+q
+    (axisDefect1 background fieldValue site Q.+q
+      (axisDefect2 background fieldValue site Q.+q
+        axisDefect3 background fieldValue site))
 
 coordinateSum4Exact :
   ∀ coordinate first second third fourth →
@@ -98,26 +98,26 @@ backgroundGaugeDefectCoordinate :
   Physical.RationalSU2Background4 →
   Coordinates.PhysicalSU2BondField4 →
   Coordinates.LieCoordinate3 → Periodic.Site4 → ℚ
-backgroundGaugeDefectCoordinate background field coordinate site =
-  Gauge.backgroundGaugeFirst background field (pair coordinate site)
-  - Gauge.flatGaugeFirstFromAxes field (pair coordinate site)
+backgroundGaugeDefectCoordinate background fieldValue coordinate site =
+  Gauge.backgroundGaugeFirst background fieldValue (pair coordinate site)
+  - Gauge.flatGaugeFirstFromAxes fieldValue (pair coordinate site)
 
 backgroundGaugeDefectCoordinateIsNegativeSum :
-  ∀ background field coordinate site →
-  backgroundGaugeDefectCoordinate background field coordinate site
+  ∀ background fieldValue coordinate site →
+  backgroundGaugeDefectCoordinate background fieldValue coordinate site
   ≡ - Gauge.quaternionCoordinate coordinate
-      (axisDefectSum background field site)
+      (axisDefectSum background fieldValue site)
 backgroundGaugeDefectCoordinateIsNegativeSum
-    background field coordinate site =
+    background fieldValue coordinate site =
   let
-    d0 = axisDefect0 background field site
-    d1 = axisDefect1 background field site
-    d2 = axisDefect2 background field site
-    d3 = axisDefect3 background field site
+    d0 = axisDefect0 background fieldValue site
+    d1 = axisDefect1 background fieldValue site
+    d2 = axisDefect2 background fieldValue site
+    d3 = axisDefect3 background fieldValue site
 
     literal =
       Gauge.backgroundGaugeFirstMinusFlatExact
-        background field coordinate site
+        background fieldValue coordinate site
 
     sumExact :
       Gauge.quaternionCoordinate coordinate d0
@@ -140,14 +140,14 @@ backgroundGaugeDefectCoordinateIsNegativeSum
 pointwiseGaugeDefectEnergy :
   Physical.RationalSU2Background4 →
   Coordinates.PhysicalSU2BondField4 → Periodic.Site4 → ℚ
-pointwiseGaugeDefectEnergy background field site =
+pointwiseGaugeDefectEnergy background fieldValue site =
   let
     dx = backgroundGaugeDefectCoordinate
-      background field Coordinates.coordinateX site
+      background fieldValue Coordinates.coordinateX site
     dy = backgroundGaugeDefectCoordinate
-      background field Coordinates.coordinateY site
+      background fieldValue Coordinates.coordinateY site
     dz = backgroundGaugeDefectCoordinate
-      background field Coordinates.coordinateZ site
+      background fieldValue Coordinates.coordinateZ site
   in
   dx * dx + dy * dy + dz * dz
 
@@ -164,22 +164,22 @@ vectorPartNormSqBelowNormSq (Q.quat q0 q1 q2 q3) =
       (FiniteL2.squareNonnegative q0))
 
 pointwiseGaugeDefectEnergyBelowQuaternionSum :
-  ∀ background field site →
-  pointwiseGaugeDefectEnergy background field site
-  ≤ Norm.normSq (axisDefectSum background field site)
-pointwiseGaugeDefectEnergyBelowQuaternionSum background field site =
+  ∀ background fieldValue site →
+  pointwiseGaugeDefectEnergy background fieldValue site
+  ≤ Norm.normSq (axisDefectSum background fieldValue site)
+pointwiseGaugeDefectEnergyBelowQuaternionSum background fieldValue site =
   let
-    sum = axisDefectSum background field site
+    sum = axisDefectSum background fieldValue site
 
     dxExact = backgroundGaugeDefectCoordinateIsNegativeSum
-      background field Coordinates.coordinateX site
+      background fieldValue Coordinates.coordinateX site
     dyExact = backgroundGaugeDefectCoordinateIsNegativeSum
-      background field Coordinates.coordinateY site
+      background fieldValue Coordinates.coordinateY site
     dzExact = backgroundGaugeDefectCoordinateIsNegativeSum
-      background field Coordinates.coordinateZ site
+      background fieldValue Coordinates.coordinateZ site
 
     energyExact :
-      pointwiseGaugeDefectEnergy background field site
+      pointwiseGaugeDefectEnergy background fieldValue site
       ≡ Q.q1 sum * Q.q1 sum
         + Q.q2 sum * Q.q2 sum
         + Q.q3 sum * Q.q3 sum
@@ -196,11 +196,11 @@ axisLinkDefectCharge :
   Physical.RationalSU2Background4 →
   Coordinates.PhysicalSU2BondField4 →
   Periodic.Axis4 → Periodic.Site4 → ℚ
-axisLinkDefectCharge background field axis site =
+axisLinkDefectCharge background fieldValue axis site =
   let
     previousSite = Periodic.shiftBackward axis site
     bond = pair previousSite axis
-    insertion = Gauge.insertionQuaternion field axis previousSite
+    insertion = Gauge.insertionQuaternion fieldValue axis previousSite
   in
   Norm.normSq
       (Telescope._-q_ (Physical.inverseLink background bond) Q.oneQ)
@@ -209,39 +209,39 @@ axisLinkDefectCharge background field axis site =
 pointwiseGaugeLinkDefectCharge :
   Physical.RationalSU2Background4 →
   Coordinates.PhysicalSU2BondField4 → Periodic.Site4 → ℚ
-pointwiseGaugeLinkDefectCharge background field site =
-  axisLinkDefectCharge background field Periodic.axis0 site
-  + axisLinkDefectCharge background field Periodic.axis1 site
-  + axisLinkDefectCharge background field Periodic.axis2 site
-  + axisLinkDefectCharge background field Periodic.axis3 site
+pointwiseGaugeLinkDefectCharge background fieldValue site =
+  axisLinkDefectCharge background fieldValue Periodic.axis0 site
+  + axisLinkDefectCharge background fieldValue Periodic.axis1 site
+  + axisLinkDefectCharge background fieldValue Periodic.axis2 site
+  + axisLinkDefectCharge background fieldValue Periodic.axis3 site
 
 axisAdjointDefectNormSqBound :
-  ∀ background field axis site →
-  Norm.normSq (Gauge.axisAdjointDefect background field axis site)
-  ≤ (+ 4 / 1) * axisLinkDefectCharge background field axis site
-axisAdjointDefectNormSqBound background field axis site =
+  ∀ background fieldValue axis site →
+  Norm.normSq (Gauge.axisAdjointDefect background fieldValue axis site)
+  ≤ (+ 4 / 1) * axisLinkDefectCharge background fieldValue axis site
+axisAdjointDefectNormSqBound background fieldValue axis site =
   AdjointNorm.physicalInverseLinkAdjointDefectNormSqBound
     background
     (pair (Periodic.shiftBackward axis site) axis)
-    (Gauge.insertionQuaternion field axis
+    (Gauge.insertionQuaternion fieldValue axis
       (Periodic.shiftBackward axis site))
 
 pointwiseGaugeDefectNormSqBound :
-  ∀ background field site →
-  pointwiseGaugeDefectEnergy background field site
-  ≤ (+ 16 / 1) * pointwiseGaugeLinkDefectCharge background field site
-pointwiseGaugeDefectNormSqBound background field site =
+  ∀ background fieldValue site →
+  pointwiseGaugeDefectEnergy background fieldValue site
+  ≤ (+ 16 / 1) * pointwiseGaugeLinkDefectCharge background fieldValue site
+pointwiseGaugeDefectNormSqBound background fieldValue site =
   let
-    d0 = axisDefect0 background field site
-    d1 = axisDefect1 background field site
-    d2 = axisDefect2 background field site
-    d3 = axisDefect3 background field site
+    d0 = axisDefect0 background fieldValue site
+    d1 = axisDefect1 background fieldValue site
+    d2 = axisDefect2 background fieldValue site
+    d3 = axisDefect3 background fieldValue site
 
     vectorBelow =
-      pointwiseGaugeDefectEnergyBelowQuaternionSum background field site
+      pointwiseGaugeDefectEnergyBelowQuaternionSum background fieldValue site
 
     sumBelow :
-      Norm.normSq (axisDefectSum background field site)
+      Norm.normSq (axisDefectSum background fieldValue site)
       ≤ (+ 4 / 1)
           * (Norm.normSq d0 + Norm.normSq d1
             + Norm.normSq d2 + Norm.normSq d3)
@@ -251,7 +251,7 @@ pointwiseGaugeDefectNormSqBound background field site =
       Norm.normSq d0 + Norm.normSq d1
         + Norm.normSq d2 + Norm.normSq d3
       ≤ (+ 4 / 1)
-          * pointwiseGaugeLinkDefectCharge background field site
+          * pointwiseGaugeLinkDefectCharge background fieldValue site
     axesBelow =
       subst
         (λ upper →
@@ -259,28 +259,28 @@ pointwiseGaugeDefectNormSqBound background field site =
             + Norm.normSq d2 + Norm.normSq d3
           ≤ upper)
         (ℚRing.solve-∀
-          (axisLinkDefectCharge background field Periodic.axis0 site)
-          (axisLinkDefectCharge background field Periodic.axis1 site)
-          (axisLinkDefectCharge background field Periodic.axis2 site)
-          (axisLinkDefectCharge background field Periodic.axis3 site))
+          (axisLinkDefectCharge background fieldValue Periodic.axis0 site)
+          (axisLinkDefectCharge background fieldValue Periodic.axis1 site)
+          (axisLinkDefectCharge background fieldValue Periodic.axis2 site)
+          (axisLinkDefectCharge background fieldValue Periodic.axis3 site))
         (ℚP.+-mono-≤
           (ℚP.+-mono-≤
             (ℚP.+-mono-≤
               (axisAdjointDefectNormSqBound
-                background field Periodic.axis0 site)
+                background fieldValue Periodic.axis0 site)
               (axisAdjointDefectNormSqBound
-                background field Periodic.axis1 site))
+                background fieldValue Periodic.axis1 site))
             (axisAdjointDefectNormSqBound
-              background field Periodic.axis2 site))
+              background fieldValue Periodic.axis2 site))
           (axisAdjointDefectNormSqBound
-            background field Periodic.axis3 site))
+            background fieldValue Periodic.axis3 site))
 
     scaledAxes :
       (+ 4 / 1)
         * (Norm.normSq d0 + Norm.normSq d1
           + Norm.normSq d2 + Norm.normSq d3)
       ≤ (+ 16 / 1)
-          * pointwiseGaugeLinkDefectCharge background field site
+          * pointwiseGaugeLinkDefectCharge background fieldValue site
     scaledAxes =
       subst
         (λ upper →
@@ -289,7 +289,7 @@ pointwiseGaugeDefectNormSqBound background field site =
               + Norm.normSq d2 + Norm.normSq d3)
           ≤ upper)
         (ℚRing.solve-∀
-          (pointwiseGaugeLinkDefectCharge background field site))
+          (pointwiseGaugeLinkDefectCharge background fieldValue site))
         (Norm.scaleNonnegative (+ 4 / 1)
           (ℚP.nonNegative⁻¹ (+ 4 / 1)) axesBelow)
   in

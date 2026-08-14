@@ -1,21 +1,6 @@
 name: Thread completion frontier
 
 on:
-  push:
-    branches: [master]
-    paths:
-      - "DASHI/Sheaf/FiniteTemporalClopenSheaf.agda"
-      - "DASHI/Topology/FiniteBraidRhizomeCalculus.agda"
-      - "DASHI/Analysis/HyperrealUltrapowerConstruction.agda"
-      - "DASHI/Foundations/OperationalQ3GeometricSeries.agda"
-      - "DASHI/Dynamics/ConcreteCoalitionPopulationDynamics.agda"
-      - "DASHI/Foundations/PrimorialFactorAddressConcrete.agda"
-      - "DASHI/Geometry/CalabiYauAnalysisAndPhysicalUseBoundary.agda"
-      - "DASHI/Applications/ThreadEmpiricalValidationProgramme.agda"
-      - "DASHI/Unified/ThreadCompletionFrontier.agda"
-      - "DASHI/EverythingThreadCompletion.agda"
-      - "Docs/ThreadCompletionFrontier.md"
-      - ".github/workflows/thread-completion-frontier.yml"
   pull_request:
     paths:
       - "DASHI/Sheaf/FiniteTemporalClopenSheaf.agda"
@@ -33,7 +18,7 @@ on:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
