@@ -16,6 +16,7 @@ FILES=(
   DASHI/Cognition/PNF/ControlledFutureSpectralRepresentationExact.agda
   DASHI/Cognition/PNF/GrokkingInvariantSubspaceSelectionExact.agda
   DASHI/Cognition/PNF/CanonicalFutureMinimalDynamicalRealizationExact.agda
+  DASHI/Cognition/PNF/CanonicalFutureObservableAlgebraExact.agda
   DASHI/Cognition/PNF/FutureQuotientInvariantRealizationCompilerExact.agda
   DASHI/Cognition/PNF/OrientedZeroMinimalDynamicalRealizationExact.agda
   DASHI/EverythingOperatorFutureRealizationRound23.agda
@@ -59,6 +60,13 @@ grep -q 'compileCanonicalQuotientDynamics' DASHI/Cognition/PNF/CanonicalFutureMi
 grep -q 'canonicalEncodingCommutesWithTrace' DASHI/Cognition/PNF/CanonicalFutureMinimalDynamicalRealizationExact.agda
 grep -q 'canonicalQuotientFactorsEverySectionedSafeRepresentation' DASHI/Cognition/PNF/CanonicalFutureMinimalDynamicalRealizationExact.agda
 grep -q 'invariantRepresentationFactorsOntoCanonicalQuotient' DASHI/Cognition/PNF/CanonicalFutureMinimalDynamicalRealizationExact.agda
+
+# Canonical future observable algebra / Koopman-like closure.
+grep -q 'observableFactorsThroughCanonicalQuotient' DASHI/Cognition/PNF/CanonicalFutureObservableAlgebraExact.agda
+grep -q 'liftAfterDescendRecoversFineObservable' DASHI/Cognition/PNF/CanonicalFutureObservableAlgebraExact.agda
+grep -q 'descendAfterLiftRecoversQuotientObservable' DASHI/Cognition/PNF/CanonicalFutureObservableAlgebraExact.agda
+grep -q 'actionPullback' DASHI/Cognition/PNF/CanonicalFutureObservableAlgebraExact.agda
+grep -q 'finePullbackFactorsThroughQuotientPullback' DASHI/Cognition/PNF/CanonicalFutureObservableAlgebraExact.agda
 
 # Finite compiler composition and oriented-zero regression.
 grep -q 'compileInvariantFutureRealization' DASHI/Cognition/PNF/FutureQuotientInvariantRealizationCompilerExact.agda
