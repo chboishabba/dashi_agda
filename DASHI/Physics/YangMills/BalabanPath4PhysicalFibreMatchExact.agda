@@ -34,17 +34,17 @@ index3 = sucᵢ (sucᵢ (sucᵢ zeroᵢ))
 physicalFibre4Coordinate :
   SiteField fourSide → Axis4 → Triple (CyclicIndex fourSide) →
   CyclicIndex fourSide → ℚ
-physicalFibre4Coordinate field axis transverse =
-  scaledCenteredFibreValue field axis transverse
+physicalFibre4Coordinate fieldValue axis transverse =
+  scaledCenteredFibreValue fieldValue axis transverse
 
 path4CoordinatesFromPhysicalFibre :
   SiteField fourSide → Axis4 → Triple (CyclicIndex fourSide) →
   Path4Coordinates
-path4CoordinatesFromPhysicalFibre field axis transverse =
+path4CoordinatesFromPhysicalFibre fieldValue axis transverse =
   path4Coordinates
-    (physicalFibre4Coordinate field axis transverse index0)
-    (physicalFibre4Coordinate field axis transverse index1)
-    (physicalFibre4Coordinate field axis transverse index2)
+    (physicalFibre4Coordinate fieldValue axis transverse index0)
+    (physicalFibre4Coordinate fieldValue axis transverse index1)
+    (physicalFibre4Coordinate fieldValue axis transverse index2)
 
 isolateFourthFromZero : ∀ a b c d →
   a + (b + (c + (d + 0ℚ))) ≡ 0ℚ →
@@ -64,97 +64,97 @@ isolateFourthFromZero a b c d total =
       zeroReduction)
 
 physicalFourthCoordinateIsGeneratedLast :
-  ∀ field axis transverse →
-  physicalFibre4Coordinate field axis transverse index3
-  ≡ lastCoordinate (path4CoordinatesFromPhysicalFibre field axis transverse)
-physicalFourthCoordinateIsGeneratedLast field axis transverse =
+  ∀ fieldValue axis transverse →
+  physicalFibre4Coordinate fieldValue axis transverse index3
+  ≡ lastCoordinate (path4CoordinatesFromPhysicalFibre fieldValue axis transverse)
+physicalFourthCoordinateIsGeneratedLast fieldValue axis transverse =
   isolateFourthFromZero
-    (physicalFibre4Coordinate field axis transverse index0)
-    (physicalFibre4Coordinate field axis transverse index1)
-    (physicalFibre4Coordinate field axis transverse index2)
-    (physicalFibre4Coordinate field axis transverse index3)
-    (scaledCenteredFibreSumZero field axis transverse)
+    (physicalFibre4Coordinate fieldValue axis transverse index0)
+    (physicalFibre4Coordinate fieldValue axis transverse index1)
+    (physicalFibre4Coordinate fieldValue axis transverse index2)
+    (physicalFibre4Coordinate fieldValue axis transverse index3)
+    (scaledCenteredFibreSumZero fieldValue axis transverse)
 
 physicalFibre4NormExpansion :
-  ∀ field axis transverse →
-  scaledCenteredFibreNormSq field axis transverse
-  ≡ sq (physicalFibre4Coordinate field axis transverse index0)
-    + (sq (physicalFibre4Coordinate field axis transverse index1)
-    + (sq (physicalFibre4Coordinate field axis transverse index2)
-    + (sq (physicalFibre4Coordinate field axis transverse index3) + 0ℚ)))
-physicalFibre4NormExpansion field axis transverse = refl
+  ∀ fieldValue axis transverse →
+  scaledCenteredFibreNormSq fieldValue axis transverse
+  ≡ sq (physicalFibre4Coordinate fieldValue axis transverse index0)
+    + (sq (physicalFibre4Coordinate fieldValue axis transverse index1)
+    + (sq (physicalFibre4Coordinate fieldValue axis transverse index2)
+    + (sq (physicalFibre4Coordinate fieldValue axis transverse index3) + 0ℚ)))
+physicalFibre4NormExpansion fieldValue axis transverse = refl
 
 physicalFibre4EnergyExpansion :
-  ∀ field axis transverse →
-  scaledCenteredFibreEdgeEnergy field axis transverse
+  ∀ fieldValue axis transverse →
+  scaledCenteredFibreEdgeEnergy fieldValue axis transverse
   ≡ sq
-      (physicalFibre4Coordinate field axis transverse index1
-      - physicalFibre4Coordinate field axis transverse index0)
+      (physicalFibre4Coordinate fieldValue axis transverse index1
+      - physicalFibre4Coordinate fieldValue axis transverse index0)
     + (sq
-        (physicalFibre4Coordinate field axis transverse index2
-        - physicalFibre4Coordinate field axis transverse index1)
+        (physicalFibre4Coordinate fieldValue axis transverse index2
+        - physicalFibre4Coordinate fieldValue axis transverse index1)
     + (sq
-        (physicalFibre4Coordinate field axis transverse index3
-        - physicalFibre4Coordinate field axis transverse index2)
+        (physicalFibre4Coordinate fieldValue axis transverse index3
+        - physicalFibre4Coordinate fieldValue axis transverse index2)
       + 0ℚ))
-physicalFibre4EnergyExpansion field axis transverse = refl
+physicalFibre4EnergyExpansion fieldValue axis transverse = refl
 
 physicalFibre4NormMatchesGenerated :
-  ∀ field axis transverse →
-  scaledCenteredFibreNormSq field axis transverse
-  ≡ path4NormSq (path4CoordinatesFromPhysicalFibre field axis transverse)
-physicalFibre4NormMatchesGenerated field axis transverse =
+  ∀ fieldValue axis transverse →
+  scaledCenteredFibreNormSq fieldValue axis transverse
+  ≡ path4NormSq (path4CoordinatesFromPhysicalFibre fieldValue axis transverse)
+physicalFibre4NormMatchesGenerated fieldValue axis transverse =
   trans
-    (physicalFibre4NormExpansion field axis transverse)
+    (physicalFibre4NormExpansion fieldValue axis transverse)
     (subst
       (λ fourth →
-        sq (physicalFibre4Coordinate field axis transverse index0)
-        + (sq (physicalFibre4Coordinate field axis transverse index1)
-        + (sq (physicalFibre4Coordinate field axis transverse index2)
+        sq (physicalFibre4Coordinate fieldValue axis transverse index0)
+        + (sq (physicalFibre4Coordinate fieldValue axis transverse index1)
+        + (sq (physicalFibre4Coordinate fieldValue axis transverse index2)
         + (sq fourth + 0ℚ)))
-        ≡ path4NormSq (path4CoordinatesFromPhysicalFibre field axis transverse))
-      (physicalFourthCoordinateIsGeneratedLast field axis transverse)
+        ≡ path4NormSq (path4CoordinatesFromPhysicalFibre fieldValue axis transverse))
+      (physicalFourthCoordinateIsGeneratedLast fieldValue axis transverse)
       (ℚRing.solve-∀))
 
 physicalFibre4EnergyMatchesGenerated :
-  ∀ field axis transverse →
-  scaledCenteredFibreEdgeEnergy field axis transverse
-  ≡ path4Energy (path4CoordinatesFromPhysicalFibre field axis transverse)
-physicalFibre4EnergyMatchesGenerated field axis transverse =
+  ∀ fieldValue axis transverse →
+  scaledCenteredFibreEdgeEnergy fieldValue axis transverse
+  ≡ path4Energy (path4CoordinatesFromPhysicalFibre fieldValue axis transverse)
+physicalFibre4EnergyMatchesGenerated fieldValue axis transverse =
   trans
-    (physicalFibre4EnergyExpansion field axis transverse)
+    (physicalFibre4EnergyExpansion fieldValue axis transverse)
     (subst
       (λ fourth →
         sq
-          (physicalFibre4Coordinate field axis transverse index1
-          - physicalFibre4Coordinate field axis transverse index0)
+          (physicalFibre4Coordinate fieldValue axis transverse index1
+          - physicalFibre4Coordinate fieldValue axis transverse index0)
         + (sq
-            (physicalFibre4Coordinate field axis transverse index2
-            - physicalFibre4Coordinate field axis transverse index1)
+            (physicalFibre4Coordinate fieldValue axis transverse index2
+            - physicalFibre4Coordinate fieldValue axis transverse index1)
         + (sq
             (fourth
-            - physicalFibre4Coordinate field axis transverse index2)
+            - physicalFibre4Coordinate fieldValue axis transverse index2)
           + 0ℚ))
-        ≡ path4Energy (path4CoordinatesFromPhysicalFibre field axis transverse))
-      (physicalFourthCoordinateIsGeneratedLast field axis transverse)
+        ≡ path4Energy (path4CoordinatesFromPhysicalFibre fieldValue axis transverse))
+      (physicalFourthCoordinateIsGeneratedLast fieldValue axis transverse)
       (ℚRing.solve-∀))
 
 physicalSide4FibrePoincare :
-  ∀ field axis transverse →
-  oneSixteenth * scaledCenteredFibreNormSq field axis transverse
-  ≤ scaledCenteredFibreEdgeEnergy field axis transverse
-physicalSide4FibrePoincare field axis transverse =
+  ∀ fieldValue axis transverse →
+  oneSixteenth * scaledCenteredFibreNormSq fieldValue axis transverse
+  ≤ scaledCenteredFibreEdgeEnergy fieldValue axis transverse
+physicalSide4FibrePoincare fieldValue axis transverse =
   subst
     (λ energyValue →
-      oneSixteenth * scaledCenteredFibreNormSq field axis transverse
+      oneSixteenth * scaledCenteredFibreNormSq fieldValue axis transverse
       ≤ energyValue)
-    (sym (physicalFibre4EnergyMatchesGenerated field axis transverse))
+    (sym (physicalFibre4EnergyMatchesGenerated fieldValue axis transverse))
     (subst
       (λ normValue →
         oneSixteenth * normValue
-        ≤ path4Energy (path4CoordinatesFromPhysicalFibre field axis transverse))
-      (sym (physicalFibre4NormMatchesGenerated field axis transverse))
-      (path4Poincare (path4CoordinatesFromPhysicalFibre field axis transverse)))
+        ≤ path4Energy (path4CoordinatesFromPhysicalFibre fieldValue axis transverse))
+      (sym (physicalFibre4NormMatchesGenerated fieldValue axis transverse))
+      (path4Poincare (path4CoordinatesFromPhysicalFibre fieldValue axis transverse)))
 
 path4PhysicalFibreCoordinateMatchLevel : ProofLevel
 path4PhysicalFibreCoordinateMatchLevel = machineChecked

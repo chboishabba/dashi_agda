@@ -91,72 +91,72 @@ sumSitesMatchesGlobalSiteSum term =
 periodicFibreDifferenceSum :
   Sums.SiteField Path4.side4 → Axis4 →
   Block.Triple (CyclicIndex Path4.side4) → ℚ
-periodicFibreDifferenceSum field axis transverse =
+periodicFibreDifferenceSum fieldValue axis transverse =
   Sums.sumRational axes4
     (λ coordinate →
       sq
-        (field
+        (fieldValue
           (Periodic.shiftForward axis
             (Block.insertAxis axis coordinate transverse))
-        - field (Block.insertAxis axis coordinate transverse)))
+        - fieldValue (Block.insertAxis axis coordinate transverse)))
 
 periodicFibreDifferenceSumSplits :
-  ∀ field axis transverse →
-  periodicFibreDifferenceSum field axis transverse
-  ≡ Variance.physicalFibreEdgeEnergy field axis transverse
-    + Boundary.physicalFibreWrapEnergy field axis transverse
-periodicFibreDifferenceSumSplits field Periodic.axis0
+  ∀ fieldValue axis transverse →
+  periodicFibreDifferenceSum fieldValue axis transverse
+  ≡ Variance.physicalFibreEdgeEnergy fieldValue axis transverse
+    + Boundary.physicalFibreWrapEnergy fieldValue axis transverse
+periodicFibreDifferenceSumSplits fieldValue Periodic.axis0
     (pair x1 (pair x2 x3)) =
   ℚRing.solve-∀
-    (field (pair (pair Match.index0 x1) (pair x2 x3)))
-    (field (pair (pair Match.index1 x1) (pair x2 x3)))
-    (field (pair (pair Match.index2 x1) (pair x2 x3)))
-    (field (pair (pair Match.index3 x1) (pair x2 x3)))
-periodicFibreDifferenceSumSplits field Periodic.axis1
+    (fieldValue (pair (pair Match.index0 x1) (pair x2 x3)))
+    (fieldValue (pair (pair Match.index1 x1) (pair x2 x3)))
+    (fieldValue (pair (pair Match.index2 x1) (pair x2 x3)))
+    (fieldValue (pair (pair Match.index3 x1) (pair x2 x3)))
+periodicFibreDifferenceSumSplits fieldValue Periodic.axis1
     (pair x0 (pair x2 x3)) =
   ℚRing.solve-∀
-    (field (pair (pair x0 Match.index0) (pair x2 x3)))
-    (field (pair (pair x0 Match.index1) (pair x2 x3)))
-    (field (pair (pair x0 Match.index2) (pair x2 x3)))
-    (field (pair (pair x0 Match.index3) (pair x2 x3)))
-periodicFibreDifferenceSumSplits field Periodic.axis2
+    (fieldValue (pair (pair x0 Match.index0) (pair x2 x3)))
+    (fieldValue (pair (pair x0 Match.index1) (pair x2 x3)))
+    (fieldValue (pair (pair x0 Match.index2) (pair x2 x3)))
+    (fieldValue (pair (pair x0 Match.index3) (pair x2 x3)))
+periodicFibreDifferenceSumSplits fieldValue Periodic.axis2
     (pair x0 (pair x1 x3)) =
   ℚRing.solve-∀
-    (field (pair (pair x0 x1) (pair Match.index0 x3)))
-    (field (pair (pair x0 x1) (pair Match.index1 x3)))
-    (field (pair (pair x0 x1) (pair Match.index2 x3)))
-    (field (pair (pair x0 x1) (pair Match.index3 x3)))
-periodicFibreDifferenceSumSplits field Periodic.axis3
+    (fieldValue (pair (pair x0 x1) (pair Match.index0 x3)))
+    (fieldValue (pair (pair x0 x1) (pair Match.index1 x3)))
+    (fieldValue (pair (pair x0 x1) (pair Match.index2 x3)))
+    (fieldValue (pair (pair x0 x1) (pair Match.index3 x3)))
+periodicFibreDifferenceSumSplits fieldValue Periodic.axis3
     (pair x0 (pair x1 x2)) =
   ℚRing.solve-∀
-    (field (pair (pair x0 x1) (pair x2 Match.index0)))
-    (field (pair (pair x0 x1) (pair x2 Match.index1)))
-    (field (pair (pair x0 x1) (pair x2 Match.index2)))
-    (field (pair (pair x0 x1) (pair x2 Match.index3)))
+    (fieldValue (pair (pair x0 x1) (pair x2 Match.index0)))
+    (fieldValue (pair (pair x0 x1) (pair x2 Match.index1)))
+    (fieldValue (pair (pair x0 x1) (pair x2 Match.index2)))
+    (fieldValue (pair (pair x0 x1) (pair x2 Match.index3)))
 
 axisBoundaryWrapEnergy :
   Axis4 → Sums.SiteField Path4.side4 → ℚ
-axisBoundaryWrapEnergy axis field =
+axisBoundaryWrapEnergy axis fieldValue =
   Sums.sumRational (Block.physicalTransverseCoordinates Path4.side4)
-    (Boundary.physicalFibreWrapEnergy field axis)
+    (Boundary.physicalFibreWrapEnergy fieldValue axis)
 
 axisPeriodicDifferenceEnergy :
   Axis4 → Sums.SiteField Path4.side4 → ℚ
-axisPeriodicDifferenceEnergy axis field =
-  Periodic.fieldNormSq (Periodic.forwardDifference axis field)
+axisPeriodicDifferenceEnergy axis fieldValue =
+  Periodic.fieldNormSq (Periodic.forwardDifference axis fieldValue)
 
-axisPeriodicDifferenceSplitsOpenAndBoundary : ∀ axis field →
-  axisPeriodicDifferenceEnergy axis field
-  ≡ Component.axisDirectionalEnergy axis field
-    + axisBoundaryWrapEnergy axis field
-axisPeriodicDifferenceSplitsOpenAndBoundary axis field =
+axisPeriodicDifferenceSplitsOpenAndBoundary : ∀ axis fieldValue →
+  axisPeriodicDifferenceEnergy axis fieldValue
+  ≡ Component.axisDirectionalEnergy axis fieldValue
+    + axisBoundaryWrapEnergy axis fieldValue
+axisPeriodicDifferenceSplitsOpenAndBoundary axis fieldValue =
   let
     siteTerm : Sums.SiteField Path4.side4
     siteTerm site =
-      sq (field (Periodic.shiftForward axis site) - field site)
+      sq (fieldValue (Periodic.shiftForward axis site) - fieldValue site)
 
     asGlobal :
-      axisPeriodicDifferenceEnergy axis field
+      axisPeriodicDifferenceEnergy axis fieldValue
       ≡ Partition.globalSiteSum siteTerm
     asGlobal = sumSitesMatchesGlobalSiteSum siteTerm
 
@@ -167,193 +167,193 @@ axisPeriodicDifferenceSplitsOpenAndBoundary axis field =
 
     splitFibres :
       Partition.axisPartitionSum axis siteTerm
-      ≡ Component.axisDirectionalEnergy axis field
-        + axisBoundaryWrapEnergy axis field
+      ≡ Component.axisDirectionalEnergy axis fieldValue
+        + axisBoundaryWrapEnergy axis fieldValue
     splitFibres =
       trans
         (Sums.sumRationalCong
           (Block.physicalTransverseCoordinates Path4.side4)
-          (periodicFibreDifferenceSum field axis)
+          (periodicFibreDifferenceSum fieldValue axis)
           (λ transverse →
-            Variance.physicalFibreEdgeEnergy field axis transverse
-            + Boundary.physicalFibreWrapEnergy field axis transverse)
-          (periodicFibreDifferenceSumSplits field axis))
+            Variance.physicalFibreEdgeEnergy fieldValue axis transverse
+            + Boundary.physicalFibreWrapEnergy fieldValue axis transverse)
+          (periodicFibreDifferenceSumSplits fieldValue axis))
         (Fubini.sumRationalAdd
           (Block.physicalTransverseCoordinates Path4.side4)
-          (Variance.physicalFibreEdgeEnergy field axis)
-          (Boundary.physicalFibreWrapEnergy field axis))
+          (Variance.physicalFibreEdgeEnergy fieldValue axis)
+          (Boundary.physicalFibreWrapEnergy fieldValue axis))
   in
   trans asGlobal (trans asPartition splitFibres)
 
 scalarPeriodicGradientByAxes : Periodic.BondField4 → ℚ
-scalarPeriodicGradientByAxes field =
+scalarPeriodicGradientByAxes fieldValue =
   sumAxes (λ bondAxis →
     sumAxes (λ derivativeAxis →
-      axisPeriodicDifferenceEnergy derivativeAxis (field bondAxis)))
+      axisPeriodicDifferenceEnergy derivativeAxis (fieldValue bondAxis)))
 
 scalarOpenReferenceByAxes : Periodic.BondField4 → ℚ
-scalarOpenReferenceByAxes field =
+scalarOpenReferenceByAxes fieldValue =
   sumAxes (λ bondAxis →
     sumAxes (λ derivativeAxis →
-      Component.axisDirectionalEnergy derivativeAxis (field bondAxis)))
+      Component.axisDirectionalEnergy derivativeAxis (fieldValue bondAxis)))
 
 scalarBoundaryWrapEnergy : Periodic.BondField4 → ℚ
-scalarBoundaryWrapEnergy field =
+scalarBoundaryWrapEnergy fieldValue =
   sumAxes (λ bondAxis →
     sumAxes (λ derivativeAxis →
-      axisBoundaryWrapEnergy derivativeAxis (field bondAxis)))
+      axisBoundaryWrapEnergy derivativeAxis (fieldValue bondAxis)))
 
-periodicGradientMatchesDoubleAxisSum : ∀ field →
-  Periodic.periodicGradientEnergy field
-  ≡ scalarPeriodicGradientByAxes field
-periodicGradientMatchesDoubleAxisSum field = refl
+periodicGradientMatchesDoubleAxisSum : ∀ fieldValue →
+  Periodic.periodicGradientEnergy fieldValue
+  ≡ scalarPeriodicGradientByAxes fieldValue
+periodicGradientMatchesDoubleAxisSum fieldValue = refl
 
-openReferenceMatchesDoubleAxisSum : ∀ field →
-  ScalarHodge.bondReferenceDifferenceEnergy field
-  ≡ scalarOpenReferenceByAxes field
-openReferenceMatchesDoubleAxisSum field = refl
+openReferenceMatchesDoubleAxisSum : ∀ fieldValue →
+  ScalarHodge.bondReferenceDifferenceEnergy fieldValue
+  ≡ scalarOpenReferenceByAxes fieldValue
+openReferenceMatchesDoubleAxisSum fieldValue = refl
 
-scalarPeriodicGradientSplitsOpenAndBoundary : ∀ field →
-  Periodic.periodicGradientEnergy field
-  ≡ ScalarHodge.bondReferenceDifferenceEnergy field
-    + scalarBoundaryWrapEnergy field
-scalarPeriodicGradientSplitsOpenAndBoundary field =
+scalarPeriodicGradientSplitsOpenAndBoundary : ∀ fieldValue →
+  Periodic.periodicGradientEnergy fieldValue
+  ≡ ScalarHodge.bondReferenceDifferenceEnergy fieldValue
+    + scalarBoundaryWrapEnergy fieldValue
+scalarPeriodicGradientSplitsOpenAndBoundary fieldValue =
   trans
-    (periodicGradientMatchesDoubleAxisSum field)
+    (periodicGradientMatchesDoubleAxisSum fieldValue)
     (trans
       (Sums.sumRationalCong
         axes4
         (λ bondAxis →
           sumAxes (λ derivativeAxis →
-            axisPeriodicDifferenceEnergy derivativeAxis (field bondAxis)))
+            axisPeriodicDifferenceEnergy derivativeAxis (fieldValue bondAxis)))
         (λ bondAxis →
           sumAxes (λ derivativeAxis →
-            Component.axisDirectionalEnergy derivativeAxis (field bondAxis)
-            + axisBoundaryWrapEnergy derivativeAxis (field bondAxis)))
+            Component.axisDirectionalEnergy derivativeAxis (fieldValue bondAxis)
+            + axisBoundaryWrapEnergy derivativeAxis (fieldValue bondAxis)))
         (λ bondAxis →
           Sums.sumRationalCong
             axes4
             (λ derivativeAxis →
-              axisPeriodicDifferenceEnergy derivativeAxis (field bondAxis))
+              axisPeriodicDifferenceEnergy derivativeAxis (fieldValue bondAxis))
             (λ derivativeAxis →
-              Component.axisDirectionalEnergy derivativeAxis (field bondAxis)
-              + axisBoundaryWrapEnergy derivativeAxis (field bondAxis))
+              Component.axisDirectionalEnergy derivativeAxis (fieldValue bondAxis)
+              + axisBoundaryWrapEnergy derivativeAxis (fieldValue bondAxis))
             (λ derivativeAxis →
               axisPeriodicDifferenceSplitsOpenAndBoundary
-                derivativeAxis (field bondAxis))))
+                derivativeAxis (fieldValue bondAxis))))
       (trans
         (Sums.sumRationalCong
           axes4
           (λ bondAxis →
             sumAxes (λ derivativeAxis →
-              Component.axisDirectionalEnergy derivativeAxis (field bondAxis)
-              + axisBoundaryWrapEnergy derivativeAxis (field bondAxis)))
+              Component.axisDirectionalEnergy derivativeAxis (fieldValue bondAxis)
+              + axisBoundaryWrapEnergy derivativeAxis (fieldValue bondAxis)))
           (λ bondAxis →
             sumAxes (λ derivativeAxis →
-              Component.axisDirectionalEnergy derivativeAxis (field bondAxis))
+              Component.axisDirectionalEnergy derivativeAxis (fieldValue bondAxis))
             + sumAxes (λ derivativeAxis →
-              axisBoundaryWrapEnergy derivativeAxis (field bondAxis)))
+              axisBoundaryWrapEnergy derivativeAxis (fieldValue bondAxis)))
           (λ bondAxis →
             sumAxesAdd
               (λ derivativeAxis →
-                Component.axisDirectionalEnergy derivativeAxis (field bondAxis))
+                Component.axisDirectionalEnergy derivativeAxis (fieldValue bondAxis))
               (λ derivativeAxis →
-                axisBoundaryWrapEnergy derivativeAxis (field bondAxis))))
+                axisBoundaryWrapEnergy derivativeAxis (fieldValue bondAxis))))
         (trans
           (sumAxesAdd
             (λ bondAxis →
               sumAxes (λ derivativeAxis →
-                Component.axisDirectionalEnergy derivativeAxis (field bondAxis)))
+                Component.axisDirectionalEnergy derivativeAxis (fieldValue bondAxis)))
             (λ bondAxis →
               sumAxes (λ derivativeAxis →
-                axisBoundaryWrapEnergy derivativeAxis (field bondAxis))))
+                axisBoundaryWrapEnergy derivativeAxis (fieldValue bondAxis))))
           (cong
-            (_+ scalarBoundaryWrapEnergy field)
-            (sym (openReferenceMatchesDoubleAxisSum field))))))
+            (_+ scalarBoundaryWrapEnergy fieldValue)
+            (sym (openReferenceMatchesDoubleAxisSum fieldValue))))))
 
 asPeriodicField :
   Physical.PhysicalSU2BondField4 → Periodic.PhysicalBondField4
-asPeriodicField field coordinate axis site =
-  field coordinate (pair site axis)
+asPeriodicField fieldValue coordinate axis site =
+  fieldValue coordinate (pair site axis)
 
 physicalBoundaryWrapEnergy : Physical.PhysicalSU2BondField4 → ℚ
-physicalBoundaryWrapEnergy field =
-  scalarBoundaryWrapEnergy (asPeriodicField field Physical.coordinateX)
-  + scalarBoundaryWrapEnergy (asPeriodicField field Physical.coordinateY)
-  + scalarBoundaryWrapEnergy (asPeriodicField field Physical.coordinateZ)
+physicalBoundaryWrapEnergy fieldValue =
+  scalarBoundaryWrapEnergy (asPeriodicField fieldValue Physical.coordinateX)
+  + scalarBoundaryWrapEnergy (asPeriodicField fieldValue Physical.coordinateY)
+  + scalarBoundaryWrapEnergy (asPeriodicField fieldValue Physical.coordinateZ)
 
-physicalPeriodicGradientSplitsOpenAndBoundary : ∀ field →
-  Periodic.physicalPeriodicGradientEnergy (asPeriodicField field)
-  ≡ PhysicalHodge.physicalReferenceDifferenceEnergy field
-    + physicalBoundaryWrapEnergy field
-physicalPeriodicGradientSplitsOpenAndBoundary field
+physicalPeriodicGradientSplitsOpenAndBoundary : ∀ fieldValue →
+  Periodic.physicalPeriodicGradientEnergy (asPeriodicField fieldValue)
+  ≡ PhysicalHodge.physicalReferenceDifferenceEnergy fieldValue
+    + physicalBoundaryWrapEnergy fieldValue
+physicalPeriodicGradientSplitsOpenAndBoundary fieldValue
   rewrite scalarPeriodicGradientSplitsOpenAndBoundary
-    (asPeriodicField field Physical.coordinateX)
+    (asPeriodicField fieldValue Physical.coordinateX)
   | scalarPeriodicGradientSplitsOpenAndBoundary
-    (asPeriodicField field Physical.coordinateY)
+    (asPeriodicField fieldValue Physical.coordinateY)
   | scalarPeriodicGradientSplitsOpenAndBoundary
-    (asPeriodicField field Physical.coordinateZ) =
+    (asPeriodicField fieldValue Physical.coordinateZ) =
   ℚRing.solve-∀
     (ScalarHodge.bondReferenceDifferenceEnergy
-      (field Physical.coordinateX))
+      (fieldValue Physical.coordinateX))
     (ScalarHodge.bondReferenceDifferenceEnergy
-      (field Physical.coordinateY))
+      (fieldValue Physical.coordinateY))
     (ScalarHodge.bondReferenceDifferenceEnergy
-      (field Physical.coordinateZ))
+      (fieldValue Physical.coordinateZ))
     (scalarBoundaryWrapEnergy
-      (asPeriodicField field Physical.coordinateX))
+      (asPeriodicField fieldValue Physical.coordinateX))
     (scalarBoundaryWrapEnergy
-      (asPeriodicField field Physical.coordinateY))
+      (asPeriodicField fieldValue Physical.coordinateY))
     (scalarBoundaryWrapEnergy
-      (asPeriodicField field Physical.coordinateZ))
+      (asPeriodicField fieldValue Physical.coordinateZ))
 
-axisBoundaryWrapEnergyNonnegative : ∀ axis field →
-  0ℚ ≤ axisBoundaryWrapEnergy axis field
-axisBoundaryWrapEnergyNonnegative axis field =
+axisBoundaryWrapEnergyNonnegative : ∀ axis fieldValue →
+  0ℚ ≤ axisBoundaryWrapEnergy axis fieldValue
+axisBoundaryWrapEnergyNonnegative axis fieldValue =
   Schur.sumNonnegative
     (Block.physicalTransverseCoordinates Path4.side4)
-    (Boundary.physicalFibreWrapEnergy field axis)
+    (Boundary.physicalFibreWrapEnergy fieldValue axis)
     (λ transverse →
       FiniteL2.squareNonnegative
-        (field (Block.insertAxis axis Match.index0 transverse)
-        - field (Block.insertAxis axis Match.index3 transverse)))
+        (fieldValue (Block.insertAxis axis Match.index0 transverse)
+        - fieldValue (Block.insertAxis axis Match.index3 transverse)))
 
-scalarBoundaryWrapEnergyNonnegative : ∀ field →
-  0ℚ ≤ scalarBoundaryWrapEnergy field
-scalarBoundaryWrapEnergyNonnegative field =
+scalarBoundaryWrapEnergyNonnegative : ∀ fieldValue →
+  0ℚ ≤ scalarBoundaryWrapEnergy fieldValue
+scalarBoundaryWrapEnergyNonnegative fieldValue =
   Schur.sumNonnegative axes4
     (λ bondAxis →
       sumAxes (λ derivativeAxis →
-        axisBoundaryWrapEnergy derivativeAxis (field bondAxis)))
+        axisBoundaryWrapEnergy derivativeAxis (fieldValue bondAxis)))
     (λ bondAxis →
       Schur.sumNonnegative axes4
         (λ derivativeAxis →
-          axisBoundaryWrapEnergy derivativeAxis (field bondAxis))
+          axisBoundaryWrapEnergy derivativeAxis (fieldValue bondAxis))
         (λ derivativeAxis →
           axisBoundaryWrapEnergyNonnegative
-            derivativeAxis (field bondAxis)))
+            derivativeAxis (fieldValue bondAxis)))
 
-physicalBoundaryWrapEnergyNonnegative : ∀ field →
-  0ℚ ≤ physicalBoundaryWrapEnergy field
-physicalBoundaryWrapEnergyNonnegative field =
+physicalBoundaryWrapEnergyNonnegative : ∀ fieldValue →
+  0ℚ ≤ physicalBoundaryWrapEnergy fieldValue
+physicalBoundaryWrapEnergyNonnegative fieldValue =
   ℚP.+-mono-≤
     (ℚP.+-mono-≤
       (scalarBoundaryWrapEnergyNonnegative
-        (asPeriodicField field Physical.coordinateX))
+        (asPeriodicField fieldValue Physical.coordinateX))
       (scalarBoundaryWrapEnergyNonnegative
-        (asPeriodicField field Physical.coordinateY)))
+        (asPeriodicField fieldValue Physical.coordinateY)))
     (scalarBoundaryWrapEnergyNonnegative
-      (asPeriodicField field Physical.coordinateZ))
+      (asPeriodicField fieldValue Physical.coordinateZ))
 
-physicalFlatHodgeWithBoundary : ∀ field →
-  Periodic.physicalPeriodicCurlEnergy (asPeriodicField field)
-    + Periodic.physicalPeriodicDivergenceEnergy (asPeriodicField field)
-  ≡ PhysicalHodge.physicalReferenceDifferenceEnergy field
-    + physicalBoundaryWrapEnergy field
-physicalFlatHodgeWithBoundary field =
+physicalFlatHodgeWithBoundary : ∀ fieldValue →
+  Periodic.physicalPeriodicCurlEnergy (asPeriodicField fieldValue)
+    + Periodic.physicalPeriodicDivergenceEnergy (asPeriodicField fieldValue)
+  ≡ PhysicalHodge.physicalReferenceDifferenceEnergy fieldValue
+    + physicalBoundaryWrapEnergy fieldValue
+physicalFlatHodgeWithBoundary fieldValue =
   trans
-    (sym (Periodic.physicalPeriodicHodgeIdentity (asPeriodicField field)))
-    (physicalPeriodicGradientSplitsOpenAndBoundary field)
+    (sym (Periodic.physicalPeriodicHodgeIdentity (asPeriodicField fieldValue)))
+    (physicalPeriodicGradientSplitsOpenAndBoundary fieldValue)
 
 periodicOpenReferenceBridgeLevel : ProofLevel
 periodicOpenReferenceBridgeLevel = machineChecked

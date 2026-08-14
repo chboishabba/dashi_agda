@@ -275,18 +275,18 @@ inverseLinkUpper background radius bond =
 slotInsertion :
   Coordinates.PhysicalSU2BondField4 → Physical.Plaquette4 →
   Placement.PlaquetteLinkSlot4 → Q.RationalQuaternion
-slotInsertion field (pair site axes) Placement.slot0 =
-  Q.pureQuaternion (Physical.insertionAt field (Physical.pairLeft axes) site)
-slotInsertion field (pair site axes) Placement.slot1 =
+slotInsertion fieldValue (pair site axes) Placement.slot0 =
+  Q.pureQuaternion (Physical.insertionAt fieldValue (Physical.pairLeft axes) site)
+slotInsertion fieldValue (pair site axes) Placement.slot1 =
   Q.pureQuaternion
-    (Physical.insertionAt field (Physical.pairRight axes)
+    (Physical.insertionAt fieldValue (Physical.pairRight axes)
       (Periodic.shiftForward (Physical.pairLeft axes) site))
-slotInsertion field (pair site axes) Placement.slot2 =
+slotInsertion fieldValue (pair site axes) Placement.slot2 =
   Q.pureQuaternion
-    (Physical.insertionAt field (Physical.pairLeft axes)
+    (Physical.insertionAt fieldValue (Physical.pairLeft axes)
       (Periodic.shiftForward (Physical.pairRight axes) site))
-slotInsertion field (pair site axes) Placement.slot3 =
-  Q.pureQuaternion (Physical.insertionAt field (Physical.pairRight axes) site)
+slotInsertion fieldValue (pair site axes) Placement.slot3 =
+  Q.pureQuaternion (Physical.insertionAt fieldValue (Physical.pairRight axes) site)
 
 slotUnit :
   Physical.RationalSU2Background4 → Physical.Plaquette4 →
@@ -308,86 +308,86 @@ slotActualFactor :
   Physical.RationalSU2Background4 → Coordinates.PhysicalSU2BondField4 →
   Physical.Plaquette4 → Placement.PlaquetteLinkSlot4 →
   Named.FactorSelection → Q.RationalQuaternion
-slotActualFactor background field plaquette Placement.slot0 selection =
+slotActualFactor background fieldValue plaquette Placement.slot0 selection =
   Named.applySelection selection
     (positiveUnitJet
       (slotUnit background plaquette Placement.slot0)
-      (slotInsertion field plaquette Placement.slot0))
-slotActualFactor background field plaquette Placement.slot1 selection =
+      (slotInsertion fieldValue plaquette Placement.slot0))
+slotActualFactor background fieldValue plaquette Placement.slot1 selection =
   Named.applySelection selection
     (positiveUnitJet
       (slotUnit background plaquette Placement.slot1)
-      (slotInsertion field plaquette Placement.slot1))
-slotActualFactor background field plaquette Placement.slot2 selection =
+      (slotInsertion fieldValue plaquette Placement.slot1))
+slotActualFactor background fieldValue plaquette Placement.slot2 selection =
   Named.applySelection selection
     (inverseUnitJet
       (slotUnit background plaquette Placement.slot2)
-      (slotInsertion field plaquette Placement.slot2))
-slotActualFactor background field plaquette Placement.slot3 selection =
+      (slotInsertion fieldValue plaquette Placement.slot2))
+slotActualFactor background fieldValue plaquette Placement.slot3 selection =
   Named.applySelection selection
     (inverseUnitJet
       (slotUnit background plaquette Placement.slot3)
-      (slotInsertion field plaquette Placement.slot3))
+      (slotInsertion fieldValue plaquette Placement.slot3))
 
 slotFlatFactor :
   Coordinates.PhysicalSU2BondField4 → Physical.Plaquette4 →
   Placement.PlaquetteLinkSlot4 → Named.FactorSelection →
   Q.RationalQuaternion
-slotFlatFactor field plaquette Placement.slot0 selection =
+slotFlatFactor fieldValue plaquette Placement.slot0 selection =
   Named.applySelection selection
-    (positiveUnitJet Q.oneQ (slotInsertion field plaquette Placement.slot0))
-slotFlatFactor field plaquette Placement.slot1 selection =
+    (positiveUnitJet Q.oneQ (slotInsertion fieldValue plaquette Placement.slot0))
+slotFlatFactor fieldValue plaquette Placement.slot1 selection =
   Named.applySelection selection
-    (positiveUnitJet Q.oneQ (slotInsertion field plaquette Placement.slot1))
-slotFlatFactor field plaquette Placement.slot2 selection =
+    (positiveUnitJet Q.oneQ (slotInsertion fieldValue plaquette Placement.slot1))
+slotFlatFactor fieldValue plaquette Placement.slot2 selection =
   Named.applySelection selection
-    (inverseUnitJet Q.oneQ (slotInsertion field plaquette Placement.slot2))
-slotFlatFactor field plaquette Placement.slot3 selection =
+    (inverseUnitJet Q.oneQ (slotInsertion fieldValue plaquette Placement.slot2))
+slotFlatFactor fieldValue plaquette Placement.slot3 selection =
   Named.applySelection selection
-    (inverseUnitJet Q.oneQ (slotInsertion field plaquette Placement.slot3))
+    (inverseUnitJet Q.oneQ (slotInsertion fieldValue plaquette Placement.slot3))
 
 slotSelectedEnvelope :
-  ∀ background field plaquette slot selection →
+  ∀ background fieldValue plaquette slot selection →
   Radius.RelaxedInverseLinkRadius background →
   SelectedFactorEnvelope
-    (slotActualFactor background field plaquette slot selection)
-    (slotFlatFactor field plaquette slot selection)
+    (slotActualFactor background fieldValue plaquette slot selection)
+    (slotFlatFactor fieldValue plaquette slot selection)
     Budget.epsilon
-slotSelectedEnvelope background field (pair site axes)
+slotSelectedEnvelope background fieldValue (pair site axes)
     Placement.slot0 selection radius =
   positiveFactorEnvelope
     (Physical.link background (pair site (Physical.pairLeft axes)))
-    (slotInsertion field (pair site axes) Placement.slot0)
+    (slotInsertion fieldValue (pair site axes) Placement.slot0)
     selection Budget.epsilon
     (positiveLinkUpper background radius
       (pair site (Physical.pairLeft axes)))
-slotSelectedEnvelope background field (pair site axes)
+slotSelectedEnvelope background fieldValue (pair site axes)
     Placement.slot1 selection radius =
   positiveFactorEnvelope
     (Physical.link background
       (pair (Periodic.shiftForward (Physical.pairLeft axes) site)
         (Physical.pairRight axes)))
-    (slotInsertion field (pair site axes) Placement.slot1)
+    (slotInsertion fieldValue (pair site axes) Placement.slot1)
     selection Budget.epsilon
     (positiveLinkUpper background radius
       (pair (Periodic.shiftForward (Physical.pairLeft axes) site)
         (Physical.pairRight axes)))
-slotSelectedEnvelope background field (pair site axes)
+slotSelectedEnvelope background fieldValue (pair site axes)
     Placement.slot2 selection radius =
   inverseFactorEnvelope
     (Physical.link background
       (pair (Periodic.shiftForward (Physical.pairRight axes) site)
         (Physical.pairLeft axes)))
-    (slotInsertion field (pair site axes) Placement.slot2)
+    (slotInsertion fieldValue (pair site axes) Placement.slot2)
     selection Budget.epsilon
     (inverseLinkUpper background radius
       (pair (Periodic.shiftForward (Physical.pairRight axes) site)
         (Physical.pairLeft axes)))
-slotSelectedEnvelope background field (pair site axes)
+slotSelectedEnvelope background fieldValue (pair site axes)
     Placement.slot3 selection radius =
   inverseFactorEnvelope
     (Physical.link background (pair site (Physical.pairRight axes)))
-    (slotInsertion field (pair site axes) Placement.slot3)
+    (slotInsertion fieldValue (pair site axes) Placement.slot3)
     selection Budget.epsilon
     (inverseLinkUpper background radius
       (pair site (Physical.pairRight axes)))
@@ -395,8 +395,8 @@ slotSelectedEnvelope background field (pair site axes)
 slotInsertionNorm :
   Coordinates.PhysicalSU2BondField4 → Physical.Plaquette4 →
   Placement.PlaquetteLinkSlot4 → ℚ
-slotInsertionNorm field plaquette slot =
-  Norm.normSq (slotInsertion field plaquette slot)
+slotInsertionNorm fieldValue plaquette slot =
+  Norm.normSq (slotInsertion fieldValue plaquette slot)
 
 placementWeightProductExact : ∀ placement n0 n1 n2 n3 →
   selectionWeight (Named.selection0 placement) n0
@@ -423,15 +423,15 @@ placementWeightProductExact (Placement.firstFirst Placement.ordered23) n0 n1 n2 
 placementWeightProductExact (Placement.firstFirst Placement.ordered32) n0 n1 n2 n3 = ℚRing.solve-∀ n0 n1 n2 n3
 
 physicalPlacementEnvelope :
-  ∀ background field plaquette placement →
+  ∀ background fieldValue plaquette placement →
   Radius.RelaxedInverseLinkRadius background →
   let
     factors = Partition.physicalPlacementSelectedFactors
-      background field plaquette placement
-    n0 = slotInsertionNorm field plaquette Placement.slot0
-    n1 = slotInsertionNorm field plaquette Placement.slot1
-    n2 = slotInsertionNorm field plaquette Placement.slot2
-    n3 = slotInsertionNorm field plaquette Placement.slot3
+      background fieldValue plaquette placement
+    n0 = slotInsertionNorm fieldValue plaquette Placement.slot0
+    n1 = slotInsertionNorm fieldValue plaquette Placement.slot1
+    n2 = slotInsertionNorm fieldValue plaquette Placement.slot2
+    n3 = slotInsertionNorm fieldValue plaquette Placement.slot3
   in
   Envelope.FourFactorDeepEnvelope
     (Partition.a0 factors) (Partition.a1 factors)
@@ -441,24 +441,24 @@ physicalPlacementEnvelope :
     Budget.epsilon
     (Charges.placementLeftCharge placement n0 n1 n2 n3)
     (Charges.placementRightCharge placement n0 n1 n2 n3)
-physicalPlacementEnvelope background field plaquette placement radius =
+physicalPlacementEnvelope background fieldValue plaquette placement radius =
   let
-    n0 = slotInsertionNorm field plaquette Placement.slot0
-    n1 = slotInsertionNorm field plaquette Placement.slot1
-    n2 = slotInsertionNorm field plaquette Placement.slot2
-    n3 = slotInsertionNorm field plaquette Placement.slot3
-    n0NN = Norm.normSqNonnegative (slotInsertion field plaquette Placement.slot0)
-    n1NN = Norm.normSqNonnegative (slotInsertion field plaquette Placement.slot1)
-    n2NN = Norm.normSqNonnegative (slotInsertion field plaquette Placement.slot2)
-    n3NN = Norm.normSqNonnegative (slotInsertion field plaquette Placement.slot3)
+    n0 = slotInsertionNorm fieldValue plaquette Placement.slot0
+    n1 = slotInsertionNorm fieldValue plaquette Placement.slot1
+    n2 = slotInsertionNorm fieldValue plaquette Placement.slot2
+    n3 = slotInsertionNorm fieldValue plaquette Placement.slot3
+    n0NN = Norm.normSqNonnegative (slotInsertion fieldValue plaquette Placement.slot0)
+    n1NN = Norm.normSqNonnegative (slotInsertion fieldValue plaquette Placement.slot1)
+    n2NN = Norm.normSqNonnegative (slotInsertion fieldValue plaquette Placement.slot2)
+    n3NN = Norm.normSqNonnegative (slotInsertion fieldValue plaquette Placement.slot3)
 
-    e0 = slotSelectedEnvelope background field plaquette Placement.slot0
+    e0 = slotSelectedEnvelope background fieldValue plaquette Placement.slot0
       (Named.selection0 placement) radius
-    e1 = slotSelectedEnvelope background field plaquette Placement.slot1
+    e1 = slotSelectedEnvelope background fieldValue plaquette Placement.slot1
       (Named.selection1 placement) radius
-    e2 = slotSelectedEnvelope background field plaquette Placement.slot2
+    e2 = slotSelectedEnvelope background fieldValue plaquette Placement.slot2
       (Named.selection2 placement) radius
-    e3 = slotSelectedEnvelope background field plaquette Placement.slot3
+    e3 = slotSelectedEnvelope background fieldValue plaquette Placement.slot3
       (Named.selection3 placement) radius
 
     leftNN = Charges.chargeAtNonnegative (Charges.leftSlot placement)

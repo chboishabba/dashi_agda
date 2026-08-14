@@ -24,5 +24,6 @@ jobs:
         with:
           submodules: recursive
       - uses: cachix/install-nix-action@v27
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
       - name: Check concrete SU2, Wilson, CMP109, spectral and weighted P33 math
         run: nix develop --command bash scripts/check_yang_mills_p33_five_local_bounds.sh

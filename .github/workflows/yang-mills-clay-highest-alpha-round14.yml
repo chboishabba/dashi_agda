@@ -33,5 +33,6 @@ jobs:
         with:
           submodules: recursive
       - uses: cachix/install-nix-action@v27
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
       - name: Check inverse-dexp, Wilson budgets, thermodynamic tails and Clay reuse
         run: nix develop --command bash scripts/check_yang_mills_clay_highest_alpha_round14.sh

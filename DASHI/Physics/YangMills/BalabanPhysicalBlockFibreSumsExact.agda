@@ -73,7 +73,10 @@ sumRationalNegate :
   ≡ - sumRational values term
 sumRationalNegate [] term = refl
 sumRationalNegate (value ∷ values) term
-  rewrite sumRationalNegate values term = ℚRing.solve []
+  rewrite sumRationalNegate values term = negatePlus (term value) (sumRational values term)
+  where
+    negatePlus : ∀ a b → - a + - b ≡ - (a + b)
+    negatePlus = ℚRing.solve-∀
 
 scaledDifferenceSumAlgebra : ∀ scale value rest total count →
   (scale * value - total)

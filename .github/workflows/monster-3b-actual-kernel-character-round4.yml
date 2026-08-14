@@ -44,6 +44,7 @@ jobs:
       - name: Install Nix
         uses: cachix/install-nix-action@v31
 
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
       - name: Install GAP, CTblLib, AtlasRep, and Browse
         run: |
           sudo apt-get update

@@ -23,6 +23,7 @@ jobs:
       - uses: cachix/install-nix-action@v31
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
       - name: Check concrete SU2 carrier lane with Agda 2.9
         id: check
         shell: bash

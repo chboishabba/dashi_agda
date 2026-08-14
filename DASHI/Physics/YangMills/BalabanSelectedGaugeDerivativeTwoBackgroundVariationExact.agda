@@ -69,27 +69,27 @@ gaugeDerivativeTwoBackgroundCoordinate :
   Physical.RationalSU2Background4 →
   Coordinates.PhysicalSU2BondField4 →
   Coordinates.LieCoordinate3 → Periodic.Site4 → ℚ
-gaugeDerivativeTwoBackgroundCoordinate left right field coordinate site =
-  Gauge.backgroundGaugeFirst left field (pair coordinate site)
-  - Gauge.backgroundGaugeFirst right field (pair coordinate site)
+gaugeDerivativeTwoBackgroundCoordinate left right bondField coordinate site =
+  Gauge.backgroundGaugeFirst left bondField (pair coordinate site)
+  - Gauge.backgroundGaugeFirst right bondField (pair coordinate site)
 
 gaugeDerivativeTwoBackgroundIsDefectDifference :
-  ∀ left right field coordinate site →
-  gaugeDerivativeTwoBackgroundCoordinate left right field coordinate site
-  ≡ Pointwise.backgroundGaugeDefectCoordinate left field coordinate site
-    - Pointwise.backgroundGaugeDefectCoordinate right field coordinate site
+  ∀ left right bondField coordinate site →
+  gaugeDerivativeTwoBackgroundCoordinate left right bondField coordinate site
+  ≡ Pointwise.backgroundGaugeDefectCoordinate left bondField coordinate site
+    - Pointwise.backgroundGaugeDefectCoordinate right bondField coordinate site
 gaugeDerivativeTwoBackgroundIsDefectDifference
-    left right field coordinate site =
+    left right bondField coordinate site =
   let
     leftExact = Signed.backgroundFirstIsFlatPlusDefect
-      left field coordinate site
+      left bondField coordinate site
     rightExact = Signed.backgroundFirstIsFlatPlusDefect
-      right field coordinate site
-    flat = Gauge.flatGaugeFirstFromAxes field (pair coordinate site)
+      right bondField coordinate site
+    flat = Gauge.flatGaugeFirstFromAxes bondField (pair coordinate site)
     leftDefect = Pointwise.backgroundGaugeDefectCoordinate
-      left field coordinate site
+      left bondField coordinate site
     rightDefect = Pointwise.backgroundGaugeDefectCoordinate
-      right field coordinate site
+      right bondField coordinate site
   in
   trans
     (cong₂ _-_ leftExact rightExact)
@@ -109,36 +109,36 @@ pointwiseTwoBackgroundVariationEnergy :
   Physical.RationalSU2Background4 →
   Physical.RationalSU2Background4 →
   Coordinates.PhysicalSU2BondField4 → Periodic.Site4 → ℚ
-pointwiseTwoBackgroundVariationEnergy left right field site =
+pointwiseTwoBackgroundVariationEnergy left right bondField site =
   let
     dx = gaugeDerivativeTwoBackgroundCoordinate
-      left right field Coordinates.coordinateX site
+      left right bondField Coordinates.coordinateX site
     dy = gaugeDerivativeTwoBackgroundCoordinate
-      left right field Coordinates.coordinateY site
+      left right bondField Coordinates.coordinateY site
     dz = gaugeDerivativeTwoBackgroundCoordinate
-      left right field Coordinates.coordinateZ site
+      left right bondField Coordinates.coordinateZ site
   in
   dx * dx + dy * dy + dz * dz
 
 pointwiseTwoBackgroundVariationUpper :
-  ∀ left right field site →
-  pointwiseTwoBackgroundVariationEnergy left right field site
-  ≤ (+ 2 / 1) * Pointwise.pointwiseGaugeDefectEnergy left field site
-    + (+ 2 / 1) * Pointwise.pointwiseGaugeDefectEnergy right field site
-pointwiseTwoBackgroundVariationUpper left right field site =
+  ∀ left right bondField site →
+  pointwiseTwoBackgroundVariationEnergy left right bondField site
+  ≤ (+ 2 / 1) * Pointwise.pointwiseGaugeDefectEnergy left bondField site
+    + (+ 2 / 1) * Pointwise.pointwiseGaugeDefectEnergy right bondField site
+pointwiseTwoBackgroundVariationUpper left right bondField site =
   let
     lx = Pointwise.backgroundGaugeDefectCoordinate
-      left field Coordinates.coordinateX site
+      left bondField Coordinates.coordinateX site
     ly = Pointwise.backgroundGaugeDefectCoordinate
-      left field Coordinates.coordinateY site
+      left bondField Coordinates.coordinateY site
     lz = Pointwise.backgroundGaugeDefectCoordinate
-      left field Coordinates.coordinateZ site
+      left bondField Coordinates.coordinateZ site
     rx = Pointwise.backgroundGaugeDefectCoordinate
-      right field Coordinates.coordinateX site
+      right bondField Coordinates.coordinateX site
     ry = Pointwise.backgroundGaugeDefectCoordinate
-      right field Coordinates.coordinateY site
+      right bondField Coordinates.coordinateY site
     rz = Pointwise.backgroundGaugeDefectCoordinate
-      right field Coordinates.coordinateZ site
+      right bondField Coordinates.coordinateZ site
 
     bx = squareDifferenceBelowTwoSquares lx rx
     by = squareDifferenceBelowTwoSquares ly ry
@@ -148,27 +148,27 @@ pointwiseTwoBackgroundVariationUpper left right field site =
   subst
     (λ lower →
       lower
-      ≤ (+ 2 / 1) * Pointwise.pointwiseGaugeDefectEnergy left field site
-        + (+ 2 / 1) * Pointwise.pointwiseGaugeDefectEnergy right field site)
+      ≤ (+ 2 / 1) * Pointwise.pointwiseGaugeDefectEnergy left bondField site
+        + (+ 2 / 1) * Pointwise.pointwiseGaugeDefectEnergy right bondField site)
     (sym
       (trans
         (cong₂ _+_
           (cong₂ _*_
             (gaugeDerivativeTwoBackgroundIsDefectDifference
-              left right field Coordinates.coordinateX site)
+              left right bondField Coordinates.coordinateX site)
             (gaugeDerivativeTwoBackgroundIsDefectDifference
-              left right field Coordinates.coordinateX site))
+              left right bondField Coordinates.coordinateX site))
           (cong₂ _+_
             (cong₂ _*_
               (gaugeDerivativeTwoBackgroundIsDefectDifference
-                left right field Coordinates.coordinateY site)
+                left right bondField Coordinates.coordinateY site)
               (gaugeDerivativeTwoBackgroundIsDefectDifference
-                left right field Coordinates.coordinateY site))
+                left right bondField Coordinates.coordinateY site))
             (cong₂ _*_
               (gaugeDerivativeTwoBackgroundIsDefectDifference
-                left right field Coordinates.coordinateZ site)
+                left right bondField Coordinates.coordinateZ site)
               (gaugeDerivativeTwoBackgroundIsDefectDifference
-                left right field Coordinates.coordinateZ site))))
+                left right bondField Coordinates.coordinateZ site))))
         (ℚRing.solve-∀ lx ly lz rx ry rz)))
     (subst
       (λ upper →
@@ -186,40 +186,40 @@ gaugeDerivativeTwoBackgroundVariationEnergy :
   Physical.RationalSU2Background4 →
   Physical.RationalSU2Background4 →
   Coordinates.PhysicalSU2BondField4 → ℚ
-gaugeDerivativeTwoBackgroundVariationEnergy left right field =
-  Periodic.sumSites (pointwiseTwoBackgroundVariationEnergy left right field)
+gaugeDerivativeTwoBackgroundVariationEnergy left right bondField =
+  Periodic.sumSites (pointwiseTwoBackgroundVariationEnergy left right bondField)
 
 gaugeDerivativeTwoBackgroundVariationBelowDefects :
-  ∀ left right field →
-  gaugeDerivativeTwoBackgroundVariationEnergy left right field
-  ≤ (+ 2 / 1) * Global.globalGaugeDerivativeDefectEnergy left field
-    + (+ 2 / 1) * Global.globalGaugeDerivativeDefectEnergy right field
-gaugeDerivativeTwoBackgroundVariationBelowDefects left right field =
+  ∀ left right bondField →
+  gaugeDerivativeTwoBackgroundVariationEnergy left right bondField
+  ≤ (+ 2 / 1) * Global.globalGaugeDerivativeDefectEnergy left bondField
+    + (+ 2 / 1) * Global.globalGaugeDerivativeDefectEnergy right bondField
+gaugeDerivativeTwoBackgroundVariationBelowDefects left right bondField =
   let
     raw = Global.sumSitesMonotone _ _
-      (pointwiseTwoBackgroundVariationUpper left right field)
+      (pointwiseTwoBackgroundVariationUpper left right bondField)
 
     summed :
       Periodic.sumSites
         (λ site →
-          (+ 2 / 1) * Pointwise.pointwiseGaugeDefectEnergy left field site
-          + (+ 2 / 1) * Pointwise.pointwiseGaugeDefectEnergy right field site)
-      ≡ (+ 2 / 1) * Global.globalGaugeDerivativeDefectEnergy left field
-        + (+ 2 / 1) * Global.globalGaugeDerivativeDefectEnergy right field
+          (+ 2 / 1) * Pointwise.pointwiseGaugeDefectEnergy left bondField site
+          + (+ 2 / 1) * Pointwise.pointwiseGaugeDefectEnergy right bondField site)
+      ≡ (+ 2 / 1) * Global.globalGaugeDerivativeDefectEnergy left bondField
+        + (+ 2 / 1) * Global.globalGaugeDerivativeDefectEnergy right bondField
     summed =
       trans
         (Periodic.sumSitesAdd
-          (λ site → (+ 2 / 1) * Pointwise.pointwiseGaugeDefectEnergy left field site)
-          (λ site → (+ 2 / 1) * Pointwise.pointwiseGaugeDefectEnergy right field site))
+          (λ site → (+ 2 / 1) * Pointwise.pointwiseGaugeDefectEnergy left bondField site)
+          (λ site → (+ 2 / 1) * Pointwise.pointwiseGaugeDefectEnergy right bondField site))
         (cong₂ _+_
           (Periodic.sumSitesScale (+ 2 / 1)
-            (Pointwise.pointwiseGaugeDefectEnergy left field))
+            (Pointwise.pointwiseGaugeDefectEnergy left bondField))
           (Periodic.sumSitesScale (+ 2 / 1)
-            (Pointwise.pointwiseGaugeDefectEnergy right field)))
+            (Pointwise.pointwiseGaugeDefectEnergy right bondField)))
   in
   subst
     (λ upper →
-      gaugeDerivativeTwoBackgroundVariationEnergy left right field ≤ upper)
+      gaugeDerivativeTwoBackgroundVariationEnergy left right bondField ≤ upper)
     summed raw
 
 gaugeDerivativeTwoBackgroundSquaredCoefficient : ℚ
@@ -238,21 +238,21 @@ gaugePlusBlockBudgetExact :
 gaugePlusBlockBudgetExact = ℚRing.solve []
 
 selectedGaugeDerivativeTwoBackgroundVariationUpper :
-  ∀ left right field →
+  ∀ left right bondField →
   Relaxed.RelaxedInverseLinkRadius left →
   Relaxed.RelaxedInverseLinkRadius right →
-  gaugeDerivativeTwoBackgroundVariationEnergy left right field
+  gaugeDerivativeTwoBackgroundVariationEnergy left right bondField
   ≤ gaugeDerivativeTwoBackgroundSquaredCoefficient
-      * Coordinates.physicalSU2BondNormSq field
+      * Coordinates.physicalSU2BondNormSq bondField
 selectedGaugeDerivativeTwoBackgroundVariationUpper
-    left right field leftRadius rightRadius =
+    left right bondField leftRadius rightRadius =
   let
-    norm = Coordinates.physicalSU2BondNormSq field
+    norm = Coordinates.physicalSU2BondNormSq bondField
     leftDefect = Global.globalGaugeDerivativeDefectUniformBound
-      left field Relaxed.fourRhoSquare
+      left bondField Relaxed.fourRhoSquare
       (ℚP.nonNegative⁻¹ Relaxed.fourRhoSquare) leftRadius
     rightDefect = Global.globalGaugeDerivativeDefectUniformBound
-      right field Relaxed.fourRhoSquare
+      right bondField Relaxed.fourRhoSquare
       (ℚP.nonNegative⁻¹ Relaxed.fourRhoSquare) rightRadius
 
     scaledLeft = Norm.scaleNonnegative (+ 2 / 1)
@@ -262,7 +262,7 @@ selectedGaugeDerivativeTwoBackgroundVariationUpper
 
     defectSumUpper = ℚP.+-mono-≤ scaledLeft scaledRight
     first = gaugeDerivativeTwoBackgroundVariationBelowDefects
-      left right field
+      left right bondField
     combined = ℚP.≤-trans first defectSumUpper
 
     coefficientExact :
@@ -273,7 +273,7 @@ selectedGaugeDerivativeTwoBackgroundVariationUpper
   in
   subst
     (λ upper →
-      gaugeDerivativeTwoBackgroundVariationEnergy left right field ≤ upper)
+      gaugeDerivativeTwoBackgroundVariationEnergy left right bondField ≤ upper)
     coefficientExact combined
 
 selectedGaugeDerivativeTwoBackgroundSameObjectLevel : ProofLevel

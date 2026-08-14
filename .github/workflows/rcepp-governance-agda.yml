@@ -46,6 +46,7 @@ jobs:
       - name: Run fail-closed governance source audit
         run: python3 scripts/check_rcepp_governance_spine.py
       - uses: cachix/install-nix-action@630ae543ea3a38a9a4166f03376c02c50f408342 # v31
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
       - name: Typecheck coarse mandate fibre
         run: |
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh \

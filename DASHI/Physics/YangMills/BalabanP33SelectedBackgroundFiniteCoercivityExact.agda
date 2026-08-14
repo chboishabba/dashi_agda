@@ -129,33 +129,33 @@ selectedGaugeFirstLower :
 selectedGaugeFirstLower model h radius =
   let
     background = backgroundOf model h
-    field = physicalFieldOf model h
-    residual = GaugeResidual.backgroundGaugeResidual background field
+    fieldValue = physicalFieldOf model h
+    residual = GaugeResidual.backgroundGaugeResidual background fieldValue
 
     secondLower =
       RelaxedGauge.backgroundGaugeResidualSignedLowerSixtyFourRelaxed
-        background field radius
+        background fieldValue radius
 
     firstLower :
       - (((+ 64 / 1) * SignedGauge.rho)
-          * Coordinates.physicalSU2BondNormSq field)
+          * Coordinates.physicalSU2BondNormSq fieldValue)
       ≤ Jets.residualFirstNormSquared residual
-          - Boundary.flatDivergenceEnergy field
+          - Boundary.flatDivergenceEnergy fieldValue
     firstLower =
       subst
         (λ selectedGauge →
           - (((+ 64 / 1) * SignedGauge.rho)
-              * Coordinates.physicalSU2BondNormSq field)
-          ≤ selectedGauge - Boundary.flatDivergenceEnergy field)
+              * Coordinates.physicalSU2BondNormSq fieldValue)
+          ≤ selectedGauge - Boundary.flatDivergenceEnergy fieldValue)
         (Jets.residualSecondVariationAtExactBackground residual
-          (GaugeResidual.backgroundGaugeResidualExact background field))
+          (GaugeResidual.backgroundGaugeResidualExact background fieldValue))
         secondLower
   in
   subst
     (λ coefficient →
-      - (coefficient * Coordinates.physicalSU2BondNormSq field)
+      - (coefficient * Coordinates.physicalSU2BondNormSq fieldValue)
       ≤ Cancel.gaugeFirstEnergy (selectedLiteralSecondVariation model h)
-          - Boundary.flatDivergenceEnergy field)
+          - Boundary.flatDivergenceEnergy fieldValue)
     configuredGaugeCoefficientExact
     firstLower
 
@@ -188,18 +188,18 @@ selectedBackgroundLiteralHessianTerminalCoefficient :
 selectedBackgroundLiteralHessianTerminalCoefficient
     model h radius local =
   let
-    field = physicalFieldOf model h
+    fieldValue = physicalFieldOf model h
     dataSet = selectedLiteralSecondVariation model h
     wilsonLower = selectedWilsonLower model h local
     gaugeLower = selectedGaugeFirstLower model h radius
     sharpCoupled = Boundary.boundaryAssistedSharpLower
-      field dataSet wilsonLower gaugeLower
+      fieldValue dataSet wilsonLower gaugeLower
   in
   Terminal.literalHessianCoerciveAtTerminalCoefficient
-    field dataSet
+    fieldValue dataSet
     (meanZero model h)
     (GaugeResidual.backgroundGaugeResidualExact
-      (backgroundOf model h) field)
+      (backgroundOf model h) fieldValue)
     (constraintExact model h)
     sharpCoupled
 
@@ -217,18 +217,18 @@ selectedBackgroundLiteralHessianOneThirtySecond :
 selectedBackgroundLiteralHessianOneThirtySecond
     model h radius local =
   let
-    field = physicalFieldOf model h
+    fieldValue = physicalFieldOf model h
     dataSet = selectedLiteralSecondVariation model h
     wilsonLower = selectedWilsonLower model h local
     gaugeLower = selectedGaugeFirstLower model h radius
     sharpCoupled = Boundary.boundaryAssistedSharpLower
-      field dataSet wilsonLower gaugeLower
+      fieldValue dataSet wilsonLower gaugeLower
   in
   Terminal.literalHessianCoerciveAtOneThirtySecond
-    field dataSet
+    fieldValue dataSet
     (meanZero model h)
     (GaugeResidual.backgroundGaugeResidualExact
-      (backgroundOf model h) field)
+      (backgroundOf model h) fieldValue)
     (constraintExact model h)
     sharpCoupled
 

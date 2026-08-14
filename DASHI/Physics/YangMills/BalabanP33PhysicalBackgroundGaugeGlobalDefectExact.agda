@@ -101,139 +101,139 @@ periodicSumSitesMatchesCoordinateSum4 : ∀ term →
   Periodic.sumSites term ≡ Partition.coordinateSum4 term
 periodicSumSitesMatchesCoordinateSum4 term = refl
 
-periodicFieldNormSqMatchesGlobal : ∀ field →
-  Periodic.fieldNormSq field ≡ Variance.globalNormSq field
-periodicFieldNormSqMatchesGlobal field =
+periodicFieldNormSqMatchesGlobal : ∀ fieldValue →
+  Periodic.fieldNormSq fieldValue ≡ Variance.globalNormSq fieldValue
+periodicFieldNormSqMatchesGlobal fieldValue =
   trans
     (periodicSumSitesMatchesCoordinateSum4
-      (λ site → field site * field site))
+      (λ site → fieldValue site * fieldValue site))
     (sym
       (Partition.globalSiteSumMatchesCoordinateSum4
-        (λ site → field site * field site)))
+        (λ site → fieldValue site * fieldValue site)))
 
-globalFieldNormSqMatchesPeriodic : ∀ field →
-  Variance.globalNormSq field ≡ Periodic.fieldNormSq field
-globalFieldNormSqMatchesPeriodic field =
-  sym (periodicFieldNormSqMatchesGlobal field)
+globalFieldNormSqMatchesPeriodic : ∀ fieldValue →
+  Variance.globalNormSq fieldValue ≡ Periodic.fieldNormSq fieldValue
+globalFieldNormSqMatchesPeriodic fieldValue =
+  sym (periodicFieldNormSqMatchesGlobal fieldValue)
 
 insertionNormSqPointwiseExact :
-  ∀ field axis site →
-  Norm.normSq (Gauge.insertionQuaternion field axis site)
+  ∀ fieldValue axis site →
+  Norm.normSq (Gauge.insertionQuaternion fieldValue axis site)
   ≡
-    field Coordinates.coordinateX (pair site axis)
-      * field Coordinates.coordinateX (pair site axis)
-    + (field Coordinates.coordinateY (pair site axis)
-      * field Coordinates.coordinateY (pair site axis)
-    + field Coordinates.coordinateZ (pair site axis)
-      * field Coordinates.coordinateZ (pair site axis))
-insertionNormSqPointwiseExact field axis site =
+    fieldValue Coordinates.coordinateX (pair site axis)
+      * fieldValue Coordinates.coordinateX (pair site axis)
+    + (fieldValue Coordinates.coordinateY (pair site axis)
+      * fieldValue Coordinates.coordinateY (pair site axis)
+    + fieldValue Coordinates.coordinateZ (pair site axis)
+      * fieldValue Coordinates.coordinateZ (pair site axis))
+insertionNormSqPointwiseExact fieldValue axis site =
   ℚRing.solve-∀
-    (field Coordinates.coordinateX (pair site axis))
-    (field Coordinates.coordinateY (pair site axis))
-    (field Coordinates.coordinateZ (pair site axis))
+    (fieldValue Coordinates.coordinateX (pair site axis))
+    (fieldValue Coordinates.coordinateY (pair site axis))
+    (fieldValue Coordinates.coordinateZ (pair site axis))
 
 axisInsertionNormSq :
   Coordinates.PhysicalSU2BondField4 → Periodic.Axis4 → ℚ
-axisInsertionNormSq field axis =
+axisInsertionNormSq fieldValue axis =
   Periodic.sumSites
-    (λ site → Norm.normSq (Gauge.insertionQuaternion field axis site))
+    (λ site → Norm.normSq (Gauge.insertionQuaternion fieldValue axis site))
 
-axisInsertionNormSqExact : ∀ field axis →
-  axisInsertionNormSq field axis
+axisInsertionNormSqExact : ∀ fieldValue axis →
+  axisInsertionNormSq fieldValue axis
   ≡ Periodic.fieldNormSq
-      (λ site → field Coordinates.coordinateX (pair site axis))
+      (λ site → fieldValue Coordinates.coordinateX (pair site axis))
     + (Periodic.fieldNormSq
-      (λ site → field Coordinates.coordinateY (pair site axis))
+      (λ site → fieldValue Coordinates.coordinateY (pair site axis))
     + Periodic.fieldNormSq
-      (λ site → field Coordinates.coordinateZ (pair site axis)))
-axisInsertionNormSqExact field axis =
+      (λ site → fieldValue Coordinates.coordinateZ (pair site axis)))
+axisInsertionNormSqExact fieldValue axis =
   trans
     (Periodic.sumSitesCong _ _
-      (insertionNormSqPointwiseExact field axis))
+      (insertionNormSqPointwiseExact fieldValue axis))
     (trans
       (Periodic.sumSitesAdd
         (λ site →
-          field Coordinates.coordinateX (pair site axis)
-          * field Coordinates.coordinateX (pair site axis))
+          fieldValue Coordinates.coordinateX (pair site axis)
+          * fieldValue Coordinates.coordinateX (pair site axis))
         (λ site →
-          field Coordinates.coordinateY (pair site axis)
-            * field Coordinates.coordinateY (pair site axis)
-          + field Coordinates.coordinateZ (pair site axis)
-            * field Coordinates.coordinateZ (pair site axis)))
+          fieldValue Coordinates.coordinateY (pair site axis)
+            * fieldValue Coordinates.coordinateY (pair site axis)
+          + fieldValue Coordinates.coordinateZ (pair site axis)
+            * fieldValue Coordinates.coordinateZ (pair site axis)))
       (cong₂ _+_ refl
         (Periodic.sumSitesAdd
           (λ site →
-            field Coordinates.coordinateY (pair site axis)
-            * field Coordinates.coordinateY (pair site axis))
+            fieldValue Coordinates.coordinateY (pair site axis)
+            * fieldValue Coordinates.coordinateY (pair site axis))
           (λ site →
-            field Coordinates.coordinateZ (pair site axis)
-            * field Coordinates.coordinateZ (pair site axis)))))
+            fieldValue Coordinates.coordinateZ (pair site axis)
+            * fieldValue Coordinates.coordinateZ (pair site axis)))))
 
 coordinatePeriodicBondNormSq :
   Coordinates.PhysicalSU2BondField4 → Coordinates.LieCoordinate3 → ℚ
-coordinatePeriodicBondNormSq field coordinate =
-  Periodic.fieldNormSq (λ site → field coordinate (pair site Periodic.axis0))
-  + (Periodic.fieldNormSq (λ site → field coordinate (pair site Periodic.axis1))
-  + (Periodic.fieldNormSq (λ site → field coordinate (pair site Periodic.axis2))
-  + Periodic.fieldNormSq (λ site → field coordinate (pair site Periodic.axis3))))
+coordinatePeriodicBondNormSq fieldValue coordinate =
+  Periodic.fieldNormSq (λ site → fieldValue coordinate (pair site Periodic.axis0))
+  + (Periodic.fieldNormSq (λ site → fieldValue coordinate (pair site Periodic.axis1))
+  + (Periodic.fieldNormSq (λ site → fieldValue coordinate (pair site Periodic.axis2))
+  + Periodic.fieldNormSq (λ site → fieldValue coordinate (pair site Periodic.axis3))))
 
-coordinateBondNormSqExact : ∀ field coordinate →
-  Hodge.bondNormSq (field coordinate)
-  ≡ coordinatePeriodicBondNormSq field coordinate
-coordinateBondNormSqExact field coordinate
+coordinateBondNormSqExact : ∀ fieldValue coordinate →
+  Hodge.bondNormSq (fieldValue coordinate)
+  ≡ coordinatePeriodicBondNormSq fieldValue coordinate
+coordinateBondNormSqExact fieldValue coordinate
   rewrite globalFieldNormSqMatchesPeriodic
-      (λ site → field coordinate (pair site Periodic.axis0))
+      (λ site → fieldValue coordinate (pair site Periodic.axis0))
         | globalFieldNormSqMatchesPeriodic
-      (λ site → field coordinate (pair site Periodic.axis1))
+      (λ site → fieldValue coordinate (pair site Periodic.axis1))
         | globalFieldNormSqMatchesPeriodic
-      (λ site → field coordinate (pair site Periodic.axis2))
+      (λ site → fieldValue coordinate (pair site Periodic.axis2))
         | globalFieldNormSqMatchesPeriodic
-      (λ site → field coordinate (pair site Periodic.axis3)) =
+      (λ site → fieldValue coordinate (pair site Periodic.axis3)) =
   refl
 
 periodicPhysicalBondNormSq : Coordinates.PhysicalSU2BondField4 → ℚ
-periodicPhysicalBondNormSq field =
-  axisInsertionNormSq field Periodic.axis0
-  + (axisInsertionNormSq field Periodic.axis1
-  + (axisInsertionNormSq field Periodic.axis2
-  + axisInsertionNormSq field Periodic.axis3))
+periodicPhysicalBondNormSq fieldValue =
+  axisInsertionNormSq fieldValue Periodic.axis0
+  + (axisInsertionNormSq fieldValue Periodic.axis1
+  + (axisInsertionNormSq fieldValue Periodic.axis2
+  + axisInsertionNormSq fieldValue Periodic.axis3))
 
-periodicPhysicalBondNormSqExact : ∀ field →
-  periodicPhysicalBondNormSq field
-  ≡ Coordinates.physicalSU2BondNormSq field
-periodicPhysicalBondNormSqExact field
-  rewrite axisInsertionNormSqExact field Periodic.axis0
-        | axisInsertionNormSqExact field Periodic.axis1
-        | axisInsertionNormSqExact field Periodic.axis2
-        | axisInsertionNormSqExact field Periodic.axis3
-        | coordinateBondNormSqExact field Coordinates.coordinateX
-        | coordinateBondNormSqExact field Coordinates.coordinateY
-        | coordinateBondNormSqExact field Coordinates.coordinateZ =
+periodicPhysicalBondNormSqExact : ∀ fieldValue →
+  periodicPhysicalBondNormSq fieldValue
+  ≡ Coordinates.physicalSU2BondNormSq fieldValue
+periodicPhysicalBondNormSqExact fieldValue
+  rewrite axisInsertionNormSqExact fieldValue Periodic.axis0
+        | axisInsertionNormSqExact fieldValue Periodic.axis1
+        | axisInsertionNormSqExact fieldValue Periodic.axis2
+        | axisInsertionNormSqExact fieldValue Periodic.axis3
+        | coordinateBondNormSqExact fieldValue Coordinates.coordinateX
+        | coordinateBondNormSqExact fieldValue Coordinates.coordinateY
+        | coordinateBondNormSqExact fieldValue Coordinates.coordinateZ =
   ℚRing.solve-∀
     (Periodic.fieldNormSq
-      (λ site → field Coordinates.coordinateX (pair site Periodic.axis0)))
+      (λ site → fieldValue Coordinates.coordinateX (pair site Periodic.axis0)))
     (Periodic.fieldNormSq
-      (λ site → field Coordinates.coordinateX (pair site Periodic.axis1)))
+      (λ site → fieldValue Coordinates.coordinateX (pair site Periodic.axis1)))
     (Periodic.fieldNormSq
-      (λ site → field Coordinates.coordinateX (pair site Periodic.axis2)))
+      (λ site → fieldValue Coordinates.coordinateX (pair site Periodic.axis2)))
     (Periodic.fieldNormSq
-      (λ site → field Coordinates.coordinateX (pair site Periodic.axis3)))
+      (λ site → fieldValue Coordinates.coordinateX (pair site Periodic.axis3)))
     (Periodic.fieldNormSq
-      (λ site → field Coordinates.coordinateY (pair site Periodic.axis0)))
+      (λ site → fieldValue Coordinates.coordinateY (pair site Periodic.axis0)))
     (Periodic.fieldNormSq
-      (λ site → field Coordinates.coordinateY (pair site Periodic.axis1)))
+      (λ site → fieldValue Coordinates.coordinateY (pair site Periodic.axis1)))
     (Periodic.fieldNormSq
-      (λ site → field Coordinates.coordinateY (pair site Periodic.axis2)))
+      (λ site → fieldValue Coordinates.coordinateY (pair site Periodic.axis2)))
     (Periodic.fieldNormSq
-      (λ site → field Coordinates.coordinateY (pair site Periodic.axis3)))
+      (λ site → fieldValue Coordinates.coordinateY (pair site Periodic.axis3)))
     (Periodic.fieldNormSq
-      (λ site → field Coordinates.coordinateZ (pair site Periodic.axis0)))
+      (λ site → fieldValue Coordinates.coordinateZ (pair site Periodic.axis0)))
     (Periodic.fieldNormSq
-      (λ site → field Coordinates.coordinateZ (pair site Periodic.axis1)))
+      (λ site → fieldValue Coordinates.coordinateZ (pair site Periodic.axis1)))
     (Periodic.fieldNormSq
-      (λ site → field Coordinates.coordinateZ (pair site Periodic.axis2)))
+      (λ site → fieldValue Coordinates.coordinateZ (pair site Periodic.axis2)))
     (Periodic.fieldNormSq
-      (λ site → field Coordinates.coordinateZ (pair site Periodic.axis3)))
+      (λ site → fieldValue Coordinates.coordinateZ (pair site Periodic.axis3)))
 
 ------------------------------------------------------------------------
 -- Global gauge-derivative defect and uniform inverse-link radius.
@@ -242,40 +242,40 @@ periodicPhysicalBondNormSqExact field
 globalGaugeDerivativeDefectEnergy :
   Physical.RationalSU2Background4 →
   Coordinates.PhysicalSU2BondField4 → ℚ
-globalGaugeDerivativeDefectEnergy background field =
+globalGaugeDerivativeDefectEnergy background fieldValue =
   Periodic.sumSites
-    (Pointwise.pointwiseGaugeDefectEnergy background field)
+    (Pointwise.pointwiseGaugeDefectEnergy background fieldValue)
 
 globalGaugeLinkDefectCharge :
   Physical.RationalSU2Background4 →
   Coordinates.PhysicalSU2BondField4 → ℚ
-globalGaugeLinkDefectCharge background field =
+globalGaugeLinkDefectCharge background fieldValue =
   Periodic.sumSites
-    (Pointwise.pointwiseGaugeLinkDefectCharge background field)
+    (Pointwise.pointwiseGaugeLinkDefectCharge background fieldValue)
 
 globalGaugeDerivativeDefectBelowLinkCharge :
-  ∀ background field →
-  globalGaugeDerivativeDefectEnergy background field
-  ≤ (+ 16 / 1) * globalGaugeLinkDefectCharge background field
-globalGaugeDerivativeDefectBelowLinkCharge background field =
+  ∀ background fieldValue →
+  globalGaugeDerivativeDefectEnergy background fieldValue
+  ≤ (+ 16 / 1) * globalGaugeLinkDefectCharge background fieldValue
+globalGaugeDerivativeDefectBelowLinkCharge background fieldValue =
   let
     raw :
       Periodic.sumSites
-        (Pointwise.pointwiseGaugeDefectEnergy background field)
+        (Pointwise.pointwiseGaugeDefectEnergy background fieldValue)
       ≤ Periodic.sumSites
           (λ site →
             (+ 16 / 1)
             * Pointwise.pointwiseGaugeLinkDefectCharge
-                background field site)
+                background fieldValue site)
     raw =
       sumSitesMonotone _ _
-        (Pointwise.pointwiseGaugeDefectNormSqBound background field)
+        (Pointwise.pointwiseGaugeDefectNormSqBound background fieldValue)
   in
   subst
     (λ upper →
-      globalGaugeDerivativeDefectEnergy background field ≤ upper)
+      globalGaugeDerivativeDefectEnergy background fieldValue ≤ upper)
     (Periodic.sumSitesScale (+ 16 / 1)
-      (Pointwise.pointwiseGaugeLinkDefectCharge background field))
+      (Pointwise.pointwiseGaugeLinkDefectCharge background fieldValue))
     raw
 
 UniformInverseLinkDefectSq :
@@ -287,26 +287,26 @@ UniformInverseLinkDefectSq background delta =
     ≤ delta
 
 axisLinkDefectChargeBelow :
-  ∀ background field delta axis site →
+  ∀ background fieldValue delta axis site →
   0ℚ ≤ delta →
   UniformInverseLinkDefectSq background delta →
-  Pointwise.axisLinkDefectCharge background field axis site
+  Pointwise.axisLinkDefectCharge background fieldValue axis site
   ≤ delta
       * Norm.normSq
-          (Gauge.insertionQuaternion field axis
+          (Gauge.insertionQuaternion fieldValue axis
             (Periodic.shiftBackward axis site))
 axisLinkDefectChargeBelow
-    background field delta axis site deltaNonnegative radius =
+    background fieldValue delta axis site deltaNonnegative radius =
   let
     previousSite = Periodic.shiftBackward axis site
     bond = pair previousSite axis
     insertionNorm =
-      Norm.normSq (Gauge.insertionQuaternion field axis previousSite)
+      Norm.normSq (Gauge.insertionQuaternion fieldValue axis previousSite)
 
     insertionNonnegative : 0ℚ ≤ insertionNorm
     insertionNonnegative =
       Norm.normSqNonnegative
-        (Gauge.insertionQuaternion field axis previousSite)
+        (Gauge.insertionQuaternion fieldValue axis previousSite)
 
     scaled :
       insertionNorm
@@ -337,37 +337,37 @@ axisLinkDefectChargeBelow
 
 previousInsertionNormSq :
   Coordinates.PhysicalSU2BondField4 → Periodic.Site4 → ℚ
-previousInsertionNormSq field site =
+previousInsertionNormSq fieldValue site =
   Norm.normSq
-    (Gauge.insertionQuaternion field Periodic.axis0
+    (Gauge.insertionQuaternion fieldValue Periodic.axis0
       (Periodic.shiftBackward Periodic.axis0 site))
   + (Norm.normSq
-    (Gauge.insertionQuaternion field Periodic.axis1
+    (Gauge.insertionQuaternion fieldValue Periodic.axis1
       (Periodic.shiftBackward Periodic.axis1 site))
   + (Norm.normSq
-    (Gauge.insertionQuaternion field Periodic.axis2
+    (Gauge.insertionQuaternion fieldValue Periodic.axis2
       (Periodic.shiftBackward Periodic.axis2 site))
   + Norm.normSq
-    (Gauge.insertionQuaternion field Periodic.axis3
+    (Gauge.insertionQuaternion fieldValue Periodic.axis3
       (Periodic.shiftBackward Periodic.axis3 site))))
 
 pointwiseGaugeLinkChargeBelowUniform :
-  ∀ background field delta site →
+  ∀ background fieldValue delta site →
   0ℚ ≤ delta →
   UniformInverseLinkDefectSq background delta →
-  Pointwise.pointwiseGaugeLinkDefectCharge background field site
-  ≤ delta * previousInsertionNormSq field site
+  Pointwise.pointwiseGaugeLinkDefectCharge background fieldValue site
+  ≤ delta * previousInsertionNormSq fieldValue site
 pointwiseGaugeLinkChargeBelowUniform
-    background field delta site deltaNonnegative radius =
+    background fieldValue delta site deltaNonnegative radius =
   let
     bound0 = axisLinkDefectChargeBelow
-      background field delta Periodic.axis0 site deltaNonnegative radius
+      background fieldValue delta Periodic.axis0 site deltaNonnegative radius
     bound1 = axisLinkDefectChargeBelow
-      background field delta Periodic.axis1 site deltaNonnegative radius
+      background fieldValue delta Periodic.axis1 site deltaNonnegative radius
     bound2 = axisLinkDefectChargeBelow
-      background field delta Periodic.axis2 site deltaNonnegative radius
+      background fieldValue delta Periodic.axis2 site deltaNonnegative radius
     bound3 = axisLinkDefectChargeBelow
-      background field delta Periodic.axis3 site deltaNonnegative radius
+      background fieldValue delta Periodic.axis3 site deltaNonnegative radius
 
     combined =
       ℚP.+-mono-≤ bound0
@@ -376,40 +376,40 @@ pointwiseGaugeLinkChargeBelowUniform
   in
   subst
     (λ upper →
-      Pointwise.pointwiseGaugeLinkDefectCharge background field site
+      Pointwise.pointwiseGaugeLinkDefectCharge background fieldValue site
       ≤ upper)
     (ℚRing.solve-∀ delta
       (Norm.normSq
-        (Gauge.insertionQuaternion field Periodic.axis0
+        (Gauge.insertionQuaternion fieldValue Periodic.axis0
           (Periodic.shiftBackward Periodic.axis0 site)))
       (Norm.normSq
-        (Gauge.insertionQuaternion field Periodic.axis1
+        (Gauge.insertionQuaternion fieldValue Periodic.axis1
           (Periodic.shiftBackward Periodic.axis1 site)))
       (Norm.normSq
-        (Gauge.insertionQuaternion field Periodic.axis2
+        (Gauge.insertionQuaternion fieldValue Periodic.axis2
           (Periodic.shiftBackward Periodic.axis2 site)))
       (Norm.normSq
-        (Gauge.insertionQuaternion field Periodic.axis3
+        (Gauge.insertionQuaternion fieldValue Periodic.axis3
           (Periodic.shiftBackward Periodic.axis3 site))))
     combined
 
-sumPreviousInsertionNormSqExact : ∀ field →
-  Periodic.sumSites (previousInsertionNormSq field)
-  ≡ periodicPhysicalBondNormSq field
-sumPreviousInsertionNormSqExact field =
+sumPreviousInsertionNormSqExact : ∀ fieldValue →
+  Periodic.sumSites (previousInsertionNormSq fieldValue)
+  ≡ periodicPhysicalBondNormSq fieldValue
+sumPreviousInsertionNormSqExact fieldValue =
   let
     term0 = λ site →
       Norm.normSq
-        (Gauge.insertionQuaternion field Periodic.axis0 site)
+        (Gauge.insertionQuaternion fieldValue Periodic.axis0 site)
     term1 = λ site →
       Norm.normSq
-        (Gauge.insertionQuaternion field Periodic.axis1 site)
+        (Gauge.insertionQuaternion fieldValue Periodic.axis1 site)
     term2 = λ site →
       Norm.normSq
-        (Gauge.insertionQuaternion field Periodic.axis2 site)
+        (Gauge.insertionQuaternion fieldValue Periodic.axis2 site)
     term3 = λ site →
       Norm.normSq
-        (Gauge.insertionQuaternion field Periodic.axis3 site)
+        (Gauge.insertionQuaternion fieldValue Periodic.axis3 site)
   in
   trans
     (Periodic.sumSitesAdd
@@ -437,64 +437,64 @@ sumPreviousInsertionNormSqExact field =
               (Periodic.sumSitesBackwardInvariant term3 Periodic.axis3))))))
 
 globalGaugeLinkChargeBelowUniform :
-  ∀ background field delta →
+  ∀ background fieldValue delta →
   0ℚ ≤ delta →
   UniformInverseLinkDefectSq background delta →
-  globalGaugeLinkDefectCharge background field
-  ≤ delta * Coordinates.physicalSU2BondNormSq field
+  globalGaugeLinkDefectCharge background fieldValue
+  ≤ delta * Coordinates.physicalSU2BondNormSq fieldValue
 globalGaugeLinkChargeBelowUniform
-    background field delta deltaNonnegative radius =
+    background fieldValue delta deltaNonnegative radius =
   let
     raw :
       Periodic.sumSites
-        (Pointwise.pointwiseGaugeLinkDefectCharge background field)
+        (Pointwise.pointwiseGaugeLinkDefectCharge background fieldValue)
       ≤ Periodic.sumSites
-          (λ site → delta * previousInsertionNormSq field site)
+          (λ site → delta * previousInsertionNormSq fieldValue site)
     raw =
       sumSitesMonotone _ _
         (λ site →
           pointwiseGaugeLinkChargeBelowUniform
-            background field delta site deltaNonnegative radius)
+            background fieldValue delta site deltaNonnegative radius)
 
     scaled :
       Periodic.sumSites
-        (λ site → delta * previousInsertionNormSq field site)
-      ≡ delta * periodicPhysicalBondNormSq field
+        (λ site → delta * previousInsertionNormSq fieldValue site)
+      ≡ delta * periodicPhysicalBondNormSq fieldValue
     scaled =
       trans
-        (Periodic.sumSitesScale delta (previousInsertionNormSq field))
-        (cong (delta *_) (sumPreviousInsertionNormSqExact field))
+        (Periodic.sumSitesScale delta (previousInsertionNormSq fieldValue))
+        (cong (delta *_) (sumPreviousInsertionNormSqExact fieldValue))
 
     physicalScaled :
-      delta * periodicPhysicalBondNormSq field
-      ≡ delta * Coordinates.physicalSU2BondNormSq field
+      delta * periodicPhysicalBondNormSq fieldValue
+      ≡ delta * Coordinates.physicalSU2BondNormSq fieldValue
     physicalScaled =
-      cong (delta *_) (periodicPhysicalBondNormSqExact field)
+      cong (delta *_) (periodicPhysicalBondNormSqExact fieldValue)
   in
   subst
     (λ upper →
-      globalGaugeLinkDefectCharge background field ≤ upper)
+      globalGaugeLinkDefectCharge background fieldValue ≤ upper)
     (trans scaled physicalScaled)
     raw
 
 globalGaugeDerivativeDefectUniformBound :
-  ∀ background field delta →
+  ∀ background fieldValue delta →
   0ℚ ≤ delta →
   UniformInverseLinkDefectSq background delta →
-  globalGaugeDerivativeDefectEnergy background field
+  globalGaugeDerivativeDefectEnergy background fieldValue
   ≤ (+ 16 / 1) * delta
-      * Coordinates.physicalSU2BondNormSq field
+      * Coordinates.physicalSU2BondNormSq fieldValue
 globalGaugeDerivativeDefectUniformBound
-    background field delta deltaNonnegative radius =
+    background fieldValue delta deltaNonnegative radius =
   let
-    first = globalGaugeDerivativeDefectBelowLinkCharge background field
+    first = globalGaugeDerivativeDefectBelowLinkCharge background fieldValue
     second = globalGaugeLinkChargeBelowUniform
-      background field delta deltaNonnegative radius
+      background fieldValue delta deltaNonnegative radius
 
     scaledSecond :
-      (+ 16 / 1) * globalGaugeLinkDefectCharge background field
+      (+ 16 / 1) * globalGaugeLinkDefectCharge background fieldValue
       ≤ (+ 16 / 1)
-          * (delta * Coordinates.physicalSU2BondNormSq field)
+          * (delta * Coordinates.physicalSU2BondNormSq fieldValue)
     scaledSecond =
       Norm.scaleNonnegative (+ 16 / 1)
         (ℚP.nonNegative⁻¹ (+ 16 / 1)) second
@@ -503,8 +503,8 @@ globalGaugeDerivativeDefectUniformBound
   in
   subst
     (λ upper →
-      globalGaugeDerivativeDefectEnergy background field ≤ upper)
-    (ℚRing.solve-∀ delta (Coordinates.physicalSU2BondNormSq field))
+      globalGaugeDerivativeDefectEnergy background fieldValue ≤ upper)
+    (ℚRing.solve-∀ delta (Coordinates.physicalSU2BondNormSq fieldValue))
     combined
 
 physicalPeriodicGaugeNormCompatibilityLevel : ProofLevel

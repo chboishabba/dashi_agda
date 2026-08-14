@@ -1413,7 +1413,7 @@ postulate
   Φ-large : (k : Nat) (X : List Nat) → Nat
 
 data LargeField (k : Nat) (X : List Nat) : Set where
-  large-field : LargeField k X
+  large-fieldValue : LargeField k X
 
 postulate
   largeFieldActivity : (k : Nat) (X : List Nat) → Nat
@@ -1540,7 +1540,7 @@ record P08P11AbsorptionPackage (k : Nat) (X : List Nat) : Set₁ where
   field
     p0-pos : 0 < p0-coupling k
     entropy-fac : entropyFactor X
-    large-field-decay : ∀ (C_large : Nat) → largeFieldActivity k X ≤ C_large * (c-large ^ Φ-large k X)
+    large-fieldValue-decay : ∀ (C_large : Nat) → largeFieldActivity k X ≤ C_large * (c-large ^ Φ-large k X)
     constants-close : ∀ (C-entropy C-dec : Nat) → c-large ≥ C-entropy + C-dec
 
 P11AbsorptionFromP08P11Package :
@@ -1549,7 +1549,7 @@ P11AbsorptionFromP08P11Package :
   absorbedActivity k X ≤ targetActivity k X
 P11AbsorptionFromP08P11Package k X C_large pkg =
   P11aAbsorptionInequality k X C_large
-    (P08P11AbsorptionPackage.large-field-decay pkg C_large)
+    (P08P11AbsorptionPackage.large-fieldValue-decay pkg C_large)
     (P08P11AbsorptionPackage.p0-pos pkg)
     (P08P11AbsorptionPackage.entropy-fac pkg)
 
@@ -1655,10 +1655,10 @@ P08P11EntropyFactorFromKPMargin X =
     currentDecorationFactorBound
 
 data P10CanonicalLargeFieldDecay : Set where
-  p10-canonical-large-field-decay : P10CanonicalLargeFieldDecay
+  p10-canonical-large-fieldValue-decay : P10CanonicalLargeFieldDecay
 
 currentP10CanonicalLargeFieldDecay : P10CanonicalLargeFieldDecay
-currentP10CanonicalLargeFieldDecay = p10-canonical-large-field-decay
+currentP10CanonicalLargeFieldDecay = p10-canonical-large-fieldValue-decay
 
 P10DecayMatchesGraphLargeFieldDecay :
   P10CanonicalLargeFieldDecay →
@@ -1666,7 +1666,7 @@ P10DecayMatchesGraphLargeFieldDecay :
   ∀ (C_large : Nat) →
   largeFieldActivity k X ≤ C_large * (c-large ^ Φ-large k X)
 P10DecayMatchesGraphLargeFieldDecay decay k X C_large =
-  P10bLargeFieldActivityBound k X C_large large-field
+  P10bLargeFieldActivityBound k X C_large large-fieldValue
 
 P08P11LargeFieldDecayFromP10 :
   ∀ (k : Nat) (X : List Nat) →
@@ -1682,19 +1682,19 @@ record P08P11LowerLeavesDischarged (k : Nat) (X : List Nat) : Set₁ where
   field
     p0-pos : 0 < p0-coupling k
     entropy-fac : entropyFactor X
-    large-field-decay : ∀ (C_large : Nat) → largeFieldActivity k X ≤ C_large * (c-large ^ Φ-large k X)
+    large-fieldValue-decay : ∀ (C_large : Nat) → largeFieldActivity k X ≤ C_large * (c-large ^ Φ-large k X)
 
 P08P11LowerLeavesDischargedFromOwnedLeaves :
   ∀ {k X} →
   (p0-pos-owned : 0 < p0-coupling k) →
   (entropy-fac-owned : entropyFactor X) →
-  (large-field-decay-owned : ∀ (C_large : Nat) → largeFieldActivity k X ≤ C_large * (c-large ^ Φ-large k X)) →
+  (large-fieldValue-decay-owned : ∀ (C_large : Nat) → largeFieldActivity k X ≤ C_large * (c-large ^ Φ-large k X)) →
   P08P11LowerLeavesDischarged k X
-P08P11LowerLeavesDischargedFromOwnedLeaves p0-pos-owned entropy-fac-owned large-field-decay-owned =
+P08P11LowerLeavesDischargedFromOwnedLeaves p0-pos-owned entropy-fac-owned large-fieldValue-decay-owned =
   record
     { p0-pos = p0-pos-owned
     ; entropy-fac = entropy-fac-owned
-    ; large-field-decay = large-field-decay-owned
+    ; large-fieldValue-decay = large-fieldValue-decay-owned
     }
 
 currentP08P11LowerLeavesDischarged :
@@ -1717,8 +1717,8 @@ P08P11FromLowerLeavesAndConstants k X lowerLeaves constants-close =
         P08P11LowerLeavesDischarged.p0-pos lowerLeaves
     ; entropy-fac =
         P08P11LowerLeavesDischarged.entropy-fac lowerLeaves
-    ; large-field-decay =
-        P08P11LowerLeavesDischarged.large-field-decay lowerLeaves
+    ; large-fieldValue-decay =
+        P08P11LowerLeavesDischarged.large-fieldValue-decay lowerLeaves
     ; constants-close =
         constants-close
     }

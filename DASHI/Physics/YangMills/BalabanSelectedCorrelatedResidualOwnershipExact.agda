@@ -71,12 +71,12 @@ ownerSelector selected actual with sameOwner selected actual
 
 record WilsonConstraintSourceAtom : Set where
   constructor sourceAtom
-  field sourceSubset : Cube.Subset4
+  fieldValue sourceSubset : Cube.Subset4
 open WilsonConstraintSourceAtom public
 
 record RawExtractorConstraintAtom : Set where
   constructor defectAtom
-  field defectSubset : Cube.Subset4
+  fieldValue defectSubset : Cube.Subset4
 open RawExtractorConstraintAtom public
 
 record MultiplierGreenAtomPair : Set where

@@ -28,47 +28,47 @@ open import DASHI.Physics.YangMills.BalabanPath4DirectionalEnergyContractionExac
 ------------------------------------------------------------------------
 
 axisCenteringEdgeDifferenceExact :
-  ∀ field axis transverse predecessor →
-  axisCentering4 field axis
+  ∀ fieldValue axis transverse predecessor →
+  axisCentering4 fieldValue axis
       (insertAxis axis (sucᵢ predecessor) transverse)
-  - axisCentering4 field axis
+  - axisCentering4 fieldValue axis
       (insertAxis axis (weakenIndex predecessor) transverse)
-  ≡ field (insertAxis axis (sucᵢ predecessor) transverse)
-    - field (insertAxis axis (weakenIndex predecessor) transverse)
-axisCenteringEdgeDifferenceExact field axis transverse predecessor
-  rewrite axisCentering4OnFibre field axis transverse (sucᵢ predecessor)
-        | axisCentering4OnFibre field axis transverse (weakenIndex predecessor) =
+  ≡ fieldValue (insertAxis axis (sucᵢ predecessor) transverse)
+    - fieldValue (insertAxis axis (weakenIndex predecessor) transverse)
+axisCenteringEdgeDifferenceExact fieldValue axis transverse predecessor
+  rewrite axisCentering4OnFibre fieldValue axis transverse (sucᵢ predecessor)
+        | axisCentering4OnFibre fieldValue axis transverse (weakenIndex predecessor) =
   ℚRing.solve-∀
 
-axisCenteringFibreEnergyExact : ∀ field axis transverse →
-  physicalFibreEdgeEnergy (axisCentering4 field axis) axis transverse
-  ≡ physicalFibreEdgeEnergy field axis transverse
-axisCenteringFibreEnergyExact field axis transverse =
+axisCenteringFibreEnergyExact : ∀ fieldValue axis transverse →
+  physicalFibreEdgeEnergy (axisCentering4 fieldValue axis) axis transverse
+  ≡ physicalFibreEdgeEnergy fieldValue axis transverse
+axisCenteringFibreEnergyExact fieldValue axis transverse =
   sumRationalCong
     (allCyclicIndices side3)
     (λ predecessor →
       sq
-        (axisCentering4 field axis
+        (axisCentering4 fieldValue axis
           (insertAxis axis (sucᵢ predecessor) transverse)
-        - axisCentering4 field axis
+        - axisCentering4 fieldValue axis
           (insertAxis axis (weakenIndex predecessor) transverse)))
     (λ predecessor →
       sq
-        (field (insertAxis axis (sucᵢ predecessor) transverse)
-        - field (insertAxis axis (weakenIndex predecessor) transverse)))
+        (fieldValue (insertAxis axis (sucᵢ predecessor) transverse)
+        - fieldValue (insertAxis axis (weakenIndex predecessor) transverse)))
     (λ predecessor →
       cong sq (axisCenteringEdgeDifferenceExact
-        field axis transverse predecessor))
+        fieldValue axis transverse predecessor))
 
-axisCenteringDirectionalEnergyExact : ∀ field axis →
-  axisDirectionalEnergy axis (axisCentering4 field axis)
-  ≡ axisDirectionalEnergy axis field
-axisCenteringDirectionalEnergyExact field axis =
+axisCenteringDirectionalEnergyExact : ∀ fieldValue axis →
+  axisDirectionalEnergy axis (axisCentering4 fieldValue axis)
+  ≡ axisDirectionalEnergy axis fieldValue
+axisCenteringDirectionalEnergyExact fieldValue axis =
   sumRationalCong
     (physicalTransverseCoordinates side4)
-    (physicalFibreEdgeEnergy (axisCentering4 field axis) axis)
-    (physicalFibreEdgeEnergy field axis)
-    (axisCenteringFibreEnergyExact field axis)
+    (physicalFibreEdgeEnergy (axisCentering4 fieldValue axis) axis)
+    (physicalFibreEdgeEnergy fieldValue axis)
+    (axisCenteringFibreEnergyExact fieldValue axis)
 
 axis0≢axis1 : zeroᵢ ≢ sucᵢ zeroᵢ
 axis0≢axis1 ()
@@ -88,89 +88,89 @@ axis1≢axis3 ()
 axis2≢axis3 : sucᵢ (sucᵢ zeroᵢ) ≢ sucᵢ (sucᵢ (sucᵢ zeroᵢ))
 axis2≢axis3 ()
 
-martingale0DirectionalEnergyExact : ∀ field →
-  axisDirectionalEnergy zeroᵢ (martingaleField0 field)
-  ≡ axisDirectionalEnergy zeroᵢ field
-martingale0DirectionalEnergyExact field =
-  axisCenteringDirectionalEnergyExact field zeroᵢ
+martingale0DirectionalEnergyExact : ∀ fieldValue →
+  axisDirectionalEnergy zeroᵢ (martingaleField0 fieldValue)
+  ≡ axisDirectionalEnergy zeroᵢ fieldValue
+martingale0DirectionalEnergyExact fieldValue =
+  axisCenteringDirectionalEnergyExact fieldValue zeroᵢ
 
-martingale1DirectionalEnergyBelow : ∀ field →
-  axisDirectionalEnergy (sucᵢ zeroᵢ) (martingaleField1 field)
-  ≤ axisDirectionalEnergy (sucᵢ zeroᵢ) field
-martingale1DirectionalEnergyBelow field =
+martingale1DirectionalEnergyBelow : ∀ fieldValue →
+  axisDirectionalEnergy (sucᵢ zeroᵢ) (martingaleField1 fieldValue)
+  ≤ axisDirectionalEnergy (sucᵢ zeroᵢ) fieldValue
+martingale1DirectionalEnergyBelow fieldValue =
   subst
-    (λ left → left ≤ axisDirectionalEnergy (sucᵢ zeroᵢ) field)
+    (λ left → left ≤ axisDirectionalEnergy (sucᵢ zeroᵢ) fieldValue)
     (sym (axisCenteringDirectionalEnergyExact
-      (average0 field) (sucᵢ zeroᵢ)))
+      (average0 fieldValue) (sucᵢ zeroᵢ)))
     (distinctAxisDirectionalEnergyContraction
-      zeroᵢ (sucᵢ zeroᵢ) field axis0≢axis1)
+      zeroᵢ (sucᵢ zeroᵢ) fieldValue axis0≢axis1)
 
-martingale2DirectionalEnergyBelow : ∀ field →
-  axisDirectionalEnergy (sucᵢ (sucᵢ zeroᵢ)) (martingaleField2 field)
-  ≤ axisDirectionalEnergy (sucᵢ (sucᵢ zeroᵢ)) field
-martingale2DirectionalEnergyBelow field =
+martingale2DirectionalEnergyBelow : ∀ fieldValue →
+  axisDirectionalEnergy (sucᵢ (sucᵢ zeroᵢ)) (martingaleField2 fieldValue)
+  ≤ axisDirectionalEnergy (sucᵢ (sucᵢ zeroᵢ)) fieldValue
+martingale2DirectionalEnergyBelow fieldValue =
   subst
-    (λ left → left ≤ axisDirectionalEnergy (sucᵢ (sucᵢ zeroᵢ)) field)
+    (λ left → left ≤ axisDirectionalEnergy (sucᵢ (sucᵢ zeroᵢ)) fieldValue)
     (sym (axisCenteringDirectionalEnergyExact
-      (average01 field) (sucᵢ (sucᵢ zeroᵢ))))
+      (average01 fieldValue) (sucᵢ (sucᵢ zeroᵢ))))
     (ℚP.≤-trans
       (distinctAxisDirectionalEnergyContraction
         (sucᵢ zeroᵢ) (sucᵢ (sucᵢ zeroᵢ))
-        (average0 field) axis1≢axis2)
+        (average0 fieldValue) axis1≢axis2)
       (distinctAxisDirectionalEnergyContraction
-        zeroᵢ (sucᵢ (sucᵢ zeroᵢ)) field axis0≢axis2))
+        zeroᵢ (sucᵢ (sucᵢ zeroᵢ)) fieldValue axis0≢axis2))
 
-martingale3DirectionalEnergyBelow : ∀ field →
+martingale3DirectionalEnergyBelow : ∀ fieldValue →
   axisDirectionalEnergy (sucᵢ (sucᵢ (sucᵢ zeroᵢ)))
-    (martingaleField3 field)
-  ≤ axisDirectionalEnergy (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) field
-martingale3DirectionalEnergyBelow field =
+    (martingaleField3 fieldValue)
+  ≤ axisDirectionalEnergy (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) fieldValue
+martingale3DirectionalEnergyBelow fieldValue =
   subst
     (λ left →
-      left ≤ axisDirectionalEnergy (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) field)
+      left ≤ axisDirectionalEnergy (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) fieldValue)
     (sym (axisCenteringDirectionalEnergyExact
-      (average012 field) (sucᵢ (sucᵢ (sucᵢ zeroᵢ)))))
+      (average012 fieldValue) (sucᵢ (sucᵢ (sucᵢ zeroᵢ)))))
     (ℚP.≤-trans
       (distinctAxisDirectionalEnergyContraction
         (sucᵢ (sucᵢ zeroᵢ))
         (sucᵢ (sucᵢ (sucᵢ zeroᵢ)))
-        (average01 field) axis2≢axis3)
+        (average01 fieldValue) axis2≢axis3)
       (ℚP.≤-trans
         (distinctAxisDirectionalEnergyContraction
           (sucᵢ zeroᵢ)
           (sucᵢ (sucᵢ (sucᵢ zeroᵢ)))
-          (average0 field) axis1≢axis3)
+          (average0 fieldValue) axis1≢axis3)
         (distinctAxisDirectionalEnergyContraction
           zeroᵢ (sucᵢ (sucᵢ (sucᵢ zeroᵢ)))
-          field axis0≢axis3)))
+          fieldValue axis0≢axis3)))
 
 globalDirectionalEnergy : SiteField side4 → ℚ
-globalDirectionalEnergy field =
-  axisDirectionalEnergy zeroᵢ field
-  + (axisDirectionalEnergy (sucᵢ zeroᵢ) field
-  + (axisDirectionalEnergy (sucᵢ (sucᵢ zeroᵢ)) field
-  + axisDirectionalEnergy (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) field))
+globalDirectionalEnergy fieldValue =
+  axisDirectionalEnergy zeroᵢ fieldValue
+  + (axisDirectionalEnergy (sucᵢ zeroᵢ) fieldValue
+  + (axisDirectionalEnergy (sucᵢ (sucᵢ zeroᵢ)) fieldValue
+  + axisDirectionalEnergy (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) fieldValue))
 
-path4MartingaleDirectionalEnergyContraction : ∀ field →
-  martingaleDirectionalEnergySum field ≤ globalDirectionalEnergy field
-path4MartingaleDirectionalEnergyContraction field =
+path4MartingaleDirectionalEnergyContraction : ∀ fieldValue →
+  martingaleDirectionalEnergySum fieldValue ≤ globalDirectionalEnergy fieldValue
+path4MartingaleDirectionalEnergyContraction fieldValue =
   ℚP.+-mono-≤
     (subst
-      (λ value → value ≤ axisDirectionalEnergy zeroᵢ field)
-      (sym (martingale0DirectionalEnergyExact field))
+      (λ value → value ≤ axisDirectionalEnergy zeroᵢ fieldValue)
+      (sym (martingale0DirectionalEnergyExact fieldValue))
       ℚP.≤-refl)
     (ℚP.+-mono-≤
-      (martingale1DirectionalEnergyBelow field)
+      (martingale1DirectionalEnergyBelow fieldValue)
       (ℚP.+-mono-≤
-        (martingale2DirectionalEnergyBelow field)
-        (martingale3DirectionalEnergyBelow field)))
+        (martingale2DirectionalEnergyBelow fieldValue)
+        (martingale3DirectionalEnergyBelow fieldValue)))
 
-path4GlobalPoincare : ∀ field → GlobalMeanZero4 field →
-  oneSixteenth * globalNormSq field ≤ globalDirectionalEnergy field
-path4GlobalPoincare field meanZero =
+path4GlobalPoincare : ∀ fieldValue → GlobalMeanZero4 fieldValue →
+  oneSixteenth * globalNormSq fieldValue ≤ globalDirectionalEnergy fieldValue
+path4GlobalPoincare fieldValue meanZero =
   ℚP.≤-trans
-    (path4MartingalePoincareBeforeEnergyContraction field meanZero)
-    (path4MartingaleDirectionalEnergyContraction field)
+    (path4MartingalePoincareBeforeEnergyContraction fieldValue meanZero)
+    (path4MartingaleDirectionalEnergyContraction fieldValue)
 
 path4AxisCenteringEnergyIdentityLevel : ProofLevel
 path4AxisCenteringEnergyIdentityLevel = machineChecked

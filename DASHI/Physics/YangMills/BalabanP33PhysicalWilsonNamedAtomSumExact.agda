@@ -65,28 +65,28 @@ physicalPlacementWilsonAtomSum :
   Physical.RationalSU2Background4 →
   Coordinates.PhysicalSU2BondField4 →
   Physical.Plaquette4 → ℚ
-physicalPlacementWilsonAtomSum background field plaquette =
+physicalPlacementWilsonAtomSum background fieldValue plaquette =
   sumMap Placement.plaquetteSecondVariationPlacements4
     (λ placement →
       Telescope.wilsonScalar
         (Named.physicalNamedPlacementAtom
-          background field plaquette placement))
+          background fieldValue plaquette placement))
 
 physicalPlacementWilsonAtomSumIsPlaquetteVariation :
-  ∀ background field plaquette →
-  physicalPlacementWilsonAtomSum background field plaquette
-  ≡ Physical.plaquetteWilsonSecondVariation background field plaquette
+  ∀ background fieldValue plaquette →
+  physicalPlacementWilsonAtomSum background fieldValue plaquette
+  ≡ Physical.plaquetteWilsonSecondVariation background fieldValue plaquette
 physicalPlacementWilsonAtomSumIsPlaquetteVariation
-    background field plaquette =
+    background fieldValue plaquette =
   let
-    factors = Physical.plaquetteFactorJets background field plaquette
+    factors = Physical.plaquetteFactorJets background fieldValue plaquette
 
     atomListExact :
-      Named.physicalPlacementAtoms background field plaquette
+      Named.physicalPlacementAtoms background fieldValue plaquette
       ≡ Q.secondVariationTerms factors
     atomListExact =
       Named.physicalPlacementAtomsMatchGeneratedProductRule
-        background field plaquette
+        background fieldValue plaquette
   in
   trans
     (cong
@@ -98,62 +98,62 @@ physicalPlacementWilsonDefectSum :
   Physical.RationalSU2Background4 →
   Coordinates.PhysicalSU2BondField4 →
   Physical.Plaquette4 → ℚ
-physicalPlacementWilsonDefectSum background field plaquette =
+physicalPlacementWilsonDefectSum background fieldValue plaquette =
   sumMap Placement.plaquetteSecondVariationPlacements4
     (Named.physicalPlacementWilsonScalarDefect
-      background field plaquette)
+      background fieldValue plaquette)
 
 physicalPlacementWilsonDefectSumExact :
-  ∀ background field plaquette →
-  physicalPlacementWilsonDefectSum background field plaquette
-  ≡ Physical.plaquetteWilsonSecondVariation background field plaquette
+  ∀ background fieldValue plaquette →
+  physicalPlacementWilsonDefectSum background fieldValue plaquette
+  ≡ Physical.plaquetteWilsonSecondVariation background fieldValue plaquette
     - Physical.plaquetteWilsonSecondVariation
-        Physical.identityBackground field plaquette
-physicalPlacementWilsonDefectSumExact background field plaquette =
+        Physical.identityBackground fieldValue plaquette
+physicalPlacementWilsonDefectSumExact background fieldValue plaquette =
   trans
     (sumMapDifference
       Placement.plaquetteSecondVariationPlacements4
       (λ placement →
         Telescope.wilsonScalar
           (Named.physicalNamedPlacementAtom
-            background field plaquette placement))
+            background fieldValue plaquette placement))
       (λ placement →
         Telescope.wilsonScalar
           (Named.physicalNamedPlacementAtom
-            Physical.identityBackground field plaquette placement)))
+            Physical.identityBackground fieldValue plaquette placement)))
     (cong₂ _-_
       (physicalPlacementWilsonAtomSumIsPlaquetteVariation
-        background field plaquette)
+        background fieldValue plaquette)
       (physicalPlacementWilsonAtomSumIsPlaquetteVariation
-        Physical.identityBackground field plaquette))
+        Physical.identityBackground fieldValue plaquette))
 
 physicalNamedWilsonDefectSum :
   Physical.RationalSU2Background4 →
   Coordinates.PhysicalSU2BondField4 → ℚ
-physicalNamedWilsonDefectSum background field =
+physicalNamedWilsonDefectSum background fieldValue =
   Sums.sumRational Physical.plaquettes4
-    (physicalPlacementWilsonDefectSum background field)
+    (physicalPlacementWilsonDefectSum background fieldValue)
 
 physicalNamedWilsonDefectSumIsPhysicalDefect :
-  ∀ background field →
-  physicalNamedWilsonDefectSum background field
-  ≡ Physical.physicalWilsonDefect background field
-physicalNamedWilsonDefectSumIsPhysicalDefect background field =
+  ∀ background fieldValue →
+  physicalNamedWilsonDefectSum background fieldValue
+  ≡ Physical.physicalWilsonDefect background fieldValue
+physicalNamedWilsonDefectSumIsPhysicalDefect background fieldValue =
   trans
     (Sums.sumRationalCong
       Physical.plaquettes4
-      (physicalPlacementWilsonDefectSum background field)
+      (physicalPlacementWilsonDefectSum background fieldValue)
       (λ plaquette →
-        Physical.plaquetteWilsonSecondVariation background field plaquette
+        Physical.plaquetteWilsonSecondVariation background fieldValue plaquette
         - Physical.plaquetteWilsonSecondVariation
-            Physical.identityBackground field plaquette)
-      (physicalPlacementWilsonDefectSumExact background field))
+            Physical.identityBackground fieldValue plaquette)
+      (physicalPlacementWilsonDefectSumExact background fieldValue))
     (trans
       (Sums.sumRationalSubtract
         Physical.plaquettes4
-        (Physical.plaquetteWilsonSecondVariation background field)
+        (Physical.plaquetteWilsonSecondVariation background fieldValue)
         (Physical.plaquetteWilsonSecondVariation
-          Physical.identityBackground field))
+          Physical.identityBackground fieldValue))
       refl)
 
 physicalWilsonNamedAtomPlaquetteSumLevel : ProofLevel
