@@ -11,7 +11,7 @@ module DASHI.Crypto.CryptoRepresentationParetoExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Nat.Base using (_≤_; _<_ ; z≤n; s≤s)
+open import Data.Nat.Base using (_≤_; _<_; z≤n; s≤s)
 open import Data.Product using (_×_; _,_)
 
 record RepresentationObjective : Set where
@@ -34,10 +34,6 @@ record WeaklyDominates
     observationNoWorse : observationCost left ≤ observationCost right
 
 open WeaklyDominates public
-
-------------------------------------------------------------------------
--- Wave4 / two-bit regression carried into crypto representation selection.
-------------------------------------------------------------------------
 
 binaryObjective : RepresentationObjective
 binaryObjective = representationObjective 2 4 1 2
@@ -64,11 +60,6 @@ minimumRateDoesNotChooseUniqueGeometry :
   × transitionCost grayObjective ≡ 3
   × transitionCost binaryObjective ≡ 4
 minimumRateDoesNotChooseUniqueGeometry = refl , (refl , refl)
-
-------------------------------------------------------------------------
--- Boundary: a Pareto carrier keeps tradeoffs explicit.  Choosing scalar
--- weights is an application/policy decision, not a theorem of the codec.
-------------------------------------------------------------------------
 
 data ObjectiveSelectionPolicy : Set where
   applicationSuppliedWeightsOrPareto : ObjectiveSelectionPolicy
