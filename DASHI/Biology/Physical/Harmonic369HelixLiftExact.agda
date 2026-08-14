@@ -23,6 +23,12 @@ import DASHI.Biology.SSP369JResolutionBifiltrationExact as Existing
 import DASHI.Cognition.PNF.GrokkingTaskCharacterPhaseExact as Character
 import DASHI.Physics.Closure.SSPPrimeLane369DepthWheelCantorBridge as Wheel
 
+_≢_ : ∀ {A : Set} → A → A → Set
+x ≢ y = x ≡ y → ⊥
+
+zero≢one : 0 ≢ 1
+zero≢one ()
+
 data SignedQuadrature : Set where
   qNegative qZero qPositive : SignedQuadrature
 
@@ -111,14 +117,24 @@ zeroWinding oneWinding : Existing.Triple Nat
 zeroWinding = Existing.triple 0 0 0
 oneWinding = Existing.triple 1 0 0
 
+zeroWinding≢oneWinding : zeroWinding ≢ oneWinding
+zeroWinding≢oneWinding eq = zero≢one (cong Existing.first eq)
+
 samplePhases : PhaseTriple
 samplePhases = Existing.triple Wheel.phase-0 Wheel.phase-1 Wheel.phase-2
 
+sampleHelixZero sampleHelixOne : HelicalNine
+sampleHelixZero = phaseTripleToNine samplePhases zeroWinding
+sampleHelixOne = phaseTripleToNine samplePhases oneWinding
+
 sameCircularProjectionDifferentHistory :
-  nineToSixForgetsWinding (phaseTripleToNine samplePhases zeroWinding)
-  ≡
-  nineToSixForgetsWinding (phaseTripleToNine samplePhases oneWinding)
+  nineToSixForgetsWinding sampleHelixZero
+  ≡ nineToSixForgetsWinding sampleHelixOne
 sameCircularProjectionDifferentHistory = refl
+
+helicalHistoriesRemainDistinct : sampleHelixZero ≢ sampleHelixOne
+helicalHistoriesRemainDistinct eq =
+  zeroWinding≢oneWinding (cong H.third3 eq)
 
 ------------------------------------------------------------------------
 -- The phase composition used by the harmonic lift is the existing C3 task
