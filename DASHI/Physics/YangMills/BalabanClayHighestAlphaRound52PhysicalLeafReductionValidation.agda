@@ -6,7 +6,9 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound52PhysicalLeafReducti
 open import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound51CentreKKTBetaValidation
 
 open import DASHI.Physics.YangMills.BalabanCMP109FederbushQuarterNewtonBudgetExact
+open import DASHI.Physics.YangMills.BalabanCMP109FederbushComponentResidualQuarterNewtonExact
 open import DASHI.Physics.YangMills.BalabanCMP109BishopKarcherFiveFourthSquaredExact
+open import DASHI.Physics.YangMills.BalabanCMP109BishopKarcherFiveFourthMetricExact
 
 open import DASHI.Physics.YangMills.BalabanP33JointSingletonBudgetExact
 open import DASHI.Physics.YangMills.BalabanP33JointCorrelatedResidualExact
