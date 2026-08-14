@@ -18,6 +18,7 @@ FILES=(
   DASHI/Cognition/PNF/OrientedZeroBitMinimalityExact.agda
   DASHI/Cognition/PNF/OrientedZeroCeilLog2Exact.agda
   DASHI/Cognition/PNF/OrientedZeroConditionalResidualCardinalityExact.agda
+  DASHI/Cognition/PNF/OrientedZeroExpectedResidualRateExact.agda
   DASHI/Cognition/PNF/OrientedZeroGrayTransitionGeometryExact.agda
   DASHI/Cognition/PNF/OrientedZeroPhaseOrthogonalityExact.agda
   DASHI/Cognition/PNF/FutureRateDistortionOrientedZeroExact.agda
@@ -57,6 +58,7 @@ grep -q 'scalarPlusOneBitReopensExactly' DASHI/Cognition/PNF/OrientedZeroBitMini
 grep -q 'fourStateCeilLog2IsTwo' DASHI/Cognition/PNF/OrientedZeroCeilLog2Exact.agda
 grep -q 'zeroNeedsOneResidualBit' DASHI/Cognition/PNF/OrientedZeroConditionalResidualCardinalityExact.agda
 grep -q 'adaptiveDecodeEncodeExact' DASHI/Cognition/PNF/OrientedZeroConditionalResidualCardinalityExact.agda
+grep -q 'expectedAdaptiveResidualBitsEqualZeroMass' DASHI/Cognition/PNF/OrientedZeroExpectedResidualRateExact.agda
 grep -q 'grayStrictlyImprovesPathDistortion' DASHI/Cognition/PNF/OrientedZeroGrayTransitionGeometryExact.agda
 grep -q 'grayStrictlyImprovesEqualRateDynamicObjective' DASHI/Cognition/PNF/OrientedZeroGrayTransitionGeometryExact.agda
 grep -q 'orientationAndProcessAdvanceCommute' DASHI/Cognition/PNF/OrientedZeroPhaseOrthogonalityExact.agda
