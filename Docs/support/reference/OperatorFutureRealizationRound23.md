@@ -19,15 +19,7 @@ This separates two obligations that had previously appeared in parallel:
 
 ## `FutureSufficientInvariantSubspaceExact`
 
-A `FutureSufficientInvariantRepresentation` contains
-
-`encode : State -> Latent`,
-
-`step : Action -> State -> State`,
-
-`latentStep : Action -> Latent -> Latent`,
-
-plus consumer observation factorization. The one-step intertwining law
+A `FutureSufficientInvariantRepresentation` contains `encode`, fine `step`, `latentStep`, and consumer observation factorization. The one-step intertwining law
 
 `encode (step a x) = latentStep a (encode x)`
 
@@ -39,9 +31,7 @@ This is an algebraic closure theorem. It does not assume the latent carrier is a
 
 `FourierCommittorOperatorUnificationExact` defines a common `OperatorAdaptedCoordinate` carrier.
 
-The C3 Fourier/character instance satisfies the multiplicative phase normal form: translation by phase one becomes multiplication by `omega` in the cyclotomic carrier.
-
-The chemical committor instance satisfies the harmonic generator equation `L q = 0`.
+The C3 Fourier/character instance satisfies the multiplicative phase normal form: translation by phase one becomes multiplication by `omega` in the cyclotomic carrier. The chemical committor instance satisfies the harmonic generator equation `L q = 0`.
 
 These are deliberately distinct normal forms. The theorem is not that a committor is a Fourier mode; it is that both are privileged observables because the relevant dynamical operator acts on them by a simple closed law.
 
@@ -55,46 +45,31 @@ Sources inherited by the imported owners include:
 
 `SpectralResidualFutureDistortionExact` proves a generic omitted-mode theorem. If consumer distortion is bounded by a residual magnitude and that residual cannot grow under admissible dynamics, then every finite future trace is bounded by the initial residual.
 
-The concrete regression has a transient omitted mode `2 -> 1 -> 0`, yielding a uniform future error bound of 2 after erasure.
-
-This makes “discard a decaying mode” a proof obligation rather than a heuristic: a producer must supply both residual monotonicity and a consumer-error domination law.
+The concrete regression has a transient omitted mode `2 -> 1 -> 0`, yielding a uniform future error bound of 2 after erasure. “Discard a decaying mode” is therefore a proof obligation: a producer must supply both residual monotonicity and a consumer-error domination law.
 
 ## Controlled latent realization
 
 `ControlledFutureSpectralRepresentationExact` gives action-indexed latent dynamics with goal predicates that factor between fine and latent state. It proves finite control traces commute with encoding and that a latent goal-reaching certificate compiles to a fine-state goal-reaching certificate.
 
-This is the bridge from morphogenetic control/basin geometry to reduced operator coordinates. It does not assert controllability or minimum-energy optimality.
+This is the bridge from morphogenetic basin/control geometry to reduced operator coordinates. It does not assert controllability or minimum-energy optimality.
 
 ## Grokking representation selection
 
-`GrokkingInvariantSubspaceSelectionExact` considers the two existing C3 rules:
-
-- the eight-point training memorizer;
-- the structural character rule.
-
-Both fit every declared training example. The structural rule has exact task-action defect 0; the memorizer has defect 2. Therefore zero invariant-action defect uniquely selects the character rule among these candidates.
+`GrokkingInvariantSubspaceSelectionExact` considers the eight-point training memorizer and the structural character rule. Both fit every declared training example. The structural rule has exact task-action defect 0; the memorizer has defect 2. Therefore zero invariant-action defect uniquely selects the character rule among these candidates.
 
 This strengthens “grokking learns Fourier features” into an exact finite model-selection statement: equal interpolation does not determine the representation, while task-action closure separates the generalizing rule.
 
 ## Canonical quotient -> minimal exact dynamical realization
 
-`CanonicalFutureMinimalDynamicalRealizationExact` proves that deterministic future equivalence is a congruence under every admissible action. Given a sectioned presentation of the canonical future classes, every fine action therefore descends to a quotient action.
+`CanonicalFutureMinimalDynamicalRealizationExact` proves that deterministic future equivalence is a congruence under every admissible action. Given a sectioned presentation of the canonical future classes, every fine action therefore descends to a quotient action. The canonical class map commutes with arbitrary finite action traces.
 
-The canonical class map commutes with arbitrary finite action traces.
-
-Minimality is proved in the exact quotient order: every sectioned future-safe representation factors onto the canonical future quotient. Consequently, no exact future-safe representation may merge two distinct canonical future classes.
-
-This is not yet a minimum-Euclidean-dimension theorem.
+Minimality is proved in the exact quotient order: every sectioned future-safe representation factors onto the canonical future quotient. Consequently, no exact future-safe representation may merge two distinct canonical future classes. This is not yet a minimum-Euclidean-dimension theorem.
 
 ## Canonical future observable algebra
 
 `CanonicalFutureObservableAlgebraExact` upgrades the quotient statement from state codes to **all future-invariant observables**.
 
-A fine observable `f : State -> Value` is admitted when canonical future-equivalent states always receive the same value. Given a section of the canonical quotient, every such observable descends to
-
-`f_bar : QuotientCode -> Value`
-
-and factors pointwise as
+A fine observable `f : State -> Value` is admitted when canonical future-equivalent states always receive the same value. Given a section of the canonical quotient, every such observable descends to `f_bar : QuotientCode -> Value` and factors pointwise as
 
 `f(x) = f_bar(classOf x)`.
 
@@ -102,19 +77,37 @@ Conversely, every quotient observable lifts to a future-invariant fine observabl
 
 The module also proves Koopman-like closure: pullback of a future-invariant observable by any admissible deterministic action is future-invariant again. Fine-state pullback agrees pointwise with ordinary precomposition by the induced quotient action.
 
-Thus the canonical quotient is not merely a minimal state partition. It carries exactly the full algebra/family of observables that can depend only on the declared consumer future:
+Thus:
 
 `future-invariant observables on State <-> observables on canonical QuotientCode`.
 
-Linear spans, spectral decompositions and Koopman matrices can now be introduced as coordinate choices on this exact observable algebra rather than as substitutes for semantic future equivalence.
+## Exact rational Koopman realization
+
+`CanonicalFutureKoopmanLinearExact` puts rational linear structure on the quotient-observable family. For an induced quotient action `T_a`, the operator
+
+`K_a f = f o T_a`
+
+is proved pointwise additive and homogeneous, and its lifted fine observable exactly advances the original fine dynamics. Thus the canonical quotient carries an exact linear Koopman pullback before any approximate spectral truncation is attempted.
+
+Source-facing motivation is Steven L. Brunton, Bingni W. Brunton, Joshua L. Proctor and J. Nathan Kutz, *Koopman Invariant Subspaces and Finite Linear Representations of Nonlinear Dynamical Systems for Control*, DOI `10.1371/journal.pone.0150171`. The source motivates finite invariant observable spaces; DASHI's semantic quotient minimality is a separate theorem.
+
+`OrientedZeroKoopmanMatrixExact` supplies the matrix-level regression. The four canonical Wave4 future classes are the four standard basis vectors over `Q`. The state pushforward is
+
+`[a,b,c,d] -> [0,a,b,c+d]`,
+
+while the observable pullback is
+
+`[a,b,c,d] -> [b,c,d,d]`.
+
+Both maps are linear, one-hot state encoding intertwines the wave dynamics exactly, and the exact duality
+
+`<P v , f> = <v , K f>`
+
+is proved. The four indicator basis vectors are also proved coordinatewise independent. This establishes a natural exact four-dimensional full-indicator realization, while explicitly not claiming that arbitrary nonlinear injective embeddings of four points require ambient dimension four.
 
 ## Certified finite compiler
 
-`FutureQuotientInvariantRealizationCompilerExact` composes the existing certified finite partition-refinement compiler with the canonical quotient-dynamics theorem. Its output contains:
-
-- the computed stable depth and rank bound;
-- exact equivalence between the stable refinement and presented canonical classes;
-- the induced minimal quotient dynamics.
+`FutureQuotientInvariantRealizationCompilerExact` composes the existing certified finite partition-refinement compiler with the canonical quotient-dynamics theorem. Its output contains the computed stable depth/rank bound, exact equivalence between stable refinement and presented canonical classes, and the induced minimal quotient dynamics.
 
 `OrientedZeroMinimalDynamicalRealizationExact` is the nontrivial regression. The three-state present scalar observation is refined at depth one to four future classes; the canonical quotient code is exactly the four-state wave carrier, and the quotient step is definitionally the fine wave step. In particular `-0` and `+0` cannot be merged by an exact future-safe realization.
 
