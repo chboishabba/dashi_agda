@@ -8,7 +8,7 @@ module DASHI.Crypto.MLKEMNTTActualCBD2ScalarCollisionExact where
 -- "Module-Lattice-Based Key-Encapsulation Mechanism Standard", FIPS 203,
 -- 2024. DOI: 10.6028/NIST.FIPS.203.
 --
--- For residue i=0, gamma=zeta=17.  The constant part of
+-- For residue i=0, gamma=zeta=17. The constant part of
 --   f mod (X^2-gamma)
 -- receives coefficient f_(2j) with multiplier gamma^j.
 --
@@ -25,11 +25,12 @@ module DASHI.Crypto.MLKEMNTTActualCBD2ScalarCollisionExact where
 -- at source degrees 0,8,12 have exactly the same first constant NTT scalar.
 --
 -- This is an explicit same-object FIPS-constant collision, not a cardinality
--- heuristic.  It proves that one local NTT scalar does not uniquely determine
--- even this three-coefficient CBD2 source slice.  It is not an ML-KEM break:
+-- heuristic. It proves that one local NTT scalar does not uniquely determine
+-- even this three-coefficient CBD2 source slice. It is not an ML-KEM break:
 -- all other NTT/public coordinates remain available to the real verifier.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Data.Empty using (⊥)
@@ -42,18 +43,20 @@ q = 3329
 gamma : Nat
 gamma = 17
 
-pow : Nat → Nat → Nat
-pow base zero = 1
-pow base (suc n) = base * pow base n
+-- Keep intermediate values reduced modulo q so kernel normalization never has
+-- to construct the much larger ordinary integer powers of 17.
+powMod : Nat → Nat
+powMod zero = 1
+powMod (suc n) = (gamma * powMod n) % q
 
 weight0 : Nat
-weight0 = pow gamma 0 % q
+weight0 = powMod 0
 
 weight4 : Nat
-weight4 = pow gamma 4 % q
+weight4 = powMod 4
 
 weight6 : Nat
-weight6 = pow gamma 6 % q
+weight6 = powMod 6
 
 weight0Is1 : weight0 ≡ 1
 weight0Is1 = refl
@@ -65,7 +68,7 @@ weight6Is2319 : weight6 ≡ 2319
 weight6Is2319 = refl
 
 ------------------------------------------------------------------------
--- Centered CBD2 coefficients represented by their canonical residues mod q.
+-- Centered CBD2 coefficients represented by canonical residues modulo q.
 ------------------------------------------------------------------------
 
 minus1 minus2 plus0 plus1 plus2 : Nat
@@ -129,13 +132,17 @@ fipsCBD2FirstScalarCollision =
 record ScalarCollisionBoundary : Set where
   constructor scalarCollisionBoundary
   field
-    oneScalarUniquelyDeterminesCBD2SourceSlice : Set
-    collisionOnlyConcernsOneObservedScalar : Set
+    oneScalarUniquelyDeterminesThisCBD2Slice : Bool
+    oneScalarUniquelyDeterminesThisCBD2SliceIsFalse :
+      oneScalarUniquelyDeterminesThisCBD2Slice ≡ false
+    collisionOnlyConcernsOneObservedScalar : Bool
+    collisionOnlyConcernsOneObservedScalarIsTrue :
+      collisionOnlyConcernsOneObservedScalar ≡ true
+    collisionProvesMLKEMBreak : Bool
+    collisionProvesMLKEMBreakIsFalse : collisionProvesMLKEMBreak ≡ false
 
 open ScalarCollisionBoundary public
 
 scalarCollisionBoundaryWitness : ScalarCollisionBoundary
 scalarCollisionBoundaryWitness =
-  scalarCollisionBoundary
-    (sourceA ≡ sourceB → ⊥)
-    (firstConstantNTTScalar sourceA ≡ firstConstantNTTScalar sourceB)
+  scalarCollisionBoundary false refl true refl false refl
