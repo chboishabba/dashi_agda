@@ -10,16 +10,22 @@ No ML-KEM break or security proof is claimed.
 
 `MLKEMCandidateMoveFanoutExact` turns that dependency around: a one-coefficient source move is potentially visible across `256*k` public-residual scalar coordinates.
 
-`MLKEMLocalityAreaInvariantExact` exposes a new representation-geometry identity. For the two canonical primitive move notions:
+`MLKEMLocalityAreaInvariantExact` exposes the endpoint representation-geometry identity:
 
 - coefficient-local: prior support `1`, public fanout `256*k`;
 - scalar-NTT-local: prior support `128`, public fanout `2*k`.
 
-Hence their structural locality areas are exactly equal:
+Hence both structural locality areas equal `256*k`, namely 512, 768 and 1024 for the approved parameter sets.
 
-`1*(256*k) = 128*(2*k) = 256*k`.
+`MLKEMButterflyStageLocalityInvariantExact` strengthens that result across the entire canonical Algorithm-9 butterfly ladder. At the eight stages, source-support widths are
 
-For the approved parameter sets this area is exactly 512, 768, and 1024. This is not a universal uncertainty theorem, but it is an exact same-parameter manifestation of the prior-locality / verifier-locality tradeoff.
+`1,2,4,8,16,32,64,128`
+
+while remaining same-parity scalar fanouts are
+
+`128,64,32,16,8,4,2,1`.
+
+After the BaseCase `2*k` public-output factor, every stage has the same structural locality area `256*k`. Thus the coefficient/NTT endpoint equality was not an isolated coincidence: it is invariant across every canonical butterfly stage. This is still only a FIPS-network/dataflow theorem; it is not promoted to a universal Fourier uncertainty theorem or runtime lower bound.
 
 Primary source: National Institute of Standards and Technology, *Module-Lattice-Based Key-Encapsulation Mechanism Standard*, FIPS 203 (2024), DOI `10.6028/NIST.FIPS.203`.
 
@@ -39,24 +45,21 @@ The identities need only additive cancellation around the opaque multiplication 
 
 The programme now contains source-faithful finite slices rather than only abstract transforms.
 
-`MLKEMNTTActualCBD2ScalarCollisionExact` uses actual FIPS constants and proves that two distinct CBD2-supported source triples collide on the first constant NTT scalar. The multipliers at source degrees 0, 8 and 12 are `1`, `296`, and `2319`, and both
-
-`(-1,-1,+1)`
-
-and
-
-`(+2,0,-2)`
-
-map to scalar value `2022`.
+`MLKEMNTTActualCBD2ScalarCollisionExact` uses actual FIPS constants and proves that two distinct CBD2-supported source triples collide on the first constant NTT scalar. The multipliers at source degrees 0, 8 and 12 are `1`, `296`, and `2319`, and both `(-1,-1,+1)` and `(+2,0,-2)` map to scalar value `2022`.
 
 `MLKEMNTTActualCBD2SliceCouplingExact` independently shows a two-coefficient FIPS-constant slice whose transported joint support is non-Cartesian.
 
-`MLKEMNTTActualCBD2TwoScalarRefinementExact` advances the collision to a genuine conditional-list calculation. For residue `i=2`, `gamma_2 = 17^65 = 2761 (mod 3329)` and the relevant weights are `1`, `296`, `1010`. The two old colliding sources map to 713 and 1311 respectively. Thus on this exact two-point CBD2 slice:
+`MLKEMNTTActualCBD2TwoScalarRefinementExact` advances the collision to a conditional-list calculation. For residue `i=2`, `gamma_2 = 17^65 = 2761 (mod 3329)` and the relevant weights are `1`, `296`, `1010`. The two old colliding sources map to 713 and 1311 respectively. Thus on that exact two-point slice the list shrinks `2 -> 1` after adding the second real scalar.
 
-- first scalar only: candidate list size 2;
-- first plus second scalar: candidate list size 1.
+`MLKEMNTTActualCBD2FullTripleListProfileExact` now exhausts the complete `5^3 = 125` CBD2 triple carrier at those same source degrees. It computes all unordered candidate pairs definitionally and proves:
 
-This is local conditional-list geometry, not global ML-KEM key recovery.
+- candidate count: 125;
+- collision pairs under the first actual scalar: exactly 16;
+- collision pairs under the joint `(scalar0, scalar2)` observation: exactly 0.
+
+So the earlier two-point example is part of a stronger finite fact: on this entire three-coefficient CBD2 slice, the second actual FIPS scalar resolves every collision left by the first.
+
+`MLKEMNTTActualCBD2ConditionalListMassExact` converts the collision counts into uniform finite conditional-list mass. For a finite observation partition, total list mass is `N + 2P`, where `P` is the unordered collision-pair count. Hence the first-scalar slice has total list mass `125 + 2*16 = 157`, while the two-scalar slice has `125`. Under the uniform finite prior this gives mean list-size data `157/125 -> 125/125`. This is exact finite list accounting, not Shannon/min-entropy and not full-scheme recovery complexity.
 
 ## List-decoding language
 
@@ -64,7 +67,7 @@ This is local conditional-list geometry, not global ML-KEM key recovery.
 
 `L(t,tau) = {s' : Score(t-A*s') <= tau}`.
 
-The exact score vector is `2,0,0,2`; therefore thresholds 0 and 1 give list size 2, while threshold 2 gives list size 4. Unique-decoding, small-list, and full-list regimes are kept separate from the later question of recovery work.
+The exact score vector is `2,0,0,2`; thresholds 0 and 1 give list size 2, while threshold 2 gives list size 4. Unique-decoding, small-list, and full-list regimes are kept separate from recovery work.
 
 ## Search transition geometry and mixed-radix Gray traversal
 
@@ -72,12 +75,12 @@ The exact score vector is `2,0,0,2`; therefore thresholds 0 and 1 give list size
 
 `GrayPathTransitionOptimalExact` and `SearchGraphEmbeddingDistortionExact` separate equal-rate encodings by transition geometry. `FiniteMLWETransitionGeometryExact` and `IncrementalResidualTraversalExact` carry that distinction into the finite MLWE lab.
 
-`CBD2MixedRadixGrayTraversalExact` now uses the real five-value CBD2 coefficient alphabet. For a two-coefficient 5x5 carrier with 25 states:
+`CBD2MixedRadixGrayTraversalExact` uses the real five-value CBD2 coefficient alphabet. For a two-coefficient 5x5 carrier with 25 states:
 
-- ordinary row-major traversal has Manhattan transition cost 40;
-- boustrophedon / mixed-radix Gray traversal has cost 24.
+- row-major traversal cost: 40;
+- boustrophedon / mixed-radix Gray traversal cost: 24.
 
-The candidate set is identical; only the traversal geometry changes. This is the finite precursor to incrementally maintaining `r(s)=t-A*s` while enumerating an unchanged exponential search space.
+The candidate set is identical; only traversal geometry changes. This is the finite precursor to incrementally maintaining `r(s)=t-A*s` while enumerating an unchanged exponential search space.
 
 ## Observation value and separator geometry
 
@@ -110,14 +113,13 @@ The resulting hierarchy is deliberately strict:
 
 ## Frontier after this tranche
 
-The shortest remaining mathematical targets are now concrete rather than architectural:
+The shortest remaining mathematical targets are now narrower again:
 
-1. enlarge the source-faithful CBD2 slices and compute conditional survivor/list-size profiles under increasing sets of actual FIPS NTT/public coordinates;
-2. determine whether those conditional lists admit low-cost mate reconstruction or bounded-separator reconciliation despite the connected dataflow graph;
-3. lift the finite locality-area identity toward a genuine support-spreading/no-simultaneous-locality theorem, without calling it a universal uncertainty principle until proved;
-4. generalize mixed-radix Gray incremental residual traversal from two coefficients to larger CBD blocks and compare exact verifier-update work across coefficient and NTT representations;
-5. measure any real protocol/implementation observation by the induced change in optimal protected-label recovery geometry after acquisition cost;
-6. move to probabilistic min-entropy / game-advantage semantics only once the finite conditional-list and cost carriers are stable.
+1. grow the exhaustive source-faithful carrier beyond three CBD2 coefficients and measure how rapidly additional actual FIPS coordinates collapse conditional list mass;
+2. derive conditional mate/separator complexity for those larger lists rather than stopping at list size;
+3. determine whether the all-stage `256*k` locality invariant extends to any broader class of invertible stage-local representations, or fails outside the canonical FIPS butterfly network;
+4. generalize mixed-radix Gray incremental traversal to larger CBD blocks and compare exact residual-update work with list-pruning gains;
+5. value real implementation/protocol observations by their change to optimal protected-label recovery geometry after acquisition cost.
 
 The working thesis is now:
 
