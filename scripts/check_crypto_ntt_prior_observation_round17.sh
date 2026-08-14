@@ -15,6 +15,7 @@ FILES=(
   DASHI/Crypto/ObservationAcquisitionCostExact.agda
   DASHI/Crypto/KeyConfirmationObservationRefinementExact.agda
   DASHI/Crypto/MLKEMImplicitRejectProtocolObservationExact.agda
+  DASHI/Crypto/MLKEMImplicitRejectTimingCompositionExact.agda
   DASHI/Crypto/FiniteMLWEConfirmationObservationExact.agda
   DASHI/Crypto/BlueTeamSearchObservationRound17.agda
   DASHI/EverythingTerminalisationProvenanceSymmetryRound10.agda
@@ -29,6 +30,7 @@ for f in "${FILES[@]}"; do
 done
 
 grep -q 'algorithm9StageCount' DASHI/Crypto/MLKEMNTTDataflowCouplingExact.agda
+grep -q 'zeroIndex128' DASHI/Crypto/MLKEMNTTDataflowCouplingExact.agda
 grep -q 'sevenStageScalarDependencyWidth' DASHI/Crypto/MLKEMNTTDataflowCouplingExact.agda
 grep -q 'quadraticCoordinateSeesWholePolynomial' DASHI/Crypto/MLKEMNTTDataflowCouplingExact.agda
 grep -q 'mlKem1024QuadraticSourceWidth' DASHI/Crypto/MLKEMNTTDataflowCouplingExact.agda
@@ -42,7 +44,11 @@ grep -q 'expensiveLabObservationIsNetHarmful' DASHI/Crypto/ObservationAcquisitio
 grep -q 'confirmationSplitGivesHiddenDependentObservation' DASHI/Crypto/KeyConfirmationObservationRefinementExact.agda
 grep -q 'afterConfirmationCount' DASHI/Crypto/KeyConfirmationObservationRefinementExact.agda
 grep -q 'opaqueInternalRouteDifference' DASHI/Crypto/MLKEMImplicitRejectProtocolObservationExact.agda
+grep -q 'opaqueInternalDifferenceCannotBecomeObservableSplit' DASHI/Crypto/MLKEMImplicitRejectProtocolObservationExact.agda
 grep -q 'directRouteLeakIsHiddenDependent' DASHI/Crypto/MLKEMImplicitRejectProtocolObservationExact.agda
+grep -q 'routeTimingIsHiddenDependent' DASHI/Crypto/MLKEMImplicitRejectTimingCompositionExact.agda
+grep -q 'constantRouteHasNoTimingSplit' DASHI/Crypto/MLKEMImplicitRejectTimingCompositionExact.agda
+grep -q '10.1007/3-540-68697-5_9' DASHI/Crypto/MLKEMImplicitRejectTimingCompositionExact.agda
 grep -q 'labConfirmationIsHiddenDependent' DASHI/Crypto/FiniteMLWEConfirmationObservationExact.agda
 grep -q 'labConfirmationCost2NetGain' DASHI/Crypto/FiniteMLWEConfirmationObservationExact.agda
 grep -q 'labConfirmationCost6IsHarmful' DASHI/Crypto/FiniteMLWEConfirmationObservationExact.agda
