@@ -4,6 +4,12 @@ module DASHI.Biology.Physical.DevelopmentalHiddenStateFutureDefectExact where
 -- A concrete PNF regression for physical development:
 -- equal present morphology does not imply equal developmental future when a
 -- hidden regulatory/bioelectric coordinate differs.
+--
+-- Historical API note: DASHI.Core.DynamicalQuotientSafety calls its bare
+-- future-divergence witness `TerminalisationDefect`.  This module uses that
+-- existing carrier only to prove dynamic quotient unsafety.  It does NOT prove
+-- the stronger `UnreopenableDynamicCollapse` condition and therefore does not
+-- promote the witness to unreopenable/terminalising loss.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
