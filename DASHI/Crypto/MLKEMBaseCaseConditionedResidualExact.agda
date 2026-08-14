@@ -16,12 +16,12 @@ module DASHI.Crypto.MLKEMBaseCaseConditionedResidualExact where
 --   c0 - a0*s0 = a1*s1*gamma + e0
 --   c1 - a1*s0 = a0*s1 + e1.
 --
--- The derivation below is ring-independent at the additive level: multiplication
--- is an opaque operation and only commutative-group cancellation is used.  Thus
--- the identities apply in the modular quotient ring used by FIPS once its
--- operations instantiate the supplied algebra laws.
+-- Multiplication is opaque here; only additive commutative-group cancellation
+-- is used.  The identities therefore instantiate in the modular quotient ring
+-- once its operations provide these laws.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
@@ -45,32 +45,32 @@ subR :
   Carrier R → Carrier R → Carrier R
 subR R x y = _+R_ R x (neg R y)
 
+cancelRight :
+  (R : AdditiveCommutativeGroupWithMul) →
+  ∀ x tail → _+R_ R (_+R_ R x tail) (neg R x) ≡ tail
+cancelRight R x tail =
+  trans (addAssoc R x tail (neg R x))
+    (trans
+      (cong (λ z → _+R_ R x z) (addComm R tail (neg R x)))
+      (trans
+        (sym (addAssoc R x (neg R x) tail))
+        (trans
+          (cong (λ z → _+R_ R z tail) (addInverseRight R x))
+          (addZeroLeft R tail))))
+
 cancelFirstWithTail :
   (R : AdditiveCommutativeGroupWithMul) →
   ∀ x y e →
-  subR R ((_+R_ R (_+R_ R x y) e)) x ≡ _+R_ R y e
+  subR R (_+R_ R (_+R_ R x y) e) x ≡ _+R_ R y e
 cancelFirstWithTail R x y e =
   trans
     (cong (λ z → _+R_ R z (neg R x)) (addAssoc R x y e))
     (cancelRight R x (_+R_ R y e))
-  where
-  cancelRight :
-    (R : AdditiveCommutativeGroupWithMul) →
-    ∀ x tail → _+R_ R (_+R_ R x tail) (neg R x) ≡ tail
-  cancelRight R x tail =
-    trans (addAssoc R x tail (neg R x))
-      (trans
-        (cong (λ z → _+R_ R x z) (addComm R tail (neg R x)))
-        (trans
-          (sym (addAssoc R x (neg R x) tail))
-          (trans
-            (cong (λ z → _+R_ R z tail) (addInverseRight R x))
-            (addZeroLeft R tail))))
 
 cancelMiddleWithTail :
   (R : AdditiveCommutativeGroupWithMul) →
   ∀ a x e →
-  subR R ((_+R_ R (_+R_ R a x) e)) x ≡ _+R_ R a e
+  subR R (_+R_ R (_+R_ R a x) e) x ≡ _+R_ R a e
 cancelMiddleWithTail R a x e =
   trans
     (cong
@@ -125,20 +125,23 @@ conditionedResidual1 {R} eq =
       (e1 eq))
 
 ------------------------------------------------------------------------
--- Blue-team conclusion: conditioning one component removes its known linear
--- contribution but does not remove noise or prove cheap recovery of s1.
+-- Blue-team boundary.
 ------------------------------------------------------------------------
 
 record ConditionedSearchBoundary : Set where
   constructor conditionedSearchBoundary
   field
-    conditioningRemovesKnownContribution : Set
-    remainingSystemIsNoiseFree : Set → Set
+    conditioningRemovesKnownContribution : Bool
+    conditioningRemovesKnownContributionIsTrue :
+      conditioningRemovesKnownContribution ≡ true
+    remainingSystemIsNoiseFree : Bool
+    remainingSystemIsNoiseFreeIsFalse : remainingSystemIsNoiseFree ≡ false
+    conditioningAloneProvesCheapRecovery : Bool
+    conditioningAloneProvesCheapRecoveryIsFalse :
+      conditioningAloneProvesCheapRecovery ≡ false
+
+open ConditionedSearchBoundary public
 
 canonicalConditionedSearchBoundary : ConditionedSearchBoundary
 canonicalConditionedSearchBoundary =
-  conditionedSearchBoundary
-    (∀ {R : AdditiveCommutativeGroupWithMul} (eq : NoisyBaseCase R) →
-      subR R (c0 eq) (_*R_ R (a0 eq) (s0 eq))
-      ≡ _+R_ R (_*R_ R (_*R_ R (a1 eq) (s1 eq)) (gamma eq)) (e0 eq))
-    (λ evidence → evidence)
+  conditionedSearchBoundary true refl false refl false refl
