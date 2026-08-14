@@ -44,16 +44,9 @@ record NormalizedFiniteFibreLaw : Set where
 open NormalizedFiniteFibreLaw public
 
 ------------------------------------------------------------------------
--- If every fibre uses the same rate r, expectation recovers r after
--- normalization.  The theorem is finite and exact over rationals.
+-- Constant-rate specialization over an arbitrary finite probability list.
 ------------------------------------------------------------------------
 
-setRate : ℚ → FibreRateAtom → FibreRateAtom
-setRate r atom = fibreRateAtom
-  (mass atom) r (massNonnegative atom) (localRateNonnegative atom)
-
--- Rather than requiring an order proof for arbitrary replacement rates, use a
--- separate mass-only carrier for the constant-rate theorem.
 record ProbabilityAtom : Set where
   constructor probabilityAtom
   field
@@ -81,8 +74,8 @@ normalizedConstantRateIsRate :
   (r : ℚ) (atoms : List ProbabilityAtom) →
   probabilityTotal atoms ≡ 1ℚ →
   constantRateExpectation r atoms ≡ r
-normalizedConstantRateIsRate r atoms normalized
-  rewrite constantRateFactors r atoms | normalized = solve-∀
+normalizedConstantRateIsRate r atoms normalizedMass
+  rewrite constantRateFactors r atoms | normalizedMass = solve-∀
 
 ------------------------------------------------------------------------
 -- Fibre-local sparsity: a zero-rate fibre contributes exactly zero regardless
@@ -94,8 +87,8 @@ zeroRateContribution p = solve-∀
 
 ------------------------------------------------------------------------
 -- Three-fibre specialization.  This strictly generalizes the signed-zero
--- 0/1/0 calculation: any law with local rates r-, r0, r+ has expectation
--- p- r- + p0 r0 + p+ r+.
+-- 0/1/0 calculation: any normalized coarse law may carry arbitrary local
+-- rates, and the oriented-zero widths recover exactly the zero-fibre mass.
 ------------------------------------------------------------------------
 
 record ThreeFibreRateLaw : Set where
@@ -113,29 +106,14 @@ expectedThreeFibreRate law =
   + zeroMass law * zeroRate law
   + positiveMass law * positiveRate law
 
-orientedZeroRateIdentity :
-  (negativeMass zeroMass positiveMass : ℚ) →
-  expectedThreeFibreRate
-    (threeFibreRateLaw
-      negativeMass zeroMass positiveMass
-      0ℚ 1ℚ 0ℚ
-      solve-∀)
-  ≡ zeroMass
-orientedZeroRateIdentity negativeMass zeroMass positiveMass = solve-∀
-
-------------------------------------------------------------------------
--- The preceding constructor requires normalization, so its fully generic
--- variables cannot inhabit it.  The proof-facing normalized form follows.
-------------------------------------------------------------------------
-
 orientedZeroNormalizedExpectedRate :
   (negativeMass zeroMass positiveMass : ℚ) →
-  negativeMass + zeroMass + positiveMass ≡ 1ℚ →
+  (norm : negativeMass + zeroMass + positiveMass ≡ 1ℚ) →
   expectedThreeFibreRate
     (threeFibreRateLaw
       negativeMass zeroMass positiveMass
       0ℚ 1ℚ 0ℚ
-      _) ≡ zeroMass
+      norm) ≡ zeroMass
 orientedZeroNormalizedExpectedRate negativeMass zeroMass positiveMass norm = solve-∀
 
 ------------------------------------------------------------------------
