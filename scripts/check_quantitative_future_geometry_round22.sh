@@ -19,6 +19,8 @@ FILES=(
   DASHI/Biology/Physical/FiniteMorphogeneticBasinControlExact.agda
   DASHI/Biology/Physical/PlanarianControlCalibrationExact.agda
   DASHI/Biology/Physical/BDNACalibratedHelicalGeometryExact.agda
+  DASHI/Geometry/RigidMotionSemidirectProductExact.agda
+  DASHI/Biology/Physical/BDNAStepSE3CompositionExact.agda
   DASHI/Biology/Physical/C3CubeCyclotomicFourierExact.agda
   DASHI/Biology/Physical/C3CubeCyclotomicParsevalExact.agda
   DASHI/Biology/Physical/C3DirectGroupConvolutionExact.agda
@@ -26,6 +28,7 @@ FILES=(
   DASHI/Biology/Physical/Harmonic369HelixLiftExact.agda
   DASHI/Cognition/PNF/TaskActionRepresentationGeometryExact.agda
   DASHI/Cognition/PNF/CyclotomicGrokkingActionLinearizationExact.agda
+  DASHI/Cognition/PNF/GrokkingEquivarianceDefectGeometryExact.agda
   DASHI/Cognition/PNF/FinitePathTransitionOptimalityExact.agda
   DASHI/Cognition/PNF/WaveGrayLocalGlobalGeometryExact.agda
   DASHI/Cognition/PNF/FutureGeometryEmbeddingExact.agda
@@ -34,6 +37,7 @@ FILES=(
   DASHI/Cognition/PNF/DynamicMultimodalTransitionGeometryExact.agda
   DASHI/Cognition/PNF/CacheUpdateReopenGeometryExact.agda
   DASHI/Cognition/PNF/StableProbabilisticObservationFutureBridgeExact.agda
+  DASHI/Cognition/PNF/RationalMarkovLumpingFutureExact.agda
   DASHI/Foundations/CantorFiniteClopenPremeasureExact.agda
   DASHI/EverythingQuantitativeFutureGeometryRound22.agda
 )
@@ -54,7 +58,7 @@ grep -q 'committorGeneratorHarmonic' DASHI/Biology/Physical/FiniteChemicalMaster
 grep -q 'multiplicativeFluctuationRelation' DASHI/Biology/Physical/FiniteFluctuationRelationExact.agda
 grep -q 'sameTargetLawDoesNotDetermineHistory' DASHI/Biology/Physical/CommittorConsumerFutureStatisticExact.agda
 
-# Electrodiffusion / active energy / basin calibration.
+# Electrodiffusion / active energy / basin calibration / rigid DNA frames.
 grep -q 'transportConservesAmount' DASHI/Biology/Physical/FiniteElectrodiffusiveMovingBoundaryExact.agda
 grep -q 'passiveDissipationLowersStoredEnergy' DASHI/Biology/Physical/FiniteElectrodiffusiveMovingBoundaryExact.agda
 grep -q 'passiveElectrodiffusionStrictlyDissipates' DASHI/Biology/Physical/FinitePNPFreeEnergyDissipationExact.agda
@@ -62,6 +66,9 @@ grep -q 'strongPulseIsOneStepCostOptimal' DASHI/Biology/Physical/FiniteMorphogen
 grep -q 'parameterSweepSuccessfulCount' DASHI/Biology/Physical/PlanarianControlCalibrationExact.agda
 grep -q 'idealRiseTimesTurnIsPitch' DASHI/Biology/Physical/BDNACalibratedHelicalGeometryExact.agda
 grep -q 'idealTwistTimesTurnIsFullRotation' DASHI/Biology/Physical/BDNACalibratedHelicalGeometryExact.agda
+grep -q 'canonicalRigidMotionGroupLaws' DASHI/Geometry/RigidMotionSemidirectProductExact.agda
+grep -q 'threeFrameReassociation' DASHI/Biology/Physical/BDNAStepSE3CompositionExact.agda
+grep -q 'singleStepIsRealizedDinucleotide' DASHI/Biology/Physical/BDNAStepSE3CompositionExact.agda
 
 # Exact cyclotomic Fourier closure.
 grep -q 'cubeCharacterOrthogonality' DASHI/Biology/Physical/C3CubeCyclotomicFourierExact.agda
@@ -78,6 +85,9 @@ grep -q 'sameCircularProjectionDifferentHistory' DASHI/Biology/Physical/Harmonic
 grep -q 'c3ActionBecomesCyclotomicMultiplication' DASHI/Cognition/PNF/TaskActionRepresentationGeometryExact.agda
 grep -q 'algorithmicPairLinearises' DASHI/Cognition/PNF/CyclotomicGrokkingActionLinearizationExact.agda
 grep -q 'heldOutCyclotomicFactorization' DASHI/Cognition/PNF/CyclotomicGrokkingActionLinearizationExact.agda
+grep -q 'algorithmicEquivarianceDefectIsZero' DASHI/Cognition/PNF/GrokkingEquivarianceDefectGeometryExact.agda
+grep -q 'memorizerEquivarianceDefectIsTwo' DASHI/Cognition/PNF/GrokkingEquivarianceDefectGeometryExact.agda
+grep -q 'characterGeometryStrictlyImprovesTaskActionDefect' DASHI/Cognition/PNF/GrokkingEquivarianceDefectGeometryExact.agda
 grep -q 'unitDistancePathIsOptimal' DASHI/Cognition/PNF/FinitePathTransitionOptimalityExact.agda
 grep -q 'waveLocalGlobalSeparation' DASHI/Cognition/PNF/WaveGrayLocalGlobalGeometryExact.agda
 grep -q 'composeLipschitz' DASHI/Cognition/PNF/FutureGeometryEmbeddingExact.agda
@@ -91,6 +101,8 @@ grep -q 'crossModalUpdateGeometryBound' DASHI/Cognition/PNF/DynamicMultimodalTra
 grep -q 'localDeltaOperationallyBetter' DASHI/Cognition/PNF/CacheUpdateReopenGeometryExact.agda
 grep -q 'stableProbabilisticPairIsFutureEquivalent' DASHI/Cognition/PNF/StableProbabilisticObservationFutureBridgeExact.agda
 grep -q 'stableProbabilityPartitionIsFutureSafe' DASHI/Cognition/PNF/StableProbabilisticObservationFutureBridgeExact.agda
+grep -q 'oneStepMarkovLumping' DASHI/Cognition/PNF/RationalMarkovLumpingFutureExact.agda
+grep -q 'allFiniteHorizonsRemainCoarseFactored' DASHI/Cognition/PNF/RationalMarkovLumpingFutureExact.agda
 
 # Cantor finite clopen algebra/premeasure.
 grep -q 'clopenMassComplement' DASHI/Foundations/CantorFiniteClopenPremeasureExact.agda
@@ -104,9 +116,12 @@ grep -q '10.1113/jphysiol.1952.sp004764' DASHI/Biology/Physical/FiniteElectrodif
 grep -q '10.1098/rstb.1952.0012' DASHI/Biology/Physical/FiniteElectrodiffusiveMovingBoundaryExact.agda
 grep -q '10.1089/bioe.2021.0036' DASHI/Biology/Physical/PlanarianControlCalibrationExact.agda
 grep -q '10.1006/jmbi.2001.4987' DASHI/Biology/Physical/BDNACalibratedHelicalGeometryExact.agda
+grep -q '10.1006/jmbi.2001.4987' DASHI/Biology/Physical/BDNAStepSE3CompositionExact.agda
 grep -q '10.1093/nar/gkw133' DASHI/Biology/Physical/BDNACalibratedHelicalGeometryExact.agda
 grep -q 'arXiv:2301.05217' DASHI/Cognition/PNF/CyclotomicGrokkingActionLinearizationExact.agda
 grep -q 'arXiv:2301.02679' DASHI/Cognition/PNF/CyclotomicGrokkingActionLinearizationExact.agda
+grep -q 'arXiv:2301.05217' DASHI/Cognition/PNF/GrokkingEquivarianceDefectGeometryExact.agda
+grep -q 'arXiv:2301.02679' DASHI/Cognition/PNF/GrokkingEquivarianceDefectGeometryExact.agda
 
 if command -v agda >/dev/null 2>&1; then
   agda -i . -i src DASHI/EverythingQuantitativeFutureGeometryRound22.agda
