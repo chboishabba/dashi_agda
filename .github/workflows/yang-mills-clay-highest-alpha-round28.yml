@@ -2,9 +2,7 @@ name: Yang Mills highest alpha round 28 uniformity routes
 
 on:
   push:
-    branches:
-      - 'agent/ym-clay-uniformity-routes-round28'
-      - 'agent/ym-clay-alpha-round29-unified-gates-countermodels'
+    branches: [master]
     paths:
       - 'DASHI/Physics/Common/**'
       - 'DASHI/Physics/YangMills/**'
@@ -19,6 +17,11 @@ on:
       - 'scripts/check_yang_mills_clay_highest_alpha_round28.sh'
       - '.github/workflows/yang-mills-clay-highest-alpha-round28.yml'
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

@@ -2,7 +2,7 @@ name: SSP15 indexed weave modular round 4
 
 on:
   push:
-    branches: ['agent/ssp15-indexed-weave-modular-fibration-round4']
+    branches: [master]
   pull_request:
     branches:
       - 'agent/ssp15-j-coarse-fine-round3'
@@ -33,6 +33,11 @@ on:
       - 'Docs/support/reference/SSP15IndexedWeaveModularRound4.md'
       - '.github/workflows/ssp15-indexed-weave-modular-round4.yml'
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

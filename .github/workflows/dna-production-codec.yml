@@ -11,7 +11,7 @@ on:
   workflow_dispatch:
 
 concurrency:
-  group: dna-production-${{ github.event.pull_request.number || github.ref }}
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
   cancel-in-progress: true
 
 jobs:

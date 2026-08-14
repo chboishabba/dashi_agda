@@ -2,8 +2,7 @@ name: Balaban source inventory
 
 on:
   push:
-    branches:
-      - codex/balaban-nested-constraint-minimum
+    branches: [master]
   pull_request:
     paths:
       - '.github/workflows/balaban-source-inventory.yml'
@@ -14,7 +13,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: balaban-source-inventory-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
   cancel-in-progress: true
 
 jobs:

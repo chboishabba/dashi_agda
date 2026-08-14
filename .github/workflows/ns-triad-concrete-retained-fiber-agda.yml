@@ -2,8 +2,7 @@ name: NS triad physical frontier Agda
 
 on:
   push:
-    branches:
-      - 'agent/ns-triad-scale-compatibility-closure'
+    branches: [master]
     paths:
       - 'DASHI/Physics/Closure/NSTriadKN*.agda'
       - 'scripts/ns_triad_signed_frontier_lab.py'
@@ -24,6 +23,11 @@ on:
       - 'flake.lock'
       - '.github/workflows/ns-triad-concrete-retained-fiber-agda.yml'
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

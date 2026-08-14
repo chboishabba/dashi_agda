@@ -2,8 +2,7 @@ name: Conscious access round 7 harmonic wreath carrier
 
 on:
   push:
-    branches:
-      - 'agent/conscious-access-round7-harmonic-wreath-carrier'
+    branches: [master]
     paths:
       - 'DASHI/Biology/**'
       - 'DASHI/Physics/Common/**'
@@ -16,6 +15,11 @@ on:
       - 'scripts/check_conscious_access_round7_harmonic_wreath_carrier.sh'
       - '.github/workflows/conscious-access-round7-harmonic-wreath-carrier.yml'
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

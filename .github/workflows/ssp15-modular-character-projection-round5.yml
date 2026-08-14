@@ -2,7 +2,7 @@ name: SSP15 modular character projection round 5
 
 on:
   push:
-    branches: ['agent/ssp15-modular-character-projection-round5']
+    branches: [master]
   pull_request:
     branches:
       - 'agent/ssp15-modular-character-projection-round5'
@@ -22,6 +22,11 @@ on:
       - 'Docs/support/reference/SSP15ModularCharacterProjectionRound5.md'
       - '.github/workflows/ssp15-modular-character-projection-round5.yml'
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

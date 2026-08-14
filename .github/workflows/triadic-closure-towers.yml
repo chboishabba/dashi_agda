@@ -2,6 +2,7 @@ name: Triadic closure tower Agda check
 
 on:
   push:
+    branches: [master]
     paths:
       - 'DASHI/Core/TriadicClosureTower.agda'
       - 'DASHI/Core/TriadicClosureTowerTests.agda'
@@ -15,7 +16,7 @@ on:
       - '.github/workflows/triadic-closure-towers.yml'
 
 concurrency:
-  group: triadic-closure-towers-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
   cancel-in-progress: true
 
 permissions:

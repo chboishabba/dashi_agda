@@ -2,6 +2,7 @@ name: Nested modular tensor lift Agda check
 
 on:
   push:
+    branches: [master]
     paths:
       - 'DASHI/Foundations/NestedModularTensorLift.agda'
       - 'DASHI/Foundations/NestedModularTensorLiftTests.agda'
@@ -15,7 +16,7 @@ on:
       - '.github/workflows/nested-modular-tensor-lift.yml'
 
 concurrency:
-  group: nested-modular-tensor-lift-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
   cancel-in-progress: true
 
 permissions:

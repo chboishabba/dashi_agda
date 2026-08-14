@@ -2,8 +2,7 @@ name: Yang-Mills Clay highest-alpha round 19
 
 on:
   push:
-    branches:
-      - 'agent/ym-clay-alpha-round19-combes-thomas'
+    branches: [master]
   pull_request:
     paths:
       - 'DASHI/Physics/YangMills/BalabanP33FiniteCombesThomasConjugationExact.agda'
@@ -17,6 +16,11 @@ on:
       - 'scripts/check_yang_mills_clay_highest_alpha_round19.sh'
       - '.github/workflows/yang-mills-clay-highest-alpha-round19.yml'
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

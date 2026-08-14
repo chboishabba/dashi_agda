@@ -2,8 +2,7 @@ name: Yang-Mills Clay highest-alpha round 15
 
 on:
   push:
-    branches:
-      - 'agent/ym-clay-alpha-round15-physical-gap-audit'
+    branches: [master]
     paths:
       - 'DASHI/Physics/YangMills/BalabanClayLowerBoundCountermodelExact.agda'
       - 'DASHI/Physics/YangMills/BalabanClayTransferGapDefectTelescopingExact.agda'
@@ -48,6 +47,11 @@ on:
       - 'scripts/check_yang_mills_clay_highest_alpha_round15.sh'
       - '.github/workflows/yang-mills-clay-highest-alpha-round15.yml'
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

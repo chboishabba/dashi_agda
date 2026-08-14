@@ -2,8 +2,7 @@ name: Yang-Mills Clay cross-pollination round 25
 
 on:
   push:
-    branches:
-      - 'agent/ym-clay-cross-pollination-round25'
+    branches: [master]
     paths:
       - 'DASHI/Physics/Common/**'
       - 'DASHI/Physics/YangMills/**'
@@ -20,6 +19,11 @@ on:
       - 'scripts/run_agda29_parallel_check.sh'
       - '.github/workflows/yang-mills-clay-cross-pollination-round25.yml'
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

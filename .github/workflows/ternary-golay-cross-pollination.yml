@@ -2,8 +2,7 @@ name: Ternary Golay cross-pollination
 
 on:
   push:
-    branches:
-      - agent/ubp-epistemic-lattice-boundary
+    branches: [master]
     paths:
       - 'DASHI/Foundations/TernaryGolay/**'
       - 'DASHI/Foundations/UBP/ExternalRepositoryProvenance.agda'
@@ -32,6 +31,11 @@ on:
       - 'scripts/check_explicit_ternary_golay.py'
       - '.github/workflows/ternary-golay-cross-pollination.yml'
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   audit-and-agda:

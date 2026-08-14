@@ -13,6 +13,11 @@ on:
       - "DASHI/Analysis/WeightedValuationVonMangoldtBoundary.agda"
       - ".github/workflows/zeta-agda-check.yml"
 
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   zeta-agda:
     runs-on: ubuntu-24.04

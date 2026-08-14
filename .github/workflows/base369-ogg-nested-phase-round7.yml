@@ -2,7 +2,7 @@ name: Base369 Ogg nested phase round 7
 
 on:
   push:
-    branches: ['agent/monster-3b-central-character-inertia-round5']
+    branches: [master]
   pull_request:
     branches:
       - 'master'
@@ -24,6 +24,11 @@ on:
       - 'scripts/check_base369_ogg_nested_phase_round7.sh'
       - '.github/workflows/base369-ogg-nested-phase-round7.yml'
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

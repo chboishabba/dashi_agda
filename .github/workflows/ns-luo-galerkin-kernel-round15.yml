@@ -2,8 +2,7 @@ name: NS Luo Galerkin kernel round 15
 
 on:
   push:
-    branches:
-      - 'agent/ns-luo-galerkin-kernel-round15'
+    branches: [master]
     paths:
       - 'DASHI/Physics/Closure/**'
       - 'scripts/check_ns_luo_galerkin_kernel_round15.sh'
@@ -18,6 +17,11 @@ on:
       - 'scripts/run_agda29_parallel_check.sh'
       - '.github/workflows/ns-luo-galerkin-kernel-round15.yml'
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

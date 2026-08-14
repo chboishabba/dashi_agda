@@ -2,10 +2,14 @@ name: Yang-Mills Clay highest-alpha round 37
 
 on:
   push:
-    branches:
-      - 'agent/ym-clay-alpha-round37-projector-residual-crosslane'
+    branches: [master]
   pull_request:
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

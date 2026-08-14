@@ -2,6 +2,7 @@ name: RSA 15SSP fibre admissibility
 
 on:
   push:
+    branches: [master]
     paths:
       - 'scripts/rsa_ssp_fibre_separation_benchmark.py'
       - 'scripts/tests/test_rsa_ssp_fibre_separation.py'
@@ -21,7 +22,7 @@ on:
       - '.github/workflows/rsa-ssp-fibre-admissibility.yml'
 
 concurrency:
-  group: rsa-15ssp-fibre-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
   cancel-in-progress: true
 
 permissions:

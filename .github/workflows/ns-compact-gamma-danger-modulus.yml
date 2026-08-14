@@ -2,6 +2,7 @@ name: NS compact Gamma danger expenditure modulus
 
 on:
   push:
+    branches: [master]
     paths:
       - 'scripts/ns_compact_gamma_danger_expenditure_modulus_audit.py'
       - 'scripts/ns_compact_gamma_retained_danger_modulus_audit.py'
@@ -23,7 +24,7 @@ on:
       - '.github/workflows/ns-compact-gamma-danger-modulus.yml'
 
 concurrency:
-  group: ns-compact-gamma-danger-modulus-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
   cancel-in-progress: true
 
 permissions:

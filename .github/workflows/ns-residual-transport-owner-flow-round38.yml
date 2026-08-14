@@ -9,6 +9,11 @@ on:
       - '.github/workflows/ns-residual-transport-owner-flow-round38.yml'
   workflow_dispatch:
 
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   agda-round38:
     runs-on: ubuntu-latest

@@ -2,8 +2,7 @@ name: NS Luo claimed-paper corpus round 24
 
 on:
   push:
-    branches:
-      - 'agent/ns-luo-claim-corpus-highest-alpha-round24'
+    branches: [master]
     paths:
       - 'DASHI/Physics/Closure/**'
       - 'DASHI/Papers/NavierStokes/**'
@@ -27,6 +26,11 @@ on:
       - 'scripts/run_agda29_parallel_check.sh'
       - '.github/workflows/ns-luo-claim-corpus-highest-alpha-round24.yml'
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

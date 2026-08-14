@@ -2,8 +2,7 @@ name: Millennium substantive cross-pollination
 
 on:
   push:
-    branches:
-      - 'agent/millennium-crosspollination-rh-hodge-bsd-pnp-poincare-voa'
+    branches: [master]
     paths:
       - 'DASHI/Analysis/RiemannMaassMoonshineCrossPollinationExact.agda'
       - 'DASHI/Moonshine/TrivialRationalGradedVertexAlgebraExact.agda'
@@ -40,6 +39,11 @@ on:
       - 'scripts/check_millennium_substantive_crosspollination.sh'
       - '.github/workflows/millennium-substantive-crosspollination.yml'
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

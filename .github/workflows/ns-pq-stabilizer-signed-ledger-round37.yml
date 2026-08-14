@@ -9,6 +9,11 @@ on:
       - '.github/workflows/ns-pq-stabilizer-signed-ledger-round37.yml'
   workflow_dispatch:
 
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   agda-round37:
     runs-on: ubuntu-latest

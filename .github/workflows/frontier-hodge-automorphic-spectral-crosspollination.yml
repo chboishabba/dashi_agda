@@ -2,8 +2,7 @@ name: Frontier Hodge automorphic spectral cross-pollination
 
 on:
   push:
-    branches:
-      - 'agent/frontier-hodge-automorphic-spectral-crosspollination'
+    branches: [master]
     paths:
       - 'DASHI/Mathematics/Topology/FiniteCochainComplexExact.agda'
       - 'DASHI/Mathematics/LinearAlgebra/**'
@@ -54,6 +53,11 @@ on:
       - 'scripts/check_frontier_hodge_automorphic_spectral_crosspollination.sh'
       - '.github/workflows/frontier-hodge-automorphic-spectral-crosspollination.yml'
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

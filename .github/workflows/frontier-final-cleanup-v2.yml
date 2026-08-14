@@ -8,6 +8,11 @@ on:
       - '.github/workflows/frontier-final-cleanup-v2.yml'
   workflow_dispatch:
 
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
 permissions:
   contents: write
 

@@ -2,6 +2,7 @@ name: Biology recovery tower Agda check
 
 on:
   push:
+    branches: [master]
     paths:
       - 'DASHI/Biology/**/*.agda'
       - 'DASHI/Physics/Laws/**/*.agda'
@@ -15,7 +16,7 @@ on:
       - '.github/workflows/biology-recovery-tower.yml'
 
 concurrency:
-  group: biology-recovery-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
   cancel-in-progress: true
 
 permissions:

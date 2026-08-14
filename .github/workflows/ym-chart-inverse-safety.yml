@@ -9,8 +9,7 @@ on:
       - 'scripts/check_ym_chart_inverse_safety.py'
       - '.github/workflows/ym-chart-inverse-safety.yml'
   push:
-    branches:
-      - 'agent/ym-periodic-physical-closure'
+    branches: [master]
     paths:
       - 'DASHI/Physics/YangMills/BalabanRestrictedFluctuationCoordinateBijection.agda'
       - 'DASHI/Physics/YangMills/BalabanFiniteConstrainedInverseApplicability.agda'
@@ -18,6 +17,11 @@ on:
       - 'scripts/check_ym_chart_inverse_safety.py'
       - '.github/workflows/ym-chart-inverse-safety.yml'
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

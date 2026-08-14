@@ -2,6 +2,7 @@ name: Dashifine multiscale agent Agda check
 
 on:
   push:
+    branches: [master]
     paths:
       - 'DASHI/Control/DashifineMultiscaleAgent.agda'
       - 'DASHI/Control/DashifineMultiscaleAgentTests.agda'
@@ -15,7 +16,7 @@ on:
       - '.github/workflows/dashifine-multiscale-agent.yml'
 
 concurrency:
-  group: dashifine-multiscale-agent-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
   cancel-in-progress: true
 
 permissions:

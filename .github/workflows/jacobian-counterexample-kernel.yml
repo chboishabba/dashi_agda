@@ -2,6 +2,7 @@ name: Jacobian counterexample kernel
 
 on:
   push:
+    branches: [master]
     paths:
       - "Verification/JacobianCounterexampleKernel.agda"
       - "Verification/JacobianCounterexampleScalarExtension.agda"
@@ -37,6 +38,11 @@ on:
       - "scripts/check_jacobian_noninjective_example.py"
       - "Docs/support/reference/AlpogeJacobianCounterexampleImpact.md"
       - ".github/workflows/jacobian-counterexample-kernel.yml"
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   exact-and-kernel:

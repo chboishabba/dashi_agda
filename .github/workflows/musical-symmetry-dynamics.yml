@@ -2,6 +2,7 @@ name: Musical symmetry dynamics
 
 on:
   push:
+    branches: [master]
     paths:
       - 'DASHI/Music/**'
       - 'scripts/musical_symmetry_basin_diagnostic.py'
@@ -15,6 +16,11 @@ on:
       - 'scripts/tests/test_musical_symmetry_basin_diagnostic.py'
       - 'docs/musical_symmetry_dynamics.md'
       - '.github/workflows/musical-symmetry-dynamics.yml'
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

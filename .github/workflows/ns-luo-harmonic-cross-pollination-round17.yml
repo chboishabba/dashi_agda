@@ -2,10 +2,14 @@ name: NS Luo harmonic cross-pollination round 17
 
 on:
   push:
-    branches:
-      - 'agent/ns-luo-harmonic-cross-pollination-round17'
+    branches: [master]
   pull_request:
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

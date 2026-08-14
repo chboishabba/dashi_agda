@@ -2,8 +2,7 @@ name: unification-round5
 
 on:
   push:
-    branches:
-      - 'agent/unification-round5-constants-dimension-matter-cosmology'
+    branches: [master]
   pull_request:
     paths:
       - 'DASHI/Physics/Foundations/**'
@@ -17,6 +16,11 @@ on:
       - 'scripts/check_unification_round5.sh'
       - '.github/workflows/unification-round5.yml'
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

@@ -2,6 +2,7 @@ name: Exceptional Mathieu and real-backend frontier
 
 on:
   push:
+    branches: [master]
     paths:
       - 'DASHI/Foundations/FiniteLinear/**'
       - 'DASHI/Foundations/TernaryGolay/**'
@@ -26,6 +27,11 @@ on:
       - 'scripts/check_exceptional_mathieu_frontier.py'
       - '.github/workflows/exceptional-mathieu-frontier.yml'
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   exceptional-frontier:

@@ -9,6 +9,11 @@ on:
       - '.github/workflows/dna-concrete-codec.yml'
   workflow_dispatch:
 
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   agda:
     runs-on: ubuntu-latest

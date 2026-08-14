@@ -27,6 +27,7 @@ on:
       - 'docs/scientific_operator_crossreferences.md'
       - '.github/workflows/scientific-operator-crossreferences.yml'
   push:
+    branches: [master]
     paths:
       - 'DASHI/Analysis/FiniteOperatorReductionCore.agda'
       - 'DASHI/Analysis/StoichiometricConservation.agda'
@@ -52,7 +53,7 @@ on:
       - '.github/workflows/scientific-operator-crossreferences.yml'
 
 concurrency:
-  group: scientific-operator-crossreferences-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
   cancel-in-progress: true
 
 permissions:

@@ -13,6 +13,11 @@ on:
       - 'agent/ym-clay-alpha-round42-master-reconciled-floor-recovery'
   workflow_dispatch:
 
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
 permissions:
   contents: read
 

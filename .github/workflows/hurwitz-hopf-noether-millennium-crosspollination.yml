@@ -2,8 +2,7 @@ name: Hurwitz Hopf Noether Millennium cross-pollination
 
 on:
   push:
-    branches:
-      - 'agent/hurwitz-hopf-noether-millennium-crosspollination'
+    branches: [master]
     paths:
       - 'DASHI/EverythingHurwitzHopfNoetherCrossPollination.agda'
       - 'DASHI/Mathematics/Algebra/**'
@@ -32,6 +31,11 @@ on:
       - 'scripts/check_hurwitz_hopf_noether_millennium_crosspollination.sh'
       - '.github/workflows/hurwitz-hopf-noether-millennium-crosspollination.yml'
   workflow_dispatch:
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

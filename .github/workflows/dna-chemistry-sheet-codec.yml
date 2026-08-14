@@ -6,10 +6,15 @@ on:
       - 'Ontology/DNA/**'
       - '.github/workflows/dna-chemistry-sheet-codec.yml'
   push:
-    branches: [ master ]
+    branches: [master]
     paths:
       - 'Ontology/DNA/**'
       - '.github/workflows/dna-chemistry-sheet-codec.yml'
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   agda:

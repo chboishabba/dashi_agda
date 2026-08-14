@@ -2,19 +2,14 @@ name: Balaban nested constraint Agda check
 
 on:
   push:
-    branches:
-      - codex/balaban-nested-constraint-minimum
-      - codex/balaban-literal-lattice-operators
-      - codex/balaban-literal-lattice-operators-clean
-      - codex/balaban-su2-quaternion-carrier
-      - codex/balaban-su2-quaternion-carrier-clean
+    branches: [master]
   pull_request:
     paths:
       - 'DASHI/Physics/YangMills/Balaban*.agda'
       - '.github/workflows/balaban-nested-constraint-check.yml'
 
 concurrency:
-  group: balaban-focused-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
   cancel-in-progress: true
 
 permissions:

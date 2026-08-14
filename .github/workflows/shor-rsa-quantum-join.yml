@@ -2,6 +2,7 @@ name: Shor RSA quantum join
 
 on:
   push:
+    branches: [master]
     paths:
       - 'DASHI/Algebra/Quantum/FiniteQuantumRegister.agda'
       - 'DASHI/Algebra/Quantum/QuantumFourierTransformFinite.agda'
@@ -39,7 +40,7 @@ on:
       - '.github/workflows/shor-rsa-quantum-join.yml'
 
 concurrency:
-  group: shor-rsa-quantum-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
   cancel-in-progress: true
 
 permissions:
