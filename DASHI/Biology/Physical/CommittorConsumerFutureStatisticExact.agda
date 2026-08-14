@@ -9,6 +9,7 @@ module DASHI.Biology.Physical.CommittorConsumerFutureStatisticExact where
 
 open import DASHI.Core.Prelude
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; ½; _+_; _≤_)
+open import Data.Rational.Tactic.RingSolver using (solve-∀)
 
 import DASHI.Cognition.PNF.RationalProbabilityFutureKernelExact as Prob
 
@@ -27,7 +28,9 @@ record FineChemicalState : Set where
 open FineChemicalState public
 
 halfHalf : Prob.BinaryProbability
-halfHalf = Prob.binaryProbability ½ ½ Prob.halfNonnegative Prob.halfNonnegative refl
+halfHalf =
+  Prob.binaryProbability ½ ½
+    Prob.halfNonnegative Prob.halfNonnegative solve-∀
 
 mineralState organicState : FineChemicalState
 mineralState = fineChemicalState mineralRoute halfHalf
