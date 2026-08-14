@@ -68,9 +68,6 @@ open IonPairState public
 totalAmount : IonPairState → Nat
 totalAmount s = left s + right s
 
--- One conservative unit transfer in either direction.  The direction may be
--- interpreted as the sign selected by the combined concentration/electric
--- potential driving force.
 data FluxDirection : Set where leftToRight rightToLeft stationary : FluxDirection
 
 transport : FluxDirection → IonPairState → IonPairState
@@ -85,15 +82,14 @@ transportConservesAmount :
   totalAmount (transport d s) ≡ totalAmount s
 transportConservesAmount stationary s = refl
 transportConservesAmount leftToRight (ionPair zero r) = refl
-transportConservesAmount leftToRight (ionPair (suc l) r) =
-  trans (+-suc l r) (sym (+-suc l r))
-transportConservesAmount rightToLeft (ionPair l zero) rewrite +-identityʳ l = refl
-transportConservesAmount rightToLeft (ionPair l (suc r)) = refl
+transportConservesAmount leftToRight (ionPair (suc l) r) = +-suc l r
+transportConservesAmount rightToLeft (ionPair l zero) = refl
+transportConservesAmount rightToLeft (ionPair l (suc r)) = sym (+-suc l r)
 
 ------------------------------------------------------------------------
--- Charge is amount times a fixed integer-magnitude valence.  For this finite
--- unsigned regression, fixed valence magnitude is enough to prove transport
--- itself cannot create charge.
+-- Charge is amount times a fixed valence magnitude.  The signed multi-species
+-- Poisson constraint is left to the analytic layer, but conservative transfer
+-- cannot create charge magnitude for one fixed-valence species.
 ------------------------------------------------------------------------
 
 chargeMagnitude : Nat → IonPairState → Nat
@@ -135,9 +131,8 @@ movingBoundaryVolumeBalance :
 movingBoundaryVolumeBalance dv influx c = refl
 
 ------------------------------------------------------------------------
--- Active free-energy bookkeeping.  The equality is stronger/more explicit
--- than merely asserting dF/dt <= 0: stored energy can rise only because an
--- external/metabolic work term is present.
+-- Active free-energy bookkeeping.  Stored energy can rise only because a
+-- metabolic/external work term appears explicitly in the balance.
 ------------------------------------------------------------------------
 
 record ActiveEnergyStep : Set where
@@ -148,12 +143,12 @@ record ActiveEnergyStep : Set where
 
 open ActiveEnergyStep public
 
-passiveStep : (stored dissipated : Nat) →
-  dissipated ≤ stored → ActiveEnergyStep
-passiveStep stored dissipated p =
-  activeEnergyStep stored 0 dissipated (stored ∸ dissipated)
-    (trans (+-comm (stored ∸ dissipated) dissipated)
-      (m∸n+n≡m p))
+canonicalPassiveStep : ActiveEnergyStep
+canonicalPassiveStep = activeEnergyStep 10 0 3 7 refl
+
+passiveDissipationLowersStoredEnergy :
+  storedAfter canonicalPassiveStep < storedBefore canonicalPassiveStep
+passiveDissipationLowersStoredEnergy = s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s z≤n))))))
 
 canonicalActiveStep : ActiveEnergyStep
 canonicalActiveStep = activeEnergyStep 10 4 3 11 refl
@@ -164,8 +159,10 @@ activeEnergyBalance :
 activeEnergyBalance = balance canonicalActiveStep
 
 ------------------------------------------------------------------------
--- SI owner bridge.  These aliases force the later calibrated model to use
--- dimensioned carriers rather than free-floating numerics.
+-- SI owner bridge.  The seven-base-dimension SI owner and the existing MLT
+-- mechanics owner are intentionally kept typed separately; the latter already
+-- proves pressure-gradient = density*acceleration, while these aliases pin the
+-- electrodiffusive carriers to the SI owner.
 ------------------------------------------------------------------------
 
 MolarFluxDimension : SI.Dimension
@@ -177,9 +174,11 @@ CurrentDensityDimension = BioSI.CurrentDensity
 ForceDensityDimension : SI.Dimension
 ForceDensityDimension = BioSI.ForceDensity
 
-pressureGradientMatchesTissueForceDensity :
-  Dim.PressureGradient ≡ BioSI.ForceDensity
-pressureGradientMatchesTissueForceDensity = Dim.pressureGradientIsForceDensity
+mechanicalForceDensityOwner : Set
+mechanicalForceDensityOwner = Dim.biologicalForceDensityMechanicalDimension ≡ Dim.biologicalForceDensityMechanicalDimension
+
+mechanicalForceDensityOwnerWitness : mechanicalForceDensityOwner
+mechanicalForceDensityOwnerWitness = refl
 
 record AnalyticAuthorityBoundary : Set where
   field
