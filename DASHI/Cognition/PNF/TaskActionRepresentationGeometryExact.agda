@@ -8,12 +8,6 @@ module DASHI.Cognition.PNF.TaskActionRepresentationGeometryExact where
 --
 -- Andrey Gromov, "Grokking modular arithmetic", arXiv:2301.02679.
 -- No DOI asserted.
---
--- DASHI CONTRIBUTION
--- Generic representation-equivariance square plus a concrete C3 -> Q(omega)
--- instance.  The theorem says exactly what it means for a task action to become
--- a low-complexity latent action after encoding; it does not assert that every
--- trained network discovers such an encoder.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -33,11 +27,6 @@ record EquivariantRepresentation (State Action Latent : Set) : Set₁ where
       encode (stateAction a x) ≡ latentAction a (encode x)
 
 open EquivariantRepresentation public
-
-------------------------------------------------------------------------
--- Composition: if a second coordinate map intertwines the first latent action,
--- equivariance survives the change of representation.
-------------------------------------------------------------------------
 
 record ActionIntertwiner (Action A B : Set) : Set₁ where
   constructor actionIntertwiner
@@ -71,10 +60,6 @@ composeEquivariant R I sameAction =
             | sym (sameAction a (encode R x)) =
       intertwines I a (encode R x)
 
-------------------------------------------------------------------------
--- Concrete modular C3 state action -> multiplication by a root of unity.
-------------------------------------------------------------------------
-
 Phase : Set
 Phase = Wheel.DepthWheelPhase
 
@@ -86,16 +71,7 @@ phaseLatentAction a z = Cyclo.root a Cyclo.*C z
 
 c3CyclotomicRepresentation : EquivariantRepresentation Phase Phase Cyclo.Cyclotomic3
 c3CyclotomicRepresentation =
-  equivariantRepresentation
-    Cyclo.root
-    stateAdd
-    phaseLatentAction
-    proof
-  where
-    proof : (a x : Phase) →
-      Cyclo.root (stateAdd a x)
-      ≡ Cyclo.root a Cyclo.*C Cyclo.root x
-    proof = Cyclo.rootCharacterHomomorphism
+  equivariantRepresentation Cyclo.root stateAdd phaseLatentAction Cyclo.rootCharacterHomomorphism
 
 c3ActionBecomesCyclotomicMultiplication : (a x : Phase) →
   encode c3CyclotomicRepresentation (stateAction c3CyclotomicRepresentation a x)
@@ -107,13 +83,8 @@ c3ActionBecomesCyclotomicMultiplication =
 phaseOneActsByOmega :
   latentAction c3CyclotomicRepresentation Wheel.phase-1 Cyclo.oneC
   ≡ Cyclo.omega
-phaseOneActsByOmega = Cyclo.cyc-ext Cyclo.solve-∀ Cyclo.solve-∀
-
-------------------------------------------------------------------------
--- Architecture prior is separate from task equivariance.  These constructors
--- are tags for theorem statements/experiments, not claims that one architecture
--- must realize one geometry.
-------------------------------------------------------------------------
+phaseOneActsByOmega =
+  sym (Cyclo.rootCharacterHomomorphism Wheel.phase-1 Wheel.phase-0)
 
 data GeometryPrior : Set where
   denseGlobal : GeometryPrior
