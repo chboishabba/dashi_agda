@@ -11,6 +11,7 @@ import DASHI.Biology.Physical.DynamicTissueGraphRewriteExact
 import DASHI.Biology.Physical.DynamicTopologyFutureDefectExact
 import DASHI.Biology.Physical.HierarchicalGoalConstraintCompilerExact
 import DASHI.Biology.Physical.GoalErrorDescentControllerExact
+import DASHI.Biology.Physical.GraphGeneratingGoalControllerExact
 import DASHI.Biology.Physical.DevelopmentalMeasurementQuotientExact
 import DASHI.Biology.Physical.CoupledDevelopmentalOperatorStackExact
 import DASHI.Biology.Physical.ContextDependentPadicPhysicalMapExact
