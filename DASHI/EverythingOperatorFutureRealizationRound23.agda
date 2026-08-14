@@ -17,17 +17,19 @@ import DASHI.Cognition.PNF.ControlledFutureSpectralRepresentationExact
 import DASHI.Cognition.PNF.GrokkingInvariantSubspaceSelectionExact
 
 ------------------------------------------------------------------------
--- Round 23C: canonical future quotient -> minimal exact dynamical realization.
+-- Round 23C: canonical future quotient, observable algebra and minimal dynamics.
 ------------------------------------------------------------------------
 import DASHI.Cognition.PNF.CanonicalFutureMinimalDynamicalRealizationExact
+import DASHI.Cognition.PNF.CanonicalFutureObservableAlgebraExact
 import DASHI.Cognition.PNF.FutureQuotientInvariantRealizationCompilerExact
 import DASHI.Cognition.PNF.OrientedZeroMinimalDynamicalRealizationExact
 
 ------------------------------------------------------------------------
 -- Boundary: Round 23 proves exact deterministic invariant realization,
--- consumer-future safety, controlled target transfer, a bounded omitted-mode
--- theorem, operator-adapted Fourier/committor examples, and quotient-order
--- minimality.  It does not claim minimum Euclidean/vector-space dimension,
--- approximate Koopman spectral convergence for arbitrary nonlinear systems, or
--- that neural training necessarily discovers a certified invariant realization.
+-- consumer-future safety, controlled target transfer, bounded omitted-mode
+-- distortion, operator-adapted Fourier/committor examples, exact future-
+-- invariant-observable factorization through the canonical quotient, and
+-- quotient-order minimality.  It does not claim minimum Euclidean/vector-space
+-- dimension, approximate Koopman convergence for arbitrary nonlinear systems,
+-- or that neural training necessarily discovers a certified realization.
 ------------------------------------------------------------------------
