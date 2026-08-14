@@ -7,10 +7,6 @@ open import Relation.Nullary.Decidable.Core using (yes; no)
 
 import DASHI.Core.ResidualFibreLowerBoundExact as Lower
 
-------------------------------------------------------------------------
--- ARBITRARY-k RESIDUAL CARDINALITY LOWER BOUND
-------------------------------------------------------------------------
-
 Injective : ∀ {A B : Set} → (A → B) → Set
 Injective f = ∀ {left right} → f left ≡ f right → left ≡ right
 
@@ -56,12 +52,6 @@ residualInjectionFromFutureDistinctFibre safe fibre {left} {right} residualEqual
             (trans (inSameFibre fibre i) (sym (inSameFibre fibre j)))
             equality))
 
-------------------------------------------------------------------------
--- Fixed-bit consequence.  A b-bit carrier has 2^b codewords.  Data.Fin's
--- constructive pigeonhole theorem turns the residual injection into the exact
--- numerical capacity inequality k <= 2^b.
-------------------------------------------------------------------------
-
 pow2 : Nat → Nat
 pow2 zero = 1
 pow2 (suc bits) = 2 * pow2 bits
@@ -95,6 +85,37 @@ bitBudgetBelowClassCountIsImpossible safe fibre tooSmall =
   ≤⇒≯ (futureSafetyForBitWordsImpliesCapacityBound safe fibre) tooSmall
 
 ------------------------------------------------------------------------
--- Thus every safe fixed-bit residual obeys k <= 2^b, equivalently
--- b >= ceil(log2 k) once ceil-log2 is chosen as the least b with k <= 2^b.
+-- Certified ceil(log2 k).  We avoid tying the theorem to one executable
+-- logarithm implementation: `leastCapacity` is exactly the defining universal
+-- property of ceil-log2.
+------------------------------------------------------------------------
+
+record CeilLog2Certificate (k bits : Nat) : Set where
+  constructor ceilLog2Certificate
+  field
+    hasCapacity : k ≤ pow2 bits
+    leastCapacity :
+      (candidateBits : Nat) →
+      k ≤ pow2 candidateBits →
+      bits ≤ candidateBits
+
+open CeilLog2Certificate public
+
+safeBitResidualRespectsCeilLog2 :
+  ∀ {State Coarse k bits minimumBits}
+    {FutureEq : State → State → Set}
+    {coarsen : State → Coarse}
+    {residual : State → BitWords bits}
+    (ceilCertificate : CeilLog2Certificate k minimumBits)
+    (safe : Lower.DynamicallySufficientPair
+      State Coarse (BitWords bits) FutureEq coarsen residual)
+    (fibre : FiniteFutureDistinctFibre k FutureEq coarsen) →
+  minimumBits ≤ bits
+safeBitResidualRespectsCeilLog2 ceilCertificate safe fibre =
+  leastCapacity ceilCertificate bits
+    (futureSafetyForBitWordsImpliesCapacityBound safe fibre)
+
+------------------------------------------------------------------------
+-- Every future-safe fixed-bit residual therefore obeys the exact capacity law
+-- k <= 2^b and, for any certified least-capacity exponent, b >= ceil(log2 k).
 ------------------------------------------------------------------------
