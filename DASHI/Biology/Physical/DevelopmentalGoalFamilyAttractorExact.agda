@@ -102,6 +102,38 @@ repairIsIdempotent :
 repairIsIdempotent g
   (fineMorphology organ anchor owner side scale micro) = refl
 
+repairFixesEverySatisfyingRealisation :
+  (g : Goal.DevelopmentalGoal) (m : FineMorphology) →
+  SatisfiesGoal m g →
+  repairToGoal g m ≡ m
+repairFixesEverySatisfyingRealisation g m witness
+  rewrite sym (organMatches witness)
+        | sym (anchorMatches witness)
+        | sym (ownerMatches witness)
+        | sym (sideMatches witness)
+        | sym (scaleMatches witness) = refl
+
+record GoalFamilyRetraction (g : Goal.DevelopmentalGoal) : Set₁ where
+  field
+    project : FineMorphology → FineMorphology
+    imageSatisfies :
+      (m : FineMorphology) → SatisfiesGoal (project m) g
+    fixesGoalFamily :
+      (m : FineMorphology) → SatisfiesGoal m g → project m ≡ m
+    preservesFineResidual :
+      (m : FineMorphology) → microDetail (project m) ≡ microDetail m
+
+open GoalFamilyRetraction public
+
+canonicalGoalFamilyRetraction :
+  (g : Goal.DevelopmentalGoal) → GoalFamilyRetraction g
+canonicalGoalFamilyRetraction g = record
+  { project = repairToGoal g
+  ; imageSatisfies = repairSatisfiesGoal g
+  ; fixesGoalFamily = repairFixesEverySatisfyingRealisation g
+  ; preservesFineResidual = repairPreservesMicroDetail g
+  }
+
 -- A damaged anchor can therefore be corrected without forcing a unique fine
 -- realization of the target.
 damagedHand : FineMorphology
