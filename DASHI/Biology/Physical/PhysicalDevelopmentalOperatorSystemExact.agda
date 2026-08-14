@@ -24,6 +24,9 @@ import DASHI.Physics.Laws.ThermodynamicStatisticalLaws as Thermo
 import DASHI.Physics.Laws.ContinuumMaterialLaws as Continuum
 import DASHI.Biology.AgenticMaterialsControlCore as Agentic
 import DASHI.Biology.Levin.BioelectricChemistryWaveAdapter as ChemistryWave
+import DASHI.Core.DynamicalQuotientSafety as Dynamic
+import DASHI.Biology.Cell.BioelectricNetwork as Bioelectric
+import DASHI.Biology.StateDependentMultiplexTransducer as Multiplex
 
 xor : Bool → Bool → Bool
 xor false false = false
@@ -46,24 +49,34 @@ record PhysicalDevelopmentalState : Set where
 open PhysicalDevelopmentalState public
 
 regulatoryOperator : Bool → PhysicalDevelopmentalState → PhysicalDevelopmentalState
-regulatoryOperator genome x = record x
-  { regulatoryState = xor genome (epigeneticState x) }
+regulatoryOperator genome
+  (physicalDevelopmentalState chem epi reg elec metabolic mech morph goal) =
+  physicalDevelopmentalState
+    chem epi (xor genome epi) elec metabolic mech morph goal
 
 electricalOperator : PhysicalDevelopmentalState → PhysicalDevelopmentalState
-electricalOperator x = record x
-  { electricalState = xor (regulatoryState x) (electricalState x) }
+electricalOperator
+  (physicalDevelopmentalState chem epi reg elec metabolic mech morph goal) =
+  physicalDevelopmentalState
+    chem epi reg (xor reg elec) metabolic mech morph goal
 
 mechanicalOperator : PhysicalDevelopmentalState → PhysicalDevelopmentalState
-mechanicalOperator x = record x
-  { mechanicalState = xor (electricalState x) (mechanicalState x) }
+mechanicalOperator
+  (physicalDevelopmentalState chem epi reg elec metabolic mech morph goal) =
+  physicalDevelopmentalState
+    chem epi reg elec metabolic (xor elec mech) morph goal
 
 morphologyOperator : PhysicalDevelopmentalState → PhysicalDevelopmentalState
-morphologyOperator x = record x
-  { morphology = mechanicalState x }
+morphologyOperator
+  (physicalDevelopmentalState chem epi reg elec metabolic mech morph goal) =
+  physicalDevelopmentalState
+    chem epi reg elec metabolic mech mech goal
 
 chemicalSourceOperator : Nat → PhysicalDevelopmentalState → PhysicalDevelopmentalState
-chemicalSourceOperator q x = record x
-  { chemicalInventory = q + chemicalInventory x }
+chemicalSourceOperator q
+  (physicalDevelopmentalState chem epi reg elec metabolic mech morph goal) =
+  physicalDevelopmentalState
+    (q + chem) epi reg elec metabolic mech morph goal
 
 physicalDevelopmentalStep :
   Bool → Nat → PhysicalDevelopmentalState → PhysicalDevelopmentalState
@@ -88,7 +101,8 @@ chemicalSourceSurvivesDownstreamOperators :
   (genome : Bool) (source : Nat) (x : PhysicalDevelopmentalState) →
   chemicalInventory (physicalDevelopmentalStep genome source x)
     ≡ source + chemicalInventory x
-chemicalSourceSurvivesDownstreamOperators genome source x = refl
+chemicalSourceSurvivesDownstreamOperators genome source
+  (physicalDevelopmentalState chem epi reg elec metabolic mech morph goal) = refl
 
 ------------------------------------------------------------------------
 -- The physical carrier exposes more state than morphology alone; the imported
@@ -96,7 +110,7 @@ chemicalSourceSurvivesDownstreamOperators genome source x = refl
 ------------------------------------------------------------------------
 
 morphologyOnlyFutureSafetyFails :
-  Future.Dynamic.DynamicConsumerSafety
+  Dynamic.DynamicConsumerSafety
     Future.developmentalSystem Future.morphologyProjection → ⊥
 morphologyOnlyFutureSafetyFails = Future.morphologyProjectionCannotBeDynamicallySafe
 
@@ -110,9 +124,9 @@ record PhysicalDevelopmentalOwners : Set₁ where
     reactionDiffusionSI : RD.ReactionDiffusionSISignature
     membranePowerSI : Power.MembranePowerSISignature
     tissueMechanicsSI : Mech.TissueMechanicsSISignature
-    bioelectricSINetwork : BioSI.Bioelectric.BioelectricNetwork
+    bioelectricSINetwork : Bioelectric.BioelectricNetwork
     originSeparation : Origins.PhysicalOriginSeparation
-    cellNetworkTransducer : CellBrain.Multiplex.StatefulTransducer
+    cellNetworkTransducer : Multiplex.StatefulTransducer
 
 open PhysicalDevelopmentalOwners public
 
