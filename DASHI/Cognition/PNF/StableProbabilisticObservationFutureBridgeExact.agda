@@ -37,13 +37,16 @@ stableProbabilisticPairIsFutureEquivalent :
   Prob.ProbabilityFutureEquivalent
     (probabilityKernelFromDynamics observe step) left right
 stableProbabilisticPairIsFutureEquivalent
+  {State = State} {Action = Action}
   {observe = observe} {step = step} {depth = depth}
-  stable related =
+  stable {left = left} {right = right} related =
   Prob.probabilityFutureEquivalent proof
   where
-    proof : (actions : List _) →
-      Prob.distribution (probabilityKernelFromDynamics observe step) _ actions
-      ≡ Prob.distribution (probabilityKernelFromDynamics observe step) _ actions
+    proof : (actions : List Action) →
+      Prob.distribution
+        (probabilityKernelFromDynamics observe step) left actions
+      ≡ Prob.distribution
+        (probabilityKernelFromDynamics observe step) right actions
     proof actions =
       Refine.traceObservationFromDepth actions
         (Refine.stablePairLifts stable related (length actions))
