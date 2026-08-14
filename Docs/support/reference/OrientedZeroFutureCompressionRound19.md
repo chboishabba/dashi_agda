@@ -21,6 +21,8 @@ Two coding problems are formalized and deliberately not conflated.
 
 Thus a two-bit standalone Wave4 code must not be confused with the conditional PNF residual rate. The latter pays one orientation bit only where the coarse zero fibre is dynamically nontrivial.
 
+`OrientedZeroExpectedResidualRateExact` makes the corresponding average-rate statement. Under any normalized scalar-state probability law, the adaptive residual spends `0,1,0` bits on the three coarse fibres, so its expected additional rate is exactly the probability mass of the scalar-zero fibre. This is a conditional residual rate only; total end-to-end rate must also include the retained scalar carrier.
+
 `OrientedZeroGrayTransitionGeometryExact` proves that ordinary binary and Gray codes have equal exact two-bit rate but different phase-path Hamming geometry. Binary has path cost `4`, Gray has path cost `3`. Under the concrete equal-rate objective `rate + transitionCost`, binary costs `6` and Gray costs `5`. Hence MDL/rate optimality does not by itself determine the dynamically best exact code.
 
 ## Generic arbitrary-k residual bound
