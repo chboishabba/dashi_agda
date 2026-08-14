@@ -43,32 +43,9 @@ import DASHI.Physics.Closure.NSTriadKNLuoBadCoherenceWeightedMarkovExact as Thre
 import DASHI.Physics.Closure.NSTriadKNHHBadSharpDyadicGainRound33Exact as Sharp
 import DASHI.Physics.Closure.NSTriadKNLuoCriticalDissipationHHBadBridgeRound34Exact as Scale
 import DASHI.Physics.Closure.NSTriadKNHHBadShellBarrierRound52Exact as Barrier
+import DASHI.Physics.Closure.NSTriadKNHHBadRawDuhamelSurfaceRound58 as Surface
 
-record PhysicalGeneralVariableDefectDuhamel : Set where
-  field
-    parameter : Threshold.PositiveThreshold
-    defectRate inherited generated leakage : Nat → ℚ
-    alpha forcing : Nat → ℚ
-
-    defectRateNonnegative : ∀ q → 0ℚ ≤ defectRate q
-    inheritedNonnegative : ∀ q → 0ℚ ≤ inherited q
-    generatedNonnegative : ∀ q → 0ℚ ≤ generated q
-    leakageNonnegative : ∀ q → 0ℚ ≤ leakage q
-    alphaNonnegative : ∀ q → 0ℚ ≤ alpha q
-    forcingNonnegative : ∀ q → 0ℚ ≤ forcing q
-
-    successorDecomposition : ∀ q →
-      defectRate (suc q) ≡ inherited q + generated q + leakage q
-
-    inheritedTransfer : ∀ q →
-      inherited q ≤ alpha q * Sharp.half * defectRate q
-
-    generatedLeakageTransfer : ∀ q →
-      generated q + leakage q
-      ≤ Threshold.threshold parameter
-        * Sharp.inverseDyadicScale (suc q) * forcing q
-
-open PhysicalGeneralVariableDefectDuhamel public
+open Surface.PhysicalGeneralVariableDefectDuhamel public
 
 normalizedDefect : PhysicalGeneralVariableDefectDuhamel → Nat → ℚ
 normalizedDefect physical q =
