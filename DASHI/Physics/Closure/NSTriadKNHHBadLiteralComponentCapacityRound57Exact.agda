@@ -16,7 +16,7 @@ module DASHI.Physics.Closure.NSTriadKNHHBadLiteralComponentCapacityRound57Exact 
 --
 -- ROUND 57 CONTRIBUTION
 --
--- Remove alpha from the final HH-bad tail comparison altogether.  The physical
+-- Remove alpha from the final HH-bad tail comparison altogether. The physical
 -- Duhamel carrier already contains the literal inherited, generated and
 -- leakage terms, so normalize those actual components and prove the exact
 -- successor identity
@@ -26,10 +26,6 @@ module DASHI.Physics.Closure.NSTriadKNHHBadLiteralComponentCapacityRound57Exact 
 -- A ceiling C_* is therefore preserved whenever
 --
 --   N^lit_q <= C_* - I^lit_q.
---
--- This is the most source-faithful division-free headroom statement available
--- before estimating the actual PDE terms: nonlinear creation/leakage must fit
--- inside the literal capacity left after inherited defect.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
@@ -39,7 +35,7 @@ open import Agda.Builtin.Nat using (Nat; suc)
 open import Data.Rational.Base using (ℚ; _+_; _-_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 import DASHI.Physics.Closure.NSTriadKNHHBadRawVariableCapacityRound53Exact as Raw
 import DASHI.Physics.Closure.NSTriadKNHHBadLiteralNormalizedGenerationRound57Exact as Lit
@@ -101,14 +97,17 @@ literalComponentHeadroomPreservesCeiling physical ceiling q generationFits =
     addInherited = ℚP.+-monoˡ-≤ inherited generationFits
     closes : inherited + (ceiling - inherited) ≡ ceiling
     closes = solve (inherited ∷ ceiling ∷ [])
+    componentBound : inherited + generated ≤ ceiling
+    componentBound =
+      subst
+        (λ right → inherited + generated ≤ right)
+        closes
+        addInherited
   in
   subst
     (λ left → left ≤ ceiling)
-    (literalNormalizedSuccessorComponentsExact physical q)
-    (subst
-      (λ right → inherited + generated ≤ right)
-      closes
-      addInherited)
+    (sym (literalNormalizedSuccessorComponentsExact physical q))
+    componentBound
 
 literalComponentCapacityUsesNoAlpha : Bool
 literalComponentCapacityUsesNoAlpha = true
