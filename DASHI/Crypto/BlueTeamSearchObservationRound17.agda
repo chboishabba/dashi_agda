@@ -2,15 +2,6 @@ module DASHI.Crypto.BlueTeamSearchObservationRound17 where
 
 ------------------------------------------------------------------------
 -- ROUND 17: BLUE-TEAM SEARCH GEOMETRY + OBSERVATION VALUE
---
--- Continues Round 16 along both remaining programmes:
---
---   A. transported MLWE/NTT prior geometry and reconciliation;
---   B. hidden-dependent observation refinement and net acquisition value.
---
--- Round 17 adds the third coordinate exposed by the future-quotient/Gray
--- thread: candidate fibres carry a transition/search geometry, so equal rate or
--- equal cardinality does not imply equal recovery cost.
 ------------------------------------------------------------------------
 
 import DASHI.Crypto.BlueTeamAdversaryClosureRound16
@@ -23,6 +14,7 @@ import DASHI.Crypto.MLKEMNTTParityBlockPriorExact
 import DASHI.Crypto.MLKEMNTTCombinedCouplingConnectivityExact
 import DASHI.Crypto.MLKEMCandidateMoveFanoutExact
 import DASHI.Crypto.MLKEMLocalityAreaInvariantExact
+import DASHI.Crypto.MLKEMButterflyStageLocalityInvariantExact
 import DASHI.Crypto.MLKEMBaseCaseConditionedResidualExact
 import DASHI.Crypto.ConditionedResidualAmbiguityRegressionExact
 import DASHI.Crypto.ConditionalMateAmbiguityExact
@@ -30,6 +22,8 @@ import DASHI.Crypto.ConditionalReconciliationSearchExact
 import DASHI.Crypto.MLKEMNTTActualCBD2ScalarCollisionExact
 import DASHI.Crypto.MLKEMNTTActualCBD2SliceCouplingExact
 import DASHI.Crypto.MLKEMNTTActualCBD2TwoScalarRefinementExact
+import DASHI.Crypto.MLKEMNTTActualCBD2FullTripleListProfileExact
+import DASHI.Crypto.MLKEMNTTActualCBD2ConditionalListMassExact
 import DASHI.Crypto.FiniteMLWEListDecodingGeometryExact
 
 -- Observation acquisition, threat-language refinement, and protocol-visible
@@ -86,6 +80,9 @@ record Round17ClaimBoundary : Set where
     oneLocalNTTScalarUniquelyDeterminesCBD2SourceSlice : Bool
     oneLocalNTTScalarUniquelyDeterminesCBD2SourceSliceIsFalse :
       oneLocalNTTScalarUniquelyDeterminesCBD2SourceSlice ≡ false
+    twoScalarSliceResultProvesWholeSecretRecovery : Bool
+    twoScalarSliceResultProvesWholeSecretRecoveryIsFalse :
+      twoScalarSliceResultProvesWholeSecretRecovery ≡ false
     equalRateMeansEqualSearchGeometry : Bool
     equalRateMeansEqualSearchGeometryIsFalse :
       equalRateMeansEqualSearchGeometry ≡ false
@@ -101,6 +98,9 @@ record Round17ClaimBoundary : Set where
     equalLocalityAreaIsUniversalUncertaintyTheorem : Bool
     equalLocalityAreaIsUniversalUncertaintyTheoremIsFalse :
       equalLocalityAreaIsUniversalUncertaintyTheorem ≡ false
+    butterflyStageIdentityIsUniversalRepresentationLowerBound : Bool
+    butterflyStageIdentityIsUniversalRepresentationLowerBoundIsFalse :
+      butterflyStageIdentityIsUniversalRepresentationLowerBound ≡ false
 
 open Round17ClaimBoundary public
 
@@ -109,3 +109,4 @@ canonicalRound17ClaimBoundary =
   round17ClaimBoundary
     false refl false refl false refl false refl false refl false refl
     false refl false refl false refl false refl false refl false refl false refl
+    false refl false refl
