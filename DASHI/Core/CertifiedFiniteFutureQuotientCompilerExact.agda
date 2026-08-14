@@ -27,9 +27,9 @@ RefineOnce :
   (Action → State → State) →
   (State → State → Set) →
   State → State → Set
-RefineOnce observe step relation left right =
+RefineOnce {Action = Action} observe step relation left right =
   (observe left ≡ observe right)
-  × ((action : _) → relation (step action left) (step action right))
+  × ((action : Action) → relation (step action left) (step action right))
 
 mapRefineIff :
   ∀ {State Action Observation}
