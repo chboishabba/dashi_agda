@@ -26,12 +26,17 @@ module DASHI.Physics.Closure.NSTriadKNHHBadLiteralComponentCapacityRound57Exact 
 -- A ceiling C_* is therefore preserved whenever
 --
 --   N^lit_q <= C_* - I^lit_q.
+--
+-- The final theorem permits an arbitrary finite prefix and uses only this
+-- literal component-headroom comparison on the tail.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Agda.Builtin.Nat using (Nat; suc)
+import Data.Nat.Base as Nat
+import Data.Nat.Properties as NatP
 open import Data.Rational.Base using (ℚ; _+_; _-_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
@@ -39,6 +44,7 @@ open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans
 
 import DASHI.Physics.Closure.NSTriadKNHHBadRawVariableCapacityRound53Exact as Raw
 import DASHI.Physics.Closure.NSTriadKNHHBadLiteralNormalizedGenerationRound57Exact as Lit
+import DASHI.Physics.Closure.NSTriadKNHHBadFiniteTransientTailBarrierRound55Exact as Tail
 
 literalNormalizedInherited :
   Raw.PhysicalGeneralVariableDefectDuhamel → Nat → ℚ
@@ -109,9 +115,49 @@ literalComponentHeadroomPreservesCeiling physical ceiling q generationFits =
     (sym (literalNormalizedSuccessorComponentsExact physical q))
     componentBound
 
+record LiteralComponentTailCapacity
+    (physical : Raw.PhysicalGeneralVariableDefectDuhamel) : Set where
+  field
+    start : Nat
+    ceiling : ℚ
+    finitePrefixBelow : ∀ q → q Nat.≤ start →
+      Raw.normalizedDefect physical q ≤ ceiling
+    tailComponentHeadroom : ∀ q → start Nat.≤ q →
+      literalGenerationFitsInheritedHeadroom physical ceiling q
+
+open LiteralComponentTailCapacity public
+
+literalComponentTailBelow :
+  ∀ {physical}
+    (capacity : LiteralComponentTailCapacity physical) {q} →
+  Tail.TailAt (start capacity) q →
+  Raw.normalizedDefect physical q ≤ ceiling capacity
+literalComponentTailBelow capacity Tail.atStart =
+  finitePrefixBelow capacity (start capacity) NatP.≤-refl
+literalComponentTailBelow {physical} capacity (Tail.atStep {q} previous) =
+  literalComponentHeadroomPreservesCeiling
+    physical (ceiling capacity) q
+    (tailComponentHeadroom capacity q (Tail.tailAtOrder previous))
+
+literalComponentGlobalBelow :
+  ∀ {physical}
+    (capacity : LiteralComponentTailCapacity physical) q →
+  Raw.normalizedDefect physical q ≤ ceiling capacity
+literalComponentGlobalBelow capacity q
+  with Tail.splitPrefixOrTail (start capacity) q
+... | Tail.prefix prefix = finitePrefixBelow capacity q prefix
+... | Tail.tail tail = literalComponentTailBelow capacity tail
+
 literalComponentCapacityUsesNoAlpha : Bool
 literalComponentCapacityUsesNoAlpha = true
+
+literalComponentTailAllowsArbitraryFiniteTransient : Bool
+literalComponentTailAllowsArbitraryFiniteTransient = true
 
 literalComponentCapacityUsesNoAlphaIsTrue :
   literalComponentCapacityUsesNoAlpha ≡ true
 literalComponentCapacityUsesNoAlphaIsTrue = refl
+
+literalComponentTailAllowsArbitraryFiniteTransientIsTrue :
+  literalComponentTailAllowsArbitraryFiniteTransient ≡ true
+literalComponentTailAllowsArbitraryFiniteTransientIsTrue = refl
