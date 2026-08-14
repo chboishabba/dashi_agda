@@ -47,19 +47,6 @@ normalizationFactorNonnegative physical q =
         (Scale.dyadicScale q)
   in ℚP.nonNegative⁻¹ (normalizationFactor physical q)
 
-normalizedDefectNonnegative :
-  (physical : Raw.PhysicalGeneralVariableDefectDuhamel) →
-  ∀ q → 0ℚ ≤ normalizedDefect physical q
-normalizedDefectNonnegative physical q =
-  let instance
-    factorNN = nonNegative (normalizationFactorNonnegative physical q)
-    defectNN = nonNegative (Raw.defectRateNonnegative physical q)
-    productNN =
-      ℚP.nonNeg*nonNeg⇒nonNeg
-        (normalizationFactor physical q)
-        (Raw.defectRate physical q)
-  in ℚP.nonNegative⁻¹ (normalizedDefect physical q)
-
 normalizedInherited :
   Raw.PhysicalGeneralVariableDefectDuhamel → Nat → ℚ
 normalizedInherited physical q =
@@ -74,6 +61,58 @@ normalizedLeakage :
   Raw.PhysicalGeneralVariableDefectDuhamel → Nat → ℚ
 normalizedLeakage physical q =
   normalizationFactor physical (suc q) * Raw.leakage physical q
+
+normalizedDefectNonnegative :
+  (physical : Raw.PhysicalGeneralVariableDefectDuhamel) →
+  ∀ q → 0ℚ ≤ normalizedDefect physical q
+normalizedDefectNonnegative physical q =
+  let instance
+    factorNN = nonNegative (normalizationFactorNonnegative physical q)
+    defectNN = nonNegative (Raw.defectRateNonnegative physical q)
+    productNN =
+      ℚP.nonNeg*nonNeg⇒nonNeg
+        (normalizationFactor physical q)
+        (Raw.defectRate physical q)
+  in ℚP.nonNegative⁻¹ (normalizedDefect physical q)
+
+normalizedInheritedNonnegative :
+  (physical : Raw.PhysicalGeneralVariableDefectDuhamel) →
+  ∀ q → 0ℚ ≤ normalizedInherited physical q
+normalizedInheritedNonnegative physical q =
+  let instance
+    factorNN = nonNegative (normalizationFactorNonnegative physical (suc q))
+    inheritedNN = nonNegative (Raw.inheritedNonnegative physical q)
+    productNN =
+      ℚP.nonNeg*nonNeg⇒nonNeg
+        (normalizationFactor physical (suc q))
+        (Raw.inherited physical q)
+  in ℚP.nonNegative⁻¹ (normalizedInherited physical q)
+
+normalizedGeneratedNonnegative :
+  (physical : Raw.PhysicalGeneralVariableDefectDuhamel) →
+  ∀ q → 0ℚ ≤ normalizedGenerated physical q
+normalizedGeneratedNonnegative physical q =
+  let instance
+    factorNN = nonNegative (normalizationFactorNonnegative physical (suc q))
+    generatedNN = nonNegative (Raw.generatedNonnegative physical q)
+    productNN =
+      ℚP.nonNeg*nonNeg⇒nonNeg
+        (normalizationFactor physical (suc q))
+        (Raw.generated physical q)
+  in ℚP.nonNegative⁻¹ (normalizedGenerated physical q)
+
+normalizedLeakageNonnegative :
+  (physical : Raw.PhysicalGeneralVariableDefectDuhamel) →
+  ∀ q → 0ℚ ≤ normalizedLeakage physical q
+normalizedLeakageNonnegative physical q =
+  let instance
+    factorNN = nonNegative (normalizationFactorNonnegative physical (suc q))
+    leakageNN = nonNegative (Raw.leakageNonnegative physical q)
+    productNN =
+      ℚP.nonNeg*nonNeg⇒nonNeg
+        (normalizationFactor physical (suc q))
+        (Raw.leakage physical q)
+  in ℚP.nonNegative⁻¹ (normalizedLeakage physical q)
 
 normalizedSuccessorComponentsExact :
   (physical : Raw.PhysicalGeneralVariableDefectDuhamel) →
