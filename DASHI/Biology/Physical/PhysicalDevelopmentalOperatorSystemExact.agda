@@ -30,6 +30,12 @@ import DASHI.Core.DynamicalQuotientSafety as Dynamic
 import DASHI.Biology.Cell.BioelectricNetwork as Bioelectric
 import DASHI.Biology.StateDependentMultiplexTransducer as Multiplex
 
+_≢_ : ∀ {A : Set} → A → A → Set
+x ≢ y = x ≡ y → ⊥
+
+false≢true : false ≢ true
+false≢true ()
+
 xor : Bool → Bool → Bool
 xor false false = false
 xor false true = true
@@ -105,6 +111,36 @@ chemicalSourceSurvivesDownstreamOperators :
     ≡ source + chemicalInventory x
 chemicalSourceSurvivesDownstreamOperators genome source
   (physicalDevelopmentalState chem epi reg elec metabolic mech morph goal) = refl
+
+------------------------------------------------------------------------
+-- Factor order is causal when later operators consume earlier coordinates.
+------------------------------------------------------------------------
+
+orderWitnessState : PhysicalDevelopmentalState
+orderWitnessState =
+  physicalDevelopmentalState
+    0 false false false 0 false false Goal.leftHandHereOurs
+
+regulateThenElectrify electrifyThenRegulate : PhysicalDevelopmentalState
+regulateThenElectrify =
+  electricalOperator (regulatoryOperator true orderWitnessState)
+
+electrifyThenRegulate =
+  regulatoryOperator true (electricalOperator orderWitnessState)
+
+regulateThenElectrifyElectricalIsTrue :
+  electricalState regulateThenElectrify ≡ true
+regulateThenElectrifyElectricalIsTrue = refl
+
+electrifyThenRegulateElectricalIsFalse :
+  electricalState electrifyThenRegulate ≡ false
+electrifyThenRegulateElectricalIsFalse = refl
+
+regulatoryAndElectricalOperatorsDoNotCommute :
+  regulateThenElectrify ≢ electrifyThenRegulate
+regulatoryAndElectricalOperatorsDoNotCommute eq =
+  false≢true
+    (sym (cong electricalState eq))
 
 ------------------------------------------------------------------------
 -- The physical carrier exposes more state than morphology alone; the imported
