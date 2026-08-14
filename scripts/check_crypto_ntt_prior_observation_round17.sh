@@ -34,8 +34,10 @@ done
 grep -q 'algorithm9StageCount' DASHI/Crypto/MLKEMNTTDataflowCouplingExact.agda
 grep -q 'zeroIndex128' DASHI/Crypto/MLKEMNTTDataflowCouplingExact.agda
 grep -q 'sevenStageScalarDependencyWidth' DASHI/Crypto/MLKEMNTTDataflowCouplingExact.agda
-grep -q 'quadraticCoordinateSeesWholePolynomial' DASHI/Crypto/MLKEMNTTDataflowCouplingExact.agda
-grep -q 'mlKem1024QuadraticSourceWidth' DASHI/Crypto/MLKEMNTTDataflowCouplingExact.agda
+grep -q 'secretQuadraticCoordinateSeesWholePolynomial' DASHI/Crypto/MLKEMNTTDataflowCouplingExact.agda
+grep -q 'mlKem1024SecretScalarSourceWidth' DASHI/Crypto/MLKEMNTTDataflowCouplingExact.agda
+grep -q 'mlKem1024PublicScalarSourceWidth' DASHI/Crypto/MLKEMNTTDataflowCouplingExact.agda
+grep -q 'mlKem1024PublicQuadraticSourceWidth' DASHI/Crypto/MLKEMNTTDataflowCouplingExact.agda
 grep -q 'constantComponentHasNoNontrivialDisconnectedCut' DASHI/Crypto/MLKEMNTTPriorCutNoGoExact.agda
 grep -q 'linearComponentHasNoNontrivialDisconnectedCut' DASHI/Crypto/MLKEMNTTPriorCutNoGoExact.agda
 grep -q 'targetPriorFactorsByParity' DASHI/Crypto/MLKEMNTTParityBlockPriorExact.agda
