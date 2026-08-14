@@ -13,12 +13,21 @@ module DASHI.Biology.Physical.MechanochemicalMorphogenesisSIExact where
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
+open import Agda.Builtin.Int using (pos; negsuc)
 
 import DASHI.Physics.Units.SI as SI
 import DASHI.Biology.Physical.SIBiologyDimensionsExact as BioSI
 import DASHI.Physics.Laws.ContinuumMaterialLaws as Continuum
 import DASHI.Biology.Morphogenesis.ReactionDiffusionModeSelection as Modes
 import DASHI.Biology.Physical.DevelopmentalGoalFactorizationExact as Goal
+
+_≢_ : ∀ {A : Set} → A → A → Set
+x ≢ y = x ≡ y → ⊥
+
+MassDensity : SI.Dimension
+MassDensity =
+  SI.dim (negsuc (suc zero)) (pos (suc zero))
+    (pos zero) (pos zero) (pos zero) (pos zero) (pos zero)
 
 record TissueMechanicsSISignature : Set₁ where
   field
@@ -29,9 +38,9 @@ record TissueMechanicsSISignature : Set₁ where
     strain : Set
 
     densityDimension : SI.Dimension
-    densityDimensionIsMassPerVolume :
-      densityDimension ≡ SI.dim (negsuc (suc zero)) (pos (suc zero)) (pos zero) (pos zero) (pos zero) (pos zero) (pos zero)
+    densityDimensionIsMassPerVolume : densityDimension ≡ MassDensity
 
+    densityIsSI : density ≡ SI.Quantity MassDensity SI.unitScale
     velocityIsSI : velocity ≡ SI.Quantity SI.Velocity SI.unitScale
     stressIsSI : stress ≡ SI.Quantity SI.Pressure SI.unitScale
     forceDensityIsSI : forceDensity ≡ SI.Quantity BioSI.ForceDensity SI.unitScale
@@ -41,13 +50,14 @@ open TissueMechanicsSISignature public
 
 canonicalTissueMechanicsSISignature : TissueMechanicsSISignature
 canonicalTissueMechanicsSISignature = record
-  { density = SI.Quantity (SI.dim (negsuc (suc zero)) (pos (suc zero)) (pos zero) (pos zero) (pos zero) (pos zero) (pos zero)) SI.unitScale
+  { density = SI.Quantity MassDensity SI.unitScale
   ; velocity = SI.Quantity SI.Velocity SI.unitScale
   ; stress = SI.Quantity SI.Pressure SI.unitScale
   ; forceDensity = SI.Quantity BioSI.ForceDensity SI.unitScale
   ; strain = SI.Quantity SI.Dimensionless SI.unitScale
-  ; densityDimension = SI.dim (negsuc (suc zero)) (pos (suc zero)) (pos zero) (pos zero) (pos zero) (pos zero) (pos zero)
+  ; densityDimension = MassDensity
   ; densityDimensionIsMassPerVolume = refl
+  ; densityIsSI = refl
   ; velocityIsSI = refl
   ; stressIsSI = refl
   ; forceDensityIsSI = refl
