@@ -16,6 +16,9 @@ x ≢ y = x ≡ y → ⊥
 false≢true : false ≢ true
 false≢true ()
 
+true≢false : true ≢ false
+true≢false ()
+
 xor : Bool → Bool → Bool
 xor false false = false
 xor false true = true
@@ -120,7 +123,7 @@ translationThenTranscription = transcription (translation witness)
 
 causalOrderChangesProtein :
   protein transcriptionThenTranslation ≢ protein translationThenTranscription
-causalOrderChangesProtein = false≢true
+causalOrderChangesProtein = true≢false
 
 transcriptionAndTranslationDoNotCommute :
   translation (transcription witness) ≢ transcription (translation witness)
@@ -137,7 +140,7 @@ mechanicalThenBioelectric = bioelectricUpdate (mechanicalUpdate bioelectricWitne
 
 causalOrderChangesMechanics :
   mechanical bioelectricThenMechanical ≢ mechanical mechanicalThenBioelectric
-causalOrderChangesMechanics = false≢true
+causalOrderChangesMechanics = true≢false
 
 bioelectricAndMechanicalDoNotCommute :
   mechanicalUpdate (bioelectricUpdate bioelectricWitness)
