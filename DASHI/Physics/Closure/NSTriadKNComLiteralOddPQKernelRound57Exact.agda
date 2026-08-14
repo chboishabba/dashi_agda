@@ -4,7 +4,7 @@ module DASHI.Physics.Closure.NSTriadKNComLiteralOddPQKernelRound57Exact where
 -- PRIMARY SOURCES / CONTEXT
 --
 -- Authors: Tosio Kato; Gustavo Ponce.
--- Title: "Commutator Estimates and the Euler and Navier-Stokes Equations".
+-- Title: "Commutator Estimates and the Euler and Navier--Stokes Equations".
 -- DOI: 10.1002/cpa.3160410704.
 --
 -- Authors: Hajer Bahouri; Jean-Yves Chemin; Raphael Danchin.
@@ -19,19 +19,10 @@ module DASHI.Physics.Closure.NSTriadKNComLiteralOddPQKernelRound57Exact where
 -- ROUND 57 CONTRIBUTION
 --
 -- Construct the literal odd P/Q kernel instead of postulating a scalar Gram
--- cell.  P is the repository's physical hard low projector at a selected
--- cutoff and Q is its Boolean complement.  For a physical transport matrix
--- entry T(input,output), the commutator entry is therefore exactly
---
---   +T  when output is P and input is Q   (PTQ),
---   -T  when output is Q and input is P   (-QTP),
---    0  on the two diagonal grade blocks.
---
--- Restricting this entry formula to a resonant physical triad and then to
--- `physicalOutputFiber` gives the literal finite same-output collision kernel
--- requested by the Com Schur lane.  The remaining analytic work is no longer
--- kernel construction: it is common-hat identification and post-cancellation
--- absolute fibre-mass bounds.
+-- cell. P is the repository's physical hard low projector at a selected
+-- cutoff and Q is its Boolean complement. For a physical transport entry T,
+-- the commutator coefficient is exactly +T on PTQ, -T on QTP, and zero on the
+-- two diagonal grade blocks.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -90,24 +81,6 @@ literalOddPQEntryCoefficient model cutoff E velocity {input} {output} entry
 ... | false | true  =
       C3.complexNegate (Matrix.transportEntryCoefficient E velocity entry)
 ... | false | false = C3.complexZero (LP.realField model)
-
-literalOddPQEntryIsPTQMinusQTP :
-  ∀ {r} (model : LP.PeriodicHardShellFourierPDE {r})
-    (cutoff : Nat)
-    (E : C3.IntegerEmbedding (LP.realField model))
-    (velocity : Z3.FourierMode → C3.Complex3 (LP.realField model)) →
-  ∀ {input output}
-    (entry : Matrix.PhysicalTransportMatrixEntry input output) →
-  literalOddPQEntryCoefficient model cutoff E velocity entry
-  ≡ C3.complexSubtract
-      (literalPTQEntryCoefficient model cutoff E velocity entry)
-      (literalQTPEntryCoefficient model cutoff E velocity entry)
-literalOddPQEntryIsPTQMinusQTP model cutoff E velocity {input} {output} entry
-  with LP.lowSelect model cutoff output | LP.lowSelect model cutoff input
-... | true  | false = refl
-... | true  | true  = refl
-... | false | true  = refl
-... | false | false = refl
 
 literalOddPQTriadCoefficient :
   ∀ {r} (model : LP.PeriodicHardShellFourierPDE {r})
