@@ -25,16 +25,8 @@ length : {A : Set} → List A → Nat
 length [] = 0
 length (_ ∷ xs) = suc (length xs)
 
-record PositiveEdgeCosts : Set where
-  constructor positiveEdgeCosts
-  field
-    costs : List Nat
-    positive : ∀ cost → cost ∈ costs → suc zero ≤ cost
-  where
-  open import Data.List.Membership.Propositional using (_∈_)
-
 ------------------------------------------------------------------------
--- Easier induction carrier: positivity evidence travels with each edge.
+-- Positivity evidence travels with each path edge.
 ------------------------------------------------------------------------
 
 data PositiveCostList : List Nat → Set where
