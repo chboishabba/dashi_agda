@@ -14,6 +14,8 @@ FILES=(
   DASHI/Cognition/PNF/OrientedZeroCanonicalFutureExact.agda
   DASHI/Cognition/PNF/OrientedZeroPartitionRefinementExact.agda
   DASHI/Cognition/PNF/OrientedZeroBitMinimalityExact.agda
+  DASHI/Cognition/PNF/OrientedZeroCeilLog2Exact.agda
+  DASHI/Cognition/PNF/OrientedZeroConditionalResidualCardinalityExact.agda
   DASHI/Cognition/PNF/OrientedZeroGrayTransitionGeometryExact.agda
   DASHI/Cognition/PNF/OrientedZeroPhaseOrthogonalityExact.agda
   DASHI/Cognition/PNF/FutureRateDistortionOrientedZeroExact.agda
@@ -25,6 +27,7 @@ FILES=(
   DASHI/Cognition/PNF/DynamicApproximateMultiResolutionErrorExact.agda
   DASHI/Cognition/PNF/SpectralGrokkingPhaseDynamicsExact.agda
   DASHI/Cognition/PNF/FullLearningStateFutureQuotientExact.agda
+  DASHI/Foundations/CantorDyadicNullCoverExact.agda
   DASHI/EverythingOrientedZeroFutureCompressionRound19.agda
 )
 
@@ -42,6 +45,9 @@ grep -q 'negativeZeroNotCanonicalFutureEquivalentPositiveZero' DASHI/Cognition/P
 grep -q 'zeroPairSeparatedAtDepthOne' DASHI/Cognition/PNF/OrientedZeroPartitionRefinementExact.agda
 grep -q 'oneBitCannotEncodeFourWaveStatesExactly' DASHI/Cognition/PNF/OrientedZeroBitMinimalityExact.agda
 grep -q 'scalarPlusOneBitReopensExactly' DASHI/Cognition/PNF/OrientedZeroBitMinimalityExact.agda
+grep -q 'fourStateCeilLog2IsTwo' DASHI/Cognition/PNF/OrientedZeroCeilLog2Exact.agda
+grep -q 'zeroNeedsOneResidualBit' DASHI/Cognition/PNF/OrientedZeroConditionalResidualCardinalityExact.agda
+grep -q 'adaptiveDecodeEncodeExact' DASHI/Cognition/PNF/OrientedZeroConditionalResidualCardinalityExact.agda
 grep -q 'grayStrictlyImprovesPathDistortion' DASHI/Cognition/PNF/OrientedZeroGrayTransitionGeometryExact.agda
 grep -q 'orientationAndProcessAdvanceCommute' DASHI/Cognition/PNF/OrientedZeroPhaseOrthogonalityExact.agda
 
@@ -51,6 +57,7 @@ grep -q 'zeroDistortionOptimumIsSafe' DASHI/Cognition/PNF/FutureRateDistortionGe
 
 grep -q 'residualInjectionFromFutureDistinctFibre' DASHI/Core/GeneralResidualFibreCardinalityExact.agda
 grep -q 'futureSafetyForBitWordsImpliesCapacityBound' DASHI/Core/GeneralResidualFibreCardinalityExact.agda
+grep -q 'safeBitResidualRespectsCeilLog2' DASHI/Core/GeneralResidualFibreCardinalityExact.agda
 grep -q 'refinementMonotone' DASHI/Core/GenericFuturePartitionRefinementExact.agda
 grep -q 'stablePersists' DASHI/Core/GenericFuturePartitionRefinementExact.agda
 grep -q 'rankedRefinementStabilizes' DASHI/Core/FiniteRankedRefinementStabilizationExact.agda
@@ -61,6 +68,9 @@ grep -q 'characterAmplitudeRisesBeforeBehaviorMoves' DASHI/Cognition/PNF/Spectra
 grep -q 'equalZeroGainDoesNotDetermineLearningFuture' DASHI/Cognition/PNF/SpectralGrokkingPhaseDynamicsExact.agda
 grep -q 'sameBatchDifferentLearningFuture' DASHI/Cognition/PNF/FullLearningStateFutureQuotientExact.agda
 grep -q 'learningResidualReopensExact' DASHI/Cognition/PNF/FullLearningStateFutureQuotientExact.agda
+
+grep -q 'canonicalCantorNullCoverModulus' DASHI/Foundations/CantorDyadicNullCoverExact.agda
+grep -q 'ambientNullCoverAndIntrinsicUnitMass' DASHI/Foundations/CantorDyadicNullCoverExact.agda
 
 if command -v agda >/dev/null 2>&1; then
   agda -i . -i src DASHI/EverythingOrientedZeroFutureCompressionRound19.agda
