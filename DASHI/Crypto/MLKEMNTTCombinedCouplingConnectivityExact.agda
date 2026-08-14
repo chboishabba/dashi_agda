@@ -58,7 +58,8 @@ data ConnectedWithinTwo :
     NTT.NTTScalarCoordinate → NTT.NTTScalarCoordinate → Set where
   oneEdge : ∀ {left right} →
     CouplingEdge left right → ConnectedWithinTwo left right
-  twoEdges : ∀ {left middle right} →
+  twoEdges : ∀ {left right} →
+    (middle : NTT.NTTScalarCoordinate) →
     CouplingEdge left middle →
     CouplingEdge middle right →
     ConnectedWithinTwo left right
@@ -77,12 +78,14 @@ allScalarCoordinatesConnectedWithinTwo
   (NTT.scalarCoordinate i NTT.constantPart)
   (NTT.scalarCoordinate j NTT.linearPart) =
   twoEdges
+    (NTT.scalarCoordinate j NTT.constantPart)
     (priorConstantEdge i j)
     (verifierCrossEdge j)
 allScalarCoordinatesConnectedWithinTwo
   (NTT.scalarCoordinate i NTT.linearPart)
   (NTT.scalarCoordinate j NTT.constantPart) =
   twoEdges
+    (NTT.scalarCoordinate j NTT.linearPart)
     (priorLinearEdge i j)
     (verifierCrossEdgeReverse j)
 
@@ -122,7 +125,7 @@ pathCrossesCut :
 pathCrossesCut cut leftSideProof rightSideProof (oneEdge edge) =
   noLeftToRightEdge cut leftSideProof rightSideProof edge
 pathCrossesCut cut leftSideProof rightSideProof
-  (twoEdges {middle = middle} first second)
+  (twoEdges middle first second)
   with side cut middle
 ... | leftSide =
   noLeftToRightEdge cut refl rightSideProof second
