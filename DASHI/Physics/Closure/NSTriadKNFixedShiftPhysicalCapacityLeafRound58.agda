@@ -11,7 +11,8 @@ module DASHI.Physics.Closure.NSTriadKNFixedShiftPhysicalCapacityLeafRound58 wher
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base using (ℚ; 0ℚ; _-_; _*_; _≤_; _<_) 
+open import Data.Rational.Base using (ℚ; 0ℚ; _-_; _*_; _≤_; _<_; nonNegative)
+import Data.Rational.Properties as ℚP
 
 record PhysicalOwnerFluxBlockIdentification : Set₁ where
   field
@@ -42,3 +43,29 @@ record UniformFixedShiftProductCapacity
       ≤ correctionHeadroomAfterData correctionHeadroom dataRemainder n
 
 open UniformFixedShiftProductCapacity public
+
+smallerNonnegativeCoefficientFitsEveryBlock :
+  ∀ {integralCritical correctionHeadroom dataRemainder}
+    {capacity : UniformFixedShiftProductCapacity
+      integralCritical correctionHeadroom dataRemainder} →
+  (coefficient : ℚ) →
+  0ℚ ≤ coefficient →
+  coefficient ≤ uniformCoefficient capacity →
+  ∀ n →
+  coefficient * integralCritical n
+  ≤ correctionHeadroomAfterData correctionHeadroom dataRemainder n
+smallerNonnegativeCoefficientFitsEveryBlock
+    {integralCritical = integralCritical}
+    {correctionHeadroom = correctionHeadroom}
+    {dataRemainder = dataRemainder}
+    {capacity = capacity} coefficient coefficientNN coefficientBelow n =
+  let
+    critical = integralCritical _
+    scaled :
+      coefficient * critical
+      ≤ uniformCoefficient capacity * critical
+    scaled =
+      let instance criticalNN = nonNegative (criticalIntegralNonnegative capacity n)
+      in ℚP.*-monoʳ-≤-nonNeg critical coefficientBelow
+  in
+  ℚP.≤-trans scaled (uniformProductFitsEveryBlock capacity n)
