@@ -2,14 +2,6 @@ module DASHI.Cognition.PNF.FullLearningStateFutureQuotientExact where
 
 open import DASHI.Core.Prelude
 
-------------------------------------------------------------------------
--- FULL LEARNER STATE
---
--- Equal parameters need not determine equal learning futures.  Optimizer,
--- curriculum/provenance and replay/data state are explicit coordinates of the
--- fine learner carrier.
-------------------------------------------------------------------------
-
 data Parameter : Set where
   neutralParam positiveParam : Parameter
 
@@ -57,10 +49,6 @@ sameBatchDifferentLearningFuture :
   ≡ visibleModel (update commonBatch rightLearner) → ⊥
 sameBatchDifferentLearningFuture ()
 
-------------------------------------------------------------------------
--- Parameter projection is therefore not a safe learning-state quotient.
-------------------------------------------------------------------------
-
 record LearningFutureDefect : Set where
   constructor learningFutureDefect
   field
@@ -73,12 +61,8 @@ canonicalLearningFutureDefect : LearningFutureDefect
 canonicalLearningFutureDefect =
   learningFutureDefect sameWeightsNow sameBatchDifferentLearningFuture
 
-------------------------------------------------------------------------
--- Exact provenance residual and reopening.
-------------------------------------------------------------------------
-
 record LearningResidual : Set where
-  constructor learningResidual
+  constructor learningResidualData
   field
     savedOptimizer : Optimizer
     savedProvenance : Provenance
@@ -88,26 +72,20 @@ open LearningResidual public
 
 learningResidual : LearnerState → LearningResidual
 learningResidual state =
-  learningResidual
+  learningResidualData
     (optimizer state)
     (provenance state)
     (replay state)
 
 reopenLearner : Parameter → LearningResidual → LearnerState
 reopenLearner parameter
-  (learningResidual optimizer provenance replay) =
+  (learningResidualData optimizer provenance replay) =
   learnerState parameter optimizer provenance replay
 
 learningResidualReopensExact :
   (state : LearnerState) →
   reopenLearner (visibleModel state) (learningResidual state) ≡ state
 learningResidualReopensExact (learnerState parameter optimizer provenance replay) = refl
-
-------------------------------------------------------------------------
--- Consumer-specific weakening: an inference-only consumer can forget optimizer
--- and training provenance; a continued-learning consumer cannot do so merely
--- from equality of current weights.
-------------------------------------------------------------------------
 
 data Consumer : Set where
   inferenceConsumer continuedLearningConsumer : Consumer
