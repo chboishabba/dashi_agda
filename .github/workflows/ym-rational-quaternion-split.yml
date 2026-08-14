@@ -23,7 +23,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: cachix/install-nix-action@v31
       - uses: DeterminateSystems/magic-nix-cache-action@v9
-      - name: Typecheck split quaternion leaves and consumer
+      - name: Typecheck Wilson consumer in a fresh process
         shell: bash
         run: |
           set -euo pipefail
@@ -32,10 +32,6 @@ jobs:
           export DASHI_STATUS_DIR="$RUNNER_TEMP/dashi-status"
           export AGDA_LOG_PATH="$GITHUB_WORKSPACE/ym-rational-quaternion-split.log"
           scripts/run_agda29_parallel_check.sh \
-            DASHI/Physics/YangMills/BalabanP33RationalQuaternionCoreExact.agda \
-            DASHI/Physics/YangMills/BalabanP33RationalQuaternionAlgebraLawsExact.agda \
-            DASHI/Physics/YangMills/BalabanP33RationalQuaternionWilsonJetExact.agda \
-            DASHI/Physics/YangMills/BalabanP33RationalQuaternionFlatCurlIdentityExact.agda \
             DASHI/Physics/YangMills/BalabanP33RationalQuaternionWilsonSecondVariationExact.agda
       - name: Upload Agda log
         if: always()
