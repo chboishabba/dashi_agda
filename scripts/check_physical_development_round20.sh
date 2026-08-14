@@ -56,6 +56,8 @@ grep -q 'ownerIsNotDeterminedByHandHere' DASHI/Biology/Physical/DevelopmentalGoa
 grep -q 'sameGenomeDifferentContextCanChangeOutcome' DASHI/Biology/Physical/DevelopmentalGoalFactorizationExact.agda
 grep -q 'sameHighLevelGoalHasDistinctFineRealisations' DASHI/Biology/Physical/DevelopmentalGoalFamilyAttractorExact.agda
 grep -q 'repairIsIdempotent' DASHI/Biology/Physical/DevelopmentalGoalFamilyAttractorExact.agda
+grep -q 'repairFixesEverySatisfyingRealisation' DASHI/Biology/Physical/DevelopmentalGoalFamilyAttractorExact.agda
+grep -q 'canonicalGoalFamilyRetraction' DASHI/Biology/Physical/DevelopmentalGoalFamilyAttractorExact.agda
 grep -q 'contextChangesCompiledChannelParameter' DASHI/Biology/Physical/GenomePhysicalParameterCompilerExact.agda
 grep -q 'dnaUVStillExact' DASHI/Biology/Physical/GenomePhysicalParameterCompilerExact.agda
 grep -q 'morphologyOnlyDynamicDefect' DASHI/Biology/Physical/DevelopmentalHiddenStateFutureDefectExact.agda
