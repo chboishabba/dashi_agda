@@ -18,6 +18,13 @@ module DASHI.Physics.Closure.NSTriadKNLuoFiniteEightPointSixThreeHolderExact whe
 -- NSTriadKNLuoFiniteEightPointSixThreeHolderBoundary.  This legacy module now
 -- owns only the literal eight-point carrier, transport identities, and final
 -- Holder assembly.  Its public theorem surface is unchanged.
+--
+-- Agda 2.9 profiling subsequently isolated `eightPairDiagonalMeaning` as the
+-- remaining consumer-side hotspot: the historical proof sent all sixteen
+-- x_i,y_i variables through the ring solver.  The current proof first forms
+-- the eight products p_i = x_i*y_i and asks the solver only to reassociate
+-- those eight opaque rationals.  This preserves the exact theorem while
+-- avoiding polynomial normalization of the product structure.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -166,7 +173,7 @@ sixthPairsNonnegative dataSet =
     nnp[])))))))
 
 -- Keep each product opaque to the ring solver.  The former proof passed all
--- sixteen xᵢ,yᵢ variables to `solve`, forcing Agda 2.9 to normalize the full
+-- sixteen x_i,y_i variables to `solve`, forcing Agda 2.9 to normalize the full
 -- product polynomial.  Reassociating the eight already-formed products gives
 -- the identical theorem while cutting the solver arity in half.
 eightPairDiagonalMeaning :
