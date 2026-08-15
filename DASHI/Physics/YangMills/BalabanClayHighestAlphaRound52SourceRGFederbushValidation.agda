@@ -6,8 +6,11 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound52SourceRGFederbushVa
 -- This round combines the two shortest currently available routes:
 --
 -- G1 / source chart:
---   calibrated principal-log + centre-transport column bounds
---     -> local JT-I quarter bound
+--   physical T_j = Ad_{U_j V^-1}
+--   + identity-chart chord control
+--     -> col(T_j-I) <= rho/4
+--   + principal-log defect col(J_j-I) <= rho/8
+--     -> local col(J_j T_j-I) <= 1/4
 --     -> normalized contour-average quarter contraction
 --     -> determinant-free 4/3 inverse bound.
 --
@@ -18,12 +21,16 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound52SourceRGFederbushVa
 --   + sufficiently-small coupling history
 --     -> direct Sect.-2 complete-density -> canonical YM4 invariant-region state.
 --
--- The remaining leaves are literal scalar/operator dictionaries and the
--- genuinely missing all-scale small-coupling history; no Clay promotion.
+-- The remaining leaves are literal source-chart/scalar/operator dictionaries
+-- and the genuinely missing all-scale small-coupling history; no Clay promotion.
 ------------------------------------------------------------------------
 
 import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound51CentreKKTBetaValidation
 import DASHI.Physics.YangMills.BalabanCMP109FederbushLogTransportToNormalizedInverseExact as Fed
+import DASHI.Physics.YangMills.BalabanCMP109FederbushTransportResidualControlsNormExact as TransportNorm
+import DASHI.Physics.YangMills.BalabanCMP109FederbushPrimitiveDefectsToNormalizedInverseExact as Primitive
+import DASHI.Physics.YangMills.BalabanCMP109FederbushTransportDefectFromIdentityChartExact as TransportChart
+import DASHI.Physics.YangMills.BalabanCMP109FederbushPhysicalChartToNormalizedInverseExact as PhysicalChart
 import DASHI.Physics.YangMills.BalabanClayGate4LightweightValidation as Gate4
 import DASHI.Physics.YangMills.Balaban1989CompleteDensityToYM4RegionExact as Complete
 import DASHI.Physics.YangMills.Balaban1989CanonicalYM4StateFromSection2Exact as Canonical
@@ -34,8 +41,20 @@ federbushLogTransportToLocalResidualLevel =
 federbushLogTransportToNormalizedInverseLevel =
   Fed.cmp109FederbushLogTransportToNormalizedInverseLevel
 
-federbushPhysicalLogTransportColumnBoundsLevel =
-  Fed.physicalCMP109FederbushLogTransportColumnBoundsLevel
+federbushTransportDefectControlsNormLevel =
+  TransportNorm.cmp109FederbushTransportDefectControlsNormLevel
+
+federbushPrimitiveDefectsToInverseLevel =
+  Primitive.cmp109FederbushPrimitiveDefectsToInverseLevel
+
+federbushTransportDefectFromIdentityChartLevel =
+  TransportChart.cmp109FederbushTransportDefectFromIdentityChartLevel
+
+federbushPhysicalChartToInverseLevel =
+  PhysicalChart.cmp109FederbushPhysicalChartToInverseLevel
+
+federbushSelectedChartLeavesLevel =
+  PhysicalChart.physicalCMP109FederbushSelectedChartLeavesLevel
 
 completeDensityToYM4RegionAssemblyLevel =
   Complete.balabanCompleteDensityToYM4RegionAssemblyLevel
