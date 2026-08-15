@@ -26,10 +26,10 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound52SourceRGFederbushVa
 --     -> direct Sect.-2 complete-density -> canonical YM4 invariant-region state.
 --
 -- RG1e / coupling history:
---   beta split -> beta>=0 -> finite inverse-coupling monotonicity -> backwards
---   inverse-threshold propagation.  This is weaker than the still-missing full
---   positive two-sided beta enclosure, and is sufficient for the monotonic part
---   of the CMP122 small-coupling hypothesis.
+--   beta split -> beta>=0 -> finite inverse-coupling monotonicity.  On a finite
+--   active RG trajectory, ONE terminal inverse-coupling threshold then
+--   propagates backwards to every active UV scale.  The remaining conversion
+--   is the literal positive-rational order equivalence u=1/g^2.
 --
 -- No Clay promotion is made here.
 ------------------------------------------------------------------------
@@ -46,6 +46,7 @@ import DASHI.Physics.YangMills.BalabanCMP109PrincipalLogDefectFromEndpointModulu
 import DASHI.Physics.YangMills.BalabanCMP109FederbushCoefficientChartToInverseExact as CoefficientChart
 import DASHI.Physics.YangMills.BalabanYM4NonnegativeBetaFinitePropagationExact as BetaFinite
 import DASHI.Physics.YangMills.BalabanYM4BetaSplitToSmallCouplingMonotonicityExact as BetaSplit
+import DASHI.Physics.YangMills.Balaban1989TerminalInverseThresholdHistoryExact as Terminal
 import DASHI.Physics.YangMills.BalabanClayGate4LightweightValidation as Gate4
 import DASHI.Physics.YangMills.Balaban1989CompleteDensityToYM4RegionExact as Complete
 import DASHI.Physics.YangMills.Balaban1989CanonicalYM4StateFromSection2Exact as Canonical
@@ -101,6 +102,15 @@ betaSplitNonnegativeTrajectoryLevel =
 
 betaSplitFiniteSmallCouplingMonotonicityLevel =
   BetaSplit.ym4BetaSplitFiniteSmallCouplingMonotonicityLevel
+
+terminalInverseThresholdPropagationLevel =
+  Terminal.balabanTerminalInverseThresholdPropagationLevel
+
+terminalThresholdToSmallCouplingHistoryLevel =
+  Terminal.balabanTerminalThresholdToSmallCouplingHistoryLevel
+
+rationalInverseSquareOrderDictionaryLevel =
+  Terminal.balabanRationalInverseSquareOrderDictionaryLevel
 
 completeDensityToYM4RegionAssemblyLevel =
   Complete.balabanCompleteDensityToYM4RegionAssemblyLevel
