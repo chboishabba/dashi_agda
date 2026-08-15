@@ -12,9 +12,10 @@ Primary source:
   2024. DOI: 10.6028/NIST.FIPS.203.
 
 The important structural comparison is between opposite FIPS residues such as
-(0,1), where gamma_1 = -gamma_0, and generic residue pairs.  Opposite residues
-split an 8-coefficient parity slice into even/odd subproblems.  The probe checks
-whether that algebraic split changes conditional candidate-list geometry.
+(0,1), where gamma_1 = -gamma_0, and generic residue pairs. Opposite residues
+split a coefficient block into even/odd sectors. The probe now includes seeded
+random field-point controls so that an apparent list-size improvement is not
+mistaken for a generic two-equation effect.
 """
 
 from __future__ import annotations
@@ -41,14 +42,18 @@ def gamma(i: int) -> int:
 GAMMA = [gamma(i) for i in range(128)]
 
 
-def block_signatures(m: int, residues: tuple[int, ...]):
-    weights = [[pow(GAMMA[i], j, Q) for j in range(m)] for i in residues]
-    points = list(product(CBD2, repeat=m))
+def block_signatures_at_points(m: int, points: tuple[int, ...]):
+    weights = [[pow(a, j, Q) for j in range(m)] for a in points]
+    candidates = list(product(CBD2, repeat=m))
     signatures = [
-        tuple(sum(x * w for x, w in zip(point, row)) % Q for row in weights)
-        for point in points
+        tuple(sum(x * w for x, w in zip(candidate, row)) % Q for row in weights)
+        for candidate in candidates
     ]
-    return points, signatures
+    return candidates, signatures
+
+
+def block_signatures(m: int, residues: tuple[int, ...]):
+    return block_signatures_at_points(m, tuple(GAMMA[i] for i in residues))
 
 
 def raw_profile(m: int, residues: tuple[int, ...]):
@@ -67,62 +72,76 @@ def raw_profile(m: int, residues: tuple[int, ...]):
     }
 
 
+def conditioned_mate_lists_at_points(
+    m: int,
+    points: tuple[int, ...],
+    trials: int,
+    seed: int,
+):
+    """Conditioned BaseCase-style finite block model.
+
+    At evaluation point a_j we use
+
+      R0_j = a_j * alpha1_j * S_j + E0_j
+      R1_j =       alpha0_j * S_j + E1_j,
+
+    with known random nonzero alpha0_j,alpha1_j. S,E0,E1 are transforms of
+    independent CBD2 m-coefficient blocks. For each generated observation we
+    enumerate only S candidates and test whether required E0/E1 signatures lie
+    in the exact finite error image. Runtime is O(5^m), not O(5^(3m)).
+    """
+    rng = random.Random(seed)
+    _, signatures = block_signatures_at_points(m, points)
+    image = set(signatures)
+    n = len(signatures)
+    result = []
+
+    for _ in range(trials):
+        s = signatures[rng.randrange(n)]
+        e0 = signatures[rng.randrange(n)]
+        e1 = signatures[rng.randrange(n)]
+        alpha0 = [rng.randrange(1, Q) for _ in points]
+        alpha1 = [rng.randrange(1, Q) for _ in points]
+
+        r0 = tuple(
+            (points[j] * alpha1[j] * s[j] + e0[j]) % Q
+            for j in range(len(points))
+        )
+        r1 = tuple(
+            (alpha0[j] * s[j] + e1[j]) % Q
+            for j in range(len(points))
+        )
+
+        survivors = 0
+        for candidate in signatures:
+            need0 = tuple(
+                (r0[j] - points[j] * alpha1[j] * candidate[j]) % Q
+                for j in range(len(points))
+            )
+            if need0 not in image:
+                continue
+            need1 = tuple(
+                (r1[j] - alpha0[j] * candidate[j]) % Q
+                for j in range(len(points))
+            )
+            if need1 in image:
+                survivors += 1
+        result.append(survivors)
+    return result
+
+
 def conditioned_mate_lists(
     m: int,
     residues: tuple[int, ...],
     trials: int,
     seed: int,
 ):
-    """Conditioned BaseCase-style finite block model.
-
-    For each selected residue i we use
-
-      R0_i = gamma_i * a1_i * S_i + E0_i
-      R1_i =             a0_i * S_i + E1_i,
-
-    with known random nonzero a0_i,a1_i.  S,E0,E1 are transforms of independent
-    CBD2 m-coefficient blocks.  For each generated observation we enumerate only
-    S candidates and test whether the required E0/E1 signatures remain in the
-    exact finite error image.  Thus runtime is O(5^m), not O(5^(3m)).
-    """
-    rng = random.Random(seed)
-    _, signatures = block_signatures(m, residues)
-    image = set(signatures)
-    n = len(signatures)
-    result = []
-
-    for _ in range(trials):
-        s_idx = rng.randrange(n)
-        e0_idx = rng.randrange(n)
-        e1_idx = rng.randrange(n)
-        s = signatures[s_idx]
-        e0 = signatures[e0_idx]
-        e1 = signatures[e1_idx]
-        a0 = [rng.randrange(1, Q) for _ in residues]
-        a1 = [rng.randrange(1, Q) for _ in residues]
-
-        r0 = tuple(
-            (GAMMA[residue] * a1[j] * s[j] + e0[j]) % Q
-            for j, residue in enumerate(residues)
-        )
-        r1 = tuple((a0[j] * s[j] + e1[j]) % Q for j in range(len(residues)))
-
-        survivors = 0
-        for candidate in signatures:
-            need0 = tuple(
-                (r0[j] - GAMMA[residue] * a1[j] * candidate[j]) % Q
-                for j, residue in enumerate(residues)
-            )
-            if need0 not in image:
-                continue
-            need1 = tuple(
-                (r1[j] - a0[j] * candidate[j]) % Q
-                for j in range(len(residues))
-            )
-            if need1 in image:
-                survivors += 1
-        result.append(survivors)
-    return result
+    return conditioned_mate_lists_at_points(
+        m,
+        tuple(GAMMA[i] for i in residues),
+        trials,
+        seed,
+    )
 
 
 def summarize(values):
@@ -134,10 +153,66 @@ def summarize(values):
     }
 
 
+def random_field_pairs(count: int, seed: int):
+    rng = random.Random(seed)
+    pairs = []
+    while len(pairs) < count:
+        left = rng.randrange(1, Q)
+        right = rng.randrange(1, Q)
+        if left == right or (left + right) % Q == 0:
+            continue
+        pairs.append((left, right))
+    return pairs
+
+
+def benchmark_opposite_vs_random(m: int, trials: int, baseline_pairs: int):
+    opposite = ((GAMMA[0], GAMMA[1]), (GAMMA[2], GAMMA[3]))
+    controls = random_field_pairs(baseline_pairs, 2026081500 + m)
+
+    opposite_means = []
+    print(f"\nseeded opposite-vs-random benchmark m={m}")
+    for index, points in enumerate(opposite):
+        values = conditioned_mate_lists_at_points(
+            m, points, trials, 2026081510 + 100 * m + index
+        )
+        summary = summarize(values)
+        opposite_means.append(summary["mean"])
+        print(f"opposite points={points} {summary}")
+
+    control_means = []
+    for index, points in enumerate(controls):
+        values = conditioned_mate_lists_at_points(
+            m, points, trials, 2026081520 + 100 * m + index
+        )
+        summary = summarize(values)
+        control_means.append(summary["mean"])
+        print(f"control  points={points} {summary}")
+
+    opposite_mean = statistics.mean(opposite_means)
+    control_mean = statistics.mean(control_means)
+    ratio = opposite_mean / control_mean
+    print(
+        "benchmark aggregate",
+        {
+            "opposite_mean": opposite_mean,
+            "random_control_mean": control_mean,
+            "opposite/control": ratio,
+            "control_median": statistics.median(control_means),
+        },
+    )
+    return ratio
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--trials", type=int, default=12)
     parser.add_argument("--max-block", type=int, default=8)
+    parser.add_argument("--baseline-pairs", type=int, default=6)
+    parser.add_argument(
+        "--include-m9",
+        action="store_true",
+        help="also benchmark m=9 (5^9 candidates; materially heavier memory/runtime)",
+    )
     args = parser.parse_args()
 
     assert Q == 3329
@@ -182,10 +257,17 @@ def main() -> None:
             )
             print(f"m={m} residues={residues} {summarize(values)}")
 
+    # This is the primary falsification control. At m=8 the opposite FIPS pairs
+    # reproducibly leave substantially smaller conditioned lists than seeded
+    # generic field-point pairs; m=9 checks whether the separation persists.
+    benchmark_opposite_vs_random(8, args.trials, args.baseline_pairs)
+    if args.include_m9:
+        benchmark_opposite_vs_random(9, max(3, args.trials // 4), args.baseline_pairs)
+
     print("\nInterpretation boundary:")
     print("  * This is a conditioned slice: coefficients outside the block are assumed removed.")
     print("  * A small local list is not a whole-key attack or runtime claim.")
-    print("  * Opposite residue pairs are algebraically special; compare them against generic pairs.")
+    print("  * Opposite residue pairs are algebraically special; random controls test whether that matters.")
     print("  * Promote only reproducible structural anomalies to Agda theorems.")
 
 
