@@ -3,8 +3,7 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound53LiteralFederbushCou
 ------------------------------------------------------------------------
 -- ROUND 53 FOCUSED VALIDATION ROOT
 --
--- This root does not promote any Clay endpoint.  It narrows the preferred G1
--- route to one source-convention dictionary:
+-- Preferred G1 route:
 --
 --   printed equation-(0.11) J_j T_j
 --     = J_+(Y_j) Ad_{exp Y_j}
@@ -13,14 +12,14 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound53LiteralFederbushCou
 --     -> col(J_-(Y_j)-I) < 1/4
 --     -> normalized 4/3 inverse.
 --
--- The finite/rational transport after the literal equality is now theorem
+-- The finite/rational transport after the literal equality is theorem
 -- consumption.  What remains physical is the sign/trivialization identity and
 -- the actual Bishop coefficient realization at |Y| <= 1/12.
 --
--- On the RG side this root retains the source-oriented finite history:
+-- RG route retained here:
 -- beta split -> beta >= 0 -> terminal inverse threshold -> small coupling.
--- The inverse-square rational order dictionary and the actual finite-lattice
--- beta estimates stay visible as separate leaves.
+-- The positive-rational inverse-square order dictionary and the actual
+-- finite-lattice beta estimates remain explicit leaves.  No Clay promotion.
 ------------------------------------------------------------------------
 
 import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound52SourceRGFederbushValidation as R52
@@ -51,8 +50,11 @@ sourceRadiusMatrixQuarterLevel =
 sourceRadiusBishopCoefficientLevel =
   Source.cmp109PrincipalLogSourceRadiusBishopCoefficientLevel
 
-betaSplitTerminalHistoryLevel =
-  BetaTerminal.balabanBetaSplitTerminalHistoryLevel
+betaSplitTerminalHistoryAssemblyLevel =
+  BetaTerminal.balabanBetaSplitTerminalHistoryAssemblyLevel
+
+betaSplitTerminalSmallCouplingLevel =
+  BetaTerminal.balabanBetaSplitTerminalSmallCouplingLevel
 
 terminalThresholdPropagationLevel =
   Terminal.balabanTerminalInverseThresholdPropagationLevel
