@@ -1,0 +1,182 @@
+module DASHI.Physics.YangMills.BalabanYM4LargeFieldContributionSharedSlackExact where
+
+------------------------------------------------------------------------
+-- PRIMARY SOURCES
+--
+-- Tadeusz Bałaban,
+-- "Convergent Renormalization Expansions for Lattice Gauge Theories",
+-- Communications in Mathematical Physics 119 (1988), 243--285.
+-- DOI: 10.1007/BF01217741.
+--
+-- Tadeusz Bałaban,
+-- "Large Field Renormalization. II. Localization, Exponentiation, and Bounds
+-- for the R Operation",
+-- Communications in Mathematical Physics 122 (1989), 355--392.
+-- DOI: 10.1007/BF01238433.
+--
+-- Roman Kotecky and David Preiss,
+-- "Cluster Expansion for Abstract Polymer Models",
+-- Communications in Mathematical Physics 103 (1986), 491--498.
+-- DOI: 10.1007/BF01211762.
+--
+-- DASHI CONTRIBUTION
+--
+-- This is the first direct bridge from a rooted R-operation shell estimate to
+-- the exact shared error budget consumed by the lightweight Gate-4 invariant
+-- region.  It deliberately avoids the stronger (and unnecessary here)
+-- requirement that the large-field error decay by a fixed geometric ratio in
+-- the RG scale index.
+--
+-- If, at one RG step, the weighted rooted shell at diameter depth n obeys
+--
+--      shell(n) <= a 2^{-n},
+--
+-- then every finite rooted contribution is <= 2a.  Therefore the actual
+-- combined polymer step closes whenever
+--
+--      perturbativeError + 2a <= (1-q) Kmax.
+--
+-- The factor 2 is exact for the geometric shell majorant.  Thus the remaining
+-- physical producer is sharpened to a same-step estimate of the shell
+-- amplitude a from Bałaban's boundary-uniform R^(k)(X) bound plus the rooted
+-- polymer entropy count; no all-scale fixed-ratio p0 hypothesis is needed for
+-- this particular invariant-region closure.
+------------------------------------------------------------------------
+
+open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _*_; _≤_)
+import Data.Rational.Properties as ℚP
+open import Relation.Binary.PropositionalEquality using (subst)
+
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanTraceKoteckyPreissGeometricExact as Geo
+import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
+
+scaledShellMajorant : ℚ → Nat → ℚ
+scaledShellMajorant amplitude depth = amplitude * Geo.halfPower depth
+
+scaledShellPartial : ℚ → Nat → ℚ
+scaledShellPartial amplitude zero = 0ℚ
+scaledShellPartial amplitude (suc depth) =
+  scaledShellPartial amplitude depth + scaledShellMajorant amplitude depth
+
+scaledShellPartialIsAmplitudeTimesTrace : ∀ amplitude depth →
+  scaledShellPartial amplitude depth
+  ≡ amplitude * Geo.traceShellPartialSum depth
+scaledShellPartialIsAmplitudeTimesTrace amplitude zero =
+  ℚP.*-zeroʳ amplitude
+scaledShellPartialIsAmplitudeTimesTrace amplitude (suc depth)
+  rewrite scaledShellPartialIsAmplitudeTimesTrace amplitude depth =
+  sym (ℚP.*-distribˡ-+ amplitude
+    (Geo.traceShellPartialSum depth) (Geo.halfPower depth))
+  where
+  sym : ∀ {A : Set} {x y : A} → x ≡ y → y ≡ x
+  sym refl = refl
+
+scaledShellPartialBelowTwiceAmplitude : ∀ amplitude depth →
+  0ℚ ≤ amplitude →
+  scaledShellPartial amplitude depth ≤ amplitude * Geo.twoℚ
+scaledShellPartialBelowTwiceAmplitude amplitude depth amplitudeNonnegative =
+  subst
+    (λ lower → lower ≤ amplitude * Geo.twoℚ)
+    (sym (scaledShellPartialIsAmplitudeTimesTrace amplitude depth))
+    (Norm.scaleNonnegative amplitude amplitudeNonnegative
+      (Geo.traceShellPartialSumBelowTwo depth))
+  where
+  sym : ∀ {A : Set} {x y : A} → x ≡ y → y ≡ x
+  sym refl = refl
+
+record PhysicalRootedLargeFieldContribution
+    (Scale Volume Root : Set) : Set₁ where
+  field
+    shellAmplitude : Scale → ℚ
+    rootedShell : Scale → Volume → Root → Nat → ℚ
+    largeFieldContribution : Scale → Volume → Root → Nat → ℚ
+
+    amplitudeNonnegative : ∀ scale → 0ℚ ≤ shellAmplitude scale
+
+    shellBelowGeometric : ∀ scale volume root depth →
+      rootedShell scale volume root depth
+      ≤ scaledShellMajorant (shellAmplitude scale) depth
+
+    -- The concrete norm identification: the large-field term appearing in the
+    -- combined one-step polymer norm is bounded by the finite rooted shell sum.
+    contributionBelowRootedSum : ∀ scale volume root cutoff →
+      largeFieldContribution scale volume root cutoff
+      ≤ rootedShellPartial scale volume root cutoff
+
+    rootedShellPartial : Scale → Volume → Root → Nat → ℚ
+    rootedShellPartial scale volume root zero = 0ℚ
+    rootedShellPartial scale volume root (suc depth) =
+      rootedShellPartial scale volume root depth
+      + rootedShell scale volume root depth
+
+    partialMonotone : ∀ {left leftUpper right rightUpper} →
+      left ≤ leftUpper → right ≤ rightUpper →
+      left + right ≤ leftUpper + rightUpper
+
+open PhysicalRootedLargeFieldContribution public
+
+rootedSumBelowScaledGeometric :
+  ∀ {Scale Volume Root}
+    (physical : PhysicalRootedLargeFieldContribution Scale Volume Root)
+    scale volume root cutoff →
+  rootedShellPartial physical scale volume root cutoff
+  ≤ scaledShellPartial (shellAmplitude physical scale) cutoff
+rootedSumBelowScaledGeometric physical scale volume root zero =
+  ℚP.≤-refl
+rootedSumBelowScaledGeometric physical scale volume root (suc depth) =
+  partialMonotone physical
+    (rootedSumBelowScaledGeometric physical scale volume root depth)
+    (shellBelowGeometric physical scale volume root depth)
+
+physicalLargeFieldContributionBelowTwiceAmplitude :
+  ∀ {Scale Volume Root}
+    (physical : PhysicalRootedLargeFieldContribution Scale Volume Root)
+    scale volume root cutoff →
+  largeFieldContribution physical scale volume root cutoff
+  ≤ shellAmplitude physical scale * Geo.twoℚ
+physicalLargeFieldContributionBelowTwiceAmplitude physical scale volume root cutoff =
+  ℚP.≤-trans
+    (contributionBelowRootedSum physical scale volume root cutoff)
+    (ℚP.≤-trans
+      (rootedSumBelowScaledGeometric physical scale volume root cutoff)
+      (scaledShellPartialBelowTwiceAmplitude
+        (shellAmplitude physical scale) cutoff
+        (amplitudeNonnegative physical scale)))
+
+record SharedPolymerSlackAtStep : Set where
+  field
+    contraction perturbativeError smallFieldCap largeFieldAmplitude : ℚ
+    slack : ℚ
+
+    slackDefinition :
+      slack ≡ (1ℚ - contraction) * smallFieldCap
+
+    perturbativePlusLargeFieldFits :
+      perturbativeError + largeFieldAmplitude * Geo.twoℚ ≤ slack
+
+open SharedPolymerSlackAtStep public
+
+combinedErrorFitsInvariantSlack :
+  (budget : SharedPolymerSlackAtStep) →
+  perturbativeError budget + largeFieldAmplitude budget * Geo.twoℚ
+  ≤ (1ℚ - contraction budget) * smallFieldCap budget
+combinedErrorFitsInvariantSlack budget =
+  subst
+    (λ upper →
+      perturbativeError budget + largeFieldAmplitude budget * Geo.twoℚ ≤ upper)
+    (slackDefinition budget)
+    (perturbativePlusLargeFieldFits budget)
+
+largeFieldRootedSummationLevel : ProofLevel
+largeFieldRootedSummationLevel = machineChecked
+
+largeFieldSharedSlackAssemblyLevel : ProofLevel
+largeFieldSharedSlackAssemblyLevel = machineChecked
+
+-- Remaining physical theorem: instantiate shellAmplitude from the literal
+-- boundary-uniform R-operation activity and the rooted entropy weight in the
+-- same polymer norm used by the one-step RG cutset.
+physicalROperationToRootedShellAmplitudeLevel : ProofLevel
+physicalROperationToRootedShellAmplitudeLevel = conditional
