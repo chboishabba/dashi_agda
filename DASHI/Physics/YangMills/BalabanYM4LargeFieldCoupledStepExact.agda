@@ -94,13 +94,22 @@ rawStepBelowCombinedError :
   ≤ contraction dataSet * RG.smallFieldPolymerNorm current
     + combinedError dataSet
 rawStepBelowCombinedError {current = current} dataSet =
+  let
+    largePlusPerturbative :
+      LargeFieldCoupledOneStepData.perturbativeError dataSet
+      + LargeFieldCoupledOneStepData.largeFieldContribution dataSet
+      ≤ LargeFieldCoupledOneStepData.perturbativeError dataSet
+      + LargeFieldCoupledOneStepData.shellAmplitude dataSet * Geo.twoℚ
+    largePlusPerturbative =
+      ℚP.+-monoʳ-≤
+        (LargeFieldCoupledOneStepData.perturbativeError dataSet)
+        (LargeFieldCoupledOneStepData.largeFieldContributionBound dataSet)
+  in
   ℚP.≤-trans
     (rawCombinedPolymerStep dataSet)
-    (ℚP.+-monoˡ-≤
+    (ℚP.+-monoʳ-≤
       (contraction dataSet * RG.smallFieldPolymerNorm current)
-      (ℚP.+-monoˡ-≤
-        (perturbativeError dataSet)
-        (largeFieldContributionBound dataSet)))
+      largePlusPerturbative)
 
 combinedErrorFitsSlack :
   ∀ {parameters current next}
@@ -119,25 +128,25 @@ largeFieldCoupledAnalyticBounds :
   LargeFieldCoupledOneStepData parameters current next →
   Budget.CoupledOneStepAnalyticBounds parameters current next
 largeFieldCoupledAnalyticBounds dataSet = record
-  { Budget.CoupledOneStepAnalyticBounds.contraction = contraction dataSet
-  ; Budget.CoupledOneStepAnalyticBounds.error = combinedError dataSet
-  ; Budget.CoupledOneStepAnalyticBounds.contractionNonnegative =
+  { contraction = contraction dataSet
+  ; error = combinedError dataSet
+  ; contractionNonnegative =
       contractionNonnegative dataSet
-  ; Budget.CoupledOneStepAnalyticBounds.contractionAtMostOne =
+  ; contractionAtMostOne =
       contractionAtMostOne dataSet
-  ; Budget.CoupledOneStepAnalyticBounds.smallFieldOneStep =
+  ; smallFieldOneStep =
       rawStepBelowCombinedError dataSet
-  ; Budget.CoupledOneStepAnalyticBounds.perturbativeErrorFitsSlack =
+  ; perturbativeErrorFitsSlack =
       combinedErrorFitsSlack dataSet
-  ; Budget.CoupledOneStepAnalyticBounds.couplingNextControlled =
+  ; couplingNextControlled =
       couplingNextControlled dataSet
-  ; Budget.CoupledOneStepAnalyticBounds.largeFieldNextControlled =
+  ; largeFieldNextControlled =
       largeFieldNextControlled dataSet
-  ; Budget.CoupledOneStepAnalyticBounds.covarianceNextControlled =
+  ; covarianceNextControlled =
       covarianceNextControlled dataSet
-  ; Budget.CoupledOneStepAnalyticBounds.decayNextNonnegative =
+  ; decayNextNonnegative =
       decayNextNonnegative dataSet
-  ; Budget.CoupledOneStepAnalyticBounds.spacingNextNonnegative =
+  ; spacingNextNonnegative =
       spacingNextNonnegative dataSet
   }
 

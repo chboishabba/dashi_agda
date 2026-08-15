@@ -36,14 +36,13 @@ module DASHI.Physics.YangMills.BalabanYM4ROperationEntropyShellExact where
 -- the SAME polymer-weight convention.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.List.Base using (length)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
-import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (subst; sym; trans; cong)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanYM4LargeFieldContributionSharedSlackExact as LF
@@ -57,6 +56,22 @@ natAsRational : Nat → ℚ
 natAsRational zero = 0ℚ
 natAsRational (suc n) = 1ℚ + natAsRational n
 
+natAsRationalSuc : ∀ n → natAsRational (suc n) ≡ 1ℚ + natAsRational n
+natAsRationalSuc n = refl
+
+regroupNatAsRational : ∀ n upper →
+  upper + natAsRational n * upper
+  ≡ natAsRational (suc n) * upper
+regroupNatAsRational n upper =
+  subst
+    (λ count → upper + natAsRational n * upper ≡ count * upper)
+    (sym (natAsRationalSuc n))
+    (trans
+      (cong
+        (λ first → first + natAsRational n * upper)
+        (sym (ℚP.*-identityˡ upper)))
+      (sym (ℚP.*-distribʳ-+ upper 1ℚ (natAsRational n))))
+
 sumRational : ∀ {A : Set} → List A → (A → ℚ) → ℚ
 sumRational [] term = 0ℚ
 sumRational (value ∷ values) term = term value + sumRational values term
@@ -66,7 +81,10 @@ sumMemberwiseBelowLengthTimes :
   (∀ value → value ∈ values → term value ≤ upper) →
   sumRational values term ≤ natAsRational (length values) * upper
 sumMemberwiseBelowLengthTimes [] term upper pointwise =
-  ℚP.≤-refl
+  subst
+    (λ bound → 0ℚ ≤ bound)
+    (sym (ℚP.*-zeroˡ upper))
+    ℚP.≤-refl
 sumMemberwiseBelowLengthTimes (value ∷ values) term upper pointwise =
   let
     tailBound =
@@ -76,7 +94,7 @@ sumMemberwiseBelowLengthTimes (value ∷ values) term upper pointwise =
     regroup :
       upper + natAsRational (length values) * upper
       ≡ natAsRational (suc (length values)) * upper
-    regroup = ℚRing.solve-∀ upper (natAsRational (length values))
+    regroup = regroupNatAsRational (length values) upper
   in
   subst
     (λ rhs → term value + sumRational values term ≤ rhs)

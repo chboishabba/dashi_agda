@@ -63,10 +63,12 @@ scaledShellPartialIsAmplitudeTimesTrace : ∀ amplitude depth →
   scaledShellPartial amplitude depth
   ≡ amplitude * Geo.traceShellPartialSum depth
 scaledShellPartialIsAmplitudeTimesTrace amplitude zero =
-  ℚRing.solve-∀ amplitude
+  sym (ℚP.*-zeroʳ amplitude)
 scaledShellPartialIsAmplitudeTimesTrace amplitude (suc depth)
   rewrite scaledShellPartialIsAmplitudeTimesTrace amplitude depth =
-  ℚRing.solve-∀ amplitude (Geo.traceShellPartialSum depth) (Geo.halfPower depth)
+  sym (ℚP.*-distribˡ-+ amplitude
+    (Geo.traceShellPartialSum depth)
+    (Geo.halfPower depth))
 
 scaledShellPartialBelowTwiceAmplitude : ∀ amplitude depth →
   0ℚ ≤ amplitude →
@@ -89,6 +91,14 @@ scaledShellPartialBelowTwiceAmplitude amplitude depth amplitudeNonnegative =
     (sym (scaledShellPartialIsAmplitudeTimesTrace amplitude depth))
     scaledTrace
 
+rootedShellPartial : ∀ (Scale Volume Root : Set) →
+  (Scale → Volume → Root → Nat → ℚ) →
+  Scale → Volume → Root → Nat → ℚ
+rootedShellPartial Scale Volume Root rootedShell scale volume root zero = 0ℚ
+rootedShellPartial Scale Volume Root rootedShell scale volume root (suc depth) =
+  rootedShellPartial Scale Volume Root rootedShell scale volume root depth
+  + rootedShell scale volume root depth
+
 record PhysicalRootedLargeFieldContribution
     (Scale Volume Root : Set) : Set₁ where
   field
@@ -102,12 +112,6 @@ record PhysicalRootedLargeFieldContribution
       rootedShell scale volume root depth
       ≤ scaledShellMajorant (shellAmplitude scale) depth
 
-    rootedShellPartial : Scale → Volume → Root → Nat → ℚ
-    rootedShellPartial scale volume root zero = 0ℚ
-    rootedShellPartial scale volume root (suc depth) =
-      rootedShellPartial scale volume root depth
-      + rootedShell scale volume root depth
-
     partialMonotone : ∀ {left leftUpper right rightUpper} →
       left ≤ leftUpper → right ≤ rightUpper →
       left + right ≤ leftUpper + rightUpper
@@ -116,7 +120,7 @@ record PhysicalRootedLargeFieldContribution
     -- combined one-step polymer norm is bounded by this finite rooted shell sum.
     contributionBelowRootedSum : ∀ scale volume root cutoff →
       largeFieldContribution scale volume root cutoff
-      ≤ rootedShellPartial scale volume root cutoff
+      ≤ rootedShellPartial Scale Volume Root rootedShell scale volume root cutoff
 
 open PhysicalRootedLargeFieldContribution public
 
@@ -124,7 +128,7 @@ rootedSumBelowScaledGeometric :
   ∀ {Scale Volume Root}
     (physical : PhysicalRootedLargeFieldContribution Scale Volume Root)
     scale volume root cutoff →
-  rootedShellPartial physical scale volume root cutoff
+  rootedShellPartial Scale Volume Root (rootedShell physical) scale volume root cutoff
   ≤ scaledShellPartial (shellAmplitude physical scale) cutoff
 rootedSumBelowScaledGeometric physical scale volume root zero =
   ℚP.≤-refl
