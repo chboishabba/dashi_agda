@@ -23,6 +23,7 @@ import DASHI.Physics.YangMills.BalabanCMP119RDecayReserveBudgetExact as Reserve
 import DASHI.Physics.YangMills.BalabanCMP119CMP122BoundaryReinjectionSourceExact as Boundary
 import DASHI.Physics.YangMills.BalabanCMP99CovarianceLocalityToRGStateExact as Covariance
 import DASHI.Physics.YangMills.Balaban1989SmallCouplingToRGCapExact as Coupling
+import DASHI.Physics.YangMills.Balaban1989CompleteDensityToYM4RegionExact as CompleteDensity
 
 polymerAuditReady = Polymer.lightweightPolymerAuditReady
 polymerAuditNoPromotion = Polymer.lightweightPolymerAuditNoPromotion
@@ -72,6 +73,14 @@ balabanSmallCouplingHypothesisAuthorityLevel =
 balabanSmallCouplingToRGCapTransportLevel =
   Coupling.balabanSmallCouplingToRGCapTransportLevel
 
+-- Strongest source-reuse lane: CMP119/CMP122 complete-density preservation can
+-- populate the whole rational YM4 invariant region directly once one literal
+-- Sect.-2 -> repository dictionary is supplied.  The separate constructive
+-- shell/shared-slack lane above remains useful as an auditable rederivation and
+-- falsification surface, but is no longer the only possible Gate-4 route.
+balabanCompleteDensityToYM4RegionAssemblyLevel =
+  CompleteDensity.balabanCompleteDensityToYM4RegionAssemblyLevel
+
 -- Fail-closed physical frontier.  The primary papers now own the abstract
 -- decay/locality and small-coupling conditional theorems; these are the
 -- representation, history and numerical leaves which must be instantiated on
@@ -97,6 +106,8 @@ cmp99RepositoryCovarianceDictionaryLevel =
   Covariance.cmp99RepositoryCovarianceDictionaryLevel
 balabanPhysicalSmallCouplingHistoryLevel =
   Coupling.balabanPhysicalSmallCouplingHistoryLevel
+balabanCompleteDensityYM4RegionDictionaryLevel =
+  CompleteDensity.balabanCompleteDensityYM4RegionDictionaryLevel
 
 physicalCoupledOneStepBoundsLevel =
   OneStep.lightweightGate4PhysicalAnalyticBoundsLevel
