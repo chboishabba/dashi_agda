@@ -20,25 +20,23 @@ module DASHI.Physics.YangMills.BalabanYM4LargeFieldCoupledStepExact where
 --
 -- DASHI CONTRIBUTION
 --
--- Feed the actual finite rooted large-field contribution into the same error
--- coordinate used by CoupledOneStepAnalyticBounds.  If
+-- Feed the finite rooted large-field contribution into the same error
+-- coordinate consumed by CoupledOneStepAnalyticBounds.  If
 --
---   K' <= q K + (Epert + ELF)
---   ELF <= 2 a
+--   K' <= q K + (Epert + ELF),
+--   ELF <= 2 a,
 --   Epert + 2 a <= (1-q) Kmax,
 --
--- then the common Gate-4 theorem consumes the single error
---
---   E = Epert + 2 a
---
--- and closes the invariant region.  This removes a previously hidden gap
--- between "large-field shell summability" and "strict combined polymer norm
--- closure": they are now connected by an exact theorem on the same rational
--- RG state.
+-- then the common Gate-4 theorem consumes E = Epert + 2a and closes the
+-- invariant region.  Thus rooted shell summability and strict combined polymer
+-- closure are connected on the same rational RG state.
 ------------------------------------------------------------------------
 
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_)
+open import Agda.Builtin.Equality using (_≡_)
+open import Data.Rational.Base as ℚ using
+  (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
+open import Relation.Binary.PropositionalEquality using (sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanTraceKoteckyPreissGeometricExact as Geo
@@ -115,8 +113,6 @@ combinedErrorFitsSlack {parameters = parameters} dataSet
         | sym (sharedSlackCap dataSet)
         | sym (sharedSlackAmplitude dataSet) =
   LF.combinedErrorFitsInvariantSlack (sharedSlack dataSet)
-  where
-  open import Relation.Binary.PropositionalEquality using (sym)
 
 largeFieldCoupledAnalyticBounds :
   ∀ {parameters current next} →
