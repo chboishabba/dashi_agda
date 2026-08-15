@@ -20,7 +20,11 @@ module DASHI.Physics.YangMills.Balaban1989TerminalInverseThresholdHistoryExact w
 -- Localize the coupling-history hypothesis needed by CMP122 Theorem 1.
 -- Because u_k=g_k^-2 decreases toward the coarser lattice whenever beta>=0,
 -- it is enough to certify ONE inverse-coupling threshold at the terminal scale,
--- provided every earlier scale has a finite gap to that terminal scale.
+-- provided every ACTIVE earlier scale has a finite gap to that terminal scale.
+--
+-- The explicit ActiveScale predicate is essential: a finite RG trajectory has
+-- no nonnegative gap from scales beyond its terminal index.  Thus this theorem
+-- does not smuggle in an impossible all-Nat reachability hypothesis.
 --
 -- The only representation-specific input retained here is the elementary
 -- monotone conversion
@@ -35,8 +39,7 @@ module DASHI.Physics.YangMills.Balaban1989TerminalInverseThresholdHistoryExact w
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base as ℚ using (ℚ; _≤_)
-import Data.Rational.Properties as ℚP
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanYM4SourceNormalizedCouplingRecurrenceExact as Flow
@@ -50,9 +53,12 @@ record TerminalInverseThresholdHistory
     gamma inverseThreshold : ℚ
     terminalScale : Nat
 
-    gapToTerminal : Nat → Nat
-    scaleReachesTerminal : ∀ scale →
-      Finite.advance scale (gapToTerminal scale) ≡ terminalScale
+    ActiveScale : Nat → Set
+    terminalActive : ActiveScale terminalScale
+
+    gapToTerminal : ∀ scale → ActiveScale scale → Nat
+    scaleReachesTerminal : ∀ scale (active : ActiveScale scale) →
+      Finite.advance scale (gapToTerminal scale active) ≡ terminalScale
 
     terminalInverseThreshold :
       inverseThreshold ≤ Flow.inverseCoupling trajectory terminalScale
@@ -65,40 +71,37 @@ record TerminalInverseThresholdHistory
 
 open TerminalInverseThresholdHistory public
 
-inverseThresholdAtEveryScale :
+inverseThresholdAtActiveScale :
   ∀ {trajectory}
-    (history : TerminalInverseThresholdHistory trajectory) scale →
+    (history : TerminalInverseThresholdHistory trajectory)
+    scale → ActiveScale history scale →
   inverseThreshold history ≤ Flow.inverseCoupling trajectory scale
-inverseThresholdAtEveryScale {trajectory} history scale =
+inverseThresholdAtActiveScale {trajectory} history scale active =
   let
+    gap = gapToTerminal history scale active
+
     terminalAsAdvance :
       inverseThreshold history
-      ≤ Flow.inverseCoupling trajectory
-          (Finite.advance scale (gapToTerminal history scale))
+      ≤ Flow.inverseCoupling trajectory (Finite.advance scale gap)
     terminalAsAdvance = subst
       (λ index →
         inverseThreshold history ≤ Flow.inverseCoupling trajectory index)
-      (symmetry (scaleReachesTerminal history scale))
+      (sym (scaleReachesTerminal history scale active))
       (terminalInverseThreshold history)
+  in
+  Finite.inverseThresholdPropagatesBackwards
+    (betaNonnegative history)
+    (inverseThreshold history)
+    scale gap terminalAsAdvance
 
-    backward = Finite.inverseThresholdPropagatesBackwards
-      (betaNonnegative history)
-      (inverseThreshold history)
-      scale
-      (gapToTerminal history scale)
-      terminalAsAdvance
-  in backward
-  where
-  symmetry : ∀ {A : Set} {x y : A} → x ≡ y → y ≡ x
-  symmetry refl = refl
-
-smallCouplingAtEveryScale :
+smallCouplingAtActiveScale :
   ∀ {trajectory}
-    (history : TerminalInverseThresholdHistory trajectory) scale →
+    (history : TerminalInverseThresholdHistory trajectory)
+    scale → ActiveScale history scale →
   couplingAt history scale ≤ gamma history
-smallCouplingAtEveryScale history scale =
+smallCouplingAtActiveScale history scale active =
   inverseThresholdImpliesSmallCoupling history scale
-    (inverseThresholdAtEveryScale history scale)
+    (inverseThresholdAtActiveScale history scale active)
 
 balabanTerminalInverseThresholdPropagationLevel : ProofLevel
 balabanTerminalInverseThresholdPropagationLevel = machineChecked
@@ -108,6 +111,7 @@ balabanTerminalThresholdToSmallCouplingHistoryLevel = machineChecked
 
 -- Remaining representation leaf: instantiate inverseThresholdImpliesSmallCoupling
 -- for the literal positive rational relation u_k=1/g_k^2.  The RG-specific part
--- of the all-scale history is reduced to beta>=0 plus the terminal threshold.
+-- of the active all-scale history is reduced to beta>=0 plus one terminal
+-- inverse threshold.
 balabanRationalInverseSquareOrderDictionaryLevel : ProofLevel
 balabanRationalInverseSquareOrderDictionaryLevel = conditional
