@@ -215,26 +215,27 @@ mutual
     (pair : Cube.Pair Z3.FourierMode Z3.FourierMode)
     (pairs : List (Cube.Pair Z3.FourierMode Z3.FourierMode))
     (proof : modeWithinCutoff N
-      (Z3.addMode (Cube.first pair) (Cube.second pair)) ≡ true) →
+    (Z3.addMode (Cube.first pair) (Cube.second pair)) ≡ true) →
     ∀ {τ} →
-    τ ∈ (enumerateFromPairs N (pair ∷ pairs) | true) →
+    τ ∈ (pairTriad pair ∷ enumerateFromPairs N pairs) →
     modeWithinCutoff N (k τ) ≡ true
-  trueOutputMember proof (Cube.here equality) =
+  trueOutputMember N pair pairs proof (Cube.here equality) =
     subst
       (λ output → modeWithinCutoff N output ≡ true)
       (sym (cong k equality))
       proof
-  trueOutputMember proof (Cube.there tail) =
-    enumeratedOutputWithin tail
+  trueOutputMember N pair pairs proof (Cube.there tail) =
+    enumeratedOutputWithin {N = N} tail
 
   falseOutputMember :
     (N : Nat)
     (pair : Cube.Pair Z3.FourierMode Z3.FourierMode)
     (pairs : List (Cube.Pair Z3.FourierMode Z3.FourierMode)) →
     ∀ {τ} →
-    τ ∈ (enumerateFromPairs N (pair ∷ pairs) | false) →
+    τ ∈ enumerateFromPairs N pairs →
     modeWithinCutoff N (k τ) ≡ true
-  falseOutputMember member = enumeratedOutputWithin member
+  falseOutputMember N pair pairs member =
+    enumeratedOutputWithin {N = N} member
 
 enumerateFromPairsComplete :
   ∀ {N pairs pair} →
@@ -301,7 +302,7 @@ physicalTriadEnumerationCutoffSound {N} {τ} member =
     (Cube.cartesianSecondMember pairMember)
     (Cube.cutoffModeEnumerationComplete N (k τ)
       (modeWithinCutoffSound N (k τ)
-        (enumeratedOutputWithin member)))
+        (enumeratedOutputWithin {N = N} {τ = τ} member)))
   where
   pairMember :
     triadInputPair τ ∈
