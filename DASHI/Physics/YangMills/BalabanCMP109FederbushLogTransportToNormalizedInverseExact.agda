@@ -37,7 +37,7 @@ module DASHI.Physics.YangMills.BalabanCMP109FederbushLogTransportToNormalizedInv
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List)
 open import Data.List.Base using (length)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _≤_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; 1ℚ; _*_; _≤_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanFiniteFibreAverageExact as Fibre
@@ -60,7 +60,7 @@ record FederbushPhysicalLogTransportData (Index : Set) : Set₁ where
 
     weightNonnegative : 0ℚ ≤ weight
     normalizedWeight :
-      weight * Fibre.natAsRational (length indices) ≡ Data.Rational.Base.1ℚ
+      weight * Fibre.natAsRational (length indices) ≡ 1ℚ
 
     logarithmResidualColumns : ∀ index selected →
       RectSchur.rectAbsoluteColumnMass Physical.lieCoordinates3
