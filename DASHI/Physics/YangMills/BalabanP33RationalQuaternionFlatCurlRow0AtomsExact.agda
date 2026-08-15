@@ -13,7 +13,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Rational.Base as ℚ using (_+_; -_)
 import Data.Rational.Properties as ℚP
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans)
 
 open import DASHI.Physics.YangMills.BalabanP33RationalQuaternionFlatCurlScalarExact
 
@@ -87,3 +87,15 @@ row0OneOrderedCopy a b c d
     | row0PairAC a c d
     | row0PairAD a d
     | ℚP.+-identityʳ (- vectorDot a d) = refl
+
+row0TwoOrderedCopies : ∀ a b c d →
+  pairAtomSum (pureQuaternion a)
+      (flatExponentialJet b ∷ flatExponentialJet (negV c) ∷
+        flatExponentialJet (negV d) ∷ [])
+    + pairAtomSum (pureQuaternion a)
+      (flatExponentialJet b ∷ flatExponentialJet (negV c) ∷
+        flatExponentialJet (negV d) ∷ [])
+  ≡ (vectorDot a b + ((- vectorDot a c) + (- vectorDot a d)))
+    + (vectorDot a b + ((- vectorDot a c) + (- vectorDot a d)))
+row0TwoOrderedCopies a b c d =
+  cong₂ _+_ (row0OneOrderedCopy a b c d) (row0OneOrderedCopy a b c d)
