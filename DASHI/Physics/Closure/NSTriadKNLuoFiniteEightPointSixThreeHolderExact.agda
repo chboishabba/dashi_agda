@@ -26,6 +26,13 @@ module DASHI.Physics.Closure.NSTriadKNLuoFiniteEightPointSixThreeHolderExact whe
 -- proof body: it preserves the historical import path and public theorem
 -- surface while downstream consumers pay only the compiled interface cost.
 --
+-- Validation order under the pinned Agda 2.9 toolchain is therefore:
+--   1. algebra boundary;
+--   2. transport boundary;
+--   3. this legacy wrapper;
+--   4. the immediate six-three kernel consumer;
+--   5. ABC consumers last.
+--
 -- No postulate, theorem weakening, or new analytic authority is introduced.
 ------------------------------------------------------------------------
 
