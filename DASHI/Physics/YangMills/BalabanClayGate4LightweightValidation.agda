@@ -5,7 +5,7 @@ module DASHI.Physics.YangMills.BalabanClayGate4LightweightValidation where
 --
 -- This intentionally imports only the P06/P07/P08/P09 theorem-surface audit,
 -- exact physical RG handoff, source-sized R-operation lane, and source
--- covariance/boundary authorities.  It does not import the heavyweight
+-- covariance/boundary/coupling authorities.  It does not import the heavyweight
 -- BalabanPolymerDiameterEntropy, SFGC, or triadic Closure graph.
 ------------------------------------------------------------------------
 
@@ -22,6 +22,7 @@ import DASHI.Physics.YangMills.BalabanCMP122Equation1100SharedSlackExact as EqSl
 import DASHI.Physics.YangMills.BalabanCMP119RDecayReserveBudgetExact as Reserve
 import DASHI.Physics.YangMills.BalabanCMP119CMP122BoundaryReinjectionSourceExact as Boundary
 import DASHI.Physics.YangMills.BalabanCMP99CovarianceLocalityToRGStateExact as Covariance
+import DASHI.Physics.YangMills.Balaban1989SmallCouplingToRGCapExact as Coupling
 
 polymerAuditReady = Polymer.lightweightPolymerAuditReady
 polymerAuditNoPromotion = Polymer.lightweightPolymerAuditNoPromotion
@@ -55,7 +56,9 @@ largeFieldSharedSlackAssemblyLevel = LF.largeFieldSharedSlackAssemblyLevel
 largeFieldToSharedRGErrorLevel = LFCoupled.largeFieldToSharedRGErrorLevel
 largeFieldCoupledRegionClosureLevel = LFCoupled.largeFieldCoupledRegionClosureLevel
 
--- Published boundary and covariance/locality authorities.
+-- Published boundary/covariance authorities and exact small-coupling cap
+-- transport.  The latter uses only Bałaban's explicit small-coupling hypothesis
+-- and does not pretend to prove the deferred positive-beta calculation.
 cmp119BoundaryAnalyticityAndDecayLevel =
   Boundary.cmp119BoundaryAnalyticityAndDecayLevel
 cmp122BoundaryReinjectionPreservationLevel =
@@ -64,10 +67,15 @@ cmp99BackgroundPropagatorDecayAuthorityLevel =
   Covariance.cmp99BackgroundPropagatorDecayAuthorityLevel
 cmp99NextStateCovarianceTransportLevel =
   Covariance.cmp99NextStateCovarianceTransportLevel
+balabanSmallCouplingHypothesisAuthorityLevel =
+  Coupling.balabanSmallCouplingHypothesisAuthorityLevel
+balabanSmallCouplingToRGCapTransportLevel =
+  Coupling.balabanSmallCouplingToRGCapTransportLevel
 
 -- Fail-closed physical frontier.  The primary papers now own the abstract
--- decay/locality theorems; these are the representation and numerical leaves
--- which must be instantiated on the literal repository state.
+-- decay/locality and small-coupling conditional theorems; these are the
+-- representation, history and numerical leaves which must be instantiated on
+-- the literal repository state.
 cmp109RepositoryLocalizationDomainIdentificationLevel =
   TreeSize.cmp109RepositoryLocalizationDomainIdentificationLevel
 cmp119SourceDistanceToRepositoryDiameterLevel =
@@ -87,9 +95,9 @@ cmp119CMP122BoundaryRepositoryDictionaryLevel =
 cmp99NextBackgroundRegularityLevel = Covariance.cmp99NextBackgroundRegularityLevel
 cmp99RepositoryCovarianceDictionaryLevel =
   Covariance.cmp99RepositoryCovarianceDictionaryLevel
+balabanPhysicalSmallCouplingHistoryLevel =
+  Coupling.balabanPhysicalSmallCouplingHistoryLevel
 
--- Coupling and initial UV stability remain genuinely separate after these
--- source-level reductions.
 physicalCoupledOneStepBoundsLevel =
   OneStep.lightweightGate4PhysicalAnalyticBoundsLevel
 physicalOneStepAnalyticInputsLevel = Gate4.physicalOneStepAnalyticInputsLevel
