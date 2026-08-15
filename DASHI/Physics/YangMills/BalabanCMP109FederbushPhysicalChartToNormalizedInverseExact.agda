@@ -30,7 +30,7 @@ module DASHI.Physics.YangMills.BalabanCMP109FederbushPhysicalChartToNormalizedIn
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List)
 open import Data.List.Base using (length)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _≤_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; 1ℚ; _*_; _≤_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanFiniteFibreAverageExact as Fibre
@@ -44,6 +44,7 @@ import DASHI.Physics.YangMills.BalabanCMP109FederbushComponentResidualExact as C
 import DASHI.Physics.YangMills.BalabanCMP109FederbushCentreTransportMatrixExact as Matrix
 import DASHI.Physics.YangMills.BalabanCMP109FederbushTransportDefectFromIdentityChartExact as Chart
 import DASHI.Physics.YangMills.BalabanCMP109FederbushPrimitiveDefectsToNormalizedInverseExact as Primitive
+import DASHI.Physics.YangMills.BalabanCMP109FederbushLogTransportToNormalizedInverseExact as Existing
 import DASHI.Physics.YangMills.BalabanCMP109FederbushQuarterReopeningExact as Quarter
 import DASHI.Physics.YangMills.BalabanP33CMP109LocalLeafCalibrationExact as Calibration
 
@@ -57,8 +58,7 @@ record FederbushPhysicalChartData (Index : Set) : Set₁ where
 
     weightNonnegative : 0ℚ ≤ weight
     normalizedWeight :
-      weight * Fibre.natAsRational (length indices)
-      ≡ Data.Rational.Base.1ℚ
+      weight * Fibre.natAsRational (length indices) ≡ 1ℚ
 
     identityChart : ∀ index →
       Chart.IdentityChartTransportData (input index) (centre index)
@@ -104,7 +104,7 @@ asPrimitiveDefectData dataSet = record
 physicalChartNormalizedResidualL1Quarter :
   ∀ {Index} (dataSet : FederbushPhysicalChartData Index) vector →
   L1.vectorL1 Physical.lieCoordinates3
-    (DASHI.Physics.YangMills.BalabanCMP109FederbushLogTransportToNormalizedInverseExact.physicalNormalizedResidualAction
+    (Existing.physicalNormalizedResidualAction
       (Primitive.asPhysicalLogTransportData (asPrimitiveDefectData dataSet)) vector)
   ≤ Quarter.oneQuarter * L1.vectorL1 Physical.lieCoordinates3 vector
 physicalChartNormalizedResidualL1Quarter dataSet =
