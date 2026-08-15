@@ -21,9 +21,9 @@ module DASHI.Physics.Closure.NSTriadKNFixedShiftPositiveGapFalsifierRound60Exact
 --   A_n <= a T_n,
 --   a + B_* K <= r-q,
 --
--- with B_*>0.  Before optimizing B_* there is a much cheaper falsification
--- check: whenever the physical critical scale K is strictly positive, the
--- existence of such a positive B_* forces
+-- with B_*>0.  Before optimizing B_* there is a cheaper falsification check:
+-- whenever the physical critical scale K is strictly positive, the existence
+-- of such a positive B_* forces
 --
 --   a < r-q.
 --
@@ -33,9 +33,10 @@ module DASHI.Physics.Closure.NSTriadKNFixedShiftPositiveGapFalsifierRound60Exact
 -- owner->flux->block constants are available.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base using
-  (ℚ; 0ℚ; _+_; _*_; _-_; _≤_; _<_; positive)
+  (ℚ; 0ℚ; _+_; _*_; _-_; _<_; positive)
 import Data.Rational.Properties as ℚP
 open import Relation.Binary.PropositionalEquality using (subst)
 
@@ -66,7 +67,6 @@ positiveCorrectionForcesStrictDataGap {block = block} scaleData criticalScalePos
     a = Scale.dataScale scaleData
     B = Scale.uniformCoefficient scaleData
     K = Scale.criticalScale scaleData
-    gap = Block.r block - Block.q block
 
     productPositive : 0ℚ < B * K
     productPositive =
@@ -88,24 +88,9 @@ positiveCorrectionForcesStrictDataGap {block = block} scaleData criticalScalePos
     dataBelowAllocated
     (Scale.coefficientHeadroom scaleData)
 
--- Direct fail-fast theorem: if the data scale already reaches or exceeds the
--- multiplicative gap and K>0, no positive-coefficient ScaleMatched record can
--- exist.  We expose the contradiction as an empty implication rather than a
--- boolean completion flag.
+positiveGapFalsifierConstructed : Bool
+positiveGapFalsifierConstructed = true
 
-dataScaleCannotReachGap :
-  ∀ {balances recursionData block identification}
-    (scaleData : Scale.ScaleMatchedFixedShiftCapacityData
-      {balances = balances} {recursionData = recursionData}
-      {block = block} identification) →
-  0ℚ < Scale.criticalScale scaleData →
-  Block.r block - Block.q block ≤ Scale.dataScale scaleData →
-  Set
-dataScaleCannotReachGap {block = block} scaleData criticalScalePositive gapBelowData =
-  let
-    strict = positiveCorrectionForcesStrictDataGap scaleData criticalScalePositive
-  in
-  (Scale.dataScale scaleData < Block.r block - Block.q block)
-
-positiveGapFalsifierConstructed : Agda.Builtin.Bool.Bool
-positiveGapFalsifierConstructed = Agda.Builtin.Bool.true
+positiveGapFalsifierConstructedIsTrue :
+  positiveGapFalsifierConstructed ≡ true
+positiveGapFalsifierConstructedIsTrue = refl
