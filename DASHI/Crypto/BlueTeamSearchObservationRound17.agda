@@ -7,7 +7,7 @@ module DASHI.Crypto.BlueTeamSearchObservationRound17 where
 import DASHI.Crypto.BlueTeamAdversaryClosureRound16
 
 -- FIPS-203 NTT structural dependency, conditioned equations, actual CBD slices,
--- and representation-locality geometry.
+-- representation-locality geometry, and the symmetry/uncertainty lift.
 import DASHI.Crypto.MLKEMNTTDataflowCouplingExact
 import DASHI.Crypto.MLKEMNTTPriorCutNoGoExact
 import DASHI.Crypto.MLKEMNTTParityBlockPriorExact
@@ -15,6 +15,7 @@ import DASHI.Crypto.MLKEMNTTCombinedCouplingConnectivityExact
 import DASHI.Crypto.MLKEMCandidateMoveFanoutExact
 import DASHI.Crypto.MLKEMLocalityAreaInvariantExact
 import DASHI.Crypto.MLKEMButterflyStageLocalityInvariantExact
+import DASHI.Crypto.MLKEMNTTSingularBudgetUncertaintyExact
 import DASHI.Crypto.MLKEMBaseCaseConditionedResidualExact
 import DASHI.Crypto.ConditionedResidualAmbiguityRegressionExact
 import DASHI.Crypto.ConditionalMateAmbiguityExact
