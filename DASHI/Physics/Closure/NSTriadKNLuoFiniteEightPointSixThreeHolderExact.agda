@@ -35,7 +35,9 @@ open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
 open import Relation.Nullary.Decidable.Core using (toWitness)
 
-import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
+import DASHI.Physics.Closure.NSTriadKNLuoFiniteRationalOrderCore as Core
+
+module L2 = Core
 
 three four sixteen sixtyFour : ℚ
 three = Int.+ 3 / 1
@@ -109,14 +111,14 @@ cubeEightSumReassociate a b c d e f g h
   = solve (a ∷ b ∷ c ∷ d ∷ e ∷ f ∷ g ∷ h ∷ [])
 
 l2SquareMeaning :
-  (value : ℚ) → L2.square value ≡ value * value
+  (value : ℚ) → Core.square value ≡ value * value
 l2SquareMeaning value = refl
 
 squareAddIdentity :
   (value sumValue : ℚ) →
-  L2.square value + L2.square sumValue
+  Core.square value + Core.square sumValue
     + (value * sumValue + value * sumValue)
-  ≡ L2.square (value + sumValue)
+    ≡ Core.square (value + sumValue)
 squareAddIdentity value sumValue
   rewrite l2SquareMeaning value
         | l2SquareMeaning sumValue
