@@ -7,12 +7,16 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound52SourceRGFederbushVa
 --
 -- G1 / source chart:
 --   principal-log scalar endpoint modulus + selected coordinates
---     -> col(J_j-I) <= rho/8
---   physical T_j = Ad_{U_j V^-1} + identity-chart chord control
---     -> col(T_j-I) <= rho/4 and col(T_j) <= 3
---     -> local col(J_j T_j-I) <= 1/4
---     -> normalized contour-average quarter contraction
---     -> determinant-free 4/3 inverse bound.
+--     -> a concrete J_j-I bound;
+--   physical T_j = Ad_{U_j V^-1}
+--     -> a concrete T_j-I bound;
+--   exact JT-I telescope + normalized averaging
+--     -> determinant-free inverse reopening.
+--
+-- The tiny rho/96 identity-chart specialization imported below is a checked
+-- local calibration lane, not a claim that CMP109's whole 1/24 source chart is
+-- that small.  The source-scale quarter estimate must consume the actual
+-- source Y-radius constants without silently replacing them by rho/96.
 --
 -- RG1a/RG1b / complete density:
 --   CMP109 rooted localization summability
@@ -21,8 +25,12 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound52SourceRGFederbushVa
 --   + sufficiently-small coupling history
 --     -> direct Sect.-2 complete-density -> canonical YM4 invariant-region state.
 --
--- The remaining leaves are literal source-chart/scalar/operator dictionaries
--- and the genuinely missing all-scale small-coupling history; no Clay promotion.
+-- RG1e / coupling history:
+--   beta split -> beta>=0 -> finite inverse-coupling monotonicity -> backwards
+--   inverse-threshold propagation.  This is weaker than, and logically prior
+--   to, the still-missing full positive two-sided beta enclosure.
+--
+-- No Clay promotion is made here.
 ------------------------------------------------------------------------
 
 import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound51CentreKKTBetaValidation
@@ -33,6 +41,8 @@ import DASHI.Physics.YangMills.BalabanCMP109FederbushTransportDefectFromIdentity
 import DASHI.Physics.YangMills.BalabanCMP109PrincipalLogDefectFromEndpointModulusExact as LogEndpoint
 import DASHI.Physics.YangMills.BalabanCMP109FederbushPhysicalChartToNormalizedInverseExact as PhysicalChart
 import DASHI.Physics.YangMills.BalabanCMP109FederbushCoefficientChartToInverseExact as CoefficientChart
+import DASHI.Physics.YangMills.BalabanYM4NonnegativeBetaFinitePropagationExact as BetaFinite
+import DASHI.Physics.YangMills.BalabanYM4BetaSplitToSmallCouplingMonotonicityExact as BetaSplit
 import DASHI.Physics.YangMills.BalabanClayGate4LightweightValidation as Gate4
 import DASHI.Physics.YangMills.Balaban1989CompleteDensityToYM4RegionExact as Complete
 import DASHI.Physics.YangMills.Balaban1989CanonicalYM4StateFromSection2Exact as Canonical
@@ -46,7 +56,7 @@ federbushTransportDefectControlsNormLevel =
 federbushPrimitiveDefectsToInverseLevel =
   Primitive.cmp109FederbushPrimitiveDefectsToInverseLevel
 
-federbushTransportDefectFromIdentityChartLevel =
+federbushTinyIdentityChartCalibrationLevel =
   TransportChart.cmp109FederbushTransportDefectFromIdentityChartLevel
 
 principalLogEndpointModulusToDefectLevel =
@@ -63,6 +73,18 @@ federbushCoefficientChartToInverseLevel =
 
 federbushCoefficientAndChordInputsLevel =
   CoefficientChart.physicalCMP109FederbushCoefficientAndChordInputsLevel
+
+nonnegativeBetaFiniteMonotonicityLevel =
+  BetaFinite.ym4NonnegativeBetaFiniteMonotonicityLevel
+
+inverseThresholdBackwardPropagationLevel =
+  BetaFinite.ym4InverseThresholdBackwardPropagationLevel
+
+betaSplitNonnegativeTrajectoryLevel =
+  BetaSplit.ym4BetaSplitNonnegativeTrajectoryLevel
+
+betaSplitFiniteSmallCouplingMonotonicityLevel =
+  BetaSplit.ym4BetaSplitFiniteSmallCouplingMonotonicityLevel
 
 completeDensityToYM4RegionAssemblyLevel =
   Complete.balabanCompleteDensityToYM4RegionAssemblyLevel
