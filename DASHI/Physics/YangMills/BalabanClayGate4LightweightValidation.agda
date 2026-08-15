@@ -18,6 +18,7 @@ import DASHI.Physics.YangMills.BalabanYM4LargeFieldCoupledStepExact as LFCoupled
 import DASHI.Physics.YangMills.BalabanCMP122Equation1100DirectExact as Eq1100
 import DASHI.Physics.YangMills.BalabanCMP122Equation1100EntropyBudgetExact as EqEntropy
 import DASHI.Physics.YangMills.BalabanCMP122Equation1100SharedSlackExact as EqSlack
+import DASHI.Physics.YangMills.BalabanCMP119RDecayReserveBudgetExact as Reserve
 
 polymerAuditReady = Polymer.lightweightPolymerAuditReady
 polymerAuditNoPromotion = Polymer.lightweightPolymerAuditNoPromotion
@@ -29,7 +30,8 @@ allScaleRGAssemblyLevel = Gate4.lightweightAllScaleRGAssemblyLevel
 coupledOneStepInvariantRegionLevel = OneStep.lightweightGate4OneStepRegionLevel
 
 -- High-alpha large-field bridge:
---   CMP122 (1.100)
+--   CMP119 (2.31) arbitrary R-decay reserve
+--   + CMP122 (1.100)
 --     -> weighted pointwise R decay
 --     -> rooted entropy spends the residual diameter decay
 --     -> shell <= exp(-p0(g_k)) 2^{-n}
@@ -39,6 +41,8 @@ coupledOneStepInvariantRegionLevel = OneStep.lightweightGate4OneStepRegionLevel
 cmp122Equation1100PrimarySourceLevel = Eq1100.cmp122Equation1100PrimarySourceLevel
 cmp119Equation231ArbitraryDecayReserveLevel =
   Eq1100.cmp119Equation231ArbitraryDecayReserveLevel
+cmp119ThreeWayDecayReserveArithmeticLevel =
+  Reserve.cmp119ThreeWayDecayReserveArithmeticLevel
 cmp122Equation1100EntropyAssemblyLevel =
   EqEntropy.cmp122Equation1100EntropyAssemblyLevel
 cmp122Equation1100FiniteContributionLevel =
@@ -53,12 +57,15 @@ largeFieldSharedSlackAssemblyLevel = LF.largeFieldSharedSlackAssemblyLevel
 largeFieldToSharedRGErrorLevel = LFCoupled.largeFieldToSharedRGErrorLevel
 largeFieldCoupledRegionClosureLevel = LFCoupled.largeFieldCoupledRegionClosureLevel
 
--- Fail-closed physical frontier.  Equation (1.100) itself is now primary-source
--- authority rather than a generic conditional target.  What remains in this
--- segment is the repository representation/weight split, same-geometry rooted
--- entropy payment, identification of the combined R-sector norm contribution,
--- and the concrete numerical shared-slack inequality.  Coupling,
--- boundary-domain, covariance/locality and initial UV inputs remain separate.
+-- Fail-closed physical frontier.  Equation (1.100) itself and the source
+-- freedom to choose the R-decay reserve are primary-source authorities.  What
+-- remains is the metric/representation dictionary putting d_j(X) in the same
+-- normalized rooted geometry, the weight split, same-geometry rooted entropy
+-- payment, identification of the combined R-sector norm contribution, and the
+-- concrete numerical shared-slack inequality.  Coupling, boundary-domain,
+-- covariance/locality and initial UV inputs remain separate.
+cmp119SourceDistanceToRepositoryDiameterLevel =
+  Reserve.cmp119SourceDistanceToRepositoryDiameterLevel
 cmp122Equation1100RepositoryRepresentationLevel =
   Eq1100.cmp122Equation1100RepositoryRepresentationLevel
 cmp122Equation1100WeightSplitIdentificationLevel =
