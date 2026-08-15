@@ -34,9 +34,9 @@ module DASHI.Physics.YangMills.BalabanCMP109FederbushTransportDefectFromIdentity
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; 1ℚ; _*_; _≤_; ∣_∣)
+open import Data.Rational.Base as ℚ using
+  (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_; ∣_∣)
 import Data.Rational.Properties as ℚP
-import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -45,6 +45,7 @@ import DASHI.Physics.YangMills.BalabanFiniteRectangularSchurSquaredExact as Rect
 import DASHI.Physics.YangMills.BalabanPhysicalSU2FiniteCoordinatesExact as Physical
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionWilsonSecondVariationExact as Q
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
+import DASHI.Physics.YangMills.BalabanP33QuaternionFourFactorTelescopeExact as Four
 import DASHI.Physics.YangMills.BalabanCMP109FederbushNormalizedJacobianExact as Jacobian
 import DASHI.Physics.YangMills.BalabanCMP109FederbushComponentResidualExact as Component
 import DASHI.Physics.YangMills.BalabanCMP109FederbushCentreTransportMatrixExact as Matrix
@@ -79,8 +80,6 @@ transportDifferenceAgainstIdentityIsResidual input centre row column =
           - Jacobian.identity3 row column)
     (identityTransportEntryExact row column)
     refl
-  where
-  open import Data.Rational.Base using (_-_)
 
 identityQuaternionUnit : Norm.normSq Q.oneQ ≡ 1ℚ
 identityQuaternionUnit = refl
@@ -91,8 +90,8 @@ record IdentityChartTransportData
     inputUnit : Norm.normSq input ≡ 1ℚ
     centreUnit : Norm.normSq centre ≡ 1ℚ
     chartDifferenceSquare :
-      Norm.normSq (DASHI.Physics.YangMills.BalabanP33QuaternionFourFactorTelescopeExact._-q_ input Q.oneQ)
-        + Norm.normSq (DASHI.Physics.YangMills.BalabanP33QuaternionFourFactorTelescopeExact._-q_ centre Q.oneQ)
+      Norm.normSq (Four._-q_ input Q.oneQ)
+        + Norm.normSq (Four._-q_ centre Q.oneQ)
       ≤ Calibration.transportStepRadius * Calibration.transportStepRadius
 
 open IdentityChartTransportData public
@@ -120,8 +119,6 @@ nineTransportStepsFitAllocation =
     (ℚP.nonNegative⁻¹
       (Calibration.transportAllocation
         - Column.nine * Calibration.transportStepRadius))
-  where
-  open import Data.Rational.Base using (_-_)
 
 transportResidualColumnWithinAllocation :
   ∀ input centre → IdentityChartTransportData input centre →
