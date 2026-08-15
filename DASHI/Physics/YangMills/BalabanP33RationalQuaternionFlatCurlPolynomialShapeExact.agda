@@ -27,6 +27,20 @@ doubleWithTail value tail = value + (value + tail)
 addWithTail : ℚ → ℚ → ℚ
 addWithTail value tail = value + tail
 
+twice : ℚ → ℚ
+twice value = value + value
+
+negativeTwice : ℚ → ℚ
+negativeTwice value = (- value) + (- value)
+
+row0DoubledShape : ℚ → ℚ → ℚ → ℚ
+row0DoubledShape ab ac ad =
+  twice ab + (negativeTwice ac + negativeTwice ad)
+
+row1DoubledShape : ℚ → ℚ → ℚ
+row1DoubledShape bc bd =
+  negativeTwice bc + negativeTwice bd
+
 flatRecursionShape :
   ℚ → ℚ → ℚ → ℚ → ℚ → ℚ → ℚ → ℚ → ℚ → ℚ → ℚ
 flatRecursionShape aa ab ac ad bb bc bd cc cd dd =
@@ -35,6 +49,17 @@ flatRecursionShape aa ab ac ad bb bc bd cc cd dd =
       (addWithTail bb
         (doubleWithTail (row1Shape bc bd)
           (tail23Shape cc cd dd))))
+
+-- Diagonal-first ordered normal form requested by the physical Hessian lane:
+-- aa + bb + cc + dd + 2ab - 2ac - 2ad - 2bc - 2bd + 2cd.
+-- We retain the signs as repeated scalar terms so no coefficient convention is
+-- hidden in the theorem statement.
+flatOrderedShape :
+  ℚ → ℚ → ℚ → ℚ → ℚ → ℚ → ℚ → ℚ → ℚ → ℚ → ℚ
+flatOrderedShape aa ab ac ad bb bc bd cc cd dd =
+  aa + (bb + (cc + (dd
+    + (row0DoubledShape ab ac ad
+      + (row1DoubledShape bc bd + twice cd)))))
 
 row0ShapeAdd : ∀ ab₁ ab₂ ac₁ ac₂ ad₁ ad₂ →
   row0Shape (ab₁ + ab₂) (ac₁ + ac₂) (ad₁ + ad₂)
@@ -65,6 +90,57 @@ addWithTailAdd : ∀ value₁ value₂ tail₁ tail₂ →
   ≡ addWithTail value₁ tail₁ + addWithTail value₂ tail₂
 addWithTailAdd value₁ value₂ tail₁ tail₂ =
   ℚRing.solve (value₁ ∷ value₂ ∷ tail₁ ∷ tail₂ ∷ [])
+
+doubleRow0WithTail : ∀ ab ac ad tail →
+  doubleWithTail (row0Shape ab ac ad) tail
+  ≡ row0DoubledShape ab ac ad + tail
+doubleRow0WithTail ab ac ad tail =
+  ℚRing.solve (ab ∷ ac ∷ ad ∷ tail ∷ [])
+
+doubleRow1WithTail : ∀ bc bd tail →
+  doubleWithTail (row1Shape bc bd) tail
+  ≡ row1DoubledShape bc bd + tail
+doubleRow1WithTail bc bd tail =
+  ℚRing.solve (bc ∷ bd ∷ tail ∷ [])
+
+tail23DiagonalFirst : ∀ cc cd dd →
+  tail23Shape cc cd dd ≡ cc + (dd + twice cd)
+tail23DiagonalFirst cc cd dd =
+  ℚRing.solve (cc ∷ cd ∷ dd ∷ [])
+
+moveOnePast : ∀ left moved tail →
+  left + (moved + tail) ≡ moved + (left + tail)
+moveOnePast left moved tail =
+  ℚRing.solve (left ∷ moved ∷ tail ∷ [])
+
+moveTwoPast : ∀ left middle moved tail →
+  left + (middle + (moved + tail))
+  ≡ moved + (left + (middle + tail))
+moveTwoPast left middle moved tail =
+  ℚRing.solve (left ∷ middle ∷ moved ∷ tail ∷ [])
+
+flatRecursionShapeOrdered : ∀ aa ab ac ad bb bc bd cc cd dd →
+  flatRecursionShape aa ab ac ad bb bc bd cc cd dd
+  ≡ flatOrderedShape aa ab ac ad bb bc bd cc cd dd
+flatRecursionShapeOrdered aa ab ac ad bb bc bd cc cd dd
+  rewrite doubleRow1WithTail bc bd (tail23Shape cc cd dd)
+    | tail23DiagonalFirst cc cd dd
+    | doubleRow0WithTail ab ac ad
+        (bb + (row1DoubledShape bc bd + (cc + (dd + twice cd))))
+    | moveOnePast
+        (row0DoubledShape ab ac ad)
+        bb
+        (row1DoubledShape bc bd + (cc + (dd + twice cd)))
+    | moveTwoPast
+        (row0DoubledShape ab ac ad)
+        (row1DoubledShape bc bd)
+        cc
+        (dd + twice cd)
+    | moveTwoPast
+        (row0DoubledShape ab ac ad)
+        (row1DoubledShape bc bd)
+        dd
+        (twice cd) = refl
 
 flatRecursionShapeAdd :
   ∀ aa₁ aa₂ ab₁ ab₂ ac₁ ac₂ ad₁ ad₂ bb₁ bb₂
