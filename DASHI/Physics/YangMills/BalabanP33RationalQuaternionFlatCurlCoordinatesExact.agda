@@ -14,7 +14,7 @@ module DASHI.Physics.YangMills.BalabanP33RationalQuaternionFlatCurlCoordinatesEx
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using ([]; _∷_)
-open import Data.Rational.Base as ℚ using (ℚ; _+_; _-_; _*_; -_)
+open import Data.Rational.Base as ℚ using (ℚ; _+_; _*_; -_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong₂; trans)
@@ -30,19 +30,22 @@ coordinateRecursionExpansion a b c d =
     (c * c) (c * d) (d * d)
 
 curlXContribution : ∀ x0 x1 x2 x3 →
-  (x0 + x1 - x2 - x3) * (x0 + x1 - x2 - x3)
+  (x0 + (x1 + ((- x2) + (- x3))))
+    * (x0 + (x1 + ((- x2) + (- x3))))
   ≡ coordinateRecursionExpansion x0 x1 x2 x3
 curlXContribution x0 x1 x2 x3 =
   ℚRing.solve (x0 ∷ x1 ∷ x2 ∷ x3 ∷ [])
 
 curlYContribution : ∀ y0 y1 y2 y3 →
-  (y0 + y1 - y2 - y3) * (y0 + y1 - y2 - y3)
+  (y0 + (y1 + ((- y2) + (- y3))))
+    * (y0 + (y1 + ((- y2) + (- y3))))
   ≡ coordinateRecursionExpansion y0 y1 y2 y3
 curlYContribution y0 y1 y2 y3 =
   ℚRing.solve (y0 ∷ y1 ∷ y2 ∷ y3 ∷ [])
 
 curlZContribution : ∀ z0 z1 z2 z3 →
-  (z0 + z1 - z2 - z3) * (z0 + z1 - z2 - z3)
+  (z0 + (z1 + ((- z2) + (- z3))))
+    * (z0 + (z1 + ((- z2) + (- z3))))
   ≡ coordinateRecursionExpansion z0 z1 z2 z3
 curlZContribution z0 z1 z2 z3 =
   ℚRing.solve (z0 ∷ z1 ∷ z2 ∷ z3 ∷ [])
@@ -60,9 +63,12 @@ flatCurlSquareCoordinateExpansion
     x0 y0 z0 x1 y1 z1 x2 y2 z2 x3 y3 z3 =
   trans
     (ℚP.+-assoc
-      ((x0 + x1 - x2 - x3) * (x0 + x1 - x2 - x3))
-      ((y0 + y1 - y2 - y3) * (y0 + y1 - y2 - y3))
-      ((z0 + z1 - z2 - z3) * (z0 + z1 - z2 - z3)))
+      ((x0 + (x1 + ((- x2) + (- x3))))
+        * (x0 + (x1 + ((- x2) + (- x3)))))
+      ((y0 + (y1 + ((- y2) + (- y3))))
+        * (y0 + (y1 + ((- y2) + (- y3)))))
+      ((z0 + (z1 + ((- z2) + (- z3))))
+        * (z0 + (z1 + ((- z2) + (- z3))))))
     (cong₂ _+_
       (curlXContribution x0 x1 x2 x3)
       (cong₂ _+_
