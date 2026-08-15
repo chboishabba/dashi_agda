@@ -9,7 +9,7 @@ module DASHI.Physics.YangMills.BalabanP33RationalQuaternionFlatCurlRow0AtomsExac
 -- DOI: 10.1007/BF01240355.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Rational.Base as ℚ using (_+_; -_)
 import Data.Rational.Properties as ℚP
@@ -67,61 +67,23 @@ row0OneOrderedCopy : ∀ a b c d →
     (flatExponentialJet b ∷ flatExponentialJet (negV c) ∷
       flatExponentialJet (negV d) ∷ [])
   ≡ vectorDot a b + ((- vectorDot a c) + (- vectorDot a d))
-row0OneOrderedCopy a b c d =
-  trans
-    (pairAtomSumFlatCons
+row0OneOrderedCopy a b c d
+  rewrite pairAtomSumFlatCons
       (pureQuaternion a)
       (pureQuaternion b)
       (pureQuaternion b *q pureQuaternion b)
-      (flatExponentialJet (negV c) ∷ flatExponentialJet (negV d) ∷ []))
-    (trans
-      (cong (row0PairAB a b c d |>left_) -- placeholder removed below
-        (pairAtomSumFlatCons
-          (pureQuaternion a)
-          (pureQuaternion (negV c))
-          (pureQuaternion (negV c) *q pureQuaternion (negV c))
-          (flatExponentialJet (negV d) ∷ [])))
-      (trans
-        (cong
-          (λ selected →
-            wilsonAtomContribution
-              (pureQuaternion a *q
-                (pureQuaternion b *q
-                  orderedValueProduct
-                    (flatExponentialJet (negV c) ∷
-                      flatExponentialJet (negV d) ∷ [])))
-            + (wilsonAtomContribution
-                (pureQuaternion a *q
-                  (pureQuaternion (negV c) *q
-                    orderedValueProduct (flatExponentialJet (negV d) ∷ [])))
-              + selected))
-          (pairAtomSumFlatCons
-            (pureQuaternion a)
-            (pureQuaternion (negV d))
-            (pureQuaternion (negV d) *q pureQuaternion (negV d))
-            []))
-        (trans
-          (cong
-            (λ selected →
-              wilsonAtomContribution
-                (pureQuaternion a *q
-                  (pureQuaternion b *q
-                    orderedValueProduct
-                      (flatExponentialJet (negV c) ∷
-                        flatExponentialJet (negV d) ∷ [])))
-              + (wilsonAtomContribution
-                  (pureQuaternion a *q
-                    (pureQuaternion (negV c) *q
-                      orderedValueProduct (flatExponentialJet (negV d) ∷ [])))
-                + selected))
-            (trans
-              (cong (_+ pairAtomSum (pureQuaternion a) [])
-                (row0PairAD a d))
-              (ℚP.+-identityʳ (- vectorDot a d))))
-          (cong₂ _+_
-            (row0PairAB a b c d)
-            (cong₂ _+_ (row0PairAC a c d) refl)))))
-  where
-    infix 0 _|>left_
-    _|>left_ : ∀ {x y z : ℚ.ℚ} → x ≡ y → z ≡ z
-    _|>left_ proof = refl
+      (flatExponentialJet (negV c) ∷ flatExponentialJet (negV d) ∷ [])
+    | pairAtomSumFlatCons
+      (pureQuaternion a)
+      (pureQuaternion (negV c))
+      (pureQuaternion (negV c) *q pureQuaternion (negV c))
+      (flatExponentialJet (negV d) ∷ [])
+    | pairAtomSumFlatCons
+      (pureQuaternion a)
+      (pureQuaternion (negV d))
+      (pureQuaternion (negV d) *q pureQuaternion (negV d))
+      []
+    | row0PairAB a b c d
+    | row0PairAC a c d
+    | row0PairAD a d
+    | ℚP.+-identityʳ (- vectorDot a d) = refl
