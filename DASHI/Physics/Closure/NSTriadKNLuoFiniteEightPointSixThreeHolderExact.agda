@@ -31,7 +31,6 @@ open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
 open import
   DASHI.Physics.Closure.NSTriadKNLuoFiniteEightPointSixThreeHolderBoundary
   public
-import DASHI.Physics.Closure.NSTriadKNLuoFiniteRationalOrderCore as L2
 
 record EightSixThreeData : Set where
   constructor eight-six-three-data
@@ -166,8 +165,10 @@ sixthPairsNonnegative dataSet =
     (sixthNonnegative (b7 dataSet) (b7NN dataSet))
     nnp[])))))))
 
--- The only remaining large arity ring identity is local to the transport
--- wrapper rather than duplicated throughout the algebra layer.
+-- Keep each product opaque to the ring solver.  The former proof passed all
+-- sixteen xᵢ,yᵢ variables to `solve`, forcing Agda 2.9 to normalize the full
+-- product polynomial.  Reassociating the eight already-formed products gives
+-- the identical theorem while cutting the solver arity in half.
 eightPairDiagonalMeaning :
   (x0 y0 x1 y1 x2 y2 x3 y3 x4 y4 x5 y5 x6 y6 x7 y7 : ℚ) →
   x0 * y0 + x1 * y1 + x2 * y2 + x3 * y3
@@ -178,20 +179,19 @@ eightPairDiagonalMeaning :
 eightPairDiagonalMeaning x0 y0 x1 y1 x2 y2 x3 y3
     x4 y4 x5 y5 x6 y6 x7 y7 =
   let
+    p0 = x0 * y0
+    p1 = x1 * y1
+    p2 = x2 * y2
+    p3 = x3 * y3
+    p4 = x4 * y4
+    p5 = x5 * y5
+    p6 = x6 * y6
+    p7 = x7 * y7
+
     expanded :
-      x0 * y0 + x1 * y1 + x2 * y2 + x3 * y3
-        + x4 * y4 + x5 * y5 + x6 * y6 + x7 * y7
-      ≡ x0 * y0
-        + (x1 * y1
-          + (x2 * y2
-            + (x3 * y3
-              + (x4 * y4
-                + (x5 * y5
-                  + (x6 * y6
-                    + (x7 * y7 + pairDiagonal [])))))))
-    expanded = solve
-      ( x0 ∷ y0 ∷ x1 ∷ y1 ∷ x2 ∷ y2 ∷ x3 ∷ y3
-      ∷ x4 ∷ y4 ∷ x5 ∷ y5 ∷ x6 ∷ y6 ∷ x7 ∷ y7 ∷ [])
+      p0 + p1 + p2 + p3 + p4 + p5 + p6 + p7
+      ≡ p0 + (p1 + (p2 + (p3 + (p4 + (p5 + (p6 + (p7 + 0ℚ)))))))
+    expanded = solve (p0 ∷ p1 ∷ p2 ∷ p3 ∷ p4 ∷ p5 ∷ p6 ∷ p7 ∷ [])
   in
   trans expanded refl
 
