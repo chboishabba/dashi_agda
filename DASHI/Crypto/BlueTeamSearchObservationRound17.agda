@@ -32,6 +32,7 @@ import DASHI.Crypto.MLKEMResidualTouchPathLowerBoundExact
 import DASHI.Crypto.MLKEMUncertaintyDecisionTreeStrengthBoundaryExact
 import DASHI.Crypto.MLKEMTouchInformationNoGoExact
 import DASHI.Crypto.MLKEMBoundedReadoutInformationFrontierExact
+import DASHI.Crypto.MLKEMProtectedLabelReadoutFactorisationExact
 import DASHI.Crypto.MLKEMBaseCaseConditionedResidualExact
 import DASHI.Crypto.ConditionedResidualAmbiguityRegressionExact
 import DASHI.Crypto.ConditionalMateAmbiguityExact
