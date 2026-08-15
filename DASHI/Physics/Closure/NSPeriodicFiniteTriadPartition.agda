@@ -66,12 +66,9 @@ headIntoLowHigh :
   ≡ _+_ A (_+_ A (_+_ A head lh) hl) hh
 headIntoLowHigh A head lh hl hh =
   trans
-    (cong (λ tail → _+_ A head tail)
-      (sym (addAssociative A lh hl hh)))
-    (trans
-      (sym (addAssociative A head (_+_ A lh hl) hh))
-      (cong (λ first → _+_ A first hh)
-        (sym (addAssociative A head lh hl))))
+    (sym (addAssociative A head (_+_ A lh hl) hh))
+    (cong (λ first → _+_ A first hh)
+      (sym (addAssociative A head lh hl)))
 
 headIntoHighLow :
   (A : AbsorptionArithmetic) →
@@ -85,9 +82,11 @@ headIntoHighLow A head lh hl hh =
       (trans
         (addAssociative A head lh hl)
         (trans
-          (cong (λ tail → _+_ A tail hl)
-            (addCommutative A head lh))
-          (sym (addAssociative A lh head hl)))))
+          (addCommutative A head (_+_ A lh hl))
+          (trans
+            (addAssociative A lh hl head)
+            (cong (λ tail → _+_ A lh tail)
+              (addCommutative A hl head))))))
 
 headIntoHighHigh :
   (A : AbsorptionArithmetic) →
@@ -96,14 +95,11 @@ headIntoHighHigh :
   ≡ _+_ A (_+_ A lh hl) (_+_ A head hh)
 headIntoHighHigh A head lh hl hh =
   trans
-    (cong (λ tail → _+_ A head tail)
-      (sym (addAssociative A lh hl hh)))
+    (sym (addAssociative A head (_+_ A lh hl) hh))
     (trans
-      (sym (addAssociative A head (_+_ A lh hl) hh))
-      (trans
-        (cong (λ first → _+_ A first hh)
-          (addCommutative A head (_+_ A lh hl)))
-        (addAssociative A (_+_ A lh hl) head hh)))
+      (cong (λ first → _+_ A first hh)
+        (addCommutative A head (_+_ A lh hl)))
+      (addAssociative A (_+_ A lh hl) head hh))
 
 finiteNearTriadDecomposition :
   ∀ {i} {A : AbsorptionArithmetic} {Item : Set i} →

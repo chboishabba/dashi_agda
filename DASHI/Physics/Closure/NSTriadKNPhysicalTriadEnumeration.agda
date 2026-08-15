@@ -225,7 +225,7 @@ mutual
       (sym (cong k equality))
       proof
   trueOutputMember N pair pairs proof (Cube.there tail) =
-    enumeratedOutputWithin {N = N} tail
+    enumeratedOutputWithin {N = N} {pairs = pairs} tail
 
   falseOutputMember :
     (N : Nat)
@@ -235,7 +235,7 @@ mutual
     τ ∈ enumerateFromPairs N pairs →
     modeWithinCutoff N (k τ) ≡ true
   falseOutputMember N pair pairs member =
-    enumeratedOutputWithin {N = N} member
+    enumeratedOutputWithin {N = N} {pairs = pairs} member
 
 enumerateFromPairsComplete :
   ∀ {N pairs pair} →
@@ -298,11 +298,23 @@ physicalTriadEnumerationCutoffSound :
   PhysicalTriadInCutoff N τ
 physicalTriadEnumerationCutoffSound {N} {τ} member =
   triad-in-cutoff
-    (Cube.cartesianFirstMember pairMember)
-    (Cube.cartesianSecondMember pairMember)
+    (Cube.cartesianFirstMember
+      {xs = Cube.cutoffModes N}
+      {ys = Cube.cutoffModes N}
+      {z = triadInputPair τ}
+      pairMember)
+    (Cube.cartesianSecondMember
+      {xs = Cube.cutoffModes N}
+      {ys = Cube.cutoffModes N}
+      {z = triadInputPair τ}
+      pairMember)
     (Cube.cutoffModeEnumerationComplete N (k τ)
       (modeWithinCutoffSound N (k τ)
-        (enumeratedOutputWithin {N = N} {τ = τ} member)))
+        (enumeratedOutputWithin
+          {N = N}
+          {pairs = Cube.cartesian (Cube.cutoffModes N) (Cube.cutoffModes N)}
+          {τ = τ}
+          member)))
   where
   pairMember :
     triadInputPair τ ∈

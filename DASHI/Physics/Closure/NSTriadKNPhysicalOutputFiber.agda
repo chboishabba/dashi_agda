@@ -43,9 +43,9 @@ integerEqual (-[1+ m ]) (-[1+ n ]) = natEqual m n
 integerEqualSound : ∀ {a b} → integerEqual a b ≡ true → a ≡ b
 integerEqualSound {+ m} {+ n} proof =
   cong +_ (natEqualSound proof)
-integerEqualSound {+ m} {-[1+ n ]} ()
-integerEqualSound {-[1+ m ]} {+ n} ()
-integerEqualSound {-[1+ m ]} {-[1+ n ]} proof =
+integerEqualSound {+ m} { -[1+ n ]} ()
+integerEqualSound { -[1+ m ]} {+ n} ()
+integerEqualSound { -[1+ m ]} { -[1+ n ]} proof =
   cong -[1+_] (natEqualSound proof)
 
 integerEqualRefl : ∀ z → integerEqual z z ≡ true
@@ -66,12 +66,16 @@ andTrueRight : ∀ {a b} → a and b ≡ true → b ≡ true
 andTrueRight {true} proof = proof
 andTrueRight {false} ()
 
+falseNotTrue : ∀ {A : Set} → false ≡ true → A
+falseNotTrue ()
+
 modeEqual : Z3.FourierMode → Z3.FourierMode → Bool
 modeEqual a b =
-  integerEqual (Z3.kx a) (Z3.kx b)
-  and
-  (integerEqual (Z3.ky a) (Z3.ky b)
-  and integerEqual (Z3.kz a) (Z3.kz b))
+  _and_
+    (integerEqual (Z3.kx a) (Z3.kx b))
+    (_and_
+      (integerEqual (Z3.ky a) (Z3.ky b))
+      (integerEqual (Z3.kz a) (Z3.kz b)))
 
 modeExt :
   ∀ {a b : Z3.FourierMode} →
@@ -82,11 +86,35 @@ modeExt :
 modeExt {Z3.mode ax ay az} {Z3.mode .ax .ay .az} refl refl refl = refl
 
 modeEqualSound : ∀ {a b} → modeEqual a b ≡ true → a ≡ b
-modeEqualSound proof =
+modeEqualSound {a} {b} proof =
   modeExt
-    (integerEqualSound (andTrueLeft proof))
-    (integerEqualSound (andTrueLeft (andTrueRight proof)))
-    (integerEqualSound (andTrueRight (andTrueRight proof)))
+    (integerEqualSound
+      (andTrueLeft
+        {a = integerEqual (Z3.kx a) (Z3.kx b)}
+        {b = _and_
+          (integerEqual (Z3.ky a) (Z3.ky b))
+          (integerEqual (Z3.kz a) (Z3.kz b))}
+        proof))
+    (integerEqualSound
+      (andTrueLeft
+        {a = integerEqual (Z3.ky a) (Z3.ky b)}
+        {b = integerEqual (Z3.kz a) (Z3.kz b)}
+        (andTrueRight
+          {a = integerEqual (Z3.kx a) (Z3.kx b)}
+          {b = _and_
+            (integerEqual (Z3.ky a) (Z3.ky b))
+            (integerEqual (Z3.kz a) (Z3.kz b))}
+          proof)))
+    (integerEqualSound
+      (andTrueRight
+        {a = integerEqual (Z3.ky a) (Z3.ky b)}
+        {b = integerEqual (Z3.kz a) (Z3.kz b)}
+        (andTrueRight
+          {a = integerEqual (Z3.kx a) (Z3.kx b)}
+          {b = _and_
+            (integerEqual (Z3.ky a) (Z3.ky b))
+            (integerEqual (Z3.kz a) (Z3.kz b))}
+          proof)))
 
 modeEqualRefl : ∀ mode → modeEqual mode mode ≡ true
 modeEqualRefl (Z3.mode x y z)
@@ -121,22 +149,26 @@ filterOutputSound :
   Physical.k τ ≡ output
 filterOutputSound {items = []} ()
 filterOutputSound {output} {items = head ∷ tail} {τ} member
-  with modeEqual (Physical.k head) output
-... | true with member
-...   | Cube.here equality =
+  with modeEqual (Physical.k head) output in modeProof | member
+... | true | Cube.here equality =
       trans
         (cong Physical.k equality)
-        (modeEqualSound refl)
-...   | Cube.there rest =
-      filterOutputSound rest
-... | false =
-      filterOutputSound member
+        (modeEqualSound modeProof)
+... | true | Cube.there rest =
+      filterOutputSound {output = output} {items = tail} {τ = τ} rest
+... | false | member =
+      filterOutputSound {output = output} {items = tail} {τ = τ} member
 
 physicalOutputFiberSound :
   ∀ {cutoff output τ} →
   τ ∈ physicalOutputFiber cutoff output →
   Physical.k τ ≡ output
-physicalOutputFiberSound = filterOutputSound
+physicalOutputFiberSound {cutoff} {output} {τ} member =
+  filterOutputSound
+    {output = output}
+    {items = Physical.physicalTriadEnumeration cutoff}
+    {τ = τ}
+    member
 
 filterOutputComplete :
   ∀ {output items τ} →
@@ -146,16 +178,21 @@ filterOutputComplete :
 filterOutputComplete {items = []} ()
 filterOutputComplete {output} {items = head ∷ tail} {τ}
   member outputEquality
-  with modeEqual (Physical.k head) output
-... | true with member
-...   | Cube.here equality = Cube.here equality
-...   | Cube.there rest = Cube.there (filterOutputComplete rest outputEquality)
-... | false with member
-...   | Cube.there rest = filterOutputComplete rest outputEquality
-...   | Cube.here equality
-      with modeEqualComplete
-        (trans (sym (cong Physical.k equality)) outputEquality)
-...     | ()
+  with modeEqual (Physical.k head) output in modeProof | member
+... | true | Cube.here equality = Cube.here equality
+... | true | Cube.there rest =
+      Cube.there
+        (filterOutputComplete {output = output} {items = tail} {τ = τ}
+          rest outputEquality)
+... | false | Cube.there rest =
+      filterOutputComplete {output = output} {items = tail} {τ = τ}
+        rest outputEquality
+... | false | Cube.here equality =
+      falseNotTrue
+        (trans
+          (sym modeProof)
+          (modeEqualComplete
+            (trans (sym (cong Physical.k equality)) outputEquality)))
 
 physicalOutputFiberComplete :
   ∀ {cutoff output τ} →

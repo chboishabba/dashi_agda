@@ -22,20 +22,20 @@ natLess (suc m) (suc n) = natLess m n
 record NearShellPolicy : Set₁ where
   field
     shellLevel : Z3.FourierMode → Nat
-    overlap : Nat
+    overlapRadius : Nat
 
 open NearShellPolicy public
 
 classifyLevels : Nat → Nat → Nat → Partition.NearClass
-classifyLevels overlap low high with natLess (low + overlap) high
+classifyLevels radius low high with natLess (low + radius) high
 ... | true = Partition.lowHigh
-... | false with natLess (high + overlap) low
+... | false with natLess (high + radius) low
 ...   | true = Partition.highLow
 ...   | false = Partition.highHigh
 
 classifyTriad : NearShellPolicy → Near.ConcreteNearTriad → Partition.NearClass
 classifyTriad P t = classifyLevels
-  (overlap P)
+  (overlapRadius P)
   (shellLevel P (Near.p t))
   (shellLevel P (Near.q t))
 

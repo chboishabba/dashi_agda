@@ -36,14 +36,15 @@ record PhysicalDyadicThreeMechanismTransfer : Set where
 
     -- These equalities are source identity, not new analytic assumptions.
     -- They make the legacy recurrence projections canonical views of `source`.
-    sourceParameter : parameter ≡ parameter source
-    sourceDefectRate : defectRate ≡ defectRate source
-    sourceInheritedCoefficient : inheritedCoefficient ≡ inheritedCoefficient source
-    sourceGenerated : generated ≡ generated source
-    sourceLeakage : leakage ≡ leakage source
-    sourceCeiling : ceiling ≡ ceiling source
-    sourceAlpha : alpha ≡ alpha source
-    sourceBeta : beta ≡ beta source
+    sourceParameter : parameter ≡ LocalizedDuhamelSource.parameter source
+    sourceDefectRate : defectRate ≡ LocalizedDuhamelSource.defectRate source
+    sourceInheritedCoefficient : inheritedCoefficient ≡
+      LocalizedDuhamelSource.inheritedCoefficient source
+    sourceGenerated : generated ≡ LocalizedDuhamelSource.generated source
+    sourceLeakage : leakage ≡ LocalizedDuhamelSource.leakage source
+    sourceCeiling : ceiling ≡ LocalizedDuhamelSource.ceiling source
+    sourceAlpha : alpha ≡ LocalizedDuhamelSource.alpha source
+    sourceBeta : beta ≡ LocalizedDuhamelSource.beta source
 
     defectRateNonnegative : ∀ q → 0ℚ ≤ defectRate q
 

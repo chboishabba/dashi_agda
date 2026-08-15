@@ -29,6 +29,7 @@ open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (sym; trans)
+import Data.Rational.Properties as ℚₚ
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
@@ -74,7 +75,7 @@ classifiedHeadValuePreserved :
   ≡ value τ
 classifiedHeadValuePreserved value τ
   with Support.classifyPhysicalTriad τ
-... | source , certificate = refl
+... | pair = refl
 
 physicalClassificationPreservesTotal :
   (value : Physical.PhysicalTriadIncidence → ℚ) →
@@ -163,14 +164,14 @@ fiveSourceValueSumAppend :
   fiveSourceValueSum triadValue commutator left
   + fiveSourceValueSum triadValue commutator right
 fiveSourceValueSumAppend triadValue commutator [] right =
-  solve (fiveSourceValueSum triadValue commutator right ∷ [])
+  sym (ℚₚ.+-identityˡ (fiveSourceValueSum triadValue commutator right))
 fiveSourceValueSumAppend triadValue commutator (cell ∷ rest) right
   rewrite fiveSourceValueSumAppend triadValue commutator rest right =
-  solve
-    ( fiveSourceValue triadValue commutator cell
-    ∷ fiveSourceValueSum triadValue commutator rest
-    ∷ fiveSourceValueSum triadValue commutator right
-    ∷ [])
+  sym
+    (ℚₚ.+-assoc
+      (fiveSourceValue triadValue commutator cell)
+      (fiveSourceValueSum triadValue commutator rest)
+      (fiveSourceValueSum triadValue commutator right))
 
 triadicFiveSourceValuesAgreeWithTaggedSum :
   (triadValue : Physical.PhysicalTriadIncidence → ℚ) →
@@ -193,7 +194,9 @@ commutatorTailEvaluatesAtOutput :
     (Support.differentiatedCommutator output ∷ [])
   ≡ commutator output
 commutatorTailEvaluatesAtOutput triadValue commutator output =
-  solve (commutator output ∷ [])
+  trans
+    (ℚₚ.+-comm (commutator output) 0ℚ)
+    (ℚₚ.+-identityˡ (commutator output))
 
 fiveSourceTotal :
   Nat → Z3.FourierMode →
@@ -224,6 +227,12 @@ fiveSourceTotalExpands cutoff output triadValue commutator
         | commutatorTailEvaluatesAtOutput
             triadValue commutator output = refl
 
+reorderFiveRational :
+  (a b c d e : ℚ) →
+  a + b + c + d + e ≡ d + a + b + c + e
+reorderFiveRational a b c d e =
+  solve (a ∷ b ∷ c ∷ d ∷ e ∷ [])
+
 physicalFiveSourcePartitionExact :
   (cutoff : Nat) →
   (output : Z3.FourierMode) →
@@ -243,11 +252,10 @@ physicalFiveSourcePartitionExact :
 physicalFiveSourcePartitionExact cutoff output triadValue commutator
   rewrite fiveSourceTotalExpands cutoff output triadValue commutator
         | physicalFourClassPartitionExact cutoff output triadValue =
-  solve
-    ( Four.lowHighSum (physicalTaggedOutputFiber cutoff output triadValue)
-    ∷ Four.highLowSum (physicalTaggedOutputFiber cutoff output triadValue)
-    ∷ Four.comparableSum (physicalTaggedOutputFiber cutoff output triadValue)
-    ∷ Four.highHighToLowSum
-        (physicalTaggedOutputFiber cutoff output triadValue)
-    ∷ commutator output
-    ∷ [])
+  reorderFiveRational
+    (Four.lowHighSum (physicalTaggedOutputFiber cutoff output triadValue))
+    (Four.highLowSum (physicalTaggedOutputFiber cutoff output triadValue))
+    (Four.comparableSum (physicalTaggedOutputFiber cutoff output triadValue))
+    (Four.highHighToLowSum
+      (physicalTaggedOutputFiber cutoff output triadValue))
+    (commutator output)
