@@ -18,6 +18,9 @@ import DASHI.Physics.Closure.NSTriadKNHighestAlphaRound52Exact
 import DASHI.Physics.Closure.NSTriadKNHighestAlphaRound53Exact
 import DASHI.Physics.Closure.NSTriadKNHighestAlphaRound54Exact
 import DASHI.Physics.Closure.NSTriadKNHighestAlphaRound55Exact
+import DASHI.Physics.Closure.NSTriadKNHHBadPhysicalDuhamelSourceRound59
+import DASHI.Physics.Closure.NSTriadKNComNormalizedFibreAggregateRound60Exact
+import DASHI.Physics.Closure.NSTriadKNFixedShiftScaleMatchedCapacityRound60Exact
 import DASHI.Papers.NavierStokes.ClayContractRound23 as Clay23
 
 ------------------------------------------------------------------------
@@ -30,16 +33,25 @@ import DASHI.Papers.NavierStokes.ClayContractRound23 as Clay23
 -- surface: the target theorem type is represented, but physical producers and
 -- unconditional promotion remain false.
 --
--- Round55 imports the six A--F cutset modules: finite-transient HH-bad tail
--- barrier, literal same/adjacent Com fibre assembly, canonical owner-defined
--- flux correction, kernel residual dedup/cancellation, same-object HH-good
--- master-kernel certificate, and literal-zero boundary atom recursion.  The
--- terminal Clay bit remains false: none of these imports converts an unproved
--- physical analytic inequality into a theorem by fiat.
+-- Round55 imports the six A--F cutset modules. Round59/60 then sharpen the
+-- quantitative A--C boundaries without changing any physical promotion bit:
+--
+-- * A: one canonical time-dependent Duhamel source plus estimates indexed by
+--   that source definitionally constructs the transfer; a separately supplied
+--   transfer/same-object equality is no longer accepted.
+-- * B: active same/adjacent normalized odd-(P/Q) Gram bounds extend through
+--   exact off-support annihilation to the literal whole-fibre inequality
+--   17/64 + 2(65/512) = 133/256.
+-- * C: scale-matched bounds X_n <= K C r^n and A_n <= a C r^n together with
+--   a + B_* K <= r-q construct the uniform division-free product capacity.
+--
+-- The terminal Clay bit remains false: the literal A trajectory/estimates, B
+-- active numerical estimates, and C scale-matched physical bounds are not
+-- manufactured by these reductions.
 
 paperInterfaceStatement : String
 paperInterfaceStatement =
-  "Paper-facing NS interface: A6/A7/A8/A9 closure receipts, Round-47/50/51/52/53/54/55 highest-alpha aggregates, and the literal Round 23 Fefferman periodic contract are imported; Round55 wires the A-F physical cutset while unresolved literal analytic producer inhabitation, Clay Navier-Stokes and terminal promotion remain false."
+  "Paper-facing NS interface: A6/A7/A8/A9 closure receipts, Round-47/50/51/52/53/54/55 highest-alpha aggregates, and the literal Round 23 Fefferman periodic contract are imported; Round59/60 sharpen A-C to one canonical Duhamel source, the literal 133/256 Com whole-fibre endpoint, and a scale-matched division-free fixed-shift capacity theorem, while unresolved physical producer inhabitation, Clay Navier-Stokes and terminal promotion remain false."
 
 record NSPaperTheoremStatus : Setω where
   field
@@ -163,7 +175,7 @@ canonicalNSPaperTheoremStatus =
     ; a6TheoremLadderReceiptIsCanonical = refl
     ; a6BonyRepairReceipt = A6Bony.canonicalNSBonyParaproductA6RepairBoundary
     ; a6BonyRepairReceiptIsCanonical = refl
-    ; a7ResidualDepletionReceipt = A7.canonicalNSA7ResidualDepletionGronwallBoundary
+    ; a7ResidualDepletionReceipt = A7.canonicalNSA7TheoremLadderBoundary
     ; a7ResidualDepletionReceiptIsCanonical = refl
     ; a8LocalDefectReceipt = A8.canonicalNSA8FullLocalDefectMonotonicityBoundary
     ; a8LocalDefectReceiptIsCanonical = refl
@@ -222,9 +234,3 @@ nsPaperLiteralClayTargetImplemented :
     (clayContractRound23 canonicalNSPaperTheoremStatus)
   ≡ true
 nsPaperLiteralClayTargetImplemented = Clay23.literalTargetIsImplemented
-
-nsPaperRound23PhysicalProducersOpen :
-  Clay23.physicalProducersInhabited
-    (clayContractRound23 canonicalNSPaperTheoremStatus)
-  ≡ false
-nsPaperRound23PhysicalProducersOpen = Clay23.physicalProducersRemainOpen
