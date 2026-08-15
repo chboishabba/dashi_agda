@@ -3,20 +3,20 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound52SourceRGFederbushVa
 ------------------------------------------------------------------------
 -- Focused Round-52 validation root.
 --
--- This round combines the two shortest currently available routes:
+-- G1 / source chart -- preferred route:
 --
--- G1 / source chart:
---   principal-log scalar endpoint modulus + selected coordinates
---     -> a concrete J_j-I bound;
---   physical T_j = Ad_{U_j V^-1}
---     -> a concrete T_j-I bound;
---   exact JT-I telescope + normalized averaging
---     -> determinant-free inverse reopening.
+--   D_-(Y) Ad_{exp Y} = D_+(Y),
+--   J_+ = D_+^-1, J_- = D_-^-1
+--       => J_+(Y) Ad_{exp Y} = J_-(Y).
 --
--- The tiny rho/96 identity-chart specialization imported below is a checked
--- local calibration lane, not a claim that CMP109's whole 1/24 source chart is
--- that small.  The source-scale quarter estimate must consume the actual
--- source Y-radius constants without silently replacing them by rho/96.
+-- Therefore the physical component does NOT need separately majorized
+-- principal-log and transport defects.  It inherits one opposite-trivialization
+-- inverse-dexp defect, whose source |Y|<=1/12 envelope is already <<1/4.
+-- Normalized contour averaging then gives the determinant-free 4/3 reopening.
+--
+-- The older JT-I triangle and the rho/96 identity-chart specialization remain
+-- imported as diagnostic/calibration lanes only; they are no longer presented
+-- as the shortest source-scale conditioning route.
 --
 -- RG1a/RG1b / complete density:
 --   CMP109 rooted localization summability
@@ -27,19 +27,22 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound52SourceRGFederbushVa
 --
 -- RG1e / coupling history:
 --   beta split -> beta>=0 -> finite inverse-coupling monotonicity -> backwards
---   inverse-threshold propagation.  This is weaker than, and logically prior
---   to, the still-missing full positive two-sided beta enclosure.
+--   inverse-threshold propagation.  This is weaker than the still-missing full
+--   positive two-sided beta enclosure, and is sufficient for the monotonic part
+--   of the CMP122 small-coupling hypothesis.
 --
 -- No Clay promotion is made here.
 ------------------------------------------------------------------------
 
 import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound51CentreKKTBetaValidation
-import DASHI.Physics.YangMills.BalabanCMP109FederbushLogTransportToNormalizedInverseExact as Fed
+import DASHI.Physics.YangMills.BalabanCMP109FederbushDexpTransportCancellationExact as Cancellation
+import DASHI.Physics.YangMills.BalabanCMP109FederbushCancellationNormalizedInverseExact as CancellationInverse
+import DASHI.Physics.YangMills.BalabanCMP109FederbushSourceScaleQuarterExact as SourceScale
+import DASHI.Physics.YangMills.BalabanCMP109FederbushSourceScaleNormalizedInverseExact as SourceScaleInverse
 import DASHI.Physics.YangMills.BalabanCMP109FederbushTransportResidualControlsNormExact as TransportNorm
 import DASHI.Physics.YangMills.BalabanCMP109FederbushPrimitiveDefectsToNormalizedInverseExact as Primitive
 import DASHI.Physics.YangMills.BalabanCMP109FederbushTransportDefectFromIdentityChartExact as TransportChart
 import DASHI.Physics.YangMills.BalabanCMP109PrincipalLogDefectFromEndpointModulusExact as LogEndpoint
-import DASHI.Physics.YangMills.BalabanCMP109FederbushPhysicalChartToNormalizedInverseExact as PhysicalChart
 import DASHI.Physics.YangMills.BalabanCMP109FederbushCoefficientChartToInverseExact as CoefficientChart
 import DASHI.Physics.YangMills.BalabanYM4NonnegativeBetaFinitePropagationExact as BetaFinite
 import DASHI.Physics.YangMills.BalabanYM4BetaSplitToSmallCouplingMonotonicityExact as BetaSplit
@@ -47,9 +50,28 @@ import DASHI.Physics.YangMills.BalabanClayGate4LightweightValidation as Gate4
 import DASHI.Physics.YangMills.Balaban1989CompleteDensityToYM4RegionExact as Complete
 import DASHI.Physics.YangMills.Balaban1989CanonicalYM4StateFromSection2Exact as Canonical
 
-federbushLogTransportToLocalResidualLevel =
-  Fed.cmp109FederbushLogTransportToLocalResidualLevel
+federbushDexpTransportCancellationLevel =
+  Cancellation.cmp109FederbushDexpTransportCancellationLevel
 
+federbushPhysicalDexpTransportIdentificationLevel =
+  Cancellation.cmp109FederbushPhysicalDexpTransportIdentificationLevel
+
+federbushCancellationResidualQuarterLevel =
+  CancellationInverse.cmp109FederbushCancellationResidualQuarterLevel
+
+federbushCancellationFourThirdsInverseLevel =
+  CancellationInverse.cmp109FederbushCancellationFourThirdsInverseLevel
+
+federbushCancellationMatrixDictionaryLevel =
+  CancellationInverse.cmp109FederbushCancellationMatrixDictionaryLevel
+
+federbushSourceScaleQuarterArithmeticLevel =
+  SourceScale.cmp109FederbushSourceScaleQuarterArithmeticLevel
+
+federbushSourceScaleFourThirdsInverseLevel =
+  SourceScaleInverse.cmp109FederbushSourceScaleFourThirdsInverseLevel
+
+-- Secondary diagnostics/calibrations.
 federbushTransportDefectControlsNormLevel =
   TransportNorm.cmp109FederbushTransportDefectControlsNormLevel
 
@@ -65,14 +87,8 @@ principalLogEndpointModulusToDefectLevel =
 principalLogBishopCoefficientToRationalLevel =
   LogEndpoint.cmp109PrincipalLogBishopCoefficientToRationalLevel
 
-federbushPhysicalChartToInverseLevel =
-  PhysicalChart.cmp109FederbushPhysicalChartToInverseLevel
-
 federbushCoefficientChartToInverseLevel =
   CoefficientChart.cmp109FederbushCoefficientChartToInverseLevel
-
-federbushCoefficientAndChordInputsLevel =
-  CoefficientChart.physicalCMP109FederbushCoefficientAndChordInputsLevel
 
 nonnegativeBetaFiniteMonotonicityLevel =
   BetaFinite.ym4NonnegativeBetaFiniteMonotonicityLevel
