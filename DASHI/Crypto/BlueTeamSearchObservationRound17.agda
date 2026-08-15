@@ -36,6 +36,8 @@ import DASHI.Crypto.MLKEMProtectedLabelReadoutFactorisationExact
 import DASHI.Crypto.MLKEMFiniteStateTranscriptCapacityExact
 import DASHI.Crypto.MLKEMBoundedCellTranscriptCapacityExact
 import DASHI.Crypto.MLKEMUpdateCapacityDichotomyExact
+import DASHI.Crypto.MLKEMFIPS203ProtectedSecretCapacityExact
+import DASHI.Crypto.MLKEMFIPS203UpdateCapacityResourceExact
 import DASHI.Crypto.MLKEMBaseCaseConditionedResidualExact
 import DASHI.Crypto.ConditionedResidualAmbiguityRegressionExact
 import DASHI.Crypto.ConditionalMateAmbiguityExact
