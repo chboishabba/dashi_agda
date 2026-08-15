@@ -16,24 +16,22 @@ module DASHI.Physics.YangMills.BalabanClayGate4LightweightPolymerRGHandoffExact 
 --
 -- PURPOSE
 --
--- This is the lightweight Gate-4 handoff requested by the local Agda 2.9
--- audit.  It deliberately does not import BalabanPolymerDiameterEntropy,
--- StepVAssemblyLemmaQueue, SFGC, or the graph-combinatorics implementation.
+-- Lightweight Gate-4 handoff for the Agda 2.9 audit.  This module does not
+-- import BalabanPolymerDiameterEntropy, StepVAssemblyLemmaQueue, SFGC, or the
+-- graph-combinatorics implementation which caused the host-memory failure.
 --
 -- The theorem-surface side uses BalabanPolymerDiameterEntropyLight to retain
--- the canonical P06/P07/P08/P09 audit and the fail-closed Clay flag.  The RG
--- side consumes only the already-small exact Gate-4 one-step/iteration API.
--- Hence an Agda check of this module tests the actual polymer-audit -> RG
--- packaging handoff without reopening the OOM import graph.
+-- the canonical P06/P07/P08/P09 audit and fail-closed Clay flag.  The RG side
+-- consumes only the exact physical one-step/iteration API.  Thus checking this
+-- module tests the polymer-audit -> RG packaging handoff without reopening the
+-- heavyweight polymer graph.
 --
--- This does NOT manufacture the missing analytic estimates.  In particular,
--- PhysicalOneStepClosure still requires the physical coupling-domain,
--- boundary, and strict polymer-norm preservation proofs.  What is proved here
--- is that once those physical one-step estimates are supplied, the lightweight
--- polymer audit and the exact all-scale RG induction compose on one carrier.
+-- No analytic input is promoted here.  PhysicalOneStepClosure still requires
+-- physical coupling-domain preservation, boundary reinjection admissibility,
+-- and strict combined polymer-norm closure.  Once those are supplied, the
+-- all-scale admissibility and partition-function induction below are exact.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 
@@ -49,8 +47,6 @@ record LightweightPolymerRGHandoff
     polymerAudit : Light.LightweightPolymerAuditSurface
     closure : Physical.PhysicalOneStepClosure State Bound
 
-    -- Keep the audit on exactly the canonical source surfaces, rather than a
-    -- parallel lightweight vocabulary.
     p06Canonical :
       Light.LightweightPolymerAuditSurface.p06AnimalCounting polymerAudit
       ≡ Light.LightweightPolymerAuditSurface.p06AnimalCounting
@@ -87,25 +83,28 @@ canonicalLightweightPolymerRGHandoff closure = record
   }
 
 ------------------------------------------------------------------------
--- Actual RG handoff: no polymer implementation details occur below.
+-- Exact RG handoff.  No heavyweight polymer object occurs in these types.
 ------------------------------------------------------------------------
 
 lightweightPhysicalAdmissibility :
-  ∀ {State Bound} →
-  LightweightPolymerRGHandoff State Bound →
-  UV.CombinedRGAdmissibility
-    (Physical.normData ∘ closure)
+  ∀ {State Bound} (handoff : LightweightPolymerRGHandoff State Bound) →
+  UV.CombinedRGAdmissibility (Physical.normData (closure handoff))
 lightweightPhysicalAdmissibility handoff =
   Physical.physicalAdmissibility (closure handoff)
-  where
-  _∘_ :
-    ∀ {A B : Set} {C : B → Set} →
-    ((b : B) → C b) → A → ((a : A) → B) → Set
-  _∘_ f a g = C (g a)
 
--- The previous helper type is intentionally not exported as a separate API;
--- the concrete all-scale theorem below uses the exact Physical/UV types and
--- therefore catches any future drift in that handoff.
+lightweightStepPreservesAdmissibility :
+  ∀ {State Bound}
+    (handoff : LightweightPolymerRGHandoff State Bound)
+    (state : State) →
+  UV.AdmissibleRGState (lightweightPhysicalAdmissibility handoff) state →
+  UV.AdmissibleRGState
+    (lightweightPhysicalAdmissibility handoff)
+    (UV.next (Physical.normData (closure handoff)) state)
+lightweightStepPreservesAdmissibility handoff state evidence =
+  UV.combinedStepPreservesAdmissibility
+    (lightweightPhysicalAdmissibility handoff)
+    state
+    evidence
 
 lightweightPackageAllScaleAdmissible :
   ∀ {State Bound}
@@ -142,11 +141,12 @@ lightweightPackagePartitionBound initialData scale =
 lightweightPolymerAuditRGHandoffLevel : ProofLevel
 lightweightPolymerAuditRGHandoffLevel = machineChecked
 
+lightweightOneStepRGAssemblyLevel : ProofLevel
+lightweightOneStepRGAssemblyLevel = machineChecked
+
 lightweightAllScaleRGAssemblyLevel : ProofLevel
 lightweightAllScaleRGAssemblyLevel = machineChecked
 
--- These are still the actual mathematical frontier.  Keeping them named here
--- makes the lightweight check useful rather than promotional.
 physicalOneStepAnalyticInputsLevel : ProofLevel
 physicalOneStepAnalyticInputsLevel = conditional
 
