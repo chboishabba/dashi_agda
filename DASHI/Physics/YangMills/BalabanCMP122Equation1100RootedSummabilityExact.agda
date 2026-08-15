@@ -23,16 +23,10 @@ module DASHI.Physics.YangMills.BalabanCMP122Equation1100RootedSummabilityExact w
 --
 -- DASHI CONTRIBUTION
 --
--- There are now two source-faithful ways to control the R-sector:
---
---  (A) explicit shell counting, yielding a 2^{-n} shell and a concrete factor 2;
---  (B) the shorter primary-source route implemented here.
---
 -- CMP109 (0.26) already sums sufficiently strong exp(-kappa d_j(X)) decay over
 -- the rooted localization family D_j. CMP119 uses the same D_j family for the
 -- R-terms, while CMP122 (1.100) supplies the extra small factor exp(-p0(g_k)).
--- Therefore, after the repository weight has consumed part of the available
--- R-decay,
+-- Hence, after the repository norm spends part of the R-decay,
 --
 --   ||R_k(X)||_weighted <= s_k r_k(X),
 --   sum_{X rooted} r_k(X) <= C_root,k
@@ -40,16 +34,12 @@ module DASHI.Physics.YangMills.BalabanCMP122Equation1100RootedSummabilityExact w
 -- imply directly
 --
 --   sum_{X rooted} ||R_k(X)||_weighted <= s_k C_root,k.
---
--- This avoids reconstructing a separate animal count when all that is needed
--- is source-level UV stability. The explicit P06/shell lane remains valuable
--- for auditable numerical constants and for proving a particular shared-slack
--- inequality from scratch.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanCMP109RootedLocalizationSummabilityExact as Rooted
@@ -80,15 +70,13 @@ sumPointwiseScaledBelow coefficient (value ∷ rest) term residual
       coefficient * residual value
         + coefficient * Rooted.sumDecay rest residual
       ≡ coefficient * Rooted.sumDecay (value ∷ rest) residual
-    regroup = ℚP.*-distribˡ-+ coefficient
-      (residual value) (Rooted.sumDecay rest residual)
+    regroup = sym (ℚP.*-distribˡ-+ coefficient
+      (residual value) (Rooted.sumDecay rest residual))
   in
   subst
     (λ upper → sumWeighted (value ∷ rest) term ≤ upper)
     regroup
     added
-  where
-  open import Relation.Binary.PropositionalEquality using (subst)
 
 record Equation1100RootedSummableData
     (Scale Root Domain : Set) : Set₁ where
@@ -154,8 +142,5 @@ rootedWeightedRBelowSuppressionTimesSourceConstant dataSet scale root =
 cmp109CMP122DirectRootedRAssemblyLevel : ProofLevel
 cmp109CMP122DirectRootedRAssemblyLevel = machineChecked
 
--- Physical representation seam: equation (1.100)'s exp(-p0) and remaining
--- exp(-kappa d_j) must be identified with suppression/residualDecay after the
--- actual repository polymer norm weight is inserted.
 cmp122DirectRootedRRepresentationLevel : ProofLevel
 cmp122DirectRootedRRepresentationLevel = conditional
