@@ -20,6 +20,7 @@ import DASHI.Crypto.MLKEMNTTLocalOutcomeBudgetExact
 import DASHI.Crypto.MLKEMNTTLocalMatrixOutcomeClassifierExact
 import DASHI.Crypto.MLKEMNTTLocalLeftInverseZeroReflectionExact
 import DASHI.Crypto.MLKEMBaseCaseAdjugateInverseExact
+import DASHI.Crypto.MLKEMBaseCaseNormInverseBridgeExact
 import DASHI.Crypto.MLKEMBaseCaseConditionedResidualExact
 import DASHI.Crypto.ConditionedResidualAmbiguityRegressionExact
 import DASHI.Crypto.ConditionalMateAmbiguityExact
