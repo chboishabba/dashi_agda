@@ -24,6 +24,7 @@ import DASHI.Crypto.MLKEMBaseCaseNormInverseBridgeExact
 import DASHI.Crypto.MLKEMBaseCaseNonsquareNormSeparationExact
 import DASHI.Crypto.MLKEMFIPS203GammaNonsquareTransportExact
 import DASHI.Crypto.MLKEMUncertaintyTransitionCostBridgeExact
+import DASHI.Crypto.MLKEMProtectedLabelUncertaintyEdgeExact
 import DASHI.Crypto.MLKEMBaseCaseConditionedResidualExact
 import DASHI.Crypto.ConditionedResidualAmbiguityRegressionExact
 import DASHI.Crypto.ConditionalMateAmbiguityExact
