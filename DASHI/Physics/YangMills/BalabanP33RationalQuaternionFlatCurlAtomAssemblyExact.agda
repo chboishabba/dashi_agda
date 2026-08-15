@@ -55,6 +55,24 @@ flatOrderedDotExpansion a b c d =
     (vectorDot c d)
     (vectorDot d d)
 
+-- Literal displayed normal form:
+-- |A|²+|B|²+|C|²+|D|²
+-- +2 A·B-2 A·C-2 A·D-2 B·C-2 B·D+2 C·D.
+flatDisplayedOrderedExpansion :
+  RationalVector3 → RationalVector3 → RationalVector3 → RationalVector3 → ℚ
+flatDisplayedOrderedExpansion a b c d =
+  flatOrderedShape
+    (vectorNormSq a)
+    (vectorDot a b)
+    (vectorDot a c)
+    (vectorDot a d)
+    (vectorNormSq b)
+    (vectorDot b c)
+    (vectorDot b d)
+    (vectorNormSq c)
+    (vectorDot c d)
+    (vectorNormSq d)
+
 flatTail123AtomFamily : ∀ b c d →
   wilsonSecondVariationAtomSum
     (flatExponentialJet b ∷ flatExponentialJet (negV c) ∷
@@ -102,6 +120,14 @@ flatRecursionDotExpansionIsOrdered a b c d =
     (vectorDot c d)
     (vectorDot d d)
 
+flatOrderedDotExpansionIsDisplayed : ∀ a b c d →
+  flatOrderedDotExpansion a b c d ≡ flatDisplayedOrderedExpansion a b c d
+flatOrderedDotExpansionIsDisplayed a b c d
+  rewrite vectorDotSelfIsNormSq a
+    | vectorDotSelfIsNormSq b
+    | vectorDotSelfIsNormSq c
+    | vectorDotSelfIsNormSq d = refl
+
 flatSecondVariationRecursionDotExpansion : ∀ a b c d →
   flatOrientedPlaquetteSecondVariation a b c d
   ≡ flatRecursionDotExpansion a b c d
@@ -117,3 +143,11 @@ flatSecondVariationOrderedDotExpansion a b c d =
   trans
     (flatSecondVariationRecursionDotExpansion a b c d)
     (flatRecursionDotExpansionIsOrdered a b c d)
+
+flatSecondVariationDisplayedOrderedExpansion : ∀ a b c d →
+  flatOrientedPlaquetteSecondVariation a b c d
+  ≡ flatDisplayedOrderedExpansion a b c d
+flatSecondVariationDisplayedOrderedExpansion a b c d =
+  trans
+    (flatSecondVariationOrderedDotExpansion a b c d)
+    (flatOrderedDotExpansionIsDisplayed a b c d)
