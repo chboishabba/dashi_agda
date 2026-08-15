@@ -29,7 +29,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoFiniteBonyFourClassAccountingExact wher
 -- continuum estimate is hidden inside the bookkeeping theorem.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _≤_)
 import Data.Rational.Properties as ℚₚ
@@ -81,6 +81,30 @@ highHighToLowSum
   value + highHighToLowSum interactions
 highHighToLowSum (_ ∷ interactions) = highHighToLowSum interactions
 
+fourRationalAddHead :
+  (a b c d e : ℚ) →
+  a + (b + c + d + e) ≡ a + b + c + d + e
+fourRationalAddHead a b c d e =
+  solve (a ∷ b ∷ c ∷ d ∷ e ∷ [])
+
+fourRationalAddSecond :
+  (a b c d e : ℚ) →
+  a + (b + c + d + e) ≡ b + (a + c) + d + e
+fourRationalAddSecond a b c d e =
+  solve (a ∷ b ∷ c ∷ d ∷ e ∷ [])
+
+fourRationalAddThird :
+  (a b c d e : ℚ) →
+  a + (b + c + d + e) ≡ b + c + (a + d) + e
+fourRationalAddThird a b c d e =
+  solve (a ∷ b ∷ c ∷ d ∷ e ∷ [])
+
+fourRationalAddFourth :
+  (a b c d e : ℚ) →
+  a + (b + c + d + e) ≡ b + c + d + (a + e)
+fourRationalAddFourth a b c d e =
+  solve (a ∷ b ∷ c ∷ d ∷ e ∷ [])
+
 fourClassPartitionExact :
   (interactions : List TaggedInteraction) →
   allInteractionSum interactions
@@ -88,47 +112,31 @@ fourClassPartitionExact :
     + highLowSum interactions
     + comparableSum interactions
     + highHighToLowSum interactions
-fourClassPartitionExact [] = solve []
+fourClassPartitionExact [] = refl
 fourClassPartitionExact
   (tagged-interaction lowHighClass value ∷ interactions)
   rewrite fourClassPartitionExact interactions =
-  solve
-    ( value
-    ∷ lowHighSum interactions
-    ∷ highLowSum interactions
-    ∷ comparableSum interactions
-    ∷ highHighToLowSum interactions
-    ∷ [])
+  fourRationalAddHead
+    value (lowHighSum interactions) (highLowSum interactions)
+    (comparableSum interactions) (highHighToLowSum interactions)
 fourClassPartitionExact
   (tagged-interaction highLowClass value ∷ interactions)
   rewrite fourClassPartitionExact interactions =
-  solve
-    ( value
-    ∷ lowHighSum interactions
-    ∷ highLowSum interactions
-    ∷ comparableSum interactions
-    ∷ highHighToLowSum interactions
-    ∷ [])
+  fourRationalAddSecond
+    value (lowHighSum interactions) (highLowSum interactions)
+    (comparableSum interactions) (highHighToLowSum interactions)
 fourClassPartitionExact
   (tagged-interaction comparableClass value ∷ interactions)
   rewrite fourClassPartitionExact interactions =
-  solve
-    ( value
-    ∷ lowHighSum interactions
-    ∷ highLowSum interactions
-    ∷ comparableSum interactions
-    ∷ highHighToLowSum interactions
-    ∷ [])
+  fourRationalAddThird
+    value (lowHighSum interactions) (highLowSum interactions)
+    (comparableSum interactions) (highHighToLowSum interactions)
 fourClassPartitionExact
   (tagged-interaction highHighToLowClass value ∷ interactions)
   rewrite fourClassPartitionExact interactions =
-  solve
-    ( value
-    ∷ lowHighSum interactions
-    ∷ highLowSum interactions
-    ∷ comparableSum interactions
-    ∷ highHighToLowSum interactions
-    ∷ [])
+  fourRationalAddFourth
+    value (lowHighSum interactions) (highLowSum interactions)
+    (comparableSum interactions) (highHighToLowSum interactions)
 
 record FourClassTerminalBudget : Set where
   constructor four-class-terminal-budget
@@ -168,6 +176,14 @@ fourClassTerminalAssembly :
   (budget : FourClassTerminalBudget) →
   totalInteraction budget
   ≤ coefficientSum budget * tailRoot budget * shellEnergy budget
+
+fourCoefficientDistribution :
+  (a b c d r s : ℚ) →
+  a * r * s + b * r * s + c * r * s + d * r * s
+  ≡ (a + b + c + d) * r * s
+fourCoefficientDistribution a b c d r s =
+  solve (a ∷ b ∷ c ∷ d ∷ r ∷ s ∷ [])
+
 fourClassTerminalAssembly budget =
   let
     summed :
@@ -197,14 +213,13 @@ fourClassTerminalAssembly budget =
             * tailRoot budget * shellEnergy budget)
       ≡ coefficientSum budget * tailRoot budget * shellEnergy budget
     targetMeaning =
-      solve
-        ( lowHighCoefficient budget
-        ∷ highLowCoefficient budget
-        ∷ comparableCoefficient budget
-        ∷ highHighToLowCoefficient budget
-        ∷ tailRoot budget
-        ∷ shellEnergy budget
-        ∷ [])
+      fourCoefficientDistribution
+        (lowHighCoefficient budget)
+        (highLowCoefficient budget)
+        (comparableCoefficient budget)
+        (highHighToLowCoefficient budget)
+        (tailRoot budget)
+        (shellEnergy budget)
   in
   subst
     (λ upper → totalInteraction budget ≤ upper)

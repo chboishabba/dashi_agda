@@ -2,7 +2,8 @@ module DASHI.Physics.Closure.NSTriadKNOfficialInfinityNormTriangle where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; _+_)
+open import Agda.Builtin.Nat using (Nat)
+import Agda.Builtin.Nat as BN
 open import Data.Integer.Base using (ℤ; _+_; -_; _-_ ; ∣_∣)
 open import Data.Nat.Base using (_≤_; _⊔_)
 import Data.Nat.Properties as Nat
@@ -22,9 +23,9 @@ max3 x y z = (x ⊔ y) ⊔ z
 infinityNorm : Z3.FourierMode → Nat
 infinityNorm k =
   max3
-    ∣ Z3.kx k ∣
-    ∣ Z3.ky k ∣
-    ∣ Z3.kz k ∣
+    (∣ Z3.kx k ∣)
+    (∣ Z3.ky k ∣)
+    (∣ Z3.kz k ∣)
 
 first≤max3 : ∀ x y z → x ≤ max3 x y z
 first≤max3 x y z =
@@ -51,23 +52,23 @@ max3Least x≤ y≤ z≤ =
 xMagnitude≤InfinityNorm :
   ∀ k → ∣ Z3.kx k ∣ ≤ infinityNorm k
 xMagnitude≤InfinityNorm k =
-  first≤max3 ∣ Z3.kx k ∣ ∣ Z3.ky k ∣ ∣ Z3.kz k ∣
+  first≤max3 (∣ Z3.kx k ∣) (∣ Z3.ky k ∣) (∣ Z3.kz k ∣)
 
 yMagnitude≤InfinityNorm :
   ∀ k → ∣ Z3.ky k ∣ ≤ infinityNorm k
 yMagnitude≤InfinityNorm k =
-  second≤max3 ∣ Z3.kx k ∣ ∣ Z3.ky k ∣ ∣ Z3.kz k ∣
+  second≤max3 (∣ Z3.kx k ∣) (∣ Z3.ky k ∣) (∣ Z3.kz k ∣)
 
 zMagnitude≤InfinityNorm :
   ∀ k → ∣ Z3.kz k ∣ ≤ infinityNorm k
 zMagnitude≤InfinityNorm k =
-  third≤max3 ∣ Z3.kx k ∣ ∣ Z3.ky k ∣ ∣ Z3.kz k ∣
+  third≤max3 (∣ Z3.kx k ∣) (∣ Z3.ky k ∣) (∣ Z3.kz k ∣)
 
 coordinateSumBound :
-  ∀ coordinateP coordinateQ boundP boundQ →
+  ∀ (coordinateP coordinateQ : ℤ) (boundP boundQ : Nat) →
   ∣ coordinateP ∣ ≤ boundP →
   ∣ coordinateQ ∣ ≤ boundQ →
-  ∣ coordinateP + coordinateQ ∣ ≤ boundP + boundQ
+  ∣ coordinateP + coordinateQ ∣ ≤ BN._+_ boundP boundQ
 coordinateSumBound coordinateP coordinateQ boundP boundQ p≤ q≤ =
   Nat.≤-trans
     (Int.∣i+j∣≤∣i∣+∣j∣ coordinateP coordinateQ)
@@ -76,7 +77,7 @@ coordinateSumBound coordinateP coordinateQ boundP boundQ p≤ q≤ =
 infinityNormTriangle :
   ∀ p q →
   infinityNorm (Z3.addMode p q)
-  ≤ infinityNorm p + infinityNorm q
+  ≤ BN._+_ (infinityNorm p) (infinityNorm q)
 infinityNormTriangle p q =
   max3Least
     (coordinateSumBound
@@ -106,13 +107,13 @@ sumMinusLeft i j =
         (Int.+-identityʳ j)))
 
 coordinateReverseLeft :
-  ∀ coordinateP coordinateQ boundSum boundQ →
+  ∀ (coordinateP coordinateQ : ℤ) (boundSum boundQ : Nat) →
   ∣ coordinateP + coordinateQ ∣ ≤ boundSum →
   ∣ coordinateQ ∣ ≤ boundQ →
-  ∣ coordinateP ∣ ≤ boundSum + boundQ
+  ∣ coordinateP ∣ ≤ BN._+_ boundSum boundQ
 coordinateReverseLeft coordinateP coordinateQ boundSum boundQ sum≤ q≤ =
   subst
-    (λ magnitude → magnitude ≤ boundSum + boundQ)
+    (λ magnitude → magnitude ≤ BN._+_ boundSum boundQ)
     (cong ∣_∣ (sumMinusLeft coordinateQ coordinateP))
     (Nat.≤-trans
       (Int.∣i-j∣≤∣i∣+∣j∣
@@ -128,7 +129,7 @@ coordinateReverseLeft coordinateP coordinateQ boundSum boundQ sum≤ q≤ =
 infinityNormReverseLeft :
   ∀ p q →
   infinityNorm p
-  ≤ infinityNorm (Z3.addMode p q) + infinityNorm q
+  ≤ BN._+_ (infinityNorm (Z3.addMode p q)) (infinityNorm q)
 infinityNormReverseLeft p q =
   max3Least
     (coordinateReverseLeft
@@ -160,11 +161,11 @@ addModeCommutative (Z3.mode px py pz) (Z3.mode qx qy qz)
 infinityNormReverseRight :
   ∀ p q →
   infinityNorm q
-  ≤ infinityNorm (Z3.addMode p q) + infinityNorm p
+  ≤ BN._+_ (infinityNorm (Z3.addMode p q)) (infinityNorm p)
 infinityNormReverseRight p q =
   subst
     (λ output →
-      infinityNorm q ≤ infinityNorm output + infinityNorm p)
+      infinityNorm q ≤ BN._+_ (infinityNorm output) (infinityNorm p))
     (sym (addModeCommutative p q))
     (infinityNormReverseLeft q p)
 
@@ -174,15 +175,15 @@ record OfficialResonantNormConsequences
   field
     outputTriangle :
       infinityNorm (Physical.k τ)
-      ≤ infinityNorm (Physical.p τ) + infinityNorm (Physical.q τ)
+      ≤ BN._+_ (infinityNorm (Physical.p τ)) (infinityNorm (Physical.q τ))
 
     pReverseTriangle :
       infinityNorm (Physical.p τ)
-      ≤ infinityNorm (Physical.k τ) + infinityNorm (Physical.q τ)
+      ≤ BN._+_ (infinityNorm (Physical.k τ)) (infinityNorm (Physical.q τ))
 
     qReverseTriangle :
       infinityNorm (Physical.q τ)
-      ≤ infinityNorm (Physical.k τ) + infinityNorm (Physical.p τ)
+      ≤ BN._+_ (infinityNorm (Physical.k τ)) (infinityNorm (Physical.p τ))
 
 open OfficialResonantNormConsequences public
 
@@ -194,19 +195,19 @@ officialResonantNormConsequences τ =
     (subst
       (λ output →
         infinityNorm output
-        ≤ infinityNorm (Physical.p τ) + infinityNorm (Physical.q τ))
+        ≤ BN._+_ (infinityNorm (Physical.p τ)) (infinityNorm (Physical.q τ)))
       (Physical.resonance τ)
       (infinityNormTriangle (Physical.p τ) (Physical.q τ)))
     (subst
       (λ output →
         infinityNorm (Physical.p τ)
-        ≤ infinityNorm output + infinityNorm (Physical.q τ))
+        ≤ BN._+_ (infinityNorm output) (infinityNorm (Physical.q τ)))
       (Physical.resonance τ)
       (infinityNormReverseLeft (Physical.p τ) (Physical.q τ)))
     (subst
       (λ output →
         infinityNorm (Physical.q τ)
-        ≤ infinityNorm output + infinityNorm (Physical.p τ))
+        ≤ BN._+_ (infinityNorm output) (infinityNorm (Physical.p τ)))
       (Physical.resonance τ)
       (infinityNormReverseRight (Physical.p τ) (Physical.q τ)))
 

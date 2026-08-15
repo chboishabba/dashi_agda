@@ -7,7 +7,7 @@ open import Data.Empty using (⊥; ⊥-elim)
 open import Data.Nat.Base using (_≤_; z≤n; s≤s; ∣_-_∣)
 import Data.Nat.Properties as Nat
 open import Data.Sum.Base using (inj₁; inj₂)
-open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
@@ -21,7 +21,14 @@ import DASHI.Physics.Closure.NSTriadKNShellFactorTwo as FactorTwo
 ------------------------------------------------------------------------
 
 doublePow2 : ∀ n → Shell.pow2 n + Shell.pow2 n ≡ Shell.pow2 (suc n)
-doublePow2 n = refl
+doublePow2 n =
+  trans
+    (cong
+      (λ right → Shell.pow2 n + right)
+      (sym (Nat.*-identityʳ (Shell.pow2 n))))
+    (trans
+      (sym (Nat.*-suc (Shell.pow2 n) 1))
+      (Nat.*-comm (Shell.pow2 n) 2))
 
 shellOfNormSumUpperRight :
   ∀ {left right output} →
@@ -75,9 +82,9 @@ gapThreeContradictsUpperSuccessor :
   lower + 3 ≤ higher →
   higher ≤ suc lower →
   ⊥
-gapThreeContradictsUpperSuccessor {lower} gap upper =
+gapThreeContradictsUpperSuccessor {lower} {higher} gap upper =
   threeNotLeOne
-    (Nat.+-cancelˡ-≤ lower
+    (Nat.+-cancelˡ-≤ lower 3 1
       (subst
         (λ right → lower + 3 ≤ right)
         (sym (Nat.+-comm lower 1))
@@ -112,6 +119,9 @@ lowHighOutputTracksHighOne τ gap =
     ≤ suc (Shell.shellIndex (Physical.q τ))
   outputUpper =
     shellOfNormSumUpperRight
+      {left = Infinity.infinityNorm (Physical.p τ)}
+      {right = Infinity.infinityNorm (Physical.q τ)}
+      {output = Infinity.infinityNorm (Physical.k τ)}
       (Infinity.outputTriangle consequences)
       pShell≤qShell
 
@@ -124,12 +134,23 @@ lowHighOutputTracksHighOne τ gap =
       (Shell.shellIndex (Physical.k τ))
   ... | inj₁ pShell≤kShell =
     shellOfNormSumUpperRight
-      (Infinity.qReverseTriangle consequences)
+      {left = Infinity.infinityNorm (Physical.p τ)}
+      {right = Infinity.infinityNorm (Physical.k τ)}
+      {output = Infinity.infinityNorm (Physical.q τ)}
+      (subst
+        (λ sum → Infinity.infinityNorm (Physical.q τ) ≤ sum)
+        (Nat.+-comm
+          (Infinity.infinityNorm (Physical.k τ))
+          (Infinity.infinityNorm (Physical.p τ)))
+        (Infinity.qReverseTriangle consequences))
       pShell≤kShell
   ... | inj₂ kShell≤pShell =
     ⊥-elim
       (gapThreeContradictsUpperSuccessor gap
         (shellOfNormSumUpperRight
+          {left = Infinity.infinityNorm (Physical.k τ)}
+          {right = Infinity.infinityNorm (Physical.p τ)}
+          {output = Infinity.infinityNorm (Physical.q τ)}
           (Infinity.qReverseTriangle consequences)
           kShell≤pShell))
 
@@ -155,7 +176,15 @@ highLowOutputTracksHighOne τ gap =
     ≤ suc (Shell.shellIndex (Physical.p τ))
   outputUpper =
     shellOfNormSumUpperRight
-      (Infinity.outputTriangle consequences)
+      {left = Infinity.infinityNorm (Physical.q τ)}
+      {right = Infinity.infinityNorm (Physical.p τ)}
+      {output = Infinity.infinityNorm (Physical.k τ)}
+      (subst
+        (λ sum → Infinity.infinityNorm (Physical.k τ) ≤ sum)
+        (Nat.+-comm
+          (Infinity.infinityNorm (Physical.p τ))
+          (Infinity.infinityNorm (Physical.q τ)))
+        (Infinity.outputTriangle consequences))
       qShell≤pShell
 
   highUpper :
@@ -167,12 +196,23 @@ highLowOutputTracksHighOne τ gap =
       (Shell.shellIndex (Physical.k τ))
   ... | inj₁ qShell≤kShell =
     shellOfNormSumUpperRight
-      (Infinity.pReverseTriangle consequences)
+      {left = Infinity.infinityNorm (Physical.q τ)}
+      {right = Infinity.infinityNorm (Physical.k τ)}
+      {output = Infinity.infinityNorm (Physical.p τ)}
+      (subst
+        (λ sum → Infinity.infinityNorm (Physical.p τ) ≤ sum)
+        (Nat.+-comm
+          (Infinity.infinityNorm (Physical.k τ))
+          (Infinity.infinityNorm (Physical.q τ)))
+        (Infinity.pReverseTriangle consequences))
       qShell≤kShell
   ... | inj₂ kShell≤qShell =
     ⊥-elim
       (gapThreeContradictsUpperSuccessor gap
         (shellOfNormSumUpperRight
+          {left = Infinity.infinityNorm (Physical.k τ)}
+          {right = Infinity.infinityNorm (Physical.q τ)}
+          {output = Infinity.infinityNorm (Physical.p τ)}
           (Infinity.pReverseTriangle consequences)
           kShell≤qShell))
 
@@ -209,6 +249,9 @@ highHighToLowInputsComparableOne τ kGapP kGapQ =
     ≤ suc (Shell.shellIndex (Physical.q τ))
   pUpper =
     shellOfNormSumUpperRight
+      {left = Infinity.infinityNorm (Physical.k τ)}
+      {right = Infinity.infinityNorm (Physical.q τ)}
+      {output = Infinity.infinityNorm (Physical.p τ)}
       (Infinity.pReverseTriangle consequences)
       kShell≤qShell
 
@@ -217,6 +260,9 @@ highHighToLowInputsComparableOne τ kGapP kGapQ =
     ≤ suc (Shell.shellIndex (Physical.p τ))
   qUpper =
     shellOfNormSumUpperRight
+      {left = Infinity.infinityNorm (Physical.k τ)}
+      {right = Infinity.infinityNorm (Physical.p τ)}
+      {output = Infinity.infinityNorm (Physical.q τ)}
       (Infinity.qReverseTriangle consequences)
       kShell≤pShell
 

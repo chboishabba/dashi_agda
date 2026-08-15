@@ -47,7 +47,7 @@ open import Data.Nat.Base using (_≤_; z≤n; s≤s; ∣_-_∣)
 import Data.Nat.Properties as Nat
 open import Data.Product.Base using (_×_; _,_; proj₁; proj₂)
 open import Data.Sum.Base using (inj₁; inj₂)
-open import Relation.Binary.PropositionalEquality using (sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSPeriodicNearTriadClassification as Near
@@ -93,14 +93,25 @@ noTwoInputsThreeShellsBelowOutput τ pGap qGap
 ... | inj₁ pShell≤qShell =
   Dyadic.gapThreeContradictsUpperSuccessor qGap
     (Dyadic.shellOfNormSumUpperRight
+      {left = Infinity.infinityNorm (Physical.p τ)}
+      {right = Infinity.infinityNorm (Physical.q τ)}
+      {output = Infinity.infinityNorm (Physical.k τ)}
       (Infinity.outputTriangle
         (Infinity.officialResonantNormConsequences τ))
       pShell≤qShell)
 ... | inj₂ qShell≤pShell =
   Dyadic.gapThreeContradictsUpperSuccessor pGap
     (Dyadic.shellOfNormSumUpperRight
-      (Infinity.outputTriangle
-        (Infinity.officialResonantNormConsequences τ))
+      {left = Infinity.infinityNorm (Physical.q τ)}
+      {right = Infinity.infinityNorm (Physical.p τ)}
+      {output = Infinity.infinityNorm (Physical.k τ)}
+      (subst
+        (λ sum → Infinity.infinityNorm (Physical.k τ) ≤ sum)
+        (Nat.+-comm
+          (Infinity.infinityNorm (Physical.p τ))
+          (Infinity.infinityNorm (Physical.q τ)))
+        (Infinity.outputTriangle
+          (Infinity.officialResonantNormConsequences τ)))
       qShell≤pShell)
 
 data TriadicSourceClass : Set where
@@ -146,15 +157,20 @@ classifyPhysicalTriad :
   Σ TriadicSourceClass (λ source → TriadicClassCertificate τ source)
 classifyPhysicalTriad τ
   with Scale.classifyScale literalShellPolicy τ
+    in classProof
      | Scale.scaleClassificationSound literalShellPolicy τ
 ... | Scale.lowHigh | evidence =
-      LH , triadic-class-certificate refl evidence
+      LH , triadic-class-certificate
+        (trans (cong classForRegime classProof) refl) evidence
 ... | Scale.highLow | evidence =
-      HL , triadic-class-certificate refl evidence
+      HL , triadic-class-certificate
+        (trans (cong classForRegime classProof) refl) evidence
 ... | Scale.highHigh | evidence =
-      HH , triadic-class-certificate refl evidence
+      HH , triadic-class-certificate
+        (trans (cong classForRegime classProof) refl) evidence
 ... | Scale.comparable | evidence =
-      CC , triadic-class-certificate refl evidence
+      CC , triadic-class-certificate
+        (trans (cong classForRegime classProof) refl) evidence
 
 triadicClassificationUnique :
   ∀ {τ first second} →
@@ -199,8 +215,8 @@ lowHighOutputTracksHighOne :
   TriadicClassCertificate τ LH →
   ∣ Shell.shellIndex (Physical.k τ)
     - Shell.shellIndex (Physical.q τ) ∣ ≤ 1
-lowHighOutputTracksHighOne certificate =
-  Dyadic.lowHighOutputTracksHighOne _
+lowHighOutputTracksHighOne {τ} certificate =
+  Dyadic.lowHighOutputTracksHighOne τ
     (lowHighWeakGap (classMeaning certificate))
 
 highLowOutputTracksHighOne :
@@ -208,8 +224,8 @@ highLowOutputTracksHighOne :
   TriadicClassCertificate τ HL →
   ∣ Shell.shellIndex (Physical.k τ)
     - Shell.shellIndex (Physical.p τ) ∣ ≤ 1
-highLowOutputTracksHighOne certificate =
-  Dyadic.highLowOutputTracksHighOne _
+highLowOutputTracksHighOne {τ} certificate =
+  Dyadic.highLowOutputTracksHighOne τ
     (highLowWeakGap (classMeaning certificate))
 
 highHighInputsComparableOne :
@@ -217,8 +233,8 @@ highHighInputsComparableOne :
   TriadicClassCertificate τ HH →
   ∣ Shell.shellIndex (Physical.p τ)
     - Shell.shellIndex (Physical.q τ) ∣ ≤ 1
-highHighInputsComparableOne certificate =
-  Dyadic.highHighToLowInputsComparableOne _
+highHighInputsComparableOne {τ} certificate =
+  Dyadic.highHighToLowInputsComparableOne τ
     (proj₁ gaps)
     (proj₂ gaps)
   where

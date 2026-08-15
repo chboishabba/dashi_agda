@@ -27,7 +27,7 @@ record PhysicalShellPolicy : Set₁ where
   constructor shell-policy
   field
     shellLevel : Z3.FourierMode → Nat
-    overlap : Nat
+    overlapRadius : Nat
 
 open PhysicalShellPolicy public
 
@@ -50,7 +50,7 @@ classifyScale :
   ScaleRegime
 classifyScale policy τ =
   classifyScaleLevels
-    (overlap policy)
+    (overlapRadius policy)
     (shellLevel policy (Physical.p τ))
     (shellLevel policy (Physical.q τ))
     (shellLevel policy (Physical.k τ))
@@ -61,57 +61,57 @@ data ScaleCondition
     ScaleRegime → Set where
   lowHighCondition :
     NearClass.natLess
-      (shellLevel policy (Physical.p τ) + overlap policy)
+      (shellLevel policy (Physical.p τ) + overlapRadius policy)
       (shellLevel policy (Physical.q τ))
     ≡ true →
     ScaleCondition policy τ lowHigh
 
   highLowCondition :
     NearClass.natLess
-      (shellLevel policy (Physical.p τ) + overlap policy)
+      (shellLevel policy (Physical.p τ) + overlapRadius policy)
       (shellLevel policy (Physical.q τ))
     ≡ false →
     NearClass.natLess
-      (shellLevel policy (Physical.q τ) + overlap policy)
+      (shellLevel policy (Physical.q τ) + overlapRadius policy)
       (shellLevel policy (Physical.p τ))
     ≡ true →
     ScaleCondition policy τ highLow
 
   highHighCondition :
     NearClass.natLess
-      (shellLevel policy (Physical.p τ) + overlap policy)
+      (shellLevel policy (Physical.p τ) + overlapRadius policy)
       (shellLevel policy (Physical.q τ))
     ≡ false →
     NearClass.natLess
-      (shellLevel policy (Physical.q τ) + overlap policy)
+      (shellLevel policy (Physical.q τ) + overlapRadius policy)
       (shellLevel policy (Physical.p τ))
     ≡ false →
     NearClass.natLess
-      (shellLevel policy (Physical.k τ) + overlap policy)
+      (shellLevel policy (Physical.k τ) + overlapRadius policy)
       (shellLevel policy (Physical.p τ))
     ≡ true →
     NearClass.natLess
-      (shellLevel policy (Physical.k τ) + overlap policy)
+      (shellLevel policy (Physical.k τ) + overlapRadius policy)
       (shellLevel policy (Physical.q τ))
     ≡ true →
     ScaleCondition policy τ highHigh
 
   comparableCondition :
     NearClass.natLess
-      (shellLevel policy (Physical.p τ) + overlap policy)
+      (shellLevel policy (Physical.p τ) + overlapRadius policy)
       (shellLevel policy (Physical.q τ))
     ≡ false →
     NearClass.natLess
-      (shellLevel policy (Physical.q τ) + overlap policy)
+      (shellLevel policy (Physical.q τ) + overlapRadius policy)
       (shellLevel policy (Physical.p τ))
     ≡ false →
     (NearClass.natLess
-      (shellLevel policy (Physical.k τ) + overlap policy)
+      (shellLevel policy (Physical.k τ) + overlapRadius policy)
       (shellLevel policy (Physical.p τ))
       ≡ false
      ⊎
      NearClass.natLess
-      (shellLevel policy (Physical.k τ) + overlap policy)
+      (shellLevel policy (Physical.k τ) + overlapRadius policy)
       (shellLevel policy (Physical.q τ))
       ≡ false) →
     ScaleCondition policy τ comparable
@@ -121,25 +121,29 @@ scaleClassificationSound :
   ScaleCondition policy τ (classifyScale policy τ)
 scaleClassificationSound policy τ
   with NearClass.natLess
-    (shellLevel policy (Physical.p τ) + overlap policy)
+    (shellLevel policy (Physical.p τ) + overlapRadius policy)
     (shellLevel policy (Physical.q τ))
+    in hProof
      | NearClass.natLess
-    (shellLevel policy (Physical.q τ) + overlap policy)
+    (shellLevel policy (Physical.q τ) + overlapRadius policy)
     (shellLevel policy (Physical.p τ))
+    in pProof
      | NearClass.natLess
-    (shellLevel policy (Physical.k τ) + overlap policy)
+    (shellLevel policy (Physical.k τ) + overlapRadius policy)
     (shellLevel policy (Physical.p τ))
+    in kpProof
      | NearClass.natLess
-    (shellLevel policy (Physical.k τ) + overlap policy)
+    (shellLevel policy (Physical.k τ) + overlapRadius policy)
     (shellLevel policy (Physical.q τ))
-... | true  | hl    | kp    | kq    = lowHighCondition refl
-... | false | true  | kp    | kq    = highLowCondition refl refl
+    in kqProof
+... | true  | hl    | kp    | kq    = lowHighCondition hProof
+... | false | true  | kp    | kq    = highLowCondition hProof pProof
 ... | false | false | true  | true  =
-      highHighCondition refl refl refl refl
+      highHighCondition hProof pProof kpProof kqProof
 ... | false | false | true  | false =
-      comparableCondition refl refl (inj₂ refl)
+      comparableCondition hProof pProof (inj₂ kqProof)
 ... | false | false | false | kq    =
-      comparableCondition refl refl (inj₁ refl)
+      comparableCondition hProof pProof (inj₁ kpProof)
 
 scaleClassificationComplete :
   ∀ policy τ →
@@ -184,7 +188,7 @@ record LittlewoodPaleyShellConsequences
       ∀ τ →
       ScaleCondition policy τ highHigh →
       NearClass.natLess
-        (shellLevel policy (Physical.k τ) + overlap policy)
+        (shellLevel policy (Physical.k τ) + overlapRadius policy)
         (shellLevel policy (Physical.p τ))
       ≡ true
 
@@ -192,7 +196,7 @@ record LittlewoodPaleyShellConsequences
       ∀ τ →
       ScaleCondition policy τ comparable →
       NearClass.natLess
-        (shellLevel policy (Physical.p τ) + overlap policy)
+        (shellLevel policy (Physical.p τ) + overlapRadius policy)
         (shellLevel policy (Physical.q τ))
       ≡ false
 

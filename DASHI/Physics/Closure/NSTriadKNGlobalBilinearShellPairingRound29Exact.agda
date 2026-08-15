@@ -111,6 +111,13 @@ physicalShellBalanceExpandsOnce :
     + comValue (staticPairing balance)
     + lowerBoundary balance
     + upperBoundary balance
+sevenRationalReassociation :
+  (a b c d e f g : ℚ) →
+  a + b + c + d + e + f + g
+  ≡ a + b + c + d + e + f + g
+sevenRationalReassociation a b c d e f g =
+  solve (a ∷ b ∷ c ∷ d ∷ e ∷ f ∷ g ∷ [])
+
 physicalShellBalanceExpandsOnce balance =
   trans
     (globalDynamicBalance balance)
@@ -118,15 +125,14 @@ physicalShellBalanceExpandsOnce balance =
       (cong
         (λ source → source + lowerBoundary balance + upperBoundary balance)
         (globalPairingFiveSourceIdentity (staticPairing balance)))
-      (solve
-        ( hhValue (staticPairing balance)
-        ∷ lhValue (staticPairing balance)
-        ∷ hlValue (staticPairing balance)
-        ∷ ccValue (staticPairing balance)
-        ∷ comValue (staticPairing balance)
-        ∷ lowerBoundary balance
-        ∷ upperBoundary balance
-        ∷ [])))
+      (sevenRationalReassociation
+        (hhValue (staticPairing balance))
+        (lhValue (staticPairing balance))
+        (hlValue (staticPairing balance))
+        (ccValue (staticPairing balance))
+        (comValue (staticPairing balance))
+        (lowerBoundary balance)
+        (upperBoundary balance)))
 
 staticPhysicalShellPairingClosed : Bool
 staticPhysicalShellPairingClosed = true

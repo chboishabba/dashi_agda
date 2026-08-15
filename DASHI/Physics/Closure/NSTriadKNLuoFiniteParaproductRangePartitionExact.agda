@@ -135,7 +135,7 @@ classifyFilteredInteraction (triadic range) with classifySupportedTriad range
 ... | comparable = CC
 classifyFilteredInteraction differentiatedCommutator = Com
 
-record ParaproductRangeAuthorityBoundary : Set where
+record ParaproductRangeAuthorityBoundary : Set₁ where
   constructor paraproductRangeAuthorityBoundary
   field
     literalLowComparableHighRangesImplemented : Set

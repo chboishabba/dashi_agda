@@ -52,10 +52,12 @@ factorTwoNormsGiveShellDistanceOne :
   a ≤ 2 * b →
   b ≤ 2 * a →
   ∣ Shell.shellIndexMagnitude a - Shell.shellIndexMagnitude b ∣ ≤ 1
-factorTwoNormsGiveShellDistanceOne a≤2b b≤2a =
+factorTwoNormsGiveShellDistanceOne {a} {b} a≤2b b≤2a =
   shellDistanceAtMostOne
-    (shellBelowSuccessorFromFactorTwo a≤2b)
-    (shellBelowSuccessorFromFactorTwo b≤2a)
+    {left = Shell.shellIndexMagnitude a}
+    {right = Shell.shellIndexMagnitude b}
+    (shellBelowSuccessorFromFactorTwo {a = a} {b = b} a≤2b)
+    (shellBelowSuccessorFromFactorTwo {a = b} {b = a} b≤2a)
 
 shellFactorTwoTheoremClosed : Bool
 shellFactorTwoTheoremClosed = true
