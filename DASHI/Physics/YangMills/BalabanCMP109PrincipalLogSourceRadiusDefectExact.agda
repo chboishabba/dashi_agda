@@ -27,14 +27,11 @@ module DASHI.Physics.YangMills.BalabanCMP109PrincipalLogSourceRadiusDefectExact 
 --
 --       |c2(Y)-1/12| <= t^2/100.
 --
--- At t=1/12 this is exactly
+-- At t=1/12 this is exactly (1/1200)t = 1/14400.  Hence, with
+-- |c1|<=1/2 and each Lie coordinate bounded by t, the checked matrix theorem
+-- gives
 --
---       (1/1200) t.
---
--- Hence, with |c1|<=1/2 and each Lie coordinate bounded by t, the checked
--- matrix theorem gives
---
---       col(J_Y-I) <= (5/3 + 1/1200) t < 1/4.
+--       col(J_Y-I) <= (5/3 + 1/1200)t < 1/4.
 --
 -- This deliberately uses a coarse coordinate-l1 estimate.  It is nevertheless
 -- already strong enough for the dexp/transport cancellation route, and avoids
@@ -47,7 +44,8 @@ open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_; _/_; ∣_∣)
 import Data.Rational.Properties as ℚP
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym)
+import Data.Rational.Tactic.RingSolver as ℚRing
+open import Relation.Binary.PropositionalEquality using (cong; subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
@@ -74,7 +72,7 @@ sourceCoefficientEndpointAllowance = sourceCoefficientLipschitz * sourceRadius
 
 sourceCoefficientEndpointAllowanceIsOne14400 :
   sourceCoefficientEndpointAllowance ≡ + 1 / 14400
-sourceCoefficientEndpointAllowanceIsOne14400 = refl
+sourceCoefficientEndpointAllowanceIsOne14400 = ℚRing.solve []
 
 sourcePrincipalLogColumnBound : ℚ
 sourcePrincipalLogColumnBound =
@@ -99,15 +97,15 @@ c2AtZero = + 1 / 12
 principalLogAtZeroIsIdentity : ∀ c1 row column →
   JVar.principalLogAdMatrix c1 c2AtZero zeroAd zeroAdSquare row column
   ≡ Jacobian.identity3 row column
-principalLogAtZeroIsIdentity c1 Physical.coordinateX Physical.coordinateX = refl
-principalLogAtZeroIsIdentity c1 Physical.coordinateX Physical.coordinateY = refl
-principalLogAtZeroIsIdentity c1 Physical.coordinateX Physical.coordinateZ = refl
-principalLogAtZeroIsIdentity c1 Physical.coordinateY Physical.coordinateX = refl
-principalLogAtZeroIsIdentity c1 Physical.coordinateY Physical.coordinateY = refl
-principalLogAtZeroIsIdentity c1 Physical.coordinateY Physical.coordinateZ = refl
-principalLogAtZeroIsIdentity c1 Physical.coordinateZ Physical.coordinateX = refl
-principalLogAtZeroIsIdentity c1 Physical.coordinateZ Physical.coordinateY = refl
-principalLogAtZeroIsIdentity c1 Physical.coordinateZ Physical.coordinateZ = refl
+principalLogAtZeroIsIdentity c1 Physical.coordinateX Physical.coordinateX = ℚRing.solve-∀ c1
+principalLogAtZeroIsIdentity c1 Physical.coordinateX Physical.coordinateY = ℚRing.solve-∀ c1
+principalLogAtZeroIsIdentity c1 Physical.coordinateX Physical.coordinateZ = ℚRing.solve-∀ c1
+principalLogAtZeroIsIdentity c1 Physical.coordinateY Physical.coordinateX = ℚRing.solve-∀ c1
+principalLogAtZeroIsIdentity c1 Physical.coordinateY Physical.coordinateY = ℚRing.solve-∀ c1
+principalLogAtZeroIsIdentity c1 Physical.coordinateY Physical.coordinateZ = ℚRing.solve-∀ c1
+principalLogAtZeroIsIdentity c1 Physical.coordinateZ Physical.coordinateX = ℚRing.solve-∀ c1
+principalLogAtZeroIsIdentity c1 Physical.coordinateZ Physical.coordinateY = ℚRing.solve-∀ c1
+principalLogAtZeroIsIdentity c1 Physical.coordinateZ Physical.coordinateZ = ℚRing.solve-∀ c1
 
 record SourceRadiusPrincipalLogData
     (c1 c2 x0 x1 x2 : ℚ) : Set where
