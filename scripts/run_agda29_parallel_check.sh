@@ -18,11 +18,18 @@ if [ -z "${TMUX:-}" ] && [ "${DASHI_NO_TMUX:-0}" != "1" ] && command -v tmux >/d
   if ! tmux new-session -d -s "${SESSION_NAME}" \
     "bash -lc '
       set +e
-      DASHI_NO_TMUX=1 AGDA_JOBS=\"${JOBS}\" \"$0\" \"$@\"
+            export DASHI_AGDA29_CACHE_ROOT=\"${DASHI_AGDA29_CACHE_ROOT:-}\"
+            DASHI_NO_TMUX=1 AGDA_JOBS=\"${JOBS}\" \
+              AGDA_PROFILE=\"${AGDA_PROFILE:-}\" \
+              AGDA_PROFILE_VERBOSITY=\"${AGDA_PROFILE_VERBOSITY:-}\" \
+              AGDA_RTS_HEAP=\"${AGDA_RTS_HEAP:-}\" \
+              AGDA_RTS_STATS=\"${AGDA_RTS_STATS:-0}\" \
+              DASHI_AGDA_RSS_LIMIT_MB=\"${DASHI_AGDA_RSS_LIMIT_MB:-}\" \
+              \"$0\" \"$@\"
       rc=\$?
       printf \"%s\\n\" \"\$rc\" > \"$STATUS_FILE\"
       tmux wait-for -S \"${WAIT_CHANNEL}\"
-      if [ \"\$rc\" -ne 0 ] && [ \"\${DASHI_TMUX_KEEP_FAILED:-1}\" = \"1\" ]; then
+      if [ \"\$rc\" -ne 0 ] && [ \"\${DASHI_TMUX_KEEP_FAILED:-0}\" = \"1\" ]; then
         echo
         echo \"Agda check failed with status \$rc. Session retained for inspection: tmux attach -t ${SESSION_NAME}\"
         exec bash
@@ -251,20 +258,97 @@ AGDA_LOG_PATH="$(build_log_path "$AGDA_LOG_BASE_PATH" "$LOG_TARGET_SLUG" "$LOG_T
 prune_old_logs "$AGDA_LOG_BASE_PATH" "$AGDA_LOG_KEEP_COUNT"
 echo "Logging Agda output to: $AGDA_LOG_PATH"
 
-AGDA_RUN=("$AGDA_BIN" \
+AGDA_PROFILE_ARGS=()
+# Optional diagnostic controls for expensive focused checks.  They are opt-in
+# so ordinary wrapper invocations retain the existing Agda command line.
+# Example:
+#   AGDA_PROFILE=definitions AGDA_PROFILE_VERBOSITY=10 \
+#   AGDA_RTS_HEAP=10G AGDA_RTS_STATS=1 DASHI_AGDA_RSS_LIMIT_MB=14000 \
+#   scripts/run_agda29_parallel_check.sh DASHI/Path/To/Target.agda
+if [ -n "${AGDA_PROFILE:-}" ]; then
+  AGDA_PROFILE_ARGS+=("--profile=${AGDA_PROFILE}")
+  if [ -n "${AGDA_PROFILE_VERBOSITY:-}" ]; then
+    AGDA_PROFILE_ARGS+=("-v" "profile.${AGDA_PROFILE}:${AGDA_PROFILE_VERBOSITY}")
+  fi
+fi
+
+AGDA_RTS_ARGS=()
+if [ -n "${AGDA_RTS_HEAP:-}" ] || [ "${AGDA_RTS_STATS:-0}" = "1" ]; then
+  AGDA_RTS_ARGS=(+RTS)
+  if [ -n "${AGDA_RTS_HEAP:-}" ]; then
+    AGDA_RTS_ARGS+=("-M${AGDA_RTS_HEAP}")
+  fi
+  if [ "${AGDA_RTS_STATS:-0}" = "1" ]; then
+    AGDA_RTS_ARGS+=(-s)
+  fi
+  AGDA_RTS_ARGS+=(-RTS)
+fi
+
+AGDA_RUN=("$AGDA_BIN" "${AGDA_RTS_ARGS[@]}" \
   --no-libraries --no-default-libraries \
   "-j$JOBS" \
   -i . -i DCHoTT-Agda -i vendor/bishop -i cubical -i "$STDLIB_INCLUDE" \
-  -WnoUnsupportedIndexedMatch)
+  -WnoUnsupportedIndexedMatch \
+  "${AGDA_PROFILE_ARGS[@]}")
 
 if command -v stdbuf >/dev/null 2>&1; then
   AGDA_RUN=(stdbuf -oL -eL "${AGDA_RUN[@]}")
 fi
 
+run_agda_target() {
+  local target="$1"
+  local status watchdog_pid rss_kb watchdog_marker
+
+  if [ -z "${DASHI_AGDA_RSS_LIMIT_MB:-}" ]; then
+    "${AGDA_RUN[@]}" "$target"
+    return
+  fi
+
+  if ! [[ "$DASHI_AGDA_RSS_LIMIT_MB" =~ ^[1-9][0-9]*$ ]]; then
+    echo "DASHI_AGDA_RSS_LIMIT_MB must be a positive integer" >&2
+    return 2
+  fi
+
+  watchdog_marker="$(mktemp "${TMPDIR:-/tmp}/dashi-agda-rss-watchdog.XXXXXX")"
+  rm -f "$watchdog_marker"
+
+  "${AGDA_RUN[@]}" "$target" &
+  local agda_pid=$!
+  (
+    local limit_kb=$(( DASHI_AGDA_RSS_LIMIT_MB * 1024 ))
+    while kill -0 "$agda_pid" 2>/dev/null; do
+      rss_kb="$(ps -o rss= -p "$agda_pid" 2>/dev/null | tr -d '[:space:]')"
+      if [[ "$rss_kb" =~ ^[0-9]+$ ]] && [ "$rss_kb" -gt "$limit_kb" ]; then
+        echo "Agda RSS watchdog: ${rss_kb} KiB exceeds ${limit_kb} KiB; terminating $target" >&2
+        : >"$watchdog_marker"
+        kill -TERM "$agda_pid" 2>/dev/null || true
+        sleep 5
+        kill -KILL "$agda_pid" 2>/dev/null || true
+        break
+      fi
+      sleep 1
+    done
+  ) &
+  watchdog_pid=$!
+
+  wait "$agda_pid"
+  status=$?
+  kill "$watchdog_pid" 2>/dev/null || true
+  wait "$watchdog_pid" 2>/dev/null || true
+  if [ -e "$watchdog_marker" ]; then
+    rm -f "$watchdog_marker"
+    # Match the tmux crash sentinel: this is a memory-resource stop, not an
+    # Agda proof error.
+    return 137
+  fi
+  rm -f "$watchdog_marker"
+  return "$status"
+}
+
 for target in "${TARGETS[@]}"; do
   echo "Checking: $target"
   set +e
-  "${AGDA_RUN[@]}" "$target" 2>&1 | tee -a "$AGDA_LOG_PATH"
+  run_agda_target "$target" 2>&1 | tee -a "$AGDA_LOG_PATH"
   status="${PIPESTATUS[0]}"
   set -e
   if [ "$status" -ne 0 ]; then
