@@ -7,18 +7,23 @@ module DASHI.Physics.Closure.NSTriadKNABCInhabitationRound58Exact where
 -- transfer plus an equality claiming that it came from the physical source.
 -- It accepts only the canonical physical source and estimates indexed by that
 -- source; the transfer is constructed definitionally.
+--
+-- B is also routed explicitly through the mature squared whole-fibre endpoint,
+-- so the canonical source itself now exposes the 133/256 bandwidth-one bound.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base using (ℚ)
+open import Data.Rational.Base using (ℚ; _≤_)
 
 import DASHI.Physics.Closure.NSTriadKNHHBadDyadicThreeMechanismRecurrenceRound48Exact as A
 import DASHI.Physics.Closure.NSTriadKNHHBadRawVariableCapacityRound53Exact as Raw
 import DASHI.Physics.Closure.NSTriadKNHHBadLiteralDuhamelAdapterRound58Exact as AAdapter
 import DASHI.Physics.Closure.NSTriadKNHHBadPhysicalDuhamelSourceRound59 as ASource
 import DASHI.Physics.Closure.NSTriadKNComNormalizedFibreSourceAdapterRound58 as BSource
+import DASHI.Physics.Closure.NSTriadKNComNormalizedFibreAggregateRound60Exact as BAggregate
+import DASHI.Physics.Closure.NSTriadKNComLiteralSameAdjacentFibreRound55Exact as BWhole
 import DASHI.Physics.Closure.NSTriadKNComSupportOverlapRound42Exact as Support
 import DASHI.Physics.Closure.NSTriadKNFixedShiftCorrectionHeadroomRound54Exact as CHeadroom
 import DASHI.Physics.Closure.NSTriadKNFixedShiftUniformProductCapacityRound57Exact as C
@@ -56,14 +61,25 @@ literalHHBadDuhamel :
 literalHHBadDuhamel source =
   AAdapter.asLiteralDuhamel (literalHHBadTransfer source)
 
--- B: the common-hat and normalized same/adjacent estimates feed the existing
--- width-one reduction.  Round60 also exposes the direct 133/256 aggregate in
--- NSTriadKNComNormalizedFibreAggregateRound60Exact.
+-- B: the canonical normalized source feeds both the legacy support envelope
+-- and the literal squared whole-fibre 133/256 endpoint.
 literalComEnvelope :
   (source : LiteralABCSourceWitnesses) →
   Support.PhysicalComSupportOverlapEnvelope
 literalComEnvelope source =
   BSource.legacyEnvelope (comSource source)
+
+literalComBandwidthOneMass :
+  LiteralABCSourceWitnesses → Nat → ℚ
+literalComBandwidthOneMass source =
+  BAggregate.normalizedOddPQBandwidthOneMass (comSource source)
+
+literalComBandwidthOneMassBelow133Over256 :
+  (source : LiteralABCSourceWitnesses) →
+  ∀ q → literalComBandwidthOneMass source q ≤ BWhole.target
+literalComBandwidthOneMassBelow133Over256 source =
+  BAggregate.normalizedOddPQBandwidthOneMassBelow133Over256
+    (comSource source)
 
 -- C: the division-free uniform product capacity feeds the complete additive
 -- correction headroom theorem.
