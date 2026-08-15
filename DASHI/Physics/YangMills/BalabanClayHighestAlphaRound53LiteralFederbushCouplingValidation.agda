@@ -16,10 +16,11 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound53LiteralFederbushCou
 -- consumption.  What remains physical is the sign/trivialization identity and
 -- the actual Bishop coefficient realization at |Y| <= 1/12.
 --
--- RG route retained here:
--- beta split -> beta >= 0 -> terminal inverse threshold -> small coupling.
--- The positive-rational inverse-square order dictionary and the actual
--- finite-lattice beta estimates remain explicit leaves.  No Clay promotion.
+-- RG route:
+-- beta split -> beta >= 0 -> terminal inverse threshold -> exact positive-
+-- rational inverse-square order -> small coupling at every active scale.
+-- The arithmetic order bridge is no longer a conditional leaf here.  The
+-- actual finite-lattice beta estimates and source u_k,g_k representation are.
 ------------------------------------------------------------------------
 
 import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound52SourceRGFederbushValidation as R52
@@ -28,6 +29,8 @@ import DASHI.Physics.YangMills.BalabanCMP109FederbushDexpTransportCancellationEx
 import DASHI.Physics.YangMills.BalabanCMP109PrincipalLogSourceRadiusDefectExact as Source
 import DASHI.Physics.YangMills.Balaban1989BetaSplitTerminalHistoryExact as BetaTerminal
 import DASHI.Physics.YangMills.Balaban1989TerminalInverseThresholdHistoryExact as Terminal
+import DASHI.Physics.YangMills.BalabanYM4RationalInverseSquareOrderExact as InverseOrder
+import DASHI.Physics.YangMills.Balaban1989BetaSplitInverseSquareTerminalHistoryExact as ExactHistory
 
 literalFederbushCancellationDictionaryLevel =
   Literal.cmp109LiteralFederbushCancellationDictionaryLevel
@@ -53,14 +56,17 @@ sourceRadiusBishopCoefficientLevel =
 betaSplitTerminalHistoryAssemblyLevel =
   BetaTerminal.balabanBetaSplitTerminalHistoryAssemblyLevel
 
-betaSplitTerminalSmallCouplingLevel =
-  BetaTerminal.balabanBetaSplitTerminalSmallCouplingLevel
-
 terminalThresholdPropagationLevel =
   Terminal.balabanTerminalInverseThresholdPropagationLevel
 
-terminalThresholdSmallCouplingLevel =
-  Terminal.balabanTerminalThresholdToSmallCouplingHistoryLevel
+positiveRationalSquareOrderReflectionLevel =
+  InverseOrder.ym4PositiveRationalSquareOrderReflectionLevel
 
-rationalInverseSquareOrderDictionaryLevel =
-  Terminal.balabanRationalInverseSquareOrderDictionaryLevel
+rationalInverseSquareOrderLevel =
+  InverseOrder.ym4RationalInverseSquareOrderLevel
+
+betaSplitInverseSquareHistoryAssemblyLevel =
+  ExactHistory.balabanBetaSplitInverseSquareHistoryAssemblyLevel
+
+betaSplitInverseSquareSmallCouplingLevel =
+  ExactHistory.balabanBetaSplitInverseSquareSmallCouplingLevel
