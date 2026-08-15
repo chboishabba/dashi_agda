@@ -11,7 +11,7 @@ module DASHI.Physics.YangMills.BalabanP33RationalQuaternionFlatCurlTail23AtomsEx
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
-open import Data.Rational.Base as ℚ using (_+_)
+open import Data.Rational.Base as ℚ using (0ℚ; _+_)
 import Data.Rational.Properties as ℚP
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
