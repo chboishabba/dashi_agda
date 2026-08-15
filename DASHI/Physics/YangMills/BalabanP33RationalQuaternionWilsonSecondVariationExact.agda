@@ -55,9 +55,6 @@ open import Relation.Binary.PropositionalEquality using
   (cong; cong₂; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
-open import DASHI.Physics.YangMills.BalabanP33RationalQuaternionCoreExact public
-open import DASHI.Physics.YangMills.BalabanP33RationalQuaternionAlgebraLawsExact public
-open import DASHI.Physics.YangMills.BalabanP33RationalQuaternionWilsonJetExact public
 open import DASHI.Physics.YangMills.BalabanP33RationalQuaternionFlatCurlIdentityExact public
 
 ------------------------------------------------------------------------
