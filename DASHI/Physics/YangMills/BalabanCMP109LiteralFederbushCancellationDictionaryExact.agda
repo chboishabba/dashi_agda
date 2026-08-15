@@ -43,21 +43,22 @@ module DASHI.Physics.YangMills.BalabanCMP109LiteralFederbushCancellationDictiona
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using (List)
 open import Data.List.Base using (length)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; 1ℚ; _-_; _*_; _≤_; ∣_∣)
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
 import DASHI.Physics.YangMills.BalabanFiniteFibreAverageExact as Fibre
 import DASHI.Physics.YangMills.BalabanFiniteRectangularSchurSquaredExact as RectSchur
+import DASHI.Physics.YangMills.BalabanFiniteMatrixL1ContractionExact as L1
 import DASHI.Physics.YangMills.BalabanPhysicalSU2FiniteCoordinatesExact as Physical
 import DASHI.Physics.YangMills.BalabanCMP109FederbushNormalizedJacobianExact as Jacobian
 import DASHI.Physics.YangMills.BalabanCMP109FederbushComponentResidualExact as Component
 import DASHI.Physics.YangMills.BalabanCMP109PhysicalFederbushDifferentiatedEquation011Exact as Printed
 import DASHI.Physics.YangMills.BalabanCMP109FederbushCancellationNormalizedInverseExact as Cancellation
+import DASHI.Physics.YangMills.BalabanCMP109FederbushQuarterReopeningExact as Quarter
 import DASHI.Physics.YangMills.BalabanCMP109PrincipalLogSourceRadiusDefectExact as Source
 import DASHI.Physics.YangMills.BalabanCMP109SU2AdCoordinateMassExact as Ad
 import DASHI.Physics.YangMills.BalabanCMP109SU2AdSquareVariationMassExact as AdSq
@@ -73,7 +74,6 @@ record LiteralFederbushCancellationDictionary (Index : Set) : Set₁ where
       weight * Fibre.natAsRational
         (length (Printed.indices differential)) ≡ 1ℚ
 
-    -- Source-radius opposite-trivialization inverse-dexp coordinates.
     c1 c2 x0 x1 x2 : Index → ℚ
     sourceRadiusData : ∀ index →
       Source.SourceRadiusPrincipalLogData
@@ -90,9 +90,7 @@ record LiteralFederbushCancellationDictionary (Index : Set) : Set₁ where
             (Ad.adMatrix (x0 index) (x1 index) (x2 index)))
           row column
 
-    -- This is the one genuinely physical convention seam: identify the
-    -- printed J_j T_j component with J_-(Y_j), after fixing the source sign
-    -- and left/right trivializations.  No norm statement is assumed here.
+    -- Literal source/convention leaf only: no independent norm estimate.
     literalComponentCancellation : ∀ index row column →
       Printed.composeMatrix
         (Printed.principalLogJacobian differential index)
@@ -138,12 +136,10 @@ sourcePolynomialResidualColumnBound dictionary index column =
     zero = JVar.principalLogAdMatrix
       (c1 dictionary index) Source.c2AtZero
       Source.zeroAd Source.zeroAdSquare
-
     raw = Source.sourcePrincipalLogVariationColumn
       (c1 dictionary index) (c2 dictionary index)
       (x0 dictionary index) (x1 dictionary index) (x2 dictionary index)
       (sourceRadiusData dictionary index) column
-
     identify :
       RectSchur.rectAbsoluteColumnMass Physical.lieCoordinates3
         (Variation.matrixDifference current zero) column
@@ -217,11 +213,8 @@ literalFederbushCancellationInverseFourThirds :
     solution source →
   Cancellation.cancellationFederbushEquation
     (asCancellationData dictionary) solution source →
-  DASHI.Physics.YangMills.BalabanFiniteMatrixL1ContractionExact.vectorL1
-      Physical.lieCoordinates3 solution
-  ≤ DASHI.Physics.YangMills.BalabanCMP109FederbushQuarterReopeningExact.fourThirds
-      * DASHI.Physics.YangMills.BalabanFiniteMatrixL1ContractionExact.vectorL1
-          Physical.lieCoordinates3 source
+  L1.vectorL1 Physical.lieCoordinates3 solution
+  ≤ Quarter.fourThirds * L1.vectorL1 Physical.lieCoordinates3 source
 literalFederbushCancellationInverseFourThirds dictionary =
   Cancellation.cancellationInverseFourThirds (asCancellationData dictionary)
 
@@ -231,9 +224,5 @@ cmp109LiteralFederbushCancellationDictionaryLevel = machineChecked
 cmp109LiteralFederbushSourceRadiusDefectTransportLevel : ProofLevel
 cmp109LiteralFederbushSourceRadiusDefectTransportLevel = machineChecked
 
--- The sole physical G1 convention leaf remaining at this boundary is the field
--- literalComponentCancellation, i.e. the source-specific sign/trivialization
--- identification of printed J_j T_j with J_-(Y_j).  The Bishop coefficient
--- realization supplies sourceRadiusData; neither is silently promoted here.
 cmp109LiteralFederbushConventionIdentificationLevel : ProofLevel
 cmp109LiteralFederbushConventionIdentificationLevel = conditional
