@@ -31,7 +31,7 @@ open import Data.Product.Base using (_,_)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _≤_)
 import Data.Rational.Properties as ℚₚ
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong₂; subst; sym; trans)
 
 open import
   DASHI.Physics.Closure.NSTriadKNLuoFiniteEightPointSixThreeHolderBoundary
@@ -184,6 +184,29 @@ eightNestedSum :
 eightNestedSum x0 x1 x2 x3 x4 x5 x6 x7 =
   solve (x0 ∷ x1 ∷ x2 ∷ x3 ∷ x4 ∷ x5 ∷ x6 ∷ x7 ∷ [])
 
+sumCongruence8 :
+  (x0 x1 x2 x3 x4 x5 x6 x7
+   y0 y1 y2 y3 y4 y5 y6 y7 : ℚ) →
+  x0 ≡ y0 → x1 ≡ y1 → x2 ≡ y2 → x3 ≡ y3 →
+  x4 ≡ y4 → x5 ≡ y5 → x6 ≡ y6 → x7 ≡ y7 →
+  x0 + x1 + x2 + x3 + x4 + x5 + x6 + x7
+  ≡ y0 + y1 + y2 + y3 + y4 + y5 + y6 + y7
+sumCongruence8 x0 x1 x2 x3 x4 x5 x6 x7
+                y0 y1 y2 y3 y4 y5 y6 y7
+                p0 p1 p2 p3 p4 p5 p6 p7 =
+  cong₂ _+_
+    (cong₂ _+_
+      (cong₂ _+_
+        (cong₂ _+_ (cong₂ _+_ (cong₂ _+_ (cong₂ _+_ p0 p1) p2) p3) p4) p5)
+        p6)
+      p7
+
+sixtyFourEndpoint :
+  (low high : ℚ) →
+  sixtyFour * (low * (high * high))
+  ≡ sixtyFour * low * (high * high)
+sixtyFourEndpoint low high = solve (low ∷ high ∷ [])
+
 cubeProductSumMeaning :
   (dataSet : EightSixThreeData) →
   cube (productSquare (a0 dataSet) (b0 dataSet))
@@ -196,15 +219,33 @@ cubeProductSumMeaning :
     + cube (productSquare (a7 dataSet) (b7 dataSet))
   ≡ pairDiagonal (sixthPairs dataSet)
 cubeProductSumMeaning dataSet
-  rewrite cubeProductPairMeaning (a0 dataSet) (b0 dataSet)
-        | cubeProductPairMeaning (a1 dataSet) (b1 dataSet)
-        | cubeProductPairMeaning (a2 dataSet) (b2 dataSet)
-        | cubeProductPairMeaning (a3 dataSet) (b3 dataSet)
-        | cubeProductPairMeaning (a4 dataSet) (b4 dataSet)
-        | cubeProductPairMeaning (a5 dataSet) (b5 dataSet)
-        | cubeProductPairMeaning (a6 dataSet) (b6 dataSet)
-        | cubeProductPairMeaning (a7 dataSet) (b7 dataSet)
-  = eightNestedSum
+  = trans
+      (sumCongruence8
+        (cube (productSquare (a0 dataSet) (b0 dataSet)))
+        (cube (productSquare (a1 dataSet) (b1 dataSet)))
+        (cube (productSquare (a2 dataSet) (b2 dataSet)))
+        (cube (productSquare (a3 dataSet) (b3 dataSet)))
+        (cube (productSquare (a4 dataSet) (b4 dataSet)))
+        (cube (productSquare (a5 dataSet) (b5 dataSet)))
+        (cube (productSquare (a6 dataSet) (b6 dataSet)))
+        (cube (productSquare (a7 dataSet) (b7 dataSet)))
+        (sixth (a0 dataSet) * L2.square (cube (b0 dataSet)))
+        (sixth (a1 dataSet) * L2.square (cube (b1 dataSet)))
+        (sixth (a2 dataSet) * L2.square (cube (b2 dataSet)))
+        (sixth (a3 dataSet) * L2.square (cube (b3 dataSet)))
+        (sixth (a4 dataSet) * L2.square (cube (b4 dataSet)))
+        (sixth (a5 dataSet) * L2.square (cube (b5 dataSet)))
+        (sixth (a6 dataSet) * L2.square (cube (b6 dataSet)))
+        (sixth (a7 dataSet) * L2.square (cube (b7 dataSet)))
+        (cubeProductPairMeaning (a0 dataSet) (b0 dataSet))
+        (cubeProductPairMeaning (a1 dataSet) (b1 dataSet))
+        (cubeProductPairMeaning (a2 dataSet) (b2 dataSet))
+        (cubeProductPairMeaning (a3 dataSet) (b3 dataSet))
+        (cubeProductPairMeaning (a4 dataSet) (b4 dataSet))
+        (cubeProductPairMeaning (a5 dataSet) (b5 dataSet))
+        (cubeProductPairMeaning (a6 dataSet) (b6 dataSet))
+        (cubeProductPairMeaning (a7 dataSet) (b7 dataSet)))
+      (eightNestedSum
       (sixth (a0 dataSet) * L2.square (cube (b0 dataSet)))
       (sixth (a1 dataSet) * L2.square (cube (b1 dataSet)))
       (sixth (a2 dataSet) * L2.square (cube (b2 dataSet)))
@@ -213,6 +254,7 @@ cubeProductSumMeaning dataSet
       (sixth (a5 dataSet) * L2.square (cube (b5 dataSet)))
       (sixth (a6 dataSet) * L2.square (cube (b6 dataSet)))
       (sixth (a7 dataSet) * L2.square (cube (b7 dataSet)))
+      )
 
 abstract
   eightPointSixThreeHolderRadicalFree :
@@ -294,7 +336,9 @@ abstract
             * (highCubeMass dataSet * highCubeMass dataSet))
         ≡ sixtyFour * lowSixthMass dataSet
           * (highCubeMass dataSet * highCubeMass dataSet)
-      endpoint = solve (lowSixthMass dataSet ∷ highCubeMass dataSet ∷ [])
+      endpoint = sixtyFourEndpoint
+        (lowSixthMass dataSet)
+        (highCubeMass dataSet)
     in
     ℚₚ.≤-trans
       powerMean
