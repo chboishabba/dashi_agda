@@ -34,16 +34,19 @@ module DASHI.Physics.YangMills.BalabanCMP109FederbushSourceScaleQuarterExact whe
 -- for the principal-log Jacobian defect.  If the physical centre transport on
 -- that same source chart satisfies the deliberately coarse l1 column bound
 --
---   col(T-I) <= 1/6,
+--   col(T-I) <= 3/16,
 --
--- then T=I+(T-I) gives col(T)<=7/6, and the exact telescope gives
+-- then T=I+(T-I) gives col(T)<=19/16, and the exact telescope gives
 --
---   col(JT-I) <= l*(7/6) + 1/6 < 1/4.
+--   col(JT-I) <= l*(19/16) + 3/16 < 1/4.
 --
+-- The 3/16 target is intentionally weaker than the earlier 1/6 experiment and
+-- is compatible with an adjoint rotation angle of order 2|Y| at |Y|<=1/12.
 -- Thus the normalized Federbush inverse needs NO rho/96 absolute chord
 -- assumption.  The remaining source-scale analytic leaf is the concrete
--- transport-defect bound <=1/6 (and identification of the inverse-dexp envelope
--- with the literal principal-log derivative in the chosen l1 coordinates).
+-- transport-defect bound <=3/16 (and identification of the inverse-dexp
+-- envelope with the literal principal-log derivative in the chosen l1
+-- coordinates).
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
@@ -52,12 +55,10 @@ open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_; _/_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanFiniteRectangularSchurSquaredExact as RectSchur
 import DASHI.Physics.YangMills.BalabanPhysicalSU2FiniteCoordinatesExact as Physical
-import DASHI.Physics.YangMills.BalabanCMP109FederbushNormalizedJacobianExact as Jacobian
 import DASHI.Physics.YangMills.BalabanCMP109FederbushComponentResidualExact as Component
 import DASHI.Physics.YangMills.BalabanCMP109FederbushResidualMassTelescopeExact as Mass
 import DASHI.Physics.YangMills.BalabanCMP109FederbushTransportResidualControlsNormExact as TransportNorm
@@ -73,14 +74,14 @@ sourceLogDefectBound =
   + (+ 1 / 6) * sourceYRadius * sourceYRadius
 
 sourceTransportDefectBound : ℚ
-sourceTransportDefectBound = + 1 / 6
+sourceTransportDefectBound = + 3 / 16
 
 sourceTransportNormBound : ℚ
 sourceTransportNormBound = 1ℚ + sourceTransportDefectBound
 
-sourceTransportNormIsSevenSixths :
-  sourceTransportNormBound ≡ + 7 / 6
-sourceTransportNormIsSevenSixths = ℚRing.solve []
+sourceTransportNormIsNineteenSixteenths :
+  sourceTransportNormBound ≡ + 19 / 16
+sourceTransportNormIsNineteenSixteenths = ℚRing.solve []
 
 sourceLocalResidualBound : ℚ
 sourceLocalResidualBound =
@@ -140,7 +141,7 @@ cmp109FederbushSourceScaleResidualTelescopeLevel = machineChecked
 -- are to be proved on the full CMP98/CMP109 selected Y chart:
 --
 --   col(J_Y-I) <= t/2+t^2/6,   t<=1/12,
---   col(Ad_{exp Y}-I) <= 1/6.
+--   col(Ad_{exp Y}-I) <= 3/16.
 --
 -- The first is aligned with the repository's inverse-dexp coefficient calculus;
 -- the second should be proved from the explicit SU(2) adjoint-rotation formulas.
