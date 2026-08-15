@@ -35,7 +35,7 @@ module DASHI.Physics.Closure.NSTriadKNFixedShiftCorrectionHeadroomRound54Exact w
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base using (ℚ; _-_; _*_; _≤_)
+open import Data.Rational.Base using (ℚ; _+_; _-_; _*_; _≤_)
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 import DASHI.Physics.Closure.NSTriadKNAdmissibleOwnerTaxLanguageRound28Exact as Owner
@@ -52,27 +52,27 @@ fixedShiftCorrectionHeadroom block n =
 
 record PhysicalOwnerBlockCorrectionIdentification
     (balances : Nat → Nine.NineOwnerCriticalBalance)
-    (data : Fixed.FixedShiftRecursionPhysicalData)
+    (recursionData : Fixed.FixedShiftRecursionPhysicalData)
     (block : Block.RationalFixedBlockDecay) : Set where
   field
     ownerToFlux :
-      Round53.SameObjectOwnerToFixedShiftCorrection balances data
+      Round53.SameObjectOwnerToFixedShiftCorrection balances recursionData
 
     physicalFluxCorrectionIsBlockCorrection : ∀ n →
-      Fixed.integratedFluxCorrection data n
+      Fixed.integratedFluxCorrection recursionData n
       ≡ Block.correction block n
 
     blockShiftCoefficientIsPhysical :
-      Block.q block ≡ Fixed.correctedShiftCoefficient data
+      Block.q block ≡ Fixed.correctedShiftCoefficient recursionData
 
 open PhysicalOwnerBlockCorrectionIdentification public
 
 physicalFluxCorrectionBelowFixedShiftHeadroom :
-  ∀ {balances data block} →
+  ∀ {balances recursionData block} →
   (identification : PhysicalOwnerBlockCorrectionIdentification
-    balances data block) →
+    balances recursionData block) →
   (n : Nat) →
-  Fixed.integratedFluxCorrection data n
+  Fixed.integratedFluxCorrection recursionData n
   ≤ fixedShiftCorrectionHeadroom block n
 physicalFluxCorrectionBelowFixedShiftHeadroom {block = block}
     identification n =
@@ -82,14 +82,14 @@ physicalFluxCorrectionBelowFixedShiftHeadroom {block = block}
     (Block.correctionBudget block n)
 
 physicalOwnerRemainderBelowFixedShiftHeadroom :
-  ∀ {balances data block} →
+  ∀ {balances recursionData block} →
   (identification : PhysicalOwnerBlockCorrectionIdentification
-    balances data block) →
+    balances recursionData block) →
   (n : Nat) →
   Nine.admissibleRemainder (balances n)
   ≤ fixedShiftCorrectionHeadroom block n
 physicalOwnerRemainderBelowFixedShiftHeadroom
-    {balances} {data} {block} identification n =
+    {balances} {recursionData} {block} identification n =
   let
     same = ownerToFlux identification
     fluxBound =
@@ -101,16 +101,16 @@ physicalOwnerRemainderBelowFixedShiftHeadroom
     fluxBound
 
 physicalOwnerAggregateBelowFixedShiftHeadroom :
-  ∀ {balances data block} →
+  ∀ {balances recursionData block} →
   (identification : PhysicalOwnerBlockCorrectionIdentification
-    balances data block) →
+    balances recursionData block) →
   (n : Nat) →
   Round53.ownerAggregateDataRemainder (balances n)
     + Round53.ownerAggregateCriticalCoefficient (balances n)
       * Owner.integralCritical (Nine.environment (balances n))
   ≤ fixedShiftCorrectionHeadroom block n
 physicalOwnerAggregateBelowFixedShiftHeadroom
-    {balances} {data} {block} identification n =
+    {balances} {recursionData} {block} identification n =
   let
     same = ownerToFlux identification
     fluxBound =
@@ -124,13 +124,13 @@ physicalOwnerAggregateBelowFixedShiftHeadroom
     fluxBound
 
 fixedShiftHeadroomUsesPhysicalCoefficient :
-  ∀ {balances data block} →
+  ∀ {balances recursionData block} →
   (identification : PhysicalOwnerBlockCorrectionIdentification
-    balances data block) →
+    balances recursionData block) →
   (n : Nat) →
   fixedShiftCorrectionHeadroom block n
   ≡
-  (Block.r block - Fixed.correctedShiftCoefficient data)
+  (Block.r block - Fixed.correctedShiftCoefficient recursionData)
     * Block.scaledTarget (Block.constant block) (Block.r block) n
 fixedShiftHeadroomUsesPhysicalCoefficient {block = block}
     identification n =

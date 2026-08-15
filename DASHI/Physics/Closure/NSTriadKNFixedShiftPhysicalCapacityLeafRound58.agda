@@ -10,7 +10,7 @@ module DASHI.Physics.Closure.NSTriadKNFixedShiftPhysicalCapacityLeafRound58 wher
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false)
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ; 0ℚ; _-_; _*_; _≤_; _<_; nonNegative)
 import Data.Rational.Properties as ℚP
