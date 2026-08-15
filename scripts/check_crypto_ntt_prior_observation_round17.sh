@@ -16,6 +16,34 @@ FILES=(
   DASHI/Crypto/MLKEMCandidateMoveFanoutExact.agda
   DASHI/Crypto/MLKEMLocalityAreaInvariantExact.agda
   DASHI/Crypto/MLKEMButterflyStageLocalityInvariantExact.agda
+  DASHI/Crypto/MLKEMNTTSingularBudgetUncertaintyExact.agda
+  DASHI/Crypto/MLKEMNTTLocalOutcomeBudgetExact.agda
+  DASHI/Crypto/MLKEMNTTLocalMatrixOutcomeClassifierExact.agda
+  DASHI/Crypto/MLKEMNTTLocalLeftInverseZeroReflectionExact.agda
+  DASHI/Crypto/MLKEMBaseCaseAdjugateInverseExact.agda
+  DASHI/Crypto/MLKEMBaseCaseNormInverseBridgeExact.agda
+  DASHI/Crypto/MLKEMBaseCaseNonsquareNormSeparationExact.agda
+  DASHI/Crypto/MLKEMFIPS203GammaNonsquareTransportExact.agda
+  DASHI/Crypto/MLKEMUncertaintyTransitionCostBridgeExact.agda
+  DASHI/Crypto/MLKEMProtectedLabelUncertaintyEdgeExact.agda
+  DASHI/Crypto/MLKEMSupportUncertaintyRuntimeNoGoExact.agda
+  DASHI/Crypto/MLKEMButterflyUncertaintyWorkFrontierExact.agda
+  DASHI/Crypto/MLKEMExactResidualTouchLowerBoundExact.agda
+  DASHI/Crypto/MLKEMResidualTouchPathLowerBoundExact.agda
+  DASHI/Crypto/MLKEMUncertaintyDecisionTreeStrengthBoundaryExact.agda
+  DASHI/Crypto/MLKEMTouchInformationNoGoExact.agda
+  DASHI/Crypto/MLKEMBoundedReadoutInformationFrontierExact.agda
+  DASHI/Crypto/MLKEMProtectedLabelReadoutFactorisationExact.agda
+  DASHI/Crypto/MLKEMFiniteStateTranscriptCapacityExact.agda
+  DASHI/Crypto/MLKEMBoundedCellTranscriptCapacityExact.agda
+  DASHI/Crypto/MLKEMUpdateCapacityDichotomyExact.agda
+  DASHI/Crypto/MLKEMFIPS203ProtectedSecretCapacityExact.agda
+  DASHI/Crypto/MLKEMFIPS203UpdateCapacityResourceExact.agda
+  DASHI/Crypto/MLKEMFinitePriorSuccessMassExact.agda
+  DASHI/Crypto/MLKEMFIPS203CBDPriorSuccessBoundExact.agda
+  DASHI/Crypto/MLKEMFIPS203AverageSuccessResourceExact.agda
+  DASHI/Crypto/MLKEMOppositeResidueParityDecompositionExact.agda
+  DASHI/Crypto/MLKEMOppositeResidueParityFibreFactorisationExact.agda
   DASHI/Crypto/MLKEMBaseCaseConditionedResidualExact.agda
   DASHI/Crypto/ConditionedResidualAmbiguityRegressionExact.agda
   DASHI/Crypto/ConditionalMateAmbiguityExact.agda
@@ -61,8 +89,20 @@ grep -q 'algorithm9StageCount' DASHI/Crypto/MLKEMNTTDataflowCouplingExact.agda
 grep -q 'combinedCouplingHasNoNontrivialDisconnectedCut' DASHI/Crypto/MLKEMNTTCombinedCouplingConnectivityExact.agda
 grep -q 'mlKem1024PublicResidualMoveFanout' DASHI/Crypto/MLKEMCandidateMoveFanoutExact.agda
 grep -q 'mlKem512AreasEqual' DASHI/Crypto/MLKEMLocalityAreaInvariantExact.agda
-grep -q 'mlKem1024StageArea' DASHI/Crypto/MLKEMButterflyStageLocalityInvariantExact.agda
 grep -q 'mlKem1024AllStagesEqual' DASHI/Crypto/MLKEMButterflyStageLocalityInvariantExact.agda
+grep -q 'singularBudgetUncertainty128' DASHI/Crypto/MLKEMNTTSingularBudgetUncertaintyExact.agda
+grep -q 'activeCountWithinBudget' DASHI/Crypto/MLKEMNTTLocalOutcomeBudgetExact.agda
+grep -q 'leftInverseReflectsZero' DASHI/Crypto/MLKEMNTTLocalLeftInverseZeroReflectionExact.agda
+grep -q 'adjugateBaseCaseIdentity' DASHI/Crypto/MLKEMBaseCaseAdjugateInverseExact.agda
+grep -q 'normSeparatedBaseCaseLeftInverse' DASHI/Crypto/MLKEMBaseCaseNormInverseBridgeExact.agda
+grep -q 'nonsquareSeparatesNorm' DASHI/Crypto/MLKEMBaseCaseNonsquareNormSeparationExact.agda
+grep -q 'transitionUncertaintyCost128' DASHI/Crypto/MLKEMUncertaintyTransitionCostBridgeExact.agda
+grep -q 'pricedSearchEdgeUncertainty128' DASHI/Crypto/MLKEMProtectedLabelUncertaintyEdgeExact.agda
+grep -q 'fullRankExactResidualTouchObstruction128' DASHI/Crypto/MLKEMExactResidualTouchLowerBoundExact.agda
+grep -q 'sameOppositePairForcesSameParitySectors' DASHI/Crypto/MLKEMOppositeResidueParityFibreFactorisationExact.agda
+grep -q 'sameParitySectorsForceSameOppositePair' DASHI/Crypto/MLKEMOppositeResidueParityFibreFactorisationExact.agda
+grep -q 'oppositeResidueSumSelectsEven' DASHI/Crypto/MLKEMOppositeResidueParityDecompositionExact.agda
+grep -q 'oppositeResidueDifferenceSelectsOdd' DASHI/Crypto/MLKEMOppositeResidueParityDecompositionExact.agda
 grep -q 'conditionedResidual0' DASHI/Crypto/MLKEMBaseCaseConditionedResidualExact.agda
 grep -q 'conditionedResidual1' DASHI/Crypto/MLKEMBaseCaseConditionedResidualExact.agda
 grep -q 'conditionedEquationLeavesTwoPlausibleSecrets' DASHI/Crypto/ConditionedResidualAmbiguityRegressionExact.agda
@@ -98,10 +138,19 @@ grep -q 'sameLogicalTransitionDifferentPhysicalObservation' DASHI/Crypto/Represe
 
 grep -q '10.6028/NIST.FIPS.203' DASHI/Crypto/MLKEMBaseCaseConditionedResidualExact.agda
 grep -q '10.6028/NIST.FIPS.203' DASHI/Crypto/MLKEMButterflyStageLocalityInvariantExact.agda
-grep -q '10.6028/NIST.FIPS.203' DASHI/Crypto/MLKEMNTTActualCBD2FullTripleListProfileExact.agda
+grep -q '10.6028/NIST.FIPS.203' DASHI/Crypto/MLKEMOppositeResidueParityFibreFactorisationExact.agda
+
+if command -v python3 >/dev/null 2>&1; then
+  python3 scripts/crypto_ntt_cbd_block_reconciliation_probe.py \
+    --trials 2 --max-block 8 --baseline-pairs 2 >/dev/null
+  python3 scripts/crypto_ntt_opposite_residue_factorized_membership.py \
+    --m 8 --trials 2 >/dev/null
+else
+  echo "python3 unavailable: skipped Round-17 discovery regressions" >&2
+fi
 
 if command -v agda >/dev/null 2>&1; then
   agda -i . -i src DASHI/Crypto/BlueTeamSearchObservationRound17.agda
 else
-  echo "agda unavailable: structural/fail-closed round-17 geometry scan completed; no kernel-clean claim"
+  echo "agda unavailable: structural/fail-closed + Python Round-17 scans completed; no kernel-clean claim"
 fi
