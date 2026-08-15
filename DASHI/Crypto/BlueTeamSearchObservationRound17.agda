@@ -17,6 +17,7 @@ import DASHI.Crypto.MLKEMLocalityAreaInvariantExact
 import DASHI.Crypto.MLKEMButterflyStageLocalityInvariantExact
 import DASHI.Crypto.MLKEMNTTSingularBudgetUncertaintyExact
 import DASHI.Crypto.MLKEMNTTLocalOutcomeBudgetExact
+import DASHI.Crypto.MLKEMNTTLocalMatrixOutcomeClassifierExact
 import DASHI.Crypto.MLKEMBaseCaseConditionedResidualExact
 import DASHI.Crypto.ConditionedResidualAmbiguityRegressionExact
 import DASHI.Crypto.ConditionalMateAmbiguityExact
