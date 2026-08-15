@@ -27,6 +27,7 @@ module DASHI.Physics.YangMills.BalabanCMP99CovarianceLocalityToRGStateExact wher
 ------------------------------------------------------------------------
 
 open import Data.Rational.Base as ℚ using (ℚ; _≤_)
+import Data.Rational.Properties as ℚP
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanYM4RGInvariantRegionPhysicalGapExact as RG
@@ -43,9 +44,6 @@ record CMP99ToRGNextCovariance
     sourceCovarianceNorm : Background → ℚ
     sourceDecayExponent : Background → ℚ
 
-    -- Source Theorems 3.1--3.4, after the concrete operator/norm choice has
-    -- been fixed.  These are kept as the exact quantitative outputs consumed
-    -- below rather than a generic "locality available" flag.
     sourceNormBound :
       sourceCovarianceNorm nextBackground ≤ RG.covarianceCap parameters
 
@@ -64,13 +62,9 @@ cmp99CovarianceCapForNextState :
   CMP99ToRGNextCovariance Background Site parameters next →
   RG.conditionalCovarianceNorm next ≤ RG.covarianceCap parameters
 cmp99CovarianceCapForNextState dataSet =
-  transitive
+  ℚP.≤-trans
     (repositoryCovarianceBelowSource dataSet)
     (sourceNormBound dataSet)
-  where
-  transitive : ∀ {a b c : ℚ} → a ≤ b → b ≤ c → a ≤ c
-  transitive = Data.Rational.Properties.≤-trans
-  open import Data.Rational.Properties
 
 cmp99BackgroundPropagatorDecayAuthorityLevel : ProofLevel
 cmp99BackgroundPropagatorDecayAuthorityLevel = standardImported
@@ -78,10 +72,6 @@ cmp99BackgroundPropagatorDecayAuthorityLevel = standardImported
 cmp99NextStateCovarianceTransportLevel : ProofLevel
 cmp99NextStateCovarianceTransportLevel = machineChecked
 
--- These are the actual physical seams: prove that the RG-generated background
--- lies in CMP99's regular class uniformly, and identify the repository
--- conditional covariance/norm and lattice-distance convention with the source
--- operators and scale weights.
 cmp99NextBackgroundRegularityLevel : ProofLevel
 cmp99NextBackgroundRegularityLevel = conditional
 
