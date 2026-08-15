@@ -32,6 +32,9 @@ vectorDot : RationalVector3 → RationalVector3 → ℚ
 vectorDot (vec3 ax ay az) (vec3 bx by bz) =
   ax * bx + ay * by + az * bz
 
+vectorDotSelfIsNormSq : ∀ a → vectorDot a a ≡ vectorNormSq a
+vectorDotSelfIsNormSq (vec3 ax ay az) = refl
+
 pureProductScalar : ∀ a b →
   - q0 (pureQuaternion a *q pureQuaternion b) ≡ vectorDot a b
 pureProductScalar (vec3 ax ay az) (vec3 bx by bz) =
