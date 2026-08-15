@@ -8,8 +8,9 @@ module DASHI.Physics.Closure.NSTriadKNABCInhabitationRound58Exact where
 -- It accepts only the canonical physical source and estimates indexed by that
 -- source; the transfer is constructed definitionally.
 --
--- B is also routed explicitly through the mature squared whole-fibre endpoint,
--- so the canonical source itself now exposes the 133/256 bandwidth-one bound.
+-- B is routed explicitly through the mature squared whole-fibre endpoint while
+-- its canonical source remains on the lightweight leaf graph.  Heavy legacy
+-- envelope transport is invoked only by literalComEnvelope.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -21,7 +22,8 @@ import DASHI.Physics.Closure.NSTriadKNHHBadDyadicThreeMechanismRecurrenceRound48
 import DASHI.Physics.Closure.NSTriadKNHHBadRawVariableCapacityRound53Exact as Raw
 import DASHI.Physics.Closure.NSTriadKNHHBadLiteralDuhamelAdapterRound58Exact as AAdapter
 import DASHI.Physics.Closure.NSTriadKNHHBadPhysicalDuhamelSourceRound59 as ASource
-import DASHI.Physics.Closure.NSTriadKNComNormalizedFibreSourceAdapterRound58 as BSource
+import DASHI.Physics.Closure.NSTriadKNComNormalizedFibreSourceRound60Exact as BSource
+import DASHI.Physics.Closure.NSTriadKNComNormalizedFibreSourceAdapterRound58 as BAdapter
 import DASHI.Physics.Closure.NSTriadKNComNormalizedFibreAggregateRound60Exact as BAggregate
 import DASHI.Physics.Closure.NSTriadKNComLiteralSameAdjacentFibreRound55Exact as BWhole
 import DASHI.Physics.Closure.NSTriadKNComSupportOverlapRound42Exact as Support
@@ -61,13 +63,13 @@ literalHHBadDuhamel :
 literalHHBadDuhamel source =
   AAdapter.asLiteralDuhamel (literalHHBadTransfer source)
 
--- B: the canonical normalized source feeds both the legacy support envelope
--- and the literal squared whole-fibre 133/256 endpoint.
+-- B: the canonical normalized source feeds both the optional legacy support
+-- envelope and the lightweight literal squared whole-fibre 133/256 endpoint.
 literalComEnvelope :
   (source : LiteralABCSourceWitnesses) →
   Support.PhysicalComSupportOverlapEnvelope
 literalComEnvelope source =
-  BSource.legacyEnvelope (comSource source)
+  BAdapter.legacyEnvelope (comSource source)
 
 literalComBandwidthOneMass :
   LiteralABCSourceWitnesses → Nat → ℚ
