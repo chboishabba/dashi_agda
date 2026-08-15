@@ -5,7 +5,9 @@ module DASHI.Physics.Closure.NSTriadKNABCLeafAssemblyRound58 where
 --
 -- Round60 makes A fail closed at one object: a physical source plus estimates
 -- indexed by that source.  The transfer is a derived view, not an independently
--- supplied witness with a later same-object equality.
+-- supplied witness with a later same-object equality.  B now imports only the
+-- lightweight canonical normalized-fibre source, avoiding the legacy envelope
+-- graph in focused leaf checks.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -15,7 +17,7 @@ open import Data.Rational.Base using (ℚ)
 
 import DASHI.Physics.Closure.NSTriadKNHHBadPhysicalTransferSurfaceRound58 as A
 import DASHI.Physics.Closure.NSTriadKNHHBadPhysicalDuhamelSourceRound59 as ASource
-import DASHI.Physics.Closure.NSTriadKNComNormalizedFibreSourceAdapterRound58 as BSource
+import DASHI.Physics.Closure.NSTriadKNComNormalizedFibreSourceRound60Exact as BSource
 import DASHI.Physics.Closure.NSTriadKNFixedShiftPhysicalCapacityLeafRound58 as C
 
 record ABCLeafAssembly : Set₁ where
