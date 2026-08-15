@@ -94,6 +94,28 @@ q0AddScalar : ∀ left right →
   q0 (left +q right) ≡ q0 left + q0 right
 q0AddScalar = q0Add
 
+flatTailValueOne : ∀ a →
+  orderedValueProduct (flatExponentialJet a ∷ []) ≡ oneQ
+flatTailValueOne a = oneQMultiplyLeft oneQ
+
+flatTailValueTwo : ∀ a b →
+  orderedValueProduct (flatExponentialJet a ∷ flatExponentialJet b ∷ [])
+  ≡ oneQ
+flatTailValueTwo a b =
+  trans
+    (cong (oneQ *q_) (flatTailValueOne b))
+    (oneQMultiplyLeft oneQ)
+
+flatTailValueThree : ∀ a b c →
+  orderedValueProduct
+    (flatExponentialJet a ∷ flatExponentialJet b ∷
+      flatExponentialJet c ∷ [])
+  ≡ oneQ
+flatTailValueThree a b c =
+  trans
+    (cong (oneQ *q_) (flatTailValueTwo b c))
+    (oneQMultiplyLeft oneQ)
+
 scalarAtomSum : List RationalQuaternion → ℚ
 scalarAtomSum values = sumRational (map wilsonAtomContribution values)
 
