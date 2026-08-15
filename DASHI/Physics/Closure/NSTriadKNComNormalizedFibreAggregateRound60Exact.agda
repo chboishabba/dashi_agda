@@ -45,7 +45,7 @@ open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import DASHI.Physics.Closure.NSTriadKNComCommonHatSupportLeafRound58 as Hat
 import DASHI.Physics.Closure.NSTriadKNComNormalizedFibreMassLeafRound58 as Gram
-import DASHI.Physics.Closure.NSTriadKNComNormalizedFibreSourceAdapterRound58 as Source
+import DASHI.Physics.Closure.NSTriadKNComNormalizedFibreSourceRound60Exact as Source
 import DASHI.Physics.Closure.NSTriadKNComLiteralSameAdjacentFibreRound55Exact as Whole
 
 sameTargetAgreement : Gram.sameShellTarget ≡ Whole.same
