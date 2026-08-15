@@ -1,18 +1,12 @@
 module DASHI.Physics.Closure.NSTriadKNFixedShiftPhysicalCapacityAdapterRound58 where
 
 ------------------------------------------------------------------------
--- Round 58 C adapter.
+-- Round 58/60 C adapter.
 --
--- This file performs only the same-object transport which is already
--- justified by the canonical owner-driven fixed-shift data.  The two
--- genuinely analytic inputs remain explicit arguments:
---
---   * the identification of the integrated correction with the physical
---     block correction; and
---   * a division-free uniform product-capacity witness.
---
--- Keeping those arguments explicit prevents the adapter from turning a
--- wiring theorem into a numerical B_* claim.
+-- Same-object owner/flux/block transport remains separate from the analytic
+-- capacity calculation.  Round60 adds a second constructor: scale-matched
+-- physical bounds plus one rational coefficient inequality construct the
+-- division-free all-block capacity automatically.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
@@ -28,6 +22,7 @@ import DASHI.Physics.Closure.NSTriadKNFixedShiftCoefficientSeparationRound53Exac
 import DASHI.Physics.Closure.NSTriadKNFixedShiftPhysicalCapacityLeafRound58 as Leaf
 import DASHI.Physics.Closure.NSTriadKNFixedShiftCorrectionHeadroomRound54Exact as Headroom
 import DASHI.Physics.Closure.NSTriadKNFixedShiftUniformProductCapacityRound57Exact as Capacity
+import DASHI.Physics.Closure.NSTriadKNFixedShiftScaleMatchedCapacityRound60Exact as ScaleCapacity
 
 record PhysicalBlockCorrectionData
     {balances : Nat → Nine.NineOwnerCriticalBalance}
@@ -58,6 +53,22 @@ record PhysicalFixedShiftSource : Set₁ where
       Capacity.UniformFixedShiftProductCapacity ownerBlockIdentification
 
 open PhysicalFixedShiftSource public
+
+physicalFixedShiftSourceFromScaleMatched :
+  ∀ {balances data block}
+    (identification : Headroom.PhysicalOwnerBlockCorrectionIdentification
+      balances data block) →
+  ScaleCapacity.ScaleMatchedFixedShiftCapacityData identification →
+  PhysicalFixedShiftSource
+physicalFixedShiftSourceFromScaleMatched
+    {balances} {data} {block} identification scaleData = record
+  { balances = balances
+  ; fixedShiftData = data
+  ; fixedBlock = block
+  ; ownerBlockIdentification = identification
+  ; uniformProductCapacity =
+      ScaleCapacity.scaleMatchedUniformProductCapacity scaleData
+  }
 
 ownerFluxBlockIdentification :
   ∀ {balances}
