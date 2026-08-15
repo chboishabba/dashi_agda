@@ -21,11 +21,9 @@ module DASHI.Physics.YangMills.BalabanYM4RationalInverseSquareOrderExact where
 --
 --       u_* <= u   ==>   g <= gamma.
 --
--- The proof does not appeal to a floating reciprocal or square root.  Multiply
--- the inverse-coupling inequality by the positive product gamma^2 g^2 to get
--- g^2 <= gamma^2, then reflect square order on the positive cone.  This is the
--- literal finite-rational dictionary required after the terminal-threshold
--- propagation theorem.
+-- Multiply the inverse-coupling inequality by the positive product
+-- gamma^2 g^2 to obtain g^2 <= gamma^2, then reflect square order on the
+-- positive cone.  No floating reciprocal or square-root theorem is used.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -35,7 +33,7 @@ open import Data.Rational.Base as ℚ using
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.Definitions using (Tri; tri<; tri≈; tri>)
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -44,7 +42,11 @@ square value = value * value
 
 positiveImpliesNonnegative : ∀ value → Positive value → 0ℚ ≤ value
 positiveImpliesNonnegative value positive =
-  ℚP.<⇒≤ (ℚP.positive⁻¹ positive)
+  let
+    instance valuePositive : Positive value
+    valuePositive = positive
+  in
+  ℚP.<⇒≤ (ℚP.positive⁻¹ value)
 
 squareOrderReflectsPositive :
   ∀ g gamma →
@@ -164,14 +166,19 @@ inverseSquareOrderGivesSquareOrder dataSet thresholdBelow =
       product * inverseThreshold dataSet
       ≤ product * inverseCoupling dataSet
     scaled = ℚP.*-monoˡ-≤-nonNeg product thresholdBelow
+
+    upperRewritten :
+      product * inverseThreshold dataSet
+      ≤ square (thresholdCoupling dataSet)
+    upperRewritten = subst
+      (λ upper → product * inverseThreshold dataSet ≤ upper)
+      (scaledInverseCouplingMeaning dataSet)
+      scaled
   in
   subst
     (λ lower → lower ≤ square (thresholdCoupling dataSet))
-    (sym (scaledThresholdMeaning dataSet))
-    (subst
-      (λ upper → product * inverseThreshold dataSet ≤ upper)
-      (scaledInverseCouplingMeaning dataSet)
-      scaled)
+    (scaledThresholdMeaning dataSet)
+    upperRewritten
 
 inverseSquareThresholdImpliesSmallCoupling :
   ∀ dataSet →
