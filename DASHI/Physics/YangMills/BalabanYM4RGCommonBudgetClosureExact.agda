@@ -38,15 +38,18 @@ module DASHI.Physics.YangMills.BalabanYM4RGCommonBudgetClosureExact where
 -- slack identity cannot drift between independently tuned modules.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_)
+  (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_; NonNegative)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (_≡_; subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
-import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
 import DASHI.Physics.YangMills.BalabanYM4RGInvariantRegionPhysicalGapExact as RG
+
+commonBudgetSlackIdentity : ∀ q cap → q * cap + (1ℚ - q) * cap ≡ cap
+commonBudgetSlackIdentity q cap = ℚRing.solve (q ∷ cap ∷ [])
 
 smallFieldContractionFitsCap :
   ∀ q current next error cap →
@@ -60,7 +63,13 @@ smallFieldContractionFitsCap q current next error cap
     qNonnegative qAtMostOne currentBound nextBound errorFits =
   let
     scaledCurrent : q * current ≤ q * cap
-    scaledCurrent = Norm.scaleNonnegative q qNonnegative currentBound
+    scaledCurrent =
+      let
+        instance
+          qNonnegativeInstance : NonNegative q
+          qNonnegativeInstance = ℚ.nonNegative qNonnegative
+      in
+      ℚP.*-monoˡ-≤-nonNeg q currentBound
 
     combined :
       q * current + error
@@ -68,7 +77,7 @@ smallFieldContractionFitsCap q current next error cap
     combined = ℚP.+-mono-≤ scaledCurrent errorFits
 
     closes : q * cap + (1ℚ - q) * cap ≡ cap
-    closes = ℚRing.solve-∀ q cap
+    closes = commonBudgetSlackIdentity q cap
   in
   ℚP.≤-trans nextBound
     (subst
@@ -112,9 +121,9 @@ coupledOneStepPreservesAnalyticRegion :
   RG.InYM4RGInvariantRegion parameters next
 coupledOneStepPreservesAnalyticRegion
     {parameters} {current} {next} currentRegion estimates = record
-  { RG.InYM4RGInvariantRegion.couplingControlled =
+  { couplingControlled =
       couplingNextControlled estimates
-  ; RG.InYM4RGInvariantRegion.smallFieldControlled =
+  ; smallFieldControlled =
       smallFieldContractionFitsCap
         (contraction estimates)
         (RG.smallFieldPolymerNorm current)
@@ -126,13 +135,13 @@ coupledOneStepPreservesAnalyticRegion
         (RG.smallFieldControlled currentRegion)
         (smallFieldOneStep estimates)
         (perturbativeErrorFitsSlack estimates)
-  ; RG.InYM4RGInvariantRegion.largeFieldControlled =
+  ; largeFieldControlled =
       largeFieldNextControlled estimates
-  ; RG.InYM4RGInvariantRegion.covarianceControlled =
+  ; covarianceControlled =
       covarianceNextControlled estimates
-  ; RG.InYM4RGInvariantRegion.latticeDecayNonnegative =
+  ; latticeDecayNonnegative =
       decayNextNonnegative estimates
-  ; RG.InYM4RGInvariantRegion.inverseSpacingNonnegative =
+  ; inverseSpacingNonnegative =
       spacingNextNonnegative estimates
   }
 
