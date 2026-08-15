@@ -38,7 +38,7 @@ module DASHI.Physics.YangMills.BalabanCMP122Equation1100SharedSlackExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Data.Rational.Base as ℚ using (ℚ; 1ℚ; _+_; _-_; _*_; _≤_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -67,8 +67,6 @@ record Equation1100LargeFieldContribution
 
     largeFieldContribution : Scale → Volume → Root → Nat → ℚ
 
-    -- Identification of the R-sector contribution in the combined polymer norm
-    -- with the finite rooted sum.  All shell decay beyond this point is proved.
     contributionBelowRootedPartial : ∀ scale volume root cutoff →
       largeFieldContribution scale volume root cutoff
       ≤ rootedRPartial entropyData scale volume root cutoff
@@ -153,8 +151,6 @@ cmp122Equation1100FiniteContributionLevel = machineChecked
 cmp122Equation1100SharedSlackAssemblyLevel : ProofLevel
 cmp122Equation1100SharedSlackAssemblyLevel = machineChecked
 
--- After source (1.100) and entropy identification, only these two one-step
--- physical/numerical facts remain in the large-field error lane.
 cmp122CombinedNormContributionIdentificationLevel : ProofLevel
 cmp122CombinedNormContributionIdentificationLevel = conditional
 
