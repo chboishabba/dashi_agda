@@ -5,7 +5,10 @@ set -euo pipefail
 #
 # This intentionally does NOT invoke GitHub Actions.  It uses the repository's
 # pinned Agda 2.9 wrapper, one worker, persistent cache, and a 20 GiB RTS heap.
-# The expensive ABC inhabitation root is opt-in via FULL=1.
+# The canonical ABC inhabitation module is now part of the normal ladder because
+# its historical Com envelope transport has been split into a separate adapter.
+# LEGACY=1 adds that adapter; FULL=1 additionally retries the conjectural/heavy
+# downstream package after the lightweight boundary is known healthy.
 
 REPO_ROOT="${DASHI_REPO_ROOT:-$(cd "$(dirname "$0")/.." && pwd)}"
 cd "$REPO_ROOT"
@@ -31,19 +34,26 @@ TARGETS=(
   "DASHI/Physics/Closure/NSTriadKNLuoFiniteSixThreeKernelEstimateExact.agda"
   "DASHI/Physics/Closure/NSTriadKNLuoFiniteSixThreeKernelDimensionFreeExact.agda"
   "DASHI/Physics/Closure/NSTriadKNABCLeafAssemblyRound58.agda"
+  "DASHI/Physics/Closure/NSTriadKNABCInhabitationRound58Exact.agda"
 )
 
+if [ "${LEGACY:-0}" = "1" ]; then
+  TARGETS+=("DASHI/Physics/Closure/NSTriadKNABCComLegacyEnvelopeAdapterRound60Exact.agda")
+fi
+
 if [ "${FULL:-0}" = "1" ]; then
-  TARGETS+=("DASHI/Physics/Closure/NSTriadKNABCInhabitationRound58Exact.agda")
+  TARGETS+=("DASHI/Physics/Closure/NSTriadKNABCConjecturalSourceRound58Exact.agda")
 fi
 
 printf 'target,rc,elapsed_seconds,max_rss_kib\n' > "$CSV"
 
 echo "NS compiled-cut profile"
-echo "  cache: $DASHI_AGDA29_CACHE_ROOT"
-echo "  jobs:  $AGDA_JOBS"
-echo "  heap:  $AGDA_RTS_HEAP"
-echo "  csv:   $CSV"
+echo "  cache:  $DASHI_AGDA29_CACHE_ROOT"
+echo "  jobs:   $AGDA_JOBS"
+echo "  heap:   $AGDA_RTS_HEAP"
+echo "  legacy: ${LEGACY:-0}"
+echo "  full:   ${FULL:-0}"
+echo "  csv:    $CSV"
 echo
 
 for target in "${TARGETS[@]}"; do
