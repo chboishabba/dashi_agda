@@ -46,11 +46,11 @@ module DASHI.Physics.YangMills.BalabanCMP122Equation1100EntropyBudgetExact where
 -- both purposes.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.List.Base using (length)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _*_; _≤_)
-import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (subst)
 
@@ -67,7 +67,6 @@ record Equation1100RootedEntropyData
     source : Source.CMP122Equation1100Pointwise Scale Polymer Boundary
 
     shellPolymers : Scale → Volume → Root → Nat → List Polymer
-    boundaryAt : Scale → Volume → Root → Boundary
 
     -- The exact norm used by the combined one-step polymer coordinate.
     weightedRNorm : Scale → Volume → Root → Polymer → ℚ
@@ -82,7 +81,7 @@ record Equation1100RootedEntropyData
     -- and splitting its exp(-kappa d_k(X)) between norm weight and reserve.
     equation1100AfterWeightSplit :
       ∀ scale volume root depth polymer →
-      polymer Shell.∈ shellPolymers scale volume root depth →
+      Shell._∈_ polymer (shellPolymers scale volume root depth) →
       weightedRNorm scale volume root polymer
       ≤ Source.p0Suppression source scale
         * residualDecay scale volume root depth
