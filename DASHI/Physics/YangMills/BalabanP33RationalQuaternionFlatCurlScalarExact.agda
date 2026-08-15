@@ -24,7 +24,7 @@ open import Data.List.Base using (map; _++_)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _-_; _*_; -_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 open import DASHI.Physics.YangMills.BalabanP33RationalQuaternionFlatCurlGeometryExact public
 
@@ -100,7 +100,7 @@ scalarAtomSum values = sumRational (map wilsonAtomContribution values)
 scalarAtomSumAppend : ∀ left right →
   scalarAtomSum (left ++ right)
   ≡ scalarAtomSum left + scalarAtomSum right
-scalarAtomSumAppend [] right = ℚP.+-identityˡ (scalarAtomSum right)
+scalarAtomSumAppend [] right = sym (ℚP.+-identityˡ (scalarAtomSum right))
 scalarAtomSumAppend (value ∷ values) right =
   cong (wilsonAtomContribution value +_)
     (scalarAtomSumAppend values right)
@@ -141,7 +141,10 @@ pairAtomSumFlatCons : ∀ multiplier first second factors →
       (multiplier *q (first *q orderedValueProduct factors))
     + pairAtomSum multiplier factors
 pairAtomSumFlatCons multiplier first second factors =
-  scalarAtomSumMapThroughOneLeft multiplier (firstVariationTerms factors)
+  cong
+    (wilsonAtomContribution
+      (multiplier *q (first *q orderedValueProduct factors)) +_)
+    (scalarAtomSumMapThroughOneLeft multiplier (firstVariationTerms factors))
 
 flatSecondAtomRecurrence : ∀ first second factors →
   wilsonSecondVariationAtomSum (factorJet oneQ first second ∷ factors)
