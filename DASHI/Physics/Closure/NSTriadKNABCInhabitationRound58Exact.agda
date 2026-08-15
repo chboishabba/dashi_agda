@@ -8,9 +8,9 @@ module DASHI.Physics.Closure.NSTriadKNABCInhabitationRound58Exact where
 -- It accepts only the canonical physical source and estimates indexed by that
 -- source; the transfer is constructed definitionally.
 --
--- B is routed explicitly through the mature squared whole-fibre endpoint while
--- its canonical source remains on the lightweight leaf graph.  Heavy legacy
--- envelope transport is invoked only by literalComEnvelope.
+-- B is routed explicitly through the exact 133/256 squared whole-fibre endpoint
+-- while its canonical source and aggregate stay on the lightweight leaf graph.
+-- Heavy legacy envelope transport is invoked only by literalComEnvelope.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -25,7 +25,6 @@ import DASHI.Physics.Closure.NSTriadKNHHBadPhysicalDuhamelSourceRound59 as ASour
 import DASHI.Physics.Closure.NSTriadKNComNormalizedFibreSourceRound60Exact as BSource
 import DASHI.Physics.Closure.NSTriadKNComNormalizedFibreSourceAdapterRound58 as BAdapter
 import DASHI.Physics.Closure.NSTriadKNComNormalizedFibreAggregateRound60Exact as BAggregate
-import DASHI.Physics.Closure.NSTriadKNComLiteralSameAdjacentFibreRound55Exact as BWhole
 import DASHI.Physics.Closure.NSTriadKNComSupportOverlapRound42Exact as Support
 import DASHI.Physics.Closure.NSTriadKNFixedShiftCorrectionHeadroomRound54Exact as CHeadroom
 import DASHI.Physics.Closure.NSTriadKNFixedShiftUniformProductCapacityRound57Exact as C
@@ -78,7 +77,8 @@ literalComBandwidthOneMass source =
 
 literalComBandwidthOneMassBelow133Over256 :
   (source : LiteralABCSourceWitnesses) →
-  ∀ q → literalComBandwidthOneMass source q ≤ BWhole.target
+  ∀ q →
+  literalComBandwidthOneMass source q ≤ BAggregate.bandwidthOneTarget
 literalComBandwidthOneMassBelow133Over256 source =
   BAggregate.normalizedOddPQBandwidthOneMassBelow133Over256
     (comSource source)
