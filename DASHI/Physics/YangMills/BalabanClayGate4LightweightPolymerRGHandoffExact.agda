@@ -34,6 +34,7 @@ module DASHI.Physics.YangMills.BalabanClayGate4LightweightPolymerRGHandoffExact 
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Bool using (false)
 
 open import DASHI.Geometry.Gauge.SUNPrimitives using (clayYangMillsPromoted)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
