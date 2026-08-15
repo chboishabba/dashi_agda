@@ -16,9 +16,11 @@ import DASHI.Physics.YangMills.BalabanYM4ROperationEntropyShellExact as RShell
 import DASHI.Physics.YangMills.BalabanYM4LargeFieldContributionSharedSlackExact as LF
 import DASHI.Physics.YangMills.BalabanYM4LargeFieldCoupledStepExact as LFCoupled
 import DASHI.Physics.YangMills.BalabanCMP109LocalizationTreeSizeDictionaryExact as TreeSize
+import DASHI.Physics.YangMills.BalabanCMP109RootedLocalizationSummabilityExact as RootedSource
 import DASHI.Physics.YangMills.BalabanCMP122Equation1100DirectExact as Eq1100
 import DASHI.Physics.YangMills.BalabanCMP122Equation1100EntropyBudgetExact as EqEntropy
 import DASHI.Physics.YangMills.BalabanCMP122Equation1100SharedSlackExact as EqSlack
+import DASHI.Physics.YangMills.BalabanCMP122Equation1100RootedSummabilityExact as EqRooted
 import DASHI.Physics.YangMills.BalabanCMP119RDecayReserveBudgetExact as Reserve
 import DASHI.Physics.YangMills.BalabanCMP119CMP122BoundaryReinjectionSourceExact as Boundary
 import DASHI.Physics.YangMills.BalabanCMP99CovarianceLocalityToRGStateExact as Covariance
@@ -39,11 +41,17 @@ cmp109LocalizationDomainTreeDefinitionLevel =
 cmp109ExactTreeMetricTransportLevel = TreeSize.cmp109ExactTreeMetricTransportLevel
 cmp109DominatingTreeMetricTransportLevel =
   TreeSize.cmp109DominatingTreeMetricTransportLevel
+cmp109Equation026RootedSummabilityLevel =
+  RootedSource.cmp109Equation026RootedSummabilityLevel
+cmp109Equation027DecaySplittingLevel =
+  RootedSource.cmp109Equation027DecaySplittingLevel
 cmp122Equation1100PrimarySourceLevel = Eq1100.cmp122Equation1100PrimarySourceLevel
 cmp119Equation231ArbitraryDecayReserveLevel =
   Eq1100.cmp119Equation231ArbitraryDecayReserveLevel
 cmp119ThreeWayDecayReserveArithmeticLevel =
   Reserve.cmp119ThreeWayDecayReserveArithmeticLevel
+
+-- Explicit numerical shell route.
 cmp122Equation1100EntropyAssemblyLevel =
   EqEntropy.cmp122Equation1100EntropyAssemblyLevel
 cmp122Equation1100FiniteContributionLevel =
@@ -56,6 +64,13 @@ largeFieldRootedSummationLevel = LF.largeFieldRootedSummationLevel
 largeFieldSharedSlackAssemblyLevel = LF.largeFieldSharedSlackAssemblyLevel
 largeFieldToSharedRGErrorLevel = LFCoupled.largeFieldToSharedRGErrorLevel
 largeFieldCoupledRegionClosureLevel = LFCoupled.largeFieldCoupledRegionClosureLevel
+
+-- Shorter primary-source summability route: CMP109's rooted D_j summability
+-- plus CMP122 (1.100) gives R_root <= exp(-p0) C_root directly.  This can bypass
+-- a separate P06 shell reconstruction when source-level UV stability is the
+-- target; the explicit shell route above remains the numerical audit lane.
+cmp109CMP122DirectRootedRAssemblyLevel =
+  EqRooted.cmp109CMP122DirectRootedRAssemblyLevel
 
 -- Published boundary/covariance authorities and exact small-coupling cap
 -- transport.  The latter uses only Bałaban's explicit small-coupling hypothesis
@@ -75,18 +90,15 @@ balabanSmallCouplingToRGCapTransportLevel =
 
 -- Strongest source-reuse lane: CMP119/CMP122 complete-density preservation can
 -- populate the whole rational YM4 invariant region directly once one literal
--- Sect.-2 -> repository dictionary is supplied.  The separate constructive
--- shell/shared-slack lane above remains useful as an auditable rederivation and
--- falsification surface, but is no longer the only possible Gate-4 route.
+-- Sect.-2 -> repository dictionary is supplied.
 balabanCompleteDensityToYM4RegionAssemblyLevel =
   CompleteDensity.balabanCompleteDensityToYM4RegionAssemblyLevel
 
--- Fail-closed physical frontier.  The primary papers now own the abstract
--- decay/locality and small-coupling conditional theorems; these are the
--- representation, history and numerical leaves which must be instantiated on
--- the literal repository state.
+-- Fail-closed physical frontier.
 cmp109RepositoryLocalizationDomainIdentificationLevel =
   TreeSize.cmp109RepositoryLocalizationDomainIdentificationLevel
+cmp109RootedLocalizationRepositoryCarrierLevel =
+  RootedSource.cmp109RootedLocalizationRepositoryCarrierLevel
 cmp119SourceDistanceToRepositoryDiameterLevel =
   Reserve.cmp119SourceDistanceToRepositoryDiameterLevel
 cmp122Equation1100RepositoryRepresentationLevel =
@@ -95,6 +107,8 @@ cmp122Equation1100WeightSplitIdentificationLevel =
   EqEntropy.cmp122Equation1100WeightSplitIdentificationLevel
 cmp119RootedEntropyConsumesResidualDecayLevel =
   EqEntropy.cmp119RootedEntropyConsumesResidualDecayLevel
+cmp122DirectRootedRRepresentationLevel =
+  EqRooted.cmp122DirectRootedRRepresentationLevel
 cmp122CombinedNormContributionIdentificationLevel =
   EqSlack.cmp122CombinedNormContributionIdentificationLevel
 cmp122NumericalSharedSlackLevel =
