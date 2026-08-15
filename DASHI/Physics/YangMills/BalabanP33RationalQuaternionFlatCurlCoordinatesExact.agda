@@ -20,16 +20,14 @@ import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong₂; trans)
 
 open import DASHI.Physics.YangMills.BalabanP33RationalQuaternionFlatCurlScalarExact
+open import DASHI.Physics.YangMills.BalabanP33RationalQuaternionFlatCurlPolynomialShapeExact
 
 coordinateRecursionExpansion : ℚ → ℚ → ℚ → ℚ → ℚ
 coordinateRecursionExpansion a b c d =
-  a * a
-  + ((a * b + ((- (a * c)) + (- (a * d))))
-    + ((a * b + ((- (a * c)) + (- (a * d))))
-      + (b * b
-        + (((- (b * c)) + (- (b * d)))
-          + (((- (b * c)) + (- (b * d)))
-            + (c * c + (c * d + (c * d + d * d))))))))
+  flatRecursionShape
+    (a * a) (a * b) (a * c) (a * d)
+    (b * b) (b * c) (b * d)
+    (c * c) (c * d) (d * d)
 
 curlXContribution : ∀ x0 x1 x2 x3 →
   (x0 + x1 - x2 - x3) * (x0 + x1 - x2 - x3)
