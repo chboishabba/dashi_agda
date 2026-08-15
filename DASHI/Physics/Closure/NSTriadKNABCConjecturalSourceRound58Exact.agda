@@ -7,7 +7,8 @@ module DASHI.Physics.Closure.NSTriadKNABCConjecturalSourceRound58Exact where
 -- removes the redundant A transfer conjecture and the opaque C uniform-capacity
 -- conjecture.  A transfer is derived from source-indexed estimates; C capacity
 -- is derived from scale-matched physical bounds and one rational coefficient
--- headroom inequality.
+-- headroom inequality.  B's conjectural source stays on the lightweight leaf
+-- graph; the large legacy envelope is only a downstream consumer.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -17,7 +18,7 @@ open import Agda.Builtin.Nat using (Nat)
 import DASHI.Physics.Closure.NSTriadKNABCInhabitationRound58Exact as ABC
 import DASHI.Physics.Closure.NSTriadKNHHBadDyadicThreeMechanismRecurrenceRound48Exact as A
 import DASHI.Physics.Closure.NSTriadKNHHBadPhysicalDuhamelSourceRound59 as ASource
-import DASHI.Physics.Closure.NSTriadKNComNormalizedFibreSourceAdapterRound58 as BSource
+import DASHI.Physics.Closure.NSTriadKNComNormalizedFibreSourceRound60Exact as BSource
 import DASHI.Physics.Closure.NSTriadKNFixedShiftCorrectionHeadroomRound54Exact as CHeadroom
 import DASHI.Physics.Closure.NSTriadKNFixedShiftUniformProductCapacityRound57Exact as C
 import DASHI.Physics.Closure.NSTriadKNFixedShiftScaleMatchedCapacityRound60Exact as CScale
