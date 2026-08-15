@@ -15,7 +15,7 @@ module DASHI.Physics.YangMills.BalabanP33RationalQuaternionFlatCurlDotCoordinate
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Rational.Base as ℚ using (_+_; _*_)
 import Data.Rational.Properties as ℚP
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 open import DASHI.Physics.YangMills.BalabanP33RationalQuaternionFlatCurlScalarExact
 open import DASHI.Physics.YangMills.BalabanP33RationalQuaternionFlatCurlPolynomialShapeExact
@@ -65,3 +65,21 @@ flatRecursionDotExpansionIsCoordinateSum
     (trans
       (cong (_+ rz) xySplit)
       (ℚP.+-assoc rx ry rz))
+
+flatOrderedDotExpansionIsCoordinateSum :
+  ∀ x0 y0 z0 x1 y1 z1 x2 y2 z2 x3 y3 z3 →
+  flatOrderedDotExpansion
+    (vec3 x0 y0 z0) (vec3 x1 y1 z1)
+    (vec3 x2 y2 z2) (vec3 x3 y3 z3)
+  ≡ coordinateRecursionExpansion x0 x1 x2 x3
+    + (coordinateRecursionExpansion y0 y1 y2 y3
+      + coordinateRecursionExpansion z0 z1 z2 z3)
+flatOrderedDotExpansionIsCoordinateSum
+    x0 y0 z0 x1 y1 z1 x2 y2 z2 x3 y3 z3 =
+  trans
+    (sym
+      (flatRecursionDotExpansionIsOrdered
+        (vec3 x0 y0 z0) (vec3 x1 y1 z1)
+        (vec3 x2 y2 z2) (vec3 x3 y3 z3)))
+    (flatRecursionDotExpansionIsCoordinateSum
+      x0 y0 z0 x1 y1 z1 x2 y2 z2 x3 y3 z3)
