@@ -1,14 +1,12 @@
 module DASHI.Physics.Closure.NSTriadKNABCInhabitationRound58Exact where
 
 ------------------------------------------------------------------------
--- ROUND 58 — one typed boundary for the three quantitative gates.
+-- ROUND 58/60 — one typed boundary for the three quantitative gates.
 --
--- This module deliberately contains no new postulate and no Boolean upgrade.
--- It makes the remaining source data compositional: one A witness supplies the
--- literal Duhamel object, one B witness supplies the common-hat Gram bounds,
--- and one C witness supplies the same-object fixed-shift capacity.  All three
--- downstream consumers can therefore be checked against one package without
--- silently mixing independently named objects.
+-- Round 60 sharpens A: the package no longer accepts an independently supplied
+-- transfer plus an equality claiming that it came from the physical source.
+-- It accepts only the canonical physical source and estimates indexed by that
+-- source; the transfer is constructed definitionally.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -28,16 +26,12 @@ import DASHI.Physics.Closure.NSTriadKNFixedShiftPhysicalCapacityAdapterRound58 a
 import DASHI.Physics.Closure.NSTriadKNFixedShiftCoefficientSeparationRound53Exact as Round53
 import DASHI.Physics.Closure.NSTriadKNAdmissibleOwnerTaxLanguageRound28Exact as Owner
 import DASHI.Physics.Closure.NSTriadKNNineOwnerCriticalAbsorptionRound28Exact as Nine
-import DASHI.Physics.Closure.NSTriadKNLuoFixedShiftRecursionReductionExact as Fixed
-import DASHI.Physics.Closure.NSTriadKNLuoRationalFixedBlockInductionExact as Block
 
 record LiteralABCSourceWitnesses : Set₁ where
   field
-    hhBadTransfer : A.PhysicalDyadicThreeMechanismTransfer
     hhBadPhysicalSource : ASource.PhysicalLocalizedDuhamelSource
-    hhBadTransferUsesPhysicalSource :
-      A.source hhBadTransfer
-      ≡ ASource.asLocalizedSource hhBadPhysicalSource
+    hhBadPhysicalEstimates :
+      ASource.PhysicalLocalizedDuhamelEstimates hhBadPhysicalSource
 
     comSource : BSource.PhysicalNormalizedOddPQSource
 
@@ -45,15 +39,26 @@ record LiteralABCSourceWitnesses : Set₁ where
 
 open LiteralABCSourceWitnesses public
 
--- A: the exact source transfer is now available at the raw-variable consumer.
+literalHHBadTransfer :
+  (source : LiteralABCSourceWitnesses) →
+  A.PhysicalDyadicThreeMechanismTransfer
+literalHHBadTransfer source =
+  ASource.physicalTransferFromSource
+    (hhBadPhysicalSource source)
+    (hhBadPhysicalEstimates source)
+
+-- A: source-indexed estimates produce the exact source transfer and then the
+-- raw-variable Duhamel consumer.  There is no same-object equality left to
+-- postulate separately.
 literalHHBadDuhamel :
   (source : LiteralABCSourceWitnesses) →
   Raw.PhysicalGeneralVariableDefectDuhamel
 literalHHBadDuhamel source =
-  AAdapter.asLiteralDuhamel (hhBadTransfer source)
+  AAdapter.asLiteralDuhamel (literalHHBadTransfer source)
 
 -- B: the common-hat and normalized same/adjacent estimates feed the existing
--- width-one reduction and its exact 133/256 arithmetic.
+-- width-one reduction.  Round60 also exposes the direct 133/256 aggregate in
+-- NSTriadKNComNormalizedFibreAggregateRound60Exact.
 literalComEnvelope :
   (source : LiteralABCSourceWitnesses) →
   Support.PhysicalComSupportOverlapEnvelope
@@ -84,7 +89,6 @@ abcSourceBoundaryIsTyped = true
 abcSourceBoundaryIsTypedIsTrue : abcSourceBoundaryIsTyped ≡ true
 abcSourceBoundaryIsTypedIsTrue = refl
 
--- The package is intentionally not claimed to exist: its three fields are the
--- actual A–C analytic frontier, not aliases for sampled evidence.
+-- Fail closed: these are still the actual A/B/C physical analytic witnesses.
 literalABCSourceWitnessesConstructed : Bool
 literalABCSourceWitnessesConstructed = false
