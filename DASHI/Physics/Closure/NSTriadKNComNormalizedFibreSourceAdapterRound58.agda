@@ -1,100 +1,70 @@
 module DASHI.Physics.Closure.NSTriadKNComNormalizedFibreSourceAdapterRound58 where
 
 ------------------------------------------------------------------------
--- Round 58 B integration surface.
+-- Round 58/60 B integration surface.
 --
--- The lightweight B leaf and the legacy B consumer previously described the
--- same physical object with two records.  This adapter gives that object one
--- source package: the normalized Gram realization, its common hat, the shell
--- distance, and the off-support annihilation law.  The three target estimates
--- remain explicit fields of `bounds`; this file proves only the transport.
+-- Round60 moves the canonical source record into the lightweight
+-- NSTriadKNComNormalizedFibreSourceRound60Exact module.  This adapter now does
+-- only the expensive legacy transport.  Consequently focused checks of the
+-- physical same/adjacent inequalities no longer have to elaborate the complete
+-- Round47/42 envelope graph.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Data.Rational.Base using (ℚ)
 
 import DASHI.Physics.Closure.NSTriadKNComCommonHatSupportLeafRound58 as LightHat
 import DASHI.Physics.Closure.NSTriadKNComNormalizedFibreMassLeafRound58 as LightGram
+import DASHI.Physics.Closure.NSTriadKNComNormalizedFibreSourceRound60Exact as Source
 import DASHI.Physics.Closure.NSTriadKNComSameAdjacentActiveRound47Exact as Legacy
 import DASHI.Physics.Closure.NSTriadKNComSupportOverlapRound42Exact as Support
 
-record PhysicalNormalizedOddPQSource : Set₁ where
-  field
-    support : LightHat.PhysicalOddPQCommonHatIdentification
-    realization :
-      LightGram.PhysicalNormalizedOddPQGramRealization support
-    bounds :
-      LightGram.SameAdjacentNormalizedFibreMassBounds realization
-
-    shellDistance : Nat → Nat → Nat
-    sameShellDistance : ∀ q → shellDistance q q ≡ zero
-    forwardAdjacentDistance : ∀ q →
-      shellDistance q (suc q) ≡ suc zero
-    reverseAdjacentDistance : ∀ q →
-      shellDistance (suc q) q ≡ suc zero
-
-    inactiveSupportAnnihilatesPairProduct : ∀ q r →
-      LightHat.supportActive support q r ≡ false →
-      LightGram.pairProduct realization q r ≡ 0ℚ
-
-
-open PhysicalNormalizedOddPQSource public
-
-activeRelationIsLiteralOutputFibre :
-  (source : PhysicalNormalizedOddPQSource) →
-  ∀ q r →
-  LightHat.supportActive (support source) q r
-  ≡ LightHat.literalOddPQOutputFibreActive (support source) q r
-activeRelationIsLiteralOutputFibre source q r = refl
-
 legacySkeleton :
-  (source : PhysicalNormalizedOddPQSource) →
+  (source : Source.PhysicalNormalizedOddPQSource) →
   Legacy.PhysicalOddPQSupportSkeleton
 legacySkeleton source = record
-  { physicalPairProduct = LightGram.pairProduct (realization source)
-  ; shellDistance = shellDistance source
-  ; supportActive = LightHat.supportActive (support source)
+  { physicalPairProduct = LightGram.pairProduct (Source.realization source)
+  ; shellDistance = Source.shellDistance source
+  ; supportActive = LightHat.supportActive (Source.support source)
   ; pairProductNonnegative =
-      LightGram.pairProductNonnegative (realization source)
+      LightGram.pairProductNonnegative (Source.realization source)
   ; inactiveSupportAnnihilatesPairProduct =
-      inactiveSupportAnnihilatesPairProduct source
+      Source.inactiveSupportAnnihilatesPairProduct source
   }
 
 legacyHat :
-  (source : PhysicalNormalizedOddPQSource) →
+  (source : Source.PhysicalNormalizedOddPQSource) →
   Legacy.PhysicalOddPQHatIdentification (legacySkeleton source)
 legacyHat source = record
-  { commonHatSupport = LightHat.commonHatSupport (support source)
+  { commonHatSupport = LightHat.commonHatSupport (Source.support source)
   ; leftActiveInCommonHat =
-      LightHat.leftActiveInCommonHat (support source)
+      LightHat.leftActiveInCommonHat (Source.support source)
   ; rightActiveInCommonHat =
-      LightHat.rightActiveInCommonHat (support source)
+      LightHat.rightActiveInCommonHat (Source.support source)
   }
 
 legacyBounds :
-  (source : PhysicalNormalizedOddPQSource) →
+  (source : Source.PhysicalNormalizedOddPQSource) →
   Legacy.SameAdjacentPhysicalComBounds
     (legacySkeleton source)
     (legacyHat source)
 legacyBounds source = record
-  { sameShellDistance = sameShellDistance source
-  ; forwardAdjacentDistance = forwardAdjacentDistance source
-  ; backwardAdjacentDistance = reverseAdjacentDistance source
+  { sameShellDistance = Source.sameShellDistance source
+  ; forwardAdjacentDistance = Source.forwardAdjacentDistance source
+  ; backwardAdjacentDistance = Source.reverseAdjacentDistance source
   ; physicalComSameShellActiveBound =
       λ q active →
-        LightGram.sameShellBound (bounds source) q active
+        LightGram.sameShellBound (Source.bounds source) q active
   ; physicalComAdjacentShellActiveBound =
       λ q active →
-        LightGram.forwardAdjacentBound (bounds source) q active
+        LightGram.forwardAdjacentBound (Source.bounds source) q active
   ; physicalComReverseAdjacentShellActiveBound =
       λ q active →
-        LightGram.reverseAdjacentBound (bounds source) q active
+        LightGram.reverseAdjacentBound (Source.bounds source) q active
   }
 
 legacyEnvelope :
-  (source : PhysicalNormalizedOddPQSource) →
+  (source : Source.PhysicalNormalizedOddPQSource) →
   Support.PhysicalComSupportOverlapEnvelope
 legacyEnvelope source =
   Legacy.physicalComEnvelopeFromSameAdjacent
@@ -102,14 +72,10 @@ legacyEnvelope source =
     (legacyBounds source)
 
 -- Transport is complete, but the three physical normalized-fibre estimates
--- remain an explicit uninhabited frontier.
+-- remain an explicit uninhabited frontier in the lightweight source.
 physicalNormalizedFibreBoundsConstructed : Bool
 physicalNormalizedFibreBoundsConstructed = false
 
 physicalNormalizedFibreBoundsConstructedIsFalse :
   physicalNormalizedFibreBoundsConstructed ≡ false
 physicalNormalizedFibreBoundsConstructedIsFalse = refl
-
--- This is an integration theorem, not the missing fibre estimate: if a source
--- record is supplied, the old envelope consumer receives the same object and
--- the same three rational inequalities.
