@@ -99,7 +99,7 @@ record Round17ClaimBoundary : Set where
     candidateShrinkAloneIsNetAttackProgressIsFalse :
       candidateShrinkAloneIsNetAttackProgress ≡ false
     connectedNTTGraphRulesOutConditionalSearch : Bool
-    connectedNTTGraphRulesOutDisconnectedSearchIsFalse :
+    connectedNTTGraphRulesOutConditionalSearchIsFalse :
       connectedNTTGraphRulesOutConditionalSearch ≡ false
     conditioningOneBlockProvesUniqueMate : Bool
     conditioningOneBlockProvesUniqueMateIsFalse :
