@@ -8,7 +8,8 @@ module DASHI.Physics.Closure.NSTriadKNABCConjecturalSourceRound58Exact where
 -- conjecture.  A transfer is derived from source-indexed estimates; C capacity
 -- is derived from scale-matched physical bounds and one rational coefficient
 -- headroom inequality.  B's conjectural source stays on the lightweight leaf
--- graph; the large legacy envelope is only a downstream consumer.
+-- graph.  The historical large Com envelope is now imported only through the
+-- explicit ABC legacy adapter below.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -16,6 +17,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 
 import DASHI.Physics.Closure.NSTriadKNABCInhabitationRound58Exact as ABC
+import DASHI.Physics.Closure.NSTriadKNABCComLegacyEnvelopeAdapterRound60Exact as ABCLegacyCom
 import DASHI.Physics.Closure.NSTriadKNHHBadDyadicThreeMechanismRecurrenceRound48Exact as A
 import DASHI.Physics.Closure.NSTriadKNHHBadPhysicalDuhamelSourceRound59 as ASource
 import DASHI.Physics.Closure.NSTriadKNComNormalizedFibreSourceRound60Exact as BSource
@@ -94,7 +96,7 @@ conjecturalHHBadDuhamelExists =
 conjecturalComEnvelopeExists :
   Support.PhysicalComSupportOverlapEnvelope
 conjecturalComEnvelopeExists =
-  ABC.literalComEnvelope conjecturalABCSourceWitnesses
+  ABCLegacyCom.literalComEnvelope conjecturalABCSourceWitnesses
 
 conjecturalFixedShiftCapacityExists :
   C.UniformFixedShiftProductCapacity
