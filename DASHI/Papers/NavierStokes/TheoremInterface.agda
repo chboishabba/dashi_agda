@@ -21,6 +21,7 @@ import DASHI.Physics.Closure.NSTriadKNHighestAlphaRound55Exact
 import DASHI.Physics.Closure.NSTriadKNHHBadPhysicalDuhamelSourceRound59
 import DASHI.Physics.Closure.NSTriadKNComNormalizedFibreAggregateRound60Exact
 import DASHI.Physics.Closure.NSTriadKNFixedShiftScaleMatchedCapacityRound60Exact
+import DASHI.Physics.Closure.NSTriadKNFixedShiftPositiveGapFalsifierRound60Exact
 import DASHI.Papers.NavierStokes.ClayContractRound23 as Clay23
 
 ------------------------------------------------------------------------
@@ -44,6 +45,13 @@ import DASHI.Papers.NavierStokes.ClayContractRound23 as Clay23
 --   17/64 + 2(65/512) = 133/256.
 -- * C: scale-matched bounds X_n <= K C r^n and A_n <= a C r^n together with
 --   a + B_* K <= r-q construct the uniform division-free product capacity.
+--   The positive-gap falsifier also records the necessary condition
+--   a < r-q whenever both B_* and the physical critical scale K are positive.
+--
+-- The legacy eight-point Holder regression theorem has additionally been
+-- reduced to a thin adapter over the already-proved arbitrary-finite
+-- constant-one Holder theorem.  This is an elaboration refactor only: no
+-- physical or Clay boundary is promoted.
 --
 -- The terminal Clay bit remains false: the literal A trajectory/estimates, B
 -- active numerical estimates, and C scale-matched physical bounds are not
@@ -51,7 +59,7 @@ import DASHI.Papers.NavierStokes.ClayContractRound23 as Clay23
 
 paperInterfaceStatement : String
 paperInterfaceStatement =
-  "Paper-facing NS interface: A6/A7/A8/A9 closure receipts, Round-47/50/51/52/53/54/55 highest-alpha aggregates, and the literal Round 23 Fefferman periodic contract are imported; Round59/60 sharpen A-C to one canonical Duhamel source, the literal 133/256 Com whole-fibre endpoint, and a scale-matched division-free fixed-shift capacity theorem, while unresolved physical producer inhabitation, Clay Navier-Stokes and terminal promotion remain false."
+  "Paper-facing NS interface: A6/A7/A8/A9 closure receipts, Round-47/50/51/52/53/54/55 highest-alpha aggregates, and the literal Round 23 Fefferman periodic contract are imported; Round59/60 sharpen A-C to one canonical Duhamel source, the literal 133/256 Com whole-fibre endpoint, a scale-matched division-free fixed-shift capacity theorem, and its positive-gap falsifier, while the legacy eight-point Holder path is now a thin adapter over the stronger finite constant-one theorem; unresolved physical producer inhabitation, Clay Navier-Stokes and terminal promotion remain false."
 
 record NSPaperTheoremStatus : Setω where
   field
