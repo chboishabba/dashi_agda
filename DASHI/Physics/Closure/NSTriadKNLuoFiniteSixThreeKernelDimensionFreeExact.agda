@@ -33,6 +33,11 @@ module DASHI.Physics.Closure.NSTriadKNLuoFiniteSixThreeKernelDimensionFreeExact 
 --   (B1+B2)^3 <= 4(B1^3+B2^3).
 --
 -- The result is uniform in the number of quadrature/spatial samples.
+--
+-- COMPILER NOTE
+-- This module needs only elementary ordered-rational positivity/monotonicity.
+-- It intentionally imports the tiny FiniteRationalOrderCore rather than the
+-- full recursive finite-L2/Gram development.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.List using (List; []; _∷_)
@@ -42,7 +47,7 @@ import Data.Rational.Properties as ℚₚ
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
-import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
+import DASHI.Physics.Closure.NSTriadKNLuoFiniteRationalOrderCore as Core
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteEightPointSixThreeHolderExact as Eight
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteSixThreeHolderConstantOneV2Exact as Holder
 
@@ -68,12 +73,12 @@ cubeMonotone {left} {right} leftNN left≤right =
   let
     rightNN = ℚₚ.≤-trans leftNN left≤right
     squareBound =
-      L2.nonnegativeProductMonotone
+      Core.nonnegativeProductMonotone
         leftNN leftNN rightNN rightNN left≤right left≤right
   in
-  L2.nonnegativeProductMonotone
-    (L2.squareNonnegative left) leftNN
-    (L2.squareNonnegative right) rightNN
+  Core.nonnegativeProductMonotone
+    (Core.squareNonnegative left) leftNN
+    (Core.squareNonnegative right) rightNN
     squareBound left≤right
 
 branchCubeBound :
