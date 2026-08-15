@@ -83,3 +83,21 @@ flatOrderedDotExpansionIsCoordinateSum
         (vec3 x2 y2 z2) (vec3 x3 y3 z3)))
     (flatRecursionDotExpansionIsCoordinateSum
       x0 y0 z0 x1 y1 z1 x2 y2 z2 x3 y3 z3)
+
+flatDisplayedOrderedExpansionIsCoordinateSum :
+  ∀ x0 y0 z0 x1 y1 z1 x2 y2 z2 x3 y3 z3 →
+  flatDisplayedOrderedExpansion
+    (vec3 x0 y0 z0) (vec3 x1 y1 z1)
+    (vec3 x2 y2 z2) (vec3 x3 y3 z3)
+  ≡ coordinateRecursionExpansion x0 x1 x2 x3
+    + (coordinateRecursionExpansion y0 y1 y2 y3
+      + coordinateRecursionExpansion z0 z1 z2 z3)
+flatDisplayedOrderedExpansionIsCoordinateSum
+    x0 y0 z0 x1 y1 z1 x2 y2 z2 x3 y3 z3 =
+  trans
+    (sym
+      (flatOrderedDotExpansionIsDisplayed
+        (vec3 x0 y0 z0) (vec3 x1 y1 z1)
+        (vec3 x2 y2 z2) (vec3 x3 y3 z3)))
+    (flatOrderedDotExpansionIsCoordinateSum
+      x0 y0 z0 x1 y1 z1 x2 y2 z2 x3 y3 z3)
