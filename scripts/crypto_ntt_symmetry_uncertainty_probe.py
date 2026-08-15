@@ -10,28 +10,38 @@ Primary source:
   "Module-Lattice-Based Key-Encapsulation Mechanism Standard", FIPS 203,
   2024. DOI: 10.6028/NIST.FIPS.203.
 
-Relevant uncertainty references:
+Finite-field uncertainty theorem used here:
+  Martino Borello, Patrick Sole,
+  "The uncertainty principle over finite fields", Discrete Mathematics 345
+  (2022). DOI: 10.1016/j.disc.2021.112670.
+  Proposition 2 (Naive UP): when gcd(n,q)=1, every nonzero f in F_q^n obeys
+
+      wt_H(f) * wt_H(f-hat) >= n,
+
+  for the Mattson-Solomon / finite-field Fourier transform.  Its proof uses the
+  BCH bound: a weight-w polynomial cannot have w consecutive roots among powers
+  of a primitive n-th root of unity.
+
+Classical comparison:
   David L. Donoho, Philip B. Stark,
   "Uncertainty Principles and Signal Recovery", SIAM J. Appl. Math. 49 (1989).
   DOI: 10.1137/0149053.
 
-  Martino Borello, Patrick Sole,
-  "The uncertainty principle over finite fields", Discrete Mathematics 345
-  (2022). DOI: 10.1016/j.disc.2021.112670.
+For the FIPS parity block the exact identity checked below is
 
-The key exact identity checked here is
+    T_fips = P_bitrev * F_omega * diag(zeta^j),
 
-    T = F_omega * diag(zeta^j),
+where q=3329, zeta=17 has order 256, omega=zeta^2 has order 128, P_bitrev is a
+row permutation, and diag(zeta^j) has no zero diagonal entries.  Consequently
+both support cardinalities are unchanged by the wrappers around F_omega, so the
+Borello-Sole Proposition 2 specializes directly to
 
-where zeta=17 has order 256 modulo 3329 and omega=zeta^2 has order 128.  Thus
-one FIPS parity block is a cyclic 128-point finite-field Fourier transform up to
-a nonzero diagonal modulation and the harmless FIPS bit-reversal permutation.
+    x != 0  ==>  |supp x| * |supp(T_fips x)| >= 128.
 
-The script also constructs equality cases with
-
-    |supp x| * |supp(F x)| = 128
-
-for every divisor of 128, and computes the exact two-sparse extremizer family.
+The script also constructs sharp equality cases for every divisor d | 128:
+character-twisted indicators of a subgroup of size d have transformed support
+128/d.  These are the subgroup/character sectors suggested by the SSP symmetry
+architecture and are the likely equality objects for the later Agda theorem.
 """
 
 from collections import Counter
@@ -126,18 +136,27 @@ def support(x: np.ndarray) -> int:
     return int(np.count_nonzero(np.asarray(x) % Q))
 
 
+def verify_naive_up_hypotheses() -> None:
+    """Check the concrete arithmetic hypotheses of Borello-Sole Proposition 2."""
+    assert math.gcd(HALF, Q) == 1
+    assert (Q - 1) % HALF == 0
+    assert multiplicative_order(ZETA) == 256
+    assert multiplicative_order(pow(ZETA, 2, Q)) == HALF
+
+
 def verify_fourier_equivalence() -> tuple[np.ndarray, np.ndarray]:
     omega = pow(ZETA, 2, Q)
-    assert multiplicative_order(ZETA) == 256
-    assert multiplicative_order(omega) == 128
+    verify_naive_up_hypotheses()
 
     natural = natural_parity_ntt_matrix()
     fourier = cyclic_fourier_matrix()
     diagonal = np.array([pow(ZETA, j, Q) for j in range(HALF)], dtype=np.int64)
+    assert np.all(diagonal != 0)
     assert np.array_equal(natural, (fourier * diagonal[np.newaxis, :]) % Q)
 
     # FIPS gamma_i is exactly the bit-reversal permutation of natural rows.
     permutation = [bitrev7(i) for i in range(HALF)]
+    assert sorted(permutation) == list(range(HALF))
     assert np.array_equal(fips_parity_ntt_matrix(), natural[permutation, :])
     return natural, fourier
 
@@ -158,6 +177,17 @@ def verify_subgroup_equality_cases(fourier: np.ndarray) -> None:
             assert support(y) == HALF // d
             assert support(x) * support(y) == HALF
 
+            # Diagonal modulation transports the same sharp product to the
+            # natural FIPS parity evaluation map.
+            unmodulated = np.array(
+                [(int(x[j]) * pow(ZETA, -j, Q)) % Q for j in range(HALF)],
+                dtype=np.int64,
+            )
+            natural_y = (natural_parity_ntt_matrix() @ unmodulated) % Q
+            assert support(unmodulated) == d
+            assert support(natural_y) == HALF // d
+            assert support(unmodulated) * support(natural_y) == HALF
+
 
 def exact_two_sparse_extremizers() -> list[tuple[int, int, int, int, int]]:
     # For x=e_a+c e_b with d=b-a, zeros satisfy alpha_i^d=-1/c.
@@ -175,8 +205,13 @@ def exact_two_sparse_extremizers() -> list[tuple[int, int, int, int, int]]:
 
 def main() -> None:
     rng = random.Random(20260815)
+    verify_naive_up_hypotheses()
+    print("PASS: Borello-Sole Naive-UP hypotheses hold for n=128, q=3329")
+
     natural, fourier = verify_fourier_equivalence()
     print("PASS: FIPS parity block = row-permuted F_omega * diag(zeta^j)")
+    print("THEOREM: x != 0 => |supp x| * |supp(T_fips x)| >= 128")
+    print("         by Borello-Sole Proposition 2 plus the exact equivalence above")
 
     verify_subgroup_equality_cases(fourier)
     print("PASS: exact subgroup/character equality cases attain product 128")
