@@ -42,6 +42,7 @@ open import Agda.Builtin.List using (List)
 open import Data.List.Base using (length)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; 1ℚ; _-_; _*_; _≤_; ∣_∣)
+import Data.Rational.Properties as ℚP
 open import Relation.Binary.PropositionalEquality using (cong; subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -114,14 +115,12 @@ localCancellationResidualQuarter dataSet index column =
         (componentResidualEqualsOppositeInverseDefect
           dataSet index row column))
   in
-  Data.Rational.Properties.≤-trans
+  ℚP.≤-trans
     (subst
       (λ lower → lower ≤ SourceLog.sourcePrincipalLogColumnBound)
       identify
       (oppositeInverseDexpSourceDefect dataSet index column))
     SourceLog.sourcePrincipalLogColumnFitsQuarter
-  where
-  import Data.Rational.Properties
 
 asQuarterResidualData :
   ∀ {Index} → FederbushCancellationData Index →
