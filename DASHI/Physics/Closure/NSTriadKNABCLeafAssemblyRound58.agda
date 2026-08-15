@@ -3,8 +3,9 @@ module DASHI.Physics.Closure.NSTriadKNABCLeafAssemblyRound58 where
 ------------------------------------------------------------------------
 -- Lightweight A/B/C composition surface.
 --
--- This package checks that the three new analytic boundaries are mutually
--- composable without importing the legacy closure consumers.
+-- Round60 makes A fail closed at one object: a physical source plus estimates
+-- indexed by that source.  The transfer is a derived view, not an independently
+-- supplied witness with a later same-object equality.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -19,11 +20,9 @@ import DASHI.Physics.Closure.NSTriadKNFixedShiftPhysicalCapacityLeafRound58 as C
 
 record ABCLeafAssembly : Set₁ where
   field
-    hhBadTransfer : A.PhysicalDyadicThreeMechanismTransfer
     hhBadPhysicalSource : ASource.PhysicalLocalizedDuhamelSource
-    hhBadTransferUsesPhysicalSource :
-      A.source hhBadTransfer
-      ≡ ASource.asLocalizedSource hhBadPhysicalSource
+    hhBadPhysicalEstimates :
+      ASource.PhysicalLocalizedDuhamelEstimates hhBadPhysicalSource
 
     -- One canonical B source owns the literal output-fibre support, normalized
     -- Gram mass, off-support annihilation, and all three active bounds.
@@ -36,6 +35,12 @@ record ABCLeafAssembly : Set₁ where
         integralCritical correctionHeadroom dataRemainder
 
 open ABCLeafAssembly public
+
+hhBadTransfer : ABCLeafAssembly → A.PhysicalDyadicThreeMechanismTransfer
+hhBadTransfer assembly =
+  ASource.physicalTransferFromSource
+    (hhBadPhysicalSource assembly)
+    (hhBadPhysicalEstimates assembly)
 
 abcLeafBoundaryTyped : Bool
 abcLeafBoundaryTyped = true
