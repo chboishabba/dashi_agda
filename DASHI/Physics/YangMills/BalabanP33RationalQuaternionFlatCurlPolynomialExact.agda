@@ -9,8 +9,9 @@ module DASHI.Physics.YangMills.BalabanP33RationalQuaternionFlatCurlPolynomialExa
 -- DOI: 10.1007/BF01240355.
 --
 -- The public theorem is unchanged.  Its proof is now only a composition of
--- scalar atom-family recursion, scalar dot/coordinate transport, and three
--- independent four-variable coordinate curl identities.
+-- scalar atom-family recursion, the diagonal-first ordered dot expansion,
+-- scalar dot/coordinate transport, and three independent four-variable curl
+-- identities.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
@@ -29,11 +30,11 @@ flatPlaquetteWilsonIsCurlSquare
     (vec3 x0 y0 z0) (vec3 x1 y1 z1)
     (vec3 x2 y2 z2) (vec3 x3 y3 z3) =
   trans
-    (Atoms.flatSecondVariationRecursionDotExpansion
+    (Atoms.flatSecondVariationOrderedDotExpansion
       (vec3 x0 y0 z0) (vec3 x1 y1 z1)
       (vec3 x2 y2 z2) (vec3 x3 y3 z3))
     (trans
-      (Bridge.flatRecursionDotExpansionIsCoordinateSum
+      (Bridge.flatOrderedDotExpansionIsCoordinateSum
         x0 y0 z0 x1 y1 z1 x2 y2 z2 x3 y3 z3)
       (sym
         (Curl.flatCurlSquareCoordinateExpansion
