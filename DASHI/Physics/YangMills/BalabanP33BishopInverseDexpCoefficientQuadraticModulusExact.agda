@@ -19,26 +19,23 @@ module DASHI.Physics.YangMills.BalabanP33BishopInverseDexpCoefficientQuadraticMo
 --
 -- DASHI CONTRIBUTION
 --
--- Convert the already-proved cross-multiplied endpoint estimate
+-- Turn the checked cross-multiplied endpoint estimate
 --
---   0 <= n(t) - d(t)/12 <= (t^2/100) d(t)
+--   0 <= n(t)-d(t)/12 <= (t^2/100)d(t)
 --
--- into the actual inverse-dexp coefficient modulus on the positive half-ball.
--- Since d(t)>0, its Bishop inverse is positive and
+-- into the actual positive-radius coefficient estimate
 --
---   beta(t) = n(t) d(t)^-1.
+--   0 <= beta(t)-1/12 <= t^2/100,
+--   beta(t)=n(t)d(t)^-1.
 --
--- Multiplying by d(t)^-1 gives, without any real-number trichotomy,
---
---   0 <= beta(t) - 1/12 <= t^2/100.
---
--- This closes the analytic coefficient estimate itself.  A separate carrier
--- dictionary is still required if a downstream finite matrix insists on a
--- rational coefficient rather than a Bishop-real coefficient; that semantic
--- conversion is not silently asserted here.
+-- The proof stays constructive: d(t)>0 was already proved on the positive
+-- half-ball, so multiplication by the positive Bishop inverse preserves order.
+-- No real trichotomy and no rational approximation of beta(t) is introduced.
+-- A later finite-matrix dictionary must therefore preserve the distinction
+-- between this Bishop-real coefficient and any rational certificate carrier.
 ------------------------------------------------------------------------
 
-open import Data.Integer.Base using (+_; nonNeg)
+open import Data.Integer.Base using (+_)
 open import Data.Rational.Unnormalised as ℚ using (ℚᵘ; _/_)
 
 import Real as BishopReal
@@ -60,6 +57,10 @@ oneHundred = + 1 / 100
 embed : ℚᵘ → BishopReal.ℝ
 embed = BishopReal._⋆
 
+quadraticScale : BishopReal.ℝ → BishopReal.ℝ
+quadraticScale value =
+  BishopReal._*_ (embed oneHundred) (Endpoint.square value)
+
 coefficientDifference :
   ∀ {dataSet value} →
   (inputs : Concrete.ConcreteHalfBallSeriesInputs dataSet value) →
@@ -70,128 +71,133 @@ coefficientDifference inputs valuePositive =
     (Positive.inverseDexpCoefficientPositive inputs valuePositive)
     (embed oneTwelfth)
 
-endpointTimesInverseIsCoefficientDifference :
-  ∀ {dataSet value}
-    (inputs : Concrete.ConcreteHalfBallSeriesInputs dataSet value)
-    (valuePositive : BishopReal._<_ BishopReal.0ℝ value) →
-  BishopReal._≃_
-    (BishopReal._*_
-      (Endpoint.actualEndpointDefect dataSet value)
-      (BishopInverse._⁻¹
-        (Cross.inverseDexpDenominator dataSet value)
-        (Positive.positiveDenominatorNonzero inputs valuePositive)))
-    (coefficientDifference inputs valuePositive)
-endpointTimesInverseIsCoefficientDifference {dataSet} {value}
-    inputs valuePositive =
-  let
-    numerator = Numerator.inverseDexpNumerator dataSet value
-    denominator = Cross.inverseDexpDenominator dataSet value
-    denominatorNonzero = Positive.positiveDenominatorNonzero inputs valuePositive
-    inverse = BishopInverse._⁻¹ denominator denominatorNonzero
-
-    algebra :
-      BishopReal._≃_
-        (BishopReal._*_
-          (BishopReal._-_
-            numerator
-            (BishopReal._*_ (embed oneTwelfth) denominator))
-          inverse)
-        (BishopReal._-_
-          (BishopReal._*_ numerator inverse)
-          (BishopReal._*_
-            (embed oneTwelfth)
-            (BishopReal._*_ denominator inverse)))
-    algebra =
-      let open BishopProperties.ℝ-Solver
-      in solve 3
-        (λ n d i →
-          ((n ⊖ (Κ (+ 1 / 12) ⊗ d)) ⊗ i)
-          ⊜ ((n ⊗ i) ⊖ (Κ (+ 1 / 12) ⊗ (d ⊗ i))))
-        BishopProperties.≃-refl numerator denominator inverse
-
-    cancel :
-      BishopReal._≃_
-        (BishopReal._-_
-          (BishopReal._*_ numerator inverse)
-          (BishopReal._*_
-            (embed oneTwelfth)
-            (BishopReal._*_ denominator inverse)))
-        (BishopReal._-_
-          (BishopReal._*_ numerator inverse)
-          (embed oneTwelfth))
-    cancel =
-      BishopProperties.≃-trans
-        (BishopProperties.+-congˡ
-          (BishopProperties.neg-cong
-            (BishopProperties.≃-trans
-              (BishopProperties.*-congˡ
-                (BishopInverse.*-inverseʳ denominator denominatorNonzero))
-              (BishopProperties.*-identityʳ (embed oneTwelfth)))))
-        BishopProperties.≃-refl
-  in
-  BishopProperties.≃-trans algebra cancel
-
 coefficientDifferenceNonnegative :
   ∀ {dataSet value}
     (inputs : Concrete.ConcreteHalfBallSeriesInputs dataSet value)
     (valuePositive : BishopReal._<_ BishopReal.0ℝ value) →
   BishopReal._≤_ BishopReal.0ℝ
     (coefficientDifference inputs valuePositive)
-coefficientDifferenceNonnegative {dataSet} {value} inputs valuePositive =
+coefficientDifferenceNonnegative inputs valuePositive =
   let
-    denominator = Cross.inverseDexpDenominator dataSet value
+    bounds = Positive.positiveInverseDexpCoefficientBounds inputs valuePositive
+    beta = Positive.inverseDexpCoefficientPositive inputs valuePositive
+    shifted = BishopProperties.+-monoʳ-≤
+      (BishopReal.- (embed oneTwelfth))
+      (Positive.coefficientAboveOneTwelfth bounds)
+    leftExact :
+      BishopReal._≃_
+        (BishopReal._+_ (embed oneTwelfth)
+          (BishopReal.- (embed oneTwelfth)))
+        BishopReal.0ℝ
+    leftExact =
+      let open BishopProperties.ℝ-Solver
+      in solve 0
+        ((Κ (+ 1 / 12)) ⊕ (⊝ (Κ (+ 1 / 12))) ⊜ Κ (+ 0 / 1))
+        BishopProperties.≃-refl
+    rightExact :
+      BishopReal._≃_
+        (BishopReal._+_ beta (BishopReal.- (embed oneTwelfth)))
+        (coefficientDifference inputs valuePositive)
+    rightExact =
+      let open BishopProperties.ℝ-Solver
+      in solve 1
+        (λ b → b ⊕ (⊝ (Κ (+ 1 / 12))) ⊜ b ⊖ Κ (+ 1 / 12))
+        BishopProperties.≃-refl beta
+  in
+  BishopProperties.≤-respʳ-≃ rightExact
+    (BishopProperties.≤-respˡ-≃ leftExact shifted)
+
+numeratorBelowCoefficientEnvelopeTimesDenominator :
+  ∀ {dataSet value}
+    (inputs : Concrete.ConcreteHalfBallSeriesInputs dataSet value) →
+  BishopReal._≤_
+    (Numerator.inverseDexpNumerator dataSet value)
+    (BishopReal._*_
+      (BishopReal._+_ (embed oneTwelfth) (quadraticScale value))
+      (Cross.inverseDexpDenominator dataSet value))
+numeratorBelowCoefficientEnvelopeTimesDenominator {dataSet} {value} inputs =
+  let
+    n = Numerator.inverseDexpNumerator dataSet value
+    d = Cross.inverseDexpDenominator dataSet value
+    q = quadraticScale value
+    endpointUpper = Endpoint.actualEndpointDefectQuadraticModulus inputs
+    added = BishopProperties.+-monoʳ-≤
+      (BishopReal._*_ (embed oneTwelfth) d)
+      endpointUpper
+
+    leftExact :
+      BishopReal._≃_
+        (BishopReal._+_
+          (BishopReal._*_ (embed oneTwelfth) d)
+          (Endpoint.actualEndpointDefect dataSet value))
+        n
+    leftExact =
+      let open BishopProperties.ℝ-Solver
+      in solve 2
+        (λ numerator denominator →
+          ((Κ (+ 1 / 12) ⊗ denominator)
+            ⊕ (numerator ⊖ (Κ (+ 1 / 12) ⊗ denominator)))
+          ⊜ numerator)
+        BishopProperties.≃-refl n d
+
+    rightExact :
+      BishopReal._≃_
+        (BishopReal._+_
+          (BishopReal._*_ (embed oneTwelfth) d)
+          (Endpoint.quadraticDenominatorScale dataSet value))
+        (BishopReal._*_
+          (BishopReal._+_ (embed oneTwelfth) q) d)
+    rightExact =
+      let open BishopProperties.ℝ-Solver
+      in solve 2
+        (λ denominator scale →
+          ((Κ (+ 1 / 12) ⊗ denominator)
+            ⊕ (scale ⊗ denominator))
+          ⊜ ((Κ (+ 1 / 12) ⊕ scale) ⊗ denominator))
+        BishopProperties.≃-refl d q
+  in
+  BishopProperties.≤-respʳ-≃ rightExact
+    (BishopProperties.≤-respˡ-≃ leftExact added)
+
+coefficientBelowOneTwelfthPlusQuadratic :
+  ∀ {dataSet value}
+    (inputs : Concrete.ConcreteHalfBallSeriesInputs dataSet value)
+    (valuePositive : BishopReal._<_ BishopReal.0ℝ value) →
+  BishopReal._≤_
+    (Positive.inverseDexpCoefficientPositive inputs valuePositive)
+    (BishopReal._+_ (embed oneTwelfth) (quadraticScale value))
+coefficientBelowOneTwelfthPlusQuadratic {dataSet} {value}
+    inputs valuePositive =
+  let
+    d = Cross.inverseDexpDenominator dataSet value
     denominatorNonzero = Positive.positiveDenominatorNonzero inputs valuePositive
-    inverse = BishopInverse._⁻¹ denominator denominatorNonzero
-    inverseNN =
+    inverse = BishopInverse._⁻¹ d denominatorNonzero
+    inverseNonnegative =
       BishopProperties.pos⇒nonNeg
         (BishopInverse.posx⇒posx⁻¹ denominatorNonzero
           (BishopProperties.0<x⇒posx
             (Positive.inverseDexpDenominatorPositive inputs valuePositive)))
+
+    numeratorUpper =
+      numeratorBelowCoefficientEnvelopeTimesDenominator inputs
     scaled = BishopProperties.*-monoʳ-≤-nonNeg
-      (Endpoint.actualEndpointDefectNonnegative inputs)
-      inverseNN
-  in
-  BishopProperties.≤-respʳ-≃
-    (endpointTimesInverseIsCoefficientDifference inputs valuePositive)
-    (BishopProperties.≤-respˡ-≃
-      (BishopProperties.≃-symm (BishopProperties.zero-productˡ inverse))
-      scaled)
+      numeratorUpper inverseNonnegative
 
-quadraticScale : BishopReal.ℝ → BishopReal.ℝ
-quadraticScale value =
-  BishopReal._*_ (embed oneHundred) (Endpoint.square value)
-
-scaledQuadraticDenominatorCancels :
-  ∀ {dataSet value}
-    (inputs : Concrete.ConcreteHalfBallSeriesInputs dataSet value)
-    (valuePositive : BishopReal._<_ BishopReal.0ℝ value) →
-  BishopReal._≃_
-    (BishopReal._*_
-      (Endpoint.quadraticDenominatorScale dataSet value)
-      (BishopInverse._⁻¹
-        (Cross.inverseDexpDenominator dataSet value)
-        (Positive.positiveDenominatorNonzero inputs valuePositive)))
-    (quadraticScale value)
-scaledQuadraticDenominatorCancels {dataSet} {value} inputs valuePositive =
-  let
-    denominator = Cross.inverseDexpDenominator dataSet value
-    denominatorNonzero = Positive.positiveDenominatorNonzero inputs valuePositive
-    inverse = BishopInverse._⁻¹ denominator denominatorNonzero
-    scale = quadraticScale value
-    algebra :
+    envelope = BishopReal._+_ (embed oneTwelfth) (quadraticScale value)
+    cancelRight :
       BishopReal._≃_
         (BishopReal._*_
-          (BishopReal._*_ scale denominator)
-          inverse)
-        (BishopReal._*_
-          scale (BishopReal._*_ denominator inverse))
-    algebra = BishopProperties.*-assoc scale denominator inverse
+          (BishopReal._*_ envelope d) inverse)
+        envelope
+    cancelRight =
+      BishopProperties.≃-trans
+        (BishopProperties.*-assoc envelope d inverse)
+        (BishopProperties.≃-trans
+          (BishopProperties.*-congˡ
+            (BishopInverse.*-inverseʳ d denominatorNonzero))
+          (BishopProperties.*-identityʳ envelope))
   in
-  BishopProperties.≃-trans algebra
-    (BishopProperties.≃-trans
-      (BishopProperties.*-congˡ
-        (BishopInverse.*-inverseʳ denominator denominatorNonzero))
-      (BishopProperties.*-identityʳ scale))
+  BishopProperties.≤-respʳ-≃ cancelRight scaled
 
 coefficientDifferenceQuadraticModulus :
   ∀ {dataSet value}
@@ -200,25 +206,38 @@ coefficientDifferenceQuadraticModulus :
   BishopReal._≤_
     (coefficientDifference inputs valuePositive)
     (quadraticScale value)
-coefficientDifferenceQuadraticModulus {dataSet} {value} inputs valuePositive =
+coefficientDifferenceQuadraticModulus {value = value} inputs valuePositive =
   let
-    denominator = Cross.inverseDexpDenominator dataSet value
-    denominatorNonzero = Positive.positiveDenominatorNonzero inputs valuePositive
-    inverse = BishopInverse._⁻¹ denominator denominatorNonzero
-    inverseNN =
-      BishopProperties.pos⇒nonNeg
-        (BishopInverse.posx⇒posx⁻¹ denominatorNonzero
-          (BishopProperties.0<x⇒posx
-            (Positive.inverseDexpDenominatorPositive inputs valuePositive)))
-    scaled = BishopProperties.*-monoʳ-≤-nonNeg
-      (Endpoint.actualEndpointDefectQuadraticModulus inputs)
-      inverseNN
+    beta = Positive.inverseDexpCoefficientPositive inputs valuePositive
+    q = quadraticScale value
+    shifted = BishopProperties.+-monoʳ-≤
+      (BishopReal.- (embed oneTwelfth))
+      (coefficientBelowOneTwelfthPlusQuadratic inputs valuePositive)
+    leftExact :
+      BishopReal._≃_
+        (BishopReal._+_ beta (BishopReal.- (embed oneTwelfth)))
+        (coefficientDifference inputs valuePositive)
+    leftExact =
+      let open BishopProperties.ℝ-Solver
+      in solve 1
+        (λ b → b ⊕ (⊝ (Κ (+ 1 / 12))) ⊜ b ⊖ Κ (+ 1 / 12))
+        BishopProperties.≃-refl beta
+    rightExact :
+      BishopReal._≃_
+        (BishopReal._+_
+          (BishopReal._+_ (embed oneTwelfth) q)
+          (BishopReal.- (embed oneTwelfth)))
+        q
+    rightExact =
+      let open BishopProperties.ℝ-Solver
+      in solve 1
+        (λ scale →
+          ((Κ (+ 1 / 12) ⊕ scale) ⊕ (⊝ (Κ (+ 1 / 12)))
+          ⊜ scale)
+        BishopProperties.≃-refl q
   in
-  BishopProperties.≤-respʳ-≃
-    (scaledQuadraticDenominatorCancels inputs valuePositive)
-    (BishopProperties.≤-respˡ-≃
-      (endpointTimesInverseIsCoefficientDifference inputs valuePositive)
-      scaled)
+  BishopProperties.≤-respʳ-≃ rightExact
+    (BishopProperties.≤-respˡ-≃ leftExact shifted)
 
 record PositiveCoefficientQuadraticModulus
     {dataSet : Elementary.BishopElementaryPowerSeriesData}
