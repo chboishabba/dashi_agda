@@ -4,9 +4,10 @@ module DASHI.Physics.Closure.NSTriadKNABCConjecturalSourceRound58Exact where
 -- ROUND 58/60 — conjectural A/B/C source package.
 --
 -- This is an executable fail-closed boundary, not a proof import.  Round 60
--- removes the redundant A transfer conjecture: only the physical source and
--- source-indexed analytic estimates are postulated here, and the transfer is
--- derived by the canonical constructor.
+-- removes the redundant A transfer conjecture and the opaque C uniform-capacity
+-- conjecture.  A transfer is derived from source-indexed estimates; C capacity
+-- is derived from scale-matched physical bounds and one rational coefficient
+-- headroom inequality.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -19,6 +20,7 @@ import DASHI.Physics.Closure.NSTriadKNHHBadPhysicalDuhamelSourceRound59 as ASour
 import DASHI.Physics.Closure.NSTriadKNComNormalizedFibreSourceAdapterRound58 as BSource
 import DASHI.Physics.Closure.NSTriadKNFixedShiftCorrectionHeadroomRound54Exact as CHeadroom
 import DASHI.Physics.Closure.NSTriadKNFixedShiftUniformProductCapacityRound57Exact as C
+import DASHI.Physics.Closure.NSTriadKNFixedShiftScaleMatchedCapacityRound60Exact as CScale
 import DASHI.Physics.Closure.NSTriadKNFixedShiftPhysicalCapacityAdapterRound58 as CSource
 import DASHI.Physics.Closure.NSTriadKNNineOwnerCriticalAbsorptionRound28Exact as Nine
 import DASHI.Physics.Closure.NSTriadKNLuoFixedShiftRecursionReductionExact as Fixed
@@ -47,7 +49,7 @@ postulate
     BSource.PhysicalNormalizedOddPQSource
 
 ------------------------------------------------------------------------
--- C: same-object owner/flux/block identification and positive capacity.
+-- C: same-object owner/flux/block identification plus scale-matched estimates.
 ------------------------------------------------------------------------
 
 postulate
@@ -61,18 +63,15 @@ postulate
       conjecturalBalances conjecturalFixedShiftData conjecturalFixedBlock
 
 postulate
-  uniformFixedShiftCapacityConjecture :
-    C.UniformFixedShiftProductCapacity
+  scaleMatchedFixedShiftCapacityConjecture :
+    CScale.ScaleMatchedFixedShiftCapacityData
       physicalOwnerBlockIdentificationConjecture
 
 conjecturalFixedShiftSource : CSource.PhysicalFixedShiftSource
-conjecturalFixedShiftSource = record
-  { balances = conjecturalBalances
-  ; fixedShiftData = conjecturalFixedShiftData
-  ; fixedBlock = conjecturalFixedBlock
-  ; ownerBlockIdentification = physicalOwnerBlockIdentificationConjecture
-  ; uniformProductCapacity = uniformFixedShiftCapacityConjecture
-  }
+conjecturalFixedShiftSource =
+  CSource.physicalFixedShiftSourceFromScaleMatched
+    physicalOwnerBlockIdentificationConjecture
+    scaleMatchedFixedShiftCapacityConjecture
 
 ------------------------------------------------------------------------
 -- Assemble the exact package consumed by downstream closure code.
