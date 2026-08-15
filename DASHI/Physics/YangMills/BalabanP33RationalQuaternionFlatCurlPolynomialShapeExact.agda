@@ -1,6 +1,13 @@
 module DASHI.Physics.YangMills.BalabanP33RationalQuaternionFlatCurlPolynomialShapeExact where
 
 ------------------------------------------------------------------------
+-- PRIMARY SOURCES
+-- Kenneth G. Wilson, "Confinement of Quarks", Physical Review D 10 (1974),
+-- 2445--2459. DOI: 10.1103/PhysRevD.10.2445.
+-- Tadeusz Bałaban, "Propagators for Lattice Gauge Theories in a Background
+-- Field", Communications in Mathematical Physics 99 (1985), 389--434.
+-- DOI: 10.1007/BF01240355.
+--
 -- DASHI CONTRIBUTION
 -- The scalar polynomial shape shared by the atom recursion and the three
 -- coordinate curl leaves.  All normalization lemmas below involve at most six
