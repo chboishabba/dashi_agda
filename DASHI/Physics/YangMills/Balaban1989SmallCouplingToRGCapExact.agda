@@ -20,17 +20,10 @@ module DASHI.Physics.YangMills.Balaban1989SmallCouplingToRGCapExact where
 -- staying in a sufficiently small interval.  That hypothesis is enough for the
 -- one-step coupling-cap field of Gate 4; one must not strengthen this transport
 -- into a claim that CMP109/CMP122 prove the missing positive beta calculation.
---
--- DASHI CONTRIBUTION
---
--- If the source coupling at every scale is <= gamma, and the repository RG
--- coupling coordinate is literally that source coupling with a cap >= gamma,
--- then coupling-domain preservation is immediate.  This isolates the actual
--- hard issue correctly: constructing the required small-coupling history, not
--- reproving cap preservation after the history is supplied.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Nat using (Nat; suc)
 open import Data.Rational.Base as ℚ using (ℚ; _≤_)
 import Data.Rational.Properties as ℚP
 
@@ -67,11 +60,10 @@ sourceSmallCouplingGivesNextRepositoryCap :
   ∀ {parameters stateAt}
     (dictionary : SourceSmallCouplingRGDictionary parameters stateAt)
     scale →
-  RG.runningCoupling (stateAt (Agda.Builtin.Nat.suc scale))
+  RG.runningCoupling (stateAt (suc scale))
   ≤ RG.couplingCap parameters
 sourceSmallCouplingGivesNextRepositoryCap dictionary scale =
-  sourceSmallCouplingGivesRepositoryCap dictionary
-    (Agda.Builtin.Nat.suc scale)
+  sourceSmallCouplingGivesRepositoryCap dictionary (suc scale)
 
 balabanSmallCouplingHypothesisAuthorityLevel : ProofLevel
 balabanSmallCouplingHypothesisAuthorityLevel = standardImported
