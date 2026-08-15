@@ -39,10 +39,12 @@ module DASHI.Physics.Closure.NSTriadKNFixedShiftScaleMatchedCapacityRound60Exact
 
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.List using ([]; _∷_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base using
   (ℚ; 0ℚ; _+_; _-_; _*_; _≤_; _<_; nonNegative)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 open import Relation.Binary.PropositionalEquality using (subst)
 
 import DASHI.Physics.Closure.NSTriadKNAdmissibleOwnerTaxLanguageRound28Exact as Owner
@@ -54,12 +56,15 @@ import DASHI.Physics.Closure.NSTriadKNFixedShiftUniformProductCapacityRound57Exa
 import DASHI.Physics.Closure.NSTriadKNLuoFixedShiftRecursionReductionExact as Fixed
 import DASHI.Physics.Closure.NSTriadKNLuoRationalFixedBlockInductionExact as Block
 
+scaleRegroup : ∀ a B K T → a * T + B * (K * T) ≡ (a + B * K) * T
+scaleRegroup a B K T = solve (a ∷ B ∷ K ∷ T ∷ [])
+
 record ScaleMatchedFixedShiftCapacityData
     {balances : Nat → Nine.NineOwnerCriticalBalance}
-    {data : Fixed.FixedShiftRecursionPhysicalData}
+    {recursionData : Fixed.FixedShiftRecursionPhysicalData}
     {block : Block.RationalFixedBlockDecay}
     (identification : Headroom.PhysicalOwnerBlockCorrectionIdentification
-      balances data block) : Set where
+      balances recursionData block) : Set where
   field
     uniformCoefficient criticalScale dataScale : ℚ
 
@@ -86,15 +91,17 @@ record ScaleMatchedFixedShiftCapacityData
 open ScaleMatchedFixedShiftCapacityData public
 
 scaleMatchedProductFitsEveryBlock :
-  ∀ {balances data block identification}
+  ∀ {balances recursionData block identification}
     (scaleData : ScaleMatchedFixedShiftCapacityData
-      {balances = balances} {data = data} {block = block} identification) →
+      {balances = balances} {recursionData = recursionData}
+      {block = block} identification) →
   ∀ n →
   uniformCoefficient scaleData
     * Owner.integralCritical (Nine.environment (balances n))
   ≤ Capacity.residualCorrectionHeadroom identification n
 scaleMatchedProductFitsEveryBlock
-    {balances} {block = block} {identification = identification}
+    {balances} {recursionData} {block = block}
+    {identification = identification}
     scaleData n =
   let
     B = uniformCoefficient scaleData
@@ -114,7 +121,7 @@ scaleMatchedProductFitsEveryBlock
     addData = ℚP.+-mono-≤ (dataScaleBound scaleData n) scaledCritical
 
     regroup : a * T + B * (K * T) ≡ (a + B * K) * T
-    regroup = solve (a ∷ B ∷ K ∷ T ∷ [])
+    regroup = scaleRegroup a B K T
 
     targetNN : 0ℚ ≤ T
     targetNN =
@@ -136,9 +143,10 @@ scaleMatchedProductFitsEveryBlock
   Cap.removeDataRemainderFromHeadroom A B X (gap * T) totalFits
 
 scaleMatchedUniformProductCapacity :
-  ∀ {balances data block identification} →
+  ∀ {balances recursionData block identification} →
   ScaleMatchedFixedShiftCapacityData
-    {balances = balances} {data = data} {block = block} identification →
+    {balances = balances} {recursionData = recursionData}
+    {block = block} identification →
   Capacity.UniformFixedShiftProductCapacity identification
 scaleMatchedUniformProductCapacity scaleData = record
   { uniformCoefficient = uniformCoefficient scaleData

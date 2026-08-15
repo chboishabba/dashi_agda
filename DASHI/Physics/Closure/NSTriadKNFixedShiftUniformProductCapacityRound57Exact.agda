@@ -42,7 +42,7 @@ open import Data.Rational.Base using
   (ℚ; 0ℚ; _+_; _-_; _*_; _≤_; _<_; nonNegative)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 import DASHI.Physics.Closure.NSTriadKNAdmissibleOwnerTaxLanguageRound28Exact as Owner
 import DASHI.Physics.Closure.NSTriadKNNineOwnerCriticalAbsorptionRound28Exact as Nine
@@ -52,9 +52,9 @@ import DASHI.Physics.Closure.NSTriadKNLuoFixedShiftRecursionReductionExact as Fi
 import DASHI.Physics.Closure.NSTriadKNLuoRationalFixedBlockInductionExact as Block
 
 residualCorrectionHeadroom :
-  ∀ {balances data block}
+  ∀ {balances recursionData block}
     (identification : Headroom.PhysicalOwnerBlockCorrectionIdentification
-      balances data block) →
+      balances recursionData block) →
     Nat → ℚ
 residualCorrectionHeadroom {balances} {block = block} identification n =
   Headroom.fixedShiftCorrectionHeadroom block n
@@ -62,10 +62,10 @@ residualCorrectionHeadroom {balances} {block = block} identification n =
 
 record UniformFixedShiftProductCapacity
     {balances : Nat → Nine.NineOwnerCriticalBalance}
-    {data : Fixed.FixedShiftRecursionPhysicalData}
+    {recursionData : Fixed.FixedShiftRecursionPhysicalData}
     {block : Block.RationalFixedBlockDecay}
     (identification : Headroom.PhysicalOwnerBlockCorrectionIdentification
-      balances data block) : Set where
+      balances recursionData block) : Set where
   field
     uniformCoefficient : ℚ
     uniformCoefficientPositive : 0ℚ < uniformCoefficient
@@ -81,9 +81,9 @@ record UniformFixedShiftProductCapacity
 open UniformFixedShiftProductCapacity public
 
 smallerNonnegativeCoefficientFitsEveryBlock :
-  ∀ {balances data block}
+  ∀ {balances recursionData block}
     {identification : Headroom.PhysicalOwnerBlockCorrectionIdentification
-      balances data block} →
+      balances recursionData block} →
   (capacity : UniformFixedShiftProductCapacity identification) →
   (coefficient : ℚ) →
   0ℚ ≤ coefficient →
@@ -91,9 +91,11 @@ smallerNonnegativeCoefficientFitsEveryBlock :
   ∀ n →
   coefficient * Owner.integralCritical (Nine.environment (balances n))
   ≤ residualCorrectionHeadroom identification n
-smallerNonnegativeCoefficientFitsEveryBlock capacity coefficient coefficientNN coefficientBelow n =
+smallerNonnegativeCoefficientFitsEveryBlock
+  {balances = balances}
+  capacity coefficient coefficientNN coefficientBelow n =
   let
-    critical = Owner.integralCritical (Nine.environment _)
+    critical = Owner.integralCritical (Nine.environment (balances n))
     scaled :
       coefficient * critical
       ≤ uniformCoefficient capacity * critical
@@ -104,9 +106,9 @@ smallerNonnegativeCoefficientFitsEveryBlock capacity coefficient coefficientNN c
   ℚP.≤-trans scaled (uniformProductFitsEveryBlock capacity n)
 
 uniformCoefficientPlusDataFitsFullCorrectionHeadroom :
-  ∀ {balances data block}
+  ∀ {balances recursionData block}
     {identification : Headroom.PhysicalOwnerBlockCorrectionIdentification
-      balances data block} →
+      balances recursionData block} →
   (capacity : UniformFixedShiftProductCapacity identification) →
   ∀ n →
   Round53.ownerAggregateDataRemainder (balances n)
@@ -117,6 +119,7 @@ uniformCoefficientPlusDataFitsFullCorrectionHeadroom
     {balances} {block = block} {identification = identification} capacity n =
   let
     A = Round53.ownerAggregateDataRemainder (balances n)
+    negA = Data.Rational.Base.-_ A
     Bx = uniformCoefficient capacity
       * Owner.integralCritical (Nine.environment (balances n))
     R = Headroom.fixedShiftCorrectionHeadroom block n
@@ -127,7 +130,16 @@ uniformCoefficientPlusDataFitsFullCorrectionHeadroom
     addA = ℚP.+-monoʳ-≤ A productFits
 
     endpoint : A + (R - A) ≡ R
-    endpoint = solve (A ∷ R ∷ [])
+    endpoint =
+      trans
+        (sym (ℚP.+-assoc A R negA))
+        (trans
+          (cong (_+ negA) (ℚP.+-comm A R))
+          (trans
+            (ℚP.+-assoc R A negA)
+            (trans
+              (cong (R +_) (ℚP.+-inverseʳ A))
+              (ℚP.+-identityʳ R))))
   in
   subst (λ right → A + Bx ≤ right) endpoint addA
 

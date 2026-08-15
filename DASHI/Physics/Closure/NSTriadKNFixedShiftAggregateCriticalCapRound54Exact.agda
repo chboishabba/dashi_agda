@@ -43,7 +43,7 @@ open import Data.Rational.Base using
   (ℚ; 0ℚ; 1ℚ; _+_; _-_; -_; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 import DASHI.Physics.Closure.NSTriadKNAdmissibleOwnerTaxLanguageRound28Exact as Owner
 import DASHI.Physics.Closure.NSTriadKNNineOwnerCriticalAbsorptionRound28Exact as Nine
@@ -93,16 +93,17 @@ inverseTimesCriticalProduct :
   ≡ coefficient
 inverseTimesCriticalProduct {environment} reciprocal coefficient =
   let
+    inv = criticalInverse reciprocal
+    integral = Owner.integralCritical environment
     regroup :
-      criticalInverse reciprocal
-        * (coefficient * Owner.integralCritical environment)
-      ≡ coefficient
-        * (criticalInverse reciprocal * Owner.integralCritical environment)
-    regroup = solve
-      ( criticalInverse reciprocal
-      ∷ coefficient
-      ∷ Owner.integralCritical environment
-      ∷ [])
+      inv * (coefficient * integral)
+      ≡ coefficient * (inv * integral)
+    regroup =
+      trans
+        (sym (ℚP.*-assoc inv coefficient integral))
+        (trans
+          (cong (_* integral) (ℚP.*-comm inv coefficient))
+          (ℚP.*-assoc coefficient inv integral))
 
     cancel :
       coefficient
@@ -113,9 +114,9 @@ inverseTimesCriticalProduct {environment} reciprocal coefficient =
   trans regroup (trans cancel (ℚP.*-identityʳ coefficient))
 
 ownerAggregateCriticalTimesIntegralBelowResidualHeadroom :
-  ∀ {balances data block} →
+  ∀ {balances recursionData block} →
   (identification : Headroom.PhysicalOwnerBlockCorrectionIdentification
-    balances data block) →
+    balances recursionData block) →
   (n : Nat) →
   Round53.ownerAggregateCriticalCoefficient (balances n)
     * Owner.integralCritical (Nine.environment (balances n))
@@ -131,9 +132,9 @@ ownerAggregateCriticalTimesIntegralBelowResidualHeadroom
     (Headroom.physicalOwnerAggregateBelowFixedShiftHeadroom identification n)
 
 physicalAggregateCriticalCoefficientCap :
-  ∀ {balances data block} →
+  ∀ {balances recursionData block} →
   (identification : Headroom.PhysicalOwnerBlockCorrectionIdentification
-    balances data block) →
+    balances recursionData block) →
   (n : Nat) →
   (reciprocal : CriticalIntegralReciprocal
     (Nine.environment (balances n))) →

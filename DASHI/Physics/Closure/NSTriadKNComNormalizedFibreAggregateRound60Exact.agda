@@ -26,7 +26,7 @@ module DASHI.Physics.Closure.NSTriadKNComNormalizedFibreAggregateRound60Exact wh
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (true; false)
-open import Agda.Builtin.Equality using (refl)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Agda.Builtin.Nat using (Nat; suc)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _≤_; _/_)
@@ -49,7 +49,7 @@ targetArithmetic :
     + Gram.adjacentShellTarget
     + Gram.adjacentShellTarget
   ≡ bandwidthOneTarget
-targetArithmetic = solve []
+targetArithmetic = refl
 
 sameTargetNonnegative : 0ℚ ≤ Gram.sameShellTarget
 sameTargetNonnegative = toWitness {a? = 0ℚ ≤? Gram.sameShellTarget} _
@@ -63,12 +63,13 @@ samePairBelow :
   (q : Nat) →
   Gram.pairProduct (Source.realization source) q q ≤ Gram.sameShellTarget
 samePairBelow source q
-  with Hat.supportActive (Source.support source) q q
-... | true = Gram.sameShellBound (Source.bounds source) q refl
+  with Hat.supportActive (Source.support source) q q in activeProof
+... | true = Gram.sameShellBound (Source.bounds source) q activeProof
 ... | false =
   subst
     (λ left → left ≤ Gram.sameShellTarget)
-    (sym (Source.inactiveSupportAnnihilatesPairProduct source q q refl))
+    (sym
+      (Source.inactiveSupportAnnihilatesPairProduct source q q activeProof))
     sameTargetNonnegative
 
 forwardAdjacentPairBelow :
@@ -77,14 +78,14 @@ forwardAdjacentPairBelow :
   Gram.pairProduct (Source.realization source) q (suc q)
   ≤ Gram.adjacentShellTarget
 forwardAdjacentPairBelow source q
-  with Hat.supportActive (Source.support source) q (suc q)
-... | true = Gram.forwardAdjacentBound (Source.bounds source) q refl
+  with Hat.supportActive (Source.support source) q (suc q) in activeProof
+... | true = Gram.forwardAdjacentBound (Source.bounds source) q activeProof
 ... | false =
   subst
     (λ left → left ≤ Gram.adjacentShellTarget)
     (sym
       (Source.inactiveSupportAnnihilatesPairProduct
-        source q (suc q) refl))
+        source q (suc q) activeProof))
     adjacentTargetNonnegative
 
 reverseAdjacentPairBelow :
@@ -93,14 +94,14 @@ reverseAdjacentPairBelow :
   Gram.pairProduct (Source.realization source) (suc q) q
   ≤ Gram.adjacentShellTarget
 reverseAdjacentPairBelow source q
-  with Hat.supportActive (Source.support source) (suc q) q
-... | true = Gram.reverseAdjacentBound (Source.bounds source) q refl
+  with Hat.supportActive (Source.support source) (suc q) q in activeProof
+... | true = Gram.reverseAdjacentBound (Source.bounds source) q activeProof
 ... | false =
   subst
     (λ left → left ≤ Gram.adjacentShellTarget)
     (sym
       (Source.inactiveSupportAnnihilatesPairProduct
-        source (suc q) q refl))
+        source (suc q) q activeProof))
     adjacentTargetNonnegative
 
 normalizedOddPQBandwidthOneMass :
