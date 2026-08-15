@@ -6,10 +6,10 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound52SourceRGFederbushVa
 -- This round combines the two shortest currently available routes:
 --
 -- G1 / source chart:
---   physical T_j = Ad_{U_j V^-1}
---   + identity-chart chord control
---     -> col(T_j-I) <= rho/4
---   + principal-log defect col(J_j-I) <= rho/8
+--   principal-log scalar endpoint modulus + selected coordinates
+--     -> col(J_j-I) <= rho/8
+--   physical T_j = Ad_{U_j V^-1} + identity-chart chord control
+--     -> col(T_j-I) <= rho/4 and col(T_j) <= 3
 --     -> local col(J_j T_j-I) <= 1/4
 --     -> normalized contour-average quarter contraction
 --     -> determinant-free 4/3 inverse bound.
@@ -30,16 +30,15 @@ import DASHI.Physics.YangMills.BalabanCMP109FederbushLogTransportToNormalizedInv
 import DASHI.Physics.YangMills.BalabanCMP109FederbushTransportResidualControlsNormExact as TransportNorm
 import DASHI.Physics.YangMills.BalabanCMP109FederbushPrimitiveDefectsToNormalizedInverseExact as Primitive
 import DASHI.Physics.YangMills.BalabanCMP109FederbushTransportDefectFromIdentityChartExact as TransportChart
+import DASHI.Physics.YangMills.BalabanCMP109PrincipalLogDefectFromEndpointModulusExact as LogEndpoint
 import DASHI.Physics.YangMills.BalabanCMP109FederbushPhysicalChartToNormalizedInverseExact as PhysicalChart
+import DASHI.Physics.YangMills.BalabanCMP109FederbushCoefficientChartToInverseExact as CoefficientChart
 import DASHI.Physics.YangMills.BalabanClayGate4LightweightValidation as Gate4
 import DASHI.Physics.YangMills.Balaban1989CompleteDensityToYM4RegionExact as Complete
 import DASHI.Physics.YangMills.Balaban1989CanonicalYM4StateFromSection2Exact as Canonical
 
 federbushLogTransportToLocalResidualLevel =
   Fed.cmp109FederbushLogTransportToLocalResidualLevel
-
-federbushLogTransportToNormalizedInverseLevel =
-  Fed.cmp109FederbushLogTransportToNormalizedInverseLevel
 
 federbushTransportDefectControlsNormLevel =
   TransportNorm.cmp109FederbushTransportDefectControlsNormLevel
@@ -50,11 +49,20 @@ federbushPrimitiveDefectsToInverseLevel =
 federbushTransportDefectFromIdentityChartLevel =
   TransportChart.cmp109FederbushTransportDefectFromIdentityChartLevel
 
+principalLogEndpointModulusToDefectLevel =
+  LogEndpoint.cmp109PrincipalLogEndpointModulusToDefectLevel
+
+principalLogBishopCoefficientToRationalLevel =
+  LogEndpoint.cmp109PrincipalLogBishopCoefficientToRationalLevel
+
 federbushPhysicalChartToInverseLevel =
   PhysicalChart.cmp109FederbushPhysicalChartToInverseLevel
 
-federbushSelectedChartLeavesLevel =
-  PhysicalChart.physicalCMP109FederbushSelectedChartLeavesLevel
+federbushCoefficientChartToInverseLevel =
+  CoefficientChart.cmp109FederbushCoefficientChartToInverseLevel
+
+federbushCoefficientAndChordInputsLevel =
+  CoefficientChart.physicalCMP109FederbushCoefficientAndChordInputsLevel
 
 completeDensityToYM4RegionAssemblyLevel =
   Complete.balabanCompleteDensityToYM4RegionAssemblyLevel
