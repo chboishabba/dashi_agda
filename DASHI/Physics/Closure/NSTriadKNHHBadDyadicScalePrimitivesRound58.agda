@@ -41,3 +41,11 @@ dyadicScaleNonnegative (suc shell) =
     productNN =
       ℚP.nonNeg*nonNeg⇒nonNeg two (dyadicScale shell)
   in ℚP.nonNegative⁻¹ (two * dyadicScale shell)
+
+successorDyadicScale : ∀ shell →
+  dyadicScale (suc shell) ≡ two * dyadicScale shell
+successorDyadicScale shell = refl
+
+successorInverseDyadicScale : ∀ shell →
+  inverseDyadicScale (suc shell) ≡ half * inverseDyadicScale shell
+successorInverseDyadicScale shell = refl

@@ -9,6 +9,7 @@ module DASHI.Physics.Closure.NSTriadKNFixedShiftPhysicalCapacityLeafRound58 wher
 -- import the complete consumer graph.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ; 0ℚ; _-_; _*_; _≤_; _<_; nonNegative)
@@ -52,6 +53,21 @@ record UniformFixedShiftProductCapacity
       ≤ correctionHeadroomAfterData correctionHeadroom dataRemainder n
 
 open UniformFixedShiftProductCapacity public
+
+-- The positive uniform coefficient is still an analytic input.  In
+-- particular, same-object transport does not manufacture it from the block
+-- formula.  This explicit status is consumed by audit tooling and remains
+-- false until one rational B_* is derived uniformly in n.
+uniformPositiveCapacityDerived :
+  {integralCritical correctionHeadroom dataRemainder : Nat → ℚ} → Bool
+uniformPositiveCapacityDerived = false
+
+uniformPositiveCapacityDerivedIsFalse :
+  {integralCritical correctionHeadroom dataRemainder : Nat → ℚ} →
+  uniformPositiveCapacityDerived {integralCritical = integralCritical}
+    {correctionHeadroom = correctionHeadroom}
+    {dataRemainder = dataRemainder} ≡ false
+uniformPositiveCapacityDerivedIsFalse = refl
 
 smallerNonnegativeCoefficientFitsEveryBlock :
   ∀ {integralCritical correctionHeadroom dataRemainder}

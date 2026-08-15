@@ -97,42 +97,42 @@ FourierField model =
 shellProjector :
   ∀ {r} (model : PeriodicHardShellFourierPDE {r}) →
   Nat → FourierField model → FourierField model
-shellProjector model shell field mode
+shellProjector model shell carrier mode
   with shellSelect model shell mode
-... | true = field mode
+... | true = carrier mode
 ... | false = nothing
 
 lowProjector :
   ∀ {r} (model : PeriodicHardShellFourierPDE {r}) →
   Nat → FourierField model → FourierField model
-lowProjector model cutoff field mode
+lowProjector model cutoff carrier mode
   with lowSelect model cutoff mode
-... | true = field mode
+... | true = carrier mode
 ... | false = nothing
 
 fourierDerivative :
   ∀ {r} (model : PeriodicHardShellFourierPDE {r}) →
   FourierField model → FourierField model
-fourierDerivative model field mode =
+fourierDerivative model carrier mode =
   mapOptional
     (C3.complex3Scale (derivativeMultiplier model mode))
-    (field mode)
+    (carrier mode)
 
 fourierCurl :
   ∀ {r} (model : PeriodicHardShellFourierPDE {r}) →
   FourierField model → FourierField model
-fourierCurl model field mode =
-  mapOptional (curlMultiplier model mode) (field mode)
+fourierCurl model carrier mode =
+  mapOptional (curlMultiplier model mode) (carrier mode)
 
 shellProjectorCommutesWithDerivative :
   ∀ {r} (model : PeriodicHardShellFourierPDE {r}) →
   (shell : Nat) →
-  (field : FourierField model) →
+  (carrier : FourierField model) →
   (mode : Z3.FourierMode) →
-  fourierDerivative model (shellProjector model shell field) mode
+  fourierDerivative model (shellProjector model shell carrier) mode
     ≡
-  shellProjector model shell (fourierDerivative model field) mode
-shellProjectorCommutesWithDerivative model shell field mode
+  shellProjector model shell (fourierDerivative model carrier) mode
+shellProjectorCommutesWithDerivative model shell carrier mode
   with shellSelect model shell mode
 ... | true = refl
 ... | false = refl
@@ -140,12 +140,12 @@ shellProjectorCommutesWithDerivative model shell field mode
 shellProjectorCommutesWithCurl :
   ∀ {r} (model : PeriodicHardShellFourierPDE {r}) →
   (shell : Nat) →
-  (field : FourierField model) →
+  (carrier : FourierField model) →
   (mode : Z3.FourierMode) →
-  fourierCurl model (shellProjector model shell field) mode
+  fourierCurl model (shellProjector model shell carrier) mode
     ≡
-  shellProjector model shell (fourierCurl model field) mode
-shellProjectorCommutesWithCurl model shell field mode
+  shellProjector model shell (fourierCurl model carrier) mode
+shellProjectorCommutesWithCurl model shell carrier mode
   with shellSelect model shell mode
 ... | true = refl
 ... | false = refl
@@ -153,12 +153,12 @@ shellProjectorCommutesWithCurl model shell field mode
 lowProjectorCommutesWithDerivative :
   ∀ {r} (model : PeriodicHardShellFourierPDE {r}) →
   (cutoff : Nat) →
-  (field : FourierField model) →
+  (carrier : FourierField model) →
   (mode : Z3.FourierMode) →
-  fourierDerivative model (lowProjector model cutoff field) mode
+  fourierDerivative model (lowProjector model cutoff carrier) mode
     ≡
-  lowProjector model cutoff (fourierDerivative model field) mode
-lowProjectorCommutesWithDerivative model cutoff field mode
+  lowProjector model cutoff (fourierDerivative model carrier) mode
+lowProjectorCommutesWithDerivative model cutoff carrier mode
   with lowSelect model cutoff mode
 ... | true = refl
 ... | false = refl
@@ -166,32 +166,32 @@ lowProjectorCommutesWithDerivative model cutoff field mode
 lowProjectorCommutesWithCurl :
   ∀ {r} (model : PeriodicHardShellFourierPDE {r}) →
   (cutoff : Nat) →
-  (field : FourierField model) →
+  (carrier : FourierField model) →
   (mode : Z3.FourierMode) →
-  fourierCurl model (lowProjector model cutoff field) mode
+  fourierCurl model (lowProjector model cutoff carrier) mode
     ≡
-  lowProjector model cutoff (fourierCurl model field) mode
-lowProjectorCommutesWithCurl model cutoff field mode
+  lowProjector model cutoff (fourierCurl model carrier) mode
+lowProjectorCommutesWithCurl model cutoff carrier mode
   with lowSelect model cutoff mode
 ... | true = refl
 ... | false = refl
 
 ownedShellReconstructsMode :
   ∀ {r} (model : PeriodicHardShellFourierPDE {r}) →
-  (field : FourierField model) →
+  (carrier : FourierField model) →
   (mode : Z3.FourierMode) →
-  shellProjector model (shellOwner model mode) field mode
-    ≡ field mode
-ownedShellReconstructsMode model field mode
+  shellProjector model (shellOwner model mode) carrier mode
+    ≡ carrier mode
+ownedShellReconstructsMode model carrier mode
   rewrite ownerSelected model mode = refl
 
 ownedLowPassReconstructsMode :
   ∀ {r} (model : PeriodicHardShellFourierPDE {r}) →
-  (field : FourierField model) →
+  (carrier : FourierField model) →
   (mode : Z3.FourierMode) →
-  lowProjector model (shellOwner model mode) field mode
-    ≡ field mode
-ownedLowPassReconstructsMode model field mode
+  lowProjector model (shellOwner model mode) carrier mode
+    ≡ carrier mode
+ownedLowPassReconstructsMode model carrier mode
   rewrite ownerIncludedInOwnLowPass model mode = refl
 
 ------------------------------------------------------------------------

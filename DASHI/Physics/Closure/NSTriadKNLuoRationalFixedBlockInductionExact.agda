@@ -65,12 +65,14 @@ open RationalFixedBlockDecay public
 powerNonnegative :
   (ratio : ℚ) → 0ℚ ≤ ratio →
   (n : Nat) → 0ℚ ≤ power ratio n
-powerNonnegative ratio ratioNN zero = ℚₚ.0≤1
+powerNonnegative ratio ratioNN zero = ℚₚ.nonNegative⁻¹ 1ℚ
 powerNonnegative ratio ratioNN (suc n) =
   let
     instance
       ratioNonnegative = nonNegative ratioNN
       tailNonnegative = nonNegative (powerNonnegative ratio ratioNN n)
+      productNonnegative =
+        ℚₚ.nonNeg*nonNeg⇒nonNeg ratio (power ratio n)
   in
   ℚₚ.nonNegative⁻¹ (ratio * power ratio n)
 
@@ -84,6 +86,8 @@ scaledTargetNonnegative constant ratio constantNN ratioNN n =
       constantNonnegative = nonNegative constantNN
       powerNonnegativeInstance =
         nonNegative (powerNonnegative ratio ratioNN n)
+      scaledTargetNonnegativeInstance =
+        ℚₚ.nonNeg*nonNeg⇒nonNeg constant (power ratio n)
   in
   ℚₚ.nonNegative⁻¹ (scaledTarget constant ratio n)
 
@@ -109,13 +113,16 @@ combineStepBudgets :
   (r certificate - q certificate)
       * scaledTarget (constant certificate) (r certificate) n
   ≡ scaledTarget (constant certificate) (r certificate) (suc n)
+private
+  combineStepBudgetsAlgebra :
+    (q r c p : ℚ) →
+    q * (c * p) + (r - q) * (c * p) ≡ c * (r * p)
+  combineStepBudgetsAlgebra q r c p = solve (q ∷ r ∷ c ∷ p ∷ [])
+
 combineStepBudgets certificate n =
-  solve
-    (q certificate
-      ∷ r certificate
-      ∷ constant certificate
-      ∷ power (r certificate) n
-      ∷ [])
+  combineStepBudgetsAlgebra
+    (q certificate) (r certificate) (constant certificate)
+    (power (r certificate) n)
 
 fixedBlockDecay :
   (certificate : RationalFixedBlockDecay) →

@@ -50,25 +50,27 @@ import DASHI.Physics.Closure.NSTriadKNLuoFixedShiftRecursionReductionExact as Fi
 
 physicalFixedShiftRecursionCoefficientFormula :
   Fixed.FixedShiftRecursionPhysicalData → ℚ
-physicalFixedShiftRecursionCoefficientFormula data =
-  Fixed.correctedShiftCoefficient data
+physicalFixedShiftRecursionCoefficientFormula physicalData =
+  Fixed.correctedShiftCoefficient physicalData
 
 physicalFixedShiftAdditiveCorrectionFormula :
   Fixed.FixedShiftRecursionPhysicalData → Nat → ℚ
-physicalFixedShiftAdditiveCorrectionFormula data shell =
-  Fixed.integratedFluxCorrection data shell
+physicalFixedShiftAdditiveCorrectionFormula physicalData shell =
+  Fixed.integratedFluxCorrection physicalData shell
 
 fixedShiftRhsFormula :
-  (data : Fixed.FixedShiftRecursionPhysicalData) →
+  (physicalData : Fixed.FixedShiftRecursionPhysicalData) →
   (shell : Nat) →
-  physicalFixedShiftRecursionCoefficientFormula data
-    * Fixed.cutoffDissipation data (Fixed.predecessorByFixedShift data shell)
-    + physicalFixedShiftAdditiveCorrectionFormula data shell
+  physicalFixedShiftRecursionCoefficientFormula physicalData
+    * Fixed.cutoffDissipation physicalData
+        (Fixed.predecessorByFixedShift physicalData shell)
+    + physicalFixedShiftAdditiveCorrectionFormula physicalData shell
   ≡
-  Fixed.correctedShiftCoefficient data
-    * Fixed.cutoffDissipation data (Fixed.predecessorByFixedShift data shell)
-    + Fixed.integratedFluxCorrection data shell
-fixedShiftRhsFormula data shell = refl
+  Fixed.correctedShiftCoefficient physicalData
+    * Fixed.cutoffDissipation physicalData
+        (Fixed.predecessorByFixedShift physicalData shell)
+    + Fixed.integratedFluxCorrection physicalData shell
+fixedShiftRhsFormula physicalData shell = refl
 
 ownerAggregateCriticalCoefficient :
   Nine.NineOwnerCriticalBalance → ℚ
@@ -92,47 +94,49 @@ ownerRemainderFormula balance = refl
 
 record SameObjectOwnerToFixedShiftCorrection
     (balances : Nat → Nine.NineOwnerCriticalBalance)
-    (data : Fixed.FixedShiftRecursionPhysicalData) : Set where
+    (physicalData : Fixed.FixedShiftRecursionPhysicalData) : Set where
   field
     ownerRemainderIsFluxCorrection : ∀ shell →
       Nine.admissibleRemainder (balances shell)
-      ≡ Fixed.integratedFluxCorrection data shell
+      ≡ Fixed.integratedFluxCorrection physicalData shell
 
 open SameObjectOwnerToFixedShiftCorrection public
 
 ownerCriticalAggregateLivesInAdditiveCorrection :
-  ∀ {balances data} →
-  SameObjectOwnerToFixedShiftCorrection balances data →
+  ∀ {balances physicalData} →
+  SameObjectOwnerToFixedShiftCorrection balances physicalData →
   (shell : Nat) →
-  physicalFixedShiftAdditiveCorrectionFormula data shell
+  physicalFixedShiftAdditiveCorrectionFormula physicalData shell
   ≡ ownerAggregateDataRemainder (balances shell)
       + ownerAggregateCriticalCoefficient (balances shell)
         * Owner.integralCritical (Nine.environment (balances shell))
-ownerCriticalAggregateLivesInAdditiveCorrection {balances} {data} same shell =
+ownerCriticalAggregateLivesInAdditiveCorrection
+  {balances} {physicalData} same shell =
   trans
     (sym (ownerRemainderIsFluxCorrection same shell))
     (ownerRemainderFormula (balances shell))
 
 record AdditiveCorrectionTargetCap
     (balances : Nat → Nine.NineOwnerCriticalBalance)
-    (data : Fixed.FixedShiftRecursionPhysicalData)
-    (same : SameObjectOwnerToFixedShiftCorrection balances data) : Set where
+    (physicalData : Fixed.FixedShiftRecursionPhysicalData)
+    (same : SameObjectOwnerToFixedShiftCorrection balances physicalData) : Set where
   field
     correctionTarget : Nat → ℚ
     physicalFluxCorrectionBelowTarget : ∀ shell →
-      Fixed.integratedFluxCorrection data shell ≤ correctionTarget shell
+      Fixed.integratedFluxCorrection physicalData shell ≤ correctionTarget shell
 
 open AdditiveCorrectionTargetCap public
 
 ownerAggregateRemainderBelowCorrectionTarget :
-  ∀ {balances data same} →
-  (cap : AdditiveCorrectionTargetCap balances data same) →
+  ∀ {balances physicalData same} →
+  (cap : AdditiveCorrectionTargetCap balances physicalData same) →
   (shell : Nat) →
   ownerAggregateDataRemainder (balances shell)
     + ownerAggregateCriticalCoefficient (balances shell)
       * Owner.integralCritical (Nine.environment (balances shell))
   ≤ correctionTarget cap shell
-ownerAggregateRemainderBelowCorrectionTarget {balances} {data} {same} cap shell =
+ownerAggregateRemainderBelowCorrectionTarget
+  {balances} {physicalData} {same} cap shell =
   subst
     (λ left → left ≤ correctionTarget cap shell)
     (ownerCriticalAggregateLivesInAdditiveCorrection same shell)

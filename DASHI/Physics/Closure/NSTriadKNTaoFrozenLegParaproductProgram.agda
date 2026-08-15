@@ -52,12 +52,20 @@ roleUnderFreeze freezeRight rightLeg = frozen
 roleUnderFreeze freezeRight outputLeg = inputA
 
 data AbsoluteTrichotomy : Set where
-  leftLow rightLow outputLow
-  comparable transition residual : AbsoluteTrichotomy
+  leftLow : AbsoluteTrichotomy
+  rightLow : AbsoluteTrichotomy
+  outputLow : AbsoluteTrichotomy
+  comparable : AbsoluteTrichotomy
+  transition : AbsoluteTrichotomy
+  residual : AbsoluteTrichotomy
 
 data RelativeParaproductClass : Set where
-  lowHigh highLow highHighToLow
-  nearClass transitionClass residualClass : RelativeParaproductClass
+  lowHigh : RelativeParaproductClass
+  highLow : RelativeParaproductClass
+  highHighToLow : RelativeParaproductClass
+  nearClass : RelativeParaproductClass
+  transitionClass : RelativeParaproductClass
+  residualClass : RelativeParaproductClass
 
 classUnderFreeze : FrozenLeg → AbsoluteTrichotomy → RelativeParaproductClass
 classUnderFreeze freezeOutput leftLow = lowHigh

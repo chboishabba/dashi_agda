@@ -13,17 +13,21 @@ open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ)
 
 import DASHI.Physics.Closure.NSTriadKNHHBadPhysicalTransferSurfaceRound58 as A
-import DASHI.Physics.Closure.NSTriadKNComCommonHatSupportLeafRound58 as BHat
-import DASHI.Physics.Closure.NSTriadKNComNormalizedFibreMassLeafRound58 as BGram
+import DASHI.Physics.Closure.NSTriadKNHHBadPhysicalDuhamelSourceRound59 as ASource
+import DASHI.Physics.Closure.NSTriadKNComNormalizedFibreSourceAdapterRound58 as BSource
 import DASHI.Physics.Closure.NSTriadKNFixedShiftPhysicalCapacityLeafRound58 as C
 
 record ABCLeafAssembly : Set₁ where
   field
     hhBadTransfer : A.PhysicalDyadicThreeMechanismTransfer
+    hhBadPhysicalSource : ASource.PhysicalLocalizedDuhamelSource
+    hhBadTransferUsesPhysicalSource :
+      A.source hhBadTransfer
+      ≡ ASource.asLocalizedSource hhBadPhysicalSource
 
-    comSupport : BHat.PhysicalOddPQCommonHatIdentification
-    comGram : BGram.PhysicalNormalizedOddPQGramRealization comSupport
-    comBounds : BGram.SameAdjacentNormalizedFibreMassBounds comGram
+    -- One canonical B source owns the literal output-fibre support, normalized
+    -- Gram mass, off-support annihilation, and all three active bounds.
+    comSource : BSource.PhysicalNormalizedOddPQSource
 
     integralCritical correctionHeadroom dataRemainder : Nat → ℚ
     ownerFluxBlock : C.PhysicalOwnerFluxBlockIdentification

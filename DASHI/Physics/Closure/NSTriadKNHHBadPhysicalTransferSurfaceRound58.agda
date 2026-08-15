@@ -7,19 +7,50 @@ open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_; _<_
 import DASHI.Physics.Closure.NSTriadKNHHBadPositiveThresholdRound58 as Threshold
 import DASHI.Physics.Closure.NSTriadKNHHBadDyadicScalePrimitivesRound58 as Scale
 
-record PhysicalDyadicThreeMechanismTransfer : Set where
+------------------------------------------------------------------------
+-- Canonical localized source.
+--
+-- The transfer carrier below remains the analytic proof boundary, but its
+-- component functions are now tied to one shell-localized Duhamel source.
+-- This prevents an adapter from silently combining a defect from one source
+-- with inherited/generated/leakage terms from another source.
+------------------------------------------------------------------------
+
+record LocalizedDuhamelSource : Set where
   field
     parameter : Threshold.PositiveThreshold
-
     defectRate : Nat → ℚ
+    inheritedCoefficient generated leakage : Nat → ℚ
+    ceiling alpha beta : ℚ
+
+open LocalizedDuhamelSource public
+
+record PhysicalDyadicThreeMechanismTransfer : Set where
+  field
+    source : LocalizedDuhamelSource
+
+    parameter : Threshold.PositiveThreshold
+    defectRate : Nat → ℚ
+    inheritedCoefficient generated leakage : Nat → ℚ
+    ceiling alpha beta : ℚ
+
+    -- These equalities are source identity, not new analytic assumptions.
+    -- They make the legacy recurrence projections canonical views of `source`.
+    sourceParameter : parameter ≡ parameter source
+    sourceDefectRate : defectRate ≡ defectRate source
+    sourceInheritedCoefficient : inheritedCoefficient ≡ inheritedCoefficient source
+    sourceGenerated : generated ≡ generated source
+    sourceLeakage : leakage ≡ leakage source
+    sourceCeiling : ceiling ≡ ceiling source
+    sourceAlpha : alpha ≡ alpha source
+    sourceBeta : beta ≡ beta source
+
     defectRateNonnegative : ∀ q → 0ℚ ≤ defectRate q
 
-    inheritedCoefficient generated leakage : Nat → ℚ
     inheritedCoefficientNonnegative : ∀ q → 0ℚ ≤ inheritedCoefficient q
     generatedNonnegative : ∀ q → 0ℚ ≤ generated q
     leakageNonnegative : ∀ q → 0ℚ ≤ leakage q
 
-    ceiling alpha beta : ℚ
     ceilingNonnegative : 0ℚ ≤ ceiling
     alphaNonnegative : 0ℚ ≤ alpha
     betaNonnegative : 0ℚ ≤ beta
