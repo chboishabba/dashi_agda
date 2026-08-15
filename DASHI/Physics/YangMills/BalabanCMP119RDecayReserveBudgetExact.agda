@@ -39,9 +39,10 @@ module DASHI.Physics.YangMills.BalabanCMP119RDecayReserveBudgetExact where
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Integer.Base using (+_)
-open import Data.Rational.Base as ℚ using (ℚ; _+_; _≤_; _/_)
+open import Data.Rational.Base as ℚ using (ℚ; _+_; _-_; _≤_; _/_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
+open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -68,8 +69,6 @@ allThreeFitSourceFloor =
     (λ left → left ≤ sourceReserveFloor)
     threeWayReserveExact
     ℚP.≤-refl
-  where
-  open import Relation.Binary.PropositionalEquality using (subst)
 
 cmp119Equation231ArbitraryRDecayReserveLevel : ProofLevel
 cmp119Equation231ArbitraryRDecayReserveLevel = standardImported
