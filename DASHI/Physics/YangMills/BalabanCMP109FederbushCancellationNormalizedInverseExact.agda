@@ -25,16 +25,16 @@ module DASHI.Physics.YangMills.BalabanCMP109FederbushCancellationNormalizedInver
 --       J_+(Y) Ad_{exp Y} = J_-(Y)
 --
 -- at the finite rational matrix boundary.  A caller identifies each physical
--- component J_j T_j with the opposite-trivialization inverse-dexp matrix and
--- supplies its source-radius defect bound.  The normalized residual is then
--- controlled directly, without separately paying for T_j-I.
+-- component J_j T_j with the opposite-trivialization inverse-dexp matrix.
 --
--- At |Y|<=1/12 the source inverse-dexp envelope
+-- We deliberately consume the repository's CHECKED coarse l1 source-radius
+-- bound
 --
---       t/2 + t^2/6 = 37/864
+--       col(J_-(Y)-I) <= (5/3 + 1/1200)/12 < 1/4,
 --
--- is already far below 1/4.  Thus the component cancellation gives a much
--- larger conditioning margin than the earlier triangle budget.
+-- rather than claiming the sharper t/2+t^2/6 operator envelope already lives
+-- in the identical matrix norm.  This keeps the source/rational norm dictionary
+-- fail-closed while still giving the normalized 4/3 inverse with large slack.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
@@ -42,7 +42,6 @@ open import Agda.Builtin.List using (List)
 open import Data.List.Base using (length)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; 1ℚ; _-_; _*_; _≤_; ∣_∣)
-import Data.Rational.Properties as ℚP
 open import Relation.Binary.PropositionalEquality using (cong; subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -56,8 +55,7 @@ import DASHI.Physics.YangMills.BalabanCMP109FederbushNormalizedJacobianExact as 
 import DASHI.Physics.YangMills.BalabanCMP109FederbushComponentResidualExact as Component
 import DASHI.Physics.YangMills.BalabanCMP109FederbushNormalizedResidualReopeningExact as Normalized
 import DASHI.Physics.YangMills.BalabanCMP109FederbushQuarterReopeningExact as Quarter
-import DASHI.Physics.YangMills.BalabanCMP109FederbushSourceScaleQuarterExact as SourceScale
-import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
+import DASHI.Physics.YangMills.BalabanCMP109PrincipalLogSourceRadiusDefectExact as SourceLog
 
 record FederbushCancellationData (Index : Set) : Set₁ where
   field
@@ -77,7 +75,7 @@ record FederbushCancellationData (Index : Set) : Set₁ where
     oppositeInverseDexpSourceDefect : ∀ index column →
       RectSchur.rectAbsoluteColumnMass Physical.lieCoordinates3
         (Component.logJacobianResidual (oppositeInverseDexp index)) column
-      ≤ SourceScale.sourceLogDefectBound
+      ≤ SourceLog.sourcePrincipalLogColumnBound
 
 open FederbushCancellationData public
 
@@ -98,13 +96,6 @@ componentResidualEqualsOppositeInverseDefect dataSet index row column =
     (λ value → value - Jacobian.identity3 row column)
     (componentCancellation dataSet index row column)
 
-sourceLogDefectFitsQuarter :
-  SourceScale.sourceLogDefectBound ≤ Quarter.oneQuarter
-sourceLogDefectFitsQuarter =
-  Norm.nonnegativeDifferenceImpliesBelow
-    (ℚP.nonNegative⁻¹
-      (Quarter.oneQuarter - SourceScale.sourceLogDefectBound))
-
 localCancellationResidualQuarter :
   ∀ {Index} (dataSet : FederbushCancellationData Index) index column →
   RectSchur.rectAbsoluteColumnMass Physical.lieCoordinates3
@@ -123,12 +114,14 @@ localCancellationResidualQuarter dataSet index column =
         (componentResidualEqualsOppositeInverseDefect
           dataSet index row column))
   in
-  ℚP.≤-trans
+  Data.Rational.Properties.≤-trans
     (subst
-      (λ lower → lower ≤ SourceScale.sourceLogDefectBound)
+      (λ lower → lower ≤ SourceLog.sourcePrincipalLogColumnBound)
       identify
       (oppositeInverseDexpSourceDefect dataSet index column))
-    sourceLogDefectFitsQuarter
+    SourceLog.sourcePrincipalLogColumnFitsQuarter
+  where
+  import Data.Rational.Properties
 
 asQuarterResidualData :
   ∀ {Index} → FederbushCancellationData Index →
@@ -177,7 +170,7 @@ cmp109FederbushCancellationFourThirdsInverseLevel : ProofLevel
 cmp109FederbushCancellationFourThirdsInverseLevel = machineChecked
 
 -- Remaining G1 identification: connect the Real reduced-operator cancellation
--- theorem to these literal rational 3x3 matrices and instantiate the opposite-
--- trivialization inverse-dexp source-radius defect bound.
+-- theorem to the literal rational 3x3 component matrix, and instantiate J_-(Y)
+-- with the source-radius principal-log polynomial/coefficient data.
 cmp109FederbushCancellationMatrixDictionaryLevel : ProofLevel
 cmp109FederbushCancellationMatrixDictionaryLevel = conditional
