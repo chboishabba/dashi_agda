@@ -172,10 +172,6 @@ sixthPairsNonnegative dataSet =
     (sixthNonnegative (b7 dataSet) (b7NN dataSet))
     nnp[])))))))
 
--- Keep each product opaque to the ring solver.  The former proof passed all
--- sixteen x_i,y_i variables to `solve`, forcing Agda 2.9 to normalize the full
--- product polynomial.  Reassociating the eight already-formed products gives
--- the identical theorem while cutting the solver arity in half.
 eightPairDiagonalMeaning :
   (x0 y0 x1 y1 x2 y2 x3 y3 x4 y4 x5 y5 x6 y6 x7 y7 : ℚ) →
   x0 * y0 + x1 * y1 + x2 * y2 + x3 * y3
