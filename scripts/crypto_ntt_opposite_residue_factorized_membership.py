@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Benchmark exact parity-factorized membership for opposite FIPS NTT residues.
 
-Discovery/defensive research only.  This script does not recover ML-KEM keys.
+Discovery/defensive research only. This script does not recover ML-KEM keys.
 It tests one concrete consequence of the Round-17 opposite-residue theorem:
 for evaluation points (a,-a), the CBD coefficient block splits into independent
 even/odd source sectors, so the raw transformed error-image membership test can
@@ -52,6 +52,10 @@ def split_observation(pair: tuple[int, int]):
     return even, odd
 
 
+def join_sectors(even: int, odd: int):
+    return (even + odd) % Q, (even - odd) % Q
+
+
 def factorized_member(
     pair: tuple[int, int],
     even_image: set[int],
@@ -67,20 +71,19 @@ def exhaustive_membership_equivalence(m: int, a: int):
     full_image = set(signatures)
     even_image, odd_image = parity_images(m, a)
 
+    # No false negatives on every source-generated CBD block.
     for signature in signatures:
         assert factorized_member(signature, even_image, odd_image)
 
-    # Exhaustively test the Cartesian product of the two scalar coordinate
-    # projections actually present in the image.  This catches false positives,
-    # not just false negatives on source-generated signatures.
-    plus_values = {x[0] for x in full_image}
-    minus_values = {x[1] for x in full_image}
-    for plus in plus_values:
-        for minus in minus_values:
-            pair = (plus, minus)
-            assert (pair in full_image) == factorized_member(
-                pair, even_image, odd_image
-            )
+    # No false positives: every Cartesian parity-sector pair recombines to a
+    # source image point. This is only |E|*|O| checks (271,441 for m=8,a=17),
+    # rather than scanning the ambient F_q^2 carrier.
+    factorized_image = {
+        join_sectors(even, odd)
+        for even in even_image
+        for odd in odd_image
+    }
+    assert factorized_image == full_image
 
     return {
         "source_candidates": len(signatures),
@@ -88,6 +91,7 @@ def exhaustive_membership_equivalence(m: int, a: int):
         "even_image": len(even_image),
         "odd_image": len(odd_image),
         "factorized_scalar_entries": len(even_image) + len(odd_image),
+        "factorized_pair_capacity": len(even_image) * len(odd_image),
     }
 
 
