@@ -19,6 +19,7 @@ import DASHI.Physics.YangMills.BalabanCMP122Equation1100DirectExact as Eq1100
 import DASHI.Physics.YangMills.BalabanCMP122Equation1100EntropyBudgetExact as EqEntropy
 import DASHI.Physics.YangMills.BalabanCMP122Equation1100SharedSlackExact as EqSlack
 import DASHI.Physics.YangMills.BalabanCMP119RDecayReserveBudgetExact as Reserve
+import DASHI.Physics.YangMills.BalabanCMP119CMP122BoundaryReinjectionSourceExact as Boundary
 
 polymerAuditReady = Polymer.lightweightPolymerAuditReady
 polymerAuditNoPromotion = Polymer.lightweightPolymerAuditNoPromotion
@@ -57,13 +58,22 @@ largeFieldSharedSlackAssemblyLevel = LF.largeFieldSharedSlackAssemblyLevel
 largeFieldToSharedRGErrorLevel = LFCoupled.largeFieldToSharedRGErrorLevel
 largeFieldCoupledRegionClosureLevel = LFCoupled.largeFieldCoupledRegionClosureLevel
 
--- Fail-closed physical frontier.  Equation (1.100) itself and the source
--- freedom to choose the R-decay reserve are primary-source authorities.  What
--- remains is the metric/representation dictionary putting d_j(X) in the same
--- normalized rooted geometry, the weight split, same-geometry rooted entropy
--- payment, identification of the combined R-sector norm contribution, and the
--- concrete numerical shared-slack inequality.  Coupling, boundary-domain,
--- covariance/locality and initial UV inputs remain separate.
+-- Boundary reinjection itself is also published source mathematics: CMP119
+-- (2.40)--(2.42) gives the localized analytic/gauge-invariant boundary class,
+-- and CMP122 states that the completed R-operation generates the next action in
+-- the same Sect.-2 inductive class.  Only the repository carrier dictionary is
+-- left here.
+cmp119BoundaryAnalyticityAndDecayLevel =
+  Boundary.cmp119BoundaryAnalyticityAndDecayLevel
+cmp122BoundaryReinjectionPreservationLevel =
+  Boundary.cmp122BoundaryReinjectionPreservationLevel
+
+-- Fail-closed physical frontier.  Equation (1.100), arbitrary R-decay reserve,
+-- and boundary-class preservation are now primary-source authorities.  What
+-- remains in the large-field segment is the metric/representation dictionary
+-- putting d_j(X) in the same normalized rooted geometry, the weight split,
+-- same-geometry rooted entropy payment, identification of the combined R-sector
+-- norm contribution, and the concrete numerical shared-slack inequality.
 cmp119SourceDistanceToRepositoryDiameterLevel =
   Reserve.cmp119SourceDistanceToRepositoryDiameterLevel
 cmp122Equation1100RepositoryRepresentationLevel =
@@ -76,7 +86,11 @@ cmp122CombinedNormContributionIdentificationLevel =
   EqSlack.cmp122CombinedNormContributionIdentificationLevel
 cmp122NumericalSharedSlackLevel =
   EqSlack.cmp122NumericalSharedSlackLevel
+cmp119CMP122BoundaryRepositoryDictionaryLevel =
+  Boundary.cmp119CMP122BoundaryRepositoryDictionaryLevel
 
+-- Coupling, covariance/locality and initial UV stability remain separate
+-- physical estimates after the source-level large-field/boundary reductions.
 physicalCoupledOneStepBoundsLevel =
   OneStep.lightweightGate4PhysicalAnalyticBoundsLevel
 physicalOneStepAnalyticInputsLevel = Gate4.physicalOneStepAnalyticInputsLevel
