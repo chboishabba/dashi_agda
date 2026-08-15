@@ -29,6 +29,7 @@ import DASHI.Crypto.MLKEMSupportUncertaintyRuntimeNoGoExact
 import DASHI.Crypto.MLKEMButterflyUncertaintyWorkFrontierExact
 import DASHI.Crypto.MLKEMExactResidualTouchLowerBoundExact
 import DASHI.Crypto.MLKEMResidualTouchPathLowerBoundExact
+import DASHI.Crypto.MLKEMUncertaintyDecisionTreeStrengthBoundaryExact
 import DASHI.Crypto.MLKEMBaseCaseConditionedResidualExact
 import DASHI.Crypto.ConditionedResidualAmbiguityRegressionExact
 import DASHI.Crypto.ConditionalMateAmbiguityExact
