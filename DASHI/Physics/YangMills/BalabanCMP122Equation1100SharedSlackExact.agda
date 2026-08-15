@@ -36,8 +36,9 @@ module DASHI.Physics.YangMills.BalabanCMP122Equation1100SharedSlackExact where
 -- No free a_k remains after the CMP122 identification.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_)
+open import Data.Rational.Base as ℚ using (ℚ; 1ℚ; _+_; _-_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -46,6 +47,17 @@ import DASHI.Physics.YangMills.BalabanCMP122Equation1100EntropyBudgetExact as En
 import DASHI.Physics.YangMills.BalabanYM4ROperationEntropyShellExact as Shell
 import DASHI.Physics.YangMills.BalabanYM4LargeFieldContributionSharedSlackExact as LF
 import DASHI.Physics.YangMills.BalabanTraceKoteckyPreissGeometricExact as Geo
+
+rootedRPartial :
+  ∀ {Scale Volume Root Polymer Boundary} →
+  Entropy.Equation1100RootedEntropyData Scale Volume Root Polymer Boundary →
+  Scale → Volume → Root → Nat → ℚ
+rootedRPartial dataSet scale volume root zero = 0ℚ
+rootedRPartial dataSet scale volume root (suc depth) =
+  rootedRPartial dataSet scale volume root depth
+  + Shell.rootedRActivityShell
+      (Entropy.cmp122Equation1100RootedShell dataSet)
+      scale volume root depth
 
 record Equation1100LargeFieldContribution
     (Scale Volume Root Polymer Boundary : Set) : Set₁ where
@@ -59,15 +71,7 @@ record Equation1100LargeFieldContribution
     -- with the finite rooted sum.  All shell decay beyond this point is proved.
     contributionBelowRootedPartial : ∀ scale volume root cutoff →
       largeFieldContribution scale volume root cutoff
-      ≤ rootedPartial scale volume root cutoff
-
-    rootedPartial : Scale → Volume → Root → Nat → ℚ
-    rootedPartial scale volume root zero = 0ℚ
-    rootedPartial scale volume root (suc depth) =
-      rootedPartial scale volume root depth
-      + Shell.rootedRActivityShell
-          (Entropy.cmp122Equation1100RootedShell entropyData)
-          scale volume root depth
+      ≤ rootedRPartial entropyData scale volume root cutoff
 
 open Equation1100LargeFieldContribution public
 
@@ -76,7 +80,7 @@ rootedPartialBelowSourceMajorant :
     (dataSet : Equation1100LargeFieldContribution
       Scale Volume Root Polymer Boundary)
     scale volume root cutoff →
-  rootedPartial dataSet scale volume root cutoff
+  rootedRPartial (entropyData dataSet) scale volume root cutoff
   ≤ LF.scaledShellPartial
       (Source.p0Suppression
         (Entropy.source (entropyData dataSet)) scale)
