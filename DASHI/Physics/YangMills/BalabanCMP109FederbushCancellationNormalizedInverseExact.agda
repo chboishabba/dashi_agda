@@ -40,9 +40,10 @@ module DASHI.Physics.YangMills.BalabanCMP109FederbushCancellationNormalizedInver
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List)
 open import Data.List.Base using (length)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; 1ℚ; _*_; _≤_; ∣_∣)
+open import Data.Rational.Base as ℚ using
+  (ℚ; 0ℚ; 1ℚ; _-_; _*_; _≤_; ∣_∣)
 import Data.Rational.Properties as ℚP
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym)
+open import Relation.Binary.PropositionalEquality using (cong; subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
@@ -56,6 +57,7 @@ import DASHI.Physics.YangMills.BalabanCMP109FederbushComponentResidualExact as C
 import DASHI.Physics.YangMills.BalabanCMP109FederbushNormalizedResidualReopeningExact as Normalized
 import DASHI.Physics.YangMills.BalabanCMP109FederbushQuarterReopeningExact as Quarter
 import DASHI.Physics.YangMills.BalabanCMP109FederbushSourceScaleQuarterExact as SourceScale
+import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
 
 record FederbushCancellationData (Index : Set) : Set₁ where
   field
@@ -95,27 +97,13 @@ componentResidualEqualsOppositeInverseDefect dataSet index row column =
   cong
     (λ value → value - Jacobian.identity3 row column)
     (componentCancellation dataSet index row column)
-  where
-  open import Data.Rational.Base using (_-_)
 
 sourceLogDefectFitsQuarter :
   SourceScale.sourceLogDefectBound ≤ Quarter.oneQuarter
 sourceLogDefectFitsQuarter =
-  ℚP.≤-trans
-    (oppositeInverseDexpSourceDefectDummy)
-    ℚP.≤-refl
-  where
-  -- Keep the proof as a literal rational comparison; the local dummy theorem
-  -- simply avoids importing another arithmetic helper.
-  oppositeInverseDexpSourceDefectDummy :
-    SourceScale.sourceLogDefectBound ≤ Quarter.oneQuarter
-  oppositeInverseDexpSourceDefectDummy =
-    DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact.nonnegativeDifferenceImpliesBelow
-      (ℚP.nonNegative⁻¹
-        (Quarter.oneQuarter - SourceScale.sourceLogDefectBound))
-    where
-    open import Data.Rational.Base using (_-_)
-    import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact
+  Norm.nonnegativeDifferenceImpliesBelow
+    (ℚP.nonNegative⁻¹
+      (Quarter.oneQuarter - SourceScale.sourceLogDefectBound))
 
 localCancellationResidualQuarter :
   ∀ {Index} (dataSet : FederbushCancellationData Index) index column →
