@@ -17,23 +17,28 @@ import DASHI.Physics.Closure.NSTriadKNComDyadicHatWidthOneRound46Exact as HatWid
 
 record PhysicalOddPQCommonHatIdentification : Set₁ where
   field
-    supportActive : Nat → Nat → Bool
+    -- This is the active projection of the literal odd-(P/Q) output fibre.
+    -- The public `supportActive` view below is definitionally this field.
+    literalOddPQOutputFibreActive : Nat → Nat → Bool
     commonHatSupport : Nat → Nat → Hat.DyadicHatSupport
 
     leftActiveInCommonHat : ∀ q r →
-      supportActive q r ≡ true →
+      literalOddPQOutputFibreActive q r ≡ true →
       q HatWidth.∈ Hat.activeShells (commonHatSupport q r)
 
     rightActiveInCommonHat : ∀ q r →
-      supportActive q r ≡ true →
+      literalOddPQOutputFibreActive q r ≡ true →
       r HatWidth.∈ Hat.activeShells (commonHatSupport q r)
 
 open PhysicalOddPQCommonHatIdentification public
 
+supportActive : PhysicalOddPQCommonHatIdentification → Nat → Nat → Bool
+supportActive identification = literalOddPQOutputFibreActive identification
+
 commonHatWidthOne :
   (identification : PhysicalOddPQCommonHatIdentification) →
   ∀ q r →
-  supportActive identification q r ≡ true →
+  literalOddPQOutputFibreActive identification q r ≡ true →
   HatWidth.WithinOne q r
 commonHatWidthOne identification q r active =
   HatWidth.activeShellPairWithinOne

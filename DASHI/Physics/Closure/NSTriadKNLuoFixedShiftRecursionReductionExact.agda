@@ -51,18 +51,19 @@ record FixedShiftRecursionPhysicalData : Set₁ where
 open FixedShiftRecursionPhysicalData public
 
 fixedShiftRecursionFromCutoffEnergy :
-  (data : FixedShiftRecursionPhysicalData) →
-  (shell : Nat) → sufficientlyLarge data shell →
-  selectedMaximum data
-    (cutoffEnergy data shell)
-    (cutoffDissipation data shell)
-  ≤ correctedShiftCoefficient data
-      * cutoffDissipation data (predecessorByFixedShift data shell)
-    + integratedFluxCorrection data shell
-fixedShiftRecursionFromCutoffEnergy data shell large =
+  (physicalData : FixedShiftRecursionPhysicalData) →
+  (shell : Nat) → sufficientlyLarge physicalData shell →
+  selectedMaximum physicalData
+    (cutoffEnergy physicalData shell)
+    (cutoffDissipation physicalData shell)
+  ≤ correctedShiftCoefficient physicalData
+      * cutoffDissipation physicalData
+          (predecessorByFixedShift physicalData shell)
+    + integratedFluxCorrection physicalData shell
+fixedShiftRecursionFromCutoffEnergy physicalData shell large =
   ℚₚ.≤-trans
-    (maximumBelowEnergyDissipationSum data shell)
-    (integratedCutoffEnergyInequality data shell large)
+    (maximumBelowEnergyDissipationSum physicalData shell)
+    (integratedCutoffEnergyInequality physicalData shell large)
 
 record FluxCorrectionAbsorptionData : Set₁ where
   field
@@ -80,13 +81,14 @@ record FluxCorrectionAbsorptionData : Set₁ where
 open FluxCorrectionAbsorptionData public
 
 fluxCorrectionAbsorbedFromPhysicalMajorant :
-  (data : FluxCorrectionAbsorptionData) →
-  (shell : Nat) → sufficientlyLarge data shell →
-  integratedFluxCorrection data shell ≤ dyadicDecayTarget data shell
-fluxCorrectionAbsorbedFromPhysicalMajorant data shell large =
+  (physicalData : FluxCorrectionAbsorptionData) →
+  (shell : Nat) → sufficientlyLarge physicalData shell →
+  integratedFluxCorrection physicalData shell
+    ≤ dyadicDecayTarget physicalData shell
+fluxCorrectionAbsorbedFromPhysicalMajorant physicalData shell large =
   ℚₚ.≤-trans
-    (integratedFluxBelowPhysicalMajorant data shell large)
-    (physicalMajorantBelowDecayTarget data shell large)
+    (integratedFluxBelowPhysicalMajorant physicalData shell large)
+    (physicalMajorantBelowDecayTarget physicalData shell large)
 
 fixedShiftOrderReductionClosed : Bool
 fixedShiftOrderReductionClosed = true

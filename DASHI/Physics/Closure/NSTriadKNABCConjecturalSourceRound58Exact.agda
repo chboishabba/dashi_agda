@@ -18,9 +18,11 @@ open import Data.Rational.Base using (ℚ)
 
 import DASHI.Physics.Closure.NSTriadKNABCInhabitationRound58Exact as ABC
 import DASHI.Physics.Closure.NSTriadKNHHBadDyadicThreeMechanismRecurrenceRound48Exact as A
-import DASHI.Physics.Closure.NSTriadKNComSameAdjacentActiveRound47Exact as B
+import DASHI.Physics.Closure.NSTriadKNHHBadPhysicalDuhamelSourceRound59 as ASource
+import DASHI.Physics.Closure.NSTriadKNComNormalizedFibreSourceAdapterRound58 as BSource
 import DASHI.Physics.Closure.NSTriadKNFixedShiftCorrectionHeadroomRound54Exact as CHeadroom
 import DASHI.Physics.Closure.NSTriadKNFixedShiftUniformProductCapacityRound57Exact as C
+import DASHI.Physics.Closure.NSTriadKNFixedShiftPhysicalCapacityAdapterRound58 as CSource
 import DASHI.Physics.Closure.NSTriadKNFixedShiftCoefficientSeparationRound53Exact as Round53
 import DASHI.Physics.Closure.NSTriadKNAdmissibleOwnerTaxLanguageRound28Exact as Owner
 import DASHI.Physics.Closure.NSTriadKNNineOwnerCriticalAbsorptionRound28Exact as Nine
@@ -36,21 +38,22 @@ postulate
   physicalHHBadTransferConjecture :
     A.PhysicalDyadicThreeMechanismTransfer
 
+postulate
+  physicalHHBadSourceConjecture :
+    ASource.PhysicalLocalizedDuhamelSource
+
+postulate
+  physicalHHBadTransferUsesSourceConjecture :
+    A.source physicalHHBadTransferConjecture
+    ≡ ASource.asLocalizedSource physicalHHBadSourceConjecture
+
 ------------------------------------------------------------------------
 -- B: common-hat support and normalized Gram/fibre estimates.
 ------------------------------------------------------------------------
 
 postulate
-  physicalComSkeletonConjecture : B.PhysicalOddPQSupportSkeleton
-
-postulate
-  physicalComHatConjecture :
-    B.PhysicalOddPQHatIdentification physicalComSkeletonConjecture
-
-postulate
-  physicalComNormalizedBoundsConjecture :
-    B.SameAdjacentPhysicalComBounds
-      physicalComSkeletonConjecture physicalComHatConjecture
+  physicalComSourceConjecture :
+    BSource.PhysicalNormalizedOddPQSource
 
 ------------------------------------------------------------------------
 -- C: same-object owner/flux/block identification and positive capacity.
@@ -71,6 +74,15 @@ postulate
     C.UniformFixedShiftProductCapacity
       physicalOwnerBlockIdentificationConjecture
 
+conjecturalFixedShiftSource : CSource.PhysicalFixedShiftSource
+conjecturalFixedShiftSource = record
+  { balances = conjecturalBalances
+  ; fixedShiftData = conjecturalFixedShiftData
+  ; fixedBlock = conjecturalFixedBlock
+  ; ownerBlockIdentification = physicalOwnerBlockIdentificationConjecture
+  ; uniformProductCapacity = uniformFixedShiftCapacityConjecture
+  }
+
 ------------------------------------------------------------------------
 -- Assemble the exact package consumed by downstream closure code.
 ------------------------------------------------------------------------
@@ -78,14 +90,11 @@ postulate
 conjecturalABCSourceWitnesses : ABC.LiteralABCSourceWitnesses
 conjecturalABCSourceWitnesses = record
   { hhBadTransfer = physicalHHBadTransferConjecture
-  ; comSkeleton = physicalComSkeletonConjecture
-  ; comHatIdentification = physicalComHatConjecture
-  ; comNormalizedGramBounds = physicalComNormalizedBoundsConjecture
-  ; balances = conjecturalBalances
-  ; fixedShiftData = conjecturalFixedShiftData
-  ; fixedBlock = conjecturalFixedBlock
-  ; ownerBlockIdentification = physicalOwnerBlockIdentificationConjecture
-  ; uniformProductCapacity = uniformFixedShiftCapacityConjecture
+  ; hhBadPhysicalSource = physicalHHBadSourceConjecture
+  ; hhBadTransferUsesPhysicalSource =
+      physicalHHBadTransferUsesSourceConjecture
+  ; comSource = physicalComSourceConjecture
+  ; fixedShiftSource = conjecturalFixedShiftSource
   }
 
 conjecturalHHBadDuhamelExists :
@@ -102,7 +111,7 @@ conjecturalFixedShiftCapacityExists :
   C.UniformFixedShiftProductCapacity
     physicalOwnerBlockIdentificationConjecture
 conjecturalFixedShiftCapacityExists =
-  ABC.uniformProductCapacity conjecturalABCSourceWitnesses
+  CSource.uniformProductCapacity conjecturalFixedShiftSource
 
 -- This package is intentionally conditional: the postulates are the frontier
 -- hypotheses, not constructed analytic witnesses.

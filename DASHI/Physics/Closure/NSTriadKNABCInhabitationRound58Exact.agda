@@ -19,10 +19,12 @@ open import Data.Rational.Base using (ℚ)
 import DASHI.Physics.Closure.NSTriadKNHHBadDyadicThreeMechanismRecurrenceRound48Exact as A
 import DASHI.Physics.Closure.NSTriadKNHHBadRawVariableCapacityRound53Exact as Raw
 import DASHI.Physics.Closure.NSTriadKNHHBadLiteralDuhamelAdapterRound58Exact as AAdapter
-import DASHI.Physics.Closure.NSTriadKNComSameAdjacentActiveRound47Exact as B
+import DASHI.Physics.Closure.NSTriadKNHHBadPhysicalDuhamelSourceRound59 as ASource
+import DASHI.Physics.Closure.NSTriadKNComNormalizedFibreSourceAdapterRound58 as BSource
 import DASHI.Physics.Closure.NSTriadKNComSupportOverlapRound42Exact as Support
 import DASHI.Physics.Closure.NSTriadKNFixedShiftCorrectionHeadroomRound54Exact as CHeadroom
 import DASHI.Physics.Closure.NSTriadKNFixedShiftUniformProductCapacityRound57Exact as C
+import DASHI.Physics.Closure.NSTriadKNFixedShiftPhysicalCapacityAdapterRound58 as CSource
 import DASHI.Physics.Closure.NSTriadKNFixedShiftCoefficientSeparationRound53Exact as Round53
 import DASHI.Physics.Closure.NSTriadKNAdmissibleOwnerTaxLanguageRound28Exact as Owner
 import DASHI.Physics.Closure.NSTriadKNNineOwnerCriticalAbsorptionRound28Exact as Nine
@@ -32,22 +34,14 @@ import DASHI.Physics.Closure.NSTriadKNLuoRationalFixedBlockInductionExact as Blo
 record LiteralABCSourceWitnesses : Set₁ where
   field
     hhBadTransfer : A.PhysicalDyadicThreeMechanismTransfer
+    hhBadPhysicalSource : ASource.PhysicalLocalizedDuhamelSource
+    hhBadTransferUsesPhysicalSource :
+      A.source hhBadTransfer
+      ≡ ASource.asLocalizedSource hhBadPhysicalSource
 
-    comSkeleton : B.PhysicalOddPQSupportSkeleton
-    comHatIdentification :
-      B.PhysicalOddPQHatIdentification comSkeleton
-    comNormalizedGramBounds :
-      B.SameAdjacentPhysicalComBounds
-        comSkeleton comHatIdentification
+    comSource : BSource.PhysicalNormalizedOddPQSource
 
-    balances : Nat → Nine.NineOwnerCriticalBalance
-    fixedShiftData : Fixed.FixedShiftRecursionPhysicalData
-    fixedBlock : Block.RationalFixedBlockDecay
-    ownerBlockIdentification :
-      CHeadroom.PhysicalOwnerBlockCorrectionIdentification
-        balances fixedShiftData fixedBlock
-    uniformProductCapacity :
-      C.UniformFixedShiftProductCapacity ownerBlockIdentification
+    fixedShiftSource : CSource.PhysicalFixedShiftSource
 
 open LiteralABCSourceWitnesses public
 
@@ -64,23 +58,25 @@ literalComEnvelope :
   (source : LiteralABCSourceWitnesses) →
   Support.PhysicalComSupportOverlapEnvelope
 literalComEnvelope source =
-  B.physicalComEnvelopeFromSameAdjacent
-    (comHatIdentification source)
-    (comNormalizedGramBounds source)
+  BSource.legacyEnvelope (comSource source)
 
 -- C: the division-free uniform product capacity feeds the complete additive
 -- correction headroom theorem.
 literalFixedShiftHeadroom :
   (source : LiteralABCSourceWitnesses) →
   ∀ n →
-  Round53.ownerAggregateDataRemainder (balances source n)
-    + C.uniformCoefficient (uniformProductCapacity source)
+  Round53.ownerAggregateDataRemainder
+      (CSource.balances (fixedShiftSource source) n)
+    + C.uniformCoefficient
+        (CSource.uniformProductCapacity (fixedShiftSource source))
       * Owner.integralCritical
-          (Nine.environment (balances source n))
-    ≤ CHeadroom.fixedShiftCorrectionHeadroom (fixedBlock source) n
+          (Nine.environment
+            (CSource.balances (fixedShiftSource source) n))
+    ≤ CHeadroom.fixedShiftCorrectionHeadroom
+        (CSource.fixedBlock (fixedShiftSource source)) n
 literalFixedShiftHeadroom source =
   C.uniformCoefficientPlusDataFitsFullCorrectionHeadroom
-    (uniformProductCapacity source)
+    (CSource.uniformProductCapacity (fixedShiftSource source))
 
 abcSourceBoundaryIsTyped : Bool
 abcSourceBoundaryIsTyped = true

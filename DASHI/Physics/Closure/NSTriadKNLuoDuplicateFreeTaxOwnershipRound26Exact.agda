@@ -189,75 +189,121 @@ ownedTaxTotal atoms =
   + tailTax atoms
   + boundaryTax atoms
 
+private
+  hhGoodTaxSum :
+    (a b c d e f g h i j : ℚ) →
+    a + (b + c + d + e + f + g + h + i + j)
+      ≡ a + b + c + d + e + f + g + h + i + j
+  hhGoodTaxSum a b c d e f g h i j = solve
+    (a ∷ b ∷ c ∷ d ∷ e ∷ f ∷ g ∷ h ∷ i ∷ j ∷ [])
+
+  hhBadTaxSum :
+    (a b c d e f g h i j : ℚ) →
+    a + (b + c + d + e + f + g + h + i + j)
+      ≡ b + (a + c) + d + e + f + g + h + i + j
+  hhBadTaxSum a b c d e f g h i j = solve
+    (a ∷ b ∷ c ∷ d ∷ e ∷ f ∷ g ∷ h ∷ i ∷ j ∷ [])
+
+  lhTaxSum :
+    (a b c d e f g h i j : ℚ) →
+    a + (b + c + d + e + f + g + h + i + j)
+      ≡ b + c + (a + d) + e + f + g + h + i + j
+  lhTaxSum a b c d e f g h i j = solve
+    (a ∷ b ∷ c ∷ d ∷ e ∷ f ∷ g ∷ h ∷ i ∷ j ∷ [])
+
+  hlTaxSum :
+    (a b c d e f g h i j : ℚ) →
+    a + (b + c + d + e + f + g + h + i + j)
+      ≡ b + c + d + (a + e) + f + g + h + i + j
+  hlTaxSum a b c d e f g h i j = solve
+    (a ∷ b ∷ c ∷ d ∷ e ∷ f ∷ g ∷ h ∷ i ∷ j ∷ [])
+
+  ccTaxSum :
+    (a b c d e f g h i j : ℚ) →
+    a + (b + c + d + e + f + g + h + i + j)
+      ≡ b + c + d + e + (a + f) + g + h + i + j
+  ccTaxSum a b c d e f g h i j = solve
+    (a ∷ b ∷ c ∷ d ∷ e ∷ f ∷ g ∷ h ∷ i ∷ j ∷ [])
+
+  comTaxSum :
+    (a b c d e f g h i j : ℚ) →
+    a + (b + c + d + e + f + g + h + i + j)
+      ≡ b + c + d + e + f + (a + g) + h + i + j
+  comTaxSum a b c d e f g h i j = solve
+    (a ∷ b ∷ c ∷ d ∷ e ∷ f ∷ g ∷ h ∷ i ∷ j ∷ [])
+
+  kernelTaxSum :
+    (a b c d e f g h i j : ℚ) →
+    a + (b + c + d + e + f + g + h + i + j)
+      ≡ b + c + d + e + f + g + (a + h) + i + j
+  kernelTaxSum a b c d e f g h i j = solve
+    (a ∷ b ∷ c ∷ d ∷ e ∷ f ∷ g ∷ h ∷ i ∷ j ∷ [])
+
+  tailTaxSum :
+    (a b c d e f g h i j : ℚ) →
+    a + (b + c + d + e + f + g + h + i + j)
+      ≡ b + c + d + e + f + g + h + (a + i) + j
+  tailTaxSum a b c d e f g h i j = solve
+    (a ∷ b ∷ c ∷ d ∷ e ∷ f ∷ g ∷ h ∷ i ∷ j ∷ [])
+
+  boundaryTaxSum :
+    (a b c d e f g h i j : ℚ) →
+    a + (b + c + d + e + f + g + h + i + j)
+      ≡ b + c + d + e + f + g + h + i + (a + j)
+  boundaryTaxSum a b c d e f g h i j = solve
+    (a ∷ b ∷ c ∷ d ∷ e ∷ f ∷ g ∷ h ∷ i ∷ j ∷ [])
+
 duplicateFreeTaxOwnershipExact :
   (atoms : List TaxAtom) →
   totalTax atoms ≡ ownedTaxTotal atoms
-duplicateFreeTaxOwnershipExact [] = solve []
+duplicateFreeTaxOwnershipExact [] = refl
 duplicateFreeTaxOwnershipExact (atom ∷ rest)
   with owner atom
 ... | HH-good
   rewrite duplicateFreeTaxOwnershipExact rest =
-  solve
-    ( taxableValue atom
-    ∷ hhGoodTax rest ∷ hhBadTax rest
-    ∷ lhTax rest ∷ hlTax rest ∷ ccTax rest ∷ comTax rest
-    ∷ kernelTax rest ∷ tailTax rest ∷ boundaryTax rest ∷ [])
+  hhGoodTaxSum (taxableValue atom) (hhGoodTax rest)
+    (hhBadTax rest) (lhTax rest) (hlTax rest) (ccTax rest)
+    (comTax rest) (kernelTax rest) (tailTax rest) (boundaryTax rest)
 ... | HH-bad
   rewrite duplicateFreeTaxOwnershipExact rest =
-  solve
-    ( taxableValue atom
-    ∷ hhGoodTax rest ∷ hhBadTax rest
-    ∷ lhTax rest ∷ hlTax rest ∷ ccTax rest ∷ comTax rest
-    ∷ kernelTax rest ∷ tailTax rest ∷ boundaryTax rest ∷ [])
+  hhBadTaxSum (taxableValue atom) (hhGoodTax rest)
+    (hhBadTax rest) (lhTax rest) (hlTax rest) (ccTax rest)
+    (comTax rest) (kernelTax rest) (tailTax rest) (boundaryTax rest)
 ... | LH
   rewrite duplicateFreeTaxOwnershipExact rest =
-  solve
-    ( taxableValue atom
-    ∷ hhGoodTax rest ∷ hhBadTax rest
-    ∷ lhTax rest ∷ hlTax rest ∷ ccTax rest ∷ comTax rest
-    ∷ kernelTax rest ∷ tailTax rest ∷ boundaryTax rest ∷ [])
+  lhTaxSum (taxableValue atom) (hhGoodTax rest)
+    (hhBadTax rest) (lhTax rest) (hlTax rest) (ccTax rest)
+    (comTax rest) (kernelTax rest) (tailTax rest) (boundaryTax rest)
 ... | HL
   rewrite duplicateFreeTaxOwnershipExact rest =
-  solve
-    ( taxableValue atom
-    ∷ hhGoodTax rest ∷ hhBadTax rest
-    ∷ lhTax rest ∷ hlTax rest ∷ ccTax rest ∷ comTax rest
-    ∷ kernelTax rest ∷ tailTax rest ∷ boundaryTax rest ∷ [])
+  hlTaxSum (taxableValue atom) (hhGoodTax rest)
+    (hhBadTax rest) (lhTax rest) (hlTax rest) (ccTax rest)
+    (comTax rest) (kernelTax rest) (tailTax rest) (boundaryTax rest)
 ... | CC
   rewrite duplicateFreeTaxOwnershipExact rest =
-  solve
-    ( taxableValue atom
-    ∷ hhGoodTax rest ∷ hhBadTax rest
-    ∷ lhTax rest ∷ hlTax rest ∷ ccTax rest ∷ comTax rest
-    ∷ kernelTax rest ∷ tailTax rest ∷ boundaryTax rest ∷ [])
+  ccTaxSum (taxableValue atom) (hhGoodTax rest)
+    (hhBadTax rest) (lhTax rest) (hlTax rest) (ccTax rest)
+    (comTax rest) (kernelTax rest) (tailTax rest) (boundaryTax rest)
 ... | Com
   rewrite duplicateFreeTaxOwnershipExact rest =
-  solve
-    ( taxableValue atom
-    ∷ hhGoodTax rest ∷ hhBadTax rest
-    ∷ lhTax rest ∷ hlTax rest ∷ ccTax rest ∷ comTax rest
-    ∷ kernelTax rest ∷ tailTax rest ∷ boundaryTax rest ∷ [])
+  comTaxSum (taxableValue atom) (hhGoodTax rest)
+    (hhBadTax rest) (lhTax rest) (hlTax rest) (ccTax rest)
+    (comTax rest) (kernelTax rest) (tailTax rest) (boundaryTax rest)
 ... | kernel
   rewrite duplicateFreeTaxOwnershipExact rest =
-  solve
-    ( taxableValue atom
-    ∷ hhGoodTax rest ∷ hhBadTax rest
-    ∷ lhTax rest ∷ hlTax rest ∷ ccTax rest ∷ comTax rest
-    ∷ kernelTax rest ∷ tailTax rest ∷ boundaryTax rest ∷ [])
+  kernelTaxSum (taxableValue atom) (hhGoodTax rest)
+    (hhBadTax rest) (lhTax rest) (hlTax rest) (ccTax rest)
+    (comTax rest) (kernelTax rest) (tailTax rest) (boundaryTax rest)
 ... | tail
   rewrite duplicateFreeTaxOwnershipExact rest =
-  solve
-    ( taxableValue atom
-    ∷ hhGoodTax rest ∷ hhBadTax rest
-    ∷ lhTax rest ∷ hlTax rest ∷ ccTax rest ∷ comTax rest
-    ∷ kernelTax rest ∷ tailTax rest ∷ boundaryTax rest ∷ [])
+  tailTaxSum (taxableValue atom) (hhGoodTax rest)
+    (hhBadTax rest) (lhTax rest) (hlTax rest) (ccTax rest)
+    (comTax rest) (kernelTax rest) (tailTax rest) (boundaryTax rest)
 ... | boundary
   rewrite duplicateFreeTaxOwnershipExact rest =
-  solve
-    ( taxableValue atom
-    ∷ hhGoodTax rest ∷ hhBadTax rest
-    ∷ lhTax rest ∷ hlTax rest ∷ ccTax rest ∷ comTax rest
-    ∷ kernelTax rest ∷ tailTax rest ∷ boundaryTax rest ∷ [])
+  boundaryTaxSum (taxableValue atom) (hhGoodTax rest)
+    (hhBadTax rest) (lhTax rest) (hlTax rest) (ccTax rest)
+    (comTax rest) (kernelTax rest) (tailTax rest) (boundaryTax rest)
 
 ------------------------------------------------------------------------
 -- Tax coefficients are kept separate from ownership.  Ownership prevents

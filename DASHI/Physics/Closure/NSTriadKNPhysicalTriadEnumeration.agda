@@ -26,6 +26,12 @@ _&&_ : Bool → Bool → Bool
 true && b = b
 false && b = false
 
+data BoolInspection (b : Bool) : Set where
+  inspected : (value : Bool) → b ≡ value → BoolInspection b
+
+inspectBool : (b : Bool) → BoolInspection b
+inspectBool b = inspected b refl
+
 andTrueLeft : ∀ {a b} → a && b ≡ true → a ≡ true
 andTrueLeft {true} proof = refl
 andTrueLeft {false} ()
@@ -33,6 +39,16 @@ andTrueLeft {false} ()
 andTrueRight : ∀ {a b} → a && b ≡ true → b ≡ true
 andTrueRight {true} proof = proof
 andTrueRight {false} ()
+
+andTrueMiddle : ∀ {a b c} → a && (b && c) ≡ true → b ≡ true
+andTrueMiddle {a = a} {b = b} {c = c} proof =
+  andTrueLeft {a = b} {b = c}
+    (andTrueRight {a = a} {b = b && c} proof)
+
+andTrueLast : ∀ {a b c} → a && (b && c) ≡ true → c ≡ true
+andTrueLast {a = a} {b = b} {c = c} proof =
+  andTrueRight {a = b} {b = c}
+    (andTrueRight {a = a} {b = b && c} proof)
 
 natLeBool : Nat → Nat → Bool
 natLeBool zero n = true
@@ -62,9 +78,22 @@ modeWithinCutoffSound :
   ∀ N k → modeWithinCutoff N k ≡ true → Cube.InCutoffCube N k
 modeWithinCutoffSound N k proof =
   Cube.cutoff-membership
-    (natLeBoolSound (andTrueLeft proof))
-    (natLeBoolSound (andTrueLeft (andTrueRight proof)))
-    (natLeBoolSound (andTrueRight (andTrueRight proof)))
+    (Cube.intervalComplete
+      (natLeBoolSound (andTrueLeft proof)))
+    (Cube.intervalComplete
+      (natLeBoolSound
+        (andTrueMiddle
+          {a = natLeBool (Cube.integerMagnitude (Z3.kx k)) N}
+          {b = natLeBool (Cube.integerMagnitude (Z3.ky k)) N}
+          {c = natLeBool (Cube.integerMagnitude (Z3.kz k)) N}
+          proof)))
+    (Cube.intervalComplete
+      (natLeBoolSound
+        (andTrueLast
+          {a = natLeBool (Cube.integerMagnitude (Z3.kx k)) N}
+          {b = natLeBool (Cube.integerMagnitude (Z3.ky k)) N}
+          {c = natLeBool (Cube.integerMagnitude (Z3.kz k)) N}
+          proof)))
 
 modeWithinCutoffComplete :
   ∀ {N k} → Cube.InCutoffCube N k → modeWithinCutoff N k ≡ true
@@ -161,33 +190,51 @@ enumeratedPairMember :
 enumeratedPairMember {pairs = []} ()
 enumeratedPairMember {N} {pairs = pair ∷ pairs} member
   with modeWithinCutoff N
-    (Z3.addMode (Cube.first pair) (Cube.second pair))
-... | true with member
-...   | Cube.here equality =
+    (Z3.addMode (Cube.first pair) (Cube.second pair)) | member
+... | true | Cube.here equality =
       Cube.here (cong triadInputPair equality)
-...   | Cube.there tail =
+... | true | Cube.there tail =
       Cube.there (enumeratedPairMember tail)
-... | false =
+... | false | member =
       Cube.there (enumeratedPairMember member)
 
-enumeratedOutputWithin :
-  ∀ {N pairs τ} →
-  τ ∈ enumerateFromPairs N pairs →
-  modeWithinCutoff N (k τ) ≡ true
-enumeratedOutputWithin {pairs = []} ()
-enumeratedOutputWithin {N} {pairs = pair ∷ pairs} member
-  with modeWithinCutoff N
-    (Z3.addMode (Cube.first pair) (Cube.second pair))
-... | true with member
-...   | Cube.here equality =
-      subst
-        (λ output → modeWithinCutoff N output ≡ true)
-        (sym (cong k equality))
-        refl
-...   | Cube.there tail =
-      enumeratedOutputWithin tail
-... | false =
-      enumeratedOutputWithin member
+mutual
+  enumeratedOutputWithin :
+    ∀ {N pairs τ} →
+    τ ∈ enumerateFromPairs N pairs →
+    modeWithinCutoff N (k τ) ≡ true
+  enumeratedOutputWithin {pairs = []} ()
+  enumeratedOutputWithin {N} {pairs = pair ∷ pairs} {τ = τ} member
+    with modeWithinCutoff N
+        (Z3.addMode (Cube.first pair) (Cube.second pair)) in cutoffProof
+  ... | true = trueOutputMember N pair pairs cutoffProof member
+  ... | false = falseOutputMember N pair pairs member
+
+  trueOutputMember :
+    (N : Nat)
+    (pair : Cube.Pair Z3.FourierMode Z3.FourierMode)
+    (pairs : List (Cube.Pair Z3.FourierMode Z3.FourierMode))
+    (proof : modeWithinCutoff N
+      (Z3.addMode (Cube.first pair) (Cube.second pair)) ≡ true) →
+    ∀ {τ} →
+    τ ∈ (enumerateFromPairs N (pair ∷ pairs) | true) →
+    modeWithinCutoff N (k τ) ≡ true
+  trueOutputMember proof (Cube.here equality) =
+    subst
+      (λ output → modeWithinCutoff N output ≡ true)
+      (sym (cong k equality))
+      proof
+  trueOutputMember proof (Cube.there tail) =
+    enumeratedOutputWithin tail
+
+  falseOutputMember :
+    (N : Nat)
+    (pair : Cube.Pair Z3.FourierMode Z3.FourierMode)
+    (pairs : List (Cube.Pair Z3.FourierMode Z3.FourierMode)) →
+    ∀ {τ} →
+    τ ∈ (enumerateFromPairs N (pair ∷ pairs) | false) →
+    modeWithinCutoff N (k τ) ≡ true
+  falseOutputMember member = enumeratedOutputWithin member
 
 enumerateFromPairsComplete :
   ∀ {N pairs pair} →
@@ -280,8 +327,8 @@ physicalTriadEnumerationComplete :
   PhysicalTriadEnumerationHit N τ
 physicalTriadEnumerationComplete {N} {τ} bounded =
   enumeration-hit
-    representative
-    representativeIsListed
+    representativeValue
+    representativeValueIsListed
     refl
     refl
     (resonance τ)
@@ -304,12 +351,12 @@ physicalTriadEnumerationComplete {N} {τ} bounded =
       (modeWithinCutoffComplete
         (Cube.cutoffModeEnumerationSound N (k τ) (kBounded bounded)))
 
-  representative : PhysicalTriadIncidence
-  representative = pairTriad inputPair
+  representativeValue : PhysicalTriadIncidence
+  representativeValue = pairTriad inputPair
 
-  representativeIsListed :
-    representative ∈ physicalTriadEnumeration N
-  representativeIsListed =
+  representativeValueIsListed :
+    representativeValue ∈ physicalTriadEnumeration N
+  representativeValueIsListed =
     enumerateFromPairsComplete inputPairListed outputWithin
 
 ------------------------------------------------------------------------

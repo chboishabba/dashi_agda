@@ -51,6 +51,29 @@ record NineOwnerCriticalBalance : Set where
 
 open NineOwnerCriticalBalance public
 
+private
+  shiftToRight : (s e d : ℚ) → s + (e + d) ≡ (e + d) + s
+  shiftToRight s e d = solve (s ∷ e ∷ d ∷ [])
+
+  shiftAcrossBound :
+    (s e a d r c k : ℚ) →
+    s + (e + (a * d + r + c * k))
+      ≡ (e + (a * d + r + c * k)) + s
+  shiftAcrossBound s e a d r c k = solve
+    (s ∷ e ∷ a ∷ d ∷ r ∷ c ∷ k ∷ [])
+
+  shiftedLeftMeaning :
+    (e d a : ℚ) →
+    (e + d) + (-(a * d)) ≡ e + (1ℚ - a) * d
+  shiftedLeftMeaning e d a = solve (e ∷ d ∷ a ∷ [])
+
+  shiftedRightMeaning :
+    (e a d r c k : ℚ) →
+    (e + (a * d + r + c * k)) + (-(a * d))
+      ≡ e + (r + c * k)
+  shiftedRightMeaning e a d r c k = solve
+    (e ∷ a ∷ d ∷ r ∷ c ∷ k ∷ [])
+
 remainingViscosity : NineOwnerCriticalBalance → ℚ
 remainingViscosity balance =
   1ℚ
@@ -132,12 +155,11 @@ nineOwnerStrictCriticalEstimate balance =
           (energyIn balance
             + (etaTotal * diss + dataTotal + criticalTotal * critical))
           + shift)
-        (solve (shift ∷ energyOut balance ∷ diss ∷ []))
+        (shiftToRight shift (energyOut balance) diss)
         (subst
           (λ right → shift + (energyOut balance + diss) ≤ right)
-          (solve
-            ( shift ∷ energyIn balance ∷ etaTotal ∷ diss
-            ∷ dataTotal ∷ criticalTotal ∷ critical ∷ []))
+          (shiftAcrossBound shift (energyIn balance) etaTotal diss
+            dataTotal criticalTotal critical)
           shiftedLeft)
 
     leftMeaning :
@@ -145,7 +167,7 @@ nineOwnerStrictCriticalEstimate balance =
       ≡
       energyOut balance + (1ℚ - etaTotal) * diss
     leftMeaning =
-      solve (energyOut balance ∷ diss ∷ etaTotal ∷ [])
+      shiftedLeftMeaning (energyOut balance) diss etaTotal
 
     rightMeaning :
       (energyIn balance
@@ -154,9 +176,8 @@ nineOwnerStrictCriticalEstimate balance =
       ≡
       energyIn balance + (dataTotal + criticalTotal * critical)
     rightMeaning =
-      solve
-        ( energyIn balance ∷ etaTotal ∷ diss
-        ∷ dataTotal ∷ criticalTotal ∷ critical ∷ [])
+      shiftedRightMeaning (energyIn balance) etaTotal diss
+        dataTotal criticalTotal critical
   in
   subst
     (λ left → left ≤ energyIn balance + admissibleRemainder balance)

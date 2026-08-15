@@ -108,10 +108,10 @@ record SeparatedGeometry (jLeft jRight jOutput : Nat) : Set where
     outputEvidence : lowLeg ≡ outputLeg → OutputLow jLeft jRight jOutput
 
 data ResidualSubtype : Set where
-  baseShell
-  shellEndpoint
-  cubicEuclideanCutoffEdge
-  zeroModeEdge
+  baseShell : ResidualSubtype
+  shellEndpoint : ResidualSubtype
+  cubicEuclideanCutoffEdge : ResidualSubtype
+  zeroModeEdge : ResidualSubtype
   topCutoffTruncation : ResidualSubtype
 
 record ResidualGeometry (jLeft jRight jOutput : Nat) : Set where

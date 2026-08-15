@@ -92,6 +92,18 @@ admissibleAggregateRight {environment} estimates =
   + sumDataRemainder estimates
   + sumCriticalCoefficient estimates * integralCritical environment
 
+private
+  emptyAggregateRight :
+    (d i : ℚ) → 0ℚ ≡ 0ℚ * d + 0ℚ + 0ℚ * i
+  emptyAggregateRight d i = solve (d ∷ i ∷ [])
+
+  aggregateRightStep :
+    (a b c d e f g h : ℚ) →
+    (a * c + d + f * h) + (b * c + e + g * h)
+      ≡ (a + b) * c + (d + e) + (f + g) * h
+  aggregateRightStep a b c d e f g h = solve
+    (a ∷ b ∷ c ∷ d ∷ e ∷ f ∷ g ∷ h ∷ [])
+
 aggregateOwnerEstimates :
   ∀ {environment}
     (estimates : List (AdmissibleOwnerEstimate environment)) →
@@ -99,8 +111,8 @@ aggregateOwnerEstimates :
 aggregateOwnerEstimates {environment} [] =
   subst
     (λ upper → 0ℚ ≤ upper)
-    (solve
-      (dissipation environment ∷ integralCritical environment ∷ []))
+    (emptyAggregateRight
+      (dissipation environment) (integralCritical environment))
     ℚₚ.≤-refl
 aggregateOwnerEstimates {environment} (estimate ∷ rest) =
   let
@@ -124,16 +136,11 @@ aggregateOwnerEstimates {environment} (estimate ∷ rest) =
       ≡
       admissibleAggregateRight (estimate ∷ rest)
     rightMeaning =
-      solve
-        ( eta estimate
-        ∷ sumEta rest
-        ∷ dissipation environment
-        ∷ dataRemainder estimate
-        ∷ sumDataRemainder rest
-        ∷ criticalCoefficient estimate
-        ∷ sumCriticalCoefficient rest
-        ∷ integralCritical environment
-        ∷ [])
+      aggregateRightStep
+        (eta estimate) (sumEta rest) (dissipation environment)
+        (dataRemainder estimate) (sumDataRemainder rest)
+        (criticalCoefficient estimate) (sumCriticalCoefficient rest)
+        (integralCritical environment)
   in
   subst
     (λ upper → sumProduction (estimate ∷ rest) ≤ upper)

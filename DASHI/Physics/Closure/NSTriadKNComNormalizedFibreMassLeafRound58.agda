@@ -24,10 +24,25 @@ adjacentShellTarget = Int.+ 65 / 512
 record PhysicalNormalizedOddPQGramRealization
     (support : Hat.PhysicalOddPQCommonHatIdentification) : Set₁ where
   field
-    pairProduct : Nat → Nat → ℚ
-    pairProductNonnegative : ∀ q r → 0ℚ ≤ pairProduct q r
+    -- The source quantity is the normalized squared Gram/energy mass.  The
+    -- velocity-linear kernel is deliberately not a field of this record.
+    normalizedSquaredGramEnergy : Nat → Nat → ℚ
+    normalizedSquaredGramEnergyNonnegative :
+      ∀ q r → 0ℚ ≤ normalizedSquaredGramEnergy q r
 
 open PhysicalNormalizedOddPQGramRealization public
+
+pairProduct :
+  {support : Hat.PhysicalOddPQCommonHatIdentification} →
+  PhysicalNormalizedOddPQGramRealization support → Nat → Nat → ℚ
+pairProduct realization = normalizedSquaredGramEnergy realization
+
+pairProductNonnegative :
+  {support : Hat.PhysicalOddPQCommonHatIdentification} →
+  (realization : PhysicalNormalizedOddPQGramRealization support) →
+  ∀ q r → 0ℚ ≤ pairProduct realization q r
+pairProductNonnegative realization =
+  normalizedSquaredGramEnergyNonnegative realization
 
 record SameAdjacentNormalizedFibreMassBounds
     {support : Hat.PhysicalOddPQCommonHatIdentification}
