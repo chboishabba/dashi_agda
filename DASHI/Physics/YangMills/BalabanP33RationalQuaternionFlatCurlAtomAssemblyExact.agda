@@ -19,6 +19,7 @@ open import Data.Rational.Base as ℚ using (ℚ; _+_; -_)
 open import Relation.Binary.PropositionalEquality using (trans)
 
 open import DASHI.Physics.YangMills.BalabanP33RationalQuaternionFlatCurlScalarExact
+open import DASHI.Physics.YangMills.BalabanP33RationalQuaternionFlatCurlPolynomialShapeExact
 open import DASHI.Physics.YangMills.BalabanP33RationalQuaternionFlatCurlDiagonalAtomsExact
 open import DASHI.Physics.YangMills.BalabanP33RationalQuaternionFlatCurlRow0AtomsExact
 open import DASHI.Physics.YangMills.BalabanP33RationalQuaternionFlatCurlRow1AtomsExact
@@ -27,15 +28,17 @@ open import DASHI.Physics.YangMills.BalabanP33RationalQuaternionFlatCurlTail23At
 flatRecursionDotExpansion :
   RationalVector3 → RationalVector3 → RationalVector3 → RationalVector3 → ℚ
 flatRecursionDotExpansion a b c d =
-  vectorDot a a
-  + (row0Scalar + (row0Scalar
-    + (vectorDot b b
-      + (row1Scalar + (row1Scalar
-        + (vectorDot c c
-          + (vectorDot c d + (vectorDot c d + vectorDot d d))))))))
-  where
-    row0Scalar = vectorDot a b + ((- vectorDot a c) + (- vectorDot a d))
-    row1Scalar = (- vectorDot b c) + (- vectorDot b d)
+  flatRecursionShape
+    (vectorDot a a)
+    (vectorDot a b)
+    (vectorDot a c)
+    (vectorDot a d)
+    (vectorDot b b)
+    (vectorDot b c)
+    (vectorDot b d)
+    (vectorDot c c)
+    (vectorDot c d)
+    (vectorDot d d)
 
 flatTail123AtomFamily : ∀ b c d →
   wilsonSecondVariationAtomSum
