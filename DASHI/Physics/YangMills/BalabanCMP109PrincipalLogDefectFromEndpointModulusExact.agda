@@ -34,10 +34,9 @@ module DASHI.Physics.YangMills.BalabanCMP109PrincipalLogDefectFromEndpointModulu
 --
 --   col(J_X-I) <= (5/3+1) delta = (8/3) delta < rho/8.
 --
--- Thus the remaining principal-log leaf is scalar/coordinate data, not an
--- independently supplied 3x3 matrix estimate.  The Bishop endpoint theorem in
--- the repository is much stronger, O(t^2/100); this module is the rational
--- consumer needed to connect it to the Federbush inverse lane.
+-- This is retained as a fine local calibration.  The preferred full source-
+-- scale G1 path now uses the exact dexp/transport cancellation, so this file is
+-- no longer required to force CMP109's entire 1/12 logarithm chart into rho/96.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -75,24 +74,15 @@ zeroAdSquare = AdSq.adSquare zeroAd
 principalLogAtZeroIsIdentity : ∀ c1 row column →
   JVar.principalLogAdMatrix c1 c2AtZero zeroAd zeroAdSquare row column
   ≡ Jacobian.identity3 row column
-principalLogAtZeroIsIdentity c1 Physical.coordinateX Physical.coordinateX =
-  ℚRing.solve-∀ c1
-principalLogAtZeroIsIdentity c1 Physical.coordinateX Physical.coordinateY =
-  ℚRing.solve-∀ c1
-principalLogAtZeroIsIdentity c1 Physical.coordinateX Physical.coordinateZ =
-  ℚRing.solve-∀ c1
-principalLogAtZeroIsIdentity c1 Physical.coordinateY Physical.coordinateX =
-  ℚRing.solve-∀ c1
-principalLogAtZeroIsIdentity c1 Physical.coordinateY Physical.coordinateY =
-  ℚRing.solve-∀ c1
-principalLogAtZeroIsIdentity c1 Physical.coordinateY Physical.coordinateZ =
-  ℚRing.solve-∀ c1
-principalLogAtZeroIsIdentity c1 Physical.coordinateZ Physical.coordinateX =
-  ℚRing.solve-∀ c1
-principalLogAtZeroIsIdentity c1 Physical.coordinateZ Physical.coordinateY =
-  ℚRing.solve-∀ c1
-principalLogAtZeroIsIdentity c1 Physical.coordinateZ Physical.coordinateZ =
-  ℚRing.solve-∀ c1
+principalLogAtZeroIsIdentity c1 Physical.coordinateX Physical.coordinateX = ℚRing.solve-∀ c1
+principalLogAtZeroIsIdentity c1 Physical.coordinateX Physical.coordinateY = ℚRing.solve-∀ c1
+principalLogAtZeroIsIdentity c1 Physical.coordinateX Physical.coordinateZ = ℚRing.solve-∀ c1
+principalLogAtZeroIsIdentity c1 Physical.coordinateY Physical.coordinateX = ℚRing.solve-∀ c1
+principalLogAtZeroIsIdentity c1 Physical.coordinateY Physical.coordinateY = ℚRing.solve-∀ c1
+principalLogAtZeroIsIdentity c1 Physical.coordinateY Physical.coordinateZ = ℚRing.solve-∀ c1
+principalLogAtZeroIsIdentity c1 Physical.coordinateZ Physical.coordinateX = ℚRing.solve-∀ c1
+principalLogAtZeroIsIdentity c1 Physical.coordinateZ Physical.coordinateY = ℚRing.solve-∀ c1
+principalLogAtZeroIsIdentity c1 Physical.coordinateZ Physical.coordinateZ = ℚRing.solve-∀ c1
 
 record PrincipalLogEndpointData
     (c1 c2X x0 x1 x2 : ℚ) : Set where
@@ -103,7 +93,7 @@ record PrincipalLogEndpointData
       x0 x1 x2 0ℚ 0ℚ 0ℚ Calibration.logarithmChartRadius
     c1AbsoluteBound : ∣ c1 ∣ ≤ Local.oneHalf
     coefficientEndpointModulus :
-      ∣ JVar._-_ c2X c2AtZero ∣ ≤ Calibration.logarithmChartRadius
+      ∣ c2X - c2AtZero ∣ ≤ Calibration.logarithmChartRadius
 
 open PrincipalLogEndpointData public
 
@@ -153,7 +143,7 @@ asLocalModulusData c1 c2X x0 x1 x2 dataSet = record
       c2AtZeroBelowOneSixth
   ; Local.PrincipalLogLocalModulusData.c2DifferenceModulus =
       subst
-        (λ upper → ∣ JVar._-_ c2X c2AtZero ∣ ≤ upper)
+        (λ upper → ∣ c2X - c2AtZero ∣ ≤ upper)
         (sym (ℚP.*-identityˡ Calibration.logarithmChartRadius))
         (coefficientEndpointModulus dataSet)
   }
@@ -199,8 +189,7 @@ principalLogResidualColumnWithinAllocation :
         (Ad.adMatrix x0 x1 x2)
         (AdSq.adSquare (Ad.adMatrix x0 x1 x2)))) column
   ≤ Calibration.logarithmAllocation
-principalLogResidualColumnWithinAllocation
-    c1 c2X x0 x1 x2 dataSet column =
+principalLogResidualColumnWithinAllocation c1 c2X x0 x1 x2 dataSet column =
   let
     current = JVar.principalLogAdMatrix
       c1 c2X
@@ -229,8 +218,7 @@ principalLogResidualColumnWithinAllocation
   ℚP.≤-trans
     (subst
       (λ lower →
-        lower
-        ≤ (Local.fiveThirds + one) * Calibration.logarithmChartRadius)
+        lower ≤ (Local.fiveThirds + one) * Calibration.logarithmChartRadius)
       identify raw)
     localLipschitzFitsLogarithmAllocation
 
@@ -240,8 +228,5 @@ cmp109PrincipalLogZeroEndpointIdentityLevel = machineChecked
 cmp109PrincipalLogEndpointModulusToDefectLevel : ProofLevel
 cmp109PrincipalLogEndpointModulusToDefectLevel = machineChecked
 
--- Remaining scalar bridge: instantiate c1,c2X with the actual principal-log /
--- inverse-dexp coefficients and transport the already checked Bishop endpoint
--- modulus into the rational inequality used above.
 cmp109PrincipalLogBishopCoefficientToRationalLevel : ProofLevel
 cmp109PrincipalLogBishopCoefficientToRationalLevel = conditional
