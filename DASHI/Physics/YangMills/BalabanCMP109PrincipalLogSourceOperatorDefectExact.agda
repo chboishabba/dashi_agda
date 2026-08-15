@@ -21,35 +21,27 @@ module DASHI.Physics.YangMills.BalabanCMP109PrincipalLogSourceOperatorDefectExac
 --
 --   J_-(Y)-I = +(1/2) ad_Y + beta(|Y|) ad_Y^2.
 --
--- If
+-- If |Y|<=t<=1/12, ||ad_Y||<=2t, ||ad_Y^2||<=4t^2 and
+-- |beta(t)|<=1/6, then
 --
---   |Y| <= t <= 1/12,
---   ||ad_Y|| <= 2 t,
---   ||ad_Y^2|| <= 4 t^2,
---   |beta(t)| <= 1/6,
+--   ||J_-(Y)-I|| <= t + (2/3)t^2 <= 19/216 < 1/4.
 --
--- then by the operator triangle/submultiplicative estimate
---
---   ||J_-(Y)-I||
---      <= (1/2)(2t) + (1/6)(4t^2)
---       = t + (2/3)t^2
---      <= 19/216
---       < 1/4.
---
--- This is deliberately a MAJORANT theorem: the actual operator and its actual
--- Bishop-real coefficient need not have rational entries.  A physical caller
--- supplies only certified rational upper bounds on their norms.  This removes
--- an unnecessary real-to-rational equality obligation from G1.
+-- This is deliberately a MAJORANT theorem.  The actual operator and its
+-- Bishop-real coefficient need not have rational entries; a physical caller
+-- supplies certified rational upper bounds on their norms.  Consequently G1
+-- does not require an exact real-to-rational coefficient identification merely
+-- to obtain conditioning.
 ------------------------------------------------------------------------
 
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; _+_; _*_; _≤_; _/_)
+  (ℚ; 0ℚ; _+_; _-_; _*_; _≤_; _/_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as FiniteL2
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
 
 oneHalf oneSixth two four twoThirds : ℚ
@@ -78,12 +70,15 @@ record SourceOperatorInverseDexpDefectData : Set where
     adSquareNormBound : adSquareNorm ≤ four * (radius * radius)
     betaNormBound : betaNorm ≤ oneSixth
 
-    -- Physical operator triangle.  No matrix-entry identification is assumed.
     jacobianDefectTriangle :
       jacobianDefectNorm
       ≤ oneHalf * adNorm + betaNorm * adSquareNorm
 
 open SourceOperatorInverseDexpDefectData public
+
+radiusSquareNonnegative : ∀ radius → 0ℚ ≤ radius → 0ℚ ≤ radius * radius
+radiusSquareNonnegative radius radiusNN =
+  FiniteL2.squareNonnegative radius
 
 radiusSquareMonotone :
   ∀ radius → 0ℚ ≤ radius → radius ≤ sourceRadius →
@@ -116,7 +111,10 @@ scaledQuadraticTerm :
 scaledQuadraticTerm dataSet =
   let
     betaNN = betaNormNonnegative dataSet
-    adSqNN = adSquareNormNonnegative dataSet
+    radiusSqNN = radiusSquareNonnegative
+      (radius dataSet) (radiusNonnegative dataSet)
+    fourRadiusNN = Norm.scaleNonnegative four
+      (ℚP.nonNegative⁻¹ four) radiusSqNN
 
     first :
       betaNorm dataSet * adSquareNorm dataSet
@@ -124,22 +122,12 @@ scaledQuadraticTerm dataSet =
     first = Norm.scaleNonnegative
       (betaNorm dataSet) betaNN (adSquareNormBound dataSet)
 
-    fourRadiusNN : 0ℚ ≤ four * (radius dataSet * radius dataSet)
-    fourRadiusNN =
-      let
-        radiusSqNN = ℚP.nonNegative⁻¹
-          (radius dataSet * radius dataSet)
-      in
-      ℚP.*-mono-≤
-        (ℚP.nonNegative⁻¹ four)
-        radiusSqNN
-        ℚP.≤-refl ℚP.≤-refl
-
     second :
       betaNorm dataSet * (four * (radius dataSet * radius dataSet))
       ≤ oneSixth * (four * (radius dataSet * radius dataSet))
-    second = ℚP.*-monoʳ-≤-nonNeg
+    second = Norm.scaleNonnegative
       (four * (radius dataSet * radius dataSet))
+      fourRadiusNN
       (betaNormBound dataSet)
 
     combined = ℚP.≤-trans first second
@@ -181,8 +169,6 @@ sourceDefectCeilingBelowQuarter : sourceDefectCeiling ≤ quarter
 sourceDefectCeilingBelowQuarter =
   Norm.nonnegativeDifferenceImpliesBelow
     (ℚP.nonNegative⁻¹ (quarter - sourceDefectCeiling))
-  where
-    open import Data.Rational.Base using (_-_)
 
 sourceOperatorInverseDexpDefectQuarter :
   ∀ dataSet → jacobianDefectNorm dataSet ≤ quarter
@@ -202,8 +188,5 @@ cmp109SourceOperatorInverseDexpEnvelopeLevel = machineChecked
 cmp109SourceOperatorInverseDexpQuarterLevel : ProofLevel
 cmp109SourceOperatorInverseDexpQuarterLevel = machineChecked
 
--- Physical leaves are now only the actual operator-norm estimates encoded by
--- SourceOperatorInverseDexpDefectData.  No rational coefficient equality is
--- required by this theorem.
 cmp109SourceOperatorInverseDexpPhysicalNormInputsLevel : ProofLevel
 cmp109SourceOperatorInverseDexpPhysicalNormInputsLevel = conditional
