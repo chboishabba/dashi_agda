@@ -8,28 +8,31 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound53LiteralFederbushCou
 --   printed equation-(0.11) J_j T_j
 --     = J_+(Y_j) Ad_{exp Y_j}
 --     = J_-(Y_j)
---     = literal source-radius inverse-dexp polynomial
---     -> col(J_-(Y_j)-I) < 1/4
+--     -> actual Bishop beta(t) coefficient modulus at |Y| <= 1/12
+--     -> source-radius matrix defect < 1/4
 --     -> normalized 4/3 inverse.
 --
--- The finite/rational transport after the literal equality is theorem
--- consumption.  What remains physical is the sign/trivialization identity and
--- the actual Bishop coefficient realization at |Y| <= 1/12.
+-- The new Bishop theorem proves the coefficient estimate on the actual
+-- constructive-real quotient.  The remaining G1 semantic seam is therefore
+-- explicit: connect that actual coefficient/operator to the finite matrix
+-- carrier used by the printed equation without pretending beta(t) is rational.
 --
 -- RG route:
 -- beta split -> beta >= 0 -> terminal inverse threshold -> exact positive-
 -- rational inverse-square order -> small coupling at every active scale.
--- The arithmetic order bridge is no longer a conditional leaf here.  The
--- actual finite-lattice beta estimates and source u_k,g_k representation are.
+-- The arithmetic order bridge is theorem-level.  The actual finite-lattice
+-- beta estimates and literal source u_k,g_k representation remain physical.
 ------------------------------------------------------------------------
 
 import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound52SourceRGFederbushValidation as R52
 import DASHI.Physics.YangMills.BalabanCMP109LiteralFederbushCancellationDictionaryExact as Literal
 import DASHI.Physics.YangMills.BalabanCMP109FederbushDexpTransportCancellationExact as Dexp
 import DASHI.Physics.YangMills.BalabanCMP109PrincipalLogSourceRadiusDefectExact as Source
+import DASHI.Physics.YangMills.BalabanP33BishopInverseDexpCoefficientQuadraticModulusExact as BishopModulus
 import DASHI.Physics.YangMills.Balaban1989BetaSplitTerminalHistoryExact as BetaTerminal
 import DASHI.Physics.YangMills.Balaban1989TerminalInverseThresholdHistoryExact as Terminal
 import DASHI.Physics.YangMills.BalabanYM4RationalInverseSquareOrderExact as InverseOrder
+import DASHI.Physics.YangMills.BalabanYM4InverseSquareOrderAuditExact as InverseAudit
 import DASHI.Physics.YangMills.Balaban1989BetaSplitInverseSquareTerminalHistoryExact as ExactHistory
 
 literalFederbushCancellationDictionaryLevel =
@@ -47,10 +50,16 @@ reducedDexpTransportCancellationLevel =
 physicalDexpTransportIdentificationLevel =
   Dexp.cmp109FederbushPhysicalDexpTransportIdentificationLevel
 
+bishopActualCoefficientDifferenceNonnegativeLevel =
+  BishopModulus.p33BishopInverseDexpCoefficientDifferenceNonnegativeLevel
+
+bishopActualCoefficientQuadraticModulusLevel =
+  BishopModulus.p33BishopInverseDexpCoefficientQuadraticModulusLevel
+
 sourceRadiusMatrixQuarterLevel =
   Source.cmp109PrincipalLogSourceRadiusQuarterLevel
 
-sourceRadiusBishopCoefficientLevel =
+sourceRadiusBishopToFiniteCarrierLevel =
   Source.cmp109PrincipalLogSourceRadiusBishopCoefficientLevel
 
 betaSplitTerminalHistoryAssemblyLevel =
@@ -64,6 +73,9 @@ positiveRationalSquareOrderReflectionLevel =
 
 rationalInverseSquareOrderLevel =
   InverseOrder.ym4RationalInverseSquareOrderLevel
+
+literalInverseSquareRepresentationAuditLevel =
+  InverseAudit.ym4LiteralInverseSquareRepresentationAuditLevel
 
 betaSplitInverseSquareHistoryAssemblyLevel =
   ExactHistory.balabanBetaSplitInverseSquareHistoryAssemblyLevel
