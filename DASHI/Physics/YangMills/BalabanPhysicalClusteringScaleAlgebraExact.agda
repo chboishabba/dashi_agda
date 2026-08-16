@@ -16,7 +16,7 @@ module DASHI.Physics.YangMills.BalabanPhysicalClusteringScaleAlgebraExact where
 -- DASHI CONTRIBUTION
 --
 -- Discharge the dimensional algebra hidden by the old `exponentConversion`
--- field.  Let a be the physical lattice spacing, aInv its reciprocal, mu the
+-- field. Let a be the physical lattice spacing, aInv its reciprocal, mu the
 -- dimensionless lattice localization exponent and m the target physical mass.
 -- From
 --
@@ -40,7 +40,7 @@ open import Agda.Builtin.Equality using (_≡_)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; 1ℚ; _*_; _≤_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
@@ -78,12 +78,18 @@ physicalMassTimesSpacingBelowLatticeExponent dataSet =
     leftCommutes : a * mass ≡ mass * a
     leftCommutes = ℚP.*-comm a mass
 
-    rightCollapses : a * (aInv * mu) ≡ mu
-    rightCollapses =
+    reassociate : a * (aInv * mu) ≡ (a * aInv) * mu
+    reassociate = ℚRing.solve-∀ a aInv mu
+
+    reciprocalCollapse : (a * aInv) * mu ≡ mu
+    reciprocalCollapse =
       subst
         (λ product → product * mu ≡ mu)
-        (spacingInverseExact dataSet)
+        (sym (spacingInverseExact dataSet))
         (ℚRing.solve-∀ mu)
+
+    rightCollapses : a * (aInv * mu) ≡ mu
+    rightCollapses = trans reassociate reciprocalCollapse
   in
   subst
     (λ lower → lower ≤ mu)
