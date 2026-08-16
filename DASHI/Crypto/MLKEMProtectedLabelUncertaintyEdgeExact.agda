@@ -8,7 +8,13 @@ module DASHI.Crypto.MLKEMProtectedLabelUncertaintyEdgeExact where
 -- "Module-Lattice-Based Key-Encapsulation Mechanism Standard",
 -- FIPS 203, 2024. DOI: 10.6028/NIST.FIPS.203.
 --
--- This module connects the new harmonic/singular-budget obstruction to the
+-- Finite-field uncertainty source used by the upstream support theorem:
+-- Martino Borello; Patrick Sole,
+-- "The uncertainty principle over finite fields",
+-- Discrete Mathematics 345 (2022), 112670.
+-- DOI: 10.1016/j.disc.2021.112670.
+--
+-- This module connects the harmonic/singular-budget obstruction to the
 -- pre-existing ProtectedLabelSearchGeometry object itself.  It is the first
 -- theorem in this lane whose conclusion mentions the actual edge-update cost
 -- selected by a search representation.
@@ -124,22 +130,29 @@ boundedRadiusSearchEdgeObstruction128 priced radius withinRadius =
     (searchEdgeUncertaintyObstruction128 priced)
 
 ------------------------------------------------------------------------
--- CLAIM BOUNDARY
+-- CLAIM BOUNDARY / CURRENT STATUS
 --
--- What is now proved conditionally:
+-- What is proved conditionally:
 --
---   every same-object ML-KEM search edge whose verifier work covers its
---   surviving output support obeys the sharp 128 locality/work product, with
---   singular residues appearing as an explicit defect budget.
+--   every same-object ML-KEM search edge whose charged update work covers its
+--   surviving output support obeys the 128 locality/work product, with singular
+--   residues appearing as an explicit defect budget.
+--
+-- Round 17 now provides a concrete producer for one important verifier class:
+-- an explicitly materialised exact residual state.  The residual-touch theorem
+-- proves changed cells are touched, and the path theorem aggregates that exact
+-- resource along a traversal.  Thus the implementation-facing bridge is no
+-- longer wholly abstract.
 --
 -- What is NOT yet proved:
 --
---   * every conceivable implementation's edge cost dominates residue support;
+--   * the FIPS-specific support/singularity certificate for every actual edge;
+--   * the same domination theorem for lazy/compressed/symbolic verifier states;
 --   * a lower bound on the number of candidate edges required for recovery;
---   * a total ML-KEM attack runtime lower bound;
+--   * a generic total ML-KEM attack runtime lower bound;
 --   * computational hardness from support uncertainty alone.
 --
--- The highest-alpha next producer is now concrete and implementation-facing:
--- instantiate updateCostCoversSurvivingResidues for the repository's actual
--- incremental residual verifier/update primitive.
+-- The parallel sufficient-state/readout-capacity and CBD average-success lanes
+-- now handle the first representation-independent information seam.  The next
+-- source-facing closure is to instantiate both sides on one concrete verifier.
 ------------------------------------------------------------------------
