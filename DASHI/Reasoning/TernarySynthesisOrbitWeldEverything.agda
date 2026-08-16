@@ -24,6 +24,7 @@ import DASHI.Interop.PNFSpectralFieldGraph
 import DASHI.Interop.PNFTernaryCycleSpectralExact
 import DASHI.Moonshine.TernarySevenOggSSPComparisonExact
 import DASHI.Physics.Common.FiniteWreathRefinementExact
+import DASHI.Reasoning.PNFWaveSynthesisCommutatorExact
 import DASHI.Reasoning.RelationalBranchCobordismGeometry
 import DASHI.Reasoning.RelationalBranchInterference
 import DASHI.Reasoning.RelationalLensSynthesisCore
