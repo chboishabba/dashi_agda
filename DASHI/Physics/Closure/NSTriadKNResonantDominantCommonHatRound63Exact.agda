@@ -26,9 +26,10 @@ module DASHI.Physics.Closure.NSTriadKNResonantDominantCommonHatRound63Exact wher
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; suc)
+open import Agda.Builtin.Nat using (Nat)
 
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
+import DASHI.Physics.Closure.NSTriadKNLiteralDyadicShellConstants as Shell
 import DASHI.Physics.Closure.NSTriadKNComDyadicHatWidthOneRound46Exact as Width
 import DASHI.Physics.Closure.NSPeriodicNearShellOverlapCount as Hat
 import DASHI.Physics.Closure.NSTriadKNResonantDominantTwoShellsRound63Exact as Dominant
@@ -75,20 +76,20 @@ resonantDominantCommonHat tau
   with Dominant.resonantDominantTwoShells tau
 ... | Dominant.dominantPQ within = record
   { dominantPair = Dominant.dominantPQ within
-  ; leftShell = _
-  ; rightShell = _
+  ; leftShell = Shell.shellIndex (Physical.p tau)
+  ; rightShell = Shell.shellIndex (Physical.q tau)
   ; pairHat = commonHatFromWithinOne within
   }
 ... | Dominant.dominantPK within = record
   { dominantPair = Dominant.dominantPK within
-  ; leftShell = _
-  ; rightShell = _
+  ; leftShell = Shell.shellIndex (Physical.p tau)
+  ; rightShell = Shell.shellIndex (Physical.k tau)
   ; pairHat = commonHatFromWithinOne within
   }
 ... | Dominant.dominantQK within = record
   { dominantPair = Dominant.dominantQK within
-  ; leftShell = _
-  ; rightShell = _
+  ; leftShell = Shell.shellIndex (Physical.q tau)
+  ; rightShell = Shell.shellIndex (Physical.k tau)
   ; pairHat = commonHatFromWithinOne within
   }
 
