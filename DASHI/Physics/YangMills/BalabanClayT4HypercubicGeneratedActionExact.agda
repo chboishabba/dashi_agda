@@ -19,7 +19,7 @@ module DASHI.Physics.YangMills.BalabanClayT4HypercubicGeneratedActionExact where
 -- DASHI CONTRIBUTION
 --
 -- Construct, rather than merely name, the finite signed-permutation action on
--- the generated 4^4 normalized Brillouin grid.  Four coordinate sign flips and
+-- the generated 4^4 normalized Brillouin grid. Four coordinate sign flips and
 -- the three adjacent transpositions generate the hyperoctahedral action B_4.
 --
 -- We prove:
@@ -34,8 +34,10 @@ module DASHI.Physics.YangMills.BalabanClayT4HypercubicGeneratedActionExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Nat.Properties using (+-assoc; +-comm)
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Data.Rational.Base using (ℚ)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayT4GeneratedBrillouinGridExact as Grid
@@ -112,26 +114,47 @@ outerCountGeneratorInvariant swap01 (Grid.gridCell4 a b c d) =
     (+-comm (Orbit.outerWeight b) (Orbit.outerWeight a))
 outerCountGeneratorInvariant swap12 (Grid.gridCell4 a b c d) =
   trans
-    (+-assoc (Orbit.outerWeight a) (Orbit.outerWeight c)
-      (Orbit.outerWeight b + Orbit.outerWeight d))
+    (sym (+-assoc (Orbit.outerWeight a) (Orbit.outerWeight c)
+      (Orbit.outerWeight b)))
     (trans
-      (cong (Orbit.outerWeight a +_)
+      (cong (λ middle → middle + Orbit.outerWeight d)
         (trans
-          (cong (_+ Orbit.outerWeight d)
-            (+-comm (Orbit.outerWeight c) (Orbit.outerWeight b)))
-          (sym (+-assoc (Orbit.outerWeight b) (Orbit.outerWeight c)
-            (Orbit.outerWeight d)))))
-      (sym (+-assoc (Orbit.outerWeight a) (Orbit.outerWeight b)
-        (Orbit.outerWeight c + Orbit.outerWeight d))))
+          (+-assoc (Orbit.outerWeight a) (Orbit.outerWeight c)
+            (Orbit.outerWeight b))
+          (trans
+            (cong (Orbit.outerWeight a +_)
+              (+-comm (Orbit.outerWeight c) (Orbit.outerWeight b)))
+            (sym (+-assoc (Orbit.outerWeight a) (Orbit.outerWeight b)
+              (Orbit.outerWeight c))))))
+      refl)
 outerCountGeneratorInvariant swap23 (Grid.gridCell4 a b c d) =
   cong (λ tail → Orbit.outerWeight a + Orbit.outerWeight b + tail)
     (+-comm (Orbit.outerWeight d) (Orbit.outerWeight c))
 
+classFromCount : Nat → Orbit.OrbitClass
+classFromCount zero = Orbit.infrared
+classFromCount (suc zero) = Orbit.oneOuter
+classFromCount (suc (suc zero)) = Orbit.twoOuter
+classFromCount (suc (suc (suc zero))) = Orbit.threeOuter
+classFromCount (suc (suc (suc (suc _)))) = Orbit.fourOuter
+
+orbitClassAsCount : ∀ cell →
+  Orbit.orbitClass cell ≡ classFromCount (Orbit.outerCount cell)
+orbitClassAsCount cell with Orbit.outerCount cell
+... | zero = refl
+... | suc zero = refl
+... | suc (suc zero) = refl
+... | suc (suc (suc zero)) = refl
+... | suc (suc (suc (suc n))) = refl
+
 orbitClassGeneratorInvariant : ∀ generator cell →
   Orbit.orbitClass (act generator cell) ≡ Orbit.orbitClass cell
 orbitClassGeneratorInvariant generator cell =
-  cong Orbit.orbitClassFromCount
-    (outerCountGeneratorInvariant generator cell)
+  trans
+    (orbitClassAsCount (act generator cell))
+    (trans
+      (cong classFromCount (outerCountGeneratorInvariant generator cell))
+      (sym (orbitClassAsCount cell)))
 
 ------------------------------------------------------------------------
 -- Reflexive-transitive generated action.
@@ -347,18 +370,12 @@ cellPathToOrbitRepresentative cell =
       (sortedNormalizedIsRepresentative cell))
 
 ------------------------------------------------------------------------
--- Physical-scalar consequence: generator invariance is enough.  There is no
+-- Physical-scalar consequence: generator invariance is enough. There is no
 -- separate "same-orbit values agree" authority field.
 ------------------------------------------------------------------------
 
-record GeneratorInvariantContribution (contribution : Grid.GridCell4 → Set) : Set₁ where
-  field
-    transport : ∀ generator cell →
-      contribution cell → contribution (act generator cell)
-open GeneratorInvariantContribution public
-
 record GeneratorInvariantRationalContribution
-    (contribution : Grid.GridCell4 → Data.Rational.Base.ℚ) : Set where
+    (contribution : Grid.GridCell4 → ℚ) : Set where
   field
     generatorInvariant : ∀ generator cell →
       contribution cell ≡ contribution (act generator cell)
@@ -392,7 +409,7 @@ hypercubicOrbitTransitivityOnGeneratedGridLevel : ProofLevel
 hypercubicOrbitTransitivityOnGeneratedGridLevel = machineChecked
 
 -- Remaining physical leaf: prove the fully reduced Wilson/ghost/Haar scalar
--- contribution is invariant under these seven concrete generators.  Once that
+-- contribution is invariant under these seven concrete generators. Once that
 -- is done, four representative values (or, more robustly, four joint orbit
 -- sums) exhaust the 240 regular boxes.
 literalOneLoopGeneratorInvarianceLevel : ProofLevel
