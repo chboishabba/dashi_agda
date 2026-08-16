@@ -180,7 +180,7 @@ restrictedGainBelowProductDissipation
       (ℚP.≤-trans etaChargeToEtaUnmasked
         (subst
           (λ left → left ≤ productEta input * diss)
-          etaUnmaskedMeaning
+          (sym etaUnmaskedMeaning)
           (subst
             (λ right → Sharp.two * (ceiling * unmasked) ≤ right)
             endpoint
