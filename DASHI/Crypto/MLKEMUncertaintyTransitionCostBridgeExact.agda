@@ -147,16 +147,21 @@ pricedTransitionObstruction128 step =
     (verifierWorkCoversSurvivingResidues step)
 
 ------------------------------------------------------------------------
--- AUTHORITY BOUNDARY
+-- AUTHORITY BOUNDARY / CURRENT STATUS
 --
--- This module identifies the exact missing bridge from support uncertainty to
--- search geometry.  The new implementation-facing producer is NOT another
--- uncertainty theorem.  It is a same-object statement for the actual verifier:
+-- This module identifies the exact same-object bridge from support uncertainty
+-- to charged transition work:
 --
 --   surviving output residues <= incremental update work.
 --
--- Once that is established for a concrete ProtectedLabelSearchGeometry edge,
--- every nonzero primitive transition inherits the 128 product obstruction.
--- A total search lower bound still requires path/candidate/reconciliation
--- assumptions and is intentionally not claimed here.
+-- Round 17 now contains one concrete implementation-class producer:
+-- `MLKEMExactResidualTouchLowerBoundExact` proves the needed domination for an
+-- explicitly materialised exact residual state, and
+-- `MLKEMResidualTouchPathLowerBoundExact` sums that resource along a path.
+-- Therefore the old statement that this producer was wholly missing is stale.
+--
+-- What remains open is broader: instantiate the support/singularity side on the
+-- actual FIPS public matrices, and treat lazy/compressed/symbolic verifier states
+-- through the separate sufficient-state/readout-capacity lane.  A generic total
+-- attack-runtime lower bound is still intentionally not claimed.
 ------------------------------------------------------------------------
