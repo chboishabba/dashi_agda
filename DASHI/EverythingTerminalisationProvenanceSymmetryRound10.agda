@@ -84,5 +84,11 @@ import DASHI.Crypto.CryptoLocalConstraintSearchRound15
 -- protected-label recovery cost.
 import DASHI.Crypto.BlueTeamAdversaryClosureRound16
 
+-- Round-17 continuation: actual FIPS NTT source-dataflow coupling, two-block
+-- parity-prior structure with quadratic recoupling, no disconnected parity cut,
+-- key-confirmation / implicit-reject observation witnesses, and observation
+-- acquisition cost folded into recovery cost.
+import DASHI.Crypto.BlueTeamSearchObservationRound17
+
 -- Exact arithmetic transport / semantic-promotion boundary.
 import DASHI.Arithmetic.PrimeSupportTransportTaxiMoonshineExact
