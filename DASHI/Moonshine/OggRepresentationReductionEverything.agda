@@ -21,6 +21,13 @@ module DASHI.Moonshine.OggRepresentationReductionEverything where
 -- spinor boundary rather than being forced through the odd SO(3) lane.
 -- Cyclic C2/C3 elliptic stabilisers are embedded as proper subgroups of the
 -- existing ternary S3 permutation carrier rather than conflated with S3.
+--
+-- The matched-dihedral extension is a candidate-indexed restriction
+-- H_j = D_(2j+1).  It gives the literal five-irrep decomposition
+-- 9 = 1+2+2+2+2 at j=4, while proving multiplicity-freeness itself is too weak
+-- to select Ogg.  Its sector count j+1 replaces the raw p+1 term in the modular
+-- genus formula, so the non-Fricke part of the prime-level genus is now read
+-- from reduced-representation observables plus the exact C2/C3 characters.
 ------------------------------------------------------------------------
 
 import DASHI.Analysis.FiniteRealQSeriesReflectionExact
@@ -46,6 +53,7 @@ import DASHI.Foundations.PolyhedralFixedSpaceDerivedNonaryExact
 import DASHI.Foundations.PolyhedralInvariantFixedSpaceSignatureExact
 import DASHI.Foundations.PolyhedralRestrictionCriticalCharacterExact
 import DASHI.Foundations.PolyhedralRegularRepresentationShiftExact
+import DASHI.Foundations.MatchedDihedralSO3RestrictionExact
 import DASHI.Foundations.BinaryPolyhedralMcKayDimensionExact
 import DASHI.Foundations.TernaryPermutationCyclicSubgroupsExact
 import DASHI.Foundations.TernaryPhaseShapeIncidenceExact
@@ -65,6 +73,11 @@ import DASHI.Moonshine.EisensteinDiscriminantWeight12Exact
 import DASHI.Moonshine.ModularCurveJFrickeInterfaceExact
 import DASHI.Moonshine.D4IrrepModularFrickeDescentExact
 import DASHI.Moonshine.Monster3BC3RepresentationRingEvaluationExact
+import DASHI.Moonshine.SO3CyclicFixedSpaceScanExact
+import DASHI.Moonshine.SO3CyclicBranchingControlExact
+import DASHI.Moonshine.SO3CyclicFixedSpaceFormulaExact
+import DASHI.Moonshine.SO3C5FiveIrrepNineExact
+import DASHI.Moonshine.OggFixedSpaceSelectorNoGoExact
 import DASHI.Moonshine.OggPolyhedralReductionControlExact
 import DASHI.Moonshine.OggTetrahedralReductionControlExact
 import DASHI.Moonshine.OggPrimeControlMatrixExact
@@ -72,6 +85,7 @@ import DASHI.Moonshine.PrimeFrickeGenusControlExact
 import DASHI.Moonshine.PrimeFrickeOrbitSaturationExact
 import DASHI.Moonshine.SupersingularFrobeniusOrbitSpectrumExact
 import DASHI.Moonshine.PrimeRepresentationFrickeCouplingExact
+import DASHI.Moonshine.MatchedDihedralFrickeGenusBridgeExact
 import DASHI.Moonshine.PrimeRepresentationFrickeOrbitSaturationExact
 import DASHI.Moonshine.PrimeRepresentationSupersingularOrbitCouplingExact
 import DASHI.Moonshine.AllPrimeRepresentationFrickeClosureExact
@@ -85,3 +99,4 @@ import DASHI.Physics.Closure.PhysicalSSPHeckeModelClosureReceipt
 import DASHI.Physics.Closure.SSPZ3EigenspaceClassificationReceipt
 import DASHI.Physics.Moonshine.SupersingularPrimeLaneBridge
 import Ontology.Hecke.CorrespondenceRepresentation
+import Ontology.Hecke.LevelCorrespondenceRepresentation
