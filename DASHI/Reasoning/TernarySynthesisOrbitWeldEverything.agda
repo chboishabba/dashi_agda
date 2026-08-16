@@ -21,6 +21,7 @@ import DASHI.Foundations.TernaryPermutationS3LawsExact
 import DASHI.Interop.PNFHodgeResidualTopology
 import DASHI.Interop.PNFHyperfabric369
 import DASHI.Interop.PNFSpectralFieldGraph
+import DASHI.Interop.PNFTernaryCycleSpectralExact
 import DASHI.Moonshine.TernarySevenOggSSPComparisonExact
 import DASHI.Physics.Common.FiniteWreathRefinementExact
 import DASHI.Reasoning.RelationalBranchCobordismGeometry
