@@ -19,37 +19,28 @@ module DASHI.Physics.YangMills.BalabanClayT4BishopFourCornerIntervalExact where
 -- DASHI CONTRIBUTION
 --
 -- Round55 proved the exact rational four-corner multiplication interval, but
--- the physical beta atoms are Bishop reals.  The difficult constructive case
--- is when BOTH intervals straddle zero: one may not split on the unknown sign
--- of a Bishop real.
+-- physical beta atoms are Bishop reals.  The difficult constructive case is
+-- when BOTH intervals straddle zero: one may not split on the unknown sign of
+-- a Bishop real.
 --
--- We avoid real trichotomy completely.  For x in the rational interval [a,b],
--- rational endpoint comparison is decidable.  If a=b, x is extensionally that
--- endpoint.  If a<b, the positive Bishop width has an inverse and
---
---      t = (x-a)/(b-a)
---
--- satisfies 0 <= t <= 1 and
---
---      x = (1-t)a + tb.
---
--- The same holds for y.  Bilinearity then writes xy as a nested convex
+-- We avoid real trichotomy completely.  Every Bishop point in a rational
+-- interval has a constructive convex coordinate t in [0,1].  Rational endpoint
+-- comparison is decidable; a nondegenerate rational width is a positive Bishop
+-- real and hence invertible.  Bilinearity then writes xy as a nested convex
 -- combination of ac,ad,bc,bd.  Therefore the EXISTING rational min4/max4 box
--- encloses the actual Bishop product exactly.  No sign decision on x or y and
--- no widened center-radius box is used.
+-- encloses the actual Bishop product exactly, including straddle/straddle.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥-elim)
 open import Data.Integer.Base using (+_)
+open import Data.Product.Base using (_×_; _,_; proj₁; proj₂)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; 1ℚ; _+_; _-_; -_; _*_; _≤_; _<_ ; toℚᵘ)
+  (ℚ; 0ℚ; 1ℚ; _+_; _-_; -_; _*_; _≤_; _<_; toℚᵘ)
 import Data.Rational.Properties as ℚP
-import Data.Rational.Tactic.RingSolver as ℚRing
-open import Data.Rational.Unnormalised as ℚᵘ using (0ℚᵘ; 1ℚᵘ)
 open import Data.Sum.Base using (inj₂)
-open import Relation.Binary.Definitions using (Tri; tri<; tri≈; tri>)
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Relation.Binary.Definitions using (tri<; tri≈; tri>)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import Real as Bishop
 import RealProperties as BishopP
@@ -72,10 +63,6 @@ embedStrictOrder {left} {right} strict =
     (toℚᵘ left) (toℚᵘ right)
     (ℚP.toℚᵘ-mono-< strict)
 
-embedAdd : ∀ left right →
-  embed (left + right) Bishop.≃ (embed left Bishop.+ embed right)
-embedAdd = Carrier.bishopEmbedAdd
-
 embedNeg : ∀ value → embed (- value) Bishop.≃ (Bishop.- embed value)
 embedNeg value =
   BishopP.≃-trans
@@ -88,13 +75,6 @@ embedMul left right =
   BishopP.≃-trans
     (BishopP.⋆-cong (ℚP.toℚᵘ-homo-* left right))
     (BishopP.⋆-distrib-* (toℚᵘ left) (toℚᵘ right))
-
-embedSub : ∀ left right →
-  embed (left - right) Bishop.≃ (embed left Bishop.- embed right)
-embedSub left right =
-  BishopP.≃-trans
-    (embedAdd left (- right))
-    (BishopP.+-congʳ (embed left) (embedNeg right))
 
 embedZero : embed 0ℚ Bishop.≃ Bishop.0ℝ
 embedZero = BishopP.≃-refl
@@ -114,7 +94,7 @@ record BishopLiesIn (value : Bishop.ℝ) (box : Eval.RationalInterval) : Set whe
 open BishopLiesIn public
 
 ------------------------------------------------------------------------
--- Convex coordinates for a Bishop point in a rational interval.
+-- Constructive convex coordinates.
 ------------------------------------------------------------------------
 
 convex : Bishop.ℝ → Bishop.ℝ → Bishop.ℝ → Bishop.ℝ
@@ -143,35 +123,22 @@ oneMinusNonnegative : ∀ {parameter} →
   parameter Bishop.≤ Bishop.1ℝ →
   Bishop.0ℝ Bishop.≤ (Bishop.1ℝ Bishop.- parameter)
 oneMinusNonnegative {parameter} parameterBelowOne =
-  let
-    shifted = BishopP.+-mono-≤
-      parameterBelowOne
-      (BishopP.≤-refl {x = Bishop.- parameter})
-  in
   BishopP.≤-respˡ-≃
-    (BishopP.+-inverseʳ parameter)
-    (BishopP.≤-respʳ-≃
-      (let open BishopP.ℝ-Solver
-       in solve 1
-         (λ t → (Bishop.1ℝ :+ (:- t)) := (Bishop.1ℝ :- t))
-         BishopP.≃-refl parameter)
-      shifted)
-  where
-  open BishopP.ℝ-Solver
-    using () renaming (_⊕_ to _:+_; _⊖_ to _:-_; ⊝_ to :-_)
+    (BishopP.+-inverseʳ Bishop.1ℝ)
+    (BishopP.+-monoˡ-≤ Bishop.1ℝ
+      (BishopP.neg-mono-≤ parameterBelowOne))
 
--- Rational strict order gives a positive embedded width.
 positiveEmbeddedWidth : ∀ {lower upper} → lower < upper →
   Bishop.0ℝ Bishop.< (embed upper Bishop.- embed lower)
 positiveEmbeddedWidth {lower} {upper} lowerStrict =
   let
-    strict = BishopP.+-mono-<-≤
+    shifted = BishopP.+-mono-<-≤
       (embedStrictOrder lowerStrict)
       (BishopP.≤-refl {x = Bishop.- embed lower})
   in
   BishopP.<-respˡ-≃
     (BishopP.+-inverseʳ (embed lower))
-    strict
+    shifted
 
 positiveWidthNonzero : ∀ {lower upper} (lowerStrict : lower < upper) →
   (embed upper Bishop.- embed lower) Bishop.≄ Bishop.0ℝ
@@ -188,11 +155,11 @@ strictConvexCoordinate {value} {box} inside lowerStrict =
     b = embed (Eval.upper box)
     width = b Bishop.- a
     widthNonzero = positiveWidthNonzero lowerStrict
-    widthPositive = BishopP.0<x⇒posx (positiveEmbeddedWidth lowerStrict)
     inverseWidth = BishopInverse._⁻¹ width widthNonzero
     inverseWidthNonnegative =
       BishopP.pos⇒nonNeg
-        (BishopInverse.posx⇒posx⁻¹ widthNonzero widthPositive)
+        (BishopInverse.posx⇒posx⁻¹
+          widthNonzero (BishopP.0<x⇒posx (positiveEmbeddedWidth lowerStrict)))
     delta = value Bishop.- a
     t = delta Bishop.* inverseWidth
 
@@ -217,22 +184,19 @@ strictConvexCoordinate {value} {box} inside lowerStrict =
           (BishopP.0≤x⇒nonNegx deltaNonnegative)
           inverseWidthNonnegative)
 
-    tBelowOneRaw : t Bishop.≤ (width Bishop.* inverseWidth)
-    tBelowOneRaw =
-      BishopP.*-monoʳ-≤-nonNeg deltaBelowWidth inverseWidthNonnegative
-
     tBelowOne : t Bishop.≤ Bishop.1ℝ
     tBelowOne =
       BishopP.≤-respʳ-≃
         (BishopInverse.*-inverseʳ width widthNonzero)
-        tBelowOneRaw
+        (BishopP.*-monoʳ-≤-nonNeg
+          deltaBelowWidth inverseWidthNonnegative)
 
     tTimesWidth : (t Bishop.* width) Bishop.≃ delta
     tTimesWidth =
       BishopP.≃-trans
         (BishopP.*-assoc delta inverseWidth width)
         (BishopP.≃-trans
-          (BishopP.*-congˡ delta
+          (BishopP.*-congˡ
             (BishopInverse.*-inverseˡ width widthNonzero))
           (BishopP.*-identityʳ delta))
 
@@ -272,10 +236,11 @@ degenerateConvexCoordinate {value} {box} inside endpointsEqual =
   let
     a = embed (Eval.lower box)
     valueBelowA : value Bishop.≤ a
-    valueBelowA = subst
-      (λ endpoint → value Bishop.≤ embed endpoint)
-      (sym endpointsEqual)
-      (upperSound inside)
+    valueBelowA =
+      subst
+        (λ endpoint → value Bishop.≤ embed endpoint)
+        (sym endpointsEqual)
+        (upperSound inside)
     valueIsA : value Bishop.≃ a
     valueIsA = BishopP.≤-antisym valueBelowA (lowerSound inside)
     zeroConvexIsA : convex Bishop.0ℝ a a Bishop.≃ a
@@ -378,15 +343,15 @@ cornerLower p q r s =
   let
     ll = p * r; lu = p * s; ul = q * r; uu = q * s
     minimum = Typed.min4 ll lu ul uu
-    first = BishopP.≤-respʳ-≃ (embedMul p r)
-      (embedOrder (Typed.min4BelowFirst ll lu ul uu))
-    second = BishopP.≤-respʳ-≃ (embedMul p s)
-      (embedOrder (Typed.min4BelowSecond ll lu ul uu))
-    third = BishopP.≤-respʳ-≃ (embedMul q r)
-      (embedOrder (Typed.min4BelowThird ll lu ul uu))
-    fourth = BishopP.≤-respʳ-≃ (embedMul q s)
-      (embedOrder (Typed.min4BelowFourth ll lu ul uu))
-  in first , second , third , fourth
+  in
+  BishopP.≤-respʳ-≃ (embedMul p r)
+    (embedOrder (Typed.min4BelowFirst ll lu ul uu))
+  , BishopP.≤-respʳ-≃ (embedMul p s)
+    (embedOrder (Typed.min4BelowSecond ll lu ul uu))
+  , BishopP.≤-respʳ-≃ (embedMul q r)
+    (embedOrder (Typed.min4BelowThird ll lu ul uu))
+  , BishopP.≤-respʳ-≃ (embedMul q s)
+    (embedOrder (Typed.min4BelowFourth ll lu ul uu))
 
 cornerUpper : ∀ p q r s →
   let maximum = Typed.max4 (p * r) (p * s) (q * r) (q * s)
@@ -399,17 +364,15 @@ cornerUpper p q r s =
   let
     ll = p * r; lu = p * s; ul = q * r; uu = q * s
     maximum = Typed.max4 ll lu ul uu
-    first = BishopP.≤-respˡ-≃ (embedMul p r)
-      (embedOrder (Typed.firstBelowMax4 ll lu ul uu))
-    second = BishopP.≤-respˡ-≃ (embedMul p s)
-      (embedOrder (Typed.secondBelowMax4 ll lu ul uu))
-    third = BishopP.≤-respˡ-≃ (embedMul q r)
-      (embedOrder (Typed.thirdBelowMax4 ll lu ul uu))
-    fourth = BishopP.≤-respˡ-≃ (embedMul q s)
-      (embedOrder (Typed.fourthBelowMax4 ll lu ul uu))
-  in first , second , third , fourth
-
-open import Data.Product.Base using (_×_; _,_; proj₁; proj₂)
+  in
+  BishopP.≤-respˡ-≃ (embedMul p r)
+    (embedOrder (Typed.firstBelowMax4 ll lu ul uu))
+  , BishopP.≤-respˡ-≃ (embedMul p s)
+    (embedOrder (Typed.secondBelowMax4 ll lu ul uu))
+  , BishopP.≤-respˡ-≃ (embedMul q r)
+    (embedOrder (Typed.thirdBelowMax4 ll lu ul uu))
+  , BishopP.≤-respˡ-≃ (embedMul q s)
+    (embedOrder (Typed.fourthBelowMax4 ll lu ul uu))
 
 multiplyIntervalBishopSound :
   ∀ {x y left right} →
@@ -438,11 +401,35 @@ multiplyIntervalBishopSound {x} {y} {left} {right} xIn yIn =
       (Eval.lower left) (Eval.upper left)
       (Eval.lower right) (Eval.upper right)
 
+    aYIsConvex : (a Bishop.* y) Bishop.≃
+      convex ty (a Bishop.* c) (a Bishop.* d)
+    aYIsConvex =
+      BishopP.≃-trans
+        (BishopP.*-congˡ (interpolation yCoordinate))
+        (let open BishopP.ℝ-Solver
+         in solve 4
+           (λ t a₀ c₀ d₀ →
+             a₀ ⊗ (((Κ (+ 1 / 1) ⊖ t) ⊗ c₀) ⊕ (t ⊗ d₀))
+             ⊜ ((Κ (+ 1 / 1) ⊖ t) ⊗ (a₀ ⊗ c₀))
+               ⊕ (t ⊗ (a₀ ⊗ d₀)))
+           BishopP.≃-refl ty a c d)
+
+    bYIsConvex : (b Bishop.* y) Bishop.≃
+      convex ty (b Bishop.* c) (b Bishop.* d)
+    bYIsConvex =
+      BishopP.≃-trans
+        (BishopP.*-congˡ (interpolation yCoordinate))
+        (let open BishopP.ℝ-Solver
+         in solve 4
+           (λ t b₀ c₀ d₀ →
+             b₀ ⊗ (((Κ (+ 1 / 1) ⊖ t) ⊗ c₀) ⊕ (t ⊗ d₀))
+             ⊜ ((Κ (+ 1 / 1) ⊖ t) ⊗ (b₀ ⊗ c₀))
+               ⊕ (t ⊗ (b₀ ⊗ d₀)))
+           BishopP.≃-refl ty b c d)
+
     lowerA : embed minimum Bishop.≤ (a Bishop.* y)
     lowerA =
-      BishopP.≤-respʳ-≃
-        (BishopP.≃-symm
-          (BishopP.*-congʳ a (interpolation yCoordinate)))
+      BishopP.≤-respʳ-≃ (BishopP.≃-symm aYIsConvex)
         (convexLower ty (a Bishop.* c) (a Bishop.* d) (embed minimum)
           (parameterNonnegative yCoordinate)
           (parameterBelowOne yCoordinate)
@@ -451,49 +438,37 @@ multiplyIntervalBishopSound {x} {y} {left} {right} xIn yIn =
 
     lowerB : embed minimum Bishop.≤ (b Bishop.* y)
     lowerB =
-      BishopP.≤-respʳ-≃
-        (BishopP.≃-symm
-          (BishopP.*-congʳ b (interpolation yCoordinate)))
+      BishopP.≤-respʳ-≃ (BishopP.≃-symm bYIsConvex)
         (convexLower ty (b Bishop.* c) (b Bishop.* d) (embed minimum)
           (parameterNonnegative yCoordinate)
           (parameterBelowOne yCoordinate)
           (proj₁ (proj₂ (proj₂ lowerCorners)))
           (proj₂ (proj₂ (proj₂ lowerCorners))))
 
-    lowerProductConvex :
-      embed minimum Bishop.≤
-        convex tx (a Bishop.* y) (b Bishop.* y)
-    lowerProductConvex =
-      convexLower tx (a Bishop.* y) (b Bishop.* y) (embed minimum)
-        (parameterNonnegative xCoordinate)
-        (parameterBelowOne xCoordinate)
-        lowerA lowerB
-
-    productInterpolation :
-      (x Bishop.* y) Bishop.≃
-        convex tx (a Bishop.* y) (b Bishop.* y)
-    productInterpolation =
+    productIsConvex : (x Bishop.* y) Bishop.≃
+      convex tx (a Bishop.* y) (b Bishop.* y)
+    productIsConvex =
       BishopP.≃-trans
-        (BishopP.*-congˡ y (interpolation xCoordinate))
+        (BishopP.*-congʳ (interpolation xCoordinate))
         (let open BishopP.ℝ-Solver
          in solve 4
            (λ t a₀ b₀ y₀ →
-             (((Κ (+ 1 / 1) ⊖ t) ⊗ a₀) ⊕ (t ⊗ b₀)) ⊗ y₀
+             ((((Κ (+ 1 / 1) ⊖ t) ⊗ a₀) ⊕ (t ⊗ b₀)) ⊗ y₀)
              ⊜ ((Κ (+ 1 / 1) ⊖ t) ⊗ (a₀ ⊗ y₀))
                ⊕ (t ⊗ (b₀ ⊗ y₀)))
            BishopP.≃-refl tx a b y)
 
     lowerProduct : embed minimum Bishop.≤ (x Bishop.* y)
     lowerProduct =
-      BishopP.≤-respʳ-≃
-        (BishopP.≃-symm productInterpolation)
-        lowerProductConvex
+      BishopP.≤-respʳ-≃ (BishopP.≃-symm productIsConvex)
+        (convexLower tx (a Bishop.* y) (b Bishop.* y) (embed minimum)
+          (parameterNonnegative xCoordinate)
+          (parameterBelowOne xCoordinate)
+          lowerA lowerB)
 
     upperA : (a Bishop.* y) Bishop.≤ embed maximum
     upperA =
-      BishopP.≤-respˡ-≃
-        (BishopP.≃-symm
-          (BishopP.*-congʳ a (interpolation yCoordinate)))
+      BishopP.≤-respˡ-≃ (BishopP.≃-symm aYIsConvex)
         (convexUpper ty (a Bishop.* c) (a Bishop.* d) (embed maximum)
           (parameterNonnegative yCoordinate)
           (parameterBelowOne yCoordinate)
@@ -502,32 +477,22 @@ multiplyIntervalBishopSound {x} {y} {left} {right} xIn yIn =
 
     upperB : (b Bishop.* y) Bishop.≤ embed maximum
     upperB =
-      BishopP.≤-respˡ-≃
-        (BishopP.≃-symm
-          (BishopP.*-congʳ b (interpolation yCoordinate)))
+      BishopP.≤-respˡ-≃ (BishopP.≃-symm bYIsConvex)
         (convexUpper ty (b Bishop.* c) (b Bishop.* d) (embed maximum)
           (parameterNonnegative yCoordinate)
           (parameterBelowOne yCoordinate)
           (proj₁ (proj₂ (proj₂ upperCorners)))
           (proj₂ (proj₂ (proj₂ upperCorners))))
 
-    upperProductConvex :
-      convex tx (a Bishop.* y) (b Bishop.* y)
-      Bishop.≤ embed maximum
-    upperProductConvex =
-      convexUpper tx (a Bishop.* y) (b Bishop.* y) (embed maximum)
-        (parameterNonnegative xCoordinate)
-        (parameterBelowOne xCoordinate)
-        upperA upperB
-
     upperProduct : (x Bishop.* y) Bishop.≤ embed maximum
     upperProduct =
-      BishopP.≤-respˡ-≃ productInterpolation upperProductConvex
+      BishopP.≤-respˡ-≃ productIsConvex
+        (convexUpper tx (a Bishop.* y) (b Bishop.* y) (embed maximum)
+          (parameterNonnegative xCoordinate)
+          (parameterBelowOne xCoordinate)
+          upperA upperB)
   in
   bishopLiesIn lowerProduct upperProduct
-
-bishopRationalEmbeddingRingTransportLevel : ProofLevel
-bishopRationalEmbeddingRingTransportLevel = machineChecked
 
 bishopRationalIntervalConvexCoordinateLevel : ProofLevel
 bishopRationalIntervalConvexCoordinateLevel = machineChecked
