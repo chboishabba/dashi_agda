@@ -1,16 +1,19 @@
 #!/usr/bin/env python3
-"""Audit the Round-9 SO(3) -> finite-group restriction tables.
+"""Audit the Round-9 representation/arithmetic control tables.
 
 This script is intentionally independent of Agda normalization. It parses the
 checked-in D4/A4/S4/A5 branching tables, recomputes their multiplicities from
-finite character inner products, and verifies regular-representation shifts and
-explicit Ogg/non-Ogg controls used by the formal no-go results.
+finite character inner products, verifies regular-representation shifts and
+explicit Ogg/non-Ogg controls, and independently rebuilds Ramanujan tau through
+q^71 from Delta(q)=q*prod_(m>=1)(1-q^m)^24 before comparing the complete
+CandidateLevel fingerprint table.
 
 It uses only Python's standard library and does not invoke CI or Agda.
 """
 
 from __future__ import annotations
 
+import math
 import pathlib
 import re
 import sys
@@ -22,6 +25,7 @@ D4_PATH = ROOT / "DASHI/Foundations/D4SO3RestrictionJ0To35Exact.agda"
 A4_PATH = ROOT / "DASHI/Foundations/TetrahedralSO3RestrictionJ0To35Exact.agda"
 S4_PATH = ROOT / "DASHI/Foundations/OctahedralSO3RestrictionJ0To35Exact.agda"
 A5_PATH = ROOT / "DASHI/Foundations/IcosahedralSO3RestrictionJ0To35Exact.agda"
+TAU_PATH = ROOT / "DASHI/Moonshine/RamanujanTauCandidateFingerprintJ0To35Exact.agda"
 OGG = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 41, 47, 59, 71}
 
 
@@ -102,8 +106,6 @@ def expected_d4(j: int) -> Tuple[int, ...]:
 
 
 def expected_a4(j: int) -> Tuple[int, ...]:
-    # The two conjugate 1-d reps have equal multiplicity because the SO(3)
-    # source character is real and equal on the two order-three A4 classes.
     d = 2 * j + 1
     half = chi_pi(j)
     third = chi_third(j)
@@ -179,6 +181,63 @@ def dimension(vector: Tuple[int, ...], dims: Tuple[int, ...]) -> int:
     return sum(m * d for m, d in zip(vector, dims))
 
 
+def ramanujan_tau_through(limit: int) -> Dict[int, int]:
+    # Delta(q) = q * prod_{m>=1}(1-q^m)^24, truncated exactly.
+    coeff = [0] * (limit + 1)
+    coeff[0] = 1
+    for m in range(1, limit + 1):
+        factor = [
+            (k * m, (-1) ** k * math.comb(24, k))
+            for k in range(25)
+            if k * m <= limit
+        ]
+        nxt = [0] * (limit + 1)
+        for i, left in enumerate(coeff):
+            if not left:
+                continue
+            for degree, right in factor:
+                if i + degree <= limit:
+                    nxt[i + degree] += left * right
+        coeff = nxt
+    return {n: coeff[n - 1] for n in range(1, limit + 1)}
+
+
+def parse_agda_integer(source: str) -> int:
+    source = source.strip()
+    positive = re.fullmatch(r"\+\s+(\d+)", source)
+    if positive:
+        return int(positive.group(1))
+    negative = re.fullmatch(r"-\[1\+\s*(\d+)\s*\]", source)
+    if negative:
+        return -(int(negative.group(1)) + 1)
+    raise AssertionError(f"unrecognized Agda integer literal: {source!r}")
+
+
+def parse_tau_candidate_table(path: pathlib.Path) -> Dict[int, int]:
+    text = path.read_text(encoding="utf-8")
+    table: Dict[int, int] = {}
+    spinor = re.search(
+        r"^tauAtCandidateLevel Candidate\.spinorLevel2 = (.+)$",
+        text,
+        re.MULTILINE,
+    )
+    if not spinor:
+        raise AssertionError("missing spinor level-2 tau row")
+    table[2] = parse_agda_integer(spinor.group(1))
+    pattern = re.compile(
+        r"^tauAtCandidateLevel \(Candidate\.spatialLevel Spin\.j(\d+)\) = (.+)$",
+        re.MULTILINE,
+    )
+    seen_j = set()
+    for match in pattern.finditer(text):
+        j = int(match.group(1))
+        seen_j.add(j)
+        table[2 * j + 1] = parse_agda_integer(match.group(2))
+    if seen_j != set(range(36)):
+        raise AssertionError(f"tau table missing j rows: {sorted(set(range(36)) - seen_j)}")
+    return table
+
+
 def main() -> int:
     d4 = parse_table(D4_PATH, "d4-spectrum", 5)
     a4 = parse_table(A4_PATH, "tet-spectrum", 4)
@@ -214,6 +273,16 @@ def main() -> int:
     assert 9 not in OGG and 15 not in OGG and 43 not in OGG
     assert 53 not in OGG and 67 not in OGG
 
+    tau_expected = ramanujan_tau_through(71)
+    tau_actual = parse_tau_candidate_table(TAU_PATH)
+    candidate_levels = {2} | {2 * j + 1 for j in range(36)}
+    assert set(tau_actual) == candidate_levels
+    for level in sorted(candidate_levels):
+        if tau_actual[level] != tau_expected[level]:
+            raise AssertionError(
+                f"tau({level}) mismatch: Agda={tau_actual[level]} product={tau_expected[level]}"
+            )
+
     print("Ogg representation-reduction audit: OK")
     print("  36 D4 rows = exact character inner products")
     print("  36 A4 rows = exact character inner products")
@@ -221,6 +290,7 @@ def main() -> int:
     print("  36 A5 rows = exact Z[phi] character inner products")
     print("  regular shifts: D4 +4, A4 +6, S4 +12, A5 +30")
     print("  controls include non-Ogg 9, 15, 43, 53, 67")
+    print("  all 37 candidate tau values reproduce q*prod(1-q^m)^24 through q^71")
     return 0
 
 
