@@ -40,7 +40,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; 1ℚ; _*_; _≤_; _<_; 1/_; positive)
+  (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_; _<_; 1/_; positive)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using
