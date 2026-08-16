@@ -84,6 +84,22 @@ allPairCountIsJ (suc j)
   rewrite mapNextPairPreservesCount (allPairIndices j)
         | allPairCountIsJ j = refl
 
+pairCountIsLength :
+  ∀ {j} →
+  (pairs : List (PairIndex j)) →
+  pairCount pairs ≡ length pairs
+pairCountIsLength [] = refl
+pairCountIsLength (_ ∷ rest)
+  rewrite pairCountIsLength rest = refl
+
+allPairLengthIsJ :
+  (j : Nat) →
+  length (allPairIndices j) ≡ j
+allPairLengthIsJ j =
+  trans
+    (sym (pairCountIsLength (allPairIndices j)))
+    (allPairCountIsJ j)
+
 ------------------------------------------------------------------------
 -- The occurring matched-dihedral sectors.
 ------------------------------------------------------------------------
@@ -106,6 +122,22 @@ allSectors j = selectedSinglet ∷ map pairedDoublet (allPairIndices j)
 
 occurringSectorCount : Nat → Nat
 occurringSectorCount j = length (allSectors j)
+
+mapPreservesLength :
+  ∀ {A B : Set} →
+  (f : A → B) →
+  (values : List A) →
+  length (map f values) ≡ length values
+mapPreservesLength f [] = refl
+mapPreservesLength f (_ ∷ rest)
+  rewrite mapPreservesLength f rest = refl
+
+occurringSectorCountIsSuccJ :
+  (j : Nat) →
+  occurringSectorCount j ≡ suc j
+occurringSectorCountIsSuccJ j
+  rewrite mapPreservesLength pairedDoublet (allPairIndices j)
+        | allPairLengthIsJ j = refl
 
 ------------------------------------------------------------------------
 -- Exact dimension conservation.
@@ -193,16 +225,16 @@ matchedDihedralCandidateFamily :
   Candidate.CandidateIndexedFiniteRestrictionFamily
 matchedDihedralCandidateFamily =
   record
-    { Candidate.targetFamily =
+    { targetFamily =
         λ j → matchedTargetFamilyNat (Spin.jNat j)
-    ; Candidate.branchingAt = matchedBranchingAt
-    ; Candidate.fixedSpacesAt = matchedFixedSpaces
-    ; Candidate.restrictionReceiptAt =
+    ; branchingAt = matchedBranchingAt
+    ; fixedSpacesAt = matchedFixedSpaces
+    ; restrictionReceiptAt =
         λ _ → "SO(3) carrier restricted to matched D_(2j+1) occurring sectors"
-    ; Candidate.familyLabel =
+    ; familyLabel =
         "candidate-indexed matched odd-dihedral restriction family"
-    ; Candidate.knownOggListUsedToChooseTarget = false
-    ; Candidate.knownOggListUsedToChooseTargetIsFalse = refl
+    ; knownOggListUsedToChooseTarget = false
+    ; knownOggListUsedToChooseTargetIsFalse = refl
     }
 
 ------------------------------------------------------------------------
@@ -211,6 +243,9 @@ matchedDihedralCandidateFamily =
 
 j4SectorCountIsFive : occurringSectorCount 4 ≡ 5
 j4SectorCountIsFive = refl
+
+j4SectorCountFromGenericTheorem : occurringSectorCount 4 ≡ suc 4
+j4SectorCountFromGenericTheorem = occurringSectorCountIsSuccJ 4
 
 j4MatchedDimensionIsNine :
   Core.sumWeighted
@@ -245,6 +280,8 @@ record MatchedDihedralRestrictionBoundary : Set where
       candidateIndexedFamilyConstructed ≡ true
     fiveIrrepsOfNineConstructed : Bool
     fiveIrrepsOfNineConstructedIsTrue : fiveIrrepsOfNineConstructed ≡ true
+    sectorCountIsJPlusOne : Bool
+    sectorCountIsJPlusOneIsTrue : sectorCountIsJPlusOne ≡ true
     multiplicityFreeForEveryCandidate : Bool
     multiplicityFreeForEveryCandidateIsTrue :
       multiplicityFreeForEveryCandidate ≡ true
@@ -262,6 +299,8 @@ canonicalMatchedDihedralRestrictionBoundary =
     ; candidateIndexedFamilyConstructedIsTrue = refl
     ; fiveIrrepsOfNineConstructed = true
     ; fiveIrrepsOfNineConstructedIsTrue = refl
+    ; sectorCountIsJPlusOne = true
+    ; sectorCountIsJPlusOneIsTrue = refl
     ; multiplicityFreeForEveryCandidate = true
     ; multiplicityFreeForEveryCandidateIsTrue = refl
     ; multiplicityFreeAloneSelectsOgg = false
