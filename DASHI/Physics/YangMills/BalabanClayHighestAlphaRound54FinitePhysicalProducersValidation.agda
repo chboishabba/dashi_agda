@@ -21,7 +21,8 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound54FinitePhysicalProdu
 --     The target residual inequality is never accepted as an input.
 --
 -- L3/L4  source beta positivity:
---       per-Brillouin-mode Gaussian lower enclosures
+--       exact rational positive-denominator quotient enclosure
+--       + per-Brillouin-mode Gaussian lower enclosures
 --       + per-interaction-atom O(g^4) lower enclosures
 --         -> computed beta lower
 --         -> quartic absorption
@@ -121,6 +122,10 @@ physicalSelectedMinimizerAtomIntervalEvaluationLevel =
 -- L3/L4: finite Brillouin/interacting atom beta route.
 ------------------------------------------------------------------------
 
+positiveDenominatorReciprocalAntitoneLevel =
+  Quotient.positiveDenominatorReciprocalAntitoneLevel
+positiveDenominatorQuotientEnclosureLevel =
+  Quotient.positiveDenominatorQuotientEnclosureLevel
 signAwarePositiveDenominatorEndpointLevel =
   Quotient.positiveDenominatorSignAwareEndpointSelectionLevel
 
