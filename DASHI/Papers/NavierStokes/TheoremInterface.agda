@@ -45,12 +45,16 @@ import DASHI.Papers.NavierStokes.ClayContractRound23 as Clay23
 -- exact hard tax eta_HHb=2 C_* K_bad.
 --
 -- B: Round58's Q-valued normalized Gram object is now explicitly only a
--- rational certificate carrier.  Literal Fourier energy stays on the selected
--- physical real/complex carrier.  Round62's carrier-correct endpoint uses a
--- Murray--Bishop real normalized energy and embeds 17/64, 65/512 and 133/256
--- only as rational order majorants.  The remaining physical theorem is to
--- construct that normalized real energy from the literal odd-P/Q fibre and
--- prove the same/adjacent active bounds.
+-- rational certificate carrier.  The same-object physical endpoint keeps the
+-- normalized energy in `Carrier (realField model)`, the exact algebraic real
+-- field already selected by the literal `PeriodicHardShellFourierPDE`.  An
+-- `OrderedRealExtension` plus a rational embedding of THAT carrier is enough to
+-- turn active bounds by embedded 17/64 and 65/512 into the embedded 133/256
+-- bandwidth-one bound.  Murray--Bishop reals remain a concrete setoid backend,
+-- but are not definitionally identified with this propositional-equality
+-- Fourier carrier.  The remaining B theorem is to construct the normalized
+-- operator-product energy in the literal carrier and prove common-hat plus the
+-- same/adjacent active bounds.
 --
 -- C: aggregate data headroom is no longer an opaque nine-owner field.  Six
 -- owner data remainders are already zero.  The fallback coefficient is
@@ -92,15 +96,16 @@ import DASHI.Papers.NavierStokes.ClayContractRound23 as Clay23
 -- H remains closed on the same selected Leray--Hopf/Luo continuation carrier.
 --
 -- Consequently the remaining Clay frontier is genuinely physical/analytic:
--- selected-solution Duhamel/headroom+density+charge; carrier-correct normalized
--- Com bounds; same-object C scale estimates; one localized PDE atom extraction
--- plus kernel/boundary limits; continuum annular fourfold Fourier decay; and
--- the final instantiated scalar gate.  None is promoted here by a receipt.
+-- selected-solution Duhamel/headroom+density+charge; literal-field normalized
+-- Com construction/bounds; same-object C scale estimates; one localized PDE
+-- atom extraction plus kernel/boundary limits; continuum annular fourfold
+-- Fourier decay; and the final instantiated scalar gate.  None is promoted
+-- here by a receipt.
 ------------------------------------------------------------------------
 
 paperInterfaceStatement : String
 paperInterfaceStatement =
-  "Paper-facing NS interface: Round62 removes the HH-bad affine recurrence from the producer cutset, keeps physical Com energy on the Murray-Bishop real carrier with rational constants only as majorants, reduces the preferred fixed-shift data coefficient to smooth-HH-good plus Com when the independent kernel is exactly zero, derives kernel and boundary ledgers from one structured localized-PDE atom source, closes fourth-order dyadic decay to uniform L1 summability, substitutes the sharp B_*=((r-q)-a)/K into the weighted allocator, and solves the preferred feasibility region C_* K_bad<15/32 and K S^2<(15/16-2 C_* K_bad)((r-q)-a). Genuine selected-solution A/B/C/D/F/E physical producers and the instantiated scalar gate remain open; Clay Navier-Stokes and terminal promotion remain false."
+  "Paper-facing NS interface: Round62 removes the HH-bad affine recurrence from the producer cutset; keeps physical normalized Com energy in the literal Fourier model's own ordered real field, with rational constants only as embedded majorants and Bishop reals only as a separate setoid backend; reduces the preferred fixed-shift data coefficient to smooth-HH-good plus Com when the independent kernel is exactly zero; derives kernel and boundary ledgers from one structured localized-PDE atom source; closes fourth-order dyadic decay to uniform L1 summability; substitutes the sharp B_*=((r-q)-a)/K into the weighted allocator; and solves the preferred feasibility region C_* K_bad<15/32 and K S^2<(15/16-2 C_* K_bad)((r-q)-a). Genuine selected-solution A/B/C/D/F/E physical producers and the instantiated scalar gate remain open; Clay Navier-Stokes and terminal promotion remain false."
 
 record NSPaperTheoremStatus : Setω where
   field
