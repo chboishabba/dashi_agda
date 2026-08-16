@@ -37,7 +37,7 @@ open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 import DASHI.Physics.Closure.NSTriadKNLuoRationalFixedBlockInductionExact as Block
 
@@ -71,19 +71,15 @@ unitRatioFixedBlock = record
         endpoint : 1ℚ * 1ℚ + 0ℚ ≡ 1ℚ
         endpoint = solve []
       in
-      substUpper endpoint ℚP.≤-refl
+      subst (λ right → 1ℚ ≤ right) (sym endpoint) ℚP.≤-refl
   ; Block.RationalFixedBlockDecay.correctionBudget = λ n →
       let
         target = Block.scaledTarget 1ℚ 1ℚ n
         endpoint : (1ℚ - 1ℚ) * target ≡ 0ℚ
         endpoint = solve (target ∷ [])
       in
-      substUpper endpoint ℚP.≤-refl
+      subst (λ right → 0ℚ ≤ right) (sym endpoint) ℚP.≤-refl
   }
-  where
-  substUpper : ∀ {left right upper : ℚ} →
-    upper ≡ right → left ≤ upper → left ≤ right
-  substUpper refl proof = proof
 
 unitRatioTargetIsOne :
   (n : Nat) →
