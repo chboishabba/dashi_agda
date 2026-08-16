@@ -110,6 +110,26 @@ philipMorrisLunchablesPrimary =
     "DOI 10.2105/AJPH.2026.308491; PMID 42233189; PMCID PMC13277455"
     "primary internal-document case study supporting a bounded Philip Morris tobacco-to-food R&D transfer witness, including consumer-driven product development and better-for-you reformulation; does not establish that all food engineering derives from tobacco"
 
+merchantsOfDoubtHistory : ScholarlySource
+merchantsOfDoubtHistory =
+  mkSource
+    "Naomi Oreskes; Erik M. Conway"
+    "Merchants of Doubt: How a Handful of Scientists Obscured the Truth on Issues from Tobacco Smoke to Global Warming"
+    "Bloomsbury Press, New York"
+    "2010"
+    "ISBN 978-1-59691-610-4; book, no DOI asserted"
+    "historical genealogy source documenting recurring actors and doubt-production strategies across tobacco smoke, acid rain, ozone and climate controversies; does not establish one centrally commanded network"
+
+oreskesConwayNatureCommentary : ScholarlySource
+oreskesConwayNatureCommentary =
+  mkSource
+    "Naomi Oreskes; Erik M. Conway"
+    "Defeating the merchants of doubt"
+    "Nature 465:686-687"
+    "2010"
+    "DOI 10.1038/465686a"
+    "concise scholarly commentary accompanying the historical genealogy; supports bounded cross-domain doubt-production vocabulary rather than a universal coordination claim"
+
 blackwellExperimentComparison : ScholarlySource
 blackwellExperimentComparison =
   mkSource
@@ -167,6 +187,7 @@ data SourceBoundary : Set where
   developmentalInfluenceIsNotIndoctrination : SourceBoundary
   politicalSimilarityIsNotCommonCommand : SourceBoundary
   oneTransferCaseIsNotUniversalIndustryGenealogy : SourceBoundary
+  historicalContinuityIsNotCentralCoordination : SourceBoundary
   informationOrderIsNotGovernanceVerdict : SourceBoundary
   abstractionSafetyIsConsumerRelative : SourceBoundary
   accessPrincipleIsNotAutomaticLegalThreshold : SourceBoundary
@@ -180,6 +201,7 @@ canonicalSourceBoundaries =
   ∷ developmentalInfluenceIsNotIndoctrination
   ∷ politicalSimilarityIsNotCommonCommand
   ∷ oneTransferCaseIsNotUniversalIndustryGenealogy
+  ∷ historicalContinuityIsNotCentralCoordination
   ∷ informationOrderIsNotGovernanceVerdict
   ∷ abstractionSafetyIsConsumerRelative
   ∷ accessPrincipleIsNotAutomaticLegalThreshold
