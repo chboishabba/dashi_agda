@@ -12,13 +12,12 @@ open import DASHI.Ontology.ContextualClaimComposition
 -- Provenance
 --
 -- Integration surface for the machine-checked Lean 4 Wikidata ontology work
--- reported by James Michael DuPont on 2026-08-16, including executable
--- class-algebra checkers such as unionOk/interOk and a refined RDF rendering.
--- The reported WIP request was:
---   Aristotle request ae06ae06-2580-422a-8fc3-92aeaaca8762
+-- by James Michael DuPont, supplied as the complete Aristotle archive on
+-- 2026-08-16 for request ae06ae06-2580-422a-8fc3-92aeaaca8762.
 --
--- No Lean source is copied here.  This module specifies the certificate
--- contract DASHI expects when importing results from that external checker.
+-- The complete source inventory and per-module hashes are pinned by
+-- LeanWikidataFullSourceManifest; this module specifies the generic certificate
+-- semantics used when importing source-matched theorem/checker results.
 -- A certificate carries theorem/checker provenance but does not acquire global
 -- truth authority or edit authority merely by crossing the bridge.
 ------------------------------------------------------------------------
@@ -58,7 +57,7 @@ open LeanOntologyCertificate public
 
 ------------------------------------------------------------------------
 -- A positive imported result requires BOTH executable acceptance and an
--- explicit theorem-backed checker contract.  Every other state is unresolved.
+-- explicit theorem-backed checker contract. Every other state is unresolved.
 -- In particular, checker failure or absence is not converted into a negative
 -- ontology fact: Wikidata/external ontologies are open-world evidence sources.
 ------------------------------------------------------------------------
@@ -117,8 +116,8 @@ certificateClaimPreservesReferences cert = refl
 ------------------------------------------------------------------------
 -- Cross-ontology relation comparison.
 --
--- `replicated` requires determinate support on both sides.  A genuine conflict
--- requires one side to carry explicit contradictory evidence.  Missing edges,
+-- `replicated` requires determinate support on both sides. A genuine conflict
+-- requires one side to carry explicit contradictory evidence. Missing edges,
 -- failed checkers, incomplete mappings, or unbacked computations remain
 -- unresolved and cannot manufacture a conflict.
 ------------------------------------------------------------------------
