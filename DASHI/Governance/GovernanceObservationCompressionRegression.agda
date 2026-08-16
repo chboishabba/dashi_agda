@@ -6,6 +6,7 @@ open import Data.Empty using (⊥)
 
 import DASHI.Core.ObservationLanguageRefinementExact as Observation
 import DASHI.Governance.FutureSafeCausalCompressionExact as Compression
+import DASHI.Governance.CompiledQueryFutureEquivalenceExact as Compiled
 import DASHI.Governance.ObservationRelativeReificationRegressionExact as Reification
 import DASHI.Governance.AsymmetricLegibilityContestabilityExact as Legibility
 import DASHI.Governance.ReciprocalLegibilityRefinementExact as Reciprocal
@@ -32,6 +33,18 @@ querySafetyIsObservationRelative :
     Compression.canonicalFutureSafeCausalCompressionBoundary
   ≡ true
 querySafetyIsObservationRelative = refl
+
+compiledRelationIsExactlyDeclaredFutureLanguage :
+  Compiled.CompiledQueryFutureBoundary.stabilizedCodeRelationEqualsDeclaredFutureLanguage
+    Compiled.canonicalCompiledQueryFutureBoundary
+  ≡ true
+compiledRelationIsExactlyDeclaredFutureLanguage = refl
+
+compiledExactnessDoesNotBecomeUniversalIdentity :
+  Compiled.CompiledQueryFutureBoundary.compiledEquivalenceMeansUniversalIdentity
+    Compiled.canonicalCompiledQueryFutureBoundary
+  ≡ false
+compiledExactnessDoesNotBecomeUniversalIdentity = refl
 
 sameCompressionCannotBeSafeForSeparatingQuery :
   Compression.QuerySafeCompression
