@@ -59,6 +59,7 @@ import DASHI.Physics.Closure.NSTriadKNHHBadDefectRecurrenceNormalizationRound46E
 import DASHI.Physics.Closure.NSTriadKNHHBadSelectedThresholdRecurrenceRound47Exact as Recurrence
 import DASHI.Physics.Closure.NSTriadKNHHBadSingleThresholdSufficesRound47Exact as Selected
 import DASHI.Physics.Closure.NSTriadKNHHBadNormalizedProfileRound45Exact as Profile
+import DASHI.Physics.Closure.NSTriadKNHHBadSharpDyadicGainRound33Exact as Sharp
 
 record SelectedRecurrenceLiteralDensityDominationBridge
     (effectiveViscosity : ℚ)
@@ -282,6 +283,15 @@ physicalHHBadOwnerEtaIsTwoCeilingTimesMultiplicity :
   ≡ Profile.canonicalHHBadEta (baseUniformProfile (densityBridge input))
       * badChargeMultiplicity input
 physicalHHBadOwnerEtaIsTwoCeilingTimesMultiplicity input shell = refl
+
+physicalHHBadOwnerEtaIsTwoSelectedCeilingTimesMultiplicity :
+  ∀ {environment effectiveViscosity recurrence}
+    (input : PhysicalDominatedRecurrenceHHBadOwnerInput
+      environment effectiveViscosity recurrence) →
+  ∀ shell →
+  Owner.eta (physicalHHBadOwnerWithMultiplicity input shell)
+  ≡ Sharp.two * Recurrence.ceiling recurrence * badChargeMultiplicity input
+physicalHHBadOwnerEtaIsTwoSelectedCeilingTimesMultiplicity input shell = refl
 
 normalizedDensityDominationSuffices : Bool
 normalizedDensityDominationSuffices = true
