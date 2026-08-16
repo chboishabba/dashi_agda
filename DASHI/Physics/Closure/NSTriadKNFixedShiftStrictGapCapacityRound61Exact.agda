@@ -16,26 +16,21 @@ module DASHI.Physics.Closure.NSTriadKNFixedShiftStrictGapCapacityRound61Exact wh
 -- ROUND 61 CONTRIBUTION
 --
 -- C3 is not an independent physical obligation once C1 and C2 are known.
--- Suppose the literal owner/block quantities satisfy
+-- From
 --
---   X_n <= K C r^n,        0 <= K,
---   A_n <= a C r^n,
---   a < r-q.
+--   X_n <= K C r^n,    0 <= K,
+--   A_n <= a C r^n,    a < r-q,
 --
--- Raise K harmlessly to K+1.  This is still a valid critical-scale bound and
--- is now strictly positive.  Define the correction coefficient exactly by
+-- replace K by K+1 and define
 --
---          (r-q)-a
---   B_* = --------- .
---            K+1
+--                 (r-q)-a
+--       B_*  =  ------------- .
+--                    K+1
 --
--- Then B_*>0 and
---
---   a + B_*(K+1) = r-q.
---
--- Hence the existing Round60 ScaleMatchedFixedShiftCapacityData, and therefore
--- uniform all-block product capacity, are constructed from C1+C2.  No separate
--- positive-B witness is accepted by this module.
+-- Then B_*>0 and a+B_*(K+1)=r-q exactly.  This file therefore constructs the
+-- existing Round60 ScaleMatchedFixedShiftCapacityData from C1+C2; Round60 then
+-- supplies the uniform all-block product-capacity theorem.  No positive-B or
+-- headroom witness is accepted independently here.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
@@ -82,8 +77,7 @@ record StrictGapBlockScaleData
       ≤ dataScale
         * Block.scaledTarget (Block.constant block) (Block.r block) n
 
-    strictDataGap :
-      dataScale < Block.r block - Block.q block
+    strictDataGap : dataScale < Block.r block - Block.q block
 
 open StrictGapBlockScaleData public
 
@@ -104,11 +98,8 @@ raisedCriticalScalePositive data =
   let
     onePositive : 0ℚ < 1ℚ
     onePositive = ℚP.positive⁻¹ 1ℚ
-
-    shifted :
-      0ℚ + 0ℚ < criticalScale data + 1ℚ
-    shifted =
-      ℚP.+-mono-≤-< (criticalScaleNonnegative data) onePositive
+    shifted : 0ℚ + 0ℚ < criticalScale data + 1ℚ
+    shifted = ℚP.+-mono-≤-< (criticalScaleNonnegative data) onePositive
   in
   subst
     (λ left → left < raisedCriticalScale data)
@@ -165,9 +156,7 @@ derivedUniformCoefficient :
 derivedUniformCoefficient data =
   let
     scale = raisedCriticalScale data
-    scalePositive = raisedCriticalScalePositive data
-    instance
-      scaleNonzero = ℚ.>-nonZero scalePositive
+    instance scaleNonzero = ℚ.>-nonZero (raisedCriticalScalePositive data)
   in
   correctionMargin data * ℚ.1/_ scale
 
@@ -188,8 +177,7 @@ derivedUniformCoefficientPositive data =
       scalePositiveI = positive scalePositive
       scaleNonzero = ℚP.pos⇒nonZero scale
       inversePositiveI = ℚP.1/pos⇒pos scale
-      productPositiveI =
-        ℚP.pos*pos⇒pos margin (ℚ.1/_ scale)
+      productPositiveI = ℚP.pos*pos⇒pos margin (ℚ.1/_ scale)
   in
   ℚP.positive⁻¹ (derivedUniformCoefficient data)
 
@@ -200,14 +188,7 @@ derivedUniformCoefficientNonnegative :
       {block = block} identification) →
   0ℚ ≤ derivedUniformCoefficient data
 derivedUniformCoefficientNonnegative data =
-  let
-    coefficientPositive = derivedUniformCoefficientPositive data
-    instance
-      coefficientPositiveI = positive coefficientPositive
-      coefficientNonnegativeI =
-        ℚP.pos⇒nonNeg (derivedUniformCoefficient data)
-  in
-  ℚP.nonNegative⁻¹ (derivedUniformCoefficient data)
+  ℚP.<⇒≤ (derivedUniformCoefficientPositive data)
 
 raisedScaleTimesInverseIsOne :
   ∀ {balances recursionData block identification}
@@ -215,15 +196,12 @@ raisedScaleTimesInverseIsOne :
       {balances = balances} {recursionData = recursionData}
       {block = block} identification) →
   let scale = raisedCriticalScale data
-      scalePositive = raisedCriticalScalePositive data
-      instance scaleNonzero = ℚ.>-nonZero scalePositive
+      instance scaleNonzero = ℚ.>-nonZero (raisedCriticalScalePositive data)
   in scale * ℚ.1/_ scale ≡ 1ℚ
 raisedScaleTimesInverseIsOne data =
   let
     scale = raisedCriticalScale data
-    scalePositive = raisedCriticalScalePositive data
-    instance
-      scaleNonzero = ℚ.>-nonZero scalePositive
+    instance scaleNonzero = ℚ.>-nonZero (raisedCriticalScalePositive data)
   in
   ℚP.*-inverseʳ scale
 
@@ -238,9 +216,7 @@ derivedCoefficientTimesRaisedScale data =
   let
     margin = correctionMargin data
     scale = raisedCriticalScale data
-    scalePositive = raisedCriticalScalePositive data
-    instance
-      scaleNonzero = ℚ.>-nonZero scalePositive
+    instance scaleNonzero = ℚ.>-nonZero (raisedCriticalScalePositive data)
   in
   begin
     derivedUniformCoefficient data * scale
@@ -287,7 +263,6 @@ raisedCriticalScaleBound {block = block} data n =
       Block.scaledTargetNonnegative
         (Block.constant block) (Block.r block)
         (Block.constantNonnegative block) (Block.rNonnegative block) n
-
     scaleMonotone :
       criticalScale data * T ≤ raisedCriticalScale data * T
     scaleMonotone =
@@ -319,18 +294,6 @@ strictGapScaleMatchedCapacity {block = block} data = record
         (sym (derivedCoefficientHeadroomExact data))
         ℚP.≤-refl
   }
-
-strictGapUniformProductCapacity :
-  ∀ {balances recursionData block identification} →
-  StrictGapBlockScaleData
-    {balances = balances} {recursionData = recursionData}
-    {block = block} identification →
-  DASHI.Physics.Closure.NSTriadKNFixedShiftUniformProductCapacityRound57Exact.UniformFixedShiftProductCapacity identification
-strictGapUniformProductCapacity data =
-  Scale.scaleMatchedUniformProductCapacity
-    (strictGapScaleMatchedCapacity data)
-  where
-  import DASHI.Physics.Closure.NSTriadKNFixedShiftUniformProductCapacityRound57Exact
 
 c3DerivedFromC1C2 : Bool
 c3DerivedFromC1C2 = true
