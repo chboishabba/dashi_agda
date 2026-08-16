@@ -13,3 +13,10 @@ import DASHI.Biology.PsychogeographyEverything
 import DASHI.Biology.TrumpPsychogeographicPolicyAtlasExact
 import DASHI.Biology.TrumpPsychogeographicHexagramTestsExact
 import DASHI.Biology.TrumpPsychogeographyAuthorityBoundary
+
+------------------------------------------------------------------------
+-- Evidence-gated consent / epistemic-attractor / institutional-transfer
+-- cross-pollination.  Named-actor application remains non-automatic.
+------------------------------------------------------------------------
+
+import DASHI.Biology.TrumpBannonConsentAttractorBridge
