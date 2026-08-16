@@ -113,16 +113,26 @@ fullRankUpdateConstraint certificate fullRank =
     (uncertaintyUpdateBound certificate)
 
 ------------------------------------------------------------------------
--- AUTHORITY BOUNDARY / COMPLETION TARGET
+-- AUTHORITY BOUNDARY / CURRENT STATUS
 --
--- The final source-faithful ML-KEM theorem now needs concrete producers for:
+-- The generic two-resource composition is complete here.  Round 17 now also
+-- supplies several downstream specialisations that were previously listed as
+-- missing:
 --
---   * the finite-field uncertainty/update certificate;
---   * the maintained-state cell alphabet/count;
---   * the adaptive transcript alphabet/depth;
---   * exact protected-label recovery through that state/transcript pair.
+--   * `MLKEMExactResidualTouchLowerBoundExact` gives a concrete update resource
+--     for explicitly materialised exact residual states;
+--   * `MLKEMFIPS203ProtectedSecretCapacityExact` fixes the protected carrier to
+--     the FIPS secret-support geometry;
+--   * `MLKEMFIPS203UpdateCapacityResourceExact` composes that FIPS carrier with
+--     the update inequality;
+--   * `MLKEMFIPS203CBDPriorSuccessBoundExact` and
+--     `MLKEMFIPS203AverageSuccessResourceExact` refine support-wide capacity to
+--     an average-success numerator under the explicit CBD product-prior model.
 --
--- Once instantiated, the resulting theorem is a representation-resource
--- tradeoff.  It still does not identify this tradeoff with a general
--- polynomial/exponential hardness theorem.
+-- The live producers are therefore narrower: prove the FIPS-specific Fourier
+-- support/local regular-singular certificate for the actual public map, and
+-- prove finite state/readout bounds plus exact recovery factorisation for one
+-- concrete verifier architecture (including any admitted physical observation
+-- coarsening).  The resulting theorem is a representation-resource tradeoff,
+-- not a general polynomial/exponential hardness or wall-clock theorem.
 ------------------------------------------------------------------------
