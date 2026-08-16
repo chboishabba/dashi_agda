@@ -55,11 +55,11 @@ module DASHI.Physics.Closure.NSTriadKNComConcreteActiveOddPQTriadRound62Exact wh
 -- mass/Schur control of such entries.
 ------------------------------------------------------------------------
 
-open import Agda.Primitive using (Level; lsuc)
+open import Agda.Primitive using (Level)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Data.Integer.Base using (ℤ; +_)
+open import Data.Integer.Base using (+_)
 open import Relation.Binary.PropositionalEquality using (_≢_; cong; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
@@ -74,10 +74,6 @@ import DASHI.Physics.Closure.NSTriadKNOfficialInfinityNormTriangle as Infinity
 import DASHI.Physics.Closure.NSTriadKNPhysicalTransportMatrixSkewRound40Exact as Matrix
 import DASHI.Physics.Closure.NSTriadKNPhysicalTransportCoefficientSkewRound40Exact as Coeff
 import DASHI.Physics.Closure.NSTriadKNComLiteralOddPQKernelRound57Exact as Odd
-
-------------------------------------------------------------------------
--- Canonical executable low selector j(k) <= cutoff.
-------------------------------------------------------------------------
 
 natLeBoolRefl : (n : Nat) → Physical.natLeBool n n ≡ true
 natLeBoolRefl zero = refl
@@ -99,10 +95,6 @@ selectorOnlyModel F = record
   ; derivativeMultiplier = λ mode → C3.complexZero F
   ; curlMultiplier = λ mode value → value
   }
-
-------------------------------------------------------------------------
--- One explicit resonant active entry.
-------------------------------------------------------------------------
 
 pMode qMode kMode : Z3.FourierMode
 pMode = Z3.mode (+ 1) (+ 0) (+ 0)
@@ -150,10 +142,6 @@ oddPQTestEntryIsActive F
   rewrite kIsHighAtCutoffZero F
         | qIsLowAtCutoffZero F = refl
 
-------------------------------------------------------------------------
--- Exact coefficient value for a_p=(0,1,0).
-------------------------------------------------------------------------
-
 record UnitPreservingIntegerEmbedding
     {r : Level}
     (F : C3.RealField r)
@@ -180,8 +168,8 @@ embeddedPositiveOneIsComplexOne :
     {E : C3.IntegerEmbedding F} →
   UnitPreservingIntegerEmbedding F E →
   C3.realEmbed F (C3.embedInteger E (+ 1)) ≡ C3.complexOne F
-embeddedPositiveOneIsComplexOne unit =
-  cong (C3.realEmbed _ ) (embedPositiveOne unit)
+embeddedPositiveOneIsComplexOne {F = F} unit =
+  cong (C3.realEmbed F) (embedPositiveOne unit)
 
 embeddedZeroIsComplexZero :
   ∀ {r} {F : C3.RealField r}
@@ -225,11 +213,6 @@ literalOddPQTestCoefficientIsNegativeI {F = F} {E = E} unit
   rewrite kIsHighAtCutoffZero F
         | qIsLowAtCutoffZero F
         | testTransportCoefficientIsI unit = refl
-
-------------------------------------------------------------------------
--- Nontriviality: if 1 != 0 in the selected Fourier field, the active entry is
--- genuinely nonzero.
-------------------------------------------------------------------------
 
 record NontrivialRealField {r : Level} (F : C3.RealField r) : Set r where
   field
