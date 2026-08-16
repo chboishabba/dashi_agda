@@ -141,4 +141,4 @@ canonicalRound17ClaimBoundary =
   round17ClaimBoundary
     false refl false refl false refl false refl false refl false refl
     false refl false refl false refl false refl false refl false refl false refl
-    false refl false refl
+    false refl false refl false refl
