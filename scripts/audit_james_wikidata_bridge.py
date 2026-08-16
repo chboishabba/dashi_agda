@@ -8,12 +8,13 @@ import pathlib
 import re
 import sys
 
-DECL_RE = re.compile(
+DECL_LINE_RE = re.compile(
     r"^\s*(?:set_option\b.*\bin\s*)?(?:@[\[].*?[\]]\s*)?"
     r"(theorem|lemma|def|abbrev|structure|class|inductive|instance)\s+"
-    r"([A-Za-z0-9_'.?«»]+)",
-    re.M,
+    r"([A-Za-z0-9_'.?«»]+)"
 )
+NAMESPACE_RE = re.compile(r"^\s*namespace\s+([A-Za-z0-9_.]+)\s*$")
+END_RE = re.compile(r"^\s*end(?:\s+([A-Za-z0-9_.]+))?\s*$")
 
 
 def sha256(path: pathlib.Path) -> str:
@@ -29,16 +30,38 @@ def read_tsv(path: pathlib.Path) -> list[dict[str, str]]:
         return list(csv.DictReader(handle, delimiter="\t"))
 
 
-def declaration_matches(theorem: str, declared: str) -> bool:
-    """Match a fully-qualified bridge name against its source-local declaration.
+def fully_qualified_declarations(path: pathlib.Path) -> set[str]:
+    """Reconstruct declared names using Lean's explicit namespace blocks.
 
-    Lean permits declaration names such as `RequiresStatement.trans` and names
-    containing `?`, so checking only the final dot-separated leaf is too weak.
-    The source-local name must be either the full name or a namespace suffix of
-    the fully-qualified contract.
+    The supplied project uses named `end` markers for namespaces. Named section
+    ends are ignored unless they match the active namespace tail. Declaration
+    names may themselves contain dots or `?`, e.g. `RequiresStatement.trans`
+    and `isLCS_of_lcs?_eq_some`.
     """
 
-    return theorem == declared or theorem.endswith("." + declared)
+    namespace: list[str] = []
+    declarations: set[str] = set()
+    for raw_line in path.read_text(encoding="utf-8").splitlines():
+        ns_match = NAMESPACE_RE.match(raw_line)
+        if ns_match:
+            namespace.extend(ns_match.group(1).split("."))
+            continue
+
+        end_match = END_RE.match(raw_line)
+        if end_match:
+            named = end_match.group(1)
+            if named:
+                parts = named.split(".")
+                if len(parts) <= len(namespace) and namespace[-len(parts):] == parts:
+                    del namespace[-len(parts):]
+            continue
+
+        decl_match = DECL_LINE_RE.match(raw_line)
+        if decl_match:
+            local_name = decl_match.group(2)
+            declarations.add(".".join([*namespace, local_name]))
+
+    return declarations
 
 
 def main() -> int:
@@ -75,6 +98,7 @@ def main() -> int:
             f"module count: expected {len(manifest)}, found {len(actual_files)}"
         )
 
+    declaration_cache: dict[str, set[str]] = {}
     for module, row in expected.items():
         path = args.request_project / f"{module}.lean"
         if not path.exists():
@@ -91,6 +115,7 @@ def main() -> int:
             failures.append(
                 f"{module}: line count {line_count} != pinned {row['lines']}"
             )
+        declaration_cache[module] = fully_qualified_declarations(path)
 
     for path in actual_files:
         if path.stem not in expected:
@@ -104,13 +129,15 @@ def main() -> int:
         if not path.exists():
             failures.append(f"contract {theorem}: source module {module} missing")
             continue
-        declared = {
-            match.group(2)
-            for match in DECL_RE.finditer(path.read_text(encoding="utf-8"))
-        }
-        if not any(declaration_matches(theorem, name) for name in declared):
+        declared = declaration_cache.get(module)
+        if declared is None:
+            declared = fully_qualified_declarations(path)
+            declaration_cache[module] = declared
+        if theorem not in declared:
+            near = sorted(name for name in declared if name.endswith(theorem.rsplit(".", 1)[-1]))
+            detail = f"; similarly named: {', '.join(near[:3])}" if near else ""
             failures.append(
-                f"contract {theorem}: no matching declaration found in {module}.lean"
+                f"contract {theorem}: exact declaration not found in {module}.lean{detail}"
             )
 
     if failures:
@@ -121,7 +148,7 @@ def main() -> int:
 
     print(
         "James/DASHI bridge audit OK: "
-        f"{len(manifest)} source modules, {len(contracts)} pinned theorem contracts"
+        f"{len(manifest)} source modules, {len(contracts)} exact theorem contracts"
     )
     return 0
 
