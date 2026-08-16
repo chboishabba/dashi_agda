@@ -24,16 +24,8 @@ module DASHI.Moonshine.P11ClassicalHeckeObservationQuotientExact where
 -- is non-injective and the nonconstant (-3,2) spectral mode cannot factor
 -- through it.
 --
--- Therefore
---
---   operator-safe for a declared coarse observation
---
--- is strictly weaker than
---
---   lossless for the full arithmetic state/spectrum.
---
--- This is a finite structural theorem; no statistical sufficiency or policy
--- interpretation is imported from the cited source vocabulary.
+-- Therefore operator-safe for a declared coarse observation is strictly weaker
+-- than lossless for the full arithmetic state/spectrum.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -42,12 +34,9 @@ open import Data.Integer using (ℤ; +_; -[1+_])
 
 import Ontology.Hecke.QuotientRepresentation as Quotient
 import DASHI.Moonshine.HeckeCorrespondenceQuotientDescentExact as ExistingQuotient
+import DASHI.Moonshine.ClassicalFiniteHeckeCorrespondenceCore as Classical
 import DASHI.Moonshine.ClassicalHeckeQuotientDescentExact as ClassicalDescent
 import DASHI.Moonshine.P11ClassicalTwoIsogenyCorrespondenceExact as P11
-
-------------------------------------------------------------------------
--- One-class observation quotient.
-------------------------------------------------------------------------
 
 coarseProjection : P11.J11Class → ⊤
 coarseProjection state = tt
@@ -95,35 +84,27 @@ coarseClassicalDescent =
     ; neighbourRespectsEquiv = coarseNeighbourCongruence
     }
 
-------------------------------------------------------------------------
--- The quotient operator is exactly the degree-three constant-mode operator.
-------------------------------------------------------------------------
-
 coarseOne : ⊤ → Nat
 coarseOne coarse = 1
 
-coarseOperatorIsThree :
+coarseOperatorCommutes :
   (state : P11.J11Class) →
-  P11.Classical.classicalOperator P11.p11TwoIsogenyCorrespondence
+  Classical.classicalOperator P11.p11TwoIsogenyCorrespondence
     (λ fine → coarseOne (coarseProjection fine)) state
   ≡
-  P11.Classical.classicalOperator
+  Classical.classicalOperator
     (ClassicalDescent.inducedClassicalCorrespondence coarseClassicalDescent)
     coarseOne tt
-coarseOperatorIsThree =
+coarseOperatorCommutes =
   ClassicalDescent.projectedClassicalOperatorCommutes
     coarseClassicalDescent coarseOne
 
 inducedCoarseDegreeIsThree :
-  P11.Classical.classicalOperator
+  Classical.classicalOperator
     (ClassicalDescent.inducedClassicalCorrespondence coarseClassicalDescent)
     coarseOne tt
   ≡ 3
 inducedCoarseDegreeIsThree = refl
-
-------------------------------------------------------------------------
--- But the quotient is not lossless.
-------------------------------------------------------------------------
 
 j0NotJ1 : P11.j0 ≡ P11.j1 → ⊥
 j0NotJ1 ()
@@ -140,10 +121,6 @@ noExactDecoder decoder exact =
     (trans
       (sym (exact P11.j0))
       (exact P11.j1))
-
-------------------------------------------------------------------------
--- The nonconstant arithmetic eigenmode cannot factor through the singleton.
-------------------------------------------------------------------------
 
 nonconstantModeValue : P11.J11Class → ℤ
 nonconstantModeValue P11.j0 = -[1+ 2 ]
