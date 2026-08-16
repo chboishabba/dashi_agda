@@ -29,8 +29,7 @@ module DASHI.Physics.YangMills.BalabanYM4FiveChannelQuarticBetaAdapterExact wher
 --     0 <= c_{cell,channel}.
 --
 -- This module constructs the finite interaction atom family itself and proves
--- that its betaInt is DEFINITIONALLY the nested physical five-channel sum.
--- Thus L4 no longer needs a second unrelated list of interaction atoms.
+-- that its betaInt is definitionally the nested physical five-channel sum.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -38,7 +37,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; -_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; trans; subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
@@ -196,8 +195,7 @@ localQuarticLower data cell =
               (channelCoefficient data cell))
             (ℚRing.solve-∀ fourth (localCoefficient data cell)))))
   in
-  Relation.Binary.PropositionalEquality.subst
-    (λ lower → lower ≤ localRemainder data cell)
+  subst (λ lower → lower ≤ localRemainder data cell)
     identify pointwiseSum
 
 globalQuarticLower :
@@ -234,8 +232,7 @@ globalQuarticLower data =
             (Sums.sumRationalScale fourth (cells data) (localCoefficient data))
             (ℚRing.solve-∀ fourth (coefficientTotal data)))))
   in
-  Relation.Binary.PropositionalEquality.subst
-    (λ lower → lower ≤ betaInt data)
+  subst (λ lower → lower ≤ betaInt data)
     identify pointwiseSum
 
 asFiniteInteractionAtomEnclosure :
