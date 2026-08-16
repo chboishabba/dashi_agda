@@ -17,5 +17,6 @@ import DASHI.Ontology.LeanWikidataConstraintBridge
 import DASHI.Ontology.LeanWikidataRdfExactnessBridge
 import DASHI.Ontology.LeanWikidataExistingContentAudit
 import DASHI.Ontology.LeanWikidataConcreteGraphRegression
+import DASHI.Ontology.LeanWikidataGovernedResidualBridge
 import DASHI.Ontology.LeanWikidataWholeBridge
 import DASHI.Ontology.LeanWikidataWholeBridgeTests
