@@ -41,10 +41,28 @@ open import Data.Rational.Base using
   (ℚ; 0ℚ; _*_; _≤_)
 import Data.Rational.Properties as ℚₚ
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Binary.PropositionalEquality using (_≡_; subst; sym)
 
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteRationalOrderCore as Core
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteEightPointSixThreeHolderExact as Holder
+
+cubeProductMeaning :
+  (x y : ℚ) →
+  Holder.cube (x * y) ≡ Holder.cube x * Holder.cube y
+cubeProductMeaning x y
+  rewrite Holder.cubeMeaning (x * y)
+        | Holder.cubeMeaning x
+        | Holder.cubeMeaning y
+  = solve (x ∷ y ∷ [])
+
+endpointReassociate :
+  (x y z : ℚ) →
+  Holder.cube x
+    * (Holder.sixtyFour * y * (z * z))
+    ≡ Holder.sixtyFour * Holder.cube x * y * (z * z)
+endpointReassociate x y z
+  rewrite Holder.cubeMeaning x | Holder.sixtyFourMeaning
+  = solve (x ∷ y ∷ z ∷ [])
 
 record FiniteSixThreeKernelData : Set where
   constructor finite-six-three-kernel-data
@@ -161,8 +179,9 @@ abstract
           (momentSquared * Holder.productL2Squared holderData)
         ≡ Holder.cube momentSquared
           * Holder.cube (Holder.productL2Squared holderData)
-      leftMeaning = solve
-        (momentSquared ∷ Holder.productL2Squared holderData ∷ [])
+      leftMeaning = cubeProductMeaning
+        momentSquared
+        (Holder.productL2Squared holderData)
 
       endpoint :
         Holder.cube momentSquared
@@ -175,11 +194,10 @@ abstract
           * Holder.lowSixthMass holderData
           * (Holder.highCubeMass holderData
             * Holder.highCubeMass holderData)
-      endpoint = solve
-        ( Holder.cube momentSquared
-        ∷ Holder.lowSixthMass holderData
-        ∷ Holder.highCubeMass holderData
-        ∷ [])
+      endpoint = endpointReassociate
+        momentSquared
+        (Holder.lowSixthMass holderData)
+        (Holder.highCubeMass holderData)
     in
     ℚₚ.≤-trans
       monotone
