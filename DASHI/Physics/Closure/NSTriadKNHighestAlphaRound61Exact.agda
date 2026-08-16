@@ -35,6 +35,8 @@ module DASHI.Physics.Closure.NSTriadKNHighestAlphaRound61Exact where
 --       constructs B_* = ((r-q)-a)/(K+1), so C3 is not independent.
 -- G   : exact rational B_*/3 allocation constructs all three Young splits;
 --       the final numerical feasibility question is one strict scalar gate.
+--       The necessary two-resource no-go is also generalized from 2 C_* to
+--       the physical 2 C_* K_bad hard tax.
 -- H   : the selected Leray--Hopf solution, localized gradient integral,
 --       T^3/unit-viscosity normalization and Luo continuation conclusion are
 --       proved on the same existing official carrier.
@@ -85,6 +87,8 @@ import DASHI.Physics.Closure.NSTriadKNHHGoodLiteralAnnularStrainSymbolRound48Exa
 import DASHI.Physics.Closure.NSTriadKNHHGoodAnnularMasterKernelRound41Exact
 import DASHI.Physics.Closure.NSTriadKNHHGoodSameObjectMasterKernelRound55Exact
 
--- G/H: deterministic resource allocation and same-object continuation closure.
+-- G/H: deterministic resource allocation, K_bad-aware no-go, and same-object
+-- continuation closure.
 import DASHI.Physics.Closure.NSTriadKNPhysicalNineOwnerFeasibilityRound61Exact
+import DASHI.Physics.Closure.NSTriadKNJointGlobalFeasibilityKBadRound61Exact
 import DASHI.Physics.Closure.NSTriadKNPhysicalContinuationClosureRound61Exact
