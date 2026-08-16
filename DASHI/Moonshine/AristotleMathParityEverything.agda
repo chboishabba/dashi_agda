@@ -12,6 +12,7 @@ module DASHI.Moonshine.AristotleMathParityEverything where
 import DASHI.Interop.AristotleMathSourceParityExact
 import DASHI.Arithmetic.AristotleArithmeticEverything
 import DASHI.Moonshine.AristotleHeckeRecurrenceCoreExact
+import DASHI.Moonshine.AristotleHeckeGeneralPrimePowerDecompositionExact
 import DASHI.Moonshine.AristotleHeckeWordsSourceParityExact
 import DASHI.Moonshine.AristotleDeltaWordT2T3FiniteParityExact
 import DASHI.Moonshine.ClassicalHeckeWeightKSmallWordExact
