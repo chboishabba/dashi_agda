@@ -2,11 +2,12 @@ module DASHI.Physics.YangMills.BalabanClayT4ConfiguredBrillouinBoxReceiptFamilyE
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Rational using (ℚ; 0ℚ; _+_; _-_; _*_; _≤_; _/_)
+open import Data.Rational using (ℚ; 0ℚ; _+_; _-_; _*_; _≤_; _<_)
 open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayT4ConfiguredBrillouinIntegralCertificateExact as Integral
+import DASHI.Physics.YangMills.BalabanClayT4PositiveDenominatorQuotientEndpointsExact as Quotient
 
 ------------------------------------------------------------------------
 -- Literature normalization.
@@ -22,8 +23,18 @@ import DASHI.Physics.YangMills.BalabanClayT4ConfiguredBrillouinIntegralCertifica
 -- Theories. I", Communications in Mathematical Physics 109 (1987), 249--301.
 -- DOI: 10.1007/BF01215223
 -- Relationship: Sections 4--5, pp. 281--298, and Eqs. (5.36)--(5.41) are the
--- tensor and coefficient target.  Box arithmetic below certifies only the
+-- tensor and coefficient target. Box arithmetic below certifies only the
 -- regular scalar integral after the literal diagrams have been reduced.
+--
+-- IMPORTANT SIGN / DIVISION CORRECTION
+--
+-- Division by a strictly positive denominator interval cannot use the same
+-- denominator endpoint for every numerator sign. Each receipt therefore
+-- records the sign case of its numerator enclosure, a TYPED proof that the
+-- lower denominator endpoint is positive, and the endpoint order dL<=dU.
+-- The rational interval theorem in
+-- BalabanClayT4PositiveDenominatorQuotientEndpointsExact proves the resulting
+-- quotient enclosure for every point value satisfying the endpoint bounds.
 ------------------------------------------------------------------------
 
 intervalWidth : Integral.RationalInterval → ℚ
@@ -45,14 +56,24 @@ record LiteralRegularBoxIntegrandData : Set₁ where
     integrandLower integrandUpper : ℚ
     quadratureError : ℚ
 
-    denominatorLowerPositive : Set
+    denominatorLowerPositive : 0ℚ < denominatorLower
+    denominatorBoundsOrdered : denominatorLower ≤ denominatorUpper
     denominatorEnclosureValid : Set
     numeratorTaylorEnclosureOnBox : Set
 
+    numeratorSignCase :
+      Quotient.NumeratorSignCase numeratorLower numeratorUpper
+
     quotientLowerCorrect :
-      integrandLower ≡ numeratorLower / denominatorUpper
+      integrandLower
+      ≡ Quotient.quotientLowerEndpoint
+          numeratorSignCase denominatorLower denominatorUpper
+          denominatorLowerPositive denominatorBoundsOrdered
     quotientUpperCorrect :
-      integrandUpper ≡ numeratorUpper / denominatorLower
+      integrandUpper
+      ≡ Quotient.quotientUpperEndpoint
+          numeratorSignCase denominatorLower denominatorUpper
+          denominatorLowerPositive denominatorBoundsOrdered
 
     integrandEnclosureOnBox : Set
     quadratureRemainderEnclosed : Set
