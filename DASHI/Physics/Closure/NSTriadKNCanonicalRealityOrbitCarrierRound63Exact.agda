@@ -48,10 +48,6 @@ open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier as Cube
 
-------------------------------------------------------------------------
--- Exact sign of one integer and the first nonzero sign of one Fourier mode.
-------------------------------------------------------------------------
-
 data Orientation : Set where
   negativeOrientation zeroOrientation positiveOrientation : Orientation
 
@@ -71,12 +67,6 @@ integerOrientationNegate :
 integerOrientationNegate (+ zero) = refl
 integerOrientationNegate (+ (suc n)) = refl
 integerOrientationNegate (-[1+ n ]) = refl
-
-integerOrientationZeroExact :
-  ∀ {z : ℤ} → integerOrientation z ≡ zeroOrientation → z ≡ + zero
-integerOrientationZeroExact {+ zero} proof = refl
-integerOrientationZeroExact {+ (suc n)} ()
-integerOrientationZeroExact { -[1+ n ]} ()
 
 firstNonzeroOrientation : Orientation → Orientation → Orientation → Orientation
 firstNonzeroOrientation negativeOrientation y z = negativeOrientation
@@ -141,10 +131,6 @@ nonzeroOrientation {k} nonzero with modeOrientation k in orientationProof
     (Z3.NonZeroMode.notZero nonzero
       (modeOrientationZeroExact orientationProof))
 
-------------------------------------------------------------------------
--- Executable canonical selector and literal filtered representative list.
-------------------------------------------------------------------------
-
 canonicalRepresentativeSelect : Z3.FourierMode → Bool
 canonicalRepresentativeSelect k with modeOrientation k
 ... | positiveOrientation = true
@@ -156,10 +142,10 @@ canonicalSelectTrueOrientation :
   modeOrientation k ≡ positiveOrientation
 canonicalSelectTrueOrientation {k} proof with modeOrientation k
 ... | positiveOrientation = refl
-... | negativeOrientation = ⊥-elim (falseNotTrue proof)
-... | zeroOrientation = ⊥-elim (falseNotTrue proof)
+... | negativeOrientation = falseNotTrue proof
+... | zeroOrientation = falseNotTrue proof
   where
-  falseNotTrue : false ≡ true → ⊥
+  falseNotTrue : false ≡ true → modeOrientation k ≡ positiveOrientation
   falseNotTrue ()
 
 positiveOrientationSelects :
@@ -167,15 +153,15 @@ positiveOrientationSelects :
   canonicalRepresentativeSelect k ≡ true
 positiveOrientationSelects {k} proof with modeOrientation k
 ... | positiveOrientation = refl
-... | negativeOrientation = ⊥-elim (orientationMismatch proof)
-... | zeroOrientation = ⊥-elim (orientationMismatch proof)
+... | negativeOrientation = orientationMismatch proof
+... | zeroOrientation = orientationMismatch proof
   where
   orientationMismatch :
-    {o : Orientation} → o ≡ positiveOrientation → ⊥
+    {o : Orientation} → o ≡ positiveOrientation →
+    canonicalRepresentativeSelect k ≡ true
   orientationMismatch ()
 
-filterRepresentatives :
-  List Z3.FourierMode → List Z3.FourierMode
+filterRepresentatives : List Z3.FourierMode → List Z3.FourierMode
 filterRepresentatives [] = []
 filterRepresentatives (k ∷ ks) with canonicalRepresentativeSelect k
 ... | true = k ∷ filterRepresentatives ks
@@ -264,10 +250,6 @@ zeroNeverCanonical :
 zeroNeverCanonical cutoff member with canonicalRepresentativePositive member
 ... | ()
 
-------------------------------------------------------------------------
--- Exactly one member of every nonzero {k,-k} orbit is selected.
-------------------------------------------------------------------------
-
 positiveNegatesToNegative :
   ∀ {k} →
   modeOrientation k ≡ positiveOrientation →
@@ -286,20 +268,19 @@ negativeNegatesToPositive {k} negative =
     (modeOrientationNegate k)
     (cong flipOrientation negative)
 
+positiveNotNegative : positiveOrientation ≡ negativeOrientation → ⊥
+positiveNotNegative ()
+
 canonicalAndNegativeCannotBothOccur :
   ∀ {cutoff k} →
   k Cube.∈ canonicalRealityOrbitModes cutoff →
   Z3.negateMode k Cube.∈ canonicalRealityOrbitModes cutoff →
   ⊥
 canonicalAndNegativeCannotBothOccur kMember negMember =
-  orientationContradiction
-    (canonicalRepresentativePositive negMember)
-    (positiveNegatesToNegative (canonicalRepresentativePositive kMember))
-  where
-  orientationContradiction :
-    positiveOrientation ≡ negativeOrientation →
-    negativeOrientation ≡ negativeOrientation → ⊥
-  orientationContradiction () anything
+  positiveNotNegative
+    (trans
+      (sym (canonicalRepresentativePositive negMember))
+      (positiveNegatesToNegative (canonicalRepresentativePositive kMember)))
 
 nonzeroCutoffModeHasCanonicalSheet :
   ∀ {cutoff k} →
