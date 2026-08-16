@@ -32,7 +32,9 @@ module DASHI.Physics.Closure.NSTriadKNHighestAlphaRound61Exact where
 -- B2/3: common-hat width one plus ONE active same-object theorem to the
 --       six-three Gram cell derives 17/64, 65/512, 65/512 and hence 133/256.
 -- C2/3: positive correction implies a<r-q; conversely C1 plus a<r-q
---       constructs B_* = ((r-q)-a)/(K+1), so C3 is not independent.
+--       constructs a positive correction automatically.  The zero-safe branch
+--       uses ((r-q)-a)/(K+1); when K>0 the sharp branch uses the maximal
+--       B_*=((r-q)-a)/K and saturates a+B_*K=r-q exactly.
 -- G   : exact rational B_*/3 allocation constructs all three Young splits;
 --       the final numerical feasibility question is one strict scalar gate.
 --       The necessary two-resource no-go is also generalized from 2 C_* to
@@ -69,11 +71,12 @@ import DASHI.Physics.Closure.NSTriadKNComNormalizedFibreSourceRound60Exact
 import DASHI.Physics.Closure.NSTriadKNComActiveSixThreeRealizationRound61Exact
 import DASHI.Physics.Closure.NSTriadKNComNormalizedFibreAggregateRound60Exact
 
--- C: physical scale-matched capacity, necessary strict gap, and constructive
--- sufficiency of the strict gap.
+-- C: physical scale-matched capacity, necessary strict gap, zero-safe
+-- constructive sufficiency, and the sharp positive-K maximal capacity.
 import DASHI.Physics.Closure.NSTriadKNFixedShiftScaleMatchedCapacityRound60Exact
 import DASHI.Physics.Closure.NSTriadKNFixedShiftPositiveGapFalsifierRound61Exact
 import DASHI.Physics.Closure.NSTriadKNFixedShiftStrictGapCapacityRound61Exact
+import DASHI.Physics.Closure.NSTriadKNFixedShiftSharpStrictGapCapacityRound61Exact
 
 -- D/F common source frontier and exact downstream reductions.
 import DASHI.Physics.Closure.NSTriadKNLuoExactFluxKernelDecompositionExact
