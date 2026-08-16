@@ -3,10 +3,16 @@ module DASHI.Crypto.MLKEMFIPS203UpdateCapacityResourceExact where
 ------------------------------------------------------------------------
 -- ML-KEM / FIPS 203: SOURCE-SPECIFIC UPDATE x CAPACITY RESOURCE THEOREM
 --
--- Primary source:
+-- Primary cryptographic source:
 -- National Institute of Standards and Technology,
 -- "Module-Lattice-Based Key-Encapsulation Mechanism Standard",
 -- FIPS 203, 2024. DOI: 10.6028/NIST.FIPS.203.
+--
+-- Finite-field uncertainty source used by the upstream support theorem:
+-- Martino Borello; Patrick Sole,
+-- "The uncertainty principle over finite fields",
+-- Discrete Mathematics 345 (2022), 112670.
+-- DOI: 10.1016/j.disc.2021.112670.
 --
 -- This module removes the last generic protected-count coordinate from the
 -- update/capacity dichotomy.  Exact recovery over the full declared FIPS secret
