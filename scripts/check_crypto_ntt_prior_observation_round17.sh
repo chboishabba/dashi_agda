@@ -44,6 +44,7 @@ FILES=(
   DASHI/Crypto/MLKEMFIPS203AverageSuccessResourceExact.agda
   DASHI/Crypto/MLKEMOppositeResidueParityDecompositionExact.agda
   DASHI/Crypto/MLKEMOppositeResidueParityFibreFactorisationExact.agda
+  DASHI/Crypto/MLKEMNTTActualCBD2EightCoefficientLeakageResolutionExact.agda
   DASHI/Crypto/MLKEMBaseCaseConditionedResidualExact.agda
   DASHI/Crypto/ConditionedResidualAmbiguityRegressionExact.agda
   DASHI/Crypto/ConditionalMateAmbiguityExact.agda
@@ -103,6 +104,12 @@ grep -q 'sameOppositePairForcesSameParitySectors' DASHI/Crypto/MLKEMOppositeResi
 grep -q 'sameParitySectorsForceSameOppositePair' DASHI/Crypto/MLKEMOppositeResidueParityFibreFactorisationExact.agda
 grep -q 'oppositeResidueSumSelectsEven' DASHI/Crypto/MLKEMOppositeResidueParityDecompositionExact.agda
 grep -q 'oppositeResidueDifferenceSelectsOdd' DASHI/Crypto/MLKEMOppositeResidueParityDecompositionExact.agda
+grep -q 'pair01MassFromCollisionPairs' DASHI/Crypto/MLKEMNTTActualCBD2EightCoefficientLeakageResolutionExact.agda
+grep -q 'pair02MassFromCollisionPairs' DASHI/Crypto/MLKEMNTTActualCBD2EightCoefficientLeakageResolutionExact.agda
+grep -q 'pair03EnumerationHasNoCollisionPair' DASHI/Crypto/MLKEMNTTActualCBD2EightCoefficientLeakageResolutionExact.agda
+grep -q 'pair03EnumerationHasUnitMaxFibre' DASHI/Crypto/MLKEMNTTActualCBD2EightCoefficientLeakageResolutionExact.agda
+grep -q 'coarsenedPairCollides' DASHI/Crypto/MLKEMNTTActualCBD2EightCoefficientLeakageResolutionExact.agda
+grep -q 'coarsenedPairSecretsDiffer' DASHI/Crypto/MLKEMNTTActualCBD2EightCoefficientLeakageResolutionExact.agda
 grep -q 'conditionedResidual0' DASHI/Crypto/MLKEMBaseCaseConditionedResidualExact.agda
 grep -q 'conditionedResidual1' DASHI/Crypto/MLKEMBaseCaseConditionedResidualExact.agda
 grep -q 'conditionedEquationLeavesTwoPlausibleSecrets' DASHI/Crypto/ConditionedResidualAmbiguityRegressionExact.agda
@@ -139,6 +146,10 @@ grep -q 'sameLogicalTransitionDifferentPhysicalObservation' DASHI/Crypto/Represe
 grep -q '10.6028/NIST.FIPS.203' DASHI/Crypto/MLKEMBaseCaseConditionedResidualExact.agda
 grep -q '10.6028/NIST.FIPS.203' DASHI/Crypto/MLKEMButterflyStageLocalityInvariantExact.agda
 grep -q '10.6028/NIST.FIPS.203' DASHI/Crypto/MLKEMOppositeResidueParityFibreFactorisationExact.agda
+grep -q '10.6028/NIST.FIPS.203' DASHI/Crypto/MLKEMNTTActualCBD2EightCoefficientLeakageResolutionExact.agda
+grep -q '10.46586/tches.v2021.i4.88-113' DASHI/Crypto/MLKEMNTTActualCBD2EightCoefficientLeakageResolutionExact.agda
+grep -q '10.1007/978-3-031-54773-7_5' DASHI/Crypto/MLKEMNTTActualCBD2EightCoefficientLeakageResolutionExact.agda
+grep -q '10.1016/j.disc.2021.112670' DASHI/Crypto/MLKEMFIPS203AverageSuccessResourceExact.agda
 
 if command -v python3 >/dev/null 2>&1; then
   python3 scripts/crypto_ntt_cbd_block_reconciliation_probe.py \
