@@ -26,3 +26,9 @@ import DASHI.Governance.Sudan.RCEPPSourceBoundary
 import DASHI.Governance.Sudan.RCEPPInstitutionalSurface
 import DASHI.Governance.Sudan.RCEPPPromotionBoundary
 import DASHI.Governance.Sudan.RCEPPRegression
+
+------------------------------------------------------------------------
+-- Developmental agency / epistemic-attractor / causal-resolution theorem lane.
+------------------------------------------------------------------------
+
+import DASHI.Governance.DevelopmentalConsentAttractorEverything
