@@ -29,19 +29,24 @@ module DASHI.Physics.Closure.NSTriadKNLocalizedPDEStructuredAtomsRound62Exact wh
 -- an undifferentiated list and then independently reconstruct kernel and
 -- boundary ledgers.  Emit ONE list of structured atoms:
 --
---   * physical interior atom,
+--   * physical interior atom with its existing compatible owner proof,
 --   * tail atom,
 --   * duplicate kernel atom,
 --   * exact cancelling kernel PAIR,
 --   * independent kernel atom,
 --   * lower/upper boundary atom with its vanishing-reason classification.
 --
--- A cancellation pair stores its local algebraic equality l+r=0.  Recursive
--- folding proves the TOTAL cancellation contribution is zero, constructs the
--- mature Round55 LiteralKernelResidualSplit, and extracts the boundary-atom
--- list from the same source.  No global cancellation theorem is resupplied.
+-- HH ownership is deliberately NOT guessed: a physical HH atom must carry the
+-- existing proof selecting HH-good or HH-bad.  Thus this layer preserves the
+-- duplicate-free owner semantics of the signed constituent tree exactly.
+--
+-- A cancellation pair stores l+r=0.  Recursive folding proves the TOTAL
+-- cancellation contribution is zero, constructs the mature Round55
+-- LiteralKernelResidualSplit, and extracts the boundary-atom list from the
+-- same source.  No global cancellation theorem is resupplied.
 --
 -- What remains genuinely analytic after this file is:
+--   (D1/F1) emit this ONE structured list from the literal localized NS identity;
 --   (D2) prove the independent kernel total is zero or bound it quantitatively;
 --   (F2) prove the classified boundary atom limits vanish.
 ------------------------------------------------------------------------
@@ -51,8 +56,9 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans)
 
+import DASHI.Physics.Closure.NSTriadKNLuoPhysicalFiveClassSupportRound25Exact as Support
 import DASHI.Physics.Closure.NSTriadKNLuoDuplicateFreeTaxOwnershipRound26Exact as Tax
 import DASHI.Physics.Closure.NSTriadKNSignedConstituentTreeRound28Exact as Signed
 import DASHI.Physics.Closure.NSTriadKNBoundaryVanishingClassificationRound29Exact as Boundary
@@ -64,7 +70,11 @@ import DASHI.Physics.Closure.NSTriadKNLocalizedPDEConstituentPartitionRound62Exa
 ------------------------------------------------------------------------
 
 data LocalizedPDEAtom : Set where
-  physicalAtom : (cell : Tax.PhysicalCell) → ℚ → LocalizedPDEAtom
+  physicalAtom :
+    (cell : Support.FiveSourceCell) →
+    (selected : Tax.TaxOwner) →
+    Signed.CompatibleOwner (Signed.physicalSource cell) selected →
+    ℚ → LocalizedPDEAtom
   tailAtom : ℚ → LocalizedPDEAtom
   duplicateKernelAtom : ℚ → LocalizedPDEAtom
   cancellingKernelPair :
@@ -89,9 +99,9 @@ upperBoundaryConstituent value =
     (Signed.boundarySource Signed.upperCut) Tax.boundary refl value
 
 flattenAtom : LocalizedPDEAtom → List Signed.SignedConstituent
-flattenAtom (physicalAtom cell value) =
+flattenAtom (physicalAtom cell selected compatible value) =
   Signed.signed-constituent
-    (Signed.physicalSource cell) (Tax.physicalOwner cell) refl value ∷ []
+    (Signed.physicalSource cell) selected compatible value ∷ []
 flattenAtom (tailAtom value) =
   Signed.signed-constituent Signed.tailSource Tax.tail refl value ∷ []
 flattenAtom (duplicateKernelAtom value) = kernelConstituent value ∷ []
@@ -145,18 +155,15 @@ cancelTotalsExact :
   cancelLeftTotal atoms + cancelRightTotal atoms ≡ 0ℚ
 cancelTotalsExact [] = refl
 cancelTotalsExact (cancellingKernelPair left right local ∷ rest) =
-  let tail = cancelTotalsExact rest
-  in
   trans
     (solve
       ( left ∷ right
       ∷ cancelLeftTotal rest ∷ cancelRightTotal rest ∷ []))
     (trans
-      (cong (_+ (cancelLeftTotal rest + cancelRightTotal rest)) local)
-      (trans
-        (cong (0ℚ +_) tail)
-        refl))
-cancelTotalsExact (physicalAtom cell value ∷ rest) = cancelTotalsExact rest
+      (cong₂ _+_ local (cancelTotalsExact rest))
+      (solve []))
+cancelTotalsExact (physicalAtom cell selected compatible value ∷ rest) =
+  cancelTotalsExact rest
 cancelTotalsExact (tailAtom value ∷ rest) = cancelTotalsExact rest
 cancelTotalsExact (duplicateKernelAtom value ∷ rest) = cancelTotalsExact rest
 cancelTotalsExact (independentKernelAtom value ∷ rest) = cancelTotalsExact rest
@@ -208,8 +215,20 @@ kernelFlattenMeaning :
     + (cancelLeftTotal atoms + cancelRightTotal atoms)
     + independentKernelTotal atoms
 kernelFlattenMeaning [] = solve []
-kernelFlattenMeaning (physicalAtom cell value ∷ rest) = kernelFlattenMeaning rest
-kernelFlattenMeaning (tailAtom value ∷ rest) = kernelFlattenMeaning rest
+kernelFlattenMeaning (physicalAtom cell selected compatible value ∷ rest) =
+  trans
+    (cong (0ℚ +_) (kernelFlattenMeaning rest))
+    (solve
+      ( duplicateKernelTotal rest
+      ∷ cancelLeftTotal rest ∷ cancelRightTotal rest
+      ∷ independentKernelTotal rest ∷ []))
+kernelFlattenMeaning (tailAtom value ∷ rest) =
+  trans
+    (cong (0ℚ +_) (kernelFlattenMeaning rest))
+    (solve
+      ( duplicateKernelTotal rest
+      ∷ cancelLeftTotal rest ∷ cancelRightTotal rest
+      ∷ independentKernelTotal rest ∷ []))
 kernelFlattenMeaning (duplicateKernelAtom value ∷ rest) =
   trans
     (cong (value +_) (kernelFlattenMeaning rest))
@@ -232,9 +251,19 @@ kernelFlattenMeaning (independentKernelAtom value ∷ rest) =
       ∷ cancelLeftTotal rest ∷ cancelRightTotal rest
       ∷ independentKernelTotal rest ∷ []))
 kernelFlattenMeaning (lowerBoundaryAtom reason value ∷ rest) =
-  kernelFlattenMeaning rest
+  trans
+    (cong (0ℚ +_) (kernelFlattenMeaning rest))
+    (solve
+      ( duplicateKernelTotal rest
+      ∷ cancelLeftTotal rest ∷ cancelRightTotal rest
+      ∷ independentKernelTotal rest ∷ []))
 kernelFlattenMeaning (upperBoundaryAtom reason value ∷ rest) =
-  kernelFlattenMeaning rest
+  trans
+    (cong (0ℚ +_) (kernelFlattenMeaning rest))
+    (solve
+      ( duplicateKernelTotal rest
+      ∷ cancelLeftTotal rest ∷ cancelRightTotal rest
+      ∷ independentKernelTotal rest ∷ []))
 
 kernelAfterStructuralCancellation :
   (atoms : List LocalizedPDEAtom) →
