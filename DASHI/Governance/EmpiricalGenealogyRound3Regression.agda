@@ -4,7 +4,10 @@ open import DASHI.Core.Prelude
 
 import DASHI.Governance.EvidenceGradedGenealogyCore as Genealogy
 import DASHI.Governance.EvidenceGradedGenealogyCasesExact as Cases
+import DASHI.Governance.TypedGenealogyEdgeExact as Typed
+import DASHI.Governance.ClimateGenealogyTypedCasesExact as Climate
 import DASHI.Governance.JohnPaperClaimPromotionAuditExact as Paper
+import DASHI.Governance.JohnPaperClaimManifestV2Exact as Manifest
 import DASHI.Governance.PalantirProcurementLegibilityAdapterExact as Palantir
 import DASHI.Governance.MinimalSufficientObservationGovernanceExact as Minimal
 import DASHI.Governance.MultidimensionalContestabilityAccessExact as Access
@@ -12,6 +15,13 @@ import DASHI.Governance.DependentReligiousEntrapmentCandidateExact as Entrapment
 import DASHI.Governance.EvolvingCapacityReligiousAutonomyExact as Capacity
 import DASHI.Governance.CoercionConfinementLegalSeparationExact as Legal
 import DASHI.Governance.ColonialCarceralDependencyAuthorityBridgeExact as Colonial
+import DASHI.Governance.EffectiveInstitutionalChoiceExact as Choice
+import DASHI.Governance.DelegatedEssentialServiceAuthorityExact as Service
+import DASHI.Governance.InstitutionalDependencyEntrapmentBridgeExact as InstitutionalEntrapment
+import DASHI.Governance.AliceBrownInstitutionalAgencyChoiceBridgeExact as Alice
+import DASHI.Governance.IndigenousRemovalDelegatedInfrastructureExact as Removal
+import DASHI.Governance.QuotedUtteranceContextProvenanceExact as Quote
+import DASHI.Governance.BraidedEnemyRoleProvenanceCrossPollinationExact as Braid
 
 ------------------------------------------------------------------------
 -- Focused local-kernel regression root.
@@ -38,6 +48,31 @@ tradwifeAltRightCandidateStillNeedsEvidence :
 tradwifeAltRightCandidateStillNeedsEvidence =
   Cases.candidateConnectionDoesNotPromoteWithoutReceipt
 
+------------------------------------------------------------------------
+-- Two-axis genealogy regression: strong source quality cannot rewrite the
+-- relation kind being evidenced.
+------------------------------------------------------------------------
+
+primaryMethodRecurrenceStillNotHistoricalTransfer :
+  Typed.StrongHistoricalTransfer Climate.bwToAPIRecurrence → ⊥
+primaryMethodRecurrenceStillNotHistoricalTransfer =
+  Climate.recurrenceCannotBePromotedByPrimaryQualityAlone
+
+pendingTransferStillNeedsBridge :
+  Typed.StrongHistoricalTransfer Climate.bwToAPIHistoricalTransferPending → ⊥
+pendingTransferStillNeedsBridge = Climate.pendingHistoricalTransferIsNotStrongYet
+
+singerRemainsUnresolvedNotStrong :
+  Typed.StrongEvidence
+    (Typed.evidenceStrength Climate.singerTobaccoContinuityCandidate) → ⊥
+singerRemainsUnresolvedNotStrong = Climate.singerCandidateIsNotStrong
+
+relationAndEvidenceAreIndependentAxes :
+  Typed.TypedGenealogyBoundary.relationAndEvidenceAreSeparateAxes
+    Typed.canonicalTypedGenealogyBoundary
+  ≡ true
+relationAndEvidenceAreIndependentAxes = refl
+
 paperFraudReceiptNotInstalled :
   Paper.JohnPaperPromotionAudit.fraudExternalLegalReceiptInstalled
     Paper.canonicalJohnPaperPromotionAudit
@@ -61,6 +96,18 @@ paperLegalPromotionRequiresJurisdictionReceipt :
     Paper.canonicalJohnPaperPromotionAudit
   ≡ true
 paperLegalPromotionRequiresJurisdictionReceipt = refl
+
+manifestConstructAndApplicationSeparated :
+  Manifest.ManifestV2Boundary.constructAndApplicationSeparated
+    Manifest.canonicalManifestV2Boundary
+  ≡ true
+manifestConstructAndApplicationSeparated = refl
+
+manifestMechanismDoesNotCreateEtiology :
+  Manifest.ManifestV2Boundary.mechanismAndEtiologySeparated
+    Manifest.canonicalManifestV2Boundary
+  ≡ true
+manifestMechanismDoesNotCreateEtiology = refl
 
 palantirProcurementEvidenceExists :
   Palantir.PalantirProcurementAdapterBoundary.procurementEvidenceInstalled
@@ -136,3 +183,87 @@ sharedDependencyAuthorityExitTopologyIsAvailable :
     Colonial.canonicalColonialCarceralDependencyBoundary
   ≡ true
 sharedDependencyAuthorityExitTopologyIsAvailable = refl
+
+------------------------------------------------------------------------
+-- Institutional availability / delegated service / Alice corpus pollen.
+------------------------------------------------------------------------
+
+formalInstitutionalPluralityIsNotEffectivePlurality :
+  Choice.EffectiveInstitutionalChoiceBoundary.formalPluralityEqualsEffectivePlurality
+    Choice.canonicalEffectiveInstitutionalChoiceBoundary
+  ≡ false
+formalInstitutionalPluralityIsNotEffectivePlurality = refl
+
+coordinateBottleneckCanDestroyAlternative :
+  Choice.EffectivelyAccessible Choice.secularSchoolDemand Choice.canonicalFamilyCapacity → ⊥
+coordinateBottleneckCanDestroyAlternative = Choice.secularSchoolNotAccessible
+
+religiousAvailabilityAloneDoesNotEstablishCoercion :
+  Choice.EffectiveInstitutionalChoiceBoundary.onlyAccessibleReligiousProviderEqualsCoercion
+    Choice.canonicalEffectiveInstitutionalChoiceBoundary
+  ≡ false
+religiousAvailabilityAloneDoesNotEstablishCoercion = refl
+
+healthcareStrictEqualityIsReused :
+  Service.DelegatedEssentialServiceBoundary.healthcareStrictEqualityReused
+    Service.canonicalDelegatedEssentialServiceBoundary
+  ≡ true
+healthcareStrictEqualityIsReused = refl
+
+dependencyNeedsAdditionalCoerciveUseWitness :
+  InstitutionalEntrapment.InstitutionalDependencyEntrapmentBoundary.coerciveUseRequiresAdditionalWitness
+    InstitutionalEntrapment.canonicalInstitutionalDependencyEntrapmentBoundary
+  ≡ true
+dependencyNeedsAdditionalCoerciveUseWitness = refl
+
+aliceFormalAvailabilityDoesNotEqualAgency :
+  Alice.AliceInstitutionalChoiceBoundary.formalAvailabilityEqualsAgency
+    Alice.canonicalAliceInstitutionalChoiceBoundary
+  ≡ false
+aliceFormalAvailabilityDoesNotEqualAgency = refl
+
+aliceParentExpertiseCanRemainSituatedEvidence :
+  Alice.AliceInstitutionalChoiceBoundary.parentExpertiseMayBeSituatedEvidence
+    Alice.canonicalAliceInstitutionalChoiceBoundary
+  ≡ true
+aliceParentExpertiseCanRemainSituatedEvidence = refl
+
+------------------------------------------------------------------------
+-- Bringing Them Home / braid / rhetorical-provenance regression.
+------------------------------------------------------------------------
+
+removalInfrastructureSeparatesStateAndNonStateRoles :
+  Removal.IndigenousDelegatedInfrastructureBoundary.stateAndNonStateRolesSeparated
+    Removal.canonicalIndigenousDelegatedInfrastructureBoundary
+  ≡ true
+removalInfrastructureSeparatesStateAndNonStateRoles = refl
+
+removalInfrastructureDoesNotClaimWholeLegalAuthority :
+  Removal.IndigenousDelegatedInfrastructureBoundary.operationalParticipationEqualsWholeLegalAuthority
+    Removal.canonicalIndigenousDelegatedInfrastructureBoundary
+  ≡ false
+removalInfrastructureDoesNotClaimWholeLegalAuthority = refl
+
+quoteContextDoesNotEraseLiteralUtterance :
+  Quote.QuotedUtteranceBoundary.clarificationErasesQuote
+    Quote.canonicalQuotedUtteranceBoundary
+  ≡ false
+quoteContextDoesNotEraseLiteralUtterance = refl
+
+quoteDoesNotAloneEstablishMotive :
+  Quote.QuotedUtteranceBoundary.quoteAloneEstablishesMotive
+    Quote.canonicalQuotedUtteranceBoundary
+  ≡ false
+quoteDoesNotAloneEstablishMotive = refl
+
+absoluteEnemyCompressionCanLoseResolution :
+  Braid.BraidedEnemyRoleBoundary.absoluteEnemyCompressionCanLoseActorResolution
+    Braid.canonicalBraidedEnemyRoleBoundary
+  ≡ true
+absoluteEnemyCompressionCanLoseResolution = refl
+
+braidedProvenanceDoesNotClaimIndigenousKnowledge :
+  Braid.BraidedEnemyRoleBoundary.indigenousKnowledgeClaimedByFormalAnalogy
+    Braid.canonicalBraidedEnemyRoleBoundary
+  ≡ false
+braidedProvenanceDoesNotClaimIndigenousKnowledge = refl
