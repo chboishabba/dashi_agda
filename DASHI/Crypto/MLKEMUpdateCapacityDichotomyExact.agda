@@ -3,6 +3,17 @@ module DASHI.Crypto.MLKEMUpdateCapacityDichotomyExact where
 ------------------------------------------------------------------------
 -- ML-KEM: UPDATE-LOCALITY / STATE-TRANSCRIPT CAPACITY DICHOTOMY
 --
+-- Primary cryptographic source:
+-- National Institute of Standards and Technology,
+-- "Module-Lattice-Based Key-Encapsulation Mechanism Standard",
+-- FIPS 203, 2024. DOI: 10.6028/NIST.FIPS.203.
+--
+-- Finite-field uncertainty source used by the upstream support theorem:
+-- Martino Borello; Patrick Sole,
+-- "The uncertainty principle over finite fields",
+-- Discrete Mathematics 345 (2022), 112670.
+-- DOI: 10.1016/j.disc.2021.112670.
+--
 -- This is the first direct composition of the two independent obstructions now
 -- available in Round 17:
 --
