@@ -23,6 +23,7 @@ FILES=(
   DASHI/Crypto/MLKEMBaseCaseAdjugateInverseExact.agda
   DASHI/Crypto/MLKEMBaseCaseNormInverseBridgeExact.agda
   DASHI/Crypto/MLKEMBaseCaseNonsquareNormSeparationExact.agda
+  DASHI/Crypto/MLKEMFermatNonsquareBridgeExact.agda
   DASHI/Crypto/MLKEMFIPS203GammaNonsquareTransportExact.agda
   DASHI/Crypto/MLKEMFIPS203F3329ArithmeticExact.agda
   DASHI/Crypto/MLKEMUncertaintyTransitionCostBridgeExact.agda
@@ -100,6 +101,7 @@ grep -q 'leftInverseReflectsZero' DASHI/Crypto/MLKEMNTTLocalLeftInverseZeroRefle
 grep -q 'adjugateBaseCaseIdentity' DASHI/Crypto/MLKEMBaseCaseAdjugateInverseExact.agda
 grep -q 'normSeparatedBaseCaseLeftInverse' DASHI/Crypto/MLKEMBaseCaseNormInverseBridgeExact.agda
 grep -q 'nonsquareSeparatesNorm' DASHI/Crypto/MLKEMBaseCaseNonsquareNormSeparationExact.agda
+grep -q 'fermatHalfPowerRefutesSquare' DASHI/Crypto/MLKEMFermatNonsquareBridgeExact.agda
 grep -q 'zetaEulerHalfPower' DASHI/Crypto/MLKEMFIPS203F3329ArithmeticExact.agda
 grep -q 'pair03DifferenceInverse' DASHI/Crypto/MLKEMFIPS203F3329ArithmeticExact.agda
 grep -q 'transitionUncertaintyCost128' DASHI/Crypto/MLKEMUncertaintyTransitionCostBridgeExact.agda
@@ -162,6 +164,7 @@ grep -q '10.1109/HOST55118.2023.10133270' DASHI/Crypto/MLKEMNTTActualCBD2EightCo
 grep -q '10.46586/tches.v2024.i3.200-223' DASHI/Crypto/MLKEMNTTActualCBD2EightCoefficientLeakageResolutionExact.agda
 grep -q '10.1007/978-981-97-1235-9_11' DASHI/Crypto/MLKEMNTTActualCBD2ConditionalListMassExact.agda
 grep -q 'ePrint 2023/1866' DASHI/Crypto/MLKEMUncertaintyTransitionCostBridgeExact.agda
+grep -q 'Euler' DASHI/Crypto/MLKEMFermatNonsquareBridgeExact.agda
 grep -q '10.1016/j.disc.2021.112670' DASHI/Crypto/MLKEMFIPS203AverageSuccessResourceExact.agda
 
 if command -v python3 >/dev/null 2>&1; then
