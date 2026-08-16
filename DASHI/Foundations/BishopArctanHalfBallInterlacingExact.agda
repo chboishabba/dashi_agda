@@ -10,20 +10,15 @@ module DASHI.Foundations.BishopArctanHalfBallInterlacingExact where
 -- arXiv:2205.08354. No DOI assigned.
 --
 -- DASHI CONTRIBUTION
---
 -- Continue the concrete Machin arctangent construction by proving the actual
 -- alternating-series interlacing on 0 <= x <= 1/2.  The ratio theorem from
--- BishopMachinArctanConstructionExact already gives
---
---      m_(n+1) <= (1/4) m_n,
---
--- so magnitudes are decreasing.  Positive x identifies |x^(2n+1)| with the
--- unsigned power; the existing parity theorem identifies (-1)^(2n) and
--- (-1)^(2n+1).  Therefore the generic constructive alternating-series theorem
--- applies to the ACTUAL convergent arctangent series, not an abstract receipt.
+-- BishopMachinArctanConstructionExact already gives m_(n+1) <= (1/4)m_n,
+-- hence decreasing magnitudes.  Positive x identifies |x^(2n+1)| with the
+-- unsigned power and the existing parity theorem handles the alternating sign.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (zero; suc)
+open import Data.Rational.Unnormalised using (1ℚᵘ)
 
 import Real as Bishop
 import RealProperties as BishopP
@@ -43,8 +38,7 @@ record PositiveHalfBallPoint (value : Bishop.ℝ) : Set where
     insideHalf : Bishop._≤_ (Bishop.∣_∣ value) HalfBall.bishopHalf
 open PositiveHalfBallPoint public
 
-quarterBelowOneNonStrict :
-  Bishop._≤_ HalfBall.bishopQuarter Bishop.1ℝ
+quarterBelowOneNonStrict : Bishop._≤_ HalfBall.bishopQuarter Bishop.1ℝ
 quarterBelowOneNonStrict = BishopP.<⇒≤ Atan.quarterBelowOne
 
 atanMagnitudeDecreasing : ∀ {value} → PositiveHalfBallPoint value →
@@ -78,8 +72,7 @@ atanSignedEvenIsMagnitude {value} point index =
     (BishopP.*-cong
       (Concrete.alternatingSignEven index)
       (BishopP.*-congˡ
-        (BishopP.≃-symm
-          (BishopP.nonNegx⇒∣x∣≃x powerNN))))
+        (BishopP.≃-symm (BishopP.nonNegx⇒∣x∣≃x powerNN))))
     (BishopP.*-identityˡ
       (Bishop._*_ coefficient (Bishop.∣_∣ power)))
 
@@ -92,22 +85,20 @@ atanSignedOddIsNegativeMagnitude {value} point index =
   let
     termIndex = suc (Alternating.double index)
     exponent = Estimates.oddExponent termIndex
+    coefficient = Bishop._⋆ (Atan.inverseOddRational termIndex)
     power = Bishop.pow value exponent
     powerNN = Concrete.powNonnegative (nonnegative point) exponent
+    magnitude = Atan.atanMagnitudeTerm value termIndex
   in
   BishopP.≃-trans
     (BishopP.*-cong
       (Concrete.alternatingSignOdd index)
       (BishopP.*-congˡ
-        (BishopP.≃-symm
-          (BishopP.nonNegx⇒∣x∣≃x powerNN))))
+        (BishopP.≃-symm (BishopP.nonNegx⇒∣x∣≃x powerNN))))
     (let open BishopP.ℝ-Solver
      in solve 1
-        (λ magnitude → (⊝ Κ 1ℚᵘ) ⊗ magnitude ⊜ ⊝ magnitude)
-        BishopP.≃-refl
-        (Atan.atanMagnitudeTerm value termIndex))
-  where
-  open import Data.Rational.Unnormalised using (1ℚᵘ)
+        (λ m → (⊝ Κ 1ℚᵘ) ⊗ m ⊜ ⊝ m)
+        BishopP.≃-refl magnitude)
 
 atanAlternatingSeriesData : ∀ {value} →
   PositiveHalfBallPoint value →
@@ -118,16 +109,16 @@ atanAlternatingSeriesData {value} point = record
   ; representedLimit = Atan.bishopAtanHalfBall value (insideHalf point)
   ; magnitudeNonnegative = Atan.atanMagnitudeNonnegative value
   ; magnitudeDecreasing = atanMagnitudeDecreasing point
-  ; signedEvenIsMagnitude = atanSignedEvenIsMagnitude point
-  ; signedOddIsNegativeMagnitude = atanSignedOddIsNegativeMagnitude point
-  ; seriesConverges = Atan.bishopAtanHalfBallConverges value (insideHalf point)
+  ; evenTermIsPositiveMagnitude = atanSignedEvenIsMagnitude point
+  ; oddTermIsNegativeMagnitude = atanSignedOddIsNegativeMagnitude point
+  ; seriesConvergesToRepresentedLimit =
+      Atan.bishopAtanHalfBallConverges value (insideHalf point)
   }
 
 atanInterlacing : ∀ {value} → PositiveHalfBallPoint value →
   Interlacing.BishopAlternatingInterlacingData
 atanInterlacing point =
-  Alternating.alternatingInterlacing
-    (atanAlternatingSeriesData point)
+  Alternating.alternatingInterlacingData (atanAlternatingSeriesData point)
 
 record ArctanCubicQuinticBracket (value : Bishop.ℝ) : Set₁ where
   field
@@ -139,8 +130,7 @@ record ArctanCubicQuinticBracket (value : Bishop.ℝ) : Set₁ where
 open ArctanCubicQuinticBracket public
 
 arctanCubicQuinticBracket : ∀ {value} →
-  PositiveHalfBallPoint value →
-  ArctanCubicQuinticBracket value
+  PositiveHalfBallPoint value → ArctanCubicQuinticBracket value
 arctanCubicQuinticBracket {value} point =
   let
     dataSet = atanAlternatingSeriesData point
@@ -152,8 +142,10 @@ arctanCubicQuinticBracket {value} point =
     { arctanValue = Atan.bishopAtanHalfBall value (insideHalf point)
     ; lowerCubic = lower
     ; upperQuintic = upper
-    ; lowerSound = Interlacing.lowerPartialBelowRepresentedLimit interlace (suc zero)
-    ; upperSound = Interlacing.representedLimitBelowUpperPartial interlace (suc zero)
+    ; lowerSound =
+        Interlacing.lowerPartialBelowRepresentedLimit interlace (suc zero)
+    ; upperSound =
+        Interlacing.representedLimitBelowUpperPartial interlace (suc zero)
     }
 
 bishopArctanAlternatingInterlacingLevel : ProofLevel
