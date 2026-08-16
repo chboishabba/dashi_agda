@@ -42,3 +42,4 @@ import DASHI.Reasoning.TernarySynthesisOrbitWeldRegression
 import DASHI.Topology.TernaryCylinderPantsGeometryExact
 import DASHI.Topology.TernaryPantsFrontierExact
 import DASHI.Reasoning.TernaryPantsSynthesisS3BridgeExact
+import DASHI.Reasoning.TernaryPantsSynthesisS3Regression
