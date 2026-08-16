@@ -122,9 +122,20 @@ squareMonotone : ∀ left right →
   0ℚ ≤ left → 0ℚ ≤ right → left ≤ right →
   left * left ≤ right * right
 squareMonotone left right leftNN rightNN leftBelow =
-  ℚP.≤-trans
-    (Norm.scaleNonnegative left leftNN leftBelow)
-    (Norm.scaleNonnegative right rightNN leftBelow)
+  let
+    first : left * left ≤ left * right
+    first = Norm.scaleNonnegative left leftNN leftBelow
+
+    secondRaw : right * left ≤ right * right
+    secondRaw = Norm.scaleNonnegative right rightNN leftBelow
+
+    second : left * right ≤ right * right
+    second = subst
+      (λ lower → lower ≤ right * right)
+      (ℚP.*-comm right left)
+      secondRaw
+  in
+  ℚP.≤-trans first second
 
 power4Monotone : ∀ left right →
   0ℚ ≤ left → 0ℚ ≤ right → left ≤ right →
@@ -250,8 +261,16 @@ betaSplitLowerAfterQuarticAbsorption gaussian interaction gamma
     interactionUniform = quarticUniformInteractionLower
       interaction gamma couplingNN gammaNN couplingBelow totalNN
     gaussianBound = computedGaussianLowerIsValid gaussian
+
+    summedRaw :
+      b + (- loss) ≤ betaZ gaussian + betaInt interaction
+    summedRaw = ℚP.+-mono-≤ gaussianBound interactionUniform
+
     summed : b - loss ≤ betaZ gaussian + betaInt interaction
-    summed = ℚP.+-mono-≤ gaussianBound interactionUniform
+    summed = subst
+      (λ lower → lower ≤ betaZ gaussian + betaInt interaction)
+      (ℚRing.solve-∀ b loss)
+      summedRaw
 
     negatedThreshold : - (half * b) ≤ - loss
     negatedThreshold = ℚP.neg-mono-≤ threshold
