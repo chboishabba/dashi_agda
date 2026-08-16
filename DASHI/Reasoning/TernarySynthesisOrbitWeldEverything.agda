@@ -30,3 +30,4 @@ import DASHI.Reasoning.RelationalTernaryPhaseGeometry
 import DASHI.Reasoning.TernaryComparisonSynthesisExact
 import DASHI.Reasoning.TernarySynthesisLogicQualificationExact
 import DASHI.Reasoning.TernarySynthesisTransportWeldExact
+import DASHI.Reasoning.TernarySynthesisOrbitWeldRegression
