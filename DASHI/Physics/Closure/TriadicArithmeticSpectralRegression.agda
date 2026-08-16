@@ -16,9 +16,7 @@ import DASHI.Physics.Closure.TriadicArithmeticSpectralAssembly as Assembly
 
 open QS.QSeriesCarrier using (Coeff; zeroᶜ; oneᶜ; _+ᶜ_; _*ᶜ_)
 open QS.SectorTraceTower using (Sector; traceCoefficient)
-open QS using (Vec) renaming ([] to []q; _∷_ to _∷q_)
-
-infixr 5 _∷q_
+open QS using (Vec)
 
 ------------------------------------------------------------------------
 -- Canonical [-1, 0, +1] stream.
@@ -123,7 +121,7 @@ natTraceTower =
 
 expectedNatPrefixThree : Vec Nat Q.three
 expectedNatPrefixThree =
-  zero ∷q Q.one ∷q Q.two ∷q []q
+  QS._∷_ zero (QS._∷_ Q.one (QS._∷_ Q.two QS.[]))
 
 qSeriesPrefixThreeExact :
   QS.qSeriesPrefix

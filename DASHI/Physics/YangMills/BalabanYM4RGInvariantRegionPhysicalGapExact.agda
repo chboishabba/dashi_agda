@@ -40,6 +40,7 @@ module DASHI.Physics.YangMills.BalabanYM4RGInvariantRegionPhysicalGapExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List; [])
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; 1ℚ; _*_; _≤_; _<_)
 import Data.Rational.Tactic.RingSolver as ℚRing
@@ -162,8 +163,7 @@ latticeDecayOnlyCounterexampleHasUnitLatticeExponent = refl
 
 latticeDecayOnlyCounterexamplePhysicalMassZero :
   physicalDecayMass latticeDecayOnlyCounterexample ≡ 0ℚ
-latticeDecayOnlyCounterexamplePhysicalMassZero =
-  ℚRing.solve []
+latticeDecayOnlyCounterexamplePhysicalMassZero = refl
 
 ym4RGInvariantRegionLevel : ProofLevel
 ym4RGInvariantRegionLevel = machineChecked
