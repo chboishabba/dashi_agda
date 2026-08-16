@@ -63,14 +63,23 @@ open InstitutionalSource public
 mkInstitutionalSource : String → String → String → String → String → InstitutionalSource
 mkInstitutionalSource a t d i r = institutionalSource a t d i r false
 
+ajphLunchablesPrimarySource : InstitutionalSource
+ajphLunchablesPrimarySource =
+  mkInstitutionalSource
+    "Laura A. Schmidt"
+    "Tobacco Industry Contributions to the Development of Ultraprocessed Food in the United States, 1985-2007: A Case Study of Lunchables"
+    "2026"
+    "American Journal of Public Health 116(7):940-949; DOI 10.2105/AJPH.2026.308491; PMID 42233189"
+    "primary internal-document case study: Philip Morris shared proprietary R&D across tobacco and food and applied consumer-driven product-development and better-for-you reformulation approaches to Lunchables"
+
 ucsfLunchablesSource : InstitutionalSource
 ucsfLunchablesSource =
   mkInstitutionalSource
     "University of California San Francisco; reporting by Victoria Colliver on Laura Schmidt's archival study"
     "How Big Tobacco Helped Shape the Design of Ultra-Processed Foods"
     "2026-06-03"
-    "UCSF News / American Journal of Public Health study announcement"
-    "documents cigarette research, flavour engineering and behavioural-science transfer into Lunchables development; exact primary-paper DOI should be bound separately when available"
+    "UCSF News; reports AJPH DOI 10.2105/AJPH.2026.308491"
+    "institutional research communication summarising the primary archival study; secondary to the AJPH paper"
 
 mondelezHistorySource : InstitutionalSource
 mondelezHistorySource =
@@ -78,7 +87,7 @@ mondelezHistorySource =
     "Mondelez International"
     "Our History"
     "corporate history"
-    "General Foods acquired 1985; Kraft acquired 1988; combined as Kraft General Foods 1989"
+    "General Foods acquired 1985; Kraft acquisition/combination chronology recorded by corporate history"
     "corporate ownership chronology only; does not itself prove research-method transfer"
 
 altriaHeritageSource : InstitutionalSource
@@ -106,6 +115,26 @@ record TechniqueTransferWitness : Set where
     provenance : List InstitutionalSource
     PersonnelOrDocumentEvidence : Set
     personnelOrDocumentEvidence : PersonnelOrDocumentEvidence
+
+philipMorrisConsumerDevelopmentTransfer : TechniqueTransferWitness
+philipMorrisConsumerDevelopmentTransfer =
+  techniqueTransferWitness
+    tobaccoDomain
+    foodDomain
+    behaviouralOptimisation
+    (ajphLunchablesPrimarySource ∷ ucsfLunchablesSource ∷ [])
+    ⊤
+    tt
+
+philipMorrisFlavourEngineeringTransfer : TechniqueTransferWitness
+philipMorrisFlavourEngineeringTransfer =
+  techniqueTransferWitness
+    tobaccoDomain
+    foodDomain
+    flavourRewardEngineering
+    (ajphLunchablesPrimarySource ∷ ucsfLunchablesSource ∷ [])
+    ⊤
+    tt
 
 
 data OwnershipAloneEstablishesTechniqueTransfer : Set where
@@ -187,6 +216,12 @@ canonicalInstitutionalTechniqueTransferReceipt : InstitutionalTechniqueTransferR
 canonicalInstitutionalTechniqueTransferReceipt =
   institutionalTechniqueTransferReceipt
     "institutional technique transfer: tobacco / military / carceral / commercial / civic"
-    (Sources.nationalSmokersAllianceSource ∷ [])
-    (ucsfLunchablesSource ∷ mondelezHistorySource ∷ altriaHeritageSource ∷ [])
+    (Sources.nationalSmokersAllianceSource
+      ∷ Sources.philipMorrisLunchablesPrimary
+      ∷ [])
+    (ajphLunchablesPrimarySource
+      ∷ ucsfLunchablesSource
+      ∷ mondelezHistorySource
+      ∷ altriaHeritageSource
+      ∷ [])
     canonicalInstitutionalTechniqueTransferBoundary
