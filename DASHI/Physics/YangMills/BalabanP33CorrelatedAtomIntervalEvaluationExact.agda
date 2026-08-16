@@ -26,8 +26,8 @@ module DASHI.Physics.YangMills.BalabanP33CorrelatedAtomIntervalEvaluationExact w
 --       R_corr = sum raw_S - sum green_(S,T).
 --
 -- A caller now encloses each literal raw atom and each literal two-source
--- Green atom.  Finite monotonicity constructs the enclosure of the full signed
--- residual.  In particular, the upper residual uses the UPPER raw sum and the
+-- Green atom. Finite monotonicity constructs the enclosure of the full signed
+-- residual. In particular, the upper residual uses the UPPER raw sum and the
 -- LOWER Green sum, preserving cancellation/sign information exactly.
 --
 -- The final 55/18874368 comparison is therefore a check on a COMPUTED interval
@@ -35,8 +35,10 @@ module DASHI.Physics.YangMills.BalabanP33CorrelatedAtomIntervalEvaluationExact w
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Rational.Base as ℚ using (ℚ; _+_; _-_; _≤_)
+open import Data.Rational.Base as ℚ using (ℚ; _+_; _-_; -_; _≤_)
 import Data.Rational.Properties as ℚP
+import Data.Rational.Tactic.RingSolver as ℚRing
+open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
@@ -112,10 +114,10 @@ atomIntervalResidualUpper envelope =
 rawTotalBelowIntervalUpper :
   ∀ {family} (envelope : CorrelatedAtomIntervalEnvelope family) →
   O.rawLocalizationTotal family ≤ rawUpperSum envelope
-rawTotalBelowIntervalUpper envelope =
+rawTotalBelowIntervalUpper {family} envelope =
   sumUpperMonotone
     Cube.nonemptySubsets4
-    (O.rawLocalizationAtom _)
+    (O.rawLocalizationAtom family)
     (λ subset → upper (rawBox envelope subset))
     (λ subset → upperSound (rawSound envelope subset))
 
@@ -124,38 +126,62 @@ greenLowerAtBelowActual :
   greenLowerAt envelope left
   ≤ Sums.sumRational Cube.nonemptySubsets4
       (O.multiplierGreenAtom family left)
-greenLowerAtBelowActual envelope left =
+greenLowerAtBelowActual {family} envelope left =
   sumLowerMonotone
     Cube.nonemptySubsets4
     (λ right → lower (greenBox envelope left right))
-    (O.multiplierGreenAtom _ left)
+    (O.multiplierGreenAtom family left)
     (λ right → lowerSound (greenSound envelope left right))
 
 greenLowerSumBelowActual :
   ∀ {family} (envelope : CorrelatedAtomIntervalEnvelope family) →
   greenLowerSum envelope ≤ O.greenPairTotal family
-greenLowerSumBelowActual envelope =
+greenLowerSumBelowActual {family} envelope =
   sumLowerMonotone
     Cube.nonemptySubsets4
     (greenLowerAt envelope)
     (λ left →
       Sums.sumRational Cube.nonemptySubsets4
-        (O.multiplierGreenAtom _ left))
+        (O.multiplierGreenAtom family left))
     (greenLowerAtBelowActual envelope)
 
 correlatedResidualBelowAtomIntervalUpper :
   ∀ {family} (envelope : CorrelatedAtomIntervalEnvelope family) →
   O.correlatedResidualTotal family ≤ atomIntervalResidualUpper envelope
 correlatedResidualBelowAtomIntervalUpper {family} envelope =
-  ℚP.+-mono-≤
-    (rawTotalBelowIntervalUpper envelope)
-    (ℚP.neg-mono-≤ (greenLowerSumBelowActual envelope))
+  let
+    rawBound = rawTotalBelowIntervalUpper envelope
+    greenBound = greenLowerSumBelowActual envelope
+    signed :
+      O.rawLocalizationTotal family + (- O.greenPairTotal family)
+      ≤ rawUpperSum envelope + (- greenLowerSum envelope)
+    signed = ℚP.+-mono-≤ rawBound (ℚP.neg-mono-≤ greenBound)
+
+    lowerExact :
+      O.rawLocalizationTotal family + (- O.greenPairTotal family)
+      ≡ O.correlatedResidualTotal family
+    lowerExact = ℚRing.solve-∀
+      (O.rawLocalizationTotal family) (O.greenPairTotal family)
+
+    upperExact :
+      rawUpperSum envelope + (- greenLowerSum envelope)
+      ≡ atomIntervalResidualUpper envelope
+    upperExact = ℚRing.solve-∀
+      (rawUpperSum envelope) (greenLowerSum envelope)
+  in
+  subst
+    (λ lower → lower ≤ atomIntervalResidualUpper envelope)
+    lowerExact
+    (subst
+      (λ upper →
+        O.rawLocalizationTotal family + (- O.greenPairTotal family) ≤ upper)
+      upperExact signed)
 
 p33CorrelatedAtomIntervalEvaluationLevel : ProofLevel
 p33CorrelatedAtomIntervalEvaluationLevel = machineChecked
 
 -- Physical interval arithmetic still has to instantiate each literal atom from
--- the selected-background region.  The target residual inequality itself is no
+-- the selected-background region. The target residual inequality itself is no
 -- longer accepted as an input by this module.
 p33PhysicalCorrelatedAtomIntervalInstantiationLevel : ProofLevel
 p33PhysicalCorrelatedAtomIntervalInstantiationLevel = conditional
