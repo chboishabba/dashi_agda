@@ -39,6 +39,7 @@ import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
 
 half : ℚ
 half = + 1 / 2
@@ -120,8 +121,9 @@ finiteLatticeBetaNonnegative :
 finiteLatticeBetaNonnegative dataSet =
   let
     halfZNN : 0ℚ ≤ half * zLower dataSet
-    halfZNN =
-      ℚP.*-monoˡ-≤-nonNeg half (zLowerNonnegative dataSet)
+    halfZNN = Norm.scaleNonnegative half
+      (ℚP.nonNegative⁻¹ half)
+      (zLowerNonnegative dataSet)
   in
   ℚP.≤-trans halfZNN (finiteLatticeBetaLowerHalfGap dataSet)
 
