@@ -38,9 +38,9 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
+open import Data.List.Base using (map)
 open import Data.Sum.Base using (_⊎_; inj₁; inj₂)
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
-open import Relation.Nullary using (¬_)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier as Cube
@@ -152,9 +152,11 @@ filterTagMemberComplete {tag} {tau} {items = head ∷ tail}
 ... | false =
   falseImpossible
     (trans
-      (cong (bonyTagEqual tag) tagEquality)
-      (bonyTagEqualRefl tag))
-    selected
+      (sym
+        (trans
+          (cong (bonyTagEqual tag) tagEquality)
+          (bonyTagEqualRefl tag)))
+      selected)
   where
   falseImpossible : true ≡ false →
     head Cube.∈ filterBonyTag tag (head ∷ tail)
@@ -212,8 +214,6 @@ routedOddPQCoefficients tag model projectorCutoff enumerationCutoff E velocity o
   map
     (Odd.literalOddPQTriadCoefficient model projectorCutoff E velocity)
     (bonyOutputFibre tag enumerationCutoff output)
-  where
-  open import Data.List.Base using (map)
 
 literalOddPQOutputFibrePartitionedByBonyClass : Bool
 literalOddPQOutputFibrePartitionedByBonyClass = true
