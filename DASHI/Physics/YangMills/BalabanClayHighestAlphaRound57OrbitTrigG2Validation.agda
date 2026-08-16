@@ -59,10 +59,21 @@ import DASHI.Physics.YangMills.BalabanClayT4HypercubicOrbitQuadratureWeightsExac
 import DASHI.Physics.YangMills.BalabanClayT4WilsonOneLoopOrbitSummedIntervalExact
 import DASHI.Physics.YangMills.BalabanClayT4HypercubicRepresentativeSumExact
 
+-- Source (5.6)/(5.7) Euclidean covariance of the FULL CMP109 vacuum
+-- polarization tensor feeds the concrete signed-permutation generators.
+import DASHI.Physics.YangMills.BalabanCMP109VacuumPolarizationHypercubicSourceSymmetryExact
+
 -- L3: safe syntax normalization.  Hat momentum is reduced to its literal
 -- Wilson sine-half definition without assuming the still-missing Bishop
 -- double-angle/cosine theorem.
 import DASHI.Physics.YangMills.BalabanClayT4DiagramTrigNormalFormExact
+
+-- L3: rational endpoint arithmetic is now lifted to actual Bishop-real values,
+-- including exact four-corner products without trichotomy and positive
+-- reciprocal/division transport.
+import DASHI.Physics.YangMills.BalabanClayT4BishopFourCornerIntervalExact
+import DASHI.Physics.YangMills.BalabanClayT4BishopPositiveReciprocalIntervalExact
+import DASHI.Physics.YangMills.BalabanClayT4BishopExpressionIntervalSemanticsExact
 
 -- G2: exact Boolean-four-cube degree grouping and joint grouped interval
 -- transport after the pre-existing exact owner cancellation.
