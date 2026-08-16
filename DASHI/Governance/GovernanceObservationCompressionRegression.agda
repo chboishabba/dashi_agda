@@ -2,6 +2,7 @@ module DASHI.Governance.GovernanceObservationCompressionRegression where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Bool using (false; true)
+open import Data.Empty using (⊥)
 
 import DASHI.Governance.FutureSafeCausalCompressionExact as Compression
 import DASHI.Governance.AsymmetricLegibilityContestabilityExact as Legibility
@@ -39,11 +40,9 @@ asymmetricLegibilityDoesNotPromoteAbuse = refl
 
 finiteLegibilityGapBlocksExactRecovery :
   Legibility.ExactInstitutionalViewDecoder Legibility.finiteLegibilityChannel →
-  Data.Empty.⊥
+  ⊥
 finiteLegibilityGapBlocksExactRecovery =
   Legibility.finiteExactDecoderImpossible
-  where
-    open import Data.Empty
 
 exactResidualRestoresRepresentativeIdentity :
   Residual.ContestableCompressionReceipt.exactResidualRestoresRepresentativeIdentity
