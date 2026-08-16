@@ -21,6 +21,7 @@ import DASHI.Physics.Closure.NSTriadKNHighestAlphaRound55Exact
 import DASHI.Physics.Closure.NSTriadKNHHBadPhysicalDuhamelSourceRound59
 import DASHI.Physics.Closure.NSTriadKNComNormalizedFibreAggregateRound60Exact
 import DASHI.Physics.Closure.NSTriadKNFixedShiftScaleMatchedCapacityRound60Exact
+import DASHI.Physics.Closure.NSTriadKNHighestAlphaRound61Exact
 import DASHI.Papers.NavierStokes.ClayContractRound23 as Clay23
 
 ------------------------------------------------------------------------
@@ -33,25 +34,34 @@ import DASHI.Papers.NavierStokes.ClayContractRound23 as Clay23
 -- surface: the target theorem type is represented, but physical producers and
 -- unconditional promotion remain false.
 --
--- Round55 imports the six A--F cutset modules. Round59/60 then sharpen the
--- quantitative A--C boundaries without changing any physical promotion bit:
+-- Round55 imports the six A--F cutset modules. Round59/60 sharpened the
+-- quantitative A--C boundaries. Round61 then removes several artificial
+-- producer obligations rather than adding another receipt layer:
 --
--- * A: one canonical time-dependent Duhamel source plus estimates indexed by
---   that source definitionally constructs the transfer; a separately supplied
---   transfer/same-object equality is no longer accepted.
--- * B: active same/adjacent normalized odd-(P/Q) Gram bounds extend through
---   exact off-support annihilation to the literal whole-fibre inequality
---   17/64 + 2(65/512) = 133/256.
--- * C: scale-matched bounds X_n <= K C r^n and A_n <= a C r^n together with
---   a + B_* K <= r-q construct the uniform division-free product capacity.
+-- * A3: 2^q g_q need only be dominated by the selected recurrence defect;
+--   unmasked charge may carry a physical K_bad factor, giving exactly
+--   eta_HHb=(2 C_*) K_bad rather than assuming K_bad=1.
+-- * B2/B3: one active same-object equality from the literal normalized odd-PQ
+--   pair product to the existing six-three Gram cell derives 17/64,
+--   65/512, 65/512 and the whole-fibre 133/256 endpoint. B3 is not an
+--   independent physical premise.
+-- * C2/C3: a positive fixed-shift correction forces a<r-q; conversely C1
+--   scale bounds plus a<r-q construct B_*=((r-q)-a)/(K+1), so C3 is not an
+--   independent witness either.
+-- * G: the three Young allocations are constructed exactly over Q by assigning
+--   B_*/3 to each soft owner; the final physical resource test is one strict
+--   scalar inequality. The necessary two-resource no-go also carries K_bad.
+-- * H: continuation is audited on the already-existing official selected
+--   Leray--Hopf/Luo carrier, not on a separate receipt carrier.
 --
--- The terminal Clay bit remains false: the literal A trajectory/estimates, B
--- active numerical estimates, and C scale-matched physical bounds are not
--- manufactured by these reductions.
+-- The genuine remaining producer frontier is therefore A1/A2, B1, C1/C2,
+-- D1/F1 plus their residual/limit estimates, and E2.  The terminal Clay bit
+-- remains false until those literal PDE/Fourier producers are actually proved.
+------------------------------------------------------------------------
 
 paperInterfaceStatement : String
 paperInterfaceStatement =
-  "Paper-facing NS interface: A6/A7/A8/A9 closure receipts, Round-47/50/51/52/53/54/55 highest-alpha aggregates, and the literal Round 23 Fefferman periodic contract are imported; Round59/60 sharpen A-C to one canonical Duhamel source, the literal 133/256 Com whole-fibre endpoint, and a scale-matched division-free fixed-shift capacity theorem, while unresolved physical producer inhabitation, Clay Navier-Stokes and terminal promotion remain false."
+  "Paper-facing NS interface: Round61 compresses the physical Clay cutset without promoting the theorem. A3 now uses normalized-density domination and an explicit K_bad charge multiplicity; B3 is derived from one active literal-normalized-PQ to six-three-Gram same-object theorem; C3 is constructed from C1 plus the strict a<r-q gap; G is an exact rational allocator with a K_bad-aware two-resource no-go; H is closed on the official selected Leray-Hopf/Luo carrier. Genuine physical A1/A2, B1, C1/C2, D/F and E2 producers remain open, so Clay Navier-Stokes and terminal promotion remain false."
 
 record NSPaperTheoremStatus : Setω where
   field
