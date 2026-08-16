@@ -31,9 +31,14 @@ module DASHI.Moonshine.TernarySevenOggSSPComparisonExact where
 --   * seven S3-conjugacy functional-graph shapes of T^T;
 --   * each of the two seven-lane mirrors in the existing Ogg 7+7+1 carrier.
 --
--- Equal cardinality is NOT used to identify these structures. The existing
--- SSP unit-action surface is retained as the prime-lane action/refinement
--- producer, and the exact Ogg 7+7+1 equivalence is reused unchanged.
+-- IMPORTANT ARCHITECTURAL CORRECTION
+--
+-- The 7+7+1 carrier is a downstream finite comparison surface only. It is NOT
+-- used as the explanation or selector of the Ogg/SSP set. The upstream SSP
+-- research lane now starts from actual continuous irreps, finite subgroup
+-- restriction, branching/fixed-space spectra, non-Ogg controls, and an
+-- independent modular/Hecke column. Equal seven-cardinality remains only a
+-- comparison datum unless a separate representation-theoretic map is proved.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -95,65 +100,55 @@ oggMirrorBSeven =
   ∷ Probe.mirrorB59
   ∷ []
 
-phaseNonUnitCountIsSeven :
-  listCount phaseNonUnitSeven ≡ 7
+phaseNonUnitCountIsSeven : listCount phaseNonUnitSeven ≡ 7
 phaseNonUnitCountIsSeven = refl
 
-shapeOrbitCountIsSeven :
-  listCount shapeOrbitSeven ≡ 7
+shapeOrbitCountIsSeven : listCount shapeOrbitSeven ≡ 7
 shapeOrbitCountIsSeven = refl
 
-oggMirrorACountIsSeven :
-  listCount oggMirrorASeven ≡ 7
+oggMirrorACountIsSeven : listCount oggMirrorASeven ≡ 7
 oggMirrorACountIsSeven = refl
 
-oggMirrorBCountIsSeven :
-  listCount oggMirrorBSeven ≡ 7
+oggMirrorBCountIsSeven : listCount oggMirrorBSeven ≡ 7
 oggMirrorBCountIsSeven = refl
 
-existingOggSevenSevenOneEquivalence :
-  Ogg.SevenSevenOneCarrierEquivalence
-existingOggSevenSevenOneEquivalence =
-  Ogg.canonicalSevenSevenOneCarrierEquivalence
+existingOggSevenSevenOneEquivalence : Ogg.SevenSevenOneCarrierEquivalence
+existingOggSevenSevenOneEquivalence = Ogg.canonicalSevenSevenOneCarrierEquivalence
 
-------------------------------------------------------------------------
--- Existing SSP triadic unit action remains the action/refinement producer.
-------------------------------------------------------------------------
+p7GeneratorTriadicStepIsOne : SSP.triadicStep SSP.p7GeneratorUnitActionProfile ≡ 1
+p7GeneratorTriadicStepIsOne = SSP.p7GeneratorTriadicStepIs1
 
-p7GeneratorTriadicStepIsOne :
-  SSP.triadicStep SSP.p7GeneratorUnitActionProfile ≡ 1
-p7GeneratorTriadicStepIsOne =
-  SSP.p7GeneratorTriadicStepIs1
-
-p11GeneratorTriadicStepIsOne :
-  SSP.triadicStep SSP.p11GeneratorUnitActionProfile ≡ 1
-p11GeneratorTriadicStepIsOne =
-  SSP.p11GeneratorTriadicStepIs1
+p11GeneratorTriadicStepIsOne : SSP.triadicStep SSP.p11GeneratorUnitActionProfile ≡ 1
+p11GeneratorTriadicStepIsOne = SSP.p11GeneratorTriadicStepIs1
 
 record TernarySevenOggSSPBoundary : Set where
   field
     phaseSevenConstructed : Bool
-    phaseSevenConstructedIsTrue :
-      phaseSevenConstructed ≡ true
+    phaseSevenConstructedIsTrue : phaseSevenConstructed ≡ true
 
     conjugacySevenConstructed : Bool
-    conjugacySevenConstructedIsTrue :
-      conjugacySevenConstructed ≡ true
+    conjugacySevenConstructedIsTrue : conjugacySevenConstructed ≡ true
 
     oggSevenSevenOneReused : Bool
-    oggSevenSevenOneReusedIsTrue :
-      oggSevenSevenOneReused ≡ true
+    oggSevenSevenOneReusedIsTrue : oggSevenSevenOneReused ≡ true
 
     equalSevenCardinalityPromotesCarrierIdentity : Bool
     equalSevenCardinalityPromotesCarrierIdentityIsFalse :
       equalSevenCardinalityPromotesCarrierIdentity ≡ false
 
+    sevenSevenOneUsedAsSSPSelector : Bool
+    sevenSevenOneUsedAsSSPSelectorIsFalse :
+      sevenSevenOneUsedAsSSPSelector ≡ false
+
+    representationRestrictionMustBeDerivedUpstream : Bool
+    representationRestrictionMustBeDerivedUpstreamIsTrue :
+      representationRestrictionMustBeDerivedUpstream ≡ true
+
     oggCarrierPromotedToMonsterRepresentationDecomposition : Bool
     oggCarrierPromotedToMonsterRepresentationDecompositionIsFalse :
       oggCarrierPromotedToMonsterRepresentationDecomposition ≡ false
 
-canonicalTernarySevenOggSSPBoundary :
-  TernarySevenOggSSPBoundary
+canonicalTernarySevenOggSSPBoundary : TernarySevenOggSSPBoundary
 canonicalTernarySevenOggSSPBoundary =
   record
     { phaseSevenConstructed = true
@@ -164,6 +159,10 @@ canonicalTernarySevenOggSSPBoundary =
     ; oggSevenSevenOneReusedIsTrue = refl
     ; equalSevenCardinalityPromotesCarrierIdentity = false
     ; equalSevenCardinalityPromotesCarrierIdentityIsFalse = refl
+    ; sevenSevenOneUsedAsSSPSelector = false
+    ; sevenSevenOneUsedAsSSPSelectorIsFalse = refl
+    ; representationRestrictionMustBeDerivedUpstream = true
+    ; representationRestrictionMustBeDerivedUpstreamIsTrue = refl
     ; oggCarrierPromotedToMonsterRepresentationDecomposition = false
     ; oggCarrierPromotedToMonsterRepresentationDecompositionIsFalse = refl
     }
