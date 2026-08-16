@@ -32,13 +32,16 @@ module DASHI.Moonshine.OggRepresentationReductionEverything where
 -- The Hecke frontier is now sharpened by exact quotient descent on the actual
 -- PrimeCorrespondenceHeckeOn API.  FactorVec -> SupportMask supplies a complete
 -- nontrivial model in which the existing support-mask correspondence is proved
--- to be the canonical induced quotient correspondence.  The still-open SSP
--- theorem is therefore the domain-specific SO(3)/reduction -> arithmetic Hecke
--- quotient identification, not generic commuting-square algebra.
+-- to be the canonical induced quotient correspondence.  A count-only quotient
+-- is then explicitly falsified: equal support cardinality can hide a
+-- Hecke-relevant difference.  The still-open SSP theorem is therefore the
+-- domain-specific SO(3)/reduction -> arithmetic Hecke quotient identification,
+-- not generic commuting-square algebra.
 --
--- A strengthened falsifier proves even the C2/C3/C4/C5 fixed-space signature
--- collides between dimension 13 (Ogg control) and dimension 15 (non-Ogg), so
--- operator/branching information is required beyond four cyclic dimensions.
+-- A strengthened representation falsifier proves even the C2/C3/C4/C5
+-- fixed-space signature collides between dimension 13 (Ogg control) and
+-- dimension 15 (non-Ogg), so operator/branching information is required beyond
+-- four cyclic dimensions.
 ------------------------------------------------------------------------
 
 import DASHI.Analysis.FiniteRealQSeriesReflectionExact
@@ -103,6 +106,7 @@ import DASHI.Moonshine.PrimeRepresentationSupersingularOrbitCouplingExact
 import DASHI.Moonshine.AllPrimeRepresentationFrickeClosureExact
 import DASHI.Moonshine.HeckeCorrespondenceQuotientDescentExact
 import DASHI.Moonshine.FactorVecSupportMaskHeckeQuotientExact
+import DASHI.Moonshine.SupportMaskCountHeckeCompressionNoGoExact
 import DASHI.Moonshine.SSPRepresentationHeckeIntertwinerBoundaryExact
 import DASHI.Moonshine.TernarySevenOggSSPComparisonExact
 import DASHI.Moonshine.OggPhaseFrickeSynthesisRegression
