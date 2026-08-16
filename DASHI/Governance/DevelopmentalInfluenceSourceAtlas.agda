@@ -143,6 +143,16 @@ nissenbaumContextualIntegrity =
     "journal citation; no DOI listed in the cited record"
     "supports context-relative information-flow vocabulary; does not by itself establish a legal or normative verdict for any named deployment"
 
+washingtonAccessJusticeTechnologyPrinciples : ScholarlySource
+washingtonAccessJusticeTechnologyPrinciples =
+  mkSource
+    "Washington State Access to Justice Board"
+    "Washington State Access to Justice Technology Principles"
+    "Washington Law Review 79(1):5"
+    "2004"
+    "journal citation; no DOI listed in the cited record"
+    "supports access-to-justice vocabulary in which meaningful access includes procedural information and a just process includes timeliness, affordability and transparency; does not establish a binding legal threshold for the DASHI cost carrier"
+
 cousotAbstractInterpretation : ScholarlySource
 cousotAbstractInterpretation =
   mkSource
@@ -162,6 +172,7 @@ data SourceBoundary : Set where
   oneTransferCaseIsNotUniversalIndustryGenealogy : SourceBoundary
   informationOrderIsNotGovernanceVerdict : SourceBoundary
   abstractionSafetyIsConsumerRelative : SourceBoundary
+  accessPrincipleIsNotAutomaticLegalThreshold : SourceBoundary
 
 canonicalSourceBoundaries : List SourceBoundary
 canonicalSourceBoundaries =
@@ -173,4 +184,5 @@ canonicalSourceBoundaries =
   ∷ oneTransferCaseIsNotUniversalIndustryGenealogy
   ∷ informationOrderIsNotGovernanceVerdict
   ∷ abstractionSafetyIsConsumerRelative
+  ∷ accessPrincipleIsNotAutomaticLegalThreshold
   ∷ []
