@@ -38,8 +38,8 @@ module DASHI.Crypto.MLKEMExactResidualTouchLowerBoundExact where
 --
 -- This is a state-update/memory-touch lower bound, NOT a generic wall-clock or
 -- instruction-count lower bound.  Compressed/lazy verifier states are outside
--- this materialised-state theorem and must be handled by a separate sufficient-
--- state/readout theorem.
+-- this materialised-state theorem and are handled by the separate sufficient-
+-- state/readout-capacity lane.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Level)
@@ -179,7 +179,7 @@ fullRankExactResidualTouchObstruction128
       (changedCellCountWithinTouches outcomes))
 
 ------------------------------------------------------------------------
--- AUTHORITY BOUNDARY
+-- AUTHORITY BOUNDARY / CURRENT STATUS
 --
 -- The ring theorem above proves the same-cell semantic fact:
 -- a nonzero residual delta changes the exact residual value.
@@ -187,8 +187,17 @@ fullRankExactResidualTouchObstruction128
 -- The outcome alphabet then formalises one specific implementation resource:
 -- an explicitly materialised exact residual state where changed cells are
 -- touched.  It does not claim that every possible ML-KEM recovery algorithm
--- maintains such a state.  A compressed/lazy/symbolic verifier can avoid this
--- resource only by moving the burden into its state update/readout semantics;
--- proving a representation-independent sufficient-state lower bound is the
--- next, stronger research seam.
+-- maintains such a state.
+--
+-- The formerly-next sufficient-state seam is now represented explicitly by
+-- `MLKEMProtectedLabelReadoutFactorisationExact`,
+-- `MLKEMFiniteStateTranscriptCapacityExact`, and
+-- `MLKEMBoundedCellTranscriptCapacityExact`, with FIPS support/prior
+-- instantiations downstream.  Those theorems do not replace this touch theorem;
+-- they cover verifier states that trade local touches for stored/queryable
+-- information.
+--
+-- Remaining source-facing work is to instantiate the actual FIPS public-map
+-- support/singularity producer and then attach one concrete verifier state/readout
+-- architecture.  No generic wall-clock lower bound is claimed.
 ------------------------------------------------------------------------
