@@ -42,9 +42,9 @@ module DASHI.Physics.Closure.NSTriadKNPhysicalNineOwnerFeasibilityRound61Exact w
 --     + epsilon_Com + epsilon_kernel + epsilon_HHg
 --     + 1/16 < 1.
 --
--- This file constructs the allocation and both G resource inequalities from
--- that scalar test.  It does not invent C_*, K_bad, B_*, the lifting
--- multiplicity, or the kernel/HH-good physical numerators.
+-- This equal-third construction is a robust exact fallback.  Round61's
+-- weighted allocator improves it when rational square-root majorants for the
+-- three physical numerators are available.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
@@ -279,7 +279,7 @@ canonicalAggregateCorrectionCap data = record
   ; totalCriticalBelowCap =
       subst
         (λ lower → lower ≤ correctionCap data)
-        (threeThirdCapsAreCap data)
+        (sym (threeThirdCapsAreCap data))
         ℚP.≤-refl
   }
 
