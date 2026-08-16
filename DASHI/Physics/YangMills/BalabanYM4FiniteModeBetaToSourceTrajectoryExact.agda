@@ -31,7 +31,7 @@ module DASHI.Physics.YangMills.BalabanYM4FiniteModeBetaToSourceTrajectoryExact w
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat; suc)
-open import Data.Rational.Base as ℚ using (0ℚ; _*_; _≤_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
@@ -47,7 +47,7 @@ record FiniteModeBetaTrajectoryData
   field
     gaussianAt : Nat → Local.FiniteGaussianModeEnclosure Mode
     interactionAt : Nat → Local.FiniteInteractionAtomEnclosure Atom
-    gamma : Nat → ℚ.ℚ
+    gamma : Nat → ℚ
 
     sourceBetaSplitExact : ∀ step →
       Flow.beta trajectory (suc step)
