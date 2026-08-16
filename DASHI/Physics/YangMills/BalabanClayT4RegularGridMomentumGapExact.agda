@@ -28,7 +28,7 @@ module DASHI.Physics.YangMills.BalabanClayT4RegularGridMomentumGapExact where
 -- the gap through k_mu = pi x_mu and hat{k}_mu = 2 sin(k_mu/2).
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Unit using (tt)
 open import Data.Empty using (⊥; ⊥-elim)
@@ -180,50 +180,34 @@ negativeOuterSquareLower value belowNegativeHalf =
     (ℚRing.solve-∀ value)
     reflectedSquare
 
+outerSelectedSquare : ∀ {cell} →
+  PointInGridCell cell → OuterCoordinate cell → ℚ
+outerSelectedSquare point (coordinate0 _) = x0 point * x0 point
+outerSelectedSquare point (coordinate1 _) = x1 point * x1 point
+outerSelectedSquare point (coordinate2 _) = x2 point * x2 point
+outerSelectedSquare point (coordinate3 _) = x3 point * x3 point
+
 outerCoordinateSquareLower :
   ∀ {cell} →
   (point : PointInGridCell cell) →
-  OuterCoordinate cell →
-  (Σ : ℚ) →
-  (Σ ≡ x0 point * x0 point ∨
-   Σ ≡ x1 point * x1 point ∨
-   Σ ≡ x2 point * x2 point ∨
-   Σ ≡ x3 point * x3 point) →
-  quarter ≤ Σ
-outerCoordinateSquareLower point (coordinate0 negativeOuterWitness) Σ (inj₁ exact)
-  rewrite exact = negativeOuterSquareLower (x0 point) (x0Upper point)
-outerCoordinateSquareLower point (coordinate0 positiveOuterWitness) Σ (inj₁ exact)
-  rewrite exact = positiveOuterSquareLower (x0 point) (x0Lower point)
-outerCoordinateSquareLower point (coordinate1 negativeOuterWitness) Σ (inj₂ (inj₁ exact))
-  rewrite exact = negativeOuterSquareLower (x1 point) (x1Upper point)
-outerCoordinateSquareLower point (coordinate1 positiveOuterWitness) Σ (inj₂ (inj₁ exact))
-  rewrite exact = positiveOuterSquareLower (x1 point) (x1Lower point)
-outerCoordinateSquareLower point (coordinate2 negativeOuterWitness) Σ (inj₂ (inj₂ (inj₁ exact)))
-  rewrite exact = negativeOuterSquareLower (x2 point) (x2Upper point)
-outerCoordinateSquareLower point (coordinate2 positiveOuterWitness) Σ (inj₂ (inj₂ (inj₁ exact)))
-  rewrite exact = positiveOuterSquareLower (x2 point) (x2Lower point)
-outerCoordinateSquareLower point (coordinate3 negativeOuterWitness) Σ (inj₂ (inj₂ (inj₂ exact)))
-  rewrite exact = negativeOuterSquareLower (x3 point) (x3Upper point)
-outerCoordinateSquareLower point (coordinate3 positiveOuterWitness) Σ (inj₂ (inj₂ (inj₂ exact)))
-  rewrite exact = positiveOuterSquareLower (x3 point) (x3Lower point)
-outerCoordinateSquareLower point (coordinate0 _) Σ (inj₂ _) =
-  ⊥-elim (trueNotFalse refl)
-outerCoordinateSquareLower point (coordinate1 _) Σ (inj₁ _) =
-  ⊥-elim (trueNotFalse refl)
-outerCoordinateSquareLower point (coordinate1 _) Σ (inj₂ (inj₂ _)) =
-  ⊥-elim (trueNotFalse refl)
-outerCoordinateSquareLower point (coordinate2 _) Σ (inj₁ _) =
-  ⊥-elim (trueNotFalse refl)
-outerCoordinateSquareLower point (coordinate2 _) Σ (inj₂ (inj₁ _)) =
-  ⊥-elim (trueNotFalse refl)
-outerCoordinateSquareLower point (coordinate2 _) Σ (inj₂ (inj₂ (inj₂ _))) =
-  ⊥-elim (trueNotFalse refl)
-outerCoordinateSquareLower point (coordinate3 _) Σ (inj₁ _) =
-  ⊥-elim (trueNotFalse refl)
-outerCoordinateSquareLower point (coordinate3 _) Σ (inj₂ (inj₁ _)) =
-  ⊥-elim (trueNotFalse refl)
-outerCoordinateSquareLower point (coordinate3 _) Σ (inj₂ (inj₂ (inj₁ _))) =
-  ⊥-elim (trueNotFalse refl)
+  (outerCoordinate : OuterCoordinate cell) →
+  quarter ≤ outerSelectedSquare point outerCoordinate
+outerCoordinateSquareLower point (coordinate0 negativeOuterWitness) =
+  negativeOuterSquareLower (x0 point) (x0Upper point)
+outerCoordinateSquareLower point (coordinate0 positiveOuterWitness) =
+  positiveOuterSquareLower (x0 point) (x0Lower point)
+outerCoordinateSquareLower point (coordinate1 negativeOuterWitness) =
+  negativeOuterSquareLower (x1 point) (x1Upper point)
+outerCoordinateSquareLower point (coordinate1 positiveOuterWitness) =
+  positiveOuterSquareLower (x1 point) (x1Lower point)
+outerCoordinateSquareLower point (coordinate2 negativeOuterWitness) =
+  negativeOuterSquareLower (x2 point) (x2Upper point)
+outerCoordinateSquareLower point (coordinate2 positiveOuterWitness) =
+  positiveOuterSquareLower (x2 point) (x2Lower point)
+outerCoordinateSquareLower point (coordinate3 negativeOuterWitness) =
+  negativeOuterSquareLower (x3 point) (x3Upper point)
+outerCoordinateSquareLower point (coordinate3 positiveOuterWitness) =
+  positiveOuterSquareLower (x3 point) (x3Lower point)
 
 ------------------------------------------------------------------------
 -- Four-dimensional square gap.  We keep this theorem independent of sine so
@@ -249,14 +233,9 @@ sumThreeSquaresNonnegative first second third =
 selectedSquareBelowTotal :
   ∀ {cell} →
   (point : PointInGridCell cell) →
-  OuterCoordinate cell →
-  (selected : ℚ) →
-  (selected ≡ x0 point * x0 point ∨
-   selected ≡ x1 point * x1 point ∨
-   selected ≡ x2 point * x2 point ∨
-   selected ≡ x3 point * x3 point) →
-  selected ≤ normalizedMomentumSquare point
-selectedSquareBelowTotal point outer selected (inj₁ exact) =
+  (outerCoordinate : OuterCoordinate cell) →
+  outerSelectedSquare point outerCoordinate ≤ normalizedMomentumSquare point
+selectedSquareBelowTotal point (coordinate0 _) =
   let
     tailNN = sumThreeSquaresNonnegative (x1 point) (x2 point) (x3 point)
     raw :
@@ -271,14 +250,10 @@ selectedSquareBelowTotal point outer selected (inj₁ exact) =
         (ℚP.+-monoˡ-≤ (x0 point * x0 point) tailNN)
   in
   subst
-    (λ left → left ≤ normalizedMomentumSquare point)
-    (sym exact)
-    (subst
-      (λ upper → x0 point * x0 point ≤ upper)
-      (ℚRing.solve-∀
-        (x0 point) (x1 point) (x2 point) (x3 point))
-      raw)
-selectedSquareBelowTotal point outer selected (inj₂ (inj₁ exact)) =
+    (λ upper → x0 point * x0 point ≤ upper)
+    (ℚRing.solve-∀ (x0 point) (x1 point) (x2 point) (x3 point))
+    raw
+selectedSquareBelowTotal point (coordinate1 _) =
   let
     tailNN = sumThreeSquaresNonnegative (x0 point) (x2 point) (x3 point)
     raw :
@@ -293,14 +268,10 @@ selectedSquareBelowTotal point outer selected (inj₂ (inj₁ exact)) =
         (ℚP.+-monoˡ-≤ (x1 point * x1 point) tailNN)
   in
   subst
-    (λ left → left ≤ normalizedMomentumSquare point)
-    (sym exact)
-    (subst
-      (λ upper → x1 point * x1 point ≤ upper)
-      (ℚRing.solve-∀
-        (x0 point) (x1 point) (x2 point) (x3 point))
-      raw)
-selectedSquareBelowTotal point outer selected (inj₂ (inj₂ (inj₁ exact))) =
+    (λ upper → x1 point * x1 point ≤ upper)
+    (ℚRing.solve-∀ (x0 point) (x1 point) (x2 point) (x3 point))
+    raw
+selectedSquareBelowTotal point (coordinate2 _) =
   let
     tailNN = sumThreeSquaresNonnegative (x0 point) (x1 point) (x3 point)
     raw :
@@ -315,14 +286,10 @@ selectedSquareBelowTotal point outer selected (inj₂ (inj₂ (inj₁ exact))) =
         (ℚP.+-monoˡ-≤ (x2 point * x2 point) tailNN)
   in
   subst
-    (λ left → left ≤ normalizedMomentumSquare point)
-    (sym exact)
-    (subst
-      (λ upper → x2 point * x2 point ≤ upper)
-      (ℚRing.solve-∀
-        (x0 point) (x1 point) (x2 point) (x3 point))
-      raw)
-selectedSquareBelowTotal point outer selected (inj₂ (inj₂ (inj₂ exact))) =
+    (λ upper → x2 point * x2 point ≤ upper)
+    (ℚRing.solve-∀ (x0 point) (x1 point) (x2 point) (x3 point))
+    raw
+selectedSquareBelowTotal point (coordinate3 _) =
   let
     tailNN = sumThreeSquaresNonnegative (x0 point) (x1 point) (x2 point)
     raw :
@@ -337,33 +304,9 @@ selectedSquareBelowTotal point outer selected (inj₂ (inj₂ (inj₂ exact))) =
         (ℚP.+-monoˡ-≤ (x3 point * x3 point) tailNN)
   in
   subst
-    (λ left → left ≤ normalizedMomentumSquare point)
-    (sym exact)
-    (subst
-      (λ upper → x3 point * x3 point ≤ upper)
-      (ℚRing.solve-∀
-        (x0 point) (x1 point) (x2 point) (x3 point))
-      raw)
-
-outerSelectedSquare : ∀ {cell} →
-  (point : PointInGridCell cell) →
-  OuterCoordinate cell → ℚ
-outerSelectedSquare point (coordinate0 _) = x0 point * x0 point
-outerSelectedSquare point (coordinate1 _) = x1 point * x1 point
-outerSelectedSquare point (coordinate2 _) = x2 point * x2 point
-outerSelectedSquare point (coordinate3 _) = x3 point * x3 point
-
-outerSelectedSquareChoice : ∀ {cell} →
-  (point : PointInGridCell cell) →
-  (outer : OuterCoordinate cell) →
-  outerSelectedSquare point outer ≡ x0 point * x0 point ∨
-  outerSelectedSquare point outer ≡ x1 point * x1 point ∨
-  outerSelectedSquare point outer ≡ x2 point * x2 point ∨
-  outerSelectedSquare point outer ≡ x3 point * x3 point
-outerSelectedSquareChoice point (coordinate0 _) = inj₁ refl
-outerSelectedSquareChoice point (coordinate1 _) = inj₂ (inj₁ refl)
-outerSelectedSquareChoice point (coordinate2 _) = inj₂ (inj₂ (inj₁ refl))
-outerSelectedSquareChoice point (coordinate3 _) = inj₂ (inj₂ (inj₂ refl))
+    (λ upper → x3 point * x3 point ≤ upper)
+    (ℚRing.solve-∀ (x0 point) (x1 point) (x2 point) (x3 point))
+    raw
 
 regularNormalizedMomentumSquareLower :
   ∀ cell →
@@ -372,13 +315,11 @@ regularNormalizedMomentumSquareLower :
   quarter ≤ normalizedMomentumSquare point
 regularNormalizedMomentumSquareLower cell regular point =
   let
-    outer = regularCellHasOuterCoordinate cell regular
-    selected = outerSelectedSquare point outer
-    choice = outerSelectedSquareChoice point outer
+    outerCoordinate = regularCellHasOuterCoordinate cell regular
   in
   ℚP.≤-trans
-    (outerCoordinateSquareLower point outer selected choice)
-    (selectedSquareBelowTotal point outer selected choice)
+    (outerCoordinateSquareLower point outerCoordinate)
+    (selectedSquareBelowTotal point outerCoordinate)
 
 regularGridOuterCoordinateLevel : ProofLevel
 regularGridOuterCoordinateLevel = machineChecked
