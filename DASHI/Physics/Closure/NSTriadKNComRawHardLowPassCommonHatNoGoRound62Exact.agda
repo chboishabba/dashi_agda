@@ -48,13 +48,13 @@ module DASHI.Physics.Closure.NSTriadKNComRawHardLowPassCommonHatNoGoRound62Exact
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (zero; suc)
+open import Data.Empty using (⊥)
 open import Data.Integer.Base using (+_)
 open import Relation.Nullary using (¬_)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNPeriodicLittlewoodPaleyBonyExact as LP
-import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNLiteralDyadicShellConstants as Shell
 import DASHI.Physics.Closure.NSTriadKNOfficialInfinityNormTriangle as Infinity
 import DASHI.Physics.Closure.NSTriadKNPhysicalTransportMatrixSkewRound40Exact as Matrix
@@ -79,8 +79,7 @@ farInputInfinityNormIsOne :
 farInputInfinityNormIsOne = refl
 
 farOutputInfinityNormIsEight :
-  Infinity.infinityNorm farOutput ≡
-    Shell.pow2 (suc (suc (suc zero)))
+  Infinity.infinityNorm farOutput ≡ Shell.pow2 (suc (suc (suc zero)))
 farOutputInfinityNormIsEight = refl
 
 farInputShellIsZero : Shell.shellIndex farInput ≡ zero
@@ -145,8 +144,6 @@ noCommonHatContainsZeroAndTwo support zeroActive twoActive =
   zeroAndTwoNotWithinOne
     (Width.activeShellPairWithinOne
       support zero (suc (suc zero)) zeroActive twoActive)
-  where
-  open import Data.Empty using (⊥)
 
 record RawHardLowPassPairClaim : Set where
   field
@@ -160,8 +157,6 @@ rawHardLowPassPairClaimImpossible : RawHardLowPassPairClaim → ⊥
 rawHardLowPassPairClaimImpossible claim =
   noCommonHatContainsZeroAndTwo
     (commonHat claim) (cutoffZeroInHat claim) (cutoffTwoInHat claim)
-  where
-  open import Data.Empty using (⊥)
 
 rawHardLowPassOddPQCanSpanMoreThanWidthOne : Bool
 rawHardLowPassOddPQCanSpanMoreThanWidthOne = true
