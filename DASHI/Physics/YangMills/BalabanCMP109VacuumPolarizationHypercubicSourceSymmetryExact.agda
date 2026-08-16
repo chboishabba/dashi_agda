@@ -35,6 +35,7 @@ open import Data.Rational.Base using (ℚ)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayT4GeneratedBrillouinGridExact as Grid
+import DASHI.Physics.YangMills.BalabanClayT4HypercubicOrbitGeometryExact as Orbit
 import DASHI.Physics.YangMills.BalabanClayT4HypercubicGeneratedActionExact as Action
 
 -- Coordinate reflections and adjacent transpositions are exactly the source
@@ -76,25 +77,23 @@ asGeneratorInvariant : ∀ {contribution} →
   CMP109ScalarEuclideanSymmetry contribution →
   Action.GeneratorInvariantRationalContribution contribution
 asGeneratorInvariant symmetry = record
-  { Action.GeneratorInvariantRationalContribution.generatorInvariant =
-      generatorInvariant
-  }
+  { generatorInvariant = generatorInvariantProof }
   where
-  generatorInvariant : ∀ generator cell →
+  generatorInvariantProof : ∀ generator cell →
     _ ≡ _
-  generatorInvariant Action.flip0 cell =
+  generatorInvariantProof Action.flip0 cell =
     reflectionInvariant symmetry reflect0 cell
-  generatorInvariant Action.flip1 cell =
+  generatorInvariantProof Action.flip1 cell =
     reflectionInvariant symmetry reflect1 cell
-  generatorInvariant Action.flip2 cell =
+  generatorInvariantProof Action.flip2 cell =
     reflectionInvariant symmetry reflect2 cell
-  generatorInvariant Action.flip3 cell =
+  generatorInvariantProof Action.flip3 cell =
     reflectionInvariant symmetry reflect3 cell
-  generatorInvariant Action.swap01 cell =
+  generatorInvariantProof Action.swap01 cell =
     permutationInvariant symmetry permute01 cell
-  generatorInvariant Action.swap12 cell =
+  generatorInvariantProof Action.swap12 cell =
     permutationInvariant symmetry permute12 cell
-  generatorInvariant Action.swap23 cell =
+  generatorInvariantProof Action.swap23 cell =
     permutationInvariant symmetry permute23 cell
 
 sourceEuclideanSymmetryGivesFourOrbitReduction :
@@ -102,9 +101,7 @@ sourceEuclideanSymmetryGivesFourOrbitReduction :
     (symmetry : CMP109ScalarEuclideanSymmetry contribution)
     cell →
   contribution cell
-  ≡ contribution
-      (Action.representative
-        (DASHI.Physics.YangMills.BalabanClayT4HypercubicOrbitGeometryExact.orbitClass cell))
+  ≡ contribution (Action.representative (Orbit.orbitClass cell))
 sourceEuclideanSymmetryGivesFourOrbitReduction symmetry cell =
   Action.cellContributionEqualsOrbitRepresentative
     (asGeneratorInvariant symmetry) cell
