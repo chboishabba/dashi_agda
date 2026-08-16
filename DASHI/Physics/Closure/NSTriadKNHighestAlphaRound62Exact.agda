@@ -1,7 +1,7 @@
 module DASHI.Physics.Closure.NSTriadKNHighestAlphaRound62Exact where
 
 ------------------------------------------------------------------------
--- ROUND 62: PRODUCER-CUTSET COMPRESSION
+-- ROUND 62: PRODUCER-CUTSET COMPRESSION + CONCRETE FALSIFICATION
 --
 -- PRIMARY SOURCES / CONTEXT
 --
@@ -46,6 +46,10 @@ module DASHI.Physics.Closure.NSTriadKNHighestAlphaRound62Exact where
 -- Title: "On the Multiplication of Successions of Fourier Constants".
 -- DOI: 10.1098/rspa.1912.0086.
 --
+-- Authors: Mischa Cotlar; Elias M. Stein.
+-- Title: "A unified theory of Hilbert transforms and ergodic theorems".
+-- Historical 1955 conference source; no DOI assigned.
+--
 -- MATHEMATICAL CHANGES RELATIVE TO ROUND61
 --
 -- A. DIRECT HH-BAD HEADROOM, NO AFFINE RECURRENCE
@@ -65,30 +69,57 @@ module DASHI.Physics.Closure.NSTriadKNHighestAlphaRound62Exact where
 -- directly to the owner with eta_HHb=2 C_* K_bad.  The old alpha/beta affine
 -- recurrence is no longer part of the producer cutset.
 --
--- B. PHYSICAL COM ENERGY STAYS ON THE LITERAL FOURIER REAL FIELD
+-- The lower Round30 shell-balance audit was also revisited.  The seven-term
+-- decomposition algebra is exact, but DynamicPhysicalShellBalance itself still
+-- requires the selected trajectory's differentiated projected NS identity.
+-- Likewise the global finite energy fold is exact only after the canonical
+-- literal retained-triad family is constructed.  No hidden A1 producer was
+-- found below Round59.
 --
--- The Round58 Q-valued "physical normalized Gram" record is explicitly
--- demoted to a rational certificate carrier.  Literal Fourier coefficients are
--- not rational.  More importantly, the literal `PeriodicHardShellFourierPDE`
--- already chooses an algebraic `realField`, so the same-object normalized
--- energy must stay in `Carrier (realField model)`.
+-- B. CONCRETE ODD-P/Q FALSIFICATION FIXES THE SEMANTIC TARGET
 --
--- Round62 therefore extends THAT exact carrier with the existing
--- `OrderedRealExtension` plus only a rational embedding.  Same/adjacent bounds
--- by embedded 17/64 and 65/512 imply the embedded 133/256 bandwidth-one bound
--- without changing scalar universes.  The Murray--Bishop module is retained as
--- a concrete setoid-real comparison backend, but is explicitly NOT identified
--- definitionally with the literal Fourier carrier (whose algebra uses
--- propositional equality).  Separately, finite rational Cauchy--Schwarz closes
--- the strong/weak certificate algebra.
+-- The historical Round58 Q-valued "physical normalized Gram" record remains
+-- demoted to a rational certificate carrier.  Literal Fourier coefficients
+-- live in the selected Fourier model's own realField.
 --
--- The remaining physical B theorem is therefore concrete: construct the
--- normalized operator-product energy IN the literal model's real field, supply
--- its ordered rational extension, prove common-hat support, and prove the
--- same/adjacent active bounds.  There is no physical=Q or Fourier=Bishop
--- equality to prove.
+-- Round62 now goes further than a carrier correction.  It constructs the
+-- literal odd-P/Q cross-pairing and fibre masses by recursive folds over the
+-- actual `physicalOutputFiber`, entirely inside `Carrier (realField model)`.
+-- It also gives a concrete canonical-selector active transport entry:
 --
--- C. THE ADDITIVE FIXED-SHIFT GAP IS LOCALIZED TO THE SOFT OWNERS
+--   p=(1,0,0), q=(1,1,0), k=(2,1,0), cutoff=0,
+--
+-- for which j(q)=0, j(k)=1 and the literal odd-P/Q coefficient is exactly -i
+-- on the transverse advector a_p=(0,1,0).  On every nontrivial compatible
+-- field this entry is nonzero.  Hence the physical Com object cannot be closed
+-- by a vacuous zero realization.
+--
+-- The same concrete pass falsifies a tempting but WRONG normalization.  If a
+-- same-fibre cross-Gram correlation is divided by the product of its own two
+-- masses, a unit one-dimensional fibre self-normalizes to 1, whereas the
+-- Round47 same-shell coefficient must be <=17/64<1.  Therefore the Round62
+-- cross-Gram object is retained ONLY as a diagnostic; it is not the physical B
+-- coefficient.
+--
+-- The correct consumer semantics is the already-existing Round49/53 Schur
+-- squared-output statement
+--
+--   ||oddPQ input||^2 <= rowMass * X.
+--
+-- Round54 already gives a literal physical-output-fibre Schur reducer and
+-- Round55 already aggregates the same/adjacent whole-fibre bounds to 133/256.
+-- Round35/40 reduce the two Cotlar adjoint faces to ONE normalized Gram
+-- factorization.  Thus the remaining B theorem is now precisely:
+--
+--   literal odd-P/Q cross-shell operator/fibre
+--     -> one factorized physical Gram/Schur row coefficient
+--
+-- with outer contractions <=1, common-hat support, and overlap bounded by the
+-- existing six-three values 17/64 and 65/512.  The raw -i transport entry is
+-- not itself the dimensionless row coefficient; the missing factorization is
+-- the load-bearing normalization theorem.
+--
+-- C. THE ADDITIVE FIXED-SHIFT GAP IS LOCALIZED AND FALSIFICATION-FIRST
 --
 -- Exact finite owner summation replaces an opaque aggregate A_n<=aT_n field.
 -- Six owners already have zero data remainder.  The generic fallback is
@@ -108,30 +139,65 @@ module DASHI.Physics.Closure.NSTriadKNHighestAlphaRound62Exact where
 -- on the SAME owner->flux->fixed-block object, plus the now-sharp strict gap.
 -- Round61 then constructs the maximal B_*=((r-q)-a)/K definitionally.
 --
--- D/F. ONE STRUCTURED LOCALIZED PDE ATOM SOURCE
+-- Round62 adds literal one-block counterexample objects for candidate K,
+-- a_HHg, a_Com and their two-soft sum.  A single violating physical block now
+-- formally refutes the corresponding universal scale law before any induction
+-- is attempted.  These falsifiers import no sharp-capacity or Young theorem.
+-- A separate circularity no-go prevents deriving K from the final correction
+-- headroom whose B_* already depends on K.
 --
--- A single structured atom list now distinguishes physical interior, tail,
+-- D/F. FINITE FOURIER KERNEL ALGEBRA IS ALREADY CLOSED; THE PAIR BRIDGE IS NOT
+--
+-- A single structured atom list distinguishes physical interior, tail,
 -- duplicate kernel, exact cancelling kernel pairs, independent kernel, and
 -- classified lower/upper boundary atoms.  Exact cancellation is folded from
 -- the local pair witnesses.  The mature kernel residual split and boundary
 -- ledger are both extracted from this same source.
+--
+-- The repo audit found that the later finite complex kernel lane is stronger
+-- than the old task ledger suggests: `LuoFiniteLiteralIncrementKernelFieldExact`
+-- already proves pairwise spatial-increment = four-transform multiplier,
+-- lifts that equality through arbitrary finite folds, and derives the complete
+-- rp1/rp2/hard-tail three-piece multiplier identity without assuming those
+-- coefficient equalities.
+--
+-- What remains D1 is the same-object bridge to the OFFICIAL full-shell Pair.
+-- `FullShellFourierFamily` makes Pair opaque: `incidenceComplete` produces some
+-- target/source modes only for a pair known to occur in a particular finite
+-- list, and `incidenceProofUnique` proves uniqueness only after target/source
+-- are fixed.  Therefore the official pair enumerator must be shown to realize
+-- the finite literal two-mode pair system; this cannot be obtained by a type
+-- alias.  Once that bridge emits the structured atoms on the selected solution,
+-- D2 is the actual independent-kernel zero/estimate and F2 the boundary limits.
 --
 -- The preferred D2 equality
 --
 --   independentKernelTotal = 0
 --
 -- directly constructs the existing structural zero kernel owner, deleting
--- kernel production, eta, data and critical costs simultaneously.  What remains
--- is the actual localized NS source-extraction identity, the independent-zero
--- proof (or quantitative fallback), and the physical boundary limits.
+-- kernel production, eta, data and critical costs simultaneously.
 --
--- E. FOURTH-ORDER DECAY -> L1 SUMMABILITY CLOSED
+-- E. E1 MUST CONSTRUCT THE CONTINUUM MULTIPLIER; E2 THEN NEEDS FOUR IBP
 --
 -- Once four inverse-Fourier integrations by parts give a three-dimensional
 -- dyadic shell mass bound M 2^{-j}, exact finite geometric algebra proves every
--- partial L1 mass <=2M.  Thus no separate Schwartz/L1 authority is needed.  The
--- remaining E theorem is the same-object continuum annular multiplier and the
--- literal fourfold integration-by-parts shell estimate.
+-- partial L1 mass <=2M.  Thus the summability half remains closed.
+--
+-- The new Round62 underdetermination theorem proves that the Round49 lattice
+-- restriction alone cannot select a continuum multiplier.  On the explicit
+-- continuum carrier ProjectionMode + Unit, two symbols agree definitionally on
+-- EVERY embedded lattice mode yet differ at the extra continuum point.  Hence
+-- lattice restriction by itself cannot imply compact support, C^4 regularity,
+-- derivative mass, or inverse-Fourier decay.
+--
+-- The old Sprint109/110 bump files are decomposition ledgers only; Sprint111
+-- closes them by scoped external Rudin/Grafakos authority rather than by a
+-- differentiable function in the Agda carrier.  The Bishop power-series bridge
+-- supplies constructive limits, but its elementary-function coefficient/tail
+-- inputs remain conditional and it does not provide the required derivative
+-- calculus.  Therefore E1 genuinely remains: construct/select an actual smooth
+-- compact annular continuum cutoff and matrix strain multiplier whose lattice
+-- restriction is Round48.  E2 is then the literal fourfold IBP shell estimate.
 --
 -- G. PREFERRED SHARP SCALAR GATE
 --
@@ -154,34 +220,37 @@ module DASHI.Physics.Closure.NSTriadKNHighestAlphaRound62Exact where
 --
 --   K S^2 < (15/16 - 2 C_* K_bad) ((r-q)-a).
 --
--- These are now explicit kill-tests for the current architecture.
+-- These are explicit kill-tests for every new physical constant.
 --
 -- H remains the already-closed same-selected-solution Luo continuation lane.
 --
 -- GENUINE REMAINING PHYSICAL/ANALYTIC PRODUCERS AFTER ROUND62
 --
---   A1  construct the literal selected-solution Duhamel source/successor
---       identity used by DirectPhysicalDuhamelIdentity;
---   A2  prove finite-prefix/tail component headroom N_q<=C_*-I_q, the density
+--   A1  construct the selected trajectory's literal differentiated projected
+--       shell/Duhamel identity, including literal viscosity and boundary terms;
+--   A2  prove finite-prefix/tail component headroom N_q<=C_*-I_q, density
 --       domination 2^q g_q<=C_q, and the unmasked charge bound K_bad D;
---   B1  construct normalized odd-P/Q operator-product energy in the SAME
---       `Carrier (realField model)`, its ordered rational extension, and the
---       physical common-hat support;
---   B3  prove same/forward/reverse active bounds by embedded 17/64 and 65/512;
---   C1  prove SAME-OBJECT owner->flux->block identification, the global
---       X_n<=K C r^n estimate, and local smooth-HHg/Com data-scale bounds;
+--   B1  realize the literal odd-P/Q cross-shell operator/fibre as the ONE
+--       factorized Gram/Schur row coefficient consumed by Round49/54;
+--   B2  prove canonical common-hat support for that realization;
+--   B3  prove same/forward/reverse row/overlap bounds 17/64,65/512,65/512;
+--   C1  prove the upstream global X_n<=K C r^n estimate and local smooth-HHg/
+--       Com data-scale laws, independently of final B_* headroom;
 --   C2  verify a_smooth-HHg+a_Com<r-q (preferred kernel-zero branch);
---   D1/F1 emit the structured atom list from one literal localized NS identity;
+--   D1/F1 prove official full-shell Pair -> finite literal two-mode incidence/
+--       coefficient realization and emit the structured selected-solution atoms;
 --   D2  prove independentKernelTotal=0, or supply the quantitative fallback;
 --   F2  prove every classified physical boundary atom tends to zero;
---   E1/E2 construct the continuum annular symbol restricting to the literal
---       lattice symbol and prove the fourfold inverse-Fourier shell estimate;
+--   E1  construct/select the actual C_c^4 annular continuum cutoff/matrix
+--       multiplier restricting to the literal Round48 lattice symbol;
+--   E2  prove its fourfold inverse-Fourier dyadic shell estimate;
 --   G   instantiate the physical constants and discharge the explicit preferred
 --       scalar gate above.
 --
--- These are not replaced by assumption records here.  Round62 only removes
--- algebraic duplication, carrier mistakes, fictitious owner costs and already-
--- derivable limit/summation/allocation work around those genuine theorems.
+-- These are not replaced by assumption records here.  Round62 removes
+-- algebraic duplication, stale false frontiers, carrier mistakes, a rejected
+-- normalization, fictitious owner costs and already-derivable summation/
+-- allocation work around the genuine theorems.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
@@ -193,27 +262,35 @@ import DASHI.Physics.Closure.NSTriadKNHighestAlphaRound61Exact
 import DASHI.Physics.Closure.NSTriadKNHHBadDirectPhysicalHeadroomRound62Exact
 import DASHI.Physics.Closure.NSTriadKNHHBadSelectedProfileMultiplicityRound62Exact
 
--- B: rational certificate algebra, same-object ordered literal-field endpoint,
--- and a separate concrete Bishop-setoid comparison backend.
+-- B: carrier correction, concrete same-carrier diagnostics, active nonzero
+-- test, and explicit rejection of the wrong self-mass normalization.
 import DASHI.Physics.Closure.NSTriadKNComTwoBranchFiniteGramRound62Exact
 import DASHI.Physics.Closure.NSTriadKNComOrderedPhysicalMajorantRound62Exact
 import DASHI.Physics.Closure.NSTriadKNComBishopNormalizedMajorantRound62Exact
+import DASHI.Physics.Closure.NSTriadKNComLiteralCrossGramFalsifierRound62Exact
+import DASHI.Physics.Closure.NSTriadKNComConcreteActiveOddPQTriadRound62Exact
+import DASHI.Physics.Closure.NSTriadKNComSelfMassNormalizationNoGoRound62Exact
 
--- C: local owner aggregation, three-soft fallback, preferred kernel-zero
--- two-soft scale, and HH-good smooth-only remainder identity.
+-- C: local owner aggregation, concrete one-block falsifiers, circularity
+-- firewall, preferred kernel-zero two-soft scale, and HH-good smooth remainder.
 import DASHI.Physics.Closure.NSTriadKNFixedShiftNineOwnerDataScaleRound62Exact
 import DASHI.Physics.Closure.NSTriadKNFixedShiftThreeSoftDataScaleRound62Exact
 import DASHI.Physics.Closure.NSTriadKNFixedShiftKernelZeroTwoSoftDataScaleRound62Exact
 import DASHI.Physics.Closure.NSTriadKNHHGoodSmoothOnlyDataRemainderRound62Exact
+import DASHI.Physics.Closure.NSTriadKNFixedShiftConcreteFalsifiersRound62Exact
+import DASHI.Physics.Closure.NSTriadKNCriticalScaleHeadroomCircularityNoGoRound62Exact
 
--- D/F: one raw constituent source, stronger structured atoms, and exact-zero
--- promotion to the structural kernel owner.
+-- D/F: finite literal multiplier algebra, one raw constituent source, stronger
+-- structured atoms, and exact-zero promotion to the structural kernel owner.
+import DASHI.Physics.Closure.NSTriadKNLuoFiniteLiteralIncrementKernelFieldExact
 import DASHI.Physics.Closure.NSTriadKNLocalizedPDEConstituentPartitionRound62Exact
 import DASHI.Physics.Closure.NSTriadKNLocalizedPDEStructuredAtomsRound62Exact
 import DASHI.Physics.Closure.NSTriadKNStructuredKernelZeroOwnerRound62Exact
 
--- E: exact fourth-order dyadic summability endpoint.
+-- E: exact fourth-order dyadic summability endpoint plus a constructive proof
+-- that lattice restriction alone does not determine the continuum symbol.
 import DASHI.Physics.Closure.NSTriadKNHHGoodFourthOrderDyadicL1Round62Exact
+import DASHI.Physics.Closure.NSTriadKNHHGoodContinuumExtensionUnderdeterminedRound62Exact
 
 -- G: sharp reciprocal substitution, generic three-soft gate, preferred
 -- kernel-zero two-soft gate and explicit feasibility-region falsifiers.
@@ -226,11 +303,26 @@ import DASHI.Physics.Closure.NSTriadKNPreferredScalarFeasibilityRegionRound62Exa
 round62RemovesAffineHHBadRecurrenceFromProducerCutset : Bool
 round62RemovesAffineHHBadRecurrenceFromProducerCutset = true
 
-round62PhysicalComEnergyRemainsOnLiteralFourierRealField : Bool
-round62PhysicalComEnergyRemainsOnLiteralFourierRealField = true
+round62ConcreteOddPQEntryIsNonzero : Bool
+round62ConcreteOddPQEntryIsNonzero = true
 
-round62BishopEndpointIsOnlyComparisonBackend : Bool
-round62BishopEndpointIsOnlyComparisonBackend = true
+round62SelfMassNormalizationRejectedForPhysicalB : Bool
+round62SelfMassNormalizationRejectedForPhysicalB = true
+
+round62PhysicalComTargetIsSchurRowCoefficient : Bool
+round62PhysicalComTargetIsSchurRowCoefficient = true
+
+round62ConcreteCBlockFalsifiersClosed : Bool
+round62ConcreteCBlockFalsifiersClosed = true
+
+round62CriticalScaleCircularityForbidden : Bool
+round62CriticalScaleCircularityForbidden = true
+
+round62FiniteLiteralIncrementKernelAlgebraClosed : Bool
+round62FiniteLiteralIncrementKernelAlgebraClosed = true
+
+round62LatticeRestrictionDoesNotDetermineContinuumSymbol : Bool
+round62LatticeRestrictionDoesNotDetermineContinuumSymbol = true
 
 round62PreferredCDataGapHasOnlyHHGoodAndCom : Bool
 round62PreferredCDataGapHasOnlyHHGoodAndCom = true
@@ -248,13 +340,33 @@ round62RemovesAffineHHBadRecurrenceFromProducerCutsetIsTrue :
   round62RemovesAffineHHBadRecurrenceFromProducerCutset ≡ true
 round62RemovesAffineHHBadRecurrenceFromProducerCutsetIsTrue = refl
 
-round62PhysicalComEnergyRemainsOnLiteralFourierRealFieldIsTrue :
-  round62PhysicalComEnergyRemainsOnLiteralFourierRealField ≡ true
-round62PhysicalComEnergyRemainsOnLiteralFourierRealFieldIsTrue = refl
+round62ConcreteOddPQEntryIsNonzeroIsTrue :
+  round62ConcreteOddPQEntryIsNonzero ≡ true
+round62ConcreteOddPQEntryIsNonzeroIsTrue = refl
 
-round62BishopEndpointIsOnlyComparisonBackendIsTrue :
-  round62BishopEndpointIsOnlyComparisonBackend ≡ true
-round62BishopEndpointIsOnlyComparisonBackendIsTrue = refl
+round62SelfMassNormalizationRejectedForPhysicalBIsTrue :
+  round62SelfMassNormalizationRejectedForPhysicalB ≡ true
+round62SelfMassNormalizationRejectedForPhysicalBIsTrue = refl
+
+round62PhysicalComTargetIsSchurRowCoefficientIsTrue :
+  round62PhysicalComTargetIsSchurRowCoefficient ≡ true
+round62PhysicalComTargetIsSchurRowCoefficientIsTrue = refl
+
+round62ConcreteCBlockFalsifiersClosedIsTrue :
+  round62ConcreteCBlockFalsifiersClosed ≡ true
+round62ConcreteCBlockFalsifiersClosedIsTrue = refl
+
+round62CriticalScaleCircularityForbiddenIsTrue :
+  round62CriticalScaleCircularityForbidden ≡ true
+round62CriticalScaleCircularityForbiddenIsTrue = refl
+
+round62FiniteLiteralIncrementKernelAlgebraClosedIsTrue :
+  round62FiniteLiteralIncrementKernelAlgebraClosed ≡ true
+round62FiniteLiteralIncrementKernelAlgebraClosedIsTrue = refl
+
+round62LatticeRestrictionDoesNotDetermineContinuumSymbolIsTrue :
+  round62LatticeRestrictionDoesNotDetermineContinuumSymbol ≡ true
+round62LatticeRestrictionDoesNotDetermineContinuumSymbolIsTrue = refl
 
 round62PreferredCDataGapHasOnlyHHGoodAndComIsTrue :
   round62PreferredCDataGapHasOnlyHHGoodAndCom ≡ true
