@@ -9,3 +9,6 @@ module DASHI.Arithmetic.AristotleArithmeticEverything where
 import DASHI.Arithmetic.DecimalDigitalRootNonaryExact
 import DASHI.Arithmetic.FibonacciNonaryPeriodExact
 import DASHI.Arithmetic.PrimeModSixSieveExact
+import DASHI.Arithmetic.SixWheelSieveCountExact
+import DASHI.Arithmetic.SixWheelCRTExact
+import DASHI.Arithmetic.FinitePrimeProductSieveExact
