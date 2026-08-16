@@ -120,8 +120,8 @@ deltaWordGraphsParity = aristotleMathModuleParity
   272
   32
   partial
-  "DASHI.Moonshine.ClassicalHeckeWeightKSmallWordExact;DASHI.Moonshine.Hecke23AntiparallelExact"
-  "word multipliers/algebraic normalization partly ported; 60-term certified tau table, finite-range coefficient equalities, divisibility/trinity, norm/log/phase graph theorems remain"
+  "DASHI.Moonshine.ClassicalHeckeWeightKSmallWordExact;DASHI.Moonshine.Hecke23AntiparallelExact;DASHI.Moonshine.AristotleDeltaWordT2T3FiniteParityExact"
+  "five source word multipliers and the certified m=1..3 T2/T3 comparison rows are ported; 60-term tau table, wider finite-range coefficient equalities, divisibility/trinity, norm/log/phase graph theorems remain"
 
 fibVortexParity : AristotleMathModuleParity
 fibVortexParity = aristotleMathModuleParity
@@ -139,9 +139,9 @@ hecke23Parity = aristotleMathModuleParity
   "c433699f95c7f067c772fd9223e444869ba4e4e54907b37d4db34616572676bc"
   115
   10
-  partial
-  "DASHI.Moonshine.RamanujanTauHecke23Exact;DASHI.Moonshine.ClassicalHeckeWeightKSmallWordExact"
-  "small Hecke recurrences/closed identities ported; abstract HeckeSystem, smooth uniqueness, satisfiable divisor-count example, and trinity_smooth remain"
+  substantialCore
+  "DASHI.Moonshine.AristotleHeckeRecurrenceCoreExact;DASHI.Moonshine.RamanujanTauHecke23Exact;DASHI.Moonshine.ClassicalHeckeWeightKSmallWordExact"
+  "prime-power recurrence uniqueness and exact two-prime smooth assembly are ported together with low closed identities; full Nat HeckeSystem coprime packaging, divisor-count example, and source Set Smooth3 packaging remain"
 
 heckeGeneralParity : AristotleMathModuleParity
 heckeGeneralParity = aristotleMathModuleParity
@@ -150,8 +150,8 @@ heckeGeneralParity = aristotleMathModuleParity
   155
   8
   unportedCore
-  "DASHI.Moonshine.CandidateLevelRepresentationHeckeSquareExact"
-  "candidate/intertwiner boundary exists, but S-smooth uniqueness, all-prime determination, finite separating bound, and a_zero_undetermined are not ported"
+  "DASHI.Moonshine.AristotleHeckeRecurrenceCoreExact;DASHI.Moonshine.CandidateLevelRepresentationHeckeSquareExact"
+  "the prime-power recurrence kernel is now imported, but arbitrary-S Nat factorisation closure, all-prime determination, finite separating bound, and a_zero_undetermined remain unported"
 
 heckeWordsParity : AristotleMathModuleParity
 heckeWordsParity = aristotleMathModuleParity
@@ -200,8 +200,8 @@ t2vsT3Parity = aristotleMathModuleParity
   287
   34
   partial
-  "DASHI.Moonshine.Hecke23AntiparallelExact"
-  "division-free antiparallel relation and selected multiplier facts ported; product/difference/quotient/power/remainder finite-table and trinity behavior mostly remain"
+  "DASHI.Moonshine.Hecke23AntiparallelExact;DASHI.Moonshine.AristotleDeltaWordT2T3FiniteParityExact"
+  "division-free antiparallel relation plus certified m=1..3 product/difference/Lean-integer quotient/remainder plate are ported; wider finite table, power and trinity behavior remain"
 
 t2vsT3DeltaParity : AristotleMathModuleParity
 t2vsT3DeltaParity = aristotleMathModuleParity
