@@ -8,15 +8,20 @@ import DASHI.Foundations.D4SO3NineIrrepRestrictionExact as D4
 import DASHI.Foundations.D4SO3RestrictionJ0To35Exact as D4Scan
 import DASHI.Foundations.D4SO3RestrictionCharacterJ0To35Exact as D4Character
 import DASHI.Foundations.SU2SO3IrrepDimensionExact as Spin
+import DASHI.Foundations.TetrahedralSO3RestrictionJ0To35Exact as Tet
+import DASHI.Foundations.TetrahedralSO3RestrictionCharacterJ0To35Exact as TetCharacter
 import DASHI.Foundations.OctahedralSO3RestrictionJ0To35Exact as Oct
 import DASHI.Foundations.OctahedralSO3RestrictionCharacterJ0To35Exact as OctCharacter
 import DASHI.Foundations.IcosahedralSO3RestrictionJ0To35Exact as Ico
 import DASHI.Foundations.IcosahedralSO3RestrictionCharacterJ0To35Exact as IcoCharacter
 import DASHI.Foundations.PolyhedralFixedSpaceSpectrumJ0To35Exact as Fixed
+import DASHI.Foundations.PolyhedralFixedSpaceDerivedNonaryExact as DerivedNonary
 import DASHI.Foundations.PolyhedralRestrictionCriticalCharacterExact as Character
 import DASHI.Foundations.PolyhedralRegularRepresentationShiftExact as Regular
+import DASHI.Moonshine.CandidateLevelRepresentationHeckeSquareExact as CandidateSquare
 import DASHI.Moonshine.ModularCurveJFrickeInterfaceExact as Modular
 import DASHI.Moonshine.OggPolyhedralReductionControlExact as Control
+import DASHI.Moonshine.OggTetrahedralReductionControlExact as TetControl
 import DASHI.Moonshine.SSPRepresentationHeckeIntertwinerBoundaryExact as Intertwiner
 import DASHI.Moonshine.TernarySevenOggSSPComparisonExact as Seven
 import DASHI.Physics.Closure.PhysicalSSPHeckeModelClosureReceipt as Existing
@@ -33,6 +38,12 @@ spinHalfNotOnSO3DescentLane = Spin.spinorHighestWeightOneDoesNotDescend
 
 j35IsDimension71 : Spin.jDimension Spin.j35 ≡ 71
 j35IsDimension71 = Spin.j35DimensionIsSeventyOne
+
+candidateSquareIncludesNonOggNine :
+  CandidateSquare.candidateLevelNat
+    (CandidateSquare.spatialLevel Spin.j4)
+  ≡ 9
+candidateSquareIncludesNonOggNine = refl
 
 ------------------------------------------------------------------------
 -- Five irreps of nine: actual SO(3) j=4 restriction to rotational D4.
@@ -57,7 +68,7 @@ rawNineCellIsDifferentRepresentation :
 rawNineCellIsDifferentRepresentation = D4.rawNinePermutationIsNotJ4Restriction
 
 ------------------------------------------------------------------------
--- Full character certification, not only selected rows.
+-- Full character certification for four finite rotation groups.
 ------------------------------------------------------------------------
 
 d4AllRowsCharacterExact :
@@ -66,6 +77,13 @@ d4AllRowsCharacterExact :
   D4Character.branchingCharacter (D4Scan.branchingSpectrum j) class
   ≡ D4Character.restrictedCharacter j class
 d4AllRowsCharacterExact = D4Character.branchingCharacterExact
+
+tetrahedralAllRowsCharacterExact :
+  (j : Spin.AngularMomentum0To35) →
+  (class : Tet.TetrahedralClass) →
+  Tet.branchingCharacter (Tet.branchingSpectrum j) class
+  ≡ Tet.restrictedCharacter j class
+tetrahedralAllRowsCharacterExact = TetCharacter.branchingCharacterExact
 
 octahedralAllRowsCharacterExact :
   (j : Spin.AngularMomentum0To35) →
@@ -88,6 +106,12 @@ icosahedralAllRowsCharacterExact = IcoCharacter.branchingCharacterExact
 nineIsNotOgg : Control.OggDimensionWitness 9 → ⊥
 nineIsNotOgg = Control.dimension9IsNotOgg
 
+fifteenIsNotOgg : Control.OggDimensionWitness 15 → ⊥
+fifteenIsNotOgg = TetControl.dimension15IsNotOgg
+
+fortyThreeIsNotOgg : Control.OggDimensionWitness 43 → ⊥
+fortyThreeIsNotOgg = DerivedNonary.dimension43IsNotOgg
+
 fiftyThreeIsNotOgg : Control.OggDimensionWitness 53 → ⊥
 fiftyThreeIsNotOgg = Control.dimension53IsNotOgg
 
@@ -98,6 +122,10 @@ d4RegularPeriodIsFour :
   Regular.nonidentityCharacterPeriod Regular.rotationalD4 ≡ 4
 d4RegularPeriodIsFour = refl
 
+tetrahedralRegularPeriodIsSix :
+  Regular.nonidentityCharacterPeriod Regular.rotationalTetrahedral ≡ 6
+tetrahedralRegularPeriodIsSix = refl
+
 octahedralRegularPeriodIsTwelve :
   Regular.nonidentityCharacterPeriod Regular.rotationalOctahedral ≡ 12
 octahedralRegularPeriodIsTwelve = refl
@@ -105,6 +133,11 @@ octahedralRegularPeriodIsTwelve = refl
 icosahedralRegularPeriodIsThirty :
   Regular.nonidentityCharacterPeriod Regular.rotationalIcosahedral ≡ 30
 icosahedralRegularPeriodIsThirty = refl
+
+tetrahedral3To15RegularCollision :
+  Tet.branchingSpectrum Spin.j7
+  ≡ Tet.addSpectrum Tet.regularSpectrum (Tet.branchingSpectrum Spin.j1)
+tetrahedral3To15RegularCollision = Tet.j1ToJ7IsOneRegularShift
 
 octahedral5To53RegularCollision :
   Oct.branchingSpectrum Spin.j26
@@ -118,7 +151,7 @@ icosahedral7To67RegularCollision :
 icosahedral7To67RegularCollision = Ico.j3ToJ33IsOneRegularShift
 
 ------------------------------------------------------------------------
--- Actual fixed-space probes: C3 is not the six-element S3 permutation group.
+-- Actual fixed-space probes and derived 369 address.
 ------------------------------------------------------------------------
 
 c3NotS3 : Fixed.orderC3 ≡ Fixed.orderTernaryS3 → ⊥
@@ -126,6 +159,12 @@ c3NotS3 = Fixed.c3IsNotTernaryS3ByOrder
 
 j3C3FixedSpaceIsThree : Fixed.fixedDimension Spin.j3 Fixed.C3Probe ≡ 3
 j3C3FixedSpaceIsThree = Fixed.j3C3FixedDimension
+
+sevenAndFortyThreeDerivedNonaryCollide :
+  DerivedNonary.fixedSpaceNonary Spin.j3
+  ≡ DerivedNonary.fixedSpaceNonary Spin.j21
+sevenAndFortyThreeDerivedNonaryCollide =
+  DerivedNonary.j3AndJ21DerivedNonaryCollide
 
 ------------------------------------------------------------------------
 -- Arithmetic/modular side remains independent until an intertwiner is built.
@@ -142,6 +181,12 @@ classicalIntertwinerStillOpen :
     Intertwiner.canonicalSSPRepresentationModularIntertwinerTarget
   ≡ false
 classicalIntertwinerStillOpen = refl
+
+unbiasedCandidateExceptionalLocusStillOpen :
+  CandidateSquare.exceptionalLocusEqualityConstructed
+    CandidateSquare.canonicalCandidateLevelSquareBoundary
+  ≡ false
+unbiasedCandidateExceptionalLocusStillOpen = refl
 
 modularGenusZeroNotManufacturedHere :
   Modular.genusZeroIsInternallyProved Modular.canonicalModularCurveBoundary
