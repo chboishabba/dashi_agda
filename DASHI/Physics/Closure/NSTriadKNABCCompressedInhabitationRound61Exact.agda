@@ -38,10 +38,12 @@ module DASHI.Physics.Closure.NSTriadKNABCCompressedInhabitationRound61Exact wher
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
+open import Data.Rational.Base using (_≤_)
 
 import DASHI.Physics.Closure.NSTriadKNABCInhabitationRound58Exact as ABC
 import DASHI.Physics.Closure.NSTriadKNHHBadPhysicalDuhamelSourceRound59 as A
 import DASHI.Physics.Closure.NSTriadKNComActiveSixThreeRealizationRound61Exact as B
+import DASHI.Physics.Closure.NSTriadKNComNormalizedFibreAggregateRound60Exact as BAggregate
 import DASHI.Physics.Closure.NSTriadKNFixedShiftCorrectionHeadroomRound54Exact as CHeadroom
 import DASHI.Physics.Closure.NSTriadKNFixedShiftPhysicalCapacityAdapterRound58 as CAdapter
 import DASHI.Physics.Closure.NSTriadKNFixedShiftSharpStrictGapCapacityRound61Exact as C
@@ -89,7 +91,7 @@ round61ABCComEndpoint :
     (literalABCSourceFromRound61
       hhBadPhysicalSource hhBadPhysicalEstimates
       comPhysicalSource fixedShiftPhysicalData) q
-  ≤ DASHI.Physics.Closure.NSTriadKNComNormalizedFibreAggregateRound60Exact.bandwidthOneTarget
+  ≤ BAggregate.bandwidthOneTarget
 round61ABCComEndpoint
     hhBadPhysicalSource hhBadPhysicalEstimates
     comPhysicalSource fixedShiftPhysicalData =
@@ -97,9 +99,6 @@ round61ABCComEndpoint
     (literalABCSourceFromRound61
       hhBadPhysicalSource hhBadPhysicalEstimates
       comPhysicalSource fixedShiftPhysicalData)
-  where
-  open import Data.Rational.Base using (_≤_)
-  import DASHI.Physics.Closure.NSTriadKNComNormalizedFibreAggregateRound60Exact
 
 round61ABCSourceCompressionConstructed : Bool
 round61ABCSourceCompressionConstructed = true
