@@ -22,9 +22,6 @@ INITIAL_CLEAN="${DASHI_AGDA29_CLEAN:-0}"
 export DASHI_AGDA29_CLEAN=0
 export DASHI_AGDA29_CACHE_ROOT="${DASHI_AGDA29_CACHE_ROOT:-${XDG_CACHE_HOME:-$HOME/.cache}/dashi-agda29-ns-cut}"
 
-# `time` is not part of the minimal runner image on every worker.  Prefer the
-# native binary, but resolve the same GNU resource sampler through Nix when it
-# is absent.  Keep this as an argv array so paths/arguments remain unambiguous.
 if [ -x /usr/bin/time ]; then
   TIME_CMD=(/usr/bin/time)
 else
@@ -43,6 +40,7 @@ TARGETS=(
   "DASHI/Physics/Closure/NSTriadKNLuoFiniteEightPointSixThreeHolderExact.agda"
   "DASHI/Physics/Closure/NSTriadKNLuoFiniteSixThreeKernelBranchBoundary.agda"
   "DASHI/Physics/Closure/NSTriadKNLuoFiniteSixThreeKernelEstimateExact.agda"
+  "DASHI/Physics/Closure/NSTriadKNLuoFiniteSixThreeHolderConstantOneCompiledExact.agda"
   "DASHI/Physics/Closure/NSTriadKNLuoFiniteSixThreeKernelDimensionFreeExact.agda"
   "DASHI/Physics/Closure/NSTriadKNABCLeafAssemblyRound58.agda"
   "DASHI/Physics/Closure/NSTriadKNABCInhabitationRound58Exact.agda"
