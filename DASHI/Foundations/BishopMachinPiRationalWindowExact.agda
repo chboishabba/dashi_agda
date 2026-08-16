@@ -50,6 +50,8 @@ import RealProperties as BishopP
 import DASHI.Foundations.BishopMachinArctanConstructionExact as Atan
 import DASHI.Foundations.BishopArctanHalfBallInterlacingExact as Interlace
 import DASHI.Foundations.BishopArctanCubicQuinticPolynomialExact as Poly
+import DASHI.Physics.YangMills.BalabanBishopAlternatingBracketFromMonotoneLimitsExact as Limits
+import DASHI.Physics.YangMills.BalabanP33BishopLowOrderTaylorBracketsExact as Low
 import DASHI.Physics.YangMills.BalabanP33BishopInverseDexpCoefficientExact as Order
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -83,8 +85,10 @@ oneTwoHundredThirtyNinthPoint =
     Atan.oneTwoHundredThirtyNinthNonnegative
     Atan.bishopOneTwoHundredThirtyNinthInsideHalf
 
-sixteenNN fourNN : Bishop.NonNegative (embed Atan.sixteen)
+sixteenNN : Bishop.NonNegative (embed Atan.sixteen)
 sixteenNN = Order.embeddedRationalNonnegative Atan.sixteen nonNeg
+
+fourNN : Bishop.NonNegative (embed Atan.four)
 fourNN = Order.embeddedRationalNonnegative Atan.four nonNeg
 
 atanUpperByValue : ∀ {value} →
@@ -95,12 +99,9 @@ atanUpperByValue : ∀ {value} →
 atanUpperByValue {value} point =
   let
     dataSet = Interlace.atanAlternatingSeriesData point
-    raw =
-      DASHI.Physics.YangMills.BalabanBishopAlternatingBracketFromMonotoneLimitsExact.representedLimitBelowUpperPartial
-        (Interlace.atanInterlacing point) 0
-    upperIsMagnitude =
-      DASHI.Physics.YangMills.BalabanP33BishopLowOrderTaylorBracketsExact.upperZeroEquivalentFirstMagnitude
-        dataSet
+    raw = Limits.representedLimitBelowUpperPartial
+      (Interlace.atanInterlacing point) 0
+    upperIsMagnitude = Low.upperZeroEquivalentFirstMagnitude dataSet
     magnitudeIsValue = Poly.magnitudeZeroIsValue (Interlace.nonnegative point)
   in
   BishopP.≤-respʳ-≃
@@ -216,13 +217,12 @@ upperRationalBelowTwentyTwoSevenths :
   upperRational ℚ.< twentyTwoSevenths
 upperRationalBelowTwentyTwoSevenths =
   let
-    marginPositive = ℚP.positive⁻¹ upperMargin
     zeroBelowMargin : 0ℚᵘ ℚ.< upperMargin
-    zeroBelowMargin = marginPositive
+    zeroBelowMargin = ℚP.positive⁻¹ upperMargin
     raw :
       twentyTwoSevenths ℚ.- upperMargin
       ℚ.< twentyTwoSevenths ℚ.- 0ℚᵘ
-    raw = ℚP.+-monoˡ-< twentyTwoSevenths
+    raw = ℚP.+-monoʳ-< twentyTwoSevenths
       (ℚP.neg-mono-< zeroBelowMargin)
   in
   ℚP.<-respʳ-≃
