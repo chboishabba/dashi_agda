@@ -1,19 +1,19 @@
 name	wd-class-algebra
-item	Q483501
+item	Q-painter-sculptor
 item	Q1028181
 item	Q1281618
-item	Q-painter-sculptor
+item	Q483501
 item	Q5592
 item	Q762
-level	Q483501	1
+level	Q-painter-sculptor	1
 level	Q1028181	1
 level	Q1281618	1
-level	Q-painter-sculptor	1
+level	Q483501	1
 level	Q5592	0
 level	Q762	0
-p279	Q1028181	Q483501
-p279	Q1281618	Q483501
 p279	Q-painter-sculptor	Q1028181
 p279	Q-painter-sculptor	Q1281618
+p279	Q1028181	Q483501
+p279	Q1281618	Q483501
 p31	Q5592	Q-painter-sculptor
 p31	Q762	Q1028181
