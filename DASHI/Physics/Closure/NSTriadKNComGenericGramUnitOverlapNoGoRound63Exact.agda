@@ -38,7 +38,7 @@ open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; _<_)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Nullary using (¬_)
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
 import DASHI.Physics.Closure.NSTriadKNComGramInterferenceRound35Exact as Gram
@@ -65,8 +65,6 @@ unnormalizedOverlapTwoCell = Gram.gram-interference-cell
   ℚP.≤-refl
   ℚP.≤-refl
   (subst (λ upper → two ≤ upper) (sym unitTimesTwoTimesUnit) ℚP.≤-refl)
-  where
-  open import Relation.Binary.PropositionalEquality using (sym)
 
 oneStrictlyBelowTwo : 1ℚ < two
 oneStrictlyBelowTwo =
