@@ -29,19 +29,16 @@ module DASHI.Physics.Closure.NSTriadKNHHBadDirectPhysicalHeadroomRound62Exact wh
 --
 -- Normalize by delta^(-1) 2^(q+1).  Exact reciprocal cancellation gives
 --
--- C_(q+1) = I_(q+1) + N_q,
+-- C_(q+1) = I_(q+1) + N_q.
 --
--- where N_q is the literal normalized generated+leakage contribution.  Hence
+-- Therefore N_q <= C_* - I_(q+1) preserves the ceiling in one step.  An
+-- arbitrary finite prefix plus this tail headroom proves C_q<=C_* globally.
+-- No alpha contraction, beta factorization, or manufactured recurrence
+-- coefficient is required.
 --
--- N_q <= C_* - I_(q+1)
---
--- preserves the ceiling in ONE step.  An arbitrary finite prefix plus this
--- tail headroom proves C_q<=C_* globally.  No alpha contraction, no beta
--- factorization and no manufactured recurrence coefficient are required.
---
--- Finally, a literal density satisfying 2^q g_q <= C_q is transported directly
--- to the mature selected-threshold HH-bad profile.  This is the exact A1/A2/A3
--- shape requested by the Clay cutset.
+-- A literal density satisfying 2^q g_q <= C_q is then transported directly
+-- to the mature selected-threshold HH-bad profile.  This is the A1/A2/A3 shape
+-- of the physical Clay cutset with every later recurrence convenience removed.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
@@ -51,12 +48,12 @@ open import Agda.Builtin.Nat using (Nat; suc)
 import Data.Nat.Base as Nat
 import Data.Nat.Properties as NatP
 open import Data.Rational.Base using
-  (ℚ; 0ℚ; _+_; _-_; _*_; _≤_)
+  (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using
-  (cong; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
+import DASHI.Physics.Closure.NSTriadKNHHBadPositiveThresholdRound58 as Threshold
 import DASHI.Physics.Closure.NSTriadKNHHBadPhysicalDuhamelSourceRound59 as Source
 import DASHI.Physics.Closure.NSTriadKNHHBadSharpDyadicGainRound33Exact as Sharp
 import DASHI.Physics.Closure.NSTriadKNHHBadFiniteTransientTailBarrierRound55Exact as Tail
@@ -69,24 +66,18 @@ record DirectPhysicalDuhamelIdentity
   field
     successorDecomposition : ∀ q →
       Source.defectAt source (suc q)
-      ≡ Source.parameter source
-          .DASHI.Physics.Closure.NSTriadKNHHBadPositiveThresholdRound58.threshold
+      ≡ Threshold.threshold (Source.parameter source)
           * Sharp.inverseDyadicScale (suc q)
           * Source.inheritedAt source (suc q)
         + Source.generatedAt source q + Source.leakageAt source q
 
 open DirectPhysicalDuhamelIdentity public
 
--- Keep the threshold projection readable below.
 threshold : Source.PhysicalLocalizedDuhamelSource → ℚ
-threshold source =
-  DASHI.Physics.Closure.NSTriadKNHHBadPositiveThresholdRound58.threshold
-    (Source.parameter source)
+threshold source = Threshold.threshold (Source.parameter source)
 
 thresholdInverse : Source.PhysicalLocalizedDuhamelSource → ℚ
-thresholdInverse source =
-  DASHI.Physics.Closure.NSTriadKNHHBadPositiveThresholdRound58.thresholdInverse
-    (Source.parameter source)
+thresholdInverse source = Threshold.thresholdInverse (Source.parameter source)
 
 normalizedDefect : Source.PhysicalLocalizedDuhamelSource → Nat → ℚ
 normalizedDefect source q =
@@ -124,14 +115,11 @@ normalizedInheritedCancellation source q =
   trans regroup
     (trans
       (cong (λ first → first * (idy * dy) * inherited)
-        (DASHI.Physics.Closure.NSTriadKNHHBadPositiveThresholdRound58.inverseMeaning
-          (Source.parameter source)))
+        (Threshold.inverseMeaning (Source.parameter source)))
       (trans
         (cong (λ second → 1ℚ * second * inherited)
           (Sharp.inverseDyadicReciprocal (suc q)))
         (solve (inherited ∷ []))))
-  where
-  open import Data.Rational.Base using (1ℚ)
 
 normalizedSuccessorComponentsExact :
   (source : Source.PhysicalLocalizedDuhamelSource) →
