@@ -13,32 +13,30 @@ module DASHI.Physics.Closure.NSTriadKNReconstructedOrbitCoordinateGrowthNoGoRoun
 --
 -- ROUND 62 FINITE-FLOW REPRESENTATION AUDIT
 --
--- The reconstructed physical state stores ONE list called
--- `positiveOrbitCoefficients`; its retained Fourier modes are then expanded as
+-- `ReconstructedPhysicalState` stores one list called
+-- `positiveOrbitCoefficients`.  The same-object Fourier system expands each
+-- stored representative into the two retained modes k,-k.  The generic exact
+-- Galerkin RHS builder then maps one output coefficient over EVERY retained
+-- mode and stores that entire output list back as `positiveOrbitCoefficients`.
 --
---   k_1,-k_1,k_2,-k_2,... .
+-- Pure list arithmetic therefore gives
 --
--- The mature concrete Galerkin producer is exact coefficient-wise, but its
--- generic construction maps the RHS over the ENTIRE retained-mode list and
--- stores every resulting coefficient back into `positiveOrbitCoefficients`.
--- Therefore the generic composition does not preserve the intended
--- one-representative-per-reality-orbit coordinate count:
+--   n stored representatives
+--     -> 2n retained modes
+--     -> 2n stored RHS coefficients
+--     -> 4n reconstructed RHS modes.
 --
---   input positive representatives       : n
---   input reconstructed retained modes   : 2 n
---   output stored "positive" coefficients: 2 n
---   output reconstructed retained modes  : 4 n.
+-- This is a representation theorem, not a PDE estimate.  It does not challenge
+-- the literal RHS formula: every generated coefficient is still the exact
+-- viscous-plus-exhaustive-quadratic coefficient.  It shows that the unrestricted
+-- list carrier is not yet the fixed-dimensional one-representative-per-reality-
+-- orbit coordinate space required by Picard--Lindelof.
 --
--- This file proves those list-count identities definitionally, independently
--- of any PDE estimate.  It does NOT say the Fourier RHS is mathematically
--- wrong: every generated coefficient is still the exact literal RHS.  It says
--- this unrestricted LIST representation is not yet the fixed-dimensional ODE
--- coordinate carrier needed by Picard--Lindelof.
---
--- The repair is precise: fix a cutoff-dependent canonical representative of
--- each nonzero orbit k ~ -k, store/evolve only those coordinates, and
--- reconstruct the opposite sheet by conjugation.  The already-proved Fourier
--- reality theorem then determines the discarded derivative coordinates.
+-- The needed repair is precise: for each fixed cutoff choose one canonical
+-- representative of every nonzero orbit k ~ -k; evolve only those coordinates;
+-- reconstruct the opposite sheet by conjugation.  The already-proved summed
+-- nonlinear and viscous Fourier-reality theorems determine the omitted RHS
+-- coordinates.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
@@ -47,9 +45,13 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
+import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
+import DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier as Cube
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNLuoRealityTransversePhaseSpaceRound26Exact as Phase
 import DASHI.Physics.Closure.NSTriadKNConcreteReconstructedPhysicalSelectorRound29Exact as State
+import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
+import DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact as Coefficient
 import DASHI.Physics.Closure.NSTriadKNConcretePhysicalGalerkinVectorFieldRound30Exact as Concrete
 import DASHI.Physics.Closure.NSTriadKNSameCarrierSameObjectRound31Exact as Same
 
@@ -65,44 +67,46 @@ fourTimes : Nat → Nat
 fourTimes n = twice (twice n)
 
 ------------------------------------------------------------------------
--- Any reconstructed physical state has exactly two retained modes per stored
--- representative.
+-- Exact list used by the same-object state reconstruction.
 ------------------------------------------------------------------------
+
+reconstructedModesOf :
+  ∀ {r} {F : C3.RealField r} {E : C3.IntegerEmbedding F} →
+  List (Phase.TransverseModeCoefficient F E) → List Z3.FourierMode
+reconstructedModesOf [] = []
+reconstructedModesOf (coefficient ∷ rest) =
+  Phase.coefficientMode coefficient
+  ∷ Phase.reconstructedNegativeMode coefficient
+  ∷ reconstructedModesOf rest
+
+reconstructedModesOfCount :
+  ∀ {r} {F : C3.RealField r} {E : C3.IntegerEmbedding F}
+    (coefficients : List (Phase.TransverseModeCoefficient F E)) →
+  length (reconstructedModesOf coefficients)
+  ≡ twice (length coefficients)
+reconstructedModesOfCount [] = refl
+reconstructedModesOfCount (_ ∷ rest) =
+  cong suc (cong suc (reconstructedModesOfCount rest))
+
+sameObjectReconstructedModesMeaning :
+  ∀ {r} {F : C3.RealField r} {E : C3.IntegerEmbedding F}
+    (state : State.ReconstructedPhysicalState F E) →
+  Same.reconstructedStateModes state
+  ≡ reconstructedModesOf (State.positiveOrbitCoefficients state)
+sameObjectReconstructedModesMeaning state = refl
 
 reconstructedStateModesCount :
   ∀ {r} {F : C3.RealField r} {E : C3.IntegerEmbedding F}
     (state : State.ReconstructedPhysicalState F E) →
   length (Same.reconstructedStateModes state)
   ≡ twice (length (State.positiveOrbitCoefficients state))
-reconstructedStateModesCount {F = F} {E = E} state =
-  go (State.positiveOrbitCoefficients state)
-  where
-  go :
-    (coefficients : List (Phase.TransverseModeCoefficient F E)) →
-    length (Same.reconstructedStateModes
-      (State.reconstructed-physical-state coefficients
-        (λ coefficient member →
-          State.positiveModesNonzero state coefficient
-            (transportMember coefficients member))))
-    ≡ twice (length coefficients)
-  go [] = refl
-  go (coefficient ∷ rest) = cong suc (cong suc (go rest))
-
-  transportMember :
-    (coefficients : List (Phase.TransverseModeCoefficient F E)) →
-    ∀ coefficient → coefficient State.∈ coefficients →
-    coefficient State.∈ State.positiveOrbitCoefficients state
-  transportMember coefficients coefficient member =
-    transportByPrefix coefficients member
-
-  transportByPrefix :
-    (coefficients : List (Phase.TransverseModeCoefficient F E)) →
-    ∀ {coefficient} → coefficient State.∈ coefficients →
-    coefficient State.∈ State.positiveOrbitCoefficients state
-  transportByPrefix coefficients member = member
+reconstructedStateModesCount state =
+  trans
+    (cong length (sameObjectReconstructedModesMeaning state))
+    (reconstructedModesOfCount (State.positiveOrbitCoefficients state))
 
 ------------------------------------------------------------------------
--- The concrete map produces exactly one output coefficient for every source
+-- The concrete RHS map returns exactly one stored coefficient for each source
 -- retained mode.
 ------------------------------------------------------------------------
 
@@ -110,15 +114,12 @@ mapConcreteCoefficientsCount :
   ∀ {r} {F : C3.RealField r} {E : C3.IntegerEmbedding F}
     (builder : Concrete.StateIndexedPhysicalGalerkinSystem F E)
     (state : State.ReconstructedPhysicalState F E)
-    (source : List DASHI.Physics.Closure.NSIntegerFourierLattice.FourierMode)
+    (source : List Z3.FourierMode)
     (sourceIncluded : ∀ mode →
-      DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier._∈_
-        mode source →
-      DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier._∈_
-        mode
-        (DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit.modes
-          (DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact.finiteSystem
-            (Concrete.physicalSystemAt builder state)))) →
+      mode Cube.∈ source →
+      mode Cube.∈ Audit.modes
+        (Coefficient.finiteSystem
+          (Concrete.physicalSystemAt builder state))) →
   length (Concrete.mapConcreteCoefficients
     builder state source sourceIncluded)
   ≡ length source
@@ -127,14 +128,28 @@ mapConcreteCoefficientsCount builder state (_ ∷ rest) sourceIncluded =
   cong suc
     (mapConcreteCoefficientsCount builder state rest
       (λ selected selectedMember →
-        sourceIncluded selected
-          (DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier.there
-            selectedMember)))
+        sourceIncluded selected (Cube.there selectedMember)))
+
+concreteOutputCoefficientsCount :
+  ∀ {r} {F : C3.RealField r} {E : C3.IntegerEmbedding F}
+    (builder : Concrete.StateIndexedPhysicalGalerkinSystem F E)
+    (state : State.ReconstructedPhysicalState F E) →
+  length (Concrete.concreteOutputCoefficients builder state)
+  ≡ length
+      (Audit.modes
+        (Coefficient.finiteSystem
+          (Concrete.physicalSystemAt builder state)))
+concreteOutputCoefficientsCount builder state =
+  mapConcreteCoefficientsCount builder state
+    (Audit.modes
+      (Coefficient.finiteSystem
+        (Concrete.physicalSystemAt builder state)))
+    (λ mode member → member)
 
 ------------------------------------------------------------------------
--- For a same-object builder, the concrete output stored-representative count is
--- exactly the input reconstructed-mode count, hence twice the input positive
--- count.
+-- Same-object builder: retained modes are exactly the +/- reconstruction of the
+-- input state.  Hence the concrete RHS stores twice as many representatives as
+-- the input state stores.
 ------------------------------------------------------------------------
 
 sameObjectConcreteOutputPositiveCount :
@@ -147,13 +162,8 @@ sameObjectConcreteOutputPositiveCount :
   ≡ twice (length (State.positiveOrbitCoefficients state))
 sameObjectConcreteOutputPositiveCount builder state =
   trans
-    (mapConcreteCoefficientsCount
-      (Same.forgetSameCarrierSameObject builder)
-      state
-      (DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit.modes
-        (DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact.finiteSystem
-          (Same.physicalSystemAt builder state)))
-      (λ mode member → member))
+    (concreteOutputCoefficientsCount
+      (Same.forgetSameCarrierSameObject builder) state)
     (trans
       (cong length (Same.retainedModesExact builder state))
       (reconstructedStateModesCount state))
