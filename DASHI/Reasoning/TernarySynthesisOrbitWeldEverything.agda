@@ -24,7 +24,10 @@ import DASHI.Interop.PNFHodgeResidualTopology
 import DASHI.Interop.PNFHyperfabric369
 import DASHI.Interop.PNFSpectralFieldGraph
 import DASHI.Interop.PNFTernaryCycleSpectralExact
+import DASHI.Interop.PNFSignedResidualDelta0Exact
+import DASHI.Interop.PNFSignedResidualDelta0Regression
 import DASHI.Moonshine.TernarySevenOggSSPComparisonExact
+import DASHI.Moonshine.TernarySevenCanonicalMapSeparationExact
 import DASHI.Physics.Common.FiniteWreathRefinementExact
 import DASHI.Reasoning.PNFWaveSynthesisCommutatorExact
 import DASHI.Reasoning.RelationalBranchCobordismGeometry
@@ -36,3 +39,13 @@ import DASHI.Reasoning.TernarySynthesisCellComplexExact
 import DASHI.Reasoning.TernarySynthesisLogicQualificationExact
 import DASHI.Reasoning.TernarySynthesisTransportWeldExact
 import DASHI.Reasoning.TernarySynthesisOrbitWeldRegression
+
+------------------------------------------------------------------------
+-- Round-24 recursive ternary tree / pants reconciliation.
+------------------------------------------------------------------------
+
+import DASHI.Topology.TernaryCylinderPantsGeometryExact
+import DASHI.Topology.TernaryPantsFrontierExact
+import DASHI.Reasoning.TernaryPantsSynthesisS3BridgeExact
+import DASHI.Reasoning.TernaryPantsSynthesisS3Regression
+import DASHI.Reasoning.TernaryPantsRecursiveWreathActionExact

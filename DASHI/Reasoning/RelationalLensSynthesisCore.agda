@@ -22,6 +22,8 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
 import Base369 as Base
+import DASHI.Foundations.BalancedTernaryStageSymmetryExact as BT
+import DASHI.Foundations.CounterpositionOrderedJoinExact as Counter
 import DASHI.Foundations.RepresentationChartInvariant as Representation
 import DASHI.Reasoning.TernaryComparisonSynthesisExact as Synthesis
 import DASHI.Reasoning.TypedHyperfabricCore as Hyperfabric
@@ -126,14 +128,21 @@ record InvertibleLensTransition
       (view : View) → forward (backward view) ≡ view
 
 ------------------------------------------------------------------------
--- Operator roles remain separated. In particular a counter-view, reversal,
--- algebraic inverse and logical negation are not definitionally identified.
+-- Operator roles remain separated. In particular a counter-view,
+-- orientation reversal, algebraic inverse, logical negation and lens
+-- transition are not definitionally identified.
+--
+-- Cross-pollination from CounterpositionOrderedJoinExact is deliberate:
+-- contextual counterposition may invert only one coordinate or merely reindex
+-- coordinates.  Therefore "take the opposing position" cannot silently mean
+-- "apply the global inverse" at the lens layer.
 ------------------------------------------------------------------------
 
 data RelationalOperatorRole : Set where
   logicalNegationRole : RelationalOperatorRole
   algebraicInverseRole : RelationalOperatorRole
   orientationReversalRole : RelationalOperatorRole
+  contextualCounterpositionRole : RelationalOperatorRole
   lensTransitionRole : RelationalOperatorRole
 
 orientationReversalIsNotLogicalNegation :
@@ -144,6 +153,14 @@ orientationReversalIsNotAlgebraicInverse :
   orientationReversalRole ≡ algebraicInverseRole → ⊥
 orientationReversalIsNotAlgebraicInverse ()
 
+contextualCounterpositionIsNotAlgebraicInverseByRole :
+  contextualCounterpositionRole ≡ algebraicInverseRole → ⊥
+contextualCounterpositionIsNotAlgebraicInverseByRole ()
+
+contextualCounterpositionIsNotLogicalNegationByRole :
+  contextualCounterpositionRole ≡ logicalNegationRole → ⊥
+contextualCounterpositionIsNotLogicalNegationByRole ()
+
 lensTransitionIsNotAlgebraicInverseByRole :
   lensTransitionRole ≡ algebraicInverseRole → ⊥
 lensTransitionIsNotAlgebraicInverseByRole ()
@@ -151,6 +168,13 @@ lensTransitionIsNotAlgebraicInverseByRole ()
 logicalNegationIsNotLensTransitionByRole :
   logicalNegationRole ≡ lensTransitionRole → ⊥
 logicalNegationIsNotLensTransitionByRole ()
+
+foundationCounterpositionWitnessSeparatesFromInverse :
+  Counter.counterUnder Counter.rejectThird BT.allPositive
+  ≡ Counter.counterUnder Counter.invertAll BT.allPositive
+  → ⊥
+foundationCounterpositionWitnessSeparatesFromInverse =
+  Counter.partialCounterpositionIsNotFullInverse
 
 ------------------------------------------------------------------------
 -- The existing FramedAtlas is a special lossless lens family: transitions
@@ -206,6 +230,10 @@ record RelationalLensSynthesisBoundary : Set where
     reversalNegationInverseCollapsedIsFalse :
       reversalNegationInverseCollapsed ≡ false
 
+    contextualCounterpositionCollapsedIntoInverse : Bool
+    contextualCounterpositionCollapsedIntoInverseIsFalse :
+      contextualCounterpositionCollapsedIntoInverse ≡ false
+
     everyGenericLensDeclaredLossless : Bool
     everyGenericLensDeclaredLosslessIsFalse :
       everyGenericLensDeclaredLossless ≡ false
@@ -222,6 +250,8 @@ canonicalRelationalLensSynthesisBoundary =
     ; lensTransitionRequiresExplicitTransportIsTrue = refl
     ; reversalNegationInverseCollapsed = false
     ; reversalNegationInverseCollapsedIsFalse = refl
+    ; contextualCounterpositionCollapsedIntoInverse = false
+    ; contextualCounterpositionCollapsedIntoInverseIsFalse = refl
     ; everyGenericLensDeclaredLossless = false
     ; everyGenericLensDeclaredLosslessIsFalse = refl
     }
