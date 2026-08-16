@@ -3,12 +3,13 @@ module DASHI.Governance.AustralianTwoPartyPreferredObservationExact where
 ------------------------------------------------------------------------
 -- AUSTRALIAN TWO-PARTY-PREFERRED AS OBSERVATION COMPRESSION
 --
--- Primary source:
+-- Primary sources:
 -- Australian Electoral Commission (AEC),
 -- "Counting the votes - Frequently Asked Questions" and
 -- "How the House of Representatives result is determined".
 -- Institution/author: Australian Electoral Commission.
--- No DOI asserted.
+-- Venue: official AEC electoral-administration guidance.
+-- DOI: no DOI asserted.
 --
 -- The AEC defines two-party-preferred (TPP) as the distribution of preferences
 -- between the Australian Labor Party and the Liberal/National Coalition.  In a
@@ -24,14 +25,13 @@ module DASHI.Governance.AustralianTwoPartyPreferredObservationExact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
-import DASHI.Governance.EpistemicBinaryForcingLossExact as Binary
-import DASHI.Governance.FutureSafeCausalCompressionExact as Compression
-
 record ElectoralSourceReceipt : Set where
   constructor electoralSourceReceipt
   field
-    institution : String
+    institutionAuthor : String
     title : String
+    venue : String
+    yearOrAccessScope : String
     doi : String
     boundedRole : String
 
@@ -41,6 +41,8 @@ aecCountingReceipt : ElectoralSourceReceipt
 aecCountingReceipt = electoralSourceReceipt
   "Australian Electoral Commission"
   "Counting the votes - Frequently Asked Questions"
+  "official AEC electoral-administration guidance"
+  "current official guidance; bounded to the cited TPP/TCP definitions"
   "no DOI asserted"
   "defines TPP as preference distribution between Labor and Coalition; does not assert political reality is intrinsically binary"
 
@@ -48,6 +50,8 @@ aecHouseCountReceipt : ElectoralSourceReceipt
 aecHouseCountReceipt = electoralSourceReceipt
   "Australian Electoral Commission"
   "How the House of Representatives result is determined"
+  "official AEC electoral-administration guidance"
+  "current official guidance; bounded to House preference distribution and notional TPP scrutiny"
   "no DOI asserted"
   "documents notional TPP scrutiny where Labor and Coalition are not the actual final two candidates"
 
