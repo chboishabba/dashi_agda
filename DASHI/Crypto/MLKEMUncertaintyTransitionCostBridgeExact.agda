@@ -14,6 +14,15 @@ module DASHI.Crypto.MLKEMUncertaintyTransitionCostBridgeExact where
 -- Discrete Mathematics 345 (2022), 112670.
 -- DOI: 10.1016/j.disc.2021.112670.
 --
+-- Defensive incomplete/noisy-NTT-information context (not a proof input):
+-- Zehua Qiao, Yuejun Liu, Yongbin Zhou, Mingyao Shao, Shuo Sun,
+-- "When NTT Meets SIS: Efficient Side-channel Attacks on Dilithium and Kyber",
+-- IACR ePrint 2023/1866.  The ePrint record has no assigned DOI.
+--
+-- This citation motivates keeping surviving-support, observation quality and
+-- downstream recovery work as separate coordinates.  Its attack construction
+-- is not imported into this theorem.
+--
 -- PURPOSE
 --
 -- The harmonic theorem alone is not a recovery-cost lower bound.  This module
@@ -90,16 +99,6 @@ fullRankUncertaintyToTransitionWork
 
 ------------------------------------------------------------------------
 -- Bounded transition radius.
---
--- If a representation/search graph promises every primitive move changes at
--- most r source coordinates, uncertainty forces the verifier side to pay the
--- complementary product.  The theorem is deliberately division-free:
---
---     s <= r  and  128 <= s*(w+sigma)
---       => 128 <= r*(w+sigma).
---
--- Thus any claimed primitive with small radius r must exhibit enough verifier
--- work (or singularity budget) to satisfy this product.
 ------------------------------------------------------------------------
 
 boundedRadiusTransitionObstruction :
