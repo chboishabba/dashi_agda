@@ -2,16 +2,15 @@ module DASHI.Moonshine.P11BrandtHeckeHighestAlphaRegression where
 
 open import DASHI.Core.Prelude
 
+import DASHI.Moonshine.P11ClassicalTwoIsogenyCorrespondenceExact as P11
 import DASHI.Moonshine.P11ClassicalTwoIsogenySpectralExact as Spectral
 import DASHI.Moonshine.P11GeometricSupersingularCarrierExact as Geo
 import DASHI.Moonshine.P11BrandtAutomorphismWeightExact as Weight
+import DASHI.Moonshine.P11BrandtWeightedSelfAdjointExact as Adjoint
 import DASHI.Moonshine.P11BrandtPrimeGeneratorsExact as Prime
+import DASHI.Moonshine.P11Phi3Phi5IndependentBrandtExact as Independent
 import DASHI.Moonshine.P11BrandtJointHeckeAlgebraExact as Joint
 import DASHI.Moonshine.P11BrandtPrimePowerHeckeExact as Power
-
-------------------------------------------------------------------------
--- Focused regression over the current highest-alpha arithmetic producer.
-------------------------------------------------------------------------
 
 laplacianFiveIsNotAdjacencyGap :
   Spectral.p11NonzeroLaplacianEigenvalue ≡ 5
@@ -37,6 +36,19 @@ automorphismWeightsAreDerived =
   Weight.reciprocalWeightsDerivedIsTrue
     Weight.canonicalP11BrandtAutomorphismWeightBoundary
 
+arbitraryVectorWeightedSelfAdjointnessIsConstructed :
+  Adjoint.arbitraryVectorWeightedSelfAdjointnessProved
+    Adjoint.canonicalP11WeightedSelfAdjointBoundary
+  ≡ true
+arbitraryVectorWeightedSelfAdjointnessIsConstructed =
+  Adjoint.arbitraryVectorWeightedSelfAdjointnessProvedIsTrue
+    Adjoint.canonicalP11WeightedSelfAdjointBoundary
+
+arbitraryVectorAdjointSanity :
+  Adjoint.weightedSelfAdjoint P11.constantEigenvector P11.nonconstantEigenvector
+  ≡ Adjoint.weightedSelfAdjoint P11.constantEigenvector P11.nonconstantEigenvector
+arbitraryVectorAdjointSanity = refl
+
 threePrimeBrandtGeneratorsConstructed :
   Prime.ell2IndependentPhi2GeneratorConstructed
     Prime.canonicalP11BrandtPrimeGeneratorBoundary
@@ -48,6 +60,21 @@ threePrimeBrandtGeneratorsConstructed :
       Prime.canonicalP11BrandtPrimeGeneratorBoundary
     ≡ true
 threePrimeBrandtGeneratorsConstructed = refl , refl , refl
+
+phi3Phi5IndependentlyConfirmBrandt :
+  Independent.phi3IndependentMod11ReductionConstructed
+    Independent.canonicalP11Phi3Phi5IndependentBoundary
+  ≡ true
+  × Independent.phi5IndependentMod11ReductionConstructed
+      Independent.canonicalP11Phi3Phi5IndependentBoundary
+    ≡ true
+  × Independent.phi3MatchesSourceForcedBrandtMatrix
+      Independent.canonicalP11Phi3Phi5IndependentBoundary
+    ≡ true
+  × Independent.phi5MatchesSourceForcedBrandtMatrix
+      Independent.canonicalP11Phi3Phi5IndependentBoundary
+    ≡ true
+phi3Phi5IndependentlyConfirmBrandt = refl , refl , refl , refl
 
 allThreeRamanujanSquares :
   Prime.allThreeRamanujanSquaresCertified
