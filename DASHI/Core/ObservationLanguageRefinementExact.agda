@@ -15,6 +15,7 @@ module DASHI.Core.ObservationLanguageRefinementExact where
 -- authority for the exact construction.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 open import Data.Product using (_×_; _,_)
@@ -62,48 +63,45 @@ open LanguageSplitWitness public
 
 splitRefutesExtendedEquivalence :
   ∀ {language : ObservationLanguage}
-    (split : LanguageSplitWitness language) →
-  ExtendedEquivalent language (left split) (right split) → ⊥
-splitRefutesExtendedEquivalence split extended =
-  extraDifferent split (Data.Product.proj₂ extended)
+    (splitWitness : LanguageSplitWitness language) →
+  ExtendedEquivalent language
+    (left splitWitness) (right splitWitness) → ⊥
+splitRefutesExtendedEquivalence splitWitness extended =
+  extraDifferent splitWitness (Data.Product.proj₂ extended)
 
 record StrictObservationRefinement
   (language : ObservationLanguage) : Set where
   constructor strictObservationRefinement
   field
-    split : LanguageSplitWitness language
+    splitWitness : LanguageSplitWitness language
 
 open StrictObservationRefinement public
 
-strictRefinementWitnessesNewDistinction :
-  ∀ {language : ObservationLanguage} →
-  StrictObservationRefinement language →
+strictRefinementWitnessesBaseCollision :
+  ∀ {language : ObservationLanguage}
+    (refinement : StrictObservationRefinement language) →
   BaseEquivalent language
-    (left (split _)) (right (split _))
-strictRefinementWitnessesNewDistinction refinement =
-  baseSame (split refinement)
+    (left (splitWitness refinement))
+    (right (splitWitness refinement))
+strictRefinementWitnessesBaseCollision refinement =
+  baseSame (splitWitness refinement)
 
 strictRefinementRejectsOldCollision :
   ∀ {language : ObservationLanguage}
     (refinement : StrictObservationRefinement language) →
   ExtendedEquivalent language
-    (left (split refinement)) (right (split refinement)) → ⊥
+    (left (splitWitness refinement))
+    (right (splitWitness refinement)) → ⊥
 strictRefinementRejectsOldCollision refinement =
-  splitRefutesExtendedEquivalence (split refinement)
-
-------------------------------------------------------------------------
--- Boundary: refinement is informational, not automatically normative.
-------------------------------------------------------------------------
+  splitRefutesExtendedEquivalence (splitWitness refinement)
 
 record ObservationLanguageRefinementBoundary : Set where
   constructor observationLanguageRefinementBoundary
   field
-    extendedEquivalenceAlwaysImpliesBaseEquivalence : Agda.Builtin.Bool.Bool
-    baseEquivalenceAlwaysImpliesExtendedEquivalence : Agda.Builtin.Bool.Bool
-    concreteSplitWitnessCanProveStrictRefinement : Agda.Builtin.Bool.Bool
-    newObservationCoordinateAutomaticallyLegitimate : Agda.Builtin.Bool.Bool
-
-open import Agda.Builtin.Bool using (Bool; false; true)
+    extendedEquivalenceAlwaysImpliesBaseEquivalence : Bool
+    baseEquivalenceAlwaysImpliesExtendedEquivalence : Bool
+    concreteSplitWitnessCanProveStrictRefinement : Bool
+    newObservationCoordinateAutomaticallyLegitimate : Bool
 
 canonicalObservationLanguageRefinementBoundary :
   ObservationLanguageRefinementBoundary
