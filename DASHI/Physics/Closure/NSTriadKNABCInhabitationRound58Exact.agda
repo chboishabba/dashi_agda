@@ -8,9 +8,13 @@ module DASHI.Physics.Closure.NSTriadKNABCInhabitationRound58Exact where
 -- It accepts only the canonical physical source and estimates indexed by that
 -- source; the transfer is constructed definitionally.
 --
--- B is routed explicitly through the exact 133/256 squared whole-fibre endpoint
--- while its canonical source and aggregate stay on the lightweight leaf graph.
--- Heavy legacy envelope transport is invoked only by literalComEnvelope.
+-- B is routed ONLY through the lightweight normalized odd-(P/Q) source and the
+-- exact 133/256 squared whole-fibre endpoint here.  The historical Round47/42
+-- support-envelope transport has moved to
+-- NSTriadKNABCComLegacyEnvelopeAdapterRound60Exact.  This is a compiler cut,
+-- not a mathematical weakening: consumers that genuinely need the old
+-- envelope can import that adapter explicitly, while the canonical ABC source
+-- boundary no longer drags the legacy transport graph into every check.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -23,9 +27,7 @@ import DASHI.Physics.Closure.NSTriadKNHHBadRawVariableCapacityRound53Exact as Ra
 import DASHI.Physics.Closure.NSTriadKNHHBadLiteralDuhamelAdapterRound58Exact as AAdapter
 import DASHI.Physics.Closure.NSTriadKNHHBadPhysicalDuhamelSourceRound59 as ASource
 import DASHI.Physics.Closure.NSTriadKNComNormalizedFibreSourceRound60Exact as BSource
-import DASHI.Physics.Closure.NSTriadKNComNormalizedFibreSourceAdapterRound58 as BAdapter
 import DASHI.Physics.Closure.NSTriadKNComNormalizedFibreAggregateRound60Exact as BAggregate
-import DASHI.Physics.Closure.NSTriadKNComSupportOverlapRound42Exact as Support
 import DASHI.Physics.Closure.NSTriadKNFixedShiftCorrectionHeadroomRound54Exact as CHeadroom
 import DASHI.Physics.Closure.NSTriadKNFixedShiftUniformProductCapacityRound57Exact as C
 import DASHI.Physics.Closure.NSTriadKNFixedShiftPhysicalCapacityAdapterRound58 as CSource
@@ -62,14 +64,9 @@ literalHHBadDuhamel :
 literalHHBadDuhamel source =
   AAdapter.asLiteralDuhamel (literalHHBadTransfer source)
 
--- B: the canonical normalized source feeds both the optional legacy support
--- envelope and the lightweight literal squared whole-fibre 133/256 endpoint.
-literalComEnvelope :
-  (source : LiteralABCSourceWitnesses) →
-  Support.PhysicalComSupportOverlapEnvelope
-literalComEnvelope source =
-  BAdapter.legacyEnvelope (comSource source)
-
+-- B: the canonical normalized source feeds the lightweight literal squared
+-- whole-fibre 133/256 endpoint.  Legacy support-envelope transport is not part
+-- of this canonical source boundary anymore.
 literalComBandwidthOneMass :
   LiteralABCSourceWitnesses → Nat → ℚ
 literalComBandwidthOneMass source =
