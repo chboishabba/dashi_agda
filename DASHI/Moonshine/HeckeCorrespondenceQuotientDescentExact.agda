@@ -14,27 +14,23 @@ module DASHI.Moonshine.HeckeCorrespondenceQuotientDescentExact where
 --
 -- DASHI CONTRIBUTION
 --
--- Give the exact quotient-natural form of the currently open representation /
--- Hecke intertwiner problem on the repository's *actual* finite
+-- Extend the repository's existing Ontology.Hecke.QuotientRepresentation API
+-- from deterministic prime transports to the actual finite 15-way
 -- PrimeCorrespondenceHeckeOn carrier.
 --
--- If a projection q : Fine -> Coarse has a section and the projected 15-way
--- correspondence list is constant on q-fibres, then the fine correspondence
--- canonically descends to Coarse.  The resulting finite Hecke operator obeys
+-- If an existing QuotientInterfaceOn has projection-complete fibres and the
+-- projected correspondence respects its equivalence relation, then the fine
+-- correspondence canonically descends to the quotient.  The resulting finite
+-- Hecke observable operator obeys
 --
---   T_fine (f o q) = T_quotient f o q
+--   T_fine (f o proj) = T_quotient f o proj
 --
--- exactly, for every Nat-valued coarse observable f.
+-- exactly for every Nat-valued quotient observable f.
 --
--- Thus a future representation/Hecke proof need not guess an arbitrary Phi
--- and then independently prove Phi R_p = T_p Phi.  Once Phi is a sectioned
--- quotient with correspondence-congruence, the commuting square is derived;
--- the remaining domain-specific obligation is to identify the induced
--- quotient correspondence/operator with the intended arithmetic Hecke one.
---
--- No claim is made here that the current SSP support-mask correspondence is a
--- quotient of the SO(3)/dihedral reduction carrier.  That is the next concrete
--- producer obligation.
+-- This turns a large part of the open representation/Hecke intertwiner into a
+-- quotient-well-definedness theorem.  A domain-specific proof must still show
+-- that its representation reduction really produces the intended arithmetic
+-- quotient correspondence; this module does not manufacture that bridge.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -43,20 +39,7 @@ open import Ontology.GodelLattice renaming (v15 to mkVec15)
 
 import MonsterOntos as Monster
 import Ontology.Hecke.CorrespondenceRepresentation as Hecke
-
-------------------------------------------------------------------------
--- A projection with a chosen representative for every coarse code.
-------------------------------------------------------------------------
-
-record SectionedProjection
-    {Fine Coarse : Set}
-    (project : Fine → Coarse) : Set where
-  field
-    section : Coarse → Fine
-    sectionRightInverse :
-      (coarse : Coarse) → project (section coarse) ≡ coarse
-
-open SectionedProjection public
+import Ontology.Hecke.QuotientRepresentation as Quotient
 
 ------------------------------------------------------------------------
 -- Vec15 functoriality used by the actual finite Hecke operator.
@@ -74,46 +57,66 @@ map15Fusion f g
   refl
 
 ------------------------------------------------------------------------
+-- Exact quotient presentation: the existing quotient projection both respects
+-- and reflects the declared equivalence.  This is true for the repository's
+-- equality quotient and support-mask quotient instances.
+------------------------------------------------------------------------
+
+record ExactQuotientPresentation
+    {Fine Coarse : Set}
+    (quotient : Quotient.QuotientInterfaceOn Fine Coarse) : Set₁ where
+  field
+    projectionComplete :
+      ∀ {left right : Fine} →
+      Quotient.QuotientInterfaceOn.proj quotient left
+      ≡ Quotient.QuotientInterfaceOn.proj quotient right →
+      Quotient.EquivalenceOn._≈_
+        (Quotient.QuotientInterfaceOn.equiv quotient) left right
+
+open ExactQuotientPresentation public
+
+------------------------------------------------------------------------
 -- The exact well-definedness condition for quotienting a correspondence.
 ------------------------------------------------------------------------
 
 record QuotientStablePrimeCorrespondence
     {Fine Coarse : Set}
-    (project : Fine → Coarse)
+    (quotient : Quotient.QuotientInterfaceOn Fine Coarse)
     (fineHecke : Hecke.PrimeCorrespondenceHeckeOn Fine) : Set₁ where
   field
-    sectioned : SectionedProjection project
+    exactPresentation : ExactQuotientPresentation quotient
 
-    correspondenceCongruent :
+    correspondenceRespectsEquiv :
       (prime : Monster.SSP) →
-      (left right : Fine) →
-      project left ≡ project right →
-      Hecke.map15 project
+      ∀ {left right : Fine} →
+      Quotient.EquivalenceOn._≈_
+        (Quotient.QuotientInterfaceOn.equiv quotient) left right →
+      Hecke.map15 (Quotient.QuotientInterfaceOn.proj quotient)
         (Hecke.PrimeCorrespondenceHeckeOn.correspondence fineHecke prime left)
       ≡
-      Hecke.map15 project
+      Hecke.map15 (Quotient.QuotientInterfaceOn.proj quotient)
         (Hecke.PrimeCorrespondenceHeckeOn.correspondence fineHecke prime right)
 
 open QuotientStablePrimeCorrespondence public
 
 inducedCorrespondence :
   ∀ {Fine Coarse : Set}
-    {project : Fine → Coarse}
+    {quotient : Quotient.QuotientInterfaceOn Fine Coarse}
     {fineHecke : Hecke.PrimeCorrespondenceHeckeOn Fine} →
-  QuotientStablePrimeCorrespondence project fineHecke →
+  QuotientStablePrimeCorrespondence quotient fineHecke →
   Monster.SSP → Coarse → Vec15 Coarse
 inducedCorrespondence
-  {project = project} {fineHecke = fineHecke}
+  {quotient = quotient} {fineHecke = fineHecke}
   descent prime coarse =
-  Hecke.map15 project
+  Hecke.map15 (Quotient.QuotientInterfaceOn.proj quotient)
     (Hecke.PrimeCorrespondenceHeckeOn.correspondence fineHecke prime
-      (section (sectioned descent) coarse))
+      (Quotient.QuotientInterfaceOn.representative quotient coarse))
 
 inducedHecke :
   ∀ {Fine Coarse : Set}
-    {project : Fine → Coarse}
+    {quotient : Quotient.QuotientInterfaceOn Fine Coarse}
     {fineHecke : Hecke.PrimeCorrespondenceHeckeOn Fine} →
-  QuotientStablePrimeCorrespondence project fineHecke →
+  QuotientStablePrimeCorrespondence quotient fineHecke →
   Hecke.PrimeCorrespondenceHeckeOn Coarse
 inducedHecke descent =
   record
@@ -126,46 +129,52 @@ inducedHecke descent =
 
 projectedCorrespondenceCommutes :
   ∀ {Fine Coarse : Set}
-    {project : Fine → Coarse}
+    {quotient : Quotient.QuotientInterfaceOn Fine Coarse}
     {fineHecke : Hecke.PrimeCorrespondenceHeckeOn Fine}
-    (descent : QuotientStablePrimeCorrespondence project fineHecke)
+    (descent : QuotientStablePrimeCorrespondence quotient fineHecke)
     (prime : Monster.SSP)
     (fine : Fine) →
-  Hecke.map15 project
+  Hecke.map15 (Quotient.QuotientInterfaceOn.proj quotient)
     (Hecke.PrimeCorrespondenceHeckeOn.correspondence fineHecke prime fine)
   ≡
   Hecke.PrimeCorrespondenceHeckeOn.correspondence
-    (inducedHecke descent) prime (project fine)
+    (inducedHecke descent) prime
+    (Quotient.QuotientInterfaceOn.proj quotient fine)
 projectedCorrespondenceCommutes
-  {project = project} descent prime fine =
-  correspondenceCongruent descent prime fine
-    (section (sectioned descent) (project fine))
-    (sym (sectionRightInverse (sectioned descent) (project fine)))
+  {quotient = quotient} descent prime fine =
+  correspondenceRespectsEquiv descent prime
+    (projectionComplete (exactPresentation descent)
+      (sym
+        (Quotient.QuotientInterfaceOn.section quotient
+          (Quotient.QuotientInterfaceOn.proj quotient fine))))
 
 ------------------------------------------------------------------------
--- Consequently the actual finite Hecke observable operator commutes with q.
+-- Consequently the actual finite Hecke observable operator commutes with proj.
 ------------------------------------------------------------------------
 
 projectedObservableHeckeCommutes :
   ∀ {Fine Coarse : Set}
-    {project : Fine → Coarse}
+    {quotient : Quotient.QuotientInterfaceOn Fine Coarse}
     {fineHecke : Hecke.PrimeCorrespondenceHeckeOn Fine}
-    (descent : QuotientStablePrimeCorrespondence project fineHecke)
+    (descent : QuotientStablePrimeCorrespondence quotient fineHecke)
     (observable : Coarse → Nat)
     (prime : Monster.SSP)
     (fine : Fine) →
   Hecke.PrimeCorrespondenceHeckeOn.operator fineHecke
-    (λ state → observable (project state)) prime fine
+    (λ state → observable
+      (Quotient.QuotientInterfaceOn.proj quotient state))
+    prime fine
   ≡
   Hecke.PrimeCorrespondenceHeckeOn.operator (inducedHecke descent)
-    observable prime (project fine)
+    observable prime (Quotient.QuotientInterfaceOn.proj quotient fine)
 projectedObservableHeckeCommutes
-  {project = project} {fineHecke = fineHecke}
+  {quotient = quotient} {fineHecke = fineHecke}
   descent observable prime fine =
   trans
     (cong Hecke.sum15
       (sym
-        (map15Fusion observable project
+        (map15Fusion observable
+          (Quotient.QuotientInterfaceOn.proj quotient)
           (Hecke.PrimeCorrespondenceHeckeOn.correspondence
             fineHecke prime fine))))
     (cong
@@ -174,23 +183,23 @@ projectedObservableHeckeCommutes
 
 ------------------------------------------------------------------------
 -- Canonicality: any other coarse correspondence commuting with the same
--- sectioned projection agrees pointwise with the induced one.
+-- quotient agrees pointwise with the induced correspondence.
 ------------------------------------------------------------------------
 
 inducedCorrespondenceUnique :
   ∀ {Fine Coarse : Set}
-    {project : Fine → Coarse}
+    {quotient : Quotient.QuotientInterfaceOn Fine Coarse}
     {fineHecke : Hecke.PrimeCorrespondenceHeckeOn Fine}
-    (descent : QuotientStablePrimeCorrespondence project fineHecke)
+    (descent : QuotientStablePrimeCorrespondence quotient fineHecke)
     (candidate : Hecke.PrimeCorrespondenceHeckeOn Coarse)
     (candidateCommutes :
       (prime : Monster.SSP) →
       (fine : Fine) →
-      Hecke.map15 project
+      Hecke.map15 (Quotient.QuotientInterfaceOn.proj quotient)
         (Hecke.PrimeCorrespondenceHeckeOn.correspondence fineHecke prime fine)
       ≡
-      Hecke.PrimeCorrespondenceHeckeOn.correspondence
-        candidate prime (project fine))
+      Hecke.PrimeCorrespondenceHeckeOn.correspondence candidate prime
+        (Quotient.QuotientInterfaceOn.proj quotient fine))
     (prime : Monster.SSP)
     (coarse : Coarse) →
   Hecke.PrimeCorrespondenceHeckeOn.correspondence candidate prime coarse
@@ -198,13 +207,15 @@ inducedCorrespondenceUnique :
   Hecke.PrimeCorrespondenceHeckeOn.correspondence
     (inducedHecke descent) prime coarse
 inducedCorrespondenceUnique
+  {quotient = quotient}
   descent candidate candidateCommutes prime coarse =
   trans
     (cong
       (Hecke.PrimeCorrespondenceHeckeOn.correspondence candidate prime)
-      (sym (sectionRightInverse (sectioned descent) coarse)))
+      (sym (Quotient.QuotientInterfaceOn.section quotient coarse)))
     (sym
-      (candidateCommutes prime (section (sectioned descent) coarse)))
+      (candidateCommutes prime
+        (Quotient.QuotientInterfaceOn.representative quotient coarse)))
 
 ------------------------------------------------------------------------
 -- Authority boundary.
@@ -212,6 +223,10 @@ inducedCorrespondenceUnique
 
 record HeckeCorrespondenceQuotientBoundary : Set where
   field
+    existingQuotientRepresentationAPIReused : Bool
+    existingQuotientRepresentationAPIReusedIsTrue :
+      existingQuotientRepresentationAPIReused ≡ true
+
     quotientCorrespondenceConstructedFromCongruence : Bool
     quotientCorrespondenceConstructedFromCongruenceIsTrue :
       quotientCorrespondenceConstructedFromCongruence ≡ true
@@ -220,9 +235,9 @@ record HeckeCorrespondenceQuotientBoundary : Set where
     observableIntertwinerDerivedRatherThanAssumedIsTrue :
       observableIntertwinerDerivedRatherThanAssumed ≡ true
 
-    inducedCorrespondenceCanonicalForChosenSectionedProjection : Bool
-    inducedCorrespondenceCanonicalForChosenSectionedProjectionIsTrue :
-      inducedCorrespondenceCanonicalForChosenSectionedProjection ≡ true
+    inducedCorrespondenceCanonicalForChosenExactQuotient : Bool
+    inducedCorrespondenceCanonicalForChosenExactQuotientIsTrue :
+      inducedCorrespondenceCanonicalForChosenExactQuotient ≡ true
 
     currentSO3ReductionIdentifiedWithSupportMaskHecke : Bool
     currentSO3ReductionIdentifiedWithSupportMaskHeckeIsFalse :
@@ -232,12 +247,14 @@ canonicalHeckeCorrespondenceQuotientBoundary :
   HeckeCorrespondenceQuotientBoundary
 canonicalHeckeCorrespondenceQuotientBoundary =
   record
-    { quotientCorrespondenceConstructedFromCongruence = true
+    { existingQuotientRepresentationAPIReused = true
+    ; existingQuotientRepresentationAPIReusedIsTrue = refl
+    ; quotientCorrespondenceConstructedFromCongruence = true
     ; quotientCorrespondenceConstructedFromCongruenceIsTrue = refl
     ; observableIntertwinerDerivedRatherThanAssumed = true
     ; observableIntertwinerDerivedRatherThanAssumedIsTrue = refl
-    ; inducedCorrespondenceCanonicalForChosenSectionedProjection = true
-    ; inducedCorrespondenceCanonicalForChosenSectionedProjectionIsTrue = refl
+    ; inducedCorrespondenceCanonicalForChosenExactQuotient = true
+    ; inducedCorrespondenceCanonicalForChosenExactQuotientIsTrue = refl
     ; currentSO3ReductionIdentifiedWithSupportMaskHecke = false
     ; currentSO3ReductionIdentifiedWithSupportMaskHeckeIsFalse = refl
     }
