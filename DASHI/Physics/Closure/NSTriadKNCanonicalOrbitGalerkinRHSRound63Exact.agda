@@ -30,9 +30,10 @@ module DASHI.Physics.Closure.NSTriadKNCanonicalOrbitGalerkinRHSRound63Exact wher
 open import Agda.Primitive using (Level)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using (List)
-open import Data.Empty using (⊥)
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.Nat using (zero; suc)
+open import Data.Integer.Base using (+_; -[1+_])
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier as Cube
@@ -116,12 +117,12 @@ canonicalModeIncludedInPhysicalSystem family state mode member =
     (sym retainedMeaning)
     nonzeroMember
 
-canonicalOrbitRHSCoeefficients :
+canonicalOrbitRHSCoefficients :
   ∀ {r} {F : C3.RealField r} {E : C3.IntegerEmbedding F} →
   Canonical.CutoffSameObjectFamily F E →
   (state : State.ReconstructedPhysicalState F E) →
   List (Phase.TransverseModeCoefficient F E)
-canonicalOrbitRHSCoeefficients family state =
+canonicalOrbitRHSCoefficients family state =
   let
     builder = Adapter.canonicalStateIndexedPhysicalGalerkinSystem family
     source = Orbit.canonicalCutoffOrbitModes
@@ -135,7 +136,7 @@ canonicalOrbitRHSCoefficientWitness :
     (family : Canonical.CutoffSameObjectFamily F E)
     (state : State.ReconstructedPhysicalState F E)
     coefficient →
-  coefficient State.∈ canonicalOrbitRHSCoeefficients family state →
+  coefficient State.∈ canonicalOrbitRHSCoefficients family state →
   Concrete.LiteralCoefficientWitness
     (Adapter.canonicalStateIndexedPhysicalGalerkinSystem family)
     state coefficient
@@ -156,13 +157,13 @@ canonicalOrbitRHSState :
   State.ReconstructedPhysicalState F E
 canonicalOrbitRHSState family state =
   State.reconstructed-physical-state
-    (canonicalOrbitRHSCoeefficients family state)
+    (canonicalOrbitRHSCoefficients family state)
     outputNonzero
   where
   builder = Adapter.canonicalStateIndexedPhysicalGalerkinSystem family
 
   outputNonzero : ∀ coefficient →
-    coefficient State.∈ canonicalOrbitRHSCoeefficients family state →
+    coefficient State.∈ canonicalOrbitRHSCoefficients family state →
     Z3.NonZeroMode (Phase.coefficientMode coefficient)
   outputNonzero coefficient member =
     let
@@ -180,7 +181,7 @@ canonicalOrbitRHSCountIsCoordinateCount :
   ∀ {r} {F : C3.RealField r} {E : C3.IntegerEmbedding F}
     (family : Canonical.CutoffSameObjectFamily F E)
     (state : State.ReconstructedPhysicalState F E) →
-  Growth.length (canonicalOrbitRHSCoeefficients family state)
+  Growth.length (canonicalOrbitRHSCoefficients family state)
   ≡ Growth.length
       (Orbit.canonicalCutoffOrbitModes
         (Canonical.cutoff (Canonical.datumAt family state)))
