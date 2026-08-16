@@ -15,25 +15,26 @@ module DASHI.Physics.YangMills.BalabanWilsonBooleanFourCubeMobiusExact where
 --
 -- DASHI CONTRIBUTION
 --
--- Give the literal Boolean four-cube its canonical Möbius transform.  For a
+-- Give the literal Boolean four-cube its canonical Möbius transform. For a
 -- function F on the sixteen plaquette-factor subsets, define
 --
 --   a(S) = sum_{T subseteq S} (-1)^(|S|-|T|) F(T).
 --
 -- Since the carrier is fixed and finite, the transform is written out
 -- definitionally rather than hiding subset enumeration behind another
--- certificate.  Exact rational normalization proves
+-- certificate. Exact rational normalization proves
 --
 --   sum_{S nonempty} a(S) = F({0,1,2,3}) - F(empty).
 --
 -- Hence whenever the background/empty evaluation vanishes, the fifteen Wilson
--- atoms reconstruct the full plaquette value automatically.  This removes the
+-- atoms reconstruct the full plaquette value automatically. This removes the
 -- old need to supply arbitrary atoms together with a reconstruction equality.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Data.Rational.Base as ℚ using (ℚ; _+_; _-_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _-_)
 import Data.Rational.Tactic.RingSolver as ℚRing
+open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
@@ -107,18 +108,16 @@ nonemptyMobiusSumExact value =
     (value Cube.s0123)
 
 nonemptyMobiusSumWithZeroBackground :
-  ∀ value → value Cube.empty ≡ ℚ.0ℚ →
+  ∀ value → value Cube.empty ≡ 0ℚ →
   Sums.sumRational Cube.nonemptySubsets4 (mobiusAtom value)
   ≡ value Cube.s0123
 nonemptyMobiusSumWithZeroBackground value emptyZero =
-  Relation.Binary.PropositionalEquality.trans
+  trans
     (nonemptyMobiusSumExact value)
-    (Relation.Binary.PropositionalEquality.subst
+    (subst
       (λ background → value Cube.s0123 - background ≡ value Cube.s0123)
-      (Relation.Binary.PropositionalEquality.sym emptyZero)
+      (sym emptyZero)
       (ℚRing.solve-∀ (value Cube.s0123)))
-  where
-  open import Relation.Binary.PropositionalEquality
 
 booleanFourCubeMobiusDefinitionLevel : ProofLevel
 booleanFourCubeMobiusDefinitionLevel = machineChecked
