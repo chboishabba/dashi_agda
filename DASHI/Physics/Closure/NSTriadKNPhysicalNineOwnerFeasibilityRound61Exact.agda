@@ -59,6 +59,7 @@ open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 open import Relation.Nullary.Decidable.Core using (toWitness)
 
+import DASHI.Physics.Closure.NSTriadKNComExplicitSoftCoefficientRound50Exact as ComCoefficient
 import DASHI.Physics.Closure.NSTriadKNComLiftingFeasibilityRound52Exact as Com
 import DASHI.Physics.Closure.NSTriadKNJointSoftCorrectionBudgetRound54Exact as Joint
 import DASHI.Physics.Closure.NSTriadKNJointGlobalFeasibilityRound54Exact as Existing
@@ -144,16 +145,16 @@ comNumeratorNonnegative :
   (data : PhysicalNineOwnerScalars) → 0ℚ ≤ comNumerator data
 comNumeratorNonnegative data =
   let
-    coefficientNN : 0ℚ ≤ Com.Com.oneThousandTwentyFourth133
+    coefficientNN : 0ℚ ≤ ComCoefficient.oneThousandTwentyFourth133
     coefficientNN =
-      Com.Com.oneThousandTwentyFourth133Nonnegative
+      toWitness {a? = 0ℚ ≤? ComCoefficient.oneThousandTwentyFourth133} _
     multiplicityNN = comMultiplicityNonnegative data
     instance
       coefficientNNI = nonNegative coefficientNN
       multiplicityNNI = nonNegative multiplicityNN
       productNNI =
         ℚP.nonNeg*nonNeg⇒nonNeg
-          Com.Com.oneThousandTwentyFourth133
+          ComCoefficient.oneThousandTwentyFourth133
           (comMultiplicity data)
   in
   ℚP.nonNegative⁻¹ (comNumerator data)
