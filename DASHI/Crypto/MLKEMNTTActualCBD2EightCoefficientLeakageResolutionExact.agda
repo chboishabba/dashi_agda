@@ -177,12 +177,6 @@ sameRawImpliesSameObserved channel left right refl = refl
 
 ------------------------------------------------------------------------
 -- Exact criterion for when a coarsening preserves the dangerous raw resolution.
---
--- This is the implementation-facing target for Hamming-weight/distance, timing,
--- masked-share, frequency, cache-line or other concrete channels: equality of
--- the *observed* values must reflect equality of the raw signatures on the
--- actual secret image.  Global injectivity of `observe` outside that image is
--- unnecessary.
 ------------------------------------------------------------------------
 
 ObservationReflectsRawOnSecretImage : ObservationCoarsening → Set
@@ -216,20 +210,18 @@ coarseningCollisionRefutesObservedInjectivity :
   CoarseningCollisionWitness channel →
   RawInjectiveOn (coarsenedObservation channel) →
   ⊥
-coarseningCollisionRefutesObservedInjectivity witness observedInjective =
+coarseningCollisionRefutesObservedInjectivity {channel} witness observedInjective =
   rawDifferent witness
-    (λ-equality-forbidden
+    (secretEqualityGivesRawEquality
       (observedInjective
         (left witness)
         (right witness)
         (observedSame witness)))
   where
-  -- If the coarsened observation were injective, the two secrets would be
-  -- equal; congruence of the raw signature would then contradict rawDifferent.
-  λ-equality-forbidden :
+  secretEqualityGivesRawEquality :
     left witness ≡ right witness →
     rawSignature channel (left witness) ≡ rawSignature channel (right witness)
-  λ-equality-forbidden refl = refl
+  secretEqualityGivesRawEquality refl = refl
 
 ------------------------------------------------------------------------
 -- Tiny exact counterexample showing why raw injectivity cannot be promoted to
