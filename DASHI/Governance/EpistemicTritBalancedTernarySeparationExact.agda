@@ -20,13 +20,10 @@ module DASHI.Governance.EpistemicTritBalancedTernarySeparationExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
+open import Data.Product using (_×_; _,_)
 
 import DASHI.Ontology.EpistemicTrit as Epistemic
 import DASHI.Foundations.BalancedTernaryStageSymmetryExact as BT
-
-------------------------------------------------------------------------
--- Resolved evidence carrier excludes unresolved by construction.
-------------------------------------------------------------------------
 
 data ResolvedPolarity : Set where
   resolvedAgainst resolvedFor : ResolvedPolarity
@@ -64,10 +61,6 @@ supportedMapsPositive = refl
 contradictedMapsNegative : resolvedViewToDigit contradictedView ≡ BT.neg
 contradictedMapsNegative = refl
 
-------------------------------------------------------------------------
--- Unresolved cannot be smuggled into a resolved view by choosing a polarity.
-------------------------------------------------------------------------
-
 unresolvedCannotResolveFor :
   Epistemic.unresolved ≡ resolvedState resolvedFor → ⊥
 unresolvedCannotResolveFor ()
@@ -75,11 +68,6 @@ unresolvedCannotResolveFor ()
 unresolvedCannotResolveAgainst :
   Epistemic.unresolved ≡ resolvedState resolvedAgainst → ⊥
 unresolvedCannotResolveAgainst ()
-
-------------------------------------------------------------------------
--- If a consumer truly wants a total ternary encoding, the unresolved digit is
--- an explicit policy parameter.  The core does not force zeroDigit.
-------------------------------------------------------------------------
 
 record TotalEpistemicDigitPolicy : Set where
   constructor totalEpistemicDigitPolicy
@@ -110,13 +98,6 @@ unresolvedEncodingDependsOnPolicy :
   × encodeWithPolicy negativeUnresolvedPolicy Epistemic.unresolved ≡ BT.neg
   × encodeWithPolicy positiveUnresolvedPolicy Epistemic.unresolved ≡ BT.pos
 unresolvedEncodingDependsOnPolicy = refl , refl , refl
-  where
-    open import Data.Product using (_×_; _,_)
-
-------------------------------------------------------------------------
--- Boundary: equal cardinality and convenient neutral symbols do not collapse
--- epistemic uncertainty into signed neutrality.
-------------------------------------------------------------------------
 
 record EpistemicTernarySeparationBoundary : Set where
   constructor epistemicTernarySeparationBoundary
