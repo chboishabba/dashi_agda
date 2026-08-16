@@ -11,7 +11,7 @@ import sys
 DECL_RE = re.compile(
     r"^\s*(?:set_option\b.*\bin\s*)?(?:@[\[].*?[\]]\s*)?"
     r"(theorem|lemma|def|abbrev|structure|class|inductive|instance)\s+"
-    r"([A-Za-z0-9_'«»]+)",
+    r"([A-Za-z0-9_'.?«»]+)",
     re.M,
 )
 
@@ -27,6 +27,18 @@ def sha256(path: pathlib.Path) -> str:
 def read_tsv(path: pathlib.Path) -> list[dict[str, str]]:
     with path.open(encoding="utf-8", newline="") as handle:
         return list(csv.DictReader(handle, delimiter="\t"))
+
+
+def declaration_matches(theorem: str, declared: str) -> bool:
+    """Match a fully-qualified bridge name against its source-local declaration.
+
+    Lean permits declaration names such as `RequiresStatement.trans` and names
+    containing `?`, so checking only the final dot-separated leaf is too weak.
+    The source-local name must be either the full name or a namespace suffix of
+    the fully-qualified contract.
+    """
+
+    return theorem == declared or theorem.endswith("." + declared)
 
 
 def main() -> int:
@@ -96,10 +108,9 @@ def main() -> int:
             match.group(2)
             for match in DECL_RE.finditer(path.read_text(encoding="utf-8"))
         }
-        leaf = theorem.rsplit(".", 1)[-1]
-        if leaf not in declared:
+        if not any(declaration_matches(theorem, name) for name in declared):
             failures.append(
-                f"contract {theorem}: declaration {leaf!r} not found in {module}.lean"
+                f"contract {theorem}: no matching declaration found in {module}.lean"
             )
 
     if failures:
