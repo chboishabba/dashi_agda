@@ -43,7 +43,6 @@ open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _<_)
-open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 import DASHI.Physics.Closure.NSTriadKNNineOwnerCriticalAbsorptionRound28Exact as Nine
@@ -115,34 +114,55 @@ twoSoftSharpEtaTotalMeaning :
 twoSoftSharpEtaTotalMeaning soft critical strictGap {data} capIsSharp roots =
   let
     positiveScale = positiveScaleFromTwoSoft soft critical strictGap
+    oldS = Weighted.rootSum (TwoSoftG.asThreeSlotRoots roots)
+    newS = TwoSoftG.twoRootSum roots
+    inv = SharpGate.correctionMarginInverse positiveScale
+
+    sharpMeaning :
+      G.hhBadEta data
+        + Weighted.weightedSoftEta (TwoSoftG.asThreeSlotRoots roots)
+        + Existing.hardFourClassTax
+      ≡ SharpGate.explicitSharpEtaTotal
+          positiveScale data (TwoSoftG.asThreeSlotRoots roots)
     sharpMeaning =
       SharpGate.sharpWeightedEtaTotalMeaning
         positiveScale capIsSharp (TwoSoftG.asThreeSlotRoots roots)
-    rootMeaning = TwoSoftG.threeSlotRootSumIsTwoRootSum roots
+
     kMeaning : SharpGate.criticalScale positiveScale ≡ C9.criticalScale critical
     kMeaning = refl
+
+    rootMeaning : oldS ≡ newS
+    rootMeaning = TwoSoftG.threeSlotRootSumIsTwoRootSum roots
+
+    moveK :
+      SharpGate.explicitSharpEtaTotal
+        positiveScale data (TwoSoftG.asThreeSlotRoots roots)
+      ≡ G.hhBadEta data
+        + C9.criticalScale critical * oldS * oldS * inv
+        + Existing.oneSixteenth
+    moveK =
+      cong
+        (λ selectedK →
+          G.hhBadEta data + selectedK * oldS * oldS * inv
+            + Existing.oneSixteenth)
+        kMeaning
+
+    moveS :
+      G.hhBadEta data
+        + C9.criticalScale critical * oldS * oldS * inv
+        + Existing.oneSixteenth
+      ≡ G.hhBadEta data
+        + C9.criticalScale critical * newS * newS * inv
+        + Existing.oneSixteenth
+    moveS =
+      cong
+        (λ selectedS →
+          G.hhBadEta data
+            + C9.criticalScale critical * selectedS * selectedS * inv
+            + Existing.oneSixteenth)
+        rootMeaning
   in
-  trans sharpMeaning
-    (cong
-      (λ softPart → G.hhBadEta data + softPart + Existing.oneSixteenth)
-      (trans
-        (cong
-          (λ selectedK →
-            selectedK
-            * Weighted.rootSum (TwoSoftG.asThreeSlotRoots roots)
-            * Weighted.rootSum (TwoSoftG.asThreeSlotRoots roots)
-            * SharpGate.correctionMarginInverse positiveScale)
-          kMeaning)
-        (subst
-          (λ selectedS →
-            C9.criticalScale critical
-            * Weighted.rootSum (TwoSoftG.asThreeSlotRoots roots)
-            * Weighted.rootSum (TwoSoftG.asThreeSlotRoots roots)
-            * SharpGate.correctionMarginInverse positiveScale
-            ≡ C9.criticalScale critical * selectedS * selectedS
-              * SharpGate.correctionMarginInverse positiveScale)
-          rootMeaning
-          refl)))
+  trans sharpMeaning (trans moveK moveS)
 
 twoSoftSharpStrictAbsorptionFromExplicitGate :
   ∀ {balances : Nat → Nine.NineOwnerCriticalBalance}
