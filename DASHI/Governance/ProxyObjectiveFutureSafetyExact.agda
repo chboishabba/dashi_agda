@@ -23,8 +23,10 @@ module DASHI.Governance.ProxyObjectiveFutureSafetyExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.String using (String)
+open import Agda.Builtin.Unit using (⊤; tt)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.AdmissibleReachability as Reachability
@@ -85,6 +87,101 @@ proxyFutureDefectRefutesWelfareSufficiency sufficient defect =
       (samePresentProxy defect)
       (leftExecution defect)
       (rightExecution defect))
+
+------------------------------------------------------------------------
+-- Exact finite regression.
+--
+-- Two present states have the same proxy observation.  Under the same one-step
+-- admissible action they evolve to states with different welfare observations.
+-- Therefore present proxy equality is not a future-welfare-sufficient quotient.
+------------------------------------------------------------------------
+
+data FiniteState : Set where
+  leftBefore rightBefore leftAfter rightAfter : FiniteState
+
+data FiniteAction : Set where advance : FiniteAction
+
+finiteStep : FiniteState → FiniteState
+finiteStep leftBefore = leftAfter
+finiteStep rightBefore = rightAfter
+finiteStep leftAfter = leftAfter
+finiteStep rightAfter = rightAfter
+
+finiteSystem : Dependency.DependentActionSystem FiniteState FiniteAction
+finiteSystem = record
+  { Precondition = λ state action → ⊤
+  ; Postcondition = λ before action after → after ≡ finiteStep before
+  ; actionLabel = λ action → "advance"
+  }
+
+finiteAdmissible :
+  (state : FiniteState) →
+  Dependency.AdmissibleAction finiteSystem state advance
+finiteAdmissible state = record
+  { precondition = tt
+  ; after = finiteStep state
+  ; postcondition = refl
+  ; dependencyReceipt = "finite proxy/welfare regression transition"
+  }
+
+finiteProxy : FiniteState → Bool
+finiteProxy _ = false
+
+finiteWelfare : FiniteState → Bool
+finiteWelfare leftBefore = false
+finiteWelfare rightBefore = false
+finiteWelfare leftAfter = false
+finiteWelfare rightAfter = true
+
+finiteProxyWelfareSystem : ProxyWelfareSystem
+finiteProxyWelfareSystem =
+  proxyWelfareSystem
+    FiniteState
+    FiniteAction
+    Bool
+    Bool
+    finiteSystem
+    finiteProxy
+    finiteWelfare
+
+leftExecution :
+  Reachability.Executes finiteSystem
+    (advance ∷ []) leftBefore leftAfter
+leftExecution =
+  Reachability.executesCons (finiteAdmissible leftBefore) Reachability.executesNil
+
+rightExecution :
+  Reachability.Executes finiteSystem
+    (advance ∷ []) rightBefore rightAfter
+rightExecution =
+  Reachability.executesCons (finiteAdmissible rightBefore) Reachability.executesNil
+
+falseNotTrue : false ≡ true → ⊥
+falseNotTrue ()
+
+finiteProxyFutureDefect :
+  ProxyFutureWelfareDefect finiteProxyWelfareSystem
+finiteProxyFutureDefect =
+  proxyFutureWelfareDefect
+    (advance ∷ [])
+    leftBefore
+    rightBefore
+    leftAfter
+    rightAfter
+    refl
+    leftExecution
+    rightExecution
+    falseNotTrue
+
+finiteProxyIsNotFutureWelfareSufficient :
+  ProxySufficientForFutureWelfare finiteProxyWelfareSystem → ⊥
+finiteProxyIsNotFutureWelfareSufficient sufficient =
+  proxyFutureDefectRefutesWelfareSufficiency
+    sufficient finiteProxyFutureDefect
+
+------------------------------------------------------------------------
+-- Adapter boundary back to ResponsiveInfluencePolicy.
+------------------------------------------------------------------------
 
 record InfluenceProxyAdapter
   (S : Influence.InfluenceSystem) : Set₁ where
