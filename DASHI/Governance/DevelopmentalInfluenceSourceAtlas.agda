@@ -3,14 +3,6 @@ module DASHI.Governance.DevelopmentalInfluenceSourceAtlas where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
-------------------------------------------------------------------------
--- Source atlas for the developmental-influence / epistemic-dependency lane.
---
--- These records bind bibliographic provenance to bounded formal roles.  A
--- source entry does not by itself promote a causal, clinical, legal, religious
--- or political conclusion.
-------------------------------------------------------------------------
-
 record ScholarlySource : Set where
   constructor scholarlySource
   field
@@ -118,6 +110,56 @@ philipMorrisLunchablesPrimary =
     "DOI 10.2105/AJPH.2026.308491; PMID 42233189; PMCID PMC13277455"
     "primary internal-document case study supporting a bounded Philip Morris tobacco-to-food R&D transfer witness, including consumer-driven product development and better-for-you reformulation; does not establish that all food engineering derives from tobacco"
 
+blackwellExperimentComparison : ScholarlySource
+blackwellExperimentComparison =
+  mkSource
+    "David Blackwell"
+    "Equivalent Comparisons of Experiments"
+    "The Annals of Mathematical Statistics 24(2):265-272"
+    "1953"
+    "DOI 10.1214/aoms/1177729032"
+    "supports comparison-of-information vocabulary; DASHI supplies the exact observation-relative compression and separating-query theorems"
+
+nissenbaumContextualIntegrity : ScholarlySource
+nissenbaumContextualIntegrity =
+  mkSource
+    "Helen Nissenbaum"
+    "Privacy as Contextual Integrity"
+    "Washington Law Review 79(1):119-158"
+    "2004"
+    "journal citation; no DOI listed in the cited record"
+    "supports context-relative information-flow vocabulary; does not by itself establish a legal or normative verdict for any named deployment"
+
+washingtonAccessJusticeTechnologyPrinciples : ScholarlySource
+washingtonAccessJusticeTechnologyPrinciples =
+  mkSource
+    "Washington State Access to Justice Board"
+    "Washington State Access to Justice Technology Principles"
+    "Washington Law Review 79(1):5"
+    "2004"
+    "journal citation; no DOI listed in the cited record"
+    "supports access-to-justice vocabulary in which meaningful access includes procedural information and a just process includes timeliness, affordability and transparency; does not establish a binding legal threshold for the DASHI cost carrier"
+
+cousotAbstractInterpretation : ScholarlySource
+cousotAbstractInterpretation =
+  mkSource
+    "Patrick Cousot; Radhia Cousot"
+    "Abstract interpretation: a unified lattice model for static analysis of programs by construction or approximation of fixpoints"
+    "POPL 1977:238-252"
+    "1977"
+    "DOI 10.1145/512950.512973"
+    "supports abstraction/concrete-semantics vocabulary; DASHI supplies the consumer-relative future-safety and proxy/welfare trace theorems"
+
+mooreKearfottCloudIntervalAnalysis : ScholarlySource
+mooreKearfottCloudIntervalAnalysis =
+  mkSource
+    "Ramon E. Moore; R. Baker Kearfott; Michael J. Cloud"
+    "Introduction to Interval Analysis"
+    "SIAM, Other Titles in Applied Mathematics 110"
+    "2009"
+    "DOI 10.1137/1.9780898717716"
+    "supports interval/enclosure vocabulary; DASHI supplies the abstract ordered-evidence composition theorem and does not infer empirical probabilities"
+
 data SourceBoundary : Set where
   bibliographyIsNotCausality : SourceBoundary
   associationIsNotMechanism : SourceBoundary
@@ -125,6 +167,10 @@ data SourceBoundary : Set where
   developmentalInfluenceIsNotIndoctrination : SourceBoundary
   politicalSimilarityIsNotCommonCommand : SourceBoundary
   oneTransferCaseIsNotUniversalIndustryGenealogy : SourceBoundary
+  informationOrderIsNotGovernanceVerdict : SourceBoundary
+  abstractionSafetyIsConsumerRelative : SourceBoundary
+  accessPrincipleIsNotAutomaticLegalThreshold : SourceBoundary
+  intervalEnclosureIsNotProbabilityClaim : SourceBoundary
 
 canonicalSourceBoundaries : List SourceBoundary
 canonicalSourceBoundaries =
@@ -134,4 +180,8 @@ canonicalSourceBoundaries =
   ∷ developmentalInfluenceIsNotIndoctrination
   ∷ politicalSimilarityIsNotCommonCommand
   ∷ oneTransferCaseIsNotUniversalIndustryGenealogy
+  ∷ informationOrderIsNotGovernanceVerdict
+  ∷ abstractionSafetyIsConsumerRelative
+  ∷ accessPrincipleIsNotAutomaticLegalThreshold
+  ∷ intervalEnclosureIsNotProbabilityClaim
   ∷ []
