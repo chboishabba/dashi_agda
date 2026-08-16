@@ -24,8 +24,10 @@ module DASHI.Physics.Closure.NSTriadKNABCCompressedInhabitationRound61Exact wher
 -- sources.  After the Round61 reductions, B and C should not be packaged by
 -- callers in that stronger form:
 --
---   B: one active literal normalized-PQ = six-three-Gram same-object theorem
---      derives the 17/64, 65/512, 65/512 source fields and 133/256 aggregate;
+--   B: exact active literal normalized-PQ = actual factorized physical Gram,
+--      plus a six-three bound on THAT cell's overlap, derives the 17/64,
+--      65/512, 65/512 source fields and the 133/256 aggregate.  It does not
+--      equate the physical Gram itself with the six-three envelope candidate;
 --
 --   C: C1 scale bounds plus C2's strict gap and K>0 derive the maximal positive
 --      B_* = ((r-q)-a)/K and hence the complete Round60 fixed-shift capacity.
