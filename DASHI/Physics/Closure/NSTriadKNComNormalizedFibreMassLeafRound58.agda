@@ -12,12 +12,15 @@ module DASHI.Physics.Closure.NSTriadKNComNormalizedFibreMassLeafRound58 where
 -- rational certificate/majorant leaf used by the finite 17/64, 65/512 and
 -- 133/256 arithmetic only.
 --
--- Carrier-correct physical authority now lives in
+-- Carrier-correct same-object physical authority now lives in
 --
---   NSTriadKNComBishopNormalizedMajorantRound62Exact
+--   NSTriadKNComOrderedPhysicalMajorantRound62Exact
 --
--- where physical normalized energy is a Murray--Bishop real and the rational
--- targets enter only through the exact ordered rational embedding.
+-- where normalized energy remains in `Carrier (realField model)` and rational
+-- targets enter only through an ordered rational embedding of THAT carrier.
+-- `NSTriadKNComBishopNormalizedMajorantRound62Exact` is a concrete setoid-real
+-- comparison backend, not a definitional identification with the literal
+-- Fourier `RealField`.
 --
 -- The record name `PhysicalNormalizedOddPQGramRealization` is retained for
 -- dependency compatibility with earlier rounds; its authority is explicitly
