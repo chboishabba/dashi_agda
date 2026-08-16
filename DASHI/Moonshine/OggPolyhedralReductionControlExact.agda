@@ -106,66 +106,57 @@ dimension67IsNotOgg (Monster.p47 , ())
 dimension67IsNotOgg (Monster.p59 , ())
 dimension67IsNotOgg (Monster.p71 , ())
 
-------------------------------------------------------------------------
--- Clean branching is not enough: non-Ogg dimension 9 is multiplicity-free.
-------------------------------------------------------------------------
-
 nineIsCleanOctahedralControl :
   Oct.MultiplicityFree (Oct.branchingSpectrum Spin.j4)
 nineIsCleanOctahedralControl = Oct.j4NineIsMultiplicityFree
 
-------------------------------------------------------------------------
--- No selector invariant under regular-representation addition can be exact
--- on the exhibited Ogg/non-Ogg control pairs.
-------------------------------------------------------------------------
-
 record OctahedralRegularQuotientSelector : Set where
   field
-    select : Oct.OctahedralSpectrum → Bool
-    regularInvariant :
+    octSelect : Oct.OctahedralSpectrum → Bool
+    octRegularInvariant :
       (spectrum : Oct.OctahedralSpectrum) →
-      select (Oct.addSpectrum Oct.regularSpectrum spectrum) ≡ select spectrum
+      octSelect (Oct.addSpectrum Oct.regularSpectrum spectrum) ≡ octSelect spectrum
 
 open OctahedralRegularQuotientSelector public
 
 octahedralControlCollision :
   (selector : OctahedralRegularQuotientSelector) →
-  select selector (Oct.branchingSpectrum Spin.j26)
-  ≡ select selector (Oct.branchingSpectrum Spin.j2)
+  octSelect selector (Oct.branchingSpectrum Spin.j26)
+  ≡ octSelect selector (Oct.branchingSpectrum Spin.j2)
 octahedralControlCollision selector =
   trans
-    (cong (select selector) Oct.j2ToJ26IsTwoRegularShifts)
+    (cong (octSelect selector) Oct.j2ToJ26IsTwoRegularShifts)
     (trans
-      (regularInvariant selector
+      (octRegularInvariant selector
         (Oct.addSpectrum Oct.regularSpectrum
           (Oct.branchingSpectrum Spin.j2)))
-      (regularInvariant selector (Oct.branchingSpectrum Spin.j2)))
+      (octRegularInvariant selector (Oct.branchingSpectrum Spin.j2)))
 
 record IcosahedralRegularQuotientSelector : Set where
   field
-    select : Ico.IcosahedralSpectrum → Bool
-    regularInvariant :
+    icoSelect : Ico.IcosahedralSpectrum → Bool
+    icoRegularInvariant :
       (spectrum : Ico.IcosahedralSpectrum) →
-      select (Ico.addSpectrum Ico.regularSpectrum spectrum) ≡ select spectrum
+      icoSelect (Ico.addSpectrum Ico.regularSpectrum spectrum) ≡ icoSelect spectrum
 
 open IcosahedralRegularQuotientSelector public
 
 icosahedralControlCollision :
   (selector : IcosahedralRegularQuotientSelector) →
-  select selector (Ico.branchingSpectrum Spin.j33)
-  ≡ select selector (Ico.branchingSpectrum Spin.j3)
+  icoSelect selector (Ico.branchingSpectrum Spin.j33)
+  ≡ icoSelect selector (Ico.branchingSpectrum Spin.j3)
 icosahedralControlCollision selector =
   trans
-    (cong (select selector) Ico.j3ToJ33IsOneRegularShift)
-    (regularInvariant selector (Ico.branchingSpectrum Spin.j3))
+    (cong (icoSelect selector) Ico.j3ToJ33IsOneRegularShift)
+    (icoRegularInvariant selector (Ico.branchingSpectrum Spin.j3))
 
 trueNotFalse : true ≡ false → ⊥
 trueNotFalse ()
 
 noExactOggOctahedralRegularQuotientSelector :
   (selector : OctahedralRegularQuotientSelector) →
-  select selector (Oct.branchingSpectrum Spin.j2) ≡ true →
-  select selector (Oct.branchingSpectrum Spin.j26) ≡ false →
+  octSelect selector (Oct.branchingSpectrum Spin.j2) ≡ true →
+  octSelect selector (Oct.branchingSpectrum Spin.j26) ≡ false →
   ⊥
 noExactOggOctahedralRegularQuotientSelector selector selects5 rejects53 =
   trueNotFalse
@@ -177,8 +168,8 @@ noExactOggOctahedralRegularQuotientSelector selector selects5 rejects53 =
 
 noExactOggIcosahedralRegularQuotientSelector :
   (selector : IcosahedralRegularQuotientSelector) →
-  select selector (Ico.branchingSpectrum Spin.j3) ≡ true →
-  select selector (Ico.branchingSpectrum Spin.j33) ≡ false →
+  icoSelect selector (Ico.branchingSpectrum Spin.j3) ≡ true →
+  icoSelect selector (Ico.branchingSpectrum Spin.j33) ≡ false →
   ⊥
 noExactOggIcosahedralRegularQuotientSelector selector selects7 rejects67 =
   trueNotFalse
