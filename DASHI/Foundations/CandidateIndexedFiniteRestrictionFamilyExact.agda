@@ -24,6 +24,11 @@ module DASHI.Foundations.CandidateIndexedFiniteRestrictionFamilyExact where
 -- Ogg by themselves.  The frontier SSP thesis therefore lives at this richer
 -- dependent-family level (or at an equivalent higher-order carrier), without
 -- hard-coding the known Ogg list into the family.
+--
+-- The assembled FiniteRestriction is not a caller-supplied independent field:
+-- it is definitionally built from the same targetFamily, branchingAt and
+-- fixedSpacesAt.  This prevents a dependent-family receipt from silently
+-- carrying an unrelated restriction object.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -50,8 +55,8 @@ record CandidateIndexedFiniteRestrictionFamily : Set₂ where
     fixedSpacesAt :
       Spin.AngularMomentum0To35 → Core.FixedSpaceSpectrum
 
-    restrictionAt :
-      (j : Spin.AngularMomentum0To35) → Core.FiniteRestriction
+    restrictionReceiptAt :
+      Spin.AngularMomentum0To35 → String
 
     familyLabel : String
 
@@ -60,6 +65,17 @@ record CandidateIndexedFiniteRestrictionFamily : Set₂ where
       knownOggListUsedToChooseTarget ≡ false
 
 open CandidateIndexedFiniteRestrictionFamily public
+
+assembledRestriction :
+  (family : CandidateIndexedFiniteRestrictionFamily) →
+  (j : Spin.AngularMomentum0To35) → Core.FiniteRestriction
+assembledRestriction family j =
+  Core.finite-restriction
+    (Spin.continuousSO3Irrep j)
+    (targetFamily family j)
+    (branchingAt family j)
+    (fixedSpacesAt family j)
+    (restrictionReceiptAt family j)
 
 ------------------------------------------------------------------------
 -- Fixed-group control families.
@@ -71,7 +87,8 @@ octahedralConstantFamily =
     { targetFamily = λ _ → Oct.octahedralFamily
     ; branchingAt = Oct.octahedralBranching
     ; fixedSpacesAt = Poly.octahedralFixedSpaces
-    ; restrictionAt = Poly.octahedralFiniteRestriction
+    ; restrictionReceiptAt =
+        λ _ → "SO(3) angular-momentum irrep restricted to rotational S4 control"
     ; familyLabel = "constant rotational-octahedral S4 control family"
     ; knownOggListUsedToChooseTarget = false
     ; knownOggListUsedToChooseTargetIsFalse = refl
@@ -83,11 +100,24 @@ icosahedralConstantFamily =
     { targetFamily = λ _ → Ico.icosahedralFamily
     ; branchingAt = Ico.icosahedralBranching
     ; fixedSpacesAt = Poly.icosahedralFixedSpaces
-    ; restrictionAt = Poly.icosahedralFiniteRestriction
+    ; restrictionReceiptAt =
+        λ _ → "SO(3) angular-momentum irrep restricted to rotational A5 control"
     ; familyLabel = "constant rotational-icosahedral A5 control family"
     ; knownOggListUsedToChooseTarget = false
     ; knownOggListUsedToChooseTargetIsFalse = refl
     }
+
+octahedralAssemblyUsesDeclaredTarget :
+  (j : Spin.AngularMomentum0To35) →
+  Core.targetFamily (assembledRestriction octahedralConstantFamily j)
+  ≡ Oct.octahedralFamily
+octahedralAssemblyUsesDeclaredTarget j = refl
+
+icosahedralAssemblyUsesDeclaredBranching :
+  (j : Spin.AngularMomentum0To35) →
+  Core.branching (assembledRestriction icosahedralConstantFamily j)
+  ≡ Ico.icosahedralBranching j
+icosahedralAssemblyUsesDeclaredBranching j = refl
 
 ------------------------------------------------------------------------
 -- A future candidate-dependent selector must supply its own target family.
@@ -104,6 +134,10 @@ record CandidateIndexedRestrictionBoundary : Set where
     candidateDependentTargetRepresentable : Bool
     candidateDependentTargetRepresentableIsTrue :
       candidateDependentTargetRepresentable ≡ true
+
+    assembledRestrictionCannotDriftFromDeclaredBranching : Bool
+    assembledRestrictionCannotDriftFromDeclaredBranchingIsTrue :
+      assembledRestrictionCannotDriftFromDeclaredBranching ≡ true
 
     fixedPolyhedralControlFamiliesConstructed : Bool
     fixedPolyhedralControlFamiliesConstructedIsTrue :
@@ -122,6 +156,8 @@ canonicalCandidateIndexedRestrictionBoundary =
   record
     { candidateDependentTargetRepresentable = true
     ; candidateDependentTargetRepresentableIsTrue = refl
+    ; assembledRestrictionCannotDriftFromDeclaredBranching = true
+    ; assembledRestrictionCannotDriftFromDeclaredBranchingIsTrue = refl
     ; fixedPolyhedralControlFamiliesConstructed = true
     ; fixedPolyhedralControlFamiliesConstructedIsTrue = refl
     ; exactOggSelectingReductionFamilyConstructed = false
