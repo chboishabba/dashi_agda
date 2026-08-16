@@ -44,7 +44,8 @@ module DASHI.Physics.Closure.NSTriadKNPhysicalNineOwnerFeasibilityRound61Exact w
 --
 -- This equal-third construction is a robust exact fallback.  Round61's
 -- weighted allocator improves it when rational square-root majorants for the
--- three physical numerators are available.
+-- three physical numerators are available.  The final scalar gate is consumed
+-- directly as a proof argument; it is not wrapped in a one-field receipt.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
@@ -120,12 +121,6 @@ softEta data =
 totalNineOwnerEta : PhysicalNineOwnerScalars → ℚ
 totalNineOwnerEta data =
   hhBadEta data + softEta data + Existing.hardFourClassTax
-
-record PhysicalNineOwnerReserve (data : PhysicalNineOwnerScalars) : Set where
-  field
-    strictNineOwnerReserve : totalNineOwnerEta data < 1ℚ
-
-open PhysicalNineOwnerReserve public
 
 correctionCapInversePositive :
   (data : PhysicalNineOwnerScalars) →
@@ -297,14 +292,14 @@ canonicalCriticalBudgetIsExact = threeThirdCapsAreCap
 
 canonicalNineOwnerStrictAbsorption :
   ∀ data →
-  PhysicalNineOwnerReserve data →
+  totalNineOwnerEta data < 1ℚ →
   hhBadEta data
     + Joint.softEtaTotal (canonicalThreeSoftAllocation data)
     + Existing.hardFourClassTax
   < 1ℚ
-canonicalNineOwnerStrictAbsorption data reserve
+canonicalNineOwnerStrictAbsorption data scalarGate
   rewrite canonicalSoftEtaMeaning data =
-  strictNineOwnerReserve reserve
+  scalarGate
 
 physicalNineOwnerFeasibilityConstructedFromOneScalarGate : Bool
 physicalNineOwnerFeasibilityConstructedFromOneScalarGate = true
