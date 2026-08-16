@@ -20,29 +20,67 @@ module DASHI.Physics.YangMills.BalabanP33UniformSelectedMinimizerAtomIntervalExa
 --
 -- DASHI CONTRIBUTION
 --
--- Finish the structural part of G2 without a residual-upper-bound receipt.
--- Over a certified region containing the selected minimizer, the caller gives
--- interval boxes for EACH LITERAL raw and Green atom. The previous module
--- evaluates those boxes into a signed residual endpoint
+-- Make the G2 selected-ball estimate genuinely UNIFORM rather than accepting
+-- a fresh endpoint inequality at each configuration.
 --
---       U(A) = sum rawUpper_S - sum greenLower_(S,T).
+-- The caller supplies ONE region-wide family of interval boxes
 --
--- The only final numerical certificate accepted here is the endpoint check
+--   raw_S(A)       in [L_raw(S), U_raw(S)],
+--   green_ST(A)    in [L_green(S,T), U_green(S,T)]
 --
---       U(A) <= (55/18874368) Q(A),
+-- valid for every A in the certified selected region, plus ONE lower bound
+-- Q_* <= Q(A).  From the shared boxes we compute the single rational endpoint
 --
--- uniformly on the region. Since U(A) is definitionally computed from the
--- atom boxes, this is not the desired physical residual inequality smuggled in
--- as a field. The selected minimizer theorem follows by transitivity.
+--   U_* = sum_S U_raw(S) - sum_{S,T} L_green(S,T).
+--
+-- The only target-facing numerical check is then
+--
+--   U_* <= (55/18874368) Q_*.
+--
+-- Finite interval monotonicity proves for EVERY A in the region
+--
+--   R_corr(A) <= U_* <= (55/18874368) Q_*
+--             <= (55/18874368) Q(A),
+--
+-- and therefore the same theorem for the actual selected minimizer.  There is
+-- no configuration-indexed `R_corr <= target` or endpoint-to-target premise.
 ------------------------------------------------------------------------
 
-open import Data.Rational.Base as ℚ using (ℚ; _*_; _≤_)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _*_; _≤_)
 import Data.Rational.Properties as ℚP
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
+import DASHI.Physics.YangMills.BalabanWilsonBooleanFourCubeExact as Cube
+import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundVariationSelectorExact as Selector
 import DASHI.Physics.YangMills.BalabanSelectedCorrelatedResidualOwnershipExact as Ownership
 import DASHI.Physics.YangMills.BalabanP33CorrelatedAtomIntervalEvaluationExact as Atom
+
+record SharedCorrelatedAtomBoxes : Set where
+  field
+    rawBox : Cube.Subset4 → Atom.RationalInterval
+    greenBox : Cube.Subset4 → Cube.Subset4 → Atom.RationalInterval
+open SharedCorrelatedAtomBoxes public
+
+sharedRawUpperSum : SharedCorrelatedAtomBoxes → ℚ
+sharedRawUpperSum boxes =
+  Sums.sumRational Cube.nonemptySubsets4
+    (λ subset → Atom.upper (rawBox boxes subset))
+
+sharedGreenLowerAt : SharedCorrelatedAtomBoxes → Cube.Subset4 → ℚ
+sharedGreenLowerAt boxes left =
+  Sums.sumRational Cube.nonemptySubsets4
+    (λ right → Atom.lower (greenBox boxes left right))
+
+sharedGreenLowerSum : SharedCorrelatedAtomBoxes → ℚ
+sharedGreenLowerSum boxes =
+  Sums.sumRational Cube.nonemptySubsets4 (sharedGreenLowerAt boxes)
+
+sharedResidualUpper : SharedCorrelatedAtomBoxes → ℚ
+sharedResidualUpper boxes =
+  sharedRawUpperSum boxes - sharedGreenLowerSum boxes
 
 record UniformSelectedMinimizerAtomInterval (Configuration : Set) : Set₁ where
   field
@@ -53,29 +91,112 @@ record UniformSelectedMinimizerAtomInterval (Configuration : Set) : Set₁ where
     familyAt : Configuration → Ownership.CorrelatedResidualFamily
     chargeAt : Configuration → ℚ
 
-    atomEnvelopeAt : ∀ configuration →
-      InCertifiedRegion configuration →
-      Atom.CorrelatedAtomIntervalEnvelope (familyAt configuration)
+    sharedBoxes : SharedCorrelatedAtomBoxes
 
-    computedEndpointFitsAt : ∀ configuration inRegion →
-      Atom.atomIntervalResidualUpper
-        (atomEnvelopeAt configuration inRegion)
-      ≤ Selector.remainingSingletonCoefficient * chargeAt configuration
+    rawSoundUniform : ∀ configuration →
+      InCertifiedRegion configuration →
+      ∀ subset →
+      Atom.LiesIn
+        (Ownership.rawLocalizationAtom (familyAt configuration) subset)
+        (rawBox sharedBoxes subset)
+
+    greenSoundUniform : ∀ configuration →
+      InCertifiedRegion configuration →
+      ∀ left right →
+      Atom.LiesIn
+        (Ownership.multiplierGreenAtom (familyAt configuration) left right)
+        (greenBox sharedBoxes left right)
+
+    chargeLower : ℚ
+    chargeLowerBound : ∀ configuration →
+      InCertifiedRegion configuration →
+      chargeLower ≤ chargeAt configuration
+
+    uniformEndpointFitsLowerCharge :
+      sharedResidualUpper sharedBoxes
+      ≤ Selector.remainingSingletonCoefficient * chargeLower
 
 open UniformSelectedMinimizerAtomInterval public
 
-uniformRegionResidualClosesFromComputedAtomEndpoint :
+atomEnvelopeAt :
+  ∀ {Configuration}
+    (dataSet : UniformSelectedMinimizerAtomInterval Configuration)
+    configuration →
+  InCertifiedRegion dataSet configuration →
+  Atom.CorrelatedAtomIntervalEnvelope (familyAt dataSet configuration)
+atomEnvelopeAt dataSet configuration inRegion = record
+  { Atom.CorrelatedAtomIntervalEnvelope.rawBox =
+      rawBox (sharedBoxes dataSet)
+  ; Atom.CorrelatedAtomIntervalEnvelope.greenBox =
+      greenBox (sharedBoxes dataSet)
+  ; Atom.CorrelatedAtomIntervalEnvelope.rawSound =
+      rawSoundUniform dataSet configuration inRegion
+  ; Atom.CorrelatedAtomIntervalEnvelope.greenSound =
+      greenSoundUniform dataSet configuration inRegion
+  }
+
+atomEnvelopeUsesSharedResidualUpper :
+  ∀ {Configuration}
+    (dataSet : UniformSelectedMinimizerAtomInterval Configuration)
+    configuration
+    (inRegion : InCertifiedRegion dataSet configuration) →
+  Atom.atomIntervalResidualUpper
+    (atomEnvelopeAt dataSet configuration inRegion)
+  ≡ sharedResidualUpper (sharedBoxes dataSet)
+atomEnvelopeUsesSharedResidualUpper dataSet configuration inRegion = refl
+
+remainingSingletonCoefficientNonnegative :
+  0ℚ ≤ Selector.remainingSingletonCoefficient
+remainingSingletonCoefficientNonnegative =
+  ℚP.nonNegative⁻¹ Selector.remainingSingletonCoefficient
+
+uniformRegionResidualBelowSharedEndpoint :
+  ∀ {Configuration}
+    (dataSet : UniformSelectedMinimizerAtomInterval Configuration)
+    configuration →
+  (inRegion : InCertifiedRegion dataSet configuration) →
+  Ownership.correlatedResidualTotal (familyAt dataSet configuration)
+  ≤ sharedResidualUpper (sharedBoxes dataSet)
+uniformRegionResidualBelowSharedEndpoint dataSet configuration inRegion =
+  let
+    bounded = Atom.correlatedResidualBelowAtomIntervalUpper
+      (atomEnvelopeAt dataSet configuration inRegion)
+  in
+  Relation.Binary.PropositionalEquality.subst
+    (λ upper →
+      Ownership.correlatedResidualTotal (familyAt dataSet configuration)
+      ≤ upper)
+    (atomEnvelopeUsesSharedResidualUpper dataSet configuration inRegion)
+    bounded
+  where
+  open import Relation.Binary.PropositionalEquality
+
+uniformLowerChargeBelowActualTarget :
+  ∀ {Configuration}
+    (dataSet : UniformSelectedMinimizerAtomInterval Configuration)
+    configuration →
+  (inRegion : InCertifiedRegion dataSet configuration) →
+  Selector.remainingSingletonCoefficient * chargeLower dataSet
+  ≤ Selector.remainingSingletonCoefficient * chargeAt dataSet configuration
+uniformLowerChargeBelowActualTarget dataSet configuration inRegion =
+  Norm.scaleNonnegative
+    Selector.remainingSingletonCoefficient
+    remainingSingletonCoefficientNonnegative
+    (chargeLowerBound dataSet configuration inRegion)
+
+uniformRegionResidualClosesFromSharedAtomEndpoint :
   ∀ {Configuration}
     (dataSet : UniformSelectedMinimizerAtomInterval Configuration)
     configuration →
   (inRegion : InCertifiedRegion dataSet configuration) →
   Ownership.correlatedResidualTotal (familyAt dataSet configuration)
   ≤ Selector.remainingSingletonCoefficient * chargeAt dataSet configuration
-uniformRegionResidualClosesFromComputedAtomEndpoint dataSet configuration inRegion =
+uniformRegionResidualClosesFromSharedAtomEndpoint dataSet configuration inRegion =
   ℚP.≤-trans
-    (Atom.correlatedResidualBelowAtomIntervalUpper
-      (atomEnvelopeAt dataSet configuration inRegion))
-    (computedEndpointFitsAt dataSet configuration inRegion)
+    (uniformRegionResidualBelowSharedEndpoint dataSet configuration inRegion)
+    (ℚP.≤-trans
+      (uniformEndpointFitsLowerCharge dataSet)
+      (uniformLowerChargeBelowActualTarget dataSet configuration inRegion))
 
 selectedMinimizerCorrelatedResidualClosesFromAtomIntervals :
   ∀ {Configuration}
@@ -85,7 +206,7 @@ selectedMinimizerCorrelatedResidualClosesFromAtomIntervals :
   ≤ Selector.remainingSingletonCoefficient
       * chargeAt dataSet (selectedMinimizer dataSet)
 selectedMinimizerCorrelatedResidualClosesFromAtomIntervals dataSet =
-  uniformRegionResidualClosesFromComputedAtomEndpoint
+  uniformRegionResidualClosesFromSharedAtomEndpoint
     dataSet
     (selectedMinimizer dataSet)
     (selectedMinimizerInRegion dataSet)
@@ -93,8 +214,12 @@ selectedMinimizerCorrelatedResidualClosesFromAtomIntervals dataSet =
 p33UniformSelectedMinimizerAtomIntervalTransportLevel : ProofLevel
 p33UniformSelectedMinimizerAtomIntervalTransportLevel = machineChecked
 
--- The remaining G2 calculation is now precisely a certified interval run that
--- constructs atomEnvelopeAt and checks the resulting rational endpoint. No
--- theorem-level R_corr <= target assumption remains in this route.
+-- The remaining G2 computation is now exactly:
+--   (1) one interval enclosure for every raw/Green atom over the WHOLE selected
+--       region,
+--   (2) one uniform charge floor, and
+--   (3) one rational comparison of the computed shared endpoint with
+--       (55/18874368) times that floor.
+-- No configuration-indexed target inequality survives this route.
 p33PhysicalSelectedMinimizerAtomIntervalEvaluationLevel : ProofLevel
 p33PhysicalSelectedMinimizerAtomIntervalEvaluationLevel = conditional
