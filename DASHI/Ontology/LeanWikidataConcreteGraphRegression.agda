@@ -4,6 +4,8 @@ open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
 
+open import DASHI.Ontology.EpistemicTrit using (supported)
+open import DASHI.Ontology.LeanWikidataVerdictBridge using (positivePropositionState)
 open import DASHI.Ontology.LeanWikidataExistingContentAudit
 open import DASHI.Ontology.LeanWikidataSourceRegressionBridge
 
