@@ -39,7 +39,8 @@ module DASHI.Physics.Closure.NSTriadKNLuoFiniteSixThreeKernelDimensionFreeExact 
 -- It intentionally imports the tiny FiniteRationalOrderCore rather than the
 -- full recursive finite-L2/Gram development.  The constant-one Holder theorem
 -- is likewise taken from the compiled-core variant that does not import the
--- legacy recursive Gram proof.
+-- legacy recursive Gram proof.  The branch and centered endpoint proofs are
+-- abstract so later consumers only elaborate their theorem types.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.List using (List; []; _∷_)
@@ -83,95 +84,96 @@ cubeMonotone {left} {right} leftNN left≤right =
     (Core.squareNonnegative right) rightNN
     squareBound left≤right
 
-branchCubeBound :
-  (dataSet : FiniteSixThreeBranchData) →
-  Holder.cube (branchL2Squared dataSet)
-  ≤ Holder.cube (kernelSecondMomentSquared dataSet)
-    * Holder.sumBy Holder.leftSixthMass (holderPairs dataSet)
-    * (Holder.sumBy Holder.rightCubeMass (holderPairs dataSet)
-      * Holder.sumBy Holder.rightCubeMass (holderPairs dataSet))
-branchCubeBound dataSet =
-  let
-    monotone :
-      Holder.cube (branchL2Squared dataSet)
-      ≤ Holder.cube
+abstract
+  branchCubeBound :
+    (dataSet : FiniteSixThreeBranchData) →
+    Holder.cube (branchL2Squared dataSet)
+    ≤ Holder.cube (kernelSecondMomentSquared dataSet)
+      * Holder.sumBy Holder.leftSixthMass (holderPairs dataSet)
+      * (Holder.sumBy Holder.rightCubeMass (holderPairs dataSet)
+        * Holder.sumBy Holder.rightCubeMass (holderPairs dataSet))
+  branchCubeBound dataSet =
+    let
+      monotone :
+        Holder.cube (branchL2Squared dataSet)
+        ≤ Holder.cube
+            (kernelSecondMomentSquared dataSet
+              * Holder.sumBy Holder.productMass (holderPairs dataSet))
+      monotone =
+        cubeMonotone
+          (branchL2SquaredNonnegative dataSet)
+          (branchKernelBound dataSet)
+
+      holderBound =
+        Holder.finiteSixThreeHolderRadicalFree (holderPairs dataSet)
+
+      momentCubeNN :
+        0ℚ ≤ Holder.cube (kernelSecondMomentSquared dataSet)
+      momentCubeNN =
+        Eight.cubeNonnegative
+          (kernelSecondMomentSquared dataSet)
+          (kernelSecondMomentSquaredNonnegative dataSet)
+
+      scaledHolder :
+        Holder.cube (kernelSecondMomentSquared dataSet)
+          * Holder.cube (Holder.sumBy Holder.productMass (holderPairs dataSet))
+        ≤ Holder.cube (kernelSecondMomentSquared dataSet)
+          * (Holder.sumBy Holder.leftSixthMass (holderPairs dataSet)
+            * (Holder.sumBy Holder.rightCubeMass (holderPairs dataSet)
+              * Holder.sumBy Holder.rightCubeMass (holderPairs dataSet)))
+      scaledHolder =
+        Eight.scaleBound
+          (Holder.cube (kernelSecondMomentSquared dataSet))
+          (Holder.cube (Holder.sumBy Holder.productMass (holderPairs dataSet)))
+          (Holder.sumBy Holder.leftSixthMass (holderPairs dataSet)
+            * (Holder.sumBy Holder.rightCubeMass (holderPairs dataSet)
+              * Holder.sumBy Holder.rightCubeMass (holderPairs dataSet)))
+          momentCubeNN
+          holderBound
+
+      leftMeaning :
+        Holder.cube
           (kernelSecondMomentSquared dataSet
             * Holder.sumBy Holder.productMass (holderPairs dataSet))
-    monotone =
-      cubeMonotone
-        (branchL2SquaredNonnegative dataSet)
-        (branchKernelBound dataSet)
+        ≡ Holder.cube (kernelSecondMomentSquared dataSet)
+          * Holder.cube (Holder.sumBy Holder.productMass (holderPairs dataSet))
+      leftMeaning = solve
+        ( kernelSecondMomentSquared dataSet
+        ∷ Holder.sumBy Holder.productMass (holderPairs dataSet)
+        ∷ [])
 
-    holderBound =
-      Holder.finiteSixThreeHolderRadicalFree (holderPairs dataSet)
-
-    momentCubeNN :
-      0ℚ ≤ Holder.cube (kernelSecondMomentSquared dataSet)
-    momentCubeNN =
-      Eight.cubeNonnegative
-        (kernelSecondMomentSquared dataSet)
-        (kernelSecondMomentSquaredNonnegative dataSet)
-
-    scaledHolder :
-      Holder.cube (kernelSecondMomentSquared dataSet)
-        * Holder.cube (Holder.sumBy Holder.productMass (holderPairs dataSet))
-      ≤ Holder.cube (kernelSecondMomentSquared dataSet)
-        * (Holder.sumBy Holder.leftSixthMass (holderPairs dataSet)
-          * (Holder.sumBy Holder.rightCubeMass (holderPairs dataSet)
-            * Holder.sumBy Holder.rightCubeMass (holderPairs dataSet)))
-    scaledHolder =
-      Eight.scaleBound
-        (Holder.cube (kernelSecondMomentSquared dataSet))
-        (Holder.cube (Holder.sumBy Holder.productMass (holderPairs dataSet)))
-        (Holder.sumBy Holder.leftSixthMass (holderPairs dataSet)
-          * (Holder.sumBy Holder.rightCubeMass (holderPairs dataSet)
-            * Holder.sumBy Holder.rightCubeMass (holderPairs dataSet)))
-        momentCubeNN
-        holderBound
-
-    leftMeaning :
-      Holder.cube
-        (kernelSecondMomentSquared dataSet
-          * Holder.sumBy Holder.productMass (holderPairs dataSet))
-      ≡ Holder.cube (kernelSecondMomentSquared dataSet)
-        * Holder.cube (Holder.sumBy Holder.productMass (holderPairs dataSet))
-    leftMeaning = solve
-      ( kernelSecondMomentSquared dataSet
-      ∷ Holder.sumBy Holder.productMass (holderPairs dataSet)
-      ∷ [])
-
-    endpoint :
-      Holder.cube (kernelSecondMomentSquared dataSet)
-        * (Holder.sumBy Holder.leftSixthMass (holderPairs dataSet)
-          * (Holder.sumBy Holder.rightCubeMass (holderPairs dataSet)
-            * Holder.sumBy Holder.rightCubeMass (holderPairs dataSet)))
-      ≡ Holder.cube (kernelSecondMomentSquared dataSet)
-        * Holder.sumBy Holder.leftSixthMass (holderPairs dataSet)
-        * (Holder.sumBy Holder.rightCubeMass (holderPairs dataSet)
-          * Holder.sumBy Holder.rightCubeMass (holderPairs dataSet))
-    endpoint = solve
-      ( Holder.cube (kernelSecondMomentSquared dataSet)
-      ∷ Holder.sumBy Holder.leftSixthMass (holderPairs dataSet)
-      ∷ Holder.sumBy Holder.rightCubeMass (holderPairs dataSet)
-      ∷ [])
-  in
-  ℚₚ.≤-trans
-    monotone
-    (subst
-      (λ lower →
-        lower
-        ≤ Holder.cube (kernelSecondMomentSquared dataSet)
+      endpoint :
+        Holder.cube (kernelSecondMomentSquared dataSet)
+          * (Holder.sumBy Holder.leftSixthMass (holderPairs dataSet)
+            * (Holder.sumBy Holder.rightCubeMass (holderPairs dataSet)
+              * Holder.sumBy Holder.rightCubeMass (holderPairs dataSet)))
+        ≡ Holder.cube (kernelSecondMomentSquared dataSet)
           * Holder.sumBy Holder.leftSixthMass (holderPairs dataSet)
           * (Holder.sumBy Holder.rightCubeMass (holderPairs dataSet)
-            * Holder.sumBy Holder.rightCubeMass (holderPairs dataSet)))
-      (sym leftMeaning)
+            * Holder.sumBy Holder.rightCubeMass (holderPairs dataSet))
+      endpoint = solve
+        ( Holder.cube (kernelSecondMomentSquared dataSet)
+        ∷ Holder.sumBy Holder.leftSixthMass (holderPairs dataSet)
+        ∷ Holder.sumBy Holder.rightCubeMass (holderPairs dataSet)
+        ∷ [])
+    in
+    ℚₚ.≤-trans
+      monotone
       (subst
-        (λ upper →
-          Holder.cube (kernelSecondMomentSquared dataSet)
-            * Holder.cube (Holder.sumBy Holder.productMass (holderPairs dataSet))
-          ≤ upper)
-        endpoint
-        scaledHolder))
+        (λ lower →
+          lower
+          ≤ Holder.cube (kernelSecondMomentSquared dataSet)
+            * Holder.sumBy Holder.leftSixthMass (holderPairs dataSet)
+            * (Holder.sumBy Holder.rightCubeMass (holderPairs dataSet)
+              * Holder.sumBy Holder.rightCubeMass (holderPairs dataSet)))
+        (sym leftMeaning)
+        (subst
+          (λ upper →
+            Holder.cube (kernelSecondMomentSquared dataSet)
+              * Holder.cube (Holder.sumBy Holder.productMass (holderPairs dataSet))
+            ≤ upper)
+          endpoint
+          scaledHolder))
 
 record FiniteCenteredSixThreeData : Set where
   constructor finite-centered-six-three-data
@@ -183,44 +185,45 @@ record FiniteCenteredSixThreeData : Set where
 
 open FiniteCenteredSixThreeData public
 
-centeredSixThreeKernelDimensionFree :
-  (dataSet : FiniteCenteredSixThreeData) →
-  Holder.cube
-    (branchL2Squared (firstBranch dataSet)
-      + branchL2Squared (secondBranch dataSet))
-  ≤ Eight.four
-    * ( Holder.cube
-          (kernelSecondMomentSquared (firstBranch dataSet))
-        * Holder.sumBy Holder.leftSixthMass
-            (holderPairs (firstBranch dataSet))
-        * (Holder.sumBy Holder.rightCubeMass
+abstract
+  centeredSixThreeKernelDimensionFree :
+    (dataSet : FiniteCenteredSixThreeData) →
+    Holder.cube
+      (branchL2Squared (firstBranch dataSet)
+        + branchL2Squared (secondBranch dataSet))
+    ≤ Eight.four
+      * ( Holder.cube
+            (kernelSecondMomentSquared (firstBranch dataSet))
+          * Holder.sumBy Holder.leftSixthMass
               (holderPairs (firstBranch dataSet))
-          * Holder.sumBy Holder.rightCubeMass
-              (holderPairs (firstBranch dataSet)))
-      + Holder.cube
-          (kernelSecondMomentSquared (secondBranch dataSet))
-        * Holder.sumBy Holder.leftSixthMass
-            (holderPairs (secondBranch dataSet))
-        * (Holder.sumBy Holder.rightCubeMass
+          * (Holder.sumBy Holder.rightCubeMass
+                (holderPairs (firstBranch dataSet))
+            * Holder.sumBy Holder.rightCubeMass
+                (holderPairs (firstBranch dataSet)))
+        + Holder.cube
+            (kernelSecondMomentSquared (secondBranch dataSet))
+          * Holder.sumBy Holder.leftSixthMass
               (holderPairs (secondBranch dataSet))
-          * Holder.sumBy Holder.rightCubeMass
-              (holderPairs (secondBranch dataSet))) )
-centeredSixThreeKernelDimensionFree dataSet =
-  let
-    pairBound =
-      Eight.cubePairBound
-        (branchL2Squared (firstBranch dataSet))
-        (branchL2Squared (secondBranch dataSet))
-        (branchL2SquaredNonnegative (firstBranch dataSet))
-        (branchL2SquaredNonnegative (secondBranch dataSet))
+          * (Holder.sumBy Holder.rightCubeMass
+                (holderPairs (secondBranch dataSet))
+            * Holder.sumBy Holder.rightCubeMass
+                (holderPairs (secondBranch dataSet))) )
+  centeredSixThreeKernelDimensionFree dataSet =
+    let
+      pairBound =
+        Eight.cubePairBound
+          (branchL2Squared (firstBranch dataSet))
+          (branchL2Squared (secondBranch dataSet))
+          (branchL2SquaredNonnegative (firstBranch dataSet))
+          (branchL2SquaredNonnegative (secondBranch dataSet))
 
-    summed =
-      ℚₚ.+-mono-≤
-        (branchCubeBound (firstBranch dataSet))
-        (branchCubeBound (secondBranch dataSet))
+      summed =
+        ℚₚ.+-mono-≤
+          (branchCubeBound (firstBranch dataSet))
+          (branchCubeBound (secondBranch dataSet))
 
-    scaled =
-      Eight.scaleBound
-        Eight.four _ _ Eight.fourNonnegative summed
-  in
-  ℚₚ.≤-trans pairBound scaled
+      scaled =
+        Eight.scaleBound
+          Eight.four _ _ Eight.fourNonnegative summed
+    in
+    ℚₚ.≤-trans pairBound scaled
