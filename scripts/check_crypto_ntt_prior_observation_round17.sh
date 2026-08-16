@@ -24,6 +24,7 @@ FILES=(
   DASHI/Crypto/MLKEMBaseCaseNormInverseBridgeExact.agda
   DASHI/Crypto/MLKEMBaseCaseNonsquareNormSeparationExact.agda
   DASHI/Crypto/MLKEMFIPS203GammaNonsquareTransportExact.agda
+  DASHI/Crypto/MLKEMFIPS203F3329ArithmeticExact.agda
   DASHI/Crypto/MLKEMUncertaintyTransitionCostBridgeExact.agda
   DASHI/Crypto/MLKEMProtectedLabelUncertaintyEdgeExact.agda
   DASHI/Crypto/MLKEMSupportUncertaintyRuntimeNoGoExact.agda
@@ -44,6 +45,8 @@ FILES=(
   DASHI/Crypto/MLKEMFIPS203AverageSuccessResourceExact.agda
   DASHI/Crypto/MLKEMOppositeResidueParityDecompositionExact.agda
   DASHI/Crypto/MLKEMOppositeResidueParityFibreFactorisationExact.agda
+  DASHI/Crypto/MLKEMNTTPair03CubicRootFactorReductionExact.agda
+  DASHI/Crypto/MLKEMNTTPair03ReducedKernelCertificateExact.agda
   DASHI/Crypto/MLKEMNTTActualCBD2EightCoefficientLeakageResolutionExact.agda
   DASHI/Crypto/MLKEMBaseCaseConditionedResidualExact.agda
   DASHI/Crypto/ConditionedResidualAmbiguityRegressionExact.agda
@@ -97,6 +100,8 @@ grep -q 'leftInverseReflectsZero' DASHI/Crypto/MLKEMNTTLocalLeftInverseZeroRefle
 grep -q 'adjugateBaseCaseIdentity' DASHI/Crypto/MLKEMBaseCaseAdjugateInverseExact.agda
 grep -q 'normSeparatedBaseCaseLeftInverse' DASHI/Crypto/MLKEMBaseCaseNormInverseBridgeExact.agda
 grep -q 'nonsquareSeparatesNorm' DASHI/Crypto/MLKEMBaseCaseNonsquareNormSeparationExact.agda
+grep -q 'zetaEulerHalfPower' DASHI/Crypto/MLKEMFIPS203F3329ArithmeticExact.agda
+grep -q 'pair03DifferenceInverse' DASHI/Crypto/MLKEMFIPS203F3329ArithmeticExact.agda
 grep -q 'transitionUncertaintyCost128' DASHI/Crypto/MLKEMUncertaintyTransitionCostBridgeExact.agda
 grep -q 'pricedSearchEdgeUncertainty128' DASHI/Crypto/MLKEMProtectedLabelUncertaintyEdgeExact.agda
 grep -q 'fullRankExactResidualTouchObstruction128' DASHI/Crypto/MLKEMExactResidualTouchLowerBoundExact.agda
@@ -104,12 +109,15 @@ grep -q 'sameOppositePairForcesSameParitySectors' DASHI/Crypto/MLKEMOppositeResi
 grep -q 'sameParitySectorsForceSameOppositePair' DASHI/Crypto/MLKEMOppositeResidueParityFibreFactorisationExact.agda
 grep -q 'oppositeResidueSumSelectsEven' DASHI/Crypto/MLKEMOppositeResidueParityDecompositionExact.agda
 grep -q 'oppositeResidueDifferenceSelectsOdd' DASHI/Crypto/MLKEMOppositeResidueParityDecompositionExact.agda
+grep -q 'twoRootsGiveLinearTimesQuadratic' DASHI/Crypto/MLKEMNTTPair03CubicRootFactorReductionExact.agda
+grep -q 'pair03ReducedKernelCheckIsTrue' DASHI/Crypto/MLKEMNTTPair03ReducedKernelCertificateExact.agda
+grep -q 'compactPair03BoundedKernelOnlyZero' DASHI/Crypto/MLKEMNTTPair03ReducedKernelCertificateExact.agda
 grep -q 'pair01MassFromCollisionPairs' DASHI/Crypto/MLKEMNTTActualCBD2EightCoefficientLeakageResolutionExact.agda
 grep -q 'pair02MassFromCollisionPairs' DASHI/Crypto/MLKEMNTTActualCBD2EightCoefficientLeakageResolutionExact.agda
 grep -q 'pair03EnumerationHasNoCollisionPair' DASHI/Crypto/MLKEMNTTActualCBD2EightCoefficientLeakageResolutionExact.agda
 grep -q 'pair03EnumerationHasUnitMaxFibre' DASHI/Crypto/MLKEMNTTActualCBD2EightCoefficientLeakageResolutionExact.agda
-grep -q 'coarsenedPairCollides' DASHI/Crypto/MLKEMNTTActualCBD2EightCoefficientLeakageResolutionExact.agda
-grep -q 'coarsenedPairSecretsDiffer' DASHI/Crypto/MLKEMNTTActualCBD2EightCoefficientLeakageResolutionExact.agda
+grep -q 'ObservationReflectsRawOnSecretImage' DASHI/Crypto/MLKEMNTTActualCBD2EightCoefficientLeakageResolutionExact.agda
+grep -q 'finiteCoarseningNotInjective' DASHI/Crypto/MLKEMNTTActualCBD2EightCoefficientLeakageResolutionExact.agda
 grep -q 'conditionedResidual0' DASHI/Crypto/MLKEMBaseCaseConditionedResidualExact.agda
 grep -q 'conditionedResidual1' DASHI/Crypto/MLKEMBaseCaseConditionedResidualExact.agda
 grep -q 'conditionedEquationLeavesTwoPlausibleSecrets' DASHI/Crypto/ConditionedResidualAmbiguityRegressionExact.agda
@@ -149,9 +157,15 @@ grep -q '10.6028/NIST.FIPS.203' DASHI/Crypto/MLKEMOppositeResidueParityFibreFact
 grep -q '10.6028/NIST.FIPS.203' DASHI/Crypto/MLKEMNTTActualCBD2EightCoefficientLeakageResolutionExact.agda
 grep -q '10.46586/tches.v2021.i4.88-113' DASHI/Crypto/MLKEMNTTActualCBD2EightCoefficientLeakageResolutionExact.agda
 grep -q '10.1007/978-3-031-54773-7_5' DASHI/Crypto/MLKEMNTTActualCBD2EightCoefficientLeakageResolutionExact.agda
+grep -q '10.46586/tches.v2025.i4.409-436' DASHI/Crypto/MLKEMNTTActualCBD2EightCoefficientLeakageResolutionExact.agda
+grep -q '10.1109/HOST55118.2023.10133270' DASHI/Crypto/MLKEMNTTActualCBD2EightCoefficientLeakageResolutionExact.agda
+grep -q '10.46586/tches.v2024.i3.200-223' DASHI/Crypto/MLKEMNTTActualCBD2EightCoefficientLeakageResolutionExact.agda
+grep -q '10.1007/978-981-97-1235-9_11' DASHI/Crypto/MLKEMNTTActualCBD2ConditionalListMassExact.agda
+grep -q 'ePrint 2023/1866' DASHI/Crypto/MLKEMUncertaintyTransitionCostBridgeExact.agda
 grep -q '10.1016/j.disc.2021.112670' DASHI/Crypto/MLKEMFIPS203AverageSuccessResourceExact.agda
 
 if command -v python3 >/dev/null 2>&1; then
+  python3 scripts/crypto_ntt_pair03_compact_injectivity_certificate.py >/dev/null
   python3 scripts/crypto_ntt_cbd_block_reconciliation_probe.py \
     --trials 2 --max-block 8 --baseline-pairs 2 >/dev/null
   python3 scripts/crypto_ntt_opposite_residue_factorized_membership.py \
