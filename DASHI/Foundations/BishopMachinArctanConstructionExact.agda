@@ -45,11 +45,11 @@ module DASHI.Foundations.BishopMachinArctanConstructionExact where
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Integer.Base using (+_; nonNeg)
 import Data.Nat.Base as ℕ
-open ℕ using (NonZero; _≤_; z≤n; s≤s)
+open ℕ using (NonZero; _≤_; _<_; z≤n; s≤s)
 import Data.Nat.Properties as ℕP
-open import Data.Product.Base using (_,_)
+open import Data.Product.Base using (_,_; proj₂)
 open import Data.Rational.Unnormalised as ℚ using
-  (ℚᵘ; 0ℚᵘ; 1ℚᵘ; _/_; _≤_)
+  (ℚᵘ; 0ℚᵘ; 1ℚᵘ; _/_; _≤_; _<_)
 import Data.Rational.Unnormalised.Properties as ℚP
 
 import ExtraProperties as Extra
@@ -58,7 +58,6 @@ import RealProperties as BishopProperties
 import Sequence as BishopSequence
 
 import DASHI.Physics.YangMills.BalabanClayGate4BishopHalfRadiusRealEstimatesExact as Estimates
-import DASHI.Physics.YangMills.BalabanBishopConcreteFactorialCoefficientDischargeExact as Factorial
 import DASHI.Physics.YangMills.BalabanBishopConcreteHalfBallSquareExact as HalfBall
 import DASHI.Physics.YangMills.BalabanBishopConcreteSineCosineTermParityExact as Terms
 import DASHI.Physics.YangMills.BalabanBishopFactorialPowerRecurrenceExact as Recurrence
@@ -310,8 +309,12 @@ quarterPositive =
       HalfBall.quarter
       (ℚP.positive⁻¹ HalfBall.quarter))
 
+oneBelowFour : suc zero < suc (suc (suc (suc zero)))
+oneBelowFour = s≤s (s≤s z≤n)
+
 quarterBelowOneRational : HalfBall.quarter ℚ.< 1ℚᵘ
-quarterBelowOneRational = ℚ.*<* (Data.Integer.Base.+<+ (s≤s (s≤s z≤n)))
+quarterBelowOneRational =
+  Extra.q<r⇒+p/r<+p/q 1 1 4 oneBelowFour
 
 quarterBelowOne : BishopReal._<_ HalfBall.bishopQuarter BishopReal.1ℝ
 quarterBelowOne =
@@ -356,7 +359,7 @@ bishopOneFifth bishopOneTwoHundredThirtyNinth : BishopReal.ℝ
 bishopOneFifth = BishopReal._⋆ oneFifth
 bishopOneTwoHundredThirtyNinth = BishopReal._⋆ oneTwoHundredThirtyNinth
 
-twoBelowFive : suc (suc zero) ≤ suc (suc (suc (suc (suc zero))))
+twoBelowFive : suc (suc zero) ≤ 5
 twoBelowFive = s≤s (s≤s z≤n)
 
 twoBelowTwoHundredThirtyNine : suc (suc zero) ≤ 239
