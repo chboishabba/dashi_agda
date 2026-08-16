@@ -12,128 +12,83 @@ module DASHI.Physics.Closure.NSTriadKNLiteralBonyInteractionRoutingRound63Exact 
 -- Title: "Fourier Analysis and Nonlinear Partial Differential Equations".
 -- DOI: 10.1007/978-3-642-16830-7.
 --
--- Authors: Tosio Kato; Gustavo Ponce.
--- Title: "Commutator Estimates and the Euler and Navier-Stokes Equations".
--- DOI: 10.1002/cpa.3160410704.
+-- Author: Xiaoyutao Luo.
+-- Title: "A Beale--Kato--Majda Criterion with Optimal Frequency and Temporal
+-- Localization".
+-- DOI: 10.1007/s00021-019-0411-z.
+-- arXiv DOI: 10.48550/arXiv.1803.05569.
 --
--- ROUND 63 B0 CONTRIBUTION
+-- ROUND 63 B0 AUTHORITY CORRECTION
 --
--- The raw odd-P/Q commutator contains interactions that should not all be
--- interpreted as the near-diagonal Com owner.  This file classifies EVERY
--- literal physical triad by the actual dyadic shell geometry, at the official
--- separation Csep=3:
+-- An earlier Round63 draft reimplemented the four-way Bony classifier using
+-- weak inequalities j+3<=j'.  The mature physical five-source lane uses the
+-- repository's AUTHORITATIVE executable predicate
 --
---   LH : j(p)+3 <= j(q),
---   HL : j(q)+3 <= j(p),
---   HH->L : j(k)+3 <= j(p) and j(k)+3 <= j(q),
---   residual : none of the above.
+--   natLess (j+3) j' = true,
 --
--- The already-proved resonance geometry then gives, constructively:
+-- i.e. the strict comparison j+3<j'.  The two formulations differ exactly on
+-- the three-shell collar and therefore cannot be interchanged.
 --
---   LH     => output k is within one shell of input q,
---   HL     => output k is within one shell of advector p,
---   HH->L  => the two high inputs p,q are within one shell.
+-- This file now delegates classification directly to
+-- `NSTriadKNLuoPhysicalFiveClassSupportRound25Exact` and merely exposes a small
+-- proof-relevant adapter.  In particular the Round62 witness
 --
--- Therefore the Round62 shell-0 -> shell-3 odd-P/Q witness is not a failure of
--- Bony localization: it is classified EXACTLY as HL and should be routed to the
--- HL owner before the near-Com common-hat theorem is attempted.
+--   j(q)=0, j(p)=3, j(k)=3
 --
--- This is a finite exact partition of triad geometry.  It does not yet claim
--- that every residual interaction is width-one in (q,k); the remaining B0
--- analytic/combinatorial task is precisely to split that finite residual into
--- the actual near-Com piece and any remaining owner/tail terms.
+-- is AUTHORITATIVELY comparable/CC, not HL.  This correction is important:
+-- CC is a triadic Bony class, while the fifth `Com` source in Round25 is the
+-- separately appended differentiated-commutator cell.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
-open import Data.Nat.Base using (_≤_; ∣_-_∣)
-import Data.Nat.Properties as Nat
-open import Data.Sum.Base using (_⊎_; inj₁; inj₂)
-open import Relation.Nullary using (¬_; yes; no)
+open import Agda.Builtin.Nat using (zero; suc)
+open import Agda.Builtin.Sigma using (_,_)
+open import Data.Nat.Base using (∣_-_∣; _≤_)
 
-import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNLiteralDyadicShellConstants as Shell
-import DASHI.Physics.Closure.NSTriadKNLiteralDyadicConsequencesClosed as Dyadic
+import DASHI.Physics.Closure.NSTriadKNLuoPhysicalFiveClassSupportRound25Exact as Support
 import DASHI.Physics.Closure.NSTriadKNComRawHardLowPassCommonHatNoGoRound62Exact as Raw
 
-data LiteralBonyClass (τ : Physical.PhysicalTriadIncidence) : Set where
+data LiteralBonyClass (tau : Physical.PhysicalTriadIncidence) : Set where
   lowHigh :
-    Shell.shellIndex (Physical.p τ) + Shell.Csep
-      ≤ Shell.shellIndex (Physical.q τ) →
-    LiteralBonyClass τ
+    Support.TriadicClassCertificate tau Support.LH → LiteralBonyClass tau
   highLow :
-    Shell.shellIndex (Physical.q τ) + Shell.Csep
-      ≤ Shell.shellIndex (Physical.p τ) →
-    LiteralBonyClass τ
+    Support.TriadicClassCertificate tau Support.HL → LiteralBonyClass tau
   highHighToLow :
-    Shell.shellIndex (Physical.k τ) + Shell.Csep
-      ≤ Shell.shellIndex (Physical.p τ) →
-    Shell.shellIndex (Physical.k τ) + Shell.Csep
-      ≤ Shell.shellIndex (Physical.q τ) →
-    LiteralBonyClass τ
-  residual :
-    ¬ (Shell.shellIndex (Physical.p τ) + Shell.Csep
-      ≤ Shell.shellIndex (Physical.q τ)) →
-    ¬ (Shell.shellIndex (Physical.q τ) + Shell.Csep
-      ≤ Shell.shellIndex (Physical.p τ)) →
-    ( ¬ (Shell.shellIndex (Physical.k τ) + Shell.Csep
-          ≤ Shell.shellIndex (Physical.p τ))
-      ⊎
-      ¬ (Shell.shellIndex (Physical.k τ) + Shell.Csep
-          ≤ Shell.shellIndex (Physical.q τ)) ) →
-    LiteralBonyClass τ
+    Support.TriadicClassCertificate tau Support.HH → LiteralBonyClass tau
+  comparable :
+    Support.TriadicClassCertificate tau Support.CC → LiteralBonyClass tau
 
 classifyLiteralBony :
-  (τ : Physical.PhysicalTriadIncidence) → LiteralBonyClass τ
-classifyLiteralBony τ
-  with Nat._≤?_
-    (Shell.shellIndex (Physical.p τ) + Shell.Csep)
-    (Shell.shellIndex (Physical.q τ))
-... | yes pLow = lowHigh pLow
-... | no notPLow
-  with Nat._≤?_
-    (Shell.shellIndex (Physical.q τ) + Shell.Csep)
-    (Shell.shellIndex (Physical.p τ))
-... | yes qLow = highLow qLow
-... | no notQLow
-  with Nat._≤?_
-    (Shell.shellIndex (Physical.k τ) + Shell.Csep)
-    (Shell.shellIndex (Physical.p τ))
-... | no notKLowP = residual notPLow notQLow (inj₁ notKLowP)
-... | yes kLowP
-  with Nat._≤?_
-    (Shell.shellIndex (Physical.k τ) + Shell.Csep)
-    (Shell.shellIndex (Physical.q τ))
-... | yes kLowQ = highHighToLow kLowP kLowQ
-... | no notKLowQ = residual notPLow notQLow (inj₂ notKLowQ)
+  (tau : Physical.PhysicalTriadIncidence) → LiteralBonyClass tau
+classifyLiteralBony tau with Support.classifyPhysicalTriad tau
+... | Support.LH , certificate = lowHigh certificate
+... | Support.HL , certificate = highLow certificate
+... | Support.HH , certificate = highHighToLow certificate
+... | Support.CC , certificate = comparable certificate
 
 lowHighTracksInputWithinOne :
-  (τ : Physical.PhysicalTriadIncidence) →
-  Shell.shellIndex (Physical.p τ) + Shell.Csep
-    ≤ Shell.shellIndex (Physical.q τ) →
-  ∣ Shell.shellIndex (Physical.k τ)
-    - Shell.shellIndex (Physical.q τ) ∣ ≤ 1
-lowHighTracksInputWithinOne = Dyadic.lowHighOutputTracksHighOne
+  ∀ {tau} →
+  Support.TriadicClassCertificate tau Support.LH →
+  ∣ Shell.shellIndex (Physical.k tau)
+    - Shell.shellIndex (Physical.q tau) ∣ ≤ 1
+lowHighTracksInputWithinOne = Support.lowHighOutputTracksHighOne
 
 highLowTracksAdvectorWithinOne :
-  (τ : Physical.PhysicalTriadIncidence) →
-  Shell.shellIndex (Physical.q τ) + Shell.Csep
-    ≤ Shell.shellIndex (Physical.p τ) →
-  ∣ Shell.shellIndex (Physical.k τ)
-    - Shell.shellIndex (Physical.p τ) ∣ ≤ 1
-highLowTracksAdvectorWithinOne = Dyadic.highLowOutputTracksHighOne
+  ∀ {tau} →
+  Support.TriadicClassCertificate tau Support.HL →
+  ∣ Shell.shellIndex (Physical.k tau)
+    - Shell.shellIndex (Physical.p tau) ∣ ≤ 1
+highLowTracksAdvectorWithinOne = Support.highLowOutputTracksHighOne
 
 highHighInputsWithinOne :
-  (τ : Physical.PhysicalTriadIncidence) →
-  Shell.shellIndex (Physical.k τ) + Shell.Csep
-    ≤ Shell.shellIndex (Physical.p τ) →
-  Shell.shellIndex (Physical.k τ) + Shell.Csep
-    ≤ Shell.shellIndex (Physical.q τ) →
-  ∣ Shell.shellIndex (Physical.p τ)
-    - Shell.shellIndex (Physical.q τ) ∣ ≤ 1
-highHighInputsWithinOne = Dyadic.highHighToLowInputsComparableOne
+  ∀ {tau} →
+  Support.TriadicClassCertificate tau Support.HH →
+  ∣ Shell.shellIndex (Physical.p tau)
+    - Shell.shellIndex (Physical.q tau) ∣ ≤ 1
+highHighInputsWithinOne = Support.highHighInputsComparableOne
 
 farPhysicalTriad : Physical.PhysicalTriadIncidence
 farPhysicalTriad =
@@ -143,29 +98,20 @@ farPShellIsThree :
   Shell.shellIndex Raw.farP ≡ suc (suc (suc zero))
 farPShellIsThree = refl
 
-farTriadIsHighLow :
-  Shell.shellIndex (Physical.q farPhysicalTriad) + Shell.Csep
-  ≤ Shell.shellIndex (Physical.p farPhysicalTriad)
-farTriadIsHighLow
-  rewrite Raw.farInputShellIsZero
-        | farPShellIsThree = Nat.≤-refl
+farTriadAuthoritativeClassIsComparable :
+  Support.triadicSourceClass farPhysicalTriad ≡ Support.CC
+farTriadAuthoritativeClassIsComparable = refl
 
-farTriadOutputTracksAdvector :
-  ∣ Shell.shellIndex (Physical.k farPhysicalTriad)
-    - Shell.shellIndex (Physical.p farPhysicalTriad) ∣ ≤ 1
-farTriadOutputTracksAdvector =
-  highLowTracksAdvectorWithinOne farPhysicalTriad farTriadIsHighLow
+round62FarWitnessIsCCNotHL : Bool
+round62FarWitnessIsCCNotHL = true
 
-round62FarWitnessRoutesToHL : Bool
-round62FarWitnessRoutesToHL = true
+authoritativeStrictBonyClassifierReused : Bool
+authoritativeStrictBonyClassifierReused = true
 
-literalBonyTriadClassificationConstructed : Bool
-literalBonyTriadClassificationConstructed = true
+round62FarWitnessIsCCNotHLIsTrue :
+  round62FarWitnessIsCCNotHL ≡ true
+round62FarWitnessIsCCNotHLIsTrue = refl
 
-round62FarWitnessRoutesToHLIsTrue :
-  round62FarWitnessRoutesToHL ≡ true
-round62FarWitnessRoutesToHLIsTrue = refl
-
-literalBonyTriadClassificationConstructedIsTrue :
-  literalBonyTriadClassificationConstructed ≡ true
-literalBonyTriadClassificationConstructedIsTrue = refl
+authoritativeStrictBonyClassifierReusedIsTrue :
+  authoritativeStrictBonyClassifierReused ≡ true
+authoritativeStrictBonyClassifierReusedIsTrue = refl
