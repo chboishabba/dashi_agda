@@ -28,7 +28,8 @@ open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; _<_)
 import Data.Rational.Properties as ℚP
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Nullary using (¬_)
 
 import DASHI.Physics.Closure.NSTriadKNAdmissibleOwnerTaxLanguageRound28Exact as Owner
 
@@ -51,8 +52,6 @@ adversarialCriticalStrictlyExceedsProposedScale K target =
     (λ right → K * target < right)
     (sym (adversarialCriticalExact K target))
     (ℚP.+-monoʳ-< (K * target) ℚP.0<1)
-  where
-  open import Relation.Binary.PropositionalEquality using (sym)
 
 adversarialEnvironmentRefutesProposedBound :
   (K target : ℚ) →
@@ -62,8 +61,6 @@ adversarialEnvironmentRefutesProposedBound K target proposed =
     (ℚP.<-≤-trans
       (adversarialCriticalStrictlyExceedsProposedScale K target)
       proposed)
-  where
-  open import Relation.Nullary using (¬_)
 
 ownerGrammarCannotProveC1 : Bool
 ownerGrammarCannotProveC1 = true
