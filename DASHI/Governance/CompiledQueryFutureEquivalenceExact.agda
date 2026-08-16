@@ -22,12 +22,9 @@ open import DASHI.Core.Prelude
 
 import DASHI.Core.CertifiedFiniteFutureQuotientCompilerExact as Compiler
 import DASHI.Core.FutureObservationLanguageQuotientExact as Future
+import DASHI.Core.GenericFuturePartitionRefinementExact as Refinement
 import DASHI.Core.StablePartitionCanonicalFutureBridgeExact as Bridge
 import DASHI.Governance.DevelopmentalInfluenceSourceAtlas as Sources
-
-------------------------------------------------------------------------
--- The actual stabilized code relation is exactly canonical future equivalence.
-------------------------------------------------------------------------
 
 compiledRelationExactlyCanonicalFuture :
   ∀ {State Action Observation}
@@ -53,11 +50,10 @@ compiledRelationExactlyCanonicalFuture compiler left right =
   where
     compiled = Compiler.compileFutureQuotient compiler
     depth = Compiler.stableDepth compiled
-
     canonical = Compiler.canonicalExact compiled left right
 
     futureForward :
-      DASHI.Core.GenericFuturePartitionRefinementExact.RefinesToDepth depth
+      Refinement.RefinesToDepth depth
         (Compiler.observe compiler) (Compiler.step compiler) left right →
       Future.FutureObservationEquivalent
         (Bridge.deterministicSystem
@@ -74,7 +70,7 @@ compiledRelationExactlyCanonicalFuture compiler left right =
           (Compiler.actionLabel compiler))
         (Compiler.observe compiler)
         left right →
-      DASHI.Core.GenericFuturePartitionRefinementExact.RefinesToDepth depth
+      Refinement.RefinesToDepth depth
         (Compiler.observe compiler) (Compiler.step compiler) left right
     futureBackward = proj₂ canonical
 
@@ -94,9 +90,9 @@ compiledRelationImpliesSameFutureLanguage :
       (Compiler.actionLabel compiler))
     (Compiler.observe compiler)
     left right
-compiledRelationImpliesSameFutureLanguage compiler =
+compiledRelationImpliesSameFutureLanguage compiler {left} {right} =
   Compiler.forward
-    (compiledRelationExactlyCanonicalFuture compiler _ _)
+    (compiledRelationExactlyCanonicalFuture compiler left right)
 
 canonicalFutureLanguageImpliesCompiledRelation :
   ∀ {State Action Observation}
@@ -114,15 +110,9 @@ canonicalFutureLanguageImpliesCompiledRelation :
   Compiler.relation compiler
     (Compiler.forwardIterate compiler depth)
     left right
-canonicalFutureLanguageImpliesCompiledRelation compiler =
+canonicalFutureLanguageImpliesCompiledRelation compiler {left} {right} =
   Compiler.backward
-    (compiledRelationExactlyCanonicalFuture compiler _ _)
-
-------------------------------------------------------------------------
--- Governance boundary: exactness is language-relative.  The compiled quotient
--- is not promoted to universal ontological identity, truth, legal authority,
--- or normative approval.
-------------------------------------------------------------------------
+    (compiledRelationExactlyCanonicalFuture compiler left right)
 
 record CompiledQueryFutureBoundary : Set where
   constructor compiledQueryFutureBoundary
