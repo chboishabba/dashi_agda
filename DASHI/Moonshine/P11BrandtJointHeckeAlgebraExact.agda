@@ -40,7 +40,7 @@ module DASHI.Moonshine.P11BrandtJointHeckeAlgebraExact where
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
-open import Data.Integer using (ℤ; +_)
+open import Data.Integer using (ℤ; +_; -[1+_])
   renaming (_+_ to _+ℤ_; _*_ to _*ℤ_)
 
 import DASHI.Moonshine.P11ClassicalTwoIsogenyCorrespondenceExact as P11
@@ -48,10 +48,6 @@ import DASHI.Moonshine.P11ClassicalTwoIsogenySpectralExact as Spectral
 import DASHI.Moonshine.P11BrandtPrimeGeneratorsExact as Brandt
 import DASHI.Moonshine.P11AristotleHeckeSquareCrossPollinationExact as Square
 import DASHI.Moonshine.P11Phi4CyclicVsFullHeckeExact as Phi4
-
-------------------------------------------------------------------------
--- Nat matrix composition.
-------------------------------------------------------------------------
 
 compose : Brandt.P11BrandtMatrix → Brandt.P11BrandtMatrix → Brandt.P11BrandtMatrix
 compose A B =
@@ -63,11 +59,6 @@ compose A B =
 
 identityMatrix : Brandt.P11BrandtMatrix
 identityMatrix = Brandt.brandtMatrix 1 0 0 1
-
-------------------------------------------------------------------------
--- Coprime products.  These are the finite Brandt realization of T_m T_n=T_mn
--- in the three-generator subalgebra currently constructed.
-------------------------------------------------------------------------
 
 B11_6 : Brandt.P11BrandtMatrix
 B11_6 = Brandt.brandtMatrix 6 6 4 8
@@ -108,10 +99,6 @@ B3B5Commute :
   compose Brandt.B11_3 Brandt.B11_5 ≡ compose Brandt.B11_5 Brandt.B11_3
 B3B5Commute = refl
 
-------------------------------------------------------------------------
--- Composite eigenvalues multiply on the same joint eigenbasis.
-------------------------------------------------------------------------
-
 B6ConstantEigenvalueTwelve :
   Brandt.matrixAction B11_6 P11.constantEigenvector
   ≡ P11.scalePair (+ 12) P11.constantEigenvector
@@ -141,10 +128,6 @@ B15NonconstantEigenvalueMinusOne :
   Brandt.matrixAction B11_15 P11.nonconstantEigenvector
   ≡ P11.scalePair (-[1+ 0 ]) P11.nonconstantEigenvector
 B15NonconstantEigenvalueMinusOne = refl
-
-------------------------------------------------------------------------
--- Prime-square relation at ell=2.
-------------------------------------------------------------------------
 
 B2Squared : Brandt.P11BrandtMatrix
 B2Squared = compose Brandt.B11_2 Brandt.B11_2
@@ -180,17 +163,6 @@ fullT4MatchesPR567ForcedOnJ1 :
   ≡ Square.forcedT4Action Spectral.basisJ1
 fullT4MatchesPR567ForcedOnJ1 = refl
 
-------------------------------------------------------------------------
--- Surprising finite projection coincidence:
---
---   B_11(5) has matrix [[3,3],[2,4]],
---   Phi_4(cyclic) has matrix [[3,3],[2,4]].
---
--- They therefore induce the same linear operator on this two-coordinate
--- arithmetic projection.  They are NOT thereby the same geometric
--- correspondence: one is prime-degree 5 and the other is cyclic degree 4.
-------------------------------------------------------------------------
-
 B5MatchesCyclicPhi4OnJ0 :
   Brandt.matrixAction Brandt.B11_5 Spectral.basisJ0
   ≡ Phi4.cyclicFourMatrixAction Spectral.basisJ0
@@ -210,10 +182,6 @@ B5MatchesCyclicPhi4NonconstantMode :
   Brandt.matrixAction Brandt.B11_5 P11.nonconstantEigenvector
   ≡ Phi4.cyclicFourMatrixAction P11.nonconstantEigenvector
 B5MatchesCyclicPhi4NonconstantMode = refl
-
-------------------------------------------------------------------------
--- Boundary: same finite matrix is explicitly weaker than same correspondence.
-------------------------------------------------------------------------
 
 record P11BrandtJointHeckeBoundary : Set where
   field
