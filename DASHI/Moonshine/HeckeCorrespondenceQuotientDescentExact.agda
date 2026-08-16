@@ -102,9 +102,11 @@ inducedCorrespondence :
     {fineHecke : Hecke.PrimeCorrespondenceHeckeOn Fine} →
   QuotientStablePrimeCorrespondence project fineHecke →
   Monster.SSP → Coarse → Vec15 Coarse
-inducedCorrespondence descent prime coarse =
-  Hecke.map15 _
-    (Hecke.PrimeCorrespondenceHeckeOn.correspondence _ prime
+inducedCorrespondence
+  {project = project} {fineHecke = fineHecke}
+  descent prime coarse =
+  Hecke.map15 project
+    (Hecke.PrimeCorrespondenceHeckeOn.correspondence fineHecke prime
       (section (sectioned descent) coarse))
 
 inducedHecke :
@@ -196,7 +198,7 @@ inducedCorrespondenceUnique :
   Hecke.PrimeCorrespondenceHeckeOn.correspondence
     (inducedHecke descent) prime coarse
 inducedCorrespondenceUnique
-  {project = project} descent candidate candidateCommutes prime coarse =
+  descent candidate candidateCommutes prime coarse =
   trans
     (cong
       (Hecke.PrimeCorrespondenceHeckeOn.correspondence candidate prime)
