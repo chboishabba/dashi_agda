@@ -23,13 +23,13 @@ module DASHI.Foundations.BishopArctanHalfBallInterlacingExact where
 -- applies to the ACTUAL convergent arctangent series, not an abstract receipt.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Data.Rational.Unnormalised as ℚ using (1ℚᵘ)
+open import Agda.Builtin.Nat using (zero; suc)
 
 import Real as Bishop
 import RealProperties as BishopP
 
 import DASHI.Foundations.BishopMachinArctanConstructionExact as Atan
+import DASHI.Physics.YangMills.BalabanClayGate4BishopHalfRadiusRealEstimatesExact as Estimates
 import DASHI.Physics.YangMills.BalabanBishopConcreteHalfBallSquareExact as HalfBall
 import DASHI.Physics.YangMills.BalabanBishopConcreteSineCosineInterlacingExact as Concrete
 import DASHI.Physics.YangMills.BalabanBishopAlternatingInterlacingFromDecreasingTermsExact as Alternating
@@ -68,25 +68,20 @@ atanSignedEvenIsMagnitude : ∀ {value} → PositiveHalfBallPoint value →
     (Atan.atanMagnitudeTerm value (Alternating.double index))
 atanSignedEvenIsMagnitude {value} point index =
   let
-    exponent = DASHI.Physics.YangMills.BalabanClayGate4BishopHalfRadiusRealEstimatesExact.oddExponent
-      (Alternating.double index)
+    termIndex = Alternating.double index
+    exponent = Estimates.oddExponent termIndex
+    coefficient = Bishop._⋆ (Atan.inverseOddRational termIndex)
+    power = Bishop.pow value exponent
     powerNN = Concrete.powNonnegative (nonnegative point) exponent
-    absPower = BishopP.0≤x⇒∣x∣≃x (BishopP.nonNegx⇒0≤x powerNN)
   in
   BishopP.≃-trans
-    (BishopP.*-congʳ
-      (Bishop._*_
-        (Bishop._⋆ (Atan.inverseOddRational (Alternating.double index)))
-        (Bishop.pow value exponent))
-      (Concrete.alternatingSignEven index))
-    (BishopP.≃-trans
-      (BishopP.*-identityˡ
-        (Bishop._*_
-          (Bishop._⋆ (Atan.inverseOddRational (Alternating.double index)))
-          (Bishop.pow value exponent)))
+    (BishopP.*-cong
+      (Concrete.alternatingSignEven index)
       (BishopP.*-congˡ
-        (Bishop._⋆ (Atan.inverseOddRational (Alternating.double index)))
-        (BishopP.≃-symm absPower)))
+        (BishopP.≃-symm
+          (BishopP.nonNegx⇒∣x∣≃x powerNN))))
+    (BishopP.*-identityˡ
+      (Bishop._*_ coefficient (Bishop.∣_∣ power)))
 
 atanSignedOddIsNegativeMagnitude : ∀ {value} → PositiveHalfBallPoint value →
   ∀ index →
@@ -95,41 +90,37 @@ atanSignedOddIsNegativeMagnitude : ∀ {value} → PositiveHalfBallPoint value �
     (Bishop.- Atan.atanMagnitudeTerm value (suc (Alternating.double index)))
 atanSignedOddIsNegativeMagnitude {value} point index =
   let
-    position = suc (Alternating.double index)
-    exponent = DASHI.Physics.YangMills.BalabanClayGate4BishopHalfRadiusRealEstimatesExact.oddExponent position
+    termIndex = suc (Alternating.double index)
+    exponent = Estimates.oddExponent termIndex
+    power = Bishop.pow value exponent
     powerNN = Concrete.powNonnegative (nonnegative point) exponent
-    absPower = BishopP.0≤x⇒∣x∣≃x (BishopP.nonNegx⇒0≤x powerNN)
-    coefficient = Bishop._⋆ (Atan.inverseOddRational position)
-    unsignedPower = Bishop.pow value exponent
-    magnitude = Bishop._*_ coefficient (Bishop.∣_∣ unsignedPower)
   in
   BishopP.≃-trans
-    (BishopP.*-congʳ
-      (Bishop._*_ coefficient unsignedPower)
-      (Concrete.alternatingSignOdd index))
-    (BishopP.≃-trans
-      (BishopP.negative-product-left (Bishop._*_ coefficient unsignedPower))
-      (BishopP.neg-cong
-        (BishopP.*-congˡ coefficient (BishopP.≃-symm absPower))))
+    (BishopP.*-cong
+      (Concrete.alternatingSignOdd index)
+      (BishopP.*-congˡ
+        (BishopP.≃-symm
+          (BishopP.nonNegx⇒∣x∣≃x powerNN))))
+    (let open BishopP.ℝ-Solver
+     in solve 1
+        (λ magnitude → (⊝ Κ 1ℚᵘ) ⊗ magnitude ⊜ ⊝ magnitude)
+        BishopP.≃-refl
+        (Atan.atanMagnitudeTerm value termIndex))
+  where
+  open import Data.Rational.Unnormalised using (1ℚᵘ)
 
 atanAlternatingSeriesData : ∀ {value} →
   PositiveHalfBallPoint value →
   Alternating.AlternatingDecreasingSeriesData
 atanAlternatingSeriesData {value} point = record
-  { Alternating.AlternatingDecreasingSeriesData.term = Atan.atanSignedTerm value
-  ; Alternating.AlternatingDecreasingSeriesData.magnitude = Atan.atanMagnitudeTerm value
-  ; Alternating.AlternatingDecreasingSeriesData.representedLimit =
-      Atan.bishopAtanHalfBall value (insideHalf point)
-  ; Alternating.AlternatingDecreasingSeriesData.magnitudeNonnegative =
-      Atan.atanMagnitudeNonnegative value
-  ; Alternating.AlternatingDecreasingSeriesData.magnitudeDecreasing =
-      atanMagnitudeDecreasing point
-  ; Alternating.AlternatingDecreasingSeriesData.signedEvenIsMagnitude =
-      atanSignedEvenIsMagnitude point
-  ; Alternating.AlternatingDecreasingSeriesData.signedOddIsNegativeMagnitude =
-      atanSignedOddIsNegativeMagnitude point
-  ; Alternating.AlternatingDecreasingSeriesData.seriesConverges =
-      Atan.bishopAtanHalfBallConverges value (insideHalf point)
+  { term = Atan.atanSignedTerm value
+  ; magnitude = Atan.atanMagnitudeTerm value
+  ; representedLimit = Atan.bishopAtanHalfBall value (insideHalf point)
+  ; magnitudeNonnegative = Atan.atanMagnitudeNonnegative value
+  ; magnitudeDecreasing = atanMagnitudeDecreasing point
+  ; signedEvenIsMagnitude = atanSignedEvenIsMagnitude point
+  ; signedOddIsNegativeMagnitude = atanSignedOddIsNegativeMagnitude point
+  ; seriesConverges = Atan.bishopAtanHalfBallConverges value (insideHalf point)
   }
 
 atanInterlacing : ∀ {value} → PositiveHalfBallPoint value →
