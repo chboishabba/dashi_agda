@@ -12,89 +12,65 @@ module DASHI.Governance.FutureSafeCausalCompressionExact where
 -- The exact future-language and causal-compression constructions below are
 -- DASHI constructions.
 --
--- Internal producer pollen:
---   * PR #548 / DASHI.Core.FutureObservationLanguageQuotientExact
+-- Existing repository producers reused directly:
+--   * DASHI.Core.FutureObservationLanguageQuotientExact
 --       kernel containment in future observational equivalence;
 --   * PR #549 / AttackerObservationLanguageRefinementExact
 --       observation-language refinement and separating observations;
 --   * PR #556 / CausalResolutionExact
 --       endpoint-preserving graph compression and reification collision loss.
 --
--- This module is deliberately self-contained over the #556 branch.  It ports
--- only the theorem shape needed by governance consumers; it does not duplicate
--- the full #548 future-quotient compiler or the crypto-specific #549 carrier.
+-- The future-equivalence object is NOT redefined here.  This governance bridge
+-- consumes the already-existing core theorem and adds the causal/query-relative
+-- notion needed to distinguish safe abstraction from reification loss.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
-open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.Equality using (_≡_)
 open import Data.Empty using (⊥)
 
+import DASHI.Core.FutureObservationLanguageQuotientExact as Future
+import DASHI.Core.TypedDependencyCore as Dependency
 import DASHI.Governance.CausalResolutionExact as Resolution
 
 ------------------------------------------------------------------------
--- Future observational equivalence.
+-- Future-safe causal edge compression.
 ------------------------------------------------------------------------
 
-record DynamicObservationSystem : Set₁ where
-  constructor dynamicObservationSystem
+record FutureSafeEdgeCompression
+  (Fine Coarse : Resolution.CausalGraph)
+  (C : Resolution.GraphCompression Fine Coarse) : Set₁ where
+  constructor futureSafeEdgeCompression
   field
-    State : Set
     Action : Set
     Observation : Set
-    step : Action → State → State
-    observe : State → Observation
+    system :
+      Dependency.DependentActionSystem
+        (Resolution.Edge Fine) Action
+    project : Resolution.Edge Fine → Observation
+    futureSafety :
+      Future.FutureLanguageSafeProjection
+        system
+        project
+        (Resolution.GraphCompression.edgeMap C)
 
-open DynamicObservationSystem public
+open FutureSafeEdgeCompression public
 
-run :
-  (S : DynamicObservationSystem) →
-  List (Action S) → State S → State S
-run S [] state = state
-run S (action ∷ actions) state =
-  run S actions (step S action state)
-
-record FutureEquivalent
-  (S : DynamicObservationSystem)
-  (left right : State S) : Set where
-  constructor futureEquivalent
-  field
-    sameFutureObservation :
-      (actions : List (Action S)) →
-      observe S (run S actions left)
-      ≡ observe S (run S actions right)
-
-open FutureEquivalent public
-
-futureEquivalentRefl :
-  (S : DynamicObservationSystem) →
-  (state : State S) →
-  FutureEquivalent S state state
-futureEquivalentRefl S state =
-  futureEquivalent (λ actions → refl)
-
-record FutureSafeCoarsening
-  (S : DynamicObservationSystem)
-  (Coarse : Set) : Set₁ where
-  constructor futureSafeCoarsening
-  field
-    coarsen : State S → Coarse
-    kernelContainedInFutureEquivalence :
-      ∀ {left right} →
-      coarsen left ≡ coarsen right →
-      FutureEquivalent S left right
-
-open FutureSafeCoarsening public
-
-safeCollisionIsFutureInvisible :
-  ∀ {S : DynamicObservationSystem}
-    {Coarse : Set}
-    (safe : FutureSafeCoarsening S Coarse)
-    {left right : State S} →
-  coarsen safe left ≡ coarsen safe right →
-  FutureEquivalent S left right
-safeCollisionIsFutureInvisible safe =
-  kernelContainedInFutureEquivalence safe
+compressedEdgesAreFutureEquivalent :
+  ∀ {Fine Coarse : Resolution.CausalGraph}
+    {C : Resolution.GraphCompression Fine Coarse}
+    (safe : FutureSafeEdgeCompression Fine Coarse C)
+    {left right : Resolution.Edge Fine} →
+  Resolution.GraphCompression.edgeMap C left
+    ≡ Resolution.GraphCompression.edgeMap C right →
+  Future.FutureObservationEquivalent
+    (system safe)
+    (project safe)
+    left right
+compressedEdgesAreFutureEquivalent safe collision =
+  Future.kernelContainedInFutureEquivalence
+    (futureSafety safe)
+    collision
 
 ------------------------------------------------------------------------
 -- Query-relative causal resolution.
@@ -203,6 +179,7 @@ record FutureSafeCausalCompressionBoundary : Set where
     querySafetyImpliesUniversalOntologicalIdentity : Bool
     moreDetailIsAlwaysBetter : Bool
     futureSafetyIsRelativeToActionObservationLanguage : Bool
+    futureEquivalenceCoreReusedRatherThanRedefined : Bool
 
 canonicalFutureSafeCausalCompressionBoundary :
   FutureSafeCausalCompressionBoundary
@@ -213,4 +190,5 @@ canonicalFutureSafeCausalCompressionBoundary =
     true
     false
     false
+    true
     true
