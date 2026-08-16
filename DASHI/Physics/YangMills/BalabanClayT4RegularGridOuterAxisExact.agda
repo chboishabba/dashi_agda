@@ -45,10 +45,6 @@ regularCellHasOuterAxis
   (Grid.gridCell4 Grid.positiveInner Grid.positiveOuter c d) regular = outer1 refl
 regularCellHasOuterAxis
   (Grid.gridCell4 a b Grid.negativeOuter d) regular = outer2 refl
-  where
-    -- The two earlier clauses already catch outer axes 0/1.  This clause is
-    -- intentionally more general: if axis 2 is outer it is a valid witness
-    -- regardless of the earlier coordinates.
 regularCellHasOuterAxis
   (Grid.gridCell4 a b Grid.positiveOuter d) regular = outer2 refl
 regularCellHasOuterAxis
