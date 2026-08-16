@@ -15,34 +15,30 @@ module DASHI.Physics.YangMills.BalabanYM4FiniteLatticeBetaEstimateExact where
 --
 -- DASHI CONTRIBUTION
 --
--- Put the finite-lattice beta estimate in the exact form needed by the
--- complete-density small-coupling history.  The relevant coefficient is split
--- at the literal localized plaquette projector:
+-- Finite-lattice beta estimate at one literal RG step.  The one-loop Gaussian
+-- coefficient and the signed quartic interaction remainder are kept as the
+-- actual two summands.  A physical quartic estimate
 --
---       beta = beta_Z + beta_int,
+--       |beta_int| <= C_int g^4
 --
--- where beta_Z is the gauge/ghost one-loop plaquette coefficient and beta_int
--- is the total quartic localized remainder.  If the finite Brillouin-zone
--- certificate gives beta_Z >= z_* > 0 and the physical quartic estimate gives
+-- and one common small-coupling compatibility
 --
---       |beta_int| <= C_int g^4 <= z_*/2,
+--       C_int g^4 <= z_*/2 <= beta_Z/2
 --
--- then beta >= z_*/2 > 0.  Unlike the older beta-split interface, the theorem
--- below also carries the actual g^4 remainder production and proves the
--- half-gap from a single small-coupling compatibility inequality.
+-- give beta >= z_*/2 >= 0.  The all-scale `FiniteLatticeBetaSplit` is built in
+-- the separate trajectory module, so this file does not invent a second split
+-- record incompatible with the repository API.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; _+_; _*_; _≤_; _/_; ∣_∣)
+  (ℚ; 0ℚ; _+_; _-_; _*_; _≤_; _/_; ∣_∣)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (subst; trans)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
-import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
-import DASHI.Physics.YangMills.BalabanYM4BetaSplitPositivityExact as Split
 
 half : ℚ
 half = + 1 / 2
@@ -53,21 +49,13 @@ fourthPower g = (g * g) * (g * g)
 record FiniteLatticeBetaEstimate : Set where
   field
     beta betaZ betaInt coupling interactionConstant zLower : ℚ
-
     betaSplitExact : beta ≡ betaZ + betaInt
-
     couplingNonnegative : 0ℚ ≤ coupling
     interactionConstantNonnegative : 0ℚ ≤ interactionConstant
     zLowerNonnegative : 0ℚ ≤ zLower
-
     gaussianLower : zLower ≤ betaZ
-
-    -- This is the literal quartic small-field remainder estimate after the
-    -- plaquette coefficient projector.
     interactionQuartic :
       ∣ betaInt ∣ ≤ interactionConstant * fourthPower coupling
-
-    -- One common small-coupling budget; no independent beta remainder input.
     quarticFitsHalfGaussianGap :
       interactionConstant * fourthPower coupling ≤ half * zLower
 
@@ -95,6 +83,13 @@ interactionSignedLower dataSet =
   in
   ℚP.≤-trans reflected negAbsBelow
 
+interactionSignedUpper :
+  ∀ dataSet → betaInt dataSet ≤ half * zLower dataSet
+interactionSignedUpper dataSet =
+  ℚP.≤-trans
+    (ℚP.p≤∣p∣ (betaInt dataSet))
+    (interactionBelowHalfGaussianGap dataSet)
+
 finiteLatticeBetaLowerHalfGap :
   ∀ dataSet → half * zLower dataSet ≤ beta dataSet
 finiteLatticeBetaLowerHalfGap dataSet =
@@ -119,39 +114,16 @@ finiteLatticeBetaLowerHalfGap dataSet =
         zLower dataSet + (0ℚ - half * zLower dataSet) ≤ upper)
       (sym (betaSplitExact dataSet))
       summed)
-  where
-    open import Relation.Binary.PropositionalEquality using (sym)
 
 finiteLatticeBetaNonnegative :
   ∀ dataSet → 0ℚ ≤ beta dataSet
 finiteLatticeBetaNonnegative dataSet =
   let
     halfZNN : 0ℚ ≤ half * zLower dataSet
-    halfZNN = ℚP.*-mono-≤
-      (ℚP.nonNegative⁻¹ half)
-      (zLowerNonnegative dataSet)
-      ℚP.≤-refl ℚP.≤-refl
+    halfZNN =
+      ℚP.*-monoˡ-≤-nonNeg half (zLowerNonnegative dataSet)
   in
   ℚP.≤-trans halfZNN (finiteLatticeBetaLowerHalfGap dataSet)
-
-finiteLatticeBetaSplitForExistingHistory :
-  ∀ dataSet →
-  Split.BetaSplitBounds
-    (beta dataSet)
-    (betaZ dataSet)
-    (betaInt dataSet)
-    (zLower dataSet)
-    (betaZ dataSet)
-finiteLatticeBetaSplitForExistingHistory dataSet = record
-  { Split.BetaSplitBounds.betaSplitExact = betaSplitExact dataSet
-  ; Split.BetaSplitBounds.gaussianLower = gaussianLower dataSet
-  ; Split.BetaSplitBounds.gaussianUpper = ℚP.≤-refl
-  ; Split.BetaSplitBounds.interactionLower = interactionSignedLower dataSet
-  ; Split.BetaSplitBounds.interactionUpper =
-      ℚP.≤-trans
-        (ℚP.p≤∣p∣ (betaInt dataSet))
-        (interactionBelowHalfGaussianGap dataSet)
-  }
 
 ym4FiniteLatticeBetaQuarticEstimateLevel : ProofLevel
 ym4FiniteLatticeBetaQuarticEstimateLevel = machineChecked
