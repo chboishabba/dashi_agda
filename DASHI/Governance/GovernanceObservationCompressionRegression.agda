@@ -16,16 +16,10 @@ import DASHI.Governance.OpenWorldDisconfirmationBoundaryExact as OpenWorld
 import DASHI.Governance.CounterpositionDiversityAutonomyExact as Counter
 import DASHI.Governance.EpistemicBinaryForcingLossExact as Binary
 import DASHI.Governance.EpistemicTritBalancedTernarySeparationExact as TernarySeparation
+import DASHI.Governance.CompositionalEvidenceEnclosureExact as Evidence
 import DASHI.Governance.InterventionFeasibilityCutsetExact as Feasibility
 import DASHI.Governance.FiniteCausalQueryRefinementStabilizationExact as Refinement
 import DASHI.Governance.ProxyObjectiveFutureSafetyExact as Proxy
-
-------------------------------------------------------------------------
--- Focused local-kernel regression root.
---
--- Suggested local command:
---   agda -i . DASHI/Governance/GovernanceObservationCompressionRegression.agda
-------------------------------------------------------------------------
 
 compressionIsNotAutomaticallyReification :
   Compression.FutureSafeCausalCompressionBoundary.everyCompressionIsReificationLoss
@@ -128,6 +122,18 @@ acceptBinaryCannotReconstructEpistemicState = Binary.acceptForcingIsNotInjective
 rejectBinaryCannotReconstructEpistemicState :
   Binary.RejectForcingInjective → ⊥
 rejectBinaryCannotReconstructEpistemicState = Binary.rejectForcingIsNotInjective
+
+composedEvidenceLowerBoundIsDerived : Evidence.lower Evidence.fiveBox ≡ 3
+composedEvidenceLowerBoundIsDerived = Evidence.fiveBoxLowerIsThree
+
+composedEvidenceUpperBoundIsDerived : Evidence.upper Evidence.fiveBox ≡ 7
+composedEvidenceUpperBoundIsDerived = Evidence.fiveBoxUpperIsSeven
+
+targetEvidenceReceiptIsNotRequired :
+  Evidence.EvidenceEnclosureBoundary.localBoundsCanComposeWithoutTargetReceipt
+    Evidence.canonicalEvidenceEnclosureBoundary
+  ≡ true
+targetEvidenceReceiptIsNotRequired = refl
 
 outcomeNeedsSeparateFeasibilityLaw :
   Feasibility.InterventionFeasibilityCutsetBoundary.desiredOutcomeNeedsSeparateLaw
