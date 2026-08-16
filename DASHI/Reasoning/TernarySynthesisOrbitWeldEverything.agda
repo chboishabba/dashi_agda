@@ -22,6 +22,8 @@ import DASHI.Interop.PNFHodgeResidualTopology
 import DASHI.Interop.PNFHyperfabric369
 import DASHI.Interop.PNFSpectralFieldGraph
 import DASHI.Interop.PNFTernaryCycleSpectralExact
+import DASHI.Interop.PNFSignedResidualDelta0Exact
+import DASHI.Interop.PNFSignedResidualDelta0Regression
 import DASHI.Moonshine.TernarySevenOggSSPComparisonExact
 import DASHI.Physics.Common.FiniteWreathRefinementExact
 import DASHI.Reasoning.PNFWaveSynthesisCommutatorExact
