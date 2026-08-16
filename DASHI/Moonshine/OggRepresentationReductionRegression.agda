@@ -14,6 +14,7 @@ import DASHI.Moonshine.ModularCurveJFrickeInterfaceExact as Modular
 import DASHI.Moonshine.OggPolyhedralReductionControlExact as Control
 import DASHI.Moonshine.SSPRepresentationHeckeIntertwinerBoundaryExact as Intertwiner
 import DASHI.Moonshine.TernarySevenOggSSPComparisonExact as Seven
+import DASHI.Physics.Closure.PhysicalSSPHeckeModelClosureReceipt as Existing
 
 ------------------------------------------------------------------------
 -- Continuous dimension lane and p=2 boundary.
@@ -105,8 +106,8 @@ j3C3FixedSpaceIsThree = Fixed.j3C3FixedDimension
 ------------------------------------------------------------------------
 
 existingCarrierEqualityStillOpen :
-  Intertwiner.Existing.sspCarrierEqualsHeckeModelProved
-    Intertwiner.Existing.canonicalPhysicalSSPHeckeModelClosureReceipt
+  Existing.sspCarrierEqualsHeckeModelProved
+    Existing.canonicalPhysicalSSPHeckeModelClosureReceipt
   ≡ false
 existingCarrierEqualityStillOpen = Intertwiner.existingCarrierEqualityStillOpen
 
