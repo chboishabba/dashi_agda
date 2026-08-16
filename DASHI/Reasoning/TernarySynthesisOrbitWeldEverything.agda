@@ -26,6 +26,7 @@ import DASHI.Interop.PNFTernaryCycleSpectralExact
 import DASHI.Interop.PNFSignedResidualDelta0Exact
 import DASHI.Interop.PNFSignedResidualDelta0Regression
 import DASHI.Moonshine.TernarySevenOggSSPComparisonExact
+import DASHI.Moonshine.TernarySevenCanonicalMapSeparationExact
 import DASHI.Physics.Common.FiniteWreathRefinementExact
 import DASHI.Reasoning.PNFWaveSynthesisCommutatorExact
 import DASHI.Reasoning.RelationalBranchCobordismGeometry
