@@ -29,16 +29,19 @@ module DASHI.Physics.Closure.NSTriadKNHighestAlphaRound61Exact where
 --
 -- A3  : normalized-density domination suffices; an explicit K_bad charge
 --       multiplicity is propagated to eta_HHb = (2 C_*) K_bad.
--- B2/3: common-hat width one plus ONE active same-object theorem to the
---       six-three Gram cell derives 17/64, 65/512, 65/512 and hence 133/256.
+-- B1/3: an active literal normalized odd-PQ fibre is identified exactly with
+--       an ACTUAL factorized physical Gram cell; only that cell's overlap is
+--       bounded by the six-three scale envelope.  Outer contractions plus
+--       common-hat width one then derive 17/64, 65/512, 65/512 and 133/256.
+--       The physical Fourier Gram is not equated to the envelope candidate.
 -- C2/3: positive correction implies a<r-q; conversely C1 plus a<r-q
 --       constructs a positive correction automatically.  The zero-safe branch
 --       uses ((r-q)-a)/(K+1); when K>0 the sharp branch uses the maximal
 --       B_*=((r-q)-a)/K and saturates a+B_*K=r-q exactly.
 -- ABC : the canonical Round58/60 source can now be constructed from A's
---       source-indexed estimates, B's single active six-three identification,
---       and C's strict-positive-scale data; derived B/C certificates are not
---       re-requested from callers.
+--       source-indexed estimates, B's physical-Gram realization plus overlap
+--       bound, and C's strict-positive-scale data; derived B/C certificates
+--       are not re-requested from callers.
 -- C->G: the final G scalar carrier takes the sharp positive-K B_* from C
 --       definitionally, so no smaller arbitrary correction cap is reintroduced
 --       between the fixed-shift proof and the global feasibility calculation.
@@ -56,7 +59,8 @@ module DASHI.Physics.Closure.NSTriadKNHighestAlphaRound61Exact where
 --
 --   A1/A2  actual localized Duhamel construction and quantitative tail
 --          headroom on the selected physical solution;
---   B1     active literal odd-(P/Q) normalized Gram = six-three Gram;
+--   B1/B3  literal normalized odd-PQ -> physical factorized Gram realization,
+--          and the six-three overlap estimate on that physical cell;
 --   C1     physical owner/block scale bounds (C2 is the immediate falsifier);
 --   D1/F1  one localized PDE identity extracting kernel and boundary atoms;
 --   D2/F2  independent kernel estimate/zero and physical boundary limits;
@@ -74,7 +78,8 @@ import DASHI.Physics.Closure.NSTriadKNHHBadPhysicalDuhamelSourceRound59
 import DASHI.Physics.Closure.NSTriadKNHHBadLiteralComponentCapacityRound57Exact
 import DASHI.Physics.Closure.NSTriadKNHHBadDominatedRecurrenceMultiplicityRound61Exact
 
--- B: literal odd-PQ operator, normalized source and active six-three reduction.
+-- B: literal odd-PQ operator, normalized source and physical-Gram/six-three
+-- overlap reduction.
 import DASHI.Physics.Closure.NSTriadKNComLiteralOddPQKernelRound57Exact
 import DASHI.Physics.Closure.NSTriadKNComNormalizedFibreSourceRound60Exact
 import DASHI.Physics.Closure.NSTriadKNComActiveSixThreeRealizationRound61Exact
