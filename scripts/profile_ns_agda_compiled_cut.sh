@@ -9,6 +9,13 @@ set -euo pipefail
 # its historical Com envelope transport has been split into a separate adapter.
 # LEGACY=1 adds that adapter; FULL=1 additionally retries the conjectural/heavy
 # downstream package after the lightweight boundary is known healthy.
+#
+# Round 61 profiling showed the previous dimension-free route reached the legacy
+# recursive finite-Gram theorem first (~263.5 s in finiteGramStep) and then hit
+# the historical ConstantOneV2 let-binding parser error.  The ladder therefore
+# checks the new compiled constant-one Holder module explicitly before the
+# dimension-free kernel consumer; neither should now require the legacy Gram
+# graph.  This is the path intended to remain runnable on a 32 GiB workstation.
 
 REPO_ROOT="${DASHI_REPO_ROOT:-$(cd "$(dirname "$0")/.." && pwd)}"
 cd "$REPO_ROOT"
