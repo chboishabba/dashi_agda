@@ -90,6 +90,14 @@ compressionWithCollisionIsNotInjective loss injective =
       (ReificationLoss.compressedTogether loss))
 
 ------------------------------------------------------------------------
+-- Self-contained list membership for refinement witnesses.
+------------------------------------------------------------------------
+
+data _∈_ {A : Set} (x : A) : List A → Set where
+  here : ∀ {xs} → x ∈ (x ∷ xs)
+  there : ∀ {y xs} → x ∈ xs → x ∈ (y ∷ xs)
+
+------------------------------------------------------------------------
 -- Structural refinement goes the opposite direction: a coarse explanatory
 -- edge is decomposed into named fine edges with explicit evidentiary support.
 ------------------------------------------------------------------------
@@ -102,7 +110,7 @@ record StructuralRefinement
     everyRefinedEdgeInspectable :
       (coarse : Edge Coarse) →
       (fine : Edge Fine) →
-      Member fine (refine coarse) →
+      fine ∈ refine coarse →
       inspectable fine
 
 ------------------------------------------------------------------------
