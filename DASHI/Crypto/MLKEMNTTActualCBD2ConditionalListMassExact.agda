@@ -8,6 +8,16 @@ module DASHI.Crypto.MLKEMNTTActualCBD2ConditionalListMassExact where
 -- "Module-Lattice-Based Key-Encapsulation Mechanism Standard", FIPS 203,
 -- 2024. DOI: 10.6028/NIST.FIPS.203.
 --
+-- Defensive partial-information / reconciliation context (not a proof input):
+-- Yen-Ting Kuo; Atsushi Takayasu,
+-- "A Lattice Attack on CRYSTALS-Kyber with Correlation Power Analysis",
+-- ICISC 2023, LNCS, 202--220.
+-- DOI: 10.1007/978-981-97-1235-9_11.
+-- Earlier version: IACR ePrint 2023/1781.
+--
+-- The cited work motivates treating residual candidate ambiguity as a defensive
+-- audit quantity.  Its lattice-recovery algorithm is not imported here.
+--
 -- If a finite candidate set of size N is partitioned by an observation, then
 -- the sum, over candidates, of the size of the candidate's observation fibre is
 --
@@ -77,22 +87,3 @@ twoScalarMeanNumeratorIs125 = refl
 commonDenominatorIs125 :
   denominator firstScalarMeanListSize ≡ 125
 commonDenominatorIs125 = refl
-
-record ConditionalListMassRefinement : Set where
-  constructor conditionalListMassRefinement
-  field
-    beforeMass afterMass : Nat
-    beforeIs157 : beforeMass ≡ 157
-    afterIs125 : afterMass ≡ 125
-
-open ConditionalListMassRefinement public
-
-actualCBD2ConditionalListMassRefinement : ConditionalListMassRefinement
-actualCBD2ConditionalListMassRefinement =
-  conditionalListMassRefinement 157 125 refl refl
-
-------------------------------------------------------------------------
--- Boundary: smaller average finite list size is not yet a recovery-work theorem.
--- Mate construction, reconciliation, traversal and acquisition costs remain
--- independent coordinates in the blue-team search geometry.
-------------------------------------------------------------------------
