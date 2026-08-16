@@ -13,7 +13,11 @@ module DASHI.Moonshine.OggRepresentationReductionEverything where
 -- supplies an independently constructed finite reduction chain rather than an
 -- SSP selector assumption.  Direct Aristotle arithmetic/Hecke/q-series
 -- theorems and the complete candidate tau fingerprint are independent control
--- columns, not selector premises.
+-- columns, not selector premises.  The prime Fricke coupling imports below
+-- make the first exact representation/modular defect bridge: SO(3) characters
+-- reconstruct the elliptic-point part of g(X0(p)), while class-number Fricke
+-- fixed points close the quotient defect.  p=2 stays a separate SU(2) spinor
+-- boundary rather than being forced through the odd-dimensional SO(3) lane.
 ------------------------------------------------------------------------
 
 import DASHI.Analysis.FiniteRealQSeriesReflectionExact
@@ -22,6 +26,7 @@ import DASHI.Foundations.FiniteRepresentationRestrictionCore
 import DASHI.Foundations.PolyhedralFiniteRestrictionInstancesExact
 import DASHI.Foundations.CandidateIndexedFiniteRestrictionFamilyExact
 import DASHI.Foundations.SU2SO3IrrepDimensionExact
+import DASHI.Foundations.CubicSO3OrbitalBranchingExact
 import DASHI.Foundations.D4SO3NineIrrepRestrictionExact
 import DASHI.Foundations.D4SO3RestrictionJ0To35Exact
 import DASHI.Foundations.D4SO3RestrictionCharacterJ0To35Exact
@@ -57,10 +62,15 @@ import DASHI.Moonshine.Monster3BC3RepresentationRingEvaluationExact
 import DASHI.Moonshine.OggPolyhedralReductionControlExact
 import DASHI.Moonshine.OggTetrahedralReductionControlExact
 import DASHI.Moonshine.OggPrimeControlMatrixExact
+import DASHI.Moonshine.PrimeFrickeGenusControlExact
+import DASHI.Moonshine.PrimeFrickeOrbitSaturationExact
+import DASHI.Moonshine.PrimeRepresentationFrickeCouplingExact
+import DASHI.Moonshine.AllPrimeRepresentationFrickeClosureExact
 import DASHI.Moonshine.SSPRepresentationHeckeIntertwinerBoundaryExact
 import DASHI.Moonshine.TernarySevenOggSSPComparisonExact
 import DASHI.Moonshine.OggPhaseFrickeSynthesisRegression
 import DASHI.Moonshine.AristotleCrossPollinationRegression
+import DASHI.Moonshine.OggPrimeModularControlRegression
 import DASHI.Physics.Closure.PhysicalSSPHeckeModelClosureReceipt
 import DASHI.Physics.Closure.SSPZ3EigenspaceClassificationReceipt
 import DASHI.Physics.Moonshine.SupersingularPrimeLaneBridge
