@@ -15,25 +15,32 @@ module DASHI.Physics.YangMills.BalabanClayT4PositiveDenominatorQuotientEndpoints
 --      lower = numeratorLower / denominatorUpper
 --      upper = numeratorUpper / denominatorLower
 --
--- for a strictly positive denominator interval. Those endpoints are correct
--- only when the numerator interval is nonnegative. Division by a positive
+-- for a strictly positive denominator interval.  Those endpoints are correct
+-- only when the numerator interval is nonnegative.  Division by a positive
 -- interval is monotone in the numerator but changes monotonicity in the
 -- denominator with the SIGN of the numerator.
 --
--- This finite sign split makes the endpoint choice explicit:
+-- This file now does more than choose the correct endpoints.  Over exact
+-- rationals it proves the full pointwise enclosure theorem for all three sign
+-- cases:
 --
 --   nL >= 0:       [ nL/dU , nU/dL ]
 --   nU <= 0:       [ nL/dL , nU/dU ]
 --   nL <= 0 <= nU: [ nL/dL , nU/dL ].
 --
--- Sound division still requires the evaluator to prove 0 < dL and that the
--- numerator/denominator functions lie in their boxes. What is removed here
--- is the unsound assumption that the same denominator endpoint works for all
--- numerator signs.
+-- Rational quotient notation is implemented explicitly as multiplication by
+-- the positive reciprocal.  This avoids confusing Agda's rational constructor
+-- `_/_` with division of two rationals and makes every nonzero denominator
+-- obligation visible to the kernel.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational using (ℚ; 0ℚ; _≤_; _/_)
+open import Data.Rational.Base as ℚ using
+  (ℚ; 0ℚ; 1ℚ; _*_; _≤_; _<_; 1/_; Positive; NonNegative; NonPositive; NonZero)
+import Data.Rational.Properties as ℚP
+import Data.Rational.Tactic.RingSolver as ℚRing
+open import Relation.Binary.PropositionalEquality using
+  (cong; subst; subst₂; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -43,53 +50,391 @@ data NumeratorSignCase (lower upper : ℚ) : Set where
   numeratorStraddlesZero :
     lower ≤ 0ℚ → 0ℚ ≤ upper → NumeratorSignCase lower upper
 
+positiveReciprocal : (denominator : ℚ) → 0ℚ < denominator → ℚ
+positiveReciprocal denominator denominatorPositive =
+  let
+    instance
+      positiveDenominator : Positive denominator
+      positiveDenominator = ℚ.positive denominatorPositive
+
+      nonzeroDenominator : NonZero denominator
+      nonzeroDenominator = ℚP.pos⇒nonZero denominator
+  in
+  1/ denominator
+
+dividePositive : (numerator denominator : ℚ) → 0ℚ < denominator → ℚ
+dividePositive numerator denominator denominatorPositive =
+  numerator * positiveReciprocal denominator denominatorPositive
+
+positiveReciprocalRightInverse :
+  ∀ denominator (denominatorPositive : 0ℚ < denominator) →
+  denominator * positiveReciprocal denominator denominatorPositive ≡ 1ℚ
+positiveReciprocalRightInverse denominator denominatorPositive =
+  let
+    instance
+      positiveDenominator : Positive denominator
+      positiveDenominator = ℚ.positive denominatorPositive
+
+      nonzeroDenominator : NonZero denominator
+      nonzeroDenominator = ℚP.pos⇒nonZero denominator
+  in
+  ℚP.*-inverseʳ denominator
+
+positiveReciprocalPositive :
+  ∀ denominator (denominatorPositive : 0ℚ < denominator) →
+  0ℚ < positiveReciprocal denominator denominatorPositive
+positiveReciprocalPositive denominator denominatorPositive =
+  let
+    instance
+      positiveDenominator : Positive denominator
+      positiveDenominator = ℚ.positive denominatorPositive
+
+      nonzeroDenominator : NonZero denominator
+      nonzeroDenominator = ℚP.pos⇒nonZero denominator
+
+      reciprocalPositive : Positive (1/ denominator)
+      reciprocalPositive = ℚP.1/pos⇒pos denominator
+  in
+  ℚP.positive⁻¹ (1/ denominator)
+
+positiveReciprocalNonnegative :
+  ∀ denominator (denominatorPositive : 0ℚ < denominator) →
+  NonNegative (positiveReciprocal denominator denominatorPositive)
+positiveReciprocalNonnegative denominator denominatorPositive =
+  ℚ.nonNegative
+    (ℚP.<⇒≤ (positiveReciprocalPositive denominator denominatorPositive))
+
+upperDenominatorPositive :
+  ∀ lower upper → 0ℚ < lower → lower ≤ upper → 0ℚ < upper
+upperDenominatorPositive lower upper lowerPositive lowerBelowUpper =
+  ℚP.<-≤-trans lowerPositive lowerBelowUpper
+
+reciprocalAntitonePositive :
+  ∀ lower upper
+    (lowerPositive : 0ℚ < lower)
+    (upperPositive : 0ℚ < upper) →
+  lower ≤ upper →
+  positiveReciprocal upper upperPositive
+  ≤ positiveReciprocal lower lowerPositive
+reciprocalAntitonePositive lower upper lowerPositive upperPositive lowerBelowUpper =
+  let
+    lowerInverse = positiveReciprocal lower lowerPositive
+    upperInverse = positiveReciprocal upper upperPositive
+    scale = lower * upper
+
+    instance
+      lowerIsPositive : Positive lower
+      lowerIsPositive = ℚ.positive lowerPositive
+
+      upperIsPositive : Positive upper
+      upperIsPositive = ℚ.positive upperPositive
+
+      scaleIsPositive : Positive scale
+      scaleIsPositive = ℚP.pos*pos⇒pos lower upper
+
+    scaleUpperInverse : scale * upperInverse ≡ lower
+    scaleUpperInverse =
+      trans
+        (ℚRing.solve-∀ lower upper upperInverse)
+        (trans
+          (cong (lower *_) (positiveReciprocalRightInverse upper upperPositive))
+          (ℚRing.solve-∀ lower))
+
+    scaleLowerInverse : scale * lowerInverse ≡ upper
+    scaleLowerInverse =
+      trans
+        (ℚRing.solve-∀ lower upper lowerInverse)
+        (trans
+          (cong (upper *_) (positiveReciprocalRightInverse lower lowerPositive))
+          (ℚRing.solve-∀ upper))
+
+    scaled : scale * upperInverse ≤ scale * lowerInverse
+    scaled = subst₂ _≤_
+      (sym scaleUpperInverse)
+      (sym scaleLowerInverse)
+      lowerBelowUpper
+  in
+  ℚP.*-cancelˡ-≤-pos scale scaled
+
+dividePositiveNumeratorMonotone :
+  ∀ lower upper denominator
+    (denominatorPositive : 0ℚ < denominator) →
+  lower ≤ upper →
+  dividePositive lower denominator denominatorPositive
+  ≤ dividePositive upper denominator denominatorPositive
+dividePositiveNumeratorMonotone lower upper denominator denominatorPositive lowerBelowUpper =
+  let
+    reciprocal = positiveReciprocal denominator denominatorPositive
+    instance
+      reciprocalNonnegative : NonNegative reciprocal
+      reciprocalNonnegative =
+        positiveReciprocalNonnegative denominator denominatorPositive
+  in
+  ℚP.*-monoʳ-≤-nonNeg reciprocal lowerBelowUpper
+
+dividePositiveDenominatorAntitoneNonnegative :
+  ∀ numerator lowerDenominator upperDenominator
+    (numeratorNonnegative : 0ℚ ≤ numerator)
+    (lowerPositive : 0ℚ < lowerDenominator)
+    (upperPositive : 0ℚ < upperDenominator) →
+  lowerDenominator ≤ upperDenominator →
+  dividePositive numerator upperDenominator upperPositive
+  ≤ dividePositive numerator lowerDenominator lowerPositive
+dividePositiveDenominatorAntitoneNonnegative numerator lowerDenominator upperDenominator
+    numeratorNonnegative lowerPositive upperPositive lowerBelowUpper =
+  let
+    instance
+      numeratorIsNonnegative : NonNegative numerator
+      numeratorIsNonnegative = ℚ.nonNegative numeratorNonnegative
+  in
+  ℚP.*-monoˡ-≤-nonNeg numerator
+    (reciprocalAntitonePositive
+      lowerDenominator upperDenominator
+      lowerPositive upperPositive lowerBelowUpper)
+
+dividePositiveDenominatorMonotoneNonpositive :
+  ∀ numerator lowerDenominator upperDenominator
+    (numeratorNonpositive : numerator ≤ 0ℚ)
+    (lowerPositive : 0ℚ < lowerDenominator)
+    (upperPositive : 0ℚ < upperDenominator) →
+  lowerDenominator ≤ upperDenominator →
+  dividePositive numerator lowerDenominator lowerPositive
+  ≤ dividePositive numerator upperDenominator upperPositive
+dividePositiveDenominatorMonotoneNonpositive numerator lowerDenominator upperDenominator
+    numeratorNonpositive lowerPositive upperPositive lowerBelowUpper =
+  let
+    instance
+      numeratorIsNonpositive : NonPositive numerator
+      numeratorIsNonpositive = ℚ.nonPositive numeratorNonpositive
+  in
+  ℚP.*-monoˡ-≤-nonPos numerator
+    (reciprocalAntitonePositive
+      lowerDenominator upperDenominator
+      lowerPositive upperPositive lowerBelowUpper)
+
 quotientLowerEndpoint :
   ∀ {numeratorLower numeratorUpper} →
   NumeratorSignCase numeratorLower numeratorUpper →
-  ℚ → ℚ → ℚ
+  (denominatorLower denominatorUpper : ℚ) →
+  (denominatorLowerPositive : 0ℚ < denominatorLower) →
+  denominatorLower ≤ denominatorUpper → ℚ
 quotientLowerEndpoint {numeratorLower}
-    (numeratorNonnegative _) denominatorLower denominatorUpper =
-  numeratorLower / denominatorUpper
+    (numeratorNonnegative _)
+    denominatorLower denominatorUpper denominatorLowerPositive denominatorOrdered =
+  dividePositive numeratorLower denominatorUpper
+    (upperDenominatorPositive
+      denominatorLower denominatorUpper denominatorLowerPositive denominatorOrdered)
 quotientLowerEndpoint {numeratorLower}
-    (numeratorNonpositive _) denominatorLower denominatorUpper =
-  numeratorLower / denominatorLower
+    (numeratorNonpositive _)
+    denominatorLower denominatorUpper denominatorLowerPositive denominatorOrdered =
+  dividePositive numeratorLower denominatorLower denominatorLowerPositive
 quotientLowerEndpoint {numeratorLower}
-    (numeratorStraddlesZero _ _) denominatorLower denominatorUpper =
-  numeratorLower / denominatorLower
+    (numeratorStraddlesZero _ _)
+    denominatorLower denominatorUpper denominatorLowerPositive denominatorOrdered =
+  dividePositive numeratorLower denominatorLower denominatorLowerPositive
 
 quotientUpperEndpoint :
   ∀ {numeratorLower numeratorUpper} →
   NumeratorSignCase numeratorLower numeratorUpper →
-  ℚ → ℚ → ℚ
+  (denominatorLower denominatorUpper : ℚ) →
+  (denominatorLowerPositive : 0ℚ < denominatorLower) →
+  denominatorLower ≤ denominatorUpper → ℚ
 quotientUpperEndpoint {numeratorUpper}
-    (numeratorNonnegative _) denominatorLower denominatorUpper =
-  numeratorUpper / denominatorLower
+    (numeratorNonnegative _)
+    denominatorLower denominatorUpper denominatorLowerPositive denominatorOrdered =
+  dividePositive numeratorUpper denominatorLower denominatorLowerPositive
 quotientUpperEndpoint {numeratorUpper}
-    (numeratorNonpositive _) denominatorLower denominatorUpper =
-  numeratorUpper / denominatorUpper
+    (numeratorNonpositive _)
+    denominatorLower denominatorUpper denominatorLowerPositive denominatorOrdered =
+  dividePositive numeratorUpper denominatorUpper
+    (upperDenominatorPositive
+      denominatorLower denominatorUpper denominatorLowerPositive denominatorOrdered)
 quotientUpperEndpoint {numeratorUpper}
-    (numeratorStraddlesZero _ _) denominatorLower denominatorUpper =
-  numeratorUpper / denominatorLower
+    (numeratorStraddlesZero _ _)
+    denominatorLower denominatorUpper denominatorLowerPositive denominatorOrdered =
+  dividePositive numeratorUpper denominatorLower denominatorLowerPositive
+
+record LiesBetween (lower value upper : ℚ) : Set where
+  constructor liesBetween
+  field
+    lowerSound : lower ≤ value
+    upperSound : value ≤ upper
+open LiesBetween public
+
+positiveDenominatorQuotientEnclosure :
+  ∀ {numeratorLower numeratorUpper numerator
+      denominatorLower denominatorUpper denominator}
+    (signCase : NumeratorSignCase numeratorLower numeratorUpper)
+    (denominatorLowerPositive : 0ℚ < denominatorLower)
+    (denominatorOrdered : denominatorLower ≤ denominatorUpper)
+    (numeratorLowerSound : numeratorLower ≤ numerator)
+    (numeratorUpperSound : numerator ≤ numeratorUpper)
+    (denominatorLowerSound : denominatorLower ≤ denominator)
+    (denominatorUpperSound : denominator ≤ denominatorUpper) →
+  LiesBetween
+    (quotientLowerEndpoint signCase
+      denominatorLower denominatorUpper
+      denominatorLowerPositive denominatorOrdered)
+    (dividePositive numerator denominator
+      (ℚP.<-≤-trans denominatorLowerPositive denominatorLowerSound))
+    (quotientUpperEndpoint signCase
+      denominatorLower denominatorUpper
+      denominatorLowerPositive denominatorOrdered)
+positiveDenominatorQuotientEnclosure
+    {numeratorLower} {numeratorUpper} {numerator}
+    {denominatorLower} {denominatorUpper} {denominator}
+    (numeratorNonnegative numeratorLowerNonnegative)
+    denominatorLowerPositive denominatorOrdered
+    numeratorLowerSound numeratorUpperSound
+    denominatorLowerSound denominatorUpperSound =
+  let
+    denominatorPositive =
+      ℚP.<-≤-trans denominatorLowerPositive denominatorLowerSound
+    denominatorUpperPositive =
+      upperDenominatorPositive
+        denominatorLower denominatorUpper
+        denominatorLowerPositive denominatorOrdered
+
+    numeratorNonnegative =
+      ℚP.≤-trans numeratorLowerNonnegative numeratorLowerSound
+    numeratorUpperNonnegative =
+      ℚP.≤-trans numeratorNonnegative numeratorUpperSound
+
+    lowerByDenominator =
+      dividePositiveDenominatorAntitoneNonnegative
+        numeratorLower denominator denominatorUpper
+        numeratorLowerNonnegative denominatorPositive denominatorUpperPositive
+        denominatorUpperSound
+    lowerByNumerator =
+      dividePositiveNumeratorMonotone
+        numeratorLower numerator denominator denominatorPositive
+        numeratorLowerSound
+
+    upperByNumerator =
+      dividePositiveNumeratorMonotone
+        numerator numeratorUpper denominator denominatorPositive
+        numeratorUpperSound
+    upperByDenominator =
+      dividePositiveDenominatorAntitoneNonnegative
+        numeratorUpper denominatorLower denominator
+        numeratorUpperNonnegative denominatorLowerPositive denominatorPositive
+        denominatorLowerSound
+  in
+  liesBetween
+    (ℚP.≤-trans lowerByDenominator lowerByNumerator)
+    (ℚP.≤-trans upperByNumerator upperByDenominator)
+positiveDenominatorQuotientEnclosure
+    {numeratorLower} {numeratorUpper} {numerator}
+    {denominatorLower} {denominatorUpper} {denominator}
+    (numeratorNonpositive numeratorUpperNonpositive)
+    denominatorLowerPositive denominatorOrdered
+    numeratorLowerSound numeratorUpperSound
+    denominatorLowerSound denominatorUpperSound =
+  let
+    denominatorPositive =
+      ℚP.<-≤-trans denominatorLowerPositive denominatorLowerSound
+    denominatorUpperPositive =
+      upperDenominatorPositive
+        denominatorLower denominatorUpper
+        denominatorLowerPositive denominatorOrdered
+
+    numeratorNonpositive =
+      ℚP.≤-trans numeratorUpperSound numeratorUpperNonpositive
+    numeratorLowerNonpositive =
+      ℚP.≤-trans numeratorLowerSound numeratorNonpositive
+
+    lowerByDenominator =
+      dividePositiveDenominatorMonotoneNonpositive
+        numeratorLower denominatorLower denominator
+        numeratorLowerNonpositive denominatorLowerPositive denominatorPositive
+        denominatorLowerSound
+    lowerByNumerator =
+      dividePositiveNumeratorMonotone
+        numeratorLower numerator denominator denominatorPositive
+        numeratorLowerSound
+
+    upperByNumerator =
+      dividePositiveNumeratorMonotone
+        numerator numeratorUpper denominator denominatorPositive
+        numeratorUpperSound
+    upperByDenominator =
+      dividePositiveDenominatorMonotoneNonpositive
+        numeratorUpper denominator denominatorUpper
+        numeratorUpperNonpositive denominatorPositive denominatorUpperPositive
+        denominatorUpperSound
+  in
+  liesBetween
+    (ℚP.≤-trans lowerByDenominator lowerByNumerator)
+    (ℚP.≤-trans upperByNumerator upperByDenominator)
+positiveDenominatorQuotientEnclosure
+    {numeratorLower} {numeratorUpper} {numerator}
+    {denominatorLower} {denominatorUpper} {denominator}
+    (numeratorStraddlesZero numeratorLowerNonpositive numeratorUpperNonnegative)
+    denominatorLowerPositive denominatorOrdered
+    numeratorLowerSound numeratorUpperSound
+    denominatorLowerSound denominatorUpperSound =
+  let
+    denominatorPositive =
+      ℚP.<-≤-trans denominatorLowerPositive denominatorLowerSound
+
+    lowerByDenominator =
+      dividePositiveDenominatorMonotoneNonpositive
+        numeratorLower denominatorLower denominator
+        numeratorLowerNonpositive denominatorLowerPositive denominatorPositive
+        denominatorLowerSound
+    lowerByNumerator =
+      dividePositiveNumeratorMonotone
+        numeratorLower numerator denominator denominatorPositive
+        numeratorLowerSound
+
+    upperByNumerator =
+      dividePositiveNumeratorMonotone
+        numerator numeratorUpper denominator denominatorPositive
+        numeratorUpperSound
+    upperByDenominator =
+      dividePositiveDenominatorAntitoneNonnegative
+        numeratorUpper denominatorLower denominator
+        numeratorUpperNonnegative denominatorLowerPositive denominatorPositive
+        denominatorLowerSound
+  in
+  liesBetween
+    (ℚP.≤-trans lowerByDenominator lowerByNumerator)
+    (ℚP.≤-trans upperByNumerator upperByDenominator)
 
 positiveNumeratorLegacyLowerExact :
   ∀ numeratorLower numeratorUpper denominatorLower denominatorUpper
-    (nonnegative : 0ℚ ≤ numeratorLower) →
+    (nonnegative : 0ℚ ≤ numeratorLower)
+    (denominatorLowerPositive : 0ℚ < denominatorLower)
+    (denominatorOrdered : denominatorLower ≤ denominatorUpper) →
   quotientLowerEndpoint
     (numeratorNonnegative {numeratorLower} {numeratorUpper} nonnegative)
-    denominatorLower denominatorUpper
-  ≡ numeratorLower / denominatorUpper
+    denominatorLower denominatorUpper denominatorLowerPositive denominatorOrdered
+  ≡ dividePositive numeratorLower denominatorUpper
+      (upperDenominatorPositive
+        denominatorLower denominatorUpper
+        denominatorLowerPositive denominatorOrdered)
 positiveNumeratorLegacyLowerExact numeratorLower numeratorUpper
-    denominatorLower denominatorUpper nonnegative = refl
+    denominatorLower denominatorUpper nonnegative
+    denominatorLowerPositive denominatorOrdered = refl
 
 positiveNumeratorLegacyUpperExact :
   ∀ numeratorLower numeratorUpper denominatorLower denominatorUpper
-    (nonnegative : 0ℚ ≤ numeratorLower) →
+    (nonnegative : 0ℚ ≤ numeratorLower)
+    (denominatorLowerPositive : 0ℚ < denominatorLower)
+    (denominatorOrdered : denominatorLower ≤ denominatorUpper) →
   quotientUpperEndpoint
     (numeratorNonnegative {numeratorLower} {numeratorUpper} nonnegative)
-    denominatorLower denominatorUpper
-  ≡ numeratorUpper / denominatorLower
+    denominatorLower denominatorUpper denominatorLowerPositive denominatorOrdered
+  ≡ dividePositive numeratorUpper denominatorLower denominatorLowerPositive
 positiveNumeratorLegacyUpperExact numeratorLower numeratorUpper
-    denominatorLower denominatorUpper nonnegative = refl
+    denominatorLower denominatorUpper nonnegative
+    denominatorLowerPositive denominatorOrdered = refl
+
+positiveDenominatorReciprocalAntitoneLevel : ProofLevel
+positiveDenominatorReciprocalAntitoneLevel = machineChecked
+
+positiveDenominatorQuotientEnclosureLevel : ProofLevel
+positiveDenominatorQuotientEnclosureLevel = machineChecked
 
 positiveDenominatorSignAwareEndpointSelectionLevel : ProofLevel
 positiveDenominatorSignAwareEndpointSelectionLevel = machineChecked
