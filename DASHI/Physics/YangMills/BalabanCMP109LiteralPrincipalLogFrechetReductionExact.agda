@@ -30,7 +30,7 @@ module DASHI.Physics.YangMills.BalabanCMP109LiteralPrincipalLogFrechetReductionE
 -- This module therefore makes the centre formula a CONSEQUENCE: callers only
 -- identify the two literal one-leg principal-log Frechet derivatives with
 -- J_+ and J_- respectively.  The printed J_+ Ad_exp centre formula is then
--- derived entrywise from the already-proved cancellation.
+-- derived from the already-proved action cancellation.
 --
 -- The remaining analytic leaf is now exactly the source theorem
 --
@@ -41,6 +41,7 @@ module DASHI.Physics.YangMills.BalabanCMP109LiteralPrincipalLogFrechetReductionE
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.List using (List)
 open import Data.Rational.Base as ℚ using (0ℚ; _-_)
 open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
 
@@ -51,7 +52,7 @@ import DASHI.Physics.YangMills.BalabanCMP109FiniteMatrixLeftRightDexpCancellatio
 
 record LiteralPrincipalLogOneLegFrechetData (Index : Set) : Set₁ where
   field
-    indices : Agda.Builtin.List.List Index
+    indices : List Index
 
     rightInverseDexp : Index → Jacobian.Lie3Matrix
     adjointTransport : Index → Jacobian.Lie3Matrix
@@ -101,19 +102,8 @@ centreCompositionActionEqualsLeftAction :
       (adjointTransport data index))
     vector row
   ≡ Printed.applyMatrix (leftInverseDexp data index) vector row
-centreCompositionActionEqualsLeftAction data index vector row =
-  let
-    -- Matrix action is a finite sum; extensional equality of every entry is
-    -- sufficient.  LR's matrix-cancellation theorem is entrywise, and the
-    -- action congruence is already built into the finite matrix layer.
-    pointwise = centreCompositionEqualsLeftInverseDexp data index
-  in
-  LR.matrixActionCongruence
-    (Printed.composeMatrix
-      (rightInverseDexp data index)
-      (adjointTransport data index))
-    (leftInverseDexp data index)
-    pointwise vector row
+centreCompositionActionEqualsLeftAction data index =
+  LR.leftRightDexpActionCancellation (leftRightDexpData data index)
 
 printedCentreDerivativeFromOppositeTrivialization :
   ∀ {Index} (data : LiteralPrincipalLogOneLegFrechetData Index)
