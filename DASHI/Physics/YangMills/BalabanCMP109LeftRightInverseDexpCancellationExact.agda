@@ -38,7 +38,7 @@ module DASHI.Physics.YangMills.BalabanCMP109LeftRightInverseDexpCancellationExac
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayGate4SU2DexpInverseClosedFormExact as Dexp
@@ -67,9 +67,7 @@ JplusAdjointAfterDexpMinus :
   Jplus dataSet (adjointExp dataSet (dexpMinus dataSet vector)) ≡ vector
 JplusAdjointAfterDexpMinus dataSet vector =
   trans
-    (cong (Jplus dataSet)
-      (Relation.Binary.PropositionalEquality.sym
-        (plusIsAdjointOfMinus dataSet vector)))
+    (cong (Jplus dataSet) (sym (plusIsAdjointOfMinus dataSet vector)))
     (JplusAfterDexpPlus dataSet vector)
 
 leftRightInverseDexpCancellation :
@@ -83,8 +81,6 @@ leftRightInverseDexpCancellation dataSet =
     (dexpMinusAfterJminus dataSet)
     (JplusAdjointAfterDexpMinus dataSet)
 
--- The centre derivative is therefore the opposite-trivialised inverse-dexp
--- action after the ordinary linear minus sign has been pulled outside.
 centreLegCancellation :
   ∀ {Lie} (dataSet : LeftRightDexpCancellationData Lie) vector →
   Jplus dataSet (adjointExp dataSet vector) ≡ Jminus dataSet vector
