@@ -22,15 +22,15 @@ module DASHI.Physics.YangMills.BalabanP33CorrelatedMobiusDegreeIntervalExact whe
 -- DASHI CONTRIBUTION
 --
 -- Consume the exact 4 + 16 Möbius-degree decomposition from Round57 and prove
--- the interval transport at the SAME grouped level.  This replaces separate
+-- interval transport at the SAME grouped level.  This replaces separate
 -- majorisation of 15 raw atoms and 15x15 Green atoms by four raw upper bounds
--- and sixteen joint Green lower bounds.  The theorem is pure rational order
--- algebra; the remaining physical work is to obtain those 20 bounds from the
--- same selected-background variables, preferably by one affine/Taylor model.
+-- and sixteen joint Green lower bounds.  The remaining physical work is to
+-- obtain those 20 bounds from the same selected-background variables,
+-- preferably by one affine/Taylor model.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Rational.Base as ℚ using (ℚ; _+_; _-_; _≤_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _-_; -_; _≤_)
 import Data.Rational.Properties as ℚP
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
@@ -38,6 +38,30 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
 import DASHI.Physics.YangMills.BalabanSelectedCorrelatedResidualOwnershipExact as Ownership
 import DASHI.Physics.YangMills.BalabanP33CorrelatedMobiusDegreeJointExact as Degree
+
+------------------------------------------------------------------------
+-- Finite-sum monotonicity, proved here rather than assumed from a helper API.
+------------------------------------------------------------------------
+
+sumPointwiseUpper : ∀ {A : Set}
+  (values : List A) (left right : A → ℚ) →
+  (∀ value → left value ≤ right value) →
+  Sums.sumRational values left ≤ Sums.sumRational values right
+sumPointwiseUpper [] left right pointwise = ℚP.≤-refl
+sumPointwiseUpper (value ∷ values) left right pointwise =
+  ℚP.+-mono-≤
+    (pointwise value)
+    (sumPointwiseUpper values left right pointwise)
+
+sumPointwiseLower : ∀ {A : Set}
+  (values : List A) (left right : A → ℚ) →
+  (∀ value → left value ≤ right value) →
+  Sums.sumRational values left ≤ Sums.sumRational values right
+sumPointwiseLower = sumPointwiseUpper
+
+------------------------------------------------------------------------
+-- Twenty joint degree envelopes.
+------------------------------------------------------------------------
 
 record DegreeRawUpper
     (family : Ownership.CorrelatedResidualFamily)
@@ -83,139 +107,83 @@ record JointDegreeEnvelope
     green44 : DegreeGreenLower family Degree.degree4 Degree.degree4
 open JointDegreeEnvelope public
 
+chooseRaw : ∀ {family} → JointDegreeEnvelope family →
+  (degree : Degree.MobiusDegree) → DegreeRawUpper family degree
+chooseRaw envelope Degree.degree1 = raw1 envelope
+chooseRaw envelope Degree.degree2 = raw2 envelope
+chooseRaw envelope Degree.degree3 = raw3 envelope
+chooseRaw envelope Degree.degree4 = raw4 envelope
+
+chooseGreen : ∀ {family} → JointDegreeEnvelope family →
+  (left right : Degree.MobiusDegree) → DegreeGreenLower family left right
+chooseGreen envelope Degree.degree1 Degree.degree1 = green11 envelope
+chooseGreen envelope Degree.degree1 Degree.degree2 = green12 envelope
+chooseGreen envelope Degree.degree1 Degree.degree3 = green13 envelope
+chooseGreen envelope Degree.degree1 Degree.degree4 = green14 envelope
+chooseGreen envelope Degree.degree2 Degree.degree1 = green21 envelope
+chooseGreen envelope Degree.degree2 Degree.degree2 = green22 envelope
+chooseGreen envelope Degree.degree2 Degree.degree3 = green23 envelope
+chooseGreen envelope Degree.degree2 Degree.degree4 = green24 envelope
+chooseGreen envelope Degree.degree3 Degree.degree1 = green31 envelope
+chooseGreen envelope Degree.degree3 Degree.degree2 = green32 envelope
+chooseGreen envelope Degree.degree3 Degree.degree3 = green33 envelope
+chooseGreen envelope Degree.degree3 Degree.degree4 = green34 envelope
+chooseGreen envelope Degree.degree4 Degree.degree1 = green41 envelope
+chooseGreen envelope Degree.degree4 Degree.degree2 = green42 envelope
+chooseGreen envelope Degree.degree4 Degree.degree3 = green43 envelope
+chooseGreen envelope Degree.degree4 Degree.degree4 = green44 envelope
+
+rawUpperValue : ∀ {family} → JointDegreeEnvelope family →
+  Degree.MobiusDegree → ℚ
+rawUpperValue envelope degree = upper (chooseRaw envelope degree)
+
+greenLowerValue : ∀ {family} → JointDegreeEnvelope family →
+  Degree.MobiusDegree → Degree.MobiusDegree → ℚ
+greenLowerValue envelope left right = lower (chooseGreen envelope left right)
+
 rawUpperTotal : ∀ {family} → JointDegreeEnvelope family → ℚ
 rawUpperTotal envelope =
-  upper (raw1 envelope) + upper (raw2 envelope)
-  + upper (raw3 envelope) + upper (raw4 envelope)
+  Sums.sumRational Degree.allDegrees (rawUpperValue envelope)
+
+greenLowerRow : ∀ {family} → JointDegreeEnvelope family →
+  Degree.MobiusDegree → ℚ
+greenLowerRow envelope left =
+  Sums.sumRational Degree.allDegrees (greenLowerValue envelope left)
 
 greenLowerTotal : ∀ {family} → JointDegreeEnvelope family → ℚ
 greenLowerTotal envelope =
-  lower (green11 envelope) + lower (green12 envelope)
-  + lower (green13 envelope) + lower (green14 envelope)
-  + lower (green21 envelope) + lower (green22 envelope)
-  + lower (green23 envelope) + lower (green24 envelope)
-  + lower (green31 envelope) + lower (green32 envelope)
-  + lower (green33 envelope) + lower (green34 envelope)
-  + lower (green41 envelope) + lower (green42 envelope)
-  + lower (green43 envelope) + lower (green44 envelope)
+  Sums.sumRational Degree.allDegrees (greenLowerRow envelope)
 
 rawDegreeTotalUpper : ∀ {family}
   (envelope : JointDegreeEnvelope family) →
   Degree.rawDegreeTotal family ≤ rawUpperTotal envelope
 rawDegreeTotalUpper envelope =
-  Sums.sumRationalPointwiseUpper
+  sumPointwiseUpper
     Degree.allDegrees
     (Degree.rawDegreeBlock _)
-    (λ degree →
-      let chosen : DegreeRawUpper _ degree
-          chosen with degree
-          ... | Degree.degree1 = raw1 envelope
-          ... | Degree.degree2 = raw2 envelope
-          ... | Degree.degree3 = raw3 envelope
-          ... | Degree.degree4 = raw4 envelope
-      in upper chosen)
-    (λ degree →
-      let chosen : DegreeRawUpper _ degree
-          chosen with degree
-          ... | Degree.degree1 = raw1 envelope
-          ... | Degree.degree2 = raw2 envelope
-          ... | Degree.degree3 = raw3 envelope
-          ... | Degree.degree4 = raw4 envelope
-      in sound chosen)
+    (rawUpperValue envelope)
+    (λ degree → sound (chooseRaw envelope degree))
 
 greenRowLower : ∀ {family}
   (envelope : JointDegreeEnvelope family)
   (left : Degree.MobiusDegree) →
-  Sums.sumRational Degree.allDegrees
-    (λ right → lower (chooseGreen envelope left right))
-  ≤ Degree.greenDegreeRow family left
-  where
-  chooseGreen : ∀ {family} → JointDegreeEnvelope family →
-    (left right : Degree.MobiusDegree) → DegreeGreenLower family left right
-  chooseGreen envelope Degree.degree1 Degree.degree1 = green11 envelope
-  chooseGreen envelope Degree.degree1 Degree.degree2 = green12 envelope
-  chooseGreen envelope Degree.degree1 Degree.degree3 = green13 envelope
-  chooseGreen envelope Degree.degree1 Degree.degree4 = green14 envelope
-  chooseGreen envelope Degree.degree2 Degree.degree1 = green21 envelope
-  chooseGreen envelope Degree.degree2 Degree.degree2 = green22 envelope
-  chooseGreen envelope Degree.degree2 Degree.degree3 = green23 envelope
-  chooseGreen envelope Degree.degree2 Degree.degree4 = green24 envelope
-  chooseGreen envelope Degree.degree3 Degree.degree1 = green31 envelope
-  chooseGreen envelope Degree.degree3 Degree.degree2 = green32 envelope
-  chooseGreen envelope Degree.degree3 Degree.degree3 = green33 envelope
-  chooseGreen envelope Degree.degree3 Degree.degree4 = green34 envelope
-  chooseGreen envelope Degree.degree4 Degree.degree1 = green41 envelope
-  chooseGreen envelope Degree.degree4 Degree.degree2 = green42 envelope
-  chooseGreen envelope Degree.degree4 Degree.degree3 = green43 envelope
-  chooseGreen envelope Degree.degree4 Degree.degree4 = green44 envelope
-
+  greenLowerRow envelope left ≤ Degree.greenDegreeRow family left
 greenRowLower envelope left =
-  Sums.sumRationalPointwiseUpper
+  sumPointwiseLower
     Degree.allDegrees
-    (λ right → lower (chooseGreen envelope left right))
+    (greenLowerValue envelope left)
     (Degree.greenDegreeBlock _ left)
     (λ right → sound (chooseGreen envelope left right))
-  where
-  chooseGreen : ∀ {family} → JointDegreeEnvelope family →
-    (left right : Degree.MobiusDegree) → DegreeGreenLower family left right
-  chooseGreen envelope Degree.degree1 Degree.degree1 = green11 envelope
-  chooseGreen envelope Degree.degree1 Degree.degree2 = green12 envelope
-  chooseGreen envelope Degree.degree1 Degree.degree3 = green13 envelope
-  chooseGreen envelope Degree.degree1 Degree.degree4 = green14 envelope
-  chooseGreen envelope Degree.degree2 Degree.degree1 = green21 envelope
-  chooseGreen envelope Degree.degree2 Degree.degree2 = green22 envelope
-  chooseGreen envelope Degree.degree2 Degree.degree3 = green23 envelope
-  chooseGreen envelope Degree.degree2 Degree.degree4 = green24 envelope
-  chooseGreen envelope Degree.degree3 Degree.degree1 = green31 envelope
-  chooseGreen envelope Degree.degree3 Degree.degree2 = green32 envelope
-  chooseGreen envelope Degree.degree3 Degree.degree3 = green33 envelope
-  chooseGreen envelope Degree.degree3 Degree.degree4 = green34 envelope
-  chooseGreen envelope Degree.degree4 Degree.degree1 = green41 envelope
-  chooseGreen envelope Degree.degree4 Degree.degree2 = green42 envelope
-  chooseGreen envelope Degree.degree4 Degree.degree3 = green43 envelope
-  chooseGreen envelope Degree.degree4 Degree.degree4 = green44 envelope
 
 greenDegreeTotalLower : ∀ {family}
   (envelope : JointDegreeEnvelope family) →
   greenLowerTotal envelope ≤ Degree.greenDegreeTotal family
 greenDegreeTotalLower envelope =
-  let
-    chooseGreen : (left right : Degree.MobiusDegree) →
-      DegreeGreenLower _ left right
-    chooseGreen Degree.degree1 Degree.degree1 = green11 envelope
-    chooseGreen Degree.degree1 Degree.degree2 = green12 envelope
-    chooseGreen Degree.degree1 Degree.degree3 = green13 envelope
-    chooseGreen Degree.degree1 Degree.degree4 = green14 envelope
-    chooseGreen Degree.degree2 Degree.degree1 = green21 envelope
-    chooseGreen Degree.degree2 Degree.degree2 = green22 envelope
-    chooseGreen Degree.degree2 Degree.degree3 = green23 envelope
-    chooseGreen Degree.degree2 Degree.degree4 = green24 envelope
-    chooseGreen Degree.degree3 Degree.degree1 = green31 envelope
-    chooseGreen Degree.degree3 Degree.degree2 = green32 envelope
-    chooseGreen Degree.degree3 Degree.degree3 = green33 envelope
-    chooseGreen Degree.degree3 Degree.degree4 = green34 envelope
-    chooseGreen Degree.degree4 Degree.degree1 = green41 envelope
-    chooseGreen Degree.degree4 Degree.degree2 = green42 envelope
-    chooseGreen Degree.degree4 Degree.degree3 = green43 envelope
-    chooseGreen Degree.degree4 Degree.degree4 = green44 envelope
-
-    rowLowerValue : Degree.MobiusDegree → ℚ
-    rowLowerValue left =
-      Sums.sumRational Degree.allDegrees
-        (λ right → lower (chooseGreen left right))
-
-    pointwiseRows : ∀ left →
-      rowLowerValue left ≤ Degree.greenDegreeRow _ left
-    pointwiseRows = greenRowLower envelope
-  in
-  subst
-    (λ lowerTotal → lowerTotal ≤ Degree.greenDegreeTotal _)
-    (sym (Sums.sumRationalExplicitFour
-      (λ left →
-        let row = rowLowerValue left in row)))
-    (Sums.sumRationalPointwiseUpper
-      Degree.allDegrees rowLowerValue (Degree.greenDegreeRow _)
-      pointwiseRows)
+  sumPointwiseLower
+    Degree.allDegrees
+    (greenLowerRow envelope)
+    (Degree.greenDegreeRow _)
+    (greenRowLower envelope)
 
 correlatedResidualJointDegreeUpper : ∀ {family}
   (envelope : JointDegreeEnvelope family) →
@@ -225,7 +193,6 @@ correlatedResidualJointDegreeUpper {family} envelope =
   let
     rawBound = rawDegreeTotalUpper envelope
     greenBound = greenDegreeTotalLower envelope
-    grouped = Degree.correlatedResidualIsJointDegreeExpression family
     differenceBound :
       Degree.rawDegreeTotal family - Degree.greenDegreeTotal family
       ≤ rawUpperTotal envelope - greenLowerTotal envelope
@@ -234,7 +201,7 @@ correlatedResidualJointDegreeUpper {family} envelope =
   in
   subst
     (λ actual → actual ≤ rawUpperTotal envelope - greenLowerTotal envelope)
-    (sym grouped)
+    (sym (Degree.correlatedResidualIsJointDegreeExpression family))
     differenceBound
 
 mobiusDegreeJointIntervalTransportLevel : ProofLevel
