@@ -22,15 +22,20 @@ module DASHI.Moonshine.SSPRepresentationHeckeIntertwinerBoundaryExact where
 --
 --   SSP carrier = Hecke model
 --
--- by the operator-compatible target suggested by the representation/modular
--- synthesis:
+-- by the operator-compatible target
 --
 --   Phi o R_p = T_p o Phi.
 --
--- An intertwiner preserves the distinction between two carriers while making
--- their dynamics/correspondences comparable.  This module defines that target
--- and a second target matching the repository's existing finite
--- PrimeCorrespondenceHeckeOn API.  It does NOT manufacture either intertwiner.
+-- The repository now proves the generic quotient-descent mechanism for the
+-- actual finite PrimeCorrespondenceHeckeOn API, and has one nontrivial concrete
+-- instance: FactorVec -> SupportMask.  Therefore a sectioned exact quotient
+-- plus correspondence congruence *derives* the observable intertwining law.
+--
+-- What remains open is the domain-specific frontier: construct a corresponding
+-- quotient/correspondence map from the SO(3)/candidate-dependent reduction
+-- carrier to the intended arithmetic Hecke carrier and identify its induced
+-- operator with the arithmetic correspondence.  Carrier equality is neither
+-- required nor assumed.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -39,6 +44,8 @@ open import Agda.Builtin.String using (String)
 
 import MonsterOntos as Monster
 import Ontology.Hecke.CorrespondenceRepresentation as Hecke
+import DASHI.Moonshine.HeckeCorrespondenceQuotientDescentExact as QuotientDescent
+import DASHI.Moonshine.FactorVecSupportMaskHeckeQuotientExact as FiniteModel
 import DASHI.Physics.Closure.PhysicalSSPHeckeModelClosureReceipt as Existing
 
 record PrimeIndexedOperatorIntertwiner
@@ -98,7 +105,27 @@ existingGate3StillOpen =
     Existing.canonicalPhysicalSSPHeckeModelClosureReceipt
 
 ------------------------------------------------------------------------
--- Commuting-square obligation without assuming either side already exists.
+-- The generic and finite-model quotient stages are now constructed.
+------------------------------------------------------------------------
+
+genericQuotientDescentConstructed :
+  QuotientDescent.quotientCorrespondenceConstructedFromCongruence
+    QuotientDescent.canonicalHeckeCorrespondenceQuotientBoundary
+  ≡ true
+genericQuotientDescentConstructed =
+  QuotientDescent.quotientCorrespondenceConstructedFromCongruenceIsTrue
+    QuotientDescent.canonicalHeckeCorrespondenceQuotientBoundary
+
+finiteSupportMaskIntertwinerConstructed :
+  FiniteModel.observableHeckeIntertwiningProved
+    FiniteModel.canonicalFactorVecSupportMaskHeckeBoundary
+  ≡ true
+finiteSupportMaskIntertwinerConstructed =
+  FiniteModel.observableHeckeIntertwiningProvedIsTrue
+    FiniteModel.canonicalFactorVecSupportMaskHeckeBoundary
+
+------------------------------------------------------------------------
+-- Commuting-square obligation for the actual SSP representation/modular lane.
 ------------------------------------------------------------------------
 
 record SSPRepresentationModularIntertwinerTarget : Set₁ where
@@ -130,7 +157,7 @@ canonicalSSPRepresentationModularIntertwinerTarget =
     ; witnessConstructed = false
     ; witnessConstructedIsFalse = refl
     ; targetDescription =
-        "Construct a prime-indexed reduction/Hecke intertwiner Phi R_p = T_p Phi; carrier equality is not required and is not assumed."
+        "Construct a representation-side exact quotient/correspondence whose induced operator is the intended arithmetic Hecke action; generic quotient descent and the FactorVec/support-mask model are already proved."
     }
 
 record SSPRepresentationHeckeBoundary : Set where
@@ -143,9 +170,17 @@ record SSPRepresentationHeckeBoundary : Set where
     existingFiniteCorrespondenceAPIReusedIsTrue :
       existingFiniteCorrespondenceAPIReused ≡ true
 
-    classicalHeckeIntertwinerConstructed : Bool
-    classicalHeckeIntertwinerConstructedIsFalse :
-      classicalHeckeIntertwinerConstructed ≡ false
+    genericQuotientCorrespondenceDescentProved : Bool
+    genericQuotientCorrespondenceDescentProvedIsTrue :
+      genericQuotientCorrespondenceDescentProved ≡ true
+
+    concreteFactorVecSupportMaskIntertwinerProved : Bool
+    concreteFactorVecSupportMaskIntertwinerProvedIsTrue :
+      concreteFactorVecSupportMaskIntertwinerProved ≡ true
+
+    classicalSO3ToArithmeticHeckeIntertwinerConstructed : Bool
+    classicalSO3ToArithmeticHeckeIntertwinerConstructedIsFalse :
+      classicalSO3ToArithmeticHeckeIntertwinerConstructed ≡ false
 
     representationReductionClaimedToEqualHeckeAction : Bool
     representationReductionClaimedToEqualHeckeActionIsFalse :
@@ -158,8 +193,12 @@ canonicalSSPRepresentationHeckeBoundary =
     ; equalityReplacedByIntertwinerTargetIsTrue = refl
     ; existingFiniteCorrespondenceAPIReused = true
     ; existingFiniteCorrespondenceAPIReusedIsTrue = refl
-    ; classicalHeckeIntertwinerConstructed = false
-    ; classicalHeckeIntertwinerConstructedIsFalse = refl
+    ; genericQuotientCorrespondenceDescentProved = true
+    ; genericQuotientCorrespondenceDescentProvedIsTrue = refl
+    ; concreteFactorVecSupportMaskIntertwinerProved = true
+    ; concreteFactorVecSupportMaskIntertwinerProvedIsTrue = refl
+    ; classicalSO3ToArithmeticHeckeIntertwinerConstructed = false
+    ; classicalSO3ToArithmeticHeckeIntertwinerConstructedIsFalse = refl
     ; representationReductionClaimedToEqualHeckeAction = false
     ; representationReductionClaimedToEqualHeckeActionIsFalse = refl
     }
