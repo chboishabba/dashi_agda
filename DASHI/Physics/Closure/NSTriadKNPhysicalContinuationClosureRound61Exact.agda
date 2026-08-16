@@ -41,11 +41,11 @@ open import Agda.Primitive using (Level)
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base using (ℚ; _≤_)
+open import Data.Rational.Base using (_≤_)
 
+import DASHI.Physics.Closure.NSTriadKNRegularLerayHopfPeriodicSolutionExact as LH
 import DASHI.Physics.Closure.NSTriadKNLuoOfficialContinuationClosureExact as Closure
 import DASHI.Physics.Closure.NSTriadKNLuoOfficialLerayHopfAuthorityExact as Source
-import DASHI.Physics.Closure.NSTriadKNLuoPeriodicMultiplierKernelBoundExact as Multiplier
 
 selectedLerayHopfSolutionIsSelectedSolution :
   ∀ {d s t}
@@ -53,7 +53,7 @@ selectedLerayHopfSolutionIsSelectedSolution :
     {Solution : Set s}
     {Time : Set t} →
   (C : Closure.OfficialLuoContinuationClosure InitialDatum Solution Time) →
-  Source.LH.solution
+  LH.solution
     (Source.lerayHopfSolutionAt
       (Closure.sourceCarrier C)
       (Closure.initial C)
@@ -71,7 +71,7 @@ selectedLerayHopfInitialDatumIsSelectedInitialDatum :
     {Solution : Set s}
     {Time : Set t} →
   (C : Closure.OfficialLuoContinuationClosure InitialDatum Solution Time) →
-  Source.LH.initialDatum
+  LH.initialDatum
     (Source.lerayHopfSolutionAt
       (Closure.sourceCarrier C)
       (Closure.initial C)
@@ -135,11 +135,6 @@ physicalSelectedSolutionContinuesBeyondTerminal :
 physicalSelectedSolutionContinuesBeyondTerminal =
   Closure.officialLuoContinuation
 
--- The final implication above consumes no `ContinuesBeyond` witness.  Its
--- ingredients are all fields already carried by C: smooth initial data and
--- the NS solution selection, plus the localized bound derived by the multiplier
--- lane.  This theorem exposes the exact proof term again so the non-circular
--- dependency is visible at the Round61 cut rather than represented by a flag.
 physicalContinuationFromLocalizedCutoffBounds :
   ∀ {d s t}
     {InitialDatum : Set d}
