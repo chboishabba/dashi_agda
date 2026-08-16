@@ -131,3 +131,8 @@ proxyDefectCanRefuteSufficiency :
     Proxy.canonicalProxyFutureSafetyBoundary
   ≡ true
 proxyDefectCanRefuteSufficiency = refl
+
+finiteProxyCannotServeAsFutureWelfareQuotient :
+  Proxy.ProxySufficientForFutureWelfare Proxy.finiteProxyWelfareSystem → ⊥
+finiteProxyCannotServeAsFutureWelfareQuotient =
+  Proxy.finiteProxyIsNotFutureWelfareSufficient
