@@ -20,10 +20,10 @@ module DASHI.Physics.YangMills.Balaban1989FiniteModeInverseSquareTerminalHistory
 --
 -- DASHI CONTRIBUTION
 --
--- Direct L3/L4 -> CMP122 bridge.  Unlike the older beta-split history, this
--- module does not accept global fields betaZ>=b* or |betaInt|<=b*/2.  It starts
+-- Direct L3/L4 -> CMP122 bridge. Unlike the older beta-split history, this
+-- module does not accept global fields betaZ>=b* or |betaInt|<=b*/2. It starts
 -- from the finite per-mode Gaussian/per-atom interaction producer and obtains
--- beta>=0 from those local estimates.  The already machine-checked rational
+-- beta>=0 from those local estimates. The already machine-checked rational
 -- inverse-square order theorem then turns one terminal inverse threshold into
 -- g_k<=gamma on every active scale.
 ------------------------------------------------------------------------
@@ -72,7 +72,9 @@ record FiniteModeInverseSquareTerminalHistoryData
 open FiniteModeInverseSquareTerminalHistoryData public
 
 orderDataAtScale :
-  ∀ {trajectory Mode Atom betaData} →
+  ∀ {trajectory : Flow.SourceNormalizedCouplingTrajectory}
+    {Mode Atom : Set}
+    {betaData : FiniteBeta.FiniteModeBetaTrajectoryData trajectory Mode Atom} →
   FiniteModeInverseSquareTerminalHistoryData
     trajectory Mode Atom betaData →
   Nat → Order.RationalInverseSquareOrderData
@@ -94,7 +96,9 @@ orderDataAtScale {trajectory} dataSet scale = record
   }
 
 asTerminalHistory :
-  ∀ {trajectory Mode Atom betaData} →
+  ∀ {trajectory : Flow.SourceNormalizedCouplingTrajectory}
+    {Mode Atom : Set}
+    {betaData : FiniteBeta.FiniteModeBetaTrajectoryData trajectory Mode Atom} →
   FiniteModeInverseSquareTerminalHistoryData
     trajectory Mode Atom betaData →
   History.TerminalInverseThresholdHistory trajectory
@@ -120,7 +124,9 @@ asTerminalHistory {betaData = betaData} dataSet = record
   }
 
 finiteModeTerminalThresholdAtActiveScale :
-  ∀ {trajectory Mode Atom betaData}
+  ∀ {trajectory : Flow.SourceNormalizedCouplingTrajectory}
+    {Mode Atom : Set}
+    {betaData : FiniteBeta.FiniteModeBetaTrajectoryData trajectory Mode Atom}
     (dataSet : FiniteModeInverseSquareTerminalHistoryData
       trajectory Mode Atom betaData)
     scale → ActiveScale dataSet scale →
@@ -129,7 +135,9 @@ finiteModeTerminalThresholdAtActiveScale dataSet =
   History.inverseThresholdAtActiveScale (asTerminalHistory dataSet)
 
 finiteModeSmallCouplingAtActiveScale :
-  ∀ {trajectory Mode Atom betaData}
+  ∀ {trajectory : Flow.SourceNormalizedCouplingTrajectory}
+    {Mode Atom : Set}
+    {betaData : FiniteBeta.FiniteModeBetaTrajectoryData trajectory Mode Atom}
     (dataSet : FiniteModeInverseSquareTerminalHistoryData
       trajectory Mode Atom betaData)
     scale → ActiveScale dataSet scale →
