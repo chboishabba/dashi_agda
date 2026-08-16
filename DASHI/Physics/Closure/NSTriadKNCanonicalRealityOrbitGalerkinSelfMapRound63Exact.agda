@@ -52,6 +52,7 @@ import DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30E
 import DASHI.Physics.Closure.NSTriadKNSameCarrierSameObjectRound31Exact as Same
 import DASHI.Physics.Closure.NSTriadKNSameObjectLookupConsistencyRound33Exact as Lookup
 import DASHI.Physics.Closure.NSTriadKNCanonicalCutoffSameObjectSystemRound34Exact as OldCutoff
+import DASHI.Physics.Closure.NSTriadKNCanonicalRealityOrbitCarrierRound63Exact as Orbit
 import DASHI.Physics.Closure.NSTriadKNCanonicalRealityOrbitLookupRound63Exact as Canonical
 
 record CanonicalFixedCutoffSystemData
@@ -135,34 +136,25 @@ positiveModeRetained :
       (Coefficient.finiteSystem (canonicalPhysicalSystem data))
 positiveModeRetained {F = F} {E = E} data coefficient member =
   go (State.positiveOrbitCoefficients (rawState data))
-    (λ selected selectedMember → selectedMember)
     coefficient member
   where
   go :
     (coefficients : List (Phase.TransverseModeCoefficient F E)) →
-    (include : ∀ selected →
-      selected State.∈ coefficients →
-      selected State.∈ State.positiveOrbitCoefficients (rawState data)) →
     (selected : Phase.TransverseModeCoefficient F E) →
     selected State.∈ coefficients →
     Phase.coefficientMode selected
-      Cube.∈ Same.reconstructedStateModes (rawState data)
-  go [] include selected ()
-  go (head ∷ tail) include selected (State.here refl) = Cube.here refl
-  go (head ∷ tail) include selected (State.there rest) =
-    Cube.there
-      (Cube.there
-        (go tail
-          (λ tailCoefficient tailMember →
-            include tailCoefficient (State.there tailMember))
-          selected rest))
+      Cube.∈ OldCutoff.orbitModes coefficients
+  go [] selected ()
+  go (head ∷ tail) selected (State.here refl) = Cube.here refl
+  go (head ∷ tail) selected (State.there rest) =
+    Cube.there (Cube.there (go tail selected rest))
 
 mapCanonicalRHS :
   ∀ {r} {F : C3.RealField r} {E : C3.IntegerEmbedding F} {cutoff} →
   (data : CanonicalFixedCutoffSystemData F E cutoff) →
-  List (Phase.TransverseModeCoefficient F E) →
-  (∀ coefficient →
-    coefficient State.∈ State.positiveOrbitCoefficients (rawState data) →
+  (source : List (Phase.TransverseModeCoefficient F E)) →
+  (include : ∀ coefficient →
+    coefficient State.∈ source →
     coefficient State.∈ State.positiveOrbitCoefficients (rawState data)) →
   List (Phase.TransverseModeCoefficient F E)
 mapCanonicalRHS data [] include = []
@@ -187,12 +179,12 @@ canonicalRHSList data =
 mapCanonicalRHSModesExact :
   ∀ {r} {F : C3.RealField r} {E : C3.IntegerEmbedding F} {cutoff}
     (data : CanonicalFixedCutoffSystemData F E cutoff)
-    (coefficients : List (Phase.TransverseModeCoefficient F E))
+    (source : List (Phase.TransverseModeCoefficient F E))
     (include : ∀ coefficient →
-      coefficient State.∈ State.positiveOrbitCoefficients (rawState data) →
+      coefficient State.∈ source →
       coefficient State.∈ State.positiveOrbitCoefficients (rawState data)) →
-  map Phase.coefficientMode (mapCanonicalRHS data coefficients include)
-  ≡ map Phase.coefficientMode coefficients
+  map Phase.coefficientMode (mapCanonicalRHS data source include)
+  ≡ map Phase.coefficientMode source
 mapCanonicalRHSModesExact data [] include = refl
 mapCanonicalRHSModesExact data (coefficient ∷ rest) include =
   cong (Phase.coefficientMode coefficient ∷_)
@@ -203,74 +195,13 @@ canonicalRHSListModesExact :
   ∀ {r} {F : C3.RealField r} {E : C3.IntegerEmbedding F} {cutoff}
     (data : CanonicalFixedCutoffSystemData F E cutoff) →
   map Phase.coefficientMode (canonicalRHSList data)
-  ≡ Canonical.Orbit.canonicalRealityOrbitModes cutoff
+  ≡ Orbit.canonicalRealityOrbitModes cutoff
 canonicalRHSListModesExact {cutoff = cutoff} data =
   trans
     (mapCanonicalRHSModesExact data
       (State.positiveOrbitCoefficients (rawState data))
       (λ coefficient member → member))
     (Canonical.positiveModesExact (state data))
-
-canonicalRHSModeNonzero :
-  ∀ {r} {F : C3.RealField r} {E : C3.IntegerEmbedding F} {cutoff}
-    (data : CanonicalFixedCutoffSystemData F E cutoff)
-    coefficient →
-  coefficient State.∈ canonicalRHSList data →
-  Z3.NonZeroMode (Phase.coefficientMode coefficient)
-canonicalRHSModeNonzero data coefficient member =
-  Coefficient.mappedCoefficientModeNonzero
-    (canonicalPhysicalSystem data)
-    (map Phase.coefficientMode
-      (State.positiveOrbitCoefficients (rawState data)))
-    sourceIncluded coefficient
-    mappedMember
-  where
-  sourceIncluded : ∀ mode →
-    mode Cube.∈ map Phase.coefficientMode
-      (State.positiveOrbitCoefficients (rawState data)) →
-    mode Cube.∈ Audit.modes
-      (Coefficient.finiteSystem (canonicalPhysicalSystem data))
-  sourceIncluded mode modeMember =
-    sourceModeRetained
-      (State.positiveOrbitCoefficients (rawState data)) mode modeMember
-    where
-    sourceModeRetained :
-      (coefficients : List (Phase.TransverseModeCoefficient _ _)) →
-      ∀ selectedMode →
-      selectedMode Cube.∈ map Phase.coefficientMode coefficients →
-      selectedMode Cube.∈ Same.reconstructedStateModes (rawState data)
-    sourceModeRetained [] selectedMode ()
-    sourceModeRetained (head ∷ tail) selectedMode (Cube.here equality) =
-      subst
-        (λ selected → selected Cube.∈ Same.reconstructedStateModes (rawState data))
-        equality
-        (positiveModeRetained data head (State.here refl))
-    sourceModeRetained (head ∷ tail) selectedMode (Cube.there rest) =
-      sourceModeRetained tail selectedMode rest
-
-  mappedMember : coefficient State.∈
-    Coefficient.mapLiteralCoefficients
-      (canonicalPhysicalSystem data)
-      (map Phase.coefficientMode
-        (State.positiveOrbitCoefficients (rawState data)))
-      sourceIncluded
-  mappedMember =
-    -- `mapCanonicalRHS` is extensionally the same traversal but coefficient-
-    -- driven.  Rather than introduce a second list equality just to recover
-    -- nonzero, the output coefficient already carries the same source mode;
-    -- this placeholder is intentionally unreachable below and is replaced by
-    -- the direct recursive proof in `canonicalRHSState`.
-    impossible member
-    where
-    impossible :
-      coefficient State.∈ canonicalRHSList data →
-      coefficient State.∈
-        Coefficient.mapLiteralCoefficients
-          (canonicalPhysicalSystem data)
-          (map Phase.coefficientMode
-            (State.positiveOrbitCoefficients (rawState data)))
-          sourceIncluded
-    impossible { } membership = membership
 
 canonicalRHSState :
   ∀ {r} {F : C3.RealField r} {E : C3.IntegerEmbedding F} {cutoff} →
