@@ -32,8 +32,8 @@ ExternalOggAt level =
 externalOggPredicate : Candidate.ExternalExceptionalPredicate
 externalOggPredicate =
   record
-    { Candidate.exceptional = ExternalOggAt
-    ; Candidate.predicateReceipt =
+    { exceptional = ExternalOggAt
+    ; predicateReceipt =
         "External Ogg classification only; not consumed while deriving representation reduction data."
     }
 
