@@ -20,10 +20,6 @@ open import Data.Empty using (⊥)
 
 import DASHI.Governance.InterventionBundleExact as Intervention
 
-------------------------------------------------------------------------
--- Required-support feasibility over an arbitrary existing BundleSystem.
-------------------------------------------------------------------------
-
 record RequiredSupportSystem
   (S : Intervention.BundleSystem) : Set₁ where
   constructor requiredSupportSystem
@@ -71,12 +67,6 @@ missingRequiredSupportFalsifiesCompleteness missing complete =
       (missingFeature missing)
       (featureRequired missing))
 
-------------------------------------------------------------------------
--- Allocation and outcome remain later stages.  A missing-support falsifier can
--- stop a proposed completeness proof cheaply; passing the necessary gate does
--- not itself construct an allocation or establish an outcome.
-------------------------------------------------------------------------
-
 record AllocationSystem
   {S : Intervention.BundleSystem}
   (R : RequiredSupportSystem S) : Set₁ where
@@ -114,14 +104,10 @@ allocationConstructsSupportCompleteness :
     {bundle : Intervention.BundleSystem.Bundle S} →
   BundleAllocation A bundle →
   SupportComplete R bundle
-allocationConstructsSupportCompleteness allocated =
+allocationConstructsSupportCompleteness {A = A} allocated =
   supportComplete λ feature required →
     allocationRealized allocated feature
-      (allocationCoversRequired _ (allocation allocated) feature required)
-
-------------------------------------------------------------------------
--- Outcome theorem is an explicit extra law, never smuggled into feasibility.
-------------------------------------------------------------------------
+      (allocationCoversRequired A (allocation allocated) feature required)
 
 record FeasibilityOutcomeLaw
   {S : Intervention.BundleSystem}
@@ -144,14 +130,9 @@ allocatedBundleReachesDesiredOutcome :
     {bundle : Intervention.BundleSystem.Bundle S} →
   BundleAllocation A bundle →
   DesiredOutcome L (Intervention.BundleSystem.outcomeOf S bundle)
-allocatedBundleReachesDesiredOutcome {L = L} allocated =
-  completeBundleHasDesiredOutcome L _
+allocatedBundleReachesDesiredOutcome {L = L} {bundle = bundle} allocated =
+  completeBundleHasDesiredOutcome L bundle
     (allocationConstructsSupportCompleteness allocated)
-
-------------------------------------------------------------------------
--- Boundary: necessary condition -> constructive allocation -> outcome theorem
--- are three distinct proof stages.
-------------------------------------------------------------------------
 
 record InterventionFeasibilityCutsetBoundary : Set where
   constructor interventionFeasibilityCutsetBoundary
@@ -166,10 +147,4 @@ record InterventionFeasibilityCutsetBoundary : Set where
 canonicalInterventionFeasibilityCutsetBoundary :
   InterventionFeasibilityCutsetBoundary
 canonicalInterventionFeasibilityCutsetBoundary =
-  interventionFeasibilityCutsetBoundary
-    false
-    false
-    true
-    true
-    true
-    false
+  interventionFeasibilityCutsetBoundary false false true true true false
