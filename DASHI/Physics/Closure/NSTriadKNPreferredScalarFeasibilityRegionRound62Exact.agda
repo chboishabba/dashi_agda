@@ -46,7 +46,7 @@ open import Data.Rational.Base as ℚ using
 import Data.Rational.Properties as ℚP
 open ℚP using (_≤?_; _<?_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong; subst₂; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst₂; trans)
 open import Relation.Nullary.Decidable.Core using (toWitness)
 
 oneSixteenth fifteenSixteenths fifteenThirtySeconds half : ℚ
@@ -71,16 +71,17 @@ record PreferredScalarGate : Set where
     rootSumNonnegative : 0ℚ ≤ rootSum
     marginPositive : 0ℚ < margin
 
+  reciprocalMargin : ℚ
+  reciprocalMargin =
+    let instance marginNonzero = ℚ.>-nonZero marginPositive
+    in ℚ.1/_ margin
+
+  field
     strictGate :
       2 * hhBadCeiling * badChargeMultiplicity
       + criticalScale * rootSum * rootSum * reciprocalMargin
       + oneSixteenth
       < 1ℚ
-
-  reciprocalMargin : ℚ
-  reciprocalMargin =
-    let instance marginNonzero = ℚ.>-nonZero marginPositive
-    in ℚ.1/_ margin
 
 open PreferredScalarGate public
 
@@ -174,8 +175,7 @@ hhBadProductBelow15Over32 :
   hhBadProduct data < fifteenThirtySeconds
 hhBadProductBelow15Over32 data =
   let
-    shifted :
-      2 * hhBadProduct data < fifteenSixteenths
+    shifted : 2 * hhBadProduct data < fifteenSixteenths
     shifted =
       let
         move = ℚP.+-monoʳ-< (0ℚ - oneSixteenth)
@@ -190,7 +190,13 @@ hhBadProductBelow15Over32 data =
         rightMeaning = solve []
       in subst₂ _<_ leftMeaning rightMeaning move
 
-    scaled = ℚP.*-monoˡ-<-pos half shifted
+    scaled :
+      half * (2 * hhBadProduct data)
+      < half * fifteenSixteenths
+    scaled =
+      let instance halfPos = positive halfPositive
+      in ℚP.*-monoˡ-<-pos half shifted
+
     leftMeaning : half * (2 * hhBadProduct data) ≡ hhBadProduct data
     leftMeaning = solve (hhBadProduct data ∷ [])
     rightMeaning : half * fifteenSixteenths ≡ fifteenThirtySeconds
@@ -234,11 +240,13 @@ softNumeratorBelowReserveTimesMargin :
   softNumerator data < reserve data * margin data
 softNumeratorBelowReserveTimesMargin data =
   let
+    scaled :
+      (softNumerator data * reciprocalMargin data) * margin data
+      < reserve data * margin data
     scaled =
-      ℚP.*-monoˡ-<-pos
-        (margin data)
-        (softTermBelowReserve data)
-        (marginPositive data)
+      let instance marginPos = positive (marginPositive data)
+      in ℚP.*-monoˡ-<-pos
+        (margin data) (softTermBelowReserve data)
 
     leftMeaning :
       (softNumerator data * reciprocalMargin data) * margin data
@@ -251,12 +259,8 @@ softNumeratorBelowReserveTimesMargin data =
           (cong (softNumerator data *_)
             (marginTimesReciprocalIsOne data))
           (ℚP.*-identityʳ (softNumerator data)))
-
-    rightMeaning :
-      reserve data * margin data ≡ reserve data * margin data
-    rightMeaning = refl
   in
-  subst₂ _<_ leftMeaning rightMeaning scaled
+  subst₂ _<_ leftMeaning refl scaled
 
 preferredGateFeasibilityRegionSolvedExactly : Bool
 preferredGateFeasibilityRegionSolvedExactly = true
