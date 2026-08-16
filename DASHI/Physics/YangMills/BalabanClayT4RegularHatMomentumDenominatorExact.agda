@@ -25,10 +25,11 @@ module DASHI.Physics.YangMills.BalabanClayT4RegularHatMomentumDenominatorExact w
 -- denominator estimate is needed.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Bool using (false)
+open import Agda.Builtin.Equality using (_≡_)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; _+_; _*_; _≤_; _<_ ; _/_)
+  (ℚ; 0ℚ; _+_; _*_; _≤_; _<_; _/_)
 import Data.Rational.Properties as ℚP
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
@@ -138,7 +139,7 @@ record RegularOuterSineSquareFloor
     (cell : Grid.GridCell4)
     (s0 s1 s2 s3 : ℚ) : Set where
   field
-    regular : Grid.allInner cell ≡ Agda.Builtin.Bool.false
+    regular : Grid.allInner cell ≡ false
     outerAxis : Outer.OuterAxisWitness cell
     floorSquared : ℚ
     floorSquaredPositive : 0ℚ < floorSquared
@@ -158,10 +159,6 @@ floorBelowHatMomentumSum data =
     (selectedSquareBelowSumSquares
       (outerAxis data) _ _ _ _)
 
--- The physical denominator is four times the sum of squares.  The exact
--- multiplication by four can be performed by the existing rational interval
--- layer.  The key nontrivial reduction supplied here is that one outer-axis
--- trigonometric square floor controls the entire four-dimensional sum.
 regularDenominatorScalarFloorLevel : ProofLevel
 regularDenominatorScalarFloorLevel = machineChecked
 
