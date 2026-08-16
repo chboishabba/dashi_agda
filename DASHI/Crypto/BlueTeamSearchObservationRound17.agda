@@ -22,6 +22,7 @@ import DASHI.Crypto.MLKEMNTTLocalLeftInverseZeroReflectionExact
 import DASHI.Crypto.MLKEMBaseCaseAdjugateInverseExact
 import DASHI.Crypto.MLKEMBaseCaseNormInverseBridgeExact
 import DASHI.Crypto.MLKEMBaseCaseNonsquareNormSeparationExact
+import DASHI.Crypto.MLKEMFermatNonsquareBridgeExact
 import DASHI.Crypto.MLKEMFIPS203GammaNonsquareTransportExact
 import DASHI.Crypto.MLKEMFIPS203F3329ArithmeticExact
 import DASHI.Crypto.MLKEMUncertaintyTransitionCostBridgeExact
