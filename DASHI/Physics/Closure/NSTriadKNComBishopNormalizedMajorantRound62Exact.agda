@@ -48,7 +48,8 @@ module DASHI.Physics.Closure.NSTriadKNComBishopNormalizedMajorantRound62Exact wh
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; suc)
-open import Data.Rational.Base using (ℚ)
+import Data.Rational.Base as Rat
+open Rat using (ℚ)
 open import Relation.Binary.PropositionalEquality using (subst)
 
 import Real as Bishop
@@ -105,7 +106,7 @@ samePairBelowEmbeddedTarget source q
 ... | false =
   BishopLaws.≤-respˡ-≃
     (inactiveEnergyZero source q q activeProof)
-    (BishopCarrier.bishopEmbedOrder RationalGram.sameTargetNonnegative)
+    (BishopCarrier.bishopEmbedOrder Aggregate.sameTargetNonnegative)
 
 forwardAdjacentBelowEmbeddedTarget :
   (source : BishopPhysicalNormalizedOddPQSource) → ∀ q →
@@ -118,7 +119,7 @@ forwardAdjacentBelowEmbeddedTarget source q
 ... | false =
   BishopLaws.≤-respˡ-≃
     (inactiveEnergyZero source q (suc q) activeProof)
-    (BishopCarrier.bishopEmbedOrder RationalGram.adjacentTargetNonnegative)
+    (BishopCarrier.bishopEmbedOrder Aggregate.adjacentTargetNonnegative)
 
 reverseAdjacentBelowEmbeddedTarget :
   (source : BishopPhysicalNormalizedOddPQSource) → ∀ q →
@@ -131,7 +132,7 @@ reverseAdjacentBelowEmbeddedTarget source q
 ... | false =
   BishopLaws.≤-respˡ-≃
     (inactiveEnergyZero source (suc q) q activeProof)
-    (BishopCarrier.bishopEmbedOrder RationalGram.adjacentTargetNonnegative)
+    (BishopCarrier.bishopEmbedOrder Aggregate.adjacentTargetNonnegative)
 
 bishopBandwidthOneEnergy :
   BishopPhysicalNormalizedOddPQSource → Nat → Bishop.ℝ
@@ -158,8 +159,9 @@ embeddedThreeTargetMeaning =
           (embed RationalGram.sameShellTarget)
           (embed RationalGram.adjacentShellTarget))
         (embed
-          (RationalGram.sameShellTarget
-            Data.Rational.Base.+ RationalGram.adjacentShellTarget))
+          (Rat._+_
+            RationalGram.sameShellTarget
+            RationalGram.adjacentShellTarget))
     first = BishopLaws.≃-symm
       (BishopCarrier.bishopEmbedAdd
         RationalGram.sameShellTarget RationalGram.adjacentShellTarget)
@@ -168,17 +170,21 @@ embeddedThreeTargetMeaning =
       Bishop._≃_
         (Bishop._+_
           (embed
-            (RationalGram.sameShellTarget
-              Data.Rational.Base.+ RationalGram.adjacentShellTarget))
+            (Rat._+_
+              RationalGram.sameShellTarget
+              RationalGram.adjacentShellTarget))
           (embed RationalGram.adjacentShellTarget))
         (embed
-          ((RationalGram.sameShellTarget
-              Data.Rational.Base.+ RationalGram.adjacentShellTarget)
-            Data.Rational.Base.+ RationalGram.adjacentShellTarget))
+          (Rat._+_
+            (Rat._+_
+              RationalGram.sameShellTarget
+              RationalGram.adjacentShellTarget)
+            RationalGram.adjacentShellTarget))
     second = BishopLaws.≃-symm
       (BishopCarrier.bishopEmbedAdd
-        (RationalGram.sameShellTarget
-          Data.Rational.Base.+ RationalGram.adjacentShellTarget)
+        (Rat._+_
+          RationalGram.sameShellTarget
+          RationalGram.adjacentShellTarget)
         RationalGram.adjacentShellTarget)
   in
   subst
