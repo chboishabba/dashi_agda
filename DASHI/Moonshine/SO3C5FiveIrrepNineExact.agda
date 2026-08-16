@@ -38,6 +38,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; _+_)
 open import Data.Empty using (⊥)
 open import Data.List.Base using (List; []; _∷_)
+open import Data.Product using (_×_; _,_)
 
 import DASHI.Moonshine.SO3CyclicFixedSpaceScanExact as Scan
 
