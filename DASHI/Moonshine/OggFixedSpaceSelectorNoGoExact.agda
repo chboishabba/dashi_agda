@@ -27,9 +27,11 @@ module DASHI.Moonshine.OggFixedSpaceSelectorNoGoExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
-open import Relation.Binary.PropositionalEquality using (sym; trans)
+open import Data.Product using (_×_)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Moonshine.SO3CyclicFixedSpaceScanExact as Scan
 
@@ -37,7 +39,7 @@ falseNotTrue : false ≡ true → ⊥
 falseNotTrue ()
 
 FixedPairSelector : Set
-FixedPairSelector = Scan.FixedPair → Bool
+FixedPairSelector = (Nat × Nat) → Bool
 
 fixedPairSelectorCannotSeparateNineAndEleven :
   (selector : FixedPairSelector) →
