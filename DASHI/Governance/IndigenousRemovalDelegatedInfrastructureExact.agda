@@ -134,10 +134,6 @@ kimmererAcknowledgement = Braid.canonicalKimmererBraidingAcknowledgement
 colonialComparisonBoundary : Colonial.ColonialCarceralDependencyBoundary
 colonialComparisonBoundary = Colonial.canonicalColonialCarceralDependencyBoundary
 
-indigenousPolicyAnchor :
-  Colonial.Trump.TrumpPolicyCase
-indigenousPolicyAnchor = Colonial.indigenousPolicySurfaceImported
-
 record IndigenousDelegatedInfrastructureBoundary : Set where
   constructor indigenousDelegatedInfrastructureBoundary
   field
