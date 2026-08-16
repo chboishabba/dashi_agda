@@ -15,23 +15,21 @@ module DASHI.Physics.Closure.NSTriadKNCriticalRatioNormalizationRound63Exact whe
 --
 -- ROUND 63 / C0 SHARP NORMALIZATION
 --
--- On the physically meaningful positive block branch C>0 and r>0, the target
--- T_n=C r^n is strictly positive.  Hence there is a canonical dimensionless
--- normalized critical functional
+-- On the positive block branch C>0 and r>0, T_n=C r^n is strictly positive.
+-- Define the canonical dimensionless functional
 --
 --        Xi_n = X_n / T_n.
 --
--- This file constructs that ratio in exact rational arithmetic and proves
+-- Exact rational arithmetic gives
 --
---        X_n = T_n Xi_n.
+--        X_n = T_n Xi_n
 --
--- More importantly, for every nonnegative K,
+-- and, pointwise for every K,
 --
 --        X_n <= K T_n    iff    Xi_n <= K.
 --
--- Thus C1 has been reduced *exactly*, not heuristically, to the scale-invariant
--- uniform boundedness problem for Xi.  No final correction cap or B_* enters
--- the construction.
+-- Therefore the genuine C1 theorem is now exactly the UNIFORM assertion
+-- `forall n, Xi_n <= K`.  No final correction cap or B_* is used here.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
@@ -83,8 +81,8 @@ scaledTargetPositive {block = block} positiveBlock n =
     p = Block.power (Block.r block) n
     instance
       cPosI = positive (constantPositive positiveBlock)
-      pPosI = positive (powerPositive
-        (Block.r block) (ratioPositive positiveBlock) n)
+      pPosI = positive
+        (powerPositive (Block.r block) (ratioPositive positiveBlock) n)
       productPosI = ℚP.pos*pos⇒pos c p
   in
   ℚP.positive⁻¹ (Block.scaledTarget c (Block.r block) n)
@@ -96,8 +94,8 @@ targetReciprocal :
 targetReciprocal {block = block} positiveBlock n =
   let
     T = Block.scaledTarget (Block.constant block) (Block.r block) n
-    instance tNonzero = ℚP.pos⇒nonZero T
-      (scaledTargetPositive positiveBlock n)
+    TPos = scaledTargetPositive positiveBlock n
+    instance tNonzero = ℚ.>-nonZero TPos
   in ℚ.1/_ T
 
 normalizedCriticalRatio :
@@ -118,8 +116,8 @@ targetTimesReciprocalIsOne :
 targetTimesReciprocalIsOne {block = block} positiveBlock n =
   let
     T = Block.scaledTarget (Block.constant block) (Block.r block) n
-    instance tNonzero = ℚP.pos⇒nonZero T
-      (scaledTargetPositive positiveBlock n)
+    TPos = scaledTargetPositive positiveBlock n
+    instance tNonzero = ℚ.>-nonZero TPos
   in ℚP.*-inverseʳ T
 
 criticalFactorizationExact :
@@ -143,6 +141,21 @@ criticalFactorizationExact {balances = balances} {block = block}
       (cong (X *_) (targetTimesReciprocalIsOne positiveBlock n))
       (ℚP.*-identityʳ X))
 
+reciprocalTargetPositive :
+  ∀ {balances block}
+    (positiveBlock : PositiveCriticalBlockScale balances block)
+    (n : Nat) →
+  0ℚ < targetReciprocal positiveBlock n
+reciprocalTargetPositive {block = block} positiveBlock n =
+  let
+    T = Block.scaledTarget (Block.constant block) (Block.r block) n
+    TPos = scaledTargetPositive positiveBlock n
+    instance
+      tPosI = positive TPos
+      tNonzeroI = ℚ.>-nonZero TPos
+      invPosI = ℚP.1/pos⇒pos T
+  in ℚP.positive⁻¹ (targetReciprocal positiveBlock n)
+
 normalizedCriticalRatioNonnegative :
   ∀ {balances block}
     (positiveBlock : PositiveCriticalBlockScale balances block)
@@ -152,19 +165,9 @@ normalizedCriticalRatioNonnegative {balances = balances} positiveBlock n =
   let
     X = Owner.integralCritical (Nine.environment (balances n))
     invT = targetReciprocal positiveBlock n
-    invPos : 0ℚ < invT
-    invPos =
-      let
-        T = _
-        instance
-          tPosI = positive (scaledTargetPositive positiveBlock n)
-          tNonzeroI = ℚP.pos⇒nonZero T
-            (scaledTargetPositive positiveBlock n)
-          invPosI = ℚP.1/pos⇒pos T
-      in ℚP.positive⁻¹ invT
     instance
       xNNI = nonNegative (criticalNonnegative positiveBlock n)
-      invNNI = nonNegative (ℚP.<⇒≤ invPos)
+      invNNI = nonNegative (ℚP.<⇒≤ (reciprocalTargetPositive positiveBlock n))
       productNNI = ℚP.nonNeg*nonNeg⇒nonNeg X invT
   in
   ℚP.nonNegative⁻¹ (normalizedCriticalRatio positiveBlock n)
@@ -201,16 +204,11 @@ c1ImpliesNormalizedBound {balances = balances} {block = block}
     T = Block.scaledTarget (Block.constant block) (Block.r block) n
     X = Owner.integralCritical (Nine.environment (balances n))
     invT = targetReciprocal positiveBlock n
-    invPos : 0ℚ < invT
-    invPos =
-      let instance
-        tPosI = positive (scaledTargetPositive positiveBlock n)
-        tNonzeroI = ℚP.pos⇒nonZero T (scaledTargetPositive positiveBlock n)
-        invPosI = ℚP.1/pos⇒pos T
-      in ℚP.positive⁻¹ invT
     scaled : X * invT ≤ (K * T) * invT
     scaled =
-      let instance invNNI = nonNegative (ℚP.<⇒≤ invPos)
+      let instance
+        invNNI = nonNegative
+          (ℚP.<⇒≤ (reciprocalTargetPositive positiveBlock n))
       in ℚP.*-monoʳ-≤-nonNeg invT c1
     rightMeaning : (K * T) * invT ≡ K
     rightMeaning =
@@ -231,47 +229,42 @@ normalizedBoundImpliesC1 :
   normalizedCriticalRatio positiveBlock n ≤ K →
   Owner.integralCritical (Nine.environment (balances n))
     ≤ K * Block.scaledTarget (Block.constant block) (Block.r block) n
-normalizedBoundImpliesC1 {balances = balances} {block = block}
+normalizedBoundImpliesC1 {block = block}
     positiveBlock K n normalizedBound =
   let
-    normalization = canonicalRatioNormalization positiveBlock
-    uniform : C0.UniformNormalizedCriticalBound normalization
-    uniform = record
-      { C0.UniformNormalizedCriticalBound.uniformCriticalConstant = K
-      ; C0.UniformNormalizedCriticalBound.uniformCriticalConstantNonnegative =
-          ℚP.≤-trans
-            (normalizedCriticalRatioNonnegative positiveBlock n)
-            normalizedBound
-      ; C0.UniformNormalizedCriticalBound.normalizedCriticalBelowUniform =
-          λ m → normalizedBoundAt m
-      }
-
-    -- This theorem is pointwise; only n is supplied.  Avoid pretending a
-    -- bound at n proves a uniform bound at every m.  We therefore use direct
-    -- multiplication below rather than the uniform record.
-    targetNN = Block.scaledTargetNonnegative
-      (Block.constant block) (Block.r block)
-      (Block.constantNonnegative block) (Block.rNonnegative block) n
-    scaled :
-      Block.scaledTarget (Block.constant block) (Block.r block) n
-        * normalizedCriticalRatio positiveBlock n
-      ≤ Block.scaledTarget (Block.constant block) (Block.r block) n * K
+    T = Block.scaledTarget (Block.constant block) (Block.r block) n
+    targetNN = ℚP.<⇒≤ (scaledTargetPositive positiveBlock n)
+    scaled : T * normalizedCriticalRatio positiveBlock n ≤ T * K
     scaled =
       let instance targetNNI = nonNegative targetNN
-      in ℚP.*-monoˡ-≤-nonNeg _ normalizedBound
+      in ℚP.*-monoˡ-≤-nonNeg T normalizedBound
     leftMeaning = criticalFactorizationExact positiveBlock n
-    rightMeaning :
-      Block.scaledTarget (Block.constant block) (Block.r block) n * K
-      ≡ K * Block.scaledTarget (Block.constant block) (Block.r block) n
-    rightMeaning = ℚP.*-comm _ K
+    rightMeaning : T * K ≡ K * T
+    rightMeaning = ℚP.*-comm T K
   in
   subst₂ _≤_ leftMeaning rightMeaning scaled
-  where
-  -- deliberately unreachable in the direct proof above; declared only to keep
-  -- the pointwise/uniform distinction syntactically explicit.
-  normalizedBoundAt : Nat →
-    normalizedCriticalRatio positiveBlock _ ≤ K
-  normalizedBoundAt m = normalizedBound
+
+uniformC1EquivalentToUniformNormalizedBound :
+  ∀ {balances block}
+    (positiveBlock : PositiveCriticalBlockScale balances block)
+    (K : ℚ) →
+  ((n : Nat) →
+    Owner.integralCritical (Nine.environment (balances n))
+      ≤ K * Block.scaledTarget (Block.constant block) (Block.r block) n) →
+  ((n : Nat) → normalizedCriticalRatio positiveBlock n ≤ K)
+uniformC1EquivalentToUniformNormalizedBound positiveBlock K c1 n =
+  c1ImpliesNormalizedBound positiveBlock K n (c1 n)
+
+uniformNormalizedBoundImpliesUniformC1 :
+  ∀ {balances block}
+    (positiveBlock : PositiveCriticalBlockScale balances block)
+    (K : ℚ) →
+  ((n : Nat) → normalizedCriticalRatio positiveBlock n ≤ K) →
+  ((n : Nat) →
+    Owner.integralCritical (Nine.environment (balances n))
+      ≤ K * Block.scaledTarget (Block.constant block) (Block.r block) n)
+uniformNormalizedBoundImpliesUniformC1 positiveBlock K normalized n =
+  normalizedBoundImpliesC1 positiveBlock K n (normalized n)
 
 round63C1IsExactlyUniformNormalizedCriticalRatioBound : Bool
 round63C1IsExactlyUniformNormalizedCriticalRatioBound = true
