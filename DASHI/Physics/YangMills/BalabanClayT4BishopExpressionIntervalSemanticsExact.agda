@@ -38,6 +38,7 @@ open import Relation.Binary.PropositionalEquality using (subst; sym)
 import Real as Bishop
 import RealProperties as BishopP
 
+import DASHI.Physics.Closure.NSTriadKNMurrayBishopDirectCanonicalCarrier as Carrier
 import DASHI.Physics.YangMills.BalabanClayT4LiteralOneLoopBoxEvaluatorExact as Eval
 import DASHI.Physics.YangMills.BalabanClayT4TypedRationalExpressionIntervalExact as Typed
 import DASHI.Physics.YangMills.BalabanClayT4PositiveDenominatorQuotientEndpointsExact as Quotient
@@ -55,13 +56,11 @@ addIntervalBishopSound : ∀ {x y left right} →
 addIntervalBishopSound {x} {y} {left} {right} xIn yIn =
   Product.bishopLiesIn
     (BishopP.≤-respˡ-≃
-      (DASHI.Physics.Closure.NSTriadKNMurrayBishopDirectCanonicalCarrier.bishopEmbedAdd
-        (Eval.lower left) (Eval.lower right))
+      (Carrier.bishopEmbedAdd (Eval.lower left) (Eval.lower right))
       (BishopP.+-mono-≤
         (Product.lowerSound xIn) (Product.lowerSound yIn)))
     (BishopP.≤-respʳ-≃
-      (DASHI.Physics.Closure.NSTriadKNMurrayBishopDirectCanonicalCarrier.bishopEmbedAdd
-        (Eval.upper left) (Eval.upper right))
+      (Carrier.bishopEmbedAdd (Eval.upper left) (Eval.upper right))
       (BishopP.+-mono-≤
         (Product.upperSound xIn) (Product.upperSound yIn)))
 
