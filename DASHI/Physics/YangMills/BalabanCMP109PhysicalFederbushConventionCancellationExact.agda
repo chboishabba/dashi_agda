@@ -67,13 +67,13 @@ record LiteralCMP109FederbushConvention (Y : SU2LieAlgebra) : Set where
 open LiteralCMP109FederbushConvention public
 
 cancellationData :
-  ∀ {Y} → LiteralCMP109FederbushConvention Y →
+  ∀ {Y} (convention : LiteralCMP109FederbushConvention Y) →
   Cancel.DexpTransportCancellationData Y
-    (dexpPlus _)
-    (dexpMinus _)
-    (inversePlus _)
-    (inverseMinus _)
-    (adjointTransport _)
+    (dexpPlus convention)
+    (dexpMinus convention)
+    (inversePlus convention)
+    (inverseMinus convention)
+    (adjointTransport convention)
 cancellationData convention = record
   { Cancel.DexpTransportCancellationData.dexpMinusTransportIsPlus =
       dexpMinusAfterAdjointIsPlus convention
@@ -108,8 +108,8 @@ printedCentreActionIsOppositeInverseDexp :
     (variation : SU2LieAlgebra) →
   R.applyReducedAdjoint Y (printedCentreOperator convention) variation
   ≡ R.applyReducedAdjoint Y (inverseMinus convention) variation
-printedCentreActionIsOppositeInverseDexp convention variation =
-  cong (λ operator → R.applyReducedAdjoint _ operator variation)
+printedCentreActionIsOppositeInverseDexp {Y} convention variation =
+  cong (λ operator → R.applyReducedAdjoint Y operator variation)
     (printedCentreOperatorIsOppositeInverseDexp convention)
 
 cmp109PhysicalFederbushConventionCancellationLevel : ProofLevel
