@@ -19,19 +19,19 @@ module DASHI.Physics.YangMills.BalabanClayT4TypedRationalExpressionIntervalExact
 --   constant, +, -, unary -, multiplication, and division by an interval
 --   whose lower endpoint is strictly positive.
 --
--- Multiplication uses the exact four-corner hull.  Division uses the
+-- Multiplication uses the exact four-corner hull. Division uses the
 -- sign-aware positive-denominator theorem from
 -- BalabanClayT4PositiveDenominatorQuotientEndpointsExact.
 --
 -- `ExpressionInterval atomBoxes expression result` is not a receipt saying
--- that `result` is sound.  It is a derivation whose constructors FORCE result
+-- that `result` is sound. It is a derivation whose constructors FORCE result
 -- to be the interval obtained by recursively applying those proved arithmetic
--- operations.  At a division node the only extra datum is the typed rational
+-- operations. At a division node the only extra datum is the typed rational
 -- inequality `0 < lower denominatorInterval`.
 --
--- Finally `evaluateDerivation` proves semantic membership by induction.  Its
+-- Finally `evaluateDerivation` proves semantic membership by induction. Its
 -- only source-facing leaves are the values of the literal trig/momentum atoms
--- and proofs that those values lie in `atomBoxes`.  Hence all recursive
+-- and proofs that those values lie in `atomBoxes`. Hence all recursive
 -- rational arithmetic soundness is now machine algebra rather than an opaque
 -- per-box input.
 ------------------------------------------------------------------------
@@ -47,10 +47,6 @@ open import Relation.Binary.PropositionalEquality using (subst; sym)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayT4LiteralOneLoopBoxEvaluatorExact as Eval
 import DASHI.Physics.YangMills.BalabanClayT4PositiveDenominatorQuotientEndpointsExact as Quotient
-
-------------------------------------------------------------------------
--- Semantic membership.
-------------------------------------------------------------------------
 
 record LiesIn (value : ℚ) (box : Eval.RationalInterval) : Set where
   constructor liesIn
@@ -189,13 +185,13 @@ fourthBelowMax4 a b c d =
     (rightBelowMax2 c d)
     (rightBelowMax2 (max2 a b) (max2 c d))
 
-record ProductCorners (left right : Eval.RationalInterval) : Set where
+record ProductCorners : Set where
   constructor corners
   field
     lowerLower lowerUpper upperLower upperUpper : ℚ
 open ProductCorners public
 
-productCorners : Eval.RationalInterval → Eval.RationalInterval → ProductCorners _ _
+productCorners : Eval.RationalInterval → Eval.RationalInterval → ProductCorners
 productCorners left right = corners
   (Eval.lower left * Eval.lower right)
   (Eval.lower left * Eval.upper right)
@@ -232,30 +228,42 @@ intervalSign box with ℚP.≤-total 0ℚ (Eval.lower box)
 mulRightNN : ∀ scalar {left right} →
   0ℚ ≤ scalar → left ≤ right → left * scalar ≤ right * scalar
 mulRightNN scalar scalarNN inequality =
-  let instance scalarNonnegative : NonNegative scalar
+  let
+    instance
+      scalarNonnegative : NonNegative scalar
       scalarNonnegative = ℚ.nonNegative scalarNN
-  in ℚP.*-monoʳ-≤-nonNeg scalar inequality
+  in
+  ℚP.*-monoʳ-≤-nonNeg scalar inequality
 
 mulLeftNN : ∀ scalar {left right} →
   0ℚ ≤ scalar → left ≤ right → scalar * left ≤ scalar * right
 mulLeftNN scalar scalarNN inequality =
-  let instance scalarNonnegative : NonNegative scalar
+  let
+    instance
+      scalarNonnegative : NonNegative scalar
       scalarNonnegative = ℚ.nonNegative scalarNN
-  in ℚP.*-monoˡ-≤-nonNeg scalar inequality
+  in
+  ℚP.*-monoˡ-≤-nonNeg scalar inequality
 
 mulRightNP : ∀ scalar {left right} →
   scalar ≤ 0ℚ → left ≤ right → right * scalar ≤ left * scalar
 mulRightNP scalar scalarNP inequality =
-  let instance scalarNonpositive : NonPositive scalar
+  let
+    instance
+      scalarNonpositive : NonPositive scalar
       scalarNonpositive = ℚ.nonPositive scalarNP
-  in ℚP.*-monoʳ-≤-nonPos scalar inequality
+  in
+  ℚP.*-monoʳ-≤-nonPos scalar inequality
 
 mulLeftNP : ∀ scalar {left right} →
   scalar ≤ 0ℚ → left ≤ right → scalar * right ≤ scalar * left
 mulLeftNP scalar scalarNP inequality =
-  let instance scalarNonpositive : NonPositive scalar
+  let
+    instance
+      scalarNonpositive : NonPositive scalar
       scalarNonpositive = ℚ.nonPositive scalarNP
-  in ℚP.*-monoˡ-≤-nonPos scalar inequality
+  in
+  ℚP.*-monoˡ-≤-nonPos scalar inequality
 
 productNN : ∀ left right →
   0ℚ ≤ left → 0ℚ ≤ right → 0ℚ ≤ left * right
@@ -305,7 +313,6 @@ multiplyIntervalSound {leftValue = x} {rightValue = y} {left} {right}
     xNN = ℚP.≤-trans lNN (lowerSound xIn)
     yNN = ℚP.≤-trans rNN (lowerSound yIn)
     uLNN = ℚP.≤-trans lNN (Eval.ordered left)
-    uRNN = ℚP.≤-trans rNN (Eval.ordered right)
     lowerCorner : ll ≤ x * y
     lowerCorner = ℚP.≤-trans
       (mulRightNN (Eval.lower right) rNN (lowerSound xIn))
@@ -314,7 +321,8 @@ multiplyIntervalSound {leftValue = x} {rightValue = y} {left} {right}
     upperCorner = ℚP.≤-trans
       (mulRightNN y yNN (upperSound xIn))
       (mulLeftNN (Eval.upper left) uLNN (upperSound yIn))
-  in liesIn
+  in
+  liesIn
     (ℚP.≤-trans (min4BelowFirst ll lu ul uu) lowerCorner)
     (ℚP.≤-trans upperCorner (fourthBelowMax4 ll lu ul uu))
 ... | nonnegative lNN | nonpositive rNP =
@@ -326,7 +334,6 @@ multiplyIntervalSound {leftValue = x} {rightValue = y} {left} {right}
     xNN = ℚP.≤-trans lNN (lowerSound xIn)
     yNP = ℚP.≤-trans (upperSound yIn) rNP
     lowerRNP = ℚP.≤-trans (Eval.ordered right) rNP
-    upperLNN = ℚP.≤-trans lNN (Eval.ordered left)
     lowerCorner : ul ≤ x * y
     lowerCorner = ℚP.≤-trans
       (mulRightNP (Eval.lower right) lowerRNP (upperSound xIn))
@@ -335,7 +342,8 @@ multiplyIntervalSound {leftValue = x} {rightValue = y} {left} {right}
     upperCorner = ℚP.≤-trans
       (mulRightNP y yNP (lowerSound xIn))
       (mulLeftNN (Eval.lower left) lNN (upperSound yIn))
-  in liesIn
+  in
+  liesIn
     (ℚP.≤-trans (min4BelowThird ll lu ul uu) lowerCorner)
     (ℚP.≤-trans upperCorner (secondBelowMax4 ll lu ul uu))
 ... | nonnegative lNN | straddlesZero rLowerNP rUpperNN =
@@ -345,7 +353,6 @@ multiplyIntervalSound {leftValue = x} {rightValue = y} {left} {right}
     ul = Eval.upper left * Eval.lower right
     uu = Eval.upper left * Eval.upper right
     xNN = ℚP.≤-trans lNN (lowerSound xIn)
-    upperLNN = ℚP.≤-trans lNN (Eval.ordered left)
     lowerCorner : ul ≤ x * y
     lowerCorner = ℚP.≤-trans
       (mulRightNP (Eval.lower right) rLowerNP (upperSound xIn))
@@ -354,7 +361,8 @@ multiplyIntervalSound {leftValue = x} {rightValue = y} {left} {right}
     upperCorner = ℚP.≤-trans
       (mulLeftNN x xNN (upperSound yIn))
       (mulRightNN (Eval.upper right) rUpperNN (upperSound xIn))
-  in liesIn
+  in
+  liesIn
     (ℚP.≤-trans (min4BelowThird ll lu ul uu) lowerCorner)
     (ℚP.≤-trans upperCorner (fourthBelowMax4 ll lu ul uu))
 ... | nonpositive lNP | nonnegative rNN =
@@ -366,16 +374,17 @@ multiplyIntervalSound {leftValue = x} {rightValue = y} {left} {right}
     xNP = ℚP.≤-trans (upperSound xIn) lNP
     yNN = ℚP.≤-trans rNN (lowerSound yIn)
     lowerLNP = ℚP.≤-trans (Eval.ordered left) lNP
-    upperRNN = ℚP.≤-trans rNN (Eval.ordered right)
     lowerCorner : lu ≤ x * y
     lowerCorner = ℚP.≤-trans
-      (mulRightNN (Eval.upper right) upperRNN (lowerSound xIn))
+      (mulRightNN (Eval.upper right)
+        (ℚP.≤-trans rNN (Eval.ordered right)) (lowerSound xIn))
       (mulLeftNP x xNP (upperSound yIn))
     upperCorner : x * y ≤ ul
     upperCorner = ℚP.≤-trans
       (mulRightNN y yNN (upperSound xIn))
       (mulLeftNP (Eval.upper left) lNP (lowerSound yIn))
-  in liesIn
+  in
+  liesIn
     (ℚP.≤-trans (min4BelowSecond ll lu ul uu) lowerCorner)
     (ℚP.≤-trans upperCorner (thirdBelowMax4 ll lu ul uu))
 ... | nonpositive lNP | nonpositive rNP =
@@ -387,7 +396,6 @@ multiplyIntervalSound {leftValue = x} {rightValue = y} {left} {right}
     xNP = ℚP.≤-trans (upperSound xIn) lNP
     yNP = ℚP.≤-trans (upperSound yIn) rNP
     lowerLNP = ℚP.≤-trans (Eval.ordered left) lNP
-    lowerRNP = ℚP.≤-trans (Eval.ordered right) rNP
     lowerCorner : uu ≤ x * y
     lowerCorner = ℚP.≤-trans
       (mulRightNP (Eval.upper right) rNP (upperSound xIn))
@@ -396,7 +404,8 @@ multiplyIntervalSound {leftValue = x} {rightValue = y} {left} {right}
     upperCorner = ℚP.≤-trans
       (mulRightNP y yNP (lowerSound xIn))
       (mulLeftNP (Eval.lower left) lowerLNP (lowerSound yIn))
-  in liesIn
+  in
+  liesIn
     (ℚP.≤-trans (min4BelowFourth ll lu ul uu) lowerCorner)
     (ℚP.≤-trans upperCorner (firstBelowMax4 ll lu ul uu))
 ... | nonpositive lNP | straddlesZero rLowerNP rUpperNN =
@@ -415,7 +424,8 @@ multiplyIntervalSound {leftValue = x} {rightValue = y} {left} {right}
     upperCorner = ℚP.≤-trans
       (mulLeftNP x xNP (lowerSound yIn))
       (mulRightNP (Eval.lower right) rLowerNP (lowerSound xIn))
-  in liesIn
+  in
+  liesIn
     (ℚP.≤-trans (min4BelowSecond ll lu ul uu) lowerCorner)
     (ℚP.≤-trans upperCorner (firstBelowMax4 ll lu ul uu))
 ... | straddlesZero lLowerNP lUpperNN | nonnegative rNN =
@@ -425,7 +435,6 @@ multiplyIntervalSound {leftValue = x} {rightValue = y} {left} {right}
     ul = Eval.upper left * Eval.lower right
     uu = Eval.upper left * Eval.upper right
     yNN = ℚP.≤-trans rNN (lowerSound yIn)
-    upperRNN = ℚP.≤-trans rNN (Eval.ordered right)
     lowerCorner : lu ≤ x * y
     lowerCorner = ℚP.≤-trans
       (mulLeftNP (Eval.lower left) lLowerNP (upperSound yIn))
@@ -434,7 +443,8 @@ multiplyIntervalSound {leftValue = x} {rightValue = y} {left} {right}
     upperCorner = ℚP.≤-trans
       (mulRightNN y yNN (upperSound xIn))
       (mulLeftNN (Eval.upper left) lUpperNN (upperSound yIn))
-  in liesIn
+  in
+  liesIn
     (ℚP.≤-trans (min4BelowSecond ll lu ul uu) lowerCorner)
     (ℚP.≤-trans upperCorner (fourthBelowMax4 ll lu ul uu))
 ... | straddlesZero lLowerNP lUpperNN | nonpositive rNP =
@@ -444,7 +454,6 @@ multiplyIntervalSound {leftValue = x} {rightValue = y} {left} {right}
     ul = Eval.upper left * Eval.lower right
     uu = Eval.upper left * Eval.upper right
     yNP = ℚP.≤-trans (upperSound yIn) rNP
-    lowerRNP = ℚP.≤-trans (Eval.ordered right) rNP
     lowerCorner : ul ≤ x * y
     lowerCorner = ℚP.≤-trans
       (mulLeftNN (Eval.upper left) lUpperNN (lowerSound yIn))
@@ -453,7 +462,8 @@ multiplyIntervalSound {leftValue = x} {rightValue = y} {left} {right}
     upperCorner = ℚP.≤-trans
       (mulRightNP y yNP (lowerSound xIn))
       (mulLeftNP (Eval.lower left) lLowerNP (lowerSound yIn))
-  in liesIn
+  in
+  liesIn
     (ℚP.≤-trans (min4BelowThird ll lu ul uu) lowerCorner)
     (ℚP.≤-trans upperCorner (firstBelowMax4 ll lu ul uu))
 ... | straddlesZero lLowerNP lUpperNN | straddlesZero rLowerNP rUpperNN
@@ -473,7 +483,8 @@ multiplyIntervalSound {leftValue = x} {rightValue = y} {left} {right}
     upperCorner = ℚP.≤-trans
       (mulRightNN y yNN (upperSound xIn))
       (mulLeftNN (Eval.upper left) lUpperNN (upperSound yIn))
-  in liesIn
+  in
+  liesIn
     (ℚP.≤-trans (min4BelowSecond ll lu ul uu)
       (ℚP.≤-trans lowerToZero zeroToProduct))
     (ℚP.≤-trans upperCorner (fourthBelowMax4 ll lu ul uu))
@@ -492,7 +503,8 @@ multiplyIntervalSound {leftValue = x} {rightValue = y} {left} {right}
     zeroToUpper : 0ℚ ≤ uu
     zeroToUpper = productNN (Eval.upper left) (Eval.upper right)
       lUpperNN rUpperNN
-  in liesIn
+  in
+  liesIn
     (ℚP.≤-trans (min4BelowThird ll lu ul uu) lowerCorner)
     (ℚP.≤-trans productToZero
       (ℚP.≤-trans zeroToUpper (fourthBelowMax4 ll lu ul uu)))
@@ -511,7 +523,8 @@ multiplyIntervalSound {leftValue = x} {rightValue = y} {left} {right}
     zeroToUpper : 0ℚ ≤ uu
     zeroToUpper = productNN (Eval.upper left) (Eval.upper right)
       lUpperNN rUpperNN
-  in liesIn
+  in
+  liesIn
     (ℚP.≤-trans (min4BelowSecond ll lu ul uu) lowerCorner)
     (ℚP.≤-trans productToZero
       (ℚP.≤-trans zeroToUpper (fourthBelowMax4 ll lu ul uu)))
@@ -530,7 +543,8 @@ multiplyIntervalSound {leftValue = x} {rightValue = y} {left} {right}
     upperCorner = ℚP.≤-trans
       (mulRightNP y yNP (lowerSound xIn))
       (mulLeftNP (Eval.lower left) lLowerNP (lowerSound yIn))
-  in liesIn
+  in
+  liesIn
     (ℚP.≤-trans (min4BelowSecond ll lu ul uu)
       (ℚP.≤-trans lowerToZero zeroToProduct))
     (ℚP.≤-trans upperCorner (firstBelowMax4 ll lu ul uu))
@@ -583,8 +597,6 @@ divideIntervalSound :
 divideIntervalSound {numeratorValue} {denominatorValue} {numerator} {denominator}
     numeratorIn denominatorIn denominatorPositive =
   let
-    actualPositive =
-      ℚP.<-≤-trans denominatorPositive (lowerSound denominatorIn)
     quotientSound = Quotient.positiveDenominatorQuotientEnclosure
       (toQuotientSign (intervalSign numerator))
       denominatorPositive (Eval.ordered denominator)
