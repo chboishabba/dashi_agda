@@ -152,7 +152,8 @@ p11FourEll = 4 * p11Ell
 
 p11RamanujanSquareCertificate :
   p11NontrivialEigenvalueSquare < p11FourEll
-p11RamanujanSquareCertificate = s≤s (s≤s (s≤s (s≤s z≤n)))
+p11RamanujanSquareCertificate =
+  s≤s (s≤s (s≤s (s≤s (s≤s z≤n))))
 
 ------------------------------------------------------------------------
 -- Backwards-compatible name retained deliberately, but no longer authoritative
