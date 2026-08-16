@@ -28,7 +28,7 @@ module DASHI.Moonshine.ClassicalFiniteHeckeCorrespondenceCore where
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
-open import Data.Fin using (Fin)
+open import Data.Fin using (Fin; zero; suc)
 
 record ClassicalPrimeDegreeCorrespondence (Class : Set) : Set₁ where
   field
@@ -42,8 +42,8 @@ foldFin :
   (A → A → A) → A → (Fin n → A) → A
 foldFin {zero} combine identity values = identity
 foldFin {suc n} combine identity values =
-  combine (values Data.Fin.zero)
-    (foldFin combine identity (λ index → values (Data.Fin.suc index)))
+  combine (values zero)
+    (foldFin combine identity (λ index → values (suc index)))
 
 classicalOperator :
   ∀ {Class : Set} →
