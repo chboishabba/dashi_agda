@@ -11,6 +11,7 @@ import DASHI.Governance.ResponsiveInfluencePolicy
 import DASHI.Governance.AutonomyReopeningCriterion
 import DASHI.Governance.RepresentationCarrierVerificationCore
 import DASHI.Governance.EpistemicAttractorCore
+import DASHI.Governance.ContextualCounterpositionEpistemicBridgeExact
 import DASHI.Governance.WeightedEpistemicPipelineExact
 import DASHI.Governance.GenericSocialAttractor
 import DASHI.Governance.EpistemicAttractorDynamicsExact
