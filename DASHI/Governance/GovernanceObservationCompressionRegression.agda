@@ -13,6 +13,7 @@ import DASHI.Governance.ContestabilityAccessCostExact as AccessCost
 import DASHI.Governance.ContestableCompressionResidualExact as Residual
 import DASHI.Governance.OpenWorldDisconfirmationBoundaryExact as OpenWorld
 import DASHI.Governance.CounterpositionDiversityAutonomyExact as Counter
+import DASHI.Governance.EpistemicBinaryForcingLossExact as Binary
 import DASHI.Governance.InterventionFeasibilityCutsetExact as Feasibility
 import DASHI.Governance.FiniteCausalQueryRefinementStabilizationExact as Refinement
 import DASHI.Governance.ProxyObjectiveFutureSafetyExact as Proxy
@@ -98,6 +99,14 @@ forcedBinaryDoesNotExhaustCounterpositions = refl
 nonBinaryAlternativeExistsInFoundation :
   Counter.NonBinaryAlternativeAccess Counter.foundationCounterpositionSystem
 nonBinaryAlternativeExistsInFoundation = Counter.foundationNonBinaryAccess
+
+acceptBinaryCannotReconstructEpistemicState :
+  Binary.AcceptForcingInjective → ⊥
+acceptBinaryCannotReconstructEpistemicState = Binary.acceptForcingIsNotInjective
+
+rejectBinaryCannotReconstructEpistemicState :
+  Binary.RejectForcingInjective → ⊥
+rejectBinaryCannotReconstructEpistemicState = Binary.rejectForcingIsNotInjective
 
 outcomeNeedsSeparateFeasibilityLaw :
   Feasibility.InterventionFeasibilityCutsetBoundary.desiredOutcomeNeedsSeparateLaw
