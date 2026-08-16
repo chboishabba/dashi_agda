@@ -10,6 +10,7 @@ import DASHI.Foundations.BalancedTernaryStageSymmetryExact
 import DASHI.Foundations.CounterpositionOrderedJoinExact
 import DASHI.Foundations.HexTruthS3CarrierBridgeExact
 import DASHI.Foundations.NaryCyclicOutputPhaseCountExact
+import DASHI.Foundations.PhaseQuotientNonaryGroupSeparationExact
 import DASHI.Foundations.RepresentationChartInvariant
 import DASHI.Foundations.SignedZeroTernaryOrientationExact
 import DASHI.Foundations.SSPPrimeLaneUnitAction
@@ -18,6 +19,7 @@ import DASHI.Foundations.TernaryEndomorphismPhaseQuotientExact
 import DASHI.Foundations.TernaryEndomorphismS3ActionLawsExact
 import DASHI.Foundations.TernaryHypervoxelPermutationTransportExact
 import DASHI.Foundations.TernaryPermutationS3LawsExact
+import DASHI.Foundations.TernaryPhaseShapeIncidenceExact
 import DASHI.Interop.PNFHodgeResidualTopology
 import DASHI.Interop.PNFHyperfabric369
 import DASHI.Interop.PNFSpectralFieldGraph
