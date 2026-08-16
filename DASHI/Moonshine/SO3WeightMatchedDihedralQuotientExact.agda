@@ -78,11 +78,11 @@ matchedWeightEquivalence :
   (j : Nat) → Quotient.EquivalenceOn (SO3WeightState j)
 matchedWeightEquivalence j =
   record
-    { Quotient.EquivalenceOn._≈_ =
+    { _≈_ =
         λ left right → weightToMatchedSector left ≡ weightToMatchedSector right
-    ; Quotient.EquivalenceOn.refl = λ state → refl
-    ; Quotient.EquivalenceOn.sym = sym
-    ; Quotient.EquivalenceOn.trans = trans
+    ; refl = λ state → refl
+    ; sym = sym
+    ; trans = trans
     }
 
 matchedWeightQuotient :
@@ -91,18 +91,18 @@ matchedWeightQuotient :
     (SO3WeightState j) (Matched.MatchedDihedralSector j)
 matchedWeightQuotient j =
   record
-    { Quotient.QuotientInterfaceOn.equiv = matchedWeightEquivalence j
-    ; Quotient.QuotientInterfaceOn.proj = weightToMatchedSector
-    ; Quotient.QuotientInterfaceOn.respect-proj = λ equality → equality
-    ; Quotient.QuotientInterfaceOn.representative = matchedSectorRepresentative
-    ; Quotient.QuotientInterfaceOn.section = matchedSectorSection
+    { equiv = matchedWeightEquivalence j
+    ; proj = weightToMatchedSector
+    ; respect-proj = λ equality → equality
+    ; representative = matchedSectorRepresentative
+    ; section = matchedSectorSection
     }
 
 matchedWeightExactPresentation :
   (j : Nat) → Descent.ExactQuotientPresentation (matchedWeightQuotient j)
 matchedWeightExactPresentation j =
   record
-    { Descent.ExactQuotientPresentation.projectionComplete = λ equality → equality
+    { projectionComplete = λ equality → equality
     }
 
 ------------------------------------------------------------------------
@@ -169,11 +169,11 @@ candidateWeightEquivalence :
   (level : Nat) → Quotient.EquivalenceOn (CandidateWeightState level)
 candidateWeightEquivalence level =
   record
-    { Quotient.EquivalenceOn._≈_ =
+    { _≈_ =
         λ left right → candidateWeightToSector left ≡ candidateWeightToSector right
-    ; Quotient.EquivalenceOn.refl = λ state → refl
-    ; Quotient.EquivalenceOn.sym = sym
-    ; Quotient.EquivalenceOn.trans = trans
+    ; refl = λ state → refl
+    ; sym = sym
+    ; trans = trans
     }
 
 candidateWeightQuotient :
@@ -183,11 +183,11 @@ candidateWeightQuotient :
     (Sector.CandidateReductionSector level)
 candidateWeightQuotient level =
   record
-    { Quotient.QuotientInterfaceOn.equiv = candidateWeightEquivalence level
-    ; Quotient.QuotientInterfaceOn.proj = candidateWeightToSector
-    ; Quotient.QuotientInterfaceOn.respect-proj = λ equality → equality
-    ; Quotient.QuotientInterfaceOn.representative = candidateSectorRepresentative
-    ; Quotient.QuotientInterfaceOn.section = candidateSectorSection
+    { equiv = candidateWeightEquivalence level
+    ; proj = candidateWeightToSector
+    ; respect-proj = λ equality → equality
+    ; representative = candidateSectorRepresentative
+    ; section = candidateSectorSection
     }
 
 candidateWeightExactPresentation :
@@ -195,7 +195,7 @@ candidateWeightExactPresentation :
   Descent.ExactQuotientPresentation (candidateWeightQuotient level)
 candidateWeightExactPresentation level =
   record
-    { Descent.ExactQuotientPresentation.projectionComplete = λ equality → equality
+    { projectionComplete = λ equality → equality
     }
 
 ------------------------------------------------------------------------
