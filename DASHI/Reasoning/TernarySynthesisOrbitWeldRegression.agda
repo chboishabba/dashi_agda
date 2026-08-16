@@ -1,10 +1,14 @@
 module DASHI.Reasoning.TernarySynthesisOrbitWeldRegression where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; _+_)
 open import Data.Empty using (⊥)
+open import Data.Integer using (+_; -[1+_])
 
 import Base369 as Base
+import DASHI.Biology.JFineCoarseRelativeScaleExact as JScale
+import DASHI.Cognition.RecursiveFibreTower as Tower
+import DASHI.Foundations.DialecticCubieTetralemmaExact as Tetra
 import DASHI.Foundations.HexTruthS3CarrierBridgeExact as HexS3
 import DASHI.Foundations.NaryCyclicOutputPhaseCountExact as Nary
 import DASHI.Foundations.SignedZeroTernaryOrientationExact as Signed
@@ -13,6 +17,7 @@ import DASHI.Foundations.TernaryEndomorphismPhaseQuotientExact as Phase
 import DASHI.Foundations.TernaryEndomorphismS3ActionLawsExact as Action
 import DASHI.Foundations.TernaryPermutationS3LawsExact as S3
 import DASHI.Moonshine.TernarySevenOggSSPComparisonExact as Ogg
+import DASHI.Physics.ShiftDiscreteWaveStep as Wave
 import DASHI.Reasoning.RelationalLensSynthesisCore as Lens
 import DASHI.Reasoning.TernaryComparisonSynthesisExact as Synthesis
 import DASHI.Reasoning.TernarySynthesisLogicQualificationExact as Logic
@@ -63,7 +68,7 @@ s3IsNonAbelian :
 s3IsNonAbelian = S3.nonCommutativeWitness
 
 conjugationIdentityActsTrivially :
-  (code : DASHI.Cognition.RecursiveFibreTower.LevelTwoCode) →
+  (code : Tower.LevelTwoCode) →
   Conj.conjugateCode Conj.permIdentity code ≡ code
 conjugationIdentityActsTrivially = Action.conjugateIdentity
 
@@ -118,7 +123,7 @@ synthesisCarrierIsTwentySeven =
 bothSupportRemainsTetralemmaQualified :
   (choice : Synthesis.SynthesisChoice27) →
   Logic.tetralemmaPosition (Logic.bothSupportedQualification choice)
-  ≡ DASHI.Foundations.DialecticCubieTetralemmaExact.bothSupported
+  ≡ Tetra.bothSupported
 bothSupportRemainsTetralemmaQualified =
   Logic.bothPositionIsBothSupported
 
@@ -133,20 +138,20 @@ lensReversalIsNotLogicalNegation =
 
 canonicalTransportDefectIsZero :
   Transport.transportDefect Transport.canonicalOneToThreeSynthesis
-  ≡ DASHI.Physics.ShiftDiscreteWaveStep.mkDiscreteWave (+ 0) (+ 0)
+  ≡ Wave.mkDiscreteWave (+ 0) (+ 0)
 canonicalTransportDefectIsZero =
   Transport.canonicalSynthesisDefectIsZero
 
 phaseChangedTransportDefectIsNonzeroWitness :
   Transport.transportDefect Transport.phaseChangedSynthesis
-  ≡ DASHI.Physics.ShiftDiscreteWaveStep.mkDiscreteWave (-[1+ 0 ]) (+ 1)
+  ≡ Wave.mkDiscreteWave (-[1+ 0 ]) (+ 1)
 phaseChangedTransportDefectIsNonzeroWitness =
   Transport.phaseChangedSynthesisDefectExact
 
-jCoarseIsNine : Transport.JScale.jCoarseFrequency ≡ 9
+jCoarseIsNine : JScale.jCoarseFrequency ≡ 9
 jCoarseIsNine = Transport.jCoarseIsNine
 
-jFineIsThreePowerNine : Transport.JScale.jFineFrequency ≡ 19683
+jFineIsThreePowerNine : JScale.jFineFrequency ≡ 19683
 jFineIsThreePowerNine = Transport.jFineIsThreePowerNine
 
 ------------------------------------------------------------------------
