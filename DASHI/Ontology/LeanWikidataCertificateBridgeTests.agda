@@ -5,28 +5,31 @@ open import Agda.Builtin.List using ([]; _∷_)
 
 open import DASHI.Ontology.EpistemicTrit
 open import DASHI.Ontology.LeanWikidataCertificateBridge
+open import DASHI.Ontology.LeanWikidataSourceSnapshot
 
 ------------------------------------------------------------------------
--- Worked fragment reported by James Michael DuPont on 2026-08-16:
--- artist as a (possibly overlapping) union of painter and sculptor, checked by
--- the theorem-backed executable `unionOk` surface in RequestProject/ClassAlgebra.
--- These string identifiers are provenance labels only; the formal claims below
--- concern the certificate import semantics, not the live Wikidata graph.
+-- Source-faithful worked fragment from the uploaded Aristotle archive:
+-- RequestProject/ClassAlgebra.lean, ClassAlgebraExample.artistKB.
+--
+-- `artist` (Q483501) is checked as the overlapping union P2737 of
+-- `painter` (Q1028181) and `sculptor` (Q1281618).  The exact Lean checker
+-- and proof names are pinned in LeanWikidataSourceSnapshot.
 ------------------------------------------------------------------------
 
 artistUnionCertificate : LeanOntologyCertificate
 artistUnionCertificate =
   leanOntologyCertificate
-    "ae06ae06-2580-422a-8fc3-92aeaaca8762"
-    "RequestProject.ClassAlgebra"
-    "unionOk_sound"
-    "unionOk"
-    "worked-fragment:artist-painter-sculptor"
-    "wd:artist"
+    aristotleRequestId
+    classAlgebraModule
+    unionSoundnessTheorem
+    unionChecker
+    "sha256:6ee3b2371498d67c159fe97389c9ca1e06144ad530e17554cb3f87968c9f899a#ClassAlgebraExample.artistKB"
+    artistQid
     "wdt:P2737"
-    "wd:painter|wd:sculptor"
+    artistUnionParts
     unionOf
     ("aristotle:ae06ae06-2580-422a-8fc3-92aeaaca8762"
+      ∷ "lean:Wikidata.ClassAlgebraExample.artistKB_unionOk"
       ∷ "reported-by:James-Michael-DuPont:2026-08-16"
       ∷ [])
     true
@@ -53,14 +56,14 @@ artistUnionExplicitExternalOppositionConflicts = refl
 failedArtistUnionCertificate : LeanOntologyCertificate
 failedArtistUnionCertificate =
   leanOntologyCertificate
-    "ae06ae06-2580-422a-8fc3-92aeaaca8762"
-    "RequestProject.ClassAlgebra"
-    "unionOk_sound"
-    "unionOk"
-    "worked-fragment:artist-painter-sculptor"
-    "wd:artist"
+    aristotleRequestId
+    classAlgebraModule
+    unionSoundnessTheorem
+    unionChecker
+    "sha256:6ee3b2371498d67c159fe97389c9ca1e06144ad530e17554cb3f87968c9f899a#ClassAlgebraExample.artistKB"
+    artistQid
     "wdt:P2737"
-    "wd:painter|wd:sculptor"
+    artistUnionParts
     unionOf
     []
     false
