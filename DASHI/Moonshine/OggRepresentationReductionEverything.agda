@@ -19,12 +19,15 @@ module DASHI.Moonshine.OggRepresentationReductionEverything where
 -- points close the quotient defect, orbit saturation, and finite
 -- supersingular/Frobenius two-orbit spectrum.  p=2 stays a separate SU(2)
 -- spinor boundary rather than being forced through the odd SO(3) lane.
+-- Cyclic C2/C3 elliptic stabilisers are embedded as proper subgroups of the
+-- existing ternary S3 permutation carrier rather than conflated with S3.
 ------------------------------------------------------------------------
 
 import DASHI.Analysis.FiniteRealQSeriesReflectionExact
 import DASHI.Arithmetic.AristotleArithmeticEverything
 import DASHI.Foundations.FiniteRepresentationRestrictionCore
 import DASHI.Foundations.FiniteInvolutionOrbitNormalFormExact
+import DASHI.Foundations.FiniteInvolutionCorrespondenceDescentExact
 import DASHI.Foundations.PolyhedralFiniteRestrictionInstancesExact
 import DASHI.Foundations.CandidateIndexedFiniteRestrictionFamilyExact
 import DASHI.Foundations.SU2SO3IrrepDimensionExact
@@ -44,6 +47,7 @@ import DASHI.Foundations.PolyhedralInvariantFixedSpaceSignatureExact
 import DASHI.Foundations.PolyhedralRestrictionCriticalCharacterExact
 import DASHI.Foundations.PolyhedralRegularRepresentationShiftExact
 import DASHI.Foundations.BinaryPolyhedralMcKayDimensionExact
+import DASHI.Foundations.TernaryPermutationCyclicSubgroupsExact
 import DASHI.Foundations.TernaryPhaseShapeIncidenceExact
 import DASHI.Foundations.PhaseQuotientNonaryGroupSeparationExact
 import DASHI.Biology.D4NineCellOrbitCompressionExact
@@ -75,6 +79,7 @@ import DASHI.Moonshine.SSPRepresentationHeckeIntertwinerBoundaryExact
 import DASHI.Moonshine.TernarySevenOggSSPComparisonExact
 import DASHI.Moonshine.OggPhaseFrickeSynthesisRegression
 import DASHI.Moonshine.AristotleCrossPollinationRegression
+import DASHI.Moonshine.OggRepresentationFrickeCouplingRegression
 import DASHI.Moonshine.OggPrimeModularControlRegression
 import DASHI.Physics.Closure.PhysicalSSPHeckeModelClosureReceipt
 import DASHI.Physics.Closure.SSPZ3EigenspaceClassificationReceipt
