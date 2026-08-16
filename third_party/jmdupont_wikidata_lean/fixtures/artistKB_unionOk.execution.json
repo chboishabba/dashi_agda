@@ -1,0 +1,13 @@
+{
+  "contract": "dashi.james_wikidata_execution.v1",
+  "request_id": "ae06ae06-2580-422a-8fc3-92aeaaca8762",
+  "source_archive_sha256": "d394cd224742dea06a47d2cc6c150e9284e2d6ea291a02c3ba2b2dd04d4f5f88",
+  "module": "ClassAlgebra",
+  "theorem": "Wikidata.ClassAlgebraExample.artistKB_unionOk",
+  "input_graph_sha256": "6e7c185bd7d97fa0eff022e9e3f51219158215bd15f2e79f938645e86c1c3723",
+  "verdict": "certified_holds",
+  "references": [
+    "third_party/jmdupont_wikidata_lean/fixtures/artistKB.canonical.tsv",
+    "RequestProject/ClassAlgebra.lean"
+  ]
+}
