@@ -14,22 +14,21 @@ module DASHI.Physics.Closure.NSTriadKNHHGoodFourthOrderDyadicL1Round62Exact wher
 --
 -- ROUND 62 CONTRIBUTION
 --
--- For the HH-good annular multiplier, four integrations by parts in R^3 give
--- the standard pointwise decay |K(x)| <= C M_4 (1+|x|)^(-4).  On the dyadic
--- shell |x|~2^j the volume costs 2^(3j), hence the shell L1 mass costs only
--- 2^(-j).  This module closes that LAST summability step exactly over Q.
+-- Four inverse-Fourier integrations by parts in R^3 give the standard decay
+-- |K(x)| <= C M_4 (1+|x|)^(-4).  A dyadic shell costs 2^(3j) in volume and
+-- gains 2^(-4j) in decay, hence has L1 mass O(2^(-j)).
 --
--- If physical shell masses m_j satisfy
+-- This file closes that summability endpoint exactly over Q.  If m_j obeys
 --
 --   0 <= m_j <= M 2^(-j),
 --
--- every finite partial L1 mass is <= 2 M.  The proof uses the exact invariant
+-- then every finite partial mass is <=2M.  The exact invariant is
 --
---   sum_{j=0}^n 2^(-j) + 2 * 2^(-(n+1)) = 2.
+--   sum_{j=0}^n 2^(-j) + 2*2^(-(n+1)) = 2.
 --
--- Thus E no longer needs a separate "Schwartz decay implies L1" authority.
--- The remaining continuum theorem is only the literal fourfold inverse-Fourier
--- integration-by-parts estimate that produces the dyadic shell majorant.
+-- Therefore E no longer needs a separate geometric-series/Schwartz-to-L1
+-- step.  The remaining continuum theorem is the literal fourfold integration
+-- by parts that produces this shell majorant for the actual matrix symbol.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
@@ -39,10 +38,15 @@ open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Rational.Base using
   (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚP
+open ℚP using (_≤?_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (subst; trans)
+open import Relation.Nullary.Decidable.Core using (toWitness)
 
 import DASHI.Physics.Closure.NSTriadKNHHBadDyadicScalePrimitivesRound58 as Scale
+
+halfNonnegative : 0ℚ ≤ Scale.half
+halfNonnegative = toWitness {a? = 0ℚ ≤? Scale.half} _
 
 partialDyadicWeight : Nat → ℚ
 partialDyadicWeight zero = 1ℚ
@@ -70,11 +74,9 @@ inverseDyadicScaleNonnegative : ∀ n →
 inverseDyadicScaleNonnegative zero = ℚP.0≤1
 inverseDyadicScaleNonnegative (suc n) =
   let
-    halfNN : 0ℚ ≤ Scale.half
-    halfNN = ℚP.<⇒≤ (ℚP.positive⁻¹ Scale.half)
     tailNN = inverseDyadicScaleNonnegative n
     instance
-      halfNNI = nonNegative halfNN
+      halfNNI = nonNegative halfNonnegative
       tailNNI = nonNegative tailNN
       productNNI =
         ℚP.nonNeg*nonNeg⇒nonNeg Scale.half (Scale.inverseDyadicScale n)
@@ -130,10 +132,7 @@ partialShellMassBelowScaledDyadicWeight :
   partialShellMass majorant n
   ≤ decayMass majorant * partialDyadicWeight n
 partialShellMassBelowScaledDyadicWeight majorant zero =
-  subst
-    (λ right → shellMass majorant zero ≤ right)
-    (sym (ℚP.*-identityʳ (decayMass majorant)))
-    (fourthOrderThreeDimensionalShellBound majorant zero)
+  fourthOrderThreeDimensionalShellBound majorant zero
 partialShellMassBelowScaledDyadicWeight majorant (suc n) =
   let
     previous = partialShellMassBelowScaledDyadicWeight majorant n
@@ -151,8 +150,7 @@ partialShellMassBelowScaledDyadicWeight majorant (suc n) =
   in
   subst
     (λ right → partialShellMass majorant (suc n) ≤ right)
-    regroup
-    added
+    regroup added
 
 finitePartialL1UniformBound :
   (majorant : FourthOrderDyadicShellMajorant) → ∀ n →
@@ -175,8 +173,7 @@ finitePartialL1UniformBound majorant n =
   ℚP.≤-trans first
     (subst
       (λ upper → decayMass majorant * partialDyadicWeight n ≤ upper)
-      endpoint
-      scaled)
+      endpoint scaled)
 
 fourthOrderDecaySummabilityClosed : Bool
 fourthOrderDecaySummabilityClosed = true
