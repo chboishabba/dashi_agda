@@ -20,26 +20,27 @@ module DASHI.Physics.YangMills.BalabanCMP109LiteralFederbushCancellationDictiona
 --
 -- DASHI CONTRIBUTION
 --
--- Close the finite/rational half of the remaining G1 convention dictionary.
--- The literal differentiated equation-(0.11) module already constructs the
--- centre component from the SAME J_j and T_j as
+-- Close the finite/rational half of the remaining G1 convention dictionary
+-- WITHOUT accepting the desired component cancellation as a field.  The
+-- printed equation contributes the same J_j and T_j to the centre matrix
 --
 --        K_j = J_j T_j.
 --
--- The cancellation route says that, in the source trivializations,
+-- A caller now supplies only the literal left/right dexp data
 --
---        J_+(Y_j) Ad_{exp Y_j} = J_-(Y_j).
+--        dexp+ = Ad_exp o dexp-,
+--        J+ dexp+ = I,
+--        dexp- J- = I.
 --
--- This module forbids a second independently chosen physical component: the
--- component consumed by the normalized 4/3 inverse is definitionally the
--- literal composeMatrix J_j T_j from the printed equation.  Once a caller
--- supplies the pointwise convention identification with the opposite inverse-
--- dexp polynomial and the source-radius coefficient data, the existing
--- source-radius theorem supplies the column bound automatically.
+-- BalabanCMP109FiniteMatrixLeftRightDexpCancellationExact derives
 --
--- Thus the only G1 source leaf left after this module is the actual convention
--- identification (sign/trivialization and Bishop coefficient realization), not
--- another matrix-norm or normalization estimate.
+--        J+ Ad_exp = J-
+--
+-- entrywise from inverse uniqueness and coordinate-basis evaluation.  Hence
+-- the cancellation consumed by the normalized 4/3 inverse is a theorem, not a
+-- restated assumption.  The remaining physical leaf is source calculus:
+-- identify the printed J/T and the opposite inverse-dexp with those literal
+-- trivializations, plus the Bishop-real coefficient/norm realization.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -64,6 +65,7 @@ import DASHI.Physics.YangMills.BalabanCMP109SU2AdCoordinateMassExact as Ad
 import DASHI.Physics.YangMills.BalabanCMP109SU2AdSquareVariationMassExact as AdSq
 import DASHI.Physics.YangMills.BalabanCMP109SU2PrincipalLogAdPolynomialVariationMassExact as JVar
 import DASHI.Physics.YangMills.BalabanCMP109FederbushComponentVariationExact as Variation
+import DASHI.Physics.YangMills.BalabanCMP109FiniteMatrixLeftRightDexpCancellationExact as LR
 
 record LiteralFederbushCancellationDictionary (Index : Set) : Set₁ where
   field
@@ -90,15 +92,26 @@ record LiteralFederbushCancellationDictionary (Index : Set) : Set₁ where
             (Ad.adMatrix (x0 index) (x1 index) (x2 index)))
           row column
 
-    -- Literal source/convention leaf only: no independent norm estimate.
-    literalComponentCancellation : ∀ index row column →
-      Printed.composeMatrix
+    -- This is source-facing dexp/trivialisation data, not the target matrix
+    -- cancellation.  LR derives that cancellation from these inverse laws.
+    leftRightDexpData : ∀ index →
+      LR.MatrixLeftRightDexpCancellationData
         (Printed.principalLogJacobian differential index)
         (Printed.centreTransport differential index)
-        row column
-      ≡ oppositeInverseDexp index row column
+        (oppositeInverseDexp index)
 
 open LiteralFederbushCancellationDictionary public
+
+literalComponentCancellation :
+  ∀ {Index} (dictionary : LiteralFederbushCancellationDictionary Index)
+    index row column →
+  Printed.composeMatrix
+    (Printed.principalLogJacobian (differential dictionary) index)
+    (Printed.centreTransport (differential dictionary) index)
+    row column
+  ≡ oppositeInverseDexp dictionary index row column
+literalComponentCancellation dictionary index =
+  LR.leftRightDexpMatrixCancellation (leftRightDexpData dictionary index)
 
 sourcePolynomial :
   ∀ {Index} → LiteralFederbushCancellationDictionary Index →
@@ -221,8 +234,11 @@ literalFederbushCancellationInverseFourThirds dictionary =
 cmp109LiteralFederbushCancellationDictionaryLevel : ProofLevel
 cmp109LiteralFederbushCancellationDictionaryLevel = machineChecked
 
+cmp109LiteralFederbushCancellationDerivedLevel : ProofLevel
+cmp109LiteralFederbushCancellationDerivedLevel = machineChecked
+
 cmp109LiteralFederbushSourceRadiusDefectTransportLevel : ProofLevel
 cmp109LiteralFederbushSourceRadiusDefectTransportLevel = machineChecked
 
-cmp109LiteralFederbushConventionIdentificationLevel : ProofLevel
-cmp109LiteralFederbushConventionIdentificationLevel = conditional
+cmp109LiteralFederbushDexpTrivializationIdentificationLevel : ProofLevel
+cmp109LiteralFederbushDexpTrivializationIdentificationLevel = conditional
