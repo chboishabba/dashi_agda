@@ -22,6 +22,26 @@ module DASHI.Crypto.MLKEMNTTActualCBD2EightCoefficientLeakageResolutionExact whe
 -- ACNS 2024, LNCS 14584, 101--130.
 -- DOI: 10.1007/978-3-031-54773-7_5.
 --
+-- Pierre-Alain Fouque, Damien Marion, Quyen Nguyen, Alexandre Wallet,
+-- "Avengers assemble! Supervised learning meets lattice reduction: A single
+-- power trace attack against CRYSTALS-Kyber Key Generation",
+-- IACR Transactions on Cryptographic Hardware and Embedded Systems 2025(4),
+-- 409--436. DOI: 10.46586/tches.v2025.i4.409-436.
+--
+-- Guilhem Assael, Philippe Elbaz-Vincent, Guillaume Reymond,
+-- "Improving Single-Trace Attacks on the Number-Theoretic Transform for
+-- Cortex-M4", IEEE HOST 2023.
+-- DOI: 10.1109/HOST55118.2023.10133270.
+--
+-- Tianrun Yu, Chi Cheng, Zilong Yang, Yingchen Wang, Yanbin Pan, Jian Weng,
+-- "Hints from Hertz: Dynamic Frequency Scaling Side-Channel Analysis of
+-- Number Theoretic Transform in Lattice-Based KEMs",
+-- IACR Transactions on Cryptographic Hardware and Embedded Systems 2024(3),
+-- 200--223. DOI: 10.46586/tches.v2024.i3.200-223.
+--
+-- These papers motivate defensive observation/coarsening audits only. Their
+-- attack procedures are not imported as theorem premises.
+--
 -- PURPOSE
 -- -------
 -- Record the exact arithmetic consequences of the source-faithful exhaustive
