@@ -18,6 +18,13 @@ module DASHI.Physics.Closure.NSTriadKNLuoFiniteEightPointSixThreeHolderBoundary 
 -- eight-point theorem module should contain only the concrete eight-point data
 -- transport and final theorem assembly.
 --
+-- Round 61 profiling sharpened the hotspot further: the old eight-variable
+-- RingSolver call used only to reassociate the cube of an eight-term sum took
+-- about 76 seconds and drove the warm-cache check to roughly 17.7 GiB RSS.
+-- Reassociation below is therefore proved from binary associativity, and the
+-- four/eight endpoint arithmetic is factored through two-variable solver
+-- lemmas.  The public theorem statements are unchanged.
+--
 -- No postulates or new analytic assumptions are introduced here.
 ------------------------------------------------------------------------
 
@@ -30,7 +37,7 @@ open import Data.Rational.Base using
 import Data.Rational.Properties as ℚₚ
 open ℚₚ using (_≤?_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 open import Relation.Nullary.Decidable.Core using (toWitness)
 
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteRationalOrderCore as Core
@@ -71,38 +78,93 @@ sixteenMeaning = refl
 sixtyFourMeaning : sixtyFour ≡ Int.+ 64 / 1
 sixtyFourMeaning = refl
 
+sumFourReassociate :
+  (a b c d : ℚ) →
+  a + b + c + d ≡ (a + b) + (c + d)
+sumFourReassociate a b c d =
+  ℚₚ.+-assoc (a + b) c d
+
+sumRightFourAssociate :
+  (a b c d : ℚ) →
+  a + b + c + d ≡ a + (b + (c + d))
+sumRightFourAssociate a b c d =
+  trans
+    (ℚₚ.+-assoc (a + b) c d)
+    (ℚₚ.+-assoc a b (c + d))
+
+sumEightReassociate :
+  (a b c d e f g h : ℚ) →
+  a + b + c + d + e + f + g + h
+    ≡ (a + b + c + d) + (e + f + g + h)
+sumEightReassociate a b c d e f g h =
+  let
+    left4 : ℚ
+    left4 = a + b + c + d
+
+    tailRightAssociated :
+      e + f + g + h ≡ e + (f + (g + h))
+    tailRightAssociated = sumRightFourAssociate e f g h
+  in
+  trans
+    (ℚₚ.+-assoc ((left4 + e) + f) g h)
+    (trans
+      (ℚₚ.+-assoc (left4 + e) f (g + h))
+      (trans
+        (ℚₚ.+-assoc left4 e (f + (g + h)))
+        (cong (λ tail → left4 + tail) (sym tailRightAssociated))))
+
+fourPairEndpointGrouped :
+  (left right : ℚ) →
+  four * (four * left + four * right)
+    ≡ sixteen * (left + right)
+fourPairEndpointGrouped left right
+  rewrite fourMeaning | sixteenMeaning
+  = solve (left ∷ right ∷ [])
+
 fourPairEndpoint :
   (x y z w : ℚ) →
   four * (four * (x + y) + four * (z + w))
     ≡ sixteen * (x + y + z + w)
-fourPairEndpoint x y z w
-  rewrite fourMeaning | sixteenMeaning
-  = solve (x ∷ y ∷ z ∷ w ∷ [])
+fourPairEndpoint x y z w =
+  trans
+    (fourPairEndpointGrouped (x + y) (z + w))
+    (cong
+      (λ total → sixteen * total)
+      (sym (sumFourReassociate x y z w)))
 
 cubeFourSumReassociate :
   (a b c d : ℚ) →
   cube (a + b + c + d) ≡ cube ((a + b) + (c + d))
-cubeFourSumReassociate a b c d
-  rewrite cubeMeaning (a + b + c + d)
-        | cubeMeaning ((a + b) + (c + d))
-  = solve (a ∷ b ∷ c ∷ d ∷ [])
+cubeFourSumReassociate a b c d =
+  cong cube (sumFourReassociate a b c d)
+
+eightEndpointGrouped :
+  (left right : ℚ) →
+  four * (sixteen * left + sixteen * right)
+    ≡ sixtyFour * (left + right)
+eightEndpointGrouped left right
+  rewrite fourMeaning | sixteenMeaning | sixtyFourMeaning
+  = solve (left ∷ right ∷ [])
 
 eightEndpoint :
   (a b c d e f g h : ℚ) →
   four * (sixteen * (a + b + c + d) + sixteen * (e + f + g + h))
     ≡ sixtyFour * (a + b + c + d + e + f + g + h)
-eightEndpoint a b c d e f g h
-  rewrite fourMeaning | sixteenMeaning | sixtyFourMeaning
-  = solve (a ∷ b ∷ c ∷ d ∷ e ∷ f ∷ g ∷ h ∷ [])
+eightEndpoint a b c d e f g h =
+  trans
+    (eightEndpointGrouped
+      (a + b + c + d)
+      (e + f + g + h))
+    (cong
+      (λ total → sixtyFour * total)
+      (sym (sumEightReassociate a b c d e f g h)))
 
 cubeEightSumReassociate :
   (a b c d e f g h : ℚ) →
   cube (a + b + c + d + e + f + g + h)
     ≡ cube ((a + b + c + d) + (e + f + g + h))
-cubeEightSumReassociate a b c d e f g h
-  rewrite cubeMeaning (a + b + c + d + e + f + g + h)
-        | cubeMeaning ((a + b + c + d) + (e + f + g + h))
-  = solve (a ∷ b ∷ c ∷ d ∷ e ∷ f ∷ g ∷ h ∷ [])
+cubeEightSumReassociate a b c d e f g h =
+  cong cube (sumEightReassociate a b c d e f g h)
 
 l2SquareMeaning :
   (value : ℚ) → Core.square value ≡ value * value
