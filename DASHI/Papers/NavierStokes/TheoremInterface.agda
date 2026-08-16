@@ -22,56 +22,85 @@ import DASHI.Physics.Closure.NSTriadKNHHBadPhysicalDuhamelSourceRound59
 import DASHI.Physics.Closure.NSTriadKNComNormalizedFibreAggregateRound60Exact
 import DASHI.Physics.Closure.NSTriadKNFixedShiftScaleMatchedCapacityRound60Exact
 import DASHI.Physics.Closure.NSTriadKNHighestAlphaRound61Exact
+import DASHI.Physics.Closure.NSTriadKNHighestAlphaRound62Exact
 import DASHI.Papers.NavierStokes.ClayContractRound23 as Clay23
 
 ------------------------------------------------------------------------
 -- Paper-facing Navier-Stokes theorem/status interface.
 --
--- This module is a thin, non-promoting wrapper over the current closure
--- receipts. It intentionally exports theorem-status fields suitable for a
--- paper spine while preserving the Clay terminal boundary as false. Round 23
--- carries the literal Fefferman periodic contract as a canonical fail-closed
--- surface: the target theorem type is represented, but physical producers and
--- unconditional promotion remain false.
+-- This module remains a non-promoting paper spine.  The literal periodic Clay
+-- target is represented, but the terminal theorem remains false until the
+-- genuine physical producer lemmas are proved.
 --
--- Round55 imports the six A--F cutset modules. Round59/60 sharpened the
--- quantitative A--C boundaries. Round61 then removes several artificial
--- producer obligations rather than adding another receipt layer:
+-- ROUND62 MATHEMATICAL COMPRESSION
 --
--- * A3: 2^q g_q need only be dominated by the selected recurrence defect;
---   unmasked charge may carry a physical K_bad factor, giving exactly
---   eta_HHb=(2 C_*) K_bad rather than assuming K_bad=1.
--- * B2/B3: one active same-object equality from the literal normalized odd-PQ
---   pair product to the existing six-three Gram cell derives 17/64,
---   65/512, 65/512 and the whole-fibre 133/256 endpoint. B3 is not an
---   independent physical premise.
--- * C2/C3: a positive fixed-shift correction forces a<r-q. Conversely C1
---   scale bounds plus a<r-q construct a positive correction automatically:
---   the zero-safe branch uses ((r-q)-a)/(K+1), while for K>0 the sharp branch
---   uses the maximal B_*=((r-q)-a)/K and saturates a+B_*K=r-q exactly.
--- * ABC: the compiler-light canonical source is now constructed from A's
---   source-indexed estimates, B's single active six-three same-object theorem,
---   and C's strict-positive scale data; callers do not resupply derived B/C
---   certificates.
--- * C->G: the final resource carrier receives the sharp positive-K B_* from C
---   definitionally rather than accepting another arbitrary correction cap.
--- * G: equal B_*/3 allocation remains an exact fallback. The high-alpha path
---   uses rational square-root majorants c_i<=s_i^2, allocates B_i proportional
---   to s_i, and obtains exact soft tax S^2/B_* with
---   S=s_Com+s_kernel+s_HHg. This approaches the Cauchy-optimal real allocation
---   without irrational carriers. The final strict scalar gate is consumed
---   directly, and the necessary two-resource no-go carries K_bad.
--- * H: continuation is audited on the already-existing official selected
---   Leray--Hopf/Luo carrier, not on a separate receipt carrier.
+-- A: the HH-bad affine alpha/beta recurrence is removed from the required
+-- producer path.  Normalizing the literal successor identity gives exactly
 --
--- The genuine remaining producer frontier is therefore A1/A2, B1, C1/C2,
--- D1/F1 plus their residual/limit estimates, and E2.  The terminal Clay bit
--- remains false until those literal PDE/Fourier producers are actually proved.
+--   C_(q+1) = I_(q+1) + N_q,
+--
+-- so finite prefix plus N_q<=C_*-I_(q+1) closes the ceiling directly.  The
+-- literal density comparison 2^q g_q<=C_q feeds the selected normalized
+-- profile, and the physical unmasked-charge estimate Q_q<=K_bad D gives the
+-- exact hard tax eta_HHb=2 C_* K_bad.
+--
+-- B: Round58's Q-valued normalized Gram object is now explicitly only a
+-- rational certificate carrier.  Literal Fourier energy stays on the selected
+-- physical real/complex carrier.  Round62's carrier-correct endpoint uses a
+-- Murray--Bishop real normalized energy and embeds 17/64, 65/512 and 133/256
+-- only as rational order majorants.  The remaining physical theorem is to
+-- construct that normalized real energy from the literal odd-P/Q fibre and
+-- prove the same/adjacent active bounds.
+--
+-- C: aggregate data headroom is no longer an opaque nine-owner field.  Six
+-- owner data remainders are already zero.  The fallback coefficient is
+-- a_HHg+a_Com+a_kernel.  On the preferred exact-independent-kernel-zero branch,
+-- kernel vanishes as an owner entirely and the strict-gap coefficient is
+--
+--   a = a_HHg + a_Com.
+--
+-- Moreover the singular/parabolic HH-good owner has data remainder zero, so
+-- a_HHg is only the smooth periodic correction scale.  The remaining global C
+-- estimate is X_n<=K C r^n on the same owner->flux->block object.  If K>0 and
+-- a<r-q, Round61 already constructs the maximal
+--
+--   B_* = ((r-q)-a)/K.
+--
+-- D/F: one structured localized-PDE atom list now produces the interior,
+-- kernel and lower/upper boundary ledgers.  Exact kernel cancellation pairs are
+-- folded structurally.  If the literal independent total is zero, the existing
+-- structural kernel-zero owner follows and has production=eta=data=critical=0.
+-- Only the actual localized PDE extraction, independent-zero/estimate, and
+-- classified boundary limits remain analytic.
+--
+-- E: once four inverse-Fourier integrations by parts produce shell mass
+-- M*2^(-j) in dimension three, exact geometric algebra proves every finite L1
+-- partial mass <=2M.  Thus the remaining E theorem is the same-object continuum
+-- annular multiplier plus that literal fourfold integration-by-parts estimate;
+-- no separate Schwartz-to-L1 authority is needed.
+--
+-- G: after substituting the maximal B_* and deleting kernel on the preferred
+-- branch, S=s_Com+s_HHg and the final gate is
+--
+--   2 C_* K_bad + K S^2 / ((r-q)-a) + 1/16 < 1.
+--
+-- Round62 solves its exact feasibility region:
+--
+--   C_* K_bad < 15/32,
+--   K S^2 < (15/16 - 2 C_* K_bad) ((r-q)-a).
+--
+-- H remains closed on the same selected Leray--Hopf/Luo continuation carrier.
+--
+-- Consequently the remaining Clay frontier is genuinely physical/analytic:
+-- selected-solution Duhamel/headroom+density+charge; carrier-correct normalized
+-- Com bounds; same-object C scale estimates; one localized PDE atom extraction
+-- plus kernel/boundary limits; continuum annular fourfold Fourier decay; and
+-- the final instantiated scalar gate.  None is promoted here by a receipt.
 ------------------------------------------------------------------------
 
 paperInterfaceStatement : String
 paperInterfaceStatement =
-  "Paper-facing NS interface: Round61 compresses the physical Clay cutset without promoting the theorem. A3 uses normalized-density domination and explicit K_bad charge multiplicity; B3 follows from one active literal-normalized-PQ to six-three-Gram same-object theorem; C3 is constructed from C1 plus a<r-q, sharply as ((r-q)-a)/K for K>0; the canonical ABC root constructs derived B/C certificates; C feeds its sharp B_* directly into G; G has an exact equal-third fallback and a sharper rational square-root-majorant allocation with soft tax S^2/B_*, plus a K_bad-aware two-resource no-go; H is closed on the official selected Leray-Hopf/Luo carrier. Genuine physical A1/A2, B1, C1/C2, D/F and E2 producers remain open, so Clay Navier-Stokes and terminal promotion remain false."
+  "Paper-facing NS interface: Round62 removes the HH-bad affine recurrence from the producer cutset, keeps physical Com energy on the Murray-Bishop real carrier with rational constants only as majorants, reduces the preferred fixed-shift data coefficient to smooth-HH-good plus Com when the independent kernel is exactly zero, derives kernel and boundary ledgers from one structured localized-PDE atom source, closes fourth-order dyadic decay to uniform L1 summability, substitutes the sharp B_*=((r-q)-a)/K into the weighted allocator, and solves the preferred feasibility region C_* K_bad<15/32 and K S^2<(15/16-2 C_* K_bad)((r-q)-a). Genuine selected-solution A/B/C/D/F/E physical producers and the instantiated scalar gate remain open; Clay Navier-Stokes and terminal promotion remain false."
 
 record NSPaperTheoremStatus : Setω where
   field
