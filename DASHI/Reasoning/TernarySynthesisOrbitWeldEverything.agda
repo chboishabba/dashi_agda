@@ -14,6 +14,7 @@ import DASHI.Foundations.SSPPrimeLaneUnitAction
 import DASHI.Foundations.TernaryEndomorphismConjugacyExact
 import DASHI.Foundations.TernaryEndomorphismPhaseQuotientExact
 import DASHI.Foundations.TernaryHypervoxelPermutationTransportExact
+import DASHI.Foundations.TernaryPermutationS3LawsExact
 import DASHI.Interop.PNFHodgeResidualTopology
 import DASHI.Interop.PNFHyperfabric369
 import DASHI.Interop.PNFSpectralFieldGraph
@@ -21,6 +22,7 @@ import DASHI.Moonshine.TernarySevenOggSSPComparisonExact
 import DASHI.Physics.Common.FiniteWreathRefinementExact
 import DASHI.Reasoning.RelationalBranchCobordismGeometry
 import DASHI.Reasoning.RelationalBranchInterference
+import DASHI.Reasoning.RelationalLensSynthesisCore
 import DASHI.Reasoning.RelationalTernaryPhaseGeometry
 import DASHI.Reasoning.TernaryComparisonSynthesisExact
 import DASHI.Reasoning.TernarySynthesisTransportWeldExact
