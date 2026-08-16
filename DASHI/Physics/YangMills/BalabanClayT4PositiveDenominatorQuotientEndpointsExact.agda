@@ -15,8 +15,8 @@ module DASHI.Physics.YangMills.BalabanClayT4PositiveDenominatorQuotientEndpoints
 --      lower = numeratorLower / denominatorUpper
 --      upper = numeratorUpper / denominatorLower
 --
--- for a strictly positive denominator interval.  Those endpoints are correct
--- only when the numerator interval is nonnegative.  Division by a positive
+-- for a strictly positive denominator interval. Those endpoints are correct
+-- only when the numerator interval is nonnegative. Division by a positive
 -- interval is monotone in the numerator but changes monotonicity in the
 -- denominator with the SIGN of the numerator.
 --
@@ -27,11 +27,12 @@ module DASHI.Physics.YangMills.BalabanClayT4PositiveDenominatorQuotientEndpoints
 --   nL <= 0 <= nU: [ nL/dL , nU/dL ].
 --
 -- Sound division still requires the evaluator to prove 0 < dL and that the
--- numerator/denominator functions lie in their boxes.  What is removed here
+-- numerator/denominator functions lie in their boxes. What is removed here
 -- is the unsound assumption that the same denominator endpoint works for all
 -- numerator signs.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational using (ℚ; 0ℚ; _≤_; _/_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -46,13 +47,13 @@ quotientLowerEndpoint :
   ∀ {numeratorLower numeratorUpper} →
   NumeratorSignCase numeratorLower numeratorUpper →
   ℚ → ℚ → ℚ
-quotientLowerEndpoint {numeratorLower} {numeratorUpper}
+quotientLowerEndpoint {numeratorLower}
     (numeratorNonnegative _) denominatorLower denominatorUpper =
   numeratorLower / denominatorUpper
-quotientLowerEndpoint {numeratorLower} {numeratorUpper}
+quotientLowerEndpoint {numeratorLower}
     (numeratorNonpositive _) denominatorLower denominatorUpper =
   numeratorLower / denominatorLower
-quotientLowerEndpoint {numeratorLower} {numeratorUpper}
+quotientLowerEndpoint {numeratorLower}
     (numeratorStraddlesZero _ _) denominatorLower denominatorUpper =
   numeratorLower / denominatorLower
 
@@ -60,13 +61,13 @@ quotientUpperEndpoint :
   ∀ {numeratorLower numeratorUpper} →
   NumeratorSignCase numeratorLower numeratorUpper →
   ℚ → ℚ → ℚ
-quotientUpperEndpoint {numeratorLower} {numeratorUpper}
+quotientUpperEndpoint {numeratorUpper}
     (numeratorNonnegative _) denominatorLower denominatorUpper =
   numeratorUpper / denominatorLower
-quotientUpperEndpoint {numeratorLower} {numeratorUpper}
+quotientUpperEndpoint {numeratorUpper}
     (numeratorNonpositive _) denominatorLower denominatorUpper =
   numeratorUpper / denominatorUpper
-quotientUpperEndpoint {numeratorLower} {numeratorUpper}
+quotientUpperEndpoint {numeratorUpper}
     (numeratorStraddlesZero _ _) denominatorLower denominatorUpper =
   numeratorUpper / denominatorLower
 
@@ -78,8 +79,7 @@ positiveNumeratorLegacyLowerExact :
     denominatorLower denominatorUpper
   ≡ numeratorLower / denominatorUpper
 positiveNumeratorLegacyLowerExact numeratorLower numeratorUpper
-    denominatorLower denominatorUpper nonnegative = Agda.Builtin.Equality.refl
-  where open import Agda.Builtin.Equality
+    denominatorLower denominatorUpper nonnegative = refl
 
 positiveNumeratorLegacyUpperExact :
   ∀ numeratorLower numeratorUpper denominatorLower denominatorUpper
@@ -89,8 +89,7 @@ positiveNumeratorLegacyUpperExact :
     denominatorLower denominatorUpper
   ≡ numeratorUpper / denominatorLower
 positiveNumeratorLegacyUpperExact numeratorLower numeratorUpper
-    denominatorLower denominatorUpper nonnegative = Agda.Builtin.Equality.refl
-  where open import Agda.Builtin.Equality
+    denominatorLower denominatorUpper nonnegative = refl
 
 positiveDenominatorSignAwareEndpointSelectionLevel : ProofLevel
 positiveDenominatorSignAwareEndpointSelectionLevel = machineChecked
