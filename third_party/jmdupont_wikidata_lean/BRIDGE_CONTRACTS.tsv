@@ -73,4 +73,4 @@ Diagnostics	Wikidata.KB.brokenKB_disjoint	positive	source_regression
 Redundancy	Wikidata.KB.redundantKB_valid	positive	source_regression
 Redundancy	Wikidata.KB.redundantKB_pruned	positive	source_regression
 Alignment	Wikidata.AlignmentExample.bad_links_alignOk_false	negative	source_regression
-Rdf	Wikidata.RdfExample.adams_entity_computed	positive	source_regression
+Rdf	Wikidata.Rdf.RdfExample.adams_entity_computed	positive	source_regression
