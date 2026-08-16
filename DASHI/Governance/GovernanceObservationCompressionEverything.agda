@@ -5,13 +5,15 @@ module DASHI.Governance.GovernanceObservationCompressionEverything where
 -- future-safe compression / causal resolution / contestability / open-world
 -- evidence / counterposition diversity / intervention feasibility / proxy
 -- future safety / observation-language refinement / access cost / forced-binary
--- epistemic information loss / ternary-carrier semantic separation.
+-- epistemic information loss / ternary-carrier semantic separation /
+-- directional-versus-reciprocal legibility refinement.
 ------------------------------------------------------------------------
 
 import DASHI.Core.ObservationLanguageRefinementExact
 import DASHI.Governance.FutureSafeCausalCompressionExact
 import DASHI.Governance.ObservationRelativeReificationRegressionExact
 import DASHI.Governance.AsymmetricLegibilityContestabilityExact
+import DASHI.Governance.ReciprocalLegibilityRefinementExact
 import DASHI.Governance.ContestabilityObservationRefinementExact
 import DASHI.Governance.ContestabilityAccessCostExact
 import DASHI.Governance.ContestableCompressionResidualExact
