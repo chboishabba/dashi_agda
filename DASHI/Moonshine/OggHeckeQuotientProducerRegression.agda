@@ -1,6 +1,7 @@
 module DASHI.Moonshine.OggHeckeQuotientProducerRegression where
 
 open import DASHI.Core.Prelude
+open import Data.List.Base using (length)
 
 import DASHI.Moonshine.HeckeCorrespondenceQuotientDescentExact as Descent
 import DASHI.Moonshine.FactorVecSupportMaskHeckeQuotientExact as FiniteModel
