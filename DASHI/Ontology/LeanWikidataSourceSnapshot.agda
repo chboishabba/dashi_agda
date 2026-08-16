@@ -10,9 +10,9 @@ open import Agda.Builtin.String using (String)
 -- Aristotle request:
 --   ae06ae06-2580-422a-8fc3-92aeaaca8762
 --
--- The uploaded archive contains the actual RequestProject Lean sources. These
--- constants pin the exact source-facing names used by the certificate bridge;
--- they are provenance data, not an assertion that DASHI kernel-checks Lean.
+-- The supplied archive contains the actual RequestProject Lean sources. These
+-- constants pin its exact identity and source-facing names; they are provenance
+-- data, not an assertion that DASHI kernel-checks Lean.
 --
 -- The final supplied archive contains 39 RequestProject/*.lean modules and
 -- 13,187 Lean source lines. The earlier status image's 36-module count predates
