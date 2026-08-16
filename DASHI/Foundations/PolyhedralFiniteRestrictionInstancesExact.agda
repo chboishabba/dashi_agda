@@ -53,13 +53,57 @@ d4Family =
     Candidate.irrepDimension
     "rotational D4 irreps A1,A2,B1,B2,E"
 
+d4CoreDimensionExact :
+  (j : Spin.AngularMomentum0To35) →
+  Core.sumWeighted
+    (Core.irreps d4Family)
+    (Core.finiteIrrepDimension d4Family)
+    (D4.multiplicityOf (D4.branchingSpectrum j))
+  ≡ Spin.jDimension j
+d4CoreDimensionExact Spin.j0 = refl
+d4CoreDimensionExact Spin.j1 = refl
+d4CoreDimensionExact Spin.j2 = refl
+d4CoreDimensionExact Spin.j3 = refl
+d4CoreDimensionExact Spin.j4 = refl
+d4CoreDimensionExact Spin.j5 = refl
+d4CoreDimensionExact Spin.j6 = refl
+d4CoreDimensionExact Spin.j7 = refl
+d4CoreDimensionExact Spin.j8 = refl
+d4CoreDimensionExact Spin.j9 = refl
+d4CoreDimensionExact Spin.j10 = refl
+d4CoreDimensionExact Spin.j11 = refl
+d4CoreDimensionExact Spin.j12 = refl
+d4CoreDimensionExact Spin.j13 = refl
+d4CoreDimensionExact Spin.j14 = refl
+d4CoreDimensionExact Spin.j15 = refl
+d4CoreDimensionExact Spin.j16 = refl
+d4CoreDimensionExact Spin.j17 = refl
+d4CoreDimensionExact Spin.j18 = refl
+d4CoreDimensionExact Spin.j19 = refl
+d4CoreDimensionExact Spin.j20 = refl
+d4CoreDimensionExact Spin.j21 = refl
+d4CoreDimensionExact Spin.j22 = refl
+d4CoreDimensionExact Spin.j23 = refl
+d4CoreDimensionExact Spin.j24 = refl
+d4CoreDimensionExact Spin.j25 = refl
+d4CoreDimensionExact Spin.j26 = refl
+d4CoreDimensionExact Spin.j27 = refl
+d4CoreDimensionExact Spin.j28 = refl
+d4CoreDimensionExact Spin.j29 = refl
+d4CoreDimensionExact Spin.j30 = refl
+d4CoreDimensionExact Spin.j31 = refl
+d4CoreDimensionExact Spin.j32 = refl
+d4CoreDimensionExact Spin.j33 = refl
+d4CoreDimensionExact Spin.j34 = refl
+d4CoreDimensionExact Spin.j35 = refl
+
 d4Branching :
   (j : Spin.AngularMomentum0To35) →
   Core.BranchingSpectrum (Spin.continuousSO3Irrep j) d4Family
 d4Branching j =
   Core.branching-spectrum
     (D4.multiplicityOf (D4.branchingSpectrum j))
-    (D4.branchingDimensionExact j)
+    (d4CoreDimensionExact j)
     "exact rotational-D4 restriction"
 
 data D4FixedProbe : Set where
@@ -112,13 +156,57 @@ tetrahedralFamily =
     Tet.tetrahedralIrrepDimension
     "rotational tetrahedral A4 irreps 1,1omega,1omega2,3"
 
+tetrahedralCoreDimensionExact :
+  (j : Spin.AngularMomentum0To35) →
+  Core.sumWeighted
+    (Core.irreps tetrahedralFamily)
+    (Core.finiteIrrepDimension tetrahedralFamily)
+    (tetrahedralMultiplicityOf (Tet.branchingSpectrum j))
+  ≡ Spin.jDimension j
+tetrahedralCoreDimensionExact Spin.j0 = refl
+tetrahedralCoreDimensionExact Spin.j1 = refl
+tetrahedralCoreDimensionExact Spin.j2 = refl
+tetrahedralCoreDimensionExact Spin.j3 = refl
+tetrahedralCoreDimensionExact Spin.j4 = refl
+tetrahedralCoreDimensionExact Spin.j5 = refl
+tetrahedralCoreDimensionExact Spin.j6 = refl
+tetrahedralCoreDimensionExact Spin.j7 = refl
+tetrahedralCoreDimensionExact Spin.j8 = refl
+tetrahedralCoreDimensionExact Spin.j9 = refl
+tetrahedralCoreDimensionExact Spin.j10 = refl
+tetrahedralCoreDimensionExact Spin.j11 = refl
+tetrahedralCoreDimensionExact Spin.j12 = refl
+tetrahedralCoreDimensionExact Spin.j13 = refl
+tetrahedralCoreDimensionExact Spin.j14 = refl
+tetrahedralCoreDimensionExact Spin.j15 = refl
+tetrahedralCoreDimensionExact Spin.j16 = refl
+tetrahedralCoreDimensionExact Spin.j17 = refl
+tetrahedralCoreDimensionExact Spin.j18 = refl
+tetrahedralCoreDimensionExact Spin.j19 = refl
+tetrahedralCoreDimensionExact Spin.j20 = refl
+tetrahedralCoreDimensionExact Spin.j21 = refl
+tetrahedralCoreDimensionExact Spin.j22 = refl
+tetrahedralCoreDimensionExact Spin.j23 = refl
+tetrahedralCoreDimensionExact Spin.j24 = refl
+tetrahedralCoreDimensionExact Spin.j25 = refl
+tetrahedralCoreDimensionExact Spin.j26 = refl
+tetrahedralCoreDimensionExact Spin.j27 = refl
+tetrahedralCoreDimensionExact Spin.j28 = refl
+tetrahedralCoreDimensionExact Spin.j29 = refl
+tetrahedralCoreDimensionExact Spin.j30 = refl
+tetrahedralCoreDimensionExact Spin.j31 = refl
+tetrahedralCoreDimensionExact Spin.j32 = refl
+tetrahedralCoreDimensionExact Spin.j33 = refl
+tetrahedralCoreDimensionExact Spin.j34 = refl
+tetrahedralCoreDimensionExact Spin.j35 = refl
+
 tetrahedralBranching :
   (j : Spin.AngularMomentum0To35) →
   Core.BranchingSpectrum (Spin.continuousSO3Irrep j) tetrahedralFamily
 tetrahedralBranching j =
   Core.branching-spectrum
     (tetrahedralMultiplicityOf (Tet.branchingSpectrum j))
-    (Tet.branchingDimensionExact j)
+    (tetrahedralCoreDimensionExact j)
     "exact rotational-tetrahedral restriction"
 
 data TetrahedralFixedProbe : Set where
@@ -250,6 +338,10 @@ record PolyhedralRestrictionInstanceBoundary : Set where
     genericRestrictionCoreHasConcreteInstancesIsTrue :
       genericRestrictionCoreHasConcreteInstances ≡ true
 
+    genericWeightedDimensionObligationsDischarged : Bool
+    genericWeightedDimensionObligationsDischargedIsTrue :
+      genericWeightedDimensionObligationsDischarged ≡ true
+
     probesRestrictedToOrdersPresentInTargetGroup : Bool
     probesRestrictedToOrdersPresentInTargetGroupIsTrue :
       probesRestrictedToOrdersPresentInTargetGroup ≡ true
@@ -264,6 +356,8 @@ canonicalPolyhedralRestrictionInstanceBoundary =
   record
     { genericRestrictionCoreHasConcreteInstances = true
     ; genericRestrictionCoreHasConcreteInstancesIsTrue = refl
+    ; genericWeightedDimensionObligationsDischarged = true
+    ; genericWeightedDimensionObligationsDischargedIsTrue = refl
     ; probesRestrictedToOrdersPresentInTargetGroup = true
     ; probesRestrictedToOrdersPresentInTargetGroupIsTrue = refl
     ; fixedSpaceProbeListClaimedCompleteForAllSubgroups = false
