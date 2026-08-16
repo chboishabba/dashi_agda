@@ -5,6 +5,7 @@ import DASHI.Ontology.LeanWikidataFullSourceManifest
 import DASHI.Ontology.LeanWikidataCertificateBridge
 import DASHI.Ontology.LeanWikidataCertificateBridgeTests
 import DASHI.Ontology.LeanWikidataTheoremSurfaceBridge
+import DASHI.Ontology.LeanWikidataExtendedTheoremSurfaceBridge
 import DASHI.Ontology.LeanWikidataVerdictBridge
 import DASHI.Ontology.LeanWikidataSourceRegressionBridge
 import DASHI.Ontology.LeanWikidataAlignmentBridge
