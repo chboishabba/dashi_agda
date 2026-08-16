@@ -5,6 +5,8 @@ import DASHI.Ontology.LeanWikidataFullSourceManifest
 import DASHI.Ontology.LeanWikidataCertificateBridge
 import DASHI.Ontology.LeanWikidataCertificateBridgeTests
 import DASHI.Ontology.LeanWikidataTheoremSurfaceBridge
+import DASHI.Ontology.LeanWikidataVerdictBridge
+import DASHI.Ontology.LeanWikidataSourceRegressionBridge
 import DASHI.Ontology.LeanWikidataAlignmentBridge
 import DASHI.Ontology.LeanWikidataDiagnosticsRepairBridge
 import DASHI.Ontology.LeanWikidataDataModelBridge
@@ -12,5 +14,6 @@ import DASHI.Ontology.LeanWikidataContextBridge
 import DASHI.Ontology.LeanWikidataIdentityBridge
 import DASHI.Ontology.LeanWikidataConstraintBridge
 import DASHI.Ontology.LeanWikidataRdfExactnessBridge
+import DASHI.Ontology.LeanWikidataExistingContentAudit
 import DASHI.Ontology.LeanWikidataWholeBridge
 import DASHI.Ontology.LeanWikidataWholeBridgeTests
