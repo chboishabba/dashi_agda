@@ -49,6 +49,7 @@ module DASHI.Moonshine.P11ClassicalTwoIsogenyCorrespondenceExact where
 open import DASHI.Core.Prelude
 open import Data.Fin using (Fin; zero; suc)
 open import Data.Integer using (ℤ; +_; -[1+_])
+  renaming (_+_ to _+ℤ_; _*_ to _*ℤ_)
 
 import DASHI.Moonshine.ClassicalFiniteHeckeCorrespondenceCore as Classical
 
@@ -64,15 +65,12 @@ record CubicMod11 : Set where
 
 open CubicMod11 public
 
--- Direct specializations of the classical Phi_2 after coefficient reduction
--- modulo 11.
 phi2AtJ0Mod11 : CubicMod11
 phi2AtJ0Mod11 = cubic11 10 3 8 1
 
 phi2AtJ1Mod11 : CubicMod11
 phi2AtJ1Mod11 = cubic11 0 0 10 1
 
--- Expansions of (Y-1)^3 and Y^2(Y-1) in F_11[Y].
 tripleRootAtOne : CubicMod11
 tripleRootAtOne = cubic11 10 3 8 1
 
@@ -180,12 +178,12 @@ open IntPair public
 matrixAction : IntPair → IntPair
 matrixAction (intPair x y) =
   intPair
-    ((+ 3) Data.Integer.* y)
-    (((+ 2) Data.Integer.* x) Data.Integer.+ y)
+    ((+ 3) *ℤ y)
+    (((+ 2) *ℤ x) +ℤ y)
 
 scalePair : ℤ → IntPair → IntPair
 scalePair scalar (intPair x y) =
-  intPair (scalar Data.Integer.* x) (scalar Data.Integer.* y)
+  intPair (scalar *ℤ x) (scalar *ℤ y)
 
 constantEigenvector : IntPair
 constantEigenvector = intPair (+ 1) (+ 1)
