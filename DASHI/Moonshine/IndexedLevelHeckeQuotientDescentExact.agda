@@ -16,21 +16,19 @@ module DASHI.Moonshine.IndexedLevelHeckeQuotientDescentExact where
 -- DASHI CONTRIBUTION
 --
 -- Lift the exact correspondence-quotient theorem to the unbiased natural-level
--- scan while allowing the quotient class to depend on level:
+-- scan while allowing *both* sides to depend on level:
 --
---   Coarse : Nat -> Set.
+--   Fine Coarse : Nat -> Set.
 --
--- This is the correct theorem shape for candidate-dependent reductions such as
---
---   V_j downarrow D_(2j+1),
---
--- whose occurring irrep carrier changes with j.  For every level, an existing
+-- This is the correct theorem shape for the current representation programme:
+-- level 2 is spinorial, while every odd level 2*j+1 has its own SO(3) weight
+-- carrier and matched D_(2j+1) sector carrier.  For every level, an existing
 -- QuotientInterfaceOn plus projection-completeness and correspondence
--- congruence canonically induces a finite correspondence on Coarse level and
--- proves the observable commuting square.
+-- congruence canonically induces the quotient correspondence and proves the
+-- observable commuting square.
 --
--- No concrete SO(3) state carrier or Brandt/isogeny correspondence is created
--- here.  The theorem removes only the generic dependent quotient algebra.
+-- No concrete SO(3) Hecke/Brandt correspondence is created here.  The theorem
+-- removes only the generic dependent quotient algebra.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -62,47 +60,45 @@ levelMap15Fusion f g
 ------------------------------------------------------------------------
 
 record IndexedQuotientStableCorrespondence
-    {Fine : Set}
-    (Coarse : Nat → Set)
-    (fineHecke : Level.LevelCorrespondenceHeckeOn Fine) : Set₁ where
+    (Fine Coarse : Nat → Set)
+    (fineHecke : Indexed.IndexedLevelCorrespondenceHeckeOn Fine) : Set₁ where
   field
     quotientAt :
-      (level : Nat) → Quotient.QuotientInterfaceOn Fine (Coarse level)
+      (level : Nat) →
+      Quotient.QuotientInterfaceOn (Fine level) (Coarse level)
 
     exactAt :
       (level : Nat) → PrimeDescent.ExactQuotientPresentation (quotientAt level)
 
     correspondenceRespectsEquivAt :
       (level : Nat) →
-      ∀ {left right : Fine} →
+      ∀ {left right : Fine level} →
       Quotient.EquivalenceOn._≈_
         (Quotient.QuotientInterfaceOn.equiv (quotientAt level)) left right →
       Level.map15 (Quotient.QuotientInterfaceOn.proj (quotientAt level))
-        (Level.correspondence fineHecke level left)
+        (Indexed.correspondence fineHecke level left)
       ≡
       Level.map15 (Quotient.QuotientInterfaceOn.proj (quotientAt level))
-        (Level.correspondence fineHecke level right)
+        (Indexed.correspondence fineHecke level right)
 
 open IndexedQuotientStableCorrespondence public
 
 inducedIndexedCorrespondence :
-  ∀ {Fine : Set}
-    {Coarse : Nat → Set}
-    {fineHecke : Level.LevelCorrespondenceHeckeOn Fine} →
-  IndexedQuotientStableCorrespondence Coarse fineHecke →
+  ∀ {Fine Coarse : Nat → Set}
+    {fineHecke : Indexed.IndexedLevelCorrespondenceHeckeOn Fine} →
+  IndexedQuotientStableCorrespondence Fine Coarse fineHecke →
   (level : Nat) → Coarse level → Vec15 (Coarse level)
 inducedIndexedCorrespondence
   {fineHecke = fineHecke} descent level coarse =
   Level.map15 (Quotient.QuotientInterfaceOn.proj (quotientAt descent level))
-    (Level.correspondence fineHecke level
+    (Indexed.correspondence fineHecke level
       (Quotient.QuotientInterfaceOn.representative
         (quotientAt descent level) coarse))
 
 inducedIndexedHecke :
-  ∀ {Fine : Set}
-    {Coarse : Nat → Set}
-    {fineHecke : Level.LevelCorrespondenceHeckeOn Fine} →
-  IndexedQuotientStableCorrespondence Coarse fineHecke →
+  ∀ {Fine Coarse : Nat → Set}
+    {fineHecke : Indexed.IndexedLevelCorrespondenceHeckeOn Fine} →
+  IndexedQuotientStableCorrespondence Fine Coarse fineHecke →
   Indexed.IndexedLevelCorrespondenceHeckeOn Coarse
 inducedIndexedHecke descent =
   record
@@ -114,14 +110,13 @@ inducedIndexedHecke descent =
 ------------------------------------------------------------------------
 
 indexedProjectedCorrespondenceCommutes :
-  ∀ {Fine : Set}
-    {Coarse : Nat → Set}
-    {fineHecke : Level.LevelCorrespondenceHeckeOn Fine}
-    (descent : IndexedQuotientStableCorrespondence Coarse fineHecke)
+  ∀ {Fine Coarse : Nat → Set}
+    {fineHecke : Indexed.IndexedLevelCorrespondenceHeckeOn Fine}
+    (descent : IndexedQuotientStableCorrespondence Fine Coarse fineHecke)
     (level : Nat)
-    (fine : Fine) →
+    (fine : Fine level) →
   Level.map15 (Quotient.QuotientInterfaceOn.proj (quotientAt descent level))
-    (Level.correspondence fineHecke level fine)
+    (Indexed.correspondence fineHecke level fine)
   ≡
   Indexed.correspondence (inducedIndexedHecke descent) level
     (Quotient.QuotientInterfaceOn.proj (quotientAt descent level) fine)
@@ -139,17 +134,16 @@ indexedProjectedCorrespondenceCommutes descent level fine =
 ------------------------------------------------------------------------
 
 indexedProjectedObservableHeckeCommutes :
-  ∀ {Fine : Set}
-    {Coarse : Nat → Set}
-    {fineHecke : Level.LevelCorrespondenceHeckeOn Fine}
-    (descent : IndexedQuotientStableCorrespondence Coarse fineHecke)
+  ∀ {Fine Coarse : Nat → Set}
+    {fineHecke : Indexed.IndexedLevelCorrespondenceHeckeOn Fine}
+    (descent : IndexedQuotientStableCorrespondence Fine Coarse fineHecke)
     (level : Nat)
     (observable : Coarse level → Nat)
-    (fine : Fine) →
-  Level.operator fineHecke
+    (fine : Fine level) →
+  Indexed.operator fineHecke level
     (λ state → observable
       (Quotient.QuotientInterfaceOn.proj (quotientAt descent level) state))
-    level fine
+    fine
   ≡
   Indexed.operator (inducedIndexedHecke descent)
     level observable
@@ -161,7 +155,7 @@ indexedProjectedObservableHeckeCommutes
       (sym
         (levelMap15Fusion observable
           (Quotient.QuotientInterfaceOn.proj (quotientAt descent level))
-          (Level.correspondence fineHecke level fine))))
+          (Indexed.correspondence fineHecke level fine))))
     (cong
       (λ values → Level.sum15 (Level.map15 observable values))
       (indexedProjectedCorrespondenceCommutes descent level fine))
@@ -172,6 +166,10 @@ indexedProjectedObservableHeckeCommutes
 
 record IndexedLevelHeckeQuotientBoundary : Set where
   field
+    levelDependentFineCarrierRepresentable : Bool
+    levelDependentFineCarrierRepresentableIsTrue :
+      levelDependentFineCarrierRepresentable ≡ true
+
     levelDependentClassCarrierConstructed : Bool
     levelDependentClassCarrierConstructedIsTrue :
       levelDependentClassCarrierConstructed ≡ true
@@ -196,7 +194,9 @@ canonicalIndexedLevelHeckeQuotientBoundary :
   IndexedLevelHeckeQuotientBoundary
 canonicalIndexedLevelHeckeQuotientBoundary =
   record
-    { levelDependentClassCarrierConstructed = true
+    { levelDependentFineCarrierRepresentable = true
+    ; levelDependentFineCarrierRepresentableIsTrue = refl
+    ; levelDependentClassCarrierConstructed = true
     ; levelDependentClassCarrierConstructedIsTrue = refl
     ; levelwiseQuotientIntertwiningDerived = true
     ; levelwiseQuotientIntertwiningDerivedIsTrue = refl
