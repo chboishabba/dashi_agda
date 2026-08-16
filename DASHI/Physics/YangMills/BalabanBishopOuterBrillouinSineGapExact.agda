@@ -121,11 +121,12 @@ quadraticSumUpper :
   BishopReal._≤_ (quadraticSum value) (embed upperQuadraticSum)
 quadraticSumUpper value valueNN valueBelowUpper =
   let
+    lowerSquare = BishopReal._*_ (embed lowerAngle) (embed lowerAngle)
     raw = BishopProperties.+-mono-≤
       (squareBelowUpperSquare value valueNN valueBelowUpper)
       (BishopProperties.+-mono-≤
         (linearCrossBelowUpper value valueBelowUpper)
-        BishopProperties.≤-refl)
+        (BishopProperties.≤-refl {x = lowerSquare}))
 
     upperIdentity :
       BishopReal._≃_
@@ -252,14 +253,16 @@ sineAboveEightySevenOverOneTwentyEight inputs lowerBound upperBound =
     (Sine.sineCubicLowerTwoBall inputs)
 
 hatComponent :
-  ∀ {dataSet} → BishopReal.ℝ → BishopReal.ℝ
-hatComponent {dataSet} value =
+  Elementary.BishopElementaryPowerSeriesData →
+  BishopReal.ℝ → BishopReal.ℝ
+hatComponent dataSet value =
   BishopReal._*_ (embed two) (Elementary.bishopSin dataSet value)
 
 hatSquare :
-  ∀ {dataSet} → BishopReal.ℝ → BishopReal.ℝ
-hatSquare {dataSet} value =
-  BishopReal._*_ (hatComponent {dataSet} value) (hatComponent {dataSet} value)
+  Elementary.BishopElementaryPowerSeriesData →
+  BishopReal.ℝ → BishopReal.ℝ
+hatSquare dataSet value =
+  BishopReal._*_ (hatComponent dataSet value) (hatComponent dataSet value)
 
 hatLowerIdentity :
   BishopReal._≃_
@@ -279,7 +282,7 @@ hatComponentSquareAboveFixedGap :
   (inputs : Sine.ConcreteTwoBallSineInputs dataSet value) →
   BishopReal._≤_ (embed lowerAngle) value →
   BishopReal._≤_ value (embed upperAngle) →
-  BishopReal._≤_ (embed hatSquareLower) (hatSquare {dataSet} value)
+  BishopReal._≤_ (embed hatSquareLower) (hatSquare dataSet value)
 hatComponentSquareAboveFixedGap {dataSet} {value} inputs lowerBound upperBound =
   let
     sineBound = sineAboveEightySevenOverOneTwentyEight
@@ -288,10 +291,6 @@ hatComponentSquareAboveFixedGap {dataSet} {value} inputs lowerBound upperBound =
       sineBound twoNonnegative
     scaledLowerNN = BishopProperties.nonNegx,y⇒nonNegx*y
       twoNonnegative lowerSineNonnegative
-    scaledActualNN = BishopProperties.0≤x⇒nonNegx
-      (BishopProperties.≤-trans
-        (BishopProperties.nonNegx⇒0≤x scaledLowerNN)
-        scaledBound)
     squared = BishopProperties.*-mono-≤
       scaledLowerNN scaledLowerNN scaledBound scaledBound
   in
