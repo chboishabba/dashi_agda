@@ -41,8 +41,7 @@ record StableQueryResolution
     stableCode : Ranked.Code (process S)
     codeExact :
       stableCode ≡ Ranked.iterate (process S) depth (initialCode S)
-    stable :
-      stableCode ≡ Ranked.advance (process S) stableCode
+    stable : stableCode ≡ Ranked.advance (process S) stableCode
     queryComplete : QueryComplete S stableCode
 
 open StableQueryResolution public
@@ -53,17 +52,16 @@ finiteRankedQueryRefinementStabilizes :
 finiteRankedQueryRefinementStabilizes S
   with Ranked.rankedRefinementStabilizes (process S) (initialCode S)
 ... | Ranked.stabilizationWitness depth depth≤bound stable =
+  let
+    stableCode = Ranked.iterate (process S) depth (initialCode S)
+  in
   stableQueryResolution
     depth
     depth≤bound
-    (Ranked.iterate (process S) depth (initialCode S))
+    stableCode
     refl
     stable
-    (stableIsQueryComplete S _ stable)
-
-------------------------------------------------------------------------
--- Boundary: bounded-rank stabilization is conditional on the supplied process.
-------------------------------------------------------------------------
+    (stableIsQueryComplete S stableCode stable)
 
 record FiniteCausalQueryRefinementBoundary : Set where
   constructor finiteCausalQueryRefinementBoundary
@@ -77,9 +75,4 @@ record FiniteCausalQueryRefinementBoundary : Set where
 canonicalFiniteCausalQueryRefinementBoundary :
   FiniteCausalQueryRefinementBoundary
 canonicalFiniteCausalQueryRefinementBoundary =
-  finiteCausalQueryRefinementBoundary
-    false
-    true
-    false
-    true
-    true
+  finiteCausalQueryRefinementBoundary false true false true true
