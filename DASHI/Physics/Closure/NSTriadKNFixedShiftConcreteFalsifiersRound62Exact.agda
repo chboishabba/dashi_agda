@@ -37,8 +37,9 @@ open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
-open import Data.Rational.Base using (ℚ; _+_; _*_; _≤_; _<_)
+open import Data.Rational.Base using (ℚ; _+_; _-_; _*_; _≤_; _<_)
 import Data.Rational.Properties as ℚP
+open import Relation.Nullary using (¬_)
 
 import DASHI.Physics.Closure.NSTriadKNAdmissibleOwnerTaxLanguageRound28Exact as Owner
 import DASHI.Physics.Closure.NSTriadKNNineOwnerCriticalAbsorptionRound28Exact as Nine
@@ -90,8 +91,7 @@ criticalCounterexampleRefutesUniformScale :
   ((n : Nat) →
     criticalValue balances n ≤ candidateK * blockTarget block n) →
   ⊥
-criticalCounterexampleRefutesUniformScale
-    {balances} {block} {candidateK} failure uniform =
+criticalCounterexampleRefutesUniformScale failure uniform =
   ℚP.<-irrefl refl
     (ℚP.<-≤-trans
       (candidateTargetStrictlyBelowCritical failure)
@@ -203,8 +203,6 @@ twoSoftGapFailureRefutesStrictGap :
 twoSoftGapFailureRefutesStrictGap failure strict =
   ℚP.<-irrefl refl
     (ℚP.<-≤-trans strict (gapNotStrict failure))
-  where
-  open import Relation.Nullary using (¬_)
 
 concreteCriticalScaleFalsifierClosed : Bool
 concreteCriticalScaleFalsifierClosed = true
