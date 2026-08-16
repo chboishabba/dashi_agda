@@ -26,6 +26,19 @@ import DASHI.Core.GenericFuturePartitionRefinementExact as Refinement
 import DASHI.Core.StablePartitionCanonicalFutureBridgeExact as Bridge
 import DASHI.Governance.DevelopmentalInfluenceSourceAtlas as Sources
 
+------------------------------------------------------------------------
+-- Universe-aware equivalence: the compiler relation is Set, whereas the
+-- canonical future-language equivalence is a Set₁ record.
+------------------------------------------------------------------------
+
+record RelationIff₀₁ (A : Set) (B : Set₁) : Set₁ where
+  constructor relationIff₀₁
+  field
+    forward₀₁ : A → B
+    backward₀₁ : B → A
+
+open RelationIff₀₁ public
+
 compiledRelationExactlyCanonicalFuture :
   ∀ {State Action Observation}
     (compiler : Compiler.CertifiedPartitionRefiner State Action Observation)
@@ -33,7 +46,7 @@ compiledRelationExactlyCanonicalFuture :
   let compiled = Compiler.compileFutureQuotient compiler
       depth = Compiler.stableDepth compiled
   in
-  Compiler.RelationIff
+  RelationIff₀₁
     (Compiler.relation compiler
       (Compiler.forwardIterate compiler depth)
       left right)
@@ -44,9 +57,16 @@ compiledRelationExactlyCanonicalFuture :
       (Compiler.observe compiler)
       left right)
 compiledRelationExactlyCanonicalFuture compiler left right =
-  Compiler.composeIff
-    (Compiler.codeAtCorrect compiler depth left right)
-    (Compiler.relationIff futureForward futureBackward)
+  relationIff₀₁
+    (λ compiledRelated →
+      futureForward
+        (Compiler.forward
+          (Compiler.codeAtCorrect compiler depth left right)
+          compiledRelated))
+    (λ futureEquivalent →
+      Compiler.backward
+        (Compiler.codeAtCorrect compiler depth left right)
+        (futureBackward futureEquivalent))
   where
     compiled = Compiler.compileFutureQuotient compiler
     depth = Compiler.stableDepth compiled
@@ -91,7 +111,7 @@ compiledRelationImpliesSameFutureLanguage :
     (Compiler.observe compiler)
     left right
 compiledRelationImpliesSameFutureLanguage compiler {left} {right} =
-  Compiler.forward
+  forward₀₁
     (compiledRelationExactlyCanonicalFuture compiler left right)
 
 canonicalFutureLanguageImpliesCompiledRelation :
@@ -111,7 +131,7 @@ canonicalFutureLanguageImpliesCompiledRelation :
     (Compiler.forwardIterate compiler depth)
     left right
 canonicalFutureLanguageImpliesCompiledRelation compiler {left} {right} =
-  Compiler.backward
+  backward₀₁
     (compiledRelationExactlyCanonicalFuture compiler left right)
 
 record CompiledQueryFutureBoundary : Set where
