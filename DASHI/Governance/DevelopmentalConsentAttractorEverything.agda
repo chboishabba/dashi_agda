@@ -23,4 +23,13 @@ import DASHI.Governance.ExternalityCarrierAttractor
 import DASHI.Governance.SocialAttractorAdaptersExact
 import DASHI.Governance.InstitutionalTechniqueTransferCore
 import DASHI.Governance.DomainPermeabilityAuthorityTransport
+
+------------------------------------------------------------------------
+-- Round-two cross-pollination: safe compression, query-relative resolution,
+-- asymmetric legibility, contestable residuals, open-world disconfirmation,
+-- counterposition diversity, feasibility cutsets and proxy future safety.
+------------------------------------------------------------------------
+
+import DASHI.Governance.GovernanceObservationCompressionEverything
+
 import DASHI.Governance.DevelopmentalConsentAttractorRegression
