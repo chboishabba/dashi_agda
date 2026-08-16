@@ -24,16 +24,13 @@ module DASHI.Governance.ProxyObjectiveFutureSafetyExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.List using (List)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.AdmissibleReachability as Reachability
 import DASHI.Core.TypedDependencyCore as Dependency
 import DASHI.Governance.ResponsiveInfluencePolicy as Influence
-
-------------------------------------------------------------------------
--- Proxy observation versus welfare observation over one transition system.
-------------------------------------------------------------------------
+import DASHI.Governance.DevelopmentalInfluenceSourceAtlas as Sources
 
 record ProxyWelfareSystem : Set₁ where
   constructor proxyWelfareSystem
@@ -73,8 +70,7 @@ record ProxyFutureWelfareDefect
       Reachability.Executes (system S) actionTrace left leftAfter
     rightExecution :
       Reachability.Executes (system S) actionTrace right rightAfter
-    futureWelfareDiffers :
-      welfare S leftAfter ≡ welfare S rightAfter → ⊥
+    futureWelfareDiffers : welfare S leftAfter ≡ welfare S rightAfter → ⊥
 
 open ProxyFutureWelfareDefect public
 
@@ -90,14 +86,6 @@ proxyFutureDefectRefutesWelfareSufficiency sufficient defect =
       (leftExecution defect)
       (rightExecution defect))
 
-------------------------------------------------------------------------
--- Adapter boundary back to ResponsiveInfluencePolicy.
---
--- The influence system separates selection objective from child state/update.
--- A case-specific consumer may now provide a ProxyWelfareSystem over that same
--- state evolution and either prove trace sufficiency or exhibit a defect.
-------------------------------------------------------------------------
-
 record InfluenceProxyAdapter
   (S : Influence.InfluenceSystem) : Set₁ where
   constructor influenceProxyAdapter
@@ -105,12 +93,6 @@ record InfluenceProxyAdapter
     proxyWelfare : ProxyWelfareSystem
     sameStateCarrier : State proxyWelfare ≡ Influence.State S
     sameActionCarrier : Action proxyWelfare ≡ Influence.Input S
-
-------------------------------------------------------------------------
--- Boundary: observing/optimising a proxy is not enough to promote welfare
--- sufficiency.  A congruence theorem or a separating defect is the relevant
--- mathematical object.
-------------------------------------------------------------------------
 
 record ProxyFutureSafetyBoundary : Set where
   constructor proxyFutureSafetyBoundary
@@ -124,10 +106,19 @@ record ProxyFutureSafetyBoundary : Set where
 
 canonicalProxyFutureSafetyBoundary : ProxyFutureSafetyBoundary
 canonicalProxyFutureSafetyBoundary =
-  proxyFutureSafetyBoundary
-    false
-    false
-    true
-    true
-    false
-    true
+  proxyFutureSafetyBoundary false false true true false true
+
+record ProxyFutureSafetyReceipt : Set where
+  constructor proxyFutureSafetyReceipt
+  field
+    sources : List Sources.ScholarlySource
+    boundary : ProxyFutureSafetyBoundary
+
+canonicalProxyFutureSafetyReceipt : ProxyFutureSafetyReceipt
+canonicalProxyFutureSafetyReceipt =
+  proxyFutureSafetyReceipt
+    (Sources.cousotAbstractInterpretation
+      ∷ Sources.screenUseContextMetaAnalysis
+      ∷ Sources.feedingPracticesProspective
+      ∷ [])
+    canonicalProxyFutureSafetyBoundary
