@@ -6,11 +6,17 @@ module DASHI.Governance.GovernanceObservationCompressionEverything where
 -- evidence / counterposition diversity / intervention feasibility / proxy
 -- future safety / observation-language refinement / access cost / forced-binary
 -- epistemic information loss / ternary-carrier semantic separation /
--- directional-versus-reciprocal legibility / compositional evidence enclosure.
+-- directional-versus-reciprocal legibility / compositional evidence enclosure /
+-- certified finite canonical future quotient compilation.
 ------------------------------------------------------------------------
 
 import DASHI.Core.ObservationLanguageRefinementExact
+import DASHI.Core.GenericFuturePartitionRefinementExact
+import DASHI.Core.FiniteRankedRefinementStabilizationExact
+import DASHI.Core.StablePartitionCanonicalFutureBridgeExact
+import DASHI.Core.CertifiedFiniteFutureQuotientCompilerExact
 import DASHI.Governance.FutureSafeCausalCompressionExact
+import DASHI.Governance.CompiledQueryFutureEquivalenceExact
 import DASHI.Governance.ObservationRelativeReificationRegressionExact
 import DASHI.Governance.AsymmetricLegibilityContestabilityExact
 import DASHI.Governance.ReciprocalLegibilityRefinementExact
