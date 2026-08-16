@@ -90,22 +90,18 @@ proxyFutureDefectRefutesWelfareSufficiency sufficient defect =
 
 ------------------------------------------------------------------------
 -- Exact finite regression.
---
--- Two present states have the same proxy observation.  Under the same one-step
--- admissible action they evolve to states with different welfare observations.
--- Therefore present proxy equality is not a future-welfare-sufficient quotient.
 ------------------------------------------------------------------------
 
 data FiniteState : Set where
-  leftBefore rightBefore leftAfter rightAfter : FiniteState
+  finiteLeftBefore finiteRightBefore finiteLeftAfter finiteRightAfter : FiniteState
 
 data FiniteAction : Set where advance : FiniteAction
 
 finiteStep : FiniteState → FiniteState
-finiteStep leftBefore = leftAfter
-finiteStep rightBefore = rightAfter
-finiteStep leftAfter = leftAfter
-finiteStep rightAfter = rightAfter
+finiteStep finiteLeftBefore = finiteLeftAfter
+finiteStep finiteRightBefore = finiteRightAfter
+finiteStep finiteLeftAfter = finiteLeftAfter
+finiteStep finiteRightAfter = finiteRightAfter
 
 finiteSystem : Dependency.DependentActionSystem FiniteState FiniteAction
 finiteSystem = record
@@ -128,33 +124,31 @@ finiteProxy : FiniteState → Bool
 finiteProxy _ = false
 
 finiteWelfare : FiniteState → Bool
-finiteWelfare leftBefore = false
-finiteWelfare rightBefore = false
-finiteWelfare leftAfter = false
-finiteWelfare rightAfter = true
+finiteWelfare finiteLeftBefore = false
+finiteWelfare finiteRightBefore = false
+finiteWelfare finiteLeftAfter = false
+finiteWelfare finiteRightAfter = true
 
 finiteProxyWelfareSystem : ProxyWelfareSystem
 finiteProxyWelfareSystem =
   proxyWelfareSystem
-    FiniteState
-    FiniteAction
-    Bool
-    Bool
-    finiteSystem
-    finiteProxy
-    finiteWelfare
+    FiniteState FiniteAction Bool Bool finiteSystem finiteProxy finiteWelfare
 
-leftExecution :
+finiteLeftRun :
   Reachability.Executes finiteSystem
-    (advance ∷ []) leftBefore leftAfter
-leftExecution =
-  Reachability.executesCons (finiteAdmissible leftBefore) Reachability.executesNil
+    (advance ∷ []) finiteLeftBefore finiteLeftAfter
+finiteLeftRun =
+  Reachability.executesCons
+    (finiteAdmissible finiteLeftBefore)
+    Reachability.executesNil
 
-rightExecution :
+finiteRightRun :
   Reachability.Executes finiteSystem
-    (advance ∷ []) rightBefore rightAfter
-rightExecution =
-  Reachability.executesCons (finiteAdmissible rightBefore) Reachability.executesNil
+    (advance ∷ []) finiteRightBefore finiteRightAfter
+finiteRightRun =
+  Reachability.executesCons
+    (finiteAdmissible finiteRightBefore)
+    Reachability.executesNil
 
 falseNotTrue : false ≡ true → ⊥
 falseNotTrue ()
@@ -164,13 +158,13 @@ finiteProxyFutureDefect :
 finiteProxyFutureDefect =
   proxyFutureWelfareDefect
     (advance ∷ [])
-    leftBefore
-    rightBefore
-    leftAfter
-    rightAfter
+    finiteLeftBefore
+    finiteRightBefore
+    finiteLeftAfter
+    finiteRightAfter
     refl
-    leftExecution
-    rightExecution
+    finiteLeftRun
+    finiteRightRun
     falseNotTrue
 
 finiteProxyIsNotFutureWelfareSufficient :
