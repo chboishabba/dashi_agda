@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """Audit the Round-9 SO(3) -> finite-group restriction tables.
 
-This script is intentionally independent of Agda normalization.  It parses the
-three checked-in branching tables, recomputes their multiplicities from finite
-character inner products, and verifies the regular-representation shift laws
-and explicit Ogg/non-Ogg controls used by the no-go theorems.
+This script is intentionally independent of Agda normalization. It parses the
+checked-in D4/A4/S4/A5 branching tables, recomputes their multiplicities from
+finite character inner products, and verifies regular-representation shifts and
+explicit Ogg/non-Ogg controls used by the formal no-go results.
 
 It uses only Python's standard library and does not invoke CI or Agda.
 """
@@ -15,14 +15,13 @@ import pathlib
 import re
 import sys
 from dataclasses import dataclass
-from typing import Dict, Iterable, Tuple
+from typing import Dict, Tuple
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
-
 D4_PATH = ROOT / "DASHI/Foundations/D4SO3RestrictionJ0To35Exact.agda"
+A4_PATH = ROOT / "DASHI/Foundations/TetrahedralSO3RestrictionJ0To35Exact.agda"
 S4_PATH = ROOT / "DASHI/Foundations/OctahedralSO3RestrictionJ0To35Exact.agda"
 A5_PATH = ROOT / "DASHI/Foundations/IcosahedralSO3RestrictionJ0To35Exact.agda"
-
 OGG = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 41, 47, 59, 71}
 
 
@@ -41,7 +40,6 @@ def chi_quarter(j: int) -> int:
 @dataclass(frozen=True)
 class PhiInt:
     """a + b*phi with phi^2 = phi + 1."""
-
     a: int
     b: int
 
@@ -64,25 +62,11 @@ PHI_CONJ = PhiInt(1, -1)
 
 
 def chi_fifth(j: int) -> PhiInt:
-    # theta = 2*pi/5
-    return (
-        PhiInt(1, 0),
-        PHI,
-        P0,
-        PhiInt(0, -1),
-        PhiInt(-1, 0),
-    )[j % 5]
+    return (PhiInt(1, 0), PHI, P0, PhiInt(0, -1), PhiInt(-1, 0))[j % 5]
 
 
 def chi_fifth_squared(j: int) -> PhiInt:
-    # theta = 4*pi/5
-    return (
-        PhiInt(1, 0),
-        PHI_CONJ,
-        P0,
-        PhiInt(-1, 1),
-        PhiInt(-1, 0),
-    )[j % 5]
+    return (PhiInt(1, 0), PHI_CONJ, P0, PhiInt(-1, 1), PhiInt(-1, 0))[j % 5]
 
 
 def parse_table(path: pathlib.Path, constructor: str, width: int) -> Dict[int, Tuple[int, ...]]:
@@ -105,7 +89,6 @@ def parse_table(path: pathlib.Path, constructor: str, width: int) -> Dict[int, T
 
 
 def expected_d4(j: int) -> Tuple[int, ...]:
-    # classes: 1, r^2, {r,r^3}, axis half-turns, diagonal half-turns
     sizes = (1, 1, 2, 2, 2)
     chi = (2 * j + 1, chi_pi(j), chi_quarter(j), chi_pi(j), chi_pi(j))
     irreps = (
@@ -118,16 +101,27 @@ def expected_d4(j: int) -> Tuple[int, ...]:
     return tuple(sum(s * c * r for s, c, r in zip(sizes, chi, row)) // 8 for row in irreps)
 
 
+def expected_a4(j: int) -> Tuple[int, ...]:
+    # The two conjugate 1-d reps have equal multiplicity because the SO(3)
+    # source character is real and equal on the two order-three A4 classes.
+    d = 2 * j + 1
+    half = chi_pi(j)
+    third = chi_third(j)
+    trivial = (d + 3 * half + 8 * third) // 12
+    omega = (d + 3 * half - 4 * third) // 12
+    three = (3 * d - 3 * half) // 12
+    return trivial, omega, omega, three
+
+
 def expected_s4(j: int) -> Tuple[int, ...]:
-    # classes: identity, edge half-turn, face half-turn, third-turn, quarter-turn
     sizes = (1, 6, 3, 8, 6)
     chi = (2 * j + 1, chi_pi(j), chi_pi(j), chi_third(j), chi_quarter(j))
     irreps = (
-        (1, 1, 1, 1, 1),       # A1
-        (1, -1, 1, 1, -1),     # A2
-        (2, 0, 2, -1, 0),      # E
-        (3, -1, -1, 0, 1),     # T1
-        (3, 1, -1, 0, -1),     # T2
+        (1, 1, 1, 1, 1),
+        (1, -1, 1, 1, -1),
+        (2, 0, 2, -1, 0),
+        (3, -1, -1, 0, 1),
+        (3, 1, -1, 0, -1),
     )
     return tuple(sum(s * c * r for s, c, r in zip(sizes, chi, row)) // 24 for row in irreps)
 
@@ -135,11 +129,8 @@ def expected_s4(j: int) -> Tuple[int, ...]:
 def expected_a5(j: int) -> Tuple[int, ...]:
     sizes = (1, 15, 20, 12, 12)
     chi = (
-        PhiInt(2 * j + 1, 0),
-        PhiInt(chi_pi(j), 0),
-        PhiInt(chi_third(j), 0),
-        chi_fifth(j),
-        chi_fifth_squared(j),
+        PhiInt(2 * j + 1, 0), PhiInt(chi_pi(j), 0), PhiInt(chi_third(j), 0),
+        chi_fifth(j), chi_fifth_squared(j),
     )
     irreps = (
         (PhiInt(1, 0), PhiInt(1, 0), PhiInt(1, 0), PhiInt(1, 0), PhiInt(1, 0)),
@@ -159,7 +150,7 @@ def expected_a5(j: int) -> Tuple[int, ...]:
     return tuple(out)
 
 
-def check_table(name: str, actual: Dict[int, Tuple[int, ...]], expected) -> None:
+def check_table(name, actual, expected) -> None:
     for j in range(36):
         wanted = expected(j)
         if actual[j] != wanted:
@@ -174,12 +165,13 @@ def scale(n: int, a: Tuple[int, ...]) -> Tuple[int, ...]:
     return tuple(n * x for x in a)
 
 
-def check_shift(table: Dict[int, Tuple[int, ...]], period: int, regular: Tuple[int, ...]) -> None:
+def check_shift(table, period: int, regular: Tuple[int, ...]) -> None:
     for j in range(36 - period):
-        if table[j + period] != add(table[j], regular):
+        expected = add(table[j], regular)
+        if table[j + period] != expected:
             raise AssertionError(
                 f"regular shift period={period} failed at j={j}: "
-                f"{table[j + period]} != {add(table[j], regular)}"
+                f"{table[j + period]} != {expected}"
             )
 
 
@@ -189,38 +181,46 @@ def dimension(vector: Tuple[int, ...], dims: Tuple[int, ...]) -> int:
 
 def main() -> int:
     d4 = parse_table(D4_PATH, "d4-spectrum", 5)
+    a4 = parse_table(A4_PATH, "tet-spectrum", 4)
     s4 = parse_table(S4_PATH, "oct-spectrum", 5)
     a5 = parse_table(A5_PATH, "ico-spectrum", 5)
 
     check_table("D4", d4, expected_d4)
+    check_table("A4", a4, expected_a4)
     check_table("S4", s4, expected_s4)
     check_table("A5", a5, expected_a5)
 
     for j in range(36):
         assert dimension(d4[j], (1, 1, 1, 1, 2)) == 2 * j + 1
+        assert dimension(a4[j], (1, 1, 1, 3)) == 2 * j + 1
         assert dimension(s4[j], (1, 1, 2, 3, 3)) == 2 * j + 1
         assert dimension(a5[j], (1, 3, 3, 4, 5)) == 2 * j + 1
 
     d4_reg = (1, 1, 1, 1, 2)
+    a4_reg = (1, 1, 1, 3)
     s4_reg = (1, 1, 2, 3, 3)
     a5_reg = (1, 3, 3, 4, 5)
     check_shift(d4, 4, d4_reg)
+    check_shift(a4, 6, a4_reg)
     check_shift(s4, 12, s4_reg)
     check_shift(a5, 30, a5_reg)
 
     assert d4[4] == add(d4[0], d4_reg) == (2, 1, 1, 1, 2)
+    assert a4[7] == add(a4[1], a4_reg)
     assert s4[26] == add(s4[2], scale(2, s4_reg))
     assert a5[33] == add(a5[3], a5_reg)
 
-    assert 5 in OGG and 7 in OGG
-    assert 9 not in OGG and 53 not in OGG and 67 not in OGG
+    assert 3 in OGG and 5 in OGG and 7 in OGG
+    assert 9 not in OGG and 15 not in OGG and 43 not in OGG
+    assert 53 not in OGG and 67 not in OGG
 
     print("Ogg representation-reduction audit: OK")
     print("  36 D4 rows = exact character inner products")
+    print("  36 A4 rows = exact character inner products")
     print("  36 S4 rows = exact character inner products")
     print("  36 A5 rows = exact Z[phi] character inner products")
-    print("  regular shifts: D4 +4, S4 +12, A5 +30")
-    print("  controls: 9, 53, 67 are non-Ogg; 5, 7 are Ogg")
+    print("  regular shifts: D4 +4, A4 +6, S4 +12, A5 +30")
+    print("  controls include non-Ogg 9, 15, 43, 53, 67")
     return 0
 
 
