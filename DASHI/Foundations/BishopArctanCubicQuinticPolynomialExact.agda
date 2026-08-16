@@ -112,12 +112,10 @@ lowerPartialOneIsCubic {value} point =
   in
   BishopP.≃-trans
     (Low.lowerOneEquivalentFirstMinusSecondMagnitude dataSet)
-    (BishopP.≃-trans
-      (BishopP.+-cong
-        (magnitudeZeroIsValue (Interlace.nonnegative point))
-        (BishopP.-‿cong
-          (magnitudeOneIsCubic (Interlace.nonnegative point))))
-      BishopP.≃-refl)
+    (BishopP.+-cong
+      (magnitudeZeroIsValue (Interlace.nonnegative point))
+      (BishopP.-‿cong
+        (magnitudeOneIsCubic (Interlace.nonnegative point))))
 
 upperPartialOneIsQuintic : ∀ {value} →
   (point : Interlace.PositiveHalfBallPoint value) →
@@ -131,12 +129,19 @@ upperPartialOneIsQuintic {value} point =
     upper = Alternating.upperPartial dataSet (suc zero)
     third = Atan.atanMagnitudeTerm value (suc (suc zero))
     difference = Alternating.upperMinusLowerIsEvenMagnitude dataSet (suc zero)
+    upperAsDifferencePlusLower :
+      Bishop._≃_ upper (Bishop._+_ (Bishop._-_ upper lower) lower)
+    upperAsDifferencePlusLower =
+      let open BishopP.ℝ-Solver
+      in solve 2
+        (λ u l → u ⊜ (u ⊖ l) ⊕ l)
+        BishopP.≃-refl upper lower
     upperAsLowerPlusThird : Bishop._≃_ upper (Bishop._+_ lower third)
     upperAsLowerPlusThird =
-      let open BishopP.ℝ-Solver
-      in solve 3
-        (λ u l t → u ⊖ l ⊜ t → u ⊜ l ⊕ t)
-        BishopP.≃-refl upper lower third difference
+      BishopP.≃-trans upperAsDifferencePlusLower
+        (BishopP.≃-trans
+          (BishopP.+-congʳ lower difference)
+          (BishopP.+-comm third lower))
   in
   BishopP.≃-trans upperAsLowerPlusThird
     (BishopP.+-cong
