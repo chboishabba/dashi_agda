@@ -67,35 +67,45 @@ derivationFromLeanVerdict claim verdict derivationId axes evidence obligations =
     obligations
 
 ------------------------------------------------------------------------
--- Concrete fibre regression: the same surface proposition can carry a source
--- theorem that supports it and another theorem that contradicts a stronger
--- formulation.  DASHI's existing presence semantics preserve both rather than
--- collapsing one into the other.
+-- Concrete fibre regressions.
+--
+-- The source proves two DIFFERENT propositions about artistKB: the ordinary
+-- union claim holds, while the stronger disjoint-union claim is refuted because
+-- the parts overlap.  They therefore live over separate ClaimBase values.
 ------------------------------------------------------------------------
 
-artistClassClaim : Fibre.ClaimBase
-artistClassClaim =
+artistUnionClaim : Fibre.ClaimBase
+artistUnionClaim =
   Fibre.claimBase
-    "class-algebra:artist"
-    "artist is union/disjoint-union of painter and sculptor"
+    "class-algebra:artist:union"
+    "artist is the union of painter and sculptor"
     Fibre.wikidataStatementClaim
     Fibre.mainValueRole
-    "artistKB:05ba35f5ca702fd446a8dc290244e299e717f63bcc571b4aaf3b78e3c7927a8b"
+    "artistKB:6e7c185bd7d97fa0eff022e9e3f51219158215bd15f2e79f938645e86c1c3723"
 
-artistUnionDerivation : Fibre.Derivation artistClassClaim
+artistDisjointUnionClaim : Fibre.ClaimBase
+artistDisjointUnionClaim =
+  Fibre.claimBase
+    "class-algebra:artist:disjoint-union"
+    "artist is the disjoint union of painter and sculptor"
+    Fibre.wikidataStatementClaim
+    Fibre.mainValueRole
+    "artistKB:6e7c185bd7d97fa0eff022e9e3f51219158215bd15f2e79f938645e86c1c3723"
+
+artistUnionDerivation : Fibre.Derivation artistUnionClaim
 artistUnionDerivation =
   derivationFromLeanVerdict
-    artistClassClaim
+    artistUnionClaim
     artistUnionVerdict
     "lean:artistKB_unionOk"
     (Fibre.externalAxis "James-ClassAlgebra" ∷ [])
     "Wikidata.ClassAlgebraExample.artistKB_unionOk"
     []
 
-artistDisjointUnionDerivation : Fibre.Derivation artistClassClaim
+artistDisjointUnionDerivation : Fibre.Derivation artistDisjointUnionClaim
 artistDisjointUnionDerivation =
   derivationFromLeanVerdict
-    artistClassClaim
+    artistDisjointUnionClaim
     artistNotDisjointUnionVerdict
     "lean:artistKB_not_dunOk"
     (Fibre.externalAxis "James-ClassAlgebra" ∷ [])
@@ -110,11 +120,12 @@ artistDisjointUnionPolarityContradicting :
   Fibre.derivationPolarity artistDisjointUnionDerivation ≡ Fibre.contradicting
 artistDisjointUnionPolarityContradicting = refl
 
--- At the fibre-presence layer, simultaneous support and contradiction is kept
--- explicitly as `both`; the bridge does not force a binary winner.
-sourceDisagreementPreservedAsBoth :
+-- Existing fibre semantics remain available for genuinely competing derivations
+-- of one and the same ClaimBase. The source bridge does not manufacture such a
+-- conflict merely because one proposition strengthens another.
+genuineSameClaimDisagreementWouldRemainBoth :
   Fibre.fibreOutcomeFromPresence true true ≡ Fibre.both
-sourceDisagreementPreservedAsBoth = refl
+genuineSameClaimDisagreementWouldRemainBoth = refl
 
 sourceAbsencePreservedUndetermined :
   Fibre.validateRequiredSubfibre Fibre.axisRequired false false
