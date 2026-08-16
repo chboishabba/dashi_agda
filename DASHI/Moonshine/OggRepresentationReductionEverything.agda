@@ -11,10 +11,13 @@ module DASHI.Moonshine.OggRepresentationReductionEverything where
 -- The old Ogg 7+7+1/nonary surfaces remain downstream comparison data.
 -- The phase-quotient/jCoarse/jFine/Fricke weld is imported here because it
 -- supplies an independently constructed finite reduction chain rather than an
--- SSP selector assumption.
+-- SSP selector assumption.  The direct Aristotle arithmetic/Hecke checks are
+-- imported as independent arithmetic controls, not as selector premises.
 ------------------------------------------------------------------------
 
+import DASHI.Arithmetic.AristotleArithmeticEverything
 import DASHI.Foundations.FiniteRepresentationRestrictionCore
+import DASHI.Foundations.CandidateIndexedFiniteRestrictionFamilyExact
 import DASHI.Foundations.SU2SO3IrrepDimensionExact
 import DASHI.Foundations.D4SO3NineIrrepRestrictionExact
 import DASHI.Foundations.D4SO3RestrictionJ0To35Exact
@@ -37,6 +40,7 @@ import DASHI.Biology.TernaryPhaseQuotientJCoarseBridgeExact
 import DASHI.Biology.JFinePhaseQuotientFieldExact
 import DASHI.Biology.D4IrrepFiniteFrickeEquivariantExact
 import DASHI.Moonshine.CandidateLevelRepresentationHeckeSquareExact
+import DASHI.Moonshine.RamanujanTauHecke23Exact
 import DASHI.Moonshine.ModularCurveJFrickeInterfaceExact
 import DASHI.Moonshine.D4IrrepModularFrickeDescentExact
 import DASHI.Moonshine.Monster3BC3RepresentationRingEvaluationExact
