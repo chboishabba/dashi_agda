@@ -104,15 +104,21 @@ binaryTwoByThreeCombinedCapacity = refl
   where open import Agda.Builtin.Equality using (_≡_; refl)
 
 ------------------------------------------------------------------------
--- AUTHORITY BOUNDARY
+-- AUTHORITY BOUNDARY / CURRENT STATUS
 --
--- A concrete ML-KEM instantiation must still prove:
---   1. which cells constitute the sufficient maintained state;
---   2. the cardinality of each cell alphabet;
---   3. the maximum outcome alphabet of one readout/query step;
---   4. the maximum transcript depth under the considered algorithm class;
---   5. that protected recovery factors through that state/transcript pair.
+-- The numerical capacity producer itself is now complete at this abstraction:
+-- a declared A-symbol m-cell state and B-ary depth-d transcript have capacity
+-- A^m * B^d, and the generic state/transcript injection composes into it.
 --
--- The theorem then turns those exact finite facts into a protected-capacity
--- bound without introducing entropy or asymptotics.
+-- Downstream Round-17 modules now instantiate the protected carrier with the
+-- actual FIPS secret-support sizes and separately refine support cardinality to
+-- an average-success numerator under the explicit independent uniform CBD
+-- input-bit product model.  Therefore those are no longer missing mathematical
+-- layers.
+--
+-- The remaining producer is architecture-specific: a concrete ML-KEM verifier
+-- must prove which maintained cells are sufficient, their alphabets/counts, the
+-- admitted readout/query branching/depth, and exact protected recovery through
+-- that state/transcript pair.  No physical leakage, entropy, or runtime bound is
+-- inferred merely from choosing numerical values for A,m,B,d.
 ------------------------------------------------------------------------
