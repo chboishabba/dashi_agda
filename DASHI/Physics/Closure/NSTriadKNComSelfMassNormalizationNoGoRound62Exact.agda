@@ -39,13 +39,14 @@ module DASHI.Physics.Closure.NSTriadKNComSelfMassNormalizationNoGoRound62Exact w
 -- normalization.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 open import Data.Rational.Base using (ℚ; 1ℚ; _≤_; _<_)
 import Data.Rational.Properties as ℚP
 open ℚP using (_<?_)
 open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Nullary using (¬_)
 open import Relation.Nullary.Decidable.Core using (toWitness)
 
 import DASHI.Physics.Closure.NSTriadKNComSameAdjacentActiveRound47Exact as Active
@@ -86,8 +87,6 @@ unitSelfCorrelationViolatesSameShellTarget :
 unitSelfCorrelationViolatesSameShellTarget =
   selfMassNormalizationCannotMeetSameShellTarget
     unitSelfCorrelationCandidate
-  where
-  open import Relation.Nullary using (¬_)
 
 selfMassProductNormalizationRejectedForPhysicalB : Bool
 selfMassProductNormalizationRejectedForPhysicalB = true
