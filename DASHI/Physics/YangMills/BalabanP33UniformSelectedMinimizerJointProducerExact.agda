@@ -19,29 +19,80 @@ module DASHI.Physics.YangMills.BalabanP33UniformSelectedMinimizerJointProducerEx
 --
 -- DASHI CONTRIBUTION
 --
--- Remove the last semantic gap between the uniform-region interval route and
--- the literal selected correlated-singleton object.  The interval family is
--- required to be definitionally the canonical correlated residual family of
--- the SAME extraction at each configuration.  Therefore the selected
--- minimizer's pair certificate gives the exact joint-residual bound consumed
--- by `JointCorrelatedSingletonExtractionData`; no decimal approximation to
--- A_* and no second residual family are introduced.
+-- Make the uniform selected-minimizer interval theorem PRODUCE the remaining
+-- joint correlated-singleton bound instead of assuming it inside the physical
+-- extraction object.  `JointExtractionCore` contains every literal physical
+-- field except the numerical joint-residual inequality.  The uniform pair
+-- enclosure is required to refer to the canonical residual family of this same
+-- core at every configuration.  At the selected minimizer the certified region
+-- theorem supplies the missing inequality, and only then is the full
+-- `JointCorrelatedSingletonExtractionData` constructed.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base as ℚ using (ℚ)
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Agda.Builtin.Equality using (_≡_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _*_; _≤_)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanP33PhysicalRationalWilsonPlaquetteJetExact as Physical
 import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Coordinates
+import DASHI.Physics.YangMills.BalabanP33PhysicalWilsonLinearNonlinearPartitionExact as Partition
 import DASHI.Physics.YangMills.BalabanP33PhysicalWilsonSignedGlobalExact as Wilson
+import DASHI.Physics.YangMills.BalabanP33FiniteKKTAdmissibleProjectorExact as KKT
+import DASHI.Physics.YangMills.BalabanP33FiniteKKTPseudoinverseProjectorExact as Pseudo
+import DASHI.Physics.YangMills.BalabanP33PlaquetteBoundaryProjectorExact as Boundary
+import DASHI.Physics.YangMills.BalabanSelectedBackgroundVariationSelectorExact as Selector
+import DASHI.Physics.YangMills.BalabanSelectedVariationSignConventionExact as Sign
 import DASHI.Physics.YangMills.BalabanSelectedCorrelatedResidualAuthorityExact as Authority
 import DASHI.Physics.YangMills.BalabanSelectedCorrelatedResidualOwnershipExact as Ownership
-import DASHI.Physics.YangMills.BalabanP33CertifiedPlaquettePairEnvelopeExact as PairEnvelope
 import DASHI.Physics.YangMills.BalabanP33UniformSelectedMinimizerPairEnclosureExact as Uniform
 import DASHI.Physics.YangMills.BalabanSelectedCorrelatedJointSingletonClosureExact as JointClosure
 import DASHI.Physics.YangMills.BalabanP33JointCorrelatedResidualExact as Joint
+
+literalRawExtractor :
+  Coordinates.PhysicalSU2BondField4 → Physical.Plaquette4 → KKT.StateVector
+literalRawExtractor = Boundary.rawPlaquetteSingletonExtractor
+
+record JointExtractionCore
+    (background : Physical.RationalSU2Background4)
+    (bondField : Coordinates.PhysicalSU2BondField4)
+    (plaquette : Physical.Plaquette4) : Set₂ where
+  field
+    Multiplier : Set
+    pseudoData : Pseudo.FiniteKKTPseudoinverseData Multiplier
+    firstVariationCovector : KKT.StateVector
+    residualAuthority : Authority.CorrelatedResidualAuthority
+      pseudoData firstVariationCovector (literalRawExtractor bondField plaquette)
+
+    FineVariation : Set
+    variation : FineVariation
+    GaugeAdmissible ConstraintTangent SupportedNearPlaquette : FineVariation → Set
+    gaugeAdmissible : GaugeAdmissible variation
+    constraintTangent : ConstraintTangent variation
+    localSupport : SupportedNearPlaquette variation
+
+    variationNormSq : FineVariation → ℚ
+    selectorConstant : ℚ
+    selectorConstantNonnegative : 0ℚ ≤ selectorConstant
+    variationChargeBound :
+      variationNormSq variation
+      ≤ selectorConstant * Wilson.plaquetteCrossCharge bondField plaquette
+
+    firstVariation : FineVariation → ℚ
+    selectedEulerLagrangeStationary : firstVariation variation ≡ 0ℚ
+    projectedVariationExact :
+      firstVariation variation
+      ≡ Partition.physicalPlaquetteWilsonLinearPart background bondField plaquette
+        + Sign.canonicalProjectedSpillover
+            (Authority.rawLocalization residualAuthority)
+            (Authority.canonicalMultiplierGreenPairing
+              pseudoData firstVariationCovector
+              (literalRawExtractor bondField plaquette))
+
+    exactCancellation : Ownership.ExactCorrelatedCancellation
+      (Authority.canonicalCorrelatedResidualFamily residualAuthority)
+
+open JointExtractionCore public
 
 record UniformLiteralJointProducer
     (Configuration : Set)
@@ -49,20 +100,16 @@ record UniformLiteralJointProducer
     (bondFieldAt : Configuration → Coordinates.PhysicalSU2BondField4)
     (plaquette : Physical.Plaquette4) : Set₂ where
   field
-    extractionAt : ∀ configuration →
-      JointClosure.JointCorrelatedSingletonExtractionData
+    coreAt : ∀ configuration →
+      JointExtractionCore
         (backgroundAt configuration) (bondFieldAt configuration) plaquette
 
     uniform : Uniform.UniformSelectedRegionPairEnclosure Configuration
 
-    selectedBackgroundExact :
-      backgroundAt (Uniform.selectedMinimizer uniform)
-      ≡ backgroundAt (Uniform.selectedMinimizer uniform)
-
     familyAtIsLiteral : ∀ configuration →
       Uniform.familyAt uniform configuration
       ≡ Authority.canonicalCorrelatedResidualFamily
-          (JointClosure.residualAuthority (extractionAt configuration))
+          (residualAuthority (coreAt configuration))
 
     chargeAtIsLiteral : ∀ configuration →
       Uniform.chargeAt uniform configuration
@@ -70,88 +117,106 @@ record UniformLiteralJointProducer
 
 open UniformLiteralJointProducer public
 
-selectedPairEnvelope :
-  ∀ {Configuration backgroundAt bondFieldAt plaquette}
-    (dataSet : UniformLiteralJointProducer
-      Configuration backgroundAt bondFieldAt plaquette) →
-  PairEnvelope.CertifiedCorrelatedPairEnvelope
-    (Uniform.familyAt (uniform dataSet)
-      (Uniform.selectedMinimizer (uniform dataSet)))
-    (Uniform.chargeAt (uniform dataSet)
-      (Uniform.selectedMinimizer (uniform dataSet)))
-selectedPairEnvelope dataSet =
-  Uniform.pairEnvelopeAt
-    (uniform dataSet)
-    (Uniform.selectedMinimizer (uniform dataSet))
-    (Uniform.selectedMinimizerInRegion (uniform dataSet))
-
-selectedResidualUpperOnUniformObjects :
-  ∀ {Configuration backgroundAt bondFieldAt plaquette}
-    (dataSet : UniformLiteralJointProducer
-      Configuration backgroundAt bondFieldAt plaquette) →
-  Ownership.correlatedResidualTotal
-    (Uniform.familyAt (uniform dataSet)
-      (Uniform.selectedMinimizer (uniform dataSet)))
-  ℚ.≤
-  DASHI.Physics.YangMills.BalabanSelectedBackgroundVariationSelectorExact.remainingSingletonCoefficient
-    ℚ.*
-  Uniform.chargeAt (uniform dataSet)
-    (Uniform.selectedMinimizer (uniform dataSet))
-selectedResidualUpperOnUniformObjects dataSet =
-  Uniform.selectedMinimizerResidualClosesFromUniformRegion (uniform dataSet)
-
 selectedLiteralJointResidualUpper :
   ∀ {Configuration backgroundAt bondFieldAt plaquette}
     (dataSet : UniformLiteralJointProducer
       Configuration backgroundAt bondFieldAt plaquette) →
   let selected = Uniform.selectedMinimizer (uniform dataSet)
-      extraction = extractionAt dataSet selected
+      core = coreAt dataSet selected
   in
   Joint.jointResidual
-      (Authority.canonicalCorrelatedResidualFamily
-        (JointClosure.residualAuthority extraction))
-  ℚ.≤
-  DASHI.Physics.YangMills.BalabanSelectedBackgroundVariationSelectorExact.remainingSingletonCoefficient
-    ℚ.* Wilson.plaquetteCrossCharge (bondFieldAt selected) plaquette
+      (Authority.canonicalCorrelatedResidualFamily (residualAuthority core))
+  ≤ Selector.remainingSingletonCoefficient
+      * Wilson.plaquetteCrossCharge (bondFieldAt selected) plaquette
 selectedLiteralJointResidualUpper dataSet =
   let
     selected = Uniform.selectedMinimizer (uniform dataSet)
-    extraction = extractionAt dataSet selected
-    familyEq = familyAtIsLiteral dataSet selected
-    chargeEq = chargeAtIsLiteral dataSet selected
-    cancellation = JointClosure.exactCancellation extraction
+    core = coreAt dataSet selected
+    sourceUpper =
+      Uniform.selectedMinimizerResidualClosesFromUniformRegion (uniform dataSet)
 
-    totalUpper = selectedResidualUpperOnUniformObjects dataSet
-
-    jointIsTotal :
-      Joint.jointResidual
-        (Authority.canonicalCorrelatedResidualFamily
-          (JointClosure.residualAuthority extraction))
-      ≡ Ownership.correlatedResidualTotal
-        (Authority.canonicalCorrelatedResidualFamily
-          (JointClosure.residualAuthority extraction))
-    jointIsTotal = Joint.jointResidualIsPhysicalTotal cancellation
+    physicalUpper :
+      Ownership.correlatedResidualTotal
+        (Authority.canonicalCorrelatedResidualFamily (residualAuthority core))
+      ≤ Selector.remainingSingletonCoefficient
+          * Wilson.plaquetteCrossCharge (bondFieldAt selected) _
+    physicalUpper =
+      subst
+        (λ charge →
+          Ownership.correlatedResidualTotal
+            (Authority.canonicalCorrelatedResidualFamily (residualAuthority core))
+          ≤ Selector.remainingSingletonCoefficient * charge)
+        (chargeAtIsLiteral dataSet selected)
+        (subst
+          (λ family →
+            Ownership.correlatedResidualTotal family
+            ≤ Selector.remainingSingletonCoefficient
+                * Uniform.chargeAt (uniform dataSet) selected)
+          (familyAtIsLiteral dataSet selected)
+          sourceUpper)
   in
   subst
-    (λ family →
-      Joint.jointResidual
-        (Authority.canonicalCorrelatedResidualFamily
-          (JointClosure.residualAuthority extraction))
-      ℚ.≤
-      DASHI.Physics.YangMills.BalabanSelectedBackgroundVariationSelectorExact.remainingSingletonCoefficient
-        ℚ.* Uniform.chargeAt (uniform dataSet) selected)
-    familyEq
-    (subst
-      (λ left → left ℚ.≤
-        DASHI.Physics.YangMills.BalabanSelectedBackgroundVariationSelectorExact.remainingSingletonCoefficient
-          ℚ.* Uniform.chargeAt (uniform dataSet) selected)
-      (Relation.Binary.PropositionalEquality.sym jointIsTotal)
-      totalUpper)
-  where
-    open import Relation.Binary.PropositionalEquality
+    (λ lower →
+      lower ≤ Selector.remainingSingletonCoefficient
+        * Wilson.plaquetteCrossCharge (bondFieldAt selected) _)
+    (sym (Joint.jointResidualIsPhysicalTotal (exactCancellation core)))
+    physicalUpper
 
--- The interval computation now targets exactly the selected physical family.
--- This theorem is the semantic transport; the remaining numerical work is the
--- sound construction of `uniform` itself from the certified minimizer region.
-p33UniformSelectedMinimizerJointTransportLevel : ProofLevel
-p33UniformSelectedMinimizerJointTransportLevel = machineChecked
+selectedJointExtraction :
+  ∀ {Configuration backgroundAt bondFieldAt plaquette}
+    (dataSet : UniformLiteralJointProducer
+      Configuration backgroundAt bondFieldAt plaquette) →
+  let selected = Uniform.selectedMinimizer (uniform dataSet)
+  in
+  JointClosure.JointCorrelatedSingletonExtractionData
+    (backgroundAt selected) (bondFieldAt selected) plaquette
+selectedJointExtraction dataSet =
+  let
+    selected = Uniform.selectedMinimizer (uniform dataSet)
+    core = coreAt dataSet selected
+  in record
+    { JointClosure.JointCorrelatedSingletonExtractionData.Multiplier = Multiplier core
+    ; JointClosure.JointCorrelatedSingletonExtractionData.pseudoData = pseudoData core
+    ; JointClosure.JointCorrelatedSingletonExtractionData.firstVariationCovector =
+        firstVariationCovector core
+    ; JointClosure.JointCorrelatedSingletonExtractionData.residualAuthority =
+        residualAuthority core
+    ; JointClosure.JointCorrelatedSingletonExtractionData.FineVariation = FineVariation core
+    ; JointClosure.JointCorrelatedSingletonExtractionData.variation = variation core
+    ; JointClosure.JointCorrelatedSingletonExtractionData.GaugeAdmissible = GaugeAdmissible core
+    ; JointClosure.JointCorrelatedSingletonExtractionData.ConstraintTangent = ConstraintTangent core
+    ; JointClosure.JointCorrelatedSingletonExtractionData.SupportedNearPlaquette =
+        SupportedNearPlaquette core
+    ; JointClosure.JointCorrelatedSingletonExtractionData.gaugeAdmissible = gaugeAdmissible core
+    ; JointClosure.JointCorrelatedSingletonExtractionData.constraintTangent = constraintTangent core
+    ; JointClosure.JointCorrelatedSingletonExtractionData.localSupport = localSupport core
+    ; JointClosure.JointCorrelatedSingletonExtractionData.variationNormSq = variationNormSq core
+    ; JointClosure.JointCorrelatedSingletonExtractionData.selectorConstant = selectorConstant core
+    ; JointClosure.JointCorrelatedSingletonExtractionData.selectorConstantNonnegative =
+        selectorConstantNonnegative core
+    ; JointClosure.JointCorrelatedSingletonExtractionData.variationChargeBound =
+        variationChargeBound core
+    ; JointClosure.JointCorrelatedSingletonExtractionData.firstVariation = firstVariation core
+    ; JointClosure.JointCorrelatedSingletonExtractionData.selectedEulerLagrangeStationary =
+        selectedEulerLagrangeStationary core
+    ; JointClosure.JointCorrelatedSingletonExtractionData.projectedVariationExact =
+        projectedVariationExact core
+    ; JointClosure.JointCorrelatedSingletonExtractionData.exactCancellation = exactCancellation core
+    ; JointClosure.JointCorrelatedSingletonExtractionData.jointResidualUpper =
+        selectedLiteralJointResidualUpper dataSet
+    }
+
+selectedSingletonWitnessFromUniformRegion :
+  ∀ {Configuration backgroundAt bondFieldAt plaquette}
+    (dataSet : UniformLiteralJointProducer
+      Configuration backgroundAt bondFieldAt plaquette) →
+  let selected = Uniform.selectedMinimizer (uniform dataSet)
+  in
+  Selector.SingletonExtractionWitness
+    (backgroundAt selected) (bondFieldAt selected) plaquette
+selectedSingletonWitnessFromUniformRegion dataSet =
+  JointClosure.jointCorrelatedSingletonExtractionWitness
+    (selectedJointExtraction dataSet)
+
+p33UniformSelectedMinimizerJointProducerLevel : ProofLevel
+p33UniformSelectedMinimizerJointProducerLevel = machineChecked
