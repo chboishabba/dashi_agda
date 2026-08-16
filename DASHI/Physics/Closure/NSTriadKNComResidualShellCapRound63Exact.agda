@@ -12,97 +12,124 @@ module DASHI.Physics.Closure.NSTriadKNComResidualShellCapRound63Exact where
 -- Title: "Fourier Analysis and Nonlinear Partial Differential Equations".
 -- DOI: 10.1007/978-3-642-16830-7.
 --
--- ROUND 63 B0 RESIDUAL CAP
+-- Author: Xiaoyutao Luo.
+-- Title: "A Beale--Kato--Majda Criterion with Optimal Frequency and Temporal
+-- Localization".
+-- DOI: 10.1007/s00021-019-0411-z.
+-- arXiv DOI: 10.48550/arXiv.1803.05569.
 --
--- After routing the three separated Bony classes LH / HL / HH->L, the residual
--- class is not automatically width one.  Resonance forces the exact finite band
+-- ROUND 63 B0 AUTHORITY-CORRECTED COMPARABLE CAP
 --
---   j(k) <= j(q)+3,     j(q) <= j(k)+3.
+-- Historical filename note: an earlier draft called this the `residual` cap
+-- and used weak j+3<=j' separation.  The mature physical classifier instead
+-- uses strict `natLess (j+3) j'`, and calls the fourth triadic class CC /
+-- comparable.  This file now proves the correct theorem for that authoritative
+-- class.
 --
--- The proof uses only failure of the three separation tests plus the already
--- proved infinity-norm resonance triangles.  Hence post-routing Com analysis
--- has a finite transition band: separations 0,1,2,3.  Gaps 2/3 cannot be hidden
--- in a width-one common hat.
+-- For every physical triad classified CC,
+--
+--   j(k) <= j(q)+4,
+--   j(q) <= j(k)+4,
+--
+-- hence |j(k)-j(q)|<=4.
+--
+-- The extra shell versus the provisional three-shell theorem is the exact
+-- off-by-one introduced by strict versus weak collar semantics.  This theorem
+-- is diagnostic for the triadic summands of the differentiated commutator; it
+-- does NOT identify CC with the fifth Com owner.  Round25 keeps CC and Com as
+-- distinct sources.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; true)
+open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Empty using (⊥; ⊥-elim)
 open import Data.Nat.Base using (_≤_; z≤n; s≤s; ∣_-_∣)
 import Data.Nat.Properties as Nat
 open import Data.Sum.Base using (_⊎_; inj₁; inj₂)
-open import Relation.Nullary using (¬_)
-open import Relation.Binary.PropositionalEquality using (subst)
 
+import DASHI.Physics.Closure.NSPeriodicNearTriadClassification as Near
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNOfficialInfinityNormTriangle as Infinity
-import DASHI.Physics.Closure.NSTriadKNLiteralDyadicShellConstants as Shell
 import DASHI.Physics.Closure.NSTriadKNLiteralDyadicConsequencesClosed as Dyadic
+import DASHI.Physics.Closure.NSTriadKNLuoPhysicalFiveClassSupportRound25Exact as Support
+import DASHI.Physics.Closure.NSTriadKNPhysicalScaleTrichotomy as Scale
+
+natLessFalseImpliesReverseLe :
+  (left right : Nat) →
+  Near.natLess left right ≡ false →
+  right ≤ left
+natLessFalseImpliesReverseLe zero zero proof = z≤n
+natLessFalseImpliesReverseLe zero (suc right) ()
+natLessFalseImpliesReverseLe (suc left) zero proof = z≤n
+natLessFalseImpliesReverseLe (suc left) (suc right) proof =
+  s≤s (natLessFalseImpliesReverseLe left right proof)
 
 leOneSuccessor : (n : Nat) → n ≤ suc n
 leOneSuccessor zero = z≤n
 leOneSuccessor (suc n) = s≤s (leOneSuccessor n)
 
-leTwoSuccessors : (n : Nat) → n ≤ suc (suc n)
-leTwoSuccessors n = Nat.≤-trans (leOneSuccessor n) (leOneSuccessor (suc n))
+leThreeSuccessors : (n : Nat) → n ≤ suc (suc (suc n))
+leThreeSuccessors n =
+  Nat.≤-trans
+    (Nat.≤-trans (leOneSuccessor n) (leOneSuccessor (suc n)))
+    (leOneSuccessor (suc (suc n)))
 
-notGapThreeImpliesUpperTwo :
-  (lower higher : Nat) →
-  ¬ (lower + 3 ≤ higher) →
-  higher ≤ suc (suc lower)
-notGapThreeImpliesUpperTwo zero zero notGap = z≤n
-notGapThreeImpliesUpperTwo zero (suc zero) notGap = s≤s z≤n
-notGapThreeImpliesUpperTwo zero (suc (suc zero)) notGap = s≤s (s≤s z≤n)
-notGapThreeImpliesUpperTwo zero (suc (suc (suc higher))) notGap =
-  ⊥-elim (notGap (s≤s (s≤s (s≤s z≤n))))
-notGapThreeImpliesUpperTwo (suc lower) zero notGap = z≤n
-notGapThreeImpliesUpperTwo (suc lower) (suc higher) notGap =
-  s≤s
-    (notGapThreeImpliesUpperTwo lower higher
-      (λ gap → notGap (s≤s gap)))
+leFourSuccessors : (n : Nat) → n ≤ suc (suc (suc (suc n)))
+leFourSuccessors n =
+  Nat.≤-trans (leThreeSuccessors n) (leOneSuccessor (suc (suc (suc n))))
 
-record ResidualInputOutputBand
+record ComparableInputOutputBand
     (tau : Physical.PhysicalTriadIncidence) : Set where
   field
-    outputAtMostThreeAboveInput :
-      Shell.shellIndex (Physical.k tau)
-      ≤ suc (suc (suc (Shell.shellIndex (Physical.q tau))))
-    inputAtMostThreeAboveOutput :
-      Shell.shellIndex (Physical.q tau)
-      ≤ suc (suc (suc (Shell.shellIndex (Physical.k tau))))
+    outputAtMostFourAboveInput :
+      Support.literalShellPolicy Scale.PhysicalShellPolicy.shellLevel (Physical.k tau)
+      ≤ suc (suc (suc (suc
+          (Support.literalShellPolicy Scale.PhysicalShellPolicy.shellLevel (Physical.q tau)))))
 
-open ResidualInputOutputBand public
+    inputAtMostFourAboveOutput :
+      Support.literalShellPolicy Scale.PhysicalShellPolicy.shellLevel (Physical.q tau)
+      ≤ suc (suc (suc (suc
+          (Support.literalShellPolicy Scale.PhysicalShellPolicy.shellLevel (Physical.k tau)))))
 
-residualInputOutputBand :
-  (tau : Physical.PhysicalTriadIncidence) →
-  (notLH : ¬ (Shell.shellIndex (Physical.p tau) + Shell.Csep
-    ≤ Shell.shellIndex (Physical.q tau))) →
-  (notHL : ¬ (Shell.shellIndex (Physical.q tau) + Shell.Csep
-    ≤ Shell.shellIndex (Physical.p tau))) →
-  (notHH :
-    (¬ (Shell.shellIndex (Physical.k tau) + Shell.Csep
-      ≤ Shell.shellIndex (Physical.p tau)))
-    ⊎
-    (¬ (Shell.shellIndex (Physical.k tau) + Shell.Csep
-      ≤ Shell.shellIndex (Physical.q tau)))) →
-  ResidualInputOutputBand tau
-residualInputOutputBand tau notLH notHL notHH = record
-  { outputAtMostThreeAboveInput = outputUpper
-  ; inputAtMostThreeAboveOutput = inputUpper
-  }
+open ComparableInputOutputBand public
+
+-- Use the shorter exported shell-level projection below.  It is definitionally
+-- the literal shell index from the authoritative policy.
+shell : Physical.PhysicalTriadIncidence → (Physical.PhysicalTriadIncidence → _) → Nat
+shell tau projection = Scale.shellLevel Support.literalShellPolicy (projection tau)
+
+comparableInputOutputBand :
+  ∀ {tau} →
+  Support.TriadicClassCertificate tau Support.CC →
+  ( Scale.shellLevel Support.literalShellPolicy (Physical.k tau)
+      ≤ suc (suc (suc (suc
+          (Scale.shellLevel Support.literalShellPolicy (Physical.q tau))))) )
+  ×
+  ( Scale.shellLevel Support.literalShellPolicy (Physical.q tau)
+      ≤ suc (suc (suc (suc
+          (Scale.shellLevel Support.literalShellPolicy (Physical.k tau))))) )
+comparableInputOutputBand {tau} certificate
+  with Support.classMeaning certificate
+... | Scale.comparableCondition notLH notHL notHH = outputUpper , inputUpper
   where
-  jp = Shell.shellIndex (Physical.p tau)
-  jq = Shell.shellIndex (Physical.q tau)
-  jk = Shell.shellIndex (Physical.k tau)
+  jp = Scale.shellLevel Support.literalShellPolicy (Physical.p tau)
+  jq = Scale.shellLevel Support.literalShellPolicy (Physical.q tau)
+  jk = Scale.shellLevel Support.literalShellPolicy (Physical.k tau)
+  radius = Scale.overlapRadius Support.literalShellPolicy
 
-  pAtMostTwoAboveQ : jp ≤ suc (suc jq)
-  pAtMostTwoAboveQ = notGapThreeImpliesUpperTwo jq jp notHL
+  pAtMostQPlusRadius : jp ≤ jq + radius
+  pAtMostQPlusRadius =
+    natLessFalseImpliesReverseLe (jq + radius) jp notHL
+
+  qAtMostPPlusRadius : jq ≤ jp + radius
+  qAtMostPPlusRadius =
+    natLessFalseImpliesReverseLe (jp + radius) jq notLH
 
   consequences : Infinity.OfficialResonantNormConsequences tau
   consequences = Infinity.officialResonantNormConsequences tau
 
-  outputUpper : jk ≤ suc (suc (suc jq))
+  outputUpper : jk ≤ suc (suc (suc (suc jq)))
   outputUpper with Nat.≤-total jp jq
   ... | inj₁ p≤q =
     Nat.≤-trans
@@ -112,7 +139,9 @@ residualInputOutputBand tau notLH notHL notHH = record
         {output = Infinity.infinityNorm (Physical.k tau)}
         (Infinity.outputTriangle consequences)
         p≤q)
-      (s≤s (leTwoSuccessors jq))
+      (Nat.≤-trans
+        (leOneSuccessor jq)
+        (leThreeSuccessors (suc jq)))
   ... | inj₂ q≤p =
     Nat.≤-trans
       (Dyadic.shellOfNormSumUpperRight
@@ -126,24 +155,26 @@ residualInputOutputBand tau notLH notHL notHH = record
             (Infinity.infinityNorm (Physical.q tau)))
           (Infinity.outputTriangle consequences))
         q≤p)
-      (s≤s pAtMostTwoAboveQ)
+      (s≤s pAtMostQPlusRadius)
+    where
+    open import Relation.Binary.PropositionalEquality using (subst)
 
-  inputUpper : jq ≤ suc (suc (suc jk))
+  inputUpper : jq ≤ suc (suc (suc (suc jk)))
   inputUpper with notHH
-  ... | inj₂ notKGapQ =
+  ... | inj₂ notKBelowQ =
     Nat.≤-trans
-      (notGapThreeImpliesUpperTwo jk jq notKGapQ)
-      (leOneSuccessor (suc (suc jk)))
-  ... | inj₁ notKGapP =
+      (natLessFalseImpliesReverseLe (jk + radius) jq notKBelowQ)
+      (leOneSuccessor (suc (suc (suc jk))))
+  ... | inj₁ notKBelowP =
     inputFromP
-      (notGapThreeImpliesUpperTwo jk jp notKGapP)
+      (natLessFalseImpliesReverseLe (jk + radius) jp notKBelowP)
       (Nat.≤-total jp jk)
     where
     inputFromP :
-      jp ≤ suc (suc jk) →
+      jp ≤ jk + radius →
       (jp ≤ jk ⊎ jk ≤ jp) →
-      jq ≤ suc (suc (suc jk))
-    inputFromP p≤k2 (inj₁ p≤k) =
+      jq ≤ suc (suc (suc (suc jk)))
+    inputFromP p≤kPlusRadius (inj₁ p≤k) =
       Nat.≤-trans
         (Dyadic.shellOfNormSumUpperRight
           {left = Infinity.infinityNorm (Physical.p tau)}
@@ -156,8 +187,10 @@ residualInputOutputBand tau notLH notHL notHH = record
               (Infinity.infinityNorm (Physical.p tau)))
             (Infinity.qReverseTriangle consequences))
           p≤k)
-        (s≤s (leTwoSuccessors jk))
-    inputFromP p≤k2 (inj₂ k≤p) =
+        (Nat.≤-trans
+          (leOneSuccessor jk)
+          (leThreeSuccessors (suc jk)))
+    inputFromP p≤kPlusRadius (inj₂ k≤p) =
       Nat.≤-trans
         (Dyadic.shellOfNormSumUpperRight
           {left = Infinity.infinityNorm (Physical.k tau)}
@@ -165,56 +198,57 @@ residualInputOutputBand tau notLH notHL notHH = record
           {output = Infinity.infinityNorm (Physical.q tau)}
           (Infinity.qReverseTriangle consequences)
           k≤p)
-        (s≤s p≤k2)
+        (s≤s p≤kPlusRadius)
 
 mutual
-  shellDistanceAtMostThree :
+  shellDistanceAtMostFour :
     ∀ {left right} →
-    left ≤ suc (suc (suc right)) →
-    right ≤ suc (suc (suc left)) →
-    ∣ left - right ∣ ≤ 3
-  shellDistanceAtMostThree {zero} {zero} leftBound rightBound = z≤n
-  shellDistanceAtMostThree {zero} {suc zero} leftBound rightBound = s≤s z≤n
-  shellDistanceAtMostThree {zero} {suc (suc zero)} leftBound rightBound =
+    left ≤ suc (suc (suc (suc right))) →
+    right ≤ suc (suc (suc (suc left))) →
+    ∣ left - right ∣ ≤ 4
+  shellDistanceAtMostFour {zero} {zero} leftBound rightBound = z≤n
+  shellDistanceAtMostFour {zero} {suc zero} leftBound rightBound = s≤s z≤n
+  shellDistanceAtMostFour {zero} {suc (suc zero)} leftBound rightBound =
     s≤s (s≤s z≤n)
-  shellDistanceAtMostThree {zero} {suc (suc (suc zero))} leftBound rightBound =
+  shellDistanceAtMostFour {zero} {suc (suc (suc zero))} leftBound rightBound =
     s≤s (s≤s (s≤s z≤n))
-  shellDistanceAtMostThree {zero} {suc (suc (suc (suc right)))}
-    leftBound (s≤s (s≤s (s≤s ())))
-  shellDistanceAtMostThree {suc zero} {zero} leftBound rightBound = s≤s z≤n
-  shellDistanceAtMostThree {suc (suc zero)} {zero} leftBound rightBound =
+  shellDistanceAtMostFour {zero} {suc (suc (suc (suc zero)))} leftBound rightBound =
+    s≤s (s≤s (s≤s (s≤s z≤n)))
+  shellDistanceAtMostFour {zero} {suc (suc (suc (suc (suc right))))}
+    leftBound (s≤s (s≤s (s≤s (s≤s ()))))
+  shellDistanceAtMostFour {suc zero} {zero} leftBound rightBound = s≤s z≤n
+  shellDistanceAtMostFour {suc (suc zero)} {zero} leftBound rightBound =
     s≤s (s≤s z≤n)
-  shellDistanceAtMostThree {suc (suc (suc zero))} {zero} leftBound rightBound =
+  shellDistanceAtMostFour {suc (suc (suc zero))} {zero} leftBound rightBound =
     s≤s (s≤s (s≤s z≤n))
-  shellDistanceAtMostThree {suc (suc (suc (suc left)))} {zero}
-    (s≤s (s≤s (s≤s ()))) rightBound
-  shellDistanceAtMostThree {suc left} {suc right}
+  shellDistanceAtMostFour {suc (suc (suc (suc zero)))} {zero} leftBound rightBound =
+    s≤s (s≤s (s≤s (s≤s z≤n)))
+  shellDistanceAtMostFour {suc (suc (suc (suc (suc left))))} {zero}
+    (s≤s (s≤s (s≤s (s≤s ())))) rightBound
+  shellDistanceAtMostFour {suc left} {suc right}
     (s≤s leftBound) (s≤s rightBound) =
-    shellDistanceAtMostThree leftBound rightBound
+    shellDistanceAtMostFour leftBound rightBound
 
-residualInputOutputDistanceAtMostThree :
-  (tau : Physical.PhysicalTriadIncidence) →
-  (notLH : ¬ (Shell.shellIndex (Physical.p tau) + Shell.Csep
-    ≤ Shell.shellIndex (Physical.q tau))) →
-  (notHL : ¬ (Shell.shellIndex (Physical.q tau) + Shell.Csep
-    ≤ Shell.shellIndex (Physical.p tau))) →
-  (notHH :
-    (¬ (Shell.shellIndex (Physical.k tau) + Shell.Csep
-      ≤ Shell.shellIndex (Physical.p tau)))
-    ⊎
-    (¬ (Shell.shellIndex (Physical.k tau) + Shell.Csep
-      ≤ Shell.shellIndex (Physical.q tau)))) →
-  ∣ Shell.shellIndex (Physical.k tau)
-    - Shell.shellIndex (Physical.q tau) ∣ ≤ 3
-residualInputOutputDistanceAtMostThree tau notLH notHL notHH =
-  let band = residualInputOutputBand tau notLH notHL notHH
-  in shellDistanceAtMostThree
-      (outputAtMostThreeAboveInput band)
-      (inputAtMostThreeAboveOutput band)
+comparableInputOutputDistanceAtMostFour :
+  ∀ {tau} →
+  Support.TriadicClassCertificate tau Support.CC →
+  ∣ Scale.shellLevel Support.literalShellPolicy (Physical.k tau)
+    - Scale.shellLevel Support.literalShellPolicy (Physical.q tau) ∣ ≤ 4
+comparableInputOutputDistanceAtMostFour certificate =
+  let band = comparableInputOutputBand certificate
+  in shellDistanceAtMostFour (proj₁ band) (proj₂ band)
+  where
+  open import Data.Product.Base using (proj₁; proj₂)
 
-literalBonyResidualHasFiniteThreeShellBand : Bool
-literalBonyResidualHasFiniteThreeShellBand = true
+comparableTriadicBandIsFour : Bool
+comparableTriadicBandIsFour = true
 
-literalBonyResidualHasFiniteThreeShellBandIsTrue :
-  literalBonyResidualHasFiniteThreeShellBand ≡ true
-literalBonyResidualHasFiniteThreeShellBandIsTrue = refl
+comparableIsDistinctFromFifthComOwner : Bool
+comparableIsDistinctFromFifthComOwner = true
+
+comparableTriadicBandIsFourIsTrue : comparableTriadicBandIsFour ≡ true
+comparableTriadicBandIsFourIsTrue = refl
+
+comparableIsDistinctFromFifthComOwnerIsTrue :
+  comparableIsDistinctFromFifthComOwner ≡ true
+comparableIsDistinctFromFifthComOwnerIsTrue = refl
