@@ -35,6 +35,10 @@ module DASHI.Physics.Closure.NSTriadKNHighestAlphaRound61Exact where
 --       constructs a positive correction automatically.  The zero-safe branch
 --       uses ((r-q)-a)/(K+1); when K>0 the sharp branch uses the maximal
 --       B_*=((r-q)-a)/K and saturates a+B_*K=r-q exactly.
+-- ABC : the canonical Round58/60 source can now be constructed from A's
+--       source-indexed estimates, B's single active six-three identification,
+--       and C's strict-positive-scale data; derived B/C certificates are not
+--       re-requested from callers.
 -- G   : exact rational B_*/3 allocation constructs all three Young splits;
 --       the final numerical feasibility question is one strict scalar gate.
 --       The necessary two-resource no-go is also generalized from 2 C_* to
@@ -77,6 +81,9 @@ import DASHI.Physics.Closure.NSTriadKNFixedShiftScaleMatchedCapacityRound60Exact
 import DASHI.Physics.Closure.NSTriadKNFixedShiftPositiveGapFalsifierRound61Exact
 import DASHI.Physics.Closure.NSTriadKNFixedShiftStrictGapCapacityRound61Exact
 import DASHI.Physics.Closure.NSTriadKNFixedShiftSharpStrictGapCapacityRound61Exact
+
+-- Canonical compiler-light ABC source compressed to the irreducible B/C inputs.
+import DASHI.Physics.Closure.NSTriadKNABCCompressedInhabitationRound61Exact
 
 -- D/F common source frontier and exact downstream reductions.
 import DASHI.Physics.Closure.NSTriadKNLuoExactFluxKernelDecompositionExact
