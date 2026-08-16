@@ -8,10 +8,10 @@ module DASHI.Crypto.MLKEMOppositeResidueParityFibreFactorisationExact where
 -- "Module-Lattice-Based Key-Encapsulation Mechanism Standard", FIPS 203,
 -- 2024. DOI: 10.6028/NIST.FIPS.203.
 --
--- Discovery context
--- -----------------
--- The source-faithful CBD block probe finds a reproducible conditioned-list
--- reduction for actual opposite FIPS residue pairs (gamma_1 = -gamma_0 and
+-- Defensive discovery context
+-- ---------------------------
+-- The source-faithful CBD block probe finds reproducibly different conditioned
+-- list geometry for actual opposite FIPS residue pairs (gamma_1 = -gamma_0 and
 -- gamma_3 = -gamma_2) relative to seeded generic field-point controls.
 --
 -- The preceding decomposition theorem proves that the sum/difference of the
@@ -22,7 +22,8 @@ module DASHI.Crypto.MLKEMOppositeResidueParityFibreFactorisationExact where
 --
 -- Thus the special FIPS pair does not merely have a suggestive symmetry: its
 -- raw observation fibre literally factors through the parity-sector quotient.
--- This is an attack-discovery structural theorem, not a whole-key attack claim.
+-- Blue-team use: this identifies a structurally special joint observation that
+-- implementations should audit explicitly.  It is not a whole-key attack claim.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Level; _⊔_)
@@ -136,10 +137,10 @@ module _ {c ℓ : Level} (R : CommutativeRing c ℓ) where
 -- For F_3329, doubling is injective because 2 is nonzero/invertible; that
 -- concrete field producer is still separate.  Likewise this theorem explains
 -- the exact parity-sector fibre geometry but does not identify the measured
--- conditioned-list ratio with a whole-key recovery speedup.
+-- conditioned-list ratio with whole-key recovery or a runtime speedup.
 --
 -- The current discovery script compares the opposite FIPS pairs against seeded
--- generic field-point controls.  At m=8 the observed conditioned-list means are
--- roughly half the control mean in the deterministic benchmark.  Those measured
--- numbers remain computational regressions rather than kernel theorems.
+-- generic field-point controls.  Those finite measurements are a defensive
+-- prioritisation signal for joint-leakage auditing, not a substitute for an
+-- implementation observation-channel proof.
 ------------------------------------------------------------------------
