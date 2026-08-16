@@ -12,36 +12,17 @@ module DASHI.Governance.CounterpositionDiversityAutonomyExact where
 -- space of reasons from autonomy-destroying closure.  The exact finite
 -- counterposition algebra below is inherited from DASHI's older balanced-
 -- ternary foundation and is not claimed as a theorem of Hanks.
---
--- Internal producer pollen:
---   * BalancedTernaryStageSymmetryExact / CounterpositionOrderedJoinExact:
---       contextual opposition need not be full inversion;
---   * PR #556 / AutonomyReopeningCriterion:
---       epistemic openness includes revisability under disconfirming evidence;
---   * PR #558 lens lane:
---       counterposition, negation, inverse, reversal and lens transition remain
---       distinct operator roles.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Empty using (⊥)
 
 import DASHI.Foundations.BalancedTernaryStageSymmetryExact as BT
 import DASHI.Foundations.CounterpositionOrderedJoinExact as Counter
 import DASHI.Governance.AutonomyReopeningCriterion as Reopening
-
-------------------------------------------------------------------------
--- Concrete non-binary alternative witness.
---
--- For (+++):
---   self        = (+++)
---   full inverse= (---)
---   reject-third= (++-)
---
--- The contextual alternative is therefore neither the original position nor
--- its global inverse.
-------------------------------------------------------------------------
+import DASHI.Governance.DevelopmentalInfluenceSourceAtlas as Sources
 
 record NonBinaryCounterpositionWitness : Set where
   constructor nonBinaryCounterpositionWitness
@@ -64,54 +45,31 @@ canonicalNonBinaryCounterpositionWitness =
     BT.allPositive
     BT.thirdCoordinateCounterposition
     BT.allNegative
-    refl
-    refl
-    (λ ())
-    (λ ())
-
-------------------------------------------------------------------------
--- The older CounterContext already exposes several distinct ways to counter a
--- position.  At allPositive the three coordinate-local challenges are pairwise
--- distinct, so the admissible counterposition space is visibly richer than
--- the binary carrier {x,!x}.
-------------------------------------------------------------------------
+    refl refl (λ ()) (λ ())
 
 rejectFirstPositive : BT.TriadPattern
-rejectFirstPositive =
-  Counter.counterUnder Counter.rejectFirst BT.allPositive
+rejectFirstPositive = Counter.counterUnder Counter.rejectFirst BT.allPositive
 
 rejectSecondPositive : BT.TriadPattern
-rejectSecondPositive =
-  Counter.counterUnder Counter.rejectSecond BT.allPositive
+rejectSecondPositive = Counter.counterUnder Counter.rejectSecond BT.allPositive
 
 rejectThirdPositive : BT.TriadPattern
-rejectThirdPositive =
-  Counter.counterUnder Counter.rejectThird BT.allPositive
+rejectThirdPositive = Counter.counterUnder Counter.rejectThird BT.allPositive
 
-rejectFirstNotRejectSecond :
-  rejectFirstPositive ≡ rejectSecondPositive → ⊥
+rejectFirstNotRejectSecond : rejectFirstPositive ≡ rejectSecondPositive → ⊥
 rejectFirstNotRejectSecond ()
 
-rejectFirstNotRejectThird :
-  rejectFirstPositive ≡ rejectThirdPositive → ⊥
+rejectFirstNotRejectThird : rejectFirstPositive ≡ rejectThirdPositive → ⊥
 rejectFirstNotRejectThird ()
 
-rejectSecondNotRejectThird :
-  rejectSecondPositive ≡ rejectThirdPositive → ⊥
+rejectSecondNotRejectThird : rejectSecondPositive ≡ rejectThirdPositive → ⊥
 rejectSecondNotRejectThird ()
 
 rejectThirdNotFullInverse :
   rejectThirdPositive
   ≡ Counter.counterUnder Counter.invertAll BT.allPositive
   → ⊥
-rejectThirdNotFullInverse =
-  Counter.partialCounterpositionIsNotFullInverse
-
-------------------------------------------------------------------------
--- Generic openness carrier: revisability and counterposition diversity are
--- separate coordinates.  One can imagine alternatives but refuse evidence,
--- or permit evidence updates while exposing only a forced binary choice.
-------------------------------------------------------------------------
+rejectThirdNotFullInverse = Counter.partialCounterpositionIsNotFullInverse
 
 record CounterpositionAccessSystem : Set₁ where
   constructor counterpositionAccessSystem
@@ -130,8 +88,7 @@ record NonBinaryAlternativeAccess
     accessClaim : Claim S
     accessContext : Context S
     accessAlternative : Claim S
-    accessExact :
-      counter S accessContext accessClaim ≡ accessAlternative
+    accessExact : counter S accessContext accessClaim ≡ accessAlternative
     accessNotClaim : accessAlternative ≡ accessClaim → ⊥
     accessNotInverse : accessAlternative ≡ inverse S accessClaim → ⊥
 
@@ -142,35 +99,19 @@ record EpistemicOpennessWitness : Set₁ where
   field
     revisionWitness : Reopening.ReflexiveRevisionWitness
     counterpositionSystem : CounterpositionAccessSystem
-    nonBinaryAlternative :
-      NonBinaryAlternativeAccess counterpositionSystem
-
-------------------------------------------------------------------------
--- Foundation instance of generic non-binary access.
-------------------------------------------------------------------------
+    nonBinaryAlternative : NonBinaryAlternativeAccess counterpositionSystem
 
 foundationCounterpositionSystem : CounterpositionAccessSystem
 foundationCounterpositionSystem =
   counterpositionAccessSystem
-    BT.TriadPattern
-    Counter.CounterContext
-    BT.strictInverse
-    Counter.counterUnder
+    BT.TriadPattern Counter.CounterContext BT.strictInverse Counter.counterUnder
 
 foundationNonBinaryAccess :
   NonBinaryAlternativeAccess foundationCounterpositionSystem
 foundationNonBinaryAccess =
   nonBinaryAlternativeAccess
-    BT.allPositive
-    Counter.rejectThird
-    BT.thirdCoordinateCounterposition
-    refl
-    (λ ())
-    (λ ())
-
-------------------------------------------------------------------------
--- Claim boundary.
-------------------------------------------------------------------------
+    BT.allPositive Counter.rejectThird BT.thirdCoordinateCounterposition
+    refl (λ ()) (λ ())
 
 record CounterpositionDiversityBoundary : Set where
   constructor counterpositionDiversityBoundary
@@ -184,10 +125,16 @@ record CounterpositionDiversityBoundary : Set where
 
 canonicalCounterpositionDiversityBoundary : CounterpositionDiversityBoundary
 canonicalCounterpositionDiversityBoundary =
-  counterpositionDiversityBoundary
-    false
-    false
-    false
-    true
-    false
-    true
+  counterpositionDiversityBoundary false false false true false true
+
+record CounterpositionDiversityReceipt : Set where
+  constructor counterpositionDiversityReceipt
+  field
+    sources : List Sources.ScholarlySource
+    boundary : CounterpositionDiversityBoundary
+
+canonicalCounterpositionDiversityReceipt : CounterpositionDiversityReceipt
+canonicalCounterpositionDiversityReceipt =
+  counterpositionDiversityReceipt
+    (Sources.indoctrinationSpaceReasons ∷ Sources.epistemicTrustReview ∷ [])
+    canonicalCounterpositionDiversityBoundary
