@@ -58,9 +58,10 @@ sumBelowDoubleRight {a} {b} a≤b =
 
 selfBelowDouble : ∀ n → n ≤ 2 * n
 selfBelowDouble n =
-  Nat.≤-trans
+  subst
+    (n ≤_)
+    (sym doubleMeaning)
     (Nat.m≤m+n n n)
-    (subst (n ≤_) (sym doubleMeaning) Nat.≤-refl)
   where
   doubleMeaning : 2 * n ≡ n + n
   doubleMeaning =
