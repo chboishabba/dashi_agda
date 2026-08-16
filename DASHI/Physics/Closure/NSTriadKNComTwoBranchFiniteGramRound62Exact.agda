@@ -4,7 +4,7 @@ module DASHI.Physics.Closure.NSTriadKNComTwoBranchFiniteGramRound62Exact where
 -- PRIMARY SOURCES / CONTEXT
 --
 -- Authors: Augustin-Louis Cauchy; Hermann Amandus Schwarz.
--- Title/context: finite Cauchy--Schwarz inequality.
+-- Result/context: finite Cauchy--Schwarz inequality.
 -- DOI: not applicable to the original nineteenth-century results.
 --
 -- Authors: Tosio Kato; Gustavo Ponce.
@@ -21,32 +21,24 @@ module DASHI.Physics.Closure.NSTriadKNComTwoBranchFiniteGramRound62Exact where
 -- DOI: 10.1007/s00041-018-9612-8.
 -- Correction DOI: 10.1007/s00041-019-09724-7.
 --
--- ROUND 62 CONTRIBUTION
+-- ROUND 62 CONTRIBUTION / AUTHORITY CORRECTION
 --
--- Round61 correctly stopped asking the physical Fourier Gram to equal the
--- synthetic six-three model cell.  It still asked the producer to supply an
--- actual GramInterferenceCell and its overlap estimate as primitive fields.
--- This module removes those two fields.
+-- This object is deliberately a RATIONAL MAJORANT CERTIFICATE, not the literal
+-- physical odd-(P/Q) Fourier energy.  The physical coefficient carrier is a
+-- constructive real/complex carrier; identifying it with Q would be wrong.
+-- `NSTriadKNComBishopNormalizedMajorantRound62Exact` is the carrier-correct
+-- physical boundary.
 --
--- The normalized physical odd-(P/Q) fibre is represented by TWO explicit
--- finite rational pair families, corresponding to the strong and weak
--- centered-commutator branches.  The repository already proves finite squared
--- Cauchy--Schwarz exactly.  Therefore the only branch-local analytic inputs are
+-- The useful finite algebra survives intact.  Given two explicit rational
+-- branch-pair families and the four one-sided norm estimates
 --
 --   ||L_s||^2 <= strongGap,   ||R_s||^2 <= 1,
---   ||L_w||^2 <= weakGap,     ||R_w||^2 <= 1.
+--   ||L_w||^2 <= weakGap,     ||R_w||^2 <= 1,
 --
--- Cauchy--Schwarz proves
---
---   <L_s,R_s>^2 + <L_w,R_w>^2
---     <= strongGap + weakGap
---      = twoBranchSquaredGap.
---
--- From this theorem we CONSTRUCT the actual Round61 physical Gram cell with
--- pairProduct equal to the literal normalized fibre quantity and overlap equal
--- to the six-three envelope.  B1/B3 are thus no longer producer assumptions:
--- the remaining B analysis is reduced to explicit normalized fibre extraction
--- plus four one-sided finite norm bounds.
+-- exact finite Cauchy--Schwarz proves the rational certificate mass is below
+-- the six-three envelope.  With common-hat support and exact distances this
+-- gives 17/64, 65/512, 65/512 and hence 133/256.  A physical theorem may use
+-- these values as majorants only through an explicit ordered-real embedding.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -55,17 +47,16 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
-open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
 import DASHI.Physics.Closure.NSTriadKNComCommonHatSupportLeafRound58 as Hat
-import DASHI.Physics.Closure.NSTriadKNComGramInterferenceRound35Exact as Gram
-import DASHI.Physics.Closure.NSTriadKNComActiveSixThreeRealizationRound61Exact as Round61
+import DASHI.Physics.Closure.NSTriadKNComNormalizedFibreMassLeafRound58 as Targets
 import DASHI.Physics.Closure.NSTriadKNComNormalizedFibreAggregateRound60Exact as Aggregate
+import DASHI.Physics.Closure.NSTriadKNComSameAdjacentActiveRound47Exact as Active
 import DASHI.Physics.Closure.NSTriadKNLuoSixThreeCenteredCommutatorScaleExact as SixThree
 
-record PhysicalOddPQTwoBranchFiniteGramSource : Set₁ where
+record RationalTwoBranchGramCertificate : Set₁ where
   field
     support : Hat.PhysicalOddPQCommonHatIdentification
     strongPairs weakPairs : Nat → Nat → List L2.Pair
@@ -75,7 +66,7 @@ record PhysicalOddPQTwoBranchFiniteGramSource : Set₁ where
     forwardAdjacentDistance : ∀ q → shellDistance q (suc q) ≡ suc zero
     reverseAdjacentDistance : ∀ q → shellDistance (suc q) q ≡ suc zero
 
-    inactivePairProductZero : ∀ q r →
+    inactiveCertificateZero : ∀ q r →
       Hat.supportActive support q r ≡ false →
       L2.square (L2.pairDot (strongPairs q r))
         + L2.square (L2.pairDot (weakPairs q r))
@@ -99,21 +90,21 @@ record PhysicalOddPQTwoBranchFiniteGramSource : Set₁ where
       Hat.supportActive support q r ≡ true →
       L2.rightNormSquared (weakPairs q r) ≤ 1ℚ
 
-open PhysicalOddPQTwoBranchFiniteGramSource public
+open RationalTwoBranchGramCertificate public
 
-normalizedPairProduct :
-  PhysicalOddPQTwoBranchFiniteGramSource → Nat → Nat → ℚ
-normalizedPairProduct physical q r =
-  L2.square (L2.pairDot (strongPairs physical q r))
-  + L2.square (L2.pairDot (weakPairs physical q r))
+certificatePairProduct :
+  RationalTwoBranchGramCertificate → Nat → Nat → ℚ
+certificatePairProduct certificate q r =
+  L2.square (L2.pairDot (strongPairs certificate q r))
+  + L2.square (L2.pairDot (weakPairs certificate q r))
 
-normalizedPairProductNonnegative :
-  (physical : PhysicalOddPQTwoBranchFiniteGramSource) →
-  ∀ q r → 0ℚ ≤ normalizedPairProduct physical q r
-normalizedPairProductNonnegative physical q r =
+certificatePairProductNonnegative :
+  (certificate : RationalTwoBranchGramCertificate) →
+  ∀ q r → 0ℚ ≤ certificatePairProduct certificate q r
+certificatePairProductNonnegative certificate q r =
   L2.addNonnegative
-    (L2.squareNonnegative (L2.pairDot (strongPairs physical q r)))
-    (L2.squareNonnegative (L2.pairDot (weakPairs physical q r)))
+    (L2.squareNonnegative (L2.pairDot (strongPairs certificate q r)))
+    (L2.squareNonnegative (L2.pairDot (weakPairs certificate q r)))
 
 private
   branchPairBelowBudget :
@@ -123,109 +114,146 @@ private
     L2.rightNormSquared pairs ≤ 1ℚ →
     L2.square (L2.pairDot pairs) ≤ budget
   branchPairBelowBudget pairs budget budgetNN leftBound rightBound =
-    let
-      cauchy = L2.finiteCauchySchwarzSquared pairs
-      normProductBound =
-        L2.nonnegativeProductMonotone
-          (L2.leftNormSquaredNonnegative pairs)
-          (L2.rightNormSquaredNonnegative pairs)
-          budgetNN ℚP.0≤1 leftBound rightBound
-    in
-    ℚP.≤-trans cauchy
+    ℚP.≤-trans
+      (L2.finiteCauchySchwarzSquared pairs)
       (subst
         (λ upper →
           L2.leftNormSquared pairs * L2.rightNormSquared pairs ≤ upper)
         (ℚP.*-identityʳ budget)
-        normProductBound)
+        (L2.nonnegativeProductMonotone
+          (L2.leftNormSquaredNonnegative pairs)
+          (L2.rightNormSquaredNonnegative pairs)
+          budgetNN ℚP.0≤1 leftBound rightBound))
 
 strongPairBelowStrongGap :
-  (physical : PhysicalOddPQTwoBranchFiniteGramSource) → ∀ q r →
-  Hat.supportActive (support physical) q r ≡ true →
-  L2.square (L2.pairDot (strongPairs physical q r))
-  ≤ SixThree.strongBranchSquaredGap (shellDistance physical q r)
-strongPairBelowStrongGap physical q r active =
+  (certificate : RationalTwoBranchGramCertificate) → ∀ q r →
+  Hat.supportActive (support certificate) q r ≡ true →
+  L2.square (L2.pairDot (strongPairs certificate q r))
+  ≤ SixThree.strongBranchSquaredGap (shellDistance certificate q r)
+strongPairBelowStrongGap certificate q r active =
   branchPairBelowBudget
-    (strongPairs physical q r)
-    (SixThree.strongBranchSquaredGap (shellDistance physical q r))
-    (SixThree.strongBranchSquaredNonnegative (shellDistance physical q r))
-    (strongLeftMassBound physical q r active)
-    (strongRightContraction physical q r active)
+    (strongPairs certificate q r)
+    (SixThree.strongBranchSquaredGap (shellDistance certificate q r))
+    (SixThree.strongBranchSquaredNonnegative (shellDistance certificate q r))
+    (strongLeftMassBound certificate q r active)
+    (strongRightContraction certificate q r active)
 
 weakPairBelowWeakGap :
-  (physical : PhysicalOddPQTwoBranchFiniteGramSource) → ∀ q r →
-  Hat.supportActive (support physical) q r ≡ true →
-  L2.square (L2.pairDot (weakPairs physical q r))
-  ≤ SixThree.weakBranchSquaredGap (shellDistance physical q r)
-weakPairBelowWeakGap physical q r active =
+  (certificate : RationalTwoBranchGramCertificate) → ∀ q r →
+  Hat.supportActive (support certificate) q r ≡ true →
+  L2.square (L2.pairDot (weakPairs certificate q r))
+  ≤ SixThree.weakBranchSquaredGap (shellDistance certificate q r)
+weakPairBelowWeakGap certificate q r active =
   branchPairBelowBudget
-    (weakPairs physical q r)
-    (SixThree.weakBranchSquaredGap (shellDistance physical q r))
-    (SixThree.weakBranchSquaredNonnegative (shellDistance physical q r))
-    (weakLeftMassBound physical q r active)
-    (weakRightContraction physical q r active)
+    (weakPairs certificate q r)
+    (SixThree.weakBranchSquaredGap (shellDistance certificate q r))
+    (SixThree.weakBranchSquaredNonnegative (shellDistance certificate q r))
+    (weakLeftMassBound certificate q r active)
+    (weakRightContraction certificate q r active)
 
-activePairProductBelowSixThree :
-  (physical : PhysicalOddPQTwoBranchFiniteGramSource) → ∀ q r →
-  Hat.supportActive (support physical) q r ≡ true →
-  normalizedPairProduct physical q r
-  ≤ SixThree.twoBranchSquaredGap (shellDistance physical q r)
-activePairProductBelowSixThree physical q r active =
+activeCertificateBelowSixThree :
+  (certificate : RationalTwoBranchGramCertificate) → ∀ q r →
+  Hat.supportActive (support certificate) q r ≡ true →
+  certificatePairProduct certificate q r
+  ≤ SixThree.twoBranchSquaredGap (shellDistance certificate q r)
+activeCertificateBelowSixThree certificate q r active =
   ℚP.+-mono-≤
-    (strongPairBelowStrongGap physical q r active)
-    (weakPairBelowWeakGap physical q r active)
+    (strongPairBelowStrongGap certificate q r active)
+    (weakPairBelowWeakGap certificate q r active)
 
-activePhysicalGramCell :
-  (physical : PhysicalOddPQTwoBranchFiniteGramSource) → ∀ q r →
-  Hat.supportActive (support physical) q r ≡ true →
-  Gram.GramInterferenceCell (shellDistance physical q r)
-activePhysicalGramCell physical q r active =
-  Gram.gram-interference-cell
-    1ℚ (SixThree.twoBranchSquaredGap gap) 1ℚ
-    (normalizedPairProduct physical q r)
-    ℚP.0≤1 (Gram.sixThreeOverlapNonnegative gap) ℚP.0≤1
-    (normalizedPairProductNonnegative physical q r)
-    ℚP.≤-refl ℚP.≤-refl factorizationBound
-  where
-  gap = shellDistance physical q r
-  factorizationBound :
-    normalizedPairProduct physical q r
-    ≤ 1ℚ * SixThree.twoBranchSquaredGap gap * 1ℚ
-  factorizationBound =
-    subst
-      (λ upper → normalizedPairProduct physical q r ≤ upper)
-      (sym (solve (SixThree.twoBranchSquaredGap gap ∷ [])))
-      (activePairProductBelowSixThree physical q r active)
+sameCertificateBelowTarget :
+  (certificate : RationalTwoBranchGramCertificate) → ∀ q →
+  certificatePairProduct certificate q q ≤ Targets.sameShellTarget
+sameCertificateBelowTarget certificate q
+  with Hat.supportActive (support certificate) q q in activeProof
+... | true =
+  subst
+    (λ upper → certificatePairProduct certificate q q ≤ upper)
+    Active.sixThreeSameShellExact
+    (subst
+      (λ gap →
+        certificatePairProduct certificate q q
+        ≤ SixThree.twoBranchSquaredGap gap)
+      (sameShellDistance certificate q)
+      (activeCertificateBelowSixThree certificate q q activeProof))
+... | false =
+  subst
+    (λ left → left ≤ Targets.sameShellTarget)
+    (sym (inactiveCertificateZero certificate q q activeProof))
+    Aggregate.sameTargetNonnegative
 
-asRound61PhysicalSource :
-  PhysicalOddPQTwoBranchFiniteGramSource →
-  Round61.PhysicalActiveSixThreeOddPQSource
-asRound61PhysicalSource physical = record
-  { support = support physical
-  ; normalizedPairProduct = normalizedPairProduct physical
-  ; normalizedPairProductNonnegative = normalizedPairProductNonnegative physical
-  ; shellDistance = shellDistance physical
-  ; sameShellDistance = sameShellDistance physical
-  ; forwardAdjacentDistance = forwardAdjacentDistance physical
-  ; reverseAdjacentDistance = reverseAdjacentDistance physical
-  ; inactivePairProductZero = inactivePairProductZero physical
-  ; activePhysicalGramCell = activePhysicalGramCell physical
-  ; activeProductIsPhysicalGram = λ q r active → refl
-  ; activePhysicalOverlapBelowSixThree = λ q r active → ℚP.≤-refl
-  }
+forwardCertificateBelowTarget :
+  (certificate : RationalTwoBranchGramCertificate) → ∀ q →
+  certificatePairProduct certificate q (suc q) ≤ Targets.adjacentShellTarget
+forwardCertificateBelowTarget certificate q
+  with Hat.supportActive (support certificate) q (suc q) in activeProof
+... | true =
+  subst
+    (λ upper → certificatePairProduct certificate q (suc q) ≤ upper)
+    Active.sixThreeAdjacentShellExact
+    (subst
+      (λ gap →
+        certificatePairProduct certificate q (suc q)
+        ≤ SixThree.twoBranchSquaredGap gap)
+      (forwardAdjacentDistance certificate q)
+      (activeCertificateBelowSixThree certificate q (suc q) activeProof))
+... | false =
+  subst
+    (λ left → left ≤ Targets.adjacentShellTarget)
+    (sym (inactiveCertificateZero certificate q (suc q) activeProof))
+    Aggregate.adjacentTargetNonnegative
 
-fullBandwidthOneMassBelow133Over256FromFiniteBranches :
-  (physical : PhysicalOddPQTwoBranchFiniteGramSource) → ∀ q →
-  Aggregate.normalizedOddPQBandwidthOneMass
-    (Round61.asPhysicalNormalizedOddPQSource
-      (asRound61PhysicalSource physical)) q
-  ≤ Aggregate.bandwidthOneTarget
-fullBandwidthOneMassBelow133Over256FromFiniteBranches physical =
-  Round61.fullBandwidthOneMassBelow133Over256
-    (asRound61PhysicalSource physical)
+reverseCertificateBelowTarget :
+  (certificate : RationalTwoBranchGramCertificate) → ∀ q →
+  certificatePairProduct certificate (suc q) q ≤ Targets.adjacentShellTarget
+reverseCertificateBelowTarget certificate q
+  with Hat.supportActive (support certificate) (suc q) q in activeProof
+... | true =
+  subst
+    (λ upper → certificatePairProduct certificate (suc q) q ≤ upper)
+    Active.sixThreeAdjacentShellExact
+    (subst
+      (λ gap →
+        certificatePairProduct certificate (suc q) q
+        ≤ SixThree.twoBranchSquaredGap gap)
+      (reverseAdjacentDistance certificate q)
+      (activeCertificateBelowSixThree certificate (suc q) q activeProof))
+... | false =
+  subst
+    (λ left → left ≤ Targets.adjacentShellTarget)
+    (sym (inactiveCertificateZero certificate (suc q) q activeProof))
+    Aggregate.adjacentTargetNonnegative
 
-b1AndB3ReducedToFiniteCauchyBranchBounds : Bool
-b1AndB3ReducedToFiniteCauchyBranchBounds = true
+certificateBandwidthOneMass :
+  RationalTwoBranchGramCertificate → Nat → ℚ
+certificateBandwidthOneMass certificate q =
+  certificatePairProduct certificate q q
+  + certificatePairProduct certificate q (suc q)
+  + certificatePairProduct certificate (suc q) q
 
-b1AndB3ReducedToFiniteCauchyBranchBoundsIsTrue :
-  b1AndB3ReducedToFiniteCauchyBranchBounds ≡ true
-b1AndB3ReducedToFiniteCauchyBranchBoundsIsTrue = refl
+certificateBandwidthOneMassBelow133Over256 :
+  (certificate : RationalTwoBranchGramCertificate) → ∀ q →
+  certificateBandwidthOneMass certificate q ≤ Aggregate.bandwidthOneTarget
+certificateBandwidthOneMassBelow133Over256 certificate q =
+  subst
+    (λ upper → certificateBandwidthOneMass certificate q ≤ upper)
+    Aggregate.targetArithmetic
+    (ℚP.+-mono-≤
+      (ℚP.+-mono-≤
+        (sameCertificateBelowTarget certificate q)
+        (forwardCertificateBelowTarget certificate q))
+      (reverseCertificateBelowTarget certificate q))
+
+rationalTwoBranchObjectIsOnlyMajorantCertificate : Bool
+rationalTwoBranchObjectIsOnlyMajorantCertificate = true
+
+finiteCauchyClosesRationalMajorantAlgebra : Bool
+finiteCauchyClosesRationalMajorantAlgebra = true
+
+rationalTwoBranchObjectIsOnlyMajorantCertificateIsTrue :
+  rationalTwoBranchObjectIsOnlyMajorantCertificate ≡ true
+rationalTwoBranchObjectIsOnlyMajorantCertificateIsTrue = refl
+
+finiteCauchyClosesRationalMajorantAlgebraIsTrue :
+  finiteCauchyClosesRationalMajorantAlgebra ≡ true
+finiteCauchyClosesRationalMajorantAlgebraIsTrue = refl
