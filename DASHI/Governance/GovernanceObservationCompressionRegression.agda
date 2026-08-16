@@ -14,6 +14,7 @@ import DASHI.Governance.ContestableCompressionResidualExact as Residual
 import DASHI.Governance.OpenWorldDisconfirmationBoundaryExact as OpenWorld
 import DASHI.Governance.CounterpositionDiversityAutonomyExact as Counter
 import DASHI.Governance.EpistemicBinaryForcingLossExact as Binary
+import DASHI.Governance.EpistemicTritBalancedTernarySeparationExact as TernarySeparation
 import DASHI.Governance.InterventionFeasibilityCutsetExact as Feasibility
 import DASHI.Governance.FiniteCausalQueryRefinementStabilizationExact as Refinement
 import DASHI.Governance.ProxyObjectiveFutureSafetyExact as Proxy
@@ -89,6 +90,12 @@ concealmentNeedsSeparateEvidence :
     OpenWorld.canonicalOpenWorldDisconfirmationBoundary
   ≡ true
 concealmentNeedsSeparateEvidence = refl
+
+unresolvedDoesNotAutomaticallyBecomeNeutralDigit :
+  TernarySeparation.EpistemicTernarySeparationBoundary.unresolvedDefinitionallyEqualsNeutralDigit
+    TernarySeparation.canonicalEpistemicTernarySeparationBoundary
+  ≡ false
+unresolvedDoesNotAutomaticallyBecomeNeutralDigit = refl
 
 forcedBinaryDoesNotExhaustCounterpositions :
   Counter.CounterpositionDiversityBoundary.forcedBinaryChoiceExhaustsCounterpositionSpace
