@@ -127,12 +127,15 @@ record NonBinaryAlternativeAccess
   (S : CounterpositionAccessSystem) : Set₁ where
   constructor nonBinaryAlternativeAccess
   field
-    claim : Claim S
-    context : Context S
-    alternative : Claim S
-    alternativeExact : counter S context claim ≡ alternative
-    differsFromClaim : alternative ≡ claim → ⊥
-    differsFromInverse : alternative ≡ inverse S claim → ⊥
+    accessClaim : Claim S
+    accessContext : Context S
+    accessAlternative : Claim S
+    accessExact :
+      counter S accessContext accessClaim ≡ accessAlternative
+    accessNotClaim : accessAlternative ≡ accessClaim → ⊥
+    accessNotInverse : accessAlternative ≡ inverse S accessClaim → ⊥
+
+open NonBinaryAlternativeAccess public
 
 record EpistemicOpennessWitness : Set₁ where
   constructor epistemicOpennessWitness
