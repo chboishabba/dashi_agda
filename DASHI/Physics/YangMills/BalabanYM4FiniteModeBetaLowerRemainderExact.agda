@@ -39,6 +39,7 @@ import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as FiniteL2
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
 
@@ -97,10 +98,11 @@ computedGaussianLowerIsValid :
   computedGaussianLower dataSet ≤ betaZ dataSet
 computedGaussianLowerIsValid dataSet =
   let
+    factorNonnegative : 0ℚ ≤ oneLoopSU2Factor
+    factorNonnegative = ℚP.nonNegative⁻¹ oneLoopSU2Factor
+
     scaledEll = Norm.scaleNonnegative
-      oneLoopSU2Factor
-      (ℚP.nonNegative⁻¹ oneLoopSU2Factor)
-      (computedEllLowerIsValid dataSet)
+      oneLoopSU2Factor factorNonnegative (computedEllLowerIsValid dataSet)
     summed = ℚP.+-mono-≤ scaledEll (epsilonLower dataSet)
   in
   subst
@@ -143,8 +145,8 @@ power4Monotone : ∀ left right →
 power4Monotone left right leftNN rightNN leftBelow =
   let
     squareBelow = squareMonotone left right leftNN rightNN leftBelow
-    leftSquareNN = ℚP.nonNegative⁻¹ (left * left)
-    rightSquareNN = ℚP.nonNegative⁻¹ (right * right)
+    leftSquareNN = FiniteL2.squareNonnegative left
+    rightSquareNN = FiniteL2.squareNonnegative right
   in
   squareMonotone
     (left * left) (right * right)
