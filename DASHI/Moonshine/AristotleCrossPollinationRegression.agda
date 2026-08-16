@@ -2,7 +2,7 @@ module DASHI.Moonshine.AristotleCrossPollinationRegression where
 
 open import Agda.Builtin.Bool using (true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; _*_)
+open import Agda.Builtin.Nat using (Nat; _+_; _*_)
 open import Data.Integer using (ℤ; +_; -[1+_]; _*_; _-_)
 open import Data.List.Base using (List; []; _∷_)
 
@@ -19,10 +19,6 @@ import DASHI.Moonshine.RamanujanTauHecke23Exact as Tau
 import DASHI.Physics.ShiftDiscreteWaveStep as Wave
 import DASHI.Physics.ShiftPhaseTableInterference as Phase
 
-------------------------------------------------------------------------
--- Decimal/nonary arithmetic.
-------------------------------------------------------------------------
-
 decimal123DigitSumInvariant :
   Digital.decimalPositionalResidue9
     (Digital.mapDigits (Digital.d1 ∷ Digital.d2 ∷ Digital.d3 ∷ []))
@@ -36,23 +32,13 @@ decimal123DigitSumInvariant =
 rootNineIsZeroResidue : Digital.rootResidue9 Digital.root9 ≡ Base.non-0
 rootNineIsZeroResidue = refl
 
-------------------------------------------------------------------------
--- Fibonacci modulo nine.
-------------------------------------------------------------------------
-
 fibonacciStateReturnsAtTwentyFour :
   Fibonacci.fibState 24 ≡ Fibonacci.fibStart
 fibonacciStateReturnsAtTwentyFour = Fibonacci.fibStateAt24IsStart
 
 fibonacciTriadicOffsetTwenty :
-  Fibonacci.isTriadicResidue
-    (Fibonacci.fibResidue 20)
-  ≡ true
+  Fibonacci.isTriadicResidue (Fibonacci.fibResidue 20) ≡ true
 fibonacciTriadicOffsetTwenty = refl
-
-------------------------------------------------------------------------
--- Six-wheel and product sieve.
-------------------------------------------------------------------------
 
 sixWheelTotalSplitAtFiveBlocks :
   5 * 6 ≡ 5 * 4 + 5 * 2
@@ -68,10 +54,6 @@ twoThreeProductSurvivorsIsTwo = ProductSieve.twoThreeSurvivorsIsTwo
 
 crtFiveSurvives : CRT.CRT23Survivor (CRT.r6ToCRT23 Wheel.r5)
 crtFiveSurvives = CRT.r5SurvivesCRT
-
-------------------------------------------------------------------------
--- Classical Hecke normalization and tau checks.
-------------------------------------------------------------------------
 
 weight12Hecke23 :
   Hecke.heckeProductExpression 11 2 3
@@ -95,10 +77,6 @@ antiparallelAtTauSix :
   (-[1+ 1 ]) * Antiparallel.hecke3ScaledCoefficient Tau.tau6
 antiparallelAtTauSix =
   Antiparallel.hecke23AntiparallelCrossMultiplied Tau.tau6
-
-------------------------------------------------------------------------
--- Finite real-q-series reflection on the existing wave carrier.
-------------------------------------------------------------------------
 
 phaseOneReflectsToPhaseThree :
   (coefficients : List ℤ) →
