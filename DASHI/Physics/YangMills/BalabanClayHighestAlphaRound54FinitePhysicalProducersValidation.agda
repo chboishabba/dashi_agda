@@ -14,11 +14,15 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound54FinitePhysicalProdu
 --         -> 4/3 reopening.
 --
 -- L2  selected correlated residual:
---       literal raw/Green atom boxes
+--       literal 16-point subset evaluations
+--         -> canonical Boolean-four-cube Möbius inversion
+--         -> 15 source/defect atoms with exact reconstruction
+--         -> literal raw/Green atom boxes
 --         -> sum rawUpper - sum greenLower
---         -> uniform selected-region residual endpoint
+--         -> one uniform selected-region residual endpoint
 --         -> selected minimizer residual <= 55/18874368 Q.
---     The target residual inequality is never accepted as an input.
+--     Neither the atom decomposition nor the target residual inequality is
+--     accepted as an input.
 --
 -- L3/L4  source beta positivity:
 --       exact rational positive-denominator quotient enclosure
@@ -61,6 +65,8 @@ import DASHI.Physics.YangMills.BalabanCMP109LiteralFederbushCancellationDictiona
 import DASHI.Physics.YangMills.BalabanCMP109PrincipalLogSourceOperatorDefectExact as G1Defect
 import DASHI.Physics.YangMills.BalabanCMP109SourceNormQuarterReopeningExact as G1Reopen
 
+import DASHI.Physics.YangMills.BalabanWilsonBooleanFourCubeMobiusExact as Mobius
+import DASHI.Physics.YangMills.BalabanSelectedRawExtractorConstraintDefectAtomsExact as ConstraintAtoms
 import DASHI.Physics.YangMills.BalabanP33CorrelatedAtomIntervalEvaluationExact as G2Atoms
 import DASHI.Physics.YangMills.BalabanP33UniformSelectedMinimizerAtomIntervalExact as G2Uniform
 
@@ -106,8 +112,17 @@ sourceNormFourThirdsLevel =
   G1Reopen.cmp109SourceNormQuarterReopeningLevel
 
 ------------------------------------------------------------------------
--- L2: atom-compositional selected-minimizer interval route.
+-- L2: canonical atoms + atom-compositional selected-minimizer interval route.
 ------------------------------------------------------------------------
+
+booleanFourCubeMobiusDefinitionLevel =
+  Mobius.booleanFourCubeMobiusDefinitionLevel
+booleanFourCubeMobiusReconstructionLevel =
+  Mobius.booleanFourCubeMobiusReconstructionLevel
+selectedConstraintMobiusAtomConstructionLevel =
+  ConstraintAtoms.selectedConstraintMobiusAtomConstructionLevel
+selectedPhysicalConstraintPartialEvaluationProducerLevel =
+  ConstraintAtoms.selectedPhysicalConstraintPartialEvaluationProducerLevel
 
 correlatedAtomIntervalEvaluationLevel =
   G2Atoms.p33CorrelatedAtomIntervalEvaluationLevel
