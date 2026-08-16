@@ -23,7 +23,6 @@ module DASHI.Governance.CompositionalEvidenceEnclosureExact where
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
-open import Agda.Builtin.String using (String)
 
 import DASHI.Governance.DevelopmentalInfluenceSourceAtlas as Sources
 
@@ -71,19 +70,12 @@ combineEnclosures :
   EvidenceEnclosure O leftActual →
   EvidenceEnclosure O rightActual →
   EvidenceEnclosure O (combine A leftActual rightActual)
-combineEnclosures {O = O} A leftBox rightBox =
+combineEnclosures A leftBox rightBox =
   evidenceEnclosure
     (combine A (lower leftBox) (lower rightBox))
     (combine A (upper leftBox) (upper rightBox))
     (monotone A (lowerSound leftBox) (lowerSound rightBox))
     (monotone A (upperSound leftBox) (upperSound rightBox))
-
-------------------------------------------------------------------------
--- Target-receipt-free aggregation principle.
---
--- The aggregate enclosure is derived from local sound enclosures plus
--- monotonicity.  Callers do not provide the desired aggregate bound as a field.
-------------------------------------------------------------------------
 
 record CompositionalEvidenceReceipt
   (O : OrderedEvidence) : Set₁ where
@@ -101,9 +93,8 @@ canonicalCompositionalBoundaryReceipt aggregator =
   compositionalEvidenceReceipt aggregator true false
 
 ------------------------------------------------------------------------
--- Exact Nat regression: addition is monotone, so [1,3] and [2,4] enclose the
--- actual values 2 and 3, and their composed enclosure is [3,7] around 5.
--- This is a proof-shape regression only, not an empirical evidence scale.
+-- Exact Nat regression: [1,3] encloses 2 and [2,4] encloses 3.  Monotone
+-- addition derives [3,7] around the aggregate value 5.
 ------------------------------------------------------------------------
 
 natEvidenceOrder : OrderedEvidence
@@ -121,7 +112,12 @@ natAdditionAggregator =
     (λ left right → +-mono-≤ left right)
 
 twoBox : EvidenceEnclosure natEvidenceOrder 2
-twoBox = evidenceEnclosure 1 3 (s≤s z≤n) (s≤s (s≤s (s≤s z≤n)))
+twoBox =
+  evidenceEnclosure
+    1
+    3
+    (s≤s z≤n)
+    (s≤s (s≤s z≤n))
 
 threeBox : EvidenceEnclosure natEvidenceOrder 3
 threeBox =
@@ -129,7 +125,7 @@ threeBox =
     2
     4
     (s≤s (s≤s z≤n))
-    (s≤s (s≤s (s≤s (s≤s z≤n))))
+    (s≤s (s≤s (s≤s z≤n)))
 
 fiveBox : EvidenceEnclosure natEvidenceOrder 5
 fiveBox = combineEnclosures natAdditionAggregator twoBox threeBox
@@ -139,10 +135,6 @@ fiveBoxLowerIsThree = refl
 
 fiveBoxUpperIsSeven : upper fiveBox ≡ 7
 fiveBoxUpperIsSeven = refl
-
-------------------------------------------------------------------------
--- Boundary and provenance.
-------------------------------------------------------------------------
 
 record EvidenceEnclosureBoundary : Set where
   constructor evidenceEnclosureBoundary
