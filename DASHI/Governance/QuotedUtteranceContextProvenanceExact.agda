@@ -13,8 +13,9 @@ module DASHI.Governance.QuotedUtteranceContextProvenanceExact where
 -- description of his wording as inappropriate / imprecise and attempted
 -- satire in an interview with Cenk Uygur.
 --
--- Reuters, "UK blocks visits by left-wing US commentators Cenk Uygur and
--- Hasan Piker", 1 June 2026. No DOI asserted.
+-- Reuters,
+-- "UK blocks visits by left-wing US commentators Cenk Uygur and Hasan Piker",
+-- 1 June 2026. No DOI asserted.
 -- Bounded role: later independent reporting that the 2019 statement occurred
 -- and was subsequently characterized by Piker as inappropriate.
 --
@@ -28,7 +29,6 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
 import DASHI.Governance.AmalekProvenanceRoleBinding as Amalek
-import DASHI.Governance.OpenWorldDisconfirmationBoundaryExact as OpenWorld
 
 record QuoteReceipt : Set where
   constructor quoteReceipt
