@@ -3,7 +3,7 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound54FinitePhysicalProdu
 ------------------------------------------------------------------------
 -- ROUND 54 HIGHEST-ALPHA VALIDATION ROOT
 --
--- This root deliberately does NOT claim the Clay cutset is closed.  It records
+-- This root deliberately does NOT claim the Clay cutset is closed. It records
 -- the strongest producer-shaped path after the L1--L5 audit:
 --
 -- L1  literal Federbush cancellation:
@@ -36,7 +36,7 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound54FinitePhysicalProdu
 --
 -- L6  source reuse boundary:
 --       published CMP122 Theorem 1 supplies complete-density preservation only
---       under the small-effective-coupling hypothesis.  The literal Sect.-2
+--       under the small-effective-coupling hypothesis. The literal Sect.-2
 --       coordinate/norm dictionary and the finite diagram/interaction
 --       enclosures remain the source-specific producers.
 --
@@ -49,7 +49,7 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound54FinitePhysicalProdu
 --
 -- L8/L9 are intentionally reused rather than duplicated: the repository
 -- already has reflected-Gram convergence/closed-cone OS transport and the
--- uniform fourth-cumulant -> continuum non-Gaussian implication.  Their actual
+-- uniform fourth-cumulant -> continuum non-Gaussian implication. Their actual
 -- cutoff-measure convergence/moment producers remain conditional.
 ------------------------------------------------------------------------
 
@@ -179,14 +179,34 @@ physicalClusteringExponentConversionLevel =
   PhysicalScale.physicalClusteringExponentConversionLevel
 
 ------------------------------------------------------------------------
--- L8/L9 reuse: no duplicate wrappers.
+-- L8: existing reflected-Gram topology and physical finite-sum adapter.
 ------------------------------------------------------------------------
 
-reflectedGramTopologyLevel = OSGram.reflectedGramTopologyLevel
-physicalReflectedGramConvergenceLevel =
-  PhysicalGram.physicalReflectedGramConvergenceLevel
+osGramQuadraticFormClosureLevel =
+  OSGram.osGramQuadraticFormClosureLevel
+osNonnegativeConeClosureLevel =
+  OSGram.osNonnegativeConeClosureLevel
+measureToSchwingerGramClosureLevel =
+  OSGram.measureToSchwingerGramClosureLevel
+physicalOSGramTopologyIdentificationLevel =
+  OSGram.physicalOSGramTopologyIdentificationLevel
 
-cumulantFiniteLowerToContinuumNonzeroLevel =
-  Cumulant.cumulantFiniteLowerToContinuumNonzeroLevel
-cumulantContinuumNonGaussianLevel =
-  Cumulant.cumulantContinuumNonGaussianLevel
+physicalFiniteGramExpansionLevel =
+  PhysicalGram.physicalFiniteGramExpansionLevel
+finiteGramEntrywiseToQuadraticConvergenceLevel =
+  PhysicalGram.finiteGramEntrywiseToQuadraticConvergenceLevel
+physicalMeasureToOSGramAdapterLevel =
+  PhysicalGram.physicalMeasureToOSGramAdapterLevel
+physicalExpectationConvergenceInputsLevel =
+  PhysicalGram.physicalExpectationConvergenceInputsLevel
+
+------------------------------------------------------------------------
+-- L9: existing finite fourth-cumulant lower bound -> non-Gaussian continuum.
+------------------------------------------------------------------------
+
+uniformCumulantLimitLowerBoundLevel =
+  Cumulant.uniformCumulantLimitLowerBoundLevel
+finiteCumulantToContinuumNontrivialityLevel =
+  Cumulant.finiteCumulantToContinuumNontrivialityLevel
+continuumNonGaussianFromCumulantLevel =
+  Cumulant.continuumNonGaussianFromCumulantLevel
