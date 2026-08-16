@@ -17,15 +17,17 @@ module DASHI.Physics.YangMills.BalabanYM4FiniteLatticeBetaHistoryExact where
 --
 -- Assemble the per-step finite-lattice Gaussian/quartic estimates into the
 -- repository's actual `FiniteLatticeBetaSplit` on one source-normalized
--- coupling trajectory.  This is the missing bridge between the literal
--- plaquette beta calculation and the already-closed UV-history propagation.
+-- coupling trajectory.  This is the bridge between the literal plaquette beta
+-- calculation and the already-closed UV-history propagation.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat; suc)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _≤_)
+open import Data.Rational.Base as ℚ using
+  (ℚ; 0ℚ; _+_; _-_; _*_; _≤_; _/_)
 import Data.Rational.Properties as ℚP
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+import Data.Rational.Tactic.RingSolver as ℚRing
+open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanYM4SourceNormalizedCouplingRecurrenceExact as Flow
@@ -64,13 +66,9 @@ historySplitExact :
   Flow.beta trajectory (suc step)
   ≡ historyBetaZ dataSet step + historyBetaInt dataSet step
 historySplitExact dataSet step =
-  let estimate = estimateAt dataSet step
-  in
-  Relation.Binary.PropositionalEquality.trans
+  trans
     (sym (betaIsTrajectory dataSet step))
-    (Estimate.betaSplitExact estimate)
-  where
-    open import Relation.Binary.PropositionalEquality
+    (Estimate.betaSplitExact (estimateAt dataSet step))
 
 historyGaussianLower :
   ∀ {trajectory} (dataSet : FiniteLatticeBetaHistoryEstimate trajectory) step →
@@ -81,42 +79,51 @@ historyGaussianLower dataSet step =
     (zLowerIsUniform dataSet step)
     (Estimate.gaussianLower (estimateAt dataSet step))
 
+estimateHalfIsSplitHalf : ∀ value →
+  Estimate.half * value ≡ Split.half value
+estimateHalfIsSplitHalf value = ℚRing.solve-∀ value
+
 historyInteractionLower :
   ∀ {trajectory} (dataSet : FiniteLatticeBetaHistoryEstimate trajectory) step →
   0ℚ - Split.half (uniformGaussianLower dataSet)
   ≤ historyBetaInt dataSet step
 historyInteractionLower dataSet step =
-  let estimate = estimateAt dataSet step
+  let
+    estimate = estimateAt dataSet step
+    atEstimateLower :
+      0ℚ - Split.half (Estimate.zLower estimate)
+      ≤ Estimate.betaInt estimate
+    atEstimateLower =
+      subst
+        (λ coefficient → 0ℚ - coefficient ≤ Estimate.betaInt estimate)
+        (estimateHalfIsSplitHalf (Estimate.zLower estimate))
+        (Estimate.interactionSignedLower estimate)
   in
   subst
     (λ lower → 0ℚ - Split.half lower ≤ historyBetaInt dataSet step)
     (zLowerIsUniform dataSet step)
-    (subst
-      (λ coefficient →
-        0ℚ - coefficient ≤ Estimate.betaInt estimate)
-      (Data.Rational.Tactic.RingSolver.solve-∀
-        (Estimate.zLower estimate))
-      (Estimate.interactionSignedLower estimate))
-  where
-    import Data.Rational.Tactic.RingSolver
+    atEstimateLower
 
 historyInteractionUpper :
   ∀ {trajectory} (dataSet : FiniteLatticeBetaHistoryEstimate trajectory) step →
   historyBetaInt dataSet step
   ≤ Split.half (uniformGaussianLower dataSet)
 historyInteractionUpper dataSet step =
-  let estimate = estimateAt dataSet step
+  let
+    estimate = estimateAt dataSet step
+    atEstimateUpper :
+      Estimate.betaInt estimate
+      ≤ Split.half (Estimate.zLower estimate)
+    atEstimateUpper =
+      subst
+        (λ coefficient → Estimate.betaInt estimate ≤ coefficient)
+        (estimateHalfIsSplitHalf (Estimate.zLower estimate))
+        (Estimate.interactionSignedUpper estimate)
   in
   subst
     (λ upper → historyBetaInt dataSet step ≤ Split.half upper)
     (zLowerIsUniform dataSet step)
-    (subst
-      (λ coefficient → Estimate.betaInt estimate ≤ coefficient)
-      (Data.Rational.Tactic.RingSolver.solve-∀
-        (Estimate.zLower estimate))
-      (Estimate.interactionSignedUpper estimate))
-  where
-    import Data.Rational.Tactic.RingSolver
+    atEstimateUpper
 
 finiteEstimatesGiveRepositoryBetaSplit :
   ∀ {trajectory} →
