@@ -15,14 +15,16 @@ module DASHI.Moonshine.OggRepresentationReductionEverything where
 -- theorems and the complete candidate tau fingerprint are independent control
 -- columns, not selector premises.  The prime Fricke coupling imports below
 -- make the first exact representation/modular defect bridge: SO(3) characters
--- reconstruct the elliptic-point part of g(X0(p)), while class-number Fricke
--- fixed points close the quotient defect.  p=2 stays a separate SU(2) spinor
--- boundary rather than being forced through the odd-dimensional SO(3) lane.
+-- reconstruct the elliptic-point part of g(X0(p)); class-number Fricke fixed
+-- points close the quotient defect, orbit saturation, and finite
+-- supersingular/Frobenius two-orbit spectrum.  p=2 stays a separate SU(2)
+-- spinor boundary rather than being forced through the odd SO(3) lane.
 ------------------------------------------------------------------------
 
 import DASHI.Analysis.FiniteRealQSeriesReflectionExact
 import DASHI.Arithmetic.AristotleArithmeticEverything
 import DASHI.Foundations.FiniteRepresentationRestrictionCore
+import DASHI.Foundations.FiniteInvolutionOrbitNormalFormExact
 import DASHI.Foundations.PolyhedralFiniteRestrictionInstancesExact
 import DASHI.Foundations.CandidateIndexedFiniteRestrictionFamilyExact
 import DASHI.Foundations.SU2SO3IrrepDimensionExact
@@ -64,7 +66,10 @@ import DASHI.Moonshine.OggTetrahedralReductionControlExact
 import DASHI.Moonshine.OggPrimeControlMatrixExact
 import DASHI.Moonshine.PrimeFrickeGenusControlExact
 import DASHI.Moonshine.PrimeFrickeOrbitSaturationExact
+import DASHI.Moonshine.SupersingularFrobeniusOrbitSpectrumExact
 import DASHI.Moonshine.PrimeRepresentationFrickeCouplingExact
+import DASHI.Moonshine.PrimeRepresentationFrickeOrbitSaturationExact
+import DASHI.Moonshine.PrimeRepresentationSupersingularOrbitCouplingExact
 import DASHI.Moonshine.AllPrimeRepresentationFrickeClosureExact
 import DASHI.Moonshine.SSPRepresentationHeckeIntertwinerBoundaryExact
 import DASHI.Moonshine.TernarySevenOggSSPComparisonExact
