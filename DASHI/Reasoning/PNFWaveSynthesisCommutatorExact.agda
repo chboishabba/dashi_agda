@@ -4,7 +4,7 @@ module DASHI.Reasoning.PNFWaveSynthesisCommutatorExact where
 -- DASHI CONTRIBUTION
 --
 -- Make the synthesis/transport commutator explicit on the repository's
--- existing finite DiscreteWave carrier.  In this concrete wave realization,
+-- existing finite DiscreteWave carrier. In this concrete wave realization,
 -- synthesis is additive superposition:
 --
 --   Sigma(x,y) = x + y.
@@ -13,12 +13,12 @@ module DASHI.Reasoning.PNFWaveSynthesisCommutatorExact where
 --
 --   delta_Sigma(x,y) = Sigma(Tx,Ty) - T(Sigma(x,y)).
 --
--- Any additive transport has zero defect.  The existing state-indexed finite
+-- Any additive transport has zero defect. The existing state-indexed finite
 -- Schrodinger-style step is additive because its Hamiltonian is scalar
--- multiplication and multiplication by i is additive.  Hence this existing
+-- multiplication and multiplication by i is additive. Hence this existing
 -- finite wave step satisfies the commuting synthesis square exactly.
 --
--- This is a finite integer-pair theorem only.  It does not promote the wave
+-- This is a finite integer-pair theorem only. It does not promote the wave
 -- carrier to analytic Hilbert-space, quantum, psychological or continuum
 -- authority.
 ------------------------------------------------------------------------
@@ -32,9 +32,10 @@ import Tactic.RingSolver.NonReflective as NR
 
 import DASHI.Physics.SchrodingerGapPhaseWaveShiftInstance as SPWSI
 import DASHI.Physics.ShiftDiscreteWaveStep as Wave
+import DASHI.Physics.ShiftPotentialQuadraticEnergy as Energy
 
 module RingZ = NR IntRS.ring
-open RingZ using (Κ; _⊕_; _⊗_; ⊝_; solve)
+open RingZ using (Κ; _⊕_; _⊗_; solve)
 
 zeroWave : Wave.DiscreteWave
 zeroWave = Wave.mkDiscreteWave (+ 0) (+ 0)
@@ -75,10 +76,6 @@ waveSubSelf (Wave.mkDiscreteWave real imag) =
         , Κ (+ 0)))
       refl imag)
 
-------------------------------------------------------------------------
--- Additive maps and the generic defect theorem.
-------------------------------------------------------------------------
-
 record AdditiveWaveTransport : Set₁ where
   constructor additiveWaveTransport
   field
@@ -111,10 +108,6 @@ additiveTransportHasZeroSynthesisDefect transportSurface left right
     (Wave.waveAdd
       (transport transportSurface left)
       (transport transportSurface right))
-
-------------------------------------------------------------------------
--- Existing finite wave operations are additive.
-------------------------------------------------------------------------
 
 scaleWavePreservesSuperposition :
   (scalar : ℤ) →
@@ -233,7 +226,7 @@ shiftHamiltonianIsAdditive :
 shiftHamiltonianIsAdditive state =
   additiveHamiltonian
     (scaleWavePreservesSuperposition
-      (+ (DASHI.Physics.ShiftPotentialQuadraticEnergy.shiftQuadraticEnergy
+      (+ (Energy.shiftQuadraticEnergy
         (SPWSI.ShiftWavePhaseState.carrier state))))
 
 shiftStepIsAdditive :
