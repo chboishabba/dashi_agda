@@ -167,7 +167,7 @@ protectedCapacityProductBound capacity =
     (jointBoundedByProduct capacity)
 
 ------------------------------------------------------------------------
--- AUTHORITY BOUNDARY
+-- AUTHORITY BOUNDARY / CURRENT STATUS
 --
 -- The semantic theorem above proves an actual injection
 --
@@ -175,9 +175,17 @@ protectedCapacityProductBound capacity =
 --
 -- once representatives exist and exact decoding is supplied.
 --
--- Turning that injection into a concrete cardinal inequality still requires a
--- finite-cardinality producer for the actual state/transcript carriers.  For a
--- bounded-cell state this should be supplied by a separate exact product-power
--- count; for an adaptive query/readout procedure it should be supplied by a
--- transcript-tree capacity theorem.  Neither is silently assumed here.
+-- The formerly-missing generic numerical producer now exists downstream:
+-- `MLKEMBoundedCellTranscriptCapacityExact` gives the exact product-power bound
+-- A^m * B^d for bounded state cells and bounded transcript depth.  The FIPS
+-- secret-support and product-CBD average-success instantiations are supplied by
+-- `MLKEMFIPS203ProtectedSecretCapacityExact`,
+-- `MLKEMFIPS203CBDPriorSuccessBoundExact`, and
+-- `MLKEMFIPS203AverageSuccessResourceExact`.
+--
+-- What is still intentionally not supplied here is a claim that an arbitrary
+-- real verifier has a particular finite state alphabet, cell count, transcript
+-- branching factor or depth.  Those are architecture-specific producers and
+-- must be proved for the concrete defensive model before applying the capacity
+-- theorem.  No entropy or generic runtime claim is inferred from capacity alone.
 ------------------------------------------------------------------------
