@@ -17,21 +17,16 @@ module DASHI.Physics.YangMills.BalabanYM4FiniteModeBetaLowerRemainderExact where
 --
 -- DASHI CONTRIBUTION
 --
--- Make L3/L4 finite and compositional.  A Gaussian lower bound is built from
--- PER-MODE lower enclosures, not supplied as `betaZ >= b*`.  Likewise the
+-- Make L3/L4 finite and compositional. A Gaussian lower bound is built from
+-- PER-MODE lower enclosures, not supplied as `betaZ >= b*`. Likewise the
 -- interaction lower bound is built from a finite list of literal interaction
--- atoms, each carrying its O(g^4) coefficient.  The exact finite sums then give
+-- atoms, each carrying its O(g^4) coefficient. Exact finite sums then give
 --
 --   b_* <= beta_Z,
 --   - C_beta g^4 <= beta_int.
 --
--- A separate exact quartic-monotonicity theorem transports g<=gamma into the
--- uniform small-coupling condition C_beta gamma^4 <= b_*/2 and hence
---
---   b_*/2 <= beta_Z + beta_int.
---
--- The remaining physical work is therefore the actual finite Brillouin-mode
--- and interaction-atom enclosure, not this order algebra.
+-- Quartic monotonicity transports g<=gamma into
+-- C_beta gamma^4 <= b_*/2 and hence b_*/2 <= beta_Z + beta_int.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
@@ -186,17 +181,32 @@ interactionLowerCollapsed :
   ≤ betaInt dataSet
 interactionLowerCollapsed dataSet =
   let
-    distributed = Sums.sumRationalScale
-      (power4 (coupling dataSet))
-      (atoms dataSet) (coefficient dataSet)
+    fourth = power4 (coupling dataSet)
     negated = Sums.sumRationalNegate
       (atoms dataSet)
-      (λ atom → coefficient dataSet atom * power4 (coupling dataSet))
+      (λ atom → coefficient dataSet atom * fourth)
+    commuted = Sums.sumRationalCong
+      (atoms dataSet)
+      (λ atom → coefficient dataSet atom * fourth)
+      (λ atom → fourth * coefficient dataSet atom)
+      (λ atom → ℚRing.solve-∀ (coefficient dataSet atom) fourth)
+    distributed = Sums.sumRationalScale
+      fourth (atoms dataSet) (coefficient dataSet)
+    totalCommutes :
+      fourth * interactionCoefficientTotal dataSet
+      ≡ interactionCoefficientTotal dataSet * fourth
+    totalCommutes = ℚRing.solve-∀
+      fourth (interactionCoefficientTotal dataSet)
+    positiveIdentify :
+      Sums.sumRational (atoms dataSet)
+        (λ atom → coefficient dataSet atom * fourth)
+      ≡ interactionCoefficientTotal dataSet * fourth
+    positiveIdentify = trans commuted (trans distributed totalCommutes)
     identify :
       Sums.sumRational (atoms dataSet)
-        (λ atom → - (coefficient dataSet atom * power4 (coupling dataSet)))
-      ≡ - (interactionCoefficientTotal dataSet * power4 (coupling dataSet))
-    identify = trans negated (cong -_ distributed)
+        (λ atom → - (coefficient dataSet atom * fourth))
+      ≡ - (interactionCoefficientTotal dataSet * fourth)
+    identify = trans negated (cong -_ positiveIdentify)
   in
   subst
     (λ lower → lower ≤ betaInt dataSet)
@@ -226,33 +236,43 @@ betaSplitLowerAfterQuarticAbsorption :
     (gaussian : FiniteGaussianModeEnclosure Mode)
     (interaction : FiniteInteractionAtomEnclosure Atom)
     gamma →
-  betaZ gaussian + betaInt interaction ≡ betaZ gaussian + betaInt interaction →
   0ℚ ≤ coupling interaction → 0ℚ ≤ gamma → coupling interaction ≤ gamma →
   0ℚ ≤ interactionCoefficientTotal interaction →
   interactionCoefficientTotal interaction * power4 gamma
     ≤ half * computedGaussianLower gaussian →
   half * computedGaussianLower gaussian
     ≤ betaZ gaussian + betaInt interaction
-betaSplitLowerAfterQuarticAbsorption gaussian interaction gamma refl
+betaSplitLowerAfterQuarticAbsorption gaussian interaction gamma
     couplingNN gammaNN couplingBelow totalNN threshold =
   let
+    b = computedGaussianLower gaussian
+    loss = interactionCoefficientTotal interaction * power4 gamma
     interactionUniform = quarticUniformInteractionLower
       interaction gamma couplingNN gammaNN couplingBelow totalNN
     gaussianBound = computedGaussianLowerIsValid gaussian
+    summed : b - loss ≤ betaZ gaussian + betaInt interaction
     summed = ℚP.+-mono-≤ gaussianBound interactionUniform
-    targetShift :
-      half * computedGaussianLower gaussian
-      ≤ computedGaussianLower gaussian
-        - interactionCoefficientTotal interaction * power4 gamma
+
+    negatedThreshold : - (half * b) ≤ - loss
+    negatedThreshold = ℚP.neg-mono-≤ threshold
+
+    shifted : b + (- (half * b)) ≤ b + (- loss)
+    shifted = ℚP.+-monoʳ-≤ b negatedThreshold
+
+    leftExact : b + (- (half * b)) ≡ half * b
+    leftExact = ℚRing.solve-∀ b
+
+    rightExact : b + (- loss) ≡ b - loss
+    rightExact = ℚRing.solve-∀ b loss
+
+    targetShift : half * b ≤ b - loss
     targetShift =
       subst
-        (λ lower → lower
-          ≤ computedGaussianLower gaussian
-            - interactionCoefficientTotal interaction * power4 gamma)
-        (ℚRing.solve-∀ (computedGaussianLower gaussian))
-        (ℚP.+-monoʳ-≤
-          (half * computedGaussianLower gaussian)
-          (ℚP.neg-mono-≤ threshold))
+        (λ lower → lower ≤ b - loss)
+        leftExact
+        (subst
+          (λ upper → b + (- (half * b)) ≤ upper)
+          rightExact shifted)
   in
   ℚP.≤-trans targetShift summed
 
