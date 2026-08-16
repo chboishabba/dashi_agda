@@ -34,16 +34,12 @@ module DASHI.Moonshine.P11TwoIsogenyFrobeniusNormalFormBridgeExact where
 
 open import DASHI.Core.Prelude
 open import Data.Fin using (Fin; zero; suc)
-open import Data.Sum using (inj₁)
+open import Data.Sum using (inj₁; inj₂)
 
 import DASHI.Foundations.FiniteInvolutionOrbitNormalFormExact as Orbit
 import DASHI.Moonshine.OggPrimeControlMatrixExact as Matrix
 import DASHI.Moonshine.SupersingularFrobeniusOrbitSpectrumExact as Frobenius
 import DASHI.Moonshine.P11ClassicalTwoIsogenyCorrespondenceExact as P11
-
-------------------------------------------------------------------------
--- Existing p=11 orbit data.
-------------------------------------------------------------------------
 
 p11ExistingSpectrum : Orbit.InvolutionOrbitSpectrum
 p11ExistingSpectrum = Frobenius.supersingularOrbitSpectrum Matrix.prime11
@@ -60,10 +56,6 @@ p11TotalCountIsTwo = refl
 P11OrbitNormal : Set
 P11OrbitNormal = Orbit.OrbitNormalFormCarrier 2 0
 
-------------------------------------------------------------------------
--- Explicit chart J11Class <-> OrbitNormalFormCarrier 2 0.
-------------------------------------------------------------------------
-
 toNormal : P11.J11Class → P11OrbitNormal
 toNormal P11.j0 = inj₁ zero
 toNormal P11.j1 = inj₁ (suc zero)
@@ -71,6 +63,7 @@ toNormal P11.j1 = inj₁ (suc zero)
 fromNormal : P11OrbitNormal → P11.J11Class
 fromNormal (inj₁ zero) = P11.j0
 fromNormal (inj₁ (suc zero)) = P11.j1
+fromNormal (inj₂ (() , bit))
 
 fromAfterTo : (state : P11.J11Class) → fromNormal (toNormal state) ≡ state
 fromAfterTo P11.j0 = refl
@@ -79,15 +72,13 @@ fromAfterTo P11.j1 = refl
 toAfterFrom : (state : P11OrbitNormal) → toNormal (fromNormal state) ≡ state
 toAfterFrom (inj₁ zero) = refl
 toAfterFrom (inj₁ (suc zero)) = refl
-
-------------------------------------------------------------------------
--- With no paired summand, the normal-form Frobenius is pointwise identity.
-------------------------------------------------------------------------
+toAfterFrom (inj₂ (() , bit))
 
 p11NormalFrobeniusIsIdentity :
   (state : P11OrbitNormal) → Orbit.orbitInvolution state ≡ state
 p11NormalFrobeniusIsIdentity (inj₁ zero) = refl
 p11NormalFrobeniusIsIdentity (inj₁ (suc zero)) = refl
+p11NormalFrobeniusIsIdentity (inj₂ (() , bit))
 
 jClassNormalFrobenius : P11.J11Class → P11.J11Class
 jClassNormalFrobenius state =
@@ -97,11 +88,6 @@ jClassNormalFrobeniusIsIdentity :
   (state : P11.J11Class) → jClassNormalFrobenius state ≡ state
 jClassNormalFrobeniusIsIdentity P11.j0 = refl
 jClassNormalFrobeniusIsIdentity P11.j1 = refl
-
-------------------------------------------------------------------------
--- Every one of the three ell=2 neighbours commutes with the normal-form
--- Frobenius action.
-------------------------------------------------------------------------
 
 twoIsogenyCommutesWithNormalFrobenius :
   (state : P11.J11Class) →
@@ -115,10 +101,6 @@ twoIsogenyCommutesWithNormalFrobenius P11.j0 (suc (suc zero)) = refl
 twoIsogenyCommutesWithNormalFrobenius P11.j1 zero = refl
 twoIsogenyCommutesWithNormalFrobenius P11.j1 (suc zero) = refl
 twoIsogenyCommutesWithNormalFrobenius P11.j1 (suc (suc zero)) = refl
-
-------------------------------------------------------------------------
--- Boundary.
-------------------------------------------------------------------------
 
 record P11FrobeniusNormalFormBoundary : Set where
   field
