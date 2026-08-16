@@ -2,8 +2,12 @@ module DASHI.Moonshine.OggRepresentationReductionRegression where
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (false)
+open import Data.Integer using (+_; -[1+_])
 
 import DASHI.Biology.TernaryMonsterSymmetryCandidateExact as Candidate
+import DASHI.Foundations.FiniteRepresentationRestrictionCore as RestrictionCore
+import DASHI.Foundations.PolyhedralFiniteRestrictionInstancesExact as Instances
+import DASHI.Foundations.CandidateIndexedFiniteRestrictionFamilyExact as IndexedFamily
 import DASHI.Foundations.D4SO3NineIrrepRestrictionExact as D4
 import DASHI.Foundations.D4SO3RestrictionJ0To35Exact as D4Scan
 import DASHI.Foundations.D4SO3RestrictionCharacterJ0To35Exact as D4Character
@@ -16,9 +20,12 @@ import DASHI.Foundations.IcosahedralSO3RestrictionJ0To35Exact as Ico
 import DASHI.Foundations.IcosahedralSO3RestrictionCharacterJ0To35Exact as IcoCharacter
 import DASHI.Foundations.PolyhedralFixedSpaceSpectrumJ0To35Exact as Fixed
 import DASHI.Foundations.PolyhedralFixedSpaceDerivedNonaryExact as DerivedNonary
+import DASHI.Foundations.PolyhedralInvariantFixedSpaceSignatureExact as InvariantSig
 import DASHI.Foundations.PolyhedralRestrictionCriticalCharacterExact as Character
 import DASHI.Foundations.PolyhedralRegularRepresentationShiftExact as Regular
 import DASHI.Moonshine.CandidateLevelRepresentationHeckeSquareExact as CandidateSquare
+import DASHI.Moonshine.CandidateLevelExternalOggPredicateExact as ExternalOgg
+import DASHI.Moonshine.RamanujanTauCandidateFingerprintJ0To35Exact as Tau
 import DASHI.Moonshine.ModularCurveJFrickeInterfaceExact as Modular
 import DASHI.Moonshine.OggPolyhedralReductionControlExact as Control
 import DASHI.Moonshine.OggTetrahedralReductionControlExact as TetControl
@@ -44,6 +51,28 @@ candidateSquareIncludesNonOggNine :
     (CandidateSquare.spatialLevel Spin.j4)
   ≡ 9
 candidateSquareIncludesNonOggNine = refl
+
+------------------------------------------------------------------------
+-- The generic restriction carrier has concrete, target-consistent instances.
+------------------------------------------------------------------------
+
+d4GenericInstanceHasJ4Source :
+  RestrictionCore.sourceIrrep (Instances.d4FiniteRestriction Spin.j4)
+  ≡ Spin.continuousSO3Irrep Spin.j4
+d4GenericInstanceHasJ4Source = refl
+
+octahedralIndexedFamilyUsesDeclaredTarget :
+  RestrictionCore.targetFamily
+    (IndexedFamily.assembledRestriction
+      IndexedFamily.octahedralConstantFamily Spin.j4)
+  ≡ Oct.octahedralFamily
+octahedralIndexedFamilyUsesDeclaredTarget =
+  IndexedFamily.octahedralAssemblyUsesDeclaredTarget Spin.j4
+
+exactCandidateDependentSSPFamilyStillOpen :
+  IndexedFamily.ConstructedExactSSPReductionFamily → ⊥
+exactCandidateDependentSSPFamilyStillOpen =
+  IndexedFamily.noExactSSPReductionFamilyConstructedHere
 
 ------------------------------------------------------------------------
 -- Five irreps of nine: actual SO(3) j=4 restriction to rotational D4.
@@ -166,8 +195,38 @@ sevenAndFortyThreeDerivedNonaryCollide :
 sevenAndFortyThreeDerivedNonaryCollide =
   DerivedNonary.j3AndJ21DerivedNonaryCollide
 
+fourLensFixedSpace29And35Collide :
+  InvariantSig.invariantSignature Spin.j14
+  ≡ InvariantSig.invariantSignature Spin.j17
+fourLensFixedSpace29And35Collide =
+  InvariantSig.ogg29AndNonOgg35HaveSameFixedSpaceSignature
+
+thirtyFiveIsNotOgg : Control.OggDimensionWitness 35 → ⊥
+thirtyFiveIsNotOgg = InvariantSig.dimension35IsNotOgg
+
 ------------------------------------------------------------------------
--- Arithmetic/modular side remains independent until an intertwiner is built.
+-- Arithmetic/modular column is complete on the same unbiased candidate scan.
+------------------------------------------------------------------------
+
+externalOggNineStillNegative : ExternalOgg.ExternalOggAt 9 → ⊥
+externalOggNineStillNegative = ExternalOgg.dimension9IsNotExternallyOgg
+
+tau2MatchesExistingHeckeChecksum :
+  Tau.tauAtCandidateLevel CandidateSquare.spinorLevel2 ≡ -[1+ 23 ]
+tau2MatchesExistingHeckeChecksum = Tau.tauAt2MatchesExisting
+
+tau29Fingerprint :
+  Tau.tauAtCandidateLevel (CandidateSquare.spatialLevel Spin.j14)
+  ≡ + 128406630
+tau29Fingerprint = Tau.tauAt29
+
+tau35Fingerprint :
+  Tau.tauAtCandidateLevel (CandidateSquare.spatialLevel Spin.j17)
+  ≡ -[1+ 80873519 ]
+tau35Fingerprint = Tau.tauAt35
+
+------------------------------------------------------------------------
+-- The actual representation/Hecke exceptional-locus theorem remains open.
 ------------------------------------------------------------------------
 
 existingCarrierEqualityStillOpen :
