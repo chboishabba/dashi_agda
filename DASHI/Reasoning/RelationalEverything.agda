@@ -24,5 +24,6 @@ import DASHI.Reasoning.DevelopmentalAttunementPNFBridge
 import DASHI.Reasoning.DevelopmentalExplanationWithdrawalExact
 import DASHI.Reasoning.RelationalFormalismSourceAtlas
 import DASHI.Reasoning.RelationalBranchGeometrySourceAtlas
+import DASHI.Reasoning.TernarySynthesisOrbitWeldEverything
 import DASHI.Reasoning.RelationalRegression
 import DASHI.Reasoning.RelationalBranchGeometryRegression
