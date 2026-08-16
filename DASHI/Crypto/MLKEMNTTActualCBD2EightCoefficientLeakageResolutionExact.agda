@@ -84,10 +84,6 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; _+_; _*_)
 open import Data.Empty using (⊥)
 
-------------------------------------------------------------------------
--- Exhaustive-enumeration profile carrier.
-------------------------------------------------------------------------
-
 record LeakageResolutionProfile : Set where
   constructor leakage-resolution-profile
   field
@@ -117,10 +113,6 @@ pair02CandidateCount = refl
 pair03CandidateCount : candidates pair03 ≡ 390625
 pair03CandidateCount = refl
 
-------------------------------------------------------------------------
--- Exact finite-list-mass arithmetic.
-------------------------------------------------------------------------
-
 pair01MassFromCollisionPairs :
   conditionalMass pair01 ≡ candidates pair01 + 2 * collisionPairs pair01
 pair01MassFromCollisionPairs = refl
@@ -144,11 +136,6 @@ pair03EnumerationHasUnitMaxFibre = refl
 
 ------------------------------------------------------------------------
 -- Semantic raw-signature injectivity interface.
---
--- The numerical profile above is a pinned exhaustive-computation result.  A
--- semantic theorem that some raw signature determines a carrier element should
--- consume an explicit injectivity certificate rather than silently treating the
--- Python enumeration as a kernel proof.
 ------------------------------------------------------------------------
 
 RawInjectiveOn : ∀ {Secret Raw : Set} → (Secret → Raw) → Set
@@ -164,12 +151,7 @@ rawInjectiveCollapsesRawFibre raw injective left right sameRaw =
   injective left right sameRaw
 
 ------------------------------------------------------------------------
--- Observation coarsening boundary.
---
--- A real implementation generally exposes observe(raw(secret)), not raw(secret)
--- itself.  Equal raw signatures always remain equal after coarsening, but the
--- converse need not hold.  The tiny counterexample below makes this logical
--- boundary kernel-visible.
+-- Observation coarsening.
 ------------------------------------------------------------------------
 
 record ObservationCoarsening : Set₁ where
@@ -192,6 +174,67 @@ sameRawImpliesSameObserved :
   rawSignature channel left ≡ rawSignature channel right →
   coarsenedObservation channel left ≡ coarsenedObservation channel right
 sameRawImpliesSameObserved channel left right refl = refl
+
+------------------------------------------------------------------------
+-- Exact criterion for when a coarsening preserves the dangerous raw resolution.
+--
+-- This is the implementation-facing target for Hamming-weight/distance, timing,
+-- masked-share, frequency, cache-line or other concrete channels: equality of
+-- the *observed* values must reflect equality of the raw signatures on the
+-- actual secret image.  Global injectivity of `observe` outside that image is
+-- unnecessary.
+------------------------------------------------------------------------
+
+ObservationReflectsRawOnSecretImage : ObservationCoarsening → Set
+ObservationReflectsRawOnSecretImage channel =
+  ∀ left right →
+  coarsenedObservation channel left ≡ coarsenedObservation channel right →
+  rawSignature channel left ≡ rawSignature channel right
+
+coarseningPreservesInjectivityExactlyWhenItReflectsRaw :
+  (channel : ObservationCoarsening) →
+  RawInjectiveOn (rawSignature channel) →
+  ObservationReflectsRawOnSecretImage channel →
+  RawInjectiveOn (coarsenedObservation channel)
+coarseningPreservesInjectivityExactlyWhenItReflectsRaw
+  channel rawInjective reflectsRaw left right observedSame =
+  rawInjective left right (reflectsRaw left right observedSame)
+
+record CoarseningCollisionWitness (channel : ObservationCoarsening) : Set where
+  constructor coarsening-collision-witness
+  field
+    left right : Secret channel
+    rawDifferent :
+      rawSignature channel left ≡ rawSignature channel right → ⊥
+    observedSame :
+      coarsenedObservation channel left ≡ coarsenedObservation channel right
+
+open CoarseningCollisionWitness public
+
+coarseningCollisionRefutesObservedInjectivity :
+  ∀ {channel : ObservationCoarsening} →
+  CoarseningCollisionWitness channel →
+  RawInjectiveOn (coarsenedObservation channel) →
+  ⊥
+coarseningCollisionRefutesObservedInjectivity witness observedInjective =
+  rawDifferent witness
+    (λ-equality-forbidden
+      (observedInjective
+        (left witness)
+        (right witness)
+        (observedSame witness)))
+  where
+  -- If the coarsened observation were injective, the two secrets would be
+  -- equal; congruence of the raw signature would then contradict rawDifferent.
+  λ-equality-forbidden :
+    left witness ≡ right witness →
+    rawSignature channel (left witness) ≡ rawSignature channel (right witness)
+  λ-equality-forbidden refl = refl
+
+------------------------------------------------------------------------
+-- Tiny exact counterexample showing why raw injectivity cannot be promoted to
+-- physical observation injectivity without the reflection criterion.
+------------------------------------------------------------------------
 
 data Secret2 : Set where
   secret0 secret1 : Secret2
@@ -228,17 +271,33 @@ coarsenedPairCollides = refl
 coarsenedPairSecretsDiffer : secret0 ≡ secret1 → ⊥
 coarsenedPairSecretsDiffer ()
 
+rawPairDifferent : raw2 secret0 ≡ raw2 secret1 → ⊥
+rawPairDifferent ()
+
+finiteCoarseningCollision : CoarseningCollisionWitness coarseningCounterexample
+finiteCoarseningCollision =
+  coarsening-collision-witness secret0 secret1 rawPairDifferent refl
+
+finiteCoarseningNotInjective :
+  RawInjectiveOn (coarsenedObservation coarseningCounterexample) → ⊥
+finiteCoarseningNotInjective =
+  coarseningCollisionRefutesObservedInjectivity finiteCoarseningCollision
+
 ------------------------------------------------------------------------
--- AUTHORITY BOUNDARY
+-- AUTHORITY BOUNDARY / CURRENT STATUS
 --
--- The three profile values are reproducible exhaustive finite-computation
--- regressions pinned in the Python script.  This Agda module checks their exact
--- arithmetic consequences and the semantic observation boundary; it does not
--- replay 390625-point enumeration in the kernel.
+-- The large 5^8 profile remains a reproducible discovery regression rather than
+-- a kernel enumeration.  Round 17 now also contains the compact proof route:
 --
--- To promote the (0,3) raw collision-free result to a semantic Agda injectivity
--- theorem, provide a compact proof/certificate for the actual eight-coefficient
--- signature map.  To promote that further to an implementation leakage claim,
--- prove that the admitted physical observation channel preserves the required
--- distinctions.  Neither step is silently assumed here.
+--   MLKEMNTTPair03CubicRootFactorReductionExact
+--     -> MLKEMNTTPair03ReducedKernelCertificateExact
+--
+-- which reduces the semantic raw-kernel problem to 81^2 = 6561 bounded states.
+-- The remaining same-object step is the canonical F_3329 bridge from equality
+-- of actual raw pair-(0,3) signatures to those reduced equations.
+--
+-- Separately, the theorem above identifies exactly what a real physical channel
+-- must prove before raw injectivity matters: observation equality must reflect
+-- raw-signature equality on the actual secret image.  No such implementation-
+-- specific Hamming/timing/masking/frequency theorem is silently assumed.
 ------------------------------------------------------------------------
