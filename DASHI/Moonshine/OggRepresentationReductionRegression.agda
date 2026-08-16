@@ -5,11 +5,16 @@ open import Agda.Builtin.Bool using (false)
 
 import DASHI.Biology.TernaryMonsterSymmetryCandidateExact as Candidate
 import DASHI.Foundations.D4SO3NineIrrepRestrictionExact as D4
+import DASHI.Foundations.D4SO3RestrictionJ0To35Exact as D4Scan
+import DASHI.Foundations.D4SO3RestrictionCharacterJ0To35Exact as D4Character
 import DASHI.Foundations.SU2SO3IrrepDimensionExact as Spin
 import DASHI.Foundations.OctahedralSO3RestrictionJ0To35Exact as Oct
+import DASHI.Foundations.OctahedralSO3RestrictionCharacterJ0To35Exact as OctCharacter
 import DASHI.Foundations.IcosahedralSO3RestrictionJ0To35Exact as Ico
+import DASHI.Foundations.IcosahedralSO3RestrictionCharacterJ0To35Exact as IcoCharacter
 import DASHI.Foundations.PolyhedralFixedSpaceSpectrumJ0To35Exact as Fixed
 import DASHI.Foundations.PolyhedralRestrictionCriticalCharacterExact as Character
+import DASHI.Foundations.PolyhedralRegularRepresentationShiftExact as Regular
 import DASHI.Moonshine.ModularCurveJFrickeInterfaceExact as Modular
 import DASHI.Moonshine.OggPolyhedralReductionControlExact as Control
 import DASHI.Moonshine.SSPRepresentationHeckeIntertwinerBoundaryExact as Intertwiner
@@ -52,6 +57,31 @@ rawNineCellIsDifferentRepresentation :
 rawNineCellIsDifferentRepresentation = D4.rawNinePermutationIsNotJ4Restriction
 
 ------------------------------------------------------------------------
+-- Full character certification, not only selected rows.
+------------------------------------------------------------------------
+
+d4AllRowsCharacterExact :
+  (j : Spin.AngularMomentum0To35) →
+  (class : D4.D4RotationClass) →
+  D4Character.branchingCharacter (D4Scan.branchingSpectrum j) class
+  ≡ D4Character.restrictedCharacter j class
+d4AllRowsCharacterExact = D4Character.branchingCharacterExact
+
+octahedralAllRowsCharacterExact :
+  (j : Spin.AngularMomentum0To35) →
+  (class : Oct.OctahedralClass) →
+  Character.octahedralBranchingCharacter (Oct.branchingSpectrum j) class
+  ≡ Character.restrictedOctahedralCharacter j class
+octahedralAllRowsCharacterExact = OctCharacter.branchingCharacterExact
+
+icosahedralAllRowsCharacterExact :
+  (j : Spin.AngularMomentum0To35) →
+  (class : Ico.IcosahedralClass) →
+  Character.icosahedralBranchingCharacter (Ico.branchingSpectrum j) class
+  ≡ Character.restrictedIcosahedralCharacter j class
+icosahedralAllRowsCharacterExact = IcoCharacter.branchingCharacterExact
+
+------------------------------------------------------------------------
 -- Non-Ogg controls and regular-quotient no-go results.
 ------------------------------------------------------------------------
 
@@ -64,6 +94,18 @@ fiftyThreeIsNotOgg = Control.dimension53IsNotOgg
 sixtySevenIsNotOgg : Control.OggDimensionWitness 67 → ⊥
 sixtySevenIsNotOgg = Control.dimension67IsNotOgg
 
+d4RegularPeriodIsFour :
+  Regular.nonidentityCharacterPeriod Regular.rotationalD4 ≡ 4
+d4RegularPeriodIsFour = refl
+
+octahedralRegularPeriodIsTwelve :
+  Regular.nonidentityCharacterPeriod Regular.rotationalOctahedral ≡ 12
+octahedralRegularPeriodIsTwelve = refl
+
+icosahedralRegularPeriodIsThirty :
+  Regular.nonidentityCharacterPeriod Regular.rotationalIcosahedral ≡ 30
+icosahedralRegularPeriodIsThirty = refl
+
 octahedral5To53RegularCollision :
   Oct.branchingSpectrum Spin.j26
   ≡ Oct.addSpectrum Oct.regularSpectrum
@@ -74,22 +116,6 @@ icosahedral7To67RegularCollision :
   Ico.branchingSpectrum Spin.j33
   ≡ Ico.addSpectrum Ico.regularSpectrum (Ico.branchingSpectrum Spin.j3)
 icosahedral7To67RegularCollision = Ico.j3ToJ33IsOneRegularShift
-
-------------------------------------------------------------------------
--- Character certification for the rows used by those controls.
-------------------------------------------------------------------------
-
-nineOctahedralCharacterExact :
-  (class : Oct.OctahedralClass) →
-  Character.octahedralBranchingCharacter (Oct.branchingSpectrum Spin.j4) class
-  ≡ Character.restrictedOctahedralCharacter Spin.j4 class
-nineOctahedralCharacterExact = Character.j4OctahedralCharacterExact
-
-sevenIcosahedralCharacterExact :
-  (class : Ico.IcosahedralClass) →
-  Character.icosahedralBranchingCharacter (Ico.branchingSpectrum Spin.j3) class
-  ≡ Character.restrictedIcosahedralCharacter Spin.j3 class
-sevenIcosahedralCharacterExact = Character.j3IcosahedralCharacterExact
 
 ------------------------------------------------------------------------
 -- Actual fixed-space probes: C3 is not the six-element S3 permutation group.
