@@ -38,8 +38,9 @@ module DASHI.Physics.Closure.NSTriadKNComActiveSixThreeRealizationRound61Exact w
 --
 --   same shell       <= 17/64,
 --   forward adjacent <= 65/512,
---   reverse adjacent <= 65/512.
+--   reverse adjacent <= 65/512,
 --
+-- and the Round60 aggregate gives the full bandwidth-one mass <= 133/256.
 -- Thus B3 is no longer an independent premise once B1+B2 are proved on the
 -- physical normalized carrier.
 ------------------------------------------------------------------------
@@ -53,6 +54,7 @@ import Data.Rational.Properties as ℚP
 import DASHI.Physics.Closure.NSTriadKNComCommonHatSupportLeafRound58 as Hat
 import DASHI.Physics.Closure.NSTriadKNComNormalizedFibreMassLeafRound58 as LightGram
 import DASHI.Physics.Closure.NSTriadKNComNormalizedFibreSourceRound60Exact as Source
+import DASHI.Physics.Closure.NSTriadKNComNormalizedFibreAggregateRound60Exact as Aggregate
 import DASHI.Physics.Closure.NSTriadKNComGramInterferenceRound35Exact as Gram
 import DASHI.Physics.Closure.NSTriadKNComSameAdjacentActiveRound47Exact as Legacy
 import DASHI.Physics.Closure.NSTriadKNComDyadicHatWidthOneRound46Exact as HatWidth
@@ -162,6 +164,16 @@ asPhysicalNormalizedOddPQSource physical = record
   ; reverseAdjacentDistance = reverseAdjacentDistance physical
   ; inactiveSupportAnnihilatesPairProduct = inactivePairProductZero physical
   }
+
+fullBandwidthOneMassBelow133Over256 :
+  (physical : PhysicalActiveSixThreeOddPQSource) →
+  ∀ q →
+  Aggregate.normalizedOddPQBandwidthOneMass
+    (asPhysicalNormalizedOddPQSource physical) q
+  ≤ Aggregate.bandwidthOneTarget
+fullBandwidthOneMassBelow133Over256 physical =
+  Aggregate.normalizedOddPQBandwidthOneMassBelow133Over256
+    (asPhysicalNormalizedOddPQSource physical)
 
 b3DerivedFromActiveSixThreeSameObject : Bool
 b3DerivedFromActiveSixThreeSameObject = true
