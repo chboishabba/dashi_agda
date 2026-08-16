@@ -12,13 +12,24 @@ set -euo pipefail
 
 REPO_ROOT="${DASHI_REPO_ROOT:-$(cd "$(dirname "$0")/.." && pwd)}"
 cd "$REPO_ROOT"
+export DASHI_REPO_ROOT="$REPO_ROOT"
 
 export AGDA_JOBS="${AGDA_JOBS:-1}"
-export AGDA_RTS_HEAP="${AGDA_RTS_HEAP:--M20G}"
+export AGDA_RTS_HEAP="${AGDA_RTS_HEAP:-20G}"
 export DASHI_NO_TMUX=1
 export DASHI_AGDA29_EPHEMERAL="${DASHI_AGDA29_EPHEMERAL:-0}"
-export DASHI_AGDA29_CLEAN="${DASHI_AGDA29_CLEAN:-0}"
+INITIAL_CLEAN="${DASHI_AGDA29_CLEAN:-0}"
+export DASHI_AGDA29_CLEAN=0
 export DASHI_AGDA29_CACHE_ROOT="${DASHI_AGDA29_CACHE_ROOT:-${XDG_CACHE_HOME:-$HOME/.cache}/dashi-agda29-ns-cut}"
+
+# `time` is not part of the minimal runner image on every worker.  Prefer the
+# native binary, but resolve the same GNU resource sampler through Nix when it
+# is absent.  Keep this as an argv array so paths/arguments remain unambiguous.
+if [ -x /usr/bin/time ]; then
+  TIME_CMD=(/usr/bin/time)
+else
+  TIME_CMD=(nix shell nixpkgs#time --command time)
+fi
 
 OUT_DIR="${NS_CUT_PROFILE_DIR:-$REPO_ROOT/.cache/ns-agda-cut-profile}"
 mkdir -p "$OUT_DIR"
@@ -56,6 +67,7 @@ echo "  full:   ${FULL:-0}"
 echo "  csv:    $CSV"
 echo
 
+first_target=1
 for target in "${TARGETS[@]}"; do
   slug="${target//\//__}"
   slug="${slug%.agda}"
@@ -64,8 +76,13 @@ for target in "${TARGETS[@]}"; do
 
   echo "=== $target ==="
   set +e
-  /usr/bin/time -f '%e %M' -o "$time_file" \
+  clean_for_target=0
+  if [ "$first_target" -eq 1 ]; then
+    clean_for_target="$INITIAL_CLEAN"
+  fi
+  "${TIME_CMD[@]}" -f '%e %M' -o "$time_file" \
     env AGDA_LOG_PATH="$log_file" \
+      DASHI_AGDA29_CLEAN="$clean_for_target" \
       bash scripts/run_agda29_parallel_check.sh "$target"
   rc=$?
   set -e
@@ -83,6 +100,7 @@ for target in "${TARGETS[@]}"; do
     echo "Stopping at first nonzero target; inspect $log_file" >&2
     exit "$rc"
   fi
+  first_target=0
 done
 
 # Produce the static graph ranking beside the measured ladder.  Previously
