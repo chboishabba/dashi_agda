@@ -37,7 +37,9 @@ module DASHI.Physics.Closure.NSTriadKNLuoFiniteSixThreeKernelDimensionFreeExact 
 -- COMPILER NOTE
 -- This module needs only elementary ordered-rational positivity/monotonicity.
 -- It intentionally imports the tiny FiniteRationalOrderCore rather than the
--- full recursive finite-L2/Gram development.
+-- full recursive finite-L2/Gram development.  The constant-one Holder theorem
+-- is likewise taken from the compiled-core variant that does not import the
+-- legacy recursive Gram proof.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.List using (List; []; _∷_)
@@ -49,7 +51,7 @@ open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteRationalOrderCore as Core
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteEightPointSixThreeHolderExact as Eight
-import DASHI.Physics.Closure.NSTriadKNLuoFiniteSixThreeHolderConstantOneV2Exact as Holder
+import DASHI.Physics.Closure.NSTriadKNLuoFiniteSixThreeHolderConstantOneCompiledExact as Holder
 
 record FiniteSixThreeBranchData : Set where
   constructor finite-six-three-branch-data
