@@ -27,14 +27,14 @@ module DASHI.Physics.YangMills.BalabanBishopNormalizedOuterMomentumGapExact wher
 
 import Real as BishopReal
 
+import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact as Elementary
 import DASHI.Physics.YangMills.BalabanBishopSineTwoBallCubicLowerExact as Sine
 import DASHI.Physics.YangMills.BalabanBishopOuterBrillouinSineGapExact as Gap
 import DASHI.Physics.YangMills.BalabanBishopNormalizedOuterMomentumAngleExact as Angle
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 record NormalizedOuterMomentumGapData
-    (dataSet : DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact.BishopElementaryPowerSeriesData)
-    : Set₁ where
+    (dataSet : Elementary.BishopElementaryPowerSeriesData) : Set₁ where
   field
     angleData : Angle.NormalizedOuterMomentumAngleData
     sineInputs : Sine.ConcreteTwoBallSineInputs dataSet (Angle.angle angleData)
@@ -46,8 +46,7 @@ normalizedOuterSineLower :
   (data : NormalizedOuterMomentumGapData dataSet) →
   BishopReal._≤_
     (Gap.embed Gap.lowerSine)
-    (DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact.bishopSin
-      dataSet (Angle.angle (angleData data)))
+    (Elementary.bishopSin dataSet (Angle.angle (angleData data)))
 normalizedOuterSineLower data =
   Gap.sineAboveEightySevenOverOneTwentyEight
     (sineInputs data)
