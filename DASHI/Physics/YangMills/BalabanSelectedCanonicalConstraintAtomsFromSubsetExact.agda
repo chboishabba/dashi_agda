@@ -26,6 +26,7 @@ module DASHI.Physics.YangMills.BalabanSelectedCanonicalConstraintAtomsFromSubset
 -- Owner maps may classify the resulting atoms but cannot replace their values.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_)
 open import Data.Rational.Base as ℚ using (ℚ)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
