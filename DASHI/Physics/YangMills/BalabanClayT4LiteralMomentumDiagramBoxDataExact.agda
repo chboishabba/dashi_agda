@@ -2,12 +2,13 @@ module DASHI.Physics.YangMills.BalabanClayT4LiteralMomentumDiagramBoxDataExact w
 
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Equality using (_≡_)
-open import Data.Rational using (ℚ; _+_; _-_; _*_; _≤_; _/_)
+open import Data.Rational using (ℚ; 0ℚ; _+_; _-_; _*_; _≤_; _<_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayT4LiteralDiagramWardCancellationExact as Ward
 import DASHI.Physics.YangMills.BalabanClayT4ConfiguredBrillouinBoxReceiptFamilyExact as Boxes
 import DASHI.Physics.YangMills.BalabanClayT4ConfiguredBrillouinIntegralCertificateExact as Integral
+import DASHI.Physics.YangMills.BalabanClayT4PositiveDenominatorQuotientEndpointsExact as Quotient
 
 ------------------------------------------------------------------------
 -- Literature normalization.
@@ -26,8 +27,16 @@ import DASHI.Physics.YangMills.BalabanClayT4ConfiguredBrillouinIntegralCertifica
 -- Theories. I", Communications in Mathematical Physics 109 (1987), 249--301.
 -- DOI: 10.1007/BF01215223
 -- Relationship: Eqs. (5.36)--(5.41) are the transverse-kernel and coefficient
--- falsification target.  All lattice numerators below are derived from the fixed
+-- falsification target. All lattice numerators below are derived from the fixed
 -- Wilson, ghost and Haar conventions.
+--
+-- The regular-box quotient endpoints are sign-aware. A positive denominator
+-- interval is not by itself enough to justify nL/dU and nU/dL: the appropriate
+-- denominator endpoint depends on the sign of the numerator enclosure. The
+-- lower denominator endpoint is now a typed positive rational proof and every
+-- box carries dL<=dU explicitly, allowing the exact rational quotient theorem
+-- to discharge division soundness once the pointwise numerator/denominator
+-- enclosure is instantiated.
 ------------------------------------------------------------------------
 
 record LatticeMomentum4 (Momentum Lorentz Scalar : Set) : Set₁ where
@@ -159,11 +168,23 @@ record GeneratedRegularMomentumBox : Set₁ where
     sinHalfMomentumEnclosure : Set
     cosineMomentumEnclosure : Set
     propagatorDenominatorEnclosure : Set
-    propagatorDenominatorStrictlyPositive : Set
+    propagatorDenominatorStrictlyPositive : 0ℚ < denominatorLower
+    denominatorBoundsOrdered : denominatorLower ≤ denominatorUpper
     diagramNumeratorEnclosure : Set
 
-    quotientLowerExact : integrandLower ≡ numeratorLower / denominatorUpper
-    quotientUpperExact : integrandUpper ≡ numeratorUpper / denominatorLower
+    numeratorSignCase :
+      Quotient.NumeratorSignCase numeratorLower numeratorUpper
+
+    quotientLowerExact :
+      integrandLower
+      ≡ Quotient.quotientLowerEndpoint
+          numeratorSignCase denominatorLower denominatorUpper
+          propagatorDenominatorStrictlyPositive denominatorBoundsOrdered
+    quotientUpperExact :
+      integrandUpper
+      ≡ Quotient.quotientUpperEndpoint
+          numeratorSignCase denominatorLower denominatorUpper
+          propagatorDenominatorStrictlyPositive denominatorBoundsOrdered
     integrandEnclosure : Set
     quadratureRemainderUpper : Set
 
@@ -190,8 +211,10 @@ asLiteralRegularBoxIntegrandData dataSet = record
   ; integrandUpper = integrandUpper dataSet
   ; quadratureError = quadratureRemainder dataSet
   ; denominatorLowerPositive = propagatorDenominatorStrictlyPositive dataSet
+  ; denominatorBoundsOrdered = denominatorBoundsOrdered dataSet
   ; denominatorEnclosureValid = propagatorDenominatorEnclosure dataSet
   ; numeratorTaylorEnclosureOnBox = diagramNumeratorEnclosure dataSet
+  ; numeratorSignCase = numeratorSignCase dataSet
   ; quotientLowerCorrect = quotientLowerExact dataSet
   ; quotientUpperCorrect = quotientUpperExact dataSet
   ; integrandEnclosureOnBox = integrandEnclosure dataSet
