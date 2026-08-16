@@ -13,15 +13,17 @@ open import DASHI.Ontology.LeanWikidataSourceRegressionBridge
 -- Content-addressed normalisation of RequestProject.ClassAlgebra's artistKB.
 -- The exact canonical payload is committed as:
 --   third_party/jmdupont_wikidata_lean/fixtures/artistKB.canonical.tsv
+-- and is reproducible from artistKB.graph.json with
+-- scripts/canonicalize_james_wikidata_graph.py.
 -- SHA-256:
---   05ba35f5ca702fd446a8dc290244e299e717f63bcc571b4aaf3b78e3c7927a8b
+--   6e7c185bd7d97fa0eff022e9e3f51219158215bd15f2e79f938645e86c1c3723
 ------------------------------------------------------------------------
 
 artistGraph : ConcreteQidGraphAdapter
 artistGraph =
   concreteQidGraphAdapter
     "RequestProject.ClassAlgebra:ClassAlgebraExample.artistKB"
-    "05ba35f5ca702fd446a8dc290244e299e717f63bcc571b4aaf3b78e3c7927a8b"
+    "6e7c185bd7d97fa0eff022e9e3f51219158215bd15f2e79f938645e86c1c3723"
     ("Q483501" ∷ "Q1028181" ∷ "Q1281618" ∷ "Q-painter-sculptor" ∷ "Q5592" ∷ "Q762" ∷ [])
     ("P31:Q5592->Q-painter-sculptor" ∷ "P31:Q762->Q1028181" ∷ [])
     ("P279:Q1028181->Q483501" ∷ "P279:Q1281618->Q483501" ∷
@@ -35,7 +37,7 @@ artistUnionExecution =
     artistGraph
     "ae06ae06-2580-422a-8fc3-92aeaaca8762"
     "d394cd224742dea06a47d2cc6c150e9284e2d6ea291a02c3ba2b2dd04d4f5f88"
-    "05ba35f5ca702fd446a8dc290244e299e717f63bcc571b4aaf3b78e3c7927a8b"
+    "6e7c185bd7d97fa0eff022e9e3f51219158215bd15f2e79f938645e86c1c3723"
     "Wikidata.ClassAlgebraExample.artistKB_unionOk"
     true
     true
