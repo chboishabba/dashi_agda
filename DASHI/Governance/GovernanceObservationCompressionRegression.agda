@@ -4,8 +4,12 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Bool using (false; true)
 open import Data.Empty using (⊥)
 
+import DASHI.Core.ObservationLanguageRefinementExact as Observation
 import DASHI.Governance.FutureSafeCausalCompressionExact as Compression
+import DASHI.Governance.ObservationRelativeReificationRegressionExact as Reification
 import DASHI.Governance.AsymmetricLegibilityContestabilityExact as Legibility
+import DASHI.Governance.ContestabilityObservationRefinementExact as ContestObservation
+import DASHI.Governance.ContestabilityAccessCostExact as AccessCost
 import DASHI.Governance.ContestableCompressionResidualExact as Residual
 import DASHI.Governance.OpenWorldDisconfirmationBoundaryExact as OpenWorld
 import DASHI.Governance.CounterpositionDiversityAutonomyExact as Counter
@@ -32,6 +36,16 @@ querySafetyIsObservationRelative :
   ≡ true
 querySafetyIsObservationRelative = refl
 
+sameCompressionCannotBeSafeForSeparatingQuery :
+  Compression.QuerySafeCompression
+    Reification.fineGraph
+    Reification.coarseGraph
+    Reification.compression
+    Reification.richLanguage
+  → ⊥
+sameCompressionCannotBeSafeForSeparatingQuery =
+  Reification.richQuerySafetyImpossible
+
 asymmetricLegibilityDoesNotPromoteAbuse :
   Legibility.AsymmetricLegibilityBoundary.asymmetryAloneProvesAbuse
     Legibility.canonicalAsymmetricLegibilityBoundary
@@ -43,6 +57,19 @@ finiteLegibilityGapBlocksExactRecovery :
   ⊥
 finiteLegibilityGapBlocksExactRecovery =
   Legibility.finiteExactDecoderImpossible
+
+finiteExplanationAddsStrictObservationRefinement :
+  Observation.StrictObservationRefinement
+    (ContestObservation.asObservationLanguage
+      ContestObservation.finiteExplanationChannel)
+finiteExplanationAddsStrictObservationRefinement =
+  ContestObservation.finiteExplanationStrictlyRefines
+
+formalContestabilityDoesNotGuaranteeAffordableAccess :
+  AccessCost.AffordableContestability
+    AccessCost.finiteCost AccessCost.finiteBudget → ⊥
+formalContestabilityDoesNotGuaranteeAffordableAccess =
+  AccessCost.formalAvailabilityDoesNotEstablishAffordability
 
 exactResidualRestoresRepresentativeIdentity :
   Residual.ContestableCompressionReceipt.exactResidualRestoresRepresentativeIdentity
