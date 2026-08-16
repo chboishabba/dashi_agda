@@ -97,7 +97,7 @@ excludedCannotSurviveCRT :
   CRT23Survivor
     (r6ToCRT23 (Wheel.forgetResidueClass (inj₁ r))) →
   ⊥
-excludedCannotSurviveCRT Wheel.e0 ()
-excludedCannotSurviveCRT Wheel.e2 ()
-excludedCannotSurviveCRT Wheel.e3 ()
-excludedCannotSurviveCRT Wheel.e4 ()
+excludedCannotSurviveCRT Wheel.e0 (crt23Survivor () _)
+excludedCannotSurviveCRT Wheel.e2 (crt23Survivor () _)
+excludedCannotSurviveCRT Wheel.e3 (crt23Survivor _ ())
+excludedCannotSurviveCRT Wheel.e4 (crt23Survivor () _)
