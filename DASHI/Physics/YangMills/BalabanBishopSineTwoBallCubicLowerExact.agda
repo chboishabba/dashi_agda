@@ -40,7 +40,7 @@ module DASHI.Physics.YangMills.BalabanBishopSineTwoBallCubicLowerExact where
 
 open import Agda.Builtin.Nat using (zero; suc)
 open import Data.Integer.Base using (+_; nonNeg)
-open import Data.Rational.Unnormalised as ℚ using (ℚᵘ; 0ℚᵘ; 1ℚᵘ; _/_)
+open import Data.Rational.Unnormalised as ℚ using (ℚᵘ; 0ℚᵘ; _/_)
 import Data.Rational.Unnormalised.Properties as ℚP
 
 import Real as BishopReal
@@ -57,22 +57,23 @@ import DASHI.Physics.YangMills.BalabanBishopAlternatingInterlacingFromDecreasing
 import DASHI.Physics.YangMills.BalabanBishopAlternatingBracketFromMonotoneLimitsExact as Interlacing
 import DASHI.Physics.YangMills.BalabanP33BishopLowOrderTaylorBracketsExact as Low
 import DASHI.Physics.YangMills.BalabanP33BishopTaylorPolynomialFormExact as Polynomial
+import DASHI.Physics.YangMills.BalabanP33BishopInverseDexpCoefficientExact as Order
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
-two four twoThird : ℚᵘ
+two four twoThird oneThird : ℚᵘ
 two = + 2 / 1
 four = + 4 / 1
 twoThird = + 2 / 3
+oneThird = + 1 / 3
 
-bishopTwo bishopFour bishopTwoThird : BishopReal.ℝ
+bishopTwo bishopFour bishopTwoThird bishopOneThird : BishopReal.ℝ
 bishopTwo = BishopReal._⋆ two
 bishopFour = BishopReal._⋆ four
 bishopTwoThird = BishopReal._⋆ twoThird
+bishopOneThird = BishopReal._⋆ oneThird
 
 bishopTwoNonnegative : BishopReal.NonNegative bishopTwo
-bishopTwoNonnegative =
-  BishopProperties.0≤x⇒nonNegx
-    (BishopProperties.p≤q⇒p⋆≤q⋆ 0ℚᵘ two (ℚP.nonNegative⁻¹ two))
+bishopTwoNonnegative = Order.embeddedRationalNonnegative two nonNeg
 
 bishopOneSixthNonnegative : BishopReal.NonNegative Ratios.bishopOneSixth
 bishopOneSixthNonnegative = Ratios.bishopOneSixthNonnegative
@@ -80,9 +81,10 @@ bishopOneSixthNonnegative = Ratios.bishopOneSixthNonnegative
 bishopTwoSquareEquivalentFour :
   BishopReal._≃_ (BishopReal._*_ bishopTwo bishopTwo) bishopFour
 bishopTwoSquareEquivalentFour =
-  BishopProperties.≃-trans
-    (BishopProperties.≃-symm (BishopProperties.⋆-distrib-* two two))
-    (BishopProperties.⋆-cong ℚP.≃-refl)
+  let open BishopProperties.ℝ-Solver
+  in solve 0
+      (Κ two ⊗ Κ two ⊜ Κ four)
+      BishopProperties.≃-refl
 
 magnitudeSquareBelowFour :
   ∀ value →
@@ -100,10 +102,10 @@ fourTimesSixthEquivalentTwoThird :
     (BishopReal._*_ bishopFour Ratios.bishopOneSixth)
     bishopTwoThird
 fourTimesSixthEquivalentTwoThird =
-  BishopProperties.≃-trans
-    (BishopProperties.≃-symm
-      (BishopProperties.⋆-distrib-* four Ratios.oneSixth))
-    (BishopProperties.⋆-cong ℚP.≃-refl)
+  let open BishopProperties.ℝ-Solver
+  in solve 0
+      (Κ four ⊗ Κ Ratios.oneSixth ⊜ Κ twoThird)
+      BishopProperties.≃-refl
 
 sineRatioBelowTwoThird :
   ∀ value →
@@ -117,10 +119,23 @@ sineRatioBelowTwoThird value insideTwo =
       (magnitudeSquareBelowFour value insideTwo)
       bishopOneSixthNonnegative)
 
+oneMinusTwoThirdEquivalentOneThird :
+  BishopReal._≃_
+    (BishopReal._-_ BishopReal.1ℝ bishopTwoThird)
+    bishopOneThird
+oneMinusTwoThirdEquivalentOneThird =
+  let open BishopProperties.ℝ-Solver
+  in solve 0
+      (Κ (+ 1 / 1) ⊖ Κ twoThird ⊜ Κ oneThird)
+      BishopProperties.≃-refl
+
 bishopTwoThirdBelowOne : BishopReal._≤_ bishopTwoThird BishopReal.1ℝ
 bishopTwoThirdBelowOne =
-  BishopProperties.p≤q⇒p⋆≤q⋆ twoThird 1ℚᵘ
-    (ℚP.≤-reflexive (ℚP.≃-reflexive refl))
+  Order.nonnegativeDifferenceGivesOrder
+    (BishopProperties.≤-respʳ-≃
+      (BishopProperties.≃-symm oneMinusTwoThirdEquivalentOneThird)
+      (BishopProperties.nonNegx⇒0≤x
+        (Order.embeddedRationalNonnegative oneThird nonNeg)))
 
 sineMagnitudeDecreasingTwoBall :
   ∀ value →
