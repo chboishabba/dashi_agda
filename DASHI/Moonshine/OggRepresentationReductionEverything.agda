@@ -11,11 +11,12 @@ module DASHI.Moonshine.OggRepresentationReductionEverything where
 -- The old Ogg 7+7+1/nonary surfaces remain downstream comparison data.
 -- The phase-quotient/jCoarse/jFine/Fricke weld is imported here because it
 -- supplies an independently constructed finite reduction chain rather than an
--- SSP selector assumption.  The direct Aristotle arithmetic/Hecke checks and
--- complete candidate tau fingerprint are independent arithmetic controls, not
--- selector premises.
+-- SSP selector assumption.  Direct Aristotle arithmetic/Hecke/q-series
+-- theorems and the complete candidate tau fingerprint are independent control
+-- columns, not selector premises.
 ------------------------------------------------------------------------
 
+import DASHI.Analysis.FiniteRealQSeriesReflectionExact
 import DASHI.Arithmetic.AristotleArithmeticEverything
 import DASHI.Foundations.FiniteRepresentationRestrictionCore
 import DASHI.Foundations.PolyhedralFiniteRestrictionInstancesExact
@@ -35,6 +36,7 @@ import DASHI.Foundations.PolyhedralFixedSpaceDerivedNonaryExact
 import DASHI.Foundations.PolyhedralInvariantFixedSpaceSignatureExact
 import DASHI.Foundations.PolyhedralRestrictionCriticalCharacterExact
 import DASHI.Foundations.PolyhedralRegularRepresentationShiftExact
+import DASHI.Foundations.BinaryPolyhedralMcKayDimensionExact
 import DASHI.Foundations.TernaryPhaseShapeIncidenceExact
 import DASHI.Foundations.PhaseQuotientNonaryGroupSeparationExact
 import DASHI.Biology.D4NineCellOrbitCompressionExact
@@ -42,18 +44,23 @@ import DASHI.Biology.TernaryMonsterSymmetryCandidateExact
 import DASHI.Biology.TernaryPhaseQuotientJCoarseBridgeExact
 import DASHI.Biology.JFinePhaseQuotientFieldExact
 import DASHI.Biology.D4IrrepFiniteFrickeEquivariantExact
+import DASHI.Moonshine.ClassicalHeckeWeightKSmallWordExact
+import DASHI.Moonshine.Hecke23AntiparallelExact
 import DASHI.Moonshine.CandidateLevelRepresentationHeckeSquareExact
 import DASHI.Moonshine.CandidateLevelExternalOggPredicateExact
 import DASHI.Moonshine.RamanujanTauHecke23Exact
 import DASHI.Moonshine.RamanujanTauCandidateFingerprintJ0To35Exact
+import DASHI.Moonshine.EisensteinDiscriminantWeight12Exact
 import DASHI.Moonshine.ModularCurveJFrickeInterfaceExact
 import DASHI.Moonshine.D4IrrepModularFrickeDescentExact
 import DASHI.Moonshine.Monster3BC3RepresentationRingEvaluationExact
 import DASHI.Moonshine.OggPolyhedralReductionControlExact
 import DASHI.Moonshine.OggTetrahedralReductionControlExact
+import DASHI.Moonshine.OggPrimeControlMatrixExact
 import DASHI.Moonshine.SSPRepresentationHeckeIntertwinerBoundaryExact
 import DASHI.Moonshine.TernarySevenOggSSPComparisonExact
 import DASHI.Moonshine.OggPhaseFrickeSynthesisRegression
+import DASHI.Moonshine.AristotleCrossPollinationRegression
 import DASHI.Physics.Closure.PhysicalSSPHeckeModelClosureReceipt
 import DASHI.Physics.Closure.SSPZ3EigenspaceClassificationReceipt
 import DASHI.Physics.Moonshine.SupersingularPrimeLaneBridge
