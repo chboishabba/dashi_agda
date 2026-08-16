@@ -41,6 +41,7 @@ module DASHI.Physics.YangMills.BalabanSU2WilsonRightTrivializedFourthJetExact wh
 
 open import Agda.Builtin.List using (List; []; _∷_)
 
+import DASHI.Foundations.RealAnalysisAxioms as Real
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier
 open import DASHI.Physics.YangMills.BalabanSU2LieAlgebraCarrier using
@@ -132,7 +133,7 @@ literalPlaquetteJet4 data =
     (inverseOrientedLinkJet4 (inverse3 data) (insertion3 data))
 
 wilsonQuadraticNumerator wilsonCubicNumerator wilsonQuarticNumerator :
-  RightTrivializedWilsonPlaquetteData → DASHI.Foundations.RealAnalysisAxioms.ℝ
+  RightTrivializedWilsonPlaquetteData → Real.ℝ
 wilsonQuadraticNumerator data = -R (q0 (jet2 (literalPlaquetteJet4 data)))
 wilsonCubicNumerator data = -R (q0 (jet3 (literalPlaquetteJet4 data)))
 wilsonQuarticNumerator data = -R (q0 (jet4 (literalPlaquetteJet4 data)))
