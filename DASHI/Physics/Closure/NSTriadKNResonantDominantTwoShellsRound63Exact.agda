@@ -28,11 +28,11 @@ module DASHI.Physics.Closure.NSTriadKNResonantDominantTwoShellsRound63Exact wher
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
-open import Data.Nat.Base using (_≤_; _+_; _*_; ∣_-_∣)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Data.Nat.Base using (_≤_; _+_; _*_; z≤n; s≤s; ∣_-_∣)
 import Data.Nat.Properties as Nat
 open import Data.Sum.Base using (inj₁; inj₂)
-open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
@@ -55,6 +55,20 @@ sumBelowDoubleRight {a} {b} a≤b =
       (trans
         (Nat.*-suc b 1)
         (cong (b +_) (Nat.*-identityʳ b)))
+
+selfBelowDouble : ∀ n → n ≤ 2 * n
+selfBelowDouble n =
+  Nat.≤-trans
+    (Nat.m≤m+n n n)
+    (subst (n ≤_) (sym doubleMeaning) Nat.≤-refl)
+  where
+  doubleMeaning : 2 * n ≡ n + n
+  doubleMeaning =
+    trans
+      (Nat.*-comm 2 n)
+      (trans
+        (Nat.*-suc n 1)
+        (cong (n +_) (Nat.*-identityʳ n)))
 
 mutual
   shellWithinOneFromFactorTwo :
@@ -119,7 +133,7 @@ resonantDominantTwoShells tau
       dominantQK
         (shellWithinOneFromFactorTwo
           (Physical.q tau) (Physical.k tau)
-          (Nat.≤-trans q≤k (Nat.m≤m*n 2 _))
+          (Nat.≤-trans q≤k (selfBelowDouble _))
           (Nat.≤-trans
             (Infinity.outputTriangle
               (Infinity.officialResonantNormConsequences tau))
@@ -136,12 +150,12 @@ resonantDominantTwoShells tau
               (Infinity.qReverseTriangle
                 (Infinity.officialResonantNormConsequences tau))
               (sumBelowDoubleRight p≤k))
-            (Nat.≤-trans k≤q (Nat.m≤m*n 2 _)))
+            (Nat.≤-trans k≤q (selfBelowDouble _)))
 ...     | inj₂ k≤p =
         dominantPQ
           (shellWithinOneFromFactorTwo
             (Physical.p tau) (Physical.q tau)
-            (Nat.≤-trans p≤q (Nat.m≤m*n 2 _))
+            (Nat.≤-trans p≤q (selfBelowDouble _))
             (Nat.≤-trans
               (Infinity.qReverseTriangle
                 (Infinity.officialResonantNormConsequences tau))
@@ -154,7 +168,7 @@ resonantDominantTwoShells tau
       dominantPK
         (shellWithinOneFromFactorTwo
           (Physical.p tau) (Physical.k tau)
-          (Nat.≤-trans p≤k (Nat.m≤m*n 2 _))
+          (Nat.≤-trans p≤k (selfBelowDouble _))
           (Nat.≤-trans
             (Infinity.outputTriangle
               (Infinity.officialResonantNormConsequences tau))
@@ -171,7 +185,7 @@ resonantDominantTwoShells tau
               (Infinity.pReverseTriangle
                 (Infinity.officialResonantNormConsequences tau))
               (sumBelowDoubleRight q≤k))
-            (Nat.≤-trans k≤p (Nat.m≤m*n 2 _)))
+            (Nat.≤-trans k≤p (selfBelowDouble _)))
 ...     | inj₂ k≤q =
         dominantPQ
           (shellWithinOneFromFactorTwo
@@ -180,7 +194,7 @@ resonantDominantTwoShells tau
               (Infinity.pReverseTriangle
                 (Infinity.officialResonantNormConsequences tau))
               (sumBelowDoubleRight k≤q))
-            (Nat.≤-trans q≤p (Nat.m≤m*n 2 _)))
+            (Nat.≤-trans q≤p (selfBelowDouble _)))
 
 round63EveryResonantTriadHasWidthOneDominantShellPair : Bool
 round63EveryResonantTriadHasWidthOneDominantShellPair = true
