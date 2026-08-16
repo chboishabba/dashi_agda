@@ -1,23 +1,29 @@
 module DASHI.Governance.ContestabilityAccessCostExact where
 
 ------------------------------------------------------------------------
--- CROSS-POLLINATION CALIBRATION
+-- SOURCE / CROSS-POLLINATION CALIBRATION
+--
+-- Authoring body: Washington State Access to Justice Board.
+-- Title: "Washington State Access to Justice Technology Principles".
+-- Venue: Washington Law Review 79(1), first page 5 (2004).
+-- DOI: no DOI listed in the cited journal record.
+--
+-- The published principles motivate access vocabulary in which meaningful
+-- access includes procedural information and a just process includes
+-- timeliness, affordability and transparency.  They do NOT supply the Nat cost
+-- model or a binding legal threshold here; those are deliberately separated.
 --
 -- Internal producer pollen:
 --   * PR #549 / ObservationAcquisitionCostExact separates the informational
 --     value of an observation from the cost of acquiring it;
 --   * AsymmetricLegibilityContestabilityExact separates formal explanation,
 --     appeal and correction witnesses from the information asymmetry itself.
---
--- Governance consequence: a formally available contestability path is not
--- definitionally an affordable/usable path.  This file gives exact finite Nat
--- accounting only.  It does not assign real-world costs, legal thresholds, or
--- a normative verdict to any named institution.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
 
 import DASHI.Governance.AsymmetricLegibilityContestabilityExact as Legibility
+import DASHI.Governance.DevelopmentalInfluenceSourceAtlas as Sources
 
 record ContestabilityCost : Set where
   constructor contestabilityCost
@@ -48,11 +54,6 @@ record AffordableContestability
 
 open AffordableContestability public
 
-------------------------------------------------------------------------
--- Formal availability is a separate witness over the existing contestability
--- interface.
-------------------------------------------------------------------------
-
 record FormallyAvailableContestability
   {L : Legibility.LegibilityChannel}
   (C : Legibility.ContestabilityInterface L)
@@ -62,11 +63,6 @@ record FormallyAvailableContestability
     explanation : Legibility.Explanation C subject
     appeal : Legibility.Appeal C subject
     correction : Legibility.Correction C subject
-
-------------------------------------------------------------------------
--- Finite countermodel: all three channels exist, but the declared access cost
--- exceeds the declared subject budget.
-------------------------------------------------------------------------
 
 finiteContestabilityInterface :
   Legibility.ContestabilityInterface Legibility.finiteLegibilityChannel
@@ -100,12 +96,6 @@ formalAvailabilityDoesNotEstablishAffordability :
 formalAvailabilityDoesNotEstablishAffordability affordable =
   fiveNotLeThree (withinBudget affordable)
 
-------------------------------------------------------------------------
--- Boundary: accessibility may depend on money, time, cognition, language,
--- representation, procedure, assistance, etc.; Nat is only an abstract exact
--- cost carrier here.
-------------------------------------------------------------------------
-
 record ContestabilityAccessCostBoundary : Set where
   constructor contestabilityAccessCostBoundary
   field
@@ -118,3 +108,15 @@ record ContestabilityAccessCostBoundary : Set where
 canonicalContestabilityAccessCostBoundary : ContestabilityAccessCostBoundary
 canonicalContestabilityAccessCostBoundary =
   contestabilityAccessCostBoundary false true false false true
+
+record ContestabilityAccessCostReceipt : Set where
+  constructor contestabilityAccessCostReceipt
+  field
+    sources : List Sources.ScholarlySource
+    boundary : ContestabilityAccessCostBoundary
+
+canonicalContestabilityAccessCostReceipt : ContestabilityAccessCostReceipt
+canonicalContestabilityAccessCostReceipt =
+  contestabilityAccessCostReceipt
+    (Sources.washingtonAccessJusticeTechnologyPrinciples ∷ [])
+    canonicalContestabilityAccessCostBoundary
