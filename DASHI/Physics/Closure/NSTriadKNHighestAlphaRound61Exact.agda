@@ -39,6 +39,9 @@ module DASHI.Physics.Closure.NSTriadKNHighestAlphaRound61Exact where
 --       source-indexed estimates, B's single active six-three identification,
 --       and C's strict-positive-scale data; derived B/C certificates are not
 --       re-requested from callers.
+-- C->G: the final G scalar carrier takes the sharp positive-K B_* from C
+--       definitionally, so no smaller arbitrary correction cap is reintroduced
+--       between the fixed-shift proof and the global feasibility calculation.
 -- G   : equal-third allocation is an exact rational fallback.  The high-alpha
 --       allocator accepts rational square-root majorants c_i<=s_i^2 and spends
 --       B_i proportional to s_i, giving exact soft tax S^2/B_* with
@@ -99,8 +102,9 @@ import DASHI.Physics.Closure.NSTriadKNHHGoodLiteralAnnularStrainSymbolRound48Exa
 import DASHI.Physics.Closure.NSTriadKNHHGoodAnnularMasterKernelRound41Exact
 import DASHI.Physics.Closure.NSTriadKNHHGoodSameObjectMasterKernelRound55Exact
 
--- G/H: exact fallback + weighted near-optimal allocation, K_bad-aware no-go,
--- and same-object continuation closure.
+-- G/H: sharp C->G capacity wiring, exact fallback + weighted near-optimal
+-- allocation, K_bad-aware no-go, and same-object continuation closure.
+import DASHI.Physics.Closure.NSTriadKNSharpCapacityToNineOwnerRound61Exact
 import DASHI.Physics.Closure.NSTriadKNPhysicalNineOwnerFeasibilityRound61Exact
 import DASHI.Physics.Closure.NSTriadKNPhysicalNineOwnerWeightedFeasibilityRound61Exact
 import DASHI.Physics.Closure.NSTriadKNJointGlobalFeasibilityKBadRound61Exact
