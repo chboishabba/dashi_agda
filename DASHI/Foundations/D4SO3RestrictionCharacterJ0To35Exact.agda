@@ -23,6 +23,7 @@ open import DASHI.Core.Prelude
 open import Data.Integer using (ℤ; +_)
   renaming (_+_ to _+ℤ_)
 
+import DASHI.Biology.TernaryMonsterSymmetryCandidateExact as Candidate
 import DASHI.Foundations.SU2SO3IrrepDimensionExact as Spin
 import DASHI.Foundations.D4SO3RestrictionJ0To35Exact as Scan
 import DASHI.Foundations.D4SO3NineIrrepRestrictionExact as D4
@@ -35,11 +36,11 @@ scaleInt (suc n) value = value +ℤ scaleInt n value
 
 branchingCharacter : Scan.D4Spectrum → D4.D4RotationClass → ℤ
 branchingCharacter spectrum class =
-  scaleInt (Scan.multiplicityA1 spectrum) (D4.d4Character DASHI.Biology.TernaryMonsterSymmetryCandidateExact.A1 class)
-  +ℤ scaleInt (Scan.multiplicityA2 spectrum) (D4.d4Character DASHI.Biology.TernaryMonsterSymmetryCandidateExact.A2 class)
-  +ℤ scaleInt (Scan.multiplicityB1 spectrum) (D4.d4Character DASHI.Biology.TernaryMonsterSymmetryCandidateExact.B1 class)
-  +ℤ scaleInt (Scan.multiplicityB2 spectrum) (D4.d4Character DASHI.Biology.TernaryMonsterSymmetryCandidateExact.B2 class)
-  +ℤ scaleInt (Scan.multiplicityE spectrum) (D4.d4Character DASHI.Biology.TernaryMonsterSymmetryCandidateExact.E2 class)
+  scaleInt (Scan.multiplicityA1 spectrum) (D4.d4Character Candidate.A1 class)
+  +ℤ scaleInt (Scan.multiplicityA2 spectrum) (D4.d4Character Candidate.A2 class)
+  +ℤ scaleInt (Scan.multiplicityB1 spectrum) (D4.d4Character Candidate.B1 class)
+  +ℤ scaleInt (Scan.multiplicityB2 spectrum) (D4.d4Character Candidate.B2 class)
+  +ℤ scaleInt (Scan.multiplicityE spectrum) (D4.d4Character Candidate.E2 class)
 
 restrictedCharacter : Spin.AngularMomentum0To35 → D4.D4RotationClass → ℤ
 restrictedCharacter j D4.identityClass = + (Spin.jDimension j)
