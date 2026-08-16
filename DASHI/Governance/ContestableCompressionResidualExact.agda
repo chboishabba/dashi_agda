@@ -22,10 +22,6 @@ import DASHI.Core.FutureObservationLanguageQuotientExact as Future
 import DASHI.Core.FutureQuotientResidualExact as Residual
 import DASHI.Core.TypedDependencyCore as Dependency
 
-------------------------------------------------------------------------
--- Exact appeal packet: quotient class plus exact residual.
-------------------------------------------------------------------------
-
 record ExactAppealPacket
     {State Action Observation : Set}
     {system : Dependency.DependentActionSystem State Action}
@@ -50,18 +46,12 @@ canonicalExactAppealPacket :
     (receipt : Residual.ExactResidualOverFutureQuotient presentation)
     (state : State) →
   ExactAppealPacket receipt state
-canonicalExactAppealPacket receipt state =
+canonicalExactAppealPacket {presentation = presentation} receipt state =
   exactAppealPacket
-    (Future.classOf _ state)
+    (Future.classOf presentation state)
     (Residual.residual receipt state)
     refl
     refl
-
-------------------------------------------------------------------------
--- If two affected cases have the same quotient class AND the same exact
--- residual, then the original states are equal.  The theorem is inherited from
--- the existing core residual injectivity result.
-------------------------------------------------------------------------
 
 sameExactAppealCoordinatesDetermineCase :
   ∀ {State Action Observation}
@@ -76,12 +66,6 @@ sameExactAppealCoordinatesDetermineCase :
 sameExactAppealCoordinatesDetermineCase =
   Residual.classAndResidualDetermineState
 
-------------------------------------------------------------------------
--- Relevant reopening is strictly weaker as a contract: it returns a state in
--- the same declared future-observation class, not necessarily the identical
--- historical representative.
-------------------------------------------------------------------------
-
 exactAppealResidualIsFutureRelevant :
   ∀ {State Action Observation}
     {system : Dependency.DependentActionSystem State Action}
@@ -90,10 +74,6 @@ exactAppealResidualIsFutureRelevant :
   Residual.ExactResidualOverFutureQuotient presentation →
   Residual.RelevantResidualOverFutureQuotient presentation
 exactAppealResidualIsFutureRelevant = Residual.exactResidualIsRelevant
-
-------------------------------------------------------------------------
--- Contestability level keeps exact and future-relevant reopening distinct.
-------------------------------------------------------------------------
 
 data ReopeningStrength : Set where
   futureRelevantReopening exactRepresentativeReopening : ReopeningStrength
@@ -111,19 +91,9 @@ record ContestableCompressionReceipt : Set where
 canonicalExactContestabilityReceipt : ContestableCompressionReceipt
 canonicalExactContestabilityReceipt =
   contestableCompressionReceipt
-    exactRepresentativeReopening
-    true
-    true
-    false
-    false
-    false
+    exactRepresentativeReopening true true false false false
 
 canonicalRelevantContestabilityReceipt : ContestableCompressionReceipt
 canonicalRelevantContestabilityReceipt =
   contestableCompressionReceipt
-    futureRelevantReopening
-    true
-    false
-    true
-    false
-    false
+    futureRelevantReopening true false true false false
