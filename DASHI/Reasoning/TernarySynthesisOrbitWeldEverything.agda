@@ -34,3 +34,12 @@ import DASHI.Reasoning.TernarySynthesisCellComplexExact
 import DASHI.Reasoning.TernarySynthesisLogicQualificationExact
 import DASHI.Reasoning.TernarySynthesisTransportWeldExact
 import DASHI.Reasoning.TernarySynthesisOrbitWeldRegression
+
+------------------------------------------------------------------------
+-- Round-24 recursive ternary tree / pants reconciliation.
+------------------------------------------------------------------------
+
+import DASHI.Topology.TernaryCylinderPantsGeometryExact
+import DASHI.Topology.TernaryPantsFrontierExact
+import DASHI.Reasoning.TernaryPantsSynthesisS3BridgeExact
+import DASHI.Reasoning.TernaryPantsSynthesisS3Regression
