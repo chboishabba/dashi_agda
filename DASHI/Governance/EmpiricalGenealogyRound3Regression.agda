@@ -20,6 +20,9 @@ import DASHI.Governance.DelegatedEssentialServiceAuthorityExact as Service
 import DASHI.Governance.InstitutionalDependencyEntrapmentBridgeExact as InstitutionalEntrapment
 import DASHI.Governance.AliceBrownInstitutionalAgencyChoiceBridgeExact as Alice
 import DASHI.Governance.IndigenousRemovalDelegatedInfrastructureExact as Removal
+import DASHI.Governance.EffectiveChoiceConcentrationExact as Concentration
+import DASHI.Governance.AustralianSupermarketChoiceConcentrationExact as Supermarket
+import DASHI.Governance.AustralianTwoPartyPreferredObservationExact as TPP
 import DASHI.Governance.QuotedUtteranceContextProvenanceExact as Quote
 import DASHI.Governance.BraidedEnemyRoleProvenanceCrossPollinationExact as Braid
 
@@ -227,6 +230,55 @@ aliceParentExpertiseCanRemainSituatedEvidence :
     Alice.canonicalAliceInstitutionalChoiceBoundary
   ≡ true
 aliceParentExpertiseCanRemainSituatedEvidence = refl
+
+------------------------------------------------------------------------
+-- Effective concentration / Australian supermarket / TPP regressions.
+------------------------------------------------------------------------
+
+dominantPairDoesNotEqualMonopoly :
+  Concentration.EffectiveChoiceConcentrationBoundary.dominantPairEqualsMonopoly
+    Concentration.canonicalEffectiveChoiceConcentrationBoundary
+  ≡ false
+dominantPairDoesNotEqualMonopoly = refl
+
+effectiveMonopolyStillDoesNotEqualCoercion :
+  Concentration.EffectiveChoiceConcentrationBoundary.monopolyEqualsCoercion
+    Concentration.canonicalEffectiveChoiceConcentrationBoundary
+  ≡ false
+effectiveMonopolyStillDoesNotEqualCoercion = refl
+
+coerciveUseStillRequiresSeparateWitness :
+  Concentration.EffectiveChoiceConcentrationBoundary.coerciveUseRequiresSeparateWitness
+    Concentration.canonicalEffectiveChoiceConcentrationBoundary
+  ≡ true
+coerciveUseStillRequiresSeparateWitness = refl
+
+acccConcentrationDoesNotBecomeLiteralDuopoly :
+  Supermarket.AustralianSupermarketChoiceBoundary.dominantPairShareEqualsLiteralDuopoly
+    Supermarket.canonicalAustralianSupermarketChoiceBoundary
+  ≡ false
+acccConcentrationDoesNotBecomeLiteralDuopoly = refl
+
+supermarketObserverSubstitutionCanRemainDistinct :
+  Supermarket.AustralianSupermarketChoiceBoundary.observerRelativeSubstitutabilityRetained
+    Supermarket.canonicalAustralianSupermarketChoiceBoundary
+  ≡ true
+supermarketObserverSubstitutionCanRemainDistinct = refl
+
+tppCompressionLosesSomeFirstPreferenceResolution :
+  TPP.AustralianTPPObservationBoundary.tppPreservesEveryFirstPreferenceDistinction
+    TPP.canonicalAustralianTPPObservationBoundary
+  ≡ false
+tppCompressionLosesSomeFirstPreferenceResolution = refl
+
+tppDoesNotPromoteLiteralPoliticalDuopoly :
+  TPP.AustralianTPPObservationBoundary.tppEqualsLiteralPoliticalDuopoly
+    TPP.canonicalAustralianTPPObservationBoundary
+  ≡ false
+tppDoesNotPromoteLiteralPoliticalDuopoly = refl
+
+tppFiniteWitnessIsNonInjective : TPP.TPPInjective → ⊥
+tppFiniteWitnessIsNonInjective = TPP.tppObservationIsNotInjective
 
 ------------------------------------------------------------------------
 -- Bringing Them Home / braid / rhetorical-provenance regression.
