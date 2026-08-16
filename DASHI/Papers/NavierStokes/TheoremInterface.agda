@@ -45,9 +45,14 @@ import DASHI.Papers.NavierStokes.ClayContractRound23 as Clay23
 --   pair product to the existing six-three Gram cell derives 17/64,
 --   65/512, 65/512 and the whole-fibre 133/256 endpoint. B3 is not an
 --   independent physical premise.
--- * C2/C3: a positive fixed-shift correction forces a<r-q; conversely C1
---   scale bounds plus a<r-q construct B_*=((r-q)-a)/(K+1), so C3 is not an
---   independent witness either.
+-- * C2/C3: a positive fixed-shift correction forces a<r-q. Conversely C1
+--   scale bounds plus a<r-q construct a positive correction automatically:
+--   the zero-safe branch uses ((r-q)-a)/(K+1), while for K>0 the sharp branch
+--   uses the maximal B_*=((r-q)-a)/K and saturates a+B_*K=r-q exactly.
+-- * ABC: the compiler-light canonical source is now constructed from A's
+--   source-indexed estimates, B's single active six-three same-object theorem,
+--   and C's strict-positive scale data; callers do not resupply derived B/C
+--   certificates.
 -- * G: the three Young allocations are constructed exactly over Q by assigning
 --   B_*/3 to each soft owner; the final physical resource test is one strict
 --   scalar inequality. The necessary two-resource no-go also carries K_bad.
@@ -61,7 +66,7 @@ import DASHI.Papers.NavierStokes.ClayContractRound23 as Clay23
 
 paperInterfaceStatement : String
 paperInterfaceStatement =
-  "Paper-facing NS interface: Round61 compresses the physical Clay cutset without promoting the theorem. A3 now uses normalized-density domination and an explicit K_bad charge multiplicity; B3 is derived from one active literal-normalized-PQ to six-three-Gram same-object theorem; C3 is constructed from C1 plus the strict a<r-q gap; G is an exact rational allocator with a K_bad-aware two-resource no-go; H is closed on the official selected Leray-Hopf/Luo carrier. Genuine physical A1/A2, B1, C1/C2, D/F and E2 producers remain open, so Clay Navier-Stokes and terminal promotion remain false."
+  "Paper-facing NS interface: Round61 compresses the physical Clay cutset without promoting the theorem. A3 now uses normalized-density domination and an explicit K_bad charge multiplicity; B3 is derived from one active literal-normalized-PQ to six-three-Gram same-object theorem; C3 is constructed from C1 plus the strict a<r-q gap, sharply as ((r-q)-a)/K when K>0; the canonical ABC root constructs its derived B/C certificates; G is an exact rational allocator with a K_bad-aware two-resource no-go; H is closed on the official selected Leray-Hopf/Luo carrier. Genuine physical A1/A2, B1, C1/C2, D/F and E2 producers remain open, so Clay Navier-Stokes and terminal promotion remain false."
 
 record NSPaperTheoremStatus : Setω where
   field
