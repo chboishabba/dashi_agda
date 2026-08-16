@@ -27,22 +27,35 @@ module DASHI.Physics.Closure.NSTriadKNComActiveSixThreeRealizationRound61Exact w
 -- inequalities as three fields.  That is stronger than the genuine physical
 -- frontier and duplicates arithmetic already proved in Round35/47.
 --
--- The only new analytic/same-object input here is instead:
+-- IMPORTANT CORRECTION TO THE FIRST ROUND61 DRAFT
 --
---   on an ACTIVE literal odd-(P/Q) fibre,
+-- Round35 explicitly describes `sixThreeGramCell` as a SCALE-ENVELOPE
+-- candidate.  It is not the literal Fourier Gram and should not be equated to
+-- the physical T_q^*T_r / T_qT_r^* pair product.  The honest B frontier is the
+-- two-step statement already suggested by the Round35 architecture:
+--
+--   (B1) on an active literal odd-(P/Q) fibre, identify the normalized pair
+--        product EXACTLY with the pair product of an actual physical
+--        `GramInterferenceCell`;
+--
+--   (B3) prove that this physical cell's overlap is bounded by the existing
+--        six-three two-branch scale envelope.
+--
+-- Outer contractions then remove the two physical outer factors, giving
+--
 --   normalized pair product
---     = pairProduct (sixThreeGramCell shellDistance).
+--     <= physical overlap
+--     <= sixThree twoBranchSquaredGap(shellDistance).
 --
--- Off support the literal pair product is exactly zero.  Common-hat geometry
--- supplies |q-r|<=1.  The existing six-three cell then gives, as theorems,
+-- Common-hat width one reduces active fibres to distances 0 and 1, where the
+-- existing exact arithmetic is
 --
---   same shell       <= 17/64,
---   forward adjacent <= 65/512,
---   reverse adjacent <= 65/512,
+--   g_6,3(0) = 17/64,
+--   g_6,3(1) = 65/512.
 --
--- and the Round60 aggregate gives the full bandwidth-one mass <= 133/256.
--- Thus B3 is no longer an independent premise once B1+B2 are proved on the
--- physical normalized carrier.
+-- The Round60 aggregate therefore still gives the full 133/256 endpoint, but
+-- without the false/over-strong claim that the literal physical Gram itself is
+-- definitionally the six-three model cell.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -50,6 +63,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Rational.Base using (ℚ; 0ℚ; _≤_)
 import Data.Rational.Properties as ℚP
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import DASHI.Physics.Closure.NSTriadKNComCommonHatSupportLeafRound58 as Hat
 import DASHI.Physics.Closure.NSTriadKNComNormalizedFibreMassLeafRound58 as LightGram
@@ -58,6 +72,7 @@ import DASHI.Physics.Closure.NSTriadKNComNormalizedFibreAggregateRound60Exact as
 import DASHI.Physics.Closure.NSTriadKNComGramInterferenceRound35Exact as Gram
 import DASHI.Physics.Closure.NSTriadKNComSameAdjacentActiveRound47Exact as Legacy
 import DASHI.Physics.Closure.NSTriadKNComDyadicHatWidthOneRound46Exact as HatWidth
+import DASHI.Physics.Closure.NSTriadKNLuoSixThreeCenteredCommutatorScaleExact as SixThree
 
 record PhysicalActiveSixThreeOddPQSource : Set₁ where
   field
@@ -80,14 +95,24 @@ record PhysicalActiveSixThreeOddPQSource : Set₁ where
       Hat.supportActive support q r ≡ false →
       normalizedPairProduct q r ≡ 0ℚ
 
-    -- The single genuine B same-object theorem.  It is required only on the
-    -- active output fibre; demanding it off support would contradict exact
-    -- support annihilation because the model six-three kernel has a nonzero
-    -- tail.
-    activeProductIsSixThreeGram : ∀ q r →
+    -- B1: exact same-object identification to the ACTUAL physical factorized
+    -- Gram cell.  The active proof is indexed so no off-support model value is
+    -- introduced.
+    activePhysicalGramCell : ∀ q r →
       Hat.supportActive support q r ≡ true →
+      Gram.GramInterferenceCell (shellDistance q r)
+
+    activeProductIsPhysicalGram : ∀ q r →
+      (active : Hat.supportActive support q r ≡ true) →
       normalizedPairProduct q r
-      ≡ Gram.pairProduct (Gram.sixThreeGramCell (shellDistance q r))
+      ≡ Gram.pairProduct (activePhysicalGramCell q r active)
+
+    -- B3 analytic heart: only the overlap is compared to the six-three scale
+    -- envelope.  Outer contractions are already theorem-level Round35 data.
+    activePhysicalOverlapBelowSixThree : ∀ q r →
+      (active : Hat.supportActive support q r ≡ true) →
+      Gram.overlap (activePhysicalGramCell q r active)
+      ≤ SixThree.twoBranchSquaredGap (shellDistance q r)
 
 open PhysicalActiveSixThreeOddPQSource public
 
@@ -106,6 +131,33 @@ activeWithinOne :
   HatWidth.WithinOne q r
 activeWithinOne physical = Hat.commonHatWidthOne (support physical)
 
+activePairProductBelowSixThree :
+  (physical : PhysicalActiveSixThreeOddPQSource) →
+  ∀ q r →
+  (active : Hat.supportActive (support physical) q r ≡ true) →
+  normalizedPairProduct physical q r
+  ≤ SixThree.twoBranchSquaredGap (shellDistance physical q r)
+activePairProductBelowSixThree physical q r active =
+  let
+    cell = activePhysicalGramCell physical q r active
+    gramToOverlap :
+      Gram.pairProduct cell ≤ Gram.overlap cell
+    gramToOverlap = Gram.outerContractionsRemove cell
+
+    gramToSixThree :
+      Gram.pairProduct cell
+      ≤ SixThree.twoBranchSquaredGap (shellDistance physical q r)
+    gramToSixThree =
+      ℚP.≤-trans
+        gramToOverlap
+        (activePhysicalOverlapBelowSixThree physical q r active)
+  in
+  subst
+    (λ lower →
+      lower ≤ SixThree.twoBranchSquaredGap (shellDistance physical q r))
+    (sym (activeProductIsPhysicalGram physical q r active))
+    gramToSixThree
+
 sameShellBoundDerived :
   (physical : PhysicalActiveSixThreeOddPQSource) →
   ∀ q →
@@ -113,10 +165,9 @@ sameShellBoundDerived :
   LightGram.pairProduct (asNormalizedRealization physical) q q
   ≤ LightGram.sameShellTarget
 sameShellBoundDerived physical q active
-  rewrite activeProductIsSixThreeGram physical q q active
-        | sameShellDistance physical q
+  rewrite sameShellDistance physical q
         | Legacy.sixThreeSameShellExact =
-  ℚP.≤-refl
+  activePairProductBelowSixThree physical q q active
 
 forwardAdjacentBoundDerived :
   (physical : PhysicalActiveSixThreeOddPQSource) →
@@ -125,10 +176,9 @@ forwardAdjacentBoundDerived :
   LightGram.pairProduct (asNormalizedRealization physical) q (suc q)
   ≤ LightGram.adjacentShellTarget
 forwardAdjacentBoundDerived physical q active
-  rewrite activeProductIsSixThreeGram physical q (suc q) active
-        | forwardAdjacentDistance physical q
+  rewrite forwardAdjacentDistance physical q
         | Legacy.sixThreeAdjacentShellExact =
-  ℚP.≤-refl
+  activePairProductBelowSixThree physical q (suc q) active
 
 reverseAdjacentBoundDerived :
   (physical : PhysicalActiveSixThreeOddPQSource) →
@@ -137,10 +187,9 @@ reverseAdjacentBoundDerived :
   LightGram.pairProduct (asNormalizedRealization physical) (suc q) q
   ≤ LightGram.adjacentShellTarget
 reverseAdjacentBoundDerived physical q active
-  rewrite activeProductIsSixThreeGram physical (suc q) q active
-        | reverseAdjacentDistance physical q
+  rewrite reverseAdjacentDistance physical q
         | Legacy.sixThreeAdjacentShellExact =
-  ℚP.≤-refl
+  activePairProductBelowSixThree physical (suc q) q active
 
 asSameAdjacentBounds :
   (physical : PhysicalActiveSixThreeOddPQSource) →
@@ -175,9 +224,9 @@ fullBandwidthOneMassBelow133Over256 physical =
   Aggregate.normalizedOddPQBandwidthOneMassBelow133Over256
     (asPhysicalNormalizedOddPQSource physical)
 
-b3DerivedFromActiveSixThreeSameObject : Bool
-b3DerivedFromActiveSixThreeSameObject = true
+b1ExactPhysicalGramThenB3SixThreeOverlapSuffices : Bool
+b1ExactPhysicalGramThenB3SixThreeOverlapSuffices = true
 
-b3DerivedFromActiveSixThreeSameObjectIsTrue :
-  b3DerivedFromActiveSixThreeSameObject ≡ true
-b3DerivedFromActiveSixThreeSameObjectIsTrue = refl
+b1ExactPhysicalGramThenB3SixThreeOverlapSufficesIsTrue :
+  b1ExactPhysicalGramThenB3SixThreeOverlapSuffices ≡ true
+b1ExactPhysicalGramThenB3SixThreeOverlapSufficesIsTrue = refl
