@@ -34,6 +34,10 @@ data RepairOperation : Set where
   splitEntity : RepairOperation
   underspecifyType : RepairOperation
   removeBadSuperclass : RepairOperation
+  -- A redundant edge is not the same thing as a semantically bad superclass.
+  -- This constructor is used by theorem-backed pruning diagnostics such as the
+  -- James Michael DuPont / Aristotle `Wikidata.KB.warning_prunable` result.
+  removeRedundantSuperclass : RepairOperation
   proposeLatentType : RepairOperation
   holdForReview : RepairOperation
 
