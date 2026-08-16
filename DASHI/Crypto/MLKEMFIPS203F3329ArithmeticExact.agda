@@ -52,6 +52,9 @@ gamma0 = 17
 gamma3 : Nat
 gamma3 = 568
 
+minus17 : Nat
+minus17 = 3312
+
 modPow : Nat → Nat → Nat
 modPow base zero = 1
 modPow base (suc exponent) = (base * modPow base exponent) % q
@@ -80,7 +83,10 @@ minus331Representative = refl
 minus585Representative : (585 + 2744) % q ≡ 0
 minus585Representative = refl
 
-pair03Difference : (568 + 3329 - 17) % q ≡ 551
+minus17Representative : (17 + minus17) % q ≡ 0
+minus17Representative = refl
+
+pair03Difference : (gamma3 + minus17) % q ≡ 551
 pair03Difference = refl
 
 pair03DifferenceInverse : (551 * 3184) % q ≡ 1
@@ -126,7 +132,7 @@ canonicalPair03ArithmeticFacts =
     (modPow gamma3 4)
     ((gamma0 + gamma3) % q)
     ((gamma0 * gamma3) % q)
-    ((568 + 3329 - 17) % q)
+    ((gamma3 + minus17) % q)
     3184
     refl refl refl refl refl refl
 
