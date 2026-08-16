@@ -55,6 +55,10 @@ record DelegatedServiceProvider : Set where
 
 open DelegatedServiceProvider public
 
+data EssentialOrLifePreserving : Essentiality → Set where
+  essentialWitness : EssentialOrLifePreserving essential
+  lifePreservingWitness : EssentialOrLifePreserving lifePreserving
+
 ------------------------------------------------------------------------
 -- Dependency does not require physical confinement.  It can arise because a
 -- service is essential and no effectively accessible substitute is available.
@@ -63,7 +67,7 @@ open DelegatedServiceProvider public
 record EffectiveProviderDependency (provider : DelegatedServiceProvider) : Set where
   constructor effectiveProviderDependency
   field
-    essentialWitness : essentiality provider ≡ essential ⊎ essentiality provider ≡ lifePreserving
+    criticalityWitness : EssentialOrLifePreserving (essentiality provider)
     noAlternativeWitness : effectiveAlternativeAvailable provider ≡ false
 
 open EffectiveProviderDependency public
