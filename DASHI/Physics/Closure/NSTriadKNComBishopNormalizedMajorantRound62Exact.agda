@@ -19,30 +19,27 @@ module DASHI.Physics.Closure.NSTriadKNComBishopNormalizedMajorantRound62Exact wh
 -- Title: "Fourier Analysis and Nonlinear Partial Differential Equations".
 -- DOI: 10.1007/978-3-642-16830-7.
 --
--- ROUND 62 CONTRIBUTION
+-- ROUND 62 AUTHORITY BOUNDARY
 --
--- Correct the remaining B carrier mismatch.  The literal odd-(P/Q) Fourier
--- coefficients are not rational: they live in the real/complex carrier of the
--- physical Fourier model.  Consequently the normalized operator-product
--- energy must remain a genuine constructive real until it is BOUNDED by a
--- rational constant.
+-- This is the concrete Murray--Bishop SETOID comparison backend for normalized
+-- Com majorants.  It proves the 17/64, 65/512 -> 133/256 aggregation directly
+-- in Bishop.ℝ with rational constants embedded order-preservingly.
 --
--- This module uses the repository's pinned Murray--Bishop backend and exact
--- rational embedding.  A physical producer supplies real-valued normalized
--- energies E(q,r), their common-hat support, and ONLY the three active bounds
+-- It is NOT, by itself, a same-object identification with the literal
+-- `PeriodicHardShellFourierPDE.realField`: that older algebraic carrier uses
+-- propositional equality, while Bishop.ℝ is governed by setoid equality.
+-- The same-object physical B boundary is now
 --
---   E(q,q)       <= embed(17/64),
---   E(q,q+1)     <= embed(65/512),
---   E(q+1,q)     <= embed(65/512).
+--   NSTriadKNComOrderedPhysicalMajorantRound62Exact
 --
--- Off-support energy is extensionally zero.  The theorem then proves on the
--- REAL carrier
+-- which keeps normalized energy in `Carrier (realField model)` and adds only an
+-- ordered rational extension of that exact carrier.  A separate theorem would
+-- be required to identify a particular literal Fourier model with this Bishop
+-- backend.
 --
---   E(q,q)+E(q,q+1)+E(q+1,q) <= embed(133/256).
---
--- Thus 133/256 is a rational MAJORANT of physical energy, never an equality
--- identifying a Bishop real with Q.  The remaining B theorem is the literal
--- odd-P/Q normalization plus these three finite active estimates.
+-- The theorem here remains useful: whenever normalized energies are already in
+-- Bishop.ℝ, same/adjacent majorants imply bandwidth-one energy <= embed(133/256)
+-- without ever identifying the energy with Q.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -231,6 +228,9 @@ physicalComEnergyNeverIdentifiedWithRationalCarrier = true
 bishopBandwidthOneMajorantClosed : Bool
 bishopBandwidthOneMajorantClosed = true
 
+bishopEndpointIsLiteralFourierSameObject : Bool
+bishopEndpointIsLiteralFourierSameObject = false
+
 physicalComEnergyNeverIdentifiedWithRationalCarrierIsTrue :
   physicalComEnergyNeverIdentifiedWithRationalCarrier ≡ true
 physicalComEnergyNeverIdentifiedWithRationalCarrierIsTrue = refl
@@ -238,3 +238,7 @@ physicalComEnergyNeverIdentifiedWithRationalCarrierIsTrue = refl
 bishopBandwidthOneMajorantClosedIsTrue :
   bishopBandwidthOneMajorantClosed ≡ true
 bishopBandwidthOneMajorantClosedIsTrue = refl
+
+bishopEndpointIsLiteralFourierSameObjectIsFalse :
+  bishopEndpointIsLiteralFourierSameObject ≡ false
+bishopEndpointIsLiteralFourierSameObjectIsFalse = refl
