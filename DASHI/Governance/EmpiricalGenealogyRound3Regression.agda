@@ -8,6 +8,10 @@ import DASHI.Governance.JohnPaperClaimPromotionAuditExact as Paper
 import DASHI.Governance.PalantirProcurementLegibilityAdapterExact as Palantir
 import DASHI.Governance.MinimalSufficientObservationGovernanceExact as Minimal
 import DASHI.Governance.MultidimensionalContestabilityAccessExact as Access
+import DASHI.Governance.DependentReligiousEntrapmentCandidateExact as Entrapment
+import DASHI.Governance.EvolvingCapacityReligiousAutonomyExact as Capacity
+import DASHI.Governance.CoercionConfinementLegalSeparationExact as Legal
+import DASHI.Governance.ColonialCarceralDependencyAuthorityBridgeExact as Colonial
 
 ------------------------------------------------------------------------
 -- Focused local-kernel regression root.
@@ -80,3 +84,55 @@ scalarContestabilityBudgetCanHideBottleneck :
   Access.ResourceAccessWithin Access.bottleneckDemand Access.spreadBudget → ⊥
 scalarContestabilityBudgetCanHideBottleneck =
   Access.aggregateSufficiencyDoesNotEstablishCoordinateAccess
+
+------------------------------------------------------------------------
+-- Entrapment/capacity/legal cross-pollination regressions.
+------------------------------------------------------------------------
+
+ordinaryTeachingDoesNotEqualEntrapment :
+  Entrapment.DependentReligiousEntrapmentBoundary.ordinaryReligiousTeachingEqualsEntrapment
+    Entrapment.canonicalDependentReligiousEntrapmentBoundary
+  ≡ false
+ordinaryTeachingDoesNotEqualEntrapment = refl
+
+entrapmentMechanismsCanIncludeBelongingAndDivineSanction :
+  Entrapment.DependentReligiousEntrapmentBoundary.familyBelongingPenaltyCanBeRelevantMechanism
+    Entrapment.canonicalDependentReligiousEntrapmentBoundary
+  ≡ true
+entrapmentMechanismsCanIncludeBelongingAndDivineSanction = refl
+
+age18IsNotReligiousConsentSwitch :
+  Capacity.EvolvingCapacityReligiousAutonomyBoundary.fixedAge18ReligiousConsentSwitch
+    Capacity.canonicalEvolvingCapacityReligiousAutonomyBoundary
+  ≡ false
+age18IsNotReligiousConsentSwitch = refl
+
+formationBeforeEpistemicIndependenceIsRelevant :
+  Capacity.EvolvingCapacityReligiousAutonomyBoundary.formationBeforeEpistemicIndependenceRelevant
+    Capacity.canonicalEvolvingCapacityReligiousAutonomyBoundary
+  ≡ true
+formationBeforeEpistemicIndependenceIsRelevant = refl
+
+psychologicalCoercionDoesNotEqualSlavery :
+  Legal.CoercionConfinementLegalBoundary.socialEntrapmentEqualsSlavery
+    Legal.canonicalCoercionConfinementLegalBoundary
+  ≡ false
+psychologicalCoercionDoesNotEqualSlavery = refl
+
+servitudeStillNeedsLabourOrServicesReceipt :
+  Legal.CoercionConfinementLegalBoundary.servitudeRequiresAdditionalLabourOrServicesReceipt
+    Legal.canonicalCoercionConfinementLegalBoundary
+  ≡ true
+servitudeStillNeedsLabourOrServicesReceipt = refl
+
+colonialCarceralComparisonDoesNotCollapseDomains :
+  Colonial.ColonialCarceralDependencyBoundary.colonialSystemEqualsCarceralSystem
+    Colonial.canonicalColonialCarceralDependencyBoundary
+  ≡ false
+colonialCarceralComparisonDoesNotCollapseDomains = refl
+
+sharedDependencyAuthorityExitTopologyIsAvailable :
+  Colonial.ColonialCarceralDependencyBoundary.dependencyAuthorityExitTopologyShared
+    Colonial.canonicalColonialCarceralDependencyBoundary
+  ≡ true
+sharedDependencyAuthorityExitTopologyIsAvailable = refl
