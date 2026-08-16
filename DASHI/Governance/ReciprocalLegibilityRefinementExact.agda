@@ -16,12 +16,6 @@ module DASHI.Governance.ReciprocalLegibilityRefinementExact where
 -- The sources motivate context-relative information flow and comparison of
 -- information structures.  The exact directional refinement theorem is DASHI's
 -- construction.
---
--- Central duality: adding a distinguishing coordinate to the institution-side
--- view while withholding it from the subject can create an exact legibility
--- gap; exposing the same full coordinate pair to the subject admits an exact
--- decoder.  This is an information theorem, not a rule requiring universal
--- disclosure or classifying asymmetric systems as abusive/illegal.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -40,10 +34,6 @@ record DirectionalObservationRefinement : Set₁ where
 
 open DirectionalObservationRefinement public
 
-------------------------------------------------------------------------
--- Institution-only refinement: institution sees Base × Extra; subject sees Base.
-------------------------------------------------------------------------
-
 institutionOnlyChannel :
   DirectionalObservationRefinement → Legibility.LegibilityChannel
 institutionOnlyChannel R =
@@ -53,10 +43,6 @@ institutionOnlyChannel R =
     (Base R)
     (λ case → baseObservation R case , extraObservation R case)
     proj₁
-
-------------------------------------------------------------------------
--- Reciprocal full-view channel: both sides receive Base × Extra.
-------------------------------------------------------------------------
 
 reciprocalFullViewChannel :
   DirectionalObservationRefinement → Legibility.LegibilityChannel
@@ -82,7 +68,7 @@ institutionOnlyRefinementCreatesLegibilityGap :
   ∀ {R : DirectionalObservationRefinement} →
   DirectionalSplitWitness R →
   Legibility.AsymmetricLegibilityWitness (institutionOnlyChannel R)
-institutionOnlyRefinementCreatesLegibilityGap split =
+institutionOnlyRefinementCreatesLegibilityGap {R = R} split =
   Legibility.asymmetricLegibilityWitness
     (left split)
     (right split)
@@ -90,8 +76,8 @@ institutionOnlyRefinementCreatesLegibilityGap split =
     (baseSame split)
   where
     institutionSeparates :
-      Legibility.inspect (institutionOnlyChannel _) (left split)
-      ≡ Legibility.inspect (institutionOnlyChannel _) (right split)
+      Legibility.inspect (institutionOnlyChannel R) (left split)
+      ≡ Legibility.inspect (institutionOnlyChannel R) (right split)
       → ⊥
     institutionSeparates equalViews =
       extraDifferent split (cong proj₂ equalViews)
@@ -111,10 +97,6 @@ reciprocalFullViewHasExactDecoder =
   Legibility.exactInstitutionalViewDecoder
     (λ view → view)
     (λ subject → refl)
-
-------------------------------------------------------------------------
--- Finite witness.
-------------------------------------------------------------------------
 
 data Case2 : Set where case0 case1 : Case2
 data BaseOne : Set where sameBase : BaseOne
@@ -146,10 +128,6 @@ finiteReciprocalDecoderExists :
   Legibility.ExactInstitutionalViewDecoder
     (reciprocalFullViewChannel finiteDirectionalRefinement)
 finiteReciprocalDecoderExists = reciprocalFullViewHasExactDecoder
-
-------------------------------------------------------------------------
--- Boundary and source receipt.
-------------------------------------------------------------------------
 
 record ReciprocalLegibilityBoundary : Set where
   constructor reciprocalLegibilityBoundary
