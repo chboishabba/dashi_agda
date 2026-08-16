@@ -7,6 +7,10 @@ module DASHI.Physics.Closure.NSTriadKNLuoFiniteRationalOrderCore where
 -- This deliberately does not import the Galerkin/L2 carrier.  Keeping these
 -- elementary facts behind a small boundary prevents local finite inequalities
 -- from importing the full finite Cauchy--Schwarz / Gram-defect development.
+-- Round 61 profiling confirmed that distinction is material: the legacy
+-- recursive Gram path spent roughly 263.5 seconds in finiteGramStep before the
+-- constant-one Hölder proof itself was reached.  The compiled constant-one
+-- Hölder route therefore depends only on this core.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
