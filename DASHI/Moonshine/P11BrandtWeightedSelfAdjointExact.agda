@@ -28,14 +28,11 @@ import Tactic.RingSolver.NonReflective as NR
 
 import DASHI.Moonshine.P11ClassicalTwoIsogenyCorrespondenceExact as P11
 import DASHI.Moonshine.P11ClassicalTwoIsogenySpectralExact as Spectral
+import DASHI.Moonshine.P11GeometricSupersingularCarrierExact as Geo
 import DASHI.Moonshine.P11BrandtAutomorphismWeightExact as Weight
 
 module Ring = NR IntRS.ring
-open Ring using (_⊕_; _⊗_; _⊜_; solve)
-
-------------------------------------------------------------------------
--- The scalar polynomial identity behind weighted self-adjointness.
-------------------------------------------------------------------------
+open Ring using (Κ; _⊕_; _⊗_; _⊜_; solve)
 
 weightedSelfAdjointPolynomial :
   (x y z w : ℤ) →
@@ -47,15 +44,11 @@ weightedSelfAdjointPolynomial :
 weightedSelfAdjointPolynomial x y z w =
   Ring.solve 4
     (λ x y z w →
-      ( (((+ 2) ⊗ (((+ 3) ⊗ y) ⊗ z))
-          ⊕ ((+ 3) ⊗ ((((+ 2) ⊗ x) ⊕ y) ⊗ w)))
-      , (((+ 2) ⊗ (x ⊗ ((+ 3) ⊗ w)))
-          ⊕ ((+ 3) ⊗ (y ⊗ (((+ 2) ⊗ z) ⊕ w)))) ))
+      ( ((Κ (+ 2)) ⊗ (((Κ (+ 3)) ⊗ y) ⊗ z))
+          ⊕ ((Κ (+ 3)) ⊗ ((((Κ (+ 2)) ⊗ x) ⊕ y) ⊗ w))
+      , ((Κ (+ 2)) ⊗ (x ⊗ ((Κ (+ 3)) ⊗ w)))
+          ⊕ ((Κ (+ 3)) ⊗ (y ⊗ (((Κ (+ 2)) ⊗ z) ⊕ w))) ))
     refl x y z w
-
-------------------------------------------------------------------------
--- Full arbitrary-vector theorem.
-------------------------------------------------------------------------
 
 weightedSelfAdjoint :
   (u v : P11.IntPair) →
@@ -64,18 +57,12 @@ weightedSelfAdjoint :
 weightedSelfAdjoint (P11.intPair x y) (P11.intPair z w) =
   weightedSelfAdjointPolynomial x y z w
 
-------------------------------------------------------------------------
--- The proof uses exactly the automorphism-derived weights 2 and 3.
-------------------------------------------------------------------------
-
 leftWeightIsGeometric :
-  Spectral.weightJ0 ≡ + (Weight.clearedReciprocalWeight
-    DASHI.Moonshine.P11GeometricSupersingularCarrierExact.jZeroSS)
+  Spectral.weightJ0 ≡ + (Weight.clearedReciprocalWeight Geo.jZeroSS)
 leftWeightIsGeometric = refl
 
 rightWeightIsGeometric :
-  Spectral.weightJ1 ≡ + (Weight.clearedReciprocalWeight
-    DASHI.Moonshine.P11GeometricSupersingularCarrierExact.j1728SS)
+  Spectral.weightJ1 ≡ + (Weight.clearedReciprocalWeight Geo.j1728SS)
 rightWeightIsGeometric = refl
 
 record P11WeightedSelfAdjointBoundary : Set where
