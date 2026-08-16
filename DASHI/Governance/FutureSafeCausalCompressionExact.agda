@@ -27,11 +27,13 @@ module DASHI.Governance.FutureSafeCausalCompressionExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.FutureObservationLanguageQuotientExact as Future
 import DASHI.Core.TypedDependencyCore as Dependency
 import DASHI.Governance.CausalResolutionExact as Resolution
+import DASHI.Governance.DevelopmentalInfluenceSourceAtlas as Sources
 
 ------------------------------------------------------------------------
 -- Future-safe causal edge compression.
@@ -167,7 +169,7 @@ querySafeCollisionProducesKernelEquivalence safe collision =
     (compressedEdgesQueryEquivalent safe collision)
 
 ------------------------------------------------------------------------
--- Governance boundary.
+-- Governance boundary and provenance receipt.
 ------------------------------------------------------------------------
 
 record FutureSafeCausalCompressionBoundary : Set where
@@ -192,3 +194,16 @@ canonicalFutureSafeCausalCompressionBoundary =
     false
     true
     true
+
+record FutureSafeCausalCompressionReceipt : Set where
+  constructor futureSafeCausalCompressionReceipt
+  field
+    sources : List Sources.ScholarlySource
+    boundary : FutureSafeCausalCompressionBoundary
+
+canonicalFutureSafeCausalCompressionReceipt :
+  FutureSafeCausalCompressionReceipt
+canonicalFutureSafeCausalCompressionReceipt =
+  futureSafeCausalCompressionReceipt
+    (Sources.blackwellExperimentComparison ∷ [])
+    canonicalFutureSafeCausalCompressionBoundary
