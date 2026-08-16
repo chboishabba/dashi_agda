@@ -23,7 +23,8 @@ module DASHI.Moonshine.P11ClassicalTwoIsogenySpectralExact where
 --
 --   w_0 A_01 = w_1 A_10 = 6.
 --
--- Hence A is self-adjoint for the weighted pairing.  Its exact eigenmodes are
+-- The four basis pairings therefore satisfy weighted self-adjointness exactly.
+-- Its explicit eigenmodes are
 --
 --   (1,1)   with lambda = 3,
 --   (-3,2)  with lambda = -2,
@@ -32,8 +33,8 @@ module DASHI.Moonshine.P11ClassicalTwoIsogenySpectralExact where
 --
 --   L = 3 I - A
 --
--- therefore has eigenvalues 0 and 5.  This is an exact finite arithmetic gap,
--- not an imported physical mass-gap claim.
+-- has eigenvalues 0 and 5 on those two independent modes.  This is an exact
+-- finite arithmetic gap, not an imported physical mass-gap claim.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -41,10 +42,6 @@ open import Data.Integer using (ℤ; +_; -[1+_])
   renaming (_+_ to _+ℤ_; _*_ to _*ℤ_; _-_ to _-ℤ_)
 
 import DASHI.Moonshine.P11ClassicalTwoIsogenyCorrespondenceExact as P11
-
-------------------------------------------------------------------------
--- Weighted pairing.
-------------------------------------------------------------------------
 
 weightJ0 weightJ1 : ℤ
 weightJ0 = + 2
@@ -65,22 +62,34 @@ constantAndNonconstantOrthogonal :
 constantAndNonconstantOrthogonal = refl
 
 ------------------------------------------------------------------------
--- Weighted self-adjointness for the explicit two-state matrix.
+-- Exact weighted self-adjointness on the coordinate basis.  This is the finite
+-- matrix content needed here; no general integer-bilinearity theorem is hidden
+-- behind refl.
 ------------------------------------------------------------------------
 
-weightedSelfAdjoint :
-  (u v : P11.IntPair) →
-  weightedPairing (P11.matrixAction u) v
-  ≡ weightedPairing u (P11.matrixAction v)
-weightedSelfAdjoint (P11.intPair (+ 0) (+ 0)) v = refl
-weightedSelfAdjoint (P11.intPair (+ 0) (-[1+ uR ])) v = refl
-weightedSelfAdjoint (P11.intPair (+ 0) (+ sucUR)) v = refl
-weightedSelfAdjoint (P11.intPair (-[1+ uL ]) (+ 0)) v = refl
-weightedSelfAdjoint (P11.intPair (-[1+ uL ]) (-[1+ uR ])) v = refl
-weightedSelfAdjoint (P11.intPair (-[1+ uL ]) (+ sucUR)) v = refl
-weightedSelfAdjoint (P11.intPair (+ sucUL) (+ 0)) v = refl
-weightedSelfAdjoint (P11.intPair (+ sucUL) (-[1+ uR ])) v = refl
-weightedSelfAdjoint (P11.intPair (+ sucUL) (+ sucUR)) v = refl
+basisJ0 basisJ1 : P11.IntPair
+basisJ0 = P11.intPair (+ 1) (+ 0)
+basisJ1 = P11.intPair (+ 0) (+ 1)
+
+weightedSelfAdjoint00 :
+  weightedPairing (P11.matrixAction basisJ0) basisJ0
+  ≡ weightedPairing basisJ0 (P11.matrixAction basisJ0)
+weightedSelfAdjoint00 = refl
+
+weightedSelfAdjoint01 :
+  weightedPairing (P11.matrixAction basisJ0) basisJ1
+  ≡ weightedPairing basisJ0 (P11.matrixAction basisJ1)
+weightedSelfAdjoint01 = refl
+
+weightedSelfAdjoint10 :
+  weightedPairing (P11.matrixAction basisJ1) basisJ0
+  ≡ weightedPairing basisJ1 (P11.matrixAction basisJ0)
+weightedSelfAdjoint10 = refl
+
+weightedSelfAdjoint11 :
+  weightedPairing (P11.matrixAction basisJ1) basisJ1
+  ≡ weightedPairing basisJ1 (P11.matrixAction basisJ1)
+weightedSelfAdjoint11 = refl
 
 ------------------------------------------------------------------------
 -- Degree-three Laplacian L = 3I - A.
@@ -106,14 +115,14 @@ p11ArithmeticSpectralGap = 5
 p11ArithmeticSpectralGapIsFive : p11ArithmeticSpectralGap ≡ 5
 p11ArithmeticSpectralGapIsFive = refl
 
-------------------------------------------------------------------------
--- Authority boundary.
-------------------------------------------------------------------------
-
 record P11ArithmeticSpectralBoundary : Set where
   field
     detailedBalanceConstructed : Bool
     detailedBalanceConstructedIsTrue : detailedBalanceConstructed ≡ true
+
+    basisWeightedSelfAdjointnessConstructed : Bool
+    basisWeightedSelfAdjointnessConstructedIsTrue :
+      basisWeightedSelfAdjointnessConstructed ≡ true
 
     weightedOrthogonalModesConstructed : Bool
     weightedOrthogonalModesConstructedIsTrue :
@@ -121,6 +130,10 @@ record P11ArithmeticSpectralBoundary : Set where
 
     exactFiniteGapConstructed : Bool
     exactFiniteGapConstructedIsTrue : exactFiniteGapConstructed ≡ true
+
+    arbitraryVectorSelfAdjointnessProvedHere : Bool
+    arbitraryVectorSelfAdjointnessProvedHereIsFalse :
+      arbitraryVectorSelfAdjointnessProvedHere ≡ false
 
     gapIdentifiedWithPhysicalMassGap : Bool
     gapIdentifiedWithPhysicalMassGapIsFalse :
@@ -131,10 +144,14 @@ canonicalP11ArithmeticSpectralBoundary =
   record
     { detailedBalanceConstructed = true
     ; detailedBalanceConstructedIsTrue = refl
+    ; basisWeightedSelfAdjointnessConstructed = true
+    ; basisWeightedSelfAdjointnessConstructedIsTrue = refl
     ; weightedOrthogonalModesConstructed = true
     ; weightedOrthogonalModesConstructedIsTrue = refl
     ; exactFiniteGapConstructed = true
     ; exactFiniteGapConstructedIsTrue = refl
+    ; arbitraryVectorSelfAdjointnessProvedHere = false
+    ; arbitraryVectorSelfAdjointnessProvedHereIsFalse = refl
     ; gapIdentifiedWithPhysicalMassGap = false
     ; gapIdentifiedWithPhysicalMassGapIsFalse = refl
     }
