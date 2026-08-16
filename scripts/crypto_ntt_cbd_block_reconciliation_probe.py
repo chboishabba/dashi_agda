@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 """Source-faithful finite probe for ML-KEM/FIPS-203 CBD block reconciliation.
 
-This is a discovery script, not an attack implementation and not a security claim.
-It studies a conditioned local model already exposed by the Round-17 Agda work:
-all coefficients outside one parity-block slice are assumed known/removed, and we
-ask how many CBD2 secret-block candidates survive a small number of actual FIPS
-NTT residue equations when two independent CBD2 error blocks are marginalized.
+This is a blue-team discovery/audit script, not an attack implementation and not
+a security claim. It studies a conditioned local model already exposed by the
+Round-17 Agda work: all coefficients outside one parity-block slice are assumed
+known/removed, and we ask how many CBD2 secret-block candidates survive a small
+number of actual FIPS NTT residue equations when two independent CBD2 error
+blocks are marginalized.
 
 Primary source:
   NIST, Module-Lattice-Based Key-Encapsulation Mechanism Standard, FIPS 203,
@@ -13,9 +14,14 @@ Primary source:
 
 The important structural comparison is between opposite FIPS residues such as
 (0,1), where gamma_1 = -gamma_0, and generic residue pairs. Opposite residues
-split a coefficient block into even/odd sectors. The probe now includes seeded
-random field-point controls so that an apparent list-size improvement is not
-mistaken for a generic two-equation effect.
+split a coefficient block into even/odd sectors. The probe includes seeded
+random field-point controls so that an apparent list-size change is not mistaken
+for a generic two-equation effect.
+
+Raw pair profiles are defensive leakage-resolution diagnostics. A raw pair that
+is injective on a conditioned carrier is a priority observation surface to audit,
+not evidence that a real implementation exposes that pair: Hamming weight,
+timing, masking, shuffling and other physical channels can coarsen it heavily.
 """
 
 from __future__ import annotations
@@ -223,7 +229,9 @@ def main() -> None:
     assert GAMMA[3] == 568
     assert (GAMMA[2] + GAMMA[3]) % Q == 0
 
-    # Durable exact raw regressions discovered in the larger-block pass.
+    # Durable exact raw regressions discovered in the larger-block pass. Keep
+    # the entire dictionaries pinned so the Agda profile module cannot silently
+    # drift away from the executable enumeration.
     p01 = raw_profile(8, (0, 1))
     p02 = raw_profile(8, (0, 2))
     p03 = raw_profile(8, (0, 3))
@@ -235,13 +243,25 @@ def main() -> None:
         "mean_list": 693889 / 390625,
         "max_fibre": 4,
     }
-    assert p02["collision_pairs"] == 20805
-    assert p02["images"] == 369865
-    assert p03["collision_pairs"] == 0
-    assert p03["images"] == 390625
+    assert p02 == {
+        "candidates": 390625,
+        "images": 369865,
+        "collision_pairs": 20805,
+        "conditional_mass": 432235,
+        "mean_list": 432235 / 390625,
+        "max_fibre": 3,
+    }
+    assert p03 == {
+        "candidates": 390625,
+        "images": 390625,
+        "collision_pairs": 0,
+        "conditional_mass": 390625,
+        "mean_list": 1.0,
+        "max_fibre": 1,
+    }
 
     print("FIPS constants: gamma0=17, gamma1=-17, gamma2=2761, gamma3=-2761")
-    print("raw m=8 profiles:")
+    print("raw m=8 defensive leakage-resolution profiles:")
     for residues, profile in [((0, 1), p01), ((0, 2), p02), ((0, 3), p03)]:
         print(residues, profile)
 
@@ -257,18 +277,20 @@ def main() -> None:
             )
             print(f"m={m} residues={residues} {summarize(values)}")
 
-    # This is the primary falsification control. At m=8 the opposite FIPS pairs
-    # reproducibly leave substantially smaller conditioned lists than seeded
-    # generic field-point pairs; m=9 checks whether the separation persists.
+    # Primary falsification control: compare the structured opposite FIPS pairs
+    # against seeded generic field points before attributing list geometry to the
+    # opposite-pair algebra.
     benchmark_opposite_vs_random(8, args.trials, args.baseline_pairs)
     if args.include_m9:
         benchmark_opposite_vs_random(9, max(3, args.trials // 4), args.baseline_pairs)
 
-    print("\nInterpretation boundary:")
+    print("\nBlue-team interpretation boundary:")
     print("  * This is a conditioned slice: coefficients outside the block are assumed removed.")
-    print("  * A small local list is not a whole-key attack or runtime claim.")
+    print("  * A small or unit raw fibre is not a whole-key recovery or runtime claim.")
+    print("  * Raw injectivity does not prove a physical observation channel is injective.")
+    print("  * Unusually resolving raw pairs are implementation-audit priorities, not attack recipes.")
     print("  * Opposite residue pairs are algebraically special; random controls test whether that matters.")
-    print("  * Promote only reproducible structural anomalies to Agda theorems.")
+    print("  * Promote only reproducible structural anomalies and explicit observation channels to Agda theorems.")
 
 
 if __name__ == "__main__":
