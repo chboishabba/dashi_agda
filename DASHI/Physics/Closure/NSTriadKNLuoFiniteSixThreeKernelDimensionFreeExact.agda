@@ -48,7 +48,7 @@ open import Data.Rational.Base using
   (ℚ; 0ℚ; _+_; _*_; _≤_)
 import Data.Rational.Properties as ℚₚ
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Binary.PropositionalEquality using (_≡_; subst; sym)
 
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteRationalOrderCore as Core
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteEightPointSixThreeHolderExact as Eight
@@ -67,6 +67,18 @@ record FiniteSixThreeBranchData : Set where
         * Holder.sumBy Holder.productMass holderPairs
 
 open FiniteSixThreeBranchData public
+
+cubeProductMeaning : (p q : ℚ) →
+  Holder.cube (p * q) ≡ Holder.cube p * Holder.cube q
+cubeProductMeaning p q
+  rewrite Holder.cubeMeaning (p * q)
+        | Holder.cubeMeaning p
+        | Holder.cubeMeaning q =
+  solve (p ∷ q ∷ [])
+
+kernelEndpoint : (K A B : ℚ) →
+  K * (A * (B * B)) ≡ K * A * (B * B)
+kernelEndpoint K A B = solve (K ∷ A ∷ B ∷ [])
 
 cubeMonotone :
   ∀ {left right : ℚ} →
@@ -137,10 +149,9 @@ abstract
             * Holder.sumBy Holder.productMass (holderPairs dataSet))
         ≡ Holder.cube (kernelSecondMomentSquared dataSet)
           * Holder.cube (Holder.sumBy Holder.productMass (holderPairs dataSet))
-      leftMeaning = solve
-        ( kernelSecondMomentSquared dataSet
-        ∷ Holder.sumBy Holder.productMass (holderPairs dataSet)
-        ∷ [])
+      leftMeaning = cubeProductMeaning
+        (kernelSecondMomentSquared dataSet)
+        (Holder.sumBy Holder.productMass (holderPairs dataSet))
 
       endpoint :
         Holder.cube (kernelSecondMomentSquared dataSet)
@@ -151,11 +162,10 @@ abstract
           * Holder.sumBy Holder.leftSixthMass (holderPairs dataSet)
           * (Holder.sumBy Holder.rightCubeMass (holderPairs dataSet)
             * Holder.sumBy Holder.rightCubeMass (holderPairs dataSet))
-      endpoint = solve
-        ( Holder.cube (kernelSecondMomentSquared dataSet)
-        ∷ Holder.sumBy Holder.leftSixthMass (holderPairs dataSet)
-        ∷ Holder.sumBy Holder.rightCubeMass (holderPairs dataSet)
-        ∷ [])
+      endpoint = kernelEndpoint
+        (Holder.cube (kernelSecondMomentSquared dataSet))
+        (Holder.sumBy Holder.leftSixthMass (holderPairs dataSet))
+        (Holder.sumBy Holder.rightCubeMass (holderPairs dataSet))
     in
     ℚₚ.≤-trans
       monotone

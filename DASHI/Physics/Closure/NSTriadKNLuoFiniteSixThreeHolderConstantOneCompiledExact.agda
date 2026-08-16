@@ -37,7 +37,7 @@ import Data.Rational.Properties as ℚₚ
 open ℚₚ using (_≤?_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using
-  (cong; cong₂; subst; trans)
+  (cong; cong₂; subst; sym; trans)
 open import Relation.Nullary.Decidable.Core using (toWitness)
 
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteRationalOrderCore as Core
@@ -57,6 +57,22 @@ square cube sixth : ℚ → ℚ
 square value = value * value
 cube value = value * value * value
 sixth value = cube value * cube value
+
+squareMeaning : (value : ℚ) → square value ≡ value * value
+squareMeaning value = refl
+
+cubeMeaning : (value : ℚ) → cube value ≡ value * value * value
+cubeMeaning value = refl
+
+threeVariableIdentity :
+  (x y z : ℚ) →
+  three * (x * y * z)
+    + (x + y + z)
+      * (half * (square (x - y) + square (y - z) + square (z - x)))
+    ≡ cube x + cube y + cube z
+threeVariableIdentity x y z
+  rewrite cubeMeaning x | cubeMeaning y | cubeMeaning z =
+  solve (x ∷ y ∷ z ∷ [])
 
 record NonnegativePair : Set where
   constructor nonnegative-pair
@@ -99,18 +115,53 @@ sumByMonotone lower upper (item ∷ items) pointwise =
     (pointwise item)
     (sumByMonotone lower upper items pointwise)
 
+sumByAddStep :
+  (p q r s : ℚ) →
+  p + q + (r + s) ≡ p + r + (q + s)
+sumByAddStep p q r s = solve (p ∷ q ∷ r ∷ s ∷ [])
+
+sumByScaleLeftStep :
+  (scale value rest : ℚ) →
+  scale * value + scale * rest ≡ scale * (value + rest)
+sumByScaleLeftStep scale value rest = solve (scale ∷ value ∷ rest ∷ [])
+
+sumByScaleRightStep :
+  (value rest scale : ℚ) →
+  value * scale + rest * scale ≡ (value + rest) * scale
+sumByScaleRightStep value rest scale = solve (value ∷ rest ∷ scale ∷ [])
+
+sum2ProductStep :
+  (p rest q : ℚ) →
+  p * q + rest * q ≡ (p + rest) * q
+sum2ProductStep p rest q = solve (p ∷ rest ∷ q ∷ [])
+
+zeroProduct : (q : ℚ) → 0ℚ * q ≡ 0ℚ
+zeroProduct q = solve (q ∷ [])
+
+productAssoc :
+  (p q r : ℚ) →
+  p * q * r ≡ p * (q * r)
+productAssoc p q r = solve (p ∷ q ∷ r ∷ [])
+
+productRightAssoc :
+  (p q r : ℚ) →
+  p * (q * r) ≡ p * q * r
+productRightAssoc p q r = solve (p ∷ q ∷ r ∷ [])
+
 sumByAdd :
   ∀ {A : Set}
     (first second : A → ℚ)
     (items : List A) →
   sumBy (λ item → first item + second item) items
   ≡ sumBy first items + sumBy second items
-sumByAdd first second [] = solve []
+sumByAdd first second [] = sym (ℚₚ.+-identityʳ 0ℚ)
 sumByAdd first second (item ∷ items)
   rewrite sumByAdd first second items =
-  solve
-    (first item ∷ second item
-    ∷ sumBy first items ∷ sumBy second items ∷ [])
+  sumByAddStep
+    (first item)
+    (second item)
+    (sumBy first items)
+    (sumBy second items)
 
 sumByScaleLeft :
   ∀ {A : Set}
@@ -119,10 +170,10 @@ sumByScaleLeft :
     (items : List A) →
   sumBy (λ item → scale * value item) items
   ≡ scale * sumBy value items
-sumByScaleLeft scale value [] = solve []
+sumByScaleLeft scale value [] = solve (scale ∷ [])
 sumByScaleLeft scale value (item ∷ items)
   rewrite sumByScaleLeft scale value items =
-  solve (scale ∷ value item ∷ sumBy value items ∷ [])
+  sumByScaleLeftStep scale (value item) (sumBy value items)
 
 sumByScaleRight :
   ∀ {A : Set}
@@ -131,10 +182,10 @@ sumByScaleRight :
     (scale : ℚ) →
   sumBy (λ item → value item * scale) items
   ≡ sumBy value items * scale
-sumByScaleRight value [] scale = solve []
+sumByScaleRight value [] scale = solve (scale ∷ [])
 sumByScaleRight value (item ∷ items) scale
   rewrite sumByScaleRight value items scale =
-  solve (value item ∷ sumBy value items ∷ scale ∷ [])
+  sumByScaleRightStep (value item) (sumBy value items) scale
 
 sum2 :
   ∀ {A B : Set} →
@@ -150,6 +201,33 @@ sum3 value first second third =
   sumBy
     (λ a → sumBy (λ b → sumBy (value a b) third) second)
     first
+
+sum3Cong :
+  ∀ {A B C : Set}
+    (firstValue secondValue : A → B → C → ℚ)
+    (first : List A)
+    (second : List B)
+    (third : List C) →
+  ((a : A) → (b : B) → (c : C) →
+    firstValue a b c ≡ secondValue a b c) →
+  sum3 firstValue first second third
+  ≡ sum3 secondValue first second third
+sum3Cong firstValue secondValue first second third pointwise =
+  sumByCong
+    (λ a → sumBy (λ b → sumBy (firstValue a b) third) second)
+    (λ a → sumBy (λ b → sumBy (secondValue a b) third) second)
+    first
+    (λ a →
+      sumByCong
+        (λ b → sumBy (firstValue a b) third)
+        (λ b → sumBy (secondValue a b) third)
+        second
+        (λ b →
+          sumByCong
+            (firstValue a b)
+            (secondValue a b)
+            third
+            (pointwise a b)))
 
 sum2Add :
   ∀ {A B : Set}
@@ -274,13 +352,15 @@ sum2ProductFactorizes :
     (second : List B) →
   sum2 (λ a b → firstValue a * secondValue b) first second
   ≡ sumBy firstValue first * sumBy secondValue second
-sum2ProductFactorizes firstValue secondValue [] second = solve []
+sum2ProductFactorizes firstValue secondValue [] second =
+  sym (zeroProduct (sumBy secondValue second))
 sum2ProductFactorizes firstValue secondValue (a ∷ first) second
   rewrite sumByScaleLeft (firstValue a) secondValue second
         | sum2ProductFactorizes firstValue secondValue first second =
-  solve
-    (firstValue a ∷ sumBy firstValue first
-    ∷ sumBy secondValue second ∷ [])
+  sum2ProductStep
+    (firstValue a)
+    (sumBy firstValue first)
+    (sumBy secondValue second)
 
 sum3ProductFactorizes :
   ∀ {A B C : Set}
@@ -307,8 +387,8 @@ sum3ProductFactorizes
         (λ a b c → firstValue a * secondValue b * thirdValue c)
         (λ a b c → firstValue a * (secondValue b * thirdValue c))
         first second third
-        (λ a b c → solve
-          (firstValue a ∷ secondValue b ∷ thirdValue c ∷ []))
+        (λ a b c → productAssoc
+          (firstValue a) (secondValue b) (thirdValue c))
 
     factorEachFirst =
       sumByCong
@@ -331,10 +411,10 @@ sum3ProductFactorizes
       ≡ sumBy firstValue first
         * sumBy secondValue second
         * sumBy thirdValue third
-    endpoint = solve
-      (sumBy firstValue first
-      ∷ sumBy secondValue second
-      ∷ sumBy thirdValue third ∷ [])
+    endpoint = productRightAssoc
+      (sumBy firstValue first)
+      (sumBy secondValue second)
+      (sumBy thirdValue third)
   in
   trans reassociate
     (trans factorEachFirst
@@ -415,7 +495,7 @@ threeVariableAMGM x y z xNN yNN zNN =
         + (x + y + z)
           * (half * (square (x - y) + square (y - z) + square (z - x)))
       ≡ cube x + cube y + cube z
-    identity = solve (x ∷ y ∷ z ∷ [])
+    identity = threeVariableIdentity x y z
   in
   subst (λ upper → three * (x * y * z) ≤ upper) identity addDefect
 
@@ -429,6 +509,53 @@ xTerm yTerm zTerm :
 xTerm i j k = leftSixthMass i * rightCubeMass j * rightCubeMass k
 yTerm i j k = rightCubeMass i * leftSixthMass j * rightCubeMass k
 zTerm i j k = rightCubeMass i * rightCubeMass j * leftSixthMass k
+
+tripleLeftMeaning :
+  (li lj lk ri rj rk : ℚ) →
+  three *
+    ((square li * rj * rk) * (square lj * rk * ri)
+      * (square lk * ri * rj))
+  ≡ three *
+    (square (li * ri) * square (lj * rj) * square (lk * rk))
+tripleLeftMeaning li lj lk ri rj rk
+  rewrite squareMeaning li | squareMeaning lj | squareMeaning lk
+        | squareMeaning (li * ri)
+        | squareMeaning (lj * rj)
+        | squareMeaning (lk * rk) =
+  solve (li ∷ lj ∷ lk ∷ ri ∷ rj ∷ rk ∷ [])
+
+tripleRightMeaning :
+  (li lj lk ri rj rk : ℚ) →
+  cube (square li * rj * rk)
+    + cube (square lj * rk * ri)
+    + cube (square lk * ri * rj)
+  ≡ sixth li * cube rj * cube rk
+    + cube ri * sixth lj * cube rk
+    + cube ri * cube rj * sixth lk
+tripleRightMeaning li lj lk ri rj rk
+  rewrite squareMeaning li | squareMeaning lj | squareMeaning lk
+        | cubeMeaning (square li * rj * rk)
+        | cubeMeaning (square lj * rk * ri)
+        | cubeMeaning (square lk * ri * rj)
+        | cubeMeaning rj | cubeMeaning rk | cubeMeaning ri
+        | cubeMeaning rj | cubeMeaning rk | cubeMeaning ri
+        | cubeMeaning rj | cubeMeaning rk =
+  solve (li ∷ lj ∷ lk ∷ ri ∷ rj ∷ rk ∷ [])
+
+cyclicEndpoint :
+  (A B : ℚ) →
+  (A * B * B + B * A * B) + B * B * A
+  ≡ three * (A * (B * B))
+cyclicEndpoint A B = solve (A ∷ B ∷ [])
+
+oneThirdThreeCube : (p : ℚ) → oneThird * (three * cube p) ≡ cube p
+oneThirdThreeCube p
+  rewrite cubeMeaning p =
+  solve (p ∷ [])
+
+oneThirdThreeProduct : (A B : ℚ) →
+  oneThird * (three * (A * (B * B))) ≡ A * (B * B)
+oneThirdThreeProduct A B = solve (A ∷ B ∷ [])
 
 tripleAMGM :
   (i j k : NonnegativePair) →
@@ -472,14 +599,16 @@ tripleAMGM i j k =
 
     leftMeaning :
       three * (x * y * z) ≡ three * tripleTarget i j k
-    leftMeaning = solve
-      (left i ∷ left j ∷ left k ∷ right i ∷ right j ∷ right k ∷ [])
+    leftMeaning = tripleLeftMeaning
+      (left i) (left j) (left k)
+      (right i) (right j) (right k)
 
     rightMeaning :
       cube x + cube y + cube z
       ≡ xTerm i j k + yTerm i j k + zTerm i j k
-    rightMeaning = solve
-      (left i ∷ left j ∷ left k ∷ right i ∷ right j ∷ right k ∷ [])
+    rightMeaning = tripleRightMeaning
+      (left i) (left j) (left k)
+      (right i) (right j) (right k)
   in
   subst
     (λ lower → lower ≤ xTerm i j k + yTerm i j k + zTerm i j k)
@@ -545,7 +674,7 @@ cyclicUpperFactorization items =
     endpoint :
       (A * B * B + B * A * B) + B * B * A
       ≡ three * (A * (B * B))
-    endpoint = solve (A ∷ B ∷ [])
+    endpoint = cyclicEndpoint A B
   in
   trans splitAll (trans factorAll endpoint)
 
@@ -575,7 +704,7 @@ abstract
             (trans
               (sum3ProductFactorizes
                 productMass productMass productMass items items items)
-              (solve (sumBy productMass items ∷ []))))
+              (sym (cubeMeaning (sumBy productMass items)))))
 
       upperEndpoint = cyclicUpperFactorization items
 
@@ -613,7 +742,7 @@ abstract
       leftNormalize :
         oneThird * (three * cube (sumBy productMass items))
         ≡ cube (sumBy productMass items)
-      leftNormalize = solve (sumBy productMass items ∷ [])
+      leftNormalize = oneThirdThreeCube (sumBy productMass items)
 
       rightNormalize :
         oneThird
@@ -622,8 +751,9 @@ abstract
               * (sumBy rightCubeMass items * sumBy rightCubeMass items)))
         ≡ sumBy leftSixthMass items
           * (sumBy rightCubeMass items * sumBy rightCubeMass items)
-      rightNormalize = solve
-        (sumBy leftSixthMass items ∷ sumBy rightCubeMass items ∷ [])
+      rightNormalize = oneThirdThreeProduct
+        (sumBy leftSixthMass items)
+        (sumBy rightCubeMass items)
     in
     subst
       (λ lower →
