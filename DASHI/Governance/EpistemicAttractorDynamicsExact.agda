@@ -36,7 +36,8 @@ record EpistemicDynamics
 open EpistemicDynamics public
 
 asDiscreteSystem :
-  ∀ {S R} →
+  {S : Epistemic.TrustUpdateSystem} →
+  {R : Epistemic.EvidenceReframingSystem S} →
   EpistemicDynamics S R →
   Attractor.DiscreteSystem
 asDiscreteSystem dynamics =
@@ -65,7 +66,8 @@ record StableEpistemicClosure
 open StableEpistemicClosure public
 
 stableClosureGivesFixedPoint :
-  ∀ {S R}
+  {S : Epistemic.TrustUpdateSystem} →
+  {R : Epistemic.EvidenceReframingSystem S} →
   (D : EpistemicDynamics S R) →
   StableEpistemicClosure D →
   EpistemicDynamics.TrustState D →
@@ -96,7 +98,8 @@ record ClosedTrustNeighbourhood
 open ClosedTrustNeighbourhood public
 
 closedNeighbourhoodAsInvariant :
-  ∀ {S R}
+  {S : Epistemic.TrustUpdateSystem} →
+  {R : Epistemic.EvidenceReframingSystem S} →
   (D : EpistemicDynamics S R) →
   ClosedTrustNeighbourhood D →
   Attractor.InvariantRegion (asDiscreteSystem D)
@@ -107,7 +110,8 @@ closedNeighbourhoodAsInvariant D closed =
     }
 
 closedNeighbourhoodPersistsTwoSteps :
-  ∀ {S R}
+  {S : Epistemic.TrustUpdateSystem} →
+  {R : Epistemic.EvidenceReframingSystem S} →
   (D : EpistemicDynamics S R) →
   (closed : ClosedTrustNeighbourhood D) →
   (t : EpistemicDynamics.TrustState D) →
