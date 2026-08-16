@@ -22,6 +22,7 @@ module DASHI.Foundations.HexTruthS3CarrierBridgeExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import Base369 as Base
 import DASHI.Foundations.TernaryEndomorphismConjugacyExact as Perm
@@ -65,10 +66,6 @@ permutationRoundTrip Perm.permSwapMidHigh = refl
 
 ------------------------------------------------------------------------
 -- Concrete failure of operation preservation.
---
--- hex-1 xor hex-3 = hex-4 under the existing cyclic C6 operation, whereas
--- permRotate . permSwapLowMid = permSwapLowHigh for this particular pair; so
--- choose a pair where C6 commutativity and S3 noncommutativity force a split.
 ------------------------------------------------------------------------
 
 hexPairCommutes :
@@ -99,8 +96,6 @@ hexCarrierChartCannotPreserveBothProducts hom =
       (trans
         (cong hexToPermutation hexPairCommutes)
         (hom Base.hex-3 Base.hex-1)))
-  where
-    open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 record HexTruthS3CarrierBoundary : Set where
   field
