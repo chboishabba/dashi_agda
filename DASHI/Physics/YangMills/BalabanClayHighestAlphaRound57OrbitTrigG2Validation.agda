@@ -32,9 +32,9 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound57OrbitTrigG2Validati
 -- Theories", Commun. Math. Phys. 119 (1988), 243--285.
 -- DOI: 10.1007/BF01217741.
 --
--- Tadeusz Bałaban, "Renormalization Group Approach to Lattice Gauge Field
--- Theories. III. Convergence of the Effective Actions", Commun. Math. Phys.
--- 122 (1989), 355--392. DOI: 10.1007/BF01238433.
+-- Tadeusz Bałaban, "Large Field Renormalization. II. Localization,
+-- Exponentiation, and Bounds for the R Operation", Commun. Math. Phys. 122
+-- (1989), 355--392. DOI: 10.1007/BF01238433.
 --
 -- Gian-Carlo Rota, "On the Foundations of Combinatorial Theory I. Theory of
 -- Möbius Functions", Z. Wahrscheinlichkeitstheorie verw. Gebiete 2 (1964),
@@ -58,22 +58,20 @@ import DASHI.Physics.YangMills.BalabanClayT4HypercubicGeneratedActionExact
 import DASHI.Physics.YangMills.BalabanClayT4HypercubicOrbitQuadratureWeightsExact
 import DASHI.Physics.YangMills.BalabanClayT4WilsonOneLoopOrbitSummedIntervalExact
 import DASHI.Physics.YangMills.BalabanClayT4HypercubicRepresentativeSumExact
+import DASHI.Physics.YangMills.BalabanCMP109FourOrbitNormalizedQuadratureExact
 
 -- Source (5.6)/(5.7) Euclidean covariance of the FULL CMP109 vacuum
 -- polarization tensor feeds the concrete signed-permutation generators.
 import DASHI.Physics.YangMills.BalabanCMP109VacuumPolarizationHypercubicSourceSymmetryExact
 
--- L3: safe syntax normalization.  Hat momentum is reduced to its literal
--- Wilson sine-half definition without assuming the still-missing Bishop
--- double-angle/cosine theorem.
+-- L3: safe syntax normalization and Bishop semantic interval arithmetic.
+-- Hat momentum is reduced to the literal Wilson sine-half definition rather
+-- than independently certified.
 import DASHI.Physics.YangMills.BalabanClayT4DiagramTrigNormalFormExact
-
--- L3: rational endpoint arithmetic is now lifted to actual Bishop-real values,
--- including exact four-corner products without trichotomy and positive
--- reciprocal/division transport.
 import DASHI.Physics.YangMills.BalabanClayT4BishopFourCornerIntervalExact
 import DASHI.Physics.YangMills.BalabanClayT4BishopPositiveReciprocalIntervalExact
 import DASHI.Physics.YangMills.BalabanClayT4BishopExpressionIntervalSemanticsExact
+import DASHI.Physics.YangMills.BalabanClayT4CanonicalBishopAtomEnvironmentExact
 
 -- G2: exact Boolean-four-cube degree grouping and joint grouped interval
 -- transport after the pre-existing exact owner cancellation.
@@ -89,8 +87,16 @@ import DASHI.Physics.YangMills.BalabanYM4FiveChannelFourthOrderFactorizationExac
 import DASHI.Physics.YangMills.BalabanCMP119Section2SourceNativeStateExact
 import DASHI.Physics.YangMills.Balaban1989ActiveScaleTheorem1BetaBridgeExact
 
--- Nonblocking foundation lane: actual convergent Bishop arctangent series and
--- exact rational Machin tangent algebra.  Trig/branch characterization remains
--- separate from real-number construction.
+-- Nonblocking foundation lane.  The arctangent series are actual convergent
+-- Bishop series; their cubic/quintic interlacing now proves
+--
+--                3 < pi_M < 22/7
+--
+-- for the constructed Machin real.  Hence the only pi-facing physical leaf is
+-- identification of the Wilson Fourier period with this same real.
 import DASHI.Foundations.BishopMachinRationalTangentAlgebraExact
 import DASHI.Foundations.BishopMachinArctanConstructionExact
+import DASHI.Foundations.BishopArctanHalfBallInterlacingExact
+import DASHI.Foundations.BishopArctanCubicQuinticPolynomialExact
+import DASHI.Foundations.BishopMachinPiRationalWindowExact
+import DASHI.Physics.YangMills.BalabanBishopMachinNormalizedOuterMomentumExact
