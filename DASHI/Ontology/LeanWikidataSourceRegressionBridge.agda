@@ -1,7 +1,8 @@
 module DASHI.Ontology.LeanWikidataSourceRegressionBridge where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using ([]; _∷_)
+open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.String using (String)
 
 open import DASHI.Ontology.EpistemicTrit
 open import DASHI.Ontology.LeanWikidataFullSourceManifest
@@ -87,6 +88,7 @@ adamsInstanceComputed =
     "RDF worked fragment computes Q42 instance of Q35120"
     checkerExactness
 
+refs : List String
 refs =
   "aristotle:ae06ae06-2580-422a-8fc3-92aeaaca8762"
   ∷ "archive-sha256:d394cd224742dea06a47d2cc6c150e9284e2d6ea291a02c3ba2b2dd04d4f5f88"
