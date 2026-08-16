@@ -3,14 +3,6 @@ module DASHI.Governance.DevelopmentalInfluenceSourceAtlas where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
-------------------------------------------------------------------------
--- Source atlas for the developmental-influence / epistemic-dependency lane.
---
--- These records bind bibliographic provenance to bounded formal roles.  A
--- source entry does not by itself promote a causal, clinical, legal, religious
--- or political conclusion.
-------------------------------------------------------------------------
-
 record ScholarlySource : Set where
   constructor scholarlySource
   field
@@ -118,11 +110,6 @@ philipMorrisLunchablesPrimary =
     "DOI 10.2105/AJPH.2026.308491; PMID 42233189; PMCID PMC13277455"
     "primary internal-document case study supporting a bounded Philip Morris tobacco-to-food R&D transfer witness, including consumer-driven product development and better-for-you reformulation; does not establish that all food engineering derives from tobacco"
 
-------------------------------------------------------------------------
--- Observation / abstraction / information-flow sources used by the current
--- cross-pollination tranche.
-------------------------------------------------------------------------
-
 blackwellExperimentComparison : ScholarlySource
 blackwellExperimentComparison =
   mkSource
@@ -163,6 +150,16 @@ cousotAbstractInterpretation =
     "DOI 10.1145/512950.512973"
     "supports abstraction/concrete-semantics vocabulary; DASHI supplies the consumer-relative future-safety and proxy/welfare trace theorems"
 
+mooreKearfottCloudIntervalAnalysis : ScholarlySource
+mooreKearfottCloudIntervalAnalysis =
+  mkSource
+    "Ramon E. Moore; R. Baker Kearfott; Michael J. Cloud"
+    "Introduction to Interval Analysis"
+    "SIAM, Other Titles in Applied Mathematics 110"
+    "2009"
+    "DOI 10.1137/1.9780898717716"
+    "supports interval/enclosure vocabulary; DASHI supplies the abstract ordered-evidence composition theorem and does not infer empirical probabilities"
+
 data SourceBoundary : Set where
   bibliographyIsNotCausality : SourceBoundary
   associationIsNotMechanism : SourceBoundary
@@ -173,6 +170,7 @@ data SourceBoundary : Set where
   informationOrderIsNotGovernanceVerdict : SourceBoundary
   abstractionSafetyIsConsumerRelative : SourceBoundary
   accessPrincipleIsNotAutomaticLegalThreshold : SourceBoundary
+  intervalEnclosureIsNotProbabilityClaim : SourceBoundary
 
 canonicalSourceBoundaries : List SourceBoundary
 canonicalSourceBoundaries =
@@ -185,4 +183,5 @@ canonicalSourceBoundaries =
   ∷ informationOrderIsNotGovernanceVerdict
   ∷ abstractionSafetyIsConsumerRelative
   ∷ accessPrincipleIsNotAutomaticLegalThreshold
+  ∷ intervalEnclosureIsNotProbabilityClaim
   ∷ []
