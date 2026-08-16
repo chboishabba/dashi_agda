@@ -6,7 +6,7 @@ module DASHI.Moonshine.OggRepresentationReductionEverything where
 -- continuous irrep -> finite restriction -> branching/fixed-space spectrum
 --                    ||
 --                    vv
--- independent modular/Hecke column -> explicit intertwiner obligation.
+-- independent modular/Hecke column -> quotient-induced intertwiner obligation.
 --
 -- The old Ogg 7+7+1/nonary surfaces remain downstream comparison data.
 -- The phase-quotient/jCoarse/jFine/Fricke weld is imported here because it
@@ -28,6 +28,17 @@ module DASHI.Moonshine.OggRepresentationReductionEverything where
 -- to select Ogg.  Its sector count j+1 replaces the raw p+1 term in the modular
 -- genus formula, so the non-Fricke part of the prime-level genus is now read
 -- from reduced-representation observables plus the exact C2/C3 characters.
+--
+-- The Hecke frontier is now sharpened by exact quotient descent on the actual
+-- PrimeCorrespondenceHeckeOn API.  FactorVec -> SupportMask supplies a complete
+-- nontrivial model in which the existing support-mask correspondence is proved
+-- to be the canonical induced quotient correspondence.  The still-open SSP
+-- theorem is therefore the domain-specific SO(3)/reduction -> arithmetic Hecke
+-- quotient identification, not generic commuting-square algebra.
+--
+-- A strengthened falsifier proves even the C2/C3/C4/C5 fixed-space signature
+-- collides between dimension 13 (Ogg control) and dimension 15 (non-Ogg), so
+-- operator/branching information is required beyond four cyclic dimensions.
 ------------------------------------------------------------------------
 
 import DASHI.Analysis.FiniteRealQSeriesReflectionExact
@@ -78,6 +89,7 @@ import DASHI.Moonshine.SO3CyclicBranchingControlExact
 import DASHI.Moonshine.SO3CyclicFixedSpaceFormulaExact
 import DASHI.Moonshine.SO3C5FiveIrrepNineExact
 import DASHI.Moonshine.OggFixedSpaceSelectorNoGoExact
+import DASHI.Moonshine.OggCyclicFixedSpaceFourProbeNoGoExact
 import DASHI.Moonshine.OggPolyhedralReductionControlExact
 import DASHI.Moonshine.OggTetrahedralReductionControlExact
 import DASHI.Moonshine.OggPrimeControlMatrixExact
@@ -89,6 +101,8 @@ import DASHI.Moonshine.MatchedDihedralFrickeGenusBridgeExact
 import DASHI.Moonshine.PrimeRepresentationFrickeOrbitSaturationExact
 import DASHI.Moonshine.PrimeRepresentationSupersingularOrbitCouplingExact
 import DASHI.Moonshine.AllPrimeRepresentationFrickeClosureExact
+import DASHI.Moonshine.HeckeCorrespondenceQuotientDescentExact
+import DASHI.Moonshine.FactorVecSupportMaskHeckeQuotientExact
 import DASHI.Moonshine.SSPRepresentationHeckeIntertwinerBoundaryExact
 import DASHI.Moonshine.TernarySevenOggSSPComparisonExact
 import DASHI.Moonshine.OggPhaseFrickeSynthesisRegression
@@ -100,3 +114,6 @@ import DASHI.Physics.Closure.SSPZ3EigenspaceClassificationReceipt
 import DASHI.Physics.Moonshine.SupersingularPrimeLaneBridge
 import Ontology.Hecke.CorrespondenceRepresentation
 import Ontology.Hecke.LevelCorrespondenceRepresentation
+import Ontology.Hecke.QuotientRepresentation
+import Ontology.Hecke.FactorVecCorrespondence
+import Ontology.Hecke.FactorVecInstances
