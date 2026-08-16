@@ -43,6 +43,7 @@ import DASHI.Crypto.MLKEMFIPS203CBDPriorSuccessBoundExact
 import DASHI.Crypto.MLKEMFIPS203AverageSuccessResourceExact
 import DASHI.Crypto.MLKEMOppositeResidueParityDecompositionExact
 import DASHI.Crypto.MLKEMOppositeResidueParityFibreFactorisationExact
+import DASHI.Crypto.MLKEMNTTActualCBD2EightCoefficientLeakageResolutionExact
 import DASHI.Crypto.MLKEMBaseCaseConditionedResidualExact
 import DASHI.Crypto.ConditionedResidualAmbiguityRegressionExact
 import DASHI.Crypto.ConditionalMateAmbiguityExact
@@ -129,6 +130,9 @@ record Round17ClaimBoundary : Set where
     butterflyStageIdentityIsUniversalRepresentationLowerBound : Bool
     butterflyStageIdentityIsUniversalRepresentationLowerBoundIsFalse :
       butterflyStageIdentityIsUniversalRepresentationLowerBound ≡ false
+    rawPairInjectivityProvesPhysicalSideChannelInjectivity : Bool
+    rawPairInjectivityProvesPhysicalSideChannelInjectivityIsFalse :
+      rawPairInjectivityProvesPhysicalSideChannelInjectivity ≡ false
 
 open Round17ClaimBoundary public
 
