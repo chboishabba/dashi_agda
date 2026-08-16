@@ -149,9 +149,9 @@ heckeGeneralParity = aristotleMathModuleParity
   "a45235046a9f46c7fb0b8c86282db5be52f8637ee309096e0dfbc0b4b013c2cf"
   155
   8
-  unportedCore
-  "DASHI.Moonshine.AristotleHeckeRecurrenceCoreExact;DASHI.Moonshine.CandidateLevelRepresentationHeckeSquareExact"
-  "the prime-power recurrence kernel is now imported, but arbitrary-S Nat factorisation closure, all-prime determination, finite separating bound, and a_zero_undetermined remain unported"
+  partial
+  "DASHI.Moonshine.AristotleHeckeRecurrenceCoreExact;DASHI.Moonshine.AristotleHeckeGeneralPrimePowerDecompositionExact;DASHI.Moonshine.CandidateLevelRepresentationHeckeSquareExact"
+  "stdlib constructive raw factorisation plus arbitrary-S closure on pairwise-coprime prime-power decompositions are ported; canonical grouping of raw repeated prime factors into prime-power blocks, finite separating bound, and a_zero_undetermined remain"
 
 heckeWordsParity : AristotleMathModuleParity
 heckeWordsParity = aristotleMathModuleParity
@@ -159,9 +159,9 @@ heckeWordsParity = aristotleMathModuleParity
   "893eaa885ca57e4698767e38903a02e20702086cb0661e64f295b504d2589a03"
   223
   26
-  partial
-  "DASHI.Moonshine.ClassicalHeckeWeightKSmallWordExact;DASHI.Moonshine.RamanujanTauHecke23Exact"
-  "small word normalization/eigenvalue identities ported; full finitely-supported Hecke algebra multiplication/evaluation surface and all source polynomials remain"
+  substantialCore
+  "DASHI.Moonshine.ClassicalHeckeWeightKSmallWordExact;DASHI.Moonshine.AristotleHeckeWordsSourceParityExact;DASHI.Moonshine.RamanujanTauHecke23Exact"
+  "recursive finite word interpreter and all five source word normal forms are ported over the classical divisor-sum structure constants; generic CommRing/Finsupp evaluation presentation remains representation-distinct and source evalT packaging remains"
 
 mainParity : AristotleMathModuleParity
 mainParity = aristotleMathModuleParity
