@@ -51,7 +51,9 @@ module DASHI.Physics.Closure.NSTriadKNPhysicalNineOwnerWeightedFeasibilityRound6
 -- Rational upper approximations to sqrt(c_i) can make this arbitrarily close
 -- to the Cauchy-optimal real allocation while preserving exact proof terms.
 -- The equal-third allocator remains useful for the degenerate S=0 case and as
--- a simple fallback, but should not be the primary feasibility test.
+-- a simple fallback, but should not be the primary feasibility test.  As in the
+-- fallback module, the final strict gate is a direct proof argument, not a
+-- one-field reserve receipt.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
@@ -324,28 +326,19 @@ weightedCriticalBudgetIsExact :
   ≡ G.correctionCap data
 weightedCriticalBudgetIsExact = weightedCorrectionTotalExact
 
-record WeightedPhysicalNineOwnerReserve
-    {data : G.PhysicalNineOwnerScalars}
-    (roots : RationalSquareRootMajorants data) : Set where
-  field
-    strictWeightedNineOwnerReserve :
-      G.hhBadEta data
-        + weightedSoftEta roots
-        + Existing.hardFourClassTax
-      < 1ℚ
-
-open WeightedPhysicalNineOwnerReserve public
-
 weightedNineOwnerStrictAbsorption :
   ∀ {data} (roots : RationalSquareRootMajorants data) →
-  WeightedPhysicalNineOwnerReserve roots →
+  ( G.hhBadEta data
+      + weightedSoftEta roots
+      + Existing.hardFourClassTax
+    < 1ℚ ) →
   G.hhBadEta data
     + Joint.softEtaTotal (weightedThreeSoftAllocation roots)
     + Existing.hardFourClassTax
   < 1ℚ
-weightedNineOwnerStrictAbsorption roots reserve
+weightedNineOwnerStrictAbsorption roots scalarGate
   rewrite weightedSoftEtaMeaning roots =
-  strictWeightedNineOwnerReserve reserve
+  scalarGate
 
 weightedRationalYoungAllocatorConstructed : Bool
 weightedRationalYoungAllocatorConstructed = true
