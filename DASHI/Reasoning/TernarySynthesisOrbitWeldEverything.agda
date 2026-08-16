@@ -8,7 +8,6 @@ import DASHI.Cognition.RecursiveFibreTower
 import DASHI.Cognition.PhaseEnrichedTrit
 import DASHI.Foundations.BalancedTernaryStageSymmetryExact
 import DASHI.Foundations.CounterpositionOrderedJoinExact
-import DASHI.Foundations.FiniteWreathRefinementExact
 import DASHI.Foundations.RepresentationChartInvariant
 import DASHI.Foundations.SignedZeroTernaryOrientationExact
 import DASHI.Foundations.SSPPrimeLaneUnitAction
