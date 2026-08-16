@@ -38,6 +38,7 @@ module DASHI.Physics.Closure.NSTriadKNSharpWeightedScalarGateRound62Exact where
 --
 --   2 C_* K_bad + K S^2 / ((r-q)-a) + 1/16 < 1.
 --
+-- The first term is `G.hhBadEta`, definitionally `2*C_*K_bad` in Round61.
 -- No correction-cap choice remains hidden in the final gate.
 ------------------------------------------------------------------------
 
@@ -46,11 +47,11 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; 1ℚ; _+_; _*_; _<_; 1/_)
+  (ℚ; 1ℚ; _+_; _*_; _<_; 1/_)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using
-  (cong; subst; sym; trans; module ≡-Reasoning)
+  (cong; subst; sym; module ≡-Reasoning)
 
 import DASHI.Physics.Closure.NSTriadKNNineOwnerCriticalAbsorptionRound28Exact as Nine
 import DASHI.Physics.Closure.NSTriadKNFixedShiftCorrectionHeadroomRound54Exact as Headroom
@@ -234,8 +235,8 @@ explicitSharpEtaTotal :
     {identification : Headroom.PhysicalOwnerBlockCorrectionIdentification
       balances recursionData block} →
   SharpC.StrictPositiveCriticalScaleData identification →
-  G.PhysicalNineOwnerScalars →
-  Weighted.RationalSquareRootMajorants → ℚ
+  (data : G.PhysicalNineOwnerScalars) →
+  Weighted.RationalSquareRootMajorants data → ℚ
 explicitSharpEtaTotal positiveScale data roots =
   G.hhBadEta data
   + criticalScale positiveScale
