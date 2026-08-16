@@ -29,7 +29,7 @@ module DASHI.Physics.YangMills.BalabanP33UniformSelectedMinimizerAtomIntervalExa
 --   green_ST(A)    in [L_green(S,T), U_green(S,T)]
 --
 -- valid for every A in the certified selected region, plus ONE lower bound
--- Q_* <= Q(A).  From the shared boxes we compute the single rational endpoint
+-- Q_* <= Q(A). From the shared boxes we compute the single rational endpoint
 --
 --   U_* = sum_S U_raw(S) - sum_{S,T} L_green(S,T).
 --
@@ -42,13 +42,14 @@ module DASHI.Physics.YangMills.BalabanP33UniformSelectedMinimizerAtomIntervalExa
 --   R_corr(A) <= U_* <= (55/18874368) Q_*
 --             <= (55/18874368) Q(A),
 --
--- and therefore the same theorem for the actual selected minimizer.  There is
+-- and therefore the same theorem for the actual selected minimizer. There is
 -- no configuration-indexed `R_corr <= target` or endpoint-to-target premise.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _*_; _≤_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _-_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
+open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
@@ -158,18 +159,13 @@ uniformRegionResidualBelowSharedEndpoint :
   Ownership.correlatedResidualTotal (familyAt dataSet configuration)
   ≤ sharedResidualUpper (sharedBoxes dataSet)
 uniformRegionResidualBelowSharedEndpoint dataSet configuration inRegion =
-  let
-    bounded = Atom.correlatedResidualBelowAtomIntervalUpper
-      (atomEnvelopeAt dataSet configuration inRegion)
-  in
-  Relation.Binary.PropositionalEquality.subst
+  subst
     (λ upper →
       Ownership.correlatedResidualTotal (familyAt dataSet configuration)
       ≤ upper)
     (atomEnvelopeUsesSharedResidualUpper dataSet configuration inRegion)
-    bounded
-  where
-  open import Relation.Binary.PropositionalEquality
+    (Atom.correlatedResidualBelowAtomIntervalUpper
+      (atomEnvelopeAt dataSet configuration inRegion))
 
 uniformLowerChargeBelowActualTarget :
   ∀ {Configuration}
