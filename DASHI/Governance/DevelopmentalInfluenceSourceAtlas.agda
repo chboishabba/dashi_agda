@@ -108,12 +108,23 @@ nationalSmokersAllianceSource =
     "DOI 10.1080/10810730701326002"
     "supports a historically bounded consent-engineering / counter-mobilization case rather than a generic hidden-coordination claim"
 
+philipMorrisLunchablesPrimary : ScholarlySource
+philipMorrisLunchablesPrimary =
+  mkSource
+    "Laura A. Schmidt"
+    "Tobacco Industry Contributions to the Development of Ultraprocessed Food in the United States, 1985-2007: A Case Study of Lunchables"
+    "American Journal of Public Health 116(7):940-949"
+    "2026"
+    "DOI 10.2105/AJPH.2026.308491; PMID 42233189; PMCID PMC13277455"
+    "primary internal-document case study supporting a bounded Philip Morris tobacco-to-food R&D transfer witness, including consumer-driven product development and better-for-you reformulation; does not establish that all food engineering derives from tobacco"
+
 data SourceBoundary : Set where
   bibliographyIsNotCausality : SourceBoundary
   associationIsNotMechanism : SourceBoundary
   mechanismIsNotNormativeVerdict : SourceBoundary
   developmentalInfluenceIsNotIndoctrination : SourceBoundary
   politicalSimilarityIsNotCommonCommand : SourceBoundary
+  oneTransferCaseIsNotUniversalIndustryGenealogy : SourceBoundary
 
 canonicalSourceBoundaries : List SourceBoundary
 canonicalSourceBoundaries =
@@ -122,4 +133,5 @@ canonicalSourceBoundaries =
   ∷ mechanismIsNotNormativeVerdict
   ∷ developmentalInfluenceIsNotIndoctrination
   ∷ politicalSimilarityIsNotCommonCommand
+  ∷ oneTransferCaseIsNotUniversalIndustryGenealogy
   ∷ []
