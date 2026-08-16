@@ -21,32 +21,33 @@ module DASHI.Physics.Closure.NSTriadKNComResidualShellCapRound63Exact where
 -- ROUND 63 B0 AUTHORITY-CORRECTED COMPARABLE CAP
 --
 -- Historical filename note: an earlier draft called this the `residual` cap
--- and used weak j+3<=j' separation.  The mature physical classifier instead
--- uses strict `natLess (j+3) j'`, and calls the fourth triadic class CC /
--- comparable.  This file now proves the correct theorem for that authoritative
--- class.
+-- and reimplemented the collar with weak inequalities.  The mature physical
+-- classifier uses strict `natLess (j+Csep) j'`, and names the fourth TRIADIC
+-- class CC/comparable.  This module now reasons directly from that certificate.
 --
--- For every physical triad classified CC,
+-- If radius=Csep, a comparable triad satisfies the classifier-native bounds
 --
---   j(k) <= j(q)+4,
---   j(q) <= j(k)+4,
+--   j(k) <= suc (j(q) + radius),
+--   j(q) <= suc (j(k) + radius).
 --
--- hence |j(k)-j(q)|<=4.
+-- Since the authoritative literal policy has radius=Csep=3, this is precisely
+-- the finite four-shell band.  The theorem intentionally keeps the native
+-- `suc (j+radius)` form instead of normalizing Nat addition inside dependent
+-- types.
 --
--- The extra shell versus the provisional three-shell theorem is the exact
--- off-by-one introduced by strict versus weak collar semantics.  This theorem
--- is diagnostic for the triadic summands of the differentiated commutator; it
--- does NOT identify CC with the fifth Com owner.  Round25 keeps CC and Com as
--- distinct sources.
+-- This is a statement about the triadic CC summands.  It does NOT identify CC
+-- with the fifth Com owner; Round25 keeps the appended differentiated
+-- commutator as a separate source.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Data.Empty using (⊥; ⊥-elim)
-open import Data.Nat.Base using (_≤_; z≤n; s≤s; ∣_-_∣)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
+open import Data.Nat.Base using (_≤_; z≤n; s≤s)
 import Data.Nat.Properties as Nat
-open import Data.Sum.Base using (_⊎_; inj₁; inj₂)
+open import Data.Product.Base using (_×_; _,_; proj₁; proj₂)
+open import Data.Sum.Base using (inj₁; inj₂)
+open import Relation.Binary.PropositionalEquality using (subst)
 
 import DASHI.Physics.Closure.NSPeriodicNearTriadClassification as Near
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
@@ -69,67 +70,38 @@ leOneSuccessor : (n : Nat) → n ≤ suc n
 leOneSuccessor zero = z≤n
 leOneSuccessor (suc n) = s≤s (leOneSuccessor n)
 
-leThreeSuccessors : (n : Nat) → n ≤ suc (suc (suc n))
-leThreeSuccessors n =
-  Nat.≤-trans
-    (Nat.≤-trans (leOneSuccessor n) (leOneSuccessor (suc n)))
-    (leOneSuccessor (suc (suc n)))
+leSelfPlus : (left right : Nat) → left ≤ left + right
+leSelfPlus zero right = z≤n
+leSelfPlus (suc left) right = s≤s (leSelfPlus left right)
 
-leFourSuccessors : (n : Nat) → n ≤ suc (suc (suc (suc n)))
-leFourSuccessors n =
-  Nat.≤-trans (leThreeSuccessors n) (leOneSuccessor (suc (suc (suc n))))
-
-record ComparableInputOutputBand
-    (tau : Physical.PhysicalTriadIncidence) : Set where
-  field
-    outputAtMostFourAboveInput :
-      Support.literalShellPolicy Scale.PhysicalShellPolicy.shellLevel (Physical.k tau)
-      ≤ suc (suc (suc (suc
-          (Support.literalShellPolicy Scale.PhysicalShellPolicy.shellLevel (Physical.q tau)))))
-
-    inputAtMostFourAboveOutput :
-      Support.literalShellPolicy Scale.PhysicalShellPolicy.shellLevel (Physical.q tau)
-      ≤ suc (suc (suc (suc
-          (Support.literalShellPolicy Scale.PhysicalShellPolicy.shellLevel (Physical.k tau)))))
-
-open ComparableInputOutputBand public
-
--- Use the shorter exported shell-level projection below.  It is definitionally
--- the literal shell index from the authoritative policy.
-shell : Physical.PhysicalTriadIncidence → (Physical.PhysicalTriadIncidence → _) → Nat
-shell tau projection = Scale.shellLevel Support.literalShellPolicy (projection tau)
-
-comparableInputOutputBand :
+comparableInputOutputNativeBand :
   ∀ {tau} →
   Support.TriadicClassCertificate tau Support.CC →
-  ( Scale.shellLevel Support.literalShellPolicy (Physical.k tau)
-      ≤ suc (suc (suc (suc
-          (Scale.shellLevel Support.literalShellPolicy (Physical.q tau))))) )
-  ×
-  ( Scale.shellLevel Support.literalShellPolicy (Physical.q tau)
-      ≤ suc (suc (suc (suc
-          (Scale.shellLevel Support.literalShellPolicy (Physical.k tau))))) )
-comparableInputOutputBand {tau} certificate
+  let policy = Support.literalShellPolicy
+      jp = Scale.shellLevel policy (Physical.p tau)
+      jq = Scale.shellLevel policy (Physical.q tau)
+      jk = Scale.shellLevel policy (Physical.k tau)
+      radius = Scale.overlapRadius policy
+  in
+  (jk ≤ suc (jq + radius)) × (jq ≤ suc (jk + radius))
+comparableInputOutputNativeBand {tau} certificate
   with Support.classMeaning certificate
 ... | Scale.comparableCondition notLH notHL notHH = outputUpper , inputUpper
   where
-  jp = Scale.shellLevel Support.literalShellPolicy (Physical.p tau)
-  jq = Scale.shellLevel Support.literalShellPolicy (Physical.q tau)
-  jk = Scale.shellLevel Support.literalShellPolicy (Physical.k tau)
-  radius = Scale.overlapRadius Support.literalShellPolicy
+  policy = Support.literalShellPolicy
+  jp = Scale.shellLevel policy (Physical.p tau)
+  jq = Scale.shellLevel policy (Physical.q tau)
+  jk = Scale.shellLevel policy (Physical.k tau)
+  radius = Scale.overlapRadius policy
 
   pAtMostQPlusRadius : jp ≤ jq + radius
   pAtMostQPlusRadius =
     natLessFalseImpliesReverseLe (jq + radius) jp notHL
 
-  qAtMostPPlusRadius : jq ≤ jp + radius
-  qAtMostPPlusRadius =
-    natLessFalseImpliesReverseLe (jp + radius) jq notLH
-
   consequences : Infinity.OfficialResonantNormConsequences tau
   consequences = Infinity.officialResonantNormConsequences tau
 
-  outputUpper : jk ≤ suc (suc (suc (suc jq)))
+  outputUpper : jk ≤ suc (jq + radius)
   outputUpper with Nat.≤-total jp jq
   ... | inj₁ p≤q =
     Nat.≤-trans
@@ -139,9 +111,7 @@ comparableInputOutputBand {tau} certificate
         {output = Infinity.infinityNorm (Physical.k tau)}
         (Infinity.outputTriangle consequences)
         p≤q)
-      (Nat.≤-trans
-        (leOneSuccessor jq)
-        (leThreeSuccessors (suc jq)))
+      (s≤s (leSelfPlus jq radius))
   ... | inj₂ q≤p =
     Nat.≤-trans
       (Dyadic.shellOfNormSumUpperRight
@@ -156,15 +126,13 @@ comparableInputOutputBand {tau} certificate
           (Infinity.outputTriangle consequences))
         q≤p)
       (s≤s pAtMostQPlusRadius)
-    where
-    open import Relation.Binary.PropositionalEquality using (subst)
 
-  inputUpper : jq ≤ suc (suc (suc (suc jk)))
+  inputUpper : jq ≤ suc (jk + radius)
   inputUpper with notHH
   ... | inj₂ notKBelowQ =
     Nat.≤-trans
       (natLessFalseImpliesReverseLe (jk + radius) jq notKBelowQ)
-      (leOneSuccessor (suc (suc (suc jk))))
+      (leOneSuccessor (jk + radius))
   ... | inj₁ notKBelowP =
     inputFromP
       (natLessFalseImpliesReverseLe (jk + radius) jp notKBelowP)
@@ -173,7 +141,7 @@ comparableInputOutputBand {tau} certificate
     inputFromP :
       jp ≤ jk + radius →
       (jp ≤ jk ⊎ jk ≤ jp) →
-      jq ≤ suc (suc (suc (suc jk)))
+      jq ≤ suc (jk + radius)
     inputFromP p≤kPlusRadius (inj₁ p≤k) =
       Nat.≤-trans
         (Dyadic.shellOfNormSumUpperRight
@@ -187,9 +155,7 @@ comparableInputOutputBand {tau} certificate
               (Infinity.infinityNorm (Physical.p tau)))
             (Infinity.qReverseTriangle consequences))
           p≤k)
-        (Nat.≤-trans
-          (leOneSuccessor jk)
-          (leThreeSuccessors (suc jk)))
+        (s≤s (leSelfPlus jk radius))
     inputFromP p≤kPlusRadius (inj₂ k≤p) =
       Nat.≤-trans
         (Dyadic.shellOfNormSumUpperRight
@@ -200,54 +166,39 @@ comparableInputOutputBand {tau} certificate
           k≤p)
         (s≤s p≤kPlusRadius)
 
-mutual
-  shellDistanceAtMostFour :
-    ∀ {left right} →
-    left ≤ suc (suc (suc (suc right))) →
-    right ≤ suc (suc (suc (suc left))) →
-    ∣ left - right ∣ ≤ 4
-  shellDistanceAtMostFour {zero} {zero} leftBound rightBound = z≤n
-  shellDistanceAtMostFour {zero} {suc zero} leftBound rightBound = s≤s z≤n
-  shellDistanceAtMostFour {zero} {suc (suc zero)} leftBound rightBound =
-    s≤s (s≤s z≤n)
-  shellDistanceAtMostFour {zero} {suc (suc (suc zero))} leftBound rightBound =
-    s≤s (s≤s (s≤s z≤n))
-  shellDistanceAtMostFour {zero} {suc (suc (suc (suc zero)))} leftBound rightBound =
-    s≤s (s≤s (s≤s (s≤s z≤n)))
-  shellDistanceAtMostFour {zero} {suc (suc (suc (suc (suc right))))}
-    leftBound (s≤s (s≤s (s≤s (s≤s ()))))
-  shellDistanceAtMostFour {suc zero} {zero} leftBound rightBound = s≤s z≤n
-  shellDistanceAtMostFour {suc (suc zero)} {zero} leftBound rightBound =
-    s≤s (s≤s z≤n)
-  shellDistanceAtMostFour {suc (suc (suc zero))} {zero} leftBound rightBound =
-    s≤s (s≤s (s≤s z≤n))
-  shellDistanceAtMostFour {suc (suc (suc (suc zero)))} {zero} leftBound rightBound =
-    s≤s (s≤s (s≤s (s≤s z≤n)))
-  shellDistanceAtMostFour {suc (suc (suc (suc (suc left))))} {zero}
-    (s≤s (s≤s (s≤s (s≤s ())))) rightBound
-  shellDistanceAtMostFour {suc left} {suc right}
-    (s≤s leftBound) (s≤s rightBound) =
-    shellDistanceAtMostFour leftBound rightBound
+literalComparableCollarIsThree :
+  Scale.overlapRadius Support.literalShellPolicy ≡ suc (suc (suc zero))
+literalComparableCollarIsThree = Support.separationCollarIsThree
 
-comparableInputOutputDistanceAtMostFour :
+comparableOutputNativeCap :
   ∀ {tau} →
   Support.TriadicClassCertificate tau Support.CC →
-  ∣ Scale.shellLevel Support.literalShellPolicy (Physical.k tau)
-    - Scale.shellLevel Support.literalShellPolicy (Physical.q tau) ∣ ≤ 4
-comparableInputOutputDistanceAtMostFour certificate =
-  let band = comparableInputOutputBand certificate
-  in shellDistanceAtMostFour (proj₁ band) (proj₂ band)
-  where
-  open import Data.Product.Base using (proj₁; proj₂)
+  Scale.shellLevel Support.literalShellPolicy (Physical.k tau)
+  ≤ suc
+      (Scale.shellLevel Support.literalShellPolicy (Physical.q tau)
+       + Scale.overlapRadius Support.literalShellPolicy)
+comparableOutputNativeCap certificate =
+  proj₁ (comparableInputOutputNativeBand certificate)
 
-comparableTriadicBandIsFour : Bool
-comparableTriadicBandIsFour = true
+comparableInputNativeCap :
+  ∀ {tau} →
+  Support.TriadicClassCertificate tau Support.CC →
+  Scale.shellLevel Support.literalShellPolicy (Physical.q tau)
+  ≤ suc
+      (Scale.shellLevel Support.literalShellPolicy (Physical.k tau)
+       + Scale.overlapRadius Support.literalShellPolicy)
+comparableInputNativeCap certificate =
+  proj₂ (comparableInputOutputNativeBand certificate)
+
+comparableTriadicBandIsCollarPlusOne : Bool
+comparableTriadicBandIsCollarPlusOne = true
 
 comparableIsDistinctFromFifthComOwner : Bool
 comparableIsDistinctFromFifthComOwner = true
 
-comparableTriadicBandIsFourIsTrue : comparableTriadicBandIsFour ≡ true
-comparableTriadicBandIsFourIsTrue = refl
+comparableTriadicBandIsCollarPlusOneIsTrue :
+  comparableTriadicBandIsCollarPlusOne ≡ true
+comparableTriadicBandIsCollarPlusOneIsTrue = refl
 
 comparableIsDistinctFromFifthComOwnerIsTrue :
   comparableIsDistinctFromFifthComOwner ≡ true
