@@ -36,6 +36,10 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Foundations.SU2SO3IrrepDimensionExact as Spin
 
+infix 2 _⇔_
+_⇔_ : Set → Set → Set
+A ⇔ B = (A → B) × (B → A)
+
 data CandidateLevel : Set where
   spinorLevel2 : CandidateLevel
   spatialLevel : Spin.AngularMomentum0To35 → CandidateLevel
@@ -127,7 +131,7 @@ record ExceptionalLocusAgreement
       (level : CandidateLevel) →
       representationClosed comparison
         (representationDefect comparison level)
-      ↔
+      ⇔
       arithmeticClosed comparison
         (arithmeticDefect comparison (candidateLevelNat level))
 
@@ -154,13 +158,13 @@ record DerivedExceptionalLocusMatchesExternal
       (level : CandidateLevel) →
       representationClosed comparison
         (representationDefect comparison level)
-      ↔ exceptional external (candidateLevelNat level)
+      ⇔ exceptional external (candidateLevelNat level)
 
     arithmeticMatchesExternal :
       (level : CandidateLevel) →
       arithmeticClosed comparison
         (arithmeticDefect comparison (candidateLevelNat level))
-      ↔ exceptional external (candidateLevelNat level)
+      ⇔ exceptional external (candidateLevelNat level)
 
     matchingReceipt : String
 
