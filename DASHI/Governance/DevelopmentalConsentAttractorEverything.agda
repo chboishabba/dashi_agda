@@ -10,5 +10,6 @@ import DASHI.Governance.ResponsiveInfluencePolicy
 import DASHI.Governance.AutonomyReopeningCriterion
 import DASHI.Governance.RepresentationCarrierVerificationCore
 import DASHI.Governance.EpistemicAttractorCore
+import DASHI.Governance.WokeAwakeProvenanceBoundary
 import DASHI.Governance.ExternalityCarrierAttractor
 import DASHI.Governance.InstitutionalTechniqueTransferCore
