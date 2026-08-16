@@ -8,11 +8,13 @@ import DASHI.Cognition.RecursiveFibreTower
 import DASHI.Cognition.PhaseEnrichedTrit
 import DASHI.Foundations.BalancedTernaryStageSymmetryExact
 import DASHI.Foundations.CounterpositionOrderedJoinExact
+import DASHI.Foundations.NaryCyclicOutputPhaseCountExact
 import DASHI.Foundations.RepresentationChartInvariant
 import DASHI.Foundations.SignedZeroTernaryOrientationExact
 import DASHI.Foundations.SSPPrimeLaneUnitAction
 import DASHI.Foundations.TernaryEndomorphismConjugacyExact
 import DASHI.Foundations.TernaryEndomorphismPhaseQuotientExact
+import DASHI.Foundations.TernaryEndomorphismS3ActionLawsExact
 import DASHI.Foundations.TernaryHypervoxelPermutationTransportExact
 import DASHI.Foundations.TernaryPermutationS3LawsExact
 import DASHI.Interop.PNFHodgeResidualTopology
@@ -25,4 +27,5 @@ import DASHI.Reasoning.RelationalBranchInterference
 import DASHI.Reasoning.RelationalLensSynthesisCore
 import DASHI.Reasoning.RelationalTernaryPhaseGeometry
 import DASHI.Reasoning.TernaryComparisonSynthesisExact
+import DASHI.Reasoning.TernarySynthesisLogicQualificationExact
 import DASHI.Reasoning.TernarySynthesisTransportWeldExact
