@@ -199,7 +199,7 @@ normalizedTwoSoftToStrictGapData
   ; dataScaleBound = λ n →
       subst
         (λ left → left ≤ aSoft * C0.blockTarget block n)
-        (aggregateRemainderIsTwoSoft balances zeros n)
+        (sym (aggregateRemainderIsTwoSoft balances zeros n))
         (normalizedTwoSoftBoundImpliesScale
           balances block positiveScale aSoft uniform n)
   ; strictDataGap = strictGap
