@@ -39,10 +39,12 @@ module DASHI.Physics.Closure.NSTriadKNHighestAlphaRound61Exact where
 --       source-indexed estimates, B's single active six-three identification,
 --       and C's strict-positive-scale data; derived B/C certificates are not
 --       re-requested from callers.
--- G   : exact rational B_*/3 allocation constructs all three Young splits;
---       the final numerical feasibility question is one strict scalar gate.
---       The necessary two-resource no-go is also generalized from 2 C_* to
---       the physical 2 C_* K_bad hard tax.
+-- G   : equal-third allocation is an exact rational fallback.  The high-alpha
+--       allocator accepts rational square-root majorants c_i<=s_i^2 and spends
+--       B_i proportional to s_i, giving exact soft tax S^2/B_* with
+--       S=s_Com+s_kernel+s_HHg.  This approaches the Cauchy-optimal real split
+--       without introducing irrational carriers.  The necessary two-resource
+--       no-go is generalized from 2 C_* to physical 2 C_* K_bad.
 -- H   : the selected Leray--Hopf solution, localized gradient integral,
 --       T^3/unit-viscosity normalization and Luo continuation conclusion are
 --       proved on the same existing official carrier.
@@ -97,8 +99,9 @@ import DASHI.Physics.Closure.NSTriadKNHHGoodLiteralAnnularStrainSymbolRound48Exa
 import DASHI.Physics.Closure.NSTriadKNHHGoodAnnularMasterKernelRound41Exact
 import DASHI.Physics.Closure.NSTriadKNHHGoodSameObjectMasterKernelRound55Exact
 
--- G/H: deterministic resource allocation, K_bad-aware no-go, and same-object
--- continuation closure.
+-- G/H: exact fallback + weighted near-optimal allocation, K_bad-aware no-go,
+-- and same-object continuation closure.
 import DASHI.Physics.Closure.NSTriadKNPhysicalNineOwnerFeasibilityRound61Exact
+import DASHI.Physics.Closure.NSTriadKNPhysicalNineOwnerWeightedFeasibilityRound61Exact
 import DASHI.Physics.Closure.NSTriadKNJointGlobalFeasibilityKBadRound61Exact
 import DASHI.Physics.Closure.NSTriadKNPhysicalContinuationClosureRound61Exact
