@@ -118,6 +118,41 @@ philipMorrisLunchablesPrimary =
     "DOI 10.2105/AJPH.2026.308491; PMID 42233189; PMCID PMC13277455"
     "primary internal-document case study supporting a bounded Philip Morris tobacco-to-food R&D transfer witness, including consumer-driven product development and better-for-you reformulation; does not establish that all food engineering derives from tobacco"
 
+------------------------------------------------------------------------
+-- Observation / abstraction / information-flow sources used by the current
+-- cross-pollination tranche.
+------------------------------------------------------------------------
+
+blackwellExperimentComparison : ScholarlySource
+blackwellExperimentComparison =
+  mkSource
+    "David Blackwell"
+    "Equivalent Comparisons of Experiments"
+    "The Annals of Mathematical Statistics 24(2):265-272"
+    "1953"
+    "DOI 10.1214/aoms/1177729032"
+    "supports comparison-of-information vocabulary; DASHI supplies the exact observation-relative compression and separating-query theorems"
+
+nissenbaumContextualIntegrity : ScholarlySource
+nissenbaumContextualIntegrity =
+  mkSource
+    "Helen Nissenbaum"
+    "Privacy as Contextual Integrity"
+    "Washington Law Review 79(1):119-158"
+    "2004"
+    "journal citation; no DOI listed in the cited record"
+    "supports context-relative information-flow vocabulary; does not by itself establish a legal or normative verdict for any named deployment"
+
+cousotAbstractInterpretation : ScholarlySource
+cousotAbstractInterpretation =
+  mkSource
+    "Patrick Cousot; Radhia Cousot"
+    "Abstract interpretation: a unified lattice model for static analysis of programs by construction or approximation of fixpoints"
+    "POPL 1977:238-252"
+    "1977"
+    "DOI 10.1145/512950.512973"
+    "supports abstraction/concrete-semantics vocabulary; DASHI supplies the consumer-relative future-safety and proxy/welfare trace theorems"
+
 data SourceBoundary : Set where
   bibliographyIsNotCausality : SourceBoundary
   associationIsNotMechanism : SourceBoundary
@@ -125,6 +160,8 @@ data SourceBoundary : Set where
   developmentalInfluenceIsNotIndoctrination : SourceBoundary
   politicalSimilarityIsNotCommonCommand : SourceBoundary
   oneTransferCaseIsNotUniversalIndustryGenealogy : SourceBoundary
+  informationOrderIsNotGovernanceVerdict : SourceBoundary
+  abstractionSafetyIsConsumerRelative : SourceBoundary
 
 canonicalSourceBoundaries : List SourceBoundary
 canonicalSourceBoundaries =
@@ -134,4 +171,6 @@ canonicalSourceBoundaries =
   ∷ developmentalInfluenceIsNotIndoctrination
   ∷ politicalSimilarityIsNotCommonCommand
   ∷ oneTransferCaseIsNotUniversalIndustryGenealogy
+  ∷ informationOrderIsNotGovernanceVerdict
+  ∷ abstractionSafetyIsConsumerRelative
   ∷ []
