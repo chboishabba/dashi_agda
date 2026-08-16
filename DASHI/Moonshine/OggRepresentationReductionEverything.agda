@@ -1,54 +1,46 @@
 module DASHI.Moonshine.OggRepresentationReductionEverything where
 
 ------------------------------------------------------------------------
--- Aggregate surface for the corrected SSP research direction:
+-- Aggregate surface for the corrected SSP research direction.
 --
--- continuous irrep -> finite restriction -> branching/fixed-space spectrum
---                    ||
---                    vv
--- independent modular/Hecke column -> quotient-induced intertwiner obligation.
+-- Representation lane:
+--   continuous irrep -> finite restriction -> branching/fixed-space spectrum
+--   -> explicit weight states -> matched-dihedral sector quotient.
 --
--- The old Ogg 7+7+1/nonary surfaces remain downstream comparison data.
--- The phase-quotient/jCoarse/jFine/Fricke weld is imported here because it
--- supplies an independently constructed finite reduction chain rather than an
--- SSP selector assumption.  Direct Aristotle arithmetic/Hecke/q-series
--- theorems and the complete candidate tau fingerprint are independent control
--- columns, not selector premises.  The prime Fricke coupling imports below
--- make the first exact representation/modular defect bridge: SO(3) characters
--- reconstruct the elliptic-point part of g(X0(p)); class-number Fricke fixed
--- points close the quotient defect, orbit saturation, and finite
--- supersingular/Frobenius two-orbit spectrum.  p=2 stays a separate SU(2)
--- spinor boundary rather than being forced through the odd SO(3) lane.
--- Cyclic C2/C3 elliptic stabilisers are embedded as proper subgroups of the
--- existing ternary S3 permutation carrier rather than conflated with S3.
+-- Modular/arithmetic lane:
+--   Fricke/class-number controls plus a source-faithful variable-degree
+--   classical Hecke correspondence carrier.  The older Vec15 Monster-prime
+--   ontology correspondence remains a useful finite quotient model but is not
+--   identified with the classical ell+1 isogeny fibre.
 --
--- The matched-dihedral extension is a candidate-indexed restriction
--- H_j = D_(2j+1).  It gives the literal five-irrep decomposition
--- 9 = 1+2+2+2+2 at j=4, while proving multiplicity-freeness itself is too weak
--- to select Ogg.  Its sector count j+1 replaces the raw p+1 term in the modular
--- genus formula, so the non-Fricke part of the prime-level genus is now read
--- from reduced-representation observables plus the exact C2/C3 characters.
+-- The matched-dihedral family H_j = D_(2j+1) gives the literal five-irrep
+-- decomposition 9 = 1+2+2+2+2 at j=4.  Its sector count j+1 replaces the raw
+-- p+1 term in the prime-level genus formula.  Scalar selector falsifiers show
+-- that C2/C3 and even C2/C3/C4/C5 fixed-space dimensions are too coarse.
 --
--- The Hecke frontier is sharpened by exact quotient descent on the actual
--- PrimeCorrespondenceHeckeOn API.  FactorVec -> SupportMask supplies a complete
--- nontrivial model in which the existing support-mask correspondence is proved
--- to be the canonical induced quotient correspondence.  A count-only quotient
--- is explicitly falsified: equal support cardinality can hide a Hecke-relevant
--- difference.
+-- Generic quotient descent is proved for both the legacy Vec15 correspondence
+-- and the new classical variable-degree correspondence.  FactorVec ->
+-- SupportMask supplies a complete nontrivial Vec15 model, while a count-only
+-- quotient is explicitly rejected as operator-unsafe.
 --
--- The natural-level API is now extended to level-dependent fine/coarse class
--- families.  The representation target is concrete: level 2 has two spinor
--- basis states quotienting to one SU(2) doublet sector; odd level 2*j+1 has the
--- explicit SO(3) weights 0,+/-1,...,+/-j quotienting by +/- pairing onto the
--- matched D_(2j+1) sectors.  At level 9 this is an exact 9 fine states -> five
--- irreducible sectors construction.  What remains is the source-justified
--- level-indexed 15-way fine correspondence and its arithmetic Hecke/Brandt
--- identification, not the carrier or quotient algebra.
+-- The first actual classical arithmetic producer is p=11, ell=2.  The reduced
+-- modular polynomial gives the degree-three multiplicity matrix
 --
--- A strengthened representation falsifier proves even the C2/C3/C4/C5
--- fixed-space signature collides between dimension 13 (Ogg control) and
--- dimension 15 (non-Ogg), so operator/branching information is required beyond
--- four cyclic dimensions.
+--   [[0,3],[2,1]],
+--
+-- with exact eigenvalues 3 and -2 and degree-Laplacian modes 0 and 5.  Its
+-- two-state carrier has a two-way chart to the existing p=11 Frobenius normal
+-- form (two fixed, zero paired slots), with an explicit boundary preventing
+-- that finite chart from being promoted automatically to geometric
+-- supersingular realization.  A singleton quotient demonstrates that an
+-- operator-stable coarse observation may still erase the nonconstant spectral
+-- mode.
+--
+-- The real frontier is therefore source-specific rather than categorical:
+-- construct the geometric supersingular/Brandt correspondence (or another
+-- justified classical Hecke realization), construct the corresponding
+-- representation-side classical correspondence, and prove an actual
+-- intertwiner/quotient identification between those operator systems.
 ------------------------------------------------------------------------
 
 import DASHI.Analysis.FiniteRealQSeriesReflectionExact
@@ -117,6 +109,12 @@ import DASHI.Moonshine.SupportMaskCountHeckeCompressionNoGoExact
 import DASHI.Moonshine.IndexedLevelHeckeQuotientDescentExact
 import DASHI.Moonshine.CandidateReductionSectorFamilyExact
 import DASHI.Moonshine.SO3WeightMatchedDihedralQuotientExact
+import DASHI.Moonshine.ClassicalFiniteHeckeCorrespondenceCore
+import DASHI.Moonshine.ClassicalHeckeQuotientDescentExact
+import DASHI.Moonshine.P11ClassicalTwoIsogenyCorrespondenceExact
+import DASHI.Moonshine.P11ClassicalTwoIsogenySpectralExact
+import DASHI.Moonshine.P11TwoIsogenyFrobeniusNormalFormBridgeExact
+import DASHI.Moonshine.P11ClassicalHeckeObservationQuotientExact
 import DASHI.Moonshine.SSPRepresentationHeckeIntertwinerBoundaryExact
 import DASHI.Moonshine.TernarySevenOggSSPComparisonExact
 import DASHI.Moonshine.OggPhaseFrickeSynthesisRegression
