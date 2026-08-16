@@ -48,11 +48,12 @@ module DASHI.Physics.Closure.NSTriadKNComLiteralOddPQCommutatorIdentityRound62Ex
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNComplex3FieldAlgebra as Algebra
+import DASHI.Physics.Closure.NSTriadKNComplex3HermitianAlgebraProgram as Hermitian
 import DASHI.Physics.Closure.NSTriadKNComplexCommutativeRingExact as Ring
 import DASHI.Physics.Closure.NSTriadKNPeriodicLittlewoodPaleyBonyExact as LP
 import DASHI.Physics.Closure.NSTriadKNPhysicalTransportMatrixSkewRound40Exact as Matrix
@@ -86,7 +87,7 @@ oneMinusZero :
   C3.complexSubtract (C3.complexOne F) (C3.complexZero F)
   ≡ C3.complexOne F
 oneMinusZero {F = F}
-  rewrite Ring.complexAddInverseRight (C3.complexZero F)
+  rewrite Hermitian.complexNegateZero F
         | Algebra.complexAddZeroRight (C3.complexOne F) = refl
 
 oneMinusOne :
@@ -135,65 +136,45 @@ literalOddPQIsProjectorCommutatorCoefficient
   with LP.lowSelect model cutoff output
      | LP.lowSelect model cutoff input
 ... | true | false =
-  trans
-    refl
+  sym
     (trans
       (cong
         (λ grade →
           C3.complexMultiply grade
             (Matrix.transportEntryCoefficient E velocity entry))
-        (symmetry oneMinusZero))
-      (symmetry
-        (Algebra.complexOneMultiply
-          (Matrix.transportEntryCoefficient E velocity entry))))
-  where
-  symmetry : ∀ {A : Set} {x y : A} → x ≡ y → y ≡ x
-  symmetry refl = refl
+        oneMinusZero)
+      (Algebra.complexOneMultiply
+        (Matrix.transportEntryCoefficient E velocity entry)))
 ... | true | true =
-  trans
-    refl
+  sym
     (trans
       (cong
         (λ grade →
           C3.complexMultiply grade
             (Matrix.transportEntryCoefficient E velocity entry))
-        (symmetry oneMinusOne))
-      (symmetry
-        (Algebra.complexMultiplyZeroLeft
-          (Matrix.transportEntryCoefficient E velocity entry))))
-  where
-  symmetry : ∀ {A : Set} {x y : A} → x ≡ y → y ≡ x
-  symmetry refl = refl
+        oneMinusOne)
+      (Algebra.complexMultiplyZeroLeft
+        (Matrix.transportEntryCoefficient E velocity entry)))
 ... | false | true =
-  trans
-    refl
+  sym
     (trans
       (cong
         (λ grade →
           C3.complexMultiply grade
             (Matrix.transportEntryCoefficient E velocity entry))
-        (symmetry zeroMinusOne))
-      (symmetry
-        (negativeOneTimes
-          (Matrix.transportEntryCoefficient E velocity entry))))
-  where
-  symmetry : ∀ {A : Set} {x y : A} → x ≡ y → y ≡ x
-  symmetry refl = refl
+        zeroMinusOne)
+      (negativeOneTimes
+        (Matrix.transportEntryCoefficient E velocity entry)))
 ... | false | false =
-  trans
-    refl
+  sym
     (trans
       (cong
         (λ grade →
           C3.complexMultiply grade
             (Matrix.transportEntryCoefficient E velocity entry))
-        (symmetry zeroMinusZero))
-      (symmetry
-        (Algebra.complexMultiplyZeroLeft
-          (Matrix.transportEntryCoefficient E velocity entry))))
-  where
-  symmetry : ∀ {A : Set} {x y : A} → x ≡ y → y ≡ x
-  symmetry refl = refl
+        zeroMinusZero)
+      (Algebra.complexMultiplyZeroLeft
+        (Matrix.transportEntryCoefficient E velocity entry)))
 
 literalOddPQCommutatorIdentityClosed : Bool
 literalOddPQCommutatorIdentityClosed = true
