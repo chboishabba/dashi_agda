@@ -8,8 +8,8 @@ module DASHI.Crypto.MLKEMOppositeResidueParityDecompositionExact where
 -- "Module-Lattice-Based Key-Encapsulation Mechanism Standard", FIPS 203,
 -- 2024. DOI: 10.6028/NIST.FIPS.203.
 --
--- Discovery context
--- -----------------
+-- Defensive discovery context
+-- ---------------------------
 -- The larger CBD2 block probe found that actual FIPS residue pairs (0,1) and
 -- (2,3) behave differently from generic pairs in conditioned list geometry.
 -- The structural reason is exact and simple:
@@ -19,9 +19,11 @@ module DASHI.Crypto.MLKEMOppositeResidueParityDecompositionExact where
 -- Evaluating an eight-coefficient parity-block polynomial at a and -a splits
 -- the observation into even- and odd-exponent sectors.  This module proves the
 -- ring identity itself; the F_3329 instantiation and the measured candidate-
--- list advantage remain separate source/computational producers.
+-- list geometry remain separate source/computational producers.
 --
--- This is useful attack-discovery structure, not a whole-key recovery theorem.
+-- Blue-team interpretation: opposite-residue observations constitute a
+-- structurally special joint leakage surface and therefore deserve explicit
+-- implementation-level auditing.  This is not a whole-key recovery theorem.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Level; lsuc)
@@ -129,7 +131,8 @@ module _ {c ℓ : Level} (R : CommutativeRing c ℓ) where
 --
 -- The computational discovery script
 --   scripts/crypto_ntt_cbd_block_reconciliation_probe.py
--- then studies what this parity-sector split does to conditioned CBD2 candidate
--- lists.  Its empirical/list-enumeration values are deliberately not promoted
--- here to theorem status without a compact kernel proof.
+-- studies what this parity-sector split does to conditioned CBD2 candidate
+-- lists.  Its finite enumeration is used as a defensive leakage-resolution
+-- audit and is deliberately not promoted here to theorem status without a
+-- compact kernel proof.
 ------------------------------------------------------------------------
