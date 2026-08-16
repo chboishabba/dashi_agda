@@ -17,6 +17,7 @@ module DASHI.Moonshine.OggRepresentationReductionEverything where
 
 import DASHI.Arithmetic.AristotleArithmeticEverything
 import DASHI.Foundations.FiniteRepresentationRestrictionCore
+import DASHI.Foundations.PolyhedralFiniteRestrictionInstancesExact
 import DASHI.Foundations.CandidateIndexedFiniteRestrictionFamilyExact
 import DASHI.Foundations.SU2SO3IrrepDimensionExact
 import DASHI.Foundations.D4SO3NineIrrepRestrictionExact
@@ -30,6 +31,7 @@ import DASHI.Foundations.IcosahedralSO3RestrictionJ0To35Exact
 import DASHI.Foundations.IcosahedralSO3RestrictionCharacterJ0To35Exact
 import DASHI.Foundations.PolyhedralFixedSpaceSpectrumJ0To35Exact
 import DASHI.Foundations.PolyhedralFixedSpaceDerivedNonaryExact
+import DASHI.Foundations.PolyhedralInvariantFixedSpaceSignatureExact
 import DASHI.Foundations.PolyhedralRestrictionCriticalCharacterExact
 import DASHI.Foundations.PolyhedralRegularRepresentationShiftExact
 import DASHI.Foundations.TernaryPhaseShapeIncidenceExact
@@ -40,6 +42,7 @@ import DASHI.Biology.TernaryPhaseQuotientJCoarseBridgeExact
 import DASHI.Biology.JFinePhaseQuotientFieldExact
 import DASHI.Biology.D4IrrepFiniteFrickeEquivariantExact
 import DASHI.Moonshine.CandidateLevelRepresentationHeckeSquareExact
+import DASHI.Moonshine.CandidateLevelExternalOggPredicateExact
 import DASHI.Moonshine.RamanujanTauHecke23Exact
 import DASHI.Moonshine.ModularCurveJFrickeInterfaceExact
 import DASHI.Moonshine.D4IrrepModularFrickeDescentExact
