@@ -49,6 +49,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Data.Nat.Base using (_≤_; ∣_-_∣)
 import Data.Nat.Properties as Nat
+open import Data.Sum.Base using (_⊎_; inj₁; inj₂)
 open import Relation.Nullary using (¬_; yes; no)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
@@ -107,8 +108,6 @@ classifyLiteralBony τ
     (Shell.shellIndex (Physical.q τ))
 ... | yes kLowQ = highHighToLow kLowP kLowQ
 ... | no notKLowQ = residual notPLow notQLow (inj₂ notKLowQ)
-  where
-  open import Data.Sum.Base using (inj₁; inj₂)
 
 lowHighTracksInputWithinOne :
   (τ : Physical.PhysicalTriadIncidence) →
