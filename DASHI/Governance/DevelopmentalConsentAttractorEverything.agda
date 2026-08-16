@@ -25,11 +25,19 @@ import DASHI.Governance.InstitutionalTechniqueTransferCore
 import DASHI.Governance.DomainPermeabilityAuthorityTransport
 
 ------------------------------------------------------------------------
--- Round-two cross-pollination: safe compression, query-relative resolution,
--- asymmetric legibility, contestable residuals, open-world disconfirmation,
+-- Round two: safe compression, query-relative resolution, asymmetric
+-- legibility, contestable residuals, open-world disconfirmation,
 -- counterposition diversity, feasibility cutsets and proxy future safety.
 ------------------------------------------------------------------------
 
 import DASHI.Governance.GovernanceObservationCompressionEverything
+
+------------------------------------------------------------------------
+-- Round three: bounded empirical adapters, evidence-graded genealogy,
+-- auditable paper claim promotion, minimal sufficient observation and
+-- multidimensional contestability access.
+------------------------------------------------------------------------
+
+import DASHI.Governance.EmpiricalGenealogyRound3Everything
 
 import DASHI.Governance.DevelopmentalConsentAttractorRegression
