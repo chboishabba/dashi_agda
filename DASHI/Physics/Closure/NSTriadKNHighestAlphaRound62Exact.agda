@@ -65,19 +65,28 @@ module DASHI.Physics.Closure.NSTriadKNHighestAlphaRound62Exact where
 -- directly to the owner with eta_HHb=2 C_* K_bad.  The old alpha/beta affine
 -- recurrence is no longer part of the producer cutset.
 --
--- B. PHYSICAL COM ENERGY STAYS ON THE REAL CARRIER
+-- B. PHYSICAL COM ENERGY STAYS ON THE LITERAL FOURIER REAL FIELD
 --
 -- The Round58 Q-valued "physical normalized Gram" record is explicitly
 -- demoted to a rational certificate carrier.  Literal Fourier coefficients are
--- not rational.  The carrier-correct Round62 endpoint keeps normalized physical
--- odd-(P/Q) energy in Murray--Bishop R and embeds 17/64, 65/512 and 133/256 only
--- as rational ORDER MAJORANTS.  Separately, finite rational Cauchy--Schwarz
--- closes the strong/weak two-branch majorant algebra.
+-- not rational.  More importantly, the literal `PeriodicHardShellFourierPDE`
+-- already chooses an algebraic `realField`, so the same-object normalized
+-- energy must stay in `Carrier (realField model)`.
+--
+-- Round62 therefore extends THAT exact carrier with the existing
+-- `OrderedRealExtension` plus only a rational embedding.  Same/adjacent bounds
+-- by embedded 17/64 and 65/512 imply the embedded 133/256 bandwidth-one bound
+-- without changing scalar universes.  The Murray--Bishop module is retained as
+-- a concrete setoid-real comparison backend, but is explicitly NOT identified
+-- definitionally with the literal Fourier carrier (whose algebra uses
+-- propositional equality).  Separately, finite rational Cauchy--Schwarz closes
+-- the strong/weak certificate algebra.
 --
 -- The remaining physical B theorem is therefore concrete: construct the
--- normalized Bishop-real operator-product energy from the literal odd-P/Q
--- coefficient fibre, prove common-hat support, and prove the same/adjacent
--- active bounds.  There is no physical=Q equality to prove.
+-- normalized operator-product energy IN the literal model's real field, supply
+-- its ordered rational extension, prove common-hat support, and prove the
+-- same/adjacent active bounds.  There is no physical=Q or Fourier=Bishop
+-- equality to prove.
 --
 -- C. THE ADDITIVE FIXED-SHIFT GAP IS LOCALIZED TO THE SOFT OWNERS
 --
@@ -155,9 +164,10 @@ module DASHI.Physics.Closure.NSTriadKNHighestAlphaRound62Exact where
 --       identity used by DirectPhysicalDuhamelIdentity;
 --   A2  prove finite-prefix/tail component headroom N_q<=C_*-I_q, the density
 --       domination 2^q g_q<=C_q, and the unmasked charge bound K_bad D;
---   B1  construct the Bishop-real normalized odd-P/Q operator-product energy
---       from the literal Fourier fibre and the physical common-hat support;
---   B3  prove its same/forward/reverse active bounds by 17/64 and 65/512;
+--   B1  construct normalized odd-P/Q operator-product energy in the SAME
+--       `Carrier (realField model)`, its ordered rational extension, and the
+--       physical common-hat support;
+--   B3  prove same/forward/reverse active bounds by embedded 17/64 and 65/512;
 --   C1  prove SAME-OBJECT owner->flux->block identification, the global
 --       X_n<=K C r^n estimate, and local smooth-HHg/Com data-scale bounds;
 --   C2  verify a_smooth-HHg+a_Com<r-q (preferred kernel-zero branch);
@@ -183,8 +193,10 @@ import DASHI.Physics.Closure.NSTriadKNHighestAlphaRound61Exact
 import DASHI.Physics.Closure.NSTriadKNHHBadDirectPhysicalHeadroomRound62Exact
 import DASHI.Physics.Closure.NSTriadKNHHBadSelectedProfileMultiplicityRound62Exact
 
--- B: rational certificate algebra + carrier-correct Bishop-real physical edge.
+-- B: rational certificate algebra, same-object ordered literal-field endpoint,
+-- and a separate concrete Bishop-setoid comparison backend.
 import DASHI.Physics.Closure.NSTriadKNComTwoBranchFiniteGramRound62Exact
+import DASHI.Physics.Closure.NSTriadKNComOrderedPhysicalMajorantRound62Exact
 import DASHI.Physics.Closure.NSTriadKNComBishopNormalizedMajorantRound62Exact
 
 -- C: local owner aggregation, three-soft fallback, preferred kernel-zero
@@ -214,8 +226,11 @@ import DASHI.Physics.Closure.NSTriadKNPreferredScalarFeasibilityRegionRound62Exa
 round62RemovesAffineHHBadRecurrenceFromProducerCutset : Bool
 round62RemovesAffineHHBadRecurrenceFromProducerCutset = true
 
-round62PhysicalComEnergyRemainsOnRealCarrier : Bool
-round62PhysicalComEnergyRemainsOnRealCarrier = true
+round62PhysicalComEnergyRemainsOnLiteralFourierRealField : Bool
+round62PhysicalComEnergyRemainsOnLiteralFourierRealField = true
+
+round62BishopEndpointIsOnlyComparisonBackend : Bool
+round62BishopEndpointIsOnlyComparisonBackend = true
 
 round62PreferredCDataGapHasOnlyHHGoodAndCom : Bool
 round62PreferredCDataGapHasOnlyHHGoodAndCom = true
@@ -233,9 +248,13 @@ round62RemovesAffineHHBadRecurrenceFromProducerCutsetIsTrue :
   round62RemovesAffineHHBadRecurrenceFromProducerCutset ≡ true
 round62RemovesAffineHHBadRecurrenceFromProducerCutsetIsTrue = refl
 
-round62PhysicalComEnergyRemainsOnRealCarrierIsTrue :
-  round62PhysicalComEnergyRemainsOnRealCarrier ≡ true
-round62PhysicalComEnergyRemainsOnRealCarrierIsTrue = refl
+round62PhysicalComEnergyRemainsOnLiteralFourierRealFieldIsTrue :
+  round62PhysicalComEnergyRemainsOnLiteralFourierRealField ≡ true
+round62PhysicalComEnergyRemainsOnLiteralFourierRealFieldIsTrue = refl
+
+round62BishopEndpointIsOnlyComparisonBackendIsTrue :
+  round62BishopEndpointIsOnlyComparisonBackend ≡ true
+round62BishopEndpointIsOnlyComparisonBackendIsTrue = refl
 
 round62PreferredCDataGapHasOnlyHHGoodAndComIsTrue :
   round62PreferredCDataGapHasOnlyHHGoodAndCom ≡ true
