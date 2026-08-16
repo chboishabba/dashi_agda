@@ -61,11 +61,14 @@ open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; _<_; 1/_; positive; nonNegative)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Binary.PropositionalEquality using
+  (cong; subst; sym; module ≡-Reasoning)
 
 import DASHI.Physics.Closure.NSTriadKNJointSoftCorrectionBudgetRound54Exact as Joint
 import DASHI.Physics.Closure.NSTriadKNJointGlobalFeasibilityRound54Exact as Existing
 import DASHI.Physics.Closure.NSTriadKNPhysicalNineOwnerFeasibilityRound61Exact as G
+
+open ≡-Reasoning
 
 record RationalSquareRootMajorants
     (data : G.PhysicalNineOwnerScalars) : Set where
@@ -175,16 +178,26 @@ weightedYoungExact :
   ∀ {data} (roots : RationalSquareRootMajorants data) s →
   weightedEpsilon roots s * weightedCorrection roots s
   ≡ s * s
-weightedYoungExact {data} roots s
-  rewrite G.capTimesInverseIsOne data
-        | rootSumTimesInverseIsOne roots =
-  solve
-    ( s
-    ∷ G.correctionCap data
-    ∷ G.correctionCapInverse data
-    ∷ rootSum roots
-    ∷ rootSumInverse roots
-    ∷ [])
+weightedYoungExact {data} roots s =
+  let
+    cap = G.correctionCap data
+    capInv = G.correctionCapInverse data
+    S = rootSum roots
+    sInv = rootSumInverse roots
+  in
+  begin
+    weightedEpsilon roots s * weightedCorrection roots s
+  ≡⟨ solve (S ∷ s ∷ capInv ∷ cap ∷ sInv ∷ []) ⟩
+    (s * s) * (cap * capInv) * (S * sInv)
+  ≡⟨ cong (λ value → (s * s) * value * (S * sInv))
+        (G.capTimesInverseIsOne data) ⟩
+    (s * s) * 1ℚ * (S * sInv)
+  ≡⟨ cong (λ value → (s * s) * 1ℚ * value)
+        (rootSumTimesInverseIsOne roots) ⟩
+    (s * s) * 1ℚ * 1ℚ
+  ≡⟨ solve (s ∷ []) ⟩
+    s * s
+  ∎
 
 weightedCorrectionTotalExact :
   ∀ {data} (roots : RationalSquareRootMajorants data) →
@@ -192,16 +205,27 @@ weightedCorrectionTotalExact :
     + weightedCorrection roots (sKernel roots)
     + weightedCorrection roots (sHHGood roots)
   ≡ G.correctionCap data
-weightedCorrectionTotalExact {data} roots
-  rewrite rootSumTimesInverseIsOne roots =
-  solve
-    ( G.correctionCap data
-    ∷ sCom roots
-    ∷ sKernel roots
-    ∷ sHHGood roots
-    ∷ rootSum roots
-    ∷ rootSumInverse roots
-    ∷ [])
+weightedCorrectionTotalExact {data} roots =
+  let
+    cap = G.correctionCap data
+    inv = rootSumInverse roots
+    sC = sCom roots
+    sK = sKernel roots
+    sH = sHHGood roots
+  in
+  begin
+    weightedCorrection roots sC
+      + weightedCorrection roots sK
+      + weightedCorrection roots sH
+  ≡⟨ solve (cap ∷ sC ∷ sK ∷ sH ∷ inv ∷ []) ⟩
+    cap * ((sC + sK + sH) * inv)
+  ≡⟨ refl ⟩
+    cap * (rootSum roots * rootSumInverse roots)
+  ≡⟨ cong (cap *_) (rootSumTimesInverseIsOne roots) ⟩
+    cap * 1ℚ
+  ≡⟨ ℚP.*-identityʳ cap ⟩
+    cap
+  ∎
 
 weightedSoftEta :
   ∀ {data} → RationalSquareRootMajorants data → ℚ
@@ -215,13 +239,22 @@ weightedEpsilonTotalExact :
     + weightedEpsilon roots (sHHGood roots)
   ≡ weightedSoftEta roots
 weightedEpsilonTotalExact {data} roots =
-  solve
-    ( sCom roots
-    ∷ sKernel roots
-    ∷ sHHGood roots
-    ∷ rootSum roots
-    ∷ G.correctionCapInverse data
-    ∷ [])
+  let
+    S = rootSum roots
+    inv = G.correctionCapInverse data
+    sC = sCom roots
+    sK = sKernel roots
+    sH = sHHGood roots
+  in
+  begin
+    weightedEpsilon roots sC
+      + weightedEpsilon roots sK
+      + weightedEpsilon roots sH
+  ≡⟨ solve (S ∷ sC ∷ sK ∷ sH ∷ inv ∷ []) ⟩
+    S * (sC + sK + sH) * inv
+  ≡⟨ refl ⟩
+    weightedSoftEta roots
+  ∎
 
 weightedThreeSoftAllocation :
   ∀ {data} →
@@ -275,7 +308,7 @@ weightedAggregateCorrectionCap {data} roots = record
   ; totalCriticalBelowCap =
       subst
         (λ lower → lower ≤ G.correctionCap data)
-        (weightedCorrectionTotalExact roots)
+        (sym (weightedCorrectionTotalExact roots))
         ℚP.≤-refl
   }
 
