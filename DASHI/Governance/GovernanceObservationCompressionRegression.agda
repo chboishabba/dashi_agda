@@ -8,6 +8,7 @@ import DASHI.Core.ObservationLanguageRefinementExact as Observation
 import DASHI.Governance.FutureSafeCausalCompressionExact as Compression
 import DASHI.Governance.ObservationRelativeReificationRegressionExact as Reification
 import DASHI.Governance.AsymmetricLegibilityContestabilityExact as Legibility
+import DASHI.Governance.ReciprocalLegibilityRefinementExact as Reciprocal
 import DASHI.Governance.ContestabilityObservationRefinementExact as ContestObservation
 import DASHI.Governance.ContestabilityAccessCostExact as AccessCost
 import DASHI.Governance.ContestableCompressionResidualExact as Residual
@@ -59,6 +60,19 @@ finiteLegibilityGapBlocksExactRecovery :
   ⊥
 finiteLegibilityGapBlocksExactRecovery =
   Legibility.finiteExactDecoderImpossible
+
+institutionOnlyRefinementBlocksExactRecovery :
+  Legibility.ExactInstitutionalViewDecoder
+    (Reciprocal.institutionOnlyChannel Reciprocal.finiteDirectionalRefinement) →
+  ⊥
+institutionOnlyRefinementBlocksExactRecovery =
+  Reciprocal.finiteInstitutionOnlyDecoderImpossible
+
+reciprocalFullViewRestoresExactDecoder :
+  Legibility.ExactInstitutionalViewDecoder
+    (Reciprocal.reciprocalFullViewChannel Reciprocal.finiteDirectionalRefinement)
+reciprocalFullViewRestoresExactDecoder =
+  Reciprocal.finiteReciprocalDecoderExists
 
 finiteExplanationAddsStrictObservationRefinement :
   Observation.StrictObservationRefinement
