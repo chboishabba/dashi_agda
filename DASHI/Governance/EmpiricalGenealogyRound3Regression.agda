@@ -23,6 +23,10 @@ import DASHI.Governance.IndigenousRemovalDelegatedInfrastructureExact as Removal
 import DASHI.Governance.EffectiveChoiceConcentrationExact as Concentration
 import DASHI.Governance.AustralianSupermarketChoiceConcentrationExact as Supermarket
 import DASHI.Governance.AustralianTwoPartyPreferredObservationExact as TPP
+import DASHI.Governance.SituatedEffectiveChoiceExact as Situated
+import DASHI.Governance.PluralityWithoutPowerParityExact as Parity
+import DASHI.Governance.AuthorityBearingLegibilityFailureExact as Legibility
+import DASHI.Governance.BurkeWillsSituatedKnowledgeCounterexampleExact as BurkeWills
 import DASHI.Governance.QuotedUtteranceContextProvenanceExact as Quote
 import DASHI.Governance.BraidedEnemyRoleProvenanceCrossPollinationExact as Braid
 
@@ -50,11 +54,6 @@ tradwifeAltRightCandidateStillNeedsEvidence :
   Cases.CandidateConnectionPromotesToStrongGenealogy → ⊥
 tradwifeAltRightCandidateStillNeedsEvidence =
   Cases.candidateConnectionDoesNotPromoteWithoutReceipt
-
-------------------------------------------------------------------------
--- Two-axis genealogy regression: strong source quality cannot rewrite the
--- relation kind being evidenced.
-------------------------------------------------------------------------
 
 primaryMethodRecurrenceStillNotHistoricalTransfer :
   Typed.StrongHistoricalTransfer Climate.bwToAPIRecurrence → ⊥
@@ -135,10 +134,6 @@ scalarContestabilityBudgetCanHideBottleneck :
 scalarContestabilityBudgetCanHideBottleneck =
   Access.aggregateSufficiencyDoesNotEstablishCoordinateAccess
 
-------------------------------------------------------------------------
--- Entrapment/capacity/legal cross-pollination regressions.
-------------------------------------------------------------------------
-
 ordinaryTeachingDoesNotEqualEntrapment :
   Entrapment.DependentReligiousEntrapmentBoundary.ordinaryReligiousTeachingEqualsEntrapment
     Entrapment.canonicalDependentReligiousEntrapmentBoundary
@@ -187,10 +182,6 @@ sharedDependencyAuthorityExitTopologyIsAvailable :
   ≡ true
 sharedDependencyAuthorityExitTopologyIsAvailable = refl
 
-------------------------------------------------------------------------
--- Institutional availability / delegated service / Alice corpus pollen.
-------------------------------------------------------------------------
-
 formalInstitutionalPluralityIsNotEffectivePlurality :
   Choice.EffectiveInstitutionalChoiceBoundary.formalPluralityEqualsEffectivePlurality
     Choice.canonicalEffectiveInstitutionalChoiceBoundary
@@ -230,10 +221,6 @@ aliceParentExpertiseCanRemainSituatedEvidence :
     Alice.canonicalAliceInstitutionalChoiceBoundary
   ≡ true
 aliceParentExpertiseCanRemainSituatedEvidence = refl
-
-------------------------------------------------------------------------
--- Effective concentration / Australian supermarket / TPP regressions.
-------------------------------------------------------------------------
 
 dominantPairDoesNotEqualMonopoly :
   Concentration.EffectiveChoiceConcentrationBoundary.dominantPairEqualsMonopoly
@@ -281,8 +268,54 @@ tppFiniteWitnessIsNonInjective : TPP.TPPInjective → ⊥
 tppFiniteWitnessIsNonInjective = TPP.tppObservationIsNotInjective
 
 ------------------------------------------------------------------------
--- Bringing Them Home / braid / rhetorical-provenance regression.
+-- Situated choice / plurality-power / colonial legibility / situated knowledge.
 ------------------------------------------------------------------------
+
+nationalPluralityDoesNotGuaranteeLocalChoice :
+  Situated.SituatedEffectiveChoiceBoundary.nationalPluralityEqualsLocalEffectivePlurality
+    Situated.canonicalSituatedEffectiveChoiceBoundary
+  ≡ false
+nationalPluralityDoesNotGuaranteeLocalChoice = refl
+
+remoteGeometryCanChangeReachability :
+  Situated.Reachable Situated.farProvider Situated.remoteResources → ⊥
+remoteGeometryCanChangeReachability = Situated.remoteCannotReachFarProvider
+
+nominalPluralityDoesNotGuaranteePowerParity :
+  Parity.PluralityWithoutPowerParityBoundary.nominalPluralityEqualsInstitutionalParity
+    Parity.canonicalPluralityWithoutPowerParityBoundary
+  ≡ false
+nominalPluralityDoesNotGuaranteePowerParity = refl
+
+legalVictoryDoesNotGuaranteeInstitutionalDislodgement :
+  Parity.PluralityWithoutPowerParityBoundary.legalCorrectionEqualsMaterialDislodgement
+    Parity.canonicalPluralityWithoutPowerParityBoundary
+  ≡ false
+legalVictoryDoesNotGuaranteeInstitutionalDislodgement = refl
+
+lossyRepresentationCanFeedAuthority :
+  Legibility.AuthorityBearingLegibilityBoundary.lossyRepresentationCanFeedInstitutionalAction
+    Legibility.canonicalAuthorityBearingLegibilityBoundary
+  ≡ true
+lossyRepresentationCanFeedAuthority = refl
+
+maboCorrectionDoesNotByItselfEstablishMaterialRepair :
+  Legibility.AuthorityBearingLegibilityBoundary.judicialCorrectionEqualsCompleteMaterialRepair
+    Legibility.canonicalAuthorityBearingLegibilityBoundary
+  ≡ false
+maboCorrectionDoesNotByItselfEstablishMaterialRepair = refl
+
+burkeWillsReceivedIndigenousAssistance :
+  BurkeWills.BurkeWillsSituatedKnowledgeBoundary.expeditionReceivedIndigenousAssistance
+    BurkeWills.canonicalBurkeWillsSituatedKnowledgeBoundary
+  ≡ true
+burkeWillsReceivedIndigenousAssistance = refl
+
+burkeWillsDoesNotBecomeNeverUsedKnowledgeNarrative :
+  BurkeWills.BurkeWillsSituatedKnowledgeBoundary.assistanceWasConsistentlyInstitutionalised
+    BurkeWills.canonicalBurkeWillsSituatedKnowledgeBoundary
+  ≡ false
+burkeWillsDoesNotBecomeNeverUsedKnowledgeNarrative = refl
 
 removalInfrastructureSeparatesStateAndNonStateRoles :
   Removal.IndigenousDelegatedInfrastructureBoundary.stateAndNonStateRolesSeparated
