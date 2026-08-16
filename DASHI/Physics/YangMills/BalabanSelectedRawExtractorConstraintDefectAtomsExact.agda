@@ -22,16 +22,27 @@ module DASHI.Physics.YangMills.BalabanSelectedRawExtractorConstraintDefectAtomsE
 --
 -- DASHI CONTRIBUTION
 --
--- State the exact producer boundary for the common Möbius basis without
--- deleting redundant constraint rows.  Both the source s=Lg and the literal
--- raw extractor defect delta=Lw are reconstructed from the same fifteen
--- nonempty subsets of the plaquette's four Wilson factors.  The Green pair
--- kernel uses the certified Moore--Penrose matrix K+.
+-- Put the source s=Lg and literal raw-extractor defect delta=Lw in the SAME
+-- canonical Boolean-four-cube Möbius basis without deleting redundant
+-- constraint rows.  Earlier code allowed callers to supply arbitrary fifteen
+-- atoms together with reconstruction equalities.  This file now also provides
+-- the stronger producer-shaped route:
+--
+--   literal subset evaluations on all 16 factor placements
+--     -> canonical Möbius transform
+--     -> 15 nonempty atoms
+--     -> exact source/defect reconstruction.
+--
+-- Thus the combinatorial decomposition itself is no longer a physical input.
+-- The remaining source-facing obligation is to construct the actual partial
+-- subset evaluations and identify the empty/full placements with background
+-- zero and the literal full source/defect respectively.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Empty using (⊥)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _*_)
+open import Relation.Binary.PropositionalEquality using (trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
@@ -41,6 +52,7 @@ import DASHI.Physics.YangMills.BalabanP33PhysicalRationalWilsonPlaquetteJetExact
 import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Physical
 import DASHI.Physics.YangMills.BalabanP33PlaquetteBoundaryProjectorExact as Boundary
 import DASHI.Physics.YangMills.BalabanWilsonBooleanFourCubeExact as Cube
+import DASHI.Physics.YangMills.BalabanWilsonBooleanFourCubeMobiusExact as Mobius
 
 rawExtractorConstraintDefect :
   ∀ {Multiplier} →
@@ -71,6 +83,90 @@ record SelectedConstraintAtomData
 
 open SelectedConstraintAtomData public
 
+------------------------------------------------------------------------
+-- Canonical producer from literal subset evaluations.
+------------------------------------------------------------------------
+
+record SelectedConstraintPartialEvaluationData
+    {Multiplier : Set}
+    (pseudoData : Pseudo.FiniteKKTPseudoinverseData Multiplier)
+    (firstVariationCovector rawExtractor : KKT.StateVector) : Set₁ where
+  field
+    sourcePartial : Cube.Subset4 → Multiplier → ℚ
+    defectPartial : Cube.Subset4 → Multiplier → ℚ
+
+    sourceEmptyZero : ∀ row → sourcePartial Cube.empty row ≡ 0ℚ
+    defectEmptyZero : ∀ row → defectPartial Cube.empty row ≡ 0ℚ
+
+    sourceFullExact : ∀ row →
+      sourcePartial Cube.s0123 row
+      ≡ Pseudo.constraintApply pseudoData firstVariationCovector row
+
+    defectFullExact : ∀ row →
+      defectPartial Cube.s0123 row
+      ≡ Pseudo.constraintApply pseudoData rawExtractor row
+
+open SelectedConstraintPartialEvaluationData public
+
+sourceMobiusAtom :
+  ∀ {Multiplier pseudoData firstVariationCovector rawExtractor} →
+  SelectedConstraintPartialEvaluationData
+    {Multiplier} pseudoData firstVariationCovector rawExtractor →
+  Cube.Subset4 → Multiplier → ℚ
+sourceMobiusAtom partial subset row =
+  Mobius.mobiusAtom (λ selected → sourcePartial partial selected row) subset
+
+defectMobiusAtom :
+  ∀ {Multiplier pseudoData firstVariationCovector rawExtractor} →
+  SelectedConstraintPartialEvaluationData
+    {Multiplier} pseudoData firstVariationCovector rawExtractor →
+  Cube.Subset4 → Multiplier → ℚ
+defectMobiusAtom partial subset row =
+  Mobius.mobiusAtom (λ selected → defectPartial partial selected row) subset
+
+sourceMobiusAtomsReconstruct :
+  ∀ {Multiplier pseudoData firstVariationCovector rawExtractor}
+    (partial : SelectedConstraintPartialEvaluationData
+      {Multiplier} pseudoData firstVariationCovector rawExtractor)
+    row →
+  Sums.sumRational Cube.nonemptySubsets4
+    (λ subset → sourceMobiusAtom partial subset row)
+  ≡ Pseudo.constraintApply pseudoData firstVariationCovector row
+sourceMobiusAtomsReconstruct partial row =
+  trans
+    (Mobius.nonemptyMobiusSumWithZeroBackground
+      (λ selected → sourcePartial partial selected row)
+      (sourceEmptyZero partial row))
+    (sourceFullExact partial row)
+
+defectMobiusAtomsReconstruct :
+  ∀ {Multiplier pseudoData firstVariationCovector rawExtractor}
+    (partial : SelectedConstraintPartialEvaluationData
+      {Multiplier} pseudoData firstVariationCovector rawExtractor)
+    row →
+  Sums.sumRational Cube.nonemptySubsets4
+    (λ subset → defectMobiusAtom partial subset row)
+  ≡ Pseudo.constraintApply pseudoData rawExtractor row
+defectMobiusAtomsReconstruct partial row =
+  trans
+    (Mobius.nonemptyMobiusSumWithZeroBackground
+      (λ selected → defectPartial partial selected row)
+      (defectEmptyZero partial row))
+    (defectFullExact partial row)
+
+atomsFromPartialEvaluations :
+  ∀ {Multiplier pseudoData firstVariationCovector rawExtractor} →
+  SelectedConstraintPartialEvaluationData
+    {Multiplier} pseudoData firstVariationCovector rawExtractor →
+  SelectedConstraintAtomData
+    {Multiplier} pseudoData firstVariationCovector rawExtractor
+atomsFromPartialEvaluations partial = record
+  { sourceAtom = sourceMobiusAtom partial
+  ; defectAtom = defectMobiusAtom partial
+  ; sourceAtomsReconstruct = sourceMobiusAtomsReconstruct partial
+  ; defectAtomsReconstruct = defectMobiusAtomsReconstruct partial
+  }
+
 selectedConstraintSourceAtomsExact :
   ∀ {Multiplier pseudoData firstVariationCovector rawExtractor}
     (atoms : SelectedConstraintAtomData
@@ -90,6 +186,29 @@ selectedRawExtractorConstraintDefectAtomsExact :
     (λ subset → defectAtom atoms subset row)
   ≡ Pseudo.constraintApply pseudoData rawExtractor row
 selectedRawExtractorConstraintDefectAtomsExact = defectAtomsReconstruct
+
+record LiteralRawExtractorPartialEvaluationData
+    {Multiplier : Set}
+    (pseudoData : Pseudo.FiniteKKTPseudoinverseData Multiplier)
+    (firstVariationCovector : KKT.StateVector)
+    (bondField : Physical.PhysicalSU2BondField4)
+    (plaquette : Plaquette.Plaquette4) : Set₁ where
+  field
+    partial : SelectedConstraintPartialEvaluationData
+      pseudoData firstVariationCovector
+      (Boundary.rawPlaquetteSingletonExtractor bondField plaquette)
+
+open LiteralRawExtractorPartialEvaluationData public
+
+literalAtomsFromPartialEvaluations :
+  ∀ {Multiplier pseudoData firstVariationCovector bondField plaquette} →
+  LiteralRawExtractorPartialEvaluationData
+    {Multiplier} pseudoData firstVariationCovector bondField plaquette →
+  SelectedConstraintAtomData
+    pseudoData firstVariationCovector
+    (Boundary.rawPlaquetteSingletonExtractor bondField plaquette)
+literalAtomsFromPartialEvaluations literal =
+  atomsFromPartialEvaluations (partial literal)
 
 record LiteralRawExtractorAtomData
     {Multiplier : Set}
@@ -154,8 +273,14 @@ open ConstraintAtomSupport public
 selectedConstraintAtomDecompositionLevel : ProofLevel
 selectedConstraintAtomDecompositionLevel = machineChecked
 
+selectedConstraintMobiusAtomConstructionLevel : ProofLevel
+selectedConstraintMobiusAtomConstructionLevel = machineChecked
+
 selectedLiteralRawDefectAtomReconstructionLevel : ProofLevel
 selectedLiteralRawDefectAtomReconstructionLevel = machineChecked
 
-selectedPhysicalConstraintAtomProducerLevel : ProofLevel
-selectedPhysicalConstraintAtomProducerLevel = conditional
+-- The physical producer is now narrowed to the actual partial-subset source
+-- and raw-extractor evaluations (plus support/locality). The 15-atom Möbius
+-- decomposition and its reconstruction are no longer conditional inputs.
+selectedPhysicalConstraintPartialEvaluationProducerLevel : ProofLevel
+selectedPhysicalConstraintPartialEvaluationProducerLevel = conditional
