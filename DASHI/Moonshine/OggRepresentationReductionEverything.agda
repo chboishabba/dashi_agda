@@ -29,14 +29,21 @@ module DASHI.Moonshine.OggRepresentationReductionEverything where
 -- genus formula, so the non-Fricke part of the prime-level genus is now read
 -- from reduced-representation observables plus the exact C2/C3 characters.
 --
--- The Hecke frontier is now sharpened by exact quotient descent on the actual
+-- The Hecke frontier is sharpened by exact quotient descent on the actual
 -- PrimeCorrespondenceHeckeOn API.  FactorVec -> SupportMask supplies a complete
 -- nontrivial model in which the existing support-mask correspondence is proved
 -- to be the canonical induced quotient correspondence.  A count-only quotient
--- is then explicitly falsified: equal support cardinality can hide a
--- Hecke-relevant difference.  The still-open SSP theorem is therefore the
--- domain-specific SO(3)/reduction -> arithmetic Hecke quotient identification,
--- not generic commuting-square algebra.
+-- is explicitly falsified: equal support cardinality can hide a Hecke-relevant
+-- difference.
+--
+-- The natural-level API is now extended to level-dependent fine/coarse class
+-- families.  The representation target is concrete: level 2 has two spinor
+-- basis states quotienting to one SU(2) doublet sector; odd level 2*j+1 has the
+-- explicit SO(3) weights 0,+/-1,...,+/-j quotienting by +/- pairing onto the
+-- matched D_(2j+1) sectors.  At level 9 this is an exact 9 fine states -> five
+-- irreducible sectors construction.  What remains is the source-justified
+-- level-indexed 15-way fine correspondence and its arithmetic Hecke/Brandt
+-- identification, not the carrier or quotient algebra.
 --
 -- A strengthened representation falsifier proves even the C2/C3/C4/C5
 -- fixed-space signature collides between dimension 13 (Ogg control) and
@@ -107,6 +114,9 @@ import DASHI.Moonshine.AllPrimeRepresentationFrickeClosureExact
 import DASHI.Moonshine.HeckeCorrespondenceQuotientDescentExact
 import DASHI.Moonshine.FactorVecSupportMaskHeckeQuotientExact
 import DASHI.Moonshine.SupportMaskCountHeckeCompressionNoGoExact
+import DASHI.Moonshine.IndexedLevelHeckeQuotientDescentExact
+import DASHI.Moonshine.CandidateReductionSectorFamilyExact
+import DASHI.Moonshine.SO3WeightMatchedDihedralQuotientExact
 import DASHI.Moonshine.SSPRepresentationHeckeIntertwinerBoundaryExact
 import DASHI.Moonshine.TernarySevenOggSSPComparisonExact
 import DASHI.Moonshine.OggPhaseFrickeSynthesisRegression
@@ -118,6 +128,7 @@ import DASHI.Physics.Closure.SSPZ3EigenspaceClassificationReceipt
 import DASHI.Physics.Moonshine.SupersingularPrimeLaneBridge
 import Ontology.Hecke.CorrespondenceRepresentation
 import Ontology.Hecke.LevelCorrespondenceRepresentation
+import Ontology.Hecke.IndexedLevelCorrespondenceRepresentation
 import Ontology.Hecke.QuotientRepresentation
 import Ontology.Hecke.FactorVecCorrespondence
 import Ontology.Hecke.FactorVecInstances
