@@ -68,6 +68,59 @@ partialCounterpositionIsNotFullInverse :
   → ⊥
 partialCounterpositionIsNotFullInverse ()
 
+------------------------------------------------------------------------
+-- The older counterposition result is the foundation: contextual opposition
+-- need not be full inversion.  The following is only the narrower corollary
+-- needed by later `!!x` notation discussions: strict inversion is involutive,
+-- while the same contextual counterposition need not return the input.
+------------------------------------------------------------------------
+
+invertDigitInvolutive :
+  (digit : BT.BalancedDigit) →
+  BT.invertDigit (BT.invertDigit digit) ≡ digit
+invertDigitInvolutive BT.neg = refl
+invertDigitInvolutive BT.zeroDigit = refl
+invertDigitInvolutive BT.pos = refl
+
+strictInverseInvolutive :
+  (pattern : BT.TriadPattern) →
+  BT.strictInverse (BT.strictInverse pattern) ≡ pattern
+strictInverseInvolutive (BT.triad first second third)
+  rewrite invertDigitInvolutive first
+        | invertDigitInvolutive second
+        | invertDigitInvolutive third = refl
+
+partialCounterpositionIsNotDoubleInverse :
+  counterUnder rejectThird BT.allPositive
+  ≡ BT.strictInverse (BT.strictInverse BT.allPositive)
+  → ⊥
+partialCounterpositionIsNotDoubleInverse ()
+
+record CounterpositionThreeWaySeparation : Set where
+  constructor counterpositionThreeWaySeparation
+  field
+    input : BT.TriadPattern
+    contextual : BT.TriadPattern
+    fullInverse : BT.TriadPattern
+    doubleInverse : BT.TriadPattern
+    contextualExact : counterUnder rejectThird input ≡ contextual
+    fullInverseExact : counterUnder invertAll input ≡ fullInverse
+    doubleInverseExact : BT.strictInverse (BT.strictInverse input) ≡ doubleInverse
+    contextualNotFullInverse : contextual ≡ fullInverse → ⊥
+    contextualNotDoubleInverse : contextual ≡ doubleInverse → ⊥
+
+canonicalCounterpositionThreeWaySeparation : CounterpositionThreeWaySeparation
+canonicalCounterpositionThreeWaySeparation =
+  counterpositionThreeWaySeparation
+    BT.allPositive
+    BT.thirdCoordinateCounterposition
+    BT.allNegative
+    BT.allPositive
+    refl refl
+    (strictInverseInvolutive BT.allPositive)
+    (λ ())
+    (λ ())
+
 record OrderedTriadJoin : Set where
   constructor orderedTriadJoin
   field
@@ -140,6 +193,12 @@ record CounterpositionOrderedJoinBoundary : Set where
     counterpositionAlwaysFullInverse : Bool
     counterpositionAlwaysFullInverseIsFalse :
       counterpositionAlwaysFullInverse ≡ false
+    counterpositionAlwaysDoubleInverse : Bool
+    counterpositionAlwaysDoubleInverseIsFalse :
+      counterpositionAlwaysDoubleInverse ≡ false
+    externalIsOperatorAutomaticallyIdentified : Bool
+    externalIsOperatorAutomaticallyIdentifiedIsFalse :
+      externalIsOperatorAutomaticallyIdentified ≡ false
     equalAmplitudeErasesLowerUpperOrder : Bool
     equalAmplitudeErasesLowerUpperOrderIsFalse :
       equalAmplitudeErasesLowerUpperOrder ≡ false
@@ -152,6 +211,8 @@ canonicalCounterpositionOrderedJoinBoundary :
 canonicalCounterpositionOrderedJoinBoundary =
   counterpositionOrderedJoinBoundary
     true refl
+    false refl
+    false refl
     false refl
     false refl
     false refl
