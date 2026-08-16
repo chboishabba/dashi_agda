@@ -32,6 +32,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Unit using (⊤; tt)
 open import Data.Empty using (⊥)
+open import Relation.Nullary.Negation.Core using (¬_)
 
 trueNotFalse : true ≡ false → ⊥
 trueNotFalse ()
@@ -68,9 +69,6 @@ proofUniquenessDoesNotForceTargetUniqueness proofUnique endpointUnique =
   trueNotFalse
     (endpointUnique true false true
       counterPairHasTrueTarget counterPairHasFalseTarget)
-  where
-  ¬_ : Set → Set
-  ¬ A = A → ⊥
 
 record FunctionalPairIncidence
     {p m i : Level}
