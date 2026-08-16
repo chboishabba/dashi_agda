@@ -15,23 +15,14 @@ module DASHI.Physics.Closure.NSTriadKNComResidualShellCapRound63Exact where
 -- ROUND 63 B0 RESIDUAL CAP
 --
 -- After routing the three separated Bony classes LH / HL / HH->L, the residual
--- class is not automatically width one.  What resonance DOES force is the
--- exact finite band
+-- class is not automatically width one.  Resonance forces the exact finite band
 --
---   j(k) <= j(q)+3,
---   j(q) <= j(k)+3.
+--   j(k) <= j(q)+3,     j(q) <= j(k)+3.
 --
--- Here +3 is written as three successors to avoid any hidden arithmetic
--- normalisation.  The proof uses only:
---
---   * failure of LH/HL separation => the two input shells differ by at most 2;
---   * failure of HH->L => at least one input is at most 2 shells above output;
---   * the already-proved infinity-norm resonance triangles => a sum/difference
---     lies at most one shell above the larger input.
---
--- Thus the unresolved post-routing transition band is FINITE: input/output
--- separations 0,1,2,3 only.  Width-one Com is a genuine subchannel; gaps 2/3
--- must be routed or estimated separately rather than hidden in the common hat.
+-- The proof uses only failure of the three separation tests plus the already
+-- proved infinity-norm resonance triangles.  Hence post-routing Com analysis
+-- has a finite transition band: separations 0,1,2,3.  Gaps 2/3 cannot be hidden
+-- in a width-one common hat.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
@@ -42,13 +33,12 @@ open import Data.Nat.Base using (_≤_; z≤n; s≤s; ∣_-_∣)
 import Data.Nat.Properties as Nat
 open import Data.Sum.Base using (_⊎_; inj₁; inj₂)
 open import Relation.Nullary using (¬_)
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Binary.PropositionalEquality using (subst)
 
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNOfficialInfinityNormTriangle as Infinity
 import DASHI.Physics.Closure.NSTriadKNLiteralDyadicShellConstants as Shell
 import DASHI.Physics.Closure.NSTriadKNLiteralDyadicConsequencesClosed as Dyadic
-import DASHI.Physics.Closure.NSTriadKNLiteralBonyInteractionRoutingRound63Exact as Routing
 
 leOneSuccessor : (n : Nat) → n ≤ suc n
 leOneSuccessor zero = z≤n
@@ -56,10 +46,6 @@ leOneSuccessor (suc n) = s≤s (leOneSuccessor n)
 
 leTwoSuccessors : (n : Nat) → n ≤ suc (suc n)
 leTwoSuccessors n = Nat.≤-trans (leOneSuccessor n) (leOneSuccessor (suc n))
-
-leThreeSuccessors : (n : Nat) → n ≤ suc (suc (suc n))
-leThreeSuccessors n =
-  Nat.≤-trans (leTwoSuccessors n) (leOneSuccessor (suc (suc n)))
 
 notGapThreeImpliesUpperTwo :
   (lower higher : Nat) →
@@ -111,12 +97,7 @@ residualInputOutputBand tau notLH notHL notHH = record
   jk = Shell.shellIndex (Physical.k tau)
 
   pAtMostTwoAboveQ : jp ≤ suc (suc jq)
-  pAtMostTwoAboveQ =
-    notGapThreeImpliesUpperTwo jq jp notHL
-
-  qAtMostTwoAboveP : jq ≤ suc (suc jp)
-  qAtMostTwoAboveP =
-    notGapThreeImpliesUpperTwo jp jq notLH
+  pAtMostTwoAboveQ = notGapThreeImpliesUpperTwo jq jp notHL
 
   consequences : Infinity.OfficialResonantNormConsequences tau
   consequences = Infinity.officialResonantNormConsequences tau
@@ -154,12 +135,9 @@ residualInputOutputBand tau notLH notHL notHH = record
       (notGapThreeImpliesUpperTwo jk jq notKGapQ)
       (leOneSuccessor (suc (suc jk)))
   ... | inj₁ notKGapP =
-    let
-      pAtMostTwoAboveK : jp ≤ suc (suc jk)
-      pAtMostTwoAboveK =
-        notGapThreeImpliesUpperTwo jk jp notKGapP
-    in
-    inputFromP pAtMostTwoAboveK (Nat.≤-total jp jk)
+    inputFromP
+      (notGapThreeImpliesUpperTwo jk jp notKGapP)
+      (Nat.≤-total jp jk)
     where
     inputFromP :
       jp ≤ suc (suc jk) →
@@ -211,8 +189,7 @@ mutual
   shellDistanceAtMostThree {suc (suc (suc (suc left)))} {zero}
     (s≤s (s≤s (s≤s ()))) rightBound
   shellDistanceAtMostThree {suc left} {suc right}
-    (s≤s (s≤s (s≤s leftBound)))
-    (s≤s (s≤s (s≤s rightBound))) =
+    (s≤s leftBound) (s≤s rightBound) =
     shellDistanceAtMostThree leftBound rightBound
 
 residualInputOutputDistanceAtMostThree :
