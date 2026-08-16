@@ -16,22 +16,24 @@ module DASHI.Physics.Closure.NSTriadKNComLiteralBonyOutputFibrePartitionRound63E
 -- Title: "Commutator Estimates and the Euler and Navier-Stokes Equations".
 -- DOI: 10.1002/cpa.3160410704.
 --
--- ROUND 63 B0 OUTPUT-FIBRE PARTITION
+-- ROUND 63 B0 DIAGNOSTIC OUTPUT-FIBRE PARTITION
 --
--- Lift the pointwise literal Bony classification to the ACTUAL finite
--- `physicalOutputFiber` consumed by the Round57 odd-P/Q kernel.  Four
--- executable filters are constructed:
+-- Partition the ACTUAL finite `physicalOutputFiber` consumed by the Round57
+-- odd-P/Q kernel using the mature strict four-way physical Bony classifier:
 --
---   LH, HL, HH->L, residual.
+--   LH, HL, HH->low, CC/comparable.
+--
+-- This partition is deliberately labelled DIAGNOSTIC.  It decomposes the
+-- triadic summands from which the differentiated commutator is calculated, but
+-- does NOT by itself reassign those summands from the fifth Com owner into the
+-- four triadic owners.  Round25's physical five-source theorem keeps the four
+-- triadic classes and the appended differentiated-commutator cell distinct.
+-- Any owner transfer would therefore require an additional exact cancellation
+-- or reallocation theorem.
 --
 -- Every original fibre incidence belongs to exactly one filtered list; every
--- filtered incidence is an original fibre incidence; and the odd-P/Q
--- coefficient on each branch is literally the same Round57 coefficient,
--- because routing filters incidences rather than replacing coefficients.
---
--- This is the concrete operator-side split needed before any common-hat or
--- Gram theorem.  In particular, far HL entries are no longer silently included
--- in the near-Com Gram row.
+-- filtered incidence is an original fibre incidence; and filtering leaves the
+-- literal Round57 odd-P/Q coefficient unchanged.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -52,7 +54,7 @@ import DASHI.Physics.Closure.NSTriadKNComLiteralOddPQKernelRound57Exact as Odd
 import DASHI.Physics.Closure.NSTriadKNLiteralBonyInteractionRoutingRound63Exact as Routing
 
 data BonyTag : Set where
-  lhTag hlTag hhToLowTag residualTag : BonyTag
+  lhTag hlTag hhToLowTag comparableTag : BonyTag
 
 bonyTagEqual : BonyTag → BonyTag → Bool
 bonyTagEqual lhTag lhTag = true
@@ -61,39 +63,39 @@ bonyTagEqual hlTag hlTag = true
 bonyTagEqual hlTag _ = false
 bonyTagEqual hhToLowTag hhToLowTag = true
 bonyTagEqual hhToLowTag _ = false
-bonyTagEqual residualTag residualTag = true
-bonyTagEqual residualTag _ = false
+bonyTagEqual comparableTag comparableTag = true
+bonyTagEqual comparableTag _ = false
 
 bonyTagEqualRefl : (tag : BonyTag) → bonyTagEqual tag tag ≡ true
 bonyTagEqualRefl lhTag = refl
 bonyTagEqualRefl hlTag = refl
 bonyTagEqualRefl hhToLowTag = refl
-bonyTagEqualRefl residualTag = refl
+bonyTagEqualRefl comparableTag = refl
 
 bonyTagEqualSound : ∀ {left right} → bonyTagEqual left right ≡ true → left ≡ right
 bonyTagEqualSound {lhTag} {lhTag} proof = refl
 bonyTagEqualSound {lhTag} {hlTag} ()
 bonyTagEqualSound {lhTag} {hhToLowTag} ()
-bonyTagEqualSound {lhTag} {residualTag} ()
+bonyTagEqualSound {lhTag} {comparableTag} ()
 bonyTagEqualSound {hlTag} {lhTag} ()
 bonyTagEqualSound {hlTag} {hlTag} proof = refl
 bonyTagEqualSound {hlTag} {hhToLowTag} ()
-bonyTagEqualSound {hlTag} {residualTag} ()
+bonyTagEqualSound {hlTag} {comparableTag} ()
 bonyTagEqualSound {hhToLowTag} {lhTag} ()
 bonyTagEqualSound {hhToLowTag} {hlTag} ()
 bonyTagEqualSound {hhToLowTag} {hhToLowTag} proof = refl
-bonyTagEqualSound {hhToLowTag} {residualTag} ()
-bonyTagEqualSound {residualTag} {lhTag} ()
-bonyTagEqualSound {residualTag} {hlTag} ()
-bonyTagEqualSound {residualTag} {hhToLowTag} ()
-bonyTagEqualSound {residualTag} {residualTag} proof = refl
+bonyTagEqualSound {hhToLowTag} {comparableTag} ()
+bonyTagEqualSound {comparableTag} {lhTag} ()
+bonyTagEqualSound {comparableTag} {hlTag} ()
+bonyTagEqualSound {comparableTag} {hhToLowTag} ()
+bonyTagEqualSound {comparableTag} {comparableTag} proof = refl
 
 bonyTag : (tau : Physical.PhysicalTriadIncidence) → BonyTag
 bonyTag tau with Routing.classifyLiteralBony tau
-... | Routing.lowHigh gap = lhTag
-... | Routing.highLow gap = hlTag
-... | Routing.highHighToLow gapP gapQ = hhToLowTag
-... | Routing.residual notLH notHL notHH = residualTag
+... | Routing.lowHigh certificate = lhTag
+... | Routing.highLow certificate = hlTag
+... | Routing.highHighToLow certificate = hhToLowTag
+... | Routing.comparable certificate = comparableTag
 
 filterBonyTag :
   BonyTag → List Physical.PhysicalTriadIncidence →
@@ -108,12 +110,12 @@ bonyOutputFibre :
 bonyOutputFibre tag enumerationCutoff output =
   filterBonyTag tag (Output.physicalOutputFiber enumerationCutoff output)
 
-lhOutputFibre hlOutputFibre hhToLowOutputFibre residualOutputFibre :
+lhOutputFibre hlOutputFibre hhToLowOutputFibre comparableOutputFibre :
   Nat → Z3.FourierMode → List Physical.PhysicalTriadIncidence
 lhOutputFibre = bonyOutputFibre lhTag
 hlOutputFibre = bonyOutputFibre hlTag
 hhToLowOutputFibre = bonyOutputFibre hhToLowTag
-residualOutputFibre = bonyOutputFibre residualTag
+comparableOutputFibre = bonyOutputFibre comparableTag
 
 filterTagMemberOriginal :
   ∀ {tag tau items} →
@@ -185,12 +187,12 @@ originalOutputFibreMemberRouted :
   (tau Cube.∈ lhOutputFibre enumerationCutoff output)
   ⊎ ((tau Cube.∈ hlOutputFibre enumerationCutoff output)
   ⊎ ((tau Cube.∈ hhToLowOutputFibre enumerationCutoff output)
-  ⊎  (tau Cube.∈ residualOutputFibre enumerationCutoff output)))
+  ⊎  (tau Cube.∈ comparableOutputFibre enumerationCutoff output)))
 originalOutputFibreMemberRouted {tau = tau} member with bonyTag tau
 ... | lhTag = inj₁ (filterTagMemberComplete member refl)
 ... | hlTag = inj₂ (inj₁ (filterTagMemberComplete member refl))
 ... | hhToLowTag = inj₂ (inj₂ (inj₁ (filterTagMemberComplete member refl)))
-... | residualTag = inj₂ (inj₂ (inj₂ (filterTagMemberComplete member refl)))
+... | comparableTag = inj₂ (inj₂ (inj₂ (filterTagMemberComplete member refl)))
 
 memberCannotHaveTwoDistinctTags :
   ∀ {left right enumerationCutoff output tau} →
@@ -215,16 +217,16 @@ routedOddPQCoefficients tag model projectorCutoff enumerationCutoff E velocity o
     (Odd.literalOddPQTriadCoefficient model projectorCutoff E velocity)
     (bonyOutputFibre tag enumerationCutoff output)
 
-literalOddPQOutputFibrePartitionedByBonyClass : Bool
-literalOddPQOutputFibrePartitionedByBonyClass = true
+literalOddPQOutputFibreDiagnosticPartitioned : Bool
+literalOddPQOutputFibreDiagnosticPartitioned = true
 
-routingPreservesLiteralOddPQCoefficient : Bool
-routingPreservesLiteralOddPQCoefficient = true
+partitionDoesNotByItselfReassignComOwner : Bool
+partitionDoesNotByItselfReassignComOwner = true
 
-literalOddPQOutputFibrePartitionedByBonyClassIsTrue :
-  literalOddPQOutputFibrePartitionedByBonyClass ≡ true
-literalOddPQOutputFibrePartitionedByBonyClassIsTrue = refl
+literalOddPQOutputFibreDiagnosticPartitionedIsTrue :
+  literalOddPQOutputFibreDiagnosticPartitioned ≡ true
+literalOddPQOutputFibreDiagnosticPartitionedIsTrue = refl
 
-routingPreservesLiteralOddPQCoefficientIsTrue :
-  routingPreservesLiteralOddPQCoefficient ≡ true
-routingPreservesLiteralOddPQCoefficientIsTrue = refl
+partitionDoesNotByItselfReassignComOwnerIsTrue :
+  partitionDoesNotByItselfReassignComOwner ≡ true
+partitionDoesNotByItselfReassignComOwnerIsTrue = refl
