@@ -84,7 +84,7 @@ badAlignmentRejectedComputed =
 adamsInstanceComputed : LeanTheoremContract
 adamsInstanceComputed =
   leanTheoremContract rdfSource
-    "Wikidata.RdfExample.adams_entity_computed"
+    "Wikidata.Rdf.RdfExample.adams_entity_computed"
     "RDF worked fragment computes Q42 instance of Q35120"
     checkerExactness
 
