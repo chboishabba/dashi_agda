@@ -207,11 +207,12 @@ literalCrossGramNumeratorNonnegative :
     (C3.zero (LP.realField model))
     (literalOutputFibreCrossGramNumerator
       model leftCutoff rightCutoff enumerationCutoff E velocity output)
-literalCrossGramNumeratorNonnegative O leftCutoff rightCutoff enumerationCutoff
+literalCrossGramNumeratorNonnegative
+    {model = model} O leftCutoff rightCutoff enumerationCutoff
     E velocity output =
   complexModulusSquaredNonnegative O
     (literalOutputFibreCrossPairing
-      _ leftCutoff rightCutoff enumerationCutoff E velocity output)
+      model leftCutoff rightCutoff enumerationCutoff E velocity output)
 
 ------------------------------------------------------------------------
 -- Ordered multiplication is intentionally separated from the weaker ordered
