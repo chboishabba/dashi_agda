@@ -37,9 +37,11 @@ module DASHI.Physics.Closure.NSTriadKNFixedOutputFiberThreeDOFRound72Exact where
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Agda.Builtin.Nat using (Nat)
-open import Data.Integer.Base using (_-_; ∣_∣)
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Agda.Builtin.Nat using (Nat; _*_)
+open import Data.Integer.Base using (ℤ; _-_)
+open import Data.Product.Base using (_×_; _,_; proj₁)
+open import Relation.Binary.PropositionalEquality using
+  (cong; cong₂; subst; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier as Cube
@@ -73,14 +75,12 @@ fixedOutputInputCutoff member =
   let bounded = Physical.physicalTriadEnumerationCutoffSound
         (physicalOutputFiberMemberInEnumeration member)
   in Physical.pBounded bounded , Physical.qBounded bounded
-  where
-  open import Data.Product.Base using (_×_; _,_)
 
 qCoordinateFromPK :
   (τ : Physical.PhysicalTriadIncidence) →
-  (PhysicalCoord : Z3.FourierMode → Data.Integer.Base.ℤ) →
-  PhysicalCoord (Physical.q τ)
-  ≡ PhysicalCoord (Physical.k τ) - PhysicalCoord (Physical.p τ)
+  (coordinate : Z3.FourierMode → ℤ) →
+  coordinate (Physical.q τ)
+  ≡ coordinate (Physical.k τ) - coordinate (Physical.p τ)
 qCoordinateFromPK τ coordinate =
   trans
     (sym (Infinity.sumMinusLeft
@@ -118,8 +118,6 @@ qDeterminedByPAndOutput left right pExact kExact =
           (cong Z3.kz kExact)
           (cong Z3.kz pExact))
         (sym (qCoordinateFromPK right Z3.kz))))
-  where
-  open import Relation.Binary.PropositionalEquality using (cong₂)
 
 fixedOutputPDeterminesQ :
   ∀ {N output left right} →
@@ -148,20 +146,15 @@ fixedOutputThreeDOFCode :
   ∀ {N output τ} →
   τ Cube.∈ Output.physicalOutputFiber N output →
   FixedOutputThreeDOFCode N output τ
-fixedOutputThreeDOFCode member = record
+fixedOutputThreeDOFCode {τ = τ} member = record
   { member = member
-  ; code = Physical.p _
+  ; code = Physical.p τ
   ; codeIsP = refl
-  ; codeInSingleCutoffCube =
-      Data.Product.Base.proj₁ (fixedOutputInputCutoff member)
+  ; codeInSingleCutoffCube = proj₁ (fixedOutputInputCutoff member)
   }
-  where
-  import Data.Product.Base
 
 cubeMajorant : Nat → Nat
-cubeMajorant N =
-  (3 * N) * ((3 * N) * (3 * N))
-  where open import Agda.Builtin.Nat using (_*_)
+cubeMajorant N = (3 * N) * ((3 * N) * (3 * N))
 
 cutoffCubeCardinalityCubicBound :
   ∀ N → 1 Cube.≤ᴺ N →
