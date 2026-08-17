@@ -42,49 +42,46 @@ module DASHI.Physics.Closure.NSTriadKNHighestAlphaRound71Exact where
 --    floor.  Each step duplicates the block and halves all descendant floors.
 --    The recursive event count doubles exactly.
 --
--- 2. Exact mass conservation:
+-- 2. Exact mass conservation: totalFloor(depth)=1.  Thus doubling multiplicity
+--    exactly compensates factor-1/2 descendant loss.
 --
---        totalFloor(depth) = 1.
---
---    Thus doubling multiplicity exactly compensates factor-1/2 descendant loss.
---
--- 3. Weighted version:
---
---        totalFloor(weightedBlock W depth) = W.
---
---    Taking W=E+1 rejects every Round70 funding ledger below budget E at every
---    finite depth.  Therefore exponential pointwise loss is not automatically
---    fatal if physical descendant multiplicity grows fast enough.
+-- 3. Weighted version: totalFloor(weightedBlock W depth)=W.  Taking W=E+1
+--    rejects every Round70 funding ledger below budget E at every finite depth.
+--    Exponential pointwise loss is not automatically fatal if genuine physical
+--    descendant multiplicity grows fast enough.
 --
 -- This remains arithmetic/combinatorial only.  Round70 already proves abstract
 -- block indices do not imply physical support separation; formal duplicates may
--- not be charged twice.  The hard physical theorem is multiplicity x loss on
--- genuinely distinct frequency/spacetime descendants.
+-- not be charged twice.  The hard theorem is multiplicity x loss on genuinely
+-- distinct frequency/spacetime descendants.
 --
 -- TRAJECTORY-SIDE AUDIT AND REPAIR
 --
--- 4. The old Round26/30 Picard `Assignment = CoordinateVariable -> Q` is NOT
---    the finite cutoff carrier.  CoordinateVariable contains an injective copy
---    of Nat via modes (n,0,0), so a finite equation list does not make the
---    unrestricted function assignment finite-dimensional.  It is also Q-valued
---    whereas the physical Complex3 carrier uses Carrier F.
+-- 4. The old Round26/30 Picard Assignment = CoordinateVariable -> Q is NOT the
+--    finite cutoff carrier.  CoordinateVariable contains an injective Nat copy
+--    via modes (n,0,0), and Q is not the physical real field.
 --
--- 5. Round71 constructs the replacement finite REAL carrier: exactly six
---    ordered scalar slots (x.re,x.im,y.re,y.im,z.re,z.im) for every canonical
---    retained reality-orbit mode, with values in the SAME Carrier F as the
---    physical Fourier coefficients.  The slot count is exactly six times the
---    canonical mode-list count.
+-- 5. Round71 constructs the replacement finite REAL carrier: six ordered slots
+--    (x.re,x.im,y.re,y.im,z.re,z.im) for every canonical retained reality-orbit
+--    mode, valued in the SAME Carrier F as the physical Fourier coefficients.
 --
--- 6. Every literal TransverseModeCoefficient is encoded into those six real
---    slots, and finite folding preserves the exact coefficient-mode slot order.
---    Thus the physical -> finite-real encoding half of the trajectory bridge is
---    constructed without rationalizing physical data.
+-- 6. Every literal TransverseModeCoefficient is encoded into those six slots,
+--    with exact finite mode-slot order preservation.
 --
--- The reverse map is deliberately fail-closed: arbitrary six-tuples need not be
--- transverse.  The remaining trajectory producer must either (i) construct a
--- genuine transverse four-real-coordinate chart, or (ii) extend the projected
--- RHS to the full finite six-component real space, prove local Lipschitz there,
--- and prove the transverse subspace is invariant.
+-- 7. The actual canonical physical RHS output is now aligned to that carrier:
+--    the output coefficient-mode list is proved exactly equal, in order, to the
+--    canonical source-mode list, then its six-real encoding is transported onto
+--    CanonicalCutoffRealCoordinateState.  This closes the OUTPUT half of the
+--    finite-real ODE bridge.
+--
+-- 8. The raw FiniteComplex3GalerkinSystem already accepts an arbitrary velocity
+--    function and applies the literal Leray-projected nonlinearity.  Therefore a
+--    bespoke transverse four-real chart is unnecessary in principle: the
+--    shortest remaining input-side construction is a fixed-cutoff/reality
+--    finite real state (positive canonical modes, negative values reconstructed
+--    by conjugation), a fixed Galerkin geometry, and the same projected vector
+--    field on arbitrary states of that finite carrier.  Transversality can then
+--    be proved as an invariant subspace for transverse initial data.
 --
 -- QUANTITATIVE DISCRIMINATOR
 --
@@ -95,19 +92,19 @@ module DASHI.Physics.Closure.NSTriadKNHighestAlphaRound71Exact where
 --
 -- outruns the one finite physical budget.  Uniform floors, sufficiently slow
 -- losses, or sufficiently fast genuine branching can all work.  Summable TOTAL
--- generation mass remains fatal.  The logarithmically improved regularity
--- literature is only architectural precedent for accumulated/divergence
--- criteria; it is not imported as an unconditional C1 producer.
+-- generation mass remains fatal.  Log-improved regularity criteria are recorded
+-- only as precedent for accumulated/divergence criteria, not as a C1 producer.
 --
 -- NEW SHORTEST FRONTIER
 --
--- A1. CanonicalPhysicalRHSActsOnFiniteRealCarrier: finish the same-object
---     finite REAL vector-field chart and local-Lipschitz representation;
--- A2. SelectedGalerkinTrajectoryExistsAndStaysPhysical: real Picard trajectory,
---     transverse/reality/cutoff invariance, and energy continuation;
+-- A1. FiniteRealCanonicalInputVectorFieldExact: fix cutoff geometry independent
+--     of state, decode arbitrary finite real reality-orbit data to the full +/-
+--     velocity, apply the literal projected NS field, and prove agreement with
+--     the already-aligned physical RHS on encoded physical states;
+-- A2. SelectedGalerkinTrajectoryExistsAndStaysPhysical: local Lipschitz + real
+--     finite-dimensional Picard, transverse invariance, and energy continuation;
 -- B.  LocalizedTrajectoryEmitsStructuredPDEAtoms;
--- C.  CriticalAmplificationForcesStructuredConcentration, with an explicit
---     initial physical charge floor and no Xi<=K premise;
+-- C.  CriticalAmplificationForcesStructuredConcentration;
 -- D1. PhysicalPropagationProducesDuplicateFreeDescendants;
 -- D2. PhysicalMultiplicityLossBalanceOutrunsBudget;
 -- E.  CriticalRatioBarrierFromPropagationFloors;
@@ -124,6 +121,7 @@ import DASHI.Physics.Closure.NSTriadKNBranchingCompensatesDyadicLossRound71Exact
 import DASHI.Physics.Closure.NSTriadKNOldRationalAssignmentNotFiniteCutoffRound71Exact as OldNoGo
 import DASHI.Physics.Closure.NSTriadKNFiniteRealCanonicalCoordinateCarrierRound71Exact as FiniteReal
 import DASHI.Physics.Closure.NSTriadKNPhysicalCoefficientFiniteRealEncodingRound71Exact as Encoding
+import DASHI.Physics.Closure.NSTriadKNCanonicalRHSFiniteRealSlotAlignmentRound71Exact as RHSAlignment
 
 round71BranchingCompensatesDyadicLossConstructed : Bool
 round71BranchingCompensatesDyadicLossConstructed =
@@ -145,9 +143,13 @@ round71PhysicalToFiniteRealEncodingConstructed : Bool
 round71PhysicalToFiniteRealEncodingConstructed =
   Encoding.round71PhysicalCoefficientFiniteRealEncodingConstructed
 
+round71CanonicalRHSOutputOnFiniteRealCarrierConstructed : Bool
+round71CanonicalRHSOutputOnFiniteRealCarrierConstructed =
+  RHSAlignment.round71CanonicalRHSOutputOnFiniteRealCarrier
+
 -- Genuine remaining physical producers on the decisive path.
-round71CanonicalPhysicalRHSActsOnFiniteRealCarrier : Bool
-round71CanonicalPhysicalRHSActsOnFiniteRealCarrier = false
+round71FiniteRealCanonicalInputVectorFieldConstructed : Bool
+round71FiniteRealCanonicalInputVectorFieldConstructed = false
 
 round71SelectedGalerkinTrajectoryConstructed : Bool
 round71SelectedGalerkinTrajectoryConstructed = false
@@ -190,17 +192,17 @@ round71PhysicalToFiniteRealEncodingConstructedIsTrue :
   round71PhysicalToFiniteRealEncodingConstructed ≡ true
 round71PhysicalToFiniteRealEncodingConstructedIsTrue = refl
 
-round71CanonicalPhysicalRHSActsOnFiniteRealCarrierIsFalse :
-  round71CanonicalPhysicalRHSActsOnFiniteRealCarrier ≡ false
-round71CanonicalPhysicalRHSActsOnFiniteRealCarrierIsFalse = refl
+round71CanonicalRHSOutputOnFiniteRealCarrierConstructedIsTrue :
+  round71CanonicalRHSOutputOnFiniteRealCarrierConstructed ≡ true
+round71CanonicalRHSOutputOnFiniteRealCarrierConstructedIsTrue = refl
+
+round71FiniteRealCanonicalInputVectorFieldConstructedIsFalse :
+  round71FiniteRealCanonicalInputVectorFieldConstructed ≡ false
+round71FiniteRealCanonicalInputVectorFieldConstructedIsFalse = refl
 
 round71SelectedGalerkinTrajectoryConstructedIsFalse :
   round71SelectedGalerkinTrajectoryConstructed ≡ false
 round71SelectedGalerkinTrajectoryConstructedIsFalse = refl
-
-round71LiteralTrajectoryEmitsStructuredAtomsIsFalse :
-  round71LiteralTrajectoryEmitsStructuredAtoms ≡ false
-round71LiteralTrajectoryEmitsStructuredAtomsIsFalse = refl
 
 round71CriticalAmplificationForcesStructuredConcentrationIsFalse :
   round71CriticalAmplificationForcesStructuredConcentration ≡ false
