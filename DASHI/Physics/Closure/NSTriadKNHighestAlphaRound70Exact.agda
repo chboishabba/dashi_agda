@@ -107,9 +107,9 @@ round70DyadicPropagationFundingFalsified : Bool
 round70DyadicPropagationFundingFalsified =
   DyadicNoGo.round70DyadicPropagationFundingContradictionFalsified
 
-round70BlockIndexSupportSeparationFalsified : Bool
-round70BlockIndexSupportSeparationFalsified =
-  SupportNoGo.round70BlockIndexAloneImpliesSupportSeparation
+round70BlockIndexSupportSeparationNoGoConstructed : Bool
+round70BlockIndexSupportSeparationNoGoConstructed =
+  SupportNoGo.round70BlockSupportSeparationNeedsPhysicalProducer
 
 -- Genuine remaining physical producers on the decisive path.
 round70SelectedGalerkinTrajectoryConstructed : Bool
@@ -150,9 +150,9 @@ round70DyadicPropagationFundingFalsifiedIsTrue :
   round70DyadicPropagationFundingFalsified ≡ true
 round70DyadicPropagationFundingFalsifiedIsTrue = refl
 
-round70BlockIndexSupportSeparationFalsifiedIsFalse :
-  round70BlockIndexSupportSeparationFalsified ≡ false
-round70BlockIndexSupportSeparationFalsifiedIsFalse = refl
+round70BlockIndexSupportSeparationNoGoConstructedIsTrue :
+  round70BlockIndexSupportSeparationNoGoConstructed ≡ true
+round70BlockIndexSupportSeparationNoGoConstructedIsTrue = refl
 
 round70CriticalAmplificationForcesStructuredConcentrationIsFalse :
   round70CriticalAmplificationForcesStructuredConcentration ≡ false
