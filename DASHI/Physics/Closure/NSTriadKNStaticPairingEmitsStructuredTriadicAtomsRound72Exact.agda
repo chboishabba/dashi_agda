@@ -47,10 +47,9 @@ module DASHI.Physics.Closure.NSTriadKNStaticPairingEmitsStructuredTriadicAtomsRo
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Sum.Base using (inj₁; inj₂)
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Data.Rational.Base using (ℚ; 0ℚ; _+_)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 
-import DASHI.Physics.Closure.NSTriadKNLuoFiniteParaproductRangePartitionExact as Range
 import DASHI.Physics.Closure.NSTriadKNLuoPhysicalFiveClassSupportRound25Exact as Support
 import DASHI.Physics.Closure.NSTriadKNLuoPhysicalFiveClassSumRound25Exact as Five
 import DASHI.Physics.Closure.NSTriadKNLuoDuplicateFreeTaxOwnershipRound26Exact as Tax
@@ -127,24 +126,13 @@ structuredTriadicAtoms pairing hh =
     (Support.classifiedPhysicalOutputFiber
       (Shell.cutoff pairing) (Shell.output pairing))
 
-structuredTriadicSignedSumFromClassifiedExact :
-  (pairing : Shell.StaticPhysicalShellPairing) →
-  (hh : HHOwnerSelection) →
-  (classified : List Support.ClassifiedPhysicalTriad) →
-  Concentration.triadicSignedSum
-    (structuredTriadicAtomsFromClassified pairing hh classified)
-  ≡ Five.triadValueSum Shell.triadValue? classified
-structuredTriadicSignedSumFromClassifiedExact pairing hh classified = {!!}
-
--- Use an explicit fold over ClassifiedPhysicalTriad because Five.triadValueSum
--- is defined on the erased incidence list.
 classifiedTriadValueSum :
   (pairing : Shell.StaticPhysicalShellPairing) →
-  List Support.ClassifiedPhysicalTriad → Data.Rational.Base.ℚ
-classifiedTriadValueSum pairing [] = Data.Rational.Base.0ℚ
+  List Support.ClassifiedPhysicalTriad → ℚ
+classifiedTriadValueSum pairing [] = 0ℚ
 classifiedTriadValueSum pairing (classified ∷ rest) =
   Shell.triadValue pairing (Support.incidence classified)
-  Data.Rational.Base.+ classifiedTriadValueSum pairing rest
+  + classifiedTriadValueSum pairing rest
 
 structuredTriadicSignedSumClassifiedExact :
   (pairing : Shell.StaticPhysicalShellPairing) →
