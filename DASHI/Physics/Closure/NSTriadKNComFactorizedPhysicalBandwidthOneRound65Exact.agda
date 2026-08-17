@@ -36,13 +36,14 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNPeriodicLittlewoodPaleyBonyExact as LP
 import DASHI.Physics.Closure.NSTriadKNOrderedEuclideanL2Carrier as Ordered
 import DASHI.Physics.Closure.NSTriadKNComCommonHatSupportLeafRound58 as Hat
 import DASHI.Physics.Closure.NSTriadKNComNormalizedFibreMassLeafRound58 as Targets
+import DASHI.Physics.Closure.NSTriadKNComNormalizedFibreAggregateRound60Exact as Aggregate
 import DASHI.Physics.Closure.NSTriadKNComOrderedPhysicalMajorantRound62Exact as Majorant
 import DASHI.Physics.Closure.NSTriadKNLuoSixThreeCenteredCommutatorScaleExact as SixThree
 import DASHI.Physics.Closure.NSTriadKNComOrderedPhysicalGramFactorizationRound65Exact as Gram
@@ -116,24 +117,10 @@ sameActiveBound :
   Ordered._≤_ O
     (physicalPairProduct source q q)
     (Majorant.embed R Targets.sameShellTarget)
-sameActiveBound {O = O} {R = R} source q active =
-  let
-    bound = activePairBelowEmbeddedGap source q q active
-    distanceMeaning = sameShellDistance source q
-    targetMeaning :
-      Majorant.embed R
-        (SixThree.twoBranchSquaredGap (shellDistance source q q))
-      ≡ Majorant.embed R Targets.sameShellTarget
-    targetMeaning =
-      cong (Majorant.embed R)
-        (subst
-          (λ d → SixThree.twoBranchSquaredGap d ≡ Targets.sameShellTarget)
-          (sym distanceMeaning)
-          sameGapExact)
-  in
-  subst
-    (λ right → Ordered._≤_ O (physicalPairProduct source q q) right)
-    targetMeaning bound
+sameActiveBound source q active
+  rewrite sameShellDistance source q
+        | sameGapExact =
+  activePairBelowEmbeddedGap source q q active
 
 forwardActiveBound :
   ∀ {r model O M R}
@@ -143,25 +130,10 @@ forwardActiveBound :
   Ordered._≤_ O
     (physicalPairProduct source q (suc q))
     (Majorant.embed R Targets.adjacentShellTarget)
-forwardActiveBound {O = O} {R = R} source q active =
-  let
-    bound = activePairBelowEmbeddedGap source q (suc q) active
-    distanceMeaning = forwardAdjacentDistance source q
-    targetMeaning :
-      Majorant.embed R
-        (SixThree.twoBranchSquaredGap (shellDistance source q (suc q)))
-      ≡ Majorant.embed R Targets.adjacentShellTarget
-    targetMeaning =
-      cong (Majorant.embed R)
-        (subst
-          (λ d → SixThree.twoBranchSquaredGap d ≡ Targets.adjacentShellTarget)
-          (sym distanceMeaning)
-          adjacentGapExact)
-  in
-  subst
-    (λ right → Ordered._≤_ O
-      (physicalPairProduct source q (suc q)) right)
-    targetMeaning bound
+forwardActiveBound source q active
+  rewrite forwardAdjacentDistance source q
+        | adjacentGapExact =
+  activePairBelowEmbeddedGap source q (suc q) active
 
 reverseActiveBound :
   ∀ {r model O M R}
@@ -171,25 +143,10 @@ reverseActiveBound :
   Ordered._≤_ O
     (physicalPairProduct source (suc q) q)
     (Majorant.embed R Targets.adjacentShellTarget)
-reverseActiveBound {O = O} {R = R} source q active =
-  let
-    bound = activePairBelowEmbeddedGap source (suc q) q active
-    distanceMeaning = reverseAdjacentDistance source q
-    targetMeaning :
-      Majorant.embed R
-        (SixThree.twoBranchSquaredGap (shellDistance source (suc q) q))
-      ≡ Majorant.embed R Targets.adjacentShellTarget
-    targetMeaning =
-      cong (Majorant.embed R)
-        (subst
-          (λ d → SixThree.twoBranchSquaredGap d ≡ Targets.adjacentShellTarget)
-          (sym distanceMeaning)
-          adjacentGapExact)
-  in
-  subst
-    (λ right → Ordered._≤_ O
-      (physicalPairProduct source (suc q) q) right)
-    targetMeaning bound
+reverseActiveBound source q active
+  rewrite reverseAdjacentDistance source q
+        | adjacentGapExact =
+  activePairBelowEmbeddedGap source (suc q) q active
 
 factorizedSourceToOrderedPhysicalMajorant :
   ∀ {r model O M R} →
@@ -218,8 +175,7 @@ factorizedBandwidthOneBelow133Over256 :
   Ordered._≤_ O
     (Majorant.bandwidthOnePhysicalEnergy
       (factorizedSourceToOrderedPhysicalMajorant source) q)
-    (Majorant.embed R
-      DASHI.Physics.Closure.NSTriadKNComNormalizedFibreAggregateRound60Exact.bandwidthOneTarget)
+    (Majorant.embed R Aggregate.bandwidthOneTarget)
 factorizedBandwidthOneBelow133Over256 source q =
   Majorant.bandwidthOnePhysicalEnergyBelow133Over256
     (factorizedSourceToOrderedPhysicalMajorant source) q
