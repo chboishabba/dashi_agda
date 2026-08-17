@@ -19,32 +19,15 @@ module DASHI.Physics.Closure.NSTriadKNCriticalRemainderTriadicCauchyRound71Exact
 --
 -- ROUND 71 / FINITE CAUCHY CONCENTRATION BRIDGE
 --
--- Round69 defined triadicConcentrationMass on the ONE Round62 structured PDE
--- atom list.  This file proves the exact finite implication that had not yet
--- been extracted.
---
--- Let a_1,...,a_m be the signed values of precisely the triadic physicalAtom
--- entries.  Put
---
---       S = sum_i a_i,
---       M = sum_i a_i^2,
---       m = sum_i 1.
---
--- The repository's exact finite squared Cauchy-Schwarz theorem, applied to
--- pairs (a_i,1), gives
---
---       S^2 <= M * m.
---
--- Therefore, if 0<=mu<=R and the SAME-OBJECT localized identity proves
--- R = S, then
---
---       mu^2 <= M * m.
+-- For the triadic physicalAtom values a_i in the ONE Round62 structured PDE
+-- list, set S=sum a_i, M=sum a_i^2 and m=sum 1.  Exact finite squared Cauchy-
+-- Schwarz on pairs (a_i,1) gives S^2 <= M*m.  Hence if 0<=mu<=R and the
+-- SAME-OBJECT localized identity proves R=S, then mu^2 <= M*m.
 --
 -- No ambient Xi<=K bound, Carleman estimate, compactness theorem or positivity
--- of individual signed atoms is used.  The only remaining PDE-specific seam is
--- the identity saying which literal structured atoms constitute the amplification
--- remainder.  If non-triadic terms remain, they must be separated/estimated
--- rather than silently folded into concentration.
+-- of individual signed atoms is used.  Non-triadic terms must be separated or
+-- estimated by the physical localized identity; they are not silently called
+-- concentration.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -54,7 +37,7 @@ open import Data.Product.Base using (_,_)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (subst)
 
 import DASHI.Physics.Closure.NSTriadKNLuoPhysicalFiveClassSupportRound25Exact as Support
 import DASHI.Physics.Closure.NSTriadKNLocalizedPDEStructuredAtomsRound62Exact as Structured
@@ -65,64 +48,49 @@ triadicSignedSum : List Structured.LocalizedPDEAtom → ℚ
 triadicSignedSum [] = 0ℚ
 triadicSignedSum
     (Structured.physicalAtom (Support.triadicSource classified)
-      selected compatible value ∷ rest) =
-  value + triadicSignedSum rest
+      selected compatible value ∷ rest) = value + triadicSignedSum rest
 triadicSignedSum
     (Structured.physicalAtom (Support.differentiatedCommutator output)
-      selected compatible value ∷ rest) =
-  triadicSignedSum rest
+      selected compatible value ∷ rest) = triadicSignedSum rest
 triadicSignedSum (Structured.tailAtom value ∷ rest) = triadicSignedSum rest
 triadicSignedSum (Structured.duplicateKernelAtom value ∷ rest) = triadicSignedSum rest
 triadicSignedSum
-    (Structured.cancellingKernelPair left right cancellation ∷ rest) =
-  triadicSignedSum rest
+    (Structured.cancellingKernelPair left right cancellation ∷ rest) = triadicSignedSum rest
 triadicSignedSum (Structured.independentKernelAtom value ∷ rest) = triadicSignedSum rest
-triadicSignedSum
-    (Structured.lowerBoundaryAtom reason value ∷ rest) = triadicSignedSum rest
-triadicSignedSum
-    (Structured.upperBoundaryAtom reason value ∷ rest) = triadicSignedSum rest
+triadicSignedSum (Structured.lowerBoundaryAtom reason value ∷ rest) = triadicSignedSum rest
+triadicSignedSum (Structured.upperBoundaryAtom reason value ∷ rest) = triadicSignedSum rest
 
 triadicCount : List Structured.LocalizedPDEAtom → ℚ
 triadicCount [] = 0ℚ
 triadicCount
     (Structured.physicalAtom (Support.triadicSource classified)
-      selected compatible value ∷ rest) =
-  1ℚ + triadicCount rest
+      selected compatible value ∷ rest) = 1ℚ + triadicCount rest
 triadicCount
     (Structured.physicalAtom (Support.differentiatedCommutator output)
-      selected compatible value ∷ rest) =
-  triadicCount rest
+      selected compatible value ∷ rest) = triadicCount rest
 triadicCount (Structured.tailAtom value ∷ rest) = triadicCount rest
 triadicCount (Structured.duplicateKernelAtom value ∷ rest) = triadicCount rest
 triadicCount
-    (Structured.cancellingKernelPair left right cancellation ∷ rest) =
-  triadicCount rest
+    (Structured.cancellingKernelPair left right cancellation ∷ rest) = triadicCount rest
 triadicCount (Structured.independentKernelAtom value ∷ rest) = triadicCount rest
-triadicCount
-    (Structured.lowerBoundaryAtom reason value ∷ rest) = triadicCount rest
-triadicCount
-    (Structured.upperBoundaryAtom reason value ∷ rest) = triadicCount rest
+triadicCount (Structured.lowerBoundaryAtom reason value ∷ rest) = triadicCount rest
+triadicCount (Structured.upperBoundaryAtom reason value ∷ rest) = triadicCount rest
 
 triadicUnitPairs : List Structured.LocalizedPDEAtom → List L2.Pair
 triadicUnitPairs [] = []
 triadicUnitPairs
     (Structured.physicalAtom (Support.triadicSource classified)
-      selected compatible value ∷ rest) =
-  (value , 1ℚ) ∷ triadicUnitPairs rest
+      selected compatible value ∷ rest) = (value , 1ℚ) ∷ triadicUnitPairs rest
 triadicUnitPairs
     (Structured.physicalAtom (Support.differentiatedCommutator output)
-      selected compatible value ∷ rest) =
-  triadicUnitPairs rest
+      selected compatible value ∷ rest) = triadicUnitPairs rest
 triadicUnitPairs (Structured.tailAtom value ∷ rest) = triadicUnitPairs rest
 triadicUnitPairs (Structured.duplicateKernelAtom value ∷ rest) = triadicUnitPairs rest
 triadicUnitPairs
-    (Structured.cancellingKernelPair left right cancellation ∷ rest) =
-  triadicUnitPairs rest
+    (Structured.cancellingKernelPair left right cancellation ∷ rest) = triadicUnitPairs rest
 triadicUnitPairs (Structured.independentKernelAtom value ∷ rest) = triadicUnitPairs rest
-triadicUnitPairs
-    (Structured.lowerBoundaryAtom reason value ∷ rest) = triadicUnitPairs rest
-triadicUnitPairs
-    (Structured.upperBoundaryAtom reason value ∷ rest) = triadicUnitPairs rest
+triadicUnitPairs (Structured.lowerBoundaryAtom reason value ∷ rest) = triadicUnitPairs rest
+triadicUnitPairs (Structured.upperBoundaryAtom reason value ∷ rest) = triadicUnitPairs rest
 
 pairDotIsTriadicSignedSum : ∀ atoms →
   L2.pairDot (triadicUnitPairs atoms) ≡ triadicSignedSum atoms
@@ -137,13 +105,10 @@ pairDotIsTriadicSignedSum
 pairDotIsTriadicSignedSum (Structured.tailAtom value ∷ rest) = pairDotIsTriadicSignedSum rest
 pairDotIsTriadicSignedSum (Structured.duplicateKernelAtom value ∷ rest) = pairDotIsTriadicSignedSum rest
 pairDotIsTriadicSignedSum
-    (Structured.cancellingKernelPair left right cancellation ∷ rest) =
-  pairDotIsTriadicSignedSum rest
+    (Structured.cancellingKernelPair left right cancellation ∷ rest) = pairDotIsTriadicSignedSum rest
 pairDotIsTriadicSignedSum (Structured.independentKernelAtom value ∷ rest) = pairDotIsTriadicSignedSum rest
-pairDotIsTriadicSignedSum
-    (Structured.lowerBoundaryAtom reason value ∷ rest) = pairDotIsTriadicSignedSum rest
-pairDotIsTriadicSignedSum
-    (Structured.upperBoundaryAtom reason value ∷ rest) = pairDotIsTriadicSignedSum rest
+pairDotIsTriadicSignedSum (Structured.lowerBoundaryAtom reason value ∷ rest) = pairDotIsTriadicSignedSum rest
+pairDotIsTriadicSignedSum (Structured.upperBoundaryAtom reason value ∷ rest) = pairDotIsTriadicSignedSum rest
 
 leftNormIsTriadicMass : ∀ atoms →
   L2.leftNormSquared (triadicUnitPairs atoms) ≡ Mass.triadicConcentrationMass atoms
@@ -158,13 +123,10 @@ leftNormIsTriadicMass
 leftNormIsTriadicMass (Structured.tailAtom value ∷ rest) = leftNormIsTriadicMass rest
 leftNormIsTriadicMass (Structured.duplicateKernelAtom value ∷ rest) = leftNormIsTriadicMass rest
 leftNormIsTriadicMass
-    (Structured.cancellingKernelPair left right cancellation ∷ rest) =
-  leftNormIsTriadicMass rest
+    (Structured.cancellingKernelPair left right cancellation ∷ rest) = leftNormIsTriadicMass rest
 leftNormIsTriadicMass (Structured.independentKernelAtom value ∷ rest) = leftNormIsTriadicMass rest
-leftNormIsTriadicMass
-    (Structured.lowerBoundaryAtom reason value ∷ rest) = leftNormIsTriadicMass rest
-leftNormIsTriadicMass
-    (Structured.upperBoundaryAtom reason value ∷ rest) = leftNormIsTriadicMass rest
+leftNormIsTriadicMass (Structured.lowerBoundaryAtom reason value ∷ rest) = leftNormIsTriadicMass rest
+leftNormIsTriadicMass (Structured.upperBoundaryAtom reason value ∷ rest) = leftNormIsTriadicMass rest
 
 rightNormIsTriadicCount : ∀ atoms →
   L2.rightNormSquared (triadicUnitPairs atoms) ≡ triadicCount atoms
@@ -179,35 +141,48 @@ rightNormIsTriadicCount
 rightNormIsTriadicCount (Structured.tailAtom value ∷ rest) = rightNormIsTriadicCount rest
 rightNormIsTriadicCount (Structured.duplicateKernelAtom value ∷ rest) = rightNormIsTriadicCount rest
 rightNormIsTriadicCount
-    (Structured.cancellingKernelPair left right cancellation ∷ rest) =
-  rightNormIsTriadicCount rest
+    (Structured.cancellingKernelPair left right cancellation ∷ rest) = rightNormIsTriadicCount rest
 rightNormIsTriadicCount (Structured.independentKernelAtom value ∷ rest) = rightNormIsTriadicCount rest
-rightNormIsTriadicCount
-    (Structured.lowerBoundaryAtom reason value ∷ rest) = rightNormIsTriadicCount rest
-rightNormIsTriadicCount
-    (Structured.upperBoundaryAtom reason value ∷ rest) = rightNormIsTriadicCount rest
+rightNormIsTriadicCount (Structured.lowerBoundaryAtom reason value ∷ rest) = rightNormIsTriadicCount rest
+rightNormIsTriadicCount (Structured.upperBoundaryAtom reason value ∷ rest) = rightNormIsTriadicCount rest
 
 triadicFiniteCauchy : ∀ atoms →
   L2.square (triadicSignedSum atoms)
   ≤ Mass.triadicConcentrationMass atoms * triadicCount atoms
 triadicFiniteCauchy atoms =
   let
-    base = L2.finiteCauchySchwarzSquared (triadicUnitPairs atoms)
-  in
-  subst
-    (λ dot → L2.square dot
+    base :
+      L2.square (L2.pairDot (triadicUnitPairs atoms))
       ≤ L2.leftNormSquared (triadicUnitPairs atoms)
-        * L2.rightNormSquared (triadicUnitPairs atoms))
-    (pairDotIsTriadicSignedSum atoms)
-    (subst
+        * L2.rightNormSquared (triadicUnitPairs atoms)
+    base = L2.finiteCauchySchwarzSquared (triadicUnitPairs atoms)
+
+    dotStep :
+      L2.square (triadicSignedSum atoms)
+      ≤ L2.leftNormSquared (triadicUnitPairs atoms)
+        * L2.rightNormSquared (triadicUnitPairs atoms)
+    dotStep = subst
+      (λ dot → L2.square dot
+        ≤ L2.leftNormSquared (triadicUnitPairs atoms)
+          * L2.rightNormSquared (triadicUnitPairs atoms))
+      (pairDotIsTriadicSignedSum atoms)
+      base
+
+    leftStep :
+      L2.square (triadicSignedSum atoms)
+      ≤ Mass.triadicConcentrationMass atoms
+        * L2.rightNormSquared (triadicUnitPairs atoms)
+    leftStep = subst
       (λ leftMass → L2.square (triadicSignedSum atoms)
         ≤ leftMass * L2.rightNormSquared (triadicUnitPairs atoms))
       (leftNormIsTriadicMass atoms)
-      (subst
-        (λ rightMass → L2.square (triadicSignedSum atoms)
-          ≤ Mass.triadicConcentrationMass atoms * rightMass)
-        (rightNormIsTriadicCount atoms)
-        base))
+      dotStep
+  in
+  subst
+    (λ rightMass → L2.square (triadicSignedSum atoms)
+      ≤ Mass.triadicConcentrationMass atoms * rightMass)
+    (rightNormIsTriadicCount atoms)
+    leftStep
 
 squareMonotoneNonnegative : ∀ {a b} →
   0ℚ ≤ a → 0ℚ ≤ b → a ≤ b → L2.square a ≤ L2.square b
@@ -224,10 +199,7 @@ criticalRemainderForcesTriadicMassTimesCount :
 criticalRemainderForcesTriadicMassTimesCount atoms remainder mu muNN forced sameObject =
   let
     sumNN : 0ℚ ≤ triadicSignedSum atoms
-    sumNN =
-      subst (0ℚ ≤_)
-        sameObject
-        (ℚP.≤-trans muNN forced)
+    sumNN = subst (0ℚ ≤_) sameObject (ℚP.≤-trans muNN forced)
 
     muBelowSum : mu ≤ triadicSignedSum atoms
     muBelowSum = subst (mu ≤_) sameObject forced
