@@ -9,7 +9,7 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound58FrontierCutsetValid
 --
 -- Primary source metadata remains attached to the imported producer modules.
 -- The Round58 files cite Bałaban CMP99/CMP102/CMP109/CMP119/CMP122, Rota,
--- Penrose, Daumas--Lester--Muñoz, Ahlfors, Wilson, Gross--Wilczek and
+-- Penrose, Daumas--Lester--Muñoz, Ahlfors, Wilson, Hall, Gross--Wilczek and
 -- Politzer with title/author/DOI information where a DOI exists.
 ------------------------------------------------------------------------
 
@@ -41,8 +41,11 @@ import DASHI.Physics.YangMills.BalabanCMP109LiteralPrincipalLogFrechetReductionE
 -- not bolted onto the terminal reconstruction theorem.  Once the physical
 -- Wilson/ghost/Haar colour algebra proves C_A factorization, the exact four-
 -- orbit Bishop sum and any certified lower bound are reused group-independently.
+-- The executable SU(2) colour contraction is also proved directly:
+-- sum_cd epsilon_acd epsilon_bcd = 2 delta_ab, hence C_A(SU2)=2.
 import DASHI.Physics.YangMills.BalabanCompactSimpleCasimirOrbitFactorizationExact
 import DASHI.Physics.YangMills.BalabanCompactSimpleWilsonOneLoopOrbitAdapterExact
+import DASHI.Physics.YangMills.BalabanSU2AdjointCasimirFromColourContractionExact
 
 -- CMP119/CMP122: raw source objects do not carry all-scale Section-2
 -- preservation as fields.  The raw state is constructed OVER the finite beta
