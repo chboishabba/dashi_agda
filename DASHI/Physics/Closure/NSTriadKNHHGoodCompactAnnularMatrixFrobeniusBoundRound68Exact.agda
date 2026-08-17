@@ -34,10 +34,11 @@ open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base using (0ℚ; 1ℚ; _*_; _≤_)
 import Data.Rational.Properties as ℚP
-open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
 import DASHI.Physics.Closure.NSTriadKNRationalLerayProjectionExact as V
+import DASHI.Physics.Closure.NSTriadKNLuoAngularStrainDisplayedFormulaZeroExact as Matrix
 import DASHI.Physics.Closure.NSTriadKNFourierStrainMultiplierRound38Exact as Strain
 import DASHI.Physics.Closure.NSTriadKNHHGoodCompactAnnularScalarCutoffRound68Exact as Cutoff
 import DASHI.Physics.Closure.NSTriadKNHHGoodCompactAnnularMatrixSymbolRound68Exact as Symbol
@@ -57,6 +58,27 @@ squareCutoffBelowOne rho =
   in
   subst (L2.square phi ≤_) (ℚP.*-identityˡ 1ℚ) product
 
+frobeniusSquaredNonnegative : ∀ matrix →
+  0ℚ ≤ Frobenius.frobeniusSquared matrix
+frobeniusSquaredNonnegative matrix =
+  L2.addNonnegative
+    (L2.addNonnegative
+      (L2.addNonnegative
+        (L2.addNonnegative
+          (L2.addNonnegative
+            (L2.addNonnegative
+              (L2.addNonnegative
+                (L2.addNonnegative
+                  (L2.squareNonnegative (Matrix.m11 matrix))
+                  (L2.squareNonnegative (Matrix.m12 matrix)))
+                (L2.squareNonnegative (Matrix.m13 matrix)))
+              (L2.squareNonnegative (Matrix.m21 matrix)))
+            (L2.squareNonnegative (Matrix.m22 matrix)))
+          (L2.squareNonnegative (Matrix.m23 matrix)))
+        (L2.squareNonnegative (Matrix.m31 matrix)))
+      (L2.squareNonnegative (Matrix.m32 matrix)))
+    (L2.squareNonnegative (Matrix.m33 matrix))
+
 compactAnnularMatrixFrobeniusBelowPhysical : ∀ modeData omega →
   Frobenius.frobeniusSquared (Symbol.compactAnnularMatrixSymbol modeData omega)
   ≤ Frobenius.frobeniusSquared
@@ -68,31 +90,7 @@ compactAnnularMatrixFrobeniusBelowPhysical modeData omega =
     base = Strain.fourierStrainMultiplier modeData omega
     baseMass = Frobenius.frobeniusSquared base
     phiSq≤1 = squareCutoffBelowOne (V.normSquared (V.mode modeData))
-    baseMassNN : 0ℚ ≤ baseMass
-    baseMassNN =
-      -- Frobenius mass is a finite sum of squares; derive nonnegativity by
-      -- component expansion to avoid introducing another norm interface.
-      let
-        open import DASHI.Physics.Closure.NSTriadKNLuoAngularStrainDisplayedFormulaZeroExact as Matrix
-        b = base
-      in
-      L2.addNonnegative
-        (L2.addNonnegative
-          (L2.addNonnegative
-            (L2.addNonnegative
-              (L2.addNonnegative
-                (L2.addNonnegative
-                  (L2.addNonnegative
-                    (L2.addNonnegative
-                      (L2.squareNonnegative (Matrix.m11 b))
-                      (L2.squareNonnegative (Matrix.m12 b)))
-                    (L2.squareNonnegative (Matrix.m13 b)))
-                  (L2.squareNonnegative (Matrix.m21 b)))
-                (L2.squareNonnegative (Matrix.m22 b)))
-              (L2.squareNonnegative (Matrix.m23 b)))
-            (L2.squareNonnegative (Matrix.m31 b)))
-          (L2.squareNonnegative (Matrix.m32 b)))
-        (L2.squareNonnegative (Matrix.m33 b))
+    baseMassNN = frobeniusSquaredNonnegative base
     scaled : L2.square phi * baseMass ≤ 1ℚ * baseMass
     scaled =
       L2.nonnegativeProductMonotone
@@ -102,8 +100,7 @@ compactAnnularMatrixFrobeniusBelowPhysical modeData omega =
   in
   subst
     (λ left → left ≤ baseMass)
-    (sym
-      (Frobenius.frobeniusSquaredScale phi base))
+    (sym (Frobenius.frobeniusSquaredScale phi base))
     (subst (λ right → L2.square phi * baseMass ≤ right)
       (ℚP.*-identityˡ baseMass) scaled)
 
