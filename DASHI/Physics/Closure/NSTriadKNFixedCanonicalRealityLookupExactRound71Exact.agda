@@ -20,15 +20,14 @@ module DASHI.Physics.Closure.NSTriadKNFixedCanonicalRealityLookupExactRound71Exa
 --   velocity(k)  = stored value,
 --   velocity(-k) = conjugate(stored value).
 --
--- The proof uses the canonical orbit carrier's duplicate-freedom and its exact
+-- The proof uses the canonical orbit carrier's duplicate-freedom and exact
 -- exclusion of opposite pairs.  Thus reality is an actual invariant of the
--- state representation, not a marker field in the raw Audit record.
+-- finite state representation, not a marker field in the raw Audit record.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Empty using (⊥)
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
@@ -76,12 +75,10 @@ lookupPositiveExact {entries = head ∷ rest}
     entryModeTail = entryModeMember member
     headModeTail : Fixed.mode head Cube.∈ Fixed.modeList rest
     headModeTail = subst
-      (_Cube.∈ Fixed.modeList rest)
+      (λ selected → selected Cube.∈ Fixed.modeList rest)
       same entryModeTail
   in
-  Cube.falseNotTrue (fresh headModeTail)
-  where
-  _Cube.∈_ = Cube._∈_
+  Output.falseNotTrue (fresh headModeTail)
 ... | false = lookupPositiveExact tailUnique entry member
 
 positiveModeOccursFalseWhenAbsent :
@@ -97,7 +94,7 @@ positiveModeOccursFalseWhenAbsent {entries = head ∷ rest} {selected} absent
     member : selected Cube.∈ Fixed.modeList (head ∷ rest)
     member = Cube.here same
   in
-  Cube.falseNotTrue (absent member)
+  Output.falseNotTrue (absent member)
 ... | false =
   positiveModeOccursFalseWhenAbsent
     (λ member → absent (Cube.there member))
@@ -130,12 +127,10 @@ lookupNegativeExact {entries = head ∷ rest}
     entryModeTail = entryModeMember member
     headModeTail : Fixed.mode head Cube.∈ Fixed.modeList rest
     headModeTail = subst
-      (_Cube.∈ Fixed.modeList rest)
+      (λ selected → selected Cube.∈ Fixed.modeList rest)
       same entryModeTail
   in
-  Cube.falseNotTrue (fresh headModeTail)
-  where
-  _Cube.∈_ = Cube._∈_
+  Output.falseNotTrue (fresh headModeTail)
 ... | false = lookupNegativeExact tailUnique entry member
 
 stateEntryModeCanonicalMember :
@@ -146,7 +141,7 @@ stateEntryModeCanonicalMember :
   Fixed.mode entry Cube.∈ Orbit.canonicalCutoffOrbitModes N
 stateEntryModeCanonicalMember state entry member =
   subst
-    (Fixed.mode entry Cube.∈_)
+    (λ modes → Fixed.mode entry Cube.∈ modes)
     (Fixed.positiveModesExact state)
     (entryModeMember member)
 
@@ -162,9 +157,10 @@ negativeModeAbsentFromPositiveList {N = N} state entry member negMember =
     positiveMember = stateEntryModeCanonicalMember state entry member
     nonzero : Z3.NonZeroMode (Fixed.mode entry)
     nonzero = record
-      { Z3.NonZeroMode.notZero = λ zeroEquality →
+      { notZero = λ zeroEquality →
           Orbit.canonicalCutoffExcludesZero N
-            (subst (_Cube.∈ Orbit.canonicalCutoffOrbitModes N)
+            (subst
+              (λ selected → selected Cube.∈ Orbit.canonicalCutoffOrbitModes N)
               (sym zeroEquality) positiveMember)
       }
     canonicalNegMember :
@@ -172,14 +168,25 @@ negativeModeAbsentFromPositiveList {N = N} state entry member negMember =
         Cube.∈ Orbit.canonicalCutoffOrbitModes N
     canonicalNegMember =
       subst
-        (Z3.negateMode (Fixed.mode entry) Cube.∈_)
+        (λ modes → Z3.negateMode (Fixed.mode entry) Cube.∈ modes)
         (Fixed.positiveModesExact state)
         negMember
   in
   Orbit.canonicalCutoffNeverContainsOppositePair
     nonzero positiveMember canonicalNegMember
-  where
-  _Cube.∈_ = Cube._∈_
+
+positiveModeOccursAtMember :
+  ∀ {r} {F : C3.RealField r} {entries}
+    (entry : Fixed.CanonicalModeValue F) →
+  entry Cube.∈ entries →
+  Fixed.positiveModeOccurs entries (Fixed.mode entry) ≡ true
+positiveModeOccursAtMember entry {entries = []} ()
+positiveModeOccursAtMember entry {entries = head ∷ rest} (Cube.here refl)
+  rewrite Output.modeEqualRefl (Fixed.mode head) = refl
+positiveModeOccursAtMember entry {entries = head ∷ rest} (Cube.there member)
+  with Output.modeEqual (Fixed.mode entry) (Fixed.mode head)
+... | true = refl
+... | false = positiveModeOccursAtMember entry member
 
 realityVelocityPositiveExact :
   ∀ {r} {F : C3.RealField r} {N}
@@ -193,23 +200,8 @@ realityVelocityPositiveExact state entry member
 ... | true =
   lookupPositiveExact (stateModeListNoDuplicates state) entry member
 ... | false =
-  let
-    shouldOccur :
-      Fixed.positiveModeOccurs (Fixed.positiveValues state) (Fixed.mode entry)
-      ≡ true
-    shouldOccur = go (Fixed.positiveValues state) entry member
-    go :
-      ∀ entries selected → selected Cube.∈ entries →
-      Fixed.positiveModeOccurs entries (Fixed.mode selected) ≡ true
-    go [] selected ()
-    go (head ∷ rest) selected (Cube.here refl)
-      rewrite Output.modeEqualRefl (Fixed.mode head) = refl
-    go (head ∷ rest) selected (Cube.there tailMember)
-      with Output.modeEqual (Fixed.mode selected) (Fixed.mode head)
-    ... | true = refl
-    ... | false = go rest selected tailMember
-  in
-  Output.falseNotTrue (trans (sym occurs) shouldOccur)
+  Output.falseNotTrue
+    (trans (sym occurs) (positiveModeOccursAtMember entry member))
 
 realityVelocityNegativeExact :
   ∀ {r} {F : C3.RealField r} {N}
