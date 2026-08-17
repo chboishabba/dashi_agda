@@ -31,8 +31,8 @@ module DASHI.Physics.YangMills.BalabanCompactSimpleWilsonOneLoopOrbitAdapterExac
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Relation.Binary.PropositionalEquality using (cong; sym)
-open import Data.Rational.Base as ℚ using (ℚ; _*_)
+open import Relation.Binary.PropositionalEquality using (cong; sym; subst)
+open import Data.Rational.Base as ℚ using (ℚ; _*_; _≤_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
@@ -70,7 +70,7 @@ casimirScaledFourOrbitCoefficientIsRegularCellCoefficient :
     (universalFourOrbitScalar contribution)
   ≡ casimirScaledRegularCellCoefficient carrier group contribution
 casimirScaledFourOrbitCoefficientIsRegularCellCoefficient carrier group contribution =
-  cong (Casimir.adjointCasimir carrier group *_) 
+  cong (Casimir.adjointCasimir carrier group *_)
     (universalFourOrbitTotalIsRegularCellSum contribution)
 
 casimirScaledUniversalLowerBoundControlsRegularCellCoefficient :
@@ -94,8 +94,6 @@ casimirScaledUniversalLowerBoundControlsRegularCellCoefficient
     (casimirScaledFourOrbitCoefficientIsRegularCellCoefficient
       carrier group contribution)
     scaledLower
-  where
-  open import Relation.Binary.PropositionalEquality using (subst)
 
 compactSimpleWilsonOrbitAdapterLevel : ProofLevel
 compactSimpleWilsonOrbitAdapterLevel = machineChecked
