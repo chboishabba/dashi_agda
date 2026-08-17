@@ -31,7 +31,7 @@ module DASHI.Physics.YangMills.BalabanContinuumNontrivialityAsymptoticFreedomGat
 -- theorem even after a beautiful cutoff construction exists.
 ------------------------------------------------------------------------
 
-open import Data.Rational.Base as ℚ using (ℚ; _-_; _≤_; _<_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _-_; _≤_; _<_)
 import Data.Rational.Properties as ℚP
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -60,14 +60,11 @@ physicalBetaStrictlyPositive data =
 asymptoticFreedomSurvivalMarginLevel : ProofLevel
 asymptoticFreedomSurvivalMarginLevel = machineChecked
 
--- Physical B/C producers still required to instantiate the margin.
 literalOneLoopPositiveMarginLevel : ProofLevel
 literalOneLoopPositiveMarginLevel = conditional
 
 literalFiveChannelPenaltyControlLevel : ProofLevel
 literalFiveChannelPenaltyControlLevel = conditional
 
--- The continuum theorem remains independent: exhibit an actual gauge-invariant
--- non-Gaussian/interacting observable surviving the common continuum limit.
 continuumYangMillsInteractingSurvivalLevel : ProofLevel
 continuumYangMillsInteractingSurvivalLevel = conditional
