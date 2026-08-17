@@ -2,7 +2,6 @@ module DASHI.Education.EarlyLearningReappropriationBoundaryExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
@@ -157,12 +156,12 @@ canonicalConditionalExpertEndorsement =
     true refl true refl
 
 ------------------------------------------------------------------------
--- Brown/Kimber connection: being asked for feedback or endorsement is not the
--- same thing as having constitutive authority over the problem framing.
+-- Brown/Kimber remains the upstream constitutive-governance authority: an
+-- expert asked to provide feedback need not accept the supplied question,
+-- projection or consumer family as the authoritative problem formulation.
 ------------------------------------------------------------------------
 
-feedbackSourceStillHasNoConstitutiveAuthority =
-  BrownKimber.feedbackSourceStillHasNoConstitutiveAuthority
+brownKimberGovernanceProfile = BrownKimber.brownKimberAuthorityProfile
 
 ------------------------------------------------------------------------
 -- Constructive witnesses imported from the intersectional/eKindy modules.
