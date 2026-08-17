@@ -47,6 +47,8 @@ import DASHI.Cognition.PNF.LazyHorizonIncrementalExecution
 import DASHI.Cognition.PNF.EditTransportLeafLocalityExact
 import DASHI.Cognition.PNF.EditTransportCompositionExact
 import DASHI.Cognition.PNF.DependencyDerivedOccurrenceIdentityExact
+import DASHI.Cognition.PNF.ConsumerSufficientComplexityExact
+import DASHI.Cognition.PNF.OwnerFibreReductionComplexityExact
 import DASHI.Cognition.PNF.EditTransportLeafLocalityRegression
 import DASHI.Cognition.PNF.FrequencyAdaptiveSymbolCode
 import DASHI.Cognition.PNF.HotColdExecutionProjection
