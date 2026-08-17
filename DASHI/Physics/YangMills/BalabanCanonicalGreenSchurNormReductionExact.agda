@@ -53,7 +53,7 @@ import DASHI.Physics.YangMills.BalabanSelectedCanonicalConstraintDegreeBlocksExa
 import DASHI.Physics.YangMills.BalabanSelectedConstraintGreenDegreeBilinearExact as GreenDegree
 import DASHI.Physics.YangMills.BalabanCanonicalGreenDegreeDiagonalReductionExact as Diagonal
 import DASHI.Physics.YangMills.BalabanKKTPseudoinverseSchurEnergyBoundExact as SchurEnergy
-import DASHI.Physics.YangMills.BalabanKKTGramPseudoinversePositiveExact as Positive
+import DASHI.Physics.YangMills.BalabanP33FiniteWeightedSchurSquaredExact as Schur
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
 
 record CanonicalGreenSchurNormData
@@ -95,7 +95,7 @@ energyCoefficientNonnegative bound boundNN =
     onePlusSquareNN =
       FiniteL2.addNonnegative (ℚP.nonNegative⁻¹ (+ 1 / 1)) boundSquareNN
   in
-  SchurEnergy.Schur.productNonnegative
+  Schur.productNonnegative
     (+ 1 / 2) ((+ 1 / 1) + bound * bound)
     (ℚP.nonNegative⁻¹ (+ 1 / 2)) onePlusSquareNN
 
