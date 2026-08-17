@@ -36,8 +36,10 @@ open import Data.Product.Base using (proj₁; proj₂)
 open import Data.Rational.Base using
   (ℚ; 0ℚ; 1ℚ; _+_; _*_; _-_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚP
+open ℚP using (_≤?_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
+open import Relation.Nullary.Decidable.Core using (toWitness)
 
 import DASHI.Physics.Closure.NSTriadKNHHGoodC4AnnularPolynomialCoreRound67Exact as C4
 import DASHI.Physics.Closure.NSTriadKNHHGoodC4AnnularD1UniformBoundRound68Exact as D1
@@ -106,16 +108,16 @@ fullBernsteinPartitionExact : ∀ t →
 fullBernsteinPartitionExact t = solve (t ∷ [])
 
 coefficient9Nonnegative : 0ℚ ≤ c9
-coefficient9Nonnegative = ℚP.<⇒≤ (ℚP.positive⁻¹ c9)
+coefficient9Nonnegative = toWitness {a? = 0ℚ ≤? c9} _
 
 coefficient36Nonnegative : 0ℚ ≤ c36
-coefficient36Nonnegative = ℚP.<⇒≤ (ℚP.positive⁻¹ c36)
+coefficient36Nonnegative = toWitness {a? = 0ℚ ≤? c36} _
 
 coefficient84Nonnegative : 0ℚ ≤ c84
-coefficient84Nonnegative = ℚP.<⇒≤ (ℚP.positive⁻¹ c84)
+coefficient84Nonnegative = toWitness {a? = 0ℚ ≤? c84} _
 
 coefficient126Nonnegative : 0ℚ ≤ c126
-coefficient126Nonnegative = ℚP.<⇒≤ (ℚP.positive⁻¹ c126)
+coefficient126Nonnegative = toWitness {a? = 0ℚ ≤? c126} _
 
 bernsteinMonomialNonnegative :
   ∀ coefficient t m n →
