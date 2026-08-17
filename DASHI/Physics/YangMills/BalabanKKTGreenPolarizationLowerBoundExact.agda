@@ -36,7 +36,6 @@ open import Relation.Binary.PropositionalEquality using
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanFiniteRectangularRationalExact as Rect
 import DASHI.Physics.YangMills.BalabanP33FiniteKKTPseudoinverseProjectorExact as Pseudo
-import DASHI.Physics.YangMills.BalabanSelectedConstraintAtomGreenExpansionExact as Green
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
 import DASHI.Physics.YangMills.BalabanKKTGramPseudoinversePositiveExact as Positive
 
@@ -88,11 +87,10 @@ pseudoinverseEnergyAddExpansion pseudoData left right =
       Pseudo.pseudoApply pseudoData (Rect.vectorAdd left right) row
       ≡ Rect.vectorAdd appliedLeft appliedRight row
     applyAdd row =
-      Rect.applyRectangularAddExact
-        carrier matrix left right row
+      Rect.applyRectangularAddExact carrier matrix left right row
   in
   trans
-    (Green.finiteDotRightPointwiseCong carrier applyAdd)
+    (Rect.finiteDotRightPointwiseCong carrier applyAdd)
     (trans
       (Rect.finiteDotAddRight
         carrier (Rect.vectorAdd left right) appliedLeft appliedRight)
