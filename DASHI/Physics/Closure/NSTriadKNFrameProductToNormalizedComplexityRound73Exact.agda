@@ -79,7 +79,7 @@ normalizingOverlayFrameGivesNormalizedComplexity :
   NormalizingOverlayFrame {atoms} overlay physicalEnergy frameBound →
   Normalized.NormalizedEffectiveComplexity overlay
 normalizingOverlayFrameGivesNormalizedComplexity witness = record
-  { Normalized.complexityBelowOne =
+  { complexityBelowOne =
       frameProductNormalizesFactors (normalizingProduct witness)
   }
 
