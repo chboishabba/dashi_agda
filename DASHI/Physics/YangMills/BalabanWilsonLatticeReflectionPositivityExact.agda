@@ -39,6 +39,7 @@ module DASHI.Physics.YangMills.BalabanWilsonLatticeReflectionPositivityExact whe
 
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _*_; _≤_)
+import Data.Rational.Properties as ℚP
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as FiniteL2
@@ -74,7 +75,7 @@ reflectionQuadratic (atom ∷ rest) =
 
 reflectionQuadraticNonnegative :
   ∀ atoms → 0ℚ ≤ reflectionQuadratic atoms
-reflectionQuadraticNonnegative [] = FiniteL2.zeroNonnegative
+reflectionQuadraticNonnegative [] = ℚP.≤-refl
 reflectionQuadraticNonnegative (atom ∷ rest) =
   FiniteL2.addNonnegative
     (reflectionSquareValueNonnegative atom)
