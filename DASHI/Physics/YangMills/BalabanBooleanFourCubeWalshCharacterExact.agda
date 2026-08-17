@@ -39,11 +39,16 @@ import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
 import DASHI.Physics.YangMills.BalabanWilsonBooleanFourCubeExact as Cube
 import DASHI.Physics.YangMills.BalabanWilsonBooleanFourCubeMobiusExact as Mobius
 
+infixl 6 _xor_
+infixl 7 _and_
+
+_xor_ : Bool → Bool → Bool
 false xor false = false
 false xor true = true
 true xor false = true
 true xor true = false
 
+_and_ : Bool → Bool → Bool
 false and right = false
 true and right = right
 
