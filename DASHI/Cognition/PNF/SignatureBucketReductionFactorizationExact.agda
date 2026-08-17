@@ -15,6 +15,14 @@ _++ᵇ_ : ∀ {A : Set} → List A → List A → List A
 [] ++ᵇ ys = ys
 (x ∷ xs) ++ᵇ ys = x ∷ (xs ++ᵇ ys)
 
+-- Minimal local membership/empty types keep this theorem surface independent of
+-- the larger stdlib while retaining the exact no-cross-signature premise.
+data _∈ˡ_ {A : Set} (x : A) : List A → Set where
+  hereˡ : ∀ {xs} → x ∈ˡ (x ∷ xs)
+  thereˡ : ∀ {y xs} → x ∈ˡ xs → x ∈ˡ (y ∷ xs)
+
+data ⊥ˡ : Set where
+
 record BucketSemanticReducer
   (Proposal Signature SemanticOutput : Set)
   : Set where
@@ -26,19 +34,16 @@ open BucketSemanticReducer public
 
 record DisjointSignatureBuckets
   {Proposal Signature : Set}
-  (signature : Proposal → Signature)
+  (signatureOf : Proposal → Signature)
   (left right : List Proposal)
   : Set where
   field
-    separated : ∀ {l r} → l ∈ˡ left → r ∈ˡ right → signature l ≡ signature r → ⊥ˡ
-
--- Minimal local membership/empty types keep this theorem surface independent of
--- the larger stdlib while retaining the exact no-cross-signature premise.
-data _∈ˡ_ {A : Set} (x : A) : List A → Set where
-  hereˡ : ∀ {xs} → x ∈ˡ (x ∷ xs)
-  thereˡ : ∀ {y xs} → x ∈ˡ xs → x ∈ˡ (y ∷ xs)
-
-data ⊥ˡ : Set where
+    separated :
+      ∀ {l r} →
+      l ∈ˡ left →
+      r ∈ˡ right →
+      signatureOf l ≡ signatureOf r →
+      ⊥ˡ
 
 -- A cached implementation needs only this law for its semantic surface.  It is
 -- intentionally supplied as a proof obligation of the concrete reducer rather
