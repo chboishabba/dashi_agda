@@ -46,7 +46,7 @@ module DASHI.Physics.YangMills.BalabanContinuumNontrivialityAsymptoticFreedomGat
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Rational.Base as ℚ using (ℚ; _+_; _-_; _≤_)
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -64,18 +64,23 @@ record AsymptoticFreedomSurvivalMarginData : Set where
       oneLoopLower - quarticPenalty ≤ physicalBeta
 open AsymptoticFreedomSurvivalMarginData public
 
+oneLoopAfterQuarticChargeIsSurvivalMargin :
+  ∀ data →
+  oneLoopLower data - quarticPenalty data ≡ survivalMargin data
+oneLoopAfterQuarticChargeIsSurvivalMargin data =
+  trans
+    (cong
+      (λ selected → selected - quarticPenalty data)
+      (oneLoopSplitsIntoMarginAndPenalty data))
+    (ℚRing.solve-∀
+      (survivalMargin data) (quarticPenalty data))
+
 survivalMarginBelowPhysicalBeta :
   ∀ data → survivalMargin data ≤ physicalBeta data
 survivalMarginBelowPhysicalBeta data =
   subst
     (λ lower → lower ≤ physicalBeta data)
-    (sym
-      (trans
-        (cong
-          (λ selected → selected - quarticPenalty data)
-          (oneLoopSplitsIntoMarginAndPenalty data))
-        (ℚRing.solve-∀
-          (survivalMargin data) (quarticPenalty data))))
+    (oneLoopAfterQuarticChargeIsSurvivalMargin data)
     (physicalBetaAfterQuarticCharge data)
 
 asymptoticFreedomQuarticSurvivalMarginLevel : ProofLevel
