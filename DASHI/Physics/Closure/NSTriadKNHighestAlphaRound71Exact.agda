@@ -33,56 +33,55 @@ module DASHI.Physics.Closure.NSTriadKNHighestAlphaRound71Exact where
 -- PROPAGATION SIDE
 --
 -- Round70 identified cumulative non-summability as the exact finite-funding
--- requirement.  Round71 proves the per-event loss rate alone is not decisive:
--- a dyadic branching block doubles descendant multiplicity while halving each
--- descendant floor and preserves total guaranteed floor exactly.  Weighted
--- branching has total floor W at every depth, so W=E+1 rejects every funding
--- ledger below budget E.  This remains an arithmetic viability theorem only;
--- physical descendants must still be genuinely distinct/duplicate-free.
+-- requirement. Round71 proves that per-event decay alone is not decisive: a
+-- dyadic branching block doubles multiplicity while halving each floor and
+-- preserves total guaranteed floor. Weighted branching has total floor W at
+-- every depth; W=E+1 rejects every funding ledger below budget E. Physical
+-- descendants must still be genuinely distinct/duplicate-free.
 --
 -- TRAJECTORY SIDE
 --
--- The old Round26/30 Assignment = CoordinateVariable -> Q is formally rejected
--- as the finite cutoff Picard space.  CoordinateVariable contains an injective
--- Nat family of Fourier slots and Q is not the physical real field.
+-- The old unrestricted Q Assignment is formally rejected as the finite cutoff
+-- phase space. Round71 constructs six Carrier F slots per canonical reality-
+-- orbit representative, exact physical coefficient encoding, and exact ordered
+-- alignment of the actual canonical RHS output to those slots.
 --
--- Round71 constructs:
--- * six ordered Carrier F slots per canonical retained reality-orbit mode;
--- * exact physical TransverseModeCoefficient -> finite-real encoding;
--- * exact ordered alignment of the actual canonical physical RHS output with
---   that same finite-real canonical slot carrier;
--- * a FIXED-CUTOFF autonomous full-space reality vector field.  Its state stores
---   arbitrary Complex3 F values on canonical positive representatives, negatives
---   are reconstructed by conjugation, and N/E/inverse-square/viscosity are fixed
---   independently of the evolving state.  Its nonlinear part is literally the
---   repository's Leray-projected finite Galerkin nonlinearity.
+-- One autonomous full-space reality vector field F_N is now constructed with
+-- fixed N/E/inverse-square/viscosity and arbitrary Complex3 F values on positive
+-- canonical modes. Negative values are reconstructed by conjugation and the
+-- nonlinear term is literally the repository's Leray-projected finite Galerkin
+-- nonlinearity.
 --
--- Thus the structural input/output ODE carrier problem is now closed.  The next
--- A-side theorem is ANALYTIC rather than representational: flatten this exact
--- autonomous field to the six-real coordinates, prove the degree-two/local-
--- Lipschitz formula over the actual real-number authority, invoke finite-
--- dimensional Picard, prove the transverse subspace invariant, then continue
--- globally using the exact finite energy estimate.
+-- The following are now theorem-level, not status intentions:
+-- * exact positive and negative reality lookup;
+-- * reality built into the finite carrier;
+-- * an expression evaluator definitionally tied to rawCanonicalRHSAt with
+--   algebraic degree <=2 at every output mode;
+-- * invariance of the transverse/divergence-free subspace under F_N.
+--
+-- Consequently the remaining pre-trajectory seam is standard real analysis:
+-- flatten the exact degree-two field to the six-real coordinate carrier, prove
+-- local Lipschitz for the actual real-number implementation, and invoke finite-
+-- dimensional Picard. The NS-specific carrier, polynomial-shape, reality and
+-- transversality issues exposed by earlier rounds are no longer open.
 --
 -- QUANTITATIVE DISCRIMINATOR
 --
--- A viable propagation generation j needs genuine physical descendants D_j,
--- with floors mu_(j,a), such that
+-- A viable propagation generation j needs genuine physical descendants D_j
+-- with floors mu_(j,a) whose distinct accumulated charge
 --
 --       sum_j sum_(a in D_j) mu_(j,a)
 --
--- outruns the one finite physical budget.  Uniform floors, sufficiently slow
--- loss, or sufficiently fast genuine branching can work.  Summable TOTAL
--- generation mass remains fatal.  Log-improved criteria are architectural
--- precedent only; they are not imported as an unconditional C1 producer.
+-- outruns the one finite physical budget. Uniform floors, slow loss, or fast
+-- genuine branching can work; summable TOTAL generation mass remains fatal.
 --
 -- NEW SHORTEST FRONTIER
 --
--- A1. FiniteRealCanonicalVectorFieldPolynomialLipschitz: prove the exact fixed
---     full-space reality field is a degree-two locally-Lipschitz real vector
---     field in the constructed six-real coordinates;
--- A2. SelectedGalerkinTrajectoryExistsAndStaysPhysical: finite-dimensional real
---     Picard, transverse invariance, and global energy continuation;
+-- A1. RealPolynomialLocalLipschitzAndPicard: apply actual-real finite-dimensional
+--     local-Lipschitz/Picard authority to the constructed degree-two field;
+-- A2. SelectedGalerkinTrajectoryGlobalEnergyContinuation: transport the local
+--     trajectory through the exact reality/transverse invariants and finite
+--     energy identity to obtain the global selected trajectory;
 -- B.  LocalizedTrajectoryEmitsStructuredPDEAtoms;
 -- C.  CriticalAmplificationForcesStructuredConcentration;
 -- D1. PhysicalPropagationProducesDuplicateFreeDescendants;
@@ -103,6 +102,9 @@ import DASHI.Physics.Closure.NSTriadKNFiniteRealCanonicalCoordinateCarrierRound7
 import DASHI.Physics.Closure.NSTriadKNPhysicalCoefficientFiniteRealEncodingRound71Exact as Encoding
 import DASHI.Physics.Closure.NSTriadKNCanonicalRHSFiniteRealSlotAlignmentRound71Exact as RHSAlignment
 import DASHI.Physics.Closure.NSTriadKNFixedCanonicalRealityVectorFieldRound71Exact as Fixed
+import DASHI.Physics.Closure.NSTriadKNFixedCanonicalRealityLookupExactRound71Exact as Reality
+import DASHI.Physics.Closure.NSTriadKNFixedCanonicalVectorFieldDegreeTwoRound71Exact as Degree
+import DASHI.Physics.Closure.NSTriadKNFixedCanonicalTransverseInvariantRound71Exact as Transverse
 
 round71BranchingCompensatesDyadicLossConstructed : Bool
 round71BranchingCompensatesDyadicLossConstructed =
@@ -136,10 +138,20 @@ round71FullSpaceRealityVectorFieldConstructed : Bool
 round71FullSpaceRealityVectorFieldConstructed =
   Fixed.round71FullSpaceRealityVectorFieldConstructed
 
+round71RealityBuiltIntoFiniteState : Bool
+round71RealityBuiltIntoFiniteState = Reality.round71RealityBuiltIntoFiniteState
+
+round71FixedCanonicalVectorFieldDegreeAtMostTwo : Bool
+round71FixedCanonicalVectorFieldDegreeAtMostTwo =
+  Degree.round71FixedCanonicalVectorFieldDegreeAtMostTwo
+
+round71TransverseSubspaceInvariant : Bool
+round71TransverseSubspaceInvariant =
+  Transverse.round71FixedCanonicalTransverseSubspaceInvariant
+
 -- Genuine remaining physical/analytic producers on the decisive path.
-round71FiniteRealCanonicalVectorFieldPolynomialLipschitz : Bool
-round71FiniteRealCanonicalVectorFieldPolynomialLipschitz =
-  Fixed.round71FullSpaceRealCoordinatePolynomialLipschitzConstructed
+round71RealPolynomialLocalLipschitzAndPicardConstructed : Bool
+round71RealPolynomialLocalLipschitzAndPicardConstructed = false
 
 round71SelectedGalerkinTrajectoryConstructed : Bool
 round71SelectedGalerkinTrajectoryConstructed = false
@@ -166,37 +178,21 @@ round71BranchingCompensatesDyadicLossConstructedIsTrue :
   round71BranchingCompensatesDyadicLossConstructed ≡ true
 round71BranchingCompensatesDyadicLossConstructedIsTrue = refl
 
-round71MultiplicityMustBePhysicalAndDuplicateFreeIsTrue :
-  round71MultiplicityMustBePhysicalAndDuplicateFree ≡ true
-round71MultiplicityMustBePhysicalAndDuplicateFreeIsTrue = refl
+round71RealityBuiltIntoFiniteStateIsTrue :
+  round71RealityBuiltIntoFiniteState ≡ true
+round71RealityBuiltIntoFiniteStateIsTrue = refl
 
-round71OldAssignmentNatInjectionConstructedIsTrue :
-  round71OldAssignmentNatInjectionConstructed ≡ true
-round71OldAssignmentNatInjectionConstructedIsTrue = refl
+round71FixedCanonicalVectorFieldDegreeAtMostTwoIsTrue :
+  round71FixedCanonicalVectorFieldDegreeAtMostTwo ≡ true
+round71FixedCanonicalVectorFieldDegreeAtMostTwoIsTrue = refl
 
-round71FiniteRealCanonicalCarrierConstructedIsTrue :
-  round71FiniteRealCanonicalCarrierConstructed ≡ true
-round71FiniteRealCanonicalCarrierConstructedIsTrue = refl
+round71TransverseSubspaceInvariantIsTrue :
+  round71TransverseSubspaceInvariant ≡ true
+round71TransverseSubspaceInvariantIsTrue = refl
 
-round71PhysicalToFiniteRealEncodingConstructedIsTrue :
-  round71PhysicalToFiniteRealEncodingConstructed ≡ true
-round71PhysicalToFiniteRealEncodingConstructedIsTrue = refl
-
-round71CanonicalRHSOutputOnFiniteRealCarrierConstructedIsTrue :
-  round71CanonicalRHSOutputOnFiniteRealCarrierConstructed ≡ true
-round71CanonicalRHSOutputOnFiniteRealCarrierConstructedIsTrue = refl
-
-round71FixedCanonicalGeometryIndependentOfStateIsTrue :
-  round71FixedCanonicalGeometryIndependentOfState ≡ true
-round71FixedCanonicalGeometryIndependentOfStateIsTrue = refl
-
-round71FullSpaceRealityVectorFieldConstructedIsTrue :
-  round71FullSpaceRealityVectorFieldConstructed ≡ true
-round71FullSpaceRealityVectorFieldConstructedIsTrue = refl
-
-round71FiniteRealCanonicalVectorFieldPolynomialLipschitzIsFalse :
-  round71FiniteRealCanonicalVectorFieldPolynomialLipschitz ≡ false
-round71FiniteRealCanonicalVectorFieldPolynomialLipschitzIsFalse = refl
+round71RealPolynomialLocalLipschitzAndPicardConstructedIsFalse :
+  round71RealPolynomialLocalLipschitzAndPicardConstructed ≡ false
+round71RealPolynomialLocalLipschitzAndPicardConstructedIsFalse = refl
 
 round71SelectedGalerkinTrajectoryConstructedIsFalse :
   round71SelectedGalerkinTrajectoryConstructed ≡ false
