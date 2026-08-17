@@ -3,51 +3,45 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound60FirstVariationGreen
 ------------------------------------------------------------------------
 -- ROUND 60 FOCUSED VALIDATION ROOT
 --
--- This tranche returns to the shortest physical Clay cutset after Round59's
--- continuum-gap architecture.  It closes the A1 source-support seam, derives
--- positivity of the SAME finite KKT Gram pseudoinverse already used by G2,
--- collapses A2's sixteen signed Green lower bounds to eight diagonal energies,
--- and makes asymptotic freedom an explicit upstream gate for continuum
--- nontriviality.  It also corrects the spectral branch so reversibility is not
--- forced when Lawler--Sokal's nonreversible/killed regimes fit the literal RG
--- kernel better, and records Chen--Wang's unbounded symmetric-form route.
+-- Round60 returns to the shortest physical Clay cutset after Round59.  A1 is
+-- closed on the literal Wilson first variation.  For A2/G2, the same finite
+-- KKT Moore--Penrose inverse is proved PSD; polarization converts sixteen
+-- signed Green cells to eight diagonal energies; and the finite symmetric
+-- Schur theorem converts those eight energies to ONE common K+ row-mass bound
+-- plus four source/four defect degree-vector norm-square bounds.  These are
+-- compiled directly into the existing selected-minimizer endpoint theorem.
 --
--- No module below promotes the still-open selected-region diagonal energy
--- bounds, raw/charge endpoint, literal Wilson/ghost/Haar coefficient, five
--- physical g^4 channels, continuum Schwinger construction, OS passage,
--- interacting survival, physical clustering, or reconstruction.
+-- The continuum boundary also no longer forces reversibility when the
+-- nonreversible/killed Lawler--Sokal regime is the literal one, records the
+-- Chen--Wang general symmetric-form alternative with the 2000 full-paper
+-- attribution, and keeps asymptotic freedom upstream of but distinct from
+-- interacting continuum survival.
+--
+-- No theorem here promotes the still-open selected-region quantitative G2
+-- endpoints, literal Wilson/ghost/Haar one-loop coefficient, five physical
+-- g^4 channels, continuum Schwinger construction, OS passage, interacting
+-- survival, physical clustering, or reconstruction.
 ------------------------------------------------------------------------
 
 import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound59PositiveRGGeometryValidation
 
--- A1: actual Wilson first variation = four literal noncommutative product-rule
--- atoms, evaluated on the four-boundary constrained coordinate basis and
--- canonically zero-extended to the full physical carrier.
+-- A1.
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionWilsonFirstVariationExact
 import DASHI.Physics.YangMills.BalabanSelectedWilsonFirstVariationPlaquetteSupportExact
 
--- A2/G2 endpoint: Moore--Penrose + K=L L* proves K+ positive semidefinite
--- exactly.  Polarization derives all sixteen signed degree-pair lower bounds
--- from only four source and four defect diagonal K+ energies.  The canonical
--- weld proves these are the SAME G2 degree blocks, and the final compiler turns
--- a literal 4 raw + 8 diagonal + charge selected-region dataset into the old
--- uniform 4+16 endpoint theorem automatically.
+-- A2/G2 exact reductions.
 import DASHI.Physics.YangMills.BalabanKKTGramPseudoinversePositiveExact
 import DASHI.Physics.YangMills.BalabanKKTGreenPolarizationLowerBoundExact
 import DASHI.Physics.YangMills.BalabanSelectedGreenDiagonalEndpointAdapterExact
 import DASHI.Physics.YangMills.BalabanCanonicalGreenDegreeDiagonalReductionExact
+import DASHI.Physics.YangMills.BalabanKKTPseudoinverseSchurEnergyBoundExact
+import DASHI.Physics.YangMills.BalabanCanonicalGreenSchurNormReductionExact
 import DASHI.Physics.YangMills.BalabanUniformCanonicalDiagonalG2EnvelopeExact
+import DASHI.Physics.YangMills.BalabanUniformCanonicalSchurNormG2EnvelopeExact
 
--- F1/F2 theorem selection: Lawler--Sokal includes reversible,
--- nonreversible, and killed-process regimes.  If the continuum-adjacent
--- positive object is instead a symmetric but unbounded form, Chen--Wang is a
--- separate source-native route rather than an artificial boundedness receipt.
+-- F1/F2 theorem selection.
 import DASHI.Physics.YangMills.BalabanReversibleRGCheegerSpectralGapExact
 import DASHI.Physics.YangMills.BalabanRGChenGeneralSymmetricFormBoundaryExact
 
--- E3 is downstream of B/C.  A nonzero perturbative survival margin after the
--- physical g^4 penalty is proved to remain a lower bound for physical beta,
--- but beta positivity is deliberately NOT identified with non-Gaussian
--- continuum survival.  The phi^4_4 triviality theorem is recorded as the
--- adversarial precedent for why that final implication must be proved.
+-- B/C -> E3 quantitative gate, without beta>0 => non-Gaussian promotion.
 import DASHI.Physics.YangMills.BalabanContinuumNontrivialityAsymptoticFreedomGateExact
