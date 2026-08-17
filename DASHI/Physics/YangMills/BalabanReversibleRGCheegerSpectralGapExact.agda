@@ -21,6 +21,7 @@ module DASHI.Physics.YangMills.BalabanReversibleRGCheegerSpectralGapExact where
 ------------------------------------------------------------------------
 
 open import Data.Integer.Base using (+_)
+open import Data.Product.Base using (_×_; _,_)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _*_; _≤_; _/_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
@@ -74,8 +75,6 @@ cheegerTwoSided :
     ≤ (+ 2 / 1) * conductance (lowerData data))
 cheegerTwoSided data =
   cheegerLowerBoundNormalized (lowerData data) , lawlerSokalUpper data
-  where
-  open import Data.Product.Base using (_×_; _,_)
 
 lawlerSokalCheegerTheoremLevel : ProofLevel
 lawlerSokalCheegerTheoremLevel = standardImported
