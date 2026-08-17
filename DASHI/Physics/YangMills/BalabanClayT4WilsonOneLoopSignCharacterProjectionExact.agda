@@ -25,8 +25,8 @@ module DASHI.Physics.YangMills.BalabanClayT4WilsonOneLoopSignCharacterProjection
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _*_; _≡_)
-open import Relation.Binary.PropositionalEquality using (trans)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _*_)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
@@ -82,7 +82,7 @@ projectionCongToPureSector frequency value cell data =
     (λ signs → Walsh.walshCharacter frequency signs * value (signAct signs cell))
     (Walsh.characterSector frequency (value cell))
     (λ signs →
-      Relation.Binary.PropositionalEquality.cong
+      cong
         (λ selected → Walsh.walshCharacter frequency signs * selected)
         (invariant data signs))
 
