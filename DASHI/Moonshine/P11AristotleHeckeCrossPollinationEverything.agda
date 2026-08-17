@@ -2,7 +2,8 @@ module DASHI.Moonshine.P11AristotleHeckeCrossPollinationEverything where
 
 ------------------------------------------------------------------------
 -- Aggregate for the characteristic-11 Brandt algebra, representation
--- falsifiers, surviving positive fine geometry, and cross-prime stack controls.
+-- falsifiers, positive fine geometry, stack controls, and the new source-native
+-- full-level-2 / Legendre rigidification.
 --
 -- Arithmetic side:
 -- * source-certified supersingular carrier {j=0,j=1728=1 mod11};
@@ -12,12 +13,10 @@ module DASHI.Moonshine.P11AristotleHeckeCrossPollinationEverything where
 -- * cyclic/full Phi_4 correction and positive T2^2 path-count realization.
 --
 -- Representation falsifiers:
--- * six matched-dihedral sectors admit cheap section-generated lifts;
--- * even a full unital Hecke algebra can be engineered through kernel freedom;
--- * the natural one-vs-five positive lift is impossible;
--- * no ordinary unweighted symmetric binary quotient on six sectors or eleven
---   raw weights can produce B_11(2), because the 2:3 edge-balance ratio forces
---   total fibre cardinality divisible by five.
+-- * cheap section-generated lifts and kernel nonuniqueness;
+-- * even a full unital Hecke algebra can be engineered algebraically;
+-- * natural six-sector positive lift impossible;
+-- * six-sector and eleven-weight ordinary symmetric binary quotients ruled out.
 --
 -- Positive p=11 producer:
 -- * generic positive neighbour / equitable quotient / Schreier APIs;
@@ -26,23 +25,30 @@ module DASHI.Moonshine.P11AristotleHeckeCrossPollinationEverything where
 -- * commuting prime operators;
 -- * literal positive R4,R9,R25 systems and true-identity prime-square laws.
 --
--- Stack-unweighting advance:
--- * monodromy/stabilizer weights are separated from reciprocal sheet counts;
--- * p=11 geometric weights (3,2) canonically clear to sheets (2,3), so the
---   five-state CARDINALITY pattern is now derived from Eichler--Deuring stack
---   data rather than discovered graph fitting;
--- * same prescription gives p=37 sheets (1,1,1), total 3;
--- * same prescription gives p=43 sheets (1,2,2,2), total 7, despite its
---   monodromy-weight sum also being 5;
--- * source p=37 T2 is a positive three-state system and admits a literal
---   positive R4 with R2^2 = R4 + 2I, so the first positivity package is
---   formally refuted as an Ogg selector.
+-- Stack / control layer:
+-- * monodromy weights separated from reciprocal sheet multiplicities;
+-- * p=11 weights (3,2) -> sheets (2,3);
+-- * p=37 sheets 3 and positive T2/T4 control;
+-- * p=43 reciprocal sheet count 7;
+-- * positive stack-unweighted T2-square geometry formally refuted as Ogg selector.
 --
--- Remaining frontier:
--- derive a SIMULTANEOUS source-native double-coset/quaternion/rigidified-moduli
--- producer for the full Hecke family and compare its joint Hecke +
--- Frobenius/Fricke structure across Ogg and non-Ogg controls.  The particular
--- p=11 permutation generators are not derived from the mass formula alone.
+-- Full-level-2 arithmetic geometry:
+-- * one explicit six-frame regular S3 torsor with genuine S3 relations;
+-- * reduced order-3/order-2 stabilizer quotients give exactly 2+3 sheets;
+-- * exact bijection with the existing A0,A1,B0,B1,B2 carrier;
+-- * right deck S3 derived from the frame torsor;
+-- * existing odd-prime R3/R5 aggregate correspondences are deck-equivariant;
+-- * H_11 Legendre/Deuring factor pattern gives five supersingular X(2)
+--   parameters: three F_11 roots over j=1728 and one quadratic pair over j=0;
+-- * Legendre anharmonic S3 equals the frame-torsor deck S3 on those five points.
+--
+-- Remaining highest-alpha producer:
+-- derive the INDIVIDUAL odd-prime Hecke edges on this explicit supersingular
+-- Legendre/full-level-2 carrier from the lambda modular equation, quaternion
+-- ideal-class correspondence, or an equivalent source-native double-coset
+-- construction.  For ell=2, keep the level-dividing operator separate from the
+-- prime-to-level T_ell story.  Then run the same joint Hecke/deck/Frobenius/
+-- Fricke construction on non-Ogg controls.
 ------------------------------------------------------------------------
 
 import DASHI.Moonshine.P11ClassicalTwoIsogenyCorrespondenceExact
@@ -85,3 +91,9 @@ import DASHI.Moonshine.P37NonOggPositiveHeckeControlExact
 import DASHI.Moonshine.P37NonOggPositivePrimeSquareNeighboursExact
 import DASHI.Moonshine.BrandtStackCrossPrimeSelectorCutsetExact
 import DASHI.Moonshine.BrandtStackUnweightingHighestAlphaRegression
+
+import DASHI.Moonshine.P11FullLevel2RigidificationExact
+import DASHI.Moonshine.P11FullLevel2DeckHeckeEquivarianceExact
+import DASHI.Moonshine.P11SupersingularLegendreLevel2ChartExact
+import DASHI.Moonshine.P11LegendreAnharmonicDeckExact
+import DASHI.Moonshine.P11Level2ArithmeticGeometryHighestAlphaRegression
