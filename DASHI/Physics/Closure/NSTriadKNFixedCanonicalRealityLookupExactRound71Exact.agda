@@ -180,13 +180,13 @@ positiveModeOccursAtMember :
     (entry : Fixed.CanonicalModeValue F) →
   entry Cube.∈ entries →
   Fixed.positiveModeOccurs entries (Fixed.mode entry) ≡ true
-positiveModeOccursAtMember entry {entries = []} ()
-positiveModeOccursAtMember entry {entries = head ∷ rest} (Cube.here refl)
+positiveModeOccursAtMember {entries = []} entry ()
+positiveModeOccursAtMember {entries = head ∷ rest} entry (Cube.here refl)
   rewrite Output.modeEqualRefl (Fixed.mode head) = refl
-positiveModeOccursAtMember entry {entries = head ∷ rest} (Cube.there member)
+positiveModeOccursAtMember {entries = head ∷ rest} entry (Cube.there member)
   with Output.modeEqual (Fixed.mode entry) (Fixed.mode head)
 ... | true = refl
-... | false = positiveModeOccursAtMember entry member
+... | false = positiveModeOccursAtMember {entries = rest} entry member
 
 realityVelocityPositiveExact :
   ∀ {r} {F : C3.RealField r} {N}
