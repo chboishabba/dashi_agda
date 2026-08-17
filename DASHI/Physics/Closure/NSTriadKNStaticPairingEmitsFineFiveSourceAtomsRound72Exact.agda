@@ -38,7 +38,7 @@ module DASHI.Physics.Closure.NSTriadKNStaticPairingEmitsFineFiveSourceAtomsRound
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Rational.Base using (ℚ; 0ℚ; _+_)
+open import Data.Rational.Base using (_+_)
 import Data.Rational.Properties as ℚP
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
@@ -46,6 +46,7 @@ import DASHI.Physics.Closure.NSTriadKNLuoPhysicalFiveClassSupportRound25Exact as
 import DASHI.Physics.Closure.NSTriadKNLuoPhysicalFiveClassSumRound25Exact as Five
 import DASHI.Physics.Closure.NSTriadKNSignedConstituentTreeRound28Exact as Signed
 import DASHI.Physics.Closure.NSTriadKNGlobalBilinearShellPairingRound29Exact as Shell
+import DASHI.Physics.Closure.NSTriadKNLocalizedPDEConstituentPartitionRound62Exact as Partition
 import DASHI.Physics.Closure.NSTriadKNLocalizedPDEStructuredAtomsRound62Exact as Structured
 import DASHI.Physics.Closure.NSTriadKNStaticPairingEmitsStructuredTriadicAtomsRound72Exact as Fine
 
@@ -83,12 +84,7 @@ flattenedFineFiveSourceTotalFromClassified :
   ≡ Fine.classifiedTriadValueSum pairing classified
       + Shell.commutatorValue pairing (Shell.output pairing)
 flattenedFineFiveSourceTotalFromClassified pairing hh [] =
-  trans
-    (cong
-      (Shell.commutatorValue pairing (Shell.output pairing) +_)
-      refl)
-    (ℚP.+-identityʳ
-      (Shell.commutatorValue pairing (Shell.output pairing)))
+  ℚP.+-identityʳ (Shell.commutatorValue pairing (Shell.output pairing))
 flattenedFineFiveSourceTotalFromClassified pairing hh (classified ∷ rest) =
   trans
     (cong
@@ -137,15 +133,15 @@ flattenedFineFiveSourceTotalExact pairing hh =
 staticPairingAsOneLocalizedPDEConstituentSource :
   (pairing : Shell.StaticPhysicalShellPairing) →
   (hh : Fine.HHOwnerSelection) →
-  DASHI.Physics.Closure.NSTriadKNLocalizedPDEConstituentPartitionRound62Exact.OneLocalizedPDEConstituentSource
+  Partition.OneLocalizedPDEConstituentSource
 staticPairingAsOneLocalizedPDEConstituentSource pairing hh = record
-  { DASHI.Physics.Closure.NSTriadKNLocalizedPDEConstituentPartitionRound62Exact.constituents =
+  { Partition.OneLocalizedPDEConstituentSource.constituents =
       Structured.flattenAtoms (fineFiveSourceAtoms pairing hh)
-  ; DASHI.Physics.Closure.NSTriadKNLocalizedPDEConstituentPartitionRound62Exact.localizedNonlinearValue =
+  ; Partition.OneLocalizedPDEConstituentSource.localizedNonlinearValue =
       Five.fiveSourceTotal
         (Shell.cutoff pairing) (Shell.output pairing)
         (Shell.triadValue pairing) (Shell.commutatorValue pairing)
-  ; DASHI.Physics.Closure.NSTriadKNLocalizedPDEConstituentPartitionRound62Exact.literalConstituentExpansion =
+  ; Partition.OneLocalizedPDEConstituentSource.literalConstituentExpansion =
       sym (flattenedFineFiveSourceTotalExact pairing hh)
   }
 
