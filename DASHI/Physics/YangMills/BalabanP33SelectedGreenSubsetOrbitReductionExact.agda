@@ -37,8 +37,8 @@ module DASHI.Physics.YangMills.BalabanP33SelectedGreenSubsetOrbitReductionExact 
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
-open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
+open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Nat using (Nat; _+_)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _*_; _/_)
 import Data.Rational.Tactic.RingSolver as ℚRing
@@ -49,6 +49,8 @@ import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
 import DASHI.Physics.YangMills.BalabanWilsonBooleanFourCubeExact as Cube
 import DASHI.Physics.YangMills.BalabanSelectedCorrelatedResidualOwnershipExact as O
 
+infixl 7 _and_
+_and_ : Bool → Bool → Bool
 false and right = false
 true and right = right
 
@@ -205,11 +207,11 @@ open RawDegreeInvariantData public
 rawTotalFromFourDegreeRepresentatives :
   ∀ {family} (data : RawDegreeInvariantData family) →
   O.rawLocalizationTotal family ≡ rawDegreeWeightedSum (values data)
-rawTotalFromFourDegreeRepresentatives data =
+rawTotalFromFourDegreeRepresentatives {family} data =
   trans
     (Sums.sumRationalCong
       Cube.nonemptySubsets4
-      (O.rawLocalizationAtom _)
+      (O.rawLocalizationAtom family)
       (rawDegreeValueAt (values data))
       (rawExact data))
     (rawDegreeSumExact (values data))
@@ -225,21 +227,21 @@ greenRowFromOrbitRepresentatives :
   ∀ {family} (data : GreenPairOrbitInvariantData family) left →
   Sums.sumRational Cube.nonemptySubsets4 (O.multiplierGreenAtom family left)
   ≡ Sums.sumRational Cube.nonemptySubsets4 (pairValueAt (values data) left)
-greenRowFromOrbitRepresentatives data left =
+greenRowFromOrbitRepresentatives {family} data left =
   Sums.sumRationalCong
     Cube.nonemptySubsets4
-    (O.multiplierGreenAtom _ left)
+    (O.multiplierGreenAtom family left)
     (pairValueAt (values data) left)
     (greenExact data left)
 
 greenTotalFromTwentySixOrbitRepresentatives :
   ∀ {family} (data : GreenPairOrbitInvariantData family) →
   O.greenPairTotal family ≡ pairOrbitWeightedSum (values data)
-greenTotalFromTwentySixOrbitRepresentatives data =
+greenTotalFromTwentySixOrbitRepresentatives {family} data =
   trans
     (Sums.sumRationalCong
       Cube.nonemptySubsets4
-      (λ left → Sums.sumRational Cube.nonemptySubsets4 (O.multiplierGreenAtom _ left))
+      (λ left → Sums.sumRational Cube.nonemptySubsets4 (O.multiplierGreenAtom family left))
       (λ left → Sums.sumRational Cube.nonemptySubsets4 (pairValueAt (values data) left))
       (greenRowFromOrbitRepresentatives data))
     (pairOrbitSumExact (values data))
@@ -250,9 +252,6 @@ rawFourDegreeReductionLevel = machineChecked
 greenTwentySixPairOrbitFiniteArithmeticLevel : ProofLevel
 greenTwentySixPairOrbitFiniteArithmeticLevel = machineChecked
 
--- Physical test: simultaneous S4 slot equivariance of the actual selected
--- source/defect/Green construction must be proved before using these 4/26
--- reductions.  No XOR-convolution or Walsh diagonalization is assumed here.
 selectedRawSubsetS4EquivarianceLevel : ProofLevel
 selectedRawSubsetS4EquivarianceLevel = conditional
 
