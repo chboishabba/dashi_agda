@@ -50,33 +50,26 @@ module DASHI.Physics.Closure.NSTriadKNHighestAlphaRound73Exact where
 --
 -- LITERAL FOURIER ADVANCE
 --
--- The actual complex ordered Galerkin interaction has now been factored on the
--- SAME PhysicalTriadIncidence.  Exact Leray complex-linearity proves
+-- Exact complex scalar linearity of Leray proves on the SAME incidence
 --
 --   -i P_k [ (u_p dot q) u_q ]
 --      = [-i (u_p dot q)] P_k u_q.
 --
--- Testing against the output vector gives
+-- Testing gives
 --
 --   <test_k, term>
 --      = [-i (u_p dot q)] <test_k, P_k u_q>.
 --
--- So the source-native transport/high-response split exists BEFORE the final
--- real-part collapse.  The remaining LH/HL scalar factorization theorem is no
--- longer arbitrary: it must show how the physical phase/polarisation structure
--- turns Re(z w) into the rational factors used by Q/W.  No claim is made that
--- Re(z w)=Re(z)Re(w) in general.
+-- The final signed coefficient is the real part of this source-native complex
+-- product.  Round73 now also proves a precise sufficient bridge: if the two
+-- concrete factors have cancelling physical phase
 --
--- This eliminates earlier ambiguities:
+--   z = x theta, w = y conjugate(theta), theta conjugate(theta)=1,
 --
--- 1. factor rescaling is not free: PhysicalTriadicFactorSource fixes the
---    source-native left/right coordinates on the SAME Round62 atom list;
--- 2. frame and normalized lanes are one hierarchy: W<=B E_phys and
---    B E_phys<=1 imply W<=1;
--- 3. normalization is not a scalar receipt: Q must equal the actual funded
---    physical charge;
--- 4. multiplicity is not a count of names: descendants must form an additive
---    physical charge family before their floors may be summed.
+-- then realPart(z*w)=x*y exactly.  Thus the remaining LH/HL rational
+-- factorization theorem is reduced to construction of this phase alignment (or
+-- a weaker equivalent source theorem) from the actual velocity/polarisation
+-- geometry.  No identity Re(zw)=Re(z)Re(w) is assumed.
 --
 -- FAVORABLE NORMALIZED BRANCH
 --
@@ -97,29 +90,25 @@ module DASHI.Physics.Closure.NSTriadKNHighestAlphaRound73Exact where
 --   theorem surfaces; their useful files are cross-pollinated onto this live
 --   branch and composed with the stronger normalized-square compiler here.
 --
--- SHORTEST DECISIVE PHYSICAL FRONTIER AFTER THIS ROUND73 TRANCHE
+-- SHORTEST DECISIVE PHYSICAL FRONTIER
 --
 -- A1. RealPolynomialLocalLipschitzAndPicard.
 -- A2. SelectedGalerkinTrajectoryGlobalEnergyContinuation.
 -- A3. TrajectoryInstantiatesDynamicPhysicalShellBalance plus HH owner selection
---     and literal kernel/tail/boundary atoms.  Static five-source refinement is
---     already constructed.
--- C1. PhysicalPhaseAlignedRationalTriadicFactorization:
---     the literal complex transport/high-response product is constructed;
---     prove the source-native phase/polarisation theorem crossing realPart into
---     the rational x_tau,y_tau factors, first on LH/HL.
--- C2. PhysicalTriadicFrameNormalizationAndChargeIdentity:
---     prove W<=B E_phys with a quantitatively sufficient frame product (the
---     favorable B E_phys<=1 branch gives W<=1) and identify Q with a genuine
---     budgeted physical charge on the SAME factors.
+--     and literal kernel/tail/boundary atoms.
+-- C1. PhysicalOrderedInteractionPhaseAlignment, first on LH/HL.  The literal
+--     complex transport/high-response factorization and phase-cancellation
+--     compiler are constructed; only the physical phase witness remains.
+-- C2. PhysicalTriadicFrameNormalizationAndChargeIdentity: prove W<=B E_phys
+--     with a quantitatively sufficient frame product and identify Q with a
+--     genuine budgeted physical charge on the SAME factors.
 -- C3. PhysicalHHCCExchangeSectorIdentification where exact C2 cancellation is
 --     available, followed by normalized HH/CC same-row Gram/Schur bounds.
--- D1. PhysicalPropagationProducesAdditiveNormalizedDescendants:
---     produce genuinely distinct/orthogonal descendants whose charges add.
+-- D1. PhysicalPropagationProducesAdditiveNormalizedDescendants.
 -- D2. CumulativeSquaredAmplificationFloorsOutrunBudget.
 -- E.  CriticalRatioBarrierFromAdditiveNormalizedFunding.
 --
--- After this central barrier lands, finish the already-isolated Gram/six-three,
+-- After this central barrier lands, finish the isolated Gram/six-three,
 -- HH-bad, soft-data, kernel/boundary, C_c^4/fourfold-decay and scalar-gate
 -- closures.  Clay promotion remains false.
 ------------------------------------------------------------------------
@@ -142,6 +131,8 @@ import DASHI.Physics.Closure.NSTriadKNSquareChargeCarlesonBridgeRound73Exact as 
 import DASHI.Physics.Closure.NSTriadKNPhysicalNormalizedAmplificationCarlesonRound73Exact as Direct
 import DASHI.Physics.Closure.NSTriadKNLerayComplexScalarLinearityRound73Exact as LerayLinear
 import DASHI.Physics.Closure.NSTriadKNOrderedInteractionSourceFactorizationRound73Exact as LiteralFactor
+import DASHI.Physics.Closure.NSTriadKNPhaseCancelledComplexProductRound73Exact as Phase
+import DASHI.Physics.Closure.NSTriadKNOrderedInteractionPhaseCancelledFactorizationRound73Exact as PhaseAligned
 
 round73Round72StaticFineFiveSourceRetained : Bool
 round73Round72StaticFineFiveSourceRetained =
@@ -151,8 +142,7 @@ round73FrameComplexityAlgebraConstructed : Bool
 round73FrameComplexityAlgebraConstructed = Frame.round73FrameComplexityTheoremConstructed
 
 round73FactorizationAuthorityCarrierConstructed : Bool
-round73FactorizationAuthorityCarrierConstructed =
-  Authority.round73FactorizationAuthorityCarrierConstructed
+round73FactorizationAuthorityCarrierConstructed = Authority.round73FactorizationAuthorityCarrierConstructed
 
 round73LowLegFactorizationCarrierConstructed : Bool
 round73LowLegFactorizationCarrierConstructed = LowLeg.round73LowLegPhysicalFactorizationCarrierConstructed
@@ -161,23 +151,19 @@ round73ExchangeCancellationConstructed : Bool
 round73ExchangeCancellationConstructed = Exchange.round73ExchangeCharacterCancellationConstructed
 
 round73NormalizedComplexityRemovesCardinalityLoss : Bool
-round73NormalizedComplexityRemovesCardinalityLoss =
-  Normalized.round73NormalizedEffectiveComplexityRemovesCardinalityLoss
+round73NormalizedComplexityRemovesCardinalityLoss = Normalized.round73NormalizedEffectiveComplexityRemovesCardinalityLoss
 
 round73FrameProductCompilesToNormalizedComplexity : Bool
-round73FrameProductCompilesToNormalizedComplexity =
-  FrameNormalize.round73FrameProductBelowOneCompilesToNormalizedComplexity
+round73FrameProductCompilesToNormalizedComplexity = FrameNormalize.round73FrameProductBelowOneCompilesToNormalizedComplexity
 
 round73SquareFundingCompilerConstructed : Bool
 round73SquareFundingCompilerConstructed = Square.round73SquareAmplificationFundingCompilerConstructed
 
 round73NormalizedOverlayPhysicalChargeBridgeConstructed : Bool
-round73NormalizedOverlayPhysicalChargeBridgeConstructed =
-  Physical.round73NormalizedOverlayWeldedToPhysicalChargeEvent
+round73NormalizedOverlayPhysicalChargeBridgeConstructed = Physical.round73NormalizedOverlayWeldedToPhysicalChargeEvent
 
 round73HalfAmplitudeNeedsFourWayChargeMultiplicity : Bool
-round73HalfAmplitudeNeedsFourWayChargeMultiplicity =
-  Threshold.round73FourWayMultiplicityIsCriticalForHalfAmplitudeLoss
+round73HalfAmplitudeNeedsFourWayChargeMultiplicity = Threshold.round73FourWayMultiplicityIsCriticalForHalfAmplitudeLoss
 
 round73FiniteCarlesonFundingConstructed : Bool
 round73FiniteCarlesonFundingConstructed = Carleson.round73FiniteCarlesonFundingTheoremConstructed
@@ -186,20 +172,22 @@ round73SquareFundingCarlesonUnified : Bool
 round73SquareFundingCarlesonUnified = CarlesonBridge.round73SquareFundingAndCarlesonLedgerUnified
 
 round73PhysicalNormalizedWitnessCompilesDirectlyToCarlesonNode : Bool
-round73PhysicalNormalizedWitnessCompilesDirectlyToCarlesonNode =
-  Direct.round73PhysicalNormalizedWitnessCompilesToCarlesonNode
+round73PhysicalNormalizedWitnessCompilesDirectlyToCarlesonNode = Direct.round73PhysicalNormalizedWitnessCompilesToCarlesonNode
 
 round73LerayComplexScalarLinearityConstructed : Bool
-round73LerayComplexScalarLinearityConstructed =
-  LerayLinear.round73LerayComplexScalarLinearityConstructed
+round73LerayComplexScalarLinearityConstructed = LerayLinear.round73LerayComplexScalarLinearityConstructed
 
 round73LiteralComplexOrderedFactorizationConstructed : Bool
-round73LiteralComplexOrderedFactorizationConstructed =
-  LiteralFactor.round73LiteralComplexOrderedFactorizationConstructed
+round73LiteralComplexOrderedFactorizationConstructed = LiteralFactor.round73LiteralComplexOrderedFactorizationConstructed
 
 round73TestedComplexProductFactorizationConstructed : Bool
-round73TestedComplexProductFactorizationConstructed =
-  LiteralFactor.round73TestedComplexProductFactorizationConstructed
+round73TestedComplexProductFactorizationConstructed = LiteralFactor.round73TestedComplexProductFactorizationConstructed
+
+round73PhaseCancellationCompilerConstructed : Bool
+round73PhaseCancellationCompilerConstructed = Phase.round73PhaseCancelledProductCompilesToRealAmplitudeProduct
+
+round73PhaseAlignmentCompilesLiteralSignedCoefficient : Bool
+round73PhaseAlignmentCompilesLiteralSignedCoefficient = PhaseAligned.round73PhaseAlignmentCompilesLiteralSignedCoefficientToAmplitudeProduct
 
 -- Genuine physical producers remain fail-closed.
 round73RealPolynomialLocalLipschitzAndPicard : Bool
@@ -217,8 +205,8 @@ round73PerIncidenceHHGoodBadSelectionOnTrajectory = false
 round73TrajectoryEmitsKernelTailBoundaryAtoms : Bool
 round73TrajectoryEmitsKernelTailBoundaryAtoms = false
 
-round73PhysicalPhaseAlignedRationalTriadicFactorization : Bool
-round73PhysicalPhaseAlignedRationalTriadicFactorization = false
+round73PhysicalOrderedInteractionPhaseAlignment : Bool
+round73PhysicalOrderedInteractionPhaseAlignment = false
 
 round73PhysicalHHCCExchangeSectorIdentification : Bool
 round73PhysicalHHCCExchangeSectorIdentification = false
@@ -242,17 +230,21 @@ round73LiteralComplexOrderedFactorizationConstructedIsTrue :
   round73LiteralComplexOrderedFactorizationConstructed ≡ true
 round73LiteralComplexOrderedFactorizationConstructedIsTrue = refl
 
-round73FrameProductCompilesToNormalizedComplexityIsTrue :
-  round73FrameProductCompilesToNormalizedComplexity ≡ true
-round73FrameProductCompilesToNormalizedComplexityIsTrue = refl
+round73PhaseCancellationCompilerConstructedIsTrue :
+  round73PhaseCancellationCompilerConstructed ≡ true
+round73PhaseCancellationCompilerConstructedIsTrue = refl
+
+round73PhaseAlignmentCompilesLiteralSignedCoefficientIsTrue :
+  round73PhaseAlignmentCompilesLiteralSignedCoefficient ≡ true
+round73PhaseAlignmentCompilesLiteralSignedCoefficientIsTrue = refl
 
 round73SquareFundingCarlesonUnifiedIsTrue :
   round73SquareFundingCarlesonUnified ≡ true
 round73SquareFundingCarlesonUnifiedIsTrue = refl
 
-round73PhysicalPhaseAlignedRationalTriadicFactorizationIsFalse :
-  round73PhysicalPhaseAlignedRationalTriadicFactorization ≡ false
-round73PhysicalPhaseAlignedRationalTriadicFactorizationIsFalse = refl
+round73PhysicalOrderedInteractionPhaseAlignmentIsFalse :
+  round73PhysicalOrderedInteractionPhaseAlignment ≡ false
+round73PhysicalOrderedInteractionPhaseAlignmentIsFalse = refl
 
 round73ClayPromotionIsFalse : round73ClayPromotion ≡ false
 round73ClayPromotionIsFalse = refl
