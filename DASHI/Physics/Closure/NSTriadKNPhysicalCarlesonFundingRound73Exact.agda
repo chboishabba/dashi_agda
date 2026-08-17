@@ -16,19 +16,20 @@ module DASHI.Physics.Closure.NSTriadKNPhysicalCarlesonFundingRound73Exact where
 --     floor_nu <= charge_nu,
 --
 -- and a Carleson-style budget says the subtree charge sum is <= E.  Then the
--- sum of all node floors is <= E.  Consequently any physical construction whose
--- certified floor total outruns E falsifies that funding budget.
+-- sum of all node floors is <= E.  Any finite propagated prefix whose certified
+-- floor total already exceeds E therefore contradicts that budget exactly.
 --
--- This file proves the exact finite ledger.  It deliberately leaves the PDE
--- theorem saying that selected descendants are charge-disjoint/orthogonal as a
--- separate physical source obligation.
+-- This file proves the exact finite ledger and contradiction.  It deliberately
+-- leaves the PDE theorem saying that selected descendants are charge-disjoint /
+-- orthogonal as a separate physical source obligation.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _≤_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _≤_; _<_)
 import Data.Rational.Properties as ℚP
+open import Relation.Nullary.Negation.Core using (¬_)
 
 record FundedNode : Set where
   constructor funded-node
@@ -70,6 +71,14 @@ carlesonBudgetFundsAllCertifiedFloors {nodes} witness =
   ℚP.≤-trans
     (sumFloorsBelowCharges nodes)
     (subtreeChargeWithinBudget witness)
+
+floorPrefixAboveBudgetRefutesCarlesonFunding :
+  ∀ {nodes budget} →
+  budget < sumFloors nodes →
+  ¬ PhysicalCarlesonBudget nodes budget
+floorPrefixAboveBudgetRefutesCarlesonFunding excess witness =
+  ℚP.<-irrefl budget
+    (ℚP.<-≤-trans excess (carlesonBudgetFundsAllCertifiedFloors witness))
 
 record FrameGeneratedNode : Set where
   constructor frame-generated-node
