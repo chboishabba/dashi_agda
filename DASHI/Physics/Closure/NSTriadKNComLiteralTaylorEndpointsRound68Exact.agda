@@ -34,8 +34,9 @@ module DASHI.Physics.Closure.NSTriadKNComLiteralTaylorEndpointsRound68Exact wher
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Nat.Base using (_≤_)
+open import Data.Integer.Base using (+_; _+_; -_)
 import Data.Integer.Properties as ℤP
+open import Data.Nat.Base using (_≤_)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans; module ≡-Reasoning)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
@@ -76,9 +77,7 @@ negatedLeftCancellationScalar a b =
   ≡⟨ ℤP.+-identityʳ a ⟩
     a
   ∎
-  where
-  open import Data.Integer.Base using (+_; _+_; -_)
-  open ≡-Reasoning
+  where open ≡-Reasoning
 
 negatedLeftModeCancellation : ∀ p q →
   Z3.addMode (Z3.negateMode q) (Z3.addMode p q) ≡ p
