@@ -46,8 +46,9 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Nat using (Nat; suc)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _≤_)
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Binary.PropositionalEquality using (subst)
 
+import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
 import DASHI.Physics.Closure.NSTriadKNLocalizedPDEStructuredAtomsRound62Exact as Structured
 import DASHI.Physics.Closure.NSTriadKNStructuredTriadicFactorizationOverlayRound72Exact as Overlay
 import DASHI.Physics.Closure.NSTriadKNCriticalAmplificationForcesRemainderRound69Exact as Amplification
@@ -85,14 +86,12 @@ normalizedWitnessSquareBelowPhysicalCharge :
     {step : Amplification.CriticalRatioStepDecomposition positiveBlock}
     {n mu atoms overlay} →
   PhysicalNormalizedAmplificationWitness step n mu atoms overlay →
-  DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2.square mu
-    ≤ physicalCharge
+  L2.square mu ≤ physicalCharge
 normalizedWitnessSquareBelowPhysicalCharge
     {step = step} {n = n} {mu = mu} {atoms = atoms} {overlay = overlay}
     witness =
   subst
-    (λ upper →
-      DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2.square mu ≤ upper)
+    (λ upper → L2.square mu ≤ upper)
     (overlayChargeIsPhysicalCharge witness)
     (Normalized.criticalAmplificationForcesNormalizedCharge
       step n mu atoms overlay
@@ -118,8 +117,8 @@ normalizedWitnessAsSquareChargedEvent {mu = mu} witness =
 round73NormalizedOverlayWeldedToPhysicalChargeEvent : Bool
 round73NormalizedOverlayWeldedToPhysicalChargeEvent = true
 
-round73ArbitraryRescalingCannotHideChargeCost : Bool
-round73ArbitraryRescalingCannotHideChargeCost = true
+round73OverlayChargeIdentityIsRequiredForPhysicalFunding : Bool
+round73OverlayChargeIdentityIsRequiredForPhysicalFunding = true
 
 round73SelectedTrajectoryProducesPhysicalNormalizedWitnesses : Bool
 round73SelectedTrajectoryProducesPhysicalNormalizedWitnesses = false
