@@ -34,7 +34,6 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_)
-import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
@@ -50,8 +49,7 @@ squaredMass (value ∷ rest) = L2.square value + squaredMass rest
 squaredMassAppend : ∀ left right →
   squaredMass (Branching.appendFloors left right)
   ≡ squaredMass left + squaredMass right
-squaredMassAppend [] right =
-  ℚP.+-comm 0ℚ (squaredMass right)
+squaredMassAppend [] right = solve (squaredMass right ∷ [])
 squaredMassAppend (value ∷ rest) right =
   trans
     (cong (L2.square value +_) (squaredMassAppend rest right))
@@ -64,10 +62,6 @@ squaredMassScale scalar [] = solve (scalar ∷ [])
 squaredMassScale scalar (value ∷ rest)
   rewrite squaredMassScale scalar rest =
   solve (scalar ∷ value ∷ squaredMass rest ∷ [])
-
-halfSquaredTwice :
-  L2.square Scale.half + L2.square Scale.half ≡ Scale.half
-halfSquaredTwice = solve []
 
 dyadicBranchSquaredMassExact : ∀ depth →
   squaredMass (Branching.dyadicBranchBlock depth)
@@ -99,7 +93,6 @@ dyadicBranchSquaredMassExact (suc depth) =
   where
   open import Relation.Binary.PropositionalEquality using (cong₂)
 
--- Signed sum remains exactly one by the already-proved branching mass theorem.
 dyadicBranchSignedSumExact : ∀ depth →
   Funding.sumFloors (Branching.dyadicBranchBlock depth) ≡ 1ℚ
 dyadicBranchSignedSumExact = Branching.dyadicBranchBlockMassExact
