@@ -22,16 +22,12 @@ module DASHI.Moonshine.P11MatchedDihedralLiftKernelFreedomExact where
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
-open import Data.Integer using (+_)
+open import Data.Integer using (+_; -[1+_])
 
 import DASHI.Moonshine.P11ClassicalTwoIsogenyCorrespondenceExact as P11
 import DASHI.Moonshine.P11BrandtPrimeGeneratorsExact as Brandt
 import DASHI.Moonshine.P11MatchedDihedralSplitLiftNoGoExact as Lift
 import DASHI.Moonshine.P11MatchedDihedralSixSectorBasisExact as Basis
-
-------------------------------------------------------------------------
--- A nonzero endomorphism whose image lies in ker Phi.
-------------------------------------------------------------------------
 
 kernelPerturbation :
   Lift.P11MatchedSectorVector → Lift.P11MatchedSectorVector
@@ -47,10 +43,6 @@ kernelPerturbationProjectsToZero (Lift.sectorVector e a b c d f) = refl
 kernelPerturbationIsNonzeroOnSinglet :
   kernelPerturbation Basis.epsilonBasis ≡ Lift.zeroSectorVector → ⊥
 kernelPerturbationIsNonzeroOnSinglet = Lift.kernelWitnessIsNonzero
-
-------------------------------------------------------------------------
--- Alternative lift of any Brandt matrix.
-------------------------------------------------------------------------
 
 alternativeLift :
   Brandt.P11BrandtMatrix →
@@ -90,10 +82,6 @@ R5altIntertwines :
   ≡ Brandt.matrixAction Brandt.B11_5 (Lift.testProjection v)
 R5altIntertwines = alternativeLiftIntertwines Brandt.B11_5
 
-------------------------------------------------------------------------
--- The alternative family is genuinely distinct from the split family.
-------------------------------------------------------------------------
-
 R2OnSinglet : Lift.R2 Basis.epsilonBasis ≡
   Lift.sectorVector (+ 0) (+ 2) (+ 0) (+ 0) (+ 0) (+ 0)
 R2OnSinglet = refl
@@ -105,11 +93,6 @@ R2altOnSinglet = refl
 R2altDiffersFromR2 :
   R2alt Basis.epsilonBasis ≡ Lift.R2 Basis.epsilonBasis → ⊥
 R2altDiffersFromR2 ()
-
-------------------------------------------------------------------------
--- The same coarse triple therefore has at least two simultaneous fine lifts.
--- No uniqueness/explanation theorem can follow from intertwining alone.
-------------------------------------------------------------------------
 
 record P11MatchedDihedralKernelFreedomBoundary : Set where
   field
