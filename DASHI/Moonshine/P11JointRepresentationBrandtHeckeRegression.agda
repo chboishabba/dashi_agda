@@ -6,10 +6,7 @@ import DASHI.Moonshine.P11MatchedDihedralSplitLiftNoGoExact as Split
 import DASHI.Moonshine.P11MatchedDihedralSixSectorBasisExact as Basis
 import DASHI.Moonshine.P11MatchedDihedralLiftKernelFreedomExact as Freedom
 import DASHI.Moonshine.P11MatchedDihedralUnitalHeckeCompletionExact as Unital
-
-------------------------------------------------------------------------
--- Focused regression for the representation-side highest-alpha tranche.
-------------------------------------------------------------------------
+import DASHI.Moonshine.P11MatchedDihedralPositiveHeckeNoGoExact as PositiveNoGo
 
 actualP11MatchedCarrierHasSixSectors :
   Basis.actualJ5MatchedSectorCountSix
@@ -17,6 +14,14 @@ actualP11MatchedCarrierHasSixSectors :
   ≡ true
 actualP11MatchedCarrierHasSixSectors =
   Basis.actualJ5MatchedSectorCountSixIsTrue
+    Basis.canonicalP11MatchedDihedralSixSectorBoundary
+
+actualP11MatchedCarrierHasDimensionEleven :
+  Basis.actualJ5MatchedDimensionEleven
+    Basis.canonicalP11MatchedDihedralSixSectorBoundary
+  ≡ true
+actualP11MatchedCarrierHasDimensionEleven =
+  Basis.actualJ5MatchedDimensionElevenIsTrue
     Basis.canonicalP11MatchedDihedralSixSectorBoundary
 
 splitProjectionIsLossy :
@@ -73,6 +78,23 @@ engineeredUnitalCompletionFailsMultiplicityPositivity :
       Unital.canonicalP11MatchedDihedralUnitalCompletionBoundary
     ≡ false
 engineeredUnitalCompletionFailsMultiplicityPositivity = refl , refl
+
+naturalSingletVsFivePositiveLiftIsImpossible :
+  PositiveNoGo.positiveOneVsFiveNecessaryDataProvedEmpty
+    PositiveNoGo.canonicalP11MatchedDihedralPositiveHeckeNoGoBoundary
+  ≡ true
+  × PositiveNoGo.singletVsAllDoubletsCanCarryPositiveUnitalB2Lift
+      PositiveNoGo.canonicalP11MatchedDihedralPositiveHeckeNoGoBoundary
+    ≡ false
+naturalSingletVsFivePositiveLiftIsImpossible = refl , refl
+
+noGoIsScopedToThisRepresentationInvariant :
+  PositiveNoGo.everyPossibleSixToTwoRepresentationInvariantRuledOutHere
+    PositiveNoGo.canonicalP11MatchedDihedralPositiveHeckeNoGoBoundary
+  ≡ false
+noGoIsScopedToThisRepresentationInvariant =
+  PositiveNoGo.everyPossibleSixToTwoRepresentationInvariantRuledOutHereIsFalse
+    PositiveNoGo.canonicalP11MatchedDihedralPositiveHeckeNoGoBoundary
 
 jointAlgebraAloneStillDoesNotIdentifyRepresentationAction :
   Unital.jointUnitalHeckeAlgebraAloneIdentifiesRepresentationAction
