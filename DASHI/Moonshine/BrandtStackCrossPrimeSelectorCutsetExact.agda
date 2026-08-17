@@ -42,10 +42,6 @@ import DASHI.Moonshine.BrandtStackUnweightingControlsExact as Controls
 import DASHI.Moonshine.P37NonOggPositiveHeckeControlExact as P37
 import DASHI.Moonshine.P37NonOggPositivePrimeSquareNeighboursExact as P37Square
 
-------------------------------------------------------------------------
--- Exact cross-prime count comparison.
-------------------------------------------------------------------------
-
 p11SheetCount : Nat
 p11SheetCount = P11Stack.p11UnweightedStateCount
 
@@ -70,12 +66,6 @@ p11CountDiffersFromP37 ()
 p11CountDiffersFromP43 : p11SheetCount ≡ p43SheetCount → ⊥
 p11CountDiffersFromP43 ()
 
-------------------------------------------------------------------------
--- Feature-level cutset.  A one-bit selector that sees only whether a positive
--- stack-unweighted T2-square realization exists receives the same input at
--- Ogg p=11 and non-Ogg p=37 and therefore cannot separate them.
-------------------------------------------------------------------------
-
 data PositiveT2SquareFeature : Set where
   featurePresent : PositiveT2SquareFeature
 
@@ -90,16 +80,7 @@ featureOnlyClassifierCannotSeparate :
   classify p11PositiveFeature ≡ true →
   classify p37PositiveFeature ≡ false →
   ⊥
-featureOnlyClassifierCannotSeparate classify p11True p37False
-  rewrite p11True
-  = λ () → p37False
-
-------------------------------------------------------------------------
--- A useful positive result from the controls: the reciprocal sheet COUNT is
--- already richer than the mere existence feature for the three tested levels.
--- It is deliberately NOT promoted to a global Ogg selector; two controls are
--- nowhere near enough to support that theorem.
-------------------------------------------------------------------------
+featureOnlyClassifierCannotSeparate classify refl ()
 
 record CrossPrimeStackSignature : Set where
   constructor stackSignature
