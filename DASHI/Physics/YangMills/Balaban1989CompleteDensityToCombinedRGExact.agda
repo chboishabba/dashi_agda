@@ -4,6 +4,15 @@ module DASHI.Physics.YangMills.Balaban1989CompleteDensityToCombinedRGExact where
 -- PRIMARY SOURCES
 --
 -- Tadeusz Bałaban,
+-- "Renormalization Group Approach to Lattice Gauge Field Theories - II.
+-- Cluster Expansions", Communications in Mathematical Physics 116 (1988),
+-- 1--22. DOI: 10.1007/BF01239022.
+-- Relationship: this is the direct cluster-expansion sequel to CMP109; it
+-- proves that the fluctuation-field cluster expansion preserves the inductive
+-- assumptions in the small-field approximation.  It is an intermediate
+-- source bridge, not a replacement for the later complete-density theorem.
+--
+-- Tadeusz Bałaban,
 -- "Convergent Renormalization Expansions for Lattice Gauge Theories",
 -- Communications in Mathematical Physics 119 (1988), 243--285.
 -- DOI: 10.1007/BF01217741.
