@@ -20,27 +20,23 @@ module DASHI.Physics.YangMills.BalabanContinuumNontrivialityAsymptoticFreedomGat
 -- Corrigendum: Annals of Mathematics 199 (2024), 479.
 -- DOI: 10.4007/annals.2024.199.1.7.
 --
+-- SOURCE-SCOPE NOTE
+--
+-- Aizenman--Duminil-Copin is used here as a precise adversarial precedent,
+-- not as a universal no-go theorem for every four-dimensional scalar QFT.
+-- Their theorem concerns critical/near-critical scaling limits in the
+-- nearest-neighbour ferromagnetic Ising / lambda-phi^4_4 universality class.
+-- Its role in this module is to demonstrate a concrete failure mode in which
+-- a controlled lattice family has a Gaussian continuum scaling limit.  Yang--
+-- Mills lies outside those hypotheses; asymptotic freedom is exactly why the
+-- perturbative B/C lane is treated as a possible escape mechanism rather than
+-- evidence that nontrivial survival is hopeless.
+--
 -- DASHI CONTRIBUTION
 --
 -- Nontrivial continuum survival must not float independently of the
--- asymptotic-freedom calculation.  Four-dimensional scalar phi^4 supplies the
--- exact adversarial failure mode: a controlled lattice family can have a
--- Gaussian scaling limit.  Positive Yang--Mills one-loop flow is therefore a
+-- asymptotic-freedom calculation.  Positive Yang--Mills one-loop flow is a
 -- load-bearing INPUT to E3, though by itself it is not a proof of E3.
---
--- This file welds the already-separated B/C quantities algebraically.  If the
--- certified one-loop lower contribution is decomposed as
---
---   oneLoopLower = survivalMargin + quarticPenalty
---
--- and the physical beta quantity is bounded below by
---
---   oneLoopLower - quarticPenalty,
---
--- then the SAME survivalMargin is a lower bound for the physical beta.
--- Thus the finite perturbative programme must leave a nonvanishing margin
--- after the five g^4 channels are charged, before any continuum nontriviality
--- argument can legitimately start.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
@@ -86,10 +82,5 @@ survivalMarginBelowPhysicalBeta data =
 asymptoticFreedomQuarticSurvivalMarginLevel : ProofLevel
 asymptoticFreedomQuarticSurvivalMarginLevel = machineChecked
 
--- The hard continuum theorem remains separate: prove that a genuinely
--- interacting gauge-invariant observable/cumulant survives the SAME scaling
--- subsequence.  The theorem above makes positive perturbative flow an upstream
--- quantitative gate; it deliberately does not identify beta>0 with
--- non-Gaussianity.
 continuumInteractingObservableSurvivalLevel : ProofLevel
 continuumInteractingObservableSurvivalLevel = conditional
