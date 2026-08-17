@@ -26,16 +26,17 @@ import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound59PositiveRGGeometryV
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionWilsonFirstVariationExact
 import DASHI.Physics.YangMills.BalabanSelectedWilsonFirstVariationPlaquetteSupportExact
 
--- A2: Moore--Penrose + K=L L* proves K+ positive semidefinite exactly.  Exact
--- polarization derives all sixteen signed degree-pair lower bounds from only
--- four source and four defect diagonal K+ energies, and the endpoint adapter
--- turns eight uniform diagonal uppers into the sixteen lower boxes expected by
--- the existing uniform selected-minimizer consumer.  The canonical adapter
--- proves these are the SAME canonical G2 degree blocks, not a surrogate table.
+-- A2/G2 endpoint: Moore--Penrose + K=L L* proves K+ positive semidefinite
+-- exactly.  Polarization derives all sixteen signed degree-pair lower bounds
+-- from only four source and four defect diagonal K+ energies.  The canonical
+-- weld proves these are the SAME G2 degree blocks, and the final compiler turns
+-- a literal 4 raw + 8 diagonal + charge selected-region dataset into the old
+-- uniform 4+16 endpoint theorem automatically.
 import DASHI.Physics.YangMills.BalabanKKTGramPseudoinversePositiveExact
 import DASHI.Physics.YangMills.BalabanKKTGreenPolarizationLowerBoundExact
 import DASHI.Physics.YangMills.BalabanSelectedGreenDiagonalEndpointAdapterExact
 import DASHI.Physics.YangMills.BalabanCanonicalGreenDegreeDiagonalReductionExact
+import DASHI.Physics.YangMills.BalabanUniformCanonicalDiagonalG2EnvelopeExact
 
 -- F1/F2 theorem selection: Lawler--Sokal includes reversible,
 -- nonreversible, and killed-process regimes.  If the continuum-adjacent
