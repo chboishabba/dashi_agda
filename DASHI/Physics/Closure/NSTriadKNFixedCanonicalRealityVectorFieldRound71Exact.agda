@@ -44,14 +44,12 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier as Cube
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber as Output
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
-import DASHI.Physics.Closure.NSTriadKNComplex3FieldAlgebra as Field
 import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNCanonicalCutoffSameObjectSystemRound34Exact as Canonical
 import DASHI.Physics.Closure.NSTriadKNCanonicalCutoffOrbitCarrierRound63Exact as Orbit
@@ -147,7 +145,9 @@ realityVelocity state selected
 ... | true = lookupPositive (positiveValues state) selected
 ... | false = lookupNegative (positiveValues state) selected
 
--- Fixed geometry, independent of the evolving state.
+-- Fixed geometry, independent of the evolving state.  Audit metadata fields
+-- are proposition TYPES, so we store the actual intended propositions without
+-- claiming them inhabited here.
 fixedAuditSystem :
   ∀ {r} {F : C3.RealField r} {E : C3.IntegerEmbedding F}
     (geometry : FixedCanonicalGeometry F E)
@@ -167,9 +167,8 @@ fixedAuditSystem {F = F} {E = E} geometry state = record
       λ incidence → incidence Cube.∈
         Physical.physicalTriadEnumeration (cutoff geometry)
   ; Audit.FiniteComplex3GalerkinSystem.modesAreLiteralCutoff =
-      Audit.modes
-        (fixedAuditSystem geometry state)
-      ≡ Canonical.nonzeroCutoffModes (cutoff geometry)
+      Canonical.nonzeroCutoffModes (cutoff geometry)
+        ≡ Canonical.nonzeroCutoffModes (cutoff geometry)
   ; Audit.FiniteComplex3GalerkinSystem.triadsAreLiteralEnumeration = refl
   ; Audit.FiniteComplex3GalerkinSystem.zeroModeExcluded =
       ∀ mode → mode Cube.∈ Canonical.nonzeroCutoffModes (cutoff geometry) →
