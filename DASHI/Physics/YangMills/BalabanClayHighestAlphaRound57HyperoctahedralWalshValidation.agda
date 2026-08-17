@@ -17,21 +17,25 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound57HyperoctahedralWals
 --     -> regular geometric counts 64+96+64+16
 --     -> conservative fixed-axis counts 48+48+16+16+48+48+16
 --     -> joint momentum action on actual DiagramExpression syntax
---     -> C2^4 Walsh sign projection
+--     -> literal source equivariance reduced to 7 B4-generator equations
+--        or 6 fixed-axis equations
+--     -> every finite generator word fixes the expression
+--     -> C2^4 Walsh--Fourier sign projection
 --     -> exact nontrivial sign-sector orbit cancellation
 --     -> four- or seven-representative finite sum arithmetic.
 --
 -- G2
 --   same Subset4 carrier keeps TWO structures separate:
 --     Boolean incidence/Mobius localisation;
---     C2^4 symmetric-difference/Walsh characters.
+--     C2^4 symmetric-difference/Walsh--Fourier characters.
 --   Without assuming XOR convolution, the safer simultaneous-S4 signature
 --   reduction gives 4 raw degree representatives and at most 26 ordered Green
 --   pair representatives instead of 15 and 225.
 --
 -- Physical source equivariance remains a literal theorem obligation.  The
 -- existing source-facing regularIntegrand is still abstract DiagramExpression
--- data, so this root does not manufacture an invariance proof for it.
+-- data, so this root does not manufacture an invariance proof for it.  The new
+-- generator certificate makes that obligation finite and source-auditable.
 ------------------------------------------------------------------------
 
 import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound56PiBetaG2Validation as R56
@@ -40,6 +44,7 @@ import DASHI.Physics.YangMills.BalabanBooleanFourCubeWalshCharacterExact as Wals
 import DASHI.Physics.YangMills.BalabanClayT4WilsonOneLoopSignCharacterProjectionExact as SignProjection
 import DASHI.Physics.YangMills.BalabanClayT4SignOrbitGlobalCancellationExact as SignOrbit
 import DASHI.Physics.YangMills.BalabanClayT4WilsonOneLoopJointMomentumEquivarianceExact as Joint
+import DASHI.Physics.YangMills.BalabanClayT4WilsonOneLoopHyperoctahedralGeneratorCertificateExact as GeneratorCertificate
 import DASHI.Physics.YangMills.BalabanClayT4WilsonOneLoopOrbitSummedIntervalExact as OrbitSum
 import DASHI.Physics.YangMills.BalabanP33SelectedGreenSubsetOrbitReductionExact as G2Orbit
 
@@ -67,6 +72,15 @@ literalTrigParityUnderJointActionLevel = Joint.literalTrigParityUnderJointAction
 literalHatMomentumScalarActionLevel = Joint.literalHatMomentumScalarActionLevel
 literalRegularIntegrandJointEquivarianceLevel =
   Joint.literalRegularIntegrandJointEquivarianceLevel
+
+sevenGeneratorReductionLevel =
+  GeneratorCertificate.sevenGeneratorReductionLevel
+finiteGeneratorWordClosureLevel =
+  GeneratorCertificate.finiteGeneratorWordClosureLevel
+sixGeneratorFixedAxisReductionLevel =
+  GeneratorCertificate.sixGeneratorFixedAxisReductionLevel
+literalRegularIntegrandFiniteGeneratorCertificateLevel =
+  GeneratorCertificate.literalRegularIntegrandFiniteGeneratorCertificateLevel
 
 fourOrbitFiniteSumReductionLevel = OrbitSum.fourOrbitFiniteSumReductionLevel
 sevenOrbitFiniteSumReductionLevel = OrbitSum.sevenOrbitFiniteSumReductionLevel
