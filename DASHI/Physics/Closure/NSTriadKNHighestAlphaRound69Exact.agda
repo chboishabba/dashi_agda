@@ -45,14 +45,15 @@ module DASHI.Physics.Closure.NSTriadKNHighestAlphaRound69Exact where
 --    trajectory authority admit generatedSelector constantly 0 or constantly
 --    1.  Thus generatedAt is not yet a physical observable.
 --
--- 4. The exact dynamic shell identity now emits a literal seven-source signed
---    atom list (HH/LH/HL/CC/Com/lower/upper), and its fold is exactly the PDE
---    source side.  Future Duhamel scalars must be projections/groupings of this
---    list or a finer incidence-preserving refinement.
+-- 4. Round62 already provides the correct source authority:
+--    LocalizedPDEAtom, one list carrying physical interior cells, tail,
+--    duplicate/cancelling/independent kernel atoms and classified boundaries.
+--    It derives the kernel residual and boundary ledger from that same list.
 --
--- 5. On the already-existing classified physical output fibre, squared literal
---    triad values define a nonnegative frequency concentration mass.  Erasing
---    the executable LH/HL/HH/CC classification preserves this mass exactly.
+-- 5. Round69 defines a nonnegative triadic concentration mass DIRECTLY on that
+--    one structured PDE list.  Only literal triadic physicalAtom values enter;
+--    Com, tail, kernel and boundary atoms are not silently reclassified as
+--    concentration.  Each triadic cell retains its PhysicalTriadIncidence.
 --
 -- 6. The ambient critical hypothesis used by quantitative ESS/Tao/Barker-
 --    Prange style propagation is literally the Round63 C1 target
@@ -62,21 +63,26 @@ module DASHI.Physics.Closure.NSTriadKNHighestAlphaRound69Exact where
 --    Therefore that literature is a propagation architecture/lemma mine, not
 --    an unconditional producer of C1.
 --
+-- 7. Round63 already proves the owner carrier alone admits
+--    integralCritical=K+1 for every candidate K.  Hence the new concentration
+--    inequality MUST use selected-solution/localized-PDE coupling; it cannot be
+--    derived from the owner language or renamed critical-bound assumptions.
+--
 -- NEW SHORTEST FRONTIER:
 --
--- A. construct the selected finite Galerkin trajectory and literal chain-rule
---    localized shell/Duhamel identity on that trajectory;
--- B. prove that excess Xi remainder forces a positive lower bound on the
---    literal frequency mass in a controlled subfibre, without assuming Xi<=K;
--- C. either convert that frequency concentration to a physical-space localized
---    quantity or build an equivalent propagation mechanism directly on the
---    periodic carrier;
--- D. prove propagation/separation produces enough distinct funded events that
---    the finite energy budget gives an invariant Xi barrier;
+-- A. construct the selected finite Galerkin trajectory and make its literal
+--    localized identity EMIT the existing Round62 LocalizedPDEAtom list;
+-- B. prove CriticalAmplificationForcesConcentration on that same object:
+--    excess Xi remainder forces a positive lower bound on
+--    triadicConcentrationMass in a controlled subfibre, without Xi<=K;
+-- C. convert/propagate that concentration through a physical-space periodic
+--    analogue of the ESS/Tao/Barker-Prange mechanism, again without consuming
+--    the C1 target as an ambient premise;
+-- D. prove the propagated events are sufficiently separated/duplicate-free to
+--    feed the finite funding theorem and obtain an invariant Xi barrier;
 -- E. only then return to the remaining Gram/HH-bad/data/kernel/gate closures.
 --
--- This is a sharper falsification boundary than Round68.  Clay promotion is
--- intentionally false.
+-- Clay promotion is intentionally false.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -87,9 +93,10 @@ import DASHI.Physics.Closure.NSTriadKNFourierStrainFirstVariationFrobeniusRound6
 import DASHI.Physics.Closure.NSTriadKNCriticalAmplificationForcesRemainderRound69Exact as Amplification
 import DASHI.Physics.Closure.NSTriadKNFiniteDisjointConcentrationBudgetRound69Exact as Funding
 import DASHI.Physics.Closure.NSTriadKNPhysicalDuhamelSelectorUnderdeterminationRound69Exact as SelectorNoGo
-import DASHI.Physics.Closure.NSTriadKNLiteralShellAtomListRound69Exact as LiteralSource
+import DASHI.Physics.Closure.NSTriadKNLocalizedPDEStructuredAtomsRound62Exact as Structured
+import DASHI.Physics.Closure.NSTriadKNLocalizedPDETriadicConcentrationMassRound69Exact as StructuredMass
 import DASHI.Physics.Closure.NSTriadKNCriticalAmbientBoundIdentityRound69Exact as Ambient
-import DASHI.Physics.Closure.NSTriadKNLiteralFrequencyConcentrationMassRound69Exact as Frequency
+import DASHI.Physics.Closure.NSTriadKNCriticalOwnerLanguageUniformBoundNoGoRound63Exact as OwnerNoGo
 
 round69NonCircularCriticalAmplificationConstructed : Bool
 round69NonCircularCriticalAmplificationConstructed =
@@ -103,33 +110,40 @@ round69FreeDuhamelSelectorFalsified : Bool
 round69FreeDuhamelSelectorFalsified =
   SelectorNoGo.sameTrajectoryFreeGeneratedSelectorFalsifier
 
-round69LiteralSignedShellSourceConstructed : Bool
-round69LiteralSignedShellSourceConstructed =
-  LiteralSource.round69LiteralShellAtomListConstructed
+round69OneStructuredPDEAtomAuthorityConstructed : Bool
+round69OneStructuredPDEAtomAuthorityConstructed =
+  Structured.structuredAtomsDeriveKernelResidualAndBoundaryLedger
+
+round69StructuredTriadicConcentrationMassConstructed : Bool
+round69StructuredTriadicConcentrationMassConstructed =
+  StructuredMass.round69StructuredTriadicConcentrationMassConstructed
 
 round69ConditionalCriticalCircularityIdentified : Bool
 round69ConditionalCriticalCircularityIdentified =
   Ambient.round69AmbientCriticalHypothesisIsExactlyC1
 
-round69LiteralFrequencyConcentrationMassConstructed : Bool
-round69LiteralFrequencyConcentrationMassConstructed =
-  Frequency.round69LiteralFrequencyConcentrationMassConstructed
+round69OwnerLanguageCriticalBoundFalsified : Bool
+round69OwnerLanguageCriticalBoundFalsified =
+  OwnerNoGo.round63C1CannotComeFromOwnerLanguageAlone
 
 -- Genuine remaining physical producers.
 round69SelectedGalerkinTrajectoryConstructed : Bool
 round69SelectedGalerkinTrajectoryConstructed = false
 
-round69LiteralTrajectoryLocalizedDuhamelIdentityConstructed : Bool
-round69LiteralTrajectoryLocalizedDuhamelIdentityConstructed = false
+round69LiteralTrajectoryEmitsStructuredAtoms : Bool
+round69LiteralTrajectoryEmitsStructuredAtoms = false
 
-round69RemainderForcesLocalizedFrequencyConcentration : Bool
-round69RemainderForcesLocalizedFrequencyConcentration = false
+round69CriticalAmplificationForcesStructuredConcentration : Bool
+round69CriticalAmplificationForcesStructuredConcentration = false
 
 round69FrequencyToPhysicalSpaceConcentrationConstructed : Bool
 round69FrequencyToPhysicalSpaceConcentrationConstructed = false
 
 round69NonCircularConcentrationPropagationConstructed : Bool
 round69NonCircularConcentrationPropagationConstructed = false
+
+round69PropagatedEventsFeedFiniteBudgetConstructed : Bool
+round69PropagatedEventsFeedFiniteBudgetConstructed = false
 
 round69CriticalRatioBarrierConstructed : Bool
 round69CriticalRatioBarrierConstructed = false
@@ -149,29 +163,33 @@ round69FreeDuhamelSelectorFalsifiedIsTrue :
   round69FreeDuhamelSelectorFalsified ≡ true
 round69FreeDuhamelSelectorFalsifiedIsTrue = refl
 
-round69LiteralSignedShellSourceConstructedIsTrue :
-  round69LiteralSignedShellSourceConstructed ≡ true
-round69LiteralSignedShellSourceConstructedIsTrue = refl
+round69OneStructuredPDEAtomAuthorityConstructedIsTrue :
+  round69OneStructuredPDEAtomAuthorityConstructed ≡ true
+round69OneStructuredPDEAtomAuthorityConstructedIsTrue = refl
+
+round69StructuredTriadicConcentrationMassConstructedIsTrue :
+  round69StructuredTriadicConcentrationMassConstructed ≡ true
+round69StructuredTriadicConcentrationMassConstructedIsTrue = refl
 
 round69ConditionalCriticalCircularityIdentifiedIsTrue :
   round69ConditionalCriticalCircularityIdentified ≡ true
 round69ConditionalCriticalCircularityIdentifiedIsTrue = refl
 
-round69LiteralFrequencyConcentrationMassConstructedIsTrue :
-  round69LiteralFrequencyConcentrationMassConstructed ≡ true
-round69LiteralFrequencyConcentrationMassConstructedIsTrue = refl
+round69OwnerLanguageCriticalBoundFalsifiedIsTrue :
+  round69OwnerLanguageCriticalBoundFalsified ≡ true
+round69OwnerLanguageCriticalBoundFalsifiedIsTrue = refl
 
 round69SelectedGalerkinTrajectoryConstructedIsFalse :
   round69SelectedGalerkinTrajectoryConstructed ≡ false
 round69SelectedGalerkinTrajectoryConstructedIsFalse = refl
 
-round69LiteralTrajectoryLocalizedDuhamelIdentityConstructedIsFalse :
-  round69LiteralTrajectoryLocalizedDuhamelIdentityConstructed ≡ false
-round69LiteralTrajectoryLocalizedDuhamelIdentityConstructedIsFalse = refl
+round69LiteralTrajectoryEmitsStructuredAtomsIsFalse :
+  round69LiteralTrajectoryEmitsStructuredAtoms ≡ false
+round69LiteralTrajectoryEmitsStructuredAtomsIsFalse = refl
 
-round69RemainderForcesLocalizedFrequencyConcentrationIsFalse :
-  round69RemainderForcesLocalizedFrequencyConcentration ≡ false
-round69RemainderForcesLocalizedFrequencyConcentrationIsFalse = refl
+round69CriticalAmplificationForcesStructuredConcentrationIsFalse :
+  round69CriticalAmplificationForcesStructuredConcentration ≡ false
+round69CriticalAmplificationForcesStructuredConcentrationIsFalse = refl
 
 round69CriticalRatioBarrierConstructedIsFalse :
   round69CriticalRatioBarrierConstructed ≡ false
