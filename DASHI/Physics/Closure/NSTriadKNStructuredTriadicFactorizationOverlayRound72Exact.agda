@@ -39,9 +39,9 @@ module DASHI.Physics.Closure.NSTriadKNStructuredTriadicFactorizationOverlayRound
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Rational.Base using (ℚ; 1ℚ; _*_; _≤_)
+open import Data.Rational.Base using (ℚ; 1ℚ; _+_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 import DASHI.Physics.Closure.NSTriadKNLuoPhysicalFiveClassSupportRound25Exact as Support
 import DASHI.Physics.Closure.NSTriadKNLocalizedPDEStructuredAtomsRound62Exact as Structured
@@ -118,10 +118,10 @@ overlaySignedSumExact overlay[] = refl
 overlaySignedSumExact
     (overlayTriadic {value = value} left right exact rest) =
   trans
-    (cong (_+ Effective.factorizedSignedSum (overlayFactors rest)) exact)
+    (cong
+      (λ head → head + Effective.factorizedSignedSum (overlayFactors rest))
+      (sym exact))
     (cong (value +_) (overlaySignedSumExact rest))
-  where
-  open import Data.Rational.Base using (_+_)
 overlaySignedSumExact (overlayCom rest) = overlaySignedSumExact rest
 overlaySignedSumExact (overlayTail rest) = overlaySignedSumExact rest
 overlaySignedSumExact (overlayDuplicateKernel rest) = overlaySignedSumExact rest
@@ -143,12 +143,11 @@ overlayCauchy :
   L2.square (R71.triadicSignedSum atoms)
   ≤ overlayCharge overlay * overlayEffectiveComplexity overlay
 overlayCauchy overlay =
-  let base = Effective.factorizedCauchy (overlayFactors overlay)
-  in Relation.Binary.PropositionalEquality.subst
-       (λ signed → L2.square signed
-         ≤ overlayCharge overlay * overlayEffectiveComplexity overlay)
-       (overlaySignedSumExact overlay)
-       base
+  subst
+    (λ signed → L2.square signed
+      ≤ overlayCharge overlay * overlayEffectiveComplexity overlay)
+    (overlaySignedSumExact overlay)
+    (Effective.factorizedCauchy (overlayFactors overlay))
 
 unitOverlay :
   (atoms : List Structured.LocalizedPDEAtom) →
@@ -157,10 +156,9 @@ unitOverlay [] = overlay[]
 unitOverlay
     (Structured.physicalAtom (Support.triadicSource classified)
       selected compatible value ∷ rest) =
-  overlayTriadic value 1ℚ (symIdentity value) (unitOverlay rest)
-  where
-  symIdentity : ∀ x → x ≡ x * 1ℚ
-  symIdentity x = Relation.Binary.PropositionalEquality.sym (ℚP.*-identityʳ x)
+  overlayTriadic value 1ℚ
+    (sym (ℚP.*-identityʳ value))
+    (unitOverlay rest)
 unitOverlay
     (Structured.physicalAtom (Support.differentiatedCommutator output)
       selected compatible value ∷ rest) = overlayCom (unitOverlay rest)
