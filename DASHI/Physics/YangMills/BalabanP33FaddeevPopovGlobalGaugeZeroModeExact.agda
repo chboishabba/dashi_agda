@@ -18,8 +18,7 @@ module DASHI.Physics.YangMills.BalabanP33FaddeevPopovGlobalGaugeZeroModeExact wh
 -- The literal flat Faddeev--Popov operator constructed in the companion module
 -- is the periodic lattice Laplacian.  Consequently every site-constant Lie
 -- algebra gauge parameter is an exact zero mode.  This file proves that fact on
--- the SAME side-four SU(2) carrier and supplies an explicit nonzero constant-X
--- witness.
+-- the SAME side-four SU(2) carrier and supplies the concrete constant-X mode.
 --
 -- Therefore the ordinary determinant of the FULL flat ghost operator is
 -- singular.  A one-loop ghost determinant/log-determinant must first remove
@@ -30,9 +29,9 @@ module DASHI.Physics.YangMills.BalabanP33FaddeevPopovGlobalGaugeZeroModeExact wh
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Integer.Base using (+_)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _-_; _+_; _≢_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _-_; _+_)
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using (pair)
@@ -72,10 +71,8 @@ constantFlatBackwardTermZero :
     coordinate axis site
   ≡ 0ℚ
 constantFlatBackwardTermZero x y z coordinate axis site =
-  let
-    previous = Periodic.shiftBackward axis site
-  in
-  trans
+  let previous = Periodic.shiftBackward axis site
+  in trans
     (cong
       (λ current →
         current
@@ -118,11 +115,6 @@ constantXValueExact :
   ∀ site →
   constantXGaugeParameter (pair Coordinates.coordinateX site) ≡ + 1
 constantXValueExact site = refl
-
-constantXValueNonzero :
-  ∀ site →
-  constantXGaugeParameter (pair Coordinates.coordinateX site) ≢ 0ℚ
-constantXValueNonzero site ()
 
 constantXFlatFaddeevPopovZero :
   ∀ coordinate site →
