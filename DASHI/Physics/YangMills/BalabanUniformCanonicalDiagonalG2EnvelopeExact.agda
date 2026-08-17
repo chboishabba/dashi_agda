@@ -51,6 +51,7 @@ import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Ph
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionFlatCurlExact as Flat
 import DASHI.Physics.YangMills.BalabanSelectedCanonicalConstraintAtomsFromSubsetExact as Canonical
 import DASHI.Physics.YangMills.BalabanSelectedCanonicalConstraintDegreeBlocksExact as CanonicalDegree
+import DASHI.Physics.YangMills.BalabanSelectedCorrelatedResidualOwnershipExact as Ownership
 import DASHI.Physics.YangMills.BalabanP33CorrelatedMobiusDegreeJointExact as Degree
 import DASHI.Physics.YangMills.BalabanCanonicalGreenDegreeDiagonalReductionExact as Diagonal
 import DASHI.Physics.YangMills.BalabanP33UniformSelectedMinimizerDegreeEnvelopeExact as Uniform
@@ -111,8 +112,9 @@ record UniformCanonicalDiagonalG2Data
 open UniformCanonicalDiagonalG2Data public
 
 generatedCanonicalGreenLower :
-  ∀ {Multiplier Configuration pseudoData} →
-  UniformCanonicalDiagonalG2Data {Multiplier} pseudoData Configuration →
+  ∀ {Multiplier Configuration}
+    {pseudoData : Pseudo.FiniteKKTPseudoinverseData Multiplier} →
+  UniformCanonicalDiagonalG2Data pseudoData Configuration →
   Degree.MobiusDegree → Degree.MobiusDegree → ℚ
 generatedCanonicalGreenLower dataSet sourceDegree defectDegree =
   half *
@@ -171,26 +173,18 @@ compileCanonicalDiagonalToUniformDegreeEnvelope :
   UniformCanonicalDiagonalG2Data pseudoData Configuration →
   Uniform.UniformSelectedMinimizerDegreeEnvelope Configuration
 compileCanonicalDiagonalToUniformDegreeEnvelope dataSet = record
-  { Uniform.UniformSelectedMinimizerDegreeEnvelope.InCertifiedRegion =
-      InCertifiedRegion dataSet
-  ; Uniform.UniformSelectedMinimizerDegreeEnvelope.selectedMinimizer =
-      selectedMinimizer dataSet
-  ; Uniform.UniformSelectedMinimizerDegreeEnvelope.selectedMinimizerInRegion =
-      selectedMinimizerInRegion dataSet
-  ; Uniform.UniformSelectedMinimizerDegreeEnvelope.familyAt =
-      λ configuration →
-        CanonicalDegree.canonicalFamily (canonicalInputsAt dataSet configuration)
-  ; Uniform.UniformSelectedMinimizerDegreeEnvelope.chargeAt = chargeAt dataSet
-  ; Uniform.UniformSelectedMinimizerDegreeEnvelope.rawUpper = rawUpper dataSet
-  ; Uniform.UniformSelectedMinimizerDegreeEnvelope.greenLower =
-      generatedCanonicalGreenLower dataSet
-  ; Uniform.UniformSelectedMinimizerDegreeEnvelope.rawSoundUniform =
-      rawUpperSound dataSet
-  ; Uniform.UniformSelectedMinimizerDegreeEnvelope.greenSoundUniform =
-      generatedCanonicalGreenLowerSound dataSet
-  ; Uniform.UniformSelectedMinimizerDegreeEnvelope.chargeLower = chargeLower dataSet
-  ; Uniform.UniformSelectedMinimizerDegreeEnvelope.chargeLowerBound =
-      chargeLowerSound dataSet
+  { InCertifiedRegion = InCertifiedRegion dataSet
+  ; selectedMinimizer = selectedMinimizer dataSet
+  ; selectedMinimizerInRegion = selectedMinimizerInRegion dataSet
+  ; familyAt = λ configuration →
+      CanonicalDegree.canonicalFamily (canonicalInputsAt dataSet configuration)
+  ; chargeAt = chargeAt dataSet
+  ; rawUpper = rawUpper dataSet
+  ; greenLower = generatedCanonicalGreenLower dataSet
+  ; rawSoundUniform = rawUpperSound dataSet
+  ; greenSoundUniform = generatedCanonicalGreenLowerSound dataSet
+  ; chargeLower = chargeLower dataSet
+  ; chargeLowerBound = chargeLowerSound dataSet
   }
 
 record UniformCanonicalDiagonalG2Closure
@@ -210,15 +204,14 @@ canonicalDiagonalSelectedMinimizerG2Closure :
     (dataSet : UniformCanonicalDiagonalG2Data pseudoData Configuration)
     (closure : UniformCanonicalDiagonalG2Closure dataSet) →
   let compiled = compileCanonicalDiagonalToUniformDegreeEnvelope dataSet in
-  DASHI.Physics.YangMills.BalabanSelectedCorrelatedResidualOwnershipExact.correlatedResidualTotal
+  Ownership.correlatedResidualTotal
       (Uniform.familyAt compiled (Uniform.selectedMinimizer compiled))
   ≤ Selector.remainingSingletonCoefficient
       * Uniform.chargeAt compiled (Uniform.selectedMinimizer compiled)
 canonicalDiagonalSelectedMinimizerG2Closure dataSet closure =
   Uniform.selectedMinimizerCorrelatedResidualClosesFromSharedDegreeEndpoint
     (compileCanonicalDiagonalToUniformDegreeEnvelope dataSet)
-    (record { Uniform.UniformSelectedMinimizerDegreeClosure.uniformEndpointFitsLowerCharge =
-      endpointFitsCharge closure })
+    (record { uniformEndpointFitsLowerCharge = endpointFitsCharge closure })
 
 uniformCanonicalDiagonalG2CompilerLevel : ProofLevel
 uniformCanonicalDiagonalG2CompilerLevel = machineChecked
