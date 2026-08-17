@@ -1,6 +1,7 @@
 module DASHI.Cognition.PNF.EditTransportLeafLocalityRegression where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (suc)
 open import Data.Empty using (⊥)
 open import Data.List.Base using ([]; _∷_)
 open import Data.Product using (_×_; _,_)
