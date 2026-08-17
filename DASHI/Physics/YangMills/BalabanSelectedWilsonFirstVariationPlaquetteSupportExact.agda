@@ -38,18 +38,19 @@ open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Product.Base using (_×_; _,_)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _*_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _*_; -_)
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Data.Unit.Base using (⊤; tt)
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Relation.Binary.PropositionalEquality using
+  (cong; cong₂; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using
-  (Product; pair; Empty; yes; no)
+  (pair; Empty; yes; no)
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionWilsonSecondVariationExact as Wilson
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionWilsonFirstVariationExact as First
 import DASHI.Physics.YangMills.BalabanP33PhysicalRationalWilsonPlaquetteJetExact as Plaquette
-import DASHI.Physics.YangMills.BalabanP33PhysicalFlatWilsonCurlIdentificationExact as Flat
+import DASHI.Physics.YangMills.BalabanP33PeriodicFourDimensionalHodgeIdentityExact as Hodge4
 import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Physical
 import DASHI.Physics.YangMills.BalabanP33PhysicalCoordinateBasisExact as Basis
 import DASHI.Physics.YangMills.BalabanP33LiteralResidualKernelNumericalCalibrationExact as Calibration
@@ -58,10 +59,6 @@ import DASHI.Physics.YangMills.BalabanP33PhysicalCoordinateProjectorExact as Pro
 import DASHI.Physics.YangMills.BalabanP33FiniteKKTAdmissibleProjectorExact as KKT
 import DASHI.Physics.YangMills.BalabanP33FiniteKKTPseudoinverseProjectorExact as Pseudo
 import DASHI.Physics.YangMills.BalabanSelectedSourceSubsetConstraintPartialExact as SubsetSource
-
-------------------------------------------------------------------------
--- Generic quaternion zero lemmas needed by the first-product recursion.
-------------------------------------------------------------------------
 
 quaternionMultiplyZeroLeft : ∀ value →
   Wilson.zeroQ Wilson.*q value ≡ Wilson.zeroQ
@@ -73,8 +70,7 @@ quaternionMultiplyZeroLeft (Wilson.quat a0 a1 a2 a3) =
     (ℚRing.solve-∀ a0 a1 a2 a3)
 
 negPureZero :
-  Wilson.negQ
-    (Wilson.pureQuaternion (Wilson.vec3 0ℚ 0ℚ 0ℚ))
+  Wilson.negQ (Wilson.pureQuaternion (Wilson.vec3 0ℚ 0ℚ 0ℚ))
   ≡ Wilson.zeroQ
 negPureZero =
   Wilson.quaternionExt
@@ -110,16 +106,13 @@ orderedFirstProductAllFirstZero (factor ∷ factors) (headZero , tailZero) =
       ≡ Wilson.zeroQ
     inheritedZero =
       trans
-        (cong (Wilson.factorValue factor Wilson.*q_) tailProductZero)
+        (cong (λ selected → Wilson.factorValue factor Wilson.*q selected)
+          tailProductZero)
         (Wilson.quaternionMultiplyZeroRight (Wilson.factorValue factor))
   in
   trans
     (cong₂ Wilson._+q_ headTermZero inheritedZero)
     (Wilson.quaternionAddZeroLeft Wilson.zeroQ)
-
-------------------------------------------------------------------------
--- A coordinate outside the boundary mask cannot hit any of the four cells.
-------------------------------------------------------------------------
 
 trueFalseImpossible : true ≡ false → Empty
 trueFalseImpossible ()
@@ -127,8 +120,7 @@ trueFalseImpossible ()
 basisAtBoundary0Zero :
   ∀ plaquette target coordinate →
   Boundary.plaquetteBoundaryMask plaquette target ≡ false →
-  Basis.physicalBasis target
-    (pair coordinate (Boundary.boundaryCell0 plaquette))
+  Basis.physicalBasis target (pair coordinate (Boundary.boundaryCell0 plaquette))
   ≡ 0ℚ
 basisAtBoundary0Zero plaquette target coordinate maskFalse
   with Calibration.physicalCoordinateDecidableEquality
@@ -136,23 +128,15 @@ basisAtBoundary0Zero plaquette target coordinate maskFalse
 ... | no _ = refl
 ... | yes exact =
   let
-    targetCellExact :
-      Boundary.physicalCoordinateCell target
-      ≡ Boundary.boundaryCell0 plaquette
-    targetCellExact =
-      sym (cong Boundary.physicalCoordinateCell exact)
-    maskTrue =
-      Boundary.plaquetteBoundaryMaskAt0
-        plaquette target targetCellExact
-  in
-  Boundary.emptyElim
+    targetCellExact = sym (cong Boundary.physicalCoordinateCell exact)
+    maskTrue = Boundary.plaquetteBoundaryMaskAt0 plaquette target targetCellExact
+  in Boundary.emptyElim
     (trueFalseImpossible (trans (sym maskTrue) maskFalse))
 
 basisAtBoundary1Zero :
   ∀ plaquette target coordinate →
   Boundary.plaquetteBoundaryMask plaquette target ≡ false →
-  Basis.physicalBasis target
-    (pair coordinate (Boundary.boundaryCell1 plaquette))
+  Basis.physicalBasis target (pair coordinate (Boundary.boundaryCell1 plaquette))
   ≡ 0ℚ
 basisAtBoundary1Zero plaquette target coordinate maskFalse
   with Calibration.physicalCoordinateDecidableEquality
@@ -160,22 +144,15 @@ basisAtBoundary1Zero plaquette target coordinate maskFalse
 ... | no _ = refl
 ... | yes exact =
   let
-    targetCellExact :
-      Boundary.physicalCoordinateCell target
-      ≡ Boundary.boundaryCell1 plaquette
     targetCellExact = sym (cong Boundary.physicalCoordinateCell exact)
-    maskTrue =
-      Boundary.plaquetteBoundaryMaskAt1
-        plaquette target targetCellExact
-  in
-  Boundary.emptyElim
+    maskTrue = Boundary.plaquetteBoundaryMaskAt1 plaquette target targetCellExact
+  in Boundary.emptyElim
     (trueFalseImpossible (trans (sym maskTrue) maskFalse))
 
 basisAtBoundary2Zero :
   ∀ plaquette target coordinate →
   Boundary.plaquetteBoundaryMask plaquette target ≡ false →
-  Basis.physicalBasis target
-    (pair coordinate (Boundary.boundaryCell2 plaquette))
+  Basis.physicalBasis target (pair coordinate (Boundary.boundaryCell2 plaquette))
   ≡ 0ℚ
 basisAtBoundary2Zero plaquette target coordinate maskFalse
   with Calibration.physicalCoordinateDecidableEquality
@@ -183,22 +160,15 @@ basisAtBoundary2Zero plaquette target coordinate maskFalse
 ... | no _ = refl
 ... | yes exact =
   let
-    targetCellExact :
-      Boundary.physicalCoordinateCell target
-      ≡ Boundary.boundaryCell2 plaquette
     targetCellExact = sym (cong Boundary.physicalCoordinateCell exact)
-    maskTrue =
-      Boundary.plaquetteBoundaryMaskAt2
-        plaquette target targetCellExact
-  in
-  Boundary.emptyElim
+    maskTrue = Boundary.plaquetteBoundaryMaskAt2 plaquette target targetCellExact
+  in Boundary.emptyElim
     (trueFalseImpossible (trans (sym maskTrue) maskFalse))
 
 basisAtBoundary3Zero :
   ∀ plaquette target coordinate →
   Boundary.plaquetteBoundaryMask plaquette target ≡ false →
-  Basis.physicalBasis target
-    (pair coordinate (Boundary.boundaryCell3 plaquette))
+  Basis.physicalBasis target (pair coordinate (Boundary.boundaryCell3 plaquette))
   ≡ 0ℚ
 basisAtBoundary3Zero plaquette target coordinate maskFalse
   with Calibration.physicalCoordinateDecidableEquality
@@ -206,20 +176,10 @@ basisAtBoundary3Zero plaquette target coordinate maskFalse
 ... | no _ = refl
 ... | yes exact =
   let
-    targetCellExact :
-      Boundary.physicalCoordinateCell target
-      ≡ Boundary.boundaryCell3 plaquette
     targetCellExact = sym (cong Boundary.physicalCoordinateCell exact)
-    maskTrue =
-      Boundary.plaquetteBoundaryMaskAt3
-        plaquette target targetCellExact
-  in
-  Boundary.emptyElim
+    maskTrue = Boundary.plaquetteBoundaryMaskAt3 plaquette target targetCellExact
+  in Boundary.emptyElim
     (trueFalseImpossible (trans (sym maskTrue) maskFalse))
-
-------------------------------------------------------------------------
--- Therefore all four physical tangent insertions vanish outside the mask.
-------------------------------------------------------------------------
 
 basisInsertion0Zero :
   ∀ site axes target →
@@ -239,7 +199,7 @@ basisInsertion1Zero :
   Plaquette.insertionAt
     (Physical.decodePhysicalSU2 (Basis.physicalBasis target))
     (Plaquette.pairRight axes)
-    (Plaquette.Hodge4.shiftForward (Plaquette.pairLeft axes) site)
+    (Hodge4.shiftForward (Plaquette.pairLeft axes) site)
   ≡ Wilson.vec3 0ℚ 0ℚ 0ℚ
 basisInsertion1Zero site axes target maskFalse
   rewrite basisAtBoundary1Zero (pair site axes) target Physical.coordinateX maskFalse
@@ -252,7 +212,7 @@ basisInsertion2Zero :
   Plaquette.insertionAt
     (Physical.decodePhysicalSU2 (Basis.physicalBasis target))
     (Plaquette.pairLeft axes)
-    (Plaquette.Hodge4.shiftForward (Plaquette.pairRight axes) site)
+    (Hodge4.shiftForward (Plaquette.pairRight axes) site)
   ≡ Wilson.vec3 0ℚ 0ℚ 0ℚ
 basisInsertion2Zero site axes target maskFalse
   rewrite basisAtBoundary2Zero (pair site axes) target Physical.coordinateX maskFalse
@@ -274,8 +234,7 @@ basisInsertion3Zero site axes target maskFalse
 positiveLinkJetFirstZero :
   ∀ background field site axis →
   Plaquette.insertionAt field axis site ≡ Wilson.vec3 0ℚ 0ℚ 0ℚ →
-  Wilson.factorFirst
-    (Plaquette.positiveLinkJet background field site axis)
+  Wilson.factorFirst (Plaquette.positiveLinkJet background field site axis)
   ≡ Wilson.zeroQ
 positiveLinkJetFirstZero background field site axis insertionZero =
   trans
@@ -290,25 +249,17 @@ positiveLinkJetFirstZero background field site axis insertionZero =
 inverseLinkJetFirstZero :
   ∀ background field site axis →
   Plaquette.insertionAt field axis site ≡ Wilson.vec3 0ℚ 0ℚ 0ℚ →
-  Wilson.factorFirst
-    (Plaquette.inverseLinkJet background field site axis)
+  Wilson.factorFirst (Plaquette.inverseLinkJet background field site axis)
   ≡ Wilson.zeroQ
 inverseLinkJetFirstZero background field site axis insertionZero =
-  let
-    inverse = Plaquette.inverseLink background (pair site axis)
-  in
-  trans
+  let inverse = Plaquette.inverseLink background (pair site axis)
+  in trans
     (cong
-      (λ selected →
-        Wilson.negQ (Wilson.pureQuaternion selected) Wilson.*q inverse)
+      (λ selected → Wilson.negQ (Wilson.pureQuaternion selected) Wilson.*q inverse)
       insertionZero)
     (trans
-      (cong (Wilson._*q inverse) negPureZero)
+      (cong (λ selected → selected Wilson.*q inverse) negPureZero)
       (quaternionMultiplyZeroLeft inverse))
-
-------------------------------------------------------------------------
--- Actual physical Wilson first-variation coordinate and support theorem.
-------------------------------------------------------------------------
 
 plaquetteFirstVariationCovector :
   Plaquette.RationalSU2Background4 → Plaquette.Plaquette4 → KKT.StateVector
@@ -329,40 +280,32 @@ plaquetteBasisFirstProductZero :
 plaquetteBasisFirstProductZero background site axes coordinate maskFalse =
   let
     field = Physical.decodePhysicalSU2 (Basis.physicalBasis coordinate)
-
     first0 = positiveLinkJetFirstZero background field
       site (Plaquette.pairLeft axes)
       (basisInsertion0Zero site axes coordinate maskFalse)
-
     first1 = positiveLinkJetFirstZero background field
-      (Plaquette.Hodge4.shiftForward (Plaquette.pairLeft axes) site)
+      (Hodge4.shiftForward (Plaquette.pairLeft axes) site)
       (Plaquette.pairRight axes)
       (basisInsertion1Zero site axes coordinate maskFalse)
-
     first2 = inverseLinkJetFirstZero background field
-      (Plaquette.Hodge4.shiftForward (Plaquette.pairRight axes) site)
+      (Hodge4.shiftForward (Plaquette.pairRight axes) site)
       (Plaquette.pairLeft axes)
       (basisInsertion2Zero site axes coordinate maskFalse)
-
     first3 = inverseLinkJetFirstZero background field
       site (Plaquette.pairRight axes)
       (basisInsertion3Zero site axes coordinate maskFalse)
-  in
-  orderedFirstProductAllFirstZero
+  in orderedFirstProductAllFirstZero
     (Plaquette.plaquetteFactorJets background field (pair site axes))
     (first0 , (first1 , (first2 , (first3 , tt))))
 
 plaquetteFirstVariationOutsideBoundaryZero :
   ∀ background site axes coordinate →
   Boundary.plaquetteBoundaryMask (pair site axes) coordinate ≡ false →
-  plaquetteFirstVariationCovector background (pair site axes) coordinate
-  ≡ 0ℚ
-plaquetteFirstVariationOutsideBoundaryZero
-    background site axes coordinate maskFalse =
+  plaquetteFirstVariationCovector background (pair site axes) coordinate ≡ 0ℚ
+plaquetteFirstVariationOutsideBoundaryZero background site axes coordinate maskFalse =
   trans
     (cong (λ selected → - Wilson.q0 selected)
-      (plaquetteBasisFirstProductZero
-        background site axes coordinate maskFalse))
+      (plaquetteBasisFirstProductZero background site axes coordinate maskFalse))
     (ℚRing.solve [])
 
 plaquetteFirstVariationSupported :
