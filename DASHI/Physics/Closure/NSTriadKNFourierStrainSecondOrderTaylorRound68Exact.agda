@@ -55,7 +55,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Rational.Base using (ℚ; _+_; _*_; _-_; -_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 import DASHI.Physics.Closure.NSTriadKNRationalLerayProjectionExact as V
 import DASHI.Physics.Closure.NSTriadKNLuoAngularStrainDisplayedFormulaZeroExact as Matrix
@@ -63,6 +63,7 @@ import DASHI.Physics.Closure.NSTriadKNCorrectedFourierAngularStrainExact as Angu
 import DASHI.Physics.Closure.NSTriadKNFourierStrainMultiplierRound38Exact as Strain
 import DASHI.Physics.Closure.NSTriadKNFourierStrainExactFiniteDifferenceRound68Exact as FD
 
+matrixAdd : Matrix.Matrix3 → Matrix.Matrix3 → Matrix.Matrix3
 matrixAdd = FD.matrixAdd
 
 inverseFirstVariation : V.ProjectionMode → V.Vector3 → ℚ
@@ -124,7 +125,6 @@ strainSecondRemainder left right h omega =
         (inverseTaylorRemainder left right h)
         (Angular.angularStrain (V.mode left) omega)))
 
--- Pure componentwise regrouping behind the exact Taylor formula.
 taylorMatrixRegroup : ∀ il ir d0 base linear quadratic →
   matrixAdd
     (Strain.scaleMatrix ir (matrixAdd linear quadratic))
@@ -175,9 +175,7 @@ fourierStrainSecondOrderTaylorExact left right h omega rightIsIncrement =
   trans finiteDifference
     (cong
       (matrixAdd (Strain.fourierStrainMultiplier left omega))
-      (trans
-        (taylorMatrixRegroup il ir d0 base linear quadratic)
-        refl))
+      (taylorMatrixRegroup il ir d0 base linear quadratic))
 
 inverseRemainderCarriesTwoLowFactors : Bool
 inverseRemainderCarriesTwoLowFactors = true
