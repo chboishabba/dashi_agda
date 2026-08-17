@@ -31,7 +31,7 @@ module DASHI.Physics.YangMills.BalabanClayT4WilsonOneLoopOrbitSummedIntervalExac
 ------------------------------------------------------------------------
 
 open import Data.Integer.Base using (+_)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _*_; _/_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _-_; _*_; _/_)
 import Data.Rational.Tactic.RingSolver as ℚRing
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -131,9 +131,6 @@ fourOrbitFiniteSumReductionLevel = machineChecked
 sevenOrbitFiniteSumReductionLevel : ProofLevel
 sevenOrbitFiniteSumReductionLevel = machineChecked
 
--- Physical source leaves: prove that the literal box lower contributions and
--- quadrature losses can be represented by one of these orbit data structures.
--- Once that is done the 240-cell summation itself is no longer a proof burden.
 literalFourOrbitBoxCertificateLevel : ProofLevel
 literalFourOrbitBoxCertificateLevel = conditional
 
