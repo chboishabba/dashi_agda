@@ -20,6 +20,9 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound57HyperoctahedralWals
 --     -> literal source equivariance reduced to 7 B4-generator equations
 --        or 6 fixed-axis equations
 --     -> every finite generator word fixes the expression
+--     -> atom-level generated-box environment covariance transports through
+--        the SAME recursive expression evaluator
+--     -> whole-expression RationalInterval equality across symmetry boxes
 --     -> C2^4 Walsh--Fourier sign projection
 --     -> exact nontrivial sign-sector orbit cancellation
 --     -> four- or seven-representative finite sum arithmetic.
@@ -35,7 +38,9 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound57HyperoctahedralWals
 -- Physical source equivariance remains a literal theorem obligation.  The
 -- existing source-facing regularIntegrand is still abstract DiagramExpression
 -- data, so this root does not manufacture an invariance proof for it.  The new
--- generator certificate makes that obligation finite and source-auditable.
+-- generator certificate makes that obligation finite and source-auditable;
+-- the evaluation-transport theorem removes any need for 240 independent
+-- whole-expression interval receipts once atom covariance is instantiated.
 ------------------------------------------------------------------------
 
 import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound56PiBetaG2Validation as R56
@@ -45,6 +50,7 @@ import DASHI.Physics.YangMills.BalabanClayT4WilsonOneLoopSignCharacterProjection
 import DASHI.Physics.YangMills.BalabanClayT4SignOrbitGlobalCancellationExact as SignOrbit
 import DASHI.Physics.YangMills.BalabanClayT4WilsonOneLoopJointMomentumEquivarianceExact as Joint
 import DASHI.Physics.YangMills.BalabanClayT4WilsonOneLoopHyperoctahedralGeneratorCertificateExact as GeneratorCertificate
+import DASHI.Physics.YangMills.BalabanClayT4WilsonOneLoopOrbitEvaluationTransportExact as EvaluationTransport
 import DASHI.Physics.YangMills.BalabanClayT4WilsonOneLoopOrbitSummedIntervalExact as OrbitSum
 import DASHI.Physics.YangMills.BalabanP33SelectedGreenSubsetOrbitReductionExact as G2Orbit
 
@@ -81,6 +87,13 @@ sixGeneratorFixedAxisReductionLevel =
   GeneratorCertificate.sixGeneratorFixedAxisReductionLevel
 literalRegularIntegrandFiniteGeneratorCertificateLevel =
   GeneratorCertificate.literalRegularIntegrandFiniteGeneratorCertificateLevel
+
+generatorEvaluationTransportLevel =
+  EvaluationTransport.generatorEvaluationTransportLevel
+literalRegularIntegrandIntervalTransportLevel =
+  EvaluationTransport.literalRegularIntegrandIntervalTransportLevel
+literalGeneratedBoxAtomCovarianceLevel =
+  EvaluationTransport.literalGeneratedBoxAtomCovarianceLevel
 
 fourOrbitFiniteSumReductionLevel = OrbitSum.fourOrbitFiniteSumReductionLevel
 sevenOrbitFiniteSumReductionLevel = OrbitSum.sevenOrbitFiniteSumReductionLevel
