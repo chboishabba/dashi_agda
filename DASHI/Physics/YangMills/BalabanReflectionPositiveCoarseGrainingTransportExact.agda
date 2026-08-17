@@ -32,7 +32,7 @@ module DASHI.Physics.YangMills.BalabanReflectionPositiveCoarseGrainingTransportE
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _≤_)
-open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -55,15 +55,12 @@ record ReflectionCompatibleCoarseGraining
     coarsePositiveTime : Coarse → Set
     coarseReflect : Coarse → Coarse
     coarseMultiply : Coarse → Coarse → Coarse
-
     pullbackPositiveTime : ∀ observable →
       coarsePositiveTime observable →
       positiveTime fine (pullback observable)
-
     pullbackReflectExact : ∀ observable →
       pullback (coarseReflect observable)
       ≡ reflect fine (pullback observable)
-
     pullbackMultiplyExact : ∀ left right →
       pullback (coarseMultiply left right)
       ≡ multiply fine (pullback left) (pullback right)
@@ -108,7 +105,7 @@ coarseReflectionPositive :
 coarseReflectionPositive {fine = fine} coarse observable positive =
   subst
     (λ value → 0ℚ ≤ value)
-    (coarseReflectedQuadraticPullsBackExact coarse observable)
+    (sym (coarseReflectedQuadraticPullsBackExact coarse observable))
     (reflectionPositive fine
       (pullback coarse observable)
       (pullbackPositiveTime coarse observable positive))
@@ -116,7 +113,5 @@ coarseReflectionPositive {fine = fine} coarse observable positive =
 reflectionCompatibleCoarseGrainingPreservesRPLevel : ProofLevel
 reflectionCompatibleCoarseGrainingPreservesRPLevel = machineChecked
 
--- Bałaban-specific remaining theorem: instantiate the pullback with the literal
--- RG block map and prove reflection equivariance plus positive-half locality.
 literalBalabanBlockReflectionCompatibilityLevel : ProofLevel
 literalBalabanBlockReflectionCompatibilityLevel = conditional
