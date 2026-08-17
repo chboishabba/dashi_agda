@@ -11,7 +11,7 @@ open import Relation.Binary.PropositionalEquality using (sym; trans)
 -- Edit transport and provenance-bearing occurrence identity.
 --
 -- Runtime motivation: a source edit may move an otherwise unchanged semantic
--- occurrence.  Correspondence must therefore transport source coordinates; it
+-- occurrence. Correspondence must therefore transport source coordinates; it
 -- must not identify leaves by the semantic value whose change we are trying to
 -- measure.
 --
@@ -74,7 +74,7 @@ SemanticValueChanged before after =
 
 ------------------------------------------------------------------------
 -- Unique occurrence correspondence is a prerequisite for a verified locality
--- certificate.  Two different leaves may have the same lexical/content anchor;
+-- certificate. Two different leaves may have the same lexical/content anchor;
 -- that is not enough to choose between them.
 ------------------------------------------------------------------------
 
@@ -136,7 +136,7 @@ ambiguityRefutesVerifiedCorrespondence certificate before eligible left right le
 --   sound: every actually changed leaf lies inside the predicted closure;
 --   exact: every predicted leaf actually changes.
 --
--- The runtime may safely over-approximate while still being inefficient.  A
+-- The runtime may safely over-approximate while still being inefficient. A
 -- verified soundness claim therefore must not be silently promoted to exactness.
 ------------------------------------------------------------------------
 
@@ -160,15 +160,15 @@ ClosureSound :
   {SourceAtom Leaf : Set} →
   EditedDependencyClosure SourceAtom Leaf →
   (Leaf → Set) → Set
-ClosureSound closure Changed =
-  (leaf : _) → Changed leaf → InEditedClosure closure leaf
+ClosureSound {Leaf = Leaf} closure Changed =
+  (leaf : Leaf) → Changed leaf → InEditedClosure closure leaf
 
 ClosureExact :
   {SourceAtom Leaf : Set} →
   EditedDependencyClosure SourceAtom Leaf →
   (Leaf → Set) → Set
-ClosureExact closure Changed =
-  (leaf : _) → InEditedClosure closure leaf → Changed leaf
+ClosureExact {Leaf = Leaf} closure Changed =
+  (leaf : Leaf) → InEditedClosure closure leaf → Changed leaf
 
 record ExactClosureLocality
   {SourceAtom Leaf : Set}
