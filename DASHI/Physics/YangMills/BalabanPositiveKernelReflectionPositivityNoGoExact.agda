@@ -28,6 +28,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 ------------------------------------------------------------------------
 -- A positive two-state kernel matrix [[1,2],[2,1]].
+-- Nat-valued weights make entrywise nonnegativity structural.
 ------------------------------------------------------------------------
 
 data TwoState : Set where
@@ -38,17 +39,6 @@ positiveKernelWeight state0 state0 = 1
 positiveKernelWeight state0 state1 = 2
 positiveKernelWeight state1 state0 = 2
 positiveKernelWeight state1 state1 = 1
-
-rowMass : TwoState → Nat
-rowMass state =
-  positiveKernelWeight state state0
-  + positiveKernelWeight state state1
-
-row0MassIsThree : rowMass state0 ≡ 3
-row0MassIsThree = refl
-
-row1MassIsThree : rowMass state1 ≡ 3
-row1MassIsThree = refl
 
 kernelSymmetric : ∀ left right →
   positiveKernelWeight left right ≡ positiveKernelWeight right left
