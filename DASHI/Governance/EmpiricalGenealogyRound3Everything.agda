@@ -4,8 +4,9 @@ module DASHI.Governance.EmpiricalGenealogyRound3Everything where
 -- Round three: move from generic theorem surfaces into bounded empirical
 -- adapters, typed genealogy, paper claim-promotion audit, institutional
 -- accessibility/delegation, effective-choice concentration, situated choice,
--- authority-bearing legibility, minimal future-safe observation and
--- multidimensional contestability access.
+-- measured situated-choice receipts, authority-bearing legibility,
+-- correction/material-persistence separation, minimal future-safe observation
+-- and multidimensional contestability access.
 --
 -- Source manifests used by the typed worked cases are retained under:
 --   Docs/support/reference/climate_genealogy_typed_edges.csv
@@ -35,6 +36,7 @@ import DASHI.Governance.DelegatedEssentialServiceAuthorityExact
 import DASHI.Governance.InstitutionalDependencyEntrapmentBridgeExact
 import DASHI.Governance.AliceBrownInstitutionalAgencyChoiceBridgeExact
 import DASHI.Governance.IndigenousRemovalDelegatedInfrastructureExact
+import DASHI.Governance.ReligiousChildhoodEntrapmentEvidenceAtlasExact
 
 ------------------------------------------------------------------------
 -- Choice concentration / situated access / Australian worked adapters.
@@ -44,13 +46,16 @@ import DASHI.Governance.EffectiveChoiceConcentrationExact
 import DASHI.Governance.AustralianSupermarketChoiceConcentrationExact
 import DASHI.Governance.AustralianTwoPartyPreferredObservationExact
 import DASHI.Governance.SituatedEffectiveChoiceExact
+import DASHI.Governance.MeasuredSituatedChoiceReceiptExact
 import DASHI.Governance.PluralityWithoutPowerParityExact
 
 ------------------------------------------------------------------------
--- Colonial representation/action and situated knowledge counterexample.
+-- Colonial representation/action, legal correction/material persistence, and
+-- situated knowledge counterexample.
 ------------------------------------------------------------------------
 
 import DASHI.Governance.AuthorityBearingLegibilityFailureExact
+import DASHI.Governance.NormativeCorrectionMaterialPersistenceExact
 import DASHI.Governance.BurkeWillsSituatedKnowledgeCounterexampleExact
 
 ------------------------------------------------------------------------
