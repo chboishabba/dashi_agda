@@ -34,25 +34,25 @@ module DASHI.Papers.NavierStokes.TheoremInterfaceRound73Exact where
 --
 -- ROUND73 PAPER DELTA
 --
--- Round72 killed raw polynomial lattice cardinality as a sufficient funding
--- invariant.  Round73 now has one same-object concentration/funding spine:
+-- The exact finite algebra now supplies one concentration/funding spine:
 --
---   source-native factorization a_tau=x_tau y_tau
---   -> mu^2 <= Q W
---   -> favorable physical normalization W<=1 gives mu^2<=Q
---   -> Q is identified with actual event charge
---   -> Carleson node has floor exactly mu^2 and charge exactly Q
---   -> additive physical descendants share one finite budget.
+--   source-native factorization -> mu^2 <= QW
+--   -> frame W<=B E_phys
+--   -> B E_phys<=1 gives W<=1 and mu^2<=Q
+--   -> Q = actual physical event charge
+--   -> Carleson node floor = mu^2, charge = Q
+--   -> additive descendants share one finite budget.
 --
--- General frame control W<=B E_phys is also retained when W<=1 is too strong.
--- Exact C2 exchange-odd sectors cancel before majorization, but physical HH/CC
--- exchange identification remains fail-closed.
+-- The literal Fourier lane has also advanced.  Exact complex scalar linearity
+-- of the Leray projector gives, on the SAME physical triad,
 --
--- The decisive physical theorem is no longer an atom-cardinality bound.  It is
--- the construction of the literal velocity/projector factor source together
--- with a physical frame/normalization and charge identity on the same localized
--- trajectory, followed by additive descendant propagation whose cumulative
--- squared-amplification floors exceed the finite budget.
+--   -i P_k[(u_p dot q)u_q]
+--     = [-i(u_p dot q)] P_k u_q,
+--
+-- and the tested complex interaction factors accordingly.  The remaining
+-- low/high scalar theorem is now specifically the physical phase/polarisation
+-- result needed to cross the final real-part map source-natively; no identity
+-- Re(zw)=Re(z)Re(w) is assumed.
 --
 -- Clay promotion remains false.
 ------------------------------------------------------------------------
@@ -67,8 +67,7 @@ round73PaperFrameComplexityAlgebra : Bool
 round73PaperFrameComplexityAlgebra = R73.round73FrameComplexityAlgebraConstructed
 
 round73PaperFactorizationAuthorityCarrier : Bool
-round73PaperFactorizationAuthorityCarrier =
-  R73.round73FactorizationAuthorityCarrierConstructed
+round73PaperFactorizationAuthorityCarrier = R73.round73FactorizationAuthorityCarrierConstructed
 
 round73PaperLowLegFactorizationCarrier : Bool
 round73PaperLowLegFactorizationCarrier = R73.round73LowLegFactorizationCarrierConstructed
@@ -80,12 +79,9 @@ round73PaperNormalizedComplexityRemovesCardinalityLoss : Bool
 round73PaperNormalizedComplexityRemovesCardinalityLoss =
   R73.round73NormalizedComplexityRemovesCardinalityLoss
 
-round73PaperSquareFundingCompiler : Bool
-round73PaperSquareFundingCompiler = R73.round73SquareFundingCompilerConstructed
-
-round73PaperNormalizedOverlayPhysicalChargeBridge : Bool
-round73PaperNormalizedOverlayPhysicalChargeBridge =
-  R73.round73NormalizedOverlayPhysicalChargeBridgeConstructed
+round73PaperFrameProductCompilesToNormalizedComplexity : Bool
+round73PaperFrameProductCompilesToNormalizedComplexity =
+  R73.round73FrameProductCompilesToNormalizedComplexity
 
 round73PaperSquareFundingCarlesonUnified : Bool
 round73PaperSquareFundingCarlesonUnified = R73.round73SquareFundingCarlesonUnified
@@ -94,13 +90,20 @@ round73PaperPhysicalNormalizedWitnessDirectCarleson : Bool
 round73PaperPhysicalNormalizedWitnessDirectCarleson =
   R73.round73PhysicalNormalizedWitnessCompilesDirectlyToCarlesonNode
 
-round73PaperHalfAmplitudeNeedsFourWayChargeMultiplicity : Bool
-round73PaperHalfAmplitudeNeedsFourWayChargeMultiplicity =
-  R73.round73HalfAmplitudeNeedsFourWayChargeMultiplicity
+round73PaperLerayComplexScalarLinearity : Bool
+round73PaperLerayComplexScalarLinearity = R73.round73LerayComplexScalarLinearityConstructed
 
-round73PaperLiteralVelocityProjectorFactorization : Bool
-round73PaperLiteralVelocityProjectorFactorization =
-  R73.round73LiteralVelocityProjectorProducesSourceNativeTriadicFactorization
+round73PaperLiteralComplexOrderedFactorization : Bool
+round73PaperLiteralComplexOrderedFactorization =
+  R73.round73LiteralComplexOrderedFactorizationConstructed
+
+round73PaperTestedComplexProductFactorization : Bool
+round73PaperTestedComplexProductFactorization =
+  R73.round73TestedComplexProductFactorizationConstructed
+
+round73PaperPhysicalPhaseAlignedRationalTriadicFactorization : Bool
+round73PaperPhysicalPhaseAlignedRationalTriadicFactorization =
+  R73.round73PhysicalPhaseAlignedRationalTriadicFactorization
 
 round73PaperPhysicalTriadicFrameNormalizationAndChargeIdentity : Bool
 round73PaperPhysicalTriadicFrameNormalizationAndChargeIdentity =
@@ -117,21 +120,21 @@ round73PaperCumulativeSquaredFloorsOutrunBudget =
 round73PaperClayPromotion : Bool
 round73PaperClayPromotion = R73.round73ClayPromotion
 
-round73PaperNormalizedComplexityRemovesCardinalityLossIsTrue :
-  round73PaperNormalizedComplexityRemovesCardinalityLoss ≡ true
-round73PaperNormalizedComplexityRemovesCardinalityLossIsTrue = refl
+round73PaperLiteralComplexOrderedFactorizationIsTrue :
+  round73PaperLiteralComplexOrderedFactorization ≡ true
+round73PaperLiteralComplexOrderedFactorizationIsTrue = refl
+
+round73PaperFrameProductCompilesToNormalizedComplexityIsTrue :
+  round73PaperFrameProductCompilesToNormalizedComplexity ≡ true
+round73PaperFrameProductCompilesToNormalizedComplexityIsTrue = refl
 
 round73PaperSquareFundingCarlesonUnifiedIsTrue :
   round73PaperSquareFundingCarlesonUnified ≡ true
 round73PaperSquareFundingCarlesonUnifiedIsTrue = refl
 
-round73PaperPhysicalNormalizedWitnessDirectCarlesonIsTrue :
-  round73PaperPhysicalNormalizedWitnessDirectCarleson ≡ true
-round73PaperPhysicalNormalizedWitnessDirectCarlesonIsTrue = refl
-
-round73PaperLiteralVelocityProjectorFactorizationIsFalse :
-  round73PaperLiteralVelocityProjectorFactorization ≡ false
-round73PaperLiteralVelocityProjectorFactorizationIsFalse = refl
+round73PaperPhysicalPhaseAlignedRationalTriadicFactorizationIsFalse :
+  round73PaperPhysicalPhaseAlignedRationalTriadicFactorization ≡ false
+round73PaperPhysicalPhaseAlignedRationalTriadicFactorizationIsFalse = refl
 
 round73PaperAdditiveNormalizedDescendantsIsFalse :
   round73PaperAdditiveNormalizedDescendants ≡ false
