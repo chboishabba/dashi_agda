@@ -16,6 +16,14 @@ For reverse dependencies, `ClosureSound` means every actually changed leaf is in
 
 `VerifiedEditLocality` requires both unique transported correspondence and changed-leaf inclusion in the reverse-dependency closure. One ambiguous match or one changed leaf outside that closure is a direct falsifier.
 
+`DASHI/Cognition/PNF/EditTransportCompositionExact.agda` adds the revision-lineage algebra needed by long-lived documents and chats. Edit transports have an identity, compose coordinatewise, satisfy left/right identity and associativity pointwise, and therefore support a version chain
+
+```text
+v0 -> v1 -> ... -> vn
+```
+
+without requiring a new global `v0 <-> vn` matching problem after every revision. The same module proves dependency-closure monotonicity under enlarged edit sets / reachability: adding edited source atoms cannot make an already predicted affected leaf disappear when the reverse-dependency relation is fixed or enlarged.
+
 `DASHI/Cognition/PNF/EditTransportLeafLocalityRegression.agda` contains finite witnesses that the same transported occurrence may carry a changed semantic value and that sound closure locality does not imply precision/minimality.
 
 No external mathematical source or DOI is asserted for this exact construction. It is an internal ITIR/PNF formalization extracted from the runtime audit and existing provenance/reopenability architecture.
