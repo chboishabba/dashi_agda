@@ -1,7 +1,21 @@
 module DASHI.Physics.YangMills.BalabanClayT4HyperoctahedralGridOrbitExact where
 
 ------------------------------------------------------------------------
--- PRIMARY SOURCES
+-- PRIMARY / METHOD SOURCES
+--
+-- Stefano Capitani,
+-- "Lattice Perturbation Theory", Physics Reports 382 (2003), 113--302.
+-- DOI: 10.1016/S0370-1573(03)00211-4.  arXiv: hep-lat/0211036.
+-- Relationship: standard lattice-perturbation reference for hypercubic
+-- symmetry and Brillouin-zone integral technology.
+--
+-- Martin Luescher and Peter Weisz,
+-- "Coordinate space methods for the evaluation of Feynman diagrams in
+-- lattice field theories", Nuclear Physics B 445 (1995), 429--450.
+-- DOI: 10.1016/0550-3213(95)00185-U.  arXiv: hep-lat/9502017.
+-- Relationship guardrail: the Luescher--Weisz method is a coordinate-SPACE
+-- recursion technique.  The finite 4^4 box-orbit quotient below is a distinct
+-- exact preprocessing step; the two are not identified.
 --
 -- Hermann Weyl,
 -- "The Classical Groups: Their Invariants and Representations",
@@ -17,7 +31,8 @@ module DASHI.Physics.YangMills.BalabanClayT4HyperoctahedralGridOrbitExact where
 -- DASHI CONTRIBUTION
 --
 -- Put the generated 4^4 Brillouin grid under the literal signed-coordinate
--- and adjacent-coordinate-swap generators of B4 = (C2)^4 semidirect S4.
+-- and adjacent-coordinate-swap generators of B4 = (C2)^4 semidirect S4,
+-- the standard four-dimensional hypercubic/hyperoctahedral point group.
 -- The geometric orbit invariant is the number of outer coordinates.  On the
 -- exact generated grid this gives
 --
