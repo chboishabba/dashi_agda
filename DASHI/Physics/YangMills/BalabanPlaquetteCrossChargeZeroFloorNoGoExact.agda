@@ -24,15 +24,13 @@ module DASHI.Physics.YangMills.BalabanPlaquetteCrossChargeZeroFloorNoGoExact whe
 --   * normalize the selected variation;
 --   * prove the selected variation is quantitatively nonzero and exclude zero;
 --   * formulate the uniform estimates relative to the charge itself.
---
--- This file proves the zero-charge fact on the literal physical carrier; it
--- does not choose among those three later analytic routes.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _*_)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Integer.Base using (+_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _*_; _/_)
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (trans)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Coordinates
@@ -40,7 +38,6 @@ import DASHI.Physics.YangMills.BalabanP33PeriodicFourDimensionalHodgeIdentityExa
 import DASHI.Physics.YangMills.BalabanP33PhysicalBackgroundGaugeFirstExact as Gauge
 import DASHI.Physics.YangMills.BalabanP33PhysicalWilsonIncidenceExact as Incidence
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionWilsonSecondVariationExact as Q
-import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
 
 zeroPhysicalField : Coordinates.PhysicalSU2BondField4
 zeroPhysicalField coordinate bond = 0ℚ
@@ -66,10 +63,7 @@ zeroPlaquetteDiagonalCharge left right site =
       rightForward = zeroLinkInsertionCharge right (Periodic.shiftForward left site)
       leftForward = zeroLinkInsertionCharge left (Periodic.shiftForward right site)
       right0 = zeroLinkInsertionCharge right site
-     in
-     trans
-       (cong4 left0 rightForward leftForward right0)
-       (ℚRing.solve []))
+     in cong4 left0 rightForward leftForward right0)
   where
   cong4 : ∀ {a b c d : ℚ} →
     a ≡ 0ℚ → b ≡ 0ℚ → c ≡ 0ℚ → d ≡ 0ℚ →
