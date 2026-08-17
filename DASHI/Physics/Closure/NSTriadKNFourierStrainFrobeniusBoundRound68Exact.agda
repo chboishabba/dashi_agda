@@ -42,6 +42,7 @@ open import Data.Rational.Base using
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Relation.Nullary.Decidable.Core using (toWitness)
 
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
 import DASHI.Physics.Closure.NSTriadKNRationalLerayProjectionExact as V
@@ -105,15 +106,11 @@ crossNormBelowProduct theta omega =
 normSquaredNonnegative : ∀ value → 0ℚ ≤ V.normSquared value
 normSquaredNonnegative (V.v3 x y z) =
   L2.addNonnegative
-    (L2.squareNonnegative x)
-    (L2.addNonnegative (L2.squareNonnegative y) (L2.squareNonnegative z))
+    (L2.addNonnegative (L2.squareNonnegative x) (L2.squareNonnegative y))
+    (L2.squareNonnegative z)
 
 halfNonnegative : 0ℚ ≤ half
-halfNonnegative =
-  let
-    open import Relation.Nullary.Decidable.Core using (toWitness)
-    open ℚP using (_≤?_)
-  in toWitness {a? = 0ℚ ≤? half} _
+halfNonnegative = toWitness {a? = 0ℚ ℚP.≤? half} _
 
 angularStrainFrobeniusBound : ∀ theta omega →
   frobeniusSquared (Angular.angularStrain theta omega)
