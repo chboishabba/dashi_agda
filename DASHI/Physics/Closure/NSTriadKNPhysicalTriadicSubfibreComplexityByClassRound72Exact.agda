@@ -31,18 +31,20 @@ module DASHI.Physics.Closure.NSTriadKNPhysicalTriadicSubfibreComplexityByClassRo
 -- effective raw complexity is coded by ONE dyadic low-leg cube, not by the
 -- high/output shell cube.
 --
--- This is the exact repository statement behind the heuristic
--- O(2^(3 ell)).  HH/CC deliberately remain unresolved by this theorem: both
--- inputs are high/comparable there and raw counting alone may retain high-scale
--- cubic complexity.  Those classes require dominant-hat/Gram/energy structure.
+-- Combining this with the exact cutoff-cube cardinality theorem gives the
+-- fully constructed cubic majorant (3*2^ell)^3.  HH/CC deliberately remain
+-- unresolved by the low-leg argument: those classes need dominant-hat/Gram/
+-- energy structure rather than a fictitious low coordinate.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
-open import Data.Integer.Base using (ℤ; +_; -[1+_]; ∣_∣)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Data.Integer.Base using (ℤ; +_; -[1+_]; _-_; ∣_∣)
 open import Data.Nat.Base using (_≤_; z≤n; s≤s)
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+import Data.Nat.Properties as Nat
+open import Relation.Binary.PropositionalEquality using
+  (cong; cong₂; subst; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier as Cube
@@ -51,6 +53,7 @@ import DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber as Output
 import DASHI.Physics.Closure.NSTriadKNOfficialInfinityNormTriangle as Infinity
 import DASHI.Physics.Closure.NSTriadKNCeilLogShellBounds as Bounds
 import DASHI.Physics.Closure.NSTriadKNLiteralDyadicShellConstants as Shell
+import DASHI.Physics.Closure.NSTriadKNLiteralDyadicConsequencesClosed as Dyadic
 import DASHI.Physics.Closure.NSTriadKNLuoPhysicalFiveClassSupportRound25Exact as Support
 import DASHI.Physics.Closure.NSTriadKNFixedOutputFiberThreeDOFRound72Exact as ThreeDOF
 
@@ -73,24 +76,22 @@ infinityNormBoundGivesCutoff {N} {mode} normBound =
         (subst
           (λ magnitude → magnitude ≤ N)
           (sym (integerMagnitudeIsAbs (Z3.kx mode)))
-          (Data.Nat.Properties.≤-trans
+          (Nat.≤-trans
             (Infinity.xMagnitude≤InfinityNorm mode) normBound))))
     (Cube.intervalComplete
       (standardLeToCubeLe
         (subst
           (λ magnitude → magnitude ≤ N)
           (sym (integerMagnitudeIsAbs (Z3.ky mode)))
-          (Data.Nat.Properties.≤-trans
+          (Nat.≤-trans
             (Infinity.yMagnitude≤InfinityNorm mode) normBound))))
     (Cube.intervalComplete
       (standardLeToCubeLe
         (subst
           (λ magnitude → magnitude ≤ N)
           (sym (integerMagnitudeIsAbs (Z3.kz mode)))
-          (Data.Nat.Properties.≤-trans
+          (Nat.≤-trans
             (Infinity.zMagnitude≤InfinityNorm mode) normBound))))
-  where
-  import Data.Nat.Properties
 
 modeInOwnDyadicShellCube :
   ∀ mode →
@@ -111,14 +112,12 @@ pCoordinateFromQK τ coordinate =
     (sym (Infinity.sumMinusLeft
       (coordinate (Physical.q τ))
       (coordinate (Physical.p τ))))
-    (trans
-      (cong
-        (λ total → total - coordinate (Physical.q τ))
-        (trans
-          (cong coordinate
-            (Infinity.addModeCommutative (Physical.q τ) (Physical.p τ)))
-          (cong coordinate (Physical.resonance τ))))
-      refl)
+    (cong
+      (λ total → total - coordinate (Physical.q τ))
+      (trans
+        (cong coordinate
+          (Infinity.addModeCommutative (Physical.q τ) (Physical.p τ)))
+        (cong coordinate (Physical.resonance τ))))
 
 pDeterminedByQAndOutput :
   (left right : Physical.PhysicalTriadIncidence) →
@@ -130,20 +129,17 @@ pDeterminedByQAndOutput left right qExact kExact =
     (trans
       (pCoordinateFromQK left Z3.kx)
       (trans
-        (Relation.Binary.PropositionalEquality.cong₂ _-_
-          (cong Z3.kx kExact) (cong Z3.kx qExact))
+        (cong₂ _-_ (cong Z3.kx kExact) (cong Z3.kx qExact))
         (sym (pCoordinateFromQK right Z3.kx))))
     (trans
       (pCoordinateFromQK left Z3.ky)
       (trans
-        (Relation.Binary.PropositionalEquality.cong₂ _-_
-          (cong Z3.ky kExact) (cong Z3.ky qExact))
+        (cong₂ _-_ (cong Z3.ky kExact) (cong Z3.ky qExact))
         (sym (pCoordinateFromQK right Z3.ky))))
     (trans
       (pCoordinateFromQK left Z3.kz)
       (trans
-        (Relation.Binary.PropositionalEquality.cong₂ _-_
-          (cong Z3.kz kExact) (cong Z3.kz qExact))
+        (cong₂ _-_ (cong Z3.kz kExact) (cong Z3.kz qExact))
         (sym (pCoordinateFromQK right Z3.kz))))
 
 record LHFixedOutputLowLegCode
@@ -222,21 +218,39 @@ fixedOutputHLQLegDeterminesTriadGeometry leftMember rightMember qExact =
       (Output.physicalOutputFiberSound leftMember)
       (sym (Output.physicalOutputFiberSound rightMember)))
 
+oneCubeLePow2 : ∀ ell → 1 Cube.≤ᴺ Shell.pow2 ell
+oneCubeLePow2 zero = Cube.≤ᴺ-refl 1
+oneCubeLePow2 (suc ell) =
+  let
+    old = Shell.pow2 ell
+    oldPositive = oneCubeLePow2 ell
+    oldBelowDouble : old Cube.≤ᴺ old + old
+    oldBelowDouble =
+      Cube.≤ᴺ-+-right old (Cube.≤ᴺ-refl old)
+    oneBelowDouble : 1 Cube.≤ᴺ old + old
+    oneBelowDouble = Cube.≤ᴺ-trans oldPositive oldBelowDouble
+  in
+  Cube.≤ᴺ-substRight (Dyadic.doublePow2 ell) oneBelowDouble
+
 lowLegCubeMajorant : Nat → Nat
 lowLegCubeMajorant ell = ThreeDOF.cubeMajorant (Shell.pow2 ell)
 
 lowLegComplexityCubicBound :
-  ∀ ell → 1 Cube.≤ᴺ Shell.pow2 ell →
+  ∀ ell →
   Cube.cutoffCubeCardinality (Shell.pow2 ell)
     Cube.≤ᴺ lowLegCubeMajorant ell
-lowLegComplexityCubicBound ell positive =
-  ThreeDOF.cutoffCubeCardinalityCubicBound (Shell.pow2 ell) positive
+lowLegComplexityCubicBound ell =
+  ThreeDOF.cutoffCubeCardinalityCubicBound
+    (Shell.pow2 ell) (oneCubeLePow2 ell)
 
 round72LHComplexityUsesLowLegShell : Bool
 round72LHComplexityUsesLowLegShell = true
 
 round72HLComplexityUsesLowLegShell : Bool
 round72HLComplexityUsesLowLegShell = true
+
+round72LowLegCubicCardinalityMajorantConstructed : Bool
+round72LowLegCubicCardinalityMajorantConstructed = true
 
 round72HHRawCountingClosedByLowLegArgument : Bool
 round72HHRawCountingClosedByLowLegArgument = false
@@ -247,6 +261,10 @@ round72CCRawCountingClosedByLowLegArgument = false
 round72LHComplexityUsesLowLegShellIsTrue :
   round72LHComplexityUsesLowLegShell ≡ true
 round72LHComplexityUsesLowLegShellIsTrue = refl
+
+round72LowLegCubicCardinalityMajorantConstructedIsTrue :
+  round72LowLegCubicCardinalityMajorantConstructed ≡ true
+round72LowLegCubicCardinalityMajorantConstructedIsTrue = refl
 
 round72HHRawCountingClosedByLowLegArgumentIsFalse :
   round72HHRawCountingClosedByLowLegArgument ≡ false
