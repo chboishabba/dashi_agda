@@ -108,6 +108,45 @@ monforteNetherwaySmith2023 =
     "Participation in a World Cafe does not by itself prove equal authority, representative inclusion, policy safety or just outcomes."
     true refl
 
+bringingThemHome1997 : EarlyLearningReference
+bringingThemHome1997 =
+  earlyLearningReference
+    "bringing-them-home-1997"
+    "Bringing them Home: Report of the National Inquiry into the Separation of Aboriginal and Torres Strait Islander Children from Their Families"
+    ("Human Rights and Equal Opportunity Commission" ∷ [])
+    1997
+    "National Inquiry report tabled in the Parliament of Australia"
+    "no-doi-assigned"
+    "Documents forced removal, institutional harms and the need for a self-determination-based framework stronger than consultation alone."
+    "The history does not make every contemporary institution or professional interaction unsafe; it requires that institutional trust and Indigenous self-determination remain explicit policy coordinates."
+    true refl
+
+snaiccStrategy2021 : EarlyLearningReference
+snaiccStrategy2021 =
+  earlyLearningReference
+    "national-aboriginal-torres-strait-islander-early-childhood-strategy-2021"
+    "National Aboriginal and Torres Strait Islander Early Childhood Strategy"
+    ("SNAICC - National Voice for our Children" ∷ "National Indigenous Australians Agency" ∷ [])
+    2021
+    "Australian national early-childhood strategy / consultation process"
+    "no-doi-assigned"
+    "Grounds community-led shared decision-making and Aboriginal and Torres Strait Islander participation in defining early-childhood priorities."
+    "Community control is not reducible to nuclear parental sovereignty and should not be inferred from generic family-choice language."
+    true refl
+
+kindyUplift2026 : EarlyLearningReference
+kindyUplift2026 =
+  earlyLearningReference
+    "queensland-kindy-uplift-2026"
+    "Kindy Uplift"
+    ("Queensland Department of Education" ∷ [])
+    2026
+    "Queensland Early Childhood Education and Care programme"
+    "no-doi-assigned"
+    "Operational example of data-informed differential capability support, including culturally safe and inclusive kindergarten priorities."
+    "A programme example is not proof that every differentiated funding design is equitable or sufficient."
+    true refl
+
 canonicalEarlyLearningIntersectionalSources : List EarlyLearningReference
 canonicalEarlyLearningIntersectionalSources =
   heathBrown2021
@@ -116,4 +155,7 @@ canonicalEarlyLearningIntersectionalSources =
   ∷ forsterVerbist2012
   ∷ garciaHeckmanLeafPrados2016
   ∷ monforteNetherwaySmith2023
+  ∷ bringingThemHome1997
+  ∷ snaiccStrategy2021
+  ∷ kindyUplift2026
   ∷ []
