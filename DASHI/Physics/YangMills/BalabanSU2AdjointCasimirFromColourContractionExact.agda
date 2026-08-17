@@ -33,10 +33,12 @@ module DASHI.Physics.YangMills.BalabanSU2AdjointCasimirFromColourContractionExac
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using ([])
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; _+_; _-_; _*_; _≤_; _/_)
 import Data.Rational.Properties as ℚP
+import Data.Rational.Tactic.RingSolver as ℚRing
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanCompactSimpleCasimirOrbitFactorizationExact as Casimir
@@ -75,18 +77,18 @@ adjointColourContraction : SU2Colour → SU2Colour → ℚ
 adjointColourContraction a b =
   sumColourPairs (λ c d → epsilon a c d * epsilon b c d)
 
--- All nine cases normalize directly in exact rational arithmetic.
+-- All nine cases are certified closed rational polynomial identities.
 su2AdjointColourContractionExact : ∀ a b →
   adjointColourContraction a b ≡ two * kronecker a b
-su2AdjointColourContractionExact c0 c0 = refl
-su2AdjointColourContractionExact c0 c1 = refl
-su2AdjointColourContractionExact c0 c2 = refl
-su2AdjointColourContractionExact c1 c0 = refl
-su2AdjointColourContractionExact c1 c1 = refl
-su2AdjointColourContractionExact c1 c2 = refl
-su2AdjointColourContractionExact c2 c0 = refl
-su2AdjointColourContractionExact c2 c1 = refl
-su2AdjointColourContractionExact c2 c2 = refl
+su2AdjointColourContractionExact c0 c0 = ℚRing.solve []
+su2AdjointColourContractionExact c0 c1 = ℚRing.solve []
+su2AdjointColourContractionExact c0 c2 = ℚRing.solve []
+su2AdjointColourContractionExact c1 c0 = ℚRing.solve []
+su2AdjointColourContractionExact c1 c1 = ℚRing.solve []
+su2AdjointColourContractionExact c1 c2 = ℚRing.solve []
+su2AdjointColourContractionExact c2 c0 = ℚRing.solve []
+su2AdjointColourContractionExact c2 c1 = ℚRing.solve []
+su2AdjointColourContractionExact c2 c2 = ℚRing.solve []
 
 data SU2GaugeGroup : Set where
   SU2 : SU2GaugeGroup
