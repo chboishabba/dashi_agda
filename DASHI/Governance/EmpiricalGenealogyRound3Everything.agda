@@ -5,8 +5,9 @@ module DASHI.Governance.EmpiricalGenealogyRound3Everything where
 -- adapters, typed genealogy, paper claim-promotion audit, institutional
 -- accessibility/delegation, effective-choice concentration, situated choice,
 -- measured situated-choice receipts, authority-bearing legibility,
--- correction/material-persistence separation, minimal future-safe observation
--- and multidimensional contestability access.
+-- correction/material-persistence separation, platform capability evidence,
+-- intervention-bundle reconstruction, minimal future-safe observation and
+-- multidimensional contestability access.
 --
 -- Source manifests used by the typed worked cases are retained under:
 --   Docs/support/reference/climate_genealogy_typed_edges.csv
@@ -20,6 +21,7 @@ import DASHI.Governance.ClimateGenealogyTypedCasesExact
 import DASHI.Governance.JohnPaperClaimPromotionAuditExact
 import DASHI.Governance.JohnPaperClaimManifestV2Exact
 import DASHI.Governance.PalantirProcurementLegibilityAdapterExact
+import DASHI.Governance.PalantirPlatformCapabilityEvidenceExact
 import DASHI.Governance.MinimalSufficientObservationGovernanceExact
 import DASHI.Governance.MultidimensionalContestabilityAccessExact
 
@@ -59,6 +61,13 @@ import DASHI.Governance.NormativeCorrectionMaterialPersistenceExact
 import DASHI.Governance.BurkeWillsSituatedKnowledgeCounterexampleExact
 
 ------------------------------------------------------------------------
+-- Policy-intervention bundle reconstruction.
+------------------------------------------------------------------------
+
+import DASHI.Governance.BCDecriminalizationSourceRegistryExact
+import DASHI.Governance.BritishColumbiaDecriminalizationBundleExact
+
+------------------------------------------------------------------------
 -- Provenance / rhetorical-role / relation-aware cross-pollination.
 ------------------------------------------------------------------------
 
@@ -67,3 +76,4 @@ import DASHI.Governance.BraidedEnemyRoleProvenanceCrossPollinationExact
 
 import DASHI.Governance.EmpiricalGenealogyRound3Regression
 import DASHI.Governance.EmpiricalProducerRound4Regression
+import DASHI.Governance.EmpiricalProducerRound5Regression
