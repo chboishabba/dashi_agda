@@ -22,10 +22,6 @@ module DASHI.Physics.YangMills.BalabanRGTwoMetricUniformComparisonExact where
 --   a d_RG <= c_+ d_phys
 -- with a,lambda >= 0, then
 --   c_- d_phys' <= lambda c_+ d_phys + a epsilon.
---
--- Thus a beautiful contraction in an RG/refinement metric is useless for a
--- continuum mass-gap claim unless c_-, c_+ and the normalization a are
--- controlled uniformly in the cutoff and the physical error is summable.
 ------------------------------------------------------------------------
 
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _*_; _≤_)
@@ -41,25 +37,17 @@ record RGTwoMetricStep : Set where
     physicalScale : ℚ
     contraction : ℚ
     comparisonLower comparisonUpper : ℚ
-
     rgDistance rgDistanceNext : ℚ
     physicalDistance physicalDistanceNext : ℚ
     reopeningError : ℚ
-
     physicalScaleNonnegative : 0ℚ ≤ physicalScale
     contractionNonnegative : 0ℚ ≤ contraction
-
     lowerComparison :
-      comparisonLower * physicalDistanceNext
-      ≤ physicalScale * rgDistanceNext
-
+      comparisonLower * physicalDistanceNext ≤ physicalScale * rgDistanceNext
     rgContractionWithResidual :
-      rgDistanceNext
-      ≤ contraction * rgDistance + reopeningError
-
+      rgDistanceNext ≤ contraction * rgDistance + reopeningError
     upperComparison :
-      physicalScale * rgDistance
-      ≤ comparisonUpper * physicalDistance
+      physicalScale * rgDistance ≤ comparisonUpper * physicalDistance
 open RGTwoMetricStep public
 
 rgContractionTransfersToPhysicalMetric :
@@ -69,39 +57,23 @@ rgContractionTransfersToPhysicalMetric :
     + physicalScale step * reopeningError step
 rgContractionTransfersToPhysicalMetric step =
   let
-    scaledContraction :
-      physicalScale step * rgDistanceNext step
-      ≤ physicalScale step
-        * (contraction step * rgDistance step + reopeningError step)
     scaledContraction =
       Norm.scaleNonnegative
         (physicalScale step)
         (physicalScaleNonnegative step)
         (rgContractionWithResidual step)
 
-    scaledUpper :
-      contraction step * (physicalScale step * rgDistance step)
-      ≤ contraction step * (comparisonUpper step * physicalDistance step)
     scaledUpper =
       Norm.scaleNonnegative
         (contraction step)
         (contractionNonnegative step)
         (upperComparison step)
 
-    withResidual :
-      contraction step * (physicalScale step * rgDistance step)
-        + physicalScale step * reopeningError step
-      ≤ contraction step * (comparisonUpper step * physicalDistance step)
-        + physicalScale step * reopeningError step
     withResidual =
-      ℚP.+-monoˡ-≤
+      ℚP.+-monoʳ-≤
         (physicalScale step * reopeningError step)
         scaledUpper
 
-    middle :
-      physicalScale step * rgDistanceNext step
-      ≤ contraction step * comparisonUpper step * physicalDistance step
-        + physicalScale step * reopeningError step
     middle =
       ℚP.≤-trans
         scaledContraction
@@ -133,9 +105,6 @@ rgContractionTransfersToPhysicalMetric step =
 twoMetricPhysicalTransportLevel : ProofLevel
 twoMetricPhysicalTransportLevel = machineChecked
 
--- Physical frontier: prove cutoff-independent positive c_- and finite c_+ for
--- the SAME metric normalization used by the RG step.  No theorem in Cheeger
--- theory supplies this cross-scale identification automatically.
 cutoffUniformTwoMetricComparisonLevel : ProofLevel
 cutoffUniformTwoMetricComparisonLevel = conditional
 
