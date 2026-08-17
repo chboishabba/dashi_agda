@@ -50,7 +50,3 @@ literalBalabanSymmetricFormIdentificationLevel = conditional
 
 cutoffUniformChenWangHypothesesLevel : ProofLevel
 cutoffUniformChenWangHypothesesLevel = conditional
-
--- Only one spectral route is needed in the shortest proof.
-multipleSpectralRoutesRequiredLevel : ProofLevel
-multipleSpectralRoutesRequiredLevel = refuted
