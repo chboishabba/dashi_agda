@@ -207,6 +207,133 @@ for table in (T3, T5):
         rhs = sorted(table[FROB[i]])
         assert lhs == rhs
 
+# Anharmonic/deck S3 on lambda: r(lambda)=1/(1-lambda), s(lambda)=1-lambda.
+ROOT_INDEX = {x:i for i, (_,_,x) in enumerate(ROOTS)}
+ONE = (1,0)
+
+
+def deck_r_value(lam):
+    return inv(sub(ONE, lam))
+
+
+def deck_s_value(lam):
+    return sub(ONE, lam)
+
+
+DECK_R = [ROOT_INDEX[deck_r_value(x)] for _,_,x in ROOTS]
+DECK_S = [ROOT_INDEX[deck_s_value(x)] for _,_,x in ROOTS]
+
+
+def compose_perm(p, q):
+    return [p[q[i]] for i in range(len(p))]
+
+
+ID18 = list(range(18))
+assert compose_perm(DECK_R, compose_perm(DECK_R, DECK_R)) == ID18
+assert compose_perm(DECK_S, DECK_S) == ID18
+assert compose_perm(DECK_S, compose_perm(DECK_R, DECK_S)) == compose_perm(DECK_R, DECK_R)
+assert all(CLASS[DECK_R[i]] == CLASS[i] for i in range(18))
+assert all(CLASS[DECK_S[i]] == CLASS[i] for i in range(18))
+
+for table in (T3, T5):
+    for deck in (DECK_R, DECK_S):
+        for i, row in enumerate(table):
+            assert sorted(deck[j] for j in row) == sorted(table[deck[i]])
+
+# Regular-S3 coordinates: coarse class x side x C3 phase.
+CYCLES = {
+    0: {0:[2,12,17], 1:[13,16,3]},
+    1: {0:[0,7,5],   1:[15,10,8]},
+    2: {0:[1,6,4],   1:[14,11,9]},
+}
+COORD = {}
+FROM_COORD = {}
+for c in range(3):
+    for side in range(2):
+        for phase, i in enumerate(CYCLES[c][side]):
+            COORD[i] = (c, side, phase)
+            FROM_COORD[(c, side, phase)] = i
+assert len(COORD) == 18
+assert [FROM_COORD[(c,s,(ph+1)%3)] for c,s,ph in map(COORD.get, range(18))] == DECK_R
+assert [FROM_COORD[(c,1-s,(-ph)%3)] for c,s,ph in map(COORD.get, range(18))] == DECK_S
+
+# Six left translations commuting with the right deck S3 action, in local
+# coordinate order (side0 phases 0,1,2, side1 phases 0,1,2).
+LEFT6 = [
+    (0,1,2,3,4,5),
+    (1,2,0,5,3,4),
+    (2,0,1,4,5,3),
+    (3,4,5,0,1,2),
+    (4,5,3,2,0,1),
+    (5,3,4,1,2,0),
+]
+
+
+def local_index(side, phase):
+    return side*3 + phase
+
+
+def global_orbital(coarse_sigma, left_choices):
+    out = [None]*18
+    for i in range(18):
+        c, side, phase = COORD[i]
+        local = LEFT6[left_choices[c]][local_index(side, phase)]
+        side2, phase2 = divmod(local, 3)
+        out[i] = FROM_COORD[(coarse_sigma[c], side2, phase2)]
+    assert len(set(out)) == 18
+    assert compose_perm(out, DECK_R) == compose_perm(DECK_R, out)
+    assert compose_perm(out, DECK_S) == compose_perm(DECK_S, out)
+    return out
+
+# One exact deck-equivariant permutation decomposition for each marked Hecke
+# correspondence.  (coarse permutation, left-translation choices on c0,c1,c2)
+T3_ORBITAL_SPECS = [
+    ((0,2,1), (5,0,0)),
+    ((0,2,1), (5,3,3)),
+    ((1,2,0), (3,4,1)),
+    ((2,0,1), (2,3,4)),
+]
+T5_ORBITAL_SPECS = [
+    ((0,2,1), (1,3,5)),
+    ((0,2,1), (2,5,3)),
+    ((1,0,2), (0,0,4)),
+    ((1,2,0), (4,5,2)),
+    ((2,0,1), (1,4,5)),
+    ((2,1,0), (5,4,5)),
+]
+
+
+def table_count(table):
+    counts = [[0]*18 for _ in range(18)]
+    for i,row in enumerate(table):
+        for j in row:
+            counts[i][j] += 1
+    return counts
+
+
+def orbital_sum(specs):
+    counts = [[0]*18 for _ in range(18)]
+    perms = []
+    for sigma, choices in specs:
+        perm = global_orbital(sigma, choices)
+        perms.append(perm)
+        for i,j in enumerate(perm):
+            counts[i][j] += 1
+    return counts, perms
+
+
+T3_ORBITAL_COUNTS, T3_PERMS = orbital_sum(T3_ORBITAL_SPECS)
+T5_ORBITAL_COUNTS, T5_PERMS = orbital_sum(T5_ORBITAL_SPECS)
+assert T3_ORBITAL_COUNTS == table_count(T3)
+assert T5_ORBITAL_COUNTS == table_count(T5)
+
+# Frobenius need only preserve the SUM; it may permute individual isogeny
+# summands.  Verify the exact aggregate statement again after decomposition.
+for counts in (T3_ORBITAL_COUNTS, T5_ORBITAL_COUNTS):
+    for i in range(18):
+        for j in range(18):
+            assert counts[FROB[i]][FROB[j]] == counts[i][j]
+
 
 def state_name(i):
     q, bit, _ = ROOTS[i]
