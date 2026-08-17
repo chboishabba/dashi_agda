@@ -25,9 +25,6 @@ module DASHI.Physics.YangMills.BalabanKKTGramPseudoinversePositiveExact where
 --   <y,K+y>
 --     = <K+ y, K K+ y>
 --     = <L* K+ y, L* K+ y> >= 0.
---
--- This is the exact algebraic reduction needed before polarization can replace
--- sixteen sign-sensitive Green lower bounds by diagonal energies.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
@@ -38,7 +35,6 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanFiniteRectangularRationalExact as Rect
 import DASHI.Physics.YangMills.BalabanP33FiniteKKTAdmissibleProjectorExact as KKT
 import DASHI.Physics.YangMills.BalabanP33FiniteKKTPseudoinverseProjectorExact as Pseudo
-import DASHI.Physics.YangMills.BalabanSelectedConstraintAtomGreenExpansionExact as Green
 
 pseudoinverseEnergy :
   ∀ {Multiplier}
@@ -79,7 +75,7 @@ pseudoinverseEnergyAsAdjointNormSq pseudoData vector =
   trans
     (Rect.finiteDotSymmetric carrier vector u)
     (trans
-      (Green.finiteDotLeftPointwiseCong carrier uToPseudoGramU)
+      (Rect.finiteDotLeftPointwiseCong carrier uToPseudoGramU)
       (trans
         (sym
           (Rect.symmetricMatrixMovesAcrossDot
@@ -90,7 +86,7 @@ pseudoinverseEnergyAsAdjointNormSq pseudoData vector =
         (trans
           (Rect.finiteDotSymmetric carrier gramU u)
           (trans
-            (Green.finiteDotRightPointwiseCong
+            (Rect.finiteDotRightPointwiseCong
               carrier gramToConstraintAdjoint)
             (trans
               (Rect.finiteDotSymmetric carrier u
