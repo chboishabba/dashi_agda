@@ -27,9 +27,12 @@ module DASHI.Moonshine.P11AristotleHeckeCrossPollinationEverything where
 -- Marked quaternion reconstruction:
 -- * Voight's nonprincipal ideal gives the actual j=0 left order in the SAME
 --   B=(-1,-11/Q) quaternion algebra;
+-- * its trace-Gram determinant is derived entrywise as -121=-11^2;
 -- * definite norm/congruence enumeration gives raw theta cells
 --       j=0:    (ell3,ell5)=(2,0)
 --       j=1728: (ell3,ell5)=(0,4);
+-- * the norm-reduced six-case domains are exhaustively classified rather than
+--   promoted to a generic unbounded lattice-enumerator claim;
 -- * quotienting the free +/- kernel pairing gives marked identity-orbital counts
 --       j=0:    (T3,T5)=(1,0)
 --       j=1728: (T3,T5)=(0,2);
@@ -122,7 +125,9 @@ import DASHI.Moonshine.P11Level2T5QuaternionLoopFalsifierExact
 import DASHI.Moonshine.P11Level2ArithmeticGeometryHighestAlphaRegression
 
 import DASHI.Moonshine.P11VoightNonprincipalLeftOrderExact
+import DASHI.Moonshine.P11VoightLeftOrderDiscriminantDerivedExact
 import DASHI.Moonshine.P11MarkedQuaternionThetaExact
+import DASHI.Moonshine.P11MarkedThetaBoundedCompletenessExact
 import DASHI.Moonshine.P11MarkedRefinedThetaCrossCheckExact
 import DASHI.Moonshine.P11MarkedX2HeckeReconstructionExact
 import DASHI.Moonshine.P11MarkedX2HeckeAlgebraExact
