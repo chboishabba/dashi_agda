@@ -13,47 +13,20 @@ module DASHI.Moonshine.P11FiveStatePositiveHeckeAlgebraExact where
 --
 -- DASHI CONTRIBUTION
 --
--- Test the newly constructed five-state positive lift against the two gates
--- that killed the earlier six-sector model:
+-- Test the five-state positive lift against the gates that killed the earlier
+-- six-sector model.  All statements are literal path counts on positive
+-- neighbour systems; no signed kernel completion is used.
 --
---   * simultaneous/coprime commutation;
---   * positivity of the prime-square residual R_ell^2 - ell I.
---
--- All statements below are path-count statements on the actual five-state
--- neighbour systems.  No signed kernel completion is used.
---
--- The resulting residual multiplicity matrices are
---
--- R4 = R2^2 - 2I =
---   [[1,3,1,1,1],
---    [3,1,1,1,1],
---    [1,1,1,2,2],
---    [1,1,2,1,2],
---    [1,1,2,2,1]],
---
--- R9 = R3^2 - 3I = diagonal 1, every off-diagonal 3,
---
--- R25 = R5^2 - 5I =
---   [[7,3,7,7,7],
---    [3,7,7,7,7],
---    [7,7,5,6,6],
---    [7,7,6,5,6],
---    [7,7,6,6,5]].
---
--- Hence every prime-square residual is entrywise Nat-valued.  This does not
--- yet identify the model with quaternion/Bruhat--Tits geometry, but it proves
--- that the p=11 Brandt algebra has a nontrivial positive fine realization that
--- survives the previous obstruction.
+-- The three prime systems commute entrywise.  Their prime-square residuals
+-- R2^2-2I, R3^2-3I and R5^2-5I are explicitly Nat-valued on every one of the
+-- 25 source/target entries.  In particular, positivity survives the unital
+-- Hecke-square gate that falsified the natural six-sector quotient.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
 
 import DASHI.Moonshine.PositiveFiniteNeighbourSystemExact as Positive
 import DASHI.Moonshine.P11FiveStatePositiveHeckeLiftExact as Fine
-
-------------------------------------------------------------------------
--- Five indicator observables.
-------------------------------------------------------------------------
 
 indicator : Fine.P11Fine5 → Fine.P11Fine5 → Nat
 indicator Fine.a0 Fine.a0 = 1
@@ -75,7 +48,7 @@ pathCount first second source target =
   Positive.twoStepOperator first second (indicator target) source
 
 ------------------------------------------------------------------------
--- Pairwise commutation on every source/target entry.
+-- Pairwise commutation on every matrix entry.
 ------------------------------------------------------------------------
 
 r2r3CommutesEntry :
@@ -169,7 +142,7 @@ r3r5CommutesEntry Fine.b2 Fine.b1 = refl
 r3r5CommutesEntry Fine.b2 Fine.b2 = refl
 
 ------------------------------------------------------------------------
--- Positive prime-square residual multiplicities.
+-- Explicit positive residual matrices.
 ------------------------------------------------------------------------
 
 r4Multiplicity : Fine.P11Fine5 → Fine.P11Fine5 → Nat
@@ -200,9 +173,31 @@ r4Multiplicity Fine.b2 Fine.b1 = 2
 r4Multiplicity Fine.b2 Fine.b2 = 1
 
 r9Multiplicity : Fine.P11Fine5 → Fine.P11Fine5 → Nat
-r9Multiplicity source target with indicator target source
-... | 1 = 1
-... | 0 = 3
+r9Multiplicity Fine.a0 Fine.a0 = 1
+r9Multiplicity Fine.a0 Fine.a1 = 3
+r9Multiplicity Fine.a0 Fine.b0 = 3
+r9Multiplicity Fine.a0 Fine.b1 = 3
+r9Multiplicity Fine.a0 Fine.b2 = 3
+r9Multiplicity Fine.a1 Fine.a0 = 3
+r9Multiplicity Fine.a1 Fine.a1 = 1
+r9Multiplicity Fine.a1 Fine.b0 = 3
+r9Multiplicity Fine.a1 Fine.b1 = 3
+r9Multiplicity Fine.a1 Fine.b2 = 3
+r9Multiplicity Fine.b0 Fine.a0 = 3
+r9Multiplicity Fine.b0 Fine.a1 = 3
+r9Multiplicity Fine.b0 Fine.b0 = 1
+r9Multiplicity Fine.b0 Fine.b1 = 3
+r9Multiplicity Fine.b0 Fine.b2 = 3
+r9Multiplicity Fine.b1 Fine.a0 = 3
+r9Multiplicity Fine.b1 Fine.a1 = 3
+r9Multiplicity Fine.b1 Fine.b0 = 3
+r9Multiplicity Fine.b1 Fine.b1 = 1
+r9Multiplicity Fine.b1 Fine.b2 = 3
+r9Multiplicity Fine.b2 Fine.a0 = 3
+r9Multiplicity Fine.b2 Fine.a1 = 3
+r9Multiplicity Fine.b2 Fine.b0 = 3
+r9Multiplicity Fine.b2 Fine.b1 = 3
+r9Multiplicity Fine.b2 Fine.b2 = 1
 
 r25Multiplicity : Fine.P11Fine5 → Fine.P11Fine5 → Nat
 r25Multiplicity Fine.a0 Fine.a0 = 7
@@ -230,10 +225,6 @@ r25Multiplicity Fine.b2 Fine.a1 = 7
 r25Multiplicity Fine.b2 Fine.b0 = 6
 r25Multiplicity Fine.b2 Fine.b1 = 6
 r25Multiplicity Fine.b2 Fine.b2 = 5
-
-------------------------------------------------------------------------
--- Prime-square path-count laws on every entry.
-------------------------------------------------------------------------
 
 r2SquareEntry :
   (source target : Fine.P11Fine5) →
@@ -324,10 +315,6 @@ r5SquareEntry Fine.b2 Fine.a1 = refl
 r5SquareEntry Fine.b2 Fine.b0 = refl
 r5SquareEntry Fine.b2 Fine.b1 = refl
 r5SquareEntry Fine.b2 Fine.b2 = refl
-
-------------------------------------------------------------------------
--- Boundary.
-------------------------------------------------------------------------
 
 record P11FiveStatePositiveHeckeAlgebraBoundary : Set where
   field
