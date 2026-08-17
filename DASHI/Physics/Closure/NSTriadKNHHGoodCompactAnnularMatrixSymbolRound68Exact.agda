@@ -43,7 +43,7 @@ module DASHI.Physics.Closure.NSTriadKNHHGoodCompactAnnularMatrixSymbolRound68Exa
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
-open import Data.Rational.Base using (ℚ; 0ℚ; _≤_)
+open import Data.Rational.Base using (0ℚ; 1ℚ; _≤_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
@@ -68,14 +68,8 @@ scaleZeroMatrix
     (solve (m21 ∷ [])) (solve (m22 ∷ [])) (solve (m23 ∷ []))
     (solve (m31 ∷ [])) (solve (m32 ∷ [])) (solve (m33 ∷ []))
 
-scaleOneMatrix : ∀ matrix →
-  Strain.scaleMatrix Cutoff.two matrix
-  ≡ Strain.scaleMatrix Cutoff.two matrix
-scaleOneMatrix matrix = refl
-
 scaleIdentityMatrix : ∀ matrix →
-  Strain.scaleMatrix
-    (Data.Rational.Base.1ℚ) matrix ≡ matrix
+  Strain.scaleMatrix 1ℚ matrix ≡ matrix
 scaleIdentityMatrix
     (Matrix.matrix3 m11 m12 m13 m21 m22 m23 m31 m32 m33) =
   Matrix.matrixExt
@@ -85,7 +79,7 @@ scaleIdentityMatrix
 
 compactAnnularMatrixBelowInnerSupport :
   ∀ modeData omega →
-  V.normSquared (V.mode modeData) ≤ Data.Rational.Base.1ℚ →
+  V.normSquared (V.mode modeData) ≤ 1ℚ →
   compactAnnularMatrixSymbol modeData omega ≡ Matrix.zeroMatrix
 compactAnnularMatrixBelowInnerSupport modeData omega norm≤1 =
   trans
