@@ -18,7 +18,6 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound60FirstVariationGreen
 -- interacting survival, physical clustering, or reconstruction.
 ------------------------------------------------------------------------
 
--- Complete Round59 stack.
 import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound59PositiveRGGeometryValidation
 
 -- A1: actual Wilson first variation = four literal noncommutative product-rule
@@ -28,10 +27,13 @@ import DASHI.Physics.YangMills.BalabanP33RationalQuaternionWilsonFirstVariationE
 import DASHI.Physics.YangMills.BalabanSelectedWilsonFirstVariationPlaquetteSupportExact
 
 -- A2: Moore--Penrose + K=L L* proves K+ positive semidefinite exactly.  Exact
--- polarization then derives all sixteen signed degree-pair lower bounds from
--- only four source and four defect diagonal K+ energies.
+-- polarization derives all sixteen signed degree-pair lower bounds from only
+-- four source and four defect diagonal K+ energies, and the endpoint adapter
+-- turns eight uniform diagonal uppers into the sixteen lower boxes expected by
+-- the existing uniform selected-minimizer consumer.
 import DASHI.Physics.YangMills.BalabanKKTGramPseudoinversePositiveExact
 import DASHI.Physics.YangMills.BalabanKKTGreenPolarizationLowerBoundExact
+import DASHI.Physics.YangMills.BalabanSelectedGreenDiagonalEndpointAdapterExact
 
 -- F1/F2 theorem selection: Lawler--Sokal includes reversible,
 -- nonreversible, and killed-process regimes.  If the continuum-adjacent
