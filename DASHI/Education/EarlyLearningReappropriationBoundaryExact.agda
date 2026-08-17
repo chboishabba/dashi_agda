@@ -43,11 +43,6 @@ record FramedPolicyAtom : Set where
 
 open FramedPolicyAtom public
 
-------------------------------------------------------------------------
--- Same atom, different frame: support for family care is not semantically
--- identical to parental-sovereignty or institutional-exit politics.
-------------------------------------------------------------------------
-
 progressiveFamilyCareAtom : FramedPolicyAtom
 progressiveFamilyCareAtom =
   framedPolicyAtom familyCarePayment situatedCapabilityFrame
@@ -60,10 +55,6 @@ exitFamilyCareAtom =
 
 samePolicyAtomDifferentFrame : atom progressiveFamilyCareAtom ≡ atom exitFamilyCareAtom
 samePolicyAtomDifferentFrame = refl
-
-------------------------------------------------------------------------
--- Shared frame/evidence is not command or coordination.
-------------------------------------------------------------------------
 
 data CoordinationPermission : Set where
 
@@ -79,10 +70,6 @@ politicalProvenanceDoesNotProvePrivateMotive ()
 
 conservativeReligiousContextDoesNotProveVote : VoteInferencePermission → ⊥
 conservativeReligiousContextDoesNotProveVote ()
-
-------------------------------------------------------------------------
--- Re-appropriation-resistant architecture.
-------------------------------------------------------------------------
 
 record ReappropriationResistanceGate : Set where
   constructor reappropriationResistanceGate
@@ -118,12 +105,6 @@ canonicalReappropriationResistanceGate =
     true refl true refl true refl true refl true refl
     true refl true refl true refl true refl true refl true refl
 
-------------------------------------------------------------------------
--- Endorsement is itself a governance event.  The question is not only whether
--- an expert likes one atom, but which framing/provenance conditions travel with
--- the public use of that authority.
-------------------------------------------------------------------------
-
 data EndorsementScope : Set where
   atomOnly conditionalArchitecture fullProgramme : EndorsementScope
 
@@ -156,15 +137,10 @@ canonicalConditionalExpertEndorsement =
     true refl true refl
 
 ------------------------------------------------------------------------
--- Brown/Kimber remains the upstream constitutive-governance authority: an
--- expert asked to provide feedback need not accept the supplied question,
--- projection or consumer family as the authoritative problem formulation.
-------------------------------------------------------------------------
-
-brownKimberGovernanceProfile = BrownKimber.brownKimberAuthorityProfile
-
-------------------------------------------------------------------------
--- Constructive witnesses imported from the intersectional/eKindy modules.
+-- Brown/Kimber remains the upstream constitutive-governance authority: the
+-- imported theorem keeps feedback-source participation distinct from authority
+-- over the question/projection/carrier.  We retain the import rather than
+-- duplicating that theorem here.
 ------------------------------------------------------------------------
 
 canonicalRelationalLoop : EKindy.RelationalLearningLoop
