@@ -37,12 +37,14 @@ import DASHI.Physics.YangMills.BalabanYM4FiveChannelTaylorCancellationToFourthOr
 import DASHI.Physics.YangMills.BalabanCMP109PrincipalLogFrechetFromLocalInverseExact
 import DASHI.Physics.YangMills.BalabanCMP109LiteralPrincipalLogFrechetReductionExact
 
--- CMP119/CMP122: keep the older source-native projection for compatibility,
--- but make the corrected raw carrier explicit.  Raw source objects do not
--- carry all-scale Section-2 preservation as fields.  The published active-scale
--- Theorem-1 witness is specialized directly to the same raw E/R/B/background
--- predicates and constructs the active Section-2 witness.
+-- CMP119/CMP122: raw source objects do not carry all-scale Section-2
+-- preservation as fields.  The raw state is constructed OVER the finite beta
+-- history, so runningCoupling = History.couplingAt definitionally.  The
+-- published active-scale Theorem-1 witness then constructs the same raw
+-- E/R/B/background/complete-density predicates with no coupling equality
+-- receipt.
 import DASHI.Physics.YangMills.BalabanCMP119Section2SourceNativeStateExact
 import DASHI.Physics.YangMills.BalabanCMP119SourceNativeRawStateActiveBoundsExact
 import DASHI.Physics.YangMills.Balaban1989ActiveScaleTheorem1BetaBridgeExact
 import DASHI.Physics.YangMills.BalabanCMP122Theorem1ToRawCMP119ActiveExact
+import DASHI.Physics.YangMills.BalabanCMP119RawStateFromFiniteBetaHistoryExact
