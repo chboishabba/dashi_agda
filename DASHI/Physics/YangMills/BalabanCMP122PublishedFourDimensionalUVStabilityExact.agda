@@ -70,12 +70,11 @@ publishedUVStabilityAtActiveScale :
   ∀ {trajectory Mode Atom Density betaData history}
     {flow : CMP122.ActiveEffectiveDensityFlow
       trajectory Mode Atom Density betaData history} →
-  PublishedFourDimensionalUVStableFamily flow →
+  (family : PublishedFourDimensionalUVStableFamily flow) →
   (scale : Nat) →
   (active : History.ActiveScale history scale) →
   CMP122.ActiveSection2Invariant flow
-    (publishedTheorem1
-      {flow = flow})
+    (publishedTheorem1 family)
     scale active
 publishedUVStabilityAtActiveScale family scale active =
   CMP122.activeSection2Invariant
