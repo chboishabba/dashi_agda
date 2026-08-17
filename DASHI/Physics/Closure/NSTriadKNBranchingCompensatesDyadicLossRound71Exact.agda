@@ -64,7 +64,6 @@ open import Relation.Nullary.Negation.Core using (¬_)
 
 import DASHI.Physics.Closure.NSTriadKNHHBadDyadicScalePrimitivesRound58 as Scale
 import DASHI.Physics.Closure.NSTriadKNScaleDependentConcentrationFundingRound70Exact as Funding
-import DASHI.Physics.Closure.NSTriadKNFiniteDisjointConcentrationBudgetRound69Exact as R69
 
 appendFloors : List ℚ → List ℚ → List ℚ
 appendFloors [] right = right
@@ -147,8 +146,6 @@ dyadicBranchBlockMassExact zero = solve []
 dyadicBranchBlockMassExact (suc depth) =
   let
     oldMass = Funding.sumFloors (dyadicBranchBlock depth)
-    halfMass = Funding.sumFloors
-      (scaleFloors Scale.half (dyadicBranchBlock depth))
 
     expanded :
       Funding.sumFloors (dyadicBranchBlock (suc depth))
@@ -163,9 +160,10 @@ dyadicBranchBlockMassExact (suc depth) =
           (sumScaleFloors Scale.half (dyadicBranchBlock depth)))
   in
   trans expanded
-    (subst
-      (λ mass → Scale.half * mass + Scale.half * mass ≡ 1ℚ)
-      (dyadicBranchBlockMassExact depth)
+    (trans
+      (cong
+        (λ mass → Scale.half * mass + Scale.half * mass)
+        (dyadicBranchBlockMassExact depth))
       (solve []))
   where
   open import Relation.Binary.PropositionalEquality using (cong₂)
@@ -179,9 +177,8 @@ weightedDyadicBranchBlockMassExact : ∀ weight depth →
 weightedDyadicBranchBlockMassExact weight depth =
   trans
     (sumScaleFloors weight (dyadicBranchBlock depth))
-    (subst
-      (λ mass → weight * mass ≡ weight)
-      (dyadicBranchBlockMassExact depth)
+    (trans
+      (cong (weight *_) (dyadicBranchBlockMassExact depth))
       (ℚP.*-identityʳ weight))
 
 budgetStrictlyBelowBudgetPlusOne : ∀ energy → energy < energy + 1ℚ
