@@ -16,8 +16,13 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound58FrontierCutsetValid
 -- Full Round57 finite/source-specific foundation.
 import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound57PhysicalSemanticsValidation
 
--- G2: same literal subset/KKT/Möbius authority -> same 4+16 degree blocks;
--- one region-wide grouped endpoint and one charge floor close the selector.
+-- G2: literal subset/KKT/Möbius authority -> exact cardinality-layer formulas
+-- -> four source/four defect degree vectors -> sixteen Green blocks as one
+-- common pseudoinverse bilinear family -> one region-wide grouped endpoint and
+-- one charge floor.
+import DASHI.Physics.YangMills.BalabanWilsonBooleanFourCubeMobiusDegreeLayerExact
+import DASHI.Physics.YangMills.BalabanSelectedConstraintMobiusDegreeLayerExact
+import DASHI.Physics.YangMills.BalabanSelectedConstraintGreenDegreeBilinearExact
 import DASHI.Physics.YangMills.BalabanSelectedCanonicalConstraintDegreeBlocksExact
 import DASHI.Physics.YangMills.BalabanP33UniformSelectedMinimizerDegreeEnvelopeExact
 
@@ -32,8 +37,9 @@ import DASHI.Physics.YangMills.BalabanYM4FiveChannelTaylorCancellationToFourthOr
 import DASHI.Physics.YangMills.BalabanCMP109PrincipalLogFrechetFromLocalInverseExact
 import DASHI.Physics.YangMills.BalabanCMP109LiteralPrincipalLogFrechetReductionExact
 
--- Source-native CMP119 state and active-scale CMP122 bridge retained as the RG
--- side of the finite cutset.  Round58 does not replace them with a second
--- generic invariant record.
+-- CMP119/CMP122: keep the older source-native projection for compatibility,
+-- but make the corrected raw carrier explicit: raw source objects do not carry
+-- all-scale Section-2 preservation as fields; that lives in an active witness.
 import DASHI.Physics.YangMills.BalabanCMP119Section2SourceNativeStateExact
+import DASHI.Physics.YangMills.BalabanCMP119SourceNativeRawStateActiveBoundsExact
 import DASHI.Physics.YangMills.Balaban1989ActiveScaleTheorem1BetaBridgeExact
