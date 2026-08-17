@@ -55,11 +55,13 @@ complexMultiplyNegateRight {F = F} scalar value =
       (trans
         (cong
           (λ first → C3.complexMultiply first value)
-          (trans
-            (Algebra.complexMultiplyCommutative scalar (Additive.minusOne F))
-            (Additive.complexMultiplyMinusOneLeft scalar)))
-        (sym (Additive.complexMultiplyMinusOneLeft
-          (C3.complexMultiply scalar value)))))
+          (Algebra.complexMultiplyCommutative scalar (Additive.minusOne F)))
+        (trans
+          (sym
+            (Scaling.complexMultiplyAssociative
+              (Additive.minusOne F) scalar value))
+          (Additive.complexMultiplyMinusOneLeft
+            (C3.complexMultiply scalar value)))))
 
 complex3ScaleAssociative :
   ∀ {r} {F : C3.RealField r}
