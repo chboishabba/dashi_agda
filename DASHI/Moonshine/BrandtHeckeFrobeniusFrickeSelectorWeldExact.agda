@@ -29,11 +29,7 @@ module DASHI.Moonshine.BrandtHeckeFrobeniusFrickeSelectorWeldExact where
 --   p=37 : Frobenius two-orbit defect = 1.
 --
 -- On the complete odd-prime control scan under 72, the existing exact modular
--- calculation proves
---
---   defect = g(X_0^+(p)),
---
--- and therefore
+-- calculation proves defect = g(X_0^+(p)), hence
 --
 --   defect = 0  <=>  Fricke saturation  <=>  external Ogg label.
 --
@@ -49,11 +45,15 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
 
 import DASHI.Foundations.FiniteInvolutionOrbitNormalFormExact as Orbit
+import DASHI.Moonshine.ClassicalFiniteHeckeCorrespondenceCore as Classical
+import DASHI.Moonshine.PositiveFiniteNeighbourSystemExact as Positive
 import DASHI.Moonshine.OggPrimeControlMatrixExact as Matrix
 import DASHI.Moonshine.SupersingularFrobeniusOrbitSpectrumExact as Spectrum
 import DASHI.Moonshine.PrimeFrickeOrbitSaturationExact as Saturation
 import DASHI.Moonshine.P11GeometricFrobeniusRealizationExact as P11Frob
+import DASHI.Moonshine.P11GeometricSupersingularCarrierExact as P11Geo
 import DASHI.Moonshine.P11PositiveBrandtNeighbourSystemsExact as P11
+import DASHI.Moonshine.BrandtStackUnweightingControlsExact as Controls
 import DASHI.Moonshine.P37NonOggPositiveHeckeControlExact as P37
 import DASHI.Moonshine.P37NonOggPositivePrimeSquareNeighboursExact as P37Square
 
@@ -118,11 +118,21 @@ p11ActualGeometricPairedOrbitDefectIsZero =
 
 ------------------------------------------------------------------------
 -- Positivity is held fixed across the control pair.
---
--- These values are deliberately theorem witnesses, not a classifier record:
--- p=11 has a literal positive 3-neighbour T2 source correspondence, while p=37
--- has the independently sourced positive 3-neighbour T2 and positive R4.
+-- Consume the actual source systems so this weld cannot silently degrade into
+-- two booleans detached from the positive geometry.
 ------------------------------------------------------------------------
+
+p11SourceT2 :
+  Classical.ClassicalPrimeDegreeCorrespondence P11Geo.P11SupersingularJ
+p11SourceT2 = P11.B11ell2Positive
+
+p37SourceT2 :
+  Positive.PositiveFiniteNeighbourSystem Controls.P37BrandtClass
+p37SourceT2 = P37.P37R2
+
+p37SourceT4 :
+  Positive.PositiveFiniteNeighbourSystem Controls.P37BrandtClass
+p37SourceT4 = P37Square.P37R4
 
 p11T2LocalDegreeIsThree : Nat
 p11T2LocalDegreeIsThree = 3
@@ -135,12 +145,6 @@ p37T2LocalDegreeIsThree = 3
 
 p37T2LocalDegreeCheck : p37T2LocalDegreeIsThree ≡ 3
 p37T2LocalDegreeCheck = refl
-
--- Consume the actual source systems so this weld cannot silently degrade into
--- two booleans detached from the positive geometry.
-p11SourceT2 = P11.B11ell2Positive
-p37SourceT2 = P37.P37R2
-p37SourceT4 = P37Square.P37R4
 
 record BrandtHeckeFrobeniusFrickeSelectorBoundary : Set where
   field
