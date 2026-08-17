@@ -29,20 +29,17 @@ module DASHI.Moonshine.P11FullLevel2RigidificationExact where
 --
 -- DASHI CONTRIBUTION
 --
--- Encode the exact finite quotient geometry explicitly and identify its five
--- orbit classes with the already-constructed positive carrier
---
---   A0,A1,B0,B1,B2.
---
--- This is stronger than a mass/cardinality receipt: the two and three sheets
--- are represented as actual quotient orbits of one common six-frame S3 torsor.
+-- Encode one explicit regular S3 presentation on the six frames.  The order-3
+-- and order-2 left actions satisfy the S3 relation s r s = r^-1.  Their free
+-- orbit quotients give exactly two j=0 sheets and three j=1728 sheets, and that
+-- five-element rigidified carrier is identified with the existing positive
+-- carrier A0,A1,B0,B1,B2.
 --
 -- IMPORTANT BOUNDARY
 --
 -- This module does NOT yet construct the Hecke action on full level-2 moduli.
--- In particular, the ordinary prime-to-level T_ell correspondence is naturally
--- compatible with full level 2 for odd ell; ell=2 divides the auxiliary level
--- and must not be silently identified with the same T_2 correspondence.
+-- Ordinary T_ell is prime-to-level compatible for odd ell; ell=2 divides the
+-- auxiliary level and must not be silently treated as the same correspondence.
 -- The S3 here is the full-level-2 change-of-frame group; it is NOT identified
 -- with PR #558's ternary-pants/tree S3 without an explicit action map.
 ------------------------------------------------------------------------
@@ -55,64 +52,70 @@ import DASHI.Moonshine.P11EichlerDeuringStackUnweightingExact as Stack11
 
 ------------------------------------------------------------------------
 -- A concrete six-element regular S3 frame torsor.
+--
+-- Label the elements e,r,r^2,s,sr^2,sr respectively as f0,...,f5.  Then left
+-- multiplication by r and s is represented below.
 ------------------------------------------------------------------------
 
 data Level2Frame : Set where
   f0 f1 f2 f3 f4 f5 : Level2Frame
 
--- Left multiplication by an order-3 element in one explicit regular-action
--- presentation.  It has two free orbits of size three.
+leftR : Level2Frame → Level2Frame
+leftR f0 = f1
+leftR f1 = f2
+leftR f2 = f0
+leftR f3 = f4
+leftR f4 = f5
+leftR f5 = f3
 
-c3Step : Level2Frame → Level2Frame
-c3Step f0 = f1
-c3Step f1 = f2
-c3Step f2 = f0
-c3Step f3 = f4
-c3Step f4 = f5
-c3Step f5 = f3
+leftR3IsIdentity : (x : Level2Frame) → leftR (leftR (leftR x)) ≡ x
+leftR3IsIdentity f0 = refl
+leftR3IsIdentity f1 = refl
+leftR3IsIdentity f2 = refl
+leftR3IsIdentity f3 = refl
+leftR3IsIdentity f4 = refl
+leftR3IsIdentity f5 = refl
 
-c3Step3IsIdentity : (x : Level2Frame) → c3Step (c3Step (c3Step x)) ≡ x
-c3Step3IsIdentity f0 = refl
-c3Step3IsIdentity f1 = refl
-c3Step3IsIdentity f2 = refl
-c3Step3IsIdentity f3 = refl
-c3Step3IsIdentity f4 = refl
-c3Step3IsIdentity f5 = refl
+leftRHasNoFixedFrame : (x : Level2Frame) → leftR x ≡ x → ⊥
+leftRHasNoFixedFrame f0 ()
+leftRHasNoFixedFrame f1 ()
+leftRHasNoFixedFrame f2 ()
+leftRHasNoFixedFrame f3 ()
+leftRHasNoFixedFrame f4 ()
+leftRHasNoFixedFrame f5 ()
 
-c3StepHasNoFixedFrame : (x : Level2Frame) → c3Step x ≡ x → ⊥
-c3StepHasNoFixedFrame f0 ()
-c3StepHasNoFixedFrame f1 ()
-c3StepHasNoFixedFrame f2 ()
-c3StepHasNoFixedFrame f3 ()
-c3StepHasNoFixedFrame f4 ()
-c3StepHasNoFixedFrame f5 ()
+leftS : Level2Frame → Level2Frame
+leftS f0 = f3
+leftS f3 = f0
+leftS f1 = f5
+leftS f5 = f1
+leftS f2 = f4
+leftS f4 = f2
 
--- Left multiplication by an order-2 element.  It has three free orbits of
--- size two.
+leftS2IsIdentity : (x : Level2Frame) → leftS (leftS x) ≡ x
+leftS2IsIdentity f0 = refl
+leftS2IsIdentity f1 = refl
+leftS2IsIdentity f2 = refl
+leftS2IsIdentity f3 = refl
+leftS2IsIdentity f4 = refl
+leftS2IsIdentity f5 = refl
 
-c2Step : Level2Frame → Level2Frame
-c2Step f0 = f1
-c2Step f1 = f0
-c2Step f2 = f3
-c2Step f3 = f2
-c2Step f4 = f5
-c2Step f5 = f4
+leftSHasNoFixedFrame : (x : Level2Frame) → leftS x ≡ x → ⊥
+leftSHasNoFixedFrame f0 ()
+leftSHasNoFixedFrame f1 ()
+leftSHasNoFixedFrame f2 ()
+leftSHasNoFixedFrame f3 ()
+leftSHasNoFixedFrame f4 ()
+leftSHasNoFixedFrame f5 ()
 
-c2Step2IsIdentity : (x : Level2Frame) → c2Step (c2Step x) ≡ x
-c2Step2IsIdentity f0 = refl
-c2Step2IsIdentity f1 = refl
-c2Step2IsIdentity f2 = refl
-c2Step2IsIdentity f3 = refl
-c2Step2IsIdentity f4 = refl
-c2Step2IsIdentity f5 = refl
-
-c2StepHasNoFixedFrame : (x : Level2Frame) → c2Step x ≡ x → ⊥
-c2StepHasNoFixedFrame f0 ()
-c2StepHasNoFixedFrame f1 ()
-c2StepHasNoFixedFrame f2 ()
-c2StepHasNoFixedFrame f3 ()
-c2StepHasNoFixedFrame f4 ()
-c2StepHasNoFixedFrame f5 ()
+leftSRSIsRInverse :
+  (x : Level2Frame) → leftS (leftR (leftS x)) ≡ leftR (leftR x)
+leftSRSIsRInverse f0 = refl
+leftSRSIsRInverse f1 = refl
+leftSRSIsRInverse f2 = refl
+leftSRSIsRInverse f3 = refl
+leftSRSIsRInverse f4 = refl
+leftSRSIsRInverse f5 = refl
 
 ------------------------------------------------------------------------
 -- Explicit quotient orbit carriers.
@@ -129,34 +132,34 @@ j0OrbitOfFrame f3 = j0Orbit1
 j0OrbitOfFrame f4 = j0Orbit1
 j0OrbitOfFrame f5 = j0Orbit1
 
-j0OrbitInvariantUnderC3 :
-  (x : Level2Frame) → j0OrbitOfFrame (c3Step x) ≡ j0OrbitOfFrame x
-j0OrbitInvariantUnderC3 f0 = refl
-j0OrbitInvariantUnderC3 f1 = refl
-j0OrbitInvariantUnderC3 f2 = refl
-j0OrbitInvariantUnderC3 f3 = refl
-j0OrbitInvariantUnderC3 f4 = refl
-j0OrbitInvariantUnderC3 f5 = refl
+j0OrbitInvariantUnderReducedAut :
+  (x : Level2Frame) → j0OrbitOfFrame (leftR x) ≡ j0OrbitOfFrame x
+j0OrbitInvariantUnderReducedAut f0 = refl
+j0OrbitInvariantUnderReducedAut f1 = refl
+j0OrbitInvariantUnderReducedAut f2 = refl
+j0OrbitInvariantUnderReducedAut f3 = refl
+j0OrbitInvariantUnderReducedAut f4 = refl
+j0OrbitInvariantUnderReducedAut f5 = refl
 
 data J1728Level2Orbit : Set where
   j1728Orbit0 j1728Orbit1 j1728Orbit2 : J1728Level2Orbit
 
 j1728OrbitOfFrame : Level2Frame → J1728Level2Orbit
 j1728OrbitOfFrame f0 = j1728Orbit0
-j1728OrbitOfFrame f1 = j1728Orbit0
-j1728OrbitOfFrame f2 = j1728Orbit1
-j1728OrbitOfFrame f3 = j1728Orbit1
+j1728OrbitOfFrame f3 = j1728Orbit0
+j1728OrbitOfFrame f1 = j1728Orbit1
+j1728OrbitOfFrame f5 = j1728Orbit1
+j1728OrbitOfFrame f2 = j1728Orbit2
 j1728OrbitOfFrame f4 = j1728Orbit2
-j1728OrbitOfFrame f5 = j1728Orbit2
 
-j1728OrbitInvariantUnderC2 :
-  (x : Level2Frame) → j1728OrbitOfFrame (c2Step x) ≡ j1728OrbitOfFrame x
-j1728OrbitInvariantUnderC2 f0 = refl
-j1728OrbitInvariantUnderC2 f1 = refl
-j1728OrbitInvariantUnderC2 f2 = refl
-j1728OrbitInvariantUnderC2 f3 = refl
-j1728OrbitInvariantUnderC2 f4 = refl
-j1728OrbitInvariantUnderC2 f5 = refl
+j1728OrbitInvariantUnderReducedAut :
+  (x : Level2Frame) → j1728OrbitOfFrame (leftS x) ≡ j1728OrbitOfFrame x
+j1728OrbitInvariantUnderReducedAut f0 = refl
+j1728OrbitInvariantUnderReducedAut f1 = refl
+j1728OrbitInvariantUnderReducedAut f2 = refl
+j1728OrbitInvariantUnderReducedAut f3 = refl
+j1728OrbitInvariantUnderReducedAut f4 = refl
+j1728OrbitInvariantUnderReducedAut f5 = refl
 
 ------------------------------------------------------------------------
 -- The actual five rigidified characteristic-11 classes.
@@ -249,6 +252,9 @@ record P11FullLevel2RigidificationBoundary : Set where
     commonSixFrameTorsorConstructedIsTrue :
       commonSixFrameTorsorConstructed ≡ true
 
+    regularS3RelationsConstructed : Bool
+    regularS3RelationsConstructedIsTrue : regularS3RelationsConstructed ≡ true
+
     reducedC3ActionHasTwoFreeOrbits : Bool
     reducedC3ActionHasTwoFreeOrbitsIsTrue :
       reducedC3ActionHasTwoFreeOrbits ≡ true
@@ -279,6 +285,8 @@ canonicalP11FullLevel2RigidificationBoundary =
   record
     { commonSixFrameTorsorConstructed = true
     ; commonSixFrameTorsorConstructedIsTrue = refl
+    ; regularS3RelationsConstructed = true
+    ; regularS3RelationsConstructedIsTrue = refl
     ; reducedC3ActionHasTwoFreeOrbits = true
     ; reducedC3ActionHasTwoFreeOrbitsIsTrue = refl
     ; reducedC2ActionHasThreeFreeOrbits = true
