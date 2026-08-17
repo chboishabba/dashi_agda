@@ -50,6 +50,9 @@ import DASHI.Physics.YangMills.BalabanP33FiniteKKTPseudoinverseProjectorExact as
 import DASHI.Physics.YangMills.BalabanSelectedConstraintAtomGreenExpansionExact as Green
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
 import DASHI.Physics.YangMills.BalabanKKTGramPseudoinversePositiveExact as Positive
+import DASHI.Physics.YangMills.BalabanSelectedRawExtractorConstraintDefectAtomsExact as Atoms
+import DASHI.Physics.YangMills.BalabanSelectedConstraintGreenDegreeBilinearExact as DegreeGreen
+import DASHI.Physics.YangMills.BalabanP33CorrelatedMobiusDegreeJointExact as Degree
 
 pseudoPairing :
   ∀ {Multiplier} →
@@ -174,8 +177,78 @@ pseudoPairingLowerDenominatorCleared pseudoData left right =
   Norm.nonnegativeDifferenceImpliesBelow
     (- (qLeft + qRight)) (cross + cross) differenceNonnegative
 
+------------------------------------------------------------------------
+-- Direct Round58 degree-table specialization.
+------------------------------------------------------------------------
+
+sourceDegreeEnergy :
+  ∀ {Multiplier}
+    {pseudoData : Pseudo.FiniteKKTPseudoinverseData Multiplier}
+    {firstVariationCovector rawExtractor}
+    (atoms : Atoms.SelectedConstraintAtomData
+      pseudoData firstVariationCovector rawExtractor) →
+  Degree.MobiusDegree → ℚ
+sourceDegreeEnergy {pseudoData = pseudoData} atoms degree =
+  Positive.pseudoQuadratic pseudoData
+    (DegreeGreen.sourceDegreeVector atoms degree)
+
+defectDegreeEnergy :
+  ∀ {Multiplier}
+    {pseudoData : Pseudo.FiniteKKTPseudoinverseData Multiplier}
+    {firstVariationCovector rawExtractor}
+    (atoms : Atoms.SelectedConstraintAtomData
+      pseudoData firstVariationCovector rawExtractor) →
+  Degree.MobiusDegree → ℚ
+defectDegreeEnergy {pseudoData = pseudoData} atoms degree =
+  Positive.pseudoQuadratic pseudoData
+    (DegreeGreen.defectDegreeVector atoms degree)
+
+degreeGreenLowerFromDiagonalEnergies :
+  ∀ {Multiplier}
+    {pseudoData : Pseudo.FiniteKKTPseudoinverseData Multiplier}
+    {firstVariationCovector rawExtractor}
+    (atoms : Atoms.SelectedConstraintAtomData
+      pseudoData firstVariationCovector rawExtractor)
+    sourceDegree defectDegree →
+  - (sourceDegreeEnergy atoms sourceDegree
+      + defectDegreeEnergy atoms defectDegree)
+  ≤ DegreeGreen.greenDegreePairing atoms sourceDegree defectDegree
+      + DegreeGreen.greenDegreePairing atoms sourceDegree defectDegree
+degreeGreenLowerFromDiagonalEnergies
+    {pseudoData = pseudoData} atoms sourceDegree defectDegree =
+  pseudoPairingLowerDenominatorCleared pseudoData
+    (DegreeGreen.sourceDegreeVector atoms sourceDegree)
+    (DegreeGreen.defectDegreeVector atoms defectDegree)
+
+sourceDegreeEnergyNonnegative :
+  ∀ {Multiplier}
+    {pseudoData : Pseudo.FiniteKKTPseudoinverseData Multiplier}
+    {firstVariationCovector rawExtractor}
+    (atoms : Atoms.SelectedConstraintAtomData
+      pseudoData firstVariationCovector rawExtractor)
+    degree →
+  0ℚ ≤ sourceDegreeEnergy atoms degree
+sourceDegreeEnergyNonnegative {pseudoData = pseudoData} atoms degree =
+  Positive.pseudoQuadraticNonnegative pseudoData
+    (DegreeGreen.sourceDegreeVector atoms degree)
+
+defectDegreeEnergyNonnegative :
+  ∀ {Multiplier}
+    {pseudoData : Pseudo.FiniteKKTPseudoinverseData Multiplier}
+    {firstVariationCovector rawExtractor}
+    (atoms : Atoms.SelectedConstraintAtomData
+      pseudoData firstVariationCovector rawExtractor)
+    degree →
+  0ℚ ≤ defectDegreeEnergy atoms degree
+defectDegreeEnergyNonnegative {pseudoData = pseudoData} atoms degree =
+  Positive.pseudoQuadraticNonnegative pseudoData
+    (DegreeGreen.defectDegreeVector atoms degree)
+
 kktGreenPolarizationLowerBoundLevel : ProofLevel
 kktGreenPolarizationLowerBoundLevel = machineChecked
+
+degreeGreenSixteenToEightDiagonalReductionLevel : ProofLevel
+degreeGreenSixteenToEightDiagonalReductionLevel = machineChecked
 
 -- The remaining A2 physical leaf is now diagonal: uniformly upper-bound the
 -- eight energies <S_d,K+S_d> and <D_e,K+D_e> on the selected region tightly
