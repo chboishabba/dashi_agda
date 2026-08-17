@@ -39,13 +39,14 @@ module DASHI.Physics.YangMills.BalabanSelectedWilsonFirstVariationPlaquetteSuppo
 -- this same literal Wilson differential rather than from a support receipt.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_)
 open import Data.Rational.Base as ℚ using (ℚ)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionWilsonFirstVariationExact as First
 import DASHI.Physics.YangMills.BalabanP33PhysicalRationalWilsonPlaquetteJetExact as Plaquette
-import DASHI.Physics.YangMills.BalabanP33PhysicalCoordinateBasisExact as Basis
+import DASHI.Physics.YangMills.BalabanP33FiniteGaugeOrbitPathWitnessExact as Orbit
+import DASHI.Physics.YangMills.BalabanP33RationalQuaternionFlatCurlExact as Flat
 import DASHI.Physics.YangMills.BalabanP33PhysicalCoordinateProjectorExact as Projector
 import DASHI.Physics.YangMills.BalabanP33PlaquetteBoundaryProjectorExact as Boundary
 import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Physical
@@ -54,9 +55,9 @@ import DASHI.Physics.YangMills.BalabanP33FiniteKKTPseudoinverseProjectorExact as
 import DASHI.Physics.YangMills.BalabanSelectedSourceSubsetConstraintPartialExact as Source
 
 plaquetteWilsonFirstVariation :
-  Plaquette.RationalSU2Background4 →
+  Orbit.RationalSU2Background4 →
   Physical.PhysicalSU2BondField4 →
-  Plaquette.Plaquette4 → ℚ
+  Flat.Plaquette4 → ℚ
 plaquetteWilsonFirstVariation background direction plaquette =
   First.wilsonFirstVariationNumerator
     (Plaquette.plaquetteFactorJets background direction plaquette)
@@ -71,7 +72,7 @@ plaquetteWilsonFirstVariationIsFourAtoms background direction plaquette =
     (Plaquette.plaquetteFactorJets background direction plaquette)
 
 localBasisDirection :
-  Plaquette.Plaquette4 →
+  Flat.Plaquette4 →
   Physical.PhysicalSU2Coordinate4 →
   Physical.PhysicalSU2BondField4
 localBasisDirection plaquette coordinate =
@@ -80,8 +81,8 @@ localBasisDirection plaquette coordinate =
       (Boundary.plaquetteBoundaryMask plaquette) coordinate)
 
 localWilsonFirstVariationCoordinates :
-  Plaquette.RationalSU2Background4 →
-  Plaquette.Plaquette4 →
+  Orbit.RationalSU2Background4 →
+  Flat.Plaquette4 →
   Projector.PhysicalVector
 localWilsonFirstVariationCoordinates background plaquette coordinate =
   plaquetteWilsonFirstVariation background
@@ -92,8 +93,8 @@ localWilsonFirstVariationCoordinates background plaquette coordinate =
 -- coordinate vector while the coefficient calculation above takes place on
 -- the constrained basis itself.
 selectedWilsonFirstVariationCovector :
-  Plaquette.RationalSU2Background4 →
-  Plaquette.Plaquette4 → KKT.StateVector
+  Orbit.RationalSU2Background4 →
+  Flat.Plaquette4 → KKT.StateVector
 selectedWilsonFirstVariationCovector background plaquette =
   Boundary.plaquetteBoundaryProject plaquette
     (localWilsonFirstVariationCoordinates background plaquette)
@@ -104,7 +105,7 @@ selectedWilsonFirstVariationPlaquetteSupport :
     (selectedWilsonFirstVariationCovector background plaquette)
 selectedWilsonFirstVariationPlaquetteSupport background plaquette =
   record
-    { Source.PlaquetteSupportedSource.support =
+    { support =
         Projector.physicalCoordinateProjectLiesInImage
           (Boundary.plaquetteBoundaryMask plaquette)
           (localWilsonFirstVariationCoordinates background plaquette)
@@ -130,7 +131,7 @@ literalSelectedWilsonSourceDefectProducer :
 literalSelectedWilsonSourceDefectProducer
     pseudoData background bondField plaquette =
   record
-    { Source.LiteralSourceDefectSubsetProducer.sourceSupported =
+    { sourceSupported =
         selectedWilsonFirstVariationPlaquetteSupport background plaquette
     }
 
