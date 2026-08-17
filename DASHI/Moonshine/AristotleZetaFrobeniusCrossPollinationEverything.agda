@@ -16,6 +16,7 @@ open import Data.Empty using (⊥)
 import Base369 as Base
 import DASHI.Cognition.PhaseEnrichedTrit as Phase
 import DASHI.Arithmetic.DecimalDigitalRootNonaryExact as Digital
+import DASHI.Arithmetic.TriadicDigitalRootPhaseObserverExact as Triadic
 import DASHI.Foundations.Phase3RootCharacterWeldExact as Root3
 import DASHI.Foundations.TernaryNineRingFieldFibreSeparationExact as Nine
 import DASHI.Foundations.CyclicNineCharacterPullbackExact as Pullback
@@ -52,6 +53,12 @@ c9CharacterPullbackRegression :
   ≡ Root3.characterRow Phase.phase1
 c9CharacterPullbackRegression =
   Pullback.c9SectionReproducesC3CharacterTable Phase.phase1
+
+triadicRootSixIsPhaseZero :
+  Triadic.rootPhase Digital.root6 ≡ Phase.phase0
+triadicRootSixIsPhaseZero =
+  Triadic.triadicRootProjectsToPhaseZero
+    Digital.root6 Digital.root6IsTriadic
 
 -- Digital root 9 is residue zero in the cyclic C9 lane; this is not the same
 -- statement as Frobenius fixedness in the F9 lane.
