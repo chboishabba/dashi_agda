@@ -35,15 +35,10 @@ module DASHI.Physics.YangMills.BalabanClayT4FaddeevPopovWilsonSymbolBridgeExact 
 -- 4 sin^2(k_mu/2).  This module strengthens the existing physical trig-box
 -- carrier with the SAME-momentum half-angle identity and proves that the sum
 -- of the ghost symbols is exactly the already-used Wilson hat{k}^2 value.
---
--- Thus the remaining B1 source theorem is not "guess the ghost denominator":
--- it is the source-specific Fourier identification of the literal infinite-
--- lattice/background FP operator with this coherent symbol, followed by the
--- gauge-zero-mode reduction and determinant/log-det expansion.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (cong)
+open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 import Real as Bishop
 
@@ -56,10 +51,6 @@ import DASHI.Physics.YangMills.BalabanP33PhysicalFaddeevPopovOperatorExact as Fi
 record CoherentGhostTrigBoxData : Set₁ where
   field
     trig : Canonical.PhysicalTrigBoxData
-
-    -- Standard half-angle identity on the SAME physical momentum value.
-    -- This coherence was not previously present in PhysicalTrigBoxData, whose
-    -- sine-half and cosine-full leaves could otherwise be supplied independently.
     halfAngleExact : ∀ role axis →
       Canonical.twoValue Bishop.-
         (Canonical.twoValue Bishop.*
@@ -102,36 +93,21 @@ freeGhostSymbolIsCanonicalHatMomentumAtom : ∀ dataSet role →
   ≡ Canonical.canonicalAtomValue (trig dataSet)
       (Eval.hatMomentumSquared role)
 freeGhostSymbolIsCanonicalHatMomentumAtom dataSet role =
-  let
-    toLiteral = freeGhostSymbolIsWilsonHatMomentum dataSet role
-    atomExact = Hat.hatMomentumAtomValueIsLiteralWilson (trig dataSet) role
-  in
-  Relation.Binary.PropositionalEquality.trans toLiteral
-    (Relation.Binary.PropositionalEquality.sym atomExact)
+  trans
+    (freeGhostSymbolIsWilsonHatMomentum dataSet role)
+    (sym (Hat.hatMomentumAtomValueIsLiteralWilson (trig dataSet) role))
 
-------------------------------------------------------------------------
--- Proof/source boundary.
-------------------------------------------------------------------------
-
--- Exact once the coherent trig values are on the carrier.
 freeGhostWilsonHatSymbolBridgeLevel : ProofLevel
 freeGhostWilsonHatSymbolBridgeLevel = machineChecked
 
--- Standard Fourier fact for the nearest-neighbour stencil; source-specific
--- work must still instantiate it on the literal Bałaban/Wilson ghost carrier.
 nearestNeighbourStencilFourierSymbolLevel : ProofLevel
 nearestNeighbourStencilFourierSymbolLevel = standardImported
 
--- Existing finite P33 theorem supplies a literal source witness for the local
--- stencil, but does not by itself identify the infinite-lattice one-loop
--- determinant with the Brillouin-box evaluator.
 finiteP33FaddeevPopovStencilLevel : ProofLevel
 finiteP33FaddeevPopovStencilLevel = FiniteFP.physicalFaddeevPopovOperatorLevel
 
 literalOneLoopFaddeevPopovFourierIdentificationLevel : ProofLevel
 literalOneLoopFaddeevPopovFourierIdentificationLevel = conditional
 
--- The actual physical trig producer should now establish one coherent record,
--- not unrelated sine-half and cosine-full receipts.
 coherentPhysicalTrigBoxProducerLevel : ProofLevel
 coherentPhysicalTrigBoxProducerLevel = conditional
