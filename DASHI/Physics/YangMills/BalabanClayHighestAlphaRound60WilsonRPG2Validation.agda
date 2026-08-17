@@ -14,6 +14,11 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound60WilsonRPG2Validatio
 --     -> Schur row-mass diagonal control
 --     -> uniform 4 raw + 1 row + 8 norm^2 + charge compiler.
 --
+--   The literal cross charge vanishes on the zero physical field.  Hence an
+--   absolute strictly-positive charge floor is valid only after normalization
+--   or quantitative exclusion of zero; otherwise the final G2 bound should be
+--   formulated charge-relatively.
+--
 -- REFLECTION POSITIVITY
 --   Osterwalder--Seiler / Menotti--Pelissetto Wilson lattice RP is imported at
 --   the literature boundary;
@@ -58,6 +63,7 @@ import DASHI.Physics.YangMills.BalabanCanonicalGreenDegreeDiagonalReductionExact
 import DASHI.Physics.YangMills.BalabanKKTPseudoinverseSchurEnergyBoundExact
 import DASHI.Physics.YangMills.BalabanCanonicalGreenSchurNormReductionExact
 import DASHI.Physics.YangMills.BalabanUniformCanonicalSchurNormG2ClosureExact
+import DASHI.Physics.YangMills.BalabanPlaquetteCrossChargeZeroFloorNoGoExact
 
 import DASHI.Physics.YangMills.BalabanWilsonLatticeReflectionPositivityExact
 import DASHI.Physics.YangMills.BalabanPositiveKernelReflectionPositivityNoGoExact
