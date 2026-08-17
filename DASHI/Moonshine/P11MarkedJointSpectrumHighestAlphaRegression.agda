@@ -1,7 +1,8 @@
 module DASHI.Moonshine.P11MarkedJointSpectrumHighestAlphaRegression where
 
 open import DASHI.Core.Prelude
-open import Data.Rational using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Rational using (_*_; _/_; -_)
 
 import DASHI.Moonshine.P11FiveStatePositiveHeckeLiftExact as Fine
 import DASHI.Moonshine.P11MarkedX2JointHeckeFrobeniusSpectrumExact as Joint
