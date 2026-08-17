@@ -136,9 +136,9 @@ asRound70Budget :
     energy
     (squareFloors witnesses)
     (concentrationEvents witnesses)
-asRound70Budget budget = record
-  { Funding.eventwiseFloors = squareFloorsMeetWitnessedCharges _
-  ; Funding.totalChargeBelowEnergy = totalChargeBelowEnergy budget
+asRound70Budget {witnesses = witnesses} budget = record
+  { eventwiseFloors = squareFloorsMeetWitnessedCharges witnesses
+  ; totalChargeBelowEnergy = totalChargeBelowEnergy budget
   }
 
 round73SquareAmplificationFundingCompilerConstructed : Bool
