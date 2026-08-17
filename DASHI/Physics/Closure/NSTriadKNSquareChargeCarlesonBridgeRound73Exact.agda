@@ -24,7 +24,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base using (ℚ; 0ℚ; _≤_; _<_)
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 open import Relation.Nullary.Negation.Core using (¬_)
 
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
@@ -97,10 +97,11 @@ squarePrefixAboveEnergyRefutesCarlesonBudget :
   energy < Funding.sumFloors (Square.squareFloors witnesses) →
   ¬ Carleson.PhysicalCarlesonBudget
       (squareEventsAsFundedNodes witnesses) energy
-squarePrefixAboveEnergyRefutesCarlesonBudget {witnesses = witnesses} excess budget =
+squarePrefixAboveEnergyRefutesCarlesonBudget
+    {energy = energy} {witnesses = witnesses} excess budget =
   Carleson.floorPrefixAboveBudgetRefutesCarlesonFunding
     (subst
-      (λ total → _ < total)
+      (energy <_)
       (sym (squareNodeFloorsExact witnesses))
       excess)
     budget
