@@ -39,15 +39,16 @@ module DASHI.Physics.Closure.NSTriadKNSquaredAmplificationBranchingThresholdRoun
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Rational.Base using (ℚ; 1ℚ; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
 import DASHI.Physics.Closure.NSTriadKNHHBadDyadicScalePrimitivesRound58 as Scale
 import DASHI.Physics.Closure.NSTriadKNPolynomialComplexityMultiplicityThresholdRound72Exact as Threshold
 import DASHI.Physics.Closure.NSTriadKNScaleDependentConcentrationFundingRound70Exact as Funding
+import DASHI.Physics.Closure.NSTriadKNBranchingCompensatesDyadicLossRound71Exact as Branch
 
 halfAmplitude : Nat → ℚ
 halfAmplitude zero = 1ℚ
@@ -62,7 +63,7 @@ halfAmplitudeSquareSuccessor : ∀ depth →
   ≡ Threshold.quarter * L2.square (halfAmplitude depth)
 halfAmplitudeSquareSuccessor depth = solve (halfAmplitude depth ∷ [])
 
-fourWaySquaredAmplitudeFloorBlock : Nat → Agda.Builtin.List.List ℚ
+fourWaySquaredAmplitudeFloorBlock : Nat → List ℚ
 fourWaySquaredAmplitudeFloorBlock = Threshold.quadraticComplexityBranchBlock
 
 fourWaySquaredAmplitudeFloorMassExact : ∀ depth →
@@ -70,8 +71,7 @@ fourWaySquaredAmplitudeFloorMassExact : ∀ depth →
 fourWaySquaredAmplitudeFloorMassExact = Threshold.quadraticBranchMassExact
 
 fourWaySquaredAmplitudeFloorCountExact : ∀ depth →
-  DASHI.Physics.Closure.NSTriadKNBranchingCompensatesDyadicLossRound71Exact.floorCount
-    (fourWaySquaredAmplitudeFloorBlock depth)
+  Branch.floorCount (fourWaySquaredAmplitudeFloorBlock depth)
   ≡ Threshold.quadrupleMultiplicity depth
 fourWaySquaredAmplitudeFloorCountExact = Threshold.quadraticBranchCountExact
 
