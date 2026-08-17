@@ -33,10 +33,10 @@ open import Data.Fin using (zero; suc)
 open import Data.Sum using (inj₁; inj₂)
 
 import DASHI.Foundations.FiniteInvolutionOrbitNormalFormExact as Orbit
-import DASHI.Foundations.FibreConstantObservableExact as Fibre
+import DASHI.Moonshine.OggPrimeControlMatrixExact as Matrix
+import DASHI.Moonshine.SupersingularFrobeniusOrbitSpectrumExact as Spectrum
 import DASHI.Moonshine.P11FiveStatePositiveHeckeLiftExact as Fine
 import DASHI.Moonshine.P11MarkedX2FrobeniusFrickeExact as MarkedF
-import DASHI.Moonshine.P11GeometricFrobeniusRealizationExact as CoarseF
 import DASHI.Moonshine.P11Fine5FibreObservableBridgeExact as Fibre5
 
 ------------------------------------------------------------------------
@@ -130,12 +130,11 @@ markedFrobeniusPairProjectsToSameClass =
   MarkedF.markedFrobeniusPreservesJClass Fine.a0
 
 coarseP11FullyFixed :
-  Orbit.fullyFixed CoarseF.p11NormalFormRealization.spectrum ≡ true
+  Orbit.fullyFixed (Spectrum.supersingularOrbitSpectrum Matrix.prime11) ≡ true
 coarseP11FullyFixed = refl
 
--- Use the generic quotient theorem directly: every coarse class code is
--- constant on the marked fibres even though the marked Frobenius pair survives
--- upstairs.
+-- Every coarse class code is constant on the marked fibres even though the
+-- marked Frobenius pair survives upstairs.
 coarseObservableErasesPairDistinction :
   Fibre5.fineClassCode Fine.a0 ≡ Fibre5.fineClassCode Fine.a1
 coarseObservableErasesPairDistinction = refl
