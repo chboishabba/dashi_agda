@@ -84,3 +84,4 @@ import DASHI.Moonshine.BrandtStackUnweightingControlsExact
 import DASHI.Moonshine.P37NonOggPositiveHeckeControlExact
 import DASHI.Moonshine.P37NonOggPositivePrimeSquareNeighboursExact
 import DASHI.Moonshine.BrandtStackCrossPrimeSelectorCutsetExact
+import DASHI.Moonshine.BrandtStackUnweightingHighestAlphaRegression
