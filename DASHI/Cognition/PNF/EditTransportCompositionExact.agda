@@ -1,6 +1,7 @@
 module DASHI.Cognition.PNF.EditTransportCompositionExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
 open import Data.Product using (_,_)
 
 open import DASHI.Cognition.PNF.EditTransportLeafLocalityExact
@@ -22,34 +23,34 @@ composeEditTransport first second =
       transportCoordinate second (transportCoordinate first coordinate))
 
 identityTransportCoordinate :
-  (coordinate : _) →
+  (coordinate : Nat) →
   transportCoordinate identityEditTransport coordinate ≡ coordinate
 identityTransportCoordinate coordinate = refl
 
 composedTransportCoordinate :
   (first second : EditTransport) →
-  (coordinate : _) →
+  (coordinate : Nat) →
   transportCoordinate (composeEditTransport first second) coordinate ≡
   transportCoordinate second (transportCoordinate first coordinate)
 composedTransportCoordinate first second coordinate = refl
 
 leftIdentityTransportCoordinate :
   (transport : EditTransport) →
-  (coordinate : _) →
+  (coordinate : Nat) →
   transportCoordinate (composeEditTransport identityEditTransport transport) coordinate ≡
   transportCoordinate transport coordinate
 leftIdentityTransportCoordinate transport coordinate = refl
 
 rightIdentityTransportCoordinate :
   (transport : EditTransport) →
-  (coordinate : _) →
+  (coordinate : Nat) →
   transportCoordinate (composeEditTransport transport identityEditTransport) coordinate ≡
   transportCoordinate transport coordinate
 rightIdentityTransportCoordinate transport coordinate = refl
 
 associativeTransportCoordinate :
   (first second third : EditTransport) →
-  (coordinate : _) →
+  (coordinate : Nat) →
   transportCoordinate
     (composeEditTransport (composeEditTransport first second) third)
     coordinate
