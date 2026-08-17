@@ -44,6 +44,8 @@ import DASHI.Cognition.PNF.CorpusLearningEconomy
 import DASHI.Cognition.PNF.ContextualWorldCache
 import DASHI.Cognition.PNF.RelativeOctantAddressReference
 import DASHI.Cognition.PNF.LazyHorizonIncrementalExecution
+import DASHI.Cognition.PNF.EditTransportLeafLocalityExact
+import DASHI.Cognition.PNF.EditTransportLeafLocalityRegression
 import DASHI.Cognition.PNF.FrequencyAdaptiveSymbolCode
 import DASHI.Cognition.PNF.HotColdExecutionProjection
 import DASHI.Cognition.PNF.WorkloadGranularityReference
