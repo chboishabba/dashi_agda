@@ -38,6 +38,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanYM4SourceNormalizedCouplingRecurrenceExact as Flow
 import DASHI.Physics.YangMills.BalabanYM4FiniteModeBetaToSourceTrajectoryExact as FiniteBeta
 import DASHI.Physics.YangMills.Balaban1989FiniteModeInverseSquareTerminalHistoryExact as History
+import DASHI.Physics.YangMills.Balaban1989ActiveScaleTheorem1BetaBridgeExact as ActiveTheorem1
 import DASHI.Physics.YangMills.BalabanCMP119SourceNativeRawStateActiveBoundsExact as Raw
 import DASHI.Physics.YangMills.BalabanCMP122Theorem1ToRawCMP119ActiveExact as Theorem1Raw
 
@@ -156,8 +157,7 @@ activeRawWitnessFromFiniteHistoryAndTheorem1 :
       Action WilsonTerm SmallFieldTerm RTerm BoundaryTerm Vacuum)
     {predicates : Raw.CMP119Section2PredicateFamily
       (rawStateFromFiniteBetaHistory objects)} →
-  (theorem1 :
-    DASHI.Physics.YangMills.Balaban1989ActiveScaleTheorem1BetaBridgeExact.ActiveBalaban1989Theorem1Witness
+  (theorem1 : ActiveTheorem1.ActiveBalaban1989Theorem1Witness
       (Theorem1Raw.asActiveEffectiveDensityFlow
         {trajectory = trajectory} {Mode = Mode} {Atom = Atom}
         {betaData = betaData} {history = history}
