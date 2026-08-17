@@ -53,6 +53,8 @@ import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Ph
 import DASHI.Physics.YangMills.BalabanP33FiniteKKTAdmissibleProjectorExact as KKT
 import DASHI.Physics.YangMills.BalabanP33FiniteKKTPseudoinverseProjectorExact as Pseudo
 import DASHI.Physics.YangMills.BalabanSelectedSourceSubsetConstraintPartialExact as Source
+open Source.PlaquetteSupportedSource using (support)
+open Source.LiteralSourceDefectSubsetProducer using (sourceSupported)
 
 plaquetteWilsonFirstVariation :
   Orbit.RationalSU2Background4 →
@@ -88,10 +90,6 @@ localWilsonFirstVariationCoordinates background plaquette coordinate =
   plaquetteWilsonFirstVariation background
     (localBasisDirection plaquette coordinate) plaquette
 
--- Canonical zero-extension of the local differential to the full physical
--- carrier.  The second projection is intentional: it records the global Riesz
--- coordinate vector while the coefficient calculation above takes place on
--- the constrained basis itself.
 selectedWilsonFirstVariationCovector :
   Orbit.RationalSU2Background4 →
   Flat.Plaquette4 → KKT.StateVector
