@@ -41,6 +41,7 @@ open import Agda.Primitive using (Level; lsuc)
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
+open import Data.List.Base using (List)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
@@ -163,7 +164,9 @@ literalPhysicalCrossMassBelowSelfMassProduct source q s N output =
 -- from silently changing the support object.
 localizedRowAt :
   ∀ {r} (source : LiteralPhysicalComGramSource {r}) q N output →
-  _
+  List
+    (Localized.DominantHatLocalizedComEntry
+      (model source) q (integerEmbedding source) (velocity source))
 localizedRowAt source q N output =
   Localized.literalDominantHatLocalizedOutputRow
     (model source) q N (integerEmbedding source) (velocity source) output
