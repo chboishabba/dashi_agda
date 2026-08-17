@@ -24,6 +24,10 @@ v0 -> v1 -> ... -> vn
 
 without requiring a new global `v0 <-> vn` matching problem after every revision. The same module proves dependency-closure monotonicity under enlarged edit sets / reachability: adding edited source atoms cannot make an already predicted affected leaf disappear when the reverse-dependency relation is fixed or enlarged.
 
+`DASHI/Cognition/PNF/DependencyDerivedOccurrenceIdentityExact.agda` covers source-free leaves such as exports and proofs. Their occurrence identity is the producer family/slot together with the ordered occurrence identities of their dependencies. The produced semantic value is a separate field and is not a correspondence premise. The module also proves transitivity of this dependency-derived match across a revision lineage.
+
+This matches the runtime rule now used by the numeric leaf audit: producer-authored trigger/target/evidence occurrence provenance establishes residual identity; exports and proofs then inherit correspondence from uniquely paired dependencies plus stable producer structure. Post-resolution target/state, ranks/scores, selected identity entities and final semantic digests remain value rather than occurrence identity.
+
 `DASHI/Cognition/PNF/EditTransportLeafLocalityRegression.agda` contains finite witnesses that the same transported occurrence may carry a changed semantic value and that sound closure locality does not imply precision/minimality.
 
 No external mathematical source or DOI is asserted for this exact construction. It is an internal ITIR/PNF formalization extracted from the runtime audit and existing provenance/reopenability architecture.
