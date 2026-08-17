@@ -30,10 +30,12 @@ import DASHI.Physics.YangMills.BalabanSelectedWilsonFirstVariationPlaquetteSuppo
 -- polarization derives all sixteen signed degree-pair lower bounds from only
 -- four source and four defect diagonal K+ energies, and the endpoint adapter
 -- turns eight uniform diagonal uppers into the sixteen lower boxes expected by
--- the existing uniform selected-minimizer consumer.
+-- the existing uniform selected-minimizer consumer.  The canonical adapter
+-- proves these are the SAME canonical G2 degree blocks, not a surrogate table.
 import DASHI.Physics.YangMills.BalabanKKTGramPseudoinversePositiveExact
 import DASHI.Physics.YangMills.BalabanKKTGreenPolarizationLowerBoundExact
 import DASHI.Physics.YangMills.BalabanSelectedGreenDiagonalEndpointAdapterExact
+import DASHI.Physics.YangMills.BalabanCanonicalGreenDegreeDiagonalReductionExact
 
 -- F1/F2 theorem selection: Lawler--Sokal includes reversible,
 -- nonreversible, and killed-process regimes.  If the continuum-adjacent
