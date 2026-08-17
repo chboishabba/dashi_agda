@@ -1,27 +1,29 @@
 module DASHI.Moonshine.P11AristotleHeckeCrossPollinationEverything where
 
 ------------------------------------------------------------------------
--- Aggregate for the source-faithful characteristic-11 classical
--- correspondence / Brandt / Aristotle-Hecke cross-pollination.
+-- Aggregate for the characteristic-11 arithmetic Brandt algebra plus the
+-- representation-side lift/falsifier tranche.
 --
--- The stack now contains:
---
+-- Arithmetic side:
 -- * independent Phi_2, Phi_3 and Phi_5 modular-polynomial reductions;
 -- * corrected spectral vocabulary: Laplacian eigenvalue 5 vs adjacency gap 1;
--- * a source-certified geometric supersingular carrier {j=0,j=1728=1 mod11};
--- * reduced automorphism orders 3 and 2 and derived reciprocal Brandt weights
---   2 and 3;
+-- * source-certified geometric supersingular carrier {j=0,j=1728=1 mod11};
+-- * automorphism-derived reciprocal Brandt weights 2 and 3;
 -- * arbitrary-vector weighted self-adjointness for B_11(2);
--- * prime Brandt generators B_11(2), B_11(3), B_11(5) with Ramanujan-square
---   certificates, independently checked by Phi_2/Phi_3/Phi_5;
--- * their exact commuting coprime products;
--- * prime-square Brandt operators at 4,9,25 satisfying the weight-two Hecke
---   recurrence, including the independently checked Phi_4(cyclic)+I correction
---   for full T_4.
+-- * B_11(2), B_11(3), B_11(5), their coprime products and prime squares.
 --
--- Equality of the B_11(5) two-state matrix with the cyclic Phi_4 matrix is kept
--- explicitly weaker than equality of the underlying geometric correspondences.
--- The representation-side joint-Hecke intertwiner remains the next frontier.
+-- Representation-side falsifier:
+-- * p=11 gives j=5 and six actual matched-dihedral sectors;
+-- * an explicit split 6->2 test lens mechanically lifts every Brandt operator;
+-- * the lift is lossy and has explicit kernel freedom;
+-- * even a full unital joint Hecke algebra can be engineered by putting a
+--   compatible scalar Hecke character on the kernel;
+-- * that completion has a literal negative coefficient on an actual rho_2
+--   basis state, hence is not a nonnegative multiplicity correspondence.
+--
+-- Therefore the next producer is not "some intertwiner" or even "some joint
+-- Hecke algebra": it is a source-native positive representation correspondence
+-- whose quotient genuinely realizes the Brandt system.
 ------------------------------------------------------------------------
 
 import DASHI.Moonshine.P11ClassicalTwoIsogenyCorrespondenceExact
@@ -35,3 +37,7 @@ import DASHI.Moonshine.P11AristotleHeckeSquareCrossPollinationExact
 import DASHI.Moonshine.P11Phi4CyclicVsFullHeckeExact
 import DASHI.Moonshine.P11BrandtJointHeckeAlgebraExact
 import DASHI.Moonshine.P11BrandtPrimePowerHeckeExact
+import DASHI.Moonshine.P11MatchedDihedralSplitLiftNoGoExact
+import DASHI.Moonshine.P11MatchedDihedralSixSectorBasisExact
+import DASHI.Moonshine.P11MatchedDihedralLiftKernelFreedomExact
+import DASHI.Moonshine.P11MatchedDihedralUnitalHeckeCompletionExact
