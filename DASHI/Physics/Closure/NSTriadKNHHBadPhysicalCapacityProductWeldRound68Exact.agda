@@ -35,9 +35,10 @@ module DASHI.Physics.Closure.NSTriadKNHHBadPhysicalCapacityProductWeldRound68Exa
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base using (ℚ)
+open import Data.Rational.Base using (ℚ; _≤_)
 
 import DASHI.Physics.Closure.NSTriadKNAdmissibleOwnerTaxLanguageRound28Exact as Owner
+import DASHI.Physics.Closure.NSTriadKNHHBadSingleThresholdSufficesRound47Exact as Selected
 import DASHI.Physics.Closure.NSTriadKNHHBadSelectedProfileMultiplicityRound62Exact as Physical
 import DASHI.Physics.Closure.NSTriadKNHHBadCapacityProductRound63Exact as Product
 
@@ -46,7 +47,7 @@ physicalBadCapacityProduct :
   Physical.PhysicalSelectedProfileMultiplicityInput environment effectiveViscosity → ℚ
 physicalBadCapacityProduct input =
   Product.badCapacityProduct
-    (Physical.Selected.selectedProfileCeiling (Physical.selectedProfile input))
+    (Selected.selectedProfileCeiling (Physical.selectedProfile input))
     (Physical.badChargeMultiplicity input)
 
 physicalHHBadOwnerEtaFactorsThroughCapacityProduct :
@@ -65,8 +66,6 @@ record PhysicalBadCapacityProductBound
     (budget : ℚ) : Set where
   field
     capacityProductBelowBudget : physicalBadCapacityProduct input ≤ budget
-  where
-  open import Data.Rational.Base using (_≤_)
 
 round68PhysicalHHBadTargetIsSingleCapacityProduct : Bool
 round68PhysicalHHBadTargetIsSingleCapacityProduct = true
