@@ -27,11 +27,10 @@ module DASHI.Physics.YangMills.BalabanBooleanFourCubeWalshMobiusSeparationExact 
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
 open import Data.Empty using (⊥)
-open import Data.Integer.Base using (+_)
-open import Data.Rational using (ℚ; 0ℚ; 1ℚ; _*_; _-_)
-open import Relation.Binary.PropositionalEquality using (cong₂)
+open import Data.Rational using (1ℚ; -_)
+open import Relation.Binary.PropositionalEquality using (cong₂; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanWilsonBooleanFourCubeExact as Cube
@@ -110,23 +109,23 @@ permuteSubset swap23 Cube.s023 = Cube.s023
 permuteSubset swap23 Cube.s123 = Cube.s123
 permuteSubset swap23 Cube.s0123 = Cube.s0123
 
-degreeValue : Cube.Subset4 → ℚ
-degreeValue Cube.empty = + 0
-degreeValue Cube.s0 = + 1
-degreeValue Cube.s1 = + 1
-degreeValue Cube.s2 = + 1
-degreeValue Cube.s3 = + 1
-degreeValue Cube.s01 = + 2
-degreeValue Cube.s02 = + 2
-degreeValue Cube.s03 = + 2
-degreeValue Cube.s12 = + 2
-degreeValue Cube.s13 = + 2
-degreeValue Cube.s23 = + 2
-degreeValue Cube.s012 = + 3
-degreeValue Cube.s013 = + 3
-degreeValue Cube.s023 = + 3
-degreeValue Cube.s123 = + 3
-degreeValue Cube.s0123 = + 4
+degreeValue : Cube.Subset4 → Nat
+degreeValue Cube.empty = 0
+degreeValue Cube.s0 = 1
+degreeValue Cube.s1 = 1
+degreeValue Cube.s2 = 1
+degreeValue Cube.s3 = 1
+degreeValue Cube.s01 = 2
+degreeValue Cube.s02 = 2
+degreeValue Cube.s03 = 2
+degreeValue Cube.s12 = 2
+degreeValue Cube.s13 = 2
+degreeValue Cube.s23 = 2
+degreeValue Cube.s012 = 3
+degreeValue Cube.s013 = 3
+degreeValue Cube.s023 = 3
+degreeValue Cube.s123 = 3
+degreeValue Cube.s0123 = 4
 
 degreePermutationInvariant :
   (permutation : AdjacentPermutation4) →
@@ -181,7 +180,7 @@ degreePermutationInvariant swap23 Cube.s023 = refl
 degreePermutationInvariant swap23 Cube.s123 = refl
 degreePermutationInvariant swap23 Cube.s0123 = refl
 
-degreeKernel : Cube.Subset4 → Cube.Subset4 → ℚ
+degreeKernel : Cube.Subset4 → Cube.Subset4 → Nat
 degreeKernel left right = degreeValue left * degreeValue right
 
 degreeKernelPermutationInvariant :
@@ -201,9 +200,9 @@ degreeKernelPermutationInvariant permutation left right =
 ------------------------------------------------------------------------
 
 record XorConvolutionNecessaryDiagonal
-    (kernel : Cube.Subset4 → Cube.Subset4 → ℚ) : Set₁ where
+    (kernel : Cube.Subset4 → Cube.Subset4 → Nat) : Set₁ where
   field
-    profileAtEmpty : ℚ
+    profileAtEmpty : Nat
     emptyDiagonalUsesProfile :
       kernel Cube.empty Cube.empty ≡ profileAtEmpty
     s0DiagonalUsesSameProfile :
@@ -211,19 +210,26 @@ record XorConvolutionNecessaryDiagonal
 
 open XorConvolutionNecessaryDiagonal public
 
-degreeKernelEmptyDiagonal : degreeKernel Cube.empty Cube.empty ≡ 0ℚ
+degreeKernelEmptyDiagonal : degreeKernel Cube.empty Cube.empty ≡ zero
 degreeKernelEmptyDiagonal = refl
 
-degreeKernelS0Diagonal : degreeKernel Cube.s0 Cube.s0 ≡ 1ℚ
+degreeKernelS0Diagonal : degreeKernel Cube.s0 Cube.s0 ≡ suc zero
 degreeKernelS0Diagonal = refl
+
+zeroNotOne : zero ≡ suc zero → ⊥
+zeroNotOne ()
 
 degreeSymmetryDoesNotImplyXorConvolution :
   XorConvolutionNecessaryDiagonal degreeKernel → ⊥
-degreeSymmetryDoesNotImplyXorConvolution evidence
-  rewrite degreeKernelEmptyDiagonal
-        | degreeKernelS0Diagonal
-        | emptyDiagonalUsesProfile evidence
-        | s0DiagonalUsesSameProfile evidence = λ () → _
+degreeSymmetryDoesNotImplyXorConvolution evidence =
+  zeroNotOne
+    (trans
+      (sym degreeKernelEmptyDiagonal)
+      (trans
+        (emptyDiagonalUsesProfile evidence)
+        (trans
+          (sym (s0DiagonalUsesSameProfile evidence))
+          degreeKernelS0Diagonal)))
 
 booleanFourCubeWalshMobiusSeparatedLevel : ProofLevel
 booleanFourCubeWalshMobiusSeparatedLevel = machineChecked
