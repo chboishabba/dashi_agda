@@ -67,13 +67,6 @@ import DASHI.Moonshine.P11FiveStatePositiveHeckeLiftExact as Fine5
 import DASHI.Moonshine.P11GeometricSupersingularCarrierExact as Geo
 import DASHI.Moonshine.P11FullLevel2RigidificationExact as Level2
 
-------------------------------------------------------------------------
--- Reduced Deuring polynomial H_11 over F_11.
--- Coefficients are binom(5,i)^2 reduced modulo 11:
---
---   1,25,100,100,25,1 -> 1,3,1,1,3,1.
-------------------------------------------------------------------------
-
 record Degree5Coefficients : Set where
   constructor degree5
   field
@@ -90,17 +83,6 @@ binomialSquareCoefficientsReduced = degree5 1 3 1 1 3 1
 deuring11IsReducedBinomialSquarePolynomial :
   deuring11Reduced ≡ binomialSquareCoefficientsReduced
 deuring11IsReducedBinomialSquarePolynomial = refl
-
-------------------------------------------------------------------------
--- Exact coefficient-level mod-11 factorization certificate.
---
--- Over Z,
---
--- (x-2)(x+1)(x+5)(x^2-x+1)
---   = x^5 + 3x^4 - 10x^3 + x^2 + 3x - 10.
---
--- Reducing -10 to 1 mod 11 gives exactly deuring11Reduced.
-------------------------------------------------------------------------
 
 record Degree5IntegerFactorExpansion : Set where
   constructor degree5FactorExpansion
@@ -121,8 +103,6 @@ factorProductMatchesDeuringCoefficients = refl , refl , refl , refl , refl , ref
 
 ------------------------------------------------------------------------
 -- Numeric root certificates for the three F_11 roots.
--- Evaluate the reduced integer representative.  Equality to 11*k is a
--- division-free certificate that the value vanishes modulo 11.
 ------------------------------------------------------------------------
 
 h11Representative : Nat → Nat
@@ -150,10 +130,9 @@ lambda10IsRootMod11 = refl
 --
 --   3(1-lambda+lambda^2)^3 = lambda^2(1-lambda)^2.
 --
--- We evaluate with the congruent nonnegative polynomial
---   q(lambda)=1 + 10 lambda + lambda^2
--- for 1-lambda+lambda^2, and certify the difference modulo 11 by equality
--- after adding a concrete multiple of 11 to the smaller side.
+-- qRepresentative is congruent to 1-lambda+lambda^2 and 12-x is congruent to
+-- 1-x.  Each theorem below exhibits the exact multiple of 11 separating the
+-- two integer representatives.
 ------------------------------------------------------------------------
 
 qRepresentative : Nat → Nat
@@ -165,12 +144,17 @@ leftJ1Representative x = 3 * qRepresentative x * qRepresentative x * qRepresenta
 rightJ1Representative : Nat → Nat
 rightJ1Representative x = x * x * ((12 - x) * (12 - x))
 
--- Direct source-facing residues are recorded as finite data; the exact
--- denominator-cleared congruence is represented by explicit multiples of 11.
-
 lambda2JIsOneMod11 :
-  leftJ1Representative 2 + 11 * 44 ≡ rightJ1Representative 2
+  rightJ1Representative 2 + 11 * 4225 ≡ leftJ1Representative 2
 lambda2JIsOneMod11 = refl
+
+lambda6JIsOneMod11 :
+  rightJ1Representative 6 + 11 * 248793 ≡ leftJ1Representative 6
+lambda6JIsOneMod11 = refl
+
+lambda10JIsOneMod11 :
+  rightJ1Representative 10 + 11 * 2214673 ≡ leftJ1Representative 10
+lambda10JIsOneMod11 = refl
 
 ------------------------------------------------------------------------
 -- The quadratic factor is exactly the Legendre j-numerator factor.
@@ -207,10 +191,6 @@ lambdaJClass lambda6 = Geo.j1728SS
 lambdaJClass lambda10 = Geo.j1728SS
 lambdaJClass lambdaQuadratic0 = Geo.jZeroSS
 lambdaJClass lambdaQuadratic1 = Geo.jZeroSS
-
-------------------------------------------------------------------------
--- Exact chart to the existing five-state geometry.
-------------------------------------------------------------------------
 
 lambdaToFine5 : P11SupersingularLambda → Fine5.P11Fine5
 lambdaToFine5 lambdaQuadratic0 = Fine5.a0
@@ -249,10 +229,6 @@ lambdaChartRespectsJProjection lambda10 = refl
 lambdaChartRespectsJProjection lambdaQuadratic0 = refl
 lambdaChartRespectsJProjection lambdaQuadratic1 = refl
 
-------------------------------------------------------------------------
--- Exact agreement with the abstract full-level-2 rigidified carrier.
-------------------------------------------------------------------------
-
 lambdaToLevel2Rigidified : P11SupersingularLambda → Level2.P11Level2Rigidified
 lambdaToLevel2Rigidified x = Level2.fromFine5 (lambdaToFine5 x)
 
@@ -269,6 +245,9 @@ record P11SupersingularLegendreBoundary : Set where
 
     threeF11LinearRootsCertified : Bool
     threeF11LinearRootsCertifiedIsTrue : threeF11LinearRootsCertified ≡ true
+
+    threeLinearRootsJ1728Certified : Bool
+    threeLinearRootsJ1728CertifiedIsTrue : threeLinearRootsJ1728Certified ≡ true
 
     quadraticFactorIdentifiedWithJZeroNumerator : Bool
     quadraticFactorIdentifiedWithJZeroNumeratorIsTrue :
@@ -295,6 +274,8 @@ canonicalP11SupersingularLegendreBoundary =
     ; factorPatternP11ConstructedIsTrue = refl
     ; threeF11LinearRootsCertified = true
     ; threeF11LinearRootsCertifiedIsTrue = refl
+    ; threeLinearRootsJ1728Certified = true
+    ; threeLinearRootsJ1728CertifiedIsTrue = refl
     ; quadraticFactorIdentifiedWithJZeroNumerator = true
     ; quadraticFactorIdentifiedWithJZeroNumeratorIsTrue = refl
     ; fiveStateCarrierIdentifiedWithSupersingularLegendreChart = true
