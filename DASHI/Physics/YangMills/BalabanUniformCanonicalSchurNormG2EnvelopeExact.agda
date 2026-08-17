@@ -37,9 +37,6 @@ module DASHI.Physics.YangMills.BalabanUniformCanonicalSchurNormG2EnvelopeExact w
 -- + 4 defect-degree norm-square bounds
 -- + 1 positive charge floor
 -- + the final scalar endpoint comparison.
---
--- The compiler constructs the exact diagonal-energy endpoints and then reuses
--- the canonical 4+8 -> 4+16 -> selected-minimizer theorem chain.
 ------------------------------------------------------------------------
 
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _≤_)
@@ -50,6 +47,7 @@ import DASHI.Physics.YangMills.BalabanP33FiniteKKTPseudoinverseProjectorExact as
 import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Physical
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionFlatCurlExact as Flat
 import DASHI.Physics.YangMills.BalabanSelectedCanonicalConstraintAtomsFromSubsetExact as Canonical
+import DASHI.Physics.YangMills.BalabanSelectedCanonicalConstraintDegreeBlocksExact as CanonicalDegree
 import DASHI.Physics.YangMills.BalabanSelectedCorrelatedResidualOwnershipExact as Ownership
 import DASHI.Physics.YangMills.BalabanP33CorrelatedMobiusDegreeJointExact as Degree
 import DASHI.Physics.YangMills.BalabanKKTPseudoinverseSchurEnergyBoundExact as Energy
@@ -66,44 +64,35 @@ record UniformCanonicalSchurNormG2Data
     InCertifiedRegion : Configuration → Set
     selectedMinimizer : Configuration
     selectedMinimizerInRegion : InCertifiedRegion selectedMinimizer
-
     firstVariationAt : Configuration → KKT.StateVector
     bondFieldAt : Configuration → Physical.PhysicalSU2BondField4
     plaquetteAt : Configuration → Flat.Plaquette4
-
     canonicalInputsAt : ∀ configuration →
       Canonical.CanonicalSubsetCorrelatedAuthorityInputs
         pseudoData
         (firstVariationAt configuration)
         (bondFieldAt configuration)
         (plaquetteAt configuration)
-
     chargeAt : Configuration → ℚ
-
     rawUpper : Degree.MobiusDegree → ℚ
     rawUpperSound : ∀ configuration →
       InCertifiedRegion configuration → ∀ degree →
-      DASHI.Physics.YangMills.BalabanSelectedCanonicalConstraintDegreeBlocksExact.canonicalRawDegreeBlock
+      CanonicalDegree.canonicalRawDegreeBlock
         (canonicalInputsAt configuration) degree
       ≤ rawUpper degree
-
     schur : Energy.PseudoinverseSchurBound pseudoData
-
     sourceNormUpper : Degree.MobiusDegree → ℚ
     defectNormUpper : Degree.MobiusDegree → ℚ
-
     sourceNormUpperSound : ∀ configuration →
       InCertifiedRegion configuration → ∀ degree →
       NormReduction.canonicalSourceDegreeNormSq
         (canonicalInputsAt configuration) degree
       ≤ sourceNormUpper degree
-
     defectNormUpperSound : ∀ configuration →
       InCertifiedRegion configuration → ∀ degree →
       NormReduction.canonicalDefectDegreeNormSq
         (canonicalInputsAt configuration) degree
       ≤ defectNormUpper degree
-
     chargeLower : ℚ
     chargeLowerPositive : 0ℚ ≤ chargeLower
     chargeLowerSound : ∀ configuration →
@@ -197,11 +186,5 @@ canonicalSchurNormSelectedMinimizerG2Closure dataSet closure =
 uniformCanonicalSchurNormG2CompilerLevel : ProofLevel
 uniformCanonicalSchurNormG2CompilerLevel = machineChecked
 
--- Physical frontier after this exact compiler:
---   four raw upper endpoints;
---   one common row-mass bound for the literal K+;
---   four source and four defect degree-vector norm-square endpoints;
---   one positive charge floor;
---   one final scalar endpoint comparison.
 selectedRegionCanonicalSchurNormG2PhysicalLevel : ProofLevel
 selectedRegionCanonicalSchurNormG2PhysicalLevel = conditional
