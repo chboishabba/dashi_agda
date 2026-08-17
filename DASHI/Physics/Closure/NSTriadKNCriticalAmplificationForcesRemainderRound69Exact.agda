@@ -47,10 +47,10 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; suc)
 open import Agda.Builtin.List using ([]; _∷_)
-open import Data.Rational.Base using (ℚ; _+_; -_; _≤_)
+open import Data.Rational.Base using (ℚ; _+_; _*_; -_; _≤_)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst; subst₂)
+open import Relation.Binary.PropositionalEquality using (subst₂)
 
 import DASHI.Physics.Closure.NSTriadKNCriticalRatioNormalizationRound63Exact as C1
 
@@ -102,8 +102,6 @@ record MultiplicativeCriticalRatioStep
     successorBound : ∀ n →
       C1.normalizedCriticalRatio positiveBlock (suc n)
       ≤ alpha n * C1.normalizedCriticalRatio positiveBlock n + remainder n
-  where
-  open import Data.Rational.Base using (_*_)
 
 open MultiplicativeCriticalRatioStep public
 
@@ -112,10 +110,10 @@ multiplicativeStepAsDecomposition :
     {positiveBlock : C1.PositiveCriticalBlockScale balances block} →
   MultiplicativeCriticalRatioStep positiveBlock →
   CriticalRatioStepDecomposition positiveBlock
-multiplicativeStepAsDecomposition step = record
+multiplicativeStepAsDecomposition {positiveBlock = positiveBlock} step = record
   { inherited = λ n →
       MultiplicativeCriticalRatioStep.alpha step n
-      * C1.normalizedCriticalRatio _ n
+      * C1.normalizedCriticalRatio positiveBlock n
   ; remainder = MultiplicativeCriticalRatioStep.remainder step
   ; successorBound = MultiplicativeCriticalRatioStep.successorBound step
   }
