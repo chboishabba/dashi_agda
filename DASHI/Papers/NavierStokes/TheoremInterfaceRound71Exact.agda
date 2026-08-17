@@ -42,27 +42,30 @@ module DASHI.Papers.NavierStokes.TheoremInterfaceRound71Exact where
 -- Propagation side:
 -- * Round70's one-event-per-depth dyadic no-go is not a no-go for dyadic LOSS
 --   itself.  Round71 constructs a branching block whose descendant count
---   doubles while every floor halves; total guaranteed floor is exactly
---   conserved.
--- * Weighted branching has total floor exactly W at every depth, so W=E+1
---   exceeds any finite budget E.  Thus the physical discriminator is genuine
---   duplicate-free multiplicity TIMES per-descendant loss, not loss alone.
--- * No physical Navier-Stokes branching theorem is claimed yet.
+--   doubles while every floor halves; total guaranteed floor is conserved.
+-- * Weighted branching has total floor W at every depth, so W=E+1 exceeds any
+--   finite budget E.  The discriminator is duplicate-free multiplicity TIMES
+--   per-descendant loss, not loss alone.
 --
 -- Trajectory side:
 -- * the old Assignment = CoordinateVariable -> Q carrier is formally rejected
---   as the finite cutoff Picard space: CoordinateVariable contains an injective
---   Nat-indexed family of Fourier slots, and Q is not the physical real field;
--- * a finite real canonical coordinate carrier is constructed with exactly six
---   Carrier F slots per retained canonical reality-orbit mode;
--- * literal physical TransverseModeCoefficient lists are encoded exactly into
---   those finite real slots, preserving the mode-slot order.
+--   as the finite cutoff Picard space;
+-- * a finite real canonical coordinate carrier is constructed with six Carrier
+--   F slots per retained canonical reality-orbit mode;
+-- * literal physical coefficients and the actual canonical RHS output are
+--   aligned exactly to those slots;
+-- * a FIXED-CUTOFF autonomous full-space reality vector field is now
+--   constructed.  It stores arbitrary Complex3 F values on canonical positive
+--   modes, reconstructs negatives by conjugation, keeps N/E/inverse-square/nu
+--   fixed independently of state, and evaluates the literal Leray-projected
+--   nonlinearity from the raw finite Galerkin system.
 --
--- The remaining trajectory theorem is therefore narrower and more honest:
--- construct the canonical projected NS polynomial vector field on this finite
--- real carrier (or an equivalent transverse chart), prove local Lipschitz,
--- invoke finite-dimensional real Picard, and transport/invariantly retain the
--- transverse physical state.  Only then differentiate the localized identity.
+-- Thus the structural finite-dimensional ODE carrier is no longer the missing
+-- piece.  The remaining A-side analytic theorem is to flatten this same field
+-- to the six-real coordinates, prove its degree-two/local-Lipschitz formula over
+-- the actual real-number authority, invoke finite-dimensional Picard, and prove
+-- the transverse subspace plus energy continuation.  Only then differentiate
+-- the localized identity.
 --
 -- Clay promotion remains false.
 ------------------------------------------------------------------------
@@ -72,6 +75,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Papers.NavierStokes.TheoremInterfaceRound70Exact
 import DASHI.Physics.Closure.NSTriadKNHighestAlphaRound71Exact as R71
+import DASHI.Physics.Closure.NSTriadKNFixedCanonicalRealityVectorFieldRound71Exact as Fixed
 
 round71PaperBranchingCompensatesDyadicLoss : Bool
 round71PaperBranchingCompensatesDyadicLoss =
@@ -89,9 +93,21 @@ round71PaperPhysicalToFiniteRealEncodingConstructed : Bool
 round71PaperPhysicalToFiniteRealEncodingConstructed =
   R71.round71PhysicalToFiniteRealEncodingConstructed
 
-round71PaperCanonicalPhysicalRHSActsOnFiniteRealCarrier : Bool
-round71PaperCanonicalPhysicalRHSActsOnFiniteRealCarrier =
-  R71.round71CanonicalPhysicalRHSActsOnFiniteRealCarrier
+round71PaperCanonicalRHSOutputOnFiniteRealCarrier : Bool
+round71PaperCanonicalRHSOutputOnFiniteRealCarrier =
+  R71.round71CanonicalRHSOutputOnFiniteRealCarrierConstructed
+
+round71PaperFixedGeometryIndependentOfState : Bool
+round71PaperFixedGeometryIndependentOfState =
+  Fixed.round71FixedCanonicalGeometryIndependentOfState
+
+round71PaperFullSpaceRealityVectorFieldConstructed : Bool
+round71PaperFullSpaceRealityVectorFieldConstructed =
+  Fixed.round71FullSpaceRealityVectorFieldConstructed
+
+round71PaperRealCoordinatePolynomialLipschitzConstructed : Bool
+round71PaperRealCoordinatePolynomialLipschitzConstructed =
+  Fixed.round71FullSpaceRealCoordinatePolynomialLipschitzConstructed
 
 round71PaperSelectedGalerkinTrajectoryConstructed : Bool
 round71PaperSelectedGalerkinTrajectoryConstructed =
@@ -131,9 +147,21 @@ round71PaperPhysicalToFiniteRealEncodingConstructedIsTrue :
   round71PaperPhysicalToFiniteRealEncodingConstructed ≡ true
 round71PaperPhysicalToFiniteRealEncodingConstructedIsTrue = refl
 
-round71PaperCanonicalPhysicalRHSActsOnFiniteRealCarrierIsFalse :
-  round71PaperCanonicalPhysicalRHSActsOnFiniteRealCarrier ≡ false
-round71PaperCanonicalPhysicalRHSActsOnFiniteRealCarrierIsFalse = refl
+round71PaperCanonicalRHSOutputOnFiniteRealCarrierIsTrue :
+  round71PaperCanonicalRHSOutputOnFiniteRealCarrier ≡ true
+round71PaperCanonicalRHSOutputOnFiniteRealCarrierIsTrue = refl
+
+round71PaperFixedGeometryIndependentOfStateIsTrue :
+  round71PaperFixedGeometryIndependentOfState ≡ true
+round71PaperFixedGeometryIndependentOfStateIsTrue = refl
+
+round71PaperFullSpaceRealityVectorFieldConstructedIsTrue :
+  round71PaperFullSpaceRealityVectorFieldConstructed ≡ true
+round71PaperFullSpaceRealityVectorFieldConstructedIsTrue = refl
+
+round71PaperRealCoordinatePolynomialLipschitzConstructedIsFalse :
+  round71PaperRealCoordinatePolynomialLipschitzConstructed ≡ false
+round71PaperRealCoordinatePolynomialLipschitzConstructedIsFalse = refl
 
 round71PaperSelectedGalerkinTrajectoryConstructedIsFalse :
   round71PaperSelectedGalerkinTrajectoryConstructed ≡ false
