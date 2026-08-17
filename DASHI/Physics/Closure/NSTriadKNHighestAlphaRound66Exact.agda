@@ -35,11 +35,23 @@ module DASHI.Physics.Closure.NSTriadKNHighestAlphaRound66Exact where
 -- `PhysicalTriadIncidence`, with exact projections back to both
 -- `physicalOutputFiber` and `annularOutputFibreCoefficients`.
 --
+-- B3 LITERAL BONY BRANCH:
+-- The physical transport roles are now preserved through that split.  Since a
+-- triad p+q=k gives advector p, input q and output k, the three constructors are
+-- exactly low-advector, low-input and low-output branches.  In the low-advector
+-- branch incompressibility gives the exact derivative relocation
+--
+--   k . u_p = q . u_p,
+--
+-- while q and k are the two width-one dominant legs.  This exposes the exact
+-- Fourier identity to which the remaining Taylor multiplier estimate applies.
+--
 -- CORRECTED B FRONTIER:
--- The remaining hard B theorem is now not "find a hat" or "find the low leg".
--- Both are constructed coefficientwise.  It is the quantitative Taylor/operator
--- estimate that turns the low-vs-dominant shell separation of this literal row
--- into the internal factorized overlap bound
+-- The remaining hard B theorem is now not "find a hat", "find the low leg", or
+-- "identify the physical branch".  Those are constructed coefficientwise.  It
+-- is the quantitative Taylor/operator estimate that turns the low-vs-dominant
+-- shell separation of this literal row into the internal factorized overlap
+-- bound
 --
 --   overlap <= twoBranchSquaredGap gap.
 --
@@ -55,12 +67,16 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 import DASHI.Physics.Closure.NSTriadKNHighestAlphaRound65Exact
 import DASHI.Physics.Closure.NSTriadKNResonantDominantLowLegSplitRound66Exact
 import DASHI.Physics.Closure.NSTriadKNComAnnularDominantHatLocalizedRowRound66Exact
+import DASHI.Physics.Closure.NSTriadKNComBonyBranchGeometryRound66Exact
 
 round66CanonicalLowLegConstructedForEveryPhysicalTriad : Bool
 round66CanonicalLowLegConstructedForEveryPhysicalTriad = true
 
 round66LiteralAnnularRowCarriesHatAndLowLegOnSameIndex : Bool
 round66LiteralAnnularRowCarriesHatAndLowLegOnSameIndex = true
+
+round66LiteralPhysicalBonyBranchConstructed : Bool
+round66LiteralPhysicalBonyBranchConstructed = true
 
 round66SixThreePhysicalTaylorOverlapConstructed : Bool
 round66SixThreePhysicalTaylorOverlapConstructed = false
@@ -75,6 +91,10 @@ round66CanonicalLowLegConstructedForEveryPhysicalTriadIsTrue = refl
 round66LiteralAnnularRowCarriesHatAndLowLegOnSameIndexIsTrue :
   round66LiteralAnnularRowCarriesHatAndLowLegOnSameIndex ≡ true
 round66LiteralAnnularRowCarriesHatAndLowLegOnSameIndexIsTrue = refl
+
+round66LiteralPhysicalBonyBranchConstructedIsTrue :
+  round66LiteralPhysicalBonyBranchConstructed ≡ true
+round66LiteralPhysicalBonyBranchConstructedIsTrue = refl
 
 round66SixThreePhysicalTaylorOverlapConstructedIsFalse :
   round66SixThreePhysicalTaylorOverlapConstructed ≡ false
