@@ -38,6 +38,7 @@ module DASHI.Physics.YangMills.BalabanClayT4HyperoctahedralGridOrbitExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.Nat using (_+_)
 open import Data.List.Base using (length)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -159,11 +160,6 @@ geometricOrbitInvariant swap12 (Grid.gridCell4 a b c d) =
   rank4Swap12 (outer a) (outer b) (outer c) (outer d)
 geometricOrbitInvariant swap23 (Grid.gridCell4 a b c d) =
   rank4Swap23 (outer a) (outer b) (outer c) (outer d)
-
-infixr 5 _++_
-_++_ : ∀ {A : Set} → List A → List A → List A
-[] ++ right = right
-(x ∷ xs) ++ right = x ∷ (xs ++ right)
 
 filterOrbit : GeometricOrbit → List Grid.GridCell4 → List Grid.GridCell4
 filterOrbit target [] = []
