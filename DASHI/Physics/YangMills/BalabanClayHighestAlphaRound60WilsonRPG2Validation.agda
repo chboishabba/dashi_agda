@@ -3,21 +3,28 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound60WilsonRPG2Validatio
 ------------------------------------------------------------------------
 -- ROUND60 FOCUSED VALIDATION ROOT
 --
--- This tranche advances three genuine theorem fronts on top of Round59:
---
--- G2 / A1-A2
+-- G2 / A1-A2-A3 REDUCTION
 --   literal four-atom Wilson first variation
 --     -> actual basis-evaluated plaquette-support theorem
 --     -> existing canonical subset/KKT/Moebius authority
 --     -> K+ positivity from Moore--Penrose + K=L L*
 --     -> polarization
 --     -> Schur row-mass diagonal control
---     -> uniform 4 raw + 1 row + 8 norm^2 + charge compiler.
+--     -> charge-relative 4 raw + 1 row + 8 norm^2 compiler.
 --
---   The literal cross charge vanishes on the zero physical field.  Hence an
---   absolute strictly-positive charge floor is valid only after normalization
---   or quantitative exclusion of zero; otherwise the final G2 bound should be
---   formulated charge-relatively.
+--   The literal cross charge vanishes on the zero physical field, so an
+--   unconditional positive absolute charge floor is not the homogeneous
+--   theorem.  The preferred Round60 closure now proves ratios directly:
+--
+--     raw_d <= r_d Q,
+--     ||S_d||^2 <= s_d Q,
+--     ||D_d||^2 <= t_d Q,
+--
+--   and reduces G2 to one dimensionless coefficient gate
+--
+--     residualRatio <= 55 / 18874368.
+--
+--   No division by Q and no Q>0 premise is used.
 --
 -- REFLECTION POSITIVITY
 --   Osterwalder--Seiler / Menotti--Pelissetto Wilson lattice RP is imported at
@@ -64,6 +71,7 @@ import DASHI.Physics.YangMills.BalabanKKTPseudoinverseSchurEnergyBoundExact
 import DASHI.Physics.YangMills.BalabanCanonicalGreenSchurNormReductionExact
 import DASHI.Physics.YangMills.BalabanUniformCanonicalSchurNormG2ClosureExact
 import DASHI.Physics.YangMills.BalabanPlaquetteCrossChargeZeroFloorNoGoExact
+import DASHI.Physics.YangMills.BalabanChargeRelativeCanonicalSchurNormG2ClosureExact
 
 import DASHI.Physics.YangMills.BalabanWilsonLatticeReflectionPositivityExact
 import DASHI.Physics.YangMills.BalabanPositiveKernelReflectionPositivityNoGoExact
