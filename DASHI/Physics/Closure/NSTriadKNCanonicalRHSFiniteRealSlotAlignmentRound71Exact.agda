@@ -34,13 +34,14 @@ open import Agda.Primitive using (Level)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Relation.Binary.PropositionalEquality using (cong; subst)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; subst)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier as Cube
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNLuoRealityTransversePhaseSpaceRound26Exact as Phase
 import DASHI.Physics.Closure.NSTriadKNConcreteReconstructedPhysicalSelectorRound29Exact as State
+import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact as Coefficient
 import DASHI.Physics.Closure.NSTriadKNConcretePhysicalGalerkinVectorFieldRound30Exact as Concrete
 import DASHI.Physics.Closure.NSTriadKNCanonicalCutoffSameObjectSystemRound34Exact as Canonical
@@ -56,9 +57,8 @@ mappedConcreteCoefficientModesExact :
     (state : State.ReconstructedPhysicalState F E)
     (source : List Z3.FourierMode)
     (sourceIncluded : ∀ mode → mode Cube.∈ source →
-      mode Cube.∈
-        DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit.modes
-          (Coefficient.finiteSystem (Concrete.physicalSystemAt builder state))) →
+      mode Cube.∈ Audit.modes
+        (Coefficient.finiteSystem (Concrete.physicalSystemAt builder state))) →
   Encoding.coefficientModes
     (Concrete.mapConcreteCoefficients builder state source sourceIncluded)
   ≡ source
@@ -71,21 +71,29 @@ mappedConcreteCoefficientModesExact
         (Concrete.physicalSystemAt builder state)
         mode
         (sourceIncluded mode (Cube.here refl))
+    headExact :
+      Phase.coefficientMode
+        (Concrete.transportCoefficient
+          (Concrete.embeddingExact builder state)
+          headCoefficient)
+      ≡ mode
+    headExact =
+      Concrete.transportCoefficientMode
+        (Concrete.embeddingExact builder state)
+        headCoefficient
+
     tailIncluded = λ selected member →
       sourceIncluded selected (Cube.there member)
+
+    tailExact :
+      Encoding.coefficientModes
+        (Concrete.mapConcreteCoefficients builder state rest tailIncluded)
+      ≡ rest
+    tailExact =
+      mappedConcreteCoefficientModesExact
+        builder state rest tailIncluded
   in
-  cong (mode ∷_)
-    (mappedConcreteCoefficientModesExact
-      builder state rest tailIncluded)
-  where
-  -- Rewriting the transported head mode to the source mode is definitionally
-  -- the only non-recursive content of this step.
-  _ = Concrete.transportCoefficientMode
-        (Concrete.embeddingExact builder state)
-        (Coefficient.literalTransverseCoefficient
-          (Concrete.physicalSystemAt builder state)
-          mode
-          (sourceIncluded mode (Cube.here refl)))
+  cong₂ _∷_ headExact tailExact
 
 canonicalOrbitRHSCoefficientModesExact :
   ∀ {r} {F : C3.RealField r} {E : C3.IntegerEmbedding F}
