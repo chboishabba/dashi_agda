@@ -40,11 +40,12 @@ module DASHI.Physics.Closure.NSTriadKNCriticalAmplificationFactorizedConcentrati
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
-open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base using (ℚ; 0ℚ; _≤_)
+open import Agda.Builtin.Nat using (Nat; suc)
+open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
-open import Relation.Binary.PropositionalEquality using (_≡_; subst)
+open import Relation.Binary.PropositionalEquality using (subst)
 
 import DASHI.Physics.Closure.NSTriadKNCriticalAmplificationForcesRemainderRound69Exact as Amplification
 import DASHI.Physics.Closure.NSTriadKNCriticalRatioNormalizationRound63Exact as C1
@@ -62,7 +63,7 @@ criticalAmplificationForcesFactorizedConcentration :
     (overlay : Overlay.TriadicFactorizationOverlay atoms) →
   0ℚ ≤ mu →
   Amplification.inherited step n + mu
-    ≤ C1.normalizedCriticalRatio positiveBlock (Agda.Builtin.Nat.suc n) →
+    ≤ C1.normalizedCriticalRatio positiveBlock (suc n) →
   Amplification.remainder step n ≡ R71.triadicSignedSum atoms →
   L2.square mu
     ≤ Overlay.overlayCharge overlay * Overlay.overlayEffectiveComplexity overlay
