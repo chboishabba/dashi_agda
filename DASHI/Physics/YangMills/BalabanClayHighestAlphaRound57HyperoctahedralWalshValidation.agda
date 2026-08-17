@@ -15,6 +15,7 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound57HyperoctahedralWals
 --   generated 4^4 grid
 --     -> exact B4 generator action
 --     -> regular geometric counts 64+96+64+16
+--     -> equal generated-cell measure 1/16, preserved by every generator
 --     -> conservative fixed-axis counts 48+48+16+16+48+48+16
 --     -> joint momentum action on actual DiagramExpression syntax
 --     -> literal source equivariance reduced to 7 B4-generator equations
@@ -45,6 +46,7 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound57HyperoctahedralWals
 
 import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound56PiBetaG2Validation as R56
 import DASHI.Physics.YangMills.BalabanClayT4HyperoctahedralGridOrbitExact as GridOrbit
+import DASHI.Physics.YangMills.BalabanClayT4GeneratedGridMeasureOrbitExact as GridMeasure
 import DASHI.Physics.YangMills.BalabanBooleanFourCubeWalshCharacterExact as Walsh
 import DASHI.Physics.YangMills.BalabanClayT4WilsonOneLoopSignCharacterProjectionExact as SignProjection
 import DASHI.Physics.YangMills.BalabanClayT4SignOrbitGlobalCancellationExact as SignOrbit
@@ -60,6 +62,10 @@ regularFourOrbitClassificationLevel =
   GridOrbit.regularFourOrbitClassificationLevel
 fixedAxisSevenOrbitClassificationLevel =
   GridOrbit.fixedAxisSevenOrbitClassificationLevel
+generatedGridEqualCellMeasureLevel =
+  GridMeasure.generatedGridEqualCellMeasureLevel
+hyperoctahedralGeneratedMeasureInvarianceLevel =
+  GridMeasure.hyperoctahedralGeneratedMeasureInvarianceLevel
 
 booleanFourCubeWalshCharacterLevel =
   Walsh.booleanFourCubeWalshCharacterLevel
