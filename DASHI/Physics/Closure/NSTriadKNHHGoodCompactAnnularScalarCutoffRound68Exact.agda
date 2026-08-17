@@ -42,17 +42,18 @@ module DASHI.Physics.Closure.NSTriadKNHHGoodCompactAnnularScalarCutoffRound68Exa
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Empty using (⊥; ⊥-elim)
+open import Agda.Builtin.List using ([]; _∷_)
+open import Data.Empty using (⊥-elim)
 import Data.Integer.Base as Int
-open import Data.Product.Base using (_×_; _,_)
 open import Data.Rational.Base using
-  (ℚ; 0ℚ; 1ℚ; _+_; _*_; _-_; _≤_; _<_; nonNegative)
+  (ℚ; 0ℚ; 1ℚ; _+_; _*_; -_; _-_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚP
 open ℚP using (_≤?_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; subst; trans)
 open import Relation.Nullary.Decidable.Core using (yes; no)
 
+import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
 import DASHI.Physics.Closure.NSTriadKNHHGoodC4AnnularPolynomialCoreRound67Exact as C4
 import DASHI.Physics.Closure.NSTriadKNHHGoodC4AnnularD1UniformBoundRound68Exact as D1
 import DASHI.Physics.Closure.NSTriadKNHHGoodC4AnnularAmplitudeBoundRound68Exact as Amp
@@ -65,6 +66,9 @@ three = Int.+ 3 / 1
 
 two : ℚ
 two = Int.+ 2 / 1
+
+zeroBelowOne : 0ℚ ≤ 1ℚ
+zeroBelowOne = ℚP.<⇒≤ (ℚP.positive⁻¹ 1ℚ)
 
 clampedStep4 : ℚ → ℚ
 clampedStep4 t with 0ℚ ≤? t
@@ -89,17 +93,13 @@ clampedStep4BelowZero {t} t≤0 with 0ℚ ≤? t
       let t≡0 = ℚP.≤-antisym t≤0 0≤t
       in trans (cong C4.smoothStep4 t≡0) C4.smoothStep4AtZero
 ...   | no nott≤1 =
-      let
-        t≤1 : t ≤ 1ℚ
-        t≤1 = ℚP.≤-trans t≤0 (ℚP.<⇒≤ (ℚP.positive⁻¹ 1ℚ))
+      let t≤1 = ℚP.≤-trans t≤0 zeroBelowOne
       in ⊥-elim (nott≤1 t≤1)
 
 clampedStep4AboveOne : ∀ {t} → 1ℚ ≤ t → clampedStep4 t ≡ 1ℚ
 clampedStep4AboveOne {t} 1≤t with 0ℚ ≤? t
 ... | no not0≤t =
-      let zero≤one : 0ℚ ≤ 1ℚ
-          zero≤one = ℚP.<⇒≤ (ℚP.positive⁻¹ 1ℚ)
-      in ⊥-elim (not0≤t (ℚP.≤-trans zero≤one 1≤t))
+      ⊥-elim (not0≤t (ℚP.≤-trans zeroBelowOne 1≤t))
 ... | yes _ with t ≤? 1ℚ
 ...   | no _ = refl
 ...   | yes t≤1 =
@@ -110,12 +110,12 @@ clampedStep4Nonnegative : ∀ t → 0ℚ ≤ clampedStep4 t
 clampedStep4Nonnegative t with 0ℚ ≤? t
 ... | no _ = ℚP.≤-refl
 ... | yes 0≤t with t ≤? 1ℚ
-...   | no _ = ℚP.<⇒≤ (ℚP.positive⁻¹ 1ℚ)
+...   | no _ = zeroBelowOne
 ...   | yes t≤1 = Amp.smoothStep4Nonnegative (0≤t , t≤1)
 
 clampedStep4BelowOne : ∀ t → clampedStep4 t ≤ 1ℚ
 clampedStep4BelowOne t with 0ℚ ≤? t
-... | no _ = ℚP.<⇒≤ (ℚP.positive⁻¹ 1ℚ)
+... | no _ = zeroBelowOne
 ... | yes 0≤t with t ≤? 1ℚ
 ...   | no _ = ℚP.≤-refl
 ...   | yes t≤1 = Amp.smoothStep4BelowOne (0≤t , t≤1)
@@ -145,31 +145,24 @@ compactAnnularCutoffBelowOne rho =
     rightNN = clampedStep4Nonnegative (four - rho)
     left≤1 = clampedStep4BelowOne (rho - 1ℚ)
     right≤1 = clampedStep4BelowOne (four - rho)
-    instance
-      leftNNI = nonNegative leftNN
-      rightNNI = nonNegative rightNN
-      oneNNI = nonNegative (ℚP.<⇒≤ (ℚP.positive⁻¹ 1ℚ))
     first :
       clampedStep4 (rho - 1ℚ) * clampedStep4 (four - rho)
       ≤ 1ℚ * 1ℚ
-    first =
-      import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
-      in L2.nonnegativeProductMonotone
-        leftNN rightNN
-        (ℚP.<⇒≤ (ℚP.positive⁻¹ 1ℚ))
-        (ℚP.<⇒≤ (ℚP.positive⁻¹ 1ℚ))
-        left≤1 right≤1
-  in subst (compactAnnularScalarCutoff rho ≤_) (ℚP.*-identityˡ 1ℚ) first
+    first = L2.nonnegativeProductMonotone
+      leftNN rightNN zeroBelowOne zeroBelowOne left≤1 right≤1
+  in
+  subst (compactAnnularScalarCutoff rho ≤_) (ℚP.*-identityˡ 1ℚ) first
 
 compactAnnularCutoffBelowInnerSupport : ∀ {rho} → rho ≤ 1ℚ →
   compactAnnularScalarCutoff rho ≡ 0ℚ
 compactAnnularCutoffBelowInnerSupport {rho} rho≤1 =
   let
+    shiftedRaw : rho + (- 1ℚ) ≤ 1ℚ + (- 1ℚ)
+    shiftedRaw = ℚP.+-monoʳ-≤ (- 1ℚ) rho≤1
     shifted : rho - 1ℚ ≤ 0ℚ
-    shifted =
-      subst (λ right → rho - 1ℚ ≤ right) (solve [])
-        (subst (λ left → left ≤ 1ℚ + (- 1ℚ)) (solve (rho ∷ []))
-          (ℚP.+-monoʳ-≤ (- 1ℚ) rho≤1))
+    shifted = subst₂ _≤_ (solve (rho ∷ [])) (solve []) shiftedRaw
+      where
+      open import Relation.Binary.PropositionalEquality using (subst₂)
   in
   trans
     (cong (λ left → left * clampedStep4 (four - rho))
@@ -180,11 +173,12 @@ compactAnnularCutoffAboveOuterSupport : ∀ {rho} → four ≤ rho →
   compactAnnularScalarCutoff rho ≡ 0ℚ
 compactAnnularCutoffAboveOuterSupport {rho} four≤rho =
   let
+    shiftedRaw : four + (- rho) ≤ rho + (- rho)
+    shiftedRaw = ℚP.+-monoʳ-≤ (- rho) four≤rho
     shifted : four - rho ≤ 0ℚ
-    shifted =
-      subst (λ right → four - rho ≤ right) (solve [])
-        (subst (λ left → left ≤ rho + (- rho)) (solve [])
-          (ℚP.+-monoʳ-≤ (- rho) four≤rho))
+    shifted = subst₂ _≤_ (solve (rho ∷ [])) (solve (rho ∷ [])) shiftedRaw
+      where
+      open import Relation.Binary.PropositionalEquality using (subst₂)
   in
   trans
     (cong (clampedStep4 (rho - 1ℚ) *_)
@@ -195,16 +189,21 @@ compactAnnularCutoffPlateau : ∀ {rho} → two ≤ rho → rho ≤ three →
   compactAnnularScalarCutoff rho ≡ 1ℚ
 compactAnnularCutoffPlateau {rho} two≤rho rho≤three =
   let
+    innerRaw : two + (- 1ℚ) ≤ rho + (- 1ℚ)
+    innerRaw = ℚP.+-monoʳ-≤ (- 1ℚ) two≤rho
     inner : 1ℚ ≤ rho - 1ℚ
-    inner =
-      subst (λ left → left ≤ rho - 1ℚ) (solve [])
-        (subst (λ right → two + (- 1ℚ) ≤ right) (solve (rho ∷ []))
-          (ℚP.+-monoʳ-≤ (- 1ℚ) two≤rho))
+    inner = subst₂ _≤_ (solve []) (solve (rho ∷ [])) innerRaw
+      where
+      open import Relation.Binary.PropositionalEquality using (subst₂)
+
+    negated : - three ≤ - rho
+    negated = ℚP.neg-antimono-≤ rho≤three
+    outerRaw : four + (- three) ≤ four + (- rho)
+    outerRaw = ℚP.+-monoˡ-≤ four negated
     outer : 1ℚ ≤ four - rho
-    outer =
-      subst (λ left → left ≤ four - rho) (solve [])
-        (subst (λ right → four + (- three) ≤ right) (solve (rho ∷ []))
-          (ℚP.+-monoˡ-≤ four (ℚP.neg-antimono-≤ rho≤three)))
+    outer = subst₂ _≤_ (solve []) (solve (rho ∷ [])) outerRaw
+      where
+      open import Relation.Binary.PropositionalEquality using (subst₂)
   in
   trans
     (cong₂ _*_
