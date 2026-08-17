@@ -27,7 +27,7 @@ module DASHI.Physics.YangMills.BalabanCMP109WalshCharacterOrbitCancellationExact
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Integer.Base using (+_)
-open import Data.Rational using (ℚ; 0ℚ; _*_; _+_)
+open import Data.Rational using (ℚ; 0ℚ; _*_; _+_; _/_)
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
@@ -38,11 +38,6 @@ import DASHI.Physics.YangMills.BalabanBooleanFourCubeWalshCharacterExact as Wals
 import DASHI.Physics.YangMills.BalabanClayT4GeneratedBrillouinGridExact as Grid
 import DASHI.Physics.YangMills.BalabanClayT4HypercubicGeneratedActionExact as Action
 import DASHI.Physics.YangMills.BalabanCMP109VacuumPolarizationHypercubicSourceSymmetryExact as Source
-
-------------------------------------------------------------------------
--- The sixteen-element reflection subgroup, indexed by the already-existing
--- Subset4 sign-mask carrier.
-------------------------------------------------------------------------
 
 signMaskAct : Cube.Subset4 → Grid.GridCell4 → Grid.GridCell4
 signMaskAct Cube.empty cell = cell
@@ -148,12 +143,8 @@ signMaskContributionInvariant symmetry Cube.s0123 cell =
           (Action.act Action.flip2
             (Action.act Action.flip1 (Action.act Action.flip0 cell))))))
 
-------------------------------------------------------------------------
--- Character coefficient of the actual sign orbit.
-------------------------------------------------------------------------
-
 signedOrbitWalshCoefficient :
-  (Cube.Subset4 → ℚ) →
+  (Grid.GridCell4 → ℚ) →
   Cube.Subset4 → Grid.GridCell4 → ℚ
 signedOrbitWalshCoefficient contribution character cell =
   Sums.sumRational Cube.allSubsets4
@@ -192,7 +183,7 @@ trivialSignedOrbitCharacterIsSixteenTimesContribution :
   Source.CMP109ScalarEuclideanSymmetry contribution →
   (cell : Grid.GridCell4) →
   signedOrbitWalshCoefficient contribution Cube.empty cell
-  ≡ (+ 16) * contribution cell
+  ≡ (+ 16 / 1) * contribution cell
 trivialSignedOrbitCharacterIsSixteenTimesContribution symmetry cell =
   trans
     (signedOrbitCollapsesToConstantCharacterSum symmetry Cube.empty cell)
@@ -204,9 +195,5 @@ cmp109SignCharacterCancellationLevel = machineChecked
 cmp109TrivialCharacterOrbitFactorLevel : ProofLevel
 cmp109TrivialCharacterOrbitFactorLevel = machineChecked
 
--- The remaining source-specific step is NOT another symmetry theorem: CMP109
--- already supplies (5.6),(5.7).  It is the same-object identification of the
--- literal Wilson/FP/Haar scalar expression used by the Bishop evaluator with
--- the scalar projection of that vacuum-polarisation tensor.
 literalWilsonFaddeevPopovHaarScalarIsCMP109ProjectionLevel : ProofLevel
 literalWilsonFaddeevPopovHaarScalarIsCMP109ProjectionLevel = conditional
