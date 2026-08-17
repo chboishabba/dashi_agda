@@ -41,6 +41,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _≤_)
 import Data.Rational.Properties as ℚP
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 record ConcentrationEvent : Set where
   constructor concentration-event
@@ -102,23 +103,21 @@ minimumFundingAppend : ∀ mu left right →
   minimumFunding mu (append left right)
   ≡ minimumFunding mu left + minimumFunding mu right
 minimumFundingAppend mu [] right =
-  Relation.Binary.PropositionalEquality.sym (ℚP.+-identityˡ (minimumFunding mu right))
+  sym (ℚP.+-identityˡ (minimumFunding mu right))
 minimumFundingAppend mu (event ∷ rest) right =
-  Relation.Binary.PropositionalEquality.trans
-    (Relation.Binary.PropositionalEquality.cong
-      (mu +_) (minimumFundingAppend mu rest right))
-    (ℚP.+-assoc mu (minimumFunding mu rest) (minimumFunding mu right))
+  trans
+    (cong (mu +_) (minimumFundingAppend mu rest right))
+    (sym (ℚP.+-assoc mu (minimumFunding mu rest) (minimumFunding mu right)))
 
 totalChargeAppend : ∀ left right →
   totalCharge (append left right)
   ≡ totalCharge left + totalCharge right
 totalChargeAppend [] right =
-  Relation.Binary.PropositionalEquality.sym (ℚP.+-identityˡ (totalCharge right))
+  sym (ℚP.+-identityˡ (totalCharge right))
 totalChargeAppend (event ∷ rest) right =
-  Relation.Binary.PropositionalEquality.trans
-    (Relation.Binary.PropositionalEquality.cong
-      (charge event +_) (totalChargeAppend rest right))
-    (ℚP.+-assoc (charge event) (totalCharge rest) (totalCharge right))
+  trans
+    (cong (charge event +_) (totalChargeAppend rest right))
+    (sym (ℚP.+-assoc (charge event) (totalCharge rest) (totalCharge right)))
 
 round69FiniteConcentrationFundingConstructed : Bool
 round69FiniteConcentrationFundingConstructed = true
