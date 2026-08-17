@@ -11,13 +11,20 @@ module DASHI.Physics.YangMills.BalabanReversibleRGCheegerSpectralGapExact where
 --
 -- DASHI CONTRIBUTION
 --
--- Keep the hard theorem boundary honest.  Lawler--Sokal supplies the standard
--- conductance/isoperimetry -> L^2 spectral-gap bridge for Markov chains and
--- Markov processes.  We do NOT request a spectral gap as a primitive physical
--- field.  Instead, a physical RG construction must produce a reversible
--- positive Markov object and its conductance.  This file proves the exact
--- rational normalization used downstream from the denominator-cleared
--- Cheeger inequality phi^2 <= 2 gamma.
+-- Keep the hard theorem boundary honest.  Lawler--Sokal treats discrete-time
+-- Markov chains and continuous-time Markovian jump processes on general state
+-- spaces in reversible AND nonreversible settings, and also gives a killed-
+-- process version.  Therefore detailed balance is not a mandatory physical
+-- Yang--Mills producer.  The actual obligation is to construct the literal RG
+-- kernel and prove the hypotheses of whichever Lawler--Sokal regime it really
+-- inhabits.
+--
+-- The rational calculation below remains the clean reversible/two-sided
+-- normalization used when that specialization applies:
+--
+--   phi^2 <= 2 gamma  ==>  (1/2) phi^2 <= gamma.
+--
+-- No spectral gap is requested as an independent physical receipt.
 ------------------------------------------------------------------------
 
 open import Data.Integer.Base using (+_)
@@ -29,6 +36,20 @@ open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
+
+------------------------------------------------------------------------
+-- The three theorem regimes relevant to the literal RG producer.
+------------------------------------------------------------------------
+
+data LawlerSokalKernelRegime : Set where
+  reversible nonreversible killed : LawlerSokalKernelRegime
+
+record LiteralRGLawlerSokalRegime : Set where
+  field
+    regime : LawlerSokalKernelRegime
+    positiveMarkovKernelConstructed : Set
+    theoremHypothesesForChosenRegime : Set
+open LiteralRGLawlerSokalRegime public
 
 record ReversibleRGCheegerData : Set where
   field
@@ -79,13 +100,22 @@ cheegerTwoSided data =
 lawlerSokalCheegerTheoremLevel : ProofLevel
 lawlerSokalCheegerTheoremLevel = standardImported
 
+lawlerSokalNonreversibleAndKilledRegimesLevel : ProofLevel
+lawlerSokalNonreversibleAndKilledRegimesLevel = standardImported
+
 cheegerRationalNormalizationLevel : ProofLevel
 cheegerRationalNormalizationLevel = machineChecked
 
--- These are the actual physical producer leaves.  Without them, the imported
--- theorem says nothing about Yang--Mills.
-literalRGReversibilityLevel : ProofLevel
-literalRGReversibilityLevel = conditional
+-- Physical leaves: construct the SAME literal Bałaban RG kernel as a positive
+-- Markov object, classify the regime it actually satisfies, prove the
+-- corresponding theorem hypotheses, and then obtain a cutoff-uniform
+-- conductance/isoperimetric lower bound.  Reversibility is only one possible
+-- regime, not a required conclusion.
+literalRGPositiveMarkovKernelLevel : ProofLevel
+literalRGPositiveMarkovKernelLevel = conditional
+
+literalRGLawlerSokalChosenRegimeHypothesesLevel : ProofLevel
+literalRGLawlerSokalChosenRegimeHypothesesLevel = conditional
 
 cutoffUniformRGConductanceLowerBoundLevel : ProofLevel
 cutoffUniformRGConductanceLowerBoundLevel = conditional
