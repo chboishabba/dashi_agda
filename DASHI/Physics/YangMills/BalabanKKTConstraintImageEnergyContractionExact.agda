@@ -27,24 +27,22 @@ module DASHI.Physics.YangMills.BalabanKKTConstraintImageEnergyContractionExact w
 --     = ||repair(x)||^2
 --     <= ||x||^2.
 --
--- The first equality uses the exact Round60 pseudoinverse identity.  The last
--- inequality is proved here from the same finite KKT orthogonal decomposition
--- x = project(x) + repair(x), with no spectral theorem and no row-mass
--- estimate.  This is sharper than the Schur fallback and removes K+ entirely
--- from any G2 energy estimate once an explicit state-space preimage is known.
+-- This is sharper than the Schur fallback and removes K+ entirely from any
+-- G2 energy estimate once an explicit state-space preimage is known.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _≤_)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Rational.Base as ℚ using (0ℚ; _+_; _≤_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong₂; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanFiniteRectangularRationalExact as Rect
 import DASHI.Physics.YangMills.BalabanP33FiniteKKTAdmissibleProjectorExact as KKT
 import DASHI.Physics.YangMills.BalabanP33FiniteKKTPseudoinverseProjectorExact as Pseudo
 import DASHI.Physics.YangMills.BalabanKKTGramPseudoinversePositiveExact as Positive
+import DASHI.Physics.YangMills.BalabanSelectedConstraintAtomGreenExpansionExact as Green
 
 projectRepairOrthogonal :
   ∀ {Multiplier}
@@ -60,10 +58,11 @@ projectRepairOrthogonal pseudoData vector =
     repairMultiplier =
       Pseudo.pseudoApply pseudoData (Pseudo.constraintApply pseudoData vector)
 
-    adjointExact : ∀ coordinate →
-      Pseudo.constraintRepair pseudoData vector coordinate
-      ≡ Pseudo.constraintAdjointApply pseudoData repairMultiplier coordinate
-    adjointExact coordinate = refl
+    repairToAdjoint :
+      KKT.stateDot project (Pseudo.constraintRepair pseudoData vector)
+      ≡ KKT.stateDot project
+          (Pseudo.constraintAdjointApply pseudoData repairMultiplier)
+    repairToAdjoint = refl
 
     moveToConstraint :
       KKT.stateDot project
@@ -79,12 +78,10 @@ projectRepairOrthogonal pseudoData vector =
         (Pseudo.constraintMatrix pseudoData)
         project repairMultiplier)
   in
-  trans
-    (cong₂ KKT.stateDot refl
-      (λ coordinate → adjointExact coordinate))
+  trans repairToAdjoint
     (trans moveToConstraint
       (trans
-        (Rect.finiteDotLeftPointwiseCong
+        (Green.finiteDotLeftPointwiseCong
           (Pseudo.multiplierCarrier pseudoData)
           (Pseudo.constraintZero
             (Pseudo.projectConstraintZero pseudoData vector)))
@@ -120,13 +117,6 @@ stateDecompositionPointwise pseudoData vector coordinate =
     (vector coordinate)
     (Pseudo.constraintRepair pseudoData vector coordinate)
 
-stateNormPointwiseCong :
-  ∀ {left right : KKT.StateVector} →
-  (∀ coordinate → left coordinate ≡ right coordinate) →
-  KKT.stateNormSq left ≡ KKT.stateNormSq right
-stateNormPointwiseCong {left} {right} pointwise =
-  Rect.finiteNormSqPointwiseCong KKT.physicalStateCarrier pointwise
-
 pseudoStatePythagorean :
   ∀ {Multiplier}
     (pseudoData : Pseudo.FiniteKKTPseudoinverseData Multiplier)
@@ -136,7 +126,7 @@ pseudoStatePythagorean :
     + KKT.stateNormSq (Pseudo.constraintRepair pseudoData vector)
 pseudoStatePythagorean pseudoData vector =
   trans
-    (stateNormPointwiseCong
+    (KKT.stateNormPointwiseCong
       (stateDecompositionPointwise pseudoData vector))
     (Rect.normSqAddOrthogonal
       KKT.physicalStateCarrier
