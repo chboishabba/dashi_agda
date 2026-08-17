@@ -31,9 +31,9 @@ module DASHI.Physics.YangMills.BalabanClayT4SignOrbitGlobalCancellationExact whe
 -- is the remaining source theorem.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _*_)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
@@ -81,46 +81,6 @@ nontrivialCharacterSignOrbitVanishes nontrivial value representative factorized 
     (signOrbitSumFromCharacterFactorization _ value representative factorized)
     (Walsh.nontrivialCharacterSectorOrbitSumVanishes
       nontrivial (amplitude factorized))
-
-record EvenOrbitFactorizationAt
-    (value : Grid.GridCell4 → ℚ)
-    (representative : Grid.GridCell4) : Set where
-  field
-    amplitude : ℚ
-    evenFactorization : ∀ signs →
-      value (Sign.signAct signs representative) ≡ amplitude
-open EvenOrbitFactorizationAt public
-
-evenOrbitAsTrivialCharacter :
-  ∀ value representative →
-  EvenOrbitFactorizationAt value representative →
-  CharacterFactorizationAt Cube.empty value representative
-evenOrbitAsTrivialCharacter value representative even = record
-  { amplitude = amplitude even
-  ; factorization = λ signs →
-      trans
-        (evenFactorization even signs)
-        (cong (λ selected → selected * amplitude even)
-          (symmetryOne signs))
-  }
-  where
-  symmetryOne : ∀ signs → Walsh.walshCharacter Cube.empty signs ≡ Walsh.one
-  symmetryOne Cube.empty = refl
-  symmetryOne Cube.s0 = refl
-  symmetryOne Cube.s1 = refl
-  symmetryOne Cube.s2 = refl
-  symmetryOne Cube.s3 = refl
-  symmetryOne Cube.s01 = refl
-  symmetryOne Cube.s02 = refl
-  symmetryOne Cube.s03 = refl
-  symmetryOne Cube.s12 = refl
-  symmetryOne Cube.s13 = refl
-  symmetryOne Cube.s23 = refl
-  symmetryOne Cube.s012 = refl
-  symmetryOne Cube.s013 = refl
-  symmetryOne Cube.s023 = refl
-  symmetryOne Cube.s123 = refl
-  symmetryOne Cube.s0123 = refl
 
 signOrbitCharacterFactorizationLevel : ProofLevel
 signOrbitCharacterFactorizationLevel = machineChecked
