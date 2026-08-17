@@ -25,7 +25,7 @@ module DASHI.Physics.YangMills.BalabanCMP109WalshFourOrbitFactorizationExact whe
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Integer.Base using (+_)
-open import Data.Rational.Base using (ℚ; _+_; _*_; _/_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _/_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
@@ -56,7 +56,7 @@ sourceSymmetryKillsEveryNontrivialSignSector :
   Walsh.NontrivialWalshCharacter character →
   (cell : Grid.GridCell4) →
   Character.signedOrbitWalshCoefficient contribution character cell
-  ≡ Data.Rational.Base.0ℚ
+  ≡ 0ℚ
 sourceSymmetryKillsEveryNontrivialSignSector =
   Character.nontrivialSignedOrbitCharacterVanishes
 
