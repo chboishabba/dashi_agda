@@ -17,24 +17,17 @@ module DASHI.Physics.YangMills.BalabanKKTPseudoinverseSchurEnergyBoundExact wher
 --
 -- DASHI CONTRIBUTION
 --
--- Round60 first replaced sixteen SIGNED Green lower bounds by eight diagonal
--- energies Q(v)=<v,K+v>.  At that point an operator-size estimate becomes
--- useful again.  Reuse the repository's square-root-free finite Schur theorem:
--- for symmetric K+ with absolute row mass <= B,
+-- For the same symmetric K+ used by G2, a common absolute-row-mass bound B
+-- gives the square-root-free Schur estimate
 --
 --   ||K+ v||^2 <= B^2 ||v||^2.
 --
--- Positivity is not needed for the elementary estimate
+-- Together with 2<v,K+v> <= ||v||^2 + ||K+v||^2 this yields
 --
---   2 <v,K+v> <= ||v||^2 + ||K+v||^2,
+--   <v,K+v> <= (1/2)(1+B^2)||v||^2.
 --
--- which follows coordinatewise from (v_i-(K+v)_i)^2 >= 0.  Therefore
---
---   Q(v) <= (1/2) (1+B^2) ||v||^2.
---
--- Thus A2's remaining eight diagonal-energy bounds reduce further to one
--- common row-mass bound for the SAME K+ plus norm-square bounds for the four
--- source and four defect degree vectors.
+-- The proof uses the actual implicit-endpoint API of
+-- `nonnegativeDifferenceImpliesBelow`.
 ------------------------------------------------------------------------
 
 open import Data.Integer.Base using (+_)
@@ -42,7 +35,7 @@ open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_; _/_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as FiniteL2
@@ -63,8 +56,6 @@ twoCrossBelowSquares : ∀ left right →
   ≤ FiniteL2.square left + FiniteL2.square right
 twoCrossBelowSquares left right =
   Norm.nonnegativeDifferenceImpliesBelow
-    (left * right + left * right)
-    (FiniteL2.square left + FiniteL2.square right)
     (subst
       (λ selected → 0ℚ ≤ selected)
       (ℚRing.solve-∀ left right)
@@ -87,10 +78,8 @@ pseudoEnergyDoubleBelowInputPlusOutputNorm pseudoData vector =
     pseudoVector = Pseudo.pseudoApply pseudoData vector
 
     pointwise : ∀ index →
-      vector index * pseudoVector index
-        + vector index * pseudoVector index
-      ≤ FiniteL2.square (vector index)
-        + FiniteL2.square (pseudoVector index)
+      vector index * pseudoVector index + vector index * pseudoVector index
+      ≤ FiniteL2.square (vector index) + FiniteL2.square (pseudoVector index)
     pointwise index = twoCrossBelowSquares (vector index) (pseudoVector index)
 
     summed = Schur.sumPointwiseBelow
@@ -101,33 +90,19 @@ pseudoEnergyDoubleBelowInputPlusOutputNorm pseudoData vector =
         + FiniteL2.square (pseudoVector index))
       pointwise
 
-    leftSplit :
-      Sums.sumRational indices
-        (λ index → vector index * pseudoVector index
-          + vector index * pseudoVector index)
-      ≡ Positive.pseudoQuadratic pseudoData vector
-        + Positive.pseudoQuadratic pseudoData vector
     leftSplit = Fubini.sumRationalAdd
       indices
       (λ index → vector index * pseudoVector index)
       (λ index → vector index * pseudoVector index)
 
-    rightSplit :
-      Sums.sumRational indices
-        (λ index → FiniteL2.square (vector index)
-          + FiniteL2.square (pseudoVector index))
-      ≡ Schur.vectorNormSq indices vector
-        + Schur.vectorNormSq indices pseudoVector
     rightSplit = Fubini.sumRationalAdd
       indices
       (λ index → FiniteL2.square (vector index))
       (λ index → FiniteL2.square (pseudoVector index))
   in
   subst
-    (λ left →
-      left
-      ≤ Schur.vectorNormSq indices vector
-        + Schur.vectorNormSq indices pseudoVector)
+    (λ left → left
+      ≤ Schur.vectorNormSq indices vector + Schur.vectorNormSq indices pseudoVector)
     leftSplit
     (subst
       (λ right →
@@ -135,8 +110,7 @@ pseudoEnergyDoubleBelowInputPlusOutputNorm pseudoData vector =
           (λ index → vector index * pseudoVector index
             + vector index * pseudoVector index)
         ≤ right)
-      rightSplit
-      summed)
+      rightSplit summed)
 
 record PseudoinverseSchurBound
     {Multiplier : Set}
@@ -181,9 +155,7 @@ pseudoEnergyUpperFromVectorNorm :
       (Matrix.coordinates (Pseudo.multiplierCarrier pseudoData)) vector
     ≤ vectorNormUpper →
   Positive.pseudoQuadratic pseudoData vector
-  ≤ half
-      * ((1ℚ + rowMassBound schur * rowMassBound schur)
-        * vectorNormUpper)
+  ≤ half * ((1ℚ + rowMassBound schur * rowMassBound schur) * vectorNormUpper)
 pseudoEnergyUpperFromVectorNorm
     {pseudoData = pseudoData} schur vector vectorNormUpper normUpper =
   let
@@ -233,9 +205,5 @@ pseudoEnergyUpperFromVectorNorm
 kktPseudoinverseSchurEnergyBoundLevel : ProofLevel
 kktPseudoinverseSchurEnergyBoundLevel = machineChecked
 
--- A2 after this theorem: certify one common absolute-row-mass bound for K+
--- and eight source/defect degree-vector norm-square bounds over the selected
--- region.  The eight energy endpoints and all sixteen signed Green endpoints
--- are then generated.
 selectedRegionPseudoinverseRowMassAndEightVectorNormsLevel : ProofLevel
 selectedRegionPseudoinverseRowMassAndEightVectorNormsLevel = conditional
