@@ -47,7 +47,7 @@ open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; _+_; _-_; _*_; -_; _≤_; _/_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
@@ -91,7 +91,6 @@ record ChargeRelativeCanonicalG2Data
     chargeNonnegative : ∀ configuration →
       InCertifiedRegion configuration → 0ℚ ≤ chargeAt configuration
 
-    -- Shared dimensionless physical coefficients.
     rawRatio : Degree.MobiusDegree → ℚ
     sourceNormRatio : Degree.MobiusDegree → ℚ
     defectNormRatio : Degree.MobiusDegree → ℚ
@@ -233,6 +232,7 @@ relativeEnvelopeAt dataSet configuration inRegion = record
   }
   where
   charge = chargeAt dataSet configuration
+
   raw : ∀ degree →
     Interval.DegreeRawUpper
       (CanonicalBlocks.canonicalFamily (canonicalInputsAt dataSet configuration))
@@ -252,8 +252,7 @@ relativeEnvelopeAt dataSet configuration inRegion = record
 rawRatioTotal :
   ∀ {Configuration Multiplier} →
   ChargeRelativeCanonicalG2Data Configuration Multiplier → ℚ
-rawRatioTotal dataSet =
-  Sums.sumRational Degree.allDegrees (rawRatio dataSet)
+rawRatioTotal dataSet = Sums.sumRational Degree.allDegrees (rawRatio dataSet)
 
 greenRatioRow :
   ∀ {Configuration Multiplier} →
@@ -273,6 +272,45 @@ residualRatio :
   ChargeRelativeCanonicalG2Data Configuration Multiplier → ℚ
 residualRatio dataSet = rawRatioTotal dataSet - greenRatioTotal dataSet
 
+rawUpperValueRelativeExact :
+  ∀ {Configuration Multiplier}
+    (dataSet : ChargeRelativeCanonicalG2Data Configuration Multiplier)
+    configuration
+    (inRegion : InCertifiedRegion dataSet configuration)
+    degree →
+  Interval.rawUpperValue (relativeEnvelopeAt dataSet configuration inRegion) degree
+  ≡ rawRatio dataSet degree * chargeAt dataSet configuration
+rawUpperValueRelativeExact dataSet configuration inRegion Degree.degree1 = refl
+rawUpperValueRelativeExact dataSet configuration inRegion Degree.degree2 = refl
+rawUpperValueRelativeExact dataSet configuration inRegion Degree.degree3 = refl
+rawUpperValueRelativeExact dataSet configuration inRegion Degree.degree4 = refl
+
+greenLowerValueRelativeExact :
+  ∀ {Configuration Multiplier}
+    (dataSet : ChargeRelativeCanonicalG2Data Configuration Multiplier)
+    configuration
+    (inRegion : InCertifiedRegion dataSet configuration)
+    left right →
+  Interval.greenLowerValue
+    (relativeEnvelopeAt dataSet configuration inRegion) left right
+  ≡ relativeGreenRatio dataSet left right * chargeAt dataSet configuration
+greenLowerValueRelativeExact dataSet configuration inRegion Degree.degree1 Degree.degree1 = refl
+greenLowerValueRelativeExact dataSet configuration inRegion Degree.degree1 Degree.degree2 = refl
+greenLowerValueRelativeExact dataSet configuration inRegion Degree.degree1 Degree.degree3 = refl
+greenLowerValueRelativeExact dataSet configuration inRegion Degree.degree1 Degree.degree4 = refl
+greenLowerValueRelativeExact dataSet configuration inRegion Degree.degree2 Degree.degree1 = refl
+greenLowerValueRelativeExact dataSet configuration inRegion Degree.degree2 Degree.degree2 = refl
+greenLowerValueRelativeExact dataSet configuration inRegion Degree.degree2 Degree.degree3 = refl
+greenLowerValueRelativeExact dataSet configuration inRegion Degree.degree2 Degree.degree4 = refl
+greenLowerValueRelativeExact dataSet configuration inRegion Degree.degree3 Degree.degree1 = refl
+greenLowerValueRelativeExact dataSet configuration inRegion Degree.degree3 Degree.degree2 = refl
+greenLowerValueRelativeExact dataSet configuration inRegion Degree.degree3 Degree.degree3 = refl
+greenLowerValueRelativeExact dataSet configuration inRegion Degree.degree3 Degree.degree4 = refl
+greenLowerValueRelativeExact dataSet configuration inRegion Degree.degree4 Degree.degree1 = refl
+greenLowerValueRelativeExact dataSet configuration inRegion Degree.degree4 Degree.degree2 = refl
+greenLowerValueRelativeExact dataSet configuration inRegion Degree.degree4 Degree.degree3 = refl
+greenLowerValueRelativeExact dataSet configuration inRegion Degree.degree4 Degree.degree4 = refl
+
 rawEndpointFactorsCharge :
   ∀ {Configuration Multiplier}
     (dataSet : ChargeRelativeCanonicalG2Data Configuration Multiplier)
@@ -283,8 +321,10 @@ rawEndpointFactorsCharge :
 rawEndpointFactorsCharge dataSet configuration inRegion =
   trans
     (Sums.sumRationalCong Degree.allDegrees _ _
-      (λ degree → ℚP.*-comm
-        (rawRatio dataSet degree) (chargeAt dataSet configuration)))
+      (λ degree → trans
+        (rawUpperValueRelativeExact dataSet configuration inRegion degree)
+        (ℚP.*-comm
+          (rawRatio dataSet degree) (chargeAt dataSet configuration))))
     (Sums.sumRationalScale
       (chargeAt dataSet configuration) Degree.allDegrees (rawRatio dataSet))
 
@@ -299,9 +339,11 @@ greenRowEndpointFactorsCharge :
 greenRowEndpointFactorsCharge dataSet configuration inRegion left =
   trans
     (Sums.sumRationalCong Degree.allDegrees _ _
-      (λ right → ℚP.*-comm
-        (relativeGreenRatio dataSet left right)
-        (chargeAt dataSet configuration)))
+      (λ right → trans
+        (greenLowerValueRelativeExact dataSet configuration inRegion left right)
+        (ℚP.*-comm
+          (relativeGreenRatio dataSet left right)
+          (chargeAt dataSet configuration))))
     (Sums.sumRationalScale
       (chargeAt dataSet configuration) Degree.allDegrees
       (relativeGreenRatio dataSet left))
@@ -412,9 +454,5 @@ chargeRelativeCanonicalG2CompilerLevel = machineChecked
 selectedMinimizerChargeRelativeG2ClosureLevel : ProofLevel
 selectedMinimizerChargeRelativeG2ClosureLevel = machineChecked
 
--- Remaining G2 physical theorem after this compiler:
--- prove the four raw ratios, one K+ row bound, four source-norm ratios and four
--- defect-norm ratios uniformly on the selected region, then verify the single
--- dimensionless ratio gate.  No absolute charge floor is required.
 selectedRegionChargeRelativeG2NumericalTheoremLevel : ProofLevel
 selectedRegionChargeRelativeG2NumericalTheoremLevel = conditional
