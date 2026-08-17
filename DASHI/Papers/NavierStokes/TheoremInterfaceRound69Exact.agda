@@ -25,22 +25,25 @@ module DASHI.Papers.NavierStokes.TheoremInterfaceRound69Exact where
 -- Navier-Stokes equations".
 -- DOI: 10.1002/cpa.3160350604.
 --
--- Round69 changes the proof priority.  The multiplier lane remains available,
--- but the decisive C1 test now comes first:
+-- Round69 changes proof priority.  The multiplier lane remains available, but
+-- the decisive C1 test now comes first:
 --
---   literal trajectory shell identity
+--   selected trajectory / literal localized PDE atom list
 --     -> non-circular amplification remainder
---     -> localized positive concentration
+--     -> positive structured triadic concentration
 --     -> propagation/separation
---     -> finite funding contradiction/barrier.
+--     -> finite funding contradiction / Xi barrier.
 --
--- The first and last algebraic implications are constructed.  The current
--- Duhamel selector interface is formally falsified as a physical concentration
--- authority and replaced upstream by a literal signed seven-source atom list.
--- A nonnegative frequency mass is constructed on actual physical triad
--- incidences.  What remains open is the new PDE inequality identifying excess
--- critical remainder with localized frequency/physical-space concentration and
--- propagating it without assuming the C1 bound itself.
+-- The amplification and finite-funding algebra are constructed.  The current
+-- free-selector Round59 Duhamel interface is formally falsified as a physical
+-- concentration authority.  The source authority used here is instead the
+-- existing Round62 LocalizedPDEAtom list, which already carries physical source,
+-- tail, kernel and classified boundary structure on one list.  Round69 defines
+-- a nonnegative triadic concentration mass directly on those physical atoms.
+--
+-- Quantitative ESS/Tao/Barker-Prange machinery remains a conditional
+-- propagation architecture: an ambient `forall n, Xi_n <= K` assumption is
+-- literally the C1 target and is not imported as its proof.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -61,25 +64,41 @@ round69PaperFreeDuhamelSelectorFalsified : Bool
 round69PaperFreeDuhamelSelectorFalsified =
   R69.round69FreeDuhamelSelectorFalsified
 
-round69PaperLiteralSignedShellSourceConstructed : Bool
-round69PaperLiteralSignedShellSourceConstructed =
-  R69.round69LiteralSignedShellSourceConstructed
+round69PaperOneStructuredPDEAtomAuthorityConstructed : Bool
+round69PaperOneStructuredPDEAtomAuthorityConstructed =
+  R69.round69OneStructuredPDEAtomAuthorityConstructed
+
+round69PaperStructuredTriadicConcentrationMassConstructed : Bool
+round69PaperStructuredTriadicConcentrationMassConstructed =
+  R69.round69StructuredTriadicConcentrationMassConstructed
 
 round69PaperConditionalCriticalCircularityIdentified : Bool
 round69PaperConditionalCriticalCircularityIdentified =
   R69.round69ConditionalCriticalCircularityIdentified
 
-round69PaperLiteralFrequencyConcentrationMassConstructed : Bool
-round69PaperLiteralFrequencyConcentrationMassConstructed =
-  R69.round69LiteralFrequencyConcentrationMassConstructed
+round69PaperOwnerLanguageCriticalBoundFalsified : Bool
+round69PaperOwnerLanguageCriticalBoundFalsified =
+  R69.round69OwnerLanguageCriticalBoundFalsified
 
-round69PaperRemainderForcesLocalizedConcentration : Bool
-round69PaperRemainderForcesLocalizedConcentration =
-  R69.round69RemainderForcesLocalizedFrequencyConcentration
+round69PaperSelectedGalerkinTrajectoryConstructed : Bool
+round69PaperSelectedGalerkinTrajectoryConstructed =
+  R69.round69SelectedGalerkinTrajectoryConstructed
+
+round69PaperLiteralTrajectoryEmitsStructuredAtoms : Bool
+round69PaperLiteralTrajectoryEmitsStructuredAtoms =
+  R69.round69LiteralTrajectoryEmitsStructuredAtoms
+
+round69PaperCriticalAmplificationForcesStructuredConcentration : Bool
+round69PaperCriticalAmplificationForcesStructuredConcentration =
+  R69.round69CriticalAmplificationForcesStructuredConcentration
 
 round69PaperNonCircularConcentrationPropagation : Bool
 round69PaperNonCircularConcentrationPropagation =
   R69.round69NonCircularConcentrationPropagationConstructed
+
+round69PaperPropagatedEventsFeedFiniteBudget : Bool
+round69PaperPropagatedEventsFeedFiniteBudget =
+  R69.round69PropagatedEventsFeedFiniteBudgetConstructed
 
 round69PaperCriticalRatioBarrier : Bool
 round69PaperCriticalRatioBarrier =
@@ -100,21 +119,33 @@ round69PaperFreeDuhamelSelectorFalsifiedIsTrue :
   round69PaperFreeDuhamelSelectorFalsified ≡ true
 round69PaperFreeDuhamelSelectorFalsifiedIsTrue = refl
 
-round69PaperLiteralSignedShellSourceConstructedIsTrue :
-  round69PaperLiteralSignedShellSourceConstructed ≡ true
-round69PaperLiteralSignedShellSourceConstructedIsTrue = refl
+round69PaperOneStructuredPDEAtomAuthorityConstructedIsTrue :
+  round69PaperOneStructuredPDEAtomAuthorityConstructed ≡ true
+round69PaperOneStructuredPDEAtomAuthorityConstructedIsTrue = refl
+
+round69PaperStructuredTriadicConcentrationMassConstructedIsTrue :
+  round69PaperStructuredTriadicConcentrationMassConstructed ≡ true
+round69PaperStructuredTriadicConcentrationMassConstructedIsTrue = refl
 
 round69PaperConditionalCriticalCircularityIdentifiedIsTrue :
   round69PaperConditionalCriticalCircularityIdentified ≡ true
 round69PaperConditionalCriticalCircularityIdentifiedIsTrue = refl
 
-round69PaperLiteralFrequencyConcentrationMassConstructedIsTrue :
-  round69PaperLiteralFrequencyConcentrationMassConstructed ≡ true
-round69PaperLiteralFrequencyConcentrationMassConstructedIsTrue = refl
+round69PaperOwnerLanguageCriticalBoundFalsifiedIsTrue :
+  round69PaperOwnerLanguageCriticalBoundFalsified ≡ true
+round69PaperOwnerLanguageCriticalBoundFalsifiedIsTrue = refl
 
-round69PaperRemainderForcesLocalizedConcentrationIsFalse :
-  round69PaperRemainderForcesLocalizedConcentration ≡ false
-round69PaperRemainderForcesLocalizedConcentrationIsFalse = refl
+round69PaperSelectedGalerkinTrajectoryConstructedIsFalse :
+  round69PaperSelectedGalerkinTrajectoryConstructed ≡ false
+round69PaperSelectedGalerkinTrajectoryConstructedIsFalse = refl
+
+round69PaperLiteralTrajectoryEmitsStructuredAtomsIsFalse :
+  round69PaperLiteralTrajectoryEmitsStructuredAtoms ≡ false
+round69PaperLiteralTrajectoryEmitsStructuredAtomsIsFalse = refl
+
+round69PaperCriticalAmplificationForcesStructuredConcentrationIsFalse :
+  round69PaperCriticalAmplificationForcesStructuredConcentration ≡ false
+round69PaperCriticalAmplificationForcesStructuredConcentrationIsFalse = refl
 
 round69PaperCriticalRatioBarrierIsFalse :
   round69PaperCriticalRatioBarrier ≡ false
