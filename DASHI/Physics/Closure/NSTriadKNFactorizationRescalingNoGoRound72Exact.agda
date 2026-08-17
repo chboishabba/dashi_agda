@@ -25,17 +25,17 @@ module DASHI.Physics.Closure.NSTriadKNFactorizationRescalingNoGoRound72Exact whe
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using ([]; _∷_)
-open import Data.Rational.Base using (ℚ; 1ℚ; _*_; _+_)
+open import Agda.Builtin.List using (List; []; _∷_)
+open import Data.Rational.Base using (1ℚ; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 
 import DASHI.Physics.Closure.NSTriadKNHHBadDyadicScalePrimitivesRound58 as Scale
 import DASHI.Physics.Closure.NSTriadKNFactorizedEffectiveComplexityCauchyRound72Exact as Effective
 
-unitFactors : _
+unitFactors : List Effective.FactorizedContribution
 unitFactors = Effective.factorized-contribution 1ℚ 1ℚ ∷ []
 
-rescaledFactors : _
+rescaledFactors : List Effective.FactorizedContribution
 rescaledFactors =
   Effective.factorized-contribution Scale.two Scale.half ∷ []
 
