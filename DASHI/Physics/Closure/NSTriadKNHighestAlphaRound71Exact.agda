@@ -33,79 +33,85 @@ module DASHI.Physics.Closure.NSTriadKNHighestAlphaRound71Exact where
 --
 -- Round70 identified cumulative non-summability as the exact finite-funding
 -- requirement and falsified one-event-per-depth dyadic floors 1,1/2,1/4,... .
--- Round71 now shows that the PER-EVENT loss rate is not by itself decisive.
--- Multiplicity can compensate loss.
+-- Round71 now shows that the PER-EVENT loss rate is not by itself decisive:
+-- genuine multiplicity can compensate loss.
 --
--- CONSTRUCTED:
+-- PROPAGATION-SIDE CONSTRUCTIONS
 --
 -- 1. A literal finite dyadic branching block.  Depth zero contains one unit
---    floor.  Each propagation step duplicates the entire block and halves all
---    descendant floors.  The recursive event count doubles exactly.
+--    floor.  Each step duplicates the block and halves all descendant floors.
+--    The recursive event count doubles exactly.
 --
--- 2. Exact mass conservation under that branching law:
+-- 2. Exact mass conservation:
 --
---        totalFloor(depth) = 1
+--        totalFloor(depth) = 1.
 --
---    for every finite depth.  Thus doubling multiplicity exactly compensates
---    a factor-1/2 loss per descendant.
+--    Thus doubling multiplicity exactly compensates factor-1/2 descendant loss.
 --
--- 3. Weighted version.  For every rational W,
+-- 3. Weighted version:
 --
 --        totalFloor(weightedBlock W depth) = W.
 --
---    Hence for every finite budget E, choosing W=E+1 gives a finite floor block
---    with cumulative requirement E+1>E at EVERY depth.  Round70 funding then
---    rejects every possible event ledger fitting under budget E.
+--    Taking W=E+1 rejects every Round70 funding ledger below budget E at every
+--    finite depth.  Therefore exponential pointwise loss is not automatically
+--    fatal if physical descendant multiplicity grows fast enough.
 --
--- This is intentionally only an arithmetic / combinatorial viability theorem.
--- It does NOT claim that Navier-Stokes supplies 2^j distinct descendants.
--- Round70 already showed that abstract block indices do not imply physical
--- support separation, so formal duplication cannot be charged twice.
+-- This remains arithmetic/combinatorial only.  Round70 already proves abstract
+-- block indices do not imply physical support separation; formal duplicates may
+-- not be charged twice.  The hard physical theorem is multiplicity x loss on
+-- genuinely distinct frequency/spacetime descendants.
+--
+-- TRAJECTORY-SIDE AUDIT AND REPAIR
+--
+-- 4. The old Round26/30 Picard `Assignment = CoordinateVariable -> Q` is NOT
+--    the finite cutoff carrier.  CoordinateVariable contains an injective copy
+--    of Nat via modes (n,0,0), so a finite equation list does not make the
+--    unrestricted function assignment finite-dimensional.  It is also Q-valued
+--    whereas the physical Complex3 carrier uses Carrier F.
+--
+-- 5. Round71 constructs the replacement finite REAL carrier: exactly six
+--    ordered scalar slots (x.re,x.im,y.re,y.im,z.re,z.im) for every canonical
+--    retained reality-orbit mode, with values in the SAME Carrier F as the
+--    physical Fourier coefficients.  The slot count is exactly six times the
+--    canonical mode-list count.
+--
+-- 6. Every literal TransverseModeCoefficient is encoded into those six real
+--    slots, and finite folding preserves the exact coefficient-mode slot order.
+--    Thus the physical -> finite-real encoding half of the trajectory bridge is
+--    constructed without rationalizing physical data.
+--
+-- The reverse map is deliberately fail-closed: arbitrary six-tuples need not be
+-- transverse.  The remaining trajectory producer must either (i) construct a
+-- genuine transverse four-real-coordinate chart, or (ii) extend the projected
+-- RHS to the full finite six-component real space, prove local Lipschitz there,
+-- and prove the transverse subspace is invariant.
 --
 -- QUANTITATIVE DISCRIMINATOR
 --
--- The physical propagation question is therefore not merely
---
---       how fast does one event's charge floor decay?
---
--- but
---
---       how does genuine duplicate-free descendant multiplicity
---       compare with the per-descendant propagation loss?
---
--- Symbolically, a viable generation j needs enough actual physical descendants
--- D_j, with individual floors mu_(j,a), that the accumulated distinct charge
+-- A viable propagation generation j needs genuine physical descendants D_j,
+-- with floors mu_(j,a), such that
 --
 --       sum_j sum_(a in D_j) mu_(j,a)
 --
--- outruns the one finite energy/enstrophy budget.  A uniform floor is one route;
--- slow/logarithmic loss is another; sufficiently fast genuine branching is a
--- third.  Summable TOTAL generation mass remains fatal to the finite-funding
--- route regardless of event count.
+-- outruns the one finite physical budget.  Uniform floors, sufficiently slow
+-- losses, or sufficiently fast genuine branching can all work.  Summable TOTAL
+-- generation mass remains fatal.  The logarithmically improved regularity
+-- literature is only architectural precedent for accumulated/divergence
+-- criteria; it is not imported as an unconditional C1 producer.
 --
--- The logarithmically improved regularity literature is recorded only as
--- architectural precedent for accumulated/divergence criteria.  It is not
--- imported as a producer of the missing unconditional C1 bound.
+-- NEW SHORTEST FRONTIER
 --
--- NEW SHORTEST FRONTIER:
---
--- A. SelectedGalerkinTrajectoryExistsAndStaysPhysical;
--- B. LocalizedTrajectoryEmitsStructuredPDEAtoms;
--- C. CriticalAmplificationForcesStructuredConcentration, with an explicit
---    initial physical charge floor and no Xi<=K premise;
--- D1. PhysicalPropagationProducesDuplicateFreeDescendants: construct the
---     actual frequency/spacetime descendants on that SAME trajectory and prove
---     they are charge-distinct rather than formal duplicates;
--- D2. PhysicalMultiplicityLossBalanceOutrunsBudget: prove the sum of the
---     descendant floors, including propagation losses and multiplicities,
---     eventually exceeds the finite physical budget;
--- E. CriticalRatioBarrierFromPropagationFloors;
--- F. only after A-E survive, finish the existing Gram/HH-bad/data/kernel/
---    continuum/final-gate closures.
---
--- Counting D1+D2 separately, the decisive critical package is now six named
--- physical lemmas rather than five; the increase is a clarification of the one
--- previously bundled propagation lemma, not a new downstream package.
+-- A1. CanonicalPhysicalRHSActsOnFiniteRealCarrier: finish the same-object
+--     finite REAL vector-field chart and local-Lipschitz representation;
+-- A2. SelectedGalerkinTrajectoryExistsAndStaysPhysical: real Picard trajectory,
+--     transverse/reality/cutoff invariance, and energy continuation;
+-- B.  LocalizedTrajectoryEmitsStructuredPDEAtoms;
+-- C.  CriticalAmplificationForcesStructuredConcentration, with an explicit
+--     initial physical charge floor and no Xi<=K premise;
+-- D1. PhysicalPropagationProducesDuplicateFreeDescendants;
+-- D2. PhysicalMultiplicityLossBalanceOutrunsBudget;
+-- E.  CriticalRatioBarrierFromPropagationFloors;
+-- F.  only after A-E survive, finish Gram/HH-bad/data/kernel/continuum/gate.
 --
 -- Clay promotion remains false.
 ------------------------------------------------------------------------
@@ -115,6 +121,9 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Physics.Closure.NSTriadKNHighestAlphaRound70Exact
 import DASHI.Physics.Closure.NSTriadKNBranchingCompensatesDyadicLossRound71Exact as Branching
+import DASHI.Physics.Closure.NSTriadKNOldRationalAssignmentNotFiniteCutoffRound71Exact as OldNoGo
+import DASHI.Physics.Closure.NSTriadKNFiniteRealCanonicalCoordinateCarrierRound71Exact as FiniteReal
+import DASHI.Physics.Closure.NSTriadKNPhysicalCoefficientFiniteRealEncodingRound71Exact as Encoding
 
 round71BranchingCompensatesDyadicLossConstructed : Bool
 round71BranchingCompensatesDyadicLossConstructed =
@@ -124,7 +133,22 @@ round71MultiplicityMustBePhysicalAndDuplicateFree : Bool
 round71MultiplicityMustBePhysicalAndDuplicateFree =
   Branching.round71MultiplicityMustBePhysicalAndDuplicateFree
 
+round71OldAssignmentNatInjectionConstructed : Bool
+round71OldAssignmentNatInjectionConstructed =
+  OldNoGo.round71OldAssignmentDomainContainsNatInjection
+
+round71FiniteRealCanonicalCarrierConstructed : Bool
+round71FiniteRealCanonicalCarrierConstructed =
+  FiniteReal.round71FiniteRealCanonicalCoordinateCarrierConstructed
+
+round71PhysicalToFiniteRealEncodingConstructed : Bool
+round71PhysicalToFiniteRealEncodingConstructed =
+  Encoding.round71PhysicalCoefficientFiniteRealEncodingConstructed
+
 -- Genuine remaining physical producers on the decisive path.
+round71CanonicalPhysicalRHSActsOnFiniteRealCarrier : Bool
+round71CanonicalPhysicalRHSActsOnFiniteRealCarrier = false
+
 round71SelectedGalerkinTrajectoryConstructed : Bool
 round71SelectedGalerkinTrajectoryConstructed = false
 
@@ -153,6 +177,22 @@ round71BranchingCompensatesDyadicLossConstructedIsTrue = refl
 round71MultiplicityMustBePhysicalAndDuplicateFreeIsTrue :
   round71MultiplicityMustBePhysicalAndDuplicateFree ≡ true
 round71MultiplicityMustBePhysicalAndDuplicateFreeIsTrue = refl
+
+round71OldAssignmentNatInjectionConstructedIsTrue :
+  round71OldAssignmentNatInjectionConstructed ≡ true
+round71OldAssignmentNatInjectionConstructedIsTrue = refl
+
+round71FiniteRealCanonicalCarrierConstructedIsTrue :
+  round71FiniteRealCanonicalCarrierConstructed ≡ true
+round71FiniteRealCanonicalCarrierConstructedIsTrue = refl
+
+round71PhysicalToFiniteRealEncodingConstructedIsTrue :
+  round71PhysicalToFiniteRealEncodingConstructed ≡ true
+round71PhysicalToFiniteRealEncodingConstructedIsTrue = refl
+
+round71CanonicalPhysicalRHSActsOnFiniteRealCarrierIsFalse :
+  round71CanonicalPhysicalRHSActsOnFiniteRealCarrier ≡ false
+round71CanonicalPhysicalRHSActsOnFiniteRealCarrierIsFalse = refl
 
 round71SelectedGalerkinTrajectoryConstructedIsFalse :
   round71SelectedGalerkinTrajectoryConstructed ≡ false
