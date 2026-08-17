@@ -4,13 +4,13 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound58FrontierCutsetValid
 -- ROUND 58 FOCUSED VALIDATION ROOT
 --
 -- This root extends the Round57 physical-semantics tranche only with theorem-
--- bearing cutset reductions.  It intentionally does not import continuum/OS
--- terminal claims and does not promote unresolved physical estimates.
+-- bearing cutset reductions.  It intentionally does not promote unresolved
+-- continuum/OS terminal claims.
 --
 -- Primary source metadata remains attached to the imported producer modules.
--- The new Round58 files cite Bałaban CMP99/CMP102/CMP109/CMP119/CMP122, Rota,
--- Penrose, Daumas--Lester--Muñoz and Ahlfors with title/author/DOI information
--- where a DOI exists.
+-- The Round58 files cite Bałaban CMP99/CMP102/CMP109/CMP119/CMP122, Rota,
+-- Penrose, Daumas--Lester--Muñoz, Ahlfors, Wilson, Gross--Wilczek and
+-- Politzer with title/author/DOI information where a DOI exists.
 ------------------------------------------------------------------------
 
 -- Full Round57 finite/source-specific foundation.
@@ -37,6 +37,13 @@ import DASHI.Physics.YangMills.BalabanYM4FiveChannelTaylorCancellationToFourthOr
 import DASHI.Physics.YangMills.BalabanCMP109PrincipalLogFrechetFromLocalInverseExact
 import DASHI.Physics.YangMills.BalabanCMP109LiteralPrincipalLogFrechetReductionExact
 
+-- Compact-simple-group dependence is introduced at the perturbative producer,
+-- not bolted onto the terminal reconstruction theorem.  Once the physical
+-- Wilson/ghost/Haar colour algebra proves C_A factorization, the exact four-
+-- orbit Bishop sum and any certified lower bound are reused group-independently.
+import DASHI.Physics.YangMills.BalabanCompactSimpleCasimirOrbitFactorizationExact
+import DASHI.Physics.YangMills.BalabanCompactSimpleWilsonOneLoopOrbitAdapterExact
+
 -- CMP119/CMP122: raw source objects do not carry all-scale Section-2
 -- preservation as fields.  The raw state is constructed OVER the finite beta
 -- history, so runningCoupling = History.couplingAt definitionally.  The
@@ -48,3 +55,9 @@ import DASHI.Physics.YangMills.BalabanCMP119SourceNativeRawStateActiveBoundsExac
 import DASHI.Physics.YangMills.Balaban1989ActiveScaleTheorem1BetaBridgeExact
 import DASHI.Physics.YangMills.BalabanCMP122Theorem1ToRawCMP119ActiveExact
 import DASHI.Physics.YangMills.BalabanCMP119RawStateFromFiniteBetaHistoryExact
+
+-- Source audit boundary: CMP122 II is imported as the published completion of
+-- four-dimensional ultraviolet stability.  That does NOT promote continuum
+-- Schwinger construction, OS axioms, non-Gaussian survival, or cutoff-uniform
+-- physical exponential clustering; those remain explicit conditional leaves.
+import DASHI.Physics.YangMills.BalabanCMP122PublishedFourDimensionalUVStabilityExact
