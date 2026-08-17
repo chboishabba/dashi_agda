@@ -31,10 +31,6 @@ open import Data.Integer using (+_)
 import DASHI.Foundations.MatchedDihedralSO3RestrictionExact as Matched
 import DASHI.Moonshine.P11MatchedDihedralSplitLiftNoGoExact as Lift
 
-------------------------------------------------------------------------
--- The five actual PairIndex 5 values.
-------------------------------------------------------------------------
-
 pair1 : Matched.PairIndex 5
 pair1 = Matched.firstPair
 
@@ -52,10 +48,6 @@ pair5 : Matched.PairIndex 5
 pair5 = Matched.nextPair
   (Matched.nextPair (Matched.nextPair (Matched.nextPair Matched.firstPair)))
 
-------------------------------------------------------------------------
--- Named actual sectors.
-------------------------------------------------------------------------
-
 epsilonSector : Matched.MatchedDihedralSector 5
 epsilonSector = Matched.selectedSinglet
 
@@ -70,13 +62,13 @@ rho5Sector = Matched.pairedDoublet pair5
 p11MatchedSectorCountIsSix : Matched.occurringSectorCount 5 ≡ 6
 p11MatchedSectorCountIsSix = refl
 
-p11MatchedDimensionIsEleven :
+p11DoubletMassIsTen :
   Matched.doubletMass (Matched.allPairIndices 5) ≡ 10
-p11MatchedDimensionIsEleven = refl
+p11DoubletMassIsTen = refl
 
-------------------------------------------------------------------------
--- Explicit basis vectors in the six-coordinate free module.
-------------------------------------------------------------------------
+p11MatchedDimensionIsEleven :
+  1 + Matched.doubletMass (Matched.allPairIndices 5) ≡ 11
+p11MatchedDimensionIsEleven = refl
 
 epsilonBasis rho1Basis rho2Basis rho3Basis rho4Basis rho5Basis :
   Lift.P11MatchedSectorVector
@@ -106,10 +98,6 @@ sectorBasis
       (Matched.nextPair
         (Matched.nextPair (Matched.nextPair Matched.firstPair))))) = rho5Basis
 
-------------------------------------------------------------------------
--- The old countermodel's rho2 basis is literally the actual second doublet.
-------------------------------------------------------------------------
-
 rho2BasisMatchesSplitLiftWitness : rho2Basis ≡ Lift.rho2Basis
 rho2BasisMatchesSplitLiftWitness = refl
 
@@ -117,15 +105,13 @@ rho2ActualSectorIsErasedByTestProjector :
   Lift.splitProjector (sectorBasis rho2Sector) ≡ Lift.zeroSectorVector
 rho2ActualSectorIsErasedByTestProjector = refl
 
-------------------------------------------------------------------------
--- Boundary: the basis chart is exact; the two-coordinate compression is still
--- only a test lens and is not promoted to the geometric supersingular map.
-------------------------------------------------------------------------
-
 record P11MatchedDihedralSixSectorBoundary : Set where
   field
     actualJ5MatchedSectorCountSix : Bool
     actualJ5MatchedSectorCountSixIsTrue : actualJ5MatchedSectorCountSix ≡ true
+
+    actualJ5MatchedDimensionEleven : Bool
+    actualJ5MatchedDimensionElevenIsTrue : actualJ5MatchedDimensionEleven ≡ true
 
     actualSixSectorBasisConstructed : Bool
     actualSixSectorBasisConstructedIsTrue : actualSixSectorBasisConstructed ≡ true
@@ -144,6 +130,8 @@ canonicalP11MatchedDihedralSixSectorBoundary =
   record
     { actualJ5MatchedSectorCountSix = true
     ; actualJ5MatchedSectorCountSixIsTrue = refl
+    ; actualJ5MatchedDimensionEleven = true
+    ; actualJ5MatchedDimensionElevenIsTrue = refl
     ; actualSixSectorBasisConstructed = true
     ; actualSixSectorBasisConstructedIsTrue = refl
     ; splitLiftCarrierAnchoredToActualSectors = true
