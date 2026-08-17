@@ -46,44 +46,53 @@ module DASHI.Physics.Closure.NSTriadKNHighestAlphaRound71Exact where
 -- orbit representative, exact physical coefficient encoding, and exact ordered
 -- alignment of the actual canonical RHS output to those slots.
 --
--- One autonomous full-space reality vector field F_N is now constructed with
--- fixed N/E/inverse-square/viscosity and arbitrary Complex3 F values on positive
--- canonical modes. Negative values are reconstructed by conjugation and the
--- nonlinear term is literally the repository's Leray-projected finite Galerkin
--- nonlinearity.
+-- One autonomous full-space reality vector field F_N is constructed with fixed
+-- N/E/inverse-square/viscosity. Negative modes are reconstructed by conjugation
+-- and the nonlinear term is literally the Leray-projected finite Galerkin
+-- nonlinearity. Exact positive/negative lookup proves reality is built into the
+-- finite carrier. A literal expression evaluator proves degree <=2 at every
+-- output mode, and the transverse/divergence-free subspace is invariant under
+-- F_N. The remaining pre-trajectory seam is standard actual-real local-
+-- Lipschitz/Picard plus global energy continuation.
 --
--- The following are now theorem-level, not status intentions:
--- * exact positive and negative reality lookup;
--- * reality built into the finite carrier;
--- * an expression evaluator definitionally tied to rawCanonicalRHSAt with
---   algebraic degree <=2 at every output mode;
--- * invariance of the transverse/divergence-free subspace under F_N.
+-- CONCENTRATION SIDE
 --
--- Consequently the remaining pre-trajectory seam is standard real analysis:
--- flatten the exact degree-two field to the six-real coordinate carrier, prove
--- local Lipschitz for the actual real-number implementation, and invoke finite-
--- dimensional Picard. The NS-specific carrier, polynomial-shape, reality and
--- transversality issues exposed by earlier rounds are no longer open.
+-- Round71 applies the repository's exact finite squared Cauchy-Schwarz theorem
+-- directly to the triadic physicalAtom values in the ONE Round62 structured PDE
+-- list. If the amplification remainder R is exactly their signed sum and
+-- 0<=mu<=R, then
+--
+--       mu^2 <= triadicCount * triadicConcentrationMass.
+--
+-- This is a non-Carleman amplification-to-mass bridge.  But the cardinality
+-- factor is essential: the exact dyadic branching model has signed sum 1 at
+-- every depth while squared mass is 2^(-j).  Thus an order-one remainder may be
+-- diluted across exponentially many atoms.  The physical concentration theorem
+-- must therefore identify a controlled-cardinality/coherent subfibre (or exploit
+-- additional sign/geometry) before the squared mass becomes a useful charge.
 --
 -- QUANTITATIVE DISCRIMINATOR
 --
--- A viable propagation generation j needs genuine physical descendants D_j
--- with floors mu_(j,a) whose distinct accumulated charge
+-- A viable propagation generation j needs genuinely distinct physical
+-- descendants D_j with floors mu_(j,a) whose accumulated physical charge
 --
 --       sum_j sum_(a in D_j) mu_(j,a)
 --
--- outruns the one finite physical budget. Uniform floors, slow loss, or fast
--- genuine branching can work; summable TOTAL generation mass remains fatal.
+-- outruns the one finite budget. Uniform floors, slow loss, or fast genuine
+-- branching can work; summable TOTAL generation mass remains fatal.
 --
 -- NEW SHORTEST FRONTIER
 --
--- A1. RealPolynomialLocalLipschitzAndPicard: apply actual-real finite-dimensional
---     local-Lipschitz/Picard authority to the constructed degree-two field;
--- A2. SelectedGalerkinTrajectoryGlobalEnergyContinuation: transport the local
---     trajectory through the exact reality/transverse invariants and finite
---     energy identity to obtain the global selected trajectory;
--- B.  LocalizedTrajectoryEmitsStructuredPDEAtoms;
--- C.  CriticalAmplificationForcesStructuredConcentration;
+-- A1. RealPolynomialLocalLipschitzAndPicard: actual-real finite-dimensional
+--     local-Lipschitz/Picard for the constructed degree-two field;
+-- A2. SelectedGalerkinTrajectoryGlobalEnergyContinuation;
+-- B.  LocalizedTrajectoryEmitsStructuredPDEAtoms and identify exactly which
+--     projected atom grouping is the critical amplification remainder;
+-- C1. CriticalAmplificationForcesControlledSubfibre: prove excess amplification
+--     forces a triadic/coherent subfibre with quantitatively controlled
+--     cardinality/sign geometry;
+-- C2. StructuredSubfibreHasPositiveCharge: consume the constructed Cauchy
+--     inequality to obtain the physical concentration floor;
 -- D1. PhysicalPropagationProducesDuplicateFreeDescendants;
 -- D2. PhysicalMultiplicityLossBalanceOutrunsBudget;
 -- E.  CriticalRatioBarrierFromPropagationFloors;
@@ -105,34 +114,20 @@ import DASHI.Physics.Closure.NSTriadKNFixedCanonicalRealityVectorFieldRound71Exa
 import DASHI.Physics.Closure.NSTriadKNFixedCanonicalRealityLookupExactRound71Exact as Reality
 import DASHI.Physics.Closure.NSTriadKNFixedCanonicalVectorFieldDegreeTwoRound71Exact as Degree
 import DASHI.Physics.Closure.NSTriadKNFixedCanonicalTransverseInvariantRound71Exact as Transverse
+import DASHI.Physics.Closure.NSTriadKNCriticalRemainderTriadicCauchyRound71Exact as Cauchy
+import DASHI.Physics.Closure.NSTriadKNCriticalCauchyCardinalityDilutionNoGoRound71Exact as Dilution
 
 round71BranchingCompensatesDyadicLossConstructed : Bool
 round71BranchingCompensatesDyadicLossConstructed =
   Branching.round71BranchingCompensatesDyadicPerEventLoss
 
-round71MultiplicityMustBePhysicalAndDuplicateFree : Bool
-round71MultiplicityMustBePhysicalAndDuplicateFree =
-  Branching.round71MultiplicityMustBePhysicalAndDuplicateFree
-
-round71OldAssignmentNatInjectionConstructed : Bool
-round71OldAssignmentNatInjectionConstructed =
-  OldNoGo.round71OldAssignmentDomainContainsNatInjection
-
 round71FiniteRealCanonicalCarrierConstructed : Bool
 round71FiniteRealCanonicalCarrierConstructed =
   FiniteReal.round71FiniteRealCanonicalCoordinateCarrierConstructed
 
-round71PhysicalToFiniteRealEncodingConstructed : Bool
-round71PhysicalToFiniteRealEncodingConstructed =
-  Encoding.round71PhysicalCoefficientFiniteRealEncodingConstructed
-
 round71CanonicalRHSOutputOnFiniteRealCarrierConstructed : Bool
 round71CanonicalRHSOutputOnFiniteRealCarrierConstructed =
   RHSAlignment.round71CanonicalRHSOutputOnFiniteRealCarrier
-
-round71FixedCanonicalGeometryIndependentOfState : Bool
-round71FixedCanonicalGeometryIndependentOfState =
-  Fixed.round71FixedCanonicalGeometryIndependentOfState
 
 round71FullSpaceRealityVectorFieldConstructed : Bool
 round71FullSpaceRealityVectorFieldConstructed =
@@ -149,6 +144,14 @@ round71TransverseSubspaceInvariant : Bool
 round71TransverseSubspaceInvariant =
   Transverse.round71FixedCanonicalTransverseSubspaceInvariant
 
+round71FiniteCauchyRemainderToTriadicMassConstructed : Bool
+round71FiniteCauchyRemainderToTriadicMassConstructed =
+  Cauchy.round71FiniteCauchyRemainderToTriadicMassConstructed
+
+round71CardinalityDilutionNoGoConstructed : Bool
+round71CardinalityDilutionNoGoConstructed =
+  Dilution.round71OrderOneRemainderCanHaveDyadicallySmallSquaredMass
+
 -- Genuine remaining physical/analytic producers on the decisive path.
 round71RealPolynomialLocalLipschitzAndPicardConstructed : Bool
 round71RealPolynomialLocalLipschitzAndPicardConstructed = false
@@ -159,8 +162,8 @@ round71SelectedGalerkinTrajectoryConstructed = false
 round71LiteralTrajectoryEmitsStructuredAtoms : Bool
 round71LiteralTrajectoryEmitsStructuredAtoms = false
 
-round71CriticalAmplificationForcesStructuredConcentration : Bool
-round71CriticalAmplificationForcesStructuredConcentration = false
+round71CriticalAmplificationForcesControlledSubfibre : Bool
+round71CriticalAmplificationForcesControlledSubfibre = false
 
 round71PhysicalPropagationProducesDuplicateFreeDescendants : Bool
 round71PhysicalPropagationProducesDuplicateFreeDescendants = false
@@ -190,6 +193,14 @@ round71TransverseSubspaceInvariantIsTrue :
   round71TransverseSubspaceInvariant ≡ true
 round71TransverseSubspaceInvariantIsTrue = refl
 
+round71FiniteCauchyRemainderToTriadicMassConstructedIsTrue :
+  round71FiniteCauchyRemainderToTriadicMassConstructed ≡ true
+round71FiniteCauchyRemainderToTriadicMassConstructedIsTrue = refl
+
+round71CardinalityDilutionNoGoConstructedIsTrue :
+  round71CardinalityDilutionNoGoConstructed ≡ true
+round71CardinalityDilutionNoGoConstructedIsTrue = refl
+
 round71RealPolynomialLocalLipschitzAndPicardConstructedIsFalse :
   round71RealPolynomialLocalLipschitzAndPicardConstructed ≡ false
 round71RealPolynomialLocalLipschitzAndPicardConstructedIsFalse = refl
@@ -198,9 +209,9 @@ round71SelectedGalerkinTrajectoryConstructedIsFalse :
   round71SelectedGalerkinTrajectoryConstructed ≡ false
 round71SelectedGalerkinTrajectoryConstructedIsFalse = refl
 
-round71CriticalAmplificationForcesStructuredConcentrationIsFalse :
-  round71CriticalAmplificationForcesStructuredConcentration ≡ false
-round71CriticalAmplificationForcesStructuredConcentrationIsFalse = refl
+round71CriticalAmplificationForcesControlledSubfibreIsFalse :
+  round71CriticalAmplificationForcesControlledSubfibre ≡ false
+round71CriticalAmplificationForcesControlledSubfibreIsFalse = refl
 
 round71PhysicalPropagationProducesDuplicateFreeDescendantsIsFalse :
   round71PhysicalPropagationProducesDuplicateFreeDescendants ≡ false
