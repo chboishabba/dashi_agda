@@ -28,7 +28,7 @@ module DASHI.Physics.YangMills.BalabanBooleanFourCubeWalshCharacterExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Integer.Base using (+_)
-open import Data.Rational using (ℚ; 0ℚ; 1ℚ; _+_; _*_; -_)
+open import Data.Rational using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _/_; -_)
 import Data.Rational.Tactic.RingSolver as ℚRing
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -116,7 +116,7 @@ nontrivialWalshKillsConstant nt0123 value = ℚRing.solve-∀ value
 trivialWalshConstantIsSixteen :
   (value : ℚ) →
   walshCoefficient (constantFunction value) Cube.empty
-  ≡ (+ 16) * value
+  ≡ (+ 16 / 1) * value
 trivialWalshConstantIsSixteen value = ℚRing.solve-∀ value
 
 ------------------------------------------------------------------------
