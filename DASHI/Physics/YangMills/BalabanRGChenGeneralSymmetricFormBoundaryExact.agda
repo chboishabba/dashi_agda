@@ -31,7 +31,7 @@ module DASHI.Physics.YangMills.BalabanRGChenGeneralSymmetricFormBoundaryExact wh
 -- the general symmetric-form theorem without requiring finite M.
 ------------------------------------------------------------------------
 
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _*_; _≤_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _*_; _≤_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
