@@ -15,20 +15,13 @@ module DASHI.Physics.Closure.NSTriadKNFixedCanonicalTransverseInvariantRound71Ex
 --
 -- On the fixed autonomous reality carrier, define transversality only on the
 -- canonical positive representatives.  Reality reconstructs the negative sheet.
---
--- If u is transverse on those positive modes, then for every canonical output k:
---
--- * the viscous term -nu |k|^2 u(k) is transverse by scalar multiplication;
--- * the complete literal projected nonlinearity is transverse for arbitrary
---   input velocities by the existing Round30 Leray-output theorem;
--- * their sum is transverse.
---
--- The exact positive lookup theorem identifies the output state's stored value
--- with rawCanonicalRHSAt.  Hence the fixed vector field maps the transverse
--- subspace to itself.  No ODE authority is used here.
+-- If u is transverse there, the viscous term stays transverse and the complete
+-- literal projected nonlinearity is transverse for arbitrary input velocities.
+-- Their sum is therefore transverse.  Exact positive lookup identifies the
+-- output state's stored derivative with rawCanonicalRHSAt.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
@@ -37,6 +30,7 @@ import DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier as Cube
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNComplex3FieldAlgebra as Field
 import DASHI.Physics.Closure.NSTriadKNComplex3HermitianScalingLaws as Scaling
+import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNProjectedNonlinearityTransverseRound30Exact as Nonlinear
 import DASHI.Physics.Closure.NSTriadKNCanonicalCutoffOrbitCarrierRound63Exact as Orbit
 import DASHI.Physics.Closure.NSTriadKNFixedCanonicalRealityVectorFieldRound71Exact as Fixed
@@ -46,13 +40,13 @@ CanonicalPositiveTransverse :
   ∀ {r} {F : C3.RealField r} {E : C3.IntegerEmbedding F}
     (geometry : Fixed.FixedCanonicalGeometry F E) →
   Fixed.CanonicalRealityState F (Fixed.cutoff geometry) → Set r
-CanonicalPositiveTransverse {E = E} geometry state =
+CanonicalPositiveTransverse {F = F} {E = E} geometry state =
   ∀ mode →
   mode Cube.∈ Orbit.canonicalCutoffOrbitModes (Fixed.cutoff geometry) →
   C3.bilinearDot3
     (C3.modeVector E mode)
     (Fixed.realityVelocity state mode)
-  ≡ C3.complexZero _
+  ≡ C3.complexZero F
 
 canonicalModeNonzero :
   ∀ {N mode} →
@@ -113,8 +107,7 @@ rawCanonicalRHSAtTransverse {E = E} geometry state mode nonzero inputZero =
     (C3.complex3Scale
       (Fixed.viscousScalar geometry mode)
       (Fixed.realityVelocity state mode))
-    (DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit.projectedNonlinearity
-      (Fixed.fixedAuditSystem geometry state) mode)
+    (Audit.projectedNonlinearity (Fixed.fixedAuditSystem geometry state) mode)
     (viscousPartTransverse geometry state mode inputZero)
     (Nonlinear.projectedNonlinearityTransverseExact
       (Fixed.fixedAuditSystem geometry state) mode nonzero)
@@ -153,7 +146,7 @@ fixedCanonicalVectorFieldPreservesTransverse :
   CanonicalPositiveTransverse geometry state →
   CanonicalPositiveTransverse geometry
     (Fixed.fixedCanonicalRealityVectorField geometry state)
-fixedCanonicalVectorFieldPreservesTransverse {F = F} {E = E}
+fixedCanonicalVectorFieldPreservesTransverse {E = E}
     geometry state inputTransverse mode member =
   trans
     (cong
