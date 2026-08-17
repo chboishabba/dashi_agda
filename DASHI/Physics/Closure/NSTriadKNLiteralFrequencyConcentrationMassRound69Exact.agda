@@ -46,7 +46,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _≤_)
 import Data.Rational.Properties as ℚP
-open import Relation.Binary.PropositionalEquality using (cong)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
@@ -116,10 +116,9 @@ physicalOutputFrequencyMassNonnegative cutoff output value =
     rawNN = rawSquaredMassNonnegative value
       (Output.physicalOutputFiber cutoff output)
   in
-  Relation.Binary.PropositionalEquality.subst
+  subst
     (0ℚ ≤_)
-    (Relation.Binary.PropositionalEquality.sym
-      (physicalOutputFrequencyMassIsRawFibreMass cutoff output value))
+    (sym (physicalOutputFrequencyMassIsRawFibreMass cutoff output value))
     rawNN
 
 round69LiteralFrequencyConcentrationMassConstructed : Bool
