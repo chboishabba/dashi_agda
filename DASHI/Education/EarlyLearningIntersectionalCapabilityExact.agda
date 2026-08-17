@@ -74,7 +74,9 @@ familyChoiceProjection position = sameFormalFamilyChoice
 
 ------------------------------------------------------------------------
 -- Finite witness: same family-choice label, different effective capability.
--- Bool is a structural witness only, not an empirical score.
+-- Bool is a structural witness only, not an empirical score.  The witness uses
+-- one retained fine coordinate only to prove the projection theorem; the full
+-- situated carrier keeps the other axes available to consumers.
 ------------------------------------------------------------------------
 
 lowReachabilityPosition : SituatedEarlyLearningPosition
@@ -94,9 +96,9 @@ highReachabilityPosition =
     kinCommunityGoverned institutionTrusted
 
 effectiveCapabilityWitness : SituatedEarlyLearningPosition → Bool
-effectiveCapabilityWitness lowReachabilityPosition = false
-effectiveCapabilityWitness highReachabilityPosition = true
-effectiveCapabilityWitness position = false
+effectiveCapabilityWitness position with labour position
+... | secureFlexible = true
+... | precariousTimePoor = false
 
 sameChoiceDifferentCapability :
   effectiveCapabilityWitness lowReachabilityPosition ≡
