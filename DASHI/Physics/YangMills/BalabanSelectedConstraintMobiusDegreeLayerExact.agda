@@ -32,11 +32,11 @@ module DASHI.Physics.YangMills.BalabanSelectedConstraintMobiusDegreeLayerExact w
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Data.Rational.Base as ℚ using (ℚ)
+open import Data.Integer.Base using (+_)
+open import Data.Rational.Base as ℚ using (ℚ; _+_; _-_; _*_; _/_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
-import DASHI.Physics.YangMills.BalabanP33FiniteKKTPseudoinverseProjectorExact as Pseudo
-import DASHI.Physics.YangMills.BalabanP33FiniteKKTAdmissibleProjectorExact as KKT
+import DASHI.Physics.YangMills.BalabanWilsonBooleanFourCubeExact as Cube
 import DASHI.Physics.YangMills.BalabanSelectedRawExtractorConstraintDefectAtomsExact as Atoms
 import DASHI.Physics.YangMills.BalabanWilsonBooleanFourCubeMobiusDegreeLayerExact as Layer
 
@@ -44,14 +44,14 @@ sourcePartialAt :
   ∀ {Multiplier pseudoData firstVariationCovector rawExtractor} →
   Atoms.SelectedConstraintPartialEvaluationData
     {Multiplier} pseudoData firstVariationCovector rawExtractor →
-  Multiplier → DASHI.Physics.YangMills.BalabanWilsonBooleanFourCubeExact.Subset4 → ℚ
+  Multiplier → Cube.Subset4 → ℚ
 sourcePartialAt partial row subset = Atoms.sourcePartial partial subset row
 
 defectPartialAt :
   ∀ {Multiplier pseudoData firstVariationCovector rawExtractor} →
   Atoms.SelectedConstraintPartialEvaluationData
     {Multiplier} pseudoData firstVariationCovector rawExtractor →
-  Multiplier → DASHI.Physics.YangMills.BalabanWilsonBooleanFourCubeExact.Subset4 → ℚ
+  Multiplier → Cube.Subset4 → ℚ
 defectPartialAt partial row subset = Atoms.defectPartial partial subset row
 
 sourceLayer1 sourceLayer2 sourceLayer3 sourceLayer4 :
@@ -109,7 +109,7 @@ sourceDegree2LayerExact :
       {Multiplier} pseudoData firstVariationCovector rawExtractor)
     row →
   sourceDegree2 partial row
-  ≡ sourceLayer2 partial row - (+ 3 Data.Rational.Base./ 1) * sourceLayer1 partial row
+  ≡ sourceLayer2 partial row - (+ 3 / 1) * sourceLayer1 partial row
 sourceDegree2LayerExact partial row =
   Layer.mobiusDegree2ZeroBackground
     (sourcePartialAt partial row) (Atoms.sourceEmptyZero partial row)
@@ -121,8 +121,8 @@ sourceDegree3LayerExact :
     row →
   sourceDegree3 partial row
   ≡ sourceLayer3 partial row
-    - (+ 2 Data.Rational.Base./ 1) * sourceLayer2 partial row
-    + (+ 3 Data.Rational.Base./ 1) * sourceLayer1 partial row
+    - (+ 2 / 1) * sourceLayer2 partial row
+    + (+ 3 / 1) * sourceLayer1 partial row
 sourceDegree3LayerExact partial row =
   Layer.mobiusDegree3ZeroBackground
     (sourcePartialAt partial row) (Atoms.sourceEmptyZero partial row)
@@ -154,7 +154,7 @@ defectDegree2LayerExact :
       {Multiplier} pseudoData firstVariationCovector rawExtractor)
     row →
   defectDegree2 partial row
-  ≡ defectLayer2 partial row - (+ 3 Data.Rational.Base./ 1) * defectLayer1 partial row
+  ≡ defectLayer2 partial row - (+ 3 / 1) * defectLayer1 partial row
 defectDegree2LayerExact partial row =
   Layer.mobiusDegree2ZeroBackground
     (defectPartialAt partial row) (Atoms.defectEmptyZero partial row)
@@ -166,8 +166,8 @@ defectDegree3LayerExact :
     row →
   defectDegree3 partial row
   ≡ defectLayer3 partial row
-    - (+ 2 Data.Rational.Base./ 1) * defectLayer2 partial row
-    + (+ 3 Data.Rational.Base./ 1) * defectLayer1 partial row
+    - (+ 2 / 1) * defectLayer2 partial row
+    + (+ 3 / 1) * defectLayer1 partial row
 defectDegree3LayerExact partial row =
   Layer.mobiusDegree3ZeroBackground
     (defectPartialAt partial row) (Atoms.defectEmptyZero partial row)
