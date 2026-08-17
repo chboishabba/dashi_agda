@@ -29,7 +29,8 @@ module DASHI.Physics.Closure.NSTriadKNLowLegFrameFactorizationRound73Exact where
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Rational.Base using (ℚ)
+open import Data.Product.Base using (_×_)
+open import Data.Rational.Base using (ℚ; _*_)
 
 import DASHI.Physics.Closure.NSTriadKNLuoPhysicalFiveClassSupportRound25Exact as Support
 import DASHI.Physics.Closure.NSTriadKNGlobalBilinearShellPairingRound29Exact as Shell
