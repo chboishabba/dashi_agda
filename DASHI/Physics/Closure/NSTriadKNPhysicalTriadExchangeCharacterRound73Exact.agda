@@ -29,7 +29,6 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; -_)
 import Data.Rational.Properties as ℚP
-open import Relation.Binary.PropositionalEquality using (subst)
 
 data ExchangeSector : Set where
   exchangeEven exchangeOdd : ExchangeSector
@@ -62,12 +61,8 @@ oddPairSum : List ExchangePair → ℚ
 oddPairSum [] = 0ℚ
 oddPairSum (p ∷ rest) = pairSum p + oddPairSum rest
 
-AllExchangeOdd : List ExchangePair → Set
-AllExchangeOdd [] = Agda.Builtin.Unit.⊤
-AllExchangeOdd (p ∷ rest) = CertifiedExchangeOdd p Agda.Builtin.Sigma.× AllExchangeOdd rest
-
--- Keep the recursive cancellation theorem on a dedicated proof carrier to avoid
--- treating exchange symmetry as a property of every physical row.
+-- The recursive carrier deliberately certifies only those physical pair rows
+-- for which the source theorem proves exchange-odd covariance.
 data ExchangeOddFamily : List ExchangePair → Set where
   odd[] : ExchangeOddFamily []
   odd∷ : ∀ {p rest} → CertifiedExchangeOdd p →
