@@ -38,6 +38,7 @@ module DASHI.Physics.YangMills.BalabanP33RationalQuaternionWilsonFirstVariationE
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List)
 open import Data.List.Base using (map; length)
 open import Data.Rational.Base as ℚ using (ℚ; -_)
 open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
