@@ -41,11 +41,16 @@ module DASHI.Physics.Closure.NSTriadKNHighestAlphaRound67Exact where
 -- endpoints.  These are exact rational polynomial identities and provide the
 -- gluing jets required for a C^4 annular transition.
 --
--- CROSS-POLLINATION:
+-- CROSS-POLLINATION + TAYLOR FACTOR:
 -- The same S is instantiated in the existing finite-dimensional Frechet
 -- carrier from the Yang-Mills/Balaban lane.  Its derivative is literally
--- S'(x)h and its remainder is literally S(x+h)-S(x)-S'(x)h, with the exact
--- increment expansion proved by ring normalization.
+-- S'(x)h and its remainder is literally S(x+h)-S(x)-S'(x)h.  The remainder is
+-- then factored exactly as
+--
+--   R(x,h) = h^2 Q(x,h)
+--
+-- for an explicit rational polynomial Q.  Thus the smooth cutoff now has a
+-- genuine second-order Taylor small parameter, rather than an assumed one.
 --
 -- B3 LOW-OUTPUT PARITY:
 -- The physical Fourier strain multiplier is proved even under k -> -k.  This
@@ -55,12 +60,12 @@ module DASHI.Physics.Closure.NSTriadKNHighestAlphaRound67Exact where
 --
 -- REMAINING RISK-BEARING B/E PRODUCER:
 -- Attach the explicit smooth radial transition to the actual continuum
--- projection-mode/matrix symbol, prove quantitative first-/higher-order
--- derivative bounds on the Round66 branch geometry, and feed those bounds into
--- the normalized physical Gram overlap.  The hard annulus is no longer an
--- admissible Taylor object.  Fourfold continuum integration by parts for this
--- same matrix symbol remains the E2 analytic endpoint; Round62 already closes
--- the resulting dyadic L1 summation.
+-- projection-mode/matrix symbol, prove quantitative derivative bounds on the
+-- Round66 branch geometry (including the angular strain contribution), and
+-- feed those bounds into the normalized physical Gram overlap.  The hard
+-- annulus is no longer an admissible Taylor object.  Fourfold continuum
+-- integration by parts for this same matrix symbol remains the E2 analytic
+-- endpoint; Round62 already closes the resulting dyadic L1 summation.
 --
 -- No Clay promotion is made here.
 ------------------------------------------------------------------------
@@ -73,6 +78,7 @@ import DASHI.Physics.Closure.NSTriadKNHHGoodScaleInvariantAnnulusNoGoRound67Exac
 import DASHI.Physics.Closure.NSTriadKNComHardDyadicBoundaryTaylorNoGoRound67Exact
 import DASHI.Physics.Closure.NSTriadKNHHGoodC4AnnularPolynomialCoreRound67Exact
 import DASHI.Physics.Closure.NSTriadKNHHGoodC4AnnularFrechetBridgeRound67Exact
+import DASHI.Physics.Closure.NSTriadKNHHGoodC4AnnularTaylorFactorRound67Exact
 import DASHI.Physics.Closure.NSTriadKNFourierStrainModeParityRound67Exact
 
 round67HomogeneousAndAnnularRolesSeparated : Bool
@@ -86,6 +92,9 @@ round67ExplicitC4RadialTransitionCoreConstructed = true
 
 round67C4TransitionFrechetExpansionConstructed : Bool
 round67C4TransitionFrechetExpansionConstructed = true
+
+round67C4TransitionTaylorSquareFactorConstructed : Bool
+round67C4TransitionTaylorSquareFactorConstructed = true
 
 round67FourierStrainModeParityConstructed : Bool
 round67FourierStrainModeParityConstructed = true
@@ -114,6 +123,10 @@ round67ExplicitC4RadialTransitionCoreConstructedIsTrue = refl
 round67C4TransitionFrechetExpansionConstructedIsTrue :
   round67C4TransitionFrechetExpansionConstructed ≡ true
 round67C4TransitionFrechetExpansionConstructedIsTrue = refl
+
+round67C4TransitionTaylorSquareFactorConstructedIsTrue :
+  round67C4TransitionTaylorSquareFactorConstructed ≡ true
+round67C4TransitionTaylorSquareFactorConstructedIsTrue = refl
 
 round67FourierStrainModeParityConstructedIsTrue :
   round67FourierStrainModeParityConstructed ≡ true
