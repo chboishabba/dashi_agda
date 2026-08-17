@@ -14,37 +14,26 @@ module DASHI.Moonshine.P11MatchedDihedralPositiveHeckeNoGoExact where
 --
 -- DASHI CONTRIBUTION
 --
--- A finite positivity no-go for the natural test lens
+-- Finite positivity no-go for the natural test lens
 --
---   {epsilon}  versus  {rho1,...,rho5}.
+--   {epsilon} versus {rho1,...,rho5}.
 --
--- Suppose a nonnegative six-state ell=2 correspondence descends to
---
---        B_11(2) = [[0,3],[2,1]].
---
--- Then the epsilon row has exactly three total edges into the five rho sectors.
--- Hence at least one rho_i receives zero direct epsilon->rho_i multiplicity.
--- Every rho row has quotient multiplicity two back to epsilon and total
--- multiplicity one inside the rho block.  Consequently the rho-block two-step
--- return contribution at any fixed rho_i is at most one.
---
--- At an unhit rho_i the diagonal of R2^2 is therefore at most one.  But a
--- nonnegative full Hecke relation
+-- A nonnegative six-state ell=2 correspondence descending to
+-- B_11(2)=[[0,3],[2,1]] has only three epsilon->rho edges across five rho
+-- sectors, hence misses at least one rho_i.  Each rho row has quotient
+-- multiplicity two back to epsilon and total rho-block multiplicity one, so the
+-- rho-block two-step return at a fixed rho_i is at most one.  At a missed rho_i
+-- the diagonal of R2^2 is therefore <=1, whereas
 --
 --   R2^2 = R4 + 2 I
 --
--- requires every diagonal entry of R2^2 to be at least two.  Contradiction.
+-- with nonnegative R4 forces every diagonal to be >=2.  Contradiction.
 --
--- The record below stores only these NECESSARY numerical consequences of such
--- a positive correspondence; no fabricated adjacency matrix is introduced.
--- Therefore its emptiness is a genuine no-go for this one-vs-five quotient.
+-- The record stores only necessary numerical consequences of a positive
+-- correspondence; no adjacency matrix is fabricated.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
-
-------------------------------------------------------------------------
--- Which rho coordinate is missed by the three epsilon edges?
-------------------------------------------------------------------------
 
 data FiveIndex : Set where
   i1 i2 i3 i4 i5 : FiveIndex
@@ -62,30 +51,23 @@ zeroAmongFiveWithSumThree
   (suc a) (suc b) (suc c) (suc d) (suc e) ()
 
 ------------------------------------------------------------------------
--- A number <=1 cannot equal a number >=2.
+-- Definitionally normalized form of "<=1 cannot equal >=2".
 ------------------------------------------------------------------------
 
 atMostOneCannotBePlusTwo :
   (r r4 : Nat) →
   r ≤ 1 →
-  r ≡ r4 + 2 →
+  r ≡ 2 + r4 →
   ⊥
 atMostOneCannotBePlusTwo 0 r4 bound ()
 atMostOneCannotBePlusTwo 1 r4 bound ()
 atMostOneCannotBePlusTwo (suc (suc r)) r4 () equality
 
-------------------------------------------------------------------------
--- Necessary diagonal data for a positive one-vs-five lift.
-------------------------------------------------------------------------
-
 record PositiveOneVsFiveR2SquareData : Set where
   field
-    -- epsilon -> rho_i multiplicities; quotient row degree forces total 3.
     e1 e2 e3 e4 e5 : Nat
     epsilonRowDegree : e1 + e2 + e3 + e4 + e5 ≡ 3
 
-    -- rho-block two-step return contributions.  Because every rho row has
-    -- exactly one total rho-block edge, each such return contribution is <=1.
     return1 return2 return3 return4 return5 : Nat
     return1AtMostOne : return1 ≤ 1
     return2AtMostOne : return2 ≤ 1
@@ -93,23 +75,17 @@ record PositiveOneVsFiveR2SquareData : Set where
     return4AtMostOne : return4 ≤ 1
     return5AtMostOne : return5 ≤ 1
 
-    -- Nonnegative R4 diagonal entries.
     r4diag1 r4diag2 r4diag3 r4diag4 r4diag5 : Nat
 
-    -- Diagonal prime-square equations.  The first term is the two-step path
-    -- rho_i -> epsilon -> rho_i: quotient multiplicity 2 times e_i.
-    square1 : 2 * e1 + return1 ≡ r4diag1 + 2
-    square2 : 2 * e2 + return2 ≡ r4diag2 + 2
-    square3 : 2 * e3 + return3 ≡ r4diag3 + 2
-    square4 : 2 * e4 + return4 ≡ r4diag4 + 2
-    square5 : 2 * e5 + return5 ≡ r4diag5 + 2
+    -- Use 2+r4 rather than r4+2 so the lower-bound constructor shape is
+    -- definitionally visible to Agda without invoking Nat commutativity.
+    square1 : 2 * e1 + return1 ≡ 2 + r4diag1
+    square2 : 2 * e2 + return2 ≡ 2 + r4diag2
+    square3 : 2 * e3 + return3 ≡ 2 + r4diag3
+    square4 : 2 * e4 + return4 ≡ 2 + r4diag4
+    square5 : 2 * e5 + return5 ≡ 2 + r4diag5
 
 open PositiveOneVsFiveR2SquareData public
-
-------------------------------------------------------------------------
--- Selecting the missed rho turns its square equation into return_i = r4+2,
--- contradicting return_i <=1.
-------------------------------------------------------------------------
 
 missedIndexImpossible :
   (data : PositiveOneVsFiveR2SquareData) →
@@ -146,11 +122,6 @@ missedIndexImpossible data i5 zeroProofs
       (return5 data) (r4diag5 data)
       (return5AtMostOne data) (square5 data)
 
-------------------------------------------------------------------------
--- A direct constructive missed-index package avoids any classical pigeonhole
--- principle: the five Nat inputs are pattern-matched exactly.
-------------------------------------------------------------------------
-
 record MissedRhoWitness (a b c d e : Nat) : Set where
   constructor missedRho
   field
@@ -185,10 +156,6 @@ positiveOneVsFiveLiftImpossible data with
     (epsilonRowDegree data)
 ... | missedRho missed i1z i2z i3z i4z i5z =
   missedIndexImpossible data missed (i1z , i2z , i3z , i4z , i5z)
-
-------------------------------------------------------------------------
--- Boundary.
-------------------------------------------------------------------------
 
 record P11MatchedDihedralPositiveHeckeNoGoBoundary : Set where
   field
