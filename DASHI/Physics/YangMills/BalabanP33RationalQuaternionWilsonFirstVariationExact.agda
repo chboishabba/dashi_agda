@@ -32,6 +32,7 @@ module DASHI.Physics.YangMills.BalabanP33RationalQuaternionWilsonFirstVariationE
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List)
 open import Data.List.Base using (map; length)
 open import Data.Rational.Base as ℚ using (ℚ; -_)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
@@ -39,13 +40,11 @@ open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionWilsonJetExact as Jet
 
-wilsonFirstVariationNumerator :
-  Agda.Builtin.List.List Jet.QuaternionFactorJet → ℚ
+wilsonFirstVariationNumerator : List Jet.QuaternionFactorJet → ℚ
 wilsonFirstVariationNumerator factors =
   - Jet.q0 (Jet.orderedFirstProduct factors)
 
-wilsonFirstVariationAtomSum :
-  Agda.Builtin.List.List Jet.QuaternionFactorJet → ℚ
+wilsonFirstVariationAtomSum : List Jet.QuaternionFactorJet → ℚ
 wilsonFirstVariationAtomSum factors =
   Jet.sumRational
     (map Jet.wilsonAtomContribution (Jet.firstVariationTerms factors))
