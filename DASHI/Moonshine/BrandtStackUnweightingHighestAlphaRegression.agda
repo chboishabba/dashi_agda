@@ -8,6 +8,7 @@ import DASHI.Moonshine.BrandtStackUnweightingControlsExact as Controls
 import DASHI.Moonshine.P37NonOggPositiveHeckeControlExact as P37
 import DASHI.Moonshine.P37NonOggPositivePrimeSquareNeighboursExact as P37Square
 import DASHI.Moonshine.BrandtStackCrossPrimeSelectorCutsetExact as Cutset
+import DASHI.Moonshine.CandidateLevelExternalOggPredicateExact as External
 
 p11StackExplainsFiveStateCount : P11.p11UnweightedStateCount ≡ 5
 p11StackExplainsFiveStateCount = P11.p11UnweightedStateCountIsFive
@@ -25,12 +26,10 @@ p43WeightSumFiveIsNotSheetCountSeven :
   Controls.p43MonodromyWeightSum ≡ Controls.p43UnweightedStateCount → ⊥
 p43WeightSumFiveIsNotSheetCountSeven = Controls.p43WeightSumIsNotUnweightedCount
 
-p37IsNonOggControl :
-  DASHI.Moonshine.CandidateLevelExternalOggPredicateExact.ExternalOggAt 37 → ⊥
+p37IsNonOggControl : External.ExternalOggAt 37 → ⊥
 p37IsNonOggControl = Controls.p37IsNotExternallyOgg
 
-p43IsNonOggControl :
-  DASHI.Moonshine.CandidateLevelExternalOggPredicateExact.ExternalOggAt 43 → ⊥
+p43IsNonOggControl : External.ExternalOggAt 43 → ⊥
 p43IsNonOggControl = Controls.p43IsNotExternallyOgg
 
 p37PositivePrimeSquareExists :
