@@ -19,42 +19,35 @@ module DASHI.Physics.Closure.NSTriadKNFourierStrainExactFiniteDifferenceRound68E
 --
 -- ROUND 68 / EXACT MULTIPLIER DIFFERENCE
 --
--- Round67 supplied an explicit C4 radial transition and an exact h^2 Taylor
--- factor for that cutoff.  The other part of the physical annular multiplier
--- is the order-zero Fourier strain symbol
+-- The physical order-zero strain symbol is explicit:
 --
 --   S(theta,omega) = |theta|^{-2} A(theta,omega),
 --
--- with A quadratic in theta.  This file differentiates that object without
--- importing an abstract multivariable calculus theorem.
---
--- First, the angular numerator has the exact polarization identity
+-- where A is quadratic in theta.  Rather than importing an opaque derivative
+-- theorem, derive its exact finite difference algebraically.
 --
 --   A(theta+h)-A(theta) = L_theta(h) + A(h),
 --
--- where L is bilinear in theta,h and A(h) is the literal quadratic remainder.
--- Second, for two exact ProjectionModes x,y,
+-- and for exact ProjectionModes x,y,
 --
 --   inv(y)-inv(x)
 --     = inv(x) inv(y) (|x|^2-|y|^2).
 --
--- When y=x+h this becomes
+-- If y=x+h, the reciprocal variation is therefore exactly
 --
---   inv(y)-inv(x)
---     = - inv(x) inv(y) (2 x.h + |h|^2).
+--   -inv(x)inv(y)(2 x.h + |h|^2).
 --
--- Combining the two gives an exact finite-difference decomposition of the
--- physical strain multiplier.  The remaining six-three work is therefore
--- quantitative estimation of explicit linear/quadratic terms; there is no
--- longer an opaque angular differentiability premise.
+-- Combining these gives a literal linear/quadratic decomposition of the
+-- physical strain multiplier.  Quantitative six-three work is now estimation
+-- of these displayed terms, not an unproved differentiability interface.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
-open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _-_; -_)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _-_; -_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
 import DASHI.Physics.Closure.NSTriadKNRationalLerayProjectionExact as V
 import DASHI.Physics.Closure.NSTriadKNFourierBiotSavartExact as BS
@@ -74,15 +67,6 @@ matrixAdd a b = Matrix.matrix3
   (Matrix.m32 a + Matrix.m32 b)
   (Matrix.m33 a + Matrix.m33 b)
 
-matrixNegate : Matrix.Matrix3 → Matrix.Matrix3
-matrixNegate a = Strain.scaleMatrix (- (1ℚ)) a
-  where
-  open import Data.Rational.Base using (1ℚ)
-
-matrixSubtract : Matrix.Matrix3 → Matrix.Matrix3 → Matrix.Matrix3
-matrixSubtract a b = matrixAdd a (matrixNegate b)
-
--- The part of the quadratic angular symbol which is linear in the increment.
 angularLinearVariation : V.Vector3 → V.Vector3 → V.Vector3 → Matrix.Matrix3
 angularLinearVariation theta h omega =
   let
@@ -140,20 +124,17 @@ inverseNormSquaredDifferenceExact left right =
     ir = V.inverseNormSquared right
     nl = V.normSquared (V.mode left)
     nr = V.normSquared (V.mode right)
-  in
-  trans
-    (sym (solve (il ∷ ir ∷ nl ∷ nr ∷ [])))
-    (trans
-      (cong
-        (λ pair → ir * pair - il * (V.inverseNormSquared right * nr))
-        (V.inverseLaw left))
+    rhsToLhs : il * ir * (nl - nr) ≡ ir - il
+    rhsToLhs = trans
+      (solve (il ∷ ir ∷ nl ∷ nr ∷ []))
       (trans
-        (cong
-          (λ pair → ir * 1ℚ - il * pair)
+        (cong₂
+          (λ leftUnit rightUnit → ir * leftUnit - il * rightUnit)
+          (V.inverseLaw left)
           (V.inverseLaw right))
-        (solve (il ∷ ir ∷ []))))
-  where
-  open import Data.Rational.Base using (1ℚ)
+        (solve (il ∷ ir ∷ [])))
+  in
+  sym rhsToLhs
 
 normSquaredIncrementExact : ∀ theta h →
   V.normSquared (V.add theta h)
@@ -175,7 +156,6 @@ inverseNormSquaredDisplacementExact left right h rightIsIncrement =
     il = V.inverseNormSquared left
     ir = V.inverseNormSquared right
     theta = V.mode left
-    base = inverseNormSquaredDifferenceExact left right
     normRight :
       V.normSquared (V.mode right)
       ≡ V.normSquared theta
@@ -185,7 +165,8 @@ inverseNormSquaredDisplacementExact left right h rightIsIncrement =
       (cong V.normSquared rightIsIncrement)
       (normSquaredIncrementExact theta h)
   in
-  trans base
+  trans
+    (inverseNormSquaredDifferenceExact left right)
     (trans
       (cong
         (λ selected → il * ir * (V.normSquared theta - selected))
@@ -211,30 +192,29 @@ scaleMatrixAdd scalar
     (solve (scalar ∷ a32 ∷ b32 ∷ []))
     (solve (scalar ∷ a33 ∷ b33 ∷ []))
 
-scaledAngularDifferenceDecomposition : ∀ il ir angularLeft angularRight →
-  Strain.scaleMatrix ir angularRight
+scaledAngularIncrementRegroup : ∀ il ir angularBase angularDelta →
+  matrixAdd
+    (Strain.scaleMatrix ir angularBase)
+    (Strain.scaleMatrix ir angularDelta)
   ≡ matrixAdd
-      (Strain.scaleMatrix il angularLeft)
+      (Strain.scaleMatrix il angularBase)
       (matrixAdd
-        (Strain.scaleMatrix ir (matrixSubtract angularRight angularLeft))
-        (Strain.scaleMatrix (ir - il) angularLeft))
-scaledAngularDifferenceDecomposition il ir
-    (Matrix.matrix3 l11 l12 l13 l21 l22 l23 l31 l32 l33)
-    (Matrix.matrix3 r11 r12 r13 r21 r22 r23 r31 r32 r33) =
+        (Strain.scaleMatrix ir angularDelta)
+        (Strain.scaleMatrix (ir - il) angularBase))
+scaledAngularIncrementRegroup il ir
+    (Matrix.matrix3 a11 a12 a13 a21 a22 a23 a31 a32 a33)
+    (Matrix.matrix3 d11 d12 d13 d21 d22 d23 d31 d32 d33) =
   Matrix.matrixExt
-    (solve (il ∷ ir ∷ l11 ∷ r11 ∷ []))
-    (solve (il ∷ ir ∷ l12 ∷ r12 ∷ []))
-    (solve (il ∷ ir ∷ l13 ∷ r13 ∷ []))
-    (solve (il ∷ ir ∷ l21 ∷ r21 ∷ []))
-    (solve (il ∷ ir ∷ l22 ∷ r22 ∷ []))
-    (solve (il ∷ ir ∷ l23 ∷ r23 ∷ []))
-    (solve (il ∷ ir ∷ l31 ∷ r31 ∷ []))
-    (solve (il ∷ ir ∷ l32 ∷ r32 ∷ []))
-    (solve (il ∷ ir ∷ l33 ∷ r33 ∷ []))
+    (solve (il ∷ ir ∷ a11 ∷ d11 ∷ []))
+    (solve (il ∷ ir ∷ a12 ∷ d12 ∷ []))
+    (solve (il ∷ ir ∷ a13 ∷ d13 ∷ []))
+    (solve (il ∷ ir ∷ a21 ∷ d21 ∷ []))
+    (solve (il ∷ ir ∷ a22 ∷ d22 ∷ []))
+    (solve (il ∷ ir ∷ a23 ∷ d23 ∷ []))
+    (solve (il ∷ ir ∷ a31 ∷ d31 ∷ []))
+    (solve (il ∷ ir ∷ a32 ∷ d32 ∷ []))
+    (solve (il ∷ ir ∷ a33 ∷ d33 ∷ []))
 
--- Exact physical finite difference.  This form deliberately leaves the two
--- terms separate so quantitative consumers can estimate angular variation and
--- inverse-square variation with the branch geometry best suited to each.
 fourierStrainFiniteDifferenceExact : ∀ left right h omega →
   V.mode right ≡ V.add (V.mode left) h →
   Strain.fourierStrainMultiplier right omega
@@ -251,13 +231,11 @@ fourierStrainFiniteDifferenceExact : ∀ left right h omega →
           (Angular.angularStrain (V.mode left) omega)))
 fourierStrainFiniteDifferenceExact left right h omega rightIsIncrement =
   let
-    angularIncrement :
-      Angular.angularStrain (V.mode right) omega
-      ≡ matrixAdd
-          (Angular.angularStrain (V.mode left) omega)
-          (matrixAdd
-            (angularLinearVariation (V.mode left) h omega)
-            (Angular.angularStrain h omega))
+    base = Angular.angularStrain (V.mode left) omega
+    delta = matrixAdd
+      (angularLinearVariation (V.mode left) h omega)
+      (Angular.angularStrain h omega)
+    angularIncrement : Angular.angularStrain (V.mode right) omega ≡ matrixAdd base delta
     angularIncrement = trans
       (cong (λ selected → Angular.angularStrain selected omega) rightIsIncrement)
       (angularStrainExactPolarization (V.mode left) h omega)
@@ -267,41 +245,20 @@ fourierStrainFiniteDifferenceExact left right h omega rightIsIncrement =
     (trans
       (cong (Strain.scaleMatrix (V.inverseNormSquared right)) angularIncrement)
       (trans
-        (scaleMatrixAdd
-          (V.inverseNormSquared right)
-          (Angular.angularStrain (V.mode left) omega)
-          (matrixAdd
-            (angularLinearVariation (V.mode left) h omega)
-            (Angular.angularStrain h omega)))
+        (scaleMatrixAdd (V.inverseNormSquared right) base delta)
         (trans
+          (scaledAngularIncrementRegroup
+            (V.inverseNormSquared left)
+            (V.inverseNormSquared right)
+            base delta)
           (cong
-            (matrixAdd
-              (Strain.scaleMatrix (V.inverseNormSquared right)
-                (Angular.angularStrain (V.mode left) omega)))
-            (scaleMatrixAdd
-              (V.inverseNormSquared right)
-              (angularLinearVariation (V.mode left) h omega)
-              (Angular.angularStrain h omega)))
-          (trans
-            (scaledAngularDifferenceDecomposition
-              (V.inverseNormSquared left)
-              (V.inverseNormSquared right)
-              (Angular.angularStrain (V.mode left) omega)
+            (λ selectedBase → matrixAdd selectedBase
               (matrixAdd
-                (angularLinearVariation (V.mode left) h omega)
-                (Angular.angularStrain h omega)))
-            (cong
-              (λ base → matrixAdd base
-                (matrixAdd
-                  (Strain.scaleMatrix
-                    (V.inverseNormSquared right)
-                    (matrixAdd
-                      (angularLinearVariation (V.mode left) h omega)
-                      (Angular.angularStrain h omega)))
-                  (Strain.scaleMatrix
-                    (V.inverseNormSquared right - V.inverseNormSquared left)
-                    (Angular.angularStrain (V.mode left) omega))))
-              (sym (Strain.fourierStrainMultiplierExact left omega))))))))
+                (Strain.scaleMatrix (V.inverseNormSquared right) delta)
+                (Strain.scaleMatrix
+                  (V.inverseNormSquared right - V.inverseNormSquared left)
+                  base)))
+            (sym (Strain.fourierStrainMultiplierExact left omega))))))
 
 round68AngularMultiplierDifferentiatedAlgebraically : Bool
 round68AngularMultiplierDifferentiatedAlgebraically = true
