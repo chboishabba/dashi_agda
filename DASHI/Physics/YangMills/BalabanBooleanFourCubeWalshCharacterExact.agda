@@ -3,6 +3,13 @@ module DASHI.Physics.YangMills.BalabanBooleanFourCubeWalshCharacterExact where
 ------------------------------------------------------------------------
 -- PRIMARY SOURCES
 --
+-- Ryan O'Donnell,
+-- "Analysis of Boolean Functions", Cambridge University Press, 2014.
+-- DOI: 10.1017/CBO9781139814782.
+-- Chapter 1 develops the Fourier/Walsh expansion on the Boolean cube; the
+-- orthogonality of nontrivial characters against the constant character is
+-- the standard harmonic-analysis source for the vanishing row sums below.
+--
 -- Jean-Pierre Serre,
 -- "Linear Representations of Finite Groups",
 -- Springer, 1977. DOI: 10.1007/978-1-4684-9458-7.
@@ -14,7 +21,7 @@ module DASHI.Physics.YangMills.BalabanBooleanFourCubeWalshCharacterExact where
 --
 -- DASHI CONTRIBUTION
 --
--- Put the Walsh/Fourier character geometry on the SAME sixteen-element
+-- Put the Walsh--Fourier character geometry on the SAME sixteen-element
 -- Subset4 carrier already used by the Wilson Möbius decomposition, while
 -- proving rather than assuming that the two transforms are different.
 --
