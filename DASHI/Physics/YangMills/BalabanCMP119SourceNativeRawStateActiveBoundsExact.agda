@@ -30,7 +30,7 @@ module DASHI.Physics.YangMills.BalabanCMP119SourceNativeRawStateActiveBoundsExac
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base using (ℚ)
+open import Data.Rational.Base using (ℚ; Positive; _≤_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanYM4SourceNormalizedCouplingRecurrenceExact as Flow
@@ -152,7 +152,7 @@ activeSourceCouplingPositive :
       {RTerm = RTerm} {BoundaryTerm = BoundaryTerm} {Vacuum = Vacuum}
       {source = source} predicates)
     scale → History.ActiveScale history scale →
-  Data.Rational.Base.Positive (runningCoupling source scale)
+  Positive (runningCoupling source scale)
 activeSourceCouplingPositive {history = history} {source = source}
     witness scale active
   rewrite couplingIsHistoryCoupling witness scale active =
