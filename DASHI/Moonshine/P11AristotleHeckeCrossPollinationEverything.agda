@@ -21,15 +21,15 @@ module DASHI.Moonshine.P11AristotleHeckeCrossPollinationEverything where
 --
 -- Positive producer side:
 -- * generic arbitrary-arity positive neighbour systems;
--- * positive quotient descent and equitable graph quotient descent;
+-- * labelled positive quotient descent plus equitable graph quotient descent;
 -- * generic inverse-closed Schreier producer;
--- * minimal five-state 2+3 fine carrier forced by Brandt balance;
+-- * minimal five-state 2+3 fine carrier suggested by Brandt balance;
 -- * positive ell=2,3,5 neighbour systems quotienting to the verified Brandt
 --   operators;
--- * all three prime systems commute entrywise;
--- * all three prime-square residuals are entrywise Nat-valued;
--- * the same prime adjacencies admit inverse-closed permutation-generator
---   realizations on the five-state carrier.
+-- * inverse-closed permutation-generator realizations of all three primes;
+-- * pairwise commuting prime adjacency operators;
+-- * literal positive R4,R9,R25 neighbour systems of arities 7,13,31;
+-- * prime-square path-count laws with the TRUE five-state identity.
 --
 -- The five-state carrier remains a candidate finite geometry.  It is NOT yet
 -- identified with quaternion ideal classes, Gamma\G/U, Bruhat--Tits geometry,
@@ -65,4 +65,6 @@ import DASHI.Moonshine.P11PositiveHeckeSquarePathCountsExact
 import DASHI.Moonshine.P11FiveStatePositiveHeckeLiftExact
 import DASHI.Moonshine.P11FiveStateEquitableBrandtQuotientExact
 import DASHI.Moonshine.P11FiveStatePositiveHeckeAlgebraExact
+import DASHI.Moonshine.P11FiveStatePositivePrimeSquareNeighboursExact
 import DASHI.Moonshine.P11FiveStatePermutationHeckeProducerExact
+import DASHI.Moonshine.P11PositiveGeometryHighestAlphaRegression
