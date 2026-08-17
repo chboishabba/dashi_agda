@@ -30,11 +30,12 @@ module DASHI.Physics.Closure.NSTriadKNComNormalizedSelfOverlapNoGoRound65Exact w
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Empty using (⊥)
 open import Data.Rational.Base using (ℚ; 1ℚ; _≤_; _<_)
 import Data.Rational.Properties as ℚP
 open ℚP using (_<?_)
+open import Relation.Binary.PropositionalEquality using (subst)
 open import Relation.Nullary.Decidable.Core using (toWitness)
+open import Relation.Nullary.Negation.Core using (¬_)
 
 import DASHI.Physics.Closure.NSTriadKNComNormalizedFibreMassLeafRound58 as Targets
 
@@ -46,9 +47,6 @@ oneNotBelowSameShellTarget : ¬ (1ℚ ≤ Targets.sameShellTarget)
 oneNotBelowSameShellTarget oneBelow =
   ℚP.<-irrefl 1ℚ
     (ℚP.<-≤-trans sameShellTargetStrictlyBelowOne oneBelow)
-  where
-  ¬_ : Set → Set
-  ¬ A = A → ⊥
 
 unitSelfOverlapCannotMeetSameShellTarget :
   (overlap : Nat → Nat → ℚ) →
@@ -60,10 +58,6 @@ unitSelfOverlapCannotMeetSameShellTarget overlap selfIsOne allBound =
       (λ value → value ≤ Targets.sameShellTarget)
       (selfIsOne 0)
       (allBound 0))
-  where
-  ¬_ : Set → Set
-  ¬ A = A → ⊥
-  open import Relation.Binary.PropositionalEquality using (subst)
 
 round65OrdinaryNormalizedSelfCorrelationIsNotSixThreeSameShellTarget : Bool
 round65OrdinaryNormalizedSelfCorrelationIsNotSixThreeSameShellTarget = true
