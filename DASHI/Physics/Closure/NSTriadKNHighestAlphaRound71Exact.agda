@@ -20,9 +20,8 @@ module DASHI.Physics.Closure.NSTriadKNHighestAlphaRound71Exact where
 -- Title: "Quantitative bounds for bounded solutions to the Navier-Stokes
 -- equations in endpoint critical Besov spaces".
 -- arXiv DOI: 10.48550/arXiv.2411.06483.
--- Quantitative dependence reported in the abstract: quadruple exponential in
--- the endpoint critical Besov norm and double exponential in the auxiliary
--- L^p norm.  This corrects the earlier informal "triple exponential" gloss.
+-- Their abstract reports quadruple exponential in the endpoint critical Besov
+-- norm and double exponential in the auxiliary L^p norm.
 --
 -- Authors: Jishan Fan; Song Jiang; Gen Nakamura; Yong Zhou.
 -- Title: "Logarithmically Improved Regularity Criteria for the Navier-Stokes
@@ -31,57 +30,39 @@ module DASHI.Physics.Closure.NSTriadKNHighestAlphaRound71Exact where
 --
 -- ROUND71 RESULT
 --
+-- PROPAGATION SIDE
+--
 -- Round70 identified cumulative non-summability as the exact finite-funding
--- requirement and falsified one-event-per-depth dyadic floors 1,1/2,1/4,... .
--- Round71 now shows that the PER-EVENT loss rate is not by itself decisive:
--- genuine multiplicity can compensate loss.
+-- requirement.  Round71 proves the per-event loss rate alone is not decisive:
+-- a dyadic branching block doubles descendant multiplicity while halving each
+-- descendant floor and preserves total guaranteed floor exactly.  Weighted
+-- branching has total floor W at every depth, so W=E+1 rejects every funding
+-- ledger below budget E.  This remains an arithmetic viability theorem only;
+-- physical descendants must still be genuinely distinct/duplicate-free.
 --
--- PROPAGATION-SIDE CONSTRUCTIONS
+-- TRAJECTORY SIDE
 --
--- 1. A literal finite dyadic branching block.  Depth zero contains one unit
---    floor.  Each step duplicates the block and halves all descendant floors.
---    The recursive event count doubles exactly.
+-- The old Round26/30 Assignment = CoordinateVariable -> Q is formally rejected
+-- as the finite cutoff Picard space.  CoordinateVariable contains an injective
+-- Nat family of Fourier slots and Q is not the physical real field.
 --
--- 2. Exact mass conservation: totalFloor(depth)=1.  Thus doubling multiplicity
---    exactly compensates factor-1/2 descendant loss.
+-- Round71 constructs:
+-- * six ordered Carrier F slots per canonical retained reality-orbit mode;
+-- * exact physical TransverseModeCoefficient -> finite-real encoding;
+-- * exact ordered alignment of the actual canonical physical RHS output with
+--   that same finite-real canonical slot carrier;
+-- * a FIXED-CUTOFF autonomous full-space reality vector field.  Its state stores
+--   arbitrary Complex3 F values on canonical positive representatives, negatives
+--   are reconstructed by conjugation, and N/E/inverse-square/viscosity are fixed
+--   independently of the evolving state.  Its nonlinear part is literally the
+--   repository's Leray-projected finite Galerkin nonlinearity.
 --
--- 3. Weighted version: totalFloor(weightedBlock W depth)=W.  Taking W=E+1
---    rejects every Round70 funding ledger below budget E at every finite depth.
---    Exponential pointwise loss is not automatically fatal if genuine physical
---    descendant multiplicity grows fast enough.
---
--- This remains arithmetic/combinatorial only.  Round70 already proves abstract
--- block indices do not imply physical support separation; formal duplicates may
--- not be charged twice.  The hard theorem is multiplicity x loss on genuinely
--- distinct frequency/spacetime descendants.
---
--- TRAJECTORY-SIDE AUDIT AND REPAIR
---
--- 4. The old Round26/30 Picard Assignment = CoordinateVariable -> Q is NOT the
---    finite cutoff carrier.  CoordinateVariable contains an injective Nat copy
---    via modes (n,0,0), and Q is not the physical real field.
---
--- 5. Round71 constructs the replacement finite REAL carrier: six ordered slots
---    (x.re,x.im,y.re,y.im,z.re,z.im) for every canonical retained reality-orbit
---    mode, valued in the SAME Carrier F as the physical Fourier coefficients.
---
--- 6. Every literal TransverseModeCoefficient is encoded into those six slots,
---    with exact finite mode-slot order preservation.
---
--- 7. The actual canonical physical RHS output is now aligned to that carrier:
---    the output coefficient-mode list is proved exactly equal, in order, to the
---    canonical source-mode list, then its six-real encoding is transported onto
---    CanonicalCutoffRealCoordinateState.  This closes the OUTPUT half of the
---    finite-real ODE bridge.
---
--- 8. The raw FiniteComplex3GalerkinSystem already accepts an arbitrary velocity
---    function and applies the literal Leray-projected nonlinearity.  Therefore a
---    bespoke transverse four-real chart is unnecessary in principle: the
---    shortest remaining input-side construction is a fixed-cutoff/reality
---    finite real state (positive canonical modes, negative values reconstructed
---    by conjugation), a fixed Galerkin geometry, and the same projected vector
---    field on arbitrary states of that finite carrier.  Transversality can then
---    be proved as an invariant subspace for transverse initial data.
+-- Thus the structural input/output ODE carrier problem is now closed.  The next
+-- A-side theorem is ANALYTIC rather than representational: flatten this exact
+-- autonomous field to the six-real coordinates, prove the degree-two/local-
+-- Lipschitz formula over the actual real-number authority, invoke finite-
+-- dimensional Picard, prove the transverse subspace invariant, then continue
+-- globally using the exact finite energy estimate.
 --
 -- QUANTITATIVE DISCRIMINATOR
 --
@@ -91,18 +72,17 @@ module DASHI.Physics.Closure.NSTriadKNHighestAlphaRound71Exact where
 --       sum_j sum_(a in D_j) mu_(j,a)
 --
 -- outruns the one finite physical budget.  Uniform floors, sufficiently slow
--- losses, or sufficiently fast genuine branching can all work.  Summable TOTAL
--- generation mass remains fatal.  Log-improved regularity criteria are recorded
--- only as precedent for accumulated/divergence criteria, not as a C1 producer.
+-- loss, or sufficiently fast genuine branching can work.  Summable TOTAL
+-- generation mass remains fatal.  Log-improved criteria are architectural
+-- precedent only; they are not imported as an unconditional C1 producer.
 --
 -- NEW SHORTEST FRONTIER
 --
--- A1. FiniteRealCanonicalInputVectorFieldExact: fix cutoff geometry independent
---     of state, decode arbitrary finite real reality-orbit data to the full +/-
---     velocity, apply the literal projected NS field, and prove agreement with
---     the already-aligned physical RHS on encoded physical states;
--- A2. SelectedGalerkinTrajectoryExistsAndStaysPhysical: local Lipschitz + real
---     finite-dimensional Picard, transverse invariance, and energy continuation;
+-- A1. FiniteRealCanonicalVectorFieldPolynomialLipschitz: prove the exact fixed
+--     full-space reality field is a degree-two locally-Lipschitz real vector
+--     field in the constructed six-real coordinates;
+-- A2. SelectedGalerkinTrajectoryExistsAndStaysPhysical: finite-dimensional real
+--     Picard, transverse invariance, and global energy continuation;
 -- B.  LocalizedTrajectoryEmitsStructuredPDEAtoms;
 -- C.  CriticalAmplificationForcesStructuredConcentration;
 -- D1. PhysicalPropagationProducesDuplicateFreeDescendants;
@@ -122,6 +102,7 @@ import DASHI.Physics.Closure.NSTriadKNOldRationalAssignmentNotFiniteCutoffRound7
 import DASHI.Physics.Closure.NSTriadKNFiniteRealCanonicalCoordinateCarrierRound71Exact as FiniteReal
 import DASHI.Physics.Closure.NSTriadKNPhysicalCoefficientFiniteRealEncodingRound71Exact as Encoding
 import DASHI.Physics.Closure.NSTriadKNCanonicalRHSFiniteRealSlotAlignmentRound71Exact as RHSAlignment
+import DASHI.Physics.Closure.NSTriadKNFixedCanonicalRealityVectorFieldRound71Exact as Fixed
 
 round71BranchingCompensatesDyadicLossConstructed : Bool
 round71BranchingCompensatesDyadicLossConstructed =
@@ -147,9 +128,18 @@ round71CanonicalRHSOutputOnFiniteRealCarrierConstructed : Bool
 round71CanonicalRHSOutputOnFiniteRealCarrierConstructed =
   RHSAlignment.round71CanonicalRHSOutputOnFiniteRealCarrier
 
--- Genuine remaining physical producers on the decisive path.
-round71FiniteRealCanonicalInputVectorFieldConstructed : Bool
-round71FiniteRealCanonicalInputVectorFieldConstructed = false
+round71FixedCanonicalGeometryIndependentOfState : Bool
+round71FixedCanonicalGeometryIndependentOfState =
+  Fixed.round71FixedCanonicalGeometryIndependentOfState
+
+round71FullSpaceRealityVectorFieldConstructed : Bool
+round71FullSpaceRealityVectorFieldConstructed =
+  Fixed.round71FullSpaceRealityVectorFieldConstructed
+
+-- Genuine remaining physical/analytic producers on the decisive path.
+round71FiniteRealCanonicalVectorFieldPolynomialLipschitz : Bool
+round71FiniteRealCanonicalVectorFieldPolynomialLipschitz =
+  Fixed.round71FullSpaceRealCoordinatePolynomialLipschitzConstructed
 
 round71SelectedGalerkinTrajectoryConstructed : Bool
 round71SelectedGalerkinTrajectoryConstructed = false
@@ -196,9 +186,17 @@ round71CanonicalRHSOutputOnFiniteRealCarrierConstructedIsTrue :
   round71CanonicalRHSOutputOnFiniteRealCarrierConstructed ≡ true
 round71CanonicalRHSOutputOnFiniteRealCarrierConstructedIsTrue = refl
 
-round71FiniteRealCanonicalInputVectorFieldConstructedIsFalse :
-  round71FiniteRealCanonicalInputVectorFieldConstructed ≡ false
-round71FiniteRealCanonicalInputVectorFieldConstructedIsFalse = refl
+round71FixedCanonicalGeometryIndependentOfStateIsTrue :
+  round71FixedCanonicalGeometryIndependentOfState ≡ true
+round71FixedCanonicalGeometryIndependentOfStateIsTrue = refl
+
+round71FullSpaceRealityVectorFieldConstructedIsTrue :
+  round71FullSpaceRealityVectorFieldConstructed ≡ true
+round71FullSpaceRealityVectorFieldConstructedIsTrue = refl
+
+round71FiniteRealCanonicalVectorFieldPolynomialLipschitzIsFalse :
+  round71FiniteRealCanonicalVectorFieldPolynomialLipschitz ≡ false
+round71FiniteRealCanonicalVectorFieldPolynomialLipschitzIsFalse = refl
 
 round71SelectedGalerkinTrajectoryConstructedIsFalse :
   round71SelectedGalerkinTrajectoryConstructed ≡ false
