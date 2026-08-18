@@ -45,10 +45,6 @@ import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
 import DASHI.Physics.Closure.NSTriadKNFrameWeightedSupercriticalPropagationRound77Exact as Weighted
 import DASHI.Physics.Closure.NSTriadKNPhysicalCarlesonFundingRound73Exact as Carleson
 
-------------------------------------------------------------------------
--- Abstract one-step mass interface extracted from the exact weighted row.
-------------------------------------------------------------------------
-
 record WeightedAntichainStep : Set where
   constructor weighted-antichain-step
   field
@@ -66,10 +62,6 @@ fromWeightedRow row =
     (Weighted.sumGuaranteedChildFloors (Weighted.children row))
     (L2.square (Weighted.parentAmplitude row) * Weighted.excess row)
     (Weighted.weightedSupercriticalGuaranteedGrowthExact row)
-
-------------------------------------------------------------------------
--- Finite history telescoping.
-------------------------------------------------------------------------
 
 data WeightedAntichainHistory : ℚ → ℚ → Set where
   seed : (mass : ℚ) → WeightedAntichainHistory mass mass
@@ -114,11 +106,6 @@ weightedCumulativeExcessAboveBudgetForcesFinalAbove
     {budget = budget} history above =
   subst (budget <_) (sym (weightedHistoryFinalMassExact history)) above
 
-------------------------------------------------------------------------
--- Final-antichain physical funding.  Every final node retains its weighted
--- floor explicitly, so the existing Carleson ledger consumes it unchanged.
-------------------------------------------------------------------------
-
 record FrameWeightedFundedNode : Set where
   constructor frame-weighted-funded-node
   field
@@ -162,12 +149,6 @@ weightedFinalAntichainAboveBudgetRefutesFunding {nodes} {budget} above =
   Carleson.floorPrefixAboveBudgetRefutesCarlesonFunding
     (subst (budget <_) (sym (weightedFloorMassExact nodes)) above)
 
-------------------------------------------------------------------------
--- Complete arithmetic closure: if the selected final antichain is an exact
--- realization of the final weighted mass, cumulative excess above the physical
--- budget is impossible under a Carleson funding certificate.
-------------------------------------------------------------------------
-
 record FinalWeightedAntichainRealization (finalMass : ℚ) : Set where
   field
     nodes : List FrameWeightedFundedNode
@@ -182,11 +163,12 @@ frameWeightedRouteBContradiction :
   budget < initial + cumulativeWeightedFrameExcess history →
   ¬ Carleson.PhysicalCarlesonBudget
       (asCarlesonNodes (nodes realization)) budget
-frameWeightedRouteBContradiction history realization cumulativeAbove =
+frameWeightedRouteBContradiction {budget = budget}
+    history realization cumulativeAbove =
   let
     finalAbove = weightedCumulativeExcessAboveBudgetForcesFinalAbove
       history cumulativeAbove
-    floorAbove = subst (_ <_)
+    floorAbove = subst (budget <_)
       (sym (floorMassExact realization))
       finalAbove
   in
