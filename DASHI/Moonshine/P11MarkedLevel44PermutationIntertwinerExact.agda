@@ -53,7 +53,6 @@ module DASHI.Moonshine.P11MarkedLevel44PermutationIntertwinerExact where
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.List using ([]; _∷_)
-import Data.Integer.Base as ℤBase
 import Data.Integer.Tactic.RingSolver as ℤRing
 open import Data.Integer using (ℤ; +_; -[1+_])
   renaming (_+_ to _+ℤ_; _*_ to _*ℤ_)
@@ -121,6 +120,21 @@ realizeOld3 v = S3.int5
   ((+ 6) *ℤ x2 v)
   ((+ 6) *ℤ x4 v)
 
+-- Extensionality for the existing five-coordinate record.  RingSolver proves
+-- scalar coordinate identities; this lemma then reconstructs record equality.
+int5Ext :
+  (u v : S3.Int5) →
+  S3.a0c u ≡ S3.a0c v →
+  S3.a1c u ≡ S3.a1c v →
+  S3.b0c u ≡ S3.b0c v →
+  S3.b1c u ≡ S3.b1c v →
+  S3.b2c u ≡ S3.b2c v →
+  u ≡ v
+int5Ext
+  (S3.int5 a0 a1 b0 b1 b2)
+  (S3.int5 a0' a1' b0' b1' b2')
+  refl refl refl refl refl = refl
+
 realizeBasis1 : realizeOld3 oldBasis1 ≡ Perm.oldCopyVector Old.copy1
 realizeBasis1 = refl
 
@@ -134,21 +148,23 @@ realizeAdditive :
   (u v : Old3) →
   realizeOld3 (addOld3 u v) ≡ S3.add5 (realizeOld3 u) (realizeOld3 v)
 realizeAdditive (old3 a b c) (old3 d e f) =
-  cong5 (ℤRing.solve (a ∷ b ∷ c ∷ d ∷ e ∷ f ∷ []))
-  where
-    cong5 :
-      ((-[1+ 2 ]) *ℤ ((a +ℤ d) +ℤ (b +ℤ e) +ℤ (c +ℤ f))
-       ≡ ((-[1+ 2 ]) *ℤ (a +ℤ b +ℤ c)) +ℤ ((-[1+ 2 ]) *ℤ (d +ℤ e +ℤ f))) →
-      realizeOld3 (addOld3 (old3 a b c) (old3 d e f))
-      ≡ S3.add5 (realizeOld3 (old3 a b c)) (realizeOld3 (old3 d e f))
-    cong5 _ =
-      ℤRing.solve (a ∷ b ∷ c ∷ d ∷ e ∷ f ∷ [])
+  int5Ext _ _
+    (ℤRing.solve (a ∷ b ∷ c ∷ d ∷ e ∷ f ∷ []))
+    (ℤRing.solve (a ∷ b ∷ c ∷ d ∷ e ∷ f ∷ []))
+    (ℤRing.solve (a ∷ d ∷ []))
+    (ℤRing.solve (b ∷ e ∷ []))
+    (ℤRing.solve (c ∷ f ∷ []))
 
 realizeScalar :
   (k : ℤ) → (v : Old3) →
   realizeOld3 (scaleOld3 k v) ≡ S3.scale5 k (realizeOld3 v)
 realizeScalar k (old3 a b c) =
-  ℤRing.solve (k ∷ a ∷ b ∷ c ∷ [])
+  int5Ext _ _
+    (ℤRing.solve (k ∷ a ∷ b ∷ c ∷ []))
+    (ℤRing.solve (k ∷ a ∷ b ∷ c ∷ []))
+    (ℤRing.solve (k ∷ a ∷ []))
+    (ℤRing.solve (k ∷ b ∷ []))
+    (ℤRing.solve (k ∷ c ∷ []))
 
 ------------------------------------------------------------------------
 -- Deck intertwining on arbitrary vectors.
@@ -157,12 +173,24 @@ realizeScalar k (old3 a b c) =
 realizeDeckR :
   (v : Old3) →
   realizeOld3 (oldR v) ≡ Perm.deckR5 (realizeOld3 v)
-realizeDeckR (old3 a b c) = ℤRing.solve (a ∷ b ∷ c ∷ [])
+realizeDeckR (old3 a b c) =
+  int5Ext _ _
+    (ℤRing.solve (a ∷ b ∷ c ∷ []))
+    (ℤRing.solve (a ∷ b ∷ c ∷ []))
+    (ℤRing.solve (c ∷ []))
+    (ℤRing.solve (a ∷ []))
+    (ℤRing.solve (b ∷ []))
 
 realizeDeckS :
   (v : Old3) →
   realizeOld3 (oldS v) ≡ Perm.deckS5 (realizeOld3 v)
-realizeDeckS (old3 a b c) = ℤRing.solve (a ∷ b ∷ c ∷ [])
+realizeDeckS (old3 a b c) =
+  int5Ext _ _
+    (ℤRing.solve (a ∷ b ∷ c ∷ []))
+    (ℤRing.solve (a ∷ b ∷ c ∷ []))
+    (ℤRing.solve (a ∷ []))
+    (ℤRing.solve (c ∷ []))
+    (ℤRing.solve (b ∷ []))
 
 ------------------------------------------------------------------------
 -- Source-native T3/T5/T7 Hecke intertwiners on the WHOLE old-copy module.
@@ -172,19 +200,37 @@ realizeT3 :
   (v : Old3) →
   S3.markedT3Action (realizeOld3 v)
   ≡ realizeOld3 (scaleOld3 (-[1+ 0 ]) v)
-realizeT3 (old3 a b c) = ℤRing.solve (a ∷ b ∷ c ∷ [])
+realizeT3 (old3 a b c) =
+  int5Ext _ _
+    (ℤRing.solve (a ∷ b ∷ c ∷ []))
+    (ℤRing.solve (a ∷ b ∷ c ∷ []))
+    (ℤRing.solve (a ∷ b ∷ c ∷ []))
+    (ℤRing.solve (a ∷ b ∷ c ∷ []))
+    (ℤRing.solve (a ∷ b ∷ c ∷ []))
 
 realizeT5 :
   (v : Old3) →
   S3.markedT5Action (realizeOld3 v)
   ≡ realizeOld3 (scaleOld3 (+ 1) v)
-realizeT5 (old3 a b c) = ℤRing.solve (a ∷ b ∷ c ∷ [])
+realizeT5 (old3 a b c) =
+  int5Ext _ _
+    (ℤRing.solve (a ∷ b ∷ c ∷ []))
+    (ℤRing.solve (a ∷ b ∷ c ∷ []))
+    (ℤRing.solve (a ∷ b ∷ c ∷ []))
+    (ℤRing.solve (a ∷ b ∷ c ∷ []))
+    (ℤRing.solve (a ∷ b ∷ c ∷ []))
 
 realizeT7 :
   (v : Old3) →
   T7.markedT7Action (realizeOld3 v)
   ≡ realizeOld3 (scaleOld3 (-[1+ 1 ]) v)
-realizeT7 (old3 a b c) = ℤRing.solve (a ∷ b ∷ c ∷ [])
+realizeT7 (old3 a b c) =
+  int5Ext _ _
+    (ℤRing.solve (a ∷ b ∷ c ∷ []))
+    (ℤRing.solve (a ∷ b ∷ c ∷ []))
+    (ℤRing.solve (a ∷ b ∷ c ∷ []))
+    (ℤRing.solve (a ∷ b ∷ c ∷ []))
+    (ℤRing.solve (a ∷ b ∷ c ∷ []))
 
 ------------------------------------------------------------------------
 -- The finite same-object seam is now an actual pair of commuting squares:
