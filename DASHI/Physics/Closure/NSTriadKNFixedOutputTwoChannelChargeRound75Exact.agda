@@ -44,7 +44,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Sigma using (Σ; _,_)
 import Data.Integer.Base as Int
 open import Data.Product.Base using (_×_; _,_; proj₁)
-open import Data.Rational.Base using
+open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; _+_; _*_; _≤_; _/_)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
@@ -267,19 +267,16 @@ modeDissipationNonnegative :
     mode → 0ℚ ≤ modeDissipation system mode
 modeDissipationNonnegative system mode =
   let
-    leftNN = modeNormNonnegative (Audit.integerEmbedding system) mode
-    rightNN = Frame.modeEnergyNonnegative system mode
+    instance
+      leftNN = ℚ.nonNegative
+        (modeNormNonnegative (Audit.integerEmbedding system) mode)
+      rightNN = ℚ.nonNegative
+        (Frame.modeEnergyNonnegative system mode)
+      productNN = ℚP.nonNeg*nonNeg⇒nonNeg
+        (modeNorm (Audit.integerEmbedding system) mode)
+        (Frame.modeEnergy system mode)
   in
   ℚP.nonNegative⁻¹ _
-  where
-  instance
-    leftNNI = Data.Rational.Base.nonNegative
-      (modeNormNonnegative (Audit.integerEmbedding system) mode)
-    rightNNI = Data.Rational.Base.nonNegative
-      (Frame.modeEnergyNonnegative system mode)
-    productNNI = ℚP.nonNeg*nonNeg⇒nonNeg
-      (modeNorm (Audit.integerEmbedding system) mode)
-      (Frame.modeEnergy system mode)
 
 cutoffDissipation :
   ∀ {E : C3.IntegerEmbedding F}
@@ -390,13 +387,13 @@ rawCanonicalQFixedOutputBound system output (head ∷ tail) allOutput =
       RationalL2.addNonnegative
         (let
           instance
-            tNN = Data.Rational.Base.nonNegative twoNonnegative
-            kNN = Data.Rational.Base.nonNegative (modeNormNonnegative E (Physical.k head))
+            tNN = ℚ.nonNegative twoNonnegative
+            kNN = ℚ.nonNegative (modeNormNonnegative E (Physical.k head))
           in ℚP.nonNegative⁻¹ _)
         (let
           instance
-            tNN = Data.Rational.Base.nonNegative twoNonnegative
-            pNN = Data.Rational.Base.nonNegative (modeNormNonnegative E (Physical.p head))
+            tNN = ℚ.nonNegative twoNonnegative
+            pNN = ℚ.nonNegative (modeNormNonnegative E (Physical.p head))
           in ℚP.nonNegative⁻¹ _)
     localScaled =
       ℚP.≤-trans localQ
@@ -460,18 +457,18 @@ fixedOutputCanonicalQEnergyDissipationBound system output =
     firstFactorNN =
       let
         instance
-          twoNN = Data.Rational.Base.nonNegative twoNonnegative
-          kNN = Data.Rational.Base.nonNegative
+          twoNN = ℚ.nonNegative twoNonnegative
+          kNN = ℚ.nonNegative
             (modeNormNonnegative (Audit.integerEmbedding system) output)
       in ℚP.nonNegative⁻¹
         (two * modeNorm (Audit.integerEmbedding system) output)
     eScaled =
-      let instance factorNN = Data.Rational.Base.nonNegative firstFactorNN
+      let instance factorNN = ℚ.nonNegative firstFactorNN
       in ℚP.*-monoˡ-≤-nonNeg
         (two * modeNorm (Audit.integerEmbedding system) output)
         eRestriction
     dScaled =
-      let instance twoNN = Data.Rational.Base.nonNegative twoNonnegative
+      let instance twoNN = ℚ.nonNegative twoNonnegative
       in ℚP.*-monoˡ-≤-nonNeg two dRestriction
   in
   ℚP.≤-trans first (ℚP.+-mono-≤ eScaled dScaled)
