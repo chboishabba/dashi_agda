@@ -44,9 +44,8 @@ module DASHI.Physics.YangMills.BalabanReducedGhostMatrixLogShiftedTailExact wher
 
 open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _*_; _≤_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _*_; _≤_; NonNegative)
 import Data.Rational.Properties as ℚP
-open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
@@ -56,11 +55,6 @@ import DASHI.Physics.YangMills.BalabanReducedGhostMatrixLogFifthTailExact as Tai
 import DASHI.Physics.YangMills.BalabanReducedGhostPhysicalMatrixLogFifthTailExact as PhysicalTail
 import DASHI.Physics.YangMills.BalabanReducedGhostAnchoredRelativeContractionExact as Physical
 import DASHI.Physics.YangMills.BalabanP33PhysicalBackgroundGaugeParameterizedYoungExact as Relaxed
-
-------------------------------------------------------------------------
--- A degree shift is literal left multiplication by R together with shifting
--- the coefficient stream.  Starting at zero recovers the existing fifth tail.
-------------------------------------------------------------------------
 
 shiftedFifthTail :
   ∀ {Index : Set} →
@@ -90,14 +84,17 @@ shiftedMajorantNonnegative : ∀ start length →
   0ℚ ≤ shiftedMajorant start length
 shiftedMajorantNonnegative start length =
   let
-    leftNN = startFactorNonnegative start
-    rightNN = Tail.geometricMajorantNonnegative length
+    left = startFactor start
+    right = Tail.geometricMajorant length
+    instance
+      leftNN : NonNegative left
+      leftNN = ℚ.nonNegative (startFactorNonnegative start)
+      rightNN : NonNegative right
+      rightNN = ℚ.nonNegative (Tail.geometricMajorantNonnegative length)
+      productNN : NonNegative (left * right)
+      productNN = ℚP.nonNeg*nonNeg⇒nonNeg left right
   in
-  ℚP.nonNegative⁻¹ (shiftedMajorant start length)
-
-------------------------------------------------------------------------
--- Exact geometric row bound for every shifted finite tail.
-------------------------------------------------------------------------
+  ℚP.nonNegative⁻¹ (left * right)
 
 shiftedFifthTailRowBound :
   ∀ {Index : Set}
@@ -117,12 +114,10 @@ shiftedFifthTailRowBound
   let
     rest = shiftedFifthTail
       indices matrix (Tail.shiftCoefficients coefficients) start length
-
     restRows :
       Neumann.UniformRowBound indices rest (shiftedMajorant start length)
     restRows = shiftedFifthTailRowBound
       indices matrix (Tail.shiftCoefficients coefficients) start length matrixRows
-
     productRows :
       Neumann.UniformRowBound indices
         (Matrix.matrixProduct indices matrix rest)
@@ -135,10 +130,6 @@ shiftedFifthTailRowBound
         matrixRows restRows
   in
   productRows row
-
-------------------------------------------------------------------------
--- The existing 1/2500 fifth-tail cap scales by exactly (1/5)^m.
-------------------------------------------------------------------------
 
 shiftedMajorantBelowCap : ∀ start length →
   shiftedMajorant start length ≤ shiftedCap start
@@ -164,11 +155,6 @@ shiftedFifthTailUniformCap
     (shiftedFifthTailRowBound
       indices matrix coefficients start length matrixRows row)
     (shiftedMajorantBelowCap start length)
-
-------------------------------------------------------------------------
--- Source-native physical specialization: the SAME anchored reduced FP kernel
--- from Round61 inherits the geometric shifted-tail modulus.
-------------------------------------------------------------------------
 
 physicalReducedGhostShiftedTailCap :
   ∀ background → Relaxed.RelaxedInverseLinkRadius background →
