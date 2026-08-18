@@ -18,6 +18,7 @@ open import DASHI.Core.Prelude
 
 import DASHI.Moonshine.FormalQSeriesOldformDegeneracyHeckeExact as Deg
 import DASHI.Moonshine.FormalQSeriesOldformEigencharacterTransportExact as Eig
+import DASHI.Moonshine.P11MarkedLevel44PermutationOldspaceExact as Perm
 import DASHI.Moonshine.P11MarkedLevel44PermutationIntertwinerExact as Marked
 import DASHI.Moonshine.P11Level44OldspaceSameObjectCutsetExact as Cutset
 import DASHI.Moonshine.P11Level44FormalSameCoordinateComparisonExact as Same
@@ -53,15 +54,13 @@ wholeOldspaceGoodPrimeRegression = Same.wholeOldspaceGoodPrimeEigen
 markedDeckRRegression :
   (v : Marked.Old3) →
   Marked.realizeOld3 (Marked.oldR v)
-  ≡ DASHI.Moonshine.P11MarkedLevel44PermutationOldspaceExact.deckR5
-      (Marked.realizeOld3 v)
+  ≡ Perm.deckR5 (Marked.realizeOld3 v)
 markedDeckRRegression = Marked.realizeDeckR
 
 markedDeckSRegression :
   (v : Marked.Old3) →
   Marked.realizeOld3 (Marked.oldS v)
-  ≡ DASHI.Moonshine.P11MarkedLevel44PermutationOldspaceExact.deckS5
-      (Marked.realizeOld3 v)
+  ≡ Perm.deckS5 (Marked.realizeOld3 v)
 markedDeckSRegression = Marked.realizeDeckS
 
 actualAutomorphicComparisonStillOpen :
