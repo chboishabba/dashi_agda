@@ -17,6 +17,7 @@ import DASHI.Core.PluralConsumerProjectionSafety
 import DASHI.Core.IntersectionalNonFactorability
 import DASHI.Core.ProvenanceBearingQuotient
 import DASHI.Core.ProvenanceQuotientDynamics
+import DASHI.Core.RecoverableQuotientCompositionExact
 
 import DASHI.Ontology.ProgenitorParentHyperfabric
 import DASHI.Ontology.ProgenitorParentProjectionFibre
@@ -35,6 +36,7 @@ import DASHI.Ontology.ProgenitorParentAuthorityRoutingNonfactorabilityExact
 import DASHI.Ontology.ProgenitorParentObserverFutureSafetyExact
 import DASHI.Ontology.ProgenitorParentDiachronicAuthorityFibreExact
 import DASHI.Ontology.ProgenitorParentResidualDynamicsExact
+import DASHI.Ontology.ProgenitorParentProgressiveResidualFactorizationExact
 import DASHI.Ontology.ProgenitorParentAllyshipAuthorityBridgeExact
 import DASHI.Ontology.ProgenitorParentConsultationDecisionSensitivityExact
 import DASHI.Ontology.ProgenitorParentDynamicAuthorityRegression
