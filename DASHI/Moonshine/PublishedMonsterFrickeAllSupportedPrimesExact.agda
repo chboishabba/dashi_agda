@@ -1,7 +1,7 @@
 module DASHI.Moonshine.PublishedMonsterFrickeAllSupportedPrimesExact where
 
 ------------------------------------------------------------------------
--- ALL-SUPPORTED-PRIME MONSTER / FRICKE WELD
+-- ALL-PRIME MONSTER / FRICKE WELD
 --
 -- This module composes two deliberately different published authority lanes:
 --
@@ -12,11 +12,18 @@ module DASHI.Moonshine.PublishedMonsterFrickeAllSupportedPrimesExact where
 -- The point is NOT to erase that source distinction.  It is to expose one
 -- downstream theorem surface without reintroducing MonsterPrimeLane or the
 -- finite under-72 genus table.
+--
+-- The stdlib primality decision is used only to discharge the impossible
+-- natural-number cases 0,1,4.  Consequently every proof-relevant Prime p is
+-- internally classified into exactly one source lane: 2, 3, or p >= 5.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
 open import Data.Nat using (_≤_)
+import Data.Nat.Properties as NatP
 open import Data.Nat.Primality using (Prime)
+import Data.Nat.Primality as Primality
+open import Relation.Nullary.Decidable using (from-no)
 
 import DASHI.Moonshine.MonsterOrderDivisibilityExact as Monster
 import DASHI.Moonshine.PublishedLowPrimeFrickeGenusExact as Low
@@ -83,6 +90,85 @@ caseMonsterIffFrickeGenusZero c =
   , caseFrickeGenusZeroImpliesMonster c
 
 ------------------------------------------------------------------------
+-- Internal exhaustion of Prime p into 2, 3, or >=5.
+------------------------------------------------------------------------
+
+notPrime0 : Prime 0 → ⊥
+notPrime0 = from-no (Primality.prime? 0)
+
+notPrime1 : Prime 1 → ⊥
+notPrime1 = from-no (Primality.prime? 1)
+
+notPrime4 : Prime 4 → ⊥
+notPrime4 = from-no (Primality.prime? 4)
+
+classifyPrime : (p : Nat) → Prime p → SupportedPrimeFrickeCase
+classifyPrime 0 prime = ⊥-elim (notPrime0 prime)
+classifyPrime 1 prime = ⊥-elim (notPrime1 prime)
+classifyPrime 2 prime = exceptional2
+classifyPrime 3 prime = exceptional3
+classifyPrime 4 prime = ⊥-elim (notPrime4 prime)
+classifyPrime (5 + n) prime =
+  primeAtLeast5 (5 + n) prime (NatP.m≤m+n 5 n)
+
+classifiedLevelIsOriginal :
+  (p : Nat) → (prime : Prime p) →
+  caseLevel (classifyPrime p prime) ≡ p
+classifiedLevelIsOriginal 0 prime = ⊥-elim (notPrime0 prime)
+classifiedLevelIsOriginal 1 prime = ⊥-elim (notPrime1 prime)
+classifiedLevelIsOriginal 2 prime = refl
+classifiedLevelIsOriginal 3 prime = refl
+classifiedLevelIsOriginal 4 prime = ⊥-elim (notPrime4 prime)
+classifiedLevelIsOriginal (5 + n) prime = refl
+
+------------------------------------------------------------------------
+-- Arbitrary-prime public surface.
+------------------------------------------------------------------------
+
+primeFrickeGenus : (p : Nat) → Prime p → Nat
+primeFrickeGenus p prime = caseFrickeGenus (classifyPrime p prime)
+
+primeMonsterImpliesFrickeGenusZero :
+  (p : Nat) → (prime : Prime p) →
+  Monster.PrimeDividesMonsterOrder p →
+  primeFrickeGenus p prime ≡ 0
+primeMonsterImpliesFrickeGenusZero 0 prime divides = ⊥-elim (notPrime0 prime)
+primeMonsterImpliesFrickeGenusZero 1 prime divides = ⊥-elim (notPrime1 prime)
+primeMonsterImpliesFrickeGenusZero 2 prime divides =
+  caseMonsterImpliesFrickeGenusZero exceptional2 divides
+primeMonsterImpliesFrickeGenusZero 3 prime divides =
+  caseMonsterImpliesFrickeGenusZero exceptional3 divides
+primeMonsterImpliesFrickeGenusZero 4 prime divides = ⊥-elim (notPrime4 prime)
+primeMonsterImpliesFrickeGenusZero (5 + n) prime divides =
+  caseMonsterImpliesFrickeGenusZero
+    (primeAtLeast5 (5 + n) prime (NatP.m≤m+n 5 n))
+    divides
+
+primeFrickeGenusZeroImpliesMonster :
+  (p : Nat) → (prime : Prime p) →
+  primeFrickeGenus p prime ≡ 0 →
+  Monster.PrimeDividesMonsterOrder p
+primeFrickeGenusZeroImpliesMonster 0 prime genusZero = ⊥-elim (notPrime0 prime)
+primeFrickeGenusZeroImpliesMonster 1 prime genusZero = ⊥-elim (notPrime1 prime)
+primeFrickeGenusZeroImpliesMonster 2 prime genusZero =
+  caseFrickeGenusZeroImpliesMonster exceptional2 genusZero
+primeFrickeGenusZeroImpliesMonster 3 prime genusZero =
+  caseFrickeGenusZeroImpliesMonster exceptional3 genusZero
+primeFrickeGenusZeroImpliesMonster 4 prime genusZero = ⊥-elim (notPrime4 prime)
+primeFrickeGenusZeroImpliesMonster (5 + n) prime genusZero =
+  caseFrickeGenusZeroImpliesMonster
+    (primeAtLeast5 (5 + n) prime (NatP.m≤m+n 5 n))
+    genusZero
+
+primeMonsterIffFrickeGenusZero :
+  (p : Nat) → (prime : Prime p) →
+  Monster.PrimeDividesMonsterOrder p
+  ↔ primeFrickeGenus p prime ≡ 0
+primeMonsterIffFrickeGenusZero p prime =
+  primeMonsterImpliesFrickeGenusZero p prime
+  , primeFrickeGenusZeroImpliesMonster p prime
+
+------------------------------------------------------------------------
 -- Concrete exceptional regressions prove the low-prime branch is not a dead
 -- interface around an imported Monster-prime list.
 ------------------------------------------------------------------------
@@ -116,5 +202,5 @@ canonicalPublishedMonsterFrickeAllSupportedPrimesBoundary = record
   ; MonsterPrimeLaneImported = false
   ; finiteUnder72FrickeTableImported = false
   ; oneDownstreamEquivalenceSurfaceConstructed = true
-  ; arbitraryPrimeCaseExhaustionDerivedInternally = false
+  ; arbitraryPrimeCaseExhaustionDerivedInternally = true
   }
