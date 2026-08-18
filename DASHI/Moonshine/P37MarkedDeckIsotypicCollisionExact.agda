@@ -42,6 +42,7 @@ module DASHI.Moonshine.P37MarkedDeckIsotypicCollisionExact where
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
+open import Data.Integer using (ℤ; +_)
 open import Data.Rational using (ℚ; _/_; -_)
 
 import DASHI.Moonshine.P37MarkedDeckIsotypicJointDecompositionExact as Iso
