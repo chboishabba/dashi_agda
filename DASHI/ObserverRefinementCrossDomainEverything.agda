@@ -1,7 +1,6 @@
 module DASHI.ObserverRefinementCrossDomainEverything where
 
 import DASHI.Core.ObserverRefinementLatticeExact
-import DASHI.Core.ObserverIncomparabilityAndJoinExact
 import DASHI.Core.ObserverRefinementCompositionExact
 import DASHI.Core.RobustObserverSeparationMarginExact
 import DASHI.Core.ObserverRefinementTailStoppingExact
