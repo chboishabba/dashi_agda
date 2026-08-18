@@ -11,31 +11,37 @@ module DASHI.Physics.Closure.NSTriadKNPressureDirectionHermitianOrthogonalityRou
 -- Title: "Fourier Analysis and Nonlinear Partial Differential Equations".
 -- DOI: 10.1007/978-3-642-16830-7.
 --
--- ROUND84 / PRESSURE-DIRECTION ORTHOGONALITY
+-- ROUND84 / PRESSURE-DIRECTION ORTHOGONALITY, RETAINED PACKET CLOSED
 --
--- The companion Round84 RHS split exposes the literal pressure contribution as
--- a scalar multiple of the output wave-vector.  The physical velocity carrier
--- is transverse to that wave-vector.  This module proves on the repository's
--- exact Hermitian carrier that the two are orthogonal in BOTH pairing orders:
+-- The Round84 advective/pressure split exposes the literal pressure RHS as a
+-- longitudinal Leray term.  On every retained physical mode the velocity is
+-- transverse.  Hence the pressure direction is Hermitian-orthogonal to both
+-- the packet velocity and its |k|^2-weighted copy.
 --
---   <u_k , longitudinal_k> = 0,
---   <longitudinal_k , u_k> = 0.
+-- The key exact consequence is
 --
--- It then lifts the result through the exact physical output fibre to the
--- summed pressure RHS.  Consequently any retained transverse packet has zero
--- first-order quadratic-dissipation response to the pressure direction.  The
--- only extra datum needed to apply the finite-packet theorem is the genuinely
--- semantic one: every packet mode being differentiated must be one of the
--- retained physical Galerkin modes.  Round82's raw datum did not store that
--- membership proof, so it is carried explicitly here rather than silently
--- inferred.
+--   Ddot_P = 0,
+--
+-- on any selected packet whose listed modes are proved to be retained by the
+-- same finite Galerkin system.  Therefore the pressure contribution to the
+-- compact-transfer relative-growth core simplifies from
+--
+--   R_P = qdot_P D - q Ddot_P
+--
+-- to
+--
+--   R_P = qdot_P D.
+--
+-- The explicit packet-membership witness is necessary: Round82's raw datum
+-- stores an arbitrary packet-mode list, while physical transversality is only
+-- available on retained modes.  No membership is silently reconstructed.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Level; lsuc)
-open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; subst; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier as Cube
@@ -57,9 +63,39 @@ import DASHI.Physics.Closure.NSTriadKNLiteralAdvectivePressureRHSSplitRound84Exa
 import DASHI.Physics.Closure.NSTriadKNNonlinearRelativeGrowthAdvectivePressureSplitRound84Exact as Split
 
 ------------------------------------------------------------------------
--- Abstract exact C3 fact: transverse and longitudinal vectors are Hermitian
--- orthogonal in either order because the lattice mode is real.
+-- Generic exact zero-pairing and transverse/longitudinal laws.
 ------------------------------------------------------------------------
+
+hermitianZeroLeft :
+  ∀ {r} {F : C3.RealField r} (value : C3.Complex3 F) →
+  C3.hermitianPairing3 (C3.complex3Zero F) value ≡ C3.complexZero F
+hermitianZeroLeft {F = F} value =
+  trans
+    (cong (λ first → C3.hermitianPairing3 first value)
+      (sym (Hermitian.complex3ScaleZero (C3.complex3Zero F))))
+    (trans
+      (Scaling.hermitianPairingScaleLeft
+        (C3.complexZero F) (C3.complex3Zero F) value)
+      (trans
+        (cong
+          (λ scalar → C3.complexMultiply scalar
+            (C3.hermitianPairing3 (C3.complex3Zero F) value))
+          (Hermitian.complexConjugateZero F))
+        (Hermitian.complexMultiplyZeroLeft
+          (C3.hermitianPairing3 (C3.complex3Zero F) value))))
+
+hermitianZeroRight :
+  ∀ {r} {F : C3.RealField r} (value : C3.Complex3 F) →
+  C3.hermitianPairing3 value (C3.complex3Zero F) ≡ C3.complexZero F
+hermitianZeroRight {F = F} value =
+  trans
+    (cong (C3.hermitianPairing3 value)
+      (sym (Hermitian.complex3ScaleZero (C3.complex3Zero F))))
+    (trans
+      (Scaling.hermitianPairingScaleRight
+        (C3.complexZero F) value (C3.complex3Zero F))
+      (Hermitian.complexMultiplyZeroLeft
+        (C3.hermitianPairing3 value (C3.complex3Zero F))))
 
 hermitianTransverseLongitudinalRightZero :
   ∀ {r} {F : C3.RealField r}
@@ -112,7 +148,7 @@ hermitianLongitudinalTransverseRightZero {F = F}
       (Hermitian.complexMultiplyZeroRight (C3.complexConjugate scalar)))
 
 ------------------------------------------------------------------------
--- The actual Round84 ordered pressure term is longitudinal.
+-- Each literal pressure ordered term is longitudinal in its output mode.
 ------------------------------------------------------------------------
 
 lerayRankOneScalar :
@@ -122,25 +158,11 @@ lerayRankOneScalar :
   Audit.FiniteComplex3GalerkinSystem F E I →
   Physical.PhysicalTriadIncidence → C3.Complex F
 lerayRankOneScalar {F = F} {E = E} {I = I} system incidence =
-  let
-    output = Physical.k incidence
-    value = AP.rawOrderedValue system incidence
-  in
   C3.complexMultiply
-    (C3.realEmbed F (C3.inverseNormSquared I output))
-    (C3.bilinearDot3 (C3.modeVector E output) value)
-
-lerayRankOneCorrectionIsLongitudinal :
-  ∀ {r} {F : C3.RealField r}
-    {E : C3.IntegerEmbedding F}
-    {I : C3.ModeInverseSquare F E}
-    (system : Audit.FiniteComplex3GalerkinSystem F E I)
-    (incidence : Physical.PhysicalTriadIncidence) →
-  AP.lerayRankOneCorrection system incidence
-  ≡ C3.complex3Scale
-      (lerayRankOneScalar system incidence)
+    (C3.realEmbed F (C3.inverseNormSquared I (Physical.k incidence)))
+    (C3.bilinearDot3
       (C3.modeVector E (Physical.k incidence))
-lerayRankOneCorrectionIsLongitudinal system incidence = refl
+      (AP.rawOrderedValue system incidence))
 
 pressureOrderedTermHermitianRightZero :
   ∀ {r} {F : C3.RealField r}
@@ -149,11 +171,10 @@ pressureOrderedTermHermitianRightZero :
     (system : Audit.FiniteComplex3GalerkinSystem F E I)
     (incidence : Physical.PhysicalTriadIncidence)
     (value : C3.Complex3 F) →
-  C3.bilinearDot3
-    (C3.modeVector E (Physical.k incidence)) value
+  C3.bilinearDot3 (C3.modeVector E (Physical.k incidence)) value
     ≡ C3.complexZero F →
   C3.hermitianPairing3 value (AP.pressureOrderedTerm system incidence)
-  ≡ C3.complexZero F
+    ≡ C3.complexZero F
 pressureOrderedTermHermitianRightZero {F = F} {E = E}
     system incidence value transverse =
   trans
@@ -164,12 +185,9 @@ pressureOrderedTermHermitianRightZero {F = F} {E = E}
         (C3.complexI F) value (AP.lerayRankOneCorrection system incidence))
       (trans
         (cong (C3.complexMultiply (C3.complexI F))
-          (trans
-            (cong (C3.hermitianPairing3 value)
-              (lerayRankOneCorrectionIsLongitudinal system incidence))
-            (hermitianTransverseLongitudinalRightZero
-              E (Physical.k incidence) value
-              (lerayRankOneScalar system incidence) transverse)))
+          (hermitianTransverseLongitudinalRightZero
+            E (Physical.k incidence) value
+            (lerayRankOneScalar system incidence) transverse))
         (Hermitian.complexMultiplyZeroRight (C3.complexI F))))
 
 pressureOrderedTermHermitianLeftZero :
@@ -179,11 +197,10 @@ pressureOrderedTermHermitianLeftZero :
     (system : Audit.FiniteComplex3GalerkinSystem F E I)
     (incidence : Physical.PhysicalTriadIncidence)
     (value : C3.Complex3 F) →
-  C3.bilinearDot3
-    (C3.modeVector E (Physical.k incidence)) value
+  C3.bilinearDot3 (C3.modeVector E (Physical.k incidence)) value
     ≡ C3.complexZero F →
   C3.hermitianPairing3 (AP.pressureOrderedTerm system incidence) value
-  ≡ C3.complexZero F
+    ≡ C3.complexZero F
 pressureOrderedTermHermitianLeftZero {F = F} {E = E}
     system incidence value transverse =
   trans
@@ -196,19 +213,11 @@ pressureOrderedTermHermitianLeftZero {F = F} {E = E}
         (cong
           (λ pair → C3.complexMultiply
             (C3.complexConjugate (C3.complexI F)) pair)
-          (trans
-            (cong (λ first → C3.hermitianPairing3 first value)
-              (lerayRankOneCorrectionIsLongitudinal system incidence))
-            (hermitianLongitudinalTransverseRightZero
-              E (Physical.k incidence) value
-              (lerayRankOneScalar system incidence) transverse)))
+          (hermitianLongitudinalTransverseRightZero
+            E (Physical.k incidence) value
+            (lerayRankOneScalar system incidence) transverse))
         (Hermitian.complexMultiplyZeroRight
           (C3.complexConjugate (C3.complexI F)))))
-
-------------------------------------------------------------------------
--- Lift through the exact physical output fibre.  The proof takes an explicit
--- output-equality witness for every list entry; the concrete fibre supplies it.
-------------------------------------------------------------------------
 
 pressureListHermitianRightZero :
   ∀ {r} {F : C3.RealField r}
@@ -223,22 +232,15 @@ pressureListHermitianRightZero :
   C3.hermitianPairing3 value
     (Audit.sumVectors (AP.mapPressureTerms system incidences))
   ≡ C3.complexZero F
-pressureListHermitianRightZero {F = F}
-    system output [] value transverse outputs =
-  trans
-    refl
-    (Hermitian.complexMultiplyZeroRight (C3.complexOne F))
+pressureListHermitianRightZero system output [] value transverse outputs =
+  hermitianZeroRight value
 pressureListHermitianRightZero {F = F} {E = E}
     system output (incidence ∷ rest) value transverse outputs =
   let
     outputEq = outputs incidence (Cube.here refl)
-    headTransverse :
-      C3.bilinearDot3 (C3.modeVector E (Physical.k incidence)) value
-      ≡ C3.complexZero F
     headTransverse = subst
       (λ selected →
-        C3.bilinearDot3 (C3.modeVector E selected) value
-        ≡ C3.complexZero F)
+        C3.bilinearDot3 (C3.modeVector E selected) value ≡ C3.complexZero F)
       (sym outputEq) transverse
   in
   trans
@@ -249,8 +251,7 @@ pressureListHermitianRightZero {F = F} {E = E}
       (cong₂ C3.complexAdd
         (pressureOrderedTermHermitianRightZero
           system incidence value headTransverse)
-        (pressureListHermitianRightZero
-          system output rest value transverse
+        (pressureListHermitianRightZero system output rest value transverse
           (λ selected member → outputs selected (Cube.there member))))
       (Field.complexAddZeroLeft (C3.complexZero F)))
 
@@ -267,20 +268,15 @@ pressureListHermitianLeftZero :
   C3.hermitianPairing3
     (Audit.sumVectors (AP.mapPressureTerms system incidences)) value
   ≡ C3.complexZero F
-pressureListHermitianLeftZero {F = F}
-    system output [] value transverse outputs =
-  trans refl (Hermitian.complexMultiplyZeroRight (C3.complexOne F))
+pressureListHermitianLeftZero system output [] value transverse outputs =
+  hermitianZeroLeft value
 pressureListHermitianLeftZero {F = F} {E = E}
     system output (incidence ∷ rest) value transverse outputs =
   let
     outputEq = outputs incidence (Cube.here refl)
-    headTransverse :
-      C3.bilinearDot3 (C3.modeVector E (Physical.k incidence)) value
-      ≡ C3.complexZero F
     headTransverse = subst
       (λ selected →
-        C3.bilinearDot3 (C3.modeVector E selected) value
-        ≡ C3.complexZero F)
+        C3.bilinearDot3 (C3.modeVector E selected) value ≡ C3.complexZero F)
       (sym outputEq) transverse
   in
   trans
@@ -291,8 +287,7 @@ pressureListHermitianLeftZero {F = F} {E = E}
       (cong₂ C3.complexAdd
         (pressureOrderedTermHermitianLeftZero
           system incidence value headTransverse)
-        (pressureListHermitianLeftZero
-          system output rest value transverse
+        (pressureListHermitianLeftZero system output rest value transverse
           (λ selected member → outputs selected (Cube.there member))))
       (Field.complexAddZeroLeft (C3.complexZero F)))
 
@@ -327,9 +322,7 @@ pressureRHSOrthogonalLeftToTransverse system output value transverse =
     (λ incidence member → Audit.concreteTriadsAtOutputAgreement member)
 
 ------------------------------------------------------------------------
--- A selected physical packet must carry the membership that Round82's datum
--- omitted before we may consume retainedVelocityTransverse on every packet
--- mode.  This is the minimal same-object enrichment, not a new PDE carrier.
+-- Same-object retained packet and exact Ddot_P = 0.
 ------------------------------------------------------------------------
 
 record RetainedPressurePacketDatum
@@ -343,125 +336,215 @@ record RetainedPressurePacketDatum
 
 open RetainedPressurePacketDatum public
 
-packetVelocityTransverseAtRetainedMode :
+retainedVelocityTransverse :
   ∀ {r} {model : LP.PeriodicHardShellFourierPDE {r}}
     (datum : Drift.LiteralPhysicalCompactTransferDatum model)
     (retained : RetainedPressurePacketDatum datum)
-    mode →
-  mode Cube.∈ Drift.packetModes datum →
+    mode → mode Cube.∈ Drift.packetModes datum →
   C3.bilinearDot3
     (C3.modeVector
       (Literal.physicalEmbedding (Drift.physicalSystem datum)) mode)
-    (Drift.packetVelocity datum mode)
+    (Audit.velocity (Drift.finiteSystem datum) mode)
   ≡ C3.complexZero (LP.realField model)
-packetVelocityTransverseAtRetainedMode {model = model}
-    datum retained mode member
-  with LP.shellSelect model (Drift.shell datum) mode
-... | true =
+retainedVelocityTransverse datum retained mode member =
   Literal.retainedVelocityTransverse
     (Drift.physicalSystem datum) mode
     (packetModesAreRetained retained mode member)
-... | false =
-  Algebra.bilinearDot3RightZero
-    (C3.modeVector
-      (Literal.physicalEmbedding (Drift.physicalSystem datum)) mode)
 
-weightedPacketVelocityTransverseAtRetainedMode :
+pressurePacketPairingLeftZero :
   ∀ {r} {model : LP.PeriodicHardShellFourierPDE {r}}
     (datum : Drift.LiteralPhysicalCompactTransferDatum model)
     (retained : RetainedPressurePacketDatum datum)
-    mode →
-  mode Cube.∈ Drift.packetModes datum →
-  C3.bilinearDot3
-    (C3.modeVector
-      (Literal.physicalEmbedding (Drift.physicalSystem datum)) mode)
+    mode → mode Cube.∈ Drift.packetModes datum →
+  C3.hermitianPairing3
+    (Packet.packetField model (Drift.shell datum) (Split.pressureRHS datum) mode)
     (Drift.weightedPacketField datum
       (Audit.velocity (Drift.finiteSystem datum)) mode)
   ≡ C3.complexZero (LP.realField model)
-weightedPacketVelocityTransverseAtRetainedMode {model = model}
-    datum retained mode member =
-  trans
-    (Scaling.bilinearDot3ScaleRight
+pressurePacketPairingLeftZero {model = model} datum retained mode member
+  with LP.shellSelect model (Drift.shell datum) mode
+... | true =
+  pressureRHSOrthogonalLeftToTransverse
+    (Drift.finiteSystem datum) mode
+    (C3.complex3Scale
       (Drift.modeDissipationWeight datum mode)
-      (C3.modeVector
-        (Literal.physicalEmbedding (Drift.physicalSystem datum)) mode)
-      (Drift.packetVelocity datum mode))
+      (Audit.velocity (Drift.finiteSystem datum) mode))
+    (trans
+      (Scaling.bilinearDot3ScaleRight
+        (Drift.modeDissipationWeight datum mode)
+        (C3.modeVector
+          (Literal.physicalEmbedding (Drift.physicalSystem datum)) mode)
+        (Audit.velocity (Drift.finiteSystem datum) mode))
+      (trans
+        (cong (C3.complexMultiply (Drift.modeDissipationWeight datum mode))
+          (retainedVelocityTransverse datum retained mode member))
+        (Hermitian.complexMultiplyZeroRight
+          (Drift.modeDissipationWeight datum mode))))
+... | false =
+  hermitianZeroLeft
+    (Drift.weightedPacketField datum
+      (Audit.velocity (Drift.finiteSystem datum)) mode)
+
+pressurePacketPairingRightZero :
+  ∀ {r} {model : LP.PeriodicHardShellFourierPDE {r}}
+    (datum : Drift.LiteralPhysicalCompactTransferDatum model)
+    (retained : RetainedPressurePacketDatum datum)
+    mode → mode Cube.∈ Drift.packetModes datum →
+  C3.hermitianPairing3
+    (Drift.packetVelocity datum mode)
+    (Drift.weightedPacketField datum (Split.pressureRHS datum) mode)
+  ≡ C3.complexZero (LP.realField model)
+pressurePacketPairingRightZero {model = model} datum retained mode member
+  with LP.shellSelect model (Drift.shell datum) mode
+... | true =
+  trans
+    (Scaling.hermitianPairingScaleRight
+      (Drift.modeDissipationWeight datum mode)
+      (Audit.velocity (Drift.finiteSystem datum) mode)
+      (Split.pressureRHS datum mode))
     (trans
       (cong (C3.complexMultiply (Drift.modeDissipationWeight datum mode))
-        (packetVelocityTransverseAtRetainedMode datum retained mode member))
+        (pressureRHSOrthogonalRightToTransverse
+          (Drift.finiteSystem datum) mode
+          (Audit.velocity (Drift.finiteSystem datum) mode)
+          (retainedVelocityTransverse datum retained mode member)))
       (Hermitian.complexMultiplyZeroRight
         (Drift.modeDissipationWeight datum mode)))
+... | false =
+  hermitianZeroLeft
+    (Drift.weightedPacketField datum (Split.pressureRHS datum) mode)
 
-finitePressureDissipationPairingsZero :
+finitePressurePacketPairingLeftZero :
+  ∀ {r} {model : LP.PeriodicHardShellFourierPDE {r}}
+    (datum : Drift.LiteralPhysicalCompactTransferDatum model)
+    (retained : RetainedPressurePacketDatum datum) →
+  Packet.finiteHermitianPairing
+    (Drift.packetModes datum)
+    (Packet.packetField model (Drift.shell datum) (Split.pressureRHS datum))
+    (Drift.weightedPacketField datum
+      (Audit.velocity (Drift.finiteSystem datum)))
+  ≡ C3.complexZero (LP.realField model)
+finitePressurePacketPairingLeftZero {model = model} datum retained =
+  go (Drift.packetModes datum)
+    (λ mode member → packetModesAreRetained retained mode member)
+  where
+  F = LP.realField model
+
+  go :
+    (modes : List Z3.FourierMode) →
+    (∀ mode → mode Cube.∈ modes → mode Cube.∈ Audit.modes (Drift.finiteSystem datum)) →
+    Packet.finiteHermitianPairing modes
+      (Packet.packetField model (Drift.shell datum) (Split.pressureRHS datum))
+      (Drift.weightedPacketField datum
+        (Audit.velocity (Drift.finiteSystem datum)))
+    ≡ C3.complexZero F
+  go [] retainedModes = refl
+  go (mode ∷ modes) retainedModes =
+    trans
+      (cong₂ C3.complexAdd
+        (pressurePacketPairingLeftZero datum
+          (record { packetModesAreRetained =
+            λ selected selectedMember →
+              retainedModes selected
+                (subst (λ xs → selected Cube.∈ xs) refl selectedMember) })
+          mode (Cube.here refl))
+        (go modes
+          (λ selected member → retainedModes selected (Cube.there member))))
+      (Field.complexAddZeroLeft (C3.complexZero F))
+
+finitePressurePacketPairingRightZero :
+  ∀ {r} {model : LP.PeriodicHardShellFourierPDE {r}}
+    (datum : Drift.LiteralPhysicalCompactTransferDatum model)
+    (retained : RetainedPressurePacketDatum datum) →
+  Packet.finiteHermitianPairing
+    (Drift.packetModes datum)
+    (Drift.packetVelocity datum)
+    (Drift.weightedPacketField datum (Split.pressureRHS datum))
+  ≡ C3.complexZero (LP.realField model)
+finitePressurePacketPairingRightZero {model = model} datum retained =
+  go (Drift.packetModes datum)
+    (λ mode member → packetModesAreRetained retained mode member)
+  where
+  F = LP.realField model
+
+  go :
+    (modes : List Z3.FourierMode) →
+    (∀ mode → mode Cube.∈ modes → mode Cube.∈ Audit.modes (Drift.finiteSystem datum)) →
+    Packet.finiteHermitianPairing modes
+      (Drift.packetVelocity datum)
+      (Drift.weightedPacketField datum (Split.pressureRHS datum))
+    ≡ C3.complexZero F
+  go [] retainedModes = refl
+  go (mode ∷ modes) retainedModes =
+    trans
+      (cong₂ C3.complexAdd
+        (pressurePacketPairingRightZero datum
+          (record { packetModesAreRetained =
+            λ selected selectedMember →
+              retainedModes selected
+                (subst (λ xs → selected Cube.∈ xs) refl selectedMember) })
+          mode (Cube.here refl))
+        (go modes
+          (λ selected member → retainedModes selected (Cube.there member))))
+      (Field.complexAddZeroLeft (C3.complexZero F))
+
+complexPressureDissipationTangentZero :
   ∀ {r} {model : LP.PeriodicHardShellFourierPDE {r}}
     (datum : Drift.LiteralPhysicalCompactTransferDatum model)
     (retained : RetainedPressurePacketDatum datum) →
   R83.complexDissipationTangentComponent datum (Split.pressureRHS datum)
   ≡ C3.complexZero (LP.realField model)
-finitePressureDissipationPairingsZero {model = model} datum retained =
-  pairingsZero (Drift.packetModes datum)
-    (λ mode member → packetModesAreRetained retained mode member)
-  where
-  E = Literal.physicalEmbedding (Drift.physicalSystem datum)
-  F = LP.realField model
+complexPressureDissipationTangentZero {model = model} datum retained =
+  trans
+    (cong₂ C3.complexAdd
+      (finitePressurePacketPairingLeftZero datum retained)
+      (finitePressurePacketPairingRightZero datum retained))
+    (Field.complexAddZeroLeft (C3.complexZero (LP.realField model)))
 
-  pairingsZero :
-    (modes : List Z3.FourierMode) →
-    (∀ mode → mode Cube.∈ modes → mode Cube.∈ Audit.modes (Drift.finiteSystem datum)) →
-    C3.complexAdd
-      (Packet.finiteHermitianPairing modes
-        (Packet.packetField model (Drift.shell datum) (Split.pressureRHS datum))
-        (Drift.weightedPacketField datum
-          (Audit.velocity (Drift.finiteSystem datum))))
-      (Packet.finiteHermitianPairing modes
-        (Drift.packetVelocity datum)
-        (Drift.weightedPacketField datum (Split.pressureRHS datum)))
-    ≡ C3.complexZero F
-  pairingsZero [] retainedModes =
-    Field.complexAddZeroLeft (C3.complexZero F)
-  pairingsZero (mode ∷ modes) retainedModes =
-    let
-      member = retainedModes mode (Cube.here refl)
-      velocityTransverse = Literal.retainedVelocityTransverse
-        (Drift.physicalSystem datum) mode member
-      pressureLeft = pressureRHSOrthogonalLeftToTransverse
-        (Drift.finiteSystem datum) mode
-        (C3.complex3Scale
-          (Drift.modeDissipationWeight datum mode)
-          (Audit.velocity (Drift.finiteSystem datum) mode))
-        (trans
-          (Scaling.bilinearDot3ScaleRight
-            (Drift.modeDissipationWeight datum mode)
-            (C3.modeVector E mode)
-            (Audit.velocity (Drift.finiteSystem datum) mode))
-          (trans
-            (cong (C3.complexMultiply (Drift.modeDissipationWeight datum mode))
-              velocityTransverse)
-            (Hermitian.complexMultiplyZeroRight
-              (Drift.modeDissipationWeight datum mode))))
-      pressureRight = pressureRHSOrthogonalRightToTransverse
-        (Drift.finiteSystem datum) mode
-        (Audit.velocity (Drift.finiteSystem datum) mode)
-        velocityTransverse
-    in
-    pairingsZero modes
-      (λ selected selectedMember → retainedModes selected (Cube.there selectedMember))
+rawPressureDissipationTangentZero :
+  ∀ {r} {model : LP.PeriodicHardShellFourierPDE {r}}
+    (datum : Drift.LiteralPhysicalCompactTransferDatum model)
+    (retained : RetainedPressurePacketDatum datum) →
+  Split.rawDissipationTangentPressure datum ≡ C3.zero (LP.realField model)
+rawPressureDissipationTangentZero datum retained =
+  trans (cong C3.real (complexPressureDissipationTangentZero datum retained)) refl
+
+pressureRelativeGrowthReducesToTransferTimesDissipation :
+  ∀ {r} {model : LP.PeriodicHardShellFourierPDE {r}}
+    (datum : Drift.LiteralPhysicalCompactTransferDatum model)
+    (retained : RetainedPressurePacketDatum datum) →
+  Split.pressureRelativeGrowthCore datum
+  ≡ C3.multiply (LP.realField model)
+      (Split.rawTransferTangentPressure datum)
+      (Drift.rawDissipation datum)
+pressureRelativeGrowthReducesToTransferTimesDissipation {model = model}
+    datum retained
+  rewrite rawPressureDissipationTangentZero datum retained =
+  P.R.solve 3
+    (λ qdot d q →
+      ((qdot P.R.⊗ d)
+        P.R.⊕ P.R.⊝ (q P.R.⊗ P.R.Κ (C3.zero (LP.realField model))))
+      P.R.⊜ (qdot P.R.⊗ d))
+    refl
+    (Split.rawTransferTangentPressure datum)
+    (Drift.rawDissipation datum)
+    (Drift.rawTransfer datum)
+  where
+  module P = Field.Polynomial (LP.realField model)
 
 round84PressureDirectionHermitianOrthogonalityConstructed : Bool
 round84PressureDirectionHermitianOrthogonalityConstructed = true
 
 round84RetainedPacketPressureDissipationTangentZero : Bool
-round84RetainedPacketPressureDissipationTangentZero = false
+round84RetainedPacketPressureDissipationTangentZero = true
 
--- The modewise geometry is fully constructed.  The final finite-pairing theorem
--- above is intentionally left behind the source-shape audit flag until its
--- recursive pairing normalization is kernel-checked; no Clay-facing consumer
--- is promoted from an unchecked proof shape.
+round84PressureRelativeGrowthReducesToTransferTimesDissipation : Bool
+round84PressureRelativeGrowthReducesToTransferTimesDissipation = true
 
-round84PressureDirectionHermitianOrthogonalityConstructedIsTrue :
-  round84PressureDirectionHermitianOrthogonalityConstructed ≡ true
-round84PressureDirectionHermitianOrthogonalityConstructedIsTrue = refl
+round84RetainedPacketPressureDissipationTangentZeroIsTrue :
+  round84RetainedPacketPressureDissipationTangentZero ≡ true
+round84RetainedPacketPressureDissipationTangentZeroIsTrue = refl
 
-round84RetainedPacketPressureDissipationTangentZeroIsFalse :
-  round84RetainedPacketPressureDissipationTangentZero ≡ false
-round84RetainedPacketPressureDissipationTangentZeroIsFalse = refl
+round84PressureRelativeGrowthReducesToTransferTimesDissipationIsTrue :
+  round84PressureRelativeGrowthReducesToTransferTimesDissipation ≡ true
+round84PressureRelativeGrowthReducesToTransferTimesDissipationIsTrue = refl
