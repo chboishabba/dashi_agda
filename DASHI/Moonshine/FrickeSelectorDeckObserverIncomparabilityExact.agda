@@ -43,6 +43,7 @@ open import DASHI.Core.Prelude
 
 import DASHI.Moonshine.P11MarkedX2S3HeckeDecompositionExact as P11
 import DASHI.Moonshine.P37MarkedDeckIsotypicCollisionExact as P37
+import DASHI.Moonshine.P37MarkedDeckIsotypicJointDecompositionExact as Iso
 import DASHI.Moonshine.P11P37MarkedDeckSelectorCutsetExact as Cutset
 
 ------------------------------------------------------------------------
@@ -58,10 +59,10 @@ data SharedDeckType : Set where
 p11StandardWitness : P11.Int5
 p11StandardWitness = P11.standardVector1
 
-p37StandardWitness : P37.Iso.StdBlock3
+p37StandardWitness : Iso.StdBlock3
 p37StandardWitness = P37.p37StandardCollisionVector
 
-p37TrivialWitness : P37.Iso.Block3
+p37TrivialWitness : Iso.Block3
 p37TrivialWitness = P37.p37TrivialCollisionVector
 
 ------------------------------------------------------------------------
