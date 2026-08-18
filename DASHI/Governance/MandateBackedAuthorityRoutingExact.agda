@@ -150,6 +150,93 @@ mandateBackedRouteYieldsBoundedAuthority backed =
     (Authority.recallWitness (scopedAuthority backed))
     (Authority.reviewWitness (scopedAuthority backed))
 
+------------------------------------------------------------------------
+-- Concrete inhabited witness: the bridge is not merely a negative boundary.
+-- One situated route carries an admissible constitutional delegation plus
+-- explicit representation, scope, recall and review witnesses.
+------------------------------------------------------------------------
+
+data DemoSituation : Set where
+  delegatedResponseSituation : DemoSituation
+
+data DemoRoute : Set where
+  delegatedResponderRoute : DemoRoute
+
+demoMandate : Authority.Mandate
+demoMandate = record
+  { Constituency = ⊤
+  ; Representative = ⊤
+  ; Scope = ⊤
+  ; Term = ⊤
+  ; representedBy = λ constituency representative → ⊤
+  ; authorisedFor = λ representative scope → ⊤
+  ; termOf = λ representative → tt
+  ; recallable = λ constituency representative → ⊤
+  ; reviewable = λ representative → ⊤
+  }
+
+demoRouting : Routing.RoutingSystem DemoSituation DemoRoute
+demoRouting = record
+  { Routing.Sufficient = λ situation route → ⊤
+  ; Routing.Competent = λ situation route → ⊤
+  ; Routing.Mandated = λ situation route → ⊤
+  ; Routing.CurrentAuthority = λ situation route → ⊤
+  ; Routing.SubjectLegible = λ situation route → ⊤
+  ; Routing.Safe = λ situation route → ⊤
+  ; Routing.Reviewable = λ situation route → ⊤
+  ; Routing.RepairCapable = λ situation route → ⊤
+  ; Routing.dominationCost = λ situation route → 0
+  }
+
+demoInterpretation : RouteMandateInterpretation demoMandate
+demoInterpretation =
+  routeMandateInterpretation
+    (λ situation → tt)
+    (λ route → tt)
+    (λ situation route → tt)
+
+demoAdmissibleRoute :
+  Routing.AdmissibleRoute
+    demoRouting delegatedResponseSituation delegatedResponderRoute
+demoAdmissibleRoute =
+  Routing.admissibleRoute tt tt tt tt tt tt tt tt
+
+demoScopedAuthority : Authority.ScopedAuthority demoMandate
+demoScopedAuthority = record
+  { Authority.source = Authority.constitutionalDelegation
+  ; Authority.sourceAdmissible = tt
+  ; Authority.constituency = tt
+  ; Authority.representative = tt
+  ; Authority.scope = tt
+  ; Authority.representationWitness = tt
+  ; Authority.scopeWitness = tt
+  ; Authority.recallWitness = tt
+  ; Authority.reviewWitness = tt
+  }
+
+canonicalMandateBackedRoute :
+  MandateBackedAdmissibleRoute
+    demoRouting
+    demoMandate
+    demoInterpretation
+    delegatedResponseSituation
+    delegatedResponderRoute
+canonicalMandateBackedRoute =
+  mandateBackedAdmissibleRoute
+    demoAdmissibleRoute
+    demoScopedAuthority
+    refl refl refl
+
+canonicalMandateBackedRouteIsBounded :
+  RouteAuthorityIsDiachronicallyScoped
+    demoRouting
+    demoMandate
+    demoInterpretation
+    delegatedResponseSituation
+    delegatedResponderRoute
+canonicalMandateBackedRouteIsBounded =
+  mandateBackedRouteYieldsBoundedAuthority canonicalMandateBackedRoute
+
 record MandateBackedRoutingBoundary : Set where
   constructor mandateBackedRoutingBoundary
   field
@@ -158,7 +245,8 @@ record MandateBackedRoutingBoundary : Set where
     scopedAuthorityRequiresScope : Bool
     scopedAuthorityRequiresRecall : Bool
     scopedAuthorityRequiresReview : Bool
+    inhabitedScopedRouteWitnessAvailable : Bool
 
 canonicalMandateBackedRoutingBoundary : MandateBackedRoutingBoundary
 canonicalMandateBackedRoutingBoundary =
-  mandateBackedRoutingBoundary false false true true true
+  mandateBackedRoutingBoundary false false true true true true
