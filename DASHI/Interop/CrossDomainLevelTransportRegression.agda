@@ -23,8 +23,13 @@ open import DASHI.Core.Prelude
 import DASHI.Core.ArgumentLevelTransportHyperformalismExact as Transport
 import DASHI.Core.LevelIndexedProofObligationHyperformalismExact as Levelled
 import DASHI.Interop.JPlusOne369FibreCarryHyperformalismExact as Broad
+import DASHI.Interop.PNFHyperfabric369 as H369
+import DASHI.Dynamics.TriadicResidualRechartDynamics as Rechart
+import DASHI.Foundations.JChartSuccessorBoundary as Chart
 import Ontology.Brain.BrainInvariantDepth as Brain
 import Ontology.Brain.BrainVocabularySurface as BrainVocabulary
+import Ontology.Brain.BrainCoarseSummarySurface as BrainSummary
+import Ontology.Brain.BrainExtractionSurface as BrainExtraction
 import DASHI.Cognition.PNF.DepthWheelMemoryHyperfabric as Memory
 import DASHI.Biology.PedagogicalJPlusOneRouting as Pedagogy
 import DASHI.Physics.Foundations.AtomicGenerationPipelineExact as Atomics
@@ -35,12 +40,12 @@ import DASHI.Physics.Foundations.AtomicGenerationPipelineExact as Atomics
 
 brainSummaryPreservesDeclaredDepth :
   ∀ {n} (state : BrainVocabulary.BrainState n) →
-  Brain.stateDepth state ≡ Brain.summaryDepth (Brain.summarizeState state)
+  Brain.stateDepth state ≡ Brain.summaryDepth (BrainSummary.summarizeState state)
 brainSummaryPreservesDeclaredDepth = Brain.state-summary-depth-exact
 
 brainExtractionPreservesDeclaredDepth :
   ∀ {n} (state : BrainVocabulary.BrainState n) →
-  Brain.stateDepth state ≡ Brain.extractionDepth (Brain.extractState state)
+  Brain.stateDepth state ≡ Brain.extractionDepth (BrainExtraction.extractState state)
 brainExtractionPreservesDeclaredDepth = Brain.state-extraction-depth-exact
 
 ------------------------------------------------------------------------
@@ -129,16 +134,16 @@ finiteAtomicScoreDoesNotPromoteQuantitativeChemistry =
 -- Broader 369/J+1/carry receipts remain jointly visible.
 ------------------------------------------------------------------------
 
-broadNonaryReceipt : Broad.H369.nonaryDimension ≡ 9
+broadNonaryReceipt : H369.nonaryDimension ≡ 9
 broadNonaryReceipt = Broad.threeByThreeIsNine
 
 broadDialecticAddressReceipt :
-  Broad.H369.dialecticDiscussionAtomDimension ≡ 27
+  H369.dialecticDiscussionAtomDimension ≡ 27
 broadDialecticAddressReceipt = Broad.threeCubedAddressIsTwentySeven
 
 broadResidualRechartReceipt :
-  Broad.Rechart.chart (Broad.Rechart.rechart Broad.Rechart.stateAtStar)
-  ≡ Broad.Chart.chart 11
+  Rechart.chart (Rechart.rechart Rechart.stateAtStar)
+  ≡ Chart.chart 11
 broadResidualRechartReceipt = Broad.residualGluingFailureRechartsToEleven
 
 record CrossDomainLevelTransportBoundary : Set where
