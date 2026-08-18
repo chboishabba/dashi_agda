@@ -40,9 +40,9 @@ module DASHI.Physics.Closure.NSTriadKNPressureContractionInjectionSeparationRoun
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ)
 open import Data.Rational.Tactic.RingSolver using (solve)
+open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 import DASHI.Physics.Closure.NSTriadKNRationalLerayProjectionExact as V
 import DASHI.Physics.Closure.NSTriadKNLuoAngularStrainDisplayedFormulaZeroExact as M
@@ -80,7 +80,8 @@ mixedPressureContraction = solve []
 sameStretchingContraction :
   pressureContraction zeroPressure basisE2
   ≡ pressureContraction mixedPressure basisE2
-sameStretchingContraction = refl
+sameStretchingContraction =
+  trans zeroPressureContraction (sym mixedPressureContraction)
 
 zeroFrameInjection : frameInjection23 zeroPressure ≡ 0ℚ
 zeroFrameInjection = solve []
@@ -101,10 +102,13 @@ pressureContractionCannotDetermineInjection :
   PressureContractionDeterminesInjection →
   0ℚ ≡ 1ℚ
 pressureContractionCannotDetermineInjection candidate =
-  let equalInjection =
-        determine candidate zeroPressure mixedPressure sameStretchingContraction
+  let
+    equalInjection =
+      determine candidate zeroPressure mixedPressure sameStretchingContraction
   in
-  equalInjection
+  trans
+    (sym zeroFrameInjection)
+    (trans equalInjection mixedFrameInjection)
 
 round79PressureContractionDeterminesEigenframeInjection : Bool
 round79PressureContractionDeterminesEigenframeInjection = false
