@@ -11,10 +11,15 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound60WalshSymmetryValida
 -- On G2, the same sixteen-element carrier is given its independent Walsh
 -- character geometry and an exact counterexample proves that degree/S4
 -- symmetry alone does not justify XOR-convolution diagonalisation.
+--
+-- The full sixteen-point Walsh inversion theorem is also imported here, so
+-- the character transform is certified as a lossless basis change before
+-- physical symmetry kills nontrivial sectors.
 ------------------------------------------------------------------------
 
 import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound59PositiveRGGeometryValidation
 import DASHI.Physics.YangMills.BalabanBooleanFourCubeWalshCharacterExact
+import DASHI.Physics.YangMills.BalabanBooleanFourCubeWalshInversionExact
 import DASHI.Physics.YangMills.BalabanBooleanFourCubeWalshMobiusSeparationExact
 import DASHI.Physics.YangMills.BalabanCMP109WalshCharacterOrbitCancellationExact
 import DASHI.Physics.YangMills.BalabanCMP109WalshFourOrbitFactorizationExact
