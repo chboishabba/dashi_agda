@@ -54,10 +54,12 @@ open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; tra
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
-import DASHI.Physics.Closure.NSTriadKNComplex3FieldAlgebra as Field
 import DASHI.Physics.Closure.NSTriadKNComplex3AlgebraLaws as Algebra
 import DASHI.Physics.Closure.NSTriadKNComplexCommutativeRingExact as CRing
+import DASHI.Physics.Closure.NSTriadKNComplex3HermitianScalingLaws as Scaling
+import DASHI.Physics.Closure.NSTriadKNComplex3HermitianAdditiveLaws as Additive
 import DASHI.Physics.Closure.NSTriadKNComplex3RealityPhaseAudit as Audit
+import DASHI.Physics.Closure.NSTriadKNLerayOutputTransversalityRound30Exact as LerayOut
 import DASHI.Physics.Closure.NSTriadKNPhysicalTransportCoefficientSkewRound40Exact as Transport
 import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Galerkin
 import DASHI.Physics.Closure.NSTriadKNLiteralAdvectivePressureRHSSplitRound84Exact as AP
@@ -196,20 +198,23 @@ pressureModeDivergence :
     (system : Galerkin.FiniteComplex3GalerkinSystem F E I)
     (mode : Z3.FourierMode) →
   C3.complexMultiply
-    (C3.complexNegate (C3.complexI F))
+    (Potential.minusI F)
     (Transport.modeDot E mode (AP.pressureNonlinearity system mode))
   ≡ C3.complexNegate
       (Poisson.pressurePoissonSourceCoefficient system mode)
 pressureModeDivergence {F = F} {E = E} {I = I} system mode =
   let
     pHat = Potential.pressurePotential system mode
-    norm = C3.normSquared I mode
+    mI = Potential.minusI F
+    normC = C3.realEmbed F (C3.normSquared I mode)
     source = Poisson.pressurePoissonSourceCoefficient system mode
-  in
-  trans
-    (cong
-      (C3.complexMultiply (C3.complexNegate (C3.complexI F)))
-      (trans
+
+    modeDotPressure :
+      Transport.modeDot E mode (AP.pressureNonlinearity system mode)
+      ≡ C3.complexMultiply
+          (C3.complexMultiply mI pHat) normC
+    modeDotPressure =
+      trans
         (cong
           (Transport.modeDot E mode)
           (Potential.pressureNonlinearityIsNegativeGradientOfPotential
@@ -219,21 +224,48 @@ pressureModeDivergence {F = F} {E = E} {I = I} system mode =
             (C3.modeVector E mode)
             (Potential.negativeGradient E mode pHat))
           (trans
-            (DASHI.Physics.Closure.NSTriadKNComplex3HermitianScalingLaws.bilinearDot3ScaleRight
-              (C3.complexMultiply (Potential.minusI F) pHat)
+            (Scaling.bilinearDot3ScaleRight
+              (C3.complexMultiply mI pHat)
               (C3.modeVector E mode)
               (C3.modeVector E mode))
             (cong
-              (C3.complexMultiply
-                (C3.complexMultiply (Potential.minusI F) pHat))
-              (DASHI.Physics.Closure.NSTriadKNLerayOutputTransversalityRound30Exact.modeSelfDotIsEmbeddedNormSquared
-                E I mode))))))
-    (C.solve 3
-      (λ i p n →
-        ((C.⊝ i) C.⊗ (((C.⊝ i) C.⊗ p) C.⊗ n))
-        C.⊜ (C.⊝ (p C.⊗ n)))
-      refl
-      (C3.complexI F) pHat (C3.realEmbed F norm))
+              (C3.complexMultiply (C3.complexMultiply mI pHat))
+              (LerayOut.modeSelfDotIsEmbeddedNormSquared E I mode))))
+
+    regroup :
+      C3.complexMultiply mI
+        (C3.complexMultiply (C3.complexMultiply mI pHat) normC)
+      ≡ C3.complexMultiply
+          (C3.complexMultiply mI mI)
+          (C3.complexMultiply pHat normC)
+    regroup =
+      C.solve 4
+        (λ m p n dummy →
+          (m C.⊗ ((m C.⊗ p) C.⊗ n))
+          C.⊜ ((m C.⊗ m) C.⊗ (p C.⊗ n)))
+        refl mI pHat normC (C3.complexOne F)
+
+    sourceNegated :
+      C3.complexMultiply
+        (C3.complexNegate (C3.complexOne F))
+        (C3.complexMultiply pHat normC)
+      ≡ C3.complexNegate source
+    sourceNegated =
+      trans
+        (Additive.complexMultiplyMinusOneLeft
+          (C3.complexMultiply pHat normC))
+        refl
+  in
+  trans
+    (cong (C3.complexMultiply mI) modeDotPressure)
+    (trans
+      regroup
+      (trans
+        (cong
+          (λ square →
+            C3.complexMultiply square (C3.complexMultiply pHat normC))
+          (Potential.minusISquared F))
+        sourceNegated))
   where
   module C = CRing.Solver F
 
