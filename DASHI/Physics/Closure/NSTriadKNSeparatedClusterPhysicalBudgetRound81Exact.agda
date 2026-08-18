@@ -55,12 +55,12 @@ sylvesterForcingEnergyMatchesPhysical datum =
       Syl.square a
         + Syl.square (Syl.forcingB (Syl.sylvester (separatedSylvester datum)))
       ≡ Force.totalSquareEnergy (physicalForcing datum))
-    (forcingAMatchesPhysical datum)
+    (sym (forcingAMatchesPhysical datum))
     (subst
       (λ b →
         Syl.square (Force.totalA (physicalForcing datum)) + Syl.square b
         ≡ Force.totalSquareEnergy (physicalForcing datum))
-      (forcingBMatchesPhysical datum)
+      (sym (forcingBMatchesPhysical datum))
       refl)
 
 separatedClusterProjectorRatePhysicalBudget :
