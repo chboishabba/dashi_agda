@@ -43,18 +43,17 @@ module DASHI.Physics.YangMills.BalabanSelectedCombinedConstraintGramBlockSchurEx
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Data.Rational.Base using (ℚ; _+_)
-open import Relation.Binary.PropositionalEquality using (trans)
+open import Data.Rational.Base using (ℚ; _+_; _*_)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanFiniteRectangularRationalExact as Rect
 import DASHI.Physics.YangMills.BalabanP33FiniteKKTAdmissibleProjectorExact as StateCarrier
+import DASHI.Physics.YangMills.BalabanP33PhysicalFlatGaugeDivergenceIdentificationExact as FlatGauge
 import DASHI.Physics.YangMills.BalabanP33PhysicalRationalWilsonPlaquetteJetExact as Physical
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundBlockAverageConstraintMatrixExact as Average
 import DASHI.Physics.YangMills.BalabanSelectedBlockAverageSectionExact as AverageSection
-import DASHI.Physics.YangMills.BalabanSelectedBackgroundGaugeConstraintMatrixExact as GaugeMatrix
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundCombinedConstraintMatrixExact as Combined
-import DASHI.Physics.YangMills.BalabanSelectedCombinedConstraintRowCarrierExact as Rows
 import DASHI.Physics.YangMills.BalabanSelectedCombinedConstraintFiniteKKTExact as KKT
 import DASHI.Physics.YangMills.BalabanSelectedCombinedMultiplierSplitExact as Split
 import DASHI.Physics.YangMills.BalabanSelectedReducedCombinedConstraintFloorExact as Floor
@@ -81,7 +80,7 @@ averageGaugeCross background selected =
 
 gaugeAverageCross :
   Physical.RationalSU2Background4 → ReducedMultiplier →
-  DASHI.Physics.YangMills.BalabanP33PhysicalFlatGaugeDivergenceIdentificationExact.GaugeCoordinate4 → ℚ
+  FlatGauge.GaugeCoordinate4 → ℚ
 gaugeAverageCross background selected =
   GaugeOperator.backgroundGaugeConstraintApply background
     (Floor.averageAdjoint selected)
