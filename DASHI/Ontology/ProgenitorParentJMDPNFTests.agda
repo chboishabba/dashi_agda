@@ -8,6 +8,7 @@ import DASHI.Core.FibreRestrictionCore as Fibre
 open import DASHI.Ontology.ProgenitorParentHyperfabric
 open import DASHI.Ontology.ProgenitorParentProjectionFibre
 open import DASHI.Ontology.LeanWikidataParentingPullbackBridge
+open import DASHI.Ontology.LeanWikidataParentingCardinalityBoundary
 open import DASHI.Ontology.LeanWikidataPullbackTopologyBoundary
 open import DASHI.Ontology.ProgenitorParentPNFPullbackLattice
 open import DASHI.Ontology.ProgenitorParentPredicateBaseChange
@@ -26,6 +27,14 @@ jmdFlatRoleLossRegression :
   × genealogicalParent (refineJMDRole jmdDonor) ≡ false
   × genealogicalParent (refineJMDRole jmdAdoptive) ≡ true
 jmdFlatRoleLossRegression = jmdRecordedParentProjectionIsLossy
+
+jmdCapIsNotExactTwoRegression :
+  capMeansExactlyTwo canonicalJMDGeneticCardinalityBoundary ≡ false
+jmdCapIsNotExactTwoRegression = jmdCapDoesNotMeanExactlyTwo
+
+jmdCapDoesNotSelectProfileRegression :
+  capDeterminesReproductiveProfile canonicalJMDGeneticCardinalityBoundary ≡ false
+jmdCapDoesNotSelectProfileRegression = jmdCapDoesNotDetermineReproductiveProfile
 
 parentFibreRestrictionRegression :
   Fibre.doesNotRecoverCarrier parentFibreRestrictionCore ≡ true
