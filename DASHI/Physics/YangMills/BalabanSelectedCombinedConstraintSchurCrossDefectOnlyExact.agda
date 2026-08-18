@@ -43,6 +43,7 @@ open import Relation.Binary.PropositionalEquality using (cong; trans)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanFiniteRectangularRationalExact as Rect
 import DASHI.Physics.YangMills.BalabanP33FiniteKKTAdmissibleProjectorExact as StateCarrier
+import DASHI.Physics.YangMills.BalabanP33PhysicalRationalWilsonPlaquetteJetExact as Physical
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundBlockAverageConstraintMatrixExact as Average
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundGaugeAdjointDefectExact as Defect
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundGaugeReducedFloorExact as GaugeReduced
@@ -56,7 +57,7 @@ ReducedMultiplier : Set
 ReducedMultiplier = Split.SelectedReducedCombinedMultiplier
 
 averageGaugeDefectCross :
-  ∀ {background : DASHI.Physics.YangMills.BalabanP33PhysicalRationalWilsonPlaquetteJetExact.RationalSU2Background4} →
+  ∀ {background : Physical.RationalSU2Background4} →
   ReducedMultiplier → Average.SelectedBlockAverageRow4 → ℚ
 averageGaugeDefectCross {background} selected =
   Average.selectedBackgroundBlockAverageConstraintApply
