@@ -7,6 +7,8 @@ import DASHI.Core.ProvenanceFibreDynamicsReceiptExact
 import DASHI.Core.ObserverRefinementFutureSafetyExact
 import DASHI.Core.ObserverFactorizedRefinementExact
 import DASHI.Core.RecoverableObserverRefinementTowerExact
+import DASHI.Core.PolicyObserverFactorizationNaturalityExact
+import DASHI.Core.PolicyNaturalityDynamicSafetyBoundaryRegression
 import DASHI.Core.IndexedObserverFamilyBridgeExact
 import DASHI.Core.ConsumerTransportObserverFamilyCrossPollinationExact
 import DASHI.Core.C3OrbitFibreDynamicsReceiptExact
