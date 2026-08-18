@@ -7,8 +7,9 @@ module DASHI.Ontology.WikidataHigherOrderFictionContextExact where
 -- order of its instances: its instances are first-order classes.  That is an
 -- order-of-predication coordinate.  It does not by itself answer whether the
 -- class is editorially about fiction, exists only inside a fictional world,
--- is an ordinary real-world modelling class, or is even applicable at the
--- current inspection level.
+-- has member-classes whose instances are fictional individuals, is an ordinary
+-- real-world modelling class, or is even applicable at the current inspection
+-- level.
 --
 -- This module keeps those coordinates orthogonal.  The phrase
 -- "fictional second-order class" is therefore represented as a lossy public
@@ -34,6 +35,7 @@ data NarrativeDomain : Set where
   ordinaryModellingDomain : NarrativeDomain
   editoriallyAboutFiction : NarrativeDomain
   inWorldFictionalDomain : NarrativeDomain
+  memberClassesClassifyFictionalIndividuals : NarrativeDomain
   unspecifiedNarrativeDomain : NarrativeDomain
 
 record HigherOrderClassState : Set where
@@ -48,9 +50,11 @@ record HigherOrderClassState : Set where
 open HigherOrderClassState public
 
 ------------------------------------------------------------------------
--- Two semantically distinct fine states can occupy the same public label/order.
+-- Three distinct readings can occupy the same public label/order.
 ------------------------------------------------------------------------
 
+-- Reading 1: a real editorial/metamodel class whose members are classes used
+-- to organise fiction.
 editorialSecondOrderState : HigherOrderClassState
 editorialSecondOrderState =
   higherOrderClassState
@@ -60,6 +64,9 @@ editorialSecondOrderState =
     Level.applicableHere
     "editorial/metamodel classification about fictional first-order classes"
 
+-- Reading 2: a second-order class interpreted as existing within a fictional
+-- world.  This is deliberately a countermodel carrier, not a claim that the
+-- live Wikidata item has this semantics.
 inWorldSecondOrderState : HigherOrderClassState
 inWorldSecondOrderState =
   higherOrderClassState
@@ -69,17 +76,45 @@ inWorldSecondOrderState =
     Level.outsideCurrentComparisonScope
     "countermodel: second-order classification interpreted inside a fictional world"
 
-samePublicLabel :
+-- Reading 3: an ordinary modelling class of classes, where the member classes
+-- themselves classify fictional individuals.  This differs from saying that
+-- the metaclass itself is an in-world fictional entity.
+memberClassSecondOrderState : HigherOrderClassState
+memberClassSecondOrderState =
+  higherOrderClassState
+    "fictional second-order class"
+    secondOrder
+    memberClassesClassifyFictionalIndividuals
+    Level.applicableHere
+    "class of classes whose instances are fictional individuals"
+
+samePublicLabelEditorialInWorld :
   publicLabel editorialSecondOrderState ≡ publicLabel inWorldSecondOrderState
-samePublicLabel = refl
+samePublicLabelEditorialInWorld = refl
 
-sameClassOrder :
+samePublicLabelEditorialMemberClass :
+  publicLabel editorialSecondOrderState ≡ publicLabel memberClassSecondOrderState
+samePublicLabelEditorialMemberClass = refl
+
+sameClassOrderEditorialInWorld :
   classOrder editorialSecondOrderState ≡ classOrder inWorldSecondOrderState
-sameClassOrder = refl
+sameClassOrderEditorialInWorld = refl
 
-narrativeDomainsDiffer :
+sameClassOrderEditorialMemberClass :
+  classOrder editorialSecondOrderState ≡ classOrder memberClassSecondOrderState
+sameClassOrderEditorialMemberClass = refl
+
+editorialDiffersFromInWorld :
   editoriallyAboutFiction ≡ inWorldFictionalDomain → ⊥
-narrativeDomainsDiffer ()
+editorialDiffersFromInWorld ()
+
+editorialDiffersFromMemberClassSemantics :
+  editoriallyAboutFiction ≡ memberClassesClassifyFictionalIndividuals → ⊥
+editorialDiffersFromMemberClassSemantics ()
+
+inWorldDiffersFromMemberClassSemantics :
+  inWorldFictionalDomain ≡ memberClassesClassifyFictionalIndividuals → ⊥
+inWorldDiffersFromMemberClassSemantics ()
 
 applicabilityDiffers :
   Level.applicableHere ≡ Level.outsideCurrentComparisonScope → ⊥
@@ -105,11 +140,11 @@ open OrderOnlyNarrativeDecoder public
 classOrderCannotDetermineNarrativeDomain :
   OrderOnlyNarrativeDecoder → ⊥
 classOrderCannotDetermineNarrativeDomain decoder =
-  narrativeDomainsDiffer
+  editorialDiffersFromInWorld
     (trans
       (sym (editorialCorrect decoder))
       (trans
-        (cong (decodeNarrativeFromOrder decoder) sameClassOrder)
+        (cong (decodeNarrativeFromOrder decoder) sameClassOrderEditorialInWorld)
         (inWorldCorrect decoder)))
 
 record LabelOnlyNarrativeDecoder : Set where
@@ -128,11 +163,11 @@ open LabelOnlyNarrativeDecoder public
 publicLabelCannotDetermineNarrativeDomain :
   LabelOnlyNarrativeDecoder → ⊥
 publicLabelCannotDetermineNarrativeDomain decoder =
-  narrativeDomainsDiffer
+  editorialDiffersFromInWorld
     (trans
       (sym (editorialLabelCorrect decoder))
       (trans
-        (cong (decodeNarrativeFromLabel decoder) samePublicLabel)
+        (cong (decodeNarrativeFromLabel decoder) samePublicLabelEditorialInWorld)
         (inWorldLabelCorrect decoder)))
 
 ------------------------------------------------------------------------
@@ -158,6 +193,10 @@ inWorldDecisionRequiresRechart :
   inspectionDecision inWorldSecondOrderState ≡ rechartBeforeDecision
 inWorldDecisionRequiresRechart = refl
 
+memberClassDecisionHere :
+  inspectionDecision memberClassSecondOrderState ≡ decideAtThisLevel
+memberClassDecisionHere = refl
+
 inspectionDecisionsDiffer :
   decideAtThisLevel ≡ rechartBeforeDecision → ⊥
 inspectionDecisionsDiffer ()
@@ -182,11 +221,33 @@ inspectionDecisionNotFactorableThroughClassOrder decoder =
     (trans
       (sym (editorialDecisionCorrect decoder))
       (trans
-        (cong (decodeDecisionFromOrder decoder) sameClassOrder)
+        (cong (decodeDecisionFromOrder decoder) sameClassOrderEditorialInWorld)
         (inWorldDecisionCorrect decoder)))
 
 ------------------------------------------------------------------------
--- Boundary: order, fiction, and applicability must not collapse.
+-- Live Wikidata calibration surface, kept distinct from theorem semantics.
+------------------------------------------------------------------------
+
+record WikidataFictionCalibration : Set where
+  constructor wikidataFictionCalibration
+  field
+    fictionalProfessionQid : String
+    fictionalProfessionHasFictionalMetaclass : Bool
+    fictionalProfessionHasFictionalSecondOrderClass : Bool
+    fictionalSecondOrderClassQid : String
+    calibrationDate : String
+
+canonicalWikidataFictionCalibration : WikidataFictionCalibration
+canonicalWikidataFictionCalibration =
+  wikidataFictionCalibration
+    "Q17305127"
+    true
+    true
+    "Q126371087"
+    "2026-08-19"
+
+------------------------------------------------------------------------
+-- Boundary: order, fiction, member-domain, and applicability must not collapse.
 ------------------------------------------------------------------------
 
 record HigherOrderFictionBoundary : Set where
@@ -195,6 +256,8 @@ record HigherOrderFictionBoundary : Set where
     secondOrderMeansFictional : Bool
     fictionalMeansSecondOrder : Bool
     editorialAboutFictionMeansInWorldFictional : Bool
+    editorialAboutFictionMeansMemberClassesFictional : Bool
+    memberClassesFictionalMeansMetaclassInWorldFictional : Bool
     sameLabelMeansSameNarrativeDomain : Bool
     sameOrderMeansSameApplicability : Bool
     noTypedMeetMeansGloballyFalse : Bool
@@ -202,4 +265,4 @@ record HigherOrderFictionBoundary : Set where
 
 canonicalHigherOrderFictionBoundary : HigherOrderFictionBoundary
 canonicalHigherOrderFictionBoundary =
-  higherOrderFictionBoundary false false false false false false true
+  higherOrderFictionBoundary false false false false false false false false true
