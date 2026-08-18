@@ -1,7 +1,8 @@
 module DASHI.Moonshine.MarkedOldspaceGeometricOggFrontierEverything where
 
 ------------------------------------------------------------------------
--- Focused frontier root after the p11/p37/p43 marked-Hecke tranches.
+-- Focused frontier root after the p11/p13/p37/p43 marked-Hecke/Frobenius
+-- tranches.
 --
 -- OLDSPACE / LOCAL-REALIZATION SIDE
 --   one common Old3 coordinate module realizes both:
@@ -29,12 +30,16 @@ module DASHI.Moonshine.MarkedOldspaceGeometricOggFrontierEverything where
 --   assumption: all-prime Hecke blindness on a fine fibre requires only a
 --   source-native equivariant quotient q T_marked = T_global q plus a
 --   nontrivial q-fibre.  A literal Global x Deck product is sufficient but not
---   necessary.  This narrows future same-object work to the commuting quotient
---   square actually consumed by the observer theorem.
+--   necessary.
+--
+--   AuxiliaryLevelHeckeFactorizationAuthorityExact supplies the converse
+--   guard: even pointwise all-prime global blindness does NOT authorize deck
+--   preservation/product factorization.  A finite counterexample has identical
+--   global Hecke readouts while the actual Hecke action flips the deck.
 --
 --   Remaining seam: construct the actual 2-adic local comparison inside the
 --   same global automorphic representation (equivalently, the source-native
---   Eichler/Jacquet--Langlands fixed-vector comparison), rather than declaring
+--   Eichler/Jacquet-Langlands fixed-vector comparison), rather than declaring
 --   the K(2)-fixed and K_0(4)-fixed models definitionally equal.
 --
 -- OGG SELECTOR SIDE
@@ -47,7 +52,12 @@ module DASHI.Moonshine.MarkedOldspaceGeometricOggFrontierEverything where
 --     * one rational dual-graph vertex and one loop edge per pair;
 --     * arithmetic genus = Frobenius pair count.
 --
---   The global selector therefore requires only TWO source-facing equalities:
+--   p=13 now joins p=11,p=37,p=43 as an independently realized geometric
+--   control: H_13 factors into three irreducible quadratic lambda pairs, all
+--   six full-level-2 points forget to the single rational supersingular class
+--   j=5, and coarse Frobenius is therefore fixed=1, paired=0.
+--
+--   The global selector requires only TWO source-facing equalities:
 --
 --     actual Fricke special fibre
 --       = derived Frobenius-pair nodal model,
@@ -78,6 +88,9 @@ import DASHI.Moonshine.P11Level44SameCoordinateHighestAlphaRegression as SameReg
 import DASHI.Moonshine.P11Level44TwoAdicFixedVectorSeparationExact as Local2
 import DASHI.Moonshine.P11Level44HeckeAlignmentNonUniquenessExact as AlignNoGo
 import DASHI.Moonshine.AuxiliaryLevelHeckeEquivariantQuotientNoGoExact as QuotientNoGo
+import DASHI.Moonshine.AuxiliaryLevelHeckeFactorizationAuthorityExact as FactorAuthority
+import DASHI.Moonshine.P13OggFullLevel2DeuringControlExact as P13
+import DASHI.Moonshine.P13GeometricFrobeniusRealizationExact as P13Geo
 import DASHI.Moonshine.SupersingularFrobeniusFrickeGenusReductionExact as CountReduce
 import DASHI.Moonshine.SupersingularFrobeniusFrickeGenusReductionRegression as CountReg
 import DASHI.Moonshine.RationalNodalSpecialFibreGenusExact as Nodal
@@ -134,6 +147,32 @@ equivariantQuotientAllPrimeBlindnessRegression :
     QuotientNoGo.canonicalEquivariantQuotientNoGoBoundary ≡ true
 equivariantQuotientAllPrimeBlindnessRegression = refl
 
+allPrimeBlindnessCannotAuthorizeProductRegression :
+  FactorAuthority.BlindnessToFactorizationPromoter → ⊥
+allPrimeBlindnessCannotAuthorizeProductRegression =
+  FactorAuthority.allPrimeBlindnessCannotAuthorizeFactorization
+
+------------------------------------------------------------------------
+-- Independent p=13 Deuring/Frobenius control.
+------------------------------------------------------------------------
+
+p13MarkedThreePairRegression : P13.p13MarkedPairCount ≡ 3
+p13MarkedThreePairRegression = refl
+
+p13CoarsePairDefectZeroRegression : P13.p13CoarsePairCount ≡ 0
+p13CoarsePairDefectZeroRegression = P13.p13CoarsePairCountIsZero
+
+p13EachFactorMapsToJFiveRegression :
+  (q : P13.P13QuadraticFactor) →
+  P13.jNumeratorRemainder q
+  ≡ P13.fiveTimesDenominatorRemainderMod13 q
+p13EachFactorMapsToJFiveRegression = P13.p13EachQuadraticHasJFive
+
+p13GeometricNormalFormRegression :
+  P13Geo.p13PairedOrbitDefectIsZero
+  ≡ P13Geo.p13PairedOrbitDefectIsZero
+p13GeometricNormalFormRegression = refl
+
 countReductionRegression :
   (D : CountReduce.SupersingularFrickeCountData) →
   CountReduce.frobeniusPairDefect D ≡ CountReduce.genusX0Plus D
@@ -163,7 +202,7 @@ finiteOggTableNotUsedInGeometricFixedSelectorRegression :
 finiteOggTableNotUsedInGeometricFixedSelectorRegression = refl
 
 ------------------------------------------------------------------------
--- New Deligne--Rapoport quotient-node regressions.
+-- Deligne--Rapoport quotient-node regressions.
 ------------------------------------------------------------------------
 
 p37DerivedNodalGenusRegression :
