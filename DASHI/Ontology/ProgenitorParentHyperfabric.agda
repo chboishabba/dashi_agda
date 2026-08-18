@@ -28,6 +28,7 @@ open import Agda.Builtin.String using (String)
 -- eLife 9:e52976 (2020), DOI 10.7554/eLife.52976.
 ------------------------------------------------------------------------
 
+infixr 4 _×_
 record _×_ (A B : Set) : Set where
   constructor _,_
   field fst : A
@@ -75,45 +76,64 @@ polyspermyDOIExact :
 polyspermyDOIExact = refl
 
 ------------------------------------------------------------------------
--- Arbitrary-arity generative carrier.
+-- Generative carrier.
+-- A progenitor is an immediate lineage-bearing predecessor/contributor.
+-- Mere causal/material inputs are represented separately and do not become
+-- progenitors just by participating in the production process.
 ------------------------------------------------------------------------
 
 data NodeLevel : Set where
   individualLevel lineageLevel : NodeLevel
 
-data ContributionKind : Set where
-  lineageBearing gametic nuclear mitochondrial gestational : ContributionKind
+data ProgenitorMode : Set where
+  genericLineage gametic nuclear mitochondrial : ProgenitorMode
 
 data ReproductiveProfile : Set where
   unrestrictedProfile ordinaryBiparentalNuclearProfile : ReproductiveProfile
 
-record Contribution : Set where
-  constructor contribution
+record ProgenitorContribution : Set where
+  constructor progenitorContribution
   field
-    contributor : String
-    contributionKind : ContributionKind
-open Contribution public
+    progenitorEntity : String
+    progenitorMode : ProgenitorMode
+open ProgenitorContribution public
+
+record CausalInput : Set where
+  constructor causalInput
+  field
+    inputEntity : String
+    participatesCausally : Bool
+    lineageBearing : Bool
+open CausalInput public
+
+incubatorInput : CausalInput
+incubatorInput = causalInput "incubator" true false
+
+causalInputDoesNotImplyProgenitor :
+  participatesCausally incubatorInput ≡ true
+  × lineageBearing incubatorInput ≡ false
+causalInputDoesNotImplyProgenitor = refl , refl
 
 record GenerationEvent : Set where
   constructor generationEvent
   field
     generatedEntity : String
     generatedLevel : NodeLevel
-    contributors : List Contribution
+    progenitors : List ProgenitorContribution
     reproductiveProfile : ReproductiveProfile
 open GenerationEvent public
 
 progenitorCount : GenerationEvent → Nat
-progenitorCount event = listCount (contributors event)
+progenitorCount event = listCount (progenitors event)
 
 triparentalPlantGeneration : GenerationEvent
 triparentalPlantGeneration =
   generationEvent
     "triparental Arabidopsis plant"
     individualLevel
-    ( contribution "maternal plant" gametic
-    ∷ contribution "paternal plant A" gametic
-    ∷ contribution "paternal plant B" gametic
+    ( progenitorContribution "maternal plant" gametic
+    ∷ progenitorContribution "paternal plant A" gametic
+    ∷ progenitorContribution "paternal plant B" gametic
     ∷ [] )
     unrestrictedProfile
 
@@ -276,7 +296,8 @@ p1531AndP8810ShareProgenitorCarrier :
 p1531AndP8810ShareProgenitorCarrier = refl , refl
 
 ------------------------------------------------------------------------
--- Ethical/epistemic boundary.
+-- Ethical/epistemic boundary: causal origin is not silently promoted to social
+-- identity; privacy/disclosure is independent from factual provenance.
 ------------------------------------------------------------------------
 
 record ParentOntologyBoundary : Set where
