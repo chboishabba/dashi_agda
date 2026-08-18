@@ -4,45 +4,33 @@ module DASHI.Moonshine.MarkedHeckeDeckCollisionEverything where
 -- Focused aggregate for marked-Hecke / deck-observer collision and selector
 -- cutset work.
 --
--- p=11:
---   direct E(F_7) point count
---     -> a_7 = -2
---     -> direct quaternion marked norm-seven theta loops
---     -> positive marked T7 orbital correspondence
---     -> Brandt-newform / deck-standard collision survives T7
---     -> level-44 oldspace fingerprint
---     -> literal integral three-copy permutation basis in the marked carrier
---     -> one Z-linear realization intertwines deck S3 and T3/T5/T7.
+-- p=11 now has BOTH sides of the level-44 oldspace comparison:
+--
+-- MARKED / quaternion side
+--   direct a7 + quaternion theta -> marked T7 collision;
+--   integral v1,v2,v4 permutation basis;
+--   one Z-linear Old3 realization intertwines deck S3 and T3/T5/T7.
+--
+-- ANALYTIC / q-series side
+--   exact coefficient degeneracy laws;
+--   generic T_l V_d = V_d T_l for gcd(d,l)=1, including off-support terms;
+--   generic transport of a good-prime eigencharacter to d=1,2,4 copies.
+--
+-- Therefore further prime probing is no longer the p=11 frontier.  The sole
+-- oldspace seam is the same-object Eichler/Jacquet-Langlands comparison between
+-- the analytic degeneracy-copy realization of Old3 and the marked realization.
 --
 -- p=37:
---   actual 18-root Legendre T3/T5/F carrier
---     -> source-native 3 x regular-S3 orbital presentation
---     -> complete right-deck isotypic decomposition 3 + 3 + 12
---     -> explicit trivial/sign 3x3 blocks and standard 6x6 multiplicity block
---     -> structural trivial-vs-standard collision at (T3,T5,F)=(1,0,+1)
---     -> exact T3 annihilator and theorem-level T5(T3), F(T3) polynomials
---     -> deck type repairs the scalar observation.
+--   actual 18-root Legendre T3/T5/F carrier;
+--   complete right-deck isotypic decomposition 3 + 3 + 12;
+--   structural trivial-vs-standard scalar collision;
+--   exact standard-block T3 annihilator and theorem-level T5(T3), F(T3)
+--   polynomial identities.
 --
--- p=43:
---   independent Deuring/full-level-2 control with nontrivial stabilizer
---     -> 21 marked points = 3 fixed + 9 Frobenius pairs
---     -> four coarse j classes = 2 fixed + 1 pair
---     -> explicit normal-form realization of the SAME coarse defect=1 that the
---        finite Fricke/class-number spectrum predicts.
---
--- Cross-prime selector cutset:
---   scalar Hecke/Frobenius blindness to deck type occurs at BOTH p=11 and the
---   non-Ogg control p=37, so deck refinement is representation-relevant but is
---   not itself an Ogg selector.  The first currently surviving selector
---   coordinate is the COARSE geometric Frobenius paired-orbit defect:
---
---       p11 = 0, p37 = 1, p43 = 1.
---
--- The remaining p=11 global producer is no longer "try another prime": it is
--- the same-object identification of the actual marked three-copy permutation
--- module with the analytic level-11 oldspace inside level 44.  The finite map
--- on the marked side is now constructed and carries both deck and Hecke
--- commuting squares.
+-- p=43 supplies a second independent non-Ogg geometric Frobenius control.
+-- Coarse geometric Frobenius pair defect remains the first current Ogg/control
+-- separator: p11=0, p37=1, p43=1.  Its all-prime geometric theorem remains a
+-- distinct frontier from the level-44 oldspace comparison.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -57,15 +45,16 @@ import DASHI.Moonshine.P11Ell7PointCountBrandtTraceExact as Trace7
 import DASHI.Moonshine.P11MarkedLevel44OldspaceWeldExact as P11Old
 import DASHI.Moonshine.P11MarkedLevel44PermutationOldspaceExact as P11PermOld
 import DASHI.Moonshine.P11MarkedLevel44PermutationIntertwinerExact as P11OldInt
+import DASHI.Moonshine.FormalQSeriesOldformDegeneracyHeckeExact as QDeg
+import DASHI.Moonshine.FormalQSeriesOldformEigencharacterTransportExact as QEig
+import DASHI.Moonshine.P11Level44OldspaceSameObjectCutsetExact as OldCutset
 import DASHI.Moonshine.P37NonOggFullLevel2DeuringControlExact as P37
 import DASHI.Moonshine.P37MarkedX2JointFingerprintDeckCollisionExact as P37Collision
 import DASHI.Moonshine.P37MarkedDeckIsotypicJointDecompositionExact as P37Iso
 import DASHI.Moonshine.P37MarkedDeckIsotypicPolynomialExact as P37Poly
 import DASHI.Moonshine.P37MarkedDeckIsotypicCollisionExact as P37IsoCollision
 import DASHI.Moonshine.P43NonOggFullLevel2DeuringControlExact as P43
-import DASHI.Moonshine.P43GeometricFrobeniusRealizationExact as P43Geo
 import DASHI.Moonshine.P11P37MarkedDeckSelectorCutsetExact as SelectorCutset
-import DASHI.Moonshine.P37MarkedDeckIsotypicHighestAlphaRegression as P37Regression
 import DASHI.Moonshine.AuxiliaryLevelHeckeDeckFactorizationExact as Aux
 import DASHI.Moonshine.AuxiliaryLevelHeckeObserverNoGoExact as ObserverNoGo
 
@@ -89,14 +78,8 @@ p11T7CollisionRegression :
   T7.brandt357FFingerprint ≡ T7.standard357FFingerprint
 p11T7CollisionRegression = T7.brandtAndStandardStillCollideAtT7
 
-p11ThetaCriterionEll7Regression :
-  Criterion.DifferenceEquivalent
-    (Criterion.standardDeckDifference Theta7.j1728MarkedT7LoopCount 2)
-    (Criterion.coarseNonconstantDifference 8 2)
-p11ThetaCriterionEll7Regression = Criterion.ell7DeckBrandtDifferenceCollision
-
 ------------------------------------------------------------------------
--- p=11 level-44 permutation oldspace: actual deck + Hecke commuting maps.
+-- p=11 marked permutation oldspace: actual deck + Hecke commuting maps.
 ------------------------------------------------------------------------
 
 p11OldPermutationDeckRRegression :
@@ -110,6 +93,26 @@ p11OldModuleT7IntertwinerRegression :
   T7.markedT7Action (P11OldInt.realizeOld3 v)
   ≡ P11OldInt.realizeOld3 (P11OldInt.scaleOld3 (-[1+ 1 ]) v)
 p11OldModuleT7IntertwinerRegression = P11OldInt.realizeT7
+
+------------------------------------------------------------------------
+-- p=11 analytic oldspace: generic coefficient/eigencharacter theorem surfaces.
+------------------------------------------------------------------------
+
+p11AnalyticGoodPrimeCommutationRegression :
+  (d ell : Nat) →
+  Data.Nat.Coprimality.Coprime d ell →
+  (a b Ta Tb : QDeg.FormalQSeries) →
+  QDeg.DegeneracyCoefficientLaw d a b →
+  QDeg.Weight2PrimeHeckeCoefficientLaw ell a Ta →
+  QDeg.Weight2PrimeHeckeCoefficientLaw ell b Tb →
+  QDeg.DegeneracyCoefficientLaw d Ta Tb
+p11AnalyticGoodPrimeCommutationRegression =
+  QDeg.oldformDegeneracyCommutesWithGoodPrime
+
+p11NoMorePrimeProbeBoundary :
+  OldCutset.morePrimeProbesRequiredBeforeComparison
+    OldCutset.canonicalP11Level44OldspaceSameObjectCutsetBoundary ≡ false
+p11NoMorePrimeProbeBoundary = refl
 
 ------------------------------------------------------------------------
 -- p37 witness-level collision remains intact.
@@ -145,6 +148,12 @@ p37StandardT5PolynomialRegression :
   P37Poly.scaleStd (34 / 1) (P37Iso.standardT5 x)
   ≡ P37Poly.t5Polynomial x
 p37StandardT5PolynomialRegression = P37Poly.standardT5PolynomialExact
+
+p37StandardFPolynomialRegression :
+  (x : P37Iso.StdBlock3) →
+  P37Poly.scaleStd (34 / 1) (P37Iso.standardF x)
+  ≡ P37Poly.frobeniusPolynomial x
+p37StandardFPolynomialRegression = P37Poly.standardFrobeniusPolynomialExact
 
 p37StandardT3AnnihilatorRegression :
   (x : P37Iso.StdBlock3) →
@@ -189,7 +198,8 @@ p11P43FrobeniusDefectSelectorRegression =
   SelectorCutset.coarseFrobeniusPairDefectSeparates11And43
 
 ------------------------------------------------------------------------
--- Product-factorization remains a boundary, not a false p37 identification.
+-- Product-factorization remains a sufficient generic no-go, not an imposed
+-- same-object description of either arithmetic carrier.
 ------------------------------------------------------------------------
 
 auxiliaryLevelBoundaryRegression :
