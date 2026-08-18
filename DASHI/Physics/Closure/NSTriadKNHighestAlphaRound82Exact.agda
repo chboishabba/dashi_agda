@@ -6,72 +6,70 @@ module DASHI.Physics.Closure.NSTriadKNHighestAlphaRound82Exact where
 -- Round81 solved the abstract cluster Sylvester estimate, reduced the physical
 -- off-block strain forcing, closed the both-small-gap weak-stretching algebra,
 -- and exposed the lossless full L2 pressure-Hessian Fourier multiplier.
--- It also constructed a gap-free bounded smooth strain-alignment observable.
 --
--- Round82 corrects the global C5 choice after repository archaeology.  The
--- executable compact-Gamma lane records that the earlier top-strain alignment
--- potential did not exhibit signed escape on the matched dangerous triad.
--- Hence bounded smooth spectral alignment remains a useful local observer but
--- is not selected as the primary global depletion currency.
+-- Round82 corrects and narrows the global C5 route.  Repository archaeology
+-- records that the earlier smooth top-strain alignment potential did not
+-- produce signed escape on the matched dangerous finite-Galerkin triad.  It
+-- remains a useful gap-free local observer, but it is not the primary global
+-- depletion currency.
 --
--- The primary C5 object is instead source-coupled to dangerous transfer:
+-- The selected bounded global object is instead source-coupled to transfer:
 --
 --   B_K = Q_{K,+} / (Q_{K,+} + 2 nu D_K)
 --       = Gamma_transfer,K / (1 + Gamma_transfer,K).
 --
--- Its exact division-free derivative surface already exists in
--- NSCompactGammaPotentialDerivative.  Round82 proves that a transfer-Gamma
--- danger threshold transports to the corresponding compact level in
--- cross-multiplied form and, more importantly, that the global theorem only
--- needs an integrated deterministic occupation estimate
+-- Round82 now owns all of the NON-INEQUALITY algebra needed to differentiate
+-- this object on the literal finite Fourier carrier:
 --
---   dangerCost * dangerousResidence <= unabsorbed escape margin,
+--   * exact projected-nonlinearity polarization
+--       DN(u)[v] = B(u,v) + B(v,u);
+--   * exact hard-packet transfer product rule
+--       qdot = Re(<v_K,N_K(u)> + <u_K,DN_K(u)[v]>);
+--   * exact hard-packet dissipation product rule
+--       Ddot = Re(<grad v_K,grad u_K> + <grad u_K,grad v_K>);
+--   * literal field-native scales
+--       Q=s_K q, Qdot=s_K qdot, V=(2nu)D, Vdot=(2nu)Ddot;
+--   * exact factorization
+--       Qdot V - Q Vdot = s_K (2nu) (qdot D - q Ddot);
+--   * exact quotient numerator
+--       Bdot (Q+V)^2 = Qdot V - Q Vdot.
 --
--- not pointwise negative Bdot at every dangerous instant.  An exact two-slot
--- countermodel shows pointwise negativity can fail while the integrated
--- occupation payment succeeds.
+-- Thus C4 is no longer a differentiation/construction problem.  Its remaining
+-- content is a physical one-sided/integrated estimate on the SAME literal core
 --
--- The compact-transfer derivative itself now has the exact rational numerator
--- identity
+--       qdot D - q Ddot
 --
---   Bdot (Q + V)^2 = Qdot V - Q Vdot,   V = 2 nu D.
+-- along the selected Navier--Stokes tangent.
 --
--- So the remaining physical drift theorem is a relative-growth estimate on the
--- literal transfer and viscous denominator, not a new spectral derivative.
+-- Homogeneity calibration proves why this cannot come from generic boundedness:
+-- for a pure amplitude tangent, cubic q and quadratic D give qdot=3q,
+-- Ddot=2D, hence qdot D-q Ddot=qD.  Positive q,D then give positive relative
+-- growth.  The actual NS tangent decomposition is essential.
 --
--- A provenance correction is also explicit: the older periodic Route-B files
--- use a different `Gamma`, namely center-shell quantity / packet energy.
--- Packet Gamma cannot determine transfer Gamma; an exact two-state
--- nonfactorization theorem prevents reuse of packet-Gamma coercivity without a
--- same-object bridge.
+-- Global occupation algebra is already closed downstream.  Pointwise negative
+-- Bdot is not required; an integrated danger-occupation payment into the
+-- unabsorbed escape margin suffices.  The existing replenishment core accepts
+-- E=margin+absorbed and R<=absorbed+C, so no single global scalar theta<1 is
+-- required.  The deterministic occupation input is already welded into the
+-- cutoff/shell/state-uniform residence theorem.
 --
--- The resulting deterministic occupation input is welded directly into the
--- repository's pre-existing cutoff/shell/state-uniform compact-Gamma residence
--- theorem.  Moreover the existing replenishment core does not actually require
--- one scalar theta<1: it accepts an arbitrary split E = margin + absorbed and
--- R <= absorbed + C.  Therefore state-/interval-dependent absorption is already
--- supported; the physical theorem only needs a uniform occupation-paying
--- margin and endpoint/remainder control.
+-- Gamma provenance remains explicit: the older periodic Route-B packet Gamma
+-- (center-shell / packet energy) is different from transfer Gamma
+-- (Q_+/(2nuD)); packet Gamma cannot determine transfer Gamma without a bridge.
 --
--- Round82 also removes two overcounts from the old 15-lemma substantive cutset:
+-- Round82 also removes two old cutset overcounts:
 --
---   D: the six-three lane is one source-facing producer.  Once the literal
---      annular row is a FactorizedPhysicalOddPQSource / active
---      PhysicalSixThreeGramCell, existing Round65 theorems give 17/64,
---      65/512 and 133/256 automatically.
+--   D: one literal physical six-three cell/source producer suffices; existing
+--      Round65 theorems then give 17/64, 65/512 and 133/256.
 --
---   G: the actual compact annular symbol, scalar C4 bounds and dyadic L1
---      summation are already proved.  One continuum theorem remains: construct
---      the fourth-order physical kernel shell majorant by matrix chain/product
---      estimates plus literal fourfold inverse-Fourier integration by parts.
+--   G: the actual annular symbol, scalar C4 bounds, amplitude bound and dyadic
+--      L1 summation are already present.  One continuum fourth-order physical
+--      kernel-shell-majorant theorem remains.
 --
--- Thus, without merging any genuinely independent C/F/E obligations, the
--- substantive cutset is at most 13 source-facing lemmas plus the three final
--- composition/limit lemmas.  Clay promotion remains false.
---
--- Foster--Lyapunov and deterministic dissipative-system sources calibrate the
--- drift/occupation architecture only.  No stochastic recurrence theorem is
--- promoted into selected-trajectory Navier--Stokes authority.
+-- The shortest honest source-facing count therefore remains 13 substantive
+-- lemmas + 3 closing composition/limit lemmas.  The new C4 algebra narrows one
+-- of those lemmas but does not falsely count its physical inequality as proved.
+-- Clay promotion remains false.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -80,14 +78,9 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 import DASHI.Physics.Closure.NSTriadKNHighestAlphaRound80Exact as R80
 import DASHI.Physics.Closure.NSTriadKNClusterSylvesterBudgetRound81Exact as Syl
 import DASHI.Physics.Closure.NSTriadKNStrainProjectorForcingRound81Exact as Force
-import DASHI.Physics.Closure.NSTriadKNClusterForcingThreeTermBudgetRound81Exact as Three
-import DASHI.Physics.Closure.NSTriadKNSeparatedClusterPhysicalBudgetRound81Exact as Sep
 import DASHI.Physics.Closure.NSTriadKNSmallSpectrumWeakStretchingRound81Exact as Small
 import DASHI.Physics.Closure.NSTriadKNPressureHessianFourierIsometryRound81Exact as Pressure
-import DASHI.Physics.Closure.NSTriadKNPressureChargeHomogeneityRound81Exact as Homogeneity
-import DASHI.Physics.Closure.NSTriadKNUnsignedProjectorTurnoverNoBudgetRound81Exact as Unsigned
 import DASHI.Physics.Closure.NSTriadKNSmoothSpectralAlignmentPotentialRound81Exact as Smooth
-import DASHI.Physics.Closure.NSTriadKNSoftSpectralWeightDerivativeRound81Exact as Soft
 import DASHI.Physics.Closure.NSTriadKNCompactGammaDangerThresholdRound82Exact as Threshold
 import DASHI.Physics.Closure.NSTriadKNDeterministicDangerOccupationRound82Exact as Occupation
 import DASHI.Physics.Closure.NSTriadKNPointwiseDangerDriftNoGoRound82Exact as Pointwise
@@ -98,6 +91,11 @@ import DASHI.Physics.Closure.NSTriadKNGammaSemanticSeparationRound82Exact as Gam
 import DASHI.Physics.Closure.NSTriadKNStateDependentReplenishmentMarginRound82Exact as StateDependent
 import DASHI.Physics.Closure.NSTriadKNSixThreeSinglePhysicalSeamRound82Exact as SixThree
 import DASHI.Physics.Closure.NSTriadKNAnnularKernelSingleContinuumSeamRound82Exact as Kernel
+import DASHI.Physics.Closure.NSTriadKNCompactTransferPotentialBoundedRound82Exact as Bounded
+import DASHI.Physics.Closure.NSTriadKNProjectedNonlinearityFirstVariationRound82Exact as FirstVariation
+import DASHI.Physics.Closure.NSTriadKNLiteralPacketTransferFirstVariationRound82Exact as PacketVariation
+import DASHI.Physics.Closure.NSTriadKNLiteralCompactTransferDriftDataRound82Exact as LiteralDrift
+import DASHI.Physics.Closure.NSTriadKNCompactTransferHomogeneityCalibrationRound82Exact as Homogeneity
 
 round82ClusterSylvesterCoreConstructed : Bool
 round82ClusterSylvesterCoreConstructed = Syl.round81ClusterSylvesterSquaredBudgetConstructed
@@ -114,19 +112,47 @@ round82PressureHessianModeIsometryConstructed = Pressure.round81PressureHessianF
 round82SmoothSpectralPotentialBounded : Bool
 round82SmoothSpectralPotentialBounded = Smooth.round81SmoothSpectralAlignmentPotentialBoundedZeroOne
 
+round82CompactTransferPotentialBounded : Bool
+round82CompactTransferPotentialBounded = Bounded.round82CompactTransferPotentialBoundedZeroOne
+
 round82CompactDangerLevelTransportConstructed : Bool
 round82CompactDangerLevelTransportConstructed = Threshold.round82DangerThresholdTransportsToCompactLevelDivisionFree
+
+round82LiteralProjectedNonlinearityFirstVariationConstructed : Bool
+round82LiteralProjectedNonlinearityFirstVariationConstructed =
+  FirstVariation.round82LiteralProjectedNonlinearityFirstVariationConstructed
+
+round82LiteralPacketTransferFirstVariationConstructed : Bool
+round82LiteralPacketTransferFirstVariationConstructed =
+  PacketVariation.round82LiteralPacketTransferFirstVariationConstructed
+
+round82LiteralPacketDissipationFirstVariationConstructed : Bool
+round82LiteralPacketDissipationFirstVariationConstructed =
+  PacketVariation.round82LiteralPacketDissipationFirstVariationConstructed
+
+round82LiteralCompactTransferScalarsConstructed : Bool
+round82LiteralCompactTransferScalarsConstructed =
+  LiteralDrift.round82LiteralCompactTransferScalarsConstructed
+
+round82RelativeGrowthPrefactorsFactorExactly : Bool
+round82RelativeGrowthPrefactorsFactorExactly =
+  LiteralDrift.round82RelativeGrowthPrefactorsFactorExactly
 
 round82CompactDriftNumeratorReducedToRelativeGrowth : Bool
 round82CompactDriftNumeratorReducedToRelativeGrowth =
   Drift.round82CompactGammaDriftNumeratorIsRelativeGrowthCompetition
+
+round82HomogeneityAloneForcesNegativeCompactDrift : Bool
+round82HomogeneityAloneForcesNegativeCompactDrift =
+  Homogeneity.round82HomogeneityAloneForcesNegativeCompactDrift
 
 round82PacketGammaCannotDetermineTransferGamma : Bool
 round82PacketGammaCannotDetermineTransferGamma =
   GammaSeparation.round82PacketGammaCannotDetermineTransferGamma
 
 round82IntegratedDangerOccupationReducerConstructed : Bool
-round82IntegratedDangerOccupationReducerConstructed = Occupation.round82IntegratedDangerOccupationReducerConstructed
+round82IntegratedDangerOccupationReducerConstructed =
+  Occupation.round82IntegratedDangerOccupationReducerConstructed
 
 round82UniformDangerOccupationUsesExistingResidenceTheorem : Bool
 round82UniformDangerOccupationUsesExistingResidenceTheorem =
@@ -186,13 +212,21 @@ round82CriticalToSerrinReducerAlreadyPresent =
 round82ClayPromotion : Bool
 round82ClayPromotion = false
 
-round82BothSmallGapsGiveWeakStretchingIsTrue :
-  round82BothSmallGapsGiveWeakStretching ≡ true
-round82BothSmallGapsGiveWeakStretchingIsTrue = refl
+round82LiteralProjectedNonlinearityFirstVariationConstructedIsTrue :
+  round82LiteralProjectedNonlinearityFirstVariationConstructed ≡ true
+round82LiteralProjectedNonlinearityFirstVariationConstructedIsTrue = refl
 
-round82CompactDriftNumeratorReducedToRelativeGrowthIsTrue :
-  round82CompactDriftNumeratorReducedToRelativeGrowth ≡ true
-round82CompactDriftNumeratorReducedToRelativeGrowthIsTrue = refl
+round82LiteralPacketTransferFirstVariationConstructedIsTrue :
+  round82LiteralPacketTransferFirstVariationConstructed ≡ true
+round82LiteralPacketTransferFirstVariationConstructedIsTrue = refl
+
+round82RelativeGrowthPrefactorsFactorExactlyIsTrue :
+  round82RelativeGrowthPrefactorsFactorExactly ≡ true
+round82RelativeGrowthPrefactorsFactorExactlyIsTrue = refl
+
+round82HomogeneityAloneForcesNegativeCompactDriftIsFalse :
+  round82HomogeneityAloneForcesNegativeCompactDrift ≡ false
+round82HomogeneityAloneForcesNegativeCompactDriftIsFalse = refl
 
 round82PacketGammaCannotDetermineTransferGammaIsTrue :
   round82PacketGammaCannotDetermineTransferGamma ≡ true
