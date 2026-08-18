@@ -117,26 +117,32 @@ record SupercriticalSquaredPropagationRow : Set where
     squaredLossMassExact :
       Mass.squaredMass childLossWeights ≡ 1ℚ + excessSquaredMass
 
-open SupercriticalSquaredPropagationRow public
+open SupercriticalSquaredPropagationRow
+  renaming
+    ( parentAmplitude to superParentAmplitude
+    ; childLossWeights to superChildLossWeights
+    ; excessSquaredMass to superExcessSquaredMass
+    ; squaredLossMassExact to superSquaredLossMassExact
+    ) public
 
 supercriticalRowExcessExact :
   (row : SupercriticalSquaredPropagationRow) →
   Mass.squaredMass
     (irregularChildAmplitudes
-      (parentAmplitude row)
-      (childLossWeights row))
+      (superParentAmplitude row)
+      (superChildLossWeights row))
   ≡
-  L2.square (parentAmplitude row)
-  + L2.square (parentAmplitude row) * excessSquaredMass row
+  L2.square (superParentAmplitude row)
+  + L2.square (superParentAmplitude row) * superExcessSquaredMass row
 supercriticalRowExcessExact row =
   trans
     (irregularChildSquaredMassExact
-      (parentAmplitude row) (childLossWeights row))
+      (superParentAmplitude row) (superChildLossWeights row))
     (trans
-      (cong (L2.square (parentAmplitude row) *_)
-        (squaredLossMassExact row))
+      (cong (L2.square (superParentAmplitude row) *_)
+        (superSquaredLossMassExact row))
       (solve
-        (parentAmplitude row ∷ excessSquaredMass row ∷ [])))
+        (superParentAmplitude row ∷ superExcessSquaredMass row ∷ [])))
 
 round74IrregularCriticalInvariantIsSumSquaredLoss : Bool
 round74IrregularCriticalInvariantIsSumSquaredLoss = true
