@@ -1,25 +1,23 @@
 module DASHI.Moonshine.PublishedMonsterFrickeHighestAlphaEverything where
 
 ------------------------------------------------------------------------
--- Focused table-free Monster/Ogg/Fricke root for EVERY prime p.
+-- Focused table-free Monster/Fricke root for EVERY prime p.
 --
--- The final equivalence now has DIRECTIONAL proof provenance:
+-- The primary equivalence now has two distinct modern mechanisms:
 --
 --   FORWARD  p | |M| -> g(X_0^+(p)) = 0
---     uses Conway--Norton / Borcherds monstrous moonshine: a prime-order
---     Monster class has moonshine group Gamma_0(p)^+, whose McKay--Thompson
---     series is a Hauptmodul.
+--     Conway--Norton / Borcherds monstrous moonshine: the relevant prime-order
+--     Monster class has moonshine group Gamma_0(p)^+, hence genus zero.
 --
 --   CONVERSE g(X_0^+(p)) = 0 -> p | |M|
---     still uses the Ogg / Duncan--Ono classification-equivalence route.
+--     Duncan--Swisher Theorem 1.2 (2026): for p>3, Monster p-adic exponent
+--     support is equivalent to emptiness of the non-rational supersingular
+--     locus; the existing Deligne--Rapoport geometry identifies that with zero
+--     Fricke pair defect.  The exceptional primes 2,3 are handled separately.
 --
--- Thus moonshine now explains the PRESENCE of all Monster prime divisors in
--- Ogg's genus-zero set without passing through supersingular rationality.  It
--- does not yet explain why the genus-zero set has no additional primes.
---
--- Prime provenance remains split underneath the arbitrary-prime genus carrier:
---   p = 2,3 use explicit classical low-level Fricke genus-zero authority;
---   p >= 5 uses prime-level Deligne--Rapoport/Fricke special-fibre geometry.
+-- The older Duncan--Ono/Ogg supersingular SUPPORT equivalence is no longer
+-- imported by this primary all-prime proof.  It remains an independent
+-- historical/cross-check route elsewhere in the repository.
 --
 -- No MonsterPrimeLane / SSP15 enumeration and no finite under-72 Fricke table
 -- participates in the arbitrary-prime theorem.
@@ -32,13 +30,15 @@ open import Data.Nat.Primality using (Prime)
 import DASHI.Moonshine.MonsterOrderDivisibilityExact as Monster
 import DASHI.Moonshine.PublishedPrimeLevelFrickeSelectorPinnedExact as Fricke
 import DASHI.Moonshine.PrimeLevelDeligneRapoportFrickeSelectorExact as Selector
-import DASHI.Moonshine.PublishedMonsterFrickeGenusZeroExact as Ge5
+import DASHI.Moonshine.PublishedMonsterFrickeGenusZeroExact as HistoricalGe5
 import DASHI.Moonshine.PublishedMonsterFrickeAllSupportedPrimesExact as All
 import DASHI.Moonshine.MonsterPrimeMoonshineFrickeStandardAuthorityExact as Moonshine
-import DASHI.Moonshine.MonsterFrickeDirectionalMechanismExact as Directional
+import DASHI.Moonshine.DuncanSwisherMonsterFrickeAllPrimesExact as DSAll
+import DASHI.Moonshine.MonsterFrickeModernDirectionalMechanismExact as Modern
 
 ------------------------------------------------------------------------
--- Primary arbitrary-prime theorem: moonshine forward, Ogg converse.
+-- Primary arbitrary-prime theorem: moonshine forward, exponent-support
+-- converse.
 ------------------------------------------------------------------------
 
 monsterFrickeAllPrimeRegression :
@@ -46,51 +46,58 @@ monsterFrickeAllPrimeRegression :
   Monster.PrimeDividesMonsterOrder p
   ↔ All.primeFrickeGenus p prime ≡ 0
 monsterFrickeAllPrimeRegression =
-  Directional.monsterPrimeIffFrickeGenusZeroDirectional
+  Modern.monsterPrimeIffFrickeGenusZeroModern
 
 moonshineForwardRegression :
   (p : Nat) → (prime : Prime p) →
   Monster.PrimeDividesMonsterOrder p →
   All.primeFrickeGenus p prime ≡ 0
 moonshineForwardRegression =
-  Directional.monsterPrimeImpliesFrickeGenusZeroConceptually
+  Modern.monsterPrimeImpliesFrickeGenusZeroByMoonshine
 
-oggConverseRegression :
+exponentSupportConverseRegression :
   (p : Nat) → (prime : Prime p) →
   All.primeFrickeGenus p prime ≡ 0 →
   Monster.PrimeDividesMonsterOrder p
-oggConverseRegression =
-  Directional.frickeGenusZeroImpliesMonsterPrimeByOgg
+exponentSupportConverseRegression =
+  Modern.frickeGenusZeroImpliesMonsterPrimeByExponentSupport
 
 ------------------------------------------------------------------------
--- The p >= 5 supersingular/DR lane remains available as an independent second
--- proof of the forward direction and as the current converse authority.
+-- Independent routes remain available for regression/cross-checking.
 ------------------------------------------------------------------------
 
-monsterFrickeGe5Regression :
+duncanSwisherAlsoProvesForwardRegression :
+  (p : Nat) → (prime : Prime p) →
+  Monster.PrimeDividesMonsterOrder p →
+  All.primeFrickeGenus p prime ≡ 0
+duncanSwisherAlsoProvesForwardRegression =
+  Modern.duncanSwisherAlsoProvesForward
+
+historicalDuncanOnoGe5Regression :
   (p : Nat) → (prime : Prime p) → (ge5 : 5 ≤ p) →
   Monster.PrimeDividesMonsterOrder p
   ↔ Selector.genericFrickeGenus (Fricke.publishedAuthorityAt p prime ge5) ≡ 0
-monsterFrickeGe5Regression = Ge5.monsterPrimeIffFrickeGenusZero
+historicalDuncanOnoGe5Regression =
+  HistoricalGe5.monsterPrimeIffFrickeGenusZero
 
 ------------------------------------------------------------------------
 -- Promotion / explanatory boundaries.
 ------------------------------------------------------------------------
 
-forwardUsesSupersingularRationalityRegression :
-  Directional.forwardUsesSupersingularRationality
-    Directional.canonicalMonsterFrickeDirectionalMechanismBoundary ≡ false
-forwardUsesSupersingularRationalityRegression = refl
+primaryProofImportsDuncanOnoSupportRegression :
+  Modern.DuncanOnoSupportEquivalenceImported
+    Modern.canonicalMonsterFrickeModernDirectionalBoundary ≡ false
+primaryProofImportsDuncanOnoSupportRegression = refl
 
 forwardUsesMoonshineRegression :
-  Directional.forwardUsesMonstrousMoonshine
-    Directional.canonicalMonsterFrickeDirectionalMechanismBoundary ≡ true
+  Modern.forwardMechanismIsMoonshine
+    Modern.canonicalMonsterFrickeModernDirectionalBoundary ≡ true
 forwardUsesMoonshineRegression = refl
 
-absenceOfExtraOggPrimesStillOpenRegression :
-  Directional.absenceOfExtraGenusZeroPrimesExplainedByMoonshine
-    Directional.canonicalMonsterFrickeDirectionalMechanismBoundary ≡ false
-absenceOfExtraOggPrimesStillOpenRegression = refl
+converseUsesExponentSupportRegression :
+  Modern.converseMechanismIsExponentSupport
+    Modern.canonicalMonsterFrickeModernDirectionalBoundary ≡ true
+converseUsesExponentSupportRegression = refl
 
 noFiniteMonsterLaneTableRegression :
   All.MonsterPrimeLaneImported
@@ -112,7 +119,7 @@ moonshineGroupDatumReusedRegression :
     Moonshine.canonicalMonsterPrimeMoonshineFrickeAuthorityBoundary ≡ true
 moonshineGroupDatumReusedRegression = refl
 
-converseNotOversoldRegression :
-  Directional.converseExplainedByMoonshineHere
-    Directional.canonicalMonsterFrickeDirectionalMechanismBoundary ≡ false
-converseNotOversoldRegression = refl
+duncanSwisherAllPrimeSupportRegression :
+  DSAll.arbitraryPrimeSupportEquivalenceDerived
+    DSAll.canonicalDuncanSwisherMonsterFrickeAllPrimesBoundary ≡ true
+duncanSwisherAllPrimeSupportRegression = refl
