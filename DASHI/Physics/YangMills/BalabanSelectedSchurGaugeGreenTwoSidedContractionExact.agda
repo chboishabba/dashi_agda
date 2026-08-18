@@ -47,19 +47,23 @@ module DASHI.Physics.YangMills.BalabanSelectedSchurGaugeGreenTwoSidedContraction
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Data.Rational.Base as ℚ using (ℚ; _*_; _≤_; ∣_∣)
+open import Data.Rational.Base as ℚ using (ℚ; _-_; _*_; _≤_; ∣_∣)
 import Data.Rational.Properties as ℚP
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+import Data.Rational.Tactic.RingSolver as ℚRing
+open import Relation.Binary.PropositionalEquality using
+  (cong; cong₂; subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
 import DASHI.Physics.YangMills.BalabanFiniteRationalMatrixTraceCyclicExact as Matrix
 import DASHI.Physics.YangMills.BalabanFiniteRectangularAbsoluteColumnMassExact as ColumnMass
 import DASHI.Physics.YangMills.BalabanReducedGhostNeumannRowContractionExact as Neumann
+import DASHI.Physics.YangMills.BalabanSelectedBackgroundGaugeConstraintMatrixExact as GaugeMatrix
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundGaugeGramFiniteRangeExact as GaugeGram
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundGaugePerturbationFiniteRangeExact as Perturbation
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundFlatGreenPerturbationContractionExact as Flat
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundFlatGreenPerturbationTwoSidedContractionExact as FlatTwoSided
+import DASHI.Physics.YangMills.BalabanSelectedFlatGaugeGreenAbsoluteMassExact as GreenMass
 import DASHI.Physics.YangMills.BalabanSelectedSchurCrossAbsoluteMassExact as Cross
 import DASHI.Physics.YangMills.BalabanSelectedSchurFiniteRankCorrectionExact as Correction
 import DASHI.Physics.YangMills.BalabanSelectedSchurGaugeGreenContractionExact as Schur
@@ -75,20 +79,18 @@ gaugeGramSymmetric : ∀ background left right →
 gaugeGramSymmetric background left right =
   Sums.sumRationalCong Flat.gaugeRows _ _
     (λ column → ℚP.*-comm
-      (DASHI.Physics.YangMills.BalabanSelectedBackgroundGaugeConstraintMatrixExact.selectedBackgroundGaugeConstraintMatrix
+      (GaugeMatrix.selectedBackgroundGaugeConstraintMatrix
         background left column)
-      (DASHI.Physics.YangMills.BalabanSelectedBackgroundGaugeConstraintMatrixExact.selectedBackgroundGaugeConstraintMatrix
+      (GaugeMatrix.selectedBackgroundGaugeConstraintMatrix
         background right column))
 
 perturbationSymmetric : ∀ background left right →
   Perturbation.gaugeGramPerturbationMatrix background left right
   ≡ Perturbation.gaugeGramPerturbationMatrix background right left
 perturbationSymmetric background left right =
-  let
-    backgroundSym = gaugeGramSymmetric background left right
-    flatSym = gaugeGramSymmetric Physical.identityBackground left right
-  in
-  cong₂ ℚ._-_ backgroundSym flatSym
+  cong₂ _-_
+    (gaugeGramSymmetric background left right)
+    (gaugeGramSymmetric Physical.identityBackground left right)
 
 rawCorrectionSymmetric : ∀ background left right →
   Correction.rawSchurCorrection background left right
@@ -110,7 +112,7 @@ schurPerturbationSymmetric : ∀ background left right →
   Schur.schurPerturbation background left right
   ≡ Schur.schurPerturbation background right left
 schurPerturbationSymmetric background left right =
-  cong₂ ℚ._-_
+  cong₂ _-_
     (perturbationSymmetric background left right)
     (correctionSymmetric background left right)
 
@@ -151,25 +153,22 @@ reverseSchurResidualRowMassBound background radius row =
       (Schur.schurPerturbation background)
       Flat.flatGreenKernelMatrix
       Schur.schurPerturbationRowMassBound
-      DASHI.Physics.YangMills.BalabanSelectedFlatGaugeGreenAbsoluteMassExact.seventeenSixteenths
-      (ℚP.nonNegative⁻¹
-        DASHI.Physics.YangMills.BalabanSelectedFlatGaugeGreenAbsoluteMassExact.seventeenSixteenths)
+      GreenMass.seventeenSixteenths
+      (ℚP.nonNegative⁻¹ GreenMass.seventeenSixteenths)
       (Schur.selectedSchurPerturbationRowMassBound background radius)
       Flat.selectedFlatGaugeGreenAbsoluteRowMassBound
       row
+
+    coefficientExact :
+      Schur.schurPerturbationRowMassBound * GreenMass.seventeenSixteenths
+      ≡ Schur.schurGreenContractionBound
+    coefficientExact = ℚRing.solve []
   in
   subst
     (λ upper →
       Neumann.rowMass Cross.gaugeRows (reverseSchurResidual background) row
       ≤ upper)
-    (ℚP.*-comm
-      Schur.schurPerturbationRowMassBound
-      DASHI.Physics.YangMills.BalabanSelectedFlatGaugeGreenAbsoluteMassExact.seventeenSixteenths)
-    (subst
-      (λ upper →
-        Neumann.rowMass Cross.gaugeRows (reverseSchurResidual background) row
-        ≤ upper)
-      Schur.schurGreenContractionProductExact raw)
+    coefficientExact raw
 
 schurResidualColumnMassAsReverseRowMass : ∀ background column →
   ColumnMass.squareColumnMass Cross.gaugeRows
