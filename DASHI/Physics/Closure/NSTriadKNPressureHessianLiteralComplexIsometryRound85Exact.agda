@@ -14,7 +14,7 @@ module DASHI.Physics.Closure.NSTriadKNPressureHessianLiteralComplexIsometryRound
 --
 -- ROUND85 / LITERAL COMPLEX PRESSURE SOURCE INSTANTIATES HESSIAN ISOMETRY
 --
--- The generic complex isometry is now instantiated from the SAME
+-- The generic complex isometry is instantiated from the SAME
 -- `IntegerEmbedding`, `ModeInverseSquare`, Fourier mode and complex Poisson
 -- source used by the literal Galerkin pressure potential.
 --
@@ -36,7 +36,7 @@ open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNComplex3FieldAlgebra as Field
-import DASHI.Physics.Closure.NSTriadKNComplex3AlgebraLaws as Algebra
+import DASHI.Physics.Closure.NSTriadKNLerayOutputTransversalityRound30Exact as LerayOut
 import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNPressurePotentialGradientHessianSameModeRound85Exact as Potential
 import DASHI.Physics.Closure.NSTriadKNPressureTransportPoissonSplitRound85Exact as Transport
@@ -119,7 +119,7 @@ scaleComplexByRealMeaning {F = F} scalar (C3.complex real imaginary) =
       (λ s y →
         (s P.R.⊗ y)
         P.R.⊜ ((s P.R.⊗ y)
-          P.R.⊕ ((P.R.Κ (C3.zero F)) P.R.⊗ (P.R.Κ y)))
+          P.R.⊕ ((P.R.Κ (C3.zero F)) P.R.⊗ y))
       refl scalar imaginary)
   where module P = Field.Polynomial F
 
@@ -154,22 +154,43 @@ signedHessianCoefficientMatchesLiteralPotential {F = F} {I = I}
     norm = C3.normSquared I mode
     pHat = Potential.pressurePotential system mode
     source = Transport.pressurePoissonSourceCoefficient system mode
-    scalar = C3.multiply F (C3.multiply F left right) inv
+    lr = C3.multiply F left right
+    scalar = C3.multiply F lr inv
 
     sourceMeaning :
       source
       ≡ C3.complexMultiply (C3.realEmbed F norm) pHat
     sourceMeaning =
+      Field.complexMultiplyCommutative pHat (C3.realEmbed F norm)
+
+    scalarTimesNorm : C3.multiply F scalar norm ≡ lr
+    scalarTimesNorm =
       trans
-        (C3.complexMultiplyCommutative
-          pHat (C3.realEmbed F norm))
-        refl
+        (P.R.solve 4
+          (λ l r i n →
+            (((l P.R.⊗ r) P.R.⊗ i) P.R.⊗ n)
+            P.R.⊜ ((l P.R.⊗ r) P.R.⊗ (i P.R.⊗ n)))
+          refl left right inv norm)
+        (trans
+          (cong (C3.multiply F lr) (C3.inverseLaw I mode nonzero))
+          (trans
+            (C3.multiplyCommutative F lr (C3.one F))
+            (C3.multiplyOneLeft F lr)))
+
+    realPrefixCollapse :
+      C3.complexMultiply
+        (C3.realEmbed F scalar)
+        (C3.realEmbed F norm)
+      ≡ C3.realEmbed F lr
+    realPrefixCollapse =
+      trans
+        (LerayOut.realEmbedMultiply scalar norm)
+        (cong (C3.realEmbed F) scalarTimesNorm)
 
     unsignedMeaning :
       Iso.hessianCoefficient
         (literalComplexPressureModeDatum system mode nonzero) left right
-      ≡ C3.complexMultiply
-          (C3.realEmbed F (C3.multiply F left right)) pHat
+      ≡ C3.complexMultiply (C3.realEmbed F lr) pHat
     unsignedMeaning =
       trans
         (scaleComplexByRealMeaning scalar source)
@@ -177,38 +198,30 @@ signedHessianCoefficientMatchesLiteralPotential {F = F} {I = I}
           (cong
             (C3.complexMultiply (C3.realEmbed F scalar))
             sourceMeaning)
-          (Field.complexExt
-            (P.R.solve 5
-              (λ l r inv norm x →
-                (((l P.R.⊗ r) P.R.⊗ inv) P.R.⊗ (norm P.R.⊗ x))
-                P.R.⊜ ((l P.R.⊗ r) P.R.⊗ x))
-              (C3.inverseLaw I mode nonzero)
-              left right inv norm (C3.real pHat))
-            (P.R.solve 5
-              (λ l r inv norm y →
-                (((l P.R.⊗ r) P.R.⊗ inv) P.R.⊗ (norm P.R.⊗ y))
-                P.R.⊜ ((l P.R.⊗ r) P.R.⊗ y))
-              (C3.inverseLaw I mode nonzero)
-              left right inv norm (C3.imaginary pHat)))))
+          (trans
+            (Field.complexMultiplyAssociative
+              (C3.realEmbed F scalar) (C3.realEmbed F norm) pHat)
+            (cong
+              (λ prefix → C3.complexMultiply prefix pHat)
+              realPrefixCollapse)))
+
+    groupedLiteral :
+      C3.complexMultiply (C3.realEmbed F lr) pHat
+      ≡ C3.complexMultiply
+          (C3.realEmbed F left)
+          (C3.complexMultiply (C3.realEmbed F right) pHat)
+    groupedLiteral =
+      sym
+        (trans
+          (Field.complexMultiplyAssociative
+            (C3.realEmbed F left) (C3.realEmbed F right) pHat)
+          (cong
+            (λ prefix → C3.complexMultiply prefix pHat)
+            (LerayOut.realEmbedMultiply left right)))
   in
   trans
     (cong C3.complexNegate unsignedMeaning)
-    (trans
-      (cong C3.complexNegate
-        (sym
-          (scaleComplexByRealMeaning
-            (C3.multiply F left right) pHat)))
-      (Field.complexExt
-        (P.R.solve 3
-          (λ l r x →
-            (P.R.⊝ ((l P.R.⊗ r) P.R.⊗ x))
-            P.R.⊜ (P.R.⊝ (l P.R.⊗ (r P.R.⊗ x))))
-          refl left right (C3.real pHat))
-        (P.R.solve 3
-          (λ l r y →
-            (P.R.⊝ ((l P.R.⊗ r) P.R.⊗ y))
-            P.R.⊜ (P.R.⊝ (l P.R.⊗ (r P.R.⊗ y))))
-          refl left right (C3.imaginary pHat))))
+    (cong C3.complexNegate groupedLiteral)
   where module P = Field.Polynomial F
 
 round85LiteralComplexPressureModeIsometryConstructed : Bool
