@@ -71,10 +71,6 @@ rowMass : ∀ {Index : Set} →
   List Index → Matrix.Matrix Index → Index → ℚ
 rowMass = Contraction.rowMass
 
-------------------------------------------------------------------------
--- Exact l1-row calculus for sums and arbitrary rational scalars.
-------------------------------------------------------------------------
-
 rowMassAddUpper :
   ∀ {Index : Set} (indices : List Index)
     (left right : Matrix.Matrix Index) row →
@@ -87,7 +83,6 @@ rowMassAddUpper indices left right row =
       (λ column → ∣ left row column ∣ + ∣ right row column ∣)
       (λ column → ℚP.∣p+q∣≤∣p∣+∣q∣
         (left row column) (right row column))
-
     split = Fubini.sumRationalAdd indices
       (λ column → ∣ left row column ∣)
       (λ column → ∣ right row column ∣)
@@ -104,8 +99,7 @@ rowMassScaleExact :
 rowMassScaleExact indices scalar matrix row =
   trans
     (Sums.sumRationalCong indices _ _
-      (λ column →
-        ℚP.∣p*q∣≡∣p∣*∣q∣ scalar (matrix row column)))
+      (λ column → ℚP.∣p*q∣≡∣p∣*∣q∣ scalar (matrix row column)))
     (Sums.sumRationalScale ∣ scalar ∣ indices
       (λ column → ∣ matrix row column ∣))
 
@@ -131,17 +125,11 @@ rowMassCong indices left right pointwise row =
   Sums.sumRationalCong indices _ _
     (λ column → cong ∣_∣ (pointwise row column))
 
-------------------------------------------------------------------------
--- Fourth-order source-shaped expansion and the scalar contraction budget.
-------------------------------------------------------------------------
-
 record FourthOrderReducedGhostExpansion (Index : Set) : Set₁ where
   field
     indices : List Index
     coupling : ℚ
-
     actual X1 X2 X3 X4 tail : Matrix.Matrix Index
-
     exactFourthOrderExpansion : ∀ row column →
       actual row column
       ≡ matrixAdd
@@ -155,9 +143,7 @@ record FourthOrderReducedGhostExpansion (Index : Set) : Set₁ where
                   (coupling * coupling * coupling * coupling) X4)
                 tail)))
           row column
-
     b1 b2 b3 b4 b5 : ℚ
-
     X1RowBound : ∀ row → rowMass indices X1 row ≤ b1
     X2RowBound : ∀ row → rowMass indices X2 row ≤ b2
     X3RowBound : ∀ row → rowMass indices X3 row ≤ b3
@@ -169,12 +155,12 @@ open FourthOrderReducedGhostExpansion public
 contractionBudget :
   ∀ {Index : Set} → FourthOrderReducedGhostExpansion Index → ℚ
 contractionBudget dataSet =
-    ∣ coupling dataSet ∣ * b1 dataSet
-  + ∣ coupling dataSet * coupling dataSet ∣ * b2 dataSet
-  + ∣ coupling dataSet * coupling dataSet * coupling dataSet ∣ * b3 dataSet
-  + ∣ coupling dataSet * coupling dataSet * coupling dataSet * coupling dataSet ∣
+  ∣ coupling dataSet ∣ * b1 dataSet
+  + (∣ coupling dataSet * coupling dataSet ∣ * b2 dataSet
+  + (∣ coupling dataSet * coupling dataSet * coupling dataSet ∣ * b3 dataSet
+  + (∣ coupling dataSet * coupling dataSet * coupling dataSet * coupling dataSet ∣
       * b4 dataSet
-  + b5 dataSet
+  + b5 dataSet)))
 
 expandedMatrix :
   ∀ {Index : Set} → FourthOrderReducedGhostExpansion Index → Matrix.Matrix Index
@@ -214,47 +200,37 @@ fourthOrderRowContractionBound dataSet row =
   let
     g = coupling dataSet
     ixs = indices dataSet
-
     t1 = matrixScale g (X1 dataSet)
     t2 = matrixScale (g * g) (X2 dataSet)
     t3 = matrixScale (g * g * g) (X3 dataSet)
     t4 = matrixScale (g * g * g * g) (X4 dataSet)
-
     b1' = ∣ g ∣ * b1 dataSet
     b2' = ∣ g * g ∣ * b2 dataSet
     b3' = ∣ g * g * g ∣ * b3 dataSet
     b4' = ∣ g * g * g * g ∣ * b4 dataSet
-
     t1Bound : rowMass ixs t1 row ≤ b1'
     t1Bound = scaledRowBound ixs g (X1 dataSet) (b1 dataSet) row
       (X1RowBound dataSet row)
-
     t2Bound : rowMass ixs t2 row ≤ b2'
     t2Bound = scaledRowBound ixs (g * g) (X2 dataSet) (b2 dataSet) row
       (X2RowBound dataSet row)
-
     t3Bound : rowMass ixs t3 row ≤ b3'
     t3Bound = scaledRowBound ixs (g * g * g) (X3 dataSet) (b3 dataSet) row
       (X3RowBound dataSet row)
-
     t4Bound : rowMass ixs t4 row ≤ b4'
     t4Bound = scaledRowBound ixs (g * g * g * g) (X4 dataSet) (b4 dataSet) row
       (X4RowBound dataSet row)
-
     fourthAndTail :
-      rowMass ixs (matrixAdd t4 (tail dataSet)) row
-      ≤ b4' + b5 dataSet
+      rowMass ixs (matrixAdd t4 (tail dataSet)) row ≤ b4' + b5 dataSet
     fourthAndTail = ℚP.≤-trans
       (rowMassAddUpper ixs t4 (tail dataSet) row)
       (ℚP.+-mono-≤ t4Bound (tailRowBound dataSet row))
-
     thirdTail :
       rowMass ixs (matrixAdd t3 (matrixAdd t4 (tail dataSet))) row
       ≤ b3' + (b4' + b5 dataSet)
     thirdTail = ℚP.≤-trans
       (rowMassAddUpper ixs t3 (matrixAdd t4 (tail dataSet)) row)
       (ℚP.+-mono-≤ t3Bound fourthAndTail)
-
     secondTail :
       rowMass ixs
         (matrixAdd t2 (matrixAdd t3 (matrixAdd t4 (tail dataSet)))) row
@@ -263,7 +239,6 @@ fourthOrderRowContractionBound dataSet row =
       (rowMassAddUpper ixs t2
         (matrixAdd t3 (matrixAdd t4 (tail dataSet))) row)
       (ℚP.+-mono-≤ t2Bound thirdTail)
-
     firstTail :
       rowMass ixs
         (matrixAdd t1
@@ -289,14 +264,6 @@ uniformFourthOrderRowContractionBound dataSet =
 reducedGhostFourthOrderRowBudgetLevel : ProofLevel
 reducedGhostFourthOrderRowBudgetLevel = machineChecked
 
--- Physical/source-facing leaves:
---   * instantiate `actual` by the SAME relativeGhostMatrix R(g);
---   * instantiate X1..X4 by the SAME matrices already constructed in
---     BalabanReducedFaddeevPopovPhysicalFourthJetExact;
---   * prove the genuine Bishop fifth-order tail bound b5;
---   * prove contractionBudget < 1 on the selected weak-coupling ball.
--- After those are supplied, BalabanReducedGhostNeumannRowContractionExact owns
--- the geometric matrix-log convergence step.
 physicalSameObjectFourthOrderExpansionLevel : ProofLevel
 physicalSameObjectFourthOrderExpansionLevel = conditional
 
