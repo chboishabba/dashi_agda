@@ -187,10 +187,6 @@ finiteHermitianPairingAddThreeRight modes left first second third =
         C3.complexAdd pair (finiteHermitianPairing modes left third))
       (finiteHermitianPairingAddRight modes left first second))
 
-------------------------------------------------------------------------
--- Exact packetized nonlinear first variation.
-------------------------------------------------------------------------
-
 packetBaseVelocity :
   ∀ {r}
     (model : LP.PeriodicHardShellFourierPDE {r})
@@ -321,26 +317,27 @@ packetTransferSixTermExpansion :
   ≡
   C3.complexAdd
     (C3.complexAdd
+      (C3.complexAdd
+        (finiteHermitianPairing modes
+          (packetBaseVelocity model system shell)
+          (packetBaseNonlinearity model system shell))
+        (finiteHermitianPairing modes
+          (packetBaseVelocity model system shell)
+          (packetNonlinearityFirstVariation model system shell perturbation)))
       (finiteHermitianPairing modes
         (packetBaseVelocity model system shell)
-        (packetBaseNonlinearity model system shell))
-      (finiteHermitianPairing modes
-        (packetBaseVelocity model system shell)
-        (packetNonlinearityFirstVariation model system shell perturbation)))
-    (finiteHermitianPairing modes
-      (packetBaseVelocity model system shell)
-      (packetNonlinearityQuadraticRemainder model system shell perturbation))
-  |> C3.complexAdd
+        (packetNonlinearityQuadraticRemainder model system shell perturbation)))
     (C3.complexAdd
+      (C3.complexAdd
+        (finiteHermitianPairing modes
+          (packetPerturbation model shell perturbation)
+          (packetBaseNonlinearity model system shell))
+        (finiteHermitianPairing modes
+          (packetPerturbation model shell perturbation)
+          (packetNonlinearityFirstVariation model system shell perturbation)))
       (finiteHermitianPairing modes
         (packetPerturbation model shell perturbation)
-        (packetBaseNonlinearity model system shell))
-      (finiteHermitianPairing modes
-        (packetPerturbation model shell perturbation)
-        (packetNonlinearityFirstVariation model system shell perturbation)))
-    (finiteHermitianPairing modes
-      (packetPerturbation model shell perturbation)
-      (packetNonlinearityQuadraticRemainder model system shell perturbation))
+        (packetNonlinearityQuadraticRemainder model system shell perturbation)))
 packetTransferSixTermExpansion model system shell modes perturbation =
   trans
     (finiteHermitianPairingAddLeft
@@ -360,21 +357,12 @@ packetTransferSixTermExpansion model system shell modes perturbation =
         (packetNonlinearityFirstVariation model system shell perturbation)
         (packetNonlinearityQuadraticRemainder model system shell perturbation)))
   where
-  infixl 0 _|>_
-  _|>_ : ∀ {A : Set r} → A → A → Set r
-  _|>_ left right = left ≡ right
-
   nonlinearExpansion =
     First.fieldAdd
       (First.fieldAdd
         (packetBaseNonlinearity model system shell)
         (packetNonlinearityFirstVariation model system shell perturbation))
       (packetNonlinearityQuadraticRemainder model system shell perturbation)
-
-------------------------------------------------------------------------
--- Exact quadratic first variation; instantiate it with the derivative-weighted
--- packet to obtain the D_K tangent used in compact-transfer drift.
-------------------------------------------------------------------------
 
 finiteHermitianQuadraticFirstVariation :
   ∀ {r} {F : C3.RealField r} →
