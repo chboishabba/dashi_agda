@@ -34,7 +34,7 @@ module DASHI.Physics.Closure.NSTriadKNSoftSpectralWeightDerivativeRound81Exact w
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
-open import Data.Rational.Base using (ℚ; _+_; _-_; _*_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _-_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
@@ -45,22 +45,22 @@ meanEigenvalueRate p rate1 rate2 rate3 =
   Soft.p1 p * rate1 + Soft.p2 p * rate2 + Soft.p3 p * rate3
 
 spectralWeightRate :
-  ℚ → Soft.SpectralProbabilityWeights → ℚ → ℚ → ℚ → ℚ → ℚ
-spectralWeightRate beta p weight rate1 rate2 rate3 =
+  ℚ → Soft.SpectralProbabilityWeights → ℚ → ℚ → ℚ → ℚ → ℚ → ℚ
+spectralWeightRate beta p weight selectedRate rate1 rate2 rate3 =
   beta * weight *
-    (rate1 - meanEigenvalueRate p rate1 rate2 rate3)
+    (selectedRate - meanEigenvalueRate p rate1 rate2 rate3)
 
 p1Rate : ℚ → Soft.SpectralProbabilityWeights → ℚ → ℚ → ℚ → ℚ
 p1Rate beta p rate1 rate2 rate3 =
-  spectralWeightRate beta p (Soft.p1 p) rate1 rate2 rate3 rate1
+  spectralWeightRate beta p (Soft.p1 p) rate1 rate1 rate2 rate3
 
 p2Rate : ℚ → Soft.SpectralProbabilityWeights → ℚ → ℚ → ℚ → ℚ
 p2Rate beta p rate1 rate2 rate3 =
-  spectralWeightRate beta p (Soft.p2 p) rate1 rate2 rate3 rate2
+  spectralWeightRate beta p (Soft.p2 p) rate2 rate1 rate2 rate3
 
 p3Rate : ℚ → Soft.SpectralProbabilityWeights → ℚ → ℚ → ℚ → ℚ
 p3Rate beta p rate1 rate2 rate3 =
-  spectralWeightRate beta p (Soft.p3 p) rate1 rate2 rate3 rate3
+  spectralWeightRate beta p (Soft.p3 p) rate3 rate1 rate2 rate3
 
 softSpectralWeightTangentPreservesTraceOne :
   (beta : ℚ) →
