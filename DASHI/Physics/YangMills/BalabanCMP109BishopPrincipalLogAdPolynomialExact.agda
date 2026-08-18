@@ -42,6 +42,7 @@ module DASHI.Physics.YangMills.BalabanCMP109BishopPrincipalLogAdPolynomialExact 
 ------------------------------------------------------------------------
 
 open import Data.Integer.Base using (+_)
+open import Data.Product using (_×_; _,_)
 open import Data.Rational.Unnormalised as ℚ using (ℚᵘ; _/_)
 
 import Real as BishopReal
@@ -61,8 +62,7 @@ open Vec3B public
 embed : ℚᵘ → BishopReal.ℝ
 embed = BishopReal._⋆
 
-oneHalf oneTwelfth : ℚᵘ
-oneHalf = + 1 / 2
+oneTwelfth : ℚᵘ
 oneTwelfth = + 1 / 12
 
 add3 : Vec3B → Vec3B → Vec3B
@@ -109,8 +109,6 @@ vec3Congruent left right =
   BishopReal._≃_ (x left) (x right)
   × (BishopReal._≃_ (y left) (y right)
     × BishopReal._≃_ (z left) (z right))
-  where
-  open import Data.Product using (_×_)
 
 principalLogCoefficientTelescope :
   ∀ c1 beta beta0 generator value →
@@ -121,24 +119,6 @@ principalLogCoefficientTelescope :
     (scale3 (BishopReal._-_ beta beta0) (adSquare3 generator value))
 principalLogCoefficientTelescope c1 beta beta0
     (vec3B x0 x1 x2) (vec3B v0 v1 v2) =
-  let open BishopProperties.ℝ-Solver
-      component0 =
-        solve 8
-          (λ c b b0 x0 x1 x2 v0 v1 →
-            let a0 = (x1 ⊗ (x0 ⊗ v1 ⊖ x1 ⊗ v0))
-                    ⊖ (x2 ⊗ (x2 ⊗ v0 ⊖ x0 ⊗ v1))
-            in
-            ((v0 ⊕ (c ⊗ (x1 ⊗ Κ (+ 0 / 1) ⊖ x2 ⊗ v1)
-              ⊕ b ⊗ a0))
-              ⊖
-             (v0 ⊕ (c ⊗ (x1 ⊗ Κ (+ 0 / 1) ⊖ x2 ⊗ v1)
-              ⊕ b0 ⊗ a0)))
-            ⊜ ((b ⊖ b0) ⊗ a0))
-          BishopProperties.≃-refl
-          c1 beta beta0 x0 x1 x2 v0 v1
-  in
-  -- Rather than depend on the expanded coordinate chosen above, prove each
-  -- actual coordinate by the polynomial solver from the definitions.
   (let open BishopProperties.ℝ-Solver
    in solve 9
      (λ c b b0 x0 x1 x2 v0 v1 v2 →
@@ -156,8 +136,8 @@ principalLogCoefficientTelescope c1 beta beta0
     in solve 9
       (λ c b b0 x0 x1 x2 v0 v1 v2 →
         let
-          a1 = (x2 ⊗ (x0 ⊗ v1 ⊖ x1 ⊗ v0))
-               ⊖ (x0 ⊗ (x1 ⊗ v2 ⊖ x2 ⊗ v1))
+          a1 = (x2 ⊗ (x1 ⊗ v2 ⊖ x2 ⊗ v1))
+               ⊖ (x0 ⊗ (x0 ⊗ v1 ⊖ x1 ⊗ v0))
         in
         ((v1 ⊕ ((c ⊗ (x2 ⊗ v0 ⊖ x0 ⊗ v2)) ⊕ (b ⊗ a1)))
          ⊖ (v1 ⊕ ((c ⊗ (x2 ⊗ v0 ⊖ x0 ⊗ v2)) ⊕ (b0 ⊗ a1))))
@@ -170,15 +150,13 @@ principalLogCoefficientTelescope c1 beta beta0
       (λ c b b0 x0 x1 x2 v0 v1 v2 →
         let
           a2 = (x0 ⊗ (x2 ⊗ v0 ⊖ x0 ⊗ v2))
-               ⊖ (x1 ⊗ (x0 ⊗ v1 ⊖ x1 ⊗ v0))
+               ⊖ (x1 ⊗ (x1 ⊗ v2 ⊖ x2 ⊗ v1))
         in
         ((v2 ⊕ ((c ⊗ (x0 ⊗ v1 ⊖ x1 ⊗ v0)) ⊕ (b ⊗ a2)))
          ⊖ (v2 ⊕ ((c ⊗ (x0 ⊗ v1 ⊖ x1 ⊗ v0)) ⊕ (b0 ⊗ a2))))
         ⊜ ((b ⊖ b0) ⊗ a2))
       BishopProperties.≃-refl
       c1 beta beta0 x0 x1 x2 v0 v1 v2))
-  where
-  open import Data.Product using (_,_)
 
 actualSourceInverseDexpCoefficient :
   ∀ {dataSet} →
