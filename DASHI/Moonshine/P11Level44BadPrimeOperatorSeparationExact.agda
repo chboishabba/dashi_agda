@@ -20,26 +20,27 @@ module DASHI.Moonshine.P11Level44BadPrimeOperatorSeparationExact where
 --
 -- DASHI CONTRIBUTION
 --
--- Compare the ACTUAL algebraic shape of the two tempting bad-prime operators.
+-- Compare the algebraic shape of two tempting bad-prime operators.
 --
 -- Classical Gamma_0(4) oldspace, for the level-11 newform a_2=-2:
 --
 --   U2(x1,x2,x4) = (-2 x1 + x2, -2 x1 + x4, 0).
 --
--- The repository's internally discovered positive five-state R2 restricts to
+-- The repository's INTERNALLY DISCOVERED positive five-state R2 restricts to
 -- the marked Old3 image as
 --
 --   R2(x1,x2,x4) = (-x2-x4, -x1-x4, -x1-x2).
 --
--- These are NOT similar candidates for one same-object operator.  U2 has the
--- explicit nonzero kernel vector (1,2,2), while marked R2 has no nonzero
--- rational/integral kernel (indeed its determinant is -2 and its eigenvalues
--- are -2,1,1).
+-- The first operator has the explicit nonzero kernel vector (1,2,2).  On that
+-- SAME common-coordinate vector, the internal marked R2 gives (-4,-3,-3).
+-- Therefore the canonical/common-coordinate alignment definitely does NOT
+-- intertwine analytic U2 with internal marked R2.
 --
--- Hence the existing positive R2 cannot simply be relabelled the analytic U2
--- to close the local Jacquet--Langlands comparison.  The actual source-native
--- 2-adic comparison must keep these operator roles distinct and construct the
--- correct local test-vector / compact-open transport.
+-- We deliberately do NOT promote this to a no-conjugacy theorem for arbitrary
+-- local changes of basis without proving the required determinant/kernel
+-- invariant theorem in the present carrier.  The safe conclusion is exactly
+-- what the source boundary already demands: internal R2 cannot simply be
+-- relabelled analytic U2, and a source-native 2-adic comparison remains open.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -48,7 +49,6 @@ open import Data.Integer using (ℤ; +_; -[1+_])
   renaming (_+_ to _+ℤ_; _*_ to _*ℤ_)
 import Data.Integer.Tactic.RingSolver as ℤRing
 
-import DASHI.Moonshine.P11FiveStatePositiveHeckeLiftExact as Fine
 import DASHI.Moonshine.P11MarkedX2S3HeckeDecompositionExact as S3
 import DASHI.Moonshine.P11MarkedLevel44PermutationIntertwinerExact as Old
 
@@ -119,71 +119,41 @@ analyticU2 (Old.old3 x1 x2 x4) = Old.old3
   ((-[1+ 1 ]) *ℤ x1 +ℤ x4)
   (+ 0)
 
+zeroOld3 : Old.Old3
+zeroOld3 = Old.old3 (+ 0) (+ 0) (+ 0)
+
 analyticU2KernelVector : Old.Old3
 analyticU2KernelVector = Old.old3 (+ 1) (+ 2) (+ 2)
 
 analyticU2HasNonzeroKernel :
-  analyticU2 analyticU2KernelVector ≡ Old.old3 (+ 0) (+ 0) (+ 0)
+  analyticU2 analyticU2KernelVector ≡ zeroOld3
 analyticU2HasNonzeroKernel = refl
 
 data Impossible : Set where
 
 analyticKernelVectorNonzero :
-  analyticU2KernelVector ≡ Old.old3 (+ 0) (+ 0) (+ 0) → Impossible
+  analyticU2KernelVector ≡ zeroOld3 → Impossible
 analyticKernelVectorNonzero ()
 
 ------------------------------------------------------------------------
--- marked R2 has trivial integral kernel.
+-- The SAME coordinate vector is not killed by internal marked R2.
 ------------------------------------------------------------------------
 
-zeroOld3 : Old.Old3
-zeroOld3 = Old.old3 (+ 0) (+ 0) (+ 0)
+markedR2OnAnalyticKernelVector :
+  markedR2OnOld3 analyticU2KernelVector
+  ≡ Old.old3 (-[1+ 3 ]) (-[1+ 2 ]) (-[1+ 2 ])
+markedR2OnAnalyticKernelVector = refl
 
-markedR2KernelTrivial :
-  (v : Old.Old3) → markedR2OnOld3 v ≡ zeroOld3 → v ≡ zeroOld3
-markedR2KernelTrivial (Old.old3 x y z) equality =
-  old3Ext x y z equality
-  where
-  old3Ext :
-    (x y z : ℤ) →
-    markedR2OnOld3 (Old.old3 x y z) ≡ zeroOld3 →
-    Old.old3 x y z ≡ zeroOld3
-  old3Ext x y z refl = refl
+markedR2DoesNotKillAnalyticKernelVector :
+  markedR2OnOld3 analyticU2KernelVector ≡ zeroOld3 → Impossible
+markedR2DoesNotKillAnalyticKernelVector ()
 
-------------------------------------------------------------------------
--- No bijective intertwiner can conjugate analytic U2 to marked R2.
--- We only need injectivity plus preservation of zero.
-------------------------------------------------------------------------
-
-record InjectiveZeroPreservingIntertwiner : Set where
-  field
-    map : Old.Old3 → Old.Old3
-    mapsZero : map zeroOld3 ≡ zeroOld3
-    injective : {u v : Old.Old3} → map u ≡ map v → u ≡ v
-    intertwines :
-      (v : Old.Old3) →
-      map (analyticU2 v) ≡ markedR2OnOld3 (map v)
-open InjectiveZeroPreservingIntertwiner public
-
-analyticU2CannotBeConjugatedToMarkedR2 :
-  InjectiveZeroPreservingIntertwiner → Impossible
-analyticU2CannotBeConjugatedToMarkedR2 C =
-  analyticKernelVectorNonzero
-    (injective C
-      (trans
-        (sym (mapsZero C))
-        (trans
-          (cong (map C) (sym analyticU2HasNonzeroKernel))
-          (trans
-            (intertwines C analyticU2KernelVector)
-            (cong markedR2OnOld3
-              (markedR2KernelTrivial
-                (map C analyticU2KernelVector)
-                (trans
-                  (sym (intertwines C analyticU2KernelVector))
-                  (trans
-                    (cong (map C) analyticU2HasNonzeroKernel)
-                    (mapsZero C)))))))))
+canonicalCommonCoordinateDoesNotIntertwineU2AndR2 :
+  analyticU2 analyticU2KernelVector
+  ≡ markedR2OnOld3 analyticU2KernelVector → Impossible
+canonicalCommonCoordinateDoesNotIntertwineU2AndR2 equality =
+  markedR2DoesNotKillAnalyticKernelVector
+    (trans (sym equality) analyticU2HasNonzeroKernel)
 
 ------------------------------------------------------------------------
 -- Boundary.
@@ -195,8 +165,9 @@ record P11Level44BadPrimeOperatorSeparationBoundary : Set where
     markedR2SeparatesTrivialAndStandardDeckTypes : Bool
     classicalGamma0FourU2Constructed : Bool
     analyticU2NonzeroKernelConstructed : Bool
-    markedR2TrivialKernelProved : Bool
-    markedR2CanBeRelabelledAnalyticU2 : Bool
+    sameKernelVectorSurvivesInternalMarkedR2 : Bool
+    canonicalOld3AlignmentIntertwinesU2AndInternalR2 : Bool
+    arbitraryConjugacyNoGoClaimed : Bool
     sourceNativeTwoAdicComparisonStillRequired : Bool
 
 canonicalP11Level44BadPrimeOperatorSeparationBoundary :
@@ -206,7 +177,8 @@ canonicalP11Level44BadPrimeOperatorSeparationBoundary = record
   ; markedR2SeparatesTrivialAndStandardDeckTypes = true
   ; classicalGamma0FourU2Constructed = true
   ; analyticU2NonzeroKernelConstructed = true
-  ; markedR2TrivialKernelProved = true
-  ; markedR2CanBeRelabelledAnalyticU2 = false
+  ; sameKernelVectorSurvivesInternalMarkedR2 = true
+  ; canonicalOld3AlignmentIntertwinesU2AndInternalR2 = false
+  ; arbitraryConjugacyNoGoClaimed = false
   ; sourceNativeTwoAdicComparisonStillRequired = true
   }
