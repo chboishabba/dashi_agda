@@ -9,12 +9,11 @@ module DASHI.Algebra.BalancedTernaryOppositionEvidenceBridgeExact where
 -- rule that -1 is the antipode of +1 while 0 is the fixed centre.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (false; true)
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.String using (String)
-open import Data.Empty using (⊥)
-open import Data.List.Base using (List; [])
 open import Agda.Builtin.Unit using (⊤; tt)
+open import Data.Empty using (⊥)
+open import Data.List.Base using ([])
 
 import DASHI.Algebra.ClaimIndexedEvidencePolarityExact as Indexed
 import DASHI.Algebra.DisagreementFourViewBoundary as Four
@@ -64,9 +63,9 @@ geometricConflictSupportsDeclaredAntipode = refl
 
 record BalancedTernaryOppositionEvidenceBoundary : Set where
   field
-    strictAntipodeIsOrientationQualified : Agda.Builtin.Bool.Bool
-    strictAntipodeIsLogicalNegationByCarrierShape : Agda.Builtin.Bool.Bool
-    fixedCentreIsOpposingPole : Agda.Builtin.Bool.Bool
+    strictAntipodeIsOrientationQualified : Bool
+    strictAntipodeIsLogicalNegationByCarrierShape : Bool
+    fixedCentreIsOpposingPole : Bool
 
 canonicalBalancedTernaryOppositionEvidenceBoundary :
   BalancedTernaryOppositionEvidenceBoundary
