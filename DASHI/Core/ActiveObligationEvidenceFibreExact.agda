@@ -16,8 +16,8 @@ ResolvedFor :
   ∀ {State Query Axis} →
   ActiveObligationFamily State Query Axis →
   State → Query → Set
-ResolvedFor family state query =
-  (axis : _) →
+ResolvedFor {Axis = Axis} family state query =
+  (axis : Axis) →
   Active family state query axis →
   Required.ResolvedPositive (evidenceAt family state query axis)
 
@@ -44,12 +44,6 @@ missingActiveObligationBlocksResolution missing resolved =
   Required.missingCannotBeResolvedPositive
     (evidenceMissing missing)
     (resolved (axis missing) (axisIsActive missing))
-
-------------------------------------------------------------------------
--- A finite stratified witness: the required evidence fibre changes with the
--- state/query stratum.  This is the ontology analogue of the 27^3 blockwise
--- antipodal quotient whose residual orientation rank is 0,1,2,3.
-------------------------------------------------------------------------
 
 data AlignmentObligation : Set where
   identifierObligation : AlignmentObligation
