@@ -10,37 +10,31 @@ module DASHI.Core.RoutedPolicyOutcomeSafetyExact where
 --   routeObservation   : State -> Routing
 --   outcomeObservation : State -> Outcome.
 --
--- A public rights/entitlement surface, triage label, current query, or sensor
--- code can therefore be retained for one role without being promoted to the
--- complete carrier for another role.
+-- The policy carrier itself is NOT duplicated here.  We reuse the repository's
+-- existing CoarseInterventionPolicy and its factorized-lift/naturality theorem.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
 
 import DASHI.Core.AdmissibleReachability as Reachability
 import DASHI.Core.ObserverFactorizedRefinementExact as Factorized
+import DASHI.Core.PolicyObserverFactorizationNaturalityExact as PolicyNaturality
 import DASHI.Core.PolicyRelativeProjectionSafety as Policy
 import DASHI.Core.TypedDependencyCore as Dependency
-
-record RoutedInterventionPolicy (Routing Action : Set) : Set where
-  constructor routedInterventionPolicy
-  field
-    chooseAction : Routing → Action
-open RoutedInterventionPolicy public
 
 record RoutedPolicyOutcomeSafety
     {State Action Routing Outcome : Set}
     (system : Dependency.DependentActionSystem State Action)
     (routeObservation : State → Routing)
     (outcomeObservation : State → Outcome)
-    (policy : RoutedInterventionPolicy Routing Action) : Set₁ where
+    (policy : Policy.CoarseInterventionPolicy Routing Action) : Set₁ where
   constructor routedPolicyOutcomeSafety
   field
     selectedStepOutcomeCongruence :
       ∀ {left right leftAfter rightAfter action} →
       routeObservation left ≡ routeObservation right →
-      chooseAction policy (routeObservation left) ≡ action →
-      chooseAction policy (routeObservation right) ≡ action →
+      Policy.chooseAction policy (routeObservation left) ≡ action →
+      Policy.chooseAction policy (routeObservation right) ≡ action →
       Reachability.Executes system (action ∷ []) left leftAfter →
       Reachability.Executes system (action ∷ []) right rightAfter →
       outcomeObservation leftAfter ≡ outcomeObservation rightAfter
@@ -51,7 +45,7 @@ record RoutedPolicyOutcomeDefect
     (system : Dependency.DependentActionSystem State Action)
     (routeObservation : State → Routing)
     (outcomeObservation : State → Outcome)
-    (policy : RoutedInterventionPolicy Routing Action) : Set₁ where
+    (policy : Policy.CoarseInterventionPolicy Routing Action) : Set₁ where
   constructor routedPolicyOutcomeDefect
   field
     left right leftAfter rightAfter : State
@@ -59,9 +53,9 @@ record RoutedPolicyOutcomeDefect
     sameCurrentRoutingObservation :
       routeObservation left ≡ routeObservation right
     leftPolicySelectsAction :
-      chooseAction policy (routeObservation left) ≡ selectedAction
+      Policy.chooseAction policy (routeObservation left) ≡ selectedAction
     rightPolicySelectsAction :
-      chooseAction policy (routeObservation right) ≡ selectedAction
+      Policy.chooseAction policy (routeObservation right) ≡ selectedAction
     leftExecution :
       Reachability.Executes system (selectedAction ∷ []) left leftAfter
     rightExecution :
@@ -75,7 +69,7 @@ routedDefectContradictsSafety :
     {system : Dependency.DependentActionSystem State Action}
     {routeObservation : State → Routing}
     {outcomeObservation : State → Outcome}
-    {policy : RoutedInterventionPolicy Routing Action} →
+    {policy : Policy.CoarseInterventionPolicy Routing Action} →
   RoutedPolicyOutcomeSafety
     system routeObservation outcomeObservation policy →
   RoutedPolicyOutcomeDefect
@@ -93,39 +87,11 @@ routedDefectContradictsSafety safety defect =
 ------------------------------------------------------------------------
 -- Factorized routing refinement.
 --
--- Hold the outcome observer fixed.  If
---
---   coarseRoute = factor o fineRoute
---
--- then the coarse policy lifts by precomposition with `factor`.  Any safety
--- theorem proved for the coarse router is preserved by the finer router,
--- because equality of fine routes implies equality of coarse routes and the
--- lifted policy chooses exactly the same action.
+-- Hold the outcome observer fixed.  PolicyObserverFactorizationNaturalityExact
+-- already owns the policy lift and action commuting square.  Using those exact
+-- maps, safety for a coarse router is monotone upward to any factorized finer
+-- router carrying the same policy decisions.
 ------------------------------------------------------------------------
-
-liftRoutedPolicy :
-  ∀ {State CoarseRouting FineRouting Action : Set}
-    {coarseRoute : State → CoarseRouting}
-    {fineRoute : State → FineRouting} →
-  Factorized.FactorizedRefinement coarseRoute fineRoute →
-  RoutedInterventionPolicy CoarseRouting Action →
-  RoutedInterventionPolicy FineRouting Action
-liftRoutedPolicy refinement coarsePolicy =
-  routedInterventionPolicy
-    (λ fineValue →
-      chooseAction coarsePolicy (Factorized.factor refinement fineValue))
-
-liftedPolicyActionNatural :
-  ∀ {State CoarseRouting FineRouting Action : Set}
-    {coarseRoute : State → CoarseRouting}
-    {fineRoute : State → FineRouting}
-    (refinement : Factorized.FactorizedRefinement coarseRoute fineRoute)
-    (coarsePolicy : RoutedInterventionPolicy CoarseRouting Action)
-    (x : State) →
-  chooseAction (liftRoutedPolicy refinement coarsePolicy) (fineRoute x)
-  ≡ chooseAction coarsePolicy (coarseRoute x)
-liftedPolicyActionNatural refinement coarsePolicy x =
-  sym (cong (chooseAction coarsePolicy) (Factorized.factorizes refinement x))
 
 routingRefinementPreservesOutcomeSafety :
   ∀ {State Action CoarseRouting FineRouting Outcome : Set}
@@ -134,23 +100,27 @@ routingRefinementPreservesOutcomeSafety :
     {fineRoute : State → FineRouting}
     {outcomeObservation : State → Outcome}
     (refinement : Factorized.FactorizedRefinement coarseRoute fineRoute)
-    (coarsePolicy : RoutedInterventionPolicy CoarseRouting Action) →
+    (coarsePolicy : Policy.CoarseInterventionPolicy CoarseRouting Action) →
   RoutedPolicyOutcomeSafety
     system coarseRoute outcomeObservation coarsePolicy →
   RoutedPolicyOutcomeSafety
     system fineRoute outcomeObservation
-    (liftRoutedPolicy refinement coarsePolicy)
+    (PolicyNaturality.liftPolicyAlongFactorizedRefinement
+      refinement coarsePolicy)
 routingRefinementPreservesOutcomeSafety
   refinement coarsePolicy coarseSafety =
   routedPolicyOutcomeSafety proof
   where
+    finePolicy : Policy.CoarseInterventionPolicy FineRouting Action
+    finePolicy =
+      PolicyNaturality.liftPolicyAlongFactorizedRefinement
+        refinement coarsePolicy
+
     proof :
       ∀ {left right leftAfter rightAfter action} →
       fineRoute left ≡ fineRoute right →
-      chooseAction (liftRoutedPolicy refinement coarsePolicy) (fineRoute left)
-        ≡ action →
-      chooseAction (liftRoutedPolicy refinement coarsePolicy) (fineRoute right)
-        ≡ action →
+      Policy.chooseAction finePolicy (fineRoute left) ≡ action →
+      Policy.chooseAction finePolicy (fineRoute right) ≡ action →
       Reachability.Executes system (action ∷ []) left leftAfter →
       Reachability.Executes system (action ∷ []) right rightAfter →
       outcomeObservation leftAfter ≡ outcomeObservation rightAfter
@@ -159,10 +129,12 @@ routingRefinementPreservesOutcomeSafety
         (Factorized.factorizedRefinementImpliesRefines refinement
           left right sameFine)
         (trans
-          (sym (liftedPolicyActionNatural refinement coarsePolicy left))
+          (sym (PolicyNaturality.liftedPolicyNaturality
+            refinement coarsePolicy left))
           leftSelects)
         (trans
-          (sym (liftedPolicyActionNatural refinement coarsePolicy right))
+          (sym (PolicyNaturality.liftedPolicyNaturality
+            refinement coarsePolicy right))
           rightSelects)
         leftRun
         rightRun
@@ -178,9 +150,7 @@ fromPolicyRelativeSafety :
     {project : State → Observation}
     {policy : Policy.CoarseInterventionPolicy Observation Action} →
   Policy.PolicyRelativeSafety system project policy →
-  RoutedPolicyOutcomeSafety
-    system project project
-    (routedInterventionPolicy (Policy.chooseAction policy))
+  RoutedPolicyOutcomeSafety system project project policy
 fromPolicyRelativeSafety safety =
   routedPolicyOutcomeSafety
     (Policy.selectedStepCongruence safety)
@@ -191,9 +161,7 @@ fromPolicyExposedDefect :
     {project : State → Observation}
     {policy : Policy.CoarseInterventionPolicy Observation Action} →
   Policy.PolicyExposedQuotientDefect system project policy →
-  RoutedPolicyOutcomeDefect
-    system project project
-    (routedInterventionPolicy (Policy.chooseAction policy))
+  RoutedPolicyOutcomeDefect system project project policy
 fromPolicyExposedDefect defect = record
   { left = Policy.left defect
   ; right = Policy.right defect
@@ -214,6 +182,8 @@ record RoutedPolicyOutcomeBoundary : Set where
     routingAndOutcomeObserversMayDiffer : Bool
     routingAndOutcomeObserversMayDifferIsTrue :
       routingAndOutcomeObserversMayDiffer ≡ true
+    canonicalPolicyCarrierReused : Bool
+    canonicalPolicyCarrierReusedIsTrue : canonicalPolicyCarrierReused ≡ true
     oldPolicySafetyRecoveredOnDiagonal : Bool
     oldPolicySafetyRecoveredOnDiagonalIsTrue :
       oldPolicySafetyRecoveredOnDiagonal ≡ true
@@ -230,4 +200,4 @@ record RoutedPolicyOutcomeBoundary : Set where
 canonicalRoutedPolicyOutcomeBoundary : RoutedPolicyOutcomeBoundary
 canonicalRoutedPolicyOutcomeBoundary =
   routedPolicyOutcomeBoundary
-    true refl true refl true refl false refl false refl
+    true refl true refl true refl true refl false refl false refl
