@@ -3,6 +3,7 @@ module DASHI.Governance.SituatedInverseJusticeRegression where
 open import DASHI.Core.Prelude
 
 import DASHI.Core.IntersectionalNonFactorability as Intersectional
+import DASHI.Core.RequiredAxisSupportSquareExact as RequiredAxis
 import DASHI.Culture.AmalekAuthorityProjectionBoundary as AmalekAuthority
 import DASHI.Governance.AuthorityPhaseSeparationExact as Phase
 import DASHI.Governance.AuthorityRoutingProjectionSafetyExact as Projection
@@ -10,6 +11,9 @@ import DASHI.Governance.ExternalityCarrierAttractor as Externality
 import DASHI.Governance.InverseJusticeAttractorExact as Attractor
 import DASHI.Governance.InverseJusticeThroughputExact as Throughput
 import DASHI.Governance.JusticeCrossPollinationBridgeExact as Cross
+import DASHI.Governance.JusticeProvenanceOutcomeLensExact as JusticeLens
+import DASHI.Governance.JusticeQueryIndexedProjectionAdequacyExact as QueryAdequacy
+import DASHI.Governance.JusticeRequiredAxisEvidenceExact as JusticeEvidence
 import DASHI.Governance.LocalGlobalCouncilGluing as CouncilGluing
 import DASHI.Governance.MandateBackedAuthorityRoutingExact as MandateRouting
 import DASHI.Governance.NonCompensatoryJusticeOrderExact as NonCompensatory
@@ -78,6 +82,49 @@ strictInverseEmbedsIntoNonCompensatoryOrder :
 strictInverseEmbedsIntoNonCompensatoryOrder =
   NonCompensatory.strictInverseJusticeImpliesNonCompensatoryInverseJustice
     Justice.violatingActionIsInverseJustice
+
+------------------------------------------------------------------------
+-- Required-axis support-square evidence.
+------------------------------------------------------------------------
+
+conflictingEvidenceRemainsDistinctFromMissingEvidence :
+  RequiredAxis.supportState (RequiredAxis.supportSquare true true)
+  ≡ RequiredAxis.supportState (RequiredAxis.supportSquare false false) →
+  ⊥
+conflictingEvidenceRemainsDistinctFromMissingEvidence =
+  RequiredAxis.conflictingIsNotMissing
+
+pooledPositiveEvidenceCannotResolveMissingRequiredAxis :
+  RequiredAxis.RequiredAxesResolved RequiredAxis.demoFamily → ⊥
+pooledPositiveEvidenceCannotResolveMissingRequiredAxis =
+  RequiredAxis.demoPooledPositiveStillCannotResolveRequiredAxes
+
+missingEvidenceCannotBecomeJusticeViolationEvidence :
+  JusticeEvidence.ResolvedViolation
+    JusticeEvidence.demoJusticeGrid
+    DASHI.Governance.TransitionResidual.rightsInvariant
+    JusticeEvidence.authorityMandateAxis →
+  ⊥
+missingEvidenceCannotBecomeJusticeViolationEvidence =
+  JusticeEvidence.missingEvidenceCannotManufactureViolationDerivation
+    JusticeEvidence.demoRightsMandateEvidenceMissing
+
+rightsEvidenceCannotFillMissingMandateCoordinate :
+  JusticeEvidence.ResolvedSatisfaction
+    JusticeEvidence.demoJusticeGrid
+    DASHI.Governance.TransitionResidual.rightsInvariant
+    JusticeEvidence.authorityMandateAxis →
+  ⊥
+rightsEvidenceCannotFillMissingMandateCoordinate =
+  JusticeEvidence.rightsViolationEvidenceDoesNotFillMissingMandateEvidence
+
+pooledRouteEvidenceCannotManufactureCurrentAuthority :
+  RequiredAxis.RequiredAxesResolved
+    (JusticeEvidence.routeEvidenceFamily
+      JusticeEvidence.formerSupporterEvidenceProfile) →
+  ⊥
+pooledRouteEvidenceCannotManufactureCurrentAuthority =
+  JusticeEvidence.pooledRoutingEvidenceCannotManufactureCurrentAuthority
 
 ------------------------------------------------------------------------
 -- Situated routing, bounded mandate, phase separation and projection safety.
@@ -152,6 +199,27 @@ causalOrderLossChangesResponder :
   ⊥
 causalOrderLossChangesResponder =
   Projection.CausalOrderLossCanChangeAdmissibleResponder
+
+sameIncidentProjectionAdequateForSurfaceNotRouting :
+  QueryAdequacy.SameProjectionDifferentJusticeQueryAdequacy
+sameIncidentProjectionAdequateForSurfaceNotRouting =
+  QueryAdequacy.sameIncidentProjectionAdequateForSurfaceNotRouting
+
+publicOutcomeCannotReconstructFineJusticeProvenance :
+  JusticeLens.ExactSurfaceReconstruction → ⊥
+publicOutcomeCannotReconstructFineJusticeProvenance =
+  JusticeLens.publicOutcomeCannotReconstructFullJusticeState
+
+proofRelevantReceiptReopensFineJusticeProvenance :
+  (record : JusticeLens.FineJusticeRecord) →
+  DASHI.Core.ProvenanceBearingQuotient.reopen
+    JusticeLens.justiceProvenanceBearingQuotient
+    (DASHI.Core.FibreRestrictionCore.project JusticeLens.justiceFibreCore record)
+    (DASHI.Core.ProvenanceBearingQuotient.receipt
+      JusticeLens.justiceProvenanceBearingQuotient record)
+  ≡ record
+proofRelevantReceiptReopensFineJusticeProvenance =
+  JusticeLens.proofRelevantReceiptReopensFineJusticeState
 
 ------------------------------------------------------------------------
 -- Option-cone / long-horizon safety and recursive inverse justice.
