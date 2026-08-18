@@ -4,13 +4,10 @@ open import DASHI.Core.Prelude
 import DASHI.Core.ObserverRefinementLatticeExact as Observer
 import DASHI.Core.FibrePreservingDynamicsExact as Dynamics
 import DASHI.Core.PredicatePullbackLatticeExact as Predicate
-import DASHI.Core.ProvenanceBearingQuotient as Provenance
-import DASHI.Core.SectionedProjectionProvenanceBridgeExact as Sectioned
 
 import DASHI.Moonshine.P11FiveStatePositiveHeckeLiftExact as Fine
 import DASHI.Moonshine.P11GeometricSupersingularCarrierExact as Geo
-import DASHI.Moonshine.P11P37HeckeFrobeniusJointSpectrumExact as Joint
-import DASHI.Moonshine.P11MarkedX2S3HeckeDecompositionExact as Decomp
+import DASHI.Moonshine.P11MarkedX2FrobeniusFrickeExact as MarkedF
 import DASHI.Moonshine.BrandtObserverRefinementDynamicsBridgeExact as Bridge
 import DASHI.Moonshine.P11Fine5PNFProvenanceQuotientBridgeExact as Reopen
 import DASHI.Moonshine.P11Fine5PredicateDescentBridgeExact as Descent
@@ -34,7 +31,7 @@ deckTypeStrictRefinementRegression = Bridge.jointFingerprintToDeckTypeStrictRefi
 markedFrobeniusVerticalRegression :
   Dynamics.HiddenTransition
     Bridge.p11MarkedJCore
-    DASHI.Moonshine.P11MarkedX2FrobeniusFrickeExact.markedFrobenius
+    MarkedF.markedFrobenius
     Fine.a0
 markedFrobeniusVerticalRegression = Bridge.markedFrobeniusHiddenTransition
 
