@@ -12,11 +12,11 @@ module DASHI.Moonshine.DuncanSwisherUNModularLevelAuthorityExact where
 --
 --   f | U_N = (1/N) sum_{b mod N} f | V_N^{-1} T^b
 --
--- and gives the exact q-expansion law
+-- and gives the exact Laurent q-expansion law
 --
 --   c_n(f | U_N) = c_{nN}(f).
 --
--- Lemma 2.4 proves the genuine analytic level-lowering theorem
+-- Lemma 2.4 proves
 --
 --   f modular for Gamma_0(N^2)
 --     =>
@@ -24,32 +24,29 @@ module DASHI.Moonshine.DuncanSwisherUNModularLevelAuthorityExact where
 --
 -- DASHI DISCIPLINE
 --
--- FormalQSeriesUNLevelLoweringExact already constructs the coefficient selector
--- UN N on Nat -> Z.  This authority surface forces the analytic source operator
--- to have THAT SAME q-expansion pointwise.  Thus analytic modularity and formal
--- coefficient arithmetic cannot silently become two unrelated operators with
--- the same name.
+-- The modular functions used by Duncan--Swisher have poles, so their q-series
+-- must use the signed Laurent carrier Z -> Z.  This authority therefore pins
+-- analytic U_N to FormalLaurentQSeriesUNExact, not to the Nat-indexed oldform
+-- carrier used elsewhere in the repo.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
+open import Data.Integer using (ℤ; +_)
+  renaming (_*_ to _*ℤ_)
 
-import DASHI.Moonshine.FormalQSeriesOldformDegeneracyHeckeExact as Q
-import DASHI.Moonshine.FormalQSeriesUNLevelLoweringExact as U
-
-------------------------------------------------------------------------
--- Source-facing analytic modular-function carriers.
-------------------------------------------------------------------------
+import DASHI.Moonshine.FormalLaurentQSeriesUNExact as Laurent
 
 postulate
   ModularFunction : Set
-  qExpansion : ModularFunction → Q.FormalQSeries
+  qExpansion : ModularFunction → Laurent.FormalLaurentQSeries
   ModularForGamma0 : Nat → ModularFunction → Set
   analyticUN : Nat → ModularFunction → ModularFunction
 
   -- Same-object q-expansion law from equation (2.4).
   analyticUNCoefficientLaw :
-    (N : Nat) → (f : ModularFunction) → (n : Nat) →
-    qExpansion (analyticUN N f) n ≡ U.UN N (qExpansion f) n
+    (N : Nat) → (f : ModularFunction) → (n : ℤ) →
+    qExpansion (analyticUN N f) n
+    ≡ Laurent.UN N (qExpansion f) n
 
   -- Duncan--Swisher Lemma 2.4.
   analyticUNLowersSquareLevel :
@@ -57,14 +54,10 @@ postulate
     ModularForGamma0 (N * N) f →
     ModularForGamma0 N (analyticUN N f)
 
-------------------------------------------------------------------------
--- Local consequences use the formal operator, not another coefficient rule.
-------------------------------------------------------------------------
-
 analyticUNCoefficientIsSelectedSource :
-  (N : Nat) → (f : ModularFunction) → (n : Nat) →
+  (N : Nat) → (f : ModularFunction) → (n : ℤ) →
   qExpansion (analyticUN N f) n
-  ≡ qExpansion f (N * n)
+  ≡ qExpansion f ((+ N) *ℤ n)
 analyticUNCoefficientIsSelectedSource N f n =
   analyticUNCoefficientLaw N f n
 
@@ -82,16 +75,13 @@ loweredModularity :
 loweredModularity N f witness =
   analyticUNLowersSquareLevel N f (sourceSquareLevel witness)
 
-------------------------------------------------------------------------
--- Boundary.
-------------------------------------------------------------------------
-
 record DuncanSwisherUNModularLevelAuthorityBoundary : Set where
   field
     analyticUNDefinitionImported : Bool
+    signedLaurentExpansionUsed : Bool
     coefficientSelectorSameObjectPinned : Bool
     lemma24LevelLoweringImported : Bool
-    formalCoefficientLawsReprovedAnalytically : Bool
+    NatIndexedOldformCarrierUsedForMeromorphicHauptmodul : Bool
     etaHauptmodulObjectsConstructedHere : Bool
     DelignePadicRigidityConstructedHere : Bool
 
@@ -99,9 +89,10 @@ canonicalDuncanSwisherUNModularLevelAuthorityBoundary :
   DuncanSwisherUNModularLevelAuthorityBoundary
 canonicalDuncanSwisherUNModularLevelAuthorityBoundary = record
   { analyticUNDefinitionImported = true
+  ; signedLaurentExpansionUsed = true
   ; coefficientSelectorSameObjectPinned = true
   ; lemma24LevelLoweringImported = true
-  ; formalCoefficientLawsReprovedAnalytically = false
+  ; NatIndexedOldformCarrierUsedForMeromorphicHauptmodul = false
   ; etaHauptmodulObjectsConstructedHere = false
   ; DelignePadicRigidityConstructedHere = false
   }
