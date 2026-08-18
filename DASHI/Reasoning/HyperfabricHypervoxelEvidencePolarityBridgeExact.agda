@@ -12,24 +12,23 @@ import DASHI.Reasoning.TypedHyperfabricCore as Hyperfabric
 ------------------------------------------------------------------------
 -- Hyperfabric / hypervoxel evidence geometry.
 --
--- TypedHyperfabric already supplies local stalks, restriction maps,
--- provenance, compatible global sections and explicit obstructions.
--- RecursiveRadixHypervoxel already supplies a ternary base address plus a
--- polarity fibre, with centralFlip moving vertically while the base projection
--- is unchanged.  Claim-indexed evidence belongs in those local/fine fibres;
--- centre-blind descent still requires the existing invariance witness.
+-- TypedHyperfabric supplies local stalks, restrictions, provenance and
+-- compatibility.  Claim evidence additionally carries an OppositionDescriptor,
+-- so a local counter-view, reversal, inverse or logical negation cannot be
+-- conflated merely because all occupy the second information coordinate.
+-- RecursiveRadixHypervoxel remains a separate geometric polarity fibre.
 ------------------------------------------------------------------------
 
 HypervoxelClaimEvidence :
   (rank depth : Nat) →
-  String →
+  Indexed.OppositionDescriptor String →
   Hypervoxel.LiftedAddress rank depth →
   Set
-HypervoxelClaimEvidence rank depth claim site =
+HypervoxelClaimEvidence rank depth opposition site =
   Indexed.ClaimFibreEvidence
     String
     (Hypervoxel.LiftedAddress rank depth)
-    claim
+    opposition
     site
 
 centralFlipIsVerticalAtBase :
@@ -42,12 +41,12 @@ record EvidenceHyperfabricInstantiation
     (Vertex Edge Claim Context : Set) : Set₁ where
   field
     fabric : Hyperfabric.TypedHyperfabric Vertex Edge
-    claimAt : Vertex → Claim
+    oppositionAt : Vertex → Indexed.OppositionDescriptor Claim
     contextAt : Vertex → Context
     localEvidence :
       (vertex : Vertex) →
       Indexed.ClaimFibreEvidence
-        Claim Context (claimAt vertex) (contextAt vertex)
+        Claim Context (oppositionAt vertex) (contextAt vertex)
 
 open EvidenceHyperfabricInstantiation public
 
@@ -55,9 +54,11 @@ record HyperfabricHypervoxelEvidenceBoundary : Set where
   field
     evidenceCanLiveInTypedStalks : Bool
     localEvidenceRequiresClaimContextIndex : Bool
+    localEvidenceRequiresOppositionRoleIndex : Bool
     verticalFibreMotionCanBeBaseInvisible : Bool
     centreBlindDescentRequiresInvariance : Bool
     hyperfabricAutomaticallyDiagnosesClaimed : Bool
+    polarityFibreEqualsLogicalNegationClaimed : Bool
     polarityFibreEqualsTernaryAxisClaimed : Bool
 
 canonicalHyperfabricHypervoxelEvidenceBoundary :
@@ -65,9 +66,11 @@ canonicalHyperfabricHypervoxelEvidenceBoundary :
 canonicalHyperfabricHypervoxelEvidenceBoundary = record
   { evidenceCanLiveInTypedStalks = true
   ; localEvidenceRequiresClaimContextIndex = true
+  ; localEvidenceRequiresOppositionRoleIndex = true
   ; verticalFibreMotionCanBeBaseInvisible = true
   ; centreBlindDescentRequiresInvariance = true
   ; hyperfabricAutomaticallyDiagnosesClaimed = false
+  ; polarityFibreEqualsLogicalNegationClaimed = false
   ; polarityFibreEqualsTernaryAxisClaimed = false
   }
 
