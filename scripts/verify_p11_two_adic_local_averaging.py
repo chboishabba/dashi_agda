@@ -10,24 +10,28 @@ Finite compact model:
 
 On the six-point carrier B\G:
   right K2 has three 2-point orbits (the P^1(F_2) deck fibres);
-  right B has orbit sizes 4,1,1 (the B\G/B Bruhat classes).
+  right B has orbit sizes 4,1,1 (the K_0(4) / Bruhat cells).
 
-Averaging a K2-invariant function over right B gives, relative to the orbit
-indicator bases, the rational matrix
+A function fixed by BOTH right K2 and right B must be constant on the common
+connectivity closure of the two orbit partitions.  That closure has two blocks,
+of sizes 4 and 2.  Hence the two three-dimensional fixed spaces are distinct
+subspaces of the same compact induced carrier and their intersection has
+exactly two independent coordinates.
+
+Right-B averaging of a K2-invariant function has matrix
 
     [[1/2, 1/2, 0],
      [0,   0,   1],
-     [0,   0,   1]].
+     [0,   0,   1]],
 
-After clearing denominator 2 this is
+up to the deterministic orbit ordering below.  After clearing denominator 2:
 
     [[1,1,0],
      [0,0,2],
-     [0,0,2]],
+     [0,0,2]].
 
-which has rank 2 and collapses the first two K2 basis vectors.  Therefore
-compact averaging alone cannot identify the three-dimensional principal-level-2
-fixed-vector model with the three-dimensional Gamma_0(4) oldvector model.
+Its rank 2 is therefore not an accidental numerical defect: it matches the
+actual two-coordinate common fixed subspace.
 """
 
 from __future__ import annotations
@@ -108,6 +112,36 @@ assert sorted(map(len, b_orbits)) == [1, 1, 4]
 k2_orbits = sorted(k2_orbits)
 b_orbits = sorted(b_orbits, key=lambda xs: (-len(xs), xs))
 
+# Common-invariant functions are constant on the connected components obtained
+# by joining points that lie in a common K(2)-orbit OR a common B-orbit.
+parent = list(range(6))
+
+
+def find(x: int) -> int:
+    while parent[x] != x:
+        parent[x] = parent[parent[x]]
+        x = parent[x]
+    return x
+
+
+def union(x: int, y: int) -> None:
+    rx, ry = find(x), find(y)
+    if rx != ry:
+        parent[ry] = rx
+
+
+for orbit in k2_orbits + b_orbits:
+    for x in orbit[1:]:
+        union(orbit[0], x)
+
+common_by_root: dict[int, list[int]] = {}
+for x in range(6):
+    common_by_root.setdefault(find(x), []).append(x)
+common_orbits = sorted((sorted(xs) for xs in common_by_root.values()), key=lambda xs: (-len(xs), xs))
+
+assert sorted(map(len, common_orbits)) == [2, 4]
+assert len(common_orbits) == 2
+
 # Right-B averaging of K2-orbit indicator functions, read on one representative
 # of each B orbit.
 averaging: list[list[Fraction]] = []
@@ -133,8 +167,9 @@ assert cleared == [
     [Fraction(0), Fraction(0), Fraction(2)],
 ]
 
-# Exact rank over Q.
+
 def rank_q(matrix: list[list[Fraction]]) -> int:
+    """Exact Gaussian-elimination rank over Q."""
     a = [row[:] for row in matrix]
     rows, cols = len(a), len(a[0])
     r = 0
@@ -158,13 +193,17 @@ def rank_q(matrix: list[list[Fraction]]) -> int:
 assert rank_q(averaging) == 2
 # e1-e2 is an explicit kernel vector.
 assert all(row[0] - row[1] == 0 for row in averaging)
+# The averaging rank equals the number of common-invariant coordinates.
+assert rank_q(averaging) == len(common_orbits) == 2
 
 print("|GL2(Z/4)| =", len(G))
 print("|B| = |K(2)| =", len(B))
-print("K(2) orbit sizes on B\\G:", [len(x) for x in k2_orbits])
-print("B orbit sizes on B\\G:", [len(x) for x in b_orbits])
+print("K(2) orbits on B\\G:", k2_orbits)
+print("K_0(4)=B orbits on B\\G:", b_orbits)
+print("common-invariant connectivity blocks:", common_orbits)
+print("intersection coordinate count =", len(common_orbits))
 print("B-averaging matrix:")
 for row in averaging:
     print(" ", row)
 print("rank =", rank_q(averaging))
-print("verified: compact averaging collapses e1-e2 and is not an isomorphism")
+print("verified: two 3D fixed spaces intersect in exactly two coordinates")
