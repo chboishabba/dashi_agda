@@ -5,6 +5,7 @@ import DASHI.Core.ObserverRefinementLatticeExact as Observer
 import DASHI.Core.FibrePreservingDynamicsExact as Dynamics
 import DASHI.Core.SectionedProjectionProvenanceBridgeExact as Sectioned
 import DASHI.Core.PredicatePullbackLatticeExact as Predicate
+import DASHI.Cognition.PNF.ProofRelevantIdentityFibres as Identity
 
 open import DASHI.Ontology.ProgenitorParentObserverDynamicsBridge
 open import DASHI.Ontology.ProgenitorParentObservationAuthorityBridge
@@ -39,8 +40,7 @@ separatingDisclosureObserverRegression :
 separatingDisclosureObserverRegression = variantDisclosureObserverSeparating
 
 separationStillNoSurfaceWorldAuthorityRegression :
-  DASHI.Cognition.PNF.ProofRelevantIdentityFibres.WorldCanonicalPermission
-    DASHI.Cognition.PNF.ProofRelevantIdentityFibres.surfaceLocal → ⊥
+  Identity.WorldCanonicalPermission Identity.surfaceLocal → ⊥
 separationStillNoSurfaceWorldAuthorityRegression =
   separatingObserverDoesNotGrantSurfaceWorldIdentity
 
