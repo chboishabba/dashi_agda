@@ -39,10 +39,8 @@ open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; tra
 
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNComplex3FieldAlgebra as Field
-import DASHI.Physics.Closure.NSTriadKNComplexCommutativeRingExact as CRing
 import DASHI.Physics.Closure.NSTriadKNComplex3HermitianAlgebraProgram as Hermitian
 import DASHI.Physics.Closure.NSTriadKNComplex3HermitianScalingLaws as Scaling
-import DASHI.Physics.Closure.NSTriadKNComplex3HermitianAdditiveLaws as Additive
 
 scaledPairingRight :
   ∀ {r} {F : C3.RealField r} →
@@ -118,11 +116,12 @@ pairEnergyDefectExact {F = F}
     forward reverse defect left right adjointDefect =
   let
     pairing = C3.hermitianPairing3 left right
+    forwardProduct = C3.complexMultiply forward pairing
+    reverseProduct = C3.complexMultiply (C3.complexConjugate reverse) pairing
 
     reverseReal :
       C3.real (reverseEnergy reverse left right)
-      ≡ C3.real
-          (C3.complexMultiply (C3.complexConjugate reverse) pairing)
+      ≡ C3.real reverseProduct
     reverseReal =
       trans
         (sym
@@ -132,7 +131,7 @@ pairEnergyDefectExact {F = F}
 
     forwardReal :
       C3.real (forwardEnergy forward left right)
-      ≡ C3.real (C3.complexMultiply forward pairing)
+      ≡ C3.real forwardProduct
     forwardReal = cong C3.real (forwardEnergyMeaning forward left right)
 
     sumRealMeaning :
@@ -145,15 +144,18 @@ pairEnergyDefectExact {F = F}
           (C3.real (reverseEnergy reverse left right))
     sumRealMeaning = refl
 
+    productSumReal :
+      C3.add F (C3.real forwardProduct) (C3.real reverseProduct)
+      ≡ C3.real (C3.complexAdd forwardProduct reverseProduct)
+    productSumReal = refl
+
     defectRealMeaning :
       C3.real (defectEnergy defect left right)
       ≡ C3.real (C3.complexMultiply defect pairing)
     defectRealMeaning = cong C3.real (defectEnergyMeaning defect left right)
 
     coefficientCollapse :
-      C3.complexAdd
-        (C3.complexMultiply forward pairing)
-        (C3.complexMultiply (C3.complexConjugate reverse) pairing)
+      C3.complexAdd forwardProduct reverseProduct
       ≡ C3.complexMultiply defect pairing
     coefficientCollapse =
       trans
@@ -171,11 +173,7 @@ pairEnergyDefectExact {F = F}
     (trans
       (cong₂ (C3.add F) forwardReal reverseReal)
       (trans
-        (sym
-          (cong C3.real
-            (Field.complexAddRealProjection
-              (C3.complexMultiply forward pairing)
-              (C3.complexMultiply (C3.complexConjugate reverse) pairing))))
+        productSumReal
         (trans
           (cong C3.real coefficientCollapse)
           (sym defectRealMeaning))))
