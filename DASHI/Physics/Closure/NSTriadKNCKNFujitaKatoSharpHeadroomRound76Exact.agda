@@ -64,6 +64,7 @@ open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (subst₂)
 
 import DASHI.Physics.Closure.NSTriadKNHHBadCapacityProductRound63Exact as Product
+import DASHI.Physics.Closure.NSTriadKNHHBadSelectedProfileMultiplicityRound62Exact as SelectedPhysical
 import DASHI.Physics.Closure.NSTriadKNHHBadPhysicalCapacityProductWeldRound68Exact as Physical
 import DASHI.Physics.Closure.NSTriadKNJointGlobalFeasibilityRound54Exact as Existing
 
@@ -101,7 +102,7 @@ hhBadTaxBelowAvailableHeadroomClosesSharpGate lambdaBad softTax hardBelow =
 
 physicalBadCapacityProductBelowAvailableHeadroomClosesSharpGate :
   ∀ {environment effectiveViscosity}
-    (input : Physical.PhysicalSelectedProfileMultiplicityInput
+    (input : SelectedPhysical.PhysicalSelectedProfileMultiplicityInput
       environment effectiveViscosity)
     (softTax : ℚ) →
   Product.hhBadTaxFromCapacityProduct
