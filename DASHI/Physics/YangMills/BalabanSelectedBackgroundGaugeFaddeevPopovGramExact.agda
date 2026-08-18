@@ -26,36 +26,30 @@ module DASHI.Physics.YangMills.BalabanSelectedBackgroundGaugeFaddeevPopovGramExa
 --
 -- Close the same-object seam between the literal background Faddeev--Popov
 -- operator M_A = D_A G_A and the selected gauge Gram K_A = L_A L_A^T.
---
--- The proof is on the actual side-four finite rational carrier.  We first
--- expose the physical matrix entry
+-- On the actual side-four finite rational carrier we expose
 --
 --   L_A((b,y),(a,mu,x))
 --     = delta_ba delta_yx
 --       - [Ad_{U_mu(x)^-1}]_{ba} delta_{y,x+mu}.
 --
--- Finite Kronecker selection proves its forward action is exactly the already
--- constructed covariant backward divergence D_A.  A second finite selection,
--- together with the exact quaternion identity
+-- Finite selection proves its forward action is D_A.  A second finite
+-- selection plus
 --
---   <Ad_{U^-1} e_a , omega> = <e_a , Ad_U omega>,
+--   <Ad_{U^-1} e_a,omega> = <e_a,Ad_U omega>
 --
--- proves its transpose is exactly the already constructed gauge-orbit
--- derivative G_A.  Consequently
---
---   L_A L_A^T = D_A G_A = M_A
---
--- pointwise on the same gauge-multiplier carrier.
+-- proves its transpose is G_A.  Therefore L_A L_A^T = D_A G_A = M_A on the
+-- exact same multiplier carrier.  All field congruences below are proved
+-- pointwise; no function extensionality principle is used.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.List using (List)
 open import Data.Empty using (⊥-elim)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; -_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using
-  (cong; cong₂; subst; sym; trans)
+  (cong; cong₂; sym; trans)
 open import Relation.Nullary.Decidable.Core using (yes; no)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -167,12 +161,10 @@ basisQuaternion Coordinates.coordinateX = Q.quat 0ℚ 1ℚ 0ℚ 0ℚ
 basisQuaternion Coordinates.coordinateY = Q.quat 0ℚ 0ℚ 1ℚ 0ℚ
 basisQuaternion Coordinates.coordinateZ = Q.quat 0ℚ 0ℚ 0ℚ 1ℚ
 
-parameterQuaternionAt : GaugeMultiplier → Periodic.Site4 → Q.RationalQuaternion
-parameterQuaternionAt multiplier site =
-  Q.quat 0ℚ
-    (multiplier (pair Coordinates.coordinateX site))
-    (multiplier (pair Coordinates.coordinateY site))
-    (multiplier (pair Coordinates.coordinateZ site))
+componentValue : Coordinates.LieCoordinate3 → ℚ → ℚ → ℚ → ℚ
+componentValue Coordinates.coordinateX x y z = x
+componentValue Coordinates.coordinateY x y z = y
+componentValue Coordinates.coordinateZ x y z = z
 
 transportCoefficient :
   Physical.RationalSU2Background4 →
@@ -193,20 +185,13 @@ explicitGaugeConstraintMatrix background
   - transportCoefficient background output input axis columnSite
       * siteDelta rowSite (Periodic.shiftForward axis columnSite)
 
-------------------------------------------------------------------------
--- Three-coordinate linearity of the local adjoint action.
-------------------------------------------------------------------------
-
 adjointCoordinateLinearCombination :
   ∀ unit output x y z →
   Sums.sumRational Coordinates.lieCoordinates3
     (λ input →
       Gauge.quaternionCoordinate output
         (Adjoint.adjointTransport unit (basisQuaternion input))
-      * (case input of λ where
-          Coordinates.coordinateX → x
-          Coordinates.coordinateY → y
-          Coordinates.coordinateZ → z))
+      * componentValue input x y z)
   ≡ Gauge.quaternionCoordinate output
       (Adjoint.adjointTransport unit (Q.quat 0ℚ x y z))
 adjointCoordinateLinearCombination
@@ -226,10 +211,7 @@ adjointTransposeCoordinateIdentity :
       Gauge.quaternionCoordinate output
         (Adjoint.adjointTransport
           (Physical.quaternionConjugate unit) (basisQuaternion input))
-      * (case output of λ where
-          Coordinates.coordinateX → x
-          Coordinates.coordinateY → y
-          Coordinates.coordinateZ → z))
+      * componentValue output x y z)
   ≡ Gauge.quaternionCoordinate input
       (Adjoint.adjointTransport unit (Q.quat 0ℚ x y z))
 adjointTransposeCoordinateIdentity
@@ -241,10 +223,6 @@ adjointTransposeCoordinateIdentity
 adjointTransposeCoordinateIdentity
     (Q.quat u0 u1 u2 u3) Coordinates.coordinateZ x y z =
   ℚRing.solve-∀ u0 u1 u2 u3 x y z
-
-------------------------------------------------------------------------
--- Forward action: the explicit matrix is exactly D_A.
-------------------------------------------------------------------------
 
 currentSiteSum : ∀ vector output axis rowSite →
   Sums.sumRational Coordinates.lieCoordinates3
@@ -275,6 +253,16 @@ currentSiteSum vector output axis rowSite =
     (lieSelectorLeft output
       (λ input → vector (pair input (pair axis rowSite))))
 
+backgroundTransport :
+  Physical.RationalSU2Background4 → KKT.StateVector →
+  Periodic.Axis4 → Periodic.Site4 → Q.RationalQuaternion
+backgroundTransport background vector axis rowSite =
+  Adjoint.adjointTransport
+    (Gauge.backwardTransportUnit background axis rowSite)
+    (Gauge.insertionQuaternion
+      (Coordinates.decodePhysicalSU2 vector) axis
+      (Periodic.shiftBackward axis rowSite))
+
 transportedSiteSum : ∀ background vector output axis rowSite →
   Sums.sumRational Coordinates.lieCoordinates3
     (λ input →
@@ -284,70 +272,47 @@ transportedSiteSum : ∀ background vector output axis rowSite →
             * siteDelta rowSite (Periodic.shiftForward axis columnSite)
             * vector (pair input (pair axis columnSite))))
   ≡ Gauge.quaternionCoordinate output
-      (GaugeMatrixTransport background vector axis rowSite)
-  where
-  GaugeMatrixTransport :
-    Physical.RationalSU2Background4 → KKT.StateVector →
-    Periodic.Axis4 → Periodic.Site4 → Q.RationalQuaternion
-  GaugeMatrixTransport currentBackground currentVector currentAxis currentSite =
-    Adjoint.adjointTransport
-      (Gauge.backwardTransportUnit currentBackground currentAxis currentSite)
-      (Gauge.insertionQuaternion
-        (Coordinates.decodePhysicalSU2 currentVector) currentAxis
-        (Periodic.shiftBackward currentAxis currentSite))
+      (backgroundTransport background vector axis rowSite)
+transportedSiteSum background vector output axis rowSite =
+  let
+    previous = Periodic.shiftBackward axis rowSite
+    unit = Physical.inverseLink background (pair previous axis)
+    x = vector (pair Coordinates.coordinateX (pair axis previous))
+    y = vector (pair Coordinates.coordinateY (pair axis previous))
+    z = vector (pair Coordinates.coordinateZ (pair axis previous))
 
-  transportedSiteSum currentBackground currentVector currentOutput currentAxis currentRowSite =
-    let
-      previous = Periodic.shiftBackward currentAxis currentRowSite
-      unit = Physical.inverseLink currentBackground (pair previous currentAxis)
-      x = currentVector (pair Coordinates.coordinateX (pair currentAxis previous))
-      y = currentVector (pair Coordinates.coordinateY (pair currentAxis previous))
-      z = currentVector (pair Coordinates.coordinateZ (pair currentAxis previous))
-
-      perInput : ∀ input →
-        Sums.sumRational sites
+    perInput : ∀ input →
+      Sums.sumRational sites
+        (λ columnSite →
+          transportCoefficient background output input axis columnSite
+            * siteDelta rowSite (Periodic.shiftForward axis columnSite)
+            * vector (pair input (pair axis columnSite)))
+      ≡ Gauge.quaternionCoordinate output
+          (Adjoint.adjointTransport unit (basisQuaternion input))
+          * vector (pair input (pair axis previous))
+    perInput input =
+      trans
+        (Sums.sumRationalCong sites _ _
           (λ columnSite →
-            transportCoefficient currentBackground currentOutput input
-                currentAxis columnSite
-              * siteDelta currentRowSite
-                  (Periodic.shiftForward currentAxis columnSite)
-              * currentVector (pair input (pair currentAxis columnSite)))
-        ≡ Gauge.quaternionCoordinate currentOutput
-            (Adjoint.adjointTransport unit (basisQuaternion input))
-            * currentVector (pair input (pair currentAxis previous))
-      perInput input =
-        trans
-          (Sums.sumRationalCong sites _ _
-            (λ columnSite →
-              trans
-                (cong
-                  (λ delta →
-                    transportCoefficient currentBackground currentOutput input
-                        currentAxis columnSite
-                    * delta
-                    * currentVector (pair input (pair currentAxis columnSite)))
-                  (siteDeltaShiftForwardBackward
-                    currentAxis currentRowSite columnSite))
-                (ℚRing.solve-∀
-                  (transportCoefficient currentBackground currentOutput input
-                    currentAxis columnSite)
-                  (siteDelta previous columnSite)
-                  (currentVector (pair input (pair currentAxis columnSite))))))
-          (trans
-            (siteSelectorLeft previous
-              (λ columnSite →
-                transportCoefficient currentBackground currentOutput input
-                    currentAxis columnSite
-                * currentVector (pair input (pair currentAxis columnSite))))
-            refl)
+            trans
+              (cong
+                (λ delta →
+                  transportCoefficient background output input axis columnSite
+                    * delta * vector (pair input (pair axis columnSite)))
+                (siteDeltaShiftForwardBackward axis rowSite columnSite))
+              (ℚRing.solve-∀
+                (transportCoefficient background output input axis columnSite)
+                (siteDelta previous columnSite)
+                (vector (pair input (pair axis columnSite))))))
+        (siteSelectorLeft previous
+          (λ columnSite →
+            transportCoefficient background output input axis columnSite
+              * vector (pair input (pair axis columnSite))))
 
-      selected = Sums.sumRationalCong
-        Coordinates.lieCoordinates3 _ _ perInput
-
-      localLinear = adjointCoordinateLinearCombination
-        unit currentOutput x y z
-    in
-    trans selected localLinear
+    selected = Sums.sumRationalCong
+      Coordinates.lieCoordinates3 _ _ perInput
+  in
+  trans selected (adjointCoordinateLinearCombination unit output x y z)
 
 explicitGaugeConstraintApply :
   Physical.RationalSU2Background4 → KKT.StateVector → GaugeMultiplier
@@ -367,16 +332,11 @@ explicitGaugeConstraintApplyExact background vector (pair output rowSite) =
           Sums.sumRational sites
             (λ columnSite →
               explicitGaugeConstraintMatrix background
-                (pair output rowSite)
-                (pair input (pair axis columnSite))
-              * vector (pair input (pair axis columnSite))))
+                  (pair output rowSite) (pair input (pair axis columnSite))
+                * vector (pair input (pair axis columnSite))))
       ≡ Gauge.backgroundBackwardTerm background
           (Coordinates.decodePhysicalSU2 vector) output axis rowSite
     perAxis axis =
-      let
-        current = currentSiteSum vector output axis rowSite
-        transported = transportedSiteSum background vector output axis rowSite
-      in
       trans
         (Sums.sumRationalCong Coordinates.lieCoordinates3 _ _
           (λ input →
@@ -408,10 +368,12 @@ explicitGaugeConstraintApplyExact background vector (pair output rowSite) =
                   * siteDelta rowSite (Periodic.shiftForward axis columnSite)
                   * vector (pair input (pair axis columnSite)))))
           (trans
-            (cong₂ _-_ current transported)
+            (cong₂ _-_
+              (currentSiteSum vector output axis rowSite)
+              (transportedSiteSum background vector output axis rowSite))
             refl))
 
-    expanded =
+    expandPhysical =
       trans
         (Fubini.sumCartesian Coordinates.lieCoordinates3 Incidence.bondCells4
           (λ column →
@@ -423,18 +385,16 @@ explicitGaugeConstraintApplyExact background vector (pair output rowSite) =
               Fubini.sumCartesian Periodic.axes4 sites
                 (λ cell →
                   explicitGaugeConstraintMatrix background (pair output rowSite)
-                    (pair input cell)
-                  * vector (pair input cell))))
+                    (pair input cell) * vector (pair input cell))))
           (trans
             (Fubini.sumSwap Coordinates.lieCoordinates3 Periodic.axes4
-              (λ input axis →
-                Sums.sumRational sites
-                  (λ columnSite →
-                    explicitGaugeConstraintMatrix background (pair output rowSite)
-                      (pair input (pair axis columnSite))
-                    * vector (pair input (pair axis columnSite)))))
+              (λ input axis → Sums.sumRational sites
+                (λ columnSite →
+                  explicitGaugeConstraintMatrix background (pair output rowSite)
+                    (pair input (pair axis columnSite))
+                  * vector (pair input (pair axis columnSite)))))
             (Sums.sumRationalCong Periodic.axes4 _ _ perAxis)))
-  in expanded
+  in expandPhysical
 
 existingGaugeMatrixSameObject : ∀ background row column →
   Existing.selectedBackgroundGaugeConstraintMatrix background row column
@@ -443,31 +403,27 @@ existingGaugeMatrixSameObject background row column =
   let
     basis = Linear.basisVector KKT.physicalStateCarrier column
 
-    existingApply = Existing.selectedBackgroundGaugeConstraintMatrixApplyExact
-      background basis row
-    explicitApply = explicitGaugeConstraintApplyExact background basis row
-
     existingEntry :
       Rect.applyRectangular KKT.physicalStateCarrier
-        (Existing.selectedBackgroundGaugeConstraintMatrix background) basis row
+          (Existing.selectedBackgroundGaugeConstraintMatrix background) basis row
       ≡ Existing.selectedBackgroundGaugeConstraintMatrix background row column
     existingEntry = Basis.physicalIdentitySelectorExact
       (Existing.selectedBackgroundGaugeConstraintMatrix background row) column
 
     explicitEntry :
       Rect.applyRectangular KKT.physicalStateCarrier
-        (explicitGaugeConstraintMatrix background) basis row
+          (explicitGaugeConstraintMatrix background) basis row
       ≡ explicitGaugeConstraintMatrix background row column
     explicitEntry = Basis.physicalIdentitySelectorExact
       (explicitGaugeConstraintMatrix background row) column
   in
   trans (sym existingEntry)
-    (trans existingApply
-      (trans (sym explicitApply) explicitEntry))
-
-------------------------------------------------------------------------
--- Transpose action: the matrix adjoint is exactly G_A.
-------------------------------------------------------------------------
+    (trans
+      (Existing.selectedBackgroundGaugeConstraintMatrixApplyExact
+        background basis row)
+      (trans
+        (sym (explicitGaugeConstraintApplyExact background basis row))
+        explicitEntry))
 
 explicitGaugeAdjoint :
   Physical.RationalSU2Background4 → GaugeMultiplier → KKT.StateVector
@@ -485,8 +441,7 @@ transportedRowSum : ∀ background multiplier input axis site →
       (FP.forwardTransportedParameter background multiplier axis site)
 transportedRowSum background multiplier input axis site =
   let
-    bond = pair site axis
-    unit = Physical.link background bond
+    unit = Physical.link background (pair site axis)
     forward = Periodic.shiftForward axis site
     x = multiplier (pair Coordinates.coordinateX forward)
     y = multiplier (pair Coordinates.coordinateY forward)
@@ -495,8 +450,7 @@ transportedRowSum background multiplier input axis site =
   adjointTransposeCoordinateIdentity unit input x y z
 
 explicitGaugeAdjointPointwiseExact : ∀ background multiplier input axis site →
-  explicitGaugeAdjoint background multiplier
-      (pair input (pair axis site))
+  explicitGaugeAdjoint background multiplier (pair input (pair axis site))
   ≡ FP.backgroundGaugeOrbitFirst background multiplier input (pair site axis)
 explicitGaugeAdjointPointwiseExact background multiplier input axis site =
   let
@@ -505,8 +459,7 @@ explicitGaugeAdjointPointwiseExact background multiplier input axis site =
     perOutput : ∀ output →
       Sums.sumRational sites
         (λ rowSite →
-          explicitGaugeConstraintMatrix background
-              (pair output rowSite) column
+          explicitGaugeConstraintMatrix background (pair output rowSite) column
             * multiplier (pair output rowSite))
       ≡ lieDelta output input * multiplier (pair output site)
         - transportCoefficient background output input axis site
@@ -543,28 +496,28 @@ explicitGaugeAdjointPointwiseExact background multiplier input axis site =
                 (λ rowSite →
                   siteDelta rowSite (Periodic.shiftForward axis site)
                     * multiplier (pair output rowSite)))
-              (cong
-                (transportCoefficient background output input axis site *_)
+              (cong (transportCoefficient background output input axis site *_)
                 (Basis.selectorExact Basis.site4FiniteSelector
                   (λ rowSite → multiplier (pair output rowSite))
                   (Periodic.shiftForward axis site))))))
 
-    expanded = trans
-      (Fubini.sumCartesian Coordinates.lieCoordinates3 sites
-        (λ row → explicitGaugeConstraintMatrix background row column * multiplier row))
-      (trans
-        (Sums.sumRationalCong Coordinates.lieCoordinates3 _ _ perOutput)
+    expanded =
+      trans
+        (Fubini.sumCartesian Coordinates.lieCoordinates3 sites
+          (λ row →
+            explicitGaugeConstraintMatrix background row column * multiplier row))
         (trans
-          (Fubini.sumRationalSubtract Coordinates.lieCoordinates3
-            (λ output → lieDelta output input * multiplier (pair output site))
-            (λ output →
-              transportCoefficient background output input axis site
-                * multiplier (pair output (Periodic.shiftForward axis site))))
+          (Sums.sumRationalCong Coordinates.lieCoordinates3 _ _ perOutput)
           (trans
-            (cong₂ _-_
-              (lieSelectorLeft input (λ output → multiplier (pair output site)))
-              (transportedRowSum background multiplier input axis site))
-            refl)))
+            (Fubini.sumRationalSubtract Coordinates.lieCoordinates3
+              (λ output → lieDelta output input * multiplier (pair output site))
+              (λ output → transportCoefficient background output input axis site
+                * multiplier (pair output (Periodic.shiftForward axis site))))
+            (trans
+              (cong₂ _-_
+                (lieSelectorLeft input (λ output → multiplier (pair output site)))
+                (transportedRowSum background multiplier input axis site))
+              refl)))
   in expanded
 
 existingGaugeAdjoint :
@@ -572,8 +525,7 @@ existingGaugeAdjoint :
 existingGaugeAdjoint background multiplier =
   Rect.applyRectangular Rows.selectedGaugeRowCarrier
     (Rect.transposeRectangular
-      (Existing.selectedBackgroundGaugeConstraintMatrix background))
-    multiplier
+      (Existing.selectedBackgroundGaugeConstraintMatrix background)) multiplier
 
 existingGaugeAdjointIsGaugeOrbitFirst : ∀ background multiplier column →
   existingGaugeAdjoint background multiplier column
@@ -588,9 +540,58 @@ existingGaugeAdjointIsGaugeOrbitFirst background multiplier
           (pair input (pair axis site)))))
     (explicitGaugeAdjointPointwiseExact background multiplier input axis site)
 
-------------------------------------------------------------------------
--- Final same-object theorem: M_A = L_A L_A^T.
-------------------------------------------------------------------------
+insertionPointwiseCong :
+  ∀ left right →
+  (∀ coordinate bond → left coordinate bond ≡ right coordinate bond) →
+  ∀ axis site →
+  Gauge.insertionQuaternion left axis site
+  ≡ Gauge.insertionQuaternion right axis site
+insertionPointwiseCong left right equal axis site =
+  Q.quaternionExt refl
+    (equal Coordinates.coordinateX (pair site axis))
+    (equal Coordinates.coordinateY (pair site axis))
+    (equal Coordinates.coordinateZ (pair site axis))
+
+backgroundBackwardTermPointwiseCong :
+  ∀ background left right →
+  (∀ coordinate bond → left coordinate bond ≡ right coordinate bond) →
+  ∀ coordinate axis site →
+  Gauge.backgroundBackwardTerm background left coordinate axis site
+  ≡ Gauge.backgroundBackwardTerm background right coordinate axis site
+backgroundBackwardTermPointwiseCong
+    background left right equal coordinate axis site =
+  let
+    previous = Periodic.shiftBackward axis site
+    unit = Gauge.backwardTransportUnit background axis site
+    insertionExact = insertionPointwiseCong left right equal axis previous
+    transportedExact = cong (Adjoint.adjointTransport unit) insertionExact
+  in
+  cong₂ _-_
+    (equal coordinate (pair site axis))
+    (cong (Gauge.quaternionCoordinate coordinate) transportedExact)
+
+backgroundGaugeFirstPointwiseCong :
+  ∀ background left right →
+  (∀ coordinate bond → left coordinate bond ≡ right coordinate bond) →
+  ∀ row →
+  Gauge.backgroundGaugeFirst background left row
+  ≡ Gauge.backgroundGaugeFirst background right row
+backgroundGaugeFirstPointwiseCong
+    background left right equal (pair coordinate site) =
+  Sums.sumRationalCong Gauge.axes4 _ _
+    (λ axis → backgroundBackwardTermPointwiseCong
+      background left right equal coordinate axis site)
+
+decodedAdjointIsGaugeOrbitFirst :
+  ∀ background multiplier coordinate bond →
+  Coordinates.decodePhysicalSU2 (existingGaugeAdjoint background multiplier)
+      coordinate bond
+  ≡ FP.backgroundGaugeOrbitFirst background multiplier coordinate bond
+decodedAdjointIsGaugeOrbitFirst background multiplier coordinate (pair site axis) =
+  trans
+    (existingGaugeAdjointIsGaugeOrbitFirst background multiplier
+      (pair coordinate (pair axis site)))
+    refl
 
 existingGaugeGramApply :
   Physical.RationalSU2Background4 → GaugeMultiplier → GaugeMultiplier
@@ -604,34 +605,20 @@ faddeevPopovIsGaugeGram : ∀ background multiplier row →
   ≡ existingGaugeGramApply background multiplier row
 faddeevPopovIsGaugeGram background multiplier row =
   let
-    adjointExact : ∀ coordinate →
-      existingGaugeAdjoint background multiplier coordinate
-      ≡ Coordinates.encodePhysicalSU2
-          (FP.backgroundGaugeOrbitFirst background multiplier) coordinate
-    adjointExact = existingGaugeAdjointIsGaugeOrbitFirst background multiplier
-
-    decodedExact : ∀ coordinate bond →
-      Coordinates.decodePhysicalSU2
-        (existingGaugeAdjoint background multiplier) coordinate bond
-      ≡ FP.backgroundGaugeOrbitFirst background multiplier coordinate bond
-    decodedExact coordinate (pair site axis) =
-      trans
-        (adjointExact (pair coordinate (pair axis site)))
-        refl
+    matrixAction = Existing.selectedBackgroundGaugeConstraintMatrixApplyExact
+      background (existingGaugeAdjoint background multiplier) row
+    fieldCong = backgroundGaugeFirstPointwiseCong
+      background
+      (Coordinates.decodePhysicalSU2 (existingGaugeAdjoint background multiplier))
+      (FP.backgroundGaugeOrbitFirst background multiplier)
+      (decodedAdjointIsGaugeOrbitFirst background multiplier)
+      row
   in
-  sym
-    (trans
-      (Existing.selectedBackgroundGaugeConstraintMatrixApplyExact
-        background (existingGaugeAdjoint background multiplier) row)
-      (cong
-        (λ field → Gauge.backgroundGaugeFirst background field row)
-        refl))
+  sym (trans matrixAction fieldCong)
 
 selectedBackgroundGaugeExplicitEntryLevel : ProofLevel
 selectedBackgroundGaugeExplicitEntryLevel = machineChecked
-
 selectedBackgroundGaugeAdjointOrbitLevel : ProofLevel
 selectedBackgroundGaugeAdjointOrbitLevel = machineChecked
-
 selectedBackgroundFaddeevPopovGaugeGramLevel : ProofLevel
 selectedBackgroundFaddeevPopovGaugeGramLevel = machineChecked
