@@ -8,13 +8,15 @@ module DASHI.Moonshine.BrandtFrobeniusFrickeCrossPollinationEverything where
 -- quotient-observable factorization does not imply carrier identity; the naive
 -- ell=2 edge-slot C3 action fails; coarse Fricke fixed points are not the same
 -- carrier as Brandt j-classes; all-fixed Frobenius is carrier-sensitive under
--- level rigidification; observer refinement is tracked explicitly; and marked
--- states reopen from coarse j plus a proof-relevant residual sheet coordinate.
+-- level rigidification; observer refinement is tracked explicitly; marked
+-- states reopen from coarse j plus a proof-relevant residual sheet coordinate;
+-- and only fibre-constant predicates descend to the coarse j surface.
 ------------------------------------------------------------------------
 
 import DASHI.Core.ObserverRefinementLatticeExact
 import DASHI.Core.FibrePreservingDynamicsExact
 import DASHI.Core.SectionedProjectionProvenanceBridgeExact
+import DASHI.Core.PredicatePullbackLatticeExact
 
 import DASHI.Foundations.FibreConstantObservableExact
 import DASHI.Foundations.Phase3RootCharacterWeldExact
@@ -29,6 +31,7 @@ import DASHI.Moonshine.BrandtFrickeCarrierCountControlsExact
 import DASHI.Moonshine.P11GeometricFrobeniusRealizationExact
 import DASHI.Moonshine.P11Fine5FibreObservableBridgeExact
 import DASHI.Moonshine.P11Fine5PNFProvenanceQuotientBridgeExact
+import DASHI.Moonshine.P11Fine5PredicateDescentBridgeExact
 import DASHI.Moonshine.P11MarkedFrobeniusQuotientDefectExact
 import DASHI.Moonshine.P11MarkedX2C3CharacterWeldExact
 import DASHI.Moonshine.P11MarkedX2FrobeniusFrickeExact
