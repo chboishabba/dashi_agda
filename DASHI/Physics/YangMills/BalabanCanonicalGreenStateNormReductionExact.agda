@@ -57,12 +57,13 @@ pseudoinverseEnergyRespectsPointwise :
   (∀ row → left row ≡ right row) →
   Positive.pseudoinverseEnergy pseudoData left
   ≡ Positive.pseudoinverseEnergy pseudoData right
-pseudoinverseEnergyRespectsPointwise pseudoData pointwise =
+pseudoinverseEnergyRespectsPointwise {Multiplier}
+    pseudoData {left} {right} pointwise =
   let
     carrier = Pseudo.multiplierCarrier pseudoData
     pseudoCong : ∀ row →
-      Pseudo.pseudoApply pseudoData _ row
-      ≡ Pseudo.pseudoApply pseudoData _ row
+      Pseudo.pseudoApply pseudoData left row
+      ≡ Pseudo.pseudoApply pseudoData right row
     pseudoCong = Rect.applyRectangularVectorCong
       carrier (Pseudo.gramPseudoinverse pseudoData) pointwise
   in
