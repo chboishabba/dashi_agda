@@ -34,6 +34,7 @@ import DASHI.Moonshine.P11Level11Ell7PointCountExact as Point7
 import DASHI.Moonshine.P11MarkedQuaternionThetaEll7Exact as Theta7
 import DASHI.Moonshine.P11MarkedX2T7HeckeCollisionExact as T7
 import DASHI.Moonshine.P11MarkedHeckeThetaCollisionCriterionExact as Criterion
+import DASHI.Moonshine.P11Ell7PointCountBrandtTraceExact as Trace7
 import DASHI.Moonshine.P37NonOggFullLevel2DeuringControlExact as P37
 import DASHI.Moonshine.P37MarkedX2JointFingerprintDeckCollisionExact as P37Collision
 import DASHI.Moonshine.AuxiliaryLevelHeckeDeckFactorizationExact as Aux
@@ -48,6 +49,12 @@ p11PointCountTenRegression = Point7.projectivePointCountIsTen
 
 p11ThetaSevenRegression : Theta7.markedT7LoopTable ≡ (2 , 0)
 p11ThetaSevenRegression = Theta7.markedT7LoopTableIsTwoZero
+
+p11DirectPointCountTraceRegression :
+  Criterion.DifferenceEquivalent
+    (Criterion.coarseNonconstantDifference T7.p11Ell7Degree T7.p11Ell7CrossUnit)
+    (Criterion.natDifference 0 Point7.a7NegativeMagnitude)
+p11DirectPointCountTraceRegression = Trace7.ell7CoarseBrandtDifferenceIsPointCountTrace
 
 p11T7CollisionRegression :
   T7.brandt357FFingerprint ≡ T7.standard357FFingerprint
@@ -71,8 +78,6 @@ p37DeckMovingFingerprintRegression :
   ≡ P37Collision.deckMovingEvenObserver x
 p37DeckMovingFingerprintRegression = P37Collision.deckMovingEvenT3Eigen
 
--- The generic auxiliary-level mechanism remains reusable but does not identify
--- the arithmetic carrier automatically.
 auxiliaryLevelBoundaryRegression :
   Aux.p11SameObjectProductFactorizationClaimedHere
     Aux.canonicalAuxiliaryLevelHeckeDeckBoundary ≡ false
