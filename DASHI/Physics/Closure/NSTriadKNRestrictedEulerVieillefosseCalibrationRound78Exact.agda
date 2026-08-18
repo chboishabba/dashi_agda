@@ -81,10 +81,7 @@ vieillefosseDiscriminantIsFirstIntegral Q R =
 restrictedRDerivativeNonnegative : ∀ Q →
   0ℚ ≤ restrictedRDerivative Q
 restrictedRDerivativeNonnegative Q =
-  L2.nonnegativeProductMonotone
-    twoThirdsNonnegative (L2.squareNonnegative Q)
-    twoThirdsNonnegative (L2.squareNonnegative Q)
-    ℚP.≤-refl ℚP.≤-refl
+  ℚP.0≤*0≤ twoThirdsNonnegative (L2.squareNonnegative Q)
 
 round78RestrictedEulerVieillefosseInvariantExact : Bool
 round78RestrictedEulerVieillefosseInvariantExact = true
