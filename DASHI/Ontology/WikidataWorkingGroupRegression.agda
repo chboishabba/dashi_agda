@@ -3,9 +3,9 @@ module DASHI.Ontology.WikidataWorkingGroupRegression where
 open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Empty using (⊥)
+open import Data.Product using (proj₁)
 
 import DASHI.Algebra.DisagreementFourViewBoundary as Four
-import DASHI.Interop.WikidataDerivationFibreBridge as Fibre
 import DASHI.Interop.WikidataDerivationSupportSquareExact as Square
 import DASHI.Ontology.CrossOntologyContradictionAttributionExact as Attribution
 import DASHI.Ontology.DisjointUnionLatticeJMDBridgeExact as Dun
@@ -18,10 +18,9 @@ import DASHI.Ontology.WikidataRepairReopeningExact as Reopen
 import DASHI.Ontology.WikidataCheckerResultAttributionExact as Checker
 import DASHI.Core.ActiveObligationEvidenceFibreExact as Active
 import DASHI.Core.IndexedInterpretationMorphismExact as Indexed
-
-------------------------------------------------------------------------
--- Focused public regression for the Wikidata/JMD handoff.
-------------------------------------------------------------------------
+import DASHI.Core.EpistemicInquiryGovernance as CoreGovernance
+import DASHI.Core.MinimalSufficientResidual as Minimal
+import DASHI.Core.ReopenableProjectionComposition as Reopenable
 
 conflictAndIgnoranceRemainDistinctBeforeTritCollapse :
   Square.conflictSquare ≡ Square.ignoranceSquare → ⊥
@@ -70,7 +69,7 @@ missingEvidenceAndTargetFailureShareCheckerBit = Checker.targetAndMissingShareFa
 
 formalCheckerDoesNotSelfAuthoriseRevision :
   Governance.DiagnosticAuthorises Governance.formalChecker
-    DASHI.Core.EpistemicInquiryGovernance.revisionCoordinate → ⊥
+    CoreGovernance.revisionCoordinate → ⊥
 formalCheckerDoesNotSelfAuthoriseRevision = Governance.formalCheckerCannotSelfAuthoriseRevision
 
 strongerInferenceLanguageActivatesMissingObligation :
@@ -82,18 +81,13 @@ surfaceEqualityDoesNotTransferAcrossInterpretationIndices :
 surfaceEqualityDoesNotTransferAcrossInterpretationIndices = Indexed.surfaceEqualityDoesNotSupplyCrossIndexLicence
 
 repairRecommendationRetainsSourceResidual :
-  (state : DASHI.Core.MinimalSufficientResidual.FineBitState) →
-  Data.Product.proj₁
-    (Data.Product.proj₁
-      (Data.Product.proj₁
-        (DASHI.Core.ReopenableProjectionComposition.receipt
-          Reopen.fullOntologyDiagnosticRepairPipeline state)))
-  ≡ DASHI.Core.MinimalSufficientResidual.hiddenSecondBit state
+  (state : Minimal.FineBitState) →
+  proj₁ (proj₁ (proj₁
+    (Reopenable.receipt Reopen.fullOntologyDiagnosticRepairPipeline state)))
+  ≡ Minimal.hiddenSecondBit state
 repairRecommendationRetainsSourceResidual = Reopen.sourceResidualSurvivesRepairPipeline
 
 interpretiveOutputIsCandidateOnly :
-  Interpretive.DiagnosticInterpretation.outputCandidateOnly
-    Interpretive.canonicalAlignmentStressDiagnostic ≡ true
+  Interpretive.outputCandidateOnly Interpretive.canonicalAlignmentStressDiagnostic ≡ true
 interpretiveOutputIsCandidateOnly =
-  Interpretive.DiagnosticInterpretation.outputCandidateOnlyIsTrue
-    Interpretive.canonicalAlignmentStressDiagnostic
+  Interpretive.outputCandidateOnlyIsTrue Interpretive.canonicalAlignmentStressDiagnostic
