@@ -74,12 +74,12 @@ record LiteralPhysicalCompactTransferDatum
 open LiteralPhysicalCompactTransferDatum public
 
 finiteSystem :
-  ∀ {r} {model : LP.PeriodicHardShellFourierPDE {r}} →
-  LiteralPhysicalCompactTransferDatum model →
+  ∀ {r} {model : LP.PeriodicHardShellFourierPDE {r}}
+    (datum : LiteralPhysicalCompactTransferDatum model) →
   Audit.FiniteComplex3GalerkinSystem
     (LP.realField model)
-    (Literal.physicalEmbedding (physicalSystem _))
-    (Literal.physicalInverseSquare (physicalSystem _))
+    (Literal.physicalEmbedding (physicalSystem datum))
+    (Literal.physicalInverseSquare (physicalSystem datum))
 finiteSystem datum = Literal.finiteSystem (physicalSystem datum)
 
 literalRHS :
