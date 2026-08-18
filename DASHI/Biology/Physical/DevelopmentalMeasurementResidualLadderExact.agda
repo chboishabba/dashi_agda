@@ -20,10 +20,14 @@ module DASHI.Biology.Physical.DevelopmentalMeasurementResidualLadderExact where
 open import DASHI.Core.Prelude
 
 import DASHI.Biology.Physical.DevelopmentalMeasurementQuotientExact as Dev
+import DASHI.Core.AdmissibleReachability as Reachability
+import DASHI.Core.FutureLanguageProjectionDefectExact as FutureDefect
+import DASHI.Core.FutureObservationLanguageQuotientExact as Future
 import DASHI.Core.ObserverRefinementFutureSafetyExact as FutureBridge
 import DASHI.Core.ObserverRefinementLatticeExact as Observer
 import DASHI.Core.RecoverableObserverRefinementExact as Refinement
 import DASHI.Core.RecoverableQuotientCompositionExact as Recoverable
+import DASHI.Core.TypedDependencyCore as Dependency
 
 record NominalMeasurement : Set where
   constructor nominalMeasurement
@@ -167,6 +171,70 @@ futurePhenotypeBioelectricDiffers :
     ≡ Dev.phenotypeObservation (Dev.cellUpdate bioelectricRight) → ⊥
 futurePhenotypeBioelectricDiffers ()
 
+rightBioelectricFuture :
+  Future.FutureObservation
+    Dev.system
+    Dev.phenotypeObservation
+    bioelectricRight
+    (Dev.develop ∷ [])
+    true
+rightBioelectricFuture =
+  Future.futureObservation
+    (Dev.cellUpdate bioelectricRight)
+    (Reachability.executesCons
+      (Dev.admissible bioelectricRight)
+      Reachability.executesNil)
+    refl
+
+leftBioelectricFutureImpossible :
+  Future.FutureObservation
+    Dev.system
+    Dev.phenotypeObservation
+    bioelectricLeft
+    (Dev.develop ∷ [])
+    true →
+  ⊥
+leftBioelectricFutureImpossible
+  (Future.futureObservation after
+    (Reachability.executesCons step Reachability.executesNil)
+    observed)
+  with Dependency.postcondition step
+... | refl = false≢true observed
+  where
+    false≢true : false ≡ true → ⊥
+    false≢true ()
+
+chromatinFutureLanguageDefect :
+  FutureDefect.FutureLanguageProjectionDefect
+    Dev.system
+    Dev.phenotypeObservation
+    chromatinObserver
+chromatinFutureLanguageDefect =
+  FutureDefect.futureLanguageProjectionDefect
+    bioelectricLeft
+    bioelectricRight
+    sameChromatinMeasurement
+    (Dev.develop ∷ [])
+    true
+    rightBioelectricFuture
+    leftBioelectricFutureImpossible
+
+chromatinObserverStillNotFutureSafe :
+  Future.FutureLanguageSafeProjection
+    Dev.system
+    Dev.phenotypeObservation
+    chromatinObserver →
+  ⊥
+chromatinObserverStillNotFutureSafe safety =
+  FutureDefect.futureLanguageDefectContradictsSafety
+    safety
+    chromatinFutureLanguageDefect
+
+------------------------------------------------------------------------
+-- The identity observer closes the finite ladder and is future-safe for every
+-- declared future language on this exact carrier.
+------------------------------------------------------------------------
+
 fullStateObserver : Observer.Observer Dev.CellState Dev.CellState
 fullStateObserver x = x
 
@@ -174,7 +242,7 @@ fullStateSeparating : Observer.Separating fullStateObserver
 fullStateSeparating x y same = same
 
 fullStateIsFutureSafeForPhenotypeLanguage :
-  DASHI.Core.FutureObservationLanguageQuotientExact.FutureLanguageSafeProjection
+  Future.FutureLanguageSafeProjection
     Dev.system
     Dev.phenotypeObservation
     fullStateObserver
@@ -190,9 +258,9 @@ record DevelopmentalMeasurementResidualLadderBoundary : Set where
     nominalResidualFactorsIntoBioelectricAndChromatin : Bool
     nominalResidualFactorsIntoBioelectricAndChromatinIsTrue :
       nominalResidualFactorsIntoBioelectricAndChromatin ≡ true
-    chromatinMeasurementCanStillHideBioelectricDifference : Bool
-    chromatinMeasurementCanStillHideBioelectricDifferenceIsTrue :
-      chromatinMeasurementCanStillHideBioelectricDifference ≡ true
+    chromatinMeasurementStillFutureUnsafe : Bool
+    chromatinMeasurementStillFutureUnsafeIsTrue :
+      chromatinMeasurementStillFutureUnsafe ≡ true
     fullStateSeparatesAndIsFutureSafe : Bool
     fullStateSeparatesAndIsFutureSafeIsTrue :
       fullStateSeparatesAndIsFutureSafe ≡ true
