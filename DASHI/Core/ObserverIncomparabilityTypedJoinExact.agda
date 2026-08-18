@@ -63,6 +63,59 @@ jointStrictlyRefinesRight {left = left} {right = right} witness =
     (rightSame witness)
     (λ pairSame → leftSplitsRightCollision witness (cong proj₁ pairSame))
 
+------------------------------------------------------------------------
+-- Least common refinement / join universal property.
+--
+-- If a third observer is fine enough to refine BOTH transverse observers,
+-- equality under that third observer implies equality of the pair.  Therefore
+-- the typed pair observer is the least common refinement in the observational
+-- information preorder; this is stronger than merely showing that adding the
+-- second coordinate gives a strict refinement.
+------------------------------------------------------------------------
+
+jointLeastCommonRefinement :
+  ∀ {State A B Common}
+    (left : Obs.Observer State A)
+    (right : Obs.Observer State B)
+    (common : Obs.Observer State Common) →
+  Obs.Refines left common →
+  Obs.Refines right common →
+  Obs.Refines (Obs.pairObserver left right) common
+jointLeastCommonRefinement left right common commonRefinesLeft commonRefinesRight x y sameCommon =
+  cong₂ _,_
+    (commonRefinesLeft x y sameCommon)
+    (commonRefinesRight x y sameCommon)
+
+record LeastTypedObservationJoin
+    {State A B : Set}
+    (left : Obs.Observer State A)
+    (right : Obs.Observer State B) : Set₁ where
+  constructor leastTypedObservationJoin
+  field
+    join : Obs.Observer State (A × B)
+    joinRefinesLeft : Obs.Refines left join
+    joinRefinesRight : Obs.Refines right join
+    leastCommonRefinement :
+      ∀ {Common : Set}
+        (common : Obs.Observer State Common) →
+      Obs.Refines left common →
+      Obs.Refines right common →
+      Obs.Refines join common
+
+open LeastTypedObservationJoin public
+
+canonicalLeastTypedObservationJoin :
+  ∀ {State A B}
+    (left : Obs.Observer State A)
+    (right : Obs.Observer State B) →
+  LeastTypedObservationJoin left right
+canonicalLeastTypedObservationJoin left right =
+  leastTypedObservationJoin
+    (Obs.pairObserver left right)
+    (Obs.pairRefinesLeft left right)
+    (Obs.pairRefinesRight left right)
+    (jointLeastCommonRefinement left right)
+
 data AutomaticSemanticMergePermission
     {State A B : Set}
     (left : Obs.Observer State A)
@@ -80,8 +133,10 @@ record TypedObservationJoinBoundary : Set where
   field
     incomparableObserversCanBeRetainedTogether : Bool
     jointObservationStrictlyRefinesEachWhenCrossCollisionsExist : Bool
+    pairObserverHasLeastCommonRefinementProperty : Bool
     productObservationAutomaticallyLicensesSemanticPooling : Bool
+    leastJoinAutomaticallySeparatesWholeState : Bool
 
 canonicalTypedObservationJoinBoundary : TypedObservationJoinBoundary
 canonicalTypedObservationJoinBoundary =
-  typedObservationJoinBoundary true true false
+  typedObservationJoinBoundary true true true false false
