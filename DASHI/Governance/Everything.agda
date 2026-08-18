@@ -18,6 +18,10 @@ import DASHI.Governance.SituatedConstituency
 import DASHI.Governance.TransitionResidual
 import DASHI.Governance.SituatedInverseJusticeFibreExact
 import DASHI.Governance.InverseJusticeThroughputExact
+import DASHI.Governance.SituatedAuthorityRoutingExact
+import DASHI.Governance.AuthorityRoutingProjectionSafetyExact
+import DASHI.Governance.OptionConeCoercionExact
+import DASHI.Governance.JusticeCrossPollinationBridgeExact
 import DASHI.Governance.SituatedInverseJusticeRegression
 import DASHI.Governance.RevolutionarySourceAtlas
 import DASHI.Governance.RevolutionaryPracticeBraid
