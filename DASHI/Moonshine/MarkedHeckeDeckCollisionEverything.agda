@@ -36,6 +36,7 @@ module DASHI.Moonshine.MarkedHeckeDeckCollisionEverything where
 open import DASHI.Core.Prelude
 open import Data.Integer using (-[1+_])
 open import Data.Rational using (_/_)
+import Data.Nat.Coprimality as Cop
 
 import DASHI.Moonshine.P11Level11Ell7PointCountExact as Point7
 import DASHI.Moonshine.P11MarkedQuaternionThetaEll7Exact as Theta7
@@ -58,10 +59,6 @@ import DASHI.Moonshine.P11P37MarkedDeckSelectorCutsetExact as SelectorCutset
 import DASHI.Moonshine.AuxiliaryLevelHeckeDeckFactorizationExact as Aux
 import DASHI.Moonshine.AuxiliaryLevelHeckeObserverNoGoExact as ObserverNoGo
 
-------------------------------------------------------------------------
--- p=11 arithmetic and T7 regression.
-------------------------------------------------------------------------
-
 p11PointCountTenRegression : Point7.projectivePointCount ≡ 10
 p11PointCountTenRegression = Point7.projectivePointCountIsTen
 
@@ -78,10 +75,6 @@ p11T7CollisionRegression :
   T7.brandt357FFingerprint ≡ T7.standard357FFingerprint
 p11T7CollisionRegression = T7.brandtAndStandardStillCollideAtT7
 
-------------------------------------------------------------------------
--- p=11 marked permutation oldspace: actual deck + Hecke commuting maps.
-------------------------------------------------------------------------
-
 p11OldPermutationDeckRRegression :
   (copy : P11Old.OldCopy44) →
   P11PermOld.deckR5 (P11PermOld.oldCopyVector copy)
@@ -94,13 +87,9 @@ p11OldModuleT7IntertwinerRegression :
   ≡ P11OldInt.realizeOld3 (P11OldInt.scaleOld3 (-[1+ 1 ]) v)
 p11OldModuleT7IntertwinerRegression = P11OldInt.realizeT7
 
-------------------------------------------------------------------------
--- p=11 analytic oldspace: generic coefficient/eigencharacter theorem surfaces.
-------------------------------------------------------------------------
-
 p11AnalyticGoodPrimeCommutationRegression :
   (d ell : Nat) →
-  Data.Nat.Coprimality.Coprime d ell →
+  Cop.Coprime d ell →
   (a b Ta Tb : QDeg.FormalQSeries) →
   QDeg.DegeneracyCoefficientLaw d a b →
   QDeg.Weight2PrimeHeckeCoefficientLaw ell a Ta →
@@ -114,10 +103,6 @@ p11NoMorePrimeProbeBoundary :
     OldCutset.canonicalP11Level44OldspaceSameObjectCutsetBoundary ≡ false
 p11NoMorePrimeProbeBoundary = refl
 
-------------------------------------------------------------------------
--- p37 witness-level collision remains intact.
-------------------------------------------------------------------------
-
 p37CoarseFingerprintRegression :
   (x : P37.P37SupersingularLambda) →
   P37Collision.t3Action P37Collision.coarseEvenObserver x
@@ -129,10 +114,6 @@ p37DeckMovingFingerprintRegression :
   P37Collision.t3Action P37Collision.deckMovingEvenObserver x
   ≡ P37Collision.deckMovingEvenObserver x
 p37DeckMovingFingerprintRegression = P37Collision.deckMovingEvenT3Eigen
-
-------------------------------------------------------------------------
--- Complete p37 deck-isotypic compression and polynomial closure.
-------------------------------------------------------------------------
 
 p37DeckDimensionsRegression :
   P37Iso.trivialDeckDimension + P37Iso.signDeckDimension + P37Iso.standardDeckIsotypicDimension
@@ -171,10 +152,6 @@ p37StructuralDeckRepairRegression :
   P37IsoCollision.p37TrivialRefined ≡ P37IsoCollision.p37StandardRefined → ⊥
 p37StructuralDeckRepairRegression = P37IsoCollision.p37DeckRefinementSeparates
 
-------------------------------------------------------------------------
--- p43 second independent non-Ogg geometric control.
-------------------------------------------------------------------------
-
 p43MarkedCountRegression : P43.p43MarkedStateCount ≡ 21
 p43MarkedCountRegression = P43.p43MarkedStateCountIsTwentyOne
 
@@ -196,11 +173,6 @@ p11P43FrobeniusDefectSelectorRegression :
   ≡ SelectorCutset.p43CoarseFrobeniusPairDefect → ⊥
 p11P43FrobeniusDefectSelectorRegression =
   SelectorCutset.coarseFrobeniusPairDefectSeparates11And43
-
-------------------------------------------------------------------------
--- Product-factorization remains a sufficient generic no-go, not an imposed
--- same-object description of either arithmetic carrier.
-------------------------------------------------------------------------
 
 auxiliaryLevelBoundaryRegression :
   Aux.p11SameObjectProductFactorizationClaimedHere
