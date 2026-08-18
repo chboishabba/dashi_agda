@@ -43,7 +43,7 @@ module DASHI.Physics.Closure.NSTriadKNStaticRationalTwoChannelOverlayRound75Exac
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Rational.Base using (ℚ)
+open import Data.Rational.Base using (ℚ; _+_; _*_; _≤_)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
@@ -56,6 +56,7 @@ import DASHI.Physics.Closure.NSTriadKNLuoPhysicalFiveClassSupportRound25Exact as
 import DASHI.Physics.Closure.NSTriadKNLuoPhysicalFiveClassSumRound25Exact as Five
 import DASHI.Physics.Closure.NSTriadKNGlobalBilinearShellPairingRound29Exact as Shell
 import DASHI.Physics.Closure.NSTriadKNStaticPairingEmitsStructuredTriadicAtomsRound72Exact as Fine
+import DASHI.Physics.Closure.NSTriadKNCriticalRemainderTriadicCauchyRound71Exact as R71
 import DASHI.Physics.Closure.NSTriadKNOrderedInteractionRealImaginaryTwoChannelRound74Exact as Channels
 import DASHI.Physics.Closure.NSTriadKNTwoChannelStructuredCauchyOverlayRound74Exact as Overlay
 
@@ -191,14 +192,14 @@ staticRationalTwoChannelCauchy :
     (commutatorValue : Z3.FourierMode → ℚ)
     (hh : Fine.HHOwnerSelection) →
   RationalL2.square
-    (DASHI.Physics.Closure.NSTriadKNCriticalRemainderTriadicCauchyRound71Exact.triadicSignedSum
+    (R71.triadicSignedSum
       (Fine.structuredTriadicAtoms
         (staticRationalPhysicalPairing system output commutatorValue) hh))
-  RationalL2.≤
-    (Overlay.twoChannelCharge
-      (staticRationalTwoChannelOverlay system output commutatorValue hh))
-    (Overlay.twoChannelEffectiveComplexity
-      (staticRationalTwoChannelOverlay system output commutatorValue hh))
+  ≤
+    Overlay.twoChannelCharge
+      (staticRationalTwoChannelOverlay system output commutatorValue hh)
+    * Overlay.twoChannelEffectiveComplexity
+      (staticRationalTwoChannelOverlay system output commutatorValue hh)
 staticRationalTwoChannelCauchy system output commutatorValue hh =
   Overlay.twoChannelCauchy
     (staticRationalTwoChannelOverlay system output commutatorValue hh)
