@@ -68,6 +68,7 @@ module DASHI.Moonshine.MarkedOldspaceGeometricOggFrontierEverything where
 
 open import DASHI.Core.Prelude
 open import Data.Integer using (ℤ)
+open import Data.Fin using (Fin)
 
 import DASHI.Moonshine.FormalQSeriesOldformEigencharacterTransportExact as Eig
 import DASHI.Moonshine.P11MarkedLevel44PermutationIntertwinerExact as Marked
@@ -176,7 +177,7 @@ p43DerivedNodalGenusRegression :
 p43DerivedNodalGenusRegression = DRReg.p43DerivedQuotientArithmeticGenus
 
 localQuadraticPairHasTwoQuotientBranchesRegression :
-  (index : Data.Fin.Fin 1) →
+  (index : Fin 1) →
   DRLocal.quotientBranch (DRLocal.branch0Section index)
   ≡ DRLocal.quotientBranch0
 localQuadraticPairHasTwoQuotientBranchesRegression =
