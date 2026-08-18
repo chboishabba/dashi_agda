@@ -3,7 +3,6 @@ module DASHI.Ontology.LeanWikidataParentingPullbackBridge where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Agda.Builtin.String using (String)
 
 open import DASHI.Ontology.LeanWikidataFullSourceManifest
 open import DASHI.Ontology.LeanWikidataTheoremSurfaceBridge
@@ -12,9 +11,9 @@ open import DASHI.Ontology.ProgenitorParentHyperfabric
 ------------------------------------------------------------------------
 -- Exact source pins from the latest supplied Aristotle/JMD archive.
 --
--- This is deliberately a source-faithful bridge: theorem names below are
--- statements actually present in the pinned Lean files.  DASHI refinements are
--- kept in a separate section and are not attributed back to the Lean source.
+-- The theorem names below are statements actually present in the pinned Lean
+-- files. DASHI refinements are kept separate and are not attributed back to the
+-- Lean source.
 ------------------------------------------------------------------------
 
 parentingLatestSource : LeanSourceModule
@@ -50,7 +49,7 @@ pullbackRetractionLatestSource = leanSourceModule
   "RequestProject.PullbackRetraction"
   "02528e58d642a49c953c5157c8ce4d523d458a6814ee3cf778ad5f9d9bff29fd"
   classHierarchy
-  (derivationFibreAnchor ∷ identityTransport ∷ [])
+  (derivationFibreAnchor ∷ contextualClaimAnchor ∷ [])
 
 metaFrobeniusLatestSource : LeanSourceModule
 metaFrobeniusLatestSource = leanSourceModule
@@ -81,7 +80,7 @@ latestParentPullbackSources =
   categoryOntologiesLatestSource ∷ cubicalTypesLatestSource ∷ []
 
 ------------------------------------------------------------------------
--- Imported theorem contracts: these are the actual Lean statements we consume.
+-- Imported theorem contracts: actual Lean statements consumed by DASHI.
 ------------------------------------------------------------------------
 
 jmdParentReachabilityExact : LeanTheoremContract
@@ -111,13 +110,13 @@ jmdClassicalKinshipConservative = leanTheoremContract parentingLatestSource
 jmdFourRecordedParents : LeanTheoremContract
 jmdFourRecordedParents = leanTheoremContract parentingExamplesLatestSource
   "Wikidata.ParentingKB.rainbow_four_parents"
-  "worked parenting KB has four recorded parents"
+  "worked parenting KB has four recorded parents and two genetic parents"
   semanticExactness
 
 jmdAdoptionSeparatesLegalGenetic : LeanTheoremContract
 jmdAdoptionSeparatesLegalGenetic = leanTheoremContract parentingExamplesLatestSource
   "Wikidata.ParentingKB.adoption_legal_disjoint_genetic"
-  "worked adoption example separates legal and genetic parent sets"
+  "worked adoption example separates legal, social and genetic parent sets"
   negativeConstraintTheorem
 
 jmdSurrogacySeparatesBirthGenetic : LeanTheoremContract
@@ -167,11 +166,6 @@ latestParentPullbackTheoremContracts =
 
 ------------------------------------------------------------------------
 -- Exact JMD role surface, then a DASHI refinement into orthogonal coordinates.
---
--- JMD's ParentRole is a flat tag on a recorded ParentEdge.  The functions
--- isGenetic/isLegal/isSocial are faithfully reproduced below.  The richer
--- RelationVector is a DASHI refinement and must not be read back as a theorem of
--- the Lean source.
 ------------------------------------------------------------------------
 
 data JMDParentRole : Set where
@@ -197,8 +191,8 @@ jmdIsSocial jmdFoster = true
 jmdIsSocial jmdGuardian = true
 jmdIsSocial _ = false
 
--- Every constructor is a tag on a JMD ParentEdge, so recorded-parenthood is a
--- separate surface coordinate from DASHI genealogical/social parenthood.
+-- Every constructor tags a JMD ParentEdge. Recorded-parenthood is therefore a
+-- source surface distinct from DASHI genealogical/social-parent coordinates.
 jmdRecordedAsParent : JMDParentRole → Bool
 jmdRecordedAsParent _ = true
 
@@ -256,9 +250,6 @@ jmdSocialPredicatePreserved jmdFoster = refl
 jmdSocialPredicatePreserved jmdGuardian = refl
 jmdSocialPredicatePreserved jmdGodparent = refl
 
--- The flat recorded-parent tag does not recover the richer parent semantics.
--- Donor and adoptive roles are both recorded ParentEdges in JMD, while their
--- refined genealogical-parent coordinates differ.
 jmdRecordedParentProjectionIsLossy :
   jmdRecordedAsParent jmdDonor ≡ jmdRecordedAsParent jmdAdoptive
   × genealogicalParent (refineJMDRole jmdDonor) ≡ false
