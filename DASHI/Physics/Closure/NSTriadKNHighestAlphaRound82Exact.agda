@@ -47,27 +47,31 @@ module DASHI.Physics.Closure.NSTriadKNHighestAlphaRound82Exact where
 --
 -- The resulting deterministic occupation input is welded directly into the
 -- repository's pre-existing cutoff/shell/state-uniform compact-Gamma residence
--- theorem.  Therefore no new abstract residence algebra remains after Round82:
--- the open C5 content is physical construction of the uniform occupation and
--- replenishment estimates on the selected Navier--Stokes trajectory.
+-- theorem.  Moreover the existing replenishment core does not actually require
+-- one scalar theta<1: it accepts an arbitrary split E = margin + absorbed and
+-- R <= absorbed + C.  Therefore state-/interval-dependent absorption is already
+-- supported; the physical theorem only needs a uniform occupation-paying
+-- margin and endpoint/remainder control.
+--
+-- Round82 also removes two overcounts from the old 15-lemma substantive cutset:
+--
+--   D: the six-three lane is one source-facing producer.  Once the literal
+--      annular row is a FactorizedPhysicalOddPQSource / active
+--      PhysicalSixThreeGramCell, existing Round65 theorems give 17/64,
+--      65/512 and 133/256 automatically.
+--
+--   G: the actual compact annular symbol, scalar C4 bounds and dyadic L1
+--      summation are already proved.  One continuum theorem remains: construct
+--      the fourth-order physical kernel shell majorant by matrix chain/product
+--      estimates plus literal fourfold inverse-Fourier integration by parts.
+--
+-- Thus, without merging any genuinely independent C/F/E obligations, the
+-- substantive cutset is at most 13 source-facing lemmas plus the three final
+-- composition/limit lemmas.  Clay promotion remains false.
 --
 -- Foster--Lyapunov and deterministic dissipative-system sources calibrate the
 -- drift/occupation architecture only.  No stochastic recurrence theorem is
 -- promoted into selected-trajectory Navier--Stokes authority.
---
--- SHORTEST PHYSICAL CUTSET
---
--- Seven packages remain.  Package 3 is now best stated as:
---
--- 3a. same-event pressure/stretching surplus or quantitative depletion;
--- 3b. physical strain/small-spectrum and pressure/projector local mechanisms;
--- 3c. selected-trajectory compact-transfer derivative / relative-growth bridge;
--- 3d. cutoff-uniform integrated dangerous-occupation coercivity and
---     replenishment absorption for that same compact-transfer object.
---
--- The old matrix-exponential Frechet lift is not required merely to formulate
--- C5.  It remains optional/local support for a spectral pressure mechanism.
--- Clay promotion remains false.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -91,6 +95,9 @@ import DASHI.Physics.Closure.NSTriadKNC5CompactTransferPivotRound82Exact as Pivo
 import DASHI.Physics.Closure.NSTriadKNCompactGammaUniformOccupationWeldRound82Exact as Uniform
 import DASHI.Physics.Closure.NSTriadKNCompactGammaDriftNumeratorRound82Exact as Drift
 import DASHI.Physics.Closure.NSTriadKNGammaSemanticSeparationRound82Exact as GammaSeparation
+import DASHI.Physics.Closure.NSTriadKNStateDependentReplenishmentMarginRound82Exact as StateDependent
+import DASHI.Physics.Closure.NSTriadKNSixThreeSinglePhysicalSeamRound82Exact as SixThree
+import DASHI.Physics.Closure.NSTriadKNAnnularKernelSingleContinuumSeamRound82Exact as Kernel
 
 round82ClusterSylvesterCoreConstructed : Bool
 round82ClusterSylvesterCoreConstructed = Syl.round81ClusterSylvesterSquaredBudgetConstructed
@@ -125,11 +132,23 @@ round82UniformDangerOccupationUsesExistingResidenceTheorem : Bool
 round82UniformDangerOccupationUsesExistingResidenceTheorem =
   Uniform.round82UniformOccupationUsesExistingResidenceTheorem
 
+round82StateDependentReplenishmentSupported : Bool
+round82StateDependentReplenishmentSupported =
+  StateDependent.round82StateDependentAbsorbedPartSupportedByExistingCore
+
 round82PointwiseNegativeDriftRequired : Bool
 round82PointwiseNegativeDriftRequired = Pointwise.round82PointwiseNegativeDangerDriftIsNecessary
 
 round82PrimaryC5IsCompactTransferPotential : Bool
 round82PrimaryC5IsCompactTransferPotential = Pivot.round82CompactTransferPotentialSelectedAsPrimaryC5Currency
+
+round82SixThreeD1D2CompressedToOnePhysicalProducer : Bool
+round82SixThreeD1D2CompressedToOnePhysicalProducer =
+  SixThree.round82SixThreeFormerD1D2ReduceToSinglePhysicalSourceProducer
+
+round82AnnularG1G2CompressedToOneContinuumProducer : Bool
+round82AnnularG1G2CompressedToOneContinuumProducer =
+  Kernel.round82AnnularFormerG1G2ReduceToSingleContinuumShellMajorantProducer
 
 -- Seven genuine physical/analytic packages remain.
 round82SelectedGalerkinTrajectoryExistsGloballyAndIsLiteral : Bool
@@ -182,6 +201,18 @@ round82PacketGammaCannotDetermineTransferGammaIsTrue = refl
 round82UniformDangerOccupationUsesExistingResidenceTheoremIsTrue :
   round82UniformDangerOccupationUsesExistingResidenceTheorem ≡ true
 round82UniformDangerOccupationUsesExistingResidenceTheoremIsTrue = refl
+
+round82StateDependentReplenishmentSupportedIsTrue :
+  round82StateDependentReplenishmentSupported ≡ true
+round82StateDependentReplenishmentSupportedIsTrue = refl
+
+round82SixThreeD1D2CompressedToOnePhysicalProducerIsTrue :
+  round82SixThreeD1D2CompressedToOnePhysicalProducer ≡ true
+round82SixThreeD1D2CompressedToOnePhysicalProducerIsTrue = refl
+
+round82AnnularG1G2CompressedToOneContinuumProducerIsTrue :
+  round82AnnularG1G2CompressedToOneContinuumProducer ≡ true
+round82AnnularG1G2CompressedToOneContinuumProducerIsTrue = refl
 
 round82PrimaryC5IsCompactTransferPotentialIsTrue :
   round82PrimaryC5IsCompactTransferPotential ≡ true
