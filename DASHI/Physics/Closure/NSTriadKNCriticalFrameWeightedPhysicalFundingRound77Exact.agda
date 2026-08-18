@@ -19,29 +19,35 @@ module DASHI.Physics.Closure.NSTriadKNCriticalFrameWeightedPhysicalFundingRound7
 -- ROUND77 / CRITICAL EVENT -> FRAME-WEIGHTED PHYSICAL CHARGE
 --
 -- Round73 required W<=1.  Round77 removes that absolute normalization.
--- A selected critical event instead carries its source-native positive frame
--- product B and an exact bound W<=B.  Its reciprocal rho is then constructed
--- canonically from rational positivity, rather than supplied as another premise.
--- On the SAME atoms and SAME critical-ratio remainder,
+-- A selected critical event instead carries its source-native frame product B
+-- and an exact bound W<=B.  For a genuine positive critical excess mu>0,
+-- positivity of B is DERIVED: if B=0 then the factorized concentration theorem
+-- gives mu^2 <= Q B = 0, contradicting mu^2>0.  Rational positivity then
+-- constructs the reciprocal rho canonically.
+--
+-- Hence, on the SAME atoms and SAME critical-ratio remainder,
 --
 --   mu^2 <= Q W <= Q B
+--        and mu>0
 --
--- implies
+-- imply
 --
---   rho mu^2 <= Q.
+--   B>0,  rho=1/B,  rho mu^2 <= Q.
 --
 -- If Q is simultaneously identified with the event's physical charge, the
--- frame-weighted square rho mu^2 is a genuine Carleson floor.  This is the
--- dynamic interface required by the weighted Route-B compiler; no unit frame
--- bound, phase choice, square root, or free factor rescaling remains.
+-- frame-weighted square rho mu^2 is a genuine Carleson floor.  No unit frame
+-- bound, reciprocal premise, phase choice, square root, or free rescaling
+-- remains.  The live C2/C3 frontier is therefore the same-object dynamic
+-- overlay/charge identity, not normalization.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Nat using (Nat; suc)
-open import Data.Rational using (ℚ; 0ℚ; Positive; _*_; _+_; _≤_)
+open import Data.Rational using
+  (ℚ; 0ℚ; Positive; _*_; _+_; _≤_; _<_; _≢_; nonNegative; ≢-nonZero)
 import Data.Rational.Properties as ℚP
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
 import DASHI.Physics.Closure.NSTriadKNLocalizedPDEStructuredAtomsRound62Exact as Structured
@@ -118,6 +124,80 @@ criticalAmplificationForcesChargeTimesFrame
   in
   ℚP.≤-trans factorized scaled
 
+positiveAmplificationForcesFrameNonzero :
+  ∀ {balances block}
+    {positiveBlock : C1.PositiveCriticalBlockScale balances block}
+    (step : Amplification.CriticalRatioStepDecomposition positiveBlock)
+    (n : Nat) (mu : ℚ)
+    (atoms : List Structured.LocalizedPDEAtom)
+    (overlay : Overlay.TriadicFactorizationOverlay atoms)
+    (frameProduct : ℚ)
+    (bounded : FrameBoundedCriticalOverlay overlay frameProduct) →
+  Positive mu →
+  Amplification.inherited step n + mu
+    ≤ C1.normalizedCriticalRatio positiveBlock (suc n) →
+  Amplification.remainder step n ≡ R71.triadicSignedSum atoms →
+  frameProduct ≢ 0ℚ
+positiveAmplificationForcesFrameNonzero
+    step n mu atoms overlay frameProduct bounded muPositive excess remainderExact
+    frameZero =
+  let
+    instance
+      muPositiveInstance : Positive mu
+      muPositiveInstance = muPositive
+      squarePositiveInstance : Positive (L2.square mu)
+      squarePositiveInstance = ℚP.pos*pos⇒pos mu mu
+
+    muNN : 0ℚ ≤ mu
+    muNN = ℚP.<⇒≤ (ℚP.positive⁻¹ mu)
+
+    productBound = criticalAmplificationForcesChargeTimesFrame
+      step n mu atoms overlay frameProduct bounded muNN excess remainderExact
+
+    squareBelowZero : L2.square mu ≤ 0ℚ
+    squareBelowZero =
+      subst
+        (λ selectedFrame →
+          L2.square mu ≤ Overlay.overlayCharge overlay * selectedFrame)
+        frameZero
+        productBound
+      |> subst (L2.square mu ≤_) (ℚP.*-zeroʳ (Overlay.overlayCharge overlay))
+
+    squarePositive : 0ℚ < L2.square mu
+    squarePositive = ℚP.positive⁻¹ (L2.square mu)
+  in
+  ℚP.<-irrefl 0ℚ (ℚP.<-≤-trans squarePositive squareBelowZero)
+  where
+  infixl 0 _|>_
+  _|>_ : ∀ {A B : Set} → A → (A → B) → B
+  x |> f = f x
+
+positiveAmplificationForcesFramePositive :
+  ∀ {balances block}
+    {positiveBlock : C1.PositiveCriticalBlockScale balances block}
+    (step : Amplification.CriticalRatioStepDecomposition positiveBlock)
+    (n : Nat) (mu : ℚ)
+    (atoms : List Structured.LocalizedPDEAtom)
+    (overlay : Overlay.TriadicFactorizationOverlay atoms)
+    (frameProduct : ℚ)
+    (bounded : FrameBoundedCriticalOverlay overlay frameProduct) →
+  Positive mu →
+  Amplification.inherited step n + mu
+    ≤ C1.normalizedCriticalRatio positiveBlock (suc n) →
+  Amplification.remainder step n ≡ R71.triadicSignedSum atoms →
+  Positive frameProduct
+positiveAmplificationForcesFramePositive
+    step n mu atoms overlay frameProduct bounded muPositive excess remainderExact =
+  let
+    frameNonzero = positiveAmplificationForcesFrameNonzero
+      step n mu atoms overlay frameProduct bounded
+      muPositive excess remainderExact
+    instance
+      frameNN = nonNegative (frameNonnegative bounded)
+      frameNZ = ≢-nonZero frameNonzero
+  in
+  ℚP.nonNeg∧nonZero⇒pos frameProduct
+
 record PhysicalFrameWeightedAmplificationWitness
     {balances block}
     {positiveBlock : C1.PositiveCriticalBlockScale balances block}
@@ -127,10 +207,9 @@ record PhysicalFrameWeightedAmplificationWitness
     (overlay : Overlay.TriadicFactorizationOverlay atoms) : Set where
   field
     frameProduct : ℚ
-    framePositive : Positive frameProduct
     frameBounded : FrameBoundedCriticalOverlay overlay frameProduct
 
-    amplificationNonnegative : 0ℚ ≤ mu
+    amplificationPositive : Positive mu
     criticalExcess :
       Amplification.inherited step n + mu
       ≤ C1.normalizedCriticalRatio positiveBlock (suc n)
@@ -143,6 +222,38 @@ record PhysicalFrameWeightedAmplificationWitness
       Overlay.overlayCharge overlay ≡ physicalCharge
 
 open PhysicalFrameWeightedAmplificationWitness public
+
+amplificationNonnegative :
+  ∀ {balances block}
+    {positiveBlock : C1.PositiveCriticalBlockScale balances block}
+    {step : Amplification.CriticalRatioStepDecomposition positiveBlock}
+    {n mu atoms overlay} →
+  PhysicalFrameWeightedAmplificationWitness step n mu atoms overlay →
+  0ℚ ≤ mu
+amplificationNonnegative witness =
+  let
+    instance
+      muPositiveInstance : Positive _
+      muPositiveInstance = amplificationPositive witness
+  in
+  ℚP.<⇒≤ (ℚP.positive⁻¹ _)
+
+framePositive :
+  ∀ {balances block}
+    {positiveBlock : C1.PositiveCriticalBlockScale balances block}
+    {step : Amplification.CriticalRatioStepDecomposition positiveBlock}
+    {n mu atoms overlay} →
+  (witness : PhysicalFrameWeightedAmplificationWitness step n mu atoms overlay) →
+  Positive (frameProduct witness)
+framePositive {step = step} {n = n} {mu = mu} {atoms = atoms} {overlay = overlay}
+    witness =
+  positiveAmplificationForcesFramePositive
+    step n mu atoms overlay
+    (frameProduct witness)
+    (frameBounded witness)
+    (amplificationPositive witness)
+    (criticalExcess witness)
+    (remainderExact witness)
 
 reciprocalWeight :
   ∀ {balances block}
@@ -215,14 +326,17 @@ asFinalWeightedFundedNode {mu = mu} witness =
 round77CriticalEventNeedsAbsoluteUnitNormalization : Bool
 round77CriticalEventNeedsAbsoluteUnitNormalization = false
 
+round77PositiveCriticalEventForcesPositiveFrameProduct : Bool
+round77PositiveCriticalEventForcesPositiveFrameProduct = true
+
 round77CriticalFrameReciprocalIsConstructedNotAssumed : Bool
 round77CriticalFrameReciprocalIsConstructedNotAssumed = true
 
 round77FrameWeightedCriticalFundingCompilerConstructed : Bool
 round77FrameWeightedCriticalFundingCompilerConstructed = true
 
-round77SelectedTrajectoryProducesFrameWeightedWitnesses : Bool
-round77SelectedTrajectoryProducesFrameWeightedWitnesses = false
+round77SelectedTrajectoryProducesSameObjectFrameWeightedWitnesses : Bool
+round77SelectedTrajectoryProducesSameObjectFrameWeightedWitnesses = false
 
 round77DynamicCanonicalQPhysicalChargeIdentityConstructed : Bool
 round77DynamicCanonicalQPhysicalChargeIdentityConstructed = false
