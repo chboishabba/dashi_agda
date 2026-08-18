@@ -23,8 +23,9 @@ module DASHI.Physics.Closure.NSTriadKNSeparatedClusterPhysicalBudgetRound81Exact
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base using (ℚ; _≤_)
-open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
+open import Data.Rational.Base using (ℚ; _+_; _*_; _≤_)
+import Data.Rational.Properties as ℚP
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import DASHI.Physics.Closure.NSTriadKNClusterSylvesterBudgetRound81Exact as Syl
 import DASHI.Physics.Closure.NSTriadKNClusterForcingThreeTermBudgetRound81Exact as Force
@@ -89,17 +90,25 @@ separatedClusterProjectorRatePhysicalBudget datum =
           + Force.pressureSquareEnergy (physicalForcing datum)
           + Force.viscousSquareEnergy (physicalForcing datum))
     physical = Force.twoCoordinateThreeTermForcingBound (physicalForcing datum)
+
+    forcingPhysical :
+      Syl.forcingSquareEnergy
+        (Syl.sylvester (separatedSylvester datum))
+      ≤ Force.three *
+        (Force.localSquareEnergy (physicalForcing datum)
+          + Force.pressureSquareEnergy (physicalForcing datum)
+          + Force.viscousSquareEnergy (physicalForcing datum))
+    forcingPhysical =
+      subst
+        (λ lower →
+          lower ≤ Force.three *
+            (Force.localSquareEnergy (physicalForcing datum)
+              + Force.pressureSquareEnergy (physicalForcing datum)
+              + Force.viscousSquareEnergy (physicalForcing datum)))
+        (sym (sylvesterForcingEnergyMatchesPhysical datum))
+        physical
   in
-  trans
-    spectral
-    (subst
-      (λ lower →
-        lower ≤ Force.three *
-          (Force.localSquareEnergy (physicalForcing datum)
-            + Force.pressureSquareEnergy (physicalForcing datum)
-            + Force.viscousSquareEnergy (physicalForcing datum)))
-      (sym (sylvesterForcingEnergyMatchesPhysical datum))
-      physical)
+  ℚP.≤-trans spectral forcingPhysical
 
 round81SeparatedClusterAbstractC4ClosedToPhysicalBudget : Bool
 round81SeparatedClusterAbstractC4ClosedToPhysicalBudget = true
