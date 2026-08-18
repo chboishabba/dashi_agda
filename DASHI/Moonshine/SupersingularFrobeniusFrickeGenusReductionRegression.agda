@@ -15,16 +15,18 @@ module DASHI.Moonshine.SupersingularFrobeniusFrickeGenusReductionRegression wher
 --   p=37 : (2,1,2)
 --   p=43 : (3,1,4).
 --
--- This file shows that all three instantiate ONE generic algebraic reduction.
--- It remains a calibration: the Fricke rows use the existing class-number
--- input family, so these three instances do not replace the missing global
--- geometric proof of R = 2 r or S = g0+1.
+-- This file shows that all three instantiate ONE generic algebraic reduction
+-- and explicitly consumes the domain-specific Frobenius normal-form
+-- realizations.  It remains a calibration: the Fricke rows use the existing
+-- class-number input family, so these three instances do not replace the
+-- missing arbitrary-prime geometric special-fibre theorem.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
 
 import DASHI.Moonshine.PrimeFrickeGenusControlExact as Fricke
 import DASHI.Moonshine.OggPrimeControlMatrixExact as Matrix
+import DASHI.Moonshine.SupersingularFrobeniusOrbitSpectrumExact as Spectrum
 import DASHI.Moonshine.P11GeometricFrobeniusRealizationExact as P11
 import DASHI.Moonshine.P37SageSupersingularFrobeniusExact as P37
 import DASHI.Moonshine.P43NonOggFullLevel2DeuringControlExact as P43
@@ -85,14 +87,20 @@ p43PairDefectEqualsGenus :
   Reduce.frobeniusPairDefect p43CountData ≡ Reduce.genusX0Plus p43CountData
 p43PairDefectEqualsGenus = Reduce.frobeniusPairDefectEqualsFrickeGenus p43CountData
 
-p11GeometricPairWitnessConsumed :
-  P11.p11PairedOrbitDefectIsZero
-  ≡ P11.p11PairedOrbitDefectIsZero
-p11GeometricPairWitnessConsumed = refl
+p11GeometricRealizationRegression :
+  Spectrum.SupersingularFrobeniusNormalFormRealization
+    Matrix.prime11 P11.p11FrobeniusCarrier
+p11GeometricRealizationRegression = P11.p11GeometricSpectrumRealization
 
-p37GeometricNormalFormExists :
-  P37.P37Normal ≡ P37.P37Normal
-p37GeometricNormalFormExists = refl
+p37GeometricRealizationRegression :
+  Spectrum.SupersingularFrobeniusNormalFormRealization
+    Matrix.prime37 P37.p37FrobeniusCarrier
+p37GeometricRealizationRegression = P37.p37GeometricSpectrumRealization
 
-p43GeometricPairCountConsumed : P43.p43CoarsePairCount ≡ 1
-p43GeometricPairCountConsumed = P43.p43CoarsePairCountIsOne
+p43GeometricRealizationRegression :
+  Spectrum.SupersingularFrobeniusNormalFormRealization
+    Matrix.prime43 P43Geo.p43FrobeniusCarrier
+p43GeometricRealizationRegression = P43Geo.p43GeometricSpectrumRealization
+
+p43GeometricPairCountRegression : P43.p43CoarsePairCount ≡ 1
+p43GeometricPairCountRegression = P43.p43CoarsePairCountIsOne
