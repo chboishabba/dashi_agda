@@ -11,6 +11,7 @@ open import DASHI.Ontology.LeanWikidataParentingPullbackBridge
 open import DASHI.Ontology.LeanWikidataPullbackTopologyBoundary
 open import DASHI.Ontology.ProgenitorParentPNFPullbackLattice
 open import DASHI.Ontology.ProgenitorParentPredicateBaseChange
+open import DASHI.Ontology.ProgenitorParentPredicatePullbackExact
 
 jmdDonorGeneticPreservedRegression :
   jmdIsGenetic jmdDonor ≡ geneticContributor (refineJMDRole jmdDonor)
@@ -62,6 +63,14 @@ predicateBaseChangeGeneticRegression = geneticAndParentForgetsToGenetic
 predicateBaseChangeParentRegression :
   genealogicalParentP (predicateCarrier (meetFibreToRight geneticAndParentP8810)) ≡ true
 predicateBaseChangeParentRegression = geneticAndParentForgetsToParent
+
+exactPredicatePullbackGeneticRegression :
+  geneticP (pullbackCarrier geneticParentPullbackPair) ≡ true
+exactPredicatePullbackGeneticRegression = geneticParentPullbackHasGeneticWitness
+
+exactPredicatePullbackParentRegression :
+  genealogicalParentP (pullbackCarrier geneticParentPullbackPair) ≡ true
+exactPredicatePullbackParentRegression = geneticParentPullbackHasParentWitness
 
 pullbackTopologyNonCollapseRegression :
   categoricalPullbackAutomaticallyTopologicalEquivalence canonicalPullbackTopologyBoundary ≡ false
