@@ -38,10 +38,6 @@ import DASHI.Governance.DiachronicDelegatedAuthorityBoundary as Diachronic
 import DASHI.Reasoning.RelationalChronologyProjectionBoundary as Chronology
 import DASHI.Reasoning.RelationalSharedStateUpdate as Shared
 
-------------------------------------------------------------------------
--- Generic proof-carrying router.
-------------------------------------------------------------------------
-
 record RoutingSystem (Situation Route : Set) : Set₁ where
   field
     Sufficient : Situation → Route → Set
@@ -104,7 +100,6 @@ record PreferredRoute
 
 open PreferredRoute public
 
--- This is the formal "sufficiency first, then least domination" carrier.
 routeToLeastDomineeringSufficientSituatedAuthority :
   ∀ {Situation Route}
     {system : RoutingSystem Situation Route}
@@ -115,12 +110,7 @@ routeToLeastDomineeringSufficientSituatedAuthority :
 routeToLeastDomineeringSufficientSituatedAuthority = PreferredRoute.admissible
 
 ------------------------------------------------------------------------
--- Responder-family extension and the residual police domain.
---
--- A richer family adds possible responders without deleting the old ones.
--- If police was already present in the base family, then adding alternatives
--- cannot create a new state in which police has no less-domineering admissible
--- alternative.  This is the exact monotonic form of the reallocation claim.
+-- Responder-family extension and residual police domain.
 ------------------------------------------------------------------------
 
 ResponderFamily : Set → Set₁
@@ -191,11 +181,25 @@ policeRouteRequiresResidualNecessity :
 policeRouteRequiresResidualNecessity =
   ResidualPoliceDomain.noLessDomineeringAlternative
 
+preferredPoliceRouteImpliesResidualPoliceDomain :
+  ∀ {Situation Route}
+    {system : RoutingSystem Situation Route}
+    {police : Route}
+    {family : ResponderFamily Route}
+    {situation : Situation} →
+  family police →
+  PreferredRoute system situation police →
+  ResidualPoliceDomain system police family situation
+preferredPoliceRouteImpliesResidualPoliceDomain policeInFamily preferred =
+  residualPoliceDomain
+    policeInFamily
+    (admissible preferred)
+    λ other otherInFamily otherAdmissible less →
+      <⇒≱ less
+        (minimalAmongAdmissible preferred other otherAdmissible)
+
 ------------------------------------------------------------------------
 -- Concrete routing countermodel.
--- Some situations can genuinely route to a coercive/public-authority response
--- while that fact does not make the same route the default for another
--- situated state.
 ------------------------------------------------------------------------
 
 data DemoSituation : Set where
@@ -221,10 +225,6 @@ somePoliceNecessityDoesNotEstablishPoliceDefault allegedDefault with
 
 ------------------------------------------------------------------------
 -- Protective/supportive role cannot self-authorise an override.
---
--- The generic router exposes this as an independent CurrentAuthority
--- obligation.  The finite countermodel below gives a protective-looking route
--- all other obligations while making current authority empty.
 ------------------------------------------------------------------------
 
 data ProtectiveSituation : Set where
@@ -273,9 +273,7 @@ revokedProtectiveAuthorityCannotSelfRestoreFromPastEvidence =
   Diachronic.canonicalHistoricalEvidenceRestoresAuthorityFalse
 
 ------------------------------------------------------------------------
--- Community governance requires decision sensitivity, not merely consultation.
--- The existing canonical pseudo-consultation episode requested input but the
--- decision was insensitive to it.  It therefore cannot inhabit this witness.
+-- Community governance requires decision sensitivity, not mere consultation.
 ------------------------------------------------------------------------
 
 record CommunityAuthorityWitness
@@ -304,10 +302,6 @@ hearingDoesNotEstablishDecisionSensitivity :
   ≡ false
 hearingDoesNotEstablishDecisionSensitivity = refl
 
-------------------------------------------------------------------------
--- Boundary.
-------------------------------------------------------------------------
-
 record SituatedAuthorityRoutingBoundary : Set where
   constructor situatedAuthorityRoutingBoundary
   field
@@ -315,6 +309,7 @@ record SituatedAuthorityRoutingBoundary : Set where
     protectiveRoleSelfAuthorisesOverride : Bool
     consultationAloneCreatesCommunityAuthority : Bool
     richerResponderFamilyMayCreateNewResidualPoliceNeed : Bool
+    preferredPoliceImpliesResidualNeed : Bool
     routeAdmissibilityRequiresCurrentAuthority : Bool
     routeAdmissibilityRequiresSafety : Bool
     routeAdmissibilityRequiresRepairCapacity : Bool
@@ -322,4 +317,4 @@ record SituatedAuthorityRoutingBoundary : Set where
 canonicalSituatedAuthorityRoutingBoundary : SituatedAuthorityRoutingBoundary
 canonicalSituatedAuthorityRoutingBoundary =
   situatedAuthorityRoutingBoundary
-    false false false false true true true
+    false false false false true true true true
