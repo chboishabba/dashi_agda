@@ -17,35 +17,27 @@ module DASHI.Moonshine.P11JacquetLanglandsCoordinateNonCanonicityExact where
 --
 -- DASHI CONTRIBUTION
 --
--- The representation-level Jacquet--Langlands seam is already correctly
--- closed: quaternionic/Brandt and classical level-11 objects have the SAME
--- unramified local representation pi_2, while K(2)- and K_0(4)-fixed vectors
--- are distinct compact-open invariant subspaces.
+-- Representation-level Jacquet--Langlands is already closed correctly: the
+-- quaternionic/Brandt and classical level-11 objects have the SAME unramified
+-- local representation pi_2, while K(2)- and K_0(4)-fixed vectors are distinct
+-- compact-open invariant subspaces.
 --
--- This module proves a stronger coordinate-level non-canonicity theorem.
--- Even after retaining ALL of the currently source-native local information
+-- This module proves a stronger coordinate-level non-canonicity theorem.  Even
+-- after retaining the same local representation, exact common compact plane,
+-- a_2=-2 Satake polynomial, complete Satake residual map and kernel line, there
+-- remain two distinct integral transverse alignments.
 --
---   * the same local representation pi_2;
---   * the exact common two-coordinate compact intersection;
---   * the p=11 value a_2=-2;
---   * the Satake polynomial X^2+2X+2;
---   * the cubic oldspace operator identity;
---   * the complete Satake residual map;
---   * the resulting kernel line;
---
--- there remain TWO distinct integral transverse alignments.  Their transported
--- bad-prime operators P+ and P- differ, but their Satake residual maps agree
--- pointwise and their kernel generator is the same.
---
--- Thus a Whittaker/test-vector normalization is genuinely OPTIONAL additional
--- coordinate structure.  It can choose a preferred chart if a consumer needs
--- one, but its absence does not reopen the representation-level JL theorem.
+-- Therefore Whittaker/test-vector normalization is OPTIONAL additional
+-- coordinate structure: it may choose a preferred chart, but its absence does
+-- not reopen the representation-level JL theorem.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
+open import Data.Integer using (+_)
 
 import DASHI.Moonshine.P11JacquetLanglandsRepresentationStandardAuthorityExact as JL
 import DASHI.Moonshine.P11JacquetLanglandsFixedSpaceResolutionExact as Resolution
+import DASHI.Moonshine.P11Level44TwoAdicAveragingNoGoExact as K0
 import DASHI.Moonshine.P11Level44TwoAdicFixedSpaceIntersectionExact as Intersection
 import DASHI.Moonshine.P11Level44TwoAdicTransverseAlignmentExact as Transverse
 import DASHI.Moonshine.P11Level44TransverseSatakeNonUniquenessExact as Satake
@@ -53,16 +45,11 @@ import DASHI.Moonshine.P11Level44BadPrimeConjugacyNoGoExact as R2NoGo
 import DASHI.Moonshine.P11Level44BadPrimeOperatorSeparationExact as Bad
 import DASHI.Moonshine.P11MarkedLevel44PermutationIntertwinerExact as Principal
 
-------------------------------------------------------------------------
--- A proof-relevant collision: two distinct coordinate alignments satisfy the
--- same currently-declared local observer.
-------------------------------------------------------------------------
-
 record LocalCoordinateAlignment : Set where
   constructor local-coordinate-alignment
   field
-    principalToK0 : Principal.Old3 → DASHI.Moonshine.P11Level44TwoAdicAveragingNoGoExact.Bruhat3
-    k0ToPrincipal : DASHI.Moonshine.P11Level44TwoAdicAveragingNoGoExact.Bruhat3 → Principal.Old3
+    principalToK0 : Principal.Old3 → K0.Bruhat3
+    k0ToPrincipal : K0.Bruhat3 → Principal.Old3
     transportedU2 : Principal.Old3 → Principal.Old3
 
 open LocalCoordinateAlignment public
@@ -79,10 +66,27 @@ minusAlignment = local-coordinate-alignment
   Transverse.minusK0ToPrincipal
   Satake.minusPrincipalU2
 
-------------------------------------------------------------------------
--- The observer deliberately contains every invariant that has actually been
--- shown source-native so far.  It does NOT contain an arbitrary chart label.
-------------------------------------------------------------------------
+zeroPrincipal : Principal.Old3
+zeroPrincipal = Principal.old3 (+ 0) (+ 0) (+ 0)
+
+alignmentSatakeResidual :
+  LocalCoordinateAlignment → Principal.Old3 → Principal.Old3
+alignmentSatakeResidual A v =
+  Principal.addOld3
+    (transportedU2 A (transportedU2 A v))
+    (Principal.addOld3
+      (Principal.scaleOld3 (+ 2) (transportedU2 A v))
+      (Principal.scaleOld3 (+ 2) v))
+
+plusAlignmentResidualIsExisting :
+  (v : Principal.Old3) →
+  alignmentSatakeResidual plusAlignment v ≡ Satake.plusSatakeQuadratic v
+plusAlignmentResidualIsExisting v = refl
+
+minusAlignmentResidualIsExisting :
+  (v : Principal.Old3) →
+  alignmentSatakeResidual minusAlignment v ≡ Satake.minusSatakeQuadratic v
+minusAlignmentResidualIsExisting v = refl
 
 record SameDeclaredLocalData
     (A B : LocalCoordinateAlignment) : Set where
@@ -98,13 +102,11 @@ record SameDeclaredLocalData
 
     sameSatakeResidual :
       (v : Principal.Old3) →
-      Satake.plusSatakeQuadratic v ≡ Satake.minusSatakeQuadratic v
+      alignmentSatakeResidual A v ≡ alignmentSatakeResidual B v
 
     sameKernelGenerator :
-      transportedU2 A Satake.principalKernelGenerator
-      ≡ Principal.old3 0 0 0
-      × transportedU2 B Satake.principalKernelGenerator
-        ≡ Principal.old3 0 0 0
+      transportedU2 A Satake.principalKernelGenerator ≡ zeroPrincipal
+      × transportedU2 B Satake.principalKernelGenerator ≡ zeroPrincipal
 
 open SameDeclaredLocalData public
 
@@ -114,14 +116,15 @@ plusMinusSameDeclaredLocalData = record
   { sameRepresentation = Resolution.sameP11LocalRepresentationAtTwo
   ; sameCommonPlane = λ c →
       trans (Transverse.plusOnCommon c) (sym (Transverse.minusOnCommon c))
-  ; sameSatakeResidual = Satake.satakeResidualsIdentical
+  ; sameSatakeResidual = λ v →
+      trans
+        (plusAlignmentResidualIsExisting v)
+        (trans
+          (Satake.satakeResidualsIdentical v)
+          (sym (minusAlignmentResidualIsExisting v)))
   ; sameKernelGenerator =
       Satake.plusKernelGeneratorKilled , Satake.minusKernelGeneratorKilled
   }
-
-------------------------------------------------------------------------
--- Yet the alignments are genuinely distinct on the one transverse coordinate.
-------------------------------------------------------------------------
 
 alignmentsDistinct :
   ((v : Principal.Old3) →
@@ -133,11 +136,6 @@ transportedOperatorsDistinct :
   ((v : Principal.Old3) →
     transportedU2 plusAlignment v ≡ transportedU2 minusAlignment v) → ⊥
 transportedOperatorsDistinct = Satake.plusMinusOperatorsDistinct
-
-------------------------------------------------------------------------
--- A generic selector using only SameDeclaredLocalData cannot distinguish the
--- two alignments: the witness is literally inhabited for a distinct pair.
-------------------------------------------------------------------------
 
 record LocalCoordinateNonCanonicityWitness : Set where
   field
@@ -158,11 +156,6 @@ canonicalLocalCoordinateNonCanonicity = record
   ; coordinateDistinct = alignmentsDistinct
   ; badPrimeOperatorDistinct = transportedOperatorsDistinct
   }
-
-------------------------------------------------------------------------
--- The internal positive marked R2 is not one of the missing coordinate choices
--- either: the arbitrary conjugacy no-go is imported as a separate obstruction.
-------------------------------------------------------------------------
 
 internalMarkedR2CannotBeRecoveredByCoordinateChoice :
   R2NoGo.U2R2LinearConjugacy → Bad.Impossible
