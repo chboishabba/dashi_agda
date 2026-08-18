@@ -26,7 +26,7 @@ module DASHI.Physics.Closure.NSTriadKNDeviatoricPressureAlignmentDefectRound78Ex
 --       + (lambda2-lambda3) alpha2.
 --
 -- Thus departure from the smallest-eigenvector enabling endpoint has the exact
--- nonnegative-looking defect currency
+-- defect currency
 --
 --   D_align = (lambda1-lambda3) alpha1
 --             + (lambda2-lambda3) alpha2.
@@ -39,7 +39,7 @@ module DASHI.Physics.Closure.NSTriadKNDeviatoricPressureAlignmentDefectRound78Ex
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
-open import Data.Rational.Base using (ℚ; 1ℚ; _+_; _*_; _-_)
+open import Data.Rational.Base using (ℚ; 1ℚ; _+_; _*_; _-_; -_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
@@ -75,13 +75,27 @@ normalizedContractionEqualsSmallestPlusAlignmentDefect alignment =
     a1 = alpha1 alignment
     a2 = alpha2 alignment
     a3 = alpha3 alignment
+
+    regrouped :
+      normalizedDeviatoricContraction alignment
+      ≡ (l1 - l3) * a1 + (l2 - l3) * a2 + l3 * ((a1 + a2) + a3)
+    regrouped = solve (l1 ∷ l2 ∷ l3 ∷ a1 ∷ a2 ∷ a3 ∷ [])
+
+    weightsClosed :
+      (l1 - l3) * a1 + (l2 - l3) * a2 + l3 * ((a1 + a2) + a3)
+      ≡ (l1 - l3) * a1 + (l2 - l3) * a2 + l3 * 1ℚ
+    weightsClosed =
+      cong
+        (λ sumWeights →
+          (l1 - l3) * a1 + (l2 - l3) * a2 + l3 * sumWeights)
+        (alignmentWeightsSumOne alignment)
+
+    endpoint :
+      (l1 - l3) * a1 + (l2 - l3) * a2 + l3 * 1ℚ
+      ≡ l3 + alignmentDefectCost alignment
+    endpoint = solve (l1 ∷ l2 ∷ l3 ∷ a1 ∷ a2 ∷ [])
   in
-  trans
-    (solve (l1 ∷ l2 ∷ l3 ∷ a1 ∷ a2 ∷ a3 ∷ []))
-    (cong
-      (λ sumWeights →
-        (l1 - l3) * a1 + (l2 - l3) * a2 + l3 * sumWeights)
-      (alignmentWeightsSumOne alignment))
+  trans regrouped (trans weightsClosed endpoint)
 
 negatedNormalizedContractionExact :
   ∀ alignment →
