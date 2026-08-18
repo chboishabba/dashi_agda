@@ -26,6 +26,7 @@ import DASHI.Physics.Chemistry.AtomicEvidenceObligationBridgeExact
 -- Operator/action geometry and the repo-native 27^3 = 3^9 interaction carrier.
 import DASHI.Foundations.BalancedTernaryAntipodalOrbitExact
 import DASHI.Foundations.Base369InteractionAntipodalFibreExact
+import DASHI.Foundations.Base369InteractionObserverJoinExact
 import DASHI.Foundations.TernaryNineAntipodalD4SeparationExact
 
 -- Existing source-native support-square / contradiction projection from the
