@@ -20,6 +20,7 @@ module DASHI.Moonshine.DuncanSwisherMonsterFrickeAllPrimesExact where
 
 open import DASHI.Core.Prelude
 open import Data.Nat.Primality using (Prime)
+import Data.Nat.Properties as NatP
 
 import DASHI.Moonshine.MonsterOrderDivisibilityExact as Monster
 import DASHI.Moonshine.PublishedLowPrimeFrickeGenusExact as Low
@@ -49,7 +50,7 @@ duncanSwisherMonsterIffFrickeGenusZeroAllPrimes 4 prime =
 duncanSwisherMonsterIffFrickeGenusZeroAllPrimes
   (suc (suc (suc (suc (suc n))))) prime =
   DSGe5.duncanSwisherMonsterIffFrickeGenusZero
-    (5 + n) prime (Data.Nat.Properties.m≤m+n 5 n)
+    (5 + n) prime (NatP.m≤m+n 5 n)
 
 ------------------------------------------------------------------------
 -- Directional projections, useful for combining with the independent
