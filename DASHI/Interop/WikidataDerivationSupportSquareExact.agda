@@ -9,26 +9,6 @@ import DASHI.Algebra.TetralemmaBridge as Tetralemma
 import DASHI.Interop.WikidataDerivationFibreBridge as Fibre
 import DASHI.Ontology.EpistemicTrit as Trit
 
-------------------------------------------------------------------------
--- Existing support-square semantics for Wikidata derivation fibres.
---
--- DASHI already had both ingredients:
---
---   * PolarAssessment = (supports P, supports not-P), and
---   * FibreOutcome = satisfied | violated | both | undetermined.
---
--- This module welds them directly.  No new four-valued logic carrier is
--- introduced.  The point is to preserve conflict (true,true) separately from
--- ignorance (false,false) until a deliberately lossy trit projection is used.
---
--- Source cross-check:
---   James Michael DuPont / Aristotle, RequestProject.Epistemic.Tetralemma,
---   SupportSquare.merge and merge_then_collapse_ne_collapse_then_merge.
---   Supplied source SHA-256:
---   d043a72b73401c8d7642bca4683f3a12939fb208a2a4b7aeade09574873ac512
--- No DOI is asserted for this source artifact.
-------------------------------------------------------------------------
-
 infixl 5 _∨ᵇ_
 
 _∨ᵇ_ : Bool → Bool → Bool
@@ -68,23 +48,19 @@ ignoranceSquare = squareFromPolarity Fibre.unresolved
 conflictSquare : Four.PolarAssessment
 conflictSquare = mergeSquare supportSquare contradictionSquare
 
-conflictSquareIsBothSupported :
-  conflictSquare ≡ Four.assess true true
+conflictSquareIsBothSupported : conflictSquare ≡ Four.assess true true
 conflictSquareIsBothSupported = refl
 
-conflictPositionIsBoth :
-  Four.polarPosition conflictSquare ≡ Tetralemma.both
+conflictPositionIsBoth : Four.polarPosition conflictSquare ≡ Tetralemma.both
 conflictPositionIsBoth = refl
 
-ignorancePositionIsNeither :
-  Four.polarPosition ignoranceSquare ≡ Tetralemma.neither
+ignorancePositionIsNeither : Four.polarPosition ignoranceSquare ≡ Tetralemma.neither
 ignorancePositionIsNeither = refl
 
 conflictOutcomeIsBoth : squareOutcome conflictSquare ≡ Fibre.both
 conflictOutcomeIsBoth = refl
 
-ignoranceOutcomeIsUndetermined :
-  squareOutcome ignoranceSquare ≡ Fibre.undetermined
+ignoranceOutcomeIsUndetermined : squareOutcome ignoranceSquare ≡ Fibre.undetermined
 ignoranceOutcomeIsUndetermined = refl
 
 conflictAndIgnoranceBothCollapseToUnresolved :
@@ -94,19 +70,10 @@ conflictAndIgnoranceBothCollapseToUnresolved = refl
 conflictIsNotIgnorance : conflictSquare ≡ ignoranceSquare → ⊥
 conflictIsNotIgnorance ()
 
-------------------------------------------------------------------------
--- Pool first, collapse later.
---
--- The lossy EpistemicTrit cannot tell whether `unresolved` arose because no
--- side was established or because both sides were established.  The support
--- square and FibreOutcome retain that distinction exactly.
-------------------------------------------------------------------------
-
 oppositeCertifiedSourcesPoolToConflict :
   squareOutcome (mergeSquare
     (squareFromPolarity Fibre.supporting)
-    (squareFromPolarity Fibre.contradicting))
-  ≡ Fibre.both
+    (squareFromPolarity Fibre.contradicting)) ≡ Fibre.both
 oppositeCertifiedSourcesPoolToConflict = refl
 
 collapsedConflictIsUnresolved : collapseSquare conflictSquare ≡ Trit.unresolved
