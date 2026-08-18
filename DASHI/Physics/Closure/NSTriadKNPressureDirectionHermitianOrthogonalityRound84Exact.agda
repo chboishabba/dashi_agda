@@ -426,30 +426,30 @@ finitePressurePacketPairingLeftZero :
   ≡ C3.complexZero (LP.realField model)
 finitePressurePacketPairingLeftZero {model = model} datum retained =
   go (Drift.packetModes datum)
-    (λ mode member → packetModesAreRetained retained mode member)
+    (λ mode member → pressurePacketPairingLeftZero datum retained mode member)
   where
   F = LP.realField model
 
   go :
     (modes : List Z3.FourierMode) →
-    (∀ mode → mode Cube.∈ modes → mode Cube.∈ Audit.modes (Drift.finiteSystem datum)) →
+    (∀ mode → mode Cube.∈ modes →
+      C3.hermitianPairing3
+        (Packet.packetField model (Drift.shell datum) (Split.pressureRHS datum) mode)
+        (Drift.weightedPacketField datum
+          (Audit.velocity (Drift.finiteSystem datum)) mode)
+      ≡ C3.complexZero F) →
     Packet.finiteHermitianPairing modes
       (Packet.packetField model (Drift.shell datum) (Split.pressureRHS datum))
       (Drift.weightedPacketField datum
         (Audit.velocity (Drift.finiteSystem datum)))
     ≡ C3.complexZero F
-  go [] retainedModes = refl
-  go (mode ∷ modes) retainedModes =
+  go [] pointwise = refl
+  go (mode ∷ modes) pointwise =
     trans
       (cong₂ C3.complexAdd
-        (pressurePacketPairingLeftZero datum
-          (record { packetModesAreRetained =
-            λ selected selectedMember →
-              retainedModes selected
-                (subst (λ xs → selected Cube.∈ xs) refl selectedMember) })
-          mode (Cube.here refl))
+        (pointwise mode (Cube.here refl))
         (go modes
-          (λ selected member → retainedModes selected (Cube.there member))))
+          (λ selected member → pointwise selected (Cube.there member))))
       (Field.complexAddZeroLeft (C3.complexZero F))
 
 finitePressurePacketPairingRightZero :
@@ -463,29 +463,28 @@ finitePressurePacketPairingRightZero :
   ≡ C3.complexZero (LP.realField model)
 finitePressurePacketPairingRightZero {model = model} datum retained =
   go (Drift.packetModes datum)
-    (λ mode member → packetModesAreRetained retained mode member)
+    (λ mode member → pressurePacketPairingRightZero datum retained mode member)
   where
   F = LP.realField model
 
   go :
     (modes : List Z3.FourierMode) →
-    (∀ mode → mode Cube.∈ modes → mode Cube.∈ Audit.modes (Drift.finiteSystem datum)) →
+    (∀ mode → mode Cube.∈ modes →
+      C3.hermitianPairing3
+        (Drift.packetVelocity datum mode)
+        (Drift.weightedPacketField datum (Split.pressureRHS datum) mode)
+      ≡ C3.complexZero F) →
     Packet.finiteHermitianPairing modes
       (Drift.packetVelocity datum)
       (Drift.weightedPacketField datum (Split.pressureRHS datum))
     ≡ C3.complexZero F
-  go [] retainedModes = refl
-  go (mode ∷ modes) retainedModes =
+  go [] pointwise = refl
+  go (mode ∷ modes) pointwise =
     trans
       (cong₂ C3.complexAdd
-        (pressurePacketPairingRightZero datum
-          (record { packetModesAreRetained =
-            λ selected selectedMember →
-              retainedModes selected
-                (subst (λ xs → selected Cube.∈ xs) refl selectedMember) })
-          mode (Cube.here refl))
+        (pointwise mode (Cube.here refl))
         (go modes
-          (λ selected member → retainedModes selected (Cube.there member))))
+          (λ selected member → pointwise selected (Cube.there member))))
       (Field.complexAddZeroLeft (C3.complexZero F))
 
 complexPressureDissipationTangentZero :
