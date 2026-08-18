@@ -27,16 +27,22 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound61DLRTransferAuditVal
 --
 -- * and the canonical-metric bridge proves
 --
---       (1/5)^m / 2500 <= (1/2)^m,
+--       (1/5)^m / 2500 <= (1/2)^m.
 --
---   so the SAME ghost tail already fits DASHI's standard dyadic FastCauchy
---   error schedule.
+-- * even the safe redundant trace cost 3*256=768 is absorbed by the existing
+--   fifth-tail factor:
 --
--- The finite rate/convergence-majorant algebra is therefore no longer the
--- frontier. Remaining ghost seam: realize the actual partial-sum sequence in
--- the existing FastCauchy/Bishop completion and identify its limit with the
--- principal matrix logarithm / reduced determinant ratio, then combine that
--- scalar with the literal Wilson and Haar channels.
+--       768 (1/5)^m / 2500 <= (1/2)^m.
+--
+--   Therefore an exact finite trace-difference/tail identity produces a
+--   canonical FastCauchyReal directly; no new convergence-rate theorem remains.
+--
+-- Remaining ghost seams:
+--   (i) prove the literal partial-trace difference equals the corresponding
+--       finite matrix tail on the same reduced ghost matrix;
+--   (ii) identify the resulting FastCauchy limit with the principal matrix
+--        logarithm / reduced determinant ratio;
+--   (iii) combine that scalar with the literal Wilson and Haar channels.
 --
 -- CMP109 PRINCIPAL-LOG ROUTE
 -- * source-radius inverse-dexp coefficient is actual Bishop-real data;
@@ -125,6 +131,7 @@ import DASHI.Physics.YangMills.BalabanReducedGhostMatrixLogFifthTailExact
 import DASHI.Physics.YangMills.BalabanReducedGhostPhysicalMatrixLogFifthTailExact
 import DASHI.Physics.YangMills.BalabanReducedGhostMatrixLogShiftedTailExact
 import DASHI.Physics.YangMills.BalabanReducedGhostDyadicCauchyBudgetExact
+import DASHI.Physics.YangMills.BalabanReducedGhostTraceFastCauchyCompletionExact
 
 import DASHI.Physics.YangMills.BalabanCMP109BishopSourceRadiusEndpointExact
 import DASHI.Physics.YangMills.BalabanCMP109BishopPrincipalLogSourcePackageExact
