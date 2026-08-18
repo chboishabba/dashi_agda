@@ -41,6 +41,12 @@ import DASHI.Ontology.ProgenitorParentAllyshipAuthorityBridgeExact
 import DASHI.Ontology.ProgenitorParentConsultationDecisionSensitivityExact
 import DASHI.Ontology.ProgenitorParentDynamicAuthorityRegression
 
+-- Later JMD/Aristotle source now independently exposes matching parent observer,
+-- hidden-transition, exact-reopening, route-nonfactorability and policy-safety
+-- theorems.  This module pairs those source-pinned Lean contracts with the
+-- existing Agda proof terms without identifying the two kernels.
+import DASHI.Ontology.ProgenitorParentLatestJMDConformanceExact
+
 import DASHI.Governance.DiachronicDelegatedAuthorityBoundary
 import DASHI.Biology.ParentAllyshipMultiObserverBridge
 import DASHI.Reasoning.RelationalChronologyProjectionBoundary
