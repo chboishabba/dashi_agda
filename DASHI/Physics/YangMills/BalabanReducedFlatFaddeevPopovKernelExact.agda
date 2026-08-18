@@ -41,6 +41,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using (pair)
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
 import DASHI.Physics.YangMills.BalabanPath4AxisAverageExact as Average
+import DASHI.Physics.YangMills.BalabanPath4GlobalAverageExact as Global
 import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Coordinates
 import DASHI.Physics.YangMills.BalabanP33PhysicalFaddeevPopovOperatorExact as FP
 import DASHI.Physics.YangMills.BalabanP33FaddeevPopovAnchoredGaugeReductionExact as Anchored
@@ -103,15 +104,15 @@ zeroLaplacianFieldEqualsAverage field laplacianZero site =
         (Green.scalarGreenAverageExact field site)
         (trans
           (Green.averageScalarGreenExact field site)
-          (sym (Average.average0123EqualsGlobalMean field site)))))
+          (sym (Global.average0123EqualsGlobalMean field site)))))
 
 average0123SameAtEverySite :
   ∀ (field : Sums.SiteField Average.side4) left right →
   Average.average0123 field left ≡ Average.average0123 field right
 average0123SameAtEverySite field left right =
   trans
-    (Average.average0123EqualsGlobalMean field left)
-    (sym (Average.average0123EqualsGlobalMean field right))
+    (Global.average0123EqualsGlobalMean field left)
+    (sym (Global.average0123EqualsGlobalMean field right))
 
 flatFaddeevPopovKernelIsColourwiseConstant :
   ∀ parameter →
