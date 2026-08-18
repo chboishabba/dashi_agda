@@ -37,7 +37,7 @@ module DASHI.Physics.YangMills.BalabanP33PhysicalFaddeevPopovDefectFactorization
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base as ℚ using (ℚ; _+_; _-_; -_)
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using (pair)
@@ -195,8 +195,6 @@ faddeevPopovBackgroundMinusFlatExact background parameter coordinate site =
       (Gauge.flatGaugeFirstFromAxes GA (pair coordinate site))
       (Gauge.flatGaugeFirstFromAxes G0 (pair coordinate site)))
     (cong₂ _+_ first second)
-  where
-  open import Relation.Binary.PropositionalEquality using (cong₂)
 
 physicalFaddeevPopovDefectTwoTermFactorizationLevel : ProofLevel
 physicalFaddeevPopovDefectTwoTermFactorizationLevel = machineChecked
