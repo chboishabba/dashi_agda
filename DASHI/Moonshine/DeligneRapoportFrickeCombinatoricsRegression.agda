@@ -11,7 +11,9 @@ module DASHI.Moonshine.DeligneRapoportFrickeCombinatoricsRegression where
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
+open import Data.Fin using (zero)
 
+import DASHI.Foundations.FiniteInvolutionPairedOrbitQuotientExact as PairQuot
 import DASHI.Moonshine.OggPrimeControlMatrixExact as Matrix
 import DASHI.Moonshine.SupersingularFrobeniusOrbitSpectrumExact as Spectrum
 import DASHI.Moonshine.P11GeometricSupersingularCarrierExact as P11Carrier
@@ -20,6 +22,7 @@ import DASHI.Moonshine.P11GeometricFrobeniusRealizationExact as P11
 import DASHI.Moonshine.P37SageSupersingularFrobeniusExact as P37
 import DASHI.Moonshine.P43NonOggFullLevel2DeuringControlExact as P43Carrier
 import DASHI.Moonshine.P43GeometricFrobeniusRealizationExact as P43
+import DASHI.Moonshine.RationalNodalSpecialFibreGenusExact as Nodal
 import DASHI.Moonshine.PrimeLevelDeligneRapoportFrickeCombinatoricsExact as DR
 
 p11DRData : DR.PrimeLevelSupersingularFrobeniusData
@@ -68,36 +71,28 @@ p43DRData = record
   }
 
 p11DerivedQuotientArithmeticGenus :
-  DASHI.Moonshine.RationalNodalSpecialFibreGenusExact.arithmeticGenus
-    (DR.canonicalFrickeQuotientDualGraph p11DRData)
-  ≡ 0
+  Nodal.arithmeticGenus (DR.canonicalFrickeQuotientDualGraph p11DRData) ≡ 0
 p11DerivedQuotientArithmeticGenus =
   DR.canonicalFrickeArithmeticGenusEqualsDeclaredPairCount p11DRData
 
 p37DerivedQuotientArithmeticGenus :
-  DASHI.Moonshine.RationalNodalSpecialFibreGenusExact.arithmeticGenus
-    (DR.canonicalFrickeQuotientDualGraph p37DRData)
-  ≡ 1
+  Nodal.arithmeticGenus (DR.canonicalFrickeQuotientDualGraph p37DRData) ≡ 1
 p37DerivedQuotientArithmeticGenus =
   DR.canonicalFrickeArithmeticGenusEqualsDeclaredPairCount p37DRData
 
 p43DerivedQuotientArithmeticGenus :
-  DASHI.Moonshine.RationalNodalSpecialFibreGenusExact.arithmeticGenus
-    (DR.canonicalFrickeQuotientDualGraph p43DRData)
-  ≡ 1
+  Nodal.arithmeticGenus (DR.canonicalFrickeQuotientDualGraph p43DRData) ≡ 1
 p43DerivedQuotientArithmeticGenus =
   DR.canonicalFrickeArithmeticGenusEqualsDeclaredPairCount p43DRData
 
-p37UniqueNodeHasTwoOrientedRepresentatives :
+p37UniqueNodeSectionExact :
   DR.frickeNodeOfNormalPair p37DRData
-    (DASHI.Foundations.FiniteInvolutionPairedOrbitQuotientExact.pairedOrbitNodeSection
-      {1} Data.Fin.zero)
-  ≡ Data.Fin.zero
-p37UniqueNodeHasTwoOrientedRepresentatives = refl
+    (PairQuot.pairedOrbitNodeSection {1} zero)
+  ≡ zero
+p37UniqueNodeSectionExact = refl
 
-p43UniqueNodeHasTwoOrientedRepresentatives :
+p43UniqueNodeSectionExact :
   DR.frickeNodeOfNormalPair p43DRData
-    (DASHI.Foundations.FiniteInvolutionPairedOrbitQuotientExact.pairedOrbitNodeSection
-      {1} Data.Fin.zero)
-  ≡ Data.Fin.zero
-p43UniqueNodeHasTwoOrientedRepresentatives = refl
+    (PairQuot.pairedOrbitNodeSection {1} zero)
+  ≡ zero
+p43UniqueNodeSectionExact = refl
