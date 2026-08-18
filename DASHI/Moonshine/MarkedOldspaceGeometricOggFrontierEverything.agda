@@ -25,6 +25,13 @@ module DASHI.Moonshine.MarkedOldspaceGeometricOggFrontierEverything where
 --   intertwining EVERY scalar Hecke action.  Thus no further away-from-2 Hecke
 --   probes can canonicalize the local comparison.
 --
+--   AuxiliaryLevelHeckeEquivariantQuotientNoGoExact weakens an earlier product
+--   assumption: all-prime Hecke blindness on a fine fibre requires only a
+--   source-native equivariant quotient q T_marked = T_global q plus a
+--   nontrivial q-fibre.  A literal Global x Deck product is sufficient but not
+--   necessary.  This narrows future same-object work to the commuting quotient
+--   square actually consumed by the observer theorem.
+--
 --   Remaining seam: construct the actual 2-adic local comparison inside the
 --   same global automorphic representation (equivalently, the source-native
 --   Eichler/Jacquet--Langlands fixed-vector comparison), rather than declaring
@@ -61,6 +68,7 @@ import DASHI.Moonshine.P11Level44FormalSameCoordinateComparisonExact as Same
 import DASHI.Moonshine.P11Level44SameCoordinateHighestAlphaRegression as SameReg
 import DASHI.Moonshine.P11Level44TwoAdicFixedVectorSeparationExact as Local2
 import DASHI.Moonshine.P11Level44HeckeAlignmentNonUniquenessExact as AlignNoGo
+import DASHI.Moonshine.AuxiliaryLevelHeckeEquivariantQuotientNoGoExact as QuotientNoGo
 import DASHI.Moonshine.SupersingularFrobeniusFrickeGenusReductionExact as CountReduce
 import DASHI.Moonshine.SupersingularFrobeniusFrickeGenusReductionRegression as CountReg
 import DASHI.Moonshine.RationalNodalSpecialFibreGenusExact as Nodal
@@ -101,6 +109,16 @@ rotationIntertwinesArbitraryScalarHeckeRegression :
       (AlignNoGo.mapOld3 AlignNoGo.rotationOld3Map v)
 rotationIntertwinesArbitraryScalarHeckeRegression =
   AlignNoGo.rotationHeckeIntertwiner
+
+equivariantQuotientNotProductRequiredRegression :
+  QuotientNoGo.productFactorizationRequiredForBlindness
+    QuotientNoGo.canonicalEquivariantQuotientNoGoBoundary ≡ false
+equivariantQuotientNotProductRequiredRegression = refl
+
+equivariantQuotientAllPrimeBlindnessRegression :
+  QuotientNoGo.equivariantQuotientSufficientForAllPrimeBlindness
+    QuotientNoGo.canonicalEquivariantQuotientNoGoBoundary ≡ true
+equivariantQuotientAllPrimeBlindnessRegression = refl
 
 countReductionRegression :
   (D : CountReduce.SupersingularFrickeCountData) →
