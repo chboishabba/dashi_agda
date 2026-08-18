@@ -25,12 +25,13 @@ module DASHI.Physics.YangMills.BalabanClayOSPullbackBlockingBridgeExact where
 --
 -- Once the original OS form is the same fine reflection-positive form, the
 -- exact physical pullback identity canonically IS a reflection-positive
--- blocking.  Therefore the existing blocking-composition theorem applies to
+-- blocking. Therefore the existing blocking-composition theorem applies to
 -- the recombination-aware Balaban route without introducing another positivity
 -- hypothesis or requiring labelled RG pieces to be positive separately.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_)
+open import Relation.Binary.PropositionalEquality using (trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.FiniteReflectionPositivity as RP
@@ -63,7 +64,7 @@ exactPullbackAsReflectionPositiveBlocking dataSet match = record
   ; Block.ReflectionPositiveBlocking.coarseOSForm =
       Pullback.blockedOSForm dataSet
   ; Block.ReflectionPositiveBlocking.coarseFormPullback = λ blocked →
-      Agda.Builtin.Equality.trans
+      trans
         (Pullback.exactPullbackIdentity dataSet blocked)
         (originalFormIsFineForm match (Pullback.pullback dataSet blocked))
   }
@@ -82,8 +83,5 @@ exactPullbackProducesBlockedReflectionPositive dataSet match =
 pullbackBlockingBridgeLevel : ProofLevel
 pullbackBlockingBridgeLevel = machineChecked
 
--- The remaining source-facing input is not positivity itself.  It is the exact
--- same-carrier identification between the literal Bałaban blocked OS form and
--- the pullback/recombination data, plus preservation of positive-time support.
 literalBalabanBlockedOSPullbackIdentificationLevel : ProofLevel
 literalBalabanBlockedOSPullbackIdentificationLevel = conditional
