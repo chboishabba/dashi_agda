@@ -35,8 +35,8 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _-_; -_; _≤_)
 import Data.Rational.Properties as ℚP
-open import Relation.Binary.PropositionalEquality using (subst)
 
+import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
 import DASHI.Physics.Closure.NSTriadKNDeviatoricPressureAlignmentDefectRound78Exact as Defect
 import DASHI.Physics.Closure.NSTriadKNIsotropicPressureEnstrophyStrainCriterionRound78Exact as Iso
 import DASHI.Physics.Closure.NSTriadKNPressureAlignmentDefectSpectralBracketRound78Exact as Spectral
@@ -86,7 +86,7 @@ alignmentDefectNonnegative {alignment} ordered =
         * Defect.alpha2 alignment
     secondNN = ℚP.0≤*0≤ gap2NN (alpha2Nonnegative ordered)
   in
-  ℚP.+-mono-≤ firstNN secondNN
+  L2.addNonnegative firstNN secondNN
 
 imperfectAlignmentDeviatoricEnableBelowExactAlignment :
   ∀ {alignment} →
@@ -97,9 +97,8 @@ imperfectAlignmentDeviatoricEnableBelowExactAlignment {alignment} ordered =
   let
     defectNN = alignmentDefectNonnegative ordered
     negDefect≤0 = ℚP.neg-antimono-≤ defectNN
-    shifted = ℚP.+-monoˡ-≤ (- Defect.lambda3 alignment) negDefect≤0
   in
-  shifted
+  ℚP.+-monoˡ-≤ (- Defect.lambda3 alignment) negDefect≤0
 
 pressureBracketWithDefectBelowExactAlignedBracket :
   ∀ enstrophy strainIntensity {alignment} →
@@ -110,12 +109,9 @@ pressureBracketWithDefectBelowExactAlignedBracket :
       enstrophy strainIntensity (Defect.lambda3 alignment)
 pressureBracketWithDefectBelowExactAlignedBracket
     enstrophy strainIntensity {alignment} ordered =
-  let
-    enableBound = imperfectAlignmentDeviatoricEnableBelowExactAlignment ordered
-  in
   ℚP.+-monoʳ-≤
     (- Iso.oneSixth * (enstrophy - strainIntensity))
-    enableBound
+    (imperfectAlignmentDeviatoricEnableBelowExactAlignment ordered)
 
 round78AlignmentDefectNonnegativeForOrderedSpectrum : Bool
 round78AlignmentDefectNonnegativeForOrderedSpectrum = true
