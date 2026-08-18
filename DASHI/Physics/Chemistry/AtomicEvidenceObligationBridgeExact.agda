@@ -2,6 +2,7 @@ module DASHI.Physics.Chemistry.AtomicEvidenceObligationBridgeExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Empty using (⊥)
 
 import DASHI.Algebra.DisagreementFourViewBoundary as Four
 import DASHI.Core.EvidenceObligationAuthoritySeparationExact as Governed
@@ -36,7 +37,7 @@ periodicTableRecoveryConsumesWitness = Atomic.periodicTableRecoveryAvailable
 
 dialecticalAtomPromotionStillImpossible :
   DialecticalAtom.DialecticalAtomFrontierPromotion →
-  Data.Empty.⊥
+  ⊥
 dialecticalAtomPromotionStillImpossible =
   DialecticalAtom.dialecticalAtomFrontierPromotionImpossibleHere
 
