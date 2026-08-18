@@ -92,16 +92,15 @@ canonicalGreenZeroFromHigherSource :
     {left} → HigherDegree left → ∀ right →
   CanonicalBlocks.canonicalGreenDegreeBlock inputs left right ≡ 0ℚ
 canonicalGreenZeroFromHigherSource
-    {pseudoData = pseudoData} inputs higher right =
+    {pseudoData = pseudoData} inputs {left = left} higher right =
   let
     carrier = Pseudo.multiplierCarrier pseudoData
     atoms = Canonical.canonicalConstraintAtoms inputs
-    source = GreenDegree.sourceDegreeVector atoms _
     transported = Pseudo.pseudoApply pseudoData
       (GreenDegree.defectDegreeVector atoms right)
   in
   trans
-    (Pairing.canonicalGreenIsBilinearPairing inputs _ right)
+    (Pairing.canonicalGreenIsBilinearPairing inputs left right)
     (trans
       (Rect.finiteDotLeftPointwiseCong carrier
         (sourceHigherVectorZero inputs higher))
@@ -116,11 +115,11 @@ canonicalGreenZeroFromHigherDefect :
     left {right} → HigherDegree right →
   CanonicalBlocks.canonicalGreenDegreeBlock inputs left right ≡ 0ℚ
 canonicalGreenZeroFromHigherDefect
-    {pseudoData = pseudoData} inputs left higher =
+    {pseudoData = pseudoData} inputs left {right = right} higher =
   let
     carrier = Pseudo.multiplierCarrier pseudoData
     atoms = Canonical.canonicalConstraintAtoms inputs
-    defect = GreenDegree.defectDegreeVector atoms _
+    defect = GreenDegree.defectDegreeVector atoms right
     pseudoZero : ∀ row →
       Pseudo.pseudoApply pseudoData defect row ≡ 0ℚ
     pseudoZero row =
@@ -132,7 +131,7 @@ canonicalGreenZeroFromHigherDefect
           carrier (Pseudo.gramPseudoinverse pseudoData) row)
   in
   trans
-    (Pairing.canonicalGreenIsBilinearPairing inputs left _)
+    (Pairing.canonicalGreenIsBilinearPairing inputs left right)
     (trans
       (Rect.finiteDotRightPointwiseCong carrier pseudoZero)
       (Rect.finiteDotZeroRight carrier
