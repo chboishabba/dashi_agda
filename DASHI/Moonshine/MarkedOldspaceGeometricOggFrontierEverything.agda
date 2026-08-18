@@ -20,8 +20,16 @@ module DASHI.Moonshine.MarkedOldspaceGeometricOggFrontierEverything where
 --
 --       g(X0+(p)) = Frobenius pair defect.
 --
---   Remaining seam: construct the Deligne--Rapoport/Fricke special-fibre
---   realization for arbitrary p on the actual modular-curve carrier.
+--   The new same-object involution/special-fibre weld further proves, without
+--   the finite Ogg control table,
+--
+--       Frobenius pointwise fixed <=> g(X0+(p)) = 0
+--
+--   whenever the actual supersingular involution normal form and actual nodal
+--   Fricke special fibre are tied by equality of their pair counts.
+--
+--   Remaining seam: construct that Deligne--Rapoport/Fricke + supersingular
+--   Frobenius geometry for arbitrary p on the actual modular-curve carrier.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -34,6 +42,7 @@ import DASHI.Moonshine.SupersingularFrobeniusFrickeGenusReductionExact as CountR
 import DASHI.Moonshine.SupersingularFrobeniusFrickeGenusReductionRegression as CountReg
 import DASHI.Moonshine.RationalNodalSpecialFibreGenusExact as Nodal
 import DASHI.Moonshine.SupersingularFrickeSpecialFibreSelectorExact as Geometric
+import DASHI.Moonshine.FrickeSpecialFibreFrobeniusFixedSelectorExact as FixedSelector
 
 wholeOldspaceRegression :
   {D : Same.Level44DegeneracyTriple} {ell : Nat} →
@@ -58,3 +67,16 @@ geometricSelectorRegression :
   (R : Geometric.PrimeFrickeSpecialFibreRealization) →
   Geometric.genericFrickeGenus R ≡ Geometric.frobeniusPairDefect R
 geometricSelectorRegression = Geometric.frickeGenusEqualsFrobeniusPairDefect
+
+geometricFixedIffGenusZeroRegression :
+  (G : FixedSelector.PrimeFrickeFrobeniusGeometry) →
+  FixedSelector.GeometricallyFullyFixed G
+  ↔ Geometric.genericFrickeGenus
+      (FixedSelector.specialFibreRealization G) ≡ 0
+geometricFixedIffGenusZeroRegression =
+  FixedSelector.frobeniusFullyFixedIffFrickeGenusZero
+
+finiteOggTableNotUsedInGeometricFixedSelectorRegression :
+  FixedSelector.finiteOggControlTableUsed
+    FixedSelector.canonicalFrickeFrobeniusFixedSelectorBoundary ≡ false
+finiteOggTableNotUsedInGeometricFixedSelectorRegression = refl
