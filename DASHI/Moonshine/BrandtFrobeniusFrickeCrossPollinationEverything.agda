@@ -39,6 +39,7 @@ import DASHI.Moonshine.P11MarkedX2HeckeAlgebraExact
 import DASHI.Moonshine.P11MarkedX2PrimeSquareNeighboursExact
 import DASHI.Moonshine.P11MarkedX2S3HeckeDecompositionExact
 import DASHI.Moonshine.BrandtObserverRefinementDynamicsBridgeExact
+import DASHI.Moonshine.BrandtObserverRefinementDynamicsRegression
 
 import DASHI.Moonshine.P13OggOneClassHeckeControlExact
 import DASHI.Moonshine.P37SageSupersingularFrobeniusExact
