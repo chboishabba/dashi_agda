@@ -41,11 +41,13 @@ module DASHI.Physics.Closure.NSTriadKNFrameWeightedSquareChargeRound77Exact wher
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _*_; _≤_; nonNegative)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _*_; _≤_)
 import Data.Rational.Properties as ℚP
+open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
+import DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier as Cube
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as RationalL2
@@ -94,9 +96,7 @@ reciprocalFrameWeightTurnsProductChargeIntoCharge
 
     commuteToReciprocal :
       rho * (charge * frame) ≡ charge * (frame * rho)
-    commuteToReciprocal = ℚP.*-assoc rho charge frame
-      |> trans (cong (_* frame) (ℚP.*-comm rho charge))
-      |> trans (ℚP.*-assoc charge frame rho)
+    commuteToReciprocal = solve (rho ∷ charge ∷ frame ∷ [])
 
     collapse : charge * (frame * rho) ≡ charge
     collapse =
@@ -107,10 +107,6 @@ reciprocalFrameWeightTurnsProductChargeIntoCharge
   subst (rho * x ≤_)
     (trans commuteToReciprocal collapse)
     scaled
-  where
-  infixl 0 _|>_
-  _|>_ : ∀ {a b : Set} → a → (a → b) → b
-  x |> f = f x
 
 ------------------------------------------------------------------------
 -- Same literal Round75 two-channel row, now without B<=1.
@@ -150,8 +146,14 @@ literalFixedOutputSquareBelowChargeTimesFrame
       (Two.twoChannelFactors overlay)
     complexityNN = Effective.effectiveComplexityNonnegative
       (Two.twoChannelFactors overlay)
-    frameNN = Frame.literalOutputFrameProductNonnegative
-      O system output outputNonzero
+    outputNN = Frame.modeEnergyNonnegative system output
+    cutoffNN =
+      Frame.sumMassNonnegative
+        (Frame.modeEnergy system)
+        (Frame.modeEnergyNonnegative system)
+        (Cube.cutoffModes (Audit.cutoff system))
+    frameNN : 0ℚ ≤ R76.literalOutputFrameProduct system output
+    frameNN = ℚP.0≤*0≤ outputNN cutoffNN
 
     productBound :
       Two.twoChannelCharge overlay * Two.twoChannelEffectiveComplexity overlay
