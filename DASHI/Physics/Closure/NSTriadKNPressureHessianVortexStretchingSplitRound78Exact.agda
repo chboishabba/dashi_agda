@@ -27,10 +27,9 @@ module DASHI.Physics.Closure.NSTriadKNPressureHessianVortexStretchingSplitRound7
 --
 -- Thus a negative deviatoric contraction is an enabling contribution after
 -- the PDE minus sign, while a positive isotropic contraction is depleting.
--- This module proves only that exact algebraic split.  The source-native future
--- theorem must construct C_I,C_D from the actual selected pressure Hessian and
--- establish their signs/size on the same event; DNS conditional statistics are
--- not promoted to pointwise proof authority.
+-- The exact raw split is also mapped into Round78's competition budget; an
+-- additional declared depletion term (viscous, geometric, frame/allocation,
+-- etc.) is subtracted without changing the sign convention.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -38,6 +37,8 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Rational.Base using (ℚ; _+_; _-_; -_)
 open import Data.Rational.Tactic.RingSolver using (solve)
+
+import DASHI.Physics.Closure.NSTriadKNPressureStretchingCompetitionRound78Exact as Competition
 
 record RawPressureStretchingContractions : Set where
   constructor raw-pressure-stretching-contractions
@@ -74,8 +75,33 @@ pressureSplitExact raw =
     ∷ deviatoricPressureContraction raw
     ∷ [])
 
+asCompetitionBudget :
+  RawPressureStretchingContractions → ℚ → Competition.PressureStretchingBudget
+asCompetitionBudget raw additionalDepletion =
+  Competition.pressure-stretching-budget
+    (vortexStretchingSquare raw)
+    (nonlocalDeviatoricEnable raw)
+    (localIsotropicDepletion raw)
+    additionalDepletion
+
+competitionSurplusIsRawAccelerationMinusAdditionalDepletion :
+  ∀ raw additionalDepletion →
+  Competition.netStretchingSurplus
+    (asCompetitionBudget raw additionalDepletion)
+  ≡ inviscidStretchingAcceleration raw - additionalDepletion
+competitionSurplusIsRawAccelerationMinusAdditionalDepletion raw additionalDepletion =
+  solve
+    ( vortexStretchingSquare raw
+    ∷ isotropicPressureContraction raw
+    ∷ deviatoricPressureContraction raw
+    ∷ additionalDepletion
+    ∷ [])
+
 round78PressureHessianRawSplitConstructed : Bool
 round78PressureHessianRawSplitConstructed = true
+
+round78RawPressureSplitWeldedToCompetitionBudget : Bool
+round78RawPressureSplitWeldedToCompetitionBudget = true
 
 round78DNSConditionalSignsPromotedToPointwiseTheorem : Bool
 round78DNSConditionalSignsPromotedToPointwiseTheorem = false
