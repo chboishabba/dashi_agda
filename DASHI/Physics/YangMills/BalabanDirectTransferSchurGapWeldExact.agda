@@ -11,7 +11,7 @@ module DASHI.Physics.YangMills.BalabanDirectTransferSchurGapWeldExact where
 -- Volker Bach, Jürg Fröhlich and Israel Michael Sigal,
 -- "Renormalization Group Analysis of Spectral Problems in Quantum Field
 -- Theory", Advances in Mathematics 137 (1998), 205--298.
--- DOI: 10.1006/aima.1998.1730.
+-- DOI: 10.1006/aima.1998.1733.
 --
 -- Volker Bach, Thomas Chen, Jürg Fröhlich and Israel Michael Sigal,
 -- "Smooth Feshbach Map and Operator-Theoretic Renormalization Group
@@ -39,7 +39,7 @@ module DASHI.Physics.YangMills.BalabanDirectTransferSchurGapWeldExact where
 -- Lüscher transfer gap.
 ------------------------------------------------------------------------
 
-open import Data.Rational.Base as ℚ using (ℚ; _-_; _*)
+open import Data.Rational.Base as ℚ using (ℚ; _+_; _-_; _*_; _≤_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanWilsonTransferIntertwinerExact as Transfer
