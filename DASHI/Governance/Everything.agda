@@ -23,6 +23,7 @@ import DASHI.Governance.SituatedAuthorityRoutingExact
 import DASHI.Governance.MandateBackedAuthorityRoutingExact
 import DASHI.Governance.AuthorityPhaseSeparationExact
 import DASHI.Governance.AuthorityRoutingProjectionSafetyExact
+import DASHI.Governance.OperationalLegibilityJusticeSafetyExact
 import DASHI.Governance.OptionConeCoercionExact
 import DASHI.Governance.JusticeCrossPollinationBridgeExact
 import DASHI.Governance.InverseJusticeAttractorExact
