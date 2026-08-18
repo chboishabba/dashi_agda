@@ -125,8 +125,8 @@ formerSupporterCurrentAuthorityEvidenceIsMissing :
       JusticeEvidence.formerSupporterEvidenceProfile
       JusticeEvidence.currentAuthorityAxis)
 formerSupporterCurrentAuthorityEvidenceIsMissing =
-  JusticeEvidence.formerSupporterMissingCurrentAuthorityEvidence
-    .Support.MissingRequiredAxis.missingAxisEvidence
+  Support.missingAxisEvidence
+    JusticeEvidence.formerSupporterMissingCurrentAuthorityEvidence
 
 -- Same high-level routing question, structurally different obstruction:
 --   * former supporter: evidence missing;
