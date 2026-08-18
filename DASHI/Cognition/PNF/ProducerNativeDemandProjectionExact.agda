@@ -37,13 +37,6 @@ producerNativeEqualsReconstruction law producer = projectionExact law producer
 
 ------------------------------------------------------------------------
 -- Producer-known coordinates.
---
--- The parser producer already knows coordinates such as sentence identity and
--- the declared same-sentence dependency-head span. A compatibility writer may
--- materialize a textual/key coordinate and recover the numeric coordinate by a
--- later lookup, but that lookup is not semantic authority once the producer's
--- supplied coordinate is proved equal to recovery from the same materialized
--- state. This is the formal boundary used by the strict numeric COPY path.
 ------------------------------------------------------------------------
 
 record ProducerKnownCoordinate
@@ -75,13 +68,6 @@ knownCoordinateEliminatesRecoveryAsAuthority law producer =
 
 ------------------------------------------------------------------------
 -- Demand-local statement factorization.
---
--- Constraint rows, initial horizon work, parser sentence-region/work rows and
--- other pure derived relations are pointwise projections of a finite inserted
--- carrier. A statement-level transition-table implementation is permitted only
--- when projecting the whole list is exactly the concatenation of the pointwise
--- projections. This is the algebra behind replacing N row-trigger invocations
--- with one set operation over the inserted fibre.
 ------------------------------------------------------------------------
 
 _++ᵈ_ : ∀ {A : Set} → List A → List A → List A
@@ -115,12 +101,6 @@ statementProjectionEqualsPointwiseProjection law demands =
 
 ------------------------------------------------------------------------
 -- Pre-aggregated finite lookup.
---
--- A set-wise implementation may compute a finite support summary once and join
--- every occurrence against it. The optimization is admissible only when the
--- aggregate lookup agrees with the original pointwise lookup for every key.
--- This is the exact law used to replace repeated correlated uniqueness probes
--- by one grouped token/object support relation.
 ------------------------------------------------------------------------
 
 record PreaggregatedLookup
@@ -145,19 +125,6 @@ preaggregationPreservesLookup law source key = aggregateExact law source key
 
 ------------------------------------------------------------------------
 -- Superseded projection elision with live-residue extraction.
---
--- A historical derived carrier may be expensive to maintain even after newer
--- authority has replaced it. It is NOT enough to observe that the old carrier
--- is no longer the preferred consumer surface: some live obligation may still
--- have been produced only as a side effect of that carrier.
---
--- The safe cut is consumer-indexed. For the complete family of live consumers
--- supplied to this record, the smaller replacement/residue projection must give
--- exactly the same observation as the legacy projection. Historical Legacy rows
--- may remain cold/reopenable; automatic maintenance is not semantic authority.
---
--- This is the formal boundary behind retiring the procedural mention/recurrence
--- compiler while extracting its still-live anaphor demand/source projection.
 ------------------------------------------------------------------------
 
 record SupersededProjectionElision
@@ -187,11 +154,6 @@ replacementPreservesEveryLiveConsumer law consumer source =
 
 ------------------------------------------------------------------------
 -- Sparse live residue.
---
--- The replacement may intentionally carry fewer derived families than Legacy.
--- The following law isolates the stronger requirement needed for that move:
--- every live obligation emitted by the old projection must be recoverable from
--- the replacement. Dead diagnostic/compatibility structure need not remain hot.
 ------------------------------------------------------------------------
 
 record LiveObligationExtraction
@@ -216,3 +178,36 @@ replacementRetainsAllLiveObligations :
   ≡ replacementObligations law (replacementFromSource law source)
 replacementRetainsAllLiveObligations law source =
   liveObligationsExact law source
+
+------------------------------------------------------------------------
+-- Cold exact rebuild.
+--
+-- Once every live production consumer has factored through Replacement, a
+-- superseded Legacy carrier need not remain transactionally hot merely because
+-- audit/compatibility tooling may still inspect it.  The cold carrier remains
+-- legitimate only when an explicit rebuild from current source authority is
+-- extensionally equal to the historical Legacy projection.
+--
+-- This is the formal boundary used when migration-122 occurrence support is
+-- removed from automatic demand/export maintenance while preserving a set-wise
+-- explicit audit rebuild.  Cold does not mean approximate or stale-by-design:
+-- it means "rebuild before a consumer which explicitly requests Legacy".
+------------------------------------------------------------------------
+
+record ColdRebuildableProjection
+  (Source Legacy : Set)
+  : Set₁ where
+  field
+    legacyFromCurrentSource : Source → Legacy
+    rebuildCold : Source → Legacy
+    coldRebuildExact : ∀ source →
+      rebuildCold source ≡ legacyFromCurrentSource source
+
+open ColdRebuildableProjection public
+
+coldRebuildPreservesLegacyObservation :
+  ∀ {Source Legacy : Set}
+    (law : ColdRebuildableProjection Source Legacy)
+    (source : Source) →
+  rebuildCold law source ≡ legacyFromCurrentSource law source
+coldRebuildPreservesLegacyObservation law source = coldRebuildExact law source
