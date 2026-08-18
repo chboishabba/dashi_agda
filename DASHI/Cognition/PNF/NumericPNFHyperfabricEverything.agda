@@ -51,7 +51,7 @@ import DASHI.Cognition.PNF.ConsumerSufficientComplexityExact
 import DASHI.Cognition.PNF.OwnerFibreReductionComplexityExact
 import DASHI.Cognition.PNF.SignatureBucketReductionFactorizationExact
 import DASHI.Cognition.PNF.DependencyIndexedOwnerWakeupExact
-import DASHI.Cognition.PNF.ChangedInterfaceLookupDeltaExact
+import DASHI.Cognition.PNF.SparseFrontierTopologyExact
 import DASHI.Cognition.PNF.EditTransportLeafLocalityRegression
 import DASHI.Cognition.PNF.FrequencyAdaptiveSymbolCode
 import DASHI.Cognition.PNF.HotColdExecutionProjection
