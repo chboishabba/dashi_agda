@@ -31,6 +31,12 @@ module DASHI.Physics.Closure.NSTriadKNHighestAlphaRound82Exact where
 -- countermodel shows pointwise negativity can fail while the integrated
 -- occupation payment succeeds.
 --
+-- The resulting deterministic occupation input is now welded directly into the
+-- repository's pre-existing cutoff/shell/state-uniform compact-Gamma residence
+-- theorem.  Therefore no new abstract residence algebra remains after Round82:
+-- the open C5 content is physical construction of the uniform occupation and
+-- replenishment estimates on the selected Navier--Stokes trajectory.
+--
 -- Foster--Lyapunov and deterministic dissipative-system sources calibrate the
 -- drift/occupation architecture only.  No stochastic recurrence theorem is
 -- promoted into selected-trajectory Navier--Stokes authority.
@@ -68,6 +74,7 @@ import DASHI.Physics.Closure.NSTriadKNCompactGammaDangerThresholdRound82Exact as
 import DASHI.Physics.Closure.NSTriadKNDeterministicDangerOccupationRound82Exact as Occupation
 import DASHI.Physics.Closure.NSTriadKNPointwiseDangerDriftNoGoRound82Exact as Pointwise
 import DASHI.Physics.Closure.NSTriadKNC5CompactTransferPivotRound82Exact as Pivot
+import DASHI.Physics.Closure.NSTriadKNCompactGammaUniformOccupationWeldRound82Exact as Uniform
 
 round82ClusterSylvesterCoreConstructed : Bool
 round82ClusterSylvesterCoreConstructed = Syl.round81ClusterSylvesterSquaredBudgetConstructed
@@ -89,6 +96,10 @@ round82CompactDangerLevelTransportConstructed = Threshold.round82DangerThreshold
 
 round82IntegratedDangerOccupationReducerConstructed : Bool
 round82IntegratedDangerOccupationReducerConstructed = Occupation.round82IntegratedDangerOccupationReducerConstructed
+
+round82UniformDangerOccupationUsesExistingResidenceTheorem : Bool
+round82UniformDangerOccupationUsesExistingResidenceTheorem =
+  Uniform.round82UniformOccupationUsesExistingResidenceTheorem
 
 round82PointwiseNegativeDriftRequired : Bool
 round82PointwiseNegativeDriftRequired = Pointwise.round82PointwiseNegativeDangerDriftIsNecessary
@@ -135,6 +146,10 @@ round82ClayPromotion = false
 round82BothSmallGapsGiveWeakStretchingIsTrue :
   round82BothSmallGapsGiveWeakStretching ≡ true
 round82BothSmallGapsGiveWeakStretchingIsTrue = refl
+
+round82UniformDangerOccupationUsesExistingResidenceTheoremIsTrue :
+  round82UniformDangerOccupationUsesExistingResidenceTheorem ≡ true
+round82UniformDangerOccupationUsesExistingResidenceTheoremIsTrue = refl
 
 round82PrimaryC5IsCompactTransferPotentialIsTrue :
   round82PrimaryC5IsCompactTransferPotential ≡ true
