@@ -60,14 +60,18 @@ crossSelfZero (V.v3 wx wy wz) =
     (solve (wx ∷ wy ∷ wz ∷ []))
     (solve (wx ∷ wy ∷ wz ∷ []))
 
+dotZeroVector :
+  (mode : V.Vector3) →
+  V.dot mode (V.v3 0ℚ 0ℚ 0ℚ) ≡ 0ℚ
+dotZeroVector (V.v3 kx ky kz) = solve (kx ∷ ky ∷ kz ∷ [])
+
 dotModeCrossSelfZero :
   (mode omega : V.Vector3) →
   V.dot mode (BS.cross omega omega) ≡ 0ℚ
 dotModeCrossSelfZero mode omega =
   trans
     (cong (V.dot mode) (crossSelfZero omega))
-    (case mode of λ where
-      (V.v3 kx ky kz) → solve (kx ∷ ky ∷ kz ∷ []))
+    (dotZeroVector mode)
 
 fourierSelfModeStretchingVanishes :
   (modeData : V.ProjectionMode) →
