@@ -17,7 +17,8 @@ module DASHI.Foundations.Base369InteractionAntipodalFibreExact where
 -- from scalar aggregation.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl; cong)
+open import Agda.Builtin.Bool using (Bool; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; _+_; _*_)
 open import Data.Empty using (⊥)
 open import Data.Integer using (ℤ; +_; -[1+_]) renaming (_+_ to _+ℤ_)
@@ -28,10 +29,6 @@ import DASHI.Foundations.Base369AddressSymmetryAndBranchGeometryExact as Branch
 import DASHI.Foundations.Base369InteractionAppraisalCubeExact as Cube
 import DASHI.Foundations.BalancedTernaryAntipodalOrbitExact as Orbit
 import DASHI.Foundations.SSPTritCarrier as SSP
-
-------------------------------------------------------------------------
--- Reuse the literal three 27-state blocks.
-------------------------------------------------------------------------
 
 interactionTriple : Cube.InteractionCube → Orbit.TritTriple
 interactionTriple (Cube.interactionCube a b c) = Branch.triple a b c
@@ -290,8 +287,6 @@ record InteractionAntipodalFibreBoundary : Set where
     globalAntipodeEqualsContextualCounterposition : Bool
     aggregateZeroImpliesStructuralZero : Bool
     orientationForgottenBaseReconstructsFineState : Bool
-
-open import Agda.Builtin.Bool using (Bool; false)
 
 canonicalInteractionAntipodalFibreBoundary : InteractionAntipodalFibreBoundary
 canonicalInteractionAntipodalFibreBoundary = record
