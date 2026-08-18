@@ -35,6 +35,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier as Torus
 import DASHI.Physics.YangMills.BalabanPath4AxisAverageExact as Path4
 import DASHI.Physics.YangMills.BalabanPath4GlobalAverageExact as GlobalAverage
+import DASHI.Physics.YangMills.BalabanP33PeriodicFourDimensionalHodgeIdentityExact as Periodic
 import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Coordinates
 import DASHI.Physics.YangMills.BalabanConstructiveRationalMatrixInverseExact as Matrix
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundFiniteRationalReopeningExact as Carrier
@@ -45,10 +46,10 @@ import DASHI.Physics.YangMills.BalabanSelectedGaugeMeanDecompositionExact as Mea
 import DASHI.Physics.YangMills.BalabanSelectedGaugeCenteringLinearityExact as Linear
 import DASHI.Physics.YangMills.BalabanSelectedGaugeReducedLinearClosureExact as Reduced
 import DASHI.Physics.YangMills.BalabanSelectedCombinedMultiplierSplitExact as Split
+import DASHI.Physics.YangMills.BalabanSelectedSchurPerturbationActionExact as SchurAction
 import DASHI.Physics.YangMills.BalabanSelectedProjectedSchurPerturbationContractionExact as Projected
 import DASHI.Physics.YangMills.BalabanSelectedProjectedSchurFiniteRationalReopeningExact as Reopen
 import DASHI.Physics.YangMills.BalabanSelectedProjectedSchurGreenFiniteExact as SchurGreen
-import DASHI.Physics.YangMills.BalabanP33PhysicalRationalWilsonPlaquetteJetExact as Physical
 
 GaugeMultiplier : Set
 GaugeMultiplier = FlatFloor.GaugeMultiplier
@@ -61,8 +62,7 @@ constantProjectionRespectsPointwise :
   ≡ Mean.constantProjection right (Torus.pair coordinate site)
 constantProjectionRespectsPointwise {left} {right} pointwise coordinate site =
   cong (GlobalAverage.oneTwoFiftySix *_)
-    (Path4.sumRationalCong
-      (Torus.physicalBlockSites Path4.side4)
+    (Periodic.sumSitesCong
       (FlatFloor.gaugeMultiplierField left coordinate)
       (FlatFloor.gaugeMultiplierField right coordinate)
       (λ current → pointwise (Torus.pair coordinate current)))
@@ -73,10 +73,8 @@ constantProjectionIdempotent :
     (Torus.pair coordinate site)
   ≡ Mean.constantProjection multiplier (Torus.pair coordinate site)
 constantProjectionIdempotent multiplier coordinate site =
-  let
-    value = Mean.constantProjection multiplier (Torus.pair coordinate site)
-  in
-  trans
+  let value = Mean.constantProjection multiplier (Torus.pair coordinate site)
+  in trans
     (cong (GlobalAverage.oneTwoFiftySix *_)
       (Mean.siteSumConstantExact value))
     (ℚRing.solve-∀ value)
@@ -131,7 +129,7 @@ projectedSchurPerturbationReduced background multiplier =
   Reduced.meanZeroRespectsPointwise
     (Projected.projectedSchurPerturbationActionExact background multiplier)
     (Mean.centeredMultiplierReduced
-      (Projected.SchurAction.schurPerturbationApply background multiplier))
+      (SchurAction.schurPerturbationApply background multiplier))
 
 projectedPaddedSchurConstantProjectionExact :
   ∀ background multiplier coordinate site →
@@ -199,13 +197,11 @@ selectedProjectedSchurGreenPreservesReduced
     background certificate source sourceReduced =
   let
     solution = SchurGreen.selectedProjectedSchurGreen background certificate source
-
     schurEqualsSource : ∀ row →
       SchurGreen.projectedPaddedSchurApply background solution row ≡ source row
     schurEqualsSource =
       SchurGreen.selectedProjectedSchurGreenRightInverse
         background certificate source
-
     solutionConstantZero : ∀ coordinate site →
       Mean.constantProjection solution (Torus.pair coordinate site) ≡ 0ℚ
     solutionConstantZero coordinate site =
@@ -214,8 +210,7 @@ selectedProjectedSchurGreenPreservesReduced
           (projectedPaddedSchurConstantProjectionExact
             background solution coordinate site))
         (trans
-          (constantProjectionRespectsPointwise
-            schurEqualsSource coordinate site)
+          (constantProjectionRespectsPointwise schurEqualsSource coordinate site)
           (Split.constantProjectionReducedZero source sourceReduced
             coordinate site))
   in
