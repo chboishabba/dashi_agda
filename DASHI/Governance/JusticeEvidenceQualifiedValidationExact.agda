@@ -35,13 +35,11 @@ import DASHI.Governance.TransitionResidual as Transition
 
 evidencePresentation :
   Support.SupportSquare → Transition.GovernanceValidation
-evidencePresentation (Support.supportSquare true false) = Transition.satisfied
-evidencePresentation (Support.supportSquare false true) =
-  Transition.positivelyViolated
-evidencePresentation (Support.supportSquare true true) =
-  Transition.undeterminedAxisIncomplete
-evidencePresentation (Support.supportSquare false false) =
-  Transition.undeterminedAxisIncomplete
+evidencePresentation square with Support.supportState square
+... | Support.positiveOnly = Transition.satisfied
+... | Support.negativeOnly = Transition.positivelyViolated
+... | Support.conflictingState = Transition.undeterminedAxisIncomplete
+... | Support.missingState = Transition.undeterminedAxisIncomplete
 
 contradictionAndMissingCollapseToSameGovernancePresentation :
   evidencePresentation (Support.supportSquare true true)
