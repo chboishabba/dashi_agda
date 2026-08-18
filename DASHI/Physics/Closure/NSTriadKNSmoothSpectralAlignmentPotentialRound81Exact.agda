@@ -43,10 +43,15 @@ module DASHI.Physics.Closure.NSTriadKNSmoothSpectralAlignmentPotentialRound81Exa
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using ([]; _∷_)
+open import Data.Product using (_×_; _,_; proj₁; proj₂)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; NonNegative)
 import Data.Rational.Properties as ℚP
-open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
+open import Data.Rational.Tactic.RingSolver using (solve)
+open import Relation.Binary.PropositionalEquality using (subst; trans)
+
+import DASHI.Physics.Closure.NSTriadKNLuoFiniteRationalOrderCore as Order
 
 record SpectralProbabilityWeights : Set where
   field
@@ -54,7 +59,7 @@ record SpectralProbabilityWeights : Set where
     p1Nonnegative : 0ℚ ≤ p1
     p2Nonnegative : 0ℚ ≤ p2
     p3Nonnegative : 0ℚ ≤ p3
-    sumOne : (p1 + p2) + p3 ≡ 1ℚ
+    spectralSumOne : (p1 + p2) + p3 ≡ 1ℚ
 
 open SpectralProbabilityWeights public
 
@@ -64,7 +69,7 @@ record DirectionAlignmentWeights : Set where
     alpha1Nonnegative : 0ℚ ≤ alpha1
     alpha2Nonnegative : 0ℚ ≤ alpha2
     alpha3Nonnegative : 0ℚ ≤ alpha3
-    sumOne : (alpha1 + alpha2) + alpha3 ≡ 1ℚ
+    alignmentSumOne : (alpha1 + alpha2) + alpha3 ≡ 1ℚ
 
 open DirectionAlignmentWeights public
 
@@ -80,8 +85,6 @@ probabilityCoordinateBelowOne :
   (p1 p ≤ 1ℚ) × (p2 p ≤ 1ℚ) × (p3 p ≤ 1ℚ)
 probabilityCoordinateBelowOne p = first , second , third
   where
-  open import Data.Product using (_×_; _,_)
-
   p1≤sum : p1 p ≤ (p1 p + p2 p) + p3 p
   p1≤sum =
     let
@@ -127,20 +130,17 @@ probabilityCoordinateBelowOne p = first , second , third
       (λ left → left ≤ (p1 p + p2 p) + p3 p)
       (ℚP.+-identityˡ (p3 p))
       (ℚP.+-mono-≤
-        (let
-          zero≤p1p2 : 0ℚ ≤ p1 p + p2 p
-          zero≤p1p2 = ℚP.+-mono-≤ (p1Nonnegative p) (p2Nonnegative p)
-         in zero≤p1p2)
+        (Order.addNonnegative (p1Nonnegative p) (p2Nonnegative p))
         (ℚP.≤-refl {x = p3 p}))
 
   first : p1 p ≤ 1ℚ
-  first = subst (p1 p ≤_) (sumOne p) p1≤sum
+  first = subst (p1 p ≤_) (spectralSumOne p) p1≤sum
 
   second : p2 p ≤ 1ℚ
-  second = subst (p2 p ≤_) (sumOne p) p2≤sum
+  second = subst (p2 p ≤_) (spectralSumOne p) p2≤sum
 
   third : p3 p ≤ 1ℚ
-  third = subst (p3 p ≤_) (sumOne p) p3≤sum
+  third = subst (p3 p ≤_) (spectralSumOne p) p3≤sum
 
 softSpectralAlignmentPotentialNonnegative :
   (p : SpectralProbabilityWeights) →
@@ -162,11 +162,14 @@ softSpectralAlignmentPotentialNonnegative p alpha =
       a3NN : NonNegative (alpha3 alpha)
       a3NN = ℚ.nonNegative (alpha3Nonnegative alpha)
 
+    firstNN : 0ℚ ≤ p1 p * alpha1 alpha
     firstNN = ℚP.nonNegative⁻¹ (p1 p * alpha1 alpha)
+    secondNN : 0ℚ ≤ p2 p * alpha2 alpha
     secondNN = ℚP.nonNegative⁻¹ (p2 p * alpha2 alpha)
+    thirdNN : 0ℚ ≤ p3 p * alpha3 alpha
     thirdNN = ℚP.nonNegative⁻¹ (p3 p * alpha3 alpha)
   in
-  ℚP.+-mono-≤ (ℚP.+-mono-≤ firstNN secondNN) thirdNN
+  Order.addNonnegative (Order.addNonnegative firstNN secondNN) thirdNN
 
 softSpectralAlignmentPotentialBelowOne :
   (p : SpectralProbabilityWeights) →
@@ -175,7 +178,6 @@ softSpectralAlignmentPotentialBelowOne :
 softSpectralAlignmentPotentialBelowOne p alpha =
   let
     bounds = probabilityCoordinateBelowOne p
-    open import Data.Product using (proj₁; proj₂)
     p1≤1 = proj₁ bounds
     p2≤1 = proj₁ (proj₂ bounds)
     p3≤1 = proj₂ (proj₂ bounds)
@@ -195,18 +197,19 @@ softSpectralAlignmentPotentialBelowOne p alpha =
     third : p3 p * alpha3 alpha ≤ 1ℚ * alpha3 alpha
     third = ℚP.*-monoʳ-≤-nonNeg (alpha3 alpha) p3≤1
 
+    summed :
+      softSpectralAlignmentPotential p alpha
+      ≤ 1ℚ * alpha1 alpha + 1ℚ * alpha2 alpha + 1ℚ * alpha3 alpha
     summed = ℚP.+-mono-≤ (ℚP.+-mono-≤ first second) third
+
+    removeOnes :
+      1ℚ * alpha1 alpha + 1ℚ * alpha2 alpha + 1ℚ * alpha3 alpha
+      ≡ (alpha1 alpha + alpha2 alpha) + alpha3 alpha
+    removeOnes = solve (alpha1 alpha ∷ alpha2 alpha ∷ alpha3 alpha ∷ [])
 
     upperIsOne :
       1ℚ * alpha1 alpha + 1ℚ * alpha2 alpha + 1ℚ * alpha3 alpha ≡ 1ℚ
-    upperIsOne =
-      trans
-        (cong₂ _+_
-          (cong₂ _+_ (ℚP.*-identityˡ (alpha1 alpha)) (ℚP.*-identityˡ (alpha2 alpha)))
-          (ℚP.*-identityˡ (alpha3 alpha)))
-        (sumOne alpha)
-      where
-      open import Relation.Binary.PropositionalEquality using (cong₂)
+    upperIsOne = trans removeOnes (alignmentSumOne alpha)
   in
   subst
     (λ upper → softSpectralAlignmentPotential p alpha ≤ upper)
