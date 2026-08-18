@@ -41,6 +41,7 @@ module DASHI.Physics.Closure.NSTriadKNFrameWeightedSquareChargeRound77Exact wher
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _*_; _≤_)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
@@ -62,10 +63,6 @@ import DASHI.Physics.Closure.NSTriadKNFixedOutputTwoChannelNormalizedChargeRound
 
 F : C3.RealField _
 F = RationalL2.rationalRealField
-
-------------------------------------------------------------------------
--- Generic reciprocal-frame compiler.
-------------------------------------------------------------------------
 
 record ReciprocalFrameWeight (frameProduct rho : ℚ) : Set where
   field
@@ -107,10 +104,6 @@ reciprocalFrameWeightTurnsProductChargeIntoCharge
   subst (rho * x ≤_)
     (trans commuteToReciprocal collapse)
     scaled
-
-------------------------------------------------------------------------
--- Same literal Round75 two-channel row, now without B<=1.
-------------------------------------------------------------------------
 
 literalFixedOutputSquareBelowChargeTimesFrame :
   ∀ {E : C3.IntegerEmbedding F}
