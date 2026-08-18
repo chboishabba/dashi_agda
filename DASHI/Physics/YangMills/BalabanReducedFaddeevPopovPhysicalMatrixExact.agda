@@ -29,14 +29,12 @@ module DASHI.Physics.YangMills.BalabanReducedFaddeevPopovPhysicalMatrixExact whe
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ)
-open import Relation.Binary.PropositionalEquality using (cong)
+open import Data.Rational.Base as ℚ using (0ℚ)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using (pair)
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreCarrier as Block
 import DASHI.Physics.YangMills.BalabanPath4AxisAverageExact as Path4
-import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Coordinates
 import DASHI.Physics.YangMills.BalabanP33PhysicalFlatGaugeDivergenceIdentificationExact as Gauge
 import DASHI.Physics.YangMills.BalabanP33PhysicalRationalWilsonPlaquetteJetExact as Physical
 import DASHI.Physics.YangMills.BalabanFiniteRationalMatrixTraceCyclicExact as Matrix
@@ -61,17 +59,13 @@ relativeGhostMatrix background anchor =
 identityRelativeGhostMatrixZero :
   ∀ anchor row column →
   relativeGhostMatrix Physical.identityBackground anchor row column ≡ 0ℚ
-identityRelativeGhostMatrixZero anchor row (pair colour site) =
+identityRelativeGhostMatrixZero
+    anchor (pair rowColour rowSite) (pair colour site) =
   Relative.relativeFaddeevPopovIdentityZero
     (Basis.reducedGhostBasisSource anchor colour site)
     anchor
     (Basis.reducedGhostBasisMeanZero anchor colour site)
-    (Coordinates.first row)
-    (Coordinates.second row)
-  where
-  -- The physical gauge coordinate is definitionally a Product colour site;
-  -- destructing the row avoids any projection ambiguity.
-  open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using (first; second)
+    rowColour rowSite
 
 relativeGhostPhysicalMatrixLevel : ProofLevel
 relativeGhostPhysicalMatrixLevel = machineChecked
