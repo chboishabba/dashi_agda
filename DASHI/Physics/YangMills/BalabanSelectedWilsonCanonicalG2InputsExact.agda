@@ -79,9 +79,7 @@ literalWilsonCanonicalG2Inputs :
     (WilsonSource.plaquetteFirstVariationCovector background plaquette)
     bondField plaquette
 literalWilsonCanonicalG2Inputs
-    {pseudoData = pseudoData}
     {background = background}
-    {bondField = bondField}
     {plaquette = plaquette}
     inputs = record
   { Canonical.CanonicalSubsetCorrelatedAuthorityInputs.sourceSupported =
@@ -97,18 +95,6 @@ literalWilsonCanonicalG2Inputs
   ; Canonical.CanonicalSubsetCorrelatedAuthorityInputs.greenOwnerOf =
       greenOwnerOf inputs
   }
-
-literalWilsonCanonicalConstraintAtoms :
-  ∀ {Multiplier}
-    {pseudoData : Pseudo.FiniteKKTPseudoinverseData Multiplier}
-    {background bondField plaquette}
-    (inputs : LiteralWilsonCanonicalG2RawInputs
-      pseudoData background bondField plaquette) →
-  Canonical.canonicalConstraintAtoms
-    (literalWilsonCanonicalG2Inputs inputs)
-  ≡ Canonical.canonicalConstraintAtoms
-    (literalWilsonCanonicalG2Inputs inputs)
-literalWilsonCanonicalConstraintAtoms inputs = _≡_.refl
 
 selectedWilsonCanonicalG2SourceLevel : ProofLevel
 selectedWilsonCanonicalG2SourceLevel = machineChecked
