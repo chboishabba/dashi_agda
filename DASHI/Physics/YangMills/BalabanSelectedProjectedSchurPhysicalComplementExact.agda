@@ -39,6 +39,7 @@ open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier as Torus
 import DASHI.Physics.YangMills.BalabanP33PeriodicFourDimensionalHodgeIdentityExact as Periodic
+import DASHI.Physics.YangMills.BalabanPath4GlobalAverageExact as GlobalAverage
 import DASHI.Physics.YangMills.BalabanSelectedFlatGaugeReducedFloorExact as FlatFloor
 import DASHI.Physics.YangMills.BalabanSelectedFlatGaugeRegularizedGreenExact as FlatGreen
 import DASHI.Physics.YangMills.BalabanSelectedGaugeMeanDecompositionExact as Mean
@@ -94,7 +95,7 @@ constantProjectionRespectsPointwise :
   Mean.constantProjection left (Torus.pair coordinate site)
   ≡ Mean.constantProjection right (Torus.pair coordinate site)
 constantProjectionRespectsPointwise {left} {right} pointwise coordinate site =
-  cong (Mean.scalarMean)
+  cong (GlobalAverage.oneTwoFiftySix *_)
     (Periodic.sumSitesCong
       (FlatFloor.gaugeMultiplierField left coordinate)
       (FlatFloor.gaugeMultiplierField right coordinate)
