@@ -19,27 +19,12 @@ module DASHI.Physics.YangMills.BalabanReducedFaddeevPopovPhysicalFourthJetExact 
 -- DASHI CONTRIBUTION
 --
 -- Assemble the four algebraic background coefficients of the SAME literal
--- physical Faddeev--Popov operator M_A = D_A G_A.
---
--- For a rational tangent bond field X, the analytic background path
--- A(g)=exp(gX) is Bishop-real for nonzero g, but the adjoint Taylor
--- coefficients at g=0 are rational and were constructed exactly in
--- `BalabanReducedGhostAdjointFourthJetExact`.
---
--- This module threads those jets through both places where the background
--- enters the FP operator:
---
---   G_A omega on each forward bond,
---   D_A on the resulting bond field with inverse-link transport.
---
--- It then postcomposes each positive-degree coefficient with the already
--- constructed reduced M0^{-1} and turns the resulting four linear maps into
--- the explicit 765-dimensional matrix representation used by the trace-log
--- jet.  Thus X1,...,X4 are no longer anonymous matrices supplied by a caller;
--- they are literal finite expressions built from D_A, G_A and M0^{-1}.
---
--- Remaining analytic work is the Bishop O(g^5) remainder and the finite
--- log/determinant identification on the selected weak-coupling ball.
+-- physical Faddeev--Popov operator M_A = D_A G_A.  For a rational tangent
+-- bond field X, exp(gX) is Bishop-real away from g=0, while every Taylor
+-- coefficient at zero is rational.  The linkwise adjoint coefficients are
+-- threaded through forward G_A and backward D_A, postcomposed with the exact
+-- reduced M0^{-1}, converted to the explicit 765-dimensional matrices, and
+-- immediately fed into the already-proved fourth-order trace-log algebra.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.List using (List; []; _∷_)
@@ -58,6 +43,7 @@ import DASHI.Physics.YangMills.BalabanReducedFlatFaddeevPopovGreenInverseExact a
 import DASHI.Physics.YangMills.BalabanReducedGhostExplicitTraceCarrierExact as Basis
 import DASHI.Physics.YangMills.BalabanReducedGhostOperatorMatrixExact as MatrixCarrier
 import DASHI.Physics.YangMills.BalabanFiniteRationalMatrixTraceCyclicExact as Matrix
+import DASHI.Physics.YangMills.BalabanReducedFaddeevPopovTraceLogJetExact as TraceJet
 import DASHI.Physics.YangMills.BalabanReducedFaddeevPopovMatrixTraceLogJetExact as TraceMatrix
 import DASHI.Physics.YangMills.BalabanReducedGhostAdjointFourthJetExact as Jet
 
@@ -197,9 +183,9 @@ physicalReducedGhostMatrices4 generator anchor = record
 
 physicalGhostTraceLogJet :
   Coordinates.PhysicalSU2BondField4 → Block.PhysicalBlockL Path4.side4 →
-  DASHI.Physics.YangMills.BalabanReducedFaddeevPopovTraceLogJetExact.GhostTraceLogJet4
+  TraceJet.ReducedGhostTraceLogJet4
 physicalGhostTraceLogJet generator anchor =
-  TraceMatrix.matrixTraceLogJet (physicalReducedGhostMatrices4 generator anchor)
+  TraceMatrix.matrixTraceLogJet4 (physicalReducedGhostMatrices4 generator anchor)
 
 physicalFaddeevPopovFourthJetConstructionLevel : ProofLevel
 physicalFaddeevPopovFourthJetConstructionLevel = machineChecked
@@ -211,9 +197,9 @@ physicalReducedGhostTraceLogCoefficientsLevel : ProofLevel
 physicalReducedGhostTraceLogCoefficientsLevel = machineChecked
 
 -- The coefficient matrices and their fourth-order trace-log polynomial are now
--- source-native.  What remains of the former fourth-jet package is the analytic
--- theorem that the Bishop background path has these coefficients with a
--- uniform O(g^5) remainder; the determinant theorem then identifies the finite
--- trace-log with log det on the selected weak-coupling ball.
+-- source-native.  What remains is the analytic theorem that the Bishop
+-- background path has these coefficients with a uniform O(g^5) remainder;
+-- the determinant theorem then identifies the finite trace-log with log det on
+-- the selected weak-coupling ball.
 physicalReducedGhostBishopFifthOrderRemainderLevel : ProofLevel
 physicalReducedGhostBishopFifthOrderRemainderLevel = conditional
