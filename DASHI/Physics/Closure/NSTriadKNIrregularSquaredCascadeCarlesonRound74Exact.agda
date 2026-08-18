@@ -24,7 +24,8 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base using (ℚ; _*_; _≤_; _<_)
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+import Data.Rational.Properties as ℚP
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym)
 open import Relation.Nullary.Negation.Core using (¬_)
 
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
@@ -38,7 +39,7 @@ data PhysicallyFundedLossChildren
   funded∷ :
     ∀ {weight rest}
       (actualCharge : ℚ) →
-    L2.square (weight * parentAmplitude) ≤ actualCharge →
+    L2.square (parentAmplitude * weight) ≤ actualCharge →
     PhysicallyFundedLossChildren parentAmplitude rest →
     PhysicallyFundedLossChildren parentAmplitude (weight ∷ rest)
 
@@ -46,14 +47,14 @@ asFundedNodes :
   ∀ {parentAmplitude weights} →
   PhysicallyFundedLossChildren parentAmplitude weights →
   List Carleson.FundedNode
-asFundedNodes funded[] = []
-asFundedNodes
-    (funded∷ {weight = weight} {rest = rest}
+asFundedNodes {parentAmplitude} funded[] = []
+asFundedNodes {parentAmplitude}
+    (funded∷ {weight = weight}
       actualCharge floorBelow restWitness) =
   Carleson.funded-node
-    (L2.square (weight * _))
+    (L2.square (parentAmplitude * weight))
     actualCharge
-    (L2.squareNonnegative (weight * _))
+    (L2.squareNonnegative (parentAmplitude * weight))
     floorBelow
   ∷ asFundedNodes restWitness
 
@@ -63,11 +64,11 @@ fundedChildrenFloorMassExact :
   Carleson.sumFloors (asFundedNodes witness)
   ≡ Mass.squaredMass
       (Cascade.irregularChildAmplitudes parentAmplitude weights)
-fundedChildrenFloorMassExact funded[] = refl
-fundedChildrenFloorMassExact
+fundedChildrenFloorMassExact {parentAmplitude} funded[] = refl
+fundedChildrenFloorMassExact {parentAmplitude}
     (funded∷ {weight = weight} actualCharge floorBelow restWitness) =
   cong
-    (L2.square (weight * _) +_)
+    (L2.square (parentAmplitude * weight) +_)
     (fundedChildrenFloorMassExact restWitness)
 
 irregularCascadeCarlesonBudgetBoundsExactFloorMass :
@@ -77,9 +78,10 @@ irregularCascadeCarlesonBudgetBoundsExactFloorMass :
   Mass.squaredMass
     (Cascade.irregularChildAmplitudes parentAmplitude weights)
   ≤ budget
-irregularCascadeCarlesonBudgetBoundsExactFloorMass children budgetWitness =
+irregularCascadeCarlesonBudgetBoundsExactFloorMass
+    {budget = budget} children budgetWitness =
   subst
-    (_≤ _)
+    (λ floorMass → floorMass ≤ budget)
     (fundedChildrenFloorMassExact children)
     (Carleson.carlesonBudgetFundsAllCertifiedFloors budgetWitness)
 
@@ -90,10 +92,11 @@ irregularCascadeFloorAboveBudgetRefutesCarlesonFunding :
     < Mass.squaredMass
         (Cascade.irregularChildAmplitudes parentAmplitude weights) →
   ¬ Carleson.PhysicalCarlesonBudget (asFundedNodes children) budget
-irregularCascadeFloorAboveBudgetRefutesCarlesonFunding children excess =
+irregularCascadeFloorAboveBudgetRefutesCarlesonFunding
+    {budget = budget} children excess =
   Carleson.floorPrefixAboveBudgetRefutesCarlesonFunding
     (subst
-      (_ <_)
+      (budget <_)
       (sym (fundedChildrenFloorMassExact children))
       excess)
 
