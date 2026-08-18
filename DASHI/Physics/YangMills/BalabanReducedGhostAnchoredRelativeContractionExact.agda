@@ -39,8 +39,9 @@ module DASHI.Physics.YangMills.BalabanReducedGhostAnchoredRelativeContractionExa
 --     <= (6153/65536)(17/8)
 --      = 104601/524288 < 1/5 < 1.
 --
--- This is a strict contraction for the ACTUAL anchored reduced relative FP
--- operator, without silently replacing the anchored section by the
+-- The same-object proof transports the anchored Green to the reduced inverse
+-- through pointwise finite-matrix congruence.  It does not use function
+-- extensionality and does not silently replace the anchored section by the
 -- translation-invariant Green representative.
 ------------------------------------------------------------------------
 
@@ -61,7 +62,6 @@ import DASHI.Physics.YangMills.BalabanFiniteRectangularRationalExact as Rect
 import DASHI.Physics.YangMills.BalabanFiniteRectangularAbsoluteMassExact as Mass
 import DASHI.Physics.YangMills.BalabanP33FiniteWeightedSchurSquaredExact as Schur
 import DASHI.Physics.YangMills.BalabanP33FiniteKKTAdmissibleProjectorExact as KKT
-import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Coordinates
 import DASHI.Physics.YangMills.BalabanP33PhysicalFlatGaugeDivergenceIdentificationExact as FlatGauge
 import DASHI.Physics.YangMills.BalabanP33PhysicalRationalWilsonPlaquetteJetExact as Physical
 import DASHI.Physics.YangMills.BalabanP33PhysicalBackgroundGaugeParameterizedYoungExact as Relaxed
@@ -122,8 +122,7 @@ anchoredGreenApplyIsReducedInverse anchor source coordinate site =
     anchorExact = GreenContraction.flatGreenKernelActsExactly
       source coordinate anchor
   in
-  trans split
-    (trans (cong₂ _-_ currentExact anchorExact) refl)
+  trans split (trans (cong₂ _-_ currentExact anchorExact) refl)
 
 ------------------------------------------------------------------------
 -- Absolute row mass of H_x0.
@@ -251,56 +250,46 @@ anchoredRelativeIsPhysicalReducedFP :
 anchoredRelativeIsPhysicalReducedFP
     background anchor source meanZero (pair coordinate site) =
   let
+    row = pair coordinate site
     reduced = ReducedInverse.reducedFlatGreenInverse source anchor
 
-    kernelToReduced : ∀ row →
-      anchoredGreenApply anchor source row ≡ reduced row
+    kernelToReduced : ∀ selected →
+      anchoredGreenApply anchor source selected ≡ reduced selected
     kernelToReduced (pair colour currentSite) =
-      anchoredGreenApplyIsReducedInverse
-        anchor source colour currentSite
+      anchoredGreenApplyIsReducedInverse anchor source colour currentSite
 
-    perturbationAction =
-      anchoredRelativeApplyExact background anchor source (pair coordinate site)
+    perturbationVectorCong =
+      Rect.applyRectangularVectorCong
+        Rows.selectedGaugeRowCarrier
+        (Perturbation.gaugeGramPerturbationMatrix background)
+        kernelToReduced row
 
     perturbationDifference =
       PerturbationAction.selectedGaugeGramPerturbationDifferenceExact
-        background (anchoredGreenApply anchor source) (pair coordinate site)
+        background reduced row
 
     backgroundFP = selectedGaugeGramApplyIsFaddeevPopov
-      background (anchoredGreenApply anchor source) (pair coordinate site)
-
+      background reduced row
     identityFP = selectedGaugeGramApplyIsFaddeevPopov
-      Physical.identityBackground (anchoredGreenApply anchor source)
-      (pair coordinate site)
-
-    backgroundReduced = cong
-      (λ parameter →
-        FP.faddeevPopovApply background parameter (pair coordinate site))
-      (kernelToReduced (pair coordinate site))
-
-    identityReduced = cong
-      (λ parameter →
-        FP.faddeevPopovApply Physical.identityBackground parameter
-          (pair coordinate site))
-      (kernelToReduced (pair coordinate site))
+      Physical.identityBackground reduced row
 
     flatIsFlat = FP.identityFaddeevPopovIsFlat reduced coordinate site
     rightInverse = ReducedInverse.reducedFlatGreenRightInverse
       source anchor meanZero coordinate site
   in
-  trans perturbationAction
-    (trans perturbationDifference
-      (trans
-        (cong₂ _-_ backgroundFP identityFP)
+  trans
+    (anchoredRelativeApplyExact background anchor source row)
+    (trans perturbationVectorCong
+      (trans perturbationDifference
         (trans
-          (cong₂ _-_ backgroundReduced identityReduced)
+          (cong₂ _-_ backgroundFP identityFP)
           (trans
             (cong
-              (FP.faddeevPopovApply background reduced (pair coordinate site) -_)
+              (FP.faddeevPopovApply background reduced row -_)
               flatIsFlat)
             (trans
               (cong
-                (FP.faddeevPopovApply background reduced (pair coordinate site) -_)
+                (FP.faddeevPopovApply background reduced row -_)
                 rightInverse)
               refl)))))
 
