@@ -30,7 +30,7 @@ module DASHI.Algebra.OrdinaryNodeCotangentJetExact where
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
-open import Data.Integer using (ℤ)
+open import Data.Integer using (ℤ; +_)
   renaming (_+_ to _+ℤ_; _*_ to _*ℤ_)
 import Data.Integer.Tactic.RingSolver as ℤRing
 open import Agda.Builtin.List using ([]; _∷_)
