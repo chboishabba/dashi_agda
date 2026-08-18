@@ -6,9 +6,6 @@ open import DASHI.Ontology.ProgenitorParentHyperfabric
 
 ------------------------------------------------------------------------
 -- Exact fibre over the Wikidata parent-slot projection.
---
--- This specializes the existing DASHI projection-fibre idea to parenting:
--- multiple carrier semantics can inhabit the same P22/P25/P8810/P1531 surface.
 ------------------------------------------------------------------------
 
 record ParentCarrier : Set where
@@ -46,25 +43,19 @@ adoptiveParentInP8810Fibre = parentSlotFibre adoptiveCarrier refl
 cultivarInP1531Fibre : ParentSlotFibre hybridOfP1531
 cultivarInP1531Fibre = parentSlotFibre cultivarCarrier refl
 
--- Same observable slot, incompatible genetic coordinates: observational
--- agreement at P8810 cannot recover the parent carrier.
 p8810FibreContainsGeneticallyDistinctCarriers :
   geneticContributor (carrierRelation anonymousDonorCarrier) ≡ true
   × geneticContributor (carrierRelation adoptiveCarrier) ≡ false
 p8810FibreContainsGeneticallyDistinctCarriers = refl , refl
 
--- The lineage projection changes the preferred Wikidata surface while retaining
--- the lineage/genealogical coordinate. This is representation specialization,
--- not a proof that cultivars are ontologically ineligible for progeniture.
-p1531SpecializationPreservesLineageParentCoordinate :
+-- P1531 specializes the visible representation while preserving progeniture;
+-- it does not force the lineage relation into genealogical/social parenthood.
+p1531SpecializationPreservesProgenitorCoordinate :
   projectParentSlot cultivarCarrier ≡ hybridOfP1531
-  × genealogicalParent (carrierRelation cultivarCarrier) ≡ true
-p1531SpecializationPreservesLineageParentCoordinate = refl , refl
+  × progenitorRelation (carrierRelation cultivarCarrier) ≡ true
+  × genealogicalParent (carrierRelation cultivarCarrier) ≡ false
+p1531SpecializationPreservesProgenitorCoordinate = refl , (refl , refl)
 
--- Projection compatibility object: a surface and hidden carrier are paired only
--- when the surface is exactly the carrier's projection. This is the concrete
--- parenting analogue of the pullback/fibre-product discipline used in the Lean
--- ontology work: compatibility is retained without identifying the views.
 record CompatibleParentView : Set where
   constructor compatibleParentView
   field
@@ -84,9 +75,6 @@ forgetAfterLift :
   forgetCompatibility (liftCarrier carrier) ≡ carrier
 forgetAfterLift carrier = refl
 
--- The carrier is therefore a retract of the compatible surface-plus-carrier
--- representation. The retraction preserves hidden semantics rather than
--- pretending that the visible slot determines them.
 carrierRetractionIsExact :
   (carrier : ParentCarrier) →
   carrierRelation (forgetCompatibility (liftCarrier carrier))
