@@ -3,7 +3,7 @@ module DASHI.Moonshine.MonsterFrickeCasselmanHighestAlphaEverything where
 ------------------------------------------------------------------------
 -- Current highest-alpha convergence root.
 --
--- GLOBAL PRIME-SET SIDE -- ALL-PRIME THEOREM WITH DIRECTIONAL PROVENANCE
+-- GLOBAL PRIME-SET SIDE -- ALL-PRIME THEOREM WITH TWO MODERN MECHANISMS
 --
 --   FORWARD:
 --     p | |M|
@@ -13,17 +13,17 @@ module DASHI.Moonshine.MonsterFrickeCasselmanHighestAlphaEverything where
 --
 --   CONVERSE:
 --     g(X_0^+(p)) = 0
---       -> Ogg/Duncan--Ono classification-equivalence
---       -> p | |M|.
+--       -> zero coarse Frobenius-pair defect
+--       -> Duncan--Swisher Theorem 1.2 exponent support (p>3)
+--       -> p | |M|,
 --
--- The forward inclusion is therefore conceptually explained by monstrous
--- moonshine and no longer passes through supersingular rationality.  The
--- remaining global explanatory problem is exactly the ABSENCE of extra
--- genus-zero primes; the current converse remains the Ogg classification input.
+-- with p=2,3 handled by the separate exact low-level lane.
 --
--- Source provenance underneath the arbitrary-prime Fricke genus is split:
---   p = 2,3 : explicit classical low-level Fricke genus-zero authority;
---   p >= 5  : published prime-level Deligne--Rapoport/Fricke geometry.
+-- The older Duncan--Ono/Ogg supersingular SUPPORT equivalence is no longer
+-- imported by the primary arbitrary-prime theorem.  It remains an independent
+-- historical cross-check.  The next global frontier is to lower the stronger
+-- Duncan--Swisher exponent theorem itself into explicit modular-function
+-- operators rather than consuming only its support corollary.
 --
 -- No MonsterPrimeLane / SSP15 finite table and no finite under-72 Fricke table
 -- participates in the arbitrary-prime theorem.
@@ -87,9 +87,10 @@ open import Data.Nat using (_≤_)
 open import Data.Nat.Primality using (Prime)
 
 import DASHI.Moonshine.MonsterOrderDivisibilityExact as Monster
-import DASHI.Moonshine.PublishedMonsterFrickeGenusZeroExact as GlobalGe5
+import DASHI.Moonshine.PublishedMonsterFrickeGenusZeroExact as HistoricalGe5
 import DASHI.Moonshine.PublishedMonsterFrickeAllSupportedPrimesExact as GlobalAll
-import DASHI.Moonshine.MonsterFrickeDirectionalMechanismExact as Directional
+import DASHI.Moonshine.MonsterFrickeModernDirectionalMechanismExact as Modern
+import DASHI.Moonshine.DuncanSwisherMonsterFrickeAllPrimesExact as DSAll
 import DASHI.Moonshine.PublishedPrimeLevelFrickeSelectorPinnedExact as Fricke
 import DASHI.Moonshine.PrimeLevelDeligneRapoportFrickeSelectorExact as Selector
 import DASHI.Moonshine.CasselmanUnramifiedPGL2FixedVectorTowerExact as Casselman
@@ -109,33 +110,43 @@ import DASHI.Moonshine.P11JacquetLanglandsCoordinateNonCanonicityExact as Coordi
 -- Global Monster / Fricke regressions.
 ------------------------------------------------------------------------
 
-monsterPrimeGenusZeroGe5Regression :
+monsterPrimeGenusZeroGe5HistoricalRegression :
   (p : Nat) → (prime : Prime p) → (ge5 : 5 ≤ p) →
   Monster.PrimeDividesMonsterOrder p
   ↔ Selector.genericFrickeGenus (Fricke.publishedAuthorityAt p prime ge5) ≡ 0
-monsterPrimeGenusZeroGe5Regression = GlobalGe5.monsterPrimeIffFrickeGenusZero
+monsterPrimeGenusZeroGe5HistoricalRegression =
+  HistoricalGe5.monsterPrimeIffFrickeGenusZero
 
 monsterPrimeGenusZeroAllPrimesRegression :
   (p : Nat) → (prime : Prime p) →
   Monster.PrimeDividesMonsterOrder p
   ↔ GlobalAll.primeFrickeGenus p prime ≡ 0
 monsterPrimeGenusZeroAllPrimesRegression =
-  Directional.monsterPrimeIffFrickeGenusZeroDirectional
+  Modern.monsterPrimeIffFrickeGenusZeroModern
 
-moonshineForwardDoesNotUseSupersingularRegression :
-  Directional.forwardUsesSupersingularRationality
-    Directional.canonicalMonsterFrickeDirectionalMechanismBoundary ≡ false
-moonshineForwardDoesNotUseSupersingularRegression = refl
+moonshineForwardRegression :
+  (p : Nat) → (prime : Prime p) →
+  Monster.PrimeDividesMonsterOrder p →
+  GlobalAll.primeFrickeGenus p prime ≡ 0
+moonshineForwardRegression =
+  Modern.monsterPrimeImpliesFrickeGenusZeroByMoonshine
 
-moonshineExplainsMonsterPrimePresenceRegression :
-  Directional.presenceOfMonsterPrimesExplainedByMoonshine
-    Directional.canonicalMonsterFrickeDirectionalMechanismBoundary ≡ true
-moonshineExplainsMonsterPrimePresenceRegression = refl
+exponentSupportConverseRegression :
+  (p : Nat) → (prime : Prime p) →
+  GlobalAll.primeFrickeGenus p prime ≡ 0 →
+  Monster.PrimeDividesMonsterOrder p
+exponentSupportConverseRegression =
+  Modern.frickeGenusZeroImpliesMonsterPrimeByExponentSupport
 
-extraOggPrimeExclusionStillClassificatoryRegression :
-  Directional.absenceOfExtraGenusZeroPrimesExplainedByMoonshine
-    Directional.canonicalMonsterFrickeDirectionalMechanismBoundary ≡ false
-extraOggPrimeExclusionStillClassificatoryRegression = refl
+primaryAllPrimeProofUsesDuncanOnoSupportRegression :
+  Modern.DuncanOnoSupportEquivalenceImported
+    Modern.canonicalMonsterFrickeModernDirectionalBoundary ≡ false
+primaryAllPrimeProofUsesDuncanOnoSupportRegression = refl
+
+duncanSwisherAllPrimeSupportRegression :
+  DSAll.arbitraryPrimeSupportEquivalenceDerived
+    DSAll.canonicalDuncanSwisherMonsterFrickeAllPrimesBoundary ≡ true
+duncanSwisherAllPrimeSupportRegression = refl
 
 primeCaseExhaustionRegression :
   GlobalAll.arbitraryPrimeCaseExhaustionDerivedInternally
@@ -235,8 +246,3 @@ whittakerOptionalForPreferredCoordinatesRegression :
   CoordinateNoGo.whittakerNormalizationOptionalForPreferredCoordinates
     CoordinateNoGo.canonicalP11JacquetLanglandsCoordinateNonCanonicityBoundary ≡ true
 whittakerOptionalForPreferredCoordinatesRegression = refl
-
-finiteMonsterLaneTableStillUnusedGe5Regression :
-  GlobalGe5.MonsterPrimeLaneTableUsed
-    GlobalGe5.canonicalPublishedMonsterFrickeGenusZeroBoundary ≡ false
-finiteMonsterLaneTableStillUnusedGe5Regression = refl
