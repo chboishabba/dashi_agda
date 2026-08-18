@@ -5,7 +5,9 @@ open import Agda.Builtin.Sigma using (Σ; _,_)
 
 ------------------------------------------------------------------------
 -- Canonical containment and overlapping evidence fibres are different edge
--- species. A shared Interface carrier does not authorize one reduction law.
+-- species. Canonical LEAVES and canonical PARENT frontiers are different
+-- reduction roles as well: sharing a containment topology does not authorize a
+-- leaf interface to run the parent-frontier reducer.
 ------------------------------------------------------------------------
 
 data ⊥ᶠ : Set where
@@ -13,12 +15,23 @@ data ⊥ᶠ : Set where
 record FrontierTopology (Interface : Set) : Set₁ where
   field
     Canonical : Interface → Set
+    ParentFrontier : Interface → Set
+    Leaf : Interface → Set
     Overlapping : Interface → Set
     parent : Interface → Interface → Set
     supports : Interface → Interface → Set
 
     canonicalOverlapDisjoint :
       ∀ interface → Canonical interface → Overlapping interface → ⊥ᶠ
+
+    parentFrontierRequiresCanonical :
+      ∀ interface → ParentFrontier interface → Canonical interface
+
+    leafRequiresCanonical :
+      ∀ interface → Leaf interface → Canonical interface
+
+    parentLeafDisjoint :
+      ∀ interface → ParentFrontier interface → Leaf interface → ⊥ᶠ
 
     parentRequiresCanonical :
       ∀ child parentInterface → parent child parentInterface → Canonical child
@@ -31,10 +44,13 @@ record CanonicalReductionBoundary
   : Set₁ where
   field
     reducible : Interface → Set
-    reducibleIffCanonical :
-      ∀ interface → reducible interface ≡ Canonical topology interface
+    reducibleIffParentFrontier :
+      ∀ interface → reducible interface ≡ ParentFrontier topology interface
 
 open CanonicalReductionBoundary public
+
+substᶠ : ∀ {A B : Set} → A ≡ B → A → B
+substᶠ refl value = value
 
 canonicalReducerRejectsOverlap :
   ∀ {Interface : Set}
@@ -46,11 +62,25 @@ canonicalReducerRejectsOverlap :
     ⊥ᶠ
 canonicalReducerRejectsOverlap {topology = topology} boundary interface overlap canReduce =
   canonicalOverlapDisjoint topology interface
-    (substᶠ (reducibleIffCanonical boundary interface) canReduce)
+    (parentFrontierRequiresCanonical topology interface parentProof)
     overlap
   where
-  substᶠ : ∀ {A B : Set} → A ≡ B → A → B
-  substᶠ refl value = value
+  parentProof : ParentFrontier topology interface
+  parentProof = substᶠ (reducibleIffParentFrontier boundary interface) canReduce
+
+canonicalParentReducerRejectsLeaf :
+  ∀ {Interface : Set}
+    {topology : FrontierTopology Interface}
+    (boundary : CanonicalReductionBoundary Interface topology)
+    (interface : Interface) →
+    Leaf topology interface →
+    reducible boundary interface →
+    ⊥ᶠ
+canonicalParentReducerRejectsLeaf {topology = topology} boundary interface leaf canReduce =
+  parentLeafDisjoint topology interface parentProof leaf
+  where
+  parentProof : ParentFrontier topology interface
+  parentProof = substᶠ (reducibleIffParentFrontier boundary interface) canReduce
 
 ------------------------------------------------------------------------
 -- Sparse dirty closure.
