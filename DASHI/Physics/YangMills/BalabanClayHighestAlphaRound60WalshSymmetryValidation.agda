@@ -12,14 +12,15 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound60WalshSymmetryValida
 -- character geometry and an exact counterexample proves that degree/S4
 -- symmetry alone does not justify XOR-convolution diagonalisation.
 --
--- The full sixteen-point Walsh inversion theorem is also imported here, so
--- the character transform is certified as a lossless basis change before
--- physical symmetry kills nontrivial sectors.
+-- Full sixteen-point Walsh inversion and normalized character-sector
+-- reconstruction are imported as well, so the transform is certified as a
+-- lossless basis change before physical symmetry kills nontrivial sectors.
 ------------------------------------------------------------------------
 
 import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound59PositiveRGGeometryValidation
 import DASHI.Physics.YangMills.BalabanBooleanFourCubeWalshCharacterExact
 import DASHI.Physics.YangMills.BalabanBooleanFourCubeWalshInversionExact
+import DASHI.Physics.YangMills.BalabanBooleanFourCubeWalshProjectorDecompositionExact
 import DASHI.Physics.YangMills.BalabanBooleanFourCubeWalshMobiusSeparationExact
 import DASHI.Physics.YangMills.BalabanCMP109WalshCharacterOrbitCancellationExact
 import DASHI.Physics.YangMills.BalabanCMP109WalshFourOrbitFactorizationExact
