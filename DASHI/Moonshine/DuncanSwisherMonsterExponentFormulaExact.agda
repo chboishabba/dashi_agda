@@ -35,14 +35,10 @@ module DASHI.Moonshine.DuncanSwisherMonsterExponentFormulaExact where
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
-open import Data.Nat using (_≤_; _*_; suc)
+open import Data.Nat using (_≤_; _*_; suc; s≤s; z≤n)
 open import Data.Nat.Primality using (Prime)
-import Data.Nat.Properties as NatP
 
-import DASHI.Moonshine.PublishedPrimeLevelFrickeSelectorPinnedExact as Fricke
-import DASHI.Moonshine.PrimeLevelDeligneRapoportFrickeSelectorExact as Selector
 import DASHI.Moonshine.PrimeLevelDeligneRapoportFrickeCombinatoricsExact as DR
-import DASHI.Moonshine.MonsterOrderDivisibilityExact as Monster
 
 ------------------------------------------------------------------------
 -- Source-shaped denominator-free cases of Duncan--Swisher Theorem 1.2.
@@ -116,9 +112,23 @@ summary A = exponent-depth-summary
   (monsterValuation A)
 
 ------------------------------------------------------------------------
+-- Tiny structural positivity helpers.  Keeping these local avoids depending
+-- on version-sensitive multiplication monotonicity APIs.
+------------------------------------------------------------------------
+
+positiveNotZero :
+  {n : Nat} → 1 ≤ n → n ≡ 0 → ⊥
+positiveNotZero {0} () refl
+positiveNotZero {suc n} positive ()
+
+threeTimesPositive :
+  {m : Nat} → 1 ≤ m → 1 ≤ 3 * m
+threeTimesPositive {0} ()
+threeTimesPositive {suc m} positive = s≤s z≤n
+
+------------------------------------------------------------------------
 -- Positive minimum automorphism order makes the two zero-pair branches have
--- positive valuation.  We prove only what is needed by case analysis, avoiding
--- any Monster-prime enumeration.
+-- positive valuation.  No Monster-prime enumeration occurs here.
 ------------------------------------------------------------------------
 
 zeroPairBranchValuationCannotBeZero :
@@ -131,28 +141,17 @@ zeroPairBranchValuationCannotBeZero :
 zeroPairBranchValuationCannotBeZero mPositive
   (singletonRational fixedOne pairedZero doubled) _ valuationZero
   rewrite valuationZero =
-  let
-    threeMPositive : 1 ≤ 3 * _
-    threeMPositive = NatP.m≤m*n 1 mPositive 3
-  in
-  NatP.1+n≰n 0
-    (subst (λ n → 1 ≤ n) (sym doubled) threeMPositive)
+  positiveNotZero
+    (threeTimesPositive mPositive)
+    (sym doubled)
 zeroPairBranchValuationCannotBeZero mPositive
   (multipleRational fixedMany pairedZero doubled) _ valuationZero
   rewrite valuationZero =
-  let
-    impossible : 1 ≤ 0
-    impossible = subst (λ n → 1 ≤ n) (sym doubled) mPositive
-  in
-  NatP.1+n≰n 0 impossible
+  positiveNotZero mPositive (sym doubled)
 zeroPairBranchValuationCannotBeZero mPositive
   (quadraticPresent pairedPositive valuationZero minTwo)
   pairedZero _ =
-  let
-    impossible : 1 ≤ 0
-    impossible = subst (λ n → 1 ≤ n) pairedZero pairedPositive
-  in
-  NatP.1+n≰n 0 impossible
+  positiveNotZero pairedPositive pairedZero
 
 ------------------------------------------------------------------------
 -- Full theorem immediately recovers the older support statement, but now as a
@@ -166,14 +165,10 @@ pairPresentForcesZeroValuation :
   valuation ≡ 0
 pairPresentForcesZeroValuation
   (singletonRational fixedOne pairedZero doubled) pairedPositive =
-  ⊥-elim
-    (NatP.1+n≰n 0
-      (subst (λ n → 1 ≤ n) pairedZero pairedPositive))
+  ⊥-elim (positiveNotZero pairedPositive pairedZero)
 pairPresentForcesZeroValuation
   (multipleRational fixedMany pairedZero doubled) pairedPositive =
-  ⊥-elim
-    (NatP.1+n≰n 0
-      (subst (λ n → 1 ≤ n) pairedZero pairedPositive))
+  ⊥-elim (positiveNotZero pairedPositive pairedZero)
 pairPresentForcesZeroValuation
   (quadraticPresent pairedPositive valuationZero minTwo) _ = valuationZero
 
@@ -197,8 +192,8 @@ zeroValuationForcesPairPresent mPositive
   (quadraticPresent pairedPositive valuationZero minTwo) _ = pairedPositive
 
 ------------------------------------------------------------------------
--- A zero/nonzero pair-count formulation avoids choosing a decidable comparison
--- theorem here.  The exact branch object still retains the depth information.
+-- Zero valuation iff the coarse Frobenius has a nontrivial pair.  The exact
+-- branch object still retains the exponent depth discarded by this corollary.
 ------------------------------------------------------------------------
 
 valuationZeroIffPairPositive :
@@ -214,9 +209,7 @@ valuationZeroIffPairPositive A =
   (pairPresentForcesZeroValuation (theorem12 A))
 
 ------------------------------------------------------------------------
--- Geometric refinement: positive Fricke pair defect is exactly the
--- zero-exponent branch on this source authority.  Genus transport itself stays
--- in the independent Deligne--Rapoport selector lane.
+-- Promotion boundary.
 ------------------------------------------------------------------------
 
 record DuncanSwisherExponentFormulaBoundary : Set where
