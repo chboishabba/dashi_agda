@@ -3,21 +3,29 @@ module DASHI.Moonshine.MonsterFrickeCasselmanHighestAlphaEverything where
 ------------------------------------------------------------------------
 -- Current highest-alpha convergence root.
 --
--- GLOBAL PRIME-SET SIDE -- CLOSED AT EXPLICIT PUBLISHED AUTHORITY BOUNDARIES
+-- GLOBAL PRIME-SET SIDE -- ALL-PRIME THEOREM WITH DIRECTIONAL PROVENANCE
 --
---   actual Monster order divisibility
---     <=> Ogg/Duncan--Ono supersingular rationality
---     <=> Deligne--Rapoport/Fricke coarse Frobenius fully fixed
---     <=> g(X_0^+(p)) = 0
+--   FORWARD:
+--     p | |M|
+--       -> Conway--Norton/Borcherds prime-order moonshine class
+--       -> moonshine group Gamma_0(p)^+ is genus zero
+--       -> g(X_0^+(p)) = 0.
 --
--- for every proof-relevant prime p.  The source provenance is deliberately
--- split:
+--   CONVERSE:
+--     g(X_0^+(p)) = 0
+--       -> Ogg/Duncan--Ono classification-equivalence
+--       -> p | |M|.
 --
+-- The forward inclusion is therefore conceptually explained by monstrous
+-- moonshine and no longer passes through supersingular rationality.  The
+-- remaining global explanatory problem is exactly the ABSENCE of extra
+-- genus-zero primes; the current converse remains the Ogg classification input.
+--
+-- Source provenance underneath the arbitrary-prime Fricke genus is split:
 --   p = 2,3 : explicit classical low-level Fricke genus-zero authority;
---   p >= 5  : published prime-level special-fibre geometry.
+--   p >= 5  : published prime-level Deligne--Rapoport/Fricke geometry.
 --
--- The case split is derived internally from stdlib primality.  No
--- MonsterPrimeLane / SSP15 finite table and no finite under-72 Fricke table
+-- No MonsterPrimeLane / SSP15 finite table and no finite under-72 Fricke table
 -- participates in the arbitrary-prime theorem.
 --
 -- LOCAL p11 SIDE -- RESOLVED AT THE CORRECT REPRESENTATION LEVEL
@@ -81,6 +89,7 @@ open import Data.Nat.Primality using (Prime)
 import DASHI.Moonshine.MonsterOrderDivisibilityExact as Monster
 import DASHI.Moonshine.PublishedMonsterFrickeGenusZeroExact as GlobalGe5
 import DASHI.Moonshine.PublishedMonsterFrickeAllSupportedPrimesExact as GlobalAll
+import DASHI.Moonshine.MonsterFrickeDirectionalMechanismExact as Directional
 import DASHI.Moonshine.PublishedPrimeLevelFrickeSelectorPinnedExact as Fricke
 import DASHI.Moonshine.PrimeLevelDeligneRapoportFrickeSelectorExact as Selector
 import DASHI.Moonshine.CasselmanUnramifiedPGL2FixedVectorTowerExact as Casselman
@@ -111,7 +120,22 @@ monsterPrimeGenusZeroAllPrimesRegression :
   Monster.PrimeDividesMonsterOrder p
   ↔ GlobalAll.primeFrickeGenus p prime ≡ 0
 monsterPrimeGenusZeroAllPrimesRegression =
-  GlobalAll.primeMonsterIffFrickeGenusZero
+  Directional.monsterPrimeIffFrickeGenusZeroDirectional
+
+moonshineForwardDoesNotUseSupersingularRegression :
+  Directional.forwardUsesSupersingularRationality
+    Directional.canonicalMonsterFrickeDirectionalMechanismBoundary ≡ false
+moonshineForwardDoesNotUseSupersingularRegression = refl
+
+moonshineExplainsMonsterPrimePresenceRegression :
+  Directional.presenceOfMonsterPrimesExplainedByMoonshine
+    Directional.canonicalMonsterFrickeDirectionalMechanismBoundary ≡ true
+moonshineExplainsMonsterPrimePresenceRegression = refl
+
+extraOggPrimeExclusionStillClassificatoryRegression :
+  Directional.absenceOfExtraGenusZeroPrimesExplainedByMoonshine
+    Directional.canonicalMonsterFrickeDirectionalMechanismBoundary ≡ false
+extraOggPrimeExclusionStillClassificatoryRegression = refl
 
 primeCaseExhaustionRegression :
   GlobalAll.arbitraryPrimeCaseExhaustionDerivedInternally
