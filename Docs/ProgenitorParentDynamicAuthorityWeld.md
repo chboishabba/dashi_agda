@@ -1,6 +1,6 @@
 # Progenitor / Parent Dynamic Authority Weld
 
-This note records the action-facing extension of the parent/progenitor hyperfabric. It deliberately reuses existing DASHI dynamic-safety, policy-safety, non-factorability, provenance-reopening, plural-observer, consultation, and diachronic-authority kernels rather than adding another parent-specific foundation.
+This note records the action-facing extension of the parent/progenitor hyperfabric. It deliberately reuses existing DASHI dynamic-safety, policy-safety, non-factorability, provenance-reopening, plural-observer, consultation, recoverable-quotient composition, and diachronic-authority kernels rather than adding another parent-specific foundation.
 
 ## 1. Public parent slots do not factor authority routing
 
@@ -63,7 +63,21 @@ This is the parent specialization of the generic receipt-dynamics theorem develo
 
 The receipt remains proof-relevant state, not semantic-erasure or disclosure authority.
 
-## 5. Family agency is not parental sovereignty
+## 5. Progressive residual factorisation
+
+`ProgenitorParentProgressiveResidualFactorizationExact.agda` reuses `DASHI.Core.RecoverableQuotientCompositionExact` to replace a monolithic parent receipt with an exact two-stage quotient tower:
+
+`ParentCarrier -> ParentSemanticSurface -> WikidataParentSlot`.
+
+The semantic surface retains the visible slot plus progenitor, genetic, and genealogical-parent coordinates. The first residual retains the remaining relation coordinates: gametic, mitochondrial, gestational, intended, legal, social, caregiver, identity-known, and identity-disclosable state. The second residual retains exactly the semantic coordinates forgotten when the semantic surface is projected to the Wikidata slot.
+
+Both stages reopen exactly. The generic composition theorem then proves that the composite residual is the product:
+
+`ParentPrivateResidual × ParentSemanticResidual`.
+
+So refinement can be represented as progressive proof-relevant residuals rather than by continually widening one public ontology record.
+
+## 6. Family agency is not parental sovereignty
 
 `ProgenitorParentAllyshipAuthorityBridgeExact.agda` cross-pollinates two older repo lanes:
 
@@ -76,7 +90,7 @@ The combined boundary is:
 
 This is the formal counterpart of the education-policy distinction between supporting family agency and turning parenthood into epistemic or political sovereignty.
 
-## 6. Hearing is not decision sensitivity
+## 7. Hearing is not decision sensitivity
 
 `ProgenitorParentConsultationDecisionSensitivityExact.agda` imports the existing `RelationalChronologyProjectionBoundary` / `RelationalSharedStateUpdate` pseudo-consultation witness.
 
@@ -88,7 +102,7 @@ It also composes with the diachronic support boundary: consultation cannot be us
 
 This matters in both directions. Asking a child/dependent/family member for input does not establish meaningful participation if the answer cannot affect the route; conversely, preserving a present preference does not automatically manufacture a historical joint agreement.
 
-## 7. Relationship to observer refinement and PR #584
+## 8. Relationship to observer refinement and PR #584
 
 PR #581 already contains the static observer-refinement and fibre-dynamics cores needed by the parent ontology. PR #584 independently owns the generic bridges from observer refinement to future-language safety and from hidden fibre motion to receipt motion.
 
