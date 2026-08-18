@@ -152,8 +152,6 @@ mandateBackedRouteYieldsBoundedAuthority backed =
 
 ------------------------------------------------------------------------
 -- Concrete inhabited witness: the bridge is not merely a negative boundary.
--- One situated route carries an admissible constitutional delegation plus
--- explicit representation, scope, recall and review witnesses.
 ------------------------------------------------------------------------
 
 data DemoSituation : Set where
@@ -177,15 +175,15 @@ demoMandate = record
 
 demoRouting : Routing.RoutingSystem DemoSituation DemoRoute
 demoRouting = record
-  { Routing.Sufficient = λ situation route → ⊤
-  ; Routing.Competent = λ situation route → ⊤
-  ; Routing.Mandated = λ situation route → ⊤
-  ; Routing.CurrentAuthority = λ situation route → ⊤
-  ; Routing.SubjectLegible = λ situation route → ⊤
-  ; Routing.Safe = λ situation route → ⊤
-  ; Routing.Reviewable = λ situation route → ⊤
-  ; Routing.RepairCapable = λ situation route → ⊤
-  ; Routing.dominationCost = λ situation route → 0
+  { Sufficient = λ situation route → ⊤
+  ; Competent = λ situation route → ⊤
+  ; Mandated = λ situation route → ⊤
+  ; CurrentAuthority = λ situation route → ⊤
+  ; SubjectLegible = λ situation route → ⊤
+  ; Safe = λ situation route → ⊤
+  ; Reviewable = λ situation route → ⊤
+  ; RepairCapable = λ situation route → ⊤
+  ; dominationCost = λ situation route → 0
   }
 
 demoInterpretation : RouteMandateInterpretation demoMandate
@@ -203,15 +201,15 @@ demoAdmissibleRoute =
 
 demoScopedAuthority : Authority.ScopedAuthority demoMandate
 demoScopedAuthority = record
-  { Authority.source = Authority.constitutionalDelegation
-  ; Authority.sourceAdmissible = tt
-  ; Authority.constituency = tt
-  ; Authority.representative = tt
-  ; Authority.scope = tt
-  ; Authority.representationWitness = tt
-  ; Authority.scopeWitness = tt
-  ; Authority.recallWitness = tt
-  ; Authority.reviewWitness = tt
+  { source = Authority.constitutionalDelegation
+  ; sourceAdmissible = tt
+  ; constituency = tt
+  ; representative = tt
+  ; scope = tt
+  ; representationWitness = tt
+  ; scopeWitness = tt
+  ; recallWitness = tt
+  ; reviewWitness = tt
   }
 
 canonicalMandateBackedRoute :
