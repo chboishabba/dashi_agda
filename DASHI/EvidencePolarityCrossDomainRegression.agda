@@ -20,27 +20,31 @@ conflictStillRetained :
   Indexed.conflict ≡ Four.assess true true
 conflictStillRetained = Indexed.conflictIsBoth
 
-supportAloneStillCannotPromote :
-  Governed.promotionGate Governed.supportOnlyOpenDenied ≡ false
-supportAloneStillCannotPromote = Governed.supportDoesNotDischargeObligations
+supportStillLeavesObligationOpen :
+  Governed.obligations Governed.supportOnlyOpen ≡ Governed.obligationsOpen
+supportStillLeavesObligationOpen = Governed.supportDoesNotDischargeObligations
 
-conflictStillCannotPromoteAffirmatively :
-  Governed.promotionGate Governed.conflictDischargedGranted ≡ false
-conflictStillCannotPromoteAffirmatively =
-  Governed.conflictDoesNotBecomeAffirmativePromotion
+dischargedTechnicalObligationsStillCannotOpenLocalAuthority :
+  Governed.localPromotion Governed.supportOnlyDischarged ≡ false
+dischargedTechnicalObligationsStillCannotOpenLocalAuthority =
+  Governed.dischargedObligationsDoNotOpenAuthorityGate
+
+conflictStillCannotOpenAuthority :
+  Governed.localPromotion Governed.conflictDischarged ≡ false
+conflictStillCannotOpenAuthority = Governed.conflictDoesNotOpenAuthorityGate
 
 brainProxySupportStillNonPromoting :
-  Governed.promotionGate Brain.proxyObservationSupportedOnly ≡ false
+  Governed.localPromotion Brain.proxyObservationSupportedOnly ≡ false
 brainProxySupportStillNonPromoting = Brain.proxySupportDoesNotPromoteHiddenState
 
 chemistrySupportStillNonPromoting :
-  Governed.promotionGate Chemistry.chemistryCandidateSupportedButNotPromotable
+  Governed.localPromotion Chemistry.chemistryCandidateSupportedButNotPromotable
   ≡ false
 chemistrySupportStillNonPromoting =
   Chemistry.chemistryCandidateSupportDoesNotPromote
 
 atomicSupportStillNonPromoting :
-  Governed.promotionGate Atomic.atomicCandidateSupportedOnly ≡ false
+  Governed.localPromotion Atomic.atomicCandidateSupportedOnly ≡ false
 atomicSupportStillNonPromoting =
   Atomic.atomicCandidateSupportDoesNotPromoteRecovery
 
