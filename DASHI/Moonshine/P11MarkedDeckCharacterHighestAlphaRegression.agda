@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 
 import DASHI.Cognition.PhaseEnrichedTrit as Phase
 import DASHI.Foundations.Phase3RootCharacterWeldExact as Root
+import DASHI.Moonshine.P11FiveStatePositiveHeckeLiftExact as Fine
 import DASHI.Moonshine.P11MarkedQuaternionHeckeHighestAlphaRegression as Prior
 import DASHI.Moonshine.P11MarkedX2S3HeckeDecompositionExact as Dec
 import DASHI.Moonshine.P11MarkedX2JointHeckeFrobeniusSpectrumExact as Joint
@@ -41,7 +42,7 @@ completeJointBlockMultiplicityThree = refl
 
 completeJointBasisSpans :
   (observable : Joint.Observable5) →
-  (state : DASHI.Moonshine.P11FiveStatePositiveHeckeLiftExact.P11Fine5) →
+  (state : Fine.P11Fine5) →
   Joint.reconstruct observable state ≡ observable state
 completeJointBasisSpans = Joint.jointBasisSpans
 
