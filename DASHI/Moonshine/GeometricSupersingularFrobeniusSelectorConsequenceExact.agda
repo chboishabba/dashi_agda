@@ -47,17 +47,13 @@ module DASHI.Moonshine.GeometricSupersingularFrobeniusSelectorConsequenceExact w
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
-open import Data.Fin using (Fin; zero)
+open import Data.Fin using (zero)
 open import Data.Sum using (inj₁; inj₂)
 
 import DASHI.Foundations.FiniteInvolutionOrbitNormalFormExact as Orbit
 import DASHI.Moonshine.OggPrimeControlMatrixExact as Matrix
 import DASHI.Moonshine.PrimeFrickeGenusControlExact as Fricke
 import DASHI.Moonshine.SupersingularFrobeniusOrbitSpectrumExact as Spectrum
-
-------------------------------------------------------------------------
--- Geometric pointwise fixedness on an actual carrier.
-------------------------------------------------------------------------
 
 GeometricallyFullyFixed :
   {prime : Matrix.OddPrimeCandidateUnder72} →
@@ -77,19 +73,11 @@ realizationNoPairsImpliesAllFixed :
   Orbit.pairedOrbitCount (Spectrum.supersingularOrbitSpectrum prime) ≡ 0 →
   GeometricallyFullyFixed carrier
 realizationNoPairsImpliesAllFixed {prime} carrier R pairZero x
+  rewrite pairZero
   with Orbit.toNormal (Spectrum.realization R) x
 ... | inj₁ fixedIndex =
   let
     realization = Spectrum.realization R
-    fxNormal :
-      Orbit.toNormal realization (Spectrum.frobenius carrier x)
-      ≡ Orbit.toNormal realization x
-    fxNormal =
-      trans
-        (Orbit.intertwinesInvolution realization x)
-        (trans
-          (cong Orbit.orbitInvolution refl)
-          refl)
   in
   trans
     (sym (Orbit.fromAfterTo realization (Spectrum.frobenius carrier x)))
@@ -99,12 +87,8 @@ realizationNoPairsImpliesAllFixed {prime} carrier R pairZero x
           (Orbit.intertwinesInvolution realization x)
           (Orbit.fixedSummandReallyFixed fixedIndex)))
       (Orbit.fromAfterTo realization x))
-... | inj₂ (pairIndex , bit) with pairZero
-... | ()
+... | inj₂ (() , bit)
 
--- If even one paired normal-form orbit exists, pull one of its points back to
--- the geometric carrier.  Pointwise geometric fixedness would force the
--- fixed-point-free bit flip to have a fixed point.
 realizationAllFixedImpliesNoPairs :
   {prime : Matrix.OddPrimeCandidateUnder72} →
   (carrier : Spectrum.SupersingularFrobeniusCarrier prime) →
@@ -126,16 +110,18 @@ realizationAllFixedImpliesNoPairs {prime} carrier R allFixed
     normalFixed : Orbit.orbitInvolution normalPoint ≡ normalPoint
     normalFixed =
       trans
-        (sym (Orbit.intertwinesInvolution realization x))
+        (cong Orbit.orbitInvolution
+          (sym (Orbit.toAfterFrom realization normalPoint)))
         (trans
-          (cong (Orbit.toNormal realization) geometricFixed)
-          (Orbit.toAfterFrom realization normalPoint))
+          (sym (Orbit.intertwinesInvolution realization x))
+          (trans
+            (cong (Orbit.toNormal realization) geometricFixed)
+            (Orbit.toAfterFrom realization normalPoint)))
   in
   ⊥-elim (Orbit.pairedSummandHasNoFixedPoint zero Orbit.bit0 normalFixed)
 
 ------------------------------------------------------------------------
--- Since pairedOrbitCount is DEFINITIONALLY genusX0Plus in the spectrum, the
--- geometric theorem immediately becomes the desired genus statement.
+-- pairedOrbitCount is definitionally genusX0Plus in the supersingular spectrum.
 ------------------------------------------------------------------------
 
 realizationGenusZeroImpliesAllFixed :
@@ -156,7 +142,7 @@ realizationAllFixedImpliesGenusZero :
 realizationAllFixedImpliesGenusZero = realizationAllFixedImpliesNoPairs
 
 ------------------------------------------------------------------------
--- Boolean bridge to the existing Ogg control label.
+-- Boolean bridge to the existing external Ogg control label.
 ------------------------------------------------------------------------
 
 noPairsImpliesFullyFixedTrue :
