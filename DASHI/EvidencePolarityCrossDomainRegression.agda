@@ -15,7 +15,10 @@ import DASHI.Cognition.PNF.AggregateProjectionWorldCompletenessBoundaryExact as 
 import DASHI.Cognition.PNF.BinaryBalancedTernaryAggregateLossExact as Aggregate
 import DASHI.Core.EvidenceObligationAuthoritySeparationExact as Governed
 import DASHI.Foundations.BalancedTernaryAntipodalOrbitExact as Orbit
+import DASHI.Foundations.BalancedTernaryNineZeroFibreCountExact as ZeroCount
 import DASHI.Foundations.Base369InteractionAntipodalFibreExact as Interaction
+import DASHI.Foundations.Base369InteractionObserverJoinExact as Join
+import DASHI.Foundations.Base369NineCoordinateAggregateBridgeExact as NineBridge
 import DASHI.Foundations.SSPTritCarrier as SSP
 import DASHI.Foundations.TernaryNineAntipodalD4SeparationExact as D4Sep
 import DASHI.Physics.Chemistry.AtomicEvidenceObligationBridgeExact as Atomic
@@ -143,6 +146,33 @@ aggregateCollisionStillSplitByBlockOrientation :
   ≡ Interaction.forgetBlockOrientation Interaction.cancellationZeroRound → ⊥
 aggregateCollisionStillSplitByBlockOrientation =
   proj₂ Interaction.aggregateCollisionSeparatedByBlockOrientation
+
+blockObserverStillCannotDecodeFromSum : Join.BlockFactorsThroughSum → ⊥
+blockObserverStillCannotDecodeFromSum = Join.blockCannotFactorThroughSum
+
+sumObserverStillCannotDecodeFromBlock : Join.SumFactorsThroughBlock → ⊥
+sumObserverStillCannotDecodeFromBlock = Join.sumCannotFactorThroughBlock
+
+jointObserverStillHasLeastFactorisationProperty :
+  Join.Base369ObserverJoinBoundary.anyCommonObserverCarryingBothFactorsTheJoint
+    Join.canonicalBase369ObserverJoinBoundary
+  ≡ true
+jointObserverStillHasLeastFactorisationProperty = refl
+
+exactNineTritZeroFibreCountStill3139 :
+  ZeroCount.aggregateZeroFibreCount ≡ 3139
+exactNineTritZeroFibreCountStill3139 =
+  ZeroCount.aggregateZeroFibreCountIs3139
+
+zeroFibreCoefficientRowStillTotalsWholeCarrier :
+  ZeroCount.sumList ZeroCount.row9 ≡ 19683
+zeroFibreCoefficientRowStillTotalsWholeCarrier =
+  ZeroCount.ninthCoefficientRowTotalIs19683
+
+base369SameObjectZeroFibreCoefficientStill3139 :
+  NineBridge.base369AggregateZeroFibreCoefficient ≡ 3139
+base369SameObjectZeroFibreCoefficientStill3139 =
+  NineBridge.base369AggregateZeroFibreCoefficientIs3139
 
 binaryCountStillErasesDisagreementDirection :
   Aggregate.acceptCount (Aggregate.binaryProjectPositiveOnly Aggregate.forwardDisagreement)
