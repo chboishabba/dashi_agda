@@ -23,9 +23,9 @@ import DASHI.Biology.Physical.DevelopmentalMeasurementQuotientExact as Dev
 import DASHI.Core.AdmissibleReachability as Reachability
 import DASHI.Core.FutureLanguageProjectionDefectExact as FutureDefect
 import DASHI.Core.FutureObservationLanguageQuotientExact as Future
+import DASHI.Core.ObserverFactorizedRefinementExact as Factorized
 import DASHI.Core.ObserverRefinementFutureSafetyExact as FutureBridge
 import DASHI.Core.ObserverRefinementLatticeExact as Observer
-import DASHI.Core.RecoverableObserverRefinementExact as Refinement
 import DASHI.Core.RecoverableQuotientCompositionExact as Recoverable
 import DASHI.Core.TypedDependencyCore as Dependency
 
@@ -67,6 +67,16 @@ forgetChromatin x =
     (fineGenome x)
     (fineTranscript x)
     (finePhenotype x)
+
+chromatinFactorizedRefinement :
+  Factorized.FactorizedRefinement nominalObserver chromatinObserver
+chromatinFactorizedRefinement =
+  Factorized.factorizedRefinement forgetChromatin (λ x → refl)
+
+chromatinRefinesNominalMeasurement :
+  Observer.Refines nominalObserver chromatinObserver
+chromatinRefinesNominalMeasurement =
+  Factorized.factorizedRefinementImpliesRefines chromatinFactorizedRefinement
 
 fineResidual : Dev.CellState → Bool
 fineResidual = Dev.bioelectric
@@ -113,22 +123,15 @@ coarseRecoverable =
   Recoverable.exactRecoverableProjection
     Bool forgetChromatin coarseResidual reopenCoarse reopenCoarseExact
 
-measurementRefinementStep :
-  Refinement.RecoverableRefinementStep
-    Dev.CellState ChromatinMeasurement NominalMeasurement
-measurementRefinementStep =
-  Refinement.recoverableRefinementStep fineRecoverable coarseRecoverable
-
-chromatinRefinesNominalMeasurement :
-  Observer.Refines nominalObserver chromatinObserver
-chromatinRefinesNominalMeasurement =
-  Refinement.fineRefinesCompositeCoarse measurementRefinementStep
+nominalRecoverable :
+  Recoverable.ExactRecoverableProjection Dev.CellState NominalMeasurement
+nominalRecoverable =
+  Recoverable.composeRecoverable fineRecoverable coarseRecoverable
 
 nominalResidualDecomposesAsBioelectricTimesChromatin :
-  Recoverable.Residual
-    (Refinement.compositeRecoverableProjection measurementRefinementStep)
-  ≡ (Bool × Bool)
-nominalResidualDecomposesAsBioelectricTimesChromatin = refl
+  Recoverable.Residual nominalRecoverable ≡ (Bool × Bool)
+nominalResidualDecomposesAsBioelectricTimesChromatin =
+  Recoverable.compositeResidualIsProduct fineRecoverable coarseRecoverable
 
 ------------------------------------------------------------------------
 -- The existing source-native chromatin collision is separated by the first
@@ -166,11 +169,6 @@ sameChromatinMeasurement :
   chromatinObserver bioelectricLeft ≡ chromatinObserver bioelectricRight
 sameChromatinMeasurement = refl
 
-futurePhenotypeBioelectricDiffers :
-  Dev.phenotypeObservation (Dev.cellUpdate bioelectricLeft)
-    ≡ Dev.phenotypeObservation (Dev.cellUpdate bioelectricRight) → ⊥
-futurePhenotypeBioelectricDiffers ()
-
 rightBioelectricFuture :
   Future.FutureObservation
     Dev.system
@@ -199,10 +197,10 @@ leftBioelectricFutureImpossible
     (Reachability.executesCons step Reachability.executesNil)
     observed)
   with Dependency.postcondition step
-... | refl = false≢true observed
+... | refl = falseNotTrue observed
   where
-    false≢true : false ≡ true → ⊥
-    false≢true ()
+    falseNotTrue : false ≡ true → ⊥
+    falseNotTrue ()
 
 chromatinFutureLanguageDefect :
   FutureDefect.FutureLanguageProjectionDefect
