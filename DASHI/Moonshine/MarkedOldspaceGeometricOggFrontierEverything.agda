@@ -3,13 +3,25 @@ module DASHI.Moonshine.MarkedOldspaceGeometricOggFrontierEverything where
 ------------------------------------------------------------------------
 -- Focused frontier root after the p11/p37/p43 marked-Hecke tranches.
 --
--- OLDSPACE SIDE
---   one common Old3 coordinate module now realizes both:
---     * the formal analytic d=1,2,4 degeneracy span;
---     * the source-native marked v1,v2,v4 permutation span.
+-- OLDSPACE / LOCAL-REALIZATION SIDE
+--   one common Old3 coordinate module realizes both:
+--     * the formal analytic d=1,2,4 Gamma_0(4)-degeneracy span;
+--     * the source-native marked principal-level-2 permutation span.
 --   The entire analytic span inherits every good-prime level-11 eigencharacter.
---   Remaining seam: actual automorphic/Eichler--Jacquet--Langlands same-object
---   identification of those already-common coordinates.
+--
+--   IMPORTANT CORRECTION:
+--   common coordinates + common good-prime Hecke character do NOT identify the
+--   two local fixed-vector realizations.  The marked side carries a genuine
+--   GL_2(F_2)=S3 deck action; the classical degeneracy model is a different
+--   local level realization.  P11Level44TwoAdicFixedVectorSeparationExact
+--   constructs the finite P^1(F_2) action explicitly and proves the marked
+--   deck action is exactly that permutation module, while shared Old3
+--   coordinates do not identify the local roles.
+--
+--   Remaining seam: construct the actual 2-adic local comparison inside the
+--   same global automorphic representation (equivalently, the source-native
+--   Eichler/Jacquet--Langlands fixed-vector comparison), rather than declaring
+--   the K(2)-fixed and K_0(4)-fixed models definitionally equal.
 --
 -- OGG SELECTOR SIDE
 --   generic count algebra proves pair defect = Fricke genus once the standard
@@ -20,8 +32,8 @@ module DASHI.Moonshine.MarkedOldspaceGeometricOggFrontierEverything where
 --
 --       g(X0+(p)) = Frobenius pair defect.
 --
---   The new same-object involution/special-fibre weld further proves, without
---   the finite Ogg control table,
+--   The same-object involution/special-fibre weld further proves, without the
+--   finite Ogg control table,
 --
 --       Frobenius pointwise fixed <=> g(X0+(p)) = 0
 --
@@ -38,6 +50,7 @@ import DASHI.Moonshine.FormalQSeriesOldformEigencharacterTransportExact as Eig
 import DASHI.Moonshine.P11MarkedLevel44PermutationIntertwinerExact as Marked
 import DASHI.Moonshine.P11Level44FormalSameCoordinateComparisonExact as Same
 import DASHI.Moonshine.P11Level44SameCoordinateHighestAlphaRegression as SameReg
+import DASHI.Moonshine.P11Level44TwoAdicFixedVectorSeparationExact as Local2
 import DASHI.Moonshine.SupersingularFrobeniusFrickeGenusReductionExact as CountReduce
 import DASHI.Moonshine.SupersingularFrobeniusFrickeGenusReductionRegression as CountReg
 import DASHI.Moonshine.RationalNodalSpecialFibreGenusExact as Nodal
@@ -52,6 +65,19 @@ wholeOldspaceRegression :
   Same.analyticHeckeRealize H v n
   ≡ Eig.scaleSeries (Same.eigenvalue H) (Same.analyticRealize D v) n
 wholeOldspaceRegression = Same.wholeOldspaceGoodPrimeEigen
+
+localP1RotationRegression :
+  (x : Local2.P1F2) →
+  Marked.realizeOld3 (Local2.p1Basis (Local2.rotateP1 x))
+  ≡ DASHI.Moonshine.P11MarkedLevel44PermutationOldspaceExact.deckR5
+      (Marked.realizeOld3 (Local2.p1Basis x))
+localP1RotationRegression = Local2.markedDeckRotationFromP1
+
+localRoleNoCollapseRegression :
+  (v : Marked.Old3) →
+  Local2.markedLocalPresentation v
+  ≡ Local2.analyticDegeneracyPresentation v → Local2.Impossible
+localRoleNoCollapseRegression = Local2.sameCoordinatesDoNotIdentifyLocalRealization
 
 countReductionRegression :
   (D : CountReduce.SupersingularFrickeCountData) →
