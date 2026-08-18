@@ -53,6 +53,7 @@ import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as RationalL2
 import DASHI.Physics.Closure.NSTriadKNRationalComplex3LerayPythagoras as Leray
 import DASHI.Physics.Closure.NSTriadKNStaticPairingEmitsStructuredTriadicAtomsRound72Exact as Fine
+import DASHI.Physics.Closure.NSTriadKNCriticalRemainderTriadicCauchyRound71Exact as R71
 import DASHI.Physics.Closure.NSTriadKNFactorizedEffectiveComplexityCauchyRound72Exact as Effective
 import DASHI.Physics.Closure.NSTriadKNTwoChannelStructuredCauchyOverlayRound74Exact as Two
 import DASHI.Physics.Closure.NSTriadKNStaticRationalTwoChannelOverlayRound75Exact as Static
@@ -129,7 +130,7 @@ literalFixedOutputNormalizedSquareCharge :
     (hh : Fine.HHOwnerSelection) →
   literalOutputFrameProduct system output ≤ 1ℚ →
   RationalL2.square
-    (DASHI.Physics.Closure.NSTriadKNCriticalRemainderTriadicCauchyRound71Exact.triadicSignedSum
+    (R71.triadicSignedSum
       (Fine.structuredTriadicAtoms
         (Static.staticRationalPhysicalPairing system output commutatorValue) hh))
   ≤ Two.twoChannelCharge
