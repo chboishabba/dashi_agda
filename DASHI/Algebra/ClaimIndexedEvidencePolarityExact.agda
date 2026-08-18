@@ -3,18 +3,30 @@ module DASHI.Algebra.ClaimIndexedEvidencePolarityExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
+open import Data.Empty using (⊥)
 open import Data.List.Base using (List; _++_)
 
 import DASHI.Algebra.DisagreementFourViewBoundary as Four
+import DASHI.Reasoning.RelationalLensSynthesisCore as Lens
 
 ------------------------------------------------------------------------
--- Claim/context-indexed support-square pooling.
+-- Claim/context/operator-indexed support-square pooling.
 --
--- DASHI already represents evidence polarity as PolarAssessment =
--- (supports P, supports not-P).  The missing generic boundary is that pooling
--- is only well typed inside one common claim/context fibre.  Evidence about a
--- different claim, time, body, place, institution, observer, or provenance
--- scope must first cross an explicit alignment witness.
+-- DASHI already represents a two-coordinate information carrier as
+-- PolarAssessment.  IMPORTANT: the second Boolean coordinate is NOT treated
+-- here as automatically meaning classical/logical negation of the first claim.
+-- Existing DASHI foundations distinguish:
+--
+--   logical negation
+--   algebraic inverse
+--   orientation reversal
+--   contextual counterposition
+--   lens transition.
+--
+-- CounterpositionOrderedJoinExact additionally constructs a contextual
+-- counterposition which is neither the full inverse nor the double inverse.
+-- Therefore a support square is interpreted only after declaring the base
+-- claim, opposing target, and operator role connecting them.
 --
 -- Logical/informational calibration:
 --   Nuel D. Belnap, "A Useful Four-Valued Logic", in J. Michael Dunn and
@@ -24,10 +36,8 @@ import DASHI.Algebra.DisagreementFourViewBoundary as Four
 --   'Coupled Trees'", Philosophical Studies 29(3), 149-168 (1976),
 --   DOI 10.1007/BF00373152.
 --
--- Those references motivate independent positive/negative information only.
--- Claim/context-indexed pooling is a DASHI-local typing discipline.
--- Incoming PR #582 independently owns required-axis completeness via
--- RequiredAxisSupportSquareExact; this module does not duplicate that layer.
+-- Those references motivate independent information coordinates only.  The
+-- operator-role qualification and fibre discipline are DASHI-local.
 ------------------------------------------------------------------------
 
 infixl 5 _∨ᵇ_
@@ -40,9 +50,54 @@ mergePolarity : Four.PolarAssessment → Four.PolarAssessment → Four.PolarAsse
 mergePolarity (Four.assess p n) (Four.assess p′ n′) =
   Four.assess (p ∨ᵇ p′) (n ∨ᵇ n′)
 
+------------------------------------------------------------------------
+-- Opposition is an explicitly typed relation, not Boolean complement.
+------------------------------------------------------------------------
+
+record OppositionDescriptor (Claim : Set) : Set where
+  constructor oppositionDescriptor
+  field
+    baseClaim : Claim
+    opposingClaim : Claim
+    operatorRole : Lens.RelationalOperatorRole
+    applyOperator : Claim → Claim
+    opposingClaimExact : applyOperator baseClaim ≡ opposingClaim
+
+open OppositionDescriptor public
+
+record LogicalNegationQualified
+    {Claim : Set}
+    (opposition : OppositionDescriptor Claim) : Set where
+  constructor logicalNegationQualified
+  field
+    roleIsLogicalNegation :
+      operatorRole opposition ≡ Lens.logicalNegationRole
+
+open LogicalNegationQualified public
+
+contextualCounterpositionRoleIsNotLogicalNegation :
+  Lens.contextualCounterpositionRole ≡ Lens.logicalNegationRole → ⊥
+contextualCounterpositionRoleIsNotLogicalNegation =
+  Lens.contextualCounterpositionIsNotLogicalNegationByRole
+
+orientationReversalRoleIsNotLogicalNegation :
+  Lens.orientationReversalRole ≡ Lens.logicalNegationRole → ⊥
+orientationReversalRoleIsNotLogicalNegation =
+  Lens.orientationReversalIsNotLogicalNegation
+
+------------------------------------------------------------------------
+-- Evidence fibre.
+--
+-- The first PolarAssessment coordinate is read as support for baseClaim.
+-- The second is read as support for opposingClaim under the declared role.
+-- It may be called support-for-not-P only after LogicalNegationQualified is
+-- supplied.  This avoids silently identifying !P, inverse(P), reverse(P),
+-- counter(P), and a lens-transformed view of P.
+------------------------------------------------------------------------
+
 record ClaimFibreEvidence
     (Claim Context : Set)
-    (claim : Claim)
+    (opposition : OppositionDescriptor Claim)
     (context : Context) : Set where
   constructor claimFibreEvidence
   field
@@ -51,82 +106,103 @@ record ClaimFibreEvidence
 
 open ClaimFibreEvidence public
 
+supportsBaseClaim :
+  ∀ {Claim Context opposition context} →
+  ClaimFibreEvidence Claim Context opposition context → Bool
+supportsBaseClaim evidence = Four.supportsP (polarity evidence)
+
+supportsOpposingClaim :
+  ∀ {Claim Context opposition context} →
+  ClaimFibreEvidence Claim Context opposition context → Bool
+supportsOpposingClaim evidence = Four.supportsNotP (polarity evidence)
+
+supportsLogicalNegation :
+  ∀ {Claim Context opposition context} →
+  LogicalNegationQualified opposition →
+  ClaimFibreEvidence Claim Context opposition context → Bool
+supportsLogicalNegation qualification evidence = supportsOpposingClaim evidence
+
 mergeSameFibre :
-  ∀ {Claim Context claim context} →
-  ClaimFibreEvidence Claim Context claim context →
-  ClaimFibreEvidence Claim Context claim context →
-  ClaimFibreEvidence Claim Context claim context
+  ∀ {Claim Context opposition context} →
+  ClaimFibreEvidence Claim Context opposition context →
+  ClaimFibreEvidence Claim Context opposition context →
+  ClaimFibreEvidence Claim Context opposition context
 mergeSameFibre left right =
   claimFibreEvidence
     (mergePolarity (polarity left) (polarity right))
     (provenance left ++ provenance right)
 
-mergeSameFibreSupports :
-  ∀ {Claim Context claim context}
-    (left right : ClaimFibreEvidence Claim Context claim context) →
-  Four.supportsP (polarity (mergeSameFibre left right))
+mergeSameFibreSupportsBase :
+  ∀ {Claim Context opposition context}
+    (left right : ClaimFibreEvidence Claim Context opposition context) →
+  supportsBaseClaim (mergeSameFibre left right)
   ≡
-  (Four.supportsP (polarity left) ∨ᵇ Four.supportsP (polarity right))
-mergeSameFibreSupports (claimFibreEvidence (Four.assess p n) lp)
-                       (claimFibreEvidence (Four.assess p′ n′) rp) = refl
+  (supportsBaseClaim left ∨ᵇ supportsBaseClaim right)
+mergeSameFibreSupportsBase
+  (claimFibreEvidence (Four.assess p n) lp)
+  (claimFibreEvidence (Four.assess p′ n′) rp) = refl
 
-mergeSameFibreRefutes :
-  ∀ {Claim Context claim context}
-    (left right : ClaimFibreEvidence Claim Context claim context) →
-  Four.supportsNotP (polarity (mergeSameFibre left right))
+mergeSameFibreSupportsOpposing :
+  ∀ {Claim Context opposition context}
+    (left right : ClaimFibreEvidence Claim Context opposition context) →
+  supportsOpposingClaim (mergeSameFibre left right)
   ≡
-  (Four.supportsNotP (polarity left) ∨ᵇ Four.supportsNotP (polarity right))
-mergeSameFibreRefutes (claimFibreEvidence (Four.assess p n) lp)
-                      (claimFibreEvidence (Four.assess p′ n′) rp) = refl
+  (supportsOpposingClaim left ∨ᵇ supportsOpposingClaim right)
+mergeSameFibreSupportsOpposing
+  (claimFibreEvidence (Four.assess p n) lp)
+  (claimFibreEvidence (Four.assess p′ n′) rp) = refl
 
 ------------------------------------------------------------------------
--- Cross-fibre pooling requires an explicit alignment witness.
+-- Cross-fibre pooling requires equality/alignment of the ENTIRE opposition
+-- descriptor plus context. Matching base claim labels are insufficient when
+-- operator role or opposing target differ.
 ------------------------------------------------------------------------
 
 record EvidenceFibreAlignment
     {Claim Context : Set}
-    (leftClaim rightClaim : Claim)
+    (leftOpposition rightOpposition : OppositionDescriptor Claim)
     (leftContext rightContext : Context) : Set where
   constructor evidenceFibreAlignment
   field
-    claimAligned : leftClaim ≡ rightClaim
+    oppositionAligned : leftOpposition ≡ rightOpposition
     contextAligned : leftContext ≡ rightContext
 
 open EvidenceFibreAlignment public
 
 transportEvidence :
   ∀ {Claim Context}
-    {leftClaim rightClaim : Claim}
+    {leftOpposition rightOpposition : OppositionDescriptor Claim}
     {leftContext rightContext : Context} →
-  leftClaim ≡ rightClaim →
+  leftOpposition ≡ rightOpposition →
   leftContext ≡ rightContext →
-  ClaimFibreEvidence Claim Context leftClaim leftContext →
-  ClaimFibreEvidence Claim Context rightClaim rightContext
+  ClaimFibreEvidence Claim Context leftOpposition leftContext →
+  ClaimFibreEvidence Claim Context rightOpposition rightContext
 transportEvidence refl refl evidence = evidence
 
 mergeAlignedFibres :
   ∀ {Claim Context}
-    {leftClaim rightClaim : Claim}
+    {leftOpposition rightOpposition : OppositionDescriptor Claim}
     {leftContext rightContext : Context} →
-  ClaimFibreEvidence Claim Context leftClaim leftContext →
-  ClaimFibreEvidence Claim Context rightClaim rightContext →
-  EvidenceFibreAlignment leftClaim rightClaim leftContext rightContext →
-  ClaimFibreEvidence Claim Context rightClaim rightContext
+  ClaimFibreEvidence Claim Context leftOpposition leftContext →
+  ClaimFibreEvidence Claim Context rightOpposition rightContext →
+  EvidenceFibreAlignment
+    leftOpposition rightOpposition leftContext rightContext →
+  ClaimFibreEvidence Claim Context rightOpposition rightContext
 mergeAlignedFibres left right (evidenceFibreAlignment refl refl) =
   mergeSameFibre left right
 
 ------------------------------------------------------------------------
--- Canonical polarity witnesses.
+-- Raw two-bit witnesses remain informational shapes only.
 ------------------------------------------------------------------------
 
 supportOnly : Four.PolarAssessment
 supportOnly = Four.assess true false
 
-refutationOnly : Four.PolarAssessment
-refutationOnly = Four.assess false true
+opposingSupportOnly : Four.PolarAssessment
+opposingSupportOnly = Four.assess false true
 
 conflict : Four.PolarAssessment
-conflict = mergePolarity supportOnly refutationOnly
+conflict = mergePolarity supportOnly opposingSupportOnly
 
 ignorance : Four.PolarAssessment
 ignorance = Four.assess false false
@@ -141,6 +217,9 @@ record ClaimIndexedEvidencePolarityBoundary : Set where
   field
     poolingRequiresCommonTypedFibre : Bool
     crossFibrePoolingRequiresAlignment : Bool
+    oppositionRoleExplicit : Bool
+    opposingSupportAutomaticallyMeansLogicalNegation : Bool
+    inversionReversalCounterpositionNegationCollapsed : Bool
     conflictRetainedBeforeProjection : Bool
     ignoranceRetainedBeforeProjection : Bool
 
@@ -149,6 +228,9 @@ canonicalClaimIndexedEvidencePolarityBoundary :
 canonicalClaimIndexedEvidencePolarityBoundary = record
   { poolingRequiresCommonTypedFibre = true
   ; crossFibrePoolingRequiresAlignment = true
+  ; oppositionRoleExplicit = true
+  ; opposingSupportAutomaticallyMeansLogicalNegation = false
+  ; inversionReversalCounterpositionNegationCollapsed = false
   ; conflictRetainedBeforeProjection = true
   ; ignoranceRetainedBeforeProjection = true
   }
