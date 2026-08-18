@@ -15,28 +15,24 @@ module DASHI.Physics.YangMills.BalabanTerminalTransferKatoGapStabilityExact wher
 --
 -- DASHI CONTRIBUTION
 --
--- Isolate the quantitative terminal-gap perturbation theorem actually useful
--- to the direct Wilson-transfer route.  On the SAME vacuum-orthogonal carrier,
--- if a reference quadratic form has gap m0 and the terminal physical form is
--- bounded below by the reference form minus epsilon ||v||^2, then
+-- On the SAME vacuum-orthogonal carrier, if a reference quadratic form has gap
+-- m0 and the terminal physical form is bounded below by the reference form
+-- minus epsilon ||v||^2, then
 --
 --   H_terminal[v] >= (m0-epsilon) ||v||^2.
 --
--- A strict epsilon < m0 therefore gives a strict terminal gap.  The theorem is
--- deliberately expressed on named quadratic forms rather than claiming that
--- positivity of the transfer operator itself supplies a spectral gap.
+-- A strict epsilon < m0 therefore gives a strict terminal gap. Positivity of
+-- the transfer operator itself is never substituted for this spectral theorem.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Empty using (⊥-elim)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; _+_; _-_; _*_; _≤_; _<_)
+  (ℚ; 0ℚ; _+_; _-_; _*_; -_; _≤_; _<_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
-import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
 
 record TerminalGapPerturbationData (Vector : Set) : Set₁ where
   field
@@ -89,7 +85,6 @@ terminalGapLower dataSet vector excited =
       ≤ referenceForm dataSet vector - loss * n
     subtractLoss =
       let
-        -- Translation invariance of rational order, written using + (-x).
         translated = ℚP.+-monoˡ-≤ (- (loss * n))
           (referenceGapLower dataSet vector excited)
       in
@@ -109,19 +104,35 @@ terminalGapLower dataSet vector excited =
     (sym (referenceMinusLossReassociate ref loss n))
     physical
 
+differencePositive : ∀ larger smaller →
+  smaller < larger → 0ℚ < larger - smaller
+differencePositive larger smaller smaller<larger =
+  let
+    left : ℚ
+    left = - larger + larger
+    right : ℚ
+    right = - smaller + larger
+    step : left < right
+    step = ℚP.+-monoˡ-< larger
+      (ℚP.neg-antimono-< smaller<larger)
+    leftExact : left ≡ 0ℚ
+    leftExact = ℚRing.solve-∀ larger
+    rightExact : right ≡ larger - smaller
+    rightExact = ℚRing.solve-∀ larger smaller
+  in
+  subst (λ selectedLeft → selectedLeft < larger - smaller)
+    leftExact
+    (subst (λ selectedRight → left < selectedRight)
+      rightExact step)
+
 strictLossLeavesPositiveGap :
   ∀ {Vector}
     (dataSet : TerminalGapPerturbationData Vector) →
   perturbationLoss dataSet < referenceGap dataSet →
   0ℚ < terminalGapCandidate dataSet
 strictLossLeavesPositiveGap dataSet strictLoss =
-  let
-    differencePositive :
-      0ℚ < referenceGap dataSet - perturbationLoss dataSet
-    differencePositive =
-      ℚP.positiveDifference strictLoss
-  in
   differencePositive
+    (referenceGap dataSet) (perturbationLoss dataSet) strictLoss
 
 record StrictTerminalGapWitness (Vector : Set) : Set₁ where
   field
@@ -152,7 +163,7 @@ terminalKatoStrictGapAssemblyLevel = machineChecked
 
 -- Remaining physical terminal theorem: choose the reference form on the SAME
 -- terminal Wilson/Luescher Hilbert carrier, prove its isolated-vacuum gap, and
--- bound the actual terminal RG form perturbation by epsilon < m0.  Kato-style
+-- bound the actual terminal RG form perturbation by epsilon < m0. Kato-style
 -- stability then supplies the terminal gap consumed by the existing Feshbach
 -- pullback recursion.
 physicalTerminalReferenceGapAndPerturbationLevel : ProofLevel
