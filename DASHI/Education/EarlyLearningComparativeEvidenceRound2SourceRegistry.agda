@@ -2,7 +2,7 @@ module DASHI.Education.EarlyLearningComparativeEvidenceRound2SourceRegistry wher
 
 open import Agda.Builtin.Bool using (true)
 open import Agda.Builtin.Equality using (refl)
-open import Agda.Builtin.List using ([]; _∷_)
+open import Agda.Builtin.List using (List; []; _∷_)
 
 import DASHI.Education.EarlyLearningComparativeEvidenceSourceRegistry as Sources
 
@@ -84,7 +84,7 @@ oecdTalisStartingStrong2019 =
     "Cross-country survey evidence does not establish one universal quality threshold or identify setting type with quality."
     true refl
 
-canonicalRound2ComparativeSources : Agda.Builtin.List.List Sources.ComparativeReference
+canonicalRound2ComparativeSources : List Sources.ComparativeReference
 canonicalRound2ComparativeSources =
   cornelissenDustmannRauteSchonberg2018
   ∷ gruberKosonenHuttunen2025
