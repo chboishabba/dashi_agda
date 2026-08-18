@@ -8,6 +8,15 @@ module DASHI.Physics.YangMills.BalabanPositiveRGDirichletGeometryExact where
 -- extended edition, De Gruyter Studies in Mathematics 19, 2010.
 -- DOI: 10.1515/9783110218091.
 --
+-- Martin Lüscher,
+-- "Construction of a Selfadjoint, Strictly Positive Transfer Matrix for
+-- Euclidean Lattice Gauge Theories", Communications in Mathematical Physics
+-- 54 (1977), 283--292. DOI: 10.1007/BF01614090.
+--
+-- Konrad Osterwalder and Erhard Seiler,
+-- "Gauge Field Theories on a Lattice", Annals of Physics 110 (1978),
+-- 440--471. DOI: 10.1016/0003-4916(78)90039-8.
+--
 -- Repository-local structural precursor:
 -- DASHI.Moonshine.PositiveFiniteNeighbourSystemExact (PR #567).
 -- That branch puts positive finite neighbour geometry before linearization.
@@ -22,8 +31,17 @@ module DASHI.Physics.YangMills.BalabanPositiveRGDirichletGeometryExact where
 -- nonnegative observables, and the associated finite rational Dirichlet
 -- energy is a sum of nonnegative weighted squares.
 --
--- This directly guards against the signed-Delta0 phenomenon formalized in
--- PR #558: algebraic Laplacian shape does not imply a positive Dirichlet form.
+-- Lüscher supplies a stronger and more specific positive operator for Wilson
+-- lattice gauge theory: the canonical transfer matrix is self-adjoint and
+-- strictly positive.  That imported theorem is highly relevant, but it does
+-- NOT identify the transfer matrix with the Bałaban block-RG transition object.
+-- Such an identification/compression is therefore kept as a separate physical
+-- same-object theorem below.
+--
+-- This guards two distinct failure modes:
+--   * signed-Delta0: Laplacian-looking algebra need not be positive;
+--   * positivity conflation: Wilson transfer positivity need not automatically
+--     be positivity of an independently defined RG stochastic kernel.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -128,15 +146,19 @@ record PositiveLocalRGGeometry (State : Set) : Set₁ where
     neighbours : State → List (PositiveRGNeighbour State)
 open PositiveLocalRGGeometry public
 
--- The positivity theorem is local and unconditional once literal nonnegative
--- neighbours have been constructed.  What remains physical is to derive these
--- neighbours/weights from the SAME Bałaban block-RG transformation rather than
--- supplying an unrelated stochastic chain.
 positiveRGDirichletGeometryLevel : ProofLevel
 positiveRGDirichletGeometryLevel = machineChecked
 
+-- Imported Wilson transfer positivity.  It is a candidate source for the
+-- physical RG spectral object only after a same-object/compression theorem.
+luscherWilsonTransferMatrixStrictPositivityLevel : ProofLevel
+luscherWilsonTransferMatrixStrictPositivityLevel = standardImported
+
 literalBalabanPositiveNeighbourProducerLevel : ProofLevel
 literalBalabanPositiveNeighbourProducerLevel = conditional
+
+balabanRGKernelAsLuscherTransferCompressionLevel : ProofLevel
+balabanRGKernelAsLuscherTransferCompressionLevel = conditional
 
 -- Fukushima--Oshima--Takeda is cited for the mature analytic correspondence
 -- between regular Dirichlet forms and symmetric Markov processes.  We do not
