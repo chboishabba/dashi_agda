@@ -8,6 +8,7 @@ import DASHI.Core.FibreRestrictionCore as Fibre
 open import DASHI.Ontology.ProgenitorParentHyperfabric
 open import DASHI.Ontology.ProgenitorParentProjectionFibre
 open import DASHI.Ontology.LeanWikidataParentingPullbackBridge
+open import DASHI.Ontology.LeanWikidataPullbackTopologyBoundary
 open import DASHI.Ontology.ProgenitorParentPNFPullbackLattice
 open import DASHI.Ontology.ProgenitorParentPredicateBaseChange
 
@@ -61,3 +62,11 @@ predicateBaseChangeGeneticRegression = geneticAndParentForgetsToGenetic
 predicateBaseChangeParentRegression :
   genealogicalParentP (predicateCarrier (meetFibreToRight geneticAndParentP8810)) ≡ true
 predicateBaseChangeParentRegression = geneticAndParentForgetsToParent
+
+pullbackTopologyNonCollapseRegression :
+  categoricalPullbackAutomaticallyTopologicalEquivalence canonicalPullbackTopologyBoundary ≡ false
+pullbackTopologyNonCollapseRegression = pullbackDoesNotCollapseSemanticTopology
+
+pullbackComponentwiseWitnessRegression :
+  componentwiseCompatibilityRequiredByPositiveTheorem canonicalPullbackTopologyBoundary ≡ true
+pullbackComponentwiseWitnessRegression = componentwiseCompatibilityRemainsExplicit
