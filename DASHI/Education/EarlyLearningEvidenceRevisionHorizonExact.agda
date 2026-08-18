@@ -6,6 +6,7 @@ open import Data.Empty using (⊥)
 
 import DASHI.Cognition.PNF.ReopenableEvidenceFibre as Reopenable
 import DASHI.Core.IntersectionalNonFactorability as Intersection
+import DASHI.Core.ProvenanceBearingQuotient as Quotient
 import DASHI.Education.SituatedRelationalLearningAffordanceExact as Affordance
 
 ------------------------------------------------------------------------
@@ -53,9 +54,8 @@ quebecMaternalLabour =
   versionedEvidenceObservation updatedFiscalVintage maternalLabourAxis beneficialEvidence
 
 ------------------------------------------------------------------------
--- An early-vintage label cannot determine the later evidence signal.  The
--- structural witness deliberately holds the vintage fixed while varying which
--- outcome axis later becomes visible.
+-- A vintage label cannot determine the evidence signal.  The structural
+-- witness deliberately holds the vintage fixed while varying the outcome axis.
 ------------------------------------------------------------------------
 
 data SameUpdatedVintageCase : Set where
@@ -125,8 +125,7 @@ reweightingStillCannotRefute :
 reweightingStillCannotRefute = Reopenable.reweightingAloneCannotRefute
 
 projectionResidualStillCannotEraseEvidence :
-  DASHI.Core.ProvenanceBearingQuotient.ProjectionSemanticErasurePermission
-    DASHI.Core.ProvenanceBearingQuotient.projectionReceiptOnly → ⊥
+  Quotient.ProjectionSemanticErasurePermission Quotient.projectionReceiptOnly → ⊥
 projectionResidualStillCannotEraseEvidence =
   Reopenable.ReopenableEvidenceBoundary.projectionResidualIsNotErasure
     canonicalReopenableEvidenceBoundary
