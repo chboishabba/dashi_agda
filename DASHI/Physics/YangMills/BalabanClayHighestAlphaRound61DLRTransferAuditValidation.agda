@@ -33,17 +33,22 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound61DLRTransferAuditVal
 -- The old W1'/W2'/W3' obligations feed kernel naturality; W4' is the actual
 -- temporal trace/integration interchange law.
 --
--- (4) CLOSE THE REDUCED FLAT FP KERNEL AND BUILD THE BASE INVERSE
+-- (4) CLOSE THE REDUCED FLAT FP KERNEL AND CONSTRUCT THE EXACT BASE INVERSE
 --
 -- The computed side-four scalar Green kernel is a two-sided inverse for
 -- L + global-average. Since the literal flat FP operator is exactly L in each
 -- colour coordinate, L f = 0 forces f to be constant. The anchored
 -- representative vanishes at its anchor, so the reduced kernel is trivial.
 --
--- On colourwise mean-zero sources the explicit map source -> anchor (G source)
--- is also proved a right inverse of the reduced flat FP operator. Thus the
--- flat base inverse needed by the later background determinant/log-det
--- expansion is concrete rather than existential.
+-- Periodic reindexing also proves the flat FP image has colourwise zero site
+-- mean. On that source carrier the explicit map source -> anchor (G source) is
+-- a right inverse; conversely G(L f)=f-mean(f), so re-anchoring cancels the
+-- mean and gives a left inverse on anchored parameters. Thus the reduced flat
+-- FP operator is explicitly isomorphic between anchored gauge parameters and
+-- colourwise mean-zero ghost sources.
+--
+-- The flat M0^{-1} required by the background determinant/log-det expansion
+-- is therefore concrete and two-sided rather than existential.
 --
 -- (5) WELD FESHBACH/SCHUR BOOKKEEPING TO THE NAMED TRANSFER OPERATORS
 --
@@ -81,3 +86,4 @@ import DASHI.Physics.YangMills.BalabanTransferKernelTraceNaturalityExact
 import DASHI.Physics.YangMills.BalabanDirectTransferSchurGapWeldExact
 import DASHI.Physics.YangMills.BalabanReducedFlatFaddeevPopovKernelExact
 import DASHI.Physics.YangMills.BalabanReducedFlatFaddeevPopovGreenInverseExact
+import DASHI.Physics.YangMills.BalabanReducedFlatFaddeevPopovIsomorphismExact
