@@ -44,3 +44,6 @@ import DASHI.Core.IndexedInterpretationMorphismExact
 import DASHI.Core.ObserverRefinementLatticeExact
 import DASHI.Core.ObserverIncomparabilityTypedJoinExact
 import DASHI.Cognition.PNF.EditTransportLeafLocalityExact
+
+-- One small public regression exercises the complete handoff contract.
+import DASHI.Ontology.WikidataWorkingGroupRegression
