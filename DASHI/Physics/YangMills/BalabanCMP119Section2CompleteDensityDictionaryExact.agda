@@ -17,26 +17,17 @@ module DASHI.Physics.YangMills.BalabanCMP119Section2CompleteDensityDictionaryExa
 --
 -- DASHI CONTRIBUTION
 --
--- Correct the source-facing shape of the "complete density" seam.  CMP119
+-- Correct the source-facing shape of the "complete density" seam. CMP119
 -- Section 2 does NOT introduce five scalar coordinates named K,L,C,mu,a^-1.
 -- Its literal inductive object is a complete density represented by the
--- large-field integration/localization operation T_k and the effective action
+-- large-field integration/localization operation T_k and effective action
 --
 --   A_k = Wilson(g_k,U_k) + E_k + R_k + B_k - E_k^vac,
 --
--- with the regular/localized E part, the R-operation part, boundary B part,
--- coupling/small-field scales and analyticity/localization parameters carrying
--- the source bounds.
---
--- This module records that source-native decomposition as one typed object and
--- then makes any lower-dimensional repository summary an explicit DERIVED
--- projection.  In particular, the older DASHI tuple
---
---   (g,K,L,C,mu,aInverse)
---
--- may remain useful downstream, but K,L,C,mu,aInverse must be proved functions
--- of the same Section-2 density data; they are not silently advertised as
--- notation printed by Bałaban.
+-- together with coupling/small-field scales and analytic/localization bounds.
+-- Any compact DASHI tuple (g,K,L,C,mu,aInverse) is therefore made an explicit
+-- DERIVED projection of those same source objects rather than being silently
+-- presented as notation printed by Bałaban.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -44,17 +35,12 @@ open import Agda.Builtin.Nat using (Nat)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
-------------------------------------------------------------------------
--- Literal source-shape carrier for one scale.
-------------------------------------------------------------------------
-
 record CMP119Section2CompleteDensity
     (Coupling Density Operation Action Field
       RegularTerm RTerm BoundaryTerm VacuumTerm
       SmallFieldScale BlockRadius AnalyticRadius Decay : Set) : Set₁ where
   field
     scale : Nat
-
     g : Coupling
     rho : Density
     T : Operation
@@ -71,26 +57,16 @@ record CMP119Section2CompleteDensity
     alpha0 alpha1 : AnalyticRadius
     decayKappa : Decay
 
-    -- Equations (2.18), (2.23) and the representation of the density/action are
-    -- source equations, represented without committing to an artificial scalar
-    -- norm convention here.
-    assembleDensity :
-      Operation → Action → Density
+    assembleDensity : Operation → Action → Density
     assembleAction :
       Coupling → Field → RegularTerm → RTerm → BoundaryTerm → VacuumTerm → Action
 
-    densityEquation :
-      rho ≡ assembleDensity T effectiveAction
-
+    densityEquation : rho ≡ assembleDensity T effectiveAction
     actionEquation :
       effectiveAction
       ≡ assembleAction g background regularE rOperationR boundaryB vacuumE
 
 open CMP119Section2CompleteDensity public
-
-------------------------------------------------------------------------
--- Source hypotheses that must survive the RT step.
-------------------------------------------------------------------------
 
 record CMP119Section2InductiveBounds
     {Coupling Density Operation Action Field
@@ -121,10 +97,6 @@ record CMP119Section2InductiveBounds
 
 open CMP119Section2InductiveBounds public
 
-------------------------------------------------------------------------
--- Any compact DASHI state is explicitly a projection of the same density.
-------------------------------------------------------------------------
-
 record CompleteDensityDerivedSummary
     {Coupling Density Operation Action Field
       RegularTerm RTerm BoundaryTerm VacuumTerm
@@ -135,15 +107,10 @@ record CompleteDensityDerivedSummary
       SmallFieldScale BlockRadius AnalyticRadius Decay)
     (Bound : Set) : Set₁ where
   field
-    smallFieldPolymerNorm :
-      CMP119Section2CompleteDensity.RegularTerm dataSet → Bound
-    largeFieldActivityNorm :
-      CMP119Section2CompleteDensity.RTerm dataSet →
-      CMP119Section2CompleteDensity.BoundaryTerm dataSet → Bound
-    conditionalCovarianceNorm :
-      CMP119Section2CompleteDensity.Operation dataSet → Bound
-    localizationExponent :
-      CMP119Section2CompleteDensity.Decay dataSet → Bound
+    smallFieldPolymerNorm : RegularTerm → Bound
+    largeFieldActivityNorm : RTerm → BoundaryTerm → Bound
+    conditionalCovarianceNorm : Operation → Bound
+    localizationExponent : Decay → Bound
     inverseLatticeSpacing : Nat → Bound
 
 open CompleteDensityDerivedSummary public
@@ -218,10 +185,10 @@ cmp119Section2CompleteDensitySourceShapeLevel = machineChecked
 cmp119Section2DerivedSummarySameObjectLevel : ProofLevel
 cmp119Section2DerivedSummarySameObjectLevel = machineChecked
 
--- Remaining literal source-to-DASHI dictionary: instantiate the five projection
+-- Remaining literal source-to-DASHI dictionary: instantiate these projection
 -- functionals by the precise CMP119/CMP122 localization/norm conventions and
--- prove the bounds required by the downstream YM4 region.  The key correction
--- is that those five projections are now visibly DERIVED from E/R/B/T/scale,
--- rather than falsely presented as five names printed in Section 2.
+-- prove the inequalities needed by the downstream YM4 region. The five compact
+-- coordinates are now visibly derived from E/R/B/T/scale rather than falsely
+-- presented as five scalar names printed in Section 2.
 cmp119Section2PhysicalProjectionBoundsLevel : ProofLevel
 cmp119Section2PhysicalProjectionBoundsLevel = conditional
