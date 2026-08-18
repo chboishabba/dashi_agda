@@ -24,21 +24,24 @@ module DASHI.Moonshine.FormalQSeriesUNLevelLoweringExact where
 --
 --   FormalQSeries = Nat -> Z.
 --
+-- All operator equalities are deliberately stated COEFFICIENTWISE.  This is
+-- the native observation consumed by the source argument and avoids importing
+-- function extensionality merely to package pointwise equal q-series.
+--
 -- This file proves only coefficient algebra:
 --
 --   (U_N f)_n = f_{Nn},
---   U_M U_N = U_{NM},
---   U_1 = id,
---   U_N preserves coefficientwise equality,
---   U_N sends support to the N-divisible subsequence.
+--   U_M U_N = U_{NM} coefficientwise,
+--   U_1 = id coefficientwise,
+--   coefficientwise equality is preserved,
+--   every U_N coefficient has an explicit N-multiple source index.
 --
 -- It deliberately does NOT claim the analytic/modular theorem that U_p lowers
 -- a specified modular-function level.  That source-facing theorem is isolated
--- in DuncanSwisherUNModularLevelAuthorityExact.
+-- separately.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
-open import Data.Integer using (ℤ)
 open import Data.Nat using (_*_)
 import Data.Nat.Properties as NatP
 
@@ -57,49 +60,32 @@ unCoefficient :
 unCoefficient N f n = refl
 
 ------------------------------------------------------------------------
--- Extensional equality helper for formal q-series.
+-- Identity and composition, coefficientwise.
 ------------------------------------------------------------------------
 
-seriesExt :
-  (f g : Q.FormalQSeries) →
-  ((n : Nat) → f n ≡ g n) →
-  f ≡ g
-seriesExt f g pointwise = funext pointwise
+uOneIdentityAt :
+  (f : Q.FormalQSeries) → (n : Nat) → UN 1 f n ≡ f n
+uOneIdentityAt f n = cong f (NatP.*-identityˡ n)
 
-------------------------------------------------------------------------
--- Identity and composition.
-------------------------------------------------------------------------
+uCompositionAt :
+  (M N : Nat) → (f : Q.FormalQSeries) → (n : Nat) →
+  UN M (UN N f) n ≡ UN (N * M) f n
+uCompositionAt M N f n =
+  cong f (sym (NatP.*-assoc N M n))
 
-uOneIdentity :
-  (f : Q.FormalQSeries) → UN 1 f ≡ f
-uOneIdentity f =
-  seriesExt (UN 1 f) f (λ n → cong f (NatP.*-identityˡ n))
-
-uComposition :
-  (M N : Nat) → (f : Q.FormalQSeries) →
-  UN M (UN N f) ≡ UN (N * M) f
-uComposition M N f =
-  seriesExt (UN M (UN N f)) (UN (N * M) f)
-    (λ n → cong f (sym (NatP.*-assoc N M n)))
-
-uCompositionCommutesOnIndices :
-  (M N : Nat) → (f : Q.FormalQSeries) →
-  UN M (UN N f) ≡ UN N (UN M f)
-uCompositionCommutesOnIndices M N f =
+uCompositionCommutesOnIndicesAt :
+  (M N : Nat) → (f : Q.FormalQSeries) → (n : Nat) →
+  UN M (UN N f) n ≡ UN N (UN M f) n
+uCompositionCommutesOnIndicesAt M N f n =
   trans
-    (uComposition M N f)
+    (uCompositionAt M N f n)
     (trans
-      (cong (λ k → UN k f) (NatP.*-comm N M))
-      (sym (uComposition N M f)))
+      (cong (λ k → f (k * n)) (NatP.*-comm N M))
+      (sym (uCompositionAt N M f n)))
 
 ------------------------------------------------------------------------
 -- Equality transport.
 ------------------------------------------------------------------------
-
-uCong :
-  (N : Nat) → {f g : Q.FormalQSeries} →
-  f ≡ g → UN N f ≡ UN N g
-uCong N equality = cong (UN N) equality
 
 uPointwiseCong :
   (N : Nat) → (f g : Q.FormalQSeries) →
@@ -138,20 +124,22 @@ coefficientOrigin N f n = record
 record FormalQSeriesUNBoundary : Set where
   field
     coefficientSelectionConstructed : Bool
-    uOneIdentityProved : Bool
-    compositionProved : Bool
-    commutingIndexSelectionsProved : Bool
+    uOneIdentityProvedCoefficientwise : Bool
+    compositionProvedCoefficientwise : Bool
+    commutingIndexSelectionsProvedCoefficientwise : Bool
     coefficientOriginProved : Bool
+    functionExtensionalityImported : Bool
     modularFunctionLevelLoweringProvedHere : Bool
     etaOrHauptmodulAnalyticObjectConstructedHere : Bool
 
 canonicalFormalQSeriesUNBoundary : FormalQSeriesUNBoundary
 canonicalFormalQSeriesUNBoundary = record
   { coefficientSelectionConstructed = true
-  ; uOneIdentityProved = true
-  ; compositionProved = true
-  ; commutingIndexSelectionsProved = true
+  ; uOneIdentityProvedCoefficientwise = true
+  ; compositionProvedCoefficientwise = true
+  ; commutingIndexSelectionsProvedCoefficientwise = true
   ; coefficientOriginProved = true
+  ; functionExtensionalityImported = false
   ; modularFunctionLevelLoweringProvedHere = false
   ; etaOrHauptmodulAnalyticObjectConstructedHere = false
   }
