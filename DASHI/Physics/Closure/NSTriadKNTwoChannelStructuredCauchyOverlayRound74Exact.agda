@@ -33,6 +33,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base using (ℚ; _+_; _*_; _≤_)
+import Data.Rational.Properties as ℚP
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 import DASHI.Physics.Closure.NSTriadKNLuoPhysicalFiveClassSupportRound25Exact as Support
@@ -113,17 +114,17 @@ twoChannelSignedSumExact overlay[] = refl
 twoChannelSignedSumExact
     (overlayTriadic2 {value = value}
       left0 right0 left1 right1 exact rest) =
+  let
+    tail = R71.triadicSignedSum _
+  in
   trans
     (cong
-      (λ tail →
-        left0 * right0 + (left1 * right1 + tail))
+      (λ selectedTail →
+        left0 * right0 + (left1 * right1 + selectedTail))
       (twoChannelSignedSumExact rest))
     (trans
-      (sym
-        (cong
-          (λ head → head + R71.triadicSignedSum _)
-          exact))
-      refl)
+      (sym (ℚP.+-assoc (left0 * right0) (left1 * right1) tail))
+      (cong (λ head → head + tail) (sym exact)))
 twoChannelSignedSumExact (overlayCom rest) = twoChannelSignedSumExact rest
 twoChannelSignedSumExact (overlayTail rest) = twoChannelSignedSumExact rest
 twoChannelSignedSumExact (overlayDuplicateKernel rest) = twoChannelSignedSumExact rest
