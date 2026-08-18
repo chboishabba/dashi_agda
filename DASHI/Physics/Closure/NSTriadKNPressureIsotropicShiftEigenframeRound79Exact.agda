@@ -33,9 +33,9 @@ module DASHI.Physics.Closure.NSTriadKNPressureIsotropicShiftEigenframeRound79Exa
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
-open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _-_)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _-_; -_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
+open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
 
 import DASHI.Physics.Closure.NSTriadKNRationalLerayProjectionExact as V
 import DASHI.Physics.Closure.NSTriadKNLuoAngularStrainDisplayedFormulaZeroExact as M
@@ -46,8 +46,6 @@ identityMatrix = M.matrix3
   1ℚ 0ℚ 0ℚ
   0ℚ 1ℚ 0ℚ
   0ℚ 0ℚ 1ℚ
-  where
-  open import Data.Rational.Base using (1ℚ)
 
 addMatrix : M.Matrix3 → M.Matrix3 → M.Matrix3
 addMatrix left right = M.matrix3
@@ -106,6 +104,21 @@ addScaledSameVector a b (V.v3 x y z) =
     (solve (a ∷ b ∷ y ∷ []))
     (solve (a ∷ b ∷ z ∷ []))
 
+isotropicShiftRoundtrip : ∀ scalar matrix →
+  isotropicShift (- scalar) (isotropicShift scalar matrix) ≡ matrix
+isotropicShiftRoundtrip scalar
+    (M.matrix3 a11 a12 a13 a21 a22 a23 a31 a32 a33) =
+  M.matrixExt
+    (solve (scalar ∷ a11 ∷ []))
+    (solve (scalar ∷ a12 ∷ []))
+    (solve (scalar ∷ a13 ∷ []))
+    (solve (scalar ∷ a21 ∷ []))
+    (solve (scalar ∷ a22 ∷ []))
+    (solve (scalar ∷ a23 ∷ []))
+    (solve (scalar ∷ a31 ∷ []))
+    (solve (scalar ∷ a32 ∷ []))
+    (solve (scalar ∷ a33 ∷ []))
+
 record Eigenpair (matrix : M.Matrix3) : Set where
   constructor eigenpair
   field
@@ -141,21 +154,13 @@ isotropicShiftEigenpairReflects :
   Eigenpair (isotropicShift scalar deviatoric) →
   Eigenpair deviatoric
 isotropicShiftEigenpairReflects scalar deviatoric pair =
-  eigenpair
-    (eigenvector pair)
-    (eigenvalue pair - scalar)
-    proof
-  where
-  proof :
-    A.apply deviatoric (eigenvector pair)
-    ≡ V.scale (eigenvalue pair - scalar) (eigenvector pair)
-  proof with eigenvector pair | deviatoric
-  ... | V.v3 x y z | M.matrix3 a11 a12 a13 a21 a22 a23 a31 a32 a33 =
-    let shifted = eigenEquation pair in
-    V.vectorExt
-      (solve (a11 ∷ a12 ∷ a13 ∷ x ∷ y ∷ z ∷ scalar ∷ eigenvalue pair ∷ []))
-      (solve (a21 ∷ a22 ∷ a23 ∷ x ∷ y ∷ z ∷ scalar ∷ eigenvalue pair ∷ []))
-      (solve (a31 ∷ a32 ∷ a33 ∷ x ∷ y ∷ z ∷ scalar ∷ eigenvalue pair ∷ []))
+  subst
+    Eigenpair
+    (isotropicShiftRoundtrip scalar deviatoric)
+    (isotropicShiftPreservesEigenpair
+      (- scalar)
+      (isotropicShift scalar deviatoric)
+      pair)
 
 round79FullPressureAndDeviatoricPressureShareEigenframe : Bool
 round79FullPressureAndDeviatoricPressureShareEigenframe = true
