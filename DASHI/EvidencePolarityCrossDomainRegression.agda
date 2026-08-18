@@ -3,7 +3,9 @@ module DASHI.EvidencePolarityCrossDomainRegression where
 open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
+open import Data.Product using (proj₁; proj₂)
 
+import DASHI.Algebra.BalancedTernaryOppositionEvidenceBridgeExact as GeometricEvidence
 import DASHI.Algebra.ClaimIndexedEvidencePolarityExact as Indexed
 import DASHI.Algebra.DisagreementFourViewBoundary as Four
 import DASHI.Biology.BrainProxyEvidenceAuthorityBridgeExact as Brain
@@ -19,10 +21,6 @@ import DASHI.Physics.Chemistry.AtomicEvidenceObligationBridgeExact as Atomic
 import DASHI.Reasoning.HyperfabricHypervoxelEvidencePolarityBridgeExact as Hyper
 import DASHI.Reasoning.RelationalLensSynthesisCore as Lens
 
-------------------------------------------------------------------------
--- Focused compile/regression surface for the cross-domain evidence tranche.
-------------------------------------------------------------------------
-
 conflictStillRetained :
   Indexed.conflict ≡ Four.assess true true
 conflictStillRetained = Indexed.conflictIsBoth
@@ -36,6 +34,11 @@ orientationReversalStillNotLogicalNegation :
   Lens.orientationReversalRole ≡ Lens.logicalNegationRole → ⊥
 orientationReversalStillNotLogicalNegation =
   Indexed.orientationReversalRoleIsNotLogicalNegation
+
+strictAntipodeStillCannotSelfQualifyAsLogicalNegation :
+  Indexed.LogicalNegationQualified GeometricEvidence.positiveStrictAntipodeOpposition → ⊥
+strictAntipodeStillCannotSelfQualifyAsLogicalNegation =
+  GeometricEvidence.positiveAntipodeCannotSelfQualifyAsLogicalNegation
 
 opposingSupportDoesNotSelfQualifyAsNegation :
   Indexed.ClaimIndexedEvidencePolarityBoundary.opposingSupportAutomaticallyMeansLogicalNegation
@@ -82,10 +85,6 @@ hyperfabricDoesNotDiagnose :
     Hyper.canonicalHyperfabricHypervoxelEvidenceBoundary
   ≡ false
 hyperfabricDoesNotDiagnose = refl
-
-------------------------------------------------------------------------
--- New action/orbit and aggregation regressions.
-------------------------------------------------------------------------
 
 zeroStillFixedUnderStrictAntipode :
   Orbit.strictAntipode SSP.sspZero ≡ SSP.sspZero
