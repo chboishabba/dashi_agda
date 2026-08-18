@@ -4,10 +4,10 @@ module DASHI.Governance.SituatedInverseJusticeFibreExact where
 -- SITUATED JUSTICE / INVERSE-JUSTICE FIBRE
 --
 -- This module does not identify policing, arrest, custody, protest control,
--- military/security institutions, or any named political actor with injustice
--- by label.  It supplies a typed carrier for asking whether a situated
--- institutional transition preserves, repairs, leaves unresolved, or
--- positively violates an applicable justice invariant.
+-- military/security institutions, extremist association, or any named live
+-- political actor with injustice by label.  It supplies a typed carrier for
+-- asking whether a situated institutional transition preserves, repairs,
+-- leaves unresolved, or positively violates an applicable justice invariant.
 --
 -- Cross-pollination / source calibration:
 --
@@ -37,15 +37,17 @@ import DASHI.Core.IntersectionalNonFactorability as Intersectional
 import DASHI.Governance.AsymmetricLegibilityContestabilityExact as Legibility
 import DASHI.Governance.AuthorityMandateCore as Authority
 import DASHI.Governance.ContestabilityAccessCostExact as Contestability
+import DASHI.Governance.CouncilDelegationGraph as Council
 import DASHI.Governance.DependentAuthorityCoercionKernel as Coercion
 import DASHI.Governance.MultidimensionalContestabilityAccessExact as Access
 import DASHI.Governance.SituatedConstituency as Situated
 import DASHI.Governance.TransitionResidual as Transition
+import DASHI.Promotion.PoliticalRoleAssignmentBoundary as PoliticalRole
 
 ------------------------------------------------------------------------
 -- Justice is a fibre over an already-situated governance relation.
--- We deliberately reuse Transition.ConstitutionalInvariant rather than
--- replacing it with a new scalar justice score.
+-- We deliberately reuse Transition.ConstitutionalInvariant and its four-way
+-- validation rather than replacing them with a fresh scalar justice score.
 ------------------------------------------------------------------------
 
 record SituatedJusticeBase : Set where
@@ -76,6 +78,48 @@ record JusticeTransition
 
 open JusticeTransition public
 
+------------------------------------------------------------------------
+-- A partial comparison on the four-way validation carrier.
+-- Unknown and inapplicable states are not silently ranked against known
+-- satisfied/violated states.  The relation records only justified "no worse"
+-- moves and therefore preserves the repo's residual discipline.
+------------------------------------------------------------------------
+
+data ValidationNoWorse :
+  Transition.GovernanceValidation →
+  Transition.GovernanceValidation →
+  Set where
+  satisfiedStaysSatisfied :
+    ValidationNoWorse Transition.satisfied Transition.satisfied
+  violationRepaired :
+    ValidationNoWorse Transition.positivelyViolated Transition.satisfied
+  violationRetained :
+    ValidationNoWorse Transition.positivelyViolated Transition.positivelyViolated
+  incompleteResolvedSatisfied :
+    ValidationNoWorse Transition.undeterminedAxisIncomplete Transition.satisfied
+  incompleteRetained :
+    ValidationNoWorse
+      Transition.undeterminedAxisIncomplete
+      Transition.undeterminedAxisIncomplete
+  inapplicableRetained :
+    ValidationNoWorse Transition.inapplicableToRole Transition.inapplicableToRole
+
+record FibreNoWorse
+  {beforeBase afterBase : SituatedJusticeBase}
+  (before : JusticeFibre beforeBase)
+  (after : JusticeFibre afterBase) : Set₁ where
+  constructor fibreNoWorse
+  field
+    noWorseAt :
+      (invariant : Transition.ConstitutionalInvariant) →
+      applicable before invariant →
+      applicable after invariant →
+      ValidationNoWorse (validation before invariant) (validation after invariant)
+
+------------------------------------------------------------------------
+-- Exact positive-violation / repair witnesses.
+------------------------------------------------------------------------
+
 record CreatedPositiveViolation
   {beforeBase afterBase : SituatedJusticeBase}
   {before : JusticeFibre beforeBase}
@@ -84,8 +128,8 @@ record CreatedPositiveViolation
   (invariant : Transition.ConstitutionalInvariant) : Set where
   constructor createdPositiveViolation
   field
-    applicableBefore : applicable before invariant
-    applicableAfter : applicable after invariant
+    violationApplicableBefore : applicable before invariant
+    violationApplicableAfter : applicable after invariant
     wasSatisfied : validation before invariant ≡ Transition.satisfied
     becamePositivelyViolated :
       validation after invariant ≡ Transition.positivelyViolated
@@ -100,8 +144,8 @@ record RepairedPositiveViolation
   (invariant : Transition.ConstitutionalInvariant) : Set where
   constructor repairedPositiveViolation
   field
-    applicableBefore : applicable before invariant
-    applicableAfter : applicable after invariant
+    repairApplicableBefore : applicable before invariant
+    repairApplicableAfter : applicable after invariant
     wasPositivelyViolated :
       validation before invariant ≡ Transition.positivelyViolated
     becameSatisfied : validation after invariant ≡ Transition.satisfied
@@ -136,10 +180,14 @@ positiveJusticeViolationIsInverseJustice :
   ∀ {beforeBase afterBase}
     {before : JusticeFibre beforeBase}
     {after : JusticeFibre afterBase}
-    {transition : JusticeTransition before after} →
-  JusticeNegativeTransition transition →
+    {transition : JusticeTransition before after}
+    {invariant : Transition.ConstitutionalInvariant} →
+  CreatedPositiveViolation transition invariant →
+  ((candidate : Transition.ConstitutionalInvariant) →
+    RepairedPositiveViolation transition candidate → ⊥) →
   InverseJusticeOperator transition
-positiveJusticeViolationIsInverseJustice negative = negative
+positiveJusticeViolationIsInverseJustice {invariant = invariant} created noRepair =
+  justiceNegativeTransition invariant created noRepair
 
 ------------------------------------------------------------------------
 -- "Coppers != justice": force does not self-promote even to admissible public
@@ -158,11 +206,15 @@ forceDoesNotEstablishJustice : ForceAloneEstablishesJustice → ⊥
 forceDoesNotEstablishJustice claim =
   Authority.possessionOfForceRejected (forceIsAdmissibleAuthority claim)
 
+securityInstitutionRemainsSubordinateToPeople :
+  Council.SubordinationPath Council.securityInstitution Council.peopleInstitution
+securityInstitutionRemainsSubordinateToPeople = Council.securityToPeoplePath
+
 ------------------------------------------------------------------------
 -- Concrete same-role countermodel.
--- The same institutional label and same coercive relation can occur in a
--- rights-preserving or rights-violating transition.  Therefore institutional
--- role alone does not determine justice sign.
+-- The same institutional label, same situated base, and same coercive relation
+-- can occur in a rights-preserving or rights-violating transition.  Therefore
+-- institutional role alone cannot determine justice sign.
 ------------------------------------------------------------------------
 
 exampleRelation : Coercion.AuthorityRelation
@@ -223,8 +275,7 @@ noRepairFromAllSatisfied invariant repair with
 
 violatingActionIsInverseJustice : InverseJusticeOperator violatingAction
 violatingActionIsInverseJustice =
-  justiceNegativeTransition
-    Transition.rightsInvariant
+  positiveJusticeViolationIsInverseJustice
     rightsViolationCreated
     noRepairFromAllSatisfied
 
@@ -236,9 +287,49 @@ preservingActionCannotCreatePositiveViolation invariant created with
   CreatedPositiveViolation.becamePositivelyViolated created
 ... | ()
 
+preservingActionIsNotInverseJustice :
+  InverseJusticeOperator preservingAction → ⊥
+preservingActionIsNotInverseJustice negative =
+  preservingActionCannotCreatePositiveViolation
+    (violatedInvariant negative)
+    (createsViolation negative)
+
+record SameInstitutionOppositeJusticeWitness : Set₁ where
+  constructor sameInstitutionOppositeJusticeWitness
+  field
+    preservingTransition : JusticeTransition preservingFibre preservingFibre
+    violatingTransition : JusticeTransition preservingFibre violatingFibre
+    preservingIsNotInverse : InverseJusticeOperator preservingTransition → ⊥
+    violatingIsInverse : InverseJusticeOperator violatingTransition
+
 institutionalRoleDoesNotDetermineJusticeSign :
-  InverseJusticeOperator violatingAction
-institutionalRoleDoesNotDetermineJusticeSign = violatingActionIsInverseJustice
+  SameInstitutionOppositeJusticeWitness
+institutionalRoleDoesNotDetermineJusticeSign =
+  sameInstitutionOppositeJusticeWitness
+    preservingAction
+    violatingAction
+    preservingActionIsNotInverseJustice
+    violatingActionIsInverseJustice
+
+------------------------------------------------------------------------
+-- A situated custody/protest-style base can explicitly retain ethnicity,
+-- coloniality, armed-power and institutional-access axes.  This is an abstract
+-- carrier example only; it does not adjudicate any real death, arrest or group.
+------------------------------------------------------------------------
+
+situatedCustodyConstituency : Situated.SituatedConstituency
+situatedCustodyConstituency =
+  Situated.mkSituatedConstituency
+    "situated custody constituency"
+    "unspecified place"
+    0
+    "custodial / policing institution"
+    (Situated.ethnicityAxis
+      ∷ Situated.colonialityAxis
+      ∷ Situated.armedPowerAxis
+      ∷ Situated.institutionalAccessAxis
+      ∷ [])
+    "requires relational and institutional evaluation"
 
 ------------------------------------------------------------------------
 -- Intersectional integration.
@@ -280,6 +371,20 @@ asymmetricLegibilityCanBlockExactRecovery :
   ⊥
 asymmetricLegibilityCanBlockExactRecovery =
   Legibility.finiteExactDecoderImpossible
+
+------------------------------------------------------------------------
+-- Live political labels remain evidence-gated.  This is the integration point
+-- for claims such as extremist/far-right association: evidence may eventually
+-- affect equal-citizenship/rights/authority invariants, but the label itself is
+-- not minted by this justice fibre.
+------------------------------------------------------------------------
+
+livePoliticalRoleAssignmentRemainsBlocked :
+  PoliticalRole.PoliticalRoleAssignmentBoundaryReceipt.politicalAdjudicationAuthority
+    PoliticalRole.canonicalPoliticalRoleAssignmentBoundaryReceipt
+  ≡ false
+livePoliticalRoleAssignmentRemainsBlocked =
+  PoliticalRole.canonicalNoPoliticalAdjudication
 
 ------------------------------------------------------------------------
 -- Repeated justice-negative coercive transitions.
@@ -325,6 +430,7 @@ record SituatedInverseJusticeBoundary : Set where
     arrestLabelAutomaticallyInverseJustice : Bool
     policeLabelAutomaticallyInverseJustice : Bool
     protestLabelAutomaticallyEstablishesRightsViolation : Bool
+    extremistLabelAutomaticallyAssigned : Bool
     flatSingleAxisLabelSufficesForSituatedJustice : Bool
     contestabilityExhaustsJustice : Bool
     negativeTransitionMayInstantiateInverseJustice : Bool
@@ -333,6 +439,7 @@ record SituatedInverseJusticeBoundary : Set where
 canonicalSituatedInverseJusticeBoundary : SituatedInverseJusticeBoundary
 canonicalSituatedInverseJusticeBoundary =
   situatedInverseJusticeBoundary
+    false
     false
     false
     false
