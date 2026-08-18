@@ -26,20 +26,37 @@ module DASHI.Papers.NavierStokes.TheoremInterfaceRound82Exact where
 --
 --   tied directly to Q_{K,+}/(2 nu D_K).
 --
--- On its positive branch Round82 proves 0<=B_K<=1.  Its exact drift numerator
--- is
+-- On its positive branch Round82 proves 0<=B_K<=1.  All differentiation
+-- algebra is now literal on the finite Fourier carrier:
 --
---   Bdot (Q + V)^2 = Qdot V - Q Vdot,
+--   DN(u)[v] = B(u,v) + B(v,u),
 --
--- so the physical C5 theorem is a relative-growth/occupation estimate, not a
--- matrix-exponential theorem.  The downstream consumer needs an integrated
--- deterministic occupation inequality plus replenishment absorption;
--- pointwise negative Bdot at every dangerous instant is not required.
+--   qdot = Re(<v_K,N_K(u)> + <u_K,DN_K(u)[v]>),
+--   Ddot = Re(<grad v_K,grad u_K> + <grad u_K,grad v_K>),
 --
--- The absorption core is stronger than the common theta<1 shorthand: it accepts
--- E = margin + absorbed and R <= absorbed + C, so the absorbed part may vary by
--- state/interval.  The resulting occupation input is already welded into the
--- existing cutoff/shell/state-uniform residence theorem.
+--   Q=s_K q, Qdot=s_K qdot,
+--   V=(2nu)D, Vdot=(2nu)Ddot,
+--
+--   Qdot V - Q Vdot = s_K(2nu)(qdot D - q Ddot),
+--
+--   Bdot (Q+V)^2 = Qdot V - Q Vdot.
+--
+-- Thus C4 is no longer a missing derivative construction.  Its remaining
+-- physical content is a one-sided/integrated estimate on the SAME normalized
+-- packet relative-growth core `qdot D - q Ddot` along the actual selected
+-- Navier--Stokes tangent.
+--
+-- Homogeneity alone cannot provide that sign: for the calibration tangent
+-- u -> (1+epsilon)u, cubic q and quadratic D give qdot=3q, Ddot=2D and hence
+-- qdot D-q Ddot=qD.  Actual NS tangent geometry is essential.
+--
+-- The downstream consumer needs an integrated deterministic occupation
+-- inequality plus replenishment absorption; pointwise negative Bdot at every
+-- dangerous instant is not required.  The absorption core is stronger than the
+-- common theta<1 shorthand: it accepts E=margin+absorbed and R<=absorbed+C, so
+-- the absorbed part may vary by state/interval.  The resulting occupation input
+-- is already welded into the existing cutoff/shell/state-uniform residence
+-- theorem.
 --
 -- `Gamma` provenance is explicit: the older periodic Route-B packet Gamma
 -- (center-shell / packet energy) is a different observable and cannot be used
@@ -51,15 +68,15 @@ module DASHI.Papers.NavierStokes.TheoremInterfaceRound82Exact where
 --   * former G1+G2 -> one continuum fourth-order kernel-shell-majorant producer.
 --
 -- Therefore the previous 15 substantive + 3 closing cutset is now at most
--- 13 substantive + 3 closing lemmas, with no physical theorem promoted merely
--- by this recounting.
+-- 13 substantive + 3 closing lemmas.  The new literal C4 differentiation
+-- results narrow C4 but do not count its physical coercivity inequality as
+-- proved.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Physics.Closure.NSTriadKNHighestAlphaRound82Exact as R82
-import DASHI.Physics.Closure.NSTriadKNCompactTransferPotentialBoundedRound82Exact as Bounded
 
 round82ClusterSylvesterAvailable : Bool
 round82ClusterSylvesterAvailable = R82.round82ClusterSylvesterCoreConstructed
@@ -71,12 +88,34 @@ round82PressureHessianModeIsometryAvailable : Bool
 round82PressureHessianModeIsometryAvailable = R82.round82PressureHessianModeIsometryConstructed
 
 round82CompactTransferPotentialBounded : Bool
-round82CompactTransferPotentialBounded =
-  Bounded.round82CompactTransferPotentialBoundedZeroOne
+round82CompactTransferPotentialBounded = R82.round82CompactTransferPotentialBounded
+
+round82LiteralProjectedNonlinearityFirstVariation : Bool
+round82LiteralProjectedNonlinearityFirstVariation =
+  R82.round82LiteralProjectedNonlinearityFirstVariationConstructed
+
+round82LiteralPacketTransferFirstVariation : Bool
+round82LiteralPacketTransferFirstVariation =
+  R82.round82LiteralPacketTransferFirstVariationConstructed
+
+round82LiteralPacketDissipationFirstVariation : Bool
+round82LiteralPacketDissipationFirstVariation =
+  R82.round82LiteralPacketDissipationFirstVariationConstructed
+
+round82LiteralCompactTransferScalars : Bool
+round82LiteralCompactTransferScalars = R82.round82LiteralCompactTransferScalarsConstructed
+
+round82RelativeGrowthPrefactorsFactorExactly : Bool
+round82RelativeGrowthPrefactorsFactorExactly =
+  R82.round82RelativeGrowthPrefactorsFactorExactly
 
 round82CompactDriftIsRelativeGrowthCompetition : Bool
 round82CompactDriftIsRelativeGrowthCompetition =
   R82.round82CompactDriftNumeratorReducedToRelativeGrowth
+
+round82HomogeneityAloneForcesNegativeCompactDrift : Bool
+round82HomogeneityAloneForcesNegativeCompactDrift =
+  R82.round82HomogeneityAloneForcesNegativeCompactDrift
 
 round82PacketGammaDeterminesTransferGamma : Bool
 round82PacketGammaDeterminesTransferGamma = false
@@ -142,13 +181,21 @@ round82CriticalToSerrinReducerAlreadyPresent =
 round82ClayPromotion : Bool
 round82ClayPromotion = false
 
-round82CompactTransferPotentialBoundedIsTrue :
-  round82CompactTransferPotentialBounded ≡ true
-round82CompactTransferPotentialBoundedIsTrue = refl
+round82LiteralProjectedNonlinearityFirstVariationIsTrue :
+  round82LiteralProjectedNonlinearityFirstVariation ≡ true
+round82LiteralProjectedNonlinearityFirstVariationIsTrue = refl
 
-round82CompactDriftIsRelativeGrowthCompetitionIsTrue :
-  round82CompactDriftIsRelativeGrowthCompetition ≡ true
-round82CompactDriftIsRelativeGrowthCompetitionIsTrue = refl
+round82LiteralPacketTransferFirstVariationIsTrue :
+  round82LiteralPacketTransferFirstVariation ≡ true
+round82LiteralPacketTransferFirstVariationIsTrue = refl
+
+round82RelativeGrowthPrefactorsFactorExactlyIsTrue :
+  round82RelativeGrowthPrefactorsFactorExactly ≡ true
+round82RelativeGrowthPrefactorsFactorExactlyIsTrue = refl
+
+round82HomogeneityAloneForcesNegativeCompactDriftIsFalse :
+  round82HomogeneityAloneForcesNegativeCompactDrift ≡ false
+round82HomogeneityAloneForcesNegativeCompactDriftIsFalse = refl
 
 round82PacketGammaDeterminesTransferGammaIsFalse :
   round82PacketGammaDeterminesTransferGamma ≡ false
