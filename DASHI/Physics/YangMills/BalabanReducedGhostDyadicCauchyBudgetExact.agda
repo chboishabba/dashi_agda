@@ -25,8 +25,7 @@ module DASHI.Physics.YangMills.BalabanReducedGhostDyadicCauchyBudgetExact where
 --
 --       epsilon_m = (1/2)^m.
 --
--- This module proves internally that the physical ghost modulus is strictly
--- faster than the canonical dyadic one:
+-- This module proves internally that the physical ghost modulus is faster:
 --
 --       (1/5)^m <= (1/2)^m,
 --       (1/5)^m / 2500 <= (1/2)^m.
@@ -39,27 +38,29 @@ module DASHI.Physics.YangMills.BalabanReducedGhostDyadicCauchyBudgetExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; 1ℚ; ½; _*_; _≤_; NonNegative)
+  (ℚ; 0ℚ; 1ℚ; ½; _*_; _≤_; _/_; NonNegative)
 import Data.Rational.Properties as ℚP
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Analysis.CanonicalRationalMetric as Metric
+import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
 import DASHI.Physics.YangMills.BalabanReducedGhostNeumannRowContractionExact as Neumann
 import DASHI.Physics.YangMills.BalabanReducedGhostMatrixLogFifthTailExact as Fifth
 import DASHI.Physics.YangMills.BalabanReducedGhostMatrixLogShiftedTailExact as Shifted
 
 oneFifthBelowHalf : Fifth.oneFifth ≤ ½
-oneFifthBelowHalf = ℚP.<⇒≤ (ℚP.positiveDifference⇒< (ℚP.nonNegative⁻¹ (+ 3 / 10)))
+oneFifthBelowHalf =
+  Norm.nonnegativeDifferenceImpliesBelow
+    (ℚP.nonNegative⁻¹ (+ 3 / 10))
 
--- Both powers use the same left-recursive multiplication convention.
 oneFifthPowerBelowDyadic : ∀ exponent →
   Neumann.rationalPower Fifth.oneFifth exponent ≤ Metric.dyadicQ exponent
 oneFifthPowerBelowDyadic zero = ℚP.≤-refl
 oneFifthPowerBelowDyadic (suc exponent) =
   let
     fifthPower = Neumann.rationalPower Fifth.oneFifth exponent
-    dyadicPower = Metric.dyadicQ exponent
 
     instance
       fifthPowerNN : NonNegative fifthPower
@@ -72,7 +73,7 @@ oneFifthPowerBelowDyadic (suc exponent) =
     first : Fifth.oneFifth * fifthPower ≤ ½ * fifthPower
     first = ℚP.*-monoʳ-≤-nonNeg fifthPower oneFifthBelowHalf
 
-    second : ½ * fifthPower ≤ ½ * dyadicPower
+    second : ½ * fifthPower ≤ ½ * Metric.dyadicQ exponent
     second = ℚP.*-monoˡ-≤-nonNeg ½
       (oneFifthPowerBelowDyadic exponent)
   in
@@ -80,7 +81,8 @@ oneFifthPowerBelowDyadic (suc exponent) =
 
 fifthTailCapBelowOne : Fifth.fifthTailCap ≤ 1ℚ
 fifthTailCapBelowOne =
-  ℚP.<⇒≤ (ℚP.positiveDifference⇒< (ℚP.nonNegative⁻¹ (+ 2499 / 2500)))
+  Norm.nonnegativeDifferenceImpliesBelow
+    (ℚP.nonNegative⁻¹ (+ 2499 / 2500))
 
 shiftedCapBelowStartFactor : ∀ start →
   Shifted.shiftedCap start ≤ Shifted.startFactor start
@@ -90,10 +92,10 @@ shiftedCapBelowStartFactor start =
     instance
       factorNN : NonNegative factor
       factorNN = ℚ.nonNegative (Shifted.startFactorNonnegative start)
+    scaled : factor * Fifth.fifthTailCap ≤ factor * 1ℚ
+    scaled = ℚP.*-monoˡ-≤-nonNeg factor fifthTailCapBelowOne
   in
-  ℚP.≤-trans
-    (ℚP.*-monoˡ-≤-nonNeg factor fifthTailCapBelowOne)
-    (ℚP.≤-reflexive (ℚP.*-identityʳ factor))
+  ℚP.≤-trans scaled (ℚP.≤-reflexive (ℚP.*-identityʳ factor))
 
 shiftedCapBelowDyadic : ∀ start →
   Shifted.shiftedCap start ≤ Metric.dyadicQ start
@@ -101,11 +103,6 @@ shiftedCapBelowDyadic start =
   ℚP.≤-trans
     (shiftedCapBelowStartFactor start)
     (oneFifthPowerBelowDyadic start)
-
-------------------------------------------------------------------------
--- Generic row-budget adapter: any late finite tail carrying the stronger
--- shifted cap automatically carries the canonical dyadic FastCauchy budget.
-------------------------------------------------------------------------
 
 dyadicRowBudgetFromShiftedCap :
   ∀ value start →
@@ -120,8 +117,5 @@ reducedGhostOneFifthBeatsDyadicLevel = machineChecked
 reducedGhostShiftedTailFitsCanonicalFastCauchyBudgetLevel : ProofLevel
 reducedGhostShiftedTailFitsCanonicalFastCauchyBudgetLevel = machineChecked
 
--- The unresolved theorem is no longer a rate comparison.  It is the actual
--- sequence realization / principal-log identification in the complete
--- constructive-real matrix carrier.
 physicalReducedGhostFastCauchySequenceRealizationLevel : ProofLevel
 physicalReducedGhostFastCauchySequenceRealizationLevel = conditional
