@@ -36,10 +36,18 @@ module DASHI.Moonshine.PrimeLevelDeligneRapoportFrickeSelectorExact where
 --   3. transport arithmetic genus from that special fibre to the generic
 --      Fricke curve by proper flatness.
 --
--- Once those two proof-relevant equalities are supplied, the global selector
--- theorem is pure composition:
+-- Once those proof-relevant equalities are supplied, the global selector is
+-- pure composition:
 --
 --   g(X_0^+(p)) = d_F(p).
+--
+-- Moreover the older table-free theorem
+--
+--   Frobenius pointwise fixed <=> g(X_0^+(p)) = 0
+--
+-- is now recovered WITHOUT an independent pairCountSameObject premise: the
+-- pair count on the special fibre is definitionally descended from the SAME
+-- finite involution normal form.
 --
 -- No Fricke/class-number control table is consumed here.
 ------------------------------------------------------------------------
@@ -49,6 +57,8 @@ open import DASHI.Core.Prelude
 import DASHI.Foundations.FiniteInvolutionOrbitNormalFormExact as Orbit
 import DASHI.Moonshine.RationalNodalSpecialFibreGenusExact as Nodal
 import DASHI.Moonshine.PrimeLevelDeligneRapoportFrickeCombinatoricsExact as DR
+import DASHI.Moonshine.SupersingularFrickeSpecialFibreSelectorExact as Older
+import DASHI.Moonshine.FrickeSpecialFibreFrobeniusFixedSelectorExact as Fixed
 
 record PrimeLevelFrickeSpecialFibreAuthority : Set₁ where
   field
@@ -112,12 +122,10 @@ zeroGenusIffZeroPairDefect A =
     trans (genericFrickeGenusEqualsDeclaredPairDefect A) pairZero)
 
 ------------------------------------------------------------------------
--- Adapter to the older selector interface.  Notice that nodesAreQuadraticPairs
--- and arithmetic genus = nodes are no longer independent authority premises:
--- they come from the derived canonical quotient graph.
+-- Adapter to the older special-fibre selector interface.  Notice that
+-- nodesAreQuadraticPairs and arithmetic genus = nodes are no longer independent
+-- authority premises: they come from the derived canonical quotient graph.
 ------------------------------------------------------------------------
-
-import DASHI.Moonshine.SupersingularFrickeSpecialFibreSelectorExact as Older
 
 asOlderSpecialFibreRealization :
   (A : PrimeLevelFrickeSpecialFibreAuthority) →
@@ -142,11 +150,43 @@ olderSelectorRecovered A =
   Older.frickeGenusEqualsFrobeniusPairDefect
     (asOlderSpecialFibreRealization A)
 
+------------------------------------------------------------------------
+-- Stronger adapter: consume the existing pointwise-fixed selector without an
+-- independent pairCountSameObject authority.  Both sides use the same spectrum
+-- from supersingularFrobenius A, and the special-fibre defect is derived from
+-- that spectrum by construction.
+------------------------------------------------------------------------
+
+asFixedSelectorGeometry :
+  (A : PrimeLevelFrickeSpecialFibreAuthority) →
+  Fixed.PrimeFrickeFrobeniusGeometry
+asFixedSelectorGeometry A = record
+  { Fixed.Carrier = DR.Supersingular (supersingularFrobenius A)
+  ; Fixed.frobenius = DR.frobenius (supersingularFrobenius A)
+  ; Fixed.spectrum = DR.spectrum (supersingularFrobenius A)
+  ; Fixed.frobeniusRealization = DR.normalForm (supersingularFrobenius A)
+  ; Fixed.specialFibreRealization = asOlderSpecialFibreRealization A
+  ; Fixed.pairCountSameObject = DR.spectrumPaired (supersingularFrobenius A)
+  }
+
+GeometricallyFullyFixed : PrimeLevelFrickeSpecialFibreAuthority → Set
+GeometricallyFullyFixed A =
+  Fixed.GeometricallyFullyFixed (asFixedSelectorGeometry A)
+
+frobeniusFullyFixedIffGenericFrickeGenusZero :
+  (A : PrimeLevelFrickeSpecialFibreAuthority) →
+  GeometricallyFullyFixed A ↔ genericFrickeGenus A ≡ 0
+frobeniusFullyFixedIffGenericFrickeGenusZero A =
+  Fixed.frobeniusFullyFixedIffFrickeGenusZero
+    (asFixedSelectorGeometry A)
+
 record PrimeLevelDeligneRapoportFrickeSelectorBoundary : Set where
   field
     finitePairedOrbitQuotientDerived : Bool
     canonicalNodalDualGraphDerived : Bool
     arithmeticGenusEqualsPairCountDerived : Bool
+    duplicatePairCountAuthorityEliminated : Bool
+    fixedIffGenusZeroRecovered : Bool
     sameObjectSpecialFibreEqualityRequired : Bool
     properFlatGenusTransportRequired : Bool
     finiteFrickeTableUsed : Bool
@@ -158,6 +198,8 @@ canonicalPrimeLevelDeligneRapoportFrickeSelectorBoundary = record
   { finitePairedOrbitQuotientDerived = true
   ; canonicalNodalDualGraphDerived = true
   ; arithmeticGenusEqualsPairCountDerived = true
+  ; duplicatePairCountAuthorityEliminated = true
+  ; fixedIffGenusZeroRecovered = true
   ; sameObjectSpecialFibreEqualityRequired = true
   ; properFlatGenusTransportRequired = true
   ; finiteFrickeTableUsed = false
