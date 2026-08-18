@@ -37,13 +37,63 @@ morphologyPlusJunctionStrictlyRefinesMorphology =
     Topology.sameVisibleMorphology
     Topology.hiddenTopologyDiffers
 
+withoutWithJunctionDistinct :
+  Topology.withoutJunction ≡ Topology.withJunction → ⊥
+withoutWithJunctionDistinct same =
+  Topology.hiddenTopologyDiffers (cong Topology.junction same)
+
+morphologyCollision :
+  Observer.ObserverCollision Topology.morphologyProjection
+morphologyCollision =
+  Observer.observerCollision
+    Topology.withoutJunction
+    Topology.withJunction
+    Topology.sameVisibleMorphology
+    withoutWithJunctionDistinct
+
 morphologyProjectionCannotSeparateGraphState :
   Observer.Separating Topology.morphologyProjection → ⊥
 morphologyProjectionCannotSeparateGraphState =
-  Observer.strictFamilyRefinementBlocksCoarseSeparation
-    (Observer.strictFamilyRefinement
-      (λ x y pairSame → cong proj₁ pairSame)
-      Topology.withoutJunction
-      Topology.withJunction
-      Topology.sameVisibleMorphology
-      (λ pairSame → Topology.hiddenTopologyDiffers (cong proj₂ pairSame)))
+  Observer.collisionBlocksSeparation morphologyCollision
+
+morphologyJunctionSeparatesGraphState :
+  Observer.Separating morphologyJunctionObserver
+morphologyJunctionSeparatesGraphState
+  (Topology.graphDevelopmentalState leftMorph leftJunction)
+  (Topology.graphDevelopmentalState rightMorph rightJunction)
+  same
+  with cong proj₁ same | cong proj₂ same
+... | refl | refl = refl
+
+morphologyJunctionIsFutureLanguageSafe :
+  DASHI.Core.FutureObservationLanguageQuotientExact.FutureLanguageSafeProjection
+    Topology.system
+    Topology.morphologyProjection
+    morphologyJunctionObserver
+morphologyJunctionIsFutureLanguageSafe =
+  FutureBridge.separatingObserverIsFutureLanguageSafe
+    morphologyJunctionSeparatesGraphState
+
+record DynamicTopologyObserverRefinementBoundary : Set where
+  constructor dynamicTopologyObserverRefinementBoundary
+  field
+    morphologyAloneCollides : Bool
+    morphologyAloneCollidesIsTrue : morphologyAloneCollides ≡ true
+    junctionStrictlyRefinesMorphology : Bool
+    junctionStrictlyRefinesMorphologyIsTrue :
+      junctionStrictlyRefinesMorphology ≡ true
+    morphologyJunctionSeparatesCurrentState : Bool
+    morphologyJunctionSeparatesCurrentStateIsTrue :
+      morphologyJunctionSeparatesCurrentState ≡ true
+    separatingRefinementIsFutureSafeForMorphologyLanguage : Bool
+    separatingRefinementIsFutureSafeForMorphologyLanguageIsTrue :
+      separatingRefinementIsFutureSafeForMorphologyLanguage ≡ true
+
+canonicalDynamicTopologyObserverRefinementBoundary :
+  DynamicTopologyObserverRefinementBoundary
+canonicalDynamicTopologyObserverRefinementBoundary =
+  dynamicTopologyObserverRefinementBoundary
+    true refl
+    true refl
+    true refl
+    true refl
