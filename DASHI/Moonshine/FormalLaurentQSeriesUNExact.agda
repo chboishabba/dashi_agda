@@ -17,12 +17,6 @@ module DASHI.Moonshine.FormalLaurentQSeriesUNExact where
 --   c_n(f | U_N) = c_{nN}(f)
 --
 -- for signed Laurent indices n.
---
--- DASHI CONTRIBUTION
---
--- Construct that signed formal carrier and U_N coefficient selector.  The
--- earlier Nat-indexed FormalQSeries operator remains useful for holomorphic
--- oldforms, but is not promoted to the modular-function carrier used here.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -31,16 +25,8 @@ open import Data.Integer using (ℤ; +_; -[1+_])
   renaming (_*_ to _*ℤ_)
 import Data.Integer.Tactic.RingSolver as ℤRing
 
-------------------------------------------------------------------------
--- Signed Laurent coefficient carrier.
-------------------------------------------------------------------------
-
 FormalLaurentQSeries : Set
 FormalLaurentQSeries = ℤ → ℤ
-
-------------------------------------------------------------------------
--- Coefficient-selection U_N.
-------------------------------------------------------------------------
 
 UN : Nat → FormalLaurentQSeries → FormalLaurentQSeries
 UN N f n = f ((+ N) *ℤ n)
@@ -69,10 +55,6 @@ uCompositionCommutesAt M N f n =
     (uCompositionAt M N f n)
     (sym (uCompositionAt N M f n))
 
-------------------------------------------------------------------------
--- Normalized Hauptmodul principal-part observations.
-------------------------------------------------------------------------
-
 minusOne : ℤ
 minusOne = -[1+ 0 ]
 
@@ -90,21 +72,14 @@ record NormalizedPrincipalPart (f : FormalLaurentQSeries) : Set where
 open NormalizedPrincipalPart public
 
 ------------------------------------------------------------------------
--- U_N moves the source coefficient at -N onto output coefficient -1.
--- This is exactly why a level-lowered modular function can acquire/read a
--- principal part from a deeper negative source coefficient.
+-- For POSITIVE level N=suc k, U_N moves source coefficient -N onto output -1.
 ------------------------------------------------------------------------
 
-uNMinusOneReadsMinusN :
-  (N : Nat) → (f : FormalLaurentQSeries) →
-  UN N f minusOne ≡ f (-[1+ (N - 1) ])
-uNMinusOneReadsMinusN 0 f = refl
-uNMinusOneReadsMinusN (suc N) f =
-  cong f (ℤRing.solve ((+ (suc N)) ∷ []))
-
-------------------------------------------------------------------------
--- Same coefficientwise-equality discipline as the Nat-indexed operator.
-------------------------------------------------------------------------
+uPositiveMinusOneReadsNegativeLevel :
+  (k : Nat) → (f : FormalLaurentQSeries) →
+  UN (suc k) f minusOne ≡ f (-[1+ k ])
+uPositiveMinusOneReadsNegativeLevel k f =
+  cong f (ℤRing.solve ((+ (suc k)) ∷ []))
 
 uPointwiseCong :
   (N : Nat) → (f g : FormalLaurentQSeries) →
@@ -119,6 +94,7 @@ record FormalLaurentQSeriesUNBoundary : Set where
     signedUNCoefficientSelectionConstructed : Bool
     compositionProvedCoefficientwise : Bool
     normalizedPrincipalPartObserverConstructed : Bool
+    positiveLevelPrincipalPartReadoutProved : Bool
     NatIndexedOldformCarrierReusedAsModularFunctionCarrier : Bool
     analyticModularityProvedHere : Bool
 
@@ -129,6 +105,7 @@ canonicalFormalLaurentQSeriesUNBoundary = record
   ; signedUNCoefficientSelectionConstructed = true
   ; compositionProvedCoefficientwise = true
   ; normalizedPrincipalPartObserverConstructed = true
+  ; positiveLevelPrincipalPartReadoutProved = true
   ; NatIndexedOldformCarrierReusedAsModularFunctionCarrier = false
   ; analyticModularityProvedHere = false
   }
