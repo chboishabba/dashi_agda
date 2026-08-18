@@ -41,10 +41,12 @@ import DASHI.Physics.Closure.NSTriadKNOrderedEuclideanL2Carrier as L2
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as RationalL2
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNLuoPhysicalFiveClassSupportRound25Exact as Support
+import DASHI.Physics.Closure.NSTriadKNGlobalBilinearShellPairingRound29Exact as Shell
 import DASHI.Physics.Closure.NSTriadKNStaticPairingEmitsStructuredTriadicAtomsRound72Exact as Fine
 import DASHI.Physics.Closure.NSTriadKNFactorizedEffectiveComplexityCauchyRound72Exact as Effective
 import DASHI.Physics.Closure.NSTriadKNOrderedInteractionRealImaginaryTwoChannelRound74Exact as Channels
 import DASHI.Physics.Closure.NSTriadKNOrderedInteractionTwoChannelMassIdentityRound74Exact as Mass
+import DASHI.Physics.Closure.NSTriadKNTwoChannelStructuredCauchyOverlayRound74Exact as Overlay
 import DASHI.Physics.Closure.NSTriadKNRationalComplex3LerayPythagoras as Leray
 import DASHI.Physics.Closure.NSTriadKNCanonicalTwoChannelPhysicalMassBoundsRound75Exact as Bounds
 import DASHI.Physics.Closure.NSTriadKNStaticRationalTwoChannelOverlayRound75Exact as Static
@@ -101,15 +103,14 @@ factorChargeFromClassifiedExact :
   ∀ {E : C3.IntegerEmbedding F}
     {I : C3.ModeInverseSquare F E}
     (system : Audit.FiniteComplex3GalerkinSystem F E I)
-    (pairing : DASHI.Physics.Closure.NSTriadKNGlobalBilinearShellPairingRound29Exact.StaticPhysicalShellPairing)
+    (pairing : Shell.StaticPhysicalShellPairing)
     (hh : Fine.HHOwnerSelection)
     (classified : List Support.ClassifiedPhysicalTriad)
     (valuesExact : ∀ selected →
-      DASHI.Physics.Closure.NSTriadKNGlobalBilinearShellPairingRound29Exact.triadValue pairing
-        (Support.incidence selected)
+      Shell.triadValue pairing (Support.incidence selected)
       ≡ Static.literalRationalTriadValue system (Support.incidence selected)) →
   Effective.concentrationCharge
-    (DASHI.Physics.Closure.NSTriadKNTwoChannelStructuredCauchyOverlayRound74Exact.twoChannelFactors
+    (Overlay.twoChannelFactors
       (Static.twoChannelOverlayFromClassified
         system pairing hh classified valuesExact))
   ≡ canonicalQSum system classified
@@ -137,15 +138,14 @@ factorComplexityFromClassifiedExact :
   ∀ {E : C3.IntegerEmbedding F}
     {I : C3.ModeInverseSquare F E}
     (system : Audit.FiniteComplex3GalerkinSystem F E I)
-    (pairing : DASHI.Physics.Closure.NSTriadKNGlobalBilinearShellPairingRound29Exact.StaticPhysicalShellPairing)
+    (pairing : Shell.StaticPhysicalShellPairing)
     (hh : Fine.HHOwnerSelection)
     (classified : List Support.ClassifiedPhysicalTriad)
     (valuesExact : ∀ selected →
-      DASHI.Physics.Closure.NSTriadKNGlobalBilinearShellPairingRound29Exact.triadValue pairing
-        (Support.incidence selected)
+      Shell.triadValue pairing (Support.incidence selected)
       ≡ Static.literalRationalTriadValue system (Support.incidence selected)) →
   Effective.effectiveComplexity
-    (DASHI.Physics.Closure.NSTriadKNTwoChannelStructuredCauchyOverlayRound74Exact.twoChannelFactors
+    (Overlay.twoChannelFactors
       (Static.twoChannelOverlayFromClassified
         system pairing hh classified valuesExact))
   ≡ canonicalWSum system classified
@@ -177,12 +177,10 @@ canonicalQSumBelowEnergyMajorant :
   canonicalQSum system classified ≤ qEnergyMajorant system classified
 canonicalQSumBelowEnergyMajorant system [] = ℚP.≤-refl
 canonicalQSumBelowEnergyMajorant system (classified ∷ rest) =
-  let
-    incidence = Support.incidence classified
-    local = Bounds.orderedInteractionCanonicalQBound system incidence
-    tail = canonicalQSumBelowEnergyMajorant system rest
-  in
-  ℚP.+-mono-≤ local tail
+  ℚP.+-mono-≤
+    (Bounds.orderedInteractionCanonicalQBound
+      system (Support.incidence classified))
+    (canonicalQSumBelowEnergyMajorant system rest)
 
 canonicalWSumBelowEnergyMajorant :
   ∀ {E : C3.IntegerEmbedding F}
@@ -194,14 +192,12 @@ canonicalWSumBelowEnergyMajorant :
   canonicalWSum system classified ≤ wEnergyMajorant system classified
 canonicalWSumBelowEnergyMajorant O system [] nonzero = ℚP.≤-refl
 canonicalWSumBelowEnergyMajorant O system (classified ∷ rest) nonzero =
-  let
-    incidence = Support.incidence classified
-    local = Bounds.orderedInteractionCanonicalWBound
-      O system incidence (nonzero classified) (Static.outputVelocityTest system incidence)
-    tail = canonicalWSumBelowEnergyMajorant
-      O system rest (λ selected → nonzero selected)
-  in
-  ℚP.+-mono-≤ local tail
+  ℚP.+-mono-≤
+    (Bounds.orderedInteractionCanonicalWBound
+      O system (Support.incidence classified) (nonzero classified)
+      (Static.outputVelocityTest system (Support.incidence classified)))
+    (canonicalWSumBelowEnergyMajorant
+      O system rest (λ selected → nonzero selected))
 
 round75OverlayChargeEqualsCanonicalQSum : Bool
 round75OverlayChargeEqualsCanonicalQSum = true
