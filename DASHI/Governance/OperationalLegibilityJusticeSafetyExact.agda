@@ -20,48 +20,36 @@ import DASHI.Core.AdmissibleReachability as Reachability
 import DASHI.Core.PolicyRelativeProjectionSafety as Policy
 import DASHI.Governance.InstitutionalTechniqueTransferCore as Technique
 
-------------------------------------------------------------------------
--- Concrete operational legibility loop over the existing finite policy model.
-------------------------------------------------------------------------
-
 resolveDemoEntity : List Policy.DemoState → Policy.DemoState
 resolveDemoEntity [] = Policy.leftNow
 resolveDemoEntity (state ∷ rest) = state
 
 canonicalOperationalLegibilitySystem : Technique.OperationalLegibilitySystem
 canonicalOperationalLegibilitySystem = record
-  { Technique.OperationalLegibilitySystem.Trace = Policy.DemoState
-  ; Technique.OperationalLegibilitySystem.Entity = Policy.DemoState
-  ; Technique.OperationalLegibilitySystem.Relation = ⊤
-  ; Technique.OperationalLegibilitySystem.Classification = Bool
-  ; Technique.OperationalLegibilitySystem.Intervention = Policy.DemoAction
-  ; Technique.OperationalLegibilitySystem.resolveEntity = resolveDemoEntity
-  ; Technique.OperationalLegibilitySystem.inferRelations =
-      λ entity traces → []
-  ; Technique.OperationalLegibilitySystem.classify =
-      λ entity relations → Policy.demoProject entity
-  ; Technique.OperationalLegibilitySystem.intervene =
-      λ entity classification → Policy.reveal
+  { Trace = Policy.DemoState
+  ; Entity = Policy.DemoState
+  ; Relation = ⊤
+  ; Classification = Bool
+  ; Intervention = Policy.DemoAction
+  ; resolveEntity = resolveDemoEntity
+  ; inferRelations = λ entity traces → []
+  ; classify = λ entity relations → Policy.demoProject entity
+  ; intervene = λ entity classification → Policy.reveal
   }
 
 canonicalClosedOperationalLoop :
   Technique.ClosedOperationalLoop canonicalOperationalLegibilitySystem
 canonicalClosedOperationalLoop = record
-  { Technique.ClosedOperationalLoop.traces = Policy.leftNow ∷ []
-  ; Technique.ClosedOperationalLoop.entity = Policy.leftNow
-  ; Technique.ClosedOperationalLoop.relations = []
-  ; Technique.ClosedOperationalLoop.classification = false
-  ; Technique.ClosedOperationalLoop.intervention = Policy.reveal
-  ; Technique.ClosedOperationalLoop.entityResolved = refl
-  ; Technique.ClosedOperationalLoop.relationsInferred = refl
-  ; Technique.ClosedOperationalLoop.classificationProduced = refl
-  ; Technique.ClosedOperationalLoop.interventionProduced = refl
+  { traces = Policy.leftNow ∷ []
+  ; entity = Policy.leftNow
+  ; relations = []
+  ; classification = false
+  ; intervention = Policy.reveal
+  ; entityResolved = refl
+  ; relationsInferred = refl
+  ; classificationProduced = refl
+  ; interventionProduced = refl
   }
-
-------------------------------------------------------------------------
--- A reveal-selecting coarse policy exposes the exact quotient defect already
--- latent in PolicyRelativeProjectionSafety's demo state system.
-------------------------------------------------------------------------
 
 revealPolicy : Policy.CoarseInterventionPolicy Bool Policy.DemoAction
 revealPolicy = Policy.coarseInterventionPolicy (λ observation → Policy.reveal)
