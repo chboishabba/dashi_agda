@@ -38,24 +38,32 @@ module DASHI.Moonshine.MarkedOldspaceGeometricOggFrontierEverything where
 --   the K(2)-fixed and K_0(4)-fixed models definitionally equal.
 --
 -- OGG SELECTOR SIDE
---   generic count algebra proves pair defect = Fricke genus once the standard
---   supersingular/Fricke count identities are supplied;
---   stronger geometric route: one rational special-fibre component with one
---   node per quadratic supersingular pair has arithmetic genus equal to the
---   pair count, hence flat genus preservation gives
+--   The finite quotient geometry has now advanced beyond a count interface.
+--   From any ACTUAL supersingular Frobenius normal-form realization we derive:
 --
---       g(X0+(p)) = Frobenius pair defect.
+--     * one quotient-node coordinate per nonfixed Frobenius pair;
+--     * four oriented Deligne--Rapoport local branches over a quadratic pair;
+--     * exactly two Fricke branch-orbits over one quotient-node coordinate;
+--     * one rational dual-graph vertex and one loop edge per pair;
+--     * arithmetic genus = Frobenius pair count.
 --
---   The same-object involution/special-fibre weld further proves, without the
---   finite Ogg control table,
+--   The global selector therefore requires only TWO source-facing equalities:
 --
---       Frobenius pointwise fixed <=> g(X0+(p)) = 0
+--     actual Fricke special fibre
+--       = derived Frobenius-pair nodal model,
 --
---   whenever the actual supersingular involution normal form and actual nodal
---   Fricke special fibre are tied by equality of their pair counts.
+--     generic Fricke genus
+--       = arithmetic genus of that proper-flat special fibre.
 --
---   Remaining seam: construct that Deligne--Rapoport/Fricke + supersingular
---   Frobenius geometry for arbitrary p on the actual modular-curve carrier.
+--   Once supplied, pair defect = g(X0+(p)) follows.  The older table-free
+--   pointwise-fixed selector is recovered automatically, and its former
+--   independent pairCountSameObject premise disappears because both counts now
+--   descend from the SAME finite involution normal form.
+--
+--   Remaining seam: construct the actual Deligne--Rapoport modular scheme /
+--   Fricke quotient same-object theorem and proper-flat genus transport for
+--   arbitrary p.  The finite Fricke/class-number Ogg table is not used by this
+--   geometric proof interface.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -74,6 +82,11 @@ import DASHI.Moonshine.SupersingularFrobeniusFrickeGenusReductionRegression as C
 import DASHI.Moonshine.RationalNodalSpecialFibreGenusExact as Nodal
 import DASHI.Moonshine.SupersingularFrickeSpecialFibreSelectorExact as Geometric
 import DASHI.Moonshine.FrickeSpecialFibreFrobeniusFixedSelectorExact as FixedSelector
+import DASHI.Foundations.FiniteInvolutionPairedOrbitQuotientExact as PairQuot
+import DASHI.Moonshine.PrimeLevelDeligneRapoportFrickeCombinatoricsExact as DRComb
+import DASHI.Moonshine.DeligneRapoportFrickeLocalNodeExact as DRLocal
+import DASHI.Moonshine.PrimeLevelDeligneRapoportFrickeSelectorExact as DRSelector
+import DASHI.Moonshine.DeligneRapoportFrickeCombinatoricsRegression as DRReg
 
 wholeOldspaceRegression :
   {D : Same.Level44DegeneracyTriple} {ell : Nat} →
@@ -147,3 +160,42 @@ finiteOggTableNotUsedInGeometricFixedSelectorRegression :
   FixedSelector.finiteOggControlTableUsed
     FixedSelector.canonicalFrickeFrobeniusFixedSelectorBoundary ≡ false
 finiteOggTableNotUsedInGeometricFixedSelectorRegression = refl
+
+------------------------------------------------------------------------
+-- New Deligne--Rapoport quotient-node regressions.
+------------------------------------------------------------------------
+
+p37DerivedNodalGenusRegression :
+  Nodal.arithmeticGenus
+    (DRComb.canonicalFrickeQuotientDualGraph DRReg.p37DRData) ≡ 1
+p37DerivedNodalGenusRegression = DRReg.p37DerivedQuotientArithmeticGenus
+
+p43DerivedNodalGenusRegression :
+  Nodal.arithmeticGenus
+    (DRComb.canonicalFrickeQuotientDualGraph DRReg.p43DRData) ≡ 1
+p43DerivedNodalGenusRegression = DRReg.p43DerivedQuotientArithmeticGenus
+
+localQuadraticPairHasTwoQuotientBranchesRegression :
+  (index : Data.Fin.Fin 1) →
+  DRLocal.quotientBranch (DRLocal.branch0Section index)
+  ≡ DRLocal.quotientBranch0
+localQuadraticPairHasTwoQuotientBranchesRegression =
+  DRLocal.branch0SectionHasType
+
+derivedSelectorRegression :
+  (A : DRSelector.PrimeLevelFrickeSpecialFibreAuthority) →
+  DRSelector.genericFrickeGenus A
+  ≡ DRComb.pairedCount (DRSelector.supersingularFrobenius A)
+derivedSelectorRegression = DRSelector.genericFrickeGenusEqualsDeclaredPairDefect
+
+derivedFixedIffGenusZeroRegression :
+  (A : DRSelector.PrimeLevelFrickeSpecialFibreAuthority) →
+  DRSelector.GeometricallyFullyFixed A
+  ↔ DRSelector.genericFrickeGenus A ≡ 0
+derivedFixedIffGenusZeroRegression =
+  DRSelector.frobeniusFullyFixedIffGenericFrickeGenusZero
+
+duplicatePairAuthorityEliminatedRegression :
+  DRSelector.duplicatePairCountAuthorityEliminated
+    DRSelector.canonicalPrimeLevelDeligneRapoportFrickeSelectorBoundary ≡ true
+duplicatePairAuthorityEliminatedRegression = refl
