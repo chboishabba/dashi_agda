@@ -241,7 +241,7 @@ plusMinusDefectsOppositeOnCommon :
   ≡ Int.-_
     (Transverse.defect
       (Transverse.principalSplit
-        (minusPrincipalU2 (Intersection.principalCommon c)))
+        (minusPrincipalU2 (Intersection.principalCommon c))))
 plusMinusDefectsOppositeOnCommon (Intersection.common2 a b) =
   ℤRing.solve (a ∷ b ∷ [])
 
