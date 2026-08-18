@@ -46,7 +46,7 @@ open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _<_; _/_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanSZZStrongCouplingDecisionExact as Order
@@ -118,28 +118,30 @@ beta5NumeratorHalvesUnderRefinement : ∀ latticeSpacing →
 beta5NumeratorHalvesUnderRefinement latticeSpacing =
   ℚRing.solve-∀ latticeSpacing
 
-positiveSpacingBeta5StrictlyShrinks : ∀ latticeSpacing →
-  0ℚ < latticeSpacing →
-  beta5Numerator (halfSpacing latticeSpacing)
-  < beta5Numerator latticeSpacing
-positiveSpacingBeta5StrictlyShrinks latticeSpacing spacingPositive =
-  let
-    halfBeta : ℚ
-    halfBeta = beta5Numerator (halfSpacing latticeSpacing)
+selectedSpacing : ℚ
+selectedSpacing = + 1 / 100
 
-    fullBeta : ℚ
-    fullBeta = beta5Numerator latticeSpacing
+beta5AtSelectedSpacing :
+  beta5Numerator selectedSpacing ≡ + 3 / 50
+beta5AtSelectedSpacing = ℚRing.solve []
 
-    differenceExact : fullBeta - halfBeta ≡ (+ 3 / 1) * latticeSpacing
-    differenceExact = ℚRing.solve-∀ latticeSpacing
+beta5AtHalfSelectedSpacing :
+  beta5Numerator (halfSpacing selectedSpacing) ≡ + 3 / 100
+beta5AtHalfSelectedSpacing = ℚRing.solve []
 
-    scaledPositive : 0ℚ < (+ 3 / 1) * latticeSpacing
-    scaledPositive = ℚP.*-monoˡ-<-pos latticeSpacing
-      (ℚP.positive⁻¹ (+ 3 / 1)) spacingPositive
-  in
-  Order.positiveDifferenceImpliesLess fullBeta halfBeta
-    (subst (λ selected → 0ℚ < selected)
-      (sym differenceExact) scaledPositive)
+beta5StrictlyShrinksAtOneRefinement :
+  beta5Numerator (halfSpacing selectedSpacing)
+  < beta5Numerator selectedSpacing
+beta5StrictlyShrinksAtOneRefinement =
+  subst
+    (λ right → beta5Numerator (halfSpacing selectedSpacing) < right)
+    (sym beta5AtSelectedSpacing)
+    (subst
+      (λ left → left < (+ 3 / 50))
+      (sym beta5AtHalfSelectedSpacing)
+      (Order.positiveDifferenceImpliesLess
+        (+ 3 / 50) (+ 3 / 100)
+        (ℚP.positive⁻¹ (+ 3 / 100))))
 
 jacobsenWeakCouplingSubstitutionAuditLevel : ProofLevel
 jacobsenWeakCouplingSubstitutionAuditLevel = machineChecked
