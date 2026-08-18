@@ -108,7 +108,7 @@ classifyPrime 1 prime = ⊥-elim (notPrime1 prime)
 classifyPrime 2 prime = exceptional2
 classifyPrime 3 prime = exceptional3
 classifyPrime 4 prime = ⊥-elim (notPrime4 prime)
-classifyPrime (5 + n) prime =
+classifyPrime (suc (suc (suc (suc (suc n))))) prime =
   primeAtLeast5 (5 + n) prime (NatP.m≤m+n 5 n)
 
 classifiedLevelIsOriginal :
@@ -119,7 +119,7 @@ classifiedLevelIsOriginal 1 prime = ⊥-elim (notPrime1 prime)
 classifiedLevelIsOriginal 2 prime = refl
 classifiedLevelIsOriginal 3 prime = refl
 classifiedLevelIsOriginal 4 prime = ⊥-elim (notPrime4 prime)
-classifiedLevelIsOriginal (5 + n) prime = refl
+classifiedLevelIsOriginal (suc (suc (suc (suc (suc n))))) prime = refl
 
 ------------------------------------------------------------------------
 -- Arbitrary-prime public surface.
@@ -139,7 +139,8 @@ primeMonsterImpliesFrickeGenusZero 2 prime divides =
 primeMonsterImpliesFrickeGenusZero 3 prime divides =
   caseMonsterImpliesFrickeGenusZero exceptional3 divides
 primeMonsterImpliesFrickeGenusZero 4 prime divides = ⊥-elim (notPrime4 prime)
-primeMonsterImpliesFrickeGenusZero (5 + n) prime divides =
+primeMonsterImpliesFrickeGenusZero
+  (suc (suc (suc (suc (suc n))))) prime divides =
   caseMonsterImpliesFrickeGenusZero
     (primeAtLeast5 (5 + n) prime (NatP.m≤m+n 5 n))
     divides
@@ -155,7 +156,8 @@ primeFrickeGenusZeroImpliesMonster 2 prime genusZero =
 primeFrickeGenusZeroImpliesMonster 3 prime genusZero =
   caseFrickeGenusZeroImpliesMonster exceptional3 genusZero
 primeFrickeGenusZeroImpliesMonster 4 prime genusZero = ⊥-elim (notPrime4 prime)
-primeFrickeGenusZeroImpliesMonster (5 + n) prime genusZero =
+primeFrickeGenusZeroImpliesMonster
+  (suc (suc (suc (suc (suc n))))) prime genusZero =
   caseFrickeGenusZeroImpliesMonster
     (primeAtLeast5 (5 + n) prime (NatP.m≤m+n 5 n))
     genusZero
