@@ -27,8 +27,8 @@ module DASHI.Physics.Closure.NSTriadKNPressureAlignmentDefectNonnegativeRound78E
 -- Exact alignment with the smallest pressure-Hessian eigenvector therefore
 -- maximizes the deviatoric enabling contribution for a fixed spectrum and
 -- enstrophy.  Imperfect alignment can only reduce the pressure spectral bracket.
--- This is an exact pointwise spectral theorem; no DNS alignment statistics are
--- needed for the inequality.
+-- Consequently, if even the exact-alignment bracket is nonpositive, EVERY
+-- normalized orientation on the same ordered spectrum is pressure-depleting.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -113,11 +113,30 @@ pressureBracketWithDefectBelowExactAlignedBracket
     (- Iso.oneSixth * (enstrophy - strainIntensity))
     (imperfectAlignmentDeviatoricEnableBelowExactAlignment ordered)
 
+exactAlignedBracketNonpositiveForcesAllOrientationsNonpositive :
+  ∀ enstrophy strainIntensity {alignment} →
+  OrderedNonnegativePressureAlignment alignment →
+  Aligned.pressureSpectralBracket
+      enstrophy strainIntensity (Defect.lambda3 alignment)
+    ≤ 0ℚ →
+  Spectral.pressureBracketWithAlignmentDefect
+      enstrophy strainIntensity alignment
+    ≤ 0ℚ
+exactAlignedBracketNonpositiveForcesAllOrientationsNonpositive
+    enstrophy strainIntensity {alignment} ordered aligned≤0 =
+  ℚP.≤-trans
+    (pressureBracketWithDefectBelowExactAlignedBracket
+      enstrophy strainIntensity ordered)
+    aligned≤0
+
 round78AlignmentDefectNonnegativeForOrderedSpectrum : Bool
 round78AlignmentDefectNonnegativeForOrderedSpectrum = true
 
 round78ExactSmallestEigenvectorAlignmentMaximizesPressureEnable : Bool
 round78ExactSmallestEigenvectorAlignmentMaximizesPressureEnable = true
+
+round78NonpositiveExactAlignedBracketKillsPressureEnableForAllOrientations : Bool
+round78NonpositiveExactAlignedBracketKillsPressureEnableForAllOrientations = true
 
 round78ExactSmallestEigenvectorAlignmentMaximizesPressureEnableIsTrue :
   round78ExactSmallestEigenvectorAlignmentMaximizesPressureEnable ≡ true
