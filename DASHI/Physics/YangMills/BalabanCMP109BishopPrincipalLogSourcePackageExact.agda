@@ -46,44 +46,40 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 record CMP109BishopPrincipalLogSourcePackage
     {dataSet}
     (inputs : Concrete.ConcreteHalfBallSeriesInputs
-      dataSet Source.sourceRadiusValue)
-    (sourceRadiusPositive :
-      BishopReal._<_ BishopReal.0ℝ Source.sourceRadiusValue) : Set where
+      dataSet Source.sourceRadiusValue) : Set where
   field
     endpointDefectNonnegative :
       BishopReal._≤_ BishopReal.0ℝ
-        (Endpoint.coefficientEndpointDefect inputs sourceRadiusPositive)
+        (Endpoint.coefficientEndpointDefect
+          inputs Source.sourceRadiusPositive)
 
     endpointDefectBelowOne14400 :
       BishopReal._≤_
-        (Endpoint.coefficientEndpointDefect inputs sourceRadiusPositive)
+        (Endpoint.coefficientEndpointDefect
+          inputs Source.sourceRadiusPositive)
         (Source.embed Source.sourceEndpointAllowance)
 
     symmetricCoefficientAboveTwentyThreeTwentyFourth :
       BishopReal._≤_
         (Symmetric.embed Symmetric.twentyThreeTwentyFourth)
         (Symmetric.principalLogSymmetricCoefficient
-          inputs (Positive.positiveRadius sourceRadiusPositive))
+          inputs (Positive.positiveRadius Source.sourceRadiusPositive))
 
 open CMP109BishopPrincipalLogSourcePackage public
 
 cmp109BishopPrincipalLogSourcePackage :
   ∀ {dataSet}
     (inputs : Concrete.ConcreteHalfBallSeriesInputs
-      dataSet Source.sourceRadiusValue)
-    (sourceRadiusPositive :
-      BishopReal._<_ BishopReal.0ℝ Source.sourceRadiusValue) →
-  CMP109BishopPrincipalLogSourcePackage inputs sourceRadiusPositive
-cmp109BishopPrincipalLogSourcePackage inputs sourceRadiusPositive = record
+      dataSet Source.sourceRadiusValue) →
+  CMP109BishopPrincipalLogSourcePackage inputs
+cmp109BishopPrincipalLogSourcePackage inputs = record
   { endpointDefectNonnegative =
-      Source.sourceRadiusCoefficientEndpointNonnegative
-        inputs sourceRadiusPositive
+      Source.sourceRadiusCoefficientEndpointNonnegative inputs
   ; endpointDefectBelowOne14400 =
-      Source.sourceRadiusCoefficientEndpointModulus
-        inputs sourceRadiusPositive
+      Source.sourceRadiusCoefficientEndpointModulus inputs
   ; symmetricCoefficientAboveTwentyThreeTwentyFourth =
       Symmetric.principalLogSymmetricCoefficientAboveTwentyThreeTwentyFourth
-        inputs (Positive.positiveRadius sourceRadiusPositive)
+        inputs (Positive.positiveRadius Source.sourceRadiusPositive)
   }
 
 cmp109BishopPrincipalLogSourceQuantitativePackageLevel : ProofLevel
