@@ -24,13 +24,13 @@ module DASHI.Physics.Closure.NSTriadKNProjectedNonlinearityFirstVariationRound82
 -- finite.  We therefore obtain an exact polynomial expansion
 --
 --   N(u+v)
---     = B(u,u) + B(u,v) + B(v,u) + B(v,v),
+--     = N(u) + DN(u)[v] + B(v,v),
 --
--- with `projectedNonlinearityFirstVariation` equal to the two mixed terms.
--- The final B(v,v) term is the exact quadratic remainder.  The remaining C4
--- task is no longer to invent/assume DN; it is to identify the selected packet
--- transfer derivative built from this literal first variation and prove the
--- required physical relative-growth estimate.
+-- with `projectedNonlinearityFirstVariation` equal to the two mixed terms and
+-- `projectedNonlinearityQuadraticRemainder` equal to the exact B(v,v) remainder.
+-- The remaining C4 task is no longer to invent/assume DN; it is to identify the
+-- selected packet-transfer derivative built from this literal first variation
+-- and prove the required physical relative-growth estimate.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Level)
@@ -47,10 +47,6 @@ import DASHI.Physics.Closure.NSTriadKNComplex3FieldAlgebra as Field
 import DASHI.Physics.Closure.NSTriadKNComplex3HermitianAdditiveLaws as Additive
 import DASHI.Physics.Closure.NSTriadKNExactSignedGalerkinCoefficient as Signed
 import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
-
-------------------------------------------------------------------------
--- Small exact C3 linearity lemmas needed by the rank-one Leray formula.
-------------------------------------------------------------------------
 
 complex3AddZeroLeft :
   ∀ {r} {F : C3.RealField r} (u : C3.Complex3 F) →
@@ -81,6 +77,19 @@ complex3Interchange a b c d =
           (sym
             (Field.complex3AddAssociative
               a c (C3.complex3Add b d))))))
+
+complex3PolarizationReassociate :
+  ∀ {r} {F : C3.RealField r}
+    (a b c d : C3.Complex3 F) →
+  C3.complex3Add (C3.complex3Add a b) (C3.complex3Add c d)
+  ≡ C3.complex3Add (C3.complex3Add a (C3.complex3Add b c)) d
+complex3PolarizationReassociate a b c d =
+  trans
+    (Field.complex3AddAssociative a b (C3.complex3Add c d))
+    (trans
+      (cong (C3.complex3Add a)
+        (sym (Field.complex3AddAssociative b c d)))
+      (sym (Field.complex3AddAssociative a (C3.complex3Add b c) d)))
 
 complexNegateAdd :
   ∀ {r} {F : C3.RealField r}
@@ -210,10 +219,6 @@ lerayProjectAdd E I k u v =
     (complex3SubtractPairDistributes
       u v (lerayCorrection E I k u) (lerayCorrection E I k v))
 
-------------------------------------------------------------------------
--- Literal ordered interaction is bilinear in its two velocity inputs.
-------------------------------------------------------------------------
-
 minusI :
   ∀ {r} (F : C3.RealField r) → C3.Complex F
 minusI F = C3.complexNegate (C3.complexI F)
@@ -296,12 +301,8 @@ orderedInteractionAddRight {F = F} E I k p q u v w =
         (C3.lerayProject3 E I k first)
         (C3.lerayProject3 E I k second)))
 
-------------------------------------------------------------------------
--- Mixed finite output-fibre nonlinearity and exact polarization.
-------------------------------------------------------------------------
-
 VelocityField :
-  ∀ {r} (F : C3.RealField r) → Set
+  ∀ {r} (F : C3.RealField r) → Set r
 VelocityField F = Z3.FourierMode → C3.Complex3 F
 
 fieldAdd :
@@ -507,32 +508,12 @@ projectedNonlinearityPolarizationExact system perturbation output =
         (mixedProjectedNonlinearityAddRight system u u v output)
         (mixedProjectedNonlinearityAddRight system v u v output))
       (trans
-        (complex3Interchange uu uv vu vv)
-        (trans
-          (cong
-            (λ first → C3.complex3Add first (C3.complex3Add uv vv))
-            (Field.complex3AddCommutative uu vu))
-          (trans
-            (sym
-              (Field.complex3AddAssociative
-                vu uu (C3.complex3Add uv vv)))
-            (trans
-              (cong (C3.complex3Add vu)
-                (trans
-                  (Field.complex3AddAssociative uu uv vv)
-                  (cong
-                    (λ middle → C3.complex3Add middle vv)
-                    (Field.complex3AddCommutative uv vu))))
-              (trans
-                (Field.complex3AddAssociative
-                  vu (C3.complex3Add uu vu) vv)
-                (cong
-                  (λ first → C3.complex3Add first vv)
-                  (trans
-                    (Field.complex3AddCommutative
-                      vu (C3.complex3Add uu vu))
-                    (sym
-                      (Field.complex3AddAssociative uu vu uv)))))))))))
+        (complex3PolarizationReassociate uu uv vu vv)
+        (cong
+          (λ base →
+            C3.complex3Add
+              (C3.complex3Add base (C3.complex3Add uv vu)) vv)
+          (sym (projectedNonlinearityAsMixedSelf system output)))))
 
 round82LiteralProjectedNonlinearityBilinear : Bool
 round82LiteralProjectedNonlinearityBilinear = true
