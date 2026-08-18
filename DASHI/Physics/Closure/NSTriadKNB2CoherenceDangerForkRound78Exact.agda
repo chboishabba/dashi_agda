@@ -40,6 +40,7 @@ open import Agda.Primitive using (Set)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
+open import Data.Rational.Base using (_≤_)
 
 import DASHI.Physics.Closure.NSMiddleEigenvalueDangerFork as Fork
 import DASHI.Physics.Closure.NSTriadKNFrameWeightedSupercriticalPropagationRound77Exact as Propagation
@@ -56,23 +57,23 @@ record QuantitativeDangerResolution
 
     biaxialDominates : Biaxial →
       Gate.crossModeNonlocalEnable decomposition
-      Gate.≤ Gate.pressureGeometryAndAllocationDepletion decomposition
+      ≤ Gate.pressureGeometryAndAllocationDepletion decomposition
 
     smallAlignmentDominates : AlignmentSmall →
       Gate.crossModeNonlocalEnable decomposition
-      Gate.≤ Gate.pressureGeometryAndAllocationDepletion decomposition
+      ≤ Gate.pressureGeometryAndAllocationDepletion decomposition
 
     turnoverDominates : Turnover →
       Gate.crossModeNonlocalEnable decomposition
-      Gate.≤ Gate.pressureGeometryAndAllocationDepletion decomposition
+      ≤ Gate.pressureGeometryAndAllocationDepletion decomposition
 
     lostTightnessDominates : Tail →
       Gate.crossModeNonlocalEnable decomposition
-      Gate.≤ Gate.pressureGeometryAndAllocationDepletion decomposition
+      ≤ Gate.pressureGeometryAndAllocationDepletion decomposition
 
     viscousDominates : Viscous →
       Gate.crossModeNonlocalEnable decomposition
-      Gate.≤ Gate.pressureGeometryAndAllocationDepletion decomposition
+      ≤ Gate.pressureGeometryAndAllocationDepletion decomposition
 
 open QuantitativeDangerResolution public
 
@@ -81,7 +82,7 @@ resolutionGivesDominance :
   QuantitativeDangerResolution
     {row = row} decomposition Biaxial AlignmentSmall Turnover Tail Viscous →
   Gate.crossModeNonlocalEnable decomposition
-  Gate.≤ Gate.pressureGeometryAndAllocationDepletion decomposition
+  ≤ Gate.pressureGeometryAndAllocationDepletion decomposition
 resolutionGivesDominance certificate with qualitative certificate
 ... | Fork.biaxialDepletion proof = biaxialDominates certificate proof
 ... | Fork.alignmentDepletion proof = smallAlignmentDominates certificate proof
