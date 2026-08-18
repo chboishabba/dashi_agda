@@ -1,6 +1,6 @@
 module DASHI.Ontology.ProgenitorParentProgressiveResidualFactorizationExact where
 
-open import DASHI.Core.Prelude using (Bool; _≡_; refl)
+open import DASHI.Core.Prelude using (Bool; true; _≡_; refl)
 import Data.Product as Product
 
 import DASHI.Core.RecoverableQuotientCompositionExact as Recoverable
@@ -212,4 +212,4 @@ record ParentProgressiveResidualBoundary : Set where
 
 canonicalParentProgressiveResidualBoundary : ParentProgressiveResidualBoundary
 canonicalParentProgressiveResidualBoundary =
-  parentProgressiveResidualBoundary true refl true refl true refl true refl
+  parentProgressiveResidualBoundary true refl true refl true refl
