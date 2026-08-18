@@ -38,9 +38,9 @@ module DASHI.Physics.YangMills.BalabanChargeRelativeG2AggregateRatioExact where
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Integer.Base using (+_)
-open import Data.Rational.Base as ℚ using (ℚ; _+_; _*_; -_; _/_)
+open import Data.Rational.Base as ℚ using (ℚ; _+_; _-_; _*_; -_; _/_)
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (trans)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
@@ -99,19 +99,14 @@ residualRatioCollapsesToAggregateGate :
   Charge.residualRatio dataSet ≡ residualRatioAggregate dataSet
 residualRatioCollapsesToAggregateGate dataSet =
   trans
-    (let
-      collapsed = greenRatioTotalCollapsesToTwoAggregates dataSet
-     in
-      cong
-        (λ green → Charge.rawRatioTotal dataSet - green)
-        collapsed)
+    (cong
+      (λ green → Charge.rawRatioTotal dataSet - green)
+      (greenRatioTotalCollapsesToTwoAggregates dataSet))
     (ℚRing.solve-∀
       (Charge.rawRatioTotal dataSet)
       (GreenSchur.energyCoefficient (Charge.rowBound dataSet))
       (sourceNormRatioTotal dataSet)
       (defectNormRatioTotal dataSet))
-  where
-  open import Relation.Binary.PropositionalEquality using (cong)
 
 chargeRelativeG2SixteenGreenCompressionLevel : ProofLevel
 chargeRelativeG2SixteenGreenCompressionLevel = machineChecked
