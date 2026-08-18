@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 
 import DASHI.Core.IntersectionalNonFactorability as Intersectional
 import DASHI.Culture.AmalekAuthorityProjectionBoundary as AmalekAuthority
+import DASHI.Governance.AuthorityPhaseSeparationExact as Phase
 import DASHI.Governance.AuthorityRoutingProjectionSafetyExact as Projection
 import DASHI.Governance.ExternalityCarrierAttractor as Externality
 import DASHI.Governance.InverseJusticeThroughputExact as Throughput
@@ -76,7 +77,7 @@ strictInverseEmbedsIntoNonCompensatoryOrder =
     Justice.violatingActionIsInverseJustice
 
 ------------------------------------------------------------------------
--- Situated routing and projection safety.
+-- Situated routing, phase separation and projection safety.
 ------------------------------------------------------------------------
 
 somePoliceNecessityStillDoesNotCreateDefault :
@@ -100,6 +101,19 @@ pseudoConsultationCannotEstablishCommunityGovernance :
   ⊥
 pseudoConsultationCannotEstablishCommunityGovernance =
   Routing.consultationDoesNotEstablishCommunityGovernance
+
+oneAuthoritySurfaceCannotDetermineAllPhases :
+  Intersectional.FactorsThrough
+    Phase.coarseAuthorityProjection
+    Phase.phaseAuthorityRole →
+  ⊥
+oneAuthoritySurfaceCannotDetermineAllPhases =
+  Phase.oneAuthoritySurfaceCannotDetermineEveryPhase
+
+phaseSeparatedAuthoritiesComposeCompatibly :
+  Phase.PhaseSeparatedCompatibleAuthorityComposition
+phaseSeparatedAuthoritiesComposeCompatibly =
+  Phase.CompatibleSituatedAuthoritiesCanComposeWithoutSovereigntyCollapse
 
 disturbanceSurfaceCannotDetermineSoundRoute :
   Projection.RoutingFactorisation
