@@ -1,6 +1,6 @@
 # Progenitor / Parent Hyperfabric
 
-This tranche separates generative provenance, parenthood, Wikidata representation, and disclosure rather than overloading one `ParentRole` or one property slot.
+This tranche separates generative provenance, parenthood, Wikidata representation, and disclosure rather than overloading one `ParentRole` or one property slot. It reuses the repository's existing fibre/provenance/PNF/identity-authority infrastructure rather than creating a parallel ontology stack.
 
 ## Carrier
 
@@ -22,6 +22,20 @@ This yields executable countermodels:
 - mitochondrial donor: progenitor/mitochondrial/genetic contribution without automatic parenthood.
 
 The concrete donor-conception family computes to **one genealogical parent and two genetic contributors**. This is the central witness that `Parent ≡ GeneticContributor` is not a valid ontology identity.
+
+## Existing DASHI infrastructure reused
+
+The tranche deliberately extends, rather than replaces:
+
+- `DASHI.Core.FibreRestrictionCore` for fine-carrier/coarse-surface/evidence restriction;
+- `DASHI.Core.ProvenanceBearingQuotient` for proof-relevant exact reopening;
+- `DASHI.Cognition.PNF.ReopenableEvidenceFibre` for the PNF quotient/reopening surface;
+- `DASHI.Cognition.PNF.ProofRelevantIdentityFibres` for authority-indexed identity projection;
+- `DASHI.Core.ConsumerIndexedRelevanceMeasure` for consumer-indexed relevance without world-truth promotion;
+- `DASHI.Reasoning.TypedHyperfabricCore` and `PNFEvidenceHyperformalism` for stalk/restriction/global-section semantics;
+- `DASHI.Biology.ParentAllyshipMultiObserverBridge` for plural situated observer fibres.
+
+The only generic theorem layers added here are the missing observer-refinement/fibre-dynamics structure and the quotient/predicate weld needed to state their interaction exactly.
 
 ## Latest JMD/Aristotle Lean bridge
 
