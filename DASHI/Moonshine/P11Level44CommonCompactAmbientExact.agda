@@ -52,7 +52,7 @@ module DASHI.Moonshine.P11Level44CommonCompactAmbientExact where
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
-open import Data.Integer using (ℤ; +_)
+open import Data.Integer using (ℤ)
 
 import DASHI.Moonshine.P11MarkedLevel44PermutationIntertwinerExact as Old
 import DASHI.Moonshine.P11Level44TwoAdicAveragingNoGoExact as Avg
@@ -78,6 +78,28 @@ compact6Ext
   (compact6 b0 b1 b2 b3 b4 b5)
   refl refl refl refl refl refl = refl
 
+old3Ext :
+  (u v : Old.Old3) →
+  Old.x1 u ≡ Old.x1 v →
+  Old.x2 u ≡ Old.x2 v →
+  Old.x4 u ≡ Old.x4 v →
+  u ≡ v
+old3Ext
+  (Old.old3 a b c)
+  (Old.old3 a' b' c')
+  refl refl refl = refl
+
+bruhat3Ext :
+  (u v : Avg.Bruhat3) →
+  Avg.wide u ≡ Avg.wide v →
+  Avg.left u ≡ Avg.left v →
+  Avg.right u ≡ Avg.right v →
+  u ≡ v
+bruhat3Ext
+  (Avg.bruhat3 a b c)
+  (Avg.bruhat3 a' b' c')
+  refl refl refl = refl
+
 ------------------------------------------------------------------------
 -- Principal K(2)-fixed embedding: constant on the three two-point orbits.
 ------------------------------------------------------------------------
@@ -90,10 +112,11 @@ principalCompactEmbedInjective :
   (u v : Old.Old3) →
   principalCompactEmbed u ≡ principalCompactEmbed v →
   u ≡ v
-principalCompactEmbedInjective
-  (Old.old3 x y z) (Old.old3 a b c) equality
-  with cong c0 equality | cong c1 equality | cong c4 equality
-... | refl | refl | refl = refl
+principalCompactEmbedInjective u v equality =
+  old3Ext u v
+    (cong c0 equality)
+    (cong c1 equality)
+    (cong c4 equality)
 
 ------------------------------------------------------------------------
 -- Gamma_0(4)-fixed / Bruhat embedding: constant on the 4+1+1 partition.
@@ -108,10 +131,11 @@ gammaCompactEmbedInjective :
   (u v : Avg.Bruhat3) →
   gammaCompactEmbed u ≡ gammaCompactEmbed v →
   u ≡ v
-gammaCompactEmbedInjective
-  (Avg.bruhat3 w l r) (Avg.bruhat3 a b c) equality
-  with cong c0 equality | cong c4 equality | cong c5 equality
-... | refl | refl | refl = refl
+gammaCompactEmbedInjective u v equality =
+  bruhat3Ext u v
+    (cong c0 equality)
+    (cong c4 equality)
+    (cong c5 equality)
 
 ------------------------------------------------------------------------
 -- Exact common intersection: two free coordinates a,b.
@@ -191,30 +215,40 @@ sameAmbientHasIntersectionWitness :
   (p : Old.Old3) → (g : Avg.Bruhat3) →
   principalCompactEmbed p ≡ gammaCompactEmbed g →
   AmbientIntersectionWitness p g
-sameAmbientHasIntersectionWitness
-  p@(Old.old3 x y z) g@(Avg.bruhat3 w l r) equality
-  with cong c0 equality | cong c1 equality | cong c4 equality | cong c5 equality
-... | x=w | y=w | z=l | z=r = record
-  { coordinates = intersection2 x z
-  ; principalExact =
-      let y=x : y ≡ x
-          y=x = trans y=w (sym x=w)
-      in
-      cong (λ q → Old.old3 x q z) (sym y=x)
-  ; gammaExact =
-      let w=x : w ≡ x
-          w=x = sym x=w
-          l=z : l ≡ z
-          l=z = sym z=l
-          r=z : r ≡ z
-          r=z = sym z=r
-      in
-      trans
-        (cong (λ q → Avg.bruhat3 q z z) (sym w=x))
-        (trans
-          (cong (λ q → Avg.bruhat3 w q z) (sym l=z))
-          (cong (Avg.bruhat3 w l) (sym r=z)))
-  }
+sameAmbientHasIntersectionWitness p g equality =
+  let
+    firstTwo : Old.x1 p ≡ Old.x2 p
+    firstTwo = sameAmbientForcesPrincipalFirstTwoEqual p g equality
+
+    terminalTwo : Avg.left g ≡ Avg.right g
+    terminalTwo = sameAmbientForcesGammaTerminalEqual p g equality
+
+    wideEq : Old.x1 p ≡ Avg.wide g
+    wideEq = sameAmbientIdentifiesWide p g equality
+
+    terminalEq : Old.x4 p ≡ Avg.left g
+    terminalEq = sameAmbientIdentifiesTerminal p g equality
+
+    q : Intersection2
+    q = intersection2 (Old.x1 p) (Old.x4 p)
+
+    principalProof : intersectionPrincipal q ≡ p
+    principalProof = old3Ext _ p
+      refl
+      firstTwo
+      refl
+
+    gammaProof : intersectionGamma q ≡ g
+    gammaProof = bruhat3Ext _ g
+      wideEq
+      terminalEq
+      (trans terminalEq terminalTwo)
+  in
+  record
+    { coordinates = q
+    ; principalExact = principalProof
+    ; gammaExact = gammaProof
+    }
 
 ------------------------------------------------------------------------
 -- The denominator-cleared compact average lands exactly in the Gamma-side
