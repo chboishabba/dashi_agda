@@ -9,10 +9,20 @@ open import DASHI.Core.Prelude
 import DASHI.Core.ArgumentLevelTransportHyperformalismExact as Transport
 import DASHI.Core.LevelIndexedProofObligationHyperformalismExact as Levelled
 import DASHI.Core.TypedProvenanceDependencyGraphExact as Graph
+import DASHI.Core.IntersectionalNonFactorability as NF
+import DASHI.Core.AttributedSourceCore as Attr
 import DASHI.Interop.JPlusOne369FibreCarryHyperformalismExact as Broad
 import DASHI.Interop.CrossDomainLevelTransportRegression as CrossDomain
 import DASHI.Interop.BroadMathProvenanceDependencyGraphExact as Provenance
+import DASHI.Interop.PNFHyperfabric369 as H369
+import DASHI.Foundations.JChartSuccessorBoundary as Chart
+import DASHI.Foundations.JPlusOneScaleBridge as J1
+import DASHI.Reasoning.CarryMemorySubvoxelReceipt as Carry
+import DASHI.Physics.Closure.TeslaPolyphaseHistoricalBoundary as Tesla
+import DASHI.Physics.Foundations.AtomicGenerationPipelineExact as Atomics
+import DASHI.Biology.PedagogicalJPlusOneRouting as Pedagogy
 import DASHI.Governance.ArgumentLevelAuthorityRoutingExact as Authority
+import Moonshine as Moon
 
 ------------------------------------------------------------------------
 -- Whole argument / provenance survive level transport.
@@ -34,7 +44,7 @@ argumentJPlusOneKeepsProvenance =
 
 argumentRechartsToEleven :
   Transport.currentLevel Transport.canonicalArgumentAfter
-  ≡ Transport.Chart.chart 11
+  ≡ Chart.chart 11
 argumentRechartsToEleven =
   Transport.canonicalArgumentAfterIsChartEleven
 
@@ -49,7 +59,7 @@ sameSupportDifferentApplicability =
   Levelled.sameEvidenceDifferentApplicability
 
 flatSupportCannotRecoverLevelAwareDecision :
-  Levelled.NF.FactorsThrough Levelled.flattenEvidence Levelled.fineDecision → ⊥
+  NF.FactorsThrough Levelled.flattenEvidence Levelled.fineDecision → ⊥
 flatSupportCannotRecoverLevelAwareDecision =
   Levelled.noFlatEvidenceFactorisationRecoversLevelAwareDecision
 
@@ -67,37 +77,37 @@ authorityLevelShiftKeepsProvenance = Authority.authorityReviewKeepsProvenance
 -- Broad 369/J+1/carry/Moonshine arithmetic and boundaries.
 ------------------------------------------------------------------------
 
-nonaryNine : Broad.H369.nonaryDimension ≡ 9
+nonaryNine : H369.nonaryDimension ≡ 9
 nonaryNine = Broad.threeByThreeIsNine
 
 dialecticAddressTwentySeven :
-  Broad.H369.dialecticDiscussionAtomDimension ≡ 27
+  H369.dialecticDiscussionAtomDimension ≡ 27
 dialecticAddressTwentySeven = Broad.threeCubedAddressIsTwentySeven
 
-wovenEightyOne : Broad.H369.twoInteractionFabricDimension ≡ 81
+wovenEightyOne : H369.twoInteractionFabricDimension ≡ 81
 wovenEightyOne = Broad.nineSquaredIsEightyOne
 
-mckayPlusOneExact : Broad.Moon.rep-dim + 1 ≡ Broad.Moon.j-coefficient
+mckayPlusOneExact : Moon.rep-dim + 1 ≡ Moon.j-coefficient
 mckayPlusOneExact = Broad.mckayFreshUnitExact
 
 carryReadsAdjacentDepths :
-  Broad.Carry.depthEvaluationBoundary Broad.Carry.canonicalCarryMemorySubvoxelReceipt
-  ≡ Broad.Carry.evaluateJAndJPlusOneTogether
+  Carry.depthEvaluationBoundary Carry.canonicalCarryMemorySubvoxelReceipt
+  ≡ Carry.evaluateJAndJPlusOneTogether
 carryReadsAdjacentDepths = Broad.carryRequiresJAndJPlusOneReading
 
 lowerCarryResiduePersists :
-  Broad.Carry.subvoxelMemory Broad.Carry.canonicalCarryMemorySubvoxelReceipt
-  ≡ Broad.Carry.lowerResiduePersistsAsMemory
+  Carry.subvoxelMemory Carry.canonicalCarryMemorySubvoxelReceipt
+  ≡ Carry.lowerResiduePersistsAsMemory
 lowerCarryResiduePersists = Broad.lowerResiduePersistsAcrossCarry
 
 moonshineAndChartJRemainDifferentCarriers :
-  Broad.J1.JPlusOneShapeAnalogy.valuesIdentified Broad.J1.canonicalJPlusOneShapeAnalogy
+  J1.JPlusOneShapeAnalogy.valuesIdentified J1.canonicalJPlusOneShapeAnalogy
   ≡ false
 moonshineAndChartJRemainDifferentCarriers =
   Broad.sharedFreshUnitShapeDoesNotIdentifyValues
 
 teslaUniversal369Blocked :
-  Broad.Tesla.universal369DoctrinePromoted Broad.Tesla.teslaPolyphaseBoundary
+  Tesla.universal369DoctrinePromoted Tesla.teslaPolyphaseBoundary
   ≡ false
 teslaUniversal369Blocked = Broad.teslaUniversal369NotPromoted
 
@@ -105,9 +115,18 @@ teslaUniversal369Blocked = Broad.teslaUniversal369NotPromoted
 -- Cross-domain adversarial instances.
 ------------------------------------------------------------------------
 
+atomicOpenStagesRemainVisible :
+  Atomics.generatorAuthority Atomics.enumerateNuclearCharges
+    ≡ Atomics.stageFiniteAnalogue
+  ×
+  Atomics.generatorAuthority Atomics.solveDeclaredHamiltonian
+    ≡ Atomics.stageExternallyOpen
 atomicOpenStagesRemainVisible =
   CrossDomain.atomicEnumerationDoesNotSolveHamiltonian
 
+pedagogicalPlusOneNotAutomatic :
+  Pedagogy.jPlusOneNotAutomatic Pedagogy.canonicalPedagogicalJPlusOneRouting
+  ≡ true
 pedagogicalPlusOneNotAutomatic =
   CrossDomain.pedagogicalJPlusOneIsNotAutomatic
 
@@ -128,6 +147,6 @@ boundedGraphDashiCountIsSix :
 boundedGraphDashiCountIsSix = Provenance.canonicalBroadDashiNodesIsSix
 
 sourceAtlasDoesNotCreateAuthority :
-  Provenance.Attr.atlasCreatesAuthority Provenance.canonicalBroadSourceAtlas ≡ false
+  Attr.atlasCreatesAuthority Provenance.canonicalBroadSourceAtlas ≡ false
 sourceAtlasDoesNotCreateAuthority =
   Provenance.canonicalBroadSourceAtlasDoesNotCreateAuthority
