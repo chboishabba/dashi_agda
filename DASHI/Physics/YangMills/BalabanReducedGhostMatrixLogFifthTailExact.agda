@@ -26,28 +26,26 @@ module DASHI.Physics.YangMills.BalabanReducedGhostMatrixLogFifthTailExact where
 --     <= (1/5)^5 sum_{j=0}^N (1/5)^j
 --     <= 1/2500.
 --
--- The final scalar cap reuses the exact finite geometric identity already
--- proved in the repository.  No determinant, continuum limit or physical
--- Taylor remainder is assumed here.
+-- The scalar cap reuses the repository's exact finite geometric identity.  No
+-- determinant, continuum limit or physical Taylor remainder is assumed here.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_; NonNegative)
+  (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_; ∣_∣; NonNegative)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
-import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
 import DASHI.Physics.YangMills.BalabanFiniteSumFubiniExact as Fubini
 import DASHI.Physics.YangMills.BalabanP33FiniteWeightedSchurSquaredExact as Schur
-import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
 import DASHI.Physics.YangMills.BalabanFiniteRationalMatrixTraceCyclicExact as Matrix
 import DASHI.Physics.YangMills.BalabanReducedGhostNeumannRowContractionExact as Neumann
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteGeometricResidualTailExact as Geometric
+import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as FiniteL2
 
 oneFifth oneFifthFifth fifthTailCap fourFifths : ℚ
 oneFifth = + 1 / 5
@@ -121,16 +119,18 @@ finiteGeometricNonnegative : ∀ exponent →
 finiteGeometricNonnegative zero = ℚP.nonNegative⁻¹ 1ℚ
 finiteGeometricNonnegative (suc exponent) =
   let
+    tail = Geometric.finiteGeometricSum oneFifth exponent
     instance
       ratioNN : NonNegative oneFifth
       ratioNN = ℚ.nonNegative oneFifthNonnegative
-      tailNN : NonNegative (Geometric.finiteGeometricSum oneFifth exponent)
+      tailNN : NonNegative tail
       tailNN = ℚ.nonNegative (finiteGeometricNonnegative exponent)
+      productNN : NonNegative (oneFifth * tail)
+      productNN = ℚP.nonNeg*nonNeg⇒nonNeg oneFifth tail
+      sumNN : NonNegative (1ℚ + oneFifth * tail)
+      sumNN = ℚP.nonNeg+nonNeg⇒nonNeg 1ℚ (oneFifth * tail)
   in
-  ℚP.+-mono-≤
-    (ℚP.nonNegative⁻¹ 1ℚ)
-    (ℚP.nonNegative⁻¹
-      (oneFifth * Geometric.finiteGeometricSum oneFifth exponent))
+  ℚP.nonNegative⁻¹ (1ℚ + oneFifth * tail)
 
 geometricMajorant : Nat → ℚ
 geometricMajorant exponent =
@@ -140,13 +140,14 @@ geometricMajorantNonnegative : ∀ exponent →
   0ℚ ≤ geometricMajorant exponent
 geometricMajorantNonnegative exponent =
   let
+    sum = Geometric.finiteGeometricSum oneFifth exponent
     instance
       fifthNN : NonNegative oneFifthFifth
       fifthNN = ℚ.nonNegative oneFifthFifthNonnegative
-      sumNN : NonNegative (Geometric.finiteGeometricSum oneFifth exponent)
+      sumNN : NonNegative sum
       sumNN = ℚ.nonNegative (finiteGeometricNonnegative exponent)
   in
-  ℚP.nonNegative⁻¹ (geometricMajorant exponent)
+  ℚP.nonNegative⁻¹ (oneFifthFifth * sum)
 
 record LogTailCoefficients : Set₁ where
   field
@@ -241,41 +242,44 @@ rationalPowerNonnegative : ∀ exponent →
 rationalPowerNonnegative zero = ℚP.nonNegative⁻¹ 1ℚ
 rationalPowerNonnegative (suc exponent) =
   let
+    power = Geometric.rationalPower oneFifth exponent
     instance
       ratioNN : NonNegative oneFifth
       ratioNN = ℚ.nonNegative oneFifthNonnegative
-      powerNN : NonNegative (Geometric.rationalPower oneFifth exponent)
+      powerNN : NonNegative power
       powerNN = ℚ.nonNegative (rationalPowerNonnegative exponent)
   in
-  ℚP.nonNegative⁻¹
-    (oneFifth * Geometric.rationalPower oneFifth exponent)
+  ℚP.nonNegative⁻¹ (oneFifth * power)
 
-finiteGeometricBelowFiveFourths : ∀ exponent →
-  Geometric.finiteGeometricSum oneFifth exponent ≤ + 5 / 4
-finiteGeometricBelowFiveFourths exponent =
+geometricMajorantBelowFifthTailCap : ∀ exponent →
+  geometricMajorant exponent ≤ fifthTailCap
+geometricMajorantBelowFifthTailCap exponent =
   let
+    sum = Geometric.finiteGeometricSum oneFifth exponent
     power = Geometric.rationalPower oneFifth (suc exponent)
 
     rhsBelowOne : 1ℚ - power ≤ 1ℚ
     rhsBelowOne =
-      Norm.nonnegativeDifferenceImpliesBelow
-        (subst
-          (λ difference → 0ℚ ≤ difference)
-          (ℚRing.solve-∀ power : 1ℚ - (1ℚ - power) ≡ power)
-          (rationalPowerNonnegative (suc exponent)))
+      FiniteL2.subtractNonnegativeBelow
+        1ℚ power (rationalPowerNonnegative (suc exponent))
 
-    scaledSumBelowOne :
-      fourFifths * Geometric.finiteGeometricSum oneFifth exponent ≤ 1ℚ
+    oneMinusRatioExact : 1ℚ - oneFifth ≡ fourFifths
+    oneMinusRatioExact = ℚRing.solve []
+
+    scaledIdentity : fourFifths * sum ≡ 1ℚ - power
+    scaledIdentity = trans
+      (cong (λ coefficient → coefficient * sum) (sym oneMinusRatioExact))
+      (Geometric.finiteGeometricIdentity oneFifth exponent)
+
+    scaledSumBelowOne : fourFifths * sum ≤ 1ℚ
     scaledSumBelowOne = subst
       (λ left → left ≤ 1ℚ)
-      (Geometric.finiteGeometricIdentity oneFifth exponent)
+      (sym scaledIdentity)
       rhsBelowOne
 
-    scaled :
-      fifthTailCap
-        * (fourFifths * Geometric.finiteGeometricSum oneFifth exponent)
-      ≤ fifthTailCap * 1ℚ
-    scaled =
+    scaledByCap :
+      fifthTailCap * (fourFifths * sum) ≤ fifthTailCap * 1ℚ
+    scaledByCap =
       let
         instance capNN : NonNegative fifthTailCap
         capNN = ℚ.nonNegative fifthTailCapNonnegative
@@ -283,74 +287,19 @@ finiteGeometricBelowFiveFourths exponent =
       ℚP.*-monoˡ-≤-nonNeg fifthTailCap scaledSumBelowOne
 
     leftExact :
-      fifthTailCap
-        * (fourFifths * Geometric.finiteGeometricSum oneFifth exponent)
-      ≡ oneFifthFifth * Geometric.finiteGeometricSum oneFifth exponent
-    leftExact = ℚRing.solve-∀
-      (Geometric.finiteGeometricSum oneFifth exponent)
+      fifthTailCap * (fourFifths * sum)
+      ≡ oneFifthFifth * sum
+    leftExact = ℚRing.solve-∀ sum
 
     rightExact : fifthTailCap * 1ℚ ≡ fifthTailCap
     rightExact = ℚP.*-identityʳ fifthTailCap
   in
-  let majorantBelowCap : geometricMajorant exponent ≤ fifthTailCap
-      majorantBelowCap = subst
-        (λ left → left ≤ fifthTailCap)
-        leftExact
-        (subst
-          (λ right →
-            fifthTailCap
-              * (fourFifths * Geometric.finiteGeometricSum oneFifth exponent)
-            ≤ right)
-          rightExact scaled)
-  in
-  -- This equivalent sum bound is convenient for downstream scalar consumers.
-  -- 1/3125 * sum <= 1/2500 implies sum <= 5/4; prove the latter directly
-  -- from the same four-fifths inequality to avoid division machinery.
-  let
-    instance fourFifthsNN : NonNegative fourFifths
-    fourFifthsNN = ℚ.nonNegative (ℚP.nonNegative⁻¹ fourFifths)
-
-    targetExact : fourFifths * (+ 5 / 4) ≡ 1ℚ
-    targetExact = ℚRing.solve []
-
-    -- finite rational order cancellation is avoided; use difference form.
-    differenceExact :
-      (+ 5 / 4) - Geometric.finiteGeometricSum oneFifth exponent
-      ≡ (+ 5 / 4)
-        * (1ℚ - fourFifths * Geometric.finiteGeometricSum oneFifth exponent)
-    differenceExact = ℚRing.solve-∀
-      (Geometric.finiteGeometricSum oneFifth exponent)
-
-    oneMinusNonnegative :
-      0ℚ ≤ 1ℚ - fourFifths * Geometric.finiteGeometricSum oneFifth exponent
-    oneMinusNonnegative =
-      Norm.belowImpliesNonnegativeDifference scaledSumBelowOne
-
-    differenceNonnegative :
-      0ℚ ≤ (+ 5 / 4) - Geometric.finiteGeometricSum oneFifth exponent
-    differenceNonnegative =
-      subst
-        (λ value → 0ℚ ≤ value)
-        (sym differenceExact)
-        (Norm.scaleNonnegative (+ 5 / 4)
-          (ℚP.nonNegative⁻¹ (+ 5 / 4)) oneMinusNonnegative)
-  in
-  Norm.nonnegativeDifferenceImpliesBelow differenceNonnegative
-
-geometricMajorantBelowFifthTailCap : ∀ exponent →
-  geometricMajorant exponent ≤ fifthTailCap
-geometricMajorantBelowFifthTailCap exponent =
-  let
-    sumBelow = finiteGeometricBelowFiveFourths exponent
-    instance fifthNN : NonNegative oneFifthFifth
-    fifthNN = ℚ.nonNegative oneFifthFifthNonnegative
-    scaled = ℚP.*-monoˡ-≤-nonNeg oneFifthFifth sumBelow
-    capExact : oneFifthFifth * (+ 5 / 4) ≡ fifthTailCap
-    capExact = ℚRing.solve []
-  in
   subst
-    (λ upper → geometricMajorant exponent ≤ upper)
-    capExact scaled
+    (λ left → left ≤ fifthTailCap)
+    leftExact
+    (subst
+      (λ right → fifthTailCap * (fourFifths * sum) ≤ right)
+      rightExact scaledByCap)
 
 finiteFifthTailUniformCap :
   ∀ {Index : Set} (indices : List Index) (matrix : Matrix.Matrix Index)
