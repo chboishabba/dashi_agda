@@ -39,10 +39,11 @@ module DASHI.Physics.Closure.NSTriadKNPressureStretchingRotationJointTargetRound
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base using (ℚ; _≤_; _<_)
+open import Data.Rational.Base using (_*_; _≤_; _<_)
 
 import DASHI.Physics.Closure.NSTriadKNFrameWeightedSupercriticalPropagationRound77Exact as Propagation
 import DASHI.Physics.Closure.NSTriadKNB2PressureSpectralTargetRound78Exact as Scalar
+import DASHI.Physics.Closure.NSTriadKNPressureAlignmentDefectSpectralBracketRound78Exact as Spectral
 import DASHI.Physics.Closure.NSTriadKNPressureEigenframeRotationGapBudgetRound79Exact as Rotation
 
 record JointPressureStretchingRotationEvent
@@ -66,7 +67,7 @@ jointEventForcesStrictStretchingTarget :
   Scalar.additionalDepletion (scalarEvent event)
   <
   (let scalar = scalarEvent event in
-   DASHI.Physics.Closure.NSTriadKNPressureAlignmentDefectSpectralBracketRound78Exact.inviscidAccelerationWithAlignmentDefect
+   Spectral.inviscidAccelerationWithAlignmentDefect
      (Scalar.stretchingSquare scalar)
      (Scalar.enstrophy scalar)
      (Scalar.strainIntensity scalar)
