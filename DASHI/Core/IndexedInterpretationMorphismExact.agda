@@ -23,9 +23,6 @@ record IndexedInterpretation
 
 open IndexedInterpretation public
 
--- Equality at one interpretation index is not globally transportable without a
--- theorem relating the two indices.  This is the common shape behind
--- action-indexed 369 quotients and inference-language-indexed ontology safety.
 OutputEqualityTransfersAcrossIndices :
   ∀ {State Output Operator Context Query Role} →
   IndexedInterpretation State Output Operator Context Query Role → Set
@@ -33,12 +30,6 @@ OutputEqualityTransfersAcrossIndices system =
   ∀ leftIndex rightIndex x y →
   interpret system leftIndex x ≡ interpret system leftIndex y →
   interpret system rightIndex x ≡ interpret system rightIndex y
-
-------------------------------------------------------------------------
--- Exact countermodel: the same carrier has one coarse operation and one fine
--- operation.  The coarse surface identifies two states that the fine query
--- separates.
-------------------------------------------------------------------------
 
 data DemoState : Set where
   state₀ state₁ : DemoState
@@ -64,11 +55,10 @@ fineIndex = interpretationIndex observeOperator sharedContext fineQuery observat
 demoInterpret :
   InterpretationIndex DemoOperator DemoContext DemoQuery DemoRole →
   DemoState → Bool
-demoInterpret index state with query index
-... | coarseQuery = false
-... | fineQuery with state
-...   | state₀ = false
-...   | state₁ = true
+demoInterpret (interpretationIndex observeOperator sharedContext coarseQuery observationRole) state₀ = false
+demoInterpret (interpretationIndex observeOperator sharedContext coarseQuery observationRole) state₁ = false
+demoInterpret (interpretationIndex observeOperator sharedContext fineQuery observationRole) state₀ = false
+demoInterpret (interpretationIndex observeOperator sharedContext fineQuery observationRole) state₁ = true
 
 demoSystem :
   IndexedInterpretation DemoState Bool DemoOperator DemoContext DemoQuery DemoRole
