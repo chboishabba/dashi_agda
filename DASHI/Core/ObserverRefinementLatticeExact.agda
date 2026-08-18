@@ -21,10 +21,10 @@ record StrictRefinement {State Coarse Fine : Set}
     (coarse : Observer State Coarse) (fine : Observer State Fine) : Set where
   constructor strictRefinement
   field
-    refines : Refines coarse fine
-    left right : State
-    coarseCollision : coarse left ≡ coarse right
-    fineSeparates : fine left ≡ fine right → ⊥
+    refinementLaw : Refines coarse fine
+    refinementLeft refinementRight : State
+    refinementCoarseCollision : coarse refinementLeft ≡ coarse refinementRight
+    refinementFineSeparates : fine refinementLeft ≡ fine refinementRight → ⊥
 open StrictRefinement public
 
 ObserverFamily : Set → Set → Set
@@ -57,25 +57,25 @@ record StrictFamilyRefinement {State Value : Set}
     (coarse fine : ObserverFamily State Value) : Set where
   constructor strictFamilyRefinement
   field
-    familyRefines : FamilyRefines coarse fine
-    left right : State
-    coarseCollision : AgreeOn coarse left right
-    fineSeparates : AgreeOn fine left right → ⊥
+    familyRefinementLaw : FamilyRefines coarse fine
+    familyLeft familyRight : State
+    familyCoarseCollision : AgreeOn coarse familyLeft familyRight
+    familyFineSeparates : AgreeOn fine familyLeft familyRight → ⊥
 open StrictFamilyRefinement public
 
 strictFamilyRefinementBlocksCoarseSeparation : ∀ {State Value : Set} {coarse fine : ObserverFamily State Value} → StrictFamilyRefinement coarse fine → SeparatingFamily coarse → ⊥
 strictFamilyRefinementBlocksCoarseSeparation {fine = fine} refinement separating
-  with separating (left refinement) (right refinement) (coarseCollision refinement)
-... | refl = fineSeparates refinement (familySelfAgreement fine (left refinement))
+  with separating (familyLeft refinement) (familyRight refinement) (familyCoarseCollision refinement)
+... | refl = familyFineSeparates refinement (familySelfAgreement fine (familyLeft refinement))
 
 pairObserver : ∀ {State A B : Set} → Observer State A → Observer State B → Observer State (A × B)
-pairObserver left right x = left x , right x
+pairObserver leftObserver rightObserver x = leftObserver x , rightObserver x
 
-pairRefinesLeft : ∀ {State A B : Set} (left : Observer State A) (right : Observer State B) → Refines left (pairObserver left right)
-pairRefinesLeft left right x y equality = cong proj₁ equality
+pairRefinesLeft : ∀ {State A B : Set} (leftObserver : Observer State A) (rightObserver : Observer State B) → Refines leftObserver (pairObserver leftObserver rightObserver)
+pairRefinesLeft leftObserver rightObserver x y equality = cong proj₁ equality
 
-pairRefinesRight : ∀ {State A B : Set} (left : Observer State A) (right : Observer State B) → Refines right (pairObserver left right)
-pairRefinesRight left right x y equality = cong proj₂ equality
+pairRefinesRight : ∀ {State A B : Set} (leftObserver : Observer State A) (rightObserver : Observer State B) → Refines rightObserver (pairObserver leftObserver rightObserver)
+pairRefinesRight leftObserver rightObserver x y equality = cong proj₂ equality
 
 strictPairRefinement : ∀ {State A B : Set} (coarse : Observer State A) (extra : Observer State B) (x y : State) → coarse x ≡ coarse y → (extra x ≡ extra y → ⊥) → StrictRefinement coarse (pairObserver coarse extra)
 strictPairRefinement coarse extra x y coarseSame extraDiff = strictRefinement (pairRefinesLeft coarse extra) x y coarseSame (λ pairSame → extraDiff (cong proj₂ pairSame))
@@ -83,13 +83,13 @@ strictPairRefinement coarse extra x y coarseSame extraDiff = strictRefinement (p
 record ObserverCollision {State Value : Set} (observe : Observer State Value) : Set where
   constructor observerCollision
   field
-    left right : State
-    sameObservation : observe left ≡ observe right
-    distinctStates : left ≡ right → ⊥
+    collisionLeft collisionRight : State
+    sameObservation : observe collisionLeft ≡ observe collisionRight
+    distinctStates : collisionLeft ≡ collisionRight → ⊥
 open ObserverCollision public
 
 collisionBlocksSeparation : ∀ {State Value : Set} {observe : Observer State Value} → ObserverCollision observe → Separating observe → ⊥
-collisionBlocksSeparation collision separating = distinctStates collision (separating (left collision) (right collision) (sameObservation collision))
+collisionBlocksSeparation collision separating = distinctStates collision (separating (collisionLeft collision) (collisionRight collision) (sameObservation collision))
 
 record ObserverRefinementBoundary : Set where
   constructor observerRefinementBoundary
