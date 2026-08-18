@@ -22,8 +22,8 @@ module DASHI.Physics.YangMills.BalabanP33FaddeevPopovAnchoredGaugeReductionExact
 --
 -- Then omega_red vanishes at x0 in every colour coordinate, all nearest-
 -- neighbour differences are unchanged, and therefore the flat FP operator is
--- exactly unchanged.  The map is idempotent and invariant under adding a
--- site-constant colour parameter.  It is thus a concrete finite section of the
+-- exactly unchanged. The map is idempotent and invariant under adding a
+-- site-constant colour parameter. It is thus a concrete finite section of the
 -- global gauge orbit suitable for the later reduced determinant/pseudodeterminant
 -- construction.
 ------------------------------------------------------------------------
@@ -31,10 +31,11 @@ module DASHI.Physics.YangMills.BalabanP33FaddeevPopovAnchoredGaugeReductionExact
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _-_; _+_)
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using (pair)
+import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
 import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Coordinates
 import DASHI.Physics.YangMills.BalabanP33PeriodicFourDimensionalHodgeIdentityExact as Periodic
 import DASHI.Physics.YangMills.BalabanP33PhysicalBackgroundGaugeFirstExact as Gauge
@@ -105,8 +106,7 @@ anchoredFlatBackwardTermExact :
   ≡ Gauge.flatBackwardTerm
       (FP.flatGaugeOrbitFirst parameter) coordinate axis site
 anchoredFlatBackwardTermExact parameter anchor coordinate axis site =
-  let
-    previous = Periodic.shiftBackward axis site
+  let previous = Periodic.shiftBackward axis site
   in
   trans
     (cong
@@ -121,6 +121,18 @@ anchoredFlatBackwardTermExact parameter anchor coordinate axis site =
       (anchoredFlatGaugeOrbitFirstExact
         parameter anchor coordinate previous axis))
 
+anchoredFlatFaddeevPopovAxisTermExact :
+  ∀ parameter anchor coordinate axis site →
+  FP.flatFaddeevPopovAxisTerm
+    (anchoredGaugeParameter parameter anchor) coordinate axis site
+  ≡ FP.flatFaddeevPopovAxisTerm parameter coordinate axis site
+anchoredFlatFaddeevPopovAxisTermExact parameter anchor coordinate axis site =
+  ℚRing.solve-∀
+    (parameter (pair coordinate site))
+    (parameter (pair coordinate (Periodic.shiftForward axis site)))
+    (parameter (pair coordinate (Periodic.shiftBackward axis site)))
+    (parameter (pair coordinate anchor))
+
 anchoredFlatFaddeevPopovExact :
   ∀ parameter anchor coordinate site →
   FP.flatFaddeevPopovApply (anchoredGaugeParameter parameter anchor)
@@ -131,41 +143,18 @@ anchoredFlatFaddeevPopovExact parameter anchor coordinate site =
     (FP.flatFaddeevPopovIsPeriodicLaplacian
       (anchoredGaugeParameter parameter anchor) coordinate site)
     (trans
-      (cong
-        (λ selected → selected)
-        (Agda.Builtin.Equality.refl))
-      (trans
-        (symmetry
-          (FP.flatFaddeevPopovIsPeriodicLaplacian
-            parameter coordinate site))
-        (Agda.Builtin.Equality.refl)))
-  where
-  symmetry : ∀ {A : Set} {left right : A} → left ≡ right → right ≡ left
-  symmetry refl = refl
-
--- A direct proof avoiding any Fourier identification: use the original
--- divergence representation and pointwise equality of all four orbit-first
--- bond values.
-anchoredFaddeevPopovViaGaugeFirstExact :
-  ∀ parameter anchor coordinate site →
-  FP.flatFaddeevPopovApply (anchoredGaugeParameter parameter anchor)
-      (pair coordinate site)
-  ≡ FP.flatFaddeevPopovApply parameter (pair coordinate site)
-anchoredFaddeevPopovViaGaugeFirstExact parameter anchor coordinate site =
-  let
-    orbitPointwise : ∀ selectedCoordinate bond →
-      FP.flatGaugeOrbitFirst (anchoredGaugeParameter parameter anchor)
-        selectedCoordinate bond
-      ≡ FP.flatGaugeOrbitFirst parameter selectedCoordinate bond
-    orbitPointwise selectedCoordinate (pair selectedSite axis) =
-      anchoredFlatGaugeOrbitFirstExact
-        parameter anchor selectedCoordinate selectedSite axis
-  in
-  Gauge.flatGaugeFirstFromAxesCong
-    (FP.flatGaugeOrbitFirst (anchoredGaugeParameter parameter anchor))
-    (FP.flatGaugeOrbitFirst parameter)
-    orbitPointwise
-    coordinate site
+      (Sums.sumRationalCong
+        Gauge.axes4
+        (λ axis →
+          FP.flatFaddeevPopovAxisTerm
+            (anchoredGaugeParameter parameter anchor) coordinate axis site)
+        (λ axis →
+          FP.flatFaddeevPopovAxisTerm parameter coordinate axis site)
+        (λ axis →
+          anchoredFlatFaddeevPopovAxisTermExact
+            parameter anchor coordinate axis site))
+      (sym (FP.flatFaddeevPopovIsPeriodicLaplacian
+        parameter coordinate site)))
 
 anchoredGaugeReductionLevel : ProofLevel
 anchoredGaugeReductionLevel = machineChecked
