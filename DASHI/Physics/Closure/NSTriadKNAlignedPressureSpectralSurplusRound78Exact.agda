@@ -29,9 +29,14 @@ module DASHI.Physics.Closure.NSTriadKNAlignedPressureSpectralSurplusRound78Exact
 --
 --   -lambda3^D <= (Omega-Sigma)/6.
 --
--- The opposite strict inequality is the concrete spectral region in which the
--- pressure subsystem can itself contribute positive stretching.  Full B2 still
--- includes W.W and the additional geometry/frame/allocation/viscous costs.
+-- Including the quadratic self-amplification W.W gives the exact raw inviscid
+-- acceleration
+--
+--   W.W + Omega [ -lambda3^D - (Omega-Sigma)/6 ].
+--
+-- On a nonpositive pressure bracket this is bounded above by W.W itself.  Thus
+-- a Round78 B2 event in that branch cannot get any extra gain from pressure;
+-- its quadratic/cross-mode channel must already pay the remaining costs.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -40,7 +45,7 @@ open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _-_; -_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (subst; trans)
 
 import DASHI.Physics.Closure.NSTriadKNIsotropicPressureEnstrophyStrainCriterionRound78Exact as Iso
 import DASHI.Physics.Closure.NSTriadKNDeviatoricPressureAlignmentEnableRound78Exact as Dev
@@ -100,8 +105,67 @@ alignedPressureDepletingWhenBracketNonpositive
       enstrophy strainIntensity smallestEigenvalue)
     factored≤zero
 
+alignedInviscidStretchingAcceleration : ℚ → ℚ → ℚ → ℚ → ℚ
+alignedInviscidStretchingAcceleration
+    stretchingSquare enstrophy strainIntensity smallestEigenvalue =
+  stretchingSquare
+  + alignedPressureContribution enstrophy strainIntensity smallestEigenvalue
+
+alignedInviscidStretchingAccelerationFactors :
+  ∀ stretchingSquare enstrophy strainIntensity smallestEigenvalue →
+  alignedInviscidStretchingAcceleration
+    stretchingSquare enstrophy strainIntensity smallestEigenvalue
+  ≡ stretchingSquare
+      + enstrophy
+          * pressureSpectralBracket enstrophy strainIntensity smallestEigenvalue
+alignedInviscidStretchingAccelerationFactors
+    stretchingSquare enstrophy strainIntensity smallestEigenvalue =
+  trans
+    (refl)
+    (congLeft
+      (alignedPressureContributionFactors
+        enstrophy strainIntensity smallestEigenvalue))
+  where
+  congLeft : ∀ {left right : ℚ} → left ≡ right →
+    stretchingSquare + left ≡ stretchingSquare + right
+  congLeft refl = refl
+
+nonpositivePressureBracketCannotIncreaseQuadraticAcceleration :
+  ∀ stretchingSquare enstrophy strainIntensity smallestEigenvalue →
+  0ℚ ≤ enstrophy →
+  pressureSpectralBracket enstrophy strainIntensity smallestEigenvalue ≤ 0ℚ →
+  alignedInviscidStretchingAcceleration
+    stretchingSquare enstrophy strainIntensity smallestEigenvalue
+  ≤ stretchingSquare
+nonpositivePressureBracketCannotIncreaseQuadraticAcceleration
+    stretchingSquare enstrophy strainIntensity smallestEigenvalue
+    enstrophyNN bracket≤0 =
+  let
+    pressure≤0 :
+      alignedPressureContribution enstrophy strainIntensity smallestEigenvalue ≤ 0ℚ
+    pressure≤0 =
+      alignedPressureDepletingWhenBracketNonpositive
+        enstrophy strainIntensity smallestEigenvalue enstrophyNN bracket≤0
+
+    added :
+      stretchingSquare
+        + alignedPressureContribution enstrophy strainIntensity smallestEigenvalue
+      ≤ stretchingSquare + 0ℚ
+    added = ℚP.+-monoˡ-≤ stretchingSquare pressure≤0
+  in
+  subst
+    (λ right →
+      alignedInviscidStretchingAcceleration
+        stretchingSquare enstrophy strainIntensity smallestEigenvalue
+      ≤ right)
+    (ℚP.+-identityʳ stretchingSquare)
+    added
+
 round78AlignedPressureSpectralFactorizationConstructed : Bool
 round78AlignedPressureSpectralFactorizationConstructed = true
+
+round78NonpositivePressureBracketCannotIncreaseQuadraticAcceleration : Bool
+round78NonpositivePressureBracketCannotIncreaseQuadraticAcceleration = true
 
 round78PressureEnablingRequiresPositiveSpectralBracket : Bool
 round78PressureEnablingRequiresPositiveSpectralBracket = true
