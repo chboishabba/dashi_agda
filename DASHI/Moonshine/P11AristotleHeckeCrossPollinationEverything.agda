@@ -2,8 +2,8 @@ module DASHI.Moonshine.P11AristotleHeckeCrossPollinationEverything where
 
 ------------------------------------------------------------------------
 -- Aggregate for the characteristic-11 Brandt algebra, representation
--- falsifiers, positive fine geometry, stack controls, and source-native marked
--- full-level-2 / quaternion Hecke reconstruction.
+-- falsifiers, source-native marked full-level-2 / quaternion Hecke
+-- reconstruction, and deck-character observation refinement.
 --
 -- Coarse arithmetic:
 -- * geometric p=11 supersingular carrier {j=0,j=1728=1 mod11};
@@ -45,33 +45,35 @@ module DASHI.Moonshine.P11AristotleHeckeCrossPollinationEverything where
 -- * corrected marked Hecke is Frobenius/Fricke equivariant;
 -- * a second refined-theta tally path independently recovers the four cells.
 --
--- Representation decomposition of the TRUE marked carrier:
+-- Complete marked spectrum and character refinement:
+-- * PR #576's exact Q-valued decomposition is consumed: every observable is
+--   reconstructed from five simultaneous modes and (T3,T5,F) has signatures
+--       (4,6,+1) [1D], (1,-3,-1) [1D], (-1,1,+1) [3D];
+-- * the existing Phase3 character carrier from PR #572 is reused exactly;
+-- * the complete 3D (-1,1,+1) block splits under the ACTUAL deck C3 as
+--       chi0 + chi1 + chi2;
+-- * chi0 is the Brandt-newform line while chi1+chi2 is the deck-standard plane;
+-- * therefore deck character strictly refines (T3,T5,F), and no exact decoder
+--   from the coarse arithmetic fingerprint can recover the sector;
+-- * the reflection generator separates sign from trivial one-dimensional deck
+--   type, completing the S3 observer without complex-Hilbert promotion.
 --
---   Z[X(2)_ss] over Q = 2*1 + sgn + std
---
--- and corrected (T3,T5,F) fingerprints are
---   constant       ( 4, 6,+1)
---   Brandt newform (-1, 1,+1)
---   sign           ( 1,-3,-1)
---   standard       (-1, 1,+1).
---
--- Thus Brandt-newform and deck-standard sectors collide under the current joint
--- Hecke+Frobenius observation: deck S3 type is genuine extra information.
---
--- Non-Ogg control port:
--- * same full-level-2/Deuring front end at p=37 gives 3 coarse classes with six
---   frames each = 18 marked states;
--- * H_37 has nine nonsquare-discriminant quadratic factors, hence marked
---   Frobenius has 0 fixed points and 9 pairs;
--- * exact p=37 T3/T5 quaternion-order theta counts are NOT fabricated here and
---   remain the next cross-prime arithmetic leaves.
+-- Non-Ogg p=37 control:
+-- * same full-level-2/Deuring front end gives 18 marked states;
+-- * H_37 gives 0 marked Frobenius fixed points and 9 pairs;
+-- * because all three coarse stabilizer weights are one, the deck carrier is
+--       3 Q[S3] = 3*1 + 3*sgn + 6*std,
+--   and its C3 character multiplicities are (6,6,6);
+-- * exact p=37 marked T3/T5 quaternion-order theta counts remain the next
+--   cross-prime arithmetic leaves and are NOT fabricated here.
 --
 -- Current highest-alpha frontier:
--- 1. compute the three p=37 endomorphism orders / marked ell=3,5 theta cells
+-- 1. construct the three p=37 endomorphism orders and marked ell=3,5 theta cells
 --    using the same Kohel/Kirschmer--Voight producer;
--- 2. reconstruct p=37 marked T3,T5 and compare the full deck-Hecke-Frobenius-
---    Fricke representation package against p=11;
--- 3. only then test an Ogg/Monster selector and reconnect #565/#558.
+-- 2. reconstruct p=37 marked T3,T5 and compare the full
+--    Hecke + Frobenius/Fricke + deck-character representation package to p=11;
+-- 3. only then test an Ogg/Monster selector and reconnect #565/#558 through an
+--    explicit representation/tree-to-source-native-carrier map.
 ------------------------------------------------------------------------
 
 import DASHI.Moonshine.P11ClassicalTwoIsogenyCorrespondenceExact
@@ -134,5 +136,12 @@ import DASHI.Moonshine.P11MarkedX2HeckeAlgebraExact
 import DASHI.Moonshine.P11MarkedX2PrimeSquareNeighboursExact
 import DASHI.Moonshine.P11MarkedX2FrobeniusFrickeExact
 import DASHI.Moonshine.P11MarkedX2S3HeckeDecompositionExact
+import DASHI.Moonshine.P11MarkedX2JointHeckeFrobeniusSpectrumExact
+import DASHI.Foundations.Phase3RootCharacterWeldExact
+import DASHI.Moonshine.P11MarkedX2DeckCharacterSeparationExact
+import DASHI.Moonshine.P11MarkedJointEigenspaceCharacterSplitExact
+import DASHI.Moonshine.P11MarkedObservationRefinementExact
 import DASHI.Moonshine.P37NonOggFullLevel2DeuringControlExact
+import DASHI.Moonshine.P37NonOggFullLevel2DeckCharacterControlExact
 import DASHI.Moonshine.P11MarkedQuaternionHeckeHighestAlphaRegression
+import DASHI.Moonshine.P11MarkedDeckCharacterHighestAlphaRegression
