@@ -8,6 +8,7 @@ import DASHI.Algebra.ClaimIndexedEvidencePolarityExact as Indexed
 import DASHI.Algebra.DisagreementFourViewBoundary as Four
 import DASHI.Algebra.TetralemmaBridge as Tetralemma
 import DASHI.Cognition.PNF.EvidenceHorizon369 as Horizon
+import DASHI.Interop.SensibLawResidualLattice as Residual
 import DASHI.Reasoning.DialecticInvariantGeometry as Dialectic
 
 ------------------------------------------------------------------------
@@ -20,6 +21,9 @@ import DASHI.Reasoning.DialecticInvariantGeometry as Dialectic
 -- to be retained in the fine claim/evidence fibre rather than manufactured by
 -- the ternary presentation.
 ------------------------------------------------------------------------
+
+_≢_ : ∀ {A : Set} → A → A → Set
+x ≢ y = x ≡ y → ⊥
 
 dialecticPolarity :
   ∀ {X} →
@@ -47,7 +51,7 @@ dialectic369Residual :
   ∀ {X} →
   Dialectic.DialecticField X →
   X →
-  DASHI.Interop.SensibLawResidualLattice.ResidualLevel
+  Residual.ResidualLevel
 dialectic369Residual field x =
   Tetralemma.triResidual
     (Tetralemma.tetralemmaTone
@@ -55,8 +59,7 @@ dialectic369Residual field x =
 
 dialectic369ProjectionCannotEmitContradiction :
   ∀ {X} (field : Dialectic.DialecticField X) x →
-  dialectic369Residual field x
-  ≢ DASHI.Interop.SensibLawResidualLattice.contradiction
+  dialectic369Residual field x ≢ Residual.contradiction
 dialectic369ProjectionCannotEmitContradiction field x =
   Tetralemma.triResidual-excludes-contradiction
     (Tetralemma.tetralemmaTone
