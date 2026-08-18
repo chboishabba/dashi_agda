@@ -15,6 +15,16 @@ module DASHI.Moonshine.PublishedMonsterFrickeHighestAlphaEverything where
 --     locus; the existing Deligne--Rapoport geometry identifies that with zero
 --     Fricke pair defect.  The exceptional primes 2,3 are handled separately.
 --
+-- For p>=5 the same modern chain is now also exposed WITHOUT the genus
+-- coordinate:
+--
+--   p | |M|
+--      <=> zero coarse Frobenius-pair residual
+--      <=> coarse supersingular Frobenius is pointwise fixed.
+--
+-- This makes the actual surviving finite observer explicit rather than using
+-- genus zero as the only public interface.
+--
 -- The older Duncan--Ono/Ogg supersingular SUPPORT equivalence is no longer
 -- imported by this primary all-prime proof.  It remains an independent
 -- historical/cross-check route elsewhere in the repository.
@@ -30,11 +40,13 @@ open import Data.Nat.Primality using (Prime)
 import DASHI.Moonshine.MonsterOrderDivisibilityExact as Monster
 import DASHI.Moonshine.PublishedPrimeLevelFrickeSelectorPinnedExact as Fricke
 import DASHI.Moonshine.PrimeLevelDeligneRapoportFrickeSelectorExact as Selector
+import DASHI.Moonshine.PrimeLevelDeligneRapoportFrickeCombinatoricsExact as DR
 import DASHI.Moonshine.PublishedMonsterFrickeGenusZeroExact as HistoricalGe5
 import DASHI.Moonshine.PublishedMonsterFrickeAllSupportedPrimesExact as All
 import DASHI.Moonshine.MonsterPrimeMoonshineFrickeStandardAuthorityExact as Moonshine
 import DASHI.Moonshine.DuncanSwisherMonsterFrickeAllPrimesExact as DSAll
 import DASHI.Moonshine.MonsterFrickeModernDirectionalMechanismExact as Modern
+import DASHI.Moonshine.DuncanSwisherMonsterFrobeniusFixedExact as FrobeniusModern
 
 ------------------------------------------------------------------------
 -- Primary arbitrary-prime theorem: moonshine forward, exponent-support
@@ -61,6 +73,35 @@ exponentSupportConverseRegression :
   Monster.PrimeDividesMonsterOrder p
 exponentSupportConverseRegression =
   Modern.frickeGenusZeroImpliesMonsterPrimeByExponentSupport
+
+------------------------------------------------------------------------
+-- New p>=5 direct geometric-observer form.
+------------------------------------------------------------------------
+
+monsterIffCoarseFrobeniusFixedRegression :
+  (p : Nat) → (prime : Prime p) → (ge5 : 5 ≤ p) →
+  Monster.PrimeDividesMonsterOrder p
+  ↔ Fricke.PublishedFrobeniusFullyFixed p prime ge5
+monsterIffCoarseFrobeniusFixedRegression =
+  FrobeniusModern.monsterDividesIffCoarseFrobeniusFullyFixed
+
+monsterIffZeroFrobeniusPairResidualRegression :
+  (p : Nat) → (prime : Prime p) → (ge5 : 5 ≤ p) →
+  Monster.PrimeDividesMonsterOrder p
+  ↔ DR.pairedCount
+      (Selector.supersingularFrobenius
+        (Fricke.publishedAuthorityAt p prime ge5)) ≡ 0
+monsterIffZeroFrobeniusPairResidualRegression =
+  FrobeniusModern.monsterDividesIffFrobeniusPairResidualZero
+
+zeroPairResidualIffFixedRegression :
+  (p : Nat) → (prime : Prime p) → (ge5 : 5 ≤ p) →
+  DR.pairedCount
+      (Selector.supersingularFrobenius
+        (Fricke.publishedAuthorityAt p prime ge5)) ≡ 0
+  ↔ Fricke.PublishedFrobeniusFullyFixed p prime ge5
+zeroPairResidualIffFixedRegression =
+  FrobeniusModern.pairResidualZeroIffFullyFixed
 
 ------------------------------------------------------------------------
 -- Independent routes remain available for regression/cross-checking.
@@ -123,3 +164,8 @@ duncanSwisherAllPrimeSupportRegression :
   DSAll.arbitraryPrimeSupportEquivalenceDerived
     DSAll.canonicalDuncanSwisherMonsterFrickeAllPrimesBoundary ≡ true
 duncanSwisherAllPrimeSupportRegression = refl
+
+directFrobeniusRouteAvoidsOldDuncanOnoRegression :
+  FrobeniusModern.oldDuncanOnoEquivalenceImportedHere
+    FrobeniusModern.canonicalDuncanSwisherMonsterFrobeniusFixedBoundary ≡ false
+directFrobeniusRouteAvoidsOldDuncanOnoRegression = refl
