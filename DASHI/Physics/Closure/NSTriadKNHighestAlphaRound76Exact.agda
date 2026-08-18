@@ -128,8 +128,9 @@ import DASHI.Physics.Closure.NSTriadKNFixedOutputTwoChannelNormalizedChargeRound
 import DASHI.Physics.Closure.NSTriadKNRouteBSupercriticalFinalAntichainBudgetRound76Exact as RouteB76
 import DASHI.Physics.Closure.NSTriadKNCKNFujitaKatoSharpHeadroomRound76Exact as Headroom76
 
-round76PhaseAlignmentStillEliminated : Bool
-round76PhaseAlignmentStillEliminated = R74.round74PhaseAlignmentNoLongerRequired
+round76PhysicalPhaseAlignmentRequiredForFactorization : Bool
+round76PhysicalPhaseAlignmentRequiredForFactorization =
+  R74.round74PhaseAlignmentNoLongerRequired
 
 round76FixedOutputResponseHasNoCardinalityLoss : Bool
 round76FixedOutputResponseHasNoCardinalityLoss =
@@ -194,6 +195,10 @@ round76PhysicalAnnularMultiplierKernelBound = false
 
 round76ClayPromotion : Bool
 round76ClayPromotion = false
+
+round76PhysicalPhaseAlignmentRequiredForFactorizationIsFalse :
+  round76PhysicalPhaseAlignmentRequiredForFactorization ≡ false
+round76PhysicalPhaseAlignmentRequiredForFactorizationIsFalse = refl
 
 round76LiteralNormalizedSquareChargeCompilerIsTrue :
   round76LiteralNormalizedSquareChargeCompiler ≡ true
