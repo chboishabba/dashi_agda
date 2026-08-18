@@ -25,6 +25,8 @@ import DASHI.Governance.AuthorityPhaseSeparationExact
 import DASHI.Governance.AuthorityRoutingProjectionSafetyExact
 import DASHI.Governance.OperationalLegibilityJusticeSafetyExact
 import DASHI.Governance.JusticeRequiredAxisEvidenceExact
+import DASHI.Governance.JusticeEvidenceQualifiedValidationExact
+import DASHI.Governance.RequiredAxisAuthorityRoutingExact
 import DASHI.Governance.JusticeQueryIndexedProjectionAdequacyExact
 import DASHI.Governance.JusticeProvenanceOutcomeLensExact
 import DASHI.Governance.OptionConeCoercionExact
