@@ -4,22 +4,24 @@ module DASHI.Papers.NavierStokes.TheoremInterfaceRound78Exact where
 -- PAPER-FACING ROUND78 INTERFACE
 --
 -- Round78 follows the physical B2 proof-or-kill path rather than adding a new
--- cascade receipt.  Restricted Euler is retained as a genuine local
--- self-amplification calibration, but the actual Fourier carrier proves that a
--- single mode's vorticity cannot stretch itself through its own strain mode.
--- Positive vortex-stretching sign is also insufficient after pressure/geometry/
--- allocation depletion.
+-- cascade receipt.  Restricted Euler is retained as a local self-amplification
+-- calibration.  The actual Fourier carrier proves same-mode vortex stretching
+-- is zero, while an explicit physical triad exhibits positive cross-mode
+-- stretching.  Thus B2 survives only as a cross-mode/nonlocal mechanism.
 --
--- The central source-facing theorem is now:
+-- Pressure is now resolved into its source-native scalar competition.  Using
+-- the packet-coherence alpha_i coordinates, the pressure contribution is
 --
---   selected critical event
---   -> exact cross-mode/nonlocal enable versus depletion decomposition
---   -> either strict frame-weighted surplus
---      or quantitative depletion/residence closure.
+--   Omega [ -lambda3^D - D_align - (Omega-Sigma)/6 ],
 --
--- Existing middle-eigenvalue/coherence-budget machinery supplies the correct
--- complement to the surplus branch.  No DNS/statistical or restricted-Euler
--- statement is promoted to the missing pointwise NS inequality.
+-- and a frame-weighted supercritical event must satisfy
+--
+--   W.W + Omega[...pressure bracket...] > D_additional.
+--
+-- A nonpositive pressure bracket together with W.W<=D_additional refutes B2.
+-- Existing middle-eigenvalue/coherence-budget machinery supplies the natural
+-- complementary depletion/residence branch.  DNS/statistical and restricted-
+-- Euler statements remain calibration only, not pointwise NS authority.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -34,12 +36,27 @@ round78RestrictedEulerCalibrationConstructed =
 round78SameModeSelfStretchingRejected : Bool
 round78SameModeSelfStretchingRejected = true
 
+round78PositiveCrossModePhysicalTriadWitnessConstructed : Bool
+round78PositiveCrossModePhysicalTriadWitnessConstructed =
+  R78.round78PositiveCrossModePhysicalTriadWitnessConstructed
+
 round78PositiveStretchingSignSufficientForB2 : Bool
 round78PositiveStretchingSignSufficientForB2 = false
 
-round78CrossModeSurplusNecessaryForB2 : Bool
-round78CrossModeSurplusNecessaryForB2 =
-  R78.round78B2RequiresCrossModeNonlocalSurplusAfterDepletion
+round78PressureRawSplitConstructed : Bool
+round78PressureRawSplitConstructed = R78.round78PressureHessianRawSplitConstructed
+
+round78PressureAlignmentDefectConstructed : Bool
+round78PressureAlignmentDefectConstructed =
+  R78.round78PressureAlignmentDefectIdentityConstructed
+
+round78DefectResolvedPressureBracketConstructed : Bool
+round78DefectResolvedPressureBracketConstructed =
+  R78.round78PressureDefectSpectralBracketConstructed
+
+round78B2ReducedToDefectResolvedSpectralTarget : Bool
+round78B2ReducedToDefectResolvedSpectralTarget =
+  R78.round78B2ReducedToDefectResolvedSpectralTarget
 
 round78QuantitativeDepletionForkRefutesB2OnResolvedEvent : Bool
 round78QuantitativeDepletionForkRefutesB2OnResolvedEvent =
@@ -52,8 +69,8 @@ round78SelectedGlobalLiteralGalerkinTrajectory = false
 round78SelectedFineStructuredDynamicBalance : Bool
 round78SelectedFineStructuredDynamicBalance = false
 
-round78PhysicalCrossModeWeightedSurplusOrDepletionClosure : Bool
-round78PhysicalCrossModeWeightedSurplusOrDepletionClosure = false
+round78PhysicalPressureResolvedCrossModeSurplusOrDepletionClosure : Bool
+round78PhysicalPressureResolvedCrossModeSurplusOrDepletionClosure = false
 
 round78PhysicalNormalizedSixThreeGramEstimate : Bool
 round78PhysicalNormalizedSixThreeGramEstimate = false
@@ -85,9 +102,17 @@ round78SameModeSelfStretchingRejectedIsTrue :
   round78SameModeSelfStretchingRejected ≡ true
 round78SameModeSelfStretchingRejectedIsTrue = refl
 
+round78PositiveCrossModePhysicalTriadWitnessConstructedIsTrue :
+  round78PositiveCrossModePhysicalTriadWitnessConstructed ≡ true
+round78PositiveCrossModePhysicalTriadWitnessConstructedIsTrue = refl
+
 round78PositiveStretchingSignSufficientForB2IsFalse :
   round78PositiveStretchingSignSufficientForB2 ≡ false
 round78PositiveStretchingSignSufficientForB2IsFalse = refl
+
+round78B2ReducedToDefectResolvedSpectralTargetIsTrue :
+  round78B2ReducedToDefectResolvedSpectralTarget ≡ true
+round78B2ReducedToDefectResolvedSpectralTargetIsTrue = refl
 
 round78ClayPromotionIsFalse : round78ClayPromotion ≡ false
 round78ClayPromotionIsFalse = refl
