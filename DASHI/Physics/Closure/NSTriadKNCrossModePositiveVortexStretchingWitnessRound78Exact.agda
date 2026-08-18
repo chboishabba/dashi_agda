@@ -14,48 +14,62 @@ module DASHI.Physics.Closure.NSTriadKNCrossModePositiveVortexStretchingWitnessRo
 --
 -- ROUND78 / POSITIVE CROSS-MODE FINITE WITNESS
 --
--- Round78 proved exact same-mode self-stretching vanishes.  This file checks
--- that the literal Fourier strain carrier nevertheless admits a genuinely
--- positive CROSS-vector interaction.
+-- Round78 proved exact same-mode self-stretching vanishes.  The literal
+-- Fourier carrier nevertheless admits a positive interaction between TWO
+-- divergence-free Fourier vorticity modes.
 --
--- Choose
+-- Choose strain/source mode k=(1,0,0) with omega_k=(0,1,0), and target mode
+-- l=(1,0,1) with omega_l=(1,0,-1).  Both vorticities are transverse to their
+-- own modes and the resonant output is k+l=(2,0,1).  The existing exact strain
+-- formula gives
 --
---   k      = (1,0,0), |k|^-2 = 1,
---   source = (0,1,0),
---   target = (1,0,-1).
---
--- The existing exact formula gives
---
---   target . S_k(source) target
---     = - (k.target) k.(source x target)
+--   omega_l . S_k(omega_k) omega_l
+--     = - (k.omega_l) k.(omega_k x omega_l)
 --     = -(1)(-1)
 --     = 1.
 --
--- This is not yet a selected NS descendant/triad theorem: target is an exact
--- vector in the strain action, not an assertion that the Round77 critical
--- event dynamically realizes this configuration.  It proves the local Fourier
--- geometry has not killed the only viable B2 mechanism after the same-mode
--- no-go; positive cross-mode stretching is algebraically possible.
+-- This is an exact physical Fourier-pair geometry witness, but still not a
+-- selected Round77 dynamic descendant theorem.  It proves the self-mode no-go
+-- does not kill B2 in principle: a cross-mode/nonlocal amplifying channel
+-- genuinely exists on the same rational Fourier geometry.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
-open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _*_; -_)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_; -_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (trans)
 
 import DASHI.Physics.Closure.NSTriadKNRationalLerayProjectionExact as V
 import DASHI.Physics.Closure.NSTriadKNFourierStrainMultiplierRound38Exact as Strain
 
+sourceMode : V.Vector3
+sourceMode = V.v3 1ℚ 0ℚ 0ℚ
+
+targetMode : V.Vector3
+targetMode = V.v3 1ℚ 0ℚ 1ℚ
+
+resonantOutputMode : V.Vector3
+resonantOutputMode = V.add sourceMode targetMode
+
 unitXMode : V.ProjectionMode
-unitXMode = V.projection-mode (V.v3 1ℚ 0ℚ 0ℚ) 1ℚ refl
+unitXMode = V.projection-mode sourceMode 1ℚ refl
 
 crossSource : V.Vector3
 crossSource = V.v3 0ℚ 1ℚ 0ℚ
 
 crossTarget : V.Vector3
 crossTarget = V.v3 1ℚ 0ℚ (- 1ℚ)
+
+sourceVorticityTransverse : V.dot sourceMode crossSource ≡ 0ℚ
+sourceVorticityTransverse = solve []
+
+targetVorticityTransverse : V.dot targetMode crossTarget ≡ 0ℚ
+targetVorticityTransverse = solve []
+
+resonanceExact : resonantOutputMode ≡ V.v3 (1ℚ + 1ℚ) 0ℚ 1ℚ
+resonanceExact = refl
 
 positiveCrossModeStretchingExact :
   Strain.fourierStretchingScalar unitXMode crossSource crossTarget ≡ 1ℚ
@@ -67,6 +81,9 @@ positiveCrossModeStretchingExact =
 
 round78PositiveCrossModeStretchingExistsOnFourierCarrier : Bool
 round78PositiveCrossModeStretchingExistsOnFourierCarrier = true
+
+round78WitnessUsesTwoTransverseVorticityModes : Bool
+round78WitnessUsesTwoTransverseVorticityModes = true
 
 round78PositiveCrossModeWitnessAlreadyIsSelectedB2 : Bool
 round78PositiveCrossModeWitnessAlreadyIsSelectedB2 = false
