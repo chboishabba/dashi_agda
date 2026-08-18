@@ -10,7 +10,7 @@ module DASHI.Physics.Closure.NSTriadKNStateDependentReplenishmentMarginRound82Ex
 -- Pekka Tuominen; Richard L. Tweedie,
 -- "Subgeometric rates of convergence of f-ergodic Markov chains",
 -- Advances in Applied Probability 26 (1994), 775--798.
--- DOI: 10.2307/1427445.
+-- DOI: 10.2307/1427820.
 --
 -- Roger Temam,
 -- "Infinite-Dimensional Dynamical Systems in Mechanics and Physics", 2nd ed.,
