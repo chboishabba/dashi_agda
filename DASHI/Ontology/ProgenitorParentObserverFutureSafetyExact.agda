@@ -7,6 +7,7 @@ open import Agda.Builtin.String using (String)
 import DASHI.Core.AdmissibleReachability as Reachability
 import DASHI.Core.DynamicalQuotientSafety as Dynamic
 import DASHI.Core.PluralConsumerProjectionSafety as Plural
+import DASHI.Core.PolicyRelativeProjectionSafety as Policy
 import DASHI.Core.TypedDependencyCore as Dependency
 
 ------------------------------------------------------------------------
@@ -148,6 +149,47 @@ parentConsumerSafetyAsymmetry =
     publicRegistryIsDynamicallySafe
     authorityDecisionTerminalisationDefect
 
+------------------------------------------------------------------------
+-- Policy-relative strengthening.
+--
+-- The coarse authority policy sees the same current `publicP8810` atom and
+-- therefore selects the same resolution action for both states. The selected
+-- future observations nevertheless differ. This is exactly the existing DASHI
+-- PolicyExposedQuotientDefect shape.
+------------------------------------------------------------------------
+
+parentAuthorityPolicy :
+  Policy.CoarseInterventionPolicy ParentDecisionObservation ParentDecisionAction
+parentAuthorityPolicy =
+  Policy.coarseInterventionPolicy (λ _ → resolveCurrentAuthority)
+
+parentAuthorityPolicyDefect :
+  Policy.PolicyExposedQuotientDefect
+    parentDecisionSystem
+    (parentDecisionProject authorityDecisionConsumer)
+    parentAuthorityPolicy
+parentAuthorityPolicyDefect =
+  Policy.policyExposedQuotientDefect
+    donorNow
+    adoptiveNow
+    donorResolved
+    adoptiveResolved
+    resolveCurrentAuthority
+    refl
+    refl
+    refl
+    donorResolutionExecutes
+    adoptiveResolutionExecutes
+    (λ ())
+
+coarseParentAuthorityPolicyIsUnsafe :
+  Policy.PolicyRelativeSafety
+    parentDecisionSystem
+    (parentDecisionProject authorityDecisionConsumer)
+    parentAuthorityPolicy → ⊥
+coarseParentAuthorityPolicyIsUnsafe safety =
+  Policy.policyDefectContradictsPolicySafety safety parentAuthorityPolicyDefect
+
 record ParentObserverFutureSafetyBoundary : Set where
   constructor parentObserverFutureSafetyBoundary
   field
@@ -156,10 +198,13 @@ record ParentObserverFutureSafetyBoundary : Set where
     authorityConsumerCanExposeHiddenFuture : Bool
     authorityConsumerCanExposeHiddenFutureIsTrue :
       authorityConsumerCanExposeHiddenFuture ≡ true
+    coarseAuthorityPolicyCanBeUnsafe : Bool
+    coarseAuthorityPolicyCanBeUnsafeIsTrue :
+      coarseAuthorityPolicyCanBeUnsafe ≡ true
     localConsumerSafetyPromotesToPluralSafety : Bool
     localConsumerSafetyPromotesToPluralSafetyIsFalse :
       localConsumerSafetyPromotesToPluralSafety ≡ false
 
 canonicalParentObserverFutureSafetyBoundary : ParentObserverFutureSafetyBoundary
 canonicalParentObserverFutureSafetyBoundary =
-  parentObserverFutureSafetyBoundary true refl true refl false refl
+  parentObserverFutureSafetyBoundary true refl true refl true refl false refl
