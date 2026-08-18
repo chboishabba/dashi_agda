@@ -20,13 +20,16 @@ module DASHI.Moonshine.P13GeometricFrobeniusRealizationExact where
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
-open import Data.Fin using (zero)
-open import Data.Sum using (inj₁)
+open import Data.Fin using (Fin; zero)
+open import Data.Sum using (inj₁; inj₂)
 
 import DASHI.Foundations.FiniteInvolutionOrbitNormalFormExact as Orbit
 import DASHI.Moonshine.OggPrimeControlMatrixExact as Matrix
 import DASHI.Moonshine.SupersingularFrobeniusOrbitSpectrumExact as Spectrum
 import DASHI.Moonshine.P13OggFullLevel2DeuringControlExact as P13
+
+emptyFinElim : ∀ {A : Set} → Fin 0 → A
+emptyFinElim ()
 
 p13FrobeniusCarrier : Spectrum.SupersingularFrobeniusCarrier Matrix.prime13
 p13FrobeniusCarrier = record
@@ -45,6 +48,7 @@ p13ToNormal P13.j5 = inj₁ zero
 
 p13FromNormal : P13Normal → P13.P13GeometricJ
 p13FromNormal (inj₁ zero) = P13.j5
+p13FromNormal (inj₂ (empty , bit)) = emptyFinElim empty
 
 p13FromAfterTo :
   (j : P13.P13GeometricJ) → p13FromNormal (p13ToNormal j) ≡ j
@@ -53,6 +57,7 @@ p13FromAfterTo P13.j5 = refl
 p13ToAfterFrom :
   (j : P13Normal) → p13ToNormal (p13FromNormal j) ≡ j
 p13ToAfterFrom (inj₁ zero) = refl
+p13ToAfterFrom (inj₂ (empty , bit)) = emptyFinElim empty
 
 p13IntertwinesFrobenius :
   (j : P13.P13GeometricJ) →
