@@ -18,24 +18,33 @@ module DASHI.Moonshine.P11P37MarkedDeckSelectorCutsetExact where
 --
 -- DASHI CONTRIBUTION
 --
--- The p=11 and p=37 marked calculations now make two different notions of
--- separation explicit:
+-- The marked calculations make two different notions of separation explicit:
 --
 --   (A) representation separation:
 --       deck type refines scalar Hecke/Frobenius fingerprints;
 --
 --   (B) Ogg/control separation:
---       the coarse geometric Frobenius paired-orbit defect differs at 11/37.
+--       the COARSE geometric Frobenius paired-orbit defect differs between the
+--       Ogg p=11 laboratory and non-Ogg p=37/p=43 controls.
 --
--- These are not the same theorem.  In particular, scalar Hecke/Frobenius
--- blindness to deck type occurs at BOTH p=11 and non-Ogg p=37, so the need for
--- a deck observer is not itself an Ogg selector.
+-- These are not the same theorem.  Scalar Hecke/Frobenius blindness to deck
+-- type occurs at BOTH p=11 and non-Ogg p=37, so the need for a deck observer is
+-- not itself an Ogg selector.
 --
--- Conversely, the existing finite under-72 scan proves zero coarse Frobenius
--- pair defect agrees with Fricke saturation / the external Ogg label, but that
--- scan is derived from the same Fricke/class-number input family.  It therefore
--- identifies the right candidate invariant without becoming an independent
--- geometric all-prime proof.
+-- Independent/source-facing coarse Frobenius realizations now exist at:
+--
+--   p=11 : 2 fixed, 0 paired;
+--   p=37 : 1 fixed, 1 paired;
+--   p=43 : 2 fixed, 1 paired.
+--
+-- The p=43 realization is derived from an independent Deuring/full-level-2
+-- chart with four coarse j-classes; it is not inferred from the Fricke table.
+--
+-- Conversely, the existing complete under-72 scan proves zero coarse
+-- Frobenius pair defect agrees with Fricke saturation / the external Ogg label,
+-- but that generic scan is derived from the same Fricke/class-number input
+-- family.  It identifies the right candidate invariant without becoming an
+-- independent geometric all-prime proof.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -44,6 +53,9 @@ import DASHI.Moonshine.P37MarkedDeckIsotypicCollisionExact as P37Iso
 import DASHI.Moonshine.P11MarkedX2DeckCharacterSeparationExact as P11Deck
 import DASHI.Moonshine.BrandtHeckeFrobeniusFrickeSelectorWeldExact as Selector
 import DASHI.Moonshine.OggPrimeControlMatrixExact as Matrix
+import DASHI.Moonshine.SupersingularFrobeniusOrbitSpectrumExact as Spectrum
+import DASHI.Moonshine.P37SageSupersingularFrobeniusExact as P37Geo
+import DASHI.Moonshine.P43GeometricFrobeniusRealizationExact as P43Geo
 
 ------------------------------------------------------------------------
 -- Representation-level information loss/refinement exists on both sides.
@@ -62,7 +74,7 @@ p11DeckRefinementRepairsKnownCollision :
 p11DeckRefinementRepairsKnownCollision = P11Deck.extendedFingerprintsSeparate
 
 ------------------------------------------------------------------------
--- Coarse geometric Frobenius is the presently surviving 11/37 separator.
+-- Coarse geometric Frobenius is the presently surviving selector coordinate.
 ------------------------------------------------------------------------
 
 p11CoarseFrobeniusPairDefect : Nat
@@ -71,15 +83,39 @@ p11CoarseFrobeniusPairDefect = Selector.frobeniusPairDefect Matrix.prime11
 p37CoarseFrobeniusPairDefect : Nat
 p37CoarseFrobeniusPairDefect = Selector.frobeniusPairDefect Matrix.prime37
 
+p43CoarseFrobeniusPairDefect : Nat
+p43CoarseFrobeniusPairDefect = Selector.frobeniusPairDefect Matrix.prime43
+
 p11DefectZero : p11CoarseFrobeniusPairDefect ≡ 0
 p11DefectZero = Selector.p11FrobeniusPairDefectIsZero
 
 p37DefectOne : p37CoarseFrobeniusPairDefect ≡ 1
 p37DefectOne = Selector.p37FrobeniusPairDefectIsOne
 
+p43DefectOne : p43CoarseFrobeniusPairDefect ≡ 1
+p43DefectOne = P43Geo.p43PairedOrbitDefectIsOne
+
 coarseFrobeniusPairDefectSeparates11And37 :
   p11CoarseFrobeniusPairDefect ≡ p37CoarseFrobeniusPairDefect → ⊥
 coarseFrobeniusPairDefectSeparates11And37 = Selector.p11AndP37FrobeniusDefectsDiffer
+
+coarseFrobeniusPairDefectSeparates11And43 :
+  p11CoarseFrobeniusPairDefect ≡ p43CoarseFrobeniusPairDefect → ⊥
+coarseFrobeniusPairDefectSeparates11And43 ()
+
+------------------------------------------------------------------------
+-- Consume the actual geometric realization witnesses for both non-Ogg controls.
+------------------------------------------------------------------------
+
+p37IndependentGeometricRealization :
+  Spectrum.SupersingularFrobeniusNormalFormRealization
+    Matrix.prime37 P37Geo.p37FrobeniusCarrier
+p37IndependentGeometricRealization = P37Geo.p37GeometricSpectrumRealization
+
+p43IndependentGeometricRealization :
+  Spectrum.SupersingularFrobeniusNormalFormRealization
+    Matrix.prime43 P43Geo.p43FrobeniusCarrier
+p43IndependentGeometricRealization = P43Geo.p43GeometricSpectrumRealization
 
 ------------------------------------------------------------------------
 -- Finite Ogg calibration and authority boundary.
@@ -96,9 +132,12 @@ record P11P37MarkedDeckSelectorCutsetBoundary : Set where
     p37ScalarHeckeFrobeniusNeedsDeckRefinement : Bool
     deckRefinementIsThereforeOggSelector : Bool
     coarseFrobeniusPairDefectSeparates11And37 : Bool
+    independentP37GeometricRealization : Bool
+    independentP43GeometricRealization : Bool
+    p43NontrivialStabilizerControlDefectOne : Bool
     finiteUnder72ZeroDefectMatchesOgg : Bool
     finiteScanIsIndependentGeometricAllPrimeProof : Bool
-    nextIndependentControlGeometryNeeded : Bool
+    secondIndependentControlGeometryStillMissing : Bool
 
 canonicalP11P37MarkedDeckSelectorCutsetBoundary :
   P11P37MarkedDeckSelectorCutsetBoundary
@@ -107,7 +146,10 @@ canonicalP11P37MarkedDeckSelectorCutsetBoundary = record
   ; p37ScalarHeckeFrobeniusNeedsDeckRefinement = true
   ; deckRefinementIsThereforeOggSelector = false
   ; coarseFrobeniusPairDefectSeparates11And37 = true
+  ; independentP37GeometricRealization = true
+  ; independentP43GeometricRealization = true
+  ; p43NontrivialStabilizerControlDefectOne = true
   ; finiteUnder72ZeroDefectMatchesOgg = true
   ; finiteScanIsIndependentGeometricAllPrimeProof = false
-  ; nextIndependentControlGeometryNeeded = true
+  ; secondIndependentControlGeometryStillMissing = false
   }
