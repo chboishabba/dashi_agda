@@ -9,47 +9,47 @@ import DASHI.Algebra.DisagreementFourViewBoundary as Four
 import DASHI.Biology.IntersectionalLongitudinalResidualDynamics as Intersectional
 
 ------------------------------------------------------------------------
--- Intersectional evidence pooling is claim/context indexed.
+-- Intersectional evidence pooling is claim/context/operator indexed.
 --
 -- The existing longitudinal carrier keeps body, time, place, relation,
--- institution and axis bundle explicit.  We use that whole carrier as the
--- context index.  Consequently evidence from two distinct situated carriers
--- cannot be merged by mergeSameFibre: an explicit EvidenceFibreAlignment is
--- required first.  This blocks axis/context collapse from manufacturing a
--- contradiction.
+-- institution and axis bundle explicit.  The opposition descriptor separately
+-- keeps the base claim, opposing target and operator role explicit.  Thus two
+-- reports cannot manufacture a contradiction merely by sharing a surface label
+-- while differing in situated context OR in what kind of opposition is meant.
 ------------------------------------------------------------------------
 
 IntersectionalClaimEvidence :
-  String →
+  Indexed.OppositionDescriptor String →
   Intersectional.IntersectionalResidualCarrier →
   Set
-IntersectionalClaimEvidence claim context =
+IntersectionalClaimEvidence opposition context =
   Indexed.ClaimFibreEvidence
     String
     Intersectional.IntersectionalResidualCarrier
-    claim
+    opposition
     context
 
 situatedSupport :
-  (claim : String) →
+  (opposition : Indexed.OppositionDescriptor String) →
   (context : Intersectional.IntersectionalResidualCarrier) →
-  IntersectionalClaimEvidence claim context
-situatedSupport claim context =
+  IntersectionalClaimEvidence opposition context
+situatedSupport opposition context =
   Indexed.claimFibreEvidence
     (Four.assess true false)
     (Intersectional.carrierReading context ∷ [])
 
 mergeSituatedEvidence :
-  ∀ {claim context} →
-  IntersectionalClaimEvidence claim context →
-  IntersectionalClaimEvidence claim context →
-  IntersectionalClaimEvidence claim context
+  ∀ {opposition context} →
+  IntersectionalClaimEvidence opposition context →
+  IntersectionalClaimEvidence opposition context →
+  IntersectionalClaimEvidence opposition context
 mergeSituatedEvidence = Indexed.mergeSameFibre
 
 record IntersectionalClaimEvidenceBoundary : Set where
   field
     bodyTimePlaceRelationInstitutionAxesRetained : Bool
     crossContextPoolingAutomaticClaimed : Bool
+    crossOppositionRolePoolingAutomaticClaimed : Bool
     axisNeutralContradictionManufactureAllowed : Bool
     explicitAlignmentRequiredAcrossContexts : Bool
 
@@ -58,6 +58,7 @@ canonicalIntersectionalClaimEvidenceBoundary :
 canonicalIntersectionalClaimEvidenceBoundary = record
   { bodyTimePlaceRelationInstitutionAxesRetained = true
   ; crossContextPoolingAutomaticClaimed = false
+  ; crossOppositionRolePoolingAutomaticClaimed = false
   ; axisNeutralContradictionManufactureAllowed = false
   ; explicitAlignmentRequiredAcrossContexts = true
   }
