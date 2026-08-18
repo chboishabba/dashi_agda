@@ -18,7 +18,7 @@ open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List)
 open import Data.Rational.Base as ℚ using (ℚ; _*_)
 import Data.Rational.Properties as ℚP
-open import Relation.Binary.PropositionalEquality using (trans)
+open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
@@ -47,10 +47,11 @@ matrixProductAssociative indices first second third row column =
   trans
     (Sums.sumRationalCong indices _ _
       (λ middle2 →
-        Fibre.sumRationalScaleRight
-          (third middle2 column)
-          indices
-          (λ middle1 → first row middle1 * second middle1 middle2)))
+        sym
+          (Fibre.sumRationalScaleRight
+            (third middle2 column)
+            indices
+            (λ middle1 → first row middle1 * second middle1 middle2))))
     (trans
       (Fubini.sumSwap indices indices
         (λ middle2 middle1 →
