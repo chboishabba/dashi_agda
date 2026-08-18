@@ -107,7 +107,7 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound62ProducerCutsetValid
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; _+_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -157,8 +157,6 @@ liveSU2HardProducerCount : Nat
 liveSU2HardProducerCount =
   g2Hard + oneLoopHard + nonlinearRGHard + transferHard + latticeGapHard
   + continuumHard + nontrivialityMassHard
-  where
-  open import Agda.Builtin.Nat using (_+_)
 
 liveSU2HardProducerCountExact : liveSU2HardProducerCount ≡ 13
 liveSU2HardProducerCountExact = refl
