@@ -22,3 +22,6 @@ import DASHI.Physics.Chemistry.AtomicEvidenceObligationBridgeExact
 -- Existing source-native support-square / contradiction projection from the
 -- cross-ontology tranche remains an independent consumer of the same carrier.
 import DASHI.Interop.WikidataDerivationSupportSquareExact
+
+-- Focused proof-shape regression for this tranche.
+import DASHI.EvidencePolarityCrossDomainRegression
