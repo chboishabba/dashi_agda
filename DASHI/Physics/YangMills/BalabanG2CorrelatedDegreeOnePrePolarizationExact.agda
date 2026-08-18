@@ -38,13 +38,13 @@ module DASHI.Physics.YangMills.BalabanG2CorrelatedDegreeOnePrePolarizationExact 
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _-_)
+open import Data.Rational.Base as ℚ using (ℚ; _+_; _-_)
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
-import DASHI.Physics.YangMills.BalabanP33FiniteKKTPseudoinverseProjectorExact as Pseudo
 import DASHI.Physics.YangMills.BalabanP33CorrelatedMobiusDegreeJointExact as Degree
+import DASHI.Physics.YangMills.BalabanSelectedCorrelatedResidualOwnershipExact as Ownership
 import DASHI.Physics.YangMills.BalabanSelectedCanonicalConstraintAtomsFromSubsetExact as Canonical
 import DASHI.Physics.YangMills.BalabanSelectedCanonicalConstraintDegreeBlocksExact as Blocks
 import DASHI.Physics.YangMills.BalabanCanonicalGreenDegreeOneOnlyExact as DegreeOne
@@ -107,8 +107,7 @@ canonicalCorrelatedResidualIsSignedDegreeOnePlusHigherRaw :
   ∀ {Multiplier pseudoData firstVariationCovector bondField plaquette}
     (inputs : Canonical.CanonicalSubsetCorrelatedAuthorityInputs
       {Multiplier} pseudoData firstVariationCovector bondField plaquette) →
-  DASHI.Physics.YangMills.BalabanSelectedCorrelatedResidualOwnershipExact.correlatedResidualTotal
-    (Blocks.canonicalFamily inputs)
+  Ownership.correlatedResidualTotal (Blocks.canonicalFamily inputs)
   ≡ signedDegreeOneCore inputs + higherRawCore inputs
 canonicalCorrelatedResidualIsSignedDegreeOnePlusHigherRaw inputs =
   trans
