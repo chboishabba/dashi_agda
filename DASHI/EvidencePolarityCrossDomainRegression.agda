@@ -40,6 +40,11 @@ strictAntipodeStillCannotSelfQualifyAsLogicalNegation :
 strictAntipodeStillCannotSelfQualifyAsLogicalNegation =
   GeometricEvidence.positiveAntipodeCannotSelfQualifyAsLogicalNegation
 
+strictAntipodeOrientationStillNotAlgebraicInverse :
+  Lens.orientationReversalRole ≡ Lens.algebraicInverseRole → ⊥
+strictAntipodeOrientationStillNotAlgebraicInverse =
+  GeometricEvidence.strictAntipodeOrientationRoleIsNotAlgebraicInverse
+
 opposingSupportDoesNotSelfQualifyAsNegation :
   Indexed.ClaimIndexedEvidencePolarityBoundary.opposingSupportAutomaticallyMeansLogicalNegation
     Indexed.canonicalClaimIndexedEvidencePolarityBoundary
@@ -105,6 +110,11 @@ repoNativeThreeCubeCarrierStill19683 = Interaction.fineInteractionStateCountIs19
 blockwiseOrientationBaseStill2744 : Interaction.blockOrientationClassCount ≡ 2744
 blockwiseOrientationBaseStill2744 = Interaction.blockOrientationClassCountIs2744
 
+globalAndBlockwiseQuotientCountsStillDiffer :
+  Interaction.globalAntipodalClassCount ≡ Interaction.blockOrientationClassCount → ⊥
+globalAndBlockwiseQuotientCountsStillDiffer =
+  Interaction.globalAndBlockwiseQuotientCountsDiffer
+
 allNoncentralBlockOrientationFibreStillEight :
   Interaction.allThreeNoncentralOrientationFibreSize ≡ 8
 allNoncentralBlockOrientationFibreStillEight =
@@ -120,6 +130,18 @@ aggregateZeroDoesNotIdentifyFineStates :
   Interaction.structuralZeroRound ≡ Interaction.cancellationZeroRound → ⊥
 aggregateZeroDoesNotIdentifyFineStates =
   proj₂ Interaction.cancellationToNeutralDoesNotImplyTrivialFineState
+
+blockOrientationCollisionStillSplitByAggregate :
+  Interaction.forgetBlockOrientation Interaction.allPositiveRound
+  ≡ Interaction.forgetBlockOrientation Interaction.baseFlipped
+blockOrientationCollisionStillSplitByAggregate =
+  proj₁ Interaction.blockOrientationCollisionSeparatedByAggregate
+
+aggregateCollisionStillSplitByBlockOrientation :
+  Interaction.forgetBlockOrientation Interaction.structuralZeroRound
+  ≡ Interaction.forgetBlockOrientation Interaction.cancellationZeroRound → ⊥
+aggregateCollisionStillSplitByBlockOrientation =
+  proj₂ Interaction.aggregateCollisionSeparatedByBlockOrientation
 
 binaryCountStillErasesDisagreementDirection :
   Aggregate.acceptCount (Aggregate.binaryProjectPositiveOnly Aggregate.forwardDisagreement)
