@@ -7,10 +7,12 @@ module DASHI.Moonshine.P11JacquetLanglandsFixedSpaceResolutionExact where
 -- the principal full-level-2 marked fixed space and the classical K_0(4)
 -- oldvector fixed space.  That target was too strong.
 --
--- Standard Jacquet--Langlands supplies sameness of the AUTOMORPHIC
--- REPRESENTATION (and therefore of the local component at 2), while Martin's
--- basis-problem formulation explicitly warns that the modular-form-level JL
--- map is non-canonical.
+-- Standard Jacquet--Langlands supplies a CORRESPONDENCE between the global
+-- quaternionic and classical automorphic representations and, at the split
+-- place 2, matching local GL_2(Q_2) components.  It does NOT literally identify
+-- the two different global representations.  Martin's basis-problem
+-- formulation also explicitly warns that the modular-form-level JL map is
+-- non-canonical.
 --
 -- Independently, repository finite algebra now proves that the two compact-open
 -- fixed spaces are distinct 3-dimensional subspaces of one compact induced
@@ -19,7 +21,7 @@ module DASHI.Moonshine.P11JacquetLanglandsFixedSpaceResolutionExact where
 --
 -- Therefore the correct theorem is:
 --
---   same local representation
+--   corresponding / matching local representation at 2
 --   + different compact-open fixed subspaces
 --   + noncanonical comparison discipline.
 --
@@ -39,13 +41,20 @@ import DASHI.Moonshine.P11Level44TwoAdicAveragingNoGoExact as Averaging
 -- Load-bearing representation theorem.
 ------------------------------------------------------------------------
 
-sameP11LocalRepresentationAtTwo :
-  JL.localAtTwo JL.p11QuaternionBrandtRepresentation
-  ≡ JL.localAtTwo JL.p11ClassicalNewformRepresentation
-sameP11LocalRepresentationAtTwo = JL.p11JacquetLanglandsSameLocalAtTwo
+p11GlobalJacquetLanglandsCorrespondence :
+  JL.JacquetLanglandsCorresponds
+    JL.p11QuaternionBrandtRepresentation
+    JL.p11ClassicalNewformRepresentation
+p11GlobalJacquetLanglandsCorrespondence = JL.p11JacquetLanglandsCorrespondence
+
+matchingP11LocalRepresentationAtTwo :
+  JL.quaternionLocalAtTwo JL.p11QuaternionBrandtRepresentation
+  ≡ JL.classicalLocalAtTwo JL.p11ClassicalNewformRepresentation
+matchingP11LocalRepresentationAtTwo = JL.p11JacquetLanglandsLocalAtTwoMatch
 
 quaternionSideUnramifiedAtTwo :
-  JL.UnramifiedAtTwo (JL.localAtTwo JL.p11QuaternionBrandtRepresentation)
+  JL.UnramifiedAtTwo
+    (JL.quaternionLocalAtTwo JL.p11QuaternionBrandtRepresentation)
 quaternionSideUnramifiedAtTwo = JL.p11QuaternionLocalAtTwoUnramified
 
 ------------------------------------------------------------------------
@@ -93,8 +102,9 @@ compactAveragingStillNotAnIsomorphism = refl
 
 record P11JacquetLanglandsFixedSpaceResolutionBoundary : Set where
   field
-    representationLevelJLSupplied : Bool
-    sameLocalRepresentationAtTwoDerived : Bool
+    representationLevelJLCorrespondenceSupplied : Bool
+    globalRepresentationsLiterallyIdentified : Bool
+    matchingLocalRepresentationAtTwoSupplied : Bool
     twoFixedSpacesPlacedInCommonAmbient : Bool
     twoFixedSpacesProvedDistinct : Bool
     exactIntersectionDimensionDerived : Bool
@@ -106,8 +116,9 @@ record P11JacquetLanglandsFixedSpaceResolutionBoundary : Set where
 canonicalP11JacquetLanglandsFixedSpaceResolutionBoundary :
   P11JacquetLanglandsFixedSpaceResolutionBoundary
 canonicalP11JacquetLanglandsFixedSpaceResolutionBoundary = record
-  { representationLevelJLSupplied = true
-  ; sameLocalRepresentationAtTwoDerived = true
+  { representationLevelJLCorrespondenceSupplied = true
+  ; globalRepresentationsLiterallyIdentified = false
+  ; matchingLocalRepresentationAtTwoSupplied = true
   ; twoFixedSpacesPlacedInCommonAmbient = true
   ; twoFixedSpacesProvedDistinct = true
   ; exactIntersectionDimensionDerived = true
