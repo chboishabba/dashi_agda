@@ -11,6 +11,7 @@ import DASHI.Algebra.DisagreementFourViewBoundary as Four
 import DASHI.Biology.BrainProxyEvidenceAuthorityBridgeExact as Brain
 import DASHI.Biology.IntersectionalClaimEvidenceFibreExact as Intersectional
 import DASHI.Chemistry.EvidenceObligationAuthorityBridgeExact as Chemistry
+import DASHI.Cognition.PNF.AggregateProjectionWorldCompletenessBoundaryExact as Completeness
 import DASHI.Cognition.PNF.BinaryBalancedTernaryAggregateLossExact as Aggregate
 import DASHI.Core.EvidenceObligationAuthoritySeparationExact as Governed
 import DASHI.Foundations.BalancedTernaryAntipodalOrbitExact as Orbit
@@ -152,6 +153,18 @@ binaryCountStillErasesDisagreementDirection =
 halfPointStillComplementFixed :
   Aggregate.complementPoint Aggregate.probabilityHalf ≡ Aggregate.probabilityHalf
 halfPointStillComplementFixed = Aggregate.halfIsComplementFixed
+
+centralLimitStillNotConstructedByDeterministicBoundary :
+  Completeness.AggregateProjectionWorldCompletenessBoundary.centralLimitTheoremConstructedHere
+    Completeness.canonicalAggregateProjectionWorldCompletenessBoundary
+  ≡ false
+centralLimitStillNotConstructedByDeterministicBoundary = refl
+
+concentrationStillCannotMintReopening :
+  Completeness.AggregateProjectionWorldCompletenessBoundary.concentrationWouldReopenAggregateFibreWithoutResidual
+    Completeness.canonicalAggregateProjectionWorldCompletenessBoundary
+  ≡ false
+concentrationStillCannotMintReopening = refl
 
 fiveAntipodalClassesStillNotFiveD4IrrepSpecies :
   D4Sep.TernaryNineAntipodalD4Boundary.fiveAntipodalOrbitClassesAreFiveD4IrrepSpecies
