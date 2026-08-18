@@ -5,6 +5,7 @@ open import DASHI.Core.Prelude using (false; true; _≡_; refl; ⊥)
 import DASHI.Core.IntersectionalNonFactorability as NonFactor
 import DASHI.Core.DynamicalQuotientSafety as Dynamic
 import DASHI.Core.PolicyRelativeProjectionSafety as Policy
+import DASHI.Core.RecoverableQuotientCompositionExact as Recoverable
 import DASHI.Governance.DiachronicDelegatedAuthorityBoundary as GovernanceDiachronic
 import DASHI.Ontology.ProgenitorParentProjectionFibre as ParentFibre
 import DASHI.Ontology.ProgenitorParentObserverDynamicsBridge as ParentDynamics
@@ -12,6 +13,7 @@ import DASHI.Ontology.ProgenitorParentAuthorityRoutingNonfactorabilityExact as R
 import DASHI.Ontology.ProgenitorParentObserverFutureSafetyExact as Future
 import DASHI.Ontology.ProgenitorParentDiachronicAuthorityFibreExact as DiachronicParent
 import DASHI.Ontology.ProgenitorParentResidualDynamicsExact as Residual
+import DASHI.Ontology.ProgenitorParentProgressiveResidualFactorizationExact as Progressive
 import DASHI.Ontology.ProgenitorParentAllyshipAuthorityBridgeExact as AllyshipAuthority
 import DASHI.Ontology.ProgenitorParentConsultationDecisionSensitivityExact as Consultation
 
@@ -55,6 +57,14 @@ parentReopeningRegression :
     (ParentFibre.projectParentSlot carrier)
     (Residual.parentResidual carrier) ≡ carrier
 parentReopeningRegression = Residual.reopenParentCarrierExact
+
+progressiveParentReopeningRegression :
+  (carrier : ParentFibre.ParentCarrier) →
+  Recoverable.reopen Progressive.parentProgressiveRecoverable
+    (Recoverable.project Progressive.parentProgressiveRecoverable carrier)
+    (Recoverable.residual Progressive.parentProgressiveRecoverable carrier)
+  ≡ carrier
+progressiveParentReopeningRegression = Progressive.parentProgressiveReopeningExact
 
 legalResidualMotionRegression :
   Residual.parentResidual
