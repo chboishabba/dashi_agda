@@ -10,7 +10,9 @@ module DASHI.Moonshine.MarkedHeckeDeckCollisionEverything where
 --     -> direct quaternion marked norm-seven theta loops
 --     -> positive marked T7 orbital correspondence
 --     -> Brandt-newform / deck-standard collision survives T7
---     -> all-prime collision reduced to one marked theta identity.
+--     -> level-44 oldspace fingerprint
+--     -> literal integral three-copy permutation basis in the marked carrier
+--     -> one Z-linear realization intertwines deck S3 and T3/T5/T7.
 --
 -- p=37:
 --   actual 18-root Legendre T3/T5/F carrier
@@ -18,6 +20,7 @@ module DASHI.Moonshine.MarkedHeckeDeckCollisionEverything where
 --     -> complete right-deck isotypic decomposition 3 + 3 + 12
 --     -> explicit trivial/sign 3x3 blocks and standard 6x6 multiplicity block
 --     -> structural trivial-vs-standard collision at (T3,T5,F)=(1,0,+1)
+--     -> exact T3 annihilator and theorem-level T5(T3), F(T3) polynomials
 --     -> deck type repairs the scalar observation.
 --
 -- p=43:
@@ -35,31 +38,28 @@ module DASHI.Moonshine.MarkedHeckeDeckCollisionEverything where
 --
 --       p11 = 0, p37 = 1, p43 = 1.
 --
---   The p11/p37/p43 values now have source-facing geometric realizations.  The
---   complete under-72 Fricke/Ogg agreement remains explicitly non-independent
---   of the class-number/Fricke input from which that generic scan is derived.
---
--- Generic algebra:
---   if a marked space is genuinely identified as global-Hecke x deck and the
---   prime-to-level Hecke family acts only on the global factor, blindness is
---   automatic.  The actual p=37 orbitals are richer: they include nontrivial
---   LEFT frame multipliers while commuting with the RIGHT deck action.  Hence
---   the product-factorization theorem remains a sufficient abstract mechanism,
---   not a same-object description silently imposed on p=37.
---
--- No module here promotes the finite p=11 prime scan to an all-prime theorem.
+-- The remaining p=11 global producer is no longer "try another prime": it is
+-- the same-object identification of the actual marked three-copy permutation
+-- module with the analytic level-11 oldspace inside level 44.  The finite map
+-- on the marked side is now constructed and carries both deck and Hecke
+-- commuting squares.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
+open import Data.Rational using (_/_; +_)
 
 import DASHI.Moonshine.P11Level11Ell7PointCountExact as Point7
 import DASHI.Moonshine.P11MarkedQuaternionThetaEll7Exact as Theta7
 import DASHI.Moonshine.P11MarkedX2T7HeckeCollisionExact as T7
 import DASHI.Moonshine.P11MarkedHeckeThetaCollisionCriterionExact as Criterion
 import DASHI.Moonshine.P11Ell7PointCountBrandtTraceExact as Trace7
+import DASHI.Moonshine.P11MarkedLevel44PermutationOldspaceExact as P11PermOld
+import DASHI.Moonshine.P11MarkedLevel44PermutationIntertwinerExact as P11OldInt
+import DASHI.Moonshine.P11MarkedX2S3HeckeDecompositionExact as P11S3
 import DASHI.Moonshine.P37NonOggFullLevel2DeuringControlExact as P37
 import DASHI.Moonshine.P37MarkedX2JointFingerprintDeckCollisionExact as P37Collision
 import DASHI.Moonshine.P37MarkedDeckIsotypicJointDecompositionExact as P37Iso
+import DASHI.Moonshine.P37MarkedDeckIsotypicPolynomialExact as P37Poly
 import DASHI.Moonshine.P37MarkedDeckIsotypicCollisionExact as P37IsoCollision
 import DASHI.Moonshine.P43NonOggFullLevel2DeuringControlExact as P43
 import DASHI.Moonshine.P43GeometricFrobeniusRealizationExact as P43Geo
@@ -69,8 +69,7 @@ import DASHI.Moonshine.AuxiliaryLevelHeckeDeckFactorizationExact as Aux
 import DASHI.Moonshine.AuxiliaryLevelHeckeObserverNoGoExact as ObserverNoGo
 
 ------------------------------------------------------------------------
--- Regression witnesses consume actual theorem surfaces rather than receipt
--- booleans.
+-- p=11 arithmetic and T7 regression.
 ------------------------------------------------------------------------
 
 p11PointCountTenRegression : Point7.projectivePointCount ≡ 10
@@ -96,7 +95,23 @@ p11ThetaCriterionEll7Regression :
 p11ThetaCriterionEll7Regression = Criterion.ell7DeckBrandtDifferenceCollision
 
 ------------------------------------------------------------------------
--- Old p37 witness-level collision remains intact.
+-- p=11 level-44 permutation oldspace: actual deck + Hecke commuting maps.
+------------------------------------------------------------------------
+
+p11OldPermutationDeckRRegression :
+  (copy : P11PermOld.Old.OldCopy44) →
+  P11PermOld.deckR5 (P11PermOld.oldCopyVector copy)
+  ≡ P11PermOld.oldCopyVector (P11PermOld.Old.oldDeckR copy)
+p11OldPermutationDeckRRegression = P11PermOld.oldCopyDeckRIntertwines
+
+p11OldModuleT7IntertwinerRegression :
+  (v : P11OldInt.Old3) →
+  T7.markedT7Action (P11OldInt.realizeOld3 v)
+  ≡ P11OldInt.realizeOld3 (P11OldInt.scaleOld3 (-[1+ 1 ]) v)
+p11OldModuleT7IntertwinerRegression = P11OldInt.realizeT7
+
+------------------------------------------------------------------------
+-- p37 witness-level collision remains intact.
 ------------------------------------------------------------------------
 
 p37CoarseFingerprintRegression :
@@ -112,7 +127,7 @@ p37DeckMovingFingerprintRegression :
 p37DeckMovingFingerprintRegression = P37Collision.deckMovingEvenT3Eigen
 
 ------------------------------------------------------------------------
--- New complete p37 deck-isotypic compression.
+-- Complete p37 deck-isotypic compression and polynomial closure.
 ------------------------------------------------------------------------
 
 p37DeckDimensionsRegression :
@@ -123,6 +138,20 @@ p37DeckDimensionsRegression = P37Iso.isotypicDimensionsSumToEighteen
 p37StandardIsotypicTwoCopiesRegression :
   2 * P37Iso.standardMultiplicityDimension ≡ P37Iso.standardDeckIsotypicDimension
 p37StandardIsotypicTwoCopiesRegression = P37Iso.standardIsotypicIsTwoMultiplicityCopies
+
+p37StandardT5PolynomialRegression :
+  (x : P37Iso.StdBlock3) →
+  P37Poly.scaleStd (+ 34 / 1) (P37Iso.standardT5 x)
+  ≡ P37Poly.t5Polynomial x
+p37StandardT5PolynomialRegression = P37Poly.standardT5PolynomialExact
+
+p37StandardT3AnnihilatorRegression :
+  (x : P37Iso.StdBlock3) →
+  P37Poly.linearOne
+    (P37Poly.linearNegThree
+      (P37Poly.quadraticA (P37Poly.quadraticB x)))
+  ≡ P37Poly.zeroStd
+p37StandardT3AnnihilatorRegression = P37Poly.standardT3FactorizedAnnihilatorExact
 
 p37StructuralScalarCollisionRegression :
   P37IsoCollision.p37TrivialFingerprint ≡ P37IsoCollision.p37StandardFingerprint
