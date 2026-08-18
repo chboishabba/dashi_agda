@@ -105,14 +105,17 @@ record SectorDecoder : Set where
     decode : Dec.JointEigenFingerprint → CollisionSector
     exact : (x : CollisionSector) → decode (coarseObservation x) ≡ x
 
+brandtAndStandardCannotBeEqual : brandtSector ≡ standardSector → ⊥
+brandtAndStandardCannotBeEqual ()
+
 coarseObservationHasNoExactSectorDecoder : SectorDecoder → ⊥
-coarseObservationHasNoExactSectorDecoder decoder with SectorDecoder.exact decoder brandtSector | SectorDecoder.exact decoder standardSector
-... | brandtExact | standardExact rewrite coarseObservationCollides =
+coarseObservationHasNoExactSectorDecoder decoder =
   brandtAndStandardCannotBeEqual
-    (trans (sym brandtExact) standardExact)
-  where
-    brandtAndStandardCannotBeEqual : brandtSector ≡ standardSector → ⊥
-    brandtAndStandardCannotBeEqual ()
+    (trans
+      (sym (SectorDecoder.exact decoder brandtSector))
+      (trans
+        (cong (SectorDecoder.decode decoder) coarseObservationCollides)
+        (SectorDecoder.exact decoder standardSector)))
 
 ------------------------------------------------------------------------
 -- Boundary.
