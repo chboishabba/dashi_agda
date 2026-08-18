@@ -33,14 +33,13 @@ module DASHI.Physics.YangMills.BalabanCanonicalGreenDegreeStatePreimageExact whe
 --       sourceDegreeVector_d = L g_d,
 --       defectDegreeVector_d = L w_d.
 --
--- This is the missing preimage bridge needed to replace a global K+ row bound
--- by the rank-independent constraint-image energy contraction.
+-- This is the preimage bridge that lets the G2 Green estimate consume physical
+-- state norms rather than a global norm of the singular K+.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Integer.Base using (+_)
-open import Data.Rational.Base as ℚ using (ℚ; _+_; _-_; _*_ ; _/_)
-import Data.Rational.Properties as ℚP
+open import Data.Rational.Base as ℚ using (ℚ; _+_; _-_; _*_; _/_)
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
@@ -51,11 +50,13 @@ import DASHI.Physics.YangMills.BalabanFiniteRectangularRationalExact as Rect
 import DASHI.Physics.YangMills.BalabanP33FiniteKKTAdmissibleProjectorExact as KKT
 import DASHI.Physics.YangMills.BalabanP33FiniteKKTPseudoinverseProjectorExact as Pseudo
 import DASHI.Physics.YangMills.BalabanP33CorrelatedMobiusDegreeJointExact as Degree
+import DASHI.Physics.YangMills.BalabanP33PlaquetteBoundaryProjectorExact as Boundary
 import DASHI.Physics.YangMills.BalabanP33PlaquetteSubsetProjectorExact as Subset
 import DASHI.Physics.YangMills.BalabanWilsonBooleanFourCubeExact as Cube
 import DASHI.Physics.YangMills.BalabanSelectedConstraintAtomGreenExpansionExact as Green
 import DASHI.Physics.YangMills.BalabanSelectedConstraintGreenDegreeBilinearExact as GreenDegree
 import DASHI.Physics.YangMills.BalabanSelectedConstraintMobiusDegreeLayerExact as ConstraintLayer
+import DASHI.Physics.YangMills.BalabanSelectedRawExtractorConstraintDefectAtomsExact as Atoms
 import DASHI.Physics.YangMills.BalabanSelectedSourceSubsetConstraintPartialExact as Source
 import DASHI.Physics.YangMills.BalabanSelectedCanonicalConstraintAtomsFromSubsetExact as Canonical
 
@@ -70,15 +71,14 @@ constraintApplyScaleExact :
   ≡ coefficient * Pseudo.constraintApply pseudoData state row
 constraintApplyScaleExact pseudoData coefficient state row =
   let
-    rows = Matrix.coordinates KKT.physicalStateCarrier
+    coordinates = Matrix.coordinates KKT.physicalStateCarrier
     matrix = Pseudo.constraintMatrix pseudoData
   in
   trans
-    (Sums.sumRationalCong rows _ _
-      (λ coordinate →
-        ℚRing.solve-∀
-          (matrix row coordinate) coefficient (state coordinate)))
-    (Sums.sumRationalScale coefficient rows
+    (Sums.sumRationalCong coordinates _ _
+      (λ coordinate → ℚRing.solve-∀
+        (matrix row coordinate) coefficient (state coordinate)))
+    (Sums.sumRationalScale coefficient coordinates
       (λ coordinate → matrix row coordinate * state coordinate))
 
 sourceSubsetState :
@@ -165,50 +165,36 @@ defectDegreeState inputs Degree.degree4 =
       (defectLayerState inputs Degree.degree2)
       (defectLayerState inputs Degree.degree1))
 
-------------------------------------------------------------------------
--- Each subset layer commutes through the literal constraint map.
-------------------------------------------------------------------------
-
-sourceLayerConstraintExact :
-  ∀ {Multiplier pseudoData firstVariationCovector bondField plaquette}
-    (inputs : Canonical.CanonicalSubsetCorrelatedAuthorityInputs
-      {Multiplier} pseudoData firstVariationCovector bondField plaquette)
-    degree row →
-  Pseudo.constraintApply pseudoData (sourceLayerState inputs degree) row
-  ≡ Green.sumVector (Degree.degreeSubsets degree)
-      (λ subset →
-        Pseudo.constraintApply pseudoData (sourceSubsetState inputs subset)) row
-sourceLayerConstraintExact {pseudoData = pseudoData} inputs degree row =
-  Green.applyRectangularSumVector
-    KKT.physicalStateCarrier
-    (Pseudo.constraintMatrix pseudoData)
-    (Degree.degreeSubsets degree)
-    (sourceSubsetState inputs) row
-
-defectLayerConstraintExact :
-  ∀ {Multiplier pseudoData firstVariationCovector bondField plaquette}
-    (inputs : Canonical.CanonicalSubsetCorrelatedAuthorityInputs
-      {Multiplier} pseudoData firstVariationCovector bondField plaquette)
-    degree row →
-  Pseudo.constraintApply pseudoData (defectLayerState inputs degree) row
-  ≡ Green.sumVector (Degree.degreeSubsets degree)
-      (λ subset →
-        Pseudo.constraintApply pseudoData (defectSubsetState inputs subset)) row
-defectLayerConstraintExact {pseudoData = pseudoData} inputs degree row =
-  Green.applyRectangularSumVector
-    KKT.physicalStateCarrier
-    (Pseudo.constraintMatrix pseudoData)
-    (Degree.degreeSubsets degree)
-    (defectSubsetState inputs) row
-
 partialOf :
   ∀ {Multiplier pseudoData firstVariationCovector bondField plaquette} →
   Canonical.CanonicalSubsetCorrelatedAuthorityInputs
     {Multiplier} pseudoData firstVariationCovector bondField plaquette →
-  _
+  Atoms.SelectedConstraintPartialEvaluationData
+    pseudoData firstVariationCovector
+    (Boundary.rawPlaquetteSingletonExtractor bondField plaquette)
 partialOf inputs =
   Source.asSelectedConstraintPartialEvaluationData
     (Canonical.sourceDefectProducer inputs)
+
+sourceLayerValue :
+  ∀ {Multiplier pseudoData firstVariationCovector rawExtractor} →
+  Atoms.SelectedConstraintPartialEvaluationData
+    {Multiplier} pseudoData firstVariationCovector rawExtractor →
+  Degree.MobiusDegree → Multiplier → ℚ
+sourceLayerValue partial Degree.degree1 = ConstraintLayer.sourceLayer1 partial
+sourceLayerValue partial Degree.degree2 = ConstraintLayer.sourceLayer2 partial
+sourceLayerValue partial Degree.degree3 = ConstraintLayer.sourceLayer3 partial
+sourceLayerValue partial Degree.degree4 = ConstraintLayer.sourceLayer4 partial
+
+defectLayerValue :
+  ∀ {Multiplier pseudoData firstVariationCovector rawExtractor} →
+  Atoms.SelectedConstraintPartialEvaluationData
+    {Multiplier} pseudoData firstVariationCovector rawExtractor →
+  Degree.MobiusDegree → Multiplier → ℚ
+defectLayerValue partial Degree.degree1 = ConstraintLayer.defectLayer1 partial
+defectLayerValue partial Degree.degree2 = ConstraintLayer.defectLayer2 partial
+defectLayerValue partial Degree.degree3 = ConstraintLayer.defectLayer3 partial
+defectLayerValue partial Degree.degree4 = ConstraintLayer.defectLayer4 partial
 
 sourceLayerConstraintAsPartial :
   ∀ {Multiplier pseudoData firstVariationCovector bondField plaquette}
@@ -216,19 +202,15 @@ sourceLayerConstraintAsPartial :
       {Multiplier} pseudoData firstVariationCovector bondField plaquette)
     degree row →
   Pseudo.constraintApply pseudoData (sourceLayerState inputs degree) row
-  ≡ ConstraintLayer.sourcePartialAt (partialOf inputs) row |>layer degree
-  where
-  _|>layer_ : (Cube.Subset4 → ℚ) → Degree.MobiusDegree → ℚ
-  value |>layer Degree.degree1 =
-    Sums.sumRational Cube.singletonSubsets4 value
-  value |>layer Degree.degree2 =
-    Sums.sumRational Cube.pairSubsets4 value
-  value |>layer Degree.degree3 =
-    Sums.sumRational Cube.tripleSubsets4 value
-  value |>layer Degree.degree4 =
-    Sums.sumRational Cube.quarticSubsets4 value
-sourceLayerConstraintAsPartial inputs degree row =
-  trans (sourceLayerConstraintExact inputs degree row) refl
+  ≡ sourceLayerValue (partialOf inputs) degree row
+sourceLayerConstraintAsPartial {pseudoData = pseudoData} inputs degree row =
+  trans
+    (Green.applyRectangularSumVector
+      KKT.physicalStateCarrier
+      (Pseudo.constraintMatrix pseudoData)
+      (Degree.degreeSubsets degree)
+      (sourceSubsetState inputs) row)
+    refl
 
 defectLayerConstraintAsPartial :
   ∀ {Multiplier pseudoData firstVariationCovector bondField plaquette}
@@ -236,23 +218,15 @@ defectLayerConstraintAsPartial :
       {Multiplier} pseudoData firstVariationCovector bondField plaquette)
     degree row →
   Pseudo.constraintApply pseudoData (defectLayerState inputs degree) row
-  ≡ ConstraintLayer.defectPartialAt (partialOf inputs) row |>layer degree
-  where
-  _|>layer_ : (Cube.Subset4 → ℚ) → Degree.MobiusDegree → ℚ
-  value |>layer Degree.degree1 =
-    Sums.sumRational Cube.singletonSubsets4 value
-  value |>layer Degree.degree2 =
-    Sums.sumRational Cube.pairSubsets4 value
-  value |>layer Degree.degree3 =
-    Sums.sumRational Cube.tripleSubsets4 value
-  value |>layer Degree.degree4 =
-    Sums.sumRational Cube.quarticSubsets4 value
-defectLayerConstraintAsPartial inputs degree row =
-  trans (defectLayerConstraintExact inputs degree row) refl
-
-------------------------------------------------------------------------
--- The four binomial combinations commute with L.
-------------------------------------------------------------------------
+  ≡ defectLayerValue (partialOf inputs) degree row
+defectLayerConstraintAsPartial {pseudoData = pseudoData} inputs degree row =
+  trans
+    (Green.applyRectangularSumVector
+      KKT.physicalStateCarrier
+      (Pseudo.constraintMatrix pseudoData)
+      (Degree.degreeSubsets degree)
+      (defectSubsetState inputs) row)
+    refl
 
 sourceDegreeStateConstraintExact :
   ∀ {Multiplier pseudoData firstVariationCovector bondField plaquette}
@@ -262,20 +236,17 @@ sourceDegreeStateConstraintExact :
   Pseudo.constraintApply pseudoData (sourceDegreeState inputs degree) row
   ≡ GreenDegree.sourceDegreeVector
       (Canonical.canonicalConstraintAtoms inputs) degree row
-sourceDegreeStateConstraintExact {pseudoData = pseudoData} inputs Degree.degree1 row =
+sourceDegreeStateConstraintExact inputs Degree.degree1 row =
   trans (sourceLayerConstraintAsPartial inputs Degree.degree1 row) refl
 sourceDegreeStateConstraintExact {pseudoData = pseudoData} inputs Degree.degree2 row =
-  let
-    l1 = sourceLayerState inputs Degree.degree1
-    l2 = sourceLayerState inputs Degree.degree2
-    partial = partialOf inputs
-  in
-  trans
+  let l1 = sourceLayerState inputs Degree.degree1
+      l2 = sourceLayerState inputs Degree.degree2
+      partial = partialOf inputs
+  in trans
     (Rect.applyRectangularSubtract KKT.physicalStateCarrier
       (Pseudo.constraintMatrix pseudoData) l2 (scaleState (+ 3 / 1) l1) row)
     (trans
-      (cong
-        (Pseudo.constraintApply pseudoData l2 row -_)
+      (cong (Pseudo.constraintApply pseudoData l2 row -_)
         (constraintApplyScaleExact pseudoData (+ 3 / 1) l1 row))
       (trans
         (cong₂ _-_
@@ -284,15 +255,13 @@ sourceDegreeStateConstraintExact {pseudoData = pseudoData} inputs Degree.degree2
             (sourceLayerConstraintAsPartial inputs Degree.degree1 row)))
         (sym (ConstraintLayer.sourceDegree2LayerExact partial row))))
 sourceDegreeStateConstraintExact {pseudoData = pseudoData} inputs Degree.degree3 row =
-  let
-    l1 = sourceLayerState inputs Degree.degree1
-    l2 = sourceLayerState inputs Degree.degree2
-    l3 = sourceLayerState inputs Degree.degree3
-    partial = partialOf inputs
-    first = Rect.vectorSubtract l3 (scaleState (+ 2 / 1) l2)
-    second = scaleState (+ 3 / 1) l1
-  in
-  trans
+  let l1 = sourceLayerState inputs Degree.degree1
+      l2 = sourceLayerState inputs Degree.degree2
+      l3 = sourceLayerState inputs Degree.degree3
+      partial = partialOf inputs
+      first = Rect.vectorSubtract l3 (scaleState (+ 2 / 1) l2)
+      second = scaleState (+ 3 / 1) l1
+  in trans
     (Rect.applyRectangularAdd KKT.physicalStateCarrier
       (Pseudo.constraintMatrix pseudoData) first second row)
     (trans
@@ -301,8 +270,7 @@ sourceDegreeStateConstraintExact {pseudoData = pseudoData} inputs Degree.degree3
           (Rect.applyRectangularSubtract KKT.physicalStateCarrier
             (Pseudo.constraintMatrix pseudoData) l3
             (scaleState (+ 2 / 1) l2) row)
-          (cong
-            (Pseudo.constraintApply pseudoData l3 row -_)
+          (cong (Pseudo.constraintApply pseudoData l3 row -_)
             (constraintApplyScaleExact pseudoData (+ 2 / 1) l2 row)))
         (constraintApplyScaleExact pseudoData (+ 3 / 1) l1 row))
       (trans
@@ -315,14 +283,12 @@ sourceDegreeStateConstraintExact {pseudoData = pseudoData} inputs Degree.degree3
             (sourceLayerConstraintAsPartial inputs Degree.degree1 row)))
         (sym (ConstraintLayer.sourceDegree3LayerExact partial row))))
 sourceDegreeStateConstraintExact {pseudoData = pseudoData} inputs Degree.degree4 row =
-  let
-    l1 = sourceLayerState inputs Degree.degree1
-    l2 = sourceLayerState inputs Degree.degree2
-    l3 = sourceLayerState inputs Degree.degree3
-    l4 = sourceLayerState inputs Degree.degree4
-    partial = partialOf inputs
-  in
-  trans
+  let l1 = sourceLayerState inputs Degree.degree1
+      l2 = sourceLayerState inputs Degree.degree2
+      l3 = sourceLayerState inputs Degree.degree3
+      l4 = sourceLayerState inputs Degree.degree4
+      partial = partialOf inputs
+  in trans
     (Rect.applyRectangularAdd KKT.physicalStateCarrier
       (Pseudo.constraintMatrix pseudoData)
       (Rect.vectorSubtract l4 l3) (Rect.vectorSubtract l2 l1) row)
@@ -350,20 +316,17 @@ defectDegreeStateConstraintExact :
   Pseudo.constraintApply pseudoData (defectDegreeState inputs degree) row
   ≡ GreenDegree.defectDegreeVector
       (Canonical.canonicalConstraintAtoms inputs) degree row
-defectDegreeStateConstraintExact {pseudoData = pseudoData} inputs Degree.degree1 row =
+defectDegreeStateConstraintExact inputs Degree.degree1 row =
   trans (defectLayerConstraintAsPartial inputs Degree.degree1 row) refl
 defectDegreeStateConstraintExact {pseudoData = pseudoData} inputs Degree.degree2 row =
-  let
-    l1 = defectLayerState inputs Degree.degree1
-    l2 = defectLayerState inputs Degree.degree2
-    partial = partialOf inputs
-  in
-  trans
+  let l1 = defectLayerState inputs Degree.degree1
+      l2 = defectLayerState inputs Degree.degree2
+      partial = partialOf inputs
+  in trans
     (Rect.applyRectangularSubtract KKT.physicalStateCarrier
       (Pseudo.constraintMatrix pseudoData) l2 (scaleState (+ 3 / 1) l1) row)
     (trans
-      (cong
-        (Pseudo.constraintApply pseudoData l2 row -_)
+      (cong (Pseudo.constraintApply pseudoData l2 row -_)
         (constraintApplyScaleExact pseudoData (+ 3 / 1) l1 row))
       (trans
         (cong₂ _-_
@@ -372,15 +335,13 @@ defectDegreeStateConstraintExact {pseudoData = pseudoData} inputs Degree.degree2
             (defectLayerConstraintAsPartial inputs Degree.degree1 row)))
         (sym (ConstraintLayer.defectDegree2LayerExact partial row))))
 defectDegreeStateConstraintExact {pseudoData = pseudoData} inputs Degree.degree3 row =
-  let
-    l1 = defectLayerState inputs Degree.degree1
-    l2 = defectLayerState inputs Degree.degree2
-    l3 = defectLayerState inputs Degree.degree3
-    partial = partialOf inputs
-    first = Rect.vectorSubtract l3 (scaleState (+ 2 / 1) l2)
-    second = scaleState (+ 3 / 1) l1
-  in
-  trans
+  let l1 = defectLayerState inputs Degree.degree1
+      l2 = defectLayerState inputs Degree.degree2
+      l3 = defectLayerState inputs Degree.degree3
+      partial = partialOf inputs
+      first = Rect.vectorSubtract l3 (scaleState (+ 2 / 1) l2)
+      second = scaleState (+ 3 / 1) l1
+  in trans
     (Rect.applyRectangularAdd KKT.physicalStateCarrier
       (Pseudo.constraintMatrix pseudoData) first second row)
     (trans
@@ -389,8 +350,7 @@ defectDegreeStateConstraintExact {pseudoData = pseudoData} inputs Degree.degree3
           (Rect.applyRectangularSubtract KKT.physicalStateCarrier
             (Pseudo.constraintMatrix pseudoData) l3
             (scaleState (+ 2 / 1) l2) row)
-          (cong
-            (Pseudo.constraintApply pseudoData l3 row -_)
+          (cong (Pseudo.constraintApply pseudoData l3 row -_)
             (constraintApplyScaleExact pseudoData (+ 2 / 1) l2 row)))
         (constraintApplyScaleExact pseudoData (+ 3 / 1) l1 row))
       (trans
@@ -403,14 +363,12 @@ defectDegreeStateConstraintExact {pseudoData = pseudoData} inputs Degree.degree3
             (defectLayerConstraintAsPartial inputs Degree.degree1 row)))
         (sym (ConstraintLayer.defectDegree3LayerExact partial row))))
 defectDegreeStateConstraintExact {pseudoData = pseudoData} inputs Degree.degree4 row =
-  let
-    l1 = defectLayerState inputs Degree.degree1
-    l2 = defectLayerState inputs Degree.degree2
-    l3 = defectLayerState inputs Degree.degree3
-    l4 = defectLayerState inputs Degree.degree4
-    partial = partialOf inputs
-  in
-  trans
+  let l1 = defectLayerState inputs Degree.degree1
+      l2 = defectLayerState inputs Degree.degree2
+      l3 = defectLayerState inputs Degree.degree3
+      l4 = defectLayerState inputs Degree.degree4
+      partial = partialOf inputs
+  in trans
     (Rect.applyRectangularAdd KKT.physicalStateCarrier
       (Pseudo.constraintMatrix pseudoData)
       (Rect.vectorSubtract l4 l3) (Rect.vectorSubtract l2 l1) row)
