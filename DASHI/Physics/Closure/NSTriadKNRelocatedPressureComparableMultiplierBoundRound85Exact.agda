@@ -41,7 +41,7 @@ module DASHI.Physics.Closure.NSTriadKNRelocatedPressureComparableMultiplierBound
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
-open import Data.Rational.Base using (ℚ; 0ℚ; _*_; _≤_; nonNegative)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
@@ -97,16 +97,14 @@ ratioSquaredBound datum =
     inv = inversePressureNormSquared datum
     c2 = comparisonSquared datum
     dot = Leray.vecDot (pressureMode datum) (outputMode datum)
+    inv2 = L2.square inv
 
     cauchy : L2.square dot ≤ pNorm * kNorm
     cauchy = Leray.vectorCauchySquared (pressureMode datum) (outputMode datum)
 
-    inv2 = L2.square inv
-
     instance
       inv2NN = nonNegative (inverseSquareNonnegative datum)
       invNN = nonNegative (inverseNonnegative datum)
-      c2NN = nonNegative (comparisonSquaredNonnegative datum)
 
     cauchyScaled :
       inv2 * L2.square dot ≤ inv2 * (pNorm * kNorm)
