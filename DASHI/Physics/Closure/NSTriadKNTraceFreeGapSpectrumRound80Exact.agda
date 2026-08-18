@@ -29,7 +29,7 @@ open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Product using (_×_; _,_)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Binary.PropositionalEquality using (subst)
 
 record ThreeSpectrum : Set where
   constructor three-spectrum
@@ -133,30 +133,30 @@ bothAdjacentGapsZeroForceScaledSpectrumZero data gap12Zero gap23Zero =
   first =
     subst
       (λ a → three * lambda1 (spectrum data) ≡ two * a + 0ℚ)
-      (sym gap12Zero)
+      gap12Zero
       (subst
         (λ b → three * lambda1 (spectrum data) ≡ two * gap12 (spectrum data) + b)
-        (sym gap23Zero)
+        gap23Zero
         (traceFreeLambda1FromGaps data))
 
   second : three * lambda2 (spectrum data) ≡ 0ℚ
   second =
     subst
       (λ a → three * lambda2 (spectrum data) ≡ 0ℚ - a)
-      (sym gap12Zero)
+      gap12Zero
       (subst
         (λ b → three * lambda2 (spectrum data) ≡ b - gap12 (spectrum data))
-        (sym gap23Zero)
+        gap23Zero
         (traceFreeLambda2FromGaps data))
 
   third : three * lambda3 (spectrum data) ≡ 0ℚ
   third =
     subst
       (λ a → three * lambda3 (spectrum data) ≡ 0ℚ - a - two * 0ℚ)
-      (sym gap12Zero)
+      gap12Zero
       (subst
         (λ b → three * lambda3 (spectrum data) ≡ 0ℚ - gap12 (spectrum data) - two * b)
-        (sym gap23Zero)
+        gap23Zero
         (traceFreeLambda3FromGaps data))
 
 round80AdjacentGapsDetermineTraceFreeSpectrumScaled : Bool
