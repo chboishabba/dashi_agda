@@ -7,6 +7,7 @@ import DASHI.Algebra.DisagreementFourViewBoundary as Four
 import DASHI.Biology.FMRIConnectomeProxyGovernance as FMRI
 import DASHI.Biology.BrainDNABodyMemoryBridge as BrainDNA
 import DASHI.Core.EvidenceObligationAuthoritySeparationExact as Governed
+import DASHI.Promotion.AuthorityGateCore as Authority
 
 ------------------------------------------------------------------------
 -- Brain / body-memory proxy instantiation.
@@ -15,19 +16,22 @@ import DASHI.Core.EvidenceObligationAuthoritySeparationExact as Governed
 -- functional-connectivity, BrainDNA representation, and reverse inference from
 -- hidden-state, diagnostic, therapeutic, or clinical authority.  A positive
 -- proxy observation can therefore inhabit the evidence coordinate while the
--- obligation and authority coordinates remain open/denied.
+-- obligation coordinate remains open and the existing clinical authority gate
+-- stays fail-closed.
 ------------------------------------------------------------------------
 
 proxyObservationSupportedOnly : Governed.GovernedClaimState
 proxyObservationSupportedOnly =
-  Governed.governedClaimState
+  Governed.closedGovernedClaimState
     (Four.assess true false)
     Governed.obligationsOpen
-    Governed.authorityDenied
+    Authority.clinicalAuthority
+    "brain proxy observation to clinical authority"
 
 proxySupportDoesNotPromoteHiddenState :
-  Governed.promotionGate proxyObservationSupportedOnly ≡ false
-proxySupportDoesNotPromoteHiddenState = refl
+  Governed.localPromotion proxyObservationSupportedOnly ≡ false
+proxySupportDoesNotPromoteHiddenState =
+  Governed.localPromotionIsFalse proxyObservationSupportedOnly
 
 clinicalProxyAuthorityStillRejected :
   FMRI.AdmissibleFMRIConnectomeProxyRoute FMRI.clinicalAuthorityRoute →
@@ -45,7 +49,7 @@ record BrainProxyEvidenceAuthorityBoundary : Set where
     connectomeProxyDistinctFromDiagnosis : Bool
     representationDistinctFromTraumaProof : Bool
     proxySupportEqualsClinicalAuthorityClaimed : Bool
-    genericGovernedClaimStateReused : Bool
+    canonicalAuthorityGateCoreReused : Bool
 
 canonicalBrainProxyEvidenceAuthorityBoundary :
   BrainProxyEvidenceAuthorityBoundary
@@ -54,5 +58,5 @@ canonicalBrainProxyEvidenceAuthorityBoundary = record
   ; connectomeProxyDistinctFromDiagnosis = true
   ; representationDistinctFromTraumaProof = true
   ; proxySupportEqualsClinicalAuthorityClaimed = false
-  ; genericGovernedClaimStateReused = true
+  ; canonicalAuthorityGateCoreReused = true
   }
