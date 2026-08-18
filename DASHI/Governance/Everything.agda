@@ -25,6 +25,8 @@ import DASHI.Governance.AuthorityPhaseSeparationExact
 import DASHI.Governance.AuthorityRoutingProjectionSafetyExact
 import DASHI.Governance.OptionConeCoercionExact
 import DASHI.Governance.JusticeCrossPollinationBridgeExact
+import DASHI.Governance.InverseJusticeAttractorExact
+import DASHI.Governance.SecondOrderJusticeGrammarExact
 import DASHI.Governance.SituatedInverseJusticeRegression
 import DASHI.Governance.RevolutionarySourceAtlas
 import DASHI.Governance.RevolutionaryPracticeBraid
