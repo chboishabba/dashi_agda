@@ -15,60 +15,48 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound61DLRTransferAuditVal
 -- * R_A=M_A M0^{-1}-I is the literal same-carrier relative operator;
 -- * source-native X1,...,X4 are constructed from D_A G_A M0^{-1};
 -- * cyclic trace gives the exact noncommutative fourth-order log polynomial;
--- * the actual anchored physical R_A now satisfies
---
+-- * the actual anchored physical R_A satisfies
 --       rowMass(R_A) <= 104601/524288 < 1/5;
---
---   from the selected gauge-Gram perturbation and anchored flat Green;
--- * every finite degree >=5 matrix-log tail therefore has row mass <=1/2500;
--- * shifted tails satisfy the geometric finite Cauchy modulus
---
---       rowMass(Tail_m) <= (1/5)^m / 2500;
---
--- * and the canonical-metric bridge proves
---
---       (1/5)^m / 2500 <= (1/2)^m.
---
--- * even the safe redundant trace cost 3*256=768 is absorbed by the existing
---   fifth-tail factor:
---
---       768 (1/5)^m / 2500 <= (1/2)^m.
---
---   Therefore an exact finite trace-difference/tail identity produces a
---   canonical FastCauchyReal directly; no new convergence-rate theorem remains.
---
--- Remaining ghost seams:
---   (i) prove the literal partial-trace difference equals the corresponding
---       finite matrix tail on the same reduced ghost matrix;
---   (ii) identify the resulting FastCauchy limit with the principal matrix
---        logarithm / reduced determinant ratio;
---   (iii) combine that scalar with the literal Wilson and Haar channels.
+-- * every finite degree >=5 matrix-log tail has row mass <=1/2500;
+-- * shifted tails have the geometric Cauchy modulus
+--       rowMass(Tail_m) <= (1/5)^m / 2500 <= (1/2)^m;
+-- * the safe redundant trace cost 768 is absorbed by the same fifth-tail factor.
+-- Remaining ghost seams: finite partial-trace/tail identity, identification of
+-- the FastCauchy limit with principal log-det ratio, then Wilson+ghost+Haar sum.
 --
 -- CMP109 PRINCIPAL-LOG ROUTE
 -- * source-radius inverse-dexp coefficient is actual Bishop-real data;
--- * 0 <= beta(1/12)-1/12 <= 1/14400 and the symmetric coefficient has 23/24
---   floor;
+-- * 0 <= beta(1/12)-1/12 <= 1/14400 and symmetric coefficient >=23/24;
 -- * J=I+c1 ad_X+beta ad_X^2 is literal Bishop-real operator data.
 -- Remaining seam: the printed left/right product trivialization.
 --
--- G2 / KKT ROUTE
--- * sixteen Green ratios collapse to aggregate raw/source/defect sums;
--- * reduced KKT coercivity is exact on the selected combined constraint;
--- * explicit side-four rational CT weight satisfies
---       1 <= w <= 6561/4096;
--- * weighted locality therefore only needs the source-native SAME K+ weighted
---   row theorem before it feeds the ordinary G2 row bound;
--- * the final scalar comparison now has an exact non-overlapping headroom
---   allocator:
---
---       raw <= H_raw
---       2 E(B) (source+defect) <= H_green
---       H_raw + H_green <= 55/18874368
---       --------------------------------
---       residualRatio <= 55/18874368.
---
--- Remaining physical producer: instantiate those two selected-region aggregate
--- headroom bounds.  No sixteen-Green or eight-degree final budget remains.
+-- G2 / KKT ROUTE -- RANK-INDEPENDENT SHARPENING
+-- * the projected Schur Green preserves the stored mean-zero computational
+--   quotient exactly; this is useful for reduced coercivity/locality but is NOT
+--   silently identified with the raw background-dependent Moore--Penrose K+;
+-- * the repo's stabilizer stratification shows why a background-uniform raw
+--   rowMass(K+) is the wrong quantitative target: null/rank strata vary;
+-- * canonical source/defect subset partials are literal constraint images
+--       s_S=L(P_S g), delta_S=L(P_S w);
+-- * four source and four defect Mobius-degree vectors therefore have literal
+--   state preimages g_d,w_d;
+-- * the KKT repair is an orthogonal projector, giving the exact contraction
+--       <L v,K+ L v> = ||L* K+ L v||^2 <= ||v||^2;
+-- * PSD/polarization therefore gives every signed Green block directly from
+--   physical state norms:
+--       G_de >= -1/2 (||g_d||^2 + ||w_e||^2);
+-- * charge-relative compilation consequently has the sharper aggregate gate
+--       residualRatio
+--         = rawTotal + 2 (sourceStateTotal + defectStateTotal),
+--   with NO K+ row/entry norm, spectral denominator, fixed null-space dimension
+--   or Combes--Thomas weight on the G2 dependency path;
+-- * headroom allocation then closes the actual canonical residual once
+--       raw <= H_raw,
+--       2(sourceState+defectState) <= H_green,
+--       H_raw+H_green <= remainingSingletonCoefficient.
+-- Remaining G2 physical work is now only the raw and literal state-norm
+-- charge-relative estimates.  The old common-row-bound route remains in the
+-- repo as a sufficient comparison theorem, but is not the highest-alpha path.
 --
 -- CONTINUUM ROUTE
 -- Krzysztof Gawedzki and Antti Kupiainen,
@@ -137,12 +125,21 @@ import DASHI.Physics.YangMills.BalabanCMP109BishopSourceRadiusEndpointExact
 import DASHI.Physics.YangMills.BalabanCMP109BishopPrincipalLogSourcePackageExact
 import DASHI.Physics.YangMills.BalabanCMP109BishopPrincipalLogAdPolynomialExact
 
+-- Older sufficient G2 routes remain imported for comparison.
 import DASHI.Physics.YangMills.BalabanChargeRelativeG2AggregateRatioExact
 import DASHI.Physics.YangMills.BalabanChargeRelativeG2HeadroomAllocationExact
 import DASHI.Physics.YangMills.BalabanSelectedConstraintGramReducedCoercivityExact
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundRationalCombesThomasWeightEnvelopeExact
 import DASHI.Physics.YangMills.BalabanSelectedKKTWeightedToOrdinaryRowBoundExact
 import DASHI.Physics.YangMills.BalabanSelectedWilsonCanonicalG2InputsExact
+
+-- Highest-alpha G2 route.
+import DASHI.Physics.YangMills.BalabanSelectedGaugeReducedLinearClosureExact
+import DASHI.Physics.YangMills.BalabanSelectedProjectedSchurGreenPreservesReducedExact
+import DASHI.Physics.YangMills.BalabanKKTPseudoinverseConstraintImageEnergyContractionExact
+import DASHI.Physics.YangMills.BalabanCanonicalGreenDegreeStatePreimageExact
+import DASHI.Physics.YangMills.BalabanCanonicalGreenStateNormReductionExact
+import DASHI.Physics.YangMills.BalabanChargeRelativeCanonicalStateNormG2ClosureExact
 
 import DASHI.Physics.YangMills.YangMillsCompactSimpleCasimirDynkinTraceExact
 import DASHI.Physics.YangMills.BalabanContinuumProkhorovSubsequenceExact
