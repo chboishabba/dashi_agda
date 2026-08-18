@@ -50,7 +50,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteRationalOrderCore as Order
 
@@ -91,11 +91,11 @@ forcingEnergyEqualsGapWeightedRateEnergy datum =
   subst
     (λ a → square a + square (forcingB datum)
       ≡ gapWeightedProjectorRateSquareEnergy datum)
-    (forcingAIsGapTimesRate datum)
+    (sym (forcingAIsGapTimesRate datum))
     (subst
       (λ b → square (gapA datum * projectorRateA datum) + square b
         ≡ gapWeightedProjectorRateSquareEnergy datum)
-      (forcingBIsGapTimesRate datum)
+      (sym (forcingBIsGapTimesRate datum))
       (ℚRing.solve-∀
         (gapA datum) (gapB datum)
         (projectorRateA datum) (projectorRateB datum)))
