@@ -158,6 +158,10 @@ inWorldDecisionRequiresRechart :
   inspectionDecision inWorldSecondOrderState ≡ rechartBeforeDecision
 inWorldDecisionRequiresRechart = refl
 
+inspectionDecisionsDiffer :
+  decideAtThisLevel ≡ rechartBeforeDecision → ⊥
+inspectionDecisionsDiffer ()
+
 record OrderOnlyDecisionDecoder : Set where
   constructor orderOnlyDecisionDecoder
   field
@@ -174,16 +178,12 @@ open OrderOnlyDecisionDecoder public
 inspectionDecisionNotFactorableThroughClassOrder :
   OrderOnlyDecisionDecoder → ⊥
 inspectionDecisionNotFactorableThroughClassOrder decoder =
-  let
-    impossible : decideAtThisLevel ≡ rechartBeforeDecision
-    impossible =
-      trans
-        (sym (editorialDecisionCorrect decoder))
-        (trans
-          (cong (decodeDecisionFromOrder decoder) sameClassOrder)
-          (inWorldDecisionCorrect decoder))
-  in
-  case impossible of λ where ()
+  inspectionDecisionsDiffer
+    (trans
+      (sym (editorialDecisionCorrect decoder))
+      (trans
+        (cong (decodeDecisionFromOrder decoder) sameClassOrder)
+        (inWorldDecisionCorrect decoder)))
 
 ------------------------------------------------------------------------
 -- Boundary: order, fiction, and applicability must not collapse.
