@@ -47,7 +47,7 @@ open import Agda.Builtin.List using ([]; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Empty using (⊥)
 import Data.Integer.Base as Int
-open import Data.Rational.Base using (ℚ; 0ℚ; _+_; -_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _/_; _+_; _*_; -_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
