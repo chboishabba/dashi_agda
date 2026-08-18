@@ -127,8 +127,7 @@ reweightingStillCannotRefute = Reopenable.reweightingAloneCannotRefute
 projectionResidualStillCannotEraseEvidence :
   Quotient.ProjectionSemanticErasurePermission Quotient.projectionReceiptOnly → ⊥
 projectionResidualStillCannotEraseEvidence =
-  Reopenable.ReopenableEvidenceBoundary.projectionResidualIsNotErasure
-    canonicalReopenableEvidenceBoundary
+  Quotient.projectionReceiptCannotEraseSemantics
 
 ------------------------------------------------------------------------
 -- No source-ordering constructor converts newer evidence into authority to
