@@ -27,26 +27,32 @@ module DASHI.Physics.YangMills.BalabanReducedGhostAdjointFourthJetExact where
 --
 --   exp(gX) = 1 + gX + g^2 X^2/2 + g^3 X^3/6 + g^4 X^4/24 + O(g^5)
 --
--- and the corresponding inverse jet exp(-gX).  Finite noncommutative
--- convolution then constructs the four rational coefficients of
+-- and its inverse.  Noncommutative convolution constructs
 --
---   Ad_{exp(gX)} Y = exp(gX) Y exp(-gX)
+--   Ad_{exp(gX)}Y = exp(gX)Yexp(-gX),
 --
--- on the literal quaternion carrier.  The first coefficient is proved to be
--- the commutator XY-YX.  Higher coefficients are executable convolution
--- expressions and can be consumed directly by the physical FP fourth-jet
--- assembly; no irrational background value is introduced into the finite
--- trace carrier.
+-- and the four retained coefficients are proved exactly to be
+--
+--   ad_X Y,
+--   (1/2) ad_X^2 Y,
+--   (1/6) ad_X^3 Y,
+--   (1/24) ad_X^4 Y.
+--
+-- Thus all four coefficient matrices required by the finite ghost trace-log
+-- are rational whenever the tangent insertions are rational, despite the
+-- nonzero-g background itself living naturally on the Bishop-real carrier.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_)
 open import Data.Integer.Base using (+_)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _-_; _*_; -_; _/_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _*_; -_; _/_)
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionWilsonSecondVariationExact as Q
+
+zeroQ : Q.RationalQuaternion
+zeroQ = Q.quat 0ℚ 0ℚ 0ℚ 0ℚ
 
 scaleQ : ℚ → Q.RationalQuaternion → Q.RationalQuaternion
 scaleQ scalar (Q.quat q0 q1 q2 q3) =
@@ -67,9 +73,7 @@ record QuaternionJet4 : Set where
 open QuaternionJet4 public
 
 constantJet : Q.RationalQuaternion → QuaternionJet4
-constantJet value = jet4 value (Q.quat 0ℚ 0ℚ 0ℚ 0ℚ)
-  (Q.quat 0ℚ 0ℚ 0ℚ 0ℚ) (Q.quat 0ℚ 0ℚ 0ℚ 0ℚ)
-  (Q.quat 0ℚ 0ℚ 0ℚ 0ℚ)
+constantJet value = jet4 value zeroQ zeroQ zeroQ zeroQ
 
 mulJet : QuaternionJet4 → QuaternionJet4 → QuaternionJet4
 mulJet left right = jet4
@@ -102,22 +106,19 @@ fourthQ value = squareQ value Q.*q squareQ value
 
 expJet4 : Q.RationalQuaternion → QuaternionJet4
 expJet4 value = jet4
-  Q.oneQ
-  value
+  Q.oneQ value
   (scaleQ (+ 1 / 2) (squareQ value))
   (scaleQ (+ 1 / 6) (cubeQ value))
   (scaleQ (+ 1 / 24) (fourthQ value))
 
 inverseExpJet4 : Q.RationalQuaternion → QuaternionJet4
 inverseExpJet4 value = jet4
-  Q.oneQ
-  (negQ value)
+  Q.oneQ (negQ value)
   (scaleQ (+ 1 / 2) (squareQ value))
   (scaleQ (- (+ 1 / 6)) (cubeQ value))
   (scaleQ (+ 1 / 24) (fourthQ value))
 
-adjointJet4 :
-  Q.RationalQuaternion → Q.RationalQuaternion → QuaternionJet4
+adjointJet4 : Q.RationalQuaternion → Q.RationalQuaternion → QuaternionJet4
 adjointJet4 generator value =
   mulJet (mulJet (expJet4 generator) (constantJet value))
     (inverseExpJet4 generator)
@@ -125,6 +126,12 @@ adjointJet4 generator value =
 commutatorQ : Q.RationalQuaternion → Q.RationalQuaternion → Q.RationalQuaternion
 commutatorQ generator value =
   subQ (generator Q.*q value) (value Q.*q generator)
+
+ad2Q ad3Q ad4Q :
+  Q.RationalQuaternion → Q.RationalQuaternion → Q.RationalQuaternion
+ad2Q generator value = commutatorQ generator (commutatorQ generator value)
+ad3Q generator value = commutatorQ generator (ad2Q generator value)
+ad4Q generator value = commutatorQ generator (ad3Q generator value)
 
 adjointJetConstantExact : ∀ generator value →
   c0 (adjointJet4 generator value) ≡ value
@@ -146,11 +153,36 @@ adjointJetFirstIsCommutator
     (ℚRing.solve-∀ x0 x1 x2 x3 y0 y1 y2 y3)
     (ℚRing.solve-∀ x0 x1 x2 x3 y0 y1 y2 y3)
 
--- The inverse exponential is a genuine inverse through the retained fourth
--- degree: every positive-degree convolution coefficient through degree four
--- vanishes and the constant coefficient is one.  These equalities ensure that
--- the jet is not merely a list of formal coefficients with an unverified
--- inverse convention.
+adjointJetSecondIsHalfAd2 : ∀ generator value →
+  c2 (adjointJet4 generator value) ≡ scaleQ (+ 1 / 2) (ad2Q generator value)
+adjointJetSecondIsHalfAd2
+    (Q.quat x0 x1 x2 x3) (Q.quat y0 y1 y2 y3) =
+  Q.quaternionExt
+    (ℚRing.solve-∀ x0 x1 x2 x3 y0 y1 y2 y3)
+    (ℚRing.solve-∀ x0 x1 x2 x3 y0 y1 y2 y3)
+    (ℚRing.solve-∀ x0 x1 x2 x3 y0 y1 y2 y3)
+    (ℚRing.solve-∀ x0 x1 x2 x3 y0 y1 y2 y3)
+
+adjointJetThirdIsSixthAd3 : ∀ generator value →
+  c3 (adjointJet4 generator value) ≡ scaleQ (+ 1 / 6) (ad3Q generator value)
+adjointJetThirdIsSixthAd3
+    (Q.quat x0 x1 x2 x3) (Q.quat y0 y1 y2 y3) =
+  Q.quaternionExt
+    (ℚRing.solve-∀ x0 x1 x2 x3 y0 y1 y2 y3)
+    (ℚRing.solve-∀ x0 x1 x2 x3 y0 y1 y2 y3)
+    (ℚRing.solve-∀ x0 x1 x2 x3 y0 y1 y2 y3)
+    (ℚRing.solve-∀ x0 x1 x2 x3 y0 y1 y2 y3)
+
+adjointJetFourthIsTwentyFourthAd4 : ∀ generator value →
+  c4 (adjointJet4 generator value) ≡ scaleQ (+ 1 / 24) (ad4Q generator value)
+adjointJetFourthIsTwentyFourthAd4
+    (Q.quat x0 x1 x2 x3) (Q.quat y0 y1 y2 y3) =
+  Q.quaternionExt
+    (ℚRing.solve-∀ x0 x1 x2 x3 y0 y1 y2 y3)
+    (ℚRing.solve-∀ x0 x1 x2 x3 y0 y1 y2 y3)
+    (ℚRing.solve-∀ x0 x1 x2 x3 y0 y1 y2 y3)
+    (ℚRing.solve-∀ x0 x1 x2 x3 y0 y1 y2 y3)
+
 expInverseJet0Exact : ∀ generator →
   c0 (mulJet (expJet4 generator) (inverseExpJet4 generator)) ≡ Q.oneQ
 expInverseJet0Exact
@@ -162,8 +194,7 @@ expInverseJet0Exact
     (ℚRing.solve-∀ x0 x1 x2 x3)
 
 expInverseJet1Zero : ∀ generator →
-  c1 (mulJet (expJet4 generator) (inverseExpJet4 generator))
-  ≡ Q.quat 0ℚ 0ℚ 0ℚ 0ℚ
+  c1 (mulJet (expJet4 generator) (inverseExpJet4 generator)) ≡ zeroQ
 expInverseJet1Zero
     (Q.quat x0 x1 x2 x3) =
   Q.quaternionExt
@@ -173,9 +204,28 @@ expInverseJet1Zero
     (ℚRing.solve-∀ x0 x1 x2 x3)
 
 expInverseJet2Zero : ∀ generator →
-  c2 (mulJet (expJet4 generator) (inverseExpJet4 generator))
-  ≡ Q.quat 0ℚ 0ℚ 0ℚ 0ℚ
+  c2 (mulJet (expJet4 generator) (inverseExpJet4 generator)) ≡ zeroQ
 expInverseJet2Zero
+    (Q.quat x0 x1 x2 x3) =
+  Q.quaternionExt
+    (ℚRing.solve-∀ x0 x1 x2 x3)
+    (ℚRing.solve-∀ x0 x1 x2 x3)
+    (ℚRing.solve-∀ x0 x1 x2 x3)
+    (ℚRing.solve-∀ x0 x1 x2 x3)
+
+expInverseJet3Zero : ∀ generator →
+  c3 (mulJet (expJet4 generator) (inverseExpJet4 generator)) ≡ zeroQ
+expInverseJet3Zero
+    (Q.quat x0 x1 x2 x3) =
+  Q.quaternionExt
+    (ℚRing.solve-∀ x0 x1 x2 x3)
+    (ℚRing.solve-∀ x0 x1 x2 x3)
+    (ℚRing.solve-∀ x0 x1 x2 x3)
+    (ℚRing.solve-∀ x0 x1 x2 x3)
+
+expInverseJet4Zero : ∀ generator →
+  c4 (mulJet (expJet4 generator) (inverseExpJet4 generator)) ≡ zeroQ
+expInverseJet4Zero
     (Q.quat x0 x1 x2 x3) =
   Q.quaternionExt
     (ℚRing.solve-∀ x0 x1 x2 x3)
@@ -186,13 +236,13 @@ expInverseJet2Zero
 reducedGhostAdjointFourthJetConstructionLevel : ProofLevel
 reducedGhostAdjointFourthJetConstructionLevel = machineChecked
 
-reducedGhostAdjointFirstCoefficientLevel : ProofLevel
-reducedGhostAdjointFirstCoefficientLevel = machineChecked
+reducedGhostAdjointAllFourCoefficientIdentificationLevel : ProofLevel
+reducedGhostAdjointAllFourCoefficientIdentificationLevel = machineChecked
 
-reducedGhostExpInverseJetThroughSecondLevel : ProofLevel
-reducedGhostExpInverseJetThroughSecondLevel = machineChecked
+reducedGhostExpInverseJetThroughFourthLevel : ProofLevel
+reducedGhostExpInverseJetThroughFourthLevel = machineChecked
 
--- Degree-three and degree-four inverse cancellation are algebraically
--- determined by the same convolution and remain the next tiny finite closure;
--- the physical FP assembly then substitutes these four adjoint coefficients
--- into D_A and G_A before applying the already-constructed reduced M0 inverse.
+-- Remaining ghost work: assemble these exact linkwise adjoint coefficients
+-- through the literal D_A and G_A finite sums, postcompose with the existing
+-- reduced M0 inverse, and prove the Bishop-real O(g^5) remainder/log-det
+-- convergence on the selected weak-coupling ball.
