@@ -21,16 +21,22 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound61DLRTransferAuditVal
 --
 --   from the selected gauge-Gram perturbation and anchored flat Green;
 -- * every finite degree >=5 matrix-log tail therefore has row mass <=1/2500;
--- * the new shifted-tail theorem strengthens boundedness to the geometric
---   finite Cauchy modulus
+-- * shifted tails satisfy the geometric finite Cauchy modulus
 --
---       rowMass(Tail_m) <= (1/5)^m / 2500.
+--       rowMass(Tail_m) <= (1/5)^m / 2500;
 --
--- The finite Neumann/log-series convergence estimates are therefore no longer
--- the physical frontier.  Remaining ghost seam: embed these finite partial
--- sums in the complete Bishop-real matrix/function carrier and identify the
--- constructive limit with the principal matrix logarithm / reduced determinant
--- ratio, then combine its scalar with the literal Wilson and Haar channels.
+-- * and the new canonical-metric bridge proves
+--
+--       (1/5)^m / 2500 <= (1/2)^m,
+--
+--   so the SAME ghost tail already fits DASHI's standard dyadic FastCauchy
+--   error schedule.
+--
+-- The finite rate/convergence-majorant algebra is therefore no longer the
+-- frontier. Remaining ghost seam: realize the actual partial-sum sequence in
+-- the existing FastCauchy/Bishop completion and identify its limit with the
+-- principal matrix logarithm / reduced determinant ratio, then combine that
+-- scalar with the literal Wilson and Haar channels.
 --
 -- CMP109 PRINCIPAL-LOG ROUTE
 -- * source-radius inverse-dexp coefficient is actual Bishop-real data;
@@ -41,7 +47,7 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound61DLRTransferAuditVal
 --
 -- G2 / KKT ROUTE
 -- * sixteen Green ratios collapse to aggregate raw/source/defect sums;
--- * reduced KKT coercivity is now exact on the selected combined constraint;
+-- * reduced KKT coercivity is exact on the selected combined constraint;
 -- * explicit side-four rational CT weight satisfies
 --       1 <= w <= 6561/4096;
 -- * weighted locality therefore only needs the source-native SAME K+ weighted
@@ -109,6 +115,7 @@ import DASHI.Physics.YangMills.BalabanReducedGhostAnchoredRelativeContractionExa
 import DASHI.Physics.YangMills.BalabanReducedGhostMatrixLogFifthTailExact
 import DASHI.Physics.YangMills.BalabanReducedGhostPhysicalMatrixLogFifthTailExact
 import DASHI.Physics.YangMills.BalabanReducedGhostMatrixLogShiftedTailExact
+import DASHI.Physics.YangMills.BalabanReducedGhostDyadicCauchyBudgetExact
 
 import DASHI.Physics.YangMills.BalabanCMP109BishopSourceRadiusEndpointExact
 import DASHI.Physics.YangMills.BalabanCMP109BishopPrincipalLogSourcePackageExact
