@@ -74,6 +74,15 @@ p11AlignmentReopeningFamily = record
 identityConsumer : Principal.Old3 → Principal.Old3
 identityConsumer v = v
 
+transverseBasisOutputsDistinct :
+  JL.transportedU2 JL.plusAlignment Principal.oldBasis2
+  ≡ JL.transportedU2 JL.minusAlignment Principal.oldBasis2 → ⊥
+transverseBasisOutputsDistinct equality
+  with trans
+    (sym Satake.plusOnTransverseBasis)
+    (trans equality Satake.minusOnTransverseBasis)
+... | ()
+
 transportedU2SectionDependenceWitness :
   Section.SectionDependenceWitness
     p11AlignmentReopeningFamily identityConsumer
@@ -81,27 +90,8 @@ transportedU2SectionDependenceWitness = record
   { leftSection = plus
   ; rightSection = minus
   ; coarsePoint = Principal.oldBasis2
-  ; outputsDistinct = λ equality →
-      JL.transportedOperatorsDistinct
-        (λ v →
-          let
-            independenceAtV :
-              JL.transportedU2 JL.plusAlignment v
-              ≡ JL.transportedU2 JL.minusAlignment v
-            independenceAtV with v
-            ... | _ =
-              -- We only need the concrete witness at oldBasis2 here; the
-              -- stronger all-vector contradiction below is proved separately.
-              equality
-          in independenceAtV)
+  ; outputsDistinct = transverseBasisOutputsDistinct
   }
-
-------------------------------------------------------------------------
--- The previous witness is intentionally accompanied by a stronger theorem that
--- avoids relying on any chosen witness point: full section independence of the
--- reopened operator would identify the two operators pointwise, contradicting
--- the existing exact non-canonicity theorem.
-------------------------------------------------------------------------
 
 transportedU2ConsumerCannotBeSectionIndependent :
   Section.DownstreamSectionIndependent
@@ -109,6 +99,15 @@ transportedU2ConsumerCannotBeSectionIndependent :
 transportedU2ConsumerCannotBeSectionIndependent independent =
   JL.transportedOperatorsDistinct
     (λ v → independent plus minus v)
+
+transportedU2DependenceDetectedByGenericCriterion :
+  Section.DownstreamSectionIndependent
+    p11AlignmentReopeningFamily identityConsumer → ⊥
+transportedU2DependenceDetectedByGenericCriterion =
+  Section.sectionDependenceRefutesIndependence
+    p11AlignmentReopeningFamily
+    identityConsumer
+    transportedU2SectionDependenceWitness
 
 ------------------------------------------------------------------------
 -- A coarser invariant consumer CAN be section independent.  The Satake
