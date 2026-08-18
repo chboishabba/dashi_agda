@@ -1,0 +1,230 @@
+module DASHI.Physics.YangMills.BalabanReducedFaddeevPopovPhysicalFourthJetExact where
+
+------------------------------------------------------------------------
+-- PRIMARY SOURCES
+--
+-- L. D. Faddeev and V. N. Popov,
+-- "Feynman Diagrams for the Yang-Mills Field", Physics Letters B 25 (1967),
+-- 29--30. DOI: 10.1016/0370-2693(67)90067-6.
+--
+-- Tadeusz Bałaban,
+-- "Propagators for Lattice Gauge Theories in a Background Field",
+-- Communications in Mathematical Physics 99 (1985), 389--434.
+-- DOI: 10.1007/BF01240355.
+--
+-- Nicholas J. Higham,
+-- "Functions of Matrices: Theory and Computation", SIAM, 2008.
+-- DOI: 10.1137/1.9780898717778.
+--
+-- DASHI CONTRIBUTION
+--
+-- Assemble the four algebraic background coefficients of the SAME literal
+-- physical Faddeev--Popov operator M_A = D_A G_A.
+--
+-- For a rational tangent bond field X, the analytic background path
+-- A(g)=exp(gX) is Bishop-real for nonzero g, but the adjoint Taylor
+-- coefficients at g=0 are rational and were constructed exactly in
+-- `BalabanReducedGhostAdjointFourthJetExact`.
+--
+-- This module threads those jets through both places where the background
+-- enters the FP operator:
+--
+--   G_A omega on each forward bond,
+--   D_A on the resulting bond field with inverse-link transport.
+--
+-- It then postcomposes each positive-degree coefficient with the already
+-- constructed reduced M0^{-1} and turns the resulting four linear maps into
+-- the explicit 765-dimensional matrix representation used by the trace-log
+-- jet.  Thus X1,...,X4 are no longer anonymous matrices supplied by a caller;
+-- they are literal finite expressions built from D_A, G_A and M0^{-1}.
+--
+-- Remaining analytic work is the Bishop O(g^5) remainder and the finite
+-- log/determinant identification on the selected weak-coupling ball.
+------------------------------------------------------------------------
+
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List; []; _∷_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ)
+
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using (pair)
+import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreCarrier as Block
+import DASHI.Physics.YangMills.BalabanPath4AxisAverageExact as Path4
+import DASHI.Physics.YangMills.BalabanP33PeriodicFourDimensionalHodgeIdentityExact as Periodic
+import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Coordinates
+import DASHI.Physics.YangMills.BalabanP33RationalQuaternionWilsonSecondVariationExact as Q
+import DASHI.Physics.YangMills.BalabanP33PhysicalBackgroundGaugeFirstExact as Gauge
+import DASHI.Physics.YangMills.BalabanP33PhysicalFaddeevPopovOperatorExact as FP
+import DASHI.Physics.YangMills.BalabanReducedFlatFaddeevPopovGreenInverseExact as FlatInverse
+import DASHI.Physics.YangMills.BalabanReducedGhostExplicitTraceCarrierExact as Basis
+import DASHI.Physics.YangMills.BalabanReducedGhostOperatorMatrixExact as MatrixCarrier
+import DASHI.Physics.YangMills.BalabanFiniteRationalMatrixTraceCyclicExact as Matrix
+import DASHI.Physics.YangMills.BalabanReducedGhostAdjointFourthJetExact as Jet
+
+------------------------------------------------------------------------
+-- Componentwise arithmetic on quaternion fourth jets.
+------------------------------------------------------------------------
+
+zeroJet : Jet.QuaternionJet4
+zeroJet = Jet.jet4 Jet.zeroQ Jet.zeroQ Jet.zeroQ Jet.zeroQ Jet.zeroQ
+
+addJet : Jet.QuaternionJet4 → Jet.QuaternionJet4 → Jet.QuaternionJet4
+addJet left right = Jet.jet4
+  (Jet.addQ (Jet.c0 left) (Jet.c0 right))
+  (Jet.addQ (Jet.c1 left) (Jet.c1 right))
+  (Jet.addQ (Jet.c2 left) (Jet.c2 right))
+  (Jet.addQ (Jet.c3 left) (Jet.c3 right))
+  (Jet.addQ (Jet.c4 left) (Jet.c4 right))
+
+negJet : Jet.QuaternionJet4 → Jet.QuaternionJet4
+negJet value = Jet.jet4
+  (Jet.negQ (Jet.c0 value))
+  (Jet.negQ (Jet.c1 value))
+  (Jet.negQ (Jet.c2 value))
+  (Jet.negQ (Jet.c3 value))
+  (Jet.negQ (Jet.c4 value))
+
+subJet : Jet.QuaternionJet4 → Jet.QuaternionJet4 → Jet.QuaternionJet4
+subJet left right = addJet left (negJet right)
+
+sumJet : List Periodic.Axis4 → (Periodic.Axis4 → Jet.QuaternionJet4) → Jet.QuaternionJet4
+sumJet [] term = zeroJet
+sumJet (axis ∷ axes) term = addJet (term axis) (sumJet axes term)
+
+adjointJetOnJet : Q.RationalQuaternion → Jet.QuaternionJet4 → Jet.QuaternionJet4
+adjointJetOnJet generator valueJet =
+  Jet.mulJet
+    (Jet.mulJet (Jet.expJet4 generator) valueJet)
+    (Jet.inverseExpJet4 generator)
+
+------------------------------------------------------------------------
+-- Forward gauge-orbit jet G_{exp(gX)} omega.
+------------------------------------------------------------------------
+
+backgroundGeneratorQuaternion :
+  Coordinates.PhysicalSU2BondField4 → Periodic.Axis4 → Periodic.Site4 →
+  Q.RationalQuaternion
+backgroundGeneratorQuaternion generator axis site =
+  Gauge.insertionQuaternion generator axis site
+
+forwardParameterAdjointJet :
+  Coordinates.PhysicalSU2BondField4 → FP.SiteGaugeParameter4 →
+  Periodic.Axis4 → Periodic.Site4 → Jet.QuaternionJet4
+forwardParameterAdjointJet generator parameter axis site =
+  Jet.adjointJet4
+    (backgroundGeneratorQuaternion generator axis site)
+    (FP.parameterQuaternion parameter (Periodic.shiftForward axis site))
+
+backgroundGaugeOrbitJet :
+  Coordinates.PhysicalSU2BondField4 → FP.SiteGaugeParameter4 →
+  Periodic.Axis4 → Periodic.Site4 → Jet.QuaternionJet4
+backgroundGaugeOrbitJet generator parameter axis site =
+  subJet
+    (Jet.constantJet (FP.parameterQuaternion parameter site))
+    (forwardParameterAdjointJet generator parameter axis site)
+
+------------------------------------------------------------------------
+-- Backward covariant-divergence jet D_{exp(gX)} applied to the orbit jet.
+------------------------------------------------------------------------
+
+backwardOrbitAdjointJet :
+  Coordinates.PhysicalSU2BondField4 → FP.SiteGaugeParameter4 →
+  Periodic.Axis4 → Periodic.Site4 → Jet.QuaternionJet4
+backwardOrbitAdjointJet generator parameter axis site =
+  let
+    previous = Periodic.shiftBackward axis site
+    inverseGenerator = Jet.negQ (backgroundGeneratorQuaternion generator axis previous)
+  in
+  adjointJetOnJet inverseGenerator
+    (backgroundGaugeOrbitJet generator parameter axis previous)
+
+faddeevPopovAxisJet :
+  Coordinates.PhysicalSU2BondField4 → FP.SiteGaugeParameter4 →
+  Periodic.Axis4 → Periodic.Site4 → Jet.QuaternionJet4
+faddeevPopovAxisJet generator parameter axis site =
+  subJet
+    (backgroundGaugeOrbitJet generator parameter axis site)
+    (backwardOrbitAdjointJet generator parameter axis site)
+
+faddeevPopovQuaternionJet :
+  Coordinates.PhysicalSU2BondField4 → FP.SiteGaugeParameter4 →
+  Periodic.Site4 → Jet.QuaternionJet4
+faddeevPopovQuaternionJet generator parameter site =
+  sumJet Gauge.axes4 (λ axis → faddeevPopovAxisJet generator parameter axis site)
+
+------------------------------------------------------------------------
+-- Four literal scalar coefficient operators M1,...,M4.
+------------------------------------------------------------------------
+
+coefficient1 coefficient2 coefficient3 coefficient4 :
+  Coordinates.PhysicalSU2BondField4 → FP.SiteGaugeParameter4 →
+  Gauge.GaugeCoordinate4 → ℚ
+coefficient1 generator parameter (pair coordinate site) =
+  Gauge.quaternionCoordinate coordinate
+    (Jet.c1 (faddeevPopovQuaternionJet generator parameter site))
+coefficient2 generator parameter (pair coordinate site) =
+  Gauge.quaternionCoordinate coordinate
+    (Jet.c2 (faddeevPopovQuaternionJet generator parameter site))
+coefficient3 generator parameter (pair coordinate site) =
+  Gauge.quaternionCoordinate coordinate
+    (Jet.c3 (faddeevPopovQuaternionJet generator parameter site))
+coefficient4 generator parameter (pair coordinate site) =
+  Gauge.quaternionCoordinate coordinate
+    (Jet.c4 (faddeevPopovQuaternionJet generator parameter site))
+
+------------------------------------------------------------------------
+-- Normalize by the exact reduced flat inverse: X_n = M_n M0^{-1}.
+------------------------------------------------------------------------
+
+reducedCoefficient1 reducedCoefficient2 reducedCoefficient3 reducedCoefficient4 :
+  Coordinates.PhysicalSU2BondField4 → Block.PhysicalBlockL Path4.side4 →
+  Basis.GhostLinearMap
+reducedCoefficient1 generator anchor source =
+  coefficient1 generator (FlatInverse.reducedFlatGreenInverse source anchor)
+reducedCoefficient2 generator anchor source =
+  coefficient2 generator (FlatInverse.reducedFlatGreenInverse source anchor)
+reducedCoefficient3 generator anchor source =
+  coefficient3 generator (FlatInverse.reducedFlatGreenInverse source anchor)
+reducedCoefficient4 generator anchor source =
+  coefficient4 generator (FlatInverse.reducedFlatGreenInverse source anchor)
+
+physicalGhostX1 physicalGhostX2 physicalGhostX3 physicalGhostX4 :
+  Coordinates.PhysicalSU2BondField4 → Block.PhysicalBlockL Path4.side4 →
+  Matrix.Matrix Gauge.GaugeCoordinate4
+physicalGhostX1 generator anchor =
+  MatrixCarrier.reducedGhostOperatorMatrix anchor
+    (reducedCoefficient1 generator anchor)
+physicalGhostX2 generator anchor =
+  MatrixCarrier.reducedGhostOperatorMatrix anchor
+    (reducedCoefficient2 generator anchor)
+physicalGhostX3 generator anchor =
+  MatrixCarrier.reducedGhostOperatorMatrix anchor
+    (reducedCoefficient3 generator anchor)
+physicalGhostX4 generator anchor =
+  MatrixCarrier.reducedGhostOperatorMatrix anchor
+    (reducedCoefficient4 generator anchor)
+
+physicalReducedGhostMatrices4 :
+  Coordinates.PhysicalSU2BondField4 → Block.PhysicalBlockL Path4.side4 →
+  MatrixCarrier.Matrix.FiniteGhostPerturbationMatrices4 Gauge.GaugeCoordinate4
+physicalReducedGhostMatrices4 generator anchor = record
+  { MatrixCarrier.Matrix.FiniteGhostPerturbationMatrices4.indices = Gauge.flatGaugeCoordinates
+  ; MatrixCarrier.Matrix.FiniteGhostPerturbationMatrices4.X1 = physicalGhostX1 generator anchor
+  ; MatrixCarrier.Matrix.FiniteGhostPerturbationMatrices4.X2 = physicalGhostX2 generator anchor
+  ; MatrixCarrier.Matrix.FiniteGhostPerturbationMatrices4.X3 = physicalGhostX3 generator anchor
+  ; MatrixCarrier.Matrix.FiniteGhostPerturbationMatrices4.X4 = physicalGhostX4 generator anchor
+  }
+
+physicalFaddeevPopovFourthJetConstructionLevel : ProofLevel
+physicalFaddeevPopovFourthJetConstructionLevel = machineChecked
+
+physicalReducedGhostFourMatricesConstructionLevel : ProofLevel
+physicalReducedGhostFourMatricesConstructionLevel = machineChecked
+
+-- The coefficient matrices themselves are now source-native.  What remains of
+-- the former `PhysicalReducedFaddeevPopovFourthJetExact` package is the
+-- analytic theorem that the Bishop background path has these four coefficients
+-- with an O(g^5) remainder uniformly on the selected ball; finite trace-log and
+-- determinant convergence then consume these matrices.
+physicalReducedGhostBishopFifthOrderRemainderLevel : ProofLevel
+physicalReducedGhostBishopFifthOrderRemainderLevel = conditional
