@@ -29,7 +29,7 @@ module DASHI.Physics.YangMills.BalabanReducedFlatFaddeevPopovIsomorphismExact wh
 --
 --   G (L f) = L (G f) = f - mean(f).
 --
--- Re-anchoring cancels the constant mean exactly.  Thus for every anchored f,
+-- Re-anchoring cancels the constant mean exactly. Thus for every anchored f,
 --
 --   anchor (G (M0 f)) = f.
 --
@@ -40,10 +40,9 @@ module DASHI.Physics.YangMills.BalabanReducedFlatFaddeevPopovIsomorphismExact wh
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Integer.Base using (+_)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _-_; _*_)
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using (pair; allCyclicIndices; four)
@@ -54,7 +53,6 @@ import DASHI.Physics.YangMills.BalabanFiniteSumFubiniExact as Fubini
 import DASHI.Physics.YangMills.BalabanPath4AxisAverageExact as Average
 import DASHI.Physics.YangMills.BalabanPath4GlobalAverageExact as Global
 import DASHI.Physics.YangMills.BalabanConfiguredSide4PeriodicReindexingExact as Reindex
-import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Coordinates
 import DASHI.Physics.YangMills.BalabanP33PeriodicFourDimensionalHodgeIdentityExact as Periodic
 import DASHI.Physics.YangMills.BalabanP33PhysicalFaddeevPopovOperatorExact as FP
 import DASHI.Physics.YangMills.BalabanP33FaddeevPopovAnchoredGaugeReductionExact as Anchored
@@ -128,7 +126,9 @@ siteLocalLaplacianSumZero field =
             + field (Reindex.shiftBackward4 axis site))))
         (λ _ → 0ℚ)
         (λ axis → axisLaplacianSiteSumZero axis field))
-      (FiniteAverage.sumRationalConstant (allCyclicIndices four) 0ℚ))
+      (trans
+        (FiniteAverage.sumRationalConstant (allCyclicIndices four) 0ℚ)
+        (ℚRing.solve-∀)))
 
 ------------------------------------------------------------------------
 -- The literal flat FP image is therefore colourwise mean-zero.
