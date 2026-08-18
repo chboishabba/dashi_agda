@@ -27,8 +27,10 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Core.ArgumentObstructionCore as Argument
 import DASHI.Core.RequiredAxisSupportSquareExact as Support
+import DASHI.Core.ProvenanceBearingQuotient as Quotient
 import DASHI.Interop.InspectionRelativeNoTypedMeet as Inspect
 import DASHI.Interop.PNFVoidScopeBoundary as Scope
+import DASHI.Interop.SensibLawResidualLattice as Residual
 import DASHI.Cognition.PNF.ReopenableEvidenceFibre as Reopen
 import DASHI.Foundations.JChartSuccessorBoundary as Chart
 import DASHI.Dynamics.TriadicResidualRechartDynamics as Rechart
@@ -197,14 +199,14 @@ currentNoTypedMeetDoesNotPromoteTruth =
 sameFibreNoTypedMeetIsNotScopeExceeded :
   Scope.NoTypedMeetComparedInFibre.ntmSixLevelResidual
     Scope.canonicalNoTypedMeetComparedInFibre
-  ≡ Scope.Residual.noTypedMeet6
+  ≡ Residual.noTypedMeet6
 sameFibreNoTypedMeetIsNotScopeExceeded =
   Scope.canonicalNoTypedMeetRowIsNotScopeExceeded
 
 outsideComparisonReallyIsScopeExceeded :
   Scope.ScopeExceededOutsideComparison.scopeSixLevelResidual
     Scope.canonicalScopeExceededOutsideComparison
-  ≡ Scope.Residual.scopeExceeded6
+  ≡ Residual.scopeExceeded6
 outsideComparisonReallyIsScopeExceeded =
   Scope.canonicalScopeExceededRowResidualIsScopeExceeded
 
@@ -213,11 +215,16 @@ outsideComparisonReallyIsScopeExceeded =
 ------------------------------------------------------------------------
 
 projectionResidualDoesNotGrantSemanticErasure :
-  Reopen.Quotient.ProjectionSemanticErasurePermission
-    Reopen.Quotient.projectionReceiptOnly →
+  Quotient.ProjectionSemanticErasurePermission
+    Quotient.projectionReceiptOnly →
   ⊥
 projectionResidualDoesNotGrantSemanticErasure =
-  Reopen.Quotient.projectionReceiptCannotEraseSemantics
+  Quotient.projectionReceiptCannotEraseSemantics
+
+reopenableEvidenceUsesCanonicalQuotient :
+  Reopen.canonicalQuotientCoreReused Reopen.canonicalReopenableEvidenceBoundary
+  ≡ true
+reopenableEvidenceUsesCanonicalQuotient = refl
 
 safeCarryReadsJAndJPlusOneTogether :
   Carry.depthEvaluationBoundary Carry.canonicalCarryMemorySubvoxelReceipt
