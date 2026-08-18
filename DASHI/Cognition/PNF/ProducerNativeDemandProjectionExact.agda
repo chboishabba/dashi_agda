@@ -142,3 +142,77 @@ preaggregationPreservesLookup :
     (key : Key) →
   pointLookup law source key ≡ summaryLookup law (summarize law source) key
 preaggregationPreservesLookup law source key = aggregateExact law source key
+
+------------------------------------------------------------------------
+-- Superseded projection elision with live-residue extraction.
+--
+-- A historical derived carrier may be expensive to maintain even after newer
+-- authority has replaced it. It is NOT enough to observe that the old carrier
+-- is no longer the preferred consumer surface: some live obligation may still
+-- have been produced only as a side effect of that carrier.
+--
+-- The safe cut is consumer-indexed. For the complete family of live consumers
+-- supplied to this record, the smaller replacement/residue projection must give
+-- exactly the same observation as the legacy projection. Historical Legacy rows
+-- may remain cold/reopenable; automatic maintenance is not semantic authority.
+--
+-- This is the formal boundary behind retiring the procedural mention/recurrence
+-- compiler while extracting its still-live anaphor demand/source projection.
+------------------------------------------------------------------------
+
+record SupersededProjectionElision
+  (Source Legacy Replacement Consumer Observation : Set)
+  : Set₁ where
+  field
+    legacyProjection : Source → Legacy
+    replacementProjection : Source → Replacement
+    observeLegacy : Consumer → Legacy → Observation
+    observeReplacement : Consumer → Replacement → Observation
+    allLiveConsumersPreserved : ∀ consumer source →
+      observeLegacy consumer (legacyProjection source)
+      ≡ observeReplacement consumer (replacementProjection source)
+
+open SupersededProjectionElision public
+
+replacementPreservesEveryLiveConsumer :
+  ∀ {Source Legacy Replacement Consumer Observation : Set}
+    (law : SupersededProjectionElision
+      Source Legacy Replacement Consumer Observation)
+    (consumer : Consumer)
+    (source : Source) →
+  observeLegacy law consumer (legacyProjection law source)
+  ≡ observeReplacement law consumer (replacementProjection law source)
+replacementPreservesEveryLiveConsumer law consumer source =
+  allLiveConsumersPreserved law consumer source
+
+------------------------------------------------------------------------
+-- Sparse live residue.
+--
+-- The replacement may intentionally carry fewer derived families than Legacy.
+-- The following law isolates the stronger requirement needed for that move:
+-- every live obligation emitted by the old projection must be recoverable from
+-- the replacement. Dead diagnostic/compatibility structure need not remain hot.
+------------------------------------------------------------------------
+
+record LiveObligationExtraction
+  (Source Legacy Replacement Obligation : Set)
+  : Set₁ where
+  field
+    legacyObligations : Legacy → List Obligation
+    replacementObligations : Replacement → List Obligation
+    legacyFromSource : Source → Legacy
+    replacementFromSource : Source → Replacement
+    liveObligationsExact : ∀ source →
+      legacyObligations (legacyFromSource source)
+      ≡ replacementObligations (replacementFromSource source)
+
+open LiveObligationExtraction public
+
+replacementRetainsAllLiveObligations :
+  ∀ {Source Legacy Replacement Obligation : Set}
+    (law : LiveObligationExtraction Source Legacy Replacement Obligation)
+    (source : Source) →
+  legacyObligations law (legacyFromSource law source)
+  ≡ replacementObligations law (replacementFromSource law source)
+replacementRetainsAllLiveObligations law source =
+  liveObligationsExact law source
