@@ -26,7 +26,8 @@ module DASHI.Physics.Closure.NSTriadKNTraceFreeGapSpectrumRound80Exact where
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
-open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _-_; _*_)
+open import Data.Product using (_×_; _,_)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
@@ -47,15 +48,11 @@ gap12 spectrum = lambda1 spectrum - lambda2 spectrum
 gap23 : ThreeSpectrum → ℚ
 gap23 spectrum = lambda2 spectrum - lambda3 spectrum
 
-three : ℚ
-three = 3ℚ
-  where
-  open import Data.Rational.Base using (3ℚ)
-
 two : ℚ
-two = 2ℚ
-  where
-  open import Data.Rational.Base using (2ℚ)
+two = 1ℚ + 1ℚ
+
+three : ℚ
+three = two + 1ℚ
 
 lambda1GapTraceIdentity :
   (spectrum : ThreeSpectrum) →
@@ -132,8 +129,6 @@ bothAdjacentGapsZeroForceScaledSpectrumZero :
 bothAdjacentGapsZeroForceScaledSpectrumZero data gap12Zero gap23Zero =
   first , second , third
   where
-  open import Data.Product using (_×_; _,_)
-
   first : three * lambda1 (spectrum data) ≡ 0ℚ
   first =
     subst
