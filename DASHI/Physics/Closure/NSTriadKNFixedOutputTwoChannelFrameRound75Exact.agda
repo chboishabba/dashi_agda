@@ -429,7 +429,7 @@ fixedOutputCanonicalWSumFrameBound O system output outputNonzero =
       (qModes fibre)
     cutoffNN = ℚP.≤-trans qNN restriction
     scaled =
-      L2.nonnegativeProductMonotone
+      RationalL2.nonnegativeProductMonotone
         outputNN qNN outputNN cutoffNN ℚP.≤-refl restriction
   in
   ℚP.≤-trans first scaled
