@@ -1,7 +1,8 @@
 module DASHI.Moonshine.MarkedHeckeDeckCollisionEverything where
 
 ------------------------------------------------------------------------
--- Focused aggregate for the next marked-Hecke / deck-observer tranche.
+-- Focused aggregate for marked-Hecke / deck-observer collision and selector
+-- cutset work.
 --
 -- p=11:
 --   direct E(F_7) point count
@@ -13,25 +14,29 @@ module DASHI.Moonshine.MarkedHeckeDeckCollisionEverything where
 --
 -- p=37:
 --   actual 18-root Legendre T3/T5/F carrier
---     -> two distinct observables with identical (T3,T5,F)=(1,0,+1)
---     -> one is deck invariant, one is moved by deck C3
---     -> scalar Hecke/Frobenius observation is not deck separating.
+--     -> source-native 3 x regular-S3 orbital presentation
+--     -> complete right-deck isotypic decomposition 3 + 3 + 12
+--     -> explicit trivial/sign 3x3 blocks and standard 6x6 multiplicity block
+--     -> structural trivial-vs-standard collision at (T3,T5,F)=(1,0,+1)
+--     -> deck type repairs the scalar observation.
+--
+-- Cross-prime selector cutset:
+--   scalar Hecke/Frobenius blindness to deck type occurs at BOTH p=11 and the
+--   non-Ogg control p=37, so deck refinement is representation-relevant but is
+--   not itself an Ogg selector.  The first currently surviving 11/37 selector
+--   coordinate is the COARSE geometric Frobenius paired-orbit defect (0 vs 1).
+--   The under-72 Fricke/Ogg agreement remains explicitly non-independent of the
+--   class-number/Fricke input from which that generic finite scan is derived.
 --
 -- Generic algebra:
---   if the marked space is genuinely identified as
---       global Hecke factor x auxiliary deck factor
---   and prime-to-level Hecke acts on the global coordinate only, then the
---   entire prime-to-level Hecke family is necessarily blind to deck type.
+--   if a marked space is genuinely identified as global-Hecke x deck and the
+--   prime-to-level Hecke family acts only on the global factor, blindness is
+--   automatic.  The actual p=37 orbitals are richer: they include nontrivial
+--   LEFT frame multipliers while commuting with the RIGHT deck action.  Hence
+--   the product-factorization theorem remains a sufficient abstract mechanism,
+--   not a same-object description silently imposed on p=37.
 --
--- The observer no-go strengthens this from a pointwise slogan to exact
--- non-separation theorems: every finite prime family and even the whole
--- pointwise all-prime family fail on any nontrivial deck fibre, while adding
--- the deck coordinate is a strict refinement and the full (global,deck)
--- coordinate is separating.
---
--- No module here promotes the finite p=11 prime scan to an all-prime theorem,
--- nor does it assert that the actual p=11 carrier has already been proved to
--- possess the required global x deck product factorization.
+-- No module here promotes the finite p=11 prime scan to an all-prime theorem.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -43,6 +48,10 @@ import DASHI.Moonshine.P11MarkedHeckeThetaCollisionCriterionExact as Criterion
 import DASHI.Moonshine.P11Ell7PointCountBrandtTraceExact as Trace7
 import DASHI.Moonshine.P37NonOggFullLevel2DeuringControlExact as P37
 import DASHI.Moonshine.P37MarkedX2JointFingerprintDeckCollisionExact as P37Collision
+import DASHI.Moonshine.P37MarkedDeckIsotypicJointDecompositionExact as P37Iso
+import DASHI.Moonshine.P37MarkedDeckIsotypicCollisionExact as P37IsoCollision
+import DASHI.Moonshine.P11P37MarkedDeckSelectorCutsetExact as SelectorCutset
+import DASHI.Moonshine.P37MarkedDeckIsotypicHighestAlphaRegression as P37Regression
 import DASHI.Moonshine.AuxiliaryLevelHeckeDeckFactorizationExact as Aux
 import DASHI.Moonshine.AuxiliaryLevelHeckeObserverNoGoExact as ObserverNoGo
 
@@ -73,6 +82,10 @@ p11ThetaCriterionEll7Regression :
     (Criterion.coarseNonconstantDifference 8 2)
 p11ThetaCriterionEll7Regression = Criterion.ell7DeckBrandtDifferenceCollision
 
+------------------------------------------------------------------------
+-- Old p37 witness-level collision remains intact.
+------------------------------------------------------------------------
+
 p37CoarseFingerprintRegression :
   (x : P37.P37SupersingularLambda) →
   P37Collision.t3Action P37Collision.coarseEvenObserver x
@@ -84,6 +97,37 @@ p37DeckMovingFingerprintRegression :
   P37Collision.t3Action P37Collision.deckMovingEvenObserver x
   ≡ P37Collision.deckMovingEvenObserver x
 p37DeckMovingFingerprintRegression = P37Collision.deckMovingEvenT3Eigen
+
+------------------------------------------------------------------------
+-- New complete p37 deck-isotypic compression.
+------------------------------------------------------------------------
+
+p37DeckDimensionsRegression :
+  P37Iso.trivialDeckDimension + P37Iso.signDeckDimension + P37Iso.standardDeckIsotypicDimension
+  ≡ 18
+p37DeckDimensionsRegression = P37Iso.isotypicDimensionsSumToEighteen
+
+p37StandardIsotypicTwoCopiesRegression :
+  2 * P37Iso.standardMultiplicityDimension ≡ P37Iso.standardDeckIsotypicDimension
+p37StandardIsotypicTwoCopiesRegression = P37Iso.standardIsotypicIsTwoMultiplicityCopies
+
+p37StructuralScalarCollisionRegression :
+  P37IsoCollision.p37TrivialFingerprint ≡ P37IsoCollision.p37StandardFingerprint
+p37StructuralScalarCollisionRegression = P37IsoCollision.p37ArithmeticFingerprintsCoincide
+
+p37StructuralDeckRepairRegression :
+  P37IsoCollision.p37TrivialRefined ≡ P37IsoCollision.p37StandardRefined → ⊥
+p37StructuralDeckRepairRegression = P37IsoCollision.p37DeckRefinementSeparates
+
+p11P37FrobeniusDefectSelectorRegression :
+  SelectorCutset.p11CoarseFrobeniusPairDefect
+  ≡ SelectorCutset.p37CoarseFrobeniusPairDefect → ⊥
+p11P37FrobeniusDefectSelectorRegression =
+  SelectorCutset.coarseFrobeniusPairDefectSeparates11And37
+
+------------------------------------------------------------------------
+-- Product-factorization remains a boundary, not a false p37 identification.
+------------------------------------------------------------------------
 
 auxiliaryLevelBoundaryRegression :
   Aux.p11SameObjectProductFactorizationClaimedHere
