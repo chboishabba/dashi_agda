@@ -20,5 +20,7 @@ import DASHI.Ontology.LeanWikidataConcreteGraphRegression
 import DASHI.Ontology.LeanWikidataGovernedResidualBridge
 import DASHI.Ontology.LeanWikidataDerivationFibreAdapter
 import DASHI.Ontology.LeanWikidataRelationalLensBridge
+import DASHI.Ontology.ProgenitorParentHyperfabric
+import DASHI.Ontology.ProgenitorParentHyperfabricTests
 import DASHI.Ontology.LeanWikidataWholeBridge
 import DASHI.Ontology.LeanWikidataWholeBridgeTests
