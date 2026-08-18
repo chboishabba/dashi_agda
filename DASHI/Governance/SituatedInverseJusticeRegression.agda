@@ -3,13 +3,19 @@ module DASHI.Governance.SituatedInverseJusticeRegression where
 open import DASHI.Core.Prelude
 
 import DASHI.Core.IntersectionalNonFactorability as Intersectional
+import DASHI.Culture.AmalekAuthorityProjectionBoundary as AmalekAuthority
 import DASHI.Governance.AuthorityRoutingProjectionSafetyExact as Projection
+import DASHI.Governance.ExternalityCarrierAttractor as Externality
 import DASHI.Governance.InverseJusticeThroughputExact as Throughput
 import DASHI.Governance.JusticeCrossPollinationBridgeExact as Cross
+import DASHI.Governance.LocalGlobalCouncilGluing as CouncilGluing
 import DASHI.Governance.OptionConeCoercionExact as Cone
 import DASHI.Governance.SituatedAuthorityRoutingExact as Routing
 import DASHI.Governance.SituatedInverseJusticeFibreExact as Justice
 import DASHI.Governance.TraumaMemorySublationBoundary as TraumaMemory
+import DASHI.Physics.Foundations.FrontierEnemyPersistenceExact as Frontier
+import DASHI.Physics.Foundations.SettlerEnemyAbstractionExact as Enemy
+import DASHI.Reasoning.RelationalChronologyProjectionBoundary as Chronology
 
 ------------------------------------------------------------------------
 -- Regression surface for the situated inverse-justice / authority-routing
@@ -76,8 +82,7 @@ protectiveRoleCannotSelfAuthorise =
   Routing.ProtectiveRoleDoesNotSelfAuthoriseIntervention
 
 pseudoConsultationCannotEstablishCommunityGovernance :
-  Routing.CommunityAuthorityWitness
-    DASHI.Reasoning.RelationalChronologyProjectionBoundary.canonicalConsultationEpisode →
+  Routing.CommunityAuthorityWitness Chronology.canonicalConsultationEpisode →
   ⊥
 pseudoConsultationCannotEstablishCommunityGovernance =
   Routing.consultationDoesNotEstablishCommunityGovernance
@@ -91,11 +96,8 @@ disturbanceSurfaceCannotDetermineSoundRoute =
   Projection.incidentLabelCannotDetermineSoundRoute
 
 causalOrderLossChangesResponder :
-  Projection.routeByChronology
-    DASHI.Reasoning.RelationalChronologyProjectionBoundary.actImpactObjectionResponseShape
-  ≡
-  Projection.routeByChronology
-    DASHI.Reasoning.RelationalChronologyProjectionBoundary.objectionDistressBlameShape →
+  Projection.routeByChronology Chronology.actImpactObjectionResponseShape
+  ≡ Projection.routeByChronology Chronology.objectionDistressBlameShape →
   ⊥
 causalOrderLossChangesResponder =
   Projection.CausalOrderLossCanChangeAdmissibleResponder
@@ -132,7 +134,7 @@ canonicalOptionConeCoercionWitness = Cone.canonicalOptionConeCoercion
 
 enemyCompressionCannotDetermineFineJusticeAssessment :
   Intersectional.FactorsThrough
-    DASHI.Physics.Foundations.SettlerEnemyAbstractionExact.rhetoricalCompression
+    Enemy.rhetoricalCompression
     Cross.fineJusticeAssessment →
   ⊥
 enemyCompressionCannotDetermineFineJusticeAssessment =
@@ -144,8 +146,7 @@ civilianNonSubstitutionCollisionWitness =
   Cross.canonicalCivilianNonSubstitutionCollision
 
 visibleCarrierCannotSelfPromoteToCoerciveAuthority :
-  DASHI.Governance.ExternalityCarrierAttractor.VisibleCarrierEstablishesSufficientCause →
-  ⊥
+  Externality.VisibleCarrierEstablishesSufficientCause → ⊥
 visibleCarrierCannotSelfPromoteToCoerciveAuthority =
   Cross.CarrierVisibilityCannotPromoteToCoerciveRoute
 
@@ -157,26 +158,25 @@ selectedIranOriginIsNotCompleteCause =
   Cross.iranNineteenSeventyNineFrameIsNotCompleteCause
 
 closedAuthorityCanonicalRiskHasNoIndependentCorrection :
-  DASHI.Culture.AmalekAuthorityProjectionBoundary.correctionChannelIndependent
-    DASHI.Culture.AmalekAuthorityProjectionBoundary.canonicalClosedAuthorityRisk
+  AmalekAuthority.correctionChannelIndependent
+    AmalekAuthority.canonicalClosedAuthorityRisk
   ≡ false
 closedAuthorityCanonicalRiskHasNoIndependentCorrection =
   Cross.canonicalClosedAuthorityHasNoIndependentCorrection
 
 concreteThreatRemovalDoesNotCloseAbstractEnemyApparatus :
-  DASHI.Physics.Foundations.FrontierEnemyPersistenceExact.defeatingActorDissolvesEnemyCategoryAutomatically
-    DASHI.Physics.Foundations.FrontierEnemyPersistenceExact.canonicalFrontierEnemyPersistenceBoundary
+  Frontier.defeatingActorDissolvesEnemyCategoryAutomatically
+    Frontier.canonicalFrontierEnemyPersistenceBoundary
   ≡ false
 concreteThreatRemovalDoesNotCloseAbstractEnemyApparatus =
   Cross.concreteThreatRemovalDoesNotEstablishCoerciveApparatusClosure
 
 compatibleSituatedAuthoritiesComposeWithoutAuthorityPromotion :
-  DASHI.Governance.LocalGlobalCouncilGluing.CompatibleCouncilFamily
-    DASHI.Governance.LocalGlobalCouncilGluing.canonicalLocalCouncilFamily
+  CouncilGluing.CompatibleCouncilFamily
+    CouncilGluing.canonicalLocalCouncilFamily
   ×
-  (DASHI.Governance.LocalGlobalCouncilGluing.sheafAnalogyCreatesPoliticalAuthority
-    DASHI.Governance.LocalGlobalCouncilGluing.canonicalCouncilGluingBoundary
-    ≡ false)
+  (CouncilGluing.sheafAnalogyCreatesPoliticalAuthority
+    CouncilGluing.canonicalCouncilGluingBoundary ≡ false)
 compatibleSituatedAuthoritiesComposeWithoutAuthorityPromotion =
   Cross.CompatibleSituatedAuthoritiesCanComposeWithoutSovereigntyCollapse
 
