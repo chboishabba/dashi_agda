@@ -31,5 +31,8 @@ import DASHI.Ontology.ProgenitorParentPNFPullbackLattice
 import DASHI.Ontology.ProgenitorParentPredicateBaseChange
 import DASHI.Ontology.ProgenitorParentPredicatePullbackExact
 import DASHI.Ontology.ProgenitorParentJMDPNFTests
+import DASHI.Ontology.ProgenitorParentObserverDynamicsBridge
+import DASHI.Ontology.ProgenitorParentObservationAuthorityBridge
+import DASHI.Ontology.ProgenitorParentCrossPollinationEverything
 import DASHI.Ontology.LeanWikidataWholeBridge
 import DASHI.Ontology.LeanWikidataWholeBridgeTests
