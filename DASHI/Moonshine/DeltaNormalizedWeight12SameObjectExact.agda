@@ -9,6 +9,17 @@ module DASHI.Moonshine.DeltaNormalizedWeight12SameObjectExact where
 -- Toshitsune Miyake, "Modular Forms", Springer Monographs in Mathematics,
 -- 2006. DOI: 10.1007/3-540-29593-3.
 --
+-- Tom M. Apostol,
+-- "The Dedekind eta function", Chapter 3 of
+-- "Modular Functions and Dirichlet Series in Number Theory",
+-- Graduate Texts in Mathematics, Springer.
+-- DOI: 10.1007/978-1-4612-0999-7_3.
+-- This is the source authority for the eta transformation machinery and the
+-- classical eta^24 / Delta analytic route.  The particular decomposition used
+-- by the later supplied Aristotle development (log derivative -> E2 defect ->
+-- constant-ratio rigidity -> normalization at i) is recorded below as source
+-- development provenance rather than attributed wholesale to Apostol.
+--
 -- ARISTOTLE / HARMONIC CONTEXT
 --
 -- The later supplied Delta development proves the genuine analytic chain
