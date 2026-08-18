@@ -2,112 +2,110 @@ module DASHI.Core.EvidenceObligationAuthoritySeparationExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.String using (String)
 
 import DASHI.Algebra.DisagreementFourViewBoundary as Four
+import DASHI.Promotion.AuthorityGateCore as Authority
 
 ------------------------------------------------------------------------
 -- Evidence polarity, proof-obligation discharge, and authority are distinct.
 --
--- A supported claim may still have open obligations.  A fully discharged
--- technical claim may still lack authority for a downstream action.  Authority
--- alone cannot manufacture evidence.  Promotion therefore consumes all three
--- coordinates explicitly rather than treating any one as a proxy for the rest.
+-- This module reuses AuthorityGateCore rather than introducing a second
+-- authority algebra.  A supported claim may still have open obligations; even
+-- a positively supported claim whose technical obligations are discharged
+-- cannot bypass a closed authority gate.  External/domain authority remains a
+-- separate accepted-bridge problem.
 --
 -- This module intentionally does NOT define per-axis completeness.  Incoming
 -- PR #582 owns that theorem layer in DASHI.Core.RequiredAxisSupportSquareExact
 -- (AxisEvidenceFamily, RequiredAxesResolved, MissingRequiredAxis, and the
 -- non-compensation theorem).  On stack convergence, an inhabited
--- RequiredAxesResolved proof is a natural producer for obligationsDischarged;
--- the present module only records the orthogonality of evidence, completion,
--- and downstream authority.
+-- RequiredAxesResolved proof is a natural producer for obligationsDischarged.
 ------------------------------------------------------------------------
 
 data ObligationStatus : Set where
   obligationsOpen : ObligationStatus
   obligationsDischarged : ObligationStatus
 
-data AuthorityStatus : Set where
-  authorityDenied : AuthorityStatus
-  authorityGranted : AuthorityStatus
-
 record GovernedClaimState : Set where
   constructor governedClaimState
   field
     evidence : Four.PolarAssessment
     obligations : ObligationStatus
-    authority : AuthorityStatus
+    authorityGate : Authority.PromotionGate
 
 open GovernedClaimState public
 
-promotionGate : GovernedClaimState → Bool
-promotionGate
-  (governedClaimState (Four.assess true false)
-                      obligationsDischarged
-                      authorityGranted) = true
-promotionGate _ = false
+closedGovernedClaimState :
+  Four.PolarAssessment →
+  ObligationStatus →
+  Authority.AuthorityKind →
+  String →
+  GovernedClaimState
+closedGovernedClaimState evidence obligations kind label =
+  governedClaimState evidence obligations (Authority.mkClosedGate kind label)
 
-supportOnlyOpenDenied : GovernedClaimState
-supportOnlyOpenDenied =
-  governedClaimState
+localPromotion : GovernedClaimState → Bool
+localPromotion state = Authority.promoted (authorityGate state)
+
+localPromotionIsFalse :
+  (state : GovernedClaimState) →
+  localPromotion state ≡ false
+localPromotionIsFalse state = Authority.promotedIsFalse (authorityGate state)
+
+supportOnlyOpen : GovernedClaimState
+supportOnlyOpen =
+  closedGovernedClaimState
     (Four.assess true false)
     obligationsOpen
-    authorityDenied
+    Authority.theoremAuthority
+    "supported claim with open obligations"
 
-supportOnlyDischargedDenied : GovernedClaimState
-supportOnlyDischargedDenied =
-  governedClaimState
+supportOnlyDischarged : GovernedClaimState
+supportOnlyDischarged =
+  closedGovernedClaimState
     (Four.assess true false)
     obligationsDischarged
-    authorityDenied
+    Authority.theoremAuthority
+    "supported claim with discharged technical obligations"
 
-ignoranceDischargedGranted : GovernedClaimState
-ignoranceDischargedGranted =
-  governedClaimState
-    (Four.assess false false)
-    obligationsDischarged
-    authorityGranted
-
-conflictDischargedGranted : GovernedClaimState
-conflictDischargedGranted =
-  governedClaimState
+conflictDischarged : GovernedClaimState
+conflictDischarged =
+  closedGovernedClaimState
     (Four.assess true true)
     obligationsDischarged
-    authorityGranted
-
-supportedDischargedGranted : GovernedClaimState
-supportedDischargedGranted =
-  governedClaimState
-    (Four.assess true false)
-    obligationsDischarged
-    authorityGranted
+    Authority.theoremAuthority
+    "conflicting claim with discharged technical obligations"
 
 supportDoesNotDischargeObligations :
-  promotionGate supportOnlyOpenDenied ≡ false
+  obligations supportOnlyOpen ≡ obligationsOpen
 supportDoesNotDischargeObligations = refl
 
-dischargedObligationsDoNotGrantAuthority :
-  promotionGate supportOnlyDischargedDenied ≡ false
-dischargedObligationsDoNotGrantAuthority = refl
+dischargedObligationsDoNotOpenAuthorityGate :
+  localPromotion supportOnlyDischarged ≡ false
+dischargedObligationsDoNotOpenAuthorityGate =
+  localPromotionIsFalse supportOnlyDischarged
 
-authorityDoesNotManufactureEvidence :
-  promotionGate ignoranceDischargedGranted ≡ false
-authorityDoesNotManufactureEvidence = refl
+conflictDoesNotOpenAuthorityGate :
+  localPromotion conflictDischarged ≡ false
+conflictDoesNotOpenAuthorityGate =
+  localPromotionIsFalse conflictDischarged
 
-conflictDoesNotBecomeAffirmativePromotion :
-  promotionGate conflictDischargedGranted ≡ false
-conflictDoesNotBecomeAffirmativePromotion = refl
-
-supportedDischargedAuthorizedPromotes :
-  promotionGate supportedDischargedGranted ≡ true
-supportedDischargedAuthorizedPromotes = refl
+supportAndDischargeCannotBypassClosedAuthority :
+  (state : GovernedClaimState) →
+  evidence state ≡ Four.assess true false →
+  obligations state ≡ obligationsDischarged →
+  localPromotion state ≡ false
+supportAndDischargeCannotBypassClosedAuthority state support discharged =
+  localPromotionIsFalse state
 
 record EvidenceObligationAuthorityBoundary : Set where
   field
     evidenceEqualsObligationDischargeClaimed : Bool
     obligationDischargeEqualsAuthorityClaimed : Bool
     authorityEqualsEvidenceClaimed : Bool
-    conflictPromotesAffirmativelyClaimed : Bool
-    allCoordinatesRequiredForPromotion : Bool
+    conflictOpensAuthorityClaimed : Bool
+    existingAuthorityGateCoreReused : Bool
 
 canonicalEvidenceObligationAuthorityBoundary :
   EvidenceObligationAuthorityBoundary
@@ -115,6 +113,6 @@ canonicalEvidenceObligationAuthorityBoundary = record
   { evidenceEqualsObligationDischargeClaimed = false
   ; obligationDischargeEqualsAuthorityClaimed = false
   ; authorityEqualsEvidenceClaimed = false
-  ; conflictPromotesAffirmativelyClaimed = false
-  ; allCoordinatesRequiredForPromotion = true
+  ; conflictOpensAuthorityClaimed = false
+  ; existingAuthorityGateCoreReused = true
   }
