@@ -23,7 +23,7 @@ module DASHI.Physics.YangMills.BalabanReducedGhostOperatorMatrixExact where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base as ℚ using (ℚ; _+_)
-open import Relation.Binary.PropositionalEquality using (trans)
+open import Relation.Binary.PropositionalEquality using (cong₂; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using
@@ -69,8 +69,6 @@ sumCartesian (value ∷ values) right term =
         (sumMap (λ second → pair value second) right term)
         (sumCartesian values right term))
       refl)
-  where
-  open import Relation.Binary.PropositionalEquality using (cong₂)
 
 basisFromCoordinate :
   Block.PhysicalBlockL Path4.side4 →
