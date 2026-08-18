@@ -9,6 +9,7 @@ import DASHI.Governance.ExternalityCarrierAttractor as Externality
 import DASHI.Governance.InverseJusticeThroughputExact as Throughput
 import DASHI.Governance.JusticeCrossPollinationBridgeExact as Cross
 import DASHI.Governance.LocalGlobalCouncilGluing as CouncilGluing
+import DASHI.Governance.NonCompensatoryJusticeOrderExact as NonCompensatory
 import DASHI.Governance.OptionConeCoercionExact as Cone
 import DASHI.Governance.SituatedAuthorityRoutingExact as Routing
 import DASHI.Governance.SituatedInverseJusticeFibreExact as Justice
@@ -60,6 +61,19 @@ worsenedViolationIsInverseJustice =
 
 sloganThroughputWitness : Throughput.CoerciveJusticeThroughput
 sloganThroughputWitness = Throughput.tooManyCoppersNotEnoughJusticeWitness
+
+unrelatedRepairCannotCancelProtectedViolation :
+  NonCompensatory.UnrelatedRepairCannotCancelProtectedViolationWitness
+unrelatedRepairCannotCancelProtectedViolation =
+  NonCompensatory.unrelatedJusticeRepairCannotCancelProtectedViolation
+
+strictInverseEmbedsIntoNonCompensatoryOrder :
+  NonCompensatory.NonCompensatoryJusticeNegative
+    Justice.violatingAction
+    NonCompensatory.sameInvariantCompensationPolicy
+strictInverseEmbedsIntoNonCompensatoryOrder =
+  NonCompensatory.strictInverseJusticeImpliesNonCompensatoryInverseJustice
+    Justice.violatingActionIsInverseJustice
 
 ------------------------------------------------------------------------
 -- Situated routing and projection safety.
