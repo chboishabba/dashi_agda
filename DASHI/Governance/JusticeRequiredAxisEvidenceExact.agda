@@ -215,7 +215,7 @@ allRoutingAxesRequired axis = ⊤
 record RouteEvidenceProfile : Set₁ where
   constructor routeEvidenceProfile
   field
-    evidenceAt : RoutingEvidenceAxis → Support.SupportSquare
+    routeEvidenceAt : RoutingEvidenceAxis → Support.SupportSquare
 
 open RouteEvidenceProfile public
 
@@ -223,7 +223,7 @@ routeEvidenceFamily :
   RouteEvidenceProfile →
   Support.AxisEvidenceFamily RoutingEvidenceAxis
 routeEvidenceFamily profile =
-  Support.axisEvidenceFamily (evidenceAt profile) allRoutingAxesRequired
+  Support.axisEvidenceFamily (routeEvidenceAt profile) allRoutingAxesRequired
 
 record EvidenceBackedAdmissibleRoute
     {Situation Route : Set}
