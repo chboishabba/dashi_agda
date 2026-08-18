@@ -13,8 +13,8 @@ open import DASHI.Ontology.ProgenitorParentObserverDynamicsBridge
 ------------------------------------------------------------------------
 -- Exact parent reopening.
 --
--- The public surface is the Wikidata slot.  The proof-relevant residual is the
--- full relation vector.  This is deliberately not a claim that the residual is
+-- The public surface is the Wikidata slot. The proof-relevant residual is the
+-- full relation vector. This is deliberately not a claim that the residual is
 -- public/disclosable; it is the coordinate required for exact reopening.
 ------------------------------------------------------------------------
 
@@ -69,7 +69,7 @@ sameSurfaceAndResidualDetermineParentCarrier {left} {right} sameSurface sameResi
 
 ------------------------------------------------------------------------
 -- Therefore every nontrivial hidden parent transition at fixed slot must move
--- the exact residual.  Legal finalisation gives the canonical witness.
+-- the exact residual. Legal finalisation gives the canonical witness.
 ------------------------------------------------------------------------
 
 legalFinalizationMustMoveResidual :
@@ -94,14 +94,16 @@ sameP8810SurfaceButResidualDisclosureMoves :
 sameP8810SurfaceButResidualDisclosureMoves = refl
 
 ------------------------------------------------------------------------
--- Receipt motion remains semantically and normatively bounded: exact residual
--- retention is not permission to disclose or to promote it to world truth.
+-- Receipt motion remains semantically bounded. The canonical provenance core
+-- explicitly denies semantic-erasure authority to a receipt. Disclosure/world-
+-- identity authority remains governed separately by ProofRelevantIdentityFibres
+-- through ProgenitorParentObservationAuthorityBridge.
 ------------------------------------------------------------------------
 
-parentResidualDoesNotSelfAuthoriseDisclosure :
+parentResidualDoesNotAuthoriseSemanticErasure :
   Provenance.ProjectionSemanticErasurePermission
     Provenance.projectionReceiptOnly → ⊥
-parentResidualDoesNotSelfAuthoriseDisclosure =
+parentResidualDoesNotAuthoriseSemanticErasure =
   Provenance.projectionReceiptCannotEraseSemantics
 
 record ParentResidualDynamicsBoundary : Set where
@@ -116,9 +118,9 @@ record ParentResidualDynamicsBoundary : Set where
     hiddenDisclosureMotionChangesResidual : Bool
     hiddenDisclosureMotionChangesResidualIsTrue :
       hiddenDisclosureMotionChangesResidual ≡ true
-    residualMotionGrantsDisclosureAuthority : Bool
-    residualMotionGrantsDisclosureAuthorityIsFalse :
-      residualMotionGrantsDisclosureAuthority ≡ false
+    residualMotionGrantsSemanticErasureAuthority : Bool
+    residualMotionGrantsSemanticErasureAuthorityIsFalse :
+      residualMotionGrantsSemanticErasureAuthority ≡ false
 
 canonicalParentResidualDynamicsBoundary : ParentResidualDynamicsBoundary
 canonicalParentResidualDynamicsBoundary =
