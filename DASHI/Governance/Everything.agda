@@ -16,6 +16,8 @@ import DASHI.Governance.LocalGlobalCouncilGluing
 import DASHI.Governance.RelationalMandateFibre
 import DASHI.Governance.SituatedConstituency
 import DASHI.Governance.TransitionResidual
+import DASHI.Governance.SituatedInverseJusticeFibreExact
+import DASHI.Governance.SituatedInverseJusticeRegression
 import DASHI.Governance.RevolutionarySourceAtlas
 import DASHI.Governance.RevolutionaryPracticeBraid
 import DASHI.Governance.TraumaMemorySublationBoundary
