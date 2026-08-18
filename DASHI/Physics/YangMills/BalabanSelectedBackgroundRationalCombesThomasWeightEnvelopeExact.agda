@@ -37,11 +37,14 @@ module DASHI.Physics.YangMills.BalabanSelectedBackgroundRationalCombesThomasWeig
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
+open import Data.Product using (_×_; _,_)
 open import Data.Rational.Base as ℚ using (ℚ; 1ℚ; _*_; _≤_; NonNegative)
 import Data.Rational.Properties as ℚP
-open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (subst; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
+open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using (pair)
+import DASHI.Physics.YangMills.BalabanSide4TranslationDifferenceExact as Difference
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundRationalCombesThomasWeightExact as Weight
 
 siteGrowthAboveOne : ∀ site → 1ℚ ≤ Weight.siteGrowthWeight site
@@ -73,11 +76,9 @@ siteGrowthAboveOne site =
 gaugeInverseWeightAboveOne : ∀ root row →
   1ℚ ≤ Weight.gaugeInverseWeight root row
 gaugeInverseWeightAboveOne
-    (DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier.pair rootCoordinate rootSite)
-    (DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier.pair coordinate site) =
-  siteGrowthAboveOne
-    (DASHI.Physics.YangMills.BalabanSide4TranslationDifferenceExact.subtractSite4
-      site rootSite)
+    (pair rootCoordinate rootSite)
+    (pair coordinate site) =
+  siteGrowthAboveOne (Difference.subtractSite4 site rootSite)
 
 gaugeInverseWeightEnvelope : ∀ root row →
   1ℚ ≤ Weight.gaugeInverseWeight root row
@@ -85,8 +86,6 @@ gaugeInverseWeightEnvelope : ∀ root row →
 gaugeInverseWeightEnvelope root row =
   gaugeInverseWeightAboveOne root row
   , Weight.gaugeInverseWeightBelowEnvelope root row
-  where
-  open import Data.Product using (_×_; _,_)
 
 selectedSide4CombesThomasWeightEnvelopeLevel : ProofLevel
 selectedSide4CombesThomasWeightEnvelopeLevel = machineChecked
