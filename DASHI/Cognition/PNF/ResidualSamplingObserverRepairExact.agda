@@ -15,7 +15,10 @@ module DASHI.Cognition.PNF.ResidualSamplingObserverRepairExact where
 open import DASHI.Core.Prelude
 
 import DASHI.Cognition.PNF.SemanticSamplingDynamicSafety as Sampling
+import DASHI.Cognition.PNF.SemanticSamplingLookupGeometry as Lookup
 import DASHI.Cognition.PNF.TerminalisationDefectRegression as Regression
+import DASHI.Core.DynamicalQuotientSafety as Dynamic
+import DASHI.Core.FutureObservationLanguageQuotientExact as Future
 import DASHI.Core.ObserverFactorizedRefinementExact as Factorized
 import DASHI.Core.ObserverRefinementFutureSafetyExact as FutureSafety
 import DASHI.Core.ObserverRefinementLatticeExact as Observer
@@ -60,7 +63,7 @@ visibleResidualSeparatesResidualState
 ... | refl | refl = refl
 
 visibleResidualIsFutureLanguageSafe :
-  DASHI.Core.FutureObservationLanguageQuotientExact.FutureLanguageSafeProjection
+  Future.FutureLanguageSafeProjection
     Regression.residualSystem
     Regression.residualProjection
     visibleResidualObserver
@@ -74,12 +77,11 @@ visibleResidualIsFutureLanguageSafe =
 ------------------------------------------------------------------------
 
 coarseCurrentQueryStillSufficient :
-  DASHI.Cognition.PNF.SemanticSamplingLookupGeometry.QuerySufficiency
-    Sampling.residualSamplingTower zero Bool
+  Lookup.QuerySufficiency Sampling.residualSamplingTower zero Bool
 coarseCurrentQueryStillSufficient = Sampling.staticResidualQuerySufficiency
 
 coarseProjectionStillFutureUnsafe :
-  DASHI.Core.DynamicalQuotientSafety.DynamicConsumerSafety
+  Dynamic.DynamicConsumerSafety
     Regression.residualSystem
     Regression.residualProjection →
   ⊥
