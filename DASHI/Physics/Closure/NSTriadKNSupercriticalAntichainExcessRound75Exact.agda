@@ -40,7 +40,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
 import DASHI.Physics.Closure.NSTriadKNDeterministicIrregularSquaredCascadeRound74Exact as Cascade
 import DASHI.Physics.Closure.NSTriadKNCriticalCauchyCardinalityDilutionNoGoRound71Exact as Mass
@@ -114,10 +114,8 @@ antichainStepExactGrowth step =
     (trans
       (supercriticalGenerationExcessExact (rows step))
       (cong₂ _+_
-        (Relation.Binary.PropositionalEquality.sym (parentMassExact step))
-        (Relation.Binary.PropositionalEquality.sym (excessMassExact step))))
-  where
-  open import Relation.Binary.PropositionalEquality using (cong₂)
+        (sym (parentMassExact step))
+        (sym (excessMassExact step))))
 
 round75SupercriticalAntichainWeightedExcessIdentified : Bool
 round75SupercriticalAntichainWeightedExcessIdentified = true
