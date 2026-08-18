@@ -19,24 +19,24 @@ module DASHI.Physics.YangMills.BalabanPlaquetteBoundaryStateNormChargeExact wher
 -- DASHI CONTRIBUTION
 --
 -- Compute, on the literal 3072-coordinate SU(2) carrier, the norm of the
--- four-bond plaquette projector.  Pairwise distinctness of the four positive
+-- four-bond plaquette projector. Pairwise distinctness of the four positive
 -- bond cells plus exact finite Kronecker selection gives
 --
---   ||P_p h||^2 = q_p(h),
+--   ||P_p h||^2 = q_p(h).
 --
--- where q_p is the repository's literal four-link diagonal Wilson charge.
 -- The already-proved twelve-ordered-pair incidence identity is
 --
 --   C_p(h) = 3 q_p(h).
 --
--- The defect degree-one Möbius state is exactly P_p h, so the physical G2
--- defect norm is not an analytic producer at all:
+-- Since the defect degree-one Möbius state is exactly P_p h,
 --
---   ||w_1||^2 = (1/3) C_p(h).
+--   3 ||w_1||^2 = C_p(h).
 --
--- No pseudoinverse, row bound, LBB constant, or background stabilizer enters.
+-- Thus the G2 defect degree-one ratio is exactly 1/3. No pseudoinverse, row
+-- bound, LBB constant, or background stabilizer enters this estimate.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
@@ -58,9 +58,9 @@ import DASHI.Physics.YangMills.BalabanP33LiteralResidualKernelNumericalCalibrati
 import DASHI.Physics.YangMills.BalabanP33PhysicalCoordinateBasisExact as Basis
 import DASHI.Physics.YangMills.BalabanP33PlaquetteBoundaryProjectorExact as Boundary
 import DASHI.Physics.YangMills.BalabanPlaquetteBoundaryCellsPairwiseDistinctExact as Distinct
+import DASHI.Physics.YangMills.BalabanP33PhysicalRationalWilsonPlaquetteJetExact as Plaquette
 import DASHI.Physics.YangMills.BalabanP33PhysicalWilsonIncidenceExact as Incidence
-import DASHI.Physics.YangMills.BalabanP33PhysicalBackgroundGaugeFirstExact as Gauge
-import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
+import DASHI.Physics.YangMills.BalabanP33PhysicalWilsonSignedGlobalExact as Wilson
 import DASHI.Physics.YangMills.BalabanP33CorrelatedMobiusDegreeJointExact as Degree
 import DASHI.Physics.YangMills.BalabanSelectedCanonicalConstraintAtomsFromSubsetExact as Canonical
 import DASHI.Physics.YangMills.BalabanCanonicalGreenDegreeStatePreimageExact as Preimage
@@ -76,21 +76,20 @@ sq value = value * value
 kroneckerEqual : ∀ {left right : Cell.BondCell4} →
   left ≡ right →
   Basis.kronecker Calibration.bondCellDecidableEquality left right ≡ 1ℚ
-kroneckerEqual refl
-  with Calibration.bondCellDecidableEquality _ _
+kroneckerEqual {left} {right} equality
+  with Calibration.bondCellDecidableEquality left right
 ... | yes _ = refl
-... | no notEqual = emptyElim (notEqual refl)
+... | no notEqual = emptyElim (notEqual equality)
 
 kroneckerNotEqual : ∀ {left right : Cell.BondCell4} →
   left ≢ right →
   Basis.kronecker Calibration.bondCellDecidableEquality left right ≡ 0ℚ
-kroneckerNotEqual notEqual
-  with Calibration.bondCellDecidableEquality _ _
+kroneckerNotEqual {left} {right} notEqual
+  with Calibration.bondCellDecidableEquality left right
 ... | yes equality = emptyElim (notEqual equality)
 ... | no _ = refl
 
-boundaryIndicator :
-  Boundary.Physical.Plaquette4 → Cell.BondCell4 → ℚ
+boundaryIndicator : Plaquette.Plaquette4 → Cell.BondCell4 → ℚ
 boundaryIndicator plaquette cell =
   Basis.kronecker Calibration.bondCellDecidableEquality
     cell (Boundary.boundaryCell0 plaquette)
@@ -161,7 +160,7 @@ indicatorOutside plaquette cell ne0 ne1 ne2 ne3
         | kroneckerNotEqual ne2
         | kroneckerNotEqual ne3 = ℚRing.solve []
 
-bondCellEqualFalse : ∀ {left right} →
+bondCellEqualFalse : ∀ {left right : Cell.BondCell4} →
   left ≢ right → Boundary.bondCellEqual left right ≡ false
 bondCellEqualFalse {left} {right} notEqual
   with Calibration.bondCellDecidableEquality left right
@@ -336,59 +335,80 @@ sumIndicatorSquareExact plaquette field =
     split2 = Fubini.sumRationalAdd coordinates
       (λ coordinate → term (Boundary.boundaryCell2 plaquette) coordinate)
       (λ coordinate → term (Boundary.boundaryCell3 plaquette) coordinate)
-  in
-  trans expand
-    (trans split0
-      (cong
-        (selectedCellSquareSum field (Boundary.boundaryCell0 plaquette) +_)
-        (trans split1
-          (cong
-            (selectedCellSquareSum field (Boundary.boundaryCell1 plaquette) +_)
-            split2))))
-  |> λ split →
-    trans split
+
+    split :
+      Sums.sumRational coordinates
+        (λ coordinate →
+          boundaryIndicator plaquette (Boundary.physicalCoordinateCell coordinate)
+          * sq (Physical.encodePhysicalSU2 field coordinate))
+      ≡ selectedCellSquareSum field (Boundary.boundaryCell0 plaquette)
+        + (selectedCellSquareSum field (Boundary.boundaryCell1 plaquette)
+        + (selectedCellSquareSum field (Boundary.boundaryCell2 plaquette)
+        + selectedCellSquareSum field (Boundary.boundaryCell3 plaquette)))
+    split = trans expand
+      (trans split0
+        (cong
+          (selectedCellSquareSum field (Boundary.boundaryCell0 plaquette) +_)
+          (trans split1
+            (cong
+              (selectedCellSquareSum field (Boundary.boundaryCell1 plaquette) +_)
+              split2))))
+
+    selected :
+      selectedCellSquareSum field (Boundary.boundaryCell0 plaquette)
+        + (selectedCellSquareSum field (Boundary.boundaryCell1 plaquette)
+        + (selectedCellSquareSum field (Boundary.boundaryCell2 plaquette)
+        + selectedCellSquareSum field (Boundary.boundaryCell3 plaquette)))
+      ≡ bondCellPhysicalCharge field (Boundary.boundaryCell0 plaquette)
+        + (bondCellPhysicalCharge field (Boundary.boundaryCell1 plaquette)
+        + (bondCellPhysicalCharge field (Boundary.boundaryCell2 plaquette)
+        + bondCellPhysicalCharge field (Boundary.boundaryCell3 plaquette)))
+    selected = cong₂ _+_
+      (selectedCellSquareSumExact field (Boundary.boundaryCell0 plaquette))
       (cong₂ _+_
-        (selectedCellSquareSumExact field (Boundary.boundaryCell0 plaquette))
+        (selectedCellSquareSumExact field (Boundary.boundaryCell1 plaquette))
         (cong₂ _+_
-          (selectedCellSquareSumExact field (Boundary.boundaryCell1 plaquette))
-          (cong₂ _+_
-            (selectedCellSquareSumExact field (Boundary.boundaryCell2 plaquette))
-            (selectedCellSquareSumExact field (Boundary.boundaryCell3 plaquette)))))
-  where
-  infixl 0 _|>_
-  _|>_ : ∀ {A B : Set} → A → (A → B) → B
-  value |> function = function value
+          (selectedCellSquareSumExact field (Boundary.boundaryCell2 plaquette))
+          (selectedCellSquareSumExact field (Boundary.boundaryCell3 plaquette))))
+  in
+  trans split
+    (trans selected
+      (ℚRing.solve-∀
+        (bondCellPhysicalCharge field (Boundary.boundaryCell0 plaquette))
+        (bondCellPhysicalCharge field (Boundary.boundaryCell1 plaquette))
+        (bondCellPhysicalCharge field (Boundary.boundaryCell2 plaquette))
+        (bondCellPhysicalCharge field (Boundary.boundaryCell3 plaquette))))
+
+plaquetteDiagonalCharge4 :
+  Physical.PhysicalSU2BondField4 → Plaquette.Plaquette4 → ℚ
+plaquetteDiagonalCharge4 field (pair site axes) =
+  Incidence.plaquetteDiagonalCharge field
+    (Plaquette.pairLeft axes) (Plaquette.pairRight axes) site
 
 boundaryCellChargesArePlaquetteDiagonal : ∀ field plaquette →
   bondCellPhysicalCharge field (Boundary.boundaryCell0 plaquette)
     + bondCellPhysicalCharge field (Boundary.boundaryCell1 plaquette)
     + bondCellPhysicalCharge field (Boundary.boundaryCell2 plaquette)
     + bondCellPhysicalCharge field (Boundary.boundaryCell3 plaquette)
-  ≡ Incidence.plaquetteDiagonalCharge field
-      (Boundary.Physical.pairLeft (Boundary.Physical.plaquetteAxes plaquette))
-      (Boundary.Physical.pairRight (Boundary.Physical.plaquetteAxes plaquette))
-      (Boundary.Physical.plaquetteSite plaquette)
+  ≡ plaquetteDiagonalCharge4 field plaquette
 boundaryCellChargesArePlaquetteDiagonal field (pair site axes)
   rewrite bondCellPhysicalChargeIsInsertionCharge field
-      (Boundary.Physical.pairLeft axes) site
+      (Plaquette.pairLeft axes) site
         | bondCellPhysicalChargeIsInsertionCharge field
-      (Boundary.Physical.pairRight axes)
-      (Boundary.Hodge4.shiftForward (Boundary.Physical.pairLeft axes) site)
+      (Plaquette.pairRight axes)
+      (Boundary.Hodge4.shiftForward (Plaquette.pairLeft axes) site)
         | bondCellPhysicalChargeIsInsertionCharge field
-      (Boundary.Physical.pairLeft axes)
-      (Boundary.Hodge4.shiftForward (Boundary.Physical.pairRight axes) site)
+      (Plaquette.pairLeft axes)
+      (Boundary.Hodge4.shiftForward (Plaquette.pairRight axes) site)
         | bondCellPhysicalChargeIsInsertionCharge field
-      (Boundary.Physical.pairRight axes) site =
+      (Plaquette.pairRight axes) site =
   sym (Incidence.plaquetteDiagonalChargeExpanded field
-    (Boundary.Physical.pairLeft axes) (Boundary.Physical.pairRight axes) site)
+    (Plaquette.pairLeft axes) (Plaquette.pairRight axes) site)
 
 plaquetteBoundaryProjectNormSqIsDiagonalCharge : ∀ field plaquette →
   Rect.finiteNormSq KKT.physicalStateCarrier
     (Boundary.rawPlaquetteSingletonExtractor field plaquette)
-  ≡ Incidence.plaquetteDiagonalCharge field
-      (Boundary.Physical.pairLeft (Boundary.Physical.plaquetteAxes plaquette))
-      (Boundary.Physical.pairRight (Boundary.Physical.plaquetteAxes plaquette))
-      (Boundary.Physical.plaquetteSite plaquette)
+  ≡ plaquetteDiagonalCharge4 field plaquette
 plaquetteBoundaryProjectNormSqIsDiagonalCharge field plaquette =
   trans
     (Sums.sumRationalCong Physical.physicalSU2Coordinates4 _ _
@@ -398,25 +418,20 @@ plaquetteBoundaryProjectNormSqIsDiagonalCharge field plaquette =
       (sumIndicatorSquareExact plaquette field)
       (boundaryCellChargesArePlaquetteDiagonal field plaquette))
 
--- The user-facing Wilson charge has the same plaquette packaging.
 plaquetteBoundaryProjectNormSqIsOneThirdCrossCharge : ∀ field plaquette →
   (+ 3 / 1)
     * Rect.finiteNormSq KKT.physicalStateCarrier
         (Boundary.rawPlaquetteSingletonExtractor field plaquette)
-  ≡ Incidence.plaquetteCrossCharge field
-      (Boundary.Physical.pairLeft (Boundary.Physical.plaquetteAxes plaquette))
-      (Boundary.Physical.pairRight (Boundary.Physical.plaquetteAxes plaquette))
-      (Boundary.Physical.plaquetteSite plaquette)
-plaquetteBoundaryProjectNormSqIsOneThirdCrossCharge field plaquette =
+  ≡ Wilson.plaquetteCrossCharge field plaquette
+plaquetteBoundaryProjectNormSqIsOneThirdCrossCharge
+    field (pair site axes) =
   trans
     (cong ((+ 3 / 1) *_)
-      (plaquetteBoundaryProjectNormSqIsDiagonalCharge field plaquette))
+      (plaquetteBoundaryProjectNormSqIsDiagonalCharge
+        field (pair site axes)))
     (sym (Incidence.plaquetteCrossChargeIsThreeDiagonal field
-      (Boundary.Physical.pairLeft (Boundary.Physical.plaquetteAxes plaquette))
-      (Boundary.Physical.pairRight (Boundary.Physical.plaquetteAxes plaquette))
-      (Boundary.Physical.plaquetteSite plaquette)))
+      (Plaquette.pairLeft axes) (Plaquette.pairRight axes) site))
 
--- Exact pointwise degree-one identification.
 defectDegreeOneStateIsBoundaryProject :
   ∀ {Multiplier pseudoData firstVariationCovector bondField plaquette}
     (inputs : Canonical.CanonicalSubsetCorrelatedAuthorityInputs
@@ -448,10 +463,7 @@ selectedG2DefectDegreeOneNormChargeExact :
     (inputs : Canonical.CanonicalSubsetCorrelatedAuthorityInputs
       {Multiplier} pseudoData firstVariationCovector bondField plaquette) →
   (+ 3 / 1) * StateNorm.defectStateNormSq inputs Degree.degree1
-  ≡ Incidence.plaquetteCrossCharge bondField
-      (Boundary.Physical.pairLeft (Boundary.Physical.plaquetteAxes plaquette))
-      (Boundary.Physical.pairRight (Boundary.Physical.plaquetteAxes plaquette))
-      (Boundary.Physical.plaquetteSite plaquette)
+  ≡ Wilson.plaquetteCrossCharge bondField plaquette
 selectedG2DefectDegreeOneNormChargeExact
     {bondField = bondField} {plaquette = plaquette} inputs =
   trans
