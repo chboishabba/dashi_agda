@@ -41,6 +41,7 @@ module DASHI.Physics.Closure.NSTriadKNPressureDNPacketPrincipalTailRound85Exact 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.Nat using (Nat)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
@@ -57,7 +58,7 @@ import DASHI.Physics.Closure.NSTriadKNNonlinearRelativeGrowthAdvectivePressureSp
 
 packetComplement :
   ∀ {r} (model : LP.PeriodicHardShellFourierPDE {r}) →
-  (shell : Agda.Builtin.Nat.Nat) → Packet.TotalField model → Packet.TotalField model
+  (shell : Nat) → Packet.TotalField model → Packet.TotalField model
 packetComplement model shell field mode with LP.shellSelect model shell mode
 ... | true = C3.complex3Zero (LP.realField model)
 ... | false = field mode
