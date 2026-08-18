@@ -29,6 +29,7 @@ open import Relation.Binary.PropositionalEquality using (cong; trans)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier as Torus
 import DASHI.Physics.YangMills.BalabanP33PeriodicFourDimensionalHodgeIdentityExact as Periodic
+import DASHI.Physics.YangMills.BalabanPath4GlobalAverageExact as GlobalAverage
 import DASHI.Physics.YangMills.BalabanSelectedFlatGaugeReducedFloorExact as FlatFloor
 import DASHI.Physics.YangMills.BalabanSelectedGaugeMeanDecompositionExact as Mean
 
@@ -56,7 +57,7 @@ constantProjectionAddExact left right coordinate site =
     rightField = FlatFloor.gaugeMultiplierField right coordinate
   in
   trans
-    (cong (Mean.GlobalAverage.oneTwoFiftySix *_)
+    (cong (GlobalAverage.oneTwoFiftySix *_)
       (Periodic.sumSitesAdd leftField rightField))
     (ℚRing.solve-∀
       (Periodic.sumSites leftField)
@@ -74,7 +75,7 @@ constantProjectionSubtractExact left right coordinate site =
     rightField = FlatFloor.gaugeMultiplierField right coordinate
   in
   trans
-    (cong (Mean.GlobalAverage.oneTwoFiftySix *_)
+    (cong (GlobalAverage.oneTwoFiftySix *_)
       (Periodic.sumSitesSubtract leftField rightField))
     (ℚRing.solve-∀
       (Periodic.sumSites leftField)
@@ -90,7 +91,7 @@ constantProjectionScaleExact coefficient multiplier coordinate site =
   let field = FlatFloor.gaugeMultiplierField multiplier coordinate
   in
   trans
-    (cong (Mean.GlobalAverage.oneTwoFiftySix *_)
+    (cong (GlobalAverage.oneTwoFiftySix *_)
       (Periodic.sumSitesScale coefficient field))
     (ℚRing.solve-∀ coefficient (Periodic.sumSites field))
 
