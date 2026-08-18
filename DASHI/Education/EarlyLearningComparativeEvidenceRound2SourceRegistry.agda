@@ -9,12 +9,14 @@ import DASHI.Education.EarlyLearningComparativeEvidenceSourceRegistry as Sources
 ------------------------------------------------------------------------
 -- ROUND-2 COMPARATIVE EVIDENCE SOURCES
 --
--- These references sharpen three boundaries already present in the early-
+-- These references sharpen four boundaries already present in the early-
 -- learning comparative architecture:
 --
 --   * policy effects are heterogeneous relative to family counterfactuals;
 --   * home-care allowances are not automatically protective alternatives;
---   * ECEC quality is multidimensional and workforce/process dependent.
+--   * ECEC quality is multidimensional and workforce/process dependent;
+--   * Nordic policy architectures are historically variable/hybrid rather
+--     than permanent country essences.
 --
 -- None of the references below authorises a universal route ranking.
 ------------------------------------------------------------------------
@@ -30,6 +32,32 @@ cornelissenDustmannRauteSchonberg2018 =
     "10.1086/699979"
     "Estimates heterogeneous treatment effects of universal child-care attendance in Germany and finds larger gains for disadvantaged children whose counterfactual non-attendance outcomes are worse."
     "The study supports counterfactual-relative heterogeneity; it does not provide a deterministic demographic routing rule or prove that every disadvantaged child benefits from every ECEC setting."
+    true refl
+
+duvanderEllingsaeter2016 : Sources.ComparativeReference
+duvanderEllingsaeter2016 =
+  Sources.comparativeReference
+    "nordic-cash-childcare-diverse-paths-2016"
+    "Cash for childcare schemes in the Nordic welfare states: diverse paths, diverse outcomes"
+    ("Ann-Zofie Duvander" ∷ "Anne Lise Ellingsaeter" ∷ [])
+    2016
+    "European Societies 18(1), 70-90"
+    "10.1080/14616696.2015.1124903"
+    "Compares cash-for-childcare schemes across the five Nordic countries and emphasizes policy hybridisation, different reform paths, opportunity structures and heterogeneous parental responses."
+    "The comparison supports architecture-level distinctions but rules against treating a Nordic country label as a timeless policy type or inferring one universal cash-for-care effect."
+    true refl
+
+sipilaKorpinen1998 : Sources.ComparativeReference
+sipilaKorpinen1998 =
+  Sources.comparativeReference
+    "finland-cash-versus-childcare-services-1998"
+    "Cash versus Child Care Services in Finland"
+    ("Jorma Sipila" ∷ "Johanna Korpinen" ∷ [])
+    1998
+    "Social Policy & Administration 32(3), 263-277"
+    "10.1111/1467-9515.00102"
+    "Documents the Finnish political settlement combining a legal guarantee of day-care access for young children with state subsidies for home care."
+    "The Finnish institutional history is a concrete hybrid-policy example; it does not establish that the same combination has identical effects in another country or period."
     true refl
 
 gruberKosonenHuttunen2025 : Sources.ComparativeReference
@@ -87,6 +115,8 @@ oecdTalisStartingStrong2019 =
 canonicalRound2ComparativeSources : List Sources.ComparativeReference
 canonicalRound2ComparativeSources =
   cornelissenDustmannRauteSchonberg2018
+  ∷ duvanderEllingsaeter2016
+  ∷ sipilaKorpinen1998
   ∷ gruberKosonenHuttunen2025
   ∷ laaninen2025
   ∷ oecdStartingStrongVI2021
