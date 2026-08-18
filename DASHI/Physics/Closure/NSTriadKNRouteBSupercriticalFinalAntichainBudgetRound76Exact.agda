@@ -114,9 +114,9 @@ historyCumulativeExcessAboveBudgetForcesFinalMassAboveBudget :
   budget < initial + cumulativeWeightedExcess history →
   budget < final
 historyCumulativeExcessAboveBudgetForcesFinalMassAboveBudget
-    history cumulativeAbove =
+    {budget = budget} history cumulativeAbove =
   subst
-    (_ <_)
+    (budget <_)
     (sym (historyFinalMassExact history))
     cumulativeAbove
 
@@ -186,10 +186,10 @@ finalAntichainMassAboveBudgetRefutesFinalAntichainFunding :
   ¬ Carleson.PhysicalCarlesonBudget
       (finalAntichainFundedNodes funding) budget
 finalAntichainMassAboveBudgetRefutesFinalAntichainFunding
-    funding above =
+    {budget = budget} funding above =
   Carleson.floorPrefixAboveBudgetRefutesCarlesonFunding
     (subst
-      (λ floorMass → _ < floorMass)
+      (budget <_)
       (sym (finalAntichainFundedFloorMassExact funding))
       above)
 
@@ -213,15 +213,15 @@ routeBFinalAntichainBudgetContradiction
   let
     extended = extend history step alignment
 
-    finalAbove : budget < Super.childMass step
+    finalAbove : _ < Super.childMass step
     finalAbove =
       historyCumulativeExcessAboveBudgetForcesFinalMassAboveBudget
         extended cumulativeAbove
 
-    physicalFinalAbove : budget < Super.superChildMass (Super.rows step)
+    physicalFinalAbove : _ < Super.superChildMass (Super.rows step)
     physicalFinalAbove =
       subst
-        (budget <_)
+        (_ <_)
         (Super.childMassExact step)
         finalAbove
   in
