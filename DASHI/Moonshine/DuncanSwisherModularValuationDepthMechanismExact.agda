@@ -41,7 +41,7 @@ module DASHI.Moonshine.DuncanSwisherModularValuationDepthMechanismExact where
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
-open import Data.Nat using (_≤_; _+_; _*_)
+open import Data.Nat using (_≤_; _+_; _*_; suc)
 open import Data.Nat.Primality using (Prime)
 import Data.Nat.Properties as NatP
 
@@ -114,17 +114,17 @@ cancelLeftAdd :
 cancelLeftAdd {a} {b} {c} equality =
   NatP.+-cancelˡ-≡ a b c equality
 
+------------------------------------------------------------------------
+-- Structural zero-sum theorem: no version-sensitive convenience lemma.
+------------------------------------------------------------------------
+
 sumZeroParts :
   (a b c : Nat) → a + (b + c) ≡ 0 →
   (a ≡ 0) × ((b ≡ 0) × (c ≡ 0))
-sumZeroParts a b c equality =
-  let
-    aZero = NatP.m+n≡0⇒m≡0 a equality
-    restZero = NatP.m+n≡0⇒n≡0 a equality
-    bZero = NatP.m+n≡0⇒m≡0 b restZero
-    cZero = NatP.m+n≡0⇒n≡0 b restZero
-  in
-  aZero , (bZero , cZero)
+sumZeroParts 0 0 0 equality = refl , (refl , refl)
+sumZeroParts 0 0 (suc c) ()
+sumZeroParts 0 (suc b) c ()
+sumZeroParts (suc a) b c ()
 
 ------------------------------------------------------------------------
 -- Derived modular depth carrier.
@@ -176,9 +176,7 @@ quadraticBranchAllContributionsZero E M pairPositive =
     sumZero
 
 ------------------------------------------------------------------------
--- Constructor-indexed theorem-producing surface.  Pattern matching on the
--- source branch exposes the actual equations without fabricating equality
--- proofs between dependent constructor terms.
+-- Constructor-indexed theorem-producing surface.
 ------------------------------------------------------------------------
 
 modularResidualByExponentCase :
