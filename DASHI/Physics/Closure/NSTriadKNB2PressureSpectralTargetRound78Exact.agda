@@ -26,7 +26,8 @@ module DASHI.Physics.Closure.NSTriadKNB2PressureSpectralTargetRound78Exact where
 --
 -- Since epsilon>0 on a supercritical row, B2 forces the strict scalar target
 --
---   W.W + Omega * bracket > D_additional.
+--   D_additional
+--     < W.W + Omega * bracket.
 --
 -- Conversely, on any event where bracket<=0 and W.W<=D_additional, the
 -- supercritical row is impossible.  This is the sharp proof-or-kill reduction:
@@ -37,9 +38,11 @@ module DASHI.Physics.Closure.NSTriadKNB2PressureSpectralTargetRound78Exact where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _-_; _≤_; _<_)
 import Data.Rational.Properties as ℚP
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Data.Rational.Tactic.RingSolver using (solve)
+open import Relation.Binary.PropositionalEquality using (subst; subst₂)
 
 import DASHI.Physics.Closure.NSTriadKNFrameWeightedSupercriticalPropagationRound77Exact as Propagation
 import DASHI.Physics.Closure.NSTriadKNDeviatoricPressureAlignmentDefectRound78Exact as Defect
@@ -64,7 +67,7 @@ record DefectResolvedB2Event
 
 open DefectResolvedB2Event public
 
-supercriticalEventForcesStrictSpectralTarget :
+supercriticalEventForcesPositiveSpectralSurplus :
   ∀ {row} (event : DefectResolvedB2Event row) →
   0ℚ <
     Spectral.inviscidAccelerationWithAlignmentDefect
@@ -73,11 +76,40 @@ supercriticalEventForcesStrictSpectralTarget :
       (strainIntensity event)
       (pressureAlignment event)
     - additionalDepletion event
-supercriticalEventForcesStrictSpectralTarget {row} event =
+supercriticalEventForcesPositiveSpectralSurplus {row} event =
   subst
     (0ℚ <_)
     (excessMeaning event)
     (Propagation.excessPositive row)
+
+supercriticalEventForcesStrictSpectralTarget :
+  ∀ {row} (event : DefectResolvedB2Event row) →
+  additionalDepletion event
+  < Spectral.inviscidAccelerationWithAlignmentDefect
+      (stretchingSquare event)
+      (enstrophy event)
+      (strainIntensity event)
+      (pressureAlignment event)
+supercriticalEventForcesStrictSpectralTarget event =
+  let
+    acceleration =
+      Spectral.inviscidAccelerationWithAlignmentDefect
+        (stretchingSquare event)
+        (enstrophy event)
+        (strainIntensity event)
+        (pressureAlignment event)
+    cost = additionalDepletion event
+
+    shifted : 0ℚ + cost < (acceleration - cost) + cost
+    shifted = ℚP.+-monoʳ-< cost (supercriticalEventForcesPositiveSpectralSurplus event)
+
+    leftMeaning : 0ℚ + cost ≡ cost
+    leftMeaning = solve (cost ∷ [])
+
+    rightMeaning : (acceleration - cost) + cost ≡ acceleration
+    rightMeaning = solve (acceleration ∷ cost ∷ [])
+  in
+  subst₂ _<_ leftMeaning rightMeaning shifted
 
 nonpositivePressureAndInsufficientQuadraticRefuteB2 :
   ∀ {row} (event : DefectResolvedB2Event row) →
@@ -134,11 +166,14 @@ nonpositivePressureAndInsufficientQuadraticRefuteB2 event bracket≤0 stretching
         acceleration≤cost
   in
   ℚP.<-≤-trans
-    (supercriticalEventForcesStrictSpectralTarget event)
+    (supercriticalEventForcesPositiveSpectralSurplus event)
     surplus≤0
 
 round78B2ReducedToDefectResolvedPressureSpectralTarget : Bool
 round78B2ReducedToDefectResolvedPressureSpectralTarget = true
+
+round78LiteralStrictSpectralTargetConstructed : Bool
+round78LiteralStrictSpectralTargetConstructed = true
 
 round78NonpositivePressurePlusInsufficientQuadraticKillsB2 : Bool
 round78NonpositivePressurePlusInsufficientQuadraticKillsB2 = true
