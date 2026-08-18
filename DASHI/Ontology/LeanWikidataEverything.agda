@@ -21,6 +21,8 @@ import DASHI.Ontology.LeanWikidataGovernedResidualBridge
 import DASHI.Ontology.LeanWikidataDerivationFibreAdapter
 import DASHI.Ontology.LeanWikidataRelationalLensBridge
 import DASHI.Ontology.ProgenitorParentHyperfabric
+import DASHI.Ontology.ProgenitorParentProjectionFibre
+import DASHI.Ontology.ProgenitorParentEthicsExamples
 import DASHI.Ontology.ProgenitorParentHyperfabricTests
 import DASHI.Ontology.LeanWikidataWholeBridge
 import DASHI.Ontology.LeanWikidataWholeBridgeTests
