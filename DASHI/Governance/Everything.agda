@@ -18,6 +18,7 @@ import DASHI.Governance.SituatedConstituency
 import DASHI.Governance.TransitionResidual
 import DASHI.Governance.SituatedInverseJusticeFibreExact
 import DASHI.Governance.InverseJusticeThroughputExact
+import DASHI.Governance.NonCompensatoryJusticeOrderExact
 import DASHI.Governance.SituatedAuthorityRoutingExact
 import DASHI.Governance.AuthorityRoutingProjectionSafetyExact
 import DASHI.Governance.OptionConeCoercionExact
