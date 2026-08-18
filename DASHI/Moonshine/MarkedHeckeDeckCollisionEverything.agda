@@ -46,16 +46,17 @@ module DASHI.Moonshine.MarkedHeckeDeckCollisionEverything where
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
-open import Data.Rational using (_/_; +_)
+open import Data.Integer using (-[1+_])
+open import Data.Rational using (_/_)
 
 import DASHI.Moonshine.P11Level11Ell7PointCountExact as Point7
 import DASHI.Moonshine.P11MarkedQuaternionThetaEll7Exact as Theta7
 import DASHI.Moonshine.P11MarkedX2T7HeckeCollisionExact as T7
 import DASHI.Moonshine.P11MarkedHeckeThetaCollisionCriterionExact as Criterion
 import DASHI.Moonshine.P11Ell7PointCountBrandtTraceExact as Trace7
+import DASHI.Moonshine.P11MarkedLevel44OldspaceWeldExact as P11Old
 import DASHI.Moonshine.P11MarkedLevel44PermutationOldspaceExact as P11PermOld
 import DASHI.Moonshine.P11MarkedLevel44PermutationIntertwinerExact as P11OldInt
-import DASHI.Moonshine.P11MarkedX2S3HeckeDecompositionExact as P11S3
 import DASHI.Moonshine.P37NonOggFullLevel2DeuringControlExact as P37
 import DASHI.Moonshine.P37MarkedX2JointFingerprintDeckCollisionExact as P37Collision
 import DASHI.Moonshine.P37MarkedDeckIsotypicJointDecompositionExact as P37Iso
@@ -99,9 +100,9 @@ p11ThetaCriterionEll7Regression = Criterion.ell7DeckBrandtDifferenceCollision
 ------------------------------------------------------------------------
 
 p11OldPermutationDeckRRegression :
-  (copy : P11PermOld.Old.OldCopy44) →
+  (copy : P11Old.OldCopy44) →
   P11PermOld.deckR5 (P11PermOld.oldCopyVector copy)
-  ≡ P11PermOld.oldCopyVector (P11PermOld.Old.oldDeckR copy)
+  ≡ P11PermOld.oldCopyVector (P11Old.oldDeckR copy)
 p11OldPermutationDeckRRegression = P11PermOld.oldCopyDeckRIntertwines
 
 p11OldModuleT7IntertwinerRegression :
@@ -141,7 +142,7 @@ p37StandardIsotypicTwoCopiesRegression = P37Iso.standardIsotypicIsTwoMultiplicit
 
 p37StandardT5PolynomialRegression :
   (x : P37Iso.StdBlock3) →
-  P37Poly.scaleStd (+ 34 / 1) (P37Iso.standardT5 x)
+  P37Poly.scaleStd (34 / 1) (P37Iso.standardT5 x)
   ≡ P37Poly.t5Polynomial x
 p37StandardT5PolynomialRegression = P37Poly.standardT5PolynomialExact
 
