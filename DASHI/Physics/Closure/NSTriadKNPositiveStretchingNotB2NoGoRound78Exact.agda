@@ -30,6 +30,9 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 import Data.Integer.Base as Int
 open import Data.Rational.Base using (ℚ; _/_; _<_; 0ℚ)
+import Data.Rational.Properties as ℚP
+open ℚP using (_<?_)
+open import Relation.Nullary.Decidable.Core using (toWitness)
 
 import DASHI.Physics.Closure.NSTriadKNPressureStretchingCompetitionRound78Exact as Competition
 
@@ -43,11 +46,13 @@ positiveStretchingButDepleted =
 
 rawEnablingIsPositive :
   0ℚ < Competition.enablingSide positiveStretchingButDepleted
-rawEnablingIsPositive = _
+rawEnablingIsPositive =
+  toWitness {a? = 0ℚ <? Competition.enablingSide positiveStretchingButDepleted} _
 
 netSurplusIsNegative :
   Competition.netStretchingSurplus positiveStretchingButDepleted < 0ℚ
-netSurplusIsNegative = _
+netSurplusIsNegative =
+  toWitness {a? = Competition.netStretchingSurplus positiveStretchingButDepleted <? 0ℚ} _
 
 round78PositiveVortexStretchingImpliesB2 : Bool
 round78PositiveVortexStretchingImpliesB2 = false
