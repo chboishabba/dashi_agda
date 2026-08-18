@@ -18,14 +18,14 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound61DLRTransferAuditVal
 -- * the actual anchored physical R_A satisfies
 --       rowMass(R_A) <= 104601/524288 < 1/5;
 -- * every finite degree >=5 matrix-log majorant has row mass <=1/2500;
--- * the ACTUAL alternating signed degree-five tail is now constructed and has
---   the same 1/2500 row cap; cancellation signs therefore cost no extra norm;
--- * shifted tails have the geometric Cauchy modulus
+-- * the ACTUAL alternating signed degree-five tail is constructed with the
+--   same 1/2500 row cap, so alternating signs cost no extra norm;
+-- * shifted tails have modulus
 --       rowMass(Tail_m) <= (1/5)^m / 2500 <= (1/2)^m;
--- * the safe redundant trace cost 768 is absorbed by the same fifth-tail factor.
+-- * the safe redundant trace cost 768 is absorbed by the fifth-tail factor.
 -- Remaining ghost closure is finite same-object prefix/tail splitting followed
--- by standard finite principal-log/determinant functional calculus.  Those are
--- no longer classified as independent physical research producers.
+-- by standard finite principal-log/determinant functional calculus. These are
+-- supporting finite-analysis lemmas, not independent YM research producers.
 --
 -- CMP109 / ONE-LOOP ROUTE
 -- * source-radius inverse-dexp coefficient is actual Bishop-real data;
@@ -34,40 +34,42 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound61DLRTransferAuditVal
 -- * source Euclidean reflection covariance kills every nontrivial (C2)^4
 --   Walsh sector exactly BEFORE interval arithmetic;
 -- * permutation covariance then reduces the 240 regular Brillouin cells to
---   four trivial-character representatives with weights 64,96,64,16.
--- Remaining one-loop producer is therefore the same-object Wilson/FP/Haar
--- scalar identification plus the four representative Bishop enclosures and
--- the resulting positive colour/orbit coefficient.
+--   four trivial-character representatives with weights 64,96,64,16;
+-- * weighted monotonicity now proves four representative Bishop lower bounds
+--   imply the lower bound for the complete 240-cell regular contribution.
+-- Remaining one-loop producer is the same-object Wilson/FP/Haar scalar
+-- identification, four representative Bishop enclosures, the finite literal
+-- interaction O(g^4) atom bounds, and the positive colour/orbit endpoint.
 --
--- G2 / KKT ROUTE -- DEGREE-ONE EXACT COLLAPSE
--- * the projected Schur Green preserves the stored mean-zero computational
---   quotient exactly; this is useful for reduced coercivity/locality but is NOT
---   silently identified with the raw background-dependent Moore--Penrose K+;
--- * stabilizer stratification makes a background-uniform raw rowMass(K+) the
---   wrong dependency target because null/rank strata vary;
--- * canonical source/defect subset partials are literal constraint images
+-- G2 / KKT ROUTE -- EXACT DEGREE COLLAPSE + POLARIZATION FALSIFIER
+-- * projected Schur Green preserves the mean-zero computational quotient, but
+--   is not silently identified with raw background-dependent Moore--Penrose K+;
+-- * stabilizer stratification rejects a background-uniform raw rowMass(K+) as
+--   a necessary G2 dependency;
+-- * canonical subset states are literal constraint images
 --       s_S=L(P_S g), delta_S=L(P_S w);
--- * the KKT repair is an orthogonal projector, giving the rank-independent
+-- * the KKT repair is an orthogonal projector, giving rank-independently
 --       <L v,K+ L v> = ||L* K+ L v||^2 <= ||v||^2;
--- * the four literal plaquette boundary cells are pairwise distinct;
--- * subset-localization is therefore additive on those four slots:
+-- * the four plaquette boundary cells are pairwise distinct;
+-- * subset localization is therefore additive:
 --       L1=P_p v, L2=3 L1, L3=3 L1, L4=L1;
--- * the exact Rota/Mobius formulas consequently force source and defect
---       D2=D3=D4=0;
--- * hence FIFTEEN of the sixteen canonical Green degree blocks vanish exactly;
---   only G11 can survive;
--- * the remaining Green lower bound costs only
---       1/2 (||g_1||^2 + ||w_1||^2),
---   rather than 2(sum_d ||g_d||^2 + sum_d ||w_d||^2);
--- * the literal defect degree-one state is P_p h and finite incidence gives
+-- * exact Rota/Mobius formulas force source/defect D2=D3=D4=0;
+-- * hence FIFTEEN of sixteen canonical Green degree blocks vanish exactly;
+-- * the literal defect D1 state satisfies
 --       3 ||w_1||^2 = C_p(h),
---   so the defect charge-relative coefficient is EXACTLY 1/3;
--- * the sharp degree-one compiler is therefore
---       residualRatio = rawTotal + 1/2 (sourceDegreeOneRatio + 1/3).
--- Remaining G2 physical work is only the raw aggregate estimate, the literal
--- Wilson source-degree-one norm/charge estimate on the selected family, and
--- the final rational headroom comparison.  No K+ row bound or LBB constant is
--- on the G2 critical path.
+--   so its separate norm ratio is exactly 1/3;
+-- * this exact value FALSIFIES the tempting state-norm/polarization compiler:
+--       (1/2)(1/3)=1/6
+--   already exceeds the entire singleton target 55/18874368 by >57195x,
+--   before any raw/source majorant is spent;
+-- * therefore the live route retains signed cancellation before majorisation:
+--       R_corr = (R1-G11) + (R2+R3+R4).
+-- * the highest-alpha compiler now needs exactly TWO physical estimates:
+--       R1-G11       <= a Q,
+--       R2+R3+R4     <= b Q,
+--   and closes whenever a+b <= 55/18874368.
+-- No K+ row bound, LBB constant, source/defect norm majorisation, or sixteen
+-- Green-cell interval family remains on the live G2 critical path.
 --
 -- CONTINUUM ROUTE
 -- Krzysztof Gawedzki and Antti Kupiainen,
@@ -85,8 +87,8 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound61DLRTransferAuditVal
 --   factorization, without substituting an area-law target.
 -- Remaining physical producers: same-observable scale increments, tightness,
 -- OS-stable unique continuum limit, fourth-cumulant lower bound, and uniform
--- physical exponential clustering.  Clustering -> Hamiltonian gap is treated
--- downstream as standard OS/spectral closure, not as another YM estimate.
+-- physical exponential clustering. Clustering -> Hamiltonian gap is downstream
+-- standard OS/spectral closure, not another YM estimate.
 --
 -- COMPACT-SIMPLE-G ROUTE
 -- * finite trace/Fubini proves dim(R) C_R = dim(g) I_R.
@@ -141,16 +143,20 @@ import DASHI.Physics.YangMills.BalabanCMP109BishopPrincipalLogAdPolynomialExact
 import DASHI.Physics.YangMills.BalabanBooleanFourCubeWalshCharacterExact
 import DASHI.Physics.YangMills.BalabanCMP109WalshCharacterOrbitCancellationExact
 import DASHI.Physics.YangMills.BalabanCMP109WalshFourOrbitFactorizationExact
+import DASHI.Physics.YangMills.BalabanCMP109WalshFiniteModeFourRepresentativeLowerExact
 
--- Older sufficient G2 routes remain imported for comparison only.
+-- Older G2 routes retained as comparison/falsifier history only.
 import DASHI.Physics.YangMills.BalabanChargeRelativeG2AggregateRatioExact
 import DASHI.Physics.YangMills.BalabanChargeRelativeG2HeadroomAllocationExact
 import DASHI.Physics.YangMills.BalabanSelectedConstraintGramReducedCoercivityExact
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundRationalCombesThomasWeightEnvelopeExact
 import DASHI.Physics.YangMills.BalabanSelectedKKTWeightedToOrdinaryRowBoundExact
 import DASHI.Physics.YangMills.BalabanSelectedWilsonCanonicalG2InputsExact
+import DASHI.Physics.YangMills.BalabanChargeRelativeCanonicalStateNormG2ClosureExact
+import DASHI.Physics.YangMills.BalabanChargeRelativeDegreeOneG2ClosureExact
+import DASHI.Physics.YangMills.BalabanChargeRelativeDegreeOneG2ExactDefectCompiler
 
--- Highest-alpha rank-independent / degree-one G2 route.
+-- Exact rank-independent geometry and current live correlated-D1 G2 route.
 import DASHI.Physics.YangMills.BalabanSelectedGaugeReducedLinearClosureExact
 import DASHI.Physics.YangMills.BalabanSelectedProjectedSchurGreenPreservesReducedExact
 import DASHI.Physics.YangMills.BalabanKKTPseudoinverseConstraintImageEnergyContractionExact
@@ -161,7 +167,9 @@ import DASHI.Physics.YangMills.BalabanPlaquetteSubsetMobiusDegreeOneCollapseExac
 import DASHI.Physics.YangMills.BalabanCanonicalGreenHigherMobiusDegreeVanishExact
 import DASHI.Physics.YangMills.BalabanCanonicalGreenDegreeOneOnlyExact
 import DASHI.Physics.YangMills.BalabanPlaquetteBoundaryStateNormChargeExact
-import DASHI.Physics.YangMills.BalabanChargeRelativeDegreeOneG2ClosureExact
+import DASHI.Physics.YangMills.BalabanDegreeOneStateNormG2HeadroomNoGoExact
+import DASHI.Physics.YangMills.BalabanCanonicalCorrelatedDegreeOneBeforePolarizationExact
+import DASHI.Physics.YangMills.BalabanChargeRelativeCorrelatedD1G2ClosureExact
 
 import DASHI.Physics.YangMills.YangMillsCompactSimpleCasimirDynkinTraceExact
 import DASHI.Physics.YangMills.BalabanContinuumProkhorovSubsequenceExact
