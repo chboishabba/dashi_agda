@@ -39,16 +39,16 @@ open import Relation.Binary.PropositionalEquality using (sym; trans; cong₂)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using (pair)
+import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
 import DASHI.Physics.YangMills.BalabanPath4AxisAverageExact as Average
 import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Coordinates
-import DASHI.Physics.YangMills.BalabanP33PeriodicFourDimensionalHodgeIdentityExact as Periodic
 import DASHI.Physics.YangMills.BalabanP33PhysicalFaddeevPopovOperatorExact as FP
 import DASHI.Physics.YangMills.BalabanP33FaddeevPopovAnchoredGaugeReductionExact as Anchored
 import DASHI.Physics.YangMills.BalabanSide4ScalarGreenConvolutionExact as Green
 
 colourSiteField :
   FP.SiteGaugeParameter4 → Coordinates.LieCoordinate3 →
-  Green.SiteField Green.side4
+  Sums.SiteField Average.side4
 colourSiteField parameter coordinate site =
   parameter (pair coordinate site)
 
@@ -74,7 +74,7 @@ zeroFlatFPImpliesZeroScalarLaplacian parameter coordinate fpZero site =
     (fpZero site)
 
 zeroLaplacianConfiguredIsAverage :
-  ∀ (field : Green.SiteField Green.side4) →
+  ∀ (field : Sums.SiteField Average.side4) →
   (∀ site → Green.siteLocalLaplacian field site ≡ 0ℚ) →
   ∀ site →
   Green.configuredSiteOperator field site ≡ Average.average0123 field site
@@ -84,7 +84,7 @@ zeroLaplacianConfiguredIsAverage field laplacianZero site =
     refl
 
 zeroLaplacianFieldEqualsAverage :
-  ∀ (field : Green.SiteField Green.side4) →
+  ∀ (field : Sums.SiteField Average.side4) →
   (∀ site → Green.siteLocalLaplacian field site ≡ 0ℚ) →
   ∀ site → field site ≡ Average.average0123 field site
 zeroLaplacianFieldEqualsAverage field laplacianZero site =
@@ -104,6 +104,14 @@ zeroLaplacianFieldEqualsAverage field laplacianZero site =
         (trans
           (Green.averageScalarGreenExact field site)
           (sym (Average.average0123EqualsGlobalMean field site)))))
+
+average0123SameAtEverySite :
+  ∀ (field : Sums.SiteField Average.side4) left right →
+  Average.average0123 field left ≡ Average.average0123 field right
+average0123SameAtEverySite field left right =
+  trans
+    (Average.average0123EqualsGlobalMean field left)
+    (sym (Average.average0123EqualsGlobalMean field right))
 
 flatFaddeevPopovKernelIsColourwiseConstant :
   ∀ parameter →
@@ -127,7 +135,7 @@ flatFaddeevPopovKernelIsColourwiseConstant parameter fpZero coordinate left righ
   trans
     leftAverage
     (trans
-      (Average.average0123Constant field left right)
+      (average0123SameAtEverySite field left right)
       (sym rightAverage))
 
 anchoredFlatFaddeevPopovKernelTrivial :
