@@ -47,6 +47,7 @@ import DASHI.Physics.YangMills.BalabanP33FiniteWeightedSchurSquaredExact as Schu
 import DASHI.Physics.YangMills.BalabanFiniteRationalMatrixTraceCyclicExact as Matrix
 import DASHI.Physics.YangMills.BalabanReducedGhostNeumannRowContractionExact as Neumann
 import DASHI.Physics.YangMills.BalabanReducedGhostMatrixLogFifthTailExact as Tail
+import DASHI.Physics.Closure.NSTriadKNLuoFiniteGeometricResidualTailExact as Geometric
 
 matrixNegate : ∀ {Index : Set} → Matrix.Matrix Index → Matrix.Matrix Index
 matrixNegate matrix row column = - matrix row column
@@ -180,8 +181,6 @@ signedFifthTailRowBound indices matrix coefficients (suc exponent) matrixRows =
       ≡ Tail.geometricMajorant (suc exponent)
     boundExact = ℚRing.solve-∀
       (Geometric.finiteGeometricSum Tail.oneFifth exponent)
-      where
-      import DASHI.Physics.Closure.NSTriadKNLuoFiniteGeometricResidualTailExact as Geometric
   in
   λ row → subst
     (λ bound →
