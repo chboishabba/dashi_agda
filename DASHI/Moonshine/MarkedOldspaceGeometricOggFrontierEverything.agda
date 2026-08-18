@@ -26,6 +26,8 @@ module DASHI.Moonshine.MarkedOldspaceGeometricOggFrontierEverything where
 
 open import DASHI.Core.Prelude
 
+import DASHI.Moonshine.FormalQSeriesOldformEigencharacterTransportExact as Eig
+import DASHI.Moonshine.P11MarkedLevel44PermutationIntertwinerExact as Marked
 import DASHI.Moonshine.P11Level44FormalSameCoordinateComparisonExact as Same
 import DASHI.Moonshine.P11Level44SameCoordinateHighestAlphaRegression as SameReg
 import DASHI.Moonshine.SupersingularFrobeniusFrickeGenusReductionExact as CountReduce
@@ -36,11 +38,10 @@ import DASHI.Moonshine.SupersingularFrickeSpecialFibreSelectorExact as Geometric
 wholeOldspaceRegression :
   {D : Same.Level44DegeneracyTriple} {ell : Nat} →
   (H : Same.Level44GoodPrimeEigenData D ell) →
-  (v : DASHI.Moonshine.P11MarkedLevel44PermutationIntertwinerExact.Old3) →
+  (v : Marked.Old3) →
   (n : Nat) →
   Same.analyticHeckeRealize H v n
-  ≡ DASHI.Moonshine.FormalQSeriesOldformEigencharacterTransportExact.scaleSeries
-      (Same.eigenvalue H) (Same.analyticRealize D v) n
+  ≡ Eig.scaleSeries (Same.eigenvalue H) (Same.analyticRealize D v) n
 wholeOldspaceRegression = Same.wholeOldspaceGoodPrimeEigen
 
 countReductionRegression :
