@@ -39,11 +39,11 @@ open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _/_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using
-  (Dec; yes; no; pair)
+  (Dec; Empty; yes; no; pair; four; periodicTorus4DecidableEquality)
 import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Coordinates
 import DASHI.Physics.YangMills.BalabanP33PhysicalFlatGaugeDivergenceIdentificationExact as Gauge
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreCarrier as Block
@@ -53,9 +53,12 @@ import DASHI.Physics.YangMills.BalabanPath4AxisAverageExact as Path4
 import DASHI.Physics.YangMills.BalabanPath4SU2RationalMatrixDimensionExact as Dimension
 import DASHI.Physics.YangMills.BalabanConfiguredSide4PeriodicReindexingExact as Reindex
 import DASHI.Physics.YangMills.BalabanConfiguredSide4PeriodicVectorCalculusExact as Vector
-import DASHI.Physics.YangMills.BalabanSide4ScalarGreenKernelComputed as Kernel
+import DASHI.Physics.YangMills.BalabanSide4TranslationDifferenceExact as Difference
 import DASHI.Physics.YangMills.BalabanSide4ScalarGreenConvolutionExact as Green
 import DASHI.Physics.YangMills.BalabanReducedFlatFaddeevPopovGreenInverseExact as Reduced
+
+emptyElim : ∀ {A : Set} → Empty → A
+emptyElim ()
 
 lieCoordinateDecidableEquality :
   (left right : Coordinates.LieCoordinate3) → Dec (left ≡ right)
@@ -81,7 +84,7 @@ reducedGhostBasisSource :
   Gauge.GaugeCoordinate4 → ℚ
 reducedGhostBasisSource anchor selectedColour selectedSite (pair colour site) =
   coordinateDelta selectedColour colour
-  * (Kernel.siteDelta4 selectedSite site - Kernel.siteDelta4 anchor site)
+  * (Difference.siteDelta4 selectedSite site - Difference.siteDelta4 anchor site)
 
 sumDifference :
   ∀ {A : Set} (values : List A) (left right : A → ℚ) →
@@ -91,29 +94,34 @@ sumDifference [] left right = ℚRing.solve-∀
 sumDifference (value ∷ values) left right
   rewrite sumDifference values left right = ℚRing.solve-∀
 
+siteDeltaSelf : ∀ site → Difference.siteDelta4 site site ≡ 1ℚ
+siteDeltaSelf site with periodicTorus4DecidableEquality four site site
+... | yes equality = refl
+... | no inequality = emptyElim (inequality refl)
+
 siteDeltaSumOne : ∀ center →
-  Reindex.siteSum4 (Kernel.siteDelta4 center) ≡ 1ℚ
+  Reindex.siteSum4 (Difference.siteDelta4 center) ≡ 1ℚ
 siteDeltaSumOne center =
   trans
     (Vector.siteSum4Cong
-      (Kernel.siteDelta4 center)
-      (λ site → Kernel.siteDelta4 center site * 1ℚ)
-      (λ site → ℚP.*-identityʳ (Kernel.siteDelta4 center site)))
+      (Difference.siteDelta4 center)
+      (λ site → Difference.siteDelta4 center site * 1ℚ)
+      (λ site → sym (ℚP.*-identityʳ (Difference.siteDelta4 center site))))
     (Green.siteDeltaConvolutionExact center (λ _ → 1ℚ))
 
 siteDeltaDifferenceSumZero : ∀ selected anchor →
   Reindex.siteSum4
-    (λ site → Kernel.siteDelta4 selected site - Kernel.siteDelta4 anchor site)
+    (λ site → Difference.siteDelta4 selected site - Difference.siteDelta4 anchor site)
   ≡ 0ℚ
 siteDeltaDifferenceSumZero selected anchor =
   trans
     (sumDifference
       (Block.physicalBlockSites Path4.side4)
-      (Kernel.siteDelta4 selected)
-      (Kernel.siteDelta4 anchor))
+      (Difference.siteDelta4 selected)
+      (Difference.siteDelta4 anchor))
     (trans
       (cong
-        (λ left → left - Reindex.siteSum4 (Kernel.siteDelta4 anchor))
+        (λ left → left - Reindex.siteSum4 (Difference.siteDelta4 anchor))
         (siteDeltaSumOne selected))
       (trans
         (cong (1ℚ -_) (siteDeltaSumOne anchor))
@@ -128,36 +136,53 @@ siteSumZero =
       (Sums.natAsRational
         (length (Block.physicalBlockSites Path4.side4))))
 
+zeroColourComponentSum : ∀ selected anchor →
+  Reindex.siteSum4
+    (λ site → 0ℚ
+      * (Difference.siteDelta4 selected site - Difference.siteDelta4 anchor site))
+  ≡ 0ℚ
+zeroColourComponentSum selected anchor =
+  trans
+    (Vector.siteSum4Cong _ (λ _ → 0ℚ)
+      (λ site → ℚRing.solve-∀
+        (Difference.siteDelta4 selected site)
+        (Difference.siteDelta4 anchor site)))
+    siteSumZero
+
+sameColourComponentSum : ∀ selected anchor →
+  Reindex.siteSum4
+    (λ site → 1ℚ
+      * (Difference.siteDelta4 selected site - Difference.siteDelta4 anchor site))
+  ≡ 0ℚ
+sameColourComponentSum selected anchor =
+  trans
+    (Vector.siteSum4Cong _ _ (λ site → ℚRing.solve-∀
+      (Difference.siteDelta4 selected site) (Difference.siteDelta4 anchor site)))
+    (siteDeltaDifferenceSumZero selected anchor)
+
 reducedGhostBasisMeanZero :
   ∀ anchor selectedColour selectedSite →
   Reduced.ColourwiseMeanZero
     (reducedGhostBasisSource anchor selectedColour selectedSite)
 reducedGhostBasisMeanZero anchor Coordinates.coordinateX selectedSite Coordinates.coordinateX =
-  trans
-    (Vector.siteSum4Cong _ _ (λ site → ℚRing.solve-∀
-      (Kernel.siteDelta4 selectedSite site) (Kernel.siteDelta4 anchor site)))
-    (siteDeltaDifferenceSumZero selectedSite anchor)
-reducedGhostBasisMeanZero anchor Coordinates.coordinateX selectedSite Coordinates.coordinateY = siteSumZero
-reducedGhostBasisMeanZero anchor Coordinates.coordinateX selectedSite Coordinates.coordinateZ = siteSumZero
-reducedGhostBasisMeanZero anchor Coordinates.coordinateY selectedSite Coordinates.coordinateX = siteSumZero
+  sameColourComponentSum selectedSite anchor
+reducedGhostBasisMeanZero anchor Coordinates.coordinateX selectedSite Coordinates.coordinateY =
+  zeroColourComponentSum selectedSite anchor
+reducedGhostBasisMeanZero anchor Coordinates.coordinateX selectedSite Coordinates.coordinateZ =
+  zeroColourComponentSum selectedSite anchor
+reducedGhostBasisMeanZero anchor Coordinates.coordinateY selectedSite Coordinates.coordinateX =
+  zeroColourComponentSum selectedSite anchor
 reducedGhostBasisMeanZero anchor Coordinates.coordinateY selectedSite Coordinates.coordinateY =
-  trans
-    (Vector.siteSum4Cong _ _ (λ site → ℚRing.solve-∀
-      (Kernel.siteDelta4 selectedSite site) (Kernel.siteDelta4 anchor site)))
-    (siteDeltaDifferenceSumZero selectedSite anchor)
-reducedGhostBasisMeanZero anchor Coordinates.coordinateY selectedSite Coordinates.coordinateZ = siteSumZero
-reducedGhostBasisMeanZero anchor Coordinates.coordinateZ selectedSite Coordinates.coordinateX = siteSumZero
-reducedGhostBasisMeanZero anchor Coordinates.coordinateZ selectedSite Coordinates.coordinateY = siteSumZero
+  sameColourComponentSum selectedSite anchor
+reducedGhostBasisMeanZero anchor Coordinates.coordinateY selectedSite Coordinates.coordinateZ =
+  zeroColourComponentSum selectedSite anchor
+reducedGhostBasisMeanZero anchor Coordinates.coordinateZ selectedSite Coordinates.coordinateX =
+  zeroColourComponentSum selectedSite anchor
+reducedGhostBasisMeanZero anchor Coordinates.coordinateZ selectedSite Coordinates.coordinateY =
+  zeroColourComponentSum selectedSite anchor
 reducedGhostBasisMeanZero anchor Coordinates.coordinateZ selectedSite Coordinates.coordinateZ =
-  trans
-    (Vector.siteSum4Cong _ _ (λ site → ℚRing.solve-∀
-      (Kernel.siteDelta4 selectedSite site) (Kernel.siteDelta4 anchor site)))
-    (siteDeltaDifferenceSumZero selectedSite anchor)
+  sameColourComponentSum selectedSite anchor
 
-GhostEndomorphism : Set
-GhostEndomorphism = Gauge.GaugeCoordinate4 → ℚ → Set
-
--- We use the ordinary functional representation for actual operators.
 GhostLinearMap : Set
 GhostLinearMap =
   (Gauge.GaugeCoordinate4 → ℚ) → (Gauge.GaugeCoordinate4 → ℚ)
@@ -190,10 +215,13 @@ siteConstantOneSum =
 
 identityBasisDiagonal : ∀ anchor colour site →
   identityGhost (reducedGhostBasisSource anchor colour site) (pair colour site)
-  ≡ 1ℚ - Kernel.siteDelta4 anchor site
-identityBasisDiagonal anchor Coordinates.coordinateX site = ℚRing.solve-∀ (Kernel.siteDelta4 anchor site)
-identityBasisDiagonal anchor Coordinates.coordinateY site = ℚRing.solve-∀ (Kernel.siteDelta4 anchor site)
-identityBasisDiagonal anchor Coordinates.coordinateZ site = ℚRing.solve-∀ (Kernel.siteDelta4 anchor site)
+  ≡ 1ℚ - Difference.siteDelta4 anchor site
+identityBasisDiagonal anchor Coordinates.coordinateX site
+  rewrite siteDeltaSelf site = ℚRing.solve-∀ (Difference.siteDelta4 anchor site)
+identityBasisDiagonal anchor Coordinates.coordinateY site
+  rewrite siteDeltaSelf site = ℚRing.solve-∀ (Difference.siteDelta4 anchor site)
+identityBasisDiagonal anchor Coordinates.coordinateZ site
+  rewrite siteDeltaSelf site = ℚRing.solve-∀ (Difference.siteDelta4 anchor site)
 
 identityColourTrace255 : ∀ anchor colour →
   Reindex.siteSum4
@@ -207,10 +235,10 @@ identityColourTrace255 anchor colour =
       (sumDifference
         (Block.physicalBlockSites Path4.side4)
         (λ _ → 1ℚ)
-        (Kernel.siteDelta4 anchor))
+        (Difference.siteDelta4 anchor))
       (trans
         (cong
-          (λ total → total - Reindex.siteSum4 (Kernel.siteDelta4 anchor))
+          (λ total → total - Reindex.siteSum4 (Difference.siteDelta4 anchor))
           siteConstantOneSum)
         (trans
           (cong ((+ 256 / 1) -_) (siteDeltaSumOne anchor))
