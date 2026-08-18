@@ -5,9 +5,12 @@ import DASHI.Core.FibrePreservingDynamicsExact
 import DASHI.Core.SectionedProjectionProvenanceBridgeExact
 import DASHI.Core.ProvenanceFibreDynamicsReceiptExact
 import DASHI.Core.ObserverRefinementFutureSafetyExact
+import DASHI.Core.ObserverFactorizedRefinementExact
+import DASHI.Core.RecoverableObserverRefinementTowerExact
 import DASHI.Core.IndexedObserverFamilyBridgeExact
 import DASHI.Core.ConsumerTransportObserverFamilyCrossPollinationExact
 import DASHI.Core.C3OrbitFibreDynamicsReceiptExact
+import DASHI.Cognition.PNF.ResidualSamplingObserverRepairExact
 import DASHI.Biology.Physical.DynamicTopologyObserverRefinementExact
 import Ontology.Hecke.ObserverRefinementLadderBridgeExact
 import DASHI.Moonshine.P11MarkedFrobeniusResidualReceiptExact
