@@ -23,7 +23,7 @@ module DASHI.Physics.Closure.NSTriadKNCavazziniSpectralGapThresholdAuditRound79E
 --
 --   4 g^2 - M^2 = (2g-M)(2g+M).
 --
--- That threshold algebra is useful and is retained here.  It does NOT provide
+-- That threshold algebra is useful and is retained here. It does NOT provide
 -- the separate lower bound g_j3 >= c M required to divide an off-diagonal
 -- pressure-Hessian numerator by a physical strain gap. Round79's periodic
 -- pure-rotation counterexample explicitly blocks deriving such a lower bound
@@ -33,34 +33,25 @@ module DASHI.Physics.Closure.NSTriadKNCavazziniSpectralGapThresholdAuditRound79E
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
-open import Data.Rational.Base using (ℚ; _+_; _-_; _*_)
+import Data.Integer.Base as Int
+open import Data.Rational.Base using (ℚ; _/_; _+_; _-_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
+
+four two : ℚ
+four = Int.+ 4 / 1
+two = Int.+ 2 / 1
 
 spectralThresholdPolynomial : ℚ → ℚ → ℚ → ℚ
 spectralThresholdPolynomial gbar g12 M =
-  (4ℚ * gbar * g12) - (M * M)
-  where
-  open import Data.Rational.Base using (4ℚ)
+  (four * gbar * g12) - (M * M)
 
 restrictedThresholdPolynomial : ℚ → ℚ → ℚ
 restrictedThresholdPolynomial g M =
   (four * g * g) - (M * M)
-  where
-  open import Data.Rational.Base using (ℚ)
-  four : ℚ
-  four = 4ℚ
-    where
-    open import Data.Rational.Base using (4ℚ)
 
 restrictedThresholdFactors : ∀ g M →
   restrictedThresholdPolynomial g M
   ≡ ((two * g) - M) * ((two * g) + M)
-  where
-  open import Data.Rational.Base using (ℚ)
-  two : ℚ
-  two = 2ℚ
-    where
-    open import Data.Rational.Base using (2ℚ)
 restrictedThresholdFactors g M = solve (g ∷ M ∷ [])
 
 round79CavazziniSpectralThresholdAlgebraRetained : Bool
