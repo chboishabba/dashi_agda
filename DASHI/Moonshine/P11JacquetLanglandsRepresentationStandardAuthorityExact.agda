@@ -20,15 +20,20 @@ module DASHI.Moonshine.P11JacquetLanglandsRepresentationStandardAuthorityExact w
 -- SOURCE ROLE
 --
 -- The definite quaternion algebra of discriminant 11 and the unique weight-2
--- level-11 cuspidal eigenform determine corresponding automorphic
--- representations under Jacquet--Langlands.  At every place away from the
--- quaternion discriminant, in particular at 2, the local component is a
--- GL_2(Q_2) representation.  Because the classical level is 11, the local
--- component at 2 is unramified.
+-- level-11 cuspidal eigenform determine CORRESPONDING global automorphic
+-- representations under Jacquet--Langlands.  They are representations of
+-- different global groups and are therefore NOT identified as literally equal
+-- global objects.
+--
+-- At every split place away from the quaternion discriminant, in particular at
+-- 2, the corresponding local components are GL_2(Q_2) representations and are
+-- identified by local Jacquet--Langlands compatibility.  Because the classical
+-- level is 11, the local component at 2 is unramified.
 --
 -- Martin explicitly emphasizes that the modular-form-level JL map is
--- non-canonical.  Accordingly this module imports SAME REPRESENTATION data,
--- not a canonical map between invariant spaces for different compact opens.
+-- non-canonical.  Accordingly this module imports a correspondence relation and
+-- a matching LOCAL component, not a canonical map between invariant spaces for
+-- different compact opens.
 --
 -- DASHI DISCIPLINE
 --
@@ -48,38 +53,47 @@ import DASHI.Moonshine.P11BrandtPrimeGeneratorsExact as Brandt
 ------------------------------------------------------------------------
 
 postulate
-  AutomorphicRepresentation : Set
+  ClassicalAutomorphicRepresentation : Set
+  QuaternionAutomorphicRepresentation : Set
   LocalGL2Q2Representation : Set
 
-  localAtTwo : AutomorphicRepresentation → LocalGL2Q2Representation
+  classicalLocalAtTwo :
+    ClassicalAutomorphicRepresentation → LocalGL2Q2Representation
+  quaternionLocalAtTwo :
+    QuaternionAutomorphicRepresentation → LocalGL2Q2Representation
 
-  p11ClassicalNewformRepresentation : AutomorphicRepresentation
-  p11QuaternionBrandtRepresentation : AutomorphicRepresentation
+  p11ClassicalNewformRepresentation : ClassicalAutomorphicRepresentation
+  p11QuaternionBrandtRepresentation : QuaternionAutomorphicRepresentation
 
-  -- Classical Jacquet--Langlands same-representation authority.
-  p11JacquetLanglandsSameGlobalRepresentation :
-    p11QuaternionBrandtRepresentation ≡ p11ClassicalNewformRepresentation
+  JacquetLanglandsCorresponds :
+    QuaternionAutomorphicRepresentation →
+    ClassicalAutomorphicRepresentation →
+    Set
 
-  -- Standard local-newform fact for this representation at the good prime 2.
+  p11JacquetLanglandsCorrespondence :
+    JacquetLanglandsCorresponds
+      p11QuaternionBrandtRepresentation
+      p11ClassicalNewformRepresentation
+
+  -- Local compatibility at the split place 2.
+  p11JacquetLanglandsLocalAtTwoMatch :
+    quaternionLocalAtTwo p11QuaternionBrandtRepresentation
+    ≡ classicalLocalAtTwo p11ClassicalNewformRepresentation
+
+  -- Standard local-newform fact for the classical good-prime component.
   UnramifiedAtTwo : LocalGL2Q2Representation → Set
 
   p11ClassicalLocalAtTwoUnramified :
-    UnramifiedAtTwo (localAtTwo p11ClassicalNewformRepresentation)
+    UnramifiedAtTwo (classicalLocalAtTwo p11ClassicalNewformRepresentation)
 
 ------------------------------------------------------------------------
--- Local sameness is derived; it is not a second imported identification.
+-- Unramifiedness transports to the corresponding quaternionic local component.
 ------------------------------------------------------------------------
-
-p11JacquetLanglandsSameLocalAtTwo :
-  localAtTwo p11QuaternionBrandtRepresentation
-  ≡ localAtTwo p11ClassicalNewformRepresentation
-p11JacquetLanglandsSameLocalAtTwo =
-  cong localAtTwo p11JacquetLanglandsSameGlobalRepresentation
 
 p11QuaternionLocalAtTwoUnramified :
-  UnramifiedAtTwo (localAtTwo p11QuaternionBrandtRepresentation)
+  UnramifiedAtTwo (quaternionLocalAtTwo p11QuaternionBrandtRepresentation)
 p11QuaternionLocalAtTwoUnramified
-  rewrite p11JacquetLanglandsSameLocalAtTwo =
+  rewrite p11JacquetLanglandsLocalAtTwoMatch =
   p11ClassicalLocalAtTwoUnramified
 
 ------------------------------------------------------------------------
@@ -110,8 +124,9 @@ p11BrandtA5IsOne = refl
 
 record P11JacquetLanglandsRepresentationAuthorityBoundary : Set where
   field
-    representationLevelJLImported : Bool
-    localAtTwoSamenessDerived : Bool
+    representationLevelJLCorrespondenceImported : Bool
+    globalRepresentationsLiterallyIdentified : Bool
+    localAtTwoMatchImported : Bool
     localAtTwoUnramified : Bool
     finiteBrandtPacketRegressed : Bool
     canonicalK2ToK0FixedSpaceMapImported : Bool
@@ -120,8 +135,9 @@ record P11JacquetLanglandsRepresentationAuthorityBoundary : Set where
 canonicalP11JacquetLanglandsRepresentationAuthorityBoundary :
   P11JacquetLanglandsRepresentationAuthorityBoundary
 canonicalP11JacquetLanglandsRepresentationAuthorityBoundary = record
-  { representationLevelJLImported = true
-  ; localAtTwoSamenessDerived = true
+  { representationLevelJLCorrespondenceImported = true
+  ; globalRepresentationsLiterallyIdentified = false
+  ; localAtTwoMatchImported = true
   ; localAtTwoUnramified = true
   ; finiteBrandtPacketRegressed = true
   ; canonicalK2ToK0FixedSpaceMapImported = false
