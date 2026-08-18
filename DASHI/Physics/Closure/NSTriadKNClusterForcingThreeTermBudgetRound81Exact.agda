@@ -24,7 +24,7 @@ open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _-_; _*_; _≤_; _/_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteRationalOrderCore as Order
 
@@ -104,7 +104,7 @@ twoCoordinateThreeTermForcingBound datum =
         square total
         ≤ three * (square (localA datum)
           + square (pressureA datum) + square (viscousA datum)))
-      (totalADecomposes datum)
+      (sym (totalADecomposes datum))
       (threeTermSquareBound
         (localA datum) (pressureA datum) (viscousA datum))
 
@@ -117,7 +117,7 @@ twoCoordinateThreeTermForcingBound datum =
         square total
         ≤ three * (square (localB datum)
           + square (pressureB datum) + square (viscousB datum)))
-      (totalBDecomposes datum)
+      (sym (totalBDecomposes datum))
       (threeTermSquareBound
         (localB datum) (pressureB datum) (viscousB datum))
 
