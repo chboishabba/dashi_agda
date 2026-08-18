@@ -42,8 +42,11 @@ module DASHI.Physics.Closure.NSTriadKNMoranHutchinsonPropagationBoundaryRound75E
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Data.Product.Base using (_×_; _,_)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _≤_; _<_)
 import Data.Rational.Properties as ℚP
+open import Data.Rational.Tactic.RingSolver using (solve)
+open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
 open import Relation.Nullary.Negation.Core using (¬_)
 
 import DASHI.Physics.Closure.NSTriadKNDeterministicIrregularSquaredCascadeRound74Exact as Cascade
@@ -71,10 +74,7 @@ RightChildSupport leftPoint = false
 RightChildSupport rightPoint = true
 
 supportsOverlapAt : (ToyPoint → Bool) → (ToyPoint → Bool) → ToyPoint → Set
-supportsOverlapAt A B p =
-  (A p ≡ true) × (B p ≡ true)
-  where
-  open import Data.Product.Base using (_×_)
+supportsOverlapAt A B p = (A p ≡ true) × (B p ≡ true)
 
 childrenHaveNoCommonPoint :
   (p : ToyPoint) → ¬ supportsOverlapAt LeftChildSupport RightChildSupport p
@@ -83,11 +83,9 @@ childrenHaveNoCommonPoint rightPoint ()
 
 leftChildOverlapsParent : supportsOverlapAt ParentSupport LeftChildSupport leftPoint
 leftChildOverlapsParent = refl , refl
-  where open import Data.Product.Base using (_,_)
 
 rightChildOverlapsParent : supportsOverlapAt ParentSupport RightChildSupport rightPoint
 rightChildOverlapsParent = refl , refl
-  where open import Data.Product.Base using (_,_)
 
 siblingNonOverlapDoesNotImplyCrossGenerationDisjointness : Bool
 siblingNonOverlapDoesNotImplyCrossGenerationDisjointness = true
@@ -119,15 +117,8 @@ append (x ∷ xs) ys = x ∷ append xs ys
 sumFloorsAppend : ∀ left right →
   Carleson.sumFloors (append left right)
   ≡ Carleson.sumFloors left + Carleson.sumFloors right
-sumFloorsAppend [] right =
-  let
-    open import Data.Rational.Tactic.RingSolver using (solve)
-  in solve (Carleson.sumFloors right ∷ [])
+sumFloorsAppend [] right = solve (Carleson.sumFloors right ∷ [])
 sumFloorsAppend (node ∷ rest) right =
-  let
-    open import Relation.Binary.PropositionalEquality using (cong; trans)
-    open import Data.Rational.Tactic.RingSolver using (solve)
-  in
   trans
     (cong (Carleson.floor node +_) (sumFloorsAppend rest right))
     (solve
@@ -139,15 +130,8 @@ sumFloorsAppend (node ∷ rest) right =
 sumChargesAppend : ∀ left right →
   Carleson.sumCharges (append left right)
   ≡ Carleson.sumCharges left + Carleson.sumCharges right
-sumChargesAppend [] right =
-  let
-    open import Data.Rational.Tactic.RingSolver using (solve)
-  in solve (Carleson.sumCharges right ∷ [])
+sumChargesAppend [] right = solve (Carleson.sumCharges right ∷ [])
 sumChargesAppend (node ∷ rest) right =
-  let
-    open import Relation.Binary.PropositionalEquality using (cong; trans)
-    open import Data.Rational.Tactic.RingSolver using (solve)
-  in
   trans
     (cong (Carleson.charge node +_) (sumChargesAppend rest right))
     (solve
@@ -170,17 +154,12 @@ crossGenerationAdditivityFundsBothFloorFamilies :
   CrossGenerationAdditiveCharge earlier later budget →
   Carleson.sumFloors earlier + Carleson.sumFloors later ≤ budget
 crossGenerationAdditivityFundsBothFloorFamilies
-    {earlier} {later} witness =
+    {earlier} {later} {budget} witness =
   let
     floorBelow = Carleson.sumFloorsBelowCharges (append earlier later)
     combined = ℚP.≤-trans floorBelow (concatenatedChargeWithinBudget witness)
   in
-  Relation.Binary.PropositionalEquality.subst
-    (_≤ budget)
-    (sumFloorsAppend earlier later)
-    combined
-  where
-  open import Relation.Binary.PropositionalEquality
+  subst (_≤ budget) (sumFloorsAppend earlier later) combined
 
 crossGenerationFloorAboveBudgetRefutesAdditivity :
   ∀ {earlier later budget} →
