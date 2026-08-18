@@ -8,8 +8,8 @@ module DASHI.Moonshine.P11MarkedLevel44NewformDecompositionProbeExact where
 --   E_44 : y^2 = x^3 + x^2 + 3x - 1.
 --
 -- LMFDB is used only as the model/source cross-check; no DOI is asserted for
--- the database.  The coefficients below are DERIVED here by direct finite
--- point counts at p=3,5,7 rather than imported from the database.
+-- the database.  The coefficients below are DERIVED here by explicit finite
+-- x-row point counts at p=3,5,7 rather than imported from the database.
 --
 -- Classical modular-form context:
 -- Fred Diamond and Jerry Shurman,
@@ -32,7 +32,7 @@ module DASHI.Moonshine.P11MarkedLevel44NewformDecompositionProbeExact where
 -- Thus the marked sign sector matches the conductor-44 newform at all three
 -- source-native odd primes currently constructed.
 --
--- Combined with the separate p=11 result
+-- Combined with
 --
 --   Brandt-newform = deck-standard = (-1,1,-2)
 --
@@ -58,9 +58,20 @@ import DASHI.Moonshine.P11MarkedX2T7HeckeCollisionExact as T7
 -- Direct finite point counts on E_44.
 ------------------------------------------------------------------------
 
--- p=3: x-row solution counts 0,2,0; plus infinity.
+-- p=3.  The exact x-row y-solution counts are 0,2,0.
+data X3 : Set where x30 x31 x32 : X3
+
+e44F3RowCount : X3 → Nat
+e44F3RowCount x30 = 0
+e44F3RowCount x31 = 2
+e44F3RowCount x32 = 0
+
 e44F3AffineCount : Nat
-e44F3AffineCount = 2
+e44F3AffineCount =
+  e44F3RowCount x30 + e44F3RowCount x31 + e44F3RowCount x32
+
+e44F3AffineCountIsTwo : e44F3AffineCount ≡ 2
+e44F3AffineCountIsTwo = refl
 
 e44F3PointCount : Nat
 e44F3PointCount = e44F3AffineCount + 1
@@ -72,9 +83,23 @@ e44F3PointCountIsThree = refl
 e44A3PositiveOne : 3 + 1 ≡ e44F3PointCount + 1
 e44A3PositiveOne = refl
 
--- p=5: x-row counts 2,2,0,2,2; plus infinity.
+-- p=5.  The exact x-row counts are 2,2,0,2,2.
+data X5 : Set where x50 x51 x52 x53 x54 : X5
+
+e44F5RowCount : X5 → Nat
+e44F5RowCount x50 = 2
+e44F5RowCount x51 = 2
+e44F5RowCount x52 = 0
+e44F5RowCount x53 = 2
+e44F5RowCount x54 = 2
+
 e44F5AffineCount : Nat
-e44F5AffineCount = 8
+e44F5AffineCount =
+  e44F5RowCount x50 + e44F5RowCount x51 + e44F5RowCount x52
+  + e44F5RowCount x53 + e44F5RowCount x54
+
+e44F5AffineCountIsEight : e44F5AffineCount ≡ 8
+e44F5AffineCountIsEight = refl
 
 e44F5PointCount : Nat
 e44F5PointCount = e44F5AffineCount + 1
@@ -86,9 +111,26 @@ e44F5PointCountIsNine = refl
 e44A5NegativeThree : e44F5PointCount ≡ 5 + 1 + 3
 e44A5NegativeThree = refl
 
--- p=7: x-row counts 0,2,0,2,1,0,0; plus infinity.
+-- p=7.  The exact x-row counts are 0,2,0,2,1,0,0.
+data X7 : Set where x70 x71 x72 x73 x74 x75 x76 : X7
+
+e44F7RowCount : X7 → Nat
+e44F7RowCount x70 = 0
+e44F7RowCount x71 = 2
+e44F7RowCount x72 = 0
+e44F7RowCount x73 = 2
+e44F7RowCount x74 = 1
+e44F7RowCount x75 = 0
+e44F7RowCount x76 = 0
+
 e44F7AffineCount : Nat
-e44F7AffineCount = 5
+e44F7AffineCount =
+  e44F7RowCount x70 + e44F7RowCount x71 + e44F7RowCount x72
+  + e44F7RowCount x73 + e44F7RowCount x74 + e44F7RowCount x75
+  + e44F7RowCount x76
+
+e44F7AffineCountIsFive : e44F7AffineCount ≡ 5
+e44F7AffineCountIsFive = refl
 
 e44F7PointCount : Nat
 e44F7PointCount = e44F7AffineCount + 1
@@ -130,7 +172,7 @@ markedStandardMatchesLevel11At357 :
 markedStandardMatchesLevel11At357 = refl
 
 ------------------------------------------------------------------------
--- Consume the actual marked eigen theorems, not only the fingerprint literals.
+-- Consume the actual marked eigen theorems, not only fingerprint literals.
 ------------------------------------------------------------------------
 
 signT3IsLevel44A3 :
