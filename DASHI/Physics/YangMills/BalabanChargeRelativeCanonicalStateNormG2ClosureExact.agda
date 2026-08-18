@@ -47,12 +47,14 @@ open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
+import DASHI.Physics.YangMills.BalabanP33FiniteKKTAdmissibleProjectorExact as KKT
 import DASHI.Physics.YangMills.BalabanP33FiniteKKTPseudoinverseProjectorExact as Pseudo
+import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Physical
+import DASHI.Physics.YangMills.BalabanP33PhysicalRationalWilsonPlaquetteJetExact as Plaquette
 import DASHI.Physics.YangMills.BalabanP33CorrelatedMobiusDegreeJointExact as Degree
 import DASHI.Physics.YangMills.BalabanP33CorrelatedMobiusDegreeIntervalExact as Interval
 import DASHI.Physics.YangMills.BalabanSelectedCanonicalConstraintAtomsFromSubsetExact as Canonical
 import DASHI.Physics.YangMills.BalabanSelectedCanonicalConstraintDegreeBlocksExact as CanonicalBlocks
-import DASHI.Physics.YangMills.BalabanSelectedConstraintGreenDegreeBilinearExact as GreenDegree
 import DASHI.Physics.YangMills.BalabanCanonicalGreenSchurNormReductionExact as Pairing
 import DASHI.Physics.YangMills.BalabanCanonicalGreenStateNormReductionExact as StateNorm
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundVariationSelectorExact as Selector
@@ -68,9 +70,9 @@ record ChargeRelativeCanonicalStateNormG2Data
 
     pseudoDataAt : Configuration →
       Pseudo.FiniteKKTPseudoinverseData Multiplier
-    firstVariationAt : Configuration → _
-    bondFieldAt : Configuration → _
-    plaquetteAt : Configuration → _
+    firstVariationAt : Configuration → KKT.StateVector
+    bondFieldAt : Configuration → Physical.PhysicalSU2BondField4
+    plaquetteAt : Configuration → Plaquette.Plaquette4
 
     canonicalInputsAt : ∀ configuration →
       Canonical.CanonicalSubsetCorrelatedAuthorityInputs
@@ -415,10 +417,6 @@ relativeResidualBound dataSet configuration inRegion =
     (relativeEnvelopeEndpointExact dataSet configuration inRegion)
     (Interval.correlatedResidualJointDegreeUpper
       (relativeEnvelopeAt dataSet configuration inRegion))
-
-------------------------------------------------------------------------
--- Direct non-overlapping headroom on the sharpened aggregate scalar.
-------------------------------------------------------------------------
 
 greenCorrectionAggregate :
   ∀ {Configuration Multiplier} →
