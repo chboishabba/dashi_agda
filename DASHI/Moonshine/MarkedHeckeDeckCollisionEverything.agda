@@ -3,8 +3,6 @@ module DASHI.Moonshine.MarkedHeckeDeckCollisionEverything where
 ------------------------------------------------------------------------
 -- Focused aggregate for the next marked-Hecke / deck-observer tranche.
 --
--- The source-native chain is now:
---
 -- p=11:
 --   direct E(F_7) point count
 --     -> a_7 = -2
@@ -14,7 +12,7 @@ module DASHI.Moonshine.MarkedHeckeDeckCollisionEverything where
 --     -> all-prime collision reduced to one marked theta identity.
 --
 -- p=37:
---   existing actual 18-root Legendre T3/T5/F carrier
+--   actual 18-root Legendre T3/T5/F carrier
 --     -> two distinct observables with identical (T3,T5,F)=(1,0,+1)
 --     -> one is deck invariant, one is moved by deck C3
 --     -> scalar Hecke/Frobenius observation is not deck separating.
@@ -36,6 +34,7 @@ import DASHI.Moonshine.P11Level11Ell7PointCountExact as Point7
 import DASHI.Moonshine.P11MarkedQuaternionThetaEll7Exact as Theta7
 import DASHI.Moonshine.P11MarkedX2T7HeckeCollisionExact as T7
 import DASHI.Moonshine.P11MarkedHeckeThetaCollisionCriterionExact as Criterion
+import DASHI.Moonshine.P37NonOggFullLevel2DeuringControlExact as P37
 import DASHI.Moonshine.P37MarkedX2JointFingerprintDeckCollisionExact as P37Collision
 import DASHI.Moonshine.AuxiliaryLevelHeckeDeckFactorizationExact as Aux
 
@@ -61,13 +60,13 @@ p11ThetaCriterionEll7Regression :
 p11ThetaCriterionEll7Regression = Criterion.ell7DeckBrandtDifferenceCollision
 
 p37CoarseFingerprintRegression :
-  (x : P37Collision.P37.P37SupersingularLambda) →
+  (x : P37.P37SupersingularLambda) →
   P37Collision.t3Action P37Collision.coarseEvenObserver x
   ≡ P37Collision.coarseEvenObserver x
 p37CoarseFingerprintRegression = P37Collision.coarseEvenT3Eigen
 
 p37DeckMovingFingerprintRegression :
-  (x : P37Collision.P37.P37SupersingularLambda) →
+  (x : P37.P37SupersingularLambda) →
   P37Collision.t3Action P37Collision.deckMovingEvenObserver x
   ≡ P37Collision.deckMovingEvenObserver x
 p37DeckMovingFingerprintRegression = P37Collision.deckMovingEvenT3Eigen
