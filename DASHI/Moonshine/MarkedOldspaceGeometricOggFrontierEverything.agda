@@ -48,6 +48,7 @@ open import DASHI.Core.Prelude
 
 import DASHI.Moonshine.FormalQSeriesOldformEigencharacterTransportExact as Eig
 import DASHI.Moonshine.P11MarkedLevel44PermutationIntertwinerExact as Marked
+import DASHI.Moonshine.P11MarkedLevel44PermutationOldspaceExact as Perm
 import DASHI.Moonshine.P11Level44FormalSameCoordinateComparisonExact as Same
 import DASHI.Moonshine.P11Level44SameCoordinateHighestAlphaRegression as SameReg
 import DASHI.Moonshine.P11Level44TwoAdicFixedVectorSeparationExact as Local2
@@ -69,8 +70,7 @@ wholeOldspaceRegression = Same.wholeOldspaceGoodPrimeEigen
 localP1RotationRegression :
   (x : Local2.P1F2) →
   Marked.realizeOld3 (Local2.p1Basis (Local2.rotateP1 x))
-  ≡ DASHI.Moonshine.P11MarkedLevel44PermutationOldspaceExact.deckR5
-      (Marked.realizeOld3 (Local2.p1Basis x))
+  ≡ Perm.deckR5 (Marked.realizeOld3 (Local2.p1Basis x))
 localP1RotationRegression = Local2.markedDeckRotationFromP1
 
 localRoleNoCollapseRegression :
