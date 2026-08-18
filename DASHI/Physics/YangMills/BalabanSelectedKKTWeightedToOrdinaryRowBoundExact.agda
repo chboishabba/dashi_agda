@@ -44,9 +44,10 @@ open import Agda.Builtin.Equality using (_≡_)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; 1ℚ; _*_; _≤_; ∣_∣; NonNegative)
 import Data.Rational.Properties as ℚP
-open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
 import DASHI.Physics.YangMills.BalabanConstructiveRationalMatrixInverseExact as Matrix
 import DASHI.Physics.YangMills.BalabanP33FiniteKKTPseudoinverseProjectorExact as Pseudo
 import DASHI.Physics.YangMills.BalabanP33FiniteWeightedRowSumContractionExact as Row
@@ -91,7 +92,7 @@ ordinaryRowBelowWeightedRow pseudoData weight weightAboveOne row =
 
     finiteSumBound :
       Schur.absoluteRowMass indices kernel row
-      ≤ Locality.Sums.sumRational indices
+      ≤ Sums.sumRational indices
           (λ column → ∣ kernel row column ∣ * weight column)
     finiteSumBound =
       Schur.sumPointwiseBelow indices
@@ -103,7 +104,7 @@ ordinaryRowBelowWeightedRow pseudoData weight weightAboveOne row =
 
     implementationsAgree :
       Row.weightedRowSum indices kernel weight row
-      ≡ Locality.Sums.sumRational indices
+      ≡ Sums.sumRational indices
           (λ column → ∣ kernel row column ∣ * weight column)
     implementationsAgree =
       Locality.sumImplementationsAgree indices
