@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 
 import DASHI.Moonshine.P37MarkedDeckIsotypicJointDecompositionExact as Iso
 import DASHI.Moonshine.P37MarkedDeckIsotypicCollisionExact as Collision
+import DASHI.Moonshine.P11MarkedX2S3HeckeDecompositionExact as P11
 import DASHI.Moonshine.P11P37MarkedDeckSelectorCutsetExact as Cutset
 import DASHI.Moonshine.BrandtHeckeFrobeniusFrickeSelectorWeldExact as Selector
 import DASHI.Moonshine.OggPrimeControlMatrixExact as Matrix
@@ -48,7 +49,7 @@ p37DeckRepairsCollision = Collision.p37DeckRefinementSeparates
 ------------------------------------------------------------------------
 
 p11CollisionStillExists :
-  Collision.P11.brandtNewformFingerprint ≡ Collision.P11.standardFingerprint
+  P11.brandtNewformFingerprint ≡ P11.standardFingerprint
 p11CollisionStillExists = Collision.p11ArithmeticCollisionStillExact
 
 p11FrobeniusDefectZero :
