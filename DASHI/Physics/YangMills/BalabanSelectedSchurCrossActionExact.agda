@@ -3,12 +3,12 @@ module DASHI.Physics.YangMills.BalabanSelectedSchurCrossActionExact where
 ------------------------------------------------------------------------
 -- PRIMARY SOURCES
 --
--- Tadeusz Bałaban,
+-- Tadeusz Balaban,
 -- "Averaging Operations for Lattice Gauge Theories",
 -- Communications in Mathematical Physics 98 (1985), 17--51.
 -- DOI: 10.1007/BF01211042.
 --
--- Tadeusz Bałaban,
+-- Tadeusz Balaban,
 -- "Propagators for Lattice Gauge Theories in a Background Field",
 -- Communications in Mathematical Physics 99 (1985), 389--434.
 -- DOI: 10.1007/BF01240355.
@@ -83,10 +83,6 @@ GaugeRow = Cross.GaugeRow
 GaugeMultiplier : Set
 GaugeMultiplier = GaugeRow → ℚ
 
-------------------------------------------------------------------------
--- Average basis state is literally the transpose matrix column.
-------------------------------------------------------------------------
-
 averageBasisStateIsAverageMatrixEntry : ∀ target column →
   Cross.averageBasisState target column
   ≡ Average.selectedBackgroundBlockAverageConstraintMatrix target column
@@ -113,10 +109,6 @@ selectedSchurCrossIsDefectCompose background gaugeRow averageRow =
       cong
         (Defect.gaugeDefectMatrix background gaugeRow column *_)
         (averageBasisStateIsAverageMatrixEntry averageRow column))
-
-------------------------------------------------------------------------
--- Forward C_A action = defect derivative on A^* alpha.
-------------------------------------------------------------------------
 
 selectedSchurCrossForwardApply :
   Physical.RationalSU2Background4 → AverageMultiplier → GaugeMultiplier
@@ -161,10 +153,6 @@ selectedSchurCrossForwardIsDefectOnAverageAdjoint background average gaugeRow =
       gaugeRow
   in
   trans identify (trans compose innerCong)
-
-------------------------------------------------------------------------
--- Flat gauge derivative annihilates every site-constant A^* alpha.
-------------------------------------------------------------------------
 
 averageAdjointFlatAxesZero :
   ∀ average coordinate site →
@@ -225,19 +213,14 @@ backgroundGaugeOnAverageAdjointIsDefect :
 backgroundGaugeOnAverageAdjointIsDefect background average row =
   let
     state = AverageSection.selectedBlockAverageAdjointLift average
-    split = GaugeOperator.backgroundGaugeConstraintSplits background state row
-    flatZero = flatGaugeMatrixOnAverageAdjointZero average row
   in
-  trans split
+  trans
+    (GaugeOperator.backgroundGaugeConstraintSplits background state row)
     (trans
       (cong (_+ GaugeOperator.gaugeDefectForwardApply background state row)
-        flatZero)
+        (flatGaugeMatrixOnAverageAdjointZero average row))
       (ℚRing.solve-∀
         (GaugeOperator.gaugeDefectForwardApply background state row)))
-
-------------------------------------------------------------------------
--- C_A^T action = A D_A^* gamma by finite adjointness.
-------------------------------------------------------------------------
 
 selectedSchurCrossTransposeApply :
   Physical.RationalSU2Background4 → GaugeMultiplier → AverageMultiplier
@@ -271,24 +254,13 @@ selectedSchurCrossTransposeIsAverageDefectCross background gauge averageRow =
       (Defect.gaugeDefectMatrix background)
       basis gauge
 
-    swapStateDot :
-      Rect.finiteDot KKT.physicalStateCarrier basis defectState
-      ≡ Rect.finiteDot KKT.physicalStateCarrier defectState basis
-    swapStateDot = Rect.finiteDotSymmetric KKT.physicalStateCarrier basis defectState
-
-    averageAdjoint :
-      AverageSection.selectedBlockAverageRowDot
-        (Average.selectedBackgroundBlockAverageConstraintApply defectState)
-        basisMultiplier
-      ≡ Coordinates.physicalCoordinateDot defectState
-          (AverageSection.selectedBlockAverageAdjointLift basisMultiplier)
-    averageAdjoint = AverageSection.selectedBlockAverageAdjointExact
-      defectState basisMultiplier
+    swapStateDot = Rect.finiteDotSymmetric
+      KKT.physicalStateCarrier basis defectState
 
     basisExact : ∀ coordinate →
       basis coordinate
       ≡ AverageSection.selectedBlockAverageAdjointLift basisMultiplier coordinate
-    basisExact = averageBasisStateIsAverageMatrixEntry averageRow
+    basisExact coordinate = refl
 
     stateDotToPhysical :
       Rect.finiteDot KKT.physicalStateCarrier defectState basis
@@ -296,6 +268,9 @@ selectedSchurCrossTransposeIsAverageDefectCross background gauge averageRow =
           (AverageSection.selectedBlockAverageAdjointLift basisMultiplier)
     stateDotToPhysical = Sums.sumRationalCong Coordinates.physicalSU2Coordinates4 _ _
       (λ coordinate → cong (defectState coordinate *_) (basisExact coordinate))
+
+    averageAdjoint = AverageSection.selectedBlockAverageAdjointExact
+      defectState basisMultiplier
 
     rowDotSelect :
       AverageSection.selectedBlockAverageRowDot
@@ -317,10 +292,6 @@ selectedSchurCrossTransposeIsAverageDefectCross background gauge averageRow =
       (trans swapStateDot
         (trans stateDotToPhysical
           (trans (sym averageAdjoint) rowDotSelect))))
-
-------------------------------------------------------------------------
--- Same-object links to the actual reduced combined Gram cross blocks.
-------------------------------------------------------------------------
 
 selectedSchurCrossForwardIsPhysicalGaugeAverageCross :
   ∀ background selected row →
