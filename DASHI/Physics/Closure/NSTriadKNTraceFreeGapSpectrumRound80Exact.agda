@@ -29,7 +29,7 @@ open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Product using (_×_; _,_)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (subst; trans)
 
 record ThreeSpectrum : Set where
   constructor three-spectrum
@@ -88,24 +88,40 @@ traceFreeLambda1FromGaps :
   three * lambda1 (spectrum data)
   ≡ two * gap12 (spectrum data) + gap23 (spectrum data)
 traceFreeLambda1FromGaps data =
-  subst
-    (λ tau →
+  let
+    withZero :
       three * lambda1 (spectrum data)
-      ≡ two * gap12 (spectrum data) + gap23 (spectrum data) + tau)
-    (traceZero data)
-    (lambda1GapTraceIdentity (spectrum data))
+      ≡ two * gap12 (spectrum data) + gap23 (spectrum data) + 0ℚ
+    withZero =
+      subst
+        (λ tau →
+          three * lambda1 (spectrum data)
+          ≡ two * gap12 (spectrum data) + gap23 (spectrum data) + tau)
+        (traceZero data)
+        (lambda1GapTraceIdentity (spectrum data))
+  in
+  trans withZero
+    (solve (gap12 (spectrum data) ∷ gap23 (spectrum data) ∷ []))
 
 traceFreeLambda2FromGaps :
   (data : TraceFreeThreeSpectrum) →
   three * lambda2 (spectrum data)
   ≡ gap23 (spectrum data) - gap12 (spectrum data)
 traceFreeLambda2FromGaps data =
-  subst
-    (λ tau →
+  let
+    withZero :
       three * lambda2 (spectrum data)
-      ≡ gap23 (spectrum data) - gap12 (spectrum data) + tau)
-    (traceZero data)
-    (lambda2GapTraceIdentity (spectrum data))
+      ≡ gap23 (spectrum data) - gap12 (spectrum data) + 0ℚ
+    withZero =
+      subst
+        (λ tau →
+          three * lambda2 (spectrum data)
+          ≡ gap23 (spectrum data) - gap12 (spectrum data) + tau)
+        (traceZero data)
+        (lambda2GapTraceIdentity (spectrum data))
+  in
+  trans withZero
+    (solve (gap12 (spectrum data) ∷ gap23 (spectrum data) ∷ []))
 
 traceFreeLambda3FromGaps :
   (data : TraceFreeThreeSpectrum) →
@@ -131,33 +147,39 @@ bothAdjacentGapsZeroForceScaledSpectrumZero data gap12Zero gap23Zero =
   where
   first : three * lambda1 (spectrum data) ≡ 0ℚ
   first =
-    subst
-      (λ a → three * lambda1 (spectrum data) ≡ two * a + 0ℚ)
-      gap12Zero
+    trans
+      (traceFreeLambda1FromGaps data)
       (subst
-        (λ b → three * lambda1 (spectrum data) ≡ two * gap12 (spectrum data) + b)
-        gap23Zero
-        (traceFreeLambda1FromGaps data))
+        (λ a → two * a + gap23 (spectrum data) ≡ 0ℚ)
+        gap12Zero
+        (subst
+          (λ b → two * 0ℚ + b ≡ 0ℚ)
+          gap23Zero
+          (solve [])))
 
   second : three * lambda2 (spectrum data) ≡ 0ℚ
   second =
-    subst
-      (λ a → three * lambda2 (spectrum data) ≡ 0ℚ - a)
-      gap12Zero
+    trans
+      (traceFreeLambda2FromGaps data)
       (subst
-        (λ b → three * lambda2 (spectrum data) ≡ b - gap12 (spectrum data))
-        gap23Zero
-        (traceFreeLambda2FromGaps data))
+        (λ a → gap23 (spectrum data) - a ≡ 0ℚ)
+        gap12Zero
+        (subst
+          (λ b → b - 0ℚ ≡ 0ℚ)
+          gap23Zero
+          (solve [])))
 
   third : three * lambda3 (spectrum data) ≡ 0ℚ
   third =
-    subst
-      (λ a → three * lambda3 (spectrum data) ≡ 0ℚ - a - two * 0ℚ)
-      gap12Zero
+    trans
+      (traceFreeLambda3FromGaps data)
       (subst
-        (λ b → three * lambda3 (spectrum data) ≡ 0ℚ - gap12 (spectrum data) - two * b)
-        gap23Zero
-        (traceFreeLambda3FromGaps data))
+        (λ a → 0ℚ - a - two * gap23 (spectrum data) ≡ 0ℚ)
+        gap12Zero
+        (subst
+          (λ b → 0ℚ - 0ℚ - two * b ≡ 0ℚ)
+          gap23Zero
+          (solve [])))
 
 round80AdjacentGapsDetermineTraceFreeSpectrumScaled : Bool
 round80AdjacentGapsDetermineTraceFreeSpectrumScaled = true
