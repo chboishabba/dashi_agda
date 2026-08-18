@@ -17,13 +17,13 @@ module DASHI.Physics.Closure.NSTriadKNHighestAlphaRound82Exact where
 -- The primary C5 object is instead source-coupled to dangerous transfer:
 --
 --   B_K = Q_{K,+} / (Q_{K,+} + 2 nu D_K)
---       = Gamma_K / (1 + Gamma_K).
+--       = Gamma_transfer,K / (1 + Gamma_transfer,K).
 --
 -- Its exact division-free derivative surface already exists in
--- NSCompactGammaPotentialDerivative.  Round82 proves that a Gamma danger
--- threshold transports to the corresponding compact level in cross-multiplied
--- form and, more importantly, that the global theorem only needs an integrated
--- deterministic occupation estimate
+-- NSCompactGammaPotentialDerivative.  Round82 proves that a transfer-Gamma
+-- danger threshold transports to the corresponding compact level in
+-- cross-multiplied form and, more importantly, that the global theorem only
+-- needs an integrated deterministic occupation estimate
 --
 --   dangerCost * dangerousResidence <= unabsorbed escape margin,
 --
@@ -31,7 +31,21 @@ module DASHI.Physics.Closure.NSTriadKNHighestAlphaRound82Exact where
 -- countermodel shows pointwise negativity can fail while the integrated
 -- occupation payment succeeds.
 --
--- The resulting deterministic occupation input is now welded directly into the
+-- The compact-transfer derivative itself now has the exact rational numerator
+-- identity
+--
+--   Bdot (Q + V)^2 = Qdot V - Q Vdot,   V = 2 nu D.
+--
+-- So the remaining physical drift theorem is a relative-growth estimate on the
+-- literal transfer and viscous denominator, not a new spectral derivative.
+--
+-- A provenance correction is also explicit: the older periodic Route-B files
+-- use a different `Gamma`, namely center-shell quantity / packet energy.
+-- Packet Gamma cannot determine transfer Gamma; an exact two-state
+-- nonfactorization theorem prevents reuse of packet-Gamma coercivity without a
+-- same-object bridge.
+--
+-- The resulting deterministic occupation input is welded directly into the
 -- repository's pre-existing cutoff/shell/state-uniform compact-Gamma residence
 -- theorem.  Therefore no new abstract residence algebra remains after Round82:
 -- the open C5 content is physical construction of the uniform occupation and
@@ -47,7 +61,7 @@ module DASHI.Physics.Closure.NSTriadKNHighestAlphaRound82Exact where
 --
 -- 3a. same-event pressure/stretching surplus or quantitative depletion;
 -- 3b. physical strain/small-spectrum and pressure/projector local mechanisms;
--- 3c. exact compact-transfer potential derivative on the selected trajectory;
+-- 3c. selected-trajectory compact-transfer derivative / relative-growth bridge;
 -- 3d. cutoff-uniform integrated dangerous-occupation coercivity and
 --     replenishment absorption for that same compact-transfer object.
 --
@@ -75,6 +89,8 @@ import DASHI.Physics.Closure.NSTriadKNDeterministicDangerOccupationRound82Exact 
 import DASHI.Physics.Closure.NSTriadKNPointwiseDangerDriftNoGoRound82Exact as Pointwise
 import DASHI.Physics.Closure.NSTriadKNC5CompactTransferPivotRound82Exact as Pivot
 import DASHI.Physics.Closure.NSTriadKNCompactGammaUniformOccupationWeldRound82Exact as Uniform
+import DASHI.Physics.Closure.NSTriadKNCompactGammaDriftNumeratorRound82Exact as Drift
+import DASHI.Physics.Closure.NSTriadKNGammaSemanticSeparationRound82Exact as GammaSeparation
 
 round82ClusterSylvesterCoreConstructed : Bool
 round82ClusterSylvesterCoreConstructed = Syl.round81ClusterSylvesterSquaredBudgetConstructed
@@ -93,6 +109,14 @@ round82SmoothSpectralPotentialBounded = Smooth.round81SmoothSpectralAlignmentPot
 
 round82CompactDangerLevelTransportConstructed : Bool
 round82CompactDangerLevelTransportConstructed = Threshold.round82DangerThresholdTransportsToCompactLevelDivisionFree
+
+round82CompactDriftNumeratorReducedToRelativeGrowth : Bool
+round82CompactDriftNumeratorReducedToRelativeGrowth =
+  Drift.round82CompactGammaDriftNumeratorIsRelativeGrowthCompetition
+
+round82PacketGammaCannotDetermineTransferGamma : Bool
+round82PacketGammaCannotDetermineTransferGamma =
+  GammaSeparation.round82PacketGammaCannotDetermineTransferGamma
 
 round82IntegratedDangerOccupationReducerConstructed : Bool
 round82IntegratedDangerOccupationReducerConstructed = Occupation.round82IntegratedDangerOccupationReducerConstructed
@@ -146,6 +170,14 @@ round82ClayPromotion = false
 round82BothSmallGapsGiveWeakStretchingIsTrue :
   round82BothSmallGapsGiveWeakStretching ≡ true
 round82BothSmallGapsGiveWeakStretchingIsTrue = refl
+
+round82CompactDriftNumeratorReducedToRelativeGrowthIsTrue :
+  round82CompactDriftNumeratorReducedToRelativeGrowth ≡ true
+round82CompactDriftNumeratorReducedToRelativeGrowthIsTrue = refl
+
+round82PacketGammaCannotDetermineTransferGammaIsTrue :
+  round82PacketGammaCannotDetermineTransferGamma ≡ true
+round82PacketGammaCannotDetermineTransferGammaIsTrue = refl
 
 round82UniformDangerOccupationUsesExistingResidenceTheoremIsTrue :
   round82UniformDangerOccupationUsesExistingResidenceTheorem ≡ true
