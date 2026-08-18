@@ -2,15 +2,6 @@ module DASHI.Core.ObserverRefinementLatticeExact where
 
 ------------------------------------------------------------------------
 -- Generic observer-refinement layer over existing DASHI fibre/quotient cores.
---
--- The intended use is not to replace FibreRestrictionCore, PNF fibres, or
--- domain-specific observers.  It packages the theorem pattern already used in
--- several lanes:
---
---   coarse observer collision
---       -> add/refine observers
---       -> residual observation fibre shrinks monotonically
---       -> strict refinement requires an explicit separating witness.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -44,16 +35,12 @@ record StrictRefinement
     (fine : Observer State Fine) : Set where
   constructor strictRefinement
   field
-    refines : Refines coarse fine
-    left right : State
-    coarseCollision : coarse left ≡ coarse right
-    fineSeparates : fine left ≡ fine right → ⊥
+    refinementLaw : Refines coarse fine
+    refinementLeft refinementRight : State
+    refinementCoarseCollision : coarse refinementLeft ≡ coarse refinementRight
+    refinementFineSeparates : fine refinementLeft ≡ fine refinementRight → ⊥
 
 open StrictRefinement public
-
-------------------------------------------------------------------------
--- Homogeneous finite observer families.
-------------------------------------------------------------------------
 
 ObserverFamily : Set → Set → Set
 ObserverFamily State Value = List (Observer State Value)
@@ -113,10 +100,10 @@ record StrictFamilyRefinement
     (coarse fine : ObserverFamily State Value) : Set where
   constructor strictFamilyRefinement
   field
-    familyRefines : FamilyRefines coarse fine
-    left right : State
-    coarseCollision : AgreeOn coarse left right
-    fineSeparates : AgreeOn fine left right → ⊥
+    familyRefinementLaw : FamilyRefines coarse fine
+    familyLeft familyRight : State
+    familyCoarseCollision : AgreeOn coarse familyLeft familyRight
+    familyFineSeparates : AgreeOn fine familyLeft familyRight → ⊥
 
 open StrictFamilyRefinement public
 
@@ -128,36 +115,32 @@ strictFamilyRefinementBlocksCoarseSeparation :
   ⊥
 strictFamilyRefinementBlocksCoarseSeparation {fine = fine} refinement separating
   with separating
-    (left refinement)
-    (right refinement)
-    (coarseCollision refinement)
+    (familyLeft refinement)
+    (familyRight refinement)
+    (familyCoarseCollision refinement)
 ... | refl =
-  fineSeparates refinement
-    (familySelfAgreement fine (left refinement))
-
-------------------------------------------------------------------------
--- Pairing observers: this covers the common refinement step
--- O -> (O , O') without forcing a heterogeneous observer-family encoding.
-------------------------------------------------------------------------
+  familyFineSeparates refinement
+    (familySelfAgreement fine (familyLeft refinement))
 
 pairObserver :
   ∀ {State A B : Set} →
   Observer State A → Observer State B → Observer State (A × B)
-pairObserver left right x = left x , right x
+pairObserver leftObserver rightObserver x =
+  leftObserver x , rightObserver x
 
 pairRefinesLeft :
   ∀ {State A B : Set}
-    (left : Observer State A)
-    (right : Observer State B) →
-  Refines left (pairObserver left right)
-pairRefinesLeft left right x y equality = cong proj₁ equality
+    (leftObserver : Observer State A)
+    (rightObserver : Observer State B) →
+  Refines leftObserver (pairObserver leftObserver rightObserver)
+pairRefinesLeft leftObserver rightObserver x y equality = cong proj₁ equality
 
 pairRefinesRight :
   ∀ {State A B : Set}
-    (left : Observer State A)
-    (right : Observer State B) →
-  Refines right (pairObserver left right)
-pairRefinesRight left right x y equality = cong proj₂ equality
+    (leftObserver : Observer State A)
+    (rightObserver : Observer State B) →
+  Refines rightObserver (pairObserver leftObserver rightObserver)
+pairRefinesRight leftObserver rightObserver x y equality = cong proj₂ equality
 
 strictPairRefinement :
   ∀ {State A B : Set}
@@ -173,19 +156,14 @@ strictPairRefinement coarse extra x y coarseSame extraDiff =
     x y coarseSame
     (λ pairSame → extraDiff (cong proj₂ pairSame))
 
-------------------------------------------------------------------------
--- Coarse observables are exactly unable to distinguish a witnessed collision;
--- this is the reusable negative theorem behind quotient-fibre examples.
-------------------------------------------------------------------------
-
 record ObserverCollision
     {State Value : Set}
     (observe : Observer State Value) : Set where
   constructor observerCollision
   field
-    left right : State
-    sameObservation : observe left ≡ observe right
-    distinctStates : left ≡ right → ⊥
+    collisionLeft collisionRight : State
+    sameObservation : observe collisionLeft ≡ observe collisionRight
+    distinctStates : collisionLeft ≡ collisionRight → ⊥
 
 open ObserverCollision public
 
@@ -198,8 +176,8 @@ collisionBlocksSeparation :
 collisionBlocksSeparation collision separating =
   distinctStates collision
     (separating
-      (left collision)
-      (right collision)
+      (collisionLeft collision)
+      (collisionRight collision)
       (sameObservation collision))
 
 record ObserverRefinementBoundary : Set where
