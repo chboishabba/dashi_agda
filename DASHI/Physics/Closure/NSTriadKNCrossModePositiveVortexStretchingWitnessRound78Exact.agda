@@ -18,29 +18,32 @@ module DASHI.Physics.Closure.NSTriadKNCrossModePositiveVortexStretchingWitnessRo
 -- Fourier carrier nevertheless admits a positive interaction between TWO
 -- divergence-free Fourier vorticity modes.
 --
--- Choose strain/source mode k=(1,0,0) with omega_k=(0,1,0), and target mode
--- l=(1,0,1) with omega_l=(1,0,-1).  Both vorticities are transverse to their
--- own modes and the resonant output is k+l=(2,0,1).  The existing exact strain
--- formula gives
+-- Choose strain/source mode p=(1,0,0) with omega_p=(0,1,0), target/input mode
+-- q=(1,0,1) with omega_q=(1,0,-1), and output k=p+q=(2,0,1).  The integer
+-- modes are packaged as an actual `PhysicalTriadIncidence`; both vorticities
+-- are transverse to their own modes.  On the exact rational strain carrier,
 --
---   omega_l . S_k(omega_k) omega_l
---     = - (k.omega_l) k.(omega_k x omega_l)
+--   omega_q . S_p(omega_p) omega_q
+--     = - (p.omega_q) p.(omega_p x omega_q)
 --     = -(1)(-1)
 --     = 1.
 --
--- This is an exact physical Fourier-pair geometry witness, but still not a
+-- This is an exact physical Fourier-triad geometry witness, but still not a
 -- selected Round77 dynamic descendant theorem.  It proves the self-mode no-go
 -- does not kill B2 in principle: a cross-mode/nonlocal amplifying channel
--- genuinely exists on the same rational Fourier geometry.
+-- genuinely exists on the same physical triad geometry.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
+import Data.Integer.Base as Int
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_; -_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (trans)
 
+import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
+import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Triad
 import DASHI.Physics.Closure.NSTriadKNRationalLerayProjectionExact as V
 import DASHI.Physics.Closure.NSTriadKNFourierStrainMultiplierRound38Exact as Strain
 
@@ -71,6 +74,14 @@ targetVorticityTransverse = solve []
 resonanceExact : resonantOutputMode ≡ V.v3 (1ℚ + 1ℚ) 0ℚ 1ℚ
 resonanceExact = refl
 
+integerP integerQ integerK : Z3.FourierMode
+integerP = Z3.mode (Int.+ 1) (Int.+ 0) (Int.+ 0)
+integerQ = Z3.mode (Int.+ 1) (Int.+ 0) (Int.+ 1)
+integerK = Z3.mode (Int.+ 2) (Int.+ 0) (Int.+ 1)
+
+positiveStretchingTriad : Triad.PhysicalTriadIncidence
+positiveStretchingTriad = Triad.physicalTriad integerP integerQ integerK refl
+
 positiveCrossModeStretchingExact :
   Strain.fourierStretchingScalar unitXMode crossSource crossTarget ≡ 1ℚ
 positiveCrossModeStretchingExact =
@@ -81,6 +92,9 @@ positiveCrossModeStretchingExact =
 
 round78PositiveCrossModeStretchingExistsOnFourierCarrier : Bool
 round78PositiveCrossModeStretchingExistsOnFourierCarrier = true
+
+round78PositiveWitnessIsActualPhysicalTriadIncidence : Bool
+round78PositiveWitnessIsActualPhysicalTriadIncidence = true
 
 round78WitnessUsesTwoTransverseVorticityModes : Bool
 round78WitnessUsesTwoTransverseVorticityModes = true
