@@ -87,14 +87,14 @@ julyV2StatusIsConditionalWindowed :
   statusOf julyV2 ≡ conditionalWindowed
 julyV2StatusIsConditionalWindowed = refl
 
-februaryV1StatusIsNotImportedAsClosure : ProofLevel
-februaryV1StatusIsNotImportedAsClosure = adversarial
+februaryV1UnconditionalClosureLevel : ProofLevel
+februaryV1UnconditionalClosureLevel = conjectural
 
 julyV2DLRFrontEndLevel : ProofLevel
 julyV2DLRFrontEndLevel = conditional
 
 frozenBoundaryLocalMechanismLevel : ProofLevel
-frozenBoundaryLocalMechanismLevel = sourceDerived
+frozenBoundaryLocalMechanismLevel = standardImported
 
 fibreOscillationBetaIncrementLevel : ProofLevel
 fibreOscillationBetaIncrementLevel = machineChecked
