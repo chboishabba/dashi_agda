@@ -34,16 +34,19 @@ module DASHI.Physics.YangMills.BalabanG2CorrelatedDegreeOnePrePolarizationExact 
 -- No absolute value, source-norm majorant, pseudoinverse row bound, or LBB
 -- constant is inserted.  Future physical interval work can now enclose the
 -- signed degree-one core directly and only then add genuinely surviving higher
--- raw degrees.
+-- raw degrees.  The final theorem below wires precisely that signed enclosure
+-- into the already-selected singleton coefficient.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Data.Rational.Base as ℚ using (ℚ; _+_; _-_)
+open import Data.Rational.Base as ℚ using (ℚ; _+_; _-_; _*_; _≤_)
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanP33CorrelatedMobiusDegreeJointExact as Degree
+import DASHI.Physics.YangMills.BalabanP33PhysicalWilsonSignedGlobalExact as Wilson
+import DASHI.Physics.YangMills.BalabanSelectedBackgroundVariationSelectorExact as Selector
 import DASHI.Physics.YangMills.BalabanSelectedCorrelatedResidualOwnershipExact as Ownership
 import DASHI.Physics.YangMills.BalabanSelectedCanonicalConstraintAtomsFromSubsetExact as Canonical
 import DASHI.Physics.YangMills.BalabanSelectedCanonicalConstraintDegreeBlocksExact as Blocks
@@ -123,11 +126,43 @@ canonicalCorrelatedResidualIsSignedDegreeOnePlusHigherRaw inputs =
         (Blocks.canonicalRawDegreeBlock inputs Degree.degree4)
         (Blocks.canonicalGreenDegreeBlock inputs Degree.degree1 Degree.degree1)))
 
+canonicalCorrelatedResidualUpperFromSignedCore :
+  ∀ {Multiplier pseudoData firstVariationCovector bondField plaquette}
+    (inputs : Canonical.CanonicalSubsetCorrelatedAuthorityInputs
+      {Multiplier} pseudoData firstVariationCovector bondField plaquette)
+    (upper : ℚ) →
+  signedDegreeOneCore inputs + higherRawCore inputs ≤ upper →
+  Ownership.correlatedResidualTotal (Blocks.canonicalFamily inputs) ≤ upper
+canonicalCorrelatedResidualUpperFromSignedCore inputs upper bound =
+  subst
+    (λ value → value ≤ upper)
+    (sym (canonicalCorrelatedResidualIsSignedDegreeOnePlusHigherRaw inputs))
+    bound
+
+selectedCorrelatedResidualUpperFromSignedPrePolarization :
+  ∀ {Multiplier pseudoData firstVariationCovector bondField plaquette}
+    (inputs : Canonical.CanonicalSubsetCorrelatedAuthorityInputs
+      {Multiplier} pseudoData firstVariationCovector bondField plaquette) →
+  signedDegreeOneCore inputs + higherRawCore inputs
+    ≤ Selector.remainingSingletonCoefficient
+      * Wilson.plaquetteCrossCharge bondField plaquette →
+  Ownership.correlatedResidualTotal (Blocks.canonicalFamily inputs)
+    ≤ Selector.remainingSingletonCoefficient
+      * Wilson.plaquetteCrossCharge bondField plaquette
+selectedCorrelatedResidualUpperFromSignedPrePolarization
+    {bondField = bondField} {plaquette = plaquette} inputs =
+  canonicalCorrelatedResidualUpperFromSignedCore inputs
+    (Selector.remainingSingletonCoefficient
+      * Wilson.plaquetteCrossCharge bondField plaquette)
+
 canonicalGreenTotalDegreeOneOnlyLevel : ProofLevel
 canonicalGreenTotalDegreeOneOnlyLevel = machineChecked
 
 correlatedDegreeOnePrePolarizationIdentityLevel : ProofLevel
 correlatedDegreeOnePrePolarizationIdentityLevel = machineChecked
+
+selectedSignedPrePolarizationToSingletonTargetLevel : ProofLevel
+selectedSignedPrePolarizationToSingletonTargetLevel = machineChecked
 
 -- This is the corrected live G2 physical producer.  Separate nonnegative
 -- source/defect norm majorants are provably too lossy on the selected target.
