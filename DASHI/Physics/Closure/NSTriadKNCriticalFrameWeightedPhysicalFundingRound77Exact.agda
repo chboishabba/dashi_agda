@@ -19,8 +19,9 @@ module DASHI.Physics.Closure.NSTriadKNCriticalFrameWeightedPhysicalFundingRound7
 -- ROUND77 / CRITICAL EVENT -> FRAME-WEIGHTED PHYSICAL CHARGE
 --
 -- Round73 required W<=1.  Round77 removes that absolute normalization.
--- A selected critical event instead carries its source-native frame product B,
--- an exact bound W<=B, and a nonnegative reciprocal weight rho with B*rho=1.
+-- A selected critical event instead carries its source-native positive frame
+-- product B and an exact bound W<=B.  Its reciprocal rho is then constructed
+-- canonically from rational positivity, rather than supplied as another premise.
 -- On the SAME atoms and SAME critical-ratio remainder,
 --
 --   mu^2 <= Q W <= Q B
@@ -38,7 +39,7 @@ module DASHI.Physics.Closure.NSTriadKNCriticalFrameWeightedPhysicalFundingRound7
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Nat using (Nat; suc)
-open import Data.Rational.Base using (ℚ; 0ℚ; _*_; _+_; _≤_)
+open import Data.Rational using (ℚ; 0ℚ; Positive; _*_; _+_; _≤_)
 import Data.Rational.Properties as ℚP
 open import Relation.Binary.PropositionalEquality using (subst)
 
@@ -106,7 +107,6 @@ criticalAmplificationForcesChargeTimesFrame
     factorized =
       Factorized.criticalAmplificationForcesFactorizedConcentration
         step n mu atoms overlay muNN excess remainderExact
-
     chargeNN = Effective.concentrationChargeNonnegative
       (Overlay.overlayFactors overlay)
     complexityNN = Effective.effectiveComplexityNonnegative
@@ -127,10 +127,8 @@ record PhysicalFrameWeightedAmplificationWitness
     (overlay : Overlay.TriadicFactorizationOverlay atoms) : Set where
   field
     frameProduct : ℚ
-    reciprocalWeight : ℚ
+    framePositive : Positive frameProduct
     frameBounded : FrameBoundedCriticalOverlay overlay frameProduct
-    reciprocal :
-      WeightedCharge.ReciprocalFrameWeight frameProduct reciprocalWeight
 
     amplificationNonnegative : 0ℚ ≤ mu
     criticalExcess :
@@ -145,6 +143,27 @@ record PhysicalFrameWeightedAmplificationWitness
       Overlay.overlayCharge overlay ≡ physicalCharge
 
 open PhysicalFrameWeightedAmplificationWitness public
+
+reciprocalWeight :
+  ∀ {balances block}
+    {positiveBlock : C1.PositiveCriticalBlockScale balances block}
+    {step : Amplification.CriticalRatioStepDecomposition positiveBlock}
+    {n mu atoms overlay} →
+  PhysicalFrameWeightedAmplificationWitness step n mu atoms overlay → ℚ
+reciprocalWeight witness =
+  WeightedCharge.safeRationalReciprocal (frameProduct witness)
+
+reciprocalWitness :
+  ∀ {balances block}
+    {positiveBlock : C1.PositiveCriticalBlockScale balances block}
+    {step : Amplification.CriticalRatioStepDecomposition positiveBlock}
+    {n mu atoms overlay} →
+  (witness : PhysicalFrameWeightedAmplificationWitness step n mu atoms overlay) →
+  WeightedCharge.ReciprocalFrameWeight
+    (frameProduct witness) (reciprocalWeight witness)
+reciprocalWitness witness =
+  WeightedCharge.positiveFrameReciprocal
+    (frameProduct witness) (framePositive witness)
 
 frameWeightedCriticalFloorBelowPhysicalCharge :
   ∀ {balances block}
@@ -170,7 +189,7 @@ frameWeightedCriticalFloorBelowPhysicalCharge
       (remainderExact witness)
     weighted =
       WeightedCharge.reciprocalFrameWeightTurnsProductChargeIntoCharge
-        squareNN chargeNN productBound (reciprocal witness)
+        squareNN chargeNN productBound (reciprocalWitness witness)
   in
   subst
     (λ upper → reciprocalWeight witness * L2.square mu ≤ upper)
@@ -190,11 +209,14 @@ asFinalWeightedFundedNode {mu = mu} witness =
     (reciprocalWeight witness)
     mu
     (physicalCharge witness)
-    (WeightedCharge.rhoNonnegative (reciprocal witness))
+    (WeightedCharge.rhoNonnegative (reciprocalWitness witness))
     (frameWeightedCriticalFloorBelowPhysicalCharge witness)
 
 round77CriticalEventNeedsAbsoluteUnitNormalization : Bool
 round77CriticalEventNeedsAbsoluteUnitNormalization = false
+
+round77CriticalFrameReciprocalIsConstructedNotAssumed : Bool
+round77CriticalFrameReciprocalIsConstructedNotAssumed = true
 
 round77FrameWeightedCriticalFundingCompilerConstructed : Bool
 round77FrameWeightedCriticalFundingCompilerConstructed = true
