@@ -42,10 +42,6 @@ import DASHI.Physics.Foundations.SettlerEnemyAbstractionExact as Enemy
 
 ------------------------------------------------------------------------
 -- 1. Enemy compression -> justice-relevant non-factorability.
---
--- The fine carrier below does not assign collective guilt or legal status.  It
--- only records that an individual armed-actor assessment and a civilian-
--- population protection assessment are different route/justice consumers.
 ------------------------------------------------------------------------
 
 data FineJusticeAssessment : Set where
@@ -221,21 +217,15 @@ DisconfirmationCaptureCanBlockJusticeRepair :
   (inversion : Epistemic.DisconfirmationInversion S R) →
   RepairCorrectionProtocol S R →
   ⊥
-DisconfirmationCaptureCanBlockJusticeRepair inversion protocol =
+DisconfirmationCaptureCanBlockJusticeRepair {R = R} inversion protocol =
   supportiveAndContraryDisjoint protocol
     (Epistemic.EvidenceReframingSystem.reframe R
       (Epistemic.DisconfirmationInversion.contraryEvidence inversion))
     (Epistemic.DisconfirmationInversion.reframedAsSupport inversion)
     (contraryEvidenceMustRemainCorrective protocol inversion)
-  where
-    R = _
 
 ------------------------------------------------------------------------
 -- 5. Trauma recursion -> inverse-justice attractor specialization.
---
--- The trauma core owns the historical step/fixed-point mathematics.  Justice
--- enters only through an explicit interpreter from historical states to a
--- justice transition; no fixed point is silently promoted to injustice.
 ------------------------------------------------------------------------
 
 record InverseJusticeAttractor
@@ -312,10 +302,6 @@ MeansViolationDoesNotEraseUnderlyingJusticeClaim label end base form means = ref
 
 ------------------------------------------------------------------------
 -- 8. Compatible situated authorities can compose without sovereign collapse.
---
--- Existing council gluing requires compatibility and preserves local sections;
--- its own boundary expressly refuses to manufacture political authority from
--- the sheaf analogy.  We expose that exact conjunction as the justice bridge.
 ------------------------------------------------------------------------
 
 CompatibleSituatedAuthoritiesCanComposeWithoutSovereigntyCollapse :
