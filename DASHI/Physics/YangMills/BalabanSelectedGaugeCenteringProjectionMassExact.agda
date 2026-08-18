@@ -36,11 +36,11 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥-elim)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_; _/_; ∣_∣; NonNegative)
+  (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_; _/_; ∣_∣)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using
-  (cong; subst; sym; trans)
+  (cong; cong₂; subst; sym; trans)
 open import Relation.Nullary.Decidable.Core using (yes; no)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -48,11 +48,12 @@ open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using (pair)
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreCarrier as Block
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
 import DASHI.Physics.YangMills.BalabanFiniteSumFubiniExact as Fubini
+import DASHI.Physics.YangMills.BalabanFiniteReducedFloorPerturbationExact as Difference
 import DASHI.Physics.YangMills.BalabanP33FiniteWeightedSchurSquaredExact as Schur
 import DASHI.Physics.YangMills.BalabanP33PhysicalCoordinateBasisExact as Basis
 import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Coordinates
 import DASHI.Physics.YangMills.BalabanPath4AxisAverageExact as Path4
-import DASHI.Physics.YangMills.BalabanPath4PhysicalFibreMatchExact as Indices
+import DASHI.Physics.YangMills.BalabanPath4GlobalAverageExact as GlobalAverage
 import DASHI.Physics.YangMills.BalabanP33PeriodicFourDimensionalHodgeIdentityExact as Periodic
 import DASHI.Physics.YangMills.BalabanP33PhysicalPeriodicOpenReferenceBridgeExact as Bridge
 import DASHI.Physics.YangMills.BalabanSelectedBlockAverageSectionExact as AverageSection
@@ -72,6 +73,10 @@ gaugeRows = Basis.elements Rows.selectedGaugeRowFiniteSelector
 
 oneOverSites : ℚ
 oneOverSites = AverageSection.oneOverSiteCount
+
+oneOverSitesMatchesGlobalMean :
+  oneOverSites ≡ GlobalAverage.oneTwoFiftySix
+oneOverSitesMatchesGlobalMean = ℚRing.solve []
 
 gaugeIdentityKernel : GaugeRow → GaugeRow → ℚ
 gaugeIdentityKernel row column =
@@ -99,7 +104,11 @@ identityKernelActionExact : ∀ vector row →
     (λ column → gaugeIdentityKernel row column * vector column)
   ≡ vector row
 identityKernelActionExact vector row =
-  Basis.selectorExact Rows.selectedGaugeRowFiniteSelector vector row
+  trans
+    (Sums.sumRationalCong gaugeRows _ _
+      (λ column → ℚP.*-comm
+        (gaugeIdentityKernel row column) (vector column)))
+    (Basis.selectorExact Rows.selectedGaugeRowFiniteSelector vector row)
 
 constantKernelCoordinateActionExact :
   ∀ vector outputCoordinate outputSite inputCoordinate →
@@ -186,6 +195,19 @@ constantProjectionMatrixActionExact vector outputCoordinate outputSite =
     globalMatch = sym
       (Bridge.sumSitesMatchesGlobalSiteSum
         (FlatAdjoint.multiplierField vector outputCoordinate))
+
+    coefficientMatch :
+      oneOverSites
+        * Periodic.sumSites
+            (FlatAdjoint.multiplierField vector outputCoordinate)
+      ≡ Mean.constantProjection vector (pair outputCoordinate outputSite)
+    coefficientMatch =
+      trans
+        (cong
+          (_* Periodic.sumSites
+                (FlatAdjoint.multiplierField vector outputCoordinate))
+          oneOverSitesMatchesGlobalMean)
+        refl
   in
   trans split
     (trans inner
@@ -193,7 +215,9 @@ constantProjectionMatrixActionExact vector outputCoordinate outputSite =
         (trans factor
           (trans
             (cong (oneOverSites *_) select)
-            (cong (oneOverSites *_) globalMatch)))))
+            (trans
+              (cong (oneOverSites *_) globalMatch)
+              coefficientMatch)))))
 
 gaugeCenteringProjectionActionExact : ∀ vector row →
   Sums.sumRational gaugeRows
@@ -216,18 +240,14 @@ gaugeCenteringProjectionActionExact vector
           (pair outputCoordinate outputSite) column)
         (vector column))
 
-    split =
-      DASHI.Physics.YangMills.BalabanFiniteReducedFloorPerturbationExact.sumSubtract
-        gaugeRows identityTerm constantTerm
+    split = Difference.sumSubtract gaugeRows identityTerm constantTerm
   in
   trans distribute
     (trans split
-      (trans
-        (cong₂ _-_
-          (identityKernelActionExact vector (pair outputCoordinate outputSite))
-          (constantProjectionMatrixActionExact
-            vector outputCoordinate outputSite))
-        refl))
+      (cong₂ _-_
+        (identityKernelActionExact vector (pair outputCoordinate outputSite))
+        (constantProjectionMatrixActionExact
+          vector outputCoordinate outputSite)))
 
 ------------------------------------------------------------------------
 -- Coarse exact absolute-mass bound <= 2.
@@ -277,14 +297,10 @@ constantKernelCoordinateMassExact outputCoordinate outputSite inputCoordinate =
 
     entryAbs :
       ∣ oneOverSites * lie ∣ ≡ oneOverSites * lie
-    entryAbs =
-      let
-        nonnegative : 0ℚ ≤ oneOverSites * lie
-        nonnegative with Basis.decide Basis.lieCoordinateFiniteSelector
-            inputCoordinate outputCoordinate
-        ... | yes _ = ℚP.nonNegative⁻¹ oneOverSites
-        ... | no _ = ℚP.≤-refl
-      in ℚP.0≤p⇒∣p∣≡p nonnegative
+    entryAbs with Basis.decide Basis.lieCoordinateFiniteSelector
+        inputCoordinate outputCoordinate
+    ... | yes _ = ℚP.0≤p⇒∣p∣≡p (ℚP.nonNegative⁻¹ oneOverSites)
+    ... | no _ = refl
   in
   trans
     (Sums.sumRationalCong
@@ -332,22 +348,24 @@ gaugeCenteringProjectionAbsoluteRowMassBound row =
     split = Mass.sumAddExact gaugeRows
       (λ column → ∣ gaugeIdentityKernel row column ∣)
       (λ column → ∣ constantGaugeProjectionKernel row column ∣)
+
+    exact :
+      Sums.sumRational gaugeRows
+        (λ column →
+          ∣ gaugeIdentityKernel row column ∣
+            + ∣ constantGaugeProjectionKernel row column ∣)
+      ≡ centeringProjectionRowMassBound
+    exact = trans split
+      (trans
+        (cong₂ _+_
+          (identityKernelRowMassExact row)
+          (constantKernelRowMassExact row))
+        (ℚRing.solve []))
   in
-  ℚP.≤-trans triangle
-    (subst
-      (λ upper →
-        Sums.sumRational gaugeRows
-          (λ column →
-            ∣ gaugeIdentityKernel row column ∣
-              + ∣ constantGaugeProjectionKernel row column ∣)
-        ≤ upper)
-      (trans split
-        (trans
-          (cong₂ _+_
-            (identityKernelRowMassExact row)
-            (constantKernelRowMassExact row))
-          (ℚRing.solve [])))
-      ℚP.≤-refl)
+  subst
+    (λ upper →
+      Mass.squareRowMass gaugeRows gaugeCenteringProjectionMatrix row ≤ upper)
+    exact triangle
 
 genericKroneckerSymmetric :
   ∀ {A : Set} (selector : Basis.FiniteSelector A) left right →
