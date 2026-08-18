@@ -56,15 +56,13 @@ jointStrictlyRefinesRight :
   IncomparableObservers left right →
   Obs.StrictRefinement right (Obs.pairObserver left right)
 jointStrictlyRefinesRight {left = left} {right = right} witness =
-  Obs.strictPairRefinement right left
+  Obs.strictRefinement
+    (Obs.pairRefinesRight left right)
     (rightCollision₁ witness)
     (rightCollision₂ witness)
     (rightSame witness)
-    (leftSplitsRightCollision witness)
+    (λ pairSame → leftSplitsRightCollision witness (cong proj₁ pairSame))
 
--- Retaining two observation coordinates is always mathematically available.
--- Interpreting or pooling them as one semantic/evidential quantity is a
--- separate permission and is deliberately not manufactured by the product.
 data AutomaticSemanticMergePermission
     {State A B : Set}
     (left : Obs.Observer State A)
