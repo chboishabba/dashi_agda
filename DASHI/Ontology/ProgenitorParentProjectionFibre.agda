@@ -1,7 +1,6 @@
 module DASHI.Ontology.ProgenitorParentProjectionFibre where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Sigma using (Σ; _,_)
 
 open import DASHI.Ontology.ProgenitorParentHyperfabric
 
@@ -22,9 +21,12 @@ open ParentCarrier public
 projectParentSlot : ParentCarrier → WikidataParentSlot
 projectParentSlot carrier = recommendedGenericSlot (carrierLevel carrier)
 
-ParentSlotFibre : WikidataParentSlot → Set
-ParentSlotFibre slot =
-  Σ ParentCarrier λ carrier → projectParentSlot carrier ≡ slot
+record ParentSlotFibre (slot : WikidataParentSlot) : Set where
+  constructor parentSlotFibre
+  field
+    fibreCarrier : ParentCarrier
+    fibreExact : projectParentSlot fibreCarrier ≡ slot
+open ParentSlotFibre public
 
 anonymousDonorCarrier : ParentCarrier
 anonymousDonorCarrier = parentCarrier individualLevel anonymousIVFDonor
@@ -36,13 +38,13 @@ cultivarCarrier : ParentCarrier
 cultivarCarrier = parentCarrier lineageLevel (relation cultivarLineageProjection)
 
 anonymousDonorInP8810Fibre : ParentSlotFibre parentP8810
-anonymousDonorInP8810Fibre = anonymousDonorCarrier , refl
+anonymousDonorInP8810Fibre = parentSlotFibre anonymousDonorCarrier refl
 
 adoptiveParentInP8810Fibre : ParentSlotFibre parentP8810
-adoptiveParentInP8810Fibre = adoptiveCarrier , refl
+adoptiveParentInP8810Fibre = parentSlotFibre adoptiveCarrier refl
 
 cultivarInP1531Fibre : ParentSlotFibre hybridOfP1531
-cultivarInP1531Fibre = cultivarCarrier , refl
+cultivarInP1531Fibre = parentSlotFibre cultivarCarrier refl
 
 -- Same observable slot, incompatible genetic coordinates: observational
 -- agreement at P8810 cannot recover the parent carrier.
@@ -52,7 +54,7 @@ p8810FibreContainsGeneticallyDistinctCarriers :
 p8810FibreContainsGeneticallyDistinctCarriers = refl , refl
 
 -- The lineage projection changes the preferred Wikidata surface while retaining
--- the lineage/genealogical coordinate.  This is representation specialization,
+-- the lineage/genealogical coordinate. This is representation specialization,
 -- not a proof that cultivars are ontologically ineligible for progeniture.
 p1531SpecializationPreservesLineageParentCoordinate :
   projectParentSlot cultivarCarrier ≡ hybridOfP1531
@@ -60,7 +62,7 @@ p1531SpecializationPreservesLineageParentCoordinate :
 p1531SpecializationPreservesLineageParentCoordinate = refl , refl
 
 -- Projection compatibility object: a surface and hidden carrier are paired only
--- when the surface is exactly the carrier's projection.  This is the concrete
+-- when the surface is exactly the carrier's projection. This is the concrete
 -- parenting analogue of the pullback/fibre-product discipline used in the Lean
 -- ontology work: compatibility is retained without identifying the views.
 record CompatibleParentView : Set where
@@ -75,8 +77,7 @@ forgetCompatibility : CompatibleParentView → ParentCarrier
 forgetCompatibility view = hiddenCarrier view
 
 liftCarrier : ParentCarrier → CompatibleParentView
-liftCarrier carrier =
-  compatibleParentView carrier (projectParentSlot carrier) refl
+liftCarrier carrier = compatibleParentView carrier (projectParentSlot carrier) refl
 
 forgetAfterLift :
   (carrier : ParentCarrier) →
@@ -84,7 +85,7 @@ forgetAfterLift :
 forgetAfterLift carrier = refl
 
 -- The carrier is therefore a retract of the compatible surface-plus-carrier
--- representation.  The retraction preserves hidden semantics rather than
+-- representation. The retraction preserves hidden semantics rather than
 -- pretending that the visible slot determines them.
 carrierRetractionIsExact :
   (carrier : ParentCarrier) →
