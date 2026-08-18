@@ -21,24 +21,34 @@ module DASHI.Moonshine.DuncanSwisherMonsterExponentFormulaExact where
 -- DASHI CONTRIBUTION
 --
 -- Lower the theorem from a support-only Boolean authority to its FULL exponent
--- depth, on the SAME coarse Frobenius normal form already consumed by the
--- Deligne--Rapoport/Fricke selector.
+-- depth on LITERALLY THE SAME coarse Frobenius carrier already consumed by the
+-- Deligne--Rapoport/Fricke selector.  No second supersingular geometry object
+-- exists in this interface.
 --
 -- We use the denominator-free doubled form
 --
 --   2 v_p(|M|) = 3 m_p,  m_p,  or 0,
 --
 -- so no division/parity side-condition is hidden in the formal carrier.
--- The branch witness is proof-relevant: later consumers can distinguish the
--- singleton-rational and multiple-rational genus-zero mechanisms instead of
--- remembering only whether the exponent is nonzero.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
 open import Data.Nat using (_≤_; _*_; suc; s≤s; z≤n)
 open import Data.Nat.Primality using (Prime)
 
+import DASHI.Moonshine.PublishedPrimeLevelFrickeSelectorPinnedExact as Fricke
+import DASHI.Moonshine.PrimeLevelDeligneRapoportFrickeSelectorExact as Selector
 import DASHI.Moonshine.PrimeLevelDeligneRapoportFrickeCombinatoricsExact as DR
+
+------------------------------------------------------------------------
+-- The exact shared supersingular/Frobenius carrier at the requested prime.
+------------------------------------------------------------------------
+
+sharedGeometry :
+  (p : Nat) → (prime : Prime p) → (ge5 : 5 ≤ p) →
+  DR.PrimeLevelSupersingularFrobeniusData
+sharedGeometry p prime ge5 =
+  Selector.supersingularFrobenius (Fricke.publishedAuthorityAt p prime ge5)
 
 ------------------------------------------------------------------------
 -- Source-shaped denominator-free cases of Duncan--Swisher Theorem 1.2.
@@ -68,16 +78,13 @@ data DuncanSwisherExponentCase
 record DuncanSwisherExponentAuthority
     (p : Nat) (prime : Prime p) (ge5 : 5 ≤ p) : Set where
   field
-    geometry : DR.PrimeLevelSupersingularFrobeniusData
-    geometryAtRequestedPrime : DR.prime geometry ≡ p
-
     monsterValuation : Nat
     minimumAutomorphismOrder : Nat
     minimumAutomorphismPositive : 1 ≤ minimumAutomorphismOrder
 
     theorem12 : DuncanSwisherExponentCase
-      (DR.fixedCount geometry)
-      (DR.pairedCount geometry)
+      (DR.fixedCount (sharedGeometry p prime ge5))
+      (DR.pairedCount (sharedGeometry p prime ge5))
       monsterValuation
       minimumAutomorphismOrder
 
@@ -105,15 +112,14 @@ open ExponentDepthSummary public
 summary :
   {p : Nat} {prime : Prime p} {ge5 : 5 ≤ p} →
   DuncanSwisherExponentAuthority p prime ge5 → ExponentDepthSummary
-summary A = exponent-depth-summary
-  (DR.fixedCount (geometry A))
-  (DR.pairedCount (geometry A))
+summary {p} {prime} {ge5} A = exponent-depth-summary
+  (DR.fixedCount (sharedGeometry p prime ge5))
+  (DR.pairedCount (sharedGeometry p prime ge5))
   (minimumAutomorphismOrder A)
   (monsterValuation A)
 
 ------------------------------------------------------------------------
--- Tiny structural positivity helpers.  Keeping these local avoids depending
--- on version-sensitive multiplication monotonicity APIs.
+-- Tiny structural positivity helpers.
 ------------------------------------------------------------------------
 
 positiveNotZero :
@@ -153,11 +159,6 @@ zeroPairBranchValuationCannotBeZero mPositive
   pairedZero _ =
   positiveNotZero pairedPositive pairedZero
 
-------------------------------------------------------------------------
--- Full theorem immediately recovers the older support statement, but now as a
--- corollary of exponent DEPTH rather than the imported endpoint.
-------------------------------------------------------------------------
-
 pairPresentForcesZeroValuation :
   {fixed paired valuation m : Nat} →
   DuncanSwisherExponentCase fixed paired valuation m →
@@ -192,16 +193,18 @@ zeroValuationForcesPairPresent mPositive
   (quadraticPresent pairedPositive valuationZero minTwo) _ = pairedPositive
 
 ------------------------------------------------------------------------
--- Zero valuation iff the coarse Frobenius has a nontrivial pair.  The exact
--- branch object still retains the exponent depth discarded by this corollary.
+-- Zero valuation iff the exact shared Frobenius carrier has a nontrivial pair.
 ------------------------------------------------------------------------
 
 valuationZeroIffPairPositive :
-  {p : Nat} {prime : Prime p} {ge5 : 5 ≤ p} →
-  (A : DuncanSwisherExponentAuthority p prime ge5) →
+  (p : Nat) → (prime : Prime p) → (ge5 : 5 ≤ p) →
+  let A = publishedDuncanSwisherExponentAuthority p prime ge5
+  in
   monsterValuation A ≡ 0
-  ↔ 1 ≤ DR.pairedCount (geometry A)
-valuationZeroIffPairPositive A =
+  ↔ 1 ≤ DR.pairedCount (sharedGeometry p prime ge5)
+valuationZeroIffPairPositive p prime ge5 =
+  let A = publishedDuncanSwisherExponentAuthority p prime ge5
+  in
   (zeroValuationForcesPairPresent
       (minimumAutomorphismPositive A)
       (theorem12 A))
@@ -216,7 +219,8 @@ record DuncanSwisherExponentFormulaBoundary : Set where
   field
     theorem12FullDepthImported : Bool
     doubledFormulaAvoidsDivision : Bool
-    sameCoarseFrobeniusCarrierUsed : Bool
+    exactFrickeFrobeniusCarrierReused : Bool
+    duplicateSupersingularGeometryAuthorityIntroduced : Bool
     singletonVsMultipleRationalBranchesRetained : Bool
     supportRecoveredAsCorollary : Bool
     MonsterPrimeLaneEnumerationImported : Bool
@@ -228,7 +232,8 @@ canonicalDuncanSwisherExponentFormulaBoundary :
 canonicalDuncanSwisherExponentFormulaBoundary = record
   { theorem12FullDepthImported = true
   ; doubledFormulaAvoidsDivision = true
-  ; sameCoarseFrobeniusCarrierUsed = true
+  ; exactFrickeFrobeniusCarrierReused = true
+  ; duplicateSupersingularGeometryAuthorityIntroduced = false
   ; singletonVsMultipleRationalBranchesRetained = true
   ; supportRecoveredAsCorollary = true
   ; MonsterPrimeLaneEnumerationImported = false
