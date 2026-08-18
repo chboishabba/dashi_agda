@@ -3,7 +3,8 @@ module DASHI.EverythingArgumentLevel369Hyperformalism where
 ------------------------------------------------------------------------
 -- Focused root: whole-argument transport, level-indexed proof obligations,
 -- 369/J+1/carry/Moonshine, adic hypervoxel refinement, cross-domain instances,
--- provenance dependency graph, and governance routing instance.
+-- provenance dependency graph, governance routing instance, and the focused
+-- Wikidata/JMD entity-scope handoff.
 ------------------------------------------------------------------------
 
 import DASHI.Core.RequiredAxisSupportSquareExact
@@ -34,3 +35,5 @@ import DASHI.Interop.CrossDomainLevelTransportRegression
 import DASHI.Interop.BroadMathProvenanceDependencyGraphExact
 import DASHI.Governance.ArgumentLevelAuthorityRoutingExact
 import DASHI.Governance.ArgumentHyperformalism369Regression
+
+import DASHI.Ontology.WikidataWorkingGroupEverything
