@@ -51,6 +51,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
+import DASHI.Physics.Closure.NSTriadKNComplex3AlgebraLaws as Algebra
 import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNExactSignedGalerkinCoefficient as Signed
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
@@ -103,7 +104,7 @@ sourceProductChannelsExact {F = F}
     (C3.complex zr zi) (C3.complex wr wi) =
   cong
     (C3.add F (C3.multiply F zr wr))
-    (C3.negateMultiplyLeft F zi wi)
+    (Algebra.realNegateMultiplyLeft F zi wi)
 
 orderedInteractionChannels :
   ∀ {r} {F : C3.RealField r}
@@ -135,7 +136,7 @@ signedCoefficientIsTwoChannelRealProduct :
   ≡
   C3.realEmbed F
     (channelTotal (orderedInteractionChannels system incidence testK))
-signedCoefficientIsTwoChannelRealProduct system incidence testK =
+signedCoefficientIsTwoChannelRealProduct {F = F} system incidence testK =
   let
     z = Source.transportScalar system incidence
     w = Source.testedHighResponse system incidence testK
@@ -144,7 +145,7 @@ signedCoefficientIsTwoChannelRealProduct system incidence testK =
     (Source.signedCoefficientIsRealPartOfSourceProduct system incidence testK)
     (trans
       (realProductCoordinateExact z w)
-      (cong (C3.realEmbed _)
+      (cong (C3.realEmbed F)
         (sourceProductChannelsExact z w)))
 
 round74LiteralSignedCoefficientHasCanonicalTwoRealChannels : Bool
