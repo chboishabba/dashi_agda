@@ -20,28 +20,25 @@ module DASHI.Physics.Closure.NSTriadKNChargeAllocatedFactorizationRound77Exact w
 -- is allocated BEFORE Cauchy.  For a source-native factor x*y choose a positive
 -- rational allocation scale s and reciprocal r with s*r=1, and replace
 --
---      x*y
+--      x*y  by  (s*x) * (r*y).
 --
--- by
---
---      (s*x) * (r*y).
---
--- The signed physical atom is unchanged exactly, while the Cauchy factors become
+-- The signed physical atom is unchanged exactly, while Cauchy sees
 --
 --      Q_alloc = sum (s*x)^2,
 --      W_alloc = sum (r*y)^2.
 --
--- Hence repeated consumers of one primitive x may use scales s_e satisfying
+-- Repeated consumers of one primitive x may use scales s_e satisfying
 --
 --      sum_e s_e^2 <= 1,
 --
--- which guarantees that the TOTAL allocated left charge does not exceed x^2.
--- The cost of sharing is not erased: it appears exactly as reciprocal growth in
--- W_alloc.  This is the correct replacement for assuming descendant/event
--- orthogonality merely from distinct names or distinct outputs.
+-- which guarantees that TOTAL allocated left charge does not exceed x^2.
+-- The cost of sharing appears exactly as reciprocal growth in W_alloc rather
+-- than being hidden in a disjointness/orthogonality assumption.
 --
--- No square root is used.  Requiring the allocation fraction to be a rational
--- square is constructive and matches the existing rational factor carrier.
+-- The second half of this module lifts that rescaling directly onto the SAME
+-- Round62 structured PDE atom list.  It constructs another
+-- TriadicFactorizationOverlay indexed by the identical atom carrier, so charge
+-- allocation cannot change the PDE remainder it is intended to fund.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -50,10 +47,11 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong; cong₂; subst; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; subst; sym; trans)
 
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
 import DASHI.Physics.Closure.NSTriadKNFactorizedEffectiveComplexityCauchyRound72Exact as Effective
+import DASHI.Physics.Closure.NSTriadKNStructuredTriadicFactorizationOverlayRound72Exact as Overlay
 
 record AllocationScale : Set where
   constructor allocation-scale
@@ -138,6 +136,128 @@ allocatedCauchy entries =
     (Effective.factorizedCauchy (allocatedFactors entries))
 
 ------------------------------------------------------------------------
+-- Lift allocation onto the SAME structured overlay.
+------------------------------------------------------------------------
+
+data ChargeAllocatedOverlay :
+  ∀ {atoms} → Overlay.TriadicFactorizationOverlay atoms → Set where
+  allocatedOverlay[] : ChargeAllocatedOverlay Overlay.overlay[]
+
+  allocatedOverlayTriadic :
+    ∀ {classified selected compatible value rest left right exact sourceRest} →
+    (allocation : AllocationScale) →
+    ChargeAllocatedOverlay sourceRest →
+    ChargeAllocatedOverlay
+      (Overlay.overlayTriadic
+        {classified = classified}
+        {selected = selected}
+        {compatible = compatible}
+        {value = value}
+        {rest = rest}
+        left right exact sourceRest)
+
+  allocatedOverlayCom :
+    ∀ {output selected compatible value rest sourceRest} →
+    ChargeAllocatedOverlay sourceRest →
+    ChargeAllocatedOverlay
+      (Overlay.overlayCom
+        {output = output} {selected = selected} {compatible = compatible}
+        {value = value} {rest = rest} sourceRest)
+
+  allocatedOverlayTail :
+    ∀ {value rest sourceRest} → ChargeAllocatedOverlay sourceRest →
+    ChargeAllocatedOverlay (Overlay.overlayTail {value = value} {rest = rest} sourceRest)
+
+  allocatedOverlayDuplicateKernel :
+    ∀ {value rest sourceRest} → ChargeAllocatedOverlay sourceRest →
+    ChargeAllocatedOverlay
+      (Overlay.overlayDuplicateKernel {value = value} {rest = rest} sourceRest)
+
+  allocatedOverlayCancellingKernel :
+    ∀ {left right cancellation rest sourceRest} →
+    ChargeAllocatedOverlay sourceRest →
+    ChargeAllocatedOverlay
+      (Overlay.overlayCancellingKernel
+        {left = left} {right = right} {cancellation = cancellation}
+        {rest = rest} sourceRest)
+
+  allocatedOverlayIndependentKernel :
+    ∀ {value rest sourceRest} → ChargeAllocatedOverlay sourceRest →
+    ChargeAllocatedOverlay
+      (Overlay.overlayIndependentKernel {value = value} {rest = rest} sourceRest)
+
+  allocatedOverlayLowerBoundary :
+    ∀ {reason value rest sourceRest} → ChargeAllocatedOverlay sourceRest →
+    ChargeAllocatedOverlay
+      (Overlay.overlayLowerBoundary
+        {reason = reason} {value = value} {rest = rest} sourceRest)
+
+  allocatedOverlayUpperBoundary :
+    ∀ {reason value rest sourceRest} → ChargeAllocatedOverlay sourceRest →
+    ChargeAllocatedOverlay
+      (Overlay.overlayUpperBoundary
+        {reason = reason} {value = value} {rest = rest} sourceRest)
+
+allocateOverlay :
+  ∀ {atoms} {sourceOverlay : Overlay.TriadicFactorizationOverlay atoms} →
+  ChargeAllocatedOverlay sourceOverlay → Overlay.TriadicFactorizationOverlay atoms
+allocateOverlay allocatedOverlay[] = Overlay.overlay[]
+allocateOverlay
+    (allocatedOverlayTriadic {left = left} {right = right} {exact = exact}
+      allocation rest) =
+  let
+    sourceContribution = Effective.factorized-contribution left right
+    allocated = allocatedContribution sourceContribution allocation
+    productExact = allocatedContributionProductExact sourceContribution allocation
+    allocatedExact = trans exact (sym productExact)
+  in
+  Overlay.overlayTriadic
+    (Effective.leftFactor allocated)
+    (Effective.rightFactor allocated)
+    allocatedExact
+    (allocateOverlay rest)
+allocateOverlay (allocatedOverlayCom rest) = Overlay.overlayCom (allocateOverlay rest)
+allocateOverlay (allocatedOverlayTail rest) = Overlay.overlayTail (allocateOverlay rest)
+allocateOverlay (allocatedOverlayDuplicateKernel rest) =
+  Overlay.overlayDuplicateKernel (allocateOverlay rest)
+allocateOverlay (allocatedOverlayCancellingKernel rest) =
+  Overlay.overlayCancellingKernel (allocateOverlay rest)
+allocateOverlay (allocatedOverlayIndependentKernel rest) =
+  Overlay.overlayIndependentKernel (allocateOverlay rest)
+allocateOverlay (allocatedOverlayLowerBoundary rest) =
+  Overlay.overlayLowerBoundary (allocateOverlay rest)
+allocateOverlay (allocatedOverlayUpperBoundary rest) =
+  Overlay.overlayUpperBoundary (allocateOverlay rest)
+
+allocatedOverlaySignedRemainderUnchanged :
+  ∀ {atoms} {sourceOverlay : Overlay.TriadicFactorizationOverlay atoms}
+    (allocation : ChargeAllocatedOverlay sourceOverlay) →
+  Effective.factorizedSignedSum
+    (Overlay.overlayFactors (allocateOverlay allocation))
+  ≡ Effective.factorizedSignedSum (Overlay.overlayFactors sourceOverlay)
+allocatedOverlaySignedRemainderUnchanged allocatedOverlay[] = refl
+allocatedOverlaySignedRemainderUnchanged
+    (allocatedOverlayTriadic {left = left} {right = right} allocation rest) =
+  cong₂ _+_
+    (allocatedContributionProductExact
+      (Effective.factorized-contribution left right) allocation)
+    (allocatedOverlaySignedRemainderUnchanged rest)
+allocatedOverlaySignedRemainderUnchanged (allocatedOverlayCom rest) =
+  allocatedOverlaySignedRemainderUnchanged rest
+allocatedOverlaySignedRemainderUnchanged (allocatedOverlayTail rest) =
+  allocatedOverlaySignedRemainderUnchanged rest
+allocatedOverlaySignedRemainderUnchanged (allocatedOverlayDuplicateKernel rest) =
+  allocatedOverlaySignedRemainderUnchanged rest
+allocatedOverlaySignedRemainderUnchanged (allocatedOverlayCancellingKernel rest) =
+  allocatedOverlaySignedRemainderUnchanged rest
+allocatedOverlaySignedRemainderUnchanged (allocatedOverlayIndependentKernel rest) =
+  allocatedOverlaySignedRemainderUnchanged rest
+allocatedOverlaySignedRemainderUnchanged (allocatedOverlayLowerBoundary rest) =
+  allocatedOverlaySignedRemainderUnchanged rest
+allocatedOverlaySignedRemainderUnchanged (allocatedOverlayUpperBoundary rest) =
+  allocatedOverlaySignedRemainderUnchanged rest
+
+------------------------------------------------------------------------
 -- Primitive subpartition theorem.
 ------------------------------------------------------------------------
 
@@ -186,17 +306,14 @@ primitiveSubpartitionFundsAllAllocatedCopies primitive allocations partition =
     (ℚP.*-identityʳ (L2.square primitive))
     productBound
 
-------------------------------------------------------------------------
--- Exact two-consumer sanity case: each consumer may take scale 1/2 only after
--- the source supplies a reciprocal; then total charge fraction is 1/2 rather
--- than two full copies.  The theorem above handles arbitrary finite consumers.
-------------------------------------------------------------------------
-
 round77DistinctOutputsImplyPhysicalChargeDisjointness : Bool
 round77DistinctOutputsImplyPhysicalChargeDisjointness = false
 
 round77ChargeAllocationPreservesEverySourceAtom : Bool
 round77ChargeAllocationPreservesEverySourceAtom = true
+
+round77ChargeAllocatedSameObjectOverlayConstructed : Bool
+round77ChargeAllocatedSameObjectOverlayConstructed = true
 
 round77AllocatedCauchyConstructed : Bool
 round77AllocatedCauchyConstructed = true
@@ -207,9 +324,9 @@ round77PrimitiveChargeSubpartitionConstructed = true
 round77PhysicalFinalAntichainChargeAllocationConstructed : Bool
 round77PhysicalFinalAntichainChargeAllocationConstructed = false
 
-round77ChargeAllocationPreservesEverySourceAtomIsTrue :
-  round77ChargeAllocationPreservesEverySourceAtom ≡ true
-round77ChargeAllocationPreservesEverySourceAtomIsTrue = refl
+round77ChargeAllocatedSameObjectOverlayConstructedIsTrue :
+  round77ChargeAllocatedSameObjectOverlayConstructed ≡ true
+round77ChargeAllocatedSameObjectOverlayConstructedIsTrue = refl
 
 round77PrimitiveChargeSubpartitionConstructedIsTrue :
   round77PrimitiveChargeSubpartitionConstructed ≡ true
