@@ -32,7 +32,8 @@ module DASHI.Physics.YangMills.BalabanCMP109BishopSourceRadiusEndpointExact wher
 ------------------------------------------------------------------------
 
 open import Data.Integer.Base using (+_)
-open import Data.Rational.Unnormalised as ℚ using (ℚᵘ; _/_)
+open import Data.Rational.Unnormalised as ℚ using (ℚᵘ; 0ℚᵘ; _/_)
+import Data.Rational.Unnormalised.Properties as ℚP
 
 import Real as BishopReal
 import RealProperties as BishopProperties
@@ -51,6 +52,11 @@ embed = BishopReal._⋆
 sourceRadiusValue : BishopReal.ℝ
 sourceRadiusValue = embed sourceRadius
 
+sourceRadiusPositive : BishopReal._<_ BishopReal.0ℝ sourceRadiusValue
+sourceRadiusPositive =
+  BishopProperties.p<q⇒p⋆<q⋆
+    0ℚᵘ sourceRadius (ℚP.positive⁻¹ sourceRadius)
+
 sourceQuadraticScaleIsAllowance :
   BishopReal._≃_
     (BishopReal._*_
@@ -66,13 +72,11 @@ sourceQuadraticScaleIsAllowance =
 
 sourceRadiusCoefficientEndpointModulus :
   ∀ {dataSet}
-    (inputs : Concrete.ConcreteHalfBallSeriesInputs dataSet sourceRadiusValue)
-    (sourceRadiusPositive :
-      BishopReal._<_ BishopReal.0ℝ sourceRadiusValue) →
+    (inputs : Concrete.ConcreteHalfBallSeriesInputs dataSet sourceRadiusValue) →
   BishopReal._≤_
     (Endpoint.coefficientEndpointDefect inputs sourceRadiusPositive)
     (embed sourceEndpointAllowance)
-sourceRadiusCoefficientEndpointModulus inputs sourceRadiusPositive =
+sourceRadiusCoefficientEndpointModulus inputs =
   BishopProperties.≤-respʳ-≃
     sourceQuadraticScaleIsAllowance
     (Endpoint.defectQuadraticUpper
@@ -81,14 +85,15 @@ sourceRadiusCoefficientEndpointModulus inputs sourceRadiusPositive =
 
 sourceRadiusCoefficientEndpointNonnegative :
   ∀ {dataSet}
-    (inputs : Concrete.ConcreteHalfBallSeriesInputs dataSet sourceRadiusValue)
-    (sourceRadiusPositive :
-      BishopReal._<_ BishopReal.0ℝ sourceRadiusValue) →
+    (inputs : Concrete.ConcreteHalfBallSeriesInputs dataSet sourceRadiusValue) →
   BishopReal._≤_ BishopReal.0ℝ
     (Endpoint.coefficientEndpointDefect inputs sourceRadiusPositive)
-sourceRadiusCoefficientEndpointNonnegative inputs sourceRadiusPositive =
+sourceRadiusCoefficientEndpointNonnegative inputs =
   Endpoint.defectNonnegative
     (Endpoint.positiveCoefficientEndpointModulus inputs sourceRadiusPositive)
+
+cmp109BishopSourceRadiusPositiveLevel : ProofLevel
+cmp109BishopSourceRadiusPositiveLevel = machineChecked
 
 cmp109BishopSourceRadiusOne14400Level : ProofLevel
 cmp109BishopSourceRadiusOne14400Level = machineChecked
