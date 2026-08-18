@@ -127,7 +127,7 @@ sumZeroParts a b c equality =
   aZero , (bZero , cZero)
 
 ------------------------------------------------------------------------
--- Derived modular depth classification.
+-- Derived modular depth carrier.
 ------------------------------------------------------------------------
 
 record ModularContributionDepth : Set where
@@ -176,42 +176,10 @@ quadraticBranchAllContributionsZero E M pairPositive =
     sumZero
 
 ------------------------------------------------------------------------
--- Multiple rational points, no quadratic pair: all depth is Fricke depth.
-------------------------------------------------------------------------
-
-multipleRationalResidualVanishes :
-  {p : Nat} {prime : Prime p} {ge5 : 5 ≤ p} →
-  (E : DS.DuncanSwisherExponentAuthority p prime ge5) →
-  (M : DuncanSwisherModularValuationAuthority p prime ge5 E) →
-  {fixed : Nat} →
-  DS.theorem12 E
-    ≡ DS.multipleRational {fixed = fixed}
-        {paired = DR.pairedCount (DS.sharedGeometry p prime ge5)}
-        {valuation = DS.monsterValuation E}
-        {minimumAut = DS.minimumAutomorphismOrder E}
-        (NatP.≤-refl)
-        refl
-        refl →
-  primeLevelContribution M + squareLevelContribution M ≡ 0
-multipleRationalResidualVanishes E M {fixed} impossibleShape =
-  -- This intentionally remains impossible to inhabit generically: the exact
-  -- constructor stores source equalities which cannot be reconstructed from a
-  -- bare record equality.  The usable constructor-indexed theorem below is the
-  -- proof-producing surface.
-  ⊥-elim (λ ())
-
-------------------------------------------------------------------------
 -- Constructor-indexed theorem-producing surface.  Pattern matching on the
 -- source branch exposes the actual equations without fabricating equality
 -- proofs between dependent constructor terms.
 ------------------------------------------------------------------------
-
-record ModularResidualClassification
-    (valuation minimumAut fricke residual : Nat) : Set where
-  field
-    doubledMonsterValuation : Nat
-
-open ModularResidualClassification public
 
 modularResidualByExponentCase :
   {p : Nat} {prime : Prime p} {ge5 : 5 ≤ p} →
