@@ -43,13 +43,13 @@ supportSquare = Four.assess
 ------------------------------------------------------------------------
 
 data SupportState : Set where
-  positiveOnly negativeOnly conflicting missing : SupportState
+  positiveOnly negativeOnly conflictingState missingState : SupportState
 
 supportState : SupportSquare → SupportState
 supportState (Four.assess true false) = positiveOnly
 supportState (Four.assess false true) = negativeOnly
-supportState (Four.assess true true) = conflicting
-supportState (Four.assess false false) = missing
+supportState (Four.assess true true) = conflictingState
+supportState (Four.assess false false) = missingState
 
 positiveOnlyReceipt :
   supportState (supportSquare true false) ≡ positiveOnly
@@ -60,11 +60,11 @@ negativeOnlyReceipt :
 negativeOnlyReceipt = refl
 
 conflictingReceipt :
-  supportState (supportSquare true true) ≡ conflicting
+  supportState (supportSquare true true) ≡ conflictingState
 conflictingReceipt = refl
 
 missingReceipt :
-  supportState (supportSquare false false) ≡ missing
+  supportState (supportSquare false false) ≡ missingState
 missingReceipt = refl
 
 conflictingIsNotMissing :
@@ -154,9 +154,9 @@ record MissingRequiredAxis
     (family : AxisEvidenceFamily Axis) : Set₁ where
   constructor missingRequiredAxis
   field
-    axis : Axis
-    required : Required family axis
-    missing : MissingEvidence (evidenceAt family axis)
+    missingAxisValue : Axis
+    missingAxisRequired : Required family missingAxisValue
+    missingAxisEvidence : MissingEvidence (evidenceAt family missingAxisValue)
 
 open MissingRequiredAxis public
 
@@ -165,9 +165,10 @@ record ConflictingRequiredAxis
     (family : AxisEvidenceFamily Axis) : Set₁ where
   constructor conflictingRequiredAxis
   field
-    axis : Axis
-    required : Required family axis
-    conflict : ConflictingEvidence (evidenceAt family axis)
+    conflictingAxisValue : Axis
+    conflictingAxisRequired : Required family conflictingAxisValue
+    conflictingAxisEvidence :
+      ConflictingEvidence (evidenceAt family conflictingAxisValue)
 
 open ConflictingRequiredAxis public
 
@@ -176,8 +177,9 @@ record PositiveSupportSomewhere
     (family : AxisEvidenceFamily Axis) : Set₁ where
   constructor positiveSupportSomewhere
   field
-    axis : Axis
-    positiveSupport : Four.supportsP (evidenceAt family axis) ≡ true
+    positiveAxisValue : Axis
+    positiveSupport :
+      Four.supportsP (evidenceAt family positiveAxisValue) ≡ true
 
 open PositiveSupportSomewhere public
 
@@ -189,10 +191,10 @@ missingRequiredAxisBlocksResolution :
   ⊥
 missingRequiredAxisBlocksResolution missingAxis resolved =
   missingCannotBeResolvedPositive
-    (missing missingAxis)
+    (missingAxisEvidence missingAxis)
     (resolveRequired resolved
-      (axis missingAxis)
-      (required missingAxis))
+      (missingAxisValue missingAxis)
+      (missingAxisRequired missingAxis))
 
 conflictingRequiredAxisBlocksResolvedPositive :
   ∀ {Axis}
@@ -202,10 +204,10 @@ conflictingRequiredAxisBlocksResolvedPositive :
   ⊥
 conflictingRequiredAxisBlocksResolvedPositive conflictAxis resolved =
   conflictingCannotBeResolvedPositive
-    (conflict conflictAxis)
+    (conflictingAxisEvidence conflictAxis)
     (resolveRequired resolved
-      (axis conflictAxis)
-      (required conflictAxis))
+      (conflictingAxisValue conflictAxis)
+      (conflictingAxisRequired conflictAxis))
 
 -- This is the generic non-compensation theorem: even explicit positive evidence
 -- somewhere else cannot fill a required axis whose evidence is absent.
