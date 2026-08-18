@@ -9,8 +9,23 @@ open import Data.List.Base using (List; _++_)
 import DASHI.Algebra.DisagreementFourViewBoundary as Four
 import DASHI.Reasoning.RelationalLensSynthesisCore as Lens
 
-infixl 5 _∨ᵇ_
+------------------------------------------------------------------------
+-- Claim/context/operator-indexed support-square pooling.
+--
+-- DASHI already represents a two-coordinate information carrier as
+-- PolarAssessment. IMPORTANT: the second Boolean coordinate is NOT treated
+-- here as automatically meaning classical/logical negation of the first claim.
+-- Existing DASHI foundations distinguish logical negation, algebraic inverse,
+-- orientation reversal, contextual counterposition and lens transition.
+--
+-- Logical/informational calibration:
+-- Nuel D. Belnap, "A Useful Four-Valued Logic" (1977),
+-- DOI 10.1007/978-94-010-1161-7_2.
+-- J. Michael Dunn, "Intuitive Semantics for First-Degree Entailments and
+-- 'Coupled Trees'" (1976), DOI 10.1007/BF00373152.
+------------------------------------------------------------------------
 
+infixl 5 _∨ᵇ_
 _∨ᵇ_ : Bool → Bool → Bool
 true ∨ᵇ _ = true
 false ∨ᵇ x = x
@@ -30,7 +45,8 @@ open OppositionDescriptor public
 
 record LogicalNegationQualified {Claim : Set} (opposition : OppositionDescriptor Claim) : Set where
   constructor logicalNegationQualified
-  field roleIsLogicalNegation : operatorRole opposition ≡ Lens.logicalNegationRole
+  field
+    roleIsLogicalNegation : operatorRole opposition ≡ Lens.logicalNegationRole
 open LogicalNegationQualified public
 
 contextualCounterpositionRoleIsNotLogicalNegation :
@@ -41,10 +57,7 @@ orientationReversalRoleIsNotLogicalNegation :
   Lens.orientationReversalRole ≡ Lens.logicalNegationRole → ⊥
 orientationReversalRoleIsNotLogicalNegation = Lens.orientationReversalIsNotLogicalNegation
 
-record ClaimFibreEvidence
-    (Claim Context : Set)
-    (opposition : OppositionDescriptor Claim)
-    (context : Context) : Set where
+record ClaimFibreEvidence (Claim Context : Set) (opposition : OppositionDescriptor Claim) (context : Context) : Set where
   constructor claimFibreEvidence
   field
     polarity : Four.PolarAssessment
@@ -61,12 +74,15 @@ supportsLogicalNegation : ∀ {Claim Context opposition context} → LogicalNega
 supportsLogicalNegation qualification evidence = supportsOpposingClaim evidence
 
 mergeSameFibre : ∀ {Claim Context opposition context} → ClaimFibreEvidence Claim Context opposition context → ClaimFibreEvidence Claim Context opposition context → ClaimFibreEvidence Claim Context opposition context
-mergeSameFibre left right = claimFibreEvidence
-  (mergePolarity (polarity left) (polarity right))
-  (provenance left ++ provenance right)
+mergeSameFibre left right = claimFibreEvidence (mergePolarity (polarity left) (polarity right)) (provenance left ++ provenance right)
 
-record EvidenceFibreAlignment
-    {Claim Context : Set}
+mergeSameFibreSupportsBase : ∀ {Claim Context opposition context} (left right : ClaimFibreEvidence Claim Context opposition context) → supportsBaseClaim (mergeSameFibre left right) ≡ (supportsBaseClaim left ∨ᵇ supportsBaseClaim right)
+mergeSameFibreSupportsBase (claimFibreEvidence (Four.assess p n) lp) (claimFibreEvidence (Four.assess p′ n′) rp) = refl
+
+mergeSameFibreSupportsOpposing : ∀ {Claim Context opposition context} (left right : ClaimFibreEvidence Claim Context opposition context) → supportsOpposingClaim (mergeSameFibre left right) ≡ (supportsOpposingClaim left ∨ᵇ supportsOpposingClaim right)
+mergeSameFibreSupportsOpposing (claimFibreEvidence (Four.assess p n) lp) (claimFibreEvidence (Four.assess p′ n′) rp) = refl
+
+record EvidenceFibreAlignment {Claim Context : Set}
     (leftOpposition rightOpposition : OppositionDescriptor Claim)
     (leftContext rightContext : Context) : Set where
   constructor evidenceFibreAlignment
@@ -89,6 +105,10 @@ conflict : Four.PolarAssessment
 conflict = mergePolarity supportOnly opposingSupportOnly
 ignorance : Four.PolarAssessment
 ignorance = Four.assess false false
+conflictIsBoth : conflict ≡ Four.assess true true
+conflictIsBoth = refl
+ignoranceIsNeither : ignorance ≡ Four.assess false false
+ignoranceIsNeither = refl
 
 record ClaimIndexedEvidencePolarityBoundary : Set where
   field
