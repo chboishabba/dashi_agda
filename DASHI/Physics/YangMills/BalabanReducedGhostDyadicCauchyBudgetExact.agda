@@ -40,8 +40,10 @@ module DASHI.Physics.YangMills.BalabanReducedGhostDyadicCauchyBudgetExact where
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; 1ℚ; ½; _*_; _≤_; _/_; NonNegative)
+  (ℚ; 0ℚ; 1ℚ; ½; _-_; _*_; _≤_; _/_; NonNegative)
 import Data.Rational.Properties as ℚP
+import Data.Rational.Tactic.RingSolver as ℚRing
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Analysis.CanonicalRationalMetric as Metric
@@ -53,7 +55,10 @@ import DASHI.Physics.YangMills.BalabanReducedGhostMatrixLogShiftedTailExact as S
 oneFifthBelowHalf : Fifth.oneFifth ≤ ½
 oneFifthBelowHalf =
   Norm.nonnegativeDifferenceImpliesBelow
-    (ℚP.nonNegative⁻¹ (+ 3 / 10))
+    (subst
+      (λ difference → 0ℚ ≤ difference)
+      (sym (ℚRing.solve [] : ½ - Fifth.oneFifth ≡ (+ 3 / 10)))
+      (ℚP.nonNegative⁻¹ (+ 3 / 10)))
 
 oneFifthPowerBelowDyadic : ∀ exponent →
   Neumann.rationalPower Fifth.oneFifth exponent ≤ Metric.dyadicQ exponent
@@ -82,7 +87,10 @@ oneFifthPowerBelowDyadic (suc exponent) =
 fifthTailCapBelowOne : Fifth.fifthTailCap ≤ 1ℚ
 fifthTailCapBelowOne =
   Norm.nonnegativeDifferenceImpliesBelow
-    (ℚP.nonNegative⁻¹ (+ 2499 / 2500))
+    (subst
+      (λ difference → 0ℚ ≤ difference)
+      (sym (ℚRing.solve [] : 1ℚ - Fifth.fifthTailCap ≡ (+ 2499 / 2500)))
+      (ℚP.nonNegative⁻¹ (+ 2499 / 2500)))
 
 shiftedCapBelowStartFactor : ∀ start →
   Shifted.shiftedCap start ≤ Shifted.startFactor start
