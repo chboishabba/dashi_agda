@@ -20,10 +20,7 @@ open import Ontology.Hecke.CurrentSaturatedForcedStableCollapse
     ; saturatedOrbitSummaryP2At
     )
 open import Ontology.Hecke.CurrentSaturatedOrbitSummaryCollapse
-  using
-    ( canonicalSaturatedOrbitSummary
-    ; saturatedOrbitSummary≡canonical
-    )
+  using (saturatedOrbitSummary≡canonical)
 open import Ontology.Hecke.FactorVecDefectOrbitSummaries
   using (DefectOrbitSummary)
 open import Ontology.Hecke.CurrentSaturatedSectorHistogramComputations
@@ -33,7 +30,7 @@ open import Ontology.Hecke.CurrentSaturatedSectorHistogramComputations
     )
 open import Ontology.Hecke.TriadSectorCorrelationRefinement
   using
-    ( SectorCorrelation
+    ( SectorCorrelationSummary
     ; currentSaturatedSectorCorrelationAt
     )
 
@@ -46,7 +43,7 @@ sectorHistogramObserver :
 sectorHistogramObserver = sectorHistogramsAt
 
 sectorCorrelationObserver :
-  Observer.Observer CurrentSaturatedGenerator SectorCorrelation
+  Observer.Observer CurrentSaturatedGenerator SectorCorrelationSummary
 sectorCorrelationObserver = currentSaturatedSectorCorrelationAt
 
 firstLeft : CurrentSaturatedGenerator
@@ -111,20 +108,13 @@ correlationWitnessGivesStrictRefinement correlationSeparates =
     coarseFirstPairCollides
     correlationSeparates
 
-------------------------------------------------------------------------
--- The refinement ladder is a theorem-producing interface rather than a claim
--- that either currently packaged richer observer has already separated.
-------------------------------------------------------------------------
-
 record CurrentSaturatedObserverFrontier : Set₁ where
   constructor currentSaturatedObserverFrontier
   field
     coarseObserverCollisionProved : Bool
     coarseObserverCollisionProvedIsTrue : coarseObserverCollisionProved ≡ true
-    histogramStrictnessStillRequiresWitness :
-      Set
-    correlationStrictnessStillRequiresWitness :
-      Set
+    histogramStrictnessStillRequiresWitness : Set
+    correlationStrictnessStillRequiresWitness : Set
 
 open CurrentSaturatedObserverFrontier public
 
