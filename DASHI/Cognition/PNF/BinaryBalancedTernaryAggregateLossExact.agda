@@ -30,12 +30,15 @@ open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
 open import Data.Product using (_×_; _,_)
 
+import Base369 as Base
+import DASHI.Foundations.BalancedTernaryAntipodalOrbitExact as Orbit
 import DASHI.Foundations.BalancedTernaryStageSymmetryExact as BT
 import DASHI.Foundations.DialecticCubieTetralemmaExact as Cubie
 import DASHI.Foundations.DialecticSheetFrameSelectorExact as Sheet
 import DASHI.Foundations.RepresentationChartInvariant as Chart
 import DASHI.Foundations.SSPTritCarrier as SSP
 import DASHI.Governance.EpistemicTritBalancedTernarySeparationExact as Separation
+import DASHI.Ontology.EpistemicTrit as Epistemic
 import DASHI.Reasoning.TernaryComparisonSynthesisExact as Comparison
 
 ------------------------------------------------------------------------
@@ -44,11 +47,11 @@ import DASHI.Reasoning.TernaryComparisonSynthesisExact as Comparison
 
 unresolvedEncodingRemainsPolicyIndexed :
   Separation.encodeWithPolicy Separation.neutralUnresolvedPolicy
-    Separation.Epistemic.unresolved ≡ BT.zeroDigit
+    Epistemic.unresolved ≡ BT.zeroDigit
   × Separation.encodeWithPolicy Separation.negativeUnresolvedPolicy
-    Separation.Epistemic.unresolved ≡ BT.neg
+    Epistemic.unresolved ≡ BT.neg
   × Separation.encodeWithPolicy Separation.positiveUnresolvedPolicy
-    Separation.Epistemic.unresolved ≡ BT.pos
+    Epistemic.unresolved ≡ BT.pos
 unresolvedEncodingRemainsPolicyIndexed = Separation.unresolvedEncodingDependsOnPolicy
 
 ------------------------------------------------------------------------
@@ -129,7 +132,7 @@ synthesisTwentySevenDimension : Comparison.synthesisChoiceDimension ≡ 27
 synthesisTwentySevenDimension = Comparison.synthesisChoiceDimensionIsTwentySeven
 
 comparisonBoundarySurvivesSynthesis :
-  (left right synthesis : Comparison.Base.TriTruth) →
+  (left right synthesis : Base.TriTruth) →
   Comparison.comparisonOfSynthesis
     (Comparison.makeSynthesisChoice left right synthesis)
   ≡ (left , right)
@@ -176,8 +179,7 @@ halfIsComplementFixed = refl
 centredComplementIsStrictAntipode :
   (point : BernoulliDistinguishedPoint) →
   centredPoint (complementPoint point)
-  ≡ DASHI.Foundations.BalancedTernaryAntipodalOrbitExact.strictAntipode
-      (centredPoint point)
+  ≡ Orbit.strictAntipode (centredPoint point)
 centredComplementIsStrictAntipode probabilityZero = refl
 centredComplementIsStrictAntipode probabilityHalf = refl
 centredComplementIsStrictAntipode probabilityOne = refl
