@@ -28,6 +28,7 @@ import DASHI.Ontology.LeanWikidataParentingPullbackBridge
 import DASHI.Ontology.LeanWikidataPullbackTopologyBoundary
 import DASHI.Ontology.ProgenitorParentPNFPullbackLattice
 import DASHI.Ontology.ProgenitorParentPredicateBaseChange
+import DASHI.Ontology.ProgenitorParentPredicatePullbackExact
 import DASHI.Ontology.ProgenitorParentJMDPNFTests
 import DASHI.Ontology.LeanWikidataWholeBridge
 import DASHI.Ontology.LeanWikidataWholeBridgeTests
