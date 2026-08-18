@@ -3,10 +3,13 @@ module DASHI.Ontology.ProgenitorParentJMDPNFTests where
 open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
+import DASHI.Core.FibreRestrictionCore as Fibre
+
 open import DASHI.Ontology.ProgenitorParentHyperfabric
 open import DASHI.Ontology.ProgenitorParentProjectionFibre
 open import DASHI.Ontology.LeanWikidataParentingPullbackBridge
 open import DASHI.Ontology.ProgenitorParentPNFPullbackLattice
+open import DASHI.Ontology.ProgenitorParentPredicateBaseChange
 
 jmdDonorGeneticPreservedRegression :
   jmdIsGenetic jmdDonor ≡ geneticContributor (refineJMDRole jmdDonor)
@@ -23,12 +26,12 @@ jmdFlatRoleLossRegression :
 jmdFlatRoleLossRegression = jmdRecordedParentProjectionIsLossy
 
 parentFibreRestrictionRegression :
-  parentEvidenceRestrictsWithoutRecoveringCarrier ≡ refl
-parentFibreRestrictionRegression = refl
+  Fibre.doesNotRecoverCarrier parentFibreRestrictionCore ≡ true
+parentFibreRestrictionRegression = parentEvidenceRestrictsWithoutRecoveringCarrier
 
 parentPredicateTruthBoundaryRegression :
-  parentPredicateDoesNotPromoteGlobalTruth ≡ refl
-parentPredicateTruthBoundaryRegression = refl
+  Fibre.promotesTruth parentFibreRestrictionCore ≡ false
+parentPredicateTruthBoundaryRegression = parentPredicateDoesNotPromoteGlobalTruth
 
 cultivarPredicateFibreRegression :
   progenitorP cultivarCarrier ≡ true
@@ -50,3 +53,11 @@ pullbackBoundaryRegression :
   representationDoesNotRecoverCarrier canonicalParentPullbackSynthesis ≡ true
   × predicateDoesNotPromoteTruth canonicalParentPullbackSynthesis ≡ true
 pullbackBoundaryRegression = parentPullbackKeepsProjectionBoundary
+
+predicateBaseChangeGeneticRegression :
+  geneticP (predicateCarrier (meetFibreToLeft geneticAndParentP8810)) ≡ true
+predicateBaseChangeGeneticRegression = geneticAndParentForgetsToGenetic
+
+predicateBaseChangeParentRegression :
+  genealogicalParentP (predicateCarrier (meetFibreToRight geneticAndParentP8810)) ≡ true
+predicateBaseChangeParentRegression = geneticAndParentForgetsToParent
