@@ -72,9 +72,6 @@ adoptiveParentSeparatesPredicateCoordinates = refl , refl
 
 ------------------------------------------------------------------------
 -- Predicate-restricted fibres are the concrete pullback object.
---
--- A point is simultaneously in the fibre of the Wikidata projection and in the
--- inverse image of a local parent predicate.  Both equalities remain proof data.
 ------------------------------------------------------------------------
 
 record ParentPredicateFibre
@@ -133,8 +130,11 @@ pnfUsesSameFibreCore :
 pnfUsesSameFibreCore system = PNF.fibreCore system
 
 ------------------------------------------------------------------------
--- Typed parent hyperfabric: full relation vector at the vertex stalk, local
--- semantic predicates on edge stalks. Restriction is coordinate projection.
+-- Carrier-indexed typed parent hyperfabric.
+--
+-- Each relation gets a local star-shaped fabric. The vertex stalk holds the
+-- complete RelationVector and the edge stalks hold individual predicate values.
+-- This indexed form admits a canonical GlobalSection for every carrier.
 ------------------------------------------------------------------------
 
 data ParentAxis : Set where
@@ -165,23 +165,42 @@ axisName legalParentAxis = "legal parent"
 axisName socialParentAxis = "social parent"
 axisName caregiverAxis = "caregiver"
 
-parentRelationHyperfabric : Fabric.TypedHyperfabric ParentCarrier ParentAxis
-parentRelationHyperfabric = record
+parentRelationHyperfabric :
+  ParentCarrier → Fabric.TypedHyperfabric ⊤ ParentAxis
+parentRelationHyperfabric carrier = record
   { vertexStalk = λ _ → RelationVector
   ; edgeStalk = λ _ → Bool
   ; incidence = λ _ _ → ⊤
   ; restrict = λ {edge = edge} _ relationVectorValue → axisValue edge relationVectorValue
   ; edgeProvenance = λ edge → axisName edge ∷ []
   ; edgeSalience = λ _ → zero
-  ; fabricLabel = "progenitor-parent orthogonal relation hyperfabric"
+  ; fabricLabel = "carrier-indexed progenitor-parent relation hyperfabric"
+  }
+
+parentRelationSection :
+  (carrier : ParentCarrier) →
+  Fabric.GlobalSection (parentRelationHyperfabric carrier)
+parentRelationSection carrier = record
+  { vertexValue = λ _ → carrierRelation carrier
+  ; edgeValue = λ edge → axisValue edge (carrierRelation carrier)
+  ; compatible = λ membership → refl
+  ; sectionReceipt = "parent relation vector restricts exactly to every local predicate coordinate"
   }
 
 anonymousDonorFabricNonCollapse :
-  Fabric.restrict parentRelationHyperfabric
-    {vertex = anonymousDonorCarrier} {edge = geneticAxis} tt anonymousIVFDonor ≡ true
-  × Fabric.restrict parentRelationHyperfabric
-    {vertex = anonymousDonorCarrier} {edge = genealogicalParentAxis} tt anonymousIVFDonor ≡ false
+  Fabric.edgeValue (parentRelationSection anonymousDonorCarrier) geneticAxis ≡ true
+  × Fabric.edgeValue (parentRelationSection anonymousDonorCarrier) genealogicalParentAxis ≡ false
 anonymousDonorFabricNonCollapse = refl , refl
+
+adoptiveFabricNonCollapse :
+  Fabric.edgeValue (parentRelationSection adoptiveCarrier) geneticAxis ≡ false
+  × Fabric.edgeValue (parentRelationSection adoptiveCarrier) genealogicalParentAxis ≡ true
+adoptiveFabricNonCollapse = refl , refl
+
+cultivarFabricSeparatesProgenitorFromParent :
+  Fabric.edgeValue (parentRelationSection cultivarCarrier) progenitorAxis ≡ true
+  × Fabric.edgeValue (parentRelationSection cultivarCarrier) genealogicalParentAxis ≡ false
+cultivarFabricSeparatesProgenitorFromParent = refl , refl
 
 ------------------------------------------------------------------------
 -- JMD's flat predicates land in this predicate lattice.
@@ -203,15 +222,15 @@ jmdFlatParentSurfaceRefinesToDistinctFibres :
 jmdFlatParentSurfaceRefinesToDistinctFibres = refl , (refl , refl)
 
 ------------------------------------------------------------------------
--- Structural synthesis: JMD supplies the categorical base-change/pullback
--- theorem contracts; DASHI supplies the concrete PNF fibre/hyperfabric carrier.
+-- Structural synthesis: JMD supplies categorical theorem contracts; DASHI
+-- supplies the concrete PNF fibre, predicate lattice, and indexed hyperfabric.
 ------------------------------------------------------------------------
 
 record ParentPullbackSynthesis : Set₁ where
   constructor parentPullbackSynthesis
   field
     fibreRestriction : Fibre.FibreRestrictionCore
-    fabric : Fabric.TypedHyperfabric ParentCarrier ParentAxis
+    fabricFamily : ParentCarrier → Fabric.TypedHyperfabric ⊤ ParentAxis
     jmdBaseChangeContract : LeanTheoremContract
     jmdMetaPullbackContract : LeanTheoremContract
     representationDoesNotRecoverCarrier : Bool
