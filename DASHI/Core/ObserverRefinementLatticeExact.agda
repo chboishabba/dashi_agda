@@ -65,6 +65,15 @@ AgreeOn [] x y = ⊤
 AgreeOn (observe ∷ family) x y =
   observe x ≡ observe y × AgreeOn family x y
 
+familySelfAgreement :
+  ∀ {State Value : Set}
+    (family : ObserverFamily State Value)
+    (x : State) →
+  AgreeOn family x x
+familySelfAgreement [] x = tt
+familySelfAgreement (observe ∷ family) x =
+  refl , familySelfAgreement family x
+
 SeparatingFamily :
   ∀ {State Value : Set} →
   ObserverFamily State Value → Set
@@ -111,31 +120,20 @@ record StrictFamilyRefinement
 
 open StrictFamilyRefinement public
 
-strictFamilyRefinementPreservesNonseparationWitness :
+strictFamilyRefinementBlocksCoarseSeparation :
   ∀ {State Value : Set}
     {coarse fine : ObserverFamily State Value} →
   StrictFamilyRefinement coarse fine →
   SeparatingFamily coarse →
   ⊥
-strictFamilyRefinementPreservesNonseparationWitness refinement separating =
+strictFamilyRefinementBlocksCoarseSeparation {fine = fine} refinement separating
+  with separating
+    (left refinement)
+    (right refinement)
+    (coarseCollision refinement)
+... | refl =
   fineSeparates refinement
-    (subst
-      (λ z → AgreeOn fine (left refinement) z)
-      (separating
-        (left refinement)
-        (right refinement)
-        (coarseCollision refinement))
-      (familyRefines refinement
-        (left refinement)
-        (left refinement)
-        (let selfAgreement : AgreeOn fine (left refinement) (left refinement)
-             selfAgreement = familySelfAgreement fine (left refinement)
-         in selfAgreement)))
-  where
-  familySelfAgreement :
-    ∀ {S V : Set} (fs : ObserverFamily S V) (x : S) → AgreeOn fs x x
-  familySelfAgreement [] x = tt
-  familySelfAgreement (o ∷ fs) x = refl , familySelfAgreement fs x
+    (familySelfAgreement fine (left refinement))
 
 ------------------------------------------------------------------------
 -- Pairing observers: this covers the common refinement step
@@ -167,7 +165,7 @@ strictPairRefinement :
     (extra : Observer State B)
     (x y : State) →
   coarse x ≡ coarse y →
-  extra x ≡ extra y → ⊥ →
+  (extra x ≡ extra y → ⊥) →
   StrictRefinement coarse (pairObserver coarse extra)
 strictPairRefinement coarse extra x y coarseSame extraDiff =
   strictRefinement
