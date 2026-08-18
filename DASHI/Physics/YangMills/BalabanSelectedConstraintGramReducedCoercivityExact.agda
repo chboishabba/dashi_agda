@@ -48,7 +48,7 @@ open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanFiniteRectangularRationalExact as Rect
-import DASHI.Physics.YangMills.BalabanP33PhysicalRationalWilsonPlaquetteJetExact as Physical
+import DASHI.Physics.YangMills.BalabanP33FiniteKKTAdmissibleProjectorExact as StateCarrier
 import DASHI.Physics.YangMills.BalabanP33PhysicalBackgroundGaugeParameterizedYoungExact as Radius
 import DASHI.Physics.YangMills.BalabanSelectedCombinedConstraintRowCarrierExact as Rows
 import DASHI.Physics.YangMills.BalabanSelectedCombinedConstraintFiniteKKTExact as KKT
@@ -74,8 +74,7 @@ selectedReducedConstraintGramCoercive background radius selected =
     adjointFloor :
       selectedGramReducedFloor
         * Floor.reducedCombinedMultiplierNormSq selected
-      ≤ Rect.finiteNormSq
-          DASHI.Physics.YangMills.BalabanP33FiniteKKTAdmissibleProjectorExact.physicalStateCarrier
+      ≤ Rect.finiteNormSq StateCarrier.physicalStateCarrier
           (KKT.selectedCombinedConstraintTransposeApply background raw)
     adjointFloor =
       Floor.selectedBackgroundReducedCombinedAdjointFloor
@@ -84,8 +83,7 @@ selectedReducedConstraintGramCoercive background radius selected =
     gramQuadratic :
       Rect.finiteDot Rows.selectedCombinedConstraintRowCarrier
         (KKT.selectedCombinedConstraintGramApply background raw) raw
-      ≡ Rect.finiteNormSq
-          DASHI.Physics.YangMills.BalabanP33FiniteKKTAdmissibleProjectorExact.physicalStateCarrier
+      ≡ Rect.finiteNormSq StateCarrier.physicalStateCarrier
           (KKT.selectedCombinedConstraintTransposeApply background raw)
     gramQuadratic = KKT.selectedCombinedConstraintGramQuadraticExact background raw
   in
