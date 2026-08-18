@@ -7,11 +7,14 @@ import DASHI.Culture.AmalekAuthorityProjectionBoundary as AmalekAuthority
 import DASHI.Governance.AuthorityPhaseSeparationExact as Phase
 import DASHI.Governance.AuthorityRoutingProjectionSafetyExact as Projection
 import DASHI.Governance.ExternalityCarrierAttractor as Externality
+import DASHI.Governance.InverseJusticeAttractorExact as Attractor
 import DASHI.Governance.InverseJusticeThroughputExact as Throughput
 import DASHI.Governance.JusticeCrossPollinationBridgeExact as Cross
 import DASHI.Governance.LocalGlobalCouncilGluing as CouncilGluing
+import DASHI.Governance.MandateBackedAuthorityRoutingExact as MandateRouting
 import DASHI.Governance.NonCompensatoryJusticeOrderExact as NonCompensatory
 import DASHI.Governance.OptionConeCoercionExact as Cone
+import DASHI.Governance.SecondOrderJusticeGrammarExact as SecondOrder
 import DASHI.Governance.SituatedAuthorityRoutingExact as Routing
 import DASHI.Governance.SituatedInverseJusticeFibreExact as Justice
 import DASHI.Governance.TraumaMemorySublationBoundary as TraumaMemory
@@ -77,7 +80,7 @@ strictInverseEmbedsIntoNonCompensatoryOrder =
     Justice.violatingActionIsInverseJustice
 
 ------------------------------------------------------------------------
--- Situated routing, phase separation and projection safety.
+-- Situated routing, bounded mandate, phase separation and projection safety.
 ------------------------------------------------------------------------
 
 somePoliceNecessityStillDoesNotCreateDefault :
@@ -95,6 +98,26 @@ protectiveRoleCannotSelfAuthorise :
   ⊥
 protectiveRoleCannotSelfAuthorise =
   Routing.ProtectiveRoleDoesNotSelfAuthoriseIntervention
+
+canonicalMandateBackedRouteIsConstructive :
+  MandateRouting.MandateBackedAdmissibleRoute
+    MandateRouting.demoRouting
+    MandateRouting.demoMandate
+    MandateRouting.demoInterpretation
+    MandateRouting.delegatedResponseSituation
+    MandateRouting.delegatedResponderRoute
+canonicalMandateBackedRouteIsConstructive =
+  MandateRouting.canonicalMandateBackedRoute
+
+canonicalMandateBackedRouteRetainsBoundedAuthority :
+  MandateRouting.RouteAuthorityIsDiachronicallyScoped
+    MandateRouting.demoRouting
+    MandateRouting.demoMandate
+    MandateRouting.demoInterpretation
+    MandateRouting.delegatedResponseSituation
+    MandateRouting.delegatedResponderRoute
+canonicalMandateBackedRouteRetainsBoundedAuthority =
+  MandateRouting.canonicalMandateBackedRouteIsBounded
 
 pseudoConsultationCannotEstablishCommunityGovernance :
   Routing.CommunityAuthorityWitness Chronology.canonicalConsultationEpisode →
@@ -131,7 +154,7 @@ causalOrderLossChangesResponder =
   Projection.CausalOrderLossCanChangeAdmissibleResponder
 
 ------------------------------------------------------------------------
--- Option-cone / long-horizon safety.
+-- Option-cone / long-horizon safety and recursive inverse justice.
 ------------------------------------------------------------------------
 
 immediateSafetyDoesNotDetermineLongHorizonOptimality :
@@ -156,8 +179,15 @@ canonicalOptionConeCoercionWitness :
     Cone.coerciveOutcome
 canonicalOptionConeCoercionWitness = Cone.canonicalOptionConeCoercion
 
+canonicalInverseJusticeAttractorIsInhabited :
+  Cross.InverseJusticeAttractor
+    Attractor.canonicalTraumaSystem
+    Attractor.canonicalJusticeInterpreter
+canonicalInverseJusticeAttractorIsInhabited =
+  Attractor.canonicalInverseJusticeAttractor
+
 ------------------------------------------------------------------------
--- Palestine/Amalek, externality, trauma/history and gluing cross-pollination.
+-- Palestine/Amalek, externality, trauma/history, grammar and gluing bridges.
 ------------------------------------------------------------------------
 
 enemyCompressionCannotDetermineFineJusticeAssessment :
@@ -172,6 +202,19 @@ civilianNonSubstitutionCollisionWitness :
   Cross.CivilianNonSubstitutionCollision
 civilianNonSubstitutionCollisionWitness =
   Cross.canonicalCivilianNonSubstitutionCollision
+
+secondOrderJusticeBlindGrammarWitness :
+  SecondOrder.JusticeBlindGrammarWitness
+secondOrderJusticeBlindGrammarWitness =
+  SecondOrder.secondOrderPowerCanInduceJusticeBlindnessWitness
+
+secondOrderCoarseGrammarCannotRecoverFineJusticeTreatment :
+  Intersectional.FactorsThrough
+    Enemy.rhetoricalCompression
+    Cross.fineJusticeAssessment →
+  ⊥
+secondOrderCoarseGrammarCannotRecoverFineJusticeTreatment =
+  SecondOrder.justiceNonFactorabilityBlocksCoarseGovernanceGrammar
 
 visibleCarrierCannotSelfPromoteToCoerciveAuthority :
   Externality.VisibleCarrierEstablishesSufficientCause → ⊥
