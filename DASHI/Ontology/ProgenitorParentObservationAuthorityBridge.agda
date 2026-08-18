@@ -1,6 +1,6 @@
 module DASHI.Ontology.ProgenitorParentObservationAuthorityBridge where
 
-open import DASHI.Core.Prelude
+open import DASHI.Core.Prelude using (Bool; true; false; _≡_; refl; ⊥)
 import DASHI.Core.ObserverRefinementLatticeExact as Observer
 import DASHI.Core.ConsumerIndexedRelevanceMeasure as Relevance
 import DASHI.Cognition.PNF.ProofRelevantIdentityFibres as Identity
