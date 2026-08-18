@@ -45,6 +45,7 @@ import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Co
 import DASHI.Physics.YangMills.BalabanSelectedFlatGaugeReducedFloorExact as FlatFloor
 import DASHI.Physics.YangMills.BalabanSelectedFlatGaugeRegularizedGreenExact as FlatGreen
 import DASHI.Physics.YangMills.BalabanSelectedCombinedMultiplierSplitExact as Split
+import DASHI.Physics.YangMills.BalabanSelectedGaugeMeanDecompositionExact as Mean
 
 axisStencilTotalZero :
   ∀ field axis →
@@ -196,10 +197,7 @@ flatGaugeGramApplyReduced multiplier = record
 
 flatGaugeGramCenteredExact :
   ∀ multiplier coordinate site →
-  Split.gaugeMultiplier
-    (Split.reduceSelectedMultiplier
-      (λ row →
-        FlatGreen.flatGaugeGramApply multiplier row))
+  Mean.centeredMultiplier (FlatGreen.flatGaugeGramApply multiplier)
     (Torus.pair coordinate site)
   ≡ FlatGreen.flatGaugeGramApply multiplier (Torus.pair coordinate site)
 flatGaugeGramCenteredExact multiplier coordinate site =
