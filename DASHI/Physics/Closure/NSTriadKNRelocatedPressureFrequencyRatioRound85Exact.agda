@@ -32,13 +32,12 @@ module DASHI.Physics.Closure.NSTriadKNRelocatedPressureFrequencyRatioRound85Exac
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using ([]; _∷_)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNComplexCommutativeRingExact as CRing
 import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
+import DASHI.Physics.Closure.NSTriadKNPressurePotentialGradientHessianSameModeRound85Exact as Potential
 import DASHI.Physics.Closure.NSTriadKNPressureTransportPoissonSplitRound85Exact as Transport
 
 relocatedTimesNormSquaredEqualsDotTimesSource :
@@ -58,9 +57,7 @@ relocatedTimesNormSquaredEqualsDotTimesSource :
 relocatedTimesNormSquaredEqualsDotTimesSource {F = F} {E = E} {I = I}
     system incidence =
   let
-    pHat =
-      DASHI.Physics.Closure.NSTriadKNPressurePotentialGradientHessianSameModeRound85Exact.pressurePotential
-        system (Physical.p incidence)
+    pHat = Potential.pressurePotential system (Physical.p incidence)
     dot = Transport.modeDot E (Physical.p incidence) (Physical.k incidence)
     norm = C3.realEmbed F (C3.normSquared I (Physical.p incidence))
   in
