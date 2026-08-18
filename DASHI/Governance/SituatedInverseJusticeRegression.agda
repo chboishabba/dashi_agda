@@ -2,7 +2,9 @@ module DASHI.Governance.SituatedInverseJusticeRegression where
 
 open import DASHI.Core.Prelude
 
+import DASHI.Core.FibreRestrictionCore as Fibre
 import DASHI.Core.IntersectionalNonFactorability as Intersectional
+import DASHI.Core.ProvenanceBearingQuotient as Provenance
 import DASHI.Core.RequiredAxisSupportSquareExact as RequiredAxis
 import DASHI.Culture.AmalekAuthorityProjectionBoundary as AmalekAuthority
 import DASHI.Governance.AuthorityPhaseSeparationExact as Phase
@@ -22,6 +24,7 @@ import DASHI.Governance.SecondOrderJusticeGrammarExact as SecondOrder
 import DASHI.Governance.SituatedAuthorityRoutingExact as Routing
 import DASHI.Governance.SituatedInverseJusticeFibreExact as Justice
 import DASHI.Governance.TraumaMemorySublationBoundary as TraumaMemory
+import DASHI.Governance.TransitionResidual as Transition
 import DASHI.Physics.Foundations.FrontierEnemyPersistenceExact as Frontier
 import DASHI.Physics.Foundations.SettlerEnemyAbstractionExact as Enemy
 import DASHI.Reasoning.RelationalChronologyProjectionBoundary as Chronology
@@ -102,7 +105,7 @@ pooledPositiveEvidenceCannotResolveMissingRequiredAxis =
 missingEvidenceCannotBecomeJusticeViolationEvidence :
   JusticeEvidence.ResolvedViolation
     JusticeEvidence.demoJusticeGrid
-    DASHI.Governance.TransitionResidual.rightsInvariant
+    Transition.rightsInvariant
     JusticeEvidence.authorityMandateAxis →
   ⊥
 missingEvidenceCannotBecomeJusticeViolationEvidence =
@@ -112,7 +115,7 @@ missingEvidenceCannotBecomeJusticeViolationEvidence =
 rightsEvidenceCannotFillMissingMandateCoordinate :
   JusticeEvidence.ResolvedSatisfaction
     JusticeEvidence.demoJusticeGrid
-    DASHI.Governance.TransitionResidual.rightsInvariant
+    Transition.rightsInvariant
     JusticeEvidence.authorityMandateAxis →
   ⊥
 rightsEvidenceCannotFillMissingMandateCoordinate =
@@ -212,10 +215,10 @@ publicOutcomeCannotReconstructFineJusticeProvenance =
 
 proofRelevantReceiptReopensFineJusticeProvenance :
   (record : JusticeLens.FineJusticeRecord) →
-  DASHI.Core.ProvenanceBearingQuotient.reopen
+  Provenance.reopen
     JusticeLens.justiceProvenanceBearingQuotient
-    (DASHI.Core.FibreRestrictionCore.project JusticeLens.justiceFibreCore record)
-    (DASHI.Core.ProvenanceBearingQuotient.receipt
+    (Fibre.project JusticeLens.justiceFibreCore record)
+    (Provenance.receipt
       JusticeLens.justiceProvenanceBearingQuotient record)
   ≡ record
 proofRelevantReceiptReopensFineJusticeProvenance =
