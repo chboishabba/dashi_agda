@@ -25,7 +25,7 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound61DLRTransferAuditVal
 --
 --       rowMass(Tail_m) <= (1/5)^m / 2500;
 --
--- * and the new canonical-metric bridge proves
+-- * and the canonical-metric bridge proves
 --
 --       (1/5)^m / 2500 <= (1/2)^m,
 --
@@ -51,9 +51,18 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound61DLRTransferAuditVal
 -- * explicit side-four rational CT weight satisfies
 --       1 <= w <= 6561/4096;
 -- * weighted locality therefore only needs the source-native SAME K+ weighted
---   row theorem before it feeds the ordinary G2 row bound.
--- Remaining scalar producer: selected raw/source/defect aggregate ratios and
--- the resulting one dimensionless G2 endpoint comparison.
+--   row theorem before it feeds the ordinary G2 row bound;
+-- * the final scalar comparison now has an exact non-overlapping headroom
+--   allocator:
+--
+--       raw <= H_raw
+--       2 E(B) (source+defect) <= H_green
+--       H_raw + H_green <= 55/18874368
+--       --------------------------------
+--       residualRatio <= 55/18874368.
+--
+-- Remaining physical producer: instantiate those two selected-region aggregate
+-- headroom bounds.  No sixteen-Green or eight-degree final budget remains.
 --
 -- CONTINUUM ROUTE
 -- Krzysztof Gawedzki and Antti Kupiainen,
@@ -122,6 +131,7 @@ import DASHI.Physics.YangMills.BalabanCMP109BishopPrincipalLogSourcePackageExact
 import DASHI.Physics.YangMills.BalabanCMP109BishopPrincipalLogAdPolynomialExact
 
 import DASHI.Physics.YangMills.BalabanChargeRelativeG2AggregateRatioExact
+import DASHI.Physics.YangMills.BalabanChargeRelativeG2HeadroomAllocationExact
 import DASHI.Physics.YangMills.BalabanSelectedConstraintGramReducedCoercivityExact
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundRationalCombesThomasWeightEnvelopeExact
 import DASHI.Physics.YangMills.BalabanSelectedKKTWeightedToOrdinaryRowBoundExact
