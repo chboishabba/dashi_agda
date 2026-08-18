@@ -9,7 +9,12 @@ import DASHI.Algebra.DisagreementFourViewBoundary as Four
 import DASHI.Biology.BrainProxyEvidenceAuthorityBridgeExact as Brain
 import DASHI.Biology.IntersectionalClaimEvidenceFibreExact as Intersectional
 import DASHI.Chemistry.EvidenceObligationAuthorityBridgeExact as Chemistry
+import DASHI.Cognition.PNF.BinaryBalancedTernaryAggregateLossExact as Aggregate
 import DASHI.Core.EvidenceObligationAuthoritySeparationExact as Governed
+import DASHI.Foundations.BalancedTernaryAntipodalOrbitExact as Orbit
+import DASHI.Foundations.Base369InteractionAntipodalFibreExact as Interaction
+import DASHI.Foundations.SSPTritCarrier as SSP
+import DASHI.Foundations.TernaryNineAntipodalD4SeparationExact as D4Sep
 import DASHI.Physics.Chemistry.AtomicEvidenceObligationBridgeExact as Atomic
 import DASHI.Reasoning.HyperfabricHypervoxelEvidencePolarityBridgeExact as Hyper
 import DASHI.Reasoning.RelationalLensSynthesisCore as Lens
@@ -77,3 +82,58 @@ hyperfabricDoesNotDiagnose :
     Hyper.canonicalHyperfabricHypervoxelEvidenceBoundary
   ≡ false
 hyperfabricDoesNotDiagnose = refl
+
+------------------------------------------------------------------------
+-- New action/orbit and aggregation regressions.
+------------------------------------------------------------------------
+
+zeroStillFixedUnderStrictAntipode :
+  Orbit.strictAntipode SSP.sspZero ≡ SSP.sspZero
+zeroStillFixedUnderStrictAntipode = Orbit.zeroIsAntipodeFixedCentre
+
+zeroStillNotNegativePole : SSP.sspZero ≡ SSP.sspNegOne → ⊥
+zeroStillNotNegativePole = Orbit.zeroIsNotNegativePole
+
+nineAntipodalClassesStillFive : Orbit.antipodalClass9Count ≡ 5
+nineAntipodalClassesStillFive = Orbit.antipodalClass9CountIsFive
+
+twentySevenAntipodalClassesStillFourteen : Orbit.antipodalClass27Count ≡ 14
+twentySevenAntipodalClassesStillFourteen = Orbit.antipodalClass27CountIsFourteen
+
+repoNativeThreeCubeCarrierStill19683 : Interaction.fineInteractionStateCount ≡ 19683
+repoNativeThreeCubeCarrierStill19683 = Interaction.fineInteractionStateCountIs19683
+
+blockwiseOrientationBaseStill2744 : Interaction.blockOrientationClassCount ≡ 2744
+blockwiseOrientationBaseStill2744 = Interaction.blockOrientationClassCountIs2744
+
+allNoncentralBlockOrientationFibreStillEight :
+  Interaction.allThreeNoncentralOrientationFibreSize ≡ 8
+allNoncentralBlockOrientationFibreStillEight =
+  Interaction.allThreeNoncentralOrientationFibreSizeIsEight
+
+aggregateZeroStillHasNontrivialFineFibre :
+  Interaction.aggregateSum Interaction.structuralZeroRound
+  ≡ Interaction.aggregateSum Interaction.cancellationZeroRound
+aggregateZeroStillHasNontrivialFineFibre =
+  proj₁ Interaction.cancellationToNeutralDoesNotImplyTrivialFineState
+
+aggregateZeroDoesNotIdentifyFineStates :
+  Interaction.structuralZeroRound ≡ Interaction.cancellationZeroRound → ⊥
+aggregateZeroDoesNotIdentifyFineStates =
+  proj₂ Interaction.cancellationToNeutralDoesNotImplyTrivialFineState
+
+binaryCountStillErasesDisagreementDirection :
+  Aggregate.acceptCount (Aggregate.binaryProjectPositiveOnly Aggregate.forwardDisagreement)
+  ≡ Aggregate.acceptCount (Aggregate.binaryProjectPositiveOnly Aggregate.reverseDisagreement)
+binaryCountStillErasesDisagreementDirection =
+  Aggregate.aggregateErasesDisagreementDirection
+
+halfPointStillComplementFixed :
+  Aggregate.complementPoint Aggregate.probabilityHalf ≡ Aggregate.probabilityHalf
+halfPointStillComplementFixed = Aggregate.halfIsComplementFixed
+
+fiveAntipodalClassesStillNotFiveD4IrrepSpecies :
+  D4Sep.TernaryNineAntipodalD4Boundary.fiveAntipodalOrbitClassesAreFiveD4IrrepSpecies
+    D4Sep.canonicalTernaryNineAntipodalD4Boundary
+  ≡ false
+fiveAntipodalClassesStillNotFiveD4IrrepSpecies = refl
