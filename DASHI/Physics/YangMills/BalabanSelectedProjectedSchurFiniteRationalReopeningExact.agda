@@ -48,7 +48,7 @@ open import Data.Rational.Base as ℚ using
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using
-  (cong; trans)
+  (cong; sym; trans)
 open import Relation.Nullary.Decidable.Core using (toWitness)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
