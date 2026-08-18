@@ -22,3 +22,8 @@ import DASHI.Ontology.LeanWikidataDerivationFibreAdapter
 import DASHI.Ontology.LeanWikidataRelationalLensBridge
 import DASHI.Ontology.LeanWikidataWholeBridge
 import DASHI.Ontology.LeanWikidataWholeBridgeTests
+
+-- Later JMD/Aristotle epistemic/class-algebra source and the end-to-end
+-- source/transcription/alignment/target contradiction-attribution weld.
+import DASHI.Ontology.LeanWikidataLatestEpistemicConformanceBridge
+import DASHI.Ontology.CrossOntologyContradictionEverything
