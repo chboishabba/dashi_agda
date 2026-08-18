@@ -52,7 +52,7 @@ open import Data.Rational using
   (ℚ; 0ℚ; 1ℚ; Positive; _*_; _≤_; 1/_; _≟_; ≢-nonZero)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
 open import Relation.Nullary using (yes; no)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
@@ -79,11 +79,6 @@ record ReciprocalFrameWeight (frameProduct rho : ℚ) : Set where
 
 open ReciprocalFrameWeight public
 
-------------------------------------------------------------------------
--- Construct the reciprocal canonically from positivity.  This is the same
--- standard-library arithmetic pattern already used in the YM Gate-4 lane.
-------------------------------------------------------------------------
-
 data Empty : Set where
 
 emptyEliminate : ∀ {A : Set} → Empty → A
@@ -107,17 +102,40 @@ safeRationalReciprocalTimesPositive value positive with value ≟ 0ℚ
 ... | no value≢zero =
   ℚP.*-inverseˡ value {{≢-nonZero value≢zero}}
 
+safeRationalReciprocalPositive :
+  ∀ (value : ℚ) → Positive value → Positive (safeRationalReciprocal value)
+safeRationalReciprocalPositive value positive with value ≟ 0ℚ
+... | yes value≡zero =
+  emptyEliminate
+    (positiveZeroImpossible (subst Positive value≡zero positive))
+... | no value≢zero =
+  let
+    instance
+      valuePositive : Positive value
+      valuePositive = positive
+  in
+  ℚP.1/pos⇒pos value
+
 positiveFrameReciprocal :
   ∀ frameProduct → Positive frameProduct →
   ReciprocalFrameWeight frameProduct (safeRationalReciprocal frameProduct)
-positiveFrameReciprocal frameProduct positive = record
-  { rhoNonnegative =
-      ℚP.<⇒≤ (ℚP.reciprocal-positive positive)
-  ; reciprocalExact =
-      trans
-        (ℚP.*-comm frameProduct (safeRationalReciprocal frameProduct))
-        (safeRationalReciprocalTimesPositive frameProduct positive)
-  }
+positiveFrameReciprocal frameProduct positive =
+  let
+    reciprocalPositive = safeRationalReciprocalPositive frameProduct positive
+    instance
+      reciprocalPositiveInstance : Positive (safeRationalReciprocal frameProduct)
+      reciprocalPositiveInstance = reciprocalPositive
+      reciprocalNonnegativeInstance =
+        ℚP.pos⇒nonNeg (safeRationalReciprocal frameProduct)
+  in
+  record
+    { rhoNonnegative =
+        ℚP.nonNegative⁻¹ (safeRationalReciprocal frameProduct)
+    ; reciprocalExact =
+        trans
+          (ℚP.*-comm frameProduct (safeRationalReciprocal frameProduct))
+          (safeRationalReciprocalTimesPositive frameProduct positive)
+    }
 
 reciprocalFrameWeightTurnsProductChargeIntoCharge :
   ∀ {x charge frame rho} →
@@ -131,18 +149,15 @@ reciprocalFrameWeightTurnsProductChargeIntoCharge
   let
     productNN : 0ℚ ≤ charge * frame
     productNN = ℚP.0≤*0≤ chargeNN
-
     scaled : rho * x ≤ rho * (charge * frame)
     scaled =
       RationalL2.nonnegativeProductMonotone
         (rhoNonnegative weighted) xNN
         (rhoNonnegative weighted) productNN
         ℚP.≤-refl xBelow
-
     commuteToReciprocal :
       rho * (charge * frame) ≡ charge * (frame * rho)
     commuteToReciprocal = solve (rho ∷ charge ∷ frame ∷ [])
-
     collapse : charge * (frame * rho) ≡ charge
     collapse =
       trans
@@ -175,14 +190,11 @@ literalFixedOutputSquareBelowChargeTimesFrame
   let
     overlay = Static.staticRationalTwoChannelOverlay
       system output commutatorValue hh
-
     cauchy = Static.staticRationalTwoChannelCauchy
       system output commutatorValue hh
-
     frameBound =
       Frame.staticRationalOverlayEffectiveComplexityFrameBound
         O system output outputNonzero commutatorValue hh
-
     chargeNN = Effective.concentrationChargeNonnegative
       (Two.twoChannelFactors overlay)
     complexityNN = Effective.effectiveComplexityNonnegative
@@ -195,7 +207,6 @@ literalFixedOutputSquareBelowChargeTimesFrame
         (Cube.cutoffModes (Audit.cutoff system))
     frameNN : 0ℚ ≤ R76.literalOutputFrameProduct system output
     frameNN = ℚP.0≤*0≤ outputNN cutoffNN
-
     productBound :
       Two.twoChannelCharge overlay * Two.twoChannelEffectiveComplexity overlay
       ≤ Two.twoChannelCharge overlay * R76.literalOutputFrameProduct system output
