@@ -6,12 +6,19 @@ module DASHI.Moonshine.MonsterFrickeCasselmanHighestAlphaEverything where
 -- GLOBAL PRIME-SET SIDE -- CLOSED AT EXPLICIT PUBLISHED AUTHORITY BOUNDARIES
 --
 --   actual Monster order divisibility
---     <=> Duncan--Ono/Ogg coarse supersingular rationality
+--     <=> Ogg/Duncan--Ono supersingular rationality
 --     <=> Deligne--Rapoport/Fricke coarse Frobenius fully fixed
 --     <=> g(X_0^+(p)) = 0
 --
--- for primes p >= 5 covered by the prime-level geometric authority.
--- No MonsterPrimeLane / SSP15 finite table participates in that chain.
+-- for every proof-relevant prime p.  The source provenance is deliberately
+-- split:
+--
+--   p = 2,3 : explicit classical low-level Fricke genus-zero authority;
+--   p >= 5  : published prime-level special-fibre geometry.
+--
+-- The case split is derived internally from stdlib primality.  No
+-- MonsterPrimeLane / SSP15 finite table and no finite under-72 Fricke table
+-- participates in the arbitrary-prime theorem.
 --
 -- LOCAL p11 SIDE -- RESOLVED AT THE CORRECT REPRESENTATION LEVEL
 --
@@ -28,10 +35,10 @@ module DASHI.Moonshine.MonsterFrickeCasselmanHighestAlphaEverything where
 -- Their intersection has exactly two coordinates.  The remaining transverse
 -- line admits two integral alignments fixing that common plane.
 --
--- NEW LOCAL AUDIT
+-- LOCAL NON-CANONICITY AUDIT
 --
--- The classical degeneracy basis is now tied to Schmidt's n=2 Casselman cells
--- in the source-backed order
+-- The classical degeneracy basis is tied to Schmidt's n=2 Casselman cells in
+-- the source-backed order
 --
 --   (wide,left,right) = (valuation0,terminal2,valuation1),
 --
@@ -62,8 +69,8 @@ module DASHI.Moonshine.MonsterFrickeCasselmanHighestAlphaEverything where
 --
 -- does NOT canonically select a fixed-space coordinate alignment.
 --
--- A Whittaker/test-vector normalization may still select a preferred chart for
--- a downstream consumer, but it is OPTIONAL extra coordinate structure and is
+-- A Whittaker/test-vector normalization may select a preferred chart for a
+-- downstream consumer, but it is OPTIONAL extra coordinate structure and is
 -- not required by the representation-level Jacquet--Langlands theorem.
 ------------------------------------------------------------------------
 
@@ -72,7 +79,8 @@ open import Data.Nat using (_≤_)
 open import Data.Nat.Primality using (Prime)
 
 import DASHI.Moonshine.MonsterOrderDivisibilityExact as Monster
-import DASHI.Moonshine.PublishedMonsterFrickeGenusZeroExact as Global
+import DASHI.Moonshine.PublishedMonsterFrickeGenusZeroExact as GlobalGe5
+import DASHI.Moonshine.PublishedMonsterFrickeAllSupportedPrimesExact as GlobalAll
 import DASHI.Moonshine.PublishedPrimeLevelFrickeSelectorPinnedExact as Fricke
 import DASHI.Moonshine.PrimeLevelDeligneRapoportFrickeSelectorExact as Selector
 import DASHI.Moonshine.CasselmanUnramifiedPGL2FixedVectorTowerExact as Casselman
@@ -88,11 +96,41 @@ import DASHI.Moonshine.P11CasselmanBruhatDegeneracyChartExact as BruhatChart
 import DASHI.Moonshine.P11Level44TransverseSatakeNonUniquenessExact as TransverseSatake
 import DASHI.Moonshine.P11JacquetLanglandsCoordinateNonCanonicityExact as CoordinateNoGo
 
-monsterPrimeGenusZeroRegression :
+------------------------------------------------------------------------
+-- Global Monster / Fricke regressions.
+------------------------------------------------------------------------
+
+monsterPrimeGenusZeroGe5Regression :
   (p : Nat) → (prime : Prime p) → (ge5 : 5 ≤ p) →
   Monster.PrimeDividesMonsterOrder p
   ↔ Selector.genericFrickeGenus (Fricke.publishedAuthorityAt p prime ge5) ≡ 0
-monsterPrimeGenusZeroRegression = Global.monsterPrimeIffFrickeGenusZero
+monsterPrimeGenusZeroGe5Regression = GlobalGe5.monsterPrimeIffFrickeGenusZero
+
+monsterPrimeGenusZeroAllPrimesRegression :
+  (p : Nat) → (prime : Prime p) →
+  Monster.PrimeDividesMonsterOrder p
+  ↔ GlobalAll.primeFrickeGenus p prime ≡ 0
+monsterPrimeGenusZeroAllPrimesRegression =
+  GlobalAll.primeMonsterIffFrickeGenusZero
+
+primeCaseExhaustionRegression :
+  GlobalAll.arbitraryPrimeCaseExhaustionDerivedInternally
+    GlobalAll.canonicalPublishedMonsterFrickeAllSupportedPrimesBoundary ≡ true
+primeCaseExhaustionRegression = refl
+
+lowPrimeMonsterLaneStillUnusedRegression :
+  GlobalAll.MonsterPrimeLaneImported
+    GlobalAll.canonicalPublishedMonsterFrickeAllSupportedPrimesBoundary ≡ false
+lowPrimeMonsterLaneStillUnusedRegression = refl
+
+lowPrimeFiniteFrickeTableStillUnusedRegression :
+  GlobalAll.finiteUnder72FrickeTableImported
+    GlobalAll.canonicalPublishedMonsterFrickeAllSupportedPrimesBoundary ≡ false
+lowPrimeFiniteFrickeTableStillUnusedRegression = refl
+
+------------------------------------------------------------------------
+-- Local p11 representation / coordinate regressions.
+------------------------------------------------------------------------
 
 casselmanLevelFourDimensionRegression :
   Casselman.fixedDimension Casselman.publishedP11LocalUnramifiedTower 2 ≡ 3
@@ -129,7 +167,7 @@ localSameObjectSeamResolvedRegression :
 localSameObjectSeamResolvedRegression = refl
 
 ------------------------------------------------------------------------
--- New local bad-prime / Satake regressions.
+-- Local bad-prime / Satake regressions.
 ------------------------------------------------------------------------
 
 internalR2CannotBeRecoveredByConjugacyRegression :
@@ -174,7 +212,7 @@ whittakerOptionalForPreferredCoordinatesRegression :
     CoordinateNoGo.canonicalP11JacquetLanglandsCoordinateNonCanonicityBoundary ≡ true
 whittakerOptionalForPreferredCoordinatesRegression = refl
 
-finiteMonsterLaneTableStillUnusedRegression :
-  Global.MonsterPrimeLaneTableUsed
-    Global.canonicalPublishedMonsterFrickeGenusZeroBoundary ≡ false
-finiteMonsterLaneTableStillUnusedRegression = refl
+finiteMonsterLaneTableStillUnusedGe5Regression :
+  GlobalGe5.MonsterPrimeLaneTableUsed
+    GlobalGe5.canonicalPublishedMonsterFrickeGenusZeroBoundary ≡ false
+finiteMonsterLaneTableStillUnusedGe5Regression = refl
