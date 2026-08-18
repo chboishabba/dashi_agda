@@ -40,14 +40,17 @@ module DASHI.Physics.Closure.NSTriadKNFixedOutputTwoChannelFrameRound75Exact whe
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Sigma using (Σ; _,_)
-open import Data.Integer.Base using (ℤ; _+_; _-_)
+open import Data.Empty using (⊥; ⊥-elim)
+open import Data.Integer.Base using (ℤ; _-_)
 import Data.Integer.Properties as Int
-open import Data.Product.Base using (_×_; _,_; proj₁; proj₂)
+open import Data.Product.Base using (_×_; _,_; proj₂)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong; cong₂; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using
+  (cong; cong₂; subst; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier as Cube
@@ -65,6 +68,7 @@ import DASHI.Physics.Closure.NSTriadKNRationalComplex3LerayPythagoras as Leray
 import DASHI.Physics.Closure.NSTriadKNLuoPhysicalFiveClassSupportRound25Exact as Support
 import DASHI.Physics.Closure.NSTriadKNStaticPairingEmitsStructuredTriadicAtomsRound72Exact as Fine
 import DASHI.Physics.Closure.NSTriadKNFactorizedEffectiveComplexityCauchyRound72Exact as Effective
+import DASHI.Physics.Closure.NSTriadKNOrderedInteractionTwoChannelMassIdentityRound74Exact as Mass
 import DASHI.Physics.Closure.NSTriadKNTwoChannelStructuredCauchyOverlayRound74Exact as Overlay
 import DASHI.Physics.Closure.NSTriadKNCanonicalTwoChannelPhysicalMassBoundsRound75Exact as Bounds
 import DASHI.Physics.Closure.NSTriadKNStaticRationalTwoChannelOverlayRound75Exact as Static
@@ -105,39 +109,18 @@ pDeterminedByQAndOutput left right qExact kExact =
     (trans
       (pCoordinateFromQK left Z3.kx)
       (trans
-        (cong₂ _-_
-          (cong Z3.kx kExact)
-          (cong Z3.kx qExact))
+        (cong₂ _-_ (cong Z3.kx kExact) (cong Z3.kx qExact))
         (sym (pCoordinateFromQK right Z3.kx))))
     (trans
       (pCoordinateFromQK left Z3.ky)
       (trans
-        (cong₂ _-_
-          (cong Z3.ky kExact)
-          (cong Z3.ky qExact))
+        (cong₂ _-_ (cong Z3.ky kExact) (cong Z3.ky qExact))
         (sym (pCoordinateFromQK right Z3.ky))))
     (trans
       (pCoordinateFromQK left Z3.kz)
       (trans
-        (cong₂ _-_
-          (cong Z3.kz kExact)
-          (cong Z3.kz qExact))
+        (cong₂ _-_ (cong Z3.kz kExact) (cong Z3.kz qExact))
         (sym (pCoordinateFromQK right Z3.kz))))
-
-fixedOutputQInjective :
-  ∀ {cutoff output left right} →
-  left Cube.∈ Output.physicalOutputFiber cutoff output →
-  right Cube.∈ Output.physicalOutputFiber cutoff output →
-  Physical.q left ≡ Physical.q right →
-  left ≡ right
-fixedOutputQInjective leftMember rightMember qExact =
-  let
-    kExact = trans
-      (Output.physicalOutputFiberSound leftMember)
-      (sym (Output.physicalOutputFiberSound rightMember))
-    pExact = pDeterminedByQAndOutput _ _ qExact kExact
-  in
-  Permutation.physicalIncidenceExtPQ _ _ pExact qExact
 
 qModes : List Physical.PhysicalTriadIncidence → List Z3.FourierMode
 qModes [] = []
@@ -157,13 +140,13 @@ qModePreimage {triads = head ∷ tail} (Cube.there member)
   τ , (Cube.there τMember , equality)
 
 fixedOutputQModesNoDuplicatesGeneral :
-  ∀ {cutoff output triads} →
+  ∀ {output triads} →
   Cube.NoDuplicates triads →
   (∀ τ → τ Cube.∈ triads → Physical.k τ ≡ output) →
   Cube.NoDuplicates (qModes triads)
 fixedOutputQModesNoDuplicatesGeneral Cube.unique[] allOutput = Cube.unique[]
 fixedOutputQModesNoDuplicatesGeneral
-    {cutoff} {output} {triads = head ∷ tail}
+    {output} {triads = head ∷ tail}
     (Cube.unique∷ fresh restUnique) allOutput =
   Cube.unique∷ headQFresh tailUnique
   where
@@ -184,11 +167,12 @@ fixedOutputQModesNoDuplicatesGeneral
       pEqual = pDeterminedByQAndOutput head τ qEqual kEqual
       triadEqual = Permutation.physicalIncidenceExtPQ head τ pEqual qEqual
       headInTail : head Cube.∈ tail
-      headInTail = subst (_Cube.∈ tail) (sym triadEqual) τMember
+      headInTail =
+        subst (λ selected → selected Cube.∈ tail) (sym triadEqual) τMember
     in fresh headInTail
 
 fixedOutputQModesNoDuplicates :
-  (cutoff : Agda.Builtin.Nat.Nat) (output : Z3.FourierMode) →
+  (cutoff : Nat) (output : Z3.FourierMode) →
   Cube.NoDuplicates (qModes (Output.physicalOutputFiber cutoff output))
 fixedOutputQModesNoDuplicates cutoff output =
   fixedOutputQModesNoDuplicatesGeneral
@@ -202,11 +186,11 @@ fixedOutputQModesInCutoff :
   ∀ {cutoff output mode} →
   mode Cube.∈ qModes (Output.physicalOutputFiber cutoff output) →
   mode Cube.∈ Cube.cutoffModes cutoff
-fixedOutputQModesInCutoff {cutoff} {output} {mode} member
+fixedOutputQModesInCutoff {cutoff} member
   with qModePreimage member
 ... | τ , (τMember , modeEqualsQ) =
   subst
-    (_Cube.∈ Cube.cutoffModes cutoff)
+    (λ selected → selected Cube.∈ Cube.cutoffModes cutoff)
     (sym modeEqualsQ)
     (proj₂ (Fixed.fixedOutputInputCutoff τMember))
 
@@ -230,26 +214,30 @@ sumMassRemoveAtExact mass (Cube.here refl) = refl
 sumMassRemoveAtExact mass {x = x} {xs = y ∷ ys} (Cube.there member) =
   trans
     (cong (mass y +_) (sumMassRemoveAtExact mass member))
-    (solve
-      ( mass y
-      ∷ mass x
-      ∷ sumMass mass (removeAt member)
-      ∷ []))
+    (solve (mass y ∷ mass x ∷ sumMass mass (removeAt member) ∷ []))
 
 otherMemberSurvivesRemoval :
   ∀ {A : Set} {x z : A} {xs : List A}
     (selected : x Cube.∈ xs) →
   z Cube.∈ xs →
-  (z ≡ x → Data.Empty.⊥) →
+  (z ≡ x → ⊥) →
   z Cube.∈ removeAt selected
 otherMemberSurvivesRemoval (Cube.here refl) (Cube.here equality) different =
-  Data.Empty.⊥-elim (different equality)
+  ⊥-elim (different equality)
 otherMemberSurvivesRemoval (Cube.here refl) (Cube.there member) different = member
 otherMemberSurvivesRemoval (Cube.there selected) (Cube.here equality) different =
   Cube.here equality
 otherMemberSurvivesRemoval
     (Cube.there selected) (Cube.there member) different =
   Cube.there (otherMemberSurvivesRemoval selected member different)
+
+sumMassNonnegative :
+  ∀ {A : Set} (mass : A → ℚ) →
+  (∀ x → 0ℚ ≤ mass x) →
+  ∀ xs → 0ℚ ≤ sumMass mass xs
+sumMassNonnegative mass massNN [] = ℚP.≤-refl
+sumMassNonnegative mass massNN (x ∷ xs) =
+  ℚP.+-mono-≤ (massNN x) (sumMassNonnegative mass massNN xs)
 
 uniqueRestrictionMassBound :
   ∀ {A : Set}
@@ -260,11 +248,7 @@ uniqueRestrictionMassBound :
   (∀ x → x Cube.∈ selected → x Cube.∈ full) →
   sumMass mass selected ≤ sumMass mass full
 uniqueRestrictionMassBound mass massNN Cube.unique[] subset =
-  let
-    fullNN : ∀ xs → 0ℚ ≤ sumMass mass xs
-    fullNN [] = ℚP.≤-refl
-    fullNN (x ∷ xs) = ℚP.+-mono-≤ (massNN x) (fullNN xs)
-  in fullNN _
+  sumMassNonnegative mass massNN _
 uniqueRestrictionMassBound mass massNN
     {selected = x ∷ xs} {full}
     (Cube.unique∷ fresh restUnique) subset =
@@ -278,13 +262,12 @@ uniqueRestrictionMassBound mass massNN
         xMember
         (subset z (Cube.there zMember))
         (λ zEqualsX →
-          fresh (subst (_Cube.∈ xs) zEqualsX zMember))
+          fresh
+            (subst (λ selected → selected Cube.∈ xs) zEqualsX zMember))
 
-    tailBound :
-      sumMass mass xs ≤ sumMass mass (removeAt xMember)
+    tailBound : sumMass mass xs ≤ sumMass mass (removeAt xMember)
     tailBound =
-      uniqueRestrictionMassBound
-        mass massNN restUnique tailSubsetRemoved
+      uniqueRestrictionMassBound mass massNN restUnique tailSubsetRemoved
 
     addHead :
       mass x + sumMass mass xs
@@ -297,14 +280,13 @@ uniqueRestrictionMassBound mass massNN
     addHead
 
 ------------------------------------------------------------------------
--- Apply the restriction theorem to the q-energy of one output fibre.
+-- Apply the restriction theorem to q-energy on one output fibre.
 ------------------------------------------------------------------------
 
 modeEnergy :
   ∀ {E : C3.IntegerEmbedding F}
     {I : C3.ModeInverseSquare F E} →
-  Audit.FiniteComplex3GalerkinSystem F E I →
-  Z3.FourierMode → ℚ
+  Audit.FiniteComplex3GalerkinSystem F E I → Z3.FourierMode → ℚ
 modeEnergy system mode =
   L2.complex3NormSquared (Audit.velocityAt system mode)
 
@@ -312,8 +294,7 @@ modeEnergyNonnegative :
   ∀ {E : C3.IntegerEmbedding F}
     {I : C3.ModeInverseSquare F E}
     (system : Audit.FiniteComplex3GalerkinSystem F E I)
-    mode →
-  0ℚ ≤ modeEnergy system mode
+    mode → 0ℚ ≤ modeEnergy system mode
 modeEnergyNonnegative system mode =
   Separation.complex3NormSquaredNonnegative (Audit.velocityAt system mode)
 
@@ -327,8 +308,7 @@ cutoffEnergy system =
 fixedOutputQEnergy :
   ∀ {E : C3.IntegerEmbedding F}
     {I : C3.ModeInverseSquare F E} →
-  Audit.FiniteComplex3GalerkinSystem F E I →
-  Z3.FourierMode → ℚ
+  Audit.FiniteComplex3GalerkinSystem F E I → Z3.FourierMode → ℚ
 fixedOutputQEnergy system output =
   sumMass
     (modeEnergy system)
@@ -386,22 +366,24 @@ rawCanonicalWSumFixedOutputBound
     headNonzero : Z3.NonZeroMode (Physical.k head)
     headNonzero = subst Z3.NonZeroMode (sym headK) outputNonzero
 
-    local = Bounds.orderedInteractionCanonicalWBound
-      O system head headNonzero (Static.outputVelocityTest system head)
+    headClassified = Support.classifyOnePhysicalTriad head
+    headMass =
+      Mass.rightChannelSquaredMass
+        (Static.channelsForClassified system headClassified)
 
-    kMassExact :
-      modeEnergy system (Physical.k head) ≡ modeEnergy system output
-    kMassExact = cong (modeEnergy system) headK
+    local :
+      headMass
+      ≤ modeEnergy system (Physical.k head) * modeEnergy system (Physical.q head)
+    local =
+      Bounds.orderedInteractionCanonicalWBound
+        O system head headNonzero (Static.outputVelocityTest system head)
 
     localFixed :
-      Sum.canonicalWSum system (Support.classifyOnePhysicalTriad head ∷ [])
-      ≤ modeEnergy system output * modeEnergy system (Physical.q head)
+      headMass ≤ modeEnergy system output * modeEnergy system (Physical.q head)
     localFixed =
       subst
-        (λ kMass →
-          Sum.canonicalWSum system (Support.classifyOnePhysicalTriad head ∷ [])
-          ≤ kMass * modeEnergy system (Physical.q head))
-        kMassExact
+        (λ kMass → headMass ≤ kMass * modeEnergy system (Physical.q head))
+        (cong (modeEnergy system) headK)
         local
 
     tailOutput : ∀ τ → τ Cube.∈ tail → Physical.k τ ≡ output
@@ -435,24 +417,16 @@ fixedOutputCanonicalWSumFrameBound :
 fixedOutputCanonicalWSumFrameBound O system output outputNonzero =
   let
     fibre = Output.physicalOutputFiber (Audit.cutoff system) output
-    first :
-      rawCanonicalWSum system fibre
-      ≤ modeEnergy system output * rawQEnergy system fibre
-    first = rawCanonicalWSumFixedOutputBound
-      O system output outputNonzero fibre
-      (λ τ member → Output.physicalOutputFiberSound member)
+    first =
+      rawCanonicalWSumFixedOutputBound
+        O system output outputNonzero fibre
+        (λ τ member → Output.physicalOutputFiberSound member)
 
     restriction = fixedOutputQEnergyBelowCutoffEnergy system output
     outputNN = modeEnergyNonnegative system output
-    qNN : 0ℚ ≤ fixedOutputQEnergy system output
-    qNN =
-      let
-        sumNN : ∀ modes → 0ℚ ≤ sumMass (modeEnergy system) modes
-        sumNN [] = ℚP.≤-refl
-        sumNN (mode ∷ modes) =
-          ℚP.+-mono-≤ (modeEnergyNonnegative system mode) (sumNN modes)
-      in sumNN _
-    cutoffNN : 0ℚ ≤ cutoffEnergy system
+    qNN = sumMassNonnegative
+      (modeEnergy system) (modeEnergyNonnegative system)
+      (qModes fibre)
     cutoffNN = ℚP.≤-trans qNN restriction
     scaled =
       L2.nonnegativeProductMonotone
