@@ -2,6 +2,7 @@ module DASHI.Governance.SituatedInverseJusticeRegression where
 
 open import DASHI.Core.Prelude
 
+import DASHI.Core.IntersectionalNonFactorability as Intersectional
 import DASHI.Governance.SituatedInverseJusticeFibreExact as Justice
 
 ------------------------------------------------------------------------
@@ -28,9 +29,9 @@ rightsPreservingTransitionIsNotInverseJustice =
   Justice.preservingActionIsNotInverseJustice
 
 intersectionalFlatteningCannotRecoverRelationalJusticeSign :
-  Justice.Intersectional.FactorsThrough
-    Justice.Intersectional.flatProjection
-    Justice.Intersectional.relationalOutcome →
+  Intersectional.FactorsThrough
+    Intersectional.flatProjection
+    Intersectional.relationalOutcome →
   ⊥
 intersectionalFlatteningCannotRecoverRelationalJusticeSign =
   Justice.intersectionalFlatteningCannotDetermineJusticeSign
