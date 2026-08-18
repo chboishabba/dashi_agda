@@ -27,6 +27,13 @@ module DASHI.Moonshine.MarkedHeckeDeckCollisionEverything where
 --   exact standard-block T3 annihilator and theorem-level T5(T3), F(T3)
 --   polynomial identities.
 --
+-- Generic auxiliary-level no-go:
+--   if prime-to-level Hecke acts only on a global factor, then not only each
+--   prime but every finite Hecke WORD and the pointwise family of ALL words
+--   remain blind to a nontrivial deck fibre.  Every such word also commutes
+--   with every deck-only endomorphism.  This is compositional/monoid closure,
+--   not an unproved additive Hecke-algebra identification.
+--
 -- p=43 supplies a second independent non-Ogg geometric Frobenius control.
 -- Coarse geometric Frobenius pair defect remains the first current Ogg/control
 -- separator: p11=0, p37=1, p43=1.  Its all-prime geometric theorem remains a
@@ -58,6 +65,7 @@ import DASHI.Moonshine.P43NonOggFullLevel2DeuringControlExact as P43
 import DASHI.Moonshine.P11P37MarkedDeckSelectorCutsetExact as SelectorCutset
 import DASHI.Moonshine.AuxiliaryLevelHeckeDeckFactorizationExact as Aux
 import DASHI.Moonshine.AuxiliaryLevelHeckeObserverNoGoExact as ObserverNoGo
+import DASHI.Moonshine.AuxiliaryLevelHeckeWordDeckCommutantExact as WordNoGo
 
 p11PointCountTenRegression : Point7.projectivePointCount ≡ 10
 p11PointCountTenRegression = Point7.projectivePointCountIsTen
@@ -183,3 +191,18 @@ allPrimeObserverNoGoBoundaryRegression :
   ObserverNoGo.allPrimeBlindnessDerived
     ObserverNoGo.canonicalAuxiliaryHeckeObserverNoGoBoundary ≡ true
 allPrimeObserverNoGoBoundaryRegression = refl
+
+allHeckeWordObserverNoGoBoundaryRegression :
+  WordNoGo.allWordsBlindToDeck
+    WordNoGo.canonicalHeckeWordDeckBoundary ≡ true
+allHeckeWordObserverNoGoBoundaryRegression = refl
+
+heckeWordsCommuteWithDeckRoleBoundaryRegression :
+  WordNoGo.arbitraryDeckEndomorphismsCommuteWithWords
+    WordNoGo.canonicalHeckeWordDeckBoundary ≡ true
+heckeWordsCommuteWithDeckRoleBoundaryRegression = refl
+
+additiveHeckeAlgebraNotSilentlyPromotedRegression :
+  WordNoGo.additiveHeckeAlgebraConstructedHere
+    WordNoGo.canonicalHeckeWordDeckBoundary ≡ false
+additiveHeckeAlgebraNotSilentlyPromotedRegression = refl
