@@ -29,16 +29,18 @@ import DASHI.Ontology.ProgenitorParentObservationAuthorityBridge
 import DASHI.Ontology.ProgenitorParentObserverRefinementTests
 
 -- Dynamic/action-facing parent bridges. These specialize existing generic
--- DASHI safety, non-factorability, provenance and diachronic-authority kernels;
--- they do not create parallel theories.
+-- DASHI safety, non-factorability, provenance, consultation and diachronic-
+-- authority kernels; they do not create parallel theories.
 import DASHI.Ontology.ProgenitorParentAuthorityRoutingNonfactorabilityExact
 import DASHI.Ontology.ProgenitorParentObserverFutureSafetyExact
 import DASHI.Ontology.ProgenitorParentDiachronicAuthorityFibreExact
 import DASHI.Ontology.ProgenitorParentResidualDynamicsExact
 import DASHI.Ontology.ProgenitorParentAllyshipAuthorityBridgeExact
+import DASHI.Ontology.ProgenitorParentConsultationDecisionSensitivityExact
 import DASHI.Ontology.ProgenitorParentDynamicAuthorityRegression
 
 import DASHI.Governance.DiachronicDelegatedAuthorityBoundary
 import DASHI.Biology.ParentAllyshipMultiObserverBridge
+import DASHI.Reasoning.RelationalChronologyProjectionBoundary
 
 import Ontology.Hecke.CurrentSaturatedObserverRefinementBridgeExact
