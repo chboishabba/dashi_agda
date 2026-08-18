@@ -116,7 +116,8 @@ scaleTwoZeroImpliesZero (Old.old3 x y z) equation =
       (cong Old.x4 equation))
 
 ------------------------------------------------------------------------
--- Internal marked R2 has trivial kernel / is injective.
+-- Internal marked R2 has trivial kernel.  This is all the conjugacy no-go
+-- actually needs; no separate assumption-aware matrix solver is introduced.
 ------------------------------------------------------------------------
 
 markedR2KernelTrivial :
@@ -130,29 +131,6 @@ markedR2KernelTrivial v equation =
       (trans
         (cong markedR2Adjugate equation)
         markedR2AdjugateAtZero))
-
-markedR2Injective :
-  (u v : Old.Old3) →
-  Bad.markedR2OnOld3 u ≡ Bad.markedR2OnOld3 v →
-  u ≡ v
-markedR2Injective (Old.old3 x y z) (Old.old3 a b c) equation =
-  let
-    xEq : ((-[1+ 0 ]) *ℤ y +ℤ (-[1+ 0 ]) *ℤ z)
-          ≡ ((-[1+ 0 ]) *ℤ b +ℤ (-[1+ 0 ]) *ℤ c)
-    xEq = cong Old.x1 equation
-
-    yEq : ((-[1+ 0 ]) *ℤ x +ℤ (-[1+ 0 ]) *ℤ z)
-          ≡ ((-[1+ 0 ]) *ℤ a +ℤ (-[1+ 0 ]) *ℤ c)
-    yEq = cong Old.x2 equation
-
-    zEq : ((-[1+ 0 ]) *ℤ x +ℤ (-[1+ 0 ]) *ℤ y)
-          ≡ ((-[1+ 0 ]) *ℤ a +ℤ (-[1+ 0 ]) *ℤ b)
-    zEq = cong Old.x4 equation
-  in
-  old3Ext _ _
-    (ℤRing.solve (x ∷ y ∷ z ∷ a ∷ b ∷ c ∷ []))
-    (ℤRing.solve (x ∷ y ∷ z ∷ a ∷ b ∷ c ∷ []))
-    (ℤRing.solve (x ∷ y ∷ z ∷ a ∷ b ∷ c ∷ []))
 
 ------------------------------------------------------------------------
 -- Any genuine linear comparison needs an invertible zero-preserving map and
@@ -214,7 +192,6 @@ record P11Level44BadPrimeConjugacyNoGoBoundary : Set where
     integralAdjugateConstructed : Bool
     adjugateTimesMarkedR2EqualsTwoIdentity : Bool
     markedR2KernelTrivialDerived : Bool
-    markedR2InjectiveDerived : Bool
     analyticU2HasNonzeroKernel : Bool
     arbitraryInvertibleU2R2IntertwinerPossible : Bool
     transportedPrincipalLevel2OperatorMustDifferFromInternalR2 : Bool
@@ -226,7 +203,6 @@ canonicalP11Level44BadPrimeConjugacyNoGoBoundary = record
   { integralAdjugateConstructed = true
   ; adjugateTimesMarkedR2EqualsTwoIdentity = true
   ; markedR2KernelTrivialDerived = true
-  ; markedR2InjectiveDerived = true
   ; analyticU2HasNonzeroKernel = true
   ; arbitraryInvertibleU2R2IntertwinerPossible = false
   ; transportedPrincipalLevel2OperatorMustDifferFromInternalR2 = true
