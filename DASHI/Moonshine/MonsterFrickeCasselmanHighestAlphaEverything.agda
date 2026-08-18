@@ -13,25 +13,26 @@ module DASHI.Moonshine.MonsterFrickeCasselmanHighestAlphaEverything where
 -- for primes p >= 5 covered by the prime-level geometric authority.
 -- No MonsterPrimeLane / SSP15 finite table participates in that chain.
 --
--- LOCAL p11 SIDE -- NOW ONE TRANSVERSE COORDINATE
+-- LOCAL p11 SIDE -- RESOLVED AT THE CORRECT REPRESENTATION LEVEL
 --
--- Casselman/Schmidt gives the K_0(4)=K_2(2) fixed-vector model with three
--- compact double-coset cells.  Full level 2 gives the distinct principal
--- K(2)-fixed P^1(F_2) model, also three-dimensional.
+-- Jacquet--Langlands identifies the p11 quaternionic/Brandt automorphic
+-- representation with the unique classical weight-2 level-11 representation.
+-- Hence their local components at 2 are the same unramified pi_2.
 --
--- The exact common compact quotient B(Z/4)\GL_2(Z/4) shows these are DISTINCT
--- 3-spaces with a two-coordinate intersection.  Each admits a lossless split
+-- Casselman/Schmidt and the finite compact model then show that the two compact
+-- opens used by the programme cut out DIFFERENT three-dimensional subspaces of
+-- that same pi_2:
 --
---   Common2 + one transverse defect.
+--   V^{K(2)}       principal full-level-2 marked model,
+--   V^{K_0(4)}     classical oldvector model.
 --
--- Two different integral alignments already fix Common2 pointwise and differ
--- only by the sign of the transverse coordinate.  Thus equal dimension,
--- common ambient representation, common intersection and good-prime Hecke
--- agreement still do not select the final alignment.
+-- Their intersection has exactly two coordinates.  The remaining transverse
+-- line admits at least two alignments fixing the common plane, so no canonical
+-- 3D fixed-space map follows from JL.  Martin's noncanonical JL discipline is
+-- therefore essential, not a missing implementation detail.
 --
--- Remaining producer:
---   one source-native local operator / Whittaker-test-vector normalization that
---   orients or normalizes the transverse line.
+-- An extra Whittaker/test-vector normalization may still be studied as an
+-- OPTIONAL coordinate choice, but it no longer blocks the same-object theorem.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -43,9 +44,10 @@ import DASHI.Moonshine.PublishedMonsterFrickeGenusZeroExact as Global
 import DASHI.Moonshine.PublishedPrimeLevelFrickeSelectorPinnedExact as Fricke
 import DASHI.Moonshine.PrimeLevelDeligneRapoportFrickeSelectorExact as Selector
 import DASHI.Moonshine.CasselmanUnramifiedPGL2FixedVectorTowerExact as Casselman
-import DASHI.Moonshine.P11CasselmanLevel4DoubleCosetBasisExact as LocalBasis
 import DASHI.Moonshine.P11Level44TwoAdicFixedSpaceIntersectionExact as Intersection
 import DASHI.Moonshine.P11Level44TwoAdicTransverseAlignmentExact as Transverse
+import DASHI.Moonshine.P11JacquetLanglandsRepresentationStandardAuthorityExact as JL
+import DASHI.Moonshine.P11JacquetLanglandsFixedSpaceResolutionExact as JLResolution
 
 monsterPrimeGenusZeroRegression :
   (p : Nat) → (prime : Prime p) → (ge5 : 5 ≤ p) →
@@ -56,6 +58,11 @@ monsterPrimeGenusZeroRegression = Global.monsterPrimeIffFrickeGenusZero
 casselmanLevelFourDimensionRegression :
   Casselman.fixedDimension Casselman.publishedP11LocalUnramifiedTower 2 ≡ 3
 casselmanLevelFourDimensionRegression = Casselman.level4FixedDimensionIsThree
+
+sameP11LocalRepresentationAtTwoRegression :
+  JL.localAtTwo JL.p11QuaternionBrandtRepresentation
+  ≡ JL.localAtTwo JL.p11ClassicalNewformRepresentation
+sameP11LocalRepresentationAtTwoRegression = JLResolution.sameP11LocalRepresentationAtTwo
 
 commonIntersectionHasTwoCoordinatesRegression :
   Intersection.commonIntersectionCoordinates
@@ -72,15 +79,15 @@ transverseCoordinateCountRegression :
     Transverse.canonicalP11Level44TwoAdicTransverseAlignmentBoundary ≡ 1
 transverseCoordinateCountRegression = refl
 
-commonPlaneDoesNotDetermineAlignmentRegression :
-  Transverse.commonPlaneDeterminesFullAlignment
-    Transverse.canonicalP11Level44TwoAdicTransverseAlignmentBoundary ≡ false
-commonPlaneDoesNotDetermineAlignmentRegression = refl
+canonicalFixedSpaceMapNotRequiredRegression :
+  JLResolution.canonicalFixedSpaceMapRequiredForJL
+    JLResolution.canonicalP11JacquetLanglandsFixedSpaceResolutionBoundary ≡ false
+canonicalFixedSpaceMapNotRequiredRegression = refl
 
-sourceNativeTransverseSelectorStillRequiredRegression :
-  Transverse.sourceNativeTransverseSelectorStillRequired
-    Transverse.canonicalP11Level44TwoAdicTransverseAlignmentBoundary ≡ true
-sourceNativeTransverseSelectorStillRequiredRegression = refl
+localSameObjectSeamResolvedRegression :
+  JLResolution.localSameObjectSeamResolvedAtCorrectLevel
+    JLResolution.canonicalP11JacquetLanglandsFixedSpaceResolutionBoundary ≡ true
+localSameObjectSeamResolvedRegression = refl
 
 finiteMonsterLaneTableStillUnusedRegression :
   Global.MonsterPrimeLaneTableUsed
