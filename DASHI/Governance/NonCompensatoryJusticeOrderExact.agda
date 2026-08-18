@@ -103,15 +103,28 @@ mixedReviewRepair :
 mixedReviewRepair =
   Justice.repairedPositiveViolation tt tt refl refl
 
+sameInvariantCompensationIdentifiesCoordinates :
+  ∀ {left right} →
+  SameInvariantCompensates left right →
+  left ≡ right
+sameInvariantCompensationIdentifiesCoordinates sameInvariantCompensates = refl
+
+noRightsRepairExistsInMixedAction :
+  Justice.RepairedPositiveViolation mixedAction Transition.rightsInvariant →
+  ⊥
+noRightsRepairExistsInMixedAction repair with
+  Justice.RepairedPositiveViolation.wasPositivelyViolated repair
+... | ()
+
 noSameInvariantRepairCanCompensateMixedRightsViolation :
   (repairInvariant : Transition.ConstitutionalInvariant) →
   Justice.RepairedPositiveViolation mixedAction repairInvariant →
   SameInvariantCompensates repairInvariant Transition.rightsInvariant →
   ⊥
 noSameInvariantRepairCanCompensateMixedRightsViolation
-  .Transition.rightsInvariant repair sameInvariantCompensates with
-  Justice.RepairedPositiveViolation.wasPositivelyViolated repair
-... | ()
+  repairInvariant repair compensation
+  with sameInvariantCompensationIdentifiesCoordinates compensation
+... | refl = noRightsRepairExistsInMixedAction repair
 
 mixedActionIsNonCompensatoryInverseJustice :
   NonCompensatoryJusticeNegative mixedAction sameInvariantCompensationPolicy
