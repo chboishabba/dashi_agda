@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude using (false; true; _≡_; ⊥)
 
 import DASHI.Core.IntersectionalNonFactorability as NonFactor
 import DASHI.Core.DynamicalQuotientSafety as Dynamic
+import DASHI.Core.PolicyRelativeProjectionSafety as Policy
 import DASHI.Governance.DiachronicDelegatedAuthorityBoundary as GovernanceDiachronic
 import DASHI.Ontology.ProgenitorParentProjectionFibre as ParentFibre
 import DASHI.Ontology.ProgenitorParentObserverDynamicsBridge as ParentDynamics
@@ -11,6 +12,7 @@ import DASHI.Ontology.ProgenitorParentAuthorityRoutingNonfactorabilityExact as R
 import DASHI.Ontology.ProgenitorParentObserverFutureSafetyExact as Future
 import DASHI.Ontology.ProgenitorParentDiachronicAuthorityFibreExact as DiachronicParent
 import DASHI.Ontology.ProgenitorParentResidualDynamicsExact as Residual
+import DASHI.Ontology.ProgenitorParentAllyshipAuthorityBridgeExact as AllyshipAuthority
 
 routingNonfactorabilityRegression :
   NonFactor.FactorsThrough
@@ -25,6 +27,14 @@ authorityFutureSafetyRegression :
     (Future.parentDecisionProject Future.authorityDecisionConsumer) → ⊥
 authorityFutureSafetyRegression =
   Future.authorityDecisionProjectionIsNotDynamicallySafe
+
+coarseAuthorityPolicySafetyRegression :
+  Policy.PolicyRelativeSafety
+    Future.parentDecisionSystem
+    (Future.parentDecisionProject Future.authorityDecisionConsumer)
+    Future.parentAuthorityPolicy → ⊥
+coarseAuthorityPolicySafetyRegression =
+  Future.coarseParentAuthorityPolicyIsUnsafe
 
 revokedAuthorityRegression :
   DiachronicParent.currentAuthorityActive
@@ -51,3 +61,8 @@ legalResidualMotionRegression :
   ≡ Residual.parentResidual ParentDynamics.preFinalizationCarrier
   → ⊥
 legalResidualMotionRegression = Residual.legalFinalizationMustMoveResidual
+
+familyAgencyNotSovereigntyRegression :
+  AllyshipAuthority.parentObserverIsCanonicalWhole
+    AllyshipAuthority.canonicalFamilyAgencyAuthorityBoundary ≡ false
+familyAgencyNotSovereigntyRegression = refl
