@@ -47,12 +47,13 @@ open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; 1ℚ; _*_; _≤_; _/_; ∣_∣)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
 open import Relation.Nullary.Decidable.Core using (yes; no)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using (pair)
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
+import DASHI.Physics.YangMills.BalabanP33FiniteWeightedSchurSquaredExact as WeightedSchur
 import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Coordinates
 import DASHI.Physics.YangMills.BalabanP33PhysicalCoordinateBasisExact as Basis
 import DASHI.Physics.YangMills.BalabanP33PhysicalFlatGaugeDivergenceIdentificationExact as FlatGauge
@@ -65,6 +66,7 @@ import DASHI.Physics.YangMills.BalabanSelectedCombinedConstraintRowCarrierExact 
 import DASHI.Physics.YangMills.BalabanSelectedConstraintDimensionTowerExact as Dimensions
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundGaugeAdjointDefectExact as Defect
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundGaugeDefectAbsoluteMassExact as DefectMass
+import DASHI.Physics.YangMills.BalabanSelectedBackgroundGaugeOperatorDecompositionExact as GaugeOperator
 import DASHI.Physics.YangMills.BalabanFiniteRectangularAbsoluteMassExact as Mass
 import DASHI.Physics.YangMills.BalabanFiniteRectangularAbsoluteApplyExact as Apply
 
@@ -105,7 +107,7 @@ selectedSchurCrossMatrix background gaugeRow averageRow =
 selectedSchurCrossIsDefectOnAverageBasis :
   ∀ background gaugeRow averageRow →
   selectedSchurCrossMatrix background gaugeRow averageRow
-  ≡ DASHI.Physics.YangMills.BalabanSelectedBackgroundGaugeOperatorDecompositionExact.gaugeDefectForwardApply
+  ≡ GaugeOperator.gaugeDefectForwardApply
       background (averageBasisState averageRow) gaugeRow
 selectedSchurCrossIsDefectOnAverageBasis background gaugeRow averageRow = refl
 
@@ -173,7 +175,7 @@ selectedSchurCrossAbsoluteRowMassBound :
 selectedSchurCrossAbsoluteRowMassBound background radius gaugeRow =
   let
     pointwise =
-      DASHI.Physics.YangMills.BalabanP33FiniteWeightedSchurSquaredExact.sumPointwiseBelow
+      WeightedSchur.sumPointwiseBelow
         averageRows
         (λ averageRow → ∣ selectedSchurCrossMatrix background gaugeRow averageRow ∣)
         (λ _ → DefectMass.defectRowMassBound)
@@ -194,7 +196,7 @@ selectedSchurCrossAbsoluteColumnMassBound :
 selectedSchurCrossAbsoluteColumnMassBound background radius averageRow =
   let
     pointwise =
-      DASHI.Physics.YangMills.BalabanP33FiniteWeightedSchurSquaredExact.sumPointwiseBelow
+      WeightedSchur.sumPointwiseBelow
         gaugeRows
         (λ gaugeRow → ∣ selectedSchurCrossMatrix background gaugeRow averageRow ∣)
         (λ _ → DefectMass.defectRowMassBound)
