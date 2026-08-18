@@ -39,8 +39,7 @@ module DASHI.Physics.Closure.NSTriadKNFiniteRationalSlotAssignmentBridgeRound74E
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Rational.Base using (ℚ; 0ℚ)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Data.Rational.Base using (ℚ; 0ℚ; _-_; _*_; _≤_; ∣_∣)
 
 import DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber as Output
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteGalerkinPolynomialRound26Exact as Polynomial
@@ -211,8 +210,8 @@ assignmentReadsHeadEntryExactly state refl = lookupHeadExact _ _
 
 finiteChartCoordinateRightHandSideLocalLipschitz :
   (radius delta : ℚ) →
-  0ℚ Data.Rational.Base.≤ radius →
-  0ℚ Data.Rational.Base.≤ delta →
+  0ℚ ≤ radius →
+  0ℚ ≤ delta →
   (equation : Polynomial.LiteralGalerkinCoordinateEquation) →
   ∀ {leftSlots rightSlots}
     (left : Finite.FiniteRealCoordinateState L2.rationalRealField leftSlots)
@@ -221,15 +220,12 @@ finiteChartCoordinateRightHandSideLocalLipschitz :
   Lipschitz.AssignmentBound radius (finiteRationalAssignment right) →
   Lipschitz.AssignmentDifferenceBound delta
     (finiteRationalAssignment left) (finiteRationalAssignment right) →
-  Data.Rational.Base.∣
-    Polynomial.coordinateRightHandSide equation (finiteRationalAssignment left)
-    Data.Rational.Base.-
-    Polynomial.coordinateRightHandSide equation (finiteRationalAssignment right)
-  ∣
-  Data.Rational.Base.≤
+  ∣ Polynomial.coordinateRightHandSide equation (finiteRationalAssignment left)
+    - Polynomial.coordinateRightHandSide equation (finiteRationalAssignment right) ∣
+  ≤
   Lipschitz.atomsLipschitzWeight radius
     (Polynomial.rightHandSideAtoms equation)
-  Data.Rational.Base.* delta
+  * delta
 finiteChartCoordinateRightHandSideLocalLipschitz
   radius delta radiusNN deltaNN equation left right
   leftBound rightBound differenceBound =
