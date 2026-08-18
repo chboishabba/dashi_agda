@@ -36,24 +36,18 @@ module DASHI.Moonshine.FormalQSeriesOldformEigencharacterTransportExact where
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
+open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Integer using (ℤ; +_)
   renaming (_+_ to _+ℤ_; _*_ to _*ℤ_)
-open import Data.Nat.Divisibility using (_∣_; _∣?_ ; m∣n⇒n≡m*quotient)
+open import Data.Nat.Divisibility using (_∣_; _∣?_; m∣n⇒n≡m*quotient)
+import Data.Nat.Coprimality as Cop
 import Data.Integer.Tactic.RingSolver as IntRing
 open import Relation.Nullary using (yes; no)
 
 import DASHI.Moonshine.FormalQSeriesOldformDegeneracyHeckeExact as Deg
 
-------------------------------------------------------------------------
--- Scalar multiplication of formal q-series.
-------------------------------------------------------------------------
-
 scaleSeries : ℤ → Deg.FormalQSeries → Deg.FormalQSeries
 scaleSeries k a n = k *ℤ a n
-
-------------------------------------------------------------------------
--- A degeneracy law determines its target coefficientwise.
-------------------------------------------------------------------------
 
 degeneracyTargetUnique :
   (d : Nat) →
@@ -82,10 +76,6 @@ degeneracyTargetUnique d a b c left right n with d ∣? n
     (Deg.offSupport left n d∤n)
     (sym (Deg.offSupport right n d∤n))
 
-------------------------------------------------------------------------
--- Scalar multiplication commutes with degeneracy.
-------------------------------------------------------------------------
-
 scalePreservesDegeneracy :
   (d : Nat) →
   (k : ℤ) →
@@ -99,16 +89,10 @@ scalePreservesDegeneracy d k a b law = record
         (cong (k *ℤ_) (Deg.offSupport law n d∤n))
         (IntRing.solve (k ∷ []))
   }
-  where
-  open import Agda.Builtin.List using ([]; _∷_)
-
-------------------------------------------------------------------------
--- Main eigencharacter transport theorem.
-------------------------------------------------------------------------
 
 goodPrimeEigencharacterTransport :
   (d ell : Nat) →
-  Data.Nat.Coprimality.Coprime d ell →
+  Cop.Coprime d ell →
   (lambda : ℤ) →
   (a b Ta Tb : Deg.FormalQSeries) →
   Deg.DegeneracyCoefficientLaw d a b →
@@ -138,10 +122,6 @@ goodPrimeEigencharacterTransport d ell cop lambda a b Ta Tb deg heckeA heckeB so
       (scaleSeries lambda a) (scaleSeries lambda b)
   scaledTarget = scalePreservesDegeneracy d lambda a b deg
 
-------------------------------------------------------------------------
--- Level 44: d=1,2,4 all inherit the same good-prime character.
-------------------------------------------------------------------------
-
 degeneracy1PreservesEigencharacter :
   (ell : Nat) →
   (lambda : ℤ) →
@@ -152,8 +132,7 @@ degeneracy1PreservesEigencharacter :
   ((n : Nat) → Ta n ≡ scaleSeries lambda a n) →
   (n : Nat) → Tb n ≡ scaleSeries lambda b n
 degeneracy1PreservesEigencharacter ell =
-  goodPrimeEigencharacterTransport 1 ell
-    (Data.Nat.Coprimality.1-coprimeTo ell)
+  goodPrimeEigencharacterTransport 1 ell (Cop.1-coprimeTo ell)
 
 degeneracy2PreservesEigencharacter :
   (ell : Nat) →
