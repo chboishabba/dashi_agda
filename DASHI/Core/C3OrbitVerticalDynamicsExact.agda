@@ -16,6 +16,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.C3OrbitProvenanceQuotientExact as Orbit
+import DASHI.Core.FibreRestrictionCore as Fibre
 import DASHI.Core.FiniteC3OrbitStabilizerExact as C3
 import DASHI.Core.ProvenanceBearingQuotient as PBQ
 import DASHI.Core.ProvenanceVerticalDynamicsExact as Vertical
@@ -41,8 +42,8 @@ rotateBackwardForward C3.c2 = refl
 
 rotationSurfaceInvariant :
   ∀ x →
-  Orbit.orbitCore .DASHI.Core.FibreRestrictionCore.project (rotateForward x)
-    ≡ Orbit.orbitCore .DASHI.Core.FibreRestrictionCore.project x
+  Fibre.project Orbit.orbitCore (rotateForward x)
+    ≡ Fibre.project Orbit.orbitCore x
 rotationSurfaceInvariant x = refl
 
 c3OrbitVerticalAutomorphism : Vertical.FibreAutomorphism Orbit.orbitCore
