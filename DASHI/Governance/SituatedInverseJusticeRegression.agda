@@ -3,6 +3,7 @@ module DASHI.Governance.SituatedInverseJusticeRegression where
 open import DASHI.Core.Prelude
 
 import DASHI.Core.IntersectionalNonFactorability as Intersectional
+import DASHI.Governance.InverseJusticeThroughputExact as Throughput
 import DASHI.Governance.SituatedInverseJusticeFibreExact as Justice
 
 ------------------------------------------------------------------------
@@ -38,6 +39,14 @@ intersectionalFlatteningCannotRecoverRelationalJusticeSign =
 
 canonicalRepeatedNegativeRun : Justice.InverseJusticeRun
 canonicalRepeatedNegativeRun = Justice.canonicalTwoStepInverseJusticeRun
+
+worsenedViolationIsInverseJustice :
+  Throughput.ExtendedInverseJusticeOperator Throughput.worseningAction
+worsenedViolationIsInverseJustice =
+  Throughput.worsenedPositiveViolationIsInverseJustice
+
+sloganThroughputWitness : Throughput.CoerciveJusticeThroughput
+sloganThroughputWitness = Throughput.tooManyCoppersNotEnoughJusticeWitness
 
 forcePromotionBoundaryIsClosed :
   Justice.SituatedInverseJusticeBoundary.possessionOfForceCreatesJustice
