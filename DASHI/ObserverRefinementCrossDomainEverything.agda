@@ -20,5 +20,6 @@ import DASHI.Cognition.PNF.ResidualSamplingObserverRepairExact
 import DASHI.Biology.Physical.DynamicTopologyObserverRefinementExact
 import DASHI.Reasoning.HyperfabricObservationGluingExact
 import DASHI.Physics.Closure.HolographicBulkBoundaryReceiptCorrectionExact
+import DASHI.Physics.Closure.ClopenHolographicObserverReconstructionBoundaryExact
 import Ontology.Hecke.ObserverRefinementLadderBridgeExact
 import DASHI.Moonshine.P11MarkedFrobeniusResidualReceiptExact
