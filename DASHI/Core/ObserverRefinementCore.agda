@@ -8,9 +8,9 @@ open import Data.Product using (_×_; _,_)
 -- Generic observer-refinement core.
 --
 -- An observer is a projection X → V.  We say OA refines OB when equality
--- under OA forces equality under OB.  This is the information order induced
--- by observational fibres: a finer observer has fibres contained in those of
--- a coarser observer.
+-- under OA forces equality under OB.  Equivalently, every OA-fibre lies in an
+-- OB-fibre.  `InformationBelow` reverses that primitive relation so its order
+-- reads in the conventional direction: less informative ≤ more informative.
 ------------------------------------------------------------------------
 
 infix 4 _≢_
@@ -22,6 +22,11 @@ Refines :
   (X → A) → (X → B) → Set
 Refines OA OB =
   ∀ x y → OA x ≡ OA y → OB x ≡ OB y
+
+InformationBelow :
+  ∀ {X A B : Set} →
+  (X → A) → (X → B) → Set
+InformationBelow OA OB = Refines OB OA
 
 record NotRefines
     {X A B : Set}
@@ -90,7 +95,7 @@ crossCollisionImpliesIncomparable witness =
       (differentA witness))
 
 ------------------------------------------------------------------------
--- Joint observer / binary join.
+-- Joint observer.
 ------------------------------------------------------------------------
 
 pairObserver :
@@ -125,6 +130,20 @@ pairRefinesRight :
     {OB : X → B} →
   Refines (pairObserver OA OB) OB
 pairRefinesRight x y samePair = pairRightEquality samePair
+
+leftBelowPair :
+  ∀ {X A B : Set}
+    {OA : X → A}
+    {OB : X → B} →
+  InformationBelow OA (pairObserver OA OB)
+leftBelowPair = pairRefinesLeft
+
+rightBelowPair :
+  ∀ {X A B : Set}
+    {OA : X → A}
+    {OB : X → B} →
+  InformationBelow OB (pairObserver OA OB)
+rightBelowPair = pairRefinesRight
 
 leftDoesNotRefinePair :
   ∀ {X A B : Set}
@@ -182,11 +201,11 @@ pairStrictlyRefinesRight witness =
   strictlyRefines pairRefinesRight (rightDoesNotRefinePair witness)
 
 ------------------------------------------------------------------------
--- Least joint refinement property.
+-- Least joint refinement / binary join.
 --
--- Any observer O that refines both OA and OB also refines the paired observer.
--- Thus pairing is the canonical binary join in the refinement information
--- order (up to observational equivalence).
+-- Any observer O that refines both OA and OB also refines the pair.  In the
+-- explicit `InformationBelow` order this is exactly the least-upper-bound
+-- law: OA ≤ pair, OB ≤ pair, and every common upper bound O has pair ≤ O.
 ------------------------------------------------------------------------
 
 jointRefinesPair :
@@ -199,3 +218,13 @@ jointRefinesPair :
   Refines O (pairObserver OA OB)
 jointRefinesPair refinesA refinesB x y sameO =
   refinesA x y sameO , refinesB x y sameO
+
+pairIsLeastUpperBound :
+  ∀ {X A B C : Set}
+    {O : X → C}
+    {OA : X → A}
+    {OB : X → B} →
+  InformationBelow OA O →
+  InformationBelow OB O →
+  InformationBelow (pairObserver OA OB) O
+pairIsLeastUpperBound = jointRefinesPair
