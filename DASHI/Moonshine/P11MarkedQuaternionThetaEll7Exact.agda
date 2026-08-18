@@ -137,8 +137,8 @@ record P11MarkedQuaternionThetaEll7Boundary : Set where
     plusMinusKernelPairingApplied : Bool
     plusMinusKernelPairingAppliedIsTrue : plusMinusKernelPairingApplied ≡ true
 
-    markedLoopTableIsTwoZero : Bool
-    markedLoopTableIsTwoZeroIsTrue : markedLoopTableIsTwoZero ≡ true
+    markedLoopTableTwoZeroRecorded : Bool
+    markedLoopTableTwoZeroRecordedIsTrue : markedLoopTableTwoZeroRecorded ≡ true
 
 canonicalP11MarkedQuaternionThetaEll7Boundary :
   P11MarkedQuaternionThetaEll7Boundary
@@ -149,6 +149,6 @@ canonicalP11MarkedQuaternionThetaEll7Boundary = record
   ; j1728NormSevenAbsenceConstructedIsTrue = refl
   ; plusMinusKernelPairingApplied = true
   ; plusMinusKernelPairingAppliedIsTrue = refl
-  ; markedLoopTableIsTwoZero = true
-  ; markedLoopTableIsTwoZeroIsTrue = refl
+  ; markedLoopTableTwoZeroRecorded = true
+  ; markedLoopTableTwoZeroRecordedIsTrue = refl
   }
