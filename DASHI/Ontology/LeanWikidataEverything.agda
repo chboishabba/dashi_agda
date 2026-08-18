@@ -25,6 +25,7 @@ import DASHI.Ontology.ProgenitorParentProjectionFibre
 import DASHI.Ontology.ProgenitorParentEthicsExamples
 import DASHI.Ontology.ProgenitorParentHyperfabricTests
 import DASHI.Ontology.LeanWikidataParentingPullbackBridge
+import DASHI.Ontology.LeanWikidataPullbackTopologyBoundary
 import DASHI.Ontology.ProgenitorParentPNFPullbackLattice
 import DASHI.Ontology.ProgenitorParentPredicateBaseChange
 import DASHI.Ontology.ProgenitorParentJMDPNFTests
