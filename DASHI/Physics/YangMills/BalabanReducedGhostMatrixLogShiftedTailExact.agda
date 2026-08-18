@@ -46,6 +46,7 @@ open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _*_; _≤_; NonNegative)
 import Data.Rational.Properties as ℚP
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
@@ -107,8 +108,14 @@ shiftedFifthTailRowBound :
     (shiftedFifthTail indices matrix coefficients start length)
     (shiftedMajorant start length)
 shiftedFifthTailRowBound
-    indices matrix coefficients zero length matrixRows =
-  Tail.finiteFifthTailRowBound indices matrix coefficients length matrixRows
+    indices matrix coefficients zero length matrixRows row =
+  subst
+    (λ bound →
+      Neumann.rowMass indices
+        (shiftedFifthTail indices matrix coefficients zero length) row ≤ bound)
+    (sym (ℚP.*-identityˡ (Tail.geometricMajorant length)))
+    (Tail.finiteFifthTailRowBound
+      indices matrix coefficients length matrixRows row)
 shiftedFifthTailRowBound
     indices matrix coefficients (suc start) length matrixRows row =
   let
@@ -128,8 +135,20 @@ shiftedFifthTailRowBound
         Tail.oneFifth (shiftedMajorant start length)
         (shiftedMajorantNonnegative start length)
         matrixRows restRows
+    reassociate :
+      Tail.oneFifth * shiftedMajorant start length
+      ≡ shiftedMajorant (suc start) length
+    reassociate =
+      sym (ℚP.*-assoc
+        Tail.oneFifth (startFactor start) (Tail.geometricMajorant length))
   in
-  productRows row
+  subst
+    (λ bound →
+      Neumann.rowMass indices
+        (shiftedFifthTail indices matrix coefficients (suc start) length) row
+      ≤ bound)
+    reassociate
+    (productRows row)
 
 shiftedMajorantBelowCap : ∀ start length →
   shiftedMajorant start length ≤ shiftedCap start
@@ -177,7 +196,8 @@ physicalReducedGhostShiftedTailCap
 
 shiftedCapStep : ∀ start →
   shiftedCap (suc start) ≡ Tail.oneFifth * shiftedCap start
-shiftedCapStep start = refl
+shiftedCapStep start =
+  ℚP.*-assoc Tail.oneFifth (startFactor start) Tail.fifthTailCap
 
 reducedGhostShiftedMatrixLogTailLevel : ProofLevel
 reducedGhostShiftedMatrixLogTailLevel = machineChecked
