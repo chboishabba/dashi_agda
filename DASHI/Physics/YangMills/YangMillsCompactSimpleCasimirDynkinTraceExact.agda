@@ -38,8 +38,8 @@ module DASHI.Physics.YangMills.YangMillsCompactSimpleCasimirDynkinTraceExact whe
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; 1ℚ; _+_; _*_) 
-import Data.Rational.Properties as ℚP
+open import Data.Rational.Base as ℚ using (ℚ; 1ℚ; _+_; _*_)
+import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -56,9 +56,7 @@ sumConstant :
 sumConstant [] constant = refl
 sumConstant (index ∷ indices) constant
   rewrite sumConstant indices constant =
-  trans
-    (cong (constant +_) refl)
-    (sym (ℚP.*-distribʳ-+ 1ℚ (finiteCount indices) constant))
+  ℚRing.solve-∀ constant (finiteCount indices)
 
 record FiniteRepresentationTraceData
     (Generator Basis : Set) : Set₁ where
