@@ -3,58 +3,51 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound61DLRTransferAuditVal
 ------------------------------------------------------------------------
 -- ROUND61 HIGHEST-ALPHA VALIDATION ROOT
 --
--- This tranche performs theorem-level reductions on the live Clay cutset.
---
 -- TRANSFER / SPECTRAL ROUTE
--- * Boolean W1--W5 closure is replaced by the actual transfer intertwiner
---       B (T_c f) = T_f (B f).
--- * The physical one-step theorem is reduced to two commuting squares
---       B_K K_c = K_f B,
---       B Tr_c  = Tr_f B_K.
--- * Feshbach/Schur loss bookkeeping is welded to those exact transfer maps.
--- * Historical Boolean compatibility receipts are not promoted.
+-- * Boolean W1--W5 closure is replaced by B(T_c f)=T_f(B f).
+-- * Physical one-step compatibility is factored into kernel and trace squares.
+-- * Schur/Feshbach gap bookkeeping consumes those exact named transfer maps.
 --
 -- REDUCED GHOST ROUTE
--- * the flat FP kernel is exactly global colour gauge and anchoring removes it;
+-- * flat FP kernel = global colour gauge; anchoring removes it;
 -- * M0^{-1} is an explicit two-sided Green inverse on mean-zero sources;
--- * the reduced trace carrier is explicit and has dimension 765;
--- * finite matrix product associativity and tr(AB)=tr(BA) are proved;
--- * the relative physical operator R_A=M_A M0^{-1}-I is explicit;
--- * exp(gX)Yexp(-gX) has exact rational coefficients
---       ad_X Y, ad_X^2 Y/2, ad_X^3 Y/6, ad_X^4 Y/24;
--- * those jets are threaded through literal D_A G_A M0^{-1} and produce the
---   actual X1,...,X4 matrices consumed by the trace-log polynomial;
--- * row mass is proved submultiplicative, so rowMass(R^(n+1))<=q^(n+1)
---   follows from a same-object rowMass(R)<=q bound;
--- * the new fourth-order row theorem eliminates that opaque q premise: from
+-- * reduced trace carrier is explicit, dimension 765;
+-- * R_A=M_A M0^{-1}-I is the literal same-carrier relative operator;
+-- * source-native X1,...,X4 are constructed from D_A G_A M0^{-1};
+-- * cyclic trace gives the exact noncommutative fourth-order log polynomial;
+-- * the actual anchored physical R_A now satisfies
 --
---       R = gX1 + g^2X2 + g^3X3 + g^4X4 + E5
+--       rowMass(R_A) <= 104601/524288 < 1/5;
 --
---   and row budgets b1,...,b5 it derives
+--   from the selected gauge-Gram perturbation and anchored flat Green;
+-- * every finite degree >=5 matrix-log tail therefore has row mass <=1/2500;
+-- * the new shifted-tail theorem strengthens boundedness to the geometric
+--   finite Cauchy modulus
 --
---       rowMass(R)
---         <= |g|b1 + |g^2|b2 + |g^3|b3 + |g^4|b4 + b5.
+--       rowMass(Tail_m) <= (1/5)^m / 2500.
 --
--- Thus the remaining ghost analysis is now source-shaped: instantiate this
--- exact expansion on the SAME physical R(g), prove the genuine Bishop O(g^5)
--- tail and coefficient row budgets strongly enough that the displayed scalar
--- is <1, then identify finite matrix-log with the reduced determinant ratio.
--- Generic Neumann-power and finite row-majorant algebra are no longer frontiers.
+-- The finite Neumann/log-series convergence estimates are therefore no longer
+-- the physical frontier.  Remaining ghost seam: embed these finite partial
+-- sums in the complete Bishop-real matrix/function carrier and identify the
+-- constructive limit with the principal matrix logarithm / reduced determinant
+-- ratio, then combine its scalar with the literal Wilson and Haar channels.
 --
 -- CMP109 PRINCIPAL-LOG ROUTE
--- * the source-radius inverse-dexp coefficient is the actual Bishop real and
---   satisfies 0 <= beta(1/12)-1/12 <= 1/14400;
--- * the symmetric coefficient has the constructive 23/24 floor;
--- * the Bishop-real operator J=I+c1 ad_X+beta ad_X^2 is literal, with the
---   exact coefficient telescope against beta0=1/12.
---
--- The remaining seam is only the printed left/right product trivialization.
+-- * source-radius inverse-dexp coefficient is actual Bishop-real data;
+-- * 0 <= beta(1/12)-1/12 <= 1/14400 and the symmetric coefficient has 23/24
+--   floor;
+-- * J=I+c1 ad_X+beta ad_X^2 is literal Bishop-real operator data.
+-- Remaining seam: the printed left/right product trivialization.
 --
 -- G2 / KKT ROUTE
--- * sixteen Green ratios collapse exactly to aggregate raw/source/defect sums;
--- * selected KKT weighted locality implies the ordinary pseudoinverse row bound
---   consumed by G2 whenever 1 <= w <= W:
---       rowMass(K+) <= rho W.
+-- * sixteen Green ratios collapse to aggregate raw/source/defect sums;
+-- * reduced KKT coercivity is now exact on the selected combined constraint;
+-- * explicit side-four rational CT weight satisfies
+--       1 <= w <= 6561/4096;
+-- * weighted locality therefore only needs the source-native SAME K+ weighted
+--   row theorem before it feeds the ordinary G2 row bound.
+-- Remaining scalar producer: selected raw/source/defect aggregate ratios and
+-- the resulting one dimensionless G2 endpoint comparison.
 --
 -- CONTINUUM ROUTE
 -- Krzysztof Gawedzki and Antti Kupiainen,
@@ -67,32 +60,21 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound61DLRTransferAuditVal
 -- DOI: 10.1007/BF01212281.
 --
 -- * generic Prokhorov extraction is separated from physical tightness;
--- * scale-local RG increments now have an exact geometric Cauchy compiler:
---       |Delta O_n| <= c (1/4) 2^-n
---   gives every finite tail <= c (1/2) 2^-n;
--- * non-Gaussianity no longer requires an area-law target: one gauge-invariant
---   fourth cumulant with a strict nonzero lower bound refutes Wick/Gaussian
---   factorization exactly.
---
--- Remaining continuum inputs are the physical same-observable scale-increment
--- bounds, OS-stable/unique limit, one strict continuum fourth-cumulant lower
--- bound, and survival of the physical mass scale.
+-- * scale-local RG increments have an exact geometric Cauchy compiler;
+-- * one strict gauge-invariant fourth cumulant refutes Gaussian/Wick
+--   factorization, without substituting an area-law target.
+-- Remaining: same-observable scale increments, OS-stable/unique limit,
+-- physical fourth-cumulant lower bound, and survival of physical mass scale.
 --
 -- COMPACT-SIMPLE-G ROUTE
--- * finite trace/Fubini algebra proves dim(R) C_R = dim(g) I_R. For the
---   adjoint pure-YM sector this removes representation-normalization algebra;
---   group-specific analytic constants remain open.
+-- * finite trace/Fubini proves dim(R) C_R = dim(g) I_R.
+-- Group-specific analytic constants remain open.
 --
 -- SOURCE DISCIPLINE
 -- Tadeusz Balaban, "Large Field Renormalization I: The Basic Step of the
 -- R-Operation", CMP 122 (1989), 175--202. DOI: 10.1007/BF01257412.
 -- CMP119/CMP122 Theorem 1 retains its small-running-coupling hypothesis; the
 -- author's unpublished second-order theorem is not fabricated.
---
--- FAIL-CLOSED EXACTNESS
--- The older Boolean-4 block Poincare certificate no longer contains the
--- `walshSpectralIdentityRaw` postulate: its exact 16-variable polynomial
--- identity is discharged by the rational ring normalizer.
 --
 -- REMAINING DIRECT-TRANSFER FRONTIER
 --   literal Balaban kernel naturality on the Wilson transfer carrier;
@@ -123,13 +105,20 @@ import DASHI.Physics.YangMills.BalabanReducedGhostAdjointFourthJetExact
 import DASHI.Physics.YangMills.BalabanReducedFaddeevPopovPhysicalFourthJetExact
 import DASHI.Physics.YangMills.BalabanReducedGhostNeumannRowContractionExact
 import DASHI.Physics.YangMills.BalabanReducedGhostFourthOrderRowContractionExact
+import DASHI.Physics.YangMills.BalabanReducedGhostAnchoredRelativeContractionExact
+import DASHI.Physics.YangMills.BalabanReducedGhostMatrixLogFifthTailExact
+import DASHI.Physics.YangMills.BalabanReducedGhostPhysicalMatrixLogFifthTailExact
+import DASHI.Physics.YangMills.BalabanReducedGhostMatrixLogShiftedTailExact
 
 import DASHI.Physics.YangMills.BalabanCMP109BishopSourceRadiusEndpointExact
 import DASHI.Physics.YangMills.BalabanCMP109BishopPrincipalLogSourcePackageExact
 import DASHI.Physics.YangMills.BalabanCMP109BishopPrincipalLogAdPolynomialExact
 
 import DASHI.Physics.YangMills.BalabanChargeRelativeG2AggregateRatioExact
+import DASHI.Physics.YangMills.BalabanSelectedConstraintGramReducedCoercivityExact
+import DASHI.Physics.YangMills.BalabanSelectedBackgroundRationalCombesThomasWeightEnvelopeExact
 import DASHI.Physics.YangMills.BalabanSelectedKKTWeightedToOrdinaryRowBoundExact
+import DASHI.Physics.YangMills.BalabanSelectedWilsonCanonicalG2InputsExact
 
 import DASHI.Physics.YangMills.YangMillsCompactSimpleCasimirDynkinTraceExact
 import DASHI.Physics.YangMills.BalabanContinuumProkhorovSubsequenceExact
