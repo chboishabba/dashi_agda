@@ -42,19 +42,25 @@ import DASHI.Physics.Foundations.SettlerEnemyAbstractionExact as Enemy
 
 ------------------------------------------------------------------------
 -- 1. Enemy compression -> justice-relevant non-factorability.
+--
+-- Fine assessments are deliberately role-neutral labels.  The only theorem
+-- used below is the actor-specific / civilian-population separation; unrelated
+-- anti-colonial actors receive their own fine assessment rather than being
+-- silently assimilated to the civilian-protection branch.
 ------------------------------------------------------------------------
 
 data FineJusticeAssessment : Set where
-  actorSpecificAssessment civilianPopulationProtectionAssessment :
-    FineJusticeAssessment
+  specificActorAssessment : FineJusticeAssessment
+  civilianPopulationProtectionAssessment : FineJusticeAssessment
+  heterogeneousMovementAssessment : FineJusticeAssessment
 
 fineJusticeAssessment : Enemy.ConcreteActor → FineJusticeAssessment
-fineJusticeAssessment Enemy.hamasActor = actorSpecificAssessment
+fineJusticeAssessment Enemy.hamasActor = specificActorAssessment
 fineJusticeAssessment Enemy.palestinianCivilianPopulation =
   civilianPopulationProtectionAssessment
-fineJusticeAssessment Enemy.malayanCommunistForces = actorSpecificAssessment
+fineJusticeAssessment Enemy.malayanCommunistForces = specificActorAssessment
 fineJusticeAssessment Enemy.heterogeneousAntiColonialMovements =
-  civilianPopulationProtectionAssessment
+  heterogeneousMovementAssessment
 
 combatantCivilianAssessmentsDiffer :
   fineJusticeAssessment Enemy.hamasActor
