@@ -40,9 +40,7 @@ module DASHI.Physics.Closure.NSTriadKNPointwiseStrainVorticityLowerBoundNoGoRoun
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _-_; -_; _*_; _≤_; _<_)
-open import Data.Rational.Tactic.RingSolver using (solve)
 import Data.Rational.Properties as ℚP
 
 import DASHI.Physics.Closure.NSTriadKNRationalLerayProjectionExact as V
@@ -96,21 +94,18 @@ originVorticityExact :
   vorticity periodicPureRotationOriginJet ≡ V.v3 0ℚ 0ℚ (1ℚ + 1ℚ)
 originVorticityExact = refl
 
-originVorticityNonzero :
-  vorticity periodicPureRotationOriginJet ≡ V.v3 0ℚ 0ℚ 0ℚ →
-  1ℚ < 0ℚ
-originVorticityNonzero ()
-
--- Abstract the forbidden pointwise conclusion.  If zero strain were required
--- to dominate any strictly positive vorticity scale, the concrete jet closes
--- it to the impossible inequality positiveScale <= 0.
+-- A claimed positive pointwise lower bound must, when instantiated on this
+-- exact pure-rotation jet, provide a strictly positive lower product while the
+-- strain side is zero.  Keeping product positivity explicit makes the no-go
+-- independent of a particular ordered-ring helper theorem.
 record PositivePointwiseStrainVorticityLowerBound : Set where
   field
     lowerConstant : ℚ
     lowerConstantPositive : 0ℚ < lowerConstant
+    pureRotationLowerProductPositive :
+      0ℚ < lowerConstant * (1ℚ + 1ℚ)
     atPureRotationJet :
-      lowerConstant * (1ℚ + 1ℚ)
-      ≤ 0ℚ
+      lowerConstant * (1ℚ + 1ℚ) ≤ 0ℚ
 
 open PositivePointwiseStrainVorticityLowerBound public
 
@@ -118,17 +113,9 @@ positivePointwiseLowerBoundImpossible :
   PositivePointwiseStrainVorticityLowerBound →
   0ℚ < 0ℚ
 positivePointwiseLowerBoundImpossible lower =
-  let
-    twoPositive : 0ℚ < (1ℚ + 1ℚ)
-    twoPositive = _
-
-    productPositive :
-      0ℚ < lowerConstant lower * (1ℚ + 1ℚ)
-    productPositive = ℚP.*-positive
-      (lowerConstantPositive lower)
-      twoPositive
-  in
-  ℚP.<-≤-trans productPositive (atPureRotationJet lower)
+  ℚP.<-≤-trans
+    (pureRotationLowerProductPositive lower)
+    (atPureRotationJet lower)
 
 round79TraceFreeOrderingAloneForcesStrainGapComparableToVorticity : Bool
 round79TraceFreeOrderingAloneForcesStrainGapComparableToVorticity = false
