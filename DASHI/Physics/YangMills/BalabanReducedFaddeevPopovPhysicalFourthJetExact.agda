@@ -42,9 +42,8 @@ module DASHI.Physics.YangMills.BalabanReducedFaddeevPopovPhysicalFourthJetExact 
 -- log/determinant identification on the selected weak-coupling ball.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ)
+open import Data.Rational.Base as ℚ using (ℚ)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using (pair)
@@ -59,11 +58,8 @@ import DASHI.Physics.YangMills.BalabanReducedFlatFaddeevPopovGreenInverseExact a
 import DASHI.Physics.YangMills.BalabanReducedGhostExplicitTraceCarrierExact as Basis
 import DASHI.Physics.YangMills.BalabanReducedGhostOperatorMatrixExact as MatrixCarrier
 import DASHI.Physics.YangMills.BalabanFiniteRationalMatrixTraceCyclicExact as Matrix
+import DASHI.Physics.YangMills.BalabanReducedFaddeevPopovMatrixTraceLogJetExact as TraceMatrix
 import DASHI.Physics.YangMills.BalabanReducedGhostAdjointFourthJetExact as Jet
-
-------------------------------------------------------------------------
--- Componentwise arithmetic on quaternion fourth jets.
-------------------------------------------------------------------------
 
 zeroJet : Jet.QuaternionJet4
 zeroJet = Jet.jet4 Jet.zeroQ Jet.zeroQ Jet.zeroQ Jet.zeroQ Jet.zeroQ
@@ -97,10 +93,6 @@ adjointJetOnJet generator valueJet =
     (Jet.mulJet (Jet.expJet4 generator) valueJet)
     (Jet.inverseExpJet4 generator)
 
-------------------------------------------------------------------------
--- Forward gauge-orbit jet G_{exp(gX)} omega.
-------------------------------------------------------------------------
-
 backgroundGeneratorQuaternion :
   Coordinates.PhysicalSU2BondField4 → Periodic.Axis4 → Periodic.Site4 →
   Q.RationalQuaternion
@@ -122,10 +114,6 @@ backgroundGaugeOrbitJet generator parameter axis site =
   subJet
     (Jet.constantJet (FP.parameterQuaternion parameter site))
     (forwardParameterAdjointJet generator parameter axis site)
-
-------------------------------------------------------------------------
--- Backward covariant-divergence jet D_{exp(gX)} applied to the orbit jet.
-------------------------------------------------------------------------
 
 backwardOrbitAdjointJet :
   Coordinates.PhysicalSU2BondField4 → FP.SiteGaugeParameter4 →
@@ -152,10 +140,6 @@ faddeevPopovQuaternionJet :
 faddeevPopovQuaternionJet generator parameter site =
   sumJet Gauge.axes4 (λ axis → faddeevPopovAxisJet generator parameter axis site)
 
-------------------------------------------------------------------------
--- Four literal scalar coefficient operators M1,...,M4.
-------------------------------------------------------------------------
-
 coefficient1 coefficient2 coefficient3 coefficient4 :
   Coordinates.PhysicalSU2BondField4 → FP.SiteGaugeParameter4 →
   Gauge.GaugeCoordinate4 → ℚ
@@ -171,10 +155,6 @@ coefficient3 generator parameter (pair coordinate site) =
 coefficient4 generator parameter (pair coordinate site) =
   Gauge.quaternionCoordinate coordinate
     (Jet.c4 (faddeevPopovQuaternionJet generator parameter site))
-
-------------------------------------------------------------------------
--- Normalize by the exact reduced flat inverse: X_n = M_n M0^{-1}.
-------------------------------------------------------------------------
 
 reducedCoefficient1 reducedCoefficient2 reducedCoefficient3 reducedCoefficient4 :
   Coordinates.PhysicalSU2BondField4 → Block.PhysicalBlockL Path4.side4 →
@@ -206,14 +186,20 @@ physicalGhostX4 generator anchor =
 
 physicalReducedGhostMatrices4 :
   Coordinates.PhysicalSU2BondField4 → Block.PhysicalBlockL Path4.side4 →
-  MatrixCarrier.Matrix.FiniteGhostPerturbationMatrices4 Gauge.GaugeCoordinate4
+  TraceMatrix.FiniteGhostPerturbationMatrices4 Gauge.GaugeCoordinate4
 physicalReducedGhostMatrices4 generator anchor = record
-  { MatrixCarrier.Matrix.FiniteGhostPerturbationMatrices4.indices = Gauge.flatGaugeCoordinates
-  ; MatrixCarrier.Matrix.FiniteGhostPerturbationMatrices4.X1 = physicalGhostX1 generator anchor
-  ; MatrixCarrier.Matrix.FiniteGhostPerturbationMatrices4.X2 = physicalGhostX2 generator anchor
-  ; MatrixCarrier.Matrix.FiniteGhostPerturbationMatrices4.X3 = physicalGhostX3 generator anchor
-  ; MatrixCarrier.Matrix.FiniteGhostPerturbationMatrices4.X4 = physicalGhostX4 generator anchor
+  { TraceMatrix.FiniteGhostPerturbationMatrices4.indices = Gauge.flatGaugeCoordinates
+  ; TraceMatrix.FiniteGhostPerturbationMatrices4.X1 = physicalGhostX1 generator anchor
+  ; TraceMatrix.FiniteGhostPerturbationMatrices4.X2 = physicalGhostX2 generator anchor
+  ; TraceMatrix.FiniteGhostPerturbationMatrices4.X3 = physicalGhostX3 generator anchor
+  ; TraceMatrix.FiniteGhostPerturbationMatrices4.X4 = physicalGhostX4 generator anchor
   }
+
+physicalGhostTraceLogJet :
+  Coordinates.PhysicalSU2BondField4 → Block.PhysicalBlockL Path4.side4 →
+  DASHI.Physics.YangMills.BalabanReducedFaddeevPopovTraceLogJetExact.GhostTraceLogJet4
+physicalGhostTraceLogJet generator anchor =
+  TraceMatrix.matrixTraceLogJet (physicalReducedGhostMatrices4 generator anchor)
 
 physicalFaddeevPopovFourthJetConstructionLevel : ProofLevel
 physicalFaddeevPopovFourthJetConstructionLevel = machineChecked
@@ -221,10 +207,13 @@ physicalFaddeevPopovFourthJetConstructionLevel = machineChecked
 physicalReducedGhostFourMatricesConstructionLevel : ProofLevel
 physicalReducedGhostFourMatricesConstructionLevel = machineChecked
 
--- The coefficient matrices themselves are now source-native.  What remains of
--- the former `PhysicalReducedFaddeevPopovFourthJetExact` package is the
--- analytic theorem that the Bishop background path has these four coefficients
--- with an O(g^5) remainder uniformly on the selected ball; finite trace-log and
--- determinant convergence then consume these matrices.
+physicalReducedGhostTraceLogCoefficientsLevel : ProofLevel
+physicalReducedGhostTraceLogCoefficientsLevel = machineChecked
+
+-- The coefficient matrices and their fourth-order trace-log polynomial are now
+-- source-native.  What remains of the former fourth-jet package is the analytic
+-- theorem that the Bishop background path has these coefficients with a
+-- uniform O(g^5) remainder; the determinant theorem then identifies the finite
+-- trace-log with log det on the selected weak-coupling ball.
 physicalReducedGhostBishopFifthOrderRemainderLevel : ProofLevel
 physicalReducedGhostBishopFifthOrderRemainderLevel = conditional
