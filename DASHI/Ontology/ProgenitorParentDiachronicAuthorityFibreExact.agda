@@ -1,6 +1,7 @@
 module DASHI.Ontology.ProgenitorParentDiachronicAuthorityFibreExact where
 
-open import DASHI.Core.Prelude using (Bool; true; false; Nat; _≡_; refl)
+open import DASHI.Core.Prelude using (Bool; true; false; _≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
 
 import DASHI.Governance.DiachronicDelegatedAuthorityBoundary as Diachronic
 
@@ -10,7 +11,7 @@ open import DASHI.Ontology.ProgenitorParentProjectionFibre
 ------------------------------------------------------------------------
 -- Parent/caregiver authority is diachronic and scope-indexed.
 --
--- The parent relation and the authority relation are independent fibres.  This
+-- The parent relation and the authority relation are independent fibres. This
 -- module reuses the existing delegated-authority kernel rather than encoding
 -- revocation/current-will semantics again inside ParentRole.
 ------------------------------------------------------------------------
