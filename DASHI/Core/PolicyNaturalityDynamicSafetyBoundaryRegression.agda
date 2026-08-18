@@ -16,6 +16,7 @@ module DASHI.Core.PolicyNaturalityDynamicSafetyBoundaryRegression where
 
 open import DASHI.Core.Prelude
 
+import DASHI.Core.DynamicalQuotientSafety as Dynamic
 import DASHI.Core.ObserverFactorizedRefinementExact as Factorized
 import DASHI.Core.PolicyObserverFactorizationNaturalityExact as Naturality
 import DASHI.Core.PolicyRelativeProjectionSafety as Policy
@@ -47,9 +48,7 @@ liftedDemoPolicySelectsSameAction =
     Policy.demoPolicy
 
 coarseDynamicDefectSurvivesPerfectPolicyNaturality :
-  DASHI.Core.DynamicalQuotientSafety.TerminalisationDefect
-    Policy.demoSystem
-    Policy.demoProject
+  Dynamic.TerminalisationDefect Policy.demoSystem Policy.demoProject
 coarseDynamicDefectSurvivesPerfectPolicyNaturality = Policy.demoDynamicDefect
 
 coarsePolicySafetyAlsoSurvives :
@@ -76,9 +75,7 @@ record PolicyNaturalityWithoutDynamicSafetyWitness : Set₁ where
         Policy.demoProject
         Policy.demoPolicy
     unrestrictedDynamicDefect :
-      DASHI.Core.DynamicalQuotientSafety.TerminalisationDefect
-        Policy.demoSystem
-        Policy.demoProject
+      Dynamic.TerminalisationDefect Policy.demoSystem Policy.demoProject
 
 canonicalPolicyNaturalityWithoutDynamicSafetyWitness :
   PolicyNaturalityWithoutDynamicSafetyWitness
