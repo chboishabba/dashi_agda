@@ -43,7 +43,7 @@ module DASHI.Physics.Closure.NSTriadKNLiteralCompactTransferDriftDataRound82Exac
 --   qdot D - q Ddot.
 ------------------------------------------------------------------------
 
-open import Agda.Primitive using (Level)
+open import Agda.Primitive using (Level; lsuc)
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
@@ -77,7 +77,7 @@ shellTransferScale F shell = carrierDyadicScale F (suc shell)
 
 record LiteralPacketTransferTangent
     {r : Level}
-    (model : LP.PeriodicHardShellFourierPDE {r}) : Set r where
+    (model : LP.PeriodicHardShellFourierPDE {r}) : Set (lsuc r) where
   field
     integerEmbedding : C3.IntegerEmbedding (LP.realField model)
     inverseSquare : C3.ModeInverseSquare (LP.realField model) integerEmbedding
@@ -91,27 +91,21 @@ record LiteralPacketTransferTangent
 
 open LiteralPacketTransferTangent public
 
-private
-  F-of :
-    ∀ {r} {model : LP.PeriodicHardShellFourierPDE {r}} →
-    LiteralPacketTransferTangent model → C3.RealField r
-  F-of {model = model} datum = LP.realField model
-
 rawTransfer :
   ∀ {r} {model : LP.PeriodicHardShellFourierPDE {r}} →
   LiteralPacketTransferTangent model → C3.Carrier (LP.realField model)
-rawTransfer datum =
+rawTransfer {model = model} datum =
   C3.real
     (Packet.packetTransferPairing
-      _ (system datum) (shell datum) (modes datum))
+      model (system datum) (shell datum) (modes datum))
 
 rawTransferTangent :
   ∀ {r} {model : LP.PeriodicHardShellFourierPDE {r}} →
   LiteralPacketTransferTangent model → C3.Carrier (LP.realField model)
-rawTransferTangent datum =
+rawTransferTangent {model = model} datum =
   C3.real
     (Packet.packetTransferPairingFirstVariation
-      _ (system datum) (shell datum) (modes datum) (tangent datum))
+      model (system datum) (shell datum) (modes datum) (tangent datum))
 
 rawDissipation :
   ∀ {r} {model : LP.PeriodicHardShellFourierPDE {r}} →
@@ -207,8 +201,8 @@ physicalRelativeGrowthFactorsExactly :
       (viscousFactor datum))
     (rawRelativeGrowthCore datum)
 physicalRelativeGrowthFactorsExactly {model = model} datum =
-  P.R.solve 7
-    (λ s c q qdot d ddot zero →
+  P.R.solve 6
+    (λ s c q qdot d ddot →
       ((s P.R.⊗ qdot) P.R.⊗ (c P.R.⊗ d))
         P.R.⊕ P.R.⊝ ((s P.R.⊗ q) P.R.⊗ (c P.R.⊗ ddot))
       P.R.⊜
@@ -221,7 +215,6 @@ physicalRelativeGrowthFactorsExactly {model = model} datum =
     (rawTransferTangent datum)
     (rawDissipation datum)
     (rawDissipationTangent datum)
-    (C3.zero (LP.realField model))
   where
   module P = Field.Polynomial (LP.realField model)
 
