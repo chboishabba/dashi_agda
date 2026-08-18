@@ -1,56 +1,76 @@
-# Claim-indexed evidence polarity across PNF, hyperfabric, biology and atomics
+# Claim- and operator-indexed evidence polarity across PNF, hyperfabric, biology and atomics
 
 This tranche is a cross-pollination weld over existing DASHI carriers. It does not introduce a new four-valued logic, a second authority algebra, a replacement PNF, or a parallel chemistry/biology proof system.
 
-## Shared evidence shape
+## Shared evidence shape is not semantic negation by itself
 
-DASHI already has `DASHI.Algebra.DisagreementFourViewBoundary.PolarAssessment`:
+DASHI already has `DASHI.Algebra.DisagreementFourViewBoundary.PolarAssessment`, a two-bit information carrier whose historical field names are `supportsP` and `supportsNotP`.
 
-```text
-(supports P, supports not-P) : Bool x Bool
-```
-
-The four informational states remain distinct before any lossy presentation:
+The repository also already proves that several notions colloquially called an "opposite" are distinct. `RelationalLensSynthesisCore` separates:
 
 ```text
-(true,false)  positive-only
-(false,true)  negative-only
-(true,true)   conflict / both
-(false,false) missing / neither
+logical negation
+algebraic inverse
+orientation reversal
+contextual counterposition
+lens transition
 ```
 
-`ClaimIndexedEvidencePolarityExact` adds one missing typing discipline: evidence is pooled only inside a common claim/context fibre. Evidence about a different claim, body, time, place, relation, institution, observer, or provenance scope requires an explicit alignment witness before pooling.
+and `CounterpositionOrderedJoinExact` constructs a contextual counterposition that is neither the full inverse nor the double inverse.
 
-This prevents axis/context collapse from manufacturing contradiction.
+Therefore `ClaimIndexedEvidencePolarityExact` does **not** interpret the second Boolean coordinate as logical `not P` automatically. It introduces an `OppositionDescriptor` carrying:
+
+```text
+base claim
+opposing target claim
+operator role
+operator
+exact equation operator(base) = opposing target.
+```
+
+The two coordinates are then read as:
+
+```text
+support for base claim
+support for the declared opposing target under the declared operator role.
+```
+
+Only an explicit `LogicalNegationQualified` witness permits the second coordinate to be described as support for logical negation. In particular:
+
+```text
+support for a contextual counterposition != support for logical not-P
+orientation reversal != logical negation
+algebraic inverse != logical negation
+lens transition != logical negation.
+```
+
+Direct evidence pooling requires the same complete opposition descriptor and the same context. Different targets, operator roles, claims, times, bodies, places, institutions or provenance scopes require explicit alignment before pooling. This blocks both context collapse and operator-role collapse from manufacturing contradiction.
 
 Logical/informational calibration:
 
 - Nuel D. Belnap, "A Useful Four-Valued Logic", in J. Michael Dunn and George Epstein (eds.), *Modern Uses of Multiple-Valued Logic* (1977), DOI `10.1007/978-94-010-1161-7_2`.
 - J. Michael Dunn, "Intuitive Semantics for First-Degree Entailments and 'Coupled Trees'", *Philosophical Studies* 29(3), 149-168 (1976), DOI `10.1007/BF00373152`.
 
-Those sources motivate independent positive/negative information coordinates. Claim/context-indexed pooling is a DASHI-local typing rule.
+Those sources motivate independent information coordinates. The operator-role and fibre qualification is DASHI-local and reuses existing in-repo counterposition/lens semantics.
 
-## Required-axis completeness remains a separate layer
+## Required-axis completeness remains separate
 
 Incoming PR #582 independently contains `DASHI.Core.RequiredAxisSupportSquareExact`, including `AxisEvidenceFamily`, `RequiredAxesResolved`, `MissingRequiredAxis`, `ConflictingRequiredAxis`, and the theorem that positive evidence on another axis cannot fill a missing required axis.
 
 This tranche does not duplicate that calculus. On stack convergence, `RequiredAxesResolved` is the natural proof-bearing producer for the coarse `obligationsDischarged` status used here.
 
-So the intended product is:
+The intended product is therefore:
 
 ```text
-claim/context-indexed evidence
+claim/opposition/context-indexed evidence
 x required-axis completeness
-x existing authority gate
+x domain obligations
+x existing authority gate.
 ```
-
-rather than any one coordinate standing in for the others.
 
 ## Existing authority gates are reused
 
-`EvidenceObligationAuthoritySeparationExact` reuses `DASHI.Promotion.AuthorityGateCore`.
-
-A positively supported claim may still have open technical obligations. Even after technical obligations are discharged, the canonical local authority gate remains closed until the relevant external/domain authority bridge is supplied.
+`EvidenceObligationAuthoritySeparationExact` reuses `DASHI.Promotion.AuthorityGateCore`. A positively supported claim may still have open technical obligations. Even after technical obligations are discharged, the canonical local authority gate remains closed until the relevant external/domain authority bridge is supplied.
 
 Thus:
 
@@ -58,109 +78,67 @@ Thus:
 support != obligation discharge
 obligation discharge != authority
 conflict != affirmative promotion
-authority cannot be manufactured from local formal evidence
+authority cannot be manufactured from local formal evidence.
 ```
-
-The existing `CrossDomainClaimPromotionBoundary`, `ObligationIndex`, and domain authority-intake modules remain authoritative for their own promotion lanes.
 
 ## Dialectic and 369
 
-`DialecticInvariantGeometry.DialecticField` already supplies two independent predicates: thesis and antithesis. Pointwise this has exactly the support-square shape.
+`DialecticInvariantGeometry.DialecticField` supplies two independent predicates: thesis and antithesis. Pointwise these have the same two-bit **shape** as `PolarAssessment`, but `ClaimEvidence369BridgeExact` now calls the second coordinate counter-support rather than refutation. Antithesis is not automatically logical negation.
 
-`ClaimEvidence369BridgeExact` exposes that correspondence but keeps the 369/TriTruth presentation coarser. `TetralemmaBridge.triResidual` can produce `exact`, `partial`, or `noTypedMeet` and already proves that it cannot produce the explicit `contradiction` residual.
+The bridge reuses the repository theorem that contextual counterposition is not logical negation by role. The 369/TriTruth presentation remains coarser: `TetralemmaBridge.triResidual` can produce `exact`, `partial`, or `noTypedMeet` and cannot manufacture the explicit `contradiction` residual.
 
-Therefore:
+So:
 
 ```text
-fine support/refutation evidence -> optional ternary/369 presentation
+fine thesis/counter-position information
+-> qualified claim/opposition evidence
+-> optional ternary/369 presentation,
 ```
 
 not:
 
 ```text
+antithesis = logical negation
+or
 369 presentation = complete evidence state.
 ```
 
-Likewise `EvidenceHorizon369` already carries fine signed evidence and proves that omitted horizon evidence is not refutation. The support square is a qualitative summary, not a replacement for the signed coordinate.
+`EvidenceHorizon369` continues to carry fine signed evidence and proves that omitted horizon evidence is not refutation.
 
 ## Hyperfabric and hypervoxel
 
-`TypedHyperfabricCore` already provides stalks, restriction maps, compatible global sections, provenance and obstructions. Claim-indexed evidence can therefore live locally in typed stalks without changing the hyperfabric semantics.
+`TypedHyperfabricCore` supplies stalks, restriction maps, compatible global sections, provenance and obstructions. Local evidence now carries an opposition descriptor as well as its context.
 
-`RecursiveRadixHypervoxel` gives a particularly exact geometric witness: the lifted carrier has a ternary base plus a polarity fibre, and `centralFlip` changes the fine polarity while leaving the projected base address unchanged.
+`RecursiveRadixHypervoxel` independently gives a ternary base plus a polarity fibre, with `centralFlip` changing the fine polarity while leaving the projected base address fixed. This geometric polarity is **not** thereby logical negation and is not another ternary axis.
 
-This is a source-native example of vertical fine motion invisible at the coarse base.
-
-Centre-blind descent continues to require the existing invariance proof; polarity is not promoted into another ternary geometric axis.
-
-The hyperfabric source already recorded in the core is:
-
-- Iulia Duta, Giulia Cassarà, Fabrizio Silvestri and Pietro Liò, "Sheaf Hypergraph Networks", arXiv:2309.17116, DOI `10.48550/arXiv.2309.17116`.
-
-No empirical neural-network performance claim is imported by this tranche.
+The hyperfabric source already recorded in the core is Iulia Duta, Giulia Cassarà, Fabrizio Silvestri and Pietro Liò, *Sheaf Hypergraph Networks*, arXiv:2309.17116, DOI `10.48550/arXiv.2309.17116`.
 
 ## Intersectional carrier
 
-`IntersectionalLongitudinalResidualDynamics` keeps the situated carrier explicit as:
-
-```text
-body x time x place x relation x institution x axis-bundle.
-```
-
-`IntersectionalClaimEvidenceFibreExact` uses that entire value as the evidence context index. Consequently two situated evidence packets cannot be pooled merely because their surface labels look similar. An explicit equality/alignment witness is required first.
-
-This preserves the existing no-axis-neutral-universalism boundary.
+`IntersectionalLongitudinalResidualDynamics` keeps body, time, place, relation, institution and axis bundle explicit. `IntersectionalClaimEvidenceFibreExact` now additionally indexes evidence by the complete opposition descriptor. Thus different situated contexts **or different meanings of opposition** cannot be pooled automatically.
 
 ## Trauma, memory and learning
 
-`MemoryFibre` and `LearningAlgebra` already prove that revaluation, habituation, extinction and phase realignment can preserve remembered-event identity.
-
-`MemoryEvidencePolarityLearningBridgeExact` makes evidence appraisal orthogonal to that preserved memory identity:
+`MemoryFibre` and `LearningAlgebra` already prove that revaluation, habituation, extinction and phase realignment can preserve remembered-event identity. `MemoryEvidencePolarityLearningBridgeExact` keeps appraisal change orthogonal to remembered-event identity:
 
 ```text
-before evidence polarity -> after evidence polarity
+evidence/appraisal revision != event erasure
+extinction != semantic deletion.
 ```
 
-may change while the remembered PNF event remains the same.
-
-Thus revision/counterevidence need not mean memory deletion, and extinction remains action-dominance inhibition rather than semantic erasure.
-
-The existing `TraumaMemoryHypervoxelBridge` continues to own trauma/body-memory placement and explicitly blocks residuals from becoming diagnoses.
+The existing trauma-memory hypervoxel lane continues to block residual structure from becoming diagnosis.
 
 ## Brain and biological proxies
 
-`BrainProxyEvidenceAuthorityBridgeExact` reuses `FMRIConnectomeProxyGovernance`, `BrainDNABodyMemoryBridge`, and the canonical clinical authority gate.
-
-A positive BOLD/connectome/representation observation can occupy an evidence coordinate while hidden-state recovery, trauma proof, diagnosis, treatment and clinical authority remain blocked.
-
-So:
-
-```text
-proxy evidence != hidden state
-proxy evidence != diagnosis
-representation != trauma proof
-```
+`BrainProxyEvidenceAuthorityBridgeExact` reuses `FMRIConnectomeProxyGovernance`, `BrainDNABodyMemoryBridge`, and the canonical clinical authority gate. Proxy evidence remains distinct from hidden-state recovery, trauma proof, diagnosis, treatment and clinical authority.
 
 ## Chemistry
 
-`EvidenceObligationAuthorityBridgeExact` reuses:
-
-- `ChemistryQuantitativeAdapter` for exact-reference, measurement, preservation, protocol and replication obligations;
-- `ChemistryAuthorityBinding` for NIST ASD, NIST Chemistry WebBook and CODATA authority-token shapes;
-- `AuthorityGateCore` for fail-closed scientific authority;
-- `NeurochemicalAtomicChemistryBridge` for candidate-only molecular/kinetic semantics and clinical non-promotion.
-
-Thus even positive candidate evidence plus completed local technical work does not silently create scientific or clinical authority.
+`EvidenceObligationAuthorityBridgeExact` reuses `ChemistryQuantitativeAdapter`, `ChemistryAuthorityBinding` for NIST ASD / NIST Chemistry WebBook / CODATA token shapes, `AuthorityGateCore`, and `NeurochemicalAtomicChemistryBridge`. Positive candidate evidence plus completed local technical work does not silently create scientific or clinical authority.
 
 ## Physical atomics versus dialectical atom bookkeeping
 
-`AtomicEvidenceObligationBridgeExact` preserves the strongest naming boundary in this tranche.
-
-`AtomicPeriodicTableRecoveryBoundary` is a physical theorem boundary requiring independent witnesses for force sectors, orbital control, shell recurrence, fermionic lift, interacting minima, shell dictionary and valence projection.
-
-`DialecticalAtomFrontierReceipt` is explicitly bookkeeping vocabulary: 7+7+1 lanes, balanced-trit/carry notation, signed-zero torsion markers, pressure/anisotropy bookkeeping, braid/discourse trajectories and tetration markers. Its own promotion surface blocks physical/Clay conclusions.
-
-Therefore:
+`AtomicEvidenceObligationBridgeExact` keeps `AtomicPeriodicTableRecoveryBoundary` separate from `DialecticalAtomFrontierReceipt`:
 
 ```text
 dialectical atom != physical atom
@@ -169,23 +147,30 @@ bookkeeping evidence != periodic-table recovery witness.
 
 ## Shared anti-collapse spine
 
-The resulting cross-domain invariant is:
+The resulting invariant is:
 
 ```text
-fine claim/context fibre
--> positive/negative evidence with provenance
+fine claim/opposition/context fibre
+-> support for base + support for declared opposing target + provenance
 -> required-axis completeness when needed
 -> domain proof obligations
 -> existing authority gate
--> governed projection / action.
+-> governed projection/action.
 ```
 
-with the explicit non-identifications:
+with explicit non-identifications:
 
 ```text
+opposition != logical negation
+logical negation != algebraic inverse
+logical negation != orientation reversal
+contextual counterposition != full inverse
+contextual counterposition != double inverse
+lens transition != algebraic inverse
 conflict != ignorance
 omission != refutation
-cross-context evidence != same-claim contradiction
+cross-context evidence != same-fibre contradiction
+cross-operator evidence != same-fibre contradiction
 support != obligation discharge
 obligation discharge != authority
 coarse presentation != fine state
@@ -196,4 +181,4 @@ physical theorem witness != symbolic bookkeeping analogy.
 
 ## Validation boundary
 
-This tranche is source/API/proof-shape reviewed against the live repository. The current connector runtime does not expose a usable Agda 2.9 executable, so no fresh kernel-clean claim is made here. No GitHub Actions, CI or CodeRabbit are invoked by this tranche.
+This tranche is source/API/proof-shape reviewed against the live repository. The connector runtime does not expose a usable Agda 2.9 executable, so no fresh kernel-clean claim is made here. No GitHub Actions, CI or CodeRabbit are invoked by this tranche.
