@@ -1,0 +1,54 @@
+module DASHI.Ontology.ProgenitorParentCrossPollinationEverything where
+
+------------------------------------------------------------------------
+-- Focused aggregate for the parent/progenitor + PNF + observer-refinement +
+-- dynamic-authority cross-pollination tranche. The Hecke import is intentional:
+-- it supplies an independent collapsed-observer frontier witness on the same
+-- generic core.
+------------------------------------------------------------------------
+
+import DASHI.Core.ObserverRefinementLatticeExact
+import DASHI.Core.FibrePreservingDynamicsExact
+import DASHI.Core.SectionedProjectionProvenanceBridgeExact
+import DASHI.Core.PredicatePullbackLatticeExact
+import DASHI.Core.DynamicalQuotientSafety
+import DASHI.Core.PolicyRelativeProjectionSafety
+import DASHI.Core.PluralConsumerProjectionSafety
+import DASHI.Core.IntersectionalNonFactorability
+import DASHI.Core.ProvenanceBearingQuotient
+import DASHI.Core.ProvenanceQuotientDynamics
+import DASHI.Core.RecoverableQuotientCompositionExact
+
+import DASHI.Ontology.ProgenitorParentHyperfabric
+import DASHI.Ontology.ProgenitorParentProjectionFibre
+import DASHI.Ontology.ProgenitorParentPNFPullbackLattice
+import DASHI.Ontology.ProgenitorParentPredicateBaseChange
+import DASHI.Ontology.ProgenitorParentPredicatePullbackExact
+import DASHI.Ontology.ProgenitorParentPredicateDescentBoundary
+import DASHI.Ontology.ProgenitorParentObserverDynamicsBridge
+import DASHI.Ontology.ProgenitorParentObservationAuthorityBridge
+import DASHI.Ontology.ProgenitorParentObserverRefinementTests
+
+-- Dynamic/action-facing parent bridges. These specialize existing generic
+-- DASHI safety, non-factorability, provenance, consultation and diachronic-
+-- authority kernels; they do not create parallel theories.
+import DASHI.Ontology.ProgenitorParentAuthorityRoutingNonfactorabilityExact
+import DASHI.Ontology.ProgenitorParentObserverFutureSafetyExact
+import DASHI.Ontology.ProgenitorParentDiachronicAuthorityFibreExact
+import DASHI.Ontology.ProgenitorParentResidualDynamicsExact
+import DASHI.Ontology.ProgenitorParentProgressiveResidualFactorizationExact
+import DASHI.Ontology.ProgenitorParentAllyshipAuthorityBridgeExact
+import DASHI.Ontology.ProgenitorParentConsultationDecisionSensitivityExact
+import DASHI.Ontology.ProgenitorParentDynamicAuthorityRegression
+
+-- Later JMD/Aristotle source now independently exposes matching parent observer,
+-- hidden-transition, exact-reopening, route-nonfactorability and policy-safety
+-- theorems.  This module pairs those source-pinned Lean contracts with the
+-- existing Agda proof terms without identifying the two kernels.
+import DASHI.Ontology.ProgenitorParentLatestJMDConformanceExact
+
+import DASHI.Governance.DiachronicDelegatedAuthorityBoundary
+import DASHI.Biology.ParentAllyshipMultiObserverBridge
+import DASHI.Reasoning.RelationalChronologyProjectionBoundary
+
+import Ontology.Hecke.CurrentSaturatedObserverRefinementBridgeExact
