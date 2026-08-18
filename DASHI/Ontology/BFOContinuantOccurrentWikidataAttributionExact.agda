@@ -1,5 +1,6 @@
 module DASHI.Ontology.BFOContinuantOccurrentWikidataAttributionExact where
 
+open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 
