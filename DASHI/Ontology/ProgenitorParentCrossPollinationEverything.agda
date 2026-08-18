@@ -9,12 +9,14 @@ module DASHI.Ontology.ProgenitorParentCrossPollinationEverything where
 import DASHI.Core.ObserverRefinementLatticeExact
 import DASHI.Core.FibrePreservingDynamicsExact
 import DASHI.Core.SectionedProjectionProvenanceBridgeExact
+import DASHI.Core.PredicatePullbackLatticeExact
 
 import DASHI.Ontology.ProgenitorParentHyperfabric
 import DASHI.Ontology.ProgenitorParentProjectionFibre
 import DASHI.Ontology.ProgenitorParentPNFPullbackLattice
 import DASHI.Ontology.ProgenitorParentPredicateBaseChange
 import DASHI.Ontology.ProgenitorParentPredicatePullbackExact
+import DASHI.Ontology.ProgenitorParentPredicateDescentBoundary
 import DASHI.Ontology.ProgenitorParentObserverDynamicsBridge
 import DASHI.Ontology.ProgenitorParentObservationAuthorityBridge
 
