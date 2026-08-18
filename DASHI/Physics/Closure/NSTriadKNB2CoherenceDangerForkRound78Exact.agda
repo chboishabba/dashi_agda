@@ -32,15 +32,14 @@ module DASHI.Physics.Closure.NSTriadKNB2CoherenceDangerForkRound78Exact where
 -- Round78 does not create a parallel CFM classifier.  Instead it proves the
 -- exact B2 consequence: if whichever branch occurs supplies a SAME-EVENT
 -- depletion-dominance proof, then a strictly frame-weighted supercritical row
--- is impossible.  Therefore a successful B2 event must escape at least one of
--- those quantitative depletion/turnover/tail/viscous resolutions.
+-- yields the impossible strict inequality 0<0.  Therefore a successful B2
+-- event must escape at least one quantitative resolution.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Set)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Empty using (⊥)
-open import Data.Rational.Base using (_≤_)
+open import Data.Rational.Base using (0ℚ; _≤_; _<_)
 
 import DASHI.Physics.Closure.NSMiddleEigenvalueDangerFork as Fork
 import DASHI.Physics.Closure.NSTriadKNFrameWeightedSupercriticalPropagationRound77Exact as Propagation
@@ -94,7 +93,7 @@ quantitativelyResolvedDangerRefutesB2 :
   ∀ {row decomposition Biaxial AlignmentSmall Turnover Tail Viscous} →
   (certificate : QuantitativeDangerResolution
     {row = row} decomposition Biaxial AlignmentSmall Turnover Tail Viscous) →
-  ⊥
+  0ℚ < 0ℚ
 quantitativelyResolvedDangerRefutesB2 {decomposition = decomposition} certificate =
   Gate.physicalSupercriticalRowRefutesDepletionDominance
     decomposition
