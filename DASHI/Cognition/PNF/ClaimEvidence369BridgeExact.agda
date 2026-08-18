@@ -10,16 +10,17 @@ import DASHI.Algebra.TetralemmaBridge as Tetralemma
 import DASHI.Cognition.PNF.EvidenceHorizon369 as Horizon
 import DASHI.Interop.SensibLawResidualLattice as Residual
 import DASHI.Reasoning.DialecticInvariantGeometry as Dialectic
+import DASHI.Reasoning.RelationalLensSynthesisCore as Lens
 
 ------------------------------------------------------------------------
 -- Dialectic / PNF / 369 cross-pollination.
 --
--- A DialecticField already supplies two independent Boolean predicates.
--- Pointwise, that is exactly the support-square shape.  The 369/TriTruth lane
--- remains a coarser projection: its residual projection is proven incapable of
--- emitting the explicit contradiction residual.  Contradiction therefore has
--- to be retained in the fine claim/evidence fibre rather than manufactured by
--- the ternary presentation.
+-- A DialecticField supplies two independent Boolean predicates: thesis and
+-- antithesis. Pointwise that has the same TWO-BIT SHAPE as PolarAssessment,
+-- but the second bit is only "antithesis present". It is not definitionally
+-- logical negation, algebraic inverse, orientation reversal, or any particular
+-- contextual counterposition. RelationalLensSynthesisCore already separates
+-- those operator roles.
 ------------------------------------------------------------------------
 
 _≢_ : ∀ {A : Set} → A → A → Set
@@ -41,11 +42,19 @@ dialecticSupportIsThesis :
   ≡ Dialectic.thesis field x
 dialecticSupportIsThesis field x = refl
 
-dialecticRefutationIsAntithesis :
+dialecticCounterSupportIsAntithesis :
   ∀ {X} (field : Dialectic.DialecticField X) x →
   Four.supportsNotP (dialecticPolarity field x)
   ≡ Dialectic.antithesis field x
-dialecticRefutationIsAntithesis field x = refl
+dialecticCounterSupportIsAntithesis field x = refl
+
+-- The field name `supportsNotP` comes from the reused two-bit carrier; this
+-- theorem records that the dialectic antithesis coordinate is not thereby
+-- qualified as classical logical negation.
+contextualCounterpositionStillNotLogicalNegation :
+  Lens.contextualCounterpositionRole ≡ Lens.logicalNegationRole → ⊥
+contextualCounterpositionStillNotLogicalNegation =
+  Lens.contextualCounterpositionIsNotLogicalNegationByRole
 
 dialectic369Residual :
   ∀ {X} →
@@ -68,24 +77,26 @@ dialectic369ProjectionCannotEmitContradiction field x =
 ------------------------------------------------------------------------
 -- The H3/H6/H9 evidence horizon already carries fine signed evidence and
 -- explicitly proves that omission is not refutation.  This bridge records the
--- corresponding support-square discipline without replacing signed evidence.
+-- corresponding two-coordinate discipline without replacing signed evidence.
 ------------------------------------------------------------------------
 
 record ClaimEvidence369Boundary : Set where
   field
     dialecticRetainsTwoIndependentPolarities : Bool
+    antithesisAutomaticallyMeansLogicalNegationClaimed : Bool
     supportSquareReplacesSignedEvidenceClaimed : Bool
     omittedHorizonCoordinateMeansRefutationClaimed : Bool
     ternaryProjectionManufacturesContradictionClaimed : Bool
-    claimIndexedPoolingRequired : Bool
+    claimOperatorContextIndexedPoolingRequired : Bool
 
 canonicalClaimEvidence369Boundary : ClaimEvidence369Boundary
 canonicalClaimEvidence369Boundary = record
   { dialecticRetainsTwoIndependentPolarities = true
+  ; antithesisAutomaticallyMeansLogicalNegationClaimed = false
   ; supportSquareReplacesSignedEvidenceClaimed = false
   ; omittedHorizonCoordinateMeansRefutationClaimed = false
   ; ternaryProjectionManufacturesContradictionClaimed = false
-  ; claimIndexedPoolingRequired = true
+  ; claimOperatorContextIndexedPoolingRequired = true
   }
 
 horizonOmissionStillCannotRefute :
