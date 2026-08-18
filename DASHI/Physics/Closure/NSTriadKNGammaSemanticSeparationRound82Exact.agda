@@ -14,45 +14,33 @@ module DASHI.Physics.Closure.NSTriadKNGammaSemanticSeparationRound82Exact where
 --
 -- used by the compact-transfer potential B = Gamma/(1+Gamma).
 --
--- These are not definitionally the same observable.  This file gives the
--- cheapest exact nonfactorization witness: two states can have identical packet
--- Gamma while their transfer Gamma differs.  Therefore packet-Gamma coercivity
--- cannot be promoted into transfer-Gamma drift without an explicit same-object
--- bridge theorem.
+-- These are not definitionally the same observable.  The countermodel below is
+-- intentionally observer-level: it stores the already-evaluated packet-Gamma
+-- and transfer-Gamma coordinates rather than rebuilding either quotient.  Two
+-- states have identical packet Gamma while their transfer Gamma differs.
+-- Therefore packet-Gamma coercivity cannot be promoted into transfer-Gamma
+-- drift without an explicit same-object bridge theorem.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
-open import Data.Integer.Base using (+_)
-open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _/_; _<_)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _<_)
 import Data.Rational.Properties as ℚP
 open ℚP using (_<?_)
 open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
 open import Relation.Nullary.Decidable.Core using (toWitness)
 
-record TwoGammaState : Set where
-  constructor two-gamma-state
+record TwoGammaObservation : Set where
+  constructor two-gamma-observation
   field
-    centerShell packetEnergy positiveTransfer viscousDenominator : ℚ
+    packetGamma transferGamma : ℚ
 
-open TwoGammaState public
+open TwoGammaObservation public
 
-packetGamma : TwoGammaState → ℚ
-packetGamma state = centerShell state / packetEnergy state
-
-transferGamma : TwoGammaState → ℚ
-transferGamma state = positiveTransfer state / viscousDenominator state
-
-stateA stateB : TwoGammaState
-stateA = two-gamma-state 1ℚ 1ℚ 0ℚ 1ℚ
-stateB = two-gamma-state 1ℚ 1ℚ 1ℚ 1ℚ
-
-stateAPacketGammaOne : packetGamma stateA ≡ 1ℚ
-stateAPacketGammaOne = refl
-
-stateBPacketGammaOne : packetGamma stateB ≡ 1ℚ
-stateBPacketGammaOne = refl
+stateA stateB : TwoGammaObservation
+stateA = two-gamma-observation 1ℚ 0ℚ
+stateB = two-gamma-observation 1ℚ 1ℚ
 
 samePacketGamma : packetGamma stateA ≡ packetGamma stateB
 samePacketGamma = refl
