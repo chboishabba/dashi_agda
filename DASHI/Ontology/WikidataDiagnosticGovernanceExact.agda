@@ -1,5 +1,6 @@
 module DASHI.Ontology.WikidataDiagnosticGovernanceExact where
 
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
@@ -21,9 +22,6 @@ data DiagnosticAgent : Set where
   formalChecker : DiagnosticAgent
   diagnosticAnalyst : DiagnosticAgent
 
--- The source maintainer may govern the represented source carrier; the target
--- community governs target revision.  Formal checkers and analysts may supply
--- evidence but are not given automatic constitutive authority merely by role.
 data DiagnosticAuthorises : DiagnosticAgent → Governance.InquiryCoordinate → Set where
   sourceMaintainerShapesCarrier :
     DiagnosticAuthorises sourceOntologyMaintainer Governance.carrierCoordinate
@@ -72,16 +70,15 @@ data FindingImpliesEditMandatePermission : Set where
 
 diagnosticDetectionDoesNotConferEditAuthority :
   DiagnosticFinding → FindingImpliesEditMandatePermission → EditMandate
-  -- This function is uninhabited because the permission type has no constructor.
 diagnosticDetectionDoesNotConferEditAuthority finding ()
 
 record DiagnosticGovernanceBoundary : Set where
   constructor diagnosticGovernanceBoundary
   field
-    evidenceContributionEqualsConstitutiveAuthority : Agda.Builtin.Bool.Bool
-    findingEqualsEditMandate : Agda.Builtin.Bool.Bool
-    targetRevisionRequiresIndependentGovernance : Agda.Builtin.Bool.Bool
+    evidenceContributionEqualsConstitutiveAuthority : Bool
+    findingEqualsEditMandate : Bool
+    targetRevisionRequiresIndependentGovernance : Bool
 
 canonicalDiagnosticGovernanceBoundary : DiagnosticGovernanceBoundary
 canonicalDiagnosticGovernanceBoundary =
-  diagnosticGovernanceBoundary Agda.Builtin.Bool.false Agda.Builtin.Bool.false Agda.Builtin.Bool.true
+  diagnosticGovernanceBoundary false false true
