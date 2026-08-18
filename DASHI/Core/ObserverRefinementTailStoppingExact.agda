@@ -13,7 +13,7 @@ module DASHI.Core.ObserverRefinementTailStoppingExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _≤_; _<_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _-_; _≤_; _<_)
 
 import DASHI.Core.RobustObserverSeparationMarginExact as Robust
 
@@ -34,7 +34,7 @@ record RefinementTailSeparatorData : Set where
 
     everyFutureRightLower :
       (laterStage : Nat) →
-      referenceRight Robust.- remainingEndpointTail ≤ futureRight laterStage
+      referenceRight - remainingEndpointTail ≤ futureRight laterStage
 
 open RefinementTailSeparatorData public
 
