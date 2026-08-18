@@ -38,8 +38,9 @@ module DASHI.Physics.YangMills.BalabanPlaquetteSubsetMobiusDegreeOneCollapseExac
 
 open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Integer.Base using (+_)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _*_; _/_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _*_; _/_)
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
@@ -59,6 +60,12 @@ import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
 
 emptyElim : ∀ {A : Set} → Empty → A
 emptyElim ()
+
+sumRationalZero : ∀ {A : Set} (values : List A) →
+  Sums.sumRational values (λ _ → 0ℚ) ≡ 0ℚ
+sumRationalZero [] = refl
+sumRationalZero (value ∷ values)
+  rewrite sumRationalZero values = ℚRing.solve []
 
 bondCellEqualTrue : ∀ {left right} →
   left ≡ right → Boundary.bondCellEqual left right ≡ true
@@ -401,7 +408,7 @@ sumProjectsOutside vector plaquette degree coordinate maskFalse =
         (cong (λ selected → Projector.maskSelect selected (vector coordinate))
           (maskFalse subset))
         (ℚRing.solve-∀ (vector coordinate))))
-    (Sums.sumRationalZero (Degree.degreeSubsets degree))
+    (sumRationalZero (Degree.degreeSubsets degree))
 
 subsetLayerStateCoefficientExact : ∀ vector plaquette degree coordinate →
   subsetLayerState vector plaquette degree coordinate
