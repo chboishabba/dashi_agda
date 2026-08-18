@@ -91,7 +91,11 @@ fourTimesGenusPlusEqualsFourTimesPairDefect :
   (D : SupersingularFrickeCountData) →
   4 * genusX0Plus D ≡ 4 * frobeniusPairDefect D
 fourTimesGenusPlusEqualsFourTimesPairDefect D =
-  Nat.+-cancelʳ-≡ (2 * rationalSupersingular D) balanced
+  Nat.+-cancelʳ-≡
+    (4 * genusX0Plus D)
+    (4 * frobeniusPairDefect D)
+    (2 * rationalSupersingular D)
+    balanced
   where
   rhWithRational :
     4 * genusX0Plus D + 2 * rationalSupersingular D
@@ -140,7 +144,10 @@ frobeniusPairDefectEqualsFrickeGenus :
   frobeniusPairDefect D ≡ genusX0Plus D
 frobeniusPairDefectEqualsFrickeGenus D =
   sym
-    (Nat.*-cancelˡ-≡ 4
+    (Nat.*-cancelˡ-≡
+      (genusX0Plus D)
+      (frobeniusPairDefect D)
+      4
       (fourTimesGenusPlusEqualsFourTimesPairDefect D))
 
 zeroPairDefectIffZeroFrickeGenus :
