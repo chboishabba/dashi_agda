@@ -147,6 +147,10 @@ globalAntipodalCountEquation :
   fineInteractionStateCount ≡ 1 + 9841 * 2
 globalAntipodalCountEquation = refl
 
+globalAndBlockwiseQuotientCountsDiffer :
+  globalAntipodalClassCount ≡ blockOrientationClassCount → ⊥
+globalAndBlockwiseQuotientCountsDiffer ()
+
 blockQuotientStratification :
   blockOrientationClassCount ≡ 1 + 39 + 507 + 2197
 blockQuotientStratification = refl
@@ -242,6 +246,24 @@ aggregateSum
   +ℤ tripleSum (appraisalTriple appraisalA)
   +ℤ tripleSum (appraisalTriple appraisalB)
 
+allPositiveAggregatesToNine : aggregateSum allPositiveRound ≡ + 9
+allPositiveAggregatesToNine = refl
+
+baseFlipAggregatesToThree : aggregateSum baseFlipped ≡ + 3
+baseFlipAggregatesToThree = refl
+
+nineIsNotThree : (+ 9 : ℤ) ≡ + 3 → ⊥
+nineIsNotThree ()
+
+blockOrientationCollisionSeparatedByAggregate :
+  forgetBlockOrientation allPositiveRound ≡ forgetBlockOrientation baseFlipped
+  × (aggregateSum allPositiveRound ≡ aggregateSum baseFlipped → ⊥)
+blockOrientationCollisionSeparatedByAggregate =
+  refl , (λ aggregateEquality →
+    nineIsNotThree
+      (trans (sym allPositiveAggregatesToNine)
+        (trans aggregateEquality baseFlipAggregatesToThree)))
+
 zeroInteraction : Cube.InteractionCube
 zeroInteraction = Cube.interactionCube SSP.sspZero SSP.sspZero SSP.sspZero
 
@@ -271,10 +293,62 @@ cancellationAlsoAggregatesToZero = refl
 structuralZeroIsNotCancellationState : structuralZeroRound ≡ cancellationZeroRound → ⊥
 structuralZeroIsNotCancellationState ()
 
+structuralZeroBlockClass :
+  forgetBlockOrientation structuralZeroRound
+  ≡ blockOrientationQuotient Orbit.centre27 Orbit.centre27 Orbit.centre27
+structuralZeroBlockClass = refl
+
+cancellationBlockClass :
+  forgetBlockOrientation cancellationZeroRound
+  ≡ blockOrientationQuotient
+      (Orbit.firstPositive27 SSP.sspNegOne SSP.sspZero)
+      Orbit.centre27
+      Orbit.centre27
+cancellationBlockClass = refl
+
+centreBlockClassIsNotCancellationClass :
+  blockOrientationQuotient Orbit.centre27 Orbit.centre27 Orbit.centre27
+  ≡ blockOrientationQuotient
+      (Orbit.firstPositive27 SSP.sspNegOne SSP.sspZero)
+      Orbit.centre27
+      Orbit.centre27 → ⊥
+centreBlockClassIsNotCancellationClass ()
+
+aggregateCollisionSeparatedByBlockOrientation :
+  aggregateSum structuralZeroRound ≡ aggregateSum cancellationZeroRound
+  × (forgetBlockOrientation structuralZeroRound
+      ≡ forgetBlockOrientation cancellationZeroRound → ⊥)
+aggregateCollisionSeparatedByBlockOrientation =
+  refl , (λ classEquality →
+    centreBlockClassIsNotCancellationClass
+      (trans (sym structuralZeroBlockClass)
+        (trans classEquality cancellationBlockClass)))
+
 cancellationToNeutralDoesNotImplyTrivialFineState :
   aggregateSum structuralZeroRound ≡ aggregateSum cancellationZeroRound
   × (structuralZeroRound ≡ cancellationZeroRound → ⊥)
 cancellationToNeutralDoesNotImplyTrivialFineState = refl , structuralZeroIsNotCancellationState
+
+------------------------------------------------------------------------
+-- The two summaries are incomparable: each has a collision the other splits.
+------------------------------------------------------------------------
+
+record ProjectionIncomparabilityWitness : Set where
+  constructor projectionIncomparabilityWitness
+  field
+    blockCollisionAggregateSeparates :
+      forgetBlockOrientation allPositiveRound ≡ forgetBlockOrientation baseFlipped
+      × (aggregateSum allPositiveRound ≡ aggregateSum baseFlipped → ⊥)
+    aggregateCollisionBlockSeparates :
+      aggregateSum structuralZeroRound ≡ aggregateSum cancellationZeroRound
+      × (forgetBlockOrientation structuralZeroRound
+          ≡ forgetBlockOrientation cancellationZeroRound → ⊥)
+
+canonicalProjectionIncomparabilityWitness : ProjectionIncomparabilityWitness
+canonicalProjectionIncomparabilityWitness =
+  projectionIncomparabilityWitness
+    blockOrientationCollisionSeparatedByAggregate
+    aggregateCollisionSeparatedByBlockOrientation
 
 ------------------------------------------------------------------------
 -- Boundary: blockwise and global orbit quotients, scalar aggregation, and
@@ -287,6 +361,8 @@ record InteractionAntipodalFibreBoundary : Set where
     globalAntipodeEqualsContextualCounterposition : Bool
     aggregateZeroImpliesStructuralZero : Bool
     orientationForgottenBaseReconstructsFineState : Bool
+    globalAndBlockwiseQuotientsSame : Bool
+    blockOrientationAndAggregateTotallyOrderedByRefinement : Bool
 
 canonicalInteractionAntipodalFibreBoundary : InteractionAntipodalFibreBoundary
 canonicalInteractionAntipodalFibreBoundary = record
@@ -294,4 +370,6 @@ canonicalInteractionAntipodalFibreBoundary = record
   ; globalAntipodeEqualsContextualCounterposition = false
   ; aggregateZeroImpliesStructuralZero = false
   ; orientationForgottenBaseReconstructsFineState = false
+  ; globalAndBlockwiseQuotientsSame = false
+  ; blockOrientationAndAggregateTotallyOrderedByRefinement = false
   }
