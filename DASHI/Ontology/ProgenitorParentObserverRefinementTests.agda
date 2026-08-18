@@ -7,6 +7,7 @@ import DASHI.Core.SectionedProjectionProvenanceBridgeExact as Sectioned
 import DASHI.Core.PredicatePullbackLatticeExact as Predicate
 import DASHI.Cognition.PNF.ProofRelevantIdentityFibres as Identity
 
+open import DASHI.Ontology.ProgenitorParentProjectionFibre using (projectParentSlot)
 open import DASHI.Ontology.ProgenitorParentObserverDynamicsBridge
 open import DASHI.Ontology.ProgenitorParentObservationAuthorityBridge
 open import DASHI.Ontology.ProgenitorParentPredicateDescentBoundary
