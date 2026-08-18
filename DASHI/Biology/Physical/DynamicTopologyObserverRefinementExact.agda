@@ -13,6 +13,7 @@ module DASHI.Biology.Physical.DynamicTopologyObserverRefinementExact where
 open import DASHI.Core.Prelude
 
 import DASHI.Biology.Physical.DynamicTopologyFutureDefectExact as Topology
+import DASHI.Core.FutureObservationLanguageQuotientExact as Future
 import DASHI.Core.ObserverRefinementFutureSafetyExact as FutureBridge
 import DASHI.Core.ObserverRefinementLatticeExact as Observer
 
@@ -66,7 +67,7 @@ morphologyJunctionSeparatesGraphState
 ... | refl | refl = refl
 
 morphologyJunctionIsFutureLanguageSafe :
-  DASHI.Core.FutureObservationLanguageQuotientExact.FutureLanguageSafeProjection
+  Future.FutureLanguageSafeProjection
     Topology.system
     Topology.morphologyProjection
     morphologyJunctionObserver
