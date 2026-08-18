@@ -15,6 +15,19 @@ import DASHI.Algebra.DisagreementFourViewBoundary as Four
 -- is only well typed inside one common claim/context fibre.  Evidence about a
 -- different claim, time, body, place, institution, observer, or provenance
 -- scope must first cross an explicit alignment witness.
+--
+-- Logical/informational calibration:
+--   Nuel D. Belnap, "A Useful Four-Valued Logic", in J. Michael Dunn and
+--   George Epstein (eds.), Modern Uses of Multiple-Valued Logic (1977),
+--   pp. 5-37. DOI 10.1007/978-94-010-1161-7_2.
+--   J. Michael Dunn, "Intuitive Semantics for First-Degree Entailments and
+--   'Coupled Trees'", Philosophical Studies 29(3), 149-168 (1976),
+--   DOI 10.1007/BF00373152.
+--
+-- Those references motivate independent positive/negative information only.
+-- Claim/context-indexed pooling is a DASHI-local typing discipline.
+-- Incoming PR #582 independently owns required-axis completeness via
+-- RequiredAxisSupportSquareExact; this module does not duplicate that layer.
 ------------------------------------------------------------------------
 
 infixl 5 _∨ᵇ_
