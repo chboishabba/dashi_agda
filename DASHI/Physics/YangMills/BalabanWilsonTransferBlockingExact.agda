@@ -39,8 +39,8 @@ module DASHI.Physics.YangMills.BalabanWilsonTransferBlockingExact where
 -- asserted to equal Lüscher's transfer matrix without a same-object theorem.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.FiniteReflectionPositivity as RP
@@ -96,13 +96,11 @@ composedLiftObservableExact :
   Block.liftObservable
     (composeReflectionPositiveBlocking first second) coarse
   ≡ Block.liftObservable first (Block.liftObservable second coarse)
-composedLiftObservableExact first second coarse =
-  Agda.Builtin.Equality.refl
+composedLiftObservableExact first second coarse = refl
 
 reflectionPositiveBlockingCompositionLevel : ProofLevel
 reflectionPositiveBlockingCompositionLevel = machineChecked
 
--- External Wilson transfer-matrix positivity is standard imported mathematics.
 luscherWilsonTransferMatrixStrictPositivityLevel : ProofLevel
 luscherWilsonTransferMatrixStrictPositivityLevel = standardImported
 
@@ -112,13 +110,8 @@ osterwalderSeilerWilsonReflectionPositivityLevel = standardImported
 menottiPelissettoSitePlaneWilsonReflectionPositivityLevel : ProofLevel
 menottiPelissettoSitePlaneWilsonReflectionPositivityLevel = standardImported
 
--- Remaining finite-scale OS source theorem: prove that the literal Bałaban
--- block observable/coarse measure has the pullback form required by
--- ReflectionPositiveBlocking, on the SAME Wilson carrier.
 literalBalabanBlockingOSPullbackLevel : ProofLevel
 literalBalabanBlockingOSPullbackLevel = conditional
 
--- Separate question.  It may turn out true, but must be proved rather than
--- inferred from reflection positivity or entrywise positivity.
 balabanRGKernelIsLuscherTransferCompressionLevel : ProofLevel
 balabanRGKernelIsLuscherTransferCompressionLevel = conditional
