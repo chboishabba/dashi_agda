@@ -20,24 +20,19 @@ import DASHI.Governance.JusticeCrossPollinationBridgeExact as Cross
 import DASHI.Philosophy.PowerAndGrammar as Power
 import DASHI.Physics.Foundations.SettlerEnemyAbstractionExact as Enemy
 
-------------------------------------------------------------------------
--- The grammar declares exactly those fine actors quotiented together whose
--- existing rhetorical-compression observations coincide.
-------------------------------------------------------------------------
-
 enemyCompressionGrammar : Power.ClaimGrammar Enemy.ConcreteActor
 enemyCompressionGrammar = record
-  { Power.expressible = λ claim → ⊤
-  ; Power.admissible = λ claim → ⊤
-  ; Power.quotientedTogether = λ left right →
+  { expressible = λ claim → ⊤
+  ; admissible = λ claim → ⊤
+  ; quotientedTogether = λ left right →
       Enemy.rhetoricalCompression left ≡ Enemy.rhetoricalCompression right
   }
 
 enemyCompressionPromotionPolicy : Power.PromotionPolicy Enemy.ConcreteActor
 enemyCompressionPromotionPolicy = record
-  { Power.evidenceLegible = λ claim → ⊤
-  ; Power.promotable = λ claim → ⊤
-  ; Power.residualIgnored = λ claim → ⊤
+  { evidenceLegible = λ claim → ⊤
+  ; promotable = λ claim → ⊤
+  ; residualIgnored = λ claim → ⊤
   }
 
 data GrammarCode : Set where grammarCode : GrammarCode
@@ -46,14 +41,14 @@ data PolicyCode : Set where policyCode : PolicyCode
 canonicalSecondOrderCompressionPower :
   Power.SecondOrderPower Enemy.ConcreteActor GrammarCode PolicyCode
 canonicalSecondOrderCompressionPower = record
-  { Power.grammar = enemyCompressionGrammar
-  ; Power.promotion = enemyCompressionPromotionPolicy
-  ; Power.transformGrammarCode = λ code → code
-  ; Power.transformPolicyCode = λ code → code
-  ; Power.controlsWhichDistinctionsCount = ⊤
-  ; Power.controlsWhichEvidenceIsLegible = ⊤
-  ; Power.controlsWhichClaimsPromote = ⊤
-  ; Power.accountabilityWitness = ⊤
+  { grammar = enemyCompressionGrammar
+  ; promotion = enemyCompressionPromotionPolicy
+  ; transformGrammarCode = λ code → code
+  ; transformPolicyCode = λ code → code
+  ; controlsWhichDistinctionsCount = ⊤
+  ; controlsWhichEvidenceIsLegible = ⊤
+  ; controlsWhichClaimsPromote = ⊤
+  ; accountabilityWitness = ⊤
   }
 
 canonicalCompressionPowerControlsDistinctions :
@@ -67,11 +62,6 @@ canonicalGrammarCollapsesActorAndCivilianPopulation :
     Enemy.palestinianCivilianPopulation
 canonicalGrammarCollapsesActorAndCivilianPopulation =
   Enemy.combatantAndCivilianCollapseUnderCompression
-
-------------------------------------------------------------------------
--- Justice blindness is an exact non-factorability property, not an inferred
--- psychological or political motive.
-------------------------------------------------------------------------
 
 record JusticeBlindGrammarWitness : Set₁ where
   constructor justiceBlindGrammarWitness
