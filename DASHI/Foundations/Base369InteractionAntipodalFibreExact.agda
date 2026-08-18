@@ -23,6 +23,7 @@ open import Agda.Builtin.Nat using (Nat; _+_; _*_)
 open import Data.Empty using (⊥)
 open import Data.Integer using (ℤ; +_; -[1+_]) renaming (_+_ to _+ℤ_)
 open import Data.Product using (_×_; _,_)
+open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 import DASHI.Biology.TernaryHypercubeHyperfabricExact as Hyper
 import DASHI.Foundations.Base369AddressSymmetryAndBranchGeometryExact as Branch
