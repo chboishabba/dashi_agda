@@ -3,6 +3,7 @@ module DASHI.Ontology.ProgenitorParentPredicateBaseChange where
 open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
+open import DASHI.Ontology.LeanWikidataTheoremSurfaceBridge using (LeanTheoremContract)
 open import DASHI.Ontology.ProgenitorParentHyperfabric
 open import DASHI.Ontology.ProgenitorParentProjectionFibre
 open import DASHI.Ontology.ProgenitorParentPNFPullbackLattice
@@ -10,11 +11,6 @@ open import DASHI.Ontology.LeanWikidataParentingPullbackBridge
 
 ------------------------------------------------------------------------
 -- Predicate order and base change.
---
--- p ⊑ q means every carrier selected by p is also selected by q.  Pulling a
--- slot fibre back along a stronger predicate therefore maps canonically into the
--- fibre for the weaker predicate.  This is the concrete PNF/predicate analogue
--- of JMD's retract/pullback base-change theorem surface.
 ------------------------------------------------------------------------
 
 PredicateRefines : ParentPredicate → ParentPredicate → Set
@@ -37,29 +33,29 @@ meetRefinesLeft : (p q : ParentPredicate) → (p ⊓p q) ⊑p p
 meetRefinesLeft p q carrier h with p carrier | q carrier
 ... | true | true = refl
 ... | true | false = refl
-... | false | true = refl
-... | false | false = refl
+... | false | true = h
+... | false | false = h
 
 meetRefinesRight : (p q : ParentPredicate) → (p ⊓p q) ⊑p q
 meetRefinesRight p q carrier h with p carrier | q carrier
 ... | true | true = refl
-... | true | false = refl
+... | true | false = h
 ... | false | true = refl
-... | false | false = refl
+... | false | false = h
 
 leftRefinesJoin : (p q : ParentPredicate) → p ⊑p (p ⊔p q)
 leftRefinesJoin p q carrier h with p carrier | q carrier
 ... | true | true = refl
 ... | true | false = refl
 ... | false | true = refl
-... | false | false = refl
+... | false | false = h
 
 rightRefinesJoin : (p q : ParentPredicate) → q ⊑p (p ⊔p q)
 rightRefinesJoin p q carrier h with p carrier | q carrier
 ... | true | true = refl
 ... | true | false = refl
 ... | false | true = refl
-... | false | false = refl
+... | false | false = h
 
 predicateBaseChange :
   {slot : WikidataParentSlot} {p q : ParentPredicate} →
@@ -112,14 +108,17 @@ geneticAndParentForgetsToParent :
   genealogicalParentP (predicateCarrier (meetFibreToRight geneticAndParentP8810)) ≡ true
 geneticAndParentForgetsToParent = refl
 
--- JMD supplies the general categorical result that retracts are stable under
--- base change.  The source contract is carried explicitly next to the concrete
--- predicate-base-change operation; it is not replaced by it.
+------------------------------------------------------------------------
+-- The imported JMD base-change theorem contract and the concrete predicate
+-- base-change witness are retained together without identifying proof objects.
+------------------------------------------------------------------------
+
 record ParentBaseChangeBridge : Set where
   constructor parentBaseChangeBridge
   field
     jmdCategoricalBaseChange : LeanTheoremContract
-    concretePredicateBaseChangeAvailable : ParentPredicateFibre parentP8810 geneticAndGenealogicalParentP
+    concretePredicateBaseChangeAvailable :
+      ParentPredicateFibre parentP8810 geneticAndGenealogicalParentP
 open ParentBaseChangeBridge public
 
 canonicalParentBaseChangeBridge : ParentBaseChangeBridge
