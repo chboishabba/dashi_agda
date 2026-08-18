@@ -24,32 +24,28 @@ module DASHI.Physics.Closure.NSTriadKNCriticalAllocatedFrameWeightedFundingRound
 -- its left squared mass is not an independently chosen scalar receipt: it is
 -- the charge of the source-native allocated factorization itself.
 --
--- This file composes that construction with the Round77 non-unit critical
--- funding theorem.  A positive critical event supplies:
---
---   * the original same-object overlay;
---   * a charge allocation on that overlay;
---   * a frame bound for the allocated overlay;
---   * the same critical-ratio remainder identity.
---
--- The allocated overlay charge is then DEFINITIONALLY the event charge.  The
--- positive event forces a positive frame product, constructs its reciprocal,
--- and gives
+-- A positive critical event supplies the original same-object overlay, a charge
+-- allocation on that overlay, a frame bound for the allocated overlay, and the
+-- same critical-ratio remainder identity.  Its allocated overlay charge is then
+-- DEFINITIONALLY the event charge.  Round77 derives positive frame product,
+-- constructs the reciprocal, and obtains
 --
 --      rho_e mu_e^2 <= Q_alloc,e.
 --
--- Consequently the old C3 obligation "prove canonical Q equals a separately
--- declared physical charge" is compiled away on this route.  The remaining
--- global physical obligation is stronger and cleaner: allocations for all
--- consumers of each primitive source factor must form a squared subpartition,
--- so their total allocated charge fits the primitive physical budget.
+-- The old C3 equality between canonical Q and a separately declared physical
+-- scalar is therefore unnecessary on this route.  The remaining global physical
+-- obligation is a primitive-source subpartition across the selected event
+-- family, so total allocated charge fits the actual primitive budget.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Equality using (refl)
 open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Nat using (Nat; suc)
-open import Data.Rational using (ℚ; Positive; _+_; _≤_)
+open import Data.Rational using (ℚ; Positive; _*_; _+_; _≤_)
 
+import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
+import DASHI.Physics.Closure.NSTriadKNFactorizedEffectiveComplexityCauchyRound72Exact as Effective
 import DASHI.Physics.Closure.NSTriadKNLocalizedPDEStructuredAtomsRound62Exact as Structured
 import DASHI.Physics.Closure.NSTriadKNStructuredTriadicFactorizationOverlayRound72Exact as Overlay
 import DASHI.Physics.Closure.NSTriadKNCriticalAmplificationForcesRemainderRound69Exact as Amplification
@@ -100,9 +96,9 @@ allocatedPhysicalWitness witness = record
   ; physicalCharge =
       Overlay.overlayCharge (Allocation.allocateOverlay (allocation witness))
   ; physicalChargeNonnegative =
-      DASHI.Physics.Closure.NSTriadKNFactorizedEffectiveComplexityCauchyRound72Exact.concentrationChargeNonnegative
+      Effective.concentrationChargeNonnegative
         (Overlay.overlayFactors (Allocation.allocateOverlay (allocation witness)))
-  ; overlayChargeIsPhysicalCharge = Agda.Builtin.Equality.refl
+  ; overlayChargeIsPhysicalCharge = refl
   }
 
 allocatedReciprocalWeight :
@@ -121,8 +117,7 @@ allocatedCriticalFloorBelowAllocatedCharge :
     {n mu atoms sourceOverlay} →
   (witness : AllocatedCriticalAmplificationWitness
     step n mu atoms sourceOverlay) →
-  allocatedReciprocalWeight witness
-    * DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2.square mu
+  allocatedReciprocalWeight witness * L2.square mu
   ≤ Overlay.overlayCharge (Allocation.allocateOverlay (allocation witness))
 allocatedCriticalFloorBelowAllocatedCharge witness =
   Weighted.frameWeightedCriticalFloorBelowPhysicalCharge
