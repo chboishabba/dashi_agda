@@ -8,8 +8,15 @@ module DASHI.Physics.YangMills.Jacobsen2506WeakCouplingScalingAuditExact where
 -- Yang--Mills in Four-Dimensional Space-Time", arXiv:2506.00284v1,
 -- 30 May 2025.  No DOI is assigned in the supplied preprint.
 --
+-- Roman Kotecky and David Preiss,
+-- "Cluster Expansion for Abstract Polymer Models",
+-- Communications in Mathematical Physics 103 (1986), 491--498.
+-- DOI: 10.1007/BF01211762.
+--
 -- The source is used here only as a lemma mine / adversarial test.  It is not
 -- imported as authority for a Yang--Mills existence or mass-gap theorem.
+-- Kotecky--Preiss is cited only to pin the standard small-activity polymer
+-- criterion that the audited argument invokes.
 --
 -- The supplied Appendix A writes, for the plaquette activity,
 --
@@ -27,8 +34,10 @@ module DASHI.Physics.YangMills.Jacobsen2506WeakCouplingScalingAuditExact where
 -- Rather than depending on division cancellation, the first theorem below
 -- gives a concrete weak-coupling falsifier at g0^2 = 1/100.  The displayed
 -- Taylor majorant is then 405900, whereas the claimed weak-coupling expression
--- is 1881/20000 < 1.  Thus the Kotecky--Preiss small-activity conclusion in
--- that argument cannot follow from the displayed plaquette estimate.
+-- is 1881/20000 < 1.  In particular the displayed estimate cannot even provide
+-- a subunit activity bound at that point, let alone the exponentially weighted
+-- incompatibility sum required by Kotecky--Preiss.  Thus the claimed
+-- Kotecky--Preiss conclusion cannot follow from that displayed estimate.
 --
 -- The source also defines the five-dimensional lattice coupling
 --
@@ -40,13 +49,14 @@ module DASHI.Physics.YangMills.Jacobsen2506WeakCouplingScalingAuditExact where
 -- required to expose this direction mismatch.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _<_; _/_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Nullary.Negation using (¬_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanSZZStrongCouplingDecisionExact as Order
@@ -95,6 +105,12 @@ actualTaylorMajorantAboveOne =
     (Order.positiveDifferenceImpliesLess
       (+ 405900 / 1) 1ℚ
       (ℚP.positive⁻¹ (+ 405899 / 1)))
+
+actualTaylorMajorantNotSubunit :
+  ¬ (plaquetteTaylorMajorant betaAtWeakPoint < 1ℚ)
+actualTaylorMajorantNotSubunit belowOne =
+  ℚP.<-irrefl refl
+    (ℚP.<-trans actualTaylorMajorantAboveOne belowOne)
 
 claimedAndActualWeakBoundsSeparated :
   claimedWeakCouplingExpression weakG0Squared
@@ -145,6 +161,9 @@ beta5StrictlyShrinksAtOneRefinement =
 
 jacobsenWeakCouplingSubstitutionAuditLevel : ProofLevel
 jacobsenWeakCouplingSubstitutionAuditLevel = machineChecked
+
+jacobsenKoteckyPreissSubunitAuditLevel : ProofLevel
+jacobsenKoteckyPreissSubunitAuditLevel = machineChecked
 
 jacobsenOrbifoldScalingDirectionAuditLevel : ProofLevel
 jacobsenOrbifoldScalingDirectionAuditLevel = machineChecked
