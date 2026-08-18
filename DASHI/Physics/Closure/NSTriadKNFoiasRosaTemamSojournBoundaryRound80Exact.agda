@@ -23,18 +23,11 @@ module DASHI.Physics.Closure.NSTriadKNFoiasRosaTemamSojournBoundaryRound80Exact 
 -- UPPER bound on dangerous residence (or a lower bound on depletion accrued per
 -- unit residence) for the specific selected physical trajectory.  The source
 -- theorem gives an almost-everywhere/existential POSITIVITY statement.
---
--- Two exact finite countermodels below isolate those quantifier/sign gaps:
---
---   (1) an almost-everywhere property may hold on the measure-supported
---       trajectory while the distinguished selected trajectory fails it;
---   (2) positive sojourn is compatible with unit sojourn, so positivity alone
---       cannot supply a small upper residence cap.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _<_; _≤_; _/_)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _<_; _≤_; _/_; _*_)
 import Data.Integer.Base as Int
 
 ------------------------------------------------------------------------
@@ -81,8 +74,8 @@ record PositiveMeanSojourn : Set where
 
 open PositiveMeanSojourn public
 
-unitSojourn : PositiveMeanSojourn
-unitSojourn = positive-mean-sojourn 1ℚ _
+unitSojourn : 0ℚ < 1ℚ → PositiveMeanSojourn
+unitSojourn onePositive = positive-mean-sojourn 1ℚ onePositive
 
 record PositiveSojournForcesHalfCap : Set where
   field
@@ -93,13 +86,14 @@ record PositiveSojournForcesHalfCap : Set where
 open PositiveSojournForcesHalfCap public
 
 positiveSojournCannotSupplySmallUpperResidenceCap :
+  0ℚ < 1ℚ →
   PositiveSojournForcesHalfCap →
   1ℚ ≤ half
-positiveSojournCannotSupplySmallUpperResidenceCap candidate =
-  capEveryPositiveSojourn candidate unitSojourn
+positiveSojournCannotSupplySmallUpperResidenceCap onePositive candidate =
+  capEveryPositiveSojourn candidate (unitSojourn onePositive)
 
 ------------------------------------------------------------------------
--- Correct C5 consumer shape.
+-- Correct C5 consumer shapes.
 
 record DeterministicDangerousResidenceBudget : Set where
   constructor deterministic-dangerous-residence-budget
@@ -120,8 +114,6 @@ record DepletionPerResidenceBudget : Set where
     residenceNonnegative : 0ℚ ≤ dangerousResidence
     depletionRateNonnegative : 0ℚ ≤ depletionRate
     fundedResidence : depletionRate * dangerousResidence ≤ availableBudget
-  where
-  open import Data.Rational.Base using (_*_)
 
 round80FoiasRosaTemamGivesRigorousStatisticalSojourn : Bool
 round80FoiasRosaTemamGivesRigorousStatisticalSojourn = true
