@@ -5,8 +5,9 @@ module DASHI.Algebra.BalancedTernaryOppositionEvidenceBridgeExact where
 --
 -- The strict geometric antipode on {-1,0,+1} is a declared orientation
 -- reversal in the claim-indexed evidence system.  It is NOT silently promoted
--- to logical negation.  This is the evidence-side counterpart of the geometric
--- rule that -1 is the antipode of +1 while 0 is the fixed centre.
+-- to logical negation or algebraic inverse.  This is the evidence-side
+-- counterpart of the geometric rule that -1 is the antipode of +1 while 0 is
+-- the fixed centre.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -51,6 +52,11 @@ negativeAntipodeCannotSelfQualifyAsLogicalNegation qualification =
   Indexed.orientationReversalRoleIsNotLogicalNegation
     (Indexed.roleIsLogicalNegation qualification)
 
+strictAntipodeOrientationRoleIsNotAlgebraicInverse :
+  Lens.orientationReversalRole ≡ Lens.algebraicInverseRole → ⊥
+strictAntipodeOrientationRoleIsNotAlgebraicInverse =
+  Lens.orientationReversalIsNotAlgebraicInverse
+
 geometricAntipodeEvidence :
   Indexed.ClaimFibreEvidence
     SSP.SSPTrit ⊤ positiveStrictAntipodeOpposition tt
@@ -65,6 +71,7 @@ record BalancedTernaryOppositionEvidenceBoundary : Set where
   field
     strictAntipodeIsOrientationQualified : Bool
     strictAntipodeIsLogicalNegationByCarrierShape : Bool
+    strictAntipodeAutomaticallyAlgebraicInverse : Bool
     fixedCentreIsOpposingPole : Bool
 
 canonicalBalancedTernaryOppositionEvidenceBoundary :
@@ -72,5 +79,6 @@ canonicalBalancedTernaryOppositionEvidenceBoundary :
 canonicalBalancedTernaryOppositionEvidenceBoundary = record
   { strictAntipodeIsOrientationQualified = true
   ; strictAntipodeIsLogicalNegationByCarrierShape = false
+  ; strictAntipodeAutomaticallyAlgebraicInverse = false
   ; fixedCentreIsOpposingPole = false
   }
