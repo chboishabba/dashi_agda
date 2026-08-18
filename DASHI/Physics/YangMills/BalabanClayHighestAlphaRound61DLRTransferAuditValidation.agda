@@ -24,14 +24,22 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound61DLRTransferAuditVal
 --       ad_X Y, ad_X^2 Y/2, ad_X^3 Y/6, ad_X^4 Y/24;
 -- * those jets are threaded through literal D_A G_A M0^{-1} and produce the
 --   actual X1,...,X4 matrices consumed by the trace-log polynomial;
--- * row mass is now proved submultiplicative on that finite matrix carrier, so
---       rowMass(R^(n+1)) <= q^(n+1)
---   follows from a same-object bound rowMass(R)<=q. Log-series coefficients
---   0<=c<=1 preserve the same geometric majorant.
+-- * row mass is proved submultiplicative, so rowMass(R^(n+1))<=q^(n+1)
+--   follows from a same-object rowMass(R)<=q bound;
+-- * the new fourth-order row theorem eliminates that opaque q premise: from
 --
--- Thus the remaining ghost analysis is the Bishop O(g^5) remainder, a strict
--- physical q<1 bound on the SAME R(g), and the finite matrix-log/log-det
--- identification. Generic Neumann-power algebra is no longer a frontier.
+--       R = gX1 + g^2X2 + g^3X3 + g^4X4 + E5
+--
+--   and row budgets b1,...,b5 it derives
+--
+--       rowMass(R)
+--         <= |g|b1 + |g^2|b2 + |g^3|b3 + |g^4|b4 + b5.
+--
+-- Thus the remaining ghost analysis is now source-shaped: instantiate this
+-- exact expansion on the SAME physical R(g), prove the genuine Bishop O(g^5)
+-- tail and coefficient row budgets strongly enough that the displayed scalar
+-- is <1, then identify finite matrix-log with the reduced determinant ratio.
+-- Generic Neumann-power and finite row-majorant algebra are no longer frontiers.
 --
 -- CMP109 PRINCIPAL-LOG ROUTE
 -- * the source-radius inverse-dexp coefficient is the actual Bishop real and
@@ -114,6 +122,7 @@ import DASHI.Physics.YangMills.BalabanReducedFaddeevPopovMatrixTraceLogJetExact
 import DASHI.Physics.YangMills.BalabanReducedGhostAdjointFourthJetExact
 import DASHI.Physics.YangMills.BalabanReducedFaddeevPopovPhysicalFourthJetExact
 import DASHI.Physics.YangMills.BalabanReducedGhostNeumannRowContractionExact
+import DASHI.Physics.YangMills.BalabanReducedGhostFourthOrderRowContractionExact
 
 import DASHI.Physics.YangMills.BalabanCMP109BishopSourceRadiusEndpointExact
 import DASHI.Physics.YangMills.BalabanCMP109BishopPrincipalLogSourcePackageExact
