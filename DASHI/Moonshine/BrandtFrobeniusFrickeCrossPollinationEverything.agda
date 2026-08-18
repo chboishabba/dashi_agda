@@ -7,9 +7,12 @@ module DASHI.Moonshine.BrandtFrobeniusFrickeCrossPollinationEverything where
 -- It intentionally imports both positive results and falsifiers:
 -- quotient-observable factorization does not imply carrier identity; the naive
 -- ell=2 edge-slot C3 action fails; coarse Fricke fixed points are not the same
--- carrier as Brandt j-classes; and all-fixed Frobenius is carrier-sensitive
--- under level rigidification.
+-- carrier as Brandt j-classes; all-fixed Frobenius is carrier-sensitive under
+-- level rigidification; and observer refinement is tracked explicitly.
 ------------------------------------------------------------------------
+
+import DASHI.Core.ObserverRefinementLatticeExact
+import DASHI.Core.FibrePreservingDynamicsExact
 
 import DASHI.Foundations.FibreConstantObservableExact
 import DASHI.Foundations.Phase3RootCharacterWeldExact
@@ -29,6 +32,7 @@ import DASHI.Moonshine.P11MarkedX2FrobeniusFrickeExact
 import DASHI.Moonshine.P11MarkedX2HeckeAlgebraExact
 import DASHI.Moonshine.P11MarkedX2PrimeSquareNeighboursExact
 import DASHI.Moonshine.P11MarkedX2S3HeckeDecompositionExact
+import DASHI.Moonshine.BrandtObserverRefinementDynamicsBridgeExact
 
 import DASHI.Moonshine.P13OggOneClassHeckeControlExact
 import DASHI.Moonshine.P37SageSupersingularFrobeniusExact
