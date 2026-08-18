@@ -50,6 +50,7 @@ import DASHI.Physics.Closure.NSTriadKNRationalComplex3HermitianCauchyRound74Exac
 import DASHI.Physics.Closure.NSTriadKNRationalComplex3LerayPythagoras as Leray
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNOrderedInteractionSourceFactorizationRound73Exact as Source
+import DASHI.Physics.Closure.NSTriadKNOrderedInteractionRealImaginaryTwoChannelRound74Exact as Channels
 import DASHI.Physics.Closure.NSTriadKNOrderedInteractionTwoChannelMassIdentityRound74Exact as Mass
 
 F : C3.RealField _
@@ -153,7 +154,7 @@ orderedInteractionCanonicalQBound :
     (system : Audit.FiniteComplex3GalerkinSystem F E I)
     (incidence : Physical.PhysicalTriadIncidence) →
   Mass.leftChannelSquaredMass
-    (DASHI.Physics.Closure.NSTriadKNOrderedInteractionRealImaginaryTwoChannelRound74Exact.orderedInteractionChannels
+    (Channels.orderedInteractionChannels
       system incidence (Audit.velocityAt system (Physical.k incidence)))
   ≤
   L2.complex3NormSquared
@@ -166,6 +167,7 @@ orderedInteractionCanonicalQBound system incidence =
     qIdentity = Mass.orderedInteractionLeftMassExact system incidence testK
     modulusBridge = massModulusAgreesWithL2 (Source.transportScalar system incidence)
     transportExact = transportScalarModulusSquaredExact system incidence
+    qToInteraction = trans qIdentity (trans modulusBridge transportExact)
     interactionBound = interactionScalarEnergyBound system incidence
   in
   subst
@@ -174,7 +176,7 @@ orderedInteractionCanonicalQBound system incidence =
         (Audit.velocityAt system (Physical.p incidence))
       * L2.complex3NormSquared
         (C3.modeVector (Audit.integerEmbedding system) (Physical.q incidence)))
-    (trans qIdentity (trans modulusBridge transportExact))
+    (sym qToInteraction)
     interactionBound
 
 orderedInteractionCanonicalWBound :
@@ -186,8 +188,7 @@ orderedInteractionCanonicalWBound :
     (nonzeroOutput : Z3.NonZeroMode (Physical.k incidence))
     (testK : C3.Complex3 F) →
   Mass.rightChannelSquaredMass
-    (DASHI.Physics.Closure.NSTriadKNOrderedInteractionRealImaginaryTwoChannelRound74Exact.orderedInteractionChannels
-      system incidence testK)
+    (Channels.orderedInteractionChannels system incidence testK)
   ≤
   L2.complex3NormSquared testK
   * L2.complex3NormSquared
@@ -196,6 +197,7 @@ orderedInteractionCanonicalWBound O system incidence nonzeroOutput testK =
   let
     wIdentity = Mass.orderedInteractionRightMassExact system incidence testK
     modulusBridge = massModulusAgreesWithL2 (Source.testedHighResponse system incidence testK)
+    wToResponse = trans wIdentity modulusBridge
     responseBound =
       Hermitian.rationalTestedLerayResponseBound
         (Audit.integerEmbedding system)
@@ -210,7 +212,7 @@ orderedInteractionCanonicalWBound O system incidence nonzeroOutput testK =
     (λ wMass → wMass ≤
       L2.complex3NormSquared testK
       * L2.complex3NormSquared (Audit.velocityAt system (Physical.q incidence)))
-    (trans wIdentity modulusBridge)
+    (sym wToResponse)
     responseBound
 
 round75CanonicalQPerTriadEnergyBoundConstructed : Bool
