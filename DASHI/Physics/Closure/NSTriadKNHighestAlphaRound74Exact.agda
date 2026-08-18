@@ -34,6 +34,10 @@ module DASHI.Physics.Closure.NSTriadKNHighestAlphaRound74Exact where
 -- Title: "Fourier Analysis and Nonlinear Partial Differential Equations".
 -- DOI: 10.1007/978-3-642-16830-7.
 --
+-- Author: Philip Hartman.
+-- Title: "Ordinary Differential Equations".
+-- DOI: 10.1137/1.9780898719222.
+--
 -- ROUND74 MATHEMATICAL DELTA
 --
 -- A. PHASE ALIGNMENT IS NO LONGER A REQUIRED PRODUCER.
@@ -57,9 +61,14 @@ module DASHI.Physics.Closure.NSTriadKNHighestAlphaRound74Exact where
 --   W_tau = |w_tau|^2.
 --
 -- Thus the Round72 factor-rescaling ambiguity disappears at the literal
--- source.  The remaining physical theorem is an energy/frame bound on these
--- modulus-square quantities plus transport into the ordered scalar carrier;
--- no physical phase lock is necessary.
+-- source.  On the exact rational C3 carrier Round74 additionally proves
+--
+--   |<test,P_k value>|^2 <= ||test||^2 ||value||^2
+--
+-- by a literal complex Lagrange identity plus the existing Leray Pythagorean
+-- contraction.  Remaining physical work is continuum/same-trajectory transport
+-- and summed frame normalization/charge identification, not discovery of the
+-- per-triad response inequality.
 --
 -- B. PROPAGATION IS NOW IRREGULAR AND CHARGE-NATIVE.
 --
@@ -97,19 +106,30 @@ module DASHI.Physics.Closure.NSTriadKNHighestAlphaRound74Exact where
 -- Mikhlin--Hormander operator boundedness is context, not a substitute for the
 -- pointwise |K(x)|~|x|^-4 proof.
 --
+-- F. FINITE ODE INPUT CHART.
+--
+-- Round28 already contains a genuine quantitative local-Lipschitz proof for the
+-- degree-two coordinate polynomial.  Round74 now supplies executable equality
+-- and lookup on the corrected Round71 finite rational slot carrier and proves
+-- the Round28 Lipschitz majorant applies through that chart.  The old
+-- unrestricted assignment is therefore only an evaluation semantics, not the
+-- physical state space.  Remaining A1 work is same-object RHS agreement and the
+-- complete-real norm/Picard theorem.
+--
 -- SHORTEST CENTRAL BARRIER AFTER ROUND74: 7 PACKAGES
 --
--- 1. FiniteSlotInputEvaluationAndRealPicard:
---      weld Round71 finite input carrier to the already-proved Round28
---      quantitative degree-two Lipschitz majorant, then apply a genuine
---      finite-dimensional real Picard theorem.
+-- 1. FiniteSlotRHSAgreementAndRealPicard:
+--      corrected finite assignment chart + quantitative Lipschitz are now
+--      constructed; prove fixed physical RHS = chart polynomial and invoke a
+--      genuine finite-dimensional complete-real Picard theorem.
 -- 2. SelectedGalerkinTrajectoryGlobalEnergyContinuation.
 -- 3. SelectedTrajectoryInstantiatesFineStructuredBalance:
 --      trajectory/chain rule + HH owner + kernel/tail/boundary; the time-slice
 --      fine five-source rewrite is constructed.
 -- 4. PhysicalTwoChannelFrameNormalizationAndChargeIdentity:
---      transport literal real/imag channels into the ordered energy carrier;
---      Q and W are already canonically |transport|^2 and |response|^2.
+--      Q,W are canonical modulus squares and the rational per-triad response
+--      energy bound is constructed; prove continuum transport, summed frame
+--      normalization and physical charge identity on the SAME trajectory.
 -- 5. PhysicalPropagationProducesAdditiveIrregularDescendants:
 --      construct actual child weights and actual additive charges.
 -- 6. CumulativeIrregularSquaredFloorsOutrunBudget:
@@ -144,6 +164,8 @@ import DASHI.Physics.Closure.NSTriadKNOrderedInteractionRealImaginaryTwoChannelR
 import DASHI.Physics.Closure.NSTriadKNTwoChannelStructuredCauchyOverlayRound74Exact as TwoOverlay
 import DASHI.Physics.Closure.NSTriadKNOrderedInteractionTwoChannelMassIdentityRound74Exact as TwoMass
 import DASHI.Physics.Closure.NSTriadKNHHGoodC4AnnularD234UniformBoundsRound74Exact as D234
+import DASHI.Physics.Closure.NSTriadKNFiniteRationalSlotAssignmentBridgeRound74Exact as FiniteChart
+import DASHI.Physics.Closure.NSTriadKNRationalComplex3HermitianCauchyRound74Exact as Response
 
 round74Round73LiteralComplexFactorizationRetained : Bool
 round74Round73LiteralComplexFactorizationRetained =
@@ -185,9 +207,25 @@ round74ScalarC4D0ThroughD4Bounded : Bool
 round74ScalarC4D0ThroughD4Bounded =
   D234.round74ScalarTransitionAllDerivativesThroughFourBounded
 
+round74CorrectedFiniteAssignmentChartConstructed : Bool
+round74CorrectedFiniteAssignmentChartConstructed =
+  FiniteChart.round74CorrectedFiniteRationalStateHasExecutableAssignmentChart
+
+round74FiniteChartLipschitzMajorantConstructed : Bool
+round74FiniteChartLipschitzMajorantConstructed =
+  FiniteChart.round74Round28LipschitzMajorantAppliesThroughFiniteChart
+
+round74RationalHermitianCauchyConstructed : Bool
+round74RationalHermitianCauchyConstructed =
+  Response.round74RationalComplex3HermitianCauchyConstructed
+
+round74RationalTestedLerayResponseEnergyBoundConstructed : Bool
+round74RationalTestedLerayResponseEnergyBoundConstructed =
+  Response.round74RationalTestedLerayResponseEnergyBoundConstructed
+
 -- Remaining central physical/analytic producers.
-round74FiniteSlotInputEvaluationAndRealPicard : Bool
-round74FiniteSlotInputEvaluationAndRealPicard = false
+round74FiniteSlotRHSAgreementAndRealPicard : Bool
+round74FiniteSlotRHSAgreementAndRealPicard = false
 
 round74SelectedGalerkinTrajectoryGlobalEnergyContinuation : Bool
 round74SelectedGalerkinTrajectoryGlobalEnergyContinuation = false
@@ -253,6 +291,14 @@ round74IrregularCascadeCarlesonWeldConstructedIsTrue = refl
 round74TimeDependentFineSourceRewriteConstructedIsTrue :
   round74TimeDependentFineSourceRewriteConstructed ≡ true
 round74TimeDependentFineSourceRewriteConstructedIsTrue = refl
+
+round74FiniteChartLipschitzMajorantConstructedIsTrue :
+  round74FiniteChartLipschitzMajorantConstructed ≡ true
+round74FiniteChartLipschitzMajorantConstructedIsTrue = refl
+
+round74RationalTestedLerayResponseEnergyBoundConstructedIsTrue :
+  round74RationalTestedLerayResponseEnergyBoundConstructed ≡ true
+round74RationalTestedLerayResponseEnergyBoundConstructedIsTrue = refl
 
 round74ClayPromotionIsFalse : round74ClayPromotion ≡ false
 round74ClayPromotionIsFalse = refl
