@@ -22,33 +22,34 @@ module DASHI.Moonshine.PrimeLevelDeligneRapoportFrickeSelectorExact where
 -- DASHI CONTRIBUTION
 --
 -- The finite combinatorics of the Fricke quotient is already derived from the
--- SAME supersingular Frobenius involution: one rational dual-graph vertex and
--- one loop edge for every nonfixed pair.  Arithmetic genus = pair count is
--- therefore no longer a source premise.
+-- SAME supersingular Frobenius involution.  For every derived node the source
+-- authority must additionally provide the completed-local normalization
+-- comparison, so cardinality/branch counting cannot manufacture nodality.
 --
--- The geometric authority required here is deliberately stronger than a graph
--- count.  For EVERY derived loop/node it must additionally provide the actual
--- completed-local-node comparison to the two-branch normalization pullback.
--- Thus the global special-fibre equality cannot be discharged from cardinality
--- or from an abstract two-branch label alone.
+-- Proper-flat genus transport is no longer stored as an opaque genus equality.
+-- It is derived from a common Hilbert-polynomial carrier and the flat-family
+-- equality of the generic and special Hilbert polynomials.
 --
--- Remaining source-facing equalities:
+-- Therefore the genuinely geometric authority is now:
 --
---   1. actual quotient special fibre = canonical nodal model derived from
---      supersingular Frobenius;
---   2. each canonical node has the source-native completed-local-node model;
---   3. generic Fricke genus = arithmetic genus of the proper-flat special
---      fibre.
+--   1. actual quotient special fibre = canonical Frobenius-pair nodal model;
+--   2. completed local-node same-object comparison at every loop;
+--   3. proper-flat Hilbert-polynomial constancy, with both fibre genera
+--      identified as the arithmetic genus interpretation of that polynomial.
 --
--- Once supplied, g(X_0^+(p)) = d_F(p) is pure composition, and the older
--- pointwise-fixed selector is recovered without an independent pair-count
--- alignment premise.
+-- Everything downstream, including
+--
+--   g(X_0^+(p)) = d_F(p)
+--
+-- and pointwise Frobenius fixed iff genus zero, is derived without the finite
+-- Fricke/Ogg control table.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
 open import Data.Fin using (Fin)
 
 import DASHI.Foundations.FiniteInvolutionOrbitNormalFormExact as Orbit
+import DASHI.AlgebraicGeometry.ProperFlatHilbertGenusTransportExact as Flat
 import DASHI.Moonshine.RationalNodalSpecialFibreGenusExact as Nodal
 import DASHI.Moonshine.PrimeLevelDeligneRapoportFrickeCombinatoricsExact as DR
 import DASHI.Moonshine.DeligneRapoportCompletedLocalNodeAuthorityExact as LocalNode
@@ -72,15 +73,21 @@ record PrimeLevelFrickeSpecialFibreAuthority : Set₁ where
       actualSpecialFibre
       ≡ DR.canonicalFrickeQuotientDualGraph supersingularFrobenius
 
-    -- Local scheme authority at EVERY derived nonfixed Frobenius pair.  The
-    -- index is the same canonical loop/node index used by the quotient graph.
+    -- Local scheme authority at EVERY derived nonfixed Frobenius pair.
     completedLocalNode :
       Fin (Orbit.pairedOrbitCount (DR.spectrum supersingularFrobenius)) →
       LocalNode.CompletedLocalNodeAuthority
 
-    -- Proper-flat arithmetic-genus transport from generic to special fibre.
-    properFlatGenusTransport :
-      genericFrickeGenus ≡ Nodal.arithmeticGenus actualSpecialFibre
+    -- Source-native flat-family/Hilbert-polynomial data.  Genus transport will
+    -- be derived from this object rather than accepted independently.
+    flatHilbertGenusData : Flat.ProperFlatHilbertGenusData
+
+    flatGenericGenusIsFrickeGenus :
+      Flat.genericGenus flatHilbertGenusData ≡ genericFrickeGenus
+
+    flatSpecialGenusIsActualSpecialFibre :
+      Flat.specialArithmeticGenus flatHilbertGenusData
+      ≡ Nodal.arithmeticGenus actualSpecialFibre
 
 open PrimeLevelFrickeSpecialFibreAuthority public
 
@@ -93,6 +100,21 @@ completedLocalAuthorityAt :
   Fin (Orbit.pairedOrbitCount (DR.spectrum (supersingularFrobenius A))) →
   LocalNode.CompletedLocalNodeAuthority
 completedLocalAuthorityAt = completedLocalNode
+
+------------------------------------------------------------------------
+-- Derive the former proper-flat genus equality from Hilbert-polynomial
+-- constancy.  This theorem is the only surface consumed by older adapters.
+------------------------------------------------------------------------
+
+properFlatGenusTransport :
+  (A : PrimeLevelFrickeSpecialFibreAuthority) →
+  genericFrickeGenus A ≡ Nodal.arithmeticGenus (actualSpecialFibre A)
+properFlatGenusTransport A =
+  trans
+    (sym (flatGenericGenusIsFrickeGenus A))
+    (trans
+      (Flat.properFlatGenusTransport (flatHilbertGenusData A))
+      (flatSpecialGenusIsActualSpecialFibre A))
 
 ------------------------------------------------------------------------
 -- Global geometric selector theorem.
@@ -134,7 +156,7 @@ zeroGenusIffZeroPairDefect A =
 
 ------------------------------------------------------------------------
 -- Adapter to the older special-fibre selector interface.  Node/pair count and
--- arithmetic genus are no longer independent authority premises.
+-- genus transport are both theorem-derived here.
 ------------------------------------------------------------------------
 
 asOlderSpecialFibreRealization :
@@ -196,9 +218,10 @@ record PrimeLevelDeligneRapoportFrickeSelectorBoundary : Set where
     duplicatePairCountAuthorityEliminated : Bool
     completedLocalAuthorityRequiredPerNode : Bool
     branchCountAloneSufficient : Bool
+    flatHilbertPolynomialConstancyRequired : Bool
+    directGenusEqualityAcceptedAsPrimitive : Bool
     fixedIffGenusZeroRecovered : Bool
     sameObjectSpecialFibreEqualityRequired : Bool
-    properFlatGenusTransportRequired : Bool
     finiteFrickeTableUsed : Bool
     arbitraryPrimeAuthorityConstructedHere : Bool
 
@@ -211,9 +234,10 @@ canonicalPrimeLevelDeligneRapoportFrickeSelectorBoundary = record
   ; duplicatePairCountAuthorityEliminated = true
   ; completedLocalAuthorityRequiredPerNode = true
   ; branchCountAloneSufficient = false
+  ; flatHilbertPolynomialConstancyRequired = true
+  ; directGenusEqualityAcceptedAsPrimitive = false
   ; fixedIffGenusZeroRecovered = true
   ; sameObjectSpecialFibreEqualityRequired = true
-  ; properFlatGenusTransportRequired = true
   ; finiteFrickeTableUsed = false
   ; arbitraryPrimeAuthorityConstructedHere = false
   }
