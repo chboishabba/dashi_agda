@@ -36,8 +36,11 @@ module DASHI.Physics.Closure.NSTriadKNDavisKahanClusterGapRound80Exact where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Rational.Base using (ℚ; 0ℚ; _*_; _≤_; _<_)
+open import Data.Rational.Tactic.RingSolver using (solve)
 import Data.Rational.Properties as ℚP
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 record ClusterProjectorPerturbationBudget : Set where
   constructor cluster-projector-perturbation-budget
@@ -53,8 +56,6 @@ record ClusterProjectorPerturbationBudget : Set where
 
 open ClusterProjectorPerturbationBudget public
 
--- A C4 consumer often wants a dimensionless rotation budget R with
--- perturbationSize <= R * clusterGap.  Composition stays division-free.
 record RelativePerturbationBudget
     (datum : ClusterProjectorPerturbationBudget) : Set where
   constructor relative-perturbation-budget
@@ -68,35 +69,27 @@ open RelativePerturbationBudget public
 
 clusterDistanceFitsRotationBudget :
   (datum : ClusterProjectorPerturbationBudget) →
-  RelativePerturbationBudget datum →
+  (relative : RelativePerturbationBudget datum) →
   clusterGap datum * subspaceDistance datum
-  ≤ rotationBudget _ * clusterGap datum
+  ≤ rotationBudget relative * clusterGap datum
 clusterDistanceFitsRotationBudget datum relative =
   ℚP.≤-trans
     (crossMultipliedSinThetaBound datum)
     (perturbationFitsGap relative)
 
--- At zero cluster gap, the cross-multiplied Davis--Kahan shape places no
--- restriction at all on the subspace distance: 0*d = 0 <= perturbation.
 zeroGapBoundIsVacuous :
   (distance perturbation : ℚ) →
   0ℚ ≤ perturbation →
   0ℚ * distance ≤ perturbation
 zeroGapBoundIsVacuous distance perturbation perturbationNN =
-  ℚP.≤-trans
-    (ℚP.≤-reflexive (refl {x = 0ℚ * distance}))
-    (let zeroTimes : 0ℚ * distance ≡ 0ℚ
-         zeroTimes = refl
-     in
-     Relation.Binary.PropositionalEquality.subst
-       (_≤ perturbation)
-       (Relation.Binary.PropositionalEquality.sym zeroTimes)
-       perturbationNN)
+  subst
+    (_≤ perturbation)
+    (sym zeroTimes)
+    perturbationNN
   where
-  open import Relation.Binary.PropositionalEquality
+  zeroTimes : 0ℚ * distance ≡ 0ℚ
+  zeroTimes = solve (distance ∷ [])
 
--- Positive cluster separation is therefore not bookkeeping: it is exactly the
--- theorem datum that prevents the projector estimate from collapsing to 0<=E.
 record PositiveClusterSeparation : Set where
   constructor positive-cluster-separation
   field
