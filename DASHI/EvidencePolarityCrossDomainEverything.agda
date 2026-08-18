@@ -16,6 +16,7 @@ import DASHI.Core.EvidenceObligationAuthoritySeparationExact
 import DASHI.Cognition.PNF.ClaimEvidence369BridgeExact
 import DASHI.Cognition.PNF.MemoryEvidencePolarityLearningBridgeExact
 import DASHI.Cognition.PNF.BinaryBalancedTernaryAggregateLossExact
+import DASHI.Cognition.PNF.AggregateProjectionWorldCompletenessBoundaryExact
 import DASHI.Reasoning.HyperfabricHypervoxelEvidencePolarityBridgeExact
 import DASHI.Biology.IntersectionalClaimEvidenceFibreExact
 import DASHI.Biology.BrainProxyEvidenceAuthorityBridgeExact
