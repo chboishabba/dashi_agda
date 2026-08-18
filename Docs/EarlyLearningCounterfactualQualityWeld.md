@@ -43,7 +43,14 @@ universal entitlement != uniform delivery architecture
 parallel family-care route != professional-floor removal
 ```
 
-The source-facing Nordic labels distinguish a Sweden/Denmark-style universalist family from a Finland/Norway-style hybrid family only to witness that universal access and cash/home-care architecture are independent coordinates. No country is asserted to be internally homogeneous or immutable.
+The Nordic comparison is represented by **country-neutral policy architecture types**:
+
+```text
+universal access without parallel cash-care
+universal access with parallel cash-care.
+```
+
+This is deliberate. Nordic cash-for-childcare schemes have followed different historical paths and have been introduced, amended, reduced or abolished. Finland supplies a particularly clear historical hybrid example in which a daycare guarantee and home-care subsidy were legislated together. The formal theorem therefore uses national evidence to motivate architecture coordinates without turning a country name into a timeless policy type.
 
 ## 5. Formal availability does not determine uptake
 
@@ -84,6 +91,8 @@ A dedicated empty permission prevents the routing defect from being promoted int
 `EarlyLearningComparativeEvidenceRound2SourceRegistry.agda` adds bounded source roles for:
 
 - Thomas Cornelissen, Christian Dustmann, Anna Raute and Uta Schoenberg, *Who Benefits from Universal Child Care? Estimating Marginal Returns to Early Child Care Attendance*, Journal of Political Economy 126(6), 2018, DOI `10.1086/699979`;
+- Ann-Zofie Duvander and Anne Lise Ellingsaeter, *Cash for childcare schemes in the Nordic welfare states: diverse paths, diverse outcomes*, European Societies 18(1), 2016, DOI `10.1080/14616696.2015.1124903`;
+- Jorma Sipila and Johanna Korpinen, *Cash versus Child Care Services in Finland*, Social Policy & Administration 32(3), 1998, DOI `10.1111/1467-9515.00102`;
 - Jonathan Gruber, Tuomas Kosonen and Kristiina Huttunen, *Paying moms to stay home: Short and long run effects on parents and children*, Journal of Public Economics 251, 2025, DOI `10.1016/j.jpubeco.2025.105496`;
 - Markus Laaninen, *Duration of child home care allowance period and school success: Differences by parental education level and ethnic origins*, Research in Social Stratification and Mobility 98, 2025, DOI `10.1016/j.rssm.2025.101063`;
 - OECD, *Starting Strong VI: Supporting Meaningful Interactions in Early Childhood Education and Care*, 2021, DOI `10.1787/f47a06ae-en`;
@@ -107,6 +116,7 @@ formal option availability != uptake distribution
 evidence vintage != whole evidence state
 early snapshot != full trajectory
 later evidence != erasure of earlier evidence
+country label != permanent policy architecture
 rights surface != complete intervention router
 ```
 
