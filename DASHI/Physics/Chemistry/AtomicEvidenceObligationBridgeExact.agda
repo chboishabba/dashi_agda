@@ -8,6 +8,7 @@ import DASHI.Algebra.DisagreementFourViewBoundary as Four
 import DASHI.Core.EvidenceObligationAuthoritySeparationExact as Governed
 import DASHI.Physics.Chemistry.AtomicPeriodicTableRecoveryBoundary as Atomic
 import DASHI.Physics.Closure.DialecticalAtomFrontierReceipt as DialecticalAtom
+import DASHI.Promotion.AuthorityGateCore as Authority
 
 ------------------------------------------------------------------------
 -- Atomic evidence / recovery boundary.
@@ -20,14 +21,16 @@ import DASHI.Physics.Closure.DialecticalAtomFrontierReceipt as DialecticalAtom
 
 atomicCandidateSupportedOnly : Governed.GovernedClaimState
 atomicCandidateSupportedOnly =
-  Governed.governedClaimState
+  Governed.closedGovernedClaimState
     (Four.assess true false)
     Governed.obligationsOpen
-    Governed.authorityDenied
+    Authority.theoremAuthority
+    "atomic candidate to periodic-table recovery theorem"
 
 atomicCandidateSupportDoesNotPromoteRecovery :
-  Governed.promotionGate atomicCandidateSupportedOnly ≡ false
-atomicCandidateSupportDoesNotPromoteRecovery = refl
+  Governed.localPromotion atomicCandidateSupportedOnly ≡ false
+atomicCandidateSupportDoesNotPromoteRecovery =
+  Governed.localPromotionIsFalse atomicCandidateSupportedOnly
 
 periodicTableRecoveryConsumesWitness :
   ∀ {boundary : Atomic.AtomicPeriodicTableRecoveryBoundary} →
@@ -47,7 +50,7 @@ record AtomicEvidenceObligationBoundary : Set where
     orbitalShellValenceWitnessesRemainIndependent : Bool
     dialecticalAtomEqualsPhysicalAtomClaimed : Bool
     dialecticalBookkeepingPromotesPhysicsClaimed : Bool
-    genericEvidenceObligationSeparationReused : Bool
+    canonicalAuthorityGateCoreReused : Bool
 
 canonicalAtomicEvidenceObligationBoundary : AtomicEvidenceObligationBoundary
 canonicalAtomicEvidenceObligationBoundary = record
@@ -55,5 +58,5 @@ canonicalAtomicEvidenceObligationBoundary = record
   ; orbitalShellValenceWitnessesRemainIndependent = true
   ; dialecticalAtomEqualsPhysicalAtomClaimed = false
   ; dialecticalBookkeepingPromotesPhysicsClaimed = false
-  ; genericEvidenceObligationSeparationReused = true
+  ; canonicalAuthorityGateCoreReused = true
   }
