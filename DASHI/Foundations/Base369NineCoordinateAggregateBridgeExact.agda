@@ -12,6 +12,7 @@ module DASHI.Foundations.Base369NineCoordinateAggregateBridgeExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
 open import Data.Integer using (ℤ) renaming (_+_ to _+ℤ_)
 
 import DASHI.Foundations.Base369InteractionAppraisalCubeExact as Cube
@@ -59,12 +60,16 @@ rebuildFlattenRoundTrip
       (Cube.participantAppraisal a1 a2 a3)
       (Cube.participantAppraisal b1 b2 b3))) = refl
 
+tripleCoordinateSum : SSP.SSPTrit → SSP.SSPTrit → SSP.SSPTrit → ℤ
+tripleCoordinateSum x y z =
+  Interaction.sspInteger x +ℤ Interaction.sspInteger y +ℤ Interaction.sspInteger z
+
 nineCoordinateSum : NineTrits → ℤ
 nineCoordinateSum
   (nineTrits i1 i2 i3 a1 a2 a3 b1 b2 b3) =
-  Interaction.sspInteger i1 +ℤ Interaction.sspInteger i2 +ℤ Interaction.sspInteger i3
-  +ℤ Interaction.sspInteger a1 +ℤ Interaction.sspInteger a2 +ℤ Interaction.sspInteger a3
-  +ℤ Interaction.sspInteger b1 +ℤ Interaction.sspInteger b2 +ℤ Interaction.sspInteger b3
+  tripleCoordinateSum i1 i2 i3
+  +ℤ tripleCoordinateSum a1 a2 a3
+  +ℤ tripleCoordinateSum b1 b2 b3
 
 base369AggregateIsNineCoordinateSum :
   (state : Cube.OneRoundInteractionState) →
@@ -80,7 +85,7 @@ base369FineCountMatchesCoefficientRowTotal :
   Interaction.fineInteractionStateCount ≡ Count.sumList Count.row9
 base369FineCountMatchesCoefficientRowTotal = refl
 
-base369AggregateZeroFibreCoefficient : ℕ
+base369AggregateZeroFibreCoefficient : Nat
 base369AggregateZeroFibreCoefficient = Count.aggregateZeroFibreCount
 
 base369AggregateZeroFibreCoefficientIs3139 :
