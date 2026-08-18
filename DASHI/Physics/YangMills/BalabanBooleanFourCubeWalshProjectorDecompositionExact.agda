@@ -29,7 +29,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Integer.Base using (+_)
 open import Data.Rational using (ℚ; 0ℚ; _*_; _/_)
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (sym; trans)
+open import Relation.Binary.PropositionalEquality using (trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
@@ -78,9 +78,9 @@ nontrivialCharacterSectorOfConstantZero :
   (constant : ℚ) →
   (signMask : Cube.Subset4) →
   characterSector (Walsh.constantFunction constant) character signMask ≡ 0ℚ
-nontrivialCharacterSectorOfConstantZero nontrivial constant signMask
+nontrivialCharacterSectorOfConstantZero {character} nontrivial constant signMask
   rewrite Walsh.nontrivialWalshKillsConstant nontrivial constant =
-  ℚRing.solve-∀ (Walsh.walshCharacter _ signMask)
+  ℚRing.solve-∀ (Walsh.walshCharacter character signMask)
 
 trivialCharacterSectorOfConstantExact :
   (constant : ℚ) →
@@ -92,18 +92,11 @@ trivialCharacterSectorOfConstantExact constant signMask
   ℚRing.solve-∀ constant
 
 ------------------------------------------------------------------------
--- Semantic boundary: decomposition is exact.  Subsequent sector deletion must
--- cite a symmetry theorem such as BalabanCMP109WalshCharacterOrbitCancellation.
+-- Semantic boundary: the equations above prove that the Walsh layer is a
+-- lossless decomposition.  No theorem here deletes a nontrivial sector.
+-- Sector deletion must come from the separate physical reflection/equivariance
+-- theorem in BalabanCMP109WalshCharacterOrbitCancellationExact.
 ------------------------------------------------------------------------
-
-record WalshProjectorBoundary : Set where
-  field
-    completeCharacterDecompositionConstructed : Set
-    nontrivialSectorDeletionAutomatic : Set
-
--- The second field is intentionally not instantiated here: Fourier expansion
--- alone does not imply that nontrivial sectors vanish.  That is a property of
--- the physical integrand/action.
 
 booleanFourCubeWalshProjectorDecompositionLevel : ProofLevel
 booleanFourCubeWalshProjectorDecompositionLevel = machineChecked
