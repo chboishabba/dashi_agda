@@ -42,9 +42,9 @@ import DASHI.Moonshine.P11Level44TwoAdicFixedVectorSeparationExact as Local2
 
 determinant : Local2.Mat2F2 → Local2.F2
 determinant M =
-  (Local2.a11 M Local2.*₂ Local2.a22 M)
-  Local2.+₂
-  (Local2.a12 M Local2.*₂ Local2.a21 M)
+  Local2._+₂_
+    (Local2._*₂_ (Local2.a11 M) (Local2.a22 M))
+    (Local2._*₂_ (Local2.a12 M) (Local2.a21 M))
 
 ------------------------------------------------------------------------
 -- The six elements of GL_2(F_2), written in the S3 normal form
