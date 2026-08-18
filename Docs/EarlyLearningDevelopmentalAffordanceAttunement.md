@@ -170,7 +170,7 @@ The Quebec evidence already blocks `professional floor -> good outcome`. The aff
 
 ### Waldorf / Steiner
 
-Waldorf need not be represented as simply `alternative pedagogy`. Its distinctive hypothesis can be decomposed into temporal pacing, sensory/motor affordances, continuity of relationship, delayed formalisation and structured curriculum. Whether those coordinates improve a particular outcome remains empirical; the formalism simply stops the pedagogical label from doing all explanatory work.
+Waldorf need not be represented as simply `alternative pedagogy`. Its distinctive hypothesis can be decomposed into temporal pacing, sensory/motor affordances, continuity of relationship, delayed formalisation and structured curriculum. Whether those coordinates improve a particular outcome remains empirical; the formalism simply stops the pedagogical label from doing all explanatory work. The implementation deliberately uses the current Waldorf source only as a measurement-horizon warning; there is no invented canonical Steiner ontology in the repo.
 
 ### Structured home education and unschooling
 
@@ -194,27 +194,94 @@ agency != exposure to many activities
 
 Instead, agency partly concerns the topology of viable, developmentally appropriate child actions within a governed relational field.
 
+## Availability, reachability and contestability
+
+The deeper pass through `DevelopmentalAgencyState`, `AutonomyReopeningCriterion`, `TraumaMemoryHypervoxelBridge`, `ChildAuthorityTraumaHyperfabric`, `PsychogeographicFieldExact`, `PatternPreservingTeaching`, and `NicheConstructionProblemSpace` sharpens the carrier further:
+
+```text
+available != reachable != contestable/agentic.
+```
+
+`SituatedRelationalLearningAffordanceExact` now gives two exact finite non-factorability witnesses:
+
+```text
+availableAffordanceCannotDetermineReachability
+reachabilityCannotDetermineDevelopmentalAgency
+```
+
+The first holds nominal availability fixed while varying whether the opportunity is actually reachable through the child's relational, temporal and historical topology. The second holds reachability fixed while varying whether the child has a route to accept, decline or modify participation.
+
+The child-agency lane adds an important normative correction. `DevelopmentalAgencyState` makes competence domain- and capability-relative: guardian permission is not child competence, assent is not mature consent, and refusal and withdrawal remain distinct. `ConsentAgencyGovernanceCore` requires pacing, review, refusal and withdrawal. Consequently, an adult making an opportunity available cannot by itself establish child agency.
+
+The autonomy-reopening lane prevents the opposite mistake. Temporary structure, protection or scaffolding is not automatically anti-autonomous. The relevant question is whether reasons, alternatives, independent verification and revision capacity are reopened over development. This prevents the framework from silently equating `more freedom now` with `more autonomy over time`.
+
+The trauma-memory lane adds path dependence without diagnostic determinism. Versioned developmental history and residuals may remain relevant to current accessibility, while `residualAloneProvesTrauma = false` and `formalCarrierDiagnosesPerson = false`. A nominal opportunity can therefore be historically difficult to reach without the formalism declaring a clinical diagnosis or fixed character.
+
+The psychogeographic and niche-construction lanes add two further distinctions:
+
+```text
+same physical endpoint != same lived affordance
+future affordance expansion requires longitudinal evidence.
+```
+
+Route history may alter what a place affords, and a child's actions may participate in changing a future problem space; neither claim licenses a one-step developmental outcome theorem.
+
+Finally, measurement horizon becomes explicit:
+
+```text
+immediate snapshot
+intermediate horizon
+longitudinal horizon.
+```
+
+This is the disciplined lesson drawn from comparative cases such as Waldorf: an early measurement and a later developmental trajectory are different observation surfaces. The source does not become a causal Steiner theorem.
+
+The resulting positive design gate requires the dimensions to travel together before policy language promotes an offered opportunity into a genuinely developmental affordance:
+
+```text
+nominal availability
++ actual reachability
++ child accept/decline/modify route
++ refusal and withdrawal
++ safe mediation
++ structured scaffolding compatible with later autonomy
++ relational review
++ place and sensory context
++ developmental history
++ declared measurement horizon
++ public entitlement
++ longitudinal evidence for future-affordance claims.
+```
+
+This is stronger than `more choice`, `more resources`, `more professional contact`, or even `more affordances`.
+
 ## Compact result
 
-The new high-alpha compression is:
+The high-alpha compression is now:
 
 ```text
 same delivery route       != same developmental opportunity
 same professional floor   != same developmental opportunity
 same resource inventory   != same developmental fit
 same attention quantity   != same attunement burden
+same nominal availability != same reachability
+same reachability         != same contestability/agency
+adult offer               != child assent
 more sensory exposure     != automatically better
 more autonomy             != automatically better
 more structure            != automatically better
+temporary structure       != automatic loss of autonomy
 professional presence     != automatic attunement
+developmental history     != diagnosis
+early snapshot            != whole developmental trajectory
 ```
 
 The positive target is:
 
-> Preserve public entitlements, pluralise pathways, and govern the developmental affordance field so that child, family, kin/community and professional knowledge can continuously test whether what is available is actually usable, timely, meaningful and safe.
+> Preserve public entitlements, pluralise pathways, and govern a reachable-and-contestable developmental affordance field so that child, family, kin/community and professional knowledge can continuously test whether what is available is actually usable, timely, meaningful, revisable and safe.
 
 Or more compactly:
 
 ```text
-preserve entitlements; govern affordances; evaluate fit, not labels.
+preserve entitlements; make affordances reachable; preserve contestability; declare the horizon.
 ```
