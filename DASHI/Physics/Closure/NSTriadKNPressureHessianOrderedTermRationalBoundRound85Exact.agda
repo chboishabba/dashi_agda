@@ -169,7 +169,7 @@ sourceModulusSquaredMeaning {I = I} system mode =
   trans
     (complexModulusMultiply pHat (C3.realEmbed F norm))
     (cong
-      (L2.complexModulusSquared pHat *_)
+      (λ normSquare → L2.complexModulusSquared pHat * normSquare)
       (solve (norm ∷ [])))
 
 pressureHessianActionNormSquaredBound :
@@ -202,23 +202,33 @@ pressureHessianActionNormSquaredBound E I system mode value =
         (complex3ScaleNormSquared scalar (C3.modeVector E mode))
         (trans
           (cong
-            (_* L2.complex3NormSquared (C3.modeVector E mode))
+            (λ scalarMass →
+              scalarMass * L2.complex3NormSquared (C3.modeVector E mode))
             (trans
               (complexModulusNegate (C3.complexMultiply pHat dot))
               (complexModulusMultiply pHat dot)))
           (cong
-            (pMass * dotMass *_)
+            (λ modeMass → pMass * dotMass * modeMass)
             (modeVectorNormSquaredExact E I mode)))
 
     cauchy = bilinearDotModeCauchy E I mode value
+    modeNN : 0ℚ ≤ normMode
+    modeNN =
+      subst
+        (λ x → 0ℚ ≤ x)
+        (modeVectorNormSquaredExact E I mode)
+        (Separation.complex3NormSquaredNonnegative (C3.modeVector E mode))
+    pMassNN = Separation.complexModulusSquaredNonnegative pHat
     leftFactor = pMass * normMode
+    leftFactorNN : 0ℚ ≤ leftFactor
     leftFactorNN =
-      RationalL2.productNonnegative
-        (Separation.complexModulusSquaredNonnegative pHat)
-        (subst
-          (λ x → 0ℚ ≤ x)
-          (modeVectorNormSquaredExact E I mode)
-          (Separation.complex3NormSquaredNonnegative (C3.modeVector E mode)))
+      let
+        instance
+          pNN = nonNegative pMassNN
+          nNN = nonNegative modeNN
+          productNN = ℚP.nonNeg*nonNeg⇒nonNeg pMass normMode
+      in
+      ℚP.nonNegative⁻¹ leftFactor
     instance leftFactorNNI = nonNegative leftFactorNN
 
     scaled :
@@ -244,7 +254,7 @@ pressureHessianActionNormSquaredBound E I system mode value =
     (λ upper →
       L2.complex3NormSquared
         (HessianSplit.pressureHessianAction E mode pHat value) ≤ upper)
-    (cong (_* valueMass) (sym sourceExact))
+    (cong (λ sourceMass → sourceMass * valueMass) (sym sourceExact))
     (subst
       (λ lower → lower ≤ (pMass * RationalL2.square normMode) * valueMass)
       actionExact
