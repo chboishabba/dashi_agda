@@ -25,7 +25,6 @@ module DASHI.Papers.NavierStokes.TheoremInterfaceRound78Exact where
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
-import DASHI.Papers.NavierStokes.TheoremInterfaceRound77Exact as R77
 import DASHI.Physics.Closure.NSTriadKNHighestAlphaRound78Exact as R78
 
 round78RestrictedEulerCalibrationConstructed : Bool
@@ -71,9 +70,13 @@ round78PhysicalAnnularMultiplierKernelBound = false
 round78CriticalRatioBarrier : Bool
 round78CriticalRatioBarrier = false
 
-round78GenericCompactnessAndSerrinReducersAlreadyPresent : Bool
-round78GenericCompactnessAndSerrinReducersAlreadyPresent =
-  R77.round77PositiveCriticalFrameReciprocalConstructed
+round78GenericAubinLionsLimitInterfacesAlreadyPresent : Bool
+round78GenericAubinLionsLimitInterfacesAlreadyPresent =
+  R78.round78GenericAubinLionsLimitInterfacesAlreadyPresent
+
+round78CriticalToSerrinReducerAlreadyPresent : Bool
+round78CriticalToSerrinReducerAlreadyPresent =
+  R78.round78CriticalToSerrinReducerAlreadyPresent
 
 round78ClayPromotion : Bool
 round78ClayPromotion = false
