@@ -49,12 +49,12 @@ module DASHI.Physics.Closure.NSTriadKNFrameWeightedStretchingDepletionGateRound7
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base using (ℚ; 0ℚ; _-_; _≤_; _<_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _-_; -_; _≤_; _<_)
 import Data.Rational.Properties as ℚP
+open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (subst)
 
 import DASHI.Physics.Closure.NSTriadKNFrameWeightedSupercriticalPropagationRound77Exact as Propagation
-import DASHI.Physics.Closure.NSTriadKNPressureStretchingCompetitionRound78Exact as Competition
 
 record PhysicalExcessDecomposition
     (row : Propagation.FrameWeightedSupercriticalRow) : Set where
@@ -69,14 +69,19 @@ record PhysicalExcessDecomposition
 
 open PhysicalExcessDecomposition public
 
-asCompetitionBudget :
-  ∀ {row} → PhysicalExcessDecomposition row → Competition.PressureStretchingBudget
-asCompetitionBudget decomposition =
-  Competition.pressure-stretching-budget
-    (crossModeNonlocalEnable decomposition)
-    0ℚ
-    (pressureGeometryAndAllocationDepletion decomposition)
-    0ℚ
+differenceNonpositiveFromDominance :
+  ∀ enabling depleting →
+  enabling ≤ depleting →
+  enabling - depleting ≤ 0ℚ
+differenceNonpositiveFromDominance enabling depleting dominance =
+  let
+    shifted :
+      enabling + (- depleting) ≤ depleting + (- depleting)
+    shifted = ℚP.+-monoʳ-≤ (- depleting) dominance
+    rightZero : depleting + (- depleting) ≡ 0ℚ
+    rightZero = solve (depleting ∷ [])
+  in
+  subst (λ right → enabling - depleting ≤ right) rightZero shifted
 
 physicalSupercriticalRowRefutesDepletionDominance :
   ∀ {row} (decomposition : PhysicalExcessDecomposition row) →
@@ -91,17 +96,20 @@ physicalSupercriticalRowRefutesDepletionDominance {row} decomposition dominance 
     surplusPositive =
       subst
         (0ℚ <_)
-        (PhysicalExcessDecomposition.excessMeaning decomposition)
+        (excessMeaning decomposition)
         (Propagation.excessPositive row)
 
-    budget = asCompetitionBudget decomposition
-
-    enablingDominated :
-      Competition.enablingSide budget ≤ Competition.depletingSide budget
-    enablingDominated = dominance
+    surplusNonpositive :
+      crossModeNonlocalEnable decomposition
+        - pressureGeometryAndAllocationDepletion decomposition
+      ≤ 0ℚ
+    surplusNonpositive =
+      differenceNonpositiveFromDominance
+        (crossModeNonlocalEnable decomposition)
+        (pressureGeometryAndAllocationDepletion decomposition)
+        dominance
   in
-  Competition.positiveSurplusRefutesDepletionDominance
-    budget surplusPositive enablingDominated
+  ℚP.<-≤-trans surplusPositive surplusNonpositive
 
 round78B2CanBeObtainedFromBranchingMultiplicityAlone : Bool
 round78B2CanBeObtainedFromBranchingMultiplicityAlone = false
