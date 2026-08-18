@@ -2,6 +2,7 @@ module DASHI.EvidencePolarityCrossDomainRegression where
 
 open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Empty using (⊥)
 
 import DASHI.Algebra.ClaimIndexedEvidencePolarityExact as Indexed
 import DASHI.Algebra.DisagreementFourViewBoundary as Four
@@ -11,6 +12,7 @@ import DASHI.Chemistry.EvidenceObligationAuthorityBridgeExact as Chemistry
 import DASHI.Core.EvidenceObligationAuthoritySeparationExact as Governed
 import DASHI.Physics.Chemistry.AtomicEvidenceObligationBridgeExact as Atomic
 import DASHI.Reasoning.HyperfabricHypervoxelEvidencePolarityBridgeExact as Hyper
+import DASHI.Reasoning.RelationalLensSynthesisCore as Lens
 
 ------------------------------------------------------------------------
 -- Focused compile/regression surface for the cross-domain evidence tranche.
@@ -19,6 +21,22 @@ import DASHI.Reasoning.HyperfabricHypervoxelEvidencePolarityBridgeExact as Hyper
 conflictStillRetained :
   Indexed.conflict ≡ Four.assess true true
 conflictStillRetained = Indexed.conflictIsBoth
+
+contextualCounterpositionStillNotLogicalNegation :
+  Lens.contextualCounterpositionRole ≡ Lens.logicalNegationRole → ⊥
+contextualCounterpositionStillNotLogicalNegation =
+  Indexed.contextualCounterpositionRoleIsNotLogicalNegation
+
+orientationReversalStillNotLogicalNegation :
+  Lens.orientationReversalRole ≡ Lens.logicalNegationRole → ⊥
+orientationReversalStillNotLogicalNegation =
+  Indexed.orientationReversalRoleIsNotLogicalNegation
+
+opposingSupportDoesNotSelfQualifyAsNegation :
+  Indexed.ClaimIndexedEvidencePolarityBoundary.opposingSupportAutomaticallyMeansLogicalNegation
+    Indexed.canonicalClaimIndexedEvidencePolarityBoundary
+  ≡ false
+opposingSupportDoesNotSelfQualifyAsNegation = refl
 
 supportStillLeavesObligationOpen :
   Governed.obligations Governed.supportOnlyOpen ≡ Governed.obligationsOpen
