@@ -4,8 +4,8 @@ module DASHI.Papers.NavierStokes.TheoremInterfaceRound82Exact where
 -- PAPER-FACING ROUND82 INTERFACE
 --
 -- Round82 corrects the global depletion currency after combining the Round81
--- spectral analysis with the repository's older compact-Gamma falsification
--- and potential machinery.
+-- spectral analysis with the repository's older compact-transfer falsification
+-- and bounded-potential machinery.
 --
 -- Retained exact results:
 --
@@ -22,13 +22,23 @@ module DASHI.Papers.NavierStokes.TheoremInterfaceRound82Exact where
 --   unsigned projector turnover is NOT a finite global budget;
 --   the selected bounded candidate is
 --
---       B_K = Gamma_K / (1 + Gamma_K),
+--       B_K = Gamma_transfer,K / (1 + Gamma_transfer,K),
 --
---   tied directly to the dangerous transfer ratio.
+--   tied directly to Q_{K,+}/(2 nu D_K).
 --
--- The theorem consumed downstream is an integrated deterministic occupation
--- estimate plus cutoff-uniform replenishment absorption.  Pointwise negative
--- Bdot at every dangerous instant is explicitly not required.
+-- Its exact drift numerator is
+--
+--   Bdot (Q + V)^2 = Qdot V - Q Vdot,
+--
+-- so the physical C5 theorem is a relative-growth/occupation estimate, not a
+-- matrix-exponential theorem.  The downstream consumer needs an integrated
+-- deterministic occupation inequality plus cutoff-uniform replenishment
+-- absorption; pointwise negative Bdot at every dangerous instant is not
+-- required.
+--
+-- `Gamma` provenance is explicit: the older periodic Route-B packet Gamma
+-- (center-shell / packet energy) is a different observable and cannot be used
+-- as transfer-Gamma coercivity without a same-object bridge.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -45,6 +55,13 @@ round82SmallSpectrumWeakStretchingAvailable = R82.round82BothSmallGapsGiveWeakSt
 round82PressureHessianModeIsometryAvailable : Bool
 round82PressureHessianModeIsometryAvailable = R82.round82PressureHessianModeIsometryConstructed
 
+round82CompactDriftIsRelativeGrowthCompetition : Bool
+round82CompactDriftIsRelativeGrowthCompetition =
+  R82.round82CompactDriftNumeratorReducedToRelativeGrowth
+
+round82PacketGammaDeterminesTransferGamma : Bool
+round82PacketGammaDeterminesTransferGamma = false
+
 round82PrimaryC5UsesCompactTransferPotential : Bool
 round82PrimaryC5UsesCompactTransferPotential = R82.round82PrimaryC5IsCompactTransferPotential
 
@@ -53,6 +70,10 @@ round82C5RequiresPointwiseNegativeDrift = R82.round82PointwiseNegativeDriftRequi
 
 round82IntegratedDangerOccupationReducerAvailable : Bool
 round82IntegratedDangerOccupationReducerAvailable = R82.round82IntegratedDangerOccupationReducerConstructed
+
+round82UniformDangerOccupationUsesExistingResidence : Bool
+round82UniformDangerOccupationUsesExistingResidence =
+  R82.round82UniformDangerOccupationUsesExistingResidenceTheorem
 
 -- Seven remaining physical/analytic packages.
 round82SelectedGlobalLiteralGalerkinTrajectory : Bool
@@ -90,6 +111,14 @@ round82CriticalToSerrinReducerAlreadyPresent =
 round82ClayPromotion : Bool
 round82ClayPromotion = false
 
+round82CompactDriftIsRelativeGrowthCompetitionIsTrue :
+  round82CompactDriftIsRelativeGrowthCompetition ≡ true
+round82CompactDriftIsRelativeGrowthCompetitionIsTrue = refl
+
+round82PacketGammaDeterminesTransferGammaIsFalse :
+  round82PacketGammaDeterminesTransferGamma ≡ false
+round82PacketGammaDeterminesTransferGammaIsFalse = refl
+
 round82PrimaryC5UsesCompactTransferPotentialIsTrue :
   round82PrimaryC5UsesCompactTransferPotential ≡ true
 round82PrimaryC5UsesCompactTransferPotentialIsTrue = refl
@@ -101,6 +130,10 @@ round82C5RequiresPointwiseNegativeDriftIsFalse = refl
 round82IntegratedDangerOccupationReducerAvailableIsTrue :
   round82IntegratedDangerOccupationReducerAvailable ≡ true
 round82IntegratedDangerOccupationReducerAvailableIsTrue = refl
+
+round82UniformDangerOccupationUsesExistingResidenceIsTrue :
+  round82UniformDangerOccupationUsesExistingResidence ≡ true
+round82UniformDangerOccupationUsesExistingResidenceIsTrue = refl
 
 round82ClayPromotionIsFalse : round82ClayPromotion ≡ false
 round82ClayPromotionIsFalse = refl
