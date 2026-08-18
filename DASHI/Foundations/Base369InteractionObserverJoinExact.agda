@@ -51,7 +51,7 @@ record BlockFactorsThroughSum : Set₁ where
   constructor blockFactorsThroughSum
   field
     decodeBlock : ℤ → Block
-    factorisation : (state : State) →
+    blockFactorisation : (state : State) →
       blockObserver state ≡ decodeBlock (sumObserver state)
 
 open BlockFactorsThroughSum public
@@ -60,17 +60,17 @@ blockCannotFactorThroughSum : BlockFactorsThroughSum → ⊥
 blockCannotFactorThroughSum factor =
   proj₂ Interaction.aggregateCollisionSeparatedByBlockOrientation
     (trans
-      (factorisation factor Interaction.structuralZeroRound)
+      (blockFactorisation factor Interaction.structuralZeroRound)
       (trans
         (cong (decodeBlock factor)
           (proj₁ Interaction.aggregateCollisionSeparatedByBlockOrientation))
-        (sym (factorisation factor Interaction.cancellationZeroRound))))
+        (sym (blockFactorisation factor Interaction.cancellationZeroRound))))
 
 record SumFactorsThroughBlock : Set₁ where
   constructor sumFactorsThroughBlock
   field
     decodeSum : Block → ℤ
-    factorisation : (state : State) →
+    sumFactorisation : (state : State) →
       sumObserver state ≡ decodeSum (blockObserver state)
 
 open SumFactorsThroughBlock public
@@ -79,11 +79,11 @@ sumCannotFactorThroughBlock : SumFactorsThroughBlock → ⊥
 sumCannotFactorThroughBlock factor =
   proj₂ Interaction.blockOrientationCollisionSeparatedByAggregate
     (trans
-      (factorisation factor Interaction.allPositiveRound)
+      (sumFactorisation factor Interaction.allPositiveRound)
       (trans
         (cong (decodeSum factor)
           (proj₁ Interaction.blockOrientationCollisionSeparatedByAggregate))
-        (sym (factorisation factor Interaction.baseFlipped))))
+        (sym (sumFactorisation factor Interaction.baseFlipped))))
 
 record TransverseProjectionIncomparability : Set₁ where
   constructor transverseProjectionIncomparability
