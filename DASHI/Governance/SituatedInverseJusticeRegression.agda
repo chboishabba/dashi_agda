@@ -3,11 +3,18 @@ module DASHI.Governance.SituatedInverseJusticeRegression where
 open import DASHI.Core.Prelude
 
 import DASHI.Core.IntersectionalNonFactorability as Intersectional
+import DASHI.Governance.AuthorityRoutingProjectionSafetyExact as Projection
 import DASHI.Governance.InverseJusticeThroughputExact as Throughput
+import DASHI.Governance.JusticeCrossPollinationBridgeExact as Cross
+import DASHI.Governance.OptionConeCoercionExact as Cone
+import DASHI.Governance.SituatedAuthorityRoutingExact as Routing
 import DASHI.Governance.SituatedInverseJusticeFibreExact as Justice
+import DASHI.Governance.TraumaMemorySublationBoundary as TraumaMemory
 
 ------------------------------------------------------------------------
--- Regression surface for the situated inverse-justice tranche.
+-- Regression surface for the situated inverse-justice / authority-routing
+-- tranche.  Importing this file checks the cross-domain theorem composition in
+-- one narrow surface rather than relying on receipt-only integration.
 ------------------------------------------------------------------------
 
 forceAloneCannotEstablishJustice :
@@ -47,6 +54,131 @@ worsenedViolationIsInverseJustice =
 
 sloganThroughputWitness : Throughput.CoerciveJusticeThroughput
 sloganThroughputWitness = Throughput.tooManyCoppersNotEnoughJusticeWitness
+
+------------------------------------------------------------------------
+-- Situated routing and projection safety.
+------------------------------------------------------------------------
+
+somePoliceNecessityStillDoesNotCreateDefault :
+  ((situation : Routing.DemoSituation) →
+    Routing.demoSelectedRoute situation ≡ Routing.policeRoute) →
+  ⊥
+somePoliceNecessityStillDoesNotCreateDefault =
+  Routing.somePoliceNecessityDoesNotEstablishPoliceDefault
+
+protectiveRoleCannotSelfAuthorise :
+  Routing.AdmissibleRoute
+    Routing.protectiveRoutingSystem
+    Routing.supportedDecisionSituation
+    Routing.formerSupporterRoute →
+  ⊥
+protectiveRoleCannotSelfAuthorise =
+  Routing.ProtectiveRoleDoesNotSelfAuthoriseIntervention
+
+pseudoConsultationCannotEstablishCommunityGovernance :
+  Routing.CommunityAuthorityWitness
+    DASHI.Reasoning.RelationalChronologyProjectionBoundary.canonicalConsultationEpisode →
+  ⊥
+pseudoConsultationCannotEstablishCommunityGovernance =
+  Routing.consultationDoesNotEstablishCommunityGovernance
+
+disturbanceSurfaceCannotDetermineSoundRoute :
+  Projection.RoutingFactorisation
+    Projection.incidentProjection
+    Projection.requiredRoute →
+  ⊥
+disturbanceSurfaceCannotDetermineSoundRoute =
+  Projection.incidentLabelCannotDetermineSoundRoute
+
+causalOrderLossChangesResponder :
+  Projection.routeByChronology
+    DASHI.Reasoning.RelationalChronologyProjectionBoundary.actImpactObjectionResponseShape
+  ≡
+  Projection.routeByChronology
+    DASHI.Reasoning.RelationalChronologyProjectionBoundary.objectionDistressBlameShape →
+  ⊥
+causalOrderLossChangesResponder =
+  Projection.CausalOrderLossCanChangeAdmissibleResponder
+
+------------------------------------------------------------------------
+-- Option-cone / long-horizon safety.
+------------------------------------------------------------------------
+
+immediateSafetyDoesNotDetermineLongHorizonOptimality :
+  Cone.ImmediateThreatReductionNonSufficiencyWitness
+immediateSafetyDoesNotDetermineLongHorizonOptimality =
+  Cone.ImmediateThreatReductionDoesNotDetermineJusticeOptimality
+
+canonicalJusticeNegativeRouteContractsSafeReachability :
+  Cone.JusticeNegativeRoutingContractsSafeReachability
+    Justice.violatingAction
+    Cone.demoReachability
+    Cone.beforeResponse
+    Cone.coerciveOutcome
+canonicalJusticeNegativeRouteContractsSafeReachability =
+  Cone.canonicalJusticeNegativeReachabilityContraction
+
+canonicalOptionConeCoercionWitness :
+  Cone.OptionConeCoercion
+    Cone.demoReachability
+    Cone.demoPenaltySystem
+    Cone.beforeResponse
+    Cone.coerciveOutcome
+canonicalOptionConeCoercionWitness = Cone.canonicalOptionConeCoercion
+
+------------------------------------------------------------------------
+-- Palestine/Amalek, externality, trauma/history and gluing cross-pollination.
+------------------------------------------------------------------------
+
+enemyCompressionCannotDetermineFineJusticeAssessment :
+  Intersectional.FactorsThrough
+    DASHI.Physics.Foundations.SettlerEnemyAbstractionExact.rhetoricalCompression
+    Cross.fineJusticeAssessment →
+  ⊥
+enemyCompressionCannotDetermineFineJusticeAssessment =
+  Cross.justiceRelevantEnemyCompressionCannotBeJusticeSufficient
+
+civilianNonSubstitutionCollisionWitness :
+  Cross.CivilianNonSubstitutionCollision
+civilianNonSubstitutionCollisionWitness =
+  Cross.canonicalCivilianNonSubstitutionCollision
+
+visibleCarrierCannotSelfPromoteToCoerciveAuthority :
+  DASHI.Governance.ExternalityCarrierAttractor.VisibleCarrierEstablishesSufficientCause →
+  ⊥
+visibleCarrierCannotSelfPromoteToCoerciveAuthority =
+  Cross.CarrierVisibilityCannotPromoteToCoerciveRoute
+
+selectedIranOriginIsNotCompleteCause :
+  TraumaMemory.selectedOriginIsCompleteCause
+    TraumaMemory.iranNineteenSeventyNineFrame
+  ≡ false
+selectedIranOriginIsNotCompleteCause =
+  Cross.iranNineteenSeventyNineFrameIsNotCompleteCause
+
+closedAuthorityCanonicalRiskHasNoIndependentCorrection :
+  DASHI.Culture.AmalekAuthorityProjectionBoundary.correctionChannelIndependent
+    DASHI.Culture.AmalekAuthorityProjectionBoundary.canonicalClosedAuthorityRisk
+  ≡ false
+closedAuthorityCanonicalRiskHasNoIndependentCorrection =
+  Cross.canonicalClosedAuthorityHasNoIndependentCorrection
+
+concreteThreatRemovalDoesNotCloseAbstractEnemyApparatus :
+  DASHI.Physics.Foundations.FrontierEnemyPersistenceExact.defeatingActorDissolvesEnemyCategoryAutomatically
+    DASHI.Physics.Foundations.FrontierEnemyPersistenceExact.canonicalFrontierEnemyPersistenceBoundary
+  ≡ false
+concreteThreatRemovalDoesNotCloseAbstractEnemyApparatus =
+  Cross.concreteThreatRemovalDoesNotEstablishCoerciveApparatusClosure
+
+compatibleSituatedAuthoritiesComposeWithoutAuthorityPromotion :
+  DASHI.Governance.LocalGlobalCouncilGluing.CompatibleCouncilFamily
+    DASHI.Governance.LocalGlobalCouncilGluing.canonicalLocalCouncilFamily
+  ×
+  (DASHI.Governance.LocalGlobalCouncilGluing.sheafAnalogyCreatesPoliticalAuthority
+    DASHI.Governance.LocalGlobalCouncilGluing.canonicalCouncilGluingBoundary
+    ≡ false)
+compatibleSituatedAuthoritiesComposeWithoutAuthorityPromotion =
+  Cross.CompatibleSituatedAuthoritiesCanComposeWithoutSovereigntyCollapse
 
 forcePromotionBoundaryIsClosed :
   Justice.SituatedInverseJusticeBoundary.possessionOfForceCreatesJustice
