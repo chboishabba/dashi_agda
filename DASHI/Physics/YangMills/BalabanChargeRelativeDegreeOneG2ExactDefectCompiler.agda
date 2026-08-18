@@ -20,7 +20,7 @@ module DASHI.Physics.YangMills.BalabanChargeRelativeDegreeOneG2ExactDefectCompil
 -- DASHI CONTRIBUTION
 --
 -- The degree-one G2 compiler previously still accepted two Green-state norm
--- ratios.  The literal plaquette-incidence theorem now proves the defect one
+-- ratios. The literal plaquette-incidence theorem now proves the defect one
 -- exactly:
 --
 --      3 ||w_1||^2 = C_p(h).
@@ -31,7 +31,7 @@ module DASHI.Physics.YangMills.BalabanChargeRelativeDegreeOneG2ExactDefectCompil
 --      defectDegreeOneNormRatio = 1/3.
 --
 -- Therefore the only nontrivial Green-side physical estimate left in G2 is the
--- source derivative bound.  The final coefficient is
+-- source derivative bound. The final coefficient is
 --
 --   rawTotal + 1/2 (sourceRatio + 1/3).
 --
@@ -41,7 +41,7 @@ module DASHI.Physics.YangMills.BalabanChargeRelativeDegreeOneG2ExactDefectCompil
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
-  (ℚ; _*_; _≤_; _/_)
+  (ℚ; 0ℚ; _+_; _*_; _≤_; _/_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
@@ -54,6 +54,7 @@ import DASHI.Physics.YangMills.BalabanP33PhysicalRationalWilsonPlaquetteJetExact
 import DASHI.Physics.YangMills.BalabanP33PhysicalWilsonSignedGlobalExact as Wilson
 import DASHI.Physics.YangMills.BalabanP33CorrelatedMobiusDegreeJointExact as Degree
 import DASHI.Physics.YangMills.BalabanSelectedCanonicalConstraintAtomsFromSubsetExact as Canonical
+import DASHI.Physics.YangMills.BalabanSelectedCanonicalConstraintDegreeBlocksExact as CanonicalBlocks
 import DASHI.Physics.YangMills.BalabanCanonicalGreenStateNormReductionExact as StateNorm
 import DASHI.Physics.YangMills.BalabanPlaquetteBoundaryStateNormChargeExact as Defect
 import DASHI.Physics.YangMills.BalabanChargeRelativeDegreeOneG2ClosureExact as G2
@@ -83,7 +84,7 @@ record ExactDefectDegreeOneG2Data
 
     chargeNonnegative : ∀ configuration →
       InCertifiedRegion configuration →
-      (+ 0 / 1) ≤ Wilson.plaquetteCrossCharge
+      0ℚ ≤ Wilson.plaquetteCrossCharge
         (bondFieldAt configuration) (plaquetteAt configuration)
 
     rawRatio : Degree.MobiusDegree → ℚ
@@ -91,7 +92,7 @@ record ExactDefectDegreeOneG2Data
 
     rawRelativeSound : ∀ configuration →
       InCertifiedRegion configuration → ∀ degree →
-      G2.CanonicalBlocks.canonicalRawDegreeBlock
+      CanonicalBlocks.canonicalRawDegreeBlock
         (canonicalInputsAt configuration) degree
       ≤ rawRatio degree
         * Wilson.plaquetteCrossCharge
