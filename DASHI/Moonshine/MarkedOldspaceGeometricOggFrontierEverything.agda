@@ -18,6 +18,13 @@ module DASHI.Moonshine.MarkedOldspaceGeometricOggFrontierEverything where
 --   deck action is exactly that permutation module, while shared Old3
 --   coordinates do not identify the local roles.
 --
+--   P11Level44HeckeAlignmentNonUniquenessExact strengthens the correction:
+--   on this multiplicity space every good-prime T_ell acts by one scalar
+--   a_ell, so every scalar-compatible Old3 map is automatically an intertwiner.
+--   Identity and the nontrivial three-cycle are two explicit distinct maps
+--   intertwining EVERY scalar Hecke action.  Thus no further away-from-2 Hecke
+--   probes can canonicalize the local comparison.
+--
 --   Remaining seam: construct the actual 2-adic local comparison inside the
 --   same global automorphic representation (equivalently, the source-native
 --   Eichler/Jacquet--Langlands fixed-vector comparison), rather than declaring
@@ -45,6 +52,7 @@ module DASHI.Moonshine.MarkedOldspaceGeometricOggFrontierEverything where
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
+open import Data.Integer using (ℤ)
 
 import DASHI.Moonshine.FormalQSeriesOldformEigencharacterTransportExact as Eig
 import DASHI.Moonshine.P11MarkedLevel44PermutationIntertwinerExact as Marked
@@ -52,6 +60,7 @@ import DASHI.Moonshine.P11MarkedLevel44PermutationOldspaceExact as Perm
 import DASHI.Moonshine.P11Level44FormalSameCoordinateComparisonExact as Same
 import DASHI.Moonshine.P11Level44SameCoordinateHighestAlphaRegression as SameReg
 import DASHI.Moonshine.P11Level44TwoAdicFixedVectorSeparationExact as Local2
+import DASHI.Moonshine.P11Level44HeckeAlignmentNonUniquenessExact as AlignNoGo
 import DASHI.Moonshine.SupersingularFrobeniusFrickeGenusReductionExact as CountReduce
 import DASHI.Moonshine.SupersingularFrobeniusFrickeGenusReductionRegression as CountReg
 import DASHI.Moonshine.RationalNodalSpecialFibreGenusExact as Nodal
@@ -78,6 +87,20 @@ localRoleNoCollapseRegression :
   Local2.markedLocalPresentation v
   ≡ Local2.analyticDegeneracyPresentation v → Local2.Impossible
 localRoleNoCollapseRegression = Local2.sameCoordinatesDoNotIdentifyLocalRealization
+
+allScalarHeckeAlignmentCollisionRegression :
+  AlignNoGo.HeckeAlignmentCollision
+allScalarHeckeAlignmentCollisionRegression =
+  AlignNoGo.allGoodPrimeHeckeAlignmentCollision
+
+rotationIntertwinesArbitraryScalarHeckeRegression :
+  (lambda : ℤ) → (v : Marked.Old3) →
+  AlignNoGo.mapOld3 AlignNoGo.rotationOld3Map
+    (AlignNoGo.scalarHecke lambda v)
+  ≡ AlignNoGo.scalarHecke lambda
+      (AlignNoGo.mapOld3 AlignNoGo.rotationOld3Map v)
+rotationIntertwinesArbitraryScalarHeckeRegression =
+  AlignNoGo.rotationHeckeIntertwiner
 
 countReductionRegression :
   (D : CountReduce.SupersingularFrickeCountData) →
