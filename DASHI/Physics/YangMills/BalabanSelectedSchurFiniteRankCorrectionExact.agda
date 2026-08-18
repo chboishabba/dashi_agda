@@ -92,12 +92,18 @@ selectedRawSchurCorrectionRowMassBound background radius row =
         Cross.crossRowMassBound
         (ℚP.nonNegative⁻¹ Cross.crossColumnMassBound)
         (Cross.selectedSchurCrossAbsoluteRowMassBound background radius row)
+
+    coefficientBelow :
+      Cross.crossRowMassBound * Cross.crossColumnMassBound
+      ≤ rawCorrectionRowMassBound
+    coefficientBelow =
+      subst
+        (λ upper →
+          Cross.crossRowMassBound * Cross.crossColumnMassBound ≤ upper)
+        (ℚRing.solve []) ℚP.≤-refl
   in
   ℚP.≤-trans productBound
-    (subst
-      (λ upper →
-        Cross.crossRowMassBound * Cross.crossColumnMassBound ≤ upper)
-      (ℚRing.solve []) crossRowScaled)
+    (ℚP.≤-trans crossRowScaled coefficientBelow)
 
 selectedSchurFiniteRankCorrection :
   Physical.RationalSU2Background4 → Cross.GaugeRow → Cross.GaugeRow → ℚ
