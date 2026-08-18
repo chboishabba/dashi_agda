@@ -23,6 +23,12 @@ module DASHI.Moonshine.MarkedHeckeDeckCollisionEverything where
 --   and prime-to-level Hecke acts on the global coordinate only, then the
 --   entire prime-to-level Hecke family is necessarily blind to deck type.
 --
+-- The observer no-go strengthens this from a pointwise slogan to exact
+-- non-separation theorems: every finite prime family and even the whole
+-- pointwise all-prime family fail on any nontrivial deck fibre, while adding
+-- the deck coordinate is a strict refinement and the full (global,deck)
+-- coordinate is separating.
+--
 -- No module here promotes the finite p=11 prime scan to an all-prime theorem,
 -- nor does it assert that the actual p=11 carrier has already been proved to
 -- possess the required global x deck product factorization.
@@ -38,6 +44,7 @@ import DASHI.Moonshine.P11Ell7PointCountBrandtTraceExact as Trace7
 import DASHI.Moonshine.P37NonOggFullLevel2DeuringControlExact as P37
 import DASHI.Moonshine.P37MarkedX2JointFingerprintDeckCollisionExact as P37Collision
 import DASHI.Moonshine.AuxiliaryLevelHeckeDeckFactorizationExact as Aux
+import DASHI.Moonshine.AuxiliaryLevelHeckeObserverNoGoExact as ObserverNoGo
 
 ------------------------------------------------------------------------
 -- Regression witnesses consume actual theorem surfaces rather than receipt
@@ -82,3 +89,8 @@ auxiliaryLevelBoundaryRegression :
   Aux.p11SameObjectProductFactorizationClaimedHere
     Aux.canonicalAuxiliaryLevelHeckeDeckBoundary ≡ false
 auxiliaryLevelBoundaryRegression = refl
+
+allPrimeObserverNoGoBoundaryRegression :
+  ObserverNoGo.allPrimeBlindnessDerived
+    ObserverNoGo.canonicalAuxiliaryHeckeObserverNoGoBoundary ≡ true
+allPrimeObserverNoGoBoundaryRegression = refl
