@@ -71,7 +71,7 @@ cycleRankEqualsNodeCount D =
     trans
       (Nat.+-comm 1 (nodeCount D))
       (trans
-        (sym (oneEdgePerNode D))
+        (cong (_+ 1) (sym (oneEdgePerNode D)))
         (trans
           (graphEuler D)
           (cong (_+ cycleRank D) (oneComponent D))))
