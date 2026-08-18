@@ -146,6 +146,12 @@ reopenProjectedExactly bridge x =
 SIOAttributeObserver : Set → Set → Set
 SIOAttributeObserver X V = X → V
 
+SIOInformationBelow :
+  ∀ {X A B : Set} →
+  SIOAttributeObserver X A →
+  SIOAttributeObserver X B → Set
+SIOInformationBelow = Observer.InformationBelow
+
 sioCrossCollisionImpliesIncomparable :
   ∀ {X A B : Set}
     {OA : SIOAttributeObserver X A}
@@ -177,6 +183,17 @@ sioPairedObserverIsLeastJointRefinement :
   Observer.Refines O (Observer.pairObserver OA OB)
 sioPairedObserverIsLeastJointRefinement =
   Observer.jointRefinesPair
+
+sioPairedObserverIsJoin :
+  ∀ {X A B C : Set}
+    {O : SIOAttributeObserver X C}
+    {OA : SIOAttributeObserver X A}
+    {OB : SIOAttributeObserver X B} →
+  SIOInformationBelow OA O →
+  SIOInformationBelow OB O →
+  SIOInformationBelow (Observer.pairObserver OA OB) O
+sioPairedObserverIsJoin =
+  Observer.pairIsLeastUpperBound
 
 ------------------------------------------------------------------------
 -- Boundary summary suitable for downstream documentation/tests.
