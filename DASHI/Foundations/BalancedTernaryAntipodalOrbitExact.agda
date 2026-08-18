@@ -16,7 +16,8 @@ module DASHI.Foundations.BalancedTernaryAntipodalOrbitExact where
 -- or decision semantics.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl; cong)
+open import Agda.Builtin.Bool using (Bool; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; _+_; _*_)
 open import Data.Empty using (⊥)
 
@@ -62,33 +63,10 @@ strictAntipodeTriple (Branch.triple a b c) =
 
 strictAntipodeTripleInvolutive :
   (x : TritTriple) → strictAntipodeTriple (strictAntipodeTriple x) ≡ x
-strictAntipodeTripleInvolutive (Branch.triple SSP.sspNegOne SSP.sspNegOne SSP.sspNegOne) = refl
-strictAntipodeTripleInvolutive (Branch.triple SSP.sspNegOne SSP.sspNegOne SSP.sspZero) = refl
-strictAntipodeTripleInvolutive (Branch.triple SSP.sspNegOne SSP.sspNegOne SSP.sspPosOne) = refl
-strictAntipodeTripleInvolutive (Branch.triple SSP.sspNegOne SSP.sspZero SSP.sspNegOne) = refl
-strictAntipodeTripleInvolutive (Branch.triple SSP.sspNegOne SSP.sspZero SSP.sspZero) = refl
-strictAntipodeTripleInvolutive (Branch.triple SSP.sspNegOne SSP.sspZero SSP.sspPosOne) = refl
-strictAntipodeTripleInvolutive (Branch.triple SSP.sspNegOne SSP.sspPosOne SSP.sspNegOne) = refl
-strictAntipodeTripleInvolutive (Branch.triple SSP.sspNegOne SSP.sspPosOne SSP.sspZero) = refl
-strictAntipodeTripleInvolutive (Branch.triple SSP.sspNegOne SSP.sspPosOne SSP.sspPosOne) = refl
-strictAntipodeTripleInvolutive (Branch.triple SSP.sspZero SSP.sspNegOne SSP.sspNegOne) = refl
-strictAntipodeTripleInvolutive (Branch.triple SSP.sspZero SSP.sspNegOne SSP.sspZero) = refl
-strictAntipodeTripleInvolutive (Branch.triple SSP.sspZero SSP.sspNegOne SSP.sspPosOne) = refl
-strictAntipodeTripleInvolutive (Branch.triple SSP.sspZero SSP.sspZero SSP.sspNegOne) = refl
-strictAntipodeTripleInvolutive (Branch.triple SSP.sspZero SSP.sspZero SSP.sspZero) = refl
-strictAntipodeTripleInvolutive (Branch.triple SSP.sspZero SSP.sspZero SSP.sspPosOne) = refl
-strictAntipodeTripleInvolutive (Branch.triple SSP.sspZero SSP.sspPosOne SSP.sspNegOne) = refl
-strictAntipodeTripleInvolutive (Branch.triple SSP.sspZero SSP.sspPosOne SSP.sspZero) = refl
-strictAntipodeTripleInvolutive (Branch.triple SSP.sspZero SSP.sspPosOne SSP.sspPosOne) = refl
-strictAntipodeTripleInvolutive (Branch.triple SSP.sspPosOne SSP.sspNegOne SSP.sspNegOne) = refl
-strictAntipodeTripleInvolutive (Branch.triple SSP.sspPosOne SSP.sspNegOne SSP.sspZero) = refl
-strictAntipodeTripleInvolutive (Branch.triple SSP.sspPosOne SSP.sspNegOne SSP.sspPosOne) = refl
-strictAntipodeTripleInvolutive (Branch.triple SSP.sspPosOne SSP.sspZero SSP.sspNegOne) = refl
-strictAntipodeTripleInvolutive (Branch.triple SSP.sspPosOne SSP.sspZero SSP.sspZero) = refl
-strictAntipodeTripleInvolutive (Branch.triple SSP.sspPosOne SSP.sspZero SSP.sspPosOne) = refl
-strictAntipodeTripleInvolutive (Branch.triple SSP.sspPosOne SSP.sspPosOne SSP.sspNegOne) = refl
-strictAntipodeTripleInvolutive (Branch.triple SSP.sspPosOne SSP.sspPosOne SSP.sspZero) = refl
-strictAntipodeTripleInvolutive (Branch.triple SSP.sspPosOne SSP.sspPosOne SSP.sspPosOne) = refl
+strictAntipodeTripleInvolutive (Branch.triple a b c)
+  rewrite strictAntipodeInvolutive a
+        | strictAntipodeInvolutive b
+        | strictAntipodeInvolutive c = refl
 
 ------------------------------------------------------------------------
 -- Exact orientation-forgotten quotient of one 27-state ternary cube.
@@ -116,30 +94,12 @@ classifyAntipodal27 (Branch.triple SSP.sspZero SSP.sspZero SSP.sspZero) = centre
 classifyAntipodal27Invariant :
   (x : TritTriple) →
   classifyAntipodal27 (strictAntipodeTriple x) ≡ classifyAntipodal27 x
-classifyAntipodal27Invariant (Branch.triple SSP.sspPosOne SSP.sspNegOne SSP.sspNegOne) = refl
-classifyAntipodal27Invariant (Branch.triple SSP.sspPosOne SSP.sspNegOne SSP.sspZero) = refl
-classifyAntipodal27Invariant (Branch.triple SSP.sspPosOne SSP.sspNegOne SSP.sspPosOne) = refl
-classifyAntipodal27Invariant (Branch.triple SSP.sspPosOne SSP.sspZero SSP.sspNegOne) = refl
-classifyAntipodal27Invariant (Branch.triple SSP.sspPosOne SSP.sspZero SSP.sspZero) = refl
-classifyAntipodal27Invariant (Branch.triple SSP.sspPosOne SSP.sspZero SSP.sspPosOne) = refl
-classifyAntipodal27Invariant (Branch.triple SSP.sspPosOne SSP.sspPosOne SSP.sspNegOne) = refl
-classifyAntipodal27Invariant (Branch.triple SSP.sspPosOne SSP.sspPosOne SSP.sspZero) = refl
-classifyAntipodal27Invariant (Branch.triple SSP.sspPosOne SSP.sspPosOne SSP.sspPosOne) = refl
-classifyAntipodal27Invariant (Branch.triple SSP.sspNegOne SSP.sspNegOne SSP.sspNegOne) = refl
-classifyAntipodal27Invariant (Branch.triple SSP.sspNegOne SSP.sspNegOne SSP.sspZero) = refl
-classifyAntipodal27Invariant (Branch.triple SSP.sspNegOne SSP.sspNegOne SSP.sspPosOne) = refl
-classifyAntipodal27Invariant (Branch.triple SSP.sspNegOne SSP.sspZero SSP.sspNegOne) = refl
-classifyAntipodal27Invariant (Branch.triple SSP.sspNegOne SSP.sspZero SSP.sspZero) = refl
-classifyAntipodal27Invariant (Branch.triple SSP.sspNegOne SSP.sspZero SSP.sspPosOne) = refl
-classifyAntipodal27Invariant (Branch.triple SSP.sspNegOne SSP.sspPosOne SSP.sspNegOne) = refl
-classifyAntipodal27Invariant (Branch.triple SSP.sspNegOne SSP.sspPosOne SSP.sspZero) = refl
-classifyAntipodal27Invariant (Branch.triple SSP.sspNegOne SSP.sspPosOne SSP.sspPosOne) = refl
-classifyAntipodal27Invariant (Branch.triple SSP.sspZero SSP.sspPosOne SSP.sspNegOne) = refl
-classifyAntipodal27Invariant (Branch.triple SSP.sspZero SSP.sspPosOne SSP.sspZero) = refl
-classifyAntipodal27Invariant (Branch.triple SSP.sspZero SSP.sspPosOne SSP.sspPosOne) = refl
-classifyAntipodal27Invariant (Branch.triple SSP.sspZero SSP.sspNegOne SSP.sspNegOne) = refl
-classifyAntipodal27Invariant (Branch.triple SSP.sspZero SSP.sspNegOne SSP.sspZero) = refl
-classifyAntipodal27Invariant (Branch.triple SSP.sspZero SSP.sspNegOne SSP.sspPosOne) = refl
+classifyAntipodal27Invariant (Branch.triple SSP.sspPosOne b c)
+  rewrite strictAntipodeInvolutive b | strictAntipodeInvolutive c = refl
+classifyAntipodal27Invariant (Branch.triple SSP.sspNegOne b c) = refl
+classifyAntipodal27Invariant (Branch.triple SSP.sspZero SSP.sspPosOne c)
+  rewrite strictAntipodeInvolutive c = refl
+classifyAntipodal27Invariant (Branch.triple SSP.sspZero SSP.sspNegOne c) = refl
 classifyAntipodal27Invariant (Branch.triple SSP.sspZero SSP.sspZero SSP.sspPosOne) = refl
 classifyAntipodal27Invariant (Branch.triple SSP.sspZero SSP.sspZero SSP.sspNegOne) = refl
 classifyAntipodal27Invariant (Branch.triple SSP.sspZero SSP.sspZero SSP.sspZero) = refl
@@ -207,8 +167,6 @@ record BalancedTernaryAntipodalBoundary : Set where
     antipodalC2IsBooleanTruth : Bool
     antipodalC2IsDecisionAcceptReject : Bool
     contextualCounterpositionAutomaticallyStrictAntipode : Bool
-
-open import Agda.Builtin.Bool using (Bool; false)
 
 canonicalBalancedTernaryAntipodalBoundary : BalancedTernaryAntipodalBoundary
 canonicalBalancedTernaryAntipodalBoundary = record
