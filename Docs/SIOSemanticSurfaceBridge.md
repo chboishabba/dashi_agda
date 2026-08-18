@@ -90,11 +90,7 @@ This is the ontology-facing counterpart of the existing DASHI rule
 \text{currentlyAuthorized}(e,r).
 \]
 
-The bridge deliberately provides no promotion from a role assertion to current authority. The theorem
-
-`SioRoleAssertionCannotCreateCurrentAuthority`
-
-is represented in code as `sioRoleAssertionCannotCreateCurrentAuthority` and witnesses
+The bridge deliberately provides no promotion from a role assertion to current authority. The theorem `sioRoleAssertionCannotCreateCurrentAuthority` witnesses
 
 \[
 \boxed{
@@ -124,19 +120,33 @@ The theorem is `reopenProjectedExactly`.
 
 Importantly, RDF/OWL encoding of the projected surface does not itself provide the receipt and does not authorize erasure of distinctions hidden by the projection.
 
-## Attribute observers form a refinement partial order
+## Attribute observers form an information partial order
 
-The generic `ObserverRefinementCore` defines
+`ObserverRefinementCore` keeps the primitive notion
 
 \[
-O_A \preceq O_B
+\operatorname{Refines}(O_A,O_B)
 \quad\Longleftrightarrow\quad
 O_A(x)=O_A(y)
 \Rightarrow
 O_B(x)=O_B(y).
 \]
 
-Thus \(O_A\) is at least as informative as \(O_B\): every fibre of \(O_A\) lies inside a fibre of \(O_B\).
+Thus `Refines(finer,coarser)` says every fibre of the first observer lies inside a fibre of the second.
+
+For order-theoretic statements the module explicitly reverses this into
+
+\[
+O_A \le_I O_B
+\quad\Longleftrightarrow\quad
+\operatorname{Refines}(O_B,O_A),
+\]
+
+so `InformationBelow` reads conventionally as
+
+\[
+\boxed{\text{less informative} \le_I \text{more informative}.}
+\]
 
 A `CrossCollision` consists of witnesses
 
@@ -150,19 +160,7 @@ and
 O_B(u)=O_B(v),\quad O_A(u)\neq O_A(v).
 \]
 
-The theorem
-
-`crossCollisionImpliesIncomparable`
-
-then proves
-
-\[
-\boxed{
-O_A\not\preceq O_B
-\quad\land\quad
-O_B\not\preceq O_A.
-}
-\]
+The theorem `crossCollisionImpliesIncomparable` proves that neither observer refines the other. Equivalently, neither lies below the other in the information order.
 
 This directly captures the observer-incomparability pattern that has appeared in the exact Base369/representation examples.
 
@@ -174,31 +172,41 @@ The paired observer is
 O_{A\times B}(x)=(O_A(x),O_B(x)).
 \]
 
-The core proves:
+The core proves
 
 \[
-O_{A\times B}\preceq O_A,
+O_A \le_I O_{A\times B},
 \qquad
-O_{A\times B}\preceq O_B,
+O_B \le_I O_{A\times B},
 \]
 
-and under a cross-collision each refinement is strict.
+and under a cross-collision both increases are strict.
 
-More importantly, if another observer \(O\) refines both \(O_A\) and \(O_B\), then
+If another observer \(O\) is an upper bound,
+
+\[
+O_A \le_I O,
+\qquad
+O_B \le_I O,
+\]
+
+then `pairIsLeastUpperBound` proves
 
 \[
 \boxed{
-O\preceq O_{A\times B}.
+O_{A\times B}\le_I O.
 }
 \]
 
-This is `jointRefinesPair`. Therefore the paired observer is the least joint refinement, up to observational equivalence.
+Therefore the paired observer is genuinely the binary join in the explicit information order, up to observational equivalence.
 
-The SIO bridge reexports this interpretation through:
+The SIO bridge exposes this through:
 
+- `SIOInformationBelow`;
 - `sioCrossCollisionImpliesIncomparable`;
 - `sioPairedObserverStrictlyRefinesBoth`;
-- `sioPairedObserverIsLeastJointRefinement`.
+- `sioPairedObserverIsLeastJointRefinement`;
+- `sioPairedObserverIsJoin`.
 
 This gives multiple SIO attributes a precise mathematical semantics: they need not lie on a single information ladder; they can be transverse coordinates whose correct combined public surface is their join.
 
