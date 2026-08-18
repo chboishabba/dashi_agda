@@ -87,27 +87,28 @@ expandedChoiceStillCannotDetermineProfessionalFloor =
   Choice.expandedChoiceReweightingCannotRecoverMissingProfessionalFloor
 
 ------------------------------------------------------------------------
--- Nordic architecture labels are source-facing examples only.  The formal
--- theorem concerns the architecture coordinates, not a claim that countries
--- are internally homogeneous or immutable.
+-- Nordic comparative evidence motivates architecture TYPES, not permanent
+-- country essences.  Cash-for-childcare schemes have been introduced, amended,
+-- reduced and abolished at different times across Nordic welfare states.  The
+-- theorem therefore keeps the two policy shapes independent of country names.
 ------------------------------------------------------------------------
 
-data NordicArchitectureFamily : Set where
-  swedenDenmarkUniversalist
-  finlandNorwayHybrid : NordicArchitectureFamily
+data NordicPolicyArchitecture : Set where
+  universalAccessWithoutParallelCashCare
+  universalAccessWithParallelCashCare : NordicPolicyArchitecture
 
-nordicUniversalEntitlement : NordicArchitectureFamily → Bool
-nordicUniversalEntitlement swedenDenmarkUniversalist = true
-nordicUniversalEntitlement finlandNorwayHybrid = true
+nordicUniversalEntitlement : NordicPolicyArchitecture → Bool
+nordicUniversalEntitlement universalAccessWithoutParallelCashCare = true
+nordicUniversalEntitlement universalAccessWithParallelCashCare = true
 
-nordicParallelCashCare : NordicArchitectureFamily → Bool
-nordicParallelCashCare swedenDenmarkUniversalist = false
-nordicParallelCashCare finlandNorwayHybrid = true
+nordicParallelCashCare : NordicPolicyArchitecture → Bool
+nordicParallelCashCare universalAccessWithoutParallelCashCare = false
+nordicParallelCashCare universalAccessWithParallelCashCare = true
 
-nordicFamiliesDifferAtParallelRoute :
-  nordicParallelCashCare swedenDenmarkUniversalist ≡
-  nordicParallelCashCare finlandNorwayHybrid → ⊥
-nordicFamiliesDifferAtParallelRoute ()
+nordicArchitecturesDifferAtParallelRoute :
+  nordicParallelCashCare universalAccessWithoutParallelCashCare ≡
+  nordicParallelCashCare universalAccessWithParallelCashCare → ⊥
+nordicArchitecturesDifferAtParallelRoute ()
 
 nordicUniversalismDoesNotDetermineCashCareArchitecture :
   Intersection.FactorsThrough
@@ -115,10 +116,10 @@ nordicUniversalismDoesNotDetermineCashCareArchitecture :
 nordicUniversalismDoesNotDetermineCashCareArchitecture =
   Intersection.witnessRulesOutEveryFlatFactorisation
     (Intersection.nonFactorabilityWitness
-      swedenDenmarkUniversalist
-      finlandNorwayHybrid
+      universalAccessWithoutParallelCashCare
+      universalAccessWithParallelCashCare
       refl
-      nordicFamiliesDifferAtParallelRoute)
+      nordicArchitecturesDifferAtParallelRoute)
 
 record EntitlementRouteBoundary : Set where
   constructor entitlementRouteBoundary
@@ -132,7 +133,10 @@ record EntitlementRouteBoundary : Set where
     entitlementAndRouteRemainIndependentCoordinates : Bool
     entitlementAndRouteRemainIndependentCoordinatesIsTrue :
       entitlementAndRouteRemainIndependentCoordinates ≡ true
+    architectureTypeEqualsPermanentCountryIdentity : Bool
+    architectureTypeEqualsPermanentCountryIdentityIsFalse :
+      architectureTypeEqualsPermanentCountryIdentity ≡ false
 
 canonicalEntitlementRouteBoundary : EntitlementRouteBoundary
 canonicalEntitlementRouteBoundary =
-  entitlementRouteBoundary false refl false refl true refl
+  entitlementRouteBoundary false refl false refl true refl false refl
