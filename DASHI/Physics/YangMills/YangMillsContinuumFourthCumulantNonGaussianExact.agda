@@ -24,6 +24,7 @@ module DASHI.Physics.YangMills.YangMillsContinuumFourthCumulantNonGaussianExact 
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Empty using (⊥-elim)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; _+_; _-_; _*_; _<_; _≤_; ∣_∣)
 import Data.Rational.Properties as ℚP
@@ -66,8 +67,11 @@ absoluteZeroExact = ℚP.∣0∣
 positiveMarginCannotBoundZero : ∀ margin →
   0ℚ < margin → ¬ (margin ≤ 0ℚ)
 positiveMarginCannotBoundZero margin marginPositive marginBelowZero =
-  ℚP.<-asym marginPositive
-    (ℚP.≤-<-trans marginBelowZero marginPositive)
+  let
+    impossible : margin < margin
+    impossible = ℚP.≤-<-trans marginBelowZero marginPositive
+  in
+  ⊥-elim (ℚP.<-irrefl refl impossible)
 
 record StrictFourthCumulantWitness (dataSet : FourPointMomentData) : Set where
   field
