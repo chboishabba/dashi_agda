@@ -30,6 +30,7 @@ module DASHI.Physics.YangMills.BalabanFiniteOneHalfReopeningExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.List using (List)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_; _/_)
 import Data.Rational.Properties as ℚP
@@ -54,7 +55,7 @@ twoTimesOneHalfExact = ℚRing.solve []
 
 oneHalfReopeningBound :
   ∀ {Index : Set}
-    (indices : Agda.Builtin.List.List Index)
+    (indices : List Index)
     (residual : Strict.Vector Index → Strict.Vector Index)
     solution source →
   Strict.IdentityPlusResidualEquation residual solution source →
@@ -106,7 +107,7 @@ oneHalfReopeningBound
 
 oneHalfHomogeneousReopeningZeroNorm :
   ∀ {Index : Set}
-    (indices : Agda.Builtin.List.List Index)
+    (indices : List Index)
     (residual : Strict.Vector Index → Strict.Vector Index)
     solution →
   Strict.IdentityPlusResidualEquation residual solution Strict.zeroVector →
