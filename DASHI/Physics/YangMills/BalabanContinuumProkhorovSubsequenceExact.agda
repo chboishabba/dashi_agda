@@ -30,6 +30,15 @@ module DASHI.Physics.YangMills.BalabanContinuumProkhorovSubsequenceExact where
 open import Agda.Builtin.Nat using (Nat)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
+-- Local products/sigma avoid importing a larger measure/topology hierarchy.
+record Product (A B : Set) : Set where
+  constructor product
+  field first : A; second : B
+open Product public
+
+data Sigma (A : Set) (B : A → Set) : Set where
+  sigma : (a : A) → B a → Sigma A B
+
 record ProkhorovSubsequenceAuthority (Measure Limit : Set) : Set₁ where
   field
     TightSequence : (Nat → Measure) → Set
@@ -38,22 +47,13 @@ record ProkhorovSubsequenceAuthority (Measure Limit : Set) : Set₁ where
 
     tightSequenceHasWeaklyConvergentSubsequence :
       ∀ sequence → TightSequence sequence →
-      Σ Limit (λ limit →
-        Σ (Nat → Nat) (λ subsequence →
+      Sigma Limit (λ limit →
+        Sigma (Nat → Nat) (λ subsequence →
           Product
             (StrictlyIncreasing subsequence)
             (WeaklyConverges (λ n → sequence (subsequence n)) limit)))
 
 open ProkhorovSubsequenceAuthority public
-
--- Local products/sigma avoid importing a larger measure/topology hierarchy.
-record Product (A B : Set) : Set where
-  constructor _,_
-  field first : A; second : B
-open Product public
-
-data Σ (A : Set) (B : A → Set) : Set where
-  _,_ : (a : A) → B a → Σ A B
 
 record RenormalizedSchwingerTightness
     {Measure Limit : Set}
@@ -68,8 +68,8 @@ continuumSchwingerSubsequenceExists :
   ∀ {Measure Limit}
     (authority : ProkhorovSubsequenceAuthority Measure Limit)
     (physical : RenormalizedSchwingerTightness authority) →
-  Σ Limit (λ limit →
-    Σ (Nat → Nat) (λ subsequence →
+  Sigma Limit (λ limit →
+    Sigma (Nat → Nat) (λ subsequence →
       Product
         (StrictlyIncreasing authority subsequence)
         (WeaklyConverges authority
