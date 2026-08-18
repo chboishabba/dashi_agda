@@ -1,6 +1,6 @@
 # Progenitor / Parent Dynamic Authority Weld
 
-This note records the action-facing extension of the parent/progenitor hyperfabric. It deliberately reuses existing DASHI dynamic-safety, policy-safety, non-factorability, provenance-reopening, plural-observer, and diachronic-authority kernels rather than adding another parent-specific foundation.
+This note records the action-facing extension of the parent/progenitor hyperfabric. It deliberately reuses existing DASHI dynamic-safety, policy-safety, non-factorability, provenance-reopening, plural-observer, consultation, and diachronic-authority kernels rather than adding another parent-specific foundation.
 
 ## 1. Public parent slots do not factor authority routing
 
@@ -76,7 +76,19 @@ The combined boundary is:
 
 This is the formal counterpart of the education-policy distinction between supporting family agency and turning parenthood into epistemic or political sovereignty.
 
-## 6. Relationship to observer refinement and PR #584
+## 6. Hearing is not decision sensitivity
+
+`ProgenitorParentConsultationDecisionSensitivityExact.agda` imports the existing `RelationalChronologyProjectionBoundary` / `RelationalSharedStateUpdate` pseudo-consultation witness.
+
+The canonical episode has input requested, but the input does not constrain the decision, and the unilateral decision is later represented as joint. The bridge preserves the existing promotion boundaries:
+
+`hearing != uptake != decision sensitivity != joint agreement`.
+
+It also composes with the diachronic support boundary: consultation cannot be used by a supporter to self-authorise override.
+
+This matters in both directions. Asking a child/dependent/family member for input does not establish meaningful participation if the answer cannot affect the route; conversely, preserving a present preference does not automatically manufacture a historical joint agreement.
+
+## 7. Relationship to observer refinement and PR #584
 
 PR #581 already contains the static observer-refinement and fibre-dynamics cores needed by the parent ontology. PR #584 independently owns the generic bridges from observer refinement to future-language safety and from hidden fibre motion to receipt motion.
 
