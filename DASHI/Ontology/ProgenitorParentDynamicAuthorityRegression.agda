@@ -1,6 +1,6 @@
 module DASHI.Ontology.ProgenitorParentDynamicAuthorityRegression where
 
-open import DASHI.Core.Prelude using (false; true; _≡_; ⊥)
+open import DASHI.Core.Prelude using (false; true; _≡_; refl; ⊥)
 
 import DASHI.Core.IntersectionalNonFactorability as NonFactor
 import DASHI.Core.DynamicalQuotientSafety as Dynamic
@@ -13,6 +13,7 @@ import DASHI.Ontology.ProgenitorParentObserverFutureSafetyExact as Future
 import DASHI.Ontology.ProgenitorParentDiachronicAuthorityFibreExact as DiachronicParent
 import DASHI.Ontology.ProgenitorParentResidualDynamicsExact as Residual
 import DASHI.Ontology.ProgenitorParentAllyshipAuthorityBridgeExact as AllyshipAuthority
+import DASHI.Ontology.ProgenitorParentConsultationDecisionSensitivityExact as Consultation
 
 routingNonfactorabilityRegression :
   NonFactor.FactorsThrough
@@ -66,3 +67,8 @@ familyAgencyNotSovereigntyRegression :
   AllyshipAuthority.parentObserverIsCanonicalWhole
     AllyshipAuthority.canonicalFamilyAgencyAuthorityBoundary ≡ false
 familyAgencyNotSovereigntyRegression = refl
+
+consultationDoesNotBecomeDecisionSensitivityRegression :
+  Consultation.inputActuallyDecisionSensitive
+    Consultation.canonicalParentConsultationDecisionBoundary ≡ false
+consultationDoesNotBecomeDecisionSensitivityRegression = refl
