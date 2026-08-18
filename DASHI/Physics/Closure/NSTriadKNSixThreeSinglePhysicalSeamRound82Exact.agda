@@ -39,11 +39,11 @@ open import Agda.Primitive using (Level)
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
-import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNPeriodicLittlewoodPaleyBonyExact as LP
 import DASHI.Physics.Closure.NSTriadKNOrderedEuclideanL2Carrier as Ordered
 import DASHI.Physics.Closure.NSTriadKNComOrderedPhysicalMajorantRound62Exact as Majorant
 import DASHI.Physics.Closure.NSTriadKNComOrderedPhysicalGramFactorizationRound65Exact as Gram
+import DASHI.Physics.Closure.NSTriadKNComNormalizedFibreAggregateRound60Exact as Aggregate
 import DASHI.Physics.Closure.NSTriadKNComFactorizedPhysicalBandwidthOneRound65Exact as SixThree
 
 singlePhysicalSixThreeSourceClosesBandwidthOne :
@@ -57,8 +57,7 @@ singlePhysicalSixThreeSourceClosesBandwidthOne :
   Ordered._≤_ O
     (Majorant.bandwidthOnePhysicalEnergy
       (SixThree.factorizedSourceToOrderedPhysicalMajorant source) q)
-    (Majorant.embed R
-      DASHI.Physics.Closure.NSTriadKNComNormalizedFibreAggregateRound60Exact.bandwidthOneTarget)
+    (Majorant.embed R Aggregate.bandwidthOneTarget)
 singlePhysicalSixThreeSourceClosesBandwidthOne =
   SixThree.factorizedBandwidthOneBelow133Over256
 
