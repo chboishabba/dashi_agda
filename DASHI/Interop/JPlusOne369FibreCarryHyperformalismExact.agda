@@ -7,6 +7,7 @@ module DASHI.Interop.JPlusOne369FibreCarryHyperformalismExact where
 -- mathematical shapes already present in-repo:
 --
 --   * 3*3 = 9, 9^2 = 81, 3*3*3 = 27 as address/weave geometry;
+--   * typed 3/6/9 depth-phase fibres with canonical 6 -> 9 -> 3 forgetting;
 --   * j+1 as a typed successor/rechart;
 --   * balanced-ternary carry retaining a lower-level residue as memory while
 --     moving a +1 contribution to the next depth;
@@ -39,8 +40,10 @@ open import DASHI.Core.Prelude
 import DASHI.Interop.PNFHyperfabric369 as H369
 import DASHI.Foundations.JChartSuccessorBoundary as Chart
 import DASHI.Foundations.JPlusOneScaleBridge as J1
+import DASHI.Foundations.SSPPrimeLane369Refinement as Ref369
 import DASHI.Dynamics.TriadicResidualRechartDynamics as Rechart
 import DASHI.Reasoning.CarryMemorySubvoxelReceipt as Carry
+import DASHI.Physics.Closure.SSPPrimeLane369DepthWheelCantorBridge as Wheel369
 import DASHI.Physics.Closure.TeslaPolyphaseHistoricalBoundary as Tesla
 import DASHI.Interop.SweetgrassCarrierSpine as Sweetgrass
 import Moonshine as Moon
@@ -59,6 +62,58 @@ threeCubedAddressIsTwentySeven :
   H369.dialecticDiscussionAtomDimension ≡ 27
 threeCubedAddressIsTwentySeven =
   H369.dialecticDiscussionAtomDimensionIsTwentySeven
+
+canonical369AddressDigits :
+  Ref369.addressDigits Ref369.canonicalThreeSixNineAddress
+  ≡ Ref369.digit-3 ∷ Ref369.digit-6 ∷ Ref369.digit-9 ∷ []
+canonical369AddressDigits = Ref369.canonicalThreeSixNineDigits
+
+canonical369PrefixKeepsThreeSixHistory :
+  Ref369.prefixDigits Ref369.canonicalThreeSixNineAddress
+  ≡ Ref369.digit-3 ∷ Ref369.digit-6 ∷ []
+canonical369PrefixKeepsThreeSixHistory = Ref369.canonicalThreeSixNinePrefixDigits
+
+------------------------------------------------------------------------
+-- Stronger typed 3/6/9 fibre result already present in the depth-wheel lane.
+--
+--   3 = depth phase
+--   6 = polar trit x depth phase
+--   9 = full trit x depth phase
+--
+-- The canonical information direction is 6 -> 9 -> 3.  A canonical 9 -> 6
+-- retraction needs an extra policy for the zero trit and is therefore blocked.
+------------------------------------------------------------------------
+
+threePhaseAtlasHasThreeCells :
+  Wheel369.listLength Wheel369.depthPhaseAtlas ≡ Ref369.three
+threePhaseAtlasHasThreeCells = Wheel369.depthPhaseAtlasCount
+
+polarPhaseAtlasHasSixCells :
+  Wheel369.listLength Wheel369.polarPhaseAtlas ≡ Ref369.six
+polarPhaseAtlasHasSixCells = Wheel369.polarPhaseAtlasCount
+
+fullPhaseAtlasHasNineCells :
+  Wheel369.listLength Wheel369.fullPhaseAtlas ≡ Ref369.nine
+fullPhaseAtlasHasNineCells = Wheel369.fullPhaseAtlasCount
+
+polarEmbeddingPreservesDepthPhase :
+  (cell : Wheel369.PolarPhaseCell) →
+  Wheel369.forgetFullState (Wheel369.embedPolarPhaseCell cell)
+  ≡ Wheel369.forgetPolarState cell
+polarEmbeddingPreservesDepthPhase =
+  Wheel369.polarEmbeddingPreservesDepthPhase
+
+fullNineHasNoCanonicalRetractionToPolarSixWithoutZeroPolicy :
+  Wheel369.DepthWheelBoundary.fullNineHasCanonicalRetractionToPolarSixWithoutZeroPolicy
+    Wheel369.canonicalDepthWheelBoundary
+  ≡ false
+fullNineHasNoCanonicalRetractionToPolarSixWithoutZeroPolicy =
+  Wheel369.DepthWheelBoundary.fullNineHasCanonicalRetractionToPolarSixWithoutZeroPolicyIsFalse
+    Wheel369.canonicalDepthWheelBoundary
+
+threeSixNineDepthPhaseReturnsToZero :
+  Wheel369.depthWheelPhase 9 ≡ Wheel369.phase-0
+threeSixNineDepthPhaseReturnsToZero = Wheel369.nineDepthPhaseIsZero
 
 mckayFreshUnitExact : Moon.rep-dim + 1 ≡ Moon.j-coefficient
 mckayFreshUnitExact = Moon.mckay
@@ -168,12 +223,15 @@ data CrossScaleOperation : Set where
   reopenFromResidual : CrossScaleOperation
   weaveIntoFabric : CrossScaleOperation
   extendByFreshUnit : CrossScaleOperation
+  refineSixToNine : CrossScaleOperation
+  forgetNineToThree : CrossScaleOperation
 
 data CrossScaleInvariant : Set where
   lowerHistoryRetained : CrossScaleInvariant
   provenanceRetained : CrossScaleInvariant
   carrierIdentityNotInferred : CrossScaleInvariant
   semanticAuthorityNotInferred : CrossScaleInvariant
+  forgetfulDirectionRemembered : CrossScaleInvariant
 
 record JPlusOne369FibreCarryBoundary : Set where
   constructor jPlusOne369FibreCarryBoundary
@@ -183,6 +241,8 @@ record JPlusOne369FibreCarryBoundary : Set where
     residualCanSeedRechart : Bool
     rechartErasesLowerHistory : Bool
     jAndJPlusOneShouldBeReadTogetherForCarry : Bool
+    sixEmbedsInNinePreservingDepthPhase : Bool
+    nineRetractsToSixWithoutZeroPolicy : Bool
     McKayAndChartJAreSameCarrier : Bool
     TeslaHistoricallyOwnsDASHI369 : Bool
     fabricVocabularyImpliesDomainIdentity : Bool
@@ -191,4 +251,4 @@ canonicalJPlusOne369FibreCarryBoundary :
   JPlusOne369FibreCarryBoundary
 canonicalJPlusOne369FibreCarryBoundary =
   jPlusOne369FibreCarryBoundary
-    true false true false true false false false
+    true false true false true true false false false false
