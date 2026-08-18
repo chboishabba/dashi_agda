@@ -24,8 +24,7 @@ module DASHI.Physics.Closure.NSTriadKNSpectralClusterOrSmallStrainForkRound80Exa
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Product using (_×_; _,_)
-open import Data.Rational.Base using (ℚ; _≤_)
+open import Data.Rational.Base using (ℚ; _≤_; _+_; _*_)
 import Data.Rational.Properties as ℚP
 open import Data.Sum.Base using (inj₁; inj₂)
 
@@ -73,9 +72,6 @@ record TraceFreeSmallGapBranch (threshold : ℚ) : Set where
 
 open TraceFreeSmallGapBranch public
 
--- The exact reconstruction equalities are exported on the small-gap branch;
--- the next physical theorem may turn these into an operator/stretching bound
--- without choosing any individual eigenvector through a degeneracy.
 smallGapBranchLambda1Identity :
   ∀ {threshold} (branch : TraceFreeSmallGapBranch threshold) →
   Spectrum.three * Spectrum.lambda1 (Spectrum.spectrum (traceFreeSpectrum branch))
@@ -83,8 +79,6 @@ smallGapBranchLambda1Identity :
     + Spectrum.gap23 (Spectrum.spectrum (traceFreeSpectrum branch))
 smallGapBranchLambda1Identity branch =
   Spectrum.traceFreeLambda1FromGaps (traceFreeSpectrum branch)
-  where
-  open import Data.Rational.Base using (_+_; _*_)
 
 round80UniformSimpleEigenframeNoLongerRequiredByC4Architecture : Bool
 round80UniformSimpleEigenframeNoLongerRequiredByC4Architecture = true
