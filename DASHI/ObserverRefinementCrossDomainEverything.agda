@@ -4,6 +4,7 @@ import DASHI.Core.ObserverRefinementLatticeExact
 import DASHI.Core.ObserverRefinementCompositionExact
 import DASHI.Core.RobustObserverSeparationMarginExact
 import DASHI.Core.ObserverRefinementTailStoppingExact
+import DASHI.Core.IsotypicMultiplicityObserverRefinementExact
 import DASHI.Core.FibrePreservingDynamicsExact
 import DASHI.Core.SectionedProjectionProvenanceBridgeExact
 import DASHI.Core.ProvenanceFibreDynamicsReceiptExact
