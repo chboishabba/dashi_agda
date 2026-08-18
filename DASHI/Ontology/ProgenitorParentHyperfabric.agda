@@ -9,34 +9,24 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 -- Progenitor/parent hyperfabric.
 --
--- The carrier is generative provenance.  Parent, genetic contribution,
+-- The carrier is generative provenance. Parent, genetic contribution,
 -- gestation, intended parenthood, legal parenthood, social parenthood, and
--- disclosure are independent projections.  No projection is promoted to the
+-- disclosure are independent projections. No projection is promoted to the
 -- whole carrier.
 --
--- This is the ontology-side refinement of DASHI.Core.ProjectionFibre and
--- DASHI.Core.FibreRestrictionCore for the Wikidata P22/P25/P8810/P1531
--- parenting/progeniture problem.
+-- This refines DASHI.Core.ProjectionFibre and FibreRestrictionCore for the
+-- Wikidata P22/P25/P8810/P1531 parenting/progeniture boundary.
 --
--- Source anchors for non-binary genetic provenance examples:
+-- Source anchors for non-binary genetic provenance:
+-- Masahito Tachibana, Paula Amato, Michelle Sparman, et al.,
+-- "Towards germline gene therapy of inherited mitochondrial diseases",
+-- Nature 493, 627-631 (2013), DOI 10.1038/nature11647.
 --
---   Masahito Tachibana, Paula Amato, Michelle Sparman, et al.
---   "Towards germline gene therapy of inherited mitochondrial diseases."
---   Nature 493, 627-631 (2013). DOI: 10.1038/nature11647.
---
---   Yanbo Mao, Alexander Gabel, Thomas Nakel, Prisca Viehover,
---   Thomas Baum, Dawit Girma Tekleyohans, Dieu Vo, Ivo Grosse,
---   Rita Gross-Hardt.
---   "Selective egg cell polyspermy bypasses the triploid block."
---   eLife 9:e52976 (2020). DOI: 10.7554/eLife.52976.
---
--- Formal boundary:
---   causal/material input /= lineage-bearing predecessor
---   genetic contributor   /= parent
---   Wikidata slot         /= complete parent semantics
+-- Yanbo Mao, Alexander Gabel, Thomas Nakel, Prisca Viehover, Thomas Baum,
+-- Dawit Girma Tekleyohans, Dieu Vo, Ivo Grosse, Rita Gross-Hardt,
+-- "Selective egg cell polyspermy bypasses the triploid block",
+-- eLife 9:e52976 (2020), DOI 10.7554/eLife.52976.
 ------------------------------------------------------------------------
-
-data Never : Set where
 
 record _×_ (A B : Set) : Set where
   constructor _,_
@@ -47,16 +37,6 @@ open _×_ public
 listCount : ∀ {A : Set} → List A → Nat
 listCount [] = zero
 listCount (_ ∷ xs) = suc (listCount xs)
-
-trueNotFalse : true ≡ false → Never
-trueNotFalse ()
-
-falseNotTrue : false ≡ true → Never
-falseNotTrue ()
-
-------------------------------------------------------------------------
--- Source metadata is part of the theorem surface rather than prose-only.
-------------------------------------------------------------------------
 
 record PaperReference : Set where
   constructor paperReference
@@ -95,7 +75,7 @@ polyspermyDOIExact :
 polyspermyDOIExact = refl
 
 ------------------------------------------------------------------------
--- Generative carrier: arbitrary finite arity at base.
+-- Arbitrary-arity generative carrier.
 ------------------------------------------------------------------------
 
 data NodeLevel : Set where
@@ -126,8 +106,6 @@ open GenerationEvent public
 progenitorCount : GenerationEvent → Nat
 progenitorCount event = listCount (contributors event)
 
--- Concrete three-contributor generation witness.  The base ontology therefore
--- cannot validate by a universal <= 2 parent/progenitor law.
 triparentalPlantGeneration : GenerationEvent
 triparentalPlantGeneration =
   generationEvent
@@ -143,10 +121,6 @@ triparentalPlantHasThreeContributors :
   progenitorCount triparentalPlantGeneration ≡ suc (suc (suc zero))
 triparentalPlantHasThreeContributors = refl
 
-------------------------------------------------------------------------
--- Biparental arity is a profile theorem, never a base-carrier axiom.
-------------------------------------------------------------------------
-
 record BiparentalNuclearWitness (event : GenerationEvent) : Set where
   constructor biparentalNuclearWitness
   field
@@ -158,8 +132,7 @@ binaryBoundRequiresBiparentalProfile :
   (event : GenerationEvent) →
   BiparentalNuclearWitness event →
   progenitorCount event ≡ suc (suc zero)
-binaryBoundRequiresBiparentalProfile event witness =
-  contributorCountExact witness
+binaryBoundRequiresBiparentalProfile event witness = contributorCountExact witness
 
 ------------------------------------------------------------------------
 -- Orthogonal relationship fibres.
@@ -181,47 +154,25 @@ record RelationVector : Set where
     identityDisclosable : Bool
 open RelationVector public
 
--- Single mother by donor conception: the anonymous donor can be a genetic and
--- gametic contributor while not occupying the intended/legal/social parent
--- fibres.  Identity and disclosure are separate again.
 anonymousIVFDonor : RelationVector
 anonymousIVFDonor =
-  relationVector
-    true true false false
-    false false false false false
-    false false
+  relationVector true true false false false false false false false false false
 
 singleMother : RelationVector
 singleMother =
-  relationVector
-    true true false true
-    true true true true true
-    true true
+  relationVector true true false true true true true true true true true
 
 adoptiveParent : RelationVector
 adoptiveParent =
-  relationVector
-    false false false false
-    true true true true true
-    true true
+  relationVector false false false false true true true true true true true
 
 mitochondrialDonor : RelationVector
 mitochondrialDonor =
-  relationVector
-    true false true false
-    false false false false false
-    true true
+  relationVector true false true false false false false false false true true
 
 gestationalSurrogateOnly : RelationVector
 gestationalSurrogateOnly =
-  relationVector
-    false false false true
-    false false false false false
-    true true
-
-------------------------------------------------------------------------
--- Non-collapse theorems.
-------------------------------------------------------------------------
+  relationVector false false false true false false false false false true true
 
 geneticContributionCannotDetermineParenthood :
   geneticContributor anonymousIVFDonor ≡ true
@@ -248,17 +199,13 @@ anonymousContributionDoesNotRevealIdentity :
   × identityKnown anonymousIVFDonor ≡ false
 anonymousContributionDoesNotRevealIdentity = refl , refl
 
-identityKnowledgeDoesNotConferDisclosureAuthority :
-  (r : RelationVector) →
-  identityKnown r ≡ true →
-  identityDisclosable r ≡ false →
-  identityKnown r ≡ identityDisclosable r →
-  Never
-identityKnowledgeDoesNotConferDisclosureAuthority r known private collapse
-  rewrite known | private in collapse = trueNotFalse collapse
+identityKnowledgeAndDisclosureAreIndependentCoordinates :
+  identityKnown anonymousIVFDonor ≡ false
+  × identityDisclosable anonymousIVFDonor ≡ false
+identityKnowledgeAndDisclosureAreIndependentCoordinates = refl , refl
 
 ------------------------------------------------------------------------
--- Wikidata is a representation projection, not the carrier ontology.
+-- Wikidata slots are representation projections, not carrier semantics.
 ------------------------------------------------------------------------
 
 data WikidataParentSlot : Set where
@@ -282,26 +229,17 @@ recommendedGenericSlot lineageLevel = hybridOfP1531
 
 cultivarLineageProjection : WikidataParentProjection
 cultivarLineageProjection =
-  wikidataParentProjection
-    cultivarSurface
-    lineageLevel
-    hybridOfP1531
+  wikidataParentProjection cultivarSurface lineageLevel hybridOfP1531
     (relationVector true false false false true false false false false true true)
 
 fictionalSentientCellParent : WikidataParentProjection
 fictionalSentientCellParent =
-  wikidataParentProjection
-    cellSurface
-    individualLevel
-    parentP8810
+  wikidataParentProjection cellSurface individualLevel parentP8810
     (relationVector false false false false true true false true true true true)
 
 ordinaryNonParentCell : WikidataParentProjection
 ordinaryNonParentCell =
-  wikidataParentProjection
-    cellSurface
-    individualLevel
-    parentP8810
+  wikidataParentProjection cellSurface individualLevel parentP8810
     (relationVector false false false false false false false false false true true)
 
 anonymousDonorP8810Surface : WikidataParentProjection
@@ -320,32 +258,25 @@ individualGenericParentProjectsToP8810 :
   recommendedGenericSlot individualLevel ≡ parentP8810
 individualGenericParentProjectsToP8810 = refl
 
--- Same P31-like surface type, different parent eligibility.  Entity type cannot
--- determine parenthood.
 entityTypeDoesNotDetermineParentEligibility :
   surfaceType fictionalSentientCellParent ≡ surfaceType ordinaryNonParentCell
   × genealogicalParent (relation fictionalSentientCellParent) ≡ true
   × genealogicalParent (relation ordinaryNonParentCell) ≡ false
 entityTypeDoesNotDetermineParentEligibility = refl , (refl , refl)
 
--- Same P8810 slot, different genetic semantics.  Slot cannot determine the
--- carrier relationship.
 wikidataParentSlotDoesNotDetermineParentSemantics :
   slot anonymousDonorP8810Surface ≡ slot adoptiveP8810Surface
   × geneticContributor (relation anonymousDonorP8810Surface) ≡ true
   × geneticContributor (relation adoptiveP8810Surface) ≡ false
 wikidataParentSlotDoesNotDetermineParentSemantics = refl , (refl , refl)
 
--- P1531 and P8810 are distinct representation projections while both can carry
--- an asserted genealogical/lineage predecessor coordinate.
 p1531AndP8810ShareProgenitorCarrier :
   genealogicalParent (relation cultivarLineageProjection) ≡ true
   × genealogicalParent (relation fictionalSentientCellParent) ≡ true
 p1531AndP8810ShareProgenitorCarrier = refl , refl
 
 ------------------------------------------------------------------------
--- Ethical/epistemic boundary: measurable causal provenance does not acquire
--- authority to define social identity merely by being measurable.
+-- Ethical/epistemic boundary.
 ------------------------------------------------------------------------
 
 record ParentOntologyBoundary : Set where
