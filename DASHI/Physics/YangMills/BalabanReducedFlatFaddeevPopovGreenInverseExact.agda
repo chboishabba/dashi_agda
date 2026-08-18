@@ -32,13 +32,14 @@ module DASHI.Physics.YangMills.BalabanReducedFlatFaddeevPopovGreenInverseExact w
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _-_; _*_)
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using (pair)
 import DASHI.Physics.YangMills.BalabanConfiguredSide4PeriodicReindexingExact as Reindex
+import DASHI.Physics.YangMills.BalabanPath4GlobalAverageExact as Global
 import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Coordinates
 import DASHI.Physics.YangMills.BalabanP33PeriodicFourDimensionalHodgeIdentityExact as Periodic
 import DASHI.Physics.YangMills.BalabanP33PhysicalFaddeevPopovOperatorExact as FP
@@ -78,14 +79,12 @@ flatFPOfGreenMeanZeroExact source meanZero coordinate site =
       (flatGreenGaugeParameter source) coordinate site)
     (trans
       (Green.siteGreenLaplacianIdentity scalarSource site)
-      (let sumZero = meanZero coordinate
-       in
-       trans
-         (Agda.Builtin.Equality.cong
-           (λ total → source (pair coordinate site)
-             - Green.oneTwoFiftySix * total)
-           sumZero)
-         (ℚRing.solve-∀ (source (pair coordinate site))))))
+      (trans
+        (cong
+          (λ total → source (pair coordinate site)
+            - Global.oneTwoFiftySix * total)
+          (meanZero coordinate))
+        (ℚRing.solve-∀ (source (pair coordinate site)))))
 
 reducedFlatGreenInverse :
   FP.SiteGaugeParameter4 → Periodic.Site4 → FP.SiteGaugeParameter4
