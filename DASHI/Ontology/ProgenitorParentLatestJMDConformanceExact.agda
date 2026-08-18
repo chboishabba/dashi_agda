@@ -1,6 +1,6 @@
 module DASHI.Ontology.ProgenitorParentLatestJMDConformanceExact where
 
-open import DASHI.Core.Prelude using (false; true; _≡_; ⊥)
+open import DASHI.Core.Prelude using (Bool; false; true; _≡_; ⊥)
 open import Agda.Builtin.List using ([]; _∷_)
 
 import DASHI.Core.ObserverRefinementLatticeExact as Observer
@@ -10,6 +10,7 @@ import DASHI.Core.PolicyRelativeProjectionSafety as Policy
 import DASHI.Ontology.LeanWikidataFullSourceManifest as Manifest
 import DASHI.Ontology.LeanWikidataTheoremSurfaceBridge as Lean
 import DASHI.Ontology.ProgenitorParentProjectionFibre as ParentFibre
+import DASHI.Ontology.ProgenitorParentPNFPullbackLattice as ParentPNF
 import DASHI.Ontology.ProgenitorParentObserverDynamicsBridge as ParentDynamics
 import DASHI.Ontology.ProgenitorParentAuthorityRoutingNonfactorabilityExact as Routing
 import DASHI.Ontology.ProgenitorParentObserverFutureSafetyExact as Future
@@ -97,7 +98,7 @@ slotNotSeparatingConformance =
 legalFinalizationHiddenConformance :
   SourceLocalConformance
     (Dynamics.HiddenTransition
-      ParentFibre.parentFibreRestrictionCore
+      ParentPNF.parentFibreRestrictionCore
       ParentDynamics.finalizeLegalParenthood
       ParentDynamics.preFinalizationCarrier)
 legalFinalizationHiddenConformance =
@@ -144,9 +145,9 @@ coarsePolicyUnsafeConformance =
 record ParentCrossKernelBoundary : Set where
   constructor parentCrossKernelBoundary
   field
-    sameMathematicalContractsObserved : DASHI.Core.Prelude.Bool
-    proofTermsIdentifiedAcrossKernels : DASHI.Core.Prelude.Bool
-    importedContractsPromoteWorldTruth : DASHI.Core.Prelude.Bool
+    sameMathematicalContractsObserved : Bool
+    proofTermsIdentifiedAcrossKernels : Bool
+    importedContractsPromoteWorldTruth : Bool
 
 canonicalParentCrossKernelBoundary : ParentCrossKernelBoundary
 canonicalParentCrossKernelBoundary =
