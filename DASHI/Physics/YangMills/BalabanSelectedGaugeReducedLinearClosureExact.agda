@@ -15,27 +15,33 @@ module DASHI.Physics.YangMills.BalabanSelectedGaugeReducedLinearClosureExact whe
 --
 -- DASHI CONTRIBUTION
 --
--- Record the proof-relevant linear closure of the literal componentwise
--- mean-zero gauge quotient.  This is needed by the Schur reconstruction:
--- reduced sources, projected residuals and their differences must remain in
--- the SAME `FlatGaugeReducedMultiplier` carrier, not only be pointwise equal
--- to some centered representative.
+-- Proof-relevant linear closure of the literal componentwise mean-zero gauge
+-- quotient.  The Schur reconstruction needs reduced sources, projected
+-- residuals, sums, differences and scales to remain on the SAME
+-- `FlatGaugeReducedMultiplier` carrier rather than merely be pointwise equal
+-- to a centered representative.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Data.Rational.Base as ℚ using (0ℚ; _+_; _-_; _*_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _-_; _*_)
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier as Torus
 import DASHI.Physics.YangMills.BalabanP33PeriodicFourDimensionalHodgeIdentityExact as Periodic
+import DASHI.Physics.YangMills.BalabanPath4AxisAverageExact as Path4
 import DASHI.Physics.YangMills.BalabanPath4GlobalAverageExact as GlobalAverage
 import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Coordinates
 import DASHI.Physics.YangMills.BalabanSelectedFlatGaugeReducedFloorExact as FlatFloor
 import DASHI.Physics.YangMills.BalabanSelectedGaugeCenteringLinearityExact as Linear
 
+GaugeMultiplier : Set
 GaugeMultiplier = FlatFloor.GaugeMultiplier
+
+------------------------------------------------------------------------
+-- Pointwise equality transports the proof-relevant reduced witness.
+------------------------------------------------------------------------
 
 meanZeroRespectsPointwise :
   ∀ {left right : GaugeMultiplier} →
@@ -56,10 +62,10 @@ meanZeroRespectsPointwise {left} {right} pointwise reduced = record
   where
   transport : ∀ coordinate →
     (∀ site →
-      GlobalAverage.average0123
+      Path4.average0123
         (FlatFloor.gaugeMultiplierField right coordinate) site ≡ 0ℚ) →
     ∀ site →
-      GlobalAverage.average0123
+      Path4.average0123
         (FlatFloor.gaugeMultiplierField left coordinate) site ≡ 0ℚ
   transport coordinate rightZero site =
     trans
@@ -76,6 +82,10 @@ meanZeroRespectsPointwise {left} {right} pointwise reduced = record
             (GlobalAverage.average0123EqualsGlobalMean
               (FlatFloor.gaugeMultiplierField right coordinate) site))
           (rightZero site)))
+
+------------------------------------------------------------------------
+-- Linear closure.
+------------------------------------------------------------------------
 
 reducedAdd :
   ∀ left right →
@@ -98,13 +108,13 @@ reducedAdd left right leftReduced rightReduced = record
   }
   where
   close : ∀ coordinate →
-    (∀ site → GlobalAverage.average0123
+    (∀ site → Path4.average0123
       (FlatFloor.gaugeMultiplierField left coordinate) site ≡ 0ℚ) →
-    (∀ site → GlobalAverage.average0123
+    (∀ site → Path4.average0123
       (FlatFloor.gaugeMultiplierField right coordinate) site ≡ 0ℚ) →
-    ∀ site → GlobalAverage.average0123
-      (FlatFloor.gaugeMultiplierField (Linear.addMultiplier left right) coordinate)
-      site ≡ 0ℚ
+    ∀ site → Path4.average0123
+      (FlatFloor.gaugeMultiplierField
+        (Linear.addMultiplier left right) coordinate) site ≡ 0ℚ
   close coordinate leftZero rightZero site =
     trans
       (GlobalAverage.average0123EqualsGlobalMean _ site)
@@ -148,11 +158,11 @@ reducedSubtract left right leftReduced rightReduced = record
   }
   where
   close : ∀ coordinate →
-    (∀ site → GlobalAverage.average0123
+    (∀ site → Path4.average0123
       (FlatFloor.gaugeMultiplierField left coordinate) site ≡ 0ℚ) →
-    (∀ site → GlobalAverage.average0123
+    (∀ site → Path4.average0123
       (FlatFloor.gaugeMultiplierField right coordinate) site ≡ 0ℚ) →
-    ∀ site → GlobalAverage.average0123
+    ∀ site → Path4.average0123
       (FlatFloor.gaugeMultiplierField
         (Linear.subtractMultiplier left right) coordinate) site ≡ 0ℚ
   close coordinate leftZero rightZero site =
@@ -180,7 +190,8 @@ reducedSubtract left right leftReduced rightReduced = record
 reducedScale :
   ∀ coefficient multiplier →
   FlatFloor.FlatGaugeReducedMultiplier multiplier →
-  FlatFloor.FlatGaugeReducedMultiplier (Linear.scaleMultiplier coefficient multiplier)
+  FlatFloor.FlatGaugeReducedMultiplier
+    (Linear.scaleMultiplier coefficient multiplier)
 reducedScale coefficient multiplier reduced = record
   { FlatFloor.FlatGaugeReducedMultiplier.coordinateXMeanZero =
       close Coordinates.coordinateX (FlatFloor.coordinateXMeanZero reduced)
@@ -191,9 +202,9 @@ reducedScale coefficient multiplier reduced = record
   }
   where
   close : ∀ coordinate →
-    (∀ site → GlobalAverage.average0123
+    (∀ site → Path4.average0123
       (FlatFloor.gaugeMultiplierField multiplier coordinate) site ≡ 0ℚ) →
-    ∀ site → GlobalAverage.average0123
+    ∀ site → Path4.average0123
       (FlatFloor.gaugeMultiplierField
         (Linear.scaleMultiplier coefficient multiplier) coordinate) site ≡ 0ℚ
   close coordinate zero site =
@@ -205,12 +216,15 @@ reducedScale coefficient multiplier reduced = record
             (FlatFloor.gaugeMultiplierField multiplier coordinate)))
         (trans
           (ℚRing.solve-∀ coefficient
-            (Periodic.sumSites (FlatFloor.gaugeMultiplierField multiplier coordinate)))
+            (Periodic.sumSites
+              (FlatFloor.gaugeMultiplierField multiplier coordinate)))
           (trans
             (cong (coefficient *_)
               (sym (GlobalAverage.average0123EqualsGlobalMean
                 (FlatFloor.gaugeMultiplierField multiplier coordinate) site)))
-            (trans (cong (coefficient *_) (zero site)) (ℚRing.solve [])))))
+            (trans
+              (cong (coefficient *_) (zero site))
+              (ℚRing.solve [])))))
 
 selectedGaugeReducedLinearClosureLevel : ProofLevel
 selectedGaugeReducedLinearClosureLevel = machineChecked
