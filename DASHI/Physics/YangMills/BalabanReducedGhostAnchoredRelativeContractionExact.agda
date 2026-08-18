@@ -62,7 +62,9 @@ import DASHI.Physics.YangMills.BalabanFiniteRectangularRationalExact as Rect
 import DASHI.Physics.YangMills.BalabanFiniteRectangularAbsoluteMassExact as Mass
 import DASHI.Physics.YangMills.BalabanP33FiniteWeightedSchurSquaredExact as Schur
 import DASHI.Physics.YangMills.BalabanP33FiniteKKTAdmissibleProjectorExact as KKT
+import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Coordinates
 import DASHI.Physics.YangMills.BalabanP33PhysicalFlatGaugeDivergenceIdentificationExact as FlatGauge
+import DASHI.Physics.YangMills.BalabanP33PeriodicFourDimensionalHodgeIdentityExact as Periodic
 import DASHI.Physics.YangMills.BalabanP33PhysicalRationalWilsonPlaquetteJetExact as Physical
 import DASHI.Physics.YangMills.BalabanP33PhysicalBackgroundGaugeParameterizedYoungExact as Relaxed
 import DASHI.Physics.YangMills.BalabanP33PhysicalFaddeevPopovOperatorExact as FP
@@ -82,10 +84,6 @@ GaugeRow : Set
 GaugeRow = FlatGauge.GaugeCoordinate4
 
 gaugeRows = GreenContraction.gaugeRows
-
-------------------------------------------------------------------------
--- Literal anchored Green kernel H_x0.
-------------------------------------------------------------------------
 
 anchoredGreenKernel : Periodic.Site4 → GaugeRow → GaugeRow → ℚ
 anchoredGreenKernel anchor
@@ -110,23 +108,17 @@ anchoredGreenApplyIsReducedInverse anchor source coordinate site =
   let
     output = pair coordinate site
     anchorOutput = pair coordinate anchor
-
     split = Fubini.sumRationalSubtract gaugeRows
       (λ input →
         GreenContraction.flatGreenKernelMatrix output input * source input)
       (λ input →
         GreenContraction.flatGreenKernelMatrix anchorOutput input * source input)
-
     currentExact = GreenContraction.flatGreenKernelActsExactly
       source coordinate site
     anchorExact = GreenContraction.flatGreenKernelActsExactly
       source coordinate anchor
   in
   trans split (trans (cong₂ _-_ currentExact anchorExact) refl)
-
-------------------------------------------------------------------------
--- Absolute row mass of H_x0.
-------------------------------------------------------------------------
 
 absoluteDifferenceTriangle : ∀ left right →
   ∣ left - right ∣ ≤ ∣ left ∣ + ∣ right ∣
@@ -159,7 +151,6 @@ anchoredGreenRowMassBelowSeventeenEighths
   let
     output = pair outputCoordinate outputSite
     anchorOutput = pair outputCoordinate anchor
-
     triangle = Schur.sumPointwiseBelow gaugeRows
       (λ input → ∣ anchoredGreenKernel anchor output input ∣)
       (λ input →
@@ -168,15 +159,12 @@ anchoredGreenRowMassBelowSeventeenEighths
       (λ input → absoluteDifferenceTriangle
         (GreenContraction.flatGreenKernelMatrix output input)
         (GreenContraction.flatGreenKernelMatrix anchorOutput input))
-
     split = Mass.sumAddExact gaugeRows
       (λ input → ∣ GreenContraction.flatGreenKernelMatrix output input ∣)
       (λ input → ∣ GreenContraction.flatGreenKernelMatrix anchorOutput input ∣)
-
     both = ℚP.+-mono-≤
       (GreenContraction.selectedFlatGaugeGreenAbsoluteRowMassBound output)
       (GreenContraction.selectedFlatGaugeGreenAbsoluteRowMassBound anchorOutput)
-
     coefficientExact :
       GreenMass.seventeenSixteenths + GreenMass.seventeenSixteenths
       ≡ anchoredGreenRowMassBound
@@ -195,10 +183,6 @@ anchoredGreenRowMassBelowSeventeenEighths
         (λ lower → lower ≤
           GreenMass.seventeenSixteenths + GreenMass.seventeenSixteenths)
         (sym split) both))
-
-------------------------------------------------------------------------
--- Relative kernel E_A H_x0 and same-object identification.
-------------------------------------------------------------------------
 
 anchoredRelativeKernel :
   Physical.RationalSU2Background4 → Periodic.Site4 →
@@ -252,27 +236,22 @@ anchoredRelativeIsPhysicalReducedFP
   let
     row = pair coordinate site
     reduced = ReducedInverse.reducedFlatGreenInverse source anchor
-
     kernelToReduced : ∀ selected →
       anchoredGreenApply anchor source selected ≡ reduced selected
     kernelToReduced (pair colour currentSite) =
       anchoredGreenApplyIsReducedInverse anchor source colour currentSite
-
     perturbationVectorCong =
       Rect.applyRectangularVectorCong
         Rows.selectedGaugeRowCarrier
         (Perturbation.gaugeGramPerturbationMatrix background)
         kernelToReduced row
-
     perturbationDifference =
       PerturbationAction.selectedGaugeGramPerturbationDifferenceExact
         background reduced row
-
     backgroundFP = selectedGaugeGramApplyIsFaddeevPopov
       background reduced row
     identityFP = selectedGaugeGramApplyIsFaddeevPopov
       Physical.identityBackground reduced row
-
     flatIsFlat = FP.identityFaddeevPopovIsFlat reduced coordinate site
     rightInverse = ReducedInverse.reducedFlatGreenRightInverse
       source anchor meanZero coordinate site
@@ -292,10 +271,6 @@ anchoredRelativeIsPhysicalReducedFP
                 (FP.faddeevPopovApply background reduced row -_)
                 rightInverse)
               refl)))))
-
-------------------------------------------------------------------------
--- Strict absolute-row contraction.
-------------------------------------------------------------------------
 
 transposeAnchoredGreen : Periodic.Site4 → GaugeRow → GaugeRow → ℚ
 transposeAnchoredGreen anchor output middle =
@@ -342,7 +317,6 @@ anchoredRelativeAbsoluteRowMassBound background radius anchor row =
           (λ lower → lower ≤ anchoredGreenRowMassBound)
           (sym (transposeAnchoredGreenColumnMass anchor column))
           (anchoredGreenRowMassBelowSeventeenEighths anchor column))
-
     scaled = PerturbationMass.rightScaleMonotone
       anchoredGreenRowMassBound
       (Mass.squareRowMass gaugeRows
@@ -351,7 +325,6 @@ anchoredRelativeAbsoluteRowMassBound background radius anchor row =
       (ℚP.nonNegative⁻¹ anchoredGreenRowMassBound)
       (PerturbationMass.selectedGaugeGramPerturbationAbsoluteRowMassBound
         background radius row)
-
     productBound = ℚP.≤-trans raw
       (subst
         (λ upper →
@@ -360,7 +333,6 @@ anchoredRelativeAbsoluteRowMassBound background radius anchor row =
             * anchoredGreenRowMassBound
           ≤ upper)
         anchoredRelativeContractionExactProduct scaled)
-
     kernelExact = Sums.sumRationalCong gaugeRows _ _
       (λ output → cong ∣_∣
         (anchoredRelativeAsTransposeProduct background anchor row output))
