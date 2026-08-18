@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude using (Bool; true; false; _≡_; refl)
 
 import DASHI.Biology.ParentAllyshipMultiObserverBridge as Allyship
 import DASHI.Governance.DiachronicDelegatedAuthorityBoundary as Diachronic
+open import DASHI.Ontology.ProgenitorParentHyperfabric using (_×_; _,_)
 
 ------------------------------------------------------------------------
 -- Cross-pollination: parent/family expertise is a legitimate observer fibre,
