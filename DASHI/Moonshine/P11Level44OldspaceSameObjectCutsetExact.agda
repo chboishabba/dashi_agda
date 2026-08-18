@@ -21,51 +21,37 @@ module DASHI.Moonshine.P11Level44OldspaceSameObjectCutsetExact where
 --
 -- DASHI CONTRIBUTION
 --
--- Record the genuinely narrowed same-object cutset after the current tranche.
 -- Both sides of the proposed level-44 comparison are now independently
--- theorem-producing:
+-- theorem-producing.
 --
--- ANALYTIC / q-series side
---   * coefficient degeneracy V_d is formalized by exact support laws;
---   * T_l V_d = V_d T_l is proved for gcd(d,l)=1;
---   * a T_l eigencharacter is transported to each d=1,2,4 old copy;
---   * therefore no further good-prime scan is required to know that the three
---     analytic old copies are Hecke-isospectral.
+-- ANALYTIC / q-series side:
+--   coefficient degeneracy V_d is formalized by exact support laws;
+--   T_l V_d = V_d T_l is proved for gcd(d,l)=1;
+--   a T_l eigencharacter is transported to each d=1,2,4 old copy.
 --
--- MARKED / quaternion side
---   * the actual marked five-state carrier contains the integral permutation
---     basis v1,v2,v4;
---   * one Z-linear realization from the free three-copy module intertwines the
---     genuine deck S3 action and source-native T3,T5,T7 actions;
---   * the same three-space is Brandt-newform + deck-standard.
+-- MARKED / quaternion side:
+--   the actual marked five-state carrier contains an integral permutation basis
+--   v1,v2,v4; one Z-linear realization from the free three-copy module
+--   intertwines genuine deck S3 and source-native T3,T5,T7.
 --
--- Hence the remaining theorem is NOT another Hecke relation.  It is one
+-- Hence the remaining theorem is not another Hecke relation.  It is one
 -- same-object comparison identifying the analytic d=1,2,4 degeneracy-copy
--- module with the marked v1,v2,v4 module in a way compatible with the already
--- constructed deck and good-prime Hecke structures.
---
--- This file intentionally represents that map as an interface whose downstream
--- consequences are proved.  It does not fabricate the missing Eichler/JL map.
+-- module with the marked v1,v2,v4 module, compatibly with deck and good-prime
+-- Hecke structure.  This file exposes that comparison interface but does not
+-- fabricate the missing Eichler/Jacquet-Langlands map.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
 open import Data.Integer using (ℤ)
+import Data.Integer as Int
 
 import DASHI.Moonshine.FormalQSeriesOldformDegeneracyHeckeExact as QDeg
 import DASHI.Moonshine.FormalQSeriesOldformEigencharacterTransportExact as QEig
 import DASHI.Moonshine.P11MarkedLevel44PermutationIntertwinerExact as Marked
 import DASHI.Moonshine.P11MarkedX2S3HeckeDecompositionExact as S3
 
-------------------------------------------------------------------------
--- The comparison data that remains to be constructed geometrically.
---
--- We do not demand literal equality of an analytic q-series with an Int5
--- vector.  The map compares their common abstract old-copy coordinate module.
-------------------------------------------------------------------------
-
 record Level44OldspaceSameObjectComparison : Set₁ where
   field
-    -- Actual analytic source and its three degeneracy-copy coefficient series.
     level11Series : QDeg.FormalQSeries
     copy1Series copy2Series copy4Series : QDeg.FormalQSeries
 
@@ -76,7 +62,6 @@ record Level44OldspaceSameObjectComparison : Set₁ where
     copy4Degeneracy :
       QDeg.DegeneracyCoefficientLaw 4 level11Series copy4Series
 
-    -- A coefficientwise analytic realization of the SAME free copy module.
     analyticRealize : Marked.Old3 → QDeg.FormalQSeries
 
     analyticBasis1 :
@@ -89,20 +74,14 @@ record Level44OldspaceSameObjectComparison : Set₁ where
     analyticAdditive :
       (u v : Marked.Old3) → (n : Nat) →
       analyticRealize (Marked.addOld3 u v) n
-      ≡ analyticRealize u n Data.Integer.+ analyticRealize v n
+      ≡ Int._+_ (analyticRealize u n) (analyticRealize v n)
 
     analyticScalar :
       (k : ℤ) → (v : Marked.Old3) → (n : Nat) →
       analyticRealize (Marked.scaleOld3 k v) n
-      ≡ k Data.Integer.* analyticRealize v n
+      ≡ Int._*_ k (analyticRealize v n)
 
 open Level44OldspaceSameObjectComparison public
-
-------------------------------------------------------------------------
--- Once this comparison is built, both realizations share one copy coordinate.
--- Distinct deck copies are therefore not an accidental basis naming on either
--- side; they are literally images of the same Old3 coordinate vectors.
-------------------------------------------------------------------------
 
 record OldspaceComparisonConsequence
   (C : Level44OldspaceSameObjectComparison) : Set where
@@ -127,10 +106,6 @@ comparisonConsequence C = record
   ; analyticCopy2IsSameCoordinate = analyticBasis2 C
   ; analyticCopy4IsSameCoordinate = analyticBasis4 C
   }
-
-------------------------------------------------------------------------
--- Frontier record: every surrounding algebraic obligation is now closed.
-------------------------------------------------------------------------
 
 record P11Level44OldspaceSameObjectCutsetBoundary : Set where
   field
