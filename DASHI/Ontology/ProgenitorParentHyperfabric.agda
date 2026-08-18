@@ -9,13 +9,9 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 -- Progenitor/parent hyperfabric.
 --
--- The carrier is generative provenance. Parent, genetic contribution,
--- gestation, intended parenthood, legal parenthood, social parenthood, and
--- disclosure are independent projections. No projection is promoted to the
--- whole carrier.
---
--- This refines DASHI.Core.ProjectionFibre and FibreRestrictionCore for the
--- Wikidata P22/P25/P8810/P1531 parenting/progeniture boundary.
+-- The carrier is generative provenance. Progeniture, parenthood, genetic
+-- contribution, gestation, intended/legal/social parenthood, and disclosure are
+-- independent projections. No projection is promoted to the whole carrier.
 --
 -- Source anchors for non-binary genetic provenance:
 -- Masahito Tachibana, Paula Amato, Michelle Sparman, et al.,
@@ -77,9 +73,6 @@ polyspermyDOIExact = refl
 
 ------------------------------------------------------------------------
 -- Generative carrier.
--- A progenitor is an immediate lineage-bearing predecessor/contributor.
--- Mere causal/material inputs are represented separately and do not become
--- progenitors just by participating in the production process.
 ------------------------------------------------------------------------
 
 data NodeLevel : Set where
@@ -161,6 +154,7 @@ binaryBoundRequiresBiparentalProfile event witness = contributorCountExact witne
 record RelationVector : Set where
   constructor relationVector
   field
+    progenitorRelation : Bool
     geneticContributor : Bool
     gameteContributor : Bool
     mitochondrialContributor : Bool
@@ -176,23 +170,23 @@ open RelationVector public
 
 anonymousIVFDonor : RelationVector
 anonymousIVFDonor =
-  relationVector true true false false false false false false false false false
+  relationVector true true true false false false false false false false false false
 
 singleMother : RelationVector
 singleMother =
-  relationVector true true false true true true true true true true true
+  relationVector true true true false true true true true true true true true
 
 adoptiveParent : RelationVector
 adoptiveParent =
-  relationVector false false false false true true true true true true true
+  relationVector false false false false false true true true true true true true
 
 mitochondrialDonor : RelationVector
 mitochondrialDonor =
-  relationVector true false true false false false false false false true true
+  relationVector true true false true false false false false false false true true
 
 gestationalSurrogateOnly : RelationVector
 gestationalSurrogateOnly =
-  relationVector false false false true false false false false false true true
+  relationVector false false false false true false false false false false true true
 
 geneticContributionCannotDetermineParenthood :
   geneticContributor anonymousIVFDonor ≡ true
@@ -250,17 +244,17 @@ recommendedGenericSlot lineageLevel = hybridOfP1531
 cultivarLineageProjection : WikidataParentProjection
 cultivarLineageProjection =
   wikidataParentProjection cultivarSurface lineageLevel hybridOfP1531
-    (relationVector true false false false true false false false false true true)
+    (relationVector true false false false false false false false false false true true)
 
 fictionalSentientCellParent : WikidataParentProjection
 fictionalSentientCellParent =
   wikidataParentProjection cellSurface individualLevel parentP8810
-    (relationVector false false false false true true false true true true true)
+    (relationVector true false false false false true true false true true true true)
 
 ordinaryNonParentCell : WikidataParentProjection
 ordinaryNonParentCell =
   wikidataParentProjection cellSurface individualLevel parentP8810
-    (relationVector false false false false false false false false false true true)
+    (relationVector false false false false false false false false false false true true)
 
 anonymousDonorP8810Surface : WikidataParentProjection
 anonymousDonorP8810Surface =
@@ -291,13 +285,12 @@ wikidataParentSlotDoesNotDetermineParentSemantics :
 wikidataParentSlotDoesNotDetermineParentSemantics = refl , (refl , refl)
 
 p1531AndP8810ShareProgenitorCarrier :
-  genealogicalParent (relation cultivarLineageProjection) ≡ true
-  × genealogicalParent (relation fictionalSentientCellParent) ≡ true
+  progenitorRelation (relation cultivarLineageProjection) ≡ true
+  × progenitorRelation (relation fictionalSentientCellParent) ≡ true
 p1531AndP8810ShareProgenitorCarrier = refl , refl
 
 ------------------------------------------------------------------------
--- Ethical/epistemic boundary: causal origin is not silently promoted to social
--- identity; privacy/disclosure is independent from factual provenance.
+-- Ethical/epistemic boundary.
 ------------------------------------------------------------------------
 
 record ParentOntologyBoundary : Set where
