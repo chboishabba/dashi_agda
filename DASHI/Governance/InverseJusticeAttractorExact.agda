@@ -27,22 +27,22 @@ import DASHI.Governance.TraumaExploitationAttractor as Trauma
 
 canonicalTraumaSystem : Trauma.TraumaExploitationSystem
 canonicalTraumaSystem = record
-  { Trauma.HistoricalState = ⊤
-  ; Trauma.SufferingField = ⊤
-  ; Trauma.ExploitationProtocol = ⊤
-  ; Trauma.Institution = ⊤
-  ; Trauma.Observable = ⊤
-  ; Trauma.traumaProduction = λ state → tt
-  ; Trauma.exploitationExtraction = λ suffering → tt
-  ; Trauma.institutionalise = λ protocol → tt
-  ; Trauma.reproduce = λ institution state → tt
-  ; Trauma.observe = λ state → tt
+  { HistoricalState = ⊤
+  ; SufferingField = ⊤
+  ; ExploitationProtocol = ⊤
+  ; Institution = ⊤
+  ; Observable = ⊤
+  ; traumaProduction = λ state → tt
+  ; exploitationExtraction = λ suffering → tt
+  ; institutionalise = λ protocol → tt
+  ; reproduce = λ institution state → tt
+  ; observe = λ state → tt
   }
 
 canonicalHistoricalFixedPoint : Trauma.FixedPoint canonicalTraumaSystem
 canonicalHistoricalFixedPoint = record
-  { Trauma.FixedPoint.point = tt
-  ; Trauma.FixedPoint.fixed = refl
+  { point = tt
+  ; fixed = refl
   }
 
 ------------------------------------------------------------------------
@@ -80,10 +80,10 @@ canonicalAttractorPointIsInverseJustice =
 
 canonicalRepairTransport : Trauma.RepairTransport canonicalTraumaSystem
 canonicalRepairTransport = record
-  { Trauma.RepairTransport.repair = λ state → state
-  ; Trauma.RepairTransport.recover = λ state → state
-  ; Trauma.RepairTransport.leftInverse = λ state → refl
-  ; Trauma.RepairTransport.rightInverse = λ state → refl
+  { repair = λ state → state
+  ; recover = λ state → state
+  ; leftInverse = λ state → refl
+  ; rightInverse = λ state → refl
   }
 
 record InverseJusticeAttractorBoundary : Set where
