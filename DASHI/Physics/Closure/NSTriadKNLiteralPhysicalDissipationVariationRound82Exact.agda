@@ -33,11 +33,12 @@ open import Agda.Primitive using (Level)
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNComplex3FieldAlgebra as Field
+import DASHI.Physics.Closure.NSTriadKNPeriodicLittlewoodPaleyBonyExact as LP
 import DASHI.Physics.Closure.NSTriadKNProjectedNonlinearityFirstVariationRound82Exact as First
 import DASHI.Physics.Closure.NSTriadKNLiteralPacketTransferFirstVariationRound82Exact as Packet
 import DASHI.Physics.Closure.NSTriadKNLiteralPhysicalCompactTransferDriftRound82Exact as Physical
@@ -57,52 +58,44 @@ finitePairingCongruence (mode ∷ rest) left left′ right right′ leftEq right
     (finitePairingCongruence rest left left′ right right′ leftEq rightEq)
 
 weightedDissipationPairing :
-  ∀ {r} {model}
-    (datum : Physical.LiteralPhysicalCompactTransferDatum {r} model) →
-  (Z3.FourierMode → C3.Complex3 (DASHI.Physics.Closure.NSTriadKNPeriodicLittlewoodPaleyBonyExact.realField model)) →
-  C3.Complex (DASHI.Physics.Closure.NSTriadKNPeriodicLittlewoodPaleyBonyExact.realField model)
-weightedDissipationPairing datum field =
+  ∀ {r} {model : LP.PeriodicHardShellFourierPDE {r}}
+    (datum : Physical.LiteralPhysicalCompactTransferDatum model) →
+  (Z3.FourierMode → C3.Complex3 (LP.realField model)) →
+  C3.Complex (LP.realField model)
+weightedDissipationPairing {model = model} datum field =
   Packet.finiteHermitianPairing
     (Physical.packetModes datum)
-    (Packet.packetField _ (Physical.shell datum) field)
+    (Packet.packetField model (Physical.shell datum) field)
     (Physical.weightedPacketField datum field)
 
 weightedDissipationFirstVariation :
-  ∀ {r} {model}
-    (datum : Physical.LiteralPhysicalCompactTransferDatum {r} model) →
-  (base tangent :
-    Z3.FourierMode → C3.Complex3
-      (DASHI.Physics.Closure.NSTriadKNPeriodicLittlewoodPaleyBonyExact.realField model)) →
-  C3.Complex
-    (DASHI.Physics.Closure.NSTriadKNPeriodicLittlewoodPaleyBonyExact.realField model)
-weightedDissipationFirstVariation datum base tangent =
+  ∀ {r} {model : LP.PeriodicHardShellFourierPDE {r}}
+    (datum : Physical.LiteralPhysicalCompactTransferDatum model) →
+  (base tangent : Z3.FourierMode → C3.Complex3 (LP.realField model)) →
+  C3.Complex (LP.realField model)
+weightedDissipationFirstVariation {model = model} datum base tangent =
   C3.complexAdd
     (Packet.finiteHermitianPairing
       (Physical.packetModes datum)
-      (Packet.packetField _ (Physical.shell datum) tangent)
+      (Packet.packetField model (Physical.shell datum) tangent)
       (Physical.weightedPacketField datum base))
     (Packet.finiteHermitianPairing
       (Physical.packetModes datum)
-      (Packet.packetField _ (Physical.shell datum) base)
+      (Packet.packetField model (Physical.shell datum) base)
       (Physical.weightedPacketField datum tangent))
 
 weightedDissipationQuadraticRemainder :
-  ∀ {r} {model}
-    (datum : Physical.LiteralPhysicalCompactTransferDatum {r} model) →
-  (tangent :
-    Z3.FourierMode → C3.Complex3
-      (DASHI.Physics.Closure.NSTriadKNPeriodicLittlewoodPaleyBonyExact.realField model)) →
-  C3.Complex
-    (DASHI.Physics.Closure.NSTriadKNPeriodicLittlewoodPaleyBonyExact.realField model)
+  ∀ {r} {model : LP.PeriodicHardShellFourierPDE {r}}
+    (datum : Physical.LiteralPhysicalCompactTransferDatum model) →
+  (tangent : Z3.FourierMode → C3.Complex3 (LP.realField model)) →
+  C3.Complex (LP.realField model)
 weightedDissipationQuadraticRemainder datum tangent =
   weightedDissipationPairing datum tangent
 
 weightedDissipationPolarizationExact :
-  ∀ {r} {model}
-    (datum : Physical.LiteralPhysicalCompactTransferDatum {r} model)
-    (base tangent :
-      Z3.FourierMode → C3.Complex3
-        (DASHI.Physics.Closure.NSTriadKNPeriodicLittlewoodPaleyBonyExact.realField model)) →
+  ∀ {r} {model : LP.PeriodicHardShellFourierPDE {r}}
+    (datum : Physical.LiteralPhysicalCompactTransferDatum model)
+    (base tangent : Z3.FourierMode → C3.Complex3 (LP.realField model)) →
   weightedDissipationPairing datum (First.fieldAdd base tangent)
   ≡
   C3.complexAdd
@@ -171,9 +164,10 @@ weightedDissipationPolarizationExact {model = model} datum base tangent =
           (Field.complexAddAssociative bb tb (C3.complexAdd bt tt))
           (trans
             (cong (C3.complexAdd bb)
-              (Field.complexAddAssociative tb bt tt))
-            (Field.complexAddAssociative
-              (C3.complexAdd bb (C3.complexAdd tb bt)) tt (C3.complexZero _))))
+              (sym (Field.complexAddAssociative tb bt tt)))
+            (sym
+              (Field.complexAddAssociative
+                bb (C3.complexAdd tb bt) tt))))
   in
   trans firstRewrite (trans expanded regroup)
 
