@@ -1,11 +1,12 @@
 module DASHI.Ontology.ProgenitorParentDynamicAuthorityRegression where
 
-open import DASHI.Core.Prelude using (Bool; true; false; _≡_; refl; ⊥)
+open import DASHI.Core.Prelude using (false; true; _≡_; ⊥)
 
 import DASHI.Core.IntersectionalNonFactorability as NonFactor
 import DASHI.Core.DynamicalQuotientSafety as Dynamic
-import DASHI.Core.ProvenanceBearingQuotient as Provenance
-
+import DASHI.Governance.DiachronicDelegatedAuthorityBoundary as GovernanceDiachronic
+import DASHI.Ontology.ProgenitorParentProjectionFibre as ParentFibre
+import DASHI.Ontology.ProgenitorParentObserverDynamicsBridge as ParentDynamics
 import DASHI.Ontology.ProgenitorParentAuthorityRoutingNonfactorabilityExact as Routing
 import DASHI.Ontology.ProgenitorParentObserverFutureSafetyExact as Future
 import DASHI.Ontology.ProgenitorParentDiachronicAuthorityFibreExact as DiachronicParent
@@ -13,7 +14,7 @@ import DASHI.Ontology.ProgenitorParentResidualDynamicsExact as Residual
 
 routingNonfactorabilityRegression :
   NonFactor.FactorsThrough
-    DASHI.Ontology.ProgenitorParentProjectionFibre.projectParentSlot
+    ParentFibre.projectParentSlot
     Routing.routeParentAuthority → ⊥
 routingNonfactorabilityRegression =
   Routing.parentSlotInsufficiencyBlocksAuthorityRouting
@@ -32,23 +33,21 @@ revokedAuthorityRegression =
   DiachronicParent.revokedParentAuthorityIsNotCurrent
 
 freshAuthorisationRegression :
-  DASHI.Governance.DiachronicDelegatedAuthorityBoundary.freshAuthorisationRequired
-    DASHI.Governance.DiachronicDelegatedAuthorityBoundary.newDiscretionaryStep ≡ true
+  GovernanceDiachronic.freshAuthorisationRequired
+    GovernanceDiachronic.newDiscretionaryStep ≡ true
 freshAuthorisationRegression =
   DiachronicParent.newParentDiscretionRequiresFreshAuthorisation
 
 parentReopeningRegression :
-  (carrier : DASHI.Ontology.ProgenitorParentProjectionFibre.ParentCarrier) →
+  (carrier : ParentFibre.ParentCarrier) →
   Residual.reopenParentCarrier
-    (DASHI.Ontology.ProgenitorParentProjectionFibre.projectParentSlot carrier)
+    (ParentFibre.projectParentSlot carrier)
     (Residual.parentResidual carrier) ≡ carrier
 parentReopeningRegression = Residual.reopenParentCarrierExact
 
 legalResidualMotionRegression :
   Residual.parentResidual
-    (DASHI.Ontology.ProgenitorParentObserverDynamicsBridge.finalizeLegalParenthood
-      DASHI.Ontology.ProgenitorParentObserverDynamicsBridge.preFinalizationCarrier)
-  ≡ Residual.parentResidual
-      DASHI.Ontology.ProgenitorParentObserverDynamicsBridge.preFinalizationCarrier
+    (ParentDynamics.finalizeLegalParenthood ParentDynamics.preFinalizationCarrier)
+  ≡ Residual.parentResidual ParentDynamics.preFinalizationCarrier
   → ⊥
 legalResidualMotionRegression = Residual.legalFinalizationMustMoveResidual
