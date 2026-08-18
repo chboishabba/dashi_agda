@@ -77,6 +77,10 @@ ResolvedPositive : SupportSquare → Set
 ResolvedPositive square =
   Four.supportsP square ≡ true × Four.supportsNotP square ≡ false
 
+ResolvedNegative : SupportSquare → Set
+ResolvedNegative square =
+  Four.supportsP square ≡ false × Four.supportsNotP square ≡ true
+
 MissingEvidence : SupportSquare → Set
 MissingEvidence square =
   Four.supportsP square ≡ false × Four.supportsNotP square ≡ false
@@ -94,6 +98,15 @@ missingCannotBeResolvedPositive missingEvidence resolved with
   trans (sym (proj₁ missingEvidence)) (proj₁ resolved)
 ... | ()
 
+missingCannotBeResolvedNegative :
+  ∀ {square} →
+  MissingEvidence square →
+  ResolvedNegative square →
+  ⊥
+missingCannotBeResolvedNegative missingEvidence resolved with
+  trans (sym (proj₂ missingEvidence)) (proj₂ resolved)
+... | ()
+
 conflictingCannotBeResolvedPositive :
   ∀ {square} →
   ConflictingEvidence square →
@@ -101,6 +114,15 @@ conflictingCannotBeResolvedPositive :
   ⊥
 conflictingCannotBeResolvedPositive conflictingEvidence resolved with
   trans (sym (proj₂ resolved)) (proj₂ conflictingEvidence)
+... | ()
+
+conflictingCannotBeResolvedNegative :
+  ∀ {square} →
+  ConflictingEvidence square →
+  ResolvedNegative square →
+  ⊥
+conflictingCannotBeResolvedNegative conflictingEvidence resolved with
+  trans (sym (proj₁ resolved)) (proj₁ conflictingEvidence)
 ... | ()
 
 ------------------------------------------------------------------------
@@ -237,8 +259,9 @@ record RequiredAxisSupportSquareBoundary : Set where
     positiveEvidenceSomewhereResolvesEveryRequiredAxis : Bool
     missingRequiredAxisBlocksResolution : Bool
     conflictingRequiredAxisCountsAsResolvedPositive : Bool
+    missingCountsAsResolvedNegative : Bool
 
 canonicalRequiredAxisSupportSquareBoundary :
   RequiredAxisSupportSquareBoundary
 canonicalRequiredAxisSupportSquareBoundary =
-  requiredAxisSupportSquareBoundary false false true false
+  requiredAxisSupportSquareBoundary false false true false false
