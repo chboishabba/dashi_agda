@@ -16,6 +16,7 @@ module DASHI.Governance.OperationalLegibilityJusticeSafetyExact where
 
 open import DASHI.Core.Prelude
 
+import DASHI.Core.AdmissibleReachability as Reachability
 import DASHI.Core.PolicyRelativeProjectionSafety as Policy
 import DASHI.Governance.InstitutionalTechniqueTransferCore as Technique
 
@@ -80,12 +81,12 @@ revealPolicyDefect =
     refl
     refl
     refl
-    (Policy.Reachability.executesCons
+    (Reachability.executesCons
       Policy.leftRevealAdmissible
-      Policy.Reachability.executesNil)
-    (Policy.Reachability.executesCons
+      Reachability.executesNil)
+    (Reachability.executesCons
       Policy.rightRevealAdmissible
-      Policy.Reachability.executesNil)
+      Reachability.executesNil)
     (λ ())
 
 record OperationalLegibilityJusticeDefect : Set₁ where
