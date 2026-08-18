@@ -46,7 +46,7 @@ open import Agda.Primitive using (Level)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
-open import Data.Rational.Base using (_+_)
+open import Data.Rational.Base using (ℚ; _+_)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Physics.Closure.NSTriadKNSignedConstituentTreeRound28Exact as Signed
@@ -70,7 +70,7 @@ finePhysicalSignedTotalAt :
   ∀ {timeLevel : Level} {Time : Set timeLevel} →
   (dataSet : Dynamic.PhysicalTimeDependentShellBalance Time) →
   (hhAt : Time → FineTriadic.HHOwnerSelection) →
-  Time → _
+  Time → ℚ
 finePhysicalSignedTotalAt dataSet hhAt time =
   Signed.signedConstituentTotal
     (Structured.flattenAtoms (finePhysicalAtomsAt dataSet hhAt time))
@@ -105,7 +105,6 @@ fineStructuredDynamicBalanceAt :
 fineStructuredDynamicBalanceAt dataSet hhAt time =
   let
     balance = Dynamic.balanceAt dataSet time
-    pairing = Shell.staticPairing balance
   in
   trans
     (Shell.globalDynamicBalance balance)
