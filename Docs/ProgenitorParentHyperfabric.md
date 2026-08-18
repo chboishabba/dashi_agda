@@ -39,28 +39,55 @@ JMD's eight `ParentRole` constructors and exact `isGenetic`, `isLegal`, and `isS
 
 `ProgenitorParentPNFPullbackLattice.agda` places the parent construction directly on existing DASHI infrastructure rather than defining a parallel category-theory vocabulary.
 
-`ParentPredicate = ParentCarrier → Bool` supplies decidable local predicates. Pointwise meet and join form the local predicate lattice:
+`ParentPredicate = ParentCarrier → Bool` supplies decidable local predicates. Pointwise meet and join form the local predicate lattice. `ParentPredicateFibre slot predicate` retains a hidden carrier, its Wikidata-slot equality, and a semantic predicate witness. `parentFibreRestrictionCore` is the pre-existing `DASHI.Core.FibreRestrictionCore`; evidence restricts a parent fibre without recovering the carrier or promoting truth.
 
-- `p ⊓p q` = both predicates hold;
-- `p ⊔p q` = either predicate holds.
+The hyperfabric is carrier-indexed. `parentRelationHyperfabric carrier` is a `DASHI.Reasoning.TypedHyperfabricCore.TypedHyperfabric` with the full `RelationVector` at the vertex stalk and individual semantic Boolean coordinates at edge stalks. `parentRelationSection carrier` is a canonical `GlobalSection`: every edge value is literally the restriction of that carrier's complete relation vector.
 
-The primitive lattice elements include progenitor, genetic, gametic, mitochondrial, gestational, genealogical-parent, intended-parent, legal-parent, social-parent, and caregiver predicates.
+`ProgenitorParentPredicateBaseChange.agda` adds the predicate order `p ⊑p q`; `ProgenitorParentPredicatePullbackExact.agda` proves a fibre over `p ⊓p q` is interconvertible with one slot-compatible carrier carrying separate proofs of `p` and `q`.
 
-`ParentPredicateFibre slot predicate` is a concrete pullback/fibre object: it retains a hidden `ParentCarrier`, a proof that it projects to the requested Wikidata slot, and a proof that the requested semantic predicate holds. Thus surface slot and semantic predicate are matched without identifying either with the carrier.
+## Observer refinement and residual fibres
 
-`parentFibreRestrictionCore` is an exact specialization of pre-existing `DASHI.Core.FibreRestrictionCore`: evidence restricts a parent fibre, `doesNotRecoverCarrier = true`, and `promotesTruth = false`. `pnfUsesSameFibreCore` witnesses that this is exactly the fibre-core type already carried by `PNFEvidenceHyperformalism`.
+`DASHI.Core.ObserverRefinementLatticeExact` extracts the observer theorem pattern already present independently in the parent and Hecke lanes. An observer is `State → Value`; `Separating` means equal observations force equal states; `StrictRefinement coarse fine` means the fine observer implies coarse agreement but has an explicit pair the coarse observer collides on and the fine observer separates.
 
-The hyperfabric is carrier-indexed. `parentRelationHyperfabric carrier` is a `DASHI.Reasoning.TypedHyperfabricCore.TypedHyperfabric` with the full `RelationVector` at the vertex stalk and individual semantic Boolean coordinates at edge stalks. `parentRelationSection carrier` is a canonical `GlobalSection`: every edge value is literally the restriction of that carrier's complete relation vector. Therefore donor, adoptive, and cultivar non-collapse results are compatibility theorems in the fabric rather than unrelated Boolean examples.
+For finite homogeneous observer families, `ResidualObservationFibre family x` is the set of states agreeing with `x` on that family. `addingObserverShrinksResidualFibre` proves monotonic refinement: adding an observer maps the new residual fibre into the old one. It deliberately does **not** assert that a richer family is automatically separating.
 
-`ProgenitorParentPredicateBaseChange.agda` adds the predicate order `p ⊑p q`, proves meet projects to each factor and each factor maps into join, and defines `predicateBaseChange`. A fibre under a stronger predicate therefore maps canonically to the corresponding fibre under a weaker predicate.
+`ProgenitorParentObserverDynamicsBridge.agda` gives concrete parent instances:
 
-`ProgenitorParentPredicatePullbackExact.agda` strengthens this from one-way maps to exact data equivalence: a fibre over `p ⊓p q` is interconvertible with one slot-compatible hidden carrier carrying separate proofs of `p` and `q`. `meetFibreToPullbackPair` and `pullbackPairToMeetFibre` preserve the hidden carrier in both round trips. Thus predicate conjunction is literally realized as fibre-product data over the common carrier.
+- P8810 alone is not separating;
+- `(P8810, genetic)` is a strict refinement of P8810 using anonymous donor versus adoptive parent;
+- genetic contribution alone is still not separating, since anonymous donor and ordinary genetic mother can agree genetically while disagreeing on genealogical parenthood.
+
+The old saturated Hecke lane independently instantiates the same core in `Ontology.Hecke.CurrentSaturatedObserverRefinementBridgeExact.agda`: the current full `DefectOrbitSummary` is proved to collide on `balancedCycle` and `supportCascade`; a future histogram or correlation inequality witness is converted generically into a strict refinement. The still-postulated histogram/correlation separator targets are not promoted to proved facts.
+
+## Fibre-preserving dynamics
+
+`DASHI.Core.FibrePreservingDynamicsExact` sits directly over `FibreRestrictionCore`. A `HiddenTransition` changes the fine carrier while leaving the coarse projection fixed; a nontrivial `FibreAutomorphism` therefore proves the coarse projection is noninjective.
+
+The parent instance is legal finalization: `preFinalizationCarrier` and `postFinalizationCarrier` differ in the `legalParent` coordinate while both remain in the same P8810 fibre. Thus a real relational transition can occur vertically inside an unchanged public parent edge. Disclosure can likewise change while P8810 remains fixed.
+
+This is not merely a social example. The live Brandt/Fricke branch now instantiates the same generic core directly on the source-native p=11 marked carrier. The marked Frobenius involution swaps `a0` and `a1`, preserves their coarse `j=0` class, and is therefore a nontrivial fibre automorphism. Its source-facing arithmetic context remains Betina–Lecouturier, *Congruence formulae for Legendre modular polynomials*, DOI `10.1016/j.jnt.2018.01.006`, and Katz–Mazur, *Arithmetic Moduli of Elliptic Curves*, DOI `10.1515/9781400881710`.
+
+## Sectioned quotient, residual reopening, and predicate descent
+
+`DASHI.Core.SectionedProjectionProvenanceBridgeExact` sharpens the quotient story. A section chooses a representative for each coarse class and is enough to reconstruct fibre-constant observables, but **not** arbitrary fine states. Exact reopening into the existing `ProvenanceBearingQuotient` requires a separate residual coordinate.
+
+The arithmetic branch supplies a concrete realization: the 5-state marked p=11 carrier projects to two coarse supersingular j-classes, and coarse j plus a three-valued residual sheet coordinate exactly reopens all five marked states. This is the exact PNF pattern `surface + proof-relevant residual = reopenable fine state`.
+
+`DASHI.Core.PredicatePullbackLatticeExact` proves that coarse Boolean predicates pull back to fibre-constant fine predicates and that pullback preserves pointwise meet/join. With a section, every fibre-constant fine predicate is reconstructed from representative values.
+
+`ProgenitorParentPredicateDescentBoundary.agda` then gives an exact Wikidata criterion: a semantic coordinate can live faithfully on the slot surface only if it is constant on slot fibres. `isP8810` descends; `geneticP`, `genealogicalParentP`, and `progenitorP` do not, because the same P8810 fibre contains explicit carriers on which those coordinates differ. The arithmetic p=11 bridge independently proves the analogous fact: a coarse `j=0` predicate descends while the marked-sheet predicate `isA0` does not.
+
+## Separation is not authority
+
+`ProgenitorParentObservationAuthorityBridge.agda` reuses `ProofRelevantIdentityFibres` and `ConsumerIndexedRelevanceMeasure` instead of inventing a new permission layer. A disclosure observer is mathematically separating on the explicit two-state donor disclosure fibre, yet surface-local evidence still cannot claim world-canonical identity. Likewise consumer relevance normalization cannot manufacture world truth or completeness.
+
+Therefore:
+
+`separating observer ≠ epistemic availability ≠ disclosure/world-identity authority`.
 
 ## Pullback topology boundary
 
 JMD's own `PullbackComparison` source prevents overclaiming. `LeanWikidataPullbackTopologyBoundary.agda` imports both `isHomeomorph_pbCompare_of_componentwise` and `exists_not_isHomeomorph_pbCompare`: componentwise compatibility suffices for the positive comparison theorem, while arbitrary categorical pullbacks need not be homeomorphic. Therefore categorical pullback, semantic/topological equivalence, and local PNF compatibility remain distinct notions.
-
-This is why the parent construction keeps explicit slot, predicate, stalk-restriction, and componentwise witnesses rather than treating the word “pullback” as automatic semantic identity.
 
 ## Wikidata projection
 
@@ -68,62 +95,16 @@ P22, P25, P8810 and P1531 are represented as surface slots rather than the carri
 
 Crucially, the cultivar witness has `progenitorRelation = true` while `genealogicalParent = false`: lineage parentage is not silently collapsed into person/family parenthood.
 
-The exact `ParentSlotFibre` contains multiple hidden relation carriers over the same P8810 surface. Anonymous donor and adoptive-parent carriers share the P8810 slot while disagreeing on the genetic coordinate. Thus the visible Wikidata slot cannot recover hidden parent semantics.
-
-A compatible surface-plus-carrier view is provided with `liftCarrier` and `forgetCompatibility`, with `forgetAfterLift` proving the carrier is a retract of the compatible representation. The latest JMD bridge gives this construction an explicit source-side categorical reference rather than merely an analogy.
-
 ## Main theorem surface
 
-Core non-collapse:
+Core non-collapse includes `causalInputDoesNotImplyProgenitor`, `triparentalPlantHasThreeContributors`, `binaryBoundRequiresBiparentalProfile`, `geneticContributionCannotDetermineParenthood`, `parenthoodCannotDetermineGeneticContribution`, `gestationCannotDetermineParenthood`, `mitochondrialContributionCannotDetermineParenthood`, `oneParentTwoGeneticContributors`, and `parentGeneticsBiconditionalFailsBothDirections`.
 
-- `causalInputDoesNotImplyProgenitor`
-- `triparentalPlantHasThreeContributors`
-- `binaryBoundRequiresBiparentalProfile`
-- `geneticContributionCannotDetermineParenthood`
-- `parenthoodCannotDetermineGeneticContribution`
-- `gestationCannotDetermineParenthood`
-- `mitochondrialContributionCannotDetermineParenthood`
-- `oneParentTwoGeneticContributors`
-- `parentGeneticsBiconditionalFailsBothDirections`
+The new observer/descent/dynamics tranche adds `addingObserverShrinksResidualFibre`, `collisionBlocksSeparation`, `p8810GeneticStrictRefinement`, `p8810SlotNotSeparating`, `geneticObserverNotSeparating`, `legalFinalizationIsHiddenP8810Transition`, `variantDisclosureObserverSeparating`, `geneticPredicateNotFibreConstant`, `genealogicalParentPredicateNotFibreConstant`, `progenitorPredicateNotFibreConstantOnP8810`, `residualReopeningGivesProvenanceBearingQuotient`, `pullbackPreservesMeet`, and `pullbackPreservesJoin`.
 
-Wikidata/fibre:
-
-- `entityTypeDoesNotDetermineParentEligibility`
-- `wikidataParentSlotDoesNotDetermineParentSemantics`
-- `cultivarConflictIsRepresentationRestriction`
-- `p1531AndP8810ShareProgenitorCarrier`
-- `p8810FibreContainsGeneticallyDistinctCarriers`
-- `p1531SpecializationPreservesProgenitorCoordinate`
-- `carrierRetractionIsExact`
-
-JMD refinement and scope:
-
-- `jmdGeneticPredicatePreserved`
-- `jmdLegalPredicatePreserved`
-- `jmdSocialPredicatePreserved`
-- `jmdRecordedParentProjectionIsLossy`
-- `jmdCapDoesNotMeanExactlyTwo`
-- `jmdCapDoesNotDetermineReproductiveProfile`
-- `pullbackDoesNotCollapseSemanticTopology`
-- `componentwiseCompatibilityRemainsExplicit`
-
-PNF/lattice/pullback:
-
-- `cultivarProgenitorDoesNotCollapseToGenealogicalParent`
-- `anonymousDonorFabricNonCollapse`
-- `adoptiveFabricNonCollapse`
-- `cultivarFabricSeparatesProgenitorFromParent`
-- `predicateBaseChange`
-- `meetFibreToLeft`
-- `meetFibreToRight`
-- `meetFibreToPullbackPair`
-- `pullbackPairToMeetFibre`
-- `meetPullbackCarrierRoundTrip`
-- `pullbackMeetCarrierRoundTrip`
-- `parentPullbackKeepsProjectionBoundary`
+The independent arithmetic instantiation supplies `minusTwoT2ToFrobeniusStrictRefinement`, `jointT3T5FNotSeparating`, `jointFingerprintToDeckTypeStrictRefinement`, `markedFrobeniusNontrivialFibreAutomorphism`, `markedFrobeniusHiddenTransition`, `fine5PNFProvenanceQuotient`, and `markedA0PredicateNotFibreConstant` on its own live branch.
 
 The intended synthesis is:
 
-`generative carrier ≠ local predicate ≠ PNF fibre ≠ Wikidata surface ≠ preferred-encoding constraint ≠ disclosure authority`,
+`fine carrier ≠ local predicate ≠ observer fingerprint ≠ PNF fibre ≠ coarse quotient ≠ public representation ≠ disclosure authority`,
 
-while compatible predicate intersections and representation views are glued by explicit pullback/base-change witnesses rather than semantic collapse.
+while explicit pullback, base-change, residual-reopening, observer-refinement, and fibre-automorphism witnesses say exactly what survives each projection and exactly what is lost.
