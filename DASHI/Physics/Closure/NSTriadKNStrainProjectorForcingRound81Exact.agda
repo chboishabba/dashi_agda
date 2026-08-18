@@ -51,7 +51,7 @@ open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; -_; _/_)
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
 
 quarter : ℚ
 quarter = (+ 1) / 4
@@ -164,7 +164,7 @@ localVorticityOffBlockAlignmentDefectExact datum =
           * square (enstrophy datum)
           * alignmentWeight datum
           * (1ℚ - alignmentWeight datum))
-      (lineSquareIsWeightedEnstrophy datum)
+      (sym (lineSquareIsWeightedEnstrophy datum))
       (subst
         (λ transverseSq →
           square quarter * (enstrophy datum * alignmentWeight datum)
@@ -173,7 +173,7 @@ localVorticityOffBlockAlignmentDefectExact datum =
             * square (enstrophy datum)
             * alignmentWeight datum
             * (1ℚ - alignmentWeight datum))
-        (transverseSquareIsComplement datum)
+        (sym (transverseSquareIsComplement datum))
         (ℚRing.solve-∀
           quarter (enstrophy datum) (alignmentWeight datum))))
 
