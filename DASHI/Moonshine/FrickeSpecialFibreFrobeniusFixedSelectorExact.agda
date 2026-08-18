@@ -32,7 +32,7 @@ module DASHI.Moonshine.FrickeSpecialFibreFrobeniusFixedSelectorExact where
 -- control table is imported, and no external Monster label is used.  The only
 -- remaining all-prime producer is the actual Deligne--Rapoport/Fricke
 -- special-fibre realization together with the actual supersingular Frobenius
--- normal-form realization.
+-- normal-form realization and their same-object pair-count identification.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -53,9 +53,9 @@ record PrimeFrickeFrobeniusGeometry : Set₁ where
 
     specialFibreRealization : Fricke.PrimeFrickeSpecialFibreRealization
 
-    samePrime :
-      Fricke.prime specialFibreRealization ≡ Fricke.prime specialFibreRealization
-
+    -- This equality is the real seam between the two source-facing models:
+    -- the pairs counted by the actual involution carrier are exactly the
+    -- quadratic pairs that become nodes in the actual Fricke special fibre.
     pairCountSameObject :
       Orbit.pairedOrbitCount spectrum
       ≡ Fricke.frobeniusPairDefect specialFibreRealization
