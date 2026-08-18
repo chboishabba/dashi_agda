@@ -12,6 +12,14 @@ import DASHI.Algebra.DisagreementFourViewBoundary as Four
 -- technical claim may still lack authority for a downstream action.  Authority
 -- alone cannot manufacture evidence.  Promotion therefore consumes all three
 -- coordinates explicitly rather than treating any one as a proxy for the rest.
+--
+-- This module intentionally does NOT define per-axis completeness.  Incoming
+-- PR #582 owns that theorem layer in DASHI.Core.RequiredAxisSupportSquareExact
+-- (AxisEvidenceFamily, RequiredAxesResolved, MissingRequiredAxis, and the
+-- non-compensation theorem).  On stack convergence, an inhabited
+-- RequiredAxesResolved proof is a natural producer for obligationsDischarged;
+-- the present module only records the orthogonality of evidence, completion,
+-- and downstream authority.
 ------------------------------------------------------------------------
 
 data ObligationStatus : Set where
