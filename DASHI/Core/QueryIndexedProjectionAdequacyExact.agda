@@ -8,17 +8,23 @@ module DASHI.Core.QueryIndexedProjectionAdequacyExact where
 -- answer must factor through the projection.  An exact fibre collision with
 -- different fine answers therefore refutes adequacy for that query.
 --
+-- This module deliberately reuses IntersectionalNonFactorability.FactorsThrough
+-- and NonFactorabilityWitness rather than defining a parallel factorisation
+-- calculus.
+--
 -- Conceptual precedent:
 -- David Blackwell, "Equivalent Comparisons of Experiments",
 -- Annals of Mathematical Statistics 24(2), 265-272 (1953).
 -- DOI: 10.1214/aoms/1177729032.
 --
 -- Blackwell is cited only as precedent for comparing information carried by
--- observations/experiments.  The query-indexed factorisation carrier and the
--- finite theorems below are DASHI constructions.
+-- observations/experiments.  Query-indexing of the existing DASHI
+-- factorisation carrier is a repository-local construction.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
+
+import DASHI.Core.IntersectionalNonFactorability as NonFactor
 
 record QuerySemantics (State Query Answer : Set) : Set₁ where
   constructor querySemantics
@@ -27,40 +33,47 @@ record QuerySemantics (State Query Answer : Set) : Set₁ where
 
 open QuerySemantics public
 
-record FactorsForQuery
-    {State Observation Query Answer : Set}
-    (project : State → Observation)
-    (semantics : QuerySemantics State Query Answer)
-    (query : Query) : Set₁ where
-  constructor factorsForQuery
-  field
-    coarseAnswer : Observation → Answer
-    factorisation :
-      (state : State) →
-      coarseAnswer (project state) ≡ answer semantics query state
-
-open FactorsForQuery public
-
 AdequateFor :
   ∀ {State Observation Query Answer} →
   (State → Observation) →
   QuerySemantics State Query Answer →
   Query → Set₁
-AdequateFor = FactorsForQuery
+AdequateFor project semantics query =
+  NonFactor.FactorsThrough project (answer semantics query)
 
-record QueryAdequacyDefect
-    {State Observation Query Answer : Set}
-    (project : State → Observation)
-    (semantics : QuerySemantics State Query Answer)
-    (query : Query) : Set₁ where
-  constructor queryAdequacyDefect
-  field
-    left right : State
-    sameObservation : project left ≡ project right
-    differentAnswer :
-      answer semantics query left ≡ answer semantics query right → ⊥
+QueryAdequacyDefect :
+  ∀ {State Observation Query Answer} →
+  (State → Observation) →
+  QuerySemantics State Query Answer →
+  Query → Set₁
+QueryAdequacyDefect project semantics query =
+  NonFactor.NonFactorabilityWitness project (answer semantics query)
 
-open QueryAdequacyDefect public
+-- Compatibility constructors keep the query-indexed call sites readable while
+-- delegating the actual carrier to IntersectionalNonFactorability.
+factorsForQuery :
+  ∀ {State Observation Query Answer}
+    {project : State → Observation}
+    {semantics : QuerySemantics State Query Answer}
+    {query : Query} →
+  (coarseAnswer : Observation → Answer) →
+  ((state : State) →
+    answer semantics query state ≡ coarseAnswer (project state)) →
+  AdequateFor project semantics query
+factorsForQuery coarseAnswer factorisation =
+  NonFactor.factorsThrough coarseAnswer factorisation
+
+queryAdequacyDefect :
+  ∀ {State Observation Query Answer}
+    {project : State → Observation}
+    {semantics : QuerySemantics State Query Answer}
+    {query : Query} →
+  (left right : State) →
+  project left ≡ project right →
+  (answer semantics query left ≡ answer semantics query right → ⊥) →
+  QueryAdequacyDefect project semantics query
+queryAdequacyDefect left right same different =
+  NonFactor.nonFactorabilityWitness left right same different
 
 queryAdequacyDefectBlocksFactorisation :
   ∀ {State Observation Query Answer}
@@ -70,13 +83,8 @@ queryAdequacyDefectBlocksFactorisation :
   QueryAdequacyDefect project semantics query →
   AdequateFor project semantics query →
   ⊥
-queryAdequacyDefectBlocksFactorisation defect adequate =
-  differentAnswer defect
-    (trans
-      (sym (factorisation adequate (left defect)))
-      (trans
-        (cong (coarseAnswer adequate) (sameObservation defect))
-        (factorisation adequate (right defect))))
+queryAdequacyDefectBlocksFactorisation =
+  NonFactor.witnessRulesOutEveryFlatFactorisation
 
 ------------------------------------------------------------------------
 -- Exact witness: the same projection is adequate for one query and inadequate
