@@ -32,11 +32,11 @@ module DASHI.Physics.YangMills.BalabanDegreeOneStateNormG2HeadroomNoGoExact wher
 -- Under the ordinary nonnegative-majorant convention for raw and source norm
 -- ratios, the resulting degree-one state-norm residual majorant is therefore
 -- STRICTLY larger than the complete singleton budget before either estimate is
--- even spent.  Numerically the gap factor is 3145728/55 > 57195.
+-- even spent. Numerically the gap factor is 3145728/55 > 57195.
 --
 -- This proves that the high-alpha G2 route must estimate the correlated
 -- degree-one object raw_1 - G_11 before polarization/absolute-value loss (or
--- exploit an equally strong signed cancellation).  It prevents future work
+-- exploit an equally strong signed cancellation). It prevents future work
 -- from wasting effort optimizing two estimates that cannot close the target.
 ------------------------------------------------------------------------
 
@@ -52,6 +52,7 @@ open import Relation.Nullary.Negation using (¬_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundVariationSelectorExact as Selector
+import DASHI.Physics.YangMills.BalabanChargeRelativeDegreeOneG2ClosureExact as G2
 import DASHI.Physics.YangMills.BalabanChargeRelativeDegreeOneG2ExactDefectCompiler as ExactDefect
 
 oneSixth : ℚ
@@ -92,8 +93,7 @@ record NonnegativeSeparateMajorants
       Configuration Multiplier) : Set where
   field
     rawTotalNonnegative :
-      0ℚ ≤ ExactDefect.G2.rawRatioTotal
-        (ExactDefect.toDegreeOneG2Data dataSet)
+      0ℚ ≤ G2.rawRatioTotal (ExactDefect.toDegreeOneG2Data dataSet)
     sourceRatioNonnegative :
       0ℚ ≤ ExactDefect.sourceDegreeOneNormRatio dataSet
 
@@ -107,8 +107,7 @@ residualMajorantAtLeastOneSixth :
   oneSixth ≤ ExactDefect.exactDefectResidualRatio dataSet
 residualMajorantAtLeastOneSixth {dataSet = dataSet} nonnegative =
   let
-    raw = ExactDefect.G2.rawRatioTotal
-      (ExactDefect.toDegreeOneG2Data dataSet)
+    raw = G2.rawRatioTotal (ExactDefect.toDegreeOneG2Data dataSet)
     source = ExactDefect.sourceDegreeOneNormRatio dataSet
     residual = ExactDefect.exactDefectResidualRatio dataSet
 
