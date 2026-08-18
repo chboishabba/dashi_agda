@@ -14,6 +14,7 @@ module DASHI.Governance.AuthorityPhaseSeparationExact where
 open import DASHI.Core.Prelude
 
 import DASHI.Core.IntersectionalNonFactorability as NonFactor
+import DASHI.Foundations.StageValuationBundleAtlas as Stage
 import DASHI.Governance.LocalGlobalCouncilGluing as Council
 
 ------------------------------------------------------------------------
@@ -93,13 +94,13 @@ record PhaseSeparatedCompatibleAuthorityComposition : Set₁ where
     globalSectionIsCanonical :
       globalSection ≡ Council.canonicalGlobalCouncilSection
     neighbourhoodRestrictionIsExact :
-      Council.Stage.BundleSheaf.restrict
+      Stage.BundleSheaf.restrict
         Council.rceppCouncilBundleSheaf
         globalSection
         Council.neighbourhoodPoint
       ≡ Council.canonicalLocalCouncilFamily Council.neighbourhoodPoint
     displacedConstituencyRestrictionIsExact :
-      Council.Stage.BundleSheaf.restrict
+      Stage.BundleSheaf.restrict
         Council.rceppCouncilBundleSheaf
         globalSection
         Council.idpCampPoint
