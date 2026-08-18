@@ -80,6 +80,8 @@ import DASHI.Moonshine.P11Level44TwoAdicFixedSpaceIntersectionExact as Intersect
 import DASHI.Moonshine.P11Level44TwoAdicTransverseAlignmentExact as Transverse
 import DASHI.Moonshine.P11JacquetLanglandsRepresentationStandardAuthorityExact as JL
 import DASHI.Moonshine.P11JacquetLanglandsFixedSpaceResolutionExact as JLResolution
+import DASHI.Moonshine.P11MarkedLevel44PermutationIntertwinerExact as Principal
+import DASHI.Moonshine.P11Level44BadPrimeOperatorSeparationExact as Bad
 import DASHI.Moonshine.P11Level44BadPrimeConjugacyNoGoExact as R2NoGo
 import DASHI.Moonshine.P11Level44AnalyticU2SatakePolynomialExact as AnalyticSatake
 import DASHI.Moonshine.P11CasselmanBruhatDegeneracyChartExact as BruhatChart
@@ -136,10 +138,8 @@ internalR2CannotBeRecoveredByConjugacyRegression :
 internalR2CannotBeRecoveredByConjugacyRegression = refl
 
 analyticU2CubicRegression :
-  (v : DASHI.Moonshine.P11MarkedLevel44PermutationIntertwinerExact.Old3) →
-  DASHI.Moonshine.P11Level44BadPrimeOperatorSeparationExact.analyticU2
-    (AnalyticSatake.satakeQuadraticU2 v)
-  ≡ DASHI.Moonshine.P11Level44BadPrimeOperatorSeparationExact.zeroOld3
+  (v : Principal.Old3) →
+  Bad.analyticU2 (AnalyticSatake.satakeQuadraticU2 v) ≡ Bad.zeroOld3
 analyticU2CubicRegression = AnalyticSatake.satakeQuadraticLandsInKernel
 
 casselmanBruhatOrderRegression :
@@ -148,7 +148,7 @@ casselmanBruhatOrderRegression :
 casselmanBruhatOrderRegression = refl
 
 transverseSatakeResidualCollisionRegression :
-  (v : DASHI.Moonshine.P11MarkedLevel44PermutationIntertwinerExact.Old3) →
+  (v : Principal.Old3) →
   TransverseSatake.plusSatakeQuadratic v
   ≡ TransverseSatake.minusSatakeQuadratic v
 transverseSatakeResidualCollisionRegression =
