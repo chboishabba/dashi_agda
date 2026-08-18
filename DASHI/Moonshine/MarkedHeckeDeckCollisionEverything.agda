@@ -20,13 +20,24 @@ module DASHI.Moonshine.MarkedHeckeDeckCollisionEverything where
 --     -> structural trivial-vs-standard collision at (T3,T5,F)=(1,0,+1)
 --     -> deck type repairs the scalar observation.
 --
+-- p=43:
+--   independent Deuring/full-level-2 control with nontrivial stabilizer
+--     -> 21 marked points = 3 fixed + 9 Frobenius pairs
+--     -> four coarse j classes = 2 fixed + 1 pair
+--     -> explicit normal-form realization of the SAME coarse defect=1 that the
+--        finite Fricke/class-number spectrum predicts.
+--
 -- Cross-prime selector cutset:
 --   scalar Hecke/Frobenius blindness to deck type occurs at BOTH p=11 and the
 --   non-Ogg control p=37, so deck refinement is representation-relevant but is
---   not itself an Ogg selector.  The first currently surviving 11/37 selector
---   coordinate is the COARSE geometric Frobenius paired-orbit defect (0 vs 1).
---   The under-72 Fricke/Ogg agreement remains explicitly non-independent of the
---   class-number/Fricke input from which that generic finite scan is derived.
+--   not itself an Ogg selector.  The first currently surviving selector
+--   coordinate is the COARSE geometric Frobenius paired-orbit defect:
+--
+--       p11 = 0, p37 = 1, p43 = 1.
+--
+--   The p11/p37/p43 values now have source-facing geometric realizations.  The
+--   complete under-72 Fricke/Ogg agreement remains explicitly non-independent
+--   of the class-number/Fricke input from which that generic scan is derived.
 --
 -- Generic algebra:
 --   if a marked space is genuinely identified as global-Hecke x deck and the
@@ -50,6 +61,8 @@ import DASHI.Moonshine.P37NonOggFullLevel2DeuringControlExact as P37
 import DASHI.Moonshine.P37MarkedX2JointFingerprintDeckCollisionExact as P37Collision
 import DASHI.Moonshine.P37MarkedDeckIsotypicJointDecompositionExact as P37Iso
 import DASHI.Moonshine.P37MarkedDeckIsotypicCollisionExact as P37IsoCollision
+import DASHI.Moonshine.P43NonOggFullLevel2DeuringControlExact as P43
+import DASHI.Moonshine.P43GeometricFrobeniusRealizationExact as P43Geo
 import DASHI.Moonshine.P11P37MarkedDeckSelectorCutsetExact as SelectorCutset
 import DASHI.Moonshine.P37MarkedDeckIsotypicHighestAlphaRegression as P37Regression
 import DASHI.Moonshine.AuxiliaryLevelHeckeDeckFactorizationExact as Aux
@@ -119,11 +132,31 @@ p37StructuralDeckRepairRegression :
   P37IsoCollision.p37TrivialRefined ≡ P37IsoCollision.p37StandardRefined → ⊥
 p37StructuralDeckRepairRegression = P37IsoCollision.p37DeckRefinementSeparates
 
+------------------------------------------------------------------------
+-- p43 second independent non-Ogg geometric control.
+------------------------------------------------------------------------
+
+p43MarkedCountRegression : P43.p43MarkedStateCount ≡ 21
+p43MarkedCountRegression = P43.p43MarkedStateCountIsTwentyOne
+
+p43CoarsePairRegression : P43.p43CoarsePairCount ≡ 1
+p43CoarsePairRegression = P43.p43CoarsePairCountIsOne
+
+p43GenericDefectRealizedGeometrically :
+  SelectorCutset.p43CoarseFrobeniusPairDefect ≡ 1
+p43GenericDefectRealizedGeometrically = SelectorCutset.p43DefectOne
+
 p11P37FrobeniusDefectSelectorRegression :
   SelectorCutset.p11CoarseFrobeniusPairDefect
   ≡ SelectorCutset.p37CoarseFrobeniusPairDefect → ⊥
 p11P37FrobeniusDefectSelectorRegression =
   SelectorCutset.coarseFrobeniusPairDefectSeparates11And37
+
+p11P43FrobeniusDefectSelectorRegression :
+  SelectorCutset.p11CoarseFrobeniusPairDefect
+  ≡ SelectorCutset.p43CoarseFrobeniusPairDefect → ⊥
+p11P43FrobeniusDefectSelectorRegression =
+  SelectorCutset.coarseFrobeniusPairDefectSeparates11And43
 
 ------------------------------------------------------------------------
 -- Product-factorization remains a boundary, not a false p37 identification.
