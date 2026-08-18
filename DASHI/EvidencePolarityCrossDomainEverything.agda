@@ -10,6 +10,7 @@ module DASHI.EvidencePolarityCrossDomainEverything where
 ------------------------------------------------------------------------
 
 import DASHI.Algebra.ClaimIndexedEvidencePolarityExact
+import DASHI.Algebra.BalancedTernaryOppositionEvidenceBridgeExact
 import DASHI.Core.EvidenceObligationAuthoritySeparationExact
 
 import DASHI.Cognition.PNF.ClaimEvidence369BridgeExact
