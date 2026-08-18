@@ -14,14 +14,24 @@ module DASHI.Physics.Closure.NSTriadKNFrameWeightedSquareChargeRound77Exact wher
 -- Title: "Sur le mouvement d'un liquide visqueux emplissant l'espace".
 -- DOI: 10.1007/BF02547354.
 --
+-- Authors: Errett Bishop; Douglas Bridges.
+-- Title: "Constructive Analysis".
+-- DOI: 10.1007/978-3-642-61667-9.
+--
 -- ROUND77 / NON-UNIT FRAME-WEIGHTED SQUARE CHARGE
 --
 -- Round76 used the sufficient hypothesis B_k <= 1 to conclude mu^2 <= Q_k.
 -- The periodic-scaling audit shows that B_k cannot be normalized to one merely
 -- by an upward dyadic torus zoom.  The correct division-free replacement is to
--- retain an explicit reciprocal frame weight rho_k:
+-- retain the reciprocal frame weight rho_k with
 --
 --   B_k rho_k = 1,       rho_k >= 0.
+--
+-- The reciprocal is NOT an arbitrary new premise on the positive branch.  The
+-- repository's YM lane already uses the Agda standard library's constructive
+-- rational reciprocal (`1/_`, decidable zero, `*-inverseˡ`).  We reproduce that
+-- domain-independent arithmetic pattern locally here so NS does not depend on
+-- a Yang--Mills namespace.  Positive B therefore canonically constructs rho.
 --
 -- From the already-constructed literal two-channel estimate
 --
@@ -31,21 +41,19 @@ module DASHI.Physics.Closure.NSTriadKNFrameWeightedSquareChargeRound77Exact wher
 --
 --   rho_k remainder^2 <= Q_k.
 --
--- Thus the physically admissible Carleson floor is the FRAME-WEIGHTED square
--- rho_k mu_k^2.  No square root, ad-hoc amplitude normalization, or assumption
--- B_k <= 1 is required.  This changes the correct D2 propagation threshold from
--- sum r_i^2 > 1 to the weighted condition
---
---   sum rho_i r_i^2 > rho_parent.
+-- Thus the physically admissible Carleson floor is rho_k mu_k^2.  No square
+-- root, ad-hoc amplitude normalization, or assumption B_k <= 1 is required.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
-open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _*_; _≤_)
+open import Data.Rational using
+  (ℚ; 0ℚ; 1ℚ; Positive; _*_; _≤_; 1/_; _≟_; ≢-nonZero)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Relation.Nullary using (yes; no)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier as Cube
@@ -70,6 +78,46 @@ record ReciprocalFrameWeight (frameProduct rho : ℚ) : Set where
     reciprocalExact : frameProduct * rho ≡ 1ℚ
 
 open ReciprocalFrameWeight public
+
+------------------------------------------------------------------------
+-- Construct the reciprocal canonically from positivity.  This is the same
+-- standard-library arithmetic pattern already used in the YM Gate-4 lane.
+------------------------------------------------------------------------
+
+data Empty : Set where
+
+emptyEliminate : ∀ {A : Set} → Empty → A
+emptyEliminate ()
+
+positiveZeroImpossible : Positive 0ℚ → Empty
+positiveZeroImpossible ()
+
+safeRationalReciprocal : ℚ → ℚ
+safeRationalReciprocal value with value ≟ 0ℚ
+... | yes _ = 0ℚ
+... | no value≢zero = (1/ value) {{≢-nonZero value≢zero}}
+
+safeRationalReciprocalTimesPositive :
+  ∀ (value : ℚ) → Positive value →
+  safeRationalReciprocal value * value ≡ 1ℚ
+safeRationalReciprocalTimesPositive value positive with value ≟ 0ℚ
+... | yes value≡zero =
+  emptyEliminate
+    (positiveZeroImpossible (subst Positive value≡zero positive))
+... | no value≢zero =
+  ℚP.*-inverseˡ value {{≢-nonZero value≢zero}}
+
+positiveFrameReciprocal :
+  ∀ frameProduct → Positive frameProduct →
+  ReciprocalFrameWeight frameProduct (safeRationalReciprocal frameProduct)
+positiveFrameReciprocal frameProduct positive = record
+  { rhoNonnegative =
+      ℚP.<⇒≤ (ℚP.reciprocal-positive positive)
+  ; reciprocalExact =
+      trans
+        (ℚP.*-comm frameProduct (safeRationalReciprocal frameProduct))
+        (safeRationalReciprocalTimesPositive frameProduct positive)
+  }
 
 reciprocalFrameWeightTurnsProductChargeIntoCharge :
   ∀ {x charge frame rho} →
@@ -196,19 +244,22 @@ literalFixedOutputFrameWeightedSquareCharge
 round77AbsoluteUnitFrameNormalizationRequired : Bool
 round77AbsoluteUnitFrameNormalizationRequired = false
 
+round77PositiveFrameReciprocalConstructed : Bool
+round77PositiveFrameReciprocalConstructed = true
+
 round77LiteralNonUnitFrameWeightedSquareChargeConstructed : Bool
 round77LiteralNonUnitFrameWeightedSquareChargeConstructed = true
 
-round77PhysicalReciprocalFrameWeightAtSelectedCriticalEventConstructed : Bool
-round77PhysicalReciprocalFrameWeightAtSelectedCriticalEventConstructed = false
+round77PhysicalFrameProductPositiveAtSelectedCriticalEvent : Bool
+round77PhysicalFrameProductPositiveAtSelectedCriticalEvent = false
 
 round77CanonicalQIdentifiedWithDynamicPhysicalBudgetCharge : Bool
 round77CanonicalQIdentifiedWithDynamicPhysicalBudgetCharge = false
 
+round77PositiveFrameReciprocalConstructedIsTrue :
+  round77PositiveFrameReciprocalConstructed ≡ true
+round77PositiveFrameReciprocalConstructedIsTrue = refl
+
 round77LiteralNonUnitFrameWeightedSquareChargeConstructedIsTrue :
   round77LiteralNonUnitFrameWeightedSquareChargeConstructed ≡ true
 round77LiteralNonUnitFrameWeightedSquareChargeConstructedIsTrue = refl
-
-round77AbsoluteUnitFrameNormalizationRequiredIsFalse :
-  round77AbsoluteUnitFrameNormalizationRequired ≡ false
-round77AbsoluteUnitFrameNormalizationRequiredIsFalse = refl
