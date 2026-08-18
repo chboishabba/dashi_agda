@@ -31,20 +31,10 @@ module DASHI.Moonshine.FormalQSeriesOldformDegeneracyHeckeExact where
 --   (T_l a)_n = a_(l n)            when l does not divide n.
 --
 -- We prove constructively that if gcd(d,l)=1, then any two series satisfying
--- these laws obey the exact coefficient commuting square
---
---                  V_d
---       a -----------------> b
---       |                    |
---     T_l                  T_l
---       |                    |
---       v                    v
---      Ta -----------------> Tb
---                  V_d
---
--- i.e. T_l V_d = V_d T_l at EVERY coefficient, including the off-support
--- coefficients.  The proof uses the repository/stdlib coprime-divisor theorem
--- to show that multiplication by l cannot create or erase d-divisibility.
+-- these laws obey the exact coefficient commuting square T_l V_d = V_d T_l at
+-- EVERY coefficient, including off-support coefficients.  Coprimality is used
+-- to prove multiplication by l cannot create either d-support or hidden l-
+-- divisibility.
 --
 -- Specializing d=1,2,4 gives exactly the three degeneracy copies used when
 -- level 11 is raised to level 44.  This is the analytic/formal-q-series half of
@@ -57,7 +47,7 @@ open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Integer using (ℤ; +_)
   renaming (_+_ to _+ℤ_; _*_ to _*ℤ_)
 open import Data.Nat.Divisibility using
-  (_∣_; _∣?_; quotient; m∣n⇒n≡m*quotient; ∣n⇒∣m*n)
+  (_∣_; _∣?_; m∣n⇒n≡m*quotient; ∣n⇒∣m*n)
 open import Data.Nat.Coprimality using
   (Coprime; 1-coprimeTo; coprime-divisor)
   renaming (sym to coprime-sym)
@@ -65,10 +55,6 @@ import Data.Nat.Tactic.RingSolver as NatRing
 import Data.Integer.Tactic.RingSolver as IntRing
 open import Relation.Nullary using (yes; no)
 open import Relation.Binary.PropositionalEquality using (cong₂; subst)
-
-------------------------------------------------------------------------
--- Formal coefficient carriers and theorem-bearing operator laws.
-------------------------------------------------------------------------
 
 FormalQSeries : Set
 FormalQSeries = Nat → ℤ
@@ -96,10 +82,6 @@ record Weight2PrimeHeckeCoefficientLaw
 
 open Weight2PrimeHeckeCoefficientLaw public
 
-------------------------------------------------------------------------
--- Small support lemmas: a good Hecke prime preserves the d-support predicate.
-------------------------------------------------------------------------
-
 coprimeCannotCreateSupport :
   (d ell n : Nat) →
   Coprime d ell →
@@ -116,10 +98,6 @@ coprimeCannotCreatePrimeDivisibility :
 coprimeCannotCreatePrimeDivisibility d ell n cop ell∤n ell∣d*n =
   ell∤n (coprime-divisor (coprime-sym cop) ell∣d*n)
 
-------------------------------------------------------------------------
--- Main theorem: coefficient-level oldform/Hecke commutation.
-------------------------------------------------------------------------
-
 oldformDegeneracyCommutesWithGoodPrime :
   (d ell : Nat) →
   Coprime d ell →
@@ -134,7 +112,6 @@ oldformDegeneracyCommutesWithGoodPrime d ell cop a b Ta Tb deg heckeA heckeB =
     ; offSupport = commutingOffSupport
     }
   where
-  -- Reorder the first Hecke term into the d-multiple shape consumed by V_d.
   firstTermDegenerates :
     (n : Nat) → b (ell * (d * n)) ≡ a (ell * n)
   firstTermDegenerates n =
@@ -147,7 +124,7 @@ oldformDegeneracyCommutesWithGoodPrime d ell cop a b Ta Tb deg heckeA heckeB =
   ... | yes ell∣n =
     let
       q : Nat
-      q = quotient ell∣n
+      q = _∣_.quotient ell∣n
 
       n≡ell*q : n ≡ ell * q
       n≡ell*q = m∣n⇒n≡m*quotient ell∣n
@@ -189,7 +166,7 @@ oldformDegeneracyCommutesWithGoodPrime d ell cop a b Ta Tb deg heckeA heckeB =
   ... | yes ell∣m =
     let
       q : Nat
-      q = quotient ell∣m
+      q = _∣_.quotient ell∣m
 
       m≡ell*q : m ≡ ell * q
       m≡ell*q = m∣n⇒n≡m*quotient ell∣m
