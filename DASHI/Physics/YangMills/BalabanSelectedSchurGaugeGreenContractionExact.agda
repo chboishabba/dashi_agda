@@ -56,6 +56,7 @@ open import Data.Rational.Base as ℚ using
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
+open import Relation.Nullary.Decidable.Core using (toWitness)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
@@ -120,24 +121,37 @@ selectedSchurPerturbationRowMassBound background radius row =
       (Correction.selectedSchurFiniteRankCorrectionRowMassBound
         background radius row)
 
+    afterSplit :
+      Sums.sumRational Cross.gaugeRows
+        (λ output → ∣ E row output ∣ + ∣ F row output ∣)
+      ≤ PerturbationMass.perturbationRowMassBound
+        + Correction.schurCorrectionRowMassBound
+    afterSplit =
+      subst
+        (λ lower → lower
+          ≤ PerturbationMass.perturbationRowMassBound
+            + Correction.schurCorrectionRowMassBound)
+        (sym split) bounded
+
     coefficientExact :
       PerturbationMass.perturbationRowMassBound
         + Correction.schurCorrectionRowMassBound
       ≡ schurPerturbationRowMassBound
     coefficientExact = ℚRing.solve []
+
+    afterCoefficient :
+      Sums.sumRational Cross.gaugeRows
+        (λ output → ∣ E row output ∣ + ∣ F row output ∣)
+      ≤ schurPerturbationRowMassBound
+    afterCoefficient =
+      subst
+        (λ upper →
+          Sums.sumRational Cross.gaugeRows
+            (λ output → ∣ E row output ∣ + ∣ F row output ∣)
+          ≤ upper)
+        coefficientExact afterSplit
   in
-  ℚP.≤-trans triangle
-    (subst
-      (λ upper →
-        Sums.sumRational Cross.gaugeRows
-          (λ output → ∣ E row output ∣ + ∣ F row output ∣)
-        ≤ upper)
-      (trans split coefficientExact)
-      (subst
-        (λ lower → lower
-          ≤ PerturbationMass.perturbationRowMassBound
-            + Correction.schurCorrectionRowMassBound)
-        (sym split) bounded))
+  ℚP.≤-trans triangle afterCoefficient
 
 flatGreenTimesSchurPerturbation :
   Physical.RationalSU2Background4 → Cross.GaugeRow → Cross.GaugeRow → ℚ
@@ -189,7 +203,7 @@ schurGreenContractionBelowOneEighth =
     (ℚP.nonNegative⁻¹ (oneEighth - schurGreenContractionBound))
 
 oneEighthBelowOne : oneEighth < 1ℚ
-oneEighthBelowOne = ℚP.positive⁻¹ (+ 7 / 8)
+oneEighthBelowOne = toWitness _
 
 selectedFlatGreenSchurStrictContraction :
   ∀ background → Relaxed.RelaxedInverseLinkRadius background →
