@@ -214,15 +214,12 @@ flatEvidenceCannotDetermineLevelAwareDecision =
     flattenCollision
     decisionDiffersAcrossCollision
 
-noFlatEvidenceInterpretationRecoversLevelAwareDecision :
-  (interpret : FlatEvidenceSurface → LocalDecision) →
-  NF.FactorsThrough flattenEvidence fineDecision interpret →
+noFlatEvidenceFactorisationRecoversLevelAwareDecision :
+  NF.FactorsThrough flattenEvidence fineDecision →
   ⊥
-noFlatEvidenceInterpretationRecoversLevelAwareDecision interpret factors =
-  NF.witnessBlocksFactorization
+noFlatEvidenceFactorisationRecoversLevelAwareDecision =
+  NF.witnessRulesOutEveryFlatFactorisation
     flatEvidenceCannotDetermineLevelAwareDecision
-    interpret
-    factors
 
 record LevelIndexedProofObligationBoundary : Set where
   constructor levelIndexedProofObligationBoundary
