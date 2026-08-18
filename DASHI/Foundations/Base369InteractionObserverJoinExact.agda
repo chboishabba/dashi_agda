@@ -13,9 +13,10 @@ module DASHI.Foundations.Base369InteractionObserverJoinExact where
 -- directions.  This module upgrades those witnesses to exact non-factorisation
 -- statements and gives the native universal property of the paired observer.
 --
--- The generic observer-lattice version belongs to PR #584 in
--- DASHI.Core.ObserverIncomparabilityAndJoinExact.  This module deliberately
--- avoids copying that core into the #587 stack.
+-- The canonical generic observer-lattice owner is the #582 convergence module
+-- DASHI.Core.ObserverIncomparabilityTypedJoinExact.  It now carries the same
+-- least-common-refinement universal property in the shared Observer/Refines
+-- calculus.  This #587 module stays source-native and does not copy that core.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -42,10 +43,6 @@ sumObserver = Interaction.aggregateSum
 
 jointObserver : State → Block × ℤ
 jointObserver state = blockObserver state , sumObserver state
-
-------------------------------------------------------------------------
--- Exact no-decoder theorems in both directions.
-------------------------------------------------------------------------
 
 record BlockFactorsThroughSum : Set₁ where
   constructor blockFactorsThroughSum
@@ -98,14 +95,6 @@ canonicalTransverseProjectionIncomparability =
     blockCannotFactorThroughSum
     sumCannotFactorThroughBlock
 
-------------------------------------------------------------------------
--- Native least-joint universal property in factorisation form.
---
--- If a common observer carries exact decoders for BOTH transverse coordinates,
--- then it carries an exact decoder for the pair.  Conversely the pair projects
--- to each coordinate by proj1/proj2.
-------------------------------------------------------------------------
-
 record CommonCarriesBoth (Common : Set) (common : State → Common) : Set₁ where
   constructor commonCarriesBoth
   field
@@ -146,10 +135,6 @@ jointCarriesBlock state = refl
 jointCarriesSum :
   (state : State) → sumObserver state ≡ proj₂ (jointObserver state)
 jointCarriesSum state = refl
-
-------------------------------------------------------------------------
--- Query-facing interpretation.
-------------------------------------------------------------------------
 
 record Base369ObserverJoinBoundary : Set where
   field
