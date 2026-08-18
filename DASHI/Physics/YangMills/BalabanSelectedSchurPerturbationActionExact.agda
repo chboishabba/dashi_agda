@@ -44,6 +44,7 @@ import DASHI.Physics.YangMills.BalabanFiniteReducedFloorPerturbationExact as Dif
 import DASHI.Physics.YangMills.BalabanFiniteRectangularRationalExact as Rect
 import DASHI.Physics.YangMills.BalabanSelectedFlatGaugeAdjointGramFloorExact as FlatAdjoint
 import DASHI.Physics.YangMills.BalabanSelectedFlatGaugeRegularizedGreenExact as FlatGreen
+import DASHI.Physics.YangMills.BalabanSelectedBackgroundGaugePerturbationFiniteRangeExact as Perturbation
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundGaugePerturbationActionExact as EAction
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundFlatGreenPerturbationContractionExact as Flat
 import DASHI.Physics.YangMills.BalabanSelectedSchurCrossAbsoluteMassExact as Cross
@@ -74,7 +75,7 @@ schurPerturbationApplyDifferenceExact :
 schurPerturbationApplyDifferenceExact background multiplier row =
   let
     rows = Cross.gaugeRows
-    E = DASHI.Physics.YangMills.BalabanSelectedBackgroundGaugePerturbationFiniteRangeExact.gaugeGramPerturbationMatrix background
+    E = Perturbation.gaugeGramPerturbationMatrix background
     F = Correction.selectedSchurFiniteRankCorrection background
 
     pointwise : ∀ column →
