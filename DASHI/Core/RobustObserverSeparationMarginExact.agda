@@ -22,7 +22,7 @@ module DASHI.Core.RobustObserverSeparationMarginExact where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; _+_; _-_; _*_; _≤_; _<_)
+  (ℚ; 0ℚ; _+_; _-_; _*_; -_; _≤_; _<_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (subst; sym)
