@@ -56,7 +56,6 @@ import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNComplex3FieldAlgebra as Field
 import DASHI.Physics.Closure.NSTriadKNComplexCommutativeRingExact as CRing
-import DASHI.Physics.Closure.NSTriadKNComplex3HermitianScalingLaws as Scaling
 import DASHI.Physics.Closure.NSTriadKNComplex3HermitianAdditiveLaws as Additive
 import DASHI.Physics.Closure.NSTriadKNLerayComplexScalarLinearityRound73Exact as LerayLin
 import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
@@ -66,6 +65,8 @@ import DASHI.Physics.Closure.NSTriadKNPressurePotentialGradientHessianSameModeRo
 
 ------------------------------------------------------------------------
 -- Literal Hessian action H(q)u = -q (q dot u) pHat_q.
+-- Bilinear-dot commutativity lets us use the ordered interaction's native
+-- orientation u dot q directly.
 ------------------------------------------------------------------------
 
 pressureHessianAction :
@@ -76,7 +77,7 @@ pressureHessianAction {F = F} E mode potential value =
   C3.complex3Scale
     (C3.complexNegate
       (C3.complexMultiply potential
-        (C3.bilinearDot3 (C3.modeVector E mode) value)))
+        (C3.bilinearDot3 value (C3.modeVector E mode))))
     (C3.modeVector E mode)
 
 minusITwiceScalar :
