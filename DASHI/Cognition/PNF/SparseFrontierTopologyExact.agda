@@ -1,11 +1,11 @@
 module DASHI.Cognition.PNF.SparseFrontierTopologyExact where
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Sigma using (Σ; _,_)
 
 ------------------------------------------------------------------------
 -- Canonical containment and overlapping evidence fibres are different edge
--- species.  A shared Interface carrier does not authorize one reduction law.
+-- species. A shared Interface carrier does not authorize one reduction law.
 ------------------------------------------------------------------------
 
 data ⊥ᶠ : Set where
@@ -55,7 +55,7 @@ canonicalReducerRejectsOverlap {topology = topology} boundary interface overlap 
 ------------------------------------------------------------------------
 -- Sparse dirty closure.
 --
--- Canonical child change may dirty exactly its canonical parent.  This is the
+-- Canonical child change may dirty exactly its canonical parent. This is the
 -- local transition rule that replaces a complete document-wide safety sweep.
 ------------------------------------------------------------------------
 
@@ -92,7 +92,7 @@ parentDirtyingHasNoUnrelatedInterfaces proof parentInterface =
 --
 -- If overlapping evidence is deliberately not consumed by the current root
 -- consumer, closing that evidence fibre cannot change the root observation.
--- A second root publication is therefore observationally idempotent.  This
+-- A second root publication is therefore observationally idempotent. This
 -- theorem does NOT say the evidence is irrelevant to every future consumer.
 ------------------------------------------------------------------------
 
