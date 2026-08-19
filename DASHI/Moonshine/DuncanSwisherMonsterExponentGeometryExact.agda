@@ -16,107 +16,91 @@ module DASHI.Moonshine.DuncanSwisherMonsterExponentGeometryExact where
 --
 -- DASHI CONTRIBUTION
 --
--- Instantiate the three Duncan--Swisher regimes on structurally different
--- primes and compare the geometric exponent with the existing authoritative
--- Monster exponent owner.  The non-Ogg controls p=37,43 use TWO elements in
--- S_p^2 for one Frobenius-conjugate pair; pair count and |S_p^2| are not
--- silently identified.
+-- Do NOT introduce a second generic Duncan--Swisher theorem owner.  Reuse
+-- DuncanSwisherTheorem12Exact and instantiate its exact case type on a small set
+-- of structurally different primes:
+--
+--   5,7,13 : singleton rational locus, different m_p and exponents;
+--   11     : multiple rational locus, m_11 = 4;
+--   37,43  : non-rational locus present, valuation zero.
+--
+-- The p=11 instance additionally bridges Duncan--Swisher's FULL automorphism
+-- convention back to the earlier Brandt lane: reduced orders 3,2 become full
+-- orders 6,4, so m_11=4.  Reciprocal stack sheets 2,3 are not m_11.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
 open import Data.Nat using (_≤_; z≤n; s≤s)
 
-import DASHI.Moonshine.DuncanSwisherSupersingularExponentDatumExact as DS
+import DASHI.Moonshine.DuncanSwisherTheorem12Exact as DS
 import DASHI.Moonshine.MonsterOrderExponentCorrectionExact as Monster
 import DASHI.Physics.Closure.MoonshinePrimeLaneReceiptSurface as Lane
 import DASHI.Moonshine.P11GeometricSupersingularCarrierExact as P11
 
 ------------------------------------------------------------------------
--- Small inequality witnesses for the published p>3 scope.
+-- Exact source-shaped cases.
 ------------------------------------------------------------------------
 
-fourLeFive : 4 ≤ 5
-fourLeFive = s≤s (s≤s (s≤s (s≤s z≤n)))
+p5Case :
+  DS.DuncanSwisherTheorem12Case
+    1 0 6 (Monster.monsterOrderExponent Lane.p5)
+p5Case = DS.oneRationalNoQuadratic
+  refl refl (s≤s z≤n) refl
 
-fourLeSeven : 4 ≤ 7
-fourLeSeven = s≤s (s≤s (s≤s (s≤s z≤n)))
+p7Case :
+  DS.DuncanSwisherTheorem12Case
+    1 0 4 (Monster.monsterOrderExponent Lane.p7)
+p7Case = DS.oneRationalNoQuadratic
+  refl refl (s≤s z≤n) refl
 
-fourLeEleven : 4 ≤ 11
-fourLeEleven = s≤s (s≤s (s≤s (s≤s z≤n)))
+p11Case :
+  DS.DuncanSwisherTheorem12Case
+    2 0 4 (Monster.monsterOrderExponent Lane.p11)
+p11Case = DS.manyRationalNoQuadratic
+  (s≤s (s≤s z≤n)) refl (s≤s z≤n) refl
 
-fourLeThirteen : 4 ≤ 13
-fourLeThirteen = s≤s (s≤s (s≤s (s≤s z≤n)))
+p13Case :
+  DS.DuncanSwisherTheorem12Case
+    1 0 2 (Monster.monsterOrderExponent Lane.p13)
+p13Case = DS.oneRationalNoQuadratic
+  refl refl (s≤s z≤n) refl
 
-------------------------------------------------------------------------
--- Source regimes and minimum FULL automorphism orders.
-------------------------------------------------------------------------
+-- |S_p^2| counts individual non-rational j-points.  One Frobenius pair
+-- therefore contributes TWO source points.
+p37Case : DS.DuncanSwisherTheorem12Case 1 2 2 0
+p37Case = DS.hasNonRationalSupersingular (s≤s z≤n) refl
 
-p5Geometry : DS.SupersingularExponentGeometry
-p5Geometry = DS.supersingular-exponent-geometry
-  5 1 0 6 DS.singletonRationalNoQuadratic
-  (DS.singletonEvidence refl refl)
-
-p7Geometry : DS.SupersingularExponentGeometry
-p7Geometry = DS.supersingular-exponent-geometry
-  7 1 0 4 DS.singletonRationalNoQuadratic
-  (DS.singletonEvidence refl refl)
-
-p11Geometry : DS.SupersingularExponentGeometry
-p11Geometry = DS.supersingular-exponent-geometry
-  11 2 0 4 DS.multipleRationalNoQuadratic
-  (DS.multipleEvidence (s≤s (s≤s z≤n)) refl)
-
-p13Geometry : DS.SupersingularExponentGeometry
-p13Geometry = DS.supersingular-exponent-geometry
-  13 1 0 2 DS.singletonRationalNoQuadratic
-  (DS.singletonEvidence refl refl)
-
--- One quadratic Frobenius pair means TWO elements of S_p^2.
-p37Geometry : DS.SupersingularExponentGeometry
-p37Geometry = DS.supersingular-exponent-geometry
-  37 1 2 2 DS.quadraticLocusPresent
-  (DS.quadraticEvidence (s≤s z≤n))
-
-p43Geometry : DS.SupersingularExponentGeometry
-p43Geometry = DS.supersingular-exponent-geometry
-  43 2 2 2 DS.quadraticLocusPresent
-  (DS.quadraticEvidence (s≤s z≤n))
+p43Case : DS.DuncanSwisherTheorem12Case 2 2 2 0
+p43Case = DS.hasNonRationalSupersingular (s≤s z≤n) refl
 
 ------------------------------------------------------------------------
--- Theorem 1.2, denominator-cleared, reproduces the Monster exponents.
+-- Denominator-cleared exponent equations are exact against the existing owner.
 ------------------------------------------------------------------------
 
 p5DoubledExponent :
-  2 * Monster.monsterOrderExponent Lane.p5
-  ≡ DS.doubledGeometricExponent p5Geometry
+  2 * Monster.monsterOrderExponent Lane.p5 ≡ 3 * 6
 p5DoubledExponent = refl
 
 p7DoubledExponent :
-  2 * Monster.monsterOrderExponent Lane.p7
-  ≡ DS.doubledGeometricExponent p7Geometry
+  2 * Monster.monsterOrderExponent Lane.p7 ≡ 3 * 4
 p7DoubledExponent = refl
 
 p11DoubledExponent :
-  2 * Monster.monsterOrderExponent Lane.p11
-  ≡ DS.doubledGeometricExponent p11Geometry
+  2 * Monster.monsterOrderExponent Lane.p11 ≡ 4
 p11DoubledExponent = refl
 
 p13DoubledExponent :
-  2 * Monster.monsterOrderExponent Lane.p13
-  ≡ DS.doubledGeometricExponent p13Geometry
+  2 * Monster.monsterOrderExponent Lane.p13 ≡ 3 * 2
 p13DoubledExponent = refl
 
-p37GeometricExponentZero : DS.doubledGeometricExponent p37Geometry ≡ 0
-p37GeometricExponentZero = refl
+p37DoubledExponent : 2 * 0 ≡ 0
+p37DoubledExponent = refl
 
-p43GeometricExponentZero : DS.doubledGeometricExponent p43Geometry ≡ 0
-p43GeometricExponentZero = refl
+p43DoubledExponent : 2 * 0 ≡ 0
+p43DoubledExponent = refl
 
 ------------------------------------------------------------------------
--- p=11 convention bridge to the earlier Brandt lane.
---
--- Voight gives reduced orders 3 and 2.  Full automorphism orders are therefore
--- 6 and 4; Duncan--Swisher m_11 is the minimum FULL order 4.
+-- p=11 convention bridge to #567's source-native automorphism carrier.
 ------------------------------------------------------------------------
 
 p11FullAutomorphismOrder : P11.P11SupersingularJ → Nat
@@ -135,46 +119,24 @@ p11EveryFullAutAtLeastFour P11.jZeroSS =
 p11EveryFullAutAtLeastFour P11.j1728SS =
   s≤s (s≤s (s≤s (s≤s z≤n)))
 
-p11MinimumFullAutOrderIsFour : DS.minFullAutomorphismOrder p11Geometry ≡ 4
-p11MinimumFullAutOrderIsFour = refl
+p11MinimumFullAutOrderAttained :
+  p11FullAutomorphismOrder P11.j1728SS ≡ 4
+p11MinimumFullAutOrderAttained = refl
 
 p11MpIsTwiceMinimumReducedOrder :
-  DS.minFullAutomorphismOrder p11Geometry
-  ≡ 2 * P11.reducedAutomorphismOrder P11.j1728SS
+  4 ≡ 2 * P11.reducedAutomorphismOrder P11.j1728SS
 p11MpIsTwiceMinimumReducedOrder = refl
 
 ------------------------------------------------------------------------
--- Published-law packages for the four positive-exponent probes.
+-- Boundary.
 ------------------------------------------------------------------------
-
-p5Law : DS.DuncanSwisherExponentLaw p5Geometry (Monster.monsterOrderExponent Lane.p5)
-p5Law = record
-  { DS.characteristicGreaterThanThree = fourLeFive
-  ; DS.doubledExponentExact = p5DoubledExponent
-  }
-
-p7Law : DS.DuncanSwisherExponentLaw p7Geometry (Monster.monsterOrderExponent Lane.p7)
-p7Law = record
-  { DS.characteristicGreaterThanThree = fourLeSeven
-  ; DS.doubledExponentExact = p7DoubledExponent
-  }
-
-p11Law : DS.DuncanSwisherExponentLaw p11Geometry (Monster.monsterOrderExponent Lane.p11)
-p11Law = record
-  { DS.characteristicGreaterThanThree = fourLeEleven
-  ; DS.doubledExponentExact = p11DoubledExponent
-  }
-
-p13Law : DS.DuncanSwisherExponentLaw p13Geometry (Monster.monsterOrderExponent Lane.p13)
-p13Law = record
-  { DS.characteristicGreaterThanThree = fourLeThirteen
-  ; DS.doubledExponentExact = p13DoubledExponent
-  }
 
 record DuncanSwisherMonsterExponentGeometryBoundary : Set where
   field
-    p5p7p11p13PositiveExponentRegimesConstructed : Bool
+    canonicalTheorem12OwnerReused : Bool
+    p5p7p11p13PositiveExponentCasesConstructed : Bool
     p37p43QuadraticZeroControlsConstructed : Bool
+    sourceQuadraticPointCountKeptDistinctFromPairCount : Bool
     p11FullVsReducedAutomorphismConventionBridged : Bool
     reciprocalStackSheetsUsedAsMp : Bool
     monsterExponentOwnerReused : Bool
@@ -182,8 +144,10 @@ record DuncanSwisherMonsterExponentGeometryBoundary : Set where
 canonicalDuncanSwisherMonsterExponentGeometryBoundary :
   DuncanSwisherMonsterExponentGeometryBoundary
 canonicalDuncanSwisherMonsterExponentGeometryBoundary = record
-  { p5p7p11p13PositiveExponentRegimesConstructed = true
+  { canonicalTheorem12OwnerReused = true
+  ; p5p7p11p13PositiveExponentCasesConstructed = true
   ; p37p43QuadraticZeroControlsConstructed = true
+  ; sourceQuadraticPointCountKeptDistinctFromPairCount = true
   ; p11FullVsReducedAutomorphismConventionBridged = true
   ; reciprocalStackSheetsUsedAsMp = false
   ; monsterExponentOwnerReused = true
