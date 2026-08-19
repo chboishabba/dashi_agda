@@ -3,36 +3,24 @@ module DASHI.Physics.YangMills.BalabanUnifiedContinuumEndpointMarginTransportExa
 ------------------------------------------------------------------------
 -- ROUND65: QUANTITATIVE SAME-LIMIT ENDPOINT TRANSPORT
 --
--- A unified continuum norm is useful only if its error modulus is strong enough
--- to preserve the strict endpoint inequalities required downstream.  Mere
--- convergence does not by itself preserve a positive lower bound with a named
--- margin, nor an exponential-clustering upper bound with a named envelope.
+-- One continuum approximation error epsilon is used for both endpoint
+-- consumers.  The exact ordered-ring arithmetic is:
 --
--- This file proves the exact arithmetic needed by the four-package strategy:
--- use ONE continuum approximation error epsilon at ONE sufficiently deep scale
--- for both consumers.
---
--- Interaction survival:
---
---   delta + epsilon <= kappa4_N
+--   delta + epsilon <= kappa4_N,
 --   kappa4_N - epsilon <= kappa4_infinity
---   -------------------------------------
---   delta <= kappa4_infinity.
+--       => delta <= kappa4_infinity;
 --
--- Clustering survival:
---
---   C_N(r) <= E(r) - epsilon
+--   C_N(r) <= E(r) - epsilon,
 --   C_infinity(r) <= C_N(r) + epsilon
---   ----------------------------------
---   C_infinity(r) <= E(r).
+--       => C_infinity(r) <= E(r).
 --
--- Thus a single same-family tail modulus can transport both non-Gaussianity
--- margin and physical separation decay, provided the finite-scale estimates
--- leave the corresponding buffer.  There is no proof-splicing between limits.
+-- Thus one same-family tail modulus transports both a non-Gaussianity margin
+-- and a physical clustering envelope whenever the finite-scale estimates leave
+-- the corresponding buffer.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base as ℚ using (ℚ; _+_; _-_; _≤_)
+open import Data.Rational.Base as ℚ using (ℚ; _+_; _-_; _≤_; -_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (subst)
@@ -46,17 +34,19 @@ interactionMarginSurvivesContinuumError :
   margin ≤ limitValue
 interactionMarginSurvivesContinuumError margin error finiteValue limitValue
     bufferedFinite approximation =
-  ℚP.≤-trans
-    (subst
-      (λ upper → margin ≤ upper)
-      (ℚRing.solve-∀ margin error)
-      (ℚP.+-monoʳ-≤ error bufferedFinite))
-    approximation
-  where
-  -- Adding -error to margin+error <= finiteValue gives margin <= finite-error.
-  -- The standard rational monotonicity theorem is used in the helper below.
-  ℚP.+-monoʳ-≤ : ∀ shift {left right} → left ≤ right → left + shift ≤ right + shift
-  ℚP.+-monoʳ-≤ shift inequality = ℚP.+-mono-≤ inequality ℚP.≤-refl
+  let
+    shifted = ℚP.+-mono-≤ bufferedFinite ℚP.≤-refl
+    finiteMinus : margin ≤ finiteValue - error
+    finiteMinus =
+      subst
+        (λ lower → lower ≤ finiteValue - error)
+        (ℚRing.solve-∀ margin error)
+        (subst
+          (λ upper → (margin + error) + (- error) ≤ upper)
+          (ℚRing.solve-∀ finiteValue error)
+          shifted)
+  in
+  ℚP.≤-trans finiteMinus approximation
 
 clusteringEnvelopeSurvivesContinuumError :
   (error finiteValue limitValue envelope : ℚ) →
@@ -65,18 +55,16 @@ clusteringEnvelopeSurvivesContinuumError :
   limitValue ≤ envelope
 clusteringEnvelopeSurvivesContinuumError error finiteValue limitValue envelope
     bufferedFinite approximation =
-  ℚP.≤-trans approximation
-    (subst
-      (λ upper → finiteValue + error ≤ upper)
-      (ℚRing.solve-∀ envelope error)
-      (ℚP.+-monoˡ-≤ error bufferedFinite))
-  where
-  ℚP.+-monoˡ-≤ : ∀ shift {left right} → left ≤ right → shift + left ≤ shift + right
-  ℚP.+-monoˡ-≤ shift inequality = ℚP.+-mono-≤ ℚP.≤-refl inequality
-
-------------------------------------------------------------------------
--- Same-scale, same-error package consumed by the unified continuum theorem.
-------------------------------------------------------------------------
+  let
+    shifted = ℚP.+-mono-≤ bufferedFinite ℚP.≤-refl
+    finitePlus : finiteValue + error ≤ envelope
+    finitePlus =
+      subst
+        (λ upper → finiteValue + error ≤ upper)
+        (ℚRing.solve-∀ envelope error)
+        shifted
+  in
+  ℚP.≤-trans approximation finitePlus
 
 record SameScaleEndpointMargins (Separation : Set) : Set₁ where
   field
@@ -126,9 +114,5 @@ sameLimitClusteringEnvelope dataSet separation =
 sameLimitEndpointMarginTransportLevel : ProofLevel
 sameLimitEndpointMarginTransportLevel = machineChecked
 
--- Physical input remaining: obtain the SAME continuum error modulus from the
--- unified Yang--Mills polymer/Schwinger norm and finite-scale margins/buffers
--- from the literal RG family.  The order arithmetic above is no longer part of
--- the research frontier.
 physicalUnifiedEndpointMarginsLevel : ProofLevel
 physicalUnifiedEndpointMarginsLevel = conditional
