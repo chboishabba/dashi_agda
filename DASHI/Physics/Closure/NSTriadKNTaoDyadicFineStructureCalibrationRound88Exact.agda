@@ -62,7 +62,7 @@ open import Agda.Builtin.Nat using (Nat; suc)
 open import Data.Rational.Base using (ℚ; 1ℚ; _*_)
 import Data.Integer.Base as Int
 import Data.Rational.Tactic.RingSolver as Ring
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Physics.Closure.NSTriadKNHHBadSharpDyadicGainRound33Exact as Dyadic
 
@@ -122,8 +122,6 @@ normalizedDegreeOneResidualHalves shell =
       (Dyadic.successorInverseDyadicScale shell)
       (cong (Dyadic.half *_)
         (sym (normalizedDegreeOneResidualIsInverseShell shell))))
-  where
-  open import Relation.Binary.PropositionalEquality using (sym)
 
 record DegreeOneResidualEnvelope : Set where
   constructor degree-one-residual-envelope
