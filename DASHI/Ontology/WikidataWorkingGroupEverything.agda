@@ -54,10 +54,12 @@ import DASHI.Cognition.PNF.EditTransportLeafLocalityExact
 import DASHI.Foundations.Base369SignedMembershipExact
 import DASHI.Foundations.TernaryNativeMinimalityExact
 import DASHI.Foundations.BalancedTernaryAntipodalOrbitExact
+import DASHI.Foundations.BalancedTernaryAntipodalResidualCodecExact
 import DASHI.Foundations.BalancedTernaryNineZeroFibreCountExact
 import DASHI.Foundations.Base369InteractionAntipodalFibreExact
 import DASHI.Foundations.Base369InteractionObserverJoinExact
 import DASHI.Foundations.Base369NineCoordinateAggregateBridgeExact
+import DASHI.Foundations.TernaryNineAntipodalD4SeparationExact
 import DASHI.Cognition.PNF.BinaryBalancedTernaryAggregateLossExact
 
 -- Positive-description products versus dependent/fibred object construction.
