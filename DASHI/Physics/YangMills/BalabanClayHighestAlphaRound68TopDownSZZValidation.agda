@@ -1,21 +1,19 @@
 module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound68TopDownSZZValidation where
 
 ------------------------------------------------------------------------
--- ROUND68 FOCUSED ROOT: TOP-DOWN CLAY + BALABAN -> SZZ HANDOFF
+-- ROUND68 FOCUSED ROOT: TOP-DOWN CLAY + BALABAN/SZZ CROSSOVER AUDIT
 --
--- No frontier leaf count is authoritative here.  The literal Round67 Clay
--- construction remains the endpoint.  Round68 verifies two sharper facts:
+-- No frontier leaf count is authoritative.  Round68 establishes:
 --
--- (1) the five current theorem ROLES cover every literal Clay requirement on
---     the same construction object, with no final endpoint-identification axiom;
+-- * the five theorem ROLES cover every literal Round67 Clay requirement;
+-- * Wilson/SZZ normalization and finite RG crossover are exact;
+-- * Wilson+remainder Bakry--Emery positivity is an exact Hessian perturbation;
+-- * BUT the UV->IR handoff is valid only if the rigorous source windows overlap.
 --
--- (2) the physical mass-gap role has a shorter candidate producer than an
---     independent terminal spectral theorem: run the source-normalized Balaban
---     RG until the coarse inverse coupling and the unified-norm Hessian remainder
---     enter the Shen--Zhu--Zhu positive-curvature region, then use the published
---     functional-inequality / derivative-propagation theorem at that actual
---     coarse scale and pull the resulting gap through the existing same-object
---     transfer/continuum machinery.
+-- Thus SZZ is a conditional shorter producer of the terminal mass-gap role,
+-- not an automatic elimination of that role.  If the Bałaban active threshold
+-- lies above the SZZ window, the programme must prove additional intermediate-
+-- coupling RG/Hessian control instead of silently crossing the gap.
 ------------------------------------------------------------------------
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -27,6 +25,7 @@ import DASHI.Physics.YangMills.BalabanUnifiedPolymerSchwingerNormExact as Unifie
 import DASHI.Physics.YangMills.BalabanSZZWilsonCrossoverTerminalGapExact as Cross
 import DASHI.Physics.YangMills.BalabanSZZHessianPerturbationExact as Hess
 import DASHI.Physics.YangMills.BalabanSZZSourceNativeHessianHandoffExact as Handoff
+import DASHI.Physics.YangMills.BalabanSZZActiveWindowOverlapNecessaryExact as Overlap
 import DASHI.Physics.YangMills.BalabanStrongCouplingPoincareBudgetExact as SZZ
 import DASHI.Physics.YangMills.ShenZhuZhuGaugeInvariantGaugeFixingBridgeExact as GaugeFix
 import DASHI.Physics.YangMills.BalabanFiniteScaleFourthCumulantMomentBudgetExact as Cumulant
@@ -59,8 +58,9 @@ round68HessianPerturbationLevel = Hess.hessianPerturbationBakryEmeryLevel
 round68SourceNativeSZZHandoffLevel : ProofLevel
 round68SourceNativeSZZHandoffLevel = Handoff.sourceNativeSZZHessianHandoffCompilerLevel
 
--- The exact SU(2), d=4 Poincare coefficient theorem itself is exported by SZZ
--- as `configuredSU2PoincareCoefficientExact`; this root records its status.
+round68WindowOverlapNecessityLevel : ProofLevel
+round68WindowOverlapNecessityLevel = Overlap.balabanSZZWindowOverlapNecessityLevel
+
 round68PublishedSZZPoincareArithmeticLevel : ProofLevel
 round68PublishedSZZPoincareArithmeticLevel = machineChecked
 
@@ -87,11 +87,16 @@ round68CompactSimpleCoverageLevel = Groups.compactSimpleClassificationEliminatio
 ------------------------------------------------------------------------
 -- LIVE ANALYTIC FRONTIER AFTER ROUND68
 --
---   beta lower bound + same effective-density Wilson identification
---     + unified-norm Hessian remainder + finite crossover
---       -> positive coarse Bakry--Emery margin on the actual effective action.
+-- For the SZZ shortcut to discharge the terminal spectral input, prove:
 --
--- The SZZ Poincare/commutator machinery can then supply terminal spatial decay.
+--   (A) a source-valid active scale reaches the SZZ inverse-coupling window;
+--   (B) the SAME CMP119/CMP122 effective density is Wilson(u_n)+R_n;
+--   (C) the unified norm bounds Hess R_n by rho_n;
+--   (D) K_W(u_n)-rho_n > 0.
+--
+-- If (A) fails for the published Bałaban small-coupling threshold, replace it
+-- by a new intermediate-coupling RG/Hessian theorem.  Nothing in this root
+-- promotes fixed-spacing strong-coupling clustering directly to Clay.
 ------------------------------------------------------------------------
 
 round68PhysicalHistoryDependentBetaEnclosureLevel : ProofLevel
@@ -100,6 +105,9 @@ round68PhysicalHistoryDependentBetaEnclosureLevel =
 
 round68PhysicalUnifiedNormLevel : ProofLevel
 round68PhysicalUnifiedNormLevel = Unified.physicalYMUnifiedPolymerNormProducerLevel
+
+round68PhysicalSourceWindowOverlapLevel : ProofLevel
+round68PhysicalSourceWindowOverlapLevel = Overlap.physicalBalabanSZZWindowOverlapLevel
 
 round68PhysicalSourceNativeSZZHessianHandoffLevel : ProofLevel
 round68PhysicalSourceNativeSZZHessianHandoffLevel =
