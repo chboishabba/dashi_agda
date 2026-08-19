@@ -25,6 +25,7 @@ module DASHI.Physics.YangMills.BalabanUnifiedCompletedStateProjectionExact where
 -- DOI: 10.1016/B0-12-512666-2/00071-7.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
