@@ -74,6 +74,7 @@ halfBelowThreeQuarters =
       in
       ℚP.nonNegative⁻¹ slack
 
+    shifted : half + 0ℚ ≤ half + slack
     shifted = ℚP.+-mono-≤ ℚP.≤-refl slackNonnegative
   in
   subst
@@ -91,22 +92,30 @@ halfPowerBelowThreeQuarterPower (suc n) =
   let
     induction = halfPowerBelowThreeQuarterPower n
 
+    scaledHalf :
+      half * Geo.halfPower n
+      ≤ half * Weighted.threeQuartersPower n
     scaledHalf = Norm.scaleNonnegative half halfNonnegative induction
 
-    scaledBase = Norm.scaleNonnegative
+    scaledBaseRaw :
+      Weighted.threeQuartersPower n * half
+      ≤ Weighted.threeQuartersPower n * Weighted.threeQuarters
+    scaledBaseRaw = Norm.scaleNonnegative
       (Weighted.threeQuartersPower n)
       (Weighted.threeQuartersPowerNonnegative n)
       halfBelowThreeQuarters
+
+    scaledBase :
+      half * Weighted.threeQuartersPower n
+      ≤ Weighted.threeQuartersPower n * Weighted.threeQuarters
+    scaledBase =
+      subst
+        (λ left → left
+          ≤ Weighted.threeQuartersPower n * Weighted.threeQuarters)
+        (ℚRing.solve-∀ (Weighted.threeQuartersPower n))
+        scaledBaseRaw
   in
-  ℚP.≤-trans
-    (subst
-      (λ right → Geo.halfPower (suc n) ≤ right)
-      (ℚRing.solve-∀ (Geo.halfPower n) (Weighted.threeQuartersPower n))
-      scaledHalf)
-    (subst
-      (λ right → half * Weighted.threeQuartersPower n ≤ right)
-      (ℚRing.solve-∀ (Weighted.threeQuartersPower n))
-      scaledBase)
+  ℚP.≤-trans scaledHalf scaledBase
 
 replacementMultiplicityCost : Nat → ℚ
 replacementMultiplicityCost n =
@@ -124,27 +133,45 @@ replacementMultiplicityAbsorbed (suc n) =
   let
     induction = replacementMultiplicityAbsorbed n
 
+    halfScaledInduction :
+      half * replacementMultiplicityCost n
+      ≤ half * (two * Weighted.threeQuartersPower n)
     halfScaledInduction = Norm.scaleNonnegative
       half halfNonnegative induction
 
     powerComparison = halfPowerBelowThreeQuarterPower n
+    halfScaledPower :
+      half * Geo.halfPower n
+      ≤ half * Weighted.threeQuartersPower n
     halfScaledPower = Norm.scaleNonnegative
       half halfNonnegative powerComparison
 
-    combined = ℚP.+-mono-≤ halfScaledPower halfScaledInduction
-  in
-  subst
-    (λ left → left ≤ two * Weighted.threeQuartersPower (suc n))
-    (ℚRing.solve-∀
-      (Sums.natAsRational n)
-      (Geo.halfPower n))
-    (subst
-      (λ right →
-        half * Geo.halfPower n
+    combined :
+      half * Geo.halfPower n
         + half * replacementMultiplicityCost n
-        ≤ right)
-      (ℚRing.solve-∀ (Weighted.threeQuartersPower n))
-      combined)
+      ≤
+      half * Weighted.threeQuartersPower n
+        + half * (two * Weighted.threeQuartersPower n)
+    combined = ℚP.+-mono-≤ halfScaledPower halfScaledInduction
+
+    normalized :
+      replacementMultiplicityCost (suc n)
+      ≤ two * Weighted.threeQuartersPower (suc n)
+    normalized =
+      subst
+        (λ left → left ≤ two * Weighted.threeQuartersPower (suc n))
+        (ℚRing.solve-∀
+          (Sums.natAsRational n)
+          (Geo.halfPower n))
+        (subst
+          (λ right →
+            half * Geo.halfPower n
+              + half * replacementMultiplicityCost n
+            ≤ right)
+          (ℚRing.solve-∀ (Weighted.threeQuartersPower n))
+          combined)
+  in
+  normalized
 
 markedReplacementMultiplicityAbsorptionLevel : ProofLevel
 markedReplacementMultiplicityAbsorptionLevel = machineChecked
