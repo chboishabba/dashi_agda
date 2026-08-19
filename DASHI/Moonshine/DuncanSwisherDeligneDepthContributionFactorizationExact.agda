@@ -34,10 +34,12 @@ module DASHI.Moonshine.DuncanSwisherDeligneDepthContributionFactorizationExact w
 
 open import DASHI.Core.Prelude
 open import Data.Nat using (_≤_; _+_; _*_)
+open import Data.Nat.Primality using (Prime)
 import Data.Nat.Properties as NatP
 
 import DASHI.Moonshine.DuncanSwisherMonsterExponentFormulaExact as DS
 import DASHI.Moonshine.DuncanSwisherModularValuationDepthMechanismExact as Modular
+import DASHI.Moonshine.PrimeLevelDeligneRapoportFrickeCombinatoricsExact as DR
 
 ------------------------------------------------------------------------
 -- Generic bridge between the source's minimum automorphism order and an actual
@@ -45,7 +47,7 @@ import DASHI.Moonshine.DuncanSwisherModularValuationDepthMechanismExact as Modul
 ------------------------------------------------------------------------
 
 record DeligneMinimumDepthWitness
-    {p : Nat} {prime : Data.Nat.Primality.Prime p} {ge5 : 5 ≤ p}
+    {p : Nat} {prime : Prime p} {ge5 : 5 ≤ p}
     (E : DS.DuncanSwisherExponentAuthority p prime ge5) : Set where
   constructor deligne-minimum-depth-witness
   field
@@ -64,12 +66,11 @@ cancelDouble {a} {b} equality = NatP.*-cancelˡ-≡ a b 2 equality
 ------------------------------------------------------------------------
 
 frickeContributionEqualsMinimumDepth :
-  {p : Nat} {prime : Data.Nat.Primality.Prime p} {ge5 : 5 ≤ p} →
+  {p : Nat} {prime : Prime p} {ge5 : 5 ≤ p} →
   (E : DS.DuncanSwisherExponentAuthority p prime ge5) →
   (M : Modular.DuncanSwisherModularValuationAuthority p prime ge5 E) →
   (D : DeligneMinimumDepthWitness E) →
-  DASHI.Moonshine.PrimeLevelDeligneRapoportFrickeCombinatoricsExact.pairedCount
-    (DS.sharedGeometry p prime ge5) ≡ 0 →
+  DR.pairedCount (DS.sharedGeometry p prime ge5) ≡ 0 →
   Modular.frickeContribution M ≡ minimumFirstPoleDepth D
 frickeContributionEqualsMinimumDepth E M D pairZero =
   cancelDouble
@@ -105,15 +106,13 @@ data DeligneDepthContributionPattern
 ------------------------------------------------------------------------
 
 deligneDepthContributionPattern :
-  {p : Nat} {prime : Data.Nat.Primality.Prime p} {ge5 : 5 ≤ p} →
+  {p : Nat} {prime : Prime p} {ge5 : 5 ≤ p} →
   (E : DS.DuncanSwisherExponentAuthority p prime ge5) →
   (M : Modular.DuncanSwisherModularValuationAuthority p prime ge5 E) →
   (D : DeligneMinimumDepthWitness E) →
   (case : DS.DuncanSwisherExponentCase
-    (DASHI.Moonshine.PrimeLevelDeligneRapoportFrickeCombinatoricsExact.fixedCount
-      (DS.sharedGeometry p prime ge5))
-    (DASHI.Moonshine.PrimeLevelDeligneRapoportFrickeCombinatoricsExact.pairedCount
-      (DS.sharedGeometry p prime ge5))
+    (DR.fixedCount (DS.sharedGeometry p prime ge5))
+    (DR.pairedCount (DS.sharedGeometry p prime ge5))
     (DS.monsterValuation E)
     (DS.minimumAutomorphismOrder E)) →
   DeligneDepthContributionPattern
@@ -141,19 +140,22 @@ deligneDepthContributionPattern E M D
   case@(DS.quadraticPresent pairPositive valuationZero minTwo) =
   let
     allZero = Modular.modularResidualClassification E M case
+    primeZero = proj₁ (proj₂ allZero)
+    squareZero = proj₂ (proj₂ allZero)
+    residualZero :
+      Modular.primeLevelContribution M + Modular.squareLevelContribution M ≡ 0
+    residualZero rewrite primeZero | squareZero = refl
   in
-  quadraticPattern (proj₁ allZero) (trans (proj₁ (proj₂ allZero)) (sym (NatP.+-identityʳ 0)))
+  quadraticPattern (proj₁ allZero) residualZero
 
 ------------------------------------------------------------------------
 -- p=11 exact depth witness: m_11=4, so d_min=2.
 ------------------------------------------------------------------------
 
 import DASHI.Moonshine.DuncanSwisherDeligneAutomorphismDepthBridgeExact as AutDepth
-import DASHI.Moonshine.DuncanSwisherMonsterExponentGeometryExact as Geo
 import DASHI.Physics.Closure.MoonshinePrimeLaneReceiptSurface as Lane
 import DASHI.Moonshine.MonsterOrderExponentCorrectionExact as Monster
 
--- Concrete arithmetic shadow of the generic bridge.
 p11DepthUnit : Nat
 p11DepthUnit = AutDepth.minimumFirstPoleDepth AutDepth.p11MinimumWitness
 
