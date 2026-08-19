@@ -38,6 +38,7 @@ import DASHI.Moonshine.DuncanSwisherDeligneAutomorphismDepthBridgeExact as Delig
 import DASHI.Moonshine.DuncanSwisherDeligneDepthContributionFactorizationExact as Factor
 import DASHI.Moonshine.DuncanSwisherExponentDepthHighestAlphaEverything as Depth
 import DASHI.Moonshine.MonsterOrderExponentCorrectionExact as Monster
+import DASHI.Moonshine.P11GeometricSupersingularCarrierExact as P11
 import DASHI.Physics.Closure.MoonshinePrimeLaneReceiptSurface as Lane
 
 ------------------------------------------------------------------------
@@ -54,8 +55,7 @@ canonicalTheorem12StillOwnsSourceShapeRegression = refl
 ------------------------------------------------------------------------
 
 p11FullAutMinimumRegression :
-  Geometry.p11FullAutomorphismOrder DASHI.Moonshine.P11GeometricSupersingularCarrierExact.j1728SS
-  ≡ 4
+  Geometry.p11FullAutomorphismOrder P11.j1728SS ≡ 4
 p11FullAutMinimumRegression = Geometry.p11J1728FullAutIsFour
 
 p11DeligneDepthRegression :
@@ -87,9 +87,17 @@ p11ModularGeometryMeetRegression :
   2 * Weld.modularContributionTotal Lane.p11 Monster.p11AboveThree ≡ 4
 p11ModularGeometryMeetRegression = Weld.p11ModularGeometryMeet
 
-p5ContributionTripleRegression :
-  Weld.p5ContributionTriple ≡ Weld.p5ContributionTriple
-p5ContributionTripleRegression = refl
+p5FrickeContributionRegression :
+  Monster.frickeLevel (Monster.modularContribution Lane.p5 Monster.p5AboveThree) ≡ 3
+p5FrickeContributionRegression = refl
+
+p5PrimeLevelContributionRegression :
+  Monster.primeLevel (Monster.modularContribution Lane.p5 Monster.p5AboveThree) ≡ 5
+p5PrimeLevelContributionRegression = refl
+
+p5SquareLevelContributionRegression :
+  Monster.squareLevel (Monster.modularContribution Lane.p5 Monster.p5AboveThree) ≡ 1
+p5SquareLevelContributionRegression = refl
 
 ------------------------------------------------------------------------
 -- Strict support-vs-depth refinement.
