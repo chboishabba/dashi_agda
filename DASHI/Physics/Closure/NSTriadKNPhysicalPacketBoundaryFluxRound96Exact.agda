@@ -46,9 +46,10 @@ module DASHI.Physics.Closure.NSTriadKNPhysicalPacketBoundaryFluxRound96Exact whe
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
@@ -80,8 +81,6 @@ packetTriadTransfer E I selected velocity tau =
   + selectTransfer (selected (Physical.q tau))
       (Round38.orderedPairPower E I (Orbit.qEnergyLeg tau) velocity)
 
--- Retain exactly the mixed-side interactions.  The all-in and all-out cases
--- are erased before any later majorization.
 boundaryTriadTransfer :
   (E : C3.IntegerEmbedding F) →
   (I : C3.ModeInverseSquare F E) →
@@ -126,10 +125,8 @@ allSelectedTriadPacketTransferZero E I selected velocity
       + Round38.orderedPairPower E I (Orbit.qEnergyLeg tau) velocity
     ≡ TriadEnergy.literalThreeLegPower E I tau velocity
   symThreeLeg E I tau velocity =
-    let
-      forward = Round38.threeLegPowerIsPairOrbitSum E I tau velocity
-    in
-    symEq forward
+    let forward = Round38.threeLegPowerIsPairOrbitSum E I tau velocity
+    in symEq forward
 
   symEq : ∀ {a b : ℚ} → a ≡ b → b ≡ a
   symEq refl = refl
@@ -182,6 +179,10 @@ sumBoundaryTransfer E I selected velocity (tau ∷ rest) =
   boundaryTriadTransfer E I selected velocity tau
     + sumBoundaryTransfer E I selected velocity rest
 
+cong₂AddQ : ∀ {a b c d : ℚ} →
+  a ≡ b → c ≡ d → a + c ≡ b + d
+cong₂AddQ refl refl = refl
+
 finitePacketTransferIsBoundaryFlux :
   (E : C3.IntegerEmbedding F) →
   (I : C3.ModeInverseSquare F E) →
@@ -196,16 +197,11 @@ finitePacketTransferIsBoundaryFlux E I selected velocity
     reality divergenceFree [] = refl
 finitePacketTransferIsBoundaryFlux E I selected velocity
     reality divergenceFree (tau ∷ rest) =
-  cong₂Q _+_
+  cong₂AddQ
     (packetTriadTransferEqualsBoundaryTransfer
       E I selected velocity reality divergenceFree tau)
     (finitePacketTransferIsBoundaryFlux
       E I selected velocity reality divergenceFree rest)
-  where
-  cong₂Q :
-    (ℚ → ℚ → ℚ) → ∀ {a b c d : ℚ} →
-    a ≡ b → c ≡ d → a + c ≡ b + d
-  cong₂Q f refl refl = refl
 
 literalCutoffPacketTransferIsBoundaryFlux :
   (E : C3.IntegerEmbedding F) →
@@ -214,7 +210,7 @@ literalCutoffPacketTransferIsBoundaryFlux :
   (velocity : Z3.FourierMode → C3.Complex3 F) →
   Audit.RealityCondition velocity →
   Audit.DivergenceFreeCondition E velocity →
-  (cutoff : Agda.Builtin.Nat.Nat) →
+  (cutoff : Nat) →
   sumPacketTransfer E I selected velocity
     (Physical.physicalTriadEnumeration cutoff)
   ≡ sumBoundaryTransfer E I selected velocity
