@@ -6,8 +6,9 @@ module DASHI.EverythingTopDownObservationCalculus where
 -- This aggregate does not create a parallel DASHI framework.  It exposes the
 -- smallest current generic spine assembled from existing observer, future-
 -- language, provenance, hyperfabric and authority owners plus the new static
--- consumer-descent, canonical-kernel, context/base-change, residual-symmetry,
--- orbit/stabilizer and finite representation-cost theorems.
+-- consumer-descent, canonical-kernel, context/base-change, consumer-relevant
+-- residual-necessity, residual-symmetry, orbit/stabilizer and finite
+-- representation-cost theorems.
 ------------------------------------------------------------------------
 
 -- Static observation/refinement and exact consumer descent/minimal quotient.
@@ -17,6 +18,7 @@ import DASHI.Core.ConsumerDescentMinimalObserverExact
 import DASHI.Core.ConsumerKernelQuotientPresentationExact
 import DASHI.Core.ConsumerQuotientBaseChangeExact
 import DASHI.Core.ConsumerQuotientBaseChangeRegression
+import DASHI.Core.ConsumerIndexedResidualRefinementExact
 import DASHI.Core.TopDownObservationCalculusExact
 
 -- Context-indexed carriers and exact finite regression.
@@ -51,6 +53,7 @@ import DASHI.Cognition.PNF.ObserverSeparationAuthorityBoundaryExact
 ------------------------------------------------------------------------
 -- Aggregate boundary
 --
+-- A consumer-relevant collision forces every sufficient repair to split it.
 -- Static consumer sufficiency != exact reconstruction.
 -- Static minimal observer != future-language minimal quotient.
 -- Context-local adequacy != natural/base-change transport.
