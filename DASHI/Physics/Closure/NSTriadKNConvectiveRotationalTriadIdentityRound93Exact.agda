@@ -220,7 +220,9 @@ transverseTestKillsResonantGradient {F = F} E {p} {q} {k}
           (C3.complexMultiply (C3.bilinearDot3 uP uQ))
           (trans
             (Algebra.modePairRight E k testK)
-            (cong C3.complexConjugate transverse)))
+            (trans
+              (cong C3.complexConjugate transverse)
+              Algebra.complexConjugateZero)))
         (Algebra.complexMultiplyZeroRight (C3.bilinearDot3 uP uQ))))
 
 round93ConvectiveRotationalVectorIdentityClosed : Bool
