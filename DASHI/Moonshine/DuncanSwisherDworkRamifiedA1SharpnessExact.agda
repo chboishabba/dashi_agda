@@ -17,27 +17,25 @@ module DASHI.Moonshine.DuncanSwisherDworkRamifiedA1SharpnessExact where
 -- SOURCE SHAPE
 --
 -- Duncan--Swisher use Dwork Theorem 8.2 for the ordinary sharp first-pole
--- coefficient, and then Dwork Section 7.e for the exceptional Legendre local
--- coordinates
+-- coefficient, then Dwork Section 7.e for the exceptional Legendre coordinate:
 --
 --   J_1 + 744 ~ (lambda-lambda_0)^3  at j=0,
 --   J_1 - 984 ~ (lambda-lambda_0)^2  at j=1728.
 --
--- The exact sharpness mechanism therefore requires MORE than a ramification
--- integer.  One needs the Dwork depth-one local branch, a valuation-zero local
--- unit, and the source-native factorization of A_1 through the ramified branch.
+-- The faithful logical split is therefore
+--
+--   local J-difference = unit * LegendreBranch^e,
+--   v(unit)=0,
+--   v(LegendreBranch)=1,
+--   v(A_1)=v(local J-difference)       [Dwork sharpness transfer],
+--
+-- not the stronger claim that A_1 itself is literally the e-th branch power.
 --
 -- DASHI CONTRIBUTION
 --
--- The imported source authority below contains NO numeric A_1 depth field.
--- Once its structural local factorization is supplied, the generic ramified
--- valuation theorem derives
---
---   v_p(A_1) = ramification index,
---
--- and only then specializes to 3,2,1.  At p=11 this is further welded to the
--- existing source-native Brandt monodromy weight on the SAME supersingular
--- j-class carrier.
+-- The imported source authority contains NO numeric A_1 depth field.  The
+-- ramified local-coordinate depth is derived first; Dwork's analytic transfer
+-- then gives v_p(A_1)=e.  Only afterward do 3,2,1 appear as corollaries.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -56,19 +54,26 @@ record DworkLocalA1Factorization
 
     localUnit : PadicLocal
     dworkSharpBranch : PadicLocal
+    localJDifference : PadicLocal
     A1Coefficient : PadicLocal
 
     localUnitIsUnit : Ramified.valuation padicValuation localUnit ≡ 0
     dworkOrdinaryBranchSharp :
       Ramified.valuation padicValuation dworkSharpBranch ≡ 1
 
-    localRamifiedFactorization :
-      A1Coefficient
+    legendreRamifiedJFactorization :
+      localJDifference
       ≡ Ramified.mul padicValuation localUnit
           (Ramified.pow
             padicValuation
             dworkSharpBranch
             (Legendre.legendreJRamificationIndex t))
+
+    -- The genuinely analytic Dwork sharpness transfer.  This is weaker and
+    -- more source-faithful than postulating a literal factorization of A_1.
+    dworkA1TracksLocalJDepth :
+      Ramified.valuation padicValuation A1Coefficient
+      ≡ Ramified.valuation padicValuation localJDifference
 
 open DworkLocalA1Factorization public
 
@@ -76,22 +81,34 @@ postulate
   publishedDworkLocalA1Factorization :
     (t : Aut.SupersingularAutomorphismType) → DworkLocalA1Factorization t
 
-asRamifiedSharpCoefficient :
+asRamifiedLocalJCoefficient :
   (t : Aut.SupersingularAutomorphismType) →
   let A = publishedDworkLocalA1Factorization t
   in Ramified.RamifiedSharpCoefficient
       (padicValuation A)
       (Legendre.legendreJRamificationIndex t)
-asRamifiedSharpCoefficient t =
+asRamifiedLocalJCoefficient t =
   let A = publishedDworkLocalA1Factorization t
   in record
     { Ramified.localUnit = localUnit A
     ; Ramified.localBranch = dworkSharpBranch A
-    ; Ramified.coefficient = A1Coefficient A
+    ; Ramified.coefficient = localJDifference A
     ; Ramified.localUnitDepthZero = localUnitIsUnit A
     ; Ramified.localBranchDepthOne = dworkOrdinaryBranchSharp A
-    ; Ramified.coefficientFactorization = localRamifiedFactorization A
+    ; Ramified.coefficientFactorization = legendreRamifiedJFactorization A
     }
+
+sharpLocalJDepthIsRamification :
+  (t : Aut.SupersingularAutomorphismType) →
+  let A = publishedDworkLocalA1Factorization t
+  in Ramified.valuation (padicValuation A) (localJDifference A)
+      ≡ Legendre.legendreJRamificationIndex t
+sharpLocalJDepthIsRamification t =
+  let A = publishedDworkLocalA1Factorization t
+  in Ramified.ramifiedSharpCoefficientValuation
+      (padicValuation A)
+      (Legendre.legendreJRamificationIndex t)
+      (asRamifiedLocalJCoefficient t)
 
 sharpA1DepthIsRamification :
   (t : Aut.SupersingularAutomorphismType) →
@@ -100,10 +117,9 @@ sharpA1DepthIsRamification :
       ≡ Legendre.legendreJRamificationIndex t
 sharpA1DepthIsRamification t =
   let A = publishedDworkLocalA1Factorization t
-  in Ramified.ramifiedSharpCoefficientValuation
-      (padicValuation A)
-      (Legendre.legendreJRamificationIndex t)
-      (asRamifiedSharpCoefficient t)
+  in trans
+      (dworkA1TracksLocalJDepth A)
+      (sharpLocalJDepthIsRamification t)
 
 jZeroA1DepthIsThree :
   let A = publishedDworkLocalA1Factorization Aut.jZeroExceptional
@@ -139,10 +155,6 @@ sharpA1DepthDoublesToFullAutomorphismOrder t =
     (cong (λ d → 2 * d) (sharpA1DepthMatchesExistingFirstPoleDepth t))
     (Aut.firstPoleDepthDoublesToFullAutomorphismOrder t)
 
-------------------------------------------------------------------------
--- Same-object p=11 weld: Dwork depth = Legendre ramification = Brandt weight.
-------------------------------------------------------------------------
-
 p11A1DepthIsBrandtMonodromyWeight :
   (c : Geo.P11SupersingularJ) →
   let A = publishedDworkLocalA1Factorization (Legendre.p11AutType c)
@@ -166,7 +178,9 @@ p11J1728A1DepthWeightIsTwo = j1728A1DepthIsTwo
 record DuncanSwisherDworkRamifiedA1SharpnessBoundary : Set where
   field
     dworkOrdinaryBranchDepthOneImported : Bool
-    legendreRamifiedLocalFactorizationImported : Bool
+    legendreRamifiedJCoordinateFactorizationImported : Bool
+    dworkA1ToLocalJDepthTransferImported : Bool
+    literalA1PowerFactorizationAssumed : Bool
     numericA1DepthTableImportedSeparately : Bool
     ramificationToExactA1DepthDerived : Bool
     exactJZeroDepthThreeDerived : Bool
@@ -180,7 +194,9 @@ canonicalDuncanSwisherDworkRamifiedA1SharpnessBoundary :
   DuncanSwisherDworkRamifiedA1SharpnessBoundary
 canonicalDuncanSwisherDworkRamifiedA1SharpnessBoundary = record
   { dworkOrdinaryBranchDepthOneImported = true
-  ; legendreRamifiedLocalFactorizationImported = true
+  ; legendreRamifiedJCoordinateFactorizationImported = true
+  ; dworkA1ToLocalJDepthTransferImported = true
+  ; literalA1PowerFactorizationAssumed = false
   ; numericA1DepthTableImportedSeparately = false
   ; ramificationToExactA1DepthDerived = true
   ; exactJZeroDepthThreeDerived = true
