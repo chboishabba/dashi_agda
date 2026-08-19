@@ -13,13 +13,23 @@ module DASHI.Moonshine.MoonshineEarnHistoricalWeldExact where
 -- and then checked 196883 + 1 = 196884.
 --
 -- The arithmetic is genuine; the historical comments promoted it too far by
--- calling the chain itself a proof/explanation of Monstrous Moonshine.
+-- calling the chain itself a proof/explanation of Monstrous Moonshine and by
+-- interpreting the +1 as an external observer.
 --
 -- MODERN PRIMARY SOURCES / CONTEXT
 --
 -- John H. Conway and Simon P. Norton,
 -- "Monstrous Moonshine", Bull. London Math. Soc. 11 (1979), 308--339.
 -- DOI: 10.1112/blms/11.3.308.
+--
+-- Igor B. Frenkel, James Lepowsky and Arne Meurman,
+-- "Vertex Operator Algebras and the Monster", Pure and Applied Mathematics
+-- 134, Academic Press, 1988. ISBN 978-0-12-267065-7; no DOI assigned.
+--
+-- Richard E. Borcherds,
+-- "Monstrous moonshine and monstrous Lie superalgebras",
+-- Invent. Math. 109 (1992), 405--444.
+-- DOI: 10.1007/BF01232032.
 --
 -- John F. R. Duncan and Ken Ono,
 -- "The Jack Daniels Problem", J. Number Theory 161 (2016), 230--239.
@@ -41,10 +51,19 @@ module DASHI.Moonshine.MoonshineEarnHistoricalWeldExact where
 -- (2) lies on the repository's independently computed Fricke-genus-zero
 --     control locus.
 --
--- Separately, the endpoint 196883 + 1 = 196884 is welded to the modern
--- JCoefficientCharacterBridge.  No implication from the FRACTRAN chain to
--- VOA construction, McKay--Thompson series, Hauptmodul status, Conway--Norton,
--- or the Monster representation is inferred.
+-- Separately, the endpoint 196883 + 1 = 196884 is welded to both the modern
+-- JCoefficientCharacterBridge and the source-backed Moonshine weight-two
+-- decomposition
+--
+--   V^natural_2 = conformal line (dimension 1)
+--                 + nontrivial Monster sector (dimension 196883).
+--
+-- Thus the historical +1 receives its correct in-repo typed interpretation:
+-- the conformal/Virasoro line inside weight two, not an external observer.
+--
+-- No implication from the FRACTRAN chain to VOA construction,
+-- McKay--Thompson series, Hauptmodul status, Conway--Norton, or the Monster
+-- representation is inferred.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -53,6 +72,7 @@ open import Data.Nat.Divisibility using (_∣_; divides)
 import MoonshineEarn as Earn
 import DASHI.Moonshine.JCoefficientCharacterBridge as J
 import DASHI.Moonshine.MonsterOrderDivisibilityExact as Monster
+import DASHI.Moonshine.MoonshineOrbifoldWeightTwoDecompositionExact as Weight2
 import DASHI.Moonshine.OggPrimeControlMatrixExact as Matrix
 import DASHI.Moonshine.PrimeFrickeGenusControlExact as Fricke
 
@@ -75,6 +95,33 @@ historicalEndpointPlusOne = Earn.observer
 
 modernFirstCoefficientArithmetic : 196884 ≡ 1 + 196883
 modernFirstCoefficientArithmetic = J.firstCoefficientArithmetic
+
+------------------------------------------------------------------------
+-- Modern typed interpretation of the endpoint dimensions.
+------------------------------------------------------------------------
+
+historicalProductEqualsModernNontrivialWeightTwoDimension :
+  47 * 59 * 71 ≡ Weight2.monsterNontrivialWeightTwoDimension
+historicalProductEqualsModernNontrivialWeightTwoDimension =
+  trans historicalTargetProduct
+    (sym Weight2.monsterNontrivialWeightTwoDimensionIs196883)
+
+historicalPlusOneEqualsConformalLineDimension :
+  1 ≡ Weight2.conformalLineDimension
+historicalPlusOneEqualsConformalLineDimension = refl
+
+historicalEndpointReconstructsModernWeightTwo :
+  47 * 59 * 71 + Weight2.conformalLineDimension
+  ≡ Weight2.moonshineWeightTwoDimension
+historicalEndpointReconstructsModernWeightTwo =
+  trans
+    (cong (λ n → n + Weight2.conformalLineDimension)
+      historicalTargetProduct)
+    (trans refl (sym Weight2.moonshineWeightTwoDimensionIs196884))
+
+historicalObserverNameDoesNotIdentifyExternalObserver :
+  Weight2.conformalLineDimension ≡ 1
+historicalObserverNameDoesNotIdentifyExternalObserver = refl
 
 ------------------------------------------------------------------------
 -- Exact divisibility by the ACTUAL Monster order, with no MonsterPrimeLane
@@ -171,6 +218,8 @@ record MoonshineEarnModernBoundary : Set where
     endpointProductIs196883 : Bool
     endpointPlusOneIs196884 : Bool
     modernFirstCoefficientArithmeticReused : Bool
+    modernWeightTwoDecompositionReused : Bool
+    plusOneTypedAsConformalLine : Bool
     allSixPrimesDivideActualMonsterOrder : Bool
     allSixPrimesOnFiniteFrickeGenusZeroControl : Bool
 
@@ -178,7 +227,6 @@ record MoonshineEarnModernBoundary : Set where
     fractranChainProvesJModularity : Bool
     fractranChainProvesConwayNorton : Bool
     plusOneIdentifiedAsExternalObserver : Bool
-    plusOneCanInsteadBeTypedByModernVOAGradeSemantics : Bool
 
 canonicalMoonshineEarnModernBoundary : MoonshineEarnModernBoundary
 canonicalMoonshineEarnModernBoundary = record
@@ -186,11 +234,12 @@ canonicalMoonshineEarnModernBoundary = record
   ; endpointProductIs196883 = true
   ; endpointPlusOneIs196884 = true
   ; modernFirstCoefficientArithmeticReused = true
+  ; modernWeightTwoDecompositionReused = true
+  ; plusOneTypedAsConformalLine = true
   ; allSixPrimesDivideActualMonsterOrder = true
   ; allSixPrimesOnFiniteFrickeGenusZeroControl = true
   ; fractranChainProvesMonsterRepresentation = false
   ; fractranChainProvesJModularity = false
   ; fractranChainProvesConwayNorton = false
   ; plusOneIdentifiedAsExternalObserver = false
-  ; plusOneCanInsteadBeTypedByModernVOAGradeSemantics = true
   }
