@@ -34,8 +34,17 @@ module DASHI.Moonshine.MonsterFrickeModernDirectionalMechanismExact where
 --
 --   g(X_0^+(p)) = 0  --Duncan--Swisher support-->  p | |M|.
 --
--- The older Duncan--Ono/Ogg support-equivalence module is not imported here.
--- It remains available as an independent historical/cross-check route.
+-- The forward route now uses the FACTORED Moonshine authority:
+--
+--   global Conway--Norton/Borcherds genus-zero theorem (imported once)
+--     +
+--   p-specific class order + exact Gamma_g = Gamma_0(p)^+ selection
+--     =>
+--   Fricke genus zero.
+--
+-- Thus per-prime genus zero is no longer bundled into the class-selection
+-- witness.  The older Duncan--Ono/Ogg support-equivalence module is not
+-- imported here; it remains an independent historical/cross-check route.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -43,7 +52,7 @@ open import Data.Nat.Primality using (Prime)
 
 import DASHI.Moonshine.MonsterOrderDivisibilityExact as Monster
 import DASHI.Moonshine.PublishedMonsterFrickeAllSupportedPrimesExact as Fricke
-import DASHI.Moonshine.MonsterPrimeMoonshineFrickeStandardAuthorityExact as Moonshine
+import DASHI.Moonshine.MonsterPrimeMoonshineFrickeFactoredAuthorityExact as Moonshine
 import DASHI.Moonshine.DuncanSwisherMonsterFrickeAllPrimesExact as DS
 
 ------------------------------------------------------------------------
@@ -55,7 +64,7 @@ monsterPrimeImpliesFrickeGenusZeroByMoonshine :
   Monster.PrimeDividesMonsterOrder p →
   Fricke.primeFrickeGenus p prime ≡ 0
 monsterPrimeImpliesFrickeGenusZeroByMoonshine =
-  Moonshine.monsterPrimeImpliesFrickeGenusZeroViaMoonshine
+  Moonshine.monsterPrimeImpliesFrickeGenusZeroViaFactoredMoonshine
 
 frickeGenusZeroImpliesMonsterPrimeByExponentSupport :
   (p : Nat) → (prime : Prime p) →
@@ -87,6 +96,8 @@ duncanSwisherAlsoProvesForward =
 record MonsterFrickeModernDirectionalBoundary : Set where
   field
     forwardMechanismIsMoonshine : Bool
+    forwardGenusZeroAuthorityFactoredFromPrimeSelection : Bool
+    forwardExactClassGroupEqualityIsLoadBearing : Bool
     converseMechanismIsExponentSupport : Bool
     DuncanOnoSupportEquivalenceImported : Bool
     MonsterPrimeLaneImported : Bool
@@ -98,6 +109,8 @@ canonicalMonsterFrickeModernDirectionalBoundary :
   MonsterFrickeModernDirectionalBoundary
 canonicalMonsterFrickeModernDirectionalBoundary = record
   { forwardMechanismIsMoonshine = true
+  ; forwardGenusZeroAuthorityFactoredFromPrimeSelection = true
+  ; forwardExactClassGroupEqualityIsLoadBearing = true
   ; converseMechanismIsExponentSupport = true
   ; DuncanOnoSupportEquivalenceImported = false
   ; MonsterPrimeLaneImported = false
