@@ -3,11 +3,18 @@ module DASHI.Moonshine.DuncanSwisherExponentDepthHighestAlphaEverything where
 ------------------------------------------------------------------------
 -- Focused highest-alpha root for the post-support Monster exponent problem.
 --
--- SOURCE:
+-- PRIMARY SOURCE
+--
 -- John F. R. Duncan and Holly Swisher,
 -- "Modular Functions and the Monstrous Exponents",
 -- arXiv:2602.09135 (2026).
 -- DOI: 10.48550/arXiv.2602.09135.
+--
+-- LOCAL GROUP SOURCE CALIBRATION
+--
+-- John H. Conway, Robert T. Curtis, Simon P. Norton, Richard A. Parker,
+-- Robert A. Wilson, "Atlas of Finite Groups", Oxford University Press, 1985.
+-- ISBN 0-19-853199-0; no DOI asserted.
 --
 -- This root deliberately sits ABOVE the already-closed prime-support theorem.
 -- It asks what the EXPONENT v_p(|M|) remembers once
@@ -16,7 +23,7 @@ module DASHI.Moonshine.DuncanSwisherExponentDepthHighestAlphaEverything where
 --
 -- is already known.
 --
--- The answer now formalized is:
+-- For p>3 the answer now retained is:
 --
 --   positive Fricke genus
 --     -> valuation 0 and m_p = 2;
@@ -27,13 +34,28 @@ module DASHI.Moonshine.DuncanSwisherExponentDepthHighestAlphaEverything where
 --   genus zero, singleton supersingular locus
 --     -> 2 valuation = 3 m_p and the p,p^2 modular residual = m_p.
 --
--- The same doubled Monster valuation is now explicitly exposed as a consumer of
+-- The same doubled Monster valuation is explicitly exposed as a consumer of
 -- TWO source-natural observers: supersingular geometry and the three modular
--- valuation contributions.  Support is a further coarse projection.
+-- valuation contributions. Support is a further coarse projection.
 --
--- At p=2,3 the two Duncan--Swisher right-hand sides still agree, but miss the
--- actual Monster exponents by exact residuals 10 and 2.  Those residuals, not a
--- fake extension of the p>3 theorem, are the low-prime explanatory frontier.
+-- LOW CHARACTERISTICS
+--
+-- Duncan--Swisher's two right-hand sides agree at p=2,3 but give 36 and 18,
+-- while the actual Monster exponents are 46 and 20.  We now retain TWO exact
+-- structural facts around that discrepancy:
+--
+--   * standard Monster local subgroup shapes carry the FULL low-prime depths:
+--       2^{1+24}.Co_1 -> 25 + 21 = 46,
+--       3^{1+12}.2Suz.2 -> 13 + 7 = 20;
+--
+--   * the two special elliptic J_1 residue roles used with different p>3
+--     sharpness weights collapse in characteristics 2 and 3 because their
+--     separation is 1728 = 2^6*3^3.
+--
+-- The missing theorem is therefore considerably narrower: explain how the
+-- low-characteristic analytic/geometric mechanism bridges from its common
+-- RHS to the full local-group depth.  We do NOT identify the residuals 10,2
+-- with particular Co_1/Suz factors merely from the arithmetic.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -45,6 +67,8 @@ import DASHI.Moonshine.DuncanSwisherExponentFrickeGenusRefinementExact as Genus
 import DASHI.Moonshine.DuncanSwisherModularValuationDepthMechanismExact as Modular
 import DASHI.Moonshine.DuncanSwisherExponentObserverFactorizationExact as Observers
 import DASHI.Moonshine.DuncanSwisherLowPrimeResidualExact as LowPrime
+import DASHI.Moonshine.MonsterLowPrimeLocalSubgroupDepthExact as LocalDepth
+import DASHI.Moonshine.DuncanSwisherLowPrimeEllipticCollisionExact as Elliptic
 import DASHI.Moonshine.PublishedPrimeLevelFrickeSelectorPinnedExact as Fricke
 import DASHI.Moonshine.PrimeLevelDeligneRapoportFrickeSelectorExact as Selector
 import DASHI.Moonshine.PrimeLevelDeligneRapoportFrickeCombinatoricsExact as DR
@@ -135,20 +159,67 @@ observerCarriersNotIdentifiedRegression :
 observerCarriersNotIdentifiedRegression = refl
 
 ------------------------------------------------------------------------
--- Low-prime residuals are explicit rather than hidden under p>3 notation.
+-- Low-prime quantitative residual and independent local-group realization.
 ------------------------------------------------------------------------
 
-p2UnexplainedResidualRegression : LowPrime.lowPrimeResidual LowPrime.low2 ≡ 10
-p2UnexplainedResidualRegression = LowPrime.p2ResidualIsTen
+p2ResidualRegression : LowPrime.lowPrimeResidual LowPrime.low2 ≡ 10
+p2ResidualRegression = LowPrime.p2ResidualIsTen
 
-p3UnexplainedResidualRegression : LowPrime.lowPrimeResidual LowPrime.low3 ≡ 2
-p3UnexplainedResidualRegression = LowPrime.p3ResidualIsTwo
+p3ResidualRegression : LowPrime.lowPrimeResidual LowPrime.low3 ≡ 2
+p3ResidualRegression = LowPrime.p3ResidualIsTwo
+
+p2LocalGroupDepthRegression : LocalDepth.twoBLocalTwoDepth ≡ 46
+p2LocalGroupDepthRegression = LocalDepth.twoBLocalTwoDepthIs46
+
+p3LocalGroupDepthRegression : LocalDepth.threeBLocalThreeDepth ≡ 20
+p3LocalGroupDepthRegression = LocalDepth.threeBLocalThreeDepthIs20
+
+p2RHSPlusResidualClosesToLocalDepthRegression :
+  LowPrime.commonDuncanSwisherRHS LowPrime.low2
+    + LowPrime.lowPrimeResidual LowPrime.low2
+  ≡ LocalDepth.twoBLocalTwoDepth
+p2RHSPlusResidualClosesToLocalDepthRegression =
+  LocalDepth.p2RHSPlusResidualEqualsLocalDepth
+
+p3RHSPlusResidualClosesToLocalDepthRegression :
+  LowPrime.commonDuncanSwisherRHS LowPrime.low3
+    + LowPrime.lowPrimeResidual LowPrime.low3
+  ≡ LocalDepth.threeBLocalThreeDepth
+p3RHSPlusResidualClosesToLocalDepthRegression =
+  LocalDepth.p3RHSPlusResidualEqualsLocalDepth
 
 ------------------------------------------------------------------------
--- Boundary: for p>3 the next explanatory frontier is BELOW the valuation
--- formulas: construct the modular functions / U_p / rigidity mechanism rather
--- than importing Theorems 1.1/1.2 only as numerical laws.  For p=2,3 the
--- frontier is the common exceptional residual itself.
+-- Low-characteristic analytic/geometric obstruction: the two special elliptic
+-- residue roles collapse exactly at p=2,3.
+------------------------------------------------------------------------
+
+specialEllipticSeparationRegression : Elliptic.specialJ1Separation ≡ 1728
+specialEllipticSeparationRegression = refl
+
+p2SpecialEllipticResiduesCollideRegression :
+  Elliptic.specialResidueRepresentative LowPrime.low2 Elliptic.jZeroRole
+  ≡ Elliptic.specialResidueRepresentative LowPrime.low2 Elliptic.j1728Role
+p2SpecialEllipticResiduesCollideRegression =
+  Elliptic.lowPrimeSpecialResiduesCollide LowPrime.low2
+
+p3SpecialEllipticResiduesCollideRegression :
+  Elliptic.specialResidueRepresentative LowPrime.low3 Elliptic.jZeroRole
+  ≡ Elliptic.specialResidueRepresentative LowPrime.low3 Elliptic.j1728Role
+p3SpecialEllipticResiduesCollideRegression =
+  Elliptic.lowPrimeSpecialResiduesCollide LowPrime.low3
+
+p2LowResidueCannotReconstructEllipticRoleRegression :
+  Elliptic.ExactRoleReconstructionFromLowResidue LowPrime.low2 → ⊥
+p2LowResidueCannotReconstructEllipticRoleRegression =
+  Elliptic.lowResidueCannotReconstructEllipticRole LowPrime.low2
+
+p3LowResidueCannotReconstructEllipticRoleRegression :
+  Elliptic.ExactRoleReconstructionFromLowResidue LowPrime.low3 → ⊥
+p3LowResidueCannotReconstructEllipticRoleRegression =
+  Elliptic.lowResidueCannotReconstructEllipticRole LowPrime.low3
+
+------------------------------------------------------------------------
+-- Boundary.
 ------------------------------------------------------------------------
 
 record DuncanSwisherExponentDepthHighestAlphaBoundary : Set where
@@ -161,9 +232,13 @@ record DuncanSwisherExponentDepthHighestAlphaBoundary : Set where
     geometricAndModularObserversShareConsumer : Bool
     supportExposedAsCoarserProjection : Bool
     p2p3ResidualsIsolated : Bool
+    lowPrimeFullExponentRecoveredFromLocalSubgroupStructure : Bool
+    lowPrimeEllipticStratumCollisionExposed : Bool
+    residualIdentifiedWithSpecificLocalSimpleGroupFactor : Bool
+    causalBridgeFromEllipticCollisionToResidualProved : Bool
     finiteMonsterPrimeLaneUsedForPgt3Proof : Bool
-    nextFrontierIsExplicitModularFunctionOperators : Bool
-    lowPrimeResidualMechanismStillOpen : Bool
+    nextPgt3FrontierIsExplicitModularFunctionOperators : Bool
+    nextLowPrimeFrontierIsAnalyticLocalGroupBridge : Bool
 
 canonicalDuncanSwisherExponentDepthHighestAlphaBoundary :
   DuncanSwisherExponentDepthHighestAlphaBoundary
@@ -176,7 +251,11 @@ canonicalDuncanSwisherExponentDepthHighestAlphaBoundary = record
   ; geometricAndModularObserversShareConsumer = true
   ; supportExposedAsCoarserProjection = true
   ; p2p3ResidualsIsolated = true
+  ; lowPrimeFullExponentRecoveredFromLocalSubgroupStructure = true
+  ; lowPrimeEllipticStratumCollisionExposed = true
+  ; residualIdentifiedWithSpecificLocalSimpleGroupFactor = false
+  ; causalBridgeFromEllipticCollisionToResidualProved = false
   ; finiteMonsterPrimeLaneUsedForPgt3Proof = false
-  ; nextFrontierIsExplicitModularFunctionOperators = true
-  ; lowPrimeResidualMechanismStillOpen = true
+  ; nextPgt3FrontierIsExplicitModularFunctionOperators = true
+  ; nextLowPrimeFrontierIsAnalyticLocalGroupBridge = true
   }
