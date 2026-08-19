@@ -17,6 +17,7 @@ module DASHI.Ontology.WikidataWorkingGroupFullProvenanceEverything where
 -- Focused Wikidata/JMD ontology/checker contract.
 import DASHI.Ontology.WikidataWorkingGroupEverything
 import DASHI.Ontology.WikidataWorkingGroupRegression
+import DASHI.Ontology.WikidataWorkingGroupSourcePolicyExact
 
 -- SIO public semantic surface and its Dumontier et al. source metadata.
 import DASHI.Semantics.SIOSemanticSurfaceBridge
