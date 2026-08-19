@@ -1,7 +1,7 @@
 module DASHI.Core.ContextIndexedObservationFibrationExact where
 
 ------------------------------------------------------------------------
--- CONTEXT-INDEXED OBSERVATION AS A SPLIT FIBRATION / PRESHEAF PRESENTATION
+-- CONTEXT-INDEXED OBSERVATION / SPLIT FIBRATION-SHAPED PRESENTATION
 --
 -- DASHI repeatedly has data whose meaningful carrier changes with context,
 -- query, consumer or authority frame.  This module puts that pattern above the
@@ -9,9 +9,9 @@ module DASHI.Core.ContextIndexedObservationFibrationExact where
 --
 -- A base ProjectionCategory supplies context changes.  Fine and public surface
 -- carriers are contravariantly restricted along those changes, and observation
--- is required to commute with restriction.  The resulting indexed family has
--- canonical split cartesian lifts: restriction along a composite factors
--- through restriction along each stage.
+-- is required to commute with restriction.  The chosen restriction presentation
+-- supplies canonical lift arrows and exact factor-through-lift construction for
+-- composites.
 --
 -- SOURCE / METHOD CALIBRATION
 --
@@ -23,10 +23,12 @@ module DASHI.Core.ContextIndexedObservationFibrationExact where
 -- Saunders Mac Lane, "Categories for the Working Mathematician", 2nd ed.,
 -- Springer, 1998. DOI: 10.1007/978-1-4757-4721-8.
 --
--- The code below is a strict split indexed presentation over DASHI's existing
--- ProjectionCategory.  It does not claim that every semantic context system in
--- the repository has already been supplied with these laws, nor does it claim
--- the full Grothendieck equivalence between fibrations and pseudofunctors.
+-- IMPORTANT BOUNDARY: the code below is a strict indexed restriction
+-- presentation over DASHI's existing ProjectionCategory.  It constructs the
+-- existence/factorisation side of the canonical split lifts.  It does NOT claim
+-- proof-irrelevant uniqueness of arbitrary total-category factorisations, the
+-- full Benabou cartesian universal property, or the full Grothendieck
+-- equivalence between fibrations and pseudofunctors.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -116,7 +118,7 @@ cartesianSource :
 cartesianSource indexed {A} change target =
   A , restrictFine indexed change target
 
-canonicalSplitCartesianLift :
+canonicalSplitLift :
   ∀ {base : Cat.ProjectionCategory}
     (indexed : ContextIndexedObservation base)
     {A B : Cat.Obj base}
@@ -125,14 +127,13 @@ canonicalSplitCartesianLift :
   TotalFineArrow indexed
     (cartesianSource indexed change target)
     (B , target)
-canonicalSplitCartesianLift indexed change target =
+canonicalSplitLift indexed change target =
   totalFineArrow change refl
 
--- Universal factorisation equation for the chosen split lifts.  If a source
--- state reaches target x over the composite second-after-first context map,
--- then it reaches the canonical lift over second by first restricting along
--- second and then along first.
-splitCartesianFactorization :
+-- If a source restricts to a target along a composite, the indexed composition
+-- law gives the exact stagewise equality needed to factor through the chosen
+-- lift of the second leg.
+splitLiftFactorizationEquation :
   ∀ {base : Cat.ProjectionCategory}
     (indexed : ContextIndexedObservation base)
     {A B C : Cat.Obj base}
@@ -144,12 +145,34 @@ splitCartesianFactorization :
     restrictFine indexed (Cat._∘_ base second first) target →
   source ≡
     restrictFine indexed first (restrictFine indexed second target)
-splitCartesianFactorization indexed first second source target sourceComposite =
+splitLiftFactorizationEquation indexed first second source target sourceComposite =
   trans
     sourceComposite
     (restrictFineComposition indexed first second target)
 
-observationCommutesWithCartesianLift :
+-- Existence half of the cartesian factorisation shape: from a composite
+-- restriction witness construct the actual total arrow into the chosen lift of
+-- the second leg.  No uniqueness theorem for arbitrary proof-bearing total
+-- arrows is claimed here.
+splitLiftFactorizationArrow :
+  ∀ {base : Cat.ProjectionCategory}
+    (indexed : ContextIndexedObservation base)
+    {A B C : Cat.Obj base}
+    (first : Cat.Hom base A B)
+    (second : Cat.Hom base B C)
+    (source : Fine indexed A)
+    (target : Fine indexed C) →
+  source ≡
+    restrictFine indexed (Cat._∘_ base second first) target →
+  TotalFineArrow indexed
+    (A , source)
+    (cartesianSource indexed second target)
+splitLiftFactorizationArrow indexed first second source target sourceComposite =
+  totalFineArrow first
+    (splitLiftFactorizationEquation
+      indexed first second source target sourceComposite)
+
+observationCommutesWithSplitLift :
   ∀ {base : Cat.ProjectionCategory}
     (indexed : ContextIndexedObservation base)
     {A B : Cat.Obj base}
@@ -157,7 +180,12 @@ observationCommutesWithCartesianLift :
     (target : Fine indexed B) →
   observe indexed A (restrictFine indexed change target)
   ≡ restrictSurface indexed change (observe indexed B target)
-observationCommutesWithCartesianLift indexed = observationNaturality indexed
+observationCommutesWithSplitLift indexed = observationNaturality indexed
+
+-- Backwards-compatible theorem names used by the focused regression/checker.
+canonicalSplitCartesianLift = canonicalSplitLift
+splitCartesianFactorization = splitLiftFactorizationEquation
+observationCommutesWithCartesianLift = observationCommutesWithSplitLift
 
 ------------------------------------------------------------------------
 -- Context-indexed consumer adequacy.
@@ -201,13 +229,15 @@ record ContextIndexedObservationFibrationBoundary : Set where
     surfaceCarrierMayDependOnContext : Bool
     contextChangeHasTypedRestriction : Bool
     observationMustCommuteWithRestriction : Bool
-    splitCartesianFactorizationConstructed : Bool
+    splitLiftFactorizationExistenceConstructed : Bool
+    fullBenabouCartesianUniquenessConstructed : Bool
+    fullGrothendieckEquivalenceConstructed : Bool
     adequacyIsConsumerAndContextIndexed : Bool
     localAdequacyImpliesWorldCompleteness : Bool
-    arbitraryContextChangesAutomaticallySatisfyFibrationLaws : Bool
+    arbitraryContextChangesAutomaticallySatisfyIndexedLaws : Bool
 
 canonicalContextIndexedObservationFibrationBoundary :
   ContextIndexedObservationFibrationBoundary
 canonicalContextIndexedObservationFibrationBoundary =
   contextIndexedObservationFibrationBoundary
-    true true true true true true false false
+    true true true true true false false true false false
