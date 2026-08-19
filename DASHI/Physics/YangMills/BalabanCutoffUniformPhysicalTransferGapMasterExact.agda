@@ -32,6 +32,7 @@ module DASHI.Physics.YangMills.BalabanCutoffUniformPhysicalTransferGapMasterExac
 -- A merely positive gap at every cutoff is deliberately NOT enough.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _≤_; _<_)
 import Data.Rational.Properties as ℚP
@@ -57,14 +58,10 @@ physicalGapPositiveAtEveryCutoff master cutoff =
     (massFloorPositive master)
     (massFloorBelowEveryCutoff master cutoff)
 
-------------------------------------------------------------------------
--- Existing terminal/Feshbach route as a sufficient constructor.
-------------------------------------------------------------------------
-
 record UniformGapPullbackFamily : Set₁ where
   field
     terminalGapAt : Nat → ℚ
-    lossesAt : Nat → Agda.Builtin.List.List ℚ
+    lossesAt : Nat → List ℚ
     physicalGapAt : Nat → ℚ
 
     transferChainAt : ∀ cutoff →
@@ -80,8 +77,6 @@ record UniformGapPullbackFamily : Set₁ where
     commonMassFloor : ℚ
     commonMassFloorPositive : 0ℚ < commonMassFloor
 
-    -- This is the genuinely uniform analytic content.  It is stronger than
-    -- proving each cutoff gap positive separately.
     commonFloorBelowPulledBackGap : ∀ cutoff →
       commonMassFloor
       ≤ Pullback.pullBackGap (terminalGapAt cutoff) (lossesAt cutoff)
@@ -100,8 +95,6 @@ uniformGapMasterFromPullbackFamily family = record
         (Pullback.pullBackGapBelowFine (transferChainAt family cutoff))
   }
 
--- Separate theorem showing the strict budget itself gives pointwise positivity;
--- this is intentionally weaker than the uniform master theorem.
 pullbackFamilyGivesPointwisePositiveGap :
   (family : UniformGapPullbackFamily) → ∀ cutoff →
   0ℚ < UniformGapPullbackFamily.physicalGapAt family cutoff
@@ -113,7 +106,5 @@ pullbackFamilyGivesPointwisePositiveGap family cutoff =
 cutoffUniformGapMasterCompilerLevel : ProofLevel
 cutoffUniformGapMasterCompilerLevel = machineChecked
 
--- The hard theorem is the physical cutoff-uniform floor, not Kato/Feshbach
--- algebra and not the proposition "every finite cutoff has some positive gap".
 physicalCutoffUniformTransferGapLevel : ProofLevel
 physicalCutoffUniformTransferGapLevel = conditional
