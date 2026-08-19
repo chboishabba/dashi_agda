@@ -25,7 +25,16 @@ module DASHI.Core.ConsumerDescentMinimalObserverExact where
 -- programs by construction or approximation of fixpoints", POPL 1977.
 -- DOI: 10.1145/512950.512973.
 --
--- DASHI already uses those sources in
+-- E. L. Lehmann and George Casella,
+-- "Theory of Point Estimation", 2nd ed., Springer, 1998.
+-- DOI: 10.1007/b98854.
+--
+-- Lehmann--Casella is calibration for the classical minimal-sufficiency
+-- vocabulary only.  The constructive theorem below is deterministic and
+-- consumer-indexed; it does not import likelihoods, probability families, or
+-- almost-everywhere identification.
+--
+-- DASHI already uses Blackwell/Cousot in
 -- MinimalSufficientObservationGovernanceExact.  The finite constructive proofs
 -- below are local and require no probabilistic assumptions.
 ------------------------------------------------------------------------
