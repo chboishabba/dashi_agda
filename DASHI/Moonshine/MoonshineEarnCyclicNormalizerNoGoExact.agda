@@ -41,7 +41,7 @@ module DASHI.Moonshine.MoonshineEarnCyclicNormalizerNoGoExact where
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
-open import Data.Nat using (_%_)
+open import Data.Nat using (_%_; _∸_)
 open import Data.Nat.Divisibility using (_∣_; _∤_; divides)
 import Data.Nat.Divisibility as Div
 
