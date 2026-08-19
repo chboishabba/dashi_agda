@@ -117,11 +117,21 @@ interactionTriple (Cube.interactionCube a b c) = Branch.triple a b c
 interactionFromTriple : Orbit.TritTriple → Cube.InteractionCube
 interactionFromTriple (Branch.triple a b c) = Cube.interactionCube a b c
 
+interactionTripleFromTriple :
+  (triple : Orbit.TritTriple) →
+  interactionTriple (interactionFromTriple triple) ≡ triple
+interactionTripleFromTriple (Branch.triple a b c) = refl
+
 appraisalTriple : Cube.ParticipantAppraisal → Orbit.TritTriple
 appraisalTriple (Cube.participantAppraisal a b c) = Branch.triple a b c
 
 appraisalFromTriple : Orbit.TritTriple → Cube.ParticipantAppraisal
 appraisalFromTriple (Branch.triple a b c) = Cube.participantAppraisal a b c
+
+appraisalTripleFromTriple :
+  (triple : Orbit.TritTriple) →
+  appraisalTriple (appraisalFromTriple triple) ≡ triple
+appraisalTripleFromTriple (Branch.triple a b c) = refl
 
 record ThreeBlockResidualCode : Set where
   constructor threeBlockResidualCode
@@ -164,7 +174,10 @@ decodeAfterEncodeRound
 encodeAfterDecodeRound :
   (code : ThreeBlockResidualCode) → encodeRound (decodeRound code) ≡ code
 encodeAfterDecodeRound (threeBlockResidualCode interaction appraisalA appraisalB)
-  rewrite encodeAfterDecode27 interaction
+  rewrite interactionTripleFromTriple (decode27 interaction)
+        | appraisalTripleFromTriple (decode27 appraisalA)
+        | appraisalTripleFromTriple (decode27 appraisalB)
+        | encodeAfterDecode27 interaction
         | encodeAfterDecode27 appraisalA
         | encodeAfterDecode27 appraisalB = refl
 
