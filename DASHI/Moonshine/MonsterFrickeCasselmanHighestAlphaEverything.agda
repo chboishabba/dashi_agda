@@ -19,29 +19,35 @@ module DASHI.Moonshine.MonsterFrickeCasselmanHighestAlphaEverything where
 --
 -- with p=2,3 handled by the separate exact low-level support lane.
 --
--- GLOBAL EXPONENT DEPTH -- NOW ABOVE SUPPORT
+-- GLOBAL EXPONENT DEPTH -- ABOVE SUPPORT
 --
--- The branch now retains the full Duncan--Swisher p>3 multiplicity theorem,
--- not only its Boolean support corollary.  The same Monster valuation is
--- computed from two source-natural observers:
+-- The branch retains the full Duncan--Swisher p>3 multiplicity theorem, not
+-- only its Boolean support corollary. The same Monster valuation is computed
+-- from two source-natural observers:
 --
 --   supersingular stratum + m_p
 --   modular-function p-adic valuation triple.
 --
 -- Their outputs agree at the declared consumer 2*v_p(|M|), while their carrier
--- types are not identified.  Ogg support is a further coarse projection.
+-- types are not identified. Ogg support is a further coarse projection.
 --
--- At p=2,3 the two Duncan--Swisher right-hand sides agree but equal 36 and 18,
--- whereas the Monster exponents are 46 and 20.  The exact unexplained residuals
--- 10 and 2 are now isolated; no false extension of the p>3 theorem is made.
+-- LOW PRIME STRUCTURE
+--
+-- Duncan--Swisher's two RHS values agree at p=2,3 but give 36 and 18, versus
+-- actual Monster exponents 46 and 20. The branch now independently reconstructs
+-- those FULL depths from standard Monster local subgroup structure:
+--
+--   2^{1+24}.Co_1 : 25 + 21 = 46,
+--   3^{1+12}.2Suz.2 : 13 + 7 = 20.
+--
+-- Separately, the two special elliptic J_1 residue roles used with distinct
+-- p>3 sharpness weights collide in characteristics 2 and 3; their separation is
+-- 1728 = 2^6*3^3. The remaining low-prime theorem is the causal/analytic bridge
+-- from this changed low-characteristic geometry to the residual depth 10/2,
+-- not recovery of the final Monster exponents themselves.
 --
 -- For p>3 the next explanatory frontier is below the valuation identities:
 -- explicit modular-function / U_p / level-lowering / p-adic rigidity machinery.
--- For p=2,3 it is the mechanism producing the common exceptional residual.
---
--- The older Duncan--Ono/Ogg supersingular SUPPORT equivalence is no longer
--- imported by the primary arbitrary-prime theorem.  It remains an independent
--- historical cross-check.
 --
 -- LOCAL p11 SIDE -- RESOLVED AT THE CORRECT REPRESENTATION LEVEL
 --
@@ -55,42 +61,8 @@ module DASHI.Moonshine.MonsterFrickeCasselmanHighestAlphaEverything where
 --   V^{K(2)}       principal full-level-2 marked model,
 --   V^{K_0(4)}     classical oldvector model.
 --
--- Their intersection has exactly two coordinates.  The remaining transverse
+-- Their intersection has exactly two coordinates. The remaining transverse
 -- line admits two integral alignments fixing that common plane.
---
--- LOCAL NON-CANONICITY AUDIT
---
--- The classical degeneracy basis is tied to Schmidt's n=2 Casselman cells in
--- the source-backed order
---
---   (wide,left,right) = (valuation0,terminal2,valuation1),
---
--- so the actual classical bad-prime operator is
---
---   U2(w,l,r) = (-2w+r, 0, -2w+l).
---
--- On analytic Old3 it satisfies
---
---   U2 (U2^2 + 2 U2 + 2 I) = 0,
---   ker(U2) = Z * (1,2,2).
---
--- The internally discovered positive marked R2 has trivial kernel and cannot
--- be conjugate to analytic U2 under ANY invertible zero-preserving coordinate
--- change.
---
--- Transporting the correct U2 through the two transverse alignments produces
--- distinct principal-side operators P+ and P-, but their COMPLETE Satake
--- residual maps coincide pointwise:
---
---   (P+^2+2P++2I)(x,y,z)
---     = (z,z,2z)
---     = (P-^2+2P-+2I)(x,y,z).
---
--- They also share the same kernel generator (1,1,2).  Therefore even
---
---   same pi_2 + common plane + a2 + Satake cubic + residual map + kernel line
---
--- does NOT canonically select a fixed-space coordinate alignment.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -140,8 +112,7 @@ moonshineForwardRegression :
   (p : Nat) → (prime : Prime p) →
   Monster.PrimeDividesMonsterOrder p →
   GlobalAll.primeFrickeGenus p prime ≡ 0
-moonshineForwardRegression =
-  Modern.monsterPrimeImpliesFrickeGenusZeroByMoonshine
+moonshineForwardRegression = Modern.monsterPrimeImpliesFrickeGenusZeroByMoonshine
 
 exponentSupportConverseRegression :
   (p : Nat) → (prime : Prime p) →
@@ -199,10 +170,20 @@ p2p3ResidualsExplicitRegression :
     Depth.canonicalDuncanSwisherExponentDepthHighestAlphaBoundary ≡ true
 p2p3ResidualsExplicitRegression = refl
 
-lowPrimeResidualMechanismStillOpenRegression :
-  Depth.lowPrimeResidualMechanismStillOpen
+lowPrimeFullDepthRecoveredLocallyRegression :
+  Depth.lowPrimeFullExponentRecoveredFromLocalSubgroupStructure
     Depth.canonicalDuncanSwisherExponentDepthHighestAlphaBoundary ≡ true
-lowPrimeResidualMechanismStillOpenRegression = refl
+lowPrimeFullDepthRecoveredLocallyRegression = refl
+
+lowPrimeEllipticCollisionExposedRegression :
+  Depth.lowPrimeEllipticStratumCollisionExposed
+    Depth.canonicalDuncanSwisherExponentDepthHighestAlphaBoundary ≡ true
+lowPrimeEllipticCollisionExposedRegression = refl
+
+lowPrimeCausalBridgeStillOpenRegression :
+  Depth.causalBridgeFromEllipticCollisionToResidualProved
+    Depth.canonicalDuncanSwisherExponentDepthHighestAlphaBoundary ≡ false
+lowPrimeCausalBridgeStillOpenRegression = refl
 
 ------------------------------------------------------------------------
 -- Local p11 representation / coordinate regressions.
@@ -265,8 +246,7 @@ transverseSatakeResidualCollisionRegression :
   (v : Principal.Old3) →
   TransverseSatake.plusSatakeQuadratic v
   ≡ TransverseSatake.minusSatakeQuadratic v
-transverseSatakeResidualCollisionRegression =
-  TransverseSatake.satakeResidualsIdentical
+transverseSatakeResidualCollisionRegression = TransverseSatake.satakeResidualsIdentical
 
 satakeCannotSelectTransverseSignRegression :
   TransverseSatake.satakePolynomialSelectsTransverseSign
