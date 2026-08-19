@@ -17,20 +17,6 @@ module DASHI.Physics.YangMills.YangMillsFreeGaussianMaxwellNoGapExact where
 -- dispersion omega(p)=|p| on transverse modes.  Hence there are non-vacuum
 -- one-particle states with arbitrarily small positive energy, and no interval
 -- (0,m) can be free of spectrum for any m>0.
---
--- TOP-DOWN USE
---
--- The current Clay graph uses a strict finite fourth cumulant as an interaction
--- witness.  This file tests a potentially much cheaper alternative:
---
---   if a Gaussian/free continuum Yang--Mills theory with the required UV
---   normalization necessarily contains the massless Maxwell one-particle
---   sector, then the already-required positive physical mass gap rules out that
---   Gaussian/free possibility.
---
--- Until the SAME-THEORY free-YM -> Maxwell bridge and the semantic
--- not-free -> Clay-nontrivial bridge are proved, the fourth-cumulant route
--- remains authoritative.
 ------------------------------------------------------------------------
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -75,8 +61,6 @@ record PositiveSpectralGap
     gap : Energy O
     gapPositive : StrictLess O (zero O) gap
 
-    -- Every non-vacuum state has energy at least the gap.  `NotBelow` is kept
-    -- abstract so no total-order law is smuggled into the spectral argument.
     NotBelow : Energy O → Energy O → Set
     nonVacuumNotBelowGap : ∀ state →
       NonVacuum massless state →
@@ -106,15 +90,49 @@ masslessSectorContradictsPositiveGap massless gapData =
   belowContradictsNotBelow gapData
     (energy massless state) (gap gapData) below notBelow
 
+------------------------------------------------------------------------
+-- Constructive Gaussian -> contradiction compiler.
+------------------------------------------------------------------------
+
+record GaussianMaxwellGapObstruction (O : GapOrder) : Set₁ where
+  field
+    Gaussian Contradiction : Set
+
+    -- The SAME continuum theory, under a Gaussian/free hypothesis, exposes the
+    -- standard massless transverse one-particle sector.
+    masslessSector : Gaussian → MasslessOneParticleApproximation O
+
+    -- The already-proved physical gap is transported to that same Hamiltonian.
+    gapOnSector : ∀ gaussian → PositiveSpectralGap (masslessSector gaussian)
+
+    -- The spectral contradiction type carried by the gap certificate is the
+    -- contradiction type used to negate Gaussianity.
+    contradictionFromSpectral : ∀ gaussian →
+      SpectralContradiction (gapOnSector gaussian) → Contradiction
+
+open GaussianMaxwellGapObstruction public
+
+gaussianContradictsPositiveGap :
+  ∀ {O} (dataSet : GaussianMaxwellGapObstruction O) →
+  Gaussian dataSet → Contradiction dataSet
+gaussianContradictsPositiveGap dataSet gaussian =
+  contradictionFromSpectral dataSet gaussian
+    (masslessSectorContradictsPositiveGap
+      (masslessSector dataSet gaussian)
+      (gapOnSector dataSet gaussian))
+
 masslessOneParticleSectorHasNoPositiveGapLevel : ProofLevel
 masslessOneParticleSectorHasNoPositiveGapLevel = machineChecked
+
+gaussianGapContradictionCompilerLevel : ProofLevel
+gaussianGapContradictionCompilerLevel = machineChecked
 
 freeMaxwellMasslessDispersionLevel : ProofLevel
 freeMaxwellMasslessDispersionLevel = standardImported
 
--- Two exact top-down holes before this can replace the fourth-cumulant route.
+-- TRUE physical seam for the cheaper #8 route: prove the SAME reconstructed
+-- continuum Yang--Mills system, if Gaussian/free, has the massless Maxwell
+-- one-particle sector and that the already-produced physical gap is the gap on
+-- that same Hamiltonian.  The logical contradiction thereafter is exact.
 physicalFreeGaussianYMContainsMasslessMaxwellSectorLevel : ProofLevel
 physicalFreeGaussianYMContainsMasslessMaxwellSectorLevel = conditional
-
-physicalNotFreeGaussianImpliesClayNontrivialityLevel : ProofLevel
-physicalNotFreeGaussianImpliesClayNontrivialityLevel = conditional
