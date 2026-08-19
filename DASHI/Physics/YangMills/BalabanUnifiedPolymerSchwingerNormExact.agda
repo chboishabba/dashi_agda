@@ -48,7 +48,8 @@ module DASHI.Physics.YangMills.BalabanUnifiedPolymerSchwingerNormExact where
 -- proof-splicing unrelated limits.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; suc)
+open import Data.Product using (_×_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -102,7 +103,7 @@ record UnifiedRGIncrementControl
     unifiedIncrementBound : ∀ scale →
       LessEqual authority
         (unifiedDistance authority
-          (stateAtScale scale) (stateAtScale (Nat.suc scale)))
+          (stateAtScale scale) (stateAtScale (suc scale)))
         (incrementMajorant scale)
 
 open UnifiedRGIncrementControl public
@@ -116,13 +117,13 @@ ordinaryIncrementBound :
   LessEqual authority
     (ordinaryDistance authority
       (ordinaryProjection authority (stateAtScale control scale))
-      (ordinaryProjection authority (stateAtScale control (Nat.suc scale))))
+      (ordinaryProjection authority (stateAtScale control (suc scale))))
     (incrementMajorant control scale)
 ordinaryIncrementBound {authority = authority} control scale =
   transitive authority
     (ordinaryProjectionNonexpansive authority
       (stateAtScale control scale)
-      (stateAtScale control (Nat.suc scale)))
+      (stateAtScale control (suc scale)))
     (unifiedIncrementBound control scale)
 
 compositeIncrementBound :
@@ -134,13 +135,13 @@ compositeIncrementBound :
   LessEqual authority
     (compositeDistance authority
       (compositeProjection authority (stateAtScale control scale))
-      (compositeProjection authority (stateAtScale control (Nat.suc scale))))
+      (compositeProjection authority (stateAtScale control (suc scale))))
     (incrementMajorant control scale)
 compositeIncrementBound {authority = authority} control scale =
   transitive authority
     (compositeProjectionNonexpansive authority
       (stateAtScale control scale)
-      (stateAtScale control (Nat.suc scale)))
+      (stateAtScale control (suc scale)))
     (unifiedIncrementBound control scale)
 
 correlationIncrementBound :
@@ -152,13 +153,13 @@ correlationIncrementBound :
   LessEqual authority
     (correlationDistance authority
       (correlationProjection authority (stateAtScale control scale))
-      (correlationProjection authority (stateAtScale control (Nat.suc scale))))
+      (correlationProjection authority (stateAtScale control (suc scale))))
     (incrementMajorant control scale)
 correlationIncrementBound {authority = authority} control scale =
   transitive authority
     (correlationProjectionNonexpansive authority
       (stateAtScale control scale)
-      (stateAtScale control (Nat.suc scale)))
+      (stateAtScale control (suc scale)))
     (unifiedIncrementBound control scale)
 
 ------------------------------------------------------------------------
@@ -176,7 +177,6 @@ record PhysicalYMUnifiedPolymerNormProducer : Set₁ where
     authority : UnifiedPolymerSchwingerNormAuthority
       State OrdinaryObservable CompositeObservable WeightedCorrelation Bound
 
-    -- Source-native coordinates that the norm must dominate simultaneously.
     LargeFieldRegulatorControlled : State → Set
     FieldDerivativeSeminormsControlled : State → Set
     PolymerSizeDecayControlled : State → Set
