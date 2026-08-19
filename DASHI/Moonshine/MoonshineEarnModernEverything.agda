@@ -15,8 +15,8 @@ module DASHI.Moonshine.MoonshineEarnModernEverything where
 --   * the +1 in the weight-two Moonshine decomposition is the conformal line,
 --     not an external observer.
 --
--- This root now also carries three exact mechanistic falsifiers for the
--- historical substitution itself:
+-- This root now also carries exact mechanistic falsifiers for the historical
+-- substitution itself:
 --
 --   * it cannot be a Monster conjugacy-class POWER MAP, because ord(g^k)
 --     divides ord(g), while 23->47, 7->59, 11->71 increase prime order;
@@ -24,12 +24,14 @@ module DASHI.Moonshine.MoonshineEarnModernEverything where
 --     inside the fixed level p;
 --   * it cannot factor through the shared Monster/Ogg/Fricke genus-zero
 --     membership observer, because all three sources have the same coarse
---     observation but require three different targets.
+--     observation but require three different targets;
+--   * it cannot uniformly be a source-prime cyclic complement acting on the
+--     target prime subgroup: 23|46 passes, but 7∤58 and 11∤70.
 --
 -- Thus the surviving historical research question is genuinely finer:
 -- if the arithmetic has a Moonshine mechanism, it must live in structure such
 -- as class/character/modular-function data beyond Ogg membership, and it is not
--- the standard power-map or Fricke operation.
+-- any of the standard operations excluded above.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -39,6 +41,7 @@ import DASHI.Moonshine.MoonshineOrbifoldWeightTwoDecompositionExact as Weight2
 import DASHI.Moonshine.MoonshineEarnPowerMapNoGoExact as PowerNoGo
 import DASHI.Moonshine.MoonshineEarnFrickeLevelNoGoExact as FrickeNoGo
 import DASHI.Moonshine.MoonshineEarnOggObserverNonfactorabilityExact as ObserverNoGo
+import DASHI.Moonshine.MoonshineEarnCyclicNormalizerNoGoExact as NormalizerNoGo
 
 historicalTargetProductRegression : 47 * 59 * 71 ≡ 196883
 historicalTargetProductRegression = Earn.historicalTargetProduct
@@ -91,6 +94,16 @@ oggMembershipCannotRouteEarnTargetsRegression :
   ObserverNoGo.substitutionFactorsThroughOggMembership
     ObserverNoGo.canonicalMoonshineEarnOggObserverBoundary ≡ false
 oggMembershipCannotRouteEarnTargetsRegression = refl
+
+uniformCyclicNormalizerRejectedRegression :
+  NormalizerNoGo.uniformCyclicNormalizerExplanationPossible
+    NormalizerNoGo.canonicalMoonshineEarnCyclicNormalizerBoundary ≡ false
+uniformCyclicNormalizerRejectedRegression = refl
+
+firstNormalizerEdgeOnlyNecessaryConditionRegression :
+  NormalizerNoGo.firstEdgePromotedToMonsterSubgroupTheorem
+    NormalizerNoGo.canonicalMoonshineEarnCyclicNormalizerBoundary ≡ false
+firstNormalizerEdgeOnlyNecessaryConditionRegression = refl
 
 finerMoonshineCoordinateStillRequiredRegression :
   ObserverNoGo.finerMoonshineCoordinateRequiredForMechanism
