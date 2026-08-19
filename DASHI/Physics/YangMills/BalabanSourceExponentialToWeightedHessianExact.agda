@@ -58,7 +58,8 @@ module DASHI.Physics.YangMills.BalabanSourceExponentialToWeightedHessianExact wh
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Integer.Base using (+_)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _*_; _≤_; _/_)
+open import Data.Rational.Base as ℚ using
+  (ℚ; 0ℚ; _+_; _*_; _≤_; _/_; NonNegative)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (subst)
@@ -86,6 +87,25 @@ sourceWeightedPartial dataSet (suc depth) =
   sourceWeightedPartial dataSet depth
   + sourceWeightedShell dataSet depth
 
+threeHalvesNonnegative : 0ℚ ≤ Weighted.threeHalves
+threeHalvesNonnegative =
+  let
+    instance
+      selected : NonNegative Weighted.threeHalves
+      selected = ℚP.normalize-nonNeg 3 2
+  in
+  ℚP.nonNegative⁻¹ Weighted.threeHalves
+
+weightPowerNonnegative : ∀ depth →
+  0ℚ ≤ Weighted.threeHalvesPower depth
+weightPowerNonnegative zero = ℚP.0≤1
+weightPowerNonnegative (suc depth) =
+  Norm.productNonnegative
+    (Weighted.threeHalvesPower depth)
+    Weighted.threeHalves
+    (weightPowerNonnegative depth)
+    threeHalvesNonnegative
+
 sourceWeightedShellBelowThreeQuarter :
   (dataSet : SourceWeightedHessianData) →
   ∀ depth →
@@ -96,10 +116,9 @@ sourceWeightedShellBelowThreeQuarter dataSet depth =
   let
     source = exponentialShell dataSet
     dyadic = Dyadic.sourceExponentialShellIsDyadic source depth
-    weightNonnegative = Weighted.weightPowerNonnegativePublic depth
     weighted = Norm.scaleNonnegative
       (Weighted.threeHalvesPower depth)
-      weightNonnegative
+      (weightPowerNonnegative depth)
       dyadic
   in
   subst
@@ -144,7 +163,13 @@ four : ℚ
 four = + 4 / 1
 
 fourNonnegative : 0ℚ ≤ four
-fourNonnegative = ℚP.nonNegative⁻¹ four
+fourNonnegative =
+  let
+    instance
+      selected : NonNegative four
+      selected = ℚP.normalize-nonNeg 4 1
+  in
+  ℚP.nonNegative⁻¹ four
 
 sourceWeightedPartialBelowFourAmplitude :
   (dataSet : SourceWeightedHessianData) →
@@ -167,16 +192,19 @@ sourceWeightedPartialBelowFourAmplitude dataSet depth =
       four
       fourNonnegative
       scaledByAmplitude
+
+    normalizedScaledByFour :
+      Dyadic.amplitude source * Weighted.threeQuarterPartialSum depth
+      ≤ four * Dyadic.amplitude source
+    normalizedScaledByFour =
+      subst
+        (λ left → left ≤ four * Dyadic.amplitude source)
+        (ℚRing.solve-∀
+          (Dyadic.amplitude source)
+          (Weighted.threeQuarterPartialSum depth))
+        scaledByFour
   in
-  ℚP.≤-trans partial
-    (subst
-      (λ right →
-        Dyadic.amplitude source * Weighted.threeQuarterPartialSum depth
-        ≤ right)
-      (ℚRing.solve-∀
-        (Dyadic.amplitude source)
-        (Weighted.threeQuarterPartialSum depth))
-      scaledByFour)
+  ℚP.≤-trans partial normalizedScaledByFour
 
 sourceExponentialToWeightedHessianLevel : ProofLevel
 sourceExponentialToWeightedHessianLevel = machineChecked
