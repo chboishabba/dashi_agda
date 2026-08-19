@@ -44,6 +44,11 @@ record AntipodalCode27 : Set where
 
 open AntipodalCode27 public
 
+rebuildCode27 :
+  (code : AntipodalCode27) →
+  antipodalCode27 (coarseClass code) (orientationResidual code) ≡ code
+rebuildCode27 (antipodalCode27 coarse residual) = refl
+
 encode27 : Orbit.TritTriple → AntipodalCode27
 encode27 (Branch.triple SSP.sspPosOne b c) =
   antipodalCode27 (Orbit.firstPositive27 b c) direct
