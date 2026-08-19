@@ -24,6 +24,7 @@ module DASHI.Algebra.RamifiedLocalValuationSharpnessExact where
 open import Agda.Primitive using (Level; lsuc)
 open import DASHI.Core.Prelude
 open import Data.Nat using (_+_; suc)
+import Data.Nat.Properties as NatP
 
 record MultiplicativeNatValuation {ℓ : Level} (A : Set ℓ) : Set (lsuc ℓ) where
   field
@@ -64,7 +65,7 @@ unitDepthOneBranchPowerDepth V branch branchDepth e =
     (powValuation V branch e)
     (trans
       (cong (λ d → e * d) branchDepth)
-      refl)
+      (NatP.*-identityʳ e))
 
 record RamifiedSharpCoefficient
     {ℓ : Level} {A : Set ℓ}
