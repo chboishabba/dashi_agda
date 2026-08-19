@@ -44,9 +44,12 @@ round90OldH2H3FuseAtBarrierInterface =
 round90FixedLeafCountRetiredAsInvariant : Bool
 round90FixedLeafCountRetiredAsInvariant = true
 
-round90StrongSixThreeLinearViscousShortcutRejected : Bool
-round90StrongSixThreeLinearViscousShortcutRejected =
+round90StrongSixThreeLinearViscousShortcutAvailable : Bool
+round90StrongSixThreeLinearViscousShortcutAvailable =
   SixThreeNoGo.round89D1SquaredGramCanDirectlyServeAsLinearVariationBound
+
+round90StrongSixThreeLinearViscousShortcutRejected : Bool
+round90StrongSixThreeLinearViscousShortcutRejected = true
 
 round90WeightedHHGradientTensorIdentityConstructed : Bool
 round90WeightedHHGradientTensorIdentityConstructed =
@@ -75,9 +78,13 @@ round90FixedLeafCountRetiredAsInvariantIsTrue :
   round90FixedLeafCountRetiredAsInvariant ≡ true
 round90FixedLeafCountRetiredAsInvariantIsTrue = refl
 
-round90StrongSixThreeLinearViscousShortcutRejectedIsFalse :
-  round90StrongSixThreeLinearViscousShortcutRejected ≡ false
-round90StrongSixThreeLinearViscousShortcutRejectedIsFalse = refl
+round90StrongSixThreeLinearViscousShortcutAvailableIsFalse :
+  round90StrongSixThreeLinearViscousShortcutAvailable ≡ false
+round90StrongSixThreeLinearViscousShortcutAvailableIsFalse = refl
+
+round90StrongSixThreeLinearViscousShortcutRejectedIsTrue :
+  round90StrongSixThreeLinearViscousShortcutRejected ≡ true
+round90StrongSixThreeLinearViscousShortcutRejectedIsTrue = refl
 
 round90WeightedHHGradientTensorIdentityConstructedIsTrue :
   round90WeightedHHGradientTensorIdentityConstructed ≡ true
