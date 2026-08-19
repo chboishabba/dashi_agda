@@ -37,10 +37,11 @@ module DASHI.Physics.Closure.NSTriadKNLiteralOrderedPairWaleffeFactorRound93Exac
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
+import DASHI.Physics.Closure.NSTriadKNPhysicalTriadSymmetry as Symmetry
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNComplex3FieldAlgebra as Algebra
 import DASHI.Physics.Closure.NSTriadKNComplex3HermitianAdditiveLaws as Additive
@@ -55,6 +56,11 @@ import DASHI.Physics.Closure.NSTriadKNComplex3BeltramiCrossSuppressionRound93Exa
 
 minusI : ∀ {r} (F : C3.RealField r) → C3.Complex F
 minusI F = C3.complexNegate (C3.complexI F)
+
+resonanceRecord :
+  (tau : Physical.PhysicalTriadIncidence) →
+  Z3.Resonance (Physical.p tau) (Physical.q tau) (Physical.k tau)
+resonanceRecord tau = record { closes = Physical.resonance tau }
 
 orderedPairConvectiveNormalForm :
   ∀ {r} {F : C3.RealField r}
@@ -81,14 +87,9 @@ orderedPairConvectiveNormalForm {F = F} E I tau velocity divergenceFree =
       (cong₂ C3.complexAdd
         (Ordered.orderedTransferNormalForm E I tau velocity divergenceFree)
         (Ordered.orderedTransferNormalForm
-          E I
-          (DASHI.Physics.Closure.NSTriadKNPhysicalTriadSymmetry.swapTriad tau)
-          velocity divergenceFree))
+          E I (Symmetry.swapTriad tau) velocity divergenceFree))
       finalAlgebra)
   where
-  import DASHI.Physics.Closure.NSTriadKNPhysicalTriadSymmetry as Symmetry
-  module CR = Ring.Solver F
-
   uP = velocity (Physical.p tau)
   uQ = velocity (Physical.q tau)
   uK = velocity (Physical.k tau)
@@ -278,7 +279,7 @@ literalOrderedPairWaleffeFactor {F = F} E I tau H =
         (sym
           (negativeRotationalPairHasMinusIConvectivePairing
             E
-            (Physical.resonanceWitness tau)
+            (resonanceRecord tau)
             (velocity H (Physical.p tau))
             (velocity H (Physical.q tau))
             (velocity H (Physical.k tau))
@@ -343,6 +344,25 @@ literalOrderedPairWaleffeFactor {F = F} E I tau H =
         (velocity H (Physical.q tau))
       deltaPQ = C3.complexSubtract (signedEigenP H) (signedEigenQ H)
       deltaQP = C3.complexSubtract (signedEigenQ H) (signedEigenP H)
+      module R = Ring.Solver F
+
+      vectorSign :
+        C3.complex3Negate (C3.complex3Scale deltaPQ crossPQ)
+        ≡ C3.complex3Scale deltaQP crossPQ
+      vectorSign =
+        Algebra.complex3Ext
+          (R.solve 3
+            (λ p q x → R.⊝ ((p R.⊕ (R.⊝ q)) R.⊗ x)
+              R.⊜ ((q R.⊕ (R.⊝ p)) R.⊗ x))
+            refl (signedEigenP H) (signedEigenQ H) (C3.x crossPQ))
+          (R.solve 3
+            (λ p q y → R.⊝ ((p R.⊕ (R.⊝ q)) R.⊗ y)
+              R.⊜ ((q R.⊕ (R.⊝ p)) R.⊗ y))
+            refl (signedEigenP H) (signedEigenQ H) (C3.y crossPQ))
+          (R.solve 3
+            (λ p q z → R.⊝ ((p R.⊕ (R.⊝ q)) R.⊗ z)
+              R.⊜ ((q R.⊕ (R.⊝ p)) R.⊗ z))
+            refl (signedEigenP H) (signedEigenQ H) (C3.z crossPQ))
 
       vectorRewrite :
         C3.complex3Negate
@@ -356,34 +376,11 @@ literalOrderedPairWaleffeFactor {F = F} E I tau H =
         trans
           (cong C3.complex3Negate rotationalFactor)
           vectorSign
-
-      module R = Ring.Solver F
-      vectorSign :
-        C3.complex3Negate (C3.complex3Scale deltaPQ crossPQ)
-        ≡ C3.complex3Scale deltaQP crossPQ
-      vectorSign =
-        Algebra.complex3Ext
-          (R.solve 4
-            (λ p q x z → R.⊝ ((p R.⊕ (R.⊝ q)) R.⊗ x)
-              R.⊜ ((q R.⊕ (R.⊝ p)) R.⊗ x))
-            refl (signedEigenP H) (signedEigenQ H) (C3.x crossPQ)
-              (C3.complexZero F))
-          (R.solve 4
-            (λ p q y z → R.⊝ ((p R.⊕ (R.⊝ q)) R.⊗ y)
-              R.⊜ ((q R.⊕ (R.⊝ p)) R.⊗ y))
-            refl (signedEigenP H) (signedEigenQ H) (C3.y crossPQ)
-              (C3.complexZero F))
-          (R.solve 4
-            (λ p q z dummy → R.⊝ ((p R.⊕ (R.⊝ q)) R.⊗ z)
-              R.⊜ ((q R.⊕ (R.⊝ p)) R.⊗ z))
-            refl (signedEigenP H) (signedEigenQ H) (C3.z crossPQ)
-              (C3.complexZero F))
     in
     trans
       (cong (C3.hermitianPairing3 (velocity H (Physical.k tau))) vectorRewrite)
       (Algebra.hermitianScaleRight
-        (velocity H (Physical.k tau)) crossPQ
-        (C3.complexSubtract (signedEigenQ H) (signedEigenP H)))
+        (velocity H (Physical.k tau)) crossPQ deltaQP)
 
 round93LiteralOrderedPairWaleffeFactorClosed : Bool
 round93LiteralOrderedPairWaleffeFactorClosed = true
