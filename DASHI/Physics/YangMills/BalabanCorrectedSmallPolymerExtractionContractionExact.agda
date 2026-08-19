@@ -14,6 +14,11 @@ module DASHI.Physics.YangMills.BalabanCorrectedSmallPolymerExtractionContraction
 -- "Critical (Phi^4)_{3,epsilon}", Communications in Mathematical Physics
 -- 240 (2003), 281--327. DOI: 10.1007/s00220-003-0895-4.
 --
+-- Abdelmalek Abdesselam,
+-- "A Complete Renormalization Group Trajectory Between Two Fixed Points",
+-- Communications in Mathematical Physics 276 (2007), 727--772.
+-- DOI: 10.1007/s00220-007-0352-x.
+--
 -- P. K. Mitter,
 -- contribution "A non trivial fixed point in a three dimensional quantum
 -- field theory", in Oberwolfach Report 17/2006,
@@ -28,32 +33,35 @@ module DASHI.Physics.YangMills.BalabanCorrectedSmallPolymerExtractionContraction
 -- AUTHORITY / CORRECTION BOUNDARY
 --
 -- The sources calibrate the relevant/irrelevant extraction architecture and
--- iterative polymer norms.  This file does not import a scalar-model norm as a
--- Yang--Mills theorem.  In particular, the physical gauge estimate remains a
--- producer.  We use the corrected design principle: the norm itself is part of
--- the theorem data, so a change of regulator/derivative convention cannot be
--- silently transported through an old contraction theorem.
+-- iterative polymer norms.  Mitter explicitly records Abdesselam's detection
+-- of an error in the earlier BMS norm definition and a repair leaving the
+-- estimates/theorems intact.  Consequently the norm/regulator convention is
+-- proof data below: no old contraction theorem can be silently reused after a
+-- norm change.
 --
 -- DASHI CONTRIBUTION
 --
--- In d=4 the extraction problem is explicitly finite on the designated small
--- polymers.  Every polymer is classified as small or large.  Small polymers
--- carry the finite relevant/marginal Taylor channels that must be extracted;
--- large polymers are required to enter with a direct geometric contraction.
+-- In d=4, "small" is made finite at the source boundary by the standard 2d
+-- threshold: at most eight blocks.  Every polymer is classified small/large.
+-- Small polymers carry the finite relevant/marginal Taylor channels that must
+-- be extracted; large polymers enter through direct geometric contraction.
 --
 -- For a dyadic block scale we choose the explicit target 2^{-(d+1)}=1/32 for
 -- the large-polymer branch.  This is a Round66 admissible target, not a claim
 -- that BDH proves this number for pure Yang--Mills.  Its exact positive margin
--- 31/32 is proved below and can be budgeted against the existing Step-V/KP
--- half-margin.
+-- 31/32 is proved and budgeted separately against Step V/KP.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
 open import Data.Sum.Base using (_⊎_; inj₁; inj₂)
 open import Data.Integer.Base using (+_)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; _<_; _/_)
+open import Data.Rational.Base as ℚ using
+  (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; _<_; _/_; Positive)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
+import Data.Nat.Base as ℕ
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -62,25 +70,20 @@ oneThirtySecond = + 1 / 32
 thirtyOneThirtySeconds = + 31 / 32
 
 oneThirtySecondPositive : 0ℚ < oneThirtySecond
-oneThirtySecondPositive = ℚP.positive⁻¹ oneThirtySecond
-
-oneThirtySecondBelowOne : oneThirtySecond < 1ℚ
-oneThirtySecondBelowOne = ℚP.<-cmp oneThirtySecond 1ℚ
+oneThirtySecondPositive =
+  let
+    instance
+      selectedPositive : Positive oneThirtySecond
+      selectedPositive = ℚP.normalize-pos 1 32
+  in
+  ℚP.positive⁻¹ oneThirtySecond
 
 largePolymerContractionPlusGapIsOne :
   oneThirtySecond + thirtyOneThirtySeconds ≡ 1ℚ
 largePolymerContractionPlusGapIsOne = ℚRing.solve []
-  where
-  open import Agda.Builtin.Equality using (_≡_)
 
 ------------------------------------------------------------------------
 -- Finite relevant/marginal channels on small polymers.
---
--- We make the four channels visible because this is the exact extraction
--- pattern repeatedly used in constructive RG: constant/local potential,
--- quadratic constant, quadratic first-moment, and quartic constant.  The
--- physical Yang--Mills realization may identify some channels by Ward/gauge
--- symmetry, but it may not omit the corresponding proof.
 ------------------------------------------------------------------------
 
 data ExtractionChannel : Set where
@@ -89,12 +92,20 @@ data ExtractionChannel : Set where
   quadraticLinearChannel : ExtractionChannel
   quarticConstantChannel : ExtractionChannel
 
+smallPolymerBlockThresholdD4 : Nat
+smallPolymerBlockThresholdD4 = 8
+
 record CorrectedSmallLargePolymerExtraction
     (Polymer Activity RelevantPart Bound : Set) : Set₁ where
   field
+    blockCount : Polymer → Nat
     Small Large : Polymer → Set
     classify : ∀ polymer → Small polymer ⊎ Large polymer
     smallLargeDisjoint : ∀ polymer → Small polymer → Large polymer → ⊥
+
+    -- The finite extraction branch is literally bounded by 2d=8 in d=4.
+    smallHasAtMostEightBlocks : ∀ polymer → Small polymer →
+      ℕ._≤_ (blockCount polymer) smallPolymerBlockThresholdD4
 
     activity : Polymer → Activity
     extractedRelevant : Polymer → RelevantPart
@@ -130,8 +141,6 @@ record CorrectedSmallLargePolymerExtraction
 
 open CorrectedSmallLargePolymerExtraction public
 
--- A global case split exposes exactly where analysis is needed: finite
--- extraction/normalization on Small, direct geometric decay on Large.
 data PolymerContractionCase
     {Polymer Activity RelevantPart Bound}
     (dataSet : CorrectedSmallLargePolymerExtraction
@@ -155,9 +164,6 @@ correctedSmallLargeExtractionCompilerLevel = machineChecked
 dyadicD4LargePolymerArithmeticLevel : ProofLevel
 dyadicD4LargePolymerArithmeticLevel = machineChecked
 
--- Physical frontier: construct the actual YM polymer norm/regulator, prove the
--- finite small-polymer extraction estimates, and prove that the large branch
--- really satisfies the declared geometric contraction in that SAME norm.
 physicalYMSmallPolymerExtractionLevel : ProofLevel
 physicalYMSmallPolymerExtractionLevel = conditional
 
