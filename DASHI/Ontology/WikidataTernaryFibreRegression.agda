@@ -1,7 +1,7 @@
 module DASHI.Ontology.WikidataTernaryFibreRegression where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
 import DASHI.Algebra.BalancedTernaryOppositionEvidenceBridgeExact as Opposition
@@ -61,13 +61,13 @@ strictAntipodeStillNotLogicalNegationByShape :
   Opposition.BalancedTernaryOppositionEvidenceBoundary.strictAntipodeIsLogicalNegationByCarrierShape
     Opposition.canonicalBalancedTernaryOppositionEvidenceBoundary
   ≡ false
-strictAntipodeStillNotLogicalNegationByShape = Agda.Builtin.Equality.refl
+strictAntipodeStillNotLogicalNegationByShape = refl
 
 fiveAntipodalClassesStillNotFiveD4IrrepSpecies :
   D4Sep.TernaryNineAntipodalD4Boundary.fiveAntipodalOrbitClassesAreFiveD4IrrepSpecies
     D4Sep.canonicalTernaryNineAntipodalD4Boundary
   ≡ false
-fiveAntipodalClassesStillNotFiveD4IrrepSpecies = Agda.Builtin.Equality.refl
+fiveAntipodalClassesStillNotFiveD4IrrepSpecies = refl
 
 binaryAggregateStillErasesDirectedDisagreement :
   BinaryAggregate.acceptCount
