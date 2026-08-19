@@ -73,9 +73,9 @@ everySufficientObserverSeparatesRelevantCollision :
     {coarse : State → Coarse}
     {fine : State → Fine}
     {consumer : State → Outcome} →
-  ConsumerRelevantCollision coarse consumer →
+  (collision : ConsumerRelevantCollision coarse consumer) →
   ConsumerSufficient fine consumer →
-  fine (left _) ≡ fine (right _) → ⊥
+  fine (left collision) ≡ fine (right collision) → ⊥
 everySufficientObserverSeparatesRelevantCollision collision sufficient sameFine =
   differentOutcome collision
     (sufficient
@@ -128,9 +128,10 @@ consumerRelevantResidualGivesStrictRefinement :
   Observer.StrictRefinement
     coarse
     (Observer.pairObserver coarse residual)
-consumerRelevantResidualGivesStrictRefinement collision repair =
+consumerRelevantResidualGivesStrictRefinement
+  {coarse = coarse} {residual = residual} collision repair =
   Observer.strictPairRefinement
-    _ _
+    coarse residual
     (left collision)
     (right collision)
     (sameSurface collision)
