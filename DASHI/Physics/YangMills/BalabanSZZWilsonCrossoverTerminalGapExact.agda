@@ -67,12 +67,12 @@ module DASHI.Physics.YangMills.BalabanSZZWilsonCrossoverTerminalGapExact where
 
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Integer.Base using (+_)
-open import Data.Product.Base using (_×_; _,_)
+open import Data.Product.Base using (_×_; _,_; proj₁)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_; _<_; _/_)
+  (ℚ; 0ℚ; 1ℚ; _+_; _-_; -_; _*_; _≤_; _<_; _/_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
@@ -82,10 +82,6 @@ oneHalf twentyFour oneFortyEight : ℚ
 oneHalf = + 1 / 2
 twentyFour = + 24 / 1
 oneFortyEight = + 1 / 48
-
-------------------------------------------------------------------------
--- Exact Wilson/SZZ convention bridge without division by a symbolic rank.
-------------------------------------------------------------------------
 
 record RationalRankNormalization : Set where
   field
@@ -121,10 +117,6 @@ wilsonSZZExponentCoefficientExact rank inverseCoupling =
         (inverseLaw rank))
       (ℚRing.solve-∀ inverseCoupling (inverseRankN rank)))
 
-------------------------------------------------------------------------
--- SZZ d=4 SU(N) curvature margin rewritten in inverse-g^2 coordinates.
-------------------------------------------------------------------------
-
 szzWilsonCurvatureMargin : RationalRankNormalization → ℚ → ℚ
 szzWilsonCurvatureMargin rank inverseCoupling =
   rankN rank * oneHalf
@@ -138,15 +130,14 @@ thresholdMarginZero :
   (rank : RationalRankNormalization) →
   szzWilsonCurvatureMargin rank (szzInverseCouplingThreshold rank) ≡ 0ℚ
 thresholdMarginZero rank =
-  let
-    expanded = ℚRing.solve-∀ (rankN rank) (inverseRankN rank)
-    reduceInverse = inverseLaw rank
-  in
-  trans expanded
+  trans
+    (ℚRing.solve-∀ (rankN rank) (inverseRankN rank))
     (trans
       (cong
-        (λ selected → rankN rank * oneHalf - (+ 1 / 2) * selected)
-        reduceInverse)
+        (λ selected →
+          rankN rank * oneHalf
+          - rankN rank * oneHalf * selected)
+        (inverseLaw rank))
       (ℚRing.solve-∀ (rankN rank)))
 
 perturbedSZZCurvatureMargin :
@@ -161,13 +152,6 @@ record SZZPerturbedTerminalCriterion (rank : RationalRankNormalization) : Set wh
       0ℚ < perturbedSZZCurvatureMargin
         rank inverseCoupling remainderHessianCost
 open SZZPerturbedTerminalCriterion public
-
-------------------------------------------------------------------------
--- Finite Balaban crossover: positive source beta coefficients drive u_n down
--- toward the infrared.  The caller chooses an interior target below the SZZ
--- threshold (or below the perturbatively corrected threshold) and proves that
--- the accumulated lower drift reaches it.
-------------------------------------------------------------------------
 
 record CrossoverTarget
     (trajectory : Flow.SourceNormalizedCouplingTrajectory)
@@ -189,7 +173,7 @@ crossoverInverseCouplingAtOrBelowTarget :
 crossoverInverseCouplingAtOrBelowTarget {trajectory} {bounds} target =
   let
     tube = Flow.sourceNormalizedTwoSidedUVTube bounds (depth target)
-    lowerDrift = Data.Product.Base.proj₁ tube
+    lowerDrift = proj₁ tube
     compared :
       Flow.inverseCoupling trajectory 0 - targetInverseCoupling target
       ≤ Flow.inverseCoupling trajectory 0
@@ -198,34 +182,43 @@ crossoverInverseCouplingAtOrBelowTarget {trajectory} {bounds} target =
       (accumulatedDriftReachesTarget target)
       lowerDrift
 
-    translated :
-      Flow.inverseCoupling trajectory (depth target)
-        + (Flow.inverseCoupling trajectory 0 - targetInverseCoupling target)
-      ≤ Flow.inverseCoupling trajectory (depth target)
-        + (Flow.inverseCoupling trajectory 0
-          - Flow.inverseCoupling trajectory (depth target))
-    translated = ℚP.+-monoˡ-≤
-      (Flow.inverseCoupling trajectory (depth target)) compared
+    shifted = ℚP.+-monoˡ-≤
+      (- Flow.inverseCoupling trajectory 0) compared
+
+    negativeOrder :
+      - targetInverseCoupling target
+      ≤ - Flow.inverseCoupling trajectory (depth target)
+    negativeOrder =
+      subst
+        (λ lower →
+          lower ≤
+          (- Flow.inverseCoupling trajectory 0)
+          + (Flow.inverseCoupling trajectory 0
+            - Flow.inverseCoupling trajectory (depth target)))
+        (ℚRing.solve-∀
+          (Flow.inverseCoupling trajectory 0)
+          (targetInverseCoupling target))
+        (subst
+          (λ upper →
+            (- Flow.inverseCoupling trajectory 0)
+            + (Flow.inverseCoupling trajectory 0
+              - targetInverseCoupling target)
+            ≤ upper)
+          (ℚRing.solve-∀
+            (Flow.inverseCoupling trajectory 0)
+            (Flow.inverseCoupling trajectory (depth target)))
+          shifted)
+
+    reversed = ℚP.neg-mono-≤ negativeOrder
   in
   subst
     (λ lower → lower ≤ targetInverseCoupling target)
-    (ℚRing.solve-∀
-      (Flow.inverseCoupling trajectory (depth target))
-      (Flow.inverseCoupling trajectory 0)
-      (targetInverseCoupling target))
+    (ℚRing.solve-∀ (Flow.inverseCoupling trajectory (depth target)))
     (subst
       (λ upper →
-        Flow.inverseCoupling trajectory (depth target)
-          + (Flow.inverseCoupling trajectory 0 - targetInverseCoupling target)
-        ≤ upper)
-      (ℚRing.solve-∀
-        (Flow.inverseCoupling trajectory (depth target))
-        (Flow.inverseCoupling trajectory 0))
-      translated)
-
-------------------------------------------------------------------------
--- Physical handoff boundary.
-------------------------------------------------------------------------
+        - (- Flow.inverseCoupling trajectory (depth target)) ≤ upper)
+      (ℚRing.solve-∀ (targetInverseCoupling target))
+      reversed)
 
 record BalabanToSZZTerminalHandoff
     (rank : RationalRankNormalization)
@@ -233,12 +226,8 @@ record BalabanToSZZTerminalHandoff
     (bounds : Flow.UniformBetaEnclosure trajectory) : Set₁ where
   field
     crossover : CrossoverTarget trajectory bounds
-
     remainderHessianCost : ℚ
 
-    -- Same-object analytic theorem: at the crossover depth the source-native
-    -- effective density is the Wilson action with coefficient u_n plus a
-    -- remainder whose Hessian quadratic form costs at most this number.
     effectiveDensityIsWilsonPlusControlledRemainder : Set
 
     targetLeavesPositivePerturbedSZZMargin :
@@ -247,9 +236,6 @@ record BalabanToSZZTerminalHandoff
         (targetInverseCoupling crossover)
         remainderHessianCost
 
-    -- Monotonicity of the Wilson curvature margin on the declared nonnegative
-    -- inverse-coupling region.  Kept explicit because the physical carrier must
-    -- establish the sign/order conventions rather than silently importing them.
     actualCrossoverMarginAtLeastTargetMargin :
       perturbedSZZCurvatureMargin
         rank
@@ -260,8 +246,6 @@ record BalabanToSZZTerminalHandoff
         (Flow.inverseCoupling trajectory (depth crossover))
         remainderHessianCost
 
-    -- Published SZZ/Bakry--Emery consequence, specialized to the literal
-    -- effective density after the same-object identification above.
     volumeUniformPoincareAtTerminalScale : Set
     derivativeCommutatorPropagationAtTerminalScale : Set
     exponentialSpatialCovarianceDecayAtTerminalScale : Set
@@ -288,11 +272,5 @@ balabanSZZFiniteCrossoverCompilerLevel = machineChecked
 balabanSZZPerturbedCurvatureCompilerLevel : ProofLevel
 balabanSZZPerturbedCurvatureCompilerLevel = machineChecked
 
--- The remaining physical theorem is now sharply the SAME-OBJECT estimate:
--- construct one RG scale whose effective density has the Wilson coefficient
--- dictated by `inverseCoupling` and bound the Hessian of every non-Wilson
--- polymer/remainder term tightly enough that the positive SZZ curvature slack
--- survives.  If that theorem is obtained before the Balaban validity window
--- ends, a separate mysterious terminal-gap producer is unnecessary.
 physicalBalabanToSZZSameObjectHandoffLevel : ProofLevel
 physicalBalabanToSZZSameObjectHandoffLevel = conditional
