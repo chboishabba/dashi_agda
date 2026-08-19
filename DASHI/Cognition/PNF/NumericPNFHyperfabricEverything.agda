@@ -54,6 +54,7 @@ import DASHI.Cognition.PNF.DependencyIndexedOwnerWakeupExact
 import DASHI.Cognition.PNF.SparseFrontierTopologyExact
 import DASHI.Cognition.PNF.IndependentSentenceAdmissionExact
 import DASHI.Cognition.PNF.ProducerNativeDemandProjectionExact
+import DASHI.Cognition.PNF.OptimizationEconomyExact
 import DASHI.Cognition.PNF.EditTransportLeafLocalityRegression
 import DASHI.Cognition.PNF.FrequencyAdaptiveSymbolCode
 import DASHI.Cognition.PNF.HotColdExecutionProjection
