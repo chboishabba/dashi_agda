@@ -38,6 +38,7 @@ module DASHI.Physics.YangMills.BalabanUnifiedSeventeenThirtySecondTailModulusExa
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Data.Nat.Base using (_+_)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_; _/_)
