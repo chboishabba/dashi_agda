@@ -1,0 +1,102 @@
+module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound65UnifiedBackwardsValidation where
+
+------------------------------------------------------------------------
+-- ROUND65 FOCUSED ROOT
+--
+-- This root records the current highest-alpha dependency correction:
+--
+--   * seven mathematically distinct programmes are the honest backwards cutset;
+--   * four packages are possible only if one unified polymer/Schwinger theorem
+--     closes continuum existence + local/composite fields + interaction
+--     survival + physical clustering on the same family;
+--   * generic four-dimensional UV RG stability is already source-owned by the
+--     published Bałaban CMP119/CMP122 theorem chain;
+--   * signed G2 is five exact degree blocks before polarization;
+--   * the universal SU(2) one-loop log coefficient follows from the literal
+--     scalar reduction; four-orbit Bishop work controls the regular matching
+--     remainder instead of discovering beta_0 numerically.
+------------------------------------------------------------------------
+
+open import Agda.Builtin.Equality using (_≡_; refl)
+
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.YangMillsClaySevenProgrammeBackwardsCompilerExact as Seven
+import DASHI.Physics.YangMills.YangMillsClayFourPackageBackwardsCompilerExact as Four
+import DASHI.Physics.YangMills.BalabanUnifiedPolymerSchwingerNormExact as Unified
+import DASHI.Physics.YangMills.BalabanPublishedUVStabilityNonlinearRGCoreExact as UV
+import DASHI.Physics.YangMills.BalabanSelectedRegionFiveBlockSignedG2Exact as G2
+import DASHI.Physics.YangMills.BalabanSU2OneLoopInfraredCoefficientFromLiteralScalarExact as OneLoop
+import DASHI.Physics.YangMills.BalabanLiteralTransferNaturalityMasterExact as Transfer
+import DASHI.Physics.YangMills.BalabanCutoffUniformPhysicalTransferGapMasterExact as Gap
+import DASHI.Physics.YangMills.YangMillsContinuumLocalOperatorOPEStressTensorExact as Local
+import DASHI.Physics.YangMills.YangMillsContinuumFourthCumulantNonGaussianExact as Fourth
+import DASHI.Physics.YangMills.BalabanOSExponentialClusteringImpliesHamiltonianGapExact as OSGap
+
+round65HonestProgrammeCountExact : Seven.sevenProgrammeCount ≡ 7
+round65HonestProgrammeCountExact = Seven.sevenProgrammeCountExact
+
+round65ConditionalFourPackageCountExact : Four.fourPackageCount ≡ 4
+round65ConditionalFourPackageCountExact = Four.fourPackageCountExact
+
+round65BackwardsCompilerLevel : ProofLevel
+round65BackwardsCompilerLevel = machineChecked
+
+round65UnifiedProjectionTheoremsLevel : ProofLevel
+round65UnifiedProjectionTheoremsLevel = Unified.unifiedNormProjectionClosureLevel
+
+round65PublishedUVCoreLevel : ProofLevel
+round65PublishedUVCoreLevel = UV.publishedFourDimensionalNonlinearRGCoreLevel
+
+round65FiveBlockG2CompilerLevel : ProofLevel
+round65FiveBlockG2CompilerLevel = G2.fiveBlockSignedG2CompilerLevel
+
+round65LiteralBetaCoefficientCompilerLevel : ProofLevel
+round65LiteralBetaCoefficientCompilerLevel =
+  OneLoop.literalScalarReductionToUniversalBetaCoefficientLevel
+
+-- These remain the physical research seams.  The names intentionally point at
+-- actual source/carrier work rather than generic downstream consequences.
+round65PhysicalFiveBlockG2Level : ProofLevel
+round65PhysicalFiveBlockG2Level = G2.physicalFiveBlockSignedG2Level
+
+round65LiteralWilsonGhostHaarScalarReductionLevel : ProofLevel
+round65LiteralWilsonGhostHaarScalarReductionLevel =
+  OneLoop.literalWilsonGhostHaarWardScalarReductionLevel
+
+round65LiteralRegularMatchingRemainderLevel : ProofLevel
+round65LiteralRegularMatchingRemainderLevel =
+  OneLoop.literalFourOrbitRegularMatchingRemainderLevel
+
+round65LiteralPhysicalStateToPublishedRGCarrierLevel : ProofLevel
+round65LiteralPhysicalStateToPublishedRGCarrierLevel =
+  UV.literalPhysicalStateToPublishedRGCarrierLevel
+
+round65UnifiedPhysicalPolymerNormLevel : ProofLevel
+round65UnifiedPhysicalPolymerNormLevel =
+  Unified.physicalYMUnifiedPolymerNormProducerLevel
+
+round65LiteralTransferLevel : ProofLevel
+round65LiteralTransferLevel = Transfer.physicalLiteralOSCompatibleTransferNaturalityLevel
+
+round65CutoffUniformPhysicalGapLevel : ProofLevel
+round65CutoffUniformPhysicalGapLevel = Gap.physicalCutoffUniformTransferGapLevel
+
+round65LocalOPEStressLevel : ProofLevel
+round65LocalOPEStressLevel = Local.physicalContinuumLocalOperatorOPEStressTensorLevel
+
+-- Fourth-cumulant -> non-Gaussian and OS clustering -> Hamiltonian gap remain
+-- downstream theorem closures; their physical same-limit producers are not
+-- reintroduced here as new algebraic lemmas.
+round65FourthCumulantToNonGaussianLevel : ProofLevel
+round65FourthCumulantToNonGaussianLevel = machineChecked
+
+round65OSClusteringToHamiltonianGapLevel : ProofLevel
+round65OSClusteringToHamiltonianGapLevel = machineChecked
+
+-- Seven is authoritative today.  Four becomes authoritative only after an
+-- actual physical UnifiedContinuumRGCompletion is constructed.
+round65SevenProgrammePhysicalInstantiationLevel : ProofLevel
+round65SevenProgrammePhysicalInstantiationLevel = conditional
+
+round65FourPackageCollapseLevel : ProofLevel
+round65FourPackageCollapseLevel = Four.fourPackagePhysicalCollapseLevel
