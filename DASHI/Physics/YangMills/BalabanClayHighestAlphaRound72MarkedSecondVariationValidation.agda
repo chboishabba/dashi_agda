@@ -1,44 +1,53 @@
 module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound72MarkedSecondVariationValidation where
 
 ------------------------------------------------------------------------
--- ROUND72 FOCUSED ROOT
+-- ROUND73 FOCUSED ROOT (file name retained for stacked import stability)
 --
--- Highest-alpha refinement of Lemmas 7--8:
+-- Highest-alpha correction to the Round72 8-lemma cutset:
 --
---   published CMP99(3) marked propagator/domain decay
---      + CMP109 ALREADY-DIFFERENTIATED E^(2) tree representation
---      + factorwise ordinary/marked OPERATOR estimates
---      + OWNED noncommutative marked-product telescope
---      + CMP116 generalized-walk/tree resummation
---   ---------------------------------------------------------------
---      marked differentiated-activity exponential localization
---      -> dyadic / (3/2)-weighted Hessian row
---      -> multiscale curvature
+-- CMP109 itself already performs the relevant TWO field variations before the
+-- marked localization step.  After (4.35) it states that replacing the
+-- domain-dependent H_j(Omega_0) by its free-boundary version supplies an extra
+-- exponential marked-distance factor in the bound of the corresponding E^(2)
+-- expression; (4.36)--(4.37) extend/resum the localization-domain family, and
+-- Sect. 5 equation (5.10) records exponential position-space decay of Pi.
+--
+-- Therefore the old independent item
+--
+--     MarkedDifferentiatedActivityExponentialLocalisation
+--
+-- is SOURCE-OWNED rather than new Yang--Mills analysis.  Its only live seam is
+-- same-object identification of CMP109's E^(2)/Pi with the Hessian/derivative
+-- coordinate of the literal unified RG state.  That identification belongs in
+-- `LiteralStateEntersPublishedBalabanRG` / `PhysicalUnifiedOneStepYMEstimate`.
+--
+-- The mass-gap lane is now:
+--
+--   source-owned CMP99(3)+CMP109 differentiated marked decay
+--      -> SAME unified-RG Hessian coordinate
+--      -> existing exponential/dyadic/(3/2)-weighted row compilers
+--      -> same-density Polchinski curvature
 --      -> compact-Lie Langevin commutator
---         = symmetric Hessian + onsite skew connection
---      -> skew connection contributes zero quadratic derivative energy
---      -> quasi-local propagation -> spatial clustering -> OS gap.
+--         = symmetric Hessian + onsite ad-skew connection
+--      -> exact sitewise skew quadratic cancellation
+--      -> weighted propagation + temporal relaxation
+--      -> spatial clustering -> SAME-family OS Hamiltonian gap.
 --
--- CMP109 has already taken the two external field variations by the active
--- localization step.  Generic Cauchy machinery remains a fallback, not the
--- primary source-native proof.  Likewise the CMP109 tree factors are generally
--- operator/multilinear compositions, so the noncommutative telescope is the
--- source-faithful primary assembly; the scalar telescope is only calibration.
---
+-- This is a genuine 8 -> 7 analytic-cutset reduction, not a relabelling.
+------------------------------------------------------------------------
+
 -- PRIMARY SOURCES
 --
 -- Tadeusz Bałaban,
 -- "Propagators for Lattice Gauge Theories in a Background Field",
 -- CMP 99(3) (1985), 389--434. DOI: 10.1007/BF01240355.
--- Theorem 3.14/(3.154): marked domain-sequence difference decay.
 --
 -- Tadeusz Bałaban,
 -- "Renormalization Group Approach to Lattice Gauge Field Theories. I.
 -- Generation of Effective Actions in a Small Field Approximation and a
 -- Coupling Constant Renormalization in Four Dimensions",
 -- CMP 109 (1987), 249--301. DOI: 10.1007/BF01215223.
--- Equations (4.3)--(4.5), the n=2 specialization (4.35), and resummation
--- (4.37) are the source-native differentiated lane.
+-- Source anchors: (4.3)--(4.5), (4.35)--(4.37), (5.10).
 --
 -- Tadeusz Bałaban,
 -- "Renormalization Group Approach to Lattice Gauge Field Theories. II.
@@ -49,26 +58,26 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound72MarkedSecondVariati
 -- "Lie Groups, Lie Algebras, and Representations: An Elementary Introduction",
 -- second edition, GTM 222, Springer (2015).
 -- DOI: 10.1007/978-3-319-13467-3.
--- Calibration for the compact-Lie bi-invariant metric / adjoint geometry.
 --
--- TREE/FOREST CROSS-CHECKS
+-- John Milnor,
+-- "Curvatures of Left Invariant Metrics on Lie Groups",
+-- Advances in Mathematics 21 (1976), 293--329.
+-- DOI: 10.1016/S0001-8708(76)80002-3.
 --
+-- TREE/FOREST CROSS-CHECKS ONLY
 -- David C. Brydges and Paul Federbush,
 -- "A New Form of the Mayer Expansion in Classical Statistical Mechanics",
 -- J. Math. Phys. 19 (1978), 2064--2067. DOI: 10.1063/1.523586.
---
 -- David C. Brydges and Thomas Kennedy,
 -- "Mayer Expansions and the Hamilton-Jacobi Equation",
 -- J. Stat. Phys. 48 (1987), 19--49. DOI: 10.1007/BF01010398.
---
 -- Abdelmalek Abdesselam and Vincent Rivasseau,
 -- "Trees, Forests and Jungles: A Botanical Garden for Cluster Expansions",
--- Lecture Notes in Physics 446 (1995), 7--36.
--- DOI: 10.1007/3-540-59190-7_20. arXiv:hep-th/9409094.
+-- LNP 446 (1995), 7--36. DOI: 10.1007/3-540-59190-7_20.
 --
--- Guardrail: BBF/Brydges--Kennedy/forest formulae calibrate connected
--- graph/tree resummation only.  They do not justify CMP99 common-domain walk
--- cancellation; that equality comes from paired restricted background data.
+-- Guardrail: tree/forest formulas calibrate resummation; Bałaban's exact
+-- common-domain cancellation comes from equality of paired restricted
+-- background data, not from BBF itself.
 ------------------------------------------------------------------------
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -81,80 +90,70 @@ import DASHI.Physics.YangMills.BalabanNoncommutativeMarkedOperatorProductExact
 import DASHI.Physics.YangMills.BalabanMarkedPolarisationResummation
 import DASHI.Physics.YangMills.BalabanExponentialToDyadicShellCoarseningExact
 import DASHI.Physics.YangMills.BalabanSourceExponentialToWeightedHessianExact
+import DASHI.Physics.YangMills.CompactLieBiInvariantSkewLangevinExact
 import DASHI.Physics.YangMills.CompactLieLangevinSkewConnectionCancellationExact
 
-round72PublishedMarkedPropagatorDecayLevel : ProofLevel
-round72PublishedMarkedPropagatorDecayLevel = standardImported
-
-round72PublishedDifferentiatedActivityTreeStructureLevel : ProofLevel
-round72PublishedDifferentiatedActivityTreeStructureLevel = standardImported
-
-round72PublishedGeneralizedWalkClusterLocalisationLevel : ProofLevel
-round72PublishedGeneralizedWalkClusterLocalisationLevel = standardImported
-
--- Source-faithful noncommutative finite product assembly.
-round72NoncommutativeMarkedOperatorAssemblyLevel : ProofLevel
-round72NoncommutativeMarkedOperatorAssemblyLevel = machineChecked
-
--- Scalar product assembly remains an exact shadow/calibration.
-round72ScalarMarkedProductAssemblyLevel : ProofLevel
-round72ScalarMarkedProductAssemblyLevel = machineChecked
-
-round72FiniteMarkedWalkResummationLevel : ProofLevel
-round72FiniteMarkedWalkResummationLevel = machineChecked
-
-round72ExponentialShellToWeightedRowLevel : ProofLevel
-round72ExponentialShellToWeightedRowLevel = machineChecked
-
--- Standard compact-Lie connection geometry + owned skew quadratic cancellation.
-round72CompactLieAdSkewGeometryLevel : ProofLevel
-round72CompactLieAdSkewGeometryLevel = standardImported
-
-round72SkewConnectionQuadraticCancellationLevel : ProofLevel
-round72SkewConnectionQuadraticCancellationLevel = machineChecked
-
 ------------------------------------------------------------------------
--- TRUE REMAINING LEMMA 7 PRIMITIVE
---
--- On every literal OPERATOR/multilinear factor in CMP109 (4.3)--(4.5), prove
---
---   ||factor_Ω||                  <= b_i,
---   ||factor_Ω'||                 <= b_i,
---   ||factor_Ω - factor_Ω'||      <= m_i,
---
--- where the marked difference m_i inherits CMP99(3) distance-to-change decay
--- and the ordinary b_i retain enough CMP109 tree decay that the noncommutative
--- telescoping majorant has a positive residual localization exponent after
--- CMP116 resummation.
---
--- Existing theorems then construct the whole differentiated tree-product bound,
--- marked E^(2) shell, and weighted quasi-local Hessian row automatically.
+-- SOURCE-OWNED DIFFERENTIATED MARKED LOCALISATION
 ------------------------------------------------------------------------
 
-round72PhysicalCMP109MarkedOperatorFactorBoundsLevel : ProofLevel
-round72PhysicalCMP109MarkedOperatorFactorBoundsLevel = conditional
+round73PublishedMarkedPropagatorDecayLevel : ProofLevel
+round73PublishedMarkedPropagatorDecayLevel = standardImported
+
+round73PublishedDifferentiatedActivityTreeStructureLevel : ProofLevel
+round73PublishedDifferentiatedActivityTreeStructureLevel = standardImported
+
+round73PublishedDifferentiatedMarkedE2DecayLevel : ProofLevel
+round73PublishedDifferentiatedMarkedE2DecayLevel = standardImported
+
+round73PublishedGeneralizedWalkClusterLocalisationLevel : ProofLevel
+round73PublishedGeneralizedWalkClusterLocalisationLevel = standardImported
 
 ------------------------------------------------------------------------
--- SHARPENED LEMMA 8 SEAMS
---
--- (A) identify the SAME Balaban effective density/covariance path with the
---     Bauerschmidt--Bodineau Polchinski C_t, dot C_t, ddot C_t and prove the
---     multiscale curvature/debt inequality from the weighted Hessian row;
---
--- (B) identify the literal compact-group lattice Langevin commutator in a
---     bi-invariant frame.  Once that identity is proved, the connection part is
---     onsite skew and its quadratic derivative-energy contribution is already
---     zero by CompactLieLangevinSkewConnectionCancellationExact.  Therefore no
---     new symmetric growth budget beyond the SAME Hessian is required.
+-- OWNED FINITE / QUASI-LOCAL ASSEMBLY
 ------------------------------------------------------------------------
 
-round72PhysicalSameDensityPolchinskiCurvatureLevel : ProofLevel
-round72PhysicalSameDensityPolchinskiCurvatureLevel = conditional
+round73NoncommutativeMarkedOperatorAssemblyLevel : ProofLevel
+round73NoncommutativeMarkedOperatorAssemblyLevel = machineChecked
 
-round72PhysicalLiteralCompactLieLangevinCommutatorLevel : ProofLevel
-round72PhysicalLiteralCompactLieLangevinCommutatorLevel = conditional
+round73ScalarMarkedProductAssemblyLevel : ProofLevel
+round73ScalarMarkedProductAssemblyLevel = machineChecked
 
--- After (A)+(B), weighted Gronwall + temporal relaxation are standard analysis;
--- the existing clustering/OS chain consumes their spatial covariance output.
-round72PhysicalWeightedPropagationSameFamilyLevel : ProofLevel
-round72PhysicalWeightedPropagationSameFamilyLevel = conditional
+round73FiniteMarkedWalkResummationLevel : ProofLevel
+round73FiniteMarkedWalkResummationLevel = machineChecked
+
+round73ExponentialShellToWeightedRowLevel : ProofLevel
+round73ExponentialShellToWeightedRowLevel = machineChecked
+
+round73BasisFreeAdSkewCancellationLevel : ProofLevel
+round73BasisFreeAdSkewCancellationLevel = machineChecked
+
+------------------------------------------------------------------------
+-- LIVE SAME-OBJECT SEAMS
+--
+-- S0 belongs inside the unified physical RG theorem, not as an independent
+-- decay lemma: identify source E^(2)/Pi with the derivative/Hessian coordinate
+-- of the SAME literal effective density and norm.
+--
+-- S1 identifies that same density/covariance path with the exact Polchinski
+-- C_t, dot C_t, ddot C_t and proves the multiscale curvature/debt inequality.
+--
+-- S2 proves the literal compact-group lattice Langevin commutator.  The
+-- connection part then contributes exactly zero quadratic derivative energy by
+-- the basis-free Ad-invariant theorem; no second positive growth budget exists.
+--
+-- S3 is the standard weighted-Gronwall/temporal-relaxation assembly and
+-- same-family passage to Euclidean spatial clustering.
+------------------------------------------------------------------------
+
+round73PhysicalCMP109E2IsUnifiedRGHessianCoordinateLevel : ProofLevel
+round73PhysicalCMP109E2IsUnifiedRGHessianCoordinateLevel = conditional
+
+round73PhysicalSameDensityPolchinskiCurvatureLevel : ProofLevel
+round73PhysicalSameDensityPolchinskiCurvatureLevel = conditional
+
+round73PhysicalLiteralCompactLieLangevinCommutatorLevel : ProofLevel
+round73PhysicalLiteralCompactLieLangevinCommutatorLevel = conditional
+
+round73PhysicalWeightedPropagationSameFamilyLevel : ProofLevel
+round73PhysicalWeightedPropagationSameFamilyLevel = conditional
