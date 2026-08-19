@@ -46,6 +46,7 @@ import DASHI.Algebra.RamifiedLocalValuationSharpnessExact as Ramified
 import DASHI.Moonshine.DuncanSwisherDeligneAutomorphismDepthBridgeExact as Aut
 import DASHI.Moonshine.DuncanSwisherLegendreRamificationDepthExact as Legendre
 import DASHI.Moonshine.P11GeometricSupersingularCarrierExact as Geo
+import DASHI.Moonshine.P11EichlerDeuringStackUnweightingExact as Stack11
 
 record DworkLocalA1Factorization
     (t : Aut.SupersingularAutomorphismType) : Set₁ where
@@ -146,7 +147,7 @@ p11A1DepthIsBrandtMonodromyWeight :
   (c : Geo.P11SupersingularJ) →
   let A = publishedDworkLocalA1Factorization (Legendre.p11AutType c)
   in Ramified.valuation (padicValuation A) (A1Coefficient A)
-      ≡ Legendre.Stack11.p11MonodromyWeight c
+      ≡ Stack11.p11MonodromyWeight c
 p11A1DepthIsBrandtMonodromyWeight c =
   trans
     (sharpA1DepthIsRamification (Legendre.p11AutType c))
