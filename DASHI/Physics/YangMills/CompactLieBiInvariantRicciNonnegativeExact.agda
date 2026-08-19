@@ -31,12 +31,14 @@ module DASHI.Physics.YangMills.CompactLieBiInvariantRicciNonnegativeExact where
 --
 --     Hess V_t >= kappa_t g.
 --
--- This removes a whole geometric estimate from the physical #6 theorem.  The
--- remaining curvature debt is entirely an effective-action Hessian problem.
+-- This removes a whole geometric estimate from physical theorem #6.  The live
+-- curvature debt is entirely an effective-action Hessian problem.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.List.Base using (List; []; _∷_)
+open import Data.List.Membership.Propositional using (_∈_)
+open import Data.List.Relation.Unary.Any using (here; there)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -51,7 +53,6 @@ record OrderedCurvatureScalar : Set₁ where
     zero≤quarter : zero ≤ quarter
     addMono : ∀ {a b c d} → a ≤ b → c ≤ d → add a c ≤ add b d
     mulNonnegative : ∀ {a b} → zero ≤ a → zero ≤ b → zero ≤ mul a b
-    zeroMul : ∀ x → mul zero x ≡ zero
     addZeroLeft : ∀ x → add zero x ≡ x
 
 open OrderedCurvatureScalar public
@@ -75,6 +76,31 @@ sectionalNonnegative {S} D X Y
   rewrite sectionalFormula D X Y =
   mulNonnegative S (zero≤quarter S) (bracketNormSqNonnegative D X Y)
 
+foldAdd : ∀ S → List (Scalar S) → Scalar S
+foldAdd S [] = zero S
+foldAdd S (x ∷ xs) = add S x (foldAdd S xs)
+
+finiteSumNonnegative :
+  ∀ {S} →
+  (values : List (Scalar S)) →
+  (∀ x → x ∈ values → zero S ≤ x) →
+  zero S ≤ foldAdd S values
+finiteSumNonnegative {S} [] pointwise = refl≤ S (zero S)
+finiteSumNonnegative {S} (x ∷ xs) pointwise =
+  let
+    first = pointwise x (here refl)
+    rest = finiteSumNonnegative xs
+      (λ y y∈xs → pointwise y (there y∈xs))
+    summed = addMono S first rest
+  in
+  lowerZero summed
+  where
+  lowerZero :
+    {a : Scalar S} →
+    add S (zero S) (zero S) ≤ a →
+    zero S ≤ a
+  lowerZero proof rewrite addZeroLeft S (zero S) = proof
+
 sumSectional :
   ∀ {S} (D : BiInvariantSectionalCurvatureData S) →
   Lie D → List (Lie D) → Scalar S
@@ -85,59 +111,27 @@ sumSectional {S} D X (Y ∷ Ys) =
 sumSectionalNonnegative :
   ∀ {S} (D : BiInvariantSectionalCurvatureData S) X frame →
   zero S ≤ sumSectional D X frame
-sumSectionalNonnegative {S} D X [] = refl≤ S (zero S)
-sumSectionalNonnegative {S} D X (Y ∷ Ys) =
-  let
-    first = sectionalNonnegative D X Y
-    rest = sumSectionalNonnegative D X Ys
-    summed = addMono S first rest
-  in
-  -- 0 + 0 = 0 on the lower side.
-  substLowerZero summed
+sumSectionalNonnegative {S} D X frame =
+  finiteSumNonnegative
+    (mapSectional D X frame)
+    (mapSectionalPointwise D X frame)
   where
-  substLowerZero :
-    {a : Scalar S} →
-    add S (zero S) (zero S) ≤ a →
-    zero S ≤ a
-  substLowerZero proof rewrite addZeroLeft S (zero S) = proof
+  mapSectional :
+    BiInvariantSectionalCurvatureData S →
+    Lie D → List (Lie D) → List (Scalar S)
+  mapSectional D X [] = []
+  mapSectional D X (Y ∷ Ys) = sectional D X Y ∷ mapSectional D X Ys
 
--- A finite product Ricci quadratic form is represented as a finite sum of
--- factor Ricci quadratic forms.  Nonnegativity therefore tensorizes without a
--- factor depending on the number of sites/edges.
-sumNonnegative :
-  ∀ {S} →
-  (values : List (Scalar S)) →
-  (∀ x → x ∈ values → zero S ≤ x) →
-  zero S ≤ foldAdd S values
-sumNonnegative = finiteSumNonnegative
-  where
-  open import Data.List.Membership.Propositional using (_∈_)
-  open import Data.List.Relation.Unary.Any using (here; there)
-
-  foldAdd : ∀ S → List (Scalar S) → Scalar S
-  foldAdd S [] = zero S
-  foldAdd S (x ∷ xs) = add S x (foldAdd S xs)
-
-  finiteSumNonnegative :
-    ∀ {S} →
-    (values : List (Scalar S)) →
-    (∀ x → x ∈ values → zero S ≤ x) →
-    zero S ≤ foldAdd S values
-  finiteSumNonnegative {S} [] pointwise = refl≤ S (zero S)
-  finiteSumNonnegative {S} (x ∷ xs) pointwise =
-    let
-      first = pointwise x (here refl)
-      rest = finiteSumNonnegative xs
-        (λ y y∈xs → pointwise y (there y∈xs))
-      summed = addMono S first rest
-    in
-    lowerZero summed
-    where
-    lowerZero :
-      {a : Scalar S} →
-      add S (zero S) (zero S) ≤ a →
-      zero S ≤ a
-    lowerZero proof rewrite addZeroLeft S (zero S) = proof
+  mapSectionalPointwise :
+    (D : BiInvariantSectionalCurvatureData S) →
+    (X : Lie D) →
+    (frame : List (Lie D)) →
+    ∀ q → q ∈ mapSectional D X frame → zero S ≤ q
+  mapSectionalPointwise D X [] q ()
+  mapSectionalPointwise D X (Y ∷ Ys) .(sectional D X Y) (here refl) =
+    sectionalNonnegative D X Y
+  mapSectionalPointwise D X (Y ∷ Ys) q (there q∈rest) =
+    mapSectionalPointwise D X Ys q q∈rest
 
 -- Standard geometric ownership: Milnor's bi-invariant sectional-curvature
 -- formula and the product-Ricci identity are imported geometry, while all
