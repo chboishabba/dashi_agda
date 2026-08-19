@@ -42,6 +42,7 @@ import DASHI.Physics.Closure.NSTriadKNConvectiveRotationalTriadIdentityRound93Ex
 import DASHI.Physics.Closure.NSTriadKNLiteralOrderedPairWaleffeFactorRound93Exact as Local
 import DASHI.Physics.Closure.NSTriadKNComplex3ScalarTripleOrbitRound93Exact as Triple
 import DASHI.Physics.Closure.NSTriadKNCurlRealityHelicalTransportRound93Exact as CurlReality
+import DASHI.Physics.Closure.NSTriadKNComplex3BeltramiCrossSuppressionRound93Exact as Cross
 
 realSubtract :
   ∀ {r} {F : C3.RealField r} →
@@ -237,7 +238,7 @@ pEnergyActualAmplitude :
     (O : LiteralThreeLegHelicalOrbit E I tau) →
   C3.hermitianPairing3
     (velocity O (Physical.p tau))
-    (DASHI.Physics.Closure.NSTriadKNComplex3BeltramiCrossSuppressionRound93Exact.complex3Cross
+    (Cross.complex3Cross
       (velocity O (Physical.k tau))
       (velocity O (Z3.negateMode (Physical.q tau))))
   ≡
@@ -250,8 +251,7 @@ pEnergyActualAmplitude {tau = tau} O =
     (λ selected →
       C3.hermitianPairing3
         (velocity O (Physical.p tau))
-        (DASHI.Physics.Closure.NSTriadKNComplex3BeltramiCrossSuppressionRound93Exact.complex3Cross
-          (velocity O (Physical.k tau)) selected))
+        (Cross.complex3Cross (velocity O (Physical.k tau)) selected))
     (reality O (Physical.q tau))
 
 qEnergyActualAmplitude :
@@ -262,7 +262,7 @@ qEnergyActualAmplitude :
     (O : LiteralThreeLegHelicalOrbit E I tau) →
   C3.hermitianPairing3
     (velocity O (Physical.q tau))
-    (DASHI.Physics.Closure.NSTriadKNComplex3BeltramiCrossSuppressionRound93Exact.complex3Cross
+    (Cross.complex3Cross
       (velocity O (Physical.k tau))
       (velocity O (Z3.negateMode (Physical.p tau))))
   ≡
@@ -275,8 +275,7 @@ qEnergyActualAmplitude {tau = tau} O =
     (λ selected →
       C3.hermitianPairing3
         (velocity O (Physical.q tau))
-        (DASHI.Physics.Closure.NSTriadKNComplex3BeltramiCrossSuppressionRound93Exact.complex3Cross
-          (velocity O (Physical.k tau)) selected))
+        (Cross.complex3Cross (velocity O (Physical.k tau)) selected))
     (reality O (Physical.p tau))
 
 pEnergyTransferCommonAmplitude :
@@ -296,10 +295,6 @@ pEnergyTransferCommonAmplitude {F = F} E I tau O =
       (velocity O (Physical.p tau))
       (velocity O (Physical.q tau))
       (velocity O (Physical.k tau))
-    pA = Triple.pEnergyGeometricAmplitude
-      (velocity O (Physical.p tau))
-      (velocity O (Physical.q tau))
-      (velocity O (Physical.k tau))
     dQK = realSubtract (lambdaQ O) (lambdaK O)
   in
   trans
@@ -312,7 +307,7 @@ pEnergyTransferCommonAmplitude {F = F} E I tau O =
             (C3.complexMultiply coefficient
               (C3.hermitianPairing3
                 (velocity O (Physical.p tau))
-                (DASHI.Physics.Closure.NSTriadKNComplex3BeltramiCrossSuppressionRound93Exact.complex3Cross
+                (Cross.complex3Cross
                   (velocity O (Physical.k tau))
                   (velocity O (Z3.negateMode (Physical.q tau)))))))
         (realEmbedSubtract (lambdaQ O) (lambdaK O)))
@@ -354,10 +349,6 @@ qEnergyTransferCommonAmplitude {F = F} E I tau O =
       (velocity O (Physical.p tau))
       (velocity O (Physical.q tau))
       (velocity O (Physical.k tau))
-    qA = Triple.qEnergyGeometricAmplitude
-      (velocity O (Physical.p tau))
-      (velocity O (Physical.q tau))
-      (velocity O (Physical.k tau))
     dPK = realSubtract (lambdaP O) (lambdaK O)
   in
   trans
@@ -370,7 +361,7 @@ qEnergyTransferCommonAmplitude {F = F} E I tau O =
             (C3.complexMultiply coefficient
               (C3.hermitianPairing3
                 (velocity O (Physical.q tau))
-                (DASHI.Physics.Closure.NSTriadKNComplex3BeltramiCrossSuppressionRound93Exact.complex3Cross
+                (Cross.complex3Cross
                   (velocity O (Physical.k tau))
                   (velocity O (Z3.negateMode (Physical.p tau)))))))
         (realEmbedSubtract (lambdaP O) (lambdaK O)))
