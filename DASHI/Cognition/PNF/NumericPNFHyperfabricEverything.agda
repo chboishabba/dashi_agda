@@ -56,6 +56,7 @@ import DASHI.Cognition.PNF.IndependentSentenceAdmissionExact
 import DASHI.Cognition.PNF.ProducerNativeDemandProjectionExact
 import DASHI.Cognition.PNF.OptimizationEconomyExact
 import DASHI.Cognition.PNF.ConsumerRestrictionAggregationIntertwinerExact
+import DASHI.Cognition.PNF.ConsumerRestrictionAggregationIntertwinerRegression
 import DASHI.Cognition.PNF.EditTransportLeafLocalityRegression
 import DASHI.Cognition.PNF.FrequencyAdaptiveSymbolCode
 import DASHI.Cognition.PNF.HotColdExecutionProjection
