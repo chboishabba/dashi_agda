@@ -29,34 +29,22 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound69NinePhysicalValidat
 -- * rooted Step-V/KP + derivative shell control gives a volume-uniform Hessian
 --   row budget c_H/2; the finite matrix theorem turns that into a global
 --   quadratic-form remainder bound with no volume factor.
--- * that same L7 Hessian budget can feed either:
---     (a) the SZZ coarse-scale curvature route, conditional on active-window
---         overlap, or
---     (b) the Bauerschmidt--Bodineau Polchinski multiscale LSI criterion via a
---         summable negative-curvature debt.
--- * naive global Holley--Stroock oscillation of the total extensive action is
---   rejected: independent local contributions force global oscillation to grow
---   at least linearly with the number of switchable blocks.
+-- * that same L7 Hessian budget can feed either the SZZ coarse-scale curvature
+--   route (if the active windows overlap) or the Bauerschmidt--Bodineau
+--   Polchinski multiscale LSI criterion through summable curvature debt.
+-- * global Holley--Stroock oscillation of the complete extensive action is a
+--   no-go target: independent local contributions force it to grow with volume.
 ------------------------------------------------------------------------
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
-import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact as Top
 import DASHI.Physics.YangMills.YangMillsClayTopDownFiveTheoremClosureExact as Five
-
--- L1
 import DASHI.Physics.YangMills.BalabanGroupParametricFiveBlockSignedG2Exact as G2
-
--- L2 / L3
 import DASHI.Physics.YangMills.BalabanClayT4LiteralOneLoopBoxEvaluatorExact as OneLoop
 import DASHI.Physics.YangMills.BalabanCMP109WalshFourOrbitFactorizationExact as WalshOrbit
 import DASHI.Physics.YangMills.BalabanClayT4WilsonOneLoopOrbitEvaluationTransportExact as OrbitTransport
 import DASHI.Physics.YangMills.BalabanClayT4LiteralEvaluatorFourRepresentativeReductionExact as FourRep
-
--- L4
 import DASHI.Physics.YangMills.BalabanPublishedUVStabilityNonlinearRGCoreExact as UV
-
--- L5 / L6 / L7 coupling
 import DASHI.Physics.YangMills.BalabanUniformTerminalMinusLossGapExact as Gap
 import DASHI.Physics.YangMills.BalabanUnifiedFeshbachLossTailExact as Loss
 import DASHI.Physics.YangMills.BalabanUnifiedPolymerStepVContractionBudgetExact as StepBudget
@@ -69,8 +57,6 @@ import DASHI.Physics.YangMills.BalabanPolchinskiMultiscaleLSIBridgeExact as Polc
 import DASHI.Physics.YangMills.BalabanUnifiedPolchinskiCurvatureDebtExact as Debt
 import DASHI.Physics.YangMills.BalabanUnifiedPotentialOscillationFromTaylorJetExact as Osc
 import DASHI.Physics.YangMills.YangMillsExtensivePotentialGlobalOscillationNoGoExact as OscNoGo
-
--- L8 / L9
 import DASHI.Physics.YangMills.YangMillsContinuumLocalOperatorOPEStressTensorExact as Local
 import DASHI.Physics.YangMills.BalabanFiniteScaleFourthCumulantMomentBudgetExact as Cumulant
 import DASHI.Physics.YangMills.BalabanUnifiedContinuumEndpointMarginTransportExact as Margin
@@ -87,7 +73,8 @@ round69L2LiteralExpressionEvaluatorLevel = OneLoop.literalDiagramExpressionLevel
 
 round69L3OrbitCharacterFactorizationLevel : ProofLevel
 round69L3OrbitCharacterFactorizationLevel =
-  WalshOrbit.canonicalCMP109WalshFourOrbitBoundary .WalshOrbit.CMP109WalshFourOrbitBoundary.nontrivialSignSectorsKilledBeforeIntervals
+  WalshOrbit.nontrivialSignSectorsKilledBeforeIntervals
+    WalshOrbit.canonicalCMP109WalshFourOrbitBoundary
 
 round69L3GeneratorEvaluationTransportLevel : ProofLevel
 round69L3GeneratorEvaluationTransportLevel = OrbitTransport.generatorEvaluationTransportLevel
@@ -147,9 +134,7 @@ round69SameLimitEndpointTransportLevel : ProofLevel
 round69SameLimitEndpointTransportLevel = Margin.sameLimitEndpointMarginTransportLevel
 
 ------------------------------------------------------------------------
--- ACTUAL PHYSICAL FRONTIER.  These remain theorem production, not source
--- bookkeeping.  The important Round69 compression is that L5/L6 now share L7
--- local estimates rather than demanding independent all-depth bounds.
+-- ACTUAL PHYSICAL FRONTIER.
 ------------------------------------------------------------------------
 
 round69L1PhysicalGroupSourceMapLevel : ProofLevel
@@ -163,8 +148,7 @@ round69L3PhysicalFourRepresentativeEnclosuresLevel =
   FourRep.physicalFourRepresentativeAnalyticEnclosuresLevel
 
 round69L4PhysicalSameObjectRGCarrierLevel : ProofLevel
-round69L4PhysicalSameObjectRGCarrierLevel =
-  UV.literalPhysicalStateToPublishedRGCarrierLevel
+round69L4PhysicalSameObjectRGCarrierLevel = UV.literalPhysicalStateToPublishedRGCarrierLevel
 
 round69L5PhysicalTerminalFloorLevel : ProofLevel
 round69L5PhysicalTerminalFloorLevel = Gap.physicalUniformTerminalFloorLevel
