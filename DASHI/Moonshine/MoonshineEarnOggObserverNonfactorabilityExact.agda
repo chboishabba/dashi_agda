@@ -38,6 +38,9 @@ module DASHI.Moonshine.MoonshineEarnOggObserverNonfactorabilityExact where
 open import DASHI.Core.Prelude
 
 import DASHI.Moonshine.MoonshineEarnHistoricalWeldExact as Earn
+import DASHI.Moonshine.MonsterOrderDivisibilityExact as Monster
+import DASHI.Moonshine.OggPrimeControlMatrixExact as Matrix
+import DASHI.Moonshine.PrimeFrickeGenusControlExact as Fricke
 
 ------------------------------------------------------------------------
 -- Operational source roles in the actual PR #1 chain.
@@ -75,24 +78,40 @@ locusObserver _ = monsterFrickeGenusZero
 
 sourceDividesActualMonsterOrder :
   (s : EarnSource) →
-  Earn.Monster.PrimeDividesMonsterOrder (sourcePrime s)
+  Monster.PrimeDividesMonsterOrder (sourcePrime s)
 sourceDividesActualMonsterOrder from23 = Earn.twentyThreeDividesMonsterOrder
 sourceDividesActualMonsterOrder from7 = Earn.sevenDividesMonsterOrder
 sourceDividesActualMonsterOrder from11 = Earn.elevenDividesMonsterOrder
 
 sourceFiniteFrickeGenusZero : (s : EarnSource) → Set
 sourceFiniteFrickeGenusZero from23 =
-  Earn.Fricke.genusX0Plus (Earn.Fricke.frickeRow Earn.Matrix.prime23) ≡ 0
+  Fricke.genusX0Plus (Fricke.frickeRow Matrix.prime23) ≡ 0
 sourceFiniteFrickeGenusZero from7 =
-  Earn.Fricke.genusX0Plus (Earn.Fricke.frickeRow Earn.Matrix.prime7) ≡ 0
+  Fricke.genusX0Plus (Fricke.frickeRow Matrix.prime7) ≡ 0
 sourceFiniteFrickeGenusZero from11 =
-  Earn.Fricke.genusX0Plus (Earn.Fricke.frickeRow Earn.Matrix.prime11) ≡ 0
+  Fricke.genusX0Plus (Fricke.frickeRow Matrix.prime11) ≡ 0
 
 sourceFiniteFrickeGenusZeroWitness :
   (s : EarnSource) → sourceFiniteFrickeGenusZero s
 sourceFiniteFrickeGenusZeroWitness from23 = refl
 sourceFiniteFrickeGenusZeroWitness from7 = refl
 sourceFiniteFrickeGenusZeroWitness from11 = refl
+
+------------------------------------------------------------------------
+-- A second formulation uses direct collision / target-separation witnesses.
+------------------------------------------------------------------------
+
+coarseCollision23And7 : locusObserver from23 ≡ locusObserver from7
+coarseCollision23And7 = refl
+
+coarseCollision7And11 : locusObserver from7 ≡ locusObserver from11
+coarseCollision7And11 = refl
+
+targets23And7Differ : targetPrime from23 ≡ targetPrime from7 → ⊥
+targets23And7Differ ()
+
+targets7And11Differ : targetPrime from7 ≡ targetPrime from11 → ⊥
+targets7And11Differ ()
 
 ------------------------------------------------------------------------
 -- Exact non-factorability: one coarse value cannot route to three targets.
@@ -110,33 +129,10 @@ open FactorsEarnTargetThroughLocus public
 monsterFrickeLocusCannotDetermineEarnTarget :
   FactorsEarnTargetThroughLocus → ⊥
 monsterFrickeLocusCannotDetermineEarnTarget F =
-  let
-    route23 : route F monsterFrickeGenusZero ≡ 47
-    route23 = factors F from23
-
-    route7 : route F monsterFrickeGenusZero ≡ 59
-    route7 = factors F from7
-
-    impossible : 47 ≡ 59
-    impossible = trans (sym route23) route7
-  in
-  case impossible of λ where ()
-
-------------------------------------------------------------------------
--- A second formulation uses an arbitrary target-valued observer directly.
-------------------------------------------------------------------------
-
-coarseCollision23And7 : locusObserver from23 ≡ locusObserver from7
-coarseCollision23And7 = refl
-
-coarseCollision7And11 : locusObserver from7 ≡ locusObserver from11
-coarseCollision7And11 = refl
-
-targets23And7Differ : targetPrime from23 ≡ targetPrime from7 → ⊥
-targets23And7Differ ()
-
-targets7And11Differ : targetPrime from7 ≡ targetPrime from11 → ⊥
-targets7And11Differ ()
+  targets23And7Differ
+    (trans
+      (sym (factors F from23))
+      (factors F from7))
 
 record MoonshineEarnOggObserverBoundary : Set where
   field
