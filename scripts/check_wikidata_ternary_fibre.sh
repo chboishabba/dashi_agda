@@ -17,10 +17,12 @@ sources=(
   DASHI/Foundations/TernaryNineAntipodalD4SeparationExact.agda
   DASHI/Algebra/BalancedTernaryOppositionEvidenceBridgeExact.agda
   DASHI/Cognition/PNF/BinaryBalancedTernaryAggregateLossExact.agda
+  DASHI/Interop/PointedSignAntipodal369SeparationExact.agda
   DASHI/Ontology/DependentDefinitionFibreExact.agda
   DASHI/Ontology/WikidataTernaryFibreRegression.agda
   DASHI/Ontology/WikidataWorkingGroupRegression.agda
   DASHI/Ontology/WikidataWorkingGroupEverything.agda
+  DASHI/Ontology/WikidataWorkingGroupFullProvenanceEverything.agda
 )
 
 for source in "${sources[@]}"; do
@@ -58,6 +60,7 @@ require_pattern DASHI/Foundations/BalancedTernaryAntipodalResidualCodecExact.agd
 require_pattern DASHI/Foundations/BalancedTernaryAntipodalResidualCodecExact.agda 'encodeAfterDecodeRound'
 require_pattern DASHI/Foundations/BalancedTernaryDependentRecoverableBridgeExact.agda 'canonicalDependentCodeSeparatesFineCarrier'
 require_pattern DASHI/Foundations/BalancedTernaryNineZeroFibreCountExact.agda 'aggregateZeroFibreCountIs3139'
+require_pattern DASHI/Interop/PointedSignAntipodal369SeparationExact.agda 'pointedFiveModeSignSizeIsEleven'
 require_pattern DASHI/Ontology/DependentDefinitionFibreExact.agda 'noToyotaFiestaSection'
 require_pattern DASHI/Ontology/DependentDefinitionFibreExact.agda 'flatCountSplitsAsValidPlusInvalid'
 require_pattern DASHI/Ontology/WikidataTernaryFibreRegression.agda 'threeBlockQuotientPlusResidualRoundTrips'
@@ -67,4 +70,5 @@ python3 scripts/benchmark_ternary_binary_locality.py >/dev/null
 scripts/run_agda29_parallel_check.sh \
   DASHI/Ontology/WikidataTernaryFibreRegression.agda \
   DASHI/Ontology/WikidataWorkingGroupRegression.agda \
-  DASHI/Ontology/WikidataWorkingGroupEverything.agda
+  DASHI/Ontology/WikidataWorkingGroupEverything.agda \
+  DASHI/Ontology/WikidataWorkingGroupFullProvenanceEverything.agda
