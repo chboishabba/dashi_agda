@@ -103,24 +103,34 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound70PolchinskiFiniteSpe
 --        -> CMP109 twice-differentiated local activity/polarization
 --        -> CMP116 marked/tree resummation
 --        -> positive exponential shell rate
---        -> one shell-width comparison exp(-delta R) <= 1/2
---        -> dyadic h_d <= c_H s_d.
+--        -> one shell-width comparison exp(-delta R) <= 1/2.
 --
--- 3. Rooted KP + that derivative shell estimate gives BOTH
+--    From there TWO exact downstream routes are available:
+--
+--      (a) source exponential -> dyadic -> weighted row <= 4 A,
+--
+--    which is already enough for quasi-local propagation, and
+--
+--      (b) identify the same shell with the L7 rooted derivative/KP coordinate,
+--          h_d <= c_H s_d,
+--
+--    which gives the sharper weighted row <= c_H and simultaneously feeds the
+--    unified norm / curvature-debt bookkeeping.
+--
+-- 3. Rooted KP + the derivative shell estimate gives BOTH
 --
 --      unweighted Hessian row <= c_H/2,
 --
---    and, more importantly for the RG effective action,
+--    and
 --
 --      sum_d (3/2)^d h_d <= c_H.
 --
---    The second theorem uses the exact identity
+--    Direct source exponential decay independently gives
 --
---      (3/2)^d (1/2)^d = (3/4)^d,
---      (1/4) sum_d (3/4)^d = 1.
+--      sum_d (3/2)^d h_d <= 4 A.
 --
---    This is the correct quasi-local influence norm: the renormalised polymer
---    action is exponentially decaying, not strictly finite-range.
+--    Thus KP is a useful SAME-COORDINATE strengthening, not a logically
+--    necessary intermediate for the mass-gap propagation route.
 --
 -- 4. The exact local-walk theorem is retained as a useful SPECIAL CASE for the
 --    bare/local Wilson part.  It is not promoted to the full effective action.
@@ -152,10 +162,11 @@ import DASHI.Physics.YangMills.BalabanUnifiedPolymerStepVContractionBudgetExact
 import DASHI.Physics.YangMills.BalabanUnifiedSeventeenThirtySecondIterationExact
 import DASHI.Physics.YangMills.BalabanUnifiedSeventeenThirtySecondTailModulusExact
 
--- Source-native differentiated marked localisation -> dyadic shell.
+-- Source-native differentiated marked localisation -> dyadic/weighted shell.
 import DASHI.Physics.YangMills.BalabanDecoupledActivityHessian
 import DASHI.Physics.YangMills.BalabanMarkedPolarisationResummation
 import DASHI.Physics.YangMills.BalabanExponentialToDyadicShellCoarseningExact
+import DASHI.Physics.YangMills.BalabanSourceExponentialToWeightedHessianExact
 
 -- One derivative/KP coordinate feeds curvature AND quasi-local propagation.
 import DASHI.Physics.YangMills.BalabanRootedKPToHessianRowBudgetExact
@@ -179,6 +190,9 @@ import DASHI.Physics.YangMills.BalabanClayT5PhysicalContinuumOSGapBridgeExact
 round71ExponentialToDyadicShellCompilerLevel : ProofLevel
 round71ExponentialToDyadicShellCompilerLevel = machineChecked
 
+round71SourceExponentialToWeightedHessianLevel : ProofLevel
+round71SourceExponentialToWeightedHessianLevel = machineChecked
+
 round71RootedKPWeightedHessianLevel : ProofLevel
 round71RootedKPWeightedHessianLevel = machineChecked
 
@@ -201,10 +215,11 @@ round71PolchinskiCriterionAuthorityLevel = standardImported
 -- ACTUAL PHYSICAL FRONTIER ON THIS ROUTE
 --
 -- P0. Instantiate the source-native CMP99(3)/109/116 marked differentiated
---     activity estimate and identify its exponential shell with the SAME L7
---     Hessian shell.  Choose one coarse shell width R for which the certified
---     source factor exp(-delta R) <= 1/2.  The all-depth dyadic comparison is
---     then already constructed by BalabanExponentialToDyadicShellCoarsening.
+--     activity estimate and identify its exponential shell with the SAME
+--     effective-action Hessian entering the physical L7 construction.  Choose
+--     one coarse shell width R for which exp(-delta R) <= 1/2.  The source
+--     exponential then already yields a volume-uniform weighted row <= 4 A;
+--     the stronger L7/KP identification may improve this to c_H.
 --
 -- P1. Instantiate the exact dotC/ddotC multiscale curvature inequality on the
 --     same Balaban effective density and prove its accumulated negative debt is
@@ -212,13 +227,11 @@ round71PolchinskiCriterionAuthorityLevel = standardImported
 --
 -- P2. Prove the literal lattice Langevin derivative commutator: the derivative
 --     influence matrix is the action Hessian, with group-connection/gauge terms
---     treated on the actual compact-group manifold.  The SAME P0 shell estimate
+--     treated on the actual compact-group manifold.  The SAME P0 source shell
 --     controls its absolute exponentially weighted row.
 --
 -- P3. Apply standard weighted Gronwall/semigroup analysis to the resulting
---     quasi-local row bound, obtaining the physical finite-speed envelope
---
---       exp(c_H t) (3/2)^(-distance).
+--     quasi-local row bound, obtaining a physical finite-speed envelope.
 --
 -- P4. Combine that with the SAME-measure Polchinski Poincare/LSI temporal rate
 --     and pass the resulting exponential Euclidean covariance envelope through
