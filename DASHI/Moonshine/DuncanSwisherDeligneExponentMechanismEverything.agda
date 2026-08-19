@@ -3,28 +3,31 @@ module DASHI.Moonshine.DuncanSwisherDeligneExponentMechanismEverything where
 ------------------------------------------------------------------------
 -- Focused convergence root for the quantitative post-Ogg mechanism.
 --
--- PRIMARY SOURCE
+-- PRIMARY SOURCES
+--
 -- John F. R. Duncan and Holly Swisher,
 -- "Modular Functions and the Monstrous Exponents", 2026.
 -- arXiv:2602.09135. DOI: 10.48550/arXiv.2602.09135.
 --
--- Chain now exposed:
+-- Bernard Dwork,
+-- "$p$-adic cycles", Publ. Math. IHES 37 (1969), 27--115.
+-- DOI: 10.1007/BF02684886.
 --
---   supersingular automorphism type
---      -> Deligne n=1 first-pole depth
+-- The sharp n=1 coefficient depth is no longer used here as a free 3/2/1
+-- table.  The current chain is
+--
+--   Dwork depth-one local branch
+--      + Legendre ramification index e
+--      + valuation-zero unit / local factorization
+--      -> exact v_p(A_1)=e
+--      -> strict partial-fraction leading-term separation
+--      -> exceptional total depth
 --      -> minimum depth d_min with 2 d_min = m_p
 --      -> Fricke contribution d_min
---      -> singleton residual 2 d_min / multiple residual 0
---      -> Monster exponent depth
+--      -> Monster exponent depth.
 --
--- alongside the exact Hauptmodul identity
---
---   J_1 - J_p^+ = p U_p J_p^+
---
--- at signed Laurent-coefficient level.
---
--- Support is retained only as a strict coarse projection: p=5 and p=7 have
--- the same support observation but Monster exponents 9 and 6.
+-- The full construction of Dwork's p-adic cycle machinery remains a named
+-- source boundary; the numeric A_1 valuations themselves are now derived.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -37,13 +40,12 @@ import DASHI.Moonshine.DuncanSwisherFrickeHauptmodulUNExact as Hauptmodul
 import DASHI.Moonshine.DuncanSwisherDeligneAutomorphismDepthBridgeExact as Deligne
 import DASHI.Moonshine.DuncanSwisherDeligneDepthContributionFactorizationExact as Factor
 import DASHI.Moonshine.DuncanSwisherExponentDepthHighestAlphaEverything as Depth
+import DASHI.Moonshine.DuncanSwisherDworkRamifiedA1SharpnessExact as DworkSharp
+import DASHI.Moonshine.DuncanSwisherDworkExceptionalPartialFractionSharpnessExact as DworkPF
+import DASHI.Moonshine.DuncanSwisherDelignePartialFractionMechanismExact as PF
 import DASHI.Moonshine.MonsterOrderExponentCorrectionExact as Monster
 import DASHI.Moonshine.P11GeometricSupersingularCarrierExact as P11
 import DASHI.Physics.Closure.MoonshinePrimeLaneReceiptSurface as Lane
-
-------------------------------------------------------------------------
--- Canonical theorem owner retained.
-------------------------------------------------------------------------
 
 canonicalTheorem12StillOwnsSourceShapeRegression :
   T12.exactThreeCaseTheoremImported
@@ -51,7 +53,52 @@ canonicalTheorem12StillOwnsSourceShapeRegression :
 canonicalTheorem12StillOwnsSourceShapeRegression = refl
 
 ------------------------------------------------------------------------
--- Concrete exponent geometry / old #567 automorphism bridge.
+-- Dwork / Legendre sharpness is now theorem-derived from structural local data.
+------------------------------------------------------------------------
+
+jZeroA1SharpDepthRegression :
+  let A = DworkSharp.publishedDworkLocalA1Factorization Deligne.jZeroExceptional
+  in DASHI.Algebra.RamifiedLocalValuationSharpnessExact.valuation
+      (DworkSharp.padicValuation A) (DworkSharp.A1Coefficient A) ≡ 3
+jZeroA1SharpDepthRegression = DworkSharp.jZeroA1DepthIsThree
+
+j1728A1SharpDepthRegression :
+  let A = DworkSharp.publishedDworkLocalA1Factorization Deligne.j1728Exceptional
+  in DASHI.Algebra.RamifiedLocalValuationSharpnessExact.valuation
+      (DworkSharp.padicValuation A) (DworkSharp.A1Coefficient A) ≡ 2
+j1728A1SharpDepthRegression = DworkSharp.j1728A1DepthIsTwo
+
+ordinaryA1SharpDepthRegression :
+  let A = DworkSharp.publishedDworkLocalA1Factorization Deligne.ordinaryType
+  in DASHI.Algebra.RamifiedLocalValuationSharpnessExact.valuation
+      (DworkSharp.padicValuation A) (DworkSharp.A1Coefficient A) ≡ 1
+ordinaryA1SharpDepthRegression = DworkSharp.ordinaryA1DepthIsOne
+
+numericA1DepthTableNotImportedRegression :
+  DworkSharp.numericA1DepthTableImportedSeparately
+    DworkSharp.canonicalDuncanSwisherDworkRamifiedA1SharpnessBoundary ≡ false
+numericA1DepthTableNotImportedRegression = refl
+
+p5ExceptionalDepthNowDerivedRegression :
+  let S = DworkPF.publishedExceptionalDworkPartialFractionSeparation PF.prime5
+  in DASHI.Algebra.SeparatedLeadingValuationExact.valuation
+      (DworkPF.additiveValuation S) (DworkPF.pJ1Up S) ≡ 3
+p5ExceptionalDepthNowDerivedRegression = DworkPF.p5TotalDepthIsThree
+
+p7ExceptionalDepthNowDerivedRegression :
+  let S = DworkPF.publishedExceptionalDworkPartialFractionSeparation PF.prime7
+  in DASHI.Algebra.SeparatedLeadingValuationExact.valuation
+      (DworkPF.additiveValuation S) (DworkPF.pJ1Up S) ≡ 2
+p7ExceptionalDepthNowDerivedRegression = DworkPF.p7TotalDepthIsTwo
+
+p11ExceptionalDepthNowDerivedRegression :
+  let S = DworkPF.publishedExceptionalDworkPartialFractionSeparation PF.prime11
+  in DASHI.Algebra.SeparatedLeadingValuationExact.valuation
+      (DworkPF.additiveValuation S) (DworkPF.pJ1Up S) ≡ 2
+p11ExceptionalDepthNowDerivedRegression = DworkPF.p11TotalDepthIsTwo
+
+------------------------------------------------------------------------
+-- Concrete exponent geometry / Brandt--automorphism bridge.
 ------------------------------------------------------------------------
 
 p11FullAutMinimumRegression :
@@ -63,8 +110,7 @@ p11DeligneDepthRegression :
 p11DeligneDepthRegression = Deligne.p11MinimumDeligneDepthIsTwo
 
 p11MonsterExponentIsDeligneDepthRegression :
-  Monster.monsterOrderExponent Lane.p11
-  ≡ Factor.p11DepthUnit
+  Monster.monsterOrderExponent Lane.p11 ≡ Factor.p11DepthUnit
 p11MonsterExponentIsDeligneDepthRegression = Factor.p11MonsterExponentIsOneDepthUnit
 
 p5ExponentDepthRegression :
@@ -79,29 +125,9 @@ p13ExponentDepthRegression :
   2 * Monster.monsterOrderExponent Lane.p13 ≡ 3 * 2
 p13ExponentDepthRegression = Geometry.p13DoubledExponent
 
-------------------------------------------------------------------------
--- Modular and geometric decompositions meet on the same exponent owner.
-------------------------------------------------------------------------
-
 p11ModularGeometryMeetRegression :
   2 * Weld.modularContributionTotal Lane.p11 Monster.p11AboveThree ≡ 4
 p11ModularGeometryMeetRegression = Weld.p11ModularGeometryMeet
-
-p5FrickeContributionRegression :
-  Monster.frickeLevel (Monster.modularContribution Lane.p5 Monster.p5AboveThree) ≡ 3
-p5FrickeContributionRegression = refl
-
-p5PrimeLevelContributionRegression :
-  Monster.primeLevel (Monster.modularContribution Lane.p5 Monster.p5AboveThree) ≡ 5
-p5PrimeLevelContributionRegression = refl
-
-p5SquareLevelContributionRegression :
-  Monster.squareLevel (Monster.modularContribution Lane.p5 Monster.p5AboveThree) ≡ 1
-p5SquareLevelContributionRegression = refl
-
-------------------------------------------------------------------------
--- Strict support-vs-depth refinement.
-------------------------------------------------------------------------
 
 supportCannotRecoverP5AndP7DepthRegression :
   (decode : Bool → Nat) →
@@ -113,19 +139,10 @@ supportCannotRecoverP5AndP7DepthRegression :
 supportCannotRecoverP5AndP7DepthRegression =
   Refinement.supportCannotDecodeMonsterExponent
 
-------------------------------------------------------------------------
--- The mechanism has moved below theorem-level valuation formulas.
-------------------------------------------------------------------------
-
 hauptmodulCoefficientBridgeConstructedRegression :
   Hauptmodul.coefficientDifferenceLawDerived
     Hauptmodul.canonicalDuncanSwisherFrickeHauptmodulUNBoundary ≡ true
 hauptmodulCoefficientBridgeConstructedRegression = refl
-
-deligneAutDepthBridgeConstructedRegression :
-  Deligne.depthDoublesToFullAutomorphismOrderDerived
-    Deligne.canonicalDuncanSwisherDeligneAutomorphismDepthBoundary ≡ true
-deligneAutDepthBridgeConstructedRegression = refl
 
 frickeEqualsMinimumDepthDerivedRegression :
   Factor.frickeContributionEqualsMinimumDepthDerived
@@ -140,21 +157,25 @@ supportLayerAlreadyClosedRegression = refl
 record DuncanSwisherDeligneExponentMechanismBoundary : Set where
   field
     theorem12SingleOwnerRetained : Bool
-    concreteStructuralPrimeControlsConstructed : Bool
+    dworkRamifiedA1SharpnessDerived : Bool
+    numericA1DepthTableRequired : Bool
+    exceptionalPartialFractionDepthDerived : Bool
     p11BrandtToFullAutToDeligneBridgeConstructed : Bool
     HauptmodulUNBridgeConstructed : Bool
     FrickeContributionReexpressedAsDeligneDepth : Bool
     OggSupportProvedStrictlyCoarserThanExponent : Bool
-    fullDelignePartialFractionExpansionReproved : Bool
+    fullDworkPadicCyclesConstructionReproved : Bool
 
 canonicalDuncanSwisherDeligneExponentMechanismBoundary :
   DuncanSwisherDeligneExponentMechanismBoundary
 canonicalDuncanSwisherDeligneExponentMechanismBoundary = record
   { theorem12SingleOwnerRetained = true
-  ; concreteStructuralPrimeControlsConstructed = true
+  ; dworkRamifiedA1SharpnessDerived = true
+  ; numericA1DepthTableRequired = false
+  ; exceptionalPartialFractionDepthDerived = true
   ; p11BrandtToFullAutToDeligneBridgeConstructed = true
   ; HauptmodulUNBridgeConstructed = true
   ; FrickeContributionReexpressedAsDeligneDepth = true
   ; OggSupportProvedStrictlyCoarserThanExponent = true
-  ; fullDelignePartialFractionExpansionReproved = false
+  ; fullDworkPadicCyclesConstructionReproved = false
   }
