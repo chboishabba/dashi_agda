@@ -15,6 +15,20 @@ module DASHI.Physics.YangMills.BalabanReducedGhostSignedTraceTailExact where
 -- "Feynman Diagrams for the Yang-Mills Field", Physics Letters B 25 (1967),
 -- 29--30. DOI: 10.1016/0370-2693(67)90067-6.
 --
+-- Ph. Boucaud, J. P. Leroy, A. Le Yaouanc, J. Micheli, O. Pene and
+-- J. Rodriguez-Quintero,
+-- "Large momentum behavior of the ghost propagator in SU(3) lattice gauge
+-- theory with Wilson action", Physical Review D 72 (2005), 114503.
+-- DOI: 10.1103/PhysRevD.72.114503.
+--
+-- SOURCE ROLE BOUNDARY
+--
+-- Boucaud et al. supply lattice-gauge precedent for constructing/computing the
+-- discretized Faddeev-Popov operator and ghost propagator.  The exact finite
+-- trace-log algebra below is instead justified internally plus Higham/Horn-
+-- Johnson functional calculus; no numerical lattice-QCD computation is used as
+-- a determinant identity.
+--
 -- DASHI CONTRIBUTION
 --
 -- Close the finite same-object seam between the signed matrix-log tail and its
