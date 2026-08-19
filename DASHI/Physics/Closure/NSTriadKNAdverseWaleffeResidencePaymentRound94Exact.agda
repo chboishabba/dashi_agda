@@ -26,22 +26,21 @@ module DASHI.Physics.Closure.NSTriadKNAdverseWaleffeResidencePaymentRound94Exact
 --
 --   dA + gamma A = F_network
 --
--- for the real Waleffe amplitude A, with gamma the sum of the three viscous
--- mode rates.  On a bad interval on which A >= threshold, integration gives a
--- one-cell inequality of the form
+-- for the real Waleffe amplitude A. On a bad interval with A >= threshold,
+-- integration gives a cell inequality
 --
 --   A_end + gamma * threshold * residence
 --     <= A_start + forcingCost.
 --
 -- This module proves the exact finite telescoping theorem for a chain of such
--- intervals.  No genericity or isolated-triad recurrence is used: persistent
--- adverse residence must be paid by initial phase amplitude and accumulated
--- positive network forcing.
+-- intervals. Persistent adverse residence is therefore paid by initial phase
+-- amplitude and accumulated positive network forcing.  No isolated-triad
+-- recurrence or phase-genericity theorem is imported.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
@@ -66,35 +65,32 @@ open AdverseResidenceStep public
 payment : ∀ {start} → AdverseResidenceStep start → ℚ
 payment step = (damping step * threshold step) * residence step
 
-record AdverseResidenceChain (initialAmplitude : ℚ) : Set where
-  constructor chain-end
-  field
-    finalAmplitude : ℚ
-    finalAmplitudeNonnegative : 0ℚ ≤ finalAmplitude
+data AdverseResidenceChain (initialAmplitude : ℚ) : Set where
+  chain-end :
+    0ℚ ≤ initialAmplitude →
+    AdverseResidenceChain initialAmplitude
 
-  constructor chain-step
-  field
-    firstStep : AdverseResidenceStep initialAmplitude
-    rest : AdverseResidenceChain (endAmplitude firstStep)
-
-open AdverseResidenceChain public
+  chain-step :
+    (first : AdverseResidenceStep initialAmplitude) →
+    AdverseResidenceChain (endAmplitude first) →
+    AdverseResidenceChain initialAmplitude
 
 sumPayment : ∀ {initial} → AdverseResidenceChain initial → ℚ
-sumPayment (chain-end final finalNN) = 0ℚ
+sumPayment (chain-end initialNN) = 0ℚ
 sumPayment (chain-step first rest) = payment first + sumPayment rest
 
 sumForcing : ∀ {initial} → AdverseResidenceChain initial → ℚ
-sumForcing (chain-end final finalNN) = 0ℚ
+sumForcing (chain-end initialNN) = 0ℚ
 sumForcing (chain-step first rest) = forcingCost first + sumForcing rest
 
 terminalAmplitude : ∀ {initial} → AdverseResidenceChain initial → ℚ
-terminalAmplitude (chain-end final finalNN) = final
+terminalAmplitude {initial} (chain-end initialNN) = initial
 terminalAmplitude (chain-step first rest) = terminalAmplitude rest
 
 terminalAmplitudeNonnegative :
   ∀ {initial} (chain : AdverseResidenceChain initial) →
   0ℚ ≤ terminalAmplitude chain
-terminalAmplitudeNonnegative (chain-end final finalNN) = finalNN
+terminalAmplitudeNonnegative (chain-end initialNN) = initialNN
 terminalAmplitudeNonnegative (chain-step first rest) =
   terminalAmplitudeNonnegative rest
 
@@ -102,56 +98,47 @@ adverseResidenceChainTelescopes :
   ∀ {initial} (chain : AdverseResidenceChain initial) →
   terminalAmplitude chain + sumPayment chain
   ≤ initial + sumForcing chain
-adverseResidenceChainTelescopes (chain-end final finalNN) =
-  subst
-    (λ left → left ≤ final + 0ℚ)
-    (solve (final ∷ []))
-    ℚP.≤-refl
+adverseResidenceChainTelescopes {initial} (chain-end initialNN) =
+  ℚP.≤-refl
 adverseResidenceChainTelescopes {initial} (chain-step first rest) =
   let
     tail = adverseResidenceChainTelescopes rest
 
-    tailShifted :
+    tailWithPayment :
       payment first +
         (terminalAmplitude rest + sumPayment rest)
       ≤ payment first +
         (endAmplitude first + sumForcing rest)
-    tailShifted = ℚP.+-mono-≤ ℚP.≤-refl tail
+    tailWithPayment = ℚP.+-mono-≤ ℚP.≤-refl tail
 
-    local = integratedDampedForcedBalance first
-
-    localWithTail :
-      (endAmplitude first + payment first) + sumForcing rest
-      ≤ (initial + forcingCost first) + sumForcing rest
-    localWithTail = ℚP.+-mono-≤ local ℚP.≤-refl
-
-    reorderedTail :
-      terminalAmplitude rest +
-        (payment first + sumPayment rest)
-      ≤ (endAmplitude first + payment first) + sumForcing rest
-    reorderedTail =
+    tailReordered :
+      terminalAmplitude rest + payment first + sumPayment rest
+      ≤ endAmplitude first + payment first + sumForcing rest
+    tailReordered =
       subst
-        (λ left → left ≤ (endAmplitude first + payment first) + sumForcing rest)
+        (λ left → left ≤ endAmplitude first + payment first + sumForcing rest)
         (solve
-          ( terminalAmplitude rest ∷ payment first
-          ∷ sumPayment rest ∷ []))
+          (terminalAmplitude rest ∷ payment first ∷ sumPayment rest ∷ []))
         (subst
           (λ right →
             payment first +
               (terminalAmplitude rest + sumPayment rest) ≤ right)
           (solve
-            ( payment first ∷ endAmplitude first
-            ∷ sumForcing rest ∷ []))
-          tailShifted)
+            (payment first ∷ endAmplitude first ∷ sumForcing rest ∷ []))
+          tailWithPayment)
 
-    chained = ℚP.≤-trans reorderedTail localWithTail
+    localWithTail :
+      endAmplitude first + payment first + sumForcing rest
+      ≤ initial + forcingCost first + sumForcing rest
+    localWithTail =
+      ℚP.+-mono-≤ (integratedDampedForcedBalance first) ℚP.≤-refl
+
+    chained = ℚP.≤-trans tailReordered localWithTail
   in
   subst
     (λ right →
-      terminalAmplitude rest +
-        (payment first + sumPayment rest) ≤ right)
-    (solve
-      ( initial ∷ forcingCost first ∷ sumForcing rest ∷ []))
+      terminalAmplitude rest + payment first + sumPayment rest ≤ right)
+    (solve (initial ∷ forcingCost first ∷ sumForcing rest ∷ []))
     chained
 
 adverseResidencePaymentBound :
@@ -159,21 +146,23 @@ adverseResidencePaymentBound :
   sumPayment chain ≤ initial + sumForcing chain
 adverseResidencePaymentBound {initial} chain =
   let
-    telescoped = adverseResidenceChainTelescopes chain
     terminalNN = terminalAmplitudeNonnegative chain
+    addTerminal :
+      0ℚ + sumPayment chain
+      ≤ terminalAmplitude chain + sumPayment chain
+    addTerminal = ℚP.+-mono-≤ terminalNN ℚP.≤-refl
+
     dropTerminal :
       sumPayment chain
       ≤ terminalAmplitude chain + sumPayment chain
     dropTerminal =
       subst
         (λ left → left ≤ terminalAmplitude chain + sumPayment chain)
-        (sym (solve (sumPayment chain ∷ [])))
-        (ℚP.+-mono-≤ terminalNN ℚP.≤-refl)
+        (solve (sumPayment chain ∷ []))
+        addTerminal
   in
-  ℚP.≤-trans dropTerminal telescoped
+  ℚP.≤-trans dropTerminal (adverseResidenceChainTelescopes chain)
 
--- If all bad cells use the same damping floor and amplitude threshold, the
--- payment is literally (gammaFloor * threshold) times total bad residence.
 record UniformAdverseResidenceBudget : Set where
   constructor uniform-adverse-residence-budget
   field
