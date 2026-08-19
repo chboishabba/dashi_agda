@@ -6,7 +6,7 @@ module DASHI.Physics.Closure.NSTriadKNComplex3BeltramiCrossSuppressionRound93Exa
 -- Authors: Peter Constantin; Andrew Majda.
 -- Title: "The Beltrami spectrum for incompressible fluid flows".
 -- Communications in Mathematical Physics 115 (1988), 435--456.
--- DOI: 10.1007/BF01218021.
+-- DOI: 10.1007/BF01218019.
 --
 -- Author: Fabian Waleffe.
 -- Title: "The nature of triad interactions in homogeneous turbulence".
