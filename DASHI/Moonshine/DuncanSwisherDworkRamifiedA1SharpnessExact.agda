@@ -35,7 +35,9 @@ module DASHI.Moonshine.DuncanSwisherDworkRamifiedA1SharpnessExact where
 --
 --   v_p(A_1) = ramification index,
 --
--- and only then specializes to 3,2,1.
+-- and only then specializes to 3,2,1.  At p=11 this is further welded to the
+-- existing source-native Brandt monodromy weight on the SAME supersingular
+-- j-class carrier.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -43,10 +45,7 @@ open import DASHI.Core.Prelude
 import DASHI.Algebra.RamifiedLocalValuationSharpnessExact as Ramified
 import DASHI.Moonshine.DuncanSwisherDeligneAutomorphismDepthBridgeExact as Aut
 import DASHI.Moonshine.DuncanSwisherLegendreRamificationDepthExact as Legendre
-
-------------------------------------------------------------------------
--- Source-facing analytic authority: structure, not the desired depth answer.
-------------------------------------------------------------------------
+import DASHI.Moonshine.P11GeometricSupersingularCarrierExact as Geo
 
 record DworkLocalA1Factorization
     (t : Aut.SupersingularAutomorphismType) : Set₁ where
@@ -58,9 +57,7 @@ record DworkLocalA1Factorization
     dworkSharpBranch : PadicLocal
     A1Coefficient : PadicLocal
 
-    localUnitIsUnit :
-      Ramified.valuation padicValuation localUnit ≡ 0
-
+    localUnitIsUnit : Ramified.valuation padicValuation localUnit ≡ 0
     dworkOrdinaryBranchSharp :
       Ramified.valuation padicValuation dworkSharpBranch ≡ 1
 
@@ -73,11 +70,6 @@ record DworkLocalA1Factorization
             (Legendre.legendreJRamificationIndex t))
 
 open DworkLocalA1Factorization public
-
-------------------------------------------------------------------------
--- This is the remaining source-native Dwork analytic boundary.  Crucially it
--- does NOT import v_p(A_1)=3/2/1 as a field.
-------------------------------------------------------------------------
 
 postulate
   publishedDworkLocalA1Factorization :
@@ -99,10 +91,6 @@ asRamifiedSharpCoefficient t =
     ; Ramified.localBranchDepthOne = dworkOrdinaryBranchSharp A
     ; Ramified.coefficientFactorization = localRamifiedFactorization A
     }
-
-------------------------------------------------------------------------
--- Dwork sharpness is now DERIVED from the ramified local factorization.
-------------------------------------------------------------------------
 
 sharpA1DepthIsRamification :
   (t : Aut.SupersingularAutomorphismType) →
@@ -131,10 +119,6 @@ ordinaryA1DepthIsOne :
   in Ramified.valuation (padicValuation A) (A1Coefficient A) ≡ 1
 ordinaryA1DepthIsOne = sharpA1DepthIsRamification Aut.ordinaryType
 
-------------------------------------------------------------------------
--- Compatibility with the existing numerical API is now a CONSEQUENCE.
-------------------------------------------------------------------------
-
 sharpA1DepthMatchesExistingFirstPoleDepth :
   (t : Aut.SupersingularAutomorphismType) →
   let A = publishedDworkLocalA1Factorization t
@@ -154,6 +138,30 @@ sharpA1DepthDoublesToFullAutomorphismOrder t =
     (cong (λ d → 2 * d) (sharpA1DepthMatchesExistingFirstPoleDepth t))
     (Aut.firstPoleDepthDoublesToFullAutomorphismOrder t)
 
+------------------------------------------------------------------------
+-- Same-object p=11 weld: Dwork depth = Legendre ramification = Brandt weight.
+------------------------------------------------------------------------
+
+p11A1DepthIsBrandtMonodromyWeight :
+  (c : Geo.P11SupersingularJ) →
+  let A = publishedDworkLocalA1Factorization (Legendre.p11AutType c)
+  in Ramified.valuation (padicValuation A) (A1Coefficient A)
+      ≡ Legendre.Stack11.p11MonodromyWeight c
+p11A1DepthIsBrandtMonodromyWeight c =
+  trans
+    (sharpA1DepthIsRamification (Legendre.p11AutType c))
+    (Legendre.p11RamificationIsBrandtMonodromyWeight c)
+
+p11JZeroA1DepthWeightIsThree :
+  let A = publishedDworkLocalA1Factorization (Legendre.p11AutType Geo.jZeroSS)
+  in Ramified.valuation (padicValuation A) (A1Coefficient A) ≡ 3
+p11JZeroA1DepthWeightIsThree = jZeroA1DepthIsThree
+
+p11J1728A1DepthWeightIsTwo :
+  let A = publishedDworkLocalA1Factorization (Legendre.p11AutType Geo.j1728SS)
+  in Ramified.valuation (padicValuation A) (A1Coefficient A) ≡ 2
+p11J1728A1DepthWeightIsTwo = j1728A1DepthIsTwo
+
 record DuncanSwisherDworkRamifiedA1SharpnessBoundary : Set where
   field
     dworkOrdinaryBranchDepthOneImported : Bool
@@ -164,6 +172,7 @@ record DuncanSwisherDworkRamifiedA1SharpnessBoundary : Set where
     exactJ1728DepthTwoDerived : Bool
     exactOrdinaryDepthOneDerived : Bool
     depthToAutomorphismOrderDerived : Bool
+    p11A1DepthEqualsBrandtWeightDerived : Bool
     fullDworkPadicCyclesConstructionReproved : Bool
 
 canonicalDuncanSwisherDworkRamifiedA1SharpnessBoundary :
@@ -177,5 +186,6 @@ canonicalDuncanSwisherDworkRamifiedA1SharpnessBoundary = record
   ; exactJ1728DepthTwoDerived = true
   ; exactOrdinaryDepthOneDerived = true
   ; depthToAutomorphismOrderDerived = true
+  ; p11A1DepthEqualsBrandtWeightDerived = true
   ; fullDworkPadicCyclesConstructionReproved = false
   }
