@@ -25,42 +25,35 @@ record Round63ToTenMasterCompression
     (oldTypes : Old.SU2PhysicalProducerTypes)
     (newTypes : New.TenMasterProducerTypes) : Set₁ where
   field
-    -- A1+A2 -> M1: prove the signed whole residual rather than forcing a split.
     compressG2 :
       Old.G2CorrelatedDegreeOneBound oldTypes →
       Old.G2RawHigherDegreeBound oldTypes →
       New.SignedSelectedRegionG2Absorption newTypes
 
-    -- B1 -> M2.
     compressOneLoop :
       Old.LiteralOneLoopCoefficientPositive oldTypes →
       New.LiteralWilsonGhostHaarOneLoopCoefficient newTypes
 
-    -- C1 -> M3.
     compressRG :
       Old.PhysicalQuarticRemainderUniform oldTypes →
       New.UniformNonlinearOneStepRGStability newTypes
 
-    -- D1+D2 -> M4: literal full transfer intertwiner.
     compressTransfer :
       Old.LiteralWilsonKernelNaturality oldTypes →
       Old.LiteralTemporalTraceNaturality oldTypes →
       New.LiteralOSCompatibleTransferNaturality newTypes
 
-    -- E1+E2 -> M5: one common physical-unit floor.
     compressGap :
       Old.TerminalPhysicalWilsonTransferGap oldTypes →
       Old.CutoffUniformPhysicalFeshbachLossBudget oldTypes →
       New.CutoffUniformPhysicalTransferGap newTypes
 
-    -- F1+F2+F3 -> M6: one sufficiently strong convergence theorem.
     compressContinuum :
       Old.PhysicalRenormalizedSchwingerScaleIncrementUniform oldTypes →
       Old.RenormalizedYangMillsSchwingerTightness oldTypes →
       Old.YangMillsContinuumOSUniqueLimit oldTypes →
       New.StrongContinuumSchwingerConvergence newTypes
 
-    -- G1 -> M8; G2 -> M9.
     compressNonGaussian :
       Old.PhysicalContinuumFourthCumulantLowerBound oldTypes →
       New.SameLimitFourthCumulantLowerBound newTypes
@@ -69,7 +62,6 @@ record Round63ToTenMasterCompression
       Old.PhysicalUniformExponentialClustering oldTypes →
       New.SameLimitPhysicalExponentialClustering newTypes
 
-    -- Genuine omissions from Round63, not compressions.
     localOperatorOPEStressTensor :
       New.ContinuumLocalOperatorOPEStressTensor newTypes
 
@@ -84,46 +76,43 @@ round63WitnessesPlusLiteralMissingObligationsGiveTenMasters :
   Old.SU2PhysicalProducers oldTypes →
   New.TenMasterProducers newTypes
 round63WitnessesPlusLiteralMissingObligationsGiveTenMasters compression old = record
-  { New.TenMasterProducers.signedSelectedRegionG2Absorption =
+  { signedSelectedRegionG2Absorption =
       compressG2 compression
         (Old.g2CorrelatedDegreeOneBound old)
         (Old.g2RawHigherDegreeBound old)
-  ; New.TenMasterProducers.literalWilsonGhostHaarOneLoopCoefficient =
+  ; literalWilsonGhostHaarOneLoopCoefficient =
       compressOneLoop compression
         (Old.literalOneLoopCoefficientPositive old)
-  ; New.TenMasterProducers.uniformNonlinearOneStepRGStability =
+  ; uniformNonlinearOneStepRGStability =
       compressRG compression
         (Old.physicalQuarticRemainderUniform old)
-  ; New.TenMasterProducers.literalOSCompatibleTransferNaturality =
+  ; literalOSCompatibleTransferNaturality =
       compressTransfer compression
         (Old.literalWilsonKernelNaturality old)
         (Old.literalTemporalTraceNaturality old)
-  ; New.TenMasterProducers.cutoffUniformPhysicalTransferGap =
+  ; cutoffUniformPhysicalTransferGap =
       compressGap compression
         (Old.terminalPhysicalWilsonTransferGap old)
         (Old.cutoffUniformPhysicalFeshbachLossBudget old)
-  ; New.TenMasterProducers.strongContinuumSchwingerConvergence =
+  ; strongContinuumSchwingerConvergence =
       compressContinuum compression
         (Old.physicalRenormalizedSchwingerScaleIncrementUniform old)
         (Old.renormalizedYangMillsSchwingerTightness old)
         (Old.yangMillsContinuumOSUniqueLimit old)
-  ; New.TenMasterProducers.continuumLocalOperatorOPEStressTensor =
+  ; continuumLocalOperatorOPEStressTensor =
       localOperatorOPEStressTensor compression
-  ; New.TenMasterProducers.sameLimitFourthCumulantLowerBound =
+  ; sameLimitFourthCumulantLowerBound =
       compressNonGaussian compression
         (Old.physicalContinuumFourthCumulantLowerBound old)
-  ; New.TenMasterProducers.sameLimitPhysicalExponentialClustering =
+  ; sameLimitPhysicalExponentialClustering =
       compressClustering compression
         (Old.physicalUniformExponentialClustering old)
-  ; New.TenMasterProducers.compactSimpleGroupUniformization =
+  ; compactSimpleGroupUniformization =
       compactSimpleGroupUniformization compression
   }
 
 round63ToTenMasterCompressionCompilerLevel : ProofLevel
 round63ToTenMasterCompressionCompilerLevel = machineChecked
 
--- The compression record is intentionally not given a canonical inhabitant:
--- constructing each function on the literal carriers is the mathematical work.
--- In particular, M7 and M10 cannot be manufactured from the old SU(2) fields.
 round64LiteralCompressionInstantiationLevel : ProofLevel
 round64LiteralCompressionInstantiationLevel = conditional
