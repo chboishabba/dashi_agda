@@ -14,15 +14,14 @@ module DASHI.Moonshine.DuncanSwisherModularGeometryContributionWeldExact where
 -- DASHI CONTRIBUTION
 --
 -- Reuse the pre-existing MonsterOrderExponentCorrectionExact owner for the
--- Theorem-1.1 contribution triples and the new geometric Theorem-1.2 carrier,
--- then prove they meet at one exponent.  No new Monster valuation table is
--- introduced.
+-- Theorem-1.1 contribution triples and the canonical Theorem-1.2 concrete
+-- controls.  No new Monster valuation table or generic Duncan--Swisher theorem
+-- carrier is introduced.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
 
 import DASHI.Moonshine.MonsterOrderExponentCorrectionExact as Monster
-import DASHI.Moonshine.DuncanSwisherSupersingularExponentDatumExact as DS
 import DASHI.Moonshine.DuncanSwisherMonsterExponentGeometryExact as Geo
 import DASHI.Physics.Closure.MoonshinePrimeLaneReceiptSurface as Lane
 
@@ -73,24 +72,24 @@ p13ModularEqualsExponent = refl
 ------------------------------------------------------------------------
 
 p5ModularGeometryMeet :
-  2 * modularContributionTotal Lane.p5 Monster.p5AboveThree
-  ≡ DS.doubledGeometricExponent Geo.p5Geometry
-p5ModularGeometryMeet = refl
+  2 * modularContributionTotal Lane.p5 Monster.p5AboveThree ≡ 3 * 6
+p5ModularGeometryMeet =
+  trans (cong (λ n → 2 * n) p5ModularEqualsExponent) Geo.p5DoubledExponent
 
 p7ModularGeometryMeet :
-  2 * modularContributionTotal Lane.p7 Monster.p7AboveThree
-  ≡ DS.doubledGeometricExponent Geo.p7Geometry
-p7ModularGeometryMeet = refl
+  2 * modularContributionTotal Lane.p7 Monster.p7AboveThree ≡ 3 * 4
+p7ModularGeometryMeet =
+  trans (cong (λ n → 2 * n) p7ModularEqualsExponent) Geo.p7DoubledExponent
 
 p11ModularGeometryMeet :
-  2 * modularContributionTotal Lane.p11 Monster.p11AboveThree
-  ≡ DS.doubledGeometricExponent Geo.p11Geometry
-p11ModularGeometryMeet = refl
+  2 * modularContributionTotal Lane.p11 Monster.p11AboveThree ≡ 4
+p11ModularGeometryMeet =
+  trans (cong (λ n → 2 * n) p11ModularEqualsExponent) Geo.p11DoubledExponent
 
 p13ModularGeometryMeet :
-  2 * modularContributionTotal Lane.p13 Monster.p13AboveThree
-  ≡ DS.doubledGeometricExponent Geo.p13Geometry
-p13ModularGeometryMeet = refl
+  2 * modularContributionTotal Lane.p13 Monster.p13AboveThree ≡ 3 * 2
+p13ModularGeometryMeet =
+  trans (cong (λ n → 2 * n) p13ModularEqualsExponent) Geo.p13DoubledExponent
 
 ------------------------------------------------------------------------
 -- Concrete triples expose why equal Ogg support can still have unequal
@@ -129,7 +128,7 @@ record DuncanSwisherModularGeometryContributionWeldBoundary : Set where
   field
     existingMonsterExponentOwnerReused : Bool
     theorem11ContributionOwnerReused : Bool
-    theorem12GeometryOwnerReused : Bool
+    canonicalTheorem12OwnerReused : Bool
     p5p7p11p13BothDescriptionsMeet : Bool
     supportOnlySufficientForMultiplicity : Bool
 
@@ -138,7 +137,7 @@ canonicalDuncanSwisherModularGeometryContributionWeldBoundary :
 canonicalDuncanSwisherModularGeometryContributionWeldBoundary = record
   { existingMonsterExponentOwnerReused = true
   ; theorem11ContributionOwnerReused = true
-  ; theorem12GeometryOwnerReused = true
+  ; canonicalTheorem12OwnerReused = true
   ; p5p7p11p13BothDescriptionsMeet = true
   ; supportOnlySufficientForMultiplicity = false
   }
