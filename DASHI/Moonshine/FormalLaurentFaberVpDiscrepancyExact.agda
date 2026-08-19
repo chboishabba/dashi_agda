@@ -134,8 +134,8 @@ adapterSurface :
   {p : Nat} →
   ConwayNortonLaurentFaberAdapter realization R p →
   FaberVpDiscrepancySurface p
-adapterSurface A = record
-  { FaberPolynomial = CN.FaberPolynomial _
+adapterSurface {R = R} A = record
+  { FaberPolynomial = CN.FaberPolynomial R
   ; pthFaberPolynomial = pthFaberPolynomial A
   ; jSeries = jSeries A
   ; jVpSeries = jVpSeries A
