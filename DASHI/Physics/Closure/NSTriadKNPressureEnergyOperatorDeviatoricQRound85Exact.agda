@@ -3,6 +3,11 @@ module DASHI.Physics.Closure.NSTriadKNPressureEnergyOperatorDeviatoricQRound85Ex
 ------------------------------------------------------------------------
 -- PRIMARY SOURCES / CONTEXT
 --
+-- Authors: Koji Ohkitani; Shigeo Kishiba.
+-- Title: "Nonlocal nature of vortex stretching in an inviscid fluid".
+-- Physics of Fluids 7 (1995), 411--421.
+-- DOI: 10.1063/1.868633.
+--
 -- Authors: Dhawal Buaria; Alain Pumir.
 -- Title: "Role of pressure in the dynamics of intense velocity gradients in
 -- turbulent flows".
@@ -15,25 +20,24 @@ module DASHI.Physics.Closure.NSTriadKNPressureEnergyOperatorDeviatoricQRound85Ex
 --
 -- ROUND85 / PRINCIPAL PRESSURE ENERGY OPERATOR
 --
--- For a same-field energy pairing the pressure Hessian and pressure-transport
--- integration-by-parts source occur in the combination
---
---   H - (1/2) tr(H) I.
---
--- Write
---
---   H = H^D + (1/3) tr(H) I,
---   Q = (1/2) tr(H)            [because Delta p = 2Q].
---
--- Then exactly
+-- Ohkitani--Kishiba use the standard pressure-Hessian trace/deviatoric split:
+-- the trace is the local pressure-Poisson invariant, while the trace-free part
+-- is the genuinely anisotropic/nonlocal pressure contribution.  On the DASHI
+-- normalization Delta p = 2Q, the same-field pressure-energy operator is
 --
 --   H - (1/2) tr(H) I
 --     = H^D - (1/6) tr(H) I
 --     = H^D - (1/3) Q I.
 --
--- This is the right principal pressure operator for the C4 energy pairing.
--- The selected hard-shell theorem still has a commutator/tail remainder because
--- the two mixed velocity legs are not globally identical.
+-- This file now pushes that matrix identity through the literal velocity
+-- pairing as well:
+--
+--   <v,(H - (1/2)tr(H)I)v>
+--     = <v,H^D v> - (1/3) Q |v|^2.
+--
+-- Thus C4a has an exact local/nonlocal scalar split on the principal packet.
+-- What remains analytic is to control the anisotropic H^D work in the selected
+-- dangerous-event currency; Q alone cannot recover that term.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
@@ -42,6 +46,7 @@ open import Agda.Builtin.List using ([]; _∷_)
 import Data.Integer.Base as Int
 open import Data.Rational.Base using (ℚ; _/_; _+_; _-_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
+open import Relation.Binary.PropositionalEquality using (trans)
 
 import DASHI.Physics.Closure.NSTriadKNRationalLerayProjectionExact as V
 import DASHI.Physics.Closure.NSTriadKNLuoAngularStrainDisplayedFormulaZeroExact as M
@@ -134,12 +139,49 @@ pressureEnergyBilinearEqualsDeviatoricQ : ∀ H value →
 pressureEnergyBilinearEqualsDeviatoricQ H value
   rewrite pressureEnergyOperatorEqualsDeviatoricMinusQThird H = refl
 
+------------------------------------------------------------------------
+-- Scalar local/nonlocal split used directly by C4a.
+------------------------------------------------------------------------
+
+deviatoricBilinear : M.Matrix3 → V.Vector3 → ℚ
+deviatoricBilinear H value =
+  V.dot value (A.apply (deviatoric H) value)
+
+localQEnergyCorrection : M.Matrix3 → V.Vector3 → ℚ
+localQEnergyCorrection H value =
+  third * qFromTrace H * V.normSquared value
+
+deviatoricQBilinearSplitsAnisotropicMinusLocalQ : ∀ H value →
+  deviatoricQBilinear H value
+  ≡ deviatoricBilinear H value - localQEnergyCorrection H value
+deviatoricQBilinearSplitsAnisotropicMinusLocalQ
+    (M.matrix3 h11 h12 h13 h21 h22 h23 h31 h32 h33)
+    (V.v3 vx vy vz) =
+  solve
+    (h11 ∷ h12 ∷ h13 ∷ h21 ∷ h22 ∷ h23 ∷ h31 ∷ h32 ∷ h33
+      ∷ vx ∷ vy ∷ vz ∷ [])
+
+pressureEnergyBilinearSplitsAnisotropicMinusLocalQ : ∀ H value →
+  pressureEnergyBilinear H value
+  ≡ deviatoricBilinear H value - localQEnergyCorrection H value
+pressureEnergyBilinearSplitsAnisotropicMinusLocalQ H value =
+  trans
+    (pressureEnergyBilinearEqualsDeviatoricQ H value)
+    (deviatoricQBilinearSplitsAnisotropicMinusLocalQ H value)
+
 round85PressureEnergyOperatorDeviatoricQCompressionExact : Bool
 round85PressureEnergyOperatorDeviatoricQCompressionExact = true
 
 round85PrincipalPressureEnergyUsesDeviatoricHessianAndQ : Bool
 round85PrincipalPressureEnergyUsesDeviatoricHessianAndQ = true
 
+round85PrincipalPressurePairingSplitsAnisotropicAndLocalQ : Bool
+round85PrincipalPressurePairingSplitsAnisotropicAndLocalQ = true
+
 round85PrincipalPressureEnergyUsesDeviatoricHessianAndQIsTrue :
   round85PrincipalPressureEnergyUsesDeviatoricHessianAndQ ≡ true
 round85PrincipalPressureEnergyUsesDeviatoricHessianAndQIsTrue = refl
+
+round85PrincipalPressurePairingSplitsAnisotropicAndLocalQIsTrue :
+  round85PrincipalPressurePairingSplitsAnisotropicAndLocalQ ≡ true
+round85PrincipalPressurePairingSplitsAnisotropicAndLocalQIsTrue = refl
