@@ -6,9 +6,9 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound66SixPackageValidatio
 -- Round66 starts from the six-package / eleven-leaf diagnostic and removes
 -- consequences that are not genuinely new Yang--Mills analysis.
 --
---   diagnostic leaves:       11
---   genuinely physical leaves: 10
---   theorem packages:          6
+--   diagnostic leaves:          11
+--   genuinely physical leaves:  10
+--   theorem packages:             6
 --
 -- The reduction 11 -> 10 is transfer-gap -> observable clustering: once the
 -- literal centered observable is on the SAME transfer Hilbert carrier and the
@@ -17,12 +17,12 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound66SixPackageValidatio
 --
 -- Further high-alpha reductions in this root:
 --
--- * a common mass floor is derived from terminalFloor - lossCeiling, rather
---   than accepted as another physical input;
+-- * a common mass floor is derived from terminalFloor - lossCeiling;
 -- * d=4 small-polymer extraction is finite (<=8 blocks) with four exact Taylor
 --   channels, while the large-polymer branch has an explicit 1/32 target;
--- * combining Step-V/KP 1/2 with 1/32 gives 17/32 total and 15/32 contraction
---   headroom in one norm;
+-- * Step-V/KP 1/2 + 1/32 = 17/32 leaves 15/32 contraction headroom;
+-- * the recurrence K_(n+1)<=17/32 K_n+E 2^-n has exact all-depth convolution
+--   32 ((17/32)^n-(1/2)^n), so iteration is no longer physical input;
 -- * composite-operator all-depth RG transport follows from one-step protection;
 -- * the literal one-loop evaluator is definitionally the object folded into
 --   the four joint hypercubic orbit sums.
@@ -38,6 +38,7 @@ import DASHI.Physics.YangMills.BalabanUniformTerminalMinusLossGapExact as GapBud
 import DASHI.Physics.YangMills.BalabanCorrectedSmallPolymerExtractionContractionExact as Extract
 import DASHI.Physics.YangMills.BalabanSmallPolymerTaylorNormalizationExact as Taylor
 import DASHI.Physics.YangMills.BalabanUnifiedPolymerStepVContractionBudgetExact as StepBudget
+import DASHI.Physics.YangMills.BalabanUnifiedSeventeenThirtySecondIterationExact as Iteration
 import DASHI.Physics.YangMills.BalabanCompositeOperatorRGParallelTransportExact as Composite
 import DASHI.Physics.YangMills.BalabanLiteralOneLoopFourOrbitSameObjectExact as OneLoop
 import DASHI.Physics.YangMills.BalabanSelectedRegionFiveBlockSignedG2Exact as G2
@@ -72,6 +73,10 @@ round66TaylorNormalizationLevel =
 round66StepVContractionBudgetLevel : ProofLevel
 round66StepVContractionBudgetLevel =
   StepBudget.stepVContractionBudgetArithmeticLevel
+
+round66AllDepthIterationLevel : ProofLevel
+round66AllDepthIterationLevel =
+  Iteration.seventeenThirtySecondIterationAlgebraLevel
 
 round66CompositeParallelTransportLevel : ProofLevel
 round66CompositeParallelTransportLevel =
@@ -123,6 +128,10 @@ round66LargePolymerPhysicalContractionLevel = Extract.physicalYMLargePolymerCont
 round66UnifiedPhysicalStepVBudgetLevel : ProofLevel
 round66UnifiedPhysicalStepVBudgetLevel =
   StepBudget.physicalUnifiedStepVContractionBudgetLevel
+
+round66UnifiedPhysicalOneStepRecurrenceLevel : ProofLevel
+round66UnifiedPhysicalOneStepRecurrenceLevel =
+  Iteration.physicalUnifiedOneStepRecurrenceLevel
 
 round66CompositeMixingLevel : ProofLevel
 round66CompositeMixingLevel = Composite.physicalYMCompositeMixingLevel
