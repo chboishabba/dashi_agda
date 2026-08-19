@@ -8,10 +8,9 @@ module DASHI.Core.ResidualSymmetryCollisionFibreExact where
 --   observe -> locate collision fibre -> inspect symmetry acting inside it.
 --
 -- If an invertible symmetry preserves an observer, it acts internally on every
--- observation fibre.  A residual sector label may then strictly refine the
--- coarse observer without changing its public value.  This is the set-level
--- theorem shape instantiated more richly by deck/character decompositions in
--- the marked-Hecke lane.
+-- observation fibre.  Whenever such a symmetry genuinely moves a fine state,
+-- it directly constructs a coarse observer collision.  A residual sector label
+-- may then strictly refine that collision without changing its public value.
 --
 -- SOURCE / METHOD CALIBRATION
 --
@@ -121,6 +120,36 @@ fibreActionCompositionOnCarrier :
 fibreActionCompositionOnCarrier {action = action} preserving g h value point =
   combineActs action g h (proj₁ point)
 
+symmetryMoveCreatesObserverCollision :
+  ∀ {State Symmetry Observation : Set}
+    {action : InvertibleSymmetryAction State Symmetry}
+    {observe : State → Observation}
+    (preserving : ObserverPreservingSymmetry action observe)
+    (g : Symmetry)
+    (x : State) →
+  (x ≡ act action g x → ⊥) →
+  Observer.ObserverCollision observe
+symmetryMoveCreatesObserverCollision {action = action} preserving g x moved =
+  Observer.observerCollision
+    x
+    (act action g x)
+    (sym (observationInvariant preserving g x))
+    moved
+
+nontrivialPreservingSymmetryBlocksSeparation :
+  ∀ {State Symmetry Observation : Set}
+    {action : InvertibleSymmetryAction State Symmetry}
+    {observe : State → Observation}
+    (preserving : ObserverPreservingSymmetry action observe)
+    (g : Symmetry)
+    (x : State) →
+  (x ≡ act action g x → ⊥) →
+  Observer.Separating observe →
+  ⊥
+nontrivialPreservingSymmetryBlocksSeparation preserving g x moved =
+  Observer.collisionBlocksSeparation
+    (symmetryMoveCreatesObserverCollision preserving g x moved)
+
 ------------------------------------------------------------------------
 -- Residual sector labels refine a coarse collision fibre.
 ------------------------------------------------------------------------
@@ -176,6 +205,7 @@ record ResidualSymmetryCollisionFibreBoundary : Set where
   constructor residualSymmetryCollisionFibreBoundary
   field
     observerPreservingSymmetryActsInsideEveryFibre : Bool
+    nontrivialPreservingSymmetryConstructsCollision : Bool
     residualSectorCanStrictlyRefineCollision : Bool
     commutingOperatorFamilyAutomaticallyBuildsSpectralLabels : Bool
     doubleCentralizerEqualityProvedWithoutSemisimplicity : Bool
@@ -184,4 +214,4 @@ record ResidualSymmetryCollisionFibreBoundary : Set where
 canonicalResidualSymmetryCollisionFibreBoundary :
   ResidualSymmetryCollisionFibreBoundary
 canonicalResidualSymmetryCollisionFibreBoundary =
-  residualSymmetryCollisionFibreBoundary true true false false false
+  residualSymmetryCollisionFibreBoundary true true true false false false
