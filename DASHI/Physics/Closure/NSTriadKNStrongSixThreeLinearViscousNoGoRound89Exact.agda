@@ -49,9 +49,9 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Agda.Builtin.Nat using (Nat; suc)
-open import Data.Rational.Base using (_*_)
+open import Data.Rational.Base using (1ℚ; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality as Eq using (cong)
+open import Relation.Binary.PropositionalEquality as Eq using (cong; sym)
 open Eq.≡-Reasoning
 
 import DASHI.Physics.Closure.NSTriadKNLuoSixThreeCenteredCommutatorScaleExact as SixThree
@@ -83,7 +83,7 @@ strongSquaredBranchAfterLinearTwoDerivativeWeight gap =
       * SixThree.separationScale gap
   ≡⟨ cong (_* SixThree.separationScale gap)
        (SixThree.strongGapCubicSeparationCalibration gap) ⟩
-    Data.Rational.Base.1ℚ * SixThree.separationScale gap
+    1ℚ * SixThree.separationScale gap
   ≡⟨ solve (SixThree.separationScale gap ∷ []) ⟩
     SixThree.separationScale gap
   ∎
@@ -124,7 +124,7 @@ weightedStrongSquaredRequirementDoubles gap =
   ≡⟨ separationScaleDoubles gap ⟩
     Dyadic.two * SixThree.separationScale gap
   ≡⟨ cong (Dyadic.two *_)
-       (Eq.sym (strongSquaredBranchAfterLinearTwoDerivativeWeight gap)) ⟩
+       (sym (strongSquaredBranchAfterLinearTwoDerivativeWeight gap)) ⟩
     Dyadic.two
       * (SixThree.strongBranchSquaredGap gap
         * (SixThree.separationScale gap
