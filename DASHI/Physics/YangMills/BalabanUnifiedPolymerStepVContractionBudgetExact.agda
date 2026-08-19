@@ -20,23 +20,21 @@ module DASHI.Physics.YangMills.BalabanUnifiedPolymerStepVContractionBudgetExact 
 --
 -- DASHI CONTRIBUTION
 --
--- The existing Yang--Mills Step-V theorem proves the rooted polymer/KP partial
--- sum is at most 1/2, uniformly at finite cutoff, once the physical rooted-shell
--- estimate is supplied.  Round66 assigns the large-polymer rescaling branch the
--- explicit dyadic d=4 target 1/32.  If these two costs enter additively in the
--- SAME corrected polymer norm, their complete budget is only
+-- Existing Step V gives a rooted KP budget <=1/2 once the physical shell bound
+-- is supplied.  Round66 assigns the large-polymer rescaling branch the explicit
+-- dyadic d=4 target 1/32.  If the two costs add in ONE corrected norm,
 --
 --     1/2 + 1/32 = 17/32,
 --
--- leaving exact contraction headroom 15/32.  Thus the global contraction does
--- not need an opaque theta<1 producer: the infinite/polymer-combinatorial side
--- has a concrete margin, and the hard remaining work is concentrated in the
--- finite small-polymer extraction and same-norm physical factor estimates.
+-- leaving exact headroom 15/32.  The global theta<1 condition is therefore
+-- replaced by a concrete numerical target; the physical work is the finite
+-- small-polymer extraction and proving the large branch in the same norm.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_; refl; cong)
 open import Data.Integer.Base using (+_)
-open import Data.Rational.Base as ℚ using (ℚ; 1ℚ; _+_; _≤_; _<_; _/_; Positive)
+open import Data.Rational.Base as ℚ using
+  (ℚ; 0ℚ; 1ℚ; _+_; _≤_; _<_; _/_; Positive)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 
@@ -64,16 +62,12 @@ contractionHeadroomPositive =
       marginPositive = ℚP.normalize-pos 15 32
   in
   ℚP.positive⁻¹ fifteenThirtySeconds
-  where
-  open import Data.Rational.Base using (0ℚ)
 
 record AdditiveStepVContractionBudget (Bound : Set) : Set₁ where
   field
     rational : ℚ → Bound
     add : Bound → Bound → Bound
     LessEqual : Bound → Bound → Set
-    transitive : ∀ {left middle right} →
-      LessEqual left middle → LessEqual middle right → LessEqual left right
 
     smallAndKPCost largeRescalingCost totalCost : Bound
 
@@ -94,23 +88,24 @@ open AdditiveStepVContractionBudget public
 combinedStepVCostBelowSeventeenThirtySeconds :
   ∀ {Bound} (dataSet : AdditiveStepVContractionBudget Bound) →
   LessEqual dataSet (totalCost dataSet) (rational dataSet seventeenThirtySeconds)
-combinedStepVCostBelowSeventeenThirtySeconds dataSet
-  rewrite totalCostExact dataSet =
+combinedStepVCostBelowSeventeenThirtySeconds {Bound = Bound} dataSet =
   substUpper
+    (totalCostExact dataSet)
     (rationalAddExact dataSet StepV.half Extract.oneThirtySecond)
-    (kpPlusLargeContractionExact)
+    (cong (rational dataSet) kpPlusLargeContractionExact)
     (addMonotone dataSet
       (smallAndKPBelowHalf dataSet)
       (largeBelowOneThirtySecond dataSet))
   where
   substUpper : ∀ {a b c d : Bound} →
-    b ≡ c → c ≡ d → LessEqual dataSet a b → LessEqual dataSet a d
-  substUpper refl refl proof = proof
+    a ≡ b → c ≡ d →
+    b ≡ c →
+    LessEqual dataSet b c →
+    LessEqual dataSet a d
+  substUpper refl refl refl proof = proof
 
 stepVContractionBudgetArithmeticLevel : ProofLevel
 stepVContractionBudgetArithmeticLevel = machineChecked
 
--- Physical frontier: prove the small-polymer normalized extraction and the
--- large-rescaling estimate in ONE norm so that the additive budget is valid.
 physicalUnifiedStepVContractionBudgetLevel : ProofLevel
 physicalUnifiedStepVContractionBudgetLevel = conditional
