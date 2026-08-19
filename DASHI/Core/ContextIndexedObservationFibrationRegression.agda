@@ -193,5 +193,20 @@ publicToSituatedLiftCommutesWithObservation :
   observeDemo publicContext (restrictDemoFine publicToSituated state)
   ≡ restrictDemoSurface publicToSituated (observeDemo situatedContext state)
 publicToSituatedLiftCommutesWithObservation =
-  Indexed.observationCommutesWithCartesianLift
+  Indexed.observationCommutesWithSplitLift
     demoIndexedObservation publicToSituated
+
+-- The identity-after-public-to-situated composite constructs an actual factor
+-- arrow into the chosen public-to-situated lift.  This exercises the existence
+-- half without claiming arbitrary proof-level uniqueness.
+situatedIdentityCompositeFactorsThroughLift :
+  (state : DemoFine situatedContext) →
+  Indexed.TotalFineArrow demoIndexedObservation
+    (publicContext , restrictDemoFine publicToSituated state)
+    (Indexed.cartesianSource demoIndexedObservation situatedId state)
+situatedIdentityCompositeFactorsThroughLift state =
+  Indexed.splitLiftFactorizationArrow
+    demoIndexedObservation
+    publicToSituated situatedId
+    (restrictDemoFine publicToSituated state)
+    state refl
