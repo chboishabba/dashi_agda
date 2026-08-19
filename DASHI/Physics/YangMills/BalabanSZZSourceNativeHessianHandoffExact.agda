@@ -14,25 +14,10 @@ module DASHI.Physics.YangMills.BalabanSZZSourceNativeHessianHandoffExact where
 -- "Renormalization Group Approach to Lattice Gauge Field Theories. I.",
 -- Communications in Mathematical Physics 109 (1987), 249--301.
 -- DOI: 10.1007/BF01215223.
---
--- DASHI CONTRIBUTION
---
--- This is the non-receipt version of the UV->IR handoff.  At one actual RG
--- depth, the SAME effective density carries a Wilson Hessian plus an irrelevant
--- remainder Hessian.  The Wilson coefficient is definitionally tied to the
--- source-normalized running inverse coupling u_n, and the remainder cost is the
--- number controlled by the unified RG norm.
---
--- A finite beta lower bound reaches a target u_*.  Positivity of
---
---   K_W(u_*) - rho
---
--- then implies positivity at the actual u_n because K_W is antitone in u.
--- The Hessian perturbation theorem converts this scalar margin into a lower
--- bound for Ric-Hess(S_eff) on every tangent vector.
 ------------------------------------------------------------------------
 
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _<_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _*_; _-_; _≤_; _<_)
+import Data.Rational.Properties as ℚP
 open import Relation.Binary.PropositionalEquality using (_≡_; refl)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -48,7 +33,6 @@ record SourceNativeSZZHessianHandoff
   field
     crossover : Cross.CrossoverTarget trajectory bounds
     remainderHessianCost : ℚ
-
     hessianData : Hess.WilsonPlusRemainderHessianData Tangent
 
     wilsonMarginIsRunningSZZMargin :
@@ -78,7 +62,7 @@ actualRunningSZZMarginPositive dataSet =
     targetBelowActualMargin =
       Cross.perturbedSZZMarginAntitone _ actualBelowTarget
   in
-  Data.Rational.Properties.<-≤-trans
+  ℚP.<-≤-trans
     (targetCrossoverMarginPositive dataSet)
     targetBelowActualMargin
 
@@ -116,8 +100,5 @@ sourceNativeEffectiveBakryEmeryLower dataSet =
 sourceNativeSZZHessianHandoffCompilerLevel : ProofLevel
 sourceNativeSZZHessianHandoffCompilerLevel = machineChecked
 
--- Remaining physical estimate: construct `hessianData` from the literal
--- CMP119/CMP122 effective density and prove its remainder Hessian cost from the
--- same unified norm used for continuum convergence.
 physicalSourceNativeSZZHessianHandoffLevel : ProofLevel
 physicalSourceNativeSZZHessianHandoffLevel = conditional
