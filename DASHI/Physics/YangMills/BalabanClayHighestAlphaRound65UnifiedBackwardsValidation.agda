@@ -3,14 +3,15 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound65UnifiedBackwardsVal
 ------------------------------------------------------------------------
 -- ROUND65 FOCUSED ROOT
 --
--- Seven programmes are the honest current backwards cutset.  Four packages are
+-- Seven programmes are the honest current backwards cutset. Four packages are
 -- possible only if one unified polymer/Schwinger theorem closes continuum
 -- existence + local/composite fields + interaction survival + physical
--- clustering on the same family.  Generic 4D UV RG stability is already
+-- clustering on the same family. Generic 4D UV RG stability is already
 -- source-owned by Bałaban CMP119/CMP122; signed G2 is reduced to five exact
 -- degree blocks; beta_0 follows from the literal singular scalar coefficient;
--- and compact-simple promotion is reduced to one group-parametric continuation
--- theorem over the existing quantitative Lie package.
+-- compact-simple promotion is one group-parametric continuation theorem; and
+-- one continuum error modulus transports both interaction and clustering
+-- margins when finite-scale estimates leave the required buffers.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
@@ -19,6 +20,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.YangMillsClaySevenProgrammeBackwardsCompilerExact as Seven
 import DASHI.Physics.YangMills.YangMillsClayFourPackageBackwardsCompilerExact as Four
 import DASHI.Physics.YangMills.BalabanUnifiedPolymerSchwingerNormExact as Unified
+import DASHI.Physics.YangMills.BalabanUnifiedContinuumEndpointMarginTransportExact as Margins
 import DASHI.Physics.YangMills.BalabanPublishedUVStabilityNonlinearRGCoreExact as UV
 import DASHI.Physics.YangMills.BalabanSelectedRegionFiveBlockSignedG2Exact as G2
 import DASHI.Physics.YangMills.BalabanSU2OneLoopInfraredCoefficientFromLiteralScalarExact as OneLoop
@@ -38,6 +40,9 @@ round65BackwardsCompilerLevel = machineChecked
 
 round65UnifiedProjectionTheoremsLevel : ProofLevel
 round65UnifiedProjectionTheoremsLevel = Unified.unifiedNormProjectionClosureLevel
+
+round65UnifiedEndpointMarginTransportLevel : ProofLevel
+round65UnifiedEndpointMarginTransportLevel = Margins.sameLimitEndpointMarginTransportLevel
 
 round65PublishedUVCoreLevel : ProofLevel
 round65PublishedUVCoreLevel = UV.publishedFourDimensionalNonlinearRGCoreLevel
@@ -73,6 +78,9 @@ round65UnifiedPhysicalPolymerNormLevel : ProofLevel
 round65UnifiedPhysicalPolymerNormLevel =
   Unified.physicalYMUnifiedPolymerNormProducerLevel
 
+round65UnifiedEndpointPhysicalMarginsLevel : ProofLevel
+round65UnifiedEndpointPhysicalMarginsLevel = Margins.physicalUnifiedEndpointMarginsLevel
+
 round65LiteralTransferLevel : ProofLevel
 round65LiteralTransferLevel = Transfer.physicalLiteralOSCompatibleTransferNaturalityLevel
 
@@ -86,8 +94,6 @@ round65CompactSimpleParametricContinuationLevel : ProofLevel
 round65CompactSimpleParametricContinuationLevel =
   Groups.compactSimpleParametricYMContinuationLevel
 
--- Fourth-cumulant -> non-Gaussian and OS clustering -> Hamiltonian gap remain
--- downstream theorem closures and are not reintroduced as algebraic producers.
 round65FourthCumulantToNonGaussianLevel : ProofLevel
 round65FourthCumulantToNonGaussianLevel = machineChecked
 
