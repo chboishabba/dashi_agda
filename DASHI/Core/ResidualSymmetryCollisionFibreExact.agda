@@ -76,8 +76,8 @@ actOnCollisionFibre :
   (value : Observation) →
   CollisionFibre observe value →
   CollisionFibre observe value
-actOnCollisionFibre preserving g value (x , sameValue) =
-  act _ g x ,
+actOnCollisionFibre {action = action} preserving g value (x , sameValue) =
+  act action g x ,
   trans (observationInvariant preserving g x) sameValue
 
 fibreActionStaysInSamePublicValue :
