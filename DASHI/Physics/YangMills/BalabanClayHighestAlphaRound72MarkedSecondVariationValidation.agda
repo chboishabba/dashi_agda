@@ -3,7 +3,7 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound72MarkedSecondVariati
 ------------------------------------------------------------------------
 -- ROUND73 FOCUSED ROOT (file name retained for stacked import stability)
 --
--- Highest-alpha correction to the Round72 8-lemma cutset:
+-- Highest-alpha correction INSIDE the Round72 eight-lemma cutset:
 --
 -- CMP109 itself already performs the relevant TWO field variations before the
 -- marked localization step.  After (4.35) it states that replacing the
@@ -12,14 +12,13 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound72MarkedSecondVariati
 -- expression; (4.36)--(4.37) extend/resum the localization-domain family, and
 -- Sect. 5 equation (5.10) records exponential position-space decay of Pi.
 --
--- Therefore the old independent item
---
---     MarkedDifferentiatedActivityExponentialLocalisation
---
--- is SOURCE-OWNED rather than new Yang--Mills analysis.  Its only live seam is
--- same-object identification of CMP109's E^(2)/Pi with the Hessian/derivative
--- coordinate of the literal unified RG state.  That identification belongs in
--- `LiteralStateEntersPublishedBalabanRG` / `PhysicalUnifiedOneStepYMEstimate`.
+-- Round72 had ALREADY folded differentiated localisation into
+-- `PhysicalUnifiedOneStepYMEstimate`.  Therefore this source discovery does
+-- not change the authoritative theorem-sized count from eight to seven.  It
+-- materially SHRINKS that unified-RG theorem: the decay estimate is
+-- source-owned, and its live seam is only same-object identification of
+-- CMP109's E^(2)/Pi with the Hessian/derivative coordinate of the literal
+-- unified RG state.
 --
 -- The mass-gap lane is now:
 --
@@ -33,7 +32,8 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound72MarkedSecondVariati
 --      -> weighted propagation + temporal relaxation
 --      -> spatial clustering -> SAME-family OS Hamiltonian gap.
 --
--- This is a genuine 8 -> 7 analytic-cutset reduction, not a relabelling.
+-- The authoritative eight-item analytic cutset is recorded in
+-- `BalabanClayHighestAlphaRound73EightAnalyticCutsetExact`.
 ------------------------------------------------------------------------
 
 -- PRIMARY SOURCES
@@ -93,10 +93,6 @@ import DASHI.Physics.YangMills.BalabanSourceExponentialToWeightedHessianExact
 import DASHI.Physics.YangMills.CompactLieBiInvariantSkewLangevinExact
 import DASHI.Physics.YangMills.CompactLieLangevinSkewConnectionCancellationExact
 
-------------------------------------------------------------------------
--- SOURCE-OWNED DIFFERENTIATED MARKED LOCALISATION
-------------------------------------------------------------------------
-
 round73PublishedMarkedPropagatorDecayLevel : ProofLevel
 round73PublishedMarkedPropagatorDecayLevel = standardImported
 
@@ -108,10 +104,6 @@ round73PublishedDifferentiatedMarkedE2DecayLevel = standardImported
 
 round73PublishedGeneralizedWalkClusterLocalisationLevel : ProofLevel
 round73PublishedGeneralizedWalkClusterLocalisationLevel = standardImported
-
-------------------------------------------------------------------------
--- OWNED FINITE / QUASI-LOCAL ASSEMBLY
-------------------------------------------------------------------------
 
 round73NoncommutativeMarkedOperatorAssemblyLevel : ProofLevel
 round73NoncommutativeMarkedOperatorAssemblyLevel = machineChecked
@@ -128,32 +120,21 @@ round73ExponentialShellToWeightedRowLevel = machineChecked
 round73BasisFreeAdSkewCancellationLevel : ProofLevel
 round73BasisFreeAdSkewCancellationLevel = machineChecked
 
-------------------------------------------------------------------------
--- LIVE SAME-OBJECT SEAMS
---
--- S0 belongs inside the unified physical RG theorem, not as an independent
--- decay lemma: identify source E^(2)/Pi with the derivative/Hessian coordinate
--- of the SAME literal effective density and norm.
---
--- S1 identifies that same density/covariance path with the exact Polchinski
--- C_t, dot C_t, ddot C_t and proves the multiscale curvature/debt inequality.
---
--- S2 proves the literal compact-group lattice Langevin commutator.  The
--- connection part then contributes exactly zero quadratic derivative energy by
--- the basis-free Ad-invariant theorem; no second positive growth budget exists.
---
--- S3 is the standard weighted-Gronwall/temporal-relaxation assembly and
--- same-family passage to Euclidean spatial clustering.
-------------------------------------------------------------------------
-
+-- S0 belongs inside the unified physical RG theorem: identify source E^(2)/Pi
+-- with the derivative/Hessian coordinate of the SAME literal effective density.
 round73PhysicalCMP109E2IsUnifiedRGHessianCoordinateLevel : ProofLevel
 round73PhysicalCMP109E2IsUnifiedRGHessianCoordinateLevel = conditional
 
+-- Same-density Polchinski curvature/debt instantiation.
 round73PhysicalSameDensityPolchinskiCurvatureLevel : ProofLevel
 round73PhysicalSameDensityPolchinskiCurvatureLevel = conditional
 
+-- Literal compact-group Langevin commutator.  Once identified, its connection
+-- part is already energy-zero by the basis-free Ad-invariant theorem.
 round73PhysicalLiteralCompactLieLangevinCommutatorLevel : ProofLevel
 round73PhysicalLiteralCompactLieLangevinCommutatorLevel = conditional
 
+-- Standard weighted propagation + temporal relaxation and passage to the same
+-- Euclidean continuum family.
 round73PhysicalWeightedPropagationSameFamilyLevel : ProofLevel
 round73PhysicalWeightedPropagationSameFamilyLevel = conditional
