@@ -42,12 +42,13 @@ module DASHI.Physics.Closure.NSTriadKNStrongSixThreeWeightedCellRound89Exact whe
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base using (ℚ; 0ℚ; _*_; _≤_; nonNegative)
+open import Agda.Builtin.List using ([]; _∷_)
+open import Data.Rational.Base using (ℚ; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Agda.Builtin.List using ([]; _∷_)
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Binary.PropositionalEquality using (subst; trans)
 
+import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteSixThreeCommutatorBudgetExact as Budget
 import DASHI.Physics.Closure.NSTriadKNLuoSixThreeCenteredCommutatorScaleExact as Scale
 import DASHI.Physics.Closure.NSTriadKNStrongSixThreeTwoDerivativePaymentRound89Exact as Payment
@@ -57,22 +58,11 @@ separationSquare cell =
   Scale.separationScale (Budget.gap cell)
     * Scale.separationScale (Budget.gap cell)
 
-separationScaleNonnegative :
-  (cell : Budget.SixThreeCommutatorCell) →
-  0ℚ ≤ Scale.separationScale (Budget.gap cell)
-separationScaleNonnegative cell =
-  Scale.separationScaleNonnegative (Budget.gap cell)
-
 separationSquareNonnegative :
   (cell : Budget.SixThreeCommutatorCell) →
-  0ℚ ≤ separationSquare cell
+  Data.Rational.Base.0ℚ ≤ separationSquare cell
 separationSquareNonnegative cell =
-  let
-    s = Scale.separationScale (Budget.gap cell)
-    instance
-      sNN = nonNegative (separationScaleNonnegative cell)
-      squareNN = ℚP.nonNeg*nonNeg⇒nonNeg s s
-  in ℚP.nonNegative⁻¹ (s * s)
+  L2.squareNonnegative (Scale.separationScale (Budget.gap cell))
 
 weightedStrongBranchBelowWeakEnvelope :
   (cell : Budget.SixThreeCommutatorCell) →
@@ -102,21 +92,18 @@ weightedStrongBranchBelowWeakEnvelope cell =
     scalePayment : gs * s2 ≡ gw
     scalePayment = Payment.strongPaysTwoSeparationPowers d
 
-    targetMeaning :
+    paidUpper :
       (gs * s2) * low * out ≡ Budget.weakCellEnvelope cell
-    targetMeaning =
-      subst
-        (λ coefficient → coefficient * low * out ≡ Budget.weakCellEnvelope cell)
-        (sym scalePayment)
-        refl
+    paidUpper rewrite scalePayment = refl
+
+    upperMeaning :
+      s2 * (gs * low * out) ≡ Budget.weakCellEnvelope cell
+    upperMeaning = trans rearrangedUpper paidUpper
   in
   subst
     (λ upper → s2 * b1 ≤ upper)
-    (rearrangedUpper)
-    (subst
-      (λ upper → s2 * b1 ≤ upper)
-      targetMeaning
-      weightedRaw)
+    upperMeaning
+    weightedRaw
 
 round89ExistingStrongCellPaysTwoDerivativeWeight : Bool
 round89ExistingStrongCellPaysTwoDerivativeWeight = true
