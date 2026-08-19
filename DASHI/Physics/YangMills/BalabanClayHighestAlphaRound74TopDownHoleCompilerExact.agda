@@ -19,6 +19,7 @@ import DASHI.Physics.YangMills.BalabanGroupParametricFiveBlockSignedG2Exact
 import DASHI.Physics.YangMills.BalabanSU2OneLoopInfraredCoefficientFromLiteralScalarExact
 import DASHI.Physics.YangMills.BalabanClayT4LiteralEvaluatorFourRepresentativeReductionExact
 import DASHI.Physics.YangMills.BalabanPublishedUVStabilityNonlinearRGCoreExact
+import DASHI.Physics.YangMills.Balaban1989LiteralCompleteDensityStateCoordinatesExact
 import DASHI.Physics.YangMills.Balaban1989CanonicalYM4StateFromSection2Exact
 import DASHI.Physics.YangMills.Balaban1989CompleteDensityToYM4RegionExact
 import DASHI.Physics.YangMills.BalabanUnifiedPolymerSchwingerNormExact
@@ -85,15 +86,19 @@ round74GaussianGapContradiction = Free.gaussianContradictsPositiveGap
 --    Universal SU2 11/12 and 240->4 transport are downstream.
 --
 -- #3 LiteralStateEntersPublishedBalabanRG
---    One SAME-object Section-2 dictionary extracting coupling, small/large
---    field, covariance, decay, spacing and source E^(2) from the literal
---    effective density.  CMP119/CMP122 then own baseline finite-cutoff RG.
+--    Five canonical coordinates (K,L,C,mu,a^-1) are ALREADY defined as
+--    extractors from the SAME complete density; their projection equalities are
+--    `refl`.  The remaining source weld is only:
+--      (a) identify those five extractor functions with the actual CMP119/122
+--          Section-2 quantities/norms;
+--      (b) identify CMP109's source E^(2)/Pi with the derivative/Hessian
+--          coordinate of the same stronger state.
+--    Baseline finite-cutoff nonlinear preservation is then source-owned.
 --
 -- #4 PhysicalUnifiedOneStepYMEstimate
 --    After #3, add only genuinely stronger coordinates: composite insertions,
 --    separation-weighted connected correlations, a common increment modulus,
---    source E^(2)/Pi = unified derivative/Hessian identification, and (if we
---    want #4 -> #5) the measure-defining characteristic-functional coordinate.
+--    and (if we want #4 -> #5) the measure-defining characteristic functional.
 --
 -- #5 SameFamilyContinuumOSCompletion
 --    Backwards reduction through the characteristic coordinate:
@@ -121,14 +126,11 @@ round74GaussianGapContradiction = Free.gaussianContradictsPositiveGap
 --
 -- #8 nontriviality
 --    Route A: strict finite fourth-cumulant buffer greater than the common tail.
---    Route B (now logically complete downstream): prove the ONE same-theory
---    physical bridge
+--    Route B: prove the ONE same-theory physical bridge
 --      Gaussian/free continuum YM -> massless Maxwell one-particle sector
 --    on the reconstructed Hamiltonian.  Positive gap then constructs
 --    NotGaussian, and `YangMillsNonGaussianInteractingWitnessExact` turns that
 --    constructively into the repository's existing `InteractingContinuumWitness`.
---    Thus Route B can genuinely delete the fourth-cumulant job if its one
---    physical Gaussian->Maxwell bridge is proved.
 ------------------------------------------------------------------------
 
 round74TopDownHoleCompilerLevel : ProofLevel
