@@ -31,6 +31,7 @@ module DASHI.Physics.YangMills.BalabanLiteralTransferNaturalityMasterExact where
 -- that the existing two-square KernelTraceNaturality package constructs it.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanWilsonTransferIntertwinerExact as Transfer
 import DASHI.Physics.YangMills.BalabanTransferKernelTraceNaturalityExact as KernelTrace
@@ -66,8 +67,5 @@ masterFromKernelTraceNaturality naturality = record
 literalTransferMasterCompilerLevel : ProofLevel
 literalTransferMasterCompilerLevel = machineChecked
 
--- Remaining physical theorem: instantiate this master on the literal Bałaban
--- block transformation and Wilson/Lüscher transfer carriers.  Kernel and trace
--- naturality remain one available proof decomposition, not two endgame leaves.
 physicalLiteralOSCompatibleTransferNaturalityLevel : ProofLevel
 physicalLiteralOSCompatibleTransferNaturalityLevel = conditional
