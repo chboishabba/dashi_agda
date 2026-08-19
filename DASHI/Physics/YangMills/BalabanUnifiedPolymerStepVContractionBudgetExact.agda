@@ -37,7 +37,7 @@ open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; 1ℚ; _+_; _≤_; _<_; _/_; Positive)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; subst)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayP2LargeFieldStepVExact as StepV
@@ -91,34 +91,18 @@ combinedStepVCostBelowSeventeenThirtySeconds :
   LessEqual dataSet (totalCost dataSet) (rational dataSet seventeenThirtySeconds)
 combinedStepVCostBelowSeventeenThirtySeconds dataSet =
   let
-    base :
-      LessEqual dataSet
-        (add dataSet (smallAndKPCost dataSet) (largeRescalingCost dataSet))
-        (add dataSet
-          (rational dataSet StepV.half)
-          (rational dataSet Extract.oneThirtySecond))
     base = addMonotone dataSet
       (smallAndKPBelowHalf dataSet)
       (largeBelowOneThirtySecond dataSet)
 
-    fromTotal :
-      LessEqual dataSet
-        (totalCost dataSet)
-        (add dataSet
-          (rational dataSet StepV.half)
-          (rational dataSet Extract.oneThirtySecond))
     fromTotal = subst
       (λ lower → LessEqual dataSet lower
         (add dataSet
           (rational dataSet StepV.half)
           (rational dataSet Extract.oneThirtySecond)))
-      (totalCostExact dataSet)
+      (sym (totalCostExact dataSet))
       base
 
-    rationalSum :
-      LessEqual dataSet
-        (totalCost dataSet)
-        (rational dataSet (StepV.half + Extract.oneThirtySecond))
     rationalSum = subst
       (λ upper → LessEqual dataSet (totalCost dataSet) upper)
       (rationalAddExact dataSet StepV.half Extract.oneThirtySecond)
