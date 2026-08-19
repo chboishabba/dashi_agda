@@ -19,6 +19,7 @@ module DASHI.Interop.PointedSignAntipodal369SeparationExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (_+_; _*_)
 open import Data.Empty using (⊥)
 
 import DASHI.Biology.SSP15NineObserverAtlasExact as Atlas
