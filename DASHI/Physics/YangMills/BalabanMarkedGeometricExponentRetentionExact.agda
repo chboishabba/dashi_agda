@@ -40,6 +40,7 @@ open import Data.Integer.Base using (+_)
 open import Data.List.Base using (List; []; _∷_)
 open import Data.Rational.Base as ℚ using (ℚ; 1ℚ; _*_)
 import Data.Rational.Properties as ℚP
+import Data.Nat.Properties as NatP
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -86,6 +87,23 @@ totalMarkedLength : List Nat → Nat → Nat → List Nat → Nat
 totalMarkedLength prefix markedLength discrepancy suffix =
   lengthSum prefix + markedLength + lengthSum suffix + discrepancy
 
+natMarkedExponentReassociation :
+  ∀ prefixLength markedLength discrepancy suffixLength →
+  (prefixLength + (markedLength + discrepancy)) + suffixLength
+  ≡
+  prefixLength + markedLength + suffixLength + discrepancy
+natMarkedExponentReassociation prefixLength markedLength discrepancy suffixLength =
+  trans
+    (cong (_+ suffixLength)
+      (sym (NatP.+-assoc prefixLength markedLength discrepancy)))
+    (trans
+      (NatP.+-assoc (prefixLength + markedLength) discrepancy suffixLength)
+      (trans
+        (cong ((prefixLength + markedLength) +_)
+          (NatP.+-comm discrepancy suffixLength))
+        (sym (NatP.+-assoc
+          (prefixLength + markedLength) suffixLength discrepancy))))
+
 markedReplacementRetainsBothExponents :
   ∀ q prefix markedLength discrepancy suffix →
   markedReplacementPower q prefix markedLength discrepancy suffix
@@ -94,6 +112,8 @@ markedReplacementRetainsBothExponents q prefix markedLength discrepancy suffix =
   let
     prefixEq = powerProductIsTotalPower q prefix
     suffixEq = powerProductIsTotalPower q suffix
+    exponentEq = natMarkedExponentReassociation
+      (lengthSum prefix) markedLength discrepancy (lengthSum suffix)
   in
   trans
     (cong
@@ -114,18 +134,7 @@ markedReplacementRetainsBothExponents q prefix markedLength discrepancy suffix =
           (sym (qPowerAdd q
             (lengthSum prefix + (markedLength + discrepancy))
             (lengthSum suffix)))
-          -- Nat addition is rearranged only at the exponent index.  The final
-          -- equality is propositionally the same expression after normalization.
-          exponentReassociation q prefix markedLength discrepancy suffix)))
-  where
-  postulate
-    exponentReassociation :
-      ∀ q prefix markedLength discrepancy suffix →
-      qPower q
-        ((lengthSum prefix + (markedLength + discrepancy)) + lengthSum suffix)
-      ≡
-      qPower q
-        (lengthSum prefix + markedLength + lengthSum suffix + discrepancy)
+          (cong (qPower q) exponentEq))))
 
 markedGeometricExponentRetentionLevel : ProofLevel
 markedGeometricExponentRetentionLevel = machineChecked
