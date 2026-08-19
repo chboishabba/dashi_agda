@@ -2,12 +2,6 @@ module DASHI.Ontology.WikidataWorkingGroupEverything where
 
 ------------------------------------------------------------------------
 -- FOCUSED WIKIDATA / JMD HANDOFF SURFACE
---
--- The public root exposes the JMD theorem contracts, BFO/entity-scope cases,
--- exact contradiction attribution, interpretation/governance/reopening, and
--- the generic information-order / signed-fibre machinery needed to explain
--- why an executable Boolean checker is a consumer projection rather than the
--- whole evidential carrier.
 ------------------------------------------------------------------------
 
 import DASHI.Ontology.LeanWikidataEverything
@@ -29,9 +23,7 @@ import DASHI.Ontology.InferenceLanguageIndexedAlignmentSafetyExact
 import DASHI.Ontology.BFOContinuantOccurrentWikidataAttributionExact
 import DASHI.Ontology.RdfViewInformationOrderJMDBridgeExact
 
--- Alice/Finn/Brown/Kimber-inspired generic ontology instances.  The source
--- papers calibrate interpretation/governance boundaries; they are not imported
--- as proof authority or Biology dependencies.
+-- Interpretation, governance, reopening and checker attribution.
 import DASHI.Ontology.WikidataInterpretiveDiagnosticExact
 import DASHI.Ontology.WikidataDiagnosticGovernanceExact
 import DASHI.Ontology.WikidataRepairReopeningExact
@@ -48,9 +40,9 @@ import DASHI.Core.ObserverIncomparabilityTypedJoinExact
 import DASHI.Cognition.PNF.EditTransportLeafLocalityExact
 
 -- Native signed/neutral geometry and the repo-native 369 residual tower.
--- These owners make precise the distinction
---   not-positive != strict inverse,
--- while retaining Boolean decision procedures as declared consumer surfaces.
+-- `not positive` is not promoted to strict inverse.  Boolean decisions remain
+-- legitimate declared consumer surfaces, while exact reconstruction keeps the
+-- dependent residual.
 import DASHI.Foundations.Base369SignedMembershipExact
 import DASHI.Foundations.TernaryNativeMinimalityExact
 import DASHI.Foundations.BalancedTernaryAntipodalOrbitExact
@@ -65,5 +57,6 @@ import DASHI.Cognition.PNF.BinaryBalancedTernaryAggregateLossExact
 -- Positive-description products versus dependent/fibred object construction.
 import DASHI.Ontology.DependentDefinitionFibreExact
 
--- One public regression exercises the complete handoff contract.
+-- Public regressions.
+import DASHI.Ontology.WikidataTernaryFibreRegression
 import DASHI.Ontology.WikidataWorkingGroupRegression
