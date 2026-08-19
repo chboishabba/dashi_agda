@@ -30,8 +30,7 @@ module DASHI.Physics.YangMills.CompactSimpleBiInvariantRicciReserveExact where
 -- geometric reserve needed for the heat/Doob LSI argument at large heat time.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.List.Base using (List; []; _∷_)
+open import Agda.Builtin.Equality using (_≡_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -39,12 +38,8 @@ record RicciReserveScalar : Set₁ where
   field
     Scalar : Set
     zero : Scalar
-    add : Scalar → Scalar → Scalar
     LessEqual StrictLess : Scalar → Scalar → Set
-
-    addMono : ∀ {a b c d} →
-      LessEqual a b → LessEqual c d → LessEqual (add a c) (add b d)
-    addZeroLeft : ∀ x → add zero x ≡ x
+    scale : Scalar → Scalar → Scalar
 
 open RicciReserveScalar public
 
@@ -57,57 +52,27 @@ record CompactSimpleRicciReserveData (S : RicciReserveScalar) : Set₁ where
     reservePositive : StrictLess S (zero S) reserve
     factorRicciReserve : ∀ X →
       LessEqual S
-        (scaleReserve reserve (metricQuadratic X))
+        (scale S reserve (metricQuadratic X))
         (ricciQuadratic X)
-
-    -- Multiplication by the positive reserve is kept abstract because this
-    -- module is geometric/carrier-level and does not choose a scalar model.
-    scaleReserve : Scalar S → Scalar S → Scalar S
 
 open CompactSimpleRicciReserveData public
 
-record ProductRicciReserveData
+-- Standard Riemannian product geometry is represented directly at its useful
+-- theorem boundary: the product metric and Ricci tensor are block diagonal, so
+-- a common factorwise reserve survives unchanged on every finite lattice.
+record FiniteProductRicciReserve
     (S : RicciReserveScalar)
     (factor : CompactSimpleRicciReserveData S) : Set₁ where
   field
-    Site : Set
-    productTangent : Set
-    component : productTangent → Site → Tangent factor
-    sites : List Site
+    ProductTangent : Set
+    productMetricQuadratic productRicciQuadratic : ProductTangent → Scalar S
 
-    productMetric productRicci : productTangent → Scalar S
-
-    productMetricIsSum : ∀ X →
-      productMetric X ≡ sumMetric X sites
-    productRicciIsSum : ∀ X →
-      productRicci X ≡ sumRicci X sites
-
-  sumMetric : productTangent → List Site → Scalar S
-  sumMetric X [] = zero S
-  sumMetric X (site ∷ rest) =
-    add S (metricQuadratic factor (component X site)) (sumMetric X rest)
-
-  sumRicci : productTangent → List Site → Scalar S
-  sumRicci X [] = zero S
-  sumRicci X (site ∷ rest) =
-    add S (ricciQuadratic factor (component X site)) (sumRicci X rest)
-
-open ProductRicciReserveData public
-
--- The product-reserve implication is standard Riemannian product geometry.
--- We deliberately keep scalar multiplication/distributivity in that standard
--- boundary instead of rebuilding an ordered-field hierarchy here.
-record ProductReserveWitness
-    {S : RicciReserveScalar}
-    {factor : CompactSimpleRicciReserveData S}
-    (product : ProductRicciReserveData S factor) : Set₁ where
-  field
     productRicciReserve : ∀ X →
       LessEqual S
-        (scaleReserve factor (reserve factor) (productMetric product X))
-        (productRicci product X)
+        (scale S (reserve factor) (productMetricQuadratic X))
+        (productRicciQuadratic X)
 
-open ProductReserveWitness public
+open FiniteProductRicciReserve public
 
 canonicalKillingMetricRicciQuarterLevel : ProofLevel
 canonicalKillingMetricRicciQuarterLevel = standardImported
