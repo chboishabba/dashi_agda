@@ -42,6 +42,7 @@ module DASHI.Moonshine.PublishedMonsterFrickeHighestAlphaEverything where
 
 open import DASHI.Core.Prelude
 open import Data.Nat using (_≤_)
+import Data.Nat.Properties as NatP
 open import Data.Nat.Primality using (Prime)
 
 import DASHI.Moonshine.MonsterOrderDivisibilityExact as Monster
@@ -116,7 +117,7 @@ moonshineDirectlyForcesCoarseFrobeniusFixedRegression :
   (n : Nat) → (prime : Prime (5 + n)) →
   Monster.PrimeDividesMonsterOrder (5 + n) →
   Fricke.PublishedFrobeniusFullyFixed
-    (5 + n) prime (Data.Nat.Properties.m≤m+n 5 n)
+    (5 + n) prime (NatP.m≤m+n 5 n)
 moonshineDirectlyForcesCoarseFrobeniusFixedRegression =
   MoonshineFrob.monsterPrimeImpliesCoarseFrobeniusFixedByMoonshine
 
