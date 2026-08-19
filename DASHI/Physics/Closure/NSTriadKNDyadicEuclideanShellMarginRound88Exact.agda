@@ -23,17 +23,30 @@ module DASHI.Physics.Closure.NSTriadKNDyadicEuclideanShellMarginRound88Exact whe
 --
 --   |k|_2^2 <= 3 * (2^K)^2.
 --
--- The left inequality is the matching lower bridge needed for a separated high
--- leg.  No continuum norm equivalence, asymptotic notation, or hidden constant
--- is used: this is exact Nat arithmetic on the integer Fourier carrier.
+-- For a leg separated upward by the repository's exact Csep=3 policy,
+--
+--   K + 3 <= shellIndex(p),
+--
+-- the ceil-log lower bound gives
+--
+--   2^(K+2) <= ||p||_infinity,
+--
+-- hence
+--
+--   16 * (2^K)^2 <= |p|_2^2.
+--
+-- In particular the Round87 HH->low criterion requiring only
+-- 4*(2^K)^2 <= |p|_2^2 has a factor-four reserve at the shell-arithmetic level.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; _+_; _*_)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Data.Integer.Base using (ℤ; +_; -[1+_]; ∣_∣)
-open import Data.Nat.Base using (_≤_)
+open import Data.Nat.Base using (_≤_; _<_; z≤n; s≤s)
 import Data.Nat.Properties as Nat
+open import Data.Nat.Solver using (module +-*-Solver)
+open +-*-Solver using (solve; _:*_; con; _:=_)
 open import Data.Sum.Base using (inj₁; inj₂)
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
@@ -175,15 +188,161 @@ modeNatNormBelowPacketThreeSquare {k} {K} shell≤ =
     (modeNatNormBelowThreeInfinitySquare k)
     scaled
 
+plusThreeAsThreeSuccessors : ∀ K →
+  K + 3 ≡ suc (suc (suc K))
+plusThreeAsThreeSuccessors zero = refl
+plusThreeAsThreeSuccessors (suc K) =
+  cong suc (plusThreeAsThreeSuccessors K)
+
+dropOneFromThreeShellSeparation : ∀ {K J} →
+  suc (suc (suc K)) ≤ J →
+  suc (suc K) ≤ J Nat.∸ 1
+dropOneFromThreeShellSeparation {J = zero} ()
+dropOneFromThreeShellSeparation {J = suc J} (s≤s separated) = separated
+
+threeShellSeparationForcesPositiveHighShell : ∀ {K J} →
+  suc (suc (suc K)) ≤ J → 0 < J
+threeShellSeparationForcesPositiveHighShell {J = zero} ()
+threeShellSeparationForcesPositiveHighShell {J = suc J} separated = s≤s z≤n
+
+pow2TwoSuccessorsIsFourTimes : ∀ K →
+  Shell.pow2 (suc (suc K)) ≡ 4 * Shell.pow2 K
+pow2TwoSuccessorsIsFourTimes =
+  solve 1
+    (λ x →
+      (con 2 :* (con 2 :* x)) := con 4 :* x)
+    refl
+
+doubleSquareIsFourSquare : ∀ n →
+  natSquare (2 * n) ≡ 4 * natSquare n
+doubleSquareIsFourSquare =
+  solve 1
+    (λ x →
+      ((con 2 :* x) :* (con 2 :* x)) := con 4 :* (x :* x))
+    refl
+
+fourDyadicSquareBelowSeparatedHighNorm : ∀ {p K} →
+  K + Shell.Csep ≤ Shell.shellIndex p →
+  4 * natSquare (Shell.pow2 K) ≤ ModeNorm.modeNatNormSquared p
+fourDyadicSquareBelowSeparatedHighNorm {p} {K} separated =
+  let
+    separatedThree : K + 3 ≤ Shell.shellIndex p
+    separatedThree = separated
+
+    separatedSuccessors :
+      suc (suc (suc K)) ≤ Shell.shellIndex p
+    separatedSuccessors =
+      subst
+        (_≤ Shell.shellIndex p)
+        (plusThreeAsThreeSuccessors K)
+        separatedThree
+
+    exponentBelow :
+      suc (suc K) ≤ Shell.shellIndex p Nat.∸ 1
+    exponentBelow = dropOneFromThreeShellSeparation separatedSuccessors
+
+    powerBelowLowerShell :
+      Shell.pow2 (suc (suc K))
+      ≤ Shell.pow2 (Shell.shellIndex p Nat.∸ 1)
+    powerBelowLowerShell = pow2Monotone exponentBelow
+
+    highShellPositive : 0 < Shell.shellIndex p
+    highShellPositive =
+      threeShellSeparationForcesPositiveHighShell separatedSuccessors
+
+    lowerStrict :
+      Shell.pow2 (Shell.shellIndex p Nat.∸ 1)
+      < Infinity.infinityNorm p
+    lowerStrict =
+      Ceil.ceilLogShellLowerMagnitude
+        (Infinity.infinityNorm p) highShellPositive
+
+    fourLambdaBelowInfinity :
+      4 * Shell.pow2 K ≤ Infinity.infinityNorm p
+    fourLambdaBelowInfinity =
+      subst
+        (_≤ Infinity.infinityNorm p)
+        (pow2TwoSuccessorsIsFourTimes K)
+        (Nat.<⇒≤ (Nat.≤-<-trans powerBelowLowerShell lowerStrict))
+
+    twoLambdaBelowFourLambda :
+      2 * Shell.pow2 K ≤ 4 * Shell.pow2 K
+    twoLambdaBelowFourLambda =
+      Nat.*-mono-≤ (s≤s (s≤s z≤n)) Nat.≤-refl
+
+    twoLambdaBelowInfinity :
+      2 * Shell.pow2 K ≤ Infinity.infinityNorm p
+    twoLambdaBelowInfinity =
+      Nat.≤-trans twoLambdaBelowFourLambda fourLambdaBelowInfinity
+
+    squared :
+      natSquare (2 * Shell.pow2 K)
+      ≤ natSquare (Infinity.infinityNorm p)
+    squared = squareMonotone twoLambdaBelowInfinity
+
+    toMode = Nat.≤-trans squared (infinitySquareBelowModeNatNorm p)
+  in
+  subst
+    (λ lower → lower ≤ ModeNorm.modeNatNormSquared p)
+    (doubleSquareIsFourSquare (Shell.pow2 K))
+    toMode
+
+sixteenDyadicSquareBelowSeparatedHighNorm : ∀ {p K} →
+  K + Shell.Csep ≤ Shell.shellIndex p →
+  16 * natSquare (Shell.pow2 K) ≤ ModeNorm.modeNatNormSquared p
+sixteenDyadicSquareBelowSeparatedHighNorm {p} {K} separated =
+  let
+    separatedThree : K + 3 ≤ Shell.shellIndex p
+    separatedThree = separated
+    separatedSuccessors =
+      subst
+        (_≤ Shell.shellIndex p)
+        (plusThreeAsThreeSuccessors K)
+        separatedThree
+    exponentBelow = dropOneFromThreeShellSeparation separatedSuccessors
+    powerBelow = pow2Monotone exponentBelow
+    positive = threeShellSeparationForcesPositiveHighShell separatedSuccessors
+    lowerStrict = Ceil.ceilLogShellLowerMagnitude (Infinity.infinityNorm p) positive
+    fourLambdaBelowInfinity :
+      4 * Shell.pow2 K ≤ Infinity.infinityNorm p
+    fourLambdaBelowInfinity =
+      subst
+        (_≤ Infinity.infinityNorm p)
+        (pow2TwoSuccessorsIsFourTimes K)
+        (Nat.<⇒≤ (Nat.≤-<-trans powerBelow lowerStrict))
+    squared = squareMonotone fourLambdaBelowInfinity
+    toMode = Nat.≤-trans squared (infinitySquareBelowModeNatNorm p)
+    fourSquareIsSixteen :
+      natSquare (4 * Shell.pow2 K)
+      ≡ 16 * natSquare (Shell.pow2 K)
+    fourSquareIsSixteen =
+      solve 1
+        (λ x →
+          ((con 4 :* x) :* (con 4 :* x)) := con 16 :* (x :* x))
+        refl
+        (Shell.pow2 K)
+  in
+  subst
+    (λ lower → lower ≤ ModeNorm.modeNatNormSquared p)
+    fourSquareIsSixteen
+    toMode
+
 round88InfinityEuclideanSquareComparisonClosed : Bool
 round88InfinityEuclideanSquareComparisonClosed = true
 
 round88PacketEuclideanUpperThreeDyadicSquareClosed : Bool
 round88PacketEuclideanUpperThreeDyadicSquareClosed = true
 
-round88SeparatedHighEuclideanLowerNeedsOnlyShellExponentArithmetic : Bool
-round88SeparatedHighEuclideanLowerNeedsOnlyShellExponentArithmetic = true
+round88CsepThreeGivesFourDyadicSquareHighLower : Bool
+round88CsepThreeGivesFourDyadicSquareHighLower = true
+
+round88CsepThreeActuallyGivesSixteenDyadicSquareHighLower : Bool
+round88CsepThreeActuallyGivesSixteenDyadicSquareHighLower = true
 
 round88InfinityEuclideanSquareComparisonClosedIsTrue :
   round88InfinityEuclideanSquareComparisonClosed ≡ true
 round88InfinityEuclideanSquareComparisonClosedIsTrue = refl
+
+round88CsepThreeGivesFourDyadicSquareHighLowerIsTrue :
+  round88CsepThreeGivesFourDyadicSquareHighLower ≡ true
+round88CsepThreeGivesFourDyadicSquareHighLowerIsTrue = refl
