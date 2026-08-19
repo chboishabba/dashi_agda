@@ -28,6 +28,7 @@ import DASHI.Ontology.WikidataInterpretiveDiagnosticExact
 import DASHI.Ontology.WikidataDiagnosticGovernanceExact
 import DASHI.Ontology.WikidataRepairReopeningExact
 import DASHI.Ontology.WikidataCheckerResultAttributionExact
+import DASHI.Ontology.WikidataConsumerResidualRefinementExact
 
 -- Generic mathematical owners used by the outward ontology package.
 import DASHI.Algebra.ClaimIndexedEvidencePolarityExact
@@ -42,6 +43,7 @@ import DASHI.Core.ConsumerDescentMinimalObserverExact
 import DASHI.Core.ConsumerKernelQuotientPresentationExact
 import DASHI.Core.ConsumerQuotientBaseChangeExact
 import DASHI.Core.ConsumerQuotientBaseChangeRegression
+import DASHI.Core.ConsumerIndexedResidualRefinementExact
 import DASHI.Core.ContextIndexedObservationFibrationExact
 import DASHI.Core.ResidualSymmetryCollisionFibreExact
 import DASHI.Core.OrbitStabilizerResidualPresentationExact
