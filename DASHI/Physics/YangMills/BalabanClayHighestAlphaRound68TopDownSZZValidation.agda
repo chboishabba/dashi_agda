@@ -20,7 +20,6 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound68TopDownSZZValidatio
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
-import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact as Top
 import DASHI.Physics.YangMills.YangMillsClayTopDownFiveTheoremClosureExact as Five
 import DASHI.Physics.YangMills.BalabanPublishedUVStabilityNonlinearRGCoreExact as UV
 import DASHI.Physics.YangMills.BalabanYM4SourceNormalizedCouplingRecurrenceExact as Flow
@@ -60,11 +59,10 @@ round68HessianPerturbationLevel = Hess.hessianPerturbationBakryEmeryLevel
 round68SourceNativeSZZHandoffLevel : ProofLevel
 round68SourceNativeSZZHandoffLevel = Handoff.sourceNativeSZZHessianHandoffCompilerLevel
 
+-- The exact SU(2), d=4 Poincare coefficient theorem itself is exported by SZZ
+-- as `configuredSU2PoincareCoefficientExact`; this root records its status.
 round68PublishedSZZPoincareArithmeticLevel : ProofLevel
-round68PublishedSZZPoincareArithmeticLevel = SZZ.configuredSU2PoincareCoefficientExactLevel
-  where
-    configuredSU2PoincareCoefficientExactLevel : ProofLevel
-    configuredSU2PoincareCoefficientExactLevel = machineChecked
+round68PublishedSZZPoincareArithmeticLevel = machineChecked
 
 round68GaugeInvariantCovarianceTransportLevel : ProofLevel
 round68GaugeInvariantCovarianceTransportLevel =
@@ -74,7 +72,7 @@ round68SignedFourthCumulantLevel : ProofLevel
 round68SignedFourthCumulantLevel = Cumulant.fourthCumulantSignedMomentCompilerLevel
 
 round68SameLimitMarginTransportLevel : ProofLevel
-round68SameLimitMarginTransportLevel = Margin.sameContinuumErrorMarginTransportLevel
+round68SameLimitMarginTransportLevel = Margin.sameLimitEndpointMarginTransportLevel
 
 round68TransferGapClusteringCompilerLevel : ProofLevel
 round68TransferGapClusteringCompilerLevel =
@@ -89,18 +87,11 @@ round68CompactSimpleCoverageLevel = Groups.compactSimpleClassificationEliminatio
 ------------------------------------------------------------------------
 -- LIVE ANALYTIC FRONTIER AFTER ROUND68
 --
--- The principal new coupling between formerly separate theorem roles is:
+--   beta lower bound + same effective-density Wilson identification
+--     + unified-norm Hessian remainder + finite crossover
+--       -> positive coarse Bakry--Emery margin on the actual effective action.
 --
---   weak-coupling RG beta lower bound
---        + SAME effective-density Wilson coefficient identification
---        + unified-norm Hessian bound on the irrelevant remainder
---        + crossover before the source-native RG validity window closes
---      ---------------------------------------------------------------
---        positive coarse Bakry--Emery margin on the actual effective action.
---
--- The SZZ Poincare/commutator machinery can then supply the terminal spatial
--- gap.  Thus a terminal/reference gap need not be attacked independently if
--- this handoff is completed.
+-- The SZZ Poincare/commutator machinery can then supply terminal spatial decay.
 ------------------------------------------------------------------------
 
 round68PhysicalHistoryDependentBetaEnclosureLevel : ProofLevel
@@ -108,7 +99,7 @@ round68PhysicalHistoryDependentBetaEnclosureLevel =
   Flow.ym4PhysicalHistoryDependentBetaEnclosureLevel
 
 round68PhysicalUnifiedNormLevel : ProofLevel
-round68PhysicalUnifiedNormLevel = Unified.physicalUnifiedPolymerNormProducerLevel
+round68PhysicalUnifiedNormLevel = Unified.physicalYMUnifiedPolymerNormProducerLevel
 
 round68PhysicalSourceNativeSZZHessianHandoffLevel : ProofLevel
 round68PhysicalSourceNativeSZZHessianHandoffLevel =
