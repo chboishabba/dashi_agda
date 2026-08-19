@@ -31,12 +31,13 @@ module DASHI.Physics.YangMills.BalabanUnifiedPolymerStepVContractionBudgetExact 
 -- small-polymer extraction and proving the large branch in the same norm.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl; cong)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; 1ℚ; _+_; _≤_; _<_; _/_; Positive)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
+open import Relation.Binary.PropositionalEquality using (cong; subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayP2LargeFieldStepVExact as StepV
@@ -88,21 +89,45 @@ open AdditiveStepVContractionBudget public
 combinedStepVCostBelowSeventeenThirtySeconds :
   ∀ {Bound} (dataSet : AdditiveStepVContractionBudget Bound) →
   LessEqual dataSet (totalCost dataSet) (rational dataSet seventeenThirtySeconds)
-combinedStepVCostBelowSeventeenThirtySeconds {Bound = Bound} dataSet =
-  substUpper
-    (totalCostExact dataSet)
-    (rationalAddExact dataSet StepV.half Extract.oneThirtySecond)
-    (cong (rational dataSet) kpPlusLargeContractionExact)
-    (addMonotone dataSet
+combinedStepVCostBelowSeventeenThirtySeconds dataSet =
+  let
+    base :
+      LessEqual dataSet
+        (add dataSet (smallAndKPCost dataSet) (largeRescalingCost dataSet))
+        (add dataSet
+          (rational dataSet StepV.half)
+          (rational dataSet Extract.oneThirtySecond))
+    base = addMonotone dataSet
       (smallAndKPBelowHalf dataSet)
-      (largeBelowOneThirtySecond dataSet))
-  where
-  substUpper : ∀ {a b c d : Bound} →
-    a ≡ b → c ≡ d →
-    b ≡ c →
-    LessEqual dataSet b c →
-    LessEqual dataSet a d
-  substUpper refl refl refl proof = proof
+      (largeBelowOneThirtySecond dataSet)
+
+    fromTotal :
+      LessEqual dataSet
+        (totalCost dataSet)
+        (add dataSet
+          (rational dataSet StepV.half)
+          (rational dataSet Extract.oneThirtySecond))
+    fromTotal = subst
+      (λ lower → LessEqual dataSet lower
+        (add dataSet
+          (rational dataSet StepV.half)
+          (rational dataSet Extract.oneThirtySecond)))
+      (totalCostExact dataSet)
+      base
+
+    rationalSum :
+      LessEqual dataSet
+        (totalCost dataSet)
+        (rational dataSet (StepV.half + Extract.oneThirtySecond))
+    rationalSum = subst
+      (λ upper → LessEqual dataSet (totalCost dataSet) upper)
+      (rationalAddExact dataSet StepV.half Extract.oneThirtySecond)
+      fromTotal
+  in
+  subst
+    (λ upper → LessEqual dataSet (totalCost dataSet) upper)
+    (cong (rational dataSet) kpPlusLargeContractionExact)
+    rationalSum
 
 stepVContractionBudgetArithmeticLevel : ProofLevel
 stepVContractionBudgetArithmeticLevel = machineChecked
