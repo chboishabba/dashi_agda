@@ -3,12 +3,6 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound73EightAnalyticCutset
 ------------------------------------------------------------------------
 -- ROUND73: AUTHORITATIVE EIGHT-LEMMA ANALYTIC CUTSET
 --
--- This root corrects one over-aggressive intermediate count.  Round72 had
--- already fused marked E^(2) localisation into `PhysicalUnifiedOneStepYMEstimate`.
--- Discovering that CMP109 itself owns the differentiated marked-decay shape
--- therefore SHRINKS lemma 4; it does not delete a ninth standalone item from
--- the already-eight-item cutset.
---
 -- The literal five-role Clay compiler remains the endpoint authority.  The
 -- shortest currently defensible ANALYTIC cutset beneath it is eight theorem-
 -- sized jobs:
@@ -18,7 +12,7 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound73EightAnalyticCutset
 --  3 LiteralStateEntersPublishedBalabanRG
 --  4 PhysicalUnifiedOneStepYMEstimate
 --  5 SameFamilyContinuumOSCompletion
---  6 SameDensityPolchinskiLangevinClustering
+--  6 SameDensityCompactLieHeatLangevinClustering
 --  7 SameFamilyCompositeOPEStressWardClosure
 --  8 FiniteScaleStrictFourthCumulantMargin
 --
@@ -51,56 +45,60 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound73EightAnalyticCutset
 --
 -- * The exact 17/32 tail already gives the common Cauchy modulus.  Once ONE
 --   completed unified state exists, `BalabanUnifiedCompletedStateProjectionExact`
---   proves that ordinary/composite/correlation limits are projections of that
---   SAME state.  Thus lemma 5 cannot splice unrelated subsequences; its live
---   content is one physical completed state + limiting measure/Schwinger
---   identification + continuum Euclidean/OS closure.
+--   forces ordinary/composite/correlation limits to be projections of that SAME
+--   state.  Lemma 5's live content is one physical completed state + limiting
+--   measure/Schwinger identification + continuum Euclidean/OS closure.
 --
--- * Lemma 6 has no independent compact-Lie connection-growth estimate.  A
---   compact Lie group admits an Ad-invariant inner product; ad_Z is skew, and
---   the onsite connection contribution to quadratic derivative energy vanishes
---   exactly.  The only nonlocal growth budget is the SAME symmetric Hessian.
+-- * Lemma 6 no longer silently applies the BBD Euclidean/Gaussian Polchinski
+--   theorem to G^E.  BBD starts from X subset R^N.  The PRIMARY physical route
+--   is now the compact-manifold Haar heat/Doob flow on the literal group carrier:
 --
--- Thus Round73 removes duplicated mathematics INSIDE lemmas 4--6 without
--- pretending that continuum completion, physical clustering, OPE/stress, or
--- interacting survival have already been proved.
+--       u_t = H_t exp(-V_0),       V_t = -log u_t,
+--
+--   with curvature coordinate
+--
+--       (1/2) Ric + Hess V_t.
+--
+--   A finite accumulated negative-curvature debt yields an LSI through the
+--   inhomogeneous heat/Doob criterion.  The old BBD module is retained only as
+--   an optional chart/globalisation route behind an explicit linear-carrier
+--   theorem.
+--
+-- * The compact-Lie connection term still needs no positive growth budget.  An
+--   Ad-invariant inner product makes ad_Z skew, so its quadratic derivative-
+--   energy contribution vanishes sitewise.  Spatial propagation is controlled
+--   by the SAME symmetric quasi-local Hessian coordinate.
 ------------------------------------------------------------------------
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
--- Literal endpoint compiler.
 import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact
 import DASHI.Physics.YangMills.YangMillsClayTopDownFiveTheoremClosureExact
 
--- Published ordinary RG core / same-object seam.
 import DASHI.Physics.YangMills.BalabanPublishedUVStabilityNonlinearRGCoreExact
 import DASHI.Physics.YangMills.BalabanCMP122PublishedFourDimensionalUVStabilityExact
 import DASHI.Physics.YangMills.Balaban1989CompleteDensityToYM4RegionExact
 import DASHI.Physics.YangMills.Balaban1989CanonicalYM4StateFromSection2Exact
 
--- Differentiated source localisation and owned finite/quasi-local compilers.
 import DASHI.Physics.YangMills.BalabanMarkedHessianPublishedDecayBoundaryExact
 import DASHI.Physics.YangMills.BalabanDifferentiatedMarkedFactorProductExact
 import DASHI.Physics.YangMills.BalabanNoncommutativeMarkedOperatorProductExact
 import DASHI.Physics.YangMills.BalabanSourceExponentialToWeightedHessianExact
 
--- Unified norm / exact 17/32 tail / one completed state projection.
 import DASHI.Physics.YangMills.BalabanUnifiedPolymerSchwingerNormExact
 import DASHI.Physics.YangMills.BalabanUnifiedPolymerStepVContractionBudgetExact
 import DASHI.Physics.YangMills.BalabanUnifiedSeventeenThirtySecondTailModulusExact
 import DASHI.Physics.YangMills.BalabanUnifiedCompletedStateProjectionExact
 
--- Mass-gap route and basis-free compact-Lie cancellation.
-import DASHI.Physics.YangMills.BalabanPolchinskiMultiscaleLSIBridgeExact
-import DASHI.Physics.YangMills.BalabanUnifiedPolchinskiCurvatureDebtExact
+-- Primary group-native mass-gap route.
+import DASHI.Physics.YangMills.CompactLieHeatDoobMultiscaleLSIExact
 import DASHI.Physics.YangMills.CompactLieBiInvariantSkewLangevinExact
 import DASHI.Physics.YangMills.CompactLieLangevinSkewConnectionCancellationExact
 import DASHI.Physics.YangMills.BalabanPoincareFiniteSpeedClusteringRateExact
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalContinuumOSGapBridgeExact
 
-------------------------------------------------------------------------
--- SOURCE-OWNED / MACHINE-CONSTRUCTED SUBSTRUCTURE
-------------------------------------------------------------------------
+-- Optional Euclidean/chart calibration only; not a direct physical import.
+import DASHI.Physics.YangMills.BalabanPolchinskiMultiscaleLSIBridgeExact
 
 round73PublishedCompleteFiniteCutoffRGLevel : ProofLevel
 round73PublishedCompleteFiniteCutoffRGLevel = standardImported
@@ -136,20 +134,21 @@ literalWilsonFPHaarOneLoopRGCoefficientLevel = conditional
 literalStateEntersPublishedBalabanRGLevel : ProofLevel
 literalStateEntersPublishedBalabanRGLevel = conditional
 
--- STRONG EXTENSION only: source Section-2 flow + source E^(2) coordinate ->
+-- STRONG EXTENSION only: published Section-2 flow + source E^(2) coordinate ->
 -- one unified state additionally controlling composite insertions and
 -- separation-weighted connected correlations with the common scale modulus.
 physicalUnifiedOneStepYMEstimateLevel : ProofLevel
 physicalUnifiedOneStepYMEstimateLevel = conditional
 
--- One completed unified state; identify its ordinary projection with the
--- Schwinger family of one limiting measure and establish thermodynamic/
--- continuum Euclidean/OS closure.  Projected observable limits are downstream.
 sameFamilyContinuumOSCompletionLevel : ProofLevel
 sameFamilyContinuumOSCompletionLevel = conditional
 
-sameDensityPolchinskiLangevinClusteringLevel : ProofLevel
-sameDensityPolchinskiLangevinClusteringLevel = conditional
+-- On the literal G^E carrier: construct the heat-renormalised potential V_t,
+-- prove volume-uniform integrable lower curvature history for
+-- (1/2 Ric + Hess V_t), then use the SAME Hessian for compact-Lie derivative
+-- propagation and obtain spatial covariance decay before OS reconstruction.
+sameDensityCompactLieHeatLangevinClusteringLevel : ProofLevel
+sameDensityCompactLieHeatLangevinClusteringLevel = conditional
 
 sameFamilyCompositeOPEStressWardClosureLevel : ProofLevel
 sameFamilyCompositeOPEStressWardClosureLevel = conditional
