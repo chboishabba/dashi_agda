@@ -41,7 +41,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.List.Base using (List)
 open import Data.Rational.Base using
-  (ℚ; 0ℚ; _+_; _*_; _≤_; nonNegative)
+  (ℚ; 0ℚ; _+_; _*_; _≤_; positive; nonNegative)
 import Data.Rational.Properties as ℚP
 open ℚP using (_<?_)
 open import Relation.Nullary.Decidable.Core using (toWitness)
@@ -113,7 +113,7 @@ interactionSumBelowKernelMass {kernelMass} {cubicMass} budget =
             ≤ upper)
           tripleMeaning chargeStage)
 
-    instance threeIsPositive = Data.Rational.Base.positive threePositive
+    instance threeIsPositive = positive threePositive
   in
   ℚP.*-cancelˡ-≤-pos Young.three tripleBound
 
