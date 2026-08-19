@@ -37,10 +37,6 @@ module DASHI.Core.ConsumerDescentMinimalObserverExact where
 -- vocabulary only.  The constructive theorem below is deterministic and
 -- consumer-indexed; it does not import likelihoods, probability families, or
 -- almost-everywhere identification.
---
--- DASHI already uses Blackwell/Cousot in
--- MinimalSufficientObservationGovernanceExact.  The finite constructive proofs
--- below are local and require no probabilistic assumptions.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -101,23 +97,26 @@ sectionedFibreConstantFactors projection consumer constant =
       Sectioned.fibreConstantObservableReconstructsFromSection
         projection consumer constant state)
 
-record LogicalIff (A B : Set) : Set where
-  constructor logicalIff
+-- FactorizedRefinement is intentionally owned in Set1 by the existing core,
+-- whereas kernel/fibre constancy is a Set-level proposition.  Keep that mixed
+-- universe explicit rather than pretending a Set1 witness coerces into Set.
+record LogicalIff₁₀ (A : Set₁) (B : Set) : Set₁ where
+  constructor logicalIff₁₀
   field
     forward : A → B
     backward : B → A
 
-open LogicalIff public
+open LogicalIff₁₀ public
 
 sectionedDescentIffFibreConstant :
   ∀ {State Surface Outcome : Set}
     (projection : Sectioned.SectionedProjection State Surface)
     (consumer : State → Outcome) →
-  LogicalIff
+  LogicalIff₁₀
     (FactorsThrough (Sectioned.project projection) consumer)
     (FibreConstantFor (Sectioned.project projection) consumer)
 sectionedDescentIffFibreConstant projection consumer =
-  logicalIff
+  logicalIff₁₀
     factorsThroughImpliesFibreConstant
     (sectionedFibreConstantFactors projection consumer)
 
@@ -125,11 +124,11 @@ sectionedDescentIffConsumerSufficient :
   ∀ {State Surface Outcome : Set}
     (projection : Sectioned.SectionedProjection State Surface)
     (consumer : State → Outcome) →
-  LogicalIff
+  LogicalIff₁₀
     (FactorsThrough (Sectioned.project projection) consumer)
     (ConsumerSufficient (Sectioned.project projection) consumer)
 sectionedDescentIffConsumerSufficient projection consumer =
-  logicalIff
+  logicalIff₁₀
     (λ factorization →
       fibreConstantIsConsumerSufficient
         (factorsThroughImpliesFibreConstant factorization))
