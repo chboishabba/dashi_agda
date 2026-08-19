@@ -7,8 +7,8 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound72MarkedSecondVariati
 --
 --   published CMP99(3) marked propagator/domain decay
 --      + CMP109 ALREADY-DIFFERENTIATED E^(2) tree representation
---      + one source-native marked factor replacement bound
---      + finite replacement telescope already owned in-repo
+--      + factorwise ordinary/marked source estimates
+--      + OWNED finite marked-product telescope
 --      + CMP116 generalized-walk/tree resummation
 --   ---------------------------------------------------------------
 --      marked differentiated-activity exponential localization
@@ -49,7 +49,7 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound72MarkedSecondVariati
 --
 -- David C. Brydges and Thomas Kennedy,
 -- "Mayer Expansions and the Hamilton-Jacobi Equation",
--- J. Stat. Phys. 48 (1987), 19--49.
+-- J. Stat. Phys. 48 (1987), 19--49. DOI: 10.1007/BF01010398.
 --
 -- Abdelmalek Abdesselam and Vincent Rivasseau,
 -- "Trees, Forests and Jungles: A Botanical Garden for Cluster Expansions",
@@ -66,6 +66,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound70PolchinskiFiniteSpeedValidation
 import DASHI.Physics.YangMills.BalabanMarkedHessianPublishedDecayBoundaryExact
 import DASHI.Physics.YangMills.BalabanDecoupledActivityHessian
+import DASHI.Physics.YangMills.BalabanDifferentiatedMarkedFactorProductExact
 import DASHI.Physics.YangMills.BalabanMarkedPolarisationResummation
 import DASHI.Physics.YangMills.BalabanExponentialToDyadicShellCoarseningExact
 import DASHI.Physics.YangMills.BalabanSourceExponentialToWeightedHessianExact
@@ -79,11 +80,13 @@ round72PublishedDifferentiatedActivityTreeStructureLevel = standardImported
 round72PublishedGeneralizedWalkClusterLocalisationLevel : ProofLevel
 round72PublishedGeneralizedWalkClusterLocalisationLevel = standardImported
 
--- In-repo theorem-producing algebra already closes the finite factor
--- telescope, finite common-walk cancellation/resummation, exponential->dyadic
--- shell conversion, and direct exponential->weighted-row conversion.
-round72FiniteDifferentiatedReplacementTelescopeLevel : ProofLevel
-round72FiniteDifferentiatedReplacementTelescopeLevel = machineChecked
+-- In-repo theorem-producing algebra now closes the factorwise marked-product
+-- telescope itself, as well as common-walk cancellation/resummation,
+-- exponential->dyadic shell conversion, and direct exponential->weighted-row
+-- conversion.  A caller no longer supplies a bound on each whole replacement
+-- product as an independent physical receipt.
+round72FactorwiseMarkedProductAssemblyLevel : ProofLevel
+round72FactorwiseMarkedProductAssemblyLevel = machineChecked
 
 round72FiniteMarkedWalkResummationLevel : ProofLevel
 round72FiniteMarkedWalkResummationLevel = machineChecked
@@ -94,28 +97,31 @@ round72ExponentialShellToWeightedRowLevel = machineChecked
 ------------------------------------------------------------------------
 -- TRUE REMAINING LEMMA 7 PRIMITIVE
 --
--- For each replacement term in the literal CMP109 (4.3)--(4.5)
--- differentiated tree expression, insert exactly one marked CMP99(3)
--- propagator/background-domain difference and bound all unchanged factors by
--- their ordinary CMP109 tree estimates.  The result must retain BOTH:
+-- On every literal factor in CMP109 (4.3)--(4.5), prove:
 --
---   (i) distance-to-nearest-change decay,
---   (ii) a still-positive residual tree/localization exponent.
+--   |ordinary factor on Ω|  <= b_i,
+--   |ordinary factor on Ω'| <= b_i,
+--   |factor_Ω-factor_Ω'|     <= m_i,
 --
--- Schematic target after the finite telescope/resummation:
+-- where exactly one source replacement carries the CMP99(3)
+-- distance-to-nearest-change exponential and the ordinary b_i retain enough
+-- CMP109 tree decay that the telescoping majorant still has a positive residual
+-- tree/localization exponent after CMP116 resummation.
+--
+-- The new factor-product theorem constructs the complete replacement product
+-- bound automatically.  Schematically the resummed endpoint is
 --
 -- |E^(2)_Ω(X;x,y) - E^(2)_Ω'(X;x,y)|
 --   <= C exp(-δ |x-y|)
 --        exp(-κ tree(X))
 --        exp(-δ0 D(Ω,Ω';x,y)).
 --
--- Once this TERMWISE physical inequality is supplied, the existing modules
--- construct the complete marked Hessian shell and weighted quasi-local row.
--- There is no further independent "Hessian quasi-locality" theorem required.
+-- Thus the irreducible Yang--Mills input is now FACTORWISE source estimates,
+-- not a whole-product/Hessian-localisation certificate.
 ------------------------------------------------------------------------
 
-round72PhysicalDifferentiatedMarkedReplacementTermBoundLevel : ProofLevel
-round72PhysicalDifferentiatedMarkedReplacementTermBoundLevel = conditional
+round72PhysicalCMP109FactorwiseOrdinaryAndMarkedBoundsLevel : ProofLevel
+round72PhysicalCMP109FactorwiseOrdinaryAndMarkedBoundsLevel = conditional
 
 -- Downstream same-object identifications still required for the full mass-gap
 -- role: Polchinski covariance/curvature on the same effective density and the
