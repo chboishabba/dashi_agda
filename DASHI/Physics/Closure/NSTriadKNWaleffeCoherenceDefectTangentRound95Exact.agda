@@ -10,33 +10,18 @@ module DASHI.Physics.Closure.NSTriadKNWaleffeCoherenceDefectTangentRound95Exact 
 --
 -- ROUND95 / RADICAL-FREE COHERENCE DEFECT
 --
--- The normalized phase coordinate
---
---   Psi = A^2 / (E_k E_p E_q)
---
--- is useful conceptually but introduces division and zero-leg singularities.
--- The equivalent homogeneous defect
---
---   H = E_k E_p E_q - A^2
---
--- is degree six and total.  H = 0 is the maximally coherent boundary whenever
--- the Cauchy/Gram inequality A^2 <= E_k E_p E_q is available on the physical
--- helical carrier.
---
--- This module derives the exact tangent from the Round95 normalized-phase
--- data.  Pure viscosity contributes
+-- For H = E_k E_p E_q - A^2, pure viscosity contributes
 --
 --   H' = -2 (rho_k+rho_p+rho_q) H,
 --
--- while all movement relative to the coherent boundary is carried by a
--- self-triad defect-production term plus an external-network defect-production
--- term.  Thus viscosity alone preserves the normalized coherence ratio: the
--- decisive Clay estimate must come from nonlinear phase geometry / network
--- transfer, not from raw viscous damping of phase.
+-- while movement relative to the coherent boundary is carried by explicit
+-- self-triad and external-network defect-production terms. Thus viscosity
+-- alone preserves the normalized coherence ratio.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; -_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 
@@ -97,10 +82,6 @@ coherenceDefectDampedNetworkIdentity d
     ∷ Phase.selfTransferK d ∷ Phase.selfTransferP d ∷ Phase.selfTransferQ d
     ∷ Phase.externalTransferK d ∷ Phase.externalTransferP d
     ∷ Phase.externalTransferQ d ∷ [])
-
-------------------------------------------------------------------------
--- Pure-viscosity calibration.
-------------------------------------------------------------------------
 
 record PureViscousPhaseData : Set where
   constructor pure-viscous-phase-data
