@@ -32,6 +32,8 @@ module DASHI.Moonshine.DuncanSwisherDeligneExponentMechanismEverything where
 
 open import DASHI.Core.Prelude
 
+import DASHI.Algebra.RamifiedLocalValuationSharpnessExact as Ramified
+import DASHI.Algebra.SeparatedLeadingValuationExact as Leading
 import DASHI.Moonshine.DuncanSwisherTheorem12Exact as T12
 import DASHI.Moonshine.DuncanSwisherMonsterExponentGeometryExact as Geometry
 import DASHI.Moonshine.DuncanSwisherModularGeometryContributionWeldExact as Weld
@@ -58,19 +60,19 @@ canonicalTheorem12StillOwnsSourceShapeRegression = refl
 
 jZeroA1SharpDepthRegression :
   let A = DworkSharp.publishedDworkLocalA1Factorization Deligne.jZeroExceptional
-  in DASHI.Algebra.RamifiedLocalValuationSharpnessExact.valuation
+  in Ramified.valuation
       (DworkSharp.padicValuation A) (DworkSharp.A1Coefficient A) ≡ 3
 jZeroA1SharpDepthRegression = DworkSharp.jZeroA1DepthIsThree
 
 j1728A1SharpDepthRegression :
   let A = DworkSharp.publishedDworkLocalA1Factorization Deligne.j1728Exceptional
-  in DASHI.Algebra.RamifiedLocalValuationSharpnessExact.valuation
+  in Ramified.valuation
       (DworkSharp.padicValuation A) (DworkSharp.A1Coefficient A) ≡ 2
 j1728A1SharpDepthRegression = DworkSharp.j1728A1DepthIsTwo
 
 ordinaryA1SharpDepthRegression :
   let A = DworkSharp.publishedDworkLocalA1Factorization Deligne.ordinaryType
-  in DASHI.Algebra.RamifiedLocalValuationSharpnessExact.valuation
+  in Ramified.valuation
       (DworkSharp.padicValuation A) (DworkSharp.A1Coefficient A) ≡ 1
 ordinaryA1SharpDepthRegression = DworkSharp.ordinaryA1DepthIsOne
 
@@ -81,20 +83,17 @@ numericA1DepthTableNotImportedRegression = refl
 
 p5ExceptionalDepthNowDerivedRegression :
   let S = DworkPF.publishedExceptionalDworkPartialFractionSeparation PF.prime5
-  in DASHI.Algebra.SeparatedLeadingValuationExact.valuation
-      (DworkPF.additiveValuation S) (DworkPF.pJ1Up S) ≡ 3
+  in Leading.valuation (DworkPF.additiveValuation S) (DworkPF.pJ1Up S) ≡ 3
 p5ExceptionalDepthNowDerivedRegression = DworkPF.p5TotalDepthIsThree
 
 p7ExceptionalDepthNowDerivedRegression :
   let S = DworkPF.publishedExceptionalDworkPartialFractionSeparation PF.prime7
-  in DASHI.Algebra.SeparatedLeadingValuationExact.valuation
-      (DworkPF.additiveValuation S) (DworkPF.pJ1Up S) ≡ 2
+  in Leading.valuation (DworkPF.additiveValuation S) (DworkPF.pJ1Up S) ≡ 2
 p7ExceptionalDepthNowDerivedRegression = DworkPF.p7TotalDepthIsTwo
 
 p11ExceptionalDepthNowDerivedRegression :
   let S = DworkPF.publishedExceptionalDworkPartialFractionSeparation PF.prime11
-  in DASHI.Algebra.SeparatedLeadingValuationExact.valuation
-      (DworkPF.additiveValuation S) (DworkPF.pJ1Up S) ≡ 2
+  in Leading.valuation (DworkPF.additiveValuation S) (DworkPF.pJ1Up S) ≡ 2
 p11ExceptionalDepthNowDerivedRegression = DworkPF.p11TotalDepthIsTwo
 
 ------------------------------------------------------------------------
