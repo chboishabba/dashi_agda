@@ -28,7 +28,13 @@ import DASHI.Core.ObserverRefinementFutureSafetyExact
 import DASHI.Core.FutureLanguageProjectionDefectExact
 import DASHI.Core.ObserverFactorizedRefinementExact
 import DASHI.Core.RecoverableObserverRefinementTowerExact
+import DASHI.Core.DependentRecoverableProjectionExact
 import DASHI.Cognition.PNF.ObserverSeparationAuthorityBoundaryExact
+
+-- Cross-domain theorem-shape weld: keep the SSP pointed-sign constructor
+-- (1_* + X x C2) distinct from the ternary-nine antipodal decomposition
+-- (1 + 4*2), while retaining both on the convergence tree.
+import DASHI.Interop.PointedSignAntipodal369SeparationExact
 
 -- Full Alice Brown epistemic-governance/corpus lineage: source registries,
 -- interpretive coding, participant/consumer authority, SoTL quotient/reopening,
