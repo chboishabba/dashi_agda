@@ -29,9 +29,11 @@ module DASHI.Physics.YangMills.BalabanClayT4LiteralEvaluatorFourRepresentativeRe
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayT4GeneratedBrillouinGridExact as Grid
+import DASHI.Physics.YangMills.BalabanClayT4HypercubicOrbitGeometryExact as Geometry
 import DASHI.Physics.YangMills.BalabanClayT4HypercubicGeneratedActionExact as Action
 import DASHI.Physics.YangMills.BalabanClayT4HyperoctahedralGridOrbitExact as Orbit
 import DASHI.Physics.YangMills.BalabanClayT4LiteralOneLoopBoxEvaluatorExact as Eval
@@ -47,16 +49,6 @@ asOrbitGenerator Action.flip3 = Orbit.flip3
 asOrbitGenerator Action.swap01 = Orbit.swap01
 asOrbitGenerator Action.swap12 = Orbit.swap12
 asOrbitGenerator Action.swap23 = Orbit.swap23
-
-convertedActExact : ∀ generator cell →
-  Orbit.act (asOrbitGenerator generator) cell ≡ Action.act generator cell
-convertedActExact Action.flip0 cell = refl
-convertedActExact Action.flip1 cell = refl
-convertedActExact Action.flip2 cell = refl
-convertedActExact Action.flip3 cell = refl
-convertedActExact Action.swap01 cell = refl
-convertedActExact Action.swap12 cell = refl
-convertedActExact Action.swap23 cell = refl
 
 record LiteralFourRepresentativeTransport
     {expressions : Eval.LiteralDiagramExpressions}
@@ -135,11 +127,9 @@ pathEvaluationTransport dataSet Action.pathRefl = refl
 pathEvaluationTransport dataSet (Action.pathStep generator cell) =
   oneGeneratorEvaluationTransport dataSet generator cell
 pathEvaluationTransport dataSet (Action.pathTrans first second) =
-  let
-    secondEq = pathEvaluationTransport dataSet second
-    firstEq = pathEvaluationTransport dataSet first
-  in
-  Relation.Binary.PropositionalEquality.trans secondEq firstEq
+  trans
+    (pathEvaluationTransport dataSet second)
+    (pathEvaluationTransport dataSet first)
 
 cellEvaluationEqualsCanonicalRepresentative :
   ∀ {expressions ward scalarData}
@@ -147,7 +137,7 @@ cellEvaluationEqualsCanonicalRepresentative :
       {expressions = expressions} {ward = ward} scalarData) →
     cell →
   Eval.evaluateExpression (arithmetic dataSet)
-    (environmentAt dataSet (Action.representative (Action.Orbit.orbitClass cell)))
+    (environmentAt dataSet (Action.representative (Geometry.orbitClass cell)))
     (Eval.regularIntegrand scalarData)
   ≡ Eval.evaluateExpression (arithmetic dataSet)
     (environmentAt dataSet cell)
@@ -158,10 +148,5 @@ cellEvaluationEqualsCanonicalRepresentative dataSet cell =
 literalEvaluatorFourRepresentativeReductionLevel : ProofLevel
 literalEvaluatorFourRepresentativeReductionLevel = machineChecked
 
--- The remaining L3 box analysis is therefore:
---   * seven literal source generator equalities (L2/source identification);
---   * primitive TrigAtom environment covariance;
---   * four canonical representative interval/quadrature enclosures.
--- No independent 240-cell whole-expression proof is needed.
 physicalFourRepresentativeAnalyticEnclosuresLevel : ProofLevel
 physicalFourRepresentativeAnalyticEnclosuresLevel = conditional
