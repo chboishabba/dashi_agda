@@ -24,6 +24,7 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound63BackwardsCompilerVa
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
+open import Data.Empty using (⊥)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -79,9 +80,8 @@ round62AndRound63CountsAgree = refl
 ------------------------------------------------------------------------
 
 continuumFourthCumulantLowerBoundImpliesNonGaussian :
-  ∀ witness →
-  NonGaussian.¬
-    (NonGaussian.GaussianWickFour (NonGaussian.moments witness))
+  (witness : NonGaussian.ContinuumGaugeInvariantFourthCumulantWitness) →
+  NonGaussian.GaussianWickFour (NonGaussian.moments witness) → ⊥
 continuumFourthCumulantLowerBoundImpliesNonGaussian =
   NonGaussian.continuumFourthCumulantWitnessIsNonGaussian
 
