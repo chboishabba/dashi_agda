@@ -5,9 +5,11 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 
 sources=(
+  DASHI/Core/DependentRecoverableProjectionExact.agda
   DASHI/Foundations/TernaryNativeMinimalityExact.agda
   DASHI/Foundations/BalancedTernaryAntipodalOrbitExact.agda
   DASHI/Foundations/BalancedTernaryAntipodalResidualCodecExact.agda
+  DASHI/Foundations/BalancedTernaryDependentRecoverableBridgeExact.agda
   DASHI/Foundations/BalancedTernaryNineZeroFibreCountExact.agda
   DASHI/Foundations/Base369InteractionAntipodalFibreExact.agda
   DASHI/Foundations/Base369InteractionObserverJoinExact.agda
@@ -45,6 +47,7 @@ require_pattern() {
   fi
 }
 
+require_pattern DASHI/Core/DependentRecoverableProjectionExact.agda 'dependentCodeSeparating'
 require_pattern DASHI/Foundations/TernaryNativeMinimalityExact.agda 'noOneBitInjection'
 require_pattern DASHI/Foundations/TernaryNativeMinimalityExact.agda 'noExactPositiveOnlyReconstruction'
 require_pattern DASHI/Foundations/TernaryNativeMinimalityExact.agda 'binarySimulationPreservesAntipode'
@@ -53,10 +56,13 @@ require_pattern DASHI/Foundations/Base369InteractionAntipodalFibreExact.agda 'bl
 require_pattern DASHI/Foundations/Base369InteractionAntipodalFibreExact.agda 'allThreeNoncentralOrientationFibreSizeIsEight'
 require_pattern DASHI/Foundations/BalancedTernaryAntipodalResidualCodecExact.agda 'decodeAfterEncodeRound'
 require_pattern DASHI/Foundations/BalancedTernaryAntipodalResidualCodecExact.agda 'encodeAfterDecodeRound'
+require_pattern DASHI/Foundations/BalancedTernaryDependentRecoverableBridgeExact.agda 'canonicalDependentCodeSeparatesFineCarrier'
 require_pattern DASHI/Foundations/BalancedTernaryNineZeroFibreCountExact.agda 'aggregateZeroFibreCountIs3139'
 require_pattern DASHI/Ontology/DependentDefinitionFibreExact.agda 'noToyotaFiestaSection'
 require_pattern DASHI/Ontology/DependentDefinitionFibreExact.agda 'flatCountSplitsAsValidPlusInvalid'
 require_pattern DASHI/Ontology/WikidataTernaryFibreRegression.agda 'threeBlockQuotientPlusResidualRoundTrips'
+
+python3 scripts/benchmark_ternary_binary_locality.py >/dev/null
 
 scripts/run_agda29_parallel_check.sh \
   DASHI/Ontology/WikidataTernaryFibreRegression.agda \
