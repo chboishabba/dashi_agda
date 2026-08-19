@@ -123,14 +123,11 @@ peerCatalystBoundary = Connectedness.canonicalPeerCatalystBoundary
 ------------------------------------------------------------------------
 -- Observer-family reading.
 --
--- A joined observer is more informative than each component, but product
--- observation does not itself establish semantic/evidential pooling authority.
+-- `ObserverRefinementCore` remains the theorem owner for pair observers,
+-- component-below-join laws and the least-upper-bound theorem.  SIO remains the
+-- interoperable semantic surface.  Importing either here does not turn product
+-- observation into semantic/evidential pooling permission.
 ------------------------------------------------------------------------
-
-pairObserver = Observer.pairObserver
-leftObserverBelowJoin = Observer.leftBelowPair
-rightObserverBelowJoin = Observer.rightBelowPair
-observerJoinLeastUpperBound = Observer.pairIsLeastUpperBound
 
 ------------------------------------------------------------------------
 -- No-promotion permissions.  These are deliberately empty: exact structural
