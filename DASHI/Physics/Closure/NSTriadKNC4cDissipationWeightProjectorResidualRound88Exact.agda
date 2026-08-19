@@ -56,10 +56,6 @@ import DASHI.Physics.Closure.NSTriadKNPeriodicLittlewoodPaleyBonyExact as LP
 import DASHI.Physics.Closure.NSTriadKNPhysicalTransportMatrixSkewRound40Exact as Matrix
 import DASHI.Physics.Closure.NSTriadKNLiteralPhysicalCompactTransferDriftRound82Exact as Drift
 
-------------------------------------------------------------------------
--- Generic exact complex-ring identity.
-------------------------------------------------------------------------
-
 residualWeight :
   ∀ {r} {F : C3.RealField r} →
   C3.Complex F → C3.Complex F → C3.Complex F → C3.Complex F
@@ -114,10 +110,6 @@ weightCommutatorSplitsProjectorAndResidual {F = F}
     refl reference outWeight inWeight outGrade inGrade transport
   where module C = Ring.Solver F
 
-------------------------------------------------------------------------
--- Literal shell-weight instantiation.
-------------------------------------------------------------------------
-
 shellGrade :
   ∀ {r} (model : LP.PeriodicHardShellFourierPDE {r}) →
   Nat → Z3.FourierMode → C3.Complex (LP.realField model)
@@ -150,11 +142,12 @@ literalWeightedTransportCommutatorEntry :
   ∀ {input output} →
   Matrix.PhysicalTransportMatrixEntry input output →
   C3.Complex (LP.realField model)
-literalWeightedTransportCommutatorEntry datum velocity {input} {output} entry =
+literalWeightedTransportCommutatorEntry {E = E}
+    datum velocity {input} {output} entry =
   weightedCommutatorCoefficient
     (literalDissipationWeight datum output)
     (literalDissipationWeight datum input)
-    (Matrix.transportEntryCoefficient _ velocity entry)
+    (Matrix.transportEntryCoefficient E velocity entry)
 
 literalShellProjectorPrincipalEntry :
   ∀ {r} {model : LP.PeriodicHardShellFourierPDE {r}}
@@ -165,13 +158,13 @@ literalShellProjectorPrincipalEntry :
   ∀ {input output} →
   Matrix.PhysicalTransportMatrixEntry input output →
   C3.Complex (LP.realField model)
-literalShellProjectorPrincipalEntry {model = model}
+literalShellProjectorPrincipalEntry {model = model} {E = E}
     datum reference velocity {input} {output} entry =
   projectorCommutatorCoefficient
     reference
     (shellGrade model (Drift.shell datum) output)
     (shellGrade model (Drift.shell datum) input)
-    (Matrix.transportEntryCoefficient _ velocity entry)
+    (Matrix.transportEntryCoefficient E velocity entry)
 
 literalShellSpreadResidualEntry :
   ∀ {r} {model : LP.PeriodicHardShellFourierPDE {r}}
@@ -182,7 +175,7 @@ literalShellSpreadResidualEntry :
   ∀ {input output} →
   Matrix.PhysicalTransportMatrixEntry input output →
   C3.Complex (LP.realField model)
-literalShellSpreadResidualEntry {model = model}
+literalShellSpreadResidualEntry {model = model} {E = E}
     datum reference velocity {input} {output} entry =
   residualCommutatorCoefficient
     reference
@@ -190,7 +183,7 @@ literalShellSpreadResidualEntry {model = model}
     (literalDissipationWeight datum input)
     (shellGrade model (Drift.shell datum) output)
     (shellGrade model (Drift.shell datum) input)
-    (Matrix.transportEntryCoefficient _ velocity entry)
+    (Matrix.transportEntryCoefficient E velocity entry)
 
 literalWeightedTransportEntrySplitsExactly :
   ∀ {r} {model : LP.PeriodicHardShellFourierPDE {r}}
@@ -204,7 +197,7 @@ literalWeightedTransportEntrySplitsExactly :
   ≡ C3.complexAdd
       (literalShellProjectorPrincipalEntry datum reference velocity entry)
       (literalShellSpreadResidualEntry datum reference velocity entry)
-literalWeightedTransportEntrySplitsExactly {model = model}
+literalWeightedTransportEntrySplitsExactly {model = model} {E = E}
     datum reference velocity {input} {output} entry =
   weightCommutatorSplitsProjectorAndResidual
     reference
@@ -212,7 +205,7 @@ literalWeightedTransportEntrySplitsExactly {model = model}
     (literalDissipationWeight datum input)
     (shellGrade model (Drift.shell datum) output)
     (shellGrade model (Drift.shell datum) input)
-    (Matrix.transportEntryCoefficient _ velocity entry)
+    (Matrix.transportEntryCoefficient E velocity entry)
 
 round88C4cWeightedTransportSplitsProjectorAndSpread : Bool
 round88C4cWeightedTransportSplitsProjectorAndSpread = true
