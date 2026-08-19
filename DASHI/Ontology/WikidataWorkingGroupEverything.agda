@@ -39,6 +39,7 @@ import DASHI.Ontology.WikidataCheckerResultAttributionExact
 
 -- Generic mathematical owners used by the outward ontology package.
 import DASHI.Algebra.ClaimIndexedEvidencePolarityExact
+import DASHI.Algebra.BalancedTernaryOppositionEvidenceBridgeExact
 import DASHI.Core.RequiredAxisSupportSquareExact
 import DASHI.Core.ActiveObligationEvidenceFibreExact
 import DASHI.Core.IndexedInterpretationMorphismExact
