@@ -25,25 +25,43 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound73EightAnalyticCutset
 -- ROUND73 SHARPENINGS
 --
 -- * Lemma 4 does NOT re-prove ordinary finite-cutoff nonlinear RG stability.
---   CMP119/CMP122 own preservation of the complete Section-2 density class,
---   including small/large-field control, covariance and positive localisation
---   decay, once lemma 3 identifies the literal state with that source flow.
+--   CMP119 Sect.2 already puts the SAME complete density in an inductive class
+--   containing the localized small-field E sector, strongly decaying R sector
+--
+--       |R^(j)(X)| <= g_j^kappa0 exp(-kappa0 d_j(X))            (2.31),
+--
+--   analytic localized boundary terms with
+--
+--       |B^(j)(X)| <= B exp(-kappa d_j(X))                      (2.42),
+--
+--   regular common analytic background domains and covariance control.
+--   CMP119 Theorem 1 / CMP122 preserve that complete class when the running
+--   couplings satisfy the source smallness hypothesis.  Once lemma 3 identifies
+--   the literal state with this flow, these baseline small/large/locality
+--   coordinates are SOURCE-OWNED.
 --
 -- * CMP109 already works at the twice-differentiated E^(2) level and, after
 --   (4.35), carries the domain/free-boundary replacement through an additional
 --   marked exponential factor; (4.36)--(4.37) resum it and (5.10) gives
 --   positive exponential position-space decay of Pi.  Therefore lemma 4 only
---   needs SAME-OBJECT identification of that source E^(2)/Pi with the unified
---   derivative/Hessian coordinate, plus the genuinely extra Clay consumers:
+--   needs SAME-OBJECT identification of source E^(2)/Pi with the unified
+--   derivative/Hessian coordinate, plus genuinely extra Clay consumers:
 --   composite insertions and separation-weighted connected correlations with a
 --   common quantitative increment modulus.
+--
+-- * The exact 17/32 tail already gives the common Cauchy modulus.  Once ONE
+--   completed unified state exists, `BalabanUnifiedCompletedStateProjectionExact`
+--   proves that ordinary/composite/correlation limits are projections of that
+--   SAME state.  Thus lemma 5 cannot splice unrelated subsequences; its live
+--   content is one physical completed state + limiting measure/Schwinger
+--   identification + continuum Euclidean/OS closure.
 --
 -- * Lemma 6 has no independent compact-Lie connection-growth estimate.  A
 --   compact Lie group admits an Ad-invariant inner product; ad_Z is skew, and
 --   the onsite connection contribution to quadratic derivative energy vanishes
 --   exactly.  The only nonlocal growth budget is the SAME symmetric Hessian.
 --
--- Thus Round73 removes duplicated mathematics INSIDE lemmas 4 and 6 without
+-- Thus Round73 removes duplicated mathematics INSIDE lemmas 4--6 without
 -- pretending that continuum completion, physical clustering, OPE/stress, or
 -- interacting survival have already been proved.
 ------------------------------------------------------------------------
@@ -66,10 +84,11 @@ import DASHI.Physics.YangMills.BalabanDifferentiatedMarkedFactorProductExact
 import DASHI.Physics.YangMills.BalabanNoncommutativeMarkedOperatorProductExact
 import DASHI.Physics.YangMills.BalabanSourceExponentialToWeightedHessianExact
 
--- Unified norm / exact 17/32 tail.
+-- Unified norm / exact 17/32 tail / one completed state projection.
 import DASHI.Physics.YangMills.BalabanUnifiedPolymerSchwingerNormExact
 import DASHI.Physics.YangMills.BalabanUnifiedPolymerStepVContractionBudgetExact
 import DASHI.Physics.YangMills.BalabanUnifiedSeventeenThirtySecondTailModulusExact
+import DASHI.Physics.YangMills.BalabanUnifiedCompletedStateProjectionExact
 
 -- Mass-gap route and basis-free compact-Lie cancellation.
 import DASHI.Physics.YangMills.BalabanPolchinskiMultiscaleLSIBridgeExact
@@ -98,14 +117,14 @@ round73ExponentialToWeightedHessianLevel = machineChecked
 round73SeventeenThirtySecondTailLevel : ProofLevel
 round73SeventeenThirtySecondTailLevel = machineChecked
 
+round73OneCompletedStateProjectsToAllConsumersLevel : ProofLevel
+round73OneCompletedStateProjectsToAllConsumersLevel = machineChecked
+
 round73CompactLieSkewConnectionEnergyZeroLevel : ProofLevel
 round73CompactLieSkewConnectionEnergyZeroLevel = machineChecked
 
 ------------------------------------------------------------------------
 -- THE EIGHT LIVE ANALYTIC JOBS
---
--- These names are proof-target labels only.  Their internal algebra/source
--- consequences are intentionally not split back into receipt counts.
 ------------------------------------------------------------------------
 
 compactSimpleSelectedBackgroundFiveBlockEstimateLevel : ProofLevel
@@ -117,12 +136,15 @@ literalWilsonFPHaarOneLoopRGCoefficientLevel = conditional
 literalStateEntersPublishedBalabanRGLevel : ProofLevel
 literalStateEntersPublishedBalabanRGLevel = conditional
 
--- Strongening only: published Section-2 flow + same-object E^(2) coordinate
--- -> ONE unified state controlling derivative/Hessian, composite insertions,
--- separation-weighted connected correlations and a common scale modulus.
+-- STRONG EXTENSION only: source Section-2 flow + source E^(2) coordinate ->
+-- one unified state additionally controlling composite insertions and
+-- separation-weighted connected correlations with the common scale modulus.
 physicalUnifiedOneStepYMEstimateLevel : ProofLevel
 physicalUnifiedOneStepYMEstimateLevel = conditional
 
+-- One completed unified state; identify its ordinary projection with the
+-- Schwinger family of one limiting measure and establish thermodynamic/
+-- continuum Euclidean/OS closure.  Projected observable limits are downstream.
 sameFamilyContinuumOSCompletionLevel : ProofLevel
 sameFamilyContinuumOSCompletionLevel = conditional
 
@@ -137,11 +159,8 @@ finiteScaleStrictFourthCumulantMarginLevel = conditional
 
 ------------------------------------------------------------------------
 -- COUNT BOUNDARY
---
 -- Five = Clay-facing endpoint roles.
 -- Eight = current theorem-sized analytic jobs below those roles.
--- No claim is made here that eight unrelated assumptions solve the problem:
--- the literal top-down compiler remains authoritative and requires all outputs
--- on the same physical construction.  Any future count reduction must prove an
--- implication between these jobs, not merely rename their conjunction.
+-- Any future count reduction must prove an implication between these jobs, not
+-- merely rename their conjunction.
 ------------------------------------------------------------------------
