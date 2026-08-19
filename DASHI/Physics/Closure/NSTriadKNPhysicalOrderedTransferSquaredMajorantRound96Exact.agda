@@ -263,7 +263,7 @@ orderedTransferSquaredMajorant E I tau velocity divergenceFree =
         (λ qNorm →
           (uPNorm * qNorm) * (uKNorm * uQNorm)
           ≡ modeNorm * uKNorm * uPNorm * uQNorm)
-        (modeVectorNormSquaredMeaning E I (Physical.q tau))
+        (sym (modeVectorNormSquaredMeaning E I (Physical.q tau)))
         (solve (modeNorm ∷ uKNorm ∷ uPNorm ∷ uQNorm ∷ []))
 
     modulusToFinal :
