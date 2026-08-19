@@ -37,7 +37,7 @@ module DASHI.Physics.Closure.NSTriadKNWaleffeCoherenceDefectTangentRound95Exact 
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base using (ℚ; _+_; _*_; -_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; -_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 
 import DASHI.Physics.Closure.NSTriadKNNormalizedWaleffePhaseDerivativeRound95Exact as Phase
