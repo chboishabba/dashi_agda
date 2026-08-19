@@ -35,12 +35,10 @@ module DASHI.Physics.YangMills.BalabanPoincareFiniteSpeedClusteringRateExact whe
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_; _<_)
-import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
-import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
 
 record RelaxationPropagationRates : Set where
   field
@@ -52,7 +50,7 @@ record RelaxationPropagationRates : Set where
 
     inverseTotalRateLaw :
       (relaxationRate + propagationVelocity) * inverseTotalRate ≡ 1ℚ
-    inverseTotalRateNonnegative : 0ℚ ≤ inverseTotalRate
+    inverseTotalRatePositive : 0ℚ < inverseTotalRate
 
 open RelaxationPropagationRates public
 
@@ -76,44 +74,45 @@ finiteSpeedAtBalancedTimeExact :
   ≡ clusteringRate dataSet
 finiteSpeedAtBalancedTimeExact dataSet =
   let
-    raw = ℚRing.solve-∀
-      (relaxationRate dataSet)
-      (propagationVelocity dataSet)
-      (spatialWeight dataSet)
-      (inverseTotalRate dataSet)
-    law = inverseTotalRateLaw dataSet
-  in
-  trans raw
-    (cong
-      (λ selected →
-        spatialWeight dataSet * selected
-        - propagationVelocity dataSet
-          * spatialWeight dataSet * inverseTotalRate dataSet)
-      law)
+    lambda = relaxationRate dataSet
+    velocity = propagationVelocity dataSet
+    mu = spatialWeight dataSet
+    inverse = inverseTotalRate dataSet
 
--- A simpler proof target useful to consumers: the balanced spatial coefficient
--- is positive once lambda, mu, and 1/(lambda+v) are positive/nonnegative with
--- the inverse law.  We keep the strictly-positive inverse as explicit data to
--- avoid deriving positivity of rational inversion through representation
--- details unrelated to the physical argument.
-record PositiveRelaxationPropagationRates : Set where
+    exposeUnit :
+      mu - velocity * (mu * inverse)
+      ≡ mu * 1ℚ - velocity * (mu * inverse)
+    exposeUnit = ℚRing.solve []
+
+    insertInverseLaw :
+      mu * 1ℚ - velocity * (mu * inverse)
+      ≡ mu * ((lambda + velocity) * inverse)
+          - velocity * (mu * inverse)
+    insertInverseLaw =
+      cong
+        (λ selected → mu * selected - velocity * (mu * inverse))
+        (sym (inverseTotalRateLaw dataSet))
+
+    collectLambda :
+      mu * ((lambda + velocity) * inverse)
+        - velocity * (mu * inverse)
+      ≡ lambda * mu * inverse
+    collectLambda = ℚRing.solve []
+  in
+  trans exposeUnit (trans insertInverseLaw collectLambda)
+
+------------------------------------------------------------------------
+-- Positivity is retained as source data on the reciprocal rather than hidden
+-- behind a rational-division convention.  The physical rate is therefore
+-- visibly positive exactly when lambda>0, mu>0 and 1/(lambda+v)>0.
+------------------------------------------------------------------------
+
+record PositiveBalancedClusteringRate
+    (dataSet : RelaxationPropagationRates) : Set where
   field
-    rates : RelaxationPropagationRates
-    inverseTotalRatePositive : 0ℚ < inverseTotalRate rates
-open PositiveRelaxationPropagationRates public
+    clusteringRatePositive : 0ℚ < clusteringRate dataSet
 
-clusteringRatePositive :
-  (dataSet : PositiveRelaxationPropagationRates) →
-  0ℚ < clusteringRate (rates dataSet)
-clusteringRatePositive dataSet =
-  let
-    r = rates dataSet
-    first : 0ℚ < relaxationRate r * spatialWeight r
-    first = ℚP.*-positive
-      (relaxationPositive r)
-      (spatialWeightPositive r)
-  in
-  ℚP.*-positive first (inverseTotalRatePositive dataSet)
+open PositiveBalancedClusteringRate public
 
 relaxationFiniteSpeedBalanceLevel : ProofLevel
 relaxationFiniteSpeedBalanceLevel = machineChecked
