@@ -56,6 +56,7 @@ import DASHI.Cognition.PNF.IndependentSentenceAdmissionExact
 import DASHI.Cognition.PNF.ProducerNativeDemandProjectionExact
 import DASHI.Cognition.PNF.OptimizationEconomyExact
 import DASHI.Cognition.PNF.PhysicalMutationChurnEconomyExact
+import DASHI.Cognition.PNF.PhysicalMutationChurnEconomyRegression
 import DASHI.Cognition.PNF.ConsumerRestrictionAggregationIntertwinerExact
 import DASHI.Cognition.PNF.ConsumerRestrictionAggregationIntertwinerRegression
 import DASHI.Cognition.PNF.EditTransportLeafLocalityRegression
