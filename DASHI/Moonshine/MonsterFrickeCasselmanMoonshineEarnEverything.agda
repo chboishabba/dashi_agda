@@ -25,6 +25,9 @@ open import DASHI.Core.Prelude
 import DASHI.Moonshine.MonsterFrickeCasselmanHighestAlphaEverything as Current
 import DASHI.Moonshine.DuncanSwisherExponentDepthHighestAlphaEverything as Depth
 import DASHI.Moonshine.DuncanSwisherDeligneExponentMechanismEverything as DeligneDepth
+import DASHI.Moonshine.DuncanSwisherDeligneAutomorphismDepthBridgeExact as Deligne
+import DASHI.Moonshine.DuncanSwisherFrickeHauptmodulUNExact as Hauptmodul
+import DASHI.Moonshine.MonsterExponentObserverRefinementExact as Refinement
 import DASHI.Moonshine.MoonshineEarnModernEverything as EarnRoot
 import DASHI.Moonshine.MoonshineEarnHistoricalWeldExact as Earn
 import DASHI.Moonshine.MoonshineOrbifoldWeightTwoDecompositionExact as Weight2
@@ -77,17 +80,17 @@ lowPrimeResidualsIsolatedRegression = refl
 ------------------------------------------------------------------------
 
 p11BrandtToDeligneDepthRegression :
-  DeligneDepth.p11DeligneDepthRegression ≡ DeligneDepth.p11DeligneDepthRegression
-p11BrandtToDeligneDepthRegression = refl
+  Deligne.minimumFirstPoleDepth Deligne.p11MinimumWitness ≡ 2
+p11BrandtToDeligneDepthRegression = Deligne.p11MinimumDeligneDepthIsTwo
 
 hauptmodulUNBridgeRegression :
-  DeligneDepth.hauptmodulCoefficientBridgeConstructedRegression
-  ≡ DeligneDepth.hauptmodulCoefficientBridgeConstructedRegression
+  Hauptmodul.coefficientDifferenceLawDerived
+    Hauptmodul.canonicalDuncanSwisherFrickeHauptmodulUNBoundary ≡ true
 hauptmodulUNBridgeRegression = refl
 
 supportStrictlyCoarserThanExponentRegression :
-  DeligneDepth.Refinement.quantitativeObserverStrictlyAddsInformation
-    DeligneDepth.Refinement.canonicalMonsterExponentObserverRefinementBoundary ≡ true
+  Refinement.quantitativeObserverStrictlyAddsInformation
+    Refinement.canonicalMonsterExponentObserverRefinementBoundary ≡ true
 supportStrictlyCoarserThanExponentRegression = refl
 
 historicalRoutingFactorsThroughExponentRegression :
