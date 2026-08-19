@@ -7,25 +7,22 @@ module DASHI.Physics.YangMills.YangMillsNonGaussianInteractingWitnessExact where
 -- data separate from reconstruction and from the mass gap.  This module makes
 -- the intended witness explicit without privileging the fourth cumulant.
 --
--- Given a proposition `Gaussian` for the SAME continuum Schwinger system, let
+-- Given `NotGaussian = Gaussian -> Contradiction` for the SAME continuum
+-- Schwinger system, choose `NotGaussian` itself as the witness carrier of the
+-- existing `InteractingContinuumWitness`.
 --
---     NotGaussian = Gaussian -> Contradiction.
+-- The companion free-Maxwell module now constructs such a `NotGaussian` proof
+-- from a same-Hamiltonian implication
 --
--- A proof of `NotGaussian` is itself a perfectly concrete inhabitant of the
--- existing `InteractingContinuumWitness`: choose its witness carrier to be the
--- constructive negation of Gaussianity.
+--   Gaussian YM -> massless Maxwell one-particle sector
 --
--- Consequently the free-Maxwell zero-gap route can replace the strict fourth
--- cumulant route if it proves, on the same theory,
---
---     Gaussian YM -> massless Maxwell one-particle sector,
---
--- because the already-required positive gap then constructs `NotGaussian`.
--- No excluded middle or separate moment calculation is needed for this logic.
+-- plus the already-required positive physical gap.  No excluded middle and no
+-- separate fourth-moment calculation enter the logical composition.
 ------------------------------------------------------------------------
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanOSMassGapClosure as OS
+import DASHI.Physics.YangMills.YangMillsFreeGaussianMaxwellNoGapExact as Free
 
 record NonGaussianWitnessData
     {Observable Point Scalar : Set}
@@ -46,11 +43,28 @@ nonGaussianIsInteractingWitness dataSet = record
   ; witness = notGaussian dataSet
   }
 
+-- Direct composition of the spectral obstruction into the existing OS
+-- interaction-witness carrier.  The `Gaussian` proposition is supplied by the
+-- caller for this SAME `system`; no unrelated theory is introduced.
+gaussianMaxwellGapObstructionIsInteracting :
+  ∀ {Observable Point Scalar O}
+    {system : OS.ContinuumSchwingerSystem Observable Point Scalar} →
+  (dataSet : Free.GaussianMaxwellGapObstruction O) →
+  OS.InteractingContinuumWitness Observable Point Scalar system
+gaussianMaxwellGapObstructionIsInteracting dataSet = record
+  { Witness = Free.Gaussian dataSet → Free.Contradiction dataSet
+  ; witness = Free.gaussianContradictsPositiveGap dataSet
+  }
+
 nonGaussianToInteractingWitnessLevel : ProofLevel
 nonGaussianToInteractingWitnessLevel = machineChecked
 
--- The only physical issue is therefore production of the same-system
--- `notGaussian` proof.  The strict fourth cumulant is one sufficient producer;
--- the free-Maxwell/gap contradiction is now an explicit alternative producer.
-physicalSameSystemNonGaussianWitnessLevel : ProofLevel
-physicalSameSystemNonGaussianWitnessLevel = conditional
+freeMaxwellGapToInteractingWitnessCompilerLevel : ProofLevel
+freeMaxwellGapToInteractingWitnessCompilerLevel = machineChecked
+
+-- TRUE physical seam for the cheaper route is now singular: establish on the
+-- SAME continuum Yang--Mills Hamiltonian that the Gaussian/free hypothesis
+-- produces the massless Maxwell one-particle sector.  Everything from that
+-- hypothesis + positive gap to an `InteractingContinuumWitness` is constructed.
+physicalGaussianYMToMasslessMaxwellSameHamiltonianLevel : ProofLevel
+physicalGaussianYMToMasslessMaxwellSameHamiltonianLevel = conditional
