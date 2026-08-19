@@ -15,13 +15,30 @@ module DASHI.Moonshine.MoonshineEarnModernEverything where
 --   * the +1 in the weight-two Moonshine decomposition is the conformal line,
 --     not an external observer.
 --
--- The FRACTRAN chain itself is not promoted to a proof of Moonshine.
+-- This root now also carries three exact mechanistic falsifiers for the
+-- historical substitution itself:
+--
+--   * it cannot be a Monster conjugacy-class POWER MAP, because ord(g^k)
+--     divides ord(g), while 23->47, 7->59, 11->71 increase prime order;
+--   * it cannot be a Fricke involution / Fricke level motion, because W_p acts
+--     inside the fixed level p;
+--   * it cannot factor through the shared Monster/Ogg/Fricke genus-zero
+--     membership observer, because all three sources have the same coarse
+--     observation but require three different targets.
+--
+-- Thus the surviving historical research question is genuinely finer:
+-- if the arithmetic has a Moonshine mechanism, it must live in structure such
+-- as class/character/modular-function data beyond Ogg membership, and it is not
+-- the standard power-map or Fricke operation.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
 
 import DASHI.Moonshine.MoonshineEarnHistoricalWeldExact as Earn
 import DASHI.Moonshine.MoonshineOrbifoldWeightTwoDecompositionExact as Weight2
+import DASHI.Moonshine.MoonshineEarnPowerMapNoGoExact as PowerNoGo
+import DASHI.Moonshine.MoonshineEarnFrickeLevelNoGoExact as FrickeNoGo
+import DASHI.Moonshine.MoonshineEarnOggObserverNonfactorabilityExact as ObserverNoGo
 
 historicalTargetProductRegression : 47 * 59 * 71 ≡ 196883
 historicalTargetProductRegression = Earn.historicalTargetProduct
@@ -50,3 +67,32 @@ fractranMoonshinePromotionRejectedRegression :
   Earn.fractranChainProvesConwayNorton
     Earn.canonicalMoonshineEarnModernBoundary ≡ false
 fractranMoonshinePromotionRejectedRegression = refl
+
+------------------------------------------------------------------------
+-- Mechanistic falsifier regressions.
+------------------------------------------------------------------------
+
+directMonsterPowerMapRejectedRegression :
+  PowerNoGo.directMonsterPowerMapInterpretationPossible
+    PowerNoGo.canonicalMoonshineEarnPowerMapNoGoBoundary ≡ false
+directMonsterPowerMapRejectedRegression = refl
+
+directReplicabilityPowerMapRejectedRegression :
+  PowerNoGo.directReplicabilityPowerMapExplanationPossible
+    PowerNoGo.canonicalMoonshineEarnPowerMapNoGoBoundary ≡ false
+directReplicabilityPowerMapRejectedRegression = refl
+
+directFrickeMotionRejectedRegression :
+  FrickeNoGo.directFrickeInvolutionExplanationPossible
+    FrickeNoGo.canonicalMoonshineEarnFrickeLevelNoGoBoundary ≡ false
+directFrickeMotionRejectedRegression = refl
+
+oggMembershipCannotRouteEarnTargetsRegression :
+  ObserverNoGo.substitutionFactorsThroughOggMembership
+    ObserverNoGo.canonicalMoonshineEarnOggObserverBoundary ≡ false
+oggMembershipCannotRouteEarnTargetsRegression = refl
+
+finerMoonshineCoordinateStillRequiredRegression :
+  ObserverNoGo.finerMoonshineCoordinateRequiredForMechanism
+    ObserverNoGo.canonicalMoonshineEarnOggObserverBoundary ≡ true
+finerMoonshineCoordinateStillRequiredRegression = refl
