@@ -41,8 +41,10 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.List.Base using (List)
 open import Data.Rational.Base using
-  (ℚ; 0ℚ; _+_; _*_; _≤_; positive; nonNegative)
+  (ℚ; 0ℚ; _+_; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚP
+open ℚP using (_<?_)
+open import Relation.Nullary.Decidable.Core using (toWitness)
 open import Relation.Binary.PropositionalEquality using (subst)
 open import Data.Rational.Tactic.RingSolver using (solve)
 
@@ -66,18 +68,16 @@ record CubicInteractionChargeBudget
 open CubicInteractionChargeBudget public
 
 threePositive : 0ℚ ℚP.< Young.three
-threePositive =
-  let onePositive : 0ℚ ℚP.< (Data.Rational.Base.1ℚ)
-      onePositive = ℚP.0<1
-  in
-  ℚP.<-trans onePositive
-    (ℚP.+-monoˡ-< (Data.Rational.Base.1ℚ)
-      (ℚP.+-monoˡ-< (Data.Rational.Base.1ℚ) onePositive))
+threePositive = toWitness {a? = 0ℚ <? Young.three} _
+
+twoNonnegative : 0ℚ ≤ Young.two
+twoNonnegative = ℚP.<⇒≤
+  (toWitness {a? = 0ℚ <? Young.two} _)
 
 interactionSumBelowKernelMass :
-  ∀ {kernelMass cubicMass} →
-  CubicInteractionChargeBudget kernelMass cubicMass →
-  Young.sumInteraction (interactions _) ≤ kernelMass * cubicMass
+  ∀ {kernelMass cubicMass}
+    (budget : CubicInteractionChargeBudget kernelMass cubicMass) →
+  Young.sumInteraction (interactions budget) ≤ kernelMass * cubicMass
 interactionSumBelowKernelMass {kernelMass} {cubicMass} budget =
   let
     cells = interactions budget
@@ -91,13 +91,8 @@ interactionSumBelowKernelMass {kernelMass} {cubicMass} budget =
     rightScale :
       Young.two * Young.sumRightCharge cells ≤ Young.two * M
     rightScale =
-      let
-        twoNN : 0ℚ ≤ Young.two
-        twoNN = ℚP.<⇒≤
-          (ℚP.<-trans ℚP.0<1 (ℚP.+-monoˡ-< (Data.Rational.Base.1ℚ) ℚP.0<1))
-        instance twoNNI = nonNegative twoNN
-      in
-      ℚP.*-monoˡ-≤-nonNeg Young.two (rightChargeMultiplicity budget)
+      let instance twoNNI = nonNegative twoNonnegative
+      in ℚP.*-monoˡ-≤-nonNeg Young.two (rightChargeMultiplicity budget)
 
     chargeStage :
       Young.sumLeftCharge cells + Young.two * Young.sumRightCharge cells
@@ -117,6 +112,8 @@ interactionSumBelowKernelMass {kernelMass} {cubicMass} budget =
             Young.sumLeftCharge cells + Young.two * Young.sumRightCharge cells
             ≤ upper)
           tripleMeaning chargeStage)
+
+    instance threeIsPositive = Data.Rational.Base.positive threePositive
   in
   ℚP.*-cancelˡ-≤-pos Young.three tripleBound
 
@@ -162,8 +159,8 @@ frequencyLocalThreeChannelBound ledger =
 round91FiniteFrequencyLocalThreeChannelAssemblyClosed : Bool
 round91FiniteFrequencyLocalThreeChannelAssemblyClosed = true
 
-round91LiteralPeriodicIІІInteractionEnumerationClosed : Bool
-round91LiteralPeriodicIІІInteractionEnumerationClosed = false
+round91LiteralPeriodicIIIInteractionEnumerationClosed : Bool
+round91LiteralPeriodicIIIInteractionEnumerationClosed = false
 
 round91PhysicalCubicShellMassIdentificationClosed : Bool
 round91PhysicalCubicShellMassIdentificationClosed = false
