@@ -240,15 +240,39 @@ coherenceGivesNetTransferMargin budget marginNN =
   in
   ℚP.≤-trans toPositive negateReverses
 
+coherenceThresholdGivesNonnegativeMargin :
+  ∀ budget →
+  maximumDamping budget * coherence budget ≤ minimumDamping budget →
+  0ℚ ≤ coerciveMargin budget
+coherenceThresholdGivesNonnegativeMargin budget threshold =
+  let
+    shifted = ℚP.+-mono-≤ threshold ℚP.≤-refl
+  in
+  subst
+    (λ left → left ≤ coerciveMargin budget)
+    (solve
+      ( maximumDamping budget
+      ∷ coherence budget
+      ∷ []))
+    (subst
+      (λ right →
+        maximumDamping budget * coherence budget
+          + (- (maximumDamping budget * coherence budget))
+        ≤ right)
+      (solve
+        ( minimumDamping budget
+        ∷ maximumDamping budget
+        ∷ coherence budget
+        ∷ []))
+      shifted)
+
 coherenceThresholdNonpositive :
   ∀ budget →
   maximumDamping budget * coherence budget ≤ minimumDamping budget →
   netViscousContribution budget ≤ 0ℚ
 coherenceThresholdNonpositive budget threshold =
   let
-    marginNN : 0ℚ ≤ coerciveMargin budget
-    marginNN =
-      ℚP.0≤p-q⇒q≤p threshold
+    marginNN = coherenceThresholdGivesNonnegativeMargin budget threshold
     toMargin = coherenceGivesPositiveMassMargin budget
     productNN :
       0ℚ ≤ coerciveMargin budget * positiveMass budget
