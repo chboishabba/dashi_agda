@@ -6,8 +6,11 @@ open import Data.Empty using (⊥)
 
 import DASHI.Algebra.BalancedTernaryOppositionEvidenceBridgeExact as Opposition
 import DASHI.Cognition.PNF.BinaryBalancedTernaryAggregateLossExact as BinaryAggregate
+import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
+import DASHI.Core.TopDownObservationCalculusExact as TopDown
 import DASHI.Foundations.BalancedTernaryAntipodalOrbitExact as Orbit
 import DASHI.Foundations.BalancedTernaryAntipodalResidualCodecExact as Codec
+import DASHI.Foundations.BalancedTernaryDependentRecoverableBridgeExact as RecoverableBridge
 import DASHI.Foundations.Base369InteractionAntipodalFibreExact as Interaction
 import DASHI.Foundations.SSPTritCarrier as SSP
 import DASHI.Foundations.TernaryNativeMinimalityExact as Native
@@ -24,6 +27,21 @@ notPositiveStillDoesNotMeanStrictInverse :
 notPositiveStillDoesNotMeanStrictInverse =
   Native.positiveOnlyCollapsesNegativeAndCentre
 
+-- Top-down form of the same failure: the positive-only Boolean surface is not
+-- sufficient for a consumer that needs the signed/neutral coordinate itself.
+positiveOnlyIdentityNonDescent :
+  Descent.ConsumerNonDescentWitness Native.positiveOnly (λ x → x)
+positiveOnlyIdentityNonDescent =
+  Descent.consumerNonDescentWitness
+    SSP.sspNegOne SSP.sspZero
+    Native.positiveOnlyCollapsesNegativeAndCentre
+    Native.negativeNotZero
+
+positiveOnlyCannotBeSufficientForSignedIdentity :
+  Descent.ConsumerSufficient Native.positiveOnly (λ x → x) → ⊥
+positiveOnlyCannotBeSufficientForSignedIdentity =
+  Descent.nonDescentWitnessBlocksSufficiency positiveOnlyIdentityNonDescent
+
 binarySimulationStillRoundTrips :
   (x : SSP.SSPTrit) → Native.decodeBinary (Native.encodeBinary x) ≡ x
 binarySimulationStillRoundTrips = Native.binarySimulationRoundTrip
@@ -38,6 +56,18 @@ binarySimulationStillPreservesStrictAntipode =
 oneBlockQuotientPlusResidualRoundTrips :
   (triple : Orbit.TritTriple) → Codec.decode27 (Codec.encode27 triple) ≡ triple
 oneBlockQuotientPlusResidualRoundTrips = Codec.decodeAfterEncode27
+
+-- Conversely, the exact quotient + dependent residual code is sufficient even
+-- for the identity consumer on the whole 27-state block, because it separates
+-- the fine carrier exactly.
+antipodalDependentCodeSufficientForFineIdentity :
+  Descent.ConsumerSufficient
+    (TopDown.dependentCodeObserver RecoverableBridge.canonicalAntipodalDependentProjection)
+    (λ triple → triple)
+antipodalDependentCodeSufficientForFineIdentity =
+  TopDown.dependentCodeIsAdequateForEveryConsumer
+    RecoverableBridge.canonicalAntipodalDependentProjection
+    (λ triple → triple)
 
 threeBlockQuotientPlusResidualRoundTrips :
   (state : Cube.OneRoundInteractionState) →
