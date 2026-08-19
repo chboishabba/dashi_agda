@@ -143,9 +143,9 @@ record FactorsEarnTargetThroughExponent : Set where
 
 open FactorsEarnTargetThroughExponent public
 
-historicalRoutingFactorsThroughSourceExponent :
+canonicalHistoricalRoutingFactorization :
   FactorsEarnTargetThroughExponent
-historicalRoutingFactorsThroughSourceExponent =
+canonicalHistoricalRoutingFactorization =
   factorsEarnTargetThroughExponent
     routeBySourceExponent
     routeBySourceExponentFactorsHistoricalTargets
