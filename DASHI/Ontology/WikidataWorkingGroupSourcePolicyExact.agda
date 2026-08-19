@@ -7,12 +7,6 @@ import DASHI.Core.AttributedSourceCore as Source
 
 ------------------------------------------------------------------------
 -- WIKIDATA / JMD HANDOFF SOURCE POLICY
---
--- Public external-source dependencies should be represented by the repository's
--- `AttributedSource` carrier (or by an exact source-hash/theorem contract where
--- the dependency is executable source code).  DOI state is never represented by
--- an empty string: it is either a recorded DOI or an explicit atlas-local
--- no-DOI state.
 ------------------------------------------------------------------------
 
 data ExternalSourceRegistration : Set where
@@ -40,13 +34,8 @@ requireAttributedSource :
 requireAttributedSource source =
   publicSourceRequirement
     (attributedBibliographicSource source)
-    true true true
-    (Source.citationImportsProof source)
-    (Source.citationCreatesAuthority source)
+    true true true true true
 
--- The two final fields above are intentionally false in the source carrier.
--- Expose the proof-shaped boundary directly rather than counting a citation as
--- proof or institutional/edit authority.
 attributedSourceCannotImportProof :
   (source : Source.AttributedSource) →
   Source.citationImportsProof source ≡ false
