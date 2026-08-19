@@ -8,30 +8,30 @@ module DASHI.Moonshine.MoonshineEarnModernEverything where
 --   7*11*23 -> 47*59*71 = 196883,
 --   196883 + 1 = 196884.
 --
--- Modern theorem owners then add three independent facts:
+-- Modern theorem owners add independent facts:
 --
 --   * all six source/target primes divide the actual Monster order;
 --   * all six lie on the finite Fricke genus-zero control locus;
 --   * the +1 in the weight-two Moonshine decomposition is the conformal line,
 --     not an external observer.
 --
--- This root now also carries exact mechanistic falsifiers for the historical
--- substitution itself:
+-- Exact mechanistic falsifiers kill four obvious interpretations:
 --
---   * it cannot be a Monster conjugacy-class POWER MAP, because ord(g^k)
---     divides ord(g), while 23->47, 7->59, 11->71 increase prime order;
---   * it cannot be a Fricke involution / Fricke level motion, because W_p acts
---     inside the fixed level p;
---   * it cannot factor through the shared Monster/Ogg/Fricke genus-zero
---     membership observer, because all three sources have the same coarse
---     observation but require three different targets;
---   * it cannot uniformly be a source-prime cyclic complement acting on the
---     target prime subgroup: 23|46 passes, but 7∤58 and 11∤70.
+--   * not a Monster conjugacy-class power map;
+--   * not Fricke level motion;
+--   * not routing by shared Ogg/Monster support alone;
+--   * not one uniform source-prime cyclic-normalizer mechanism.
 --
--- Thus the surviving historical research question is genuinely finer:
--- if the arithmetic has a Moonshine mechanism, it must live in structure such
--- as class/character/modular-function data beyond Ogg membership, and it is not
--- any of the standard operations excluded above.
+-- The quantitative exponent observer now supplies a genuinely finer positive
+-- result.  On the three historical SOURCES,
+--
+--   v_23=1, v_7=6, v_11=2,
+--
+-- so exponent strictly refines the constant Ogg observer and separates the
+-- source carrier.  The historical targets therefore factor through source
+-- exponent on this three-point dataset.  But exponent is NOT conserved: the
+-- target exponents at 47,59,71 are all one.  This factorization is a surviving
+-- discriminator, not a claimed Moonshine dynamics or causal explanation.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -42,6 +42,7 @@ import DASHI.Moonshine.MoonshineEarnPowerMapNoGoExact as PowerNoGo
 import DASHI.Moonshine.MoonshineEarnFrickeLevelNoGoExact as FrickeNoGo
 import DASHI.Moonshine.MoonshineEarnOggObserverNonfactorabilityExact as ObserverNoGo
 import DASHI.Moonshine.MoonshineEarnCyclicNormalizerNoGoExact as NormalizerNoGo
+import DASHI.Moonshine.MoonshineEarnExponentObserverFactorizationExact as ExponentObserver
 
 historicalTargetProductRegression : 47 * 59 * 71 ≡ 196883
 historicalTargetProductRegression = Earn.historicalTargetProduct
@@ -105,7 +106,38 @@ firstNormalizerEdgeOnlyNecessaryConditionRegression :
     NormalizerNoGo.canonicalMoonshineEarnCyclicNormalizerBoundary ≡ false
 firstNormalizerEdgeOnlyNecessaryConditionRegression = refl
 
-finerMoonshineCoordinateStillRequiredRegression :
+------------------------------------------------------------------------
+-- Surviving finer observer: source Monster exponent.
+------------------------------------------------------------------------
+
+sourceExponentStrictlyRefinesOggRegression :
+  ExponentObserver.exponentStrictlyRefinesOggOnHistoricalSources
+    ExponentObserver.canonicalMoonshineEarnExponentObserverBoundary ≡ true
+sourceExponentStrictlyRefinesOggRegression = refl
+
+sourceExponentRoutesHistoricalTargetsRegression :
+  ExponentObserver.historicalRoutingFactorsThroughSourceExponent
+    ExponentObserver.canonicalMoonshineEarnExponentObserverBoundary ≡ true
+sourceExponentRoutesHistoricalTargetsRegression = refl
+
+historicalRoutingDoesNotConserveExponentRegression :
+  ExponentObserver.routingUniformlyPreservesMonsterExponent
+    ExponentObserver.canonicalMoonshineEarnExponentObserverBoundary ≡ false
+historicalRoutingDoesNotConserveExponentRegression = refl
+
+factorizationIsNotMechanismRegression :
+  ExponentObserver.factorizationProvesMoonshineMechanism
+    ExponentObserver.canonicalMoonshineEarnExponentObserverBoundary ≡ false
+factorizationIsNotMechanismRegression = refl
+
+------------------------------------------------------------------------
+-- Updated frontier: Ogg support is too coarse, exponent is sufficient to route
+-- the three source examples, but not conserved.  Any deeper interpretation must
+-- explain WHY that discriminator is selected rather than merely fit the three
+-- finite points.
+------------------------------------------------------------------------
+
+finerMoonshineCoordinateStillRequiredForMechanismRegression :
   ObserverNoGo.finerMoonshineCoordinateRequiredForMechanism
     ObserverNoGo.canonicalMoonshineEarnOggObserverBoundary ≡ true
-finerMoonshineCoordinateStillRequiredRegression = refl
+finerMoonshineCoordinateStillRequiredForMechanismRegression = refl
