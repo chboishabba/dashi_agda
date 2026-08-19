@@ -3,10 +3,11 @@ module DASHI.Ontology.WikidataWorkingGroupEverything where
 ------------------------------------------------------------------------
 -- FOCUSED WIKIDATA / JMD HANDOFF SURFACE
 --
--- The public root deliberately excludes justice/education domain applications.
--- It exposes the JMD theorem contracts, BFO/entity-scope cases, exact
--- contradiction attribution, interpretation/governance/reopening, and the
--- generic information-order machinery needed to explain the diagnostics.
+-- The public root exposes the JMD theorem contracts, BFO/entity-scope cases,
+-- exact contradiction attribution, interpretation/governance/reopening, and
+-- the generic information-order / signed-fibre machinery needed to explain
+-- why an executable Boolean checker is a consumer projection rather than the
+-- whole evidential carrier.
 ------------------------------------------------------------------------
 
 import DASHI.Ontology.LeanWikidataEverything
@@ -45,5 +46,21 @@ import DASHI.Core.ObserverRefinementLatticeExact
 import DASHI.Core.ObserverIncomparabilityTypedJoinExact
 import DASHI.Cognition.PNF.EditTransportLeafLocalityExact
 
--- One small public regression exercises the complete handoff contract.
+-- Native signed/neutral geometry and the repo-native 369 residual tower.
+-- These owners make precise the distinction
+--   not-positive != strict inverse,
+-- while retaining Boolean decision procedures as declared consumer surfaces.
+import DASHI.Foundations.Base369SignedMembershipExact
+import DASHI.Foundations.TernaryNativeMinimalityExact
+import DASHI.Foundations.BalancedTernaryAntipodalOrbitExact
+import DASHI.Foundations.BalancedTernaryNineZeroFibreCountExact
+import DASHI.Foundations.Base369InteractionAntipodalFibreExact
+import DASHI.Foundations.Base369InteractionObserverJoinExact
+import DASHI.Foundations.Base369NineCoordinateAggregateBridgeExact
+import DASHI.Cognition.PNF.BinaryBalancedTernaryAggregateLossExact
+
+-- Positive-description products versus dependent/fibred object construction.
+import DASHI.Ontology.DependentDefinitionFibreExact
+
+-- One public regression exercises the complete handoff contract.
 import DASHI.Ontology.WikidataWorkingGroupRegression
