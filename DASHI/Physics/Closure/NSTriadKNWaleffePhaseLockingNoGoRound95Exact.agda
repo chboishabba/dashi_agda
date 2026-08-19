@@ -17,21 +17,17 @@ module DASHI.Physics.Closure.NSTriadKNWaleffePhaseLockingNoGoRound95Exact where
 -- ROUND95 / PHASE-ESCAPE NO-GO
 --
 -- A universal theorem saying that an isolated adverse triad must leave a
--- phase-locked configuration is too strong.  In a common real phase chart the
--- classical three-wave/Waleffe scalar system has a real invariant tangent:
--- real amplitudes have real derivatives.  Hence an exactly phase-locked
--- configuration may remain phase locked while modal energy is exchanged.
---
+-- phase-locked configuration is too strong. In a common real phase chart the
+-- classical three-wave/Waleffe scalar system has a real invariant tangent.
 -- The safe structural fact is different: the same self-triad transfers obey
--- the exact Manley--Rowe / energy conservation identity.  Thus persistent
--- phase lock does not manufacture total triad energy.  In the full NS network,
--- sustained dangerous amplitude must be replenished through external mode
--- coupling (or initial energy), which is the quantity the Round82/92
--- occupation-replenishment ledger should charge.
+-- exact energy conservation, so persistent phase lock does not manufacture
+-- total triad energy. Sustained danger in the full NS network must therefore
+-- be externally replenished (or funded by initial energy).
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; -_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 
@@ -52,16 +48,11 @@ alphaK w = lambdaQ w + neg (lambdaP w)
 alphaP w = lambdaK w + neg (lambdaQ w)
 alphaQ w = lambdaP w + neg (lambdaK w)
 
--- A real-chart three-wave tangent.  The exact overall normalization of the
--- common coupling is irrelevant for the invariant-manifold/no-go statement.
 dotK dotP dotQ : RealWaleffeTriad → ℚ
 dotK w = alphaK w * coupling w * cP w * cQ w
 dotP w = alphaP w * coupling w * cK w * cQ w
 dotQ w = alphaQ w * coupling w * cK w * cP w
 
--- In this chart all tangent coordinates remain on the real line.  Therefore
--- the orthogonal imaginary phase coordinate is exactly zero and has zero
--- tangent.  This is an exact finite witness that phase lock need not escape.
 lockedImaginaryCoordinate : RealWaleffeTriad → ℚ
 lockedImaginaryCoordinate w = 0ℚ
 
@@ -71,17 +62,6 @@ lockedImaginaryTangent w = 0ℚ
 phaseLockedSubmanifoldTangent :
   (w : RealWaleffeTriad) → lockedImaginaryTangent w ≡ 0ℚ
 phaseLockedSubmanifoldTangent w = refl
-
-------------------------------------------------------------------------
--- Energy exchange.
---
--- For E_j = c_j^2, the common cubic factor is
---
---   C = 2 coupling cK cP cQ.
---
--- The three energy derivatives are alpha_j C, and the Waleffe coefficient
--- differences telescope exactly.
-------------------------------------------------------------------------
 
 commonEnergyTransferFactor : RealWaleffeTriad → ℚ
 commonEnergyTransferFactor w =
@@ -104,10 +84,6 @@ isolatedTriadTotalEnergyDerivativeZero w =
   solve
     ( lambdaK w ∷ lambdaP w ∷ lambdaQ w
     ∷ coupling w ∷ cK w ∷ cP w ∷ cQ w ∷ [])
-
-------------------------------------------------------------------------
--- Viscous extension: self interaction still cannot replenish total energy.
-------------------------------------------------------------------------
 
 record ViscousRealWaleffeTriad : Set where
   constructor viscous-real-waleffe-triad
