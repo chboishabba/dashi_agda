@@ -8,6 +8,10 @@ module DASHI.Core.ConsumerDescentMinimalObserverExact where
 -- kernel/fibre formulation of descent.  On a sectioned projection, that
 -- condition is equivalent to construction of an explicit factor map.
 --
+-- IMPORTANT REUSE: explicit factorization is NOT a new record here.  It is
+-- exactly the existing `ObserverFactorizedRefinementExact.FactorizedRefinement`
+-- with `consumer` as the coarse observer and `observe` as the finer observer.
+--
 -- The canonical consumer observer is itself least informative among observers
 -- sufficient for that consumer, in DASHI's information order: every sufficient
 -- observer refines the consumer observer.  This is deterministic,
@@ -41,19 +45,15 @@ module DASHI.Core.ConsumerDescentMinimalObserverExact where
 
 open import DASHI.Core.Prelude
 
+import DASHI.Core.ObserverFactorizedRefinementExact as Factorized
 import DASHI.Core.ObserverRefinementLatticeExact as Observer
 import DASHI.Core.SectionedProjectionProvenanceBridgeExact as Sectioned
 
-record FactorsThrough
-    {State Surface Outcome : Set}
-    (observe : State → Surface)
-    (consumer : State → Outcome) : Set₁ where
-  constructor factorsThrough
-  field
-    factor : Surface → Outcome
-    factorizes : (state : State) → consumer state ≡ factor (observe state)
-
-open FactorsThrough public
+FactorsThrough :
+  ∀ {State Surface Outcome : Set} →
+  (State → Surface) → (State → Outcome) → Set₁
+FactorsThrough observe consumer =
+  Factorized.FactorizedRefinement consumer observe
 
 FibreConstantFor :
   ∀ {State Surface Outcome : Set} →
@@ -71,12 +71,8 @@ factorsThroughImpliesFibreConstant :
     {observe : State → Surface}
     {consumer : State → Outcome} →
   FactorsThrough observe consumer → FibreConstantFor observe consumer
-factorsThroughImpliesFibreConstant factorization left right sameSurface =
-  trans
-    (factorizes factorization left)
-    (trans
-      (cong (factor factorization) sameSurface)
-      (sym (factorizes factorization right)))
+factorsThroughImpliesFibreConstant =
+  Factorized.factorizedRefinementImpliesRefines
 
 fibreConstantIsConsumerSufficient :
   ∀ {State Surface Outcome : Set}
@@ -99,7 +95,7 @@ sectionedFibreConstantFactors :
   FibreConstantFor (Sectioned.project projection) consumer →
   FactorsThrough (Sectioned.project projection) consumer
 sectionedFibreConstantFactors projection consumer constant =
-  factorsThrough
+  Factorized.factorizedRefinement
     (Sectioned.representativeObservable projection consumer)
     (λ state →
       Sectioned.fibreConstantObservableReconstructsFromSection
@@ -124,6 +120,22 @@ sectionedDescentIffFibreConstant projection consumer =
   logicalIff
     factorsThroughImpliesFibreConstant
     (sectionedFibreConstantFactors projection consumer)
+
+sectionedDescentIffConsumerSufficient :
+  ∀ {State Surface Outcome : Set}
+    (projection : Sectioned.SectionedProjection State Surface)
+    (consumer : State → Outcome) →
+  LogicalIff
+    (FactorsThrough (Sectioned.project projection) consumer)
+    (ConsumerSufficient (Sectioned.project projection) consumer)
+sectionedDescentIffConsumerSufficient projection consumer =
+  logicalIff
+    (λ factorization →
+      fibreConstantIsConsumerSufficient
+        (factorsThroughImpliesFibreConstant factorization))
+    (λ sufficient →
+      sectionedFibreConstantFactors projection consumer
+        (consumerSufficientIsFibreConstant sufficient))
 
 consumerObserverIsSufficient :
   ∀ {State Outcome : Set}
@@ -195,6 +207,7 @@ nonDescentWitnessBlocksFactorization witness factorization =
 record ConsumerDescentMinimalObserverBoundary : Set where
   constructor consumerDescentMinimalObserverBoundary
   field
+    explicitDescentReusesFactorizedRefinement : Bool
     descentImpliesFibreConstancy : Bool
     sectionedFibreConstancyConstructsDescent : Bool
     consumerObserverIsLeastSufficient : Bool
@@ -205,4 +218,5 @@ record ConsumerDescentMinimalObserverBoundary : Set where
 canonicalConsumerDescentMinimalObserverBoundary :
   ConsumerDescentMinimalObserverBoundary
 canonicalConsumerDescentMinimalObserverBoundary =
-  consumerDescentMinimalObserverBoundary true true true true false false
+  consumerDescentMinimalObserverBoundary
+    true true true true true false false
