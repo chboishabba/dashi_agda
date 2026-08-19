@@ -1,24 +1,36 @@
 module DASHI.Physics.YangMills.BalabanExponentialToDyadicShellCoarseningExact where
 
 ------------------------------------------------------------------------
--- ROUND70: SOURCE EXPONENTIAL LOCALISATION -> DYADIC UNIFIED-NORM SHELL
+-- ROUND71: SOURCE EXPONENTIAL LOCALISATION -> DYADIC UNIFIED-NORM SHELL
 --
 -- PRIMARY SOURCES / CALIBRATION
 --
--- Tadeusz Balaban,
--- "Propagators for Lattice Gauge Theories in a Background Field",
--- Communications in Mathematical Physics 99 (1985), 389--434.
--- DOI: 10.1007/BF01240355.
--- Theorem 3.14 / equation (3.154): marked domain-difference decay.
+-- IMPORTANT CMP 99 DISAMBIGUATION
 --
--- Tadeusz Balaban,
+-- Tadeusz Bałaban,
+-- "Propagators for Lattice Gauge Theories in a Background Field",
+-- Communications in Mathematical Physics 99(3) (1985), 389--434.
+-- DOI: 10.1007/BF01240355.
+-- Theorem 3.14 / equation (3.154): background-propagator domain-sequence
+-- comparison with the additional marked distance-to-discrepancy decay used
+-- below.  THIS is the CMP 99 paper used by the marked random-walk argument.
+--
+-- Do not confuse it with the distinct paper in the same volume:
+-- Tadeusz Bałaban,
+-- "Spaces of Regular Gauge Field Configurations on a Lattice and Gauge
+-- Fixing Conditions", Communications in Mathematical Physics 99(1) (1985),
+-- 75--102. DOI: 10.1007/BF01466594.
+-- That paper supplies the regular gauge chart/gauge-fixing input, not the
+-- Theorem 3.14/(3.154) marked propagator comparison.
+--
+-- Tadeusz Bałaban,
 -- "Renormalization Group Approach to Lattice Gauge Field Theories. II.
--- Cluster Expansions", Communications in Mathematical Physics 116 (1988),
+-- Cluster Expansions", Communications in Mathematical Physics 116(1) (1988),
 -- 1--22. DOI: 10.1007/BF01239022.
 -- Equations (1.26), (1.29), Lemma 3 / (2.38): residual localization/tree
 -- summability with a still-positive exponential rate.
 --
--- Tadeusz Balaban,
+-- Tadeusz Bałaban,
 -- "Renormalization Group Approach to Lattice Gauge Field Theories. I.
 -- Generation of Effective Actions in a Small Field Approximation and a
 -- Coupling Constant Renormalization in Four Dimensions",
@@ -26,6 +38,17 @@ module DASHI.Physics.YangMills.BalabanExponentialToDyadicShellCoarseningExact wh
 -- DOI: 10.1007/BF01215223.
 -- Section 5 derives exponential decay of the differentiated polarization
 -- kernel after the localization sum.
+--
+-- Earlier propagator lineage used by the same carrier:
+-- Tadeusz Bałaban,
+-- "Propagators and Renormalization Transformations for Lattice Gauge
+-- Theories. I", Communications in Mathematical Physics 95 (1984), 17--40.
+-- DOI: 10.1007/BF01215753.
+--
+-- Tadeusz Bałaban,
+-- "Propagators and Renormalization Transformations for Lattice Gauge
+-- Theories. II", Communications in Mathematical Physics 96 (1984), 223--250.
+-- DOI: 10.1007/BF01240221.
 --
 -- DASHI CONTRIBUTION
 --
@@ -53,6 +76,7 @@ import Data.Rational.Properties as ℚP
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanTraceKoteckyPreissGeometricExact as KP
+import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
 
 rationalPower : ℚ → Nat → ℚ
 rationalPower base zero = 1ℚ
@@ -125,18 +149,18 @@ sourceExponentialShellIsDyadic :
 sourceExponentialShellIsDyadic dataSet depth =
   ℚP.≤-trans
     (sourceExponentialShellBound dataSet depth)
-    (ℚP.*-monoˡ-≤
+    (Norm.scaleNonnegative
       (amplitude dataSet)
-      (sourcePowerBelowDyadicPower (criterion dataSet) depth)
-      (amplitudeNonnegative dataSet))
+      (amplitudeNonnegative dataSet)
+      (sourcePowerBelowDyadicPower (criterion dataSet) depth))
 
 exponentialToDyadicShellCompilerLevel : ProofLevel
 exponentialToDyadicShellCompilerLevel = machineChecked
 
--- Source/standard-analysis seam only: for the positive CMP99/109/116
--- localization exponent delta, choose a coarse shell width R and certify the
--- numerical inequality exp(-delta R) <= 1/2 in the source normalization.  Once
--- that one scalar inequality is available, every shell-depth comparison above
--- is exact downstream algebra.
+-- Source/standard-analysis seam only: for the positive background-propagator
+-- CMP 99(3) / CMP 109 / CMP 116 localization exponent delta, choose a coarse
+-- shell width R and certify the numerical inequality exp(-delta R) <= 1/2 in
+-- the source normalization.  Once that one scalar inequality is available,
+-- every shell-depth comparison above is exact downstream algebra.
 physicalSourceExponentialRateToHalfLevel : ProofLevel
 physicalSourceExponentialRateToHalfLevel = conditional
