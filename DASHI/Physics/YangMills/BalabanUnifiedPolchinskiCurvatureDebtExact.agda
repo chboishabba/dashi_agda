@@ -23,22 +23,15 @@ module DASHI.Physics.YangMills.BalabanUnifiedPolchinskiCurvatureDebtExact where
 -- every scale but a UNIFORM TOTAL NEGATIVE CURVATURE DEBT.
 --
 -- If eta_n >= 0 majorises the negative heat-smoothed Hessian contribution at
--- scale n and
---
---      eta_n <= C (17/32)^n,
---
--- then every finite cumulative debt obeys
+-- scale n and eta_n <= C (17/32)^n, then every finite cumulative debt obeys
 --
 --      sum_{n < m} eta_n <= (32/15) C.
---
--- This is the exact discrete RG analogue of bounding the negative part of the
--- Polchinski curvature integral.  It removes the need for scale-by-scale
--- convexity and is volume-uniform whenever C is.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Data.Nat.Base using (_+_)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _*_; _≤_)
+open import Agda.Builtin.Nat using (Nat; zero)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _*_; _≤_)
+import Data.Rational.Tactic.RingSolver as ℚRing
+open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanUnifiedSeventeenThirtySecondTailModulusExact as Tail
@@ -74,15 +67,22 @@ finiteCurvatureDebtUniformBound :
   finiteCurvatureDebt dataSet count
   ≤ Tail.tailFactor * amplitude dataSet
 finiteCurvatureDebtUniformBound dataSet count =
-  Tail.finiteIncrementTailModulus (asIncrementMajorant dataSet) zero count
+  let
+    base = Tail.finiteIncrementTailModulus
+      (asIncrementMajorant dataSet) zero count
+  in
+  subst
+    (λ right → finiteCurvatureDebt dataSet count ≤ right)
+    (ℚRing.solve-∀ (Tail.tailFactor) (amplitude dataSet))
+    base
 
 record PolchinskiDiscreteCurvatureBudget : Set₁ where
   field
     negativeDebt : GeometricNegativeCurvatureDebt
 
     -- Conversion between one discrete RG shell and the continuous Polchinski
-    -- time parameter.  Keeping this explicit prevents a dyadic shell sum from
-    -- being silently identified with dt integration.
+    -- time parameter.  This remains a named physical comparison, not a silent
+    -- identification of a dyadic shell sum with dt integration.
     shellToContinuousCurvatureDebt : Set
 
     continuousNegativeCurvatureDebt : ℚ
@@ -95,9 +95,5 @@ open PolchinskiDiscreteCurvatureBudget public
 seventeenThirtySecondCurvatureDebtLevel : ProofLevel
 seventeenThirtySecondCurvatureDebtLevel = machineChecked
 
--- Physical L7 target: prove the heat-smoothed negative Hessian row contribution
--- is dominated by one geometrically decaying same-object sequence, and prove
--- the shell-to-Polchinski-time comparison.  The finite debt bound itself is now
--- exact downstream algebra.
 physicalUnifiedPolchinskiCurvatureDebtLevel : ProofLevel
 physicalUnifiedPolchinskiCurvatureDebtLevel = conditional
