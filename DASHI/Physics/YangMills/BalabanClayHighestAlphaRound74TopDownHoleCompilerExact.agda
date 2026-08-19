@@ -40,6 +40,7 @@ import DASHI.Physics.YangMills.BalabanClayT5PhysicalContinuumOSGapBridgeExact
 import DASHI.Physics.YangMills.YangMillsContinuumLocalOperatorOPEStressTensorExact
 import DASHI.Physics.YangMills.BalabanUnifiedContinuumEndpointMarginTransportExact
 import DASHI.Physics.YangMills.YangMillsFreeGaussianMaxwellNoGapExact as Free
+import DASHI.Physics.YangMills.YangMillsNonGaussianInteractingWitnessExact
 
 ------------------------------------------------------------------------
 -- ACTUAL THEOREM-PRODUCING COMPOSITIONS DISCOVERED BY THE BACKWARDS PASS
@@ -64,13 +65,17 @@ round74MasslessSectorNoGap :
   Free.SpectralContradiction gapData
 round74MasslessSectorNoGap = Free.masslessSectorContradictsPositiveGap
 
+round74GaussianGapContradiction :
+  ∀ {O} (dataSet : Free.GaussianMaxwellGapObstruction O) →
+  Free.Gaussian dataSet → Free.Contradiction dataSet
+round74GaussianGapContradiction = Free.gaussianContradictsPositiveGap
+
 ------------------------------------------------------------------------
 -- FIRST PHYSICAL LEAVES FOR EACH ROUND73 JOB
 --
 -- #1 CompactSimpleSelectedBackgroundFiveBlockEstimate
 --    Construct, for arbitrary QuantitativeCompactLiePackage G, the literal
 --    selected-background/KKT/Green source map producing
---
 --      R_i <= r_i Q (i=1..4),  g Q <= G_11,
 --      r1+r2+r3+r4-g <= 55/18874368.
 --
@@ -87,7 +92,8 @@ round74MasslessSectorNoGap = Free.masslessSectorContradictsPositiveGap
 -- #4 PhysicalUnifiedOneStepYMEstimate
 --    After #3, add only genuinely stronger coordinates: composite insertions,
 --    separation-weighted connected correlations, a common increment modulus,
---    and source E^(2)/Pi = unified derivative/Hessian identification.
+--    source E^(2)/Pi = unified derivative/Hessian identification, and (if we
+--    want #4 -> #5) the measure-defining characteristic-functional coordinate.
 --
 -- #5 SameFamilyContinuumOSCompletion
 --    Backwards reduction through the characteristic coordinate:
@@ -95,39 +101,34 @@ round74MasslessSectorNoGap = Free.masslessSectorContradictsPositiveGap
 --      (b) nuclear continuity closure,
 --      (c) Schwinger = moments of the SAME limiting characteristic,
 --      (d) same-limit OS reconstruction.
---    Proving these inside strengthened #4 makes #5 downstream and gives a real
---    future cutset reduction.
+--    Proving these inside strengthened #4 makes #5 downstream.
 --
 -- #6 SameDensityCompactLieHeatLangevinClustering
 --    Standard compact-simple geometry supplies Ric >= rho_G g, rho_G>0, on
---    every finite product G^E.  The new curvature leaf is therefore
---
+--    every finite product G^E.  The new curvature leaf is only
 --      Hess V_t >= -eta(t) g,
 --      integral_0^t eta <= M uniformly,
---
---    equivalently for u_t=H_t(exp(-V0)), the division-free pointwise target
---
+--    equivalently, for u_t=H_t(exp(-V0)),
 --      (X u_t)^2 - u_t Hess u_t(X,X)
 --        + eta(t) u_t^2 |X|^2 >= 0.
---
 --    This gives I <= exp(2M)/rho_G and an LSI.  The remaining propagation leaf
---    is the literal covariant derivative equation whose symmetric influence is
---    the SAME quasi-local Hessian.  The bi-invariant ad/connection quadratic
---    term is already exactly zero.  Weighted propagation + temporal relaxation
---    gives clustering; OS spectral meaning is downstream.
+--    is the literal covariant derivative equation with the SAME quasi-local
+--    Hessian.  The bi-invariant ad/connection quadratic term is already zero.
 --
 -- #7 SameFamilyCompositeOPEStressWardClosure
 --    (a) nonperturbative composite mixing/OPE remainder with dyadic modulus;
 --    (b) protected Ward/stress theorem with H = integral T_00 for the SAME H.
 --
--- #8 FiniteScaleStrictFourthCumulantMargin
---    Authoritative current route: strict finite fourth-cumulant buffer greater
---    than the common continuum tail.
---    Cheaper route under test: positive physical gap excludes free Gaussian YM
---    once two exact bridges are supplied:
---      free/Gaussian YM -> same-theory massless Maxwell one-particle sector,
---      not free/Gaussian -> literal Clay nontriviality.
---    The massless-sector zero-gap contradiction itself is already constructed.
+-- #8 nontriviality
+--    Route A: strict finite fourth-cumulant buffer greater than the common tail.
+--    Route B (now logically complete downstream): prove the ONE same-theory
+--    physical bridge
+--      Gaussian/free continuum YM -> massless Maxwell one-particle sector
+--    on the reconstructed Hamiltonian.  Positive gap then constructs
+--    NotGaussian, and `YangMillsNonGaussianInteractingWitnessExact` turns that
+--    constructively into the repository's existing `InteractingContinuumWitness`.
+--    Thus Route B can genuinely delete the fourth-cumulant job if its one
+--    physical Gaussian->Maxwell bridge is proved.
 ------------------------------------------------------------------------
 
 round74TopDownHoleCompilerLevel : ProofLevel
