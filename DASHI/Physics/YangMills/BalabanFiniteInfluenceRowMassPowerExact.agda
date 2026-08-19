@@ -50,20 +50,14 @@ open NonnegativeFiniteInfluenceMajorant public
 Matrix : Set → Set
 Matrix Site = Site → Site → ℚ
 
-identityMatrix :
-  ∀ {Site} → NonnegativeFiniteInfluenceMajorant Site → Matrix Site
-identityMatrix dataSet x y =
-  -- The only fact needed downstream is the row-sum-one base case.  Keeping the
-  -- Kronecker delta abstract would add equality-decision noise, so powers start
-  -- at n=1 below and the n=0 row mass is handled separately as 1.
-  majorant dataSet x y
-
 matrixCompose :
   ∀ {Site} → NonnegativeFiniteInfluenceMajorant Site →
   Matrix Site → Matrix Site → Matrix Site
 matrixCompose dataSet left right x y =
   Sums.sumRational (sites dataSet) (λ middle → left x middle * right middle y)
 
+-- Index zero denotes the first positive matrix power M^1.  This avoids adding
+-- a decidable-equality Kronecker delta only for the n=0 semigroup term.
 majorantPowerPositive :
   ∀ {Site} → NonnegativeFiniteInfluenceMajorant Site → Nat → Matrix Site
 majorantPowerPositive dataSet zero = majorant dataSet
@@ -78,14 +72,13 @@ sumTimesRow :
   ∀ {Site} (dataSet : NonnegativeFiniteInfluenceMajorant Site)
     (weights : Site → ℚ) →
   (∀ middle → 0ℚ ≤ weights middle) →
-  ∀ x →
   Sums.sumRational (sites dataSet)
     (λ middle →
       weights middle
       * Sums.sumRational (sites dataSet) (majorant dataSet middle))
   ≤ Sums.sumRational (sites dataSet)
       (λ middle → weights middle * rowMass dataSet)
-sumTimesRow dataSet weights weightsNonnegative x = go (sites dataSet)
+sumTimesRow dataSet weights weightsNonnegative = go (sites dataSet)
   where
   go : (values : List _) →
     Sums.sumRational values
@@ -103,16 +96,13 @@ sumTimesRow dataSet weights weightsNonnegative x = go (sites dataSet)
         (rowMassBound dataSet middle))
       (go values)
 
--- The remaining finite-matrix interchange identity is algebraic: summing the
--- product row over y equals summing each left coefficient times the row sum of
--- the right factor.  It is stated explicitly so later consumers cannot confuse
--- a row-mass theorem with an entrywise bound.
 record RowSumProductInterchange
     {Site : Set} (dataSet : NonnegativeFiniteInfluenceMajorant Site) : Set₁ where
   field
     powerEntriesNonnegative : ∀ n x y →
       0ℚ ≤ majorantPowerPositive dataSet n x y
 
+    -- Finite Fubini/distributivity for matrix multiplication.
     rowSumProductExact : ∀ n x →
       Sums.sumRational (sites dataSet)
         (majorantPowerPositive dataSet (suc n) x)
@@ -121,13 +111,15 @@ record RowSumProductInterchange
             majorantPowerPositive dataSet n x middle
             * Sums.sumRational (sites dataSet) (majorant dataSet middle))
 
+    -- Pull the constant row-mass factor to the LEFT so the existing
+    -- nonnegative-scaling lemma applies directly.
     factorConstantRowMassExact : ∀ n x →
       Sums.sumRational (sites dataSet)
         (λ middle →
           majorantPowerPositive dataSet n x middle * rowMass dataSet)
-      ≡ Sums.sumRational (sites dataSet)
-          (majorantPowerPositive dataSet n x)
-          * rowMass dataSet
+      ≡ rowMass dataSet
+          * Sums.sumRational (sites dataSet)
+              (majorantPowerPositive dataSet n x)
 
 open RowSumProductInterchange public
 
@@ -146,37 +138,62 @@ positivePowerRowMassBound {dataSet = dataSet} interchange zero x =
 positivePowerRowMassBound {dataSet = dataSet} interchange (suc n) x =
   let
     expanded = rowSumProductExact interchange n x
+
     weighted = sumTimesRow dataSet
       (majorantPowerPositive dataSet n x)
       (powerEntriesNonnegative interchange n x)
-      x
+
     factored = factorConstantRowMassExact interchange n x
+
+    weightedToScaledRow :
+      Sums.sumRational (sites dataSet)
+        (λ middle →
+          majorantPowerPositive dataSet n x middle
+          * Sums.sumRational (sites dataSet) (majorant dataSet middle))
+      ≤ rowMass dataSet
+          * Sums.sumRational (sites dataSet)
+              (majorantPowerPositive dataSet n x)
+    weightedToScaledRow =
+      ℚP.≤-trans weighted
+        (subst
+          (λ right →
+            Sums.sumRational (sites dataSet)
+              (λ middle →
+                majorantPowerPositive dataSet n x middle * rowMass dataSet)
+            ≤ right)
+          factored
+          ℚP.≤-refl)
+
     induction = positivePowerRowMassBound interchange n x
+
     scaled = Norm.scaleNonnegative
       (rowMass dataSet)
       (rowMassNonnegative dataSet)
       induction
+
+    scaledToNextPower :
+      rowMass dataSet
+        * Sums.sumRational (sites dataSet)
+            (majorantPowerPositive dataSet n x)
+      ≤ rationalPower (rowMass dataSet) (suc (suc n))
+    scaledToNextPower =
+      subst
+        (λ upper →
+          rowMass dataSet
+            * Sums.sumRational (sites dataSet)
+                (majorantPowerPositive dataSet n x)
+          ≤ upper)
+        (ℚP.*-comm
+          (rowMass dataSet)
+          (rationalPower (rowMass dataSet) (suc n)))
+        scaled
+
+    weightedToNext = ℚP.≤-trans weightedToScaledRow scaledToNextPower
   in
   subst
     (λ lower → lower ≤ rationalPower (rowMass dataSet) (suc (suc n)))
     (sym expanded)
-    (subst
-      (λ middle →
-        Sums.sumRational (sites dataSet)
-          (λ index →
-            majorantPowerPositive dataSet n x index * rowMass dataSet)
-        ≤ middle)
-      (sym factored)
-      (subst
-        (λ upper →
-          Sums.sumRational (sites dataSet)
-            (λ index →
-              majorantPowerPositive dataSet n x index * rowMass dataSet)
-          ≤ upper)
-        (ℚP.*-comm
-          (rationalPower (rowMass dataSet) (suc n))
-          (rowMass dataSet))
-        scaled))
+    weightedToNext
 
 finiteInfluenceRowMassPowerLevel : ProofLevel
 finiteInfluenceRowMassPowerLevel = machineChecked
