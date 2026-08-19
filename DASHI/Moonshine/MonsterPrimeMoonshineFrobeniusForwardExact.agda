@@ -32,32 +32,31 @@ module DASHI.Moonshine.MonsterPrimeMoonshineFrobeniusForwardExact where
 --     -> Deligne--Rapoport/Fricke geometry gives pointwise-fixed coarse
 --        supersingular Frobenius.
 --
--- The theorem is stated for p >= 5 because that is the prime-level geometric
--- authority surface currently used for the actual supersingular carrier.  The
--- low primes 2,3 have separate genus authority and are not silently folded into
--- this geometric statement.
+-- The theorem is stated on the canonical p=5+n source lane.  This avoids
+-- treating proof terms of 5<=p as interchangeable data; the underlying prime
+-- is still arbitrary above three.  Low primes 2,3 retain their separate source
+-- lane and are not silently folded into this geometric statement.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
-open import Data.Nat using (_≤_)
 import Data.Nat.Properties as NatP
 open import Data.Nat.Primality using (Prime)
 
 import DASHI.Moonshine.MonsterOrderDivisibilityExact as Monster
 import DASHI.Moonshine.MonsterPrimeMoonshineFrickeFactoredAuthorityExact as Moonshine
-import DASHI.Moonshine.PublishedMonsterFrickeAllSupportedPrimesExact as All
+import DASHI.Moonshine.PrimeLevelDeligneRapoportFrickeSelectorExact as Selector
 import DASHI.Moonshine.PublishedPrimeLevelFrickeSelectorPinnedExact as Published
 
 ------------------------------------------------------------------------
--- On a syntactic 5+n prime, the all-prime Fricke genus carrier is literally
--- the prime-pinned Deligne--Rapoport genus carrier.
+-- On a syntactic 5+n prime, the all-prime Fricke genus carrier reduces to the
+-- prime-pinned Deligne--Rapoport genus carrier used below.
 ------------------------------------------------------------------------
 
 moonshineGenusZeroAtFivePlus :
   (n : Nat) →
   (prime : Prime (5 + n)) →
   Monster.PrimeDividesMonsterOrder (5 + n) →
-  Published.genericFrickeGenus
+  Selector.genericFrickeGenus
     (Published.publishedAuthorityAt
       (5 + n) prime (NatP.m≤m+n 5 n)) ≡ 0
 moonshineGenusZeroAtFivePlus n prime divides =
@@ -69,60 +68,25 @@ moonshineGenusZeroAtFivePlus n prime divides =
 ------------------------------------------------------------------------
 
 monsterPrimeImpliesCoarseFrobeniusFixedByMoonshine :
-  (p : Nat) → (prime : Prime p) → (ge5 : 5 ≤ p) →
-  Monster.PrimeDividesMonsterOrder p →
-  Published.PublishedFrobeniusFullyFixed p prime ge5
-monsterPrimeImpliesCoarseFrobeniusFixedByMoonshine 0 prime () divides
-monsterPrimeImpliesCoarseFrobeniusFixedByMoonshine 1 prime () divides
-monsterPrimeImpliesCoarseFrobeniusFixedByMoonshine 2 prime () divides
-monsterPrimeImpliesCoarseFrobeniusFixedByMoonshine 3 prime () divides
-monsterPrimeImpliesCoarseFrobeniusFixedByMoonshine 4 prime () divides
-monsterPrimeImpliesCoarseFrobeniusFixedByMoonshine
-  (suc (suc (suc (suc (suc n))))) prime ge5 divides =
+  (n : Nat) →
+  (prime : Prime (5 + n)) →
+  Monster.PrimeDividesMonsterOrder (5 + n) →
+  Published.PublishedFrobeniusFullyFixed
+    (5 + n) prime (NatP.m≤m+n 5 n)
+monsterPrimeImpliesCoarseFrobeniusFixedByMoonshine n prime divides =
   let
-    canonicalGe5 : 5 ≤ 5 + n
-    canonicalGe5 = NatP.m≤m+n 5 n
-
-    genusZero :
-      Published.genericFrickeGenus
-        (Published.publishedAuthorityAt (5 + n) prime canonicalGe5) ≡ 0
+    ge5 = NatP.m≤m+n 5 n
     genusZero = moonshineGenusZeroAtFivePlus n prime divides
-
     fixedIffGenus =
       Published.publishedFrobeniusFullyFixedIffFrickeGenusZero
-        (5 + n) prime canonicalGe5
+        (5 + n) prime ge5
   in
-  -- The target proof may carry a different proof term ge5.  The proposition
-  -- depends only on p and the pinned authority; proof irrelevance is avoided by
-  -- constructing the canonical branch directly, which is definitionally the
-  -- same p=5+n source lane used by PublishedFrobeniusFullyFixed.
   proj₂ fixedIffGenus genusZero
 
 ------------------------------------------------------------------------
--- Residual form: Moonshine kills the nonfixed Frobenius-pair coordinate.
-------------------------------------------------------------------------
-
-monsterPrimeImpliesZeroFrobeniusPairResidualByMoonshine :
-  (p : Nat) → (prime : Prime p) → (ge5 : 5 ≤ p) →
-  Monster.PrimeDividesMonsterOrder p →
-  DASHI.Moonshine.PrimeLevelDeligneRapoportFrickeCombinatoricsExact.pairedCount
-    (DASHI.Moonshine.PrimeLevelDeligneRapoportFrickeSelectorExact.supersingularFrobenius
-      (Published.publishedAuthorityAt p prime ge5)) ≡ 0
-monsterPrimeImpliesZeroFrobeniusPairResidualByMoonshine p prime ge5 divides =
-  let
-    fixed = monsterPrimeImpliesCoarseFrobeniusFixedByMoonshine
-      p prime ge5 divides
-    pairIffFixed =
-      DASHI.Moonshine.DuncanSwisherMonsterFrobeniusFixedExact.pairResidualZeroIffFullyFixed
-        p prime ge5
-  in
-  proj₂ pairIffFixed fixed
-
-------------------------------------------------------------------------
--- Boundary: Duncan--Swisher is not part of the forward genus-zero mechanism.
--- The residual helper currently reuses its already-derived generic equivalence
--- between pair-zero and fixedness; that equivalence itself is geometric, but a
--- future cleanup may move it to a neutral owner.
+-- Boundary: the direct forward theorem is genuinely asymmetric.  It uses
+-- Moonshine for Monster -> genus zero and Deligne--Rapoport geometry for genus
+-- zero -> Frobenius fixedness.  Duncan--Swisher belongs to the converse lane.
 ------------------------------------------------------------------------
 
 record MonsterPrimeMoonshineFrobeniusForwardBoundary : Set where
@@ -131,7 +95,7 @@ record MonsterPrimeMoonshineFrobeniusForwardBoundary : Set where
     exactGammaGEqualsPrimeFrickeConsumed : Bool
     genusZeroTransportedFromGlobalMoonshine : Bool
     DeligneRapoportGeometryConsumed : Bool
-    DuncanSwisherSupportUsedToDeriveGenusZero : Bool
+    DuncanSwisherSupportImportedHere : Bool
     oldDuncanOnoSupportEquivalenceImported : Bool
     MonsterPrimeLaneEnumerationImported : Bool
     directMonsterToFrobeniusFixednessDerived : Bool
@@ -143,7 +107,7 @@ canonicalMonsterPrimeMoonshineFrobeniusForwardBoundary = record
   ; exactGammaGEqualsPrimeFrickeConsumed = true
   ; genusZeroTransportedFromGlobalMoonshine = true
   ; DeligneRapoportGeometryConsumed = true
-  ; DuncanSwisherSupportUsedToDeriveGenusZero = false
+  ; DuncanSwisherSupportImportedHere = false
   ; oldDuncanOnoSupportEquivalenceImported = false
   ; MonsterPrimeLaneEnumerationImported = false
   ; directMonsterToFrobeniusFixednessDerived = true
