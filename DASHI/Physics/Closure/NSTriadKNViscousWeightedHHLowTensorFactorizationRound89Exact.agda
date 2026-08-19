@@ -52,11 +52,12 @@ module DASHI.Physics.Closure.NSTriadKNViscousWeightedHHLowTensorFactorizationRou
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
+import DASHI.Physics.Closure.NSTriadKNComplex3AlgebraLaws as Algebra
 import DASHI.Physics.Closure.NSTriadKNComplex3HermitianScalingLaws as Scaling
 import DASHI.Physics.Closure.NSTriadKNComplex3RelocationInstantiation as Relocation
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
@@ -89,7 +90,7 @@ rankOneTensorDivergenceValue :
     {I : C3.ModeInverseSquare F E} →
   Audit.FiniteComplex3GalerkinSystem F E I →
   Physical.PhysicalTriadIncidence → C3.Complex3 F
-rankOneTensorDivergenceValue {F = F} {E = E} system incidence =
+rankOneTensorDivergenceValue {E = E} system incidence =
   let
     uP = Audit.velocity system (Physical.p incidence)
     uQ = Audit.velocity system (Physical.q incidence)
@@ -122,8 +123,8 @@ complex3ScaleScalarCommute left right value =
     (complex3ScaleAssociative left right value)
     (trans
       (cong (λ scalar → C3.complex3Scale scalar value)
-        (DASHI.Physics.Closure.NSTriadKNComplex3AlgebraLaws.complexMultiplyCommutative left right))
-      (DASHI.Physics.Closure.NSTriadKNComplex3HermitianScalingLaws.complex3ScaleAssociative right left value))
+        (Algebra.complexMultiplyCommutative left right))
+      (sym (complex3ScaleAssociative right left value)))
 
 viscousWeightedOrderedValueIsTensorDivergence :
   ∀ {r} {F : C3.RealField r}
@@ -136,7 +137,7 @@ viscousWeightedOrderedValueIsTensorDivergence :
     (Audit.velocity system (Physical.p incidence)) →
   viscousWeightedOrderedValue system incidence
   ≡ rankOneTensorDivergenceValue system incidence
-viscousWeightedOrderedValueIsTensorDivergence {F = F} {E = E}
+viscousWeightedOrderedValueIsTensorDivergence {E = E}
     system incidence transverse =
   let
     p = Physical.p incidence
