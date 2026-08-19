@@ -32,7 +32,6 @@ module DASHI.Core.ContextIndexedObservationFibrationExact where
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
-open import Agda.Builtin.Sigma using (Σ; _,_)
 
 import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
 import DASHI.Core.ProjectionCategory as Cat
