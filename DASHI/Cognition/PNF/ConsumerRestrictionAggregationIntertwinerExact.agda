@@ -3,15 +3,16 @@ module DASHI.Cognition.PNF.ConsumerRestrictionAggregationIntertwinerExact where
 open import Agda.Builtin.Bool using (Bool)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
+open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
 
 ------------------------------------------------------------------------
 -- Consumer-indexed restriction before quotient/fold.
 --
 -- Runtime motivation: a parent hierarchy close already consumes bounded child
--- interface fibres.  The optimization question is therefore not whether to
+-- interface fibres. The optimization question is therefore not whether to
 -- replace a global-history scan by child fibres; that locality is already
--- present.  The sharper question is whether a selective parent/consumer
+-- present. The sharper question is whether a selective parent/consumer
 -- admission can be applied to the child rows before an expensive quotient/fold.
 --
 -- The theorem shape is an exact intertwiner:
@@ -19,9 +20,9 @@ open import Data.Empty using (⊥)
 --   restrictAggregate c p (aggregate xs)
 --     = aggregate (restrictFine c p xs)
 --
--- This is the same proof-engineering discipline used elsewhere in DASHI for
--- factorized refinement/naturality: "compatible" is not enough; the square must
--- commute exactly for the declared consumer and role.
+-- This follows the same proof-engineering discipline used elsewhere in DASHI
+-- for factorized refinement/naturality: "compatible" is not enough; the square
+-- must commute exactly for the declared consumer and role.
 ------------------------------------------------------------------------
 
 record FibreSaturatedRestriction
@@ -95,12 +96,6 @@ saturatedRestrictionRejectsFactorizationDefect restriction defect =
 
 ------------------------------------------------------------------------
 -- Fibre-local fold / quotient boundary.
---
--- This record intentionally does not assert that every aggregation is safe to
--- push through.  The exact commuting equation is a separate obligation.  This
--- blocks the common invalid optimization where admission depends on a hidden
--- member coordinate, fibre cardinality, provenance diversity, or the aggregate
--- result itself.
 ------------------------------------------------------------------------
 
 record FibreLocalFold
@@ -140,8 +135,8 @@ consumerRestrictionMayMoveBeforeAggregation law consumer parent xs =
 -- Role/query indexing.
 --
 -- A key may be irrelevant for one publication/router while remaining relevant
--- to another.  Pushdown therefore carries the consumer, parent and role/query
--- index; it never promotes local irrelevance into global semantic erasure.
+-- to another. Pushdown therefore carries consumer, parent and role/query index;
+-- it never promotes local irrelevance into global semantic erasure.
 ------------------------------------------------------------------------
 
 record ConsumerRoleIndexedRestriction
@@ -155,11 +150,6 @@ open ConsumerRoleIndexedRestriction public
 
 ------------------------------------------------------------------------
 -- Physical-economy evidence is downstream of semantic legality.
---
--- The formal theorem licenses the transformation.  Empirical receipts decide
--- whether it is worthwhile.  The counts are kept separate so a reduction in
--- rows entering GROUP BY is not falsely promoted into a reduction in rows read
--- from PostgreSQL.
 ------------------------------------------------------------------------
 
 record PushdownEconomyReceipt : Set where
@@ -170,11 +160,9 @@ record PushdownEconomyReceipt : Set where
     rowsOutput : Nat
     rowsAttemptedWrite : Nat
     rowsCommittedWrite : Nat
-  where
-    open import Agda.Builtin.Nat using (Nat)
 
 ------------------------------------------------------------------------
--- Concentration / heavy-tail optimization pressure.
+-- Heavy-tail/concentration evidence remains separate from semantic legality.
 ------------------------------------------------------------------------
 
 record ConcentrationWitness : Set where
@@ -183,5 +171,3 @@ record ConcentrationWitness : Set where
     hottestWork : Nat
     topKWork : Nat
     k : Nat
-  where
-    open import Agda.Builtin.Nat using (Nat)
