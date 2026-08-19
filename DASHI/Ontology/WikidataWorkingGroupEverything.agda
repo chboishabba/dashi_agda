@@ -34,6 +34,7 @@ import DASHI.Algebra.ClaimIndexedEvidencePolarityExact
 import DASHI.Algebra.BalancedTernaryOppositionEvidenceBridgeExact
 import DASHI.Core.RequiredAxisSupportSquareExact
 import DASHI.Core.ActiveObligationEvidenceFibreExact
+import DASHI.Core.DependentRecoverableProjectionExact
 import DASHI.Core.IndexedInterpretationMorphismExact
 import DASHI.Core.ObserverRefinementLatticeExact
 import DASHI.Core.ObserverIncomparabilityTypedJoinExact
@@ -47,6 +48,7 @@ import DASHI.Foundations.Base369SignedMembershipExact
 import DASHI.Foundations.TernaryNativeMinimalityExact
 import DASHI.Foundations.BalancedTernaryAntipodalOrbitExact
 import DASHI.Foundations.BalancedTernaryAntipodalResidualCodecExact
+import DASHI.Foundations.BalancedTernaryDependentRecoverableBridgeExact
 import DASHI.Foundations.BalancedTernaryNineZeroFibreCountExact
 import DASHI.Foundations.Base369InteractionAntipodalFibreExact
 import DASHI.Foundations.Base369InteractionObserverJoinExact
