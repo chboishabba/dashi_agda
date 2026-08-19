@@ -15,25 +15,13 @@ module DASHI.Physics.Closure.NSTriadKNPhysicalSelectedTriadNetworkSplitRound95Ex
 -- ROUND95 / SAME-OBJECT SELF-TRIAD VS EXTERNAL-NETWORK SPLIT
 --
 -- For one literal physical triad tau=(p,q->k), define its three self forcing
--- vectors from the repository's exact symmetrised ordered-pair interaction on
--- the k, p-energy, and q-energy legs.  The full forcing at each mode is the
--- actual exhaustive projected Galerkin nonlinearity.  Define the external
--- remainder by subtraction:
---
---   N_ext(j) = N_full(j) - N_self(j).
---
--- Then N_full=N_self+N_ext exactly on each leg.  Since the Waleffe amplitude
--- tangent is additive in each forcing slot, its full nonlinear forcing splits
--- exactly as
---
---   F_A^full = F_A^self + F_A^ext.
---
--- No isolated-triad approximation, list-counting assumption, or statistical
--- closure is used.  A later Bony/multiplicity theorem may identify the residual
--- with a sum over all nonselected incidences for quantitative estimation; that
--- is not required for this same-object algebraic split.
+-- vectors from the exact symmetrised ordered-pair interaction on the k,
+-- p-energy, and q-energy legs. The full forcing is the actual exhaustive
+-- projected Galerkin nonlinearity. Define N_ext=N_full-N_self. Then the mode
+-- forcings and the Waleffe amplitude forcing split exactly into self+external.
 ------------------------------------------------------------------------
 
+open import Agda.Primitive using (Level)
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
@@ -47,9 +35,10 @@ import DASHI.Physics.Closure.NSTriadKNComplexCommutativeRingExact as Ring
 import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNExactSignedGalerkinCoefficient as Signed
 import DASHI.Physics.Closure.NSTriadKNWaleffeAmplitudeDampedNetworkTangentRound94Exact as Tangent
+import DASHI.Physics.Closure.NSTriadKNComplex3BeltramiCrossSuppressionRound93Exact as Cross
 
 cong3 :
-  ∀ {a b c d} {A : Set a} {B : Set b} {C : Set c} {D : Set d}
+  ∀ {a b c d : Level} {A : Set a} {B : Set b} {C : Set c} {D : Set d}
     (f : A → B → C → D) {x x' y y' z z'} →
   x ≡ x' → y ≡ y' → z ≡ z' → f x y z ≡ f x' y' z'
 cong3 f refl refl refl = refl
@@ -202,34 +191,23 @@ networkForcingAdditiveInForcingSlots {F = F}
   trans
     (cong₂ C3.complexAdd
       (cong₂ C3.complexAdd
-        (Additive.hermitianPairingAddLeft selfK extK
-          (DASHI.Physics.Closure.NSTriadKNComplex3BeltramiCrossSuppressionRound93Exact.complex3Cross uP uQ))
+        (Additive.hermitianPairingAddLeft selfK extK (Cross.complex3Cross uP uQ))
         (trans
-          (cong (C3.hermitianPairing3 uK)
-            (Tangent.crossAddLeft selfP extP uQ))
+          (cong (C3.hermitianPairing3 uK) (Tangent.crossAddLeft selfP extP uQ))
           (Additive.hermitianPairingAddRight uK
-            (DASHI.Physics.Closure.NSTriadKNComplex3BeltramiCrossSuppressionRound93Exact.complex3Cross selfP uQ)
-            (DASHI.Physics.Closure.NSTriadKNComplex3BeltramiCrossSuppressionRound93Exact.complex3Cross extP uQ))))
+            (Cross.complex3Cross selfP uQ) (Cross.complex3Cross extP uQ))))
       (trans
-        (cong (C3.hermitianPairing3 uK)
-          (Tangent.crossAddRight uP selfQ extQ))
+        (cong (C3.hermitianPairing3 uK) (Tangent.crossAddRight uP selfQ extQ))
         (Additive.hermitianPairingAddRight uK
-          (DASHI.Physics.Closure.NSTriadKNComplex3BeltramiCrossSuppressionRound93Exact.complex3Cross uP selfQ)
-          (DASHI.Physics.Closure.NSTriadKNComplex3BeltramiCrossSuppressionRound93Exact.complex3Cross uP extQ))))
+          (Cross.complex3Cross uP selfQ) (Cross.complex3Cross uP extQ))))
     regroup
   where
-  a = C3.hermitianPairing3 selfK
-        (DASHI.Physics.Closure.NSTriadKNComplex3BeltramiCrossSuppressionRound93Exact.complex3Cross uP uQ)
-  b = C3.hermitianPairing3 extK
-        (DASHI.Physics.Closure.NSTriadKNComplex3BeltramiCrossSuppressionRound93Exact.complex3Cross uP uQ)
-  c = C3.hermitianPairing3 uK
-        (DASHI.Physics.Closure.NSTriadKNComplex3BeltramiCrossSuppressionRound93Exact.complex3Cross selfP uQ)
-  d = C3.hermitianPairing3 uK
-        (DASHI.Physics.Closure.NSTriadKNComplex3BeltramiCrossSuppressionRound93Exact.complex3Cross extP uQ)
-  e = C3.hermitianPairing3 uK
-        (DASHI.Physics.Closure.NSTriadKNComplex3BeltramiCrossSuppressionRound93Exact.complex3Cross uP selfQ)
-  f = C3.hermitianPairing3 uK
-        (DASHI.Physics.Closure.NSTriadKNComplex3BeltramiCrossSuppressionRound93Exact.complex3Cross uP extQ)
+  a = C3.hermitianPairing3 selfK (Cross.complex3Cross uP uQ)
+  b = C3.hermitianPairing3 extK (Cross.complex3Cross uP uQ)
+  c = C3.hermitianPairing3 uK (Cross.complex3Cross selfP uQ)
+  d = C3.hermitianPairing3 uK (Cross.complex3Cross extP uQ)
+  e = C3.hermitianPairing3 uK (Cross.complex3Cross uP selfQ)
+  f = C3.hermitianPairing3 uK (Cross.complex3Cross uP extQ)
 
   regroup :
     C3.complexAdd (C3.complexAdd (C3.complexAdd a b) (C3.complexAdd c d))
