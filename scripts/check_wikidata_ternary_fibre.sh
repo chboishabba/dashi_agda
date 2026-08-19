@@ -9,6 +9,7 @@ sources=(
   DASHI/Core/ConsumerKernelQuotientPresentationExact.agda
   DASHI/Core/ConsumerQuotientBaseChangeExact.agda
   DASHI/Core/ConsumerQuotientBaseChangeRegression.agda
+  DASHI/Core/ConsumerIndexedResidualRefinementExact.agda
   DASHI/Core/ContextIndexedObservationFibrationExact.agda
   DASHI/Core/ContextIndexedObservationFibrationRegression.agda
   DASHI/Core/ResidualSymmetryCollisionFibreExact.agda
@@ -32,6 +33,8 @@ sources=(
   DASHI/Cognition/PNF/BinaryBalancedTernaryAggregateLossExact.agda
   DASHI/Interop/PointedSignAntipodal369SeparationExact.agda
   DASHI/Ontology/DependentDefinitionFibreExact.agda
+  DASHI/Ontology/WikidataCheckerResultAttributionExact.agda
+  DASHI/Ontology/WikidataConsumerResidualRefinementExact.agda
   DASHI/Ontology/WikidataTernaryFibreRegression.agda
   DASHI/Ontology/WikidataWorkingGroupRegression.agda
   DASHI/Ontology/WikidataWorkingGroupEverything.agda
@@ -74,6 +77,10 @@ require_pattern DASHI/Core/ConsumerQuotientBaseChangeExact.agda 'sectionedCompat
 require_pattern DASHI/Core/ConsumerQuotientBaseChangeExact.agda 'composeConsumerBaseChange'
 require_pattern DASHI/Core/ConsumerQuotientBaseChangeRegression.agda 'publicConsumerBaseChangeCommutes'
 require_pattern DASHI/Core/ConsumerQuotientBaseChangeRegression.agda 'hiddenRestrictionCannotBaseChange'
+require_pattern DASHI/Core/ConsumerIndexedResidualRefinementExact.agda 'coarseCollisionBlocksSufficiency'
+require_pattern DASHI/Core/ConsumerIndexedResidualRefinementExact.agda 'everySufficientObserverSeparatesRelevantCollision'
+require_pattern DASHI/Core/ConsumerIndexedResidualRefinementExact.agda 'residualMustSeparateRelevantCollision'
+require_pattern DASHI/Core/ConsumerIndexedResidualRefinementExact.agda 'consumerRelevantResidualGivesStrictRefinement'
 require_pattern DASHI/Core/ContextIndexedObservationFibrationExact.agda 'splitLiftFactorizationEquation'
 require_pattern DASHI/Core/ContextIndexedObservationFibrationExact.agda 'splitLiftFactorizationArrow'
 require_pattern DASHI/Core/ContextIndexedObservationFibrationExact.agda 'observationCommutesWithSplitLift'
@@ -108,6 +115,10 @@ require_pattern DASHI/Foundations/TernaryNineOptimalBinaryDilationExact.agda 'co
 require_pattern DASHI/Interop/PointedSignAntipodal369SeparationExact.agda 'pointedFiveModeSignSizeIsEleven'
 require_pattern DASHI/Ontology/DependentDefinitionFibreExact.agda 'noToyotaFiestaSection'
 require_pattern DASHI/Ontology/DependentDefinitionFibreExact.agda 'flatCountSplitsAsValidPlusInvalid'
+require_pattern DASHI/Ontology/WikidataConsumerResidualRefinementExact.agda 'checkerBitCannotServeExactDiagnosis'
+require_pattern DASHI/Ontology/WikidataConsumerResidualRefinementExact.agda 'checkerPlusAttributionStrictlyRefinesChecker'
+require_pattern DASHI/Ontology/WikidataConsumerResidualRefinementExact.agda 'anyExactDiagnosisObserverMustSplitSourceAlignment'
+require_pattern DASHI/Ontology/WikidataConsumerResidualRefinementExact.agda 'anyExactDiagnosisObserverMustSplitTargetMissing'
 require_pattern DASHI/Ontology/WikidataTernaryFibreRegression.agda 'positiveOnlyCannotBeSufficientForSignedIdentity'
 require_pattern DASHI/Ontology/WikidataTernaryFibreRegression.agda 'antipodalDependentCodeSufficientForFineIdentity'
 require_pattern DASHI/Ontology/WikidataTernaryFibreRegression.agda 'threeBlockQuotientPlusResidualRoundTrips'
@@ -117,9 +128,11 @@ python3 scripts/benchmark_ternary_nine_optimal_dilation.py >/dev/null
 
 scripts/run_agda29_parallel_check.sh \
   DASHI/Core/ConsumerQuotientBaseChangeRegression.agda \
+  DASHI/Core/ConsumerIndexedResidualRefinementExact.agda \
   DASHI/Core/ContextIndexedObservationFibrationRegression.agda \
   DASHI/Core/ResidualSymmetryCollisionFibreRegression.agda \
   DASHI/EverythingTopDownObservationCalculus.agda \
+  DASHI/Ontology/WikidataConsumerResidualRefinementExact.agda \
   DASHI/Ontology/WikidataTernaryFibreRegression.agda \
   DASHI/Ontology/WikidataWorkingGroupRegression.agda \
   DASHI/Ontology/WikidataWorkingGroupEverything.agda \
