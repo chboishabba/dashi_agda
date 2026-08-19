@@ -45,23 +45,18 @@ module DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact wher
 -- reconstructed Hilbert/Hamiltonian/vacuum data and explicit mass scale.
 -- The official Clay vocabulary is then DEFINITIONALLY induced by that object.
 -- A `LiteralClayEvidence` inhabits those exact requirement types, and
--- `literalTopDownClaySolution` constructs `ClayYangMillsSolution` by direct
--- pattern matching on the official precondition/postcondition/invariant enums.
+-- `literalTopDownClaySolution` constructs `ClayYangMillsSolution` directly.
 --
--- Consequently future work should compile BACKWARDS from any uninhabited field
--- of `LiteralClayEvidence`; numerical "frontier counts" are at most generated
--- diagnostics and are not proof architecture.
+-- Consequently future work compiles BACKWARDS from an uninhabited requirement
+-- of this literal object.  Numerical frontier counts are generated diagnostics,
+-- never proof architecture.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
+open import Data.Product using (_×_)
 open import Data.Rational.Base using (ℚ)
 
 import DASHI.Physics.YangMills.YangMillsClayProblemContractExact as Clay
-
-------------------------------------------------------------------------
--- Literal carriers.  These are mathematical carriers, not theorem-package
--- placeholders.
-------------------------------------------------------------------------
 
 record LiteralYangMillsCarriers : Set₁ where
   field
@@ -80,14 +75,7 @@ record LiteralYangMillsCarriers : Set₁ where
     HilbertSpace : Set
     Hamiltonian : Set
     VacuumState : Set
-
 open LiteralYangMillsCarriers public
-
-------------------------------------------------------------------------
--- Semantic predicates attached to the SAME carriers.  Domain-specific source
--- modules instantiate these predicates with their literal notions; they are not
--- allowed to replace the carriers by unrelated witnesses downstream.
-------------------------------------------------------------------------
 
 record LiteralYangMillsSemantics (C : LiteralYangMillsCarriers) : Set₁ where
   field
@@ -118,6 +106,7 @@ record LiteralYangMillsSemantics (C : LiteralYangMillsCarriers) : Set₁ where
       CompactSimpleGroup C →
       (CurvaturePolynomial C → LocalOperator C) → Set
     IsGaugeInvariantLocalOperator : LocalOperator C → Set
+    IsLocalOperator : LocalOperator C → Position C → Set
 
     IsPhysicalOPECoefficient :
       CompactSimpleGroup C →
@@ -142,52 +131,32 @@ record LiteralYangMillsSemantics (C : LiteralYangMillsCarriers) : Set₁ where
       HilbertSpace C → Hamiltonian C → VacuumState C → Set
     IsStrictlyPositiveFiniteMassGap : Hamiltonian C → ℚ → Set
 
-    GaugeSymmetryPreservedAlongConstruction :
-      CompactSimpleGroup C → Set
-    LocalityPreservedAlongConstruction :
-      CompactSimpleGroup C → Set
-    EuclideanCovariancePreservedAlongConstruction :
-      CompactSimpleGroup C → Set
-    ReflectionPositivityPreservedAlongConstruction :
-      CompactSimpleGroup C → Set
-    PositivityNormalizationPreservedAlongConstruction :
-      CompactSimpleGroup C → Set
-    VolumeCutoffCompatibilityPreserved :
-      CompactSimpleGroup C → Set
-    PhysicalScaleLowerBoundUniform :
-      CompactSimpleGroup C → ℚ → Set
+    GaugeSymmetryPreservedAlongConstruction : CompactSimpleGroup C → Set
+    LocalityPreservedAlongConstruction : CompactSimpleGroup C → Set
+    EuclideanCovariancePreservedAlongConstruction : CompactSimpleGroup C → Set
+    ReflectionPositivityPreservedAlongConstruction : CompactSimpleGroup C → Set
+    PositivityNormalizationPreservedAlongConstruction : CompactSimpleGroup C → Set
+    VolumeCutoffCompatibilityPreserved : CompactSimpleGroup C → Set
+    PhysicalScaleLowerBoundUniform : CompactSimpleGroup C → ℚ → Set
     NoSpectralPollutionBelowGap :
       CompactSimpleGroup C → Hamiltonian C → ℚ → Set
     NontrivialityPreservedInLimit :
       CompactSimpleGroup C → ContinuumMeasure C → Set
-    GapAndClusteringAreDerivedNotAssumed :
-      CompactSimpleGroup C → Set
+    GapAndClusteringAreDerivedNotAssumed : CompactSimpleGroup C → Set
     CompactSimpleParameterizationPreserved : Set
-
 open LiteralYangMillsSemantics public
-
-------------------------------------------------------------------------
--- One literal all-group construction object.
-------------------------------------------------------------------------
 
 record LiteralYangMillsConstruction
     (C : LiteralYangMillsCarriers)
     (S : LiteralYangMillsSemantics C) : Set₁ where
   field
     spacetime : Spacetime C
-
-    finiteMeasure :
-      CompactSimpleGroup C → Cutoff C → FiniteMeasure C
-    continuumMeasure :
-      CompactSimpleGroup C → ContinuumMeasure C
-    schwinger :
-      CompactSimpleGroup C → SchwingerFamily C
-
-    localObservable :
-      CompactSimpleGroup C → Position C → Observable C
+    finiteMeasure : CompactSimpleGroup C → Cutoff C → FiniteMeasure C
+    continuumMeasure : CompactSimpleGroup C → ContinuumMeasure C
+    schwinger : CompactSimpleGroup C → SchwingerFamily C
+    localObservable : CompactSimpleGroup C → Position C → Observable C
     curvatureOperator :
       CompactSimpleGroup C → CurvaturePolynomial C → LocalOperator C
-
     opeCoefficient :
       CompactSimpleGroup C →
       LocalOperator C → LocalOperator C → LocalOperator C →
@@ -195,40 +164,35 @@ record LiteralYangMillsConstruction
     opeRemainder :
       CompactSimpleGroup C →
       LocalOperator C → LocalOperator C → Position C → Nat → ℚ
-
     stressTensor : CompactSimpleGroup C → StressTensor C
     hilbertSpace : CompactSimpleGroup C → HilbertSpace C
     hamiltonian : CompactSimpleGroup C → Hamiltonian C
     vacuum : CompactSimpleGroup C → VacuumState C
     massGap : CompactSimpleGroup C → ℚ
-
 open LiteralYangMillsConstruction public
-
-------------------------------------------------------------------------
--- The OFFICIAL Clay requirement types induced by this literal object.
-------------------------------------------------------------------------
 
 preconditionRequirement :
   ∀ {C S} →
   (Y : LiteralYangMillsConstruction C S) →
   Clay.ClayPrecondition → Set
-preconditionRequirement {C} {S} Y Clay.compactSimpleGaugeGroupIndex =
+preconditionRequirement {S = S} Y Clay.compactSimpleGaugeGroupIndex =
   ∀ G → IsCompactSimple S G
-preconditionRequirement {C} {S} Y Clay.fourDimensionalEuclideanSpacetime =
+preconditionRequirement {S = S} Y Clay.fourDimensionalEuclideanSpacetime =
   IsFourDimensionalEuclidean S (spacetime Y)
-preconditionRequirement {C} {S} Y Clay.gaugeInvariantLocalObservableFamily =
+preconditionRequirement {S = S} Y Clay.gaugeInvariantLocalObservableFamily =
   ∀ G position →
   IsGaugeInvariantObservable S (localObservable Y G position)
-preconditionRequirement {C} {S} Y Clay.finiteVolumeCutoffMeasureFamily =
+  × IsLocalObservable S (localObservable Y G position) position
+preconditionRequirement {S = S} Y Clay.finiteVolumeCutoffMeasureFamily =
   ∀ G cutoff → IsFiniteVolumeCutoffMeasure S G cutoff (finiteMeasure Y G cutoff)
-preconditionRequirement {C} {S} Y Clay.reflectionPositiveRegularization =
+preconditionRequirement {S = S} Y Clay.reflectionPositiveRegularization =
   ∀ G cutoff →
   IsReflectionPositiveRegularization S G cutoff (finiteMeasure Y G cutoff)
-preconditionRequirement {C} {S} Y Clay.ultravioletYangMillsNormalization =
+preconditionRequirement {S = S} Y Clay.ultravioletYangMillsNormalization =
   ∀ G → HasUltravioletYangMillsNormalization S G (finiteMeasure Y G)
-preconditionRequirement {C} {S} Y Clay.asymptoticallyFreeScaleTrajectory =
+preconditionRequirement {S = S} Y Clay.asymptoticallyFreeScaleTrajectory =
   ∀ G → HasAsymptoticallyFreeScaleTrajectory S G (finiteMeasure Y G)
-preconditionRequirement {C} {S} Y Clay.acceptedAxiomaticQFTTarget =
+preconditionRequirement {S = S} Y Clay.acceptedAxiomaticQFTTarget =
   ∀ G → SatisfiesAcceptedWightmanOrOSAxioms S G (schwinger Y G)
 
 postconditionRequirement :
@@ -236,13 +200,28 @@ postconditionRequirement :
   (Y : LiteralYangMillsConstruction C S) →
   Clay.ClayPostcondition → Set
 postconditionRequirement {S = S} Y Clay.nontrivialQuantumYangMillsTheoryOnR4 =
-  ∀ G → IsNontrivialQuantumYangMills S G (continuumMeasure Y G) (schwinger Y G)
+  ∀ G →
+  IsContinuumLimitOf S G (finiteMeasure Y G) (continuumMeasure Y G)
+  × SchwingerBelongsToMeasure S (continuumMeasure Y G) (schwinger Y G)
+  × IsNontrivialQuantumYangMills S G (continuumMeasure Y G) (schwinger Y G)
 postconditionRequirement {S = S} Y Clay.gaugeInvariantCurvatureOperatorCorrespondence =
-  ∀ G → CurvatureOperatorCorrespondence S G (curvatureOperator Y G)
+  ∀ G →
+  CurvatureOperatorCorrespondence S G (curvatureOperator Y G)
+  × (∀ polynomial →
+      IsGaugeInvariantLocalOperator S (curvatureOperator Y G polynomial))
+  × (∀ polynomial position →
+      IsLocalOperator S (curvatureOperator Y G polynomial) position)
 postconditionRequirement {S = S} Y Clay.shortDistanceAsymptoticFreedomAgreement =
   ∀ G → HasShortDistanceAsymptoticFreedom S G (schwinger Y G)
-postconditionRequirement {S = S} Y Clay.stressTensorAndOperatorProductExpansion =
-  ∀ G → HasStressTensorAndOPE S G (schwinger Y G) (stressTensor Y G)
+postconditionRequirement {C = C} {S = S} Y Clay.stressTensorAndOperatorProductExpansion =
+  ∀ G →
+  HasStressTensorAndOPE S G (schwinger Y G) (stressTensor Y G)
+  × (∀ left right output position →
+      IsPhysicalOPECoefficient S G left right output position
+        (opeCoefficient Y G left right output position))
+  × (∀ left right position depth →
+      IsPhysicalOPERemainder S G left right position depth
+        (opeRemainder Y G left right position depth))
 postconditionRequirement {S = S} Y Clay.acceptedWightmanOrOSStrengthAxioms =
   ∀ G → SatisfiesAcceptedWightmanOrOSAxioms S G (schwinger Y G)
 postconditionRequirement {S = S} Y Clay.reconstructedPositiveSelfAdjointHamiltonian =
@@ -287,12 +266,6 @@ invariantRequirement {S = S} Y Clay.targetGapAndClusteringNotAssumedAsInputs =
 invariantRequirement {S = S} Y Clay.compactSimpleGroupParameterizationPreserved =
   CompactSimpleParameterizationPreserved S
 
-------------------------------------------------------------------------
--- Literal evidence: these are now the ONLY top-level holes.  They are indexed
--- by the official Clay requirements and mention the same concrete construction
--- object definitionally.
-------------------------------------------------------------------------
-
 record LiteralClayEvidence
     {C : LiteralYangMillsCarriers}
     {S : LiteralYangMillsSemantics C}
@@ -304,7 +277,6 @@ record LiteralClayEvidence
       ∀ requirement → postconditionRequirement Y requirement
     invariants :
       ∀ requirement → invariantRequirement Y requirement
-
 open LiteralClayEvidence public
 
 literalClayVocabulary :
@@ -315,8 +287,6 @@ literalClayVocabulary Y = record
   ; Clay.ClayProblemVocabulary.InvariantWitness = invariantRequirement Y
   }
 
--- No abstract endpoint identification remains: the official Clay solution is
--- constructed directly from evidence about the literal object.
 literalTopDownClaySolution :
   ∀ {C S} (Y : LiteralYangMillsConstruction C S) →
   LiteralClayEvidence Y →
