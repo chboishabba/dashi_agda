@@ -13,27 +13,6 @@ module DASHI.Physics.YangMills.BalabanSZZHessianPerturbationExact where
 -- Dominique Bakry, Ivan Gentil and Michel Ledoux,
 -- "Analysis and Geometry of Markov Diffusion Operators",
 -- Springer, 2014. DOI: 10.1007/978-3-319-00227-9.
---
--- DASHI CONTRIBUTION
---
--- SZZ prove positivity of Ric - Hess S_W for the Wilson action in a strong-
--- coupling window.  A Balaban effective density at a coarse scale is not
--- literally pure Wilson: it contains an irrelevant/polymer remainder R.
---
--- The correct handoff is perturbative at the QUADRATIC-FORM level.  For every
--- tangent vector v, if
---
---   K_W q(v) <= Ric(v,v) - Hess S_W(v,v)
---   Hess R(v,v) <= rho q(v),
---
--- then, using Hess(S_W+R)=Hess S_W+Hess R,
---
---   (K_W-rho) q(v)
---      <= Ric(v,v) - Hess(S_W+R)(v,v).
---
--- No spectral theorem, Poincare theorem, or stochastic dynamics is assumed in
--- this algebraic module.  The physical work is to obtain the two quadratic-form
--- bounds on the SAME effective density from the source-native RG norm.
 ------------------------------------------------------------------------
 
 open import Data.Rational.Base as ℚ using (ℚ; _+_; _-_; _*_; _≤_)
@@ -48,7 +27,6 @@ record WilsonPlusRemainderHessianData (Tangent : Set) : Set₁ where
     quadraticMass : Tangent → ℚ
     ricciForm : Tangent → ℚ
     wilsonHessian remainderHessian effectiveHessian : Tangent → ℚ
-
     wilsonMargin remainderCost : ℚ
 
     effectiveHessianExact : ∀ v →
@@ -60,7 +38,6 @@ record WilsonPlusRemainderHessianData (Tangent : Set) : Set₁ where
 
     remainderHessianUpper : ∀ v →
       remainderHessian v ≤ remainderCost * quadraticMass v
-
 open WilsonPlusRemainderHessianData public
 
 effectiveBakryEmeryMargin :
@@ -74,7 +51,8 @@ effectiveBakryEmeryLower :
     ∀ v →
   effectiveBakryEmeryMargin dataSet * quadraticMass dataSet v
   ≤ ricciForm dataSet v - effectiveHessian dataSet v
-effectiveBakryEmeryLower dataSet v =
+effectiveBakryEmeryLower dataSet v
+  rewrite effectiveHessianExact dataSet v =
   let
     wilson = wilsonBakryEmeryLower dataSet v
     remainder = remainderHessianUpper dataSet v
@@ -89,37 +67,32 @@ effectiveBakryEmeryLower dataSet v =
       (remainderCost dataSet)
       (quadraticMass dataSet v)
 
-    upperBeforeEffective :
+    upperNormal :
       (ricciForm dataSet v - wilsonHessian dataSet v)
         + (- remainderHessian dataSet v)
       ≡ ricciForm dataSet v
         - (wilsonHessian dataSet v + remainderHessian dataSet v)
-    upperBeforeEffective = ℚRing.solve-∀
+    upperNormal = ℚRing.solve-∀
       (ricciForm dataSet v)
       (wilsonHessian dataSet v)
       (remainderHessian dataSet v)
   in
   subst
-    (λ lower → lower ≤ ricciForm dataSet v - effectiveHessian dataSet v)
+    (λ lower →
+      lower
+      ≤ ricciForm dataSet v
+        - (wilsonHessian dataSet v + remainderHessian dataSet v))
     lowerNormal
     (subst
       (λ upper →
         wilsonMargin dataSet * quadraticMass dataSet v
           + (- (remainderCost dataSet * quadraticMass dataSet v))
         ≤ upper)
-      upperBeforeEffective
-      (subst
-        (λ upper →
-          wilsonMargin dataSet * quadraticMass dataSet v
-            + (- (remainderCost dataSet * quadraticMass dataSet v))
-          ≤ ricciForm dataSet v - upper)
-        (effectiveHessianExact dataSet v)
-        signed))
+      upperNormal
+      signed)
 
 hessianPerturbationBakryEmeryLevel : ProofLevel
 hessianPerturbationBakryEmeryLevel = machineChecked
 
--- Physical producer: instantiate the remainder Hessian upper bound from the
--- SAME unified polymer/Schwinger norm used for the continuum Cauchy theorem.
 physicalUnifiedNormControlsEffectiveHessianLevel : ProofLevel
 physicalUnifiedNormControlsEffectiveHessianLevel = conditional
