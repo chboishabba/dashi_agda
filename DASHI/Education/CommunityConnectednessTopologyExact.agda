@@ -148,6 +148,43 @@ travelBurdenCannotDetermineDwellAffordance =
     travelBurdenCannotDetermineRelationalAffordanceWitness
 
 ------------------------------------------------------------------------
+-- Genuine relational topology: effective edges compose into a typed path.
+-- The relay node supplies a route, not direct source-target identity or
+-- authority. This is the exact shape needed for a peer connector/champion-like
+-- role without converting that relay into an authoritative source.
+------------------------------------------------------------------------
+
+data CommunityNode : Set where
+  familyNode peerNode serviceNode : CommunityNode
+
+record EffectiveEdge (from to : CommunityNode) : Set where
+  constructor effectiveEdge
+  field
+    connection : CommunityConnectionState
+    connectionEffective : effectiveConnection connection ≡ true
+    edgeAddsAuthority : currentAuthority connection ≡ false
+
+open EffectiveEdge public
+
+familyToPeer : EffectiveEdge familyNode peerNode
+familyToPeer = effectiveEdge effectivePeerConnection refl refl
+
+peerToService : EffectiveEdge peerNode serviceNode
+peerToService = effectiveEdge effectivePeerConnection refl refl
+
+record TwoHopEffectivePath
+    (source relay target : CommunityNode) : Set where
+  constructor twoHopEffectivePath
+  field
+    firstEdge : EffectiveEdge source relay
+    secondEdge : EffectiveEdge relay target
+
+open TwoHopEffectivePath public
+
+familyPeerServicePath : TwoHopEffectivePath familyNode peerNode serviceNode
+familyPeerServicePath = twoHopEffectivePath familyToPeer peerToService
+
+------------------------------------------------------------------------
 -- Peer catalyst: useful relational routing without authority promotion.
 ------------------------------------------------------------------------
 
@@ -171,11 +208,12 @@ record PeerCatalystBoundary : Set where
     peerInfluenceAutomaticallyConfersEpistemicAuthority : Bool
     peerInfluenceAutomaticallyConfersDecisionAuthority : Bool
     peerCatalystMayFacilitateWithoutAuthority : Bool
+    twoHopRouteCreatesDirectAuthority : Bool
 
 open PeerCatalystBoundary public
 
 canonicalPeerCatalystBoundary : PeerCatalystBoundary
-canonicalPeerCatalystBoundary = peerCatalystBoundary false false true
+canonicalPeerCatalystBoundary = peerCatalystBoundary false false true false
 
 record CommunityConnectednessBoundary : Set where
   constructor communityConnectednessBoundary
@@ -185,9 +223,11 @@ record CommunityConnectednessBoundary : Set where
     highTravelBurdenAlwaysDestroysRelationalAffordance : Bool
     highTravelBurdenIsThereforeGood : Bool
     connectednessIsConsumerAndContextSensitive : Bool
+    effectiveEdgesCanComposeThroughRelay : Bool
+    relayPathIdentifiesEndpoints : Bool
 
 open CommunityConnectednessBoundary public
 
 canonicalCommunityConnectednessBoundary : CommunityConnectednessBoundary
 canonicalCommunityConnectednessBoundary =
-  communityConnectednessBoundary false false false false true
+  communityConnectednessBoundary false false false false true true false
