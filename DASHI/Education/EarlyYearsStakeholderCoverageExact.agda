@@ -112,14 +112,13 @@ childJoinedResolvesChildExperience childAxis tt = refl , refl
 childJoinedResolvesChildExperience communityAxis ()
 
 ------------------------------------------------------------------------
--- Observer-axis reading.  When a claim requires both professional and family
--- coordinates, carrying both constructs their joint factorisation.  Strength
--- on one axis cannot compensate for failure to retain the other.
+-- Observer-axis reading.
+--
+-- `RequiredObserverAxisJoinAdequacyExact` remains the generic theorem owner:
+-- retaining two required axes constructs the joint factorisation, while a
+-- non-factorability witness for either required axis blocks a claim that both
+-- were retained.  This module instantiates the evidence-stage side only.
 ------------------------------------------------------------------------
-
-jointRequiredAxisLaw = Join.candidateRetainingBothRetainsJoint
-missingRequiredLeftAxisBlocksJointClaim = Join.leftAxisDefectBlocksRetainingBoth
-missingRequiredRightAxisBlocksJointClaim = Join.rightAxisDefectBlocksRetainingBoth
 
 record StakeholderCoverageBoundary : Set where
   constructor stakeholderCoverageBoundary
