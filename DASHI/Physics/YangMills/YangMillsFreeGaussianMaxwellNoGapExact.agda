@@ -28,19 +28,9 @@ module DASHI.Physics.YangMills.YangMillsFreeGaussianMaxwellNoGapExact where
 --   sector, then the already-required positive physical mass gap rules out that
 --   Gaussian/free possibility.
 --
--- The spectral contradiction below is exact.  What remains physical is the
--- SAME-THEORY bridge
---
---   Gaussian/free YM + correct YM normalization
---       -> massless transverse Maxwell one-particle sector,
---
--- and the semantic identification
---
---   not free/Gaussian -> Clay's `IsNontrivialQuantumYangMills`.
---
--- Until those two bridges are proved, the fourth-cumulant route remains the
--- authoritative nontriviality producer; this module does not silently delete
--- theorem #8.
+-- Until the SAME-THEORY free-YM -> Maxwell bridge and the semantic
+-- not-free -> Clay-nontrivial bridge are proved, the fourth-cumulant route
+-- remains authoritative.
 ------------------------------------------------------------------------
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -59,10 +49,8 @@ record MasslessOneParticleApproximation (O : GapOrder) : Set₁ where
     energy : State → Energy O
     NonVacuum : State → Set
 
-    -- Arbitrarily small positive one-particle energies.
     stateBelowEveryPositiveThreshold : ∀ threshold →
-      StrictLess O (zero O) threshold →
-      State
+      StrictLess O (zero O) threshold → State
 
     selectedNonVacuum : ∀ threshold positive →
       NonVacuum (stateBelowEveryPositiveThreshold threshold positive)
@@ -82,6 +70,8 @@ record PositiveSpectralGap
     {O : GapOrder}
     (massless : MasslessOneParticleApproximation O) : Set₁ where
   field
+    SpectralContradiction : Set
+
     gap : Energy O
     gapPositive : StrictLess O (zero O) gap
 
@@ -96,8 +86,6 @@ record PositiveSpectralGap
       StrictLess O energy threshold →
       NotBelow energy threshold →
       SpectralContradiction
-
-    SpectralContradiction : Set
 
 open PositiveSpectralGap public
 
