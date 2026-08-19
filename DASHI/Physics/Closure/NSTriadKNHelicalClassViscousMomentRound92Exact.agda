@@ -101,7 +101,7 @@ pmpDefectDecomposition : (t : TriadTransfer) →
   viscousMoment t
   ≡ coeffPMP t * transferP t
       + (q t * r t) * energyDefect t
-      + (- (q t + r t)) * hPMP t
+      + (r t - q t) * hPMP t
 pmpDefectDecomposition t =
   solve
     (p t ∷ q t ∷ r t ∷ transferP t ∷ transferQ t ∷ transferR t ∷ [])
@@ -110,7 +110,7 @@ pmmDefectDecomposition : (t : TriadTransfer) →
   viscousMoment t
   ≡ coeffPMM t * transferP t
       + (- (q t * r t)) * energyDefect t
-      + (r t - q t) * hPMM t
+      + (- (q t + r t)) * hPMM t
 pmmDefectDecomposition t =
   solve
     (p t ∷ q t ∷ r t ∷ transferP t ∷ transferQ t ∷ transferR t ∷ [])
