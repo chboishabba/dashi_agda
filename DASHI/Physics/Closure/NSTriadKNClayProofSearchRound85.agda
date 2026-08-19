@@ -34,20 +34,25 @@ module DASHI.Physics.Closure.NSTriadKNClayProofSearchRound85 where
 -- IMPORTANT:
 --   * holes here are not postulates and are not imported as theorem authority;
 --   * theorem-bearing Round85 modules remain hole-free;
---   * this module should stay out of production aggregation roots;
+--   * this module stays out of production aggregation roots;
 --   * every solved producer deletes a hole here until the final term is closed.
 --
--- The first expansion is already the repository's genuine end-to-end theorem:
+-- Backward spine:
 --
---   InRepoClayPathInputs
---      -> FeffermanPeriodicClayStatementB.
+--   Fefferman periodic B
+--   <- InRepoClayPathInputs
+--   <- UniformGlobalPhysicalSolutionInputs
+--   <- GlobalPhysicalSolutionPrimitiveInputs for each datum
+--   <- maximal time dichotomy + (finite maximal time -> bottom)
+--   <- Round85 critical barrier / occupation contradiction.
 --
--- We then expand the only hard field, `legacyUniformPhysicalConstruction`,
--- into `UniformGlobalPhysicalSolutionInputs`, and then into the actual
--- `GlobalPhysicalSolutionPrimitiveInputs` record for each initial datum.
+-- The key correction compared with a passive cutset inventory is that the
+-- final theorem term is written now.  The compiler holes live inside the
+-- actual records consumed by that theorem.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Level; lsuc)
+open import Data.Empty using (⊥)
 
 import DASHI.Physics.Closure.NSTriadKNPeriodicNavierStokesSubmissionTheoremExact as Legacy
 import DASHI.Physics.Closure.NSTriadKNFeffermanPeriodicClayStatementExact as Clay
@@ -56,10 +61,7 @@ import DASHI.Physics.Closure.NSTriadKNLuoClayEndToEndCompositionRound23Exact as 
 import DASHI.Physics.Closure.NSTriadKNLuoGlobalPhysicalSolutionReductionExact as Global
 
 ------------------------------------------------------------------------
--- Terminal infrastructure that is orthogonal to the current compact-transfer
--- analytic frontier.  This merely factors the already-existing end-to-end
--- record so the proof-search hole is concentrated in the global physical
--- construction rather than duplicated mean/Galilean/adapter bookkeeping.
+-- Terminal infrastructure orthogonal to the current compact-transfer frontier.
 ------------------------------------------------------------------------
 
 record TerminalClayInfrastructure
@@ -117,8 +119,194 @@ record TerminalClayInfrastructure
 open TerminalClayInfrastructure public
 
 ------------------------------------------------------------------------
--- Expand the hard end-to-end field instead of accepting it as one black box.
+-- Standard post-barrier/maximal-solution infrastructure.
+--
+-- The hard Round85 theorem is NOT hidden in this record.  In particular the
+-- contradiction of a finite maximal time is supplied separately below.
 ------------------------------------------------------------------------
+
+record StandardGlobalContinuationInfrastructure
+    (legacy : Legacy.PeriodicNavierStokesSubmissionCarrier)
+    (initial : Legacy.SmoothPeriodicDatum legacy) : Set₁ where
+  field
+    FiniteMaximalTime : Set
+    InfiniteMaximalTime : Set
+
+    maximalTimeDichotomy :
+      Legacy.MaximalTimeAlternative FiniteMaximalTime InfiniteMaximalTime
+
+    velocityFromInfiniteMaximalTime :
+      InfiniteMaximalTime → Legacy.GlobalVelocity legacy
+
+    velocitySmoothFromSobolevAndParabolicBootstrap :
+      (infinite : InfiniteMaximalTime) →
+      Legacy.GlobalSmoothVelocity legacy
+        (velocityFromInfiniteMaximalTime infinite)
+
+    pressureFromProjectedVelocity :
+      (infinite : InfiniteMaximalTime) → Legacy.GlobalPressure legacy
+
+    pressureSmoothFromVelocity :
+      (infinite : InfiniteMaximalTime) →
+      Legacy.GlobalSmoothPressure legacy
+        (pressureFromProjectedVelocity infinite)
+
+    velocityPressureSolveOriginalEquation :
+      (infinite : InfiniteMaximalTime) →
+      Legacy.SolvesPeriodicNavierStokes legacy
+        (velocityFromInfiniteMaximalTime infinite)
+        (pressureFromProjectedVelocity infinite)
+        initial
+
+    initialTraceAtZero :
+      (infinite : InfiniteMaximalTime) →
+      Legacy.AttainsInitialDatum legacy
+        (velocityFromInfiniteMaximalTime infinite)
+        initial
+
+    strongSolutionUniquenessAndPressureNormalization :
+      (infinite : InfiniteMaximalTime) →
+      Legacy.VelocityPressurePairUnique legacy
+        (velocityFromInfiniteMaximalTime infinite)
+        (pressureFromProjectedVelocity infinite)
+        initial
+
+    globalEnergyEquality :
+      (infinite : InfiniteMaximalTime) →
+      Legacy.GlobalEnergyEquality legacy
+        (velocityFromInfiniteMaximalTime infinite)
+        initial
+
+    divergenceFreePreserved :
+      (infinite : InfiniteMaximalTime) →
+      Legacy.DivergenceFreePreserved legacy
+        (velocityFromInfiniteMaximalTime infinite)
+
+    meanZeroPreserved :
+      (infinite : InfiniteMaximalTime) →
+      Legacy.MeanZeroPreserved legacy
+        (velocityFromInfiniteMaximalTime infinite)
+
+    finiteEnergyAtEveryTime :
+      (infinite : InfiniteMaximalTime) →
+      Legacy.FiniteEnergyAtEveryTime legacy
+        (velocityFromInfiniteMaximalTime infinite)
+
+    HsAboveFiveHalvesEmbedsIntoC1 : Set
+    hsAboveFiveHalvesEmbedsIntoC1 : HsAboveFiveHalvesEmbedsIntoC1
+
+    ParabolicSmoothingAfterPositiveTime : Set
+    parabolicSmoothingAfterPositiveTime : ParabolicSmoothingAfterPositiveTime
+
+    HigherSobolevEnergyInduction : Set
+    higherSobolevEnergyInduction : HigherSobolevEnergyInduction
+
+    PressurePoissonEquation : Set
+    pressurePoissonEquation : PressurePoissonEquation
+
+    PressureMeanZeroNormalization : Set
+    pressureMeanZeroNormalization : PressureMeanZeroNormalization
+
+open StandardGlobalContinuationInfrastructure public
+
+maximalTimeInputsFromFiniteContradiction :
+  ∀ {legacy initial}
+    (standard : StandardGlobalContinuationInfrastructure legacy initial) →
+  (FiniteMaximalTime standard → ⊥) →
+  Legacy.MaximalTimeDichotomyInputs
+maximalTimeInputsFromFiniteContradiction standard contradiction = record
+  { Legacy.MaximalTimeDichotomyInputs.FiniteMaximalTime =
+      FiniteMaximalTime standard
+  ; Legacy.MaximalTimeDichotomyInputs.InfiniteMaximalTime =
+      InfiniteMaximalTime standard
+  ; Legacy.MaximalTimeDichotomyInputs.maximalTimeDichotomy =
+      maximalTimeDichotomy standard
+  ; Legacy.MaximalTimeDichotomyInputs.finiteMaximalTimeContradiction =
+      contradiction
+  }
+
+primitivePhysicalSolutionFromFiniteContradiction :
+  ∀ {legacy initial}
+    (standard : StandardGlobalContinuationInfrastructure legacy initial) →
+  (finiteContradiction : FiniteMaximalTime standard → ⊥) →
+  Global.GlobalPhysicalSolutionPrimitiveInputs legacy initial
+primitivePhysicalSolutionFromFiniteContradiction
+    {legacy} {initial} standard finiteContradiction =
+  let
+    maximalInputs =
+      maximalTimeInputsFromFiniteContradiction standard finiteContradiction
+    infinite = Legacy.maximalTimeMustBeInfinite maximalInputs
+  in
+  record
+    { Global.GlobalPhysicalSolutionPrimitiveInputs.InfiniteMaximalTime =
+        InfiniteMaximalTime standard
+    ; Global.GlobalPhysicalSolutionPrimitiveInputs.infiniteMaximalTime = infinite
+    ; Global.GlobalPhysicalSolutionPrimitiveInputs.velocityFromInfiniteMaximalTime =
+        velocityFromInfiniteMaximalTime standard
+    ; Global.GlobalPhysicalSolutionPrimitiveInputs.velocitySmoothFromSobolevAndParabolicBootstrap =
+        velocitySmoothFromSobolevAndParabolicBootstrap standard
+    ; Global.GlobalPhysicalSolutionPrimitiveInputs.pressureFromProjectedVelocity =
+        pressureFromProjectedVelocity standard
+    ; Global.GlobalPhysicalSolutionPrimitiveInputs.pressureSmoothFromVelocity =
+        pressureSmoothFromVelocity standard
+    ; Global.GlobalPhysicalSolutionPrimitiveInputs.velocityPressureSolveOriginalEquation =
+        velocityPressureSolveOriginalEquation standard
+    ; Global.GlobalPhysicalSolutionPrimitiveInputs.initialTraceAtZero =
+        initialTraceAtZero standard
+    ; Global.GlobalPhysicalSolutionPrimitiveInputs.strongSolutionUniquenessAndPressureNormalization =
+        strongSolutionUniquenessAndPressureNormalization standard
+    ; Global.GlobalPhysicalSolutionPrimitiveInputs.globalEnergyEquality =
+        globalEnergyEquality standard
+    ; Global.GlobalPhysicalSolutionPrimitiveInputs.divergenceFreePreserved =
+        divergenceFreePreserved standard
+    ; Global.GlobalPhysicalSolutionPrimitiveInputs.meanZeroPreserved =
+        meanZeroPreserved standard
+    ; Global.GlobalPhysicalSolutionPrimitiveInputs.finiteEnergyAtEveryTime =
+        finiteEnergyAtEveryTime standard
+    ; Global.GlobalPhysicalSolutionPrimitiveInputs.HsAboveFiveHalvesEmbedsIntoC1 =
+        HsAboveFiveHalvesEmbedsIntoC1 standard
+    ; Global.GlobalPhysicalSolutionPrimitiveInputs.hsAboveFiveHalvesEmbedsIntoC1 =
+        hsAboveFiveHalvesEmbedsIntoC1 standard
+    ; Global.GlobalPhysicalSolutionPrimitiveInputs.ParabolicSmoothingAfterPositiveTime =
+        ParabolicSmoothingAfterPositiveTime standard
+    ; Global.GlobalPhysicalSolutionPrimitiveInputs.parabolicSmoothingAfterPositiveTime =
+        parabolicSmoothingAfterPositiveTime standard
+    ; Global.GlobalPhysicalSolutionPrimitiveInputs.HigherSobolevEnergyInduction =
+        HigherSobolevEnergyInduction standard
+    ; Global.GlobalPhysicalSolutionPrimitiveInputs.higherSobolevEnergyInduction =
+        higherSobolevEnergyInduction standard
+    ; Global.GlobalPhysicalSolutionPrimitiveInputs.PressurePoissonEquation =
+        PressurePoissonEquation standard
+    ; Global.GlobalPhysicalSolutionPrimitiveInputs.pressurePoissonEquation =
+        pressurePoissonEquation standard
+    ; Global.GlobalPhysicalSolutionPrimitiveInputs.PressureMeanZeroNormalization =
+        PressureMeanZeroNormalization standard
+    ; Global.GlobalPhysicalSolutionPrimitiveInputs.pressureMeanZeroNormalization =
+        pressureMeanZeroNormalization standard
+    }
+
+------------------------------------------------------------------------
+-- Search holes.
+--
+-- `standardGlobalContinuationSearch` is deliberately conventional PDE
+-- infrastructure.  `finiteMaximalTimeContradictionSearch` is the hard theorem:
+-- this is where the Round85 compact-transfer/occupation/critical-ratio route
+-- must eventually terminate.
+------------------------------------------------------------------------
+
+standardGlobalContinuationSearch :
+  (legacy : Legacy.PeriodicNavierStokesSubmissionCarrier) →
+  (initial : Legacy.SmoothPeriodicDatum legacy) →
+  Legacy.DivergenceFreeDatum legacy initial →
+  Legacy.MeanZeroDatum legacy initial →
+  StandardGlobalContinuationInfrastructure legacy initial
+standardGlobalContinuationSearch legacy initial divergenceFree meanZero = {!!}
+
+finiteMaximalTimeContradictionSearch :
+  ∀ {legacy initial}
+    (standard : StandardGlobalContinuationInfrastructure legacy initial) →
+  FiniteMaximalTime standard → ⊥
+finiteMaximalTimeContradictionSearch standard finite = {!!}
 
 primitivePhysicalSolutionSearch :
   (legacy : Legacy.PeriodicNavierStokesSubmissionCarrier) →
@@ -127,31 +315,13 @@ primitivePhysicalSolutionSearch :
   Legacy.MeanZeroDatum legacy initial →
   Global.GlobalPhysicalSolutionPrimitiveInputs legacy initial
 primitivePhysicalSolutionSearch legacy initial divergenceFree meanZero =
-  record
-    { Global.GlobalPhysicalSolutionPrimitiveInputs.InfiniteMaximalTime = {!!}
-    ; Global.GlobalPhysicalSolutionPrimitiveInputs.infiniteMaximalTime = {!!}
-    ; Global.GlobalPhysicalSolutionPrimitiveInputs.velocityFromInfiniteMaximalTime = {!!}
-    ; Global.GlobalPhysicalSolutionPrimitiveInputs.velocitySmoothFromSobolevAndParabolicBootstrap = {!!}
-    ; Global.GlobalPhysicalSolutionPrimitiveInputs.pressureFromProjectedVelocity = {!!}
-    ; Global.GlobalPhysicalSolutionPrimitiveInputs.pressureSmoothFromVelocity = {!!}
-    ; Global.GlobalPhysicalSolutionPrimitiveInputs.velocityPressureSolveOriginalEquation = {!!}
-    ; Global.GlobalPhysicalSolutionPrimitiveInputs.initialTraceAtZero = {!!}
-    ; Global.GlobalPhysicalSolutionPrimitiveInputs.strongSolutionUniquenessAndPressureNormalization = {!!}
-    ; Global.GlobalPhysicalSolutionPrimitiveInputs.globalEnergyEquality = {!!}
-    ; Global.GlobalPhysicalSolutionPrimitiveInputs.divergenceFreePreserved = {!!}
-    ; Global.GlobalPhysicalSolutionPrimitiveInputs.meanZeroPreserved = {!!}
-    ; Global.GlobalPhysicalSolutionPrimitiveInputs.finiteEnergyAtEveryTime = {!!}
-    ; Global.GlobalPhysicalSolutionPrimitiveInputs.HsAboveFiveHalvesEmbedsIntoC1 = {!!}
-    ; Global.GlobalPhysicalSolutionPrimitiveInputs.hsAboveFiveHalvesEmbedsIntoC1 = {!!}
-    ; Global.GlobalPhysicalSolutionPrimitiveInputs.ParabolicSmoothingAfterPositiveTime = {!!}
-    ; Global.GlobalPhysicalSolutionPrimitiveInputs.parabolicSmoothingAfterPositiveTime = {!!}
-    ; Global.GlobalPhysicalSolutionPrimitiveInputs.HigherSobolevEnergyInduction = {!!}
-    ; Global.GlobalPhysicalSolutionPrimitiveInputs.higherSobolevEnergyInduction = {!!}
-    ; Global.GlobalPhysicalSolutionPrimitiveInputs.PressurePoissonEquation = {!!}
-    ; Global.GlobalPhysicalSolutionPrimitiveInputs.pressurePoissonEquation = {!!}
-    ; Global.GlobalPhysicalSolutionPrimitiveInputs.PressureMeanZeroNormalization = {!!}
-    ; Global.GlobalPhysicalSolutionPrimitiveInputs.pressureMeanZeroNormalization = {!!}
-    }
+  let
+    standard =
+      standardGlobalContinuationSearch legacy initial divergenceFree meanZero
+  in
+  primitivePhysicalSolutionFromFiniteContradiction
+    standard
+    (finiteMaximalTimeContradictionSearch standard)
 
 uniformPhysicalConstructionSearch :
   (legacy : Legacy.PeriodicNavierStokesSubmissionCarrier) →
@@ -162,9 +332,7 @@ uniformPhysicalConstructionSearch legacy = record
   }
 
 ------------------------------------------------------------------------
--- Actual end-to-end path term.  Once the primitive record above is closed,
--- this declaration is already the full physical path consumed by the existing
--- Fefferman theorem composition.
+-- Existing end-to-end path and literal final theorem.
 ------------------------------------------------------------------------
 
 inRepoClayPathSearch :
@@ -193,13 +361,6 @@ inRepoClayPathSearch {legacy} terminal = record
   ; EndToEnd.InRepoClayPathInputs.restoreGalileanSolution =
       restoreGalileanSolution terminal
   }
-
-------------------------------------------------------------------------
--- FINAL GOAL.
---
--- This is not a Bool/status receipt.  Its codomain is exactly Fefferman's
--- periodic alternative (B) theorem type already represented in the repo.
-------------------------------------------------------------------------
 
 periodic3DNavierStokesClayProofSearch :
   ∀ {legacy clay} →
