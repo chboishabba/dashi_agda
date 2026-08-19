@@ -58,8 +58,9 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
 import Data.Integer.Base as Int
-open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _<_; -_)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _-_; _<_; -_)
 open import Data.Rational.Tactic.RingSolver using (solve)
+open import Relation.Binary.PropositionalEquality using (sym; trans)
 open import Relation.Nullary.Decidable.Core using (toWitness)
 import Data.Rational.Properties as ℚP
 open ℚP using (_<?_)
@@ -101,8 +102,7 @@ frameInjection23 H =
   V.dot (V.v3 0ℚ 0ℚ 1ℚ) (A.apply H omega)
 
 b2RawSurplus : M.Matrix3 → ℚ
-b2RawSurplus H =
-  plusTwo - vorticityContraction H - 1ℚ
+b2RawSurplus H = plusTwo - vorticityContraction H - 1ℚ
 
 traceMinusZero : Energy.matrixTrace hMinus ≡ 0ℚ
 traceMinusZero = solve []
@@ -129,20 +129,24 @@ injectionPlusZero : frameInjection23 hPlus ≡ 0ℚ
 injectionPlusZero = solve []
 
 sameB2RecordTrace : Energy.matrixTrace hMinus ≡ Energy.matrixTrace hPlus
-sameB2RecordTrace = refl
+sameB2RecordTrace = trans traceMinusZero (sym tracePlusZero)
 
 sameB2RecordVorticityContraction :
   vorticityContraction hMinus ≡ vorticityContraction hPlus
-sameB2RecordVorticityContraction = refl
+sameB2RecordVorticityContraction =
+  trans vorticityContractionMinusZero (sym vorticityContractionPlusZero)
 
 sameB2RecordInjection : frameInjection23 hMinus ≡ frameInjection23 hPlus
-sameB2RecordInjection = refl
+sameB2RecordInjection = trans injectionMinusZero (sym injectionPlusZero)
 
 b2SurplusMinusIsOne : b2RawSurplus hMinus ≡ 1ℚ
-b2SurplusMinusIsOne = refl
+b2SurplusMinusIsOne = solve []
 
 b2SurplusPlusIsOne : b2RawSurplus hPlus ≡ 1ℚ
-b2SurplusPlusIsOne = refl
+b2SurplusPlusIsOne = solve []
+
+sameB2Surplus : b2RawSurplus hMinus ≡ b2RawSurplus hPlus
+sameB2Surplus = trans b2SurplusMinusIsOne (sym b2SurplusPlusIsOne)
 
 b2SurplusStrictlyPositiveMinus : 0ℚ < b2RawSurplus hMinus
 b2SurplusStrictlyPositiveMinus = toWitness {a? = 0ℚ <? b2RawSurplus hMinus} _
@@ -151,14 +155,14 @@ b2SurplusStrictlyPositivePlus : 0ℚ < b2RawSurplus hPlus
 b2SurplusStrictlyPositivePlus = toWitness {a? = 0ℚ <? b2RawSurplus hPlus} _
 
 velocityWorkMinus : velocityWork hMinus ≡ minusTwo
-velocityWorkMinus = refl
+velocityWorkMinus = solve []
 
 velocityWorkPlus : velocityWork hPlus ≡ plusTwo
-velocityWorkPlus = refl
+velocityWorkPlus = solve []
 
-record B2RecordDeterminesC4aVelocityWorkSign : Set where
+record B2RecordDeterminesC4aVelocityWork : Set where
   field
-    sameSign :
+    determine :
       (left right : M.Matrix3) →
       Energy.matrixTrace left ≡ Energy.matrixTrace right →
       vorticityContraction left ≡ vorticityContraction right →
@@ -166,16 +170,20 @@ record B2RecordDeterminesC4aVelocityWorkSign : Set where
       b2RawSurplus left ≡ b2RawSurplus right →
       velocityWork left ≡ velocityWork right
 
-open B2RecordDeterminesC4aVelocityWorkSign public
+open B2RecordDeterminesC4aVelocityWork public
 
 b2RecordCannotDetermineC4aVelocityWork :
-  B2RecordDeterminesC4aVelocityWorkSign → minusTwo ≡ plusTwo
+  B2RecordDeterminesC4aVelocityWork → minusTwo ≡ plusTwo
 b2RecordCannotDetermineC4aVelocityWork candidate =
-  sameSign candidate hMinus hPlus
-    sameB2RecordTrace
-    sameB2RecordVorticityContraction
-    sameB2RecordInjection
-    refl
+  trans
+    (sym velocityWorkMinus)
+    (trans
+      (determine candidate hMinus hPlus
+        sameB2RecordTrace
+        sameB2RecordVorticityContraction
+        sameB2RecordInjection
+        sameB2Surplus)
+      velocityWorkPlus)
 
 round87PositiveB2SurplusDoesNotDetermineC4aPressureWorkSign : Bool
 round87PositiveB2SurplusDoesNotDetermineC4aPressureWorkSign = true
