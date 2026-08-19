@@ -3,7 +3,7 @@ module DASHI.Moonshine.PublishedMonsterFrickeHighestAlphaEverything where
 ------------------------------------------------------------------------
 -- Focused table-free Monster/Fricke root for EVERY prime p.
 --
--- The primary equivalence now has two distinct modern mechanisms:
+-- PRIME SUPPORT now has two distinct modern mechanisms:
 --
 --   FORWARD  p | |M| -> g(X_0^+(p)) = 0
 --     global Conway--Norton / Borcherds genus-zero Moonshine theorem
@@ -16,28 +16,27 @@ module DASHI.Moonshine.PublishedMonsterFrickeHighestAlphaEverything where
 --     locus; the existing Deligne--Rapoport geometry identifies that with zero
 --     Fricke pair defect.  The exceptional primes 2,3 are handled separately.
 --
--- The forward authority is now FACTORED: genus zero is imported globally once;
--- the only p-indexed classification input is the selected prime-order class and
--- the exact equality of its Moonshine group with Gamma_0(p)^+.  Shared genus
--- zero or shared prime label is not substituted for that equality.
+-- The forward authority is FACTORED: genus zero is imported globally once; the
+-- only p-indexed classification input is the selected prime-order class and the
+-- exact equality of its Moonshine group with Gamma_0(p)^+.
 --
--- For p>=5 the same modern chain is exposed geometrically:
+-- QUANTITATIVE DEPTH is now public too.  For p>3 the full Duncan--Swisher
+-- theorem retains v_p(|M|), the rational/quadratic supersingular stratum, m_p,
+-- and the three modular valuation contributions.  Two source-natural observers
+-- compute the same doubled valuation consumer without being identified:
 --
---   p | |M|
---      <=> zero coarse Frobenius-pair residual
---      <=> coarse supersingular Frobenius is pointwise fixed.
+--   supersingular geometry  --->  2 v_p(|M|)
+--   modular valuations      --->  2 v_p(|M|).
 --
--- In addition, the FORWARD implication is now exposed directly without
--- Duncan--Swisher:
---
---   Monster prime
---     --Moonshine class/group--> Fricke genus zero
---     --Deligne--Rapoport--> coarse Frobenius fixed.
+-- Ogg/Fricke support is a further coarse projection of this depth.  For p=2,3
+-- the two Duncan--Swisher right-hand sides agree but miss the actual Monster
+-- exponents by residuals 10 and 2 respectively; those residual mechanisms are
+-- kept explicit rather than hidden under a false extension of the p>3 theorem.
 --
 -- The older Duncan--Ono/Ogg supersingular support equivalence remains only an
 -- independent historical/cross-check route.  No MonsterPrimeLane / SSP15
 -- enumeration and no finite under-72 Fricke table participates in the primary
--- arbitrary-prime theorem.
+-- arbitrary-prime support theorem.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -56,6 +55,9 @@ import DASHI.Moonshine.MonsterPrimeMoonshineFrobeniusForwardExact as MoonshineFr
 import DASHI.Moonshine.DuncanSwisherMonsterFrickeAllPrimesExact as DSAll
 import DASHI.Moonshine.MonsterFrickeModernDirectionalMechanismExact as Modern
 import DASHI.Moonshine.DuncanSwisherMonsterFrobeniusFixedExact as FrobeniusModern
+import DASHI.Moonshine.DuncanSwisherExponentDepthHighestAlphaEverything as Depth
+import DASHI.Moonshine.DuncanSwisherExponentObserverFactorizationExact as DepthObservers
+import DASHI.Moonshine.DuncanSwisherLowPrimeResidualExact as LowPrime
 
 ------------------------------------------------------------------------
 -- Primary arbitrary-prime theorem: moonshine forward, exponent-support
@@ -120,6 +122,31 @@ moonshineDirectlyForcesCoarseFrobeniusFixedRegression :
     (5 + n) prime (NatP.m≤m+n 5 n)
 moonshineDirectlyForcesCoarseFrobeniusFixedRegression =
   MoonshineFrob.monsterPrimeImpliesCoarseFrobeniusFixedByMoonshine
+
+------------------------------------------------------------------------
+-- Quantitative depth above support.
+------------------------------------------------------------------------
+
+fullExponentDepthPublicRegression :
+  Depth.fullExponentDepthNowRetained
+    Depth.canonicalDuncanSwisherExponentDepthHighestAlphaBoundary ≡ true
+fullExponentDepthPublicRegression = refl
+
+geometricAndModularDepthShareConsumerRegression :
+  Depth.geometricAndModularObserversShareConsumer
+    Depth.canonicalDuncanSwisherExponentDepthHighestAlphaBoundary ≡ true
+geometricAndModularDepthShareConsumerRegression = refl
+
+supportIsCoarserThanGeometricDepthRegression :
+  Depth.supportExposedAsCoarserProjection
+    Depth.canonicalDuncanSwisherExponentDepthHighestAlphaBoundary ≡ true
+supportIsCoarserThanGeometricDepthRegression = refl
+
+p2ExceptionalResidualRegression : LowPrime.lowPrimeResidual LowPrime.low2 ≡ 10
+p2ExceptionalResidualRegression = LowPrime.p2ResidualIsTen
+
+p3ExceptionalResidualRegression : LowPrime.lowPrimeResidual LowPrime.low3 ≡ 2
+p3ExceptionalResidualRegression = LowPrime.p3ResidualIsTwo
 
 ------------------------------------------------------------------------
 -- Independent routes remain available for regression/cross-checking.
