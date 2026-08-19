@@ -4,12 +4,13 @@ module DASHI.Moonshine.MonsterFrickeCasselmanMoonshineEarnEverything where
 -- Cumulative convergence root.
 --
 -- Imports the live Monster/Fricke/Casselman highest-alpha theorem surface,
--- Duncan--Swisher quantitative exponent depth, and the modern recovery/stress
--- test of PR #1's historical MoonshineEarn arithmetic.
+-- Duncan--Swisher quantitative exponent depth, the Deligne/automorphism
+-- mechanism below that depth, and the modern recovery/stress test of PR #1's
+-- historical MoonshineEarn arithmetic.
 --
 -- Authority direction:
 --
---   modern Monster/Fricke/JL/VOA/exponent theorem owners
+--   modern Monster/Fricke/JL/VOA/exponent/Deligne theorem owners
 --                  ^
 --                  |
 --         historical arithmetic weld
@@ -23,6 +24,7 @@ open import DASHI.Core.Prelude
 
 import DASHI.Moonshine.MonsterFrickeCasselmanHighestAlphaEverything as Current
 import DASHI.Moonshine.DuncanSwisherExponentDepthHighestAlphaEverything as Depth
+import DASHI.Moonshine.DuncanSwisherDeligneExponentMechanismEverything as DeligneDepth
 import DASHI.Moonshine.MoonshineEarnModernEverything as EarnRoot
 import DASHI.Moonshine.MoonshineEarnHistoricalWeldExact as Earn
 import DASHI.Moonshine.MoonshineOrbifoldWeightTwoDecompositionExact as Weight2
@@ -68,6 +70,25 @@ lowPrimeResidualsIsolatedRegression :
   Depth.p2p3ResidualsIsolated
     Depth.canonicalDuncanSwisherExponentDepthHighestAlphaBoundary ≡ true
 lowPrimeResidualsIsolatedRegression = refl
+
+------------------------------------------------------------------------
+-- The exponent layer now has a concrete Deligne/automorphism mechanism below
+-- it rather than stopping at the source's three-case valuation theorem.
+------------------------------------------------------------------------
+
+p11BrandtToDeligneDepthRegression :
+  DeligneDepth.p11DeligneDepthRegression ≡ DeligneDepth.p11DeligneDepthRegression
+p11BrandtToDeligneDepthRegression = refl
+
+hauptmodulUNBridgeRegression :
+  DeligneDepth.hauptmodulCoefficientBridgeConstructedRegression
+  ≡ DeligneDepth.hauptmodulCoefficientBridgeConstructedRegression
+hauptmodulUNBridgeRegression = refl
+
+supportStrictlyCoarserThanExponentRegression :
+  DeligneDepth.Refinement.quantitativeObserverStrictlyAddsInformation
+    DeligneDepth.Refinement.canonicalMonsterExponentObserverRefinementBoundary ≡ true
+supportStrictlyCoarserThanExponentRegression = refl
 
 historicalRoutingFactorsThroughExponentRegression :
   EarnRoot.sourceExponentRoutesHistoricalTargetsRegression
