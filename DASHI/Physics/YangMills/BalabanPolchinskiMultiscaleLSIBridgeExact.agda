@@ -1,14 +1,15 @@
 module DASHI.Physics.YangMills.BalabanPolchinskiMultiscaleLSIBridgeExact where
 
 ------------------------------------------------------------------------
--- ROUND69: POLCHINSKI MULTISCALE LOG-SOBOLEV ROUTE FROM THE SAME RG HESSIAN
+-- ROUND70: EXACT POLCHINSKI MULTISCALE LOG-SOBOLEV SOURCE BOUNDARY
 --
 -- PRIMARY SOURCES
 --
 -- Roland Bauerschmidt and Thierry Bodineau,
 -- "Log-Sobolev Inequality for the Continuum Sine-Gordon Model",
 -- Communications on Pure and Applied Mathematics 74 (2021), 2064--2113.
--- DOI: 10.1002/cpa.21926.  Theorem 1.2.
+-- DOI: 10.1002/cpa.21926. arXiv:1907.12308.
+-- Multiscale Bakry--Emery criterion: Theorem 2.5 in the published numbering.
 --
 -- Roland Bauerschmidt, Thierry Bodineau and Benoit Dagallier,
 -- "Stochastic dynamics and the Polchinski equation: an introduction",
@@ -20,27 +21,30 @@ module DASHI.Physics.YangMills.BalabanPolchinskiMultiscaleLSIBridgeExact where
 -- Seminaire de Probabilites XIX, Lecture Notes in Mathematics 1123 (1985),
 -- 177--206. DOI: 10.1007/BFb0075847.
 --
--- SOURCE THEOREM
+-- SOURCE THEOREM -- EXACT SHAPE RETAINED
 --
--- For dnu_0 proportional to exp[-(1/2)(zeta,A zeta)-V_0(zeta)] dzeta, put
--- Q_t=exp(-tA/2).  If
+-- Let C_t be the covariance decomposition used in the Polchinski flow and V_t
+-- the corresponding renormalised potential.  The source criterion controls
 --
---   Q_t Hess V_t(phi) Q_t >= dotMu_t id
+--   dotC_t Hess(V_t) dotC_t - (1/2) ddotC_t
+--     >= dotEll_t dotC_t
 --
--- for every t and phi, Mu_t=integral_0^t dotMu_s ds, and lambda>0 is the
--- smallest eigenvalue of A, Bauerschmidt--Bodineau prove an LSI with
+-- as a quadratic-form inequality, for every t and field.  If the associated
+-- source integral is finite, the initial measure satisfies an LSI.  Negative
+-- dotEll_t is allowed: the criterion is multiscale and does not demand global
+-- log-concavity at every scale.
 --
---   1/gamma = integral_0^infinity exp(-lambda t - 2 Mu_t) dt
---
--- when this integral is finite.  dotMu_t may be negative and V_t need not be
--- convex; the Q_t smoothing is an essential part of the criterion.
+-- A frequently convenient heat-semigroup presentation is a SPECIALISATION of
+-- this covariance criterion, not its definition.  Round70 therefore keeps the
+-- literal dotC/ddotC form as the authority surface and makes any Q_t rewrite an
+-- explicit same-object theorem.
 --
 -- DASHI CONTRIBUTION
 --
--- Preserve that exact source shape and expose the SAME-OBJECT Yang--Mills
--- instantiation boundary.  This route is multiscale and can consume local
--- Hessian control from L7 without requiring the Balaban trajectory to cross
--- the fixed-lattice SZZ strong-coupling window.
+-- Expose the exact SAME-OBJECT Yang--Mills seam.  The Balaban fluctuation
+-- covariance, its first/second scale derivatives, and the Polchinski V_t must
+-- be identified with the objects in this criterion.  A bare Hessian estimate
+-- or a separately constructed stochastic measure cannot be spliced in.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
@@ -48,38 +52,40 @@ open import Agda.Builtin.Equality using (_≡_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 record PublishedPolchinskiLSICriterion
-    (Field Scale Potential HeatOperator HessianForm Bound : Set) : Set₁ where
+    (Field Scale Potential CovarianceOperator HessianForm Bound : Set) : Set₁ where
   field
     basePotential : Potential
     renormalisedPotential : Scale → Potential
-    heatOperator : Scale → HeatOperator
 
-    -- This operation literally represents Q Hess(V) Q.  Keeping Q as an
-    -- argument prevents a bare-Hessian estimate from being silently promoted
-    -- to the source theorem's smoothed hypothesis.
-    heatSmoothedHessianForm :
-      HeatOperator → Potential → Field → HessianForm
+    covariance : Scale → CovarianceOperator
+    dotCovariance : Scale → CovarianceOperator
+    ddotCovariance : Scale → CovarianceOperator
 
+    hessian : Potential → Field → HessianForm
+    sandwich : CovarianceOperator → HessianForm → CovarianceOperator → HessianForm
+    halfSecondCovarianceForm : CovarianceOperator → HessianForm
+    subtractForm : HessianForm → HessianForm → HessianForm
+    scalarTimesCovarianceForm : Bound → CovarianceOperator → HessianForm
     LessEqualForm : HessianForm → HessianForm → Set
-    scalarIdentityForm : Bound → HessianForm
 
-    lambda : Bound
-    LambdaPositive : Bound → Set
-    lambdaPositive : LambdaPositive lambda
+    dotEll cumulativeEll : Scale → Bound
+    cumulativeEllIsIntegralOfDotEll : Set
 
-    dotMu cumulativeMu : Scale → Bound
-    cumulativeMuIsIntegralOfDotMu : Set
-
-    heatSmoothedHessianLower : ∀ scale field →
+    -- Literal Bauerschmidt--Bodineau multiscale curvature hypothesis:
+    --
+    --   dotC Hess(V_t) dotC - 1/2 ddotC >= dotEll dotC.
+    multiscaleBakryEmeryLower : ∀ scale field →
       LessEqualForm
-        (scalarIdentityForm (dotMu scale))
-        (heatSmoothedHessianForm
-          (heatOperator scale)
-          (renormalisedPotential scale)
-          field)
+        (scalarTimesCovarianceForm (dotEll scale) (dotCovariance scale))
+        (subtractForm
+          (sandwich
+            (dotCovariance scale)
+            (hessian (renormalisedPotential scale) field)
+            (dotCovariance scale))
+          (halfSecondCovarianceForm (ddotCovariance scale)))
 
     inverseLSIConstant : Bound
-    inverseLSIConstantIsPolchinskiIntegral : Set
+    inverseLSIConstantIsSourceIntegral : Set
     polchinskiIntegralFinite : Set
 
     LogSobolevInequality : Set
@@ -91,29 +97,81 @@ open PublishedPolchinskiLSICriterion public
 bauerschmidtBodineauPolchinskiCriterionLevel : ProofLevel
 bauerschmidtBodineauPolchinskiCriterionLevel = standardImported
 
+------------------------------------------------------------------------
+-- Optional heat/smoothed-Hessian presentation.  This is deliberately a
+-- theorem-bearing rewrite of the exact criterion rather than a replacement.
+------------------------------------------------------------------------
+
+record HeatSmoothedPresentation
+    {Field Scale Potential CovarianceOperator HessianForm Bound}
+    (criterion : PublishedPolchinskiLSICriterion
+      Field Scale Potential CovarianceOperator HessianForm Bound)
+    (HeatOperator : Set) : Set₁ where
+  field
+    heatOperator : Scale → HeatOperator
+    heatSmoothedHessianForm :
+      HeatOperator → Potential → Field → HessianForm
+    heatSmoothedLowerForm : Scale → Field → HessianForm
+
+    exactCovarianceRewrite : ∀ scale field →
+      heatSmoothedLowerForm scale field
+      ≡ subtractForm criterion
+          (sandwich criterion
+            (dotCovariance criterion scale)
+            (hessian criterion
+              (renormalisedPotential criterion scale) field)
+            (dotCovariance criterion scale))
+          (halfSecondCovarianceForm criterion
+            (ddotCovariance criterion scale))
+
+    heatSmoothedPresentationExact : ∀ scale field →
+      heatSmoothedHessianForm
+        (heatOperator scale)
+        (renormalisedPotential criterion scale)
+        field
+      ≡ heatSmoothedLowerForm scale field
+
+open HeatSmoothedPresentation public
+
+------------------------------------------------------------------------
+-- Same-object Yang--Mills instantiation boundary.
+------------------------------------------------------------------------
+
 record BalabanPolchinskiSameObjectBridge
-    (RGState Field Scale Potential HeatOperator HessianForm Bound : Set) : Set₁ where
+    (RGState Field Scale Potential CovarianceOperator HessianForm Bound : Set)
+    : Set₁ where
   field
     rgStateAtScale : Scale → RGState
     effectivePotentialOf : RGState → Potential
+    fluctuationCovarianceOf : RGState → CovarianceOperator
 
     criterion : PublishedPolchinskiLSICriterion
-      Field Scale Potential HeatOperator HessianForm Bound
+      Field Scale Potential CovarianceOperator HessianForm Bound
 
     renormalisedPotentialIsBalabanEffectivePotential : ∀ scale →
       renormalisedPotential criterion scale
       ≡ effectivePotentialOf (rgStateAtScale scale)
 
-    HeatOperatorMatchesRGFluctuationCovariance : Set
-    heatOperatorMatchesRGFluctuationCovariance :
-      HeatOperatorMatchesRGFluctuationCovariance
+    covarianceIsBalabanFluctuationCovariance : ∀ scale →
+      covariance criterion scale
+      ≡ fluctuationCovarianceOf (rgStateAtScale scale)
+
+    -- Derivative/coherence data must be for the SAME covariance path.  They are
+    -- kept explicit because merely matching C_t pointwise does not identify its
+    -- scale derivatives without a differentiability/coherence theorem.
+    DotCovarianceMatchesRGScaleDerivative : Set
+    DDotCovarianceMatchesRGScaleDerivative : Set
+    dotCovarianceMatchesRGScaleDerivative :
+      DotCovarianceMatchesRGScaleDerivative
+    ddotCovarianceMatchesRGScaleDerivative :
+      DDotCovarianceMatchesRGScaleDerivative
 
 open BalabanPolchinskiSameObjectBridge public
 
 sameObjectPolchinskiLSI :
-  ∀ {RGState Field Scale Potential HeatOperator HessianForm Bound}
+  ∀ {RGState Field Scale Potential CovarianceOperator HessianForm Bound}
     (bridge : BalabanPolchinskiSameObjectBridge
-      RGState Field Scale Potential HeatOperator HessianForm Bound) →
+      RGState Field Scale Potential CovarianceOperator HessianForm Bound) →
   polchinskiIntegralFinite (criterion bridge) →
   LogSobolevInequality (criterion bridge)
 sameObjectPolchinskiLSI bridge finite =
@@ -122,10 +180,15 @@ sameObjectPolchinskiLSI bridge finite =
 balabanPolchinskiSameObjectCompilerLevel : ProofLevel
 balabanPolchinskiSameObjectCompilerLevel = machineChecked
 
--- Physical work on this route is now exactly:
--- (1) identify the Balaban fluctuation covariance decomposition with Q_t/V_t;
--- (2) prove the smoothed Hessian lower rate from the same unified RG norm;
--- (3) bound accumulated negative curvature debt strongly enough that the
---     published Polchinski integral is finite uniformly in cutoff/volume.
+-- Remaining physical work on this route is now exactly source-shaped:
+--
+-- (1) identify Balaban's fluctuation covariance C_t and its scale derivatives
+--     with the Polchinski C_t, dotC_t, ddotC_t on the SAME effective density;
+-- (2) prove the literal multiscale quadratic-form lower bound above from the
+--     unified local derivative/Hessian estimates;
+-- (3) prove the accumulated negative curvature debt makes the source integral
+--     finite uniformly in cutoff/volume;
+-- (4) separately obtain spatial derivative propagation before promoting the
+--     stochastic functional inequality to Euclidean clustering/physical gap.
 physicalBalabanPolchinskiMultiscaleLSILevel : ProofLevel
 physicalBalabanPolchinskiMultiscaleLSILevel = conditional
