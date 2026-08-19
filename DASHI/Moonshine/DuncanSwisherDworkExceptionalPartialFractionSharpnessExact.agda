@@ -38,10 +38,6 @@ import DASHI.Moonshine.DuncanSwisherDelignePartialFractionMechanismExact as PF
 import DASHI.Moonshine.DuncanSwisherDworkRamifiedA1SharpnessExact as Dwork
 import DASHI.Moonshine.DuncanSwisherLegendreRamificationDepthExact as Legendre
 
-------------------------------------------------------------------------
--- Which exceptional local branch controls each small p>3 case.
-------------------------------------------------------------------------
-
 exceptionalAutType : PF.ExceptionalDelignePrime → Aut.SupersingularAutomorphismType
 exceptionalAutType PF.prime5 = Aut.jZeroExceptional
 exceptionalAutType PF.prime7 = Aut.j1728Exceptional
@@ -58,40 +54,36 @@ exceptionalRamificationMatchesLegacyDepth PF.prime5 = refl
 exceptionalRamificationMatchesLegacyDepth PF.prime7 = refl
 exceptionalRamificationMatchesLegacyDepth PF.prime11 = refl
 
-------------------------------------------------------------------------
--- Source-facing separation authority.  It does NOT contain an A_1 depth field.
-------------------------------------------------------------------------
-
 record ExceptionalDworkPartialFractionSeparation
     (regime : PF.ExceptionalDelignePrime) : Set₁ where
   field
     additiveValuation :
       Leading.StrictMinimumValuation
         (Dwork.PadicLocal
-          (Dwork.publishedDworkLocalA1Factorization (exceptionalAutType regime)))
+          (Dwork.publishedDworkLocalSharpnessData (exceptionalAutType regime)))
 
     valuationCompatibility :
       (x : Dwork.PadicLocal
-        (Dwork.publishedDworkLocalA1Factorization (exceptionalAutType regime))) →
+        (Dwork.publishedDworkLocalSharpnessData (exceptionalAutType regime))) →
       Leading.valuation additiveValuation x
       ≡ Ramified.valuation
           (Dwork.padicValuation
-            (Dwork.publishedDworkLocalA1Factorization (exceptionalAutType regime)))
+            (Dwork.publishedDworkLocalSharpnessData (exceptionalAutType regime)))
           x
 
     pJ1Up :
       Dwork.PadicLocal
-        (Dwork.publishedDworkLocalA1Factorization (exceptionalAutType regime))
+        (Dwork.publishedDworkLocalSharpnessData (exceptionalAutType regime))
 
     remainder :
       Dwork.PadicLocal
-        (Dwork.publishedDworkLocalA1Factorization (exceptionalAutType regime))
+        (Dwork.publishedDworkLocalSharpnessData (exceptionalAutType regime))
 
     partialFractionDecomposition :
       pJ1Up
       ≡ Leading.add additiveValuation
           (Dwork.A1Coefficient
-            (Dwork.publishedDworkLocalA1Factorization (exceptionalAutType regime)))
+            (Dwork.publishedDworkLocalSharpnessData (exceptionalAutType regime)))
           remainder
 
     remainderStrictlyDeeper :
@@ -105,19 +97,15 @@ postulate
     (regime : PF.ExceptionalDelignePrime) →
     ExceptionalDworkPartialFractionSeparation regime
 
-------------------------------------------------------------------------
--- The A_1 depth inside the additive valuation is derived from Dwork sharpness.
-------------------------------------------------------------------------
-
 exceptionalA1DepthIsRamification :
   (regime : PF.ExceptionalDelignePrime) →
   let S = publishedExceptionalDworkPartialFractionSeparation regime
-      A = Dwork.publishedDworkLocalA1Factorization (exceptionalAutType regime)
+      A = Dwork.publishedDworkLocalSharpnessData (exceptionalAutType regime)
   in Leading.valuation (additiveValuation S) (Dwork.A1Coefficient A)
       ≡ exceptionalRamificationDepth regime
 exceptionalA1DepthIsRamification regime =
   let S = publishedExceptionalDworkPartialFractionSeparation regime
-      A = Dwork.publishedDworkLocalA1Factorization (exceptionalAutType regime)
+      A = Dwork.publishedDworkLocalSharpnessData (exceptionalAutType regime)
   in trans
       (valuationCompatibility S (Dwork.A1Coefficient A))
       (Dwork.sharpA1DepthIsRamification (exceptionalAutType regime))
@@ -131,14 +119,12 @@ exceptionalSeparatedLeadingTerm regime =
   in record
     { Leading.leading =
         Dwork.A1Coefficient
-          (Dwork.publishedDworkLocalA1Factorization (exceptionalAutType regime))
+          (Dwork.publishedDworkLocalSharpnessData (exceptionalAutType regime))
     ; Leading.remainder = remainder S
     ; Leading.decomposition = partialFractionDecomposition S
     ; Leading.leadingStrictlyShallower =
-        let
-          a1Exact = exceptionalA1DepthIsRamification regime
-        in
-        subst
+        let a1Exact = exceptionalA1DepthIsRamification regime
+        in subst
           (λ d → d < Leading.valuation (additiveValuation S) (remainder S))
           (sym a1Exact)
           (remainderStrictlyDeeper S)
