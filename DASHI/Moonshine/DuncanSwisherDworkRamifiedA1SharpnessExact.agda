@@ -46,7 +46,7 @@ import DASHI.Moonshine.DuncanSwisherLegendreRamificationDepthExact as Legendre
 import DASHI.Moonshine.P11GeometricSupersingularCarrierExact as Geo
 import DASHI.Moonshine.P11EichlerDeuringStackUnweightingExact as Stack11
 
-record DworkLocalA1Factorization
+record DworkLocalSharpnessData
     (t : Aut.SupersingularAutomorphismType) : Set₁ where
   field
     PadicLocal : Set
@@ -69,26 +69,24 @@ record DworkLocalA1Factorization
             dworkSharpBranch
             (Legendre.legendreJRamificationIndex t))
 
-    -- The genuinely analytic Dwork sharpness transfer.  This is weaker and
-    -- more source-faithful than postulating a literal factorization of A_1.
     dworkA1TracksLocalJDepth :
       Ramified.valuation padicValuation A1Coefficient
       ≡ Ramified.valuation padicValuation localJDifference
 
-open DworkLocalA1Factorization public
+open DworkLocalSharpnessData public
 
 postulate
-  publishedDworkLocalA1Factorization :
-    (t : Aut.SupersingularAutomorphismType) → DworkLocalA1Factorization t
+  publishedDworkLocalSharpnessData :
+    (t : Aut.SupersingularAutomorphismType) → DworkLocalSharpnessData t
 
 asRamifiedLocalJCoefficient :
   (t : Aut.SupersingularAutomorphismType) →
-  let A = publishedDworkLocalA1Factorization t
+  let A = publishedDworkLocalSharpnessData t
   in Ramified.RamifiedSharpCoefficient
       (padicValuation A)
       (Legendre.legendreJRamificationIndex t)
 asRamifiedLocalJCoefficient t =
-  let A = publishedDworkLocalA1Factorization t
+  let A = publishedDworkLocalSharpnessData t
   in record
     { Ramified.localUnit = localUnit A
     ; Ramified.localBranch = dworkSharpBranch A
@@ -100,11 +98,11 @@ asRamifiedLocalJCoefficient t =
 
 sharpLocalJDepthIsRamification :
   (t : Aut.SupersingularAutomorphismType) →
-  let A = publishedDworkLocalA1Factorization t
+  let A = publishedDworkLocalSharpnessData t
   in Ramified.valuation (padicValuation A) (localJDifference A)
       ≡ Legendre.legendreJRamificationIndex t
 sharpLocalJDepthIsRamification t =
-  let A = publishedDworkLocalA1Factorization t
+  let A = publishedDworkLocalSharpnessData t
   in Ramified.ramifiedSharpCoefficientValuation
       (padicValuation A)
       (Legendre.legendreJRamificationIndex t)
@@ -112,33 +110,33 @@ sharpLocalJDepthIsRamification t =
 
 sharpA1DepthIsRamification :
   (t : Aut.SupersingularAutomorphismType) →
-  let A = publishedDworkLocalA1Factorization t
+  let A = publishedDworkLocalSharpnessData t
   in Ramified.valuation (padicValuation A) (A1Coefficient A)
       ≡ Legendre.legendreJRamificationIndex t
 sharpA1DepthIsRamification t =
-  let A = publishedDworkLocalA1Factorization t
+  let A = publishedDworkLocalSharpnessData t
   in trans
       (dworkA1TracksLocalJDepth A)
       (sharpLocalJDepthIsRamification t)
 
 jZeroA1DepthIsThree :
-  let A = publishedDworkLocalA1Factorization Aut.jZeroExceptional
+  let A = publishedDworkLocalSharpnessData Aut.jZeroExceptional
   in Ramified.valuation (padicValuation A) (A1Coefficient A) ≡ 3
 jZeroA1DepthIsThree = sharpA1DepthIsRamification Aut.jZeroExceptional
 
 j1728A1DepthIsTwo :
-  let A = publishedDworkLocalA1Factorization Aut.j1728Exceptional
+  let A = publishedDworkLocalSharpnessData Aut.j1728Exceptional
   in Ramified.valuation (padicValuation A) (A1Coefficient A) ≡ 2
 j1728A1DepthIsTwo = sharpA1DepthIsRamification Aut.j1728Exceptional
 
 ordinaryA1DepthIsOne :
-  let A = publishedDworkLocalA1Factorization Aut.ordinaryType
+  let A = publishedDworkLocalSharpnessData Aut.ordinaryType
   in Ramified.valuation (padicValuation A) (A1Coefficient A) ≡ 1
 ordinaryA1DepthIsOne = sharpA1DepthIsRamification Aut.ordinaryType
 
 sharpA1DepthMatchesExistingFirstPoleDepth :
   (t : Aut.SupersingularAutomorphismType) →
-  let A = publishedDworkLocalA1Factorization t
+  let A = publishedDworkLocalSharpnessData t
   in Ramified.valuation (padicValuation A) (A1Coefficient A)
       ≡ Aut.deligneFirstPoleDepth t
 sharpA1DepthMatchesExistingFirstPoleDepth Aut.jZeroExceptional = jZeroA1DepthIsThree
@@ -147,7 +145,7 @@ sharpA1DepthMatchesExistingFirstPoleDepth Aut.ordinaryType = ordinaryA1DepthIsOn
 
 sharpA1DepthDoublesToFullAutomorphismOrder :
   (t : Aut.SupersingularAutomorphismType) →
-  let A = publishedDworkLocalA1Factorization t
+  let A = publishedDworkLocalSharpnessData t
   in 2 * Ramified.valuation (padicValuation A) (A1Coefficient A)
       ≡ Aut.fullAutomorphismOrder t
 sharpA1DepthDoublesToFullAutomorphismOrder t =
@@ -157,7 +155,7 @@ sharpA1DepthDoublesToFullAutomorphismOrder t =
 
 p11A1DepthIsBrandtMonodromyWeight :
   (c : Geo.P11SupersingularJ) →
-  let A = publishedDworkLocalA1Factorization (Legendre.p11AutType c)
+  let A = publishedDworkLocalSharpnessData (Legendre.p11AutType c)
   in Ramified.valuation (padicValuation A) (A1Coefficient A)
       ≡ Stack11.p11MonodromyWeight c
 p11A1DepthIsBrandtMonodromyWeight c =
@@ -166,12 +164,12 @@ p11A1DepthIsBrandtMonodromyWeight c =
     (Legendre.p11RamificationIsBrandtMonodromyWeight c)
 
 p11JZeroA1DepthWeightIsThree :
-  let A = publishedDworkLocalA1Factorization (Legendre.p11AutType Geo.jZeroSS)
+  let A = publishedDworkLocalSharpnessData (Legendre.p11AutType Geo.jZeroSS)
   in Ramified.valuation (padicValuation A) (A1Coefficient A) ≡ 3
 p11JZeroA1DepthWeightIsThree = jZeroA1DepthIsThree
 
 p11J1728A1DepthWeightIsTwo :
-  let A = publishedDworkLocalA1Factorization (Legendre.p11AutType Geo.j1728SS)
+  let A = publishedDworkLocalSharpnessData (Legendre.p11AutType Geo.j1728SS)
   in Ramified.valuation (padicValuation A) (A1Coefficient A) ≡ 2
 p11J1728A1DepthWeightIsTwo = j1728A1DepthIsTwo
 
