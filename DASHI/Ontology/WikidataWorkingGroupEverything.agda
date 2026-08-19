@@ -38,6 +38,10 @@ import DASHI.Core.DependentRecoverableProjectionExact
 import DASHI.Core.IndexedInterpretationMorphismExact
 import DASHI.Core.ObserverRefinementLatticeExact
 import DASHI.Core.ObserverIncomparabilityTypedJoinExact
+import DASHI.Core.ConsumerDescentMinimalObserverExact
+import DASHI.Core.ContextIndexedObservationFibrationExact
+import DASHI.Core.ResidualSymmetryCollisionFibreExact
+import DASHI.Core.TopDownObservationCalculusExact
 import DASHI.Cognition.PNF.EditTransportLeafLocalityExact
 
 -- Native signed/neutral geometry and the repo-native 369 residual tower.
@@ -60,5 +64,7 @@ import DASHI.Cognition.PNF.BinaryBalancedTernaryAggregateLossExact
 import DASHI.Ontology.DependentDefinitionFibreExact
 
 -- Public regressions.
+import DASHI.Core.ContextIndexedObservationFibrationRegression
+import DASHI.Core.ResidualSymmetryCollisionFibreRegression
 import DASHI.Ontology.WikidataTernaryFibreRegression
 import DASHI.Ontology.WikidataWorkingGroupRegression
