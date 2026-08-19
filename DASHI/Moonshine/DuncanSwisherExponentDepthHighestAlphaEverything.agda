@@ -27,8 +27,13 @@ module DASHI.Moonshine.DuncanSwisherExponentDepthHighestAlphaEverything where
 --   genus zero, singleton supersingular locus
 --     -> 2 valuation = 3 m_p and the p,p^2 modular residual = m_p.
 --
--- Thus support is only the first coarse projection of a richer geometric /
--- modular-function depth invariant.
+-- The same doubled Monster valuation is now explicitly exposed as a consumer of
+-- TWO source-natural observers: supersingular geometry and the three modular
+-- valuation contributions.  Support is a further coarse projection.
+--
+-- At p=2,3 the two Duncan--Swisher right-hand sides still agree, but miss the
+-- actual Monster exponents by exact residuals 10 and 2.  Those residuals, not a
+-- fake extension of the p>3 theorem, are the low-prime explanatory frontier.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -38,6 +43,8 @@ open import Data.Nat.Primality using (Prime)
 import DASHI.Moonshine.DuncanSwisherMonsterExponentFormulaExact as Exponent
 import DASHI.Moonshine.DuncanSwisherExponentFrickeGenusRefinementExact as Genus
 import DASHI.Moonshine.DuncanSwisherModularValuationDepthMechanismExact as Modular
+import DASHI.Moonshine.DuncanSwisherExponentObserverFactorizationExact as Observers
+import DASHI.Moonshine.DuncanSwisherLowPrimeResidualExact as LowPrime
 import DASHI.Moonshine.PublishedPrimeLevelFrickeSelectorPinnedExact as Fricke
 import DASHI.Moonshine.PrimeLevelDeligneRapoportFrickeSelectorExact as Selector
 import DASHI.Moonshine.PrimeLevelDeligneRapoportFrickeCombinatoricsExact as DR
@@ -103,9 +110,45 @@ positiveGenusDepthCollapseRegression :
 positiveGenusDepthCollapseRegression = Genus.positiveGenusExponentCollapse
 
 ------------------------------------------------------------------------
--- Boundary: the next explanatory frontier is BELOW the valuation formulas:
--- construct the modular functions / U_p level-lowering mechanism themselves,
--- rather than importing Theorems 1.1/1.2 only as numerical valuation laws.
+-- Top-down observer result: geometric and modular carriers compute one consumer
+-- without being identified with each other.
+------------------------------------------------------------------------
+
+geometricAndModularConsumerAgreementRegression :
+  (p : Nat) → (prime : Prime p) → (ge5 : 5 ≤ p) →
+  let S = Observers.publishedExponentMechanismState p prime ge5
+  in
+  Observers.depthFromGeometry (Observers.geometricObserver S)
+  ≡ Observers.depthFromModular (Observers.modularObserver S)
+geometricAndModularConsumerAgreementRegression p prime ge5 =
+  Observers.geometricAndModularDepthAgree
+    (Observers.publishedExponentMechanismState p prime ge5)
+
+supportIsCoarseProjectionOfGeometryRegression :
+  Observers.supportFactorsThroughGeometry
+    Observers.canonicalDuncanSwisherExponentObserverBoundary ≡ true
+supportIsCoarseProjectionOfGeometryRegression = refl
+
+observerCarriersNotIdentifiedRegression :
+  Observers.observerCarriersIdentified
+    Observers.canonicalDuncanSwisherExponentObserverBoundary ≡ false
+observerCarriersNotIdentifiedRegression = refl
+
+------------------------------------------------------------------------
+-- Low-prime residuals are explicit rather than hidden under p>3 notation.
+------------------------------------------------------------------------
+
+p2UnexplainedResidualRegression : LowPrime.lowPrimeResidual LowPrime.low2 ≡ 10
+p2UnexplainedResidualRegression = LowPrime.p2ResidualIsTen
+
+p3UnexplainedResidualRegression : LowPrime.lowPrimeResidual LowPrime.low3 ≡ 2
+p3UnexplainedResidualRegression = LowPrime.p3ResidualIsTwo
+
+------------------------------------------------------------------------
+-- Boundary: for p>3 the next explanatory frontier is BELOW the valuation
+-- formulas: construct the modular functions / U_p / rigidity mechanism rather
+-- than importing Theorems 1.1/1.2 only as numerical laws.  For p=2,3 the
+-- frontier is the common exceptional residual itself.
 ------------------------------------------------------------------------
 
 record DuncanSwisherExponentDepthHighestAlphaBoundary : Set where
@@ -115,8 +158,12 @@ record DuncanSwisherExponentDepthHighestAlphaBoundary : Set where
     modularThreeTermDepthNowRetained : Bool
     singletonExtraResidualDerived : Bool
     positiveGenusZeroExponentDerived : Bool
-    finiteMonsterPrimeLaneUsed : Bool
+    geometricAndModularObserversShareConsumer : Bool
+    supportExposedAsCoarserProjection : Bool
+    p2p3ResidualsIsolated : Bool
+    finiteMonsterPrimeLaneUsedForPgt3Proof : Bool
     nextFrontierIsExplicitModularFunctionOperators : Bool
+    lowPrimeResidualMechanismStillOpen : Bool
 
 canonicalDuncanSwisherExponentDepthHighestAlphaBoundary :
   DuncanSwisherExponentDepthHighestAlphaBoundary
@@ -126,6 +173,10 @@ canonicalDuncanSwisherExponentDepthHighestAlphaBoundary = record
   ; modularThreeTermDepthNowRetained = true
   ; singletonExtraResidualDerived = true
   ; positiveGenusZeroExponentDerived = true
-  ; finiteMonsterPrimeLaneUsed = false
+  ; geometricAndModularObserversShareConsumer = true
+  ; supportExposedAsCoarserProjection = true
+  ; p2p3ResidualsIsolated = true
+  ; finiteMonsterPrimeLaneUsedForPgt3Proof = false
   ; nextFrontierIsExplicitModularFunctionOperators = true
+  ; lowPrimeResidualMechanismStillOpen = true
   }
