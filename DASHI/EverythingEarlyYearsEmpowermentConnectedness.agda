@@ -12,6 +12,7 @@ import DASHI.Education.EarlyYearsStakeholderCoverageExact
 import DASHI.Education.CapabilityRecognitionExact
 import DASHI.Education.CommunityConnectednessTopologyExact
 import DASHI.Education.EarlyYearsEmpowermentConnectednessBridgeExact
+import DASHI.Education.EarlyYearsEmpowermentConnectednessRegression
 
 -- Explicit upstream theorem owners used by the bridge.
 import DASHI.Education.SituatedRelationalLearningAffordanceExact
