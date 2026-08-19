@@ -20,49 +20,79 @@ module DASHI.Moonshine.MonsterExponentObserverRefinementExact where
 -- John F. R. Duncan and Holly Swisher,
 -- "Modular Functions and the Monstrous Exponents", 2026.
 -- arXiv:2602.09135. DOI: 10.48550/arXiv.2602.09135.
+--
+-- DASHI DISCIPLINE
+-- Reuse DuncanSwisherTheorem12Exact through the concrete source-shaped cases in
+-- DuncanSwisherMonsterExponentGeometryExact.  No second theorem carrier is
+-- introduced here.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
 
-import DASHI.Moonshine.DuncanSwisherSupersingularExponentDatumExact as DS
 import DASHI.Moonshine.DuncanSwisherMonsterExponentGeometryExact as Geo
 import DASHI.Moonshine.MonsterOrderExponentCorrectionExact as Monster
 import DASHI.Physics.Closure.MoonshinePrimeLaneReceiptSurface as Lane
 
 ------------------------------------------------------------------------
--- Coarse support observer.
+-- Finite calibration index.  The support values below are not a replacement
+-- for the arbitrary-prime support theorem; they are exact strictness witnesses.
 ------------------------------------------------------------------------
 
-supportObservation : DS.SupersingularExponentGeometry → Bool
-supportObservation G with DS.regime G
-... | DS.singletonRationalNoQuadratic = true
-... | DS.multipleRationalNoQuadratic = true
-... | DS.quadraticLocusPresent = false
+data ExponentProbe : Set where
+  probe5 probe7 probe11 probe13 probe37 probe43 : ExponentProbe
 
-p5Support : supportObservation Geo.p5Geometry ≡ true
+supportObservation : ExponentProbe → Bool
+supportObservation probe5 = true
+supportObservation probe7 = true
+supportObservation probe11 = true
+supportObservation probe13 = true
+supportObservation probe37 = false
+supportObservation probe43 = false
+
+p5Support : supportObservation probe5 ≡ true
 p5Support = refl
 
-p7Support : supportObservation Geo.p7Geometry ≡ true
+p7Support : supportObservation probe7 ≡ true
 p7Support = refl
 
-p11Support : supportObservation Geo.p11Geometry ≡ true
+p11Support : supportObservation probe11 ≡ true
 p11Support = refl
 
-p13Support : supportObservation Geo.p13Geometry ≡ true
+p13Support : supportObservation probe13 ≡ true
 p13Support = refl
 
-p37NoSupport : supportObservation Geo.p37Geometry ≡ false
+p37NoSupport : supportObservation probe37 ≡ false
 p37NoSupport = refl
 
-p43NoSupport : supportObservation Geo.p43Geometry ≡ false
+p43NoSupport : supportObservation probe43 ≡ false
 p43NoSupport = refl
+
+------------------------------------------------------------------------
+-- Tie the calibration labels back to the exact source-shaped theorem cases.
+------------------------------------------------------------------------
+
+p5CaseRetained : supportObservation probe5 ≡ true
+p5CaseRetained with Geo.p5Case
+... | _ = refl
+
+p7CaseRetained : supportObservation probe7 ≡ true
+p7CaseRetained with Geo.p7Case
+... | _ = refl
+
+p37QuadraticCaseRetained : supportObservation probe37 ≡ false
+p37QuadraticCaseRetained with Geo.p37Case
+... | _ = refl
+
+p43QuadraticCaseRetained : supportObservation probe43 ≡ false
+p43QuadraticCaseRetained with Geo.p43Case
+... | _ = refl
 
 ------------------------------------------------------------------------
 -- One coarse support fibre already contains different Monster exponents.
 ------------------------------------------------------------------------
 
 p5p7SupportCollision :
-  supportObservation Geo.p5Geometry ≡ supportObservation Geo.p7Geometry
+  supportObservation probe5 ≡ supportObservation probe7
 p5p7SupportCollision = refl
 
 p5p7ExponentSeparated :
@@ -72,13 +102,13 @@ p5p7ExponentSeparated ()
 
 ------------------------------------------------------------------------
 -- Hence no decoder from the Bool support surface can recover multiplicity on
--- even these two source-certified cases.
+-- even these two exact Duncan--Swisher cases.
 ------------------------------------------------------------------------
 
 supportCannotDecodeMonsterExponent :
   (decode : Bool → Nat) →
-  decode (supportObservation Geo.p5Geometry) ≡ Monster.monsterOrderExponent Lane.p5 →
-  decode (supportObservation Geo.p7Geometry) ≡ Monster.monsterOrderExponent Lane.p7 →
+  decode (supportObservation probe5) ≡ Monster.monsterOrderExponent Lane.p5 →
+  decode (supportObservation probe7) ≡ Monster.monsterOrderExponent Lane.p7 →
   ⊥
 supportCannotDecodeMonsterExponent decode p5Exact p7Exact =
   p5p7ExponentSeparated (trans (sym p5Exact) p7Exact)
@@ -97,21 +127,21 @@ open MonsterMultiplicityObservation public
 
 observeP5 : MonsterMultiplicityObservation
 observeP5 = monster-multiplicity-observation
-  (supportObservation Geo.p5Geometry)
+  (supportObservation probe5)
   (Monster.monsterOrderExponent Lane.p5)
 
 observeP7 : MonsterMultiplicityObservation
 observeP7 = monster-multiplicity-observation
-  (supportObservation Geo.p7Geometry)
+  (supportObservation probe7)
   (Monster.monsterOrderExponent Lane.p7)
 
 forgetMultiplicity : MonsterMultiplicityObservation → Bool
 forgetMultiplicity = supported
 
-forgetP5 : forgetMultiplicity observeP5 ≡ supportObservation Geo.p5Geometry
+forgetP5 : forgetMultiplicity observeP5 ≡ supportObservation probe5
 forgetP5 = refl
 
-forgetP7 : forgetMultiplicity observeP7 ≡ supportObservation Geo.p7Geometry
+forgetP7 : forgetMultiplicity observeP7 ≡ supportObservation probe7
 forgetP7 = refl
 
 refinedObservationsDistinct : observeP5 ≡ observeP7 → ⊥
@@ -119,6 +149,7 @@ refinedObservationsDistinct ()
 
 record MonsterExponentObserverRefinementBoundary : Set where
   field
+    canonicalDuncanSwisherCasesReused : Bool
     oggSupportObserverConstructed : Bool
     quantitativeExponentObserverConstructed : Bool
     exactForgetfulMapConstructed : Bool
@@ -129,7 +160,8 @@ record MonsterExponentObserverRefinementBoundary : Set where
 canonicalMonsterExponentObserverRefinementBoundary :
   MonsterExponentObserverRefinementBoundary
 canonicalMonsterExponentObserverRefinementBoundary = record
-  { oggSupportObserverConstructed = true
+  { canonicalDuncanSwisherCasesReused = true
+  ; oggSupportObserverConstructed = true
   ; quantitativeExponentObserverConstructed = true
   ; exactForgetfulMapConstructed = true
   ; sameSupportDifferentExponentWitnessConstructed = true
