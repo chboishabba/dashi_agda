@@ -83,15 +83,12 @@ p11ExponentCaseForcesValuationTwo :
   {valuation : Nat} →
   DS.DuncanSwisherExponentCase 2 0 valuation 4 →
   valuation ≡ 2
-p11ExponentCaseForcesValuationTwo
+p11ExponentCaseForcesValuationTwo {valuation}
   (DS.singletonRational () pairedZero doubled)
-p11ExponentCaseForcesValuationTwo
+p11ExponentCaseForcesValuationTwo {valuation}
   (DS.multipleRational fixedMany pairedZero doubled) =
   NatP.*-cancelˡ-≡ valuation 2 2 doubled
-  where
-    valuation : Nat
-    valuation = _
-p11ExponentCaseForcesValuationTwo
+p11ExponentCaseForcesValuationTwo {valuation}
   (DS.quadraticPresent () valuationZero minTwo)
 
 ------------------------------------------------------------------------
@@ -104,15 +101,12 @@ p11ExponentCaseForcesMinimumMonodromyWeight :
   DS.DuncanSwisherExponentCase
     2 0 valuation (2 * p11MinimumMonodromyWeight) →
   valuation ≡ p11MinimumMonodromyWeight
-p11ExponentCaseForcesMinimumMonodromyWeight
+p11ExponentCaseForcesMinimumMonodromyWeight {valuation}
   (DS.singletonRational () pairedZero doubled)
-p11ExponentCaseForcesMinimumMonodromyWeight
+p11ExponentCaseForcesMinimumMonodromyWeight {valuation}
   (DS.multipleRational fixedMany pairedZero doubled) =
   NatP.*-cancelˡ-≡ valuation p11MinimumMonodromyWeight 2 doubled
-  where
-    valuation : Nat
-    valuation = _
-p11ExponentCaseForcesMinimumMonodromyWeight
+p11ExponentCaseForcesMinimumMonodromyWeight {valuation}
   (DS.quadraticPresent () valuationZero minTwo)
 
 ------------------------------------------------------------------------
