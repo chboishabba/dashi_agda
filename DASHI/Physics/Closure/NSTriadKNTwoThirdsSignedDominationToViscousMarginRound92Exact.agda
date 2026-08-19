@@ -40,19 +40,19 @@ module DASHI.Physics.Closure.NSTriadKNTwoThirdsSignedDominationToViscousMarginRo
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
-open import Data.Integer.Base as Int
+import Data.Integer.Base as Int
 open import Data.Rational.Base using
-  (ℚ; 0ℚ; _+_; _*_; _≤_; nonNegative)
+  (ℚ; 0ℚ; 1ℚ; _/_; _+_; _*_; -_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚP
+open ℚP using (_≤?_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (subst)
-
-import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
+open import Relation.Nullary.Decidable.Core using (toWitness)
 
 oneThird two three : ℚ
-oneThird = Int.+ 1 Data.Rational.Base./ 3
-two = Int.+ 2 Data.Rational.Base./ 1
-three = Int.+ 3 Data.Rational.Base./ 1
+oneThird = Int.+ 1 / 3
+two = 1ℚ + 1ℚ
+three = two + 1ℚ
 
 record TwoThirdsSignedDissipationData : Set where
   constructor two-thirds-signed-dissipation-data
@@ -73,7 +73,7 @@ record TwoThirdsSignedDissipationData : Set where
 open TwoThirdsSignedDissipationData public
 
 oneThirdNonnegative : 0ℚ ≤ oneThird
-oneThirdNonnegative = ℚP.0≤p⇒0≤p/q (ℚP.0≤1)
+oneThirdNonnegative = toWitness {a? = 0ℚ ≤? oneThird} _
 
 thirdGoodFunding :
   (data : TwoThirdsSignedDissipationData) →
@@ -87,9 +87,6 @@ twoThirdsDominationAsBadPlusThirdGood :
   bad data + oneThird * good data ≤ good data
 twoThirdsDominationAsBadPlusThirdGood data =
   let
-    oneThirdThree : oneThird * three ≡ Int.+ 1 Data.Rational.Base./ 1
-    oneThirdThree = refl
-
     scaled :
       oneThird * (three * bad data) ≤ oneThird * (two * good data)
     scaled =
