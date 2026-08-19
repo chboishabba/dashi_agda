@@ -18,6 +18,7 @@ module DASHI.Foundations.BalancedTernaryAntipodalResidualCodecExact where
 -- residual is discarded.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Unit using (⊤; tt)
 
@@ -25,10 +26,6 @@ import DASHI.Foundations.Base369AddressSymmetryAndBranchGeometryExact as Branch
 import DASHI.Foundations.BalancedTernaryAntipodalOrbitExact as Orbit
 import DASHI.Foundations.SSPTritCarrier as SSP
 import DASHI.Foundations.Base369InteractionAppraisalCubeExact as Cube
-
-------------------------------------------------------------------------
--- One 27-state block.
-------------------------------------------------------------------------
 
 data Orientation2 : Set where
   direct counter : Orientation2
@@ -114,10 +111,6 @@ coarseOfEncodeIsClassifier (Branch.triple SSP.sspZero SSP.sspZero SSP.sspPosOne)
 coarseOfEncodeIsClassifier (Branch.triple SSP.sspZero SSP.sspZero SSP.sspNegOne) = refl
 coarseOfEncodeIsClassifier (Branch.triple SSP.sspZero SSP.sspZero SSP.sspZero) = refl
 
-------------------------------------------------------------------------
--- Lift the exact codec to the repo-native three-block 27^3 carrier.
-------------------------------------------------------------------------
-
 interactionTriple : Cube.InteractionCube → Orbit.TritTriple
 interactionTriple (Cube.interactionCube a b c) = Branch.triple a b c
 
@@ -178,12 +171,10 @@ encodeAfterDecodeRound (threeBlockResidualCode interaction appraisalA appraisalB
 record AntipodalResidualCodecBoundary : Set where
   constructor antipodalResidualCodecBoundary
   field
-    quotientAloneReconstructsFineState : Agda.Builtin.Bool.Bool
-    quotientPlusDependentResidualRoundTrips : Agda.Builtin.Bool.Bool
-    centreCarriesSpuriousOrientationBit : Agda.Builtin.Bool.Bool
-    threeBlockCodecRoundTripsExactly : Agda.Builtin.Bool.Bool
-
-open import Agda.Builtin.Bool using (false; true)
+    quotientAloneReconstructsFineState : Bool
+    quotientPlusDependentResidualRoundTrips : Bool
+    centreCarriesSpuriousOrientationBit : Bool
+    threeBlockCodecRoundTripsExactly : Bool
 
 canonicalAntipodalResidualCodecBoundary : AntipodalResidualCodecBoundary
 canonicalAntipodalResidualCodecBoundary =
