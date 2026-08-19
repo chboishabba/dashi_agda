@@ -6,8 +6,9 @@ module DASHI.Moonshine.PublishedMonsterFrickeHighestAlphaEverything where
 -- The primary equivalence now has two distinct modern mechanisms:
 --
 --   FORWARD  p | |M| -> g(X_0^+(p)) = 0
---     Conway--Norton / Borcherds monstrous moonshine: the relevant prime-order
---     Monster class has moonshine group Gamma_0(p)^+, hence genus zero.
+--     global Conway--Norton / Borcherds genus-zero Moonshine theorem
+--       +
+--     p-specific prime-class identification Gamma_g = Gamma_0(p)^+.
 --
 --   CONVERSE g(X_0^+(p)) = 0 -> p | |M|
 --     Duncan--Swisher Theorem 1.2 (2026): for p>3, Monster p-adic exponent
@@ -15,22 +16,28 @@ module DASHI.Moonshine.PublishedMonsterFrickeHighestAlphaEverything where
 --     locus; the existing Deligne--Rapoport geometry identifies that with zero
 --     Fricke pair defect.  The exceptional primes 2,3 are handled separately.
 --
--- For p>=5 the same modern chain is now also exposed WITHOUT the genus
--- coordinate:
+-- The forward authority is now FACTORED: genus zero is imported globally once;
+-- the only p-indexed classification input is the selected prime-order class and
+-- the exact equality of its Moonshine group with Gamma_0(p)^+.  Shared genus
+-- zero or shared prime label is not substituted for that equality.
+--
+-- For p>=5 the same modern chain is exposed geometrically:
 --
 --   p | |M|
 --      <=> zero coarse Frobenius-pair residual
 --      <=> coarse supersingular Frobenius is pointwise fixed.
 --
--- This makes the actual surviving finite observer explicit rather than using
--- genus zero as the only public interface.
+-- In addition, the FORWARD implication is now exposed directly without
+-- Duncan--Swisher:
 --
--- The older Duncan--Ono/Ogg supersingular SUPPORT equivalence is no longer
--- imported by this primary all-prime proof.  It remains an independent
--- historical/cross-check route elsewhere in the repository.
+--   Monster prime
+--     --Moonshine class/group--> Fricke genus zero
+--     --Deligne--Rapoport--> coarse Frobenius fixed.
 --
--- No MonsterPrimeLane / SSP15 enumeration and no finite under-72 Fricke table
--- participates in the arbitrary-prime theorem.
+-- The older Duncan--Ono/Ogg supersingular support equivalence remains only an
+-- independent historical/cross-check route.  No MonsterPrimeLane / SSP15
+-- enumeration and no finite under-72 Fricke table participates in the primary
+-- arbitrary-prime theorem.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -43,7 +50,8 @@ import DASHI.Moonshine.PrimeLevelDeligneRapoportFrickeSelectorExact as Selector
 import DASHI.Moonshine.PrimeLevelDeligneRapoportFrickeCombinatoricsExact as DR
 import DASHI.Moonshine.PublishedMonsterFrickeGenusZeroExact as HistoricalGe5
 import DASHI.Moonshine.PublishedMonsterFrickeAllSupportedPrimesExact as All
-import DASHI.Moonshine.MonsterPrimeMoonshineFrickeStandardAuthorityExact as Moonshine
+import DASHI.Moonshine.MonsterPrimeMoonshineFrickeFactoredAuthorityExact as Moonshine
+import DASHI.Moonshine.MonsterPrimeMoonshineFrobeniusForwardExact as MoonshineFrob
 import DASHI.Moonshine.DuncanSwisherMonsterFrickeAllPrimesExact as DSAll
 import DASHI.Moonshine.MonsterFrickeModernDirectionalMechanismExact as Modern
 import DASHI.Moonshine.DuncanSwisherMonsterFrobeniusFixedExact as FrobeniusModern
@@ -75,7 +83,7 @@ exponentSupportConverseRegression =
   Modern.frickeGenusZeroImpliesMonsterPrimeByExponentSupport
 
 ------------------------------------------------------------------------
--- New p>=5 direct geometric-observer form.
+-- p>=5 geometric observer forms.
 ------------------------------------------------------------------------
 
 monsterIffCoarseFrobeniusFixedRegression :
@@ -102,6 +110,15 @@ zeroPairResidualIffFixedRegression :
   ↔ Fricke.PublishedFrobeniusFullyFixed p prime ge5
 zeroPairResidualIffFixedRegression =
   FrobeniusModern.pairResidualZeroIffFullyFixed
+
+-- Direct conceptual FORWARD route: no Duncan--Swisher in the theorem owner.
+moonshineDirectlyForcesCoarseFrobeniusFixedRegression :
+  (n : Nat) → (prime : Prime (5 + n)) →
+  Monster.PrimeDividesMonsterOrder (5 + n) →
+  Fricke.PublishedFrobeniusFullyFixed
+    (5 + n) prime (Data.Nat.Properties.m≤m+n 5 n)
+moonshineDirectlyForcesCoarseFrobeniusFixedRegression =
+  MoonshineFrob.monsterPrimeImpliesCoarseFrobeniusFixedByMoonshine
 
 ------------------------------------------------------------------------
 -- Independent routes remain available for regression/cross-checking.
@@ -135,10 +152,35 @@ forwardUsesMoonshineRegression :
     Modern.canonicalMonsterFrickeModernDirectionalBoundary ≡ true
 forwardUsesMoonshineRegression = refl
 
+forwardAuthorityFactoredRegression :
+  Modern.forwardGenusZeroAuthorityFactoredFromPrimeSelection
+    Modern.canonicalMonsterFrickeModernDirectionalBoundary ≡ true
+forwardAuthorityFactoredRegression = refl
+
+forwardExactGroupEqualityLoadBearingRegression :
+  Modern.forwardExactClassGroupEqualityIsLoadBearing
+    Modern.canonicalMonsterFrickeModernDirectionalBoundary ≡ true
+forwardExactGroupEqualityLoadBearingRegression = refl
+
 converseUsesExponentSupportRegression :
   Modern.converseMechanismIsExponentSupport
     Modern.canonicalMonsterFrickeModernDirectionalBoundary ≡ true
 converseUsesExponentSupportRegression = refl
+
+globalMoonshineGenusZeroImportedOnceRegression :
+  Moonshine.globalConwayNortonGenusZeroAuthorityImportedOnce
+    Moonshine.canonicalMonsterPrimeMoonshineFrickeFactoredBoundary ≡ true
+globalMoonshineGenusZeroImportedOnceRegression = refl
+
+perPrimeGenusZeroNotReimportedRegression :
+  Moonshine.perPrimeGenusZeroImportedSeparately
+    Moonshine.canonicalMonsterPrimeMoonshineFrickeFactoredBoundary ≡ false
+perPrimeGenusZeroNotReimportedRegression = refl
+
+directForwardAvoidsDuncanSwisherRegression :
+  MoonshineFrob.DuncanSwisherSupportImportedHere
+    MoonshineFrob.canonicalMonsterPrimeMoonshineFrobeniusForwardBoundary ≡ false
+directForwardAvoidsDuncanSwisherRegression = refl
 
 noFiniteMonsterLaneTableRegression :
   All.MonsterPrimeLaneImported
@@ -154,11 +196,6 @@ arbitraryPrimeExhaustionRegression :
   All.arbitraryPrimeCaseExhaustionDerivedInternally
     All.canonicalPublishedMonsterFrickeAllSupportedPrimesBoundary ≡ true
 arbitraryPrimeExhaustionRegression = refl
-
-moonshineGroupDatumReusedRegression :
-  Moonshine.existingMoonshineGroupDatumReused
-    Moonshine.canonicalMonsterPrimeMoonshineFrickeAuthorityBoundary ≡ true
-moonshineGroupDatumReusedRegression = refl
 
 duncanSwisherAllPrimeSupportRegression :
   DSAll.arbitraryPrimeSupportEquivalenceDerived
