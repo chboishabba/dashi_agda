@@ -19,6 +19,12 @@ import DASHI.Ontology.WikidataWorkingGroupEverything
 import DASHI.Ontology.WikidataWorkingGroupRegression
 import DASHI.Ontology.WikidataWorkingGroupSourcePolicyExact
 
+-- Top-down generic observation/fibre/symmetry calculus.  This aggregates the
+-- existing future-language minimality, exact reopening, hyperfabric and
+-- separation/authority owners with the new static descent, context-indexed and
+-- residual-symmetry theorems; it does not create a parallel framework.
+import DASHI.EverythingTopDownObservationCalculus
+
 -- SIO public semantic surface and its Dumontier et al. source metadata.
 import DASHI.Semantics.SIOSemanticSurfaceBridge
 
