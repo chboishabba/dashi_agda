@@ -87,25 +87,6 @@ sourceWeightedPartial dataSet (suc depth) =
   sourceWeightedPartial dataSet depth
   + sourceWeightedShell dataSet depth
 
-threeHalvesNonnegative : 0ℚ ≤ Weighted.threeHalves
-threeHalvesNonnegative =
-  let
-    instance
-      selected : NonNegative Weighted.threeHalves
-      selected = ℚP.normalize-nonNeg 3 2
-  in
-  ℚP.nonNegative⁻¹ Weighted.threeHalves
-
-weightPowerNonnegative : ∀ depth →
-  0ℚ ≤ Weighted.threeHalvesPower depth
-weightPowerNonnegative zero = ℚP.0≤1
-weightPowerNonnegative (suc depth) =
-  Norm.productNonnegative
-    (Weighted.threeHalvesPower depth)
-    Weighted.threeHalves
-    (weightPowerNonnegative depth)
-    threeHalvesNonnegative
-
 sourceWeightedShellBelowThreeQuarter :
   (dataSet : SourceWeightedHessianData) →
   ∀ depth →
@@ -118,7 +99,7 @@ sourceWeightedShellBelowThreeQuarter dataSet depth =
     dyadic = Dyadic.sourceExponentialShellIsDyadic source depth
     weighted = Norm.scaleNonnegative
       (Weighted.threeHalvesPower depth)
-      (weightPowerNonnegative depth)
+      (Weighted.threeHalvesPowerNonnegative depth)
       dyadic
   in
   subst
