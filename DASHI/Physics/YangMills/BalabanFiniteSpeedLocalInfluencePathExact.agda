@@ -38,9 +38,10 @@ module DASHI.Physics.YangMills.BalabanFiniteSpeedLocalInfluencePathExact where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
+import Data.Nat.Base as ℕ using (_<_)
 open import Data.Empty using (⊥; ⊥-elim)
 open import Data.Sum.Base using (_⊎_; inj₁; inj₂)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; 1ℚ; _*_) 
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; 1ℚ; _*_)
 import Data.Rational.Properties as ℚP
 open import Relation.Nullary using (Dec; yes; no)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
@@ -164,7 +165,7 @@ record DistanceLowerBound
     (Distance : Site → Site → Nat) : Set₁ where
   field
     belowDistanceHasNoWalk : ∀ {x y n} →
-      n Data.Nat.Base.< Distance x y →
+      n ℕ.< Distance x y →
       NoLocalWalk dataSet n x y
 
 open DistanceLowerBound public
@@ -174,7 +175,7 @@ belowDistanceInfluencePowerZero :
     {Distance : Site → Site → Nat} →
   DistanceLowerBound dataSet Distance →
   ∀ {x y n} →
-  n Data.Nat.Base.< Distance x y →
+  n ℕ.< Distance x y →
   influencePower dataSet n x y ≡ 0ℚ
 belowDistanceInfluencePowerZero distanceProof below =
   powerVanishesWithoutWalk _ _
