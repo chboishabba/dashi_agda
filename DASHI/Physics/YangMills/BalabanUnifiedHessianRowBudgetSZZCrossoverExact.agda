@@ -17,32 +17,30 @@ module DASHI.Physics.YangMills.BalabanUnifiedHessianRowBudgetSZZCrossoverExact w
 --
 -- DASHI CONTRIBUTION
 --
--- This file makes the proposed L7 -> L5 collapse quantitative.  Suppose the
--- SAME local Hessian row budget rho_n carried by the unified polymer norm obeys
--- the Round66 recurrence
+-- Suppose the SAME local Hessian row budget rho_n carried by the unified
+-- polymer norm obeys
 --
 --   rho_(n+1) <= (17/32) rho_n + E 2^{-n}.
 --
--- The existing exact recurrence theorem gives a closed upper majorant M_n.
--- At a Balaban/SZZ crossover depth N it is therefore enough to check
+-- The exact Round66 recurrence gives a closed upper majorant M_n.  At a
+-- Balaban/SZZ crossover depth N it is enough to check
 --
---   0 < K_W(u_*) - M_N,
+--   0 < K_W(u_*) - M_N.
 --
--- rather than separately estimating the full Hessian quadratic form.  The
--- finite row-sum theorem supplies
+-- The finite row-sum theorem gives Hess R_N[v,v] <= rho_N ||v||^2, and
+-- rho_N <= M_N.  Antitonicity of the SZZ margin in both inverse coupling u and
+-- Hessian cost rho transports positivity from the target pair (u_*,M_N) to the
+-- actual running effective action.
 --
---   Hess R_N[v,v] <= rho_N ||v||^2 <= M_N ||v||^2,
---
--- and monotonicity in both u and rho transports the positive target margin to
--- the actual running effective action.
---
--- This does NOT solve the active-window overlap problem.  It removes a separate
--- Hessian/spectral producer once an overlap depth exists.
+-- This does NOT solve active-window overlap.  It removes a separate terminal
+-- Hessian estimate once an overlap depth exists.
 ------------------------------------------------------------------------
 
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _-_; _≤_; _<_)
+open import Agda.Builtin.Nat using (Nat)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; -_; _≤_; _<_)
 import Data.Rational.Properties as ℚP
-open import Relation.Binary.PropositionalEquality using (_≡_)
+import Data.Rational.Tactic.RingSolver as ℚRing
+open import Relation.Binary.PropositionalEquality using (_≡_; subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanYM4SourceNormalizedCouplingRecurrenceExact as Flow
@@ -52,26 +50,20 @@ import DASHI.Physics.YangMills.BalabanSZZWilsonCrossoverTerminalGapExact as Cros
 
 record UnifiedHessianRowRGControl (Index : Set) : Set₁ where
   field
-    hessianAt : _
-      -- eta-expanded by Agda from the following explicit type annotation
-    rowDataAt : (n : Agda.Builtin.Nat.Nat) → Row.FiniteSymmetricHessianRowBudget Index
-
+    rowDataAt : Nat → Row.FiniteSymmetricHessianRowBudget Index
     recurrence : Iter.SeventeenThirtySecondRGRecurrence
-
     recurrenceTracksRowBudget : ∀ n →
       Iter.K recurrence n ≡ Row.rowBudget (rowDataAt n)
-
 open UnifiedHessianRowRGControl public
 
 rowBudgetAtMostRGMajorant :
   ∀ {Index} (control : UnifiedHessianRowRGControl Index) n →
   Row.rowBudget (rowDataAt control n) ≤ Iter.majorant (recurrence control) n
 rowBudgetAtMostRGMajorant control n =
-  let base = Iter.majorantDominates (recurrence control) n
-  in Relation.Binary.PropositionalEquality.subst
+  subst
     (λ left → left ≤ Iter.majorant (recurrence control) n)
     (recurrenceTracksRowBudget control n)
-    base
+    (Iter.majorantDominates (recurrence control) n)
 
 perturbedMarginAntitoneInRemainder :
   ∀ rank u {rhoSmall rhoLarge} →
@@ -80,16 +72,23 @@ perturbedMarginAntitoneInRemainder :
   ≤ Cross.perturbedSZZCurvatureMargin rank u rhoSmall
 perturbedMarginAntitoneInRemainder rank u rhoSmallBelowLarge =
   let
-    translated = ℚP.+-monoˡ-≤
-      (Cross.szzWilsonCurvatureMargin rank u - rhoLarge)
-      rhoSmallBelowLarge
+    negOrder : - rhoLarge ≤ - rhoSmall
+    negOrder = ℚP.neg-mono-≤ rhoSmallBelowLarge
+
+    translated :
+      Cross.szzWilsonCurvatureMargin rank u + (- rhoLarge)
+      ≤ Cross.szzWilsonCurvatureMargin rank u + (- rhoSmall)
+    translated = ℚP.+-monoˡ-≤ (Cross.szzWilsonCurvatureMargin rank u) negOrder
   in
-  Relation.Binary.PropositionalEquality.subst
-    (λ right →
-      Cross.perturbedSZZCurvatureMargin rank u rhoLarge ≤ right)
-    (Data.Rational.Tactic.RingSolver.solve-∀
-      (Cross.szzWilsonCurvatureMargin rank u) rhoSmall rhoLarge)
-    translated
+  subst
+    (λ left →
+      left ≤ Cross.perturbedSZZCurvatureMargin rank u rhoSmall)
+    (ℚRing.solve-∀ (Cross.szzWilsonCurvatureMargin rank u) rhoLarge)
+    (subst
+      (λ right →
+        Cross.szzWilsonCurvatureMargin rank u + (- rhoLarge) ≤ right)
+      (ℚRing.solve-∀ (Cross.szzWilsonCurvatureMargin rank u) rhoSmall)
+      translated)
 
 record UnifiedHessianSZZCrossover
     (Index : Set)
@@ -100,14 +99,11 @@ record UnifiedHessianSZZCrossover
     hessianControl : UnifiedHessianRowRGControl Index
     crossover : Cross.CrossoverTarget trajectory bounds
 
-    -- Check positivity against the CLOSED recurrence majorant, not the unknown
-    -- actual row budget.
     targetMarginBeatsRGHessianMajorant :
       0ℚ < Cross.perturbedSZZCurvatureMargin
         rank
         (Cross.targetInverseCoupling crossover)
         (Iter.majorant (recurrence hessianControl) (Cross.depth crossover))
-
 open UnifiedHessianSZZCrossover public
 
 actualCrossoverMarginPositiveFromUnifiedHessianRG :
@@ -127,17 +123,13 @@ actualCrossoverMarginPositiveFromUnifiedHessianRG {rank = rank} {trajectory = tr
 
     start = targetMarginBeatsRGHessianMajorant dataSet
 
-    actualUBelowTarget =
-      Cross.crossoverInverseCouplingAtOrBelowTarget (crossover dataSet)
-
     moveU :
       Cross.perturbedSZZCurvatureMargin
         rank (Cross.targetInverseCoupling (crossover dataSet)) rhoUpper
       ≤ Cross.perturbedSZZCurvatureMargin
         rank (Flow.inverseCoupling trajectory depth) rhoUpper
-    moveU = Cross.perturbedSZZMarginAntitone rank actualUBelowTarget
-
-    rhoBelow = rowBudgetAtMostRGMajorant (hessianControl dataSet) depth
+    moveU = Cross.perturbedSZZMarginAntitone rank
+      (Cross.crossoverInverseCouplingAtOrBelowTarget (crossover dataSet))
 
     moveRho :
       Cross.perturbedSZZCurvatureMargin
@@ -145,16 +137,13 @@ actualCrossoverMarginPositiveFromUnifiedHessianRG {rank = rank} {trajectory = tr
       ≤ Cross.perturbedSZZCurvatureMargin
         rank (Flow.inverseCoupling trajectory depth) rho
     moveRho = perturbedMarginAntitoneInRemainder
-      rank (Flow.inverseCoupling trajectory depth) rhoBelow
+      rank (Flow.inverseCoupling trajectory depth)
+      (rowBudgetAtMostRGMajorant (hessianControl dataSet) depth)
   in
   ℚP.<-≤-trans start (ℚP.≤-trans moveU moveRho)
 
 unifiedHessianRowRGToSZZCrossoverLevel : ProofLevel
 unifiedHessianRowRGToSZZCrossoverLevel = machineChecked
 
--- Remaining physical content has now fused: the L7 one-step norm estimate must
--- bound the local Hessian row mass in the SAME 17/32 recurrence, and the running
--- coupling must reach an SZZ-overlap target before the Balaban active window
--- closes.  No independent terminal Hessian estimate remains on this route.
 physicalUnifiedHessianSZZCrossoverLevel : ProofLevel
 physicalUnifiedHessianSZZCrossoverLevel = conditional
