@@ -43,7 +43,7 @@ module DASHI.Physics.YangMills.BalabanUnifiedPotentialOscillationFromTaylorJetEx
 
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; _+_; _*_; _≤_; _/_)
+  (ℚ; 0ℚ; _+_; _-_; _*_; _≤_; _/_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (subst)
@@ -70,8 +70,6 @@ record AnchoredTaylorOscillationData (Point : Set) : Set₁ where
     distanceSquareBelowDiameterSquare : ∀ x y →
       distance x y * distance x y ≤ diameter * diameter
 
-    -- This is the actual second-order analytic estimate that the physical RG
-    -- norm must prove on the same effective potential.
     anchoredTaylorBound : ∀ x →
       potentialDifferenceMagnitude x basePoint
       ≤ baseGradientCost * distance x basePoint
@@ -161,13 +159,18 @@ stationaryBaseOscillationMajorant :
   potentialDifferenceMagnitude dataSet x y
   ≤ hessianCost dataSet * (diameter dataSet * diameter dataSet)
 stationaryBaseOscillationMajorant dataSet stationary x y =
+  let
+    general = uniformPairOscillationMajorant dataSet x y
+    normalized :
+      (+ 2 / 1) * baseGradientCost dataSet * diameter dataSet
+        + hessianCost dataSet * (diameter dataSet * diameter dataSet)
+      ≡ hessianCost dataSet * (diameter dataSet * diameter dataSet)
+    normalized rewrite stationary =
+      ℚRing.solve-∀ (hessianCost dataSet) (diameter dataSet)
+  in
   subst
-    (λ gradient →
-      potentialDifferenceMagnitude dataSet x y
-      ≤ (+ 2 / 1) * gradient * diameter dataSet
-        + hessianCost dataSet * (diameter dataSet * diameter dataSet))
-    stationary
-    (uniformPairOscillationMajorant dataSet x y)
+    (λ right → potentialDifferenceMagnitude dataSet x y ≤ right)
+    normalized general
 
 ------------------------------------------------------------------------
 -- Exact falsifier: second-order/Hessian information alone cannot control
@@ -183,7 +186,7 @@ affinePotential slope centre = slope
 affinePotential slope right = slope + slope
 
 discreteSecondDifference : (ThreePoint → ℚ) → ℚ
-discreteSecondDifference f = f left + f right + (+ -2 / 1) * f centre
+discreteSecondDifference f = f left + f right - (f centre + f centre)
 
 affineSecondDifferenceZero : ∀ slope →
   discreteSecondDifference (affinePotential slope) ≡ 0ℚ
@@ -200,9 +203,5 @@ hessianAloneCannotControlOscillationLevel = machineChecked
 anchoredTaylorToUniformOscillationLevel : ProofLevel
 anchoredTaylorToUniformOscillationLevel = machineChecked
 
--- Physical L7 strengthening: instantiate the anchored Taylor estimate and a
--- volume-uniform diameter/path bound on the ACTUAL quotient/effective-potential
--- carrier.  At a stationary selected background the gradient term disappears,
--- leaving osc(Phi) <= rho D^2.
 physicalUnifiedNormToUniformPotentialOscillationLevel : ProofLevel
 physicalUnifiedNormToUniformPotentialOscillationLevel = conditional
