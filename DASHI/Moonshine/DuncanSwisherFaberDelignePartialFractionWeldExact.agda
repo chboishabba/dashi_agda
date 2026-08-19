@@ -30,6 +30,7 @@ module DASHI.Moonshine.DuncanSwisherFaberDelignePartialFractionWeldExact where
 
 open import DASHI.Core.Prelude
 
+import DASHI.Algebra.SeparatedLeadingValuationExact as Leading
 import DASHI.Moonshine.DuncanSwisherDeligneAutomorphismDepthBridgeExact as Deligne
 import DASHI.Moonshine.DuncanSwisherDelignePartialFractionMechanismExact as Partial
 import DASHI.Moonshine.DuncanSwisherFaberVpDepthExact as Faber
@@ -112,6 +113,28 @@ ordinaryScale = partial-fraction-automorphism-scale
   ordinaryDoublePartialDepthEqualsMinimumAut
 
 ------------------------------------------------------------------------
+-- The scale values are not free labels: connect them to the ACTUAL derived
+-- partial-fraction output valuations from the new mechanism module.
+------------------------------------------------------------------------
+
+exceptionalDerivedValuationEqualsScale :
+  (r : Partial.ExceptionalDelignePrime) →
+  let A = Partial.publishedExceptionalPartialFractionAuthority r
+  in
+  Leading.valuation (Partial.valuationStructure A) (Partial.pJ1Up A)
+  ≡ partialFractionDepth (exceptionalScale r)
+exceptionalDerivedValuationEqualsScale r =
+  Partial.exceptionalPartialFractionDepth r
+
+ordinaryDerivedValuationEqualsScale :
+  (P : Partial.Pge13FrickeZeroPrime) →
+  let A = Partial.publishedOrdinaryPoleMomentAuthority P
+  in
+  Partial.totalDepth A ≡ partialFractionDepth ordinaryScale
+ordinaryDerivedValuationEqualsScale P =
+  Partial.ordinaryPoleTotalDepthIsOne P
+
+------------------------------------------------------------------------
 -- Faber + partial-fraction comparison through the SAME minimum automorphism
 -- scale.  The Faber authority owns its Laurent valuation witness; this record
 -- supplies only the source equality to the already-derived geometric scale.
@@ -162,7 +185,8 @@ record DuncanSwisherFaberDelignePartialFractionBoundary : Set where
   field
     exceptionalAutDepthScaleDerived : Bool
     ordinaryAutDepthScaleDerived : Bool
-    partialFractionOutputDepthMechanismAvailable : Bool
+    exceptionalOutputValuationTiedToScale : Bool
+    ordinaryOutputValuationTiedToScale : Bool
     faberDepthMeetsPartialFractionThroughAutScale : Bool
     faberAndPartialFractionCarriersIdentified : Bool
     monsterExponentTableUsedToSetScale : Bool
@@ -173,7 +197,8 @@ canonicalDuncanSwisherFaberDelignePartialFractionBoundary :
 canonicalDuncanSwisherFaberDelignePartialFractionBoundary = record
   { exceptionalAutDepthScaleDerived = true
   ; ordinaryAutDepthScaleDerived = true
-  ; partialFractionOutputDepthMechanismAvailable = true
+  ; exceptionalOutputValuationTiedToScale = true
+  ; ordinaryOutputValuationTiedToScale = true
   ; faberDepthMeetsPartialFractionThroughAutScale = true
   ; faberAndPartialFractionCarriersIdentified = false
   ; monsterExponentTableUsedToSetScale = false
