@@ -8,8 +8,7 @@ module DASHI.Physics.YangMills.BalabanPolchinskiMultiscaleLSIBridgeExact where
 -- Roland Bauerschmidt and Thierry Bodineau,
 -- "Log-Sobolev Inequality for the Continuum Sine-Gordon Model",
 -- Communications on Pure and Applied Mathematics 74 (2021), 2064--2113.
--- DOI: 10.1002/cpa.21926.
--- Theorem 1.2 is the source boundary used here.
+-- DOI: 10.1002/cpa.21926.  Theorem 1.2.
 --
 -- Roland Bauerschmidt, Thierry Bodineau and Benoit Dagallier,
 -- "Stochastic dynamics and the Polchinski equation: an introduction",
@@ -23,34 +22,28 @@ module DASHI.Physics.YangMills.BalabanPolchinskiMultiscaleLSIBridgeExact where
 --
 -- SOURCE THEOREM
 --
--- For a measure
---
---   dnu_0 proportional to exp[-(1/2)(zeta,A zeta)-V_0(zeta)] dzeta,
---
--- put Q_t=exp(-tA/2), let V_t be the Polchinski-renormalised potential, and
--- suppose lambda>0 is the smallest eigenvalue of A.  If
+-- For dnu_0 proportional to exp[-(1/2)(zeta,A zeta)-V_0(zeta)] dzeta, put
+-- Q_t=exp(-tA/2).  If
 --
 --   Q_t Hess V_t(phi) Q_t >= dotMu_t id
 --
--- for every t and phi, with Mu_t = integral_0^t dotMu_s ds, then the source
--- proves an LSI with
+-- for every t and phi, Mu_t=integral_0^t dotMu_s ds, and lambda>0 is the
+-- smallest eigenvalue of A, Bauerschmidt--Bodineau prove an LSI with
 --
---   1/gamma = integral_0^infinity exp(-lambda t - 2 Mu_t) dt,
+--   1/gamma = integral_0^infinity exp(-lambda t - 2 Mu_t) dt
 --
--- provided this integral is finite.  The dotMu_t may be negative; V_t need not
--- be convex.  The heat-kernel smoothing in Q_t is part of the hypothesis and
--- must not be erased.
+-- when this integral is finite.  dotMu_t may be negative and V_t need not be
+-- convex; the Q_t smoothing is an essential part of the criterion.
 --
 -- DASHI CONTRIBUTION
 --
--- Expose the exact same-object bridge required from Balaban's RG.  Unlike a
--- global Holley--Stroock oscillation bound, this route is intrinsically
--- multiscale and can consume the local Hessian row control produced by the
--- unified polymer norm.  It also does not require the RG trajectory to enter
--- the strong-coupling SZZ window.
+-- Preserve that exact source shape and expose the SAME-OBJECT Yang--Mills
+-- instantiation boundary.  This route is multiscale and can consume local
+-- Hessian control from L7 without requiring the Balaban trajectory to cross
+-- the fixed-lattice SZZ strong-coupling window.
 ------------------------------------------------------------------------
 
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _≤_; _<_)
+open import Agda.Builtin.Equality using (_≡_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -60,7 +53,12 @@ record PublishedPolchinskiLSICriterion
     basePotential : Potential
     renormalisedPotential : Scale → Potential
     heatOperator : Scale → HeatOperator
-    hessianForm : Potential → Field → HessianForm
+
+    -- This operation literally represents Q Hess(V) Q.  Keeping Q as an
+    -- argument prevents a bare-Hessian estimate from being silently promoted
+    -- to the source theorem's smoothed hypothesis.
+    heatSmoothedHessianForm :
+      HeatOperator → Potential → Field → HessianForm
 
     LessEqualForm : HessianForm → HessianForm → Set
     scalarIdentityForm : Bound → HessianForm
@@ -72,15 +70,14 @@ record PublishedPolchinskiLSICriterion
     dotMu cumulativeMu : Scale → Bound
     cumulativeMuIsIntegralOfDotMu : Set
 
-    -- Literal source hypothesis, including BOTH heat operators.
     heatSmoothedHessianLower : ∀ scale field →
       LessEqualForm
         (scalarIdentityForm (dotMu scale))
-        (hessianForm (renormalisedPotential scale) field)
+        (heatSmoothedHessianForm
+          (heatOperator scale)
+          (renormalisedPotential scale)
+          field)
 
-    -- Exact source integral.  This carrier is intentionally abstract because
-    -- the repo's rational finite algebra is not a replacement for the
-    -- continuous exponential/integration theorem.
     inverseLSIConstant : Bound
     inverseLSIConstantIsPolchinskiIntegral : Set
     polchinskiIntegralFinite : Set
@@ -94,10 +91,6 @@ open PublishedPolchinskiLSICriterion public
 bauerschmidtBodineauPolchinskiCriterionLevel : ProofLevel
 bauerschmidtBodineauPolchinskiCriterionLevel = standardImported
 
-------------------------------------------------------------------------
--- Same-object Yang--Mills instantiation boundary.
-------------------------------------------------------------------------
-
 record BalabanPolchinskiSameObjectBridge
     (RGState Field Scale Potential HeatOperator HessianForm Bound : Set) : Set₁ where
   field
@@ -107,15 +100,10 @@ record BalabanPolchinskiSameObjectBridge
     criterion : PublishedPolchinskiLSICriterion
       Field Scale Potential HeatOperator HessianForm Bound
 
-    -- The Polchinski V_t must literally be the potential of the same RG state;
-    -- a separately constructed effective measure cannot be spliced here.
     renormalisedPotentialIsBalabanEffectivePotential : ∀ scale →
       renormalisedPotential criterion scale
       ≡ effectivePotentialOf (rgStateAtScale scale)
 
-    -- The heat/covariance decomposition must be identified with the same
-    -- fluctuation integration used by the physical RG, not merely declared to
-    -- have a similar scale parameter.
     HeatOperatorMatchesRGFluctuationCovariance : Set
     heatOperatorMatchesRGFluctuationCovariance :
       HeatOperatorMatchesRGFluctuationCovariance
@@ -134,16 +122,10 @@ sameObjectPolchinskiLSI bridge finite =
 balabanPolchinskiSameObjectCompilerLevel : ProofLevel
 balabanPolchinskiSameObjectCompilerLevel = machineChecked
 
--- Remaining physical theorem on this route:
---
---   (1) identify the Balaban fluctuation-covariance decomposition with a
---       Polchinski Q_t/V_t flow on the same effective density;
---   (2) derive the heat-smoothed Hessian lower rate dotMu_t from the local
---       unified-norm Hessian estimates;
---   (3) prove the accumulated negative curvature debt is small enough that
---       the source integral for 1/gamma is finite uniformly in cutoff/volume.
---
--- This is a candidate replacement for an independent terminal-gap lemma.  No
--- Yang--Mills inhabitant is asserted by citation.
+-- Physical work on this route is now exactly:
+-- (1) identify the Balaban fluctuation covariance decomposition with Q_t/V_t;
+-- (2) prove the smoothed Hessian lower rate from the same unified RG norm;
+-- (3) bound accumulated negative curvature debt strongly enough that the
+--     published Polchinski integral is finite uniformly in cutoff/volume.
 physicalBalabanPolchinskiMultiscaleLSILevel : ProofLevel
 physicalBalabanPolchinskiMultiscaleLSILevel = conditional
