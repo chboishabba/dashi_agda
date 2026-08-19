@@ -13,22 +13,19 @@ module DASHI.Moonshine.DuncanSwisherExponentDepthHighestAlphaEverything where
 -- "$p$-adic cycles", Publ. Math. IHES 37 (1969), 27--115.
 -- DOI: 10.1007/BF02684886.
 --
--- The support theorem is already closed.  For p>3 the quantitative mechanism
--- now descends below the old imported 3/2/1 first-pole table:
+-- For p>3 the quantitative mechanism now descends below the old imported
+-- 3/2/1 first-pole table:
 --
---   Dwork depth-one local branch
---     + Legendre ramification e
---     + valuation-zero local unit / A_1 factorization
+--   depth-one Legendre branch
+--     + J-alpha = unit * branch^e
+--     + Dwork transfer v(A_1)=v(J-alpha)
 --     -> exact v_p(A_1)=e
 --     -> exceptional leading-term noncancellation
 --     -> total partial-fraction depth.
 --
--- Therefore the live p>3 source boundary is no longer the numeric sharpness
--- statement.  It is the construction of Dwork's local p-adic factorization / 
--- cycle machinery that supplies the unit, branch and factorization data.
---
--- LOW CHARACTERISTICS remain separate: p=2,3 have the exact residuals 10 and 2
--- and the special elliptic residue roles collide because 1728=2^6*3^3.
+-- The live p>3 source boundary is therefore the construction of Dwork's local
+-- p-adic cycle / coordinate machinery supplying the ramified J relation and
+-- the A_1 sharpness transfer, not the numeric valuations themselves.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -38,14 +35,12 @@ open import Data.Nat.Primality using (Prime)
 import DASHI.Algebra.RamifiedLocalValuationSharpnessExact as Ramified
 import DASHI.Moonshine.DuncanSwisherMonsterExponentFormulaExact as Exponent
 import DASHI.Moonshine.DuncanSwisherExponentFrickeGenusRefinementExact as Genus
-import DASHI.Moonshine.DuncanSwisherModularValuationDepthMechanismExact as Modular
 import DASHI.Moonshine.DuncanSwisherExponentObserverFactorizationExact as Observers
 import DASHI.Moonshine.DuncanSwisherLowPrimeResidualExact as LowPrime
 import DASHI.Moonshine.MonsterLowPrimeLocalSubgroupDepthExact as LocalDepth
 import DASHI.Moonshine.DuncanSwisherLowPrimeEllipticCollisionExact as Elliptic
 import DASHI.Moonshine.PublishedPrimeLevelFrickeSelectorPinnedExact as Fricke
 import DASHI.Moonshine.PrimeLevelDeligneRapoportFrickeSelectorExact as Selector
-import DASHI.Moonshine.PrimeLevelDeligneRapoportFrickeCombinatoricsExact as DR
 import DASHI.Moonshine.DuncanSwisherDeligneAutomorphismDepthBridgeExact as Aut
 import DASHI.Moonshine.DuncanSwisherDworkRamifiedA1SharpnessExact as Dwork
 import DASHI.Moonshine.DuncanSwisherDworkExceptionalPartialFractionSharpnessExact as DworkPF
@@ -72,22 +67,18 @@ geometricAndModularConsumerAgreementRegression p prime ge5 =
   Observers.geometricAndModularDepthAgree
     (Observers.publishedExponentMechanismState p prime ge5)
 
-------------------------------------------------------------------------
--- New Dwork sharpness regressions: the values are theorem outputs.
-------------------------------------------------------------------------
-
 jZeroA1DepthDerivedRegression :
-  let A = Dwork.publishedDworkLocalA1Factorization Aut.jZeroExceptional
+  let A = Dwork.publishedDworkLocalSharpnessData Aut.jZeroExceptional
   in Ramified.valuation (Dwork.padicValuation A) (Dwork.A1Coefficient A) ≡ 3
 jZeroA1DepthDerivedRegression = Dwork.jZeroA1DepthIsThree
 
 j1728A1DepthDerivedRegression :
-  let A = Dwork.publishedDworkLocalA1Factorization Aut.j1728Exceptional
+  let A = Dwork.publishedDworkLocalSharpnessData Aut.j1728Exceptional
   in Ramified.valuation (Dwork.padicValuation A) (Dwork.A1Coefficient A) ≡ 2
 j1728A1DepthDerivedRegression = Dwork.j1728A1DepthIsTwo
 
 ordinaryA1DepthDerivedRegression :
-  let A = Dwork.publishedDworkLocalA1Factorization Aut.ordinaryType
+  let A = Dwork.publishedDworkLocalSharpnessData Aut.ordinaryType
   in Ramified.valuation (Dwork.padicValuation A) (Dwork.A1Coefficient A) ≡ 1
 ordinaryA1DepthDerivedRegression = Dwork.ordinaryA1DepthIsOne
 
@@ -96,6 +87,11 @@ numericA1DepthTableNoLongerAuthorityRegression :
     Dwork.canonicalDuncanSwisherDworkRamifiedA1SharpnessBoundary ≡ false
 numericA1DepthTableNoLongerAuthorityRegression = refl
 
+literalA1PowerFactorizationNotAssumedRegression :
+  Dwork.literalA1PowerFactorizationAssumed
+    Dwork.canonicalDuncanSwisherDworkRamifiedA1SharpnessBoundary ≡ false
+literalA1PowerFactorizationNotAssumedRegression = refl
+
 p5PartialFractionDepthDerivedRegression :
   DworkPF.exceptionalRamificationDepth PF.prime5 ≡ 3
 p5PartialFractionDepthDerivedRegression = refl
@@ -103,10 +99,6 @@ p5PartialFractionDepthDerivedRegression = refl
 p11PartialFractionDepthDerivedRegression :
   DworkPF.exceptionalRamificationDepth PF.prime11 ≡ 2
 p11PartialFractionDepthDerivedRegression = refl
-
-------------------------------------------------------------------------
--- Low-prime residuals remain explicit and not extrapolated from p>3.
-------------------------------------------------------------------------
 
 p2ResidualRegression : LowPrime.lowPrimeResidual LowPrime.low2 ≡ 10
 p2ResidualRegression = LowPrime.p2ResidualIsTen
@@ -139,16 +131,16 @@ record DuncanSwisherExponentDepthHighestAlphaBoundary : Set where
   field
     supportTheoremAlreadyClosed : Bool
     fullExponentDepthNowRetained : Bool
-    modularThreeTermDepthNowRetained : Bool
-    dworkA1DepthDerivedFromRamificationFactorization : Bool
+    dworkA1DepthDerivedFromRamifiedJCoordinate : Bool
     numericA1DepthTableStillRequired : Bool
+    literalA1PowerFactorizationRequired : Bool
     exceptionalPartialFractionDepthDerived : Bool
     geometricAndModularObserversShareConsumer : Bool
     p2p3ResidualsIsolated : Bool
     lowPrimeFullExponentRecoveredFromLocalSubgroupStructure : Bool
     lowPrimeEllipticStratumCollisionExposed : Bool
-    fullDworkPadicCycleFactorizationConstructed : Bool
-    nextPgt3FrontierIsDworkLocalFactorization : Bool
+    fullDworkPadicCycleSharpnessTransferConstructed : Bool
+    nextPgt3FrontierIsDworkLocalAnalyticConstruction : Bool
     nextLowPrimeFrontierIsAnalyticLocalGroupBridge : Bool
 
 canonicalDuncanSwisherExponentDepthHighestAlphaBoundary :
@@ -156,15 +148,15 @@ canonicalDuncanSwisherExponentDepthHighestAlphaBoundary :
 canonicalDuncanSwisherExponentDepthHighestAlphaBoundary = record
   { supportTheoremAlreadyClosed = true
   ; fullExponentDepthNowRetained = true
-  ; modularThreeTermDepthNowRetained = true
-  ; dworkA1DepthDerivedFromRamificationFactorization = true
+  ; dworkA1DepthDerivedFromRamifiedJCoordinate = true
   ; numericA1DepthTableStillRequired = false
+  ; literalA1PowerFactorizationRequired = false
   ; exceptionalPartialFractionDepthDerived = true
   ; geometricAndModularObserversShareConsumer = true
   ; p2p3ResidualsIsolated = true
   ; lowPrimeFullExponentRecoveredFromLocalSubgroupStructure = true
   ; lowPrimeEllipticStratumCollisionExposed = true
-  ; fullDworkPadicCycleFactorizationConstructed = false
-  ; nextPgt3FrontierIsDworkLocalFactorization = true
+  ; fullDworkPadicCycleSharpnessTransferConstructed = false
+  ; nextPgt3FrontierIsDworkLocalAnalyticConstruction = true
   ; nextLowPrimeFrontierIsAnalyticLocalGroupBridge = true
   }
