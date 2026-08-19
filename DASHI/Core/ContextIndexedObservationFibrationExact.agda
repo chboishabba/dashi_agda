@@ -182,11 +182,6 @@ observationCommutesWithSplitLift :
   ≡ restrictSurface indexed change (observe indexed B target)
 observationCommutesWithSplitLift indexed = observationNaturality indexed
 
--- Backwards-compatible theorem names used by the focused regression/checker.
-canonicalSplitCartesianLift = canonicalSplitLift
-splitCartesianFactorization = splitLiftFactorizationEquation
-observationCommutesWithCartesianLift = observationCommutesWithSplitLift
-
 ------------------------------------------------------------------------
 -- Context-indexed consumer adequacy.
 ------------------------------------------------------------------------
