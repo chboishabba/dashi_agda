@@ -15,16 +15,18 @@ module DASHI.Core.ContextIndexedObservationFibrationExact where
 --
 -- SOURCE / METHOD CALIBRATION
 --
--- Jean Benabou, "Fibered Categories and the Foundations of Naive Category
--- Theory", Reports of the Midwest Category Seminar, 1967.
--- No DOI is asserted here.
+-- Jean Benabou,
+-- "Fibered Categories and the Foundations of Naive Category Theory",
+-- Journal of Symbolic Logic 50(1), 1985, 10--37.
+-- DOI: 10.2307/2273784.
 --
 -- Saunders Mac Lane, "Categories for the Working Mathematician", 2nd ed.,
 -- Springer, 1998. DOI: 10.1007/978-1-4757-4721-8.
 --
 -- The code below is a strict split indexed presentation over DASHI's existing
 -- ProjectionCategory.  It does not claim that every semantic context system in
--- the repository has already been supplied with these laws.
+-- the repository has already been supplied with these laws, nor does it claim
+-- the full Grothendieck equivalence between fibrations and pseudofunctors.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
