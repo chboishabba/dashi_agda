@@ -3,7 +3,7 @@ module DASHI.Moonshine.MonsterFrickeCasselmanHighestAlphaEverything where
 ------------------------------------------------------------------------
 -- Current highest-alpha convergence root.
 --
--- GLOBAL PRIME-SET SIDE -- ALL-PRIME THEOREM WITH TWO MODERN MECHANISMS
+-- GLOBAL PRIME SUPPORT -- ALL-PRIME THEOREM WITH TWO MODERN MECHANISMS
 --
 --   FORWARD:
 --     p | |M|
@@ -17,16 +17,31 @@ module DASHI.Moonshine.MonsterFrickeCasselmanHighestAlphaEverything where
 --       -> Duncan--Swisher Theorem 1.2 exponent support (p>3)
 --       -> p | |M|,
 --
--- with p=2,3 handled by the separate exact low-level lane.
+-- with p=2,3 handled by the separate exact low-level support lane.
+--
+-- GLOBAL EXPONENT DEPTH -- NOW ABOVE SUPPORT
+--
+-- The branch now retains the full Duncan--Swisher p>3 multiplicity theorem,
+-- not only its Boolean support corollary.  The same Monster valuation is
+-- computed from two source-natural observers:
+--
+--   supersingular stratum + m_p
+--   modular-function p-adic valuation triple.
+--
+-- Their outputs agree at the declared consumer 2*v_p(|M|), while their carrier
+-- types are not identified.  Ogg support is a further coarse projection.
+--
+-- At p=2,3 the two Duncan--Swisher right-hand sides agree but equal 36 and 18,
+-- whereas the Monster exponents are 46 and 20.  The exact unexplained residuals
+-- 10 and 2 are now isolated; no false extension of the p>3 theorem is made.
+--
+-- For p>3 the next explanatory frontier is below the valuation identities:
+-- explicit modular-function / U_p / level-lowering / p-adic rigidity machinery.
+-- For p=2,3 it is the mechanism producing the common exceptional residual.
 --
 -- The older Duncan--Ono/Ogg supersingular SUPPORT equivalence is no longer
 -- imported by the primary arbitrary-prime theorem.  It remains an independent
--- historical cross-check.  The next global frontier is to lower the stronger
--- Duncan--Swisher exponent theorem itself into explicit modular-function
--- operators rather than consuming only its support corollary.
---
--- No MonsterPrimeLane / SSP15 finite table and no finite under-72 Fricke table
--- participates in the arbitrary-prime theorem.
+-- historical cross-check.
 --
 -- LOCAL p11 SIDE -- RESOLVED AT THE CORRECT REPRESENTATION LEVEL
 --
@@ -76,10 +91,6 @@ module DASHI.Moonshine.MonsterFrickeCasselmanHighestAlphaEverything where
 --   same pi_2 + common plane + a2 + Satake cubic + residual map + kernel line
 --
 -- does NOT canonically select a fixed-space coordinate alignment.
---
--- A Whittaker/test-vector normalization may select a preferred chart for a
--- downstream consumer, but it is OPTIONAL extra coordinate structure and is
--- not required by the representation-level Jacquet--Langlands theorem.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -91,6 +102,7 @@ import DASHI.Moonshine.PublishedMonsterFrickeGenusZeroExact as HistoricalGe5
 import DASHI.Moonshine.PublishedMonsterFrickeAllSupportedPrimesExact as GlobalAll
 import DASHI.Moonshine.MonsterFrickeModernDirectionalMechanismExact as Modern
 import DASHI.Moonshine.DuncanSwisherMonsterFrickeAllPrimesExact as DSAll
+import DASHI.Moonshine.DuncanSwisherExponentDepthHighestAlphaEverything as Depth
 import DASHI.Moonshine.PublishedPrimeLevelFrickeSelectorPinnedExact as Fricke
 import DASHI.Moonshine.PrimeLevelDeligneRapoportFrickeSelectorExact as Selector
 import DASHI.Moonshine.CasselmanUnramifiedPGL2FixedVectorTowerExact as Casselman
@@ -162,6 +174,35 @@ lowPrimeFiniteFrickeTableStillUnusedRegression :
   GlobalAll.finiteUnder72FrickeTableImported
     GlobalAll.canonicalPublishedMonsterFrickeAllSupportedPrimesBoundary ≡ false
 lowPrimeFiniteFrickeTableStillUnusedRegression = refl
+
+------------------------------------------------------------------------
+-- Quantitative Monster exponent regressions.
+------------------------------------------------------------------------
+
+fullExponentDepthRetainedRegression :
+  Depth.fullExponentDepthNowRetained
+    Depth.canonicalDuncanSwisherExponentDepthHighestAlphaBoundary ≡ true
+fullExponentDepthRetainedRegression = refl
+
+geometricAndModularDepthShareConsumerRegression :
+  Depth.geometricAndModularObserversShareConsumer
+    Depth.canonicalDuncanSwisherExponentDepthHighestAlphaBoundary ≡ true
+geometricAndModularDepthShareConsumerRegression = refl
+
+supportStrictlyCoarserThanDepthRegression :
+  Depth.supportExposedAsCoarserProjection
+    Depth.canonicalDuncanSwisherExponentDepthHighestAlphaBoundary ≡ true
+supportStrictlyCoarserThanDepthRegression = refl
+
+p2p3ResidualsExplicitRegression :
+  Depth.p2p3ResidualsIsolated
+    Depth.canonicalDuncanSwisherExponentDepthHighestAlphaBoundary ≡ true
+p2p3ResidualsExplicitRegression = refl
+
+lowPrimeResidualMechanismStillOpenRegression :
+  Depth.lowPrimeResidualMechanismStillOpen
+    Depth.canonicalDuncanSwisherExponentDepthHighestAlphaBoundary ≡ true
+lowPrimeResidualMechanismStillOpenRegression = refl
 
 ------------------------------------------------------------------------
 -- Local p11 representation / coordinate regressions.
