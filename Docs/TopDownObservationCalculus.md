@@ -90,14 +90,14 @@ observe c : Fine c -> Surface c.
 
 A context change has contravariant fine/surface restriction maps.  Identity and composition are explicit laws and observation is natural with respect to restriction.
 
-The chosen restriction presentation supplies canonical split cartesian lifts and a stagewise factorisation equation.  `ContextIndexedObservationFibrationRegression` constructs a literal two-context example in which a public restriction is sufficient for the public consumer but the same surface form is not sufficient for a situated hidden-coordinate consumer.
+The chosen restriction presentation constructs canonical split **lift arrows**, the exact stagewise factorisation equation, and the factor-through-lift arrow for a composite restriction.  `ContextIndexedObservationFibrationRegression` constructs a literal two-context example in which a public restriction is sufficient for the public consumer but the same surface form is not sufficient for a situated hidden-coordinate consumer.
 
 Source calibration:
 
 - Jean Bénabou, **Fibered Categories and the Foundations of Naive Category Theory**, *Journal of Symbolic Logic* 50(1), 1985, 10--37, DOI `10.2307/2273784`.
 - Saunders Mac Lane, **Categories for the Working Mathematician**, 2nd ed., Springer, 1998, DOI `10.1007/978-1-4757-4721-8`.
 
-The current Agda is a strict split indexed presentation.  It does not claim the complete Grothendieck correspondence between fibrations and pseudofunctors, nor that every existing DASHI context carrier already satisfies the required laws.
+The current Agda is deliberately a strict split indexed/fibration-shaped presentation.  It proves the existence/factorisation side of its chosen lifts, but it does **not** claim proof-level uniqueness for arbitrary total arrows, the complete Bénabou cartesian universal property, or the Grothendieck equivalence between fibrations and pseudofunctors.  Nor does it assert that every existing DASHI context carrier already satisfies the required indexed laws.
 
 ## 4. Collision fibres and residual symmetry
 
@@ -226,7 +226,8 @@ mathematical separation = world identity
 sector separation = semantic completeness
 consumer sufficiency = exact reconstruction
 static sufficiency = future-language safety
-fibration vocabulary = every context system is a fibration
+indexed restriction laws = full Bénabou cartesian universality
+fibration-shaped vocabulary = every context system is a fibration
 commuting symmetry = double-centralizer theorem
 same finite cardinality = same algebra/action
 369 finite geometry = Moonshine theorem
