@@ -58,8 +58,10 @@ import Data.Integer.Base as Int
 open import Data.Rational.Base using
   (ℚ; 0ℚ; _/_; _+_; _-_; _*_; _≤_; -_; nonNegative)
 import Data.Rational.Properties as ℚP
+open ℚP using (_≤?_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
+open import Relation.Nullary.Decidable.Core using (toWitness)
 
 half : ℚ
 half = Int.+ 1 / 2
@@ -144,7 +146,7 @@ maximumPlusMinimumNonnegative budget =
     (minimumDampingNonnegative budget)
 
 halfNonnegative : 0ℚ ≤ half
-halfNonnegative = ℚP.0≤⇒0≤[/] (ℚP.0≤1)
+halfNonnegative = toWitness {a? = 0ℚ ≤? half} _
 
 variationCoefficientNonnegative : ∀ budget →
   0ℚ ≤ half * (maximumDamping budget - minimumDamping budget)
@@ -248,10 +250,10 @@ record StrictCriticalVariationGate
 open StrictCriticalVariationGate public
 
 criticalVariationGateGivesCoerciveViscousBound :
-  ∀ {budget} {control : CriticalVariationControl budget} →
-  StrictCriticalVariationGate control →
+  ∀ {budget} {control : CriticalVariationControl budget}
+    (gate : StrictCriticalVariationGate control) →
   netViscousContribution budget
-  ≤ - (half * margin _ * dissipation control)
+  ≤ - (half * margin gate * dissipation control)
 criticalVariationGateGivesCoerciveViscousBound {budget} {control} gate =
   let
     C = maximumDamping budget
