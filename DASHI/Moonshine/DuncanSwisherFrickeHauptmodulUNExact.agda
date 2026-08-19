@@ -97,22 +97,14 @@ hauptmodulDifferenceIsScaledUNAt :
           (UN.qExpansion (primeFrickeHauptmodul A) n)
   ≡ Int._*_ (+ p)
       (UN.qExpansion (UN.analyticUN p (primeFrickeHauptmodul A)) n)
-hauptmodulDifferenceIsScaledUNAt {p} A n =
-  let
-    source = levelLoweringIdentityAt A n
-    fricke = frickeInvariantCoefficient A n
-    a = UN.qExpansion (levelOneHauptmodul A) n
-    b = UN.qExpansion (UN.analyticUN p (primeFrickeHauptmodul A)) n
-    c = UN.qExpansion (frickeAction A (primeFrickeHauptmodul A)) n
-    d = UN.qExpansion (primeFrickeHauptmodul A) n
-  in
-  subst
-    (λ c' → Int._-_ a d ≡ Int._*_ (+ p) b)
-    fricke
-    (subst
-      (λ a' → Int._-_ a' d ≡ Int._*_ (+ p) b)
-      source
-      (ℤRing.solve ((+ p) ∷ b ∷ d ∷ [])))
+hauptmodulDifferenceIsScaledUNAt {p} A n
+  rewrite levelLoweringIdentityAt A n
+        | frickeInvariantCoefficient A n =
+  ℤRing.solve
+    ((+ p)
+      ∷ UN.qExpansion (UN.analyticUN p (primeFrickeHauptmodul A)) n
+      ∷ UN.qExpansion (primeFrickeHauptmodul A) n
+      ∷ [])
 
 ------------------------------------------------------------------------
 -- Now consume the already-pinned analytic U_p coefficient selector.
