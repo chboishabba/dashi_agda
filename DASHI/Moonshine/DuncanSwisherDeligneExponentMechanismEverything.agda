@@ -16,9 +16,9 @@ module DASHI.Moonshine.DuncanSwisherDeligneExponentMechanismEverything where
 -- The sharp n=1 coefficient depth is no longer used here as a free 3/2/1
 -- table.  The current chain is
 --
---   Dwork depth-one local branch
---      + Legendre ramification index e
---      + valuation-zero unit / local factorization
+--   Dwork depth-one Legendre branch
+--      + local J ramification J-alpha = unit * branch^e
+--      + Dwork valuation transfer v(A_1)=v(J-alpha)
 --      -> exact v_p(A_1)=e
 --      -> strict partial-fraction leading-term separation
 --      -> exceptional total depth
@@ -54,24 +54,20 @@ canonicalTheorem12StillOwnsSourceShapeRegression :
     T12.canonicalDuncanSwisherTheorem12Boundary ≡ true
 canonicalTheorem12StillOwnsSourceShapeRegression = refl
 
-------------------------------------------------------------------------
--- Dwork / Legendre sharpness is now theorem-derived from structural local data.
-------------------------------------------------------------------------
-
 jZeroA1SharpDepthRegression :
-  let A = DworkSharp.publishedDworkLocalA1Factorization Deligne.jZeroExceptional
+  let A = DworkSharp.publishedDworkLocalSharpnessData Deligne.jZeroExceptional
   in Ramified.valuation
       (DworkSharp.padicValuation A) (DworkSharp.A1Coefficient A) ≡ 3
 jZeroA1SharpDepthRegression = DworkSharp.jZeroA1DepthIsThree
 
 j1728A1SharpDepthRegression :
-  let A = DworkSharp.publishedDworkLocalA1Factorization Deligne.j1728Exceptional
+  let A = DworkSharp.publishedDworkLocalSharpnessData Deligne.j1728Exceptional
   in Ramified.valuation
       (DworkSharp.padicValuation A) (DworkSharp.A1Coefficient A) ≡ 2
 j1728A1SharpDepthRegression = DworkSharp.j1728A1DepthIsTwo
 
 ordinaryA1SharpDepthRegression :
-  let A = DworkSharp.publishedDworkLocalA1Factorization Deligne.ordinaryType
+  let A = DworkSharp.publishedDworkLocalSharpnessData Deligne.ordinaryType
   in Ramified.valuation
       (DworkSharp.padicValuation A) (DworkSharp.A1Coefficient A) ≡ 1
 ordinaryA1SharpDepthRegression = DworkSharp.ordinaryA1DepthIsOne
@@ -95,10 +91,6 @@ p11ExceptionalDepthNowDerivedRegression :
   let S = DworkPF.publishedExceptionalDworkPartialFractionSeparation PF.prime11
   in Leading.valuation (DworkPF.additiveValuation S) (DworkPF.pJ1Up S) ≡ 2
 p11ExceptionalDepthNowDerivedRegression = DworkPF.p11TotalDepthIsTwo
-
-------------------------------------------------------------------------
--- Concrete exponent geometry / Brandt--automorphism bridge.
-------------------------------------------------------------------------
 
 p11FullAutMinimumRegression :
   Geometry.p11FullAutomorphismOrder P11.j1728SS ≡ 4
