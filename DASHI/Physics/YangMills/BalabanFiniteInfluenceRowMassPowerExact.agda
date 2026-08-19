@@ -31,7 +31,8 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
-open import Relation.Binary.PropositionalEquality using (cong; cong₂; subst; sym; trans)
+import Data.Rational.Tactic.RingSolver as ℚRing
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
@@ -86,7 +87,7 @@ sumAdd (value ∷ values) left right
   where
   reassociate : ∀ a b c d →
     (a + b) + (c + d) ≡ (a + c) + (b + d)
-  reassociate = Data.Rational.Tactic.RingSolver.solve-∀
+  reassociate = ℚRing.solve-∀
 
 sumSwap :
   ∀ {A B : Set} (xs : List A) (ys : List B) (term : A → B → ℚ) →
