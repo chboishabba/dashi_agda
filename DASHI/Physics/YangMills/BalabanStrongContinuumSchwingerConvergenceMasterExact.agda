@@ -41,9 +41,11 @@ module DASHI.Physics.YangMills.BalabanStrongContinuumSchwingerConvergenceMasterE
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
+open import Data.Rational.Base as ℚ using (_*_; _≤_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanContinuumScaleLocalObservableCauchyExact as Scale
+import DASHI.Physics.YangMills.BalabanTraceKoteckyPreissGeometricExact as Geo
 
 record StrongConvergenceAuthority (Family Limit : Set) : Set₁ where
   field
@@ -98,18 +100,11 @@ strongMasterLimitIsUnique {authority = authority} master candidate candidateConv
     candidateConverges
     (strongConvergence master)
 
-------------------------------------------------------------------------
--- Existing exact scale-local theorem: the hard physical increment estimate
--- already implies an explicit Cauchy modulus, so no independent generic Cauchy
--- analysis is part of the frontier.
-------------------------------------------------------------------------
-
 scaleLocalIncrementGivesObservableCauchyModulus :
   (dataSet : Scale.RenormalizedObservableScaleCauchyData) → ∀ start count →
   Scale.scaleDifferenceMagnitude dataSet start count
   ≤ Scale.coefficient (Scale.majorant dataSet)
-      * (DASHI.Physics.YangMills.BalabanTraceKoteckyPreissGeometricExact.half
-        * DASHI.Physics.YangMills.BalabanTraceKoteckyPreissGeometricExact.halfPower start)
+      * (Geo.half * Geo.halfPower start)
 scaleLocalIncrementGivesObservableCauchyModulus =
   Scale.renormalizedObservableCauchyModulus
 
@@ -119,8 +114,5 @@ strongContinuumTopologyConsequencesLevel = machineChecked
 scaleLocalObservableCauchyClosureLevel : ProofLevel
 scaleLocalObservableCauchyClosureLevel = machineChecked
 
--- Physical master: prove the actual renormalized YM Schwinger family converges
--- in such a topology, uniformly in the volume/UV data required by downstream
--- OS, local-operator, nontriviality and clustering theorems.
 physicalStrongContinuumSchwingerConvergenceLevel : ProofLevel
 physicalStrongContinuumSchwingerConvergenceLevel = conditional
