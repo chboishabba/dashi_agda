@@ -23,7 +23,7 @@ module DASHI.Physics.Closure.NSTriadKNWaleffeSelfImbalanceSignIndefiniteRound95E
 -- into a universal favorable-sign theorem.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; true)
+open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base using (ℚ; _+_; _*_; -_)
 open import Data.Rational.Tactic.RingSolver using (solve)
@@ -51,7 +51,7 @@ positiveWitness = solve []
 -- Equipartition remains the neutral calibration.
 equipartitionWitness :
   imbalance 3 1 2 2 2 2 ≡ 0
- equipartitionWitness = solve []
+equipartitionWitness = solve []
 
 round95SelfImbalanceSignDeterminedByHelicityOrdering : Bool
 round95SelfImbalanceSignDeterminedByHelicityOrdering = false
