@@ -31,7 +31,7 @@ module DASHI.Moonshine.DuncanSwisherThreeObserverExponentWeldExact where
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
-open import Data.Nat using (_≤_; _*_; s≤s; z≤n)
+open import Data.Nat using (_≤_; _*_)
 open import Data.Nat.Primality using (Prime)
 
 import DASHI.Core.ObserverRefinementLatticeExact as Observer
@@ -39,7 +39,6 @@ import DASHI.Moonshine.DuncanSwisherMonsterExponentFormulaExact as DS
 import DASHI.Moonshine.DuncanSwisherModularValuationDepthMechanismExact as Modular
 import DASHI.Moonshine.DuncanSwisherExponentObserverFactorizationExact as Existing
 import DASHI.Moonshine.DuncanSwisherFaberVpDepthExact as Faber
-import DASHI.Moonshine.DuncanSwisherMonsterExponentGeometryExact as Controls
 
 ------------------------------------------------------------------------
 -- One theorem state carrying all three source-native mechanisms.
@@ -202,25 +201,21 @@ control37DoubledExponentMatchesTheorem12 :
   doubledMonsterControl control37 ≡ 0
 control37DoubledExponentMatchesTheorem12 = refl
 
+sixNotZero : 6 ≡ 0 → ⊥
+sixNotZero ()
+
 faberDepthAloneCannotDecodeExponent :
   (decode : Nat → Nat) →
   decode (faberDepthOnlyControl control13) ≡ doubledMonsterControl control13 →
   decode (faberDepthOnlyControl control37) ≡ doubledMonsterControl control37 →
   ⊥
 faberDepthAloneCannotDecodeExponent decode at13 at37 =
-  let
-    sameInput : faberDepthOnlyControl control13 ≡ faberDepthOnlyControl control37
-    sameInput = refl
-
-    sixEqualsZero : 6 ≡ 0
-    sixEqualsZero =
-      trans
-        (sym at13)
-        (trans
-          (cong decode sameInput)
-          at37)
-  in
-  case sixEqualsZero of λ ()
+  sixNotZero
+    (trans
+      (sym at13)
+      (trans
+        (cong decode refl)
+        at37))
 
 ------------------------------------------------------------------------
 -- Boundary.
