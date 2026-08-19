@@ -39,31 +39,39 @@ import DASHI.Core.IndexedInterpretationMorphismExact
 import DASHI.Core.ObserverRefinementLatticeExact
 import DASHI.Core.ObserverIncomparabilityTypedJoinExact
 import DASHI.Core.ConsumerDescentMinimalObserverExact
+import DASHI.Core.ConsumerKernelQuotientPresentationExact
+import DASHI.Core.ConsumerQuotientBaseChangeExact
+import DASHI.Core.ConsumerQuotientBaseChangeRegression
 import DASHI.Core.ContextIndexedObservationFibrationExact
 import DASHI.Core.ResidualSymmetryCollisionFibreExact
+import DASHI.Core.OrbitStabilizerResidualPresentationExact
 import DASHI.Core.TopDownObservationCalculusExact
 import DASHI.Cognition.PNF.EditTransportLeafLocalityExact
 
 -- Native signed/neutral geometry and the repo-native 369 residual tower.
 -- `not positive` is not promoted to strict inverse.  Boolean decisions remain
 -- legitimate declared consumer surfaces, while exact reconstruction keeps the
--- dependent residual.
+-- dependent residual.  The generic orbit/stabilizer owner now explains the
+-- variable residual as isotropy rather than as a special-purpose count.
 import DASHI.Foundations.Base369SignedMembershipExact
 import DASHI.Foundations.TernaryNativeMinimalityExact
 import DASHI.Foundations.BalancedTernaryAntipodalOrbitExact
 import DASHI.Foundations.BalancedTernaryAntipodalResidualCodecExact
+import DASHI.Foundations.BalancedTernaryOrbitStabilizerResidualBridgeExact
 import DASHI.Foundations.BalancedTernaryDependentRecoverableBridgeExact
 import DASHI.Foundations.BalancedTernaryNineZeroFibreCountExact
 import DASHI.Foundations.Base369InteractionAntipodalFibreExact
 import DASHI.Foundations.Base369InteractionObserverJoinExact
 import DASHI.Foundations.Base369NineCoordinateAggregateBridgeExact
 import DASHI.Foundations.TernaryNineAntipodalD4SeparationExact
+import DASHI.Foundations.TernaryNineOptimalBinaryDilationExact
 import DASHI.Cognition.PNF.BinaryBalancedTernaryAggregateLossExact
 
 -- Positive-description products versus dependent/fibred object construction.
 import DASHI.Ontology.DependentDefinitionFibreExact
 
 -- Public regressions.
+import DASHI.Core.ConsumerQuotientBaseChangeRegression
 import DASHI.Core.ContextIndexedObservationFibrationRegression
 import DASHI.Core.ResidualSymmetryCollisionFibreRegression
 import DASHI.Ontology.WikidataTernaryFibreRegression
