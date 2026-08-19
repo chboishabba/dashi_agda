@@ -45,6 +45,7 @@ module DASHI.Physics.YangMills.YangMillsContinuumLocalOperatorOPEStressTensorExa
 -- quantitative object that a flow-equation/RG proof should produce.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _*_; _≤_)
 
