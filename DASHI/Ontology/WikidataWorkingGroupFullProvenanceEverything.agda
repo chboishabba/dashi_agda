@@ -51,6 +51,12 @@ import DASHI.Biology.AliceBrownEpistemicGovernanceEverything
 -- lineage, including all source registries and DOI-bearing comparative evidence.
 import DASHI.EverythingEarlyLearningIntersectionalReappropriation
 
+-- Situated empowerment/connectedness specialization: stakeholder-indexed claim
+-- coverage and consumer-residual necessity, recognition of pre-existing
+-- capability, effective community topology and capability-expansion-without-
+-- domination transition semantics.
+import DASHI.EverythingEarlyYearsEmpowermentConnectedness
+
 -- Empirical genealogy / source-role provenance, including Alice institutional
 -- agency, Bringing Them Home, Kimmerer attribution, typed relation/evidence
 -- strength and claim-manifest audit.
