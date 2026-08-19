@@ -65,7 +65,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Binary.PropositionalEquality using (subst)
 
 record ExternalCriticalExcessCell
     (nonlinearConstant threshold : ℚ) : Set where
@@ -131,6 +131,14 @@ externalCellAbsorbedModuloExcess {C} {threshold} {viscosity} {delta}
       ≡ (C * threshold + delta) * D + C * (D * X)
     splitUpper = solve (C ∷ threshold ∷ delta ∷ D ∷ X ∷ [])
 
+    expanded :
+      externalFlux cell + delta * D
+      ≤ (C * threshold + delta) * D + C * (D * X)
+    expanded =
+      subst
+        (λ upper → externalFlux cell + delta * D ≤ upper)
+        splitUpper addMargin
+
     headroomTimesD :
       (C * threshold + delta) * D ≤ viscosity * D
     headroomTimesD =
@@ -142,11 +150,7 @@ externalCellAbsorbedModuloExcess {C} {threshold} {viscosity} {delta}
       ≤ viscosity * D + C * (D * X)
     addExcess = ℚP.+-mono-≤ headroomTimesD ℚP.≤-refl
   in
-  ℚP.≤-trans addMargin
-    (subst
-      (λ upper →
-        externalFlux cell + delta * D ≤ upper)
-      splitUpper addExcess)
+  ℚP.≤-trans expanded addExcess
 
 sumExternalFlux :
   ∀ {C threshold} →
