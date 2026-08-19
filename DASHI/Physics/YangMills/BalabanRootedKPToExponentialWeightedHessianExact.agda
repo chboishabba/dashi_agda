@@ -36,8 +36,7 @@ module DASHI.Physics.YangMills.BalabanRootedKPToExponentialWeightedHessianExact 
 --
 -- then with weight (3/2)^d,
 --
---     (3/2)^d h_d
---       <= (c_H/4) (3/4)^d.
+--     (3/2)^d h_d <= (c_H/4) (3/4)^d.
 --
 -- Since
 --
@@ -52,10 +51,10 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; _/_)
+  (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; _/_; NonNegative; nonNegative)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayP2LargeFieldStepVExact as StepV
@@ -66,11 +65,66 @@ threeHalves threeQuarters : ℚ
 threeHalves = + 3 / 2
 threeQuarters = + 3 / 4
 
+threeHalvesNonnegative : 0ℚ ≤ threeHalves
+threeHalvesNonnegative =
+  let
+    instance
+      selected : NonNegative threeHalves
+      selected = ℚP.normalize-nonNeg 3 2
+  in
+  ℚP.nonNegative⁻¹ threeHalves
+
+threeQuartersNonnegative : 0ℚ ≤ threeQuarters
+threeQuartersNonnegative =
+  let
+    instance
+      selected : NonNegative threeQuarters
+      selected = ℚP.normalize-nonNeg 3 4
+  in
+  ℚP.nonNegative⁻¹ threeQuarters
+
+oneNonnegative : 0ℚ ≤ 1ℚ
+oneNonnegative =
+  let
+    instance
+      selected : NonNegative 1ℚ
+      selected = ℚP.normalize-nonNeg 1 1
+  in
+  ℚP.nonNegative⁻¹ 1ℚ
+
+productNonnegative : ∀ left right →
+  0ℚ ≤ left → 0ℚ ≤ right → 0ℚ ≤ left * right
+productNonnegative left right leftNonnegative rightNonnegative =
+  let
+    instance
+      leftInstance : NonNegative left
+      leftInstance = nonNegative leftNonnegative
+      rightInstance : NonNegative right
+      rightInstance = nonNegative rightNonnegative
+      productInstance : NonNegative (left * right)
+      productInstance = ℚP.nonNeg*nonNeg⇒nonNeg left right
+  in
+  ℚP.nonNegative⁻¹ (left * right)
+
 threeHalvesPower threeQuartersPower : Nat → ℚ
 threeHalvesPower zero = 1ℚ
 threeHalvesPower (suc n) = threeHalvesPower n * threeHalves
 threeQuartersPower zero = 1ℚ
 threeQuartersPower (suc n) = threeQuartersPower n * threeQuarters
+
+threeHalvesPowerNonnegative : ∀ n → 0ℚ ≤ threeHalvesPower n
+threeHalvesPowerNonnegative zero = oneNonnegative
+threeHalvesPowerNonnegative (suc n) =
+  productNonnegative
+    (threeHalvesPower n) threeHalves
+    (threeHalvesPowerNonnegative n) threeHalvesNonnegative
+
+threeQuartersPowerNonnegative : ∀ n → 0ℚ ≤ threeQuartersPower n
+threeQuartersPowerNonnegative zero = oneNonnegative
+threeQuartersPowerNonnegative (suc n) =
+  productNonnegative
+    (threeQuartersPower n) threeQuarters
+    (threeQuartersPowerNonnegative n) threeQuartersNonnegative
 
 threeQuarterPartialSum : Nat → ℚ
 threeQuarterPartialSum zero = 0ℚ
@@ -80,53 +134,41 @@ threeQuarterPartialSum (suc n) =
 quarterThreeQuarterTailIdentity : ∀ n →
   StepV.quarter * threeQuarterPartialSum n + threeQuartersPower n ≡ 1ℚ
 quarterThreeQuarterTailIdentity zero = refl
-quarterThreeQuarterTailIdentity (suc n)
-  rewrite quarterThreeQuarterTailIdentity n =
-  ℚRing.solve []
+quarterThreeQuarterTailIdentity (suc n) =
+  trans
+    (ℚRing.solve-∀
+      (threeQuarterPartialSum n) (threeQuartersPower n))
+    (quarterThreeQuarterTailIdentity n)
 
 quarterPartialBelowOne : ∀ n →
   StepV.quarter * threeQuarterPartialSum n ≤ 1ℚ
 quarterPartialBelowOne n =
   let
-    powerNonnegative : 0ℚ ≤ threeQuartersPower n
-    powerNonnegative = powerNonnegativeProof n
-
-    baseBelow :
-      StepV.quarter * threeQuarterPartialSum n
-      ≤ StepV.quarter * threeQuarterPartialSum n + threeQuartersPower n
-    baseBelow = ℚP.≤-stepsʳ
-      (StepV.quarter * threeQuarterPartialSum n)
-      powerNonnegative
+    base = StepV.quarter * threeQuarterPartialSum n
+    translated : base + 0ℚ ≤ base + threeQuartersPower n
+    translated = ℚP.+-monoˡ-≤ base (threeQuartersPowerNonnegative n)
+    baseBelow : base ≤ base + threeQuartersPower n
+    baseBelow = subst
+      (λ lower → lower ≤ base + threeQuartersPower n)
+      (ℚP.+-identityʳ base)
+      translated
   in
   subst
-    (λ upper → StepV.quarter * threeQuarterPartialSum n ≤ upper)
+    (λ upper → base ≤ upper)
     (quarterThreeQuarterTailIdentity n)
     baseBelow
-  where
-  powerNonnegativeProof : ∀ depth → 0ℚ ≤ threeQuartersPower depth
-  powerNonnegativeProof zero = ℚP.0≤1
-  powerNonnegativeProof (suc depth) =
-    Norm.productNonnegative
-      (threeQuartersPower depth)
-      threeQuarters
-      (powerNonnegativeProof depth)
-      threeQuartersNonnegative
-
-  threeQuartersNonnegative : 0ℚ ≤ threeQuarters
-  threeQuartersNonnegative =
-    let
-      instance
-        qNonnegative : ℚ.NonNegative threeQuarters
-        qNonnegative = ℚP.normalize-nonNeg 3 4
-    in
-    ℚP.nonNegative⁻¹ threeQuarters
 
 halfThreeHalvesPowerIsThreeQuartersPower : ∀ n →
   threeHalvesPower n * StepV.halfPower n ≡ threeQuartersPower n
 halfThreeHalvesPowerIsThreeQuartersPower zero = refl
-halfThreeHalvesPowerIsThreeQuartersPower (suc n)
-  rewrite halfThreeHalvesPowerIsThreeQuartersPower n =
-  ℚRing.solve []
+halfThreeHalvesPowerIsThreeQuartersPower (suc n) =
+  trans
+    (ℚRing.solve-∀
+      (threeHalvesPower n) (StepV.halfPower n))
+    (trans
+      (cong (_* threeQuarters)
+        (halfThreeHalvesPowerIsThreeQuartersPower n))
+      refl)
 
 record ExponentialWeightedHessianShellControl
     (Scale Volume Root : Set) : Set₁ where
@@ -152,7 +194,18 @@ weightedHessianPartial dataSet scale volume root (suc depth) =
   weightedHessianPartial dataSet scale volume root depth
   + weightedHessianShell dataSet scale volume root depth
 
--- Pointwise shell estimate after inserting the 3/2 distance weight.
+weightedMajorantIdentity : ∀ derivative depth →
+  threeHalvesPower depth
+    * (derivative * (StepV.quarter * StepV.halfPower depth))
+  ≡ derivative * StepV.quarter * threeQuartersPower depth
+weightedMajorantIdentity derivative depth =
+  trans
+    (ℚRing.solve-∀
+      derivative (threeHalvesPower depth) (StepV.halfPower depth))
+    (cong
+      (λ selected → derivative * StepV.quarter * selected)
+      (halfThreeHalvesPowerIsThreeQuartersPower depth))
+
 weightedShellBelowThreeQuarterMajorant :
   ∀ {Scale Volume Root}
     (dataSet : ExponentialWeightedHessianShellControl Scale Volume Root)
@@ -163,26 +216,18 @@ weightedShellBelowThreeQuarterMajorant :
 weightedShellBelowThreeQuarterMajorant dataSet scale volume root depth =
   let
     control = hessianControl dataSet
-
     first = Hess.hessianShellBelowActivityShell
       control scale volume root depth
-
     shell = StepV.rootedShellBelowMajorant
       (Hess.kpShell control) scale volume root depth
-
     derivativeScaled = Norm.scaleNonnegative
       (Hess.derivativeConstant control)
       (Hess.derivativeConstantNonnegative control)
       shell
-
     combined = ℚP.≤-trans first derivativeScaled
-
-    weightNonnegative : 0ℚ ≤ threeHalvesPower depth
-    weightNonnegative = weightPowerNonnegative depth
-
     weighted = Norm.scaleNonnegative
       (threeHalvesPower depth)
-      weightNonnegative
+      (threeHalvesPowerNonnegative depth)
       combined
   in
   subst
@@ -191,32 +236,6 @@ weightedShellBelowThreeQuarterMajorant dataSet scale volume root depth =
     (weightedMajorantIdentity
       (Hess.derivativeConstant control) depth)
     weighted
-  where
-  threeHalvesNonnegative : 0ℚ ≤ threeHalves
-  threeHalvesNonnegative =
-    let
-      instance
-        selected : ℚ.NonNegative threeHalves
-        selected = ℚP.normalize-nonNeg 3 2
-    in
-    ℚP.nonNegative⁻¹ threeHalves
-
-  weightPowerNonnegative : ∀ n → 0ℚ ≤ threeHalvesPower n
-  weightPowerNonnegative zero = ℚP.0≤1
-  weightPowerNonnegative (suc n) =
-    Norm.productNonnegative
-      (threeHalvesPower n)
-      threeHalves
-      (weightPowerNonnegative n)
-      threeHalvesNonnegative
-
-  weightedMajorantIdentity : ∀ derivative depth →
-    threeHalvesPower depth
-      * (derivative * (StepV.quarter * StepV.halfPower depth))
-    ≡ derivative * StepV.quarter * threeQuartersPower depth
-  weightedMajorantIdentity derivative depth
-    rewrite halfThreeHalvesPowerIsThreeQuartersPower depth =
-    ℚRing.solve []
 
 weightedPartialBelowGeometricMajorant :
   ∀ {Scale Volume Root}
