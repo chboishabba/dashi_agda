@@ -32,10 +32,10 @@ module DASHI.Physics.YangMills.BalabanTransferGapToObservableClusteringExact whe
 --
 -- Consequently the remaining Yang--Mills work is the same-object transfer/OS
 -- identification and the common spectral floor, not another independent decay
--- inequality.  This module proves that implication at the exact abstract level
--- needed by the physical carrier.
+-- inequality.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 record TransferGapObservableSemigroup
@@ -63,8 +63,8 @@ record TransferGapObservableSemigroup
         (multiply (vectorNorm (centeredVector A))
           (vectorNorm (semigroup t (centeredVector B))))
 
-    -- This is the spectral theorem consequence of the common transfer gap on
-    -- the vacuum-orthogonal sector: ||e^{-tH} psi|| <= e^{-m t} ||psi||.
+    -- Spectral theorem consequence of a common transfer gap on the
+    -- vacuum-orthogonal sector.
     vacuumOrthogonalSemigroupDecay : ∀ B t →
       LessEqual
         (vectorNorm (semigroup t (centeredVector B)))
@@ -96,25 +96,17 @@ record CutoffUniformTransferGapObservableFamily
   field
     dataAt : Cutoff →
       TransferGapObservableSemigroup Observable Vector Time Scalar Bound
-
-    -- Same physical decay carrier at every cutoff.  This keeps cutoff
-    -- uniformity out of the pointwise Cauchy--Schwarz proof.
     commonGapDecay : Time → Bound
     gapDecayIsCommon : ∀ cutoff time →
       gapDecay (dataAt cutoff) time ≡ commonGapDecay time
-  where
-  open import Agda.Builtin.Equality using (_≡_)
 
--- The pointwise theorem already applies uniformly once gapDecay is identified
--- with one cutoff-independent physical decay law.  No new lattice estimate is
--- introduced by passing from the spectral floor to observable correlations.
+open CutoffUniformTransferGapObservableFamily public
+
 transferGapToObservableClusteringCompilerLevel : ProofLevel
 transferGapToObservableClusteringCompilerLevel = machineChecked
 
 transferGapSemigroupDecayStandardLevel : ProofLevel
 transferGapSemigroupDecayStandardLevel = standardImported
 
--- Physical seam: identify centered local gauge-invariant observables with the
--- SAME transfer-Hilbert-space vectors and the Round66 common mass floor.
 literalObservableTransferRepresentationLevel : ProofLevel
 literalObservableTransferRepresentationLevel = conditional
