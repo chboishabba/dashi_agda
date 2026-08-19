@@ -5,7 +5,14 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 
 sources=(
+  DASHI/Core/ConsumerDescentMinimalObserverExact.agda
+  DASHI/Core/ContextIndexedObservationFibrationExact.agda
+  DASHI/Core/ContextIndexedObservationFibrationRegression.agda
+  DASHI/Core/ResidualSymmetryCollisionFibreExact.agda
+  DASHI/Core/ResidualSymmetryCollisionFibreRegression.agda
+  DASHI/Core/TopDownObservationCalculusExact.agda
   DASHI/Core/DependentRecoverableProjectionExact.agda
+  DASHI/EverythingTopDownObservationCalculus.agda
   DASHI/Foundations/TernaryNativeMinimalityExact.agda
   DASHI/Foundations/BalancedTernaryAntipodalOrbitExact.agda
   DASHI/Foundations/BalancedTernaryAntipodalResidualCodecExact.agda
@@ -49,6 +56,16 @@ require_pattern() {
   fi
 }
 
+require_pattern DASHI/Core/ConsumerDescentMinimalObserverExact.agda 'sectionedDescentIffFibreConstant'
+require_pattern DASHI/Core/ConsumerDescentMinimalObserverExact.agda 'canonicalConsumerObserverIsLeast'
+require_pattern DASHI/Core/ConsumerDescentMinimalObserverExact.agda 'nonDescentWitnessBlocksSufficiency'
+require_pattern DASHI/Core/ContextIndexedObservationFibrationExact.agda 'splitCartesianFactorization'
+require_pattern DASHI/Core/ContextIndexedObservationFibrationExact.agda 'observationCommutesWithCartesianLift'
+require_pattern DASHI/Core/ContextIndexedObservationFibrationRegression.agda 'situatedObservationIsNotAdequate'
+require_pattern DASHI/Core/ResidualSymmetryCollisionFibreExact.agda 'sectorPairStrictlyRefinesCoarse'
+require_pattern DASHI/Core/ResidualSymmetryCollisionFibreRegression.agda 'signRefinesAntipodalPoleClass'
+require_pattern DASHI/Core/TopDownObservationCalculusExact.agda 'dependentCodeIsAdequateForEveryConsumer'
+require_pattern DASHI/Core/TopDownObservationCalculusExact.agda 'toyObserverIsNotReconstructive'
 require_pattern DASHI/Core/DependentRecoverableProjectionExact.agda 'dependentCodeSeparating'
 require_pattern DASHI/Foundations/TernaryNativeMinimalityExact.agda 'noOneBitInjection'
 require_pattern DASHI/Foundations/TernaryNativeMinimalityExact.agda 'noExactPositiveOnlyReconstruction'
@@ -63,11 +80,16 @@ require_pattern DASHI/Foundations/BalancedTernaryNineZeroFibreCountExact.agda 'a
 require_pattern DASHI/Interop/PointedSignAntipodal369SeparationExact.agda 'pointedFiveModeSignSizeIsEleven'
 require_pattern DASHI/Ontology/DependentDefinitionFibreExact.agda 'noToyotaFiestaSection'
 require_pattern DASHI/Ontology/DependentDefinitionFibreExact.agda 'flatCountSplitsAsValidPlusInvalid'
+require_pattern DASHI/Ontology/WikidataTernaryFibreRegression.agda 'positiveOnlyCannotBeSufficientForSignedIdentity'
+require_pattern DASHI/Ontology/WikidataTernaryFibreRegression.agda 'antipodalDependentCodeSufficientForFineIdentity'
 require_pattern DASHI/Ontology/WikidataTernaryFibreRegression.agda 'threeBlockQuotientPlusResidualRoundTrips'
 
 python3 scripts/benchmark_ternary_binary_locality.py >/dev/null
 
 scripts/run_agda29_parallel_check.sh \
+  DASHI/Core/ContextIndexedObservationFibrationRegression.agda \
+  DASHI/Core/ResidualSymmetryCollisionFibreRegression.agda \
+  DASHI/EverythingTopDownObservationCalculus.agda \
   DASHI/Ontology/WikidataTernaryFibreRegression.agda \
   DASHI/Ontology/WikidataWorkingGroupRegression.agda \
   DASHI/Ontology/WikidataWorkingGroupEverything.agda \
