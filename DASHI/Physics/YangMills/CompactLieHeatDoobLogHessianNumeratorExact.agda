@@ -14,7 +14,7 @@ module DASHI.Physics.YangMills.CompactLieHeatDoobLogHessianNumeratorExact where
 --
 --   Hess V(X,X) >= - eta |X|^2
 --
--- is EQUIVALENT (because u^2 > 0) to the division-free inequality
+-- is equivalent (because u^2 > 0) to
 --
 --   (X u)^2 - u Hess u(X,X) + eta u^2 |X|^2 >= 0.
 --
@@ -28,12 +28,9 @@ module DASHI.Physics.YangMills.CompactLieHeatDoobLogHessianNumeratorExact where
 -- configuration and tangent direction, with eta_t having bounded cumulative
 -- integral.  `CompactLieHeatDoobRicciReserveDebtExact` then turns that debt
 -- bound into an LSI using the positive compact-simple Ricci reserve.
---
--- This formulation is deliberately closer to heat-kernel estimates and easier
--- to formalize in exact ordered-ring arithmetic than an inequality containing
--- 1/u_t^2.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 record HeatLogHessianNumeratorData : Set₁ where
@@ -42,6 +39,7 @@ record HeatLogHessianNumeratorData : Set₁ where
 
     zero : Scalar
     add multiply square : Scalar → Scalar → Scalar
+    negate : Scalar → Scalar
     LessEqual StrictLess : Scalar → Scalar → Set
 
     u : Time → Configuration → Scalar
@@ -68,21 +66,20 @@ record HeatLogHessianNumeratorData : Set₁ where
                     (square (u t configuration) (u t configuration)))
           (tangentNormSq X))
 
-    negate : Scalar → Scalar
-
     numeratorNonnegative : ∀ t configuration X →
       LessEqual zero (numerator t configuration X)
 
 open HeatLogHessianNumeratorData public
 
--- Exact standard-calculus bridge.  It is separated from the physical theorem
--- because the only Yang--Mills-specific content is `numeratorNonnegative` and
--- the subsequent cumulative bound on `negativeHessianRate`.
+-- Standard-calculus conclusion socket.  The physical theorem supplies only
+-- the explicit numerator inequality; positivity of u converts it to the lower
+-- Hessian debt bound for -log u.
 record LogHessianDebtConclusion (D : HeatLogHessianNumeratorData) : Set₁ where
   field
     HessianDebtBound : Set
     numeratorImpliesHessianDebt :
-      (∀ t configuration X → LessEqual D (zero D) (numerator D t configuration X)) →
+      (∀ t configuration X →
+        LessEqual D (zero D) (numerator D t configuration X)) →
       HessianDebtBound
 
 open LogHessianDebtConclusion public
