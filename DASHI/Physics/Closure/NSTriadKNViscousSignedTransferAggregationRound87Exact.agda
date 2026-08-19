@@ -38,6 +38,7 @@ module DASHI.Physics.Closure.NSTriadKNViscousSignedTransferAggregationRound87Exa
 -- sum is +2.  Thus positive aggregate transfer alone is insufficient.
 ------------------------------------------------------------------------
 
+open import Agda.Primitive using (Level)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
@@ -46,7 +47,7 @@ open import Data.Rational.Base using
   (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; -_; nonNegative)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
+open import Relation.Binary.PropositionalEquality using (subst)
 
 record ViscousTransferAtom : Set where
   constructor viscous-transfer-atom
@@ -55,29 +56,29 @@ record ViscousTransferAtom : Set where
 
 open ViscousTransferAtom public
 
-sumBy : (ViscousTransferAtom → ℚ) → List ViscousTransferAtom → ℚ
+sumBy : ∀ {ℓ : Level} {A : Set ℓ} → (A → ℚ) → List A → ℚ
 sumBy value [] = 0ℚ
-sumBy value (atom ∷ atoms) = value atom + sumBy value atoms
+sumBy value (item ∷ items) = value item + sumBy value items
 
 totalTransfer : List ViscousTransferAtom → ℚ
 totalTransfer = sumBy transfer
 
 weightedTransfer : List ViscousTransferAtom → ℚ
-weightedTransfer = sumBy (λ atom → coefficient atom * transfer atom)
+weightedTransfer = sumBy (λ item → coefficient item * transfer item)
 
 centredResidual : ℚ → List ViscousTransferAtom → ℚ
 centredResidual margin =
-  sumBy (λ atom → (coefficient atom + margin) * transfer atom)
+  sumBy (λ item → (coefficient item + margin) * transfer item)
 
 centredAggregationIdentity : ∀ margin atoms →
   weightedTransfer atoms
   ≡ (- margin) * totalTransfer atoms + centredResidual margin atoms
 centredAggregationIdentity margin [] = solve [ margin ]
-centredAggregationIdentity margin (atom ∷ atoms)
-  rewrite centredAggregationIdentity margin atoms =
+centredAggregationIdentity margin (item ∷ items)
+  rewrite centredAggregationIdentity margin items =
   solve
-    ( margin ∷ coefficient atom ∷ transfer atom
-    ∷ totalTransfer atoms ∷ centredResidual margin atoms ∷ [])
+    ( margin ∷ coefficient item ∷ transfer item
+    ∷ totalTransfer items ∷ centredResidual margin items ∷ [])
 
 record NonnegativeUniformMarginAtom (margin : ℚ) : Set where
   constructor nonnegative-margin-atom
@@ -106,22 +107,29 @@ residualAtomNonpositive {margin} entry =
   in
   subst (λ rhs → (c + margin) * t ≤ rhs) (solve [ t ]) multiplied
 
-uniformEntriesResidualNonpositive : ∀ {margin} entries →
+uniformEntriesResidualNonpositive : ∀ {margin}
+  (entries : List (NonnegativeUniformMarginAtom margin)) →
   sumBy
     (λ entry →
       (coefficient (atom entry) + margin) * transfer (atom entry))
     entries
   ≤ 0ℚ
-uniformEntriesResidualNonpositive [] = ℚP.≤-refl
-uniformEntriesResidualNonpositive (entry ∷ entries) =
-  let tail = uniformEntriesResidualNonpositive entries
-      added = ℚP.+-mono-≤ (residualAtomNonpositive entry) tail
-  in subst (λ rhs →
-      (coefficient (atom entry) + _)* transfer (atom entry)
-        + sumBy
-          (λ e → (coefficient (atom e) + _) * transfer (atom e)) entries
+uniformEntriesResidualNonpositive {margin} [] = ℚP.≤-refl
+uniformEntriesResidualNonpositive {margin} (entry ∷ entries) =
+  let
+    head = residualAtomNonpositive entry
+    tail = uniformEntriesResidualNonpositive {margin} entries
+    added = ℚP.+-mono-≤ head tail
+  in
+  subst
+    (λ rhs →
+      (coefficient (atom entry) + margin) * transfer (atom entry)
+      + sumBy
+          (λ e → (coefficient (atom e) + margin) * transfer (atom e))
+          entries
       ≤ rhs)
-      (solve []) added
+    (solve [])
+    added
 
 ------------------------------------------------------------------------
 -- Minimal exact countermodel to aggregate positivity.
@@ -136,12 +144,6 @@ counterAtoms = counterFirst ∷ counterSecond ∷ []
 
 counterTotalTransferPositive : totalTransfer counterAtoms ≡ 1ℚ
 counterTotalTransferPositive = solve []
-
-counterFirstCoefficientBelowMinusOne : coefficient counterFirst ≡ - 1ℚ
-counterFirstCoefficientBelowMinusOne = refl
-
-counterSecondCoefficientBelowMinusOne : coefficient counterSecond ≡ - (Int.+ 4)
-counterSecondCoefficientBelowMinusOne = refl
 
 counterWeightedTransferPositive : weightedTransfer counterAtoms ≡ Int.+ 2
 counterWeightedTransferPositive = solve []
