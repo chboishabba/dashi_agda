@@ -52,7 +52,7 @@ module DASHI.Physics.YangMills.BalabanNoncommutativeMarkedOperatorProductExact w
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.List.Base using (List; []; _∷_)
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -209,29 +209,30 @@ operatorProductDifferenceFromFactorwiseBounds
         (rightBound x)
         tailDifferenceBound)
 
+    expanded = addOperator algebra
+      (compose algebra (difference algebra (left x) (right x)) leftTail)
+      (compose algebra (right x) (difference algebra leftTail rightTail))
+
+    splitBound :
+      LessEqual algebra
+        (operatorNorm algebra expanded)
+        (markedProductMajorant algebra ordinary marked (x ∷ xs))
     splitBound = transitive algebra
       (normTriangle algebra
         (compose algebra (difference algebra (left x) (right x)) leftTail)
         (compose algebra (right x) (difference algebra leftTail rightTail)))
       (addMonotone algebra markedHeadBound unchangedHeadBound)
+
+    productSplit = productDifferenceSplit algebra
+      (left x) (right x) leftTail rightTail
   in
   subst
-    (λ expanded →
+    (λ actual →
       LessEqual algebra
-        (operatorNorm algebra
-          (difference algebra
-            (operatorProduct algebra left (x ∷ xs))
-            (operatorProduct algebra right (x ∷ xs))))
-        expanded)
-    refl
-    (subst
-      (λ actual →
-        LessEqual algebra
-          (operatorNorm algebra actual)
-          (markedProductMajorant algebra ordinary marked (x ∷ xs)))
-      (productDifferenceSplit algebra
-        (left x) (right x) leftTail rightTail)
-      splitBound)
+        (operatorNorm algebra actual)
+        (markedProductMajorant algebra ordinary marked (x ∷ xs)))
+    (sym productSplit)
+    splitBound
 
 noncommutativeMarkedOperatorProductLevel : ProofLevel
 noncommutativeMarkedOperatorProductLevel = machineChecked
