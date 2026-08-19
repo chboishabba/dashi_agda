@@ -1,8 +1,9 @@
 module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound70PolchinskiFiniteSpeedValidation where
 
 ------------------------------------------------------------------------
--- ROUND70 FOCUSED ROOT: L7 -> MULTISCALE CURVATURE -> QUASI-LOCAL PROPAGATION
---                         -> SPATIAL CLUSTERING -> OS GAP
+-- ROUND71 FOCUSED ROOT: L7 -> SOURCE MARKED HESSIAN -> MULTISCALE CURVATURE
+--                         -> QUASI-LOCAL PROPAGATION -> SPATIAL CLUSTERING
+--                         -> OS GAP
 --
 -- This root is not a new receipt count.  It records the shortest current
 -- theorem-producing dependency path from the unified physical RG estimate to
@@ -27,7 +28,7 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound70PolchinskiFiniteSpe
 -- Hao Shen, Rongchan Zhu and Xiangchan Zhu,
 -- "A Stochastic Analysis Approach to Lattice Yang--Mills at Strong Coupling",
 -- Communications in Mathematical Physics 400 (2023), 805--851.
--- DOI: 10.1007/s00220-022-04609-1.
+-- DOI: 10.1007/s00220-022-04609-1. arXiv:2204.12737.
 --
 -- Ali Naddaf and Thomas Spencer,
 -- "On Homogenization and Scaling Limit of Some Gradient Perturbations of a
@@ -40,7 +41,54 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound70PolchinskiFiniteSpe
 -- "Axioms for Euclidean Green's Functions II", CMP 42 (1975), 281--305.
 -- DOI: 10.1007/BF01608978.
 --
--- ROUND70 SHARPENING
+-- SOURCE-NATIVE BALABAN LOCALISATION CHAIN
+--
+-- Tadeusz Bałaban,
+-- "Propagators and Renormalization Transformations for Lattice Gauge
+-- Theories. I", CMP 95 (1984), 17--40. DOI: 10.1007/BF01215753.
+--
+-- Tadeusz Bałaban,
+-- "Propagators and Renormalization Transformations for Lattice Gauge
+-- Theories. II", CMP 96 (1984), 223--250. DOI: 10.1007/BF01240221.
+--
+-- IMPORTANT: there are TWO distinct Bałaban papers in CMP volume 99.
+--
+-- (a) "Spaces of Regular Gauge Field Configurations on a Lattice and Gauge
+--     Fixing Conditions", CMP 99(1) (1985), 75--102.
+--     DOI: 10.1007/BF01466594.
+--     Role here: regular gauge chart / gauge-fixing domain.
+--
+-- (b) "Propagators for Lattice Gauge Theories in a Background Field",
+--     CMP 99(3) (1985), 389--434. DOI: 10.1007/BF01240355.
+--     Role here: background-propagator random-walk localisation and the
+--     Theorem 3.14 / equation (3.154) marked domain-sequence comparison.
+--
+-- Tadeusz Bałaban,
+-- "Renormalization Group Approach to Lattice Gauge Field Theories. I.
+-- Generation of Effective Actions in a Small Field Approximation and a
+-- Coupling Constant Renormalization in Four Dimensions",
+-- CMP 109 (1987), 249--301. DOI: 10.1007/BF01215223.
+-- Role here: twice-differentiated local activity / polarization and its
+-- resummed exponential kernel decay.
+--
+-- Tadeusz Bałaban,
+-- "Renormalization Group Approach to Lattice Gauge Field Theories. II.
+-- Cluster Expansions", CMP 116(1) (1988), 1--22.
+-- DOI: 10.1007/BF01239022.
+-- Role here: residual localization/tree summability after the marked
+-- background-propagator comparison.
+--
+-- ADVERSARIAL CLAIM BOUNDARY
+--
+-- The 2026 Watt et al. dissolution manuscript publicly describes a proof
+-- sketch for an all-finite-beta lattice gap by combining BBD-type multiscale
+-- functional inequalities with SZZ dynamics.  It explicitly does not claim a
+-- Clay solution.  No theorem from that manuscript is imported here.  Its only
+-- current value is methodological cross-check: the same BBD+SZZ synthesis is
+-- independently reached below, but every Yang--Mills-specific premise remains
+-- to be proved on the literal Balaban effective density.
+--
+-- ROUND71 SHARPENING
 --
 -- 1. The Polchinski source criterion is the literal covariance form
 --
@@ -48,7 +96,17 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound70PolchinskiFiniteSpe
 --
 --    not a silently specialised bare/smoothed Hessian condition.
 --
--- 2. Rooted KP + the unified derivative shell estimate gives BOTH:
+-- 2. The physical Hessian-shell input is no longer an invented quasi-locality
+--    receipt.  The intended source path is now explicit:
+--
+--      CMP99(3) marked background-propagator difference
+--        -> CMP109 twice-differentiated local activity/polarization
+--        -> CMP116 marked/tree resummation
+--        -> positive exponential shell rate
+--        -> one shell-width comparison exp(-delta R) <= 1/2
+--        -> dyadic h_d <= c_H s_d.
+--
+-- 3. Rooted KP + that derivative shell estimate gives BOTH
 --
 --      unweighted Hessian row <= c_H/2,
 --
@@ -64,14 +122,8 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound70PolchinskiFiniteSpe
 --    This is the correct quasi-local influence norm: the renormalised polymer
 --    action is exponentially decaying, not strictly finite-range.
 --
--- 3. The exact local-walk theorem is retained as a useful SPECIAL CASE for the
---    bare/local Wilson part: if a generator is strictly local, every matrix
---    power below graph distance vanishes.  It is not promoted to the full
---    effective action after RG.
---
--- 4. Finite Fubini/distributivity proves that a nonnegative influence majorant
---    with row mass rho has positive power row masses <= rho^n.  The weighted
---    version is what a quasi-local Gronwall argument consumes.
+-- 4. The exact local-walk theorem is retained as a useful SPECIAL CASE for the
+--    bare/local Wilson part.  It is not promoted to the full effective action.
 --
 -- 5. Weighted propagation with distance weight 3/2 has the expected form
 --
@@ -82,9 +134,6 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound70PolchinskiFiniteSpe
 --    gives
 --
 --      m = lambda log(3/2) / (lambda + c_H).
---
---    The rational balancing theorem is already exact; only the standard
---    exp/log/Gronwall analysis and physical generator identification remain.
 --
 -- 6. The stochastic gap is NOT promoted directly to the Clay Hamiltonian gap.
 --    Spatial covariance comes first; the existing OS4 spectral theorem then
@@ -102,6 +151,11 @@ import DASHI.Physics.YangMills.BalabanUnifiedPolymerSchwingerNormExact
 import DASHI.Physics.YangMills.BalabanUnifiedPolymerStepVContractionBudgetExact
 import DASHI.Physics.YangMills.BalabanUnifiedSeventeenThirtySecondIterationExact
 import DASHI.Physics.YangMills.BalabanUnifiedSeventeenThirtySecondTailModulusExact
+
+-- Source-native differentiated marked localisation -> dyadic shell.
+import DASHI.Physics.YangMills.BalabanDecoupledActivityHessian
+import DASHI.Physics.YangMills.BalabanMarkedPolarisationResummation
+import DASHI.Physics.YangMills.BalabanExponentialToDyadicShellCoarseningExact
 
 -- One derivative/KP coordinate feeds curvature AND quasi-local propagation.
 import DASHI.Physics.YangMills.BalabanRootedKPToHessianRowBudgetExact
@@ -122,35 +176,44 @@ import DASHI.Physics.YangMills.BalabanStochasticFiniteSpeedSpatialClusteringExac
 import DASHI.Physics.YangMills.BalabanClayT5ClusteringToTransferGapExact
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalContinuumOSGapBridgeExact
 
-round70RootedKPWeightedHessianLevel : ProofLevel
-round70RootedKPWeightedHessianLevel = machineChecked
+round71ExponentialToDyadicShellCompilerLevel : ProofLevel
+round71ExponentialToDyadicShellCompilerLevel = machineChecked
 
-round70BareLocalityPowerCancellationLevel : ProofLevel
-round70BareLocalityPowerCancellationLevel = machineChecked
+round71RootedKPWeightedHessianLevel : ProofLevel
+round71RootedKPWeightedHessianLevel = machineChecked
 
-round70FiniteInfluenceRowMassPowerLevel : ProofLevel
-round70FiniteInfluenceRowMassPowerLevel = machineChecked
+round71BareLocalityPowerCancellationLevel : ProofLevel
+round71BareLocalityPowerCancellationLevel = machineChecked
 
-round70RelaxationFiniteSpeedBalanceLevel : ProofLevel
-round70RelaxationFiniteSpeedBalanceLevel = machineChecked
+round71FiniteInfluenceRowMassPowerLevel : ProofLevel
+round71FiniteInfluenceRowMassPowerLevel = machineChecked
 
-round70StochasticToSpatialAssemblyLevel : ProofLevel
-round70StochasticToSpatialAssemblyLevel = machineChecked
+round71RelaxationFiniteSpeedBalanceLevel : ProofLevel
+round71RelaxationFiniteSpeedBalanceLevel = machineChecked
 
-round70PolchinskiCriterionAuthorityLevel : ProofLevel
-round70PolchinskiCriterionAuthorityLevel = standardImported
+round71StochasticToSpatialAssemblyLevel : ProofLevel
+round71StochasticToSpatialAssemblyLevel = machineChecked
+
+round71PolchinskiCriterionAuthorityLevel : ProofLevel
+round71PolchinskiCriterionAuthorityLevel = standardImported
 
 ------------------------------------------------------------------------
 -- ACTUAL PHYSICAL FRONTIER ON THIS ROUTE
+--
+-- P0. Instantiate the source-native CMP99(3)/109/116 marked differentiated
+--     activity estimate and identify its exponential shell with the SAME L7
+--     Hessian shell.  Choose one coarse shell width R for which the certified
+--     source factor exp(-delta R) <= 1/2.  The all-depth dyadic comparison is
+--     then already constructed by BalabanExponentialToDyadicShellCoarsening.
 --
 -- P1. Instantiate the exact dotC/ddotC multiscale curvature inequality on the
 --     same Balaban effective density and prove its accumulated negative debt is
 --     uniform/summable from L7.
 --
 -- P2. Prove the literal lattice Langevin derivative commutator: the derivative
---     influence matrix is the action Hessian (with gauge/connection terms
---     treated on the actual group manifold), and the SAME derivative-shell
---     estimate h_d <= c_H s_d controls its absolute weighted row.
+--     influence matrix is the action Hessian, with group-connection/gauge terms
+--     treated on the actual compact-group manifold.  The SAME P0 shell estimate
+--     controls its absolute exponentially weighted row.
 --
 -- P3. Apply standard weighted Gronwall/semigroup analysis to the resulting
 --     quasi-local row bound, obtaining the physical finite-speed envelope
@@ -162,20 +225,23 @@ round70PolchinskiCriterionAuthorityLevel = standardImported
 --     the SAME continuum/OS family.  Existing OS spectral machinery then gives
 --     the physical Hamiltonian gap; no auxiliary Markov gap is substituted.
 --
--- These are coordinates of the strong all-scale RG theorem, not four new Clay
--- package labels.  In particular P1 and P2 share the SAME L7 derivative/Hessian
--- shell estimate, so proving that estimate advances both curvature and
--- propagation simultaneously.
+-- P0/P1/P2 are coordinates of the same strong all-scale RG theorem, not three
+-- independent gap receipts.  In particular the one marked differentiated
+-- Hessian estimate advances unified norm control, curvature and propagation at
+-- once.
 ------------------------------------------------------------------------
 
-round70PhysicalMultiscaleCurvatureInstantiationLevel : ProofLevel
-round70PhysicalMultiscaleCurvatureInstantiationLevel = conditional
+round71PhysicalMarkedDifferentiatedHessianShellLevel : ProofLevel
+round71PhysicalMarkedDifferentiatedHessianShellLevel = conditional
 
-round70PhysicalDerivativeGeneratorHessianIdentificationLevel : ProofLevel
-round70PhysicalDerivativeGeneratorHessianIdentificationLevel = conditional
+round71PhysicalMultiscaleCurvatureInstantiationLevel : ProofLevel
+round71PhysicalMultiscaleCurvatureInstantiationLevel = conditional
 
-round70PhysicalWeightedGronwallPropagationLevel : ProofLevel
-round70PhysicalWeightedGronwallPropagationLevel = conditional
+round71PhysicalDerivativeGeneratorHessianIdentificationLevel : ProofLevel
+round71PhysicalDerivativeGeneratorHessianIdentificationLevel = conditional
 
-round70PhysicalSameFamilySpatialClusteringLevel : ProofLevel
-round70PhysicalSameFamilySpatialClusteringLevel = conditional
+round71PhysicalWeightedGronwallPropagationLevel : ProofLevel
+round71PhysicalWeightedGronwallPropagationLevel = conditional
+
+round71PhysicalSameFamilySpatialClusteringLevel : ProofLevel
+round71PhysicalSameFamilySpatialClusteringLevel = conditional
