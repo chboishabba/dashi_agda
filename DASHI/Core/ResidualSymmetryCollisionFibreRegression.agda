@@ -77,6 +77,26 @@ ternaryC2PreservesPoleClass :
 ternaryC2PreservesPoleClass =
   Residual.observerPreservingSymmetry poleClassInvariant
 
+positivePoleIsMovedByFlip :
+  SSP.sspPosOne ≡ c2Act c2Flip SSP.sspPosOne → ⊥
+positivePoleIsMovedByFlip equality =
+  Native.negativeNotPositive (sym equality)
+
+antipodeMoveGeneratesCoarseCollision :
+  Observer.ObserverCollision poleClass
+antipodeMoveGeneratesCoarseCollision =
+  Residual.symmetryMoveCreatesObserverCollision
+    ternaryC2PreservesPoleClass
+    c2Flip SSP.sspPosOne
+    positivePoleIsMovedByFlip
+
+poleClassCannotBeSeparating : Observer.Separating poleClass → ⊥
+poleClassCannotBeSeparating =
+  Residual.nontrivialPreservingSymmetryBlocksSeparation
+    ternaryC2PreservesPoleClass
+    c2Flip SSP.sspPosOne
+    positivePoleIsMovedByFlip
+
 negativeAndPositiveShareCoarsePole :
   poleClass SSP.sspNegOne ≡ poleClass SSP.sspPosOne
 negativeAndPositiveShareCoarsePole = refl
