@@ -22,15 +22,12 @@ module DASHI.Ontology.DependentDefinitionFibreExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat; _+_; _*_)
 open import Data.Empty using (⊥)
 open import Data.Product using (Σ; _×_; _,_; proj₁; proj₂)
 
 import Base369 as Base
 import DASHI.Foundations.Base369SignedMembershipExact as Signed
-
-------------------------------------------------------------------------
--- Flat product: syntactically constructible invalid combinations exist.
-------------------------------------------------------------------------
 
 data Make : Set where
   ford toyota : Make
@@ -55,9 +52,12 @@ flatToyotaFiestaExists = toyota , fiestaTag
 flatToyotaFiestaNeedsPostHocRejection : validFlat flatToyotaFiestaExists ≡ false
 flatToyotaFiestaNeedsPostHocRejection = refl
 
-------------------------------------------------------------------------
--- Dependent carrier: selecting Make changes the fibre of legal Model values.
-------------------------------------------------------------------------
+-- The flat product constructs all 2 x 3 combinations before validity is known.
+flatCombinationCount : Nat
+flatCombinationCount = 2 * 3
+
+flatCombinationCountIsSix : flatCombinationCount ≡ 6
+flatCombinationCountIsSix = refl
 
 data FordModel : Set where
   fiesta focus : FordModel
@@ -81,6 +81,20 @@ fordFocus = ford , focus
 toyotaCorolla : Vehicle
 toyotaCorolla = toyota , corolla
 
+-- The dependent sum has exactly 2 Ford models + 1 Toyota model.
+dependentCombinationCount : Nat
+dependentCombinationCount = 2 + 1
+
+dependentCombinationCountIsThree : dependentCombinationCount ≡ 3
+dependentCombinationCountIsThree = refl
+
+invalidFlatCombinationCount : Nat
+invalidFlatCombinationCount = 3
+
+flatCountSplitsAsValidPlusInvalid :
+  flatCombinationCount ≡ dependentCombinationCount + invalidFlatCombinationCount
+flatCountSplitsAsValidPlusInvalid = refl
+
 modelTag : ∀ {make} → Model make → FlatModel
 modelTag {ford} fiesta = fiestaTag
 modelTag {ford} focus = focusTag
@@ -95,8 +109,6 @@ dependentCarrierOnlyFlattensToValidCombinations (ford , fiesta) = refl
 dependentCarrierOnlyFlattensToValidCombinations (ford , focus) = refl
 dependentCarrierOnlyFlattensToValidCombinations (toyota , corolla) = refl
 
--- There is no dependent vehicle whose Make is Toyota and whose Model reads as
--- Fiesta.  The flat product admits that pair; the dependent sum does not.
 noToyotaFiestaSection :
   (vehicle : Vehicle) →
   proj₁ vehicle ≡ toyota →
@@ -105,10 +117,6 @@ noToyotaFiestaSection :
 noToyotaFiestaSection (ford , fiesta) () modelEq
 noToyotaFiestaSection (ford , focus) () modelEq
 noToyotaFiestaSection (toyota , corolla) makeEq ()
-
-------------------------------------------------------------------------
--- Context may be retained while locally non-determinant.
-------------------------------------------------------------------------
 
 record ContextualBundle : Set where
   constructor contextualBundle
@@ -120,8 +128,7 @@ open ContextualBundle public
 
 relevantButNonDeterminant : ContextualBundle
 relevantButNonDeterminant =
-  contextualBundle true
-    (Signed.fibredOrientation Base.tri-mid Signed.zeroOpen)
+  contextualBundle true (Signed.fibredOrientation Base.tri-mid Signed.zeroOpen)
 
 relevantBundleIsRetained : retainedInContext relevantButNonDeterminant ≡ true
 relevantBundleIsRetained = refl
@@ -138,6 +145,7 @@ record DependentDefinitionFibreBoundary : Set where
   constructor dependentDefinitionFibreBoundary
   field
     flatProductsCanContainInvalidCombinations : Bool
+    flatAndDependentCombinationCountsCoincide : Bool
     dependentCarrierRequiresPostHocValidityForItsOwnValues : Bool
     parentChoiceRestrictsChildFibre : Bool
     localNeutralityErasesRetainedContext : Bool
@@ -145,4 +153,4 @@ record DependentDefinitionFibreBoundary : Set where
 
 canonicalDependentDefinitionFibreBoundary : DependentDefinitionFibreBoundary
 canonicalDependentDefinitionFibreBoundary =
-  dependentDefinitionFibreBoundary true false true false false
+  dependentDefinitionFibreBoundary true false false true false false
