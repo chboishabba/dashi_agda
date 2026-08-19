@@ -40,7 +40,7 @@ module DASHI.Physics.YangMills.BalabanRound64AdversarialMassGapSourceBoundaryExa
 -- is not imported as proof authority for those constructions.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -92,22 +92,19 @@ sourceUse fesembeck2025 = classicalCoercivityLemmaMine
 sourceUse nobrega2024 = requirementsChecklistOnly
 
 sourceUseOdusanyaExact : sourceUse odusanya2026 ≡ finiteLatticeAnchorOnly
-sourceUseOdusanyaExact = Agda.Builtin.Equality.refl
+sourceUseOdusanyaExact = refl
 
 sourceUseMondalExact :
   sourceUse mondal2023 ≡ alternativeConditionalSpectralMechanism
-sourceUseMondalExact = Agda.Builtin.Equality.refl
+sourceUseMondalExact = refl
 
 sourceUseFesembeckExact :
   sourceUse fesembeck2025 ≡ classicalCoercivityLemmaMine
-sourceUseFesembeckExact = Agda.Builtin.Equality.refl
+sourceUseFesembeckExact = refl
 
 sourceUseNobregaExact : sourceUse nobrega2024 ≡ requirementsChecklistOnly
-sourceUseNobregaExact = Agda.Builtin.Equality.refl
+sourceUseNobregaExact = refl
 
--- Proof-level policy: the finite algebra extracted elsewhere may become
--- machine-checked, but none of these supplied manuscripts is used as a
--- standard-imported proof of the missing continuum master theorems.
 odusanyaContinuumPromotionLevel : ProofLevel
 odusanyaContinuumPromotionLevel = conditional
 
