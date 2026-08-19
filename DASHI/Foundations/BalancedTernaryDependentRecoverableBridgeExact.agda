@@ -10,10 +10,23 @@ module DASHI.Foundations.BalancedTernaryDependentRecoverableBridgeExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 import DASHI.Core.DependentRecoverableProjectionExact as Dependent
 import DASHI.Foundations.BalancedTernaryAntipodalOrbitExact as Orbit
 import DASHI.Foundations.BalancedTernaryAntipodalResidualCodecExact as Codec
+
+antipodalReopenExact :
+  (triple : Orbit.TritTriple) →
+  Codec.decode27
+    (Codec.antipodalCode27
+      (Codec.coarseClass (Codec.encode27 triple))
+      (Codec.orientationResidual (Codec.encode27 triple)))
+  ≡ triple
+antipodalReopenExact triple =
+  trans
+    (cong Codec.decode27 (Codec.rebuildCode27 (Codec.encode27 triple)))
+    (Codec.decodeAfterEncode27 triple)
 
 canonicalAntipodalDependentProjection :
   Dependent.DependentExactRecoverableProjection
@@ -24,7 +37,7 @@ canonicalAntipodalDependentProjection =
     (λ triple → Codec.coarseClass (Codec.encode27 triple))
     (λ triple → Codec.orientationResidual (Codec.encode27 triple))
     (λ coarse residual → Codec.decode27 (Codec.antipodalCode27 coarse residual))
-    Codec.decodeAfterEncode27
+    antipodalReopenExact
 
 canonicalProjectionIsOrbitClassifier :
   (triple : Orbit.TritTriple) →
