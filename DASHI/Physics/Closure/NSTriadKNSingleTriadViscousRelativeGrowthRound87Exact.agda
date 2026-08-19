@@ -12,37 +12,39 @@ module DASHI.Physics.Closure.NSTriadKNSingleTriadViscousRelativeGrowthRound87Exa
 -- Title: "Navier-Stokes Equations: Theory and Numerical Analysis".
 -- DOI: 10.1090/chel/343.
 --
--- ROUND87 / EXACT VISCOUS SIGN ON A SINGLE TRANSFER TRIAD
+-- ROUND87 / EXACT VISCOUS GEOMETRY OF COMPACT-TRANSFER RELATIVE GROWTH
 --
 -- Let p+q=k and let tau be one cubic transfer monomial carried by that triad.
 -- Pure viscosity damps its three velocity legs with rates
 --
---   nu |k|^2,  nu |p|^2,  nu |q|^2,
+--   nu |k|^2,  nu |p|^2,  nu |q|^2.
 --
--- while the output-shell quadratic dissipation D damps at twice the output
--- rate.  Therefore
---
---   tau'_nu = -nu (|k|^2+|p|^2+|q|^2) tau,
---   D'_nu   = -2 nu |k|^2 D,
---
--- and the compact-transfer relative-growth numerator contributed by this
--- monomial is
+-- Pair first with a quadratic dissipation atom on the same output k.  Its
+-- tangent is -2 nu |k|^2 D, so
 --
 --   R_nu = tau'_nu D - tau D'_nu
---        = -nu (|p|^2+|q|^2-|k|^2) tau D
---        =  2 nu (p dot q) tau D.
+--        = 2 nu (p dot q) tau D.
 --
--- Thus the sign is geometric.  In the high-high -> low regime the input modes
--- point substantially against one another, p dot q < 0, so positive transfer
--- receives a strictly negative viscous relative-growth contribution.  In a
--- forward/aligned triad p dot q can be positive, so viscosity is not a global
--- sign theorem without the triad geometry.
+-- Thus high-high -> low geometry (p dot q < 0) creates a strict negative
+-- viscous relative-growth contribution on positive transfer.
 --
--- This exact identity suggests a sharper C4 architecture: extract the
--- negatively correlated HH->low triad mass as the strict margin and charge
--- the remaining triads/pressure/commutator pieces as remainders.  The missing
--- theorem is then an aggregation theorem preserving enough negative p dot q
--- mass, not a pointwise pressure-Hessian sign theorem.
+-- The full packet denominator contains dissipation atoms on modes m different
+-- from k.  For one transfer triad and one such atom d_m, exact algebra gives
+--
+--   R_nu(t,m)
+--     = 2 nu [p dot q + |m|^2 - |k|^2] tau_t d_m.
+--
+-- Hence the diagonal HH->low angle margin and the cross-mode shell-spread
+-- correction are not different mechanisms: they are the two exact pieces of
+-- the viscous relative-growth coefficient.  A uniform negative pair bound is
+-- available whenever
+--
+--   |m|^2 - |k|^2 <= -p dot q - margin.
+--
+-- This identifies a new highest-alpha C4 route.  Pressure can be charged by
+-- the Round87 source/Frobenius remainder, advection by packet commutators, while
+-- viscosity supplies the strict margin provided the actual selected annular
+-- geometry preserves enough negative p dot q after the m-sum.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -125,6 +127,62 @@ viscousRelativeGrowthAsInputDot datum
     ∷ px ∷ py ∷ pz ∷ qx ∷ qy ∷ qz ∷ [])
 
 ------------------------------------------------------------------------
+-- Cross-mode dissipation atom.
+------------------------------------------------------------------------
+
+crossModeDissipationViscousTangent :
+  SingleTriadViscousDatum → V.Vec3 → ℚ → ℚ
+crossModeDissipationViscousTangent datum mode atom =
+  - ((1ℚ + 1ℚ) * viscosity datum
+      * V.vecNormSquared mode * atom)
+
+crossModeViscousRelativeGrowth :
+  SingleTriadViscousDatum → V.Vec3 → ℚ → ℚ
+crossModeViscousRelativeGrowth datum mode atom =
+  transferViscousTangent datum * atom
+  - transfer datum * crossModeDissipationViscousTangent datum mode atom
+
+crossModeViscousRelativeGrowthAsRawSquares : ∀ datum mode atom →
+  crossModeViscousRelativeGrowth datum mode atom
+  ≡ - (viscosity datum
+      * (V.vecNormSquared (k datum)
+          + V.vecNormSquared (p datum)
+          + V.vecNormSquared (q datum)
+          - ((1ℚ + 1ℚ) * V.vecNormSquared mode))
+      * transfer datum * atom)
+crossModeViscousRelativeGrowthAsRawSquares datum mode atom
+  with p datum | q datum | mode
+... | V.vec3 px py pz | V.vec3 qx qy qz | V.vec3 mx my mz =
+  solve
+    ( viscosity datum ∷ transfer datum ∷ atom
+    ∷ px ∷ py ∷ pz ∷ qx ∷ qy ∷ qz
+    ∷ mx ∷ my ∷ mz ∷ [])
+
+crossModeViscousRelativeGrowthAsAnglePlusSpread : ∀ datum mode atom →
+  crossModeViscousRelativeGrowth datum mode atom
+  ≡ (1ℚ + 1ℚ) * viscosity datum
+      * (V.vecDot (p datum) (q datum)
+          + V.vecNormSquared mode - V.vecNormSquared (k datum))
+      * transfer datum * atom
+crossModeViscousRelativeGrowthAsAnglePlusSpread datum mode atom
+  with p datum | q datum | mode
+... | V.vec3 px py pz | V.vec3 qx qy qz | V.vec3 mx my mz =
+  solve
+    ( viscosity datum ∷ transfer datum ∷ atom
+    ∷ px ∷ py ∷ pz ∷ qx ∷ qy ∷ qz
+    ∷ mx ∷ my ∷ mz ∷ [])
+
+crossModeAtOutputRecoversDiagonal : ∀ datum →
+  crossModeViscousRelativeGrowth datum (k datum) (dissipation datum)
+  ≡ viscousRelativeGrowth datum
+crossModeAtOutputRecoversDiagonal datum
+  with p datum | q datum
+... | V.vec3 px py pz | V.vec3 qx qy qz =
+  solve
+    ( viscosity datum ∷ transfer datum ∷ dissipation datum
+    ∷ px ∷ py ∷ pz ∷ qx ∷ qy ∷ qz ∷ [])
+
+------------------------------------------------------------------------
 -- Exact HH->low calibration witness.
 ------------------------------------------------------------------------
 
@@ -136,14 +194,14 @@ hhDatum : SingleTriadViscousDatum
 hhDatum = single-triad-viscous-datum hhP hhQ 1ℚ 1ℚ 1ℚ
 
 hhInputDot : V.vecDot hhP hhQ ≡ - 1ℚ
-hhInputDot = refl
+hhInputDot = solve []
 
 hhOutput : k hhDatum ≡ V.vec3 0ℚ 1ℚ 0ℚ
 hhOutput = refl
 
 hhRelativeGrowthStrictlyNegativeWitness :
   viscousRelativeGrowth hhDatum ≡ - (1ℚ + 1ℚ)
-hhRelativeGrowthStrictlyNegativeWitness = refl
+hhRelativeGrowthStrictlyNegativeWitness = solve []
 
 ------------------------------------------------------------------------
 -- Exact aligned/forward calibration witness: no unconditional viscous sign.
@@ -157,14 +215,36 @@ forwardDatum : SingleTriadViscousDatum
 forwardDatum = single-triad-viscous-datum forwardP forwardQ 1ℚ 1ℚ 1ℚ
 
 forwardInputDot : V.vecDot forwardP forwardQ ≡ 1ℚ
-forwardInputDot = refl
+forwardInputDot = solve []
 
 forwardRelativeGrowthPositiveWitness :
   viscousRelativeGrowth forwardDatum ≡ (1ℚ + 1ℚ)
-forwardRelativeGrowthPositiveWitness = refl
+forwardRelativeGrowthPositiveWitness = solve []
+
+------------------------------------------------------------------------
+-- Cross-mode calibration: shell spread can spend the angle margin.
+------------------------------------------------------------------------
+
+sameOutputAtom : ℚ
+sameOutputAtom = 1ℚ
+
+hhCrossAtOutput :
+  crossModeViscousRelativeGrowth hhDatum (k hhDatum) sameOutputAtom
+  ≡ - (1ℚ + 1ℚ)
+hhCrossAtOutput = solve []
+
+spreadMode : V.Vec3
+spreadMode = V.vec3 1ℚ 1ℚ 0ℚ
+
+hhCrossSpreadCancelsMargin :
+  crossModeViscousRelativeGrowth hhDatum spreadMode 1ℚ ≡ 0ℚ
+hhCrossSpreadCancelsMargin = solve []
 
 round87SingleTriadViscousRelativeGrowthEqualsTwoNuPDotQTransferD : Bool
 round87SingleTriadViscousRelativeGrowthEqualsTwoNuPDotQTransferD = true
+
+round87CrossModeViscousCoefficientEqualsAnglePlusSpectralSpread : Bool
+round87CrossModeViscousCoefficientEqualsAnglePlusSpectralSpread = true
 
 round87HHToLowViscosityCanSupplyStrictNegativeRelativeGrowth : Bool
 round87HHToLowViscosityCanSupplyStrictNegativeRelativeGrowth = true
@@ -172,9 +252,12 @@ round87HHToLowViscosityCanSupplyStrictNegativeRelativeGrowth = true
 round87ViscosityHasUnconditionalNegativeRelativeGrowthOnEveryTriad : Bool
 round87ViscosityHasUnconditionalNegativeRelativeGrowthOnEveryTriad = false
 
-round87SingleTriadViscousRelativeGrowthEqualsTwoNuPDotQTransferDIsTrue :
-  round87SingleTriadViscousRelativeGrowthEqualsTwoNuPDotQTransferD ≡ true
-round87SingleTriadViscousRelativeGrowthEqualsTwoNuPDotQTransferDIsTrue = refl
+round87AnnularGeometryPreservesNetViscousMarginConstructed : Bool
+round87AnnularGeometryPreservesNetViscousMarginConstructed = false
+
+round87CrossModeViscousCoefficientEqualsAnglePlusSpectralSpreadIsTrue :
+  round87CrossModeViscousCoefficientEqualsAnglePlusSpectralSpread ≡ true
+round87CrossModeViscousCoefficientEqualsAnglePlusSpectralSpreadIsTrue = refl
 
 round87ViscosityHasUnconditionalNegativeRelativeGrowthOnEveryTriadIsFalse :
   round87ViscosityHasUnconditionalNegativeRelativeGrowthOnEveryTriad ≡ false
