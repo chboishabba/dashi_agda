@@ -1,7 +1,7 @@
 module DASHI.Physics.YangMills.BalabanMarkedHessianPublishedDecayBoundaryExact where
 
 ------------------------------------------------------------------------
--- ROUND72: PUBLISHED MARKED PROPAGATOR DECAY != DIFFERENTIATED E^(2) CLOSURE
+-- ROUND73: CMP109 ALREADY OWNS THE DIFFERENTIATED MARKED E^(2) DECAY SHAPE
 --
 -- PRIMARY SOURCES
 --
@@ -19,19 +19,39 @@ module DASHI.Physics.YangMills.BalabanMarkedHessianPublishedDecayBoundaryExact w
 -- Coupling Constant Renormalization in Four Dimensions",
 -- Communications in Mathematical Physics 109 (1987), 249--301.
 -- DOI: 10.1007/BF01215223.
--- Equations (4.3)--(4.5) express the ALREADY DIFFERENTIATED local activity in
--- terms of background-map derivatives/tree expressions; (4.35) is the n=2
--- specialization and (4.37) resums E^(2) to the polarization tensor.  Hence
--- the primary proof route does not need to obtain the Hessian through a new
--- generic Cauchy-radius argument.
+--
+-- Source-critical Round73 observation:
+-- * Sect. 4 has ALREADY taken the external field derivatives before the active
+--   localization step.
+-- * (4.3)--(4.5) give the differentiated tree/locality estimates.
+-- * the analysis is explicitly reduced to E^(2) in (4.34)--(4.35).
+-- * immediately after (4.35), replacing the domain-dependent H_j(Omega_0) by
+--   the free-boundary H_j is stated to give an additional factor of the form
+--
+--       B_0 exp(-delta_0 * marked-distance),
+--
+--   in the bound of the corresponding E^(2) expression.
+-- * (4.36) controls the localization-domain extension and (4.37) defines
+--
+--       Pi_{mu nu}(x,y) = sum_X E^(2)_{mu nu}(X;x,y).
+--
+-- * Sect. 5, equation (5.10), records exponential position-space decay of Pi
+--   with a strictly positive rate delta_1 inherited from the preceding
+--   localization constants.
+--
+-- Therefore "derive marked decay for the twice-differentiated activity" is
+-- NOT an independent new Yang--Mills theorem.  It is source-owned by CMP109,
+-- using the CMP99(3) background-propagator machinery.  The live task is only
+-- SAME-OBJECT IDENTIFICATION: prove that the E^(2)/Pi activity and source
+-- normalization appearing here are literally the derivative/Hessian coordinate
+-- of DASHI's unified physical RG state.
 --
 -- Tadeusz Bałaban,
 -- "Renormalization Group Approach to Lattice Gauge Field Theories. II.
 -- Cluster Expansions", Communications in Mathematical Physics 116(1) (1988),
 -- 1--22. DOI: 10.1007/BF01239022.
--- CMP116 explicitly constructs the fluctuation-field cluster expansion using
--- generalized random-walk expansions for propagators/minimizers and supplies
--- the residual localization/tree summability used after the marked comparison.
+-- CMP116 supplies the generalized-random-walk localization and residual
+-- tree-length summability used by the effective-action construction.
 --
 -- TREE/FOREST CALIBRATION ONLY
 --
@@ -43,6 +63,7 @@ module DASHI.Physics.YangMills.BalabanMarkedHessianPublishedDecayBoundaryExact w
 -- David C. Brydges and Thomas Kennedy,
 -- "Mayer Expansions and the Hamilton-Jacobi Equation",
 -- Journal of Statistical Physics 48 (1987), 19--49.
+-- DOI: 10.1007/BF01010398.
 --
 -- Abdelmalek Abdesselam and Vincent Rivasseau,
 -- "Trees, Forests and Jungles: A Botanical Garden for Cluster Expansions",
@@ -50,73 +71,61 @@ module DASHI.Physics.YangMills.BalabanMarkedHessianPublishedDecayBoundaryExact w
 -- DOI: 10.1007/3-540-59190-7_20. arXiv:hep-th/9409094.
 --
 -- These tree/forest identities calibrate connected-graph/tree resummation.
--- They are NOT the authority for the CMP99 common-domain cancellation.  In the
--- source-native Yang--Mills proof, paired generalized-walk terms cancel because
--- the restricted background data agree on their common localization region.
---
--- SHARP FRONTIER
---
--- The remaining Yang--Mills-specific analytic theorem is NOT "prove marked
--- exponential decay" from scratch and NOT "derive D^2 by generic Cauchy".
--- CMP109 has already differentiated.  The true primitive is:
---
---   one factor in the CMP109 (4.3) differentiated tree expression
---       -> replace that factor by its CMP99(3) marked domain difference
---       -> keep every unchanged factor under the ordinary CMP109 tree bound
---       -> retain BOTH marked distance and residual tree-length decay
---       -> telescope the finite factor replacement
---       -> apply CMP116 localization/tree summability.
---
--- The repository already owns the finite replacement telescope and the finite
--- surviving-walk cancellation/resummation.  Therefore the irreducible physical
--- input is the SOURCE-NATIVE TERMWISE marked replacement bound for the literal
--- E^(2) tree factors, with its normalization/history dependence checked on the
--- same effective action.
+-- They are NOT the authority for Bałaban's common-domain walk cancellation.
 ------------------------------------------------------------------------
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
--- Published/source-owned marked background-propagator decay.
+-- Published/source-owned marked background-propagator domain comparison.
 cmp99BackgroundPropagatorMarkedDifferenceLevel : ProofLevel
 cmp99BackgroundPropagatorMarkedDifferenceLevel = standardImported
 
--- Published/source-owned already-differentiated E^(2) tree/locality structure.
+-- Published/source-owned differentiated E^(2) tree/locality structure.
 cmp109DifferentiatedActivityTreeStructureLevel : ProofLevel
 cmp109DifferentiatedActivityTreeStructureLevel = standardImported
+
+-- Published/source-owned differentiated MARKED domain replacement and
+-- resummed exponential polarization-kernel decay, by (4.35)--(4.37), (5.10).
+cmp109DifferentiatedMarkedActivityDecayLevel : ProofLevel
+cmp109DifferentiatedMarkedActivityDecayLevel = standardImported
 
 -- Published/source-owned generalized-walk cluster localization and residual
 -- tree summability.
 cmp116GeneralizedRandomWalkClusterLocalisationLevel : ProofLevel
 cmp116GeneralizedRandomWalkClusterLocalisationLevel = standardImported
 
--- Standard connected-graph/tree/forest resummation technology.  Kept separate
--- from Bałaban's source-native common-domain cancellation.
+-- Standard connected-graph/tree/forest resummation technology, deliberately
+-- separate from the source-native paired common-domain cancellation.
 treeForestResummationCalibrationLevel : ProofLevel
 treeForestResummationCalibrationLevel = standardImported
 
--- Already constructed in-repo: finite factor telescope / triangle inequality,
--- finite common-walk cancellation, marked surviving-walk resummation, and
--- exponential-shell -> dyadic/weighted-row algebra.
+-- In-repo finite algebra remains useful for auditing the source mechanism:
+-- scalar/noncommutative factor telescopes, common-walk cancellation, and the
+-- exponential-shell -> dyadic/weighted-row conversion are theorem-constructed.
 finiteDifferentiatedReplacementAndResummationLevel : ProofLevel
 finiteDifferentiatedReplacementAndResummationLevel = machineChecked
 
--- Generic finite-polydisc/Cauchy coefficient machinery remains available as a
--- fallback/check, but it is NOT the primary source-native route because CMP109
--- has already taken the two external field variations before (4.35)/(4.37).
+-- Cauchy extraction is retained as a fallback/check only.  It is not needed to
+-- manufacture D^2 E because CMP109 already works at E^(2).
 genericCauchyDifferentiationFallbackLevel : ProofLevel
 genericCauchyDifferentiationFallbackLevel = machineChecked
 
--- TRUE remaining physical Lemma 7 primitive.
+------------------------------------------------------------------------
+-- TRUE LIVE SEAM AFTER ROUND73
 --
--- For every replacement term in the literal CMP109 differentiated tree
--- expression, prove the bound obtained by inserting ONE CMP99(3) marked
--- propagator/background-difference factor and ordinary decay bounds on all
--- unchanged factors, without sacrificing the remaining positive tree exponent.
-physicalDifferentiatedMarkedReplacementTermBoundLevel : ProofLevel
-physicalDifferentiatedMarkedReplacementTermBoundLevel = conditional
+-- This is a SAME-OBJECT theorem, not a new decay estimate:
+-- identify the source E^(2)/Pi of CMP109 on the literal Bałaban effective
+-- density with the twice-field-differentiated activity/Hessian coordinate used
+-- by `PhysicalUnifiedOneStepYMEstimate`, preserving scale/background/history
+-- normalization.  Once this identification is made, the source exponential
+-- decay feeds the existing dyadic and (3/2)-weighted Hessian-row compilers.
+--
+-- This seam should be discharged inside either
+--   LiteralStateEntersPublishedBalabanRG
+-- or
+--   PhysicalUnifiedOneStepYMEstimate,
+-- and is no longer counted as an independent analytic Lemma 7.
+------------------------------------------------------------------------
 
--- Once that termwise primitive is instantiated, existing finite telescope +
--- CMP116 resummation modules produce the complete marked E^(2) exponential
--- localization and hence the weighted quasi-local Hessian row.
-physicalMarkedDifferentiatedActivityExponentialLocalisationLevel : ProofLevel
-physicalMarkedDifferentiatedActivityExponentialLocalisationLevel = conditional
+physicalCMP109E2IsUnifiedRGHessianCoordinateLevel : ProofLevel
+physicalCMP109E2IsUnifiedRGHessianCoordinateLevel = conditional
