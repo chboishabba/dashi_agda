@@ -159,22 +159,19 @@ literalHelicalRotationalFactorization :
 literalHelicalRotationalFactorization H =
   trans
     (cong
-      (λ pair →
+      (λ omega →
         symmetrisedRotationalInteraction
-          (C3.x pair) (uQ H) (C3.y pair) (uP H))
-      pairMeaning)
-    (helicalInputDifferenceFactorization
-      (signedEigenP H) (signedEigenQ H) (uP H) (uQ H))
-  where
-  pairMeaning :
-    C3.complex3 (omegaP H) (omegaQ H) (omegaP H)
-    ≡
-    C3.complex3
-      (C3.complex3Scale (signedEigenP H) (uP H))
-      (C3.complex3Scale (signedEigenQ H) (uQ H))
-      (omegaP H)
-  pairMeaning
-    rewrite curlEigenP H | curlEigenQ H = refl
+          omega (uQ H) (omegaQ H) (uP H))
+      (curlEigenP H))
+    (trans
+      (cong
+        (λ omega →
+          symmetrisedRotationalInteraction
+            (C3.complex3Scale (signedEigenP H) (uP H))
+            (uQ H) omega (uP H))
+        (curlEigenQ H))
+      (helicalInputDifferenceFactorization
+        (signedEigenP H) (signedEigenQ H) (uP H) (uQ H)))
 
 round93HelicalInputDifferenceFactorizationClosed : Bool
 round93HelicalInputDifferenceFactorizationClosed = true
