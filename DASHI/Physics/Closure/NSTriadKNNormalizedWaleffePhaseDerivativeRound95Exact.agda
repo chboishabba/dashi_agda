@@ -16,37 +16,25 @@ module DASHI.Physics.Closure.NSTriadKNNormalizedWaleffePhaseDerivativeRound95Exa
 --
 -- ROUND95 / NORMALIZED PHASE DERIVATIVE
 --
--- Let
---
---   Psi = A^2 / (E_k E_p E_q)
---
--- on a nonzero three-leg cell.  Rather than introduce division, this module
--- works with the numerator obtained after multiplying the quotient-rule
--- identity by (E_k E_p E_q)^2.  The exact algebraic object is
+-- Let Psi = A^2 / (E_k E_p E_q) on a nonzero three-leg cell. Rather than
+-- introduce division, work with the numerator obtained after multiplying the
+-- quotient-rule identity by (E_k E_p E_q)^2:
 --
 --   Q = 2 A A' E_k E_p E_q
 --       - A^2 (E_k' E_p E_q + E_k E_p' E_q + E_k E_p E_q').
 --
--- If
---
---   A'   = -(rho_k+rho_p+rho_q) A + F_A,
---   E_j' = -2 rho_j E_j + T_j,
---
--- then every viscous term cancels IDENTICALLY in Q.  This is the exact
--- denominator-free statement behind the logarithmic cancellation
---
---   Psi'/Psi = 2 A'/A - E_k'/E_k - E_p'/E_p - E_q'/E_q.
---
--- The nonlinear forcing is split into self-triad and external-network pieces.
--- Importantly, the self-triad amplitude forcing F_A^self is retained.  The
--- Waleffe energy-transfer identities alone do NOT imply F_A^self = 0.
+-- If A'=-(rho_k+rho_p+rho_q)A+F_A and E_j'=-2 rho_j E_j+T_j,
+-- every viscous term cancels identically in Q. The nonlinear forcing is split
+-- into self-triad and external-network pieces. In particular F_A^self is NOT
+-- silently set to zero: the Waleffe energy-transfer identities alone do not
+-- imply that statement.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; -_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst)
 
 neg : ℚ → ℚ
 neg x = - x
@@ -63,9 +51,7 @@ record NormalizedPhaseTangentData : Set where
     amplitude amplitudeTangent : ℚ
     energyK energyP energyQ : ℚ
     energyKTangent energyPTangent energyQTangent : ℚ
-
     rhoK rhoP rhoQ : ℚ
-
     selfAmplitudeForcing externalAmplitudeForcing : ℚ
     selfTransferK selfTransferP selfTransferQ : ℚ
     externalTransferK externalTransferP externalTransferQ : ℚ
@@ -139,24 +125,17 @@ normalizedPhaseViscosityCancelsExactly d
     ∷ externalTransferK d ∷ externalTransferP d ∷ externalTransferQ d
     ∷ [])
 
-------------------------------------------------------------------------
--- Waleffe self-transfer specialization.
-------------------------------------------------------------------------
-
 record WaleffeSelfTransferData : Set where
   constructor waleffe-self-transfer-data
   field
     tangentData : NormalizedPhaseTangentData
     lambdaK lambdaP lambdaQ : ℚ
-
     selfTransferKMeaning :
       selfTransferK tangentData
       ≡ (lambdaQ + neg lambdaP) * amplitude tangentData
-
     selfTransferPMeaning :
       selfTransferP tangentData
       ≡ (lambdaK + neg lambdaQ) * amplitude tangentData
-
     selfTransferQMeaning :
       selfTransferQ tangentData
       ≡ (lambdaP + neg lambdaK) * amplitude tangentData
@@ -190,14 +169,6 @@ waleffeSelfNormalizedDriftExact w
     ∷ energyQ (tangentData w)
     ∷ selfAmplitudeForcing (tangentData w)
     ∷ lambdaK w ∷ lambdaP w ∷ lambdaQ w ∷ [])
-
-------------------------------------------------------------------------
--- Equipartition calibration.
---
--- The Waleffe ENERGY-IMBALANCE polynomial vanishes when all three modal
--- energies coincide.  The full self normalized drift still contains
--- 2 A F_A^self E^3.  Thus equipartition alone does not prove Psi' = 0.
-------------------------------------------------------------------------
 
 energyImbalanceVanishesAtEquipartition :
   ∀ (lambdaK lambdaP lambdaQ E : ℚ) →
