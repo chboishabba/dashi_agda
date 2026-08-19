@@ -1,7 +1,7 @@
 module DASHI.Physics.YangMills.BalabanMarkedHessianPublishedDecayBoundaryExact where
 
 ------------------------------------------------------------------------
--- ROUND72: PUBLISHED MARKED PROPAGATOR DECAY != DIFFERENTIATED HESSIAN CLOSURE
+-- ROUND72: PUBLISHED MARKED PROPAGATOR DECAY != DIFFERENTIATED E^(2) CLOSURE
 --
 -- PRIMARY SOURCES
 --
@@ -9,12 +9,9 @@ module DASHI.Physics.YangMills.BalabanMarkedHessianPublishedDecayBoundaryExact w
 -- "Propagators for Lattice Gauge Theories in a Background Field",
 -- Communications in Mathematical Physics 99(3) (1985), 389--434.
 -- DOI: 10.1007/BF01240355.
---
--- The source proves regularity/exponential decay of the background-field
--- propagators and, for differences of propagators on two domains, an extra
--- exponential factor controlled by the distance from the localization to the
--- nearest place where the domains/background data differ.  This is the
--- published zeroth-order marked-domain decay used by the current GAP-1 route.
+-- Theorem 3.14 / equation (3.154) supplies the marked domain-sequence
+-- propagator comparison: common localized random-walk terms cancel and each
+-- survivor gains an extra distance-to-discrepancy exponential factor.
 --
 -- Tadeusz Bałaban,
 -- "Renormalization Group Approach to Lattice Gauge Field Theories. I.
@@ -22,14 +19,19 @@ module DASHI.Physics.YangMills.BalabanMarkedHessianPublishedDecayBoundaryExact w
 -- Coupling Constant Renormalization in Four Dimensions",
 -- Communications in Mathematical Physics 109 (1987), 249--301.
 -- DOI: 10.1007/BF01215223.
+-- Equations (4.3)--(4.5) express the ALREADY DIFFERENTIATED local activity in
+-- terms of background-map derivatives/tree expressions; (4.35) is the n=2
+-- specialization and (4.37) resums E^(2) to the polarization tensor.  Hence
+-- the primary proof route does not need to obtain the Hessian through a new
+-- generic Cauchy-radius argument.
 --
 -- Tadeusz Bałaban,
 -- "Renormalization Group Approach to Lattice Gauge Field Theories. II.
 -- Cluster Expansions", Communications in Mathematical Physics 116(1) (1988),
 -- 1--22. DOI: 10.1007/BF01239022.
 -- CMP116 explicitly constructs the fluctuation-field cluster expansion using
--- generalized random-walk expansions for propagators/minimizers inherited
--- from the background-propagator programme.
+-- generalized random-walk expansions for propagators/minimizers and supplies
+-- the residual localization/tree summability used after the marked comparison.
 --
 -- TREE/FOREST CALIBRATION ONLY
 --
@@ -47,68 +49,74 @@ module DASHI.Physics.YangMills.BalabanMarkedHessianPublishedDecayBoundaryExact w
 -- in Constructive Physics, Lecture Notes in Physics 446 (1995), 7--36.
 -- DOI: 10.1007/3-540-59190-7_20. arXiv:hep-th/9409094.
 --
--- These tree/forest identities calibrate the positive tree-resummation shape.
--- They are NOT the authority for the CMP99 domain-comparison cancellation.
--- In the source-native Yang--Mills proof, common generalized-walk terms cancel
--- because the paired restricted background data agree on the common region.
--- Only the surviving walks reach the marked domain discrepancy.
+-- These tree/forest identities calibrate connected-graph/tree resummation.
+-- They are NOT the authority for the CMP99 common-domain cancellation.  In the
+-- source-native Yang--Mills proof, paired generalized-walk terms cancel because
+-- the restricted background data agree on their common localization region.
 --
 -- SHARP FRONTIER
 --
--- The remaining Yang--Mills-specific analytic theorem is therefore NOT
--- "prove marked exponential decay" in general.  It is the second-variation
--- inheritance theorem:
+-- The remaining Yang--Mills-specific analytic theorem is NOT "prove marked
+-- exponential decay" from scratch and NOT "derive D^2 by generic Cauchy".
+-- CMP109 has already differentiated.  The true primitive is:
 --
---   published marked propagator/substituted-background decay
---       + analytic stability of D^2 E under that substitution
---       + CMP116 residual tree/localization summability
---   ----------------------------------------------------------
---       marked exponential decay of the SAME decoupled activity Hessian
---       entering the unified RG norm.
+--   one factor in the CMP109 (4.3) differentiated tree expression
+--       -> replace that factor by its CMP99(3) marked domain difference
+--       -> keep every unchanged factor under the ordinary CMP109 tree bound
+--       -> retain BOTH marked distance and residual tree-length decay
+--       -> telescope the finite factor replacement
+--       -> apply CMP116 localization/tree summability.
 --
--- The existing modules
---
---   BalabanDecoupledActivityHessian
---   BalabanMarkedPolarisationResummation
---
--- already construct respectively the Cauchy-coefficient lift and the finite
--- common-walk cancellation/resummation.  Thus the irreducible physical input
--- is the marked substituted-background stability estimate for D^2 E while
--- retaining BOTH discrepancy-distance and tree-length decay.
+-- The repository already owns the finite replacement telescope and the finite
+-- surviving-walk cancellation/resummation.  Therefore the irreducible physical
+-- input is the SOURCE-NATIVE TERMWISE marked replacement bound for the literal
+-- E^(2) tree factors, with its normalization/history dependence checked on the
+-- same effective action.
 ------------------------------------------------------------------------
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
--- Published/source-owned zeroth-order marked background-propagator decay.
+-- Published/source-owned marked background-propagator decay.
 cmp99BackgroundPropagatorMarkedDifferenceLevel : ProofLevel
 cmp99BackgroundPropagatorMarkedDifferenceLevel = standardImported
 
--- Published/source-owned use of generalized random-walk localization inside
--- the fluctuation-field cluster expansion.
+-- Published/source-owned already-differentiated E^(2) tree/locality structure.
+cmp109DifferentiatedActivityTreeStructureLevel : ProofLevel
+cmp109DifferentiatedActivityTreeStructureLevel = standardImported
+
+-- Published/source-owned generalized-walk cluster localization and residual
+-- tree summability.
 cmp116GeneralizedRandomWalkClusterLocalisationLevel : ProofLevel
 cmp116GeneralizedRandomWalkClusterLocalisationLevel = standardImported
 
--- Standard connected-graph/tree/forest resummation technology.  This is
--- deliberately separate from the source-native common-domain cancellation.
+-- Standard connected-graph/tree/forest resummation technology.  Kept separate
+-- from Bałaban's source-native common-domain cancellation.
 treeForestResummationCalibrationLevel : ProofLevel
 treeForestResummationCalibrationLevel = standardImported
 
--- Already constructed in-repo: finite-polydisc/Cauchy lift of a pointwise
--- marked substituted-background Hessian bound to the differentiated activity
--- coefficient, followed by common-walk cancellation and finite resummation.
-differentiatedCoefficientAndFiniteResummationLevel : ProofLevel
-differentiatedCoefficientAndFiniteResummationLevel = machineChecked
+-- Already constructed in-repo: finite factor telescope / triangle inequality,
+-- finite common-walk cancellation, marked surviving-walk resummation, and
+-- exponential-shell -> dyadic/weighted-row algebra.
+finiteDifferentiatedReplacementAndResummationLevel : ProofLevel
+finiteDifferentiatedReplacementAndResummationLevel = machineChecked
+
+-- Generic finite-polydisc/Cauchy coefficient machinery remains available as a
+-- fallback/check, but it is NOT the primary source-native route because CMP109
+-- has already taken the two external field variations before (4.35)/(4.37).
+genericCauchyDifferentiationFallbackLevel : ProofLevel
+genericCauchyDifferentiationFallbackLevel = machineChecked
 
 -- TRUE remaining physical Lemma 7 primitive.
 --
--- Prove on the literal CMP109/CMP116 substituted background that the second
--- field variation is Lipschitz/analytic with a majorant preserving the source
--- marked-distance decay and the residual positive tree-length exponent.
-physicalMarkedSubstitutedBackgroundSecondVariationStabilityLevel : ProofLevel
-physicalMarkedSubstitutedBackgroundSecondVariationStabilityLevel = conditional
+-- For every replacement term in the literal CMP109 differentiated tree
+-- expression, prove the bound obtained by inserting ONE CMP99(3) marked
+-- propagator/background-difference factor and ordinary decay bounds on all
+-- unchanged factors, without sacrificing the remaining positive tree exponent.
+physicalDifferentiatedMarkedReplacementTermBoundLevel : ProofLevel
+physicalDifferentiatedMarkedReplacementTermBoundLevel = conditional
 
--- Once the preceding physical primitive is instantiated on the SAME activity,
--- the existing resummation + exponential-shell modules produce the weighted
--- quasi-local Hessian row used by the Polchinski/finite-speed route.
+-- Once that termwise primitive is instantiated, existing finite telescope +
+-- CMP116 resummation modules produce the complete marked E^(2) exponential
+-- localization and hence the weighted quasi-local Hessian row.
 physicalMarkedDifferentiatedActivityExponentialLocalisationLevel : ProofLevel
 physicalMarkedDifferentiatedActivityExponentialLocalisationLevel = conditional
