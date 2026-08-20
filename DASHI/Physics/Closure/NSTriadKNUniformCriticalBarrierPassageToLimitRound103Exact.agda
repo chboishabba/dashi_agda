@@ -23,26 +23,24 @@ module DASHI.Physics.Closure.NSTriadKNUniformCriticalBarrierPassageToLimitRound1
 --
 -- ROUND103 / ONE-SHOT SAME-SOLUTION COMPACTNESS COMPILER
 --
--- This module implements the theorem-shaped *weld* requested by the top-down
+-- This module implements the theorem-shaped weld requested by the top-down
 -- Clay consumer.  It does not rediscover Simon compactness or Serrin theory.
--- Instead it makes their exact physical inputs explicit and proves that, once
--- those standard analytic witnesses are supplied on one Galerkin family, they
--- construct `CriticalBarrierFor` for the SAME limiting solution.
+-- Instead it proves that once the standard analytic target is instantiated on
+-- the SAME Galerkin carrier and SAME limiting strong-solution carrier, the
+-- quantitative limiting budget constructs `CriticalBarrierFor` for that exact
+-- limiting solution.
 --
--- ROUND104 RECEIPT REPAIR
+-- ROUND104 RECEIPT / CARRIER REPAIR
 --
--- The first Round103 draft stored names such as `strongCriticalCompactness`
--- merely as fields of type `Set`.  A value of type `Set` is only a proposition
--- *type*, not a proof inhabiting it.  That was too weak for the intended
--- interface.  Every abstract analytic proposition below now carries an
--- explicit inhabitant field.  This still does NOT claim the literal physical
--- Simon/Aubin--Lions instance is constructed: the predicates remain abstract
--- until a concrete Sobolev/Galerkin carrier instantiates them, and the status
--- for that physical theorem stays false.
+-- The first Round103 draft stored compactness names merely as Set fields.  A
+-- later repair added inhabitants, but still duplicated six unrelated abstract
+-- predicates locally.  Round104 removes that duplication.  There is now ONE
+-- witness-bearing Round29 `CriticalAubinLionsTarget`, and explicit equalities
+-- identify its Galerkin and limit-state carriers with the carriers consumed by
+-- this same-solution compiler.  Thus an Aubin--Lions theorem on an unrelated
+-- sequence/limit cannot silently discharge the continuation consumer.
 --
--- The time-derivative bound is not an unrelated Bool: it is the existing
--- Round29 equation budget, and the theorem below actually invokes
--- `timeDerivativeBoundFromEquation`.
+-- The physical Sobolev/Simon instantiation remains open and fail-closed.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -66,25 +64,16 @@ record UniformCriticalGalerkinLimitData
     -- than merely stored as a status marker.
     timeDerivativeBudget : Critical.NegativeNormTimeDerivativeBudget
 
-    -- Abstract proposition types for the standard same-sequence/same-solution
-    -- passage.  Each one must now be INHABITED; naming a Set is not evidence.
-    strongCriticalCompactness : Set
-    strongCriticalCompactnessWitness : strongCriticalCompactness
+    -- ONE standard compactness target, now witness-bearing in Round29.
+    aubinLionsTarget : Critical.CriticalAubinLionsTarget
 
-    quadraticTermConverges : Set
-    quadraticTermConvergesWitness : quadraticTermConverges
+    -- Same-object carrier welds.  These are type equalities, not prose claims.
+    sameGalerkinSequenceCarrier :
+      Critical.GalerkinSequence aubinLionsTarget ≡ GalerkinSequence
 
-    initialTraceRecovered : Set
-    initialTraceRecoveredWitness : initialTraceRecovered
-
-    limitingEquationRecovered : Set
-    limitingEquationRecoveredWitness : limitingEquationRecovered
-
-    weakStarLowerSemicontinuity : Set
-    weakStarLowerSemicontinuityWitness : weakStarLowerSemicontinuity
-
-    weakDissipationLowerSemicontinuity : Set
-    weakDissipationLowerSemicontinuityWitness : weakDissipationLowerSemicontinuity
+    sameLimitStateCarrier :
+      Critical.LimitState aubinLionsTarget
+      ≡ Critical.StrongSolution continuation
 
     -- The quantitative limiting budget must witness L4_t L6_x finiteness for
     -- this exact limiting solution.  This is the bridge consumed by Round90.
@@ -97,9 +86,6 @@ record UniformCriticalGalerkinLimitData
 
 open UniformCriticalGalerkinLimitData public
 
--- The equation budget automatically yields the total negative-norm derivative
--- estimate.  This theorem is deliberately exported so a physical instantiation
--- cannot bypass the equation split with an unrelated compactness flag.
 uniformCriticalTimeDerivativeBound :
   ∀ {continuation : Critical.PeriodicSerrinContinuationTarget} →
   (data : UniformCriticalGalerkinLimitData continuation) →
@@ -109,26 +95,48 @@ uniformCriticalTimeDerivativeBound :
 uniformCriticalTimeDerivativeBound data =
   Critical.timeDerivativeBoundFromEquation (timeDerivativeBudget data)
 
--- This projection family is deliberately trivial logically, but important for
--- the interface audit: construction of the data record now certifies that the
--- named analytic propositions are actually inhabited.
+-- The standard analytic witnesses are now projected from the single target.
 uniformCriticalCompactnessWitness :
   ∀ {continuation : Critical.PeriodicSerrinContinuationTarget} →
   (data : UniformCriticalGalerkinLimitData continuation) →
-  strongCriticalCompactness data
-uniformCriticalCompactnessWitness = strongCriticalCompactnessWitness
+  Critical.strongL2HOneHalfCompactness (aubinLionsTarget data)
+uniformCriticalCompactnessWitness data =
+  Critical.strongL2HOneHalfCompactnessWitness (aubinLionsTarget data)
 
 uniformCriticalQuadraticConvergenceWitness :
   ∀ {continuation : Critical.PeriodicSerrinContinuationTarget} →
   (data : UniformCriticalGalerkinLimitData continuation) →
-  quadraticTermConverges data
-uniformCriticalQuadraticConvergenceWitness = quadraticTermConvergesWitness
+  Critical.quadraticTermConvergence (aubinLionsTarget data)
+uniformCriticalQuadraticConvergenceWitness data =
+  Critical.quadraticTermConvergenceWitness (aubinLionsTarget data)
 
 uniformCriticalInitialTraceWitness :
   ∀ {continuation : Critical.PeriodicSerrinContinuationTarget} →
   (data : UniformCriticalGalerkinLimitData continuation) →
-  initialTraceRecovered data
-uniformCriticalInitialTraceWitness = initialTraceRecoveredWitness
+  Critical.initialTraceRecovered (aubinLionsTarget data)
+uniformCriticalInitialTraceWitness data =
+  Critical.initialTraceRecoveredWitness (aubinLionsTarget data)
+
+uniformCriticalLimitingEquationWitness :
+  ∀ {continuation : Critical.PeriodicSerrinContinuationTarget} →
+  (data : UniformCriticalGalerkinLimitData continuation) →
+  Critical.limitingEquationRecovered (aubinLionsTarget data)
+uniformCriticalLimitingEquationWitness data =
+  Critical.limitingEquationRecoveredWitness (aubinLionsTarget data)
+
+uniformCriticalWeakStarLSCWitness :
+  ∀ {continuation : Critical.PeriodicSerrinContinuationTarget} →
+  (data : UniformCriticalGalerkinLimitData continuation) →
+  Critical.weakStarLowerSemicontinuity (aubinLionsTarget data)
+uniformCriticalWeakStarLSCWitness data =
+  Critical.weakStarLowerSemicontinuityWitness (aubinLionsTarget data)
+
+uniformCriticalDissipationLSCWitness :
+  ∀ {continuation : Critical.PeriodicSerrinContinuationTarget} →
+  (data : UniformCriticalGalerkinLimitData continuation) →
+  Critical.weakDissipationLowerSemicontinuity (aubinLionsTarget data)
+uniformCriticalDissipationLSCWitness data =
+  Critical.weakDissipationLowerSemicontinuityWitness (aubinLionsTarget data)
 
 uniformCriticalPassageConstructsSameSolutionBarrier :
   ∀ {continuation : Critical.PeriodicSerrinContinuationTarget} →
@@ -153,13 +161,12 @@ round103SameSolutionCriticalPassageCompilerClosed = true
 round103EquationNegativeNormBudgetActuallyConsumed : Bool
 round103EquationNegativeNormBudgetActuallyConsumed = true
 
-round104CompactnessFieldsRequireProofInhabitants : Bool
-round104CompactnessFieldsRequireProofInhabitants = true
+round104SingleAubinLionsTargetSameCarrierWeld : Bool
+round104SingleAubinLionsTargetSameCarrierWeld = true
 
 -- This remains the standard analytic instantiation: Sobolev/product estimates,
 -- Simon compactness, quadratic convergence, trace recovery and lower
--- semicontinuity for the literal physical Galerkin sequence.  The abstract
--- witness-bearing compiler above must not be confused with that theorem.
+-- semicontinuity for the literal physical Galerkin sequence.
 round103PhysicalSimonAubinLionsInstantiationClosed : Bool
 round103PhysicalSimonAubinLionsInstantiationClosed = false
 
@@ -171,9 +178,9 @@ round103EquationNegativeNormBudgetActuallyConsumedIsTrue :
   round103EquationNegativeNormBudgetActuallyConsumed ≡ true
 round103EquationNegativeNormBudgetActuallyConsumedIsTrue = refl
 
-round104CompactnessFieldsRequireProofInhabitantsIsTrue :
-  round104CompactnessFieldsRequireProofInhabitants ≡ true
-round104CompactnessFieldsRequireProofInhabitantsIsTrue = refl
+round104SingleAubinLionsTargetSameCarrierWeldIsTrue :
+  round104SingleAubinLionsTargetSameCarrierWeld ≡ true
+round104SingleAubinLionsTargetSameCarrierWeldIsTrue = refl
 
 round103PhysicalSimonAubinLionsInstantiationClosedIsFalse :
   round103PhysicalSimonAubinLionsInstantiationClosed ≡ false
