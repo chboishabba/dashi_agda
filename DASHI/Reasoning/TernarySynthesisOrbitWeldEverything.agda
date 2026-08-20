@@ -2,8 +2,6 @@ module DASHI.Reasoning.TernarySynthesisOrbitWeldEverything where
 
 ------------------------------------------------------------------------
 -- Aggregate import surface for the 3/6/9/27 synthesis/orbit weld.
-------------------------------------------------------------------------
-
 import DASHI.Cognition.RecursiveFibreTower
 import DASHI.Cognition.PhaseEnrichedTrit
 import DASHI.Foundations.BalancedTernaryStageSymmetryExact
@@ -39,11 +37,7 @@ import DASHI.Reasoning.TernarySynthesisCellComplexExact
 import DASHI.Reasoning.TernarySynthesisLogicQualificationExact
 import DASHI.Reasoning.TernarySynthesisTransportWeldExact
 import DASHI.Reasoning.TernarySynthesisOrbitWeldRegression
-
-------------------------------------------------------------------------
 -- Round-24 recursive ternary tree / pants reconciliation.
-------------------------------------------------------------------------
-
 import DASHI.Topology.TernaryCylinderPantsGeometryExact
 import DASHI.Topology.TernaryPantsFrontierExact
 import DASHI.Reasoning.TernaryPantsSynthesisS3BridgeExact

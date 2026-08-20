@@ -2,6 +2,7 @@ module DASHI.Reasoning.TernaryPantsSynthesisS3Regression where
 
 open import DASHI.Core.Prelude
 
+import Base369 as Base
 import DASHI.Foundations.TernaryEndomorphismConjugacyExact as S3
 import DASHI.Reasoning.TernaryPantsSynthesisS3BridgeExact as Bridge
 import DASHI.Topology.TernaryCylinderPantsGeometryExact as Pants

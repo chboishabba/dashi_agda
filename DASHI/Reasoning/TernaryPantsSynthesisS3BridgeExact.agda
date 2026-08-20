@@ -14,7 +14,7 @@ module DASHI.Reasoning.TernaryPantsSynthesisS3BridgeExact where
 --   Michael F. Atiyah, "Topological quantum field theory",
 --   Publ. Math. IHES 68 (1988), DOI 10.1007/BF02698547.
 --
--- The result is finite/combinatorial. It does not claim a smooth TQFT or a
+-- The result is finite/combinatorial.  It does not claim a smooth TQFT or a
 -- continuous 3D pants thickening.
 ------------------------------------------------------------------------
 
@@ -26,6 +26,10 @@ import DASHI.Reasoning.TernaryComparisonSynthesisExact as Synthesis
 import DASHI.Reasoning.TernarySynthesisCellComplexExact as Cells
 import DASHI.Topology.TernaryCylinderPantsGeometryExact as Pants
 import DASHI.Topology.TernaryPantsFrontierExact as Frontier
+
+------------------------------------------------------------------------
+-- Exact slot <-> TriTruth identification for the local three-way branch.
+------------------------------------------------------------------------
 
 slotToTruth : Pants.BranchSlot → Base.TriTruth
 slotToTruth Pants.slot3 = Base.tri-low
@@ -51,6 +55,11 @@ truthSlotRoundTrip Base.tri-low = refl
 truthSlotRoundTrip Base.tri-mid = refl
 truthSlotRoundTrip Base.tri-high = refl
 
+------------------------------------------------------------------------
+-- S3 acts locally on every pants branch slot through the exact slot/truth
+-- equivalence.  The inverse action is proved, not assumed.
+------------------------------------------------------------------------
+
 permuteSlot : S3.TriPermutation → Pants.BranchSlot → Pants.BranchSlot
 permuteSlot permutation slot =
   truthToSlot (S3.applyPermutation permutation (slotToTruth slot))
@@ -66,6 +75,11 @@ permuteSlotInverseLeft permutation slot
             (S3.applyPermutation permutation (slotToTruth slot))
         | S3.inverseLeftAt permutation (slotToTruth slot)
         | slotTruthRoundTrip slot = refl
+
+------------------------------------------------------------------------
+-- A synthesis choice at any parent pants path picks three children of that
+-- same parent: left comparison endpoint, right endpoint, synthesis endpoint.
+------------------------------------------------------------------------
 
 record RecursiveSynthesisCell (n : Nat) : Set where
   constructor recursiveSynthesisCell
@@ -109,6 +123,11 @@ recursiveOriginalComparisonRetained :
 recursiveOriginalComparisonRetained cell =
   Cells.originalComparisonRetained (recursiveChoice cell)
 
+------------------------------------------------------------------------
+-- S3 equivariance at the local branch layer: permuting all three branch slots
+-- gives exactly the coordinatewise permutation of the associated 27-cell.
+------------------------------------------------------------------------
+
 permuteRecursiveCell :
   ∀ {n : Nat} →
   S3.TriPermutation →
@@ -134,6 +153,10 @@ permuteRecursiveCellInverseLeft permutation
         | permuteSlotInverseLeft permutation right
         | permuteSlotInverseLeft permutation synthesis = refl
 
+------------------------------------------------------------------------
+-- The recursive weld preserves the Round-24 promotion boundary.
+------------------------------------------------------------------------
+
 record TernaryPantsSynthesisS3Boundary : Set where
   constructor ternaryPantsSynthesisS3Boundary
   field
@@ -147,4 +170,9 @@ record TernaryPantsSynthesisS3Boundary : Set where
 canonicalTernaryPantsSynthesisS3Boundary : TernaryPantsSynthesisS3Boundary
 canonicalTernaryPantsSynthesisS3Boundary =
   ternaryPantsSynthesisS3Boundary
-    true true true true false false
+    true
+    true
+    true
+    true
+    false
+    false
