@@ -5,15 +5,41 @@ module DASHI.EverythingHierarchy where
 -- Migration rule:
 --   leaf -> subfolder Everything -> domain Everything -> DASHI.Everything
 --
--- This module is the bridge while DASHI.Everything is migrated away from its
--- historical flat import list.  It intentionally composes existing subject
--- rollups rather than duplicating their leaves.
+-- DASHI.Everything is still the historical lightweight/flat surface during
+-- migration.  This module is the exhaustive hierarchical bridge: domains own
+-- their leaf lists and the repository umbrella composes only domain rollups.
 
 import DASHI.Everything
+
+-- Mathematical / reasoning domains.
+import DASHI.Algebra.Everything
+import DASHI.Cognition.Everything
+import DASHI.Reasoning.Everything
+import DASHI.Moonshine.Everything
+
+-- Natural / physical / applied domains.
 import DASHI.Biology.Everything
+import DASHI.Chemistry.Everything
 import DASHI.Physics.Everything
+import DASHI.Applied.Everything
+import DASHI.Vision.Everything
+import DASHI.Perception.Everything
+
+-- Social / cultural / governance domains.
+import DASHI.Culture.Everything
+import DASHI.Social.Everything
+import DASHI.Governance.Everything
+import DASHI.Regulation.Everything
+import DASHI.Philosophy.Everything
+import DASHI.Music.Everything
+
+-- Systems / tooling / cross-domain domains.
+import DASHI.Compression.Everything
+import DASHI.Graph.Everything
+import DASHI.Perf.Everything
+import DASHI.Visualisation.Everything
 import DASHI.Unified.Everything
 
--- Existing specialised Everything surfaces remain valid sub-rollups and
--- should be attached to their nearest domain-level Everything rather than
--- imported directly by the root as one-off leaves.
+-- Invariant for future migrations:
+-- a specialized Everything surface should be imported by its nearest domain
+-- parent, not directly here.  This file should stay a short domain manifest.
