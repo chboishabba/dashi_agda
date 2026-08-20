@@ -9,7 +9,7 @@ module DASHI.Governance.ApprovalLegitimacyNonfactorabilityExact where
 -- non-factorability theorem behind the LES governance boundary.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; true)
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
@@ -58,8 +58,6 @@ historicalEvidenceDoesNotRestoreAuthority :
   ≡ false
 historicalEvidenceDoesNotRestoreAuthority =
   Diachronic.canonicalHistoricalEvidenceRestoresAuthorityFalse
-  where
-    open import Agda.Builtin.Bool using (false)
 
 record ProceduralLegitimacyBoundary : Set where
   constructor proceduralLegitimacyBoundary
