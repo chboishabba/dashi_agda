@@ -33,18 +33,18 @@ import DASHI.Algebra.SeparatedLeadingValuationExact as Leading
 -- choices elsewhere in the stdlib.
 ------------------------------------------------------------------------
 
-ltIrreflLocal : (n : Nat) -> not (n < n)
+ltIrreflLocal : (n : Nat) -> ¬ (n < n)
 ltIrreflLocal zero ()
-ltIrreflLocal (suc n) (s<s h) = ltIrreflLocal n h
+ltIrreflLocal (suc n) (s≤s h) = ltIrreflLocal n h
 
-ltImpliesNeq : {m n : Nat} -> m < n -> m ≡ n -> bottom
+ltImpliesNeq : {m n : Nat} -> m < n -> m ≡ n -> ⊥
 ltImpliesNeq h refl = ltIrreflLocal _ h
 
 minNatLeftOfStrictLess : {m n : Nat} -> m < n -> Depth.minNat m n ≡ m
 minNatLeftOfStrictLess {zero} {zero} ()
 minNatLeftOfStrictLess {zero} {suc n} h = refl
 minNatLeftOfStrictLess {suc m} {zero} ()
-minNatLeftOfStrictLess {suc m} {suc n} (s<s h) =
+minNatLeftOfStrictLess {suc m} {suc n} (s≤s h) =
   cong suc (minNatLeftOfStrictLess h)
 
 ------------------------------------------------------------------------
