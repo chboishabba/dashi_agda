@@ -41,10 +41,10 @@ hybridTracePreservesSafe :
   (state : Hybrid.HybridState Mode Continuous) →
   Safe state →
   Safe (runHybrid system commands state)
-hybridTracePreservesSafe witness [] state safe = safe
-hybridTracePreservesSafe witness (command ∷ rest) state safe =
-  hybridTracePreservesSafe witness rest
-    (Hybrid.hybridStep _ command state)
+hybridTracePreservesSafe {system = system} witness [] state safe = safe
+hybridTracePreservesSafe {system = system} witness (command ∷ rest) state safe =
+  hybridTracePreservesSafe {system = system} witness rest
+    (Hybrid.hybridStep system command state)
     (Hybrid.stepPreservesSafe witness command state safe)
 
 record HybridTraceBoundary : Set where
