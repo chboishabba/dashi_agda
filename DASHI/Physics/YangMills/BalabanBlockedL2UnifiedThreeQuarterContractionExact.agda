@@ -29,6 +29,7 @@ module DASHI.Physics.YangMills.BalabanBlockedL2UnifiedThreeQuarterContractionExa
 -- remains the physical analytic seam.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using (ℚ; _+_; _≤_; _<_; _/_)
 import Data.Rational.Properties as ℚP
