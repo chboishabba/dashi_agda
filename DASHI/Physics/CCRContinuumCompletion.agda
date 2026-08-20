@@ -1,8 +1,12 @@
 module DASHI.Physics.CCRContinuumCompletion where
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; suc)
+
 open import DASHI.Physics.CCRAssumptions as CCR
+
+------------------------------------------------------------------------
+-- A continuum-limit statement with an explicit approximating sequence.
 
 record Convergence {A : Set} : Set₁ where
   field

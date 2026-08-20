@@ -9,6 +9,15 @@ open import DASHI.Physics.CCRContinuumCompletion as CCC
 open import DASHI.Physics.UnitaryCompletion as UC
 open import DASHI.Physics.StandardModelUniqueness as SMU
 
+------------------------------------------------------------------------
+-- Strong closure object.
+--
+-- Each field is now a typed realization/uniqueness theorem rather than a bare
+-- proposition.  The object is intentionally assumption-parametric: supplying a
+-- value constitutes closure; the lower constructive modules discharge the
+-- finite masked-geometry part, while the remaining analytic and classification
+-- obligations are visible in their respective records.
+
 record FullPhysicsClosure : Set₁ where
   field
     dimension : GDU.GlobalDimensionClosure

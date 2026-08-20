@@ -2,6 +2,13 @@ module DASHI.Physics.StandardModelUniqueness where
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
+open import Data.Product using (_×_; _,_)
+
+------------------------------------------------------------------------
+-- Gauge and matter representation uniqueness.
+--
+-- The candidate class is explicit: compact gauge data with representations,
+-- hypercharge assignments, anomaly constraints, and generation count.
 
 record GroupData : Set₁ where
   field
@@ -35,8 +42,10 @@ record StandardModelCharacterization : Set₁ where
     threeGenerations : GaugeCandidate.generations standardModel ≡ 3
     hyperchargesCorrect : Set
     anomaliesCancel : GaugeCandidate.anomalyFree standardModel
+
     admissible : GaugeCandidate → Set
     standardModelAdmissible : admissible standardModel
+
     unique : ∀ candidate → admissible candidate →
       GaugeIsomorphism candidate standardModel
 
