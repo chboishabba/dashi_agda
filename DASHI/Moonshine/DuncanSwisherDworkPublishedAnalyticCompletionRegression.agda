@@ -6,10 +6,31 @@ module DASHI.Moonshine.DuncanSwisherDworkPublishedAnalyticCompletionRegression w
 
 open import DASHI.Core.Prelude
 
+import DASHI.Moonshine.LegendreExceptionalCertifiedResiduePointsExact as Residues
 import DASHI.Moonshine.LegendreExceptionalPadicHenselConstructionExact as Hensel
 import DASHI.Moonshine.DuncanSwisherDworkPublishedCoefficientFamilyExact as Family
 import DASHI.Moonshine.DuncanSwisherDworkPublishedFirstPoleSharpnessExact as Sharp
 import DASHI.Moonshine.DuncanSwisherDworkPublishedAnalyticCompletionExact as Complete
+
+p5CertifiedResidueAdaptedRegression :
+  Residues.p5JZeroPointAdapted
+    Residues.canonicalLegendreExceptionalCertifiedResiduePointsBoundary ≡ true
+p5CertifiedResidueAdaptedRegression = refl
+
+p7CertifiedResidueAdaptedRegression :
+  Residues.p7J1728PointAdapted
+    Residues.canonicalLegendreExceptionalCertifiedResiduePointsBoundary ≡ true
+p7CertifiedResidueAdaptedRegression = refl
+
+p11CertifiedResidueAdaptedRegression :
+  Residues.p11J1728PointAdapted
+    Residues.canonicalLegendreExceptionalCertifiedResiduePointsBoundary ≡ true
+p11CertifiedResidueAdaptedRegression = refl
+
+henselCentreDefinedFromFiniteCentreRegression :
+  Hensel.liftedCentreDefinedFromFiniteCentre
+    Hensel.canonicalLegendreExceptionalPadicHenselConstructionBoundary ≡ true
+henselCentreDefinedFromFiniteCentreRegression = refl
 
 actualLiftConstructedRegression :
   Hensel.exceptionalPadicLiftRecordConstructed
