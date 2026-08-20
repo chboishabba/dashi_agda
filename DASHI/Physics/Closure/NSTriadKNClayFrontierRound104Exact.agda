@@ -29,7 +29,7 @@ module DASHI.Physics.Closure.NSTriadKNClayFrontierRound104Exact where
 -- Thus complete critical production is a radial layer-cake of UPPER-PACKET
 -- fluxes.  Rounds96/98 already prove on the literal finite projected Galerkin
 -- equation that selected packet transfer is exactly the correctly normalized
--- physical packet-boundary flux.  Round104 now also instantiates an executable
+-- physical packet-boundary flux.  Round104 also instantiates an executable
 -- upper-frequency selector directly from the exact integer-lattice squared norm
 -- |k|^2_Nat.  Selector construction is therefore no longer an open seam.
 --
@@ -54,9 +54,13 @@ module DASHI.Physics.Closure.NSTriadKNClayFrontierRound104Exact where
 -- convergence, nonlinear limit, initial trace, dissipation liminf and
 -- Leray--Hopf identification.  The exact G12 solution is the target's limit
 -- element, and Round103 requires that element to be the exact continuation
--- solution.  The only remaining standard-analysis upgrade is the critical
--- Sobolev topology: uniform H^(1/2)/H^(3/2), L^(4/3)H^(-1/2) derivative,
--- strong L2H^(1/2), and weak-* critical lower semicontinuity.
+-- solution.
+--
+-- The uniform L^infinity H^(1/2) and L^2 H^(3/2) bounds are outputs of the
+-- uniform critical barrier and are NOT counted again as Simon work.  After
+-- obligation A, the genuinely additional standard-analysis upgrade has only
+-- three pieces: L^(4/3)H^(-1/2) time regularity, strong L^2H^(1/2) Simon
+-- compactness, and weak-* critical lower semicontinuity.
 --
 -- HONEST TWO-OBLIGATION COUNTDOWN AFTER ROUND104
 --
@@ -70,13 +74,15 @@ module DASHI.Physics.Closure.NSTriadKNClayFrontierRound104Exact where
 --     boundary-flux episode is paid by the existing danger/excess budget.
 --     Equivalently, construct the physical
 --     `UniformSignedCriticalProductionFamily` with positive retained viscosity
---     and cutoff-independent endpoint remainder.
+--     and cutoff-independent endpoint remainder.  Its topology realization
+--     supplies the uniform H^(1/2)/H^(3/2) inputs consumed by B.
 --
 --  [STANDARD ANALYSIS]
 --  B. PhysicalCriticalSobolevSimonUpgrade
---     Instantiate the five critical-space witnesses on the same physical
---     Galerkin family and weld the resulting exact limit element to the Round90
---     continuation solution.
+--     From A's critical barrier topology, prove only the three additional
+--     standard pieces: L^(4/3)H^(-1/2) derivative control, strong L^2H^(1/2)
+--     Simon compactness, and weak-* critical lower semicontinuity; then weld
+--     the exact G12 limit element to the Round90 continuation solution.
 --
 -- Then the existing theorem-bearing compilers give
 --
@@ -100,10 +106,6 @@ import DASHI.Physics.Closure.NSTriadKNExistingExcessToSignedCriticalProductionRo
 import DASHI.Physics.Closure.NSTriadKNIntegratedDangerOccupationToSignedCriticalRound104Exact as DangerWeld
 import DASHI.Physics.Closure.NSTriadKNPhysicalCriticalGalerkinSimonWeldRound104Exact as Simon
 import DASHI.Physics.Closure.NSTriadKNUniformCriticalBarrierPassageToLimitRound103Exact as Limit
-
-------------------------------------------------------------------------
--- Closed mathematical reductions / falsifiers.
-------------------------------------------------------------------------
 
 round104Round103RadialIntegrationByPartsClosed : Bool
 round104Round103RadialIntegrationByPartsClosed =
@@ -141,6 +143,10 @@ round104IntegratedDangerOccupationFeedsSignedCriticalCompiler : Bool
 round104IntegratedDangerOccupationFeedsSignedCriticalCompiler =
   DangerWeld.round104Round92DangerOccupationFeedsCriticalCompiler
 
+round104BarrierTopologyBelongsToUniformCriticalBarrier : Bool
+round104BarrierTopologyBelongsToUniformCriticalBarrier =
+  Simon.round104BarrierTopologyBelongsToUniformCriticalBarrier
+
 round104ExistingConcreteLimitChainReused : Bool
 round104ExistingConcreteLimitChainReused =
   Simon.round104ExistingG5G8G9G10G11G12LimitMachineryReused
@@ -169,10 +175,6 @@ round104PhysicalCriticalSobolevSimonUpgradeClosed =
 
 round104ClayPromotion : Bool
 round104ClayPromotion = false
-
-------------------------------------------------------------------------
--- Regression witnesses for the intended frontier polarity.
-------------------------------------------------------------------------
 
 round104PointwiseNonnegativeLeithMobilityRefutedIsTrue :
   round104PointwiseNonnegativeLeithMobilityRefuted ≡ true
@@ -205,6 +207,10 @@ round104CompactGammaExcessFeedsSignedCriticalCompilerIsTrue = refl
 round104IntegratedDangerOccupationFeedsSignedCriticalCompilerIsTrue :
   round104IntegratedDangerOccupationFeedsSignedCriticalCompiler ≡ true
 round104IntegratedDangerOccupationFeedsSignedCriticalCompilerIsTrue = refl
+
+round104BarrierTopologyBelongsToUniformCriticalBarrierIsTrue :
+  round104BarrierTopologyBelongsToUniformCriticalBarrier ≡ true
+round104BarrierTopologyBelongsToUniformCriticalBarrierIsTrue = refl
 
 round104ExistingConcreteLimitChainReusedIsTrue :
   round104ExistingConcreteLimitChainReused ≡ true
