@@ -23,7 +23,8 @@ module DASHI.Moonshine.DuncanSwisherDworkPublishedCoefficientFamilyExact where
 -- John F. R. Duncan and Holly Swisher,
 -- "Modular Functions and the Monstrous Exponents", 2026.
 -- arXiv:2602.09135. DOI: 10.48550/arXiv.2602.09135.
--- Proposition 3.1 states that there are integer coefficients A_n(alpha^) with
+-- Proposition 3.1 states, for prime p, that there are integer coefficients
+-- A_n(alpha^) with
 --
 --   p J_1|U_p
 --     = - sum_alpha sum_{n>=1}
@@ -31,59 +32,38 @@ module DASHI.Moonshine.DuncanSwisherDworkPublishedCoefficientFamilyExact where
 --
 -- DASHI CONTRIBUTION
 --
--- The previous `DworkPoleCoefficientFamily` was only a type.  This module
--- constructs that family from ONE source-native Proposition-3.1 integer family
--- and embeds every A_n(alpha^) into the SAME p-adic carrier already used by the
--- exceptional Hensel/Legendre lift.
---
--- Crucially, A_1 is still not stored independently: it remains definitionally
--- the n=1 member of this actual family.  Infinite analytic convergence is kept
--- at the named source relation below; no fake finite summation is introduced.
+-- Construct the previously type-only Dwork pole family from ONE published
+-- prime-indexed integer family and embed every A_n(alpha^) into the SAME local
+-- carrier used by the exceptional Hensel/Legendre lift.  A_1 is definitionally
+-- the n=1 member; it is never stored as a second independent coefficient.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
 open import Data.Integer using (ℤ)
+open import Data.Nat.Primality using (Prime)
 
 import DASHI.Moonshine.DuncanSwisherDworkFirstPoleSameObjectExact as Pole
 import DASHI.Moonshine.LegendreJExceptionalPolynomialFactorizationExact as Legendre
 import DASHI.Moonshine.LegendreExceptionalPadicHenselConstructionExact as Hensel
 
-------------------------------------------------------------------------
--- Abstract NAME for the published analytic partial-fraction identity.  It is a
--- relation on the actual integer coefficient function, not a Boolean receipt.
--- A source adapter inhabiting this relation is asserting Proposition 3.1 itself.
-------------------------------------------------------------------------
-
 postulate
   DeligneDworkKoikePartialFractionExpansion :
     Nat → ℤ → (Pole.PositivePoleOrder → ℤ) → Set
-
-------------------------------------------------------------------------
--- One published coefficient family at one lifted exceptional residue point.
-------------------------------------------------------------------------
 
 record PublishedDworkCoefficientSource
     {branch : Legendre.ExceptionalLegendreBranch}
     (S : Hensel.ExceptionalHenselLocalSource branch) : Set₁ where
   field
     prime : Nat
+    primeIsPrime : Prime prime
     alphaHat : ℤ
-
-    -- The actual source integers A_n(alpha^), n>=1.
     integerCoefficient : Pole.PositivePoleOrder → ℤ
-
     proposition31Expansion :
       DeligneDworkKoikePartialFractionExpansion
         prime alphaHat integerCoefficient
-
-    -- Canonical embedding of source integers into this SAME local carrier.
     embedInteger : ℤ → Hensel.PadicLocal S
 
 open PublishedDworkCoefficientSource public
-
-------------------------------------------------------------------------
--- Actual A_n(alpha^) on the p-adic Legendre carrier.
-------------------------------------------------------------------------
 
 actualDworkPoleFamily :
   {branch : Legendre.ExceptionalLegendreBranch} →
@@ -122,10 +102,6 @@ actualA1IsFamilyCoefficientOne :
   actualA1 C ≡ actualAn C (Pole.onePlus 0)
 actualA1IsFamilyCoefficientOne C = refl
 
-------------------------------------------------------------------------
--- The source expansion remains tied to the SAME integer family used above.
-------------------------------------------------------------------------
-
 publishedExpansionUsesActualIntegerFamily :
   {branch : Legendre.ExceptionalLegendreBranch} →
   {S : Hensel.ExceptionalHenselLocalSource branch} →
@@ -136,6 +112,7 @@ publishedExpansionUsesActualIntegerFamily = proposition31Expansion
 
 record DuncanSwisherDworkPublishedCoefficientFamilyBoundary : Set where
   field
+    sourcePrimeProofRequired : Bool
     proposition31FamilyIsIntegerValued : Bool
     coefficientFamilyConstructedForEveryPositivePoleOrder : Bool
     samePadicCarrierAsLegendreLift : Bool
@@ -148,7 +125,8 @@ record DuncanSwisherDworkPublishedCoefficientFamilyBoundary : Set where
 canonicalDuncanSwisherDworkPublishedCoefficientFamilyBoundary :
   DuncanSwisherDworkPublishedCoefficientFamilyBoundary
 canonicalDuncanSwisherDworkPublishedCoefficientFamilyBoundary = record
-  { proposition31FamilyIsIntegerValued = true
+  { sourcePrimeProofRequired = true
+  ; proposition31FamilyIsIntegerValued = true
   ; coefficientFamilyConstructedForEveryPositivePoleOrder = true
   ; samePadicCarrierAsLegendreLift = true
   ; A1StoredIndependently = false
