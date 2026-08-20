@@ -78,6 +78,14 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound83SevenAnalyticLemmaE
 --    renormalized continuum stress construction and identification of its charge
 --    with the SAME OS translation generator.
 --
+-- 6. Compact-simple positivity is not part of L1.  The standard Cartan--Killing
+--    classification already supplies the dual Coxeter values; Round83's
+--    `CompactSimpleClassificationAdjointCasimirExact` realizes them in the
+--    one-loop normalization and proves C_A>0 for every A/B/C/D and exceptional
+--    family.  Together with the existing universal 11/24 theorem and the new
+--    strict-beta budget compiler, all-group positivity is downstream.  The live
+--    L1 seam is the literal Wilson/FP/Haar colour/Ward scalar identification.
+--
 -- CURRENT STRICT COUNT
 --
 --   5 independent packages
@@ -96,6 +104,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound82FiveAnalyticLeafExact
 import DASHI.Physics.YangMills.BalabanSharedMarkedAnalyticShellExact
 import DASHI.Physics.YangMills.BalabanCompactSimplePositiveBetaFromSharedMarkedShellExact
+import DASHI.Physics.YangMills.CompactSimpleClassificationAdjointCasimirExact
 import DASHI.Physics.YangMills.BalabanPolchinskiShellIntegralDebtExact
 import DASHI.Physics.YangMills.YangMillsSharedMarkedCompositeOPERemainderExact
 import DASHI.Physics.YangMills.YangMillsLatticeStressWardSliceConservationExact
@@ -121,9 +130,10 @@ round83HardAnalyticLemmaUpperCount = 7
 
 -- L1 / A1.
 -- Construct the literal constrained Wilson + reduced Faddeev--Popov + Haar
--- Ward scalar on the source carrier and identify its zero-history logarithmic
--- coefficient with the existing compact-simple C_A * 11/24 scalar theorem.
--- The 11/24 and C_A algebra are already exact; same-object construction is not.
+-- Ward scalar on the source carrier and prove that its colour contraction and
+-- zero-history logarithmic coefficient equal the already-classified compact-
+-- simple C_A times the existing universal 11/24 scalar.  Strict C_A positivity,
+-- the 11/24 arithmetic, and beta-margin propagation are no longer new work.
 literalWilsonFPHaarWardScalarIdentificationLevel : ProofLevel
 literalWilsonFPHaarWardScalarIdentificationLevel = conditional
 
@@ -176,11 +186,17 @@ stressChargeEqualsOSHamiltonianLevel = conditional
 -- DOWNSTREAM / NO LONGER INDEPENDENT NEW 4D-YM LEMMAS
 ------------------------------------------------------------------------
 
+classifiedCompactSimpleCasimirStrictPositivityLevel : ProofLevel
+classifiedCompactSimpleCasimirStrictPositivityLevel = machineChecked
+
 sharedMarkedThreeConsumerTailAndRowLevel : ProofLevel
 sharedMarkedThreeConsumerTailAndRowLevel = machineChecked
 
 compactSimplePositiveBetaBudgetAssemblyLevel : ProofLevel
 compactSimplePositiveBetaBudgetAssemblyLevel = machineChecked
+
+compactSimpleStrictPositiveBetaConclusionLevel : ProofLevel
+compactSimpleStrictPositiveBetaConclusionLevel = machineChecked
 
 polchinskiShellDebtSummationLevel : ProofLevel
 polchinskiShellDebtSummationLevel = machineChecked
