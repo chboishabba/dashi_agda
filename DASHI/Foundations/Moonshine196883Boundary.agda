@@ -5,10 +5,22 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; _+_; _*_)
 open import Agda.Builtin.String using (String)
 
+------------------------------------------------------------------------
+-- Exact finite arithmetic used by the existing 47/59/71 and +1 narrative.
+--
+-- The intended number is 196883, not 19883:
+--   47 * 59 * 71 = 196883
+-- and the familiar neighbouring dimension relation is
+--   196884 = 196883 + 1.
+--
+-- This module checks only the arithmetic and role separation.  It does not
+-- promote moonshine, Monster representation, or modular j authority.
+
 moonshineLargeFactor : Nat
 moonshineLargeFactor = 196883
 
-moonshineLargeFactor-factorisation : 47 * (59 * 71) ≡ moonshineLargeFactor
+moonshineLargeFactor-factorisation :
+  47 * (59 * 71) ≡ moonshineLargeFactor
 moonshineLargeFactor-factorisation = refl
 
 moonshinePlusIdentity : Nat
@@ -24,7 +36,8 @@ record FactorTriple : Set where
     secondFactor : Nat
     thirdFactor : Nat
     product : Nat
-    productChecks : firstFactor * (secondFactor * thirdFactor) ≡ product
+    productChecks :
+      firstFactor * (secondFactor * thirdFactor) ≡ product
 
 canonical475971FactorTriple : FactorTriple
 canonical475971FactorTriple = factorTriple 47 59 71 196883 refl
@@ -46,14 +59,25 @@ record Moonshine196883Boundary : Set where
     exactFactorisationChecked : Bool
     exactPlusOneSplitChecked : Bool
     typo19883AcceptedAsEquivalent : Bool
-    typo19883AcceptedAsEquivalentIsFalse : typo19883AcceptedAsEquivalent ≡ false
+    typo19883AcceptedAsEquivalentIsFalse :
+      typo19883AcceptedAsEquivalent ≡ false
     monsterRepresentationAuthorityPromoted : Bool
-    monsterRepresentationAuthorityPromotedIsFalse : monsterRepresentationAuthorityPromoted ≡ false
+    monsterRepresentationAuthorityPromotedIsFalse :
+      monsterRepresentationAuthorityPromoted ≡ false
     modularJAuthorityPromoted : Bool
-    modularJAuthorityPromotedIsFalse : modularJAuthorityPromoted ≡ false
+    modularJAuthorityPromotedIsFalse :
+      modularJAuthorityPromoted ≡ false
     interpretation : String
 
 canonicalMoonshine196883Boundary : Moonshine196883Boundary
 canonicalMoonshine196883Boundary =
-  moonshine196883Boundary true true false refl false refl false refl
+  moonshine196883Boundary
+    true
+    true
+    false
+    refl
+    false
+    refl
+    false
+    refl
     "196883 = 47*59*71 and 196884 = 1+196883 are checked finite arithmetic; the identity/residual split does not by itself prove moonshine or modular-j claims"
