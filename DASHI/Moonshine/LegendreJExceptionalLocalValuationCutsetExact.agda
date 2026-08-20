@@ -55,6 +55,8 @@ open ExceptionalLegendreLocalSharpness public
 ------------------------------------------------------------------------
 -- Residue-facing producer: replace a bare v(unit)=0 assertion by the finite
 -- local-ring statement residue(unit) != 0 whenever the domain has such a map.
+-- Projections remain qualified to avoid shadowing the legacy local-sharpness
+-- field names exported above.
 ------------------------------------------------------------------------
 
 record ExceptionalLegendreLocalResidueSharpness
@@ -82,8 +84,6 @@ record ExceptionalLegendreLocalResidueSharpness
       ≡ Ramified.mul V localUnit
           (Ramified.pow V localParameter
             (Legendre.exceptionalRamificationExponent branch))
-
-open ExceptionalLegendreLocalResidueSharpness public
 
 residueSharpnessToLocalSharpness :
   {A R : Set} →
@@ -120,12 +120,12 @@ asRamifiedSharpCoefficient :
   Ramified.RamifiedSharpCoefficient
     V (Legendre.exceptionalRamificationExponent branch)
 asRamifiedSharpCoefficient V branch S = record
-  { Ramified.localUnit = ExceptionalLegendreLocalSharpness.localUnit S
-  ; Ramified.localBranch = ExceptionalLegendreLocalSharpness.localParameter S
-  ; Ramified.coefficient = ExceptionalLegendreLocalSharpness.localJDifference S
-  ; Ramified.localUnitDepthZero = ExceptionalLegendreLocalSharpness.localUnitDepthZero S
-  ; Ramified.localBranchDepthOne = ExceptionalLegendreLocalSharpness.localParameterDepthOne S
-  ; Ramified.coefficientFactorization = ExceptionalLegendreLocalSharpness.localJFactorization S
+  { Ramified.localUnit = localUnit S
+  ; Ramified.localBranch = localParameter S
+  ; Ramified.coefficient = localJDifference S
+  ; Ramified.localUnitDepthZero = localUnitDepthZero S
+  ; Ramified.localBranchDepthOne = localParameterDepthOne S
+  ; Ramified.coefficientFactorization = localJFactorization S
   }
 
 exceptionalLocalJDepthIsAlgebraicRamification :
@@ -133,7 +133,7 @@ exceptionalLocalJDepthIsAlgebraicRamification :
   (V : Ramified.MultiplicativeNatValuation A) →
   (branch : Legendre.ExceptionalLegendreBranch) →
   (S : ExceptionalLegendreLocalSharpness V branch) →
-  Ramified.valuation V (ExceptionalLegendreLocalSharpness.localJDifference S)
+  Ramified.valuation V (localJDifference S)
   ≡ Legendre.exceptionalRamificationExponent branch
 exceptionalLocalJDepthIsAlgebraicRamification V branch S =
   Ramified.ramifiedSharpCoefficientValuation
@@ -157,7 +157,7 @@ jZeroLocalJDepthThree :
   {A : Set} →
   (V : Ramified.MultiplicativeNatValuation A) →
   (S : ExceptionalLegendreLocalSharpness V Legendre.jZeroQuadraticBranch) →
-  Ramified.valuation V (ExceptionalLegendreLocalSharpness.localJDifference S) ≡ 3
+  Ramified.valuation V (localJDifference S) ≡ 3
 jZeroLocalJDepthThree V S =
   exceptionalLocalJDepthIsAlgebraicRamification
     V Legendre.jZeroQuadraticBranch S
@@ -166,7 +166,7 @@ j1728MinusTwoLocalJDepthTwo :
   {A : Set} →
   (V : Ramified.MultiplicativeNatValuation A) →
   (S : ExceptionalLegendreLocalSharpness V Legendre.j1728LambdaMinusTwo) →
-  Ramified.valuation V (ExceptionalLegendreLocalSharpness.localJDifference S) ≡ 2
+  Ramified.valuation V (localJDifference S) ≡ 2
 j1728MinusTwoLocalJDepthTwo V S =
   exceptionalLocalJDepthIsAlgebraicRamification
     V Legendre.j1728LambdaMinusTwo S
@@ -175,7 +175,7 @@ j1728PlusOneLocalJDepthTwo :
   {A : Set} →
   (V : Ramified.MultiplicativeNatValuation A) →
   (S : ExceptionalLegendreLocalSharpness V Legendre.j1728LambdaPlusOne) →
-  Ramified.valuation V (ExceptionalLegendreLocalSharpness.localJDifference S) ≡ 2
+  Ramified.valuation V (localJDifference S) ≡ 2
 j1728PlusOneLocalJDepthTwo V S =
   exceptionalLocalJDepthIsAlgebraicRamification
     V Legendre.j1728LambdaPlusOne S
@@ -184,7 +184,7 @@ j1728TwoLambdaMinusOneLocalJDepthTwo :
   {A : Set} →
   (V : Ramified.MultiplicativeNatValuation A) →
   (S : ExceptionalLegendreLocalSharpness V Legendre.j1728TwoLambdaMinusOne) →
-  Ramified.valuation V (ExceptionalLegendreLocalSharpness.localJDifference S) ≡ 2
+  Ramified.valuation V (localJDifference S) ≡ 2
 j1728TwoLambdaMinusOneLocalJDepthTwo V S =
   exceptionalLocalJDepthIsAlgebraicRamification
     V Legendre.j1728TwoLambdaMinusOne S
