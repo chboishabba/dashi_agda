@@ -36,6 +36,13 @@ requireAttributedSource source =
     (attributedBibliographicSource source)
     true true true true true
 
+requirePinnedFormalSource :
+  String → String → String → PublicSourceRequirement
+requirePinnedFormalSource sourceIdentity revisionOrHash contractName =
+  publicSourceRequirement
+    (sourcePinnedFormalContract sourceIdentity revisionOrHash contractName)
+    true true true true true
+
 attributedSourceCannotImportProof :
   (source : Source.AttributedSource) →
   Source.citationImportsProof source ≡ false
