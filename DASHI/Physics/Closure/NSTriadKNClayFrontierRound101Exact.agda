@@ -73,7 +73,8 @@ round101FixedEigenvalueCircleGeometryClosed =
   Circle.round100FixedEigenvalueResonanceHasDivisionFreeCircleInvariant
 
 round101ExactRadiusScalarViscosityClosed : Bool
-round101ExactRadiusScalarViscosityClosed = true
+round101ExactRadiusScalarViscosityClosed =
+  ScalarViscosity.round100EigenpacketRelativeGrowthCollapseClosed
 
 round101FullCircleCountingAloneCreatesRequiredSchurDecay : Bool
 round101FullCircleCountingAloneCreatesRequiredSchurDecay =
@@ -102,6 +103,10 @@ round101PhysicalAubinLionsLimitWeldClosed =
 round101FixedEigenvalueCircleGeometryClosedIsTrue :
   round101FixedEigenvalueCircleGeometryClosed ≡ true
 round101FixedEigenvalueCircleGeometryClosedIsTrue = refl
+
+round101ExactRadiusScalarViscosityClosedIsTrue :
+  round101ExactRadiusScalarViscosityClosed ≡ true
+round101ExactRadiusScalarViscosityClosedIsTrue = refl
 
 round101FullCircleCountingAloneCreatesRequiredSchurDecayIsFalse :
   round101FullCircleCountingAloneCreatesRequiredSchurDecay ≡ false
