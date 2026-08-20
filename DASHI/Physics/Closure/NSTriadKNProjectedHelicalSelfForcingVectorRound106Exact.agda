@@ -20,26 +20,13 @@ module DASHI.Physics.Closure.NSTriadKNProjectedHelicalSelfForcingVectorRound106E
 --
 -- ROUND106 / VECTOR WALEFFE SELF-FORCING NORMAL FORM
 --
--- Round93 proved the Waleffe eigenvalue-difference only after testing the
--- literal ordered-pair Galerkin interaction against u_k.  Round95 therefore
--- still had to leave the self contribution to the cubic phase tangent opaque.
+-- For p+q=k, nonzero k, and helical inputs,
 --
--- Here we close the stronger VECTOR identity.  For p+q=k, nonzero k, and
--- helical input modes
+--   N_k^{p,q}=(lambda_q-lambda_p) P_k(u_p x u_q).
 --
---   curl_p u_p = lambda_p u_p,
---   curl_q u_q = lambda_q u_q,
---
--- the exact symmetrised projected Galerkin forcing is
---
---   N_k^{p,q}
---     = (lambda_q-lambda_p) P_k (u_p x u_q).
---
--- The proof is entirely on the repository's literal Complex3 carrier:
--- convective = rotational + longitudinal gradient, Leray kills the resonant
--- longitudinal vector, and the two -i factors are tracked exactly.  This is
--- stronger than the old tested transfer formula and exposes the self phase
--- forcing as a projected-cross square rather than an arbitrary network term.
+-- This is the vector strengthening of Round93's tested Waleffe factor.  It
+-- uses the literal convective/rotational identity, exact Leray linearity, and
+-- exact annihilation of the resonant longitudinal gradient.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
@@ -71,14 +58,24 @@ complex3ScaleOne (C3.complex3 x y z) =
     (Field.complexOneMultiply y)
     (Field.complexOneMultiply z)
 
-complex3ScaleZero :
+complex3ScaleZeroScalar :
   ∀ {r} {F : C3.RealField r} (v : C3.Complex3 F) →
   C3.complex3Scale (C3.complexZero F) v ≡ C3.complex3Zero F
-complex3ScaleZero {F = F} (C3.complex3 x y z) =
+complex3ScaleZeroScalar {F = F} (C3.complex3 x y z) =
   Field.complex3Ext
     (Field.complexMultiplyZeroLeft x)
     (Field.complexMultiplyZeroLeft y)
     (Field.complexMultiplyZeroLeft z)
+
+complex3ScaleZeroVector :
+  ∀ {r} {F : C3.RealField r}
+    (scalar : C3.Complex F) →
+  C3.complex3Scale scalar (C3.complex3Zero F) ≡ C3.complex3Zero F
+complex3ScaleZeroVector {F = F} scalar =
+  Field.complex3Ext
+    (Field.complexMultiplyZeroRight scalar)
+    (Field.complexMultiplyZeroRight scalar)
+    (Field.complexMultiplyZeroRight scalar)
 
 complex3SubtractSelf :
   ∀ {r} {F : C3.RealField r} (v : C3.Complex3 F) →
@@ -187,19 +184,20 @@ lerayKillsResonantGradient :
   C3.lerayProject3 E I k
     (Conv.gradientPair (C3.modeVector E p) (C3.modeVector E q) uP uQ)
   ≡ C3.complex3Zero F
-lerayKillsResonantGradient {F = F} E I resonance nonzero uP uQ =
-  let
-    scalar = C3.bilinearDot3 uP uQ
+lerayKillsResonantGradient {F = F} E I {p} {q} {k}
+    resonance nonzero uP uQ =
+  let scalar = C3.bilinearDot3 uP uQ
   in
   trans
-    (cong (C3.lerayProject3 E I _)
+    (cong (C3.lerayProject3 E I k)
       (Conv.resonantGradientIsOutputLongitudinal E resonance uP uQ))
     (trans
-      (ScalarLinear.lerayProjectComplexScale E I _ scalar (C3.modeVector E _))
+      (ScalarLinear.lerayProjectComplexScale
+        E I k scalar (C3.modeVector E k))
       (trans
         (cong (C3.complex3Scale scalar)
-          (lerayKillsModeVector E I _ nonzero))
-        (complex3ScaleZero (C3.complex3Zero F))))
+          (lerayKillsModeVector E I k nonzero))
+        (complex3ScaleZeroVector scalar)))
 
 orderedPairIsMinusIProjectedConvective :
   ∀ {r} {F : C3.RealField r}
@@ -236,10 +234,9 @@ minusIRotationalIsConvectiveMinusGradient :
       (Conv.convectivePair waveP waveQ uP uQ)
       (Conv.gradientPair waveP waveQ uP uQ)
 minusIRotationalIsConvectiveMinusGradient {F = F} waveP waveQ uP uQ =
-  let
-    difference = C3.complex3Subtract
-      (Conv.convectivePair waveP waveQ uP uQ)
-      (Conv.gradientPair waveP waveQ uP uQ)
+  let difference = C3.complex3Subtract
+        (Conv.convectivePair waveP waveQ uP uQ)
+        (Conv.gradientPair waveP waveQ uP uQ)
   in
   trans
     (cong (C3.complex3Scale (minusI F))
@@ -317,7 +314,6 @@ projectedHelicalOrderedPairVector {F = F} {E} {I} {p} {q} {k} H =
     X = Cross.complex3Cross (uP H) (uQ H)
     deltaPQ = C3.complexSubtract (signedEigenP H) (signedEigenQ H)
     deltaQP = C3.complexSubtract (signedEigenQ H) (signedEigenP H)
-
     ordered = orderedPairIsMinusIProjectedConvective
       E I k p q (uP H) (uQ H)
 
@@ -349,8 +345,7 @@ projectedHelicalOrderedPairVector {F = F} {E} {I} {p} {q} {k} H =
 
     projectedDifference :
       C3.lerayProject3 E I k (C3.complex3Subtract C G)
-      ≡ C3.complex3Scale (minusI F)
-          (C3.lerayProject3 E I k R)
+      ≡ C3.complex3Scale (minusI F) (C3.lerayProject3 E I k R)
     projectedDifference =
       trans
         (cong (C3.lerayProject3 E I k) differenceToRotational)
@@ -358,8 +353,7 @@ projectedHelicalOrderedPairVector {F = F} {E} {I} {p} {q} {k} H =
 
     projectedRotational :
       C3.lerayProject3 E I k R
-      ≡ C3.complex3Scale deltaPQ
-          (C3.lerayProject3 E I k X)
+      ≡ C3.complex3Scale deltaPQ (C3.lerayProject3 E I k X)
     projectedRotational =
       trans
         (cong (C3.lerayProject3 E I k)
@@ -372,8 +366,7 @@ projectedHelicalOrderedPairVector {F = F} {E} {I} {p} {q} {k} H =
         k p q (uP H) (uQ H)
       ≡ C3.complex3Scale (minusI F)
           (C3.complex3Scale (minusI F)
-            (C3.complex3Scale deltaPQ
-              (C3.lerayProject3 E I k X)))
+            (C3.complex3Scale deltaPQ (C3.lerayProject3 E I k X)))
     expanded =
       trans ordered
         (trans
