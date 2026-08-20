@@ -23,12 +23,9 @@ module DASHI.Physics.Closure.NSTriadKNLiteralBoundaryTriadsInstantiateBonyChanne
 -- without changing p, q, k, or the resonance equation, and hence every
 -- packet-boundary physical triad receives exactly one computed near-channel
 -- tag (low-high, high-low, or high-high).
---
--- No coefficient estimate is asserted here: this is the exact carrier weld
--- needed before the Round91/official multiplicity machinery is applied.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; true)
+open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
@@ -97,14 +94,28 @@ literalPhysicalTriadHasUniqueComputedBonyChannel policy tau = record
   ; channelIsComputed = refl
   }
 
--- A packet-boundary triad is still the same physical incidence; boundary
--- status is deliberately an extra predicate, not a replacement carrier.
+------------------------------------------------------------------------
+-- Proof-relevant packet-boundary status: exactly the six mixed Boolean
+-- patterns are admitted.  All-in and all-out states have no constructor.
+------------------------------------------------------------------------
+
+data MixedBoundary : Bool → Bool → Bool → Set where
+  in-in-out : MixedBoundary true true false
+  in-out-in : MixedBoundary true false true
+  out-in-in : MixedBoundary false true true
+  in-out-out : MixedBoundary true false false
+  out-in-out : MixedBoundary false true false
+  out-out-in : MixedBoundary false false true
+
 record BoundaryPhysicalTriad
     (selected : Z3.FourierMode → Bool) : Set where
   constructor boundary-physical-triad
   field
     incidence : Physical.PhysicalTriadIncidence
-    crossesBoundary : Set
+    crossesBoundary : MixedBoundary
+      (selected (Physical.k incidence))
+      (selected (Physical.p incidence))
+      (selected (Physical.q incidence))
 
 open BoundaryPhysicalTriad public
 
@@ -116,8 +127,31 @@ literalBoundaryTriadHasComputedBonyChannel :
 literalBoundaryTriadHasComputedBonyChannel policy bt =
   literalPhysicalTriadHasUniqueComputedBonyChannel policy (incidence bt)
 
+mixedBoundaryNeverAllInside :
+  ∀ {a b c} → MixedBoundary a b c →
+  ¬ ((a ≡ true) × (b ≡ true) × (c ≡ true))
+mixedBoundaryNeverAllInside in-in-out (_ , _ , ())
+mixedBoundaryNeverAllInside in-out-in (_ , () , _)
+mixedBoundaryNeverAllInside out-in-in (() , _ , _)
+mixedBoundaryNeverAllInside in-out-out (_ , () , _)
+mixedBoundaryNeverAllInside out-in-out (() , _ , _)
+mixedBoundaryNeverAllInside out-out-in (() , _ , _)
+
+mixedBoundaryNeverAllOutside :
+  ∀ {a b c} → MixedBoundary a b c →
+  ¬ ((a ≡ false) × (b ≡ false) × (c ≡ false))
+mixedBoundaryNeverAllOutside in-in-out (() , _ , _)
+mixedBoundaryNeverAllOutside in-out-in (() , _ , _)
+mixedBoundaryNeverAllOutside out-in-in (_ , () , _)
+mixedBoundaryNeverAllOutside in-out-out (() , _ , _)
+mixedBoundaryNeverAllOutside out-in-out (_ , () , _)
+mixedBoundaryNeverAllOutside out-out-in (_ , _ , ())
+
 round97LiteralBoundaryTriadsInstantiateBonyChannels : Bool
 round97LiteralBoundaryTriadsInstantiateBonyChannels = true
+
+round97BoundaryWitnessExcludesUniformSides : Bool
+round97BoundaryWitnessExcludesUniformSides = true
 
 round97LiteralBoundaryTriadsInstantiateBonyChannelsIsTrue :
   round97LiteralBoundaryTriadsInstantiateBonyChannels ≡ true
