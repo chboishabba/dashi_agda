@@ -28,9 +28,11 @@ module DASHI.Physics.Closure.NSTriadKNCriticalCompactnessSerrinRound29Exact wher
 --
 -- The original abstract Aubin--Lions target stored proposition *types* as Set
 -- fields without requiring inhabitants.  The target now pairs every named
--- analytic proposition with an explicit witness.  This is still an abstract
--- interface rather than a literal Sobolev-function-space construction; the
--- physical instantiation status therefore remains false.
+-- analytic proposition with an explicit witness.  The target also carries the
+-- limiting-equation and lower-semicontinuity witnesses needed by the literal
+-- same-solution weld, so later modules do not duplicate unrelated abstract
+-- predicates.  This is still an abstract interface rather than a literal
+-- Sobolev-function-space construction; physical instantiation remains false.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -124,6 +126,15 @@ record CriticalAubinLionsTarget : Set₁ where
 
     initialTraceRecovered : Set
     initialTraceRecoveredWitness : initialTraceRecovered
+
+    limitingEquationRecovered : Set
+    limitingEquationRecoveredWitness : limitingEquationRecovered
+
+    weakStarLowerSemicontinuity : Set
+    weakStarLowerSemicontinuityWitness : weakStarLowerSemicontinuity
+
+    weakDissipationLowerSemicontinuity : Set
+    weakDissipationLowerSemicontinuityWitness : weakDissipationLowerSemicontinuity
 
 open CriticalAubinLionsTarget public
 
