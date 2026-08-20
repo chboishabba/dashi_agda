@@ -7,69 +7,105 @@ import DASHI.Economics.SystemicCrisisSignalKernel as Crisis
 import DASHI.Economics.SystemicCrisisCompressionBridge as Bridge
 
 closedModelReceipt : Bridge.ModelSelectionReceipt
-closedModelReceipt = Bridge.modelReceipt true true true true true true true
+closedModelReceipt =
+  Bridge.modelReceipt true true true true true true true
 
 openModelReceipt : Bridge.ModelSelectionReceipt
-openModelReceipt = Bridge.modelReceipt true true true false true false true
+openModelReceipt =
+  Bridge.modelReceipt true true true false true false true
 
 stableResiduals : Bridge.ResidualDepthProfile
-stableResiduals = Bridge.residualProfile neg neg neg neg neg neg
+stableResiduals =
+  Bridge.residualProfile neg neg neg neg neg neg
 
 fracturedResiduals : Bridge.ResidualDepthProfile
-fracturedResiduals = Bridge.residualProfile pos pos pos pos pos pos
+fracturedResiduals =
+  Bridge.residualProfile pos pos pos pos pos pos
 
 activeObservation : Crisis.CrisisObservation
-activeObservation = Crisis.observation pos pos pos pos pos neg neg
+activeObservation =
+  Crisis.observation pos pos pos pos pos neg neg
 
 abatingObservation : Crisis.CrisisObservation
-abatingObservation = Crisis.observation neg neg neg neg neg pos pos
+abatingObservation =
+  Crisis.observation neg neg neg neg neg pos pos
 
 activeChain : Bridge.TransmissionChain
-activeChain = Bridge.transmission pos pos pos pos pos pos zer
+activeChain =
+  Bridge.transmission pos pos pos pos pos pos zer
 
 sovereignChain : Bridge.TransmissionChain
-sovereignChain = Bridge.transmission pos pos pos pos pos pos pos
+sovereignChain =
+  Bridge.transmission pos pos pos pos pos pos pos
 
 activeObservedReceipt : Bridge.SystemicSignalReceipt
-activeObservedReceipt = Bridge.systemicReceipt activeObservation fracturedResiduals activeChain openModelReceipt true true true
+activeObservedReceipt =
+  Bridge.systemicReceipt
+    activeObservation
+    fracturedResiduals
+    activeChain
+    openModelReceipt
+    true true true
 
 activeValidatedReceipt : Bridge.SystemicSignalReceipt
-activeValidatedReceipt = Bridge.systemicReceipt activeObservation fracturedResiduals activeChain closedModelReceipt true true true
+activeValidatedReceipt =
+  Bridge.systemicReceipt
+    activeObservation
+    fracturedResiduals
+    activeChain
+    closedModelReceipt
+    true true true
 
 abatingReceipt : Bridge.SystemicSignalReceipt
-abatingReceipt = Bridge.systemicReceipt abatingObservation stableResiduals sovereignChain closedModelReceipt true true true
+abatingReceipt =
+  Bridge.systemicReceipt
+    abatingObservation
+    stableResiduals
+    sovereignChain
+    closedModelReceipt
+    true true true
 
-fractureClassifies : Bridge.compressionRegime fracturedResiduals ≡ Bridge.fractureRegime
+fractureClassifies :
+  Bridge.compressionRegime fracturedResiduals ≡ Bridge.fractureRegime
 fractureClassifies = refl
 
-stableClassifies : Bridge.compressionRegime stableResiduals ≡ Bridge.compressiveRegime
+stableClassifies :
+  Bridge.compressionRegime stableResiduals ≡ Bridge.compressiveRegime
 stableClassifies = refl
 
-observedBoundary : Bridge.promotionLevel activeObservedReceipt ≡ Bridge.observedMechanismLevel
-observedBoundary = refl
+activeObservedDoesNotPretendValidation :
+  Bridge.promotionLevel activeObservedReceipt ≡ Bridge.observedMechanismLevel
+activeObservedDoesNotPretendValidation = refl
 
-validatedBoundary : Bridge.promotionLevel activeValidatedReceipt ≡ Bridge.validatedModelLevel
-validatedBoundary = refl
+closedMDLPromotesValidatedModel :
+  Bridge.promotionLevel activeValidatedReceipt ≡ Bridge.validatedModelLevel
+closedMDLPromotesValidatedModel = refl
 
-sovereignLinkSeparate : Bridge.sovereignTransmissionObserved activeChain ≡ false
-sovereignLinkSeparate = refl
+sovereignLinkIsSeparate :
+  Bridge.sovereignTransmissionObserved activeChain ≡ false
+sovereignLinkIsSeparate = refl
 
-sovereignLinkClosed : Bridge.sovereignTransmissionObserved sovereignChain ≡ true
-sovereignLinkClosed = refl
+sovereignLinkCanClose :
+  Bridge.sovereignTransmissionObserved sovereignChain ≡ true
+sovereignLinkCanClose = refl
 
-activePosture : Bridge.monitoringPosture Crisis.activePhase Bridge.compressiveRegime ≡ Bridge.activeDysfunction
-activePosture = refl
+activePostureDominatesCompressionRegime :
+  Bridge.monitoringPosture Crisis.activePhase Bridge.compressiveRegime
+  ≡ Bridge.activeDysfunction
+activePostureDominatesCompressionRegime = refl
 
-abatementDetected : Bridge.peakMechanicsObserved abatingReceipt ≡ true
-abatementDetected = refl
+abatingMechanicsDetected :
+  Bridge.peakMechanicsObserved abatingReceipt ≡ true
+abatingMechanicsDetected = refl
 
-noPriceBottomPromotion : Bridge.priceBottomClaimed abatingReceipt ≡ false
-noPriceBottomPromotion = refl
+abatingStillDoesNotClaimPriceBottom :
+  Bridge.priceBottomClaimed abatingReceipt ≡ false
+abatingStillDoesNotClaimPriceBottom = refl
 
-expectationNonPromotion :
+expectationReceiptCannotPromote :
   Bridge.promotionLevel
     (Bridge.expectationOnlyReceipt
       (Bridge.technologyExpectation Bridge.inflatedExpectations pos pos)
       closedModelReceipt)
   ≡ Bridge.unsupportedLevel
-expectationNonPromotion = refl
+expectationReceiptCannotPromote = refl
