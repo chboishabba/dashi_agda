@@ -17,6 +17,7 @@ module DASHI.Physics.YangMills.BalabanNormalizedExpectationCrossNumeratorExact w
 -- the actual gauge density.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_)
 open import Data.Rational.Base as ℚ using (ℚ; _*_; _-_)
 open import Data.Rational.Tactic.RingSolver as ℚRing
 
