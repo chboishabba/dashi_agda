@@ -12,6 +12,10 @@ import DASHI.Economics.SystemicCrisisCompressionBridge as Compression
 import DASHI.Interop.TechSystemicStressCompressionBridge as Cross
 import DASHI.Interop.PNFTechSystemicStressBridge as Bridge
 
+------------------------------------------------------------------------
+-- Canonical PNF architecture remains candidate-only.
+------------------------------------------------------------------------
+
 canonicalPNFNeedsResolverSelectorITIR :
   Bridge.pnfEvidenceReady Bridge.canonicalPNFCandidateEvidence ≡ false
 canonicalPNFNeedsResolverSelectorITIR = refl
@@ -31,6 +35,10 @@ bothResidualLayersRemainDistinct :
   Bridge.relateResidualLayers true true
     ≡ Bridge.corroboratedButDistinctResiduals
 bothResidualLayersRemainDistinct = refl
+
+------------------------------------------------------------------------
+-- Independently validated crisis/MDL fixture.
+------------------------------------------------------------------------
 
 fracturedResiduals : Compression.ResidualDepthProfile
 fracturedResiduals = Compression.residualProfile pos pos pos pos pos pos
@@ -69,6 +77,10 @@ validatedCrossReceipt =
     true
     true
     true
+
+------------------------------------------------------------------------
+-- Fully receipted PNF attachment.
+------------------------------------------------------------------------
 
 readyPNFEvidence : Bridge.PNFScenarioEvidenceReceipt
 readyPNFEvidence =
