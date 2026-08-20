@@ -15,19 +15,11 @@ module DASHI.Physics.Closure.NSTriadKNWaleffeNetworkForcingRealQuarticHomogeneit
 -- ROUND106 MAKE-OR-BREAK / LITERAL QUARTIC HOMOGENEITY
 --
 -- The full Galerkin nonlinearity scales quadratically under a REAL amplitude
--- rescaling u -> a u.  This module closes the corresponding algebra directly
--- for Round94's literal Waleffe network-forcing functional.
---
--- Scale the three velocity slots by a and the three nonlinear forcing slots
--- by a^2.  Then
+-- rescaling u -> a u.  Scale the three velocity slots by a and the three
+-- nonlinear forcing slots by a^2.  Then exactly
 --
 --   F_net(a u_k,a u_p,a u_q; a^2 f_k,a^2 f_p,a^2 f_q)
 --     = a^4 F_net(u_k,u_p,u_q;f_k,f_p,f_q).
---
--- The proof tracks Hermitian conjugation exactly.  The restriction to a real
--- embedded scalar matters: for a general complex phase the first Hermitian
--- slot conjugates its multiplier.  This theorem is the source-native degree
--- calculation used by the quartic-vs-quadratic absorption falsifier.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
@@ -35,7 +27,6 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
-import DASHI.Physics.Closure.NSTriadKNComplex3FieldAlgebra as Field
 import DASHI.Physics.Closure.NSTriadKNComplex3HermitianScalingLaws as Scaling
 import DASHI.Physics.Closure.NSTriadKNComplex3HermitianAlgebraProgram as Hermitian
 import DASHI.Physics.Closure.NSTriadKNComplexCommutativeRingExact as Ring
@@ -164,10 +155,10 @@ firstForcingSlotQuartic {F = F} a fK uP uQ =
         (trans
           (cong (C3.complexMultiply s2)
             (Scaling.hermitianPairingScaleRight s2 fK X))
-          (R.solve 3
-            (λ s2 base s4 →
+          (R.solve 2
+            (λ s2 base →
               s2 R.⊗ (s2 R.⊗ base) R.⊜ (s2 R.⊗ s2) R.⊗ base)
-            refl s2 base (fourthScale a)))))
+            refl s2 base))))
   where module R = Ring.Solver F
 
 secondForcingSlotQuartic :
@@ -199,11 +190,11 @@ secondForcingSlotQuartic {F = F} a uK fP uQ =
         (trans
           (cong (C3.complexMultiply s)
             (Scaling.hermitianPairingScaleRight s3 uK X))
-          (R.solve 4
-            (λ s s2 base s4 →
+          (R.solve 3
+            (λ s s2 base →
               s R.⊗ ((s2 R.⊗ s) R.⊗ base)
               R.⊜ (s2 R.⊗ s2) R.⊗ base)
-            refl s s2 base (fourthScale a)))))
+            refl s s2 base))))
   where module R = Ring.Solver F
 
 thirdForcingSlotQuartic :
@@ -235,11 +226,11 @@ thirdForcingSlotQuartic {F = F} a uK uP fQ =
         (trans
           (cong (C3.complexMultiply s)
             (Scaling.hermitianPairingScaleRight s3 uK X))
-          (R.solve 4
-            (λ s s2 base s4 →
+          (R.solve 3
+            (λ s s2 base →
               s R.⊗ ((s R.⊗ s2) R.⊗ base)
               R.⊜ (s2 R.⊗ s2) R.⊗ base)
-            refl s s2 base (fourthScale a)))))
+            refl s s2 base))))
   where module R = Ring.Solver F
 
 networkForcingRealQuarticHomogeneous :
@@ -267,7 +258,7 @@ networkForcingRealQuarticHomogeneous {F = F} a uK uP uQ fK fP fQ =
         (secondForcingSlotQuartic a uK fP uQ))
       (thirdForcingSlotQuartic a uK uP fQ))
     (sym
-      (Field.complexDistributeLeft s4 (C3.complexAdd FK FP) FQ))
+      (Ring.complexDistributeLeft s4 (C3.complexAdd FK FP) FQ))
 
 round106LiteralWaleffeNetworkForcingRealQuarticHomogeneityClosed : Bool
 round106LiteralWaleffeNetworkForcingRealQuarticHomogeneityClosed = true
