@@ -1,7 +1,7 @@
 module DASHI.Physics.YangMills.BalabanContinuumNontrivialityAsymptoticFreedomGateExact where
 
 ------------------------------------------------------------------------
--- PRIMARY SOURCES / WARNING
+-- PRIMARY SOURCES / ADVERSARIAL CONTEXT
 --
 -- David J. Gross and Frank Wilczek,
 -- "Ultraviolet Behavior of Non-Abelian Gauge Theories",
@@ -20,51 +20,67 @@ module DASHI.Physics.YangMills.BalabanContinuumNontrivialityAsymptoticFreedomGat
 -- Corrigendum: Annals of Mathematics 199 (2024), 479.
 -- DOI: 10.4007/annals.2024.199.1.7.
 --
--- DASHI CONTRIBUTION / EPISTEMIC BOUNDARY
+-- SOURCE-SCOPE NOTE
 --
--- The one-loop sign and the controlled five-channel g^4 remainder are not
--- side calculations: together they must leave a strictly positive physical
--- beta margin along the weak-coupling trajectory.  This file makes that
--- dependency executable.  It deliberately does NOT assert that positive beta
--- implies a non-Gaussian continuum limit.  The phi^4_4 triviality theorem is a
--- concrete warning that continuum interacting survival is an independent
--- theorem even after a beautiful cutoff construction exists.
+-- Aizenman--Duminil-Copin is used here as a precise adversarial precedent,
+-- not as a universal no-go theorem for every four-dimensional scalar QFT.
+-- Their theorem concerns critical/near-critical scaling limits in the
+-- nearest-neighbour ferromagnetic Ising / lambda-phi^4_4 universality class.
+-- Its role in this module is to demonstrate a concrete failure mode in which
+-- a controlled lattice family has a Gaussian continuum scaling limit.  Yang--
+-- Mills lies outside those hypotheses; asymptotic freedom is exactly why the
+-- perturbative B/C lane is treated as a possible escape mechanism rather than
+-- evidence that nontrivial survival is hopeless.
+--
+-- DASHI CONTRIBUTION
+--
+-- Nontrivial continuum survival must not float independently of the
+-- asymptotic-freedom calculation.  Positive Yang--Mills one-loop flow is a
+-- load-bearing INPUT to E3, though by itself it is not a proof of E3.
 ------------------------------------------------------------------------
 
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _-_; _≤_; _<_)
-import Data.Rational.Properties as ℚP
+open import Agda.Builtin.Equality using (_≡_)
+open import Data.Rational.Base as ℚ using (ℚ; _+_; _-_; _≤_)
+import Data.Rational.Tactic.RingSolver as ℚRing
+open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
-record AsymptoticFreedomSurvivalMargin : Set where
+record AsymptoticFreedomSurvivalMarginData : Set where
   field
-    oneLoopCoefficient : ℚ
-    controlledHigherOrderPenalty : ℚ
-    physicalBetaCoefficient : ℚ
+    oneLoopLower : ℚ
+    quarticPenalty : ℚ
+    survivalMargin : ℚ
+    physicalBeta : ℚ
 
-    survivalMarginPositive :
-      0ℚ < oneLoopCoefficient - controlledHigherOrderPenalty
+    oneLoopSplitsIntoMarginAndPenalty :
+      oneLoopLower ≡ survivalMargin + quarticPenalty
 
-    physicalBetaDominatesSurvivalMargin :
-      oneLoopCoefficient - controlledHigherOrderPenalty
-      ≤ physicalBetaCoefficient
-open AsymptoticFreedomSurvivalMargin public
+    physicalBetaAfterQuarticCharge :
+      oneLoopLower - quarticPenalty ≤ physicalBeta
+open AsymptoticFreedomSurvivalMarginData public
 
-physicalBetaStrictlyPositive :
-  ∀ data → 0ℚ < physicalBetaCoefficient data
-physicalBetaStrictlyPositive data =
-  ℚP.<-≤-trans
-    (survivalMarginPositive data)
-    (physicalBetaDominatesSurvivalMargin data)
+oneLoopAfterQuarticChargeIsSurvivalMargin :
+  ∀ data →
+  oneLoopLower data - quarticPenalty data ≡ survivalMargin data
+oneLoopAfterQuarticChargeIsSurvivalMargin data =
+  trans
+    (cong
+      (λ selected → selected - quarticPenalty data)
+      (oneLoopSplitsIntoMarginAndPenalty data))
+    (ℚRing.solve-∀
+      (survivalMargin data) (quarticPenalty data))
 
-asymptoticFreedomSurvivalMarginLevel : ProofLevel
-asymptoticFreedomSurvivalMarginLevel = machineChecked
+survivalMarginBelowPhysicalBeta :
+  ∀ data → survivalMargin data ≤ physicalBeta data
+survivalMarginBelowPhysicalBeta data =
+  subst
+    (λ lower → lower ≤ physicalBeta data)
+    (oneLoopAfterQuarticChargeIsSurvivalMargin data)
+    (physicalBetaAfterQuarticCharge data)
 
-literalOneLoopPositiveMarginLevel : ProofLevel
-literalOneLoopPositiveMarginLevel = conditional
+asymptoticFreedomQuarticSurvivalMarginLevel : ProofLevel
+asymptoticFreedomQuarticSurvivalMarginLevel = machineChecked
 
-literalFiveChannelPenaltyControlLevel : ProofLevel
-literalFiveChannelPenaltyControlLevel = conditional
-
-continuumYangMillsInteractingSurvivalLevel : ProofLevel
-continuumYangMillsInteractingSurvivalLevel = conditional
+continuumInteractingObservableSurvivalLevel : ProofLevel
+continuumInteractingObservableSurvivalLevel = conditional

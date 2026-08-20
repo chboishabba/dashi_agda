@@ -19,67 +19,77 @@ module DASHI.Physics.YangMills.BalabanP33RationalQuaternionWilsonFirstVariationE
 --
 -- DASHI CONTRIBUTION
 --
--- The canonical rational quaternion Wilson jet already contains the exact
--- noncommutative product recursion `orderedFirstProduct` and its explicit list
--- `firstVariationTerms`.  Promote the scalar Wilson first variation itself:
+-- Promote the already-constructed noncommutative ordered first-product rule
+-- to the literal Wilson scalar variation.  For an ordered product of factor
+-- jets, the Wilson convention S = 1 - q0(U) gives
 --
---   D S_p = -q0(D U_p),
+--   dS = -q0 (orderedFirstProduct factors).
 --
--- and prove that on a four-link plaquette it is exactly the sum of four scalar
--- product-rule atoms.  This is the first-order analogue of the existing
--- sixteen-atom Hessian theorem and the algebraic precursor to physical
--- plaquette-boundary support.
+-- The existing theorem
+--
+--   sumQuaternion (firstVariationTerms factors)
+--     = orderedFirstProduct factors
+--
+-- therefore implies an exact finite atom decomposition.  For a four-link
+-- plaquette there are exactly four first-variation atoms, one per link
+-- occurrence.  This is the source-facing first derivative analogue of the
+-- existing sixteen-atom second-variation theorem and is used by the physical
+-- plaquette-support producer.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
 open import Data.List.Base using (map; length)
 open import Data.Rational.Base as ℚ using (ℚ; -_)
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
-import DASHI.Physics.YangMills.BalabanP33RationalQuaternionWilsonJetExact as Jet
+open import DASHI.Physics.YangMills.BalabanP33RationalQuaternionWilsonJetExact public
 
-wilsonFirstVariationNumerator : List Jet.QuaternionFactorJet → ℚ
+wilsonFirstVariationNumerator :
+  List QuaternionFactorJet → ℚ
 wilsonFirstVariationNumerator factors =
-  - Jet.q0 (Jet.orderedFirstProduct factors)
+  - q0 (orderedFirstProduct factors)
 
-wilsonFirstVariationAtomSum : List Jet.QuaternionFactorJet → ℚ
+wilsonFirstVariationAtomSum :
+  List QuaternionFactorJet → ℚ
 wilsonFirstVariationAtomSum factors =
-  Jet.sumRational
-    (map Jet.wilsonAtomContribution (Jet.firstVariationTerms factors))
+  sumRational (map wilsonAtomContribution (firstVariationTerms factors))
 
 wilsonFirstVariationIsAtomSum : ∀ factors →
   wilsonFirstVariationNumerator factors
   ≡ wilsonFirstVariationAtomSum factors
 wilsonFirstVariationIsAtomSum factors =
   trans
-    (cong (λ q → - Jet.q0 q)
-      (sym (Jet.sumFirstVariationTermsExact factors)))
+    (cong (λ q → - q0 q)
+      (sym (sumFirstVariationTermsExact factors)))
     (trans
-      (cong -_
-        (Jet.scalarPartSumQuaternion (Jet.firstVariationTerms factors)))
+      (cong -_ (scalarPartSumQuaternion (firstVariationTerms factors)))
       (trans
-        (Jet.negativeFiniteSum
-          (map Jet.q0 (Jet.firstVariationTerms factors)))
-        (cong Jet.sumRational
-          (Jet.mapNegatedScalarParts (Jet.firstVariationTerms factors)))))
+        (negativeFiniteSum (map q0 (firstVariationTerms factors)))
+        (cong sumRational
+          (mapNegatedScalarParts (firstVariationTerms factors)))))
 
 fourFactorFirstVariationAtomCountExact :
   ∀ first second third fourth →
-  length (Jet.firstVariationTerms
-    (Jet.fourFactorJets first second third fourth)) ≡ 4
+  length
+    (firstVariationTerms
+      (fourFactorJets first second third fourth))
+  ≡ 4
 fourFactorFirstVariationAtomCountExact first second third fourth = refl
 
 fourLinkWilsonFirstVariationIsFourScalarAtoms :
   ∀ first second third fourth →
   wilsonFirstVariationNumerator
-    (Jet.fourFactorJets first second third fourth)
+    (fourFactorJets first second third fourth)
   ≡ wilsonFirstVariationAtomSum
-      (Jet.fourFactorJets first second third fourth)
+      (fourFactorJets first second third fourth)
 fourLinkWilsonFirstVariationIsFourScalarAtoms first second third fourth =
   wilsonFirstVariationIsAtomSum
-    (Jet.fourFactorJets first second third fourth)
+    (fourFactorJets first second third fourth)
 
-wilsonFirstVariationFourAtomLevel : ProofLevel
-wilsonFirstVariationFourAtomLevel = machineChecked
+wilsonFirstVariationAtomDecompositionLevel : ProofLevel
+wilsonFirstVariationAtomDecompositionLevel = machineChecked
+
+fourLinkWilsonFirstVariationLocalityLevel : ProofLevel
+fourLinkWilsonFirstVariationLocalityLevel = machineChecked

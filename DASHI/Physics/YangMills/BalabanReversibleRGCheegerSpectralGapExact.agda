@@ -9,20 +9,22 @@ module DASHI.Physics.YangMills.BalabanReversibleRGCheegerSpectralGapExact where
 -- Transactions of the American Mathematical Society 309 (1988), 557--580.
 -- DOI: 10.1090/S0002-9947-1988-0930082-9.
 --
--- SOURCE CORRECTION / ROUND60
---
--- Lawler--Sokal treat discrete-time Markov chains and continuous-time
--- Markovian jump processes on general state spaces, including reversible and
--- nonreversible cases, and also a killed-process variant.  Reversibility is
--- therefore NOT a mandatory physical producer for the Bałaban RG kernel.
--- The literal kernel should determine which theorem branch is applicable.
---
 -- DASHI CONTRIBUTION
 --
--- Keep the hard theorem boundary honest.  The existing exact rational
--- normalization is retained for the familiar reversible Cheeger subcase,
--- while a separate regime tag prevents the physical cutset from silently
--- demanding detailed balance when Lawler--Sokal does not.
+-- Keep the hard theorem boundary honest.  Lawler--Sokal treats discrete-time
+-- Markov chains and continuous-time Markovian jump processes on general state
+-- spaces in reversible AND nonreversible settings, and also gives a killed-
+-- process version.  Therefore detailed balance is not a mandatory physical
+-- Yang--Mills producer.  The actual obligation is to construct the literal RG
+-- kernel and prove the hypotheses of whichever Lawler--Sokal regime it really
+-- inhabits.
+--
+-- The rational calculation below remains the clean reversible/two-sided
+-- normalization used when that specialization applies:
+--
+--   phi^2 <= 2 gamma  ==>  (1/2) phi^2 <= gamma.
+--
+-- No spectral gap is requested as an independent physical receipt.
 ------------------------------------------------------------------------
 
 open import Data.Integer.Base using (+_)
@@ -36,8 +38,18 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
 
 ------------------------------------------------------------------------
--- Existing exact reversible normalization.
+-- The three theorem regimes relevant to the literal RG producer.
 ------------------------------------------------------------------------
+
+data LawlerSokalKernelRegime : Set where
+  reversible nonreversible killed : LawlerSokalKernelRegime
+
+record LiteralRGLawlerSokalRegime : Set where
+  field
+    regime : LawlerSokalKernelRegime
+    positiveMarkovKernelConstructed : Set
+    theoremHypothesesForChosenRegime : Set
+open LiteralRGLawlerSokalRegime public
 
 record ReversibleRGCheegerData : Set where
   field
@@ -85,37 +97,25 @@ cheegerTwoSided :
 cheegerTwoSided data =
   cheegerLowerBoundNormalized (lowerData data) , lawlerSokalUpper data
 
-------------------------------------------------------------------------
--- Physical theorem selector: do not force reversibility.
-------------------------------------------------------------------------
-
-data LawlerSokalRegime : Set where
-  reversibleRG nonreversibleRG killedRG : LawlerSokalRegime
-
-record LiteralRGLawlerSokalRoute : Set where
-  constructor literalRGLawlerSokalRoute
-  field
-    regime : LawlerSokalRegime
-open LiteralRGLawlerSokalRoute public
-
 lawlerSokalCheegerTheoremLevel : ProofLevel
 lawlerSokalCheegerTheoremLevel = standardImported
 
-lawlerSokalNonreversibleAndKilledCoverageLevel : ProofLevel
-lawlerSokalNonreversibleAndKilledCoverageLevel = standardImported
+lawlerSokalNonreversibleAndKilledRegimesLevel : ProofLevel
+lawlerSokalNonreversibleAndKilledRegimesLevel = standardImported
 
 cheegerRationalNormalizationLevel : ProofLevel
 cheegerRationalNormalizationLevel = machineChecked
 
--- Actual physical producer: construct the SAME Bałaban RG transition object
--- and prove the hypotheses of whichever Lawler--Sokal branch it satisfies.
-literalRGLawlerSokalHypothesesLevel : ProofLevel
-literalRGLawlerSokalHypothesesLevel = conditional
+-- Physical leaves: construct the SAME literal Bałaban RG kernel as a positive
+-- Markov object, classify the regime it actually satisfies, prove the
+-- corresponding theorem hypotheses, and then obtain a cutoff-uniform
+-- conductance/isoperimetric lower bound.  Reversibility is only one possible
+-- regime, not a required conclusion.
+literalRGPositiveMarkovKernelLevel : ProofLevel
+literalRGPositiveMarkovKernelLevel = conditional
 
--- Legacy reversible subcase retained for downstream compatibility.  It is no
--- longer a mandatory leaf in the shortest Clay cutset.
-literalRGReversibilityLevel : ProofLevel
-literalRGReversibilityLevel = conditional
+literalRGLawlerSokalChosenRegimeHypothesesLevel : ProofLevel
+literalRGLawlerSokalChosenRegimeHypothesesLevel = conditional
 
 cutoffUniformRGConductanceLowerBoundLevel : ProofLevel
 cutoffUniformRGConductanceLowerBoundLevel = conditional
