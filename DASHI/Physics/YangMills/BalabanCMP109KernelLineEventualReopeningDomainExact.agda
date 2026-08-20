@@ -67,6 +67,15 @@ littleOBudgetEntersReopeningDomain ball residualNorm epsilon timeMagnitude direc
     residualUpper smallTime =
   ℚP.≤-trans residualUpper smallTime
 
+------------------------------------------------------------------------
+-- Exact quarter-reopening compatibility.
+--
+-- Once the residual is in-domain and the SAME fixed-point correction obeys
+-- the literal quarter remainder estimate, its norm is controlled by 4/3 of
+-- the residual.  Combining the two inequalities gives the exact epsilon
+-- enlargement used by tangent geometry.
+------------------------------------------------------------------------
+
 littleOBudgetCorrectionUpper :
   ∀ correctionNorm residualNorm epsilon timeMagnitude directionScale →
   correctionNorm ≤ Quarter.fourThirds * residualNorm →
@@ -79,6 +88,13 @@ littleOBudgetCorrectionUpper correctionNorm residualNorm epsilon timeMagnitude d
     (Norm.scaleNonnegative Quarter.fourThirds
       (ℚP.nonNegative⁻¹ Quarter.fourThirds)
       residualUpper)
+
+------------------------------------------------------------------------
+-- A small-time witness can be represented directly as a producer.  This is
+-- the exact formal shape needed by a later real/Bishop little-o limit theorem:
+-- it need only return a positive-enough time gate whose budget lies below the
+-- solver radius; no global IFT is reintroduced.
+------------------------------------------------------------------------
 
 record EventualReopeningDomainWitness (ball : ReopeningBall) : Set₁ where
   field

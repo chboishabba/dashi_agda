@@ -142,5 +142,8 @@ selectedReducedKKTFunctionalFactorizationExact
 cmp109SelectedReducedKKTFunctionalFactorizationLevel : ProofLevel
 cmp109SelectedReducedKKTFunctionalFactorizationLevel = machineChecked
 
+-- The multiplier in the theorem above is definitionally the same normal-solve
+-- multiplier used by the reduced tangent projector; this remains a checked
+-- same-object statement, not a compatibility receipt.
 cmp109SelectedReducedKKTSameNormalSolveFunctionalLevel : ProofLevel
 cmp109SelectedReducedKKTSameNormalSolveFunctionalLevel = machineChecked

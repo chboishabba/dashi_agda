@@ -51,7 +51,6 @@ module DASHI.Physics.YangMills.BalabanCMP109PrintedEquation012FirstOrderNormalFo
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -76,21 +75,30 @@ open FirstOrderSameObjectData public
 
 printedEquation012FirstOrderNormalFormExact :
   ∀ {Output Direction}
-    (d : FirstOrderSameObjectData Output Direction)
+    (data : FirstOrderSameObjectData Output Direction)
     (h : Direction) →
-  printedPerturbed d h
-  ≡ add d
-      (add d (printedBase d) (l13DerivativeAction d h))
-      (remainder d h)
-printedEquation012FirstOrderNormalFormExact d h =
-  trans (printedFrechetExpansionExact d h)
-    (cong (λ sem → add d (add d (printedBase d) sem) (remainder d h))
-          (semanticDerivativeIsL13Action d h))
+  printedPerturbed data h
+  ≡ add data
+      (add data (printedBase data) (l13DerivativeAction data h))
+      (remainder data h)
+printedEquation012FirstOrderNormalFormExact data h
+  with printedFrechetExpansionExact data h
+     | semanticDerivativeIsL13Action data h
+... | refl | refl = refl
+
+------------------------------------------------------------------------
+-- Single downstream authority.
+------------------------------------------------------------------------
 
 record PrintedEquation012NormalFormAuthority
     (Output Direction : Set) : Set₂ where
   field
     sameObject : FirstOrderSameObjectData Output Direction
+
+    -- Kept abstract on purpose: concrete consumers instantiate the ordinary
+    -- finite-dimensional little-o predicate in their selected norm.  What is
+    -- important here is ownership: the predicate applies to `remainder` from
+    -- the SAME object whose derivative action is the literal L13 action.
     LittleOAtZero : (Direction → Output) → Set
     remainderLittleO : LittleOAtZero (remainder sameObject)
 
@@ -116,12 +124,25 @@ authoritativePrintedEquation012RemainderLittleO :
 authoritativePrintedEquation012RemainderLittleO authority =
   remainderLittleO authority
 
+-- This projection exists only to make the provenance explicit in theorem
+-- statements: the numerical derivative consumed downstream is definitionally
+-- the L13 action owned by the authority object.
 authoritativeL13DerivativeAction :
   ∀ {Output Direction} →
   PrintedEquation012NormalFormAuthority Output Direction →
   Direction → Output
 authoritativeL13DerivativeAction authority =
   l13DerivativeAction (sameObject authority)
+
+------------------------------------------------------------------------
+-- Identity-point regression seam.
+--
+-- At the identity, a correct principal-log trivialization has derivative the
+-- identity action.  Any local Frechet expansion through that derivative can
+-- therefore be collapsed to `xi + remainder xi` without touching Federbush.
+-- This is intentionally kept independent of equation (0.12): failure here
+-- isolates a branch/trivialization error before the implicit average enters.
+------------------------------------------------------------------------
 
 record IdentityPointLogRegression (Lie Output : Set) : Set₁ where
   field
@@ -145,16 +166,15 @@ open IdentityPointLogRegression public
 
 principalLogExpIdentityFirstOrderRegression :
   ∀ {Lie Output}
-    (d : IdentityPointLogRegression Lie Output)
+    (data : IdentityPointLogRegression Lie Output)
     (xi : Lie) →
-  principalLogAfterExp d xi
-  ≡ add d (embed d xi) (remainder d xi)
-principalLogExpIdentityFirstOrderRegression d xi =
-  trans (frechetExpansion d xi)
-    (trans (cong (λ ld → add d (add d (zero d) ld) (remainder d xi))
-                 (derivativeIsIdentity d xi))
-           (cong (λ z → add d z (remainder d xi))
-                 (zeroLeft d (embed d xi))))
+  principalLogAfterExp data xi
+  ≡ add data (embed data xi) (remainder data xi)
+principalLogExpIdentityFirstOrderRegression data xi
+  with frechetExpansion data xi
+     | derivativeIsIdentity data xi
+     | zeroLeft data (embed data xi)
+... | refl | refl | refl = refl
 
 cmp109PrintedEquation012FirstOrderNormalFormLevel : ProofLevel
 cmp109PrintedEquation012FirstOrderNormalFormLevel = machineChecked

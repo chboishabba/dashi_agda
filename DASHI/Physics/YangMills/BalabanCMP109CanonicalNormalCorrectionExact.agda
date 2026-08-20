@@ -137,6 +137,10 @@ quarterContractiveNormalCorrectionUnique problem left right leftSol rightSol coo
       (cong (_+ r) differenceZero)
       (ℚRing.solve-∀ r : 0ℚ + r ≡ r))
 
+------------------------------------------------------------------------
+-- Canonical parameterized correction.
+------------------------------------------------------------------------
+
 record CanonicalNormalCorrectionFamily (Parameter Index : Set) : Set₁ where
   field
     problem : Parameter → QuarterContractiveNormalCorrectionProblem Index
