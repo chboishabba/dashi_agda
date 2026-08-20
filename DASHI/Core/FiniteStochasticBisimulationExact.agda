@@ -30,7 +30,7 @@ open import Data.Empty using (⊥)
 open import Data.Nat using (_≤_; z≤n; s≤s)
 
 record ProjectedFiniteKernel
-    (State Action Coarse : Set) : Set₁ where
+    (State Action Coarse : Set) : Set where
   constructor projectedFiniteKernel
   field
     project : State → Coarse
@@ -43,7 +43,7 @@ open ProjectedFiniteKernel public
 
 record KernelBisimulation
     {State Action Coarse : Set}
-    (kernel : ProjectedFiniteKernel State Action Coarse) : Set₁ where
+    (kernel : ProjectedFiniteKernel State Action Coarse) : Set where
   constructor kernelBisimulation
   field
     sameProjectionSameProjectedKernel :
