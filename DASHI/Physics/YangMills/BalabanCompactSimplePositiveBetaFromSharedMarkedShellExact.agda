@@ -1,7 +1,7 @@
 module DASHI.Physics.YangMills.BalabanCompactSimplePositiveBetaFromSharedMarkedShellExact where
 
 ------------------------------------------------------------------------
--- ROUND83: BETA-MARKED SHELL + UNIVERSAL C_A 11/24 -> STRICTLY POSITIVE BETA
+-- ROUND83: LOCAL + IRRELEVANT-MEMORY BUDGETS -> STRICTLY POSITIVE BETA
 --
 -- PRIMARY SOURCES
 --
@@ -25,37 +25,35 @@ module DASHI.Physics.YangMills.BalabanCompactSimplePositiveBetaFromSharedMarkedS
 -- Communications in Mathematical Physics 109 (1987), 249--301.
 -- DOI: 10.1007/BF01215223.
 --
--- DASHI CONTRIBUTION
+-- ROUND83 CORRECTION
 --
--- The compact-simple universal coefficient is already
+-- The full coefficient has two logically distinct residual channels:
 --
---          b_G = C_A(G) * 11/24 > 0.
+--   beta_j = b_G + r_local + r_irrelevant-memory,
 --
--- Round83's BETA-marked analytic shell gives the history response budget
+-- where
 --
---          H_n <= C_beta/2
+--   b_G = C_A(G) * 11/24 > 0.
 --
--- with no factor proportional to the number of preceding RG steps.  The
--- beta-mark is deliberately distinct from the spatial Hessian and OPE marks.
--- If the literal history-dependent coefficient satisfies
+-- The current/marginal local Bishop remainder MUST NOT be hidden inside an
+-- exponentially decaying history tail: Bałaban explicitly says the dependence
+-- on g_{j-1} is important.  Only the localized irrelevant/polymer memory is
+-- assigned the beta-mark geometric shell.
 --
---          b_G <= beta_n + H_n
+-- This module proves the exact two-budget conclusion.  If
 --
--- and the beta shell consumes at most half the Gaussian margin,
+--   |r_local| <= R_local,
+--   |r_memory| <= C_beta/2,
 --
---          C_beta/2 + b_G/2 <= b_G,
+-- and
 --
--- then every full coefficient obeys
+--   b_G/2 + R_local + C_beta/2 <= b_G,
 --
---          beta_n >= b_G/2 > 0.
+-- then
 --
--- The strict last inequality is proved below; positivity is not left implicit
--- in a named lower-bound record.
+--   beta_j >= b_G/2 > 0
 --
--- Thus the remaining physical beta job is sharply localized to SAME-OBJECT
--- construction of the constrained Wilson/FP/Haar coefficient and proof that
--- its preceding-scale response is the beta-mark projection of the source
--- analytic norm.  No separate arbitrary-history accumulation theorem remains.
+-- uniformly in the number of preceding RG steps.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
@@ -79,14 +77,24 @@ record SharedShellCompactSimpleBetaData
   field
     fullBeta : Nat → ℚ
 
-    historyBudgetFitsHalfUniversal :
-      StepV.half * Shared.betaAnalyticConstant shared
-      + StepV.half * Group.groupUniversalCoefficient strict group
+    -- SAME-step / marginal nonlinear remainder.  This is distinct from the
+    -- localized irrelevant-memory shell below.
+    localRemainderRadius : ℚ
+    localRemainderRadiusNonnegative : 0ℚ ≤ localRemainderRadius
+
+    -- Division-free retained-half margin:
+    --   b/2 + R_local + C_beta/2 <= b.
+    totalRemainderBudgetFitsHalfUniversal :
+      (Group.groupUniversalCoefficient strict group * StepV.half
+        + localRemainderRadius)
+      + StepV.half * Shared.betaAnalyticConstant shared
       ≤ Group.groupUniversalCoefficient strict group
 
-    fullBetaAboveUniversalMinusHistory : ∀ depth →
+    -- Lower-envelope form of
+    --   beta >= b - R_local - H_irrelevant.
+    fullBetaAboveUniversalMinusLocalAndMemory : ∀ depth →
       Group.groupUniversalCoefficient strict group
-      ≤ fullBeta depth
+      ≤ (fullBeta depth + localRemainderRadius)
         + Shared.betaHistoryPartial shared scale volume root depth
 
 open SharedShellCompactSimpleBetaData public
@@ -108,30 +116,31 @@ fullBetaKeepsHalfUniversal
   dataSet depth =
   let
     b = Group.groupUniversalCoefficient strict group
+    r = localRemainderRadius dataSet
     h = Shared.betaHistoryPartial shared scale volume root depth
 
     hBound : h ≤ StepV.half * Shared.betaAnalyticConstant shared
     hBound = Shared.betaHistoryPartialBelowHalfAnalyticConstant
       shared scale volume root depth
 
-    halfPlusHistoryBelowUniversal : b * StepV.half + h ≤ b
-    halfPlusHistoryBelowUniversal =
-      let
-        raised = ℚP.+-mono-≤ ℚP.≤-refl hBound
-      in
+    retainedPlusResidualsBelowUniversal :
+      (b * StepV.half + r) + h ≤ b
+    retainedPlusResidualsBelowUniversal =
       ℚP.≤-trans
-        raised
-        (subst
-          (λ left → left ≤ b)
-          (ℚRing.solve-∀ b StepV.half (Shared.betaAnalyticConstant shared))
-          (historyBudgetFitsHalfUniversal dataSet))
+        (ℚP.+-mono-≤ ℚP.≤-refl hBound)
+        (totalRemainderBudgetFitsHalfUniversal dataSet)
 
-    chained : b * StepV.half + h ≤ fullBeta dataSet depth + h
+    chained :
+      (b * StepV.half + r) + h
+      ≤ (fullBeta dataSet depth + r) + h
     chained = ℚP.≤-trans
-      halfPlusHistoryBelowUniversal
-      (fullBetaAboveUniversalMinusHistory dataSet depth)
+      retainedPlusResidualsBelowUniversal
+      (fullBetaAboveUniversalMinusLocalAndMemory dataSet depth)
+
+    withoutMemory : b * StepV.half + r ≤ fullBeta dataSet depth + r
+    withoutMemory = ℚP.+-cancelʳ-≤ h chained
   in
-  ℚP.+-cancelʳ-≤ h chained
+  ℚP.+-cancelʳ-≤ r withoutMemory
 
 halfPositive : 0ℚ < StepV.half
 halfPositive = ℚP.positive⁻¹ StepV.half
@@ -171,20 +180,28 @@ fullBetaStrictlyPositive {strict = strict} {group = group} dataSet depth =
     (halfUniversalStrictlyPositive strict group)
     (fullBetaKeepsHalfUniversal dataSet depth)
 
+compactSimpleTwoChannelPositiveBetaCompilerLevel : ProofLevel
+compactSimpleTwoChannelPositiveBetaCompilerLevel = machineChecked
+
+compactSimpleTwoChannelStrictPositiveBetaCompilerLevel : ProofLevel
+compactSimpleTwoChannelStrictPositiveBetaCompilerLevel = machineChecked
+
+-- Backward-compatible status names.
 compactSimpleSharedShellPositiveBetaCompilerLevel : ProofLevel
 compactSimpleSharedShellPositiveBetaCompilerLevel = machineChecked
 
 compactSimpleSharedShellStrictPositiveBetaCompilerLevel : ProofLevel
 compactSimpleSharedShellStrictPositiveBetaCompilerLevel = machineChecked
 
--- Existing exact theorem: b_G=C_A*11/24 is positive on the strict
--- compact-simple carrier.
 compactSimpleUniversalCoefficientPositivityLevel : ProofLevel
 compactSimpleUniversalCoefficientPositivityLevel = machineChecked
 
--- Physical seam after the compiler: instantiate the literal constrained
--- Wilson + reduced-FP + Haar Ward scalar and prove its history response is the
--- beta-marked projection.  CMP109's dependence on all preceding couplings is
--- thereby handled without a history-length loss.
-literalWilsonFPHaarSharedMarkedBetaIdentificationLevel : ProofLevel
-literalWilsonFPHaarSharedMarkedBetaIdentificationLevel = conditional
+-- Physical seams after the compiler:
+--   (1) localRemainderRadius: literal same-step Wilson/FP/Haar Bishop remainder;
+--   (2) beta mark: only the irrelevant/polymer-memory response at fixed
+--       declared marginal data.
+literalWilsonFPHaarLocalRemainderLevel : ProofLevel
+literalWilsonFPHaarLocalRemainderLevel = conditional
+
+literalWilsonFPHaarIrrelevantMemoryProjectionLevel : ProofLevel
+literalWilsonFPHaarIrrelevantMemoryProjectionLevel = conditional
