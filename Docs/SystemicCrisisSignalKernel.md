@@ -113,3 +113,25 @@ The focused workflow checks:
 - `SystemicCrisisCompressionBridgeTests.agda`;
 - `SystemicCrisisSignalAll.agda`.
 The exact witnesses cover normal, fragility, proximity, active, and abating paths; compression fracture; MDL promotion boundaries; separation of Treasury dysfunction from sovereign transmission; expectation-cycle non-promotion; and the distinction between mechanical peak and price bottom.
+`SystemicCrisisCompressionBridge` adds a residual-depth profile:
+- shallow, middle, and deep activation;
+A compression fracture requires deep activation, side-information growth, and quotient failure together. This formalises the Economic Compression Stability idea: a selected chart/model becomes structurally suspect when surprise migrates into deeper triadic scales while its quotient needs increasing side information and stops collapsing variation.
+Residual energy remains diagnostic, not a Lyapunov function. Promotion requires a separate `ModelSelectionReceipt` covering deterministic decode, train/test separation, out-of-sample validation, side-information accounting, MDL improvement, and comparison against competitors.
+`SystemicCrisisScenarioCrosswalk` integrates PR #157's scenario vocabulary without collapsing distinct layers.
+### Exact carrier reuse
+The module proves an exact round-trip isomorphism between `SSPTritCarrier.SSPTrit` and `DASHI.Algebra.Trit.Trit`. This permits shared signed-triadic structure while preserving the existing rule that adverse/favorable structural sign is not price direction.
+### Partial phase map
+The phase correspondence is:
+The final case is deliberately partial: insufficient evidence is not silently mapped to `normalPhase`.
+Funding, liquidity, correlation/contagion, Treasury functioning, and credit transmission have direct mechanism projections. Narrative instability, execution churn, technology concentration, capex revisions, hardware resale, and power/cooling constraints remain candidate explanatory axes until a separate transmission receipt links them to funding, liquidity, contagion, or forced selling.
+Thus the AI-capex fixture can identify a coherent candidate scenario, but it cannot by itself establish Treasury dysfunction or sovereign transmission.
+### BAD-window temporal geometry
+`AdverseInterarrivalWindow` is retained as temporal geometry: the interval between adverse onsets may support replay, persistence, and hazard studies. A `WindowBridgeReceipt` still requires replay closure, calendar coverage, no causal promotion, and no execution promotion. Post-hoc Greece-style alignment remains evidence for replay alignment only.
+### Posture and execution separation
+`monitoringPosture` is derived from mechanism phase and compression fracture; `CapitalPosture` remains the separately governed scenario-layer output. Neither creates production-trading authority. Adverse state is not an automatic short signal, and arbitrary sign inversion remains rejected.
+`promotionLevel` distinguishes unsupported, diagnostic, observed-mechanism, and validated-model claims. An observed active mechanism therefore need not pretend that its forecasting model has passed MDL and out-of-sample gates.
+## Gartner-style expectation boundary
+`TechnologyExpectationObservation` records an expectation/adoption cycle separately from plumbing. `expectationCycleCannotPromotePlumbing` proves that expectation-cycle classification alone cannot establish funding, liquidity, liquidation, or sovereign transmission. Such frameworks may inform a technology-expectation prior, but are not market-plumbing models.
+## Peak boundary
+`peakMechanicsObserved` requires mechanical recovery plus normalisation of deep activation, side-information growth, and quotient failure. This means the forced-selling mechanism is abating; it does not claim the final price bottom.
+The focused Agda 2.9 lane checks the kernel, quotient/MDL bridge, PR #157 crosswalk, exact witness modules, and aggregate. Witnesses cover carrier round trips, partial phase mapping, compression fracture, MDL promotion boundaries, trigger/cascade separation, Treasury/sovereign separation, candidate-axis non-promotion, unresolved-state handling, expectation-cycle non-promotion, execution governance, and mechanical-abatement versus price-bottom separation.

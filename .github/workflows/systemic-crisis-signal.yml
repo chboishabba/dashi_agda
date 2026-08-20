@@ -7,7 +7,10 @@ on:
       - 'DASHI/Economics/SystemicCrisisSignalKernelTests.agda'
       - 'DASHI/Economics/SystemicCrisisCompressionBridge.agda'
       - 'DASHI/Economics/SystemicCrisisCompressionBridgeTests.agda'
+      - 'DASHI/Economics/SystemicCrisisScenarioCrosswalk.agda'
+      - 'DASHI/Economics/SystemicCrisisScenarioCrosswalkTests.agda'
       - 'DASHI/Economics/SystemicCrisisSignalAll.agda'
+      - 'DASHI/Promotion/TechSystemicStressScenarioBoundary.agda'
       - 'Docs/SystemicCrisisSignalKernel.md'
       - '.github/workflows/systemic-crisis-signal.yml'
   pull_request:
@@ -16,7 +19,10 @@ on:
       - 'DASHI/Economics/SystemicCrisisSignalKernelTests.agda'
       - 'DASHI/Economics/SystemicCrisisCompressionBridge.agda'
       - 'DASHI/Economics/SystemicCrisisCompressionBridgeTests.agda'
+      - 'DASHI/Economics/SystemicCrisisScenarioCrosswalk.agda'
+      - 'DASHI/Economics/SystemicCrisisScenarioCrosswalkTests.agda'
       - 'DASHI/Economics/SystemicCrisisSignalAll.agda'
+      - 'DASHI/Promotion/TechSystemicStressScenarioBoundary.agda'
       - 'Docs/SystemicCrisisSignalKernel.md'
       - '.github/workflows/systemic-crisis-signal.yml'
 
@@ -60,6 +66,8 @@ jobs:
               DASHI/Economics/SystemicCrisisSignalKernelTests.agda
               DASHI/Economics/SystemicCrisisCompressionBridge.agda
               DASHI/Economics/SystemicCrisisCompressionBridgeTests.agda
+              DASHI/Economics/SystemicCrisisScenarioCrosswalk.agda
+              DASHI/Economics/SystemicCrisisScenarioCrosswalkTests.agda
               DASHI/Economics/SystemicCrisisSignalAll.agda
             )
             scripts/run_agda29_parallel_check.sh "${targets[@]}"
