@@ -1,26 +1,31 @@
 name: Yang-Mills submission round eleven
 
 on:
-  pull_request:
+  push:
+    branches:
+      - 'agent/ym-round11-ratio-p06-audit'
     paths:
       - 'DASHI/Physics/YangMills/BalabanBishopConfiguredTermIdentificationExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanBishopFullHalfBallParityChartExact.agda'
       - 'DASHI/Physics/YangMills/BalabanStepVPolynomialDirectRatioExact.agda'
       - 'DASHI/Physics/YangMills/BalabanP06PeriodicSupportBridgeExact.agda'
       - 'DASHI/Physics/YangMills/BalabanP06DiameterComplexityAuditExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanP11LightweightCanonicalPaymentExact.agda'
       - 'DASHI/Physics/YangMills/BalabanP33P10Gate4DependencySpineExact.agda'
-      - 'DASHI/Physics/YangMills/YangMillsFixedLatticeToContinuumDependencySpineExact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsSubmissionRound11*.agda'
+      - 'DASHI/Physics/YangMills/BalabanClayConstructiveProducerSubmissionRound11Advance.agda'
+      - 'scripts/check_yang_mills_submission_round11.sh'
+      - '.github/workflows/yang-mills-submission-round11.yml'
+  pull_request:
+    paths:
+      - 'DASHI/Physics/YangMills/BalabanBishopConfiguredTermIdentificationExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanStepVPolynomialDirectRatioExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP06PeriodicSupportBridgeExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP06DiameterComplexityAuditExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33P10Gate4DependencySpineExact.agda'
       - 'DASHI/Physics/YangMills/YangMillsSubmissionRound11*.agda'
       - 'DASHI/Physics/YangMills/BalabanClayConstructiveProducerSubmissionRound11Advance.agda'
       - 'scripts/check_yang_mills_submission_round11.sh'
       - '.github/workflows/yang-mills-submission-round11.yml'
   workflow_dispatch:
-
-
-concurrency:
-  group: dashi-global-${{ github.ref }}
-  cancel-in-progress: true
 
 jobs:
   focused-agda:
@@ -33,6 +38,5 @@ jobs:
         with:
           submodules: recursive
       - uses: cachix/install-nix-action@v27
-      - uses: DeterminateSystems/magic-nix-cache-action@v9
-      - name: Check Bishop, Step-V, P06/P11, P33-P10-Gate4 and global roots
+      - name: Check direct-ratio, P06 audit and P33-P10-Gate4 roots
         run: nix develop --command bash scripts/check_yang_mills_submission_round11.sh
