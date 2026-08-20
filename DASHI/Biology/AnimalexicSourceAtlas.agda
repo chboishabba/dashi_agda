@@ -48,6 +48,28 @@ voxelHashing =
     "spatial-hashing/locality vocabulary; citation does not prove runtime correctness"
     Source.publicAttribution
 
+semanticFusion : Source.AttributedSource
+semanticFusion =
+  Source.mkDOISource
+    "John McCormac; Ankur Handa; Andrew J. Davison; Stefan Leutenegger"
+    "SemanticFusion: Dense 3D Semantic Mapping with Convolutional Neural Networks"
+    "ICRA 2017" "2017" "10.1109/ICRA.2017.7989538"
+    "https://doi.org/10.1109/ICRA.2017.7989538"
+    Source.academicArticleSource
+    "per-surfel semantic evidence fusion vocabulary; semantic labels remain defeasible observations"
+    Source.publicAttribution
+
+raftStereo : Source.AttributedSource
+raftStereo =
+  Source.mkDOISource
+    "Lahav Lipson; Zachary Teed; Jia Deng"
+    "RAFT-Stereo: Multilevel Recurrent Field Transforms for Stereo Matching"
+    "3DV 2021" "2021" "10.1109/3DV53792.2021.00032"
+    "https://doi.org/10.1109/3DV53792.2021.00032"
+    Source.academicArticleSource
+    "replaceable stereo candidate-depth source; benchmark success does not authorize promoted geometry"
+    Source.publicAttribution
+
 deepLabCut : Source.AttributedSource
 deepLabCut =
   Source.mkDOISource
@@ -68,6 +90,17 @@ sleap =
     "https://doi.org/10.1038/s41592-022-01426-1"
     Source.academicArticleSource
     "multi-animal pose/identity observation adapter"
+    Source.publicAttribution
+
+birdNET : Source.AttributedSource
+birdNET =
+  Source.mkDOISource
+    "Stefan Kahl; Connor M. Wood; Maximilian Eibl; Holger Klinck"
+    "BirdNET: A deep learning solution for avian diversity monitoring"
+    "Ecological Informatics 61, 101236" "2021" "10.1016/j.ecoinf.2021.101236"
+    "https://doi.org/10.1016/j.ecoinf.2021.101236"
+    Source.academicArticleSource
+    "bioacoustic event/representation adapter vocabulary; species/event classification does not prove communicative semantics"
     Source.publicAttribution
 
 allenIntervals : Source.AttributedSource
@@ -102,6 +135,17 @@ keypointMoseq =
     "unsupervised pose-dynamics/event-syllable adapter; syllable does not entail meaning"
     Source.publicAttribution
 
+marginTheory : Source.AttributedSource
+marginTheory =
+  Source.mkDOISource
+    "Robert E. Schapire; Yoav Freund; Peter Bartlett; Wee Sun Lee"
+    "Boosting the Margin: A New Explanation for the Effectiveness of Voting Methods"
+    "The Annals of Statistics 26(5)" "1998" "10.1214/aos/1024691352"
+    "https://doi.org/10.1214/aos/1024691352"
+    Source.academicArticleSource
+    "margin-distribution vocabulary for empirical promotion diagnostics; it does not prove Animalexic defect localization"
+    Source.publicAttribution
+
 rabbaniRegionGrowing : Source.AttributedSource
 rabbaniRegionGrowing =
   Source.mkNoDOISource
@@ -121,6 +165,16 @@ dellaertFactorGraphs =
     "https://gtsam.org/tutorials/intro.html"
     Source.academicArticleSource
     "factor-graph/incremental-state-estimation vocabulary; probabilistic semantics are not forced"
+    Source.publicAttribution
+
+shaferEvidence : Source.AttributedSource
+shaferEvidence =
+  Source.mkNoDOISource
+    "Glenn Shafer" "A Mathematical Theory of Evidence"
+    "Princeton University Press" "1976"
+    "https://press.princeton.edu/books/hardcover/9780691081755/a-mathematical-theory-of-evidence"
+    Source.academicBookSource
+    "set-valued evidence/belief vocabulary; DASHI does not impose Dempster-Shafer combination as a universal evidence algebra"
     Source.publicAttribution
 
 equifacs : Source.AttributedSource
@@ -148,8 +202,10 @@ teglasGaze =
 animalexicSources : List Source.AttributedSource
 animalexicSources =
   kellerPointFusion ∷ elasticFusion ∷ dynamicFusion ∷ voxelHashing
-  ∷ deepLabCut ∷ sleap ∷ allenIntervals ∷ mhtRevisited ∷ keypointMoseq
-  ∷ rabbaniRegionGrowing ∷ dellaertFactorGraphs ∷ equifacs ∷ teglasGaze ∷ []
+  ∷ semanticFusion ∷ raftStereo ∷ deepLabCut ∷ sleap ∷ birdNET
+  ∷ allenIntervals ∷ mhtRevisited ∷ keypointMoseq ∷ marginTheory
+  ∷ rabbaniRegionGrowing ∷ dellaertFactorGraphs ∷ shaferEvidence
+  ∷ equifacs ∷ teglasGaze ∷ []
 
 animalexicSourceAtlas : Source.AttributedSourceAtlas
 animalexicSourceAtlas =
@@ -157,7 +213,7 @@ animalexicSourceAtlas =
     "Animalexic embodied communication source atlas"
     "DASHI.Biology.AnimalexicSourceAtlas"
     animalexicSources
-    "bounded methodology provenance for reconstruction, pose, temporal events, ambiguity management, and animal communication; source identity imports no theorem, benchmark claim, or semantic authority"
+    "bounded methodology provenance for reconstruction, stereo, pose, acoustics, temporal events, ambiguity management, evidence, and animal communication; source identity imports no theorem, benchmark claim, or semantic authority"
 
 record AnimalexicSourceBoundary : Set where
   constructor animalexicSourceBoundary
@@ -166,10 +222,13 @@ record AnimalexicSourceBoundary : Set where
     poseSourceDoesNotProveBehaviourMeaning : Bool
     behaviourSegmentationDoesNotProveCommunication : Bool
     gazeAssociationDoesNotProveIntent : Bool
+    acousticClassificationDoesNotProveMeaning : Bool
+    marginLiteratureDoesNotProveGeometricDefectLocalization : Bool
+    evidenceFormalismDoesNotAuthorizeLexiconEntry : Bool
     citationDoesNotAuthorizeLexiconEntry : Bool
 
 open AnimalexicSourceBoundary public
 
 canonicalAnimalexicSourceBoundary : AnimalexicSourceBoundary
 canonicalAnimalexicSourceBoundary =
-  animalexicSourceBoundary true true true true true
+  animalexicSourceBoundary true true true true true true true true
