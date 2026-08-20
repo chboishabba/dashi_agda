@@ -18,44 +18,22 @@ module DASHI.Physics.Closure.NSTriadKNQuarticForcingQuadraticAbsorptionNoGoExact
 --
 -- DASHI MAKE-OR-BREAK HOMOGENEITY FALSIFIER
 --
--- The literal projected Galerkin nonlinearity is already proved quadratic in
--- velocity by `NSTriadKNProjectedNonlinearityQuadraticHomogeneityRound94Exact`.
--- The Waleffe network forcing inserts that quadratic vector field into the
--- derivative of a cubic phase, so every direct absolute/Hermitian majorant is
--- quartic in velocity.  The critical dissipation currency is quadratic.
---
--- Frequency gap weights such as L/H or (L/H)^2 are invariant under amplitude
--- scaling u -> a u.  They therefore cannot repair this amplitude mismatch.
--- Algebraically, if
---
---   Q4(a) = a^4,    D2(a) = a^2,
---
--- then any proposed fixed absorption coefficient theta is violated whenever
--- a^2 > theta:
---
---   theta a^2 < a^4.
---
--- Thus Schur/Cauchy/HHolder applied AFTER absolute values, even with the exact
--- HH->low gap factors, cannot by itself give an arbitrary-data estimate
---
---   quartic forcing <= theta * critical dissipation,
---
--- with theta<nu independent of amplitude.  A successful argument must retain
--- additional time/sign dynamics, produce a genuinely higher-order coercive
--- quantity, or find a cancellation before absolute majorisation.
+-- The literal projected Galerkin nonlinearity is quadratic in velocity and
+-- the literal Waleffe network-forcing functional is quartic after inserting
+-- that forcing into the derivative of a cubic phase.  Critical dissipation is
+-- quadratic.  Frequency gap weights are invariant under u -> a u and hence
+-- cannot repair this amplitude-degree mismatch.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Rational.Base using
-  (ℚ; 0ℚ; _*_; _≤_; _<_; NonNegative; nonNegative; Positive; positive)
+  (ℚ; 0ℚ; _*_; _≤_; _<_; Positive; positive)
 import Data.Rational.Properties as ℚP
-open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst; sym)
 open import Relation.Nullary.Negation.Core using (¬_)
 
 import DASHI.Physics.Closure.NSTriadKNProjectedNonlinearityQuadraticHomogeneityRound94Exact as Quadratic
+import DASHI.Physics.Closure.NSTriadKNWaleffeNetworkForcingRealQuarticHomogeneityExact as Quartic
 
 square : ℚ → ℚ
 square a = a * a
@@ -90,13 +68,9 @@ fixedCoefficientFailsAboveItsAmplitudeScale theta a squarePositive thetaBelowSqu
     proposedNormalized : square a * square a ≤ theta * square a
     proposedNormalized = proposed
   in
-  ℚP.<-irrefl (square a * square a)
+  ℚP.<-irrefl (theta * square a)
     (ℚP.<-≤-trans scaledStrict proposedNormalized)
 
--- Multiplying a frequency-only gap coefficient changes the constant but not
--- the amplitude degree.  Once the weighted base quartic is nonzero, the same
--- obstruction occurs after rescaling; this scalar theorem records the exact
--- degree mismatch used by the physical audit.
 weightedQuarticCost : ℚ → ℚ → ℚ
 weightedQuarticCost gapWeight a = gapWeight * quarticCost a
 
@@ -110,6 +84,10 @@ literalProjectedNonlinearityQuadraticScalingAvailable : Bool
 literalProjectedNonlinearityQuadraticScalingAvailable =
   Quadratic.round94LiteralProjectedNonlinearityQuadraticHomogeneityClosed
 
+literalNetworkForcingQuarticScalingAvailable : Bool
+literalNetworkForcingQuarticScalingAvailable =
+  Quartic.round106LiteralWaleffeNetworkForcingRealQuarticHomogeneityClosed
+
 directGapWeightedQuarticSchurCanSupplyFixedQuadraticAbsorption : Bool
 directGapWeightedQuarticSchurCanSupplyFixedQuadraticAbsorption = false
 
@@ -119,6 +97,10 @@ amplitudeHomogeneityObstructionClosed = true
 literalProjectedNonlinearityQuadraticScalingAvailableIsTrue :
   literalProjectedNonlinearityQuadraticScalingAvailable ≡ true
 literalProjectedNonlinearityQuadraticScalingAvailableIsTrue = refl
+
+literalNetworkForcingQuarticScalingAvailableIsTrue :
+  literalNetworkForcingQuarticScalingAvailable ≡ true
+literalNetworkForcingQuarticScalingAvailableIsTrue = refl
 
 directGapWeightedQuarticSchurCanSupplyFixedQuadraticAbsorptionIsFalse :
   directGapWeightedQuarticSchurCanSupplyFixedQuadraticAbsorption ≡ false
