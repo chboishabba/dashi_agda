@@ -7,6 +7,19 @@ import DASHI.Moonshine.VertexOperatorAlgebraCore as VOA
 import DASHI.Moonshine.VNaturalOrbifoldConstruction as VN
 import DASHI.Moonshine.GradedRepresentation as GR
 
+------------------------------------------------------------------------
+-- Twisted trace and modular-covariance owner.
+--
+-- For commuting automorphisms g,h the generalized moonshine trace is attached
+-- to the g-twisted sector with h insertion.  The modular group acts by
+--
+--   S : (g,h) ↦ (h,g^{-1})
+--   T : (g,h) ↦ (g,gh).
+--
+-- The record below makes those transformations and their covariance explicit
+-- without asserting that the analytic trace functions have already been
+-- constructed.
+
 record GroupWithInverse (G : Set) : Setω where
   field
     group : GR.Group G
