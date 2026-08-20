@@ -1,0 +1,53 @@
+name: YM Round84 focused six-lemma Agda
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Physics/YangMills/BalabanClayHighestAlphaRound84SixAnalyticLemmaExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanClayHighestAlphaRound84Validation.agda'
+      - 'DASHI/Physics/YangMills/BalabanBetaHistoryLocalizedInfluenceExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanSharedMarkedAnalyticShellExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCompactSimplePositiveBetaFromSharedMarkedShellExact.agda'
+      - 'DASHI/Physics/YangMills/CompactSimpleClassificationAdjointCasimirExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCMP109CompactSimpleColourReductionSourceExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCompactSimpleHaarQuadraticCasimirExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanReducedGhostPrincipalLogDetSourceExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanFiniteTraceSeriesPrefixTailExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanPolchinskiShellIntegralDebtExact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsSharedMarkedCompositeOPERemainderExact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsLatticeStressWardSliceConservationExact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsStressWardStoneGeneratorBridgeExact.agda'
+      - 'scripts/check_ym_round84_six_lemma.sh'
+      - '.github/workflows/ym-round84-six-lemma.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: ym-round84-focused-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  agda:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Check Round84 focused validation root
+        env:
+          AGDA_FLAKE: github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin
+          DASHI_REPO_ROOT: ${{ github.workspace }}
+          DASHI_AGDA29_CACHE_ROOT: ${{ runner.temp }}/dashi-agda29-round84
+          DASHI_STATUS_DIR: ${{ runner.temp }}/dashi-agda29-round84/status
+          XDG_CACHE_HOME: ${{ runner.temp }}/dashi-xdg-round84
+          AGDA_LOG_PATH: ${{ github.workspace }}/ym-round84-agda.log
+          AGDA_JOBS: '4'
+          DASHI_NO_TMUX: '1'
+        run: bash scripts/check_ym_round84_six_lemma.sh
+      - name: Upload Round84 Agda log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ym-round84-six-lemma-agda-log
+          path: ym-round84-agda*.log
+          if-no-files-found: warn
