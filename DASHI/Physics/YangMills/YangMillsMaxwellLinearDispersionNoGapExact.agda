@@ -30,83 +30,17 @@ module DASHI.Physics.YangMills.YangMillsMaxwellLinearDispersionNoGapExact where
 -- `YangMillsFreeGaussianMaxwellNoGapExact` already proves that a
 -- `MasslessOneParticleApproximation` contradicts a positive spectral gap.  The
 -- only remaining free-field step was hidden inside that record.  Here it is
--- exposed and compiled: a one-particle dispersion with nonzero momenta of
--- arbitrarily small positive energy constructs the exact massless-sector
--- record required by the gap contradiction.
+-- exposed and compiled: a labelled one-particle dispersion with non-vacuum
+-- states of arbitrarily small positive energy constructs the exact massless
+-- sector required by the gap contradiction.
 ------------------------------------------------------------------------
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.YangMillsFreeGaussianMaxwellNoGapExact as Free
 
 ------------------------------------------------------------------------
--- Literal one-particle dispersion authority.  `arbitrarilySmallMomentum` is
--- the analytic/topological statement supplied by continuum momentum space;
--- all subsequent spectral packaging is theorem-exact below.
-------------------------------------------------------------------------
-
-record LinearMasslessDispersion (O : Free.GapOrder) : Set₁ where
-  field
-    Momentum State : Set
-    momentumEnergy : Momentum → Free.Energy O
-    oneParticleState : Momentum → State
-    NonzeroMomentum : Momentum → Set
-    NonVacuum : State → Set
-
-    arbitrarilySmallMomentum : ∀ threshold →
-      Free.StrictLess O (Free.zero O) threshold → Momentum
-
-    selectedMomentumNonzero : ∀ threshold positive →
-      NonzeroMomentum (arbitrarilySmallMomentum threshold positive)
-
-    selectedEnergyPositive : ∀ threshold positive →
-      Free.StrictLess O (Free.zero O)
-        (momentumEnergy (arbitrarilySmallMomentum threshold positive))
-
-    selectedEnergyBelowThreshold : ∀ threshold positive →
-      Free.StrictLess O
-        (momentumEnergy (arbitrarilySmallMomentum threshold positive))
-        threshold
-
-    nonzeroMomentumGivesNonVacuum : ∀ momentum →
-      NonzeroMomentum momentum → NonVacuum (oneParticleState momentum)
-
-open LinearMasslessDispersion public
-
-linearDispersionGivesMasslessOneParticleApproximation :
-  ∀ {O} (dispersion : LinearMasslessDispersion O) →
-  Free.MasslessOneParticleApproximation O
-linearDispersionGivesMasslessOneParticleApproximation dispersion = record
-  { Free.MasslessOneParticleApproximation.State = State dispersion
-  ; Free.MasslessOneParticleApproximation.energy =
-      λ state →
-        -- The abstract state carrier is produced from momentum below.  Rather
-        -- than assuming an inverse state->momentum map, use a dedicated energy
-        -- field in the strengthened version below.
-        Free.zero _
-  ; Free.MasslessOneParticleApproximation.NonVacuum = NonVacuum dispersion
-  ; Free.MasslessOneParticleApproximation.stateBelowEveryPositiveThreshold =
-      λ threshold positive →
-        oneParticleState dispersion
-          (arbitrarilySmallMomentum dispersion threshold positive)
-  ; Free.MasslessOneParticleApproximation.selectedNonVacuum =
-      λ threshold positive →
-        nonzeroMomentumGivesNonVacuum dispersion
-          (arbitrarilySmallMomentum dispersion threshold positive)
-          (selectedMomentumNonzero dispersion threshold positive)
-  ; Free.MasslessOneParticleApproximation.selectedEnergyPositive =
-      λ threshold positive →
-        selectedEnergyPositive dispersion threshold positive
-  ; Free.MasslessOneParticleApproximation.selectedEnergyBelowThreshold =
-      λ threshold positive →
-        selectedEnergyBelowThreshold dispersion threshold positive
-  }
-
-------------------------------------------------------------------------
--- NOTE: the builder above deliberately reveals a carrier mismatch: Free's
--- record asks for `energy : State -> Energy`, while a raw dispersion begins as
--- `Momentum -> Energy`.  A sound same-theory bridge therefore needs the state
--- itself to retain its momentum/energy label.  The following corrected carrier
--- does exactly that and is the route intended for physical use.
+-- State-native one-particle dispersion.  This avoids a hidden momentum->state
+-- inversion: the state itself carries the energy used by the spectral theorem.
 ------------------------------------------------------------------------
 
 record LabelledLinearMasslessDispersion (O : Free.GapOrder) : Set₁ where
