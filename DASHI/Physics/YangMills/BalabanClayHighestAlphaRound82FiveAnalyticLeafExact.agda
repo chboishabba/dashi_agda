@@ -44,6 +44,21 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound82FiveAnalyticLeafExa
 -- by removing an independently counted new premise, exactly as Round81 removed
 -- the selected-background reproof.  It is NOT a claim that the cited source
 -- theorem has been reproved by DASHI.
+--
+-- A1 SHARPENING
+--
+-- CMP109 also makes the remaining beta difficulty more precise.  At the end of
+-- Sect. 5 Bałaban says beta_j depends on all preceding effective couplings, even
+-- though the coefficient is extracted locally from the polarization tensor.
+-- `BalabanBetaHistoryLocalizedInfluenceExact` therefore replaces a dangerous
+-- history-length times local-error estimate by a summable shell influence:
+--
+--   influence_d <= C gamma (1/4) 2^-d
+--     ==> total history defect <= C gamma / 2.
+--
+-- Thus A1 no longer needs a bound growing with the number of RG steps.  It needs
+-- the literal constrained Gaussian coefficient plus one cutoff-uniform localized
+-- history-influence estimate for the same Wilson/FP/Haar polarization scalar.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
@@ -52,6 +67,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanTopDownSummableRGIncrementLeafEliminationExact
 import DASHI.Physics.YangMills.BalabanCMP119CompatibleLocalExpectationFlowExact
 import DASHI.Physics.YangMills.BalabanNormalizedExpectationCrossNumeratorExact
+import DASHI.Physics.YangMills.BalabanBetaHistoryLocalizedInfluenceExact
 import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound81SixAnalyticLeafExact
 
 round82ActualNewAnalyticLeafCount : Nat
@@ -62,8 +78,9 @@ round82ActualNewAnalyticLeafCount = 5
 ------------------------------------------------------------------------
 
 -- A1. Literal Wilson + reduced Faddeev--Popov + Haar coefficient on arbitrary
--- compact simple G, including a history-uniform nonlinear remainder small enough
--- to make the effective coupling decrease and remain in the source interval.
+-- compact simple G.  The universal/zero-history Gaussian coefficient is already
+-- separated; the new compiler makes the arbitrary preceding history harmless
+-- once its shell influence is summable uniformly.
 literalCompactSimplePositiveBetaLevel : ProofLevel
 literalCompactSimplePositiveBetaLevel = conditional
 
