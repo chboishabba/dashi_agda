@@ -74,3 +74,5 @@ jobs:
           gh pr comment "$pr_number" \
             --repo "$GITHUB_REPOSITORY" \
             --body "Round 5 repository-flake Agda kernel check ${CHECK_STATUS} on ${GITHUB_SHA} (workflow run ${GITHUB_RUN_ID})."
+
+# Validation-only branch delta; do not merge.
