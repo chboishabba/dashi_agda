@@ -56,6 +56,8 @@ import DASHI.Cognition.PNF.ProducerNativeDemandProjectionExact
 import DASHI.Cognition.PNF.OptimizationEconomyExact
 import DASHI.Cognition.PNF.PhysicalMutationChurnEconomyExact
 import DASHI.Cognition.PNF.PhysicalMutationChurnEconomyRegression
+import DASHI.Cognition.PNF.ProducerCompleteDependencyProjectionExact
+import DASHI.Cognition.PNF.ProducerCompleteDependencyProjectionRegression
 import DASHI.Cognition.PNF.ConsumerRestrictionAggregationIntertwinerExact
 import DASHI.Cognition.PNF.ConsumerRestrictionAggregationIntertwinerRegression
 import DASHI.Cognition.PNF.TypedEventuallyConsistentFibreSystemExact
