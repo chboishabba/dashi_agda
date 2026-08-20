@@ -47,6 +47,7 @@ open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 open import Data.List.Base using (List; []; _∷_)
+open import Data.Product using (_×_; _,_)
 
 import DASHI.Environment.LESResearchCrossPollinationExact as Round1
 
@@ -101,8 +102,8 @@ causalOutcomeCommutesAfterIntervention :
       (intervene high
         (interventionMap abstraction intervention)
         (stateMap abstraction state))
-causalOutcomeCommutesAfterIntervention abstraction intervention state
-  rewrite outcomeSquareCommutes abstraction (intervene _ intervention state)
+causalOutcomeCommutesAfterIntervention {low = low} abstraction intervention state
+  rewrite outcomeSquareCommutes abstraction (intervene low intervention state)
         | interventionSquareCommutes abstraction intervention state = refl
 
 record CausalAbstractionBoundary : Set where
