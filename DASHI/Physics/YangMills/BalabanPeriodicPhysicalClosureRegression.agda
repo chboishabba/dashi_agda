@@ -29,21 +29,21 @@ normalizationMatch :
   Normalization.PeriodicFourierNormalizationMatch
     Base.fourierAuthority Base.fourierTheorems
 normalizationMatch = record
-  { latticeSpacing = Base.one
-  ; latticeSpacingFourthPower = Base.one
-  ; siteCardinality = Base.one
-  ; inverseSiteCardinality = Base.one
-  ; physicalWeight = Base.one
-  ; multiplyAssociative = λ a b c → refl
-  ; inverseCardinalityNormalization = refl
-  ; transformNormalizationMatchesInverseCardinality = refl
-  ; transformCardinalityMatchesTorusCardinality = refl
-  ; latticeSpacingFourthPowerDefinition = refl
-  ; physicalWeightDefinition = refl
-  ; physicalBondSiteNorm = λ field → Base.one
-  ; physicalBondMomentumNorm = λ field → Base.one
-  ; physicalBondSiteNormDefinition = λ field → refl
-  ; physicalBondMomentumNormDefinition = λ field → refl
+  { Normalization.latticeSpacing = Base.one
+  ; Normalization.latticeSpacingFourthPower = Base.one
+  ; Normalization.siteCardinality = Base.one
+  ; Normalization.inverseSiteCardinality = Base.one
+  ; Normalization.physicalWeight = Base.one
+  ; Normalization.multiplyAssociative = λ a b c → refl
+  ; Normalization.inverseCardinalityNormalization = refl
+  ; Normalization.transformNormalizationMatchesInverseCardinality = refl
+  ; Normalization.transformCardinalityMatchesTorusCardinality = refl
+  ; Normalization.latticeSpacingFourthPowerDefinition = refl
+  ; Normalization.physicalWeightDefinition = refl
+  ; Normalization.physicalBondSiteNorm = λ field → Base.one
+  ; Normalization.physicalBondMomentumNorm = λ field → Base.one
+  ; Normalization.physicalBondSiteNormDefinition = λ field → refl
+  ; Normalization.physicalBondMomentumNormDefinition = λ field → refl
   }
 
 physicalParsevalRegression : Base.one ≡ Base.one
@@ -58,30 +58,30 @@ physicalConstraintInputs :
     (λ index state → Base.Holds)
     (λ index state → Base.Holds)
 physicalConstraintInputs = record
-  { GaugeOrthogonalityFourierIdentity = λ index state → Base.Holds
-  ; BlockAverageZeroFourierIdentity = λ index state → Base.Holds
-  ; ResidualGaugeOrthogonalityFourierIdentity = λ index state → Base.Holds
-  ; BoundaryCompatibilityFourierIdentity = λ index state → Base.Holds
-  ; gaugeOrthogonalityFourierIdentity =
+  { Match.GaugeOrthogonalityFourierIdentity = λ index state → Base.Holds
+  ; Match.BlockAverageZeroFourierIdentity = λ index state → Base.Holds
+  ; Match.ResidualGaugeOrthogonalityFourierIdentity = λ index state → Base.Holds
+  ; Match.BoundaryCompatibilityFourierIdentity = λ index state → Base.Holds
+  ; Match.gaugeOrthogonalityFourierIdentity =
       λ index state constraint → Base.holds
-  ; blockAverageZeroFourierIdentity =
+  ; Match.blockAverageZeroFourierIdentity =
       λ index state constraint → Base.holds
-  ; residualGaugeOrthogonalityFourierIdentity =
+  ; Match.residualGaugeOrthogonalityFourierIdentity =
       λ index state constraint → Base.holds
-  ; boundaryCompatibilityFourierIdentity =
+  ; Match.boundaryCompatibilityFourierIdentity =
       λ index state constraint → Base.holds
-  ; ExactMode = λ index frequency → Carrier.Empty
-  ; ResidualKernel = λ index frequency → Carrier.Empty
-  ; BoundaryKernel = λ index frequency → Carrier.Empty
-  ; gaugeConstraintRemovesExactModes =
+  ; Match.ExactMode = λ index frequency → Carrier.Empty
+  ; Match.ResidualKernel = λ index frequency → Carrier.Empty
+  ; Match.BoundaryKernel = λ index frequency → Carrier.Empty
+  ; Match.gaugeConstraintRemovesExactModes =
       λ index state constraint impossible → impossible
-  ; blockConstraintRemovesConstantModes =
+  ; Match.blockConstraintRemovesConstantModes =
       λ index state constraint impossible → impossible
-  ; residualGaugeConstraintRemovesResidualKernel =
+  ; Match.residualGaugeConstraintRemovesResidualKernel =
       λ index state constraint impossible → impossible
-  ; boundaryConstraintRemovesBoundaryKernel =
+  ; Match.boundaryConstraintRemovesBoundaryKernel =
       λ index state constraint impossible → impossible
-  ; symbolKernelClassification =
+  ; Match.symbolKernelClassification =
       λ index frequency impossible → emptyEliminate impossible
   }
 
@@ -116,26 +116,26 @@ physicalKernelRemovalRegression =
 
 localGapInputs : Local.PhysicalLocalBlockGapInputs matchedConstraints
 localGapInputs = record
-  { cBulk = Base.one
-  ; cBulkPositive = Base.holds
-  ; Volume = Base.One
-  ; LatticeSpacing = Base.One
-  ; RGScale = Base.One
-  ; Background = Base.One
-  ; LowMomentum = λ index frequency → Base.Holds
-  ; HighMomentum = λ index frequency → Base.Holds
-  ; blockZeroModeFrequencyDecomposition =
+  { Local.cBulk = Base.one
+  ; Local.cBulkPositive = Base.holds
+  ; Local.Volume = Base.One
+  ; Local.LatticeSpacing = Base.One
+  ; Local.RGScale = Base.One
+  ; Local.Background = Base.One
+  ; Local.LowMomentum = λ index frequency → Base.Holds
+  ; Local.HighMomentum = λ index frequency → Base.Holds
+  ; Local.blockZeroModeFrequencyDecomposition =
       λ index frequency → Gap.left Base.holds
-  ; nonzeroMomentumDifferenceSymbolLowerBound =
+  ; Local.nonzeroMomentumDifferenceSymbolLowerBound =
       λ index frequency high → Base.holds
-  ; lowMomentumControlledByLocalBlockConstraint =
+  ; Local.lowMomentumControlledByLocalBlockConstraint =
       λ index frequency low removed → Base.holds
-  ; highMomentumDifferenceEnergyBelowReference =
+  ; Local.highMomentumDifferenceEnergyBelowReference =
       λ index frequency high → Base.holds
-  ; GaugeLongitudinalModeControlled = λ index frequency → Base.Holds
-  ; TransverseModeControlledByCurl = λ index frequency → Base.Holds
-  ; gaugeLongitudinalModeControlled = λ index frequency → Base.holds
-  ; transverseModeControlledByCurl = λ index frequency → Base.holds
+  ; Local.GaugeLongitudinalModeControlled = λ index frequency → Base.Holds
+  ; Local.TransverseModeControlledByCurl = λ index frequency → Base.Holds
+  ; Local.gaugeLongitudinalModeControlled = λ index frequency → Base.holds
+  ; Local.transverseModeControlledByCurl = λ index frequency → Base.holds
   }
 
 localGapRegression : Base.Holds
@@ -151,69 +151,69 @@ bulkInputs :
     {Kernel = Base.One}
     localGapInputs
 bulkInputs = record
-  { referenceHessian = λ index state → Base.one
-  ; fullHessian = λ index state → Base.one
-  ; inner = λ left right → Base.one
-  ; referenceEnergyIsInner = λ index state → refl
-  ; perturbationEnergy = λ index state → Base.one
-  ; curvaturePart = λ index state → Base.one
-  ; transportPart = λ index state → Base.one
-  ; chartPart = λ index state → Base.one
-  ; gaugeFixingPart = λ index state → Base.one
-  ; blockConstraintPart = λ index state → Base.one
-  ; curvatureUpper = Base.one
-  ; transportUpper = Base.one
-  ; chartUpper = Base.one
-  ; gaugeFixingUpper = Base.one
-  ; blockConstraintUpper = Base.one
-  ; perturbationUpper = Base.one
-  ; perturbationBelowFiveParts = λ index state → Base.holds
-  ; curvaturePerturbationBound = λ index state → Base.holds
-  ; transportPerturbationBound = λ index state → Base.holds
-  ; chartPerturbationBound = λ index state → Base.holds
-  ; gaugeFixingPerturbationBound = λ index state → Base.holds
-  ; blockConstraintPerturbationBound = λ index state → Base.holds
-  ; combineFiveScaledBounds = λ state → refl
-  ; referenceBelowFullPlusPerturbation =
+  { Closure.referenceHessian = λ index state → Base.one
+  ; Closure.fullHessian = λ index state → Base.one
+  ; Closure.inner = λ left right → Base.one
+  ; Closure.referenceEnergyIsInner = λ index state → refl
+  ; Closure.perturbationEnergy = λ index state → Base.one
+  ; Closure.curvaturePart = λ index state → Base.one
+  ; Closure.transportPart = λ index state → Base.one
+  ; Closure.chartPart = λ index state → Base.one
+  ; Closure.gaugeFixingPart = λ index state → Base.one
+  ; Closure.blockConstraintPart = λ index state → Base.one
+  ; Closure.curvatureUpper = Base.one
+  ; Closure.transportUpper = Base.one
+  ; Closure.chartUpper = Base.one
+  ; Closure.gaugeFixingUpper = Base.one
+  ; Closure.blockConstraintUpper = Base.one
+  ; Closure.perturbationUpper = Base.one
+  ; Closure.perturbationBelowFiveParts = λ index state → Base.holds
+  ; Closure.curvaturePerturbationBound = λ index state → Base.holds
+  ; Closure.transportPerturbationBound = λ index state → Base.holds
+  ; Closure.chartPerturbationBound = λ index state → Base.holds
+  ; Closure.gaugeFixingPerturbationBound = λ index state → Base.holds
+  ; Closure.blockConstraintPerturbationBound = λ index state → Base.holds
+  ; Closure.combineFiveScaledBounds = λ state → refl
+  ; Closure.referenceBelowFullPlusPerturbation =
       λ index state tangent → Base.holds
-  ; cH = Base.one
-  ; cHPositive = Base.holds
-  ; coercivityBudget = λ state → Base.holds
-  ; reflexive = λ value → Base.holds
-  ; addMonotone = λ left≤left′ right≤right′ → Base.holds
-  ; addRightCancel = λ comparison → Base.holds
-  ; green = λ index state → Base.one
-  ; gradientGreen = λ index state → Base.one
-  ; secondGradientGreen = λ index state → Base.one
-  ; greenLeftInverse = λ index state → oneStateEquality state
-  ; greenRightInverse = λ index state → oneStateEquality state
-  ; weightedNorm = λ state → Base.one
-  ; multiplyBound = Base.oneBinary
-  ; reciprocalCH = Base.one
-  ; CG = Base.one
-  ; CGradG = Base.one
-  ; CSecondGradG = Base.one
-  ; reciprocalCHMatchesGreenConstant = refl
-  ; bulkWeightedGreenBound = λ index source → Base.holds
-  ; bulkWeightedGradientGreenBound = λ index source → Base.holds
-  ; bulkWeightedSecondGradientGreenBound =
+  ; Closure.cH = Base.one
+  ; Closure.cHPositive = Base.holds
+  ; Closure.coercivityBudget = λ state → Base.holds
+  ; Closure.reflexive = λ value → Base.holds
+  ; Closure.addMonotone = λ left≤left′ right≤right′ → Base.holds
+  ; Closure.addRightCancel = λ comparison → Base.holds
+  ; Closure.green = λ index state → Base.one
+  ; Closure.gradientGreen = λ index state → Base.one
+  ; Closure.secondGradientGreen = λ index state → Base.one
+  ; Closure.greenLeftInverse = λ index state → oneStateEquality state
+  ; Closure.greenRightInverse = λ index state → oneStateEquality state
+  ; Closure.weightedNorm = λ state → Base.one
+  ; Closure.multiplyBound = Base.oneBinary
+  ; Closure.reciprocalCH = Base.one
+  ; Closure.CG = Base.one
+  ; Closure.CGradG = Base.one
+  ; Closure.CSecondGradG = Base.one
+  ; Closure.reciprocalCHMatchesGreenConstant = refl
+  ; Closure.bulkWeightedGreenBound = λ index source → Base.holds
+  ; Closure.bulkWeightedGradientGreenBound = λ index source → Base.holds
+  ; Closure.bulkWeightedSecondGradientGreenBound =
       λ index source → Base.holds
-  ; greenKernel = λ index → Base.one
-  ; gradientGreenKernel = λ index → Base.one
-  ; secondGradientGreenKernel = λ index → Base.one
-  ; KernelExponentialDecay = λ kernel → Base.Holds
-  ; bulkGreenKernelExponentialDecay = λ index → Base.holds
-  ; bulkGradientGreenKernelExponentialDecay = λ index → Base.holds
-  ; bulkSecondGradientGreenKernelExponentialDecay =
+  ; Closure.greenKernel = λ index → Base.one
+  ; Closure.gradientGreenKernel = λ index → Base.one
+  ; Closure.secondGradientGreenKernel = λ index → Base.one
+  ; Closure.KernelExponentialDecay = λ kernel → Base.Holds
+  ; Closure.bulkGreenKernelExponentialDecay = λ index → Base.holds
+  ; Closure.bulkGradientGreenKernelExponentialDecay = λ index → Base.holds
+  ; Closure.bulkSecondGradientGreenKernelExponentialDecay =
       λ index → Base.holds
-  ; BulkGreenConstantUniformInVolume = Base.Holds
-  ; BulkGreenConstantUniformInSpacing = Base.Holds
-  ; BulkGreenConstantUniformInScale = Base.Holds
-  ; BulkGreenConstantUniformInBackground = Base.Holds
-  ; bulkGreenConstantUniformInVolume = Base.holds
-  ; bulkGreenConstantUniformInSpacing = Base.holds
-  ; bulkGreenConstantUniformInScale = Base.holds
-  ; bulkGreenConstantUniformInBackground = Base.holds
+  ; Closure.BulkGreenConstantUniformInVolume = Base.Holds
+  ; Closure.BulkGreenConstantUniformInSpacing = Base.Holds
+  ; Closure.BulkGreenConstantUniformInScale = Base.Holds
+  ; Closure.BulkGreenConstantUniformInBackground = Base.Holds
+  ; Closure.bulkGreenConstantUniformInVolume = Base.holds
+  ; Closure.bulkGreenConstantUniformInSpacing = Base.holds
+  ; Closure.bulkGreenConstantUniformInScale = Base.holds
+  ; Closure.bulkGreenConstantUniformInBackground = Base.holds
   }
 
 fullHessianCoercivityRegression : Base.Holds
