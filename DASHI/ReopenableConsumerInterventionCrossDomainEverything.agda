@@ -26,8 +26,11 @@ import DASHI.Core.IdentifiabilityActiveInformationExact
 import DASHI.Core.IndexedRobustnessExact
 import DASHI.Core.ReopenableConsumerInterventionCrossDomainRegression
 import DASHI.Core.ReopenableConsumerInterventionKernelExact
+import DASHI.Core.ReopenableHypothesisForestExact
 import DASHI.Core.SelectiveAuthorityCertificateExact
+import DASHI.Core.StructuredResidualProductExact
 import DASHI.Core.TypedEvidenceDependencyExact
+import DASHI.Core.TypedIntervalEventTransitionExact
 import DASHI.Environment.LESResearchCrossPollinationExact
 import DASHI.Environment.LESResearchCrossPollinationRound2Exact
 import DASHI.Environment.LESResearchCrossPollinationRound3Exact
