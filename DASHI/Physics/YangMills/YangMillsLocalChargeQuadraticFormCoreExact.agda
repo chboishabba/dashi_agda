@@ -46,7 +46,7 @@ module DASHI.Physics.YangMills.YangMillsLocalChargeQuadraticFormCoreExact where
 -- self-adjoint operator completion until it is genuinely needed.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; _≤_)
 import Data.Nat.Properties as ℕP
 
@@ -115,8 +115,7 @@ localCoreQuadraticFormCutoffRemoval :
   LocalCoreQuadraticFormCutoffRemoval dataSet
 localCoreQuadraticFormCutoffRemoval dataSet = record
   { limitingForm = localCoreChargeForm dataSet
-  ; limitingFormIsSupportCutoff = λ bra ket →
-      ℕP.refl
+  ; limitingFormIsSupportCutoff = λ bra ket → refl
   ; everyLargeCutoffIsLimitingForm =
       cutoffFormEqualsLocalCoreFormBeyondSupport dataSet
   }
