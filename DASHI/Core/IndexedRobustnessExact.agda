@@ -2,11 +2,9 @@ module DASHI.Core.IndexedRobustnessExact where
 
 ------------------------------------------------------------------------
 -- UNCERTAINTY-INDEXED ROBUSTNESS
---
 -- Robustness to pose, material, sensor, model, scenario, semantic ambiguity or
--- manufacturing tolerance are different obligations.  This module keeps the
--- axis in the type and proves a tagged-union composition theorem rather than
--- scalarising heterogeneous robustness claims.
+-- manufacturing tolerance are different obligations.  The axis stays typed;
+-- heterogeneous claims are not silently scalarised.
 ------------------------------------------------------------------------
 
 open import Data.Sum using (_⊎_; inj₁; inj₂)
@@ -46,18 +44,16 @@ joinRobustScenarioFamilies :
     Candidate Axis (ScenarioA ⊎ ScenarioB)
     (TaggedAccept AcceptA AcceptB)
     candidate axis
-joinRobustScenarioFamilies left right =
-  robustAcross declared robustJoined
-  where
-    declared : _
-    declared (inj₁ scenario) = DeclaredScenario left scenario
-    declared (inj₂ scenario) = DeclaredScenario right scenario
-
-    robustJoined :
-      ∀ scenario → declared scenario →
-      TaggedAccept _ _ _ _ scenario
-    robustJoined (inj₁ scenario) declaredHere = robust left scenario declaredHere
-    robustJoined (inj₂ scenario) declaredHere = robust right scenario declaredHere
+joinRobustScenarioFamilies left right = record
+  { DeclaredScenario = λ
+      { (inj₁ scenario) → DeclaredScenario left scenario
+      ; (inj₂ scenario) → DeclaredScenario right scenario
+      }
+  ; robust = λ
+      { (inj₁ scenario) declaredHere → robust left scenario declaredHere
+      ; (inj₂ scenario) declaredHere → robust right scenario declaredHere
+      }
+  }
 
 ------------------------------------------------------------------------
 -- This composes declared scenario families only.  Robustness on one axis does
