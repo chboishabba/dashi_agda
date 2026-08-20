@@ -5,20 +5,11 @@ module DASHI.Environment.LESResearchCrossPollinationRound4Exact where
 --
 -- Round 4 follows the gap map to the remaining theorem-sized formal seams.
 -- Unlike a status/receipt-only tranche, the imported modules below contain
--- concrete positive theorems and finite falsifiers for:
---
---   stochastic projected kernels;
---   partial observation / belief-state future safety;
---   identifiability, equifinality and active information value;
---   approximate-intertwiner error composition;
---   adaptive-fidelity safe pruning;
---   time/regime shift and path dependence;
---   shared-source uncertainty;
---   exact dependency closure and selective assimilation reopening;
---   finite hybrid trace safety;
---   bounded Pareto completeness;
---   socio-ecological reactive-agent non-factorability;
---   approval-versus-legitimacy non-factorability.
+-- concrete positive theorems and finite falsifiers for stochastic transition
+-- quotients, partial observation, identifiability, active information value,
+-- approximate abstraction, adaptive fidelity, temporal shift/hysteresis,
+-- shared-source uncertainty, exact dependency closure, hybrid trace safety,
+-- bounded Pareto completeness, reactive agents and governance legitimacy.
 --
 -- Domain-specific model validity remains external.  Closing a formal interface
 -- means the theorem shape is now explicit, not that LES has already supplied
@@ -34,6 +25,7 @@ import DASHI.Core.AffectedDependencyClosureExact as Closure
 import DASHI.Core.ApproximateIntertwinerCompositionExact as Approx
 import DASHI.Core.DeclaredScenarioRobustnessExact as Robustness
 import DASHI.Core.FiniteStochasticBisimulationExact as Stochastic
+import DASHI.Core.FiniteStochasticRewardPreservationExact as StochasticReward
 import DASHI.Core.IdentifiabilityActiveInformationExact as Information
 import DASHI.Core.PartialObservationBeliefSafetyExact as Partial
 import DASHI.Core.ReopenableConsumerInterventionKernelExact as Core
@@ -103,6 +95,9 @@ stochasticProjectionCounterexample :
   Stochastic.KernelBisimulationDefect Stochastic.demoKernel
 stochasticProjectionCounterexample = Stochastic.demoKernelDefect
 
+stochasticRewardBoundaryRecorded : StochasticReward.StochasticRewardBoundary
+stochasticRewardBoundaryRecorded = StochasticReward.canonicalStochasticRewardBoundary
+
 positiveInformationValueWitness : Information.PositiveDecisionValueWitness
 positiveInformationValueWitness = Information.canonicalPositiveDecisionValueWitness
 
@@ -146,6 +141,8 @@ record LESRound4FormalClosureStatus : Set where
   constructor lesRound4FormalClosureStatus
   field
     finiteStochasticKernelBisimulationSurfaceConstructed : Bool
+    finiteStochasticNormalizationConstructed : Bool
+    oneStepProjectedRewardPreservationConstructed : Bool
     partialObservationBeliefFutureTheoremConstructed : Bool
     equifinalitySplitterTheoremConstructed : Bool
     activeInformationDecisionValueWitnessConstructed : Bool
@@ -167,14 +164,15 @@ open LESRound4FormalClosureStatus public
 canonicalLESRound4FormalClosureStatus : LESRound4FormalClosureStatus
 canonicalLESRound4FormalClosureStatus =
   lesRound4FormalClosureStatus
-    true true true true true true true true
-    true true true true true true true true
+    true true true true true true true true true
+    true true true true true true true true true
 
 record LESRound4RemainingScientificFrontier : Set where
   constructor lesRound4RemainingScientificFrontier
   field
     learnedBeliefStateCertificationStillEmpirical : Bool
-    realProbabilityNormalizationAndMetricValueBoundsStillExternal : Bool
+    realTransitionProbabilitiesStillNeedScientificEstimation : Bool
+    discountedOptimalValueBoundsStillNotConstructed : Bool
     causalErrorMetricCalibrationStillDomainSpecific : Bool
     realExperimentCostAndOutcomeModelsStillExternal : Bool
     realDistributionShiftDetectionStillExternal : Bool
@@ -192,7 +190,7 @@ canonicalLESRound4RemainingScientificFrontier :
   LESRound4RemainingScientificFrontier
 canonicalLESRound4RemainingScientificFrontier =
   lesRound4RemainingScientificFrontier
-    true true true true true true
+    true true true true true true true
     true true true true true true
 
 round4BuildsOnRound3 : Round3.LESRound3Boundary
