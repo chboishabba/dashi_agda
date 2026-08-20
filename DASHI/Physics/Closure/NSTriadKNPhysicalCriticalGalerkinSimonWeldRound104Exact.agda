@@ -18,26 +18,29 @@ module DASHI.Physics.Closure.NSTriadKNPhysicalCriticalGalerkinSimonWeldRound104E
 --
 -- ROUND104 / PHYSICAL CRITICAL GALERKIN--SIMON WELD
 --
--- The repository already has a substantially more concrete Galerkin limit
--- development than the abstract Round29 target: `NSConcreteAubinLionsNonlinear-
--- LimitWitnesses` splits the standard passage into G1--G19 and constructs the
--- canonical compactness/nonlinear-limit certificate from actual witnesses.
+-- The repository already has a concrete G1--G19 Galerkin limit chain.  This
+-- module reuses G5/G8/G9/G10/G11/G12 rather than requesting duplicate
+-- compactness/product/trace/limit receipts.
 --
--- Re-proving those layers inside the critical Clay branch would be receipt
--- shuffling.  This module therefore reuses the existing G5/G8/G9/G10/G11/G12
--- witnesses directly and isolates ONLY the genuinely stronger critical-space
--- upgrade that the old energy-level route does not provide:
+-- One further dependency correction matters.  The uniform
 --
---   L^infinity_t H^(1/2) uniformly in N,
---   L^2_t H^(3/2) uniformly in N,
---   partial_t u_N uniformly in L^(4/3)_t H^(-1/2),
---   Simon compactness strong enough in L^2_t H^(1/2),
---   weak-* lower semicontinuity of the H^(1/2) critical supremum.
+--   L^infinity_t H^(1/2),   L^2_t H^(3/2)
+--
+-- estimates are not additional Simon lemmas: they are exactly the topology
+-- realization of the uniform critical Galerkin barrier produced by obligation
+-- A.  They are therefore carried separately as `CriticalBarrierTopology`.
+--
+-- Once that barrier topology exists, the genuinely additional standard-
+-- analysis upgrade has only THREE components:
+--
+--   1. partial_t u_N uniformly in L^(4/3)_t H^(-1/2);
+--   2. Simon compactness strong enough in L^2_t H^(1/2);
+--   3. weak-* lower semicontinuity of the H^(1/2) critical supremum.
 --
 -- Product convergence, nonlinear distributional convergence, initial trace,
 -- Leray--Hopf limit identification and dissipation liminf are inherited from
--- the concrete G-chain.  The actual Round29 limiting element is now the G12
--- Leray--Hopf solution itself, not merely the surrounding solution type.
+-- the existing concrete G-chain.  The actual Round29 limiting element is the
+-- G12 Leray--Hopf solution itself.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (lzero)
@@ -54,7 +57,11 @@ import DASHI.Physics.Closure.NSConcreteAubinLionsNonlinearLimitWitnesses as Conc
 ConcreteSetting : Set₁
 ConcreteSetting = Concrete.ConcreteGalerkinSetting lzero lzero
 
-record CriticalSobolevSimonUpgrade
+------------------------------------------------------------------------
+-- Output topology of obligation A: not counted again as Simon work.
+------------------------------------------------------------------------
+
+record CriticalBarrierTopology
     (S : ConcreteSetting)
     (X : Concrete.ConcreteAubinLionsNonlinearLimitCertificate S) : Set where
   field
@@ -64,6 +71,17 @@ record CriticalSobolevSimonUpgrade
     UniformL2HThreeHalf : Set
     uniformL2HThreeHalf : UniformL2HThreeHalf
 
+open CriticalBarrierTopology public
+
+------------------------------------------------------------------------
+-- Only the genuinely additional standard-analysis upgrade.
+------------------------------------------------------------------------
+
+record CriticalSobolevSimonUpgrade
+    (S : ConcreteSetting)
+    (X : Concrete.ConcreteAubinLionsNonlinearLimitCertificate S)
+    (barrier : CriticalBarrierTopology S X) : Set where
+  field
     UniformLFourThirdTimeDerivativeHMinusHalf : Set
     uniformLFourThirdTimeDerivativeHMinusHalf :
       UniformLFourThirdTimeDerivativeHMinusHalf
@@ -127,16 +145,17 @@ existingDissipationLiminfWitness X = Concrete.g11 X
 physicalCriticalGalerkinSimonWeld :
   {S : ConcreteSetting} →
   (X : Concrete.ConcreteAubinLionsNonlinearLimitCertificate S) →
-  CriticalSobolevSimonUpgrade S X →
+  (barrier : CriticalBarrierTopology S X) →
+  CriticalSobolevSimonUpgrade S X barrier →
   Critical.CriticalAubinLionsTarget
-physicalCriticalGalerkinSimonWeld {S = S} X U = record
+physicalCriticalGalerkinSimonWeld {S = S} X barrier U = record
   { Critical.GalerkinSequence = Nat
   ; Critical.LimitState = Canonical.SolutionClass (Concrete.analytic S)
   ; Critical.limitingState = Concrete.solution (Concrete.g12 X)
-  ; Critical.uniformLInfinityHOneHalf = UniformLInfinityHOneHalf U
-  ; Critical.uniformLInfinityHOneHalfWitness = uniformLInfinityHOneHalf U
-  ; Critical.uniformL2HThreeHalf = UniformL2HThreeHalf U
-  ; Critical.uniformL2HThreeHalfWitness = uniformL2HThreeHalf U
+  ; Critical.uniformLInfinityHOneHalf = UniformLInfinityHOneHalf barrier
+  ; Critical.uniformLInfinityHOneHalfWitness = uniformLInfinityHOneHalf barrier
+  ; Critical.uniformL2HThreeHalf = UniformL2HThreeHalf barrier
+  ; Critical.uniformL2HThreeHalfWitness = uniformL2HThreeHalf barrier
   ; Critical.uniformTimeDerivativeNegativeHalf =
       UniformLFourThirdTimeDerivativeHMinusHalf U
   ; Critical.uniformTimeDerivativeNegativeHalfWitness =
@@ -187,6 +206,9 @@ physicalSimonWeldReusesExistingDissipationLiminf :
 physicalSimonWeldReusesExistingDissipationLiminf X =
   Concrete.repositoryLiminf (Concrete.g11 X)
 
+round104BarrierTopologyBelongsToUniformCriticalBarrier : Bool
+round104BarrierTopologyBelongsToUniformCriticalBarrier = true
+
 round104ExistingG5G8G9G10G11G12LimitMachineryReused : Bool
 round104ExistingG5G8G9G10G11G12LimitMachineryReused = true
 
@@ -196,6 +218,10 @@ round104CriticalExponentArithmeticReused =
 
 round104PhysicalCriticalSobolevSimonUpgradeClosed : Bool
 round104PhysicalCriticalSobolevSimonUpgradeClosed = false
+
+round104BarrierTopologyBelongsToUniformCriticalBarrierIsTrue :
+  round104BarrierTopologyBelongsToUniformCriticalBarrier ≡ true
+round104BarrierTopologyBelongsToUniformCriticalBarrierIsTrue = refl
 
 round104ExistingG5G8G9G10G11G12LimitMachineryReusedIsTrue :
   round104ExistingG5G8G9G10G11G12LimitMachineryReused ≡ true
