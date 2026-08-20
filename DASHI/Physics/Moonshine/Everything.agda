@@ -1,0 +1,24 @@
+module DASHI.Physics.Moonshine.Everything where
+
+-- Physics/Moonshine ownership surface.
+-- Prefer terminal summaries/receipts that already compose their internal
+-- development chains; remaining leaves stay visible to the ownership planner.
+
+import DASHI.Physics.Moonshine.MoonshinePrototypeComparisonBundle
+import DASHI.Physics.Moonshine.MoonshineTwinedWaveBundleSummary
+import DASHI.Physics.Moonshine.MoonshineTwinedWaveRegimeSummary
+import DASHI.Physics.Moonshine.MoonshineTwinedWaveObservableTransportGeometryCoherenceSummary
+import DASHI.Physics.Moonshine.MoonshineWaveTraceConsistencySummary
+import DASHI.Physics.Moonshine.MoonshineTraceIndexedWeaveExact
+import DASHI.Physics.Moonshine.SSPMoonshineTraceFibreIntegrationExact
+import DASHI.Physics.Moonshine.DASHIPrimeLaneVOATypeReceipt
+import DASHI.Physics.Moonshine.DASHIPrimeLaneEquivClosureReceiptSurface
+import DASHI.Physics.Moonshine.PrimeLaneVOAEquivalenceReceiptSurface
+import DASHI.Physics.Moonshine.DASHIMonsterVOAUniquenessReceipt
+import DASHI.Physics.Moonshine.DongLiMasonOrbifoldReceiptSurface
+import DASHI.Physics.Moonshine.LaneDimensionTheoremReceiptSurface
+import DASHI.Physics.Moonshine.HeegnerLaneAssignmentReceipt
+import DASHI.Physics.Moonshine.KroneckerLimitAlphaCorrectionReceipt
+import DASHI.Physics.Moonshine.ModularJInvariantAlphaReceipt
+import DASHI.Physics.Moonshine.MonsterOrderDepthBoundReceipt
+import DASHI.Physics.Moonshine.SupersingularPrimeLaneBridge
