@@ -28,8 +28,6 @@ module DASHI.Physics.Closure.NSTriadKNAdverseEpisodeSignedForcingRound106Exact w
 -- `integral F_+` is unnecessary.  Interior adverse episodes start and end at
 -- A=0, so their production is paid exactly by the signed forcing integral.
 -- Only an episode touching the initial time carries an initial phase boundary.
--- This preserves network cancellation while retaining the favourable terminal
--- boundary that the whole-interval normal form would otherwise expose.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
@@ -39,7 +37,7 @@ open import Data.Rational.Base using
   (ℚ; 0ℚ; _+_; _*_; _≤_; NonNegative; nonNegative)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import DASHI.Physics.Closure.NSTriadKNSignedPhaseTimeNormalFormRound106Exact as Normal
 
@@ -64,7 +62,6 @@ adverseEpisodePaidByInitialPhaseAndSignedForcing E =
     a0 = Normal.initialAmplitude C
     aT = Normal.terminalAmplitude C
     f = Normal.integratedForcing C
-
     exact = Normal.signedPhaseTimeNormalForm C
 
     terminalProductNN : 0ℚ ≤ g * aT
@@ -76,44 +73,38 @@ adverseEpisodePaidByInitialPhaseAndSignedForcing E =
           productNN = ℚP.nonNeg*nonNeg⇒nonNeg g aT
       in ℚP.nonNegative⁻¹ (g * aT)
 
+    negTerminalRaw : -(g * aT) ≤ - 0ℚ
+    negTerminalRaw = ℚP.neg-mono-≤ terminalProductNN
+
+    negTerminal≤Zero : -(g * aT) ≤ 0ℚ
+    negTerminal≤Zero =
+      subst (λ right → -(g * aT) ≤ right)
+        (solve []) negTerminalRaw
+
+    first = ℚP.+-mono-≤ ℚP.≤-refl negTerminal≤Zero
+    second = ℚP.+-mono-≤ first ℚP.≤-refl
+
     dropNegativeTerminal :
       g * a0 + (- (g * aT)) + g * f
       ≤ g * a0 + g * f
     dropNegativeTerminal =
-      let
-        negTerminal≤Zero : -(g * aT) ≤ 0ℚ
-        negTerminal≤Zero = ℚP.neg-mono-≤ terminalProductNN
-        first = ℚP.+-mono-≤ ℚP.≤-refl negTerminal≤Zero
-        second = ℚP.+-mono-≤ first ℚP.≤-refl
-        leftMeaning :
-          (g * a0 + (- (g * aT))) + g * f
-          ≡ g * a0 + (- (g * aT)) + g * f
-        leftMeaning = solve (g ∷ a0 ∷ aT ∷ f ∷ [])
-        rightMeaning : (g * a0 + 0ℚ) + g * f ≡ g * a0 + g * f
-        rightMeaning = solve (g ∷ a0 ∷ f ∷ [])
-      in
       subst
-        (λ left → left ≤ g * a0 + g * f)
-        leftMeaning
-        (subst
-          (λ right → (g * a0 + (- (g * aT))) + g * f ≤ right)
-          rightMeaning second)
+        (λ right →
+          g * a0 + (- (g * aT)) + g * f ≤ right)
+        (solve (g ∷ a0 ∷ f ∷ []))
+        second
   in
   subst
     (λ left → left ≤ g * a0 + g * f)
     (sym exact)
     dropNegativeTerminal
-  where
-  open import Relation.Binary.PropositionalEquality using (sym)
 
 record InteriorAdverseSignedForcingEpisode : Set where
   constructor interior-adverse-signed-forcing-episode
   field
     episode : AdverseSignedForcingEpisode
-    initialAmplitudeZero :
-      Normal.initialAmplitude (cell episode) ≡ 0ℚ
-    terminalAmplitudeZero :
-      Normal.terminalAmplitude (cell episode) ≡ 0ℚ
+    initialAmplitudeZero : Normal.initialAmplitude (cell episode) ≡ 0ℚ
+    terminalAmplitudeZero : Normal.terminalAmplitude (cell episode) ≡ 0ℚ
 
 open InteriorAdverseSignedForcingEpisode public
 
@@ -183,8 +174,8 @@ finiteAdverseEpisodesPaidBySignedForcing N = go (episodes N)
           + nu * sumEpisodeProduction Es
         ≡ nu * sumEpisodeProduction (E ∷ Es)
       leftMeaning = solve
-        ( nu ∷ Normal.integratedCriticalProduction (cell E)
-        ∷ sumEpisodeProduction Es ∷ [])
+        (nu ∷ Normal.integratedCriticalProduction (cell E)
+         ∷ sumEpisodeProduction Es ∷ [])
       rightMeaning :
         (Normal.normalFormWeight (cell E) * Normal.initialAmplitude (cell E)
           + Normal.normalFormWeight (cell E) * Normal.integratedForcing (cell E))
