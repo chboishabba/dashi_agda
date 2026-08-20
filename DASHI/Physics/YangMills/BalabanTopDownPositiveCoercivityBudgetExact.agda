@@ -52,6 +52,7 @@ module DASHI.Physics.YangMills.BalabanTopDownPositiveCoercivityBudgetExact where
 -- background/FP/Wilson estimate on the enlarged region remains physical work.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; _+_; _*_; _≤_; _<_; _/_; -_; Positive)
@@ -158,18 +159,14 @@ oldRemainderBudgetPlusExtraIsNewBudget :
   Old.p33PhysicalFloor + oneSixtyFourth ≡ threeSixtyFourths
 oldRemainderBudgetPlusExtraIsNewBudget = ℚRing.solve []
 
--- 3/64 is exactly 3/2 times the old 1/32 signed-remainder allowance.
 newRemainderIsThreeHalvesOld :
   threeSixtyFourths ≡ (+ 3 / 2) * Old.p33PhysicalFloor
 newRemainderIsThreeHalvesOld = ℚRing.solve []
 
--- The currently configured total coefficient is 256.  At the enlarged radius
--- its linear remainder allowance is exactly the new 3/64 budget.
 enlargedRadiusSpendsNewRemainderBudget :
   Constants.configuredTotalCoefficient * enlargedRadius ≡ threeSixtyFourths
 enlargedRadiusSpendsNewRemainderBudget = ℚRing.solve []
 
--- The enlarged radius is exactly 3/2 times the old 1/8192 radius.
 enlargedRadiusIsThreeHalvesOld :
   enlargedRadius ≡ (+ 3 / 2) * Old.p33SmallFieldRadius
 enlargedRadiusIsThreeHalvesOld = ℚRing.solve []
@@ -180,7 +177,5 @@ topDownPositiveCoercivityBudgetLevel = machineChecked
 topDownEnlargedRadiusArithmeticLevel : ProofLevel
 topDownEnlargedRadiusArithmeticLevel = machineChecked
 
--- Physical boundary: the new radius may be used only after the literal
--- selected-background/Wilson/FP/KKT estimates are proved uniformly there.
 physicalSourceNativeEnlargedRegionLevel : ProofLevel
 physicalSourceNativeEnlargedRegionLevel = conditional
