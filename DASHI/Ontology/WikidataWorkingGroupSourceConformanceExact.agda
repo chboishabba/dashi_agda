@@ -1,6 +1,7 @@
 module DASHI.Ontology.WikidataWorkingGroupSourceConformanceExact where
 
 open import DASHI.Core.Prelude
+open import Agda.Builtin.String using (String)
 
 import DASHI.Biology.AliceBrownCorpusLoom as Alice
 import DASHI.Biology.EducationCorpusSourceRegistry as AliceSources
@@ -11,32 +12,19 @@ import DASHI.Semantics.SIOSemanticSurfaceBridge as SIO
 
 ------------------------------------------------------------------------
 -- CONCRETE SOURCE-POLICY CONFORMANCE FOR THE WIKIDATA/JMD HANDOFF
---
--- The handoff has two source classes:
---
---   bibliographic/public sources
---     -> author/title/publication/year/DOI-state/URL/role/boundary;
---
---   executable/formal sources
---     -> source/archive identity + revision/content hash + exact contract.
---
--- Neither class self-promotes to theorem truth or edit/domain authority.
 ------------------------------------------------------------------------
 
 sioRequirement : Policy.PublicSourceRequirement
 sioRequirement = Policy.requireAttributedSource SIO.sio2014Source
 
 earlyYearsStrategyRequirement : Policy.PublicSourceRequirement
-earlyYearsStrategyRequirement =
-  Policy.requireAttributedSource EarlyYears.earlyYearsStrategy2024Attributed
+earlyYearsStrategyRequirement = Policy.requireAttributedSource EarlyYears.earlyYearsStrategy2024Attributed
 
 qualityArea6Requirement : Policy.PublicSourceRequirement
-qualityArea6Requirement =
-  Policy.requireAttributedSource EarlyYears.qualityArea6Attributed
+qualityArea6Requirement = Policy.requireAttributedSource EarlyYears.qualityArea6Attributed
 
 brownKimberRequirement : Policy.PublicSourceRequirement
-brownKimberRequirement =
-  Policy.requireAttributedSource EarlyYears.brownKimber2026Attributed
+brownKimberRequirement = Policy.requireAttributedSource EarlyYears.brownKimber2026Attributed
 
 jmdArchiveRequirement : Policy.PublicSourceRequirement
 jmdArchiveRequirement =
@@ -53,11 +41,8 @@ bfoSnapshotRequirement =
     "continuant subclass entity; continuant disjointWith occurrent; transport into Wikidata remains inference-language/alignment gated"
 
 ------------------------------------------------------------------------
--- The full Alice corpus remains first-class provenance, not merely the one
--- Brown/Kimber row used by the early-years specialization.  Its owning source
--- registry carries eight distinct source-bound papers/items and the corpus loom
--- explicitly preserves source claims, cross-paper inferences, DASHI extensions
--- and future empirical work as different promotion levels.
+-- Full Alice provenance stays first-class rather than being reduced to the
+-- Brown/Kimber row used by the latest early-years specialization.
 ------------------------------------------------------------------------
 
 fullAliceCorpusRegistry : AliceSources.EducationCorpusSourceRegistry
@@ -66,24 +51,20 @@ fullAliceCorpusRegistry = AliceSources.canonicalEducationCorpusSourceRegistry
 fullAliceCorpusLoom : Alice.AliceBrownCorpusLoom
 fullAliceCorpusLoom = Alice.canonicalAliceBrownCorpusLoom
 
-fullAliceCorpusSourceCountReading : Agda.Builtin.String.String
+fullAliceCorpusSourceCountReading : String
 fullAliceCorpusSourceCountReading = Alice.canonicalCorpusLoomSourceCountReading
 
-------------------------------------------------------------------------
--- Typed DOI-state witnesses on handoff-facing bibliographic sources.
-------------------------------------------------------------------------
+sioDOIState : Source.DOIState
+sioDOIState = Source.doiState SIO.sio2014Source
 
-sioDOIRecorded : Source.DOIState
-sioDOIRecorded = Source.doiState SIO.sio2014Source
+brownKimberDOIState : Source.DOIState
+brownKimberDOIState = Source.doiState EarlyYears.brownKimber2026Attributed
 
-brownKimberDOIRecorded : Source.DOIState
-brownKimberDOIRecorded = Source.doiState EarlyYears.brownKimber2026Attributed
+earlyYearsStrategyDOIState : Source.DOIState
+earlyYearsStrategyDOIState = Source.doiState EarlyYears.earlyYearsStrategy2024Attributed
 
-earlyYearsStrategyNoDOIAtlasLocal : Source.DOIState
-earlyYearsStrategyNoDOIAtlasLocal = Source.doiState EarlyYears.earlyYearsStrategy2024Attributed
-
-qualityArea6NoDOIAtlasLocal : Source.DOIState
-qualityArea6NoDOIAtlasLocal = Source.doiState EarlyYears.qualityArea6Attributed
+qualityArea6DOIState : Source.DOIState
+qualityArea6DOIState = Source.doiState EarlyYears.qualityArea6Attributed
 
 record WorkingGroupSourceConformanceBoundary : Set where
   constructor workingGroupSourceConformanceBoundary
@@ -101,5 +82,4 @@ record WorkingGroupSourceConformanceBoundary : Set where
 
 canonicalWorkingGroupSourceConformanceBoundary : WorkingGroupSourceConformanceBoundary
 canonicalWorkingGroupSourceConformanceBoundary =
-  workingGroupSourceConformanceBoundary
-    true true true true true true true false false false
+  workingGroupSourceConformanceBoundary true true true true true true true false false false
