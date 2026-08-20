@@ -25,15 +25,17 @@ module DASHI.Core.IdentifiabilityActiveInformationExact where
 -- finite separation/decision theorems below are DASHI constructions.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; true)
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
 ------------------------------------------------------------------------
--- Generic observational equivalence and a splitter.
+-- Generic observational equivalence and a splitter.  The declared experiment
+-- family is Bool-valued so the concrete finite witness stays in Set; richer
+-- proof-relevant experiment admissibility can be layered above this kernel.
 ------------------------------------------------------------------------
 
-record ExperimentSystem (Model Experiment Result : Set) : Set₁ where
+record ExperimentSystem (Model Experiment Result : Set) : Set where
   constructor experimentSystem
   field
     observe : Experiment → Model → Result
@@ -43,13 +45,13 @@ open ExperimentSystem public
 record EquivalentOn
     {Model Experiment Result : Set}
     (system : ExperimentSystem Model Experiment Result)
-    (Declared : Experiment → Set)
-    (left right : Model) : Set₁ where
+    (Declared : Experiment → Bool)
+    (left right : Model) : Set where
   constructor equivalentOn
   field
     agree :
       ∀ experiment →
-      Declared experiment →
+      Declared experiment ≡ true →
       observe system experiment left ≡ observe system experiment right
 
 open EquivalentOn public
@@ -70,9 +72,9 @@ splitterRefutesAnyFamilyContainingIt :
   ∀ {Model Experiment Result}
     {system : ExperimentSystem Model Experiment Result}
     {left right : Model}
-    {Declared : Experiment → Set} →
+    {Declared : Experiment → Bool} →
   (splitter : DistinguishingExperiment system left right) →
-  Declared (experiment splitter) →
+  Declared (experiment splitter) ≡ true →
   EquivalentOn system Declared left right →
   ⊥
 splitterRefutesAnyFamilyContainingIt splitter included equivalent =
@@ -102,18 +104,20 @@ observeDemo diagnosticTracer localSource = localSignature
 demoSystem : ExperimentSystem DemoModel DemoExperiment DemoResult
 demoSystem = experimentSystem observeDemo
 
-data BaselineOnly : DemoExperiment → Set where
-  baselineDeclared : BaselineOnly baselineSample
+baselineOnly : DemoExperiment → Bool
+baselineOnly baselineSample = true
+baselineOnly diagnosticTracer = false
 
 baselineEquifinality :
-  EquivalentOn demoSystem BaselineOnly upstreamSource localSource
+  EquivalentOn demoSystem baselineOnly upstreamSource localSource
 baselineEquifinality = equivalentOn agreement
   where
     agreement :
       ∀ experiment →
-      BaselineOnly experiment →
+      baselineOnly experiment ≡ true →
       observeDemo experiment upstreamSource ≡ observeDemo experiment localSource
-    agreement baselineSample baselineDeclared = refl
+    agreement baselineSample included = refl
+    agreement diagnosticTracer ()
 
 diagnosticDistinguishes :
   DistinguishingExperiment demoSystem upstreamSource localSource
@@ -164,7 +168,7 @@ record PositiveDecisionValueWitness : Set where
   constructor positiveDecisionValueWitness
   field
     baselineModelsEquivalent :
-      EquivalentOn demoSystem BaselineOnly upstreamSource localSource
+      EquivalentOn demoSystem baselineOnly upstreamSource localSource
     noUniformCorrectAction :
       ∀ action →
       action ≡ requiredAction upstreamSource →

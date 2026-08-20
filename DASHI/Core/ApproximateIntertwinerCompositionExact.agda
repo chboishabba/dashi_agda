@@ -15,7 +15,7 @@ open import Agda.Builtin.Nat using (Nat)
 open import Data.Nat using (_≤_; _+_)
 open import Data.Nat.Properties as NatP using (≤-trans; +-mono-≤)
 
-record NatDistance (X : Set) : Set₁ where
+record NatDistance (X : Set) : Set where
   constructor natDistance
   field
     distance : X → X → Nat

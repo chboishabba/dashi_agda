@@ -26,6 +26,7 @@ module DASHI.Environment.LESResearchCrossPollinationRound4Exact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
+open import Agda.Builtin.Equality using (_≡_)
 
 import DASHI.Core.AdaptiveFidelityPruningExact as Fidelity
 import DASHI.Core.AffectedDependencyClosureExact as Closure
@@ -68,7 +69,31 @@ causalAbstractionToGenericIntertwiner abstraction intervention =
     (Round2.interventionSquareCommutes abstraction intervention)
 
 ------------------------------------------------------------------------
--- 2. Concrete gap-closing witnesses are exported at one LES review surface.
+-- 2. Correct the scenario quantifier explicitly.  Round 2's `RobustAcross`
+-- demands acceptability for every inhabitant of `PlausibleFuture`, which is
+-- stronger than its stored ensemble.  Any such witness certainly induces the
+-- intended declared-ensemble theorem, but future APIs should target the latter.
+------------------------------------------------------------------------
+
+round2RobustnessImpliesDeclaredRobustness :
+  ∀ {Plan : Set}
+    {plan : Plan} →
+  (robust : Round2.RobustAcross Plan plan) →
+  Robustness.RobustOnDeclared
+    (λ candidate future →
+      Round2.ScenarioEvaluation.plan (Round2.evaluate robust future) ≡ candidate
+      × (Round2.ScenarioEvaluation.acceptable (Round2.evaluate robust future) ≡ true))
+    plan
+    (Round2.ensemble robust)
+round2RobustnessImpliesDeclaredRobustness robust =
+  Robustness.robustOnDeclared λ future member →
+    Round2.evaluationIsForPlan robust future ,
+    Round2.allDeclaredFuturesAcceptable robust future
+  where
+    open import Data.Product using (_×_; _,_)
+
+------------------------------------------------------------------------
+-- 3. Concrete gap-closing witnesses are exported at one LES review surface.
 ------------------------------------------------------------------------
 
 partialObservationCounterexample : Partial.CurrentObservationTerminalisationDefect
@@ -115,7 +140,7 @@ approvalSurfaceDoesNotDetermineLegitimacy =
   Governance.approvalCannotDetermineLegitimacy
 
 ------------------------------------------------------------------------
--- 3. Round-4 status distinguishes formal closure from empirical/numerical work.
+-- 4. Round-4 status distinguishes formal closure from empirical/numerical work.
 ------------------------------------------------------------------------
 
 record LESRound4FormalClosureStatus : Set where
@@ -136,15 +161,15 @@ record LESRound4FormalClosureStatus : Set where
     boundedParetoCompletenessTheoremConstructed : Bool
     socioEcologicalReactiveCounterexampleConstructed : Bool
     approvalLegitimacyNonfactorabilityConstructed : Bool
+    declaredScenarioRobustnessConstructed : Bool
 
 open LESRound4FormalClosureStatus public
 
 canonicalLESRound4FormalClosureStatus : LESRound4FormalClosureStatus
 canonicalLESRound4FormalClosureStatus =
   lesRound4FormalClosureStatus
-    true true true true true
-    true true true true true
-    true true true true true
+    true true true true true true true true
+    true true true true true true true true
 
 record LESRound4RemainingScientificFrontier : Set where
   constructor lesRound4RemainingScientificFrontier
