@@ -5,6 +5,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.List.Base using ([]; _∷_)
 
+import DASHI.Core.ConsumerIndexedGovernedTransitionExact as Governed
 import DASHI.Core.ReopenableConsumerInterventionCrossDomainRegression as CrossDomain
 import DASHI.Environment.DepthTruncation as Depth
 import DASHI.Environment.EcologicalEvidenceGates as Evidence
@@ -109,7 +110,7 @@ researchRound3BoundaryRecorded = Research3.canonicalLESRound3Boundary
 
 round4ConsumerRelativityStillTheoremBearing :
   (depth : Nat) →
-  DASHI.Core.ConsumerIndexedGovernedTransitionExact.FutureEquivalent
+  Governed.FutureEquivalent
     CrossDomain.publicSystem CrossDomain.public depth CrossDomain.left CrossDomain.right
 round4ConsumerRelativityStillTheoremBearing =
   Research4.consumerRelativityRegression
