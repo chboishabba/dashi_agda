@@ -29,6 +29,10 @@ module DASHI.Physics.Closure.NSTriadKNQuadraticCubicNormalFormCoercivityNoGoExac
 --
 --      Y(a u) = a^2 - a^3 = 4 - 8 = -4 < 0.
 --
+-- It also connects the negative cubic direction to the repository's literal
+-- 3-4-5 Waleffe sign-flip witness: the fixed-geometry negative cell has
+-- amplitude exactly -1.
+--
 -- The theorem does NOT say that every possible higher-order normal form is
 -- impossible.  It says the simple corrected critical energy from the exact
 -- phase integration cannot itself be the arbitrary-data coercive Lyapunov
@@ -45,6 +49,9 @@ open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_; -_; _≤_; _<_)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Nullary.Negation.Core using (¬_)
+
+import DASHI.Physics.Closure.NSTriadKNHeterochiralMinorityLegReductionRound102Exact as W
+import DASHI.Physics.Closure.NSTriadKNWaleffeLeithPointwiseMobilityNoGoRound104Exact as R104
 
 square cube : ℚ → ℚ
 square a = a * a
@@ -64,6 +71,10 @@ four = Int.+ 4 / 1
 negativeCubicWitness : ℚ
 negativeCubicWitness = - one
 
+literalThreeFourFiveNegativeAmplitude :
+  W.amplitude R104.threeFourFiveNegativeCell ≡ negativeCubicWitness
+literalThreeFourFiveNegativeAmplitude = refl
+
 witnessCorrectedEnergyIsMinusFour :
   scaledQuadraticCubicCorrection one one negativeCubicWitness two ≡ - four
 witnessCorrectedEnergyIsMinusFour = solve []
@@ -82,9 +93,6 @@ witnessRefutesGlobalNonnegativeCoercivity proposed =
   ℚP.<-irrefl 0ℚ
     (ℚP.<-≤-trans witnessCorrectedEnergyStrictlyNegative proposed)
 
--- General algebraic scaling identity.  It records exactly why the issue is
--- homogeneous rather than numerical: the two pieces scale with different
--- degrees.
 quadraticCubicScalingMeaning :
   (nu X G a : ℚ) →
   scaledQuadraticCubicCorrection nu X G a
@@ -94,12 +102,19 @@ quadraticCubicScalingMeaning nu X G a = solve (nu ∷ X ∷ G ∷ a ∷ [])
 simpleGlobalPhaseNormalFormIsAutomaticallyCoercive : Bool
 simpleGlobalPhaseNormalFormIsAutomaticallyCoercive = false
 
+literalWaleffeNegativeCubicDirectionExists : Bool
+literalWaleffeNegativeCubicDirectionExists = true
+
 negativeCubicDirectionCreatesLargeAmplitudeCoercivityObstruction : Bool
 negativeCubicDirectionCreatesLargeAmplitudeCoercivityObstruction = true
 
 simpleGlobalPhaseNormalFormIsAutomaticallyCoerciveIsFalse :
   simpleGlobalPhaseNormalFormIsAutomaticallyCoercive ≡ false
 simpleGlobalPhaseNormalFormIsAutomaticallyCoerciveIsFalse = refl
+
+literalWaleffeNegativeCubicDirectionExistsIsTrue :
+  literalWaleffeNegativeCubicDirectionExists ≡ true
+literalWaleffeNegativeCubicDirectionExistsIsTrue = refl
 
 negativeCubicDirectionCreatesLargeAmplitudeCoercivityObstructionIsTrue :
   negativeCubicDirectionCreatesLargeAmplitudeCoercivityObstruction ≡ true
