@@ -30,15 +30,8 @@ module DASHI.Physics.Closure.NSTriadKNHelicalCriticalExchangeReductionRound102Ex
 -- critical half-derivative weight.  The Euler nonlinearity conserves helicity.
 --
 -- Let p and m denote the nonlinear tangents of those two critical energies.
--- Helicity conservation is
---
---   p - m = 0.
---
--- The nonlinear tangent of the unsigned critical norm is
---
---   Xdot = p + m.
---
--- Exact algebra therefore gives
+-- Helicity conservation is equivalently p=m, and therefore p-m=0.  The
+-- nonlinear tangent of the unsigned critical norm is p+m, hence
 --
 --   Xdot = 2 p = 2 m.
 --
@@ -47,17 +40,15 @@ module DASHI.Physics.Closure.NSTriadKNHelicalCriticalExchangeReductionRound102Ex
 -- nonlinear critical-growth problem is reduced to exchange between the two
 -- helicity sectors.
 --
--- The final witness also records the sharp limitation: helicity conservation
--- alone does not give a sign.  p=m=1 conserves signed helicity while Xdot=2.
--- Thus the remaining frontier theorem is a quantitative heterochiral-exchange
--- estimate, not a generic helicity-conservation statement.
+-- The final witness records the sharp limitation: helicity conservation alone
+-- does not give a sign.  p=m=1 conserves signed helicity while Xdot=2.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
 import Data.Integer.Base as Int
-open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; -_)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_; -_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 
 sub : ℚ → ℚ → ℚ
@@ -80,29 +71,27 @@ unsignedCriticalTangent : HelicalCriticalTangent → ℚ
 unsignedCriticalTangent D = plusTangent D + minusTangent D
 
 nonlinearHelicityConserved : HelicalCriticalTangent → Set
-nonlinearHelicityConserved D = signedHelicityTangent D ≡ 0ℚ
+nonlinearHelicityConserved D = plusTangent D ≡ minusTangent D
 
-helicityConservationEquatesSectorTangents :
+helicityConservationKillsSignedTangent :
   (D : HelicalCriticalTangent) →
   nonlinearHelicityConserved D →
-  plusTangent D ≡ minusTangent D
-helicityConservationEquatesSectorTangents D conserved =
-  solve (plusTangent D ∷ minusTangent D ∷ []) conserved
+  signedHelicityTangent D ≡ 0ℚ
+helicityConservationKillsSignedTangent D conserved rewrite conserved =
+  solve (minusTangent D ∷ [])
 
 criticalProductionIsTwicePlusExchange :
   (D : HelicalCriticalTangent) →
   nonlinearHelicityConserved D →
   unsignedCriticalTangent D ≡ two * plusTangent D
-criticalProductionIsTwicePlusExchange D conserved
-  rewrite helicityConservationEquatesSectorTangents D conserved =
-  solve (plusTangent D ∷ [])
+criticalProductionIsTwicePlusExchange D conserved rewrite conserved =
+  solve (minusTangent D ∷ [])
 
 criticalProductionIsTwiceMinusExchange :
   (D : HelicalCriticalTangent) →
   nonlinearHelicityConserved D →
   unsignedCriticalTangent D ≡ two * minusTangent D
-criticalProductionIsTwiceMinusExchange D conserved
-  rewrite helicityConservationEquatesSectorTangents D conserved =
+criticalProductionIsTwiceMinusExchange D conserved rewrite conserved =
   solve (minusTangent D ∷ [])
 
 homochiralPlusHasZeroCriticalProduction :
@@ -130,7 +119,7 @@ positiveExchangeWitness = helical-critical-tangent 1ℚ 1ℚ
 
 positiveExchangeConservesHelicity :
   nonlinearHelicityConserved positiveExchangeWitness
-positiveExchangeConservesHelicity = solve []
+positiveExchangeConservesHelicity = refl
 
 positiveExchangeProducesCriticalGrowth :
   unsignedCriticalTangent positiveExchangeWitness ≡ two
