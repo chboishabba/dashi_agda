@@ -47,6 +47,11 @@ nearbyResidueDerivedRegression :
     Hensel.canonicalLegendreExceptionalPadicHenselConstructionBoundary ≡ true
 nearbyResidueDerivedRegression = refl
 
+sourcePrimeProofRequiredRegression :
+  Family.sourcePrimeProofRequired
+    Family.canonicalDuncanSwisherDworkPublishedCoefficientFamilyBoundary ≡ true
+sourcePrimeProofRequiredRegression = refl
+
 actualCoefficientFamilyConstructedRegression :
   Family.coefficientFamilyConstructedForEveryPositivePoleOrder
     Family.canonicalDuncanSwisherDworkPublishedCoefficientFamilyBoundary ≡ true
