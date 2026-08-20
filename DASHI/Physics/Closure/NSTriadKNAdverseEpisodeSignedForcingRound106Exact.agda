@@ -30,14 +30,14 @@ module DASHI.Physics.Closure.NSTriadKNAdverseEpisodeSignedForcingRound106Exact w
 -- Only an episode touching the initial time carries an initial phase boundary.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; true)
+open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base using
-  (ℚ; 0ℚ; _+_; _*_; _≤_; NonNegative; nonNegative)
+  (ℚ; 0ℚ; _+_; _*_; -_; _≤_; NonNegative; nonNegative)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 import DASHI.Physics.Closure.NSTriadKNSignedPhaseTimeNormalFormRound106Exact as Normal
 
@@ -74,7 +74,7 @@ adverseEpisodePaidByInitialPhaseAndSignedForcing E =
       in ℚP.nonNegative⁻¹ (g * aT)
 
     negTerminalRaw : -(g * aT) ≤ - 0ℚ
-    negTerminalRaw = ℚP.neg-mono-≤ terminalProductNN
+    negTerminalRaw = ℚP.neg-antimono-≤ terminalProductNN
 
     negTerminal≤Zero : -(g * aT) ≤ 0ℚ
     negTerminal≤Zero =
@@ -91,7 +91,7 @@ adverseEpisodePaidByInitialPhaseAndSignedForcing E =
       subst
         (λ right →
           g * a0 + (- (g * aT)) + g * f ≤ right)
-        (solve (g ∷ a0 ∷ f ∷ []))
+        (cong (λ y → y + g * f) (ℚP.+-identityʳ (g * a0)))
         second
   in
   subst
@@ -117,10 +117,16 @@ interiorEpisodePaidExactlyBySignedForcing :
 interiorEpisodePaidExactlyBySignedForcing E
   rewrite Normal.signedPhaseTimeNormalForm (cell (episode E))
         | initialAmplitudeZero E
-        | terminalAmplitudeZero E =
-  solve
-    ( Normal.normalFormWeight (cell (episode E))
-    ∷ Normal.integratedForcing (cell (episode E)) ∷ [])
+        | terminalAmplitudeZero E
+        | ℚP.*-zeroʳ (Normal.normalFormWeight (cell (episode E))) =
+  trans
+    (cong
+      (λ y → y + Normal.normalFormWeight (cell (episode E))
+        * Normal.integratedForcing (cell (episode E)))
+      (solve []))
+    (ℚP.+-identityˡ
+      (Normal.normalFormWeight (cell (episode E))
+        * Normal.integratedForcing (cell (episode E))))
 
 sumEpisodeProduction : List AdverseSignedForcingEpisode → ℚ
 sumEpisodeProduction [] = 0ℚ

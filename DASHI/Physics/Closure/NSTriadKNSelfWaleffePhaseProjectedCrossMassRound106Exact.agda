@@ -31,7 +31,7 @@ module DASHI.Physics.Closure.NSTriadKNSelfWaleffePhaseProjectedCrossMassRound106
 -- should enter the later occupation/Schur budget.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; true)
+open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
