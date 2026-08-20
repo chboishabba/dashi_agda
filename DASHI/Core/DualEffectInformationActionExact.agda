@@ -11,7 +11,7 @@ module DASHI.Core.DualEffectInformationActionExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Product using (_×_; _,_)
+open import Data.Empty using (⊥)
 
 record DualEffectAction
     (World Information Action : Set) : Set₁ where
@@ -103,7 +103,7 @@ record InformationSeparatingAction
     differAfter :
       observe (informationStep system action left)
       ≡ observe (informationStep system action right) →
-      Data.Empty.⊥
+      ⊥
 
 ------------------------------------------------------------------------
 -- No theorem says every separating action is worth taking: cost, welfare,
