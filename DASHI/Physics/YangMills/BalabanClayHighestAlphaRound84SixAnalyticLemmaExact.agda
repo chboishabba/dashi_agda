@@ -11,8 +11,7 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound84SixAnalyticLemmaExa
 -- continuous OS translation group on a common dense core, equality with H_OS is
 -- Stone-generator uniqueness, not another four-dimensional Yang--Mills lemma.
 --
--- This file also records two trust-boundary corrections discovered while doing
--- the actual source archaeology:
+-- Two trust-boundary corrections remain authoritative:
 --
 -- (i) beta_j's marginal coupling history must NOT be assumed exponentially
 --     forgotten.  CMP109 explicitly says dependence on g_{j-1} is important.
@@ -23,6 +22,19 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound84SixAnalyticLemmaExa
 -- (ii) beta-memory depth, physical spatial separation, and OPE truncation depth
 --      are distinct typed marks.  One differentiated analytic theorem may be
 --      uniform over the mark kind, but no equality of those metrics is used.
+--
+-- ROUND84 L2 SHRINKING
+--
+-- CMP116 Sect. 1 explicitly differentiates decoupled localized activities by
+-- Cauchy formula and retains the positive exponential localization in (1.29),
+-- Lemma 1.  Therefore "differentiation preserves source localization" is
+-- source-owned.  Separately, exponential forgetting of an IRRELEVANT RG
+-- coordinate follows generically from q-contraction plus a Lipschitz beta
+-- projection.  The live L2 theorem is consequently the literal identification
+-- of the three physical marks with these source coordinates, together with
+-- positive cutoff-uniform analytic radii/constants and the literal projection
+-- bounds.  The count stays six because that same-object identification is still
+-- genuine physical analysis; two decay proofs have merely become downstream.
 --
 -- CURRENT STRICT COUNT
 --
@@ -42,6 +54,8 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound83SevenAnalyticLemmaExact
 import DASHI.Physics.YangMills.BalabanBetaHistoryLocalizedInfluenceExact
 import DASHI.Physics.YangMills.BalabanSharedMarkedAnalyticShellExact
+import DASHI.Physics.YangMills.BalabanCMP116DifferentiatedLocalizationSourceExact
+import DASHI.Physics.YangMills.BalabanIrrelevantRGMemoryContractionExact
 import DASHI.Physics.YangMills.BalabanCompactSimplePositiveBetaFromSharedMarkedShellExact
 import DASHI.Physics.YangMills.CompactSimpleClassificationAdjointCasimirExact
 import DASHI.Physics.YangMills.BalabanCMP109CompactSimpleColourReductionSourceExact
@@ -84,16 +98,26 @@ literalCompactSimpleOneLoopAndLocalRemainderLevel = conditional
 
 -- L2 / A2 + hard source mark consumed by B2a/C1-tail.
 --
--- Prove one MARK-PARAMETRIC differentiated source-locality theorem and its
--- literal same-object projections, with distinct grades:
---   beta mark      = localized irrelevant/polymer RG memory at fixed marginal data;
---   Hessian mark   = physical-spatial influence separation;
---   composite mark = RG/OPE truncation/source insertion separation.
+-- The source/generic DECAY machinery is no longer new:
+--   * CMP116 Cauchy differentiation preserves localized activity decay;
+--   * q-contractivity of an irrelevant RG coordinate + Lipschitz beta projection
+--     gives its geometric memory tail;
+--   * source positive exponential rate -> dyadic coarse width is standard real
+--     analysis;
+--   * existing exact compilers turn marked bounds into the weighted spatial
+--     Hessian row and vanishing composite tail.
 --
--- The beta mark does NOT include the marginal g_{j-1} dependence.  Existing
--- exact compilers turn the three marked estimates into a uniform irrelevant-
--- memory beta budget, a weighted spatial Hessian row, and a vanishing composite
--- tail.  Source exponential->dyadic shell-width selection is standard analysis.
+-- What remains physical is SAME-OBJECT identification, with distinct grades:
+--   beta mark      = localized irrelevant/polymer coordinate at fixed marginal data;
+--   Hessian mark   = literal physical-spatial second variation of the SAME density;
+--   composite mark = literal local source/composite derivative and OPE truncation.
+-- Prove these are the corresponding CMP116/source analytic coordinates, with
+-- positive cutoff/volume/scale-uniform radii/constants and the required
+-- projection/Lipschitz bounds.  The beta mark does NOT include g_{j-1}.
+physicalMarkedAnalyticCoordinateRadiusAndProjectionLevel : ProofLevel
+physicalMarkedAnalyticCoordinateRadiusAndProjectionLevel = conditional
+
+-- Compatibility name for prior Round84 imports/status readers.
 physicalMarkedAnalyticSourceAndProjectionLevel : ProofLevel
 physicalMarkedAnalyticSourceAndProjectionLevel = conditional
 
@@ -164,10 +188,15 @@ reducedGhostFinitePrefixTailAlgebraLevel = machineChecked
 compactSimpleTwoChannelPositiveBetaAssemblyLevel : ProofLevel
 compactSimpleTwoChannelPositiveBetaAssemblyLevel = machineChecked
 
--- Deliberate NON-GOAL (not represented by a ProofLevel field): there is no
--- theorem asserting exponential forgetting of the marginal running coupling.
--- CMP109 says the g_{j-1} dependence is important.  Only the irrelevant-memory
--- coordinate is localized/contractive on this route.
+-- Deliberate NON-GOAL: there is no theorem asserting exponential forgetting of
+-- the marginal running coupling.  Only the irrelevant coordinate is contractive
+-- on this route.
+
+cmp116DifferentiatedActivityLocalizationLevel : ProofLevel
+cmp116DifferentiatedActivityLocalizationLevel = standardImported
+
+irrelevantRGMemoryContractionToDyadicTailLevel : ProofLevel
+irrelevantRGMemoryContractionToDyadicTailLevel = machineChecked
 
 sourceExponentialToDyadicWidthLevel : ProofLevel
 sourceExponentialToDyadicWidthLevel = standardImported
