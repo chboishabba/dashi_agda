@@ -198,3 +198,5 @@ a dark-matter abundance or cosmology.
 ```
 
 They establish a precise typed interface by which such calibrated physics can later be connected without confusing portal interactions, hidden projections, metastability, boosted geometry, reconstruction, trigger selection, and empirical evidence.
+
+Validation is performed by the combined pinned Agda workflow on a temporary branch whose base already contains the updated workflow definition.
