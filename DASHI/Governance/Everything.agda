@@ -51,3 +51,22 @@ import DASHI.Governance.Sudan.RCEPPRegression
 ------------------------------------------------------------------------
 -- Developmental agency / epistemic-attractor / causal-resolution theorem lane.
 import DASHI.Governance.DevelopmentalConsentAttractorEverything
+import DASHI.Governance.EmancipatoryTransitionSafety
+-- Provenance-bearing quotient / policy-routing / corrective-reachability lane.
+import DASHI.Governance.ProvenancePolicyTransport
+import DASHI.Governance.ProvenanceRestitutionBoundary
+import DASHI.Governance.QuotientDefectResidualRouting
+import DASHI.Governance.GovernanceQuotientCoreBridge
+import DASHI.Governance.SelectiveMultiResidualRouting
+import DASHI.Governance.TraumaWeightingTerminalisationLift
+import DASHI.Governance.AsymmetricReflectionPropositionLocality
+import DASHI.Governance.CorrectiveReachabilityEquivariance
+import DASHI.Governance.RelationPolicyTransportComposition
+import DASHI.Governance.DomainIndexedPeaceSubjectCarrier
+import DASHI.Governance.TransitionGovernanceOperatorAdapter
+import DASHI.Governance.MiddleEastProvenancePolicyRouting
+-- Source-bounded/symbolic application surfaces.  These do not promote the
+-- generic structural operators into empirical motive, guilt, or ideology.
+import DASHI.Governance.AmalekProvenanceRoleBinding
+import DASHI.Governance.PopulistPlutocraticDualProjection
+import DASHI.Governance.IranUS2026RestitutionObservation
