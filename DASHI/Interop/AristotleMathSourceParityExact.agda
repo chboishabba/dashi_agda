@@ -120,8 +120,8 @@ deltaWordGraphsParity = aristotleMathModuleParity
   272
   32
   partial
-  "DASHI.Moonshine.ClassicalHeckeWeightKSmallWordExact;DASHI.Moonshine.Hecke23AntiparallelExact"
-  "word multipliers/algebraic normalization partly ported; 60-term certified tau table, finite-range coefficient equalities, divisibility/trinity, norm/log/phase graph theorems remain"
+  "DASHI.Moonshine.ClassicalHeckeWeightKSmallWordExact;DASHI.Moonshine.Hecke23AntiparallelExact;DASHI.Moonshine.AristotleDeltaWordT2T3FiniteParityExact"
+  "five source word multipliers and the certified m=1..3 T2/T3 comparison rows are ported; 60-term tau table, wider finite-range coefficient equalities, divisibility/trinity, norm/log/phase graph theorems remain"
 
 fibVortexParity : AristotleMathModuleParity
 fibVortexParity = aristotleMathModuleParity
@@ -139,9 +139,9 @@ hecke23Parity = aristotleMathModuleParity
   "c433699f95c7f067c772fd9223e444869ba4e4e54907b37d4db34616572676bc"
   115
   10
-  partial
-  "DASHI.Moonshine.RamanujanTauHecke23Exact;DASHI.Moonshine.ClassicalHeckeWeightKSmallWordExact"
-  "small Hecke recurrences/closed identities ported; abstract HeckeSystem, smooth uniqueness, satisfiable divisor-count example, and trinity_smooth remain"
+  substantialCore
+  "DASHI.Moonshine.AristotleHeckeRecurrenceCoreExact;DASHI.Moonshine.RamanujanTauHecke23Exact;DASHI.Moonshine.ClassicalHeckeWeightKSmallWordExact"
+  "prime-power recurrence uniqueness and exact two-prime smooth assembly are ported together with low closed identities; full Nat HeckeSystem coprime packaging, divisor-count example, and source Set Smooth3 packaging remain"
 
 heckeGeneralParity : AristotleMathModuleParity
 heckeGeneralParity = aristotleMathModuleParity
@@ -149,9 +149,9 @@ heckeGeneralParity = aristotleMathModuleParity
   "a45235046a9f46c7fb0b8c86282db5be52f8637ee309096e0dfbc0b4b013c2cf"
   155
   8
-  unportedCore
-  "DASHI.Moonshine.CandidateLevelRepresentationHeckeSquareExact"
-  "candidate/intertwiner boundary exists, but S-smooth uniqueness, all-prime determination, finite separating bound, and a_zero_undetermined are not ported"
+  partial
+  "DASHI.Moonshine.AristotleHeckeRecurrenceCoreExact;DASHI.Moonshine.AristotleHeckeGeneralPrimePowerDecompositionExact;DASHI.Moonshine.CandidateLevelRepresentationHeckeSquareExact"
+  "stdlib constructive raw factorisation plus arbitrary-S closure on pairwise-coprime prime-power decompositions are ported; canonical grouping of raw repeated prime factors into prime-power blocks, finite separating bound, and a_zero_undetermined remain"
 
 heckeWordsParity : AristotleMathModuleParity
 heckeWordsParity = aristotleMathModuleParity
@@ -159,9 +159,9 @@ heckeWordsParity = aristotleMathModuleParity
   "893eaa885ca57e4698767e38903a02e20702086cb0661e64f295b504d2589a03"
   223
   26
-  partial
-  "DASHI.Moonshine.ClassicalHeckeWeightKSmallWordExact;DASHI.Moonshine.RamanujanTauHecke23Exact"
-  "small word normalization/eigenvalue identities ported; full finitely-supported Hecke algebra multiplication/evaluation surface and all source polynomials remain"
+  substantialCore
+  "DASHI.Moonshine.ClassicalHeckeWeightKSmallWordExact;DASHI.Moonshine.AristotleHeckeWordsSourceParityExact;DASHI.Moonshine.RamanujanTauHecke23Exact"
+  "recursive finite word interpreter and all five source word normal forms are ported over the classical divisor-sum structure constants; generic CommRing/Finsupp evaluation presentation remains representation-distinct and source evalT packaging remains"
 
 mainParity : AristotleMathModuleParity
 mainParity = aristotleMathModuleParity
@@ -200,8 +200,8 @@ t2vsT3Parity = aristotleMathModuleParity
   287
   34
   partial
-  "DASHI.Moonshine.Hecke23AntiparallelExact"
-  "division-free antiparallel relation and selected multiplier facts ported; product/difference/quotient/power/remainder finite-table and trinity behavior mostly remain"
+  "DASHI.Moonshine.Hecke23AntiparallelExact;DASHI.Moonshine.AristotleDeltaWordT2T3FiniteParityExact"
+  "division-free antiparallel relation plus certified m=1..3 product/difference/Lean-integer quotient/remainder plate are ported; wider finite table, power and trinity behavior remain"
 
 t2vsT3DeltaParity : AristotleMathModuleParity
 t2vsT3DeltaParity = aristotleMathModuleParity

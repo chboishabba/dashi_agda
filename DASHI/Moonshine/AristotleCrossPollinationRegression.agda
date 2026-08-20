@@ -13,6 +13,7 @@ import DASHI.Arithmetic.FibonacciNonaryPeriodExact as Fibonacci
 import DASHI.Arithmetic.FinitePrimeProductSieveExact as ProductSieve
 import DASHI.Arithmetic.SixWheelCRTExact as CRT
 import DASHI.Arithmetic.SixWheelSieveCountExact as Wheel
+import DASHI.Moonshine.AristotleDeltaWordT2T3FiniteParityExact as FinitePlate
 import DASHI.Moonshine.ClassicalHeckeWeightKSmallWordExact as Hecke
 import DASHI.Moonshine.Hecke23AntiparallelExact as Antiparallel
 import DASHI.Moonshine.RamanujanTauHecke23Exact as Tau
@@ -77,6 +78,32 @@ antiparallelAtTauSix :
   (-[1+ 1 ]) * Antiparallel.hecke3ScaledCoefficient Tau.tau6
 antiparallelAtTauSix =
   Antiparallel.hecke23AntiparallelCrossMultiplied Tau.tau6
+
+-- Direct source-parity checks imported from RequestProject.DeltaWordGraphs and
+-- RequestProject.T2vsT3.  These remain finite checks, not global claims.
+finiteWordMultiplierT2T3T2 :
+  FinitePlate.wordMultiplierT2T3T2 ≡ + 145152
+finiteWordMultiplierT2T3T2 = refl
+
+finiteWordMultiplierT3Cubed :
+  FinitePlate.wordMultiplierT3T3T3 ≡ + 16003008
+finiteWordMultiplierT3Cubed = refl
+
+finiteComparisonSample2Quotient :
+  FinitePlate.integerQuotientSample FinitePlate.sample2 ≡ + 0
+finiteComparisonSample2Quotient = refl
+
+finiteComparisonSample2Remainder :
+  FinitePlate.integerRemainderSample FinitePlate.sample2 ≡ + 576
+finiteComparisonSample2Remainder = refl
+
+finiteComparisonSample3Reconstructs :
+  FinitePlate.wordT2Sample FinitePlate.sample3
+  ≡ FinitePlate.wordT3Sample FinitePlate.sample3
+      * FinitePlate.integerQuotientSample FinitePlate.sample3
+      + FinitePlate.integerRemainderSample FinitePlate.sample3
+finiteComparisonSample3Reconstructs =
+  FinitePlate.euclideanReconstruction FinitePlate.sample3
 
 phaseOneReflectsToPhaseThree :
   (coefficients : List ℤ) →
