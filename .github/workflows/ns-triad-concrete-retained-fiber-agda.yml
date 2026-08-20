@@ -14,7 +14,7 @@ on:
   workflow_dispatch:
 
 concurrency:
-  group: dashi-global-${{ github.ref }}
+  group: ns-triad-physical-frontier-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:
