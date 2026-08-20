@@ -3,12 +3,13 @@ module DASHI.Moonshine.DuncanSwisherDworkSharpnessHighestAlphaRegression where
 ------------------------------------------------------------------------
 -- Focused regression for the Dwork / Legendre sharpness dependency reversal.
 --
--- The key point is not another 3/2/1 table.  These values are now theorem
--- outputs of
+-- Exceptional 3/2 exponents are now algebraic outputs of the exact Legendre
+-- j-factorization.  The genuine analytic boundary is split into:
 --
---   local J ramification + Dwork A1 valuation transfer.
+--   local p-adic Legendre/J geometry
+--   + Dwork n=1 A1 valuation transfer.
 --
--- The repository's older integer `VpDepth` machinery is now reused only as an
+-- The repository's older integer `VpDepth` machinery is reused only as an
 -- executable algebraic shadow of the same strict-minimum valuation interface.
 -- It is not identified with Dwork's p-adic analytic carrier.  `VpTrue` also no
 -- longer postulates a universal self-fuel adequacy theorem; stabilization is
@@ -24,8 +25,12 @@ import DASHI.Moonshine.DuncanSwisherDeligneAutomorphismDepthBridgeExact as Aut
 import DASHI.Moonshine.DuncanSwisherDworkRamifiedA1SharpnessExact as Dwork
 import DASHI.Moonshine.DuncanSwisherDworkExceptionalPartialFractionSharpnessExact as PFSharp
 import DASHI.Moonshine.DuncanSwisherDworkVpDepthShadowExact as Shadow
+import DASHI.Moonshine.DuncanSwisherDworkExceptionalAnalyticCutsetExact as AnalyticCut
 import DASHI.Moonshine.DuncanSwisherDelignePartialFractionMechanismExact as PF
 import DASHI.Moonshine.DuncanSwisherLegendreRamificationDepthExact as Legendre
+import DASHI.Moonshine.LegendreJExceptionalPolynomialFactorizationExact as JFactor
+import DASHI.Moonshine.LegendreExceptionalBranchSimpleRootExact as SimpleRoot
+import DASHI.Moonshine.LegendreJExceptionalLocalValuationCutsetExact as LocalCut
 import DASHI.Moonshine.P11GeometricSupersingularCarrierExact as Geo
 import DASHI.Moonshine.P11EichlerDeuringStackUnweightingExact as Stack11
 
@@ -97,6 +102,38 @@ vpDepthShadowNotPromotedToDworkCarrierRegression :
   Shadow.DworkPadicCarrierConstructedHere
     Shadow.canonicalDuncanSwisherDworkVpDepthShadowBoundary ≡ false
 vpDepthShadowNotPromotedToDworkCarrierRegression = refl
+
+------------------------------------------------------------------------
+-- New cutset: exceptional exponents are algebraic; analytic authorities split.
+------------------------------------------------------------------------
+
+jZeroExponentAlgebraicRegression :
+  JFactor.exceptionalRamificationExponent JFactor.jZeroQuadraticBranch ≡ 3
+jZeroExponentAlgebraicRegression = JFactor.jZeroRamificationExponentIsThree
+
+j1728ExponentAlgebraicRegression :
+  JFactor.exceptionalRamificationExponent JFactor.j1728LambdaMinusTwo ≡ 2
+j1728ExponentAlgebraicRegression = refl
+
+simpleRootResidueUnitStillNotFabricatedRegression :
+  SimpleRoot.residueNonzeroImpliesPadicUnitConstructedHere
+    SimpleRoot.canonicalLegendreExceptionalBranchSimpleRootBoundary ≡ false
+simpleRootResidueUnitStillNotFabricatedRegression = refl
+
+freeRamificationExponentRejectedRegression :
+  LocalCut.freeNumericRamificationExponentAcceptedFromSource
+    LocalCut.canonicalLegendreJExceptionalLocalValuationCutsetBoundary ≡ false
+freeRamificationExponentRejectedRegression = refl
+
+A1TransferSeparatedFromGeometryRegression :
+  AnalyticCut.A1ValuationTransferAuthoritySeparated
+    AnalyticCut.canonicalDuncanSwisherDworkExceptionalAnalyticCutsetBoundary ≡ true
+A1TransferSeparatedFromGeometryRegression = refl
+
+numericA1DepthNotSuppliedByNewCutsetRegression :
+  AnalyticCut.numericA1DepthSuppliedBySource
+    AnalyticCut.canonicalDuncanSwisherDworkExceptionalAnalyticCutsetBoundary ≡ false
+numericA1DepthNotSuppliedByNewCutsetRegression = refl
 
 numericA1TableNotAuthorityRegression :
   Dwork.numericA1DepthTableImportedSeparately
