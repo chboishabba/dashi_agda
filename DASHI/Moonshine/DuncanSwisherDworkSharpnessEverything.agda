@@ -5,8 +5,8 @@ module DASHI.Moonshine.DuncanSwisherDworkSharpnessEverything where
 --
 --   exact Legendre exceptional polynomial factorization
 --     -> algebraically forced ramification exponent 3/2
---     -> finite exceptional residue certificates
---     -> complete-DVR/Hensel lift lambda0
+--     -> explicit p=5,7,11 certified exceptional residue points
+--     -> standard Hensel lift lambda0 of that finite centre
 --     -> lambda := lambda0 + pi
 --     -> lambda-lambda0 = pi*1
 --     -> actual simple branch + rational J-alpha factors
@@ -38,6 +38,7 @@ import DASHI.Moonshine.LegendreExceptionalBranchSimpleRootExact
 import DASHI.Moonshine.LegendreJExceptionalLocalValuationCutsetExact
 import DASHI.Moonshine.LegendreJExceptionalResidueLocalProducerExact
 import DASHI.Moonshine.LegendreExceptionalPadicLiftSameObjectExact
+import DASHI.Moonshine.LegendreExceptionalCertifiedResiduePointsExact
 import DASHI.Moonshine.LegendreExceptionalPadicHenselConstructionExact
 import DASHI.Moonshine.P5LegendreJZeroF25ResidueExact
 import DASHI.Moonshine.P7P11LegendreJ1728ResidueCertificatesExact
