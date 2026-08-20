@@ -31,24 +31,33 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound83SevenAnalyticLemmaE
 --    two same-measure estimates are supplied, there is no additional 4D YM
 --    lemma hiding in the optimization.
 --
--- 2. A2 and the hard spatial-decay content of B2a are projections of ONE
---    source-native marked differentiated activity.  Round83's
---    `BalabanSharedMarkedAnalyticShellExact` makes this exact and adds the third
---    composite projection.  One rooted estimate
+-- 2. A2 and the hard decay input consumed by B2a can be proved through ONE
+--    source-native MARK-PARAMETRIC differentiated analytic norm.  Round83's
+--    `BalabanSharedMarkedAnalyticShellExact` adds the composite mark as well.
 --
---       A_d <= C (1/4) 2^-d
+--    IMPORTANT: the physical grades are NOT identified.  The three marks are
 --
---    now yields
+--       betaMark      = preceding-RG-scale separation,
+--       hessianMark   = physical-spatial influence separation,
+--       compositeMark = RG/OPE truncation depth.
 --
---       beta-history tail       <= (C/2) 2^-n,
---       composite/OPE tail      <= (C/2) 2^-n,
---       weighted Hessian row    <= C.
+--    Each has its own C_k and rooted-shell estimate
+--
+--       A_k(d_k) <= C_k (1/4) 2^-d_k.
+--
+--    The single theorem family is uniform over the mark kind, while the metrics
+--    remain typed and distinct.  Its downstream consequences are
+--
+--       beta-history tail       <= (C_beta/2) 2^-n,
+--       composite/OPE tail      <= (C_OPE/2) 2^-n,
+--       weighted spatial Hessian row <= C_H.
 --
 --    The weighted Dyson/Gronwall algebra is already theorem-bearing.  On the
 --    compact-group heat/Doob carrier, the Bochner covariant-gradient identity is
 --    standard Riemannian diffusion theory.  Thus the NEW YM statement is the
---    same-object marked shell plus its literal beta/Hessian/composite
---    identifications, not a second independent Lieb--Robinson theorem.
+--    mark-parametric source estimate plus its literal beta/Hessian/composite
+--    identifications, not a second independent Lieb--Robinson theorem and not a
+--    false equality between RG depth and spatial distance.
 --
 -- 3. B1 is sharpened rather than hidden.  `BalabanPolchinskiShellIntegralDebtExact`
 --    proves that if the actual negative-curvature integral I_n on each heat
@@ -58,13 +67,13 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound83SevenAnalyticLemmaE
 --
 --    uniformly.  Only the per-shell continuous-time comparison remains new.
 --
--- 4. C1b's pure remainder DECAY is downstream of the shared marked composite
---    shell: `YangMillsSharedMarkedCompositeOPERemainderExact` constructs the
---    existing `DyadicOPERemainderMajorant` with coefficient C/2.  What remains
---    new is the physical composite/OPE identification and AF coefficient
---    matching, not a second geometric convergence proof.
+-- 4. C1b's pure remainder DECAY is downstream of the composite mark:
+--    `YangMillsSharedMarkedCompositeOPERemainderExact` constructs the existing
+--    `DyadicOPERemainderMajorant` with coefficient C_OPE/2.  What remains new is
+--    physical composite/OPE identification and AF coefficient matching, not a
+--    second geometric convergence proof.
 --
--- 5. C2's finite periodic Ward -> conserved slice-charge algebra is now exact in
+-- 5. C2's finite periodic Ward -> conserved slice-charge algebra is exact in
 --    `YangMillsLatticeStressWardSliceConservationExact`.  What remains is the
 --    renormalized continuum stress construction and identification of its charge
 --    with the SAME OS translation generator.
@@ -72,12 +81,12 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound83SevenAnalyticLemmaE
 -- CURRENT STRICT COUNT
 --
 --   5 independent packages
---   7 genuinely new physical analytic lemmas
+--   7 genuinely new physical analytic lemma families
 --
 -- A future decrement is legitimate only if one of the seven conditional roles
--- below is proved, or is rigorously shown to be a consequence of another role
--- plus standard/source-owned analysis.  Wrappers and renamed premises do not
--- change the count.
+-- below is proved, or rigorously shown to be a consequence of another role plus
+-- standard/source-owned analysis.  Wrappers, untyped metric identifications and
+-- renamed premises do not change the count.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
@@ -107,7 +116,7 @@ round83HardAnalyticLemmaUpperCount : Nat
 round83HardAnalyticLemmaUpperCount = 7
 
 ------------------------------------------------------------------------
--- SEVEN LIVE NEW PHYSICAL ANALYTIC LEMMAS
+-- SEVEN LIVE NEW PHYSICAL ANALYTIC LEMMA FAMILIES
 ------------------------------------------------------------------------
 
 -- L1 / A1.
@@ -119,11 +128,11 @@ literalWilsonFPHaarWardScalarIdentificationLevel : ProofLevel
 literalWilsonFPHaarWardScalarIdentificationLevel = conditional
 
 -- L2 / A2+B2a+C1-tail shared producer.
--- Instantiate ONE source-native marked differentiated activity shell, uniformly
--- in volume/cutoff/scale/admissible history, and prove the literal beta-history,
--- Langevin-Hessian influence, and composite-insertion responses are projections
--- of it.  Existing exact compilers then give beta/composite vanishing tails and
--- the exponentially weighted Hessian row.
+-- Instantiate ONE mark-parametric differentiated source norm, uniformly in
+-- volume/cutoff/scale/admissible history, and prove the literal beta-history,
+-- physical-spatial Langevin-Hessian influence, and composite-insertion responses
+-- are the corresponding typed marks.  Existing exact compilers then give the
+-- two RG/OPE vanishing tails and the spatial exponentially weighted Hessian row.
 physicalSharedMarkedAnalyticShellAndProjectionLevel : ProofLevel
 physicalSharedMarkedAnalyticShellAndProjectionLevel = conditional
 
@@ -142,7 +151,7 @@ sameFamilyRenormalizedCurvatureCompositeExistenceLevel : ProofLevel
 sameFamilyRenormalizedCurvatureCompositeExistenceLevel = conditional
 
 -- L5 / C1b after removal of the geometric-tail sublemma.
--- Identify the physical composite product remainder with the shared marked tail
+-- Identify the physical composite product remainder with the composite-mark tail
 -- and identify the OPE coefficients with the asymptotically-free Yang--Mills
 -- short-distance coefficients.  The pure `R_D -> 0` dyadic modulus is now
 -- machine downstream once this same-family identification is supplied.
