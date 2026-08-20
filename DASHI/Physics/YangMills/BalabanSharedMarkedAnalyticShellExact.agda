@@ -1,7 +1,7 @@
 module DASHI.Physics.YangMills.BalabanSharedMarkedAnalyticShellExact where
 
 ------------------------------------------------------------------------
--- ROUND83: ONE MARKED ANALYTIC SHELL -> THREE CLAY-FACING CONSUMERS
+-- ROUND83: ONE MARK-KIND-UNIFORM ANALYTIC NORM -> THREE CLAY CONSUMERS
 --
 -- PRIMARY SOURCES / CALIBRATION
 --
@@ -37,42 +37,40 @@ module DASHI.Physics.YangMills.BalabanSharedMarkedAnalyticShellExact where
 -- of Irreversible Quantum Dynamics", Contemporary Mathematics 552 (2011),
 -- 161--175. DOI: 10.1090/conm/552/10916.
 --
--- DASHI CONTRIBUTION
+-- DASHI CONTRIBUTION / IMPORTANT GRADE CORRECTION
 --
--- The same differentiated, marked local activity appears in three places on
--- the shortest Clay route:
+-- The same differentiated source-native analytic NORM is consumed with three
+-- different marks:
 --
---   (A2) changing an earlier coupling changes the local polarization/beta;
---   (B2) differentiating the effective action gives the Langevin influence row;
---   (C1) differentiating with a local source gives composite/OPE increments.
+--   betaMark       : separation in preceding RG history / scale,
+--   hessianMark    : physical-spatial influence separation,
+--   compositeMark  : RG/OPE truncation depth.
 --
--- Do not prove three unrelated exponential-decay theorems.  Put all three
--- projections below ONE positive analytic shell A_d and prove only
+-- THESE DEPTHS ARE NOT IDENTIFIED.  Earlier drafts used one untyped `depth` and
+-- could be read as equating RG scale distance with physical spatial distance.
+-- Round83 corrects that: the source theorem is uniform over `MarkedResponseKind`,
+-- but each mark has its own shell and constant.  What is shared is the analytic
+-- producer/proof method, not the physical metric.
 --
---        A_d <= C * rootedShell_d,
---        rootedShell_d <= (1/4) 2^{-d}.
+-- For each declared mark k prove
+--
+--       A_k(d) <= C_k * rootedShell_k(d),
+--       rootedShell_k(d) <= (1/4) 2^-d.
 --
 -- The existing rooted-KP, scale-Cauchy, and weighted-Hessian compilers then
--- imply, uniformly in finite volume/cutoff,
+-- imply the correctly typed consequences
 --
---   sum_{d<n} beta_d      <= C/2,
---   sum_{d<n} composite_d <= C/2,
---   sum_{d=n}^{n+k-1} beta_d      <= (C/2) 2^{-n},
---   sum_{d=n}^{n+k-1} composite_d <= (C/2) 2^{-n},
---   sum_{d<n} (3/2)^d h_d <= C.
+--   beta tail(n,k)      <= (C_beta/2) 2^-n,
+--   composite tail(n,k) <= (C_OPE/2) 2^-n,
+--   weighted spatial Hessian row <= C_H.
 --
--- The two tail inequalities are the important Round83 strengthening: the
--- composite projection now carries an explicit cutoff-uniform remainder modulus
--- tending geometrically to zero with the starting scale.  That is the exact
--- quantitative object consumed by the OPE lane; it is not merely a bounded
--- prefix estimate.
+-- The beta and composite grades may both be RG-related but are still kept as
+-- different marks because their literal source insertions differ.  The Hessian
+-- grade is explicitly spatial.
 --
--- Thus a single source-native marked analytic norm can control beta-history
--- stability, quasi-local stochastic propagation, and the geometric OPE tail.
--- The physical work is the one SAME-OBJECT analytic-shell estimate and the
--- identification of the three declared projections with the literal YM
--- quantities.  This file proves the downstream inequalities; it does not mark
--- that physical producer as completed.
+-- The physical work is therefore ONE mark-parametric differentiated analytic
+-- theorem plus same-object identification of each mark with its literal YM
+-- response.  It is not a claim that the three notions of distance coincide.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
@@ -90,14 +88,20 @@ import DASHI.Physics.YangMills.BalabanClayT2UrsellCauchyExact as Ursell
 import DASHI.Physics.YangMills.BalabanTraceKoteckyPreissGeometricExact as Geo
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
 
+data MarkedResponseKind : Set where
+  betaMark hessianMark compositeMark : MarkedResponseKind
+
 record SharedMarkedAnalyticShellControl
     (Scale Volume Root : Set) : Set₁ where
   field
-    kpShell : StepV.UniformRootedShellBound Scale Volume Root
+    -- A mark-parametric source theorem.  `depth` is interpreted only relative to
+    -- the selected mark; no cross-mark equality of physical distances is used.
+    kpShell : MarkedResponseKind → StepV.UniformRootedShellBound Scale Volume Root
 
-    analyticShell : Scale → Volume → Root → Nat → ℚ
-    analyticConstant : ℚ
-    analyticConstantNonnegative : 0ℚ ≤ analyticConstant
+    markedAnalyticShell :
+      MarkedResponseKind → Scale → Volume → Root → Nat → ℚ
+    markedConstant : MarkedResponseKind → ℚ
+    markedConstantNonnegative : ∀ kind → 0ℚ ≤ markedConstant kind
 
     betaHistoryShell : Scale → Volume → Root → Nat → ℚ
     hessianInfluenceShell : Scale → Volume → Root → Nat → ℚ
@@ -110,43 +114,59 @@ record SharedMarkedAnalyticShellControl
     compositeInsertionShellNonnegative : ∀ scale volume root depth →
       0ℚ ≤ compositeInsertionShell scale volume root depth
 
-    analyticShellBelowRooted : ∀ scale volume root depth →
-      analyticShell scale volume root depth
-      ≤ analyticConstant * StepV.rootedShell kpShell scale volume root depth
+    markedAnalyticShellBelowRooted :
+      ∀ kind scale volume root depth →
+      markedAnalyticShell kind scale volume root depth
+      ≤ markedConstant kind
+        * StepV.rootedShell (kpShell kind) scale volume root depth
 
     betaBelowAnalytic : ∀ scale volume root depth →
       betaHistoryShell scale volume root depth
-      ≤ analyticShell scale volume root depth
+      ≤ markedAnalyticShell betaMark scale volume root depth
 
     hessianBelowAnalytic : ∀ scale volume root depth →
       hessianInfluenceShell scale volume root depth
-      ≤ analyticShell scale volume root depth
+      ≤ markedAnalyticShell hessianMark scale volume root depth
 
     compositeBelowAnalytic : ∀ scale volume root depth →
       compositeInsertionShell scale volume root depth
-      ≤ analyticShell scale volume root depth
+      ≤ markedAnalyticShell compositeMark scale volume root depth
 
 open SharedMarkedAnalyticShellControl public
+
+betaAnalyticConstant :
+  ∀ {Scale Volume Root} → SharedMarkedAnalyticShellControl Scale Volume Root → ℚ
+betaAnalyticConstant dataSet = markedConstant dataSet betaMark
+
+hessianAnalyticConstant :
+  ∀ {Scale Volume Root} → SharedMarkedAnalyticShellControl Scale Volume Root → ℚ
+hessianAnalyticConstant dataSet = markedConstant dataSet hessianMark
+
+compositeAnalyticConstant :
+  ∀ {Scale Volume Root} → SharedMarkedAnalyticShellControl Scale Volume Root → ℚ
+compositeAnalyticConstant dataSet = markedConstant dataSet compositeMark
 
 responseControl :
   ∀ {Scale Volume Root}
     (dataSet : SharedMarkedAnalyticShellControl Scale Volume Root)
+    (kind : MarkedResponseKind)
     (response : Scale → Volume → Root → Nat → ℚ) →
     (∀ scale volume root depth →
       response scale volume root depth
-      ≤ analyticShell dataSet scale volume root depth) →
+      ≤ markedAnalyticShell dataSet kind scale volume root depth) →
   Hess.RootedHessianShellControl Scale Volume Root
-responseControl dataSet response responseBelow = record
-  { Hess.RootedHessianShellControl.kpShell = kpShell dataSet
+responseControl dataSet kind response responseBelow = record
+  { Hess.RootedHessianShellControl.kpShell = kpShell dataSet kind
   ; Hess.RootedHessianShellControl.hessianRowShell = response
-  ; Hess.RootedHessianShellControl.derivativeConstant = analyticConstant dataSet
+  ; Hess.RootedHessianShellControl.derivativeConstant = markedConstant dataSet kind
   ; Hess.RootedHessianShellControl.derivativeConstantNonnegative =
-      analyticConstantNonnegative dataSet
+      markedConstantNonnegative dataSet kind
   ; Hess.RootedHessianShellControl.hessianShellBelowActivityShell =
       λ scale volume root depth →
         ℚP.≤-trans
           (responseBelow scale volume root depth)
-          (analyticShellBelowRooted dataSet scale volume root depth)
+          (markedAnalyticShellBelowRooted
+            dataSet kind scale volume root depth)
   }
 
 betaResponseControl :
@@ -154,7 +174,7 @@ betaResponseControl :
   SharedMarkedAnalyticShellControl Scale Volume Root →
   Hess.RootedHessianShellControl Scale Volume Root
 betaResponseControl dataSet =
-  responseControl dataSet (betaHistoryShell dataSet)
+  responseControl dataSet betaMark (betaHistoryShell dataSet)
     (betaBelowAnalytic dataSet)
 
 hessianResponseControl :
@@ -162,7 +182,7 @@ hessianResponseControl :
   SharedMarkedAnalyticShellControl Scale Volume Root →
   Hess.RootedHessianShellControl Scale Volume Root
 hessianResponseControl dataSet =
-  responseControl dataSet (hessianInfluenceShell dataSet)
+  responseControl dataSet hessianMark (hessianInfluenceShell dataSet)
     (hessianBelowAnalytic dataSet)
 
 compositeResponseControl :
@@ -170,7 +190,7 @@ compositeResponseControl :
   SharedMarkedAnalyticShellControl Scale Volume Root →
   Hess.RootedHessianShellControl Scale Volume Root
 compositeResponseControl dataSet =
-  responseControl dataSet (compositeInsertionShell dataSet)
+  responseControl dataSet compositeMark (compositeInsertionShell dataSet)
     (compositeBelowAnalytic dataSet)
 
 betaHistoryPartial :
@@ -192,7 +212,7 @@ betaHistoryPartialBelowHalfAnalyticConstant :
     (dataSet : SharedMarkedAnalyticShellControl Scale Volume Root)
     scale volume root depth →
   betaHistoryPartial dataSet scale volume root depth
-  ≤ StepV.half * analyticConstant dataSet
+  ≤ StepV.half * betaAnalyticConstant dataSet
 betaHistoryPartialBelowHalfAnalyticConstant dataSet =
   Hess.hessianRowPartialBelowHalfDerivativeConstant
     (betaResponseControl dataSet)
@@ -202,31 +222,32 @@ compositeInsertionPartialBelowHalfAnalyticConstant :
     (dataSet : SharedMarkedAnalyticShellControl Scale Volume Root)
     scale volume root depth →
   compositeInsertionPartial dataSet scale volume root depth
-  ≤ StepV.half * analyticConstant dataSet
+  ≤ StepV.half * compositeAnalyticConstant dataSet
 compositeInsertionPartialBelowHalfAnalyticConstant dataSet =
   Hess.hessianRowPartialBelowHalfDerivativeConstant
     (compositeResponseControl dataSet)
 
 ------------------------------------------------------------------------
--- Arbitrary-start Cauchy tails for beta and composite projections.
+-- Arbitrary-start Cauchy tails for the RG-history and OPE marks.
 ------------------------------------------------------------------------
 
 responseScaleMajorant :
   ∀ {Scale Volume Root}
     (dataSet : SharedMarkedAnalyticShellControl Scale Volume Root)
+    (kind : MarkedResponseKind)
     (response : Scale → Volume → Root → Nat → ℚ)
     (responseNonnegative : ∀ scale volume root depth →
       0ℚ ≤ response scale volume root depth)
     (responseBelow : ∀ scale volume root depth →
       response scale volume root depth
-      ≤ analyticShell dataSet scale volume root depth)
+      ≤ markedAnalyticShell dataSet kind scale volume root depth)
     (scale : Scale) (volume : Volume) (root : Root) →
   Cauchy.ScaleLocalIncrementMajorant
-responseScaleMajorant dataSet response responseNonnegative responseBelow
+responseScaleMajorant dataSet kind response responseNonnegative responseBelow
   scale volume root = record
-  { Cauchy.ScaleLocalIncrementMajorant.coefficient = analyticConstant dataSet
+  { Cauchy.ScaleLocalIncrementMajorant.coefficient = markedConstant dataSet kind
   ; Cauchy.ScaleLocalIncrementMajorant.coefficientNonnegative =
-      analyticConstantNonnegative dataSet
+      markedConstantNonnegative dataSet kind
   ; Cauchy.ScaleLocalIncrementMajorant.incrementMagnitude =
       response scale volume root
   ; Cauchy.ScaleLocalIncrementMajorant.incrementNonnegative =
@@ -236,19 +257,20 @@ responseScaleMajorant dataSet response responseNonnegative responseBelow
         let
           first = ℚP.≤-trans
             (responseBelow scale volume root depth)
-            (analyticShellBelowRooted dataSet scale volume root depth)
+            (markedAnalyticShellBelowRooted
+              dataSet kind scale volume root depth)
           rooted = StepV.rootedShellBelowMajorant
-            (kpShell dataSet) scale volume root depth
+            (kpShell dataSet kind) scale volume root depth
           scaled = Norm.scaleNonnegative
-            (analyticConstant dataSet)
-            (analyticConstantNonnegative dataSet)
+            (markedConstant dataSet kind)
+            (markedConstantNonnegative dataSet kind)
             rooted
           combined = ℚP.≤-trans first scaled
         in
         subst
           (λ upper → response scale volume root depth ≤ upper)
           (ℚRing.solve-∀
-            (analyticConstant dataSet)
+            (markedConstant dataSet kind)
             StepV.quarter
             (Geo.halfPower depth)
             Ursell.quarter)
@@ -260,7 +282,7 @@ betaScaleMajorant :
     (dataSet : SharedMarkedAnalyticShellControl Scale Volume Root) →
     Scale → Volume → Root → Cauchy.ScaleLocalIncrementMajorant
 betaScaleMajorant dataSet =
-  responseScaleMajorant dataSet
+  responseScaleMajorant dataSet betaMark
     (betaHistoryShell dataSet)
     (betaHistoryShellNonnegative dataSet)
     (betaBelowAnalytic dataSet)
@@ -270,7 +292,7 @@ compositeScaleMajorant :
     (dataSet : SharedMarkedAnalyticShellControl Scale Volume Root) →
     Scale → Volume → Root → Cauchy.ScaleLocalIncrementMajorant
 compositeScaleMajorant dataSet =
-  responseScaleMajorant dataSet
+  responseScaleMajorant dataSet compositeMark
     (compositeInsertionShell dataSet)
     (compositeInsertionShellNonnegative dataSet)
     (compositeBelowAnalytic dataSet)
@@ -295,7 +317,7 @@ betaHistoryTailVanishingModulus :
     (dataSet : SharedMarkedAnalyticShellControl Scale Volume Root)
     scale volume root start count →
   betaHistoryTail dataSet scale volume root start count
-  ≤ analyticConstant dataSet * (Geo.half * Geo.halfPower start)
+  ≤ betaAnalyticConstant dataSet * (Geo.half * Geo.halfPower start)
 betaHistoryTailVanishingModulus dataSet scale volume root =
   Cauchy.scaleLocalCauchyTail
     (betaScaleMajorant dataSet scale volume root)
@@ -305,7 +327,7 @@ compositeInsertionTailVanishingModulus :
     (dataSet : SharedMarkedAnalyticShellControl Scale Volume Root)
     scale volume root start count →
   compositeInsertionTail dataSet scale volume root start count
-  ≤ analyticConstant dataSet * (Geo.half * Geo.halfPower start)
+  ≤ compositeAnalyticConstant dataSet * (Geo.half * Geo.halfPower start)
 compositeInsertionTailVanishingModulus dataSet scale volume root =
   Cauchy.scaleLocalCauchyTail
     (compositeScaleMajorant dataSet scale volume root)
@@ -325,7 +347,7 @@ hessianWeightedInfluenceBelowAnalyticConstant :
     scale volume root depth →
   Weighted.weightedHessianPartial
       (hessianWeightedControl dataSet) scale volume root depth
-  ≤ analyticConstant dataSet
+  ≤ hessianAnalyticConstant dataSet
 hessianWeightedInfluenceBelowAnalyticConstant dataSet =
   Weighted.weightedHessianRowUniformlyBelowDerivativeConstant
     (hessianWeightedControl dataSet)
@@ -336,13 +358,15 @@ sharedMarkedAnalyticThreeConsumerCompilerLevel = machineChecked
 sharedMarkedAnalyticVanishingTailCompilerLevel : ProofLevel
 sharedMarkedAnalyticVanishingTailCompilerLevel = machineChecked
 
--- One new physical producer, not three unrelated decay receipts: instantiate
--- `analyticShell` by the literal twice/source-differentiated CMP99(3)/109/116
--- activity norm and prove its cutoff/volume-uniform rooted-shell comparison.
+-- Source-facing theorem: instantiate `markedAnalyticShell` by the literal
+-- differentiated CMP99(3)/109/116 activity norm, uniformly over the three mark
+-- kinds.  The proof may share one Cauchy/localization argument while retaining
+-- the physically distinct depth semantics above.
 physicalSharedMarkedAnalyticShellLevel : ProofLevel
 physicalSharedMarkedAnalyticShellLevel = conditional
 
--- Same-object identification remains essential: beta, Langevin Hessian and
--- composite insertion must really be projections of that one marked activity.
+-- Same-object identification remains essential: the beta, Langevin-Hessian and
+-- composite responses must really be the declared mark projections of the
+-- source-native differentiated activity.
 physicalSharedMarkedResponseIdentificationLevel : ProofLevel
 physicalSharedMarkedResponseIdentificationLevel = conditional
