@@ -8,38 +8,74 @@ import DASHI.Culture.DerivedCulturalUseAdmissibility as Culture
 import DASHI.Biology.BraidedEmotionOperationalSemantics as Dynamics
 import DASHI.Biology.BraidedEmotionEvidenceProvenance as Evidence
 
-proxyInterpretationRemainsAdmissible : Measurement.AdmissibleInterpretation Measurement.processedProxy Measurement.proxyInterpretation
+proxyInterpretationRemainsAdmissible :
+  Measurement.AdmissibleInterpretation
+    Measurement.processedProxy
+    Measurement.proxyInterpretation
 proxyInterpretationRemainsAdmissible = Measurement.safeProxyWitness
 
-kimmererUseRemainsLimitedAnalogy : Culture.AdmissibleCulturalUse Culture.formalAnalogyMaterial Culture.limitedFormalAnalogyUse
+kimmererUseRemainsLimitedAnalogy :
+  Culture.AdmissibleCulturalUse
+    Culture.formalAnalogyMaterial
+    Culture.limitedFormalAnalogyUse
 kimmererUseRemainsLimitedAnalogy = Culture.kimmererAnalogyAdmissible
 
 labelFeedbackBranches : Dynamics.BranchingWitness
 labelFeedbackBranches = Dynamics.labelFeedbackDoesNotDetermineNextState
 
-worldResistanceRevises : Dynamics._-[_/_]→_ Dynamics.labelledState Dynamics.resistantWorldObservation Dynamics.reviseInterpretationAction Dynamics.reappraisedState
+worldResistanceRevises :
+  Dynamics._-[_/_]→_
+    Dynamics.labelledState
+    Dynamics.resistantWorldObservation
+    Dynamics.reviseInterpretationAction
+    Dynamics.reappraisedState
 worldResistanceRevises = Dynamics.worldResistanceCanRevisePrediction
 
-coRegulationRetainsAgency : Dynamics._-[_/_]→_ Dynamics.reappraisedState Dynamics.relationalObservation Dynamics.seekCoRegulationAction Dynamics.coRegulatedState
+coRegulationRetainsAgency :
+  Dynamics._-[_/_]→_
+    Dynamics.reappraisedState
+    Dynamics.relationalObservation
+    Dynamics.seekCoRegulationAction
+    Dynamics.coRegulatedState
 coRegulationRetainsAgency = Dynamics.coRegulationPreservesAgency
 
-actionChangesObservationField : Dynamics._-[_/_]→_ Dynamics.recurrentState Dynamics.changedWorldObservation Dynamics.worldChangingAction Dynamics.changedWorldState
+actionChangesObservationField :
+  Dynamics._-[_/_]→_
+    Dynamics.recurrentState
+    Dynamics.changedWorldObservation
+    Dynamics.worldChangingAction
+    Dynamics.changedWorldState
 actionChangesObservationField = Dynamics.actionChangesFutureObservation
 
 projectionInsufficiency : Dynamics.ProjectionCollision
 projectionInsufficiency = Dynamics.noSingleProjectionReconstructsCompleteState
 
-structuredEvidenceReceipts : Evidence.DialecticalEvidenceBraid.receipts Evidence.canonicalDialecticalEvidenceBraid ≡ Evidence.canonicalEvidenceReceipts
+structuredEvidenceReceipts :
+  Evidence.DialecticalEvidenceBraid.receipts
+    Evidence.canonicalDialecticalEvidenceBraid
+  ≡ Evidence.canonicalEvidenceReceipts
 structuredEvidenceReceipts = Evidence.canonicalReceiptsAreStructured
 
-supportAndQualificationCoexist : Evidence.DialecticalEvidenceBraid.supportingAndQualifyingReceiptsCoexist Evidence.canonicalDialecticalEvidenceBraid ≡ true
+supportAndQualificationCoexist :
+  Evidence.DialecticalEvidenceBraid.supportingAndQualifyingReceiptsCoexist
+    Evidence.canonicalDialecticalEvidenceBraid
+  ≡ true
 supportAndQualificationCoexist = refl
 
-disagreementIsPreserved : Evidence.DialecticalEvidenceBraid.disagreementPreserved Evidence.canonicalDialecticalEvidenceBraid ≡ true
+disagreementIsPreserved :
+  Evidence.DialecticalEvidenceBraid.disagreementPreserved
+    Evidence.canonicalDialecticalEvidenceBraid
+  ≡ true
 disagreementIsPreserved = refl
 
-noGlobalWinnerIsInferred : Evidence.DialecticalEvidenceBraid.noGlobalWinnerInferred Evidence.canonicalDialecticalEvidenceBraid ≡ true
+noGlobalWinnerIsInferred :
+  Evidence.DialecticalEvidenceBraid.noGlobalWinnerInferred
+    Evidence.canonicalDialecticalEvidenceBraid
+  ≡ true
 noGlobalWinnerIsInferred = refl
 
-noClinicalPromotionFromEvidence : Evidence.DialecticalEvidenceBraid.noClinicalPromotion Evidence.canonicalDialecticalEvidenceBraid ≡ true
+noClinicalPromotionFromEvidence :
+  Evidence.DialecticalEvidenceBraid.noClinicalPromotion
+    Evidence.canonicalDialecticalEvidenceBraid
+  ≡ true
 noClinicalPromotionFromEvidence = refl

@@ -3,12 +3,56 @@
 ## Status
 
 This document supplies source provenance for the bounded evidence rows in
-`DASHI.Biology.BraidedEmotionEvidenceRegistry`.
+`DASHI.Biology.BraidedEmotionEvidenceRegistry` and the structured receipts in
+`DASHI.Biology.BraidedEmotionEvidenceProvenance`.
 
 The Agda rows are not proofs that a disputed emotion theory is true. They record
 which kinds of observations motivate a claim, the explanatory scale at which the
-claim is used, and what would count against an over-strong reading. The source
-families below remain heterogeneous in method, population, task, and theory.
+claim is used, what would count against an over-strong reading, and whether a
+source supports, qualifies, conflicts with, or underdetermines a claim.
+
+## Stable citation keys
+
+The formal source records use compact citation keys. Full bibliographic metadata
+remains in documentation rather than being reproduced inside Agda terms.
+
+- `Barrett2017TheoryConstructedEmotion` — Lisa Feldman Barrett, “The theory of
+  constructed emotion: an active inference account of interoception and
+  categorization,” *Social Cognitive and Affective Neuroscience* 12(1), 2017.
+- `ElfenbeinAmbady2002EmotionRecognitionMetaAnalysis` — Hillary Anger Elfenbein
+  and Nalini Ambady, “On the universality and cultural specificity of emotion
+  recognition: a meta-analysis,” *Psychological Bulletin* 128(2), 2002.
+- `Gendron2015CultureEmotionPerception` — work by Maria Gendron and colleagues on
+  cultural and conceptual variation in emotion perception. This key refers to
+  the source family used to qualify universal-category readings; source-specific
+  rows should be split further before quantitative promotion.
+- `MenonUddin2010SalienceNetwork` — Vinod Menon and Lucina Q. Uddin, “Saliency,
+  switching, attention and control: a network model of insula function,” *Brain
+  Structure and Function* 214, 2010.
+- `TugadeFredrickson2004EmotionalGranularity` — Michele M. Tugade, Barbara L.
+  Fredrickson, and Lisa Feldman Barrett, “Psychological resilience and positive
+  emotional granularity,” *Journal of Personality* 72(6), 2004.
+- `Kimmerer2013BraidingSweetgrass` — Robin Wall Kimmerer, *Braiding Sweetgrass:
+  Indigenous Wisdom, Scientific Knowledge, and the Teachings of Plants*, 2013.
+
+The Kimmerer key records provenance for a normative and relational influence. It
+is not an empirical-neuroscience citation, a permission claim, or evidence that
+DASHI formalises Indigenous knowledge.
+
+## Dialectical evidence relations
+
+`EvidenceRelation` has four constructors:
+
+- `supports` — the source supplies positive warrant for a bounded claim;
+- `qualifies` — the source narrows the claim or blocks a stronger reading;
+- `conflictsWith` — the source provides materially contrary evidence;
+- `underdetermines` — the source is compatible with multiple theories and does
+  not select a unique mechanism or ontology.
+
+The same source family may support one level of description while qualifying a
+stronger one. Cross-cultural recognition results, for example, may support
+recurrent affective structure while task and cultural variation qualify strong
+claims of context-independent natural kinds.
 
 ## Source families
 
@@ -87,7 +131,7 @@ Kimmerer as her terminology.
 
 ## Promotion boundary
 
-No row in the evidence registry grants:
+No row or structured receipt grants:
 
 - theorem authority to an empirical association;
 - causal authority to a measurement proxy;
@@ -95,6 +139,6 @@ No row in the evidence registry grants:
 - cultural authority or permission to represent Indigenous knowledge;
 - a global victory declaration for any one emotion theory.
 
-Future refinements should add exact bibliographic entries, populations, task
-conditions, effect estimates, replications, disagreements, and source-specific
-limitations before any stronger evidential promotion.
+Future refinements should add source-specific effect estimates, replication
+status, contrary findings, and narrower population/task scopes before any
+stronger evidential promotion.
