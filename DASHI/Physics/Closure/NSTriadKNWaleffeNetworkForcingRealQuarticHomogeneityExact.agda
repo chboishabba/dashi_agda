@@ -24,7 +24,7 @@ module DASHI.Physics.Closure.NSTriadKNWaleffeNetworkForcingRealQuarticHomogeneit
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans)
 
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNComplex3HermitianScalingLaws as Scaling
@@ -257,8 +257,12 @@ networkForcingRealQuarticHomogeneous {F = F} a uK uP uQ fK fP fQ =
         (firstForcingSlotQuartic a fK uP uQ)
         (secondForcingSlotQuartic a uK fP uQ))
       (thirdForcingSlotQuartic a uK uP fQ))
-    (sym
-      (Ring.complexDistributeLeft s4 (C3.complexAdd FK FP) FQ))
+    (R.solve 4
+      (λ s4 FK FP FQ →
+        ((s4 R.⊗ FK) R.⊕ (s4 R.⊗ FP)) R.⊕ (s4 R.⊗ FQ)
+        R.⊜ s4 R.⊗ ((FK R.⊕ FP) R.⊕ FQ))
+      refl s4 FK FP FQ)
+  where module R = Ring.Solver F
 
 round106LiteralWaleffeNetworkForcingRealQuarticHomogeneityClosed : Bool
 round106LiteralWaleffeNetworkForcingRealQuarticHomogeneityClosed = true
