@@ -19,7 +19,6 @@ module DASHI.Core.AuthorityPreservingFutureAbstractionExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Product using (_×_; _,_)
 
 import DASHI.Core.ConsumerIndexedGovernedTransitionExact as Governed
 
@@ -56,7 +55,7 @@ sameProjectionSameDecision :
   project left ≡ project right →
   fineDecision decision consumer left
   ≡ fineDecision decision consumer right
-sameProjectionSameDecision decision consumer same
+sameProjectionSameDecision decision consumer {left} {right} same
   rewrite decisionDescends decision consumer left
         | decisionDescends decision consumer right
         | same = refl
@@ -98,7 +97,7 @@ sameProjectionGivesGovernedFutureAgreement :
   project left ≡ project right →
   GovernedFutureAgreement fine (fineDecision decision)
     consumer depth left right
-sameProjectionGivesGovernedFutureAgreement safe decision consumer depth same =
+sameProjectionGivesGovernedFutureAgreement safe decision consumer depth {left} {right} same =
   governedFutureAgreement
     (Governed.sameProjectionFutureEquivalent safe consumer depth same)
     (sameProjectionSameDecision decision consumer same)
