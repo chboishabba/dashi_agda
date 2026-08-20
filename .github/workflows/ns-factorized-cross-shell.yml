@@ -9,7 +9,6 @@ on:
       - 'DASHI/Physics/Closure/NSWeightedShellTransferBridge.agda'
       - 'DASHI/Physics/Closure/NSFactorizedSchurFrameGap.agda'
       - 'DASHI/Physics/Closure/NSFactorizedCrossShellProgram.agda'
-      - 'docs/ns_factorized_cross_shell_bound.md'
       - '.github/workflows/ns-factorized-cross-shell.yml'
   push:
     paths:
@@ -19,7 +18,6 @@ on:
       - 'DASHI/Physics/Closure/NSWeightedShellTransferBridge.agda'
       - 'DASHI/Physics/Closure/NSFactorizedSchurFrameGap.agda'
       - 'DASHI/Physics/Closure/NSFactorizedCrossShellProgram.agda'
-      - 'docs/ns_factorized_cross_shell_bound.md'
       - '.github/workflows/ns-factorized-cross-shell.yml'
 
 concurrency:
