@@ -3,28 +3,31 @@ module DASHI.Moonshine.LegendreJExceptionalResidueLocalProducerExact where
 ------------------------------------------------------------------------
 -- PREFERRED EXCEPTIONAL LEGENDRE LOCAL PRODUCER
 --
--- This module composes three already-independent algebraic layers:
+-- This module composes four independent algebraic layers:
 --
 --   * exact Legendre exceptional exponent/factorization;
 --   * residue-nonzero -> valuation-zero unit detection;
+--   * uniformizer-times-unit -> depth-one coordinate difference;
 --   * simple-root depth-one propagation.
 --
--- A source-native p-adic adapter therefore no longer supplies
+-- A source-native p-adic adapter therefore no longer supplies ANY of
 --
---   v(outerUnit)=0
---   or
+--   v(outerUnit)=0,
+--   v(lambda-lambda0)=1,
 --   v(branchValue)=1
 --
--- as primitive assertions.  It supplies the more geometric data:
+-- as primitive numeric assertions.  It supplies the more geometric data
 --
---   v(lambda-lambda0)=1,
---   derivative/complement residue != 0,
---   outer-unit residue != 0,
---   branchValue=(lambda-lambda0)*derivativeUnit,
+--   coordinateDifference = uniformizer * coordinateUnit,
+--   v(uniformizer)=1,
+--   residue(coordinateUnit) != 0,
+--   residue(derivativeUnit) != 0,
+--   residue(outerUnit) != 0,
+--   branchValue=coordinateDifference*derivativeUnit,
 --   J-alpha=outerUnit*branchValue^e.
 --
--- The two valuation statements are then derived, and the existing ramified
--- sharpness core derives v(J-alpha)=e with e fixed algebraically by the branch.
+-- All three valuation statements are then derived, followed by
+-- v(J-alpha)=e with e fixed algebraically by the selected Legendre branch.
 --
 -- No Q_p, residue field, lift, or Dwork A1 coefficient is constructed here.
 ------------------------------------------------------------------------
@@ -34,6 +37,7 @@ open import DASHI.Core.Prelude
 import DASHI.Algebra.RamifiedLocalValuationSharpnessExact as Ramified
 import DASHI.Algebra.ResidueDetectedUnitValuationExact as Residue
 import DASHI.Algebra.SimpleRootLocalParameterExact as Simple
+import DASHI.Algebra.UniformizerCoordinateDifferenceExact as Uniformizer
 import DASHI.Moonshine.LegendreJExceptionalPolynomialFactorizationExact as Legendre
 import DASHI.Moonshine.LegendreJExceptionalLocalValuationCutsetExact as Local
 
@@ -48,12 +52,18 @@ record ExceptionalResidueLocalProducer
       Ramified.valuation V x
       ≡ Residue.valuation residueValuation x
 
+    uniformizer : A
+    coordinateUnit : A
     coordinateDifference : A
+
+    uniformizerDepthOne : Ramified.valuation V uniformizer ≡ 1
+    coordinateUnitResidueNonzero :
+      Residue.ResidueUnitWitness residueValuation coordinateUnit
+    coordinateFactorization :
+      coordinateDifference ≡ Ramified.mul V uniformizer coordinateUnit
+
     derivativeUnit : A
     branchValue : A
-
-    coordinateDifferenceDepthOne :
-      Ramified.valuation V coordinateDifference ≡ 1
 
     derivativeUnitResidueNonzero :
       Residue.ResidueUnitWitness residueValuation derivativeUnit
@@ -74,6 +84,37 @@ record ExceptionalResidueLocalProducer
             (Legendre.exceptionalRamificationExponent branch))
 
 open ExceptionalResidueLocalProducer public
+
+------------------------------------------------------------------------
+-- Derived coordinate depth through one uniformizer and a residue unit.
+------------------------------------------------------------------------
+
+asUniformizerCoordinate :
+  {A R : Set} →
+  (V : Ramified.MultiplicativeNatValuation A) →
+  (branch : Legendre.ExceptionalLegendreBranch) →
+  (P : ExceptionalResidueLocalProducer V branch) →
+  Uniformizer.UniformizerCoordinateDifference V
+asUniformizerCoordinate V branch P = record
+  { Uniformizer.residueValuation = residueValuation P
+  ; Uniformizer.valuationCompatibility = valuationCompatibility P
+  ; Uniformizer.uniformizer = uniformizer P
+  ; Uniformizer.unitFactor = coordinateUnit P
+  ; Uniformizer.coordinateDifference = coordinateDifference P
+  ; Uniformizer.uniformizerDepthOne = uniformizerDepthOne P
+  ; Uniformizer.unitResidueNonzero = coordinateUnitResidueNonzero P
+  ; Uniformizer.coordinateFactorization = coordinateFactorization P
+  }
+
+coordinateDifferenceDepthOne :
+  {A R : Set} →
+  (V : Ramified.MultiplicativeNatValuation A) →
+  (branch : Legendre.ExceptionalLegendreBranch) →
+  (P : ExceptionalResidueLocalProducer V branch) →
+  Ramified.valuation V (coordinateDifference P) ≡ 1
+coordinateDifferenceDepthOne V branch P =
+  Uniformizer.coordinateDifferenceDepthOne V
+    (asUniformizerCoordinate V branch P)
 
 ------------------------------------------------------------------------
 -- Derived unit depths.
@@ -121,7 +162,7 @@ asSimpleRootParameter V branch P = record
   { Simple.coordinateDifference = coordinateDifference P
   ; Simple.derivativeUnit = derivativeUnit P
   ; Simple.branchValue = branchValue P
-  ; Simple.coordinateDifferenceDepthOne = coordinateDifferenceDepthOne P
+  ; Simple.coordinateDifferenceDepthOne = coordinateDifferenceDepthOne V branch P
   ; Simple.derivativeUnitDepthZero = derivativeUnitDepthZero V branch P
   ; Simple.simpleRootFactorization = simpleRootFactorization P
   }
@@ -168,8 +209,10 @@ preferredLocalJDepthIsAlgebraicExponent V branch P =
 record LegendreJExceptionalResidueLocalProducerBoundary : Set where
   field
     outerUnitDepthPrimitive : Bool
+    coordinateDifferenceDepthOnePrimitive : Bool
     branchDepthOnePrimitive : Bool
-    coordinateDifferenceDepthOneRequired : Bool
+    uniformizerDepthOneRequired : Bool
+    coordinateUnitResidueNonzeroRequired : Bool
     derivativeResidueNonzeroRequired : Bool
     outerUnitResidueNonzeroRequired : Bool
     exactLocalFactorizationsRequired : Bool
@@ -181,8 +224,10 @@ canonicalLegendreJExceptionalResidueLocalProducerBoundary :
   LegendreJExceptionalResidueLocalProducerBoundary
 canonicalLegendreJExceptionalResidueLocalProducerBoundary = record
   { outerUnitDepthPrimitive = false
+  ; coordinateDifferenceDepthOnePrimitive = false
   ; branchDepthOnePrimitive = false
-  ; coordinateDifferenceDepthOneRequired = true
+  ; uniformizerDepthOneRequired = true
+  ; coordinateUnitResidueNonzeroRequired = true
   ; derivativeResidueNonzeroRequired = true
   ; outerUnitResidueNonzeroRequired = true
   ; exactLocalFactorizationsRequired = true
