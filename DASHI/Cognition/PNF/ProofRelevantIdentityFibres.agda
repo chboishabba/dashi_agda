@@ -36,6 +36,32 @@ corpusIdentityCannotClaimWorldIdentity :
 corpusIdentityCannotClaimWorldIdentity ()
 
 ------------------------------------------------------------------------
+-- Surface classification and referent classification are distinct evidence
+-- roles.  Observing that the source occurrence is a pronoun, title, alias, role
+-- word, etc. may classify the source object; it does not by itself authorize a
+-- constraint saying that the object referred to has that same type.
+--
+-- This is the type-level boundary behind the runtime rule
+--
+--   sourceKind = mention.pronoun
+--   expectedReferentKind = absent
+--
+-- unless an independent typed referent witness exists.
+------------------------------------------------------------------------
+
+data ReferentConstraintEvidence : Set where
+  surfaceOccurrenceKindEvidence : ReferentConstraintEvidence
+  typedReferentKindEvidence : ReferentConstraintEvidence
+
+data ReferentConstraintPermission : ReferentConstraintEvidence → Set where
+  typedReferentKindMayConstrain :
+    ReferentConstraintPermission typedReferentKindEvidence
+
+surfaceOccurrenceKindCannotConstrainReferent :
+  ReferentConstraintPermission surfaceOccurrenceKindEvidence → ⊥
+surfaceOccurrenceKindCannotConstrainReferent ()
+
+------------------------------------------------------------------------
 -- Identity evidence is proof-relevant.  Paragraph co-scope, proximity and
 -- lexical co-occurrence are represented explicitly as inadmissible evidence,
 -- so there is no constructor that can project them into an identity fibre.
@@ -185,6 +211,8 @@ record IdentityAuthorityBoundary : Set where
       IdentityProjectionPermission paragraphCoScopeEvidence → ⊥
     proximityHasNoIdentityPermission :
       IdentityProjectionPermission lexicalProximityEvidence → ⊥
+    surfaceKindHasNoReferentConstraintPermission :
+      ReferentConstraintPermission surfaceOccurrenceKindEvidence → ⊥
 
 open IdentityAuthorityBoundary public
 
@@ -197,3 +225,4 @@ canonicalIdentityAuthorityBoundary =
     externalAuthorityMayNameWorldEntity
     paragraphCoScopeCannotProveIdentity
     lexicalProximityCannotProveIdentity
+    surfaceOccurrenceKindCannotConstrainReferent
