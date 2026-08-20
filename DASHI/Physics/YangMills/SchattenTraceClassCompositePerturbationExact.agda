@@ -69,6 +69,7 @@ module DASHI.Physics.YangMills.SchattenTraceClassCompositePerturbationExact wher
 -- and does not need Krein theory merely to justify its existing trace-log step.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 record SchattenHierarchyAuthority : Set₁ where
@@ -87,19 +88,13 @@ traceClassToCompact :
 traceClassToCompact A trace =
   hilbertSchmidtToCompact A (traceToHilbertSchmidt A trace)
 
-------------------------------------------------------------------------
--- Compact self-adjoint absolute trace-class transport.
-------------------------------------------------------------------------
-
 record SelfAdjointTraceClassFunctionalTransport : Set₁ where
   field
     Operator Function : Set
-
     CompactSelfAdjoint : Operator → Set
     TraceClassDifference : Operator → Operator → Set
     Apply : Function → Operator → Operator
     OperatorLipschitzNearZero : Function → Set
-
     sourceTransport :
       ∀ f A B →
       OperatorLipschitzNearZero f →
@@ -115,12 +110,10 @@ record CompositeSpectralPerturbation
   field
     left right : Operator T
     compositeFunction : Function T
-
     leftCompactSelfAdjoint : CompactSelfAdjoint T left
     rightCompactSelfAdjoint : CompactSelfAdjoint T right
     baseTraceClassDifference : TraceClassDifference T left right
-    compositeOperatorLipschitz :
-      OperatorLipschitzNearZero T compositeFunction
+    compositeOperatorLipschitz : OperatorLipschitzNearZero T compositeFunction
 
 open CompositeSpectralPerturbation public
 
@@ -140,30 +133,16 @@ compositeSpectralDifferenceIsTraceClass T dataSet =
     (rightCompactSelfAdjoint dataSet)
     (baseTraceClassDifference dataSet)
 
-------------------------------------------------------------------------
--- Unbounded/self-adjoint relative trace-class transport.
---
--- The source's resolvent-weighted definition is represented explicitly by the
--- `RelativeTraceClassDifference` predicate rather than weakened to ordinary
--- trace class. The source theorem owns the analytic DOI/double-operator-integral
--- work; the compiler below only applies it to a declared composite function.
-------------------------------------------------------------------------
-
 record RelativeTraceClassFunctionalTransport : Set₁ where
   field
     Operator Function : Set
-
     SelfAdjoint : Operator → Set
     RelativeTraceClassDifference : Operator → Operator → Set
     TraceClassDifference : Operator → Operator → Set
     Apply : Function → Operator → Operator
     RelativelyOperatorLipschitz : Function → Set
-
-    -- Source-native interpretation: for B=A+K, this means the appropriate
-    -- resolvent-weighted perturbation K(A+iI)^(-1) belongs to S_1.
     resolventWeightedMeaning : ∀ A B →
       RelativeTraceClassDifference A B → Set
-
     sourceRelativeTransport :
       ∀ f A B →
       RelativelyOperatorLipschitz f →
@@ -179,11 +158,9 @@ record RelativeCompositeSpectralPerturbation
   field
     reference perturbed : Operator T
     compositeFunction : Function T
-
     referenceSelfAdjoint : SelfAdjoint T reference
     perturbedSelfAdjoint : SelfAdjoint T perturbed
-    relativeTraceClass :
-      RelativeTraceClassDifference T reference perturbed
+    relativeTraceClass : RelativeTraceClassDifference T reference perturbed
     relativeTraceClassHasResolventMeaning :
       resolventWeightedMeaning T reference perturbed relativeTraceClass
     compositeRelativelyOperatorLipschitz :
@@ -207,26 +184,15 @@ relativeCompositeDifferenceIsTraceClass T dataSet =
     (perturbedSelfAdjoint dataSet)
     (relativeTraceClass dataSet)
 
-------------------------------------------------------------------------
--- Spectral-shift trace-formula interface.
---
--- This keeps the computable scalar consumer separate from the operator-ideal
--- theorem. A concrete application must build the spectral-shift object for the
--- SAME operator pair and identify its integral with the trace consumer.
-------------------------------------------------------------------------
-
 record LifshitsKreinTraceFormulaAuthority : Set₁ where
   field
     Operator Function SpectralShift Scalar : Set
-
     SelfAdjoint : Operator → Set
     TraceClassDifference : Operator → Operator → Set
     AdmissibleFunction : Function → Set
     spectralShift : Operator → Operator → SpectralShift
     functionDifferenceTrace : Function → Operator → Operator → Scalar
-    derivativeAgainstShiftIntegral :
-      Function → SpectralShift → Scalar
-
+    derivativeAgainstShiftIntegral : Function → SpectralShift → Scalar
     sourceTraceFormula : ∀ f A B →
       SelfAdjoint A →
       SelfAdjoint B →
@@ -267,13 +233,6 @@ compositeTraceEqualsSpectralShiftIntegral T dataSet =
     (baseTraceClassDifference dataSet)
     (compositeFunctionAdmissible dataSet)
 
-------------------------------------------------------------------------
--- Perturbation determinant / spectral-shift relation is kept as its own source
--- authority. This can later calibrate a continuum ghost determinant if the SAME
--- reduced FP operator pair satisfies the required self-adjoint trace-class or
--- relative-trace-class hypotheses. It is not needed for the finite determinant.
-------------------------------------------------------------------------
-
 record PerturbationDeterminantSpectralShiftAuthority : Set₁ where
   field
     Operator SpectralParameter DeterminantValue SpectralShiftValue : Set
@@ -290,10 +249,6 @@ record PerturbationDeterminantSpectralShiftAuthority : Set₁ where
 
 open PerturbationDeterminantSpectralShiftAuthority public
 
-------------------------------------------------------------------------
--- Normal/non-self-adjoint boundary.
-------------------------------------------------------------------------
-
 record NormalOperatorExtensionBoundary : Set₁ where
   field
     NormalOperator : Set
@@ -304,30 +259,21 @@ open NormalOperatorExtensionBoundary public
 
 schattenHierarchySourceLevel : ProofLevel
 schattenHierarchySourceLevel = standardImported
-
 operatorLipschitzTraceClassSourceLevel : ProofLevel
 operatorLipschitzTraceClassSourceLevel = standardImported
-
 relativeOperatorLipschitzTraceClassSourceLevel : ProofLevel
 relativeOperatorLipschitzTraceClassSourceLevel = standardImported
-
 lifshitsKreinTraceFormulaSourceLevel : ProofLevel
 lifshitsKreinTraceFormulaSourceLevel = standardImported
-
 perturbationDeterminantSpectralShiftSourceLevel : ProofLevel
 perturbationDeterminantSpectralShiftSourceLevel = standardImported
-
 traceClassToCompactCompositionLevel : ProofLevel
 traceClassToCompactCompositionLevel = machineChecked
-
 compositeSpectralTraceClassTransportLevel : ProofLevel
 compositeSpectralTraceClassTransportLevel = machineChecked
-
 relativeCompositeSpectralTraceClassTransportLevel : ProofLevel
 relativeCompositeSpectralTraceClassTransportLevel = machineChecked
-
 spectralShiftTraceFormulaCompilerLevel : ProofLevel
 spectralShiftTraceFormulaCompilerLevel = machineChecked
-
 normalOperatorFunctionalTransportLevel : ProofLevel
 normalOperatorFunctionalTransportLevel = conditional
