@@ -48,6 +48,7 @@ open import Relation.Binary.PropositionalEquality using (cong)
 
 import DASHI.Core.DynamicalQuotientSafety as Dynamic
 import DASHI.Core.GenericFuturePartitionRefinementExact as Future
+import DASHI.Core.TypedDependencyCore as Dependency
 import DASHI.Environment.LatentDepthFormalism as Latent
 import DASHI.Environment.ParetoPlanning as Pareto
 import DASHI.Environment.QuantitiesConservation as Q
@@ -156,7 +157,7 @@ sameRepresentationSameTaskOutput factor task same
 
 data CompressionAdmission
     {State Action Observation Task Output : Set}
-    (system : DASHI.Core.TypedDependencyCore.DependentActionSystem State Action)
+    (system : Dependency.DependentActionSystem State Action)
     (project : State → Observation)
     (evaluate : Task → State → Output) : Set₁ where
   dynamicallySafe :
