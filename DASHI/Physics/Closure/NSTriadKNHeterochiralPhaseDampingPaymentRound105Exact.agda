@@ -46,7 +46,7 @@ open import Data.Rational.Base using
   (ℚ; 0ℚ; _+_; _-_; _*_; _≤_; NonNegative; nonNegative)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import DASHI.Physics.Closure.NSTriadKNHeterochiralReverseTriangleRound105Exact as Triangle
 
