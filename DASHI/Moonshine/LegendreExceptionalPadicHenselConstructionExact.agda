@@ -23,14 +23,10 @@ module DASHI.Moonshine.LegendreExceptionalPadicHenselConstructionExact where
 --
 --     lambda = lambda0 + pi,
 --
--- so the coordinate identity
---
---     lambda-lambda0 = pi * 1
---
--- is derived.  Since pi reduces to zero, reduction compatibility also derives
--- that lambda and lambda0 have the same certified finite residue.  The selected
--- branch polynomial, its simple-factor quotient, and the rational J-alpha
--- outer factor are all evaluated at this SAME lambda.
+-- so lambda-lambda0 = pi*1 is derived.  The residue equality is also derived
+-- from the residue homomorphism and residue(pi)=0; it is not a separate nearby
+-- point receipt.  The selected branch polynomial, simple-factor quotient and
+-- rational J-alpha outer factor all live at this SAME lambda.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -58,6 +54,18 @@ record ExceptionalHenselLocalSource
     add subtract : PadicLocal → PadicLocal → PadicLocal
     subtractAddRight : (x d : PadicLocal) → subtract (add x d) x ≡ d
 
+    -- Residue-ring addition is included only to DERIVE reduction of lambda0+pi.
+    residueAdd : Residue → Residue → Residue
+    residueAddHom :
+      (x y : PadicLocal) →
+      ResidueUnit.residue residueValuation (add x y)
+      ≡ residueAdd
+          (ResidueUnit.residue residueValuation x)
+          (ResidueUnit.residue residueValuation y)
+    residueAddZeroRight :
+      (r : Residue) →
+      residueAdd r (ResidueUnit.residueZero residueValuation) ≡ r
+
     zeroLocal : PadicLocal
     branchPolynomial : PadicLocal → PadicLocal
     liftedCentre : PadicLocal
@@ -70,13 +78,6 @@ record ExceptionalHenselLocalSource
     uniformizerReducesToZero :
       ResidueUnit.residue residueValuation uniformizer
       ≡ ResidueUnit.residueZero residueValuation
-
-    -- Standard residue homomorphism consequence specialized to the coordinate
-    -- actually used here: adding the maximal-ideal uniformizer does not change
-    -- the residue class.
-    residueCentrePlusUniformizer :
-      ResidueUnit.residue residueValuation (add liftedCentre uniformizer)
-      ≡ ResidueUnit.residue residueValuation liftedCentre
 
     oneResidueUnit :
       ResidueUnit.ResidueUnitWitness residueValuation (Ramified.one valuation)
@@ -110,7 +111,7 @@ open ExceptionalHenselLocalSource public
 
 liftedCoordinate :
   {branch : Legendre.ExceptionalLegendreBranch} →
-  ExceptionalHenselLocalSource branch → PadicLocal
+  (S : ExceptionalHenselLocalSource branch) → PadicLocal S
 liftedCoordinate S = add S (liftedCentre S) (uniformizer S)
 
 coordinateDifference :
@@ -134,13 +135,29 @@ coordinateDifferenceIsPiTimesOne S =
   trans (coordinateDifferenceIsUniformizer S)
     (sym (mulRightOne S (uniformizer S)))
 
+liftedCoordinateReducesToLiftedCentre :
+  {branch : Legendre.ExceptionalLegendreBranch} →
+  (S : ExceptionalHenselLocalSource branch) →
+  ResidueUnit.residue (residueValuation S) (liftedCoordinate S)
+  ≡ ResidueUnit.residue (residueValuation S) (liftedCentre S)
+liftedCoordinateReducesToLiftedCentre S =
+  trans
+    (residueAddHom S (liftedCentre S) (uniformizer S))
+    (trans
+      (cong
+        (λ r → residueAdd S
+          (ResidueUnit.residue (residueValuation S) (liftedCentre S)) r)
+        (uniformizerReducesToZero S))
+      (residueAddZeroRight S
+        (ResidueUnit.residue (residueValuation S) (liftedCentre S))))
+
 liftedCoordinateReducesToFiniteCentre :
   {branch : Legendre.ExceptionalLegendreBranch} →
   (S : ExceptionalHenselLocalSource branch) →
   ResidueUnit.residue (residueValuation S) (liftedCoordinate S)
   ≡ Lift.centre (finitePoint S)
 liftedCoordinateReducesToFiniteCentre S =
-  trans (residueCentrePlusUniformizer S) (liftedCentreReduces S)
+  trans (liftedCoordinateReducesToLiftedCentre S) (liftedCentreReduces S)
 
 constructExceptionalPadicLift :
   (branch : Legendre.ExceptionalLegendreBranch) →
@@ -202,7 +219,7 @@ record LegendreExceptionalPadicHenselConstructionBoundary : Set where
     henselCentreIsActualRootRequired : Bool
     nearbyCoordinateDefinedAsCentrePlusUniformizer : Bool
     lambdaMinusLambda0EqualsPiTimesOneDerived : Bool
-    nearbyResidueDerivedFromUniformizerReduction : Bool
+    nearbyResidueDerivedFromResidueHomomorphism : Bool
     branchFactorEvaluatedAtActualNearbyPoint : Bool
     rationalJFactorEvaluatedAtActualNearbyPoint : Bool
     exceptionalPadicLiftRecordConstructed : Bool
@@ -217,7 +234,7 @@ canonicalLegendreExceptionalPadicHenselConstructionBoundary = record
   { henselCentreIsActualRootRequired = true
   ; nearbyCoordinateDefinedAsCentrePlusUniformizer = true
   ; lambdaMinusLambda0EqualsPiTimesOneDerived = true
-  ; nearbyResidueDerivedFromUniformizerReduction = true
+  ; nearbyResidueDerivedFromResidueHomomorphism = true
   ; branchFactorEvaluatedAtActualNearbyPoint = true
   ; rationalJFactorEvaluatedAtActualNearbyPoint = true
   ; exceptionalPadicLiftRecordConstructed = true
