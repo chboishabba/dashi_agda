@@ -15,32 +15,24 @@ module DASHI.Physics.Closure.NSTriadKNSelectedPacketProjectedPairingRound98Exact
 --
 -- ROUND98 / SELECTED F4 SAME-OBJECT IDENTIFICATION
 --
--- Round39 proves that the actual projected Galerkin convection-energy pairing
--- is the raw ordered-incidence fold. Round96 instead packages packet transfer
--- by summing all three energy legs, with each leg using the symmetrized
--- ordered-pair power. The complete physical enumeration therefore carries the
--- same factor six as Round38's unweighted theorem.
+-- The actual projected Galerkin convection-energy pairing is the raw ordered
+-- physical-incidence fold (Round39). Round96 instead records each physical
+-- incidence through all three energy legs and uses ordered-pair power. The
+-- selected analogue of Round38 therefore has the same exact factor six:
 --
--- This module proves the selected/packet analogue exactly:
+--   Round96.sumPacketTransfer = 6 * selectedOrderedFold.
 --
---   selected projected pairing
---     = weighted ordered-incidence fold
---     = (1/6) * Round96.sumPacketTransfer
---     = (1/6) * Round96.sumBoundaryTransfer.
+-- Consequently the literal selected projected pairing is exactly
 --
--- The last equality uses Round96's exact internal-triad cancellation and hence
--- requires only the already-native reality/divergence-free hypotheses.
+--   (1/6) * Round96.sumPacketTransfer
+--   = (1/6) * Round96.sumBoundaryTransfer.
 --
--- This closes the nonlinear same-object/normalization part of
--- PhysicalPacketBoundaryFluxLogReserveIdentification. It does NOT invent an
--- extra forcing receipt: the remaining linear packet-energy PDE step is only
--- the selected pairing of the already-existing projected ODE with u_k and the
--- literal viscous energy term.
+-- The latter equality is Round96's exact internal/all-external cancellation.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using (List; []; _∷_; map)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
@@ -64,257 +56,216 @@ import DASHI.Physics.Closure.NSTriadKNPacketBoundaryFluxNormalizationRound98Exac
 F : C3.RealField _
 F = Rational.rationalRealField
 
-weightedOrderedPower :
+selectedOrderedPower :
   (E : C3.IntegerEmbedding F) →
   (I : C3.ModeInverseSquare F E) →
   (Z3.FourierMode → Bool) →
   (Z3.FourierMode → C3.Complex3 F) →
   Physical.PhysicalTriadIncidence → ℚ
-weightedOrderedPower E I selected velocity tau =
+selectedOrderedPower E I selected velocity tau =
   Round96.selectTransfer (selected (Physical.k tau))
     (Round38.orderedPower E I tau velocity)
 
-weightedPairPower :
+selectedPairPower :
   (E : C3.IntegerEmbedding F) →
   (I : C3.ModeInverseSquare F E) →
   (Z3.FourierMode → Bool) →
   (Z3.FourierMode → C3.Complex3 F) →
   Physical.PhysicalTriadIncidence → ℚ
-weightedPairPower E I selected velocity tau =
+selectedPairPower E I selected velocity tau =
   Round96.selectTransfer (selected (Physical.k tau))
     (Round38.orderedPairPower E I tau velocity)
 
-weightedSwapPower :
-  (E : C3.IntegerEmbedding F) →
-  (I : C3.ModeInverseSquare F E) →
-  (Z3.FourierMode → Bool) →
-  (Z3.FourierMode → C3.Complex3 F) →
-  Physical.PhysicalTriadIncidence → ℚ
-weightedSwapPower E I selected velocity tau =
-  Round96.selectTransfer (selected (Physical.k tau))
-    (Round38.orderedPower E I (Symmetry.swapTriad tau) velocity)
-
-weightedFold :
-  (Physical.PhysicalTriadIncidence → ℚ) →
-  List Physical.PhysicalTriadIncidence → ℚ
-weightedFold = Round38.foldPower
-
-weightedOrderedFold :
+selectedOrderedFold :
   (E : C3.IntegerEmbedding F) →
   (I : C3.ModeInverseSquare F E) →
   (Z3.FourierMode → Bool) →
   (Z3.FourierMode → C3.Complex3 F) →
   List Physical.PhysicalTriadIncidence → ℚ
-weightedOrderedFold E I selected velocity =
-  weightedFold (weightedOrderedPower E I selected velocity)
+selectedOrderedFold E I selected velocity =
+  Round38.foldPower (selectedOrderedPower E I selected velocity)
 
-weightedPairFold :
+selectedPairFold :
   (E : C3.IntegerEmbedding F) →
   (I : C3.ModeInverseSquare F E) →
   (Z3.FourierMode → Bool) →
   (Z3.FourierMode → C3.Complex3 F) →
   List Physical.PhysicalTriadIncidence → ℚ
-weightedPairFold E I selected velocity =
-  weightedFold (weightedPairPower E I selected velocity)
+selectedPairFold E I selected velocity =
+  Round38.foldPower (selectedPairPower E I selected velocity)
 
-weightedSwapFold :
-  (E : C3.IntegerEmbedding F) →
-  (I : C3.ModeInverseSquare F E) →
-  (Z3.FourierMode → Bool) →
-  (Z3.FourierMode → C3.Complex3 F) →
-  List Physical.PhysicalTriadIncidence → ℚ
-weightedSwapFold E I selected velocity =
-  weightedFold (weightedSwapPower E I selected velocity)
+selectAdd : ∀ b x y →
+  Round96.selectTransfer b (x + y)
+  ≡ Round96.selectTransfer b x + Round96.selectTransfer b y
+selectAdd true x y = refl
+selectAdd false x y = refl
 
-selectTransferAdd : ∀ selected a b →
-  Round96.selectTransfer selected (a + b)
-  ≡ Round96.selectTransfer selected a + Round96.selectTransfer selected b
-selectTransferAdd true a b = refl
-selectTransferAdd false a b = refl
-
-weightedPairPowerDecomposition :
+selectedPairPointwise :
   (E : C3.IntegerEmbedding F) →
   (I : C3.ModeInverseSquare F E) →
   (selected : Z3.FourierMode → Bool) →
   (velocity : Z3.FourierMode → C3.Complex3 F) →
   (tau : Physical.PhysicalTriadIncidence) →
-  weightedPairPower E I selected velocity tau
-  ≡ weightedOrderedPower E I selected velocity tau
-    + weightedSwapPower E I selected velocity tau
-weightedPairPowerDecomposition E I selected velocity tau =
+  selectedPairPower E I selected velocity tau
+  ≡ selectedOrderedPower E I selected velocity tau
+    + selectedOrderedPower E I selected velocity (Symmetry.swapTriad tau)
+selectedPairPointwise E I selected velocity tau =
   trans
     (cong
       (Round96.selectTransfer (selected (Physical.k tau)))
       (Round38.orderedPairPowerIsOrderedPlusSwap E I tau velocity))
-    (selectTransferAdd
+    (selectAdd
       (selected (Physical.k tau))
       (Round38.orderedPower E I tau velocity)
       (Round38.orderedPower E I (Symmetry.swapTriad tau) velocity))
 
-weightedPairFoldDecomposition :
+selectedPairFoldSplit :
   (E : C3.IntegerEmbedding F) →
   (I : C3.ModeInverseSquare F E) →
   (selected : Z3.FourierMode → Bool) →
   (velocity : Z3.FourierMode → C3.Complex3 F) →
   (items : List Physical.PhysicalTriadIncidence) →
-  weightedPairFold E I selected velocity items
-  ≡ weightedOrderedFold E I selected velocity items
-    + weightedSwapFold E I selected velocity items
-weightedPairFoldDecomposition E I selected velocity [] = solve []
-weightedPairFoldDecomposition E I selected velocity (tau ∷ rest) =
+  selectedPairFold E I selected velocity items
+  ≡ selectedOrderedFold E I selected velocity items
+    + Round38.foldPower
+      (λ tau → selectedOrderedPower E I selected velocity
+        (Symmetry.swapTriad tau)) items
+selectedPairFoldSplit E I selected velocity [] = solve []
+selectedPairFoldSplit E I selected velocity (tau ∷ rest) =
   trans
     (cong
-      (_+ weightedPairFold E I selected velocity rest)
-      (weightedPairPowerDecomposition E I selected velocity tau))
+      (_+ selectedPairFold E I selected velocity rest)
+      (selectedPairPointwise E I selected velocity tau))
     (trans
       (cong
         (λ tail →
-          (weightedOrderedPower E I selected velocity tau
-            + weightedSwapPower E I selected velocity tau) + tail)
-        (weightedPairFoldDecomposition E I selected velocity rest))
+          (selectedOrderedPower E I selected velocity tau
+            + selectedOrderedPower E I selected velocity
+              (Symmetry.swapTriad tau)) + tail)
+        (selectedPairFoldSplit E I selected velocity rest))
       (solve
-        ( weightedOrderedPower E I selected velocity tau
-        ∷ weightedSwapPower E I selected velocity tau
-        ∷ weightedOrderedFold E I selected velocity rest
-        ∷ weightedSwapFold E I selected velocity rest
+        ( selectedOrderedPower E I selected velocity tau
+        ∷ selectedOrderedPower E I selected velocity (Symmetry.swapTriad tau)
+        ∷ selectedOrderedFold E I selected velocity rest
+        ∷ Round38.foldPower
+            (λ t → selectedOrderedPower E I selected velocity
+              (Symmetry.swapTriad t)) rest
         ∷ [])))
 
-weightedSwapFoldInvariant :
+selectedPairFoldIsDoubleOrdered :
   (E : C3.IntegerEmbedding F) →
   (I : C3.ModeInverseSquare F E) →
   (selected : Z3.FourierMode → Bool) →
   (velocity : Z3.FourierMode → C3.Complex3 F) →
   (cutoff : Nat) →
-  weightedSwapFold E I selected velocity
+  selectedPairFold E I selected velocity
     (Physical.physicalTriadEnumeration cutoff)
-  ≡ weightedOrderedFold E I selected velocity
-    (Physical.physicalTriadEnumeration cutoff)
-weightedSwapFoldInvariant E I selected velocity cutoff =
-  trans
-    (sym
-      (Round38.foldMap
-        (weightedOrderedPower E I selected velocity)
-        Symmetry.swapTriad
-        (Physical.physicalTriadEnumeration cutoff)))
-    (Round38.foldPermutationInvariant
-      (weightedOrderedPower E I selected velocity)
-      (Round38.swapTriadEnumerationPermutation cutoff))
-
-weightedPairFoldIsDoubleOrdered :
-  (E : C3.IntegerEmbedding F) →
-  (I : C3.ModeInverseSquare F E) →
-  (selected : Z3.FourierMode → Bool) →
-  (velocity : Z3.FourierMode → C3.Complex3 F) →
-  (cutoff : Nat) →
-  weightedPairFold E I selected velocity
-    (Physical.physicalTriadEnumeration cutoff)
-  ≡ weightedOrderedFold E I selected velocity
+  ≡ selectedOrderedFold E I selected velocity
       (Physical.physicalTriadEnumeration cutoff)
-    + weightedOrderedFold E I selected velocity
+    + selectedOrderedFold E I selected velocity
       (Physical.physicalTriadEnumeration cutoff)
-weightedPairFoldIsDoubleOrdered E I selected velocity cutoff =
+selectedPairFoldIsDoubleOrdered E I selected velocity cutoff =
   trans
-    (weightedPairFoldDecomposition E I selected velocity
+    (selectedPairFoldSplit E I selected velocity
       (Physical.physicalTriadEnumeration cutoff))
     (cong
-      (weightedOrderedFold E I selected velocity
+      (selectedOrderedFold E I selected velocity
         (Physical.physicalTriadEnumeration cutoff) +_)
-      (weightedSwapFoldInvariant E I selected velocity cutoff))
+      (trans
+        (sym
+          (Round38.foldMap
+            (selectedOrderedPower E I selected velocity)
+            Symmetry.swapTriad
+            (Physical.physicalTriadEnumeration cutoff)))
+        (Round38.foldPermutationInvariant
+          (selectedOrderedPower E I selected velocity)
+          (Round38.swapTriadEnumerationPermutation cutoff))))
 
-weightedPEnergyFold :
+pEnergySelectedPairFold qEnergySelectedPairFold :
   (E : C3.IntegerEmbedding F) →
   (I : C3.ModeInverseSquare F E) →
   (Z3.FourierMode → Bool) →
   (Z3.FourierMode → C3.Complex3 F) →
   List Physical.PhysicalTriadIncidence → ℚ
-weightedPEnergyFold E I selected velocity =
-  weightedFold
-    (λ tau →
-      Round96.selectTransfer (selected (Physical.p tau))
-        (Round38.orderedPairPower E I (Orbit.pEnergyLeg tau) velocity))
+pEnergySelectedPairFold E I selected velocity =
+  Round38.foldPower
+    (λ tau → Round96.selectTransfer (selected (Physical.p tau))
+      (Round38.orderedPairPower E I (Orbit.pEnergyLeg tau) velocity))
+qEnergySelectedPairFold E I selected velocity =
+  Round38.foldPower
+    (λ tau → Round96.selectTransfer (selected (Physical.q tau))
+      (Round38.orderedPairPower E I (Orbit.qEnergyLeg tau) velocity))
 
-weightedQEnergyFold :
-  (E : C3.IntegerEmbedding F) →
-  (I : C3.ModeInverseSquare F E) →
-  (Z3.FourierMode → Bool) →
-  (Z3.FourierMode → C3.Complex3 F) →
-  List Physical.PhysicalTriadIncidence → ℚ
-weightedQEnergyFold E I selected velocity =
-  weightedFold
-    (λ tau →
-      Round96.selectTransfer (selected (Physical.q tau))
-        (Round38.orderedPairPower E I (Orbit.qEnergyLeg tau) velocity))
-
-weightedPEnergyFoldInvariant :
+pEnergySelectedPairInvariant :
   (E : C3.IntegerEmbedding F) →
   (I : C3.ModeInverseSquare F E) →
   (selected : Z3.FourierMode → Bool) →
   (velocity : Z3.FourierMode → C3.Complex3 F) →
   (cutoff : Nat) →
-  weightedPEnergyFold E I selected velocity
+  pEnergySelectedPairFold E I selected velocity
     (Physical.physicalTriadEnumeration cutoff)
-  ≡ weightedPairFold E I selected velocity
+  ≡ selectedPairFold E I selected velocity
     (Physical.physicalTriadEnumeration cutoff)
-weightedPEnergyFoldInvariant E I selected velocity cutoff =
+pEnergySelectedPairInvariant E I selected velocity cutoff =
   trans
     (sym
       (Round38.foldMap
-        (weightedPairPower E I selected velocity)
+        (selectedPairPower E I selected velocity)
         Orbit.pEnergyLeg
         (Physical.physicalTriadEnumeration cutoff)))
     (Round38.foldPermutationInvariant
-      (weightedPairPower E I selected velocity)
+      (selectedPairPower E I selected velocity)
       (Round38.pEnergyLegEnumerationPermutation cutoff))
 
-weightedQEnergyFoldInvariant :
+qEnergySelectedPairInvariant :
   (E : C3.IntegerEmbedding F) →
   (I : C3.ModeInverseSquare F E) →
   (selected : Z3.FourierMode → Bool) →
   (velocity : Z3.FourierMode → C3.Complex3 F) →
   (cutoff : Nat) →
-  weightedQEnergyFold E I selected velocity
+  qEnergySelectedPairFold E I selected velocity
     (Physical.physicalTriadEnumeration cutoff)
-  ≡ weightedPairFold E I selected velocity
+  ≡ selectedPairFold E I selected velocity
     (Physical.physicalTriadEnumeration cutoff)
-weightedQEnergyFoldInvariant E I selected velocity cutoff =
+qEnergySelectedPairInvariant E I selected velocity cutoff =
   trans
     (sym
       (Round38.foldMap
-        (weightedPairPower E I selected velocity)
+        (selectedPairPower E I selected velocity)
         Orbit.qEnergyLeg
         (Physical.physicalTriadEnumeration cutoff)))
     (Round38.foldPermutationInvariant
-      (weightedPairPower E I selected velocity)
+      (selectedPairPower E I selected velocity)
       (Round38.qEnergyLegEnumerationPermutation cutoff))
 
-packetTransferThreeFoldDecomposition :
+packetTransferSplit :
   (E : C3.IntegerEmbedding F) →
   (I : C3.ModeInverseSquare F E) →
   (selected : Z3.FourierMode → Bool) →
   (velocity : Z3.FourierMode → C3.Complex3 F) →
   (items : List Physical.PhysicalTriadIncidence) →
   Round96.sumPacketTransfer E I selected velocity items
-  ≡ weightedPairFold E I selected velocity items
-    + weightedPEnergyFold E I selected velocity items
-    + weightedQEnergyFold E I selected velocity items
-packetTransferThreeFoldDecomposition E I selected velocity [] = solve []
-packetTransferThreeFoldDecomposition E I selected velocity (tau ∷ rest) =
+  ≡ selectedPairFold E I selected velocity items
+    + pEnergySelectedPairFold E I selected velocity items
+    + qEnergySelectedPairFold E I selected velocity items
+packetTransferSplit E I selected velocity [] = solve []
+packetTransferSplit E I selected velocity (tau ∷ rest) =
   trans
     (cong
       (Round96.packetTriadTransfer E I selected velocity tau +_)
-      (packetTransferThreeFoldDecomposition E I selected velocity rest))
+      (packetTransferSplit E I selected velocity rest))
     (solve
-      ( weightedPairPower E I selected velocity tau
+      ( selectedPairPower E I selected velocity tau
       ∷ Round96.selectTransfer (selected (Physical.p tau))
           (Round38.orderedPairPower E I (Orbit.pEnergyLeg tau) velocity)
       ∷ Round96.selectTransfer (selected (Physical.q tau))
           (Round38.orderedPairPower E I (Orbit.qEnergyLeg tau) velocity)
-      ∷ weightedPairFold E I selected velocity rest
-      ∷ weightedPEnergyFold E I selected velocity rest
-      ∷ weightedQEnergyFold E I selected velocity rest
+      ∷ selectedPairFold E I selected velocity rest
+      ∷ pEnergySelectedPairFold E I selected velocity rest
+      ∷ qEnergySelectedPairFold E I selected velocity rest
       ∷ []))
 
-sumPacketTransferIsSixWeightedOrderedFold :
+sumPacketTransferIsSixSelectedOrderedFold :
   (E : C3.IntegerEmbedding F) →
   (I : C3.ModeInverseSquare F E) →
   (selected : Z3.FourierMode → Bool) →
@@ -323,57 +274,52 @@ sumPacketTransferIsSixWeightedOrderedFold :
   Round96.sumPacketTransfer E I selected velocity
     (Physical.physicalTriadEnumeration cutoff)
   ≡ Round38.sixFold
-      (weightedOrderedFold E I selected velocity
+      (selectedOrderedFold E I selected velocity
         (Physical.physicalTriadEnumeration cutoff))
-sumPacketTransferIsSixWeightedOrderedFold E I selected velocity cutoff =
+sumPacketTransferIsSixSelectedOrderedFold E I selected velocity cutoff =
   let
     enumeration = Physical.physicalTriadEnumeration cutoff
-    pairTotal = weightedPairFold E I selected velocity enumeration
-    orderedTotal = weightedOrderedFold E I selected velocity enumeration
+    pairTotal = selectedPairFold E I selected velocity enumeration
+    orderedTotal = selectedOrderedFold E I selected velocity enumeration
+    pInv = pEnergySelectedPairInvariant E I selected velocity cutoff
+    qInv = qEnergySelectedPairInvariant E I selected velocity cutoff
+    pairDouble = selectedPairFoldIsDoubleOrdered E I selected velocity cutoff
   in
   trans
-    (packetTransferThreeFoldDecomposition E I selected velocity enumeration)
+    (packetTransferSplit E I selected velocity enumeration)
     (trans
-      (cong₂
-        (λ p q → pairTotal + p + q)
-        (weightedPEnergyFoldInvariant E I selected velocity cutoff)
-        (weightedQEnergyFoldInvariant E I selected velocity cutoff))
+      (cong₂ (λ p q → pairTotal + p + q) pInv qInv)
       (trans
-        (cong
-          (λ p → p + pairTotal + pairTotal)
-          (weightedPairFoldIsDoubleOrdered E I selected velocity cutoff))
+        (cong₂ _+_ (cong₂ _+_ pairDouble pairDouble) pairDouble)
         (solve (orderedTotal ∷ []))))
 
-normalizedPacketTransferIsWeightedOrderedFold :
+normalizedPacketTransferIsSelectedOrderedFold :
   (E : C3.IntegerEmbedding F) →
   (I : C3.ModeInverseSquare F E) →
   (selected : Z3.FourierMode → Bool) →
   (velocity : Z3.FourierMode → C3.Complex3 F) →
   (cutoff : Nat) →
   Norm.normalizedPacketTransfer E I selected velocity cutoff
-  ≡ weightedOrderedFold E I selected velocity
+  ≡ selectedOrderedFold E I selected velocity
       (Physical.physicalTriadEnumeration cutoff)
-normalizedPacketTransferIsWeightedOrderedFold E I selected velocity cutoff =
-  let
-    total = weightedOrderedFold E I selected velocity
-      (Physical.physicalTriadEnumeration cutoff)
+normalizedPacketTransferIsSelectedOrderedFold E I selected velocity cutoff =
+  let total = selectedOrderedFold E I selected velocity
+        (Physical.physicalTriadEnumeration cutoff)
   in
   trans
     (cong (Norm.oneSixth *_)
-      (sumPacketTransferIsSixWeightedOrderedFold
-        E I selected velocity cutoff))
+      (sumPacketTransferIsSixSelectedOrderedFold E I selected velocity cutoff))
     (solve (total ∷ []))
 
 ------------------------------------------------------------------------
--- Selected projected output pairing = weighted ordered fold.
+-- Literal selected projected pairing = selected ordered fold.
 ------------------------------------------------------------------------
 
 selectedProjectedOutputPower :
   {E : C3.IntegerEmbedding F} →
   {I : C3.ModeInverseSquare F E} →
   Equation.FiniteComplex3GalerkinSystem F E I →
-  (Z3.FourierMode → Bool) →
-  Z3.FourierMode → ℚ
+  (Z3.FourierMode → Bool) → Z3.FourierMode → ℚ
 selectedProjectedOutputPower system selected output =
   Round96.selectTransfer (selected output)
     (OutputPairing.realHermitianPower
@@ -384,8 +330,7 @@ sumSelectedProjectedPairings :
   {E : C3.IntegerEmbedding F} →
   {I : C3.ModeInverseSquare F E} →
   Equation.FiniteComplex3GalerkinSystem F E I →
-  (Z3.FourierMode → Bool) →
-  List Z3.FourierMode → ℚ
+  (Z3.FourierMode → Bool) → List Z3.FourierMode → ℚ
 sumSelectedProjectedPairings system selected [] = 0ℚ
 sumSelectedProjectedPairings system selected (output ∷ rest) =
   selectedProjectedOutputPower system selected output
@@ -400,132 +345,99 @@ literalSelectedProjectedPairing system selected =
   sumSelectedProjectedPairings system selected
     (Cube.cutoffModes (Equation.cutoff system))
 
-weightedFoldAppend :
-  (value : Physical.PhysicalTriadIncidence → ℚ) →
-  ∀ left right →
-  weightedFold value (Cube._++_ left right)
-  ≡ weightedFold value left + weightedFold value right
-weightedFoldAppend value [] right = refl
-weightedFoldAppend value (tau ∷ rest) right =
-  trans
-    (cong (value tau +_) (weightedFoldAppend value rest right))
-    (solve
-      ( value tau
-      ∷ weightedFold value rest
-      ∷ weightedFold value right
-      ∷ []))
-
-fiberWeightedFoldTrue :
-  {E : C3.IntegerEmbedding F} →
-  {I : C3.ModeInverseSquare F E} →
-  (system : Equation.FiniteComplex3GalerkinSystem F E I) →
-  (selected : Z3.FourierMode → Bool) →
-  (output : Z3.FourierMode) →
-  selected output ≡ true →
-  weightedOrderedFold E I selected (Equation.velocity system)
-    (Equation.concreteTriadsAt system output)
-  ≡ Round38.foldPower
-      (λ tau → Round38.orderedPower E I tau (Equation.velocity system))
-      (Equation.concreteTriadsAt system output)
-fiberWeightedFoldTrue {E} {I} system selected output outputTrue =
-  go
-    (Equation.concreteTriadsAt system output)
-    (λ tau member → Equation.concreteTriadsAtOutputAgreement member)
-  where
-  go :
-    (items : List Physical.PhysicalTriadIncidence) →
-    (∀ tau → Cube._∈_ tau items → Physical.k tau ≡ output) →
-    weightedOrderedFold E I selected (Equation.velocity system) items
-    ≡ Round38.foldPower
-        (λ tau → Round38.orderedPower E I tau (Equation.velocity system)) items
-  go [] pointwise = refl
-  go (tau ∷ rest) pointwise
-    rewrite pointwise tau (Cube.here refl) | outputTrue =
-    cong
-      (Round38.orderedPower E I tau (Equation.velocity system) +_)
-      (go rest (λ chosen member → pointwise chosen (Cube.there member)))
-
-fiberWeightedFoldFalse :
-  {E : C3.IntegerEmbedding F} →
-  {I : C3.ModeInverseSquare F E} →
-  (system : Equation.FiniteComplex3GalerkinSystem F E I) →
-  (selected : Z3.FourierMode → Bool) →
-  (output : Z3.FourierMode) →
-  selected output ≡ false →
-  weightedOrderedFold E I selected (Equation.velocity system)
-    (Equation.concreteTriadsAt system output)
-  ≡ 0ℚ
-fiberWeightedFoldFalse {E} {I} system selected output outputFalse =
-  go
-    (Equation.concreteTriadsAt system output)
-    (λ tau member → Equation.concreteTriadsAtOutputAgreement member)
-  where
-  go :
-    (items : List Physical.PhysicalTriadIncidence) →
-    (∀ tau → Cube._∈_ tau items → Physical.k tau ≡ output) →
-    weightedOrderedFold E I selected (Equation.velocity system) items ≡ 0ℚ
-  go [] pointwise = refl
-  go (tau ∷ rest) pointwise
-    rewrite pointwise tau (Cube.here refl) | outputFalse =
-    go rest (λ chosen member → pointwise chosen (Cube.there member))
-
-selectedOutputPairingEqualsWeightedFiberFold :
+selectedFiberFold :
   {E : C3.IntegerEmbedding F} →
   {I : C3.ModeInverseSquare F E} →
   (system : Equation.FiniteComplex3GalerkinSystem F E I) →
   (selected : Z3.FourierMode → Bool) →
   (output : Z3.FourierMode) →
   selectedProjectedOutputPower system selected output
-  ≡ weightedOrderedFold E I selected (Equation.velocity system)
+  ≡ selectedOrderedFold E I selected (Equation.velocity system)
       (Equation.concreteTriadsAt system output)
-selectedOutputPairingEqualsWeightedFiberFold {E} {I}
-    system selected output with selected output
+selectedFiberFold {E} {I} system selected output with selected output
 ... | true =
   trans
     (OutputPairing.projectedOutputEnergyPairingEqualsOrderedFiberFold
       system output)
-    (sym (fiberWeightedFoldTrue system selected output refl))
+    (sym (goTrue (Equation.concreteTriadsAt system output)
+      (λ tau member → Equation.concreteTriadsAtOutputAgreement member)))
+  where
+  goTrue :
+    (items : List Physical.PhysicalTriadIncidence) →
+    (∀ tau → Cube._∈_ tau items → Physical.k tau ≡ output) →
+    selectedOrderedFold E I (λ _ → true) (Equation.velocity system) items
+    ≡ Round38.foldPower
+        (λ tau → Round38.orderedPower E I tau (Equation.velocity system)) items
+  goTrue [] pointwise = refl
+  goTrue (tau ∷ rest) pointwise =
+    cong
+      (Round38.orderedPower E I tau (Equation.velocity system) +_)
+      (goTrue rest (λ chosen member → pointwise chosen (Cube.there member)))
 ... | false =
-  sym (fiberWeightedFoldFalse system selected output refl)
+  sym (goFalse (Equation.concreteTriadsAt system output)
+    (λ tau member → Equation.concreteTriadsAtOutputAgreement member))
+  where
+  goFalse :
+    (items : List Physical.PhysicalTriadIncidence) →
+    (∀ tau → Cube._∈_ tau items → Physical.k tau ≡ output) →
+    selectedOrderedFold E I (λ _ → false) (Equation.velocity system) items
+    ≡ 0ℚ
+  goFalse [] pointwise = refl
+  goFalse (tau ∷ rest) pointwise =
+    goFalse rest (λ chosen member → pointwise chosen (Cube.there member))
 
-sumSelectedProjectedPairingsEqualsConcatWeightedFold :
+-- We avoid a separate selected-output-fibre partition theorem: Round39 already
+-- proves the literal concatenated fibre list is a permutation of the complete
+-- enumeration, and foldPermutationInvariant works for any scalar value map.
+foldAppend :
+  (value : Physical.PhysicalTriadIncidence → ℚ) →
+  ∀ left right →
+  Round38.foldPower value (Cube._++_ left right)
+  ≡ Round38.foldPower value left + Round38.foldPower value right
+foldAppend value [] right = refl
+foldAppend value (tau ∷ rest) right =
+  trans
+    (cong (value tau +_) (foldAppend value rest right))
+    (solve
+      (value tau ∷ Round38.foldPower value rest
+       ∷ Round38.foldPower value right ∷ []))
+
+sumSelectedEqualsConcatFold :
   {E : C3.IntegerEmbedding F} →
   {I : C3.ModeInverseSquare F E} →
   (system : Equation.FiniteComplex3GalerkinSystem F E I) →
   (selected : Z3.FourierMode → Bool) →
   (outputs : List Z3.FourierMode) →
   sumSelectedProjectedPairings system selected outputs
-  ≡ weightedOrderedFold E I selected (Equation.velocity system)
+  ≡ selectedOrderedFold E I selected (Equation.velocity system)
       (Round39.concatOutputFibers (Equation.cutoff system) outputs)
-sumSelectedProjectedPairingsEqualsConcatWeightedFold system selected [] = refl
-sumSelectedProjectedPairingsEqualsConcatWeightedFold {E} {I}
-    system selected (output ∷ rest) =
+sumSelectedEqualsConcatFold system selected [] = refl
+sumSelectedEqualsConcatFold {E} {I} system selected (output ∷ rest) =
   trans
     (cong₂ _+_
-      (selectedOutputPairingEqualsWeightedFiberFold system selected output)
-      (sumSelectedProjectedPairingsEqualsConcatWeightedFold
-        system selected rest))
+      (selectedFiberFold system selected output)
+      (sumSelectedEqualsConcatFold system selected rest))
     (sym
-      (weightedFoldAppend
-        (weightedOrderedPower E I selected (Equation.velocity system))
+      (foldAppend
+        (selectedOrderedPower E I selected (Equation.velocity system))
         (Equation.concreteTriadsAt system output)
         (Round39.concatOutputFibers (Equation.cutoff system) rest)))
 
-literalSelectedProjectedPairingEqualsWeightedOrderedFold :
+literalSelectedProjectedPairingEqualsSelectedOrderedFold :
   {E : C3.IntegerEmbedding F} →
   {I : C3.ModeInverseSquare F E} →
   (system : Equation.FiniteComplex3GalerkinSystem F E I) →
   (selected : Z3.FourierMode → Bool) →
   literalSelectedProjectedPairing system selected
-  ≡ weightedOrderedFold E I selected (Equation.velocity system)
+  ≡ selectedOrderedFold E I selected (Equation.velocity system)
       (Physical.physicalTriadEnumeration (Equation.cutoff system))
-literalSelectedProjectedPairingEqualsWeightedOrderedFold {E} {I}
+literalSelectedProjectedPairingEqualsSelectedOrderedFold {E} {I}
     system selected =
   trans
-    (sumSelectedProjectedPairingsEqualsConcatWeightedFold
+    (sumSelectedEqualsConcatFold
       system selected (Cube.cutoffModes (Equation.cutoff system)))
     (Round38.foldPermutationInvariant
-      (weightedOrderedPower E I selected (Equation.velocity system))
+      (selectedOrderedPower E I selected (Equation.velocity system))
       (Round39.literalOutputPartitionPermutation (Equation.cutoff system)))
 
 literalSelectedProjectedPairingIsNormalizedPacketTransfer :
@@ -539,10 +451,9 @@ literalSelectedProjectedPairingIsNormalizedPacketTransfer :
 literalSelectedProjectedPairingIsNormalizedPacketTransfer {E} {I}
     system selected =
   trans
-    (literalSelectedProjectedPairingEqualsWeightedOrderedFold system selected)
-    (sym
-      (normalizedPacketTransferIsWeightedOrderedFold
-        E I selected (Equation.velocity system) (Equation.cutoff system)))
+    (literalSelectedProjectedPairingEqualsSelectedOrderedFold system selected)
+    (sym (normalizedPacketTransferIsSelectedOrderedFold
+      E I selected (Equation.velocity system) (Equation.cutoff system)))
 
 literalSelectedProjectedPairingIsNormalizedBoundaryFlux :
   {E : C3.IntegerEmbedding F} →
@@ -564,9 +475,6 @@ literalSelectedProjectedPairingIsNormalizedBoundaryFlux {E} {I}
 
 round98SelectedWeightedOutputFiberIdentificationClosed : Bool
 round98SelectedWeightedOutputFiberIdentificationClosed = true
-
-round98SelectedProjectedPairingIsNormalizedBoundaryFlux : Bool
-round98SelectedProjectedPairingIsNormalizedBoundaryFlux = true
 
 round98SelectedWeightedOutputFiberIdentificationClosedIsTrue :
   round98SelectedWeightedOutputFiberIdentificationClosed ≡ true
