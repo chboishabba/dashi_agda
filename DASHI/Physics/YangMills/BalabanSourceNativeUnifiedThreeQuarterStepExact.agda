@@ -40,7 +40,9 @@ module DASHI.Physics.YangMills.BalabanSourceNativeUnifiedThreeQuarterStepExact w
 -- once the estimates are stated on this carrier.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_)
 open import Data.Rational.Base as ℚ using (ℚ; _≤_; _<_)
+open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanSourceNativeStrongStateEntryExact as Source
