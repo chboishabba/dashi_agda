@@ -53,6 +53,7 @@ jobs:
             export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
             export XDG_CACHE_HOME="$RUNNER_TEMP/xdg-cache"
             export DASHI_STATUS_DIR="$RUNNER_TEMP/dashi-status"
+            export DASHI_NO_TMUX=1
             export AGDA_LOG_PATH="$GITHUB_WORKSPACE/agda-reopenable-consumer-intervention.log"
             export AGDA_JOBS=2
             mkdir -p "$XDG_CACHE_HOME" "$DASHI_STATUS_DIR"
