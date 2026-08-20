@@ -129,10 +129,10 @@ wardMassTermZero kernel =
   trans (sym leftNormalForm)
     (trans differenceEquality rightNormalForm)
 
-longitudinalIsMinusOne :
+wardLongitudinalIsMinusOne :
   (kernel : LocalTwoDerivativeWardKernel) →
   longitudinalCoefficient kernel ≡ 0ℚ - 1ℚ
-longitudinalIsMinusOne kernel =
+wardLongitudinalIsMinusOne kernel =
   let
     z = waveCoefficient kernel
     y = longitudinalCoefficient kernel
@@ -174,14 +174,14 @@ deltaCoefficientIsMaxwell kernel momentumSquared
 longitudinalCoefficientIsMaxwell :
   (kernel : LocalTwoDerivativeWardKernel) →
   longitudinalCoefficient kernel ≡ maxwellLongitudinalCoefficient
-longitudinalCoefficientIsMaxwell = longitudinalIsMinusOne
+longitudinalCoefficientIsMaxwell = wardLongitudinalIsMinusOne
 
 record MaxwellQuadraticKernelClassification
     (kernel : LocalTwoDerivativeWardKernel) : Set where
   field
     massTermZero : massSquared kernel ≡ 0ℚ
     waveIsOne : waveCoefficient kernel ≡ 1ℚ
-    longitudinalIsMinusOne :
+    longitudinalIsMinusOneExact :
       longitudinalCoefficient kernel ≡ maxwellLongitudinalCoefficient
     deltaIsMomentumSquared : ∀ q →
       deltaCoefficient kernel q ≡ maxwellDeltaCoefficient q
@@ -194,7 +194,7 @@ classifyLocalWardKernelAsMaxwell :
 classifyLocalWardKernelAsMaxwell kernel = record
   { massTermZero = wardMassTermZero kernel
   ; waveIsOne = waveNormalized kernel
-  ; longitudinalIsMinusOne = longitudinalIsMinusOne kernel
+  ; longitudinalIsMinusOneExact = wardLongitudinalIsMinusOne kernel
   ; deltaIsMomentumSquared = deltaCoefficientIsMaxwell kernel
   }
 
