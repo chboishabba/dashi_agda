@@ -21,18 +21,20 @@ module DASHI.Physics.Closure.NSTriadKNBoundarySelfTriadNormalizedDriftWitnessRou
 -- transfer through a packet boundary, or a normalized triad observable, is
 -- stationary under the isolated-triad dynamics.
 --
--- This file gives an exact rational witness inside the already-proved Round95
--- Waleffe/Manley--Rowe algebra.  Even after setting the self amplitude forcing
--- itself to zero, unequal modal energies leave the denominator-normalization
--- term nonzero.  Hence the final packet-boundary variation theorem must retain
--- a self-triad boundary sector as well as the external-network sector.
+-- This file gives exact rational witnesses inside the already-proved Round95
+-- Waleffe/Manley--Rowe algebra.  Even after setting self amplitude forcing and
+-- every external forcing to zero, unequal modal energies leave the normalized
+-- self drift nonzero.  Two choices of the lambda ordering give opposite signs.
+-- Hence the final packet-boundary theorem must retain the self-triad boundary
+-- sector, and no universal pointwise sign can be assigned to it from the
+-- three-leg energy identities alone.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
 import Data.Integer.Base as Int
-open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_; -_; _<_; positive)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_; -_; _<_)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Nullary.Decidable.Core using (toWitness)
@@ -45,63 +47,80 @@ one = 1ℚ
 two = Int.+ 2 / 1
 three = Int.+ 3 / 1
 
-selfTK selfTP selfTQ : ℚ
-selfTK = (three + (- two)) * one
-selfTP = (one + (- three)) * one
-selfTQ = (two + (- one)) * one
+mkSelfTangent : ℚ → ℚ → ℚ → Phase.NormalizedPhaseTangentData
+mkSelfTangent lambdaK lambdaP lambdaQ =
+  let
+    tk = (lambdaQ + (- lambdaP)) * one
+    tp = (lambdaK + (- lambdaQ)) * one
+    tq = (lambdaP + (- lambdaK)) * one
+  in
+  Phase.normalized-phase-tangent-data
+    one 0ℚ
+    one two three
+    tk tp tq
+    0ℚ 0ℚ 0ℚ
+    0ℚ 0ℚ
+    tk tp tq
+    0ℚ 0ℚ 0ℚ
+    (solve (lambdaK ∷ lambdaP ∷ lambdaQ ∷ []))
+    (solve (lambdaK ∷ lambdaP ∷ lambdaQ ∷ []))
+    (solve (lambdaK ∷ lambdaP ∷ lambdaQ ∷ []))
+    (solve (lambdaK ∷ lambdaP ∷ lambdaQ ∷ []))
 
-witnessTangentData : Phase.NormalizedPhaseTangentData
-witnessTangentData = Phase.normalized-phase-tangent-data
-  one                    -- amplitude
-  0ℚ                     -- amplitude tangent
-  one two three          -- E_k,E_p,E_q
-  selfTK selfTP selfTQ   -- energy tangents
-  0ℚ 0ℚ 0ℚ              -- rho_k,rho_p,rho_q
-  0ℚ 0ℚ                  -- self/external amplitude forcing
-  selfTK selfTP selfTQ   -- self transfers
-  0ℚ 0ℚ 0ℚ              -- external transfers
-  (solve [])
-  (solve [])
-  (solve [])
-  (solve [])
+mkSelfTransferData :
+  (lambdaK lambdaP lambdaQ : ℚ) → Phase.WaleffeSelfTransferData
+mkSelfTransferData lambdaK lambdaP lambdaQ =
+  Phase.waleffe-self-transfer-data
+    (mkSelfTangent lambdaK lambdaP lambdaQ)
+    lambdaK lambdaP lambdaQ
+    (solve []) (solve []) (solve [])
 
-witnessSelfTransferData : Phase.WaleffeSelfTransferData
-witnessSelfTransferData = Phase.waleffe-self-transfer-data
-  witnessTangentData
-  one two three
-  (solve [])
-  (solve [])
-  (solve [])
+negativeData : Phase.NormalizedPhaseTangentData
+negativeData = mkSelfTangent one two three
+
+positiveData : Phase.NormalizedPhaseTangentData
+positiveData = mkSelfTangent three two one
 
 minusTwo : ℚ
 minusTwo = - two
 
-witnessEnergyImbalanceIsMinusTwo :
-  Phase.energyImbalancePolynomial witnessSelfTransferData ≡ minusTwo
-witnessEnergyImbalanceIsMinusTwo = solve []
+negativeSelfNormalizedDriftIsMinusTwo :
+  Phase.selfNormalizedDrift negativeData ≡ minusTwo
+negativeSelfNormalizedDriftIsMinusTwo = solve []
 
-witnessSelfNormalizedDriftIsMinusTwo :
-  Phase.selfNormalizedDrift witnessTangentData ≡ minusTwo
-witnessSelfNormalizedDriftIsMinusTwo =
-  let
-    exact = Phase.waleffeSelfNormalizedDriftExact witnessSelfTransferData
-  in
-  solve []
+positiveSelfNormalizedDriftIsTwo :
+  Phase.selfNormalizedDrift positiveData ≡ two
+positiveSelfNormalizedDriftIsTwo = solve []
 
 minusTwoNegative : minusTwo < 0ℚ
 minusTwoNegative = toWitness {a? = minusTwo <? 0ℚ} _
 
-witnessSelfNormalizedDriftStrictlyNegative :
-  Phase.selfNormalizedDrift witnessTangentData < 0ℚ
-witnessSelfNormalizedDriftStrictlyNegative
-  rewrite witnessSelfNormalizedDriftIsMinusTwo = minusTwoNegative
+zeroBelowTwo : 0ℚ < two
+zeroBelowTwo = toWitness {a? = 0ℚ <? two} _
+
+negativeSelfNormalizedDriftStrictlyNegative :
+  Phase.selfNormalizedDrift negativeData < 0ℚ
+negativeSelfNormalizedDriftStrictlyNegative
+  rewrite negativeSelfNormalizedDriftIsMinusTwo = minusTwoNegative
+
+positiveSelfNormalizedDriftStrictlyPositive :
+  0ℚ < Phase.selfNormalizedDrift positiveData
+positiveSelfNormalizedDriftStrictlyPositive
+  rewrite positiveSelfNormalizedDriftIsTwo = zeroBelowTwo
 
 round100ThreeLegEnergyCancellationDoesNotEraseBoundarySelfDrift : Bool
 round100ThreeLegEnergyCancellationDoesNotEraseBoundarySelfDrift = true
 
-round100BoundarySelfTriadSectorMustRemainInFinalEstimate : Bool
-round100BoundarySelfTriadSectorMustRemainInFinalEstimate = true
+round100BoundarySelfDriftHasBothSignsInExactTransferAlgebra : Bool
+round100BoundarySelfDriftHasBothSignsInExactTransferAlgebra = true
+
+round100UniversalPointwiseSelfSectorSignAvailable : Bool
+round100UniversalPointwiseSelfSectorSignAvailable = false
 
 round100ThreeLegEnergyCancellationDoesNotEraseBoundarySelfDriftIsTrue :
   round100ThreeLegEnergyCancellationDoesNotEraseBoundarySelfDrift ≡ true
 round100ThreeLegEnergyCancellationDoesNotEraseBoundarySelfDriftIsTrue = refl
+
+round100UniversalPointwiseSelfSectorSignAvailableIsFalse :
+  round100UniversalPointwiseSelfSectorSignAvailable ≡ false
+round100UniversalPointwiseSelfSectorSignAvailableIsFalse = refl
