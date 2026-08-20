@@ -10,6 +10,7 @@ module DASHI.Core.CounterexampleGuidedConsumerRefinementExact where
 -- refined observer to global future safety without a separate theorem.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
@@ -39,12 +40,6 @@ record WitnessSplit
 
 open WitnessSplit public
 
-------------------------------------------------------------------------
--- If a refined observer itself factors through the old coarse observer, it
--- cannot split an old coarse collision.  Thus a genuine witness repair proves
--- strict information gain relative to that witness.
-------------------------------------------------------------------------
-
 refinementThatFactorsThroughCoarseCannotSplitDefect :
   ∀ {Fine Coarse Refined Output}
     {coarse : Fine → Coarse}
@@ -64,10 +59,6 @@ refinementThatFactorsThroughCoarseCannotSplitDefect defect refined fromCoarse fa
             | factors (Core.right defect)
             | Core.sameProjection defect = refl
 
-------------------------------------------------------------------------
--- Exact repair certificate for one witness.
-------------------------------------------------------------------------
-
 record CounterexampleGuidedRefinement
     {Fine Coarse Refined Output : Set}
     (coarse : Fine → Coarse)
@@ -83,11 +74,10 @@ open CounterexampleGuidedRefinement public
 record CounterexampleRefinementBoundary : Set where
   constructor counterexampleRefinementBoundary
   field
-    oneSplitDoesNotProveGlobalSeparation : Agda.Builtin.Bool.Bool
-    oneSplitDoesNotProveFutureSafety : Agda.Builtin.Bool.Bool
-    repeatedRefinementNeedsStoppingObligation : Agda.Builtin.Bool.Bool
+    oneSplitDoesNotProveGlobalSeparation : Bool
+    oneSplitDoesNotProveFutureSafety : Bool
+    repeatedRefinementNeedsStoppingObligation : Bool
 
 canonicalCounterexampleRefinementBoundary : CounterexampleRefinementBoundary
 canonicalCounterexampleRefinementBoundary =
-  counterexampleRefinementBoundary
-    Agda.Builtin.Bool.true Agda.Builtin.Bool.true Agda.Builtin.Bool.true
+  counterexampleRefinementBoundary true true true
