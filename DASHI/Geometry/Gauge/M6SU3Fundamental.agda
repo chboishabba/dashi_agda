@@ -7,6 +7,7 @@ open import Data.Product using (_×_; _,_)
 
 open import DASHI.Geometry.Gauge.M6BitensorRepresentation
 
+-- Dynkin labels for finite-dimensional SU(3) irreducibles.
 record SU3HighestWeight : Set where
   constructor dynkin
   field
@@ -28,12 +29,15 @@ adjoint8 = dynkin 1 1
 singlet1 : SU3HighestWeight
 singlet1 = dynkin 0 0
 
+-- The three weights of the defining representation and their mirrors.
 data FundamentalWeight : Set where
   epsilon1 epsilon2 epsilon3 : FundamentalWeight
 
 data AntiFundamentalWeight : Set where
   barEpsilon1 barEpsilon2 barEpsilon3 : AntiFundamentalWeight
 
+-- Difference weights in 3 ⊗ 3*. The zero weight occurs three times in the
+-- tensor basis; each of the six roots occurs once.
 data SU3DifferenceWeight : Set where
   zeroWeight : SU3DifferenceWeight
   alpha12 alpha13 alpha21 alpha23 alpha31 alpha32 : SU3DifferenceWeight
@@ -64,6 +68,7 @@ weightMultiplicityInMirrorTensor alpha23 = 1
 weightMultiplicityInMirrorTensor alpha31 = 1
 weightMultiplicityInMirrorTensor alpha32 = 1
 
+-- Diagonal SU(3) shells of the mirror M6 carrier 3 ⊗ 3*.
 data MirrorM6Shell : Set where
   invariantSinglet : MirrorM6Shell
   tracelessAdjoint : MirrorM6Shell
@@ -75,6 +80,8 @@ mirrorM6ShellDimension tracelessAdjoint = shell-dimension 8 1
 mirrorM6DimensionCloses : 3 * 3 ≡ 1 + 8
 mirrorM6DimensionCloses = refl
 
+-- The three tensor-basis zero weights split into the singlet zero weight and
+-- the rank-two Cartan zero-weight space of the adjoint.
 zeroWeightShellSplit : zeroWeightTensorMultiplicity ≡ 1 + 2
 zeroWeightShellSplit = refl
 
@@ -84,6 +91,7 @@ adjointRootCount = 6
 adjointWeightCountCloses : 8 ≡ 2 + adjointRootCount
 adjointWeightCountCloses = refl
 
+-- Same-orientation M6 carrier 3 ⊗ 3.
 data SameOrientationM6Shell : Set where
   symmetricSixShell : SameOrientationM6Shell
   antisymmetricMirrorShell : SameOrientationM6Shell
@@ -95,6 +103,8 @@ sameOrientationShellDimension antisymmetricMirrorShell = shell-dimension 3 1
 sameOrientationM6DimensionCloses : 3 * 3 ≡ 6 + 3
 sameOrientationM6DimensionCloses = refl
 
+-- Representation-level decomposition witnesses. They deliberately distinguish
+-- the mirror bitensor End(3) from the same-orientation tensor square.
 record SU3MirrorM6Decomposition : Set where
   field
     sourceLeft  : SU3HighestWeight
