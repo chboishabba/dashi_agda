@@ -20,7 +20,7 @@ on:
       - '.github/workflows/reopenable-consumer-intervention.yml'
 
 concurrency:
-  group: dashi-global-${{ github.ref }}
+  group: reopenable-consumer-intervention-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:
