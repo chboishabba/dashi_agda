@@ -10,29 +10,26 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound87FourAnalyticLemmaEx
 -- description, in The Millennium Prize Problems.  No DOI assigned.
 --
 -- Tadeusz Bałaban,
--- "Renormalization Group Approach to Lattice Gauge Field Theories. I.
--- Generation of Effective Actions in a Small Field Approximation and a
--- Coupling Constant Renormalization in Four Dimensions",
+-- "Renormalization Group Approach to Lattice Gauge Field Theories. I.",
 -- Communications in Mathematical Physics 109 (1987), 249--301.
 -- DOI: 10.1007/BF01215223.
 --
--- Round88 makes three genuine internal reductions.
+-- Tadeusz Bałaban,
+-- "Renormalization Group Approach to Lattice Gauge Field Theories. II.
+-- Cluster Expansions", Communications in Mathematical Physics 116 (1988),
+-- 1--22. DOI: 10.1007/BF01239022.
 --
--- A1 / beta observable: CMP109 (5.36)--(5.41) says the beta consumer only needs
--- ONE mixed derivative of an off-diagonal vacuum-polarization component.  The
--- third-order remainder vanishes in the two-jet quotient.  Therefore the finite
--- literal task is the Wilson/FP/Haar off-diagonal two-jet + mixed coefficient,
--- not an unnecessarily strong all-component kernel theorem.
+-- ROUND88 INTERNAL REDUCTIONS
 --
--- A2 / regular denominator: every regular generated cell has an outer axis;
--- one canonical outer Wilson component gap propagates to the full hat{k}^2.
--- The existing constructive Machin-angle sine theorem supplies exactly
--- 7569/4096 once the literal sine atom is materialized as that SAME Bishop sine.
--- Hence no 240-box denominator receipts and no new trig estimate remain.
---
--- B / local fields: exact finite weighted Cauchy--Schwarz reduces the composite
--- and stress Hilbert moduli to ONE cutoff-uniform differentiated-source
--- coefficient-energy estimate.
+-- A1: CMP109 beta extraction needs one off-diagonal mixed two-jet coefficient;
+--     the third-order remainder vanishes in the two-jet quotient.
+-- A2: one outer canonical Wilson component gap gives the full regular hat{k}^2;
+--     Machin-period Bishop sine analysis supplies 7569/4096 after same-object
+--     atom materialization.
+-- B1: weighted Cauchy reduces composite/stress Hilbert moduli to coefficient
+--     energy.
+-- B2: exact finite geometric summation reduces uniform coefficient energy to
+--     ONE physical shell theorem E_d <= E0 r^d with 0 <= r < 1.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
@@ -43,6 +40,7 @@ import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound85SixAnalyticLemmaAtt
 import DASHI.Physics.YangMills.YangMillsClayStressOPERequirementBoundaryExact
 import DASHI.Physics.YangMills.BalabanMarkedSourceCompositeStressFieldExact
 import DASHI.Physics.YangMills.BalabanMarkedSourceCoefficientEnergyHilbertCompilerExact
+import DASHI.Physics.YangMills.BalabanMarkedSourceGeometricShellEnergyExact
 import DASHI.Physics.YangMills.YangMillsSameFamilyCumulantMarginToInteractingExact
 import DASHI.Physics.YangMills.BalabanClayT4SineDeterminesCosineAtomExact
 import DASHI.Physics.YangMills.BalabanCMP109MixedDerivativeBetaExtractionExact
@@ -61,21 +59,24 @@ round87ShortestClayAnalyticCount = 4
 
 -- A. UV ENTRY / ASYMPTOTIC FREEDOM HISTORY
 --
--- On the SAME literal Wilson + reduced-FP + Haar Bałaban carrier:
---
---   beta_j(G) = C_A(G) 11/24 + r_local(g_{j-1}) + r_irrelevant(j)
---
--- with a cutoff/volume/scale/group-uniform strictly positive lower bound.
--- The primitive perturbative observable is the literal off-diagonal two-jet
--- mixed coefficient.  The regular denominator is downstream of one canonical
--- outer-sine materialization; four orbit enclosures and remainder budgets remain
--- the finite analytic work after the literal mixed numerator is constructed.
+-- Remaining physical content: literal Wilson/reduced-FP/Haar off-diagonal
+-- mixed two-jet; same-object regular four-orbit matching; local and irrelevant
+-- remainder budgets leaving a uniform positive margin.
 literalCompactSimplePositiveBetaLevel : ProofLevel
 literalCompactSimplePositiveBetaLevel = conditional
 
--- B. ONE DIFFERENTIATED MARKED-SOURCE LOCALITY / COEFFICIENT-ENERGY THEOREM
-physicalMarkedSourceLocalityCompositeStressCoefficientEnergyLevel : ProofLevel
-physicalMarkedSourceLocalityCompositeStressCoefficientEnergyLevel = conditional
+-- B. DIFFERENTIATED MARKED-SOURCE LOCALITY / GEOMETRIC SHELL ENERGY
+--
+-- Remaining physical content: identify Hessian/composite/stress marks with the
+-- source-native CMP116 coordinates, prove common uniform analytic radii and the
+-- spatial majorant, and prove one geometric shell-energy estimate
+--
+--                  E_d <= E0 r^d,   0 <= r < 1.
+--
+-- Exact summation -> coefficient cap -> weighted Cauchy/Hilbert -> nuclear
+-- composite/stress fields are all downstream.
+physicalMarkedSourceLocalityCompositeStressGeometricShellEnergyLevel : ProofLevel
+physicalMarkedSourceLocalityCompositeStressGeometricShellEnergyLevel = conditional
 
 -- C. SAME-DENSITY COMPACT-LIE HEAT/LANGEVIN MASS GAP
 sameDensityCompactLieHeatLangevinMassGapLevel : ProofLevel
@@ -86,7 +87,7 @@ sameFamilyShortDistanceOPEStressAFLevel : ProofLevel
 sameFamilyShortDistanceOPEStressAFLevel = conditional
 
 ------------------------------------------------------------------------
--- DOWNSTREAM THEOREMS THAT JUSTIFY / SHARPEN THE FOUR-FAMILY RECUT
+-- DOWNSTREAM THEOREMS
 ------------------------------------------------------------------------
 
 literalClayStressOPEBoundaryLevel : ProofLevel
@@ -94,6 +95,9 @@ literalClayStressOPEBoundaryLevel = machineChecked
 
 sameCompletedCompositeStressFieldCompilerLevel : ProofLevel
 sameCompletedCompositeStressFieldCompilerLevel = machineChecked
+
+markedSourceGeometricShellSummationLevel : ProofLevel
+markedSourceGeometricShellSummationLevel = machineChecked
 
 markedSourceCoefficientEnergyToHilbertCauchyLevel : ProofLevel
 markedSourceCoefficientEnergyToHilbertCauchyLevel = machineChecked
