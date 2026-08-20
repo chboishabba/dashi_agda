@@ -26,12 +26,12 @@ module DASHI.Physics.Closure.NSTriadKNClayFrontierRound101Exact where
 -- ROUND101 / CORRECTED FRONTIER AFTER TESTING THE EIGENPACKET ROUTE
 --
 -- Round100 exposed exact-radius scalar viscosity and arithmetic-circle
--- resonance geometry.  Round101 tests the two shortcuts needed to turn that
+-- resonance geometry. Round101 tests the two shortcuts needed to turn that
 -- observation into the proposed 4 -> 3 proof step.
 --
 -- Both shortcuts fail as stated:
 --
--- (1) full-circle cardinality cannot CREATE radial decay.  A nonempty circle
+-- (1) full-circle cardinality cannot CREATE radial decay. A nonempty circle
 --     has at least one incidence, and the current radial packet boundary is
 --     constant on every fixed-(m,l,n) resonance fibre, so it does not localize
 --     that fibre to a Bourgain--Rudnick short arc;
@@ -41,18 +41,30 @@ module DASHI.Physics.Closure.NSTriadKNClayFrontierRound101Exact where
 --     concrete rational witness has both diagonal eigenpacket numerators zero
 --     while the recombined numerator is +4.
 --
+-- Round101 also identifies the exact positive rescue for (2). For two radii,
+-- the cross-radius obstruction factors through
+--
+--   C = D q - E L
+--     = (lambda1-lambda2)(E1 q2 - E2 q1).
+--
+-- Thus the radial commutator vanishes whenever transfer density is coherent in
+-- the division-free sense E1 q2 = E2 q1. Under that theorem the recombined
+-- relative-growth numerator descends exactly. What remains open is proving an
+-- adequate dynamic/quantitative version of this coherence on the physical
+-- boundary interaction; Parseval itself does not supply it.
+--
 -- Therefore `FixedEigenvalueResonantCircleSchur` is NOT closed merely by the
 -- Round100 circle identity, and `EigenpacketExpenditureRecombinesToCriticalBarrier`
--- is NOT a Parseval-only lemma.  The viable replacement frontier must prove:
+-- is NOT a Parseval-only lemma. The viable replacement frontier must prove:
 --
 --   A. literal weighted/angular/cancellation gain on the fixed-radius boundary
 --      interaction (or abandon the circle route);
 --   B. signed boundary self+external replenishment/expenditure;
---   C. cross-radius commutator control, OR a same-solution critical consumer
---      that genuinely stays additive at exact radius;
+--   C. quantitative radial transfer-coherence / cross-radius commutator control,
+--      or a same-solution critical consumer genuinely additive at exact radius;
 --   D. the physical Aubin--Lions/limit weld on that same solution.
 --
--- This file is intentionally fail-closed.  It aggregates theorem results that
+-- This file is intentionally fail-closed. It aggregates theorem results that
 -- have actually been proved and does not promote the open PDE producer.
 ------------------------------------------------------------------------
 
@@ -66,6 +78,7 @@ import DASHI.Physics.Closure.NSTriadKNFixedEigenvalueCircleSchurDecayNoGoRound10
 import DASHI.Physics.Closure.NSTriadKNRadialPacketDoesNotShortenResonantCircleRound101Exact as RadialNoGo
 import DASHI.Physics.Closure.NSTriadKNEigenpacketCrossRadiusRecombinationRound101Exact as CrossRadius
 import DASHI.Physics.Closure.NSTriadKNEigenpacketRecombinationCounterexampleRound101Exact as RecombinationNoGo
+import DASHI.Physics.Closure.NSTriadKNEigenpacketRadialTransferCoherenceRound101Exact as Coherence
 import DASHI.Physics.Closure.NSTriadKNCriticalCompactnessSerrinRound29Exact as Critical
 
 round101FixedEigenvalueCircleGeometryClosed : Bool
@@ -95,6 +108,14 @@ round101DistinctRadiiHaveCrossRadiusRecombinationDefect =
 round101DiagonalEigenpacketControlAloneImpliesShellControl : Bool
 round101DiagonalEigenpacketControlAloneImpliesShellControl =
   RecombinationNoGo.round101DiagonalEigenpacketControlAloneImpliesShellControl
+
+round101CrossRadiusDefectFactorsThroughTransferDensityMinor : Bool
+round101CrossRadiusDefectFactorsThroughTransferDensityMinor =
+  Coherence.round101CrossRadiusObstructionFactorsThroughTransferDensityMinor
+
+round101ExactTransferCoherenceRestoresRecombination : Bool
+round101ExactTransferCoherenceRestoresRecombination =
+  Coherence.round101RadialTransferCoherenceRestoresExactRecombination
 
 round101PhysicalAubinLionsLimitWeldClosed : Bool
 round101PhysicalAubinLionsLimitWeldClosed =
@@ -127,6 +148,14 @@ round101DistinctRadiiHaveCrossRadiusRecombinationDefectIsTrue = refl
 round101DiagonalEigenpacketControlAloneImpliesShellControlIsFalse :
   round101DiagonalEigenpacketControlAloneImpliesShellControl ≡ false
 round101DiagonalEigenpacketControlAloneImpliesShellControlIsFalse = refl
+
+round101CrossRadiusDefectFactorsThroughTransferDensityMinorIsTrue :
+  round101CrossRadiusDefectFactorsThroughTransferDensityMinor ≡ true
+round101CrossRadiusDefectFactorsThroughTransferDensityMinorIsTrue = refl
+
+round101ExactTransferCoherenceRestoresRecombinationIsTrue :
+  round101ExactTransferCoherenceRestoresRecombination ≡ true
+round101ExactTransferCoherenceRestoresRecombinationIsTrue = refl
 
 round101PhysicalAubinLionsLimitWeldClosedIsFalse :
   round101PhysicalAubinLionsLimitWeldClosed ≡ false
