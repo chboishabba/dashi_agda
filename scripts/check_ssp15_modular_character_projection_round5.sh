@@ -101,3 +101,5 @@ python3 scripts/classify_agda_substance.py \
 scripts/run_agda29_parallel_check.sh \
   DASHI/Moonshine/SSPModularCharacterProjectionRound5Validation.agda \
   DASHI/EverythingSSPModularCharacterProjectionRound5.agda
+
+# Validation-trigger marker: execute this checker against the rebased Round-5 head.
