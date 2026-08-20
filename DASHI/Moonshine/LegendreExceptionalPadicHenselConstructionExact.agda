@@ -14,19 +14,27 @@ module DASHI.Moonshine.LegendreExceptionalPadicHenselConstructionExact where
 -- Joseph H. Silverman,
 -- "The Arithmetic of Elliptic Curves", 2nd ed., GTM 106, Springer, 2009.
 -- DOI: 10.1007/978-0-387-09494-6.
--- Legendre family, reduction, and Hensel/local-field context.
+-- Hensel lifting / complete local-field context and the Legendre family.
 --
 -- DASHI CONTRIBUTION
 --
--- Lower the old `ExceptionalPadicLift` obligation to standard complete-DVR /
--- Hensel data.  The nearby point is DEFINED by
+-- The lifted exceptional centre is no longer chosen as an unrelated p-adic
+-- element.  A standard Hensel-lift operation is the source boundary, and
 --
---     lambda = lambda0 + pi,
+--     lambda0 := henselLift finiteCentre
 --
--- so lambda-lambda0 = pi*1 is derived.  The residue equality is also derived
--- from the residue homomorphism and residue(pi)=0; it is not a separate nearby
--- point receipt.  The selected branch polynomial, simple-factor quotient and
--- rational J-alpha outer factor all live at this SAME lambda.
+-- definitionally.  Its reduction and branch-root law are the ordinary Hensel
+-- conclusions.  The nearby point is then DEFINED by
+--
+--     lambda := lambda0 + pi,
+--
+-- so lambda-lambda0 = pi*1 is derived.  Residue additivity and residue(pi)=0
+-- derive that lambda has the same certified finite residue.  The selected
+-- branch quotient and rational J-alpha outer factor are actual local elements
+-- evaluated at this SAME lambda.
+--
+-- This is intentionally an adapter to standard complete-DVR/Hensel authority;
+-- it does not reimplement Q_p or Hensel's lemma from Cauchy sequences.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -54,7 +62,6 @@ record ExceptionalHenselLocalSource
     add subtract : PadicLocal → PadicLocal → PadicLocal
     subtractAddRight : (x d : PadicLocal) → subtract (add x d) x ≡ d
 
-    -- Residue-ring addition is included only to DERIVE reduction of lambda0+pi.
     residueAdd : Residue → Residue → Residue
     residueAddHom :
       (x y : PadicLocal) →
@@ -68,10 +75,15 @@ record ExceptionalHenselLocalSource
 
     zeroLocal : PadicLocal
     branchPolynomial : PadicLocal → PadicLocal
-    liftedCentre : PadicLocal
-    liftedCentreReduces :
-      ResidueUnit.residue residueValuation liftedCentre ≡ Lift.centre finitePoint
-    liftedCentreIsRoot : branchPolynomial liftedCentre ≡ zeroLocal
+
+    -- STANDARD HENSEL AUTHORITY.  The selected finite centre is not followed by
+    -- a separately chosen lift; lambda0 is the output of this operation.
+    henselLift : Residue → PadicLocal
+    henselLiftReduces :
+      (r : Residue) →
+      ResidueUnit.residue residueValuation (henselLift r) ≡ r
+    henselSelectedCentreIsRoot :
+      branchPolynomial (henselLift (Lift.centre finitePoint)) ≡ zeroLocal
 
     uniformizer : PadicLocal
     uniformizerDepthOne : Ramified.valuation valuation uniformizer ≡ 1
@@ -84,16 +96,21 @@ record ExceptionalHenselLocalSource
     mulRightOne :
       (x : PadicLocal) → Ramified.mul valuation x (Ramified.one valuation) ≡ x
 
+    -- ACTUAL simple-factor quotient at lambda=lambda0+pi.
     derivativeUnit : PadicLocal
     derivativeReduces :
       ResidueUnit.residue residueValuation derivativeUnit
       ≡ Lift.derivativeResidue finitePoint
     branchFactorizationAtNearby :
-      branchPolynomial (add liftedCentre uniformizer)
+      branchPolynomial
+        (add (henselLift (Lift.centre finitePoint)) uniformizer)
       ≡ Ramified.mul valuation
-          (subtract (add liftedCentre uniformizer) liftedCentre)
+          (subtract
+            (add (henselLift (Lift.centre finitePoint)) uniformizer)
+            (henselLift (Lift.centre finitePoint)))
           derivativeUnit
 
+    -- ACTUAL rational-function J-alpha factor at the SAME nearby point.
     alphaLift : PadicLocal
     localJ : PadicLocal → PadicLocal
     outerUnit : PadicLocal
@@ -101,13 +118,35 @@ record ExceptionalHenselLocalSource
       ResidueUnit.residue residueValuation outerUnit
       ≡ Lift.outerUnitResidue finitePoint
     localJFactorizationAtNearby :
-      subtract (localJ (add liftedCentre uniformizer)) alphaLift
+      subtract
+        (localJ (add (henselLift (Lift.centre finitePoint)) uniformizer))
+        alphaLift
       ≡ Ramified.mul valuation outerUnit
           (Ramified.pow valuation
-            (branchPolynomial (add liftedCentre uniformizer))
+            (branchPolynomial
+              (add (henselLift (Lift.centre finitePoint)) uniformizer))
             (Legendre.exceptionalRamificationExponent branch))
 
 open ExceptionalHenselLocalSource public
+
+liftedCentre :
+  {branch : Legendre.ExceptionalLegendreBranch} →
+  (S : ExceptionalHenselLocalSource branch) → PadicLocal S
+liftedCentre S = henselLift S (Lift.centre (finitePoint S))
+
+liftedCentreReducesToFiniteCentre :
+  {branch : Legendre.ExceptionalLegendreBranch} →
+  (S : ExceptionalHenselLocalSource branch) →
+  ResidueUnit.residue (residueValuation S) (liftedCentre S)
+  ≡ Lift.centre (finitePoint S)
+liftedCentreReducesToFiniteCentre S =
+  henselLiftReduces S (Lift.centre (finitePoint S))
+
+liftedCentreIsActualBranchRoot :
+  {branch : Legendre.ExceptionalLegendreBranch} →
+  (S : ExceptionalHenselLocalSource branch) →
+  branchPolynomial S (liftedCentre S) ≡ zeroLocal S
+liftedCentreIsActualBranchRoot S = henselSelectedCentreIsRoot S
 
 liftedCoordinate :
   {branch : Legendre.ExceptionalLegendreBranch} →
@@ -157,7 +196,9 @@ liftedCoordinateReducesToFiniteCentre :
   ResidueUnit.residue (residueValuation S) (liftedCoordinate S)
   ≡ Lift.centre (finitePoint S)
 liftedCoordinateReducesToFiniteCentre S =
-  trans (liftedCoordinateReducesToLiftedCentre S) (liftedCentreReduces S)
+  trans
+    (liftedCoordinateReducesToLiftedCentre S)
+    (liftedCentreReducesToFiniteCentre S)
 
 constructExceptionalPadicLift :
   (branch : Legendre.ExceptionalLegendreBranch) →
@@ -175,7 +216,7 @@ constructExceptionalPadicLift branch S = record
   ; Lift.liftedCoordinate = liftedCoordinate S
   ; Lift.liftedCentre = liftedCentre S
   ; Lift.coordinateDifference = coordinateDifference S
-  ; Lift.liftedCentreReducesToFiniteCentre = liftedCentreReduces S
+  ; Lift.liftedCentreReducesToFiniteCentre = liftedCentreReducesToFiniteCentre S
   ; Lift.liftedCoordinateReducesToFiniteCentre = liftedCoordinateReducesToFiniteCentre S
   ; Lift.coordinateDifferenceIsActualDifference = refl
   ; Lift.uniformizer = uniformizer S
@@ -216,7 +257,9 @@ constructedLocalJDepth branch S =
 
 record LegendreExceptionalPadicHenselConstructionBoundary : Set where
   field
-    henselCentreIsActualRootRequired : Bool
+    henselLiftOperationIsSourceBoundary : Bool
+    liftedCentreDefinedFromFiniteCentre : Bool
+    liftedCentreRootLawRequired : Bool
     nearbyCoordinateDefinedAsCentrePlusUniformizer : Bool
     lambdaMinusLambda0EqualsPiTimesOneDerived : Bool
     nearbyResidueDerivedFromResidueHomomorphism : Bool
@@ -231,7 +274,9 @@ record LegendreExceptionalPadicHenselConstructionBoundary : Set where
 canonicalLegendreExceptionalPadicHenselConstructionBoundary :
   LegendreExceptionalPadicHenselConstructionBoundary
 canonicalLegendreExceptionalPadicHenselConstructionBoundary = record
-  { henselCentreIsActualRootRequired = true
+  { henselLiftOperationIsSourceBoundary = true
+  ; liftedCentreDefinedFromFiniteCentre = true
+  ; liftedCentreRootLawRequired = true
   ; nearbyCoordinateDefinedAsCentrePlusUniformizer = true
   ; lambdaMinusLambda0EqualsPiTimesOneDerived = true
   ; nearbyResidueDerivedFromResidueHomomorphism = true
