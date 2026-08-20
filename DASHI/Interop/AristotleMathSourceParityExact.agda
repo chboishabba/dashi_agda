@@ -67,9 +67,9 @@ archimedesNinetySixParity = aristotleMathModuleParity
   "b04468675150478726d53b966886de449b75f915b5210e5676d2db16c833aaf7"
   146
   9
-  unported
-  "none"
-  "96-gon interval propagation and 223/71 < pi < 22/7 remain; blocked by constructive pi/trigonometric/order layer"
+  partial
+  "DASHI.Foundations.BishopMachinPiArchimedesWindowExact"
+  "headline numerical enclosure 223/71 < bishopMachinPi < 22/7 is proved on the actual convergent Bishop Machin real; source 96-gon interval propagation and geometric/trigonometric identification of that real with pi remain"
 
 archimedesSpinParity : AristotleMathModuleParity
 archimedesSpinParity = aristotleMathModuleParity
@@ -138,8 +138,8 @@ hecke23Parity = aristotleMathModuleParity
   115
   10
   substantialCore
-  "DASHI.Moonshine.AristotleHeckeRecurrenceCoreExact;DASHI.Moonshine.RamanujanTauHecke23Exact;DASHI.Moonshine.ClassicalHeckeWeightKSmallWordExact"
-  "prime-power recurrence uniqueness and exact two-prime smooth assembly are ported together with low closed identities; full Nat HeckeSystem coprime packaging, divisor-count example, and source Set Smooth3 packaging remain"
+  "DASHI.Moonshine.AristotleHeckeRecurrenceCoreExact;DASHI.Moonshine.AristotleHecke23Smooth3ParityExact;DASHI.Moonshine.RamanujanTauHecke23Exact;DASHI.Moonshine.ClassicalHeckeWeightKSmallWordExact"
+  "prime-power recurrence uniqueness, exact two-prime smooth assembly, and the source Smooth3 carrier with 3/6/9 witnesses are ported together with low closed identities; full Nat HeckeSystem coprime packaging and divisor-count example remain"
 
 heckeGeneralParity : AristotleMathModuleParity
 heckeGeneralParity = aristotleMathModuleParity
@@ -148,8 +148,8 @@ heckeGeneralParity = aristotleMathModuleParity
   155
   8
   partial
-  "DASHI.Moonshine.AristotleHeckeRecurrenceCoreExact;DASHI.Moonshine.AristotleHeckeGeneralPrimePowerDecompositionExact;DASHI.Moonshine.CandidateLevelRepresentationHeckeSquareExact"
-  "stdlib constructive raw factorisation plus arbitrary-S closure on pairwise-coprime prime-power decompositions are ported; canonical grouping of raw repeated prime factors into prime-power blocks, finite separating bound, and a_zero_undetermined remain"
+  "DASHI.Moonshine.AristotleHeckeRecurrenceCoreExact;DASHI.Moonshine.AristotleHeckeGeneralPrimePowerDecompositionExact;DASHI.Moonshine.AristotleHeckeGeneralZeroUpdateExact;DASHI.Moonshine.CandidateLevelRepresentationHeckeSquareExact"
+  "stdlib constructive raw factorisation plus arbitrary-S closure on pairwise-coprime prime-power decompositions and the source a(0)-undetermined update theorem are ported; canonical grouping of repeated raw prime factors into prime-power blocks and the finite separating-bound theorem remain"
 
 heckeWordsParity : AristotleMathModuleParity
 heckeWordsParity = aristotleMathModuleParity
