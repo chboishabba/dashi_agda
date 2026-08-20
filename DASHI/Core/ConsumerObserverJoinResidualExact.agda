@@ -18,7 +18,7 @@ module DASHI.Core.ConsumerObserverJoinResidualExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Product using (_×_; _,_; proj₁; proj₂; Σ; _,_)
+open import Data.Product using (_×_; _,_; proj₁; proj₂; Σ)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Core.ReopenableConsumerInterventionKernelExact as Kernel
@@ -89,21 +89,15 @@ sameHotAndResidualSameFine :
   hot recoverable left ≡ hot recoverable right →
   residual recoverable left ≡ residual recoverable right →
   left ≡ right
-sameHotAndResidualSameFine recoverable sameHot sameResidual =
+sameHotAndResidualSameFine recoverable {left} {right} sameHot sameResidual =
   trans
-    (sym (reopenExact recoverable _))
-    (trans
-      (cong
-        (λ pair → reopen recoverable (proj₁ pair) (proj₂ pair))
-        (cong₂ _,_ sameHot sameResidual))
-      (reopenExact recoverable _))
+    (sym (reopenExact recoverable left))
+    (trans sameReopened (reopenExact recoverable right))
   where
-    cong₂ :
-      ∀ {A B C : Set}
-        (f : A → B → C)
-        {a a' : A} {b b' : B} →
-      a ≡ a' → b ≡ b' → f a b ≡ f a' b'
-    cong₂ f refl refl = refl
+    sameReopened :
+      reopen recoverable (hot recoverable left) (residual recoverable left)
+      ≡ reopen recoverable (hot recoverable right) (residual recoverable right)
+    sameReopened rewrite sameHot | sameResidual = refl
 
 ------------------------------------------------------------------------
 -- Consumer sufficiency is ordinary descent through the hot projection.
