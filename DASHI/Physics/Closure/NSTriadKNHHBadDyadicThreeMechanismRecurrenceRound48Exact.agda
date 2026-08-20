@@ -45,9 +45,46 @@ import DASHI.Physics.Closure.NSTriadKNHHBadSharpDyadicGainRound33Exact as Sharp
 import DASHI.Physics.Closure.NSTriadKNHHBadDyadicInheritedHalfRound48Exact as Half
 import DASHI.Physics.Closure.NSTriadKNHHBadInheritedGeneratedLeakageRound48Exact as Split
 import DASHI.Physics.Closure.NSTriadKNHHBadSelectedThresholdRecurrenceRound47Exact as Selected
-import DASHI.Physics.Closure.NSTriadKNHHBadPhysicalTransferSurfaceRound58 as Surface
 
-open Surface.PhysicalDyadicThreeMechanismTransfer public
+record PhysicalDyadicThreeMechanismTransfer : Set where
+  field
+    parameter : Threshold.PositiveThreshold
+
+    defectRate : Nat → ℚ
+    defectRateNonnegative : ∀ q → 0ℚ ≤ defectRate q
+
+    inheritedCoefficient generated leakage : Nat → ℚ
+    inheritedCoefficientNonnegative : ∀ q → 0ℚ ≤ inheritedCoefficient q
+    generatedNonnegative : ∀ q → 0ℚ ≤ generated q
+    leakageNonnegative : ∀ q → 0ℚ ≤ leakage q
+
+    ceiling alpha beta : ℚ
+    ceilingNonnegative : 0ℚ ≤ ceiling
+    alphaNonnegative : 0ℚ ≤ alpha
+    betaNonnegative : 0ℚ ≤ beta
+    alphaStrict : alpha < 1ℚ
+
+    baseLinearInSelectedThreshold :
+      defectRate zero ≤ Threshold.threshold parameter * ceiling
+
+    coefficientTransfer : ∀ q →
+      inheritedCoefficient (suc q) ≤ alpha * inheritedCoefficient q
+
+    successorDecomposition : ∀ q →
+      defectRate (suc q)
+      ≡ Threshold.threshold parameter
+          * Sharp.inverseDyadicScale (suc q)
+          * inheritedCoefficient (suc q)
+        + generated q + leakage q
+
+    generatedAndLeakageForcing : ∀ q →
+      generated q + leakage q
+      ≤ Threshold.threshold parameter
+        * Sharp.inverseDyadicScale (suc q) * beta
+
+    forcingFitsCeiling : beta ≤ (1ℚ - alpha) * ceiling
+
+open PhysicalDyadicThreeMechanismTransfer public
 
 inheritedData :
   (physical : PhysicalDyadicThreeMechanismTransfer) →
