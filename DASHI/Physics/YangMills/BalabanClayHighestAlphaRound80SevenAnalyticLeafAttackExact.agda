@@ -15,21 +15,24 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound80SevenAnalyticLeafAt
 -- L7 SameFamilyStressWardHamiltonian
 --
 -- This round deliberately does NOT decrement seven merely because supporting
--- algebra became easier.  It does, however, remove the historical numerical
--- difficulty from the large-polymer side of L3.
+-- algebra became easier.  It does, however, remove two artificial parts of L3:
+-- the historical numerical target and an independent same-object weld.
 --
 -- Repository archaeology found the older blocked-L2 WC3 lane recording
 -- q=0.23178189475262734 and eta=4 with 4q<1.  Round80 re-encodes q exactly as a
 -- rational and proves q<1/4.  Combined with the existing small/KP target <=1/2,
--- the total corrected one-step cost is <3/4 PROVIDED both estimates are on the
--- SAME source-native unified norm.
+-- the total corrected one-step cost is <3/4 PROVIDED the two physical
+-- inequalities hold on the corrected source-native unified state.
 --
--- Thus L3 is no longer an exercise in proving 1/32 or 17/32.  Its sharp live
--- analytic content is now:
+-- Round76 already made that strong state an extension of the literal
+-- CMP119/CMP122 complete density. `BalabanSourceNativeUnifiedThreeQuarterStepExact`
+-- now types both costs on the SAME `SourceNativeUnifiedState`, so there is no
+-- third cross-carrier equality theorem left to prove.
 --
---   L3a. prove actual corrected unified small/KP cost <= 1/2;
---   L3b. prove actual corrected unified large cost <= blocked-L2 q;
---   L3c. verify both are coordinates of the SAME source-native state/norm.
+-- Thus the sharp live analytic content of L3 is now only:
+--
+--   L3a. prove actual source-native unified small/KP cost <= 1/2;
+--   L3b. prove actual source-native unified large cost <= blocked-L2 q.
 --
 -- The exact compiler then supplies q_total<3/4<1.
 --
@@ -43,6 +46,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound79TopDownBudgetOptimizationExact
 import DASHI.Physics.YangMills.BalabanBlockedL2LargeBranchQuarterContractionExact
 import DASHI.Physics.YangMills.BalabanBlockedL2UnifiedThreeQuarterContractionExact
+import DASHI.Physics.YangMills.BalabanSourceNativeUnifiedThreeQuarterStepExact
 import DASHI.Physics.YangMills.BirmanSolomyakDoubleOperatorIntegralBoundaryExact
 
 round80ActualAnalyticLeafCount : Nat
@@ -50,6 +54,9 @@ round80ActualAnalyticLeafCount = 7
 
 round80L3NumericalOptimizationLevel : ProofLevel
 round80L3NumericalOptimizationLevel = machineChecked
+
+round80L3SameObjectTypingLevel : ProofLevel
+round80L3SameObjectTypingLevel = machineChecked
 
 ------------------------------------------------------------------------
 -- Seven-leaf status.  Only a genuine physical inhabitant changes the count.
@@ -79,13 +86,15 @@ l7SameFamilyStressWardHamiltonianLevel = conditional
 ------------------------------------------------------------------------
 -- NEXT PHYSICAL TARGET
 --
--- Attack L3b by proving that the actual source-native large-polymer coordinate
--- of the corrected unified norm is dominated by the blocked-L2 physical
--- activity whose old WC3 analysis produced q.  This must be a same-object
--- theorem, not equality of two numerical labels.  If it lands, L3 retains only
--- the small/KP same-norm estimate and common-coordinate weld before the exact
--- <3/4 compiler fires.
+-- Attack L3b by proving that the large-polymer coordinate OF THE SAME
+-- source-native unified state is dominated by the blocked-L2 physical activity
+-- whose older WC3 analysis produced q.  There is no longer an independent
+-- source/repository state equality theorem.  Once L3b lands, only L3a remains
+-- before the exact <3/4 compiler fires and L3 itself is closed.
 ------------------------------------------------------------------------
 
-round80PhysicalBlockedL2SameObjectWeldLevel : ProofLevel
-round80PhysicalBlockedL2SameObjectWeldLevel = conditional
+round80PhysicalUnifiedLargeBlockedL2Level : ProofLevel
+round80PhysicalUnifiedLargeBlockedL2Level = conditional
+
+round80PhysicalUnifiedSmallHalfLevel : ProofLevel
+round80PhysicalUnifiedSmallHalfLevel = conditional
