@@ -8,6 +8,7 @@ open import Data.List.Base using ([]; _∷_)
 import DASHI.Environment.DepthTruncation as Depth
 import DASHI.Environment.EcologicalEvidenceGates as Evidence
 import DASHI.Environment.EcologicalKnowledge as Knowledge
+import DASHI.Environment.LESResearchCrossPollinationExact as Research
 import DASHI.Environment.LESRuntimeBoundary as Runtime
 import DASHI.Environment.ParetoPlanning as Pareto
 import DASHI.Environment.QuantitiesConservation as Q
@@ -64,6 +65,14 @@ surrogateBoundaryRecorded = Surrogate.canonicalSurrogateBoundary
 
 governanceBoundaryRecorded : Governance.ValidationGovernanceBoundary
 governanceBoundaryRecorded = Governance.canonicalValidationGovernanceBoundary
+
+researchGapBoundaryRecorded : Research.LESResearchGapBoundary
+researchGapBoundaryRecorded = Research.canonicalLESResearchGapBoundary
+
+researchCrossPollinationBoundaryRecorded :
+  Research.LESResearchCrossPollinationBoundary
+researchCrossPollinationBoundaryRecorded =
+  Research.canonicalLESResearchCrossPollinationBoundary
 
 springfieldScenarioRecorded : Pond.SpringfieldPondGoldenScenario
 springfieldScenarioRecorded = Pond.canonicalSpringfieldPondGoldenScenario
