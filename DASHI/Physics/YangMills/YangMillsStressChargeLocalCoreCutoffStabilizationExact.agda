@@ -37,9 +37,10 @@ module DASHI.Physics.YangMills.YangMillsStressChargeLocalCoreCutoffStabilization
 -- group.  Eventual cutoff removal itself is compiled here.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl; sym; trans)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Nat.Base using (_≤_)
+import Data.Nat.Properties as ℕP
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -78,7 +79,7 @@ cutoffChargeEqualsLocalCoreChargeBeyondSupport dataSet vector cutoff supportInsi
   actionStableBeyondSupport dataSet vector cutoff
     (supportRadius dataSet vector)
     supportInside
-    (Data.Nat.Base.≤-refl)
+    ℕP.≤-refl
 
 allLargeCutoffsAgreeOnLocalCore :
   ∀ {LocalVector Target}
