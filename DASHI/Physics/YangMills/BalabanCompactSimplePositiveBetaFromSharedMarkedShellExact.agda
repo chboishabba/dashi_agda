@@ -1,7 +1,7 @@
 module DASHI.Physics.YangMills.BalabanCompactSimplePositiveBetaFromSharedMarkedShellExact where
 
 ------------------------------------------------------------------------
--- ROUND83: SHARED MARKED SHELL + UNIVERSAL C_A 11/24 -> POSITIVE FULL BETA
+-- ROUND83: BETA-MARKED SHELL + UNIVERSAL C_A 11/24 -> POSITIVE FULL BETA
 --
 -- PRIMARY SOURCES
 --
@@ -31,19 +31,19 @@ module DASHI.Physics.YangMills.BalabanCompactSimplePositiveBetaFromSharedMarkedS
 --
 --          b_G = C_A(G) * 11/24 > 0.
 --
--- Round83's shared marked analytic shell gives the history response budget
+-- Round83's BETA-marked analytic shell gives the history response budget
 --
---          H_n <= C/2
+--          H_n <= C_beta/2
 --
--- with no factor proportional to the number of preceding RG steps.  This file
--- performs the exact ordered-field weld.  If the literal history-dependent
--- coefficient satisfies
+-- with no factor proportional to the number of preceding RG steps.  The
+-- beta-mark is deliberately distinct from the spatial Hessian and OPE marks.
+-- If the literal history-dependent coefficient satisfies
 --
 --          b_G <= beta_n + H_n
 --
--- and the shared shell consumes at most half the Gaussian margin,
+-- and the beta shell consumes at most half the Gaussian margin,
 --
---          C/2 + b_G/2 <= b_G,
+--          C_beta/2 + b_G/2 <= b_G,
 --
 -- then every full coefficient obeys
 --
@@ -51,8 +51,8 @@ module DASHI.Physics.YangMills.BalabanCompactSimplePositiveBetaFromSharedMarkedS
 --
 -- Thus the remaining physical beta job is sharply localized to SAME-OBJECT
 -- construction of the constrained Wilson/FP/Haar coefficient and proof that
--- its marked history response is the beta projection of the shared analytic
--- shell.  No separate arbitrary-history accumulation theorem remains.
+-- its preceding-scale response is the beta-mark projection of the source
+-- analytic norm.  No separate arbitrary-history accumulation theorem remains.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
@@ -76,7 +76,7 @@ record SharedShellCompactSimpleBetaData
     fullBeta : Nat → ℚ
 
     historyBudgetFitsHalfUniversal :
-      StepV.half * Shared.analyticConstant shared
+      StepV.half * Shared.betaAnalyticConstant shared
       + StepV.half * Group.groupUniversalCoefficient strict group
       ≤ Group.groupUniversalCoefficient strict group
 
@@ -106,7 +106,7 @@ fullBetaKeepsHalfUniversal
     b = Group.groupUniversalCoefficient strict group
     h = Shared.betaHistoryPartial shared scale volume root depth
 
-    hBound : h ≤ StepV.half * Shared.analyticConstant shared
+    hBound : h ≤ StepV.half * Shared.betaAnalyticConstant shared
     hBound = Shared.betaHistoryPartialBelowHalfAnalyticConstant
       shared scale volume root depth
 
@@ -119,7 +119,7 @@ fullBetaKeepsHalfUniversal
         raised
         (subst
           (λ left → left ≤ b)
-          (ℚRing.solve-∀ b StepV.half (Shared.analyticConstant shared))
+          (ℚRing.solve-∀ b StepV.half (Shared.betaAnalyticConstant shared))
           (historyBudgetFitsHalfUniversal dataSet))
 
     chained : b * StepV.half + h ≤ fullBeta dataSet depth + h
@@ -139,7 +139,7 @@ compactSimpleUniversalCoefficientPositivityLevel = machineChecked
 
 -- Physical seam after the compiler: instantiate the literal constrained
 -- Wilson + reduced-FP + Haar Ward scalar and prove its history response is the
--- shared marked beta projection.  CMP109's dependence on all preceding
--- couplings is thereby handled without a history-length loss.
+-- beta-marked projection.  CMP109's dependence on all preceding couplings is
+-- thereby handled without a history-length loss.
 literalWilsonFPHaarSharedMarkedBetaIdentificationLevel : ProofLevel
 literalWilsonFPHaarSharedMarkedBetaIdentificationLevel = conditional
