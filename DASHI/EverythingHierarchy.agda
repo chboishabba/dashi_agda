@@ -20,6 +20,8 @@ import DASHI.Moonshine.Everything
 import DASHI.Ontology.Everything
 import DASHI.HME.Everything
 import DASHI.DCHoTT.Everything
+import DASHI.Energy.Everything
+import DASHI.Quantum.Everything
 
 -- Natural / physical / applied domains.
 import DASHI.Biology.DomainEverything
