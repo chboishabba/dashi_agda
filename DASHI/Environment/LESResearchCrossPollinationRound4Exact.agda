@@ -8,12 +8,9 @@ module DASHI.Environment.LESResearchCrossPollinationRound4Exact where
 -- concrete positive theorems and finite falsifiers for stochastic transition
 -- quotients, partial observation, identifiability, active information value,
 -- approximate abstraction, adaptive fidelity, temporal shift/hysteresis,
--- shared-source uncertainty, exact dependency closure, hybrid trace safety,
--- bounded Pareto completeness, reactive agents and governance legitimacy.
---
--- Domain-specific model validity remains external.  Closing a formal interface
--- means the theorem shape is now explicit, not that LES has already supplied
--- the hydrology/ecology/economics data needed to inhabit every theorem.
+-- shared-source uncertainty, exact dependency closure, dense/hybrid time,
+-- bounded Pareto completeness, plural preferences, reactive agents and
+-- governance legitimacy.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
@@ -28,21 +25,21 @@ import DASHI.Core.FiniteStochasticBisimulationExact as Stochastic
 import DASHI.Core.FiniteStochasticRewardPreservationExact as StochasticReward
 import DASHI.Core.IdentifiabilityActiveInformationExact as Information
 import DASHI.Core.PartialObservationBeliefSafetyExact as Partial
+import DASHI.Core.PluralPreferenceNonCollapseExact as Preference
 import DASHI.Core.ReopenableConsumerInterventionKernelExact as Core
 import DASHI.Core.SharedSourceUncertaintyExact as SharedUncertainty
 import DASHI.Core.SocioEcologicalFeedbackExact as Social
 import DASHI.Core.TemporalValidityPathDependenceExact as Temporal
 import DASHI.Environment.AssimilationDependencyReopeningExact as Assimilation
 import DASHI.Environment.BoundedParetoCompletenessExact as ParetoComplete
+import DASHI.Environment.DenseTimeHybridSemigroupExact as DenseHybrid
 import DASHI.Environment.HybridTraceSafetyExact as HybridTrace
 import DASHI.Environment.LESResearchCrossPollinationRound2Exact as Round2
 import DASHI.Environment.LESResearchCrossPollinationRound3Exact as Round3
 import DASHI.Governance.ApprovalLegitimacyNonfactorabilityExact as Governance
 
 ------------------------------------------------------------------------
--- 1. Exact causal abstraction is literally an instance of the generic DASHI
--- intertwiner.  This removes one more application-specific copy of the same
--- commuting-square mathematics.
+-- Exact causal abstraction is an instance of the generic DASHI intertwiner.
 ------------------------------------------------------------------------
 
 causalAbstractionToGenericIntertwiner :
@@ -62,10 +59,8 @@ causalAbstractionToGenericIntertwiner abstraction intervention =
     (Round2.interventionSquareCommutes abstraction intervention)
 
 ------------------------------------------------------------------------
--- 2. Correct the scenario quantifier explicitly.  Round 2's `RobustAcross`
--- demands acceptability for every inhabitant of `PlausibleFuture`, which is
--- stronger than its stored ensemble.  Any such witness certainly induces the
--- intended declared-ensemble theorem, but future APIs should target the latter.
+-- Round 2's robustness witness is stronger than the intended ensemble-relative
+-- reading.  It nevertheless induces the correctly quantified declared version.
 ------------------------------------------------------------------------
 
 round2RobustnessImpliesDeclaredRobustness :
@@ -84,7 +79,7 @@ round2RobustnessImpliesDeclaredRobustness robust =
     Round2.allDeclaredFuturesAcceptable robust future
 
 ------------------------------------------------------------------------
--- 3. Concrete gap-closing witnesses are exported at one LES review surface.
+-- Concrete gap-closing witnesses at one review surface.
 ------------------------------------------------------------------------
 
 partialObservationCounterexample : Partial.CurrentObservationTerminalisationDefect
@@ -133,8 +128,14 @@ approvalSurfaceDoesNotDetermineLegitimacy :
 approvalSurfaceDoesNotDetermineLegitimacy =
   Governance.approvalCannotDetermineLegitimacy
 
+preferenceNonCollapseRecorded : Preference.PreferenceNonCollapseBoundary
+preferenceNonCollapseRecorded = Preference.canonicalPreferenceNonCollapseBoundary
+
+denseTimeHybridBoundaryRecorded : DenseHybrid.DenseTimeHybridBoundary
+denseTimeHybridBoundaryRecorded = DenseHybrid.canonicalDenseTimeHybridBoundary
+
 ------------------------------------------------------------------------
--- 4. Round-4 status distinguishes formal closure from empirical/numerical work.
+-- Formal closure status versus scientific/numerical frontier.
 ------------------------------------------------------------------------
 
 record LESRound4FormalClosureStatus : Set where
@@ -154,7 +155,9 @@ record LESRound4FormalClosureStatus : Set where
     exactDependencyClosureConstructed : Bool
     selectiveAssimilationReopeningExampleConstructed : Bool
     finiteHybridTraceSafetyConstructed : Bool
+    denseTimeSemigroupConstructed : Bool
     boundedParetoCompletenessTheoremConstructed : Bool
+    pluralPreferenceNonCollapseConstructed : Bool
     socioEcologicalReactiveCounterexampleConstructed : Bool
     approvalLegitimacyNonfactorabilityConstructed : Bool
     declaredScenarioRobustnessConstructed : Bool
@@ -164,8 +167,8 @@ open LESRound4FormalClosureStatus public
 canonicalLESRound4FormalClosureStatus : LESRound4FormalClosureStatus
 canonicalLESRound4FormalClosureStatus =
   lesRound4FormalClosureStatus
-    true true true true true true true true true
-    true true true true true true true true true
+    true true true true true true true true true true
+    true true true true true true true true true true
 
 record LESRound4RemainingScientificFrontier : Set where
   constructor lesRound4RemainingScientificFrontier
@@ -177,7 +180,7 @@ record LESRound4RemainingScientificFrontier : Set where
     realExperimentCostAndOutcomeModelsStillExternal : Bool
     realDistributionShiftDetectionStillExternal : Bool
     crossModelDependenceMagnitudesStillEmpirical : Bool
-    continuousFlowReachabilityStillModelSpecific : Bool
+    realContinuousFlowLawStillModelSpecific : Bool
     scenarioDiscoveryStillAlgorithmicExternalWork : Bool
     stakeholderPreferenceAcquisitionStillEmpiricalGovernanceWork : Bool
     interventionGrammarMustStillBeDeclaredAndEnumerated : Bool
