@@ -1,0 +1,11 @@
+{
+  "policy": "All first-party Agda source is live by default. Entries here are explicit exceptions only; each must name an exact source path, a controlled category, and a concrete reason.",
+  "allowed_categories": [
+    "vendor",
+    "generated",
+    "archive",
+    "superseded",
+    "intentional-failing-fixture"
+  ],
+  "entries": []
+}
