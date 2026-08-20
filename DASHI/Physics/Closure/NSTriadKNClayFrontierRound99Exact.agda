@@ -26,9 +26,6 @@ module DASHI.Physics.Closure.NSTriadKNClayFrontierRound99Exact where
 --
 -- ROUND99 / ONE-PRODUCER MATHEMATICAL FRONTIER
 --
--- This file is deliberately a frontier *reduction*, not a receipt claiming an
--- estimate that has not been proved.
---
 -- Round99 removes two previously counted analytic producers from the shortest
 -- compact-Gamma route:
 --
@@ -39,44 +36,41 @@ module DASHI.Physics.Closure.NSTriadKNClayFrontierRound99Exact where
 --       off-packet boundary term -F E has favourable sign, and the remaining
 --       cross-dissipation is spectrally coercive.
 --
--- The generic packet/boundary normalization has also been welded directly to
--- the same compact-Gamma raw transfer, division-free over the abstract
--- RealField carrier.
+-- The generic packet/boundary normalization is also welded directly to the
+-- same compact-Gamma raw transfer, division-free over the abstract RealField.
 --
--- What remains is ONE genuinely new PDE estimate: cutoff-uniform expenditure
--- control for the nonlinear first variation of the SAME projected boundary
--- transfer.  It must control the nonlinear piece of
+-- The remaining object is NOT hidden behind an opaque Set-valued receipt.  It
+-- is exposed below as the already-existing literal nonlinear component of
 --
 --       qdot D - q Ddot
 --
--- on the literal Galerkin carrier strongly enough to feed the existing
--- integrated compact-Gamma escape/critical-barrier machinery.
+-- on the physical finite Galerkin carrier.  The outstanding theorem is a
+-- cutoff-uniform integrated expenditure estimate for THIS function.
 --
--- Why this cannot honestly be replaced by an existing conditional theorem:
--- the closed HH/Bony estimates yield a cubic-production bound of the form
---
---       N_hi <= C A_* D,
---
--- while the Cheskidov--Shvydkoy absorption theorem requires A_* below a
--- viscosity threshold.  Their cited result is a conditional regularity
--- criterion; it does not supply that smallness for arbitrary Leray solutions.
--- Thus setting a critical-amplitude hypothesis to true would merely assume the
--- missing global-regularity mechanism.
+-- Round99 also strengthens the Round91 homogeneity audit: for every proposed
+-- nonnegative constant C, amplitude a=C+1 gives a^3 > C a^2.  Therefore a
+-- static amplitude-free HH<=C*D closure is mathematically impossible; the last
+-- estimate must exploit same-trajectory transfer dynamics rather than import a
+-- conditional critical-amplitude smallness hypothesis.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
+import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
+import DASHI.Physics.Closure.NSTriadKNPeriodicLittlewoodPaleyBonyExact as LP
+import DASHI.Physics.Closure.NSTriadKNLiteralPhysicalCompactTransferDriftRound82Exact as Drift
+import DASHI.Physics.Closure.NSTriadKNLiteralRHSRelativeGrowthSplitRound83Exact as Split
 import DASHI.Physics.Closure.NSTriadKNProjectedCompactGammaPressureEliminationRound99Exact as Pressure
 import DASHI.Physics.Closure.NSTriadKNPositiveTransferOffPacketCoercivityRound99Exact as OffPacket
 import DASHI.Physics.Closure.NSTriadKNPhysicalGammaBoundaryTransferSameObjectRound99Exact as Boundary
 import DASHI.Physics.Closure.NSTriadKNGradientTensorFourierSymbolRound89Exact as GradientTensor
 import DASHI.Physics.Closure.NSTriadKNViscousWeightedHHLowTensorFactorizationRound89Exact as HHTensor
 import DASHI.Physics.Closure.NSTriadKNHHCriticalAmplitudeAbsorptionRound91Exact as CriticalAmplitude
+import DASHI.Physics.Closure.NSTriadKNCubicQuadraticUniformAbsorptionNoGoRound99Exact as NoGo
 import DASHI.Physics.Closure.NSTriadKNPhysicalPeriodicBonyEnumerationRound92Exact as Bony
 import DASHI.Physics.Closure.NSTriadKNIntegratedDangerOccupationWeldRound92Exact as Occupation
 
--- Exact reductions now available on the branch.
 round99ProjectedPressureAlreadyInsideLerayVectorField : Bool
 round99ProjectedPressureAlreadyInsideLerayVectorField =
   Pressure.round99CompactGammaUsesProjectedGalerkinTangent
@@ -105,6 +99,10 @@ round99RawHHBoundAloneSufficesForViscousAbsorption : Bool
 round99RawHHBoundAloneSufficesForViscousAbsorption =
   CriticalAmplitude.round91RawHHHMinusOneSquareBoundAloneImpliesViscousAbsorption
 
+round99UniformAmplitudeFreeCubicAbsorptionPossible : Bool
+round99UniformAmplitudeFreeCubicAbsorptionPossible =
+  NoGo.round99StaticHHBoundCanSupplyUniformAmplitudeFreeAbsorption
+
 round99LiteralPhysicalBonyClassificationClosed : Bool
 round99LiteralPhysicalBonyClassificationClosed =
   Bony.round92LiteralPhysicalBonyClassificationExhaustive
@@ -114,51 +112,24 @@ round99IntegratedDangerOccupationCompilerClosed =
   Occupation.round92IntegratedSignedCriticalEstimateFromOccupationConstructed
 
 ------------------------------------------------------------------------
--- The sole remaining theorem-sized PDE producer.
---
--- This is intentionally represented as an uninhabited interface TYPE, not a
--- postulate and not an assumed field in a theorem-producing record.  A future
--- module closes Round99 only by constructing a term from the literal physical
--- Galerkin/compact-Gamma data.
+-- Literal owner of the sole surviving nonlinear core.
 ------------------------------------------------------------------------
 
-record PhysicalProjectedBoundaryFluxVariationExpenditure : Set₁ where
-  field
-    -- The exact carrier/inequality is intentionally not weakened to a generic
-    -- scalar receipt here.  The physical implementation must itself expose:
-    --
-    --   * the literal cutoff Galerkin solution family;
-    --   * the canonical shell selector / packet boundary;
-    --   * q, qdot_N, D, Ddot_N from the same projected vector field;
-    --   * the existing weighted coercive envelope;
-    --   * a cutoff-independent finite remainder;
-    --   * the inequality which pays the nonlinear relative-growth core by
-    --     absorbed envelope plus that remainder.
-    --
-    -- These named components are theorem-construction requirements, not
-    -- independent assumptions that downstream code may silently fill.
-    LiteralPhysicalConstruction : Set
-    literalPhysicalConstruction : LiteralPhysicalConstruction
+remainingProjectedBoundaryFluxVariationCore :
+  ∀ {r} {model : LP.PeriodicHardShellFourierPDE {r}} →
+  Drift.LiteralPhysicalCompactTransferDatum model →
+  C3.Carrier (LP.realField model)
+remainingProjectedBoundaryFluxVariationCore = Split.nonlinearRelativeGrowthCore
 
-    SameObjectNonlinearRelativeGrowth : Set
-    sameObjectNonlinearRelativeGrowth : SameObjectNonlinearRelativeGrowth
+remainingCoreIsLiteralNonlinearRelativeGrowth :
+  ∀ {r} {model : LP.PeriodicHardShellFourierPDE {r}}
+    (datum : Drift.LiteralPhysicalCompactTransferDatum model) →
+  remainingProjectedBoundaryFluxVariationCore datum
+  ≡ Split.nonlinearRelativeGrowthCore datum
+remainingCoreIsLiteralNonlinearRelativeGrowth datum = refl
 
-    CutoffUniformCoerciveExpenditure : Set
-    cutoffUniformCoerciveExpenditure : CutoffUniformCoerciveExpenditure
-
-    FiniteEndpointRemainder : Set
-    finiteEndpointRemainder : FiniteEndpointRemainder
-
-    nonlinearVariationPaidByExpenditure : Set
-    nonlinearVariationPaidByExpenditureProof :
-      nonlinearVariationPaidByExpenditure
-
-open PhysicalProjectedBoundaryFluxVariationExpenditure public
-
--- This is the exact current count, not a promotion claim.
-round99GenuineAnalyticProducerCount : Bool
-round99GenuineAnalyticProducerCount = true
-
+-- Exact current frontier flags.  `true` here means one producer survives; it
+-- does not assert the missing inequality or Clay promotion.
 round99PressureProducerSurvives : Bool
 round99PressureProducerSurvives = false
 
@@ -182,6 +153,10 @@ round99PositiveTransferOffPacketNonlinearTaxRequiredIsFalse = refl
 round99RawHHBoundAloneSufficesForViscousAbsorptionIsFalse :
   round99RawHHBoundAloneSufficesForViscousAbsorption ≡ false
 round99RawHHBoundAloneSufficesForViscousAbsorptionIsFalse = refl
+
+round99UniformAmplitudeFreeCubicAbsorptionPossibleIsFalse :
+  round99UniformAmplitudeFreeCubicAbsorptionPossible ≡ false
+round99UniformAmplitudeFreeCubicAbsorptionPossibleIsFalse = refl
 
 round99ProjectedBoundaryFluxVariationProducerSurvivesIsTrue :
   round99ProjectedBoundaryFluxVariationProducerSurvives ≡ true
