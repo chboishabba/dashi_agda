@@ -33,6 +33,7 @@ module DASHI.Physics.Closure.NSTriadKNAdverseMaskCancellationNoGoExact where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Product.Base using (_×_; _,_)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_; -_; _≤_; _<_)
@@ -63,12 +64,28 @@ cancellingOppositePair x =
 oppositePairCancelsBeforeMask :
   (x : ℚ) →
   unmaskedWeightedForcing (cancellingOppositePair x) ≡ 0ℚ
-oppositePairCancelsBeforeMask x = solve (x ∷ [])
+oppositePairCancelsBeforeMask x =
+  -- Use the normalised rational laws directly: the reflection tactic's
+  -- syntactic quotient deliberately does not reduce this named functional.
+  trans
+    (cong (λ y → y + 1ℚ * (- x)) (ℚP.*-identityˡ x))
+    (trans
+      (cong (λ y → x + y) (ℚP.*-identityˡ (- x)))
+      (ℚP.+-inverseʳ x))
 
 oppositePairMaskKeepsFirst :
   (x : ℚ) →
   maskedWeightedForcing (cancellingOppositePair x) ≡ x
-oppositePairMaskKeepsFirst x = solve (x ∷ [])
+oppositePairMaskKeepsFirst x =
+  trans
+    (cong (λ y → y + 0ℚ * (1ℚ * (- x)))
+      (ℚP.*-identityˡ (1ℚ * x)))
+    (trans
+      (cong (λ y → y + 0ℚ * (1ℚ * (- x)))
+        (ℚP.*-identityˡ x))
+      (trans
+        (cong (λ y → x + y) (ℚP.*-zeroˡ (1ℚ * (- x))))
+        (ℚP.+-identityʳ x)))
 
 maskedForcingCanBePositiveDespiteExactNetworkCancellation :
   (x : ℚ) →
@@ -82,7 +99,7 @@ zeroCancellationResidualCannotBoundMaskedForcing :
   0ℚ < x →
   ¬ (maskedWeightedForcing (cancellingOppositePair x) ≤ 0ℚ)
 zeroCancellationResidualCannotBoundMaskedForcing x xPositive maskedNonpositive =
-  ℚP.<-irrefl 0ℚ
+  ℚP.<-irrefl refl
     (ℚP.<-≤-trans
       (maskedForcingCanBePositiveDespiteExactNetworkCancellation x xPositive)
       maskedNonpositive)

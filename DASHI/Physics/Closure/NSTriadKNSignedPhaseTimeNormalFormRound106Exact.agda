@@ -42,12 +42,13 @@ module DASHI.Physics.Closure.NSTriadKNSignedPhaseTimeNormalFormRound106Exact whe
 -- target for the Round106 frontier.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; true)
+open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; -_)
+import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (sym)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
 record IntegratedSignedPhaseCell : Set where
   constructor integrated-signed-phase-cell
@@ -75,13 +76,11 @@ signedPhaseTimeNormalForm :
   ≡ normalFormWeight C * initialAmplitude C
       + (- (normalFormWeight C * terminalAmplitude C))
       + normalFormWeight C * integratedForcing C
-signedPhaseTimeNormalForm C
-  rewrite coefficientFactorization C
-        | sym (integratedAmplitudeEquation C) =
+signedPhaseTimeNormalForm
+  (integrated-signed-phase-cell ν S c g A₀ Aᵀ IA IF factor equation)
+  rewrite factor | sym equation =
   solve
-    ( normalFormWeight C ∷ dampingScale C ∷ viscosity C
-    ∷ initialAmplitude C ∷ terminalAmplitude C
-    ∷ integratedAmplitude C ∷ [])
+    (g ∷ S ∷ ν ∷ A₀ ∷ Aᵀ ∷ IA ∷ [])
 
 sumIntegratedCriticalProduction : List IntegratedSignedPhaseCell → ℚ
 sumIntegratedCriticalProduction [] = 0ℚ
@@ -109,9 +108,21 @@ record CommonViscositySignedPhaseNetwork : Set where
     viscosity : ℚ
     cells : List IntegratedSignedPhaseCell
     sameViscosity : (C : IntegratedSignedPhaseCell) →
-      viscosity C ≡ viscosity
+      IntegratedSignedPhaseCell.viscosity C ≡ viscosity
 
 open CommonViscositySignedPhaseNetwork public
+
+finiteNormalFormFoldStep :
+  (ν p q i t f I T F : ℚ) →
+  ν * p ≡ i + (- t) + f →
+  ν * q ≡ I + (- T) + F →
+  ν * (p + q) ≡ (i + I) + (- (t + T)) + (f + F)
+finiteNormalFormFoldStep ν p q i t f I T F head tail =
+  trans
+    (ℚP.*-distribˡ-+ ν p q)
+    (trans
+      (cong₂ _+_ head tail)
+      (solve (i ∷ t ∷ f ∷ I ∷ T ∷ F ∷ [])))
 
 finiteSignedNetworkTimeNormalForm :
   (N : CommonViscositySignedPhaseNetwork) →
@@ -128,17 +139,23 @@ finiteSignedNetworkTimeNormalForm N = go (cells N)
     ≡ sumInitialNormalFormBoundary Cs
       + (- sumTerminalNormalFormBoundary Cs)
       + sumSignedNormalFormForcing Cs
-  go [] = solve []
-  go (C ∷ Cs)
-    rewrite sameViscosity N C
-          | signedPhaseTimeNormalForm C
-          | go Cs =
-    solve
-      ( normalFormWeight C ∷ initialAmplitude C ∷ terminalAmplitude C
-      ∷ integratedForcing C
-      ∷ sumInitialNormalFormBoundary Cs
-      ∷ sumTerminalNormalFormBoundary Cs
-      ∷ sumSignedNormalFormForcing Cs ∷ [])
+  go [] rewrite ℚP.*-zeroʳ nu = refl
+  go (C ∷ Cs) =
+    finiteNormalFormFoldStep
+      nu
+      (integratedCriticalProduction C)
+      (sumIntegratedCriticalProduction Cs)
+      (normalFormWeight C * initialAmplitude C)
+      (normalFormWeight C * terminalAmplitude C)
+      (normalFormWeight C * integratedForcing C)
+      (sumInitialNormalFormBoundary Cs)
+      (sumTerminalNormalFormBoundary Cs)
+      (sumSignedNormalFormForcing Cs)
+      (trans
+        (cong (λ v → v * integratedCriticalProduction C)
+          (sym (sameViscosity N C)))
+        (signedPhaseTimeNormalForm C))
+      (go Cs)
 
 round106SignedPhaseTimeNormalFormClosed : Bool
 round106SignedPhaseTimeNormalFormClosed = true
