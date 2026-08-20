@@ -21,8 +21,6 @@ module DASHI.Physics.Closure.NSTriadKNInteriorEpisodeBudgetEquivalenceExact wher
 --
 -- Progress can only come from substituting the LITERAL Navier--Stokes
 -- self/external forcing and proving an independent structural estimate there.
--- This theorem prevents another sequence of frontier wrappers from being
--- counted as mathematical reduction.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -30,7 +28,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _≤_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; subst; sym; trans)
 
 import DASHI.Physics.Closure.NSTriadKNSignedPhaseTimeNormalFormRound106Exact as Normal
 import DASHI.Physics.Closure.NSTriadKNAdverseEpisodeSignedForcingRound106Exact as Episode
@@ -70,14 +68,30 @@ finiteInteriorEpisodeForcingProductionEquality N = go (episodes N)
   go : (Es : List Episode.InteriorAdverseSignedForcingEpisode) →
     nu * sumInteriorProduction Es ≡ sumInteriorWeightedForcing Es
   go [] = solve []
-  go (E ∷ Es)
-    rewrite sym (sameViscosity N E)
-          | Episode.interiorEpisodePaidExactlyBySignedForcing E
-          | go Es =
-    solve
-      ( Normal.normalFormWeight (Episode.cell (Episode.episode E))
-      ∷ Normal.integratedForcing (Episode.cell (Episode.episode E))
-      ∷ sumInteriorWeightedForcing Es ∷ [])
+  go (E ∷ Es) =
+    let
+      C = Episode.cell (Episode.episode E)
+      production = Normal.integratedCriticalProduction C
+      forcing = Normal.normalFormWeight C * Normal.integratedForcing C
+
+      headAtCellViscosity :
+        Normal.viscosity C * production ≡ forcing
+      headAtCellViscosity =
+        Episode.interiorEpisodePaidExactlyBySignedForcing E
+
+      headAtCommonViscosity : nu * production ≡ forcing
+      headAtCommonViscosity =
+        trans
+          (cong (_* production) (sym (sameViscosity N E)))
+          headAtCellViscosity
+
+      distribute :
+        nu * (production + sumInteriorProduction Es)
+        ≡ nu * production + nu * sumInteriorProduction Es
+      distribute = solve (nu ∷ production ∷ sumInteriorProduction Es ∷ [])
+    in
+    trans distribute
+      (cong₂ _+_ headAtCommonViscosity (go Es))
 
 forcingBudgetImpliesProductionBudget :
   (N : CommonViscosityInteriorEpisodes) →
