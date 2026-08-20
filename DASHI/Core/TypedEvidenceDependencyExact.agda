@@ -51,12 +51,14 @@ sameRootContradictsProvenanceIndependence same independent =
 DependencyPath :
   ∀ {Artifact : Set} →
   (Artifact → Artifact → Set) → Artifact → Artifact → Set
-DependencyPath = Affected.AffectedClosure
+DependencyPath depends source target =
+  Affected.AffectedClosure depends source target
 
 ChangeInvalidates :
   ∀ {Artifact : Set} →
   (Artifact → Artifact → Set) → Artifact → Artifact → Set
-ChangeInvalidates = Affected.ReopeningObligation
+ChangeInvalidates depends changed derived =
+  Affected.ReopeningObligation depends changed derived
 
 invalidationIsTransitive :
   ∀ {Artifact}
@@ -65,7 +67,8 @@ invalidationIsTransitive :
   ChangeInvalidates DirectlyDependsOn changed middle →
   ChangeInvalidates DirectlyDependsOn middle derived →
   ChangeInvalidates DirectlyDependsOn changed derived
-invalidationIsTransitive = Affected.obligationsCompose
+invalidationIsTransitive left right =
+  Affected.obligationsCompose left right
 
 ------------------------------------------------------------------------
 -- Reopenability reasons are typed because their triggers differ.
