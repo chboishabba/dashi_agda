@@ -21,20 +21,22 @@ module DASHI.Moonshine.DuncanSwisherDworkExceptionalAnalyticCutsetExact where
 -- `DworkLocalSharpnessData`:
 --
 --   (A) local Legendre/J geometry on an ACTUAL exceptional branch;
---   (B) Dwork's first-pole transfer v_p(A1)=v_p(local J difference).
+--   (B) Dwork's first-pole transfer
+--         v_p(A_{order 1}(alpha^)) = v_p(local J difference).
 --
--- The exceptional exponent is NOT supplied by either authority.  It is read
--- from the exact polynomial factorization already proved in
--- `LegendreJExceptionalPolynomialFactorizationExact`.
+-- The A1 object is no longer stored independently: it is DEFINITIONALLY the
+-- order-one member of one source-native partial-fraction coefficient family.
+-- The exceptional exponent is likewise NOT supplied by either authority; it
+-- is read from the exact Legendre polynomial factorization.
 --
--- Consequently the exact A1 depth is locally derived as
+-- Consequently the exact first-pole depth is derived as
 --
 --   algebraic branch exponent
 --     <- local J valuation theorem
---     <- Dwork A1 valuation transfer.
+--     <- Dwork order-one coefficient valuation transfer.
 --
--- This module does not reconstruct Dwork's p-adic cycles or the Deligne
--- partial-fraction expansion itself.
+-- This module does not reconstruct Dwork's p-adic cycles or the analytic
+-- coefficient family itself.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -42,6 +44,7 @@ open import DASHI.Core.Prelude
 import DASHI.Algebra.RamifiedLocalValuationSharpnessExact as Ramified
 import DASHI.Moonshine.LegendreJExceptionalPolynomialFactorizationExact as Legendre
 import DASHI.Moonshine.LegendreJExceptionalLocalValuationCutsetExact as Local
+import DASHI.Moonshine.DuncanSwisherDworkFirstPoleSameObjectExact as Pole
 
 ------------------------------------------------------------------------
 -- Authority (A): actual local p-adic Legendre/J geometry.
@@ -57,20 +60,42 @@ record ExceptionalLegendreGeometryAuthority
 open ExceptionalLegendreGeometryAuthority public
 
 ------------------------------------------------------------------------
--- Authority (B): Dwork's n=1 first-pole valuation transfer.
+-- Authority (B): one source-native Dwork pole family on the SAME carrier, plus
+-- the n=1 sharp valuation transfer.  There is no separately supplied A1 value.
 ------------------------------------------------------------------------
 
 record DworkA1ValuationTransfer
     {branch : Legendre.ExceptionalLegendreBranch}
-    (G : ExceptionalLegendreGeometryAuthority branch) : Set where
+    (G : ExceptionalLegendreGeometryAuthority branch) : Set₁ where
   field
-    A1Coefficient : PadicLocal G
+    coefficientFamily : Pole.DworkPoleCoefficientFamily
+    coefficientCarrierIsLocal : Pole.PadicLocal coefficientFamily ≡ PadicLocal G
+
     tracksLocalJDepth :
-      Ramified.valuation (valuation G) A1Coefficient
+      Ramified.valuation (valuation G)
+        (subst (λ X → X) coefficientCarrierIsLocal
+          (Pole.firstPoleCoefficient coefficientFamily))
       ≡ Ramified.valuation (valuation G)
           (Local.localJDifference (geometry G))
 
 open DworkA1ValuationTransfer public
+
+A1Coefficient :
+  {branch : Legendre.ExceptionalLegendreBranch} →
+  {G : ExceptionalLegendreGeometryAuthority branch} →
+  DworkA1ValuationTransfer G → PadicLocal G
+A1Coefficient D =
+  subst (λ X → X) (coefficientCarrierIsLocal D)
+    (Pole.firstPoleCoefficient (coefficientFamily D))
+
+A1IsSameObjectFirstPole :
+  {branch : Legendre.ExceptionalLegendreBranch} →
+  {G : ExceptionalLegendreGeometryAuthority branch} →
+  (D : DworkA1ValuationTransfer G) →
+  A1Coefficient D
+  ≡ subst (λ X → X) (coefficientCarrierIsLocal D)
+      (Pole.poleCoefficient (coefficientFamily D) Pole.firstPoleOrder)
+A1IsSameObjectFirstPole D = refl
 
 ------------------------------------------------------------------------
 -- Composition: exact A1 depth is theorem-derived.
@@ -120,6 +145,9 @@ record DuncanSwisherDworkExceptionalAnalyticCutsetBoundary : Set where
   field
     localGeometryAuthoritySeparated : Bool
     A1ValuationTransferAuthoritySeparated : Bool
+    coefficientFamilyPrimary : Bool
+    A1StoredAsIndependentElement : Bool
+    firstPoleDefinitionallyOrderOne : Bool
     branchExponentSuppliedByAnalyticAuthority : Bool
     branchExponentDerivedFromPolynomialFactorization : Bool
     numericA1DepthSuppliedBySource : Bool
@@ -131,6 +159,9 @@ canonicalDuncanSwisherDworkExceptionalAnalyticCutsetBoundary :
 canonicalDuncanSwisherDworkExceptionalAnalyticCutsetBoundary = record
   { localGeometryAuthoritySeparated = true
   ; A1ValuationTransferAuthoritySeparated = true
+  ; coefficientFamilyPrimary = true
+  ; A1StoredAsIndependentElement = false
+  ; firstPoleDefinitionallyOrderOne = true
   ; branchExponentSuppliedByAnalyticAuthority = false
   ; branchExponentDerivedFromPolynomialFactorization = true
   ; numericA1DepthSuppliedBySource = false
