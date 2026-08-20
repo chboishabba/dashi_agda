@@ -47,7 +47,9 @@ open import Agda.Builtin.List using ([]; _∷_)
 import Data.Integer.Base as Int
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_; -_; _≤_; _<_)
 import Data.Rational.Properties as ℚP
+open ℚP using (_<?_)
 open import Data.Rational.Tactic.RingSolver using (solve)
+open import Relation.Nullary.Decidable.Core using (toWitness)
 open import Relation.Nullary.Negation.Core using (¬_)
 
 import DASHI.Physics.Closure.NSTriadKNHeterochiralMinorityLegReductionRound102Exact as W
@@ -80,7 +82,7 @@ witnessCorrectedEnergyIsMinusFour :
 witnessCorrectedEnergyIsMinusFour = solve []
 
 minusFourStrictlyNegative : - four < 0ℚ
-minusFourStrictlyNegative = ℚP.neg<0 (ℚP.positive⁻¹ four)
+minusFourStrictlyNegative = toWitness {a? = (- four) <? 0ℚ} _
 
 witnessCorrectedEnergyStrictlyNegative :
   scaledQuadraticCubicCorrection one one negativeCubicWitness two < 0ℚ
