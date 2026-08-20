@@ -24,15 +24,14 @@ module DASHI.Physics.Closure.NSTriadKNCriticalCompactnessSerrinRound29Exact wher
 -- Sobolev estimate, Aubin-Lions-Simon compactness and periodic Serrin
 -- continuation remain separate producers.
 --
--- ROUND104 RECEIPT REPAIR
+-- ROUND104 RECEIPT / SAME-LIMIT REPAIR
 --
 -- The original abstract Aubin--Lions target stored proposition *types* as Set
--- fields without requiring inhabitants.  The target now pairs every named
--- analytic proposition with an explicit witness.  The target also carries the
--- limiting-equation and lower-semicontinuity witnesses needed by the literal
--- same-solution weld, so later modules do not duplicate unrelated abstract
--- predicates.  This is still an abstract interface rather than a literal
--- Sobolev-function-space construction; physical instantiation remains false.
+-- fields without requiring inhabitants.  Round104 pairs every named analytic
+-- proposition with a proof witness and additionally makes the target own an
+-- actual `limitingState : LimitState`.  This prevents a later same-solution
+-- compiler from proving only that two LIMIT TYPES coincide while silently
+-- continuing a different element of that type.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -108,6 +107,7 @@ record CriticalAubinLionsTarget : Set₁ where
   field
     GalerkinSequence : Set
     LimitState : Set
+    limitingState : LimitState
 
     uniformLInfinityHOneHalf : Set
     uniformLInfinityHOneHalfWitness : uniformLInfinityHOneHalf
@@ -155,6 +155,9 @@ criticalToSerrinQuantitativeReducerClosed = true
 round104CriticalAubinLionsTargetRequiresWitnesses : Bool
 round104CriticalAubinLionsTargetRequiresWitnesses = true
 
+round104CriticalAubinLionsTargetOwnsLimitElement : Bool
+round104CriticalAubinLionsTargetOwnsLimitElement = true
+
 physicalNegativeNormTimeDerivativeClosed : Bool
 physicalNegativeNormTimeDerivativeClosed = false
 
@@ -171,6 +174,10 @@ criticalToSerrinQuantitativeReducerClosedIsTrue = refl
 round104CriticalAubinLionsTargetRequiresWitnessesIsTrue :
   round104CriticalAubinLionsTargetRequiresWitnesses ≡ true
 round104CriticalAubinLionsTargetRequiresWitnessesIsTrue = refl
+
+round104CriticalAubinLionsTargetOwnsLimitElementIsTrue :
+  round104CriticalAubinLionsTargetOwnsLimitElement ≡ true
+round104CriticalAubinLionsTargetOwnsLimitElementIsTrue = refl
 
 physicalNegativeNormTimeDerivativeClosedIsFalse :
   physicalNegativeNormTimeDerivativeClosed ≡ false
