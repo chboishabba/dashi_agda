@@ -56,11 +56,6 @@ import DASHI.Environment.SurrogateCalibration as Surrogate
 
 ------------------------------------------------------------------------
 -- 1. Exact/approximate behavioural compression.
---
--- `DynamicConsumerSafety` already supplies exact trace congruence.  The
--- following quantitative contract is the deliberately weaker metric analogue:
--- closeness must be propagated by every declared action, not merely observed
--- at the current state.
 ------------------------------------------------------------------------
 
 record ApproximateFutureMetricContract
@@ -118,10 +113,6 @@ traceObservationClose contract actions close =
 
 ------------------------------------------------------------------------
 -- 2. Decision-relevant/task-relative sufficiency.
---
--- This is an exact factorisation criterion: every declared task must factor
--- through the compressed representation.  It is intentionally task-relative;
--- it does not imply DynamicConsumerSafety for undeclared future dynamics.
 ------------------------------------------------------------------------
 
 record TaskFactorisation
@@ -170,11 +161,6 @@ data CompressionAdmission
 
 ------------------------------------------------------------------------
 -- 4. Multi-fidelity trust-region style escalation boundary.
---
--- LES's A/B/C lane is not assumed to be an ordered mesh hierarchy.  A runtime
--- may use genuinely different model classes.  Consequently the exact formal
--- obligation is to record local agreement evidence and fail closed when that
--- evidence is absent or outside its declared region.
 ------------------------------------------------------------------------
 
 record FidelityAgreementReceipt : Set where
@@ -202,17 +188,15 @@ record TrustRegionEscalationReceipt : Set where
       resultingLane ≡
       Latent.chooseLane startingLane
         (Surrogate.assessmentEscalation surrogateAssessment)
-    regionUpdateRecorded : Bool
-    highFidelityVerificationRecorded : Bool
+    regionUpdateResult : Bool
+    regionUpdateRecorded : regionUpdateResult ≡ true
+    highFidelityVerificationResult : Bool
+    highFidelityVerificationRecorded : highFidelityVerificationResult ≡ true
 
 open TrustRegionEscalationReceipt public
 
 ------------------------------------------------------------------------
 -- 5. Hard invariant projection.
---
--- A soft penalty or small residual is not a proof that the projected state
--- satisfies a conservation/admissibility law.  This generic carrier requires
--- the projection itself to land in the invariant set.
 ------------------------------------------------------------------------
 
 record HardInvariantProjection
@@ -255,6 +239,8 @@ open ParetoInterpretationReceipt public
 
 ------------------------------------------------------------------------
 -- 7. Approval is evidence-bearing and action-bound, not a detached Boolean.
+-- Every check that gates deployment is proof-bearing: false check results cannot
+-- inhabit `DeploymentApprovalWitness`.
 ------------------------------------------------------------------------
 
 record ApprovalEvent : Set where
@@ -275,17 +261,17 @@ record DeploymentApprovalWitness (event : ApprovalEvent) : Set where
   constructor deploymentApprovalWitness
   field
     approvalGranted : approved event ≡ true
-    scopeChecked : Bool
-    authorityCurrent : Bool
-    revocationChecked : Bool
+    scopeCheckResult : Bool
+    scopeChecked : scopeCheckResult ≡ true
+    authorityCheckResult : Bool
+    authorityCurrent : authorityCheckResult ≡ true
+    revocationCheckResult : Bool
+    revocationChecked : revocationCheckResult ≡ true
 
 open DeploymentApprovalWitness public
 
 ------------------------------------------------------------------------
 -- 8. Research-frontier boundary.
---
--- These are deliberately *gaps*, not silently asserted capabilities.  The
--- current deterministic/exact LES spine does not by itself discharge them.
 ------------------------------------------------------------------------
 
 record LESResearchGapBoundary : Set where
