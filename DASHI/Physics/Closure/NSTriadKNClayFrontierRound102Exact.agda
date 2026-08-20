@@ -59,7 +59,22 @@ module DASHI.Physics.Closure.NSTriadKNClayFrontierRound102Exact where
 --    Homochiral production vanishes. The same identity is lifted onto the
 --    repository RealField carrier used by literal periodic Fourier modules.
 --
--- 5. Once the critical Galerkin barrier is known, the standard compactness
+-- 5. Opening the literal Round93 Waleffe factor sharpens the six mixed-helicity
+--    sign classes further. In every heterochiral triad, the unsigned critical
+--    production is exactly twice the critical-weighted transfer of the UNIQUE
+--    minority-helicity leg. For minority k, for example,
+--
+--      Xdot = +/- 2 r_k (r_q-r_p) A.
+--
+--    The two homochiral sign patterns vanish. Thus eight helical sign patterns
+--    reduce to three cyclic minority-leg geometries. Resonance supplies the
+--    analytic target |r_q-r_p| <= r_k, so in the HH->low subclass with low
+--    minority output the critical coefficient is charged at the low radius
+--    squared. Minority-helicity and low-frequency are NOT identified globally;
+--    comparable-scale and high-minority mixed triads remain inside the physical
+--    exchange estimate.
+--
+-- 6. Once the critical Galerkin barrier is known, the standard compactness
 --    exponents are no longer mysterious: interpolation gives L4_t H1, hence
 --    L4_t L6; grad u is L2_t L3; the transport term is L4/3_t L2 and therefore
 --    fits a Simon/Aubin--Lions negative-half derivative route. Round102 proves
@@ -69,8 +84,8 @@ module DASHI.Physics.Closure.NSTriadKNClayFrontierRound102Exact where
 -- The submission cutset remains two theorem-sized obligations, but only the
 -- first contains new 3-D dynamics:
 --
---   A. UniformGalerkinCriticalBarrier, sharpened to a cutoff-uniform
---      HETEROCHIRAL critical-exchange estimate plus viscosity/integrable budget;
+--   A. UniformGalerkinCriticalBarrier, now a cutoff-uniform summation/absorption
+--      theorem for the three minority-leg heterochiral geometries;
 --   B. same-solution critical Galerkin -> Aubin--Lions/Simon -> limit weld.
 --
 -- Round90 already sends a same-solution CriticalBarrierFor to Serrin.
@@ -84,6 +99,7 @@ import DASHI.Physics.Closure.NSTriadKNThreeRadiusTransferExteriorRound102Exact a
 import DASHI.Physics.Closure.NSTriadKNCriticalAbsoluteValueAbsorptionNoGoRound102Exact as AbsoluteNoGo
 import DASHI.Physics.Closure.NSTriadKNHelicalCriticalExchangeReductionRound102Exact as Helical
 import DASHI.Physics.Closure.NSTriadKNHelicalCriticalExchangeFieldRound102Exact as HelicalField
+import DASHI.Physics.Closure.NSTriadKNHeterochiralMinorityLegReductionRound102Exact as Minority
 import DASHI.Physics.Closure.NSTriadKNCriticalAubinLionsExponentWeldRound102Exact as Exponents
 import DASHI.Physics.Closure.NSTriadKNCriticalCompactnessSerrinRound29Exact as Critical
 
@@ -110,6 +126,10 @@ round102CriticalProductionReducedToHeterochiralExchange =
 round102RealFieldHelicalReductionClosed : Bool
 round102RealFieldHelicalReductionClosed =
   HelicalField.round102RealFieldHelicalCriticalExchangeReductionClosed
+
+round102AllMixedHelicityProductionReducedToMinorityLeg : Bool
+round102AllMixedHelicityProductionReducedToMinorityLeg =
+  Minority.round102AllMixedHelicityCriticalProductionReducesToMinorityLeg
 
 round102CriticalAubinLionsExponentArithmeticClosed : Bool
 round102CriticalAubinLionsExponentArithmeticClosed =
@@ -149,6 +169,10 @@ round102CriticalProductionReducedToHeterochiralExchangeIsTrue = refl
 round102RealFieldHelicalReductionClosedIsTrue :
   round102RealFieldHelicalReductionClosed ≡ true
 round102RealFieldHelicalReductionClosedIsTrue = refl
+
+round102AllMixedHelicityProductionReducedToMinorityLegIsTrue :
+  round102AllMixedHelicityProductionReducedToMinorityLeg ≡ true
+round102AllMixedHelicityProductionReducedToMinorityLegIsTrue = refl
 
 round102CriticalAubinLionsExponentArithmeticClosedIsTrue :
   round102CriticalAubinLionsExponentArithmeticClosed ≡ true
