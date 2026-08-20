@@ -6,6 +6,8 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 
+import DASHI.Core.AttributedSourceCore as Source
+
 ------------------------------------------------------------------------
 -- SOURCE REGISTRY: EARLY-YEARS EMPOWERMENT + CONNECTEDNESS
 --
@@ -76,7 +78,58 @@ brownKimber2026 =
 
 canonicalEmpowermentConnectednessSources : List EmpowermentConnectednessReference
 canonicalEmpowermentConnectednessSources =
-  earlyYearsStrategy2024
-  ∷ qualityArea6
-  ∷ brownKimber2026
-  ∷ []
+  earlyYearsStrategy2024 ∷ qualityArea6 ∷ brownKimber2026 ∷ []
+
+------------------------------------------------------------------------
+-- Handoff-facing typed source atlas.
+--
+-- The legacy rows above preserve the source branch's exact metadata surface.
+-- For the convergence handoff we additionally route the same sources through
+-- AttributedSourceCore so DOI state is typed rather than inferred from a magic
+-- string. `noDOIRecordedByAtlas` is deliberately atlas-local.
+------------------------------------------------------------------------
+
+earlyYearsStrategy2024Attributed : Source.AttributedSource
+earlyYearsStrategy2024Attributed =
+  Source.mkNoDOISource
+    "Australian Government Department of Social Services"
+    "Early Years Strategy 2024-2034"
+    "Australian Government national strategy"
+    "2024"
+    "https://www.dss.gov.au/early-years-strategy/resource/early-years-strategy-2024-2034"
+    Source.governmentSource
+    "Policy-language calibration for empowered/connected families and child/family-centred, strengths-based, community-respecting principles; not empirical proof for a particular family or service."
+    Source.publicAttribution
+
+qualityArea6Attributed : Source.AttributedSource
+qualityArea6Attributed =
+  Source.mkNoDOISource
+    "Australian Children's Education and Care Quality Authority"
+    "Quality Area 6: Collaborative partnerships with families and communities"
+    "Guide to the National Quality Framework / National Quality Standard"
+    "2026"
+    "https://www.acecqa.gov.au/national-quality-framework/guide-nqf/section-3-national-quality-standard-and-assessment-and-rating/quality-area-6-collaborative-partnerships-families-and-communities"
+    Source.institutionalSource
+    "Regulatory-quality calibration for family expertise, shared decision-making, participation and community engagement; not proof of a downstream empowerment effect."
+    Source.publicAttribution
+
+brownKimber2026Attributed : Source.AttributedSource
+brownKimber2026Attributed =
+  Source.mkDOISource
+    "Alice Brown; Megan Kimber"
+    "Repositioning Student Voice and Agency: A Call for the Epistemic Expansion of Scholarship of Teaching and Learning Inquiry"
+    "Active Learning in Higher Education"
+    "2026"
+    "10.1177/14697874261426374"
+    "https://doi.org/10.1177/14697874261426374"
+    Source.academicArticleSource
+    "Epistemic voice/agency calibration; higher-education SoTL does not become empirical authority for the rural early-childhood specialization."
+    Source.publicAttribution
+
+empowermentConnectednessSourceAtlas : Source.AttributedSourceAtlas
+empowermentConnectednessSourceAtlas =
+  Source.mkSourceAtlas
+    "early-years empowerment and connectedness"
+    "DASHI.Education.EarlyYearsEmpowermentConnectednessSourceRegistry"
+    (earlyYearsStrategy2024Attributed ∷ qualityArea6Attributed ∷ brownKimber2026Attributed ∷ [])
+    "Three source-bound inputs for the #598 specialization, with DOI state, source role and non-promotion boundary explicit"
