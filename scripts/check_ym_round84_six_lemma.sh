@@ -23,6 +23,7 @@ files=(
   DASHI/Physics/YangMills/BalabanBetaHistoryLocalizedInfluenceExact.agda
   DASHI/Physics/YangMills/BalabanSharedMarkedAnalyticShellExact.agda
   DASHI/Physics/YangMills/BalabanCMP116DifferentiatedLocalizationSourceExact.agda
+  DASHI/Physics/YangMills/BalabanIrrelevantRGMemoryContractionExact.agda
   DASHI/Physics/YangMills/BalabanCompactSimplePositiveBetaFromSharedMarkedShellExact.agda
   DASHI/Physics/YangMills/CompactSimpleClassificationAdjointCasimirExact.agda
   DASHI/Physics/YangMills/BalabanCMP109CompactSimpleColourReductionSourceExact.agda
@@ -54,6 +55,8 @@ grep -q 'betaMark hessianMark compositeMark' \
   DASHI/Physics/YangMills/BalabanSharedMarkedAnalyticShellExact.agda
 grep -q 'cmp116DifferentiatedActivityLocalizationLevel' \
   DASHI/Physics/YangMills/BalabanCMP116DifferentiatedLocalizationSourceExact.agda
+grep -q 'irrelevantRGMemoryContractionCompilerLevel' \
+  DASHI/Physics/YangMills/BalabanIrrelevantRGMemoryContractionExact.agda
 grep -q 'sameFamilyStressWardGeneratesOSTranslationsLevel' \
   DASHI/Physics/YangMills/BalabanClayHighestAlphaRound84SixAnalyticLemmaExact.agda
 
