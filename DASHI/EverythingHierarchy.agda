@@ -23,6 +23,8 @@ import DASHI.DCHoTT.Everything
 import DASHI.Energy.Everything
 import DASHI.Quantum.ExhaustiveEverything
 import DASHI.Geometry.Everything
+import DASHI.Foundations.Everything
+import DASHI.Analysis.Everything
 
 -- Natural / physical / applied domains.
 import DASHI.Biology.DomainEverything
@@ -42,6 +44,7 @@ import DASHI.Music.Everything
 
 -- Systems / tooling / cross-domain domains.
 import DASHI.Context.Everything
+import DASHI.Interop.Everything
 import DASHI.Compression.Everything
 import DASHI.Graph.Everything
 import DASHI.Perf.Everything
