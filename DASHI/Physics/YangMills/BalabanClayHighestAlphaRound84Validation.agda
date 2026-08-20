@@ -15,7 +15,8 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound84Validation where
 -- identification remains a genuine physical leaf.
 --
 -- Round87 also imports the same-family finite-cumulant-margin -> continuum
--- interaction compiler and the quadratic-form local-charge cutoff compiler.
+-- interaction compiler, the quadratic-form local-charge cutoff compiler, and
+-- the sine-half -> coherent-cosine atom reduction for the literal beta evaluator.
 --
 -- A successful Agda check of THIS module forces typechecking of every new
 -- Round85--87 compiler used by the active mathematical cutset.  Import success
@@ -43,4 +44,5 @@ import DASHI.Physics.YangMills.YangMillsClayStressOPERequirementBoundaryExact
 import DASHI.Physics.YangMills.BalabanMarkedSourceCompositeStressFieldExact
 import DASHI.Physics.YangMills.YangMillsSameFamilyCumulantMarginToInteractingExact
 import DASHI.Physics.YangMills.YangMillsLocalChargeQuadraticFormCoreExact
+import DASHI.Physics.YangMills.BalabanClayT4SineDeterminesCosineAtomExact
 import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound87FourAnalyticLemmaExact
