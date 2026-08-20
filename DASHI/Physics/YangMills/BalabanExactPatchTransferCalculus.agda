@@ -5,22 +5,30 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 ------------------------------------------------------------------------
 -- Exact patch-transfer calculus.
+--
+-- A patch is a genuine retract of a bulk carrier.  The module proves the
+-- repeated boundary/interface/corner/nested algebra once and derives the
+-- patch Green estimate from the exact intertwining identity, extension and
+-- restriction stability, the bulk estimate, and one scalar constant transport.
 ------------------------------------------------------------------------
 
 record PatchRetract (Patch Bulk Bound : Set) : Set₁ where
   field
     extension : Patch → Bulk
     restriction : Bulk → Patch
+
     patchNorm : Patch → Bound
     bulkNorm : Bulk → Bound
     LessEqual : Bound → Bound → Set
     multiply : Bound → Bound → Bound
     CE CR : Bound
+
     restrictionAfterExtension : ∀ h → restriction (extension h) ≡ h
     extensionNormBound : ∀ h →
       LessEqual (bulkNorm (extension h)) (multiply CE (patchNorm h))
     restrictionNormBound : ∀ h →
       LessEqual (patchNorm (restriction h)) (multiply CR (bulkNorm h))
+
 open PatchRetract public
 
 record ConstraintPreservingPatchRetract
@@ -31,6 +39,7 @@ record ConstraintPreservingPatchRetract
     BulkConstraint : Bulk → Set
     extensionPreservesConstraints : ∀ h →
       PatchConstraint h → BulkConstraint (extension retract h)
+
 open ConstraintPreservingPatchRetract public
 
 boundaryRestrictionAfterExtension interfaceRestrictionAfterExtension
@@ -72,6 +81,10 @@ interfaceRestrictionNormBound d = restrictionNormBound d
 cornerRestrictionNormBound d = restrictionNormBound d
 nestedRestrictionNormBound d = restrictionNormBound d
 
+------------------------------------------------------------------------
+-- Energy transport.
+------------------------------------------------------------------------
+
 record PatchEnergyTransfer (Patch Bulk Bound : Set) : Set₁ where
   field
     retract : PatchRetract Patch Bulk Bound
@@ -79,6 +92,7 @@ record PatchEnergyTransfer (Patch Bulk Bound : Set) : Set₁ where
     bulkEnergy : Bulk → Bound
     energyComparedToBulk : ∀ h →
       LessEqual retract (bulkEnergy (extension retract h)) (patchEnergy h)
+
 open PatchEnergyTransfer public
 
 boundaryEnergyComparedToBulk interfaceEnergyComparedToBulk
@@ -91,13 +105,20 @@ interfaceEnergyComparedToBulk d = energyComparedToBulk d
 cornerEnergyComparedToBulk d = energyComparedToBulk d
 nestedEnergyComparedToBulk d = energyComparedToBulk d
 
+------------------------------------------------------------------------
+-- Exact Green transfer.  A nonzero correction belongs in a separate
+-- perturbative record; this owner is deliberately the K = 0 reflection lane.
+------------------------------------------------------------------------
+
 record ExactGreenPatchTransfer (Patch Bulk Bound : Set) : Set₁ where
   field
     retract : PatchRetract Patch Bulk Bound
     bulkGreen : Bulk → Bulk
     patchGreen : Patch → Patch
     greenTransferIdentity : ∀ f →
-      patchGreen f ≡ restriction retract (bulkGreen (extension retract f))
+      patchGreen f ≡
+      restriction retract (bulkGreen (extension retract f))
+
 open ExactGreenPatchTransfer public
 
 boundaryGreenTransferIdentity interfaceGreenTransferIdentity
@@ -110,6 +131,10 @@ interfaceGreenTransferIdentity d = greenTransferIdentity d
 cornerGreenTransferIdentity d = greenTransferIdentity d
 nestedGreenTransferIdentity d = greenTransferIdentity d
 
+------------------------------------------------------------------------
+-- Norm transport through exact intertwining.
+------------------------------------------------------------------------
+
 record GreenPatchBoundTransport (Patch Bulk Bound : Set) : Set₁ where
   field
     transfer : ExactGreenPatchTransfer Patch Bulk Bound
@@ -117,20 +142,24 @@ record GreenPatchBoundTransport (Patch Bulk Bound : Set) : Set₁ where
       LessEqual (retract transfer) a b →
       LessEqual (retract transfer) b c →
       LessEqual (retract transfer) a c
+    reflexive : ∀ a → LessEqual (retract transfer) a a
+    equalityRight : ∀ {a b c} → b ≡ c →
+      LessEqual (retract transfer) a b → LessEqual (retract transfer) a c
     equalityLeft : ∀ {a b c} → a ≡ b →
-      LessEqual (retract transfer) b c →
-      LessEqual (retract transfer) a c
+      LessEqual (retract transfer) b c → LessEqual (retract transfer) a c
     multiplyMonotoneLeft : ∀ c {a b} →
       LessEqual (retract transfer) a b →
       LessEqual (retract transfer)
         (multiply (retract transfer) c a)
         (multiply (retract transfer) c b)
+
     Cbulk Cpatch : Bound
     bulkGreenBound : ∀ f →
       LessEqual (retract transfer)
         (bulkNorm (retract transfer) (bulkGreen transfer f))
         (multiply (retract transfer) Cbulk
           (bulkNorm (retract transfer) f))
+
     constantTransport : ∀ f →
       LessEqual (retract transfer)
         (multiply (retract transfer) (CR (retract transfer))
@@ -139,6 +168,7 @@ record GreenPatchBoundTransport (Patch Bulk Bound : Set) : Set₁ where
               (patchNorm (retract transfer) f))))
         (multiply (retract transfer) Cpatch
           (patchNorm (retract transfer) f))
+
 open GreenPatchBoundTransport public
 
 patchGreenControlledByBulk :
@@ -182,6 +212,12 @@ interfaceGreenControlledByBulk d = patchGreenBound d
 cornerGreenControlledByBulk d = patchGreenBound d
 nestedGreenControlledByBulk d = patchGreenBound d
 
+------------------------------------------------------------------------
+-- The identical calculus applies to G, ∇G, ∇²G and the residual by choosing
+-- the corresponding bulk and patch operators.  Keeping one family record
+-- prevents accidental mixing of witnesses from different geometries.
+------------------------------------------------------------------------
+
 record FourPatchTransferFamily
     (BoundaryPatch InterfacePatch CornerPatch NestedPatch Bulk Bound : Set) : Set₁ where
   field
@@ -189,6 +225,7 @@ record FourPatchTransferFamily
     interfaceTransfer : GreenPatchBoundTransport InterfacePatch Bulk Bound
     cornerTransfer : GreenPatchBoundTransport CornerPatch Bulk Bound
     nestedTransfer : GreenPatchBoundTransport NestedPatch Bulk Bound
+
 open FourPatchTransferFamily public
 
 patchTransferAlgebraAssemblyLevel : ProofLevel
