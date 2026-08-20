@@ -131,9 +131,6 @@ reciprocalAntitonePositive lower upper lowerPositive upperPositive lowerBelowUpp
       scaleIsPositive : Positive scale
       scaleIsPositive = ℚP.pos*pos⇒pos lower upper
 
-    -- Agda 2.9 exposes the proof arguments of `positiveReciprocal` to the
-    -- reflective ring solver.  Use the ring laws and the explicit inverse
-    -- identities directly, so no denominator witness is hidden in a meta.
     scaleUpperInverse : scale * upperInverse ≡ lower
     scaleUpperInverse =
       trans
@@ -222,19 +219,16 @@ quotientLowerEndpoint :
   (denominatorLower denominatorUpper : ℚ) →
   (denominatorLowerPositive : 0ℚ < denominatorLower) →
   denominatorLower ≤ denominatorUpper → ℚ
-quotientLowerEndpoint {numeratorLower}
-    (numeratorNonnegative _)
-    denominatorLower denominatorUpper denominatorLowerPositive denominatorOrdered =
+quotientLowerEndpoint {numeratorLower} {numeratorUpper} signCase
+    denominatorLower denominatorUpper denominatorLowerPositive denominatorOrdered
+  with signCase
+... | numeratorNonnegative _ =
   dividePositive numeratorLower denominatorUpper
     (upperDenominatorPositive
       denominatorLower denominatorUpper denominatorLowerPositive denominatorOrdered)
-quotientLowerEndpoint {numeratorLower}
-    (numeratorNonpositive _)
-    denominatorLower denominatorUpper denominatorLowerPositive denominatorOrdered =
+... | numeratorNonpositive _ =
   dividePositive numeratorLower denominatorLower denominatorLowerPositive
-quotientLowerEndpoint {numeratorLower}
-    (numeratorStraddlesZero _ _)
-    denominatorLower denominatorUpper denominatorLowerPositive denominatorOrdered =
+... | numeratorStraddlesZero _ _ =
   dividePositive numeratorLower denominatorLower denominatorLowerPositive
 
 quotientUpperEndpoint :
@@ -243,19 +237,16 @@ quotientUpperEndpoint :
   (denominatorLower denominatorUpper : ℚ) →
   (denominatorLowerPositive : 0ℚ < denominatorLower) →
   denominatorLower ≤ denominatorUpper → ℚ
-quotientUpperEndpoint {numeratorUpper}
-    (numeratorNonnegative _)
-    denominatorLower denominatorUpper denominatorLowerPositive denominatorOrdered =
+quotientUpperEndpoint {numeratorLower} {numeratorUpper} signCase
+    denominatorLower denominatorUpper denominatorLowerPositive denominatorOrdered
+  with signCase
+... | numeratorNonnegative _ =
   dividePositive numeratorUpper denominatorLower denominatorLowerPositive
-quotientUpperEndpoint {numeratorUpper}
-    (numeratorNonpositive _)
-    denominatorLower denominatorUpper denominatorLowerPositive denominatorOrdered =
+... | numeratorNonpositive _ =
   dividePositive numeratorUpper denominatorUpper
     (upperDenominatorPositive
       denominatorLower denominatorUpper denominatorLowerPositive denominatorOrdered)
-quotientUpperEndpoint {numeratorUpper}
-    (numeratorStraddlesZero _ _)
-    denominatorLower denominatorUpper denominatorLowerPositive denominatorOrdered =
+... | numeratorStraddlesZero _ _ =
   dividePositive numeratorUpper denominatorLower denominatorLowerPositive
 
 record LiesBetween (lower value upper : ℚ) : Set where
