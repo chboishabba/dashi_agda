@@ -178,18 +178,18 @@ dividePositiveNumeratorMonotone lower upper denominator denominatorPositive lowe
 
 dividePositiveDenominatorAntitoneNonnegative :
   ∀ numerator lowerDenominator upperDenominator
-    (numeratorNonnegative : 0ℚ ≤ numerator)
+    (numeratorAtLeastZero : 0ℚ ≤ numerator)
     (lowerPositive : 0ℚ < lowerDenominator)
     (upperPositive : 0ℚ < upperDenominator) →
   lowerDenominator ≤ upperDenominator →
   dividePositive numerator upperDenominator upperPositive
   ≤ dividePositive numerator lowerDenominator lowerPositive
 dividePositiveDenominatorAntitoneNonnegative numerator lowerDenominator upperDenominator
-    numeratorNonnegative lowerPositive upperPositive lowerBelowUpper =
+    numeratorAtLeastZero lowerPositive upperPositive lowerBelowUpper =
   let
     instance
       numeratorIsNonnegative : NonNegative numerator
-      numeratorIsNonnegative = ℚ.nonNegative numeratorNonnegative
+      numeratorIsNonnegative = ℚ.nonNegative numeratorAtLeastZero
   in
   ℚP.*-monoˡ-≤-nonNeg numerator
     (reciprocalAntitonePositive
@@ -198,18 +198,18 @@ dividePositiveDenominatorAntitoneNonnegative numerator lowerDenominator upperDen
 
 dividePositiveDenominatorMonotoneNonpositive :
   ∀ numerator lowerDenominator upperDenominator
-    (numeratorNonpositive : numerator ≤ 0ℚ)
+    (numeratorAtMostZero : numerator ≤ 0ℚ)
     (lowerPositive : 0ℚ < lowerDenominator)
     (upperPositive : 0ℚ < upperDenominator) →
   lowerDenominator ≤ upperDenominator →
   dividePositive numerator lowerDenominator lowerPositive
   ≤ dividePositive numerator upperDenominator upperPositive
 dividePositiveDenominatorMonotoneNonpositive numerator lowerDenominator upperDenominator
-    numeratorNonpositive lowerPositive upperPositive lowerBelowUpper =
+    numeratorAtMostZero lowerPositive upperPositive lowerBelowUpper =
   let
     instance
       numeratorIsNonpositive : NonPositive numerator
-      numeratorIsNonpositive = ℚ.nonPositive numeratorNonpositive
+      numeratorIsNonpositive = ℚ.nonPositive numeratorAtMostZero
   in
   ℚP.*-monoˡ-≤-nonPos numerator
     (reciprocalAntitonePositive
