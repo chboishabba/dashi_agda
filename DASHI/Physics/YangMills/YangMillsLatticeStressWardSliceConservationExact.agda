@@ -36,7 +36,7 @@ module DASHI.Physics.YangMills.YangMillsLatticeStressWardSliceConservationExact 
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _-_; _≡ᵇ_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _-_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
