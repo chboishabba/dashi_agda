@@ -36,7 +36,7 @@ module DASHI.Physics.YangMills.BalabanCMP119AnchoredNormalizedExpectationSourceE
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base as ℚ using (ℚ; _≤_)
+open import Data.Rational.Base as ℚ using (ℚ; _≤_; _*_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
