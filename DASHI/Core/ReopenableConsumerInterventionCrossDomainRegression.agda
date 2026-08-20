@@ -8,8 +8,13 @@ open import Data.Empty using (⊥)
 open import Data.List.Base using ([])
 
 import DASHI.Core.AdaptiveFidelityConsumerMarginExact as Fidelity
+import DASHI.Core.AuthorityPreservingFutureAbstractionExact as FutureAuthority
+import DASHI.Core.AuthorityPromotionHierarchyExact as AuthorityHierarchy
 import DASHI.Core.CompositionalComplianceExact as Compliance
 import DASHI.Core.ConsumerIndexedGovernedTransitionExact as Governed
+import DASHI.Core.ConsumerObserverJoinResidualExact as ObserverResidual
+import DASHI.Core.ConsumerSafeFidelityEscalationExact as Escalation
+import DASHI.Core.EvidenceReliabilityPolarityExact as Polarity
 import DASHI.Core.ReopenableConsumerInterventionKernelExact as Kernel
 import DASHI.Core.SelectiveAuthorityCertificateExact as Selective
 import DASHI.Core.TypedEvidenceDependencyExact as Evidence
@@ -79,6 +84,34 @@ publicStatesEquivalentAtEveryRequestedDepth :
 publicStatesEquivalentAtEveryRequestedDepth depth =
   Governed.sameProjectionFutureEquivalent
     publicAbstraction public depth refl
+
+------------------------------------------------------------------------
+-- Explicit downstream decision preservation strengthens observation/authority
+-- preservation without claiming fine-state identity.
+------------------------------------------------------------------------
+
+data Decision : Set where allow : Decision
+
+fineDecision : OneConsumer → Fine → Decision
+fineDecision public state = allow
+
+coarseDecision : OneConsumer → Coarse → Decision
+coarseDecision public coarse = allow
+
+decisionSafe :
+  FutureAuthority.DecisionPreservingAbstraction
+    publicSystem project publicAbstraction
+decisionSafe =
+  FutureAuthority.decisionPreservingAbstraction
+    fineDecision coarseDecision (λ consumer state → refl)
+
+publicStatesGovernedFutureAgree :
+  (depth : Nat) →
+  FutureAuthority.GovernedFutureAgreement
+    publicSystem fineDecision public depth left right
+publicStatesGovernedFutureAgree depth =
+  FutureAuthority.sameProjectionGivesGovernedFutureAgreement
+    publicAbstraction decisionSafe public depth refl
 
 ------------------------------------------------------------------------
 -- A second consumer on the same fine/coarse carrier distinguishes the states,
@@ -157,6 +190,15 @@ lowAndHighDecisionsAgree :
 lowAndHighDecisionsAgree =
   Fidelity.lowFidelityDecisionIsSafe bounded margin inside tt
 
+certifiedLowExecution :
+  Escalation.FidelityDecisionAt pair identityBool margin tt
+certifiedLowExecution = Escalation.certifiedLow refl
+
+certifiedLowUsesLowFidelity :
+  Escalation.dispositionFromEvidence certifiedLowExecution
+  ≡ Escalation.useLow
+certifiedLowUsesLowFidelity = refl
+
 ------------------------------------------------------------------------
 -- 4. Proof-carrying compliance composition keeps the intermediate carrier.
 ------------------------------------------------------------------------
@@ -195,3 +237,51 @@ sameEpisodeCannotBeCertifiedIndependent :
   Evidence.ProvenanceIndependent evidenceA evidenceB → ⊥
 sameEpisodeCannotBeCertifiedIndependent =
   Evidence.sameRootContradictsProvenanceIndependence refl
+
+------------------------------------------------------------------------
+-- 6. Low reliability becomes ignorance, not opposition.
+------------------------------------------------------------------------
+
+untrustedSupportBecomesIgnorance :
+  Polarity.discountByReliability false Kernel.support ≡ Kernel.ignorance
+untrustedSupportBecomesIgnorance = refl
+
+untrustedSupportCannotBecomeOpposition :
+  Polarity.discountByReliability false Kernel.support ≡ Kernel.opposition → ⊥
+untrustedSupportCannotBecomeOpposition =
+  Polarity.lowReliabilityCannotCreateOpposition Kernel.support
+
+------------------------------------------------------------------------
+-- 7. Authority can reach actionability only through the declared adjacent
+-- promotion path.  The exact chain evidence remains a separate obligation.
+------------------------------------------------------------------------
+
+fullAuthorityPath :
+  AuthorityHierarchy.PromotionPath Kernel.computed Kernel.actionable
+fullAuthorityPath = AuthorityHierarchy.computedToActionablePath
+
+------------------------------------------------------------------------
+-- 8. Hot consumer state plus cold residual can reopen the exact fine carrier.
+------------------------------------------------------------------------
+
+hotFine : Fine → Coarse
+hotFine state = coarse
+
+residualFine : Fine → Fine
+residualFine state = state
+
+reopenFine : Coarse → Fine → Fine
+reopenFine coarse state = state
+
+recoverableFine : ObserverResidual.RecoverableHotCold Fine Coarse Fine
+recoverableFine =
+  ObserverResidual.recoverableHotCold
+    hotFine residualFine reopenFine (λ state → refl)
+
+sameHotResidualReopensSameFine :
+  {x y : Fine} →
+  hotFine x ≡ hotFine y →
+  residualFine x ≡ residualFine y →
+  x ≡ y
+sameHotResidualReopensSameFine =
+  ObserverResidual.sameHotAndResidualSameFine recoverableFine
