@@ -2,7 +2,6 @@ module DASHI.Governance.MiddleEastProvenancePolicyRouting where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 import DASHI.Governance.IranUS2026RestitutionObservation as Iran
 
@@ -10,11 +9,11 @@ import DASHI.Governance.IranUS2026RestitutionObservation as Iran
 -- Source-bounded Middle-East policy-routing application surface.
 --
 -- This module does not collapse Trump/US, Iran, Israel, Palestinians, Hamas,
--- or civilians into symmetric actors.  It formalises the rule-level questions
--- raised by the attached analysis: who is a negotiating subject, what
--- provenance supports which policy channel, whether civilian identity is
--- substituted for organisational/state responsibility, and whether repair is
--- treated as a right or merely as a consequence of bargaining leverage.
+-- or civilians into symmetric actors.  It formalises rule-level questions:
+-- who is a negotiating subject, what provenance supports which policy channel,
+-- whether civilian identity is substituted for organisational/state
+-- responsibility, and whether repair is treated as a right or only as a
+-- consequence of bargaining leverage.
 --
 -- Source anchors supplied in the attached analysis (news sources; no DOI):
 -- * Reuters, 10 August 2026, "Trump's Gaza plan hinges on Hamas disarmament,
@@ -23,7 +22,7 @@ import DASHI.Governance.IranUS2026RestitutionObservation as Iran
 --   sequencing (carried through syndicated reporting in the attachment).
 -- * ABC News, 18 June 2026, preliminary US-Iran memorandum/reconstruction.
 --
--- These are empirical observation receipts only; the algebra below is DASHI's
+-- These are empirical observation receipts only.  The algebra below is DASHI's
 -- structural formalisation and does not infer motive, guilt, legality, or a
 -- total political label.
 ------------------------------------------------------------------------
@@ -69,6 +68,11 @@ open SubjectRouting public
 
 ------------------------------------------------------------------------
 -- Responsibility and civilian identity are distinct propositions.
+--
+-- CivilianSubstitution is an application-defined bad promotion relation.  A
+-- locality certificate refutes any attempt to substitute an unrelated civilian
+-- for a witnessed responsible actor merely because both participate in some
+-- broader national/ethnic/political carrier.
 ------------------------------------------------------------------------
 
 record ResponsibilityLocality (S : MiddleEastRoutingSystem) : Set₁ where
@@ -77,14 +81,26 @@ record ResponsibilityLocality (S : MiddleEastRoutingSystem) : Set₁ where
     OrganisationMember : Actor S → Set
     StateActor : Actor S → Set
     ResponsibleFor : Actor S → Event S → Set
+    CivilianSubstitution : Actor S → Actor S → Event S → Set
 
     civilianNonSubstitution :
       ∀ {civilian actor event} →
       Civilian civilian →
       ResponsibleFor actor event →
-      Set
+      CivilianSubstitution civilian actor event →
+      ⊥
 
 open ResponsibilityLocality public
+
+civilianSubstitutionContradictsLocality :
+  ∀ {S} →
+  (R : ResponsibilityLocality S) →
+  ∀ {civilian actor event} →
+  Civilian R civilian →
+  ResponsibleFor R actor event →
+  CivilianSubstitution R civilian actor event →
+  ⊥
+civilianSubstitutionContradictsLocality R = civilianNonSubstitution R
 
 -- No generic constructor promotes civilian/group identity to responsibility.
 data CivilianIdentityAutomaticallyInheritsResponsibility
