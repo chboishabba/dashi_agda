@@ -24,8 +24,9 @@ module DASHI.Core.CompositionalComplianceExact where
 -- cryptographic soundness claim is made.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
-open import Data.Product using (Σ; _,_)
+open import Data.Product using (Σ; _×_; _,_)
 
 ------------------------------------------------------------------------
 -- One certified transformation.
@@ -53,10 +54,8 @@ open CertifiedStage public
 CompositeCompliance :
   ∀ {A B C : Set} →
   (A → B → Set) → (B → C → Set) → A → C → Set
-CompositeCompliance first second a c =
-  Σ _ (λ b → first a b × second b c)
-  where
-    open import Data.Product using (_×_)
+CompositeCompliance {B = B} first second a c =
+  Σ B (λ b → first a b × second b c)
 
 composeCertifiedStages :
   ∀ {A B C}
@@ -66,8 +65,8 @@ composeCertifiedStages :
     (right : CertifiedStage B C Second) →
   input right ≡ output left →
   CompositeCompliance First Second (input left) (output right)
-composeCertifiedStages left right same with same
-... | refl = output left , (compliance left , compliance right)
+composeCertifiedStages left right refl =
+  output left , (compliance left , compliance right)
 
 ------------------------------------------------------------------------
 -- A downstream stage may explicitly require an upstream compliance witness.
