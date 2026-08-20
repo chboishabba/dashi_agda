@@ -50,7 +50,7 @@ module DASHI.Physics.Closure.NSTriadKNUniformGalerkinSignedCriticalProductionRou
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
-open import Data.Rational.Base using (ℚ; _+_; _*_; _-_; _≤_)
+open import Data.Rational.Base using (ℚ; _+_; _*_; _-_; -_; _≤_)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (subst)
@@ -97,8 +97,8 @@ signedCriticalProductionAbsorbsIntoViscosity S =
     energyThenProduction =
       ℚP.≤-trans
         (criticalEnergyInequality S)
-        (ℚP.+-monoʳ-≤
-          (initialCritical S)
+        (ℚP.+-mono-≤
+          ℚP.≤-refl
           (signedProductionEstimate S))
 
     shifted :
@@ -111,9 +111,9 @@ signedCriticalProductionAbsorbsIntoViscosity S =
           + integrableRemainder S)
         - absorbedCoefficient S * criticalDissipation S
     shifted =
-      ℚP.+-monoʳ-≤
-        (- (absorbedCoefficient S * criticalDissipation S))
+      ℚP.+-mono-≤
         energyThenProduction
+        ℚP.≤-refl
 
     leftMeaning :
       terminalCritical S
