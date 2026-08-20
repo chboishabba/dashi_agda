@@ -18,6 +18,8 @@ import DASHI.Cognition.Everything
 import DASHI.Reasoning.Everything
 import DASHI.Moonshine.Everything
 import DASHI.Ontology.Everything
+import DASHI.HME.Everything
+import DASHI.DCHoTT.Everything
 
 -- Natural / physical / applied domains.
 import DASHI.Biology.DomainEverything
@@ -36,6 +38,7 @@ import DASHI.Philosophy.Everything
 import DASHI.Music.Everything
 
 -- Systems / tooling / cross-domain domains.
+import DASHI.Context.Everything
 import DASHI.Compression.Everything
 import DASHI.Graph.Everything
 import DASHI.Perf.Everything
