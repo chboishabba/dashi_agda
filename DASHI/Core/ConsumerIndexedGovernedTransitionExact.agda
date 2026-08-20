@@ -3,16 +3,28 @@ module DASHI.Core.ConsumerIndexedGovernedTransitionExact where
 ------------------------------------------------------------------------
 -- CONSUMER-INDEXED GOVERNED TRANSITIONS
 --
--- A quotient is never called safe in the abstract: safety is indexed by a
--- declared consumer and action language, and authority is preserved separately
--- from observation.
+-- This is the theorem-bearing core extracted from the SeaMeInIt / Animalexic /
+-- LES cross-pollination.  A quotient is never called "safe" in the abstract:
+-- safety is indexed by a declared consumer and action language, and authority
+-- is preserved separately from observation.
 --
--- Thomas Dean and Robert Givan, "Model Minimization in Markov Decision
--- Processes", AAAI 1997.
--- Patrick Cousot and Radhia Cousot, "Abstract interpretation: a unified lattice
--- model for static analysis of programs by construction or approximation of
--- fixpoints", POPL 1977. DOI: 10.1145/512950.512973.
--- Sander Beckers and Joseph Y. Halpern, "Abstracting Causal Models", AAAI 2019.
+-- Literature calibration:
+--
+-- Thomas Dean and Robert Givan,
+-- "Model Minimization in Markov Decision Processes", AAAI 1997.
+-- The paper supplies the classical state-partition / behavioural-minimisation
+-- neighbourhood; the deterministic consumer-indexed construction below is a
+-- DASHI theorem, not imported proof authority.
+--
+-- Patrick Cousot and Radhia Cousot,
+-- "Abstract interpretation: a unified lattice model for static analysis of
+-- programs by construction or approximation of fixpoints", POPL 1977.
+-- DOI: 10.1145/512950.512973.
+--
+-- Sander Beckers and Joseph Y. Halpern,
+-- "Abstracting Causal Models", AAAI 2019.
+-- This motivates keeping action/intervention commutation distinct from mere
+-- current-observation agreement.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -106,13 +118,16 @@ record ConsumerSafeAbstraction
     coarseAuthority : Consumer → Coarse → AuthorityDecision
     actionCommutes :
       ∀ action state →
-      project (step fine action state) ≡ coarseStep action (project state)
+      project (step fine action state)
+      ≡ coarseStep action (project state)
     observationDescends :
       ∀ consumer state →
-      observe fine consumer state ≡ coarseObserve consumer (project state)
+      observe fine consumer state
+      ≡ coarseObserve consumer (project state)
     authorityDescends :
       ∀ consumer state →
-      authority fine consumer state ≡ coarseAuthority consumer (project state)
+      authority fine consumer state
+      ≡ coarseAuthority consumer (project state)
 
 open ConsumerSafeAbstraction public
 
@@ -125,8 +140,7 @@ sameProjectionSameObservation :
     {left right : Fine} →
   project left ≡ project right →
   observe fine consumer left ≡ observe fine consumer right
-sameProjectionSameObservation abstraction consumer
-  {left = left} {right = right} same
+sameProjectionSameObservation abstraction consumer same
   rewrite observationDescends abstraction consumer left
         | observationDescends abstraction consumer right
         | same = refl
@@ -140,8 +154,7 @@ sameProjectionSameAuthority :
     {left right : Fine} →
   project left ≡ project right →
   authority fine consumer left ≡ authority fine consumer right
-sameProjectionSameAuthority abstraction consumer
-  {left = left} {right = right} same
+sameProjectionSameAuthority abstraction consumer same
   rewrite authorityDescends abstraction consumer left
         | authorityDescends abstraction consumer right
         | same = refl
@@ -155,8 +168,7 @@ stepPreservesProjectionEquality :
     {left right : Fine} →
   project left ≡ project right →
   project (step fine action left) ≡ project (step fine action right)
-stepPreservesProjectionEquality abstraction action
-  {left = left} {right = right} same
+stepPreservesProjectionEquality abstraction action same
   rewrite actionCommutes abstraction action left
         | actionCommutes abstraction action right =
   cong (coarseStep abstraction action) same
@@ -178,3 +190,8 @@ sameProjectionFutureEquivalent abstraction consumer (suc depth) same =
   , λ action allowed →
       sameProjectionFutureEquivalent abstraction consumer depth
         (stepPreservesProjectionEquality abstraction action same)
+
+------------------------------------------------------------------------
+-- Boundary: this is consumer/action-language relative.  It does not promote a
+-- safe quotient to world identity, undeclared consumers, or physical fidelity.
+------------------------------------------------------------------------
