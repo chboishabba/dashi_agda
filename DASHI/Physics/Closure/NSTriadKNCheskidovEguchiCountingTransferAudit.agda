@@ -3,8 +3,10 @@ module DASHI.Physics.Closure.NSTriadKNCheskidovEguchiCountingTransferAudit where
 ------------------------------------------------------------------------
 -- PROVENANCE
 -- Authors: Alexey Cheskidov; Taichi Eguchi.
--- arXiv title: "Global well-posedness of the Navier-Stokes equations for
--- small initial data in frequency localized Koch-Tataru's space".
+-- Title: "Global well-posedness of the Navier-Stokes equations for small
+-- initial data in frequency localized Koch-Tataru's space"; journal version
+-- "Global-in-time smooth solution to the Navier-Stokes equations for small
+-- initial data in frequency localized Koch-Tataru's space".
 -- arXiv/year: arXiv:2503.11642v1, submitted 14 March 2025.
 -- arXiv/DataCite DOI: 10.48550/arXiv.2503.11642.
 -- Journal title: "Global-in-time smooth solution to the Navier-Stokes
