@@ -44,6 +44,7 @@ import DASHI.Music.Everything
 
 -- Systems / tooling / cross-domain domains.
 import DASHI.Context.Everything
+import DASHI.Interop.Everything
 import DASHI.Compression.Everything
 import DASHI.Graph.Everything
 import DASHI.Perf.Everything
