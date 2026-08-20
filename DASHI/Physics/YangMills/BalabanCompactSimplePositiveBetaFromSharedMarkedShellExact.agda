@@ -1,7 +1,7 @@
 module DASHI.Physics.YangMills.BalabanCompactSimplePositiveBetaFromSharedMarkedShellExact where
 
 ------------------------------------------------------------------------
--- ROUND83: BETA-MARKED SHELL + UNIVERSAL C_A 11/24 -> POSITIVE FULL BETA
+-- ROUND83: BETA-MARKED SHELL + UNIVERSAL C_A 11/24 -> STRICTLY POSITIVE BETA
 --
 -- PRIMARY SOURCES
 --
@@ -49,6 +49,9 @@ module DASHI.Physics.YangMills.BalabanCompactSimplePositiveBetaFromSharedMarkedS
 --
 --          beta_n >= b_G/2 > 0.
 --
+-- The strict last inequality is proved below; positivity is not left implicit
+-- in a named lower-bound record.
+--
 -- Thus the remaining physical beta job is sharply localized to SAME-OBJECT
 -- construction of the constrained Wilson/FP/Haar coefficient and proof that
 -- its preceding-scale response is the beta-mark projection of the source
@@ -56,7 +59,8 @@ module DASHI.Physics.YangMills.BalabanCompactSimplePositiveBetaFromSharedMarkedS
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base as ℚ using (ℚ; _+_; _*_; _≤_)
+open import Data.Rational.Base as ℚ using
+  (ℚ; 0ℚ; _+_; _*_; _≤_; _<_; positive)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (subst)
@@ -129,8 +133,49 @@ fullBetaKeepsHalfUniversal
   in
   ℚP.+-cancelʳ-≤ h chained
 
+halfPositive : 0ℚ < StepV.half
+halfPositive = ℚP.positive⁻¹ StepV.half
+
+halfUniversalStrictlyPositive :
+  ∀ {GaugeGroup}
+    (strict : Group.StrictCompactSimpleCasimirCarrier GaugeGroup)
+    group →
+  0ℚ < Group.groupUniversalCoefficient strict group * StepV.half
+halfUniversalStrictlyPositive strict group =
+  let
+    b = Group.groupUniversalCoefficient strict group
+
+    instance
+      bPositive = positive (Group.groupUniversalCoefficientPositive strict group)
+
+    scaled : b * 0ℚ < b * StepV.half
+    scaled = ℚP.*-monoʳ-<-pos b halfPositive
+  in
+  subst
+    (λ left → left < b * StepV.half)
+    (ℚRing.solve-∀ b)
+    scaled
+
+fullBetaStrictlyPositive :
+  ∀ {GaugeGroup Scale Volume Root}
+    {strict : Group.StrictCompactSimpleCasimirCarrier GaugeGroup}
+    {group : GaugeGroup}
+    {shared : Shared.SharedMarkedAnalyticShellControl Scale Volume Root}
+    {scale : Scale} {volume : Volume} {root : Root}
+    (dataSet :
+      SharedShellCompactSimpleBetaData strict group shared scale volume root) →
+    ∀ depth →
+  0ℚ < fullBeta dataSet depth
+fullBetaStrictlyPositive {strict = strict} {group = group} dataSet depth =
+  ℚP.<-≤-trans
+    (halfUniversalStrictlyPositive strict group)
+    (fullBetaKeepsHalfUniversal dataSet depth)
+
 compactSimpleSharedShellPositiveBetaCompilerLevel : ProofLevel
 compactSimpleSharedShellPositiveBetaCompilerLevel = machineChecked
+
+compactSimpleSharedShellStrictPositiveBetaCompilerLevel : ProofLevel
+compactSimpleSharedShellStrictPositiveBetaCompilerLevel = machineChecked
 
 -- Existing exact theorem: b_G=C_A*11/24 is positive on the strict
 -- compact-simple carrier.
