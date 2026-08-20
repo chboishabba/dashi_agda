@@ -59,6 +59,8 @@ import DASHI.Cognition.PNF.PhysicalMutationChurnEconomyExact
 import DASHI.Cognition.PNF.PhysicalMutationChurnEconomyRegression
 import DASHI.Cognition.PNF.ConsumerRestrictionAggregationIntertwinerExact
 import DASHI.Cognition.PNF.ConsumerRestrictionAggregationIntertwinerRegression
+import DASHI.Cognition.PNF.TypedEventuallyConsistentFibreSystemExact
+import DASHI.Cognition.PNF.TypedEventuallyConsistentFibreSystemRegression
 import DASHI.Cognition.PNF.EditTransportLeafLocalityRegression
 import DASHI.Cognition.PNF.FrequencyAdaptiveSymbolCode
 import DASHI.Cognition.PNF.HotColdExecutionProjection
