@@ -52,12 +52,20 @@ module DASHI.Physics.YangMills.BalabanSharedMarkedAnalyticShellExact where
 --        A_d <= C * rootedShell_d,
 --        rootedShell_d <= (1/4) 2^{-d}.
 --
--- The existing rooted-KP and weighted-Hessian compilers then imply, uniformly
--- in finite volume/cutoff,
+-- The existing rooted-KP, scale-Cauchy, and weighted-Hessian compilers then
+-- imply, uniformly in finite volume/cutoff,
 --
 --   sum_{d<n} beta_d      <= C/2,
 --   sum_{d<n} composite_d <= C/2,
+--   sum_{d=n}^{n+k-1} beta_d      <= (C/2) 2^{-n},
+--   sum_{d=n}^{n+k-1} composite_d <= (C/2) 2^{-n},
 --   sum_{d<n} (3/2)^d h_d <= C.
+--
+-- The two tail inequalities are the important Round83 strengthening: the
+-- composite projection now carries an explicit cutoff-uniform remainder modulus
+-- tending geometrically to zero with the starting scale.  That is the exact
+-- quantitative object consumed by the OPE lane; it is not merely a bounded
+-- prefix estimate.
 --
 -- Thus a single source-native marked analytic norm can control beta-history
 -- stability, quasi-local stochastic propagation, and the geometric OPE tail.
@@ -70,11 +78,17 @@ module DASHI.Physics.YangMills.BalabanSharedMarkedAnalyticShellExact where
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _*_; _≤_)
 import Data.Rational.Properties as ℚP
+import Data.Rational.Tactic.RingSolver as ℚRing
+open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayP2LargeFieldStepVExact as StepV
 import DASHI.Physics.YangMills.BalabanRootedKPToHessianRowBudgetExact as Hess
 import DASHI.Physics.YangMills.BalabanRootedKPToExponentialWeightedHessianExact as Weighted
+import DASHI.Physics.YangMills.BalabanContinuumScaleLocalObservableCauchyExact as Cauchy
+import DASHI.Physics.YangMills.BalabanClayT2UrsellCauchyExact as Ursell
+import DASHI.Physics.YangMills.BalabanTraceKoteckyPreissGeometricExact as Geo
+import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
 
 record SharedMarkedAnalyticShellControl
     (Scale Volume Root : Set) : Set₁ where
@@ -88,6 +102,13 @@ record SharedMarkedAnalyticShellControl
     betaHistoryShell : Scale → Volume → Root → Nat → ℚ
     hessianInfluenceShell : Scale → Volume → Root → Nat → ℚ
     compositeInsertionShell : Scale → Volume → Root → Nat → ℚ
+
+    betaHistoryShellNonnegative : ∀ scale volume root depth →
+      0ℚ ≤ betaHistoryShell scale volume root depth
+    hessianInfluenceShellNonnegative : ∀ scale volume root depth →
+      0ℚ ≤ hessianInfluenceShell scale volume root depth
+    compositeInsertionShellNonnegative : ∀ scale volume root depth →
+      0ℚ ≤ compositeInsertionShell scale volume root depth
 
     analyticShellBelowRooted : ∀ scale volume root depth →
       analyticShell scale volume root depth
@@ -186,6 +207,109 @@ compositeInsertionPartialBelowHalfAnalyticConstant dataSet =
   Hess.hessianRowPartialBelowHalfDerivativeConstant
     (compositeResponseControl dataSet)
 
+------------------------------------------------------------------------
+-- Arbitrary-start Cauchy tails for beta and composite projections.
+------------------------------------------------------------------------
+
+responseScaleMajorant :
+  ∀ {Scale Volume Root}
+    (dataSet : SharedMarkedAnalyticShellControl Scale Volume Root)
+    (response : Scale → Volume → Root → Nat → ℚ)
+    (responseNonnegative : ∀ scale volume root depth →
+      0ℚ ≤ response scale volume root depth)
+    (responseBelow : ∀ scale volume root depth →
+      response scale volume root depth
+      ≤ analyticShell dataSet scale volume root depth)
+    (scale : Scale) (volume : Volume) (root : Root) →
+  Cauchy.ScaleLocalIncrementMajorant
+responseScaleMajorant dataSet response responseNonnegative responseBelow
+  scale volume root = record
+  { Cauchy.ScaleLocalIncrementMajorant.coefficient = analyticConstant dataSet
+  ; Cauchy.ScaleLocalIncrementMajorant.coefficientNonnegative =
+      analyticConstantNonnegative dataSet
+  ; Cauchy.ScaleLocalIncrementMajorant.incrementMagnitude =
+      response scale volume root
+  ; Cauchy.ScaleLocalIncrementMajorant.incrementNonnegative =
+      responseNonnegative scale volume root
+  ; Cauchy.ScaleLocalIncrementMajorant.incrementBelowScaleShell =
+      λ depth →
+        let
+          first = ℚP.≤-trans
+            (responseBelow scale volume root depth)
+            (analyticShellBelowRooted dataSet scale volume root depth)
+          rooted = StepV.rootedShellBelowMajorant
+            (kpShell dataSet) scale volume root depth
+          scaled = Norm.scaleNonnegative
+            (analyticConstant dataSet)
+            (analyticConstantNonnegative dataSet)
+            rooted
+          combined = ℚP.≤-trans first scaled
+        in
+        subst
+          (λ upper → response scale volume root depth ≤ upper)
+          (ℚRing.solve-∀
+            (analyticConstant dataSet)
+            StepV.quarter
+            (Geo.halfPower depth)
+            Ursell.quarter)
+          combined
+  }
+
+betaScaleMajorant :
+  ∀ {Scale Volume Root}
+    (dataSet : SharedMarkedAnalyticShellControl Scale Volume Root) →
+    Scale → Volume → Root → Cauchy.ScaleLocalIncrementMajorant
+betaScaleMajorant dataSet =
+  responseScaleMajorant dataSet
+    (betaHistoryShell dataSet)
+    (betaHistoryShellNonnegative dataSet)
+    (betaBelowAnalytic dataSet)
+
+compositeScaleMajorant :
+  ∀ {Scale Volume Root}
+    (dataSet : SharedMarkedAnalyticShellControl Scale Volume Root) →
+    Scale → Volume → Root → Cauchy.ScaleLocalIncrementMajorant
+compositeScaleMajorant dataSet =
+  responseScaleMajorant dataSet
+    (compositeInsertionShell dataSet)
+    (compositeInsertionShellNonnegative dataSet)
+    (compositeBelowAnalytic dataSet)
+
+betaHistoryTail :
+  ∀ {Scale Volume Root}
+    (dataSet : SharedMarkedAnalyticShellControl Scale Volume Root) →
+    Scale → Volume → Root → Nat → Nat → ℚ
+betaHistoryTail dataSet scale volume root =
+  Cauchy.scaleIncrementTail (betaScaleMajorant dataSet scale volume root)
+
+compositeInsertionTail :
+  ∀ {Scale Volume Root}
+    (dataSet : SharedMarkedAnalyticShellControl Scale Volume Root) →
+    Scale → Volume → Root → Nat → Nat → ℚ
+compositeInsertionTail dataSet scale volume root =
+  Cauchy.scaleIncrementTail
+    (compositeScaleMajorant dataSet scale volume root)
+
+betaHistoryTailVanishingModulus :
+  ∀ {Scale Volume Root}
+    (dataSet : SharedMarkedAnalyticShellControl Scale Volume Root)
+    scale volume root start count →
+  betaHistoryTail dataSet scale volume root start count
+  ≤ analyticConstant dataSet * (Geo.half * Geo.halfPower start)
+betaHistoryTailVanishingModulus dataSet scale volume root =
+  Cauchy.scaleLocalCauchyTail
+    (betaScaleMajorant dataSet scale volume root)
+
+compositeInsertionTailVanishingModulus :
+  ∀ {Scale Volume Root}
+    (dataSet : SharedMarkedAnalyticShellControl Scale Volume Root)
+    scale volume root start count →
+  compositeInsertionTail dataSet scale volume root start count
+  ≤ analyticConstant dataSet * (Geo.half * Geo.halfPower start)
+compositeInsertionTailVanishingModulus dataSet scale volume root =
+  Cauchy.scaleLocalCauchyTail
+    (compositeScaleMajorant dataSet scale volume root)
+
 hessianWeightedControl :
   ∀ {Scale Volume Root} →
   SharedMarkedAnalyticShellControl Scale Volume Root →
@@ -208,6 +332,9 @@ hessianWeightedInfluenceBelowAnalyticConstant dataSet =
 
 sharedMarkedAnalyticThreeConsumerCompilerLevel : ProofLevel
 sharedMarkedAnalyticThreeConsumerCompilerLevel = machineChecked
+
+sharedMarkedAnalyticVanishingTailCompilerLevel : ProofLevel
+sharedMarkedAnalyticVanishingTailCompilerLevel = machineChecked
 
 -- One new physical producer, not three unrelated decay receipts: instantiate
 -- `analyticShell` by the literal twice/source-differentiated CMP99(3)/109/116
