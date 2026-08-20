@@ -161,3 +161,8 @@ Finite complex-matrix algebra, determinant identities, compactness, connectednes
 These modules prove the logical bridges and keep the analytic antecedents explicit. No large-field, all-scale, OS, or mass-gap premise is silently manufactured.
 - the fully instantiated background-field closure;
 - one-step fluctuation, determinant, Ward, localization, and polymer estimates.
+3. `BalabanUniformNeumannAsymptoticResidual.agda` restores the missing uniform residual-tail theorem, separating finite Neumann control from geometric-power vanishing;
+7. `BalabanOneStepRGClosure.agda` requires fluctuation coordinates, Jacobian/determinant control, BCH control, Ward identities, localization, vacuum-energy and coupling renormalization, and a bounded irrelevant polymer remainder;
+12. `BalabanDashenGrossCalibration.agda` makes the generator, lattice-spacing, determinant, and coupling-scheme normalization factors explicit and proves the final convention map from their calibrated product.
+- one-step fluctuation, determinant, Ward, localization, and polymer estimates;
+- reflection-positive compatibility of the concrete multiscale blocking and effective measures.
