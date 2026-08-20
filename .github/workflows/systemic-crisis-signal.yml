@@ -1,21 +1,27 @@
 name: Systemic crisis signal Agda check
 
 on:
+  push:
+    paths:
+      - 'DASHI/Economics/SystemicCrisisSignalKernel.agda'
+      - 'DASHI/Economics/SystemicCrisisSignalKernelTests.agda'
+      - 'DASHI/Economics/SystemicCrisisCompressionBridge.agda'
+      - 'DASHI/Economics/SystemicCrisisCompressionBridgeTests.agda'
+      - 'DASHI/Economics/SystemicCrisisSignalAll.agda'
+      - 'Docs/SystemicCrisisSignalKernel.md'
+      - '.github/workflows/systemic-crisis-signal.yml'
   pull_request:
     paths:
       - 'DASHI/Economics/SystemicCrisisSignalKernel.agda'
       - 'DASHI/Economics/SystemicCrisisSignalKernelTests.agda'
       - 'DASHI/Economics/SystemicCrisisCompressionBridge.agda'
       - 'DASHI/Economics/SystemicCrisisCompressionBridgeTests.agda'
-      - 'DASHI/Economics/SystemicCrisisScenarioCrosswalk.agda'
-      - 'DASHI/Economics/SystemicCrisisScenarioCrosswalkTests.agda'
       - 'DASHI/Economics/SystemicCrisisSignalAll.agda'
-      - 'DASHI/Promotion/TechSystemicStressScenarioBoundary.agda'
       - 'Docs/SystemicCrisisSignalKernel.md'
       - '.github/workflows/systemic-crisis-signal.yml'
 
 concurrency:
-  group: dashi-global-${{ github.ref }}
+  group: systemic-crisis-signal-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:
@@ -31,7 +37,6 @@ jobs:
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
 
-      - uses: DeterminateSystems/magic-nix-cache-action@v9
       - name: Restore Agda 2.9 shadow cache
         uses: actions/cache@v4
         with:
@@ -55,8 +60,6 @@ jobs:
               DASHI/Economics/SystemicCrisisSignalKernelTests.agda
               DASHI/Economics/SystemicCrisisCompressionBridge.agda
               DASHI/Economics/SystemicCrisisCompressionBridgeTests.agda
-              DASHI/Economics/SystemicCrisisScenarioCrosswalk.agda
-              DASHI/Economics/SystemicCrisisScenarioCrosswalkTests.agda
               DASHI/Economics/SystemicCrisisSignalAll.agda
             )
             scripts/run_agda29_parallel_check.sh "${targets[@]}"

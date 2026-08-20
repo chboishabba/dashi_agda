@@ -39,6 +39,11 @@ isNegative neg = true
 isNegative zer = false
 isNegative pos = false
 
+isResolved : Trit → Bool
+isResolved neg = true
+isResolved zer = false
+isResolved pos = true
+
 ------------------------------------------------------------------------
 -- Residual-depth observations.
 --
@@ -52,12 +57,12 @@ isNegative pos = false
 record ResidualDepthProfile : Set where
   constructor residualProfile
   field
-    shallowActivation      : Trit
-    middleActivation       : Trit
-    deepActivation         : Trit
-    sideInformationGrowth  : Trit
-    quotientFailure        : Trit
-    modelMismatch          : Trit
+    shallowActivation   : Trit
+    middleActivation    : Trit
+    deepActivation      : Trit
+    sideInformationGrowth : Trit
+    quotientFailure     : Trit
+    modelMismatch       : Trit
 
 open ResidualDepthProfile public
 
@@ -120,7 +125,8 @@ sovereignTransmissionObserved c =
   ∧ isPositive (sovereignFundingStress c)
 
 triggerOnlyChain : Trit → TransmissionChain
-triggerOnlyChain trigger = transmission trigger zer zer zer zer zer zer
+triggerOnlyChain trigger =
+  transmission trigger zer zer zer zer zer zer
 
 triggerAloneDoesNotActivateCascade :
   (trigger : Trit) → cascadeActive (triggerOnlyChain trigger) ≡ false
@@ -133,13 +139,13 @@ triggerAloneDoesNotActivateCascade trigger = refl
 record ModelSelectionReceipt : Set where
   constructor modelReceipt
   field
-    sourceBound                   : Bool
+    sourceBound                  : Bool
     deterministicDecodeAvailable : Bool
-    trainTestSeparated            : Bool
-    outOfSampleValidated          : Bool
-    sideInformationCounted        : Bool
-    mdlImproves                   : Bool
-    competingModelsCompared       : Bool
+    trainTestSeparated           : Bool
+    outOfSampleValidated         : Bool
+    sideInformationCounted       : Bool
+    mdlImproves                  : Bool
+    competingModelsCompared      : Bool
 
 open ModelSelectionReceipt public
 
@@ -156,21 +162,21 @@ mdlGateClosed r =
 record SystemicSignalReceipt : Set where
   constructor systemicReceipt
   field
-    observation             : Crisis.CrisisObservation
-    residuals               : ResidualDepthProfile
-    transmissionChain       : TransmissionChain
-    modelSelection          : ModelSelectionReceipt
-    noLookaheadLeakage      : Bool
-    noNarrativePromotion    : Bool
+    observation        : Crisis.CrisisObservation
+    residuals          : ResidualDepthProfile
+    transmissionChain  : TransmissionChain
+    modelSelection     : ModelSelectionReceipt
+    noLookaheadLeakage : Bool
+    noNarrativePromotion : Bool
     noDeterministicTimeline : Bool
 
 open SystemicSignalReceipt public
 
 data PromotionLevel : Set where
-  unsupportedLevel      : PromotionLevel
-  diagnosticLevel       : PromotionLevel
+  unsupportedLevel : PromotionLevel
+  diagnosticLevel  : PromotionLevel
   observedMechanismLevel : PromotionLevel
-  validatedModelLevel   : PromotionLevel
+  validatedModelLevel : PromotionLevel
 
 mechanismEvidence : SystemicSignalReceipt → Bool
 mechanismEvidence r =
@@ -191,20 +197,21 @@ promotionLevel r with mechanismEvidence r
 
 ------------------------------------------------------------------------
 -- Expectation/adoption frameworks remain a separate observation layer.
+-- They may inform a trigger prior, but cannot establish plumbing transmission.
 ------------------------------------------------------------------------
 
 data ExpectationCycle : Set where
-  innovationTrigger     : ExpectationCycle
-  inflatedExpectations  : ExpectationCycle
-  disillusionment       : ExpectationCycle
-  enlightenment         : ExpectationCycle
-  productivityPlateau   : ExpectationCycle
+  innovationTrigger : ExpectationCycle
+  inflatedExpectations : ExpectationCycle
+  disillusionment : ExpectationCycle
+  enlightenment : ExpectationCycle
+  productivityPlateau : ExpectationCycle
 
 record TechnologyExpectationObservation : Set where
   constructor technologyExpectation
   field
-    cycle           : ExpectationCycle
-    adoptionStress  : Trit
+    cycle : ExpectationCycle
+    adoptionStress : Trit
     valuationStress : Trit
 
 expectationOnlyReceipt :
@@ -214,7 +221,10 @@ expectationOnlyReceipt e m =
     (Crisis.observation neg neg neg neg neg neg neg)
     (residualProfile zer zer zer zer zer zer)
     (triggerOnlyChain (TechnologyExpectationObservation.valuationStress e))
-    m true true true
+    m
+    true
+    true
+    true
 
 expectationCycleCannotPromotePlumbing :
   (e : TechnologyExpectationObservation) (m : ModelSelectionReceipt) →
@@ -226,11 +236,11 @@ expectationCycleCannotPromotePlumbing e m = refl
 ------------------------------------------------------------------------
 
 data MonitoringPosture : Set where
-  ordinaryMonitoring   : MonitoringPosture
-  modelReview          : MonitoringPosture
-  proximityAlert       : MonitoringPosture
-  activeDysfunction    : MonitoringPosture
-  mechanicalAbatement  : MonitoringPosture
+  ordinaryMonitoring : MonitoringPosture
+  modelReview         : MonitoringPosture
+  proximityAlert      : MonitoringPosture
+  activeDysfunction   : MonitoringPosture
+  mechanicalAbatement : MonitoringPosture
 
 monitoringPosture : Crisis.CrisisPhase → CompressionRegime → MonitoringPosture
 monitoringPosture Crisis.activePhase _ = activeDysfunction
