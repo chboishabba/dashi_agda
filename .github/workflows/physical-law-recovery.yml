@@ -1,6 +1,11 @@
 name: Physical law recovery Agda check
 
 on:
+  push:
+    paths:
+      - 'DASHI/Physics/Laws/**/*.agda'
+      - 'DASHI/Physics/Chemistry/*.agda'
+      - '.github/workflows/physical-law-recovery.yml'
   pull_request:
     paths:
       - 'DASHI/Physics/Laws/**/*.agda'
@@ -8,7 +13,7 @@ on:
       - '.github/workflows/physical-law-recovery.yml'
 
 concurrency:
-  group: dashi-global-${{ github.ref }}
+  group: physical-law-recovery-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:
@@ -17,14 +22,13 @@ permissions:
 jobs:
   focused-agda:
     runs-on: ubuntu-latest
-    timeout-minutes: 75
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
       - uses: cachix/install-nix-action@v31
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
 
-      - uses: DeterminateSystems/magic-nix-cache-action@v9
       - name: Restore Agda 2.9 shadow cache
         uses: actions/cache@v4
         with:
@@ -42,7 +46,7 @@ jobs:
             export DASHI_REPO_ROOT="$GITHUB_WORKSPACE"
             export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
             export AGDA_LOG_PATH="$GITHUB_WORKSPACE/agda-physical-law-recovery-check.log"
-            export AGDA_JOBS=8
+            export AGDA_JOBS=2
             scripts/run_agda29_parallel_check.sh DASHI/Physics/Laws/Everything.agda
           ) > agda-physical-law-recovery-check.log 2>&1
           status=$?
