@@ -38,6 +38,7 @@ module DASHI.Physics.YangMills.CompactSimpleClassificationAdjointCasimirExact wh
 -- this classified C_A.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
@@ -151,8 +152,7 @@ classificationStrictCasimirCarrier = record
 
 su2ClassificationCasimirIsTwo :
   classificationAdjointCasimir Class.su2Type ≡ two
-su2ClassificationCasimirIsTwo = refl
-  where open import Agda.Builtin.Equality using (_≡_; refl)
+su2ClassificationCasimirIsTwo = ℚRing.solve []
 
 classificationAdjointCasimirFormulaLevel : ProofLevel
 classificationAdjointCasimirFormulaLevel = machineChecked
