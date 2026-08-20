@@ -24,22 +24,11 @@ module DASHI.Physics.YangMills.YangMillsGaussianWardGapNontrivialityExact where
 --
 -- DASHI CONTRIBUTION
 --
--- `YangMillsGaussianWardTwoDerivativeMaxwellClassificationExact` proves the
--- nontrivial coefficient step: a local O(4)-covariant two-derivative Gaussian
--- kernel satisfying the exact Ward identity at two nonzero momentum squares
--- and the standard kinetic normalization is exactly Maxwell:
---
---     m^2 = 0,  Z = 1,  Y = -1.
---
--- `YangMillsMaxwellLinearDispersionNoGapExact` then compiles the standard
--- massless transverse one-particle dispersion into the existing no-gap
--- contradiction.
---
--- This module performs the SAME-SYSTEM assembly. The Gaussian predicate is on
--- the actual continuum Schwinger system; the positive-gap input is on the
--- Hamiltonian reconstructed from that same system. Thus nontriviality can be
--- downstream of the continuum Ward/locality theorem plus the clustering/gap
--- theorem rather than an independent fourth-cumulant estimate.
+-- The Ward->Maxwell coefficient theorem is generic over the continuum scalar
+-- additive group; it does not assume rational coefficients. This module then
+-- performs the SAME-SYSTEM assembly. The Gaussian predicate is on the actual
+-- continuum Schwinger system and the positive-gap input is on the Hamiltonian
+-- reconstructed from that same system.
 ------------------------------------------------------------------------
 
 open import Data.Empty using (⊥)
@@ -50,14 +39,6 @@ import DASHI.Physics.YangMills.YangMillsFreeGaussianMaxwellNoGapExact as Free
 import DASHI.Physics.YangMills.YangMillsMaxwellLinearDispersionNoGapExact as Disp
 import DASHI.Physics.YangMills.YangMillsGaussianWardTwoDerivativeMaxwellClassificationExact as Ward
 
-------------------------------------------------------------------------
--- Same-family authority package.
---
--- The only standard imported step is the free/Gaussian OS statement: once the
--- SAME system has the Maxwell quadratic kernel, its reconstructed one-particle
--- sector is the massless Maxwell sector. Everything else is exact assembly.
-------------------------------------------------------------------------
-
 record SameSystemGaussianWardGapData
     {Observable Point Scalar : Set}
     (system : OS.ContinuumSchwingerSystem Observable Point Scalar) : Set₂ where
@@ -66,41 +47,42 @@ record SameSystemGaussianWardGapData
 
     Gaussian : OS.ContinuumSchwingerSystem Observable Point Scalar → Set
 
-    -- Supplied by the strengthened same-family local/OPE/stress/Ward theorem.
-    localWardKernelUnderGaussian :
-      Gaussian system → Ward.LocalTwoDerivativeWardKernel
+    coefficientAlgebra : Ward.WardCoefficientAdditiveGroup
 
-    -- Spectral order used by the reconstructed Hamiltonian.
+    -- Supplied by strengthened same-family local/OPE/stress/Ward job #5.
+    localWardKernelUnderGaussian :
+      Gaussian system →
+      Ward.GenericLocalTwoDerivativeWardKernel coefficientAlgebra
+
     gapOrder : Free.GapOrder
 
-    -- Standard Gaussian OS/Fock reconstruction after the exact coefficient
-    -- classification has identified the kernel as Maxwell.
+    -- Standard Gaussian OS/Fock reconstruction after exact coefficient
+    -- classification has identified the quadratic kernel as Maxwell.
     gaussianMaxwellDispersion :
       (gaussian : Gaussian system) →
-      Ward.MaxwellQuadraticKernelClassification
-        (localWardKernelUnderGaussian gaussian) →
+      Ward.GenericMaxwellQuadraticKernelClassification
+        coefficientAlgebra (localWardKernelUnderGaussian gaussian) →
       Disp.LabelledLinearMasslessDispersion gapOrder
 
-    -- The physical gap is a theorem about the SAME reconstructed Hamiltonian.
+    -- Physical gap from job #4, on the SAME reconstructed Hamiltonian.
     PhysicalPositiveGap : OS.Hamiltonian reconstruction → Set
     physicalPositiveGap :
       PhysicalPositiveGap (OS.hamiltonian reconstruction)
 
+    -- Standard spectral restriction to the SAME Maxwell one-particle sector.
     gapRestrictsToSameMaxwellSector :
       (gaussian : Gaussian system) →
-      (classification : Ward.MaxwellQuadraticKernelClassification
-        (localWardKernelUnderGaussian gaussian)) →
+      (classification : Ward.GenericMaxwellQuadraticKernelClassification
+        coefficientAlgebra (localWardKernelUnderGaussian gaussian)) →
       PhysicalPositiveGap (OS.hamiltonian reconstruction) →
       Free.PositiveSpectralGap
         (Disp.labelledLinearDispersionGivesMasslessSector
           (gaussianMaxwellDispersion gaussian classification))
 
-    -- A positive gap says precisely that the below-gap/non-vacuum witness is
-    -- impossible; expose that contradiction as bottom for this same H.
     spectralGapContradictionIsAbsurd :
       (gaussian : Gaussian system) →
-      (classification : Ward.MaxwellQuadraticKernelClassification
-        (localWardKernelUnderGaussian gaussian)) →
+      (classification : Ward.GenericMaxwellQuadraticKernelClassification
+        coefficientAlgebra (localWardKernelUnderGaussian gaussian)) →
       let dispersion = gaussianMaxwellDispersion gaussian classification
           gapData = gapRestrictsToSameMaxwellSector
             gaussian classification physicalPositiveGap
@@ -116,8 +98,10 @@ gaussianSameSystemContradiction :
   Gaussian dataSet system → ⊥
 gaussianSameSystemContradiction dataSet gaussian =
   let
+    algebra = coefficientAlgebra dataSet
     kernel = localWardKernelUnderGaussian dataSet gaussian
-    classification = Ward.classifyLocalWardKernelAsMaxwell kernel
+    classification =
+      Ward.classifyGenericLocalWardKernelAsMaxwell algebra kernel
     dispersion = gaussianMaxwellDispersion dataSet gaussian classification
     gapData = gapRestrictsToSameMaxwellSector dataSet
       gaussian classification (physicalPositiveGap dataSet)
@@ -126,11 +110,6 @@ gaussianSameSystemContradiction dataSet gaussian =
   in
   spectralGapContradictionIsAbsurd dataSet
     gaussian classification contradiction
-
-------------------------------------------------------------------------
--- Existing Clay-facing interacting witness can therefore be instantiated by
--- literal non-Gaussianity of the SAME continuum Schwinger system.
-------------------------------------------------------------------------
 
 nonGaussianityGivesInteractingContinuumWitness :
   ∀ {Observable Point Scalar}
@@ -149,12 +128,8 @@ wardMaxwellCoefficientCompilerLevel = machineChecked
 gaussianGapNontrivialityCompilerLevel : ProofLevel
 gaussianGapNontrivialityCompilerLevel = machineChecked
 
--- Standard free/Gaussian reconstruction, once the exact Schwinger covariance
--- has been identified with Maxwell, is imported constructive-QFT machinery.
 gaussianOSMaxwellOneParticleReconstructionLevel : ProofLevel
 gaussianOSMaxwellOneParticleReconstructionLevel = standardImported
 
--- The genuinely physical inputs have now moved into the two existing jobs:
---   * localWardKernelUnderGaussian belongs to SameFamilyCompositeOPEStressWard;
---   * physicalPositiveGap belongs to SameDensity...Clustering.
--- There is no separate continuum cumulant estimate on this route.
+-- Remaining physical inputs are assigned to existing jobs #4/#5; no separate
+-- continuum cumulant estimate is present on this route.
