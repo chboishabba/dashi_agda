@@ -55,12 +55,15 @@ module DASHI.Physics.YangMills.BalabanTopDownOneLoopRemainderBudgetExact where
 -- term fits this interval is analytic work, not asserted here.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Nat using (Nat; suc)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; _+_; _-_; _≤_; _<_; _/_; -_; Positive)
+  (ℚ; 0ℚ; _+_; _-_; _≤_; _<_; _/_; -_)
 import Data.Rational.Properties as ℚP
+open ℚP using (_<?_)
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Binary.PropositionalEquality using (subst; subst₂; sym)
+open import Relation.Nullary.Decidable.Core using (toWitness)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanYM4SourceNormalizedCouplingRecurrenceExact as Flow
@@ -82,7 +85,6 @@ record SU2RegularRemainderEnclosure
     regularLower : ∀ step → - radius ≤ regularRemainder step
     regularUpper : ∀ step → regularRemainder step ≤ radius
 
-open import Agda.Builtin.Nat using (Nat; suc)
 open SU2RegularRemainderEnclosure public
 
 betaLowerFromRemainderRadius :
@@ -99,12 +101,18 @@ betaLowerStrictlyPositive :
   ∀ {trajectory} (dataSet : SU2RegularRemainderEnclosure trajectory) →
   0ℚ < betaLowerFromRemainderRadius dataSet
 betaLowerStrictlyPositive dataSet =
-  subst
-    (λ right → 0ℚ < right)
+  let
+    shifted :
+      radius dataSet + (- radius dataSet)
+      < Sanity.su2InverseCouplingCoefficient + (- radius dataSet)
+    shifted = ℚP.+-mono-<-≤
+      (radiusBelowUniversal dataSet)
+      ℚP.≤-refl
+  in
+  subst₂ _<_
+    (ℚRing.solve-∀ (radius dataSet))
     (ℚRing.solve-∀ Sanity.su2InverseCouplingCoefficient (radius dataSet))
-    (ℚP.+-monoʳ-<
-      (- radius dataSet)
-      (radiusBelowUniversal dataSet))
+    shifted
 
 betaStepLower :
   ∀ {trajectory} (dataSet : SU2RegularRemainderEnclosure trajectory) step →
@@ -134,15 +142,11 @@ betaStepUpper :
 betaStepUpper {trajectory} dataSet step =
   let
     shifted = ℚP.+-mono-≤ ℚP.≤-refl (regularUpper dataSet step)
-    normalized :
-      Sanity.su2InverseCouplingCoefficient + regularRemainder dataSet step
-      ≤ Sanity.su2InverseCouplingCoefficient + radius dataSet
-    normalized = shifted
   in
   subst
     (λ left → left ≤ betaUpperFromRemainderRadius dataSet)
     (betaIsUniversalPlusRegular dataSet step)
-    normalized
+    shifted
 
 remainderEnclosureGivesUniformPositiveBeta :
   ∀ {trajectory} (dataSet : SU2RegularRemainderEnclosure trajectory) →
@@ -170,15 +174,7 @@ halfNonnegative = ℚP.nonNegative⁻¹ half
 
 halfBelowElevenTwelfths : half < Sanity.su2InverseCouplingCoefficient
 halfBelowElevenTwelfths =
-  let
-    instance
-      positiveDifference : Positive (Sanity.su2InverseCouplingCoefficient - half)
-      positiveDifference = ℚP.normalize-pos 5 12
-  in
-  subst
-    (λ selected → half < selected)
-    (sym (ℚRing.solve []))
-    (ℚP.+-monoˡ-< half (ℚP.positive⁻¹ (Sanity.su2InverseCouplingCoefficient - half)))
+  toWitness {a? = half <? Sanity.su2InverseCouplingCoefficient} _
 
 halfRadiusLowerExact :
   Sanity.su2InverseCouplingCoefficient - half ≡ fiveTwelfths
