@@ -8,10 +8,22 @@ module DASHI.Core.ReopenableHypothesisForestExact where
 -- ambiguity remain reopenable states; refutation requires an explicit
 -- contradiction witness for the hypothesis itself.
 --
--- This is a DASHI construction.  It intentionally does not commit every domain
--- to one statistical belief calculus: probabilities, Dempster--Shafer masses,
--- geometric residuals and environmental source scores may inhabit separate
--- evidence adapters while sharing the transition law below.
+-- REFERENCE / CALIBRATION
+--
+-- Donald B. Reid,
+-- "An Algorithm for Tracking Multiple Targets",
+-- IEEE Transactions on Automatic Control 24(6), 1979, 843-854.
+-- DOI: 10.1109/TAC.1979.1102177.
+--
+-- Multiple-hypothesis tracking motivates preserving alternatives rather than
+-- collapsing every unselected branch into falsity.  The P/Q/R transition law
+-- below is a DASHI construction and does not import Reid's tracking algorithm
+-- as proof authority.
+--
+-- This module intentionally does not commit every domain to one statistical
+-- belief calculus: probabilities, Dempster--Shafer masses, geometric residuals
+-- and environmental source scores may inhabit separate evidence adapters while
+-- sharing the transition law below.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
