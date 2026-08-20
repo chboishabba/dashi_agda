@@ -32,11 +32,11 @@ module DASHI.Physics.Closure.NSTriadKNClayFrontierRound102Exact where
 --
 -- ROUND102 / TWO-OBLIGATION CLAY FRONTIER
 --
--- Round101 left several candidate mechanisms.  Round102 performs the algebra
+-- Round101 left several candidate mechanisms. Round102 performs the algebra
 -- needed to identify which of them are genuinely independent.
 --
--- 1. The cross-radius recombination defect is now factorized for an arbitrary
---    finite radial partition as
+-- 1. The cross-radius recombination defect is factorized for an arbitrary
+--    finite radial partition:
 --
 --      sum_{i<j} (lambda_i-lambda_j)(E_i q_j-E_j q_i).
 --
@@ -44,34 +44,36 @@ module DASHI.Physics.Closure.NSTriadKNClayFrontierRound102Exact where
 --    only relative radial fluctuations matter.
 --
 -- 2. Ordinary energy-transfer conservation does not telescope that exterior
---    defect away.  On a conservative family q=0 it becomes -E L, and an exact
---    rational witness has nonzero value.  Thus conservation alone cannot be
---    promoted to the missing critical barrier.
+--    defect away. On a conservative family q=0 it becomes -E L, and an exact
+--    rational witness has nonzero value.
 --
--- 3. The standard unsigned critical product estimate has residual
+-- 3. The standard unsigned critical product estimate leaves
 --
 --      (C X - nu) D,
 --
---    so it is smallness-gated.  Arbitrary-data closure requires additional
---    signed structure.
+--    and is therefore smallness-gated rather than an arbitrary-data barrier.
 --
--- 4. Helical decomposition supplies exactly such a structural reduction:
---    nonlinear helicity conservation equates the plus/minus critical-energy
+-- 4. Helical decomposition gives the stronger structural reduction:
+--    nonlinear helicity conservation equates plus/minus critical-energy
 --    tangents, hence unsigned critical production is twice their exchange.
---    Homochiral production is therefore zero.  The only new nonlinear
---    mechanism still required is a cutoff-uniform estimate on HETEROCHIRAL
---    critical exchange strong enough to produce the Galerkin H^(1/2)/H^(3/2)
---    barrier.
+--    Homochiral production vanishes. The same identity is lifted onto the
+--    repository RealField carrier used by literal periodic Fourier modules.
 --
--- The mathematical submission cutset is therefore still two theorem-sized
--- obligations, but only the first contains frontier 3-D dynamics:
+-- 5. Once the critical Galerkin barrier is known, the standard compactness
+--    exponents are no longer mysterious: interpolation gives L4_t H1, hence
+--    L4_t L6; grad u is L2_t L3; the transport term is L4/3_t L2 and therefore
+--    fits a Simon/Aubin--Lions negative-half derivative route. Round102 proves
+--    those rational exponent identities exactly. The physical compactness
+--    theorem is still not instantiated in the current Agda analysis library.
 --
---   A. UniformGalerkinCriticalBarrier, now sharpened to a heterochiral-exchange
---      estimate plus viscosity / integrable lower-order budget;
+-- The submission cutset remains two theorem-sized obligations, but only the
+-- first contains new 3-D dynamics:
+--
+--   A. UniformGalerkinCriticalBarrier, sharpened to a cutoff-uniform
+--      HETEROCHIRAL critical-exchange estimate plus viscosity/integrable budget;
 --   B. same-solution critical Galerkin -> Aubin--Lions/Simon -> limit weld.
 --
--- Round90 already consumes the resulting same-solution CriticalBarrierFor and
--- sends it to the Serrin continuation endpoint.  No Clay promotion is made.
+-- Round90 already sends a same-solution CriticalBarrierFor to Serrin.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -81,6 +83,8 @@ import DASHI.Physics.Closure.NSTriadKNFiniteRadialTransferExteriorRound102Exact 
 import DASHI.Physics.Closure.NSTriadKNThreeRadiusTransferExteriorRound102Exact as Three
 import DASHI.Physics.Closure.NSTriadKNCriticalAbsoluteValueAbsorptionNoGoRound102Exact as AbsoluteNoGo
 import DASHI.Physics.Closure.NSTriadKNHelicalCriticalExchangeReductionRound102Exact as Helical
+import DASHI.Physics.Closure.NSTriadKNHelicalCriticalExchangeFieldRound102Exact as HelicalField
+import DASHI.Physics.Closure.NSTriadKNCriticalAubinLionsExponentWeldRound102Exact as Exponents
 import DASHI.Physics.Closure.NSTriadKNCriticalCompactnessSerrinRound29Exact as Critical
 
 round102FiniteRadialExteriorFactorizationClosed : Bool
@@ -103,9 +107,15 @@ round102CriticalProductionReducedToHeterochiralExchange : Bool
 round102CriticalProductionReducedToHeterochiralExchange =
   Helical.round102CriticalProductionReducesToHeterochiralExchange
 
--- This is the remaining genuinely new 3-D estimate.  It is deliberately false
--- until the literal periodic Galerkin nonlinearity is proved to satisfy the
--- required cutoff-uniform heterochiral expenditure bound.
+round102RealFieldHelicalReductionClosed : Bool
+round102RealFieldHelicalReductionClosed =
+  HelicalField.round102RealFieldHelicalCriticalExchangeReductionClosed
+
+round102CriticalAubinLionsExponentArithmeticClosed : Bool
+round102CriticalAubinLionsExponentArithmeticClosed =
+  Exponents.round102CriticalAubinLionsExponentArithmeticClosed
+
+-- Remaining genuinely new 3-D estimate.
 round102PhysicalHeterochiralCriticalExchangeBarrierClosed : Bool
 round102PhysicalHeterochiralCriticalExchangeBarrierClosed = false
 
@@ -135,6 +145,14 @@ round102HomochiralCriticalProductionEliminatedIsTrue = refl
 round102CriticalProductionReducedToHeterochiralExchangeIsTrue :
   round102CriticalProductionReducedToHeterochiralExchange ≡ true
 round102CriticalProductionReducedToHeterochiralExchangeIsTrue = refl
+
+round102RealFieldHelicalReductionClosedIsTrue :
+  round102RealFieldHelicalReductionClosed ≡ true
+round102RealFieldHelicalReductionClosedIsTrue = refl
+
+round102CriticalAubinLionsExponentArithmeticClosedIsTrue :
+  round102CriticalAubinLionsExponentArithmeticClosed ≡ true
+round102CriticalAubinLionsExponentArithmeticClosedIsTrue = refl
 
 round102PhysicalHeterochiralCriticalExchangeBarrierClosedIsFalse :
   round102PhysicalHeterochiralCriticalExchangeBarrierClosed ≡ false
