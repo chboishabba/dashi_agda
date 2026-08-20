@@ -2,6 +2,7 @@ module DASHI.Physics.Closure.NSTriadKNDongLiFrequencyLocalizedCoercivityAudit wh
 
 ------------------------------------------------------------------------
 -- PROVENANCE
+-- Authors: Dong Li.
 -- Author: Dong Li.
 -- Title: "On a Frequency Localized Bernstein Inequality and Some Generalized
 -- Poincare-Type Inequalities".
