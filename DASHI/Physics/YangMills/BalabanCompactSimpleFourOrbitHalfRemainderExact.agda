@@ -22,7 +22,7 @@ module DASHI.Physics.YangMills.BalabanCompactSimpleFourOrbitHalfRemainderExact w
 -- H. David Politzer,
 -- "Reliable Perturbative Results for Strong Interactions?",
 -- Physical Review Letters 30 (1973), 1346--1349.
--- DOI: 10.1103/PhysRevLett.30.1346.
+-- DOI: 10.1103/PhysRevLett.30.1349.
 --
 -- MATHEMATICAL ROLE
 --
@@ -47,12 +47,10 @@ module DASHI.Physics.YangMills.BalabanCompactSimpleFourOrbitHalfRemainderExact w
 -- physical interval enclosures.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl; sym)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat; suc)
-open import Data.Integer.Base using (+_)
-open import Data.Rational.Base as ℚ using (ℚ; _+_; _≤_; -_)
+open import Data.Rational.Base as ℚ using (ℚ; _+_; _*_; _≤_; -_)
 import Data.Rational.Properties as ℚP
-open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanYM4SourceNormalizedCouplingRecurrenceExact as Flow
