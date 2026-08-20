@@ -6,6 +6,7 @@ module DASHI.Biology.AnimalexicEverything where
 
 open import DASHI.Biology.AnimalexicSourceAtlas
 open import DASHI.Biology.AnimalexicFormalSystemExact
+open import DASHI.Biology.AnimalexicGeometryReuseExact
 open import DASHI.Biology.AnimalexicCrossPollinationExact
 open import DASHI.Biology.AnimalexicRegression
 open import DASHI.Environment.LESResearchCrossPollinationRound4Exact
