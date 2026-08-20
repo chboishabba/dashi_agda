@@ -2,6 +2,7 @@ module DASHI.Physics.YangMills.BalabanClayT4LiteralDiagramWardCancellationExact 
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Data.Product using (_×_; _,_)
 open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -220,23 +221,38 @@ record LiteralTransverseScalarReduction
 
 open LiteralTransverseScalarReduction public
 
+oneLoopKernelTranslationInvariantLiteral :
+  ∀ {Momentum Lorentz Color Scalar Kernel}
+    (dataSet : LiteralOneLoopDiagramFamily Momentum Lorentz Color Scalar Kernel) →
+  (∀ shift momentum mu nu a b →
+      gaugeTranslationInvariant dataSet shift momentum mu nu a b)
+  × ((∀ shift momentum mu nu a b →
+      ghostTranslationInvariant dataSet shift momentum mu nu a b)
+  × (∀ shift momentum mu nu a b →
+      haarTranslationInvariant dataSet shift momentum mu nu a b))
 oneLoopKernelTranslationInvariantLiteral dataSet =
   gaugeTranslationInvariant dataSet ,
-  ghostTranslationInvariant dataSet ,
-  haarTranslationInvariant dataSet
-  where open import Data.Product using (_,_)
+  (ghostTranslationInvariant dataSet , haarTranslationInvariant dataSet)
 
+oneLoopKernelColorDiagonalLiteral :
+  ∀ {Momentum Lorentz Color Scalar Kernel}
+    (dataSet : LiteralOneLoopDiagramFamily Momentum Lorentz Color Scalar Kernel) →
+  (∀ momentum mu nu a b → gaugeColorDiagonal dataSet momentum mu nu a b)
+  × ((∀ momentum mu nu a b → ghostColorDiagonal dataSet momentum mu nu a b)
+  × (∀ momentum mu nu a b → haarColorDiagonal dataSet momentum mu nu a b))
 oneLoopKernelColorDiagonalLiteral dataSet =
   gaugeColorDiagonal dataSet ,
-  ghostColorDiagonal dataSet ,
-  haarColorDiagonal dataSet
-  where open import Data.Product using (_,_)
+  (ghostColorDiagonal dataSet , haarColorDiagonal dataSet)
 
+oneLoopKernelHypercubicCovariantLiteral :
+  ∀ {Momentum Lorentz Color Scalar Kernel}
+    (dataSet : LiteralOneLoopDiagramFamily Momentum Lorentz Color Scalar Kernel) →
+  (∀ momentum mu nu a b → gaugeHypercubicCovariant dataSet momentum mu nu a b)
+  × ((∀ momentum mu nu a b → ghostHypercubicCovariant dataSet momentum mu nu a b)
+  × (∀ momentum mu nu a b → haarHypercubicCovariant dataSet momentum mu nu a b))
 oneLoopKernelHypercubicCovariantLiteral dataSet =
   gaugeHypercubicCovariant dataSet ,
-  ghostHypercubicCovariant dataSet ,
-  haarHypercubicCovariant dataSet
-  where open import Data.Product using (_,_)
+  (ghostHypercubicCovariant dataSet , haarHypercubicCovariant dataSet)
 
 literalVertexReductionLevel : ProofLevel
 literalVertexReductionLevel = machineChecked
