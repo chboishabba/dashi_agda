@@ -1,0 +1,16 @@
+module DASHI.Physics.Closure.NSTriadKNClayFrontierRound104Validation where
+
+-- Focused Round104 kernel target.
+--
+-- This deliberately imports the literal Waleffe/packet/danger/Sobolev chain,
+-- not merely the aggregate status module, so a normal local Agda run must
+-- elaborate the hard reductions introduced in this round.
+
+import DASHI.Physics.Closure.NSTriadKNClayFrontierRound103Validation
+import DASHI.Physics.Closure.NSTriadKNWaleffeLeithPointwiseMobilityNoGoRound104Exact
+import DASHI.Physics.Closure.NSTriadKNCriticalProductionPacketLayerCakeRound104Exact
+import DASHI.Physics.Closure.NSTriadKNUniformGalerkinSignedCriticalProductionRound104Exact
+import DASHI.Physics.Closure.NSTriadKNExistingExcessToSignedCriticalProductionRound104Exact
+import DASHI.Physics.Closure.NSTriadKNIntegratedDangerOccupationToSignedCriticalRound104Exact
+import DASHI.Physics.Closure.NSTriadKNPhysicalCriticalGalerkinSimonWeldRound104Exact
+import DASHI.Physics.Closure.NSTriadKNClayFrontierRound104Exact
