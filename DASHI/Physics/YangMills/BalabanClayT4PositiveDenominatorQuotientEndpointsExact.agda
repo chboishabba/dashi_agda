@@ -38,9 +38,8 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; 1ℚ; _*_; _≤_; _<_; 1/_; Positive; NonNegative; NonPositive; NonZero)
 import Data.Rational.Properties as ℚP
-import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using
-  (cong; subst; subst₂; sym; trans)
+  (cong; subst₂; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -132,11 +131,9 @@ reciprocalAntitonePositive lower upper lowerPositive upperPositive lowerBelowUpp
       scaleIsPositive : Positive scale
       scaleIsPositive = ℚP.pos*pos⇒pos lower upper
 
-    -- Avoid reflective ring normalization here.  Agda 2.9 leaves the proof
-    -- arguments of `positiveReciprocal` visible enough that the ring solver sees
-    -- metas instead of a plain polynomial.  Associativity + the explicit
-    -- reciprocal identities prove exactly the same equalities without hiding
-    -- any denominator obligation.
+    -- Agda 2.9 leaves proof arguments of `positiveReciprocal` visible to the
+    -- reflective ring solver.  Prove the scaled reciprocal identities directly
+    -- from associativity/commutativity and the explicit inverse law instead.
     scaleUpperInverse : scale * upperInverse ≡ lower
     scaleUpperInverse =
       trans
@@ -371,16 +368,13 @@ open PointInsideQuotient public
 
 nonnegativeQuotientSound :
   ∀ numerator denominator numeratorValue denominatorValue
-    (lowerNN : 0ℚ ≤ lowerNumerator numerator) →
-  PointInsideNumerator numeratorValue numerator →
-  PointInsidePositiveDenominator denominatorValue denominator →
+    (lowerNN : 0ℚ ≤ lowerNumerator numerator)
+    (numeratorInside : PointInsideNumerator numeratorValue numerator)
+    (denominatorInside : PointInsidePositiveDenominator denominatorValue denominator) →
   PointInsideQuotient
     (dividePositive numeratorValue denominatorValue
-      (denominatorPointPositive {denominator = denominator} denominatorValueInside))
+      (denominatorPointPositive denominatorInside))
     (nonnegativeQuotientInterval numerator denominator lowerNN)
-  where
-    denominatorValueInside : PointInsidePositiveDenominator denominatorValue denominator
-    denominatorValueInside = ?
 nonnegativeQuotientSound numerator denominator numeratorValue denominatorValue lowerNN numeratorInside denominatorInside =
   let
     dL = lowerDenominator denominator
@@ -426,13 +420,11 @@ nonnegativeQuotientSound numerator denominator numeratorValue denominatorValue l
     (ℚP.≤-trans lowerViaDenominator lowerViaNumerator)
     (ℚP.≤-trans upperViaDenominator upperViaNumerator)
 
--- The remaining two pointwise sign cases follow the same monotonicity argument;
--- they are kept explicit rather than hidden behind an opaque interval receipt.
 nonpositiveQuotientSound :
   ∀ numerator denominator numeratorValue denominatorValue
-    (upperNP : upperNumerator numerator ≤ 0ℚ) →
-  PointInsideNumerator numeratorValue numerator →
-  PointInsidePositiveDenominator denominatorValue denominator →
+    (upperNP : upperNumerator numerator ≤ 0ℚ)
+    (numeratorInside : PointInsideNumerator numeratorValue numerator)
+    (denominatorInside : PointInsidePositiveDenominator denominatorValue denominator) →
   PointInsideQuotient
     (dividePositive numeratorValue denominatorValue
       (denominatorPointPositive denominatorInside))
@@ -487,9 +479,9 @@ nonpositiveQuotientSound numerator denominator numeratorValue denominatorValue u
 straddlingQuotientSound :
   ∀ numerator denominator numeratorValue denominatorValue
     (lowerNP : lowerNumerator numerator ≤ 0ℚ)
-    (upperNN : 0ℚ ≤ upperNumerator numerator) →
-  PointInsideNumerator numeratorValue numerator →
-  PointInsidePositiveDenominator denominatorValue denominator →
+    (upperNN : 0ℚ ≤ upperNumerator numerator)
+    (numeratorInside : PointInsideNumerator numeratorValue numerator)
+    (denominatorInside : PointInsidePositiveDenominator denominatorValue denominator) →
   PointInsideQuotient
     (dividePositive numeratorValue denominatorValue
       (denominatorPointPositive denominatorInside))
