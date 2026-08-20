@@ -1,6 +1,12 @@
 name: NS compact Gamma admissible preservation
 
 on:
+  push:
+    paths:
+      - 'DASHI/Physics/Closure/NSCompactGammaAdmissiblePreservation.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaAdmissiblePreservationTest.agda'
+      - 'docs/ns_compact_gamma_admissible_preservation.md'
+      - '.github/workflows/ns-compact-gamma-admissible-preservation.yml'
   pull_request:
     paths:
       - 'DASHI/Physics/Closure/NSCompactGammaAdmissiblePreservation.agda'
@@ -9,7 +15,7 @@ on:
       - '.github/workflows/ns-compact-gamma-admissible-preservation.yml'
 
 concurrency:
-  group: dashi-global-${{ github.ref }}
+  group: ns-compact-gamma-admissible-preservation-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:
@@ -24,7 +30,6 @@ jobs:
       - uses: cachix/install-nix-action@v31
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
-      - uses: DeterminateSystems/magic-nix-cache-action@v9
       - name: Check compact-Gamma admissible preservation
         id: focused
         shell: bash
