@@ -10,19 +10,18 @@ module DASHI.Physics.Closure.NSTriadKNPhysicalTriadExchangeCharacterRound73Exact
 -- DOI: 10.1007/978-1-4684-9458-7.
 --
 -- Author: Jean-Michel Bony.
--- Title: "Calcul symbolique et propagation des singularites pour les
--- equations aux derivees partielles non lineaires".
 -- DOI: 10.24033/asens.1404.
 --
--- Cross-pollination: recent finite-character work in the repository uses exact
--- character projection before interval/absolute-value loss.  The relevant NS
--- symmetry is the C2 exchange
+-- Cross-pollination: the recent finite-character work in the repository uses
+-- exact character projection before interval/absolute-value loss.  The relevant
+-- NS symmetry is not C3: on an ordered resonant pair it is the C2 exchange
 --
 --     (p,q) <-> (q,p).
 --
--- Every certified exchange-odd pair cancels exactly before any absolute value
--- or Gram bound is applied.  This file does NOT assert that a physical HH/CC
--- coefficient is exchange odd; that same-object PDE theorem remains explicit.
+-- This file proves the finite algebra needed downstream: every exchange-odd
+-- pair cancels exactly before any absolute value or Gram bound is applied.
+-- It does NOT assert that a physical HH/CC coefficient is exchange odd; that
+-- same-object PDE theorem remains explicit.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -62,6 +61,8 @@ oddPairSum : List ExchangePair → ℚ
 oddPairSum [] = 0ℚ
 oddPairSum (p ∷ rest) = pairSum p + oddPairSum rest
 
+-- The recursive carrier deliberately certifies only those physical pair rows
+-- for which the source theorem proves exchange-odd covariance.
 data ExchangeOddFamily : List ExchangePair → Set where
   odd[] : ExchangeOddFamily []
   odd∷ : ∀ {p rest} → CertifiedExchangeOdd p →

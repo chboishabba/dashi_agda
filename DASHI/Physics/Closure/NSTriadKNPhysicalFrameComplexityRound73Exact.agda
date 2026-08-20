@@ -5,7 +5,7 @@ module DASHI.Physics.Closure.NSTriadKNPhysicalFrameComplexityRound73Exact where
 --
 -- PRIMARY SOURCES / CONTEXT
 --
--- Author: Ole Christensen.
+-- Authors: Ole Christensen.
 -- Title: "An Introduction to Frames and Riesz Bases".
 -- DOI: 10.1007/978-3-319-25613-9.
 --

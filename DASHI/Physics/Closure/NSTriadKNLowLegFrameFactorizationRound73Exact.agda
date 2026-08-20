@@ -36,6 +36,7 @@ import DASHI.Physics.Closure.NSTriadKNLuoPhysicalFiveClassSupportRound25Exact as
 import DASHI.Physics.Closure.NSTriadKNGlobalBilinearShellPairingRound29Exact as Shell
 import DASHI.Physics.Closure.NSTriadKNFactorizedEffectiveComplexityCauchyRound72Exact as R72
 
+
 data LowLegRole : Set where
   lowFromP lowFromQ : LowLegRole
 

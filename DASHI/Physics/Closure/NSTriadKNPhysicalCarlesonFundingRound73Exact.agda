@@ -27,7 +27,7 @@ module DASHI.Physics.Closure.NSTriadKNPhysicalCarlesonFundingRound73Exact where
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _≤_; _<_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _≤_; _<_)
 import Data.Rational.Properties as ℚP
 open import Relation.Nullary.Negation.Core using (¬_)
 
@@ -76,7 +76,7 @@ floorPrefixAboveBudgetRefutesCarlesonFunding :
   ∀ {nodes budget} →
   budget < sumFloors nodes →
   ¬ PhysicalCarlesonBudget nodes budget
-floorPrefixAboveBudgetRefutesCarlesonFunding {budget = budget} excess witness =
+floorPrefixAboveBudgetRefutesCarlesonFunding excess witness =
   ℚP.<-irrefl budget
     (ℚP.<-≤-trans excess (carlesonBudgetFundsAllCertifiedFloors witness))
 
@@ -92,6 +92,9 @@ record FrameGeneratedNode : Set where
 
 open FrameGeneratedNode public
 
+-- This record is intentionally only the algebraic output shape.  The physical
+-- theorem must identify generatedFloor with actual charge, not merely choose a
+-- convenient rational after seeing the amplification.
 record PhysicalFrameFundedNode : Set where
   constructor physical-frame-funded-node
   field
