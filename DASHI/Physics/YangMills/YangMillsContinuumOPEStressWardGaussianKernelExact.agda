@@ -41,11 +41,11 @@ module DASHI.Physics.YangMills.YangMillsContinuumOPEStressWardGaussianKernelExac
 --     -> exact Ward identity on that kernel
 --     -> standard Yang--Mills kinetic normalization.
 --
--- `YangMillsGaussianWardTwoDerivativeMaxwellClassificationExact` then derives
--- m^2=0, Z=1, Y=-1 by exact rational algebra. The separate clustering theorem
--- supplies a positive gap on the SAME reconstructed H, so Gaussianity is
--- impossible. Thus this local kernel producer belongs inside the existing
--- OPE/stress/Ward job rather than being counted as a seventh/sixth theorem.
+-- The coefficient carrier is generic: it need only instantiate the ordinary
+-- cancellative additive-group laws, so no rationality premise is imposed on
+-- continuum coefficients. The downstream exact classifier gives
+-- m^2=0, Z=1, Y=-1. The separate clustering theorem supplies a positive gap on
+-- the SAME reconstructed H, so Gaussianity is impossible.
 ------------------------------------------------------------------------
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -63,9 +63,6 @@ record SameFamilyOPEStressWardGaussianKernel
         ContinuumFamily CurvaturePolynomial LocalOperator Position
         OPECoefficient StressTensor Hamiltonian
 
-    -- Exact identification of that package with the SAME continuum Schwinger
-    -- family. This blocks splicing a local OPE from one limit with a gap from
-    -- another.
     SameContinuumFamily : ContinuumFamily →
       OS.ContinuumSchwingerSystem Observable Point Scalar → Set
     sameContinuumFamily :
@@ -73,11 +70,13 @@ record SameFamilyOPEStressWardGaussianKernel
 
     Gaussian : OS.ContinuumSchwingerSystem Observable Point Scalar → Set
 
-    -- This is the strengthened physical content of the Ward/locality endpoint.
-    -- The record already contains Ward at p^2=1 and p^2=2 plus Z=1; hence the
-    -- downstream Maxwell classification contains no additional analytic input.
+    coefficientAlgebra : Ward.WardCoefficientAdditiveGroup
+
+    -- The physical local theorem supplies the kernel over its actual continuum
+    -- scalar algebra. Ward at p^2=1,2 and Z=1 are fields of this SAME object.
     gaussianLocalTwoDerivativeWardKernel :
-      Gaussian system → Ward.LocalTwoDerivativeWardKernel
+      Gaussian system →
+      Ward.GenericLocalTwoDerivativeWardKernel coefficientAlgebra
 
 open SameFamilyOPEStressWardGaussianKernel public
 
@@ -90,17 +89,16 @@ gaussianKernelClassifiesAsMaxwell :
         ContinuumFamily CurvaturePolynomial LocalOperator Position
         OPECoefficient StressTensor Hamiltonian Observable Point Scalar system) →
     (gaussian : Gaussian dataSet system) →
-  Ward.MaxwellQuadraticKernelClassification
+  Ward.GenericMaxwellQuadraticKernelClassification
+    (coefficientAlgebra dataSet)
     (gaussianLocalTwoDerivativeWardKernel dataSet gaussian)
 gaussianKernelClassifiesAsMaxwell dataSet gaussian =
-  Ward.classifyLocalWardKernelAsMaxwell
+  Ward.classifyGenericLocalWardKernelAsMaxwell
+    (coefficientAlgebra dataSet)
     (gaussianLocalTwoDerivativeWardKernel dataSet gaussian)
 
 sameFamilyGaussianWardMaxwellCompilerLevel : ProofLevel
 sameFamilyGaussianWardMaxwellCompilerLevel = machineChecked
 
--- This remains one of the five genuine physical jobs: construct the actual
--- nonperturbative OPE/stress/Ward package and, under the Gaussian reductio,
--- derive the local two-derivative Ward kernel from that SAME continuum family.
 physicalSameFamilyOPEStressWardGaussianKernelLevel : ProofLevel
 physicalSameFamilyOPEStressWardGaussianKernelLevel = conditional
