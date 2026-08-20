@@ -3,7 +3,9 @@ module DASHI.Moonshine.DuncanSwisherDworkSharpnessEverything where
 ------------------------------------------------------------------------
 -- Public convergence root for the Dwork / Legendre first-pole sharpness lane.
 --
---   multiplicative valuation algebra
+--   exact Legendre exceptional polynomial factorization
+--     -> algebraically forced ramification exponent 3/2
+--     -> source-native local unit + depth-one parameter lift
 --     -> ramified local J-coordinate depth
 --     -> Dwork A1 valuation transfer
 --     -> exact 3/2/1 coefficient depths
@@ -15,14 +17,18 @@ module DASHI.Moonshine.DuncanSwisherDworkSharpnessEverything where
 -- deliberately not promoted to Dwork's p-adic carrier, and fuel stabilization
 -- is proof-relevant rather than globally postulated.
 --
--- The remaining authority is the actual Dwork p-adic local construction, not
--- a numeric first-pole depth table.
+-- The exceptional exponents 3 and 2 are no longer accepted as free p-adic
+-- source data: they are derived from the exact Legendre j polynomial identities.
+-- The remaining source authority is the genuine local p-adic lift/unit/parameter
+-- construction plus Dwork's A1-to-local-J valuation transfer.
 ------------------------------------------------------------------------
 
 import DASHI.Algebra.RamifiedLocalValuationSharpnessExact
 import DASHI.Algebra.SeparatedLeadingValuationExact
 import DASHI.Arithmetic.VpDepthStrictMinimumBridgeExact
 import DASHI.Arithmetic.VpTrue
+import DASHI.Moonshine.LegendreJExceptionalPolynomialFactorizationExact
+import DASHI.Moonshine.LegendreJExceptionalLocalValuationCutsetExact
 import DASHI.Moonshine.DuncanSwisherDworkRamifiedA1SharpnessExact
 import DASHI.Moonshine.DuncanSwisherDworkExceptionalPartialFractionSharpnessExact
 import DASHI.Moonshine.DuncanSwisherDworkVpDepthShadowExact
