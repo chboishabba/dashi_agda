@@ -46,13 +46,15 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Integer.Base as Int
 open import Data.Rational.Base using (ℚ; _/_; _*_)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNComplex3RealityPhaseAudit as Audit
+import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Equation
+import DASHI.Physics.Closure.NSTriadKNRationalPhysicalTriadEnergyRound37Exact as TriadPower
 import DASHI.Physics.Closure.NSTriadKNPhysicalPacketBoundaryFluxRound96Exact as Round96
 import DASHI.Physics.Closure.NSTriadKNPhysicalGalerkinIncidencePermutationRound38Exact as Round38
 import DASHI.Physics.Closure.NSTriadKNF4GlobalOutputFiberPartitionRound39Exact as Round39
@@ -101,30 +103,29 @@ normalizedLiteralPacketTransferIsBoundaryFlux
     (Round96.literalCutoffPacketTransferIsBoundaryFlux
       E I selected velocity reality divergenceFree cutoff)
 
--- The established unweighted calibration.  This theorem is imported rather
--- than reproved so the normalization authority remains Round38 itself.
+-- Exact authority theorem for the unweighted complete enumeration.
 unweightedThreeLegCalibration :
   (E : C3.IntegerEmbedding F) →
   (I : C3.ModeInverseSquare F E) →
   (velocity : Z3.FourierMode → C3.Complex3 F) →
   (cutoff : Nat) →
-  Round38.literalThreeLegFoldIsSixOrderedFold E I velocity cutoff
-    ≡ Round38.literalThreeLegFoldIsSixOrderedFold E I velocity cutoff
-unweightedThreeLegCalibration E I velocity cutoff = refl
+  TriadPower.sumLiteralTriadPower E I velocity
+    (Physical.physicalTriadEnumeration cutoff)
+  ≡ Round38.sixFold
+      (Round38.orderedFold E I velocity
+        (Physical.physicalTriadEnumeration cutoff))
+unweightedThreeLegCalibration = Round38.literalThreeLegFoldIsSixOrderedFold
 
 -- Round39 is the other authority boundary: the projected PDE convection
 -- pairing is the ordered fold, not the three-leg/symmetrized fold.
 actualProjectedConvectionUsesOrderedFold :
   {E : C3.IntegerEmbedding F} →
   {I : C3.ModeInverseSquare F E} →
-  (system :
-    DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit.FiniteComplex3GalerkinSystem
-      F E I) →
+  (system : Equation.FiniteComplex3GalerkinSystem F E I) →
   Round39.literalCutoffProjectedEnergyPairing system
     ≡ Round38.orderedFold E I
-        (DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit.velocity system)
-        (Physical.physicalTriadEnumeration
-          (DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit.cutoff system))
+        (Equation.velocity system)
+        (Physical.physicalTriadEnumeration (Equation.cutoff system))
 actualProjectedConvectionUsesOrderedFold =
   Round39.literalConvectionPairingEqualsOrderedIncidenceFold
 
