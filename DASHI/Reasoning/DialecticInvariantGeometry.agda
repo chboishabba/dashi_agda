@@ -3,6 +3,10 @@ module DASHI.Reasoning.DialecticInvariantGeometry where
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
+------------------------------------------------------------------------
+-- Predicate geometry: thesis, antithesis, common invariant
+------------------------------------------------------------------------
+
 Predicate : Set → Set
 Predicate X = X → Bool
 
@@ -36,6 +40,10 @@ complement A x = ¬ A x
 ∩-comm : ∀ {X} (A B : Predicate X) (x : X) → (A ∩ B) x ≡ (B ∩ A) x
 ∩-comm A B x = ∧-comm (A x) (B x)
 
+------------------------------------------------------------------------
+-- Stance involution
+------------------------------------------------------------------------
+
 data Stance : Set where
   thesisSide antithesisSide : Stance
 
@@ -49,7 +57,8 @@ mirrorStance²-id antithesisSide = refl
 
 record DialecticField (X : Set) : Set where
   constructor dialecticField
-  field observe : Stance → Predicate X
+  field
+    observe : Stance → Predicate X
 
 open DialecticField public
 
@@ -70,6 +79,10 @@ common-swap-invariant :
   common (swap F) x ≡ common F x
 common-swap-invariant F x = ∧-comm (antithesis F x) (thesis F x)
 
+------------------------------------------------------------------------
+-- Traversable corridors and boundary semantics
+------------------------------------------------------------------------
+
 corridor : ∀ {X} → DialecticField X → Predicate X
 corridor F x = (thesis F x ∨ antithesis F x) ∧ ¬ common F x
 
@@ -86,6 +99,10 @@ corridor-is-disagreement F x with thesis F x | antithesis F x
 ... | true | false = refl
 ... | false | true = refl
 ... | false | false = refl
+
+------------------------------------------------------------------------
+-- Projection is not intersection: preserve both operators explicitly
+------------------------------------------------------------------------
 
 record ProjectionAlgebra (X : Set) : Set₁ where
   constructor projectionAlgebra
@@ -107,12 +124,17 @@ record SoftOverlap (X Score : Set) : Set₁ where
       ∀ (F : DialecticField X) (x : X) →
       score (swap F) x ≡ score F x
 
+------------------------------------------------------------------------
+-- Quantization bridge into the nine-state motif supervisor
+------------------------------------------------------------------------
+
 import DASHI.Algebra.Trit as T
 import DASHI.Reasoning.DialecticMotifKernel as M
 
 record TernaryQuantizer (X : Set) : Set₁ where
   constructor ternaryQuantizer
-  field quantize : Predicate X → T.Trit
+  field
+    quantize : Predicate X → T.Trit
 
 record DialecticToMotif (X : Set) : Set₁ where
   constructor dialecticToMotif
