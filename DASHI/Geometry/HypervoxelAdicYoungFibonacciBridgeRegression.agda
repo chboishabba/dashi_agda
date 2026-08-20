@@ -3,6 +3,8 @@ module DASHI.Geometry.HypervoxelAdicYoungFibonacciBridgeRegression where
 open import Agda.Builtin.Equality using (_≡_)
 open import DASHI.Geometry.HypervoxelAdicYoungFibonacciBridge
 
+-- Regression surface: every admitted bridge carries an explicit proof that
+-- its Young--Fibonacci graph is a projection, never an asserted identity.
 all-bridges-remain-projections :
   ∀ {H A B G S}
   → (bridge : HypervoxelAdicYoungFibonacciBridge H A B G S)
