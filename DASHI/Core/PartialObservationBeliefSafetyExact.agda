@@ -19,6 +19,7 @@ module DASHI.Core.PartialObservationBeliefSafetyExact where
 -- control.  The exact finite theorems below are DASHI constructions.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Empty using (⊥)
@@ -84,11 +85,11 @@ sameBeliefPreservesFiniteFutureObservation :
   encodeBelief machine left ≡ encodeBelief machine right →
   currentObservation machine (runHistory machine actions left)
   ≡ currentObservation machine (runHistory machine actions right)
-sameBeliefPreservesFiniteFutureObservation machine actions same
-  rewrite currentFactorsThroughBelief machine (runHistory machine actions _)
-        | currentFactorsThroughBelief machine (runHistory machine actions _)
-        | beliefRunCommutes machine actions _
-        | beliefRunCommutes machine actions _
+sameBeliefPreservesFiniteFutureObservation machine actions {left} {right} same
+  rewrite currentFactorsThroughBelief machine (runHistory machine actions left)
+        | currentFactorsThroughBelief machine (runHistory machine actions right)
+        | beliefRunCommutes machine actions left
+        | beliefRunCommutes machine actions right
         | same = refl
 
 ------------------------------------------------------------------------
@@ -148,13 +149,11 @@ canonicalCurrentObservationTerminalisationDefect =
 record PartialObservationBoundary : Set where
   constructor partialObservationBoundary
   field
-    currentObservationNeedNotBeMarkovState : Agda.Builtin.Bool.Bool
-    equalCurrentObservationNeedNotMeanEqualFuture : Agda.Builtin.Bool.Bool
-    beliefSafetyNeedsUpdateCommutation : Agda.Builtin.Bool.Bool
-    beliefSafetyIsConsumerAndActionLanguageRelative : Agda.Builtin.Bool.Bool
+    currentObservationNeedNotBeMarkovState : Bool
+    equalCurrentObservationNeedNotMeanEqualFuture : Bool
+    beliefSafetyNeedsUpdateCommutation : Bool
+    beliefSafetyIsConsumerAndActionLanguageRelative : Bool
 
 canonicalPartialObservationBoundary : PartialObservationBoundary
 canonicalPartialObservationBoundary =
-  partialObservationBoundary
-    Agda.Builtin.Bool.true Agda.Builtin.Bool.true
-    Agda.Builtin.Bool.true Agda.Builtin.Bool.true
+  partialObservationBoundary true true true true
