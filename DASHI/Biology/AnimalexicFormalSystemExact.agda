@@ -164,9 +164,31 @@ record ObjectSupportSelection
       ∀ node → ShellMember node →
       Σ Node (λ core →
         CoreMember core ×
-        Σ Nat (λ distance → Graph.ExactDistance graph node core distance))
+        Σ Nat (λ distance →
+          Graph.ExactDistance graph node core distance
+          × distance ≤ shellRadius))
 
 open ObjectSupportSelection public
+
+record AmbiguousPlateauAffiliation
+    {Node : Set}
+    (graph : Graph.GraphGeometry Node)
+    (CoreMember Plateau : Node → Set)
+    (shellRadius : Nat) : Set₁ where
+  constructor ambiguousPlateauAffiliation
+  field
+    node : Node
+    plateau : Plateau node
+    leftCore rightCore : Node
+    leftCoreMember : CoreMember leftCore
+    rightCoreMember : CoreMember rightCore
+    distinctCores : leftCore ≡ rightCore → ⊥
+    equalDistance : Nat
+    leftExact : Graph.ExactDistance graph node leftCore equalDistance
+    rightExact : Graph.ExactDistance graph node rightCore equalDistance
+    withinShell : equalDistance ≤ shellRadius
+
+open AmbiguousPlateauAffiliation public
 
 record IncrementalFactorState
     (Variable Factor : Set) : Set₁ where
