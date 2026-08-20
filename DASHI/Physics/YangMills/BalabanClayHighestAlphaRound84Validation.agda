@@ -5,16 +5,14 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound84Validation where
 --
 -- Import the established Round61 integration surface first, then the current
 -- shortest Clay-facing Round84 cutset, the Round85 theorem-bearing attacks on
--- L1/L4/L6, and the Round86 local-current reductions of the stress-charge lane.
+-- L1/L4/L6, and the Round86 local-current + four-orbit beta reductions.
 -- A successful Agda check of THIS module therefore forces typechecking of the
--- compact-simple beta floor, marked-source nuclear-field compiler, local-core
--- cutoff compiler, microcausal outer-shell compiler and stabilized-charge
--- additivity theorem without rewriting the large historical Round61 root.
+-- compact-simple beta floor, four-orbit all-group beta compiler, marked-source
+-- nuclear-field compiler, microcausal outer-shell compiler, local-core cutoff
+-- compiler and stabilized-charge additivity theorem.
 --
 -- Round86 also repairs the Agda-2.9 explicit-signature defect exposed by the
--- previous focused run in `BalabanClayT4LiteralDiagramWardCancellationExact`;
--- this root is intentionally touched again so validation runs on the repaired
--- head rather than merely retrying the stale failing merge commit.
+-- previous focused run in `BalabanClayT4LiteralDiagramWardCancellationExact`.
 --
 -- This is a kernel-target convenience only.  Import success establishes
 -- source/type correctness of the formal compilers; it does not inhabit any of
@@ -26,6 +24,7 @@ import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound84SixAnalyticLemmaExa
 import DASHI.Physics.YangMills.BalabanCMP116DifferentiatedLocalizationSourceExact
 import DASHI.Physics.YangMills.BalabanIrrelevantRGMemoryContractionExact
 import DASHI.Physics.YangMills.BalabanCompactSimpleUniversalBetaFloorExact
+import DASHI.Physics.YangMills.BalabanCompactSimpleFourOrbitHalfRemainderExact
 import DASHI.Physics.YangMills.BalabanMarkedSourceNuclearCompositeFieldExact
 import DASHI.Physics.YangMills.YangMillsStressChargeLocalCoreCutoffStabilizationExact
 import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound85SixAnalyticLemmaAttackExact
