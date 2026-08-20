@@ -8,6 +8,8 @@ open import Data.List.Base using ([]; _∷_)
 import DASHI.Core.AffectedDependencyClosureExact as Closure4
 import DASHI.Core.IdentifiabilityActiveInformationExact as Info4
 import DASHI.Environment.AssimilationDependencyReopeningExact as Assimilation4
+import DASHI.Environment.CertifiedSpatialTransportExact as CertifiedSpatial
+import DASHI.Environment.CertifiedValidationGovernanceExact as CertifiedGovernance
 import DASHI.Environment.DepthTruncation as Depth
 import DASHI.Environment.EcologicalEvidenceGates as Evidence
 import DASHI.Environment.EcologicalKnowledge as Knowledge
@@ -19,6 +21,7 @@ import DASHI.Environment.LESRuntimeBoundary as Runtime
 import DASHI.Environment.ParetoPlanning as Pareto
 import DASHI.Environment.QuantitiesConservation as Q
 import DASHI.Environment.SpatialTransport as Spatial
+import DASHI.Environment.SpringfieldPondCertifiedTransportExact as PondCertified
 import DASHI.Environment.SpringfieldPondGoldenScenario as Pond
 import DASHI.Environment.SurrogateCalibration as Surrogate
 import DASHI.Environment.ValidationGovernance as Governance
@@ -47,6 +50,14 @@ truncateOneIsPrefix = Depth.shallowerPrefixOfDeeper one one stream
 pondPathRecorded : Spatial.Path Pond.upperCatchment Pond.pond
 pondPathRecorded = Pond.phosphorusPath
 
+certifiedPondPathRecorded :
+  CertifiedSpatial.CertifiedPath Pond.upperCatchment Pond.pond
+certifiedPondPathRecorded = PondCertified.certifiedPhosphorusPath
+
+certifiedSourceToPondRecorded :
+  CertifiedSpatial.CertifiedSourceToObservation Pond.upperCatchment Pond.pond
+certifiedSourceToPondRecorded = PondCertified.certifiedSourceToPond
+
 pondPolicyEscalates :
   Pond.policyEscalates ≡ Pond.policyEscalates
 pondPolicyEscalates = refl
@@ -71,6 +82,10 @@ surrogateBoundaryRecorded = Surrogate.canonicalSurrogateBoundary
 
 governanceBoundaryRecorded : Governance.ValidationGovernanceBoundary
 governanceBoundaryRecorded = Governance.canonicalValidationGovernanceBoundary
+
+certifiedGovernanceBoundaryRecorded : CertifiedGovernance.CertifiedGovernanceBoundary
+certifiedGovernanceBoundaryRecorded =
+  CertifiedGovernance.canonicalCertifiedGovernanceBoundary
 
 researchGapBoundaryRecorded : Research.LESResearchGapBoundary
 researchGapBoundaryRecorded = Research.canonicalLESResearchGapBoundary
