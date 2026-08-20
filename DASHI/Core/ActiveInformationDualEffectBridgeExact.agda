@@ -9,8 +9,6 @@ module DASHI.Core.ActiveInformationDualEffectBridgeExact where
 -- DistinguishingExperiment on that induced experiment system.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Unit using (⊤; tt)
-
 import DASHI.Core.DualEffectInformationActionExact as Dual
 import DASHI.Core.IdentifiabilityActiveInformationExact as Active
 
@@ -34,9 +32,9 @@ separatingActionIsDistinguishingExperiment :
   Active.DistinguishingExperiment
     (informationActionExperimentSystem system observe)
     left right
-separatingActionIsDistinguishingExperiment witness =
+separatingActionIsDistinguishingExperiment {action = action} witness =
   Active.distinguishingExperiment
-    _
+    action
     (Dual.InformationSeparatingAction.differAfter witness)
 
 ------------------------------------------------------------------------
