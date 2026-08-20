@@ -9,8 +9,11 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound84Validation where
 -- check of THIS module forces typechecking of every new Round85/86 compiler used
 -- by the active mathematical cutset.
 --
--- Round86 also repairs the Agda-2.9 explicit-signature defect exposed by the
--- previous focused run in `BalabanClayT4LiteralDiagramWardCancellationExact`.
+-- Round86 also repairs the legacy Ward helper at its actual predicate boundary:
+-- diagram invariance/covariance fields are property families, so the convenience
+-- helpers now define conjunction TYPES rather than pretending to manufacture
+-- witnesses.  This root is touched to validate that corrected interpretation on
+-- the latest head.
 --
 -- This is a kernel-target convenience only.  Import success establishes
 -- source/type correctness of the formal compilers; it does not inhabit any of
