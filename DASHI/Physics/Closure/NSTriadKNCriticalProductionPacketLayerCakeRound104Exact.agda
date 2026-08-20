@@ -136,9 +136,11 @@ conservativeWeightedTransferIsLayerCake :
 conservativeWeightedTransferIsLayerCake bands conservation =
   trans
     (weightedTransferAbelIdentity bands)
-    (cong
-      (λ total → baseWeight bands * total + radialLayerCake bands)
-      conservation)
+    (trans
+      (cong
+        (λ total → baseWeight bands * total + radialLayerCake bands)
+        conservation)
+      (solve (baseWeight bands ∷ radialLayerCake bands ∷ [])))
 
 ------------------------------------------------------------------------
 -- Explicit four-band expansion: useful as a regression against accidental
