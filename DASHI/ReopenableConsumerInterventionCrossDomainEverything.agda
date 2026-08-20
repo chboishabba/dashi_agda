@@ -36,6 +36,7 @@ import DASHI.Environment.LESResearchCrossPollinationRound2Exact
 import DASHI.Environment.LESResearchCrossPollinationRound3Exact
 import DASHI.Environment.LESResearchCrossPollinationRound4Exact
 import DASHI.Environment.LESResearchCrossPollinationRound5Exact
+import DASHI.Environment.LESResearchCrossPollinationRound6Exact
 import DASHI.Geometry.AdaptiveWearableCompilerExact
 import DASHI.Geometry.EmpiricalROMRiskFieldExact
 import DASHI.Geometry.WearableBehaviouralSearchExact
