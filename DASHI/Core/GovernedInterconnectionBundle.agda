@@ -1,7 +1,10 @@
 module DASHI.Core.GovernedInterconnectionBundle where
 
 ------------------------------------------------------------------------
--- Stable aggregate import surface for governed interconnection.
+-- Aggregate import surface for the governed interconnection stack.
+--
+-- Kept theorem-free: this module only gives Everything.agda and downstream
+-- domains a stable import point for the comparison/restriction/contact chain.
 ------------------------------------------------------------------------
 
 import DASHI.Core.ComparisonLawCore
@@ -12,8 +15,6 @@ import DASHI.Core.EmpiricalContactReceipt
 import DASHI.Core.EmpiricalGovernedContactBridge
 import DASHI.Core.FibreRestrictionCore
 import DASHI.Core.GovernedContactCore
-import DASHI.Core.GovernedDiagramCore
 import DASHI.Core.InterconnectionExistingCoreBridge
-import DASHI.Core.NumberTheoreticInterconnectionAdapter
 import DASHI.Core.ObservableContactGeometry
 import DASHI.Core.ReplayArtifactCore

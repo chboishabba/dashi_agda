@@ -10,6 +10,14 @@ import DASHI.Core.GovernedContactCore as Governed
 import DASHI.Core.ObservableContactGeometry as Geometry
 import DASHI.Core.ReplayArtifactCore as Replay
 
+------------------------------------------------------------------------
+-- Empirical receipts are late specializations of governed contact.
+--
+-- The bridge is intentionally proof-bearing: callers must supply the exact
+-- residual encoder connecting the receipt's projected residual family to the
+-- Hamiltonian residual carrier, together with replay and gate witnesses.
+------------------------------------------------------------------------
+
 empiricalReceiptGivesGovernedContact :
   (receipt : Empirical.EmpiricalContactReceipt) →
   ({left right : Geometry.Observable (Empirical.contactGeometry receipt)} →

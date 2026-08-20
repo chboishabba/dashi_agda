@@ -11,6 +11,10 @@ import DASHI.Core.FibreRestrictionCore as Restriction
 import DASHI.Core.ObservableContactGeometry as Geometry
 import DASHI.Core.ReplayArtifactCore as Replay
 
+------------------------------------------------------------------------
+-- Bool conjunction
+------------------------------------------------------------------------
+
 infixr 6 _∧_
 
 _∧_ : Bool → Bool → Bool
@@ -20,6 +24,10 @@ false ∧ _ = false
 not : Bool → Bool
 not true = false
 not false = true
+
+------------------------------------------------------------------------
+-- Generic receipt metadata
+------------------------------------------------------------------------
 
 record SourceBinding : Set where
   constructor sourceBinding
@@ -37,37 +45,44 @@ replayArtifact = Replay.canonicalReplayArtifact
 record EmpiricalContactReceipt : Set₁ where
   constructor empiricalContactReceipt
   field
-    contactGeometry           : Geometry.ObservableContactGeometry
-    contactHamiltonian        : Hamiltonian.ContactHamiltonian
-    source                    : SourceBinding
-    replay                    : ReplayArtifact
-    sourceBound               : Bool
-    projectionLawTyped        : Bool
-    observableRecorded        : Bool
-    replayable                : Bool
-    comparisonLawTyped        : Bool
-    fibreRestrictionTyped     : Bool
-    diagnosticOnly            : Bool
+    contactGeometry          : Geometry.ObservableContactGeometry
+    contactHamiltonian       : Hamiltonian.ContactHamiltonian
+    source                   : SourceBinding
+    replay                   : ReplayArtifact
+    sourceBound              : Bool
+    projectionLawTyped       : Bool
+    observableRecorded       : Bool
+    replayable               : Bool
+    comparisonLawTyped       : Bool
+    fibreRestrictionTyped    : Bool
+    diagnosticOnly           : Bool
     externalAuthorityRequired : Bool
-    authorityGateClosed       : Bool
-    promotesTruth             : Bool
+    authorityGateClosed      : Bool
+    promotesTruth            : Bool
 
   observableContactClosed : Bool
   observableContactClosed =
-    sourceBound ∧ projectionLawTyped ∧ observableRecorded ∧ replayable
-    ∧ comparisonLawTyped ∧ fibreRestrictionTyped
+    sourceBound
+    ∧ projectionLawTyped
+    ∧ observableRecorded
+    ∧ replayable
+    ∧ comparisonLawTyped
+    ∧ fibreRestrictionTyped
 
   nonPromotionBoundaryClosed : Bool
   nonPromotionBoundaryClosed =
-    diagnosticOnly ∧ externalAuthorityRequired
-    ∧ not authorityGateClosed ∧ not promotesTruth
+    diagnosticOnly
+    ∧ externalAuthorityRequired
+    ∧ not authorityGateClosed
+    ∧ not promotesTruth
 
   closureStatement : String
   closureStatement =
     "Observable contact is typed as a projection from hidden carrier structure "
     ++ "to an observable surface with replay, comparison law, fibre restriction, "
     ++ "and residual-energy tracking. Contact is recorded without recovering the "
-    ++ "whole fibre, and promotion remains blocked until an external authority chain closes."
+    ++ "whole fibre, and "
+    ++ "promotion remains blocked until an external authority chain closes."
 
 open EmpiricalContactReceipt public
 
@@ -86,20 +101,39 @@ replayArtifactCore = replay
 canonicalNonPromotingEmpiricalContactReceipt :
   Geometry.ObservableContactGeometry →
   Hamiltonian.ContactHamiltonian →
-  SourceBinding → ReplayArtifact → EmpiricalContactReceipt
+  SourceBinding →
+  ReplayArtifact →
+  EmpiricalContactReceipt
 canonicalNonPromotingEmpiricalContactReceipt geometry hamiltonian source replay =
-  empiricalContactReceipt geometry hamiltonian source replay
-    true true true true true true true true false false
+  empiricalContactReceipt
+    geometry
+    hamiltonian
+    source
+    replay
+    true
+    true
+    true
+    true
+    true
+    true
+    true
+    true
+    false
+    false
 
 canonicalFibreRestrictionIsNonRecovering :
   (geometry : Geometry.ObservableContactGeometry) →
-  Restriction.doesNotRecoverCarrier (Geometry.fibreRestrictionCore geometry) ≡ true →
-  (hamiltonian : Hamiltonian.ContactHamiltonian) →
+  Restriction.doesNotRecoverCarrier
+    (Geometry.fibreRestrictionCore geometry)
+    ≡ true
+  → (hamiltonian : Hamiltonian.ContactHamiltonian) →
   (source : SourceBinding) →
   (replay : ReplayArtifact) →
   fibreRestrictionTyped
-    (canonicalNonPromotingEmpiricalContactReceipt geometry hamiltonian source replay) ≡ true
-canonicalFibreRestrictionIsNonRecovering geometry nonRecovering hamiltonian source replay = refl
+    (canonicalNonPromotingEmpiricalContactReceipt geometry hamiltonian source replay)
+    ≡ true
+canonicalFibreRestrictionIsNonRecovering geometry nonRecovering hamiltonian source replay =
+  refl
 
 canonicalObservableContactClosed :
   (geometry : Geometry.ObservableContactGeometry) →
@@ -107,7 +141,8 @@ canonicalObservableContactClosed :
   (source : SourceBinding) →
   (replay : ReplayArtifact) →
   observableContactClosed
-    (canonicalNonPromotingEmpiricalContactReceipt geometry hamiltonian source replay) ≡ true
+    (canonicalNonPromotingEmpiricalContactReceipt geometry hamiltonian source replay)
+    ≡ true
 canonicalObservableContactClosed geometry hamiltonian source replay = refl
 
 canonicalNonPromotionBoundaryClosed :
@@ -116,7 +151,8 @@ canonicalNonPromotionBoundaryClosed :
   (source : SourceBinding) →
   (replay : ReplayArtifact) →
   nonPromotionBoundaryClosed
-    (canonicalNonPromotingEmpiricalContactReceipt geometry hamiltonian source replay) ≡ true
+    (canonicalNonPromotingEmpiricalContactReceipt geometry hamiltonian source replay)
+    ≡ true
 canonicalNonPromotionBoundaryClosed geometry hamiltonian source replay = refl
 
 canonicalContactGateIsFailClosed :
@@ -126,5 +162,6 @@ canonicalContactGateIsFailClosed :
   (replay : ReplayArtifact) →
   Gate.promotesTruth
     (contactGateCore
-      (canonicalNonPromotingEmpiricalContactReceipt geometry hamiltonian source replay)) ≡ false
+      (canonicalNonPromotingEmpiricalContactReceipt geometry hamiltonian source replay))
+    ≡ false
 canonicalContactGateIsFailClosed geometry hamiltonian source replay = refl

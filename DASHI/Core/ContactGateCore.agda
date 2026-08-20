@@ -3,6 +3,14 @@ module DASHI.Core.ContactGateCore where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
+------------------------------------------------------------------------
+-- Generic fail-closed gate for governed contact.
+--
+-- Contact, replay, comparison, and residual scoring do not themselves
+-- promote truth.  Promotion requires the relevant external authority and
+-- bridge obligations to be closed explicitly.
+------------------------------------------------------------------------
+
 record ContactGateCore : Set where
   constructor contactGateCore
   field
