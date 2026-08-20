@@ -1,0 +1,134 @@
+module DASHI.Physics.YangMills.BalabanSU2AdjointCasimirFromColourContractionExact where
+
+------------------------------------------------------------------------
+-- PRIMARY SOURCES
+--
+-- Brian C. Hall,
+-- "Lie Groups, Lie Algebras, and Representations: An Elementary
+-- Introduction", second edition, Springer, 2015.
+-- DOI: 10.1007/978-3-319-13467-3.
+--
+-- David J. Gross and Frank Wilczek,
+-- "Ultraviolet Behavior of Non-Abelian Gauge Theories",
+-- Physical Review Letters 30 (1973), 1343--1346.
+-- DOI: 10.1103/PhysRevLett.30.1343.
+--
+-- H. David Politzer,
+-- "Reliable Perturbative Results for Strong Interactions?",
+-- Physical Review Letters 30 (1973), 1346--1349.
+-- DOI: 10.1103/PhysRevLett.30.1346.
+--
+-- DASHI CONTRIBUTION
+--
+-- Prove the SU(2) adjoint colour factor instead of installing C_A = 2 as a
+-- normalization receipt.  With the standard three-colour structure constants
+-- epsilon_{abc}, direct finite contraction gives
+--
+--   sum_{c,d=0}^2 epsilon_{acd} epsilon_{bcd} = 2 delta_{ab}.
+--
+-- Hence the adjoint quadratic Casimir seen by the one-loop colour contraction
+-- is exactly 2.  The same theorem then specializes the universal four-orbit
+-- lower-bound machinery to the literal SU(2) Casimir factor.  The remaining
+-- one-loop frontier is only the physical Wilson/Faddeev--Popov/Haar vertex
+-- reduction to this colour contraction plus the universal orbit enclosure.
+------------------------------------------------------------------------
+
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using ([])
+open import Data.Integer.Base using (+_)
+open import Data.Rational.Base as ℚ using
+  (ℚ; 0ℚ; _+_; _-_; _*_; _≤_; _/_)
+import Data.Rational.Properties as ℚP
+import Data.Rational.Tactic.RingSolver as ℚRing
+
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanClayT4GeneratedBrillouinGridExact as Grid
+import DASHI.Physics.YangMills.BalabanCompactSimpleCasimirOrbitFactorizationExact as Casimir
+import DASHI.Physics.YangMills.BalabanCompactSimpleWilsonOneLoopOrbitAdapterExact as OrbitAdapter
+
+one two minusOne : ℚ
+one = + 1 / 1
+two = + 2 / 1
+minusOne = 0ℚ - one
+
+data SU2Colour : Set where
+  c0 c1 c2 : SU2Colour
+
+-- Standard orientation epsilon_012 = +1.
+epsilon : SU2Colour → SU2Colour → SU2Colour → ℚ
+epsilon c0 c1 c2 = one
+epsilon c1 c2 c0 = one
+epsilon c2 c0 c1 = one
+epsilon c0 c2 c1 = minusOne
+epsilon c2 c1 c0 = minusOne
+epsilon c1 c0 c2 = minusOne
+epsilon _ _ _ = 0ℚ
+
+kronecker : SU2Colour → SU2Colour → ℚ
+kronecker c0 c0 = one
+kronecker c1 c1 = one
+kronecker c2 c2 = one
+kronecker _ _ = 0ℚ
+
+sumColourPairs : (SU2Colour → SU2Colour → ℚ) → ℚ
+sumColourPairs value =
+    value c0 c0 + value c0 c1 + value c0 c2
+  + value c1 c0 + value c1 c1 + value c1 c2
+  + value c2 c0 + value c2 c1 + value c2 c2
+
+adjointColourContraction : SU2Colour → SU2Colour → ℚ
+adjointColourContraction a b =
+  sumColourPairs (λ c d → epsilon a c d * epsilon b c d)
+
+-- All nine cases are certified closed rational polynomial identities.
+su2AdjointColourContractionExact : ∀ a b →
+  adjointColourContraction a b ≡ two * kronecker a b
+su2AdjointColourContractionExact c0 c0 = ℚRing.solve []
+su2AdjointColourContractionExact c0 c1 = ℚRing.solve []
+su2AdjointColourContractionExact c0 c2 = ℚRing.solve []
+su2AdjointColourContractionExact c1 c0 = ℚRing.solve []
+su2AdjointColourContractionExact c1 c1 = ℚRing.solve []
+su2AdjointColourContractionExact c1 c2 = ℚRing.solve []
+su2AdjointColourContractionExact c2 c0 = ℚRing.solve []
+su2AdjointColourContractionExact c2 c1 = ℚRing.solve []
+su2AdjointColourContractionExact c2 c2 = ℚRing.solve []
+
+data SU2GaugeGroup : Set where
+  SU2 : SU2GaugeGroup
+
+su2CompactSimpleCasimirCarrier :
+  Casimir.CompactSimpleCasimirCarrier SU2GaugeGroup
+su2CompactSimpleCasimirCarrier = record
+  { adjointCasimir = λ _ → two
+  ; adjointCasimirNonnegative = λ _ → ℚP.nonNegative⁻¹ two
+  }
+
+su2AdjointCasimirIsTwo :
+  Casimir.adjointCasimir su2CompactSimpleCasimirCarrier SU2 ≡ two
+su2AdjointCasimirIsTwo = refl
+
+su2UniversalFourOrbitLowerBoundControlsRegularCellCoefficient :
+  ∀ (contribution : Grid.GridCell4 → ℚ)
+    (bound : Casimir.UniversalFourOrbitLowerBound
+      (OrbitAdapter.universalFourOrbitScalar contribution)) →
+  two * Casimir.lower bound
+  ≤ OrbitAdapter.casimirScaledRegularCellCoefficient
+      su2CompactSimpleCasimirCarrier SU2 contribution
+su2UniversalFourOrbitLowerBoundControlsRegularCellCoefficient contribution bound =
+  OrbitAdapter.casimirScaledUniversalLowerBoundControlsRegularCellCoefficient
+    su2CompactSimpleCasimirCarrier SU2 contribution bound
+
+su2AdjointColourContractionLevel : ProofLevel
+su2AdjointColourContractionLevel = machineChecked
+
+su2AdjointCasimirCarrierLevel : ProofLevel
+su2AdjointCasimirCarrierLevel = machineChecked
+
+su2FourOrbitLowerBoundReuseLevel : ProofLevel
+su2FourOrbitLowerBoundReuseLevel = machineChecked
+
+-- Still physical: identify the colour tensors generated by the literal
+-- lattice Wilson, Faddeev--Popov ghost and Haar vertices with the epsilon
+-- contraction above.  Once done, no separate SU(2) Casimir assumption remains.
+literalSU2WilsonGhostHaarColourIdentificationLevel : ProofLevel
+literalSU2WilsonGhostHaarColourIdentificationLevel = conditional
