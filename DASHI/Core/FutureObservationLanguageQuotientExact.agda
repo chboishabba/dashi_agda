@@ -161,7 +161,8 @@ exactSummaryCertifiesFutureLanguageSafety :
     {coarsen : State → Coarse} →
   ExactFutureLanguageSummary system project coarsen →
   FutureLanguageSafeProjection system project coarsen
-exactSummaryCertifiesFutureLanguageSafety summary =
+exactSummaryCertifiesFutureLanguageSafety
+  {system = system} {project = project} {coarsen = coarsen} summary =
   futureLanguageSafeProjection certify
   where
     certify :
@@ -236,7 +237,7 @@ sectionedSafeProjectionFactors :
   FutureLanguageSafeProjection system project coarsen →
   SectionedProjection coarsen →
   FactorizationThroughFutureQuotient presentation
-sectionedSafeProjectionFactors presentation safe sectioned =
+sectionedSafeProjectionFactors {coarsen = coarsen} presentation safe sectioned =
   factorizationThroughFutureQuotient
     (λ coarse → classOf presentation (section sectioned coarse))
     (λ state →

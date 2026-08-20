@@ -17,6 +17,8 @@ import DASHI.Environment.LESResearchCrossPollinationExact as Research
 import DASHI.Environment.LESResearchCrossPollinationRound2Exact as Research2
 import DASHI.Environment.LESResearchCrossPollinationRound3Exact as Research3
 import DASHI.Environment.LESResearchCrossPollinationRound4Exact as Research4
+import DASHI.Environment.LESResearchCrossPollinationRound5Exact as Research5
+import DASHI.Environment.LESResearchCrossPollinationRound6Exact as Research6
 import DASHI.Environment.LESRuntimeBoundary as Runtime
 import DASHI.Environment.ParetoPlanning as Pareto
 import DASHI.Environment.QuantitiesConservation as Q
@@ -132,6 +134,12 @@ researchRound4ScientificFrontierRecorded :
   Research4.LESRound4RemainingScientificFrontier
 researchRound4ScientificFrontierRecorded =
   Research4.canonicalLESRound4RemainingScientificFrontier
+
+researchRound5BuildsOnRound4Recorded : Research4.LESRound4FormalClosureStatus
+researchRound5BuildsOnRound4Recorded = Research5.round5BuildsOnRound4
+
+researchRound6BoundaryRecorded : Research6.LESRound6Boundary
+researchRound6BoundaryRecorded = Research6.canonicalLESRound6Boundary
 
 positiveInformationValueRecorded : Info4.PositiveDecisionValueWitness
 positiveInformationValueRecorded = Research4.positiveInformationValueWitness
