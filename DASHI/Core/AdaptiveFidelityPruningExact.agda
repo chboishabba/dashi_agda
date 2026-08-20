@@ -60,7 +60,7 @@ safePruneRefutesImprovement :
   SafeMinimisationPrune order incumbent actual lower →
   _<s_ order actual incumbent →
   ⊥
-safePruneRefutesImprovement order prune actualImproves =
+safePruneRefutesImprovement order {actual = actual} prune actualImproves =
   <-irrefl order actual
     (<-≤-trans order
       (<-trans order
