@@ -149,3 +149,15 @@ Conjectural targets:
 - continuum Schwinger functions satisfying OS0–OS5;
 - an OS-reconstructed Hamiltonian with a positive physical spectral gap.
 The final mass-gap target has no constructor here and cannot self-promote.
+- `SU3MatrixInstance.agda` fixes `N = 3` and computes `dim su(3) = 8`.
+Finite complex-matrix algebra, determinant identities, compactness, connectedness, simplicity, and exponential-chart facts are `standardImported`. The subtype construction and all group/Lie/metric/chart record assembly are `machineChecked`.
+`ConstructiveYangMillsNextSurface.agda` compiles the next proof chain in the order in which the mathematics must close:
+2. `BalabanFiniteVolumeBackgroundLane.agda` factors the critical-map estimate into patchwise Green constants, nonlinear Lipschitz constants, local factors, and a strict common factor;
+3. `BalabanOneStepRGClosure.agda` requires fluctuation coordinates, Jacobian/determinant control, BCH control, Ward identities, localization, vacuum-energy and coupling renormalization, and a bounded irrelevant polymer remainder;
+4. `BalabanStepVKPClosure.agda` separates polymer activity, entropy, suppression, and the final Kotecký–Preiss comparison;
+5. `BalabanAllScaleRGClosure.agda` proves the exact induction from one-step invariant-domain preservation to admissibility at every finite scale;
+6. `BalabanOSMassGapClosure.agda` separates continuum OS axioms, standard OS reconstruction, uniform clustering, and the physical spectral-gap transfer;
+7. `BalabanDashenGrossCalibration.agda` makes the generator, lattice-spacing, determinant, and coupling-scheme normalization factors explicit and proves the final convention map from their calibrated product.
+These modules prove the logical bridges and keep the analytic antecedents explicit. No large-field, all-scale, OS, or mass-gap premise is silently manufactured.
+- the fully instantiated background-field closure;
+- one-step fluctuation, determinant, Ward, localization, and polymer estimates.
