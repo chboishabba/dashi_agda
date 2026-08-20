@@ -1,5 +1,23 @@
 module DASHI.Core.ProvenanceFibreDynamicsReceiptExact where
 
+------------------------------------------------------------------------
+-- EXACT REOPENING TURNS PROVENANCE RECEIPTS INTO FINE-FIBRE COORDINATES
+--
+-- This is an extension theorem over the existing canonical cores:
+--
+--   FibrePreservingDynamicsExact
+--   ProvenanceBearingQuotient
+--
+-- It does not introduce another quotient or dynamics abstraction.
+--
+-- Exact result:
+--
+--   same surface + same receipt => same fine carrier.
+--
+-- Hence every nontrivial hidden/fibre-preserving transition must alter the
+-- provenance receipt of an exact reopenable quotient.
+------------------------------------------------------------------------
+
 open import DASHI.Core.Prelude
 
 import DASHI.Core.FibrePreservingDynamicsExact as Dynamics
@@ -75,3 +93,24 @@ nontrivialFibreAutomorphismChangesReceipt :
 nontrivialFibreAutomorphismChangesReceipt quotient symmetry =
   hiddenTransitionChangesReceipt quotient
     (Dynamics.nontrivialFibreAutomorphismCreatesHiddenTransition symmetry)
+
+record ProvenanceFibreDynamicsReceiptBoundary : Set where
+  constructor provenanceFibreDynamicsReceiptBoundary
+  field
+    surfacePlusReceiptSeparatesExactFineState : Bool
+    surfacePlusReceiptSeparatesExactFineStateIsTrue :
+      surfacePlusReceiptSeparatesExactFineState ≡ true
+    nontrivialHiddenMotionMustChangeReceipt : Bool
+    nontrivialHiddenMotionMustChangeReceiptIsTrue :
+      nontrivialHiddenMotionMustChangeReceipt ≡ true
+    receiptChangePromotesSemanticTruth : Bool
+    receiptChangePromotesSemanticTruthIsFalse :
+      receiptChangePromotesSemanticTruth ≡ false
+
+canonicalProvenanceFibreDynamicsReceiptBoundary :
+  ProvenanceFibreDynamicsReceiptBoundary
+canonicalProvenanceFibreDynamicsReceiptBoundary =
+  provenanceFibreDynamicsReceiptBoundary
+    true refl
+    true refl
+    false refl

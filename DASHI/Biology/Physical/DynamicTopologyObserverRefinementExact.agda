@@ -3,52 +3,65 @@ module DASHI.Biology.Physical.DynamicTopologyObserverRefinementExact where
 ------------------------------------------------------------------------
 -- DYNAMIC TOPOLOGY AS AN OBSERVER-REFINEMENT WITNESS
 --
--- The existing biological example proves that equal present morphology can
--- hide a junction that changes the result of the same future signal.  Here we
--- show that adding the junction coordinate is an exact strict observer
--- refinement, and that the resulting full two-coordinate observer is safe for
--- the declared future morphology language.
+-- The existing biological theorem exhibits two states with equal present
+-- morphology but different hidden junctions, for which the same future signal
+-- yields different morphology.  Here the junction is treated as the next
+-- observer coordinate.  It strictly refines morphology and the resulting pair
+-- observer separates the concrete graph state, hence is future-language safe.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Empty using (⊥)
-open import Data.Product using (_×_; proj₁; proj₂)
-open import Relation.Binary.PropositionalEquality using (cong)
+open import DASHI.Core.Prelude
 
 import DASHI.Biology.Physical.DynamicTopologyFutureDefectExact as Topology
 import DASHI.Core.FutureObservationLanguageQuotientExact as Future
-import DASHI.Core.ObserverRefinementExact as Observer
+import DASHI.Core.ObserverRefinementFutureSafetyExact as FutureBridge
+import DASHI.Core.ObserverRefinementLatticeExact as Observer
 
-junctionProjection : Topology.GraphDevelopmentalState → Bool
-junctionProjection = Topology.junction
+junctionObserver : Observer.Observer Topology.GraphDevelopmentalState Bool
+junctionObserver = Topology.junction
 
 morphologyJunctionObserver :
-  Topology.GraphDevelopmentalState → Bool × Bool
+  Observer.Observer Topology.GraphDevelopmentalState (Bool × Bool)
 morphologyJunctionObserver =
-  Observer.jointObserver Topology.morphologyProjection junctionProjection
+  Observer.pairObserver Topology.morphologyProjection junctionObserver
 
 morphologyPlusJunctionStrictlyRefinesMorphology :
   Observer.StrictRefinement
     Topology.morphologyProjection
     morphologyJunctionObserver
 morphologyPlusJunctionStrictlyRefinesMorphology =
-  Observer.jointStrictlyRefinesWhenAddedObserverSplitsCollision
+  Observer.strictPairRefinement
     Topology.morphologyProjection
-    junctionProjection
+    junctionObserver
+    Topology.withoutJunction
+    Topology.withJunction
     Topology.sameVisibleMorphology
     Topology.hiddenTopologyDiffers
+
+withoutWithJunctionDistinct :
+  Topology.withoutJunction ≡ Topology.withJunction → ⊥
+withoutWithJunctionDistinct same =
+  Topology.hiddenTopologyDiffers (cong Topology.junction same)
+
+morphologyCollision :
+  Observer.ObserverCollision Topology.morphologyProjection
+morphologyCollision =
+  Observer.observerCollision
+    Topology.withoutJunction
+    Topology.withJunction
+    Topology.sameVisibleMorphology
+    withoutWithJunctionDistinct
 
 morphologyProjectionCannotSeparateGraphState :
   Observer.Separating Topology.morphologyProjection → ⊥
 morphologyProjectionCannotSeparateGraphState =
-  Observer.strictRefinementRulesOutCoarseSeparation
-    morphologyPlusJunctionStrictlyRefinesMorphology
+  Observer.collisionBlocksSeparation morphologyCollision
 
 morphologyJunctionSeparatesGraphState :
   Observer.Separating morphologyJunctionObserver
 morphologyJunctionSeparatesGraphState
-  {Topology.graphDevelopmentalState leftMorph leftJunction}
-  {Topology.graphDevelopmentalState rightMorph rightJunction}
+  (Topology.graphDevelopmentalState leftMorph leftJunction)
+  (Topology.graphDevelopmentalState rightMorph rightJunction)
   same
   with cong proj₁ same | cong proj₂ same
 ... | refl | refl = refl
@@ -59,22 +72,29 @@ morphologyJunctionIsFutureLanguageSafe :
     Topology.morphologyProjection
     morphologyJunctionObserver
 morphologyJunctionIsFutureLanguageSafe =
-  Future.futureLanguageSafeProjection λ same →
-    afterSeparation (morphologyJunctionSeparatesGraphState same)
-  where
-    afterSeparation :
-      ∀ {left right} →
-      left ≡ right →
-      Future.FutureObservationEquivalent
-        Topology.system Topology.morphologyProjection left right
-    afterSeparation {left} refl = Future.futureEquivalentRefl left
+  FutureBridge.separatingObserverIsFutureLanguageSafe
+    morphologyJunctionSeparatesGraphState
 
-------------------------------------------------------------------------
--- Existing negative theorem remains the other side of the bridge.
-------------------------------------------------------------------------
+record DynamicTopologyObserverRefinementBoundary : Set where
+  constructor dynamicTopologyObserverRefinementBoundary
+  field
+    morphologyAloneCollides : Bool
+    morphologyAloneCollidesIsTrue : morphologyAloneCollides ≡ true
+    junctionStrictlyRefinesMorphology : Bool
+    junctionStrictlyRefinesMorphologyIsTrue :
+      junctionStrictlyRefinesMorphology ≡ true
+    morphologyJunctionSeparatesCurrentState : Bool
+    morphologyJunctionSeparatesCurrentStateIsTrue :
+      morphologyJunctionSeparatesCurrentState ≡ true
+    separatingRefinementIsFutureSafeForMorphologyLanguage : Bool
+    separatingRefinementIsFutureSafeForMorphologyLanguageIsTrue :
+      separatingRefinementIsFutureSafeForMorphologyLanguage ≡ true
 
-morphologyAloneStillNotFutureSafe :
-  DASHI.Core.DynamicalQuotientSafety.DynamicConsumerSafety
-    Topology.system Topology.morphologyProjection → ⊥
-morphologyAloneStillNotFutureSafe =
-  Topology.morphologyWithoutTopologyIsNotFutureSafe
+canonicalDynamicTopologyObserverRefinementBoundary :
+  DynamicTopologyObserverRefinementBoundary
+canonicalDynamicTopologyObserverRefinementBoundary =
+  dynamicTopologyObserverRefinementBoundary
+    true refl
+    true refl
+    true refl
+    true refl
