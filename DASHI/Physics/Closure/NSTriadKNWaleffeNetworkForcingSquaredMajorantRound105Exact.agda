@@ -29,11 +29,6 @@ module DASHI.Physics.Closure.NSTriadKNWaleffeNetworkForcingSquaredMajorantRound1
 --       ||F_k||^2 ||u_p||^2 ||u_q||^2
 --     + ||F_p||^2 ||u_k||^2 ||u_q||^2
 --     + ||F_q||^2 ||u_k||^2 ||u_p||^2 ].
---
--- Thus the remaining phase-forcing theorem is not an opaque quartic scalar:
--- it descends to the ACTUAL Galerkin forcing norms and modal energy masses.
--- This is the correct interface for the repository's existing output-fibre,
--- Schur and convolution estimates.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
@@ -43,9 +38,10 @@ open import Data.Rational.Base using
   (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; NonNegative; nonNegative)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
+import DASHI.Physics.Closure.NSTriadKNComplex3FieldAlgebra as Field
 import DASHI.Physics.Closure.NSTriadKNOrderedEuclideanL2Carrier as L2
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNRationalComplex3Separation as Separation
@@ -106,7 +102,7 @@ onesPairingIsNetworkForcing uK uP uQ fK fP fQ
      | termP uK uP uQ fK fP fQ
      | termQ uK uP uQ fK fP fQ
 ... | C3.complex kr ki | C3.complex pr pi | C3.complex qr qi =
-  C3.complexExt (solve (kr ∷ pr ∷ qr ∷ [])) (solve (ki ∷ pi ∷ qi ∷ []))
+  Field.complexExt (solve (kr ∷ pr ∷ qr ∷ [])) (solve (ki ∷ pi ∷ qi ∷ []))
 
 termVectorNormSquaredMeaning :
   (uK uP uQ fK fP fQ : C3.Complex3 F) →
@@ -266,7 +262,7 @@ networkForcingRealSquareMajorant uK uP uQ fK fP fQ =
           ( L2.complex3NormSquared fK * L2.complex3NormSquared uP * L2.complex3NormSquared uQ
           + L2.complex3NormSquared fP * L2.complex3NormSquared uK * L2.complex3NormSquared uQ
           + L2.complex3NormSquared fQ * L2.complex3NormSquared uK * L2.complex3NormSquared uP ))
-        (cong (three *_) termMeaning)
+        (sym (cong (three *_) termMeaning))
         scaledTerms))
 
 round105WaleffeNetworkForcingSquaredMajorantClosed : Bool
