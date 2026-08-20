@@ -76,13 +76,31 @@ adverseEpisodePaidByInitialPhaseAndSignedForcing E =
     negTerminalRaw : -(g * aT) ≤ - 0ℚ
     negTerminalRaw = ℚP.neg-antimono-≤ terminalProductNN
 
+    negZero : - 0ℚ ≡ 0ℚ
+    negZero =
+      trans
+        (sym (ℚP.+-identityʳ (- 0ℚ)))
+        (ℚP.+-inverseˡ 0ℚ)
+
     negTerminal≤Zero : -(g * aT) ≤ 0ℚ
     negTerminal≤Zero =
       subst (λ right → -(g * aT) ≤ right)
-        (solve []) negTerminalRaw
+        negZero negTerminalRaw
 
-    first = ℚP.+-mono-≤ ℚP.≤-refl negTerminal≤Zero
-    second = ℚP.+-mono-≤ first ℚP.≤-refl
+    leftRefl : g * a0 ≤ g * a0
+    leftRefl = ℚP.≤-refl
+
+    forcingRefl : g * f ≤ g * f
+    forcingRefl = ℚP.≤-refl
+
+    first :
+      g * a0 + (- (g * aT)) ≤ g * a0 + 0ℚ
+    first = ℚP.+-mono-≤ leftRefl negTerminal≤Zero
+
+    second :
+      g * a0 + (- (g * aT)) + g * f
+      ≤ (g * a0 + 0ℚ) + g * f
+    second = ℚP.+-mono-≤ first forcingRefl
 
     dropNegativeTerminal :
       g * a0 + (- (g * aT)) + g * f
@@ -123,10 +141,17 @@ interiorEpisodePaidExactlyBySignedForcing E
     (cong
       (λ y → y + Normal.normalFormWeight (cell (episode E))
         * Normal.integratedForcing (cell (episode E)))
-      (solve []))
+      zeroNegZero)
     (ℚP.+-identityˡ
       (Normal.normalFormWeight (cell (episode E))
         * Normal.integratedForcing (cell (episode E))))
+  where
+  zeroNegZero : 0ℚ + (- 0ℚ) ≡ 0ℚ
+  zeroNegZero =
+    trans (ℚP.+-identityˡ (- 0ℚ))
+      (trans
+        (sym (ℚP.+-identityʳ (- 0ℚ)))
+        (ℚP.+-inverseˡ 0ℚ))
 
 sumEpisodeProduction : List AdverseSignedForcingEpisode → ℚ
 sumEpisodeProduction [] = 0ℚ
@@ -155,6 +180,28 @@ record CommonViscosityAdverseEpisodes : Set where
 
 open CommonViscosityAdverseEpisodes public
 
+adverseEpisodeFoldStep :
+  (ν p q a f A F : ℚ) →
+  ν * p ≤ a + f →
+  ν * q ≤ A + F →
+  ν * (p + q) ≤ (a + A) + (f + F)
+adverseEpisodeFoldStep ν p q a f A F head tail =
+  subst
+    (λ left → left ≤ (a + A) + (f + F))
+    (sym (ℚP.*-distribˡ-+ ν p q))
+    (subst
+      (ν * p + ν * q ≤_)
+      (trans
+        (ℚP.+-assoc a f (A + F))
+        (trans
+          (cong (a +_) (sym (ℚP.+-assoc f A F)))
+          (trans
+            (cong (λ x → a + (x + F)) (ℚP.+-comm f A))
+            (trans
+              (cong (a +_) (ℚP.+-assoc A f F))
+              (sym (ℚP.+-assoc a A (f + F)))))))
+      (ℚP.+-mono-≤ head tail))
+
 finiteAdverseEpisodesPaidBySignedForcing :
   (N : CommonViscosityAdverseEpisodes) →
   viscosity N * sumEpisodeProduction (episodes N)
@@ -167,44 +214,26 @@ finiteAdverseEpisodesPaidBySignedForcing N = go (episodes N)
   go : (Es : List AdverseSignedForcingEpisode) →
     nu * sumEpisodeProduction Es
     ≤ sumEpisodeInitialBoundary Es + sumEpisodeSignedForcing Es
-  go [] = ℚP.≤-refl
-  go (E ∷ Es)
-    rewrite sameViscosity N E =
-    let
-      head = adverseEpisodePaidByInitialPhaseAndSignedForcing E
-      tail = go Es
-      added = ℚP.+-mono-≤ head tail
-      leftMeaning :
-        Normal.viscosity (cell E)
-          * Normal.integratedCriticalProduction (cell E)
-          + nu * sumEpisodeProduction Es
-        ≡ nu * sumEpisodeProduction (E ∷ Es)
-      leftMeaning = solve
-        (nu ∷ Normal.integratedCriticalProduction (cell E)
-         ∷ sumEpisodeProduction Es ∷ [])
-      rightMeaning :
-        (Normal.normalFormWeight (cell E) * Normal.initialAmplitude (cell E)
-          + Normal.normalFormWeight (cell E) * Normal.integratedForcing (cell E))
-          + (sumEpisodeInitialBoundary Es + sumEpisodeSignedForcing Es)
-        ≡ sumEpisodeInitialBoundary (E ∷ Es)
-          + sumEpisodeSignedForcing (E ∷ Es)
-      rightMeaning = solve
-        ( Normal.normalFormWeight (cell E)
-        ∷ Normal.initialAmplitude (cell E)
-        ∷ Normal.integratedForcing (cell E)
-        ∷ sumEpisodeInitialBoundary Es ∷ sumEpisodeSignedForcing Es ∷ [])
-    in
-    subst
-      (λ left → left ≤
-        sumEpisodeInitialBoundary (E ∷ Es)
-          + sumEpisodeSignedForcing (E ∷ Es))
-      leftMeaning
+  go []
+    rewrite ℚP.*-zeroʳ nu
+          | ℚP.+-identityʳ 0ℚ = ℚP.≤-refl
+  go (E ∷ Es) =
+    adverseEpisodeFoldStep
+      nu
+      (Normal.integratedCriticalProduction (cell E))
+      (sumEpisodeProduction Es)
+      (Normal.normalFormWeight (cell E) * Normal.initialAmplitude (cell E))
+      (Normal.normalFormWeight (cell E) * Normal.integratedForcing (cell E))
+      (sumEpisodeInitialBoundary Es)
+      (sumEpisodeSignedForcing Es)
       (subst
-        (λ right →
-          Normal.viscosity (cell E)
-            * Normal.integratedCriticalProduction (cell E)
-            + nu * sumEpisodeProduction Es ≤ right)
-        rightMeaning added)
+        (_≤
+          (Normal.normalFormWeight (cell E) * Normal.initialAmplitude (cell E)
+            + Normal.normalFormWeight (cell E) * Normal.integratedForcing (cell E)))
+        (cong (λ v → v * Normal.integratedCriticalProduction (cell E))
+          (sameViscosity N E))
+        (adverseEpisodePaidByInitialPhaseAndSignedForcing E))
+      (go Es)
 
 round106AdverseEpisodeKeepsSignedForcing : Bool
 round106AdverseEpisodeKeepsSignedForcing = true
