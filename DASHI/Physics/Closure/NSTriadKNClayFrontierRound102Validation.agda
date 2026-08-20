@@ -1,0 +1,12 @@
+module DASHI.Physics.Closure.NSTriadKNClayFrontierRound102Validation where
+
+-- Focused Round102 kernel target.  Imports only theorem-producing/falsifying
+-- modules on the current two-obligation Clay frontier.
+
+import DASHI.Physics.Closure.NSTriadKNThreeRadiusTransferExteriorRound102Exact
+import DASHI.Physics.Closure.NSTriadKNFiniteRadialTransferExteriorRound102Exact
+import DASHI.Physics.Closure.NSTriadKNCriticalAbsoluteValueAbsorptionNoGoRound102Exact
+import DASHI.Physics.Closure.NSTriadKNHelicalCriticalExchangeReductionRound102Exact
+import DASHI.Physics.Closure.NSTriadKNHelicalCriticalExchangeFieldRound102Exact
+import DASHI.Physics.Closure.NSTriadKNCriticalAubinLionsExponentWeldRound102Exact
+import DASHI.Physics.Closure.NSTriadKNClayFrontierRound102Exact
