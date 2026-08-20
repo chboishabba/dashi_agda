@@ -18,8 +18,8 @@ module DASHI.Core.AuthorityPromotionHierarchyExact where
 -- no external source is used as proof of this project-specific hierarchy.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Product using (_×_; _,_)
+open import Agda.Builtin.List using (List)
+open import Agda.Builtin.String using (String)
 
 import DASHI.Core.ReopenableConsumerInterventionKernelExact as Kernel
 
@@ -82,10 +82,10 @@ record EdgePromotionWitness
     (edge : DirectPromotion from to) : Set₁ where
   constructor edgePromotionWitness
   field
-    policyReference : Agda.Builtin.String.String
-    evidenceReferences : Agda.Builtin.List.List Agda.Builtin.String.String
-    authorityReference : Agda.Builtin.String.String
-    scope : Agda.Builtin.String.String
+    policyReference : String
+    evidenceReferences : List String
+    authorityReference : String
+    scope : String
 
 open EdgePromotionWitness public
 
