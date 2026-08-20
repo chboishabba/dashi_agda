@@ -43,6 +43,10 @@ import Base369 as Base
 import DASHI.Cognition.PhaseEnrichedTrit as Phase
 import DASHI.Foundations.TernaryEndomorphismConjugacyExact as S3
 
+------------------------------------------------------------------------
+-- Existing Phase3 as the exponent carrier of the cubic roots of unity.
+------------------------------------------------------------------------
+
 phaseToTri : Phase.Phase3 → Base.TriTruth
 phaseToTri Phase.phase0 = Base.tri-low
 phaseToTri Phase.phase1 = Base.tri-mid
@@ -64,7 +68,8 @@ triPhaseRoundTrip Base.tri-mid = refl
 triPhaseRoundTrip Base.tri-high = refl
 
 phaseMul : Phase.Phase3 → Phase.Phase3 → Phase.Phase3
-phaseMul left right = triToPhase (Base.triXor (phaseToTri left) (phaseToTri right))
+phaseMul left right =
+  triToPhase (Base.triXor (phaseToTri left) (phaseToTri right))
 
 phaseOne : Phase.Phase3
 phaseOne = Phase.phase0
@@ -75,10 +80,12 @@ phaseZeta = Phase.phase1
 phaseZetaSquared : Phase.Phase3
 phaseZetaSquared = Phase.phase2
 
-zetaSquaredTimesZetaIsOne : phaseMul phaseZetaSquared phaseZeta ≡ phaseOne
+zetaSquaredTimesZetaIsOne :
+  phaseMul phaseZetaSquared phaseZeta ≡ phaseOne
 zetaSquaredTimesZetaIsOne = refl
 
-zetaCubedIsOne : phaseMul phaseZeta (phaseMul phaseZeta phaseZeta) ≡ phaseOne
+zetaCubedIsOne :
+  phaseMul phaseZeta (phaseMul phaseZeta phaseZeta) ≡ phaseOne
 zetaCubedIsOne = refl
 
 phaseInverse : Phase.Phase3 → Phase.Phase3
@@ -95,44 +102,67 @@ zetaInverseIsZetaSquared = refl
 zetaSquaredInverseIsZeta : phaseInverse phaseZetaSquared ≡ phaseZeta
 zetaSquaredInverseIsZeta = refl
 
-conjugateInvolutive : (p : Phase.Phase3) → phaseConjugate (phaseConjugate p) ≡ p
+conjugateInvolutive :
+  (p : Phase.Phase3) → phaseConjugate (phaseConjugate p) ≡ p
 conjugateInvolutive Phase.phase0 = refl
 conjugateInvolutive Phase.phase1 = refl
 conjugateInvolutive Phase.phase2 = refl
 
+------------------------------------------------------------------------
+-- Rotation is multiplication by zeta.
+------------------------------------------------------------------------
+
 zetaRotate : Phase.Phase3 → Phase.Phase3
 zetaRotate p = phaseMul phaseZeta p
 
-zetaRotateIsExistingRotation : (p : Phase.Phase3) → zetaRotate p ≡ Phase.rotatePhase p
+zetaRotateIsExistingRotation :
+  (p : Phase.Phase3) → zetaRotate p ≡ Phase.rotatePhase p
 zetaRotateIsExistingRotation Phase.phase0 = refl
 zetaRotateIsExistingRotation Phase.phase1 = refl
 zetaRotateIsExistingRotation Phase.phase2 = refl
 
-zetaRotateThree : (p : Phase.Phase3) → zetaRotate (zetaRotate (zetaRotate p)) ≡ p
+zetaRotateThree :
+  (p : Phase.Phase3) →
+  zetaRotate (zetaRotate (zetaRotate p)) ≡ p
 zetaRotateThree Phase.phase0 = refl
 zetaRotateThree Phase.phase1 = refl
 zetaRotateThree Phase.phase2 = refl
+
+------------------------------------------------------------------------
+-- The three characters of C3, represented by their root exponents.
+-- chi_k(g) = zeta^(k g).
+------------------------------------------------------------------------
 
 character : Phase.Phase3 → Phase.Phase3 → Phase.Phase3
 character Phase.phase0 g = Phase.phase0
 character Phase.phase1 g = g
 character Phase.phase2 g = phaseInverse g
 
-characterRow : Phase.Phase3 → Phase.Phase3 × (Phase.Phase3 × Phase.Phase3)
-characterRow k = character k Phase.phase0 , (character k Phase.phase1 , character k Phase.phase2)
+characterRow :
+  Phase.Phase3 → Phase.Phase3 × (Phase.Phase3 × Phase.Phase3)
+characterRow k =
+  character k Phase.phase0 ,
+  (character k Phase.phase1 , character k Phase.phase2)
 
-characterRow0Exact : characterRow Phase.phase0 ≡ (Phase.phase0 , (Phase.phase0 , Phase.phase0))
+characterRow0Exact :
+  characterRow Phase.phase0
+  ≡ (Phase.phase0 , (Phase.phase0 , Phase.phase0))
 characterRow0Exact = refl
 
-characterRow1Exact : characterRow Phase.phase1 ≡ (Phase.phase0 , (Phase.phase1 , Phase.phase2))
+characterRow1Exact :
+  characterRow Phase.phase1
+  ≡ (Phase.phase0 , (Phase.phase1 , Phase.phase2))
 characterRow1Exact = refl
 
-characterRow2Exact : characterRow Phase.phase2 ≡ (Phase.phase0 , (Phase.phase2 , Phase.phase1))
+characterRow2Exact :
+  characterRow Phase.phase2
+  ≡ (Phase.phase0 , (Phase.phase2 , Phase.phase1))
 characterRow2Exact = refl
 
 characterPreservesPhaseMul :
   (k left right : Phase.Phase3) →
-  character k (phaseMul left right) ≡ phaseMul (character k left) (character k right)
+  character k (phaseMul left right)
+  ≡ phaseMul (character k left) (character k right)
 characterPreservesPhaseMul Phase.phase0 Phase.phase0 Phase.phase0 = refl
 characterPreservesPhaseMul Phase.phase0 Phase.phase0 Phase.phase1 = refl
 characterPreservesPhaseMul Phase.phase0 Phase.phase0 Phase.phase2 = refl
@@ -161,8 +191,12 @@ characterPreservesPhaseMul Phase.phase2 Phase.phase2 Phase.phase0 = refl
 characterPreservesPhaseMul Phase.phase2 Phase.phase2 Phase.phase1 = refl
 characterPreservesPhaseMul Phase.phase2 Phase.phase2 Phase.phase2 = refl
 
+-- One-sector rotation is diagonal in character coordinates: chi_k(r g)
+-- differs from chi_k(g) by the eigenvalue zeta^k.
 characterDiagonalizesRotation :
-  (k g : Phase.Phase3) → character k (zetaRotate g) ≡ phaseMul k (character k g)
+  (k g : Phase.Phase3) →
+  character k (zetaRotate g)
+  ≡ phaseMul k (character k g)
 characterDiagonalizesRotation Phase.phase0 Phase.phase0 = refl
 characterDiagonalizesRotation Phase.phase0 Phase.phase1 = refl
 characterDiagonalizesRotation Phase.phase0 Phase.phase2 = refl
@@ -173,11 +207,17 @@ characterDiagonalizesRotation Phase.phase2 Phase.phase0 = refl
 characterDiagonalizesRotation Phase.phase2 Phase.phase1 = refl
 characterDiagonalizesRotation Phase.phase2 Phase.phase2 = refl
 
+------------------------------------------------------------------------
+-- Reflection/conjugation and the dihedral/S3 relation s r s = r^-1.
+------------------------------------------------------------------------
+
 zetaRotateInverse : Phase.Phase3 → Phase.Phase3
 zetaRotateInverse p = phaseMul phaseZetaSquared p
 
 conjugateRotateConjugateIsInverse :
-  (p : Phase.Phase3) → phaseConjugate (zetaRotate (phaseConjugate p)) ≡ zetaRotateInverse p
+  (p : Phase.Phase3) →
+  phaseConjugate (zetaRotate (phaseConjugate p))
+  ≡ zetaRotateInverse p
 conjugateRotateConjugateIsInverse Phase.phase0 = refl
 conjugateRotateConjugateIsInverse Phase.phase1 = refl
 conjugateRotateConjugateIsInverse Phase.phase2 = refl
@@ -192,7 +232,9 @@ phaseReflectionPermutation = S3.permSwapMidHigh
 
 rotationPermutationMatchesPhase :
   (rotation p : Phase.Phase3) →
-  S3.applyPermutation (phaseRotationPermutation rotation) (phaseToTri p)
+  S3.applyPermutation
+    (phaseRotationPermutation rotation)
+    (phaseToTri p)
   ≡ phaseToTri (phaseMul rotation p)
 rotationPermutationMatchesPhase Phase.phase0 Phase.phase0 = refl
 rotationPermutationMatchesPhase Phase.phase0 Phase.phase1 = refl
@@ -206,7 +248,8 @@ rotationPermutationMatchesPhase Phase.phase2 Phase.phase2 = refl
 
 reflectionPermutationMatchesConjugation :
   (p : Phase.Phase3) →
-  S3.applyPermutation phaseReflectionPermutation (phaseToTri p) ≡ phaseToTri (phaseConjugate p)
+  S3.applyPermutation phaseReflectionPermutation (phaseToTri p)
+  ≡ phaseToTri (phaseConjugate p)
 reflectionPermutationMatchesConjugation Phase.phase0 = refl
 reflectionPermutationMatchesConjugation Phase.phase1 = refl
 reflectionPermutationMatchesConjugation Phase.phase2 = refl
@@ -222,12 +265,13 @@ record Phase3RootCharacterBoundary : Set where
     hilbertOrBornInterpretationClaimed : Bool
 
 canonicalPhase3RootCharacterBoundary : Phase3RootCharacterBoundary
-canonicalPhase3RootCharacterBoundary = record
-  { existingPhaseCarrierReused = true
-  ; cubicRootRelationsExact = true
-  ; characterTableExact = true
-  ; rotationDiagonalized = true
-  ; reflectionIsExistingS3Permutation = true
-  ; complexAnalyticRealizationConstructed = false
-  ; hilbertOrBornInterpretationClaimed = false
-  }
+canonicalPhase3RootCharacterBoundary =
+  record
+    { existingPhaseCarrierReused = true
+    ; cubicRootRelationsExact = true
+    ; characterTableExact = true
+    ; rotationDiagonalized = true
+    ; reflectionIsExistingS3Permutation = true
+    ; complexAnalyticRealizationConstructed = false
+    ; hilbertOrBornInterpretationClaimed = false
+    }
