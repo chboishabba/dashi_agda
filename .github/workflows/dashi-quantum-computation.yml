@@ -1,6 +1,16 @@
 name: DASHI quantum computation bridge
 
 on:
+  push:
+    paths:
+      - 'DASHI/Algebra/Quantum/DASHIQuantumBridge.agda'
+      - 'DASHI/Algebra/Quantum/DASHIHybridExecution.agda'
+      - 'DASHI/Algebra/Quantum/DASHIStructuredStateCompression.agda'
+      - 'DASHI/Algebra/Quantum/DASHIQuantumNormalForm.agda'
+      - 'DASHI/Algebra/Quantum/DASHIQuantumComputationProgram.agda'
+      - 'docs/dashi_quantum_computation_program.md'
+      - 'scripts/run_agda29_parallel_check.sh'
+      - '.github/workflows/dashi-quantum-computation.yml'
   pull_request:
     paths:
       - 'DASHI/Algebra/Quantum/DASHIQuantumBridge.agda'
@@ -13,7 +23,7 @@ on:
       - '.github/workflows/dashi-quantum-computation.yml'
 
 concurrency:
-  group: dashi-global-${{ github.ref }}
+  group: dashi-quantum-computation-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:
@@ -28,7 +38,6 @@ jobs:
       - uses: cachix/install-nix-action@v31
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
-      - uses: DeterminateSystems/magic-nix-cache-action@v9
       - name: Restore Agda 2.9 shadow cache
         uses: actions/cache@v4
         with:
