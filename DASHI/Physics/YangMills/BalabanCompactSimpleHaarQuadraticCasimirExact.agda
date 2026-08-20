@@ -57,16 +57,15 @@ module DASHI.Physics.YangMills.BalabanCompactSimpleHaarQuadraticCasimirExact whe
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Integer.Base using (+_)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _-_; _*_; _/_; _≤_; _<_)
+open import Data.Rational.Base as ℚ using
+  (ℚ; 0ℚ; _-_; _*_; _/_; _≤_; NonNegative; nonNegative)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.CompactSimpleClassification as Types
 import DASHI.Physics.YangMills.CompactSimpleClassificationAdjointCasimirExact as Class
-
-twentyFour : ℚ
-twentyFour = + 24 / 1
 
 oneTwentyFourth : ℚ
 oneTwentyFourth = + 1 / 24
@@ -106,26 +105,33 @@ haarQuadraticCoefficientNonnegative :
   (dataSet : AdjointTraceCasimirData) →
   0ℚ ≤ haarEffectiveActionQuadraticCoefficient dataSet
 haarQuadraticCoefficientNonnegative dataSet =
+  let
+    c = adjointCasimir dataSet
+    n = normSquared dataSet
+
+    instance
+      cNN : NonNegative c
+      cNN = nonNegative (adjointCasimirNonnegative dataSet)
+      nNN : NonNegative n
+      nNN = nonNegative (normSquaredNonnegative dataSet)
+      qNN : NonNegative oneTwentyFourth
+      qNN = nonNegative (ℚP.nonNegative⁻¹ oneTwentyFourth)
+      cqNN : NonNegative (c * oneTwentyFourth)
+      cqNN = ℚP.nonNeg*nonNeg⇒nonNeg c oneTwentyFourth
+      cqnNN : NonNegative ((c * oneTwentyFourth) * n)
+      cqnNN = ℚP.nonNeg*nonNeg⇒nonNeg (c * oneTwentyFourth) n
+
+    rhsNonnegative : 0ℚ ≤ (c * oneTwentyFourth) * n
+    rhsNonnegative = ℚP.nonNegative⁻¹ ((c * oneTwentyFourth) * n)
+  in
   subst
     (λ coefficient → 0ℚ ≤ coefficient)
     (sym (haarQuadraticCoefficientIsCasimirOverTwentyFour dataSet))
-    (let
-      oneTwentyFourthNonnegative : 0ℚ ≤ oneTwentyFourth
-      oneTwentyFourthNonnegative = ℚP.nonNegative⁻¹ oneTwentyFourth
-      casimirTimesNormNonnegative :
-        0ℚ ≤ adjointCasimir dataSet * normSquared dataSet
-      casimirTimesNormNonnegative =
-        ℚP.*-mono-≤
-          ℚP.≤-refl (adjointCasimirNonnegative dataSet)
-          ℚP.≤-refl (normSquaredNonnegative dataSet)
-     in
-      ℚP.*-mono-≤
-        ℚP.≤-refl casimirTimesNormNonnegative
-        ℚP.≤-refl oneTwentyFourthNonnegative)
+    rhsNonnegative
 
 record ClassifiedHaarQuadraticData : Set₁ where
   field
-    lieType : Class.Class.SimpleLieType
+    lieType : Types.SimpleLieType
     normSquared : ℚ
     traceAdSquared : ℚ
     normSquaredNonnegative : 0ℚ ≤ normSquared
