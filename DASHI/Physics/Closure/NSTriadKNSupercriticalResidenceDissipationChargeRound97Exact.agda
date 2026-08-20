@@ -49,13 +49,13 @@ module DASHI.Physics.Closure.NSTriadKNSupercriticalResidenceDissipationChargeRou
 --   integral D (A-A_*)_+ <= escape.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _≤_; _<_ ; nonNegative)
+open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _≤_; _<_; nonNegative)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 
@@ -133,22 +133,26 @@ supercriticalCellHasDissipationPrice {C} {threshold} cell =
         (subst
           (λ upper → lambda * square A ≤ upper)
           rearrange lambdaAToBernstein)
+
+    dMeaning : lambda * lambda * E ≡ dissipation cell
+    dMeaning = sym (dissipationMeaning cell)
   in
   subst
     (λ D → lambda * square threshold ≤ C * D)
-    (dissipationMeaning cell)
+    dMeaning
     toRawD
 
 weightedResidencePrice :
   ∀ {C threshold} (cell : SupercriticalShellCell C threshold) →
   timeWeight cell * (shellScale cell * square threshold)
   ≤ C * (timeWeight cell * dissipation cell)
-weightedResidencePrice {C} cell =
+weightedResidencePrice {C} {threshold} cell =
   let
     dt = timeWeight cell
     base = supercriticalCellHasDissipationPrice cell
     scaled :
-      dt * (shellScale cell * square _) ≤ dt * (C * dissipation cell)
+      dt * (shellScale cell * square threshold)
+      ≤ dt * (C * dissipation cell)
     scaled =
       let instance dtNN = nonNegative (timeWeightNonnegative cell)
       in ℚP.*-monoˡ-≤-nonNeg dt base
@@ -158,7 +162,7 @@ weightedResidencePrice {C} cell =
   in
   subst
     (λ upper →
-      dt * (shellScale cell * square _) ≤ upper)
+      dt * (shellScale cell * square threshold) ≤ upper)
     rearrange scaled
 
 sumResidenceCost :
