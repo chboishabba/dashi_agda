@@ -98,3 +98,62 @@ advance.
 ## 4. Immediate discharge order
 1. Focus-check the directed-correlation and predicted-sector modules.
 5. Test whether the resulting separated fibres admit a natural five-class
+## 3. Correct Monster → SSP15 → FRACTRAN hierarchy
+`DASHI/Combinatorics/MonsterSSPFractranProjection.agda` records the stronger and
+more faithful interpretation:
+Monster-side object / representation / orbit data
+  -> project to multiplicities on the fifteen supersingular primes
+  -> SSP15 exponent state
+  -> FRACTRAN execution over that selected prime basis
+Thus SSP15 is the compressed Monster-facing basis, while FRACTRAN is the
+prime-exponent transition language. The core state is:
+SSP15ExponentState = SSP -> Nat
+A `MonsterSSPCompression` must identify exactly which Monster-side equivalence is
+captured by equal SSP15 projections. A `MonsterSSPResidualCodec` adds the missing
+non-SSP detail when exact reconstruction is required.
+The actual dynamic bridge is a commuting-square obligation:
+project (monsterStep object)
+  = fractranStep (project object)
+This is packaged by `MonsterSSPFractranSimulation`. It is not derived merely from
+the fact that both sides mention primes.
+## 4. Relation to the existing EV5 FRACTRAN toy
+`DASHI/Combinatorics/TriadFiveFractranIndex.agda` remains a useful finite adapter to
+the repo's existing concrete `FractranCOL.EV5` machine. It should now be read as a
+toy/indexing lane, not as the primary Monster compression theorem.
+The primary structure is fifteen SSP prime lanes. The existing five-lane machine is
+only one bounded executable fragment. Three EV5 banks can model a `3 × 5` table,
+but this does not itself prove that the Monster projection factors into those three
+banks.
+## 5. Generic SSP15 quotient codec
+`DASHI/Combinatorics/SSP15FractranCompression.agda` remains useful as a generic
+codec contract. It separates:
+1. an outcome-preserving quotient,
+2. a lossless label-plus-residual codec,
+3. a dynamics-preserving compressed transition.
+However, an arbitrary `EV5 -> SSP` classifier is not the canonical Monster story.
+For the Monster-facing lane, the encoder should arise by first projecting Monster
+structure onto the fifteen SSP multiplicities and only then executing or compressing
+that exponent state.
+## 6. Combined flow
+computed Hecke sector data
+  -> promoted invariant
+  -> candidate Monster-side structural interpretation
+  -> fifteen-SSP multiplicity projection
+  -> SSP15 prime-exponent state
+  -> FRACTRAN transition system
+  -> optional residual outside SSP15
+  -> outcome / transition / run receipts
+The Monster-facing compression is therefore upstream of FRACTRAN execution, not a
+post-hoc relabeling of arbitrary FRACTRAN states.
+## 7. Immediate discharge order
+1. Focus-check the MDL, triad-five, SSP projection, and FRACTRAN modules.
+2. Specify the actual Monster-side carrier being compressed.
+3. Define the fifteen SSP multiplicity/invariant projection.
+4. Prove projection soundness and completeness for the declared Monster-side
+   equivalence.
+5. Define FRACTRAN instructions over `SSP15ExponentState`.
+6. Prove the Monster step / FRACTRAN step commuting square.
+7. Add a residual channel for structure outside the SSP projection when exact
+   reconstruction is required.
+8. Charge the model, projected state, transition program, and residual using MDL.
+9. Only after those steps attempt a representation or moonshine interpretation.
