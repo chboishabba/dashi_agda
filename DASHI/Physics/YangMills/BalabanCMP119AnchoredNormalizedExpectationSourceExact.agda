@@ -87,9 +87,8 @@ record CMP119LocalInsertionDictionary
     IsSourceLocalAnalyticInsertion : RepositoryInsertion → Set
 
     repositoryNormalizedExpectation :
-      (scale : Scale source) → RepositoryInsertion →
-      NormalizedExpectation source scale
-        (repositoryAnchor)
+      (scale : Scale source) → (insertion : RepositoryInsertion) →
+      NormalizedExpectation source scale (repositoryAnchor insertion)
 
     repositoryInsertionIsRepresented :
       ∀ scale insertion →
