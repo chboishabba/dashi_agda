@@ -1,6 +1,14 @@
 name: NS Round40 defect measure adjoint Com
 
 on:
+  push:
+    branches:
+      - agent/ns-defect-measure-adjoint-com-round40
+    paths:
+      - 'DASHI/Physics/Closure/NSTriadKN*Round40Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNDefectMeasureAdjointComRound40Validation.agda'
+      - 'scripts/check_ns_defect_measure_adjoint_com_round40.sh'
+      - '.github/workflows/ns-defect-measure-adjoint-com-round40.yml'
   pull_request:
     paths:
       - 'DASHI/Physics/Closure/NSTriadKN*Round40Exact.agda'
@@ -12,11 +20,6 @@ on:
       - '.github/workflows/ns-defect-measure-adjoint-com-round40.yml'
       - '.github/workflows/ns-defect-density-annular-com-round41.yml'
   workflow_dispatch:
-
-
-concurrency:
-  group: dashi-global-${{ github.ref }}
-  cancel-in-progress: true
 
 jobs:
   agda-round40:
