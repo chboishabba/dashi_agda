@@ -5,7 +5,7 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound84Validation where
 --
 -- Import the established Round61 integration surface first, then the current
 -- shortest Clay-facing stack and all Round88 theorem-bearing reductions:
--- coefficient-energy marked sources, CMP109 mixed-jet beta extraction, and the
+-- geometric-shell marked sources, CMP109 mixed-jet beta extraction, and the
 -- one-outer-component -> canonical four-dimensional Wilson denominator gap.
 --
 -- Import success establishes source/type correctness only; it does not inhabit
@@ -21,6 +21,7 @@ import DASHI.Physics.YangMills.BalabanCompactSimpleFourOrbitHalfRemainderExact
 import DASHI.Physics.YangMills.BalabanCMP109MixedDerivativeBetaExtractionExact
 import DASHI.Physics.YangMills.BalabanMarkedSourceNuclearCompositeFieldExact
 import DASHI.Physics.YangMills.BalabanMarkedSourceCoefficientEnergyHilbertCompilerExact
+import DASHI.Physics.YangMills.BalabanMarkedSourceGeometricShellEnergyExact
 import DASHI.Physics.YangMills.BalabanOPECoefficientRGRecurrenceUniquenessExact
 import DASHI.Physics.YangMills.YangMillsStressChargeLocalCoreCutoffStabilizationExact
 import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound85SixAnalyticLemmaAttackExact
