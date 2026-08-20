@@ -10,7 +10,8 @@ module DASHI.Environment.LESResearchCrossPollinationRound4Exact where
 -- approximate abstraction, adaptive fidelity, temporal shift/hysteresis,
 -- shared-source uncertainty, exact dependency closure, dense/hybrid time,
 -- bounded Pareto completeness, plural preferences, reactive agents and
--- governance legitimacy.
+-- governance legitimacy.  Existing repository policy-relative safety and
+-- query-factorisation cores are reused rather than reimplemented.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
@@ -26,6 +27,7 @@ import DASHI.Core.FiniteStochasticRewardPreservationExact as StochasticReward
 import DASHI.Core.IdentifiabilityActiveInformationExact as Information
 import DASHI.Core.PartialObservationBeliefSafetyExact as Partial
 import DASHI.Core.PluralPreferenceNonCollapseExact as Preference
+import DASHI.Core.PolicyRelativeProjectionSafety as Policy
 import DASHI.Core.ReopenableConsumerInterventionKernelExact as Core
 import DASHI.Core.SharedSourceUncertaintyExact as SharedUncertainty
 import DASHI.Core.SocioEcologicalFeedbackExact as Social
@@ -36,6 +38,7 @@ import DASHI.Environment.DenseTimeHybridSemigroupExact as DenseHybrid
 import DASHI.Environment.HybridTraceSafetyExact as HybridTrace
 import DASHI.Environment.LESResearchCrossPollinationRound2Exact as Round2
 import DASHI.Environment.LESResearchCrossPollinationRound3Exact as Round3
+import DASHI.Environment.TaskFactorisationQuerySufficiencyBridgeExact as TaskQuery
 import DASHI.Governance.ApprovalLegitimacyNonfactorabilityExact as Governance
 
 ------------------------------------------------------------------------
@@ -77,6 +80,18 @@ round2RobustnessImpliesDeclaredRobustness robust =
   Robustness.robustOnDeclared λ future member →
     Round2.evaluationIsForPlan robust future ,
     Round2.allDeclaredFuturesAcceptable robust future
+
+------------------------------------------------------------------------
+-- Existing policy-relative safety is strictly weaker than unrestricted dynamic
+-- safety in general; retain the repository's finite witness as an LES design
+-- constraint so expensive compression need only be justified for the declared
+-- action language/policy when that is genuinely the consumer contract.
+------------------------------------------------------------------------
+
+policySafeButNotGloballyDynamicWitness :
+  Policy.PolicySafeButNotDynamicallySafeWitness
+policySafeButNotGloballyDynamicWitness =
+  Policy.canonicalPolicySafeButNotDynamicallySafeWitness
 
 ------------------------------------------------------------------------
 -- Concrete gap-closing witnesses at one review surface.
@@ -161,14 +176,16 @@ record LESRound4FormalClosureStatus : Set where
     socioEcologicalReactiveCounterexampleConstructed : Bool
     approvalLegitimacyNonfactorabilityConstructed : Bool
     declaredScenarioRobustnessConstructed : Bool
+    policyRelativeSafetyReuseRecorded : Bool
+    taskFactorisationQueryCoreReuseRecorded : Bool
 
 open LESRound4FormalClosureStatus public
 
 canonicalLESRound4FormalClosureStatus : LESRound4FormalClosureStatus
 canonicalLESRound4FormalClosureStatus =
   lesRound4FormalClosureStatus
-    true true true true true true true true true true
-    true true true true true true true true true true
+    true true true true true true true true true true true
+    true true true true true true true true true true true
 
 record LESRound4RemainingScientificFrontier : Set where
   constructor lesRound4RemainingScientificFrontier
