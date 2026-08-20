@@ -15,43 +15,31 @@ module DASHI.Physics.Closure.NSTriadKNPhysicalPacketBoundaryFluxLogReserveRound9
 --
 -- ROUND98 / PHYSICAL PACKET BOUNDARY-FLUX LOG-RESERVE WELD
 --
--- This is the same-object theorem requested after Round97, with the factor
--- convention corrected by the selected F4 audit.
+-- On the literal projected finite Galerkin equation, pair every selected
+-- retained mode with u_k and sum over the literal cutoff. Round98's selected
+-- F4 theorem identifies the nonlinear side with the correctly normalized
+-- Round96 boundary flux:
 --
--- For the literal finite projected Galerkin equation
+--   E'_P + D_P = (1/6) sumBoundaryTransfer.
 --
---   u_t(k) + visc(k) = P_NL(k),
+-- The factor 1/6 is forced by Round38/Round39: Round96 sums all three energy
+-- legs using ordered-pair power, while the actual projected PDE pairing is the
+-- raw ordered-incidence fold. There is no hidden convention left to choose.
 --
--- pair every selected retained mode with u_k, sum over the literal cutoff,
--- and use Round98's selected F4 theorem.  The result is
---
---   E'_P + D_P = F_boundary,
---
--- where
---
---   F_boundary = (1/6) * Round96.sumBoundaryTransfer.
---
--- The factor 1/6 is forced by the existing convention: Round96 sums all three
--- energy legs and uses ordered-pair power, whereas the actual projected PDE
--- pairing is the raw ordered-incidence fold.  Round38 proves the corresponding
--- global factor six and the selected theorem proves its packet analogue.
---
--- The final theorem then applies Round97's denominator-free log-reserve
--- algebra:
+-- Round97's exact denominator-free logarithmic algebra then gives
 --
 --   r(-E'_P) + r F_boundary = r D_P.
 --
--- Thus packet-boundary influx is owned by -log(E_P) with its signed favorable
--- contribution.  No positive-part occupation/Bony/amplitude tax is needed for
--- this packet component.
+-- Hence packet-boundary influx is already owned by the -log(E_P) reserve and
+-- requires no positive-part occupation/Bony/amplitude tax at this component.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; -_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier as Cube
@@ -60,6 +48,7 @@ import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNComplex3RealityPhaseAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Equation
 import DASHI.Physics.Closure.NSTriadKNF4ProjectedOutputPairingRound39Exact as Pairing
+import DASHI.Physics.Closure.NSTriadKNPhysicalPacketBoundaryFluxRound96Exact as Round96
 import DASHI.Physics.Closure.NSTriadKNPacketBoundaryFluxNormalizationRound98Exact as Norm
 import DASHI.Physics.Closure.NSTriadKNSelectedPacketProjectedPairingRound98Exact as Selected
 import DASHI.Physics.Closure.NSTriadKNPacketLogReserveBoundaryFluxCancellationRound97Exact as LogReserve
@@ -73,7 +62,7 @@ selectedPairing :
   (Z3.FourierMode → C3.Complex3 F) →
   Z3.FourierMode → ℚ
 selectedPairing selected test value output =
-  Selected.Round96.selectTransfer (selected output)
+  Round96.selectTransfer (selected output)
     (Pairing.realHermitianPower (test output) (value output))
 
 sumSelectedPairing :
@@ -139,22 +128,15 @@ selectedModeProjectedODEPairing system L selected output listed
   with selected output
 ... | false = solve []
 ... | true =
-  let
-    odeAtOutput =
-      Equation.projectedODE (equation L) output
-        (cutoffModeListed L output listed)
-    pairedODE =
-      cong
-        (Pairing.realHermitianPower (Equation.velocity system output))
-        odeAtOutput
-  in
   trans
-    (sym
-      (Pairing.realHermitianPowerAddRight
-        (Equation.velocity system output)
-        (Equation.timeDerivative (equation L) output)
-        (Equation.viscousTerm (equation L) output)))
-    pairedODE
+    (Pairing.realHermitianPowerAddRight
+      (Equation.velocity system output)
+      (Equation.timeDerivative (equation L) output)
+      (Equation.viscousTerm (equation L) output))
+    (cong
+      (Pairing.realHermitianPower (Equation.velocity system output))
+      (Equation.projectedODE (equation L) output
+        (cutoffModeListed L output listed)))
 
 sumSelectedProjectedODEPairing :
   {E : C3.IntegerEmbedding F} →
@@ -173,6 +155,14 @@ sumSelectedProjectedODEPairing :
 sumSelectedProjectedODEPairing system L selected [] listed = solve []
 sumSelectedProjectedODEPairing system L selected (output ∷ rest) listed =
   let
+    ht = selectedPairing selected (Equation.velocity system)
+      (Equation.timeDerivative (equation L)) output
+    hv = selectedPairing selected (Equation.velocity system)
+      (Equation.viscousTerm (equation L)) output
+    tt = sumSelectedPairing selected (Equation.velocity system)
+      (Equation.timeDerivative (equation L)) rest
+    tv = sumSelectedPairing selected (Equation.velocity system)
+      (Equation.viscousTerm (equation L)) rest
     headBalance = selectedModeProjectedODEPairing
       system L selected output (listed output (Cube.here refl))
     tailBalance = sumSelectedProjectedODEPairing
@@ -180,19 +170,8 @@ sumSelectedProjectedODEPairing system L selected (output ∷ rest) listed =
       (λ chosen member → listed chosen (Cube.there member))
   in
   trans
+    (solve (ht ∷ hv ∷ tt ∷ tv ∷ []))
     (cong₂ _+_ headBalance tailBalance)
-    (solve
-      ( selectedPairing selected (Equation.velocity system)
-          (Equation.timeDerivative (equation L)) output
-      ∷ selectedPairing selected (Equation.velocity system)
-          (Equation.viscousTerm (equation L)) output
-      ∷ sumSelectedPairing selected (Equation.velocity system)
-          (Equation.timeDerivative (equation L)) rest
-      ∷ sumSelectedPairing selected (Equation.velocity system)
-          (Equation.viscousTerm (equation L)) rest
-      ∷ Selected.selectedProjectedOutputPower system selected output
-      ∷ Selected.sumSelectedProjectedPairings system selected rest
-      ∷ []))
 
 literalSelectedProjectedODEEnergyBalance :
   {E : C3.IntegerEmbedding F} →
