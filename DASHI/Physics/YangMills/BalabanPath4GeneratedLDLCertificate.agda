@@ -24,8 +24,7 @@ open import DASHI.Physics.YangMills.BalabanRationalLDLCertificate
 -- The source supplies the standard finite LDL^T positivity method.  The
 -- coordinates, rational pivots, linear forms and exact polynomial identity
 -- below are DASHI-owned.  In particular, the reconstruction is now checked by
--- Agda's rational ring normalizer rather than admitted as a generated
--- postulate.
+-- Agda's rational ring normalizer rather than admitted as a generated axiom.
 ------------------------------------------------------------------------
 
 ------------------------------------------------------------------------
