@@ -1,15 +1,11 @@
 # Compact Lie groups in the DASHI Yang–Mills route
 
 This surface separates three obligations that were previously easy to conflate:
-
 1. exact algebra and lattice identities that Agda can check locally;
 2. standard finite-dimensional compact-Lie-group theorems imported through an explicit authority socket;
 3. conditional and conjectural analytic targets required by the four-dimensional Balaban/Clay route.
-
 ## Proof levels
-
 `CompactLieProofLevel.agda` defines five levels:
-
 | Level | Meaning | Locally promotable |
 |---|---|---|
 | `computed` | definitional or normalized computation | yes |
@@ -17,13 +13,9 @@ This surface separates three obligations that were previously easy to conflate:
 | `standardImported` | established external theorem, isolated at an authority boundary | no |
 | `conditional` | theorem proved after named hypotheses are supplied | no |
 | `conjectural` | exact target type with no witness yet | no |
-
 A conjectural record is executable theorem **shape**, not evidence that the theorem holds.
-
 ## Machine-checked layer
-
 The exact surface proves or assembles:
-
 - ordinary consequences of the group axioms, including cancellation, inverse involution, conjugation, and internal-vertex cancellation;
 - path-holonomy gauge covariance for an arbitrary group and arbitrary directed lattice;
 - gauge invariance of every closed-loop class-function observable;
@@ -36,13 +28,9 @@ The exact surface proves or assembles:
 - `C_G L_N ≤ ρ` plus the local critical-map estimate to a contraction estimate at `ρ`;
 - assembly of fixed-point/critical-point, minimizer, gauge-orbit, and analytic-dependence interfaces into the background-field package;
 - finite reflection positivity from an explicit sum-of-squares factorization and preservation under compatible blocking pullback.
-
 The quaternion rotation polynomials therefore become a concrete implementation of generic `Ad`, rather than a dependency of the generic theory.
-
 ## Concrete SU(N) matrix lane
-
 The next surface adds a finite-matrix presentation that is independent of quaternion accidents:
-
 - `SUNMatrixCarrier.agda` defines special-unitary matrices by the equations
   `U†U = I`, `UU† = I`, and `det U = 1`, then assembles the group structure;
 - `SUNMatrixLieAlgebra.agda` defines traceless anti-Hermitian matrices and the commutator bracket, then assembles the Lie algebra;
@@ -52,25 +40,17 @@ The next surface adds a finite-matrix presentation that is independent of quater
 - `SUNWilsonClassFunction.agda` turns normalized real trace into a checked class function and instantiates closed-loop gauge invariance;
 - `SUNWilsonAction.agda` defines the finite plaquette sum and proves gauge invariance of the full Wilson action by induction over plaquettes;
 - `SUNWilsonReflectionPositivity.agda` converts the standard Peter–Weyl/Haar interface factorization into a finite OS-positive Wilson form.
-
 Finite complex-matrix algebra, determinant identities, compactness, connectedness, simplicity, exponential-chart facts, cyclicity of trace, and the Peter–Weyl interface factorization are `standardImported`. The subtype construction and all group/Lie/metric/chart/Wilson/OS record assembly are `machineChecked`.
-
 ## Standard imported layer
-
 `CompactLieAnalyticPackage.agda` states the actual theorem interfaces for:
-
 - an invariant positive metric and bi-invariant group distance;
 - a quantitative local exponential/logarithm chart;
 - BCH with a cubic remainder bound;
 - normalized Haar integration;
 - Peter–Weyl orthogonality, completeness, Weyl integration, and character bounds.
-
 `CompactLieStandardAuthority.agda` is the sole imported theorem socket for these classical facts. It also provides the explicitly named imported `SU(2)` analytic package. These witnesses are deliberately not marked locally promotable.
-
 ## Constructive analytic stack
-
 `ConstructiveYangMillsNextSurface.agda` compiles the proof chain in the order in which the mathematics must close:
-
 1. `BalabanFiniteInverseConsequences.agda` derives injectivity and uniqueness from the finite Hessian/Green inverse certificate;
 2. `BalabanFiniteCoerciveGreen.agda` isolates the standard finite-dimensional coercivity-to-inverse theorem and checks its conversion into the repository's Green and inverse certificates;
 3. `BalabanUniformNeumannAsymptoticResidual.agda` separates finite Neumann control from geometric-power vanishing;
@@ -83,11 +63,8 @@ Finite complex-matrix algebra, determinant identities, compactness, connectednes
 10. `FiniteReflectionPositivity.agda`, `SUNWilsonReflectionPositivity.agda`, and `ReflectionPositiveBlocking.agda` provide the finite Wilson OS positivity and compatible-blocking lane;
 11. `BalabanOSMassGapClosure.agda` separates continuum OS axioms, standard OS reconstruction, uniform clustering, and the physical spectral-gap transfer;
 12. `BalabanDashenGrossCalibration.agda` makes the generator, lattice-spacing, determinant, and coupling-scheme normalization factors explicit.
-
 ## Quantitative frontier closure
-
 The latest layer replaces the remaining opaque arrows with exact quantified theorem interfaces:
-
 - `BalabanUniformGreenNonlinearProduct.agda` represents
   `sup_{Λ,k,U₀,P} C_G L_N ≤ ρ_G < 1` by its exact order-theoretic content: one common strict factor bounds every indexed product. It derives the uniform residual-contraction target;
 - `BalabanOneStepPolymerEstimate.agda` splits the one-step remainder into background, Jacobian, determinant, BCH, and localization contributions and proves their additive budget estimate;
@@ -97,45 +74,62 @@ The latest layer replaces the remaining opaque arrows with exact quantified theo
 - `BalabanContinuumOSLimit.agda` separates cutoff OS0–OS5, convergence, and closure of each axiom under the chosen limit topology, then assembles the continuum Schwinger system;
 - `BalabanMassGapSurvival.agda` separates finite-cutoff spectral gaps, a common positive lower bound, and spectral convergence, then derives the surviving continuum gap;
 - `BalabanUniformToMassGapChain.agda` assembles all resulting certificates in dependency order without constructing any unresolved analytic input.
-
 The bridge theorems are `machineChecked`. The existence of the four-dimensional uniform Green/nonlinear constants, concrete Step V suppression, all-scale invariant data, continuum convergence, and a cutoff-uniform positive gap remains `conjectural`. The standard closure theorems for OS limits and spectral convergence remain `standardImported` authority boundaries.
-
 ## Proof-level audit
-
 `scripts/audit_constructive_yang_mills_levels.py` runs before the focused Agda check. It verifies that the locally checked assembly modules contain no `postulate`, authority boundaries retain `standardImported`, frontier fields retain `conditional` or `conjectural`, and the Clay promotion flag remains explicitly false.
-
 ## Remaining analytic frontier
-
 The new modules no longer leave the theorem chain structurally unspecified. They leave the following mathematical witnesses unresolved:
-
 - one strict `ρ_G < 1` and one product estimate uniform in volume, scale, admissible background, and patch regime;
 - the five concrete one-step polymer component estimates;
 - four-dimensional entropy-versus-suppression and transfer-cut estimates strong enough for KP summability;
 - componentwise preservation of the quantitative RG invariant domain with summable errors;
 - tightness/convergence of the cutoff Schwinger family and closure hypotheses for OS0–OS5;
 - a positive cutoff-uniform inverse correlation length or transfer-matrix gap and the hypotheses of the continuum spectral-transfer theorem.
-
 The final mass-gap target has no unconditional constructor and cannot self-promote.
-
 ## Quantifier discipline
-
 The intended theorem is group-parametric:
-
 ```text
 for every compact simple G
 there exist group constants ε_G, μ_G, ρ_G, C_G
 such that the estimates are uniform in lattice scale, volume,
 background, and patch regime.
 ```
-
 It does **not** demand a single numerical constant uniform over all compact simple groups.
-
 ## Canonical surfaces
-
 - `CompactLieExactSurface.agda`: exact locally checked mathematics.
 - `CompactLieAnalyticPackage.agda` and `CompactLieStandardAuthority.agda`: standard imported analysis.
 - `CompactLieYangMillsFrontier.agda`: conditional/conjectural theorem ledger.
 - `ConstructiveYangMillsNextSurface.agda`: concrete SU(N) and constructive analytic closure stack.
 - `CompactLieTheorySurface.agda`: aggregate compilation surface.
-
 No module in this stack sets the repository’s Clay Yang–Mills promotion flag.
+# Generic compact Lie-group layer for Yang–Mills
+The existing SU(2) development remains the concrete proof-development carrier.  This tranche adds the abstraction boundary required before any Yang–Mills theorem can be stated for every compact simple gauge group.
+## Layering
+`CompactLieGroupCore.agda` defines:
+- groups and Lie algebras;
+- exponential/logarithm and adjoint action;
+- adjoint functoriality and bracket preservation;
+- explicit compactness, connectedness, and Lie-algebra simplicity witnesses;
+- group and Lie-algebra homomorphisms.
+`CompactLieGroupGeometry.agda` owns the quantitative local geometry:
+- an invariant inner product, norm, and bi-invariant distance;
+- a uniform exponential chart and inverse chart;
+- dexp, inverse-dexp, bracket, and adjoint-Lipschitz bounds;
+- the distinction between group-dependent constants and scale/volume/background-uniform estimates.
+`CompactLieRepresentationData.agda` owns finite-dimensional representation data:
+- rank, dimension, roots, bases, and structure constants;
+- bounded root and structure-constant data;
+- normalized left/right invariant Haar measure and Weyl integration;
+- character bounds, spectral gaps away from the center, and tensor-product control.
+`CompactLieYangMillsBridge.agda` collects the analytic obligations needed by the Balaban lane:
+- generic gauge actions and gauge fixing;
+- Faddeev–Popov coercivity;
+- equivariant block averaging;
+- small-field chart compatibility;
+- large-field suppression and polymer diameter entropy;
+- reflection positivity and cluster decomposition;
+- one-step and iterated RG, infinite-volume limit, exponential clustering, and a positive mass gap.
+## SU(2) relationship
+The quaternion and rotation-polynomial modules are not discarded.  They should instantiate the generic records for `G = SU(2)` and prove that their concrete adjoint action agrees with generic `Ad`.  Quaternion polynomial identities then prove the SU(2) instance only; they cannot inhabit the generic theorem without a separate uniform compact-Lie-group argument.
+## Claim boundary
+This tranche supplies typed interfaces and promotion boundaries.  It does not prove the generic analytic estimates, construct Haar measure, classify root systems, establish a uniform RG iteration, or prove the four-dimensional Yang–Mills mass gap.  Those remain explicit fields rather than postulates hidden inside the SU(2) implementation.
