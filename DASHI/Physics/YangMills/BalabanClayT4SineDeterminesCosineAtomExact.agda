@@ -43,7 +43,8 @@ module DASHI.Physics.YangMills.BalabanClayT4SineDeterminesCosineAtomExact where
 -- functions independently.
 ------------------------------------------------------------------------
 
-open import Data.Rational.Base as ℚ using (ℚ)
+open import Data.Integer.Base using (+_)
+open import Data.Rational.Base as ℚ using (ℚ; _/_)
 
 import Real as Bishop
 import RealProperties as BishopP
@@ -136,11 +137,11 @@ derivedPhysicalTrigBoxData dataSet = record
 -- ordered-ring algebra after the definition above; no second transcendental
 -- enclosure is used.
 derivedHalfAngleCoherence : ∀ dataSet role axis →
-  (Canonical.twoValue Bishop.-
-    (Canonical.twoValue Bishop.* derivedCosineFullValue dataSet role axis))
-  Bishop.≃
-  Canonical.scaledSineSquareValue
-    (derivedPhysicalTrigBoxData dataSet) role axis
+  Bishop._≃_
+    (Canonical.twoValue Bishop.-
+      (Canonical.twoValue Bishop.* derivedCosineFullValue dataSet role axis))
+    (Canonical.scaledSineSquareValue
+      (derivedPhysicalTrigBoxData dataSet) role axis)
 derivedHalfAngleCoherence dataSet role axis =
   let open BishopP.ℝ-Solver
   in solve 1
