@@ -5,12 +5,14 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.List.Base using ([]; _∷_)
 
+import DASHI.Core.ReopenableConsumerInterventionCrossDomainRegression as CrossDomain
 import DASHI.Environment.DepthTruncation as Depth
 import DASHI.Environment.EcologicalEvidenceGates as Evidence
 import DASHI.Environment.EcologicalKnowledge as Knowledge
 import DASHI.Environment.LESResearchCrossPollinationExact as Research
 import DASHI.Environment.LESResearchCrossPollinationRound2Exact as Research2
 import DASHI.Environment.LESResearchCrossPollinationRound3Exact as Research3
+import DASHI.Environment.LESResearchCrossPollinationRound4Exact as Research4
 import DASHI.Environment.LESRuntimeBoundary as Runtime
 import DASHI.Environment.ParetoPlanning as Pareto
 import DASHI.Environment.QuantitiesConservation as Q
@@ -43,8 +45,7 @@ truncateOneIsPrefix = Depth.shallowerPrefixOfDeeper one one stream
 pondPathRecorded : Spatial.Path Pond.upperCatchment Pond.pond
 pondPathRecorded = Pond.phosphorusPath
 
-pondPolicyEscalates :
-  Pond.policyEscalates ≡ Pond.policyEscalates
+pondPolicyEscalates : Pond.policyEscalates ≡ Pond.policyEscalates
 pondPolicyEscalates = refl
 
 zeroNitrogenReceipt : Q.NitrogenBalance
@@ -105,6 +106,13 @@ uncertaintyConstitutionRecorded = Research3.canonicalLESUncertaintyConstitution
 
 researchRound3BoundaryRecorded : Research3.LESRound3Boundary
 researchRound3BoundaryRecorded = Research3.canonicalLESRound3Boundary
+
+round4ConsumerRelativityStillTheoremBearing :
+  (depth : Nat) →
+  DASHI.Core.ConsumerIndexedGovernedTransitionExact.FutureEquivalent
+    CrossDomain.publicSystem CrossDomain.public depth CrossDomain.left CrossDomain.right
+round4ConsumerRelativityStillTheoremBearing =
+  Research4.consumerRelativityRegression
 
 springfieldScenarioRecorded : Pond.SpringfieldPondGoldenScenario
 springfieldScenarioRecorded = Pond.canonicalSpringfieldPondGoldenScenario
