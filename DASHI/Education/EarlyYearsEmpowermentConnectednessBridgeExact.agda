@@ -5,26 +5,30 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
-import DASHI.Core.ObserverRefinementCore as Observer
 import DASHI.Education.CapabilityRecognitionExact as Recognition
 import DASHI.Education.CommunityConnectednessTopologyExact as Connectedness
-import DASHI.Education.EarlyLearningCounterfactualHeterogeneityExact as Counterfactual
-import DASHI.Education.EarlyLearningMultiOutcomeVectorExact as Outcomes
-import DASHI.Education.EarlyLearningSituatedPolicyRoutingSafetyExact as Routing
 import DASHI.Education.EarlyYearsEmpowermentConnectednessSourceRegistry as Sources
 import DASHI.Education.EarlyYearsStakeholderCoverageExact as Coverage
 import DASHI.Education.SituatedRelationalLearningAffordanceExact as Affordance
+import DASHI.Education.EarlyLearningCounterfactualHeterogeneityExact as Counterfactual
+import DASHI.Education.EarlyLearningMultiOutcomeVectorExact as Outcomes
+import DASHI.Education.EarlyLearningSituatedPolicyRoutingSafetyExact as Routing
+import DASHI.Core.ObserverRefinementCore as Observer
 import DASHI.Semantics.SIOSemanticSurfaceBridge as SIO
 
 ------------------------------------------------------------------------
 -- EARLY-YEARS EMPOWERMENT + CONNECTEDNESS BRIDGE
 --
--- This is a thin specialization over the #582 convergence stack. It does not
--- define empowerment as a scalar state. The exact structural object is a
+-- This is a thin specialization over the #582 convergence stack.  It does not
+-- define empowerment as a scalar state.  The proved structural object is a
 -- situated transition certificate: pre-existing capability remains present,
 -- a reachable/recognisable route opens, contestability is retained, relational
--- effectiveness is witnessed, no authority is manufactured, and any empirical
--- claim remains bounded by its active stakeholder evidence axes.
+-- effectiveness is witnessed, no authority is manufactured, and the claim is
+-- bounded by its active stakeholder evidence axes.
+--
+-- Policy/qualitative sources calibrate interpretation only.  The exact theorem
+-- remains weaker than a universal empirical claim that a real family was
+-- empowered by a particular intervention.
 ------------------------------------------------------------------------
 
 record EmpowermentPreconditions : Set where
@@ -58,17 +62,24 @@ record EmpowermentPostconditions : Set where
 open EmpowermentPostconditions public
 
 canonicalPreconditions : EmpowermentPreconditions
-canonicalPreconditions = empowermentPreconditions true true true true true true true true true true
+canonicalPreconditions =
+  empowermentPreconditions true true true true true true true true true true
 
 canonicalPostconditions : EmpowermentPostconditions
-canonicalPostconditions = empowermentPostconditions true true true true true true true true
+canonicalPostconditions =
+  empowermentPostconditions true true true true true true true true
+
+------------------------------------------------------------------------
+-- Exact structural certificate.
+------------------------------------------------------------------------
 
 record CapabilityExpandingWithoutDomination : Set where
   constructor capabilityExpandingWithoutDomination
   field
     beforeRecognition : Recognition.CapabilityRecognitionState
     afterRecognition : Recognition.CapabilityRecognitionState
-    recognitionTransition : Recognition.StrengthBasedRecognitionTransition beforeRecognition afterRecognition
+    recognitionTransition :
+      Recognition.StrengthBasedRecognitionTransition beforeRecognition afterRecognition
     connectionAfter : Connectedness.CommunityConnectionState
     connectionIsEffective : Connectedness.effectiveConnection connectionAfter ≡ true
     noConnectionAuthorityPromotion : Connectedness.currentAuthority connectionAfter ≡ false
@@ -81,10 +92,18 @@ open CapabilityExpandingWithoutDomination public
 canonicalCapabilityExpandingWithoutDomination : CapabilityExpandingWithoutDomination
 canonicalCapabilityExpandingWithoutDomination =
   capabilityExpandingWithoutDomination
-    Recognition.latentUnrecognised Recognition.reachableRecognised
-    Recognition.mulchingShapeTransition Connectedness.effectivePeerConnection
-    refl refl canonicalPreconditions canonicalPostconditions
+    Recognition.latentUnrecognised
+    Recognition.reachableRecognised
+    Recognition.mulchingShapeTransition
+    Connectedness.effectivePeerConnection
+    refl refl
+    canonicalPreconditions
+    canonicalPostconditions
     "finite strength-based witness: existing capability becomes reachable, legible and recognised through an effective peer/community route while decline and non-authority boundaries are retained"
+
+------------------------------------------------------------------------
+-- Existing upstream invariants are carried into the bridge, not re-proved.
+------------------------------------------------------------------------
 
 reachableContestableAffordanceGate : Affordance.ReachableContestableAffordanceGate
 reachableContestableAffordanceGate = Affordance.canonicalReachableContestableAffordanceGate
@@ -101,6 +120,20 @@ communityConnectednessBoundary = Connectedness.canonicalCommunityConnectednessBo
 peerCatalystBoundary : Connectedness.PeerCatalystBoundary
 peerCatalystBoundary = Connectedness.canonicalPeerCatalystBoundary
 
+------------------------------------------------------------------------
+-- Observer-family reading.
+--
+-- `ObserverRefinementCore` remains the theorem owner for pair observers,
+-- component-below-join laws and the least-upper-bound theorem.  SIO remains the
+-- interoperable semantic surface.  Importing either here does not turn product
+-- observation into semantic/evidential pooling permission.
+------------------------------------------------------------------------
+
+------------------------------------------------------------------------
+-- No-promotion permissions.  These are deliberately empty: exact structural
+-- certificates do not manufacture stronger empirical or normative authority.
+------------------------------------------------------------------------
+
 data ParticipationEqualsEmpowermentPermission : Set where
 data ComplianceEqualsAgencyPermission : Set where
 data ProfessionalPilotEqualsFamilyExperiencePermission : Set where
@@ -108,23 +141,31 @@ data CapabilityExpansionEqualsUniversalEmpowermentPermission : Set where
 data PeerCatalystEqualsAuthorityPermission : Set where
 data EffectiveConnectionEqualsGoodOutcomePermission : Set where
 
-participationCannotAutoPromoteToEmpowerment : ParticipationEqualsEmpowermentPermission → ⊥
+participationCannotAutoPromoteToEmpowerment :
+  ParticipationEqualsEmpowermentPermission → ⊥
 participationCannotAutoPromoteToEmpowerment ()
 
 complianceCannotAutoPromoteToAgency : ComplianceEqualsAgencyPermission → ⊥
 complianceCannotAutoPromoteToAgency ()
 
-professionalPilotCannotAutoPromoteToFamilyExperience : ProfessionalPilotEqualsFamilyExperiencePermission → ⊥
+professionalPilotCannotAutoPromoteToFamilyExperience :
+  ProfessionalPilotEqualsFamilyExperiencePermission → ⊥
 professionalPilotCannotAutoPromoteToFamilyExperience ()
 
-capabilityExpansionCannotAutoPromoteToUniversalEmpowerment : CapabilityExpansionEqualsUniversalEmpowermentPermission → ⊥
+capabilityExpansionCannotAutoPromoteToUniversalEmpowerment :
+  CapabilityExpansionEqualsUniversalEmpowermentPermission → ⊥
 capabilityExpansionCannotAutoPromoteToUniversalEmpowerment ()
 
 peerCatalystCannotAutoPromoteToAuthority : PeerCatalystEqualsAuthorityPermission → ⊥
 peerCatalystCannotAutoPromoteToAuthority ()
 
-effectiveConnectionCannotAutoPromoteToGoodOutcome : EffectiveConnectionEqualsGoodOutcomePermission → ⊥
+effectiveConnectionCannotAutoPromoteToGoodOutcome :
+  EffectiveConnectionEqualsGoodOutcomePermission → ⊥
 effectiveConnectionCannotAutoPromoteToGoodOutcome ()
+
+------------------------------------------------------------------------
+-- Source-facing boundary.  These are metadata handles only.
+------------------------------------------------------------------------
 
 earlyYearsStrategySource : Sources.EmpowermentConnectednessReference
 earlyYearsStrategySource = Sources.earlyYearsStrategy2024
@@ -134,6 +175,10 @@ qualityArea6Source = Sources.qualityArea6
 
 brownKimberAgencySource : Sources.EmpowermentConnectednessReference
 brownKimberAgencySource = Sources.brownKimber2026
+
+------------------------------------------------------------------------
+-- Compact synthesis.
+------------------------------------------------------------------------
 
 record EmpowermentConnectednessInvariant : Set where
   constructor empowermentConnectednessInvariant
@@ -150,10 +195,10 @@ record EmpowermentConnectednessInvariant : Set where
     capabilityExpansionRequiresSemanticPromotionWitness : Bool
     causalClaimRequiresCounterfactualAndOutcomeDiscipline : Bool
 
-open EmpowermentConnectednessInvariant public
-
 canonicalEmpowermentConnectednessInvariant : EmpowermentConnectednessInvariant
-canonicalEmpowermentConnectednessInvariant = empowermentConnectednessInvariant false false true false false false false false false true true
+canonicalEmpowermentConnectednessInvariant =
+  empowermentConnectednessInvariant
+    false false true false false false false false false true true
 
 empowermentConnectednessReading : String
 empowermentConnectednessReading =
