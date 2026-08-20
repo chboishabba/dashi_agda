@@ -32,28 +32,28 @@ open FiniteBlockDeterminantData public
 
 finiteBlockCholeskyProduct :
   ∀ {Scalar}
-  (data : FiniteBlockDeterminantData Scalar) →
+  (detData : FiniteBlockDeterminantData Scalar) →
   ∀ n →
-  determinant data n
-    ≡ shellProduct (one data) (multiply data)
-        (conditionalDeterminant data) n
-finiteBlockCholeskyProduct data =
+  determinant detData n
+    ≡ shellProduct (one detData) (multiply detData)
+        (conditionalDeterminant detData) n
+finiteBlockCholeskyProduct detData =
   blockDeterminantProductFromStep
-    (one data) (multiply data)
-    (determinant data) (conditionalDeterminant data)
-    (determinantBase data) (blockCholeskyStep data)
+    (one detData) (multiply detData)
+    (determinant detData) (conditionalDeterminant detData)
+    (determinantBase detData) (blockCholeskyStep detData)
 
 finiteBlockCholeskyInterval :
   ∀ {Scalar}
-  (data : FiniteBlockDeterminantData Scalar) →
+  (detData : FiniteBlockDeterminantData Scalar) →
   ∀ k n →
-  determinant data (Data.Nat.Base._+_ n k)
-  ≡ multiply data (determinant data k)
-      (intervalProduct (one data) (multiply data)
-        (conditionalDeterminant data) k n)
-finiteBlockCholeskyInterval data =
+  determinant detData (Data.Nat.Base._+_ n k)
+  ≡ multiply detData (determinant detData k)
+      (intervalProduct (one detData) (multiply detData)
+        (conditionalDeterminant detData) k n)
+finiteBlockCholeskyInterval detData =
   blockDeterminantIntervalFromStep
-    (one data) (multiply data)
-    (determinant data) (conditionalDeterminant data)
-    (multiplyAssociative data) (multiplyRightIdentity data)
-    (blockCholeskyStep data)
+    (one detData) (multiply detData)
+    (determinant detData) (conditionalDeterminant detData)
+    (multiplyAssociative detData) (multiplyRightIdentity detData)
+    (blockCholeskyStep detData)

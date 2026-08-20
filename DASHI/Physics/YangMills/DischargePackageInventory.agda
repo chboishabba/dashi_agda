@@ -245,7 +245,6 @@ ProvedInternalReducerHasNoSourceLeaves .localLatticeAnalyticDischargePackageRow 
 ProvedInternalReducerHasNoSourceLeaves .downstreamAnalyticTransferPackageRow (there (there (there (there (there (there (there (there (there (there (there (there here)))))))))))) ()
 ProvedInternalReducerHasNoSourceLeaves .yangMillsFullDischargePackageRow (there (there (there (there (there (there (there (there (there (there (there (there (there here))))))))))))) ()
 ProvedInternalReducerHasNoSourceLeaves .p01P33CoverageLedgerRow (there (there (there (there (there (there (there (there (there (there (there (there (there (there here)))))))))))))) refl = refl
-ProvedInternalReducerHasNoSourceLeaves row (there (there (there (there (there (there (there (there (there (there (there (there (there (there (there ()))))))))))))))
 
 ConditionalPackageDoesNotPromoteClay :
   (row : DischargePackageRow) →
@@ -267,7 +266,6 @@ ConditionalPackageDoesNotPromoteClay .localLatticeAnalyticDischargePackageRow (t
 ConditionalPackageDoesNotPromoteClay .downstreamAnalyticTransferPackageRow (there (there (there (there (there (there (there (there (there (there (there (there here)))))))))))) refl = refl
 ConditionalPackageDoesNotPromoteClay .yangMillsFullDischargePackageRow (there (there (there (there (there (there (there (there (there (there (there (there (there here))))))))))))) ()
 ConditionalPackageDoesNotPromoteClay .p01P33CoverageLedgerRow (there (there (there (there (there (there (there (there (there (there (there (there (there (there here)))))))))))))) ()
-ConditionalPackageDoesNotPromoteClay row (there (there (there (there (there (there (there (there (there (there (there (there (there (there (there ()))))))))))))))
 
 MixedReducerDoesNotPromoteClay :
   (row : DischargePackageRow) →
@@ -289,7 +287,6 @@ MixedReducerDoesNotPromoteClay .localLatticeAnalyticDischargePackageRow (there (
 MixedReducerDoesNotPromoteClay .downstreamAnalyticTransferPackageRow (there (there (there (there (there (there (there (there (there (there (there (there here)))))))))))) ()
 MixedReducerDoesNotPromoteClay .yangMillsFullDischargePackageRow (there (there (there (there (there (there (there (there (there (there (there (there (there here))))))))))))) ()
 MixedReducerDoesNotPromoteClay .p01P33CoverageLedgerRow (there (there (there (there (there (there (there (there (there (there (there (there (there (there here)))))))))))))) ()
-MixedReducerDoesNotPromoteClay row (there (there (there (there (there (there (there (there (there (there (there (there (there (there (there ()))))))))))))))
 
 ConditionalPipelineDoesNotDischargePackages :
   (row : DischargePackageRow) →
@@ -312,7 +309,6 @@ ConditionalPipelineDoesNotDischargePackages .localLatticeAnalyticDischargePackag
 ConditionalPipelineDoesNotDischargePackages .downstreamAnalyticTransferPackageRow (there (there (there (there (there (there (there (there (there (there (there (there here)))))))))))) () _
 ConditionalPipelineDoesNotDischargePackages .yangMillsFullDischargePackageRow (there (there (there (there (there (there (there (there (there (there (there (there (there here))))))))))))) refl _ = refl
 ConditionalPipelineDoesNotDischargePackages .p01P33CoverageLedgerRow (there (there (there (there (there (there (there (there (there (there (there (there (there (there here)))))))))))))) () _
-ConditionalPipelineDoesNotDischargePackages row (there (there (there (there (there (there (there (there (there (there (there (there (there (there (there ()))))))))))))))
 
 AllDischargeRowsNoClayPromotion :
   (row : DischargePackageRow) →
@@ -333,7 +329,6 @@ AllDischargeRowsNoClayPromotion .localLatticeAnalyticDischargePackageRow (there 
 AllDischargeRowsNoClayPromotion .downstreamAnalyticTransferPackageRow (there (there (there (there (there (there (there (there (there (there (there (there here)))))))))))) = refl
 AllDischargeRowsNoClayPromotion .yangMillsFullDischargePackageRow (there (there (there (there (there (there (there (there (there (there (there (there (there here))))))))))))) = refl
 AllDischargeRowsNoClayPromotion .p01P33CoverageLedgerRow (there (there (there (there (there (there (there (there (there (there (there (there (there (there here)))))))))))))) = refl
-AllDischargeRowsNoClayPromotion row (there (there (there (there (there (there (there (there (there (there (there (there (there (there (there ()))))))))))))))
 
 -- ── Leaf Sorting Buckets ─────────────────────────────────────────────
 

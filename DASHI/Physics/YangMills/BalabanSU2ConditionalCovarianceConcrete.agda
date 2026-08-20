@@ -6,20 +6,20 @@ open import DASHI.Physics.YangMills.BalabanFiniteOneStepCore using
    covariance; covarianceLeft; covarianceRight)
 
 conditionalCovariance :
-  ∀ {Vector Scalar}
+  ∀ {Vector Scalar : Set}
   {hessianData : FiniteHessianCertificate Vector Scalar} →
   FiniteCovarianceCertificate hessianData → Vector → Vector
 conditionalCovariance = covariance
 
 conditionalCovarianceLeftInverse :
-  ∀ {Vector Scalar}
+  ∀ {Vector Scalar : Set}
   {hessianData : FiniteHessianCertificate Vector Scalar}
   (bundle : FiniteCovarianceCertificate hessianData) →
   ∀ vector → conditionalCovariance bundle (hessian hessianData vector) ≡ vector
 conditionalCovarianceLeftInverse = covarianceLeft
 
 conditionalCovarianceRightInverse :
-  ∀ {Vector Scalar}
+  ∀ {Vector Scalar : Set}
   {hessianData : FiniteHessianCertificate Vector Scalar}
   (bundle : FiniteCovarianceCertificate hessianData) →
   ∀ vector → hessian hessianData (conditionalCovariance bundle vector) ≡ vector

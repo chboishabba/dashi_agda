@@ -15,7 +15,7 @@ record CMP98AveragingWeights (Sample Scalar : Set) : Set₁ where
 open CMP98AveragingWeights public
 
 weightedFold :
-  ∀ {Sample Scalar Value}
+  ∀ {Sample Scalar Value : Set}
   (weights : CMP98AveragingWeights Sample Scalar) →
   (scale : Scalar → Value → Value) →
   (combine : Value → Value → Value) →
