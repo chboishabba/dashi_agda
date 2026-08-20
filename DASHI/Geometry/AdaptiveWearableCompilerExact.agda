@@ -25,9 +25,10 @@ module DASHI.Geometry.AdaptiveWearableCompilerExact where
 -- "Restricted Delaunay Triangulations and Normal Cycle", SoCG 2003.
 -- DOI: 10.1145/777792.777839.
 --
--- Motion-driven design reference:
+-- Katja Wolff, Philipp Herholz, Verena Ziegler, Frauke Link, Nico Bruegel,
+-- Olga Sorkine-Hornung,
 -- "Designing Personalized Garments with Body Movement",
--- Computer Graphics Forum, 2023. DOI: 10.1111/cgf.14728.
+-- Computer Graphics Forum 42(1), 2023. DOI: 10.1111/cgf.14728.
 --
 -- These sources calibrate the geometry and garment-design interpretation.  The
 -- exact finite definitions below are DASHI constructions.
