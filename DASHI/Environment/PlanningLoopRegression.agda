@@ -10,6 +10,7 @@ import DASHI.Environment.EcologicalEvidenceGates as Evidence
 import DASHI.Environment.EcologicalKnowledge as Knowledge
 import DASHI.Environment.LESResearchCrossPollinationExact as Research
 import DASHI.Environment.LESResearchCrossPollinationRound2Exact as Research2
+import DASHI.Environment.LESResearchCrossPollinationRound3Exact as Research3
 import DASHI.Environment.LESRuntimeBoundary as Runtime
 import DASHI.Environment.ParetoPlanning as Pareto
 import DASHI.Environment.QuantitiesConservation as Q
@@ -92,6 +93,18 @@ assimilationBoundaryRecorded = Research2.canonicalAssimilationBoundary
 
 hybridDynamicsBoundaryRecorded : Research2.HybridDynamicsBoundary
 hybridDynamicsBoundaryRecorded = Research2.canonicalHybridDynamicsBoundary
+
+researchRound3StatusRecorded : Research3.LESRound3CrossProjectReuseStatus
+researchRound3StatusRecorded = Research3.canonicalLESRound3CrossProjectReuseStatus
+
+crossProjectFeedbackBoundaryRecorded : Research3.CrossProjectFeedbackBoundary
+crossProjectFeedbackBoundaryRecorded = Research3.canonicalCrossProjectFeedbackBoundary
+
+uncertaintyConstitutionRecorded : Research3.LESUncertaintyConstitution
+uncertaintyConstitutionRecorded = Research3.canonicalLESUncertaintyConstitution
+
+researchRound3BoundaryRecorded : Research3.LESRound3Boundary
+researchRound3BoundaryRecorded = Research3.canonicalLESRound3Boundary
 
 springfieldScenarioRecorded : Pond.SpringfieldPondGoldenScenario
 springfieldScenarioRecorded = Pond.canonicalSpringfieldPondGoldenScenario
