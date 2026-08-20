@@ -35,6 +35,7 @@ module DASHI.Physics.Closure.NSTriadKNGenericPacketBoundaryFluxFirstVariationRou
 open import Agda.Primitive using (Level)
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
@@ -149,8 +150,6 @@ PhysicalPacketBoundaryFluxFirstVariationFactorSix {F = F} {E = E} {I = I}
     (cong Dual.complexTangent factorSix)
     (complexTangentSixFold
       (FactorSix.literalSelectedProjectedPairing lifted selected))
-  where
-  open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 round100GenericPacketBoundaryFirstVariationFactorSixClosed : Bool
 round100GenericPacketBoundaryFirstVariationFactorSixClosed = true
