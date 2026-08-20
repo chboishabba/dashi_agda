@@ -30,8 +30,8 @@ IndependentByUpstreamClosure :
   ∀ {Artifact} →
   (system : ProvenanceSystem Artifact) →
   Artifact → Artifact → Set
-IndependentByUpstreamClosure system left right =
-  (root : _) →
+IndependentByUpstreamClosure {Artifact} system left right =
+  (root : Artifact) →
   Root system root →
   UpstreamOf system root left →
   UpstreamOf system root right →
