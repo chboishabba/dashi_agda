@@ -2,21 +2,12 @@ module DASHI.Ontology.WikidataWorkingGroupFullProvenanceEverything where
 
 ------------------------------------------------------------------------
 -- FULL WIKIDATA / JMD PROVENANCE + EXTERNALITIES HANDOFF
---
--- This is the convergence root requested for handoff. It deliberately retains
--- the full relevant source/provenance/externality lineages rather than exposing
--- only the smallest ontology theorem slice. A smaller reviewer-facing root is
--- still available at `WikidataWorkingGroupEverything`.
---
--- Source papers, standards, community documents and external ontologies retain
--- their original author/title/DOI or explicit no-DOI metadata in their owning
--- modules. Importing a source-bearing module does not promote that source into
--- proof authority beyond its declared source role.
 ------------------------------------------------------------------------
 
 import DASHI.Ontology.WikidataWorkingGroupEverything
 import DASHI.Ontology.WikidataWorkingGroupRegression
 import DASHI.Ontology.WikidataWorkingGroupSourcePolicyExact
+import DASHI.Ontology.WikidataWorkingGroupSourceConformanceExact
 
 import DASHI.EverythingTopDownObservationCalculus
 import DASHI.Semantics.SIOSemanticSurfaceBridge
@@ -29,36 +20,25 @@ import DASHI.Core.RecoverableObserverRefinementTowerExact
 import DASHI.Core.DependentRecoverableProjectionExact
 import DASHI.Cognition.PNF.ObserverSeparationAuthorityBoundaryExact
 
--- Keep the SSP pointed-sign constructor distinct from the ternary-nine
--- antipodal decomposition while retaining both theorem shapes.
 import DASHI.Interop.PointedSignAntipodal369SeparationExact
 
--- Full Alice Brown epistemic-governance/corpus lineage: source registries,
--- interpretive coding, participant/consumer authority, SoTL quotient/reopening,
--- ecology of data, policy safety and corpus loom.
+-- Full Alice corpus/governance lineage.
 import DASHI.Biology.AliceBrownEpistemicGovernanceEverything
 
--- Full intersectional early-learning + counterfactual/quality/evidence-vintage
--- lineage, including all source registries and DOI-bearing comparative evidence.
+-- Full early-learning counterfactual/quality/externality lineage.
 import DASHI.EverythingEarlyLearningIntersectionalReappropriation
 
--- Latest Alice-linked early-years continuation from #598: stakeholder-indexed
--- claim coverage and consumer-residual necessity, recognition of pre-existing
--- capability, effective community topology and capability expansion without
--- domination. This is intentionally present in the convergence tree as well as
--- in Git ancestry.
+-- Latest Alice-linked #598 specialization, present in both ancestry and tree.
 import DASHI.EverythingEarlyYearsEmpowermentConnectedness
 
--- Empirical genealogy / source-role provenance, including Alice institutional
--- agency, Bringing Them Home, Kimmerer attribution, typed relation/evidence
--- strength and claim-manifest audit.
+-- Empirical/source-role provenance including Alice institutional agency,
+-- Bringing Them Home and Kimmerer attribution boundaries.
 import DASHI.Governance.EmpiricalGenealogyRound3Everything
 
--- JMD-linked parent/progenitor semantics, exact reopening, dynamic authority,
--- predicate descent, plural observers and source-pinned Lean conformance.
+-- JMD-linked parent/progenitor semantics and dynamic authority.
 import DASHI.Ontology.ProgenitorParentCrossPollinationEverything
 
--- Generic source/dependency provenance graph used by the broader convergence.
+-- Generic typed source/dependency graph.
 import DASHI.Core.TypedProvenanceDependencyGraphExact
 
 ------------------------------------------------------------------------
