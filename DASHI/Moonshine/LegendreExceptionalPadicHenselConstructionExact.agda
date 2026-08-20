@@ -42,56 +42,41 @@ open import DASHI.Core.Prelude
 import DASHI.Algebra.RamifiedLocalValuationSharpnessExact as Ramified
 import DASHI.Algebra.ResidueDetectedUnitValuationExact as ResidueUnit
 import DASHI.Moonshine.LegendreJExceptionalPolynomialFactorizationExact as Legendre
+import DASHI.Moonshine.LegendreJExceptionalResidueLocalProducerExact as Preferred
 import DASHI.Moonshine.LegendreExceptionalPadicLiftSameObjectExact as Lift
-
-------------------------------------------------------------------------
--- Standard complete-DVR / Hensel source surface.
-------------------------------------------------------------------------
 
 record ExceptionalHenselLocalSource
     (branch : Legendre.ExceptionalLegendreBranch) : Set₁ where
   field
     PadicLocal Residue : Set
-
     valuation : Ramified.MultiplicativeNatValuation PadicLocal
     residueValuation : ResidueUnit.ResidueDetectedUnitValuation PadicLocal Residue
     valuationCompatibility :
       (x : PadicLocal) →
       Ramified.valuation valuation x
       ≡ ResidueUnit.valuation residueValuation x
-
     finitePoint : Lift.ExceptionalFiniteResiduePoint Residue
     residueZeroMatches :
       ResidueUnit.residueZero residueValuation ≡ Lift.zero finitePoint
-
-    -- Actual additive local-field operations used to define the nearby point.
     add subtract : PadicLocal → PadicLocal → PadicLocal
     subtractAddRight :
       (x d : PadicLocal) → subtract (add x d) x ≡ d
-
-    -- Actual Hensel lift of the selected finite simple root.
     zeroLocal : PadicLocal
     branchPolynomial : PadicLocal → PadicLocal
     liftedCentre : PadicLocal
     liftedCentreReduces :
       ResidueUnit.residue residueValuation liftedCentre ≡ Lift.centre finitePoint
     liftedCentreIsRoot : branchPolynomial liftedCentre ≡ zeroLocal
-
-    -- DVR uniformizer.  The nearby coordinate will be lambda0 + pi.
     uniformizer : PadicLocal
     uniformizerDepthOne : Ramified.valuation valuation uniformizer ≡ 1
     uniformizerReducesToZero :
       ResidueUnit.residue residueValuation uniformizer
       ≡ ResidueUnit.residueZero residueValuation
-
-    -- The multiplicative identity is the coordinate unit epsilon.
     oneResidueUnit :
       ResidueUnit.ResidueUnitWitness residueValuation (Ramified.one valuation)
     mulRightOne :
       (x : PadicLocal) →
       Ramified.mul valuation x (Ramified.one valuation) ≡ x
-
-    -- Actual simple-factor quotient at lambda=lambda0+pi.
     derivativeUnit : PadicLocal
     derivativeReduces :
       ResidueUnit.residue residueValuation derivativeUnit
@@ -101,8 +86,6 @@ record ExceptionalHenselLocalSource
       ≡ Ramified.mul valuation
           (subtract (add liftedCentre uniformizer) liftedCentre)
           derivativeUnit
-
-    -- Actual rational-function J-alpha factor at the same nearby point.
     alphaLift : PadicLocal
     localJ : PadicLocal → PadicLocal
     outerUnit : PadicLocal
@@ -117,10 +100,6 @@ record ExceptionalHenselLocalSource
             (Legendre.exceptionalRamificationExponent branch))
 
 open ExceptionalHenselLocalSource public
-
-------------------------------------------------------------------------
--- The actual nearby point / coordinate difference are definitions.
-------------------------------------------------------------------------
 
 liftedCoordinate :
   {branch : Legendre.ExceptionalLegendreBranch} →
@@ -148,12 +127,6 @@ coordinateDifferenceIsPiTimesOne S =
   trans (coordinateDifferenceIsUniformizer S)
     (sym (mulRightOne S (uniformizer S)))
 
-------------------------------------------------------------------------
--- The nearby point has the SAME finite residue as the Hensel centre.  This is
--- standard local-ring compatibility and is retained explicitly at the source
--- boundary because the generic residue API intentionally has no additive laws.
-------------------------------------------------------------------------
-
 record HenselNearbyResidueCompatibility
     {branch : Legendre.ExceptionalLegendreBranch}
     (S : ExceptionalHenselLocalSource branch) : Set where
@@ -163,10 +136,6 @@ record HenselNearbyResidueCompatibility
       ≡ Lift.centre (finitePoint S)
 
 open HenselNearbyResidueCompatibility public
-
-------------------------------------------------------------------------
--- Construct the previously-uninhabited same-object lift record.
-------------------------------------------------------------------------
 
 constructExceptionalPadicLift :
   (branch : Legendre.ExceptionalLegendreBranch) →
@@ -212,7 +181,7 @@ constructedCoordinateDepthOne :
     (Lift.coordinateDifference (constructExceptionalPadicLift branch S nearby))
   ≡ 1
 constructedCoordinateDepthOne branch S nearby =
-  Lift.Preferred.coordinateDifferenceDepthOne
+  Preferred.coordinateDifferenceDepthOne
     (valuation S) branch
     (Lift.asPreferredLocalProducer branch
       (constructExceptionalPadicLift branch S nearby))
