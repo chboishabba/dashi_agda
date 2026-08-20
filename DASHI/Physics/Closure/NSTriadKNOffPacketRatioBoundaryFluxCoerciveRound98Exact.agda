@@ -15,19 +15,16 @@ module DASHI.Physics.Closure.NSTriadKNOffPacketRatioBoundaryFluxCoerciveRound98E
 --
 -- ROUND98 / OFF-PACKET RATIO RECUT AFTER THE PACKET-FLUX WELD
 --
--- With
+-- The explicit energy values use the standard half-energy normalization
+-- E = (1/2) sum |u_k|^2, so Re<u,u_t> is literally E'.
 --
+-- With
 --   E = E_P + E_off,       D = D_P + D_off,
 --   E'_P + D_P = F,        E' + D = 0,
---
 -- the cross-multiplied derivative numerator of R_off = E_off/E is exactly
 --
 --   E'_off E - E_off E'
 --     = -F E + E_off D_P - D_off E_P.
---
--- The total-energy identity is not assumed independently: it is the
--- all-selected instance of the same literal projected Galerkin packet theorem,
--- and its boundary transfer is zero because every incidence is all-in.
 --
 -- Therefore positive packet influx is favorable for both the packet -log
 -- reserve and the off-packet ratio. The surviving ratio physics is packet
@@ -40,7 +37,8 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _-_; _*_; -_)
+open import Data.Integer.Base as Int
+open import Data.Rational.Base using (ℚ; 0ℚ; _/_; _+_; _-_; _*_; -_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
@@ -58,6 +56,9 @@ import DASHI.Physics.Closure.NSTriadKNPhysicalPacketBoundaryFluxLogReserveRound9
 F : C3.RealField _
 F = Rational.rationalRealField
 
+oneHalf : ℚ
+oneHalf = Int.+ 1 / 2
+
 allSelected : Z3.FourierMode → Bool
 allSelected _ = true
 
@@ -67,10 +68,11 @@ literalSelectedEnergy :
   (system : Equation.FiniteComplex3GalerkinSystem F E I) →
   (selected : Z3.FourierMode → Bool) → ℚ
 literalSelectedEnergy system selected =
-  Packet.sumSelectedPairing selected
-    (Equation.velocity system)
-    (Equation.velocity system)
-    (Cube.cutoffModes (Equation.cutoff system))
+  oneHalf *
+    Packet.sumSelectedPairing selected
+      (Equation.velocity system)
+      (Equation.velocity system)
+      (Cube.cutoffModes (Equation.cutoff system))
 
 literalTotalEnergy :
   {E : C3.IntegerEmbedding F} →
@@ -215,7 +217,6 @@ literalOffPacketEnergyBalance {E} {I}
       (cong (λ value → (- dt) - value) packetMeaning)
       (solve (dt ∷ dp ∷ flux ∷ [])))
 
--- Pure equality-transport proof of the cross-multiplied ratio numerator.
 offPacketRatioCrossNumeratorIdentity :
   (totalEnergy packetEnergy offEnergy : ℚ) →
   (totalDerivative packetDerivative : ℚ) →
@@ -296,6 +297,9 @@ round98PositivePacketInfluxIsAdverseOffPacketCost = false
 
 round98OffPacketSurvivingLeavesAreOutflowAndCrossDissipation : Bool
 round98OffPacketSurvivingLeavesAreOutflowAndCrossDissipation = true
+
+round98HalfEnergyNormalizationExplicit : Bool
+round98HalfEnergyNormalizationExplicit = true
 
 round98OffPacketRatioBoundaryFluxRecutClosedIsTrue :
   round98OffPacketRatioBoundaryFluxRecutClosed ≡ true
