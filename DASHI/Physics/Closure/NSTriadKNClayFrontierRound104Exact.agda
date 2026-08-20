@@ -29,8 +29,9 @@ module DASHI.Physics.Closure.NSTriadKNClayFrontierRound104Exact where
 -- Thus complete critical production is a radial layer-cake of UPPER-PACKET
 -- fluxes.  Rounds96/98 already prove on the literal finite projected Galerkin
 -- equation that selected packet transfer is exactly the correctly normalized
--- physical packet-boundary flux.  This removes hypothetical pairwise mobility
--- from the physical theorem surface.
+-- physical packet-boundary flux.  Round104 now also instantiates an executable
+-- upper-frequency selector directly from the exact integer-lattice squared norm
+-- |k|^2_Nat.  Selector construction is therefore no longer an open seam.
 --
 -- HARD FINDING 3: F_N IS ALREADY AN EXISTING PHYSICAL CURRENCY
 --
@@ -48,28 +49,33 @@ module DASHI.Physics.Closure.NSTriadKNClayFrontierRound104Exact where
 -- HARD FINDING 4: THE SIMON LANE REUSES THE EXISTING CONCRETE G-CHAIN
 --
 -- Round29's abstract compactness target is repaired to require proof
--- inhabitants.  Round104 reuses the existing concrete G5/G8/G9/G10/G11/G12
--- machinery for strong L2 extraction, product convergence, nonlinear limit,
--- initial trace, dissipation liminf and Leray--Hopf identification.  The only
--- remaining standard-analysis upgrade is the critical Sobolev topology:
--- uniform H^(1/2)/H^(3/2), L^(4/3)H^(-1/2) derivative, strong L2H^(1/2), and
--- weak-* critical lower semicontinuity.
+-- inhabitants and an actual limiting element.  Round104 reuses the existing
+-- concrete G5/G8/G9/G10/G11/G12 machinery for strong L2 extraction, product
+-- convergence, nonlinear limit, initial trace, dissipation liminf and
+-- Leray--Hopf identification.  The exact G12 solution is the target's limit
+-- element, and Round103 requires that element to be the exact continuation
+-- solution.  The only remaining standard-analysis upgrade is the critical
+-- Sobolev topology: uniform H^(1/2)/H^(3/2), L^(4/3)H^(-1/2) derivative,
+-- strong L2H^(1/2), and weak-* critical lower semicontinuity.
 --
 -- HONEST TWO-OBLIGATION COUNTDOWN AFTER ROUND104
 --
 --  [DISCOVERY]
 --  A. PhysicalCriticalPacketDangerCoverage
---     Instantiate the radial band/suffix packet layer-cake on the literal
---     finite Galerkin trajectory and prove every adverse weighted boundary-flux
---     episode is paid by the existing Round92/96/97 same-trajectory
---     danger/excess budget, uniformly in cutoff.  Equivalently, construct the
---     physical `UniformSignedCriticalProductionFamily` with positive retained
---     viscosity and cutoff-independent endpoint remainder.
+--     The upper-frequency packet selector, selected-PDE -> boundary-flux
+--     identity, finite radial Abel layer-cake, and Round92/96/97 endpoint
+--     payment compilers are closed.  What remains is the actual critical radial
+--     weighting/norm identification on those nested packets and one
+--     same-trajectory cutoff-uniform theorem that every adverse weighted
+--     boundary-flux episode is paid by the existing danger/excess budget.
+--     Equivalently, construct the physical
+--     `UniformSignedCriticalProductionFamily` with positive retained viscosity
+--     and cutoff-independent endpoint remainder.
 --
 --  [STANDARD ANALYSIS]
 --  B. PhysicalCriticalSobolevSimonUpgrade
 --     Instantiate the five critical-space witnesses on the same physical
---     Galerkin family and weld the resulting limit carrier to the Round90
+--     Galerkin family and weld the resulting exact limit element to the Round90
 --     continuation solution.
 --
 -- Then the existing theorem-bearing compilers give
@@ -88,6 +94,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 import DASHI.Physics.Closure.NSTriadKNClayFrontierRound103Exact as R103
 import DASHI.Physics.Closure.NSTriadKNWaleffeLeithPointwiseMobilityNoGoRound104Exact as LeithNoGo
 import DASHI.Physics.Closure.NSTriadKNCriticalProductionPacketLayerCakeRound104Exact as LayerCake
+import DASHI.Physics.Closure.NSTriadKNConcreteUpperSquaredPacketRound104Exact as UpperPacket
 import DASHI.Physics.Closure.NSTriadKNUniformGalerkinSignedCriticalProductionRound104Exact as Signed
 import DASHI.Physics.Closure.NSTriadKNExistingExcessToSignedCriticalProductionRound104Exact as ExcessWeld
 import DASHI.Physics.Closure.NSTriadKNIntegratedDangerOccupationToSignedCriticalRound104Exact as DangerWeld
@@ -109,6 +116,10 @@ round104PointwiseNonnegativeLeithMobilityRefuted =
 round104CriticalProductionPacketLayerCakeClosed : Bool
 round104CriticalProductionPacketLayerCakeClosed =
   LayerCake.round104ConservativeCriticalProductionIsPacketFluxLayerCake
+
+round104ConcreteUpperSquaredPacketBoundaryFluxClosed : Bool
+round104ConcreteUpperSquaredPacketBoundaryFluxClosed =
+  UpperPacket.round104ConcreteUpperSquaredPacketBoundaryFluxClosed
 
 round104LiteralPacketBoundaryFluxSameObjectReused : Bool
 round104LiteralPacketBoundaryFluxSameObjectReused =
@@ -170,6 +181,10 @@ round104PointwiseNonnegativeLeithMobilityRefutedIsTrue = refl
 round104CriticalProductionPacketLayerCakeClosedIsTrue :
   round104CriticalProductionPacketLayerCakeClosed ≡ true
 round104CriticalProductionPacketLayerCakeClosedIsTrue = refl
+
+round104ConcreteUpperSquaredPacketBoundaryFluxClosedIsTrue :
+  round104ConcreteUpperSquaredPacketBoundaryFluxClosed ≡ true
+round104ConcreteUpperSquaredPacketBoundaryFluxClosedIsTrue = refl
 
 round104LiteralPacketBoundaryFluxSameObjectReusedIsTrue :
   round104LiteralPacketBoundaryFluxSameObjectReused ≡ true
