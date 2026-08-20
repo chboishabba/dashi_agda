@@ -28,7 +28,6 @@ import DASHI.Cognition.PNF.TerminalisationDefectRegression
 import DASHI.Cognition.PNF.PNFResidualTerminalisationRegression
 import DASHI.Cognition.PNF.RelevanceMassDynamicSafetyRegression
 import DASHI.Cognition.PNF.SemanticSamplingDynamicSafety
-
 -- Runtime-economy constitution: these remain qualified because they deliberately
 -- expose generic fields such as revision/depth/work rather than one public PNF
 -- record namespace.
@@ -66,7 +65,6 @@ import DASHI.Cognition.PNF.FrequencyAdaptiveSymbolCode
 import DASHI.Cognition.PNF.HotColdExecutionProjection
 import DASHI.Cognition.PNF.WorkloadGranularityReference
 import DASHI.Cognition.PNF.StructuralSupportSelectivity
-
 open import DASHI.Cognition.PNF.ComplexityArithmetic public
 open import DASHI.Cognition.PNF.RuntimeThroughputConstitution public
 open import DASHI.Cognition.PNF.NumericAuthority public

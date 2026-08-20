@@ -11,19 +11,16 @@ module DASHI.Moonshine.P11AristotleHeckeCrossPollinationEverything where
 -- * automorphism-derived Brandt weights / weighted self-adjointness;
 -- * coarse joint Hecke products and prime-square relations;
 -- * cyclic/full Phi_4 distinction.
---
 -- Representation falsifiers:
 -- * section-generated intertwining and kernel completion are too weak;
 -- * even a full unital algebra can be engineered linearly;
 -- * natural six-sector positive lift impossible;
 -- * six-sector / eleven-weight unweighted symmetric quotients ruled out.
---
 -- Carrier reconstruction:
 -- * Eichler--Deuring weights force the 2+3 sheet pattern;
 -- * full level 2 gives C3\S3 disjoint-union C2\S3;
 -- * H_11 Legendre/Deuring polynomial gives the same five X(2) points;
 -- * frame deck S3 equals the anharmonic lambda S3.
---
 -- Marked quaternion reconstruction:
 -- * Voight's nonprincipal ideal gives the actual j=0 left order in the SAME
 --   B=(-1,-11/Q) quaternion algebra;
@@ -44,7 +41,6 @@ module DASHI.Moonshine.P11AristotleHeckeCrossPollinationEverything where
 --   with the true fine identity;
 -- * corrected marked Hecke is Frobenius/Fricke equivariant;
 -- * a second refined-theta tally path independently recovers the four cells.
---
 -- Complete marked spectrum and character refinement:
 -- * PR #576's exact Q-valued decomposition is consumed: every observable is
 --   reconstructed from five simultaneous modes and (T3,T5,F) has signatures
@@ -57,7 +53,6 @@ module DASHI.Moonshine.P11AristotleHeckeCrossPollinationEverything where
 --   from the coarse arithmetic fingerprint can recover the sector;
 -- * the reflection generator separates sign from trivial one-dimensional deck
 --   type, completing the S3 observer without complex-Hilbert promotion.
---
 -- Non-Ogg p=37 control:
 -- * same full-level-2/Deuring front end gives 18 marked states;
 -- * H_37 gives 0 marked Frobenius fixed points and 9 pairs;
@@ -66,7 +61,6 @@ module DASHI.Moonshine.P11AristotleHeckeCrossPollinationEverything where
 --   and its C3 character multiplicities are (6,6,6);
 -- * exact p=37 marked T3/T5 quaternion-order theta counts remain the next
 --   cross-prime arithmetic leaves and are NOT fabricated here.
---
 -- Current highest-alpha frontier:
 -- 1. construct the three p=37 endomorphism orders and marked ell=3,5 theta cells
 --    using the same Kohel/Kirschmer--Voight producer;
@@ -74,8 +68,6 @@ module DASHI.Moonshine.P11AristotleHeckeCrossPollinationEverything where
 --    Hecke + Frobenius/Fricke + deck-character representation package to p=11;
 -- 3. only then test an Ogg/Monster selector and reconnect #565/#558 through an
 --    explicit representation/tree-to-source-native-carrier map.
-------------------------------------------------------------------------
-
 import DASHI.Moonshine.P11ClassicalTwoIsogenyCorrespondenceExact
 import DASHI.Moonshine.P11ClassicalTwoIsogenySpectralExact
 import DASHI.Moonshine.P11GeometricSupersingularCarrierExact
@@ -87,7 +79,6 @@ import DASHI.Moonshine.P11AristotleHeckeSquareCrossPollinationExact
 import DASHI.Moonshine.P11Phi4CyclicVsFullHeckeExact
 import DASHI.Moonshine.P11BrandtJointHeckeAlgebraExact
 import DASHI.Moonshine.P11BrandtPrimePowerHeckeExact
-
 import DASHI.Moonshine.P11MatchedDihedralSplitLiftNoGoExact
 import DASHI.Moonshine.P11MatchedDihedralSixSectorBasisExact
 import DASHI.Moonshine.P11MatchedDihedralLiftKernelFreedomExact
@@ -95,7 +86,6 @@ import DASHI.Moonshine.P11MatchedDihedralUnitalHeckeCompletionExact
 import DASHI.Moonshine.P11MatchedDihedralPositiveHeckeNoGoExact
 import DASHI.Moonshine.P11SixSectorSymmetricSchreierNoGoExact
 import DASHI.Moonshine.P11ElevenStateSymmetricSchreierNoGoExact
-
 import DASHI.Moonshine.PositiveFiniteNeighbourSystemExact
 import DASHI.Moonshine.PositiveNeighbourQuotientDescentExact
 import DASHI.Moonshine.EquitablePositiveQuotientExact
@@ -108,7 +98,6 @@ import DASHI.Moonshine.P11FiveStatePositiveHeckeAlgebraExact
 import DASHI.Moonshine.P11FiveStatePositivePrimeSquareNeighboursExact
 import DASHI.Moonshine.P11FiveStatePermutationHeckeProducerExact
 import DASHI.Moonshine.P11PositiveGeometryHighestAlphaRegression
-
 import DASHI.Moonshine.BrandtStackUnweightingExact
 import DASHI.Moonshine.P11EichlerDeuringStackUnweightingExact
 import DASHI.Moonshine.BrandtStackUnweightingControlsExact
@@ -116,7 +105,6 @@ import DASHI.Moonshine.P37NonOggPositiveHeckeControlExact
 import DASHI.Moonshine.P37NonOggPositivePrimeSquareNeighboursExact
 import DASHI.Moonshine.BrandtStackCrossPrimeSelectorCutsetExact
 import DASHI.Moonshine.BrandtStackUnweightingHighestAlphaRegression
-
 import DASHI.Moonshine.P11FullLevel2RigidificationExact
 import DASHI.Moonshine.P11FullLevel2DeckHeckeEquivarianceExact
 import DASHI.Moonshine.P11SupersingularLegendreLevel2ChartExact
@@ -125,7 +113,6 @@ import DASHI.Moonshine.P11Level2DeckHeckeRigidityExact
 import DASHI.Moonshine.P11Level2DoubleCosetHeckeBasisExact
 import DASHI.Moonshine.P11Level2T5QuaternionLoopFalsifierExact
 import DASHI.Moonshine.P11Level2ArithmeticGeometryHighestAlphaRegression
-
 import DASHI.Moonshine.P11VoightNonprincipalLeftOrderExact
 import DASHI.Moonshine.P11VoightLeftOrderDiscriminantDerivedExact
 import DASHI.Moonshine.P11MarkedQuaternionThetaExact
