@@ -14,52 +14,46 @@ module DASHI.Physics.Closure.NSTriadKNWaleffeHHMinorityNumeratorGainRound102Exac
 --
 -- ROUND102 / DIVISION-FREE HH->LOW HELICAL GEOMETRY GAIN
 --
--- Waleffe's geometric factor can be written (up to a unit phase/sign) as
+-- Waleffe's geometric factor can be written, up to a unit phase/sign, as
 --
 --   g = Q (s_k k + s_p p + s_q q) / (4 k p q),
 --
--- where
+-- with Q=4*Area(k,p,q).  Round102's minority-leg normal form multiplies this
+-- by a majority-radius difference.  The useful scale bounds can be proved
+-- before division.
 --
---   Q^2 = 2(k^2p^2+p^2q^2+q^2k^2)-k^4-p^4-q^4
---       = 16 Area(k,p,q)^2.
+-- Low-output minority k (q the larger high leg):
 --
--- Round102's minority-leg normal form multiplies this by the majority-radius
--- difference.  The useful estimates can be proved BEFORE division.
+--   Q <= 2 k p,   d=q-p <= k,   s=p+q-k <= 2q
 --
--- Low-output minority k (assume q is the larger high leg):
+-- gives
 --
---   Q <= 2 k p,
---   d = q-p <= k,
---   s = p+q-k <= 2q
+--   Q d s <= (2kp) (k * 2q) = 4 k^2 p q.
 --
--- imply
---
---   Q d s <= (2kp)(2kq) = 4 k^2 p q.
---
--- After division by the positive Waleffe denominator 2pq this is the O(k^2)
--- critical coefficient.
+-- After the positive Waleffe denominator this is O(k^2).
 --
 -- High-input minority p with low output k:
 --
---   Q <= 2 k q,
---   d = q-k <= q,
---   s = k+q-p <= 2k
+--   Q <= 2 k q,   d=q-k <= q,   s=k+q-p <= 2k
 --
--- imply
+-- gives
 --
---   Q d s <= (2kq)^2 = 4 k^2 q^2.
+--   Q d s <= (2kq) (q * 2k) = 4 k^2 q^2.
 --
--- After division by 2kq this is the O(k q) coefficient: one full low/high
--- ratio better than the naive O(q^2) high-high cost.  The q-minority case is
--- cyclic.  This file proves the ordered multiplicative step exactly; the
--- Euclidean triangle/cross-product builder supplying these geometric premises
--- is standard geometry and remains a separate source-native bridge.
+-- After the positive Waleffe denominator this is O(k q): one full low/high
+-- ratio better than a naive O(q^2) high-high coefficient.  The q-minority
+-- case is cyclic.
+--
+-- This module proves exactly the ordered multiplicative step.  The ordinary
+-- Euclidean triangle/cross-product facts supplying these premises are kept as
+-- a separate source-native geometric bridge rather than hidden in the scalar
+-- estimate.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; _+_; _*_; -_; _≤_; nonNegative)
+  (ℚ; 0ℚ; 1ℚ; _+_; _*_; -_; _≤_)
 import Data.Rational.Properties as ℚP
 open ℚP using (_≤?_)
 open import Relation.Nullary.Decidable.Core using (toWitness)
@@ -67,7 +61,7 @@ open import Relation.Nullary.Decidable.Core using (toWitness)
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteRationalOrderCore as Order
 
 one two : ℚ
-one = Data.Rational.Base.1ℚ
+one = 1ℚ
 two = one + one
 
 twoNonnegative : 0ℚ ≤ two
@@ -108,72 +102,70 @@ threeFactorMonotone aNN bNN cNN ANN BNN CNN a≤A b≤B c≤C =
 record LowMinorityHHGeometry : Set where
   constructor low-minority-hh-geometry
   field
-    k p q Q difference defect : ℚ
-    kNN pNN qNN QNN differenceNN defectNN :
-      0ℚ ≤ k × 0ℚ ≤ p × 0ℚ ≤ q × 0ℚ ≤ Q ×
-      0ℚ ≤ difference × 0ℚ ≤ defect
-    differenceMeaning : difference ≡ q + (- p)
-    defectMeaning : defect ≡ p + q + (- k)
-    areaBound : Q ≤ two * k * p
-    reverseTriangleDifference : difference ≤ k
-    triangleDefectUpper : defect ≤ two * q
+    kL pL qL QL dL sL : ℚ
+    kLNN : 0ℚ ≤ kL
+    pLNN : 0ℚ ≤ pL
+    qLNN : 0ℚ ≤ qL
+    QLNN : 0ℚ ≤ QL
+    dLNN : 0ℚ ≤ dL
+    sLNN : 0ℚ ≤ sL
+    dLMeaning : dL ≡ qL + (- pL)
+    sLMeaning : sL ≡ pL + qL + (- kL)
+    areaLUpper : QL ≤ two * kL * pL
+    differenceLUpper : dL ≤ kL
+    defectLUpper : sL ≤ two * qL
 
 open LowMinorityHHGeometry public
 
 lowMinorityWaleffeNumeratorBound :
   (G : LowMinorityHHGeometry) →
-  Q G * (difference G * defect G)
-  ≤ (two * k G * p G) * (two * k G * q G)
+  QL G * (dL G * sL G)
+  ≤ (two * kL G * pL G) * (kL G * (two * qL G))
 lowMinorityWaleffeNumeratorBound G =
   threeFactorMonotone
-    (proj₁ (proj₂ (proj₂ (proj₂ (kNN G)))))
-    (proj₁ (proj₂ (proj₂ (proj₂ (proj₂ (kNN G))))))
-    (proj₂ (proj₂ (proj₂ (proj₂ (proj₂ (kNN G))))))
-    (twiceProductNonnegative
-      (proj₁ (kNN G))
-      (proj₁ (proj₂ (kNN G))))
-    (proj₁ (kNN G))
-    (twiceProductNonnegative
-      (proj₁ (kNN G))
-      (proj₁ (proj₂ (proj₂ (kNN G)))))
-    (areaBound G)
-    (reverseTriangleDifference G)
-    (triangleDefectUpper G)
+    (QLNN G)
+    (dLNN G)
+    (sLNN G)
+    (twiceProductNonnegative (kLNN G) (pLNN G))
+    (kLNN G)
+    (productNonnegative twoNonnegative (qLNN G))
+    (areaLUpper G)
+    (differenceLUpper G)
+    (defectLUpper G)
 
 record HighPMinorityHHGeometry : Set where
   constructor high-p-minority-hh-geometry
   field
-    k p q Q difference defect : ℚ
-    kNonnegative pNonnegative qNonnegative QNonnegative : ℚ
-    kNN' : 0ℚ ≤ k
-    pNN' : 0ℚ ≤ p
-    qNN' : 0ℚ ≤ q
-    QNN' : 0ℚ ≤ Q
-    differenceNN' : 0ℚ ≤ difference
-    defectNN' : 0ℚ ≤ defect
-    differenceMeaning' : difference ≡ q + (- k)
-    defectMeaning' : defect ≡ k + q + (- p)
-    areaBound' : Q ≤ two * k * q
-    differenceUpper' : difference ≤ q
-    triangleDefectUpper' : defect ≤ two * k
+    kP pP qP QP dP sP : ℚ
+    kPNN : 0ℚ ≤ kP
+    pPNN : 0ℚ ≤ pP
+    qPNN : 0ℚ ≤ qP
+    QPNN : 0ℚ ≤ QP
+    dPNN : 0ℚ ≤ dP
+    sPNN : 0ℚ ≤ sP
+    dPMeaning : dP ≡ qP + (- kP)
+    sPMeaning : sP ≡ kP + qP + (- pP)
+    areaPUpper : QP ≤ two * kP * qP
+    differencePUpper : dP ≤ qP
+    defectPUpper : sP ≤ two * kP
 
 open HighPMinorityHHGeometry public
 
 highPMinorityWaleffeNumeratorBound :
   (G : HighPMinorityHHGeometry) →
-  Q G * (difference G * defect G)
-  ≤ (two * k G * q G) * (q G * (two * k G))
+  QP G * (dP G * sP G)
+  ≤ (two * kP G * qP G) * (qP G * (two * kP G))
 highPMinorityWaleffeNumeratorBound G =
   threeFactorMonotone
-    (QNN' G)
-    (differenceNN' G)
-    (defectNN' G)
-    (twiceProductNonnegative (kNN' G) (qNN' G))
-    (qNN' G)
-    (productNonnegative twoNonnegative (kNN' G))
-    (areaBound' G)
-    (differenceUpper' G)
-    (triangleDefectUpper' G)
+    (QPNN G)
+    (dPNN G)
+    (sPNN G)
+    (twiceProductNonnegative (kPNN G) (qPNN G))
+    (qPNN G)
+    (productNonnegative twoNonnegative (kPNN G))
+    (areaPUpper G)
+    (differencePUpper G)
+    (defectPUpper G)
 
 round102LowMinorityHHWaleffeNumeratorGainClosed : Bool
 round102LowMinorityHHWaleffeNumeratorGainClosed = true
