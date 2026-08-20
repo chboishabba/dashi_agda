@@ -35,17 +35,18 @@ module DASHI.Physics.Closure.NSTriadKNPhysicalCriticalGalerkinSimonWeldRound104E
 --   weak-* lower semicontinuity of the H^(1/2) critical supremum.
 --
 -- Product convergence, nonlinear distributional convergence, initial trace,
--- Leray--Hopf limit identification and dissipation liminf are not requested a
--- second time: they are inherited from the concrete G-chain.
+-- Leray--Hopf limit identification and dissipation liminf are inherited from
+-- the concrete G-chain.
 --
--- This file is a theorem-bearing reuse adapter, not a claim that the critical
--- Sobolev/Simon upgrade itself is already proved.  That upgrade remains the
--- one standard-analysis leaf after the uniform critical Galerkin barrier.
+-- Round29's legacy target stores ordinary `Set` fields, so this adapter is
+-- deliberately specialized to the repository's concrete lzero/lzero physical
+-- setting.  That is a type-correct API boundary, not a mathematical loss.
 ------------------------------------------------------------------------
 
-open import Agda.Primitive using (Level; Set; lsuc; _⊔_)
+open import Agda.Primitive using (lzero; Set)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
 open import Data.Product.Base using (_×_; _,_)
 
 import DASHI.Physics.Closure.NSTriadKNCriticalCompactnessSerrinRound29Exact as Critical
@@ -53,111 +54,100 @@ import DASHI.Physics.Closure.NSTriadKNCriticalAubinLionsExponentWeldRound102Exac
 import DASHI.Physics.Closure.NSGalerkinCompactnessLimit as Canonical
 import DASHI.Physics.Closure.NSConcreteAubinLionsNonlinearLimitWitnesses as Concrete
 
+ConcreteSetting : Set₁
+ConcreteSetting = Concrete.ConcreteGalerkinSetting lzero lzero
+
 ------------------------------------------------------------------------
--- Only the critical-topology upgrade that is absent from the existing
--- energy-level G1--G19 chain.
+-- Only the critical-topology upgrade absent from the energy-level G1--G19
+-- chain.  Every named proposition is accompanied by an inhabitant.
 ------------------------------------------------------------------------
 
 record CriticalSobolevSimonUpgrade
-    {ℓState ℓProp : Level}
-    (S : Concrete.ConcreteGalerkinSetting ℓState ℓProp)
-    (X : Concrete.ConcreteAubinLionsNonlinearLimitCertificate S)
-    : Set (ℓState ⊔ ℓProp) where
+    (S : ConcreteSetting)
+    (X : Concrete.ConcreteAubinLionsNonlinearLimitCertificate S) : Set where
   field
-    UniformLInfinityHOneHalf : Set ℓProp
+    UniformLInfinityHOneHalf : Set
     uniformLInfinityHOneHalf : UniformLInfinityHOneHalf
 
-    UniformL2HThreeHalf : Set ℓProp
+    UniformL2HThreeHalf : Set
     uniformL2HThreeHalf : UniformL2HThreeHalf
 
-    UniformLFourThirdTimeDerivativeHMinusHalf : Set ℓProp
+    UniformLFourThirdTimeDerivativeHMinusHalf : Set
     uniformLFourThirdTimeDerivativeHMinusHalf :
       UniformLFourThirdTimeDerivativeHMinusHalf
 
-    StrongL2HOneHalfSimonCompactness : Set ℓProp
+    StrongL2HOneHalfSimonCompactness : Set
     strongL2HOneHalfSimonCompactness : StrongL2HOneHalfSimonCompactness
 
-    WeakStarCriticalLowerSemicontinuity : Set ℓProp
+    WeakStarCriticalLowerSemicontinuity : Set
     weakStarCriticalLowerSemicontinuity : WeakStarCriticalLowerSemicontinuity
 
 open CriticalSobolevSimonUpgrade public
 
 ------------------------------------------------------------------------
--- The old concrete chain already owns the remaining standard passage pieces.
+-- Existing concrete G-chain witnesses reused directly.
 ------------------------------------------------------------------------
 
 ExistingQuadraticLimit :
-  ∀ {ℓState ℓProp}
-    {S : Concrete.ConcreteGalerkinSetting ℓState ℓProp} →
-  Concrete.ConcreteAubinLionsNonlinearLimitCertificate S → Set (ℓState ⊔ ℓProp)
+  {S : ConcreteSetting} →
+  Concrete.ConcreteAubinLionsNonlinearLimitCertificate S → Set
 ExistingQuadraticLimit {S = S} X =
   Concrete.G8ProductConvergence S (Concrete.g5 X)
 
 ExistingLimitingEquation :
-  ∀ {ℓState ℓProp}
-    {S : Concrete.ConcreteGalerkinSetting ℓState ℓProp} →
-  Concrete.ConcreteAubinLionsNonlinearLimitCertificate S → Set (ℓState ⊔ ℓProp)
+  {S : ConcreteSetting} →
+  Concrete.ConcreteAubinLionsNonlinearLimitCertificate S → Set
 ExistingLimitingEquation {S = S} X =
   Concrete.G9NonlinearTermConvergence S (Concrete.g5 X)
   × Concrete.G12LerayHopfLimit S
 
 ExistingInitialTrace :
-  ∀ {ℓState ℓProp}
-    {S : Concrete.ConcreteGalerkinSetting ℓState ℓProp} →
-  Concrete.ConcreteAubinLionsNonlinearLimitCertificate S → Set (ℓState ⊔ ℓProp)
+  {S : ConcreteSetting} →
+  Concrete.ConcreteAubinLionsNonlinearLimitCertificate S → Set
 ExistingInitialTrace {S = S} X = Concrete.G10InitialTraceIdentification S
 
 ExistingDissipationLiminf :
-  ∀ {ℓState ℓProp}
-    {S : Concrete.ConcreteGalerkinSetting ℓState ℓProp} →
-  Concrete.ConcreteAubinLionsNonlinearLimitCertificate S → Set (ℓState ⊔ ℓProp)
+  {S : ConcreteSetting} →
+  Concrete.ConcreteAubinLionsNonlinearLimitCertificate S → Set
 ExistingDissipationLiminf {S = S} X =
   Concrete.G11DissipationLowerSemicontinuity S (Concrete.g5 X)
 
 existingQuadraticLimitWitness :
-  ∀ {ℓState ℓProp}
-    {S : Concrete.ConcreteGalerkinSetting ℓState ℓProp}
-    (X : Concrete.ConcreteAubinLionsNonlinearLimitCertificate S) →
+  {S : ConcreteSetting}
+  (X : Concrete.ConcreteAubinLionsNonlinearLimitCertificate S) →
   ExistingQuadraticLimit X
 existingQuadraticLimitWitness X = Concrete.g8 X
 
 existingLimitingEquationWitness :
-  ∀ {ℓState ℓProp}
-    {S : Concrete.ConcreteGalerkinSetting ℓState ℓProp}
-    (X : Concrete.ConcreteAubinLionsNonlinearLimitCertificate S) →
+  {S : ConcreteSetting}
+  (X : Concrete.ConcreteAubinLionsNonlinearLimitCertificate S) →
   ExistingLimitingEquation X
 existingLimitingEquationWitness X = Concrete.g9 X , Concrete.g12 X
 
 existingInitialTraceWitness :
-  ∀ {ℓState ℓProp}
-    {S : Concrete.ConcreteGalerkinSetting ℓState ℓProp}
-    (X : Concrete.ConcreteAubinLionsNonlinearLimitCertificate S) →
+  {S : ConcreteSetting}
+  (X : Concrete.ConcreteAubinLionsNonlinearLimitCertificate S) →
   ExistingInitialTrace X
 existingInitialTraceWitness X = Concrete.g10 X
 
 existingDissipationLiminfWitness :
-  ∀ {ℓState ℓProp}
-    {S : Concrete.ConcreteGalerkinSetting ℓState ℓProp}
-    (X : Concrete.ConcreteAubinLionsNonlinearLimitCertificate S) →
+  {S : ConcreteSetting}
+  (X : Concrete.ConcreteAubinLionsNonlinearLimitCertificate S) →
   ExistingDissipationLiminf X
 existingDissipationLiminfWitness X = Concrete.g11 X
 
 ------------------------------------------------------------------------
--- Build the Round29 target with no duplicated product/trace/limit receipts.
---
--- The target's carrier fields are intentionally the actual cutoff index Nat
--- and the existing analytic state carrier.  The later same-solution compiler
--- must still identify that limit carrier with its continuation solution type.
+-- Build Round29's witness-bearing target.  Nat is the literal Galerkin cutoff
+-- index carrier; the limit carrier is the existing analytic SolutionClass.
 ------------------------------------------------------------------------
 
 physicalCriticalGalerkinSimonWeld :
-  ∀ {ℓState ℓProp : Level}
-    {S : Concrete.ConcreteGalerkinSetting ℓState ℓProp} →
+  {S : ConcreteSetting} →
   (X : Concrete.ConcreteAubinLionsNonlinearLimitCertificate S) →
   CriticalSobolevSimonUpgrade S X →
   Critical.CriticalAubinLionsTarget
 physicalCriticalGalerkinSimonWeld {S = S} X U = record
-  { Critical.GalerkinSequence = Canonical.State (Concrete.analytic S)
+  { Critical.GalerkinSequence = Nat
   ; Critical.LimitState = Canonical.SolutionClass (Concrete.analytic S)
   ; Critical.uniformLInfinityHOneHalf = UniformLInfinityHOneHalf U
   ; Critical.uniformLInfinityHOneHalfWitness = uniformLInfinityHOneHalf U
@@ -185,13 +175,12 @@ physicalCriticalGalerkinSimonWeld {S = S} X U = record
   }
 
 ------------------------------------------------------------------------
--- Existing G-chain projections are genuine theorem witnesses, not booleans.
+-- Actual theorem witnesses exported from the old G-chain.
 ------------------------------------------------------------------------
 
 physicalSimonWeldReusesExistingStrongL2 :
-  ∀ {ℓState ℓProp : Level}
-    {S : Concrete.ConcreteGalerkinSetting ℓState ℓProp}
-    (X : Concrete.ConcreteAubinLionsNonlinearLimitCertificate S) →
+  {S : ConcreteSetting}
+  (X : Concrete.ConcreteAubinLionsNonlinearLimitCertificate S) →
   Canonical.StrongL2TimeSpaceConvergence
     (Concrete.analytic S)
     (Concrete.subsequence (Concrete.g5 X))
@@ -200,15 +189,23 @@ physicalSimonWeldReusesExistingStrongL2 X =
   Concrete.repositoryStrongL2 (Concrete.g5 X)
 
 physicalSimonWeldReusesExistingNonlinearLimit :
-  ∀ {ℓState ℓProp : Level}
-    {S : Concrete.ConcreteGalerkinSetting ℓState ℓProp}
-    (X : Concrete.ConcreteAubinLionsNonlinearLimitCertificate S) →
+  {S : ConcreteSetting}
+  (X : Concrete.ConcreteAubinLionsNonlinearLimitCertificate S) →
   Canonical.NonlinearDistributionalConvergence
     (Concrete.analytic S)
     (Concrete.subsequence (Concrete.g5 X))
     (Canonical.LimitNonlinearity (Concrete.analytic S))
 physicalSimonWeldReusesExistingNonlinearLimit X =
   Concrete.convectionDistribution (Concrete.g9 X)
+
+physicalSimonWeldReusesExistingDissipationLiminf :
+  {S : ConcreteSetting}
+  (X : Concrete.ConcreteAubinLionsNonlinearLimitCertificate S) →
+  Canonical.DissipationLowerSemicontinuity
+    (Concrete.analytic S)
+    (Concrete.subsequence (Concrete.g5 X))
+physicalSimonWeldReusesExistingDissipationLiminf X =
+  Concrete.repositoryLiminf (Concrete.g11 X)
 
 round104ExistingG5G8G9G10G11G12LimitMachineryReused : Bool
 round104ExistingG5G8G9G10G11G12LimitMachineryReused = true
@@ -217,9 +214,9 @@ round104CriticalExponentArithmeticReused : Bool
 round104CriticalExponentArithmeticReused =
   Exponents.round102CriticalAubinLionsExponentArithmeticClosed
 
--- Remaining standard-analysis leaf: instantiate the five critical-space
--- witnesses above on the literal periodic Galerkin family.  No new nonlinear
--- dynamics should be introduced here after the uniform critical barrier exists.
+-- Remaining standard-analysis leaf: instantiate these five critical-space
+-- witnesses on the literal periodic Galerkin family.  No new nonlinear
+-- dynamics should be introduced here after the uniform critical barrier.
 round104PhysicalCriticalSobolevSimonUpgradeClosed : Bool
 round104PhysicalCriticalSobolevSimonUpgradeClosed = false
 
