@@ -7,6 +7,17 @@ import DASHI.Core.ObserverRefinementLatticeExact as Observer
 import DASHI.Core.RequiredAxisSupportSquareExact as Required
 import DASHI.Core.RequiredObserverAxisJoinAdequacyExact as Join
 
+------------------------------------------------------------------------
+-- STAKEHOLDER-INDEXED CLAIM COVERAGE
+--
+-- A claim declares the stakeholder observation axes it actually requires.
+-- Missing an inactive axis is harmless; missing an active axis blocks direct
+-- discharge of that claim.  The second half strengthens this with the current
+-- #582 consumer-residual theorem: ANY observer sufficient for a family-outcome
+-- consumer must split each professional-surface collision on which that family
+-- outcome differs.
+------------------------------------------------------------------------
+
 data StakeholderAxis : Set where
   professionalAxis familyAxis childAxis communityAxis : StakeholderAxis
 
@@ -46,7 +57,8 @@ EvidenceAt communityJoined _ professionalAxis = positive
 EvidenceAt communityJoined _ communityAxis = positive
 EvidenceAt _ _ _ = missing
 
-stakeholderObligations : Active.ActiveObligationFamily EvidenceStage EarlyYearsClaim StakeholderAxis
+stakeholderObligations :
+  Active.ActiveObligationFamily EvidenceStage EarlyYearsClaim StakeholderAxis
 stakeholderObligations = Active.activeObligationFamily ClaimRequires EvidenceAt
 
 professionalPilotResolvesProfessionalPractice :
@@ -57,8 +69,10 @@ professionalPilotResolvesProfessionalPractice childAxis ()
 professionalPilotResolvesProfessionalPractice communityAxis ()
 
 missingFamilyAtProfessionalPilot :
-  Active.MissingActiveObligation stakeholderObligations professionalPilot familyExperienceClaim
-missingFamilyAtProfessionalPilot = Active.missingActiveObligation familyAxis tt (refl , refl)
+  Active.MissingActiveObligation
+    stakeholderObligations professionalPilot familyExperienceClaim
+missingFamilyAtProfessionalPilot =
+  Active.missingActiveObligation familyAxis tt (refl , refl)
 
 professionalPilotCannotEstablishFamilyExperience :
   Active.ResolvedFor stakeholderObligations professionalPilot familyExperienceClaim → ⊥
@@ -74,7 +88,8 @@ familyJoinedResolvesFamilyExperience communityAxis ()
 
 missingChildAtFamilyJoined :
   Active.MissingActiveObligation stakeholderObligations familyJoined childExperienceClaim
-missingChildAtFamilyJoined = Active.missingActiveObligation childAxis tt (refl , refl)
+missingChildAtFamilyJoined =
+  Active.missingActiveObligation childAxis tt (refl , refl)
 
 familyEvidenceStillCannotEstablishChildExperience :
   Active.ResolvedFor stakeholderObligations familyJoined childExperienceClaim → ⊥
@@ -88,7 +103,13 @@ childJoinedResolvesChildExperience familyAxis tt = refl , refl
 childJoinedResolvesChildExperience childAxis tt = refl , refl
 childJoinedResolvesChildExperience communityAxis ()
 
-data FamilySituation : Set where situationA situationB : FamilySituation
+------------------------------------------------------------------------
+-- Strong top-down necessity: a coarse professional summary may be perfectly
+-- adequate for the professional consumer and still fail a family consumer.
+------------------------------------------------------------------------
+
+data FamilySituation : Set where
+  situationA situationB : FamilySituation
 
 professionalSummary : FamilySituation → Bool
 professionalSummary situationA = true
@@ -98,12 +119,15 @@ familyExperience : FamilySituation → Bool
 familyExperience situationA = false
 familyExperience situationB = true
 
-familyExperienceDiffers : familyExperience situationA ≡ familyExperience situationB → ⊥
+familyExperienceDiffers :
+  familyExperience situationA ≡ familyExperience situationB → ⊥
 familyExperienceDiffers ()
 
-professionalFamilyCollision : Consumer.ConsumerRelevantCollision professionalSummary familyExperience
+professionalFamilyCollision :
+  Consumer.ConsumerRelevantCollision professionalSummary familyExperience
 professionalFamilyCollision =
-  Consumer.consumer-relevant-collision situationA situationB refl familyExperienceDiffers
+  Consumer.consumer-relevant-collision
+    situationA situationB refl familyExperienceDiffers
 
 professionalSurfaceCannotServeFamilyExperience :
   Consumer.ConsumerSufficient professionalSummary familyExperience → ⊥
@@ -111,27 +135,41 @@ professionalSurfaceCannotServeFamilyExperience =
   Consumer.coarseCollisionBlocksSufficiency professionalFamilyCollision
 
 anyFamilyExperienceSufficientObserverMustSplitProfessionalCollision :
-  ∀ {Surface : Set} (observe : FamilySituation → Surface) →
+  ∀ {Surface : Set}
+    (observe : FamilySituation → Surface) →
   Consumer.ConsumerSufficient observe familyExperience →
   observe situationA ≡ observe situationB → ⊥
 anyFamilyExperienceSufficientObserverMustSplitProfessionalCollision observe sufficient =
-  Consumer.everySufficientObserverSeparatesRelevantCollision professionalFamilyCollision sufficient
+  Consumer.everySufficientObserverSeparatesRelevantCollision
+    professionalFamilyCollision sufficient
 
 familyResidual : FamilySituation → Bool
 familyResidual = familyExperience
 
-familyResidualRepair : Consumer.ResidualRepair professionalSummary familyResidual familyExperience
-familyResidualRepair = Consumer.residual-repair (λ left right samePair → cong proj₂ samePair)
+familyResidualRepair :
+  Consumer.ResidualRepair professionalSummary familyResidual familyExperience
+familyResidualRepair =
+  Consumer.residual-repair (λ left right samePair → cong proj₂ samePair)
 
 familyResidualMustSplitProfessionalCollision :
   familyResidual situationA ≡ familyResidual situationB → ⊥
 familyResidualMustSplitProfessionalCollision =
-  Consumer.residualMustSeparateRelevantCollision professionalFamilyCollision familyResidualRepair
+  Consumer.residualMustSeparateRelevantCollision
+    professionalFamilyCollision familyResidualRepair
 
 professionalPlusFamilyStrictlyRefinesProfessional :
-  Observer.StrictRefinement professionalSummary (Observer.pairObserver professionalSummary familyResidual)
+  Observer.StrictRefinement
+    professionalSummary
+    (Observer.pairObserver professionalSummary familyResidual)
 professionalPlusFamilyStrictlyRefinesProfessional =
-  Consumer.consumerRelevantResidualGivesStrictRefinement professionalFamilyCollision familyResidualRepair
+  Consumer.consumerRelevantResidualGivesStrictRefinement
+    professionalFamilyCollision familyResidualRepair
+
+------------------------------------------------------------------------
+-- `RequiredObserverAxisJoinAdequacyExact` remains the generic product owner:
+-- retaining two required axes constructs their joint factorisation; a defect
+-- on either active axis blocks a claim that both are retained.
+------------------------------------------------------------------------
 
 record StakeholderCoverageBoundary : Set where
   constructor stakeholderCoverageBoundary
