@@ -3,8 +3,6 @@ module DASHI.ReopenableConsumerInterventionCrossDomainEverything where
 ------------------------------------------------------------------------
 -- Focused root for the reopenable consumer/intervention kernel and its
 -- SeaMeInIt/Animalexic/LES cross-pollination.
-------------------------------------------------------------------------
-
 import DASHI.Core.ActiveInformationDualEffectBridgeExact
 import DASHI.Core.AdaptiveFidelityConsumerMarginExact
 import DASHI.Core.AdaptiveFidelityPruningExact
