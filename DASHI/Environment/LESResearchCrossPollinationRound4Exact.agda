@@ -5,26 +5,20 @@ module DASHI.Environment.LESResearchCrossPollinationRound4Exact where
 --
 -- Round 3 extracted common record shapes.  Round 4 closes several actual
 -- theorem connections so that the shared kernel is not merely a vocabulary:
---
---   * exact causal abstraction -> generic intervention intertwiner;
---   * exact causal outcome abstraction -> consumer descent;
---   * LES hybrid execution -> a world-only instance of dual-effect action;
---   * the cross-domain regression exercises consumer-relative future safety,
---     selective authority, adaptive fidelity, proof-carrying composition and
---     provenance-root independence.
+-- exact causal abstraction -> generic intervention intertwiner; outcome
+-- abstraction -> consumer descent; LES hybrid execution -> world-only
+-- dual-effect action; concrete cross-domain regressions remain theorem-bearing.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Unit using (⊤; tt)
+open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Unit using (⊤)
 
+import DASHI.Core.ConsumerIndexedGovernedTransitionExact as Governed
 import DASHI.Core.DualEffectInformationActionExact as Dual
 import DASHI.Core.ReopenableConsumerInterventionCrossDomainRegression as Regression
 import DASHI.Core.ReopenableConsumerInterventionKernelExact as Core
 import DASHI.Environment.LESResearchCrossPollinationRound2Exact as Round2
-
-------------------------------------------------------------------------
--- 1. Exact causal intervention abstraction is literally an intertwiner.
-------------------------------------------------------------------------
 
 causalInterventionAbstractionToIntertwiner :
   ∀ {LowState HighState LowIntervention HighIntervention LowOutcome HighOutcome}
@@ -41,12 +35,6 @@ causalInterventionAbstractionToIntertwiner abstraction intervention =
   Core.intertwiner
     (Round2.interventionSquareCommutes abstraction intervention)
 
-------------------------------------------------------------------------
--- 2. Outcome abstraction is consumer descent through the state quotient/map.
---    The fine consumer is the low outcome followed by outcomeMap; the coarse
---    consumer is the high-level outcome.
-------------------------------------------------------------------------
-
 causalOutcomeAbstractionToConsumerDescent :
   ∀ {LowState HighState LowIntervention HighIntervention LowOutcome HighOutcome}
     {low : Round2.CausalInterventionSystem LowState LowIntervention LowOutcome}
@@ -60,12 +48,6 @@ causalOutcomeAbstractionToConsumerDescent {high = high} abstraction =
   Core.consumerDescent
     (Round2.observeOutcome high)
     (Round2.outcomeSquareCommutes abstraction)
-
-------------------------------------------------------------------------
--- 3. Hybrid execution is one world-dynamics instance of the dual-effect action
---    system.  Information is explicitly fixed; later active sensing can replace
---    the trivial information carrier without changing the action interface.
-------------------------------------------------------------------------
 
 hybridAsDualEffect :
   ∀ {Mode Continuous DiscreteAction} →
@@ -87,13 +69,8 @@ hybridCommandsAreWorldOnly :
 hybridCommandsAreWorldOnly system command =
   Dual.worldOnly (λ information → refl)
 
-------------------------------------------------------------------------
--- 4. Keep the concrete finite cross-domain falsifiers in the LES regression
--- ancestry.  This is a theorem import, not a prose status flag.
-------------------------------------------------------------------------
-
 consumerRelativityRegression :
-  (depth : Agda.Builtin.Nat.Nat) →
-  DASHI.Core.ConsumerIndexedGovernedTransitionExact.FutureEquivalent
+  (depth : Nat) →
+  Governed.FutureEquivalent
     Regression.publicSystem Regression.public depth Regression.left Regression.right
 consumerRelativityRegression = Regression.publicStatesEquivalentAtEveryRequestedDepth
