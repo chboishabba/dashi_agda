@@ -133,3 +133,19 @@ The existing SU(2) development remains the concrete proof-development carrier.  
 The quaternion and rotation-polynomial modules are not discarded.  They should instantiate the generic records for `G = SU(2)` and prove that their concrete adjoint action agrees with generic `Ad`.  Quaternion polynomial identities then prove the SU(2) instance only; they cannot inhabit the generic theorem without a separate uniform compact-Lie-group argument.
 ## Claim boundary
 This tranche supplies typed interfaces and promotion boundaries.  It does not prove the generic analytic estimates, construct Haar measure, classify root systems, establish a uniform RG iteration, or prove the four-dimensional Yang–Mills mass gap.  Those remain explicit fields rather than postulates hidden inside the SU(2) implementation.
+- assembly of fixed-point/critical-point, minimizer, gauge-orbit, and analytic-dependence interfaces into the background-field package.
+## Conditional and conjectural frontier
+`CompactLieYangMillsFrontier.agda` records the current status without erasing theorem shape.
+Conditional inputs:
+- concrete all-patch weighted Green estimates;
+- nonlinear residual Lipschitz constants;
+- constrained Hessian coercivity;
+- nonlinear gauge-fixing contraction;
+- the fully instantiated background-field closure.
+Conjectural targets:
+- one strict residual factor `ρ_G < 1` uniform in scale, volume, admissible background, and patch regime;
+- four-dimensional large-field / Step V polymer suppression;
+- an all-scale four-dimensional RG invariant domain with summable errors;
+- continuum Schwinger functions satisfying OS0–OS5;
+- an OS-reconstructed Hamiltonian with a positive physical spectral gap.
+The final mass-gap target has no constructor here and cannot self-promote.
