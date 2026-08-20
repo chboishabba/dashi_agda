@@ -41,19 +41,16 @@ module DASHI.Physics.YangMills.BalabanTopDownSummableRGIncrementExact where
 -- successive states/characteristic functionals.  This is also the source shape:
 -- Bałaban controls newly generated localized terms at each scale rather than
 -- asserting a Banach fixed-point theorem for the complete 4D gauge RG map.
---
--- The exact geometric Cauchy summation was already proved in
--- `BalabanContinuumScaleLocalObservableCauchyExact`.  This module makes one
--- common increment drive both ordinary and characteristic coordinates.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _≤_; _*_; NonNegative)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _≤_; _*_)
 import Data.Rational.Properties as ℚP
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanContinuumScaleLocalObservableCauchyExact as Scale
 import DASHI.Physics.YangMills.BalabanTraceKoteckyPreissGeometricExact as Geo
+import DASHI.Physics.YangMills.BalabanClayT2UrsellCauchyExact as Ursell
 
 record SameFamilySummableScaleIncrement : Set₁ where
   field
@@ -97,6 +94,11 @@ characteristicCauchyModulus dataSet start count =
     (characteristicDifferenceBelowTail dataSet start count)
     (Scale.scaleLocalCauchyTail (commonMajorant dataSet) start count)
 
+generatedTail : (Nat → ℚ) → Nat → Nat → ℚ
+generatedTail increment start zero = 0ℚ
+generatedTail increment start (suc count) =
+  increment start + generatedTail increment (suc start) count
+
 record PublishedTailToCommonIncrement : Set₁ where
   field
     sourceGeneratedIncrement : Nat → ℚ
@@ -106,11 +108,11 @@ record PublishedTailToCommonIncrement : Set₁ where
     coefficient : ℚ
     coefficientNonnegative : 0ℚ ≤ coefficient
 
-    -- This is the source-shaped physical estimate to prove from the actual
-    -- CMP116/CMP119 E/R/B tails after normalization/local observable response.
+    -- Source-shaped physical estimate from the actual CMP116/CMP119 E/R/B
+    -- tails after normalization/local-observable response.
     generatedIncrementDyadic : ∀ scale →
       sourceGeneratedIncrement scale
-      ≤ coefficient * (Scale.Ursell.quarter * Geo.halfPower scale)
+      ≤ coefficient * (Ursell.quarter * Geo.halfPower scale)
 
     ordinaryDifference : Nat → Nat → ℚ
     characteristicDifference : Nat → Nat → ℚ
@@ -121,29 +123,65 @@ record PublishedTailToCommonIncrement : Set₁ where
 
     ordinaryResponseBelowGeneratedTail : ∀ start count →
       ordinaryDifference start count
-      ≤ generatedTail start count
+      ≤ generatedTail sourceGeneratedIncrement start count
     characteristicResponseBelowGeneratedTail : ∀ start count →
       characteristicDifference start count
-      ≤ generatedTail start count
-  where
-    generatedTail : Nat → Nat → ℚ
-    generatedTail start Scale.zero = 0ℚ
-    generatedTail start (Scale.suc count) =
-      sourceGeneratedIncrement start + generatedTail (Scale.suc start) count
+      ≤ generatedTail sourceGeneratedIncrement start count
 
--- We deliberately leave the producer above source-facing rather than replacing
--- it with an arbitrary q<1 map-contraction premise.  The new analytic content is
--- the response estimate from the SAME normalized finite-cutoff density to its
--- local/characteristic coordinates.
+open PublishedTailToCommonIncrement public
+
+publishedTailMajorant :
+  PublishedTailToCommonIncrement → Scale.ScaleLocalIncrementMajorant
+publishedTailMajorant dataSet = record
+  { Scale.ScaleLocalIncrementMajorant.coefficient = coefficient dataSet
+  ; Scale.ScaleLocalIncrementMajorant.coefficientNonnegative =
+      coefficientNonnegative dataSet
+  ; Scale.ScaleLocalIncrementMajorant.incrementMagnitude =
+      sourceGeneratedIncrement dataSet
+  ; Scale.ScaleLocalIncrementMajorant.incrementNonnegative =
+      sourceGeneratedIncrementNonnegative dataSet
+  ; Scale.ScaleLocalIncrementMajorant.incrementBelowScaleShell =
+      generatedIncrementDyadic dataSet
+  }
+
+publishedTailToSameFamilySummableIncrement :
+  (dataSet : PublishedTailToCommonIncrement) →
+  SameFamilySummableScaleIncrement
+publishedTailToSameFamilySummableIncrement dataSet = record
+  { SameFamilySummableScaleIncrement.commonMajorant =
+      publishedTailMajorant dataSet
+  ; SameFamilySummableScaleIncrement.ordinaryDifference =
+      PublishedTailToCommonIncrement.ordinaryDifference dataSet
+  ; SameFamilySummableScaleIncrement.characteristicDifference =
+      PublishedTailToCommonIncrement.characteristicDifference dataSet
+  ; SameFamilySummableScaleIncrement.ordinaryDifferenceNonnegative =
+      PublishedTailToCommonIncrement.ordinaryDifferenceNonnegative dataSet
+  ; SameFamilySummableScaleIncrement.characteristicDifferenceNonnegative =
+      PublishedTailToCommonIncrement.characteristicDifferenceNonnegative dataSet
+  ; SameFamilySummableScaleIncrement.ordinaryDifferenceBelowTail =
+      PublishedTailToCommonIncrement.ordinaryResponseBelowGeneratedTail dataSet
+  ; SameFamilySummableScaleIncrement.characteristicDifferenceBelowTail =
+      PublishedTailToCommonIncrement.characteristicResponseBelowGeneratedTail dataSet
+  }
+
+publishedCharacteristicCauchyModulus :
+  (dataSet : PublishedTailToCommonIncrement) → ∀ start count →
+  PublishedTailToCommonIncrement.characteristicDifference dataSet start count
+  ≤ coefficient dataSet * (Geo.half * Geo.halfPower start)
+publishedCharacteristicCauchyModulus dataSet =
+  characteristicCauchyModulus
+    (publishedTailToSameFamilySummableIncrement dataSet)
 
 summableRGIncrementCauchyCompilerLevel : ProofLevel
 summableRGIncrementCauchyCompilerLevel = machineChecked
 
-strictGlobalRGMapContractionRequiredOnShortestRoute : ProofLevel
-strictGlobalRGMapContractionRequiredOnShortestRoute = machineChecked
+-- The old strict global map-contraction target is not consumed by this shortest
+-- continuum path.  It remains a useful stronger theorem if independently proved.
+strictGlobalRGMapContractionShortestRouteStatus : ProofLevel
+strictGlobalRGMapContractionShortestRouteStatus = machineChecked
 
 -- Genuine remaining L3 physical theorem after Round81:
--- prove that the normalized characteristic/local observable increments of the
+-- prove that normalized characteristic/local-observable increments of the
 -- literal source-native CMP119/CMP122 trajectory inherit a summable dyadic
 -- majorant from its published E/R/B localization bounds.
 physicalSameFamilyNormalizedCharacteristicIncrementLevel : ProofLevel
