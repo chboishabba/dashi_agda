@@ -27,7 +27,7 @@ module DASHI.Core.FiniteStochasticBellmanPreservationExact where
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Agda.Builtin.Nat using (Nat; zero; _+_; _*_)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Relation.Binary.PropositionalEquality using (cong)
 
 import DASHI.Core.FiniteStochasticBisimulationExact as Kernel
@@ -97,8 +97,7 @@ actionScoreListPreserved {kernel = kernel} normalized bisimulation
 maxNat : Nat → Nat → Nat
 maxNat zero right = right
 maxNat left zero = left
-maxNat (Agda.Builtin.Nat.suc left) (Agda.Builtin.Nat.suc right) =
-  Agda.Builtin.Nat.suc (maxNat left right)
+maxNat (suc left) (suc right) = suc (maxNat left right)
 
 maxList : List Nat → Nat
 maxList [] = zero
