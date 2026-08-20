@@ -47,7 +47,7 @@ module DASHI.Physics.YangMills.BalabanFiveShellLargeBranchContractionExact where
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat; suc; zero)
 open import Data.Integer.Base using (+_)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _*_; _≤_; _<_; _/_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _*_; _-_ ; _≤_; _<_; _/_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (subst)
@@ -68,7 +68,7 @@ fiveDyadicShellsExact :
 fiveDyadicShellsExact = ℚRing.solve []
 
 quarterBelowHalf : oneQuarter < oneHalf
-quarterBelowHalf = ℚP.positive⁻¹ (oneHalf ℚ.- oneQuarter)
+quarterBelowHalf = ℚP.positive⁻¹ (oneHalf - oneQuarter)
 
 record FiveShellLargeActivityBound : Set where
   field
