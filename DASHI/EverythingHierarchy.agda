@@ -3,7 +3,7 @@ module DASHI.EverythingHierarchy where
 -- Hierarchical repository umbrella.
 --
 -- Migration rule:
---   leaf -> subfolder Everything -> domain Everything -> DASHI.Everything
+--   leaf -> subfolder Everything -> domain Everything -> repository umbrella
 --
 -- DASHI.Everything is still the historical lightweight/flat surface during
 -- migration.  This module is the exhaustive hierarchical bridge: domains own
@@ -13,12 +13,14 @@ import DASHI.Everything
 
 -- Mathematical / reasoning domains.
 import DASHI.Algebra.Everything
+import DASHI.Core.Everything
 import DASHI.Cognition.Everything
 import DASHI.Reasoning.Everything
 import DASHI.Moonshine.Everything
+import DASHI.Ontology.Everything
 
 -- Natural / physical / applied domains.
-import DASHI.Biology.Everything
+import DASHI.Biology.DomainEverything
 import DASHI.Chemistry.Everything
 import DASHI.Physics.Everything
 import DASHI.Applied.Everything
@@ -39,6 +41,11 @@ import DASHI.Graph.Everything
 import DASHI.Perf.Everything
 import DASHI.Visualisation.Everything
 import DASHI.Unified.Everything
+
+-- Historical root-level tranche rollups.  New tranches should attach to the
+-- nearest domain instead; this compatibility bucket keeps legacy Everything*
+-- entrypoints reachable while that migration proceeds.
+import DASHI.Tranches.Everything
 
 -- Invariant for future migrations:
 -- a specialized Everything surface should be imported by its nearest domain
