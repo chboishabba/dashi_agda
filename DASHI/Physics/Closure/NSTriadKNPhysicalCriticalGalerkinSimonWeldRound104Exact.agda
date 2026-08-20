@@ -36,11 +36,8 @@ module DASHI.Physics.Closure.NSTriadKNPhysicalCriticalGalerkinSimonWeldRound104E
 --
 -- Product convergence, nonlinear distributional convergence, initial trace,
 -- Leray--Hopf limit identification and dissipation liminf are inherited from
--- the concrete G-chain.
---
--- Round29's legacy target stores ordinary `Set` fields, so this adapter is
--- deliberately specialized to the repository's concrete lzero/lzero physical
--- setting.  That is a type-correct API boundary, not a mathematical loss.
+-- the concrete G-chain.  The actual Round29 limiting element is now the G12
+-- Leray--Hopf solution itself, not merely the surrounding solution type.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (lzero)
@@ -56,11 +53,6 @@ import DASHI.Physics.Closure.NSConcreteAubinLionsNonlinearLimitWitnesses as Conc
 
 ConcreteSetting : Set₁
 ConcreteSetting = Concrete.ConcreteGalerkinSetting lzero lzero
-
-------------------------------------------------------------------------
--- Only the critical-topology upgrade absent from the energy-level G1--G19
--- chain.  Every named proposition is accompanied by an inhabitant.
-------------------------------------------------------------------------
 
 record CriticalSobolevSimonUpgrade
     (S : ConcreteSetting)
@@ -83,10 +75,6 @@ record CriticalSobolevSimonUpgrade
     weakStarCriticalLowerSemicontinuity : WeakStarCriticalLowerSemicontinuity
 
 open CriticalSobolevSimonUpgrade public
-
-------------------------------------------------------------------------
--- Existing concrete G-chain witnesses reused directly.
-------------------------------------------------------------------------
 
 ExistingQuadraticLimit :
   {S : ConcreteSetting} →
@@ -136,11 +124,6 @@ existingDissipationLiminfWitness :
   ExistingDissipationLiminf X
 existingDissipationLiminfWitness X = Concrete.g11 X
 
-------------------------------------------------------------------------
--- Build Round29's witness-bearing target.  Nat is the literal Galerkin cutoff
--- index carrier; the limit carrier is the existing analytic SolutionClass.
-------------------------------------------------------------------------
-
 physicalCriticalGalerkinSimonWeld :
   {S : ConcreteSetting} →
   (X : Concrete.ConcreteAubinLionsNonlinearLimitCertificate S) →
@@ -149,6 +132,7 @@ physicalCriticalGalerkinSimonWeld :
 physicalCriticalGalerkinSimonWeld {S = S} X U = record
   { Critical.GalerkinSequence = Nat
   ; Critical.LimitState = Canonical.SolutionClass (Concrete.analytic S)
+  ; Critical.limitingState = Concrete.solution (Concrete.g12 X)
   ; Critical.uniformLInfinityHOneHalf = UniformLInfinityHOneHalf U
   ; Critical.uniformLInfinityHOneHalfWitness = uniformLInfinityHOneHalf U
   ; Critical.uniformL2HThreeHalf = UniformL2HThreeHalf U
@@ -173,10 +157,6 @@ physicalCriticalGalerkinSimonWeld {S = S} X U = record
   ; Critical.weakDissipationLowerSemicontinuityWitness =
       existingDissipationLiminfWitness X
   }
-
-------------------------------------------------------------------------
--- Actual theorem witnesses exported from the old G-chain.
-------------------------------------------------------------------------
 
 physicalSimonWeldReusesExistingStrongL2 :
   {S : ConcreteSetting}
@@ -214,9 +194,6 @@ round104CriticalExponentArithmeticReused : Bool
 round104CriticalExponentArithmeticReused =
   Exponents.round102CriticalAubinLionsExponentArithmeticClosed
 
--- Remaining standard-analysis leaf: instantiate these five critical-space
--- witnesses on the literal periodic Galerkin family.  No new nonlinear
--- dynamics should be introduced here after the uniform critical barrier.
 round104PhysicalCriticalSobolevSimonUpgradeClosed : Bool
 round104PhysicalCriticalSobolevSimonUpgradeClosed = false
 
