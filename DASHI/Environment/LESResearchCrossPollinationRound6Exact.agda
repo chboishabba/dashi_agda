@@ -23,7 +23,6 @@ import DASHI.Core.ReopenableConsumerInterventionKernelExact as Kernel
 import DASHI.Core.ReopenableHypothesisForestExact as Hypothesis
 import DASHI.Core.StructuredResidualProductExact as Residual
 import DASHI.Core.TypedIntervalEventTransitionExact as Temporal
-import DASHI.Environment.LESResearchCrossPollinationRound5Exact as Round5
 
 ------------------------------------------------------------------------
 -- Exact P/Q/R law exported for LES source/model/scenario alternatives.
@@ -73,8 +72,3 @@ record LESRound6Boundary : Set where
 canonicalLESRound6Boundary : LESRound6Boundary
 canonicalLESRound6Boundary =
   lesRound6Boundary true true true true
-
-round6BuildsOnRound5 :
-  ∀ {LowState HighState LowIntervention HighIntervention LowOutcome HighOutcome}
-    {low : _} {high : _} → Bool
-round6BuildsOnRound5 = true
