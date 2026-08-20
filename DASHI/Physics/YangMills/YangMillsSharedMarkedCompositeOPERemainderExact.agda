@@ -1,7 +1,7 @@
 module DASHI.Physics.YangMills.YangMillsSharedMarkedCompositeOPERemainderExact where
 
 ------------------------------------------------------------------------
--- ROUND83: SHARED MARKED COMPOSITE TAIL -> LITERAL DYADIC OPE REMAINDER TYPE
+-- ROUND83: COMPOSITE-MARKED TAIL -> LITERAL DYADIC OPE REMAINDER TYPE
 --
 -- PRIMARY SOURCES / CALIBRATION
 --
@@ -19,21 +19,21 @@ module DASHI.Physics.YangMills.YangMillsSharedMarkedCompositeOPERemainderExact w
 --
 -- These papers establish rigorous perturbative OPE remainder control, not the
 -- nonperturbative four-dimensional Yang--Mills result.  The new physical input
--- remains the source-native marked composite estimate in the actual Balaban
+-- remains the source-native COMPOSITE-mark estimate in the actual Balaban
 -- continuum family.
 --
 -- DASHI CONTRIBUTION
 --
--- Round83's shared marked shell already proves, uniformly in the terminal
--- finite cutoff count k,
+-- Round83's composite-marked shell proves, uniformly in terminal finite cutoff
+-- count k,
 --
---   compositeTail(n,k) <= C * (1/2) * 2^{-n}.
+--   compositeTail(n,k) <= C_OPE * (1/2) * 2^{-n}.
 --
 -- This file proves that this is EXACTLY the repository's existing
--- `DyadicOPERemainderMajorant`, with OPE coefficient C/2.  The tail is also
+-- `DyadicOPERemainderMajorant`, with OPE coefficient C_OPE/2.  The tail is also
 -- proved nonnegative from the nonnegative composite increments.  Hence no
 -- second "OPE remainder decays" lemma remains after the physical composite
--- insertion has been identified with the shared marked activity.
+-- insertion has been identified with its declared source mark.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
@@ -76,11 +76,12 @@ sharedCompositeAsDyadicOPERemainder :
   Local.DyadicOPERemainderMajorant
 sharedCompositeAsDyadicOPERemainder shared scale volume root remaining = record
   { Local.DyadicOPERemainderMajorant.coefficient =
-      Shared.analyticConstant shared * Geo.half
+      Shared.compositeAnalyticConstant shared * Geo.half
   ; Local.DyadicOPERemainderMajorant.coefficientNonnegative =
       Weighted.productNonnegative
-        (Shared.analyticConstant shared) Geo.half
-        (Shared.analyticConstantNonnegative shared) Geo.halfNonnegative
+        (Shared.compositeAnalyticConstant shared) Geo.half
+        (Shared.markedConstantNonnegative shared Shared.compositeMark)
+        Geo.halfNonnegative
   ; Local.DyadicOPERemainderMajorant.remainderMagnitude =
       λ depth → Shared.compositeInsertionTail
         shared scale volume root depth (remaining depth)
@@ -96,7 +97,7 @@ sharedCompositeAsDyadicOPERemainder shared scale volume root remaining = record
               shared scale volume root depth (remaining depth)
             ≤ upper)
           (ℚRing.solve-∀
-            (Shared.analyticConstant shared)
+            (Shared.compositeAnalyticConstant shared)
             Geo.half
             (Geo.halfPower depth))
           (Shared.compositeInsertionTailVanishingModulus
@@ -109,7 +110,7 @@ sharedMarkedCompositeOPERemainderCompilerLevel = machineChecked
 -- Remaining C1 physics after this bridge:
 --   (1) construct/renormalize the actual gauge-invariant curvature-composite
 --       insertion on the SAME continuum family;
---   (2) prove that its RG remainder is the shared composite tail above;
+--   (2) prove that its RG remainder is the composite-mark tail above;
 --   (3) identify the short-distance OPE coefficients with the asymptotically
 --       free Yang--Mills coefficients.
 -- The pure decay-to-zero theorem is no longer independent.
