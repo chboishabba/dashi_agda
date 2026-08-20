@@ -1,7 +1,7 @@
 module DASHI.Economics.SystemicCrisisScenarioCrosswalkTests where
 
 open import DASHI.Core.Prelude
-open import DASHI.Algebra.Trit using (zer)
+open import DASHI.Algebra.Trit using (neg; zer; pos)
 
 import DASHI.Foundations.SSPTritCarrier as SSP
 import DASHI.Promotion.TechSystemicStressScenarioBoundary as Scenario
