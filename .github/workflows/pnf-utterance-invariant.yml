@@ -1,6 +1,11 @@
 name: PNF utterance invariant Agda check
 
 on:
+  push:
+    paths:
+      - 'DASHI/Cognition/Utterance/**'
+      - 'Docs/PNFUtteranceInvariantDerivation.md'
+      - '.github/workflows/pnf-utterance-invariant.yml'
   pull_request:
     paths:
       - 'DASHI/Cognition/Utterance/**'
@@ -8,7 +13,7 @@ on:
       - '.github/workflows/pnf-utterance-invariant.yml'
 
 concurrency:
-  group: dashi-global-${{ github.ref }}
+  group: pnf-utterance-invariant-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:
@@ -23,7 +28,6 @@ jobs:
       - uses: cachix/install-nix-action@v31
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
-      - uses: DeterminateSystems/magic-nix-cache-action@v9
       - name: Restore Agda 2.9 shadow cache
         uses: actions/cache@v4
         with:
