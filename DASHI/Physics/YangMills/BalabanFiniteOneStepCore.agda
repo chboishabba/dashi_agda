@@ -69,8 +69,8 @@ matrixCompose socket multiply A B i k = sumWith socket (λ j → multiply (A i j
 record FiniteInverseCertificate {a : Level} (A : Set a) : Set (lsuc a) where
   field
     operator inverse : A → A
-    inverseLeft : inverse ∘ operator ≈ id
-    inverseRight : operator ∘ inverse ≈ id
+    inverseLeft : (inverse ∘ operator) ≈ (λ x → x)
+    inverseRight : (operator ∘ inverse) ≈ (λ x → x)
 open FiniteInverseCertificate public
 
 record ConstrainedMinimizerData {f c : Level} (Fine : Set f) (Coarse : Set c) : Set (lsuc (f ⊔ c)) where
@@ -180,8 +180,8 @@ record FiniteCovarianceCertificate {v s : Level} {Vector : Set v} {Scalar : Set 
   (hessianData : FiniteHessianCertificate Vector Scalar) : Set (lsuc (v ⊔ s)) where
   field
     covariance : Vector → Vector
-    covarianceLeft : covariance ∘ hessian hessianData ≈ id
-    covarianceRight : hessian hessianData ∘ covariance ≈ id
+    covarianceLeft : (covariance ∘ hessian hessianData) ≈ (λ x → x)
+    covarianceRight : (hessian hessianData ∘ covariance) ≈ (λ x → x)
 open FiniteCovarianceCertificate public
 
 record BlockSchurData {a s : Level} (A : Set a) (Scalar : Set s) : Set (lsuc (a ⊔ s)) where
