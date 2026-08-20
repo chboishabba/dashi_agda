@@ -7,6 +7,11 @@ import DASHI.Biology.Levin.FungalNetworkAgencyBoundary as Fungal
 import DASHI.Biology.Levin.ProblemSpaceAgency as Problem
 import DASHI.Biology.Levin.ConstitutiveInteractiveAutonomy as Autonomy
 
+------------------------------------------------------------------------
+-- A mycelium is treated as a remodeling transport graph rather than as a
+-- static wire diagram.  Topology, conductance, flux and growth all remain
+-- empirically indexed and are not collapsed into a neural metaphor.
+
 record MycelialGraphObservation : Set where
   field
     hyphalTipsObserved : Bool
