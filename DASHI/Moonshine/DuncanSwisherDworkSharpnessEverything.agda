@@ -5,28 +5,26 @@ module DASHI.Moonshine.DuncanSwisherDworkSharpnessEverything where
 --
 --   exact Legendre exceptional polynomial factorization
 --     -> algebraically forced ramification exponent 3/2
---     -> simple-root/complement residue geometry
---     -> residue nonzero gives local-unit depth zero
---     -> depth-one lifted coordinate gives depth-one branch
---     -> ramified local J-coordinate depth
---     -> Dwork A1 valuation transfer
+--     -> finite exceptional residue certificates
+--     -> complete-DVR/Hensel lift lambda0
+--     -> lambda := lambda0 + pi
+--     -> lambda-lambda0 = pi*1
+--     -> actual simple branch + rational J-alpha factors
+--     -> v(J-alpha)=ramification exponent
+--     -> published Deligne--Dwork A_n(alpha^) integer family
+--     -> same-carrier p-adic coefficient family
+--     -> Dwork Theorem 8.2 / Section 7.e n=1 sharpness
+--     -> DERIVED v(A_1)=v(J-alpha)
 --     -> exact 3/2/1 coefficient depths
---     -> p11 Brandt-weight weld
---     -> exceptional p=5,7,11 partial-fraction total depth.
+--     -> exceptional partial-fraction total depth.
 --
--- Finite exceptional residue inputs are now explicit for all p=5,7,11:
--- p=5 uses a concrete F25 quadratic chart, while p=7,11 use the rational
--- j=1728 Legendre branches.  None of these finite carriers is promoted to a
--- p-adic lift.
+-- The three former p>3 source-facing objects are now closed at explicit
+-- published authority boundaries.  In particular, `tracksLocalJDepth` is no
+-- longer irreducible authority: it is reconstructed from Dwork's actual n=1
+-- sharp-value theorem and the independently derived Hensel/Legendre J depth.
 --
--- The existing bounded integer p-depth machinery is reused only below the
--- analytic boundary as an executable strict-minimum valuation shadow.  It is
--- deliberately not promoted to Dwork's p-adic carrier, and fuel stabilization
--- is proof-relevant rather than globally postulated.
---
--- The remaining source authority is now narrower than a free ramified-power
--- statement: construct the actual lifted local coordinate/factorizations and
--- Dwork's n=1 A1-to-local-J valuation transfer.
+-- We still deliberately do not claim a formal reconstruction of all of
+-- Dwork's 1969 p-adic cycle machinery or infinite convergence theory.
 ------------------------------------------------------------------------
 
 import DASHI.Algebra.RamifiedLocalValuationSharpnessExact
@@ -39,9 +37,16 @@ import DASHI.Moonshine.LegendreJExceptionalPolynomialFactorizationExact
 import DASHI.Moonshine.LegendreExceptionalBranchSimpleRootExact
 import DASHI.Moonshine.LegendreJExceptionalLocalValuationCutsetExact
 import DASHI.Moonshine.LegendreJExceptionalResidueLocalProducerExact
+import DASHI.Moonshine.LegendreExceptionalPadicLiftSameObjectExact
+import DASHI.Moonshine.LegendreExceptionalPadicHenselConstructionExact
 import DASHI.Moonshine.P5LegendreJZeroF25ResidueExact
 import DASHI.Moonshine.P7P11LegendreJ1728ResidueCertificatesExact
+import DASHI.Moonshine.DuncanSwisherDworkFirstPoleSameObjectExact
+import DASHI.Moonshine.DuncanSwisherDworkPublishedCoefficientFamilyExact
+import DASHI.Moonshine.DuncanSwisherDworkPublishedFirstPoleSharpnessExact
+import DASHI.Moonshine.DuncanSwisherDworkPublishedAnalyticCompletionExact
 import DASHI.Moonshine.DuncanSwisherDworkExceptionalAnalyticCutsetExact
+import DASHI.Moonshine.DuncanSwisherDworkLiftedFirstPoleSharpnessExact
 import DASHI.Moonshine.DuncanSwisherDworkRamifiedA1SharpnessExact
 import DASHI.Moonshine.DuncanSwisherDworkExceptionalPartialFractionSharpnessExact
 import DASHI.Moonshine.DuncanSwisherDworkVpDepthShadowExact
