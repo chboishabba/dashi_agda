@@ -6,13 +6,13 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound84Validation where
 -- Import the established Round61 integration surface first, then the current
 -- shortest Clay-facing Round84/85 stack, the Round86 beta/OPE/local-current
 -- reductions, the Round87 literal-Jaffe--Witten four-family recut, and the
--- Round88 coefficient-energy sharpening of the marked-source theorem.
+-- Round88 coefficient-energy + CMP109 mixed-jet sharpenings.
 --
 -- Round87 keeps stress tensor + OPE on the literal Clay route but removes the
 -- stronger stress-charge = H_OS theorem from the shortest blocker set.
--- Round88 reuses the exact NS weighted Gram-defect/Cauchy theorem so composite
--- and stress Hilbert bounds reduce to a shared differentiated-source coefficient
--- energy estimate rather than two independent continuity producers.
+-- Round88 reuses exact finite weighted Cauchy so composite/stress Hilbert bounds
+-- share one coefficient-energy producer, and uses CMP109 (5.36)--(5.41) to
+-- reduce literal beta extraction to one off-diagonal mixed two-jet coefficient.
 --
 -- This root also forces the repaired sign-aware rational quotient arithmetic
 -- used by the literal beta evaluator.
@@ -27,6 +27,7 @@ import DASHI.Physics.YangMills.BalabanCMP116DifferentiatedLocalizationSourceExac
 import DASHI.Physics.YangMills.BalabanIrrelevantRGMemoryContractionExact
 import DASHI.Physics.YangMills.BalabanCompactSimpleUniversalBetaFloorExact
 import DASHI.Physics.YangMills.BalabanCompactSimpleFourOrbitHalfRemainderExact
+import DASHI.Physics.YangMills.BalabanCMP109MixedDerivativeBetaExtractionExact
 import DASHI.Physics.YangMills.BalabanMarkedSourceNuclearCompositeFieldExact
 import DASHI.Physics.YangMills.BalabanMarkedSourceCoefficientEnergyHilbertCompilerExact
 import DASHI.Physics.YangMills.BalabanOPECoefficientRGRecurrenceUniquenessExact
