@@ -73,7 +73,7 @@ highMinorityIsOneGapGainTimesHighSquared :
 highMinorityIsOneGapGainTimesHighSquared outputShell gap =
   trans
     (cong
-      (_* highScale outputShell gap)
+      (λ low → low * highScale outputShell gap)
       (Eq.sym (HH.highHighLowGainCalibration outputShell gap)))
     (solve
       ( helicalGapGain gap
@@ -90,9 +90,7 @@ lowMinorityIsTwoGapGainsTimesHighSquared outputShell gap =
     calibration = Eq.sym (HH.highHighLowGainCalibration outputShell gap)
   in
   trans
-    (cong
-      (λ low → low * low)
-      calibration)
+    (cong (λ low → low * low) calibration)
     (solve
       ( helicalGapGain gap
       ∷ highScale outputShell gap
