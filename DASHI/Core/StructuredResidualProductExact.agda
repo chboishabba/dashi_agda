@@ -9,8 +9,9 @@ module DASHI.Core.StructuredResidualProductExact where
 -- coordinate carries the burden.  Consumer-local safety therefore needs the
 -- structured carrier (or a proved descent theorem), not merely a scalar total.
 --
--- This is the finite two-coordinate kernel of the broader tensorising/local
--- residual principle already used elsewhere in DASHI.
+-- This module contains both the exact two-coordinate non-descent kernel and a
+-- typed four-axis cold-residual carrier for the recurrent cross-project split:
+-- raw evidence, geometry/lineage, model/fidelity, and policy/authority.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
@@ -20,6 +21,10 @@ open import Data.Empty using (⊥)
 open import Data.Product using (_×_; _,_; proj₁; proj₂)
 
 import DASHI.Core.ReopenableConsumerInterventionKernelExact as Kernel
+
+------------------------------------------------------------------------
+-- Minimal exact non-descent theorem for scalarisation.
+------------------------------------------------------------------------
 
 Residual2 : Set
 Residual2 = Nat × Nat
@@ -32,17 +37,6 @@ firstCoordinate = proj₁
 
 secondCoordinate : Residual2 → Nat
 secondCoordinate = proj₂
-
-------------------------------------------------------------------------
--- Exact non-descent witness:
---
---   (1,0) and (0,1) have the same global total 1,
---   but a consumer of the first coordinate distinguishes them.
---
--- Hence no function of the scalar sum alone can recover every coordinate-local
--- claim.  This is stronger than saying the scalar is "less informative": it is
--- an explicit quotient-descent obstruction.
-------------------------------------------------------------------------
 
 one : Nat
 one = suc zero
@@ -71,6 +65,82 @@ scalarTotalLosesSecondCoordinate =
     impossible : zero ≡ one → ⊥
     impossible ()
 
+------------------------------------------------------------------------
+-- Typed four-axis cold residual.
+--
+-- These coordinates intentionally have unrelated types.  No addition or norm
+-- is available unless a domain/consumer supplies one.  This prevents a policy
+-- authority defect from being silently added to a geometric or empirical
+-- residual merely because a runtime wants one dashboard number.
+------------------------------------------------------------------------
+
+record StructuredResidual4
+    (RawEvidence GeometryLineage ModelFidelity PolicyAuthority : Set) : Set where
+  constructor structuredResidual4
+  field
+    rawEvidence : RawEvidence
+    geometryLineage : GeometryLineage
+    modelFidelity : ModelFidelity
+    policyAuthority : PolicyAuthority
+
+open StructuredResidual4 public
+
+rebuildStructuredResidual4 :
+  ∀ {RawEvidence GeometryLineage ModelFidelity PolicyAuthority} →
+  (residual : StructuredResidual4
+    RawEvidence GeometryLineage ModelFidelity PolicyAuthority) →
+  structuredResidual4
+    (rawEvidence residual)
+    (geometryLineage residual)
+    (modelFidelity residual)
+    (policyAuthority residual)
+  ≡ residual
+rebuildStructuredResidual4 (structuredResidual4 raw geometry model policy) = refl
+
+------------------------------------------------------------------------
+-- Reopening is coordinate-specific.  A changed model calibration need not be
+-- misreported as changed raw evidence; policy invalidation need not pretend the
+-- geometry changed.  Dependency closure may of course make several coordinates
+-- live at once, but that is a theorem/dataflow fact rather than scalarization.
+------------------------------------------------------------------------
+
+data ResidualAxis : Set where
+  rawEvidenceAxis : ResidualAxis
+  geometryLineageAxis : ResidualAxis
+  modelFidelityAxis : ResidualAxis
+  policyAuthorityAxis : ResidualAxis
+
+record CoordinateReopening (axis : ResidualAxis) : Set where
+  constructor coordinateReopening
+  field
+    affected : Bool
+
+open CoordinateReopening public
+
+record StructuredReopeningPlan : Set where
+  constructor structuredReopeningPlan
+  field
+    rawEvidenceReopening : CoordinateReopening rawEvidenceAxis
+    geometryLineageReopening : CoordinateReopening geometryLineageAxis
+    modelFidelityReopening : CoordinateReopening modelFidelityAxis
+    policyAuthorityReopening : CoordinateReopening policyAuthorityAxis
+
+open StructuredReopeningPlan public
+
+onlyModelFidelityAffected : StructuredReopeningPlan
+onlyModelFidelityAffected =
+  structuredReopeningPlan
+    (coordinateReopening false)
+    (coordinateReopening false)
+    (coordinateReopening true)
+    (coordinateReopening false)
+
+modelOnlyDoesNotMarkRawEvidenceAffected :
+  affected (rawEvidenceReopening onlyModelFidelityAffected) ≡ false
+modelOnlyDoesNotMarkRawEvidenceAffected = refl
+  where
+    open import Agda.Builtin.Bool using (false)
+
 record StructuredResidualBoundary : Set where
   constructor structuredResidualBoundary
   field
@@ -78,7 +148,9 @@ record StructuredResidualBoundary : Set where
     coordinateConsumersNeedStructuredCarrierOrDescentProof : Bool
     residualCoordinatesNeedNotShareScientificUnits : Bool
     globalScalarisationIsAConsumerRelativeClaim : Bool
+    typedColdResidualHasExactReconstruction : Bool
+    reopeningCanRemainCoordinateSpecific : Bool
 
 canonicalStructuredResidualBoundary : StructuredResidualBoundary
 canonicalStructuredResidualBoundary =
-  structuredResidualBoundary true true true true
+  structuredResidualBoundary true true true true true true
