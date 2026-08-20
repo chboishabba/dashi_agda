@@ -17,8 +17,8 @@ module DASHI.Physics.YangMills.BalabanMarkedSourceGeometricShellEnergyExact wher
 -- MATHEMATICAL ROLE
 --
 -- CMP116 differentiated localization supplies exponential/tree-distance decay.
--- Once the ACTUAL differentiated source has been grouped into nonnegative shell
--- energies E_d and one proves
+-- Once the ACTUAL differentiated source has been grouped into shell energies
+-- E_d and one proves
 --
 --              E_d <= E0 r^d,
 --
@@ -31,15 +31,12 @@ module DASHI.Physics.YangMills.BalabanMarkedSourceGeometricShellEnergyExact wher
 --
 -- whenever (1-r)B = 1.  The second inequality is the already machine-checked
 -- exact rational geometric theorem.
---
--- Combined with `BalabanMarkedSourceCoefficientEnergyHilbertCompilerExact`,
--- this means the composite/stress Hilbert modulus is downstream of ONE physical
--- source theorem: a same-object geometric shell-energy estimate.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Rational.Base using
-  (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_; _<_ ; nonNegative)
+  (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_; _<_; nonNegative)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (subst)
