@@ -23,11 +23,13 @@ module DASHI.Physics.YangMills.BalabanCMP119SameFamilyInsertionReductionExact wh
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _≤_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _≤_; _*_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanCMP119AnchoredNormalizedExpectationSourceExact as Source
 import DASHI.Physics.YangMills.BalabanTopDownSummableRGIncrementExact as Sum
+import DASHI.Physics.YangMills.BalabanClayT2UrsellCauchyExact as Ursell
+import DASHI.Physics.YangMills.BalabanTraceKoteckyPreissGeometricExact as Geo
 
 
 data ResponseKind : Set where
@@ -66,9 +68,7 @@ record SameFamilyCMP119InsertionReduction
 
     generatedIncrementDyadic : ∀ scale →
       generatedIncrement scale
-      ≤ coefficient
-        * (DASHI.Physics.YangMills.BalabanClayT2UrsellCauchyExact.quarter
-          * DASHI.Physics.YangMills.BalabanTraceKoteckyPreissGeometricExact.halfPower scale)
+      ≤ coefficient * (Ursell.quarter * Geo.halfPower scale)
 
     responseDifference : ResponseKind → Nat → Nat → ℚ
     responseDifferenceNonnegative : ∀ kind start count →
