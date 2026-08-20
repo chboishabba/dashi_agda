@@ -27,6 +27,7 @@ on:
       - 'DASHI/Geometry/WearableBehaviouralSearchExact.agda'
       - 'DASHI/Environment/LESResearchCrossPollinationRound5Exact.agda'
       - 'DASHI/Environment/LESResearchCrossPollinationRound6Exact.agda'
+      - 'DASHI/Environment/PlanningLoopRegression.agda'
       - 'DASHI/ReopenableConsumerInterventionCrossDomainEverything.agda'
       - 'Docs/ReopenableConsumerInterventionRound4.md'
       - '.github/workflows/reopenable-consumer-intervention.yml'
@@ -75,6 +76,7 @@ jobs:
               DASHI/Geometry/WearableBehaviouralSearchExact.agda
               DASHI/Environment/LESResearchCrossPollinationRound5Exact.agda
               DASHI/Environment/LESResearchCrossPollinationRound6Exact.agda
+              DASHI/Environment/PlanningLoopRegression.agda
             )
             scripts/run_agda29_parallel_check.sh "${targets[@]}"
           ) > agda-reopenable-consumer-intervention.log 2>&1
