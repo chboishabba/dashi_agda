@@ -23,6 +23,8 @@ import DASHI.DCHoTT.Everything
 import DASHI.Energy.Everything
 import DASHI.Quantum.ExhaustiveEverything
 import DASHI.Geometry.Everything
+import DASHI.Foundations.Everything
+import DASHI.Analysis.Everything
 
 -- Natural / physical / applied domains.
 import DASHI.Biology.DomainEverything
