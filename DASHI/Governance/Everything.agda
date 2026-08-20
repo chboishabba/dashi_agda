@@ -44,6 +44,11 @@ import DASHI.Governance.TraumaMemorySublationBoundary
 import DASHI.Governance.CabarlahTraumaProjectionBridgeExact
 import DASHI.Governance.ComparativeCrisisClimateAtlas
 import DASHI.Governance.RevolutionaryAdjunctRegression
+
+-- Provenance-bearing policy routing, corrective reachability and source-bounded
+-- application surfaces assembled as one focused tranche.
+import DASHI.Governance.ProvenanceReflectionRoutingRound14
+
 import DASHI.Governance.Sudan.RCEPPSourceBoundary
 import DASHI.Governance.Sudan.RCEPPInstitutionalSurface
 import DASHI.Governance.Sudan.RCEPPPromotionBoundary
