@@ -52,3 +52,9 @@ jobs:
           nix develop .# --command
           bash scripts/run_agda29_parallel_check.sh
           DASHI/Physics/Closure/NSTriadKNConcretePhysicalRetainedFiberProgram.agda
+
+      - name: Type-check Round101 eigenpacket frontier
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNClayFrontierRound101Validation.agda
