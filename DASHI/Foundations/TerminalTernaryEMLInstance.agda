@@ -71,6 +71,12 @@ terminalConcreteContext =
 terminalTernaryDecision : TernaryEMLDecision
 terminalTernaryDecision = represented terminalConcreteContext
 
+------------------------------------------------------------------------
+-- Generic reusable obstruction constructor: whenever a generated diagonal unit
+-- is exactly the distinguished unit but that unit is forbidden in first position,
+-- the candidate has a certified domain obstruction.  This does not refute every
+-- restricted-domain use of the operator; it refutes the stated reusable-unit route.
+
 unitFirstArgumentObstruction :
   ∀ {Value : Set}
     (CandidateDomain : Value → Set)
