@@ -12,7 +12,7 @@ module DASHI.Physics.Closure.NSTriadKNFixedEigenvalueCircleSchurDecayNoGoRound10
 -- Title: "On the geometry of the nodal lines of eigenfunctions of the
 -- two-dimensional torus".
 -- Annales Henri Poincare 12 (2011), 1027--1053.
--- DOI: 10.1007/s00023-011-0101-y.
+-- DOI: 10.1007/s00023-011-0098-z.
 --
 -- ROUND101 / WHAT THE ARITHMETIC CIRCLE CAN AND CANNOT BUY
 --
@@ -40,8 +40,12 @@ module DASHI.Physics.Closure.NSTriadKNFixedEigenvalueCircleSchurDecayNoGoRound10
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_)
+open import Agda.Builtin.List using ([]; _∷_)
+open import Data.Rational.Base using
+  (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; NonNegative; nonNegative)
 import Data.Rational.Properties as ℚP
+open import Data.Rational.Tactic.RingSolver using (solve)
+open import Relation.Binary.PropositionalEquality using (subst)
 
 circleCountingMajorant : ℚ → ℚ → ℚ
 circleCountingMajorant count oneIncidenceWeight = count * oneIncidenceWeight
@@ -52,13 +56,21 @@ nonemptyCountCannotImproveWeight :
   0ℚ ≤ weight →
   weight ≤ circleCountingMajorant count weight
 nonemptyCountCannotImproveWeight count weight oneBelowCount zeroBelowWeight =
-  ℚP.≤-trans
-    (ℚP.≤-reflexive (sym (ℚP.*-identityˡ weight)))
-    (ℚP.*-monoʳ-≤-nonNeg weight oneBelowCount)
-  where
-  instance
-    weightNN : Data.Rational.Base.NonNegative weight
-    weightNN = Data.Rational.Base.nonNegative zeroBelowWeight
+  let
+    instance
+      weightNN : NonNegative weight
+      weightNN = nonNegative zeroBelowWeight
+
+    scaled : 1ℚ * weight ≤ count * weight
+    scaled = ℚP.*-monoʳ-≤-nonNeg weight oneBelowCount
+
+    oneTimesWeight : 1ℚ * weight ≡ weight
+    oneTimesWeight = solve (weight ∷ [])
+  in
+  subst
+    (λ lhs → lhs ≤ circleCountingMajorant count weight)
+    oneTimesWeight
+    scaled
 
 positiveWeightFloorSurvivesCounting :
   ∀ count weight floor →
