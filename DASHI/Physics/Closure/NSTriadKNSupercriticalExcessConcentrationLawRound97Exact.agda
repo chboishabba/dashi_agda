@@ -41,6 +41,7 @@ open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Rational.Base using (ℚ; 0ℚ; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 
@@ -102,13 +103,11 @@ weightedExcessSquareConcentrationLaw {C} cell =
       let instance d2NNI = nonNegative d2NN
       in ℚP.*-monoˡ-≤-nonNeg (square D) x2≤a2
 
-    lambdaNN = shellScaleNonnegative cell
-
     lambdaD2X2≤lambdaD2A2 :
       lambda * (square D * square X)
       ≤ lambda * (square D * square A)
     lambdaD2X2≤lambdaD2A2 =
-      let instance lambdaNNI = nonNegative lambdaNN
+      let instance lambdaNNI = nonNegative (shellScaleNonnegative cell)
       in ℚP.*-monoˡ-≤-nonNeg lambda d2x2≤d2a2
 
     d2TimesBernstein :
@@ -128,9 +127,21 @@ weightedExcessSquareConcentrationLaw {C} cell =
       square D * (C * D) ≡ C * cube D
     rightRearrange = solve (C ∷ D ∷ [])
 
+    baseLeftToGoalRight :
+      square D * (lambda * square A) ≤ C * cube D
+    baseLeftToGoalRight =
+      subst
+        (λ right → square D * (lambda * square A) ≤ right)
+        rightRearrange
+        d2TimesBernstein
+
     middle :
       lambda * (square D * square A) ≤ C * cube D
-    middle rewrite leftRearrange | rightRearrange = d2TimesBernstein
+    middle =
+      subst
+        (λ left → left ≤ C * cube D)
+        (sym leftRearrange)
+        baseLeftToGoalRight
 
     raw : lambda * (square D * square X) ≤ C * cube D
     raw = ℚP.≤-trans lambdaD2X2≤lambdaD2A2 middle
