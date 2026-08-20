@@ -22,15 +22,25 @@ module DASHI.Moonshine.SSPRepresentationHeckeIntertwinerBoundaryExact where
 --
 --   SSP carrier = Hecke model
 --
--- by the operator-compatible target suggested by the representation/modular
--- synthesis:
+-- by the operator-compatible target
 --
 --   Phi o R_p = T_p o Phi.
 --
--- An intertwiner preserves the distinction between two carriers while making
--- their dynamics/correspondences comparable.  This module defines that target
--- and a second target matching the repository's existing finite
--- PrimeCorrespondenceHeckeOn API.  It does NOT manufacture either intertwiner.
+-- The generic quotient-descent mechanism is now proved for the actual finite
+-- PrimeCorrespondenceHeckeOn API, with a concrete FactorVec -> SupportMask
+-- instance.  The natural-level version now permits level-dependent fine and
+-- coarse carriers.  On the representation side the explicit fine carrier and
+-- quotient are also constructed:
+--
+--   level 2: two spinor basis states -> one SU(2) doublet sector;
+--   level 2j+1: SO(3) weights 0,+/-1,...,+/-j -> matched D_(2j+1) sectors.
+--
+-- Therefore the remaining representation-side producer is no longer an
+-- unnamed quotient.  It is specifically the source-justified level-indexed
+-- 15-way correspondence on those fine states, together with proof that it
+-- respects the explicit weight-to-sector quotient.  After that, the induced
+-- sector correspondence must still be identified/intertwined with the actual
+-- arithmetic Hecke/Brandt correspondence.  No carrier equality is assumed.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -39,6 +49,11 @@ open import Agda.Builtin.String using (String)
 
 import MonsterOntos as Monster
 import Ontology.Hecke.CorrespondenceRepresentation as Hecke
+import DASHI.Moonshine.HeckeCorrespondenceQuotientDescentExact as QuotientDescent
+import DASHI.Moonshine.FactorVecSupportMaskHeckeQuotientExact as FiniteModel
+import DASHI.Moonshine.IndexedLevelHeckeQuotientDescentExact as IndexedDescent
+import DASHI.Moonshine.CandidateReductionSectorFamilyExact as Sector
+import DASHI.Moonshine.SO3WeightMatchedDihedralQuotientExact as Weight
 import DASHI.Physics.Closure.PhysicalSSPHeckeModelClosureReceipt as Existing
 
 record PrimeIndexedOperatorIntertwiner
@@ -98,7 +113,51 @@ existingGate3StillOpen =
     Existing.canonicalPhysicalSSPHeckeModelClosureReceipt
 
 ------------------------------------------------------------------------
--- Commuting-square obligation without assuming either side already exists.
+-- Constructed quotient/intertwiner stages.
+------------------------------------------------------------------------
+
+genericQuotientDescentConstructed :
+  QuotientDescent.quotientCorrespondenceConstructedFromCongruence
+    QuotientDescent.canonicalHeckeCorrespondenceQuotientBoundary
+  ≡ true
+genericQuotientDescentConstructed =
+  QuotientDescent.quotientCorrespondenceConstructedFromCongruenceIsTrue
+    QuotientDescent.canonicalHeckeCorrespondenceQuotientBoundary
+
+finiteSupportMaskIntertwinerConstructed :
+  FiniteModel.observableHeckeIntertwiningProved
+    FiniteModel.canonicalFactorVecSupportMaskHeckeBoundary
+  ≡ true
+finiteSupportMaskIntertwinerConstructed =
+  FiniteModel.observableHeckeIntertwiningProvedIsTrue
+    FiniteModel.canonicalFactorVecSupportMaskHeckeBoundary
+
+indexedQuotientDescentConstructed :
+  IndexedDescent.levelwiseQuotientIntertwiningDerived
+    IndexedDescent.canonicalIndexedLevelHeckeQuotientBoundary
+  ≡ true
+indexedQuotientDescentConstructed =
+  IndexedDescent.levelwiseQuotientIntertwiningDerivedIsTrue
+    IndexedDescent.canonicalIndexedLevelHeckeQuotientBoundary
+
+representationSectorFamilyConstructed :
+  Sector.levelDependentReductionCarrierConstructed
+    Sector.canonicalCandidateReductionSectorFamilyBoundary
+  ≡ true
+representationSectorFamilyConstructed =
+  Sector.levelDependentReductionCarrierConstructedIsTrue
+    Sector.canonicalCandidateReductionSectorFamilyBoundary
+
+representationWeightQuotientConstructed :
+  Weight.matchedDihedralSectorQuotientConstructed
+    Weight.canonicalSO3WeightMatchedDihedralBoundary
+  ≡ true
+representationWeightQuotientConstructed =
+  Weight.matchedDihedralSectorQuotientConstructedIsTrue
+    Weight.canonicalSO3WeightMatchedDihedralBoundary
+
+------------------------------------------------------------------------
+-- Commuting-square obligation for the actual SSP representation/modular lane.
 ------------------------------------------------------------------------
 
 record SSPRepresentationModularIntertwinerTarget : Set₁ where
@@ -130,7 +189,7 @@ canonicalSSPRepresentationModularIntertwinerTarget =
     ; witnessConstructed = false
     ; witnessConstructedIsFalse = refl
     ; targetDescription =
-        "Construct a prime-indexed reduction/Hecke intertwiner Phi R_p = T_p Phi; carrier equality is not required and is not assumed."
+        "Construct the source-justified indexed correspondence on the explicit spinor/SO(3) fine weight carrier; prove congruence under the explicit weight-to-matched-sector quotient; then identify the induced sector correspondence with the intended arithmetic Hecke/Brandt action."
     }
 
 record SSPRepresentationHeckeBoundary : Set where
@@ -143,9 +202,29 @@ record SSPRepresentationHeckeBoundary : Set where
     existingFiniteCorrespondenceAPIReusedIsTrue :
       existingFiniteCorrespondenceAPIReused ≡ true
 
-    classicalHeckeIntertwinerConstructed : Bool
-    classicalHeckeIntertwinerConstructedIsFalse :
-      classicalHeckeIntertwinerConstructed ≡ false
+    genericQuotientCorrespondenceDescentProved : Bool
+    genericQuotientCorrespondenceDescentProvedIsTrue :
+      genericQuotientCorrespondenceDescentProved ≡ true
+
+    concreteFactorVecSupportMaskIntertwinerProved : Bool
+    concreteFactorVecSupportMaskIntertwinerProvedIsTrue :
+      concreteFactorVecSupportMaskIntertwinerProved ≡ true
+
+    indexedLevelDependentDescentProved : Bool
+    indexedLevelDependentDescentProvedIsTrue :
+      indexedLevelDependentDescentProved ≡ true
+
+    explicitSO3WeightToSectorQuotientProved : Bool
+    explicitSO3WeightToSectorQuotientProvedIsTrue :
+      explicitSO3WeightToSectorQuotientProved ≡ true
+
+    fineSO3WeightCorrespondenceConstructed : Bool
+    fineSO3WeightCorrespondenceConstructedIsFalse :
+      fineSO3WeightCorrespondenceConstructed ≡ false
+
+    classicalSO3ToArithmeticHeckeIntertwinerConstructed : Bool
+    classicalSO3ToArithmeticHeckeIntertwinerConstructedIsFalse :
+      classicalSO3ToArithmeticHeckeIntertwinerConstructed ≡ false
 
     representationReductionClaimedToEqualHeckeAction : Bool
     representationReductionClaimedToEqualHeckeActionIsFalse :
@@ -158,8 +237,18 @@ canonicalSSPRepresentationHeckeBoundary =
     ; equalityReplacedByIntertwinerTargetIsTrue = refl
     ; existingFiniteCorrespondenceAPIReused = true
     ; existingFiniteCorrespondenceAPIReusedIsTrue = refl
-    ; classicalHeckeIntertwinerConstructed = false
-    ; classicalHeckeIntertwinerConstructedIsFalse = refl
+    ; genericQuotientCorrespondenceDescentProved = true
+    ; genericQuotientCorrespondenceDescentProvedIsTrue = refl
+    ; concreteFactorVecSupportMaskIntertwinerProved = true
+    ; concreteFactorVecSupportMaskIntertwinerProvedIsTrue = refl
+    ; indexedLevelDependentDescentProved = true
+    ; indexedLevelDependentDescentProvedIsTrue = refl
+    ; explicitSO3WeightToSectorQuotientProved = true
+    ; explicitSO3WeightToSectorQuotientProvedIsTrue = refl
+    ; fineSO3WeightCorrespondenceConstructed = false
+    ; fineSO3WeightCorrespondenceConstructedIsFalse = refl
+    ; classicalSO3ToArithmeticHeckeIntertwinerConstructed = false
+    ; classicalSO3ToArithmeticHeckeIntertwinerConstructedIsFalse = refl
     ; representationReductionClaimedToEqualHeckeAction = false
     ; representationReductionClaimedToEqualHeckeActionIsFalse = refl
     }

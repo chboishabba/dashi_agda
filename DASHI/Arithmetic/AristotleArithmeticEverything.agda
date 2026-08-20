@@ -12,7 +12,9 @@ module DASHI.Arithmetic.AristotleArithmeticEverything where
 
 import DASHI.Interop.AristotleMathSourceParityExact
 import DASHI.Arithmetic.DecimalDigitalRootNonaryExact
+import DASHI.Arithmetic.AristotleTeslaBaseNonaryOrbitExact
 import DASHI.Arithmetic.FibonacciNonaryPeriodExact
+import DASHI.Arithmetic.AristotleFibVortexParityExact
 import DASHI.Arithmetic.PrimeModSixSieveExact
 import DASHI.Arithmetic.SixWheelSieveCountExact
 import DASHI.Arithmetic.SixWheelCRTExact
