@@ -18,11 +18,15 @@ on:
       - 'DASHI/Core/ConsumerObserverJoinResidualExact.agda'
       - 'DASHI/Core/ConsumerSafeFidelityEscalationExact.agda'
       - 'DASHI/Core/EvidenceReliabilityPolarityExact.agda'
+      - 'DASHI/Core/ReopenableHypothesisForestExact.agda'
+      - 'DASHI/Core/StructuredResidualProductExact.agda'
+      - 'DASHI/Core/TypedIntervalEventTransitionExact.agda'
       - 'DASHI/Core/ReopenableConsumerInterventionCrossDomainRegression.agda'
       - 'DASHI/Geometry/AdaptiveWearableCompilerExact.agda'
       - 'DASHI/Geometry/EmpiricalROMRiskFieldExact.agda'
       - 'DASHI/Geometry/WearableBehaviouralSearchExact.agda'
       - 'DASHI/Environment/LESResearchCrossPollinationRound5Exact.agda'
+      - 'DASHI/Environment/LESResearchCrossPollinationRound6Exact.agda'
       - 'DASHI/ReopenableConsumerInterventionCrossDomainEverything.agda'
       - 'Docs/ReopenableConsumerInterventionRound4.md'
       - '.github/workflows/reopenable-consumer-intervention.yml'
@@ -70,6 +74,7 @@ jobs:
               DASHI/Core/ReopenableConsumerInterventionCrossDomainRegression.agda
               DASHI/Geometry/WearableBehaviouralSearchExact.agda
               DASHI/Environment/LESResearchCrossPollinationRound5Exact.agda
+              DASHI/Environment/LESResearchCrossPollinationRound6Exact.agda
             )
             scripts/run_agda29_parallel_check.sh "${targets[@]}"
           ) > agda-reopenable-consumer-intervention.log 2>&1
