@@ -19,6 +19,7 @@ module DASHI.Core.ConsumerSafeFidelityEscalationExact where
 -- are available", Biometrika 87(1), 2000. DOI: 10.1093/biomet/87.1.1.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Empty using (⊥)
 
@@ -84,13 +85,10 @@ dispositionFromEvidence (mustEscalate missing) = runHigh
 record FidelityEscalationBoundary : Set where
   constructor fidelityEscalationBoundary
   field
-    escalationIsInformationObligation : Agda.Builtin.Bool.Bool
-    escalationDoesNotRefuteLowFidelity : Agda.Builtin.Bool.Bool
-    acceptedLowRequiresDecisionMarginEvidence : Agda.Builtin.Bool.Bool
+    escalationIsInformationObligation : Bool
+    escalationDoesNotRefuteLowFidelity : Bool
+    acceptedLowRequiresDecisionMarginEvidence : Bool
 
 canonicalFidelityEscalationBoundary : FidelityEscalationBoundary
 canonicalFidelityEscalationBoundary =
-  fidelityEscalationBoundary
-    Agda.Builtin.Bool.true
-    Agda.Builtin.Bool.true
-    Agda.Builtin.Bool.true
+  fidelityEscalationBoundary true true true
