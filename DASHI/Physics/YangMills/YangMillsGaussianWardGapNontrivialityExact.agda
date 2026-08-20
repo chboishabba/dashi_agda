@@ -35,9 +35,9 @@ module DASHI.Physics.YangMills.YangMillsGaussianWardGapNontrivialityExact where
 -- massless transverse one-particle dispersion into the existing no-gap
 -- contradiction.
 --
--- This module performs the SAME-SYSTEM assembly.  The Gaussian predicate is on
+-- This module performs the SAME-SYSTEM assembly. The Gaussian predicate is on
 -- the actual continuum Schwinger system; the positive-gap input is on the
--- Hamiltonian reconstructed from that same system.  Thus nontriviality can be
+-- Hamiltonian reconstructed from that same system. Thus nontriviality can be
 -- downstream of the continuum Ward/locality theorem plus the clustering/gap
 -- theorem rather than an independent fourth-cumulant estimate.
 ------------------------------------------------------------------------
@@ -55,7 +55,7 @@ import DASHI.Physics.YangMills.YangMillsGaussianWardTwoDerivativeMaxwellClassifi
 --
 -- The only standard imported step is the free/Gaussian OS statement: once the
 -- SAME system has the Maxwell quadratic kernel, its reconstructed one-particle
--- sector is the massless Maxwell sector.  Everything else is exact assembly.
+-- sector is the massless Maxwell sector. Everything else is exact assembly.
 ------------------------------------------------------------------------
 
 record SameSystemGaussianWardGapData
@@ -137,8 +137,8 @@ nonGaussianityGivesInteractingContinuumWitness :
     {system : OS.ContinuumSchwingerSystem Observable Point Scalar} →
   (dataSet : SameSystemGaussianWardGapData system) →
   OS.InteractingContinuumWitness Observable Point Scalar system
-nonGaussianityGivesInteractingContinuumWitness dataSet = record
-  { OS.InteractingContinuumWitness.Witness = Gaussian dataSet _ → ⊥
+nonGaussianityGivesInteractingContinuumWitness {system = system} dataSet = record
+  { OS.InteractingContinuumWitness.Witness = Gaussian dataSet system → ⊥
   ; OS.InteractingContinuumWitness.witness =
       gaussianSameSystemContradiction dataSet
   }
