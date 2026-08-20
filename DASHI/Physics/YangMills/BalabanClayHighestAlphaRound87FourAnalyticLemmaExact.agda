@@ -52,6 +52,7 @@ import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound85SixAnalyticLemmaAtt
 import DASHI.Physics.YangMills.YangMillsClayStressOPERequirementBoundaryExact
 import DASHI.Physics.YangMills.BalabanMarkedSourceCompositeStressFieldExact
 import DASHI.Physics.YangMills.YangMillsSameFamilyCumulantMarginToInteractingExact
+import DASHI.Physics.YangMills.BalabanClayT4SineDeterminesCosineAtomExact
 import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound77FiveAnalyticCutsetExact
 import DASHI.Physics.YangMills.BalabanOPECoefficientRGRecurrenceUniquenessExact
 import DASHI.Physics.YangMills.BalabanPolchinskiShellIntegralDebtExact
@@ -72,6 +73,8 @@ round87ShortestClayAnalyticCount = 4
 -- with a cutoff/volume/scale/group-uniform strictly positive lower bound.
 -- Round86 already compiles four joint regular orbit enclosures in [-1/2,1/2]
 -- into all-group positivity once the literal evaluator/trig/remainder data exist.
+-- Round87 further removes an independent cosine interval producer: coherent
+-- cos(k) intervals are derived algebraically from the primitive sin(k/2) boxes.
 literalCompactSimplePositiveBetaLevel : ProofLevel
 literalCompactSimplePositiveBetaLevel = conditional
 
@@ -116,6 +119,9 @@ literalClayStressOPEBoundaryLevel = machineChecked
 
 sameCompletedCompositeStressFieldCompilerLevel : ProofLevel
 sameCompletedCompositeStressFieldCompilerLevel = machineChecked
+
+sineHalfDeterminesCosineIntervalLevel : ProofLevel
+sineHalfDeterminesCosineIntervalLevel = machineChecked
 
 allDepthOPECoefficientRecurrenceLevel : ProofLevel
 allDepthOPECoefficientRecurrenceLevel = machineChecked
