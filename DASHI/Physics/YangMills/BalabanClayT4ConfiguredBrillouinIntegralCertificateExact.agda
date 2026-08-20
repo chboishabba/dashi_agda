@@ -92,11 +92,15 @@ record ConfiguredBrillouinIntegralCertificate
 
     singularBoxes regularBoxes : Scale → List BoxIntegralEnclosure
 
-    colorTensorReductionExact : ∀ scale → Set
-    wardTransverseProjectorExact : ∀ scale → Set
-    massAndLongitudinalTermsVanish : ∀ scale → Set
+    -- Agda 2.9 cannot infer the domain of a binder whose codomain is the
+    -- universe `Set` and whose body does not otherwise mention the binder.
+    -- Keep the source API unchanged but state the physical scale type
+    -- explicitly.  These are propositions indexed by the same RG scale.
+    colorTensorReductionExact : (scale : Scale) → Set
+    wardTransverseProjectorExact : (scale : Scale) → Set
+    massAndLongitudinalTermsVanish : (scale : Scale) → Set
 
-    infraredSingularIntegrandExact : ∀ scale → Set
+    infraredSingularIntegrandExact : (scale : Scale) → Set
     infraredShellIntegralLogLExact : ∀ scale →
       scalarIntegral scale
       ≡ multiply
@@ -104,8 +108,8 @@ record ConfiguredBrillouinIntegralCertificate
             (casimirAdjoint scale))
           (multiply (inversePiSquared scale) (logBlocking scale))
 
-    regularBoxCoverExact : ∀ scale → Set
-    regularBoxEnclosuresValid : ∀ scale → Set
+    regularBoxCoverExact : (scale : Scale) → Set
+    regularBoxEnclosuresValid : (scale : Scale) → Set
     regularRemainderBetweenBoxSums : ∀ scale →
       LessEqual (rational (boxLowerSum (regularBoxes scale)))
         (regularRemainder scale)
