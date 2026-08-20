@@ -9,15 +9,20 @@ module DASHI.Physics.YangMills.BalabanReversibleRGCheegerSpectralGapExact where
 -- Transactions of the American Mathematical Society 309 (1988), 557--580.
 -- DOI: 10.1090/S0002-9947-1988-0930082-9.
 --
+-- SOURCE CORRECTION / ROUND60
+--
+-- Lawler--Sokal treat discrete-time Markov chains and continuous-time
+-- Markovian jump processes on general state spaces, including reversible and
+-- nonreversible cases, and also a killed-process variant.  Reversibility is
+-- therefore NOT a mandatory physical producer for the Bałaban RG kernel.
+-- The literal kernel should determine which theorem branch is applicable.
+--
 -- DASHI CONTRIBUTION
 --
--- Keep the hard theorem boundary honest.  Lawler--Sokal supplies the standard
--- conductance/isoperimetry -> L^2 spectral-gap bridge for Markov chains and
--- Markov processes.  We do NOT request a spectral gap as a primitive physical
--- field.  Instead, a physical RG construction must produce a reversible
--- positive Markov object and its conductance.  This file proves the exact
--- rational normalization used downstream from the denominator-cleared
--- Cheeger inequality phi^2 <= 2 gamma.
+-- Keep the hard theorem boundary honest.  The existing exact rational
+-- normalization is retained for the familiar reversible Cheeger subcase,
+-- while a separate regime tag prevents the physical cutset from silently
+-- demanding detailed balance when Lawler--Sokal does not.
 ------------------------------------------------------------------------
 
 open import Data.Integer.Base using (+_)
@@ -29,6 +34,10 @@ open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
+
+------------------------------------------------------------------------
+-- Existing exact reversible normalization.
+------------------------------------------------------------------------
 
 record ReversibleRGCheegerData : Set where
   field
@@ -76,14 +85,35 @@ cheegerTwoSided :
 cheegerTwoSided data =
   cheegerLowerBoundNormalized (lowerData data) , lawlerSokalUpper data
 
+------------------------------------------------------------------------
+-- Physical theorem selector: do not force reversibility.
+------------------------------------------------------------------------
+
+data LawlerSokalRegime : Set where
+  reversibleRG nonreversibleRG killedRG : LawlerSokalRegime
+
+record LiteralRGLawlerSokalRoute : Set where
+  constructor literalRGLawlerSokalRoute
+  field
+    regime : LawlerSokalRegime
+open LiteralRGLawlerSokalRoute public
+
 lawlerSokalCheegerTheoremLevel : ProofLevel
 lawlerSokalCheegerTheoremLevel = standardImported
+
+lawlerSokalNonreversibleAndKilledCoverageLevel : ProofLevel
+lawlerSokalNonreversibleAndKilledCoverageLevel = standardImported
 
 cheegerRationalNormalizationLevel : ProofLevel
 cheegerRationalNormalizationLevel = machineChecked
 
--- These are the actual physical producer leaves.  Without them, the imported
--- theorem says nothing about Yang--Mills.
+-- Actual physical producer: construct the SAME Bałaban RG transition object
+-- and prove the hypotheses of whichever Lawler--Sokal branch it satisfies.
+literalRGLawlerSokalHypothesesLevel : ProofLevel
+literalRGLawlerSokalHypothesesLevel = conditional
+
+-- Legacy reversible subcase retained for downstream compatibility.  It is no
+-- longer a mandatory leaf in the shortest Clay cutset.
 literalRGReversibilityLevel : ProofLevel
 literalRGReversibilityLevel = conditional
 

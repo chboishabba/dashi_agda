@@ -21,8 +21,8 @@ module DASHI.Physics.YangMills.BalabanP33TerminalScaleGapPullbackExact where
 -- DASHI CONTRIBUTION
 --
 -- Formalize the exact algebra that a terminal-scale spectral gap route must
--- discharge.  No unproved physical scaling law such as m_{j+1}=2m_j is
--- asserted.  Instead each RG step must provide the explicit inequality
+-- discharge. No unproved physical scaling law such as m_{j+1}=2m_j is
+-- asserted. Instead each RG step must provide the explicit inequality
 --
 --   m_{j+1} <= 2 m_j + epsilon_j.
 --
@@ -31,18 +31,26 @@ module DASHI.Physics.YangMills.BalabanP33TerminalScaleGapPullbackExact where
 --   (m_{j+1}-epsilon_j)/2 <= m_j.
 --
 -- Chaining N such steps gives a fine-scale lower floor obtained by repeatedly
--- halving the coarse floor and subtracting the corresponding loss.  The module
+-- halving the coarse floor and subtracting the corresponding loss. The module
 -- proves the recursion and its closed exact-rational decomposition
 --
 --   2^{-N} m_N - sum_j 2^{-(j+1)} epsilon_j.
 --
--- Positivity is not stored as an unrelated receipt: it is derived from the
--- explicit discounted-loss inequality
+-- Round60 strengthens the earlier nonnegative budget criterion to the strict
+-- form required by a physical mass gap:
 --
---   discountedLossBudget <= discountFactor(N) * terminalGap.
+--   discountedLossBudget < discountFactor(N) * terminalGap
+--
+-- implies BOTH
+--
+--   0 < pullBackGap terminalGap losses
+--
+-- and, for an actual GapTransferChain,
+--
+--   0 < fineGap.
 --
 -- The finite-volume terminal gap and every one-step physical estimate must be
--- proved elsewhere.  Nothing here assumes a bare volume-uniform Poincare
+-- proved elsewhere. Nothing here assumes a bare volume-uniform Poincare
 -- constant or claims that RG dynamically generates a gap.
 ------------------------------------------------------------------------
 
@@ -51,13 +59,14 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; -_; _≤_; _/_; NonNegative)
+  (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; -_; _≤_; _<_; _/_; NonNegative)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using
   (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanSZZStrongCouplingDecisionExact as SZZ
 
 half : ℚ
 half = + 1 / 2
@@ -205,7 +214,7 @@ fourStepPullbackExact terminalGap loss0 loss1 loss2 loss3 =
   ℚRing.solve-∀ terminalGap loss0 loss1 loss2 loss3
 
 ------------------------------------------------------------------------
--- Exact loss-budget criterion for a nonnegative inherited floor.
+-- Exact loss-budget criteria for nonnegative AND positive inherited floors.
 ------------------------------------------------------------------------
 
 differenceNonnegative : ∀ {lower upper} →
@@ -220,6 +229,11 @@ discountedLossBudgetAdmissible : ℚ → List ℚ → Set
 discountedLossBudgetAdmissible terminalGap losses =
   discountedLossBudget losses
   ≤ discountFactor (listLength losses) * terminalGap
+
+discountedLossBudgetStrictlyAdmissible : ℚ → List ℚ → Set
+discountedLossBudgetStrictlyAdmissible terminalGap losses =
+  discountedLossBudget losses
+  < discountFactor (listLength losses) * terminalGap
 
 admissibleBudgetImpliesPulledBackNonnegative :
   ∀ terminalGap losses →
@@ -243,6 +257,30 @@ admissibleBudgetImpliesFineNonnegative chain budgetAdmissible =
       _ _ budgetAdmissible)
     (pullBackGapBelowFine chain)
 
+strictBudgetImpliesPulledBackPositive :
+  ∀ terminalGap losses →
+  discountedLossBudgetStrictlyAdmissible terminalGap losses →
+  0ℚ < pullBackGap terminalGap losses
+strictBudgetImpliesPulledBackPositive
+    terminalGap losses budgetStrict =
+  subst
+    (λ selected → 0ℚ < selected)
+    (sym (pullBackGapClosedForm terminalGap losses))
+    (SZZ.differencePositive
+      (discountFactor (listLength losses) * terminalGap)
+      (discountedLossBudget losses)
+      budgetStrict)
+
+strictBudgetImpliesFinePositive :
+  ∀ {fine losses terminalGap} →
+  GapTransferChain fine losses terminalGap →
+  discountedLossBudgetStrictlyAdmissible terminalGap losses →
+  0ℚ < fine
+strictBudgetImpliesFinePositive chain budgetStrict =
+  ℚP.<-≤-trans
+    (strictBudgetImpliesPulledBackPositive _ _ budgetStrict)
+    (pullBackGapBelowFine chain)
+
 terminalGapPullbackStepLevel : ProofLevel
 terminalGapPullbackStepLevel = machineChecked
 
@@ -251,6 +289,9 @@ terminalGapPullbackChainLevel = machineChecked
 
 terminalGapDiscountedBudgetLevel : ProofLevel
 terminalGapDiscountedBudgetLevel = machineChecked
+
+terminalGapStrictDiscountedBudgetLevel : ProofLevel
+terminalGapStrictDiscountedBudgetLevel = machineChecked
 
 physicalRGGapTransferProducerLevel : ProofLevel
 physicalRGGapTransferProducerLevel = conditional
