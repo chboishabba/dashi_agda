@@ -1,6 +1,10 @@
 name: NS canonical finite Agda check
 
 on:
+  push:
+    branches:
+      - codex/ns-canonical-finite-closure
+      - codex/ns-canonical-profile-gamma-gap
   pull_request:
     paths:
       - 'DASHI/Physics/Closure/NSTriadKNCanonical*.agda'
@@ -8,7 +12,7 @@ on:
       - '.github/workflows/ns-canonical-finite-check.yml'
 
 concurrency:
-  group: dashi-global-${{ github.ref }}
+  group: ns-canonical-focused-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:
@@ -24,7 +28,6 @@ jobs:
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
 
-      - uses: DeterminateSystems/magic-nix-cache-action@v9
       - name: Restore Agda 2.9 shadow cache
         uses: actions/cache@v4
         with:
