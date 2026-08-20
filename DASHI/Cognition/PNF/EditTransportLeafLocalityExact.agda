@@ -15,10 +15,9 @@ open import Relation.Binary.PropositionalEquality using (sym; trans)
 -- must not identify leaves by the semantic value whose change we are trying to
 -- measure.
 --
--- This is an audit projection, not a second semantic authority carrier. The
--- existing NumericOccurrenceFibre remains the token-occurrence authority; this
--- module abstracts the extra support/structural coordinates needed to compare
--- arbitrary parser/object/factor/residual/export/proof leaves across an edit.
+-- `supportCoordinates` stands for the ordered source-support occurrence list.
+-- `structuralPositionKey` and `provenancePathKey` stand for already-numeric,
+-- proof-bearing structural coordinates (role/slot/interface path, etc.).
 ------------------------------------------------------------------------
 
 record OccurrenceSignature : Set where
@@ -131,6 +130,14 @@ ambiguityRefutesVerifiedCorrespondence certificate before eligible left right le
 
 ------------------------------------------------------------------------
 -- Reverse-dependency closure locality.
+--
+-- Soundness and precision are intentionally different propositions:
+--
+--   sound: every actually changed leaf lies inside the predicted closure;
+--   exact: every predicted leaf actually changes.
+--
+-- The runtime may safely over-approximate while still being inefficient. A
+-- verified soundness claim therefore must not be silently promoted to exactness.
 ------------------------------------------------------------------------
 
 record EditedDependencyClosure
@@ -196,6 +203,13 @@ localityViolationRefutesSoundness soundness leaf changed outside =
 
 ------------------------------------------------------------------------
 -- Full audit certificate.
+--
+-- A verified small-edit result needs BOTH:
+--   1. unique transported occurrence correspondence for every eligible leaf;
+--   2. changed-leaf inclusion in the reverse-dependency closure.
+--
+-- Semantic value equality is deliberately absent from the correspondence
+-- premise, so the audit does not assume the conclusion it is trying to test.
 ------------------------------------------------------------------------
 
 record VerifiedEditLocality
