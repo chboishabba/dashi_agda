@@ -21,6 +21,7 @@ open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 open import Data.List.Base using (List; []; _∷_)
 open import Data.List.Membership.Propositional using (_∈_)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 ------------------------------------------------------------------------
 -- 1. Consumer-relative descent through a projection.
@@ -57,11 +58,13 @@ consumerDescentDefectContradictsDescent :
   ConsumerDescent project consume →
   ConsumerDescentDefect project consume →
   ⊥
-consumerDescentDefectContradictsDescent descent defect
-  rewrite factorises descent (left defect)
-        | factorises descent (right defect)
-        | sameProjection defect =
-  consumerDistinguishes defect refl
+consumerDescentDefectContradictsDescent descent defect =
+  consumerDistinguishes defect
+    (trans
+      (factorises descent (left defect))
+      (trans
+        (cong (quotientConsumer descent) (sameProjection defect))
+        (sym (factorises descent (right defect)))))
 
 ------------------------------------------------------------------------
 -- 2. Generic intertwining / commutation law and explicit defect witness.
