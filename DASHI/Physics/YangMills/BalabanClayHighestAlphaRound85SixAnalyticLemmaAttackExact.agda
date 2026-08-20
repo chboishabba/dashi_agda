@@ -9,33 +9,31 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound85SixAnalyticLemmaAtt
 --
 -- L1 / compact-simple beta:
 --   classified C_A(G) >= 2, hence C_A(G)*11/24 >= 11/12.
---   Therefore ONE group-independent literal remainder radius R < 11/12 is
---   enough for every encoded compact-simple group.
+--   `BalabanCompactSimpleFourOrbitHalfRemainderExact` now further compiles FOUR
+--   literal joint-orbit interval enclosures with total in [-1/2,1/2] directly
+--   into an all-group `UniformBetaEnclosure`.
 --
 -- L4 / continuum composite field:
 --   once the SAME completed composite projection supplies a linear literal
 --   source derivative with one Hilbertian test-function modulus and the nuclear
 --   topology refines that Hilbert topology, nuclear-continuous distributional
 --   field existence is theorem output.  A separate completion receipt is gone.
---   The count does not fall until L2 physically supplies that same-family modulus.
 --
 -- L6 / stress charge -- Round86 sharpening:
---   Requardt's local-charge strategy suggests the correct proof-facing premise
---   is NOT global operator convergence and not even direct vector-level cutoff
---   stabilization.  Instead:
 --
 --      local T_{0 nu} + microcausality
 --        -> outer-shell commutator vanishes beyond supp(A)
 --        -> [Q_R,A] eventually constant
 --      + Q_R(A Omega) = [Q_R,A] Omega
 --        -> Q_R(A Omega) eventually constant
---        -> exact local-core charge definition.
+--        -> exact additive local-core charge.
 --
---   Finite-cutoff additivity + one common support cutoff further imply that the
---   stabilized charge is additive; this is not another continuum estimate.
---   The genuinely live stress analysis is consequently renormalized local
---   T_{mu nu}/Ward construction + same-OS infinitesimal action on a dense local
---   core + the required self-adjoint closure.  Stone then owns generator equality.
+--   There is a second reduction after this.  We no longer require the physical
+--   theorem to prove exp(i t Q)=U_OS(t) as an independent global statement.
+--   It is enough to prove that the stress charge and OS generator agree on one
+--   common core and that both global operators are the self-adjoint closures of
+--   those core actions.  `YangMillsStressWardCommonCoreGeneratorExact` then gives
+--   Q=H_OS/P and Stone supplies equality of the exponentials downstream.
 --
 -- PRIMARY LOCAL-CHARGE CALIBRATION
 --
@@ -69,11 +67,13 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound84SixAnalyticLemmaExact
 import DASHI.Physics.YangMills.BalabanCompactSimpleUniversalBetaFloorExact
+import DASHI.Physics.YangMills.BalabanCompactSimpleFourOrbitHalfRemainderExact
 import DASHI.Physics.YangMills.BalabanMarkedSourceNuclearCompositeFieldExact
 import DASHI.Physics.YangMills.YangMillsStressChargeLocalCoreCutoffStabilizationExact
 import DASHI.Physics.YangMills.YangMillsLocalChargeCommutatorToCoreStabilizationExact
 import DASHI.Physics.YangMills.YangMillsLocalCurrentMicrocausalShellExact
 import DASHI.Physics.YangMills.YangMillsLocalCoreChargeLinearityExact
+import DASHI.Physics.YangMills.YangMillsStressWardCommonCoreGeneratorExact
 import DASHI.Physics.YangMills.YangMillsStressWardStoneGeneratorBridgeExact
 
 round85IndependentPackageCount : Nat
@@ -86,10 +86,11 @@ round85HardAnalyticLemmaUpperCount = 6
 -- REFINED LIVE PHYSICAL LEAVES
 ------------------------------------------------------------------------
 
--- L1 now needs one universal same-object remainder theorem, not a family of
--- group-specific positive-beta inequalities.
-literalWilsonFPHaarScalarAndUniformRemainderBelowElevenTwelfthsLevel : ProofLevel
-literalWilsonFPHaarScalarAndUniformRemainderBelowElevenTwelfthsLevel = conditional
+-- L1: the post-evaluation arithmetic is now finished.  Physical work is the
+-- SAME literal Wilson/reduced-FP/Haar Ward scalar + C_A factorization + four
+-- joint regular orbit interval evaluations inside the common half-radius budget.
+literalWilsonFPHaarFourJointOrbitHalfEnclosuresLevel : ProofLevel
+literalWilsonFPHaarFourJointOrbitHalfEnclosuresLevel = conditional
 
 -- L2 remains the common physical marked-coordinate theorem.  For the L2->L4
 -- fusion it must additionally expose the completed composite projection, linear
@@ -110,12 +111,13 @@ sameFamilyCompositeFieldInputDataLevel = conditional
 sameFamilyOPEAndAsymptoticFreedomMatchingLevel : ProofLevel
 sameFamilyOPEAndAsymptoticFreedomMatchingLevel = conditional
 
--- L6 after Round86: construct local renormalized stress/Ward data and prove its
--- local-core infinitesimal action has the required self-adjoint closure and
--- generates the SAME reconstructed OS translations.  Microcausal shell removal,
--- vector-level cutoff stabilization and additivity are now downstream compilers.
-physicalStressWardSelfAdjointSameOSTranslationsLevel : ProofLevel
-physicalStressWardSelfAdjointSameOSTranslationsLevel = conditional
+-- L6 after Round86: construct the local renormalized stress/Ward action on the
+-- SAME reconstructed local core, prove agreement there with the OS generator,
+-- and prove the required essential-self-adjoint/common-core closure facts.
+-- Shell cutoff removal, additivity, global generator equality and exponentials
+-- are downstream.
+physicalStressWardCommonCoreAndEssentialSelfAdjointnessLevel : ProofLevel
+physicalStressWardCommonCoreAndEssentialSelfAdjointnessLevel = conditional
 
 ------------------------------------------------------------------------
 -- THEOREM-BEARING DOWNSTREAM REDUCTIONS
@@ -126,6 +128,9 @@ compactSimpleUniversalCasimirFloorLevel = machineChecked
 
 compactSimpleUniversalBetaFloorLevel : ProofLevel
 compactSimpleUniversalBetaFloorLevel = machineChecked
+
+fourOrbitHalfToAllGroupPositiveBetaLevel : ProofLevel
+fourOrbitHalfToAllGroupPositiveBetaLevel = machineChecked
 
 markedSourceToNuclearCompositeFieldCompilerLevel : ProofLevel
 markedSourceToNuclearCompositeFieldCompilerLevel = machineChecked
@@ -142,8 +147,11 @@ stressChargeLocalCoreCutoffRemovalLevel = machineChecked
 stabilizedChargeAdditivityCompilerLevel : ProofLevel
 stabilizedChargeAdditivityCompilerLevel = machineChecked
 
-stoneGeneratorUniquenessAfterSameTranslationsLevel : ProofLevel
-stoneGeneratorUniquenessAfterSameTranslationsLevel = standardImported
+commonCoreClosureEqualityCompilerLevel : ProofLevel
+commonCoreClosureEqualityCompilerLevel = machineChecked
+
+stoneExponentialsAfterGeneratorEqualityLevel : ProofLevel
+stoneExponentialsAfterGeneratorEqualityLevel = standardImported
 
 -- No Clay solution inhabitant is asserted by this root.
 ------------------------------------------------------------------------
