@@ -21,14 +21,14 @@ module DASHI.Physics.YangMills.BalabanCharacteristicNuclearContinuityTransportEx
 --
 -- Velhinho makes explicit the Hilbertian presentation of a nuclear topology:
 -- a countable increasing family of Hilbert norms, with the connecting maps
--- Hilbert--Schmidt.  Continuity in one weaker Hilbertian topology therefore
+-- Hilbert--Schmidt. Continuity in one weaker Hilbertian topology therefore
 -- implies continuity in the stronger nuclear topology.
 --
 -- Michael J. Meyer,
 -- "Regression With Gaussian Measures" (2004 notes; no DOI recorded).
 -- Meyer is used only for the separate Hilbert-space Gaussian fact that a
 -- covariance operator of a Gaussian measure on a Hilbert space is positive
--- trace class, and conversely.  This is NOT made a gate for the nuclear-dual
+-- trace class, and conversely. This is NOT made a gate for the nuclear-dual
 -- Bochner--Minlos route.
 --
 -- Boby Gunarso,
@@ -41,16 +41,6 @@ module DASHI.Physics.YangMills.BalabanCharacteristicNuclearContinuityTransportEx
 ------------------------------------------------------------------------
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
-
-------------------------------------------------------------------------
--- We avoid pretending that Agda's Set is already a topological vector space.
--- Instead we isolate exactly the implication needed by the physical compiler.
--- A `Near` predicate is indexed by an arbitrary precision/radius carrier.
---
--- `StrongerNear nuclear hilbert` means every sufficiently-nuclear-small test
--- function is also Hilbert-small at the same requested precision.  This is the
--- direction needed because the nuclear topology is stronger.
-------------------------------------------------------------------------
 
 record ContinuityScale : Set₁ where
   field
@@ -91,13 +81,6 @@ continuityMovesUpAlongStrongerDomainTopology C nuclearNear hilbertNear f
   hilbertContinuous radius test
     (nuclearToHilbert radius test nuclearSmall)
 
-------------------------------------------------------------------------
--- Physical packaging: theorem #4 does NOT need an independent mysterious
--- `NuclearContinuous` estimate if it already carries one common Hilbertian
--- characteristic modulus and the declared test space has the standard nuclear
--- topology refinement into that Hilbertian seminorm.
-------------------------------------------------------------------------
-
 record HilbertianCharacteristicModulus (C : ContinuityScale) : Set₁ where
   field
     characteristic : Test C → Value C
@@ -129,18 +112,15 @@ characteristicNuclearContinuity C dataSet =
 -- IMPORTANT ROUTE BOUNDARY
 --
 -- Trace class is a hard gate only if one insists that the Gaussian measure
--- live on the Hilbert space itself.  It is not a necessary extra hypothesis
--- for the nuclear-dual Bochner--Minlos construction.  The two routes are kept
--- as distinct constructors instead of silently identifying them.
+-- live on the Hilbert space itself. It is not a necessary extra hypothesis
+-- for the nuclear-dual Bochner--Minlos construction. The route tag below keeps
+-- the two constructions visibly distinct without inventing an implication
+-- between them.
 ------------------------------------------------------------------------
 
 data ContinuumMeasureRoute : Set where
   hilbertTraceClassRoute : ContinuumMeasureRoute
   nuclearDualMinlosRoute : ContinuumMeasureRoute
-
-routesRemainDistinct :
-  hilbertTraceClassRoute ≡ nuclearDualMinlosRoute → Set
-routesRemainDistinct impossible = Set
 
 characteristicNuclearContinuityTransportLevel : ProofLevel
 characteristicNuclearContinuityTransportLevel = machineChecked
