@@ -20,7 +20,7 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound84SixAnalyticLemmaExa
 --     fixed declared marginal data.  The current-step nonlinear remainder has a
 --     separate budget.
 --
--- (ii) beta-history depth, physical spatial separation, and OPE truncation depth
+-- (ii) beta-memory depth, physical spatial separation, and OPE truncation depth
 --      are distinct typed marks.  One differentiated analytic theorem may be
 --      uniform over the mark kind, but no equality of those metrics is used.
 --
@@ -44,8 +44,10 @@ import DASHI.Physics.YangMills.BalabanBetaHistoryLocalizedInfluenceExact
 import DASHI.Physics.YangMills.BalabanSharedMarkedAnalyticShellExact
 import DASHI.Physics.YangMills.BalabanCompactSimplePositiveBetaFromSharedMarkedShellExact
 import DASHI.Physics.YangMills.CompactSimpleClassificationAdjointCasimirExact
+import DASHI.Physics.YangMills.BalabanCMP109CompactSimpleColourReductionSourceExact
 import DASHI.Physics.YangMills.BalabanCompactSimpleHaarQuadraticCasimirExact
 import DASHI.Physics.YangMills.BalabanReducedGhostPrincipalLogDetSourceExact
+import DASHI.Physics.YangMills.BalabanFiniteTraceSeriesPrefixTailExact
 import DASHI.Physics.YangMills.BalabanPolchinskiShellIntegralDebtExact
 import DASHI.Physics.YangMills.YangMillsSharedMarkedCompositeOPERemainderExact
 import DASHI.Physics.YangMills.YangMillsLatticeStressWardSliceConservationExact
@@ -64,16 +66,19 @@ round84HardAnalyticLemmaUpperCount = 6
 -- L1 / A1: literal same-step compact-simple one-loop theorem.
 --
 -- On the SAME Bałaban finite-cutoff background carrier:
---   * identify the literal constrained Wilson + reduced FP + Haar polarization
---     scalar with the classified compact-simple C_A times the universal 11/24;
+--   * evaluate the universal constrained Wilson + reduced FP + Haar polarization
+--     scalar and normalize it to the source Ward-reduced/classified compact-
+--     simple colour factor C_A, obtaining C_A * 11/24;
 --   * prove the remaining same-step/Bishop nonlinear remainder has a
 --     cutoff/volume/scale/group-uniform radius R_local small enough for the
 --     retained positive margin.
 --
--- Already downstream/source-owned: strict C_A>0 for all classified simple Lie
--- types; Haar quadratic coefficient C_A/24 in exponential coordinates; the
--- literal reduced ghost fourth jet, row contraction, signed log-tail Cauchy
--- modulus and finite principal-log/log-det functional calculus.
+-- Already downstream/source-owned: CMP109 Ward reduction of the colour tensor
+-- to one invariant scalar; uniqueness of the compact-simple invariant bilinear
+-- form; strict C_A>0 for all classified simple Lie types; Haar quadratic
+-- coefficient C_A/24 in exponential coordinates; the literal reduced ghost
+-- fourth jet, row contraction, signed log-tail Cauchy modulus, finite prefix /
+-- tail algebra and finite principal-log/log-det functional calculus.
 literalCompactSimpleOneLoopAndLocalRemainderLevel : ProofLevel
 literalCompactSimpleOneLoopAndLocalRemainderLevel = conditional
 
@@ -95,10 +100,11 @@ physicalMarkedAnalyticSourceAndProjectionLevel = conditional
 -- L3 / B1: physical heat/Doob Hessian debt.
 --
 -- On the SAME finite-cutoff density and compact-group heat/Doob interpolation,
--- identify the negative Hessian contribution on each continuous Polchinski-time
--- shell and prove its integral I_n is bounded by the marked/discrete shell debt
--- eta_n.  The geometric sum eta_n <= C(17/32)^n -> sum I_n <= (32/15)C and
--- the Ricci-reserve/LSI algebra are downstream.
+-- identify the negative Hessian contribution on each continuous time shell and
+-- prove its integral I_n is bounded by the marked/discrete shell debt eta_n.
+-- The geometric sum eta_n <= C(17/32)^n -> sum I_n <= (32/15)C is downstream.
+-- With the positive compact-simple Ricci reserve, standard inhomogeneous
+-- Gamma-calculus then gives a strictly positive uniform LSI/Poincare rate.
 physicalPerShellHeatHessianDebtLevel : ProofLevel
 physicalPerShellHeatHessianDebtLevel = conditional
 
@@ -108,7 +114,7 @@ physicalPerShellHeatHessianDebtLevel = conditional
 -- distributions/operators on the SAME continuum Schwinger/OS family produced by
 -- the source-native RG limit.  Existing completed-state projection theorems show
 -- same-family inheritance once the completed physical carrier exists, but do not
--- themselves construct that carrier.
+-- themselves construct that carrier or its nuclear test-function continuity.
 sameFamilyRenormalizedCurvatureCompositeExistenceLevel : ProofLevel
 sameFamilyRenormalizedCurvatureCompositeExistenceLevel = conditional
 
@@ -137,6 +143,12 @@ sameFamilyStressWardGeneratesOSTranslationsLevel = conditional
 -- DOWNSTREAM / SOURCE-OWNED RESULTS REMOVED FROM THE NEW-ANALYSIS COUNT
 ------------------------------------------------------------------------
 
+cmp109WardColourScalarReductionLevel : ProofLevel
+cmp109WardColourScalarReductionLevel = standardImported
+
+compactSimpleInvariantColourReductionLevel : ProofLevel
+compactSimpleInvariantColourReductionLevel = standardImported
+
 classifiedCompactSimpleCasimirAndPositivityLevel : ProofLevel
 classifiedCompactSimpleCasimirAndPositivityLevel = machineChecked
 
@@ -146,12 +158,16 @@ compactSimpleHaarQuadraticCasimirLevel = machineChecked
 reducedGhostFinitePrincipalLogDetLevel : ProofLevel
 reducedGhostFinitePrincipalLogDetLevel = standardImported
 
+reducedGhostFinitePrefixTailAlgebraLevel : ProofLevel
+reducedGhostFinitePrefixTailAlgebraLevel = machineChecked
+
 compactSimpleTwoChannelPositiveBetaAssemblyLevel : ProofLevel
 compactSimpleTwoChannelPositiveBetaAssemblyLevel = machineChecked
 
-betaMarginalHistoryExponentialForgettingLevel : ProofLevel
--- Deliberately NOT asserted: there is no such theorem on this route.
-betaMarginalHistoryExponentialForgettingLevel = conditional
+-- Deliberate NON-GOAL (not represented by a ProofLevel field): there is no
+-- theorem asserting exponential forgetting of the marginal running coupling.
+-- CMP109 says the g_{j-1} dependence is important.  Only the irrelevant-memory
+-- coordinate is localized/contractive on this route.
 
 sourceExponentialToDyadicWidthLevel : ProofLevel
 sourceExponentialToDyadicWidthLevel = standardImported
@@ -161,6 +177,9 @@ markedTailAndWeightedRowCompilerLevel = machineChecked
 
 polchinskiShellDebtGeometricSummationLevel : ProofLevel
 polchinskiShellDebtGeometricSummationLevel = machineChecked
+
+compactGroupRicciReserveDebtToLSILevel : ProofLevel
+compactGroupRicciReserveDebtToLSILevel = standardImported
 
 compositeDyadicOPERemainderModulusLevel : ProofLevel
 compositeDyadicOPERemainderModulusLevel = machineChecked
