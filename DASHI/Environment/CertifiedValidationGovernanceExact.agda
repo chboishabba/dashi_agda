@@ -6,8 +6,8 @@ module DASHI.Environment.CertifiedValidationGovernanceExact where
 -- The base governance module is a runtime evidence carrier.  Its Bool fields
 -- are not themselves proof that a deployment gate succeeded.  This module adds
 -- the promotion layer: every condition used to authorize deployment is backed
--- by equality-to-true evidence, and validation-result lists can be certified as
--- all passed.
+-- by equality-to-true evidence, and deployment requires a non-empty validation
+-- programme whose listed results all passed.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
@@ -15,6 +15,11 @@ open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List; []; _∷_)
 
 import DASHI.Environment.ValidationGovernance as Governance
+
+
+data NonEmptyValidation : List Governance.ValidationResult → Set where
+  validationNonEmpty :
+    ∀ {head tail} → NonEmptyValidation (head ∷ tail)
 
 
 data AllValidationPassed : List Governance.ValidationResult → Set where
@@ -29,6 +34,8 @@ record CertifiedGovernanceReview
     (review : Governance.GovernanceReview) : Set where
   constructor certifiedGovernanceReview
   field
+    validationProgrammeNonEmpty :
+      NonEmptyValidation (Governance.validationResults review)
     validationsPassed :
       AllValidationPassed (Governance.validationResults review)
     communityReviewCheck : Governance.communityReviewRecorded review ≡ true
@@ -56,6 +63,7 @@ record CertifiedGovernanceBoundary : Set where
   constructor certifiedGovernanceBoundary
   field
     rawBooleanGateDoesNotByItselfProveDeploymentEligibility : Bool
+    validationProgrammeCannotBeEmptyForThisPromotion : Bool
     everyListedValidationMustPassForThisPromotion : Bool
     disclosureChecksAreProofBearing : Bool
     approvalChecksAreProofBearing : Bool
@@ -63,4 +71,4 @@ record CertifiedGovernanceBoundary : Set where
 
 canonicalCertifiedGovernanceBoundary : CertifiedGovernanceBoundary
 canonicalCertifiedGovernanceBoundary =
-  certifiedGovernanceBoundary true true true true true
+  certifiedGovernanceBoundary true true true true true true
