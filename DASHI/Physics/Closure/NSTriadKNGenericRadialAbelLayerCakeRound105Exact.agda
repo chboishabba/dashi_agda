@@ -95,8 +95,9 @@ module _ (K : Algebra.ExactOrderedCommutativeRing) where
           (Scalar._*_ S (Scalar.zero S) (Scalar.zero S))
           (Scalar.zero S)
       symZero = R.solve 0
-        (Scalar.zero S R.⊜
-          ((Scalar.zero S R.⊗ Scalar.zero S) R.⊕ Scalar.zero S)) refl
+        ((R.K (Scalar.zero S)) R.⊜
+          (((R.K (Scalar.zero S)) R.⊗ (R.K (Scalar.zero S)))
+            R.⊕ (R.K (Scalar.zero S)))) refl
   weightedTransferAbelIdentity (b ∷ []) =
     oneBand
     where
@@ -112,9 +113,10 @@ module _ (K : Algebra.ExactOrderedCommutativeRing) where
           (Scalar.zero S)
       oneBand = R.solve 2
         (λ w q →
-          ((w R.⊗ q) R.⊕ Scalar.zero S)
+          ((w R.⊗ q) R.⊕ R.K (Scalar.zero S))
           R.⊜
-          ((w R.⊗ (q R.⊕ Scalar.zero S)) R.⊕ Scalar.zero S))
+          ((w R.⊗ (q R.⊕ R.K (Scalar.zero S)))
+            R.⊕ R.K (Scalar.zero S)))
         refl (weight b) (transfer b)
   weightedTransferAbelIdentity (b0 ∷ b1 ∷ rest) =
     let
@@ -190,7 +192,8 @@ module _ (K : Algebra.ExactOrderedCommutativeRing) where
           (radialLayerCake bands)
         ≡ radialLayerCake bands
       zeroEndpoint = R.solve 2
-        (λ w L → ((w R.⊗ Scalar.zero S) R.⊕ L) R.⊜ L)
+        (λ w L →
+          ((w R.⊗ R.K (Scalar.zero S)) R.⊕ L) R.⊜ L)
         refl (baseWeight bands) (radialLayerCake bands)
 
 round105GenericRadialAbelLayerCakeClosed : Bool
