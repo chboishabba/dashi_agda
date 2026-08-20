@@ -4,27 +4,18 @@ module DASHI.Core.TypedEvidenceDependencyExact where
 -- TYPED EVIDENCE DEPENDENCY
 --
 -- Cross-domain lesson from Animalexic, SeaMeInIt and LES:
---
---   multiple downstream measurements/receipts derived from one source episode
---   are not automatically multiple independent confirmations;
---
---   changing an upstream artifact reopens exactly those downstream claims for
---   which a dependency path is actually carried.
---
--- The module is deliberately structural.  Statistical independence requires a
--- domain model; this file proves only provenance-root separation and exact
--- dependency reachability.
+-- multiple downstream measurements/receipts derived from one source episode
+-- are not automatically multiple independent confirmations.  Exact reopening
+-- reuses AffectedDependencyClosureExact rather than defining another closure.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_)
 open import Data.Empty using (⊥)
+
+import DASHI.Core.AffectedDependencyClosureExact as Affected
 
 _≢_ : ∀ {A : Set} → A → A → Set
 x ≢ y = x ≡ y → ⊥
-
-------------------------------------------------------------------------
--- Evidence episodes / provenance roots.
-------------------------------------------------------------------------
 
 record EvidenceItem (Root Payload : Set) : Set where
   constructor evidenceItem
@@ -53,44 +44,19 @@ sameRootContradictsProvenanceIndependence same independent =
   rootsDistinct independent same
 
 ------------------------------------------------------------------------
--- Exact dependency closure.  This is the provenance/build-system relation;
--- covariance, correlation, or statistical influence does not construct it.
+-- Canonical dependency/reopening aliases.  Covariance or statistical influence
+-- does not construct these paths; the upstream module owns that boundary.
 ------------------------------------------------------------------------
 
-data DependencyPath
-    {Artifact : Set}
-    (DirectlyDependsOn : Artifact → Artifact → Set) :
-    Artifact → Artifact → Set where
-  direct :
-    ∀ {upstream downstream} →
-    DirectlyDependsOn upstream downstream →
-    DependencyPath DirectlyDependsOn upstream downstream
-  extend :
-    ∀ {upstream middle downstream} →
-    DependencyPath DirectlyDependsOn upstream middle →
-    DirectlyDependsOn middle downstream →
-    DependencyPath DirectlyDependsOn upstream downstream
+DependencyPath :
+  ∀ {Artifact : Set} →
+  (Artifact → Artifact → Set) → Artifact → Artifact → Set
+DependencyPath = Affected.AffectedClosure
 
-appendDependencyPath :
-  ∀ {Artifact}
-    {DirectlyDependsOn : Artifact → Artifact → Set}
-    {left middle right : Artifact} →
-  DependencyPath DirectlyDependsOn left middle →
-  DependencyPath DirectlyDependsOn middle right →
-  DependencyPath DirectlyDependsOn left right
-appendDependencyPath first (direct edge) = extend first edge
-appendDependencyPath first (extend rest edge) =
-  extend (appendDependencyPath first rest) edge
-
-record ChangeInvalidates
-    {Artifact : Set}
-    (DirectlyDependsOn : Artifact → Artifact → Set)
-    (changed derived : Artifact) : Set where
-  constructor changeInvalidates
-  field
-    dependencyPath : DependencyPath DirectlyDependsOn changed derived
-
-open ChangeInvalidates public
+ChangeInvalidates :
+  ∀ {Artifact : Set} →
+  (Artifact → Artifact → Set) → Artifact → Artifact → Set
+ChangeInvalidates = Affected.ReopeningObligation
 
 invalidationIsTransitive :
   ∀ {Artifact}
@@ -99,11 +65,7 @@ invalidationIsTransitive :
   ChangeInvalidates DirectlyDependsOn changed middle →
   ChangeInvalidates DirectlyDependsOn middle derived →
   ChangeInvalidates DirectlyDependsOn changed derived
-invalidationIsTransitive left right =
-  changeInvalidates
-    (appendDependencyPath
-      (dependencyPath left)
-      (dependencyPath right))
+invalidationIsTransitive = Affected.obligationsCompose
 
 ------------------------------------------------------------------------
 -- Reopenability reasons are typed because their triggers differ.
@@ -138,7 +100,7 @@ record ReopenableAlternative (Payload Trigger : Set) : Set₁ where
 open ReopenableAlternative public
 
 ------------------------------------------------------------------------
--- Boundary: provenance separation is a necessary structural distinction, not a
--- proof of probabilistic independence; exact dependency reachability is not
--- inferred from model covariance.
+-- Boundary: provenance-root separation is structural evidence, not a proof of
+-- probabilistic independence.  Exact dependency reachability remains the
+-- canonical AffectedDependencyClosureExact theorem surface.
 ------------------------------------------------------------------------
