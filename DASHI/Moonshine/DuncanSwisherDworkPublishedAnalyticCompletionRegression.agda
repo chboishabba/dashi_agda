@@ -22,7 +22,7 @@ lambdaMinusLambda0DerivedRegression :
 lambdaMinusLambda0DerivedRegression = refl
 
 nearbyResidueDerivedRegression :
-  Hensel.nearbyResidueDerivedFromUniformizerReduction
+  Hensel.nearbyResidueDerivedFromResidueHomomorphism
     Hensel.canonicalLegendreExceptionalPadicHenselConstructionBoundary ≡ true
 nearbyResidueDerivedRegression = refl
 
