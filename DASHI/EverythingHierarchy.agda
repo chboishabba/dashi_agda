@@ -5,9 +5,9 @@ module DASHI.EverythingHierarchy where
 -- Migration rule:
 --   leaf -> subfolder Everything -> domain Everything -> repository umbrella
 --
--- DASHI.Everything is still the historical lightweight/flat surface during
--- migration.  This module is the exhaustive hierarchical bridge: domains own
--- their leaf lists and the repository umbrella composes only domain rollups.
+-- DASHI.Everything remains the historical lightweight/check-fast surface.
+-- This module is the exhaustive hierarchical bridge: domains own their leaf
+-- lists and the repository umbrella composes only domain rollups.
 
 import DASHI.Everything
 
@@ -22,7 +22,7 @@ import DASHI.Ontology.Everything
 -- Natural / physical / applied domains.
 import DASHI.Biology.DomainEverything
 import DASHI.Chemistry.Everything
-import DASHI.Physics.Everything
+import DASHI.Physics.ExhaustiveEverything
 import DASHI.Applied.Everything
 import DASHI.Vision.Everything
 import DASHI.Perception.Everything
