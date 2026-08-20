@@ -41,6 +41,7 @@ module DASHI.Physics.YangMills.BalabanCMP109FederbushFirstOrderNormalFormExact w
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Rational.Base as ℚ using (ℚ; _+_; _*_; _≤_)
+open import Relation.Binary.PropositionalEquality using (trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanFiniteMatrixL1ContractionExact as L1
@@ -52,9 +53,17 @@ record FederbushFirstOrderNormalFormData (Index : Set) : Set₁ where
   field
     baseAverage : Reopen.Vector Index
     perturbedAverage : Reopen.Vector Index
+
+    -- This field is intended to be instantiated by the literal solution of
+    -- Abar v = b assembled from the equation-(0.11) J_j/T_j components.
     inverseAbarSourceResponse : Reopen.Vector Index
+
     frechetErrorEquation : Frechet.FederbushFrechetErrorEquation Index
 
+    -- Exact same-object decomposition of the selected average.  The nonlinear
+    -- remainder here is definitionally the `error` of the reopening equation,
+    -- so a caller cannot prove differentiability with one remainder and use a
+    -- different remainder in the printed map.
     perturbedAverageExact : ∀ row →
       perturbedAverage row
       ≡ baseAverage row
@@ -85,6 +94,9 @@ federbushFirstOrderRemainderFourThirds data =
   Frechet.federbushFrechetErrorFourThirdsBound
     (frechetErrorEquation data)
 
+-- Epsilon-form little-o transfer.  The same inputMagnitude is deliberately
+-- left abstract so the physical equation-(0.11) instantiation can use the
+-- literal selected perturbation norm rather than a replacement norm.
 federbushFirstOrderRemainderLittleOTransfer :
   ∀ {Index} (data : FederbushFirstOrderNormalFormData Index)
     epsilon inputMagnitude →

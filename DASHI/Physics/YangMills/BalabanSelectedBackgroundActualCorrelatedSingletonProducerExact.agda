@@ -83,5 +83,8 @@ selectedActualCorrelatedSingletonToWLocalLevel = machineChecked
 selectedActualCorrelatedSingletonPhysicalWilsonHessianLevel : ProofLevel
 selectedActualCorrelatedSingletonPhysicalWilsonHessianLevel = machineChecked
 
+-- The remaining source leaf is now deliberately singular: construct the
+-- literal selected plaquette family at the selected minimizer.  All downstream
+-- Wilson coefficients and tangent collapse are already owned by this module.
 selectedActualCorrelatedSingletonFamilyProducerLevel : ProofLevel
 selectedActualCorrelatedSingletonFamilyProducerLevel = conditional

@@ -60,6 +60,8 @@ addInverseRightExact L xi =
     (addCommutative L xi (negate L xi))
     (additiveInverse L xi)
 
+-- A zero remainder is stronger than little-o.  The equality below is the
+-- precise regression consumed before any Federbush centre solve is involved.
 principalLogIdentityRemainderIsZeroExact :
   ∀ {g a : Level}
     {G : Set g} {𝔤 : Set a}
