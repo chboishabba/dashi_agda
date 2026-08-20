@@ -53,10 +53,12 @@ module DASHI.Physics.YangMills.BalabanTopDownStrictContractionBudgetExact where
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; 1ℚ; _+_; _≤_; _<_; _/_)
+  (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; _<_; _/_)
 import Data.Rational.Properties as ℚP
+open ℚP using (_<?_)
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Nullary.Decidable.Core using (toWitness)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayP2LargeFieldStepVExact as StepV
@@ -133,19 +135,21 @@ sixteenTimesOldLargeIsHalf :
   (+ 16 / 1) * OldLarge.oneThirtySecond ≡ half
 sixteenTimesOldLargeIsHalf = ℚRing.solve []
 
+oldLargeStrictHalf : OldLarge.oneThirtySecond < half
+oldLargeStrictHalf =
+  toWitness {a? = OldLarge.oneThirtySecond <? half} _
+
 oldSeventeenThirtySecondBudgetIsOneAdmissibleInteriorPoint :
   StepV.half + OldLarge.oneThirtySecond < 1ℚ
 oldSeventeenThirtySecondBudgetIsOneAdmissibleInteriorPoint =
   let
-    oldLargeStrictHalf : OldLarge.oneThirtySecond < half
-    oldLargeStrictHalf =
-      ℚP.<-≤-trans OldLarge.oneThirtySecondPositive
-        (subst
-          (λ upper → OldLarge.oneThirtySecond ≤ upper)
-          (ℚRing.solve [])
-          ℚP.≤-refl)
+    summed : StepV.half + OldLarge.oneThirtySecond < half + half
+    summed = ℚP.+-mono-≤-< ℚP.≤-refl oldLargeStrictHalf
   in
-  ℚP.+-mono-≤-< ℚP.≤-refl oldLargeStrictHalf
+  subst
+    (λ upper → StepV.half + OldLarge.oneThirtySecond < upper)
+    halfPlusHalfIsOne
+    summed
 
 topDownStrictContractionBudgetLevel : ProofLevel
 topDownStrictContractionBudgetLevel = machineChecked
