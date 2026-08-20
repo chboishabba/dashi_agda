@@ -7,6 +7,15 @@ open import DASHI.Analysis.WeightedKernelSchurTest
 open import DASHI.Physics.Closure.NSShellSchurInstance
 open import DASHI.Physics.Closure.NSFactorizedCrossShellBound
 
+------------------------------------------------------------------------
+-- Concrete weighted-kernel bridge for the two off-diagonal NS transfers.
+--
+-- The certificate objects below are indexed by their actual kernels.  The
+-- `representsK01` / `representsK10` fields are deliberately proof-relevant:
+-- coarse shell-angle telemetry is not enough unless it is identified with the
+-- pair-incidence operator used by the shell decomposition.
+------------------------------------------------------------------------
+
 record NSWeightedTransferEvidence
     {v s r01 c01r r10 c10r : Level}
     {ShellVector : Set v}
