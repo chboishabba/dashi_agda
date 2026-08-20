@@ -23,22 +23,13 @@ module DASHI.Physics.Closure.NSTriadKNUniformCriticalBarrierPassageToLimitRound1
 --
 -- ROUND103 / ONE-SHOT SAME-SOLUTION COMPACTNESS COMPILER
 --
--- This module implements the theorem-shaped weld requested by the top-down
--- Clay consumer.  It does not rediscover Simon compactness or Serrin theory.
--- Instead it proves that once the standard analytic target is instantiated on
--- the SAME Galerkin carrier and SAME limiting strong-solution carrier, the
--- quantitative limiting budget constructs `CriticalBarrierFor` for that exact
--- limiting solution.
---
--- ROUND104 RECEIPT / CARRIER REPAIR
---
--- The first Round103 draft stored compactness names merely as Set fields.  A
--- later repair added inhabitants, but still duplicated six unrelated abstract
--- predicates locally.  Round104 removes that duplication.  There is now ONE
--- witness-bearing Round29 `CriticalAubinLionsTarget`, and explicit equalities
--- identify its Galerkin and limit-state carriers with the carriers consumed by
--- this same-solution compiler.  Thus an Aubin--Lions theorem on an unrelated
--- sequence/limit cannot silently discharge the continuation consumer.
+-- Round104 repairs both proof authority and carrier identity.  There is ONE
+-- witness-bearing Round29 `CriticalAubinLionsTarget`; its Galerkin and limit
+-- TYPES are identified with the consumer carriers, and its actual
+-- `limitingState` element is transported along that type equality and required
+-- to equal the exact `limitingSolution` consumed by Round90.  Thus neither an
+-- unrelated proposition type nor a different solution in the same type can
+-- discharge the continuation consumer.
 --
 -- The physical Sobolev/Simon instantiation remains open and fail-closed.
 ------------------------------------------------------------------------
@@ -46,6 +37,7 @@ module DASHI.Physics.Closure.NSTriadKNUniformCriticalBarrierPassageToLimitRound1
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base using (_≤_; _+_)
+open import Relation.Binary.PropositionalEquality using (subst)
 
 import DASHI.Physics.Closure.NSTriadKNCriticalCompactnessSerrinRound29Exact as Critical
 import DASHI.Physics.Closure.NSTriadKNClayTopDownConsumerRound90Exact as Top
@@ -57,17 +49,11 @@ record UniformCriticalGalerkinLimitData
     GalerkinSequence : Set
     limitingSolution : Critical.StrongSolution continuation
 
-    -- Quantitative critical information inherited from the Galerkin family.
     limitingBudget : Critical.CriticalToSerrinBudget
-
-    -- Equation-level negative-norm estimate.  This is consumed below rather
-    -- than merely stored as a status marker.
     timeDerivativeBudget : Critical.NegativeNormTimeDerivativeBudget
 
-    -- ONE standard compactness target, now witness-bearing in Round29.
     aubinLionsTarget : Critical.CriticalAubinLionsTarget
 
-    -- Same-object carrier welds.  These are type equalities, not prose claims.
     sameGalerkinSequenceCarrier :
       Critical.GalerkinSequence aubinLionsTarget ≡ GalerkinSequence
 
@@ -75,8 +61,13 @@ record UniformCriticalGalerkinLimitData
       Critical.LimitState aubinLionsTarget
       ≡ Critical.StrongSolution continuation
 
-    -- The quantitative limiting budget must witness L4_t L6_x finiteness for
-    -- this exact limiting solution.  This is the bridge consumed by Round90.
+    sameLimitingState :
+      subst
+        (λ stateType → stateType)
+        sameLimitStateCarrier
+        (Critical.limitingState aubinLionsTarget)
+      ≡ limitingSolution
+
     limitingBudgetGivesL4L6Finite :
       Critical.integralL6Fourth limitingBudget
       ≤ Critical.sobolevConstantFourth limitingBudget
@@ -95,7 +86,6 @@ uniformCriticalTimeDerivativeBound :
 uniformCriticalTimeDerivativeBound data =
   Critical.timeDerivativeBoundFromEquation (timeDerivativeBudget data)
 
--- The standard analytic witnesses are now projected from the single target.
 uniformCriticalCompactnessWitness :
   ∀ {continuation : Critical.PeriodicSerrinContinuationTarget} →
   (data : UniformCriticalGalerkinLimitData continuation) →
@@ -164,9 +154,9 @@ round103EquationNegativeNormBudgetActuallyConsumed = true
 round104SingleAubinLionsTargetSameCarrierWeld : Bool
 round104SingleAubinLionsTargetSameCarrierWeld = true
 
--- This remains the standard analytic instantiation: Sobolev/product estimates,
--- Simon compactness, quadratic convergence, trace recovery and lower
--- semicontinuity for the literal physical Galerkin sequence.
+round104ExactLimitElementWeldRequired : Bool
+round104ExactLimitElementWeldRequired = true
+
 round103PhysicalSimonAubinLionsInstantiationClosed : Bool
 round103PhysicalSimonAubinLionsInstantiationClosed = false
 
@@ -181,6 +171,10 @@ round103EquationNegativeNormBudgetActuallyConsumedIsTrue = refl
 round104SingleAubinLionsTargetSameCarrierWeldIsTrue :
   round104SingleAubinLionsTargetSameCarrierWeld ≡ true
 round104SingleAubinLionsTargetSameCarrierWeldIsTrue = refl
+
+round104ExactLimitElementWeldRequiredIsTrue :
+  round104ExactLimitElementWeldRequired ≡ true
+round104ExactLimitElementWeldRequiredIsTrue = refl
 
 round103PhysicalSimonAubinLionsInstantiationClosedIsFalse :
   round103PhysicalSimonAubinLionsInstantiationClosed ≡ false
