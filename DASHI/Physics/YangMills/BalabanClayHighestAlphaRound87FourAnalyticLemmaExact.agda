@@ -9,6 +9,13 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound87FourAnalyticLemmaEx
 -- "Quantum Yang-Mills Theory", official Clay Mathematics Institute problem
 -- description, in The Millennium Prize Problems.  No DOI assigned.
 --
+-- Tadeusz Bałaban,
+-- "Renormalization Group Approach to Lattice Gauge Field Theories. I.
+-- Generation of Effective Actions in a Small Field Approximation and a
+-- Coupling Constant Renormalization in Four Dimensions",
+-- Communications in Mathematical Physics 109 (1987), 249--301.
+-- DOI: 10.1007/BF01215223.
+--
 -- IMPORTANT CORRECTION TO THE PREVIOUS PLANNING NOTE
 --
 -- The literal problem description DOES require local gauge-invariant curvature
@@ -17,21 +24,23 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound87FourAnalyticLemmaEx
 -- tensor and operator product expansion.  Therefore OPE/stress cannot simply be
 -- deleted from the submission path.
 --
--- What CAN be deleted is the stronger auxiliary theorem
+-- What CAN be deleted is the stronger auxiliary theorem integral T_00 = H_OS,
+-- together with its charge-cutoff / essential-self-adjoint / Stone-generator
+-- identification.  The positive Hamiltonian and gap are separately reconstructed
+-- from the OS family.
 --
---             integral T_00 = H_OS
+-- Round88 makes two genuine internal reductions:
 --
--- together with its local-charge cutoff removal / essential-self-adjointness /
--- Stone-generator identification, because the literal Clay stress/OPE
--- postcondition does not consume it.  The positive Hamiltonian and mass gap are
--- separately reconstructed from the OS family.
+--  A: CMP109 (5.36)--(5.41) says the beta consumer only needs ONE mixed
+--     derivative of an off-diagonal vacuum-polarization component.  The third-
+--     order remainder disappears in the two-jet quotient.  Therefore the finite
+--     literal task is the Wilson/FP/Haar off-diagonal two-jet + its mixed
+--     coefficient, not an unnecessarily strong all-component kernel theorem.
 --
--- Round87 therefore obtains a real 5 -> 4 research cutset.  Round88 sharpens B:
--- the composite/stress Hilbert moduli are no longer primitive analytic leaves.
--- Reusing the repository's exact finite weighted Cauchy--Schwarz/Gram-defect
--- theorem reduces both to ONE cutoff-uniform differentiated-source coefficient
--- energy estimate.  The physical work is now same-object CMP116 coefficient
--- identification + geometric shell square summability.
+--  B: the composite/stress Hilbert moduli are no longer primitive analytic
+--     leaves.  Reusing the exact finite weighted Cauchy--Schwarz/Gram-defect
+--     theorem reduces both to ONE cutoff-uniform differentiated-source
+--     coefficient-energy estimate.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
@@ -44,6 +53,7 @@ import DASHI.Physics.YangMills.BalabanMarkedSourceCompositeStressFieldExact
 import DASHI.Physics.YangMills.BalabanMarkedSourceCoefficientEnergyHilbertCompilerExact
 import DASHI.Physics.YangMills.YangMillsSameFamilyCumulantMarginToInteractingExact
 import DASHI.Physics.YangMills.BalabanClayT4SineDeterminesCosineAtomExact
+import DASHI.Physics.YangMills.BalabanCMP109MixedDerivativeBetaExtractionExact
 import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound77FiveAnalyticCutsetExact
 import DASHI.Physics.YangMills.BalabanOPECoefficientRGRecurrenceUniquenessExact
 import DASHI.Physics.YangMills.BalabanPolchinskiShellIntegralDebtExact
@@ -62,10 +72,12 @@ round87ShortestClayAnalyticCount = 4
 --   beta_j(G) = C_A(G) 11/24 + r_local(g_{j-1}) + r_irrelevant(j)
 --
 -- with a cutoff/volume/scale/group-uniform strictly positive lower bound.
--- Round86 already compiles four joint regular orbit enclosures in [-1/2,1/2]
--- into all-group positivity once the literal evaluator/trig/remainder data exist.
--- Round87 removes an independent cosine interval producer: coherent cos(k)
--- intervals are derived algebraically from primitive sin(k/2) boxes.
+--
+-- The primitive perturbative observable is now narrowed to the literal
+-- off-diagonal two-jet and its mixed coefficient.  CMP109's Ward/Euclidean
+-- decomposition makes the third-order remainder invisible to this coefficient.
+-- Four regular-orbit enclosures and all-group positivity remain downstream once
+-- that literal mixed coefficient / regular matching calculation is supplied.
 literalCompactSimplePositiveBetaLevel : ProofLevel
 literalCompactSimplePositiveBetaLevel = conditional
 
@@ -75,12 +87,8 @@ literalCompactSimplePositiveBetaLevel = conditional
 -- curvature/composite and stress marks with CMP116 analytic coordinates; prove
 -- common cutoff-uniform radii and the spatial shell majorant; and prove ONE
 -- weighted square-energy bound for the differentiated source coefficients.
---
--- The exact finite weighted Cauchy theorem then turns coefficient energy into
--- the composite/stress Hilbert pairing bounds.  Round85/87 transports those
--- Hilbert moduli to nuclear-continuous fields.  Thus B4/B5 from the previous
--- prose cutset have been compiled into one coefficient-energy producer rather
--- than retained as separate physical estimates.
+-- Exact finite weighted Cauchy then gives the composite/stress Hilbert bounds,
+-- and Round85/87 transports those to nuclear-continuous fields.
 physicalMarkedSourceLocalityCompositeStressCoefficientEnergyLevel : ProofLevel
 physicalMarkedSourceLocalityCompositeStressCoefficientEnergyLevel = conditional
 
@@ -119,6 +127,9 @@ sameCompletedCompositeStressFieldCompilerLevel = machineChecked
 markedSourceCoefficientEnergyToHilbertCauchyLevel : ProofLevel
 markedSourceCoefficientEnergyToHilbertCauchyLevel = machineChecked
 
+cmp109MixedDerivativeBetaExtractionLevel : ProofLevel
+cmp109MixedDerivativeBetaExtractionLevel = machineChecked
+
 sineHalfDeterminesCosineIntervalLevel : ProofLevel
 sineHalfDeterminesCosineIntervalLevel = machineChecked
 
@@ -136,12 +147,6 @@ heatShellDebtSummationLevel = machineChecked
 
 ------------------------------------------------------------------------
 -- POSSIBLE 4 -> 3 TARGET -- NOT YET A DECREMENT
---
--- A genuine next reduction would require an actual theorem that the SAME
--- differentiated marked-source construction in B also produces the physical
--- product/OPE one-step mixing law and stress short-distance Ward structure in D.
--- Merely putting B and D in one record would not count.  No 3-lemma claim is
--- asserted here.
 ------------------------------------------------------------------------
 
 round87ThreeLemmaFusionProvedLevel : ProofLevel
