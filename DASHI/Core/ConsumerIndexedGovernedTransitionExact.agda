@@ -33,19 +33,8 @@ open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Product using (_×_; _,_; proj₁; proj₂)
 open import Relation.Binary.PropositionalEquality using (cong)
 
-------------------------------------------------------------------------
--- Authority is deliberately ternary: abstention preserves the distinction
--- between an invalid candidate and an under-supported but potentially valid
--- candidate.
-------------------------------------------------------------------------
-
 data AuthorityDecision : Set where
   promote abstain reject : AuthorityDecision
-
-------------------------------------------------------------------------
--- One transition system may expose different observations and action languages
--- to different consumers.
-------------------------------------------------------------------------
 
 record ConsumerIndexedGovernedTransition
     (State Action Consumer Observation : Set) : Set₁ where
@@ -58,19 +47,15 @@ record ConsumerIndexedGovernedTransition
 
 open ConsumerIndexedGovernedTransition public
 
-------------------------------------------------------------------------
--- Finite-depth action/observation equivalence.
-------------------------------------------------------------------------
-
 FutureEquivalent :
   ∀ {State Action Consumer Observation} →
   ConsumerIndexedGovernedTransition State Action Consumer Observation →
   Consumer → Nat → State → State → Set
 FutureEquivalent system consumer zero left right =
   observe system consumer left ≡ observe system consumer right
-FutureEquivalent system consumer (suc depth) left right =
+FutureEquivalent {Action = Action} system consumer (suc depth) left right =
   (observe system consumer left ≡ observe system consumer right)
-  × ((action : _) →
+  × ((action : Action) →
       declaredAction system consumer action →
       FutureEquivalent system consumer depth
         (step system action left)
@@ -86,11 +71,6 @@ futureEquivalentMonotone {depth = zero} related = proj₁ related
 futureEquivalentMonotone {depth = suc depth} related =
   proj₁ related , λ action allowed →
     futureEquivalentMonotone (proj₂ related action allowed)
-
-------------------------------------------------------------------------
--- Declared traces and the standard finite-horizon consequence: agreement to
--- the trace length implies equal terminal observations.
-------------------------------------------------------------------------
 
 run :
   ∀ {State Action : Set} →
@@ -127,10 +107,6 @@ traceObservationFromDepth [] traceNil related = related
 traceObservationFromDepth (action ∷ rest) (traceCons allowed declaredRest) related =
   traceObservationFromDepth rest declaredRest (proj₂ related action allowed)
 
-------------------------------------------------------------------------
--- Consumer-safe abstraction: observation, dynamics AND authority descend.
-------------------------------------------------------------------------
-
 record ConsumerSafeAbstraction
     {Fine Coarse Action Consumer Observation : Set}
     (fine : ConsumerIndexedGovernedTransition Fine Action Consumer Observation)
@@ -140,17 +116,14 @@ record ConsumerSafeAbstraction
     coarseStep : Action → Coarse → Coarse
     coarseObserve : Consumer → Coarse → Observation
     coarseAuthority : Consumer → Coarse → AuthorityDecision
-
     actionCommutes :
       ∀ action state →
       project (step fine action state)
       ≡ coarseStep action (project state)
-
     observationDescends :
       ∀ consumer state →
       observe fine consumer state
       ≡ coarseObserve consumer (project state)
-
     authorityDescends :
       ∀ consumer state →
       authority fine consumer state
@@ -200,11 +173,6 @@ stepPreservesProjectionEquality abstraction action same
         | actionCommutes abstraction action right =
   cong (coarseStep abstraction action) same
 
-------------------------------------------------------------------------
--- Main theorem: a consumer-safe abstraction induces bounded future equivalence
--- for every pair in one coarse fibre, for the declared consumer/action language.
-------------------------------------------------------------------------
-
 sameProjectionFutureEquivalent :
   ∀ {Fine Coarse Action Consumer Observation}
     {fine : ConsumerIndexedGovernedTransition Fine Action Consumer Observation}
@@ -224,7 +192,6 @@ sameProjectionFutureEquivalent abstraction consumer (suc depth) same =
         (stepPreservesProjectionEquality abstraction action same)
 
 ------------------------------------------------------------------------
--- Important boundary: safety is indexed.  A quotient may be sound for one
--- consumer/action language and unsound for another; this module never promotes
--- consumer-local safety to world identity or to an undeclared consumer.
+-- Boundary: this is consumer/action-language relative.  It does not promote a
+-- safe quotient to world identity, undeclared consumers, or physical fidelity.
 ------------------------------------------------------------------------
