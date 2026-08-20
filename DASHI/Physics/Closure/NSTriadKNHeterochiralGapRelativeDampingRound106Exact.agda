@@ -60,6 +60,15 @@ two = 2
 twoNonnegative : 0ℚ ≤ two
 twoNonnegative = ℚP.<⇒≤ (ℚP.positive⁻¹ two)
 
+gapHighNonnegative :
+  (G : GapDampingGeometry) → 0ℚ ≤ gap G * high G
+gapHighNonnegative G =
+  let
+    instance
+      gNN = nonNegative (gapNonnegative G)
+      hNN = nonNegative (highNonnegative G)
+  in ℚP.nonNegative⁻¹ (gap G * high G)
+
 lowSquaredBelowGapSquaredHighSquared :
   (G : GapDampingGeometry) →
   low G * low G ≤ (gap G * gap G) * (high G * high G)
@@ -69,22 +78,21 @@ lowSquaredBelowGapSquaredHighSquared G =
     H = high G
     g = gap G
 
-    first : L * L ≤ (g * H) * (g * H)
+    first : L * L ≤ (g * H) * L
     first =
-      ℚP.*-mono-≤
-        (lowNonnegative G) (lowNonnegative G)
-        (let instance gNN = nonNegative (gapNonnegative G)
-                  hNN = nonNegative (highNonnegative G)
-              in ℚP.nonNegative⁻¹ (g * H))
-        (let instance gNN = nonNegative (gapNonnegative G)
-                  hNN = nonNegative (highNonnegative G)
-              in ℚP.nonNegative⁻¹ (g * H))
-        (lowBelowGapHigh G) (lowBelowGapHigh G)
+      let instance lNN = nonNegative (lowNonnegative G)
+      in ℚP.*-monoʳ-≤-nonNeg L (lowBelowGapHigh G)
+
+    second : (g * H) * L ≤ (g * H) * (g * H)
+    second =
+      let instance ghNN = nonNegative (gapHighNonnegative G)
+      in ℚP.*-monoˡ-≤-nonNeg (g * H) (lowBelowGapHigh G)
 
     endpoint : (g * H) * (g * H) ≡ (g * g) * (H * H)
     endpoint = solve (g ∷ H ∷ [])
   in
-  subst (λ upper → L * L ≤ upper) endpoint first
+  ℚP.≤-trans first
+    (subst (λ upper → (g * H) * L ≤ upper) endpoint second)
 
 lowMinorityCoefficientHasSquaredGap :
   (G : GapDampingGeometry) →
