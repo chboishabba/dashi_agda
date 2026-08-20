@@ -1,5 +1,8 @@
 module DASHI.Physics.Closure.NSTriadKNDefectDensityAnnularComRound41Validation where
 
+open import Agda.Builtin.Bool using (Bool; true)
+open import Agda.Builtin.Equality using (_≡_; refl)
+
 -- Round 41 is stacked on the complete Round-40 validation root.  It advances
 -- the actual hard-math frontier rather than adding a terminal wrapper:
 --
@@ -30,3 +33,10 @@ open import DASHI.Physics.Closure.NSTriadKNHHGoodAnnularMasterKernelRound41Exact
 open import DASHI.Physics.Closure.NSTriadKNHHGoodLocalMassScalingNoGoRound41Exact
 open import DASHI.Physics.Closure.NSTriadKNHHGoodSquaredYoungOwnerRound41Exact
 open import DASHI.Physics.Closure.NSTriadKNNineOwnerDualPressureBatchRound41Exact
+
+round41PullRequestValidationTrigger : Bool
+round41PullRequestValidationTrigger = true
+
+round41PullRequestValidationTriggerIsTrue :
+  round41PullRequestValidationTrigger ≡ true
+round41PullRequestValidationTriggerIsTrue = refl
