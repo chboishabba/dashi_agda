@@ -27,6 +27,8 @@ module DASHI.Physics.Closure.NSTriadKNLiteralBoundaryTriadsInstantiateBonyChanne
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Product.Base using (_×_; _,_)
+open import Relation.Nullary using (¬_)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
