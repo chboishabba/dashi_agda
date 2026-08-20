@@ -2,37 +2,64 @@ module DASHI.Physics.YangMills.BalabanAnalyticProducerFrontier where
 
 open import Agda.Builtin.Equality using (_≡_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
+
 import DASHI.Physics.YangMills.BalabanReferenceHodgeCoercivity as Hodge
 import DASHI.Physics.YangMills.BalabanBackgroundPerturbationBudget as Perturbation
 import DASHI.Physics.YangMills.BalabanCorrectionNeumannBound as Neumann
 import DASHI.Physics.YangMills.BalabanSmallFieldNonlinearConstants as Nonlinear
 import DASHI.Physics.YangMills.BalabanExplicitContractionBudget as Budget
 
-record ProducerInputs (Index State Bound : Set) : Set₁ where
+record BackgroundAnalyticProducerInputs
+    (Index State Bound : Set) : Set₁ where
   field
-    hodge : Hodge.ReferenceHodgeCoercivityData Index State Bound
-    perturbation : Perturbation.BackgroundPerturbationComponents Index State Bound
-    correction : Neumann.CorrectionNeumannData Index State Bound
-    nonlinear : Nonlinear.SmallFieldNonlinearCoefficientData Bound
-    budget : Budget.ExplicitContractionBudget Bound
-    correctionMatches : Neumann.correctionUpper correction ≡ Budget.correctionUpper budget
-    nonlinearMatches : Nonlinear.nonlinearUpper nonlinear ≡ Budget.nonlinearUpper budget
+    referenceHodge : Hodge.ReferenceHodgeCoercivityData Index State Bound
+    perturbationComponents :
+      Perturbation.BackgroundPerturbationComponents Index State Bound
+    correctionNeumann : Neumann.CorrectionNeumannData Index State Bound
+    nonlinearCoefficients : Nonlinear.SmallFieldNonlinearCoefficientData Bound
+    contractionBudget : Budget.ExplicitContractionBudget Bound
+    referenceConstantMatches :
+      Hodge.c0 referenceHodge ≡ Hodge.hodgeConstant referenceHodge
+    correctionConstantMatches :
+      Neumann.correctionUpper correctionNeumann ≡
+      Budget.correctionUpper contractionBudget
+    nonlinearConstantMatches :
+      Nonlinear.nonlinearUpper nonlinearCoefficients ≡
+      Budget.nonlinearUpper contractionBudget
 
-open ProducerInputs public
+open BackgroundAnalyticProducerInputs public
 
-record ProducerCertificate (Index State Bound : Set) : Set₁ where
+record BackgroundAnalyticProducerCertificates
+    (Index State Bound : Set) : Set₁ where
   field
-    inputs : ProducerInputs Index State Bound
-    referenceCoercive : ∀ index state → Hodge.LessEqual (hodge inputs) (Hodge.scale (hodge inputs) (Hodge.c0 (hodge inputs)) (Hodge.normSq (hodge inputs) index state)) (Hodge.referenceEnergy (hodge inputs) index state)
-    perturbationBound : ∀ index state → Perturbation.LessEqual (perturbation inputs) (Perturbation.perturbationEnergy (perturbation inputs) index state) (Perturbation.scale (perturbation inputs) (Perturbation.perturbationUpper (perturbation inputs)) (Perturbation.normSq (perturbation inputs) index state))
-    contraction : Budget.ContractionWitness (budget inputs)
+    inputs : BackgroundAnalyticProducerInputs Index State Bound
+    referenceCoercivity : ∀ index state →
+      Hodge.LessEqual (referenceHodge inputs)
+        (Hodge.scale (referenceHodge inputs)
+          (Hodge.c0 (referenceHodge inputs))
+          (Hodge.normSq (referenceHodge inputs) index state))
+        (Hodge.referenceEnergy (referenceHodge inputs) index state)
+    perturbationBound : ∀ index state →
+      Perturbation.LessEqual (perturbationComponents inputs)
+        (Perturbation.perturbationEnergy (perturbationComponents inputs)
+          index state)
+        (Perturbation.scale (perturbationComponents inputs)
+          (Perturbation.perturbationUpper (perturbationComponents inputs))
+          (Perturbation.normSq (perturbationComponents inputs) index state))
+    contractionWitness : Budget.ContractionWitness (contractionBudget inputs)
 
-assembleProducerCertificate : ∀ {Index State Bound : Set} → (inputs : ProducerInputs Index State Bound) → ProducerCertificate Index State Bound
-assembleProducerCertificate inputs = record
+open BackgroundAnalyticProducerCertificates public
+
+assembleBackgroundAnalyticProducerCertificates :
+  ∀ {Index State Bound : Set} →
+  (inputs : BackgroundAnalyticProducerInputs Index State Bound) →
+  BackgroundAnalyticProducerCertificates Index State Bound
+assembleBackgroundAnalyticProducerCertificates inputs = record
   { inputs = inputs
-  ; referenceCoercive = Hodge.referenceHessianCoercive (hodge inputs)
-  ; perturbationBound = Perturbation.backgroundPerturbationBound (perturbation inputs)
-  ; contraction = Budget.assembleContractionWitness (budget inputs)
+  ; referenceCoercivity = Hodge.referenceHessianCoercive (referenceHodge inputs)
+  ; perturbationBound =
+      Perturbation.backgroundPerturbationBound (perturbationComponents inputs)
+  ; contractionWitness = Budget.assembleContractionWitness (contractionBudget inputs)
   }
 
 analyticProducerAssemblyLevel : ProofLevel
