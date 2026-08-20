@@ -53,14 +53,11 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
+import DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier as Cube
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNComplex3FieldAlgebra as Field
 import DASHI.Physics.Closure.NSTriadKNComplex3HermitianAlgebraProgram as Hermitian
 import DASHI.Physics.Closure.NSTriadKNComplex3HermitianScalingLaws as Scaling
-import DASHI.Physics.Closure.NSTriadKNComplex3EuclideanSelfPairing as Self
-import DASHI.Physics.Closure.NSTriadKNOrderedEuclideanL2Carrier as Euclidean
-import DASHI.Physics.Closure.NSTriadKNProjectedNonlinearityFirstVariationRound82Exact as First
-import DASHI.Physics.Closure.NSTriadKNLiteralPacketTransferFirstVariationRound82Exact as Packet
 
 realPartHermitianSymmetric :
   ∀ {r} {F : C3.RealField r}
@@ -68,11 +65,9 @@ realPartHermitianSymmetric :
   C3.real (C3.hermitianPairing3 left right)
   ≡ C3.real (C3.hermitianPairing3 right left)
 realPartHermitianSymmetric left right =
-  trans
-    (sym
-      (cong C3.real
-        (Hermitian.hermitianPairingConjugateSymmetric right left)))
-    refl
+  sym
+    (cong C3.real
+      (Hermitian.hermitianPairingConjugateSymmetric right left))
 
 record EigenpacketData {r : Level} (F : C3.RealField r) : Set r where
   constructor eigenpacket-data
@@ -82,7 +77,7 @@ record EigenpacketData {r : Level} (F : C3.RealField r) : Set r where
     eigenvalue : C3.Carrier F
     modeWeight : Z3.FourierMode → C3.Carrier F
     selectedModeHasEigenvalue :
-      ∀ mode → Packet._∈_ mode modes → modeWeight mode ≡ eigenvalue
+      ∀ mode → Cube._∈_ mode modes → modeWeight mode ≡ eigenvalue
 
 open EigenpacketData public
 
@@ -111,8 +106,8 @@ weightedField :
   EigenpacketData F →
   (Z3.FourierMode → C3.Complex3 F) →
   Z3.FourierMode → C3.Complex3 F
-weightedField D field mode =
-  C3.complex3Scale (C3.realEmbed _ (modeWeight D mode)) (field mode)
+weightedField {F = F} D field mode =
+  C3.complex3Scale (C3.realEmbed F (modeWeight D mode)) (field mode)
 
 packetDissipation :
   ∀ {r} {F : C3.RealField r} → EigenpacketData F → C3.Carrier F
@@ -135,26 +130,24 @@ realScalePairingRight :
       (C3.complex3Scale (C3.realEmbed F weight) right))
   ≡ C3.multiply F weight (C3.real (C3.hermitianPairing3 left right))
 realScalePairingRight {F = F} weight left right =
-  trans
-    (cong C3.real
-      (Scaling.hermitianPairingScaleRight
-        (C3.realEmbed F weight) left right))
-    refl
+  cong C3.real
+    (Scaling.hermitianPairingScaleRight
+      (C3.realEmbed F weight) left right)
 
 sumWeightedPairingIsEigenvalueTimes :
   ∀ {r} {F : C3.RealField r}
     (D : EigenpacketData F)
     (left right : Z3.FourierMode → C3.Complex3 F)
     (items : List Z3.FourierMode) →
-  (∀ mode → Packet._∈_ mode items → modeWeight D mode ≡ eigenvalue D) →
+  (∀ mode → Cube._∈_ mode items → modeWeight D mode ≡ eigenvalue D) →
   sumRealPairing items left (weightedField D right)
   ≡ C3.multiply F (eigenvalue D) (sumRealPairing items left right)
 sumWeightedPairingIsEigenvalueTimes {F = F} D left right [] same =
   sym (Field.realMultiplyZeroRight F (eigenvalue D))
 sumWeightedPairingIsEigenvalueTimes {F = F} D left right (mode ∷ rest) same =
   let
-    headWeight = same mode (Packet.here refl)
-    tailSame = λ chosen member → same chosen (Packet.there member)
+    headWeight = same mode (Cube.here refl)
+    tailSame = λ chosen member → same chosen (Cube.there member)
   in
   trans
     (cong₂ (C3.add F)
@@ -199,26 +192,19 @@ packetDissipationTangentIsTwoEigenvalueTimesTransfer :
   ≡ C3.multiply F
       (C3.multiply F (twoCarrier F) (eigenvalue D))
       (packetTransfer D)
-packetDissipationTangentIsTwoEigenvalueTimesTransfer {F = F} D =
-  let
-    a = sumRealPairing (modes D) (tangent D) (velocity D)
-    b = packetTransfer D
-    leftWeight = sumWeightedPairingIsEigenvalueTimes
-      D (tangent D) (velocity D) (modes D) (selectedModeHasEigenvalue D)
-    rightWeight = sumWeightedPairingIsEigenvalueTimes
-      D (velocity D) (tangent D) (modes D) (selectedModeHasEigenvalue D)
-    symmetry : a ≡ b
-    symmetry = sumRealPairingSymmetric (modes D) (tangent D) (velocity D)
-  in
-  trans
-    (cong₂ (C3.add F) leftWeight rightWeight)
-    (P.R.solve 3
-      (λ lambda a b →
-        ((lambda P.R.⊗ a) P.R.⊕ (lambda P.R.⊗ b))
-        P.R.⊜
-        (((P.R.K (C3.one F) P.R.⊕ P.R.K (C3.one F)) P.R.⊗ lambda)
-          P.R.⊗ b))
-      symmetry (eigenvalue D) a b)
+packetDissipationTangentIsTwoEigenvalueTimesTransfer {F = F} D
+  rewrite sumWeightedPairingIsEigenvalueTimes
+            D (tangent D) (velocity D) (modes D) (selectedModeHasEigenvalue D)
+        | sumWeightedPairingIsEigenvalueTimes
+            D (velocity D) (tangent D) (modes D) (selectedModeHasEigenvalue D)
+        | sumRealPairingSymmetric (modes D) (tangent D) (velocity D) =
+  P.R.solve 2
+    (λ lambda q →
+      ((lambda P.R.⊗ q) P.R.⊕ (lambda P.R.⊗ q))
+      P.R.⊜
+      (((P.R.K (C3.one F) P.R.⊕ P.R.K (C3.one F)) P.R.⊗ lambda)
+        P.R.⊗ q))
+    refl (eigenvalue D) (packetTransfer D)
   where module P = Field.Polynomial F
 
 nonlinearRelativeGrowth :
@@ -241,11 +227,9 @@ eigenpacketRelativeGrowthCollapse :
         (C3.negate F
           (C3.multiply F (twoCarrier F)
             (C3.multiply F (packetTransfer D) (packetTransfer D)))))
-eigenpacketRelativeGrowthCollapse {F = F} D qdot =
-  let
-    dMeaning = packetDissipationIsEigenvalueTimesEnergy D
-    ddotMeaning = packetDissipationTangentIsTwoEigenvalueTimesTransfer D
-  in
+eigenpacketRelativeGrowthCollapse {F = F} D qdot
+  rewrite packetDissipationIsEigenvalueTimesEnergy D
+        | packetDissipationTangentIsTwoEigenvalueTimesTransfer D =
   P.R.solve 5
     (λ lambda E q qdot two →
       ((qdot P.R.⊗ (lambda P.R.⊗ E))
@@ -253,7 +237,7 @@ eigenpacketRelativeGrowthCollapse {F = F} D qdot =
       P.R.⊜
       (lambda P.R.⊗
         ((E P.R.⊗ qdot) P.R.⊕ P.R.⊝ (two P.R.⊗ (q P.R.⊗ q)))))
-    (trans (cong (C3.multiply F qdot) dMeaning) refl)
+    refl
     (eigenvalue D)
     (packetEnergy D)
     (packetTransfer D)
