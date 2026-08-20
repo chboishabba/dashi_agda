@@ -8,6 +8,20 @@ import DASHI.Moonshine.VertexOperatorAlgebraCore as VOA
 import DASHI.Moonshine.VNaturalOrbifoldConstruction as VN
 import DASHI.Moonshine.TwistedModuleModularity as TM
 
+------------------------------------------------------------------------
+-- Conway--Norton theorem closure package.
+--
+-- The theorem has two logically distinct halves:
+--
+--  1. realization: each McKay--Thompson series is the graded trace of a
+--     Monster element acting on V^natural;
+--  2. genus zero: that series is the normalized Hauptmodul for its moonshine
+--     group.
+--
+-- Existing exact finite-series/group closure remains owned by
+-- `MonsterMcKayThompsonClosure`. This file adds the missing VOA realization,
+-- twisted modularity, and theorem-level promotion package.
+
 record MonsterVOAAction
   (Monster K : Set)
   (monsterGroup : GR.Group Monster)
@@ -113,6 +127,9 @@ record ConwayNortonTheorem
   conwayNortonStatement = realizationForEveryMonsterClass
 
 open ConwayNortonTheorem public
+
+------------------------------------------------------------------------
+-- Dependency-correct promotion boundary.
 
 record MoonshineTheoremPromotionBoundary : Setω where
   field
