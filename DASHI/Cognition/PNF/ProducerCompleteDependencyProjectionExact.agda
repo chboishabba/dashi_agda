@@ -74,6 +74,27 @@ producerCompleteProjectionExact :
   directAuthorityRow fibre token ≡ repairedAuthorityRow fibre token
 producerCompleteProjectionExact fibre token = refl
 
+-- Congruence is stated locally so this module does not need a larger equality
+-- utility dependency merely to transport exact final-row equality to consumers.
+mapEquality :
+  ∀ {A B : Set} (observe : A → B) {left right : A} →
+  left ≡ right →
+  observe left ≡ observe right
+mapEquality observe refl = refl
+
+-- Runtime-facing observational law: every declared consumer of the final
+-- authority row sees exactly the same result under direct first-write admission
+-- and under the legacy insert-then-repair implementation.
+consumerObservationExact :
+  ∀ {Token PersistentId Observation : Set}
+    (fibre : ProducerCompleteDependencyFibre Token PersistentId)
+    (observe : PersistentTokenRow Token PersistentId → Observation)
+    (token : Token) →
+  observe (directAuthorityRow fibre token)
+    ≡ observe (repairedAuthorityRow fibre token)
+consumerObservationExact fibre observe token =
+  mapEquality observe (producerCompleteProjectionExact fibre token)
+
 -- The numeric dependency edge is available before the authority write and is
 -- the same edge the repair path eventually reconstructs.
 directHeadExact :
@@ -91,6 +112,21 @@ repairHeadExact :
   headTokenId (repairedAuthorityRow fibre token)
     ≡ persistentId fibre (head fibre token)
 repairHeadExact fibre token = refl
+
+-- Injective persistent identity means equality of encoded head ids reflects
+-- equality of the producer-level head tokens; numeric encoding has not merged
+-- distinct dependency targets.
+persistentHeadIdentityReflectsTokenHead :
+  ∀ {Token PersistentId : Set}
+    (fibre : ProducerCompleteDependencyFibre Token PersistentId)
+    (left right : Token) →
+  persistentId fibre (head fibre left) ≡ persistentId fibre (head fibre right) →
+  head fibre left ≡ head fibre right
+persistentHeadIdentityReflectsTokenHead fibre left right encodedEqual =
+  persistentIdInjective fibre
+    (head fibre left)
+    (head fibre right)
+    encodedEqual
 
 ------------------------------------------------------------------------
 -- Physical mutation separation.
@@ -134,6 +170,12 @@ record ProducerCompleteRewriteElimination
     authorityExact :
       ∀ token →
       directAuthorityRow fibre token ≡ repairedAuthorityRow fibre token
+    consumerExact :
+      ∀ {Observation : Set}
+        (observe : PersistentTokenRow Token PersistentId → Observation)
+        token →
+      observe (directAuthorityRow fibre token)
+        ≡ observe (repairedAuthorityRow fibre token)
     noPostInsertRewrite :
       ∀ count →
       postInsertUpdates (directMutationReceipt count) ≡ zero
@@ -147,5 +189,6 @@ compileRewriteElimination :
 compileRewriteElimination fibre = record
   { fibre = fibre
   ; authorityExact = producerCompleteProjectionExact fibre
+  ; consumerExact = consumerObservationExact fibre
   ; noPostInsertRewrite = directHasNoSelfRewrite
   }
