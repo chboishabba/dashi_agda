@@ -10,6 +10,8 @@ open import DASHI.Codec.BalancedTritBitFibre using
   ; TritFibre
   ; encodeFibre
   ; decodeFibre
+  ; decode-encode
+  ; encode-decode
   ; invertSign
   )
 open import DASHI.Foundations.Base369MobiusTransport using
@@ -22,11 +24,14 @@ open import DASHI.Foundations.SSPTritCarrier using
   ( SSPTrit
   ; toTrit
   ; fromTrit
+  ; toTrit-fromTrit
+  ; fromTrit-toTrit
   ; toTriTruth
   )
 
 ------------------------------------------------------------------------
--- Canonical SSP trits and codec support/sign fibres are equivalent.
+-- Reuse the canonical SSP trit carrier rather than creating a codec-local
+-- signed ternary type.
 
 sspToFibre : SSPTrit → TritFibre
 sspToFibre s = encodeFibre (toTrit s)
@@ -36,20 +41,22 @@ fibreToSSP f = fromTrit (decodeFibre f)
 
 fibreToSSP-sspToFibre : ∀ s → fibreToSSP (sspToFibre s) ≡ s
 fibreToSSP-sspToFibre s
-  rewrite DASHI.Codec.BalancedTritBitFibre.decode-encode (toTrit s)
-        | DASHI.Foundations.SSPTritCarrier.fromTrit-toTrit s = refl
+  rewrite decode-encode (toTrit s)
+        | fromTrit-toTrit s = refl
 
 sspToFibre-fibreToSSP : ∀ f → sspToFibre (fibreToSSP f) ≡ f
 sspToFibre-fibreToSSP f
-  rewrite DASHI.Foundations.SSPTritCarrier.toTrit-fromTrit (decodeFibre f)
-        | DASHI.Codec.BalancedTritBitFibre.encode-decode f = refl
+  rewrite toTrit-fromTrit (decodeFibre f)
+        | encode-decode f = refl
 
 sspTriPhase : SSPTrit → TriTruth
 sspTriPhase = toTriTruth
 
 ------------------------------------------------------------------------
--- Reuse the established two-point orientation fibre. This does not identify
--- TritFibre with HexTruth: only the signed, non-zero fibre is transported.
+-- The sign fibre reuses the orientation polarity already used by the
+-- HexTruth ≅ TriTruth × Polarity factorisation. This is a structural bridge:
+-- it identifies the same two-point involutive fibre, without identifying a
+-- TritFibre with HexTruth or manufacturing a six-state codec semantics.
 
 SignPolarity : Set
 SignPolarity = OrientationPolarity
@@ -75,3 +82,11 @@ signToPolarity-commutes-flip :
         flipOrientationPolarity (signToPolarity s)
 signToPolarity-commutes-flip positiveSign = refl
 signToPolarity-commutes-flip negativeSign = refl
+
+------------------------------------------------------------------------
+-- Zero remains outside OrientationPolarity. A polarity value is requested
+-- only after the support quotient has selected a signed fibre; no arbitrary
+-- sign is assigned to the neutral trit.
+
+signedFibrePolarity : Sign → SignPolarity
+signedFibrePolarity = signToPolarity

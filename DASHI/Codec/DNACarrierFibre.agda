@@ -12,9 +12,21 @@ open import DASHI.Codec.DNAFirstFormalism using
   ; complement
   )
 
+------------------------------------------------------------------------
+-- Exact quotient/fibre presentation of the four-base DNA carrier.
+--
+-- The quotient records the chemistry-visible base-pair class:
+--   A/T versus C/G.
+-- The fibre records position inside the complement orbit.
+-- Complement preserves the quotient and flips only the fibre.
+-- This is the CAGT analogue of support/sign factorisation without
+-- claiming that DNA is primitively binary or ternary.
+
+
 data ChemicalPair : Set where
   atPair : ChemicalPair
   cgPair : ChemicalPair
+
 
 data ComplementPhase : Set where
   primaryPhase : ComplementPhase
@@ -47,6 +59,9 @@ encode-decode-base (atPair , mirrorPhase) = refl
 encode-decode-base (cgPair , primaryPhase) = refl
 encode-decode-base (cgPair , mirrorPhase) = refl
 
+------------------------------------------------------------------------
+-- Complement action.
+
 flipComplementPhase : ComplementPhase → ComplementPhase
 flipComplementPhase primaryPhase = mirrorPhase
 flipComplementPhase mirrorPhase = primaryPhase
@@ -73,6 +88,11 @@ encodeBaseFibre-complement-equivariant C = refl
 encodeBaseFibre-complement-equivariant G = refl
 encodeBaseFibre-complement-equivariant T = refl
 
+------------------------------------------------------------------------
+-- Chemistry projections. These are typed carrier coordinates, not payload
+-- bits. A constrained encoder may use the pair class for GC debt while the
+-- complement phase remains available for mirror/eigen-orbit structure.
+
 chemicalPair : Base → ChemicalPair
 chemicalPair b = first (encodeBaseFibre b)
   where
@@ -91,22 +111,3 @@ chemicalPair-complement-invariant A = refl
 chemicalPair-complement-invariant C = refl
 chemicalPair-complement-invariant G = refl
 chemicalPair-complement-invariant T = refl
-
-encodeBaseFibre-injective :
-  ∀ {x y} → encodeBaseFibre x ≡ encodeBaseFibre y → x ≡ y
-encodeBaseFibre-injective {A} {A} refl = refl
-encodeBaseFibre-injective {A} {C} ()
-encodeBaseFibre-injective {A} {G} ()
-encodeBaseFibre-injective {A} {T} ()
-encodeBaseFibre-injective {C} {A} ()
-encodeBaseFibre-injective {C} {C} refl = refl
-encodeBaseFibre-injective {C} {G} ()
-encodeBaseFibre-injective {C} {T} ()
-encodeBaseFibre-injective {G} {A} ()
-encodeBaseFibre-injective {G} {C} ()
-encodeBaseFibre-injective {G} {G} refl = refl
-encodeBaseFibre-injective {G} {T} ()
-encodeBaseFibre-injective {T} {A} ()
-encodeBaseFibre-injective {T} {C} ()
-encodeBaseFibre-injective {T} {G} ()
-encodeBaseFibre-injective {T} {T} refl = refl
