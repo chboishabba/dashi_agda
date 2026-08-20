@@ -8,12 +8,23 @@ import DASHI.Foundations.SSPTritCarrier as SSP
 import DASHI.Foundations.InvolutiveTernaryDynamics as ITD
 
 ------------------------------------------------------------------------
--- The established SSP carrier is an instance of the generic involutive
--- carrier.  Inversion is transported through the already proved SSP/Trit
--- equivalence; no parallel trit representation is introduced here.
+-- Existing-spine adapter.
+--
+-- This module does not introduce another trit carrier.  It proves that the
+-- established SSP carrier is an instance of the generic involutive carrier
+-- and that the new support quotient agrees with the SSP neutrality surface.
 
 sspι : SSP.SSPTrit → SSP.SSPTrit
 sspι s = SSP.fromTrit (Trit.inv (SSP.toTrit s))
+
+sspι-neg : sspι SSP.sspNegOne ≡ SSP.sspPosOne
+sspι-neg = refl
+
+sspι-zero : sspι SSP.sspZero ≡ SSP.sspZero
+sspι-zero = refl
+
+sspι-pos : sspι SSP.sspPosOne ≡ SSP.sspNegOne
+sspι-pos = refl
 
 sspι-involutive : ∀ s → sspι (sspι s) ≡ s
 sspι-involutive SSP.sspNegOne = refl
@@ -30,20 +41,36 @@ sspInvolutiveCarrier = record
 sspSupport : SSP.SSPTrit → Bool
 sspSupport s = ITD.support (SSP.toTrit s)
 
+sspSupport-neg : sspSupport SSP.sspNegOne ≡ true
+sspSupport-neg = refl
+
+sspSupport-zero : sspSupport SSP.sspZero ≡ false
+sspSupport-zero = refl
+
+sspSupport-pos : sspSupport SSP.sspPosOne ≡ true
+sspSupport-pos = refl
+
 sspSupport-invariant : ∀ s → sspSupport (sspι s) ≡ sspSupport s
 sspSupport-invariant SSP.sspNegOne = refl
 sspSupport-invariant SSP.sspZero = refl
 sspSupport-invariant SSP.sspPosOne = refl
 
 notBool : Bool → Bool
-notBool false = true
 notBool true = false
+notBool false = true
+
+-- The existing SSP neutrality classifier and the generic support quotient are
+-- complementary views of the same carrier: neutral maps to inactive, while
+-- both polarities map to active.
 
 supportAgreesWithSSPNeutrality : ∀ s →
   sspSupport s ≡ notBool (SSP.sspTritIsNeutral s)
 supportAgreesWithSSPNeutrality SSP.sspNegOne = refl
 supportAgreesWithSSPNeutrality SSP.sspZero = refl
 supportAgreesWithSSPNeutrality SSP.sspPosOne = refl
+
+-- Round-trip compatibility records that inversion is transported through the
+-- already-proved SSP <-> canonical Trit equivalence rather than redefined.
 
 sspι-toTrit : ∀ s → SSP.toTrit (sspι s) ≡ Trit.inv (SSP.toTrit s)
 sspι-toTrit SSP.sspNegOne = refl
@@ -56,16 +83,15 @@ record ExistingSpineBridgeReceipt : Set where
     sspCarrierIsGenericInvolutive : ITD.InvolutiveCarrier
     neutralIsFixed : sspι SSP.sspZero ≡ SSP.sspZero
     supportIsMirrorInvariant : ∀ s → sspSupport (sspι s) ≡ sspSupport s
-    supportIsDerivedNeutrality : ∀ s →
+    supportMatchesExistingNeutrality : ∀ s →
       sspSupport s ≡ notBool (SSP.sspTritIsNeutral s)
-    transportedInversion : ∀ s →
-      SSP.toTrit (sspι s) ≡ Trit.inv (SSP.toTrit s)
+    transportedInversion : ∀ s → SSP.toTrit (sspι s) ≡ Trit.inv (SSP.toTrit s)
 
 existingSpineBridgeReceipt : ExistingSpineBridgeReceipt
 existingSpineBridgeReceipt =
   receipt
     sspInvolutiveCarrier
-    refl
+    sspι-zero
     sspSupport-invariant
     supportAgreesWithSSPNeutrality
     sspι-toTrit
