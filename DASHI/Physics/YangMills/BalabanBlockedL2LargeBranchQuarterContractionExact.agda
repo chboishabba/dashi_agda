@@ -42,12 +42,9 @@ module DASHI.Physics.YangMills.BalabanBlockedL2LargeBranchQuarterContractionExac
 -- No such same-object identification is assumed here.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_)
 open import Data.Integer.Base using (+_)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; 1ℚ; _*_; _≤_; _<_; _/_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; 1ℚ; _*_; _≤_; _<_; _/_; _-_)
 import Data.Rational.Properties as ℚP
-import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -64,16 +61,7 @@ fourQBelowOne : four * blockedL2Q < 1ℚ
 fourQBelowOne = ℚP.positive⁻¹ (1ℚ - four * blockedL2Q)
 
 blockedL2QBelowQuarter : blockedL2Q < oneFourth
-blockedL2QBelowQuarter =
-  let
-    scaled : four * blockedL2Q < four * oneFourth
-    scaled = subst
-      (λ upper → four * blockedL2Q < upper)
-      (ℚRing.solve [])
-      fourQBelowOne
-  in
-  let instance fourPositive = ℚ.positive (ℚP.positive⁻¹ four)
-  in ℚP.*-cancelˡ-< blockedL2Q oneFourth four scaled
+blockedL2QBelowQuarter = ℚP.positive⁻¹ (oneFourth - blockedL2Q)
 
 quarterBelowHalf : oneFourth < oneHalf
 quarterBelowHalf = ℚP.positive⁻¹ (oneHalf - oneFourth)
