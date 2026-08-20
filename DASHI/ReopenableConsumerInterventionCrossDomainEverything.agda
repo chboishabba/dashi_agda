@@ -5,7 +5,10 @@ module DASHI.ReopenableConsumerInterventionCrossDomainEverything where
 -- SeaMeInIt/Animalexic/LES cross-pollination.
 ------------------------------------------------------------------------
 
+import DASHI.Core.ActiveInformationDualEffectBridgeExact
 import DASHI.Core.AdaptiveFidelityConsumerMarginExact
+import DASHI.Core.AdaptiveFidelityPruningExact
+import DASHI.Core.AffectedDependencyClosureExact
 import DASHI.Core.CertifiedFiniteFutureQuotientCompilerExact
 import DASHI.Core.CompositionalComplianceExact
 import DASHI.Core.ConsumerIndexedGovernedTransitionExact
@@ -13,6 +16,7 @@ import DASHI.Core.CounterexampleGuidedConsumerRefinementExact
 import DASHI.Core.DualEffectInformationActionExact
 import DASHI.Core.FiniteRankedRefinementStabilizationExact
 import DASHI.Core.GenericFuturePartitionRefinementExact
+import DASHI.Core.IdentifiabilityActiveInformationExact
 import DASHI.Core.IndexedRobustnessExact
 import DASHI.Core.ReopenableConsumerInterventionCrossDomainRegression
 import DASHI.Core.ReopenableConsumerInterventionKernelExact
