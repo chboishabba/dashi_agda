@@ -3,6 +3,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoPhysicalCarrierRound16Validation where
 ------------------------------------------------------------------------
 -- PURPOSE
 -- Cumulative validation root for the round-sixteen physical-carrier tranche.
+-- Validation trigger: execute the pinned Agda 2.9 cumulative checker.
 ------------------------------------------------------------------------
 
 import DASHI.Physics.Closure.NSTriadKNLuoGalerkinKernelRound15Validation
