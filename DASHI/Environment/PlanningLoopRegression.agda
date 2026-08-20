@@ -11,6 +11,7 @@ import DASHI.Environment.EcologicalKnowledge as Knowledge
 import DASHI.Environment.LESResearchCrossPollinationExact as Research
 import DASHI.Environment.LESResearchCrossPollinationRound2Exact as Research2
 import DASHI.Environment.LESResearchCrossPollinationRound3Exact as Research3
+import DASHI.Environment.LESResearchCrossPollinationRound4Exact as Research4
 import DASHI.Environment.LESRuntimeBoundary as Runtime
 import DASHI.Environment.ParetoPlanning as Pareto
 import DASHI.Environment.QuantitiesConservation as Q
@@ -105,6 +106,24 @@ uncertaintyConstitutionRecorded = Research3.canonicalLESUncertaintyConstitution
 
 researchRound3BoundaryRecorded : Research3.LESRound3Boundary
 researchRound3BoundaryRecorded = Research3.canonicalLESRound3Boundary
+
+researchRound4FormalClosureRecorded : Research4.LESRound4FormalClosureStatus
+researchRound4FormalClosureRecorded = Research4.canonicalLESRound4FormalClosureStatus
+
+researchRound4ScientificFrontierRecorded :
+  Research4.LESRound4RemainingScientificFrontier
+researchRound4ScientificFrontierRecorded =
+  Research4.canonicalLESRound4RemainingScientificFrontier
+
+positiveInformationValueRecorded : Research4.Information.PositiveDecisionValueWitness
+positiveInformationValueRecorded = Research4.positiveInformationValueWitness
+
+assimilationPlanReopeningRecorded :
+  Research4.Closure.ReopeningObligation
+    Research4.Assimilation.Depends
+    Research4.Assimilation.newObservation
+    Research4.Assimilation.candidatePlan
+assimilationPlanReopeningRecorded = Research4.assimilationReopensDependentPlan
 
 springfieldScenarioRecorded : Pond.SpringfieldPondGoldenScenario
 springfieldScenarioRecorded = Pond.canonicalSpringfieldPondGoldenScenario
