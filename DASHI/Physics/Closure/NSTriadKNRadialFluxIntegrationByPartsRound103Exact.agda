@@ -50,18 +50,29 @@ module DASHI.Physics.Closure.NSTriadKNRadialFluxIntegrationByPartsRound103Exact 
 --   - m13 (lambda1-lambda3)^2
 --   - m23 (lambda2-lambda3)^2.
 --
--- No positivity assumption is needed for the polynomial identity itself.
--- A physical Navier--Stokes closure must prove the corresponding mobility/sign
--- statement (or a stronger summed substitute) on the literal heterochiral
--- Waleffe transfer.  That is a materially sharper target than generic circle
--- Schur decay.
+-- Round104 strengthens the polynomial identity with the ordered-rational
+-- consequence actually needed by a Leith/graph-Laplacian interpretation:
+-- if all three mobilities are nonnegative, the Dirichlet form is nonnegative
+-- and the weighted transfer is nonpositive.  This makes pointwise
+-- nonnegative-mobility falsification possible using one positive Waleffe
+-- critical-production cell.
+--
+-- No physical Navier--Stokes mobility/sign statement is imported here.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
-open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; -_)
+open import Algebra.Properties.Group as GroupProperties
+open import Data.Rational.Base as ℚ
+  using (ℚ; 0ℚ; _+_; _*_; -_; _≤_; nonNegative)
+import Data.Rational.Properties as ℚₚ
 open import Data.Rational.Tactic.RingSolver using (solve)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
+
+import DASHI.Physics.Closure.NSTriadKNLuoFiniteRationalOrderCore as Order
+
+module AddGroup = GroupProperties ℚₚ.+-0-group
 
 sub : ℚ → ℚ → ℚ
 sub x y = x + (- y)
@@ -107,10 +118,14 @@ radialFluxIntegrationByParts F =
     ( lambda1 F ∷ lambda2 F ∷ lambda3 F
     ∷ flux12 F ∷ flux13 F ∷ flux23 F ∷ [])
 
+-- Keep the mobility radii projection names distinct from the flux radii.
+-- Round103 originally opened both records with lambda1/lambda2/lambda3,
+-- which relied on overloaded projection resolution and had not received a
+-- fresh Agda kernel check in the connector environment.
 record ThreeEdgeGradientMobility : Set where
   constructor three-edge-gradient-mobility
   field
-    lambda1 lambda2 lambda3 : ℚ
+    mobilityLambda1 mobilityLambda2 mobilityLambda3 : ℚ
     mobility12 mobility13 mobility23 : ℚ
 
 open ThreeEdgeGradientMobility public
@@ -118,43 +133,94 @@ open ThreeEdgeGradientMobility public
 gradientFlux : ThreeEdgeGradientMobility → ThreeEdgeRadialFlux
 gradientFlux M =
   three-edge-radial-flux
-    (ThreeEdgeGradientMobility.lambda1 M)
-    (ThreeEdgeGradientMobility.lambda2 M)
-    (ThreeEdgeGradientMobility.lambda3 M)
-    (mobility12 M * sub (ThreeEdgeGradientMobility.lambda2 M)
-                         (ThreeEdgeGradientMobility.lambda1 M))
-    (mobility13 M * sub (ThreeEdgeGradientMobility.lambda3 M)
-                         (ThreeEdgeGradientMobility.lambda1 M))
-    (mobility23 M * sub (ThreeEdgeGradientMobility.lambda3 M)
-                         (ThreeEdgeGradientMobility.lambda2 M))
+    (mobilityLambda1 M)
+    (mobilityLambda2 M)
+    (mobilityLambda3 M)
+    (mobility12 M * sub (mobilityLambda2 M) (mobilityLambda1 M))
+    (mobility13 M * sub (mobilityLambda3 M) (mobilityLambda1 M))
+    (mobility23 M * sub (mobilityLambda3 M) (mobilityLambda2 M))
 
 gradientDirichletForm : ThreeEdgeGradientMobility → ℚ
 gradientDirichletForm M =
   mobility12 M
-    * (sub (ThreeEdgeGradientMobility.lambda1 M)
-           (ThreeEdgeGradientMobility.lambda2 M)
-       * sub (ThreeEdgeGradientMobility.lambda1 M)
-             (ThreeEdgeGradientMobility.lambda2 M))
+    * (sub (mobilityLambda1 M) (mobilityLambda2 M)
+       * sub (mobilityLambda1 M) (mobilityLambda2 M))
   + mobility13 M
-    * (sub (ThreeEdgeGradientMobility.lambda1 M)
-           (ThreeEdgeGradientMobility.lambda3 M)
-       * sub (ThreeEdgeGradientMobility.lambda1 M)
-             (ThreeEdgeGradientMobility.lambda3 M))
+    * (sub (mobilityLambda1 M) (mobilityLambda3 M)
+       * sub (mobilityLambda1 M) (mobilityLambda3 M))
   + mobility23 M
-    * (sub (ThreeEdgeGradientMobility.lambda2 M)
-           (ThreeEdgeGradientMobility.lambda3 M)
-       * sub (ThreeEdgeGradientMobility.lambda2 M)
-             (ThreeEdgeGradientMobility.lambda3 M))
+    * (sub (mobilityLambda2 M) (mobilityLambda3 M)
+       * sub (mobilityLambda2 M) (mobilityLambda3 M))
 
 downGradientFluxWeightedTransferIsNegativeDirichlet :
   (M : ThreeEdgeGradientMobility) →
   weightedTransfer (gradientFlux M) ≡ - gradientDirichletForm M
 downGradientFluxWeightedTransferIsNegativeDirichlet M =
   solve
-    ( ThreeEdgeGradientMobility.lambda1 M
-    ∷ ThreeEdgeGradientMobility.lambda2 M
-    ∷ ThreeEdgeGradientMobility.lambda3 M
+    ( mobilityLambda1 M ∷ mobilityLambda2 M ∷ mobilityLambda3 M
     ∷ mobility12 M ∷ mobility13 M ∷ mobility23 M ∷ [])
+
+mobilityTimesSquareNonnegative :
+  (m x : ℚ) →
+  0ℚ ≤ m →
+  0ℚ ≤ m * (x * x)
+mobilityTimesSquareNonnegative m x mNonnegativeProof =
+  let
+    xSquareNonnegative : 0ℚ ≤ x * x
+    xSquareNonnegative = Order.squareNonnegative x
+
+    instance
+      mNN = ℚ.nonNegative mNonnegativeProof
+      xSquareNN = ℚ.nonNegative xSquareNonnegative
+      productNN = ℚₚ.nonNeg*nonNeg⇒nonNeg m (x * x)
+  in
+  ℚₚ.nonNegative⁻¹ (m * (x * x))
+
+gradientDirichletFormNonnegative :
+  (M : ThreeEdgeGradientMobility) →
+  0ℚ ≤ mobility12 M →
+  0ℚ ≤ mobility13 M →
+  0ℚ ≤ mobility23 M →
+  0ℚ ≤ gradientDirichletForm M
+gradientDirichletFormNonnegative M m12NN m13NN m23NN =
+  Order.addNonnegative
+    (Order.addNonnegative
+      (mobilityTimesSquareNonnegative
+        (mobility12 M)
+        (sub (mobilityLambda1 M) (mobilityLambda2 M))
+        m12NN)
+      (mobilityTimesSquareNonnegative
+        (mobility13 M)
+        (sub (mobilityLambda1 M) (mobilityLambda3 M))
+        m13NN))
+    (mobilityTimesSquareNonnegative
+      (mobility23 M)
+      (sub (mobilityLambda2 M) (mobilityLambda3 M))
+      m23NN)
+
+nonnegativeGradientMobilityWeightedTransferNonpositive :
+  (M : ThreeEdgeGradientMobility) →
+  0ℚ ≤ mobility12 M →
+  0ℚ ≤ mobility13 M →
+  0ℚ ≤ mobility23 M →
+  weightedTransfer (gradientFlux M) ≤ 0ℚ
+nonnegativeGradientMobilityWeightedTransferNonpositive M m12NN m13NN m23NN =
+  let
+    dirichletNN : 0ℚ ≤ gradientDirichletForm M
+    dirichletNN =
+      gradientDirichletFormNonnegative M m12NN m13NN m23NN
+
+    negativeDirichletNonpositive : - gradientDirichletForm M ≤ 0ℚ
+    negativeDirichletNonpositive =
+      subst
+        (λ upper → - gradientDirichletForm M ≤ upper)
+        AddGroup.ε⁻¹≈ε
+        (ℚₚ.neg-antimono-≤ dirichletNN)
+  in
+  subst
+    (λ value → value ≤ 0ℚ)
+    (sym (downGradientFluxWeightedTransferIsNegativeDirichlet M))
+    negativeDirichletNonpositive
 
 round103RadialFluxConservationClosed : Bool
 round103RadialFluxConservationClosed = true
@@ -165,9 +231,13 @@ round103RadialFluxIntegrationByPartsClosed = true
 round103DownGradientRadialFluxGivesSignedDirichletForm : Bool
 round103DownGradientRadialFluxGivesSignedDirichletForm = true
 
+round104NonnegativeGradientMobilityIsNonpositive : Bool
+round104NonnegativeGradientMobilityIsNonpositive = true
+
 -- The physical theorem identifying the literal heterochiral Waleffe transfer
 -- with a down-gradient mobility (or another equally strong signed summed
--- mechanism) is deliberately not manufactured here.
+-- mechanism) is deliberately not manufactured here.  Round104 will show that
+-- the universal pointwise all-nonnegative version is in fact too strong.
 round103PhysicalWaleffeDownGradientMobilityClosed : Bool
 round103PhysicalWaleffeDownGradientMobilityClosed = false
 
@@ -178,6 +248,10 @@ round103RadialFluxIntegrationByPartsClosedIsTrue = refl
 round103DownGradientRadialFluxGivesSignedDirichletFormIsTrue :
   round103DownGradientRadialFluxGivesSignedDirichletForm ≡ true
 round103DownGradientRadialFluxGivesSignedDirichletFormIsTrue = refl
+
+round104NonnegativeGradientMobilityIsNonpositiveIsTrue :
+  round104NonnegativeGradientMobilityIsNonpositive ≡ true
+round104NonnegativeGradientMobilityIsNonpositiveIsTrue = refl
 
 round103PhysicalWaleffeDownGradientMobilityClosedIsFalse :
   round103PhysicalWaleffeDownGradientMobilityClosed ≡ false
