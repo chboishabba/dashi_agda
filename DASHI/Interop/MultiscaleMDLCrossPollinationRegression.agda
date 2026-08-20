@@ -6,6 +6,9 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import DASHI.Foundations.SSPTritCarrier
 open import DASHI.Interop.MultiscaleMDLCrossPollination
 
+------------------------------------------------------------------------
+-- Exact support/sign witnesses.
+
 negative-roundtrip : decodeSupportSign (factorSSPTrit sspNegOne) ≡ sspNegOne
 negative-roundtrip = refl
 
@@ -23,6 +26,9 @@ inactive-sign-is-quotiented = refl
 inactive-sign-canonicalises :
   canonicaliseSupportSign (support-sign false true) ≡ support-sign false false
 inactive-sign-canonicalises = refl
+
+------------------------------------------------------------------------
+-- Claim-boundary witnesses.
 
 shared-core-recorded : exactCoreShared canonicalCrossPollinationBoundary ≡ true
 shared-core-recorded = refl

@@ -9,6 +9,26 @@ open import Agda.Builtin.String using (String)
 open import DASHI.Core.MultiscaleMDL
 open import DASHI.Foundations.SSPTritCarrier
 
+------------------------------------------------------------------------
+-- Cross-pollination surface.
+--
+-- The exact shared machine is:
+--
+--   carrier at scale j
+--     -> coarse projection + gated residual
+--     -> exact reconstruction
+--     -> symmetry/orbit witness
+--     -> kernel naturality
+--     -> explicit MDL/admissibility receipt.
+--
+-- Codec, DNA, wave, Lie-action, and sparse-twist readings instantiate this
+-- machine differently.  This module records the common interfaces and the
+-- non-identifications needed to prevent one lane's semantics or authority from
+-- leaking into another.
+
+------------------------------------------------------------------------
+-- Exact support/sign factorisation of the canonical SSP trit.
+
 record SupportSign : Set where
   constructor support-sign
   field
@@ -31,6 +51,9 @@ support-sign-roundtrip sspNegOne = refl
 support-sign-roundtrip sspZero = refl
 support-sign-roundtrip sspPosOne = refl
 
+-- Sign is a gated fibre: its value is semantically irrelevant when support is
+-- false.  Canonicalisation removes that redundant bit.
+
 canonicaliseSupportSign : SupportSign → SupportSign
 canonicaliseSupportSign (support-sign false _) = support-sign false false
 canonicaliseSupportSign (support-sign true sign) = support-sign true sign
@@ -40,6 +63,10 @@ decode-canonicalise (support-sign false false) = refl
 decode-canonicalise (support-sign false true) = refl
 decode-canonicalise (support-sign true false) = refl
 decode-canonicalise (support-sign true true) = refl
+
+------------------------------------------------------------------------
+-- Domain roles.  These are interpretations of one formal machine, not proofs
+-- that the domains are identical.
 
 data CrossPollinationLane : Set where
   codecLane : CrossPollinationLane
@@ -69,6 +96,9 @@ laneSymmetryReading waveLane = "phase action or reversible evolution on a cohere
 laneSymmetryReading lieActionLane = "explicit group action and orbit witness"
 laneSymmetryReading sparseTwistLane = "orientation reversal, frame action, or local twist transport"
 
+------------------------------------------------------------------------
+-- Typed adapter from any domain lane into the exact core.
+
 record LaneAdapter (lane : CrossPollinationLane) : Set₁ where
   constructor lane-adapter
   field
@@ -83,6 +113,10 @@ record LaneAdapter (lane : CrossPollinationLane) : Set₁ where
     symmetryReading : String
     symmetryReadingIsCanonical : symmetryReading ≡ laneSymmetryReading lane
 open LaneAdapter public
+
+------------------------------------------------------------------------
+-- Cross-lane transport requires an explicit map and exact compatibility.
+-- Sharing vocabulary alone never licenses transport.
 
 record CrossLaneTransport
   {source target : CrossPollinationLane}
@@ -99,6 +133,9 @@ record CrossLaneTransport
       mapState j (kernel (kernelTower from) j x) ≡
       kernel (kernelTower to) j (mapState j x)
 open CrossLaneTransport public
+
+------------------------------------------------------------------------
+-- Authority is intentionally lane-local.
 
 data AuthorityKind : Set where
   exactFormalAuthority : AuthorityKind
@@ -123,13 +160,17 @@ record CrossPollinationBoundary : Set where
     laneSemanticsIdentical : Bool
     laneSemanticsIdenticalIsFalse : laneSemanticsIdentical ≡ false
     empiricalAuthorityTransfersAutomatically : Bool
-    empiricalAuthorityTransfersAutomaticallyIsFalse : empiricalAuthorityTransfersAutomatically ≡ false
+    empiricalAuthorityTransfersAutomaticallyIsFalse :
+      empiricalAuthorityTransfersAutomatically ≡ false
     mdlEqualsPhysicalActionAutomatically : Bool
-    mdlEqualsPhysicalActionAutomaticallyIsFalse : mdlEqualsPhysicalActionAutomatically ≡ false
+    mdlEqualsPhysicalActionAutomaticallyIsFalse :
+      mdlEqualsPhysicalActionAutomatically ≡ false
     waveLiftMakesEveryKernelUnitary : Bool
-    waveLiftMakesEveryKernelUnitaryIsFalse : waveLiftMakesEveryKernelUnitary ≡ false
+    waveLiftMakesEveryKernelUnitaryIsFalse :
+      waveLiftMakesEveryKernelUnitary ≡ false
     sparseTwistProxyProvesVorticityClosure : Bool
-    sparseTwistProxyProvesVorticityClosureIsFalse : sparseTwistProxyProvesVorticityClosure ≡ false
+    sparseTwistProxyProvesVorticityClosureIsFalse :
+      sparseTwistProxyProvesVorticityClosure ≡ false
 open CrossPollinationBoundary public
 
 canonicalCrossPollinationBoundary : CrossPollinationBoundary
@@ -143,4 +184,5 @@ canonicalCrossPollinationBoundary =
     false refl
 
 canonicalLanes : List CrossPollinationLane
-canonicalLanes = codecLane ∷ dnaLane ∷ waveLane ∷ lieActionLane ∷ sparseTwistLane ∷ []
+canonicalLanes =
+  codecLane ∷ dnaLane ∷ waveLane ∷ lieActionLane ∷ sparseTwistLane ∷ []
