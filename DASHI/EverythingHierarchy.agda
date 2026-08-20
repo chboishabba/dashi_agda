@@ -21,7 +21,7 @@ import DASHI.Ontology.Everything
 import DASHI.HME.Everything
 import DASHI.DCHoTT.Everything
 import DASHI.Energy.Everything
-import DASHI.Quantum.Everything
+import DASHI.Quantum.ExhaustiveEverything
 
 -- Natural / physical / applied domains.
 import DASHI.Biology.DomainEverything
