@@ -11,6 +11,11 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound84Validation where
 -- cutoff compiler, microcausal outer-shell compiler and stabilized-charge
 -- additivity theorem without rewriting the large historical Round61 root.
 --
+-- Round86 also repairs the Agda-2.9 explicit-signature defect exposed by the
+-- previous focused run in `BalabanClayT4LiteralDiagramWardCancellationExact`;
+-- this root is intentionally touched again so validation runs on the repaired
+-- head rather than merely retrying the stale failing merge commit.
+--
 -- This is a kernel-target convenience only.  Import success establishes
 -- source/type correctness of the formal compilers; it does not inhabit any of
 -- the remaining conditional four-dimensional Yang--Mills analytic leaves.
