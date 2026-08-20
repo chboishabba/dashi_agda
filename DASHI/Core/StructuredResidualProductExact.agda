@@ -14,7 +14,7 @@ module DASHI.Core.StructuredResidualProductExact where
 -- raw evidence, geometry/lineage, model/fidelity, and policy/authority.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; true)
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Data.Empty using (⊥)
@@ -138,8 +138,6 @@ onlyModelFidelityAffected =
 modelOnlyDoesNotMarkRawEvidenceAffected :
   affected (rawEvidenceReopening onlyModelFidelityAffected) ≡ false
 modelOnlyDoesNotMarkRawEvidenceAffected = refl
-  where
-    open import Agda.Builtin.Bool using (false)
 
 record StructuredResidualBoundary : Set where
   constructor structuredResidualBoundary
