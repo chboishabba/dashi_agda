@@ -40,6 +40,7 @@ import DASHI.Physics.Closure.NSTriadKNComplex3HermitianScalingLaws as Scaling
 import DASHI.Physics.Closure.NSTriadKNLeraySelfAdjointness as SelfAdjoint
 import DASHI.Physics.Closure.NSTriadKNLerayOutputTransversalityRound30Exact as LerayExact
 import DASHI.Physics.Closure.NSTriadKNComplex3BeltramiCrossSuppressionRound93Exact as Cross
+import DASHI.Physics.Closure.NSTriadKNExactSignedGalerkinCoefficient as Signed
 import DASHI.Physics.Closure.NSTriadKNProjectedHelicalSelfForcingVectorRound106Exact as Vector
 
 projectedCrossPairingIsProjectedCrossSelfPairing :
@@ -92,7 +93,7 @@ selfPhaseLegExact :
   let X = Cross.complex3Cross (Vector.uP H) (Vector.uQ H)
       PX = C3.lerayProject3 E I k X
       force =
-        DASHI.Physics.Closure.NSTriadKNExactSignedGalerkinCoefficient.orderedPairVelocityInteraction
+        Signed.orderedPairVelocityInteraction
           (C3.complex3VelocityGalerkinLaws F E I)
           k p q (Vector.uP H) (Vector.uQ H)
   in
