@@ -132,21 +132,28 @@ reciprocalAntitonePositive lower upper lowerPositive upperPositive lowerBelowUpp
       scaleIsPositive : Positive scale
       scaleIsPositive = ℚP.pos*pos⇒pos lower upper
 
+    -- Avoid reflective ring normalization here.  Agda 2.9 leaves the proof
+    -- arguments of `positiveReciprocal` visible enough that the ring solver sees
+    -- metas instead of a plain polynomial.  Associativity + the explicit
+    -- reciprocal identities prove exactly the same equalities without hiding
+    -- any denominator obligation.
     scaleUpperInverse : scale * upperInverse ≡ lower
     scaleUpperInverse =
       trans
-        (ℚRing.solve-∀ lower upper upperInverse)
+        (ℚP.*-assoc lower upper upperInverse)
         (trans
           (cong (lower *_) (positiveReciprocalRightInverse upper upperPositive))
-          (ℚRing.solve-∀ lower))
+          (ℚP.*-identityʳ lower))
 
     scaleLowerInverse : scale * lowerInverse ≡ upper
     scaleLowerInverse =
       trans
-        (ℚRing.solve-∀ lower upper lowerInverse)
+        (cong (_* lowerInverse) (ℚP.*-comm lower upper))
         (trans
-          (cong (upper *_) (positiveReciprocalRightInverse lower lowerPositive))
-          (ℚRing.solve-∀ upper))
+          (ℚP.*-assoc upper lower lowerInverse)
+          (trans
+            (cong (upper *_) (positiveReciprocalRightInverse lower lowerPositive))
+            (ℚP.*-identityʳ upper)))
 
     scaled : scale * upperInverse ≤ scale * lowerInverse
     scaled = subst₂ _≤_
@@ -167,12 +174,11 @@ dividePositiveNumeratorMonotone lower upper denominator denominatorPositive lowe
     reciprocal = positiveReciprocal denominator denominatorPositive
     instance
       reciprocalNonnegative : NonNegative reciprocal
-      reciprocalNonnegative =
-        positiveReciprocalNonnegative denominator denominatorPositive
+      reciprocalNonnegative = positiveReciprocalNonnegative denominator denominatorPositive
   in
-  ℚP.*-monoʳ-≤-nonNeg reciprocal lowerBelowUpper
+  ℚP.*-monoˡ-≤-nonNeg reciprocal lowerBelowUpper
 
-dividePositiveDenominatorAntitoneNonnegative :
+divideNonnegativeDenominatorAntitone :
   ∀ numerator lowerDenominator upperDenominator
     (numeratorNonnegative : 0ℚ ≤ numerator)
     (lowerPositive : 0ℚ < lowerDenominator)
@@ -180,19 +186,18 @@ dividePositiveDenominatorAntitoneNonnegative :
   lowerDenominator ≤ upperDenominator →
   dividePositive numerator upperDenominator upperPositive
   ≤ dividePositive numerator lowerDenominator lowerPositive
-dividePositiveDenominatorAntitoneNonnegative numerator lowerDenominator upperDenominator
+divideNonnegativeDenominatorAntitone numerator lowerDenominator upperDenominator
     numeratorNonnegative lowerPositive upperPositive lowerBelowUpper =
   let
     instance
-      numeratorIsNonnegative : NonNegative numerator
-      numeratorIsNonnegative = ℚ.nonNegative numeratorNonnegative
+      numeratorNN : NonNegative numerator
+      numeratorNN = ℚ.nonNegative numeratorNonnegative
   in
-  ℚP.*-monoˡ-≤-nonNeg numerator
+  ℚP.*-monoʳ-≤-nonNeg numerator
     (reciprocalAntitonePositive
-      lowerDenominator upperDenominator
-      lowerPositive upperPositive lowerBelowUpper)
+      lowerDenominator upperDenominator lowerPositive upperPositive lowerBelowUpper)
 
-dividePositiveDenominatorMonotoneNonpositive :
+divideNonpositiveDenominatorMonotone :
   ∀ numerator lowerDenominator upperDenominator
     (numeratorNonpositive : numerator ≤ 0ℚ)
     (lowerPositive : 0ℚ < lowerDenominator)
@@ -200,241 +205,338 @@ dividePositiveDenominatorMonotoneNonpositive :
   lowerDenominator ≤ upperDenominator →
   dividePositive numerator lowerDenominator lowerPositive
   ≤ dividePositive numerator upperDenominator upperPositive
-dividePositiveDenominatorMonotoneNonpositive numerator lowerDenominator upperDenominator
+divideNonpositiveDenominatorMonotone numerator lowerDenominator upperDenominator
     numeratorNonpositive lowerPositive upperPositive lowerBelowUpper =
   let
     instance
-      numeratorIsNonpositive : NonPositive numerator
-      numeratorIsNonpositive = ℚ.nonPositive numeratorNonpositive
+      numeratorNP : NonPositive numerator
+      numeratorNP = ℚ.nonPositive numeratorNonpositive
   in
-  ℚP.*-monoˡ-≤-nonPos numerator
+  ℚP.*-monoʳ-≤-nonPos numerator
     (reciprocalAntitonePositive
-      lowerDenominator upperDenominator
-      lowerPositive upperPositive lowerBelowUpper)
+      lowerDenominator upperDenominator lowerPositive upperPositive lowerBelowUpper)
 
-quotientLowerEndpoint :
-  ∀ {numeratorLower numeratorUpper} →
-  NumeratorSignCase numeratorLower numeratorUpper →
-  (denominatorLower denominatorUpper : ℚ) →
-  (denominatorLowerPositive : 0ℚ < denominatorLower) →
-  denominatorLower ≤ denominatorUpper → ℚ
-quotientLowerEndpoint {numeratorLower}
-    (numeratorNonnegative _)
-    denominatorLower denominatorUpper denominatorLowerPositive denominatorOrdered =
-  dividePositive numeratorLower denominatorUpper
-    (upperDenominatorPositive
-      denominatorLower denominatorUpper denominatorLowerPositive denominatorOrdered)
-quotientLowerEndpoint {numeratorLower}
-    (numeratorNonpositive _)
-    denominatorLower denominatorUpper denominatorLowerPositive denominatorOrdered =
-  dividePositive numeratorLower denominatorLower denominatorLowerPositive
-quotientLowerEndpoint {numeratorLower}
-    (numeratorStraddlesZero _ _)
-    denominatorLower denominatorUpper denominatorLowerPositive denominatorOrdered =
-  dividePositive numeratorLower denominatorLower denominatorLowerPositive
-
-quotientUpperEndpoint :
-  ∀ {numeratorLower numeratorUpper} →
-  NumeratorSignCase numeratorLower numeratorUpper →
-  (denominatorLower denominatorUpper : ℚ) →
-  (denominatorLowerPositive : 0ℚ < denominatorLower) →
-  denominatorLower ≤ denominatorUpper → ℚ
-quotientUpperEndpoint {numeratorUpper}
-    (numeratorNonnegative _)
-    denominatorLower denominatorUpper denominatorLowerPositive denominatorOrdered =
-  dividePositive numeratorUpper denominatorLower denominatorLowerPositive
-quotientUpperEndpoint {numeratorUpper}
-    (numeratorNonpositive _)
-    denominatorLower denominatorUpper denominatorLowerPositive denominatorOrdered =
-  dividePositive numeratorUpper denominatorUpper
-    (upperDenominatorPositive
-      denominatorLower denominatorUpper denominatorLowerPositive denominatorOrdered)
-quotientUpperEndpoint {numeratorUpper}
-    (numeratorStraddlesZero _ _)
-    denominatorLower denominatorUpper denominatorLowerPositive denominatorOrdered =
-  dividePositive numeratorUpper denominatorLower denominatorLowerPositive
-
-record LiesBetween (lower value upper : ℚ) : Set where
-  constructor liesBetween
+record PositiveDenominatorInterval : Set where
+  constructor positiveDenominatorInterval
   field
-    lowerSound : lower ≤ value
-    upperSound : value ≤ upper
-open LiesBetween public
+    lowerDenominator upperDenominator : ℚ
+    denominatorOrdered : lowerDenominator ≤ upperDenominator
+    lowerDenominatorPositive : 0ℚ < lowerDenominator
+open PositiveDenominatorInterval public
 
-positiveDenominatorQuotientEnclosure :
-  ∀ {numeratorLower numeratorUpper numerator
-      denominatorLower denominatorUpper denominator}
-    (signCase : NumeratorSignCase numeratorLower numeratorUpper)
-    (denominatorLowerPositive : 0ℚ < denominatorLower)
-    (denominatorOrdered : denominatorLower ≤ denominatorUpper)
-    (numeratorLowerSound : numeratorLower ≤ numerator)
-    (numeratorUpperSound : numerator ≤ numeratorUpper)
-    (denominatorLowerSound : denominatorLower ≤ denominator)
-    (denominatorUpperSound : denominator ≤ denominatorUpper) →
-  LiesBetween
-    (quotientLowerEndpoint signCase
-      denominatorLower denominatorUpper
-      denominatorLowerPositive denominatorOrdered)
-    (dividePositive numerator denominator
-      (ℚP.<-≤-trans denominatorLowerPositive denominatorLowerSound))
-    (quotientUpperEndpoint signCase
-      denominatorLower denominatorUpper
-      denominatorLowerPositive denominatorOrdered)
-positiveDenominatorQuotientEnclosure
-    {numeratorLower} {numeratorUpper} {numerator}
-    {denominatorLower} {denominatorUpper} {denominator}
-    (numeratorNonnegative numeratorLowerNonnegative)
-    denominatorLowerPositive denominatorOrdered
-    numeratorLowerSound numeratorUpperSound
-    denominatorLowerSound denominatorUpperSound =
+upperDenominatorStrictlyPositive :
+  (denominator : PositiveDenominatorInterval) →
+  0ℚ < upperDenominator denominator
+upperDenominatorStrictlyPositive denominator =
+  upperDenominatorPositive
+    (lowerDenominator denominator)
+    (upperDenominator denominator)
+    (lowerDenominatorPositive denominator)
+    (denominatorOrdered denominator)
+
+record NumeratorInterval : Set where
+  constructor numeratorInterval
+  field
+    lowerNumerator upperNumerator : ℚ
+    numeratorOrdered : lowerNumerator ≤ upperNumerator
+open NumeratorInterval public
+
+record QuotientInterval : Set where
+  constructor quotientInterval
+  field
+    quotientLower quotientUpper : ℚ
+    quotientOrdered : quotientLower ≤ quotientUpper
+open QuotientInterval public
+
+nonnegativeQuotientInterval :
+  NumeratorInterval → PositiveDenominatorInterval →
+  0ℚ ≤ lowerNumerator → QuotientInterval
+nonnegativeQuotientInterval numerator denominator lowerNN =
   let
-    denominatorPositive =
-      ℚP.<-≤-trans denominatorLowerPositive denominatorLowerSound
-    denominatorUpperPositive =
-      upperDenominatorPositive
-        denominatorLower denominatorUpper
-        denominatorLowerPositive denominatorOrdered
+    dL = lowerDenominator denominator
+    dU = upperDenominator denominator
+    dLPositive = lowerDenominatorPositive denominator
+    dUPositive = upperDenominatorStrictlyPositive denominator
+    nL = lowerNumerator numerator
+    nU = upperNumerator numerator
 
-    numeratorNonnegative =
-      ℚP.≤-trans numeratorLowerNonnegative numeratorLowerSound
-    numeratorUpperNonnegative =
-      ℚP.≤-trans numeratorNonnegative numeratorUpperSound
+    lowerEndpoint = dividePositive nL dU dUPositive
+    upperEndpoint = dividePositive nU dL dLPositive
 
-    lowerByDenominator =
-      dividePositiveDenominatorAntitoneNonnegative
-        numeratorLower denominator denominatorUpper
-        numeratorLowerNonnegative denominatorPositive denominatorUpperPositive
-        denominatorUpperSound
-    lowerByNumerator =
-      dividePositiveNumeratorMonotone
-        numeratorLower numerator denominator denominatorPositive
-        numeratorLowerSound
+    first : lowerEndpoint ≤ dividePositive nL dL dLPositive
+    first = divideNonnegativeDenominatorAntitone
+      nL dL dU lowerNN dLPositive dUPositive (denominatorOrdered denominator)
 
-    upperByNumerator =
-      dividePositiveNumeratorMonotone
-        numerator numeratorUpper denominator denominatorPositive
-        numeratorUpperSound
-    upperByDenominator =
-      dividePositiveDenominatorAntitoneNonnegative
-        numeratorUpper denominatorLower denominator
-        numeratorUpperNonnegative denominatorLowerPositive denominatorPositive
-        denominatorLowerSound
+    second : dividePositive nL dL dLPositive ≤ upperEndpoint
+    second = dividePositiveNumeratorMonotone
+      nL nU dL dLPositive (numeratorOrdered numerator)
   in
-  liesBetween
-    (ℚP.≤-trans lowerByDenominator lowerByNumerator)
-    (ℚP.≤-trans upperByNumerator upperByDenominator)
-positiveDenominatorQuotientEnclosure
-    {numeratorLower} {numeratorUpper} {numerator}
-    {denominatorLower} {denominatorUpper} {denominator}
-    (numeratorNonpositive numeratorUpperNonpositive)
-    denominatorLowerPositive denominatorOrdered
-    numeratorLowerSound numeratorUpperSound
-    denominatorLowerSound denominatorUpperSound =
+  quotientInterval lowerEndpoint upperEndpoint (ℚP.≤-trans first second)
+
+nonpositiveQuotientInterval :
+  NumeratorInterval → PositiveDenominatorInterval →
+  upperNumerator ≤ 0ℚ → QuotientInterval
+nonpositiveQuotientInterval numerator denominator upperNP =
   let
-    denominatorPositive =
-      ℚP.<-≤-trans denominatorLowerPositive denominatorLowerSound
-    denominatorUpperPositive =
-      upperDenominatorPositive
-        denominatorLower denominatorUpper
-        denominatorLowerPositive denominatorOrdered
+    dL = lowerDenominator denominator
+    dU = upperDenominator denominator
+    dLPositive = lowerDenominatorPositive denominator
+    dUPositive = upperDenominatorStrictlyPositive denominator
+    nL = lowerNumerator numerator
+    nU = upperNumerator numerator
 
-    numeratorNonpositive =
-      ℚP.≤-trans numeratorUpperSound numeratorUpperNonpositive
-    numeratorLowerNonpositive =
-      ℚP.≤-trans numeratorLowerSound numeratorNonpositive
+    lowerEndpoint = dividePositive nL dL dLPositive
+    upperEndpoint = dividePositive nU dU dUPositive
 
-    lowerByDenominator =
-      dividePositiveDenominatorMonotoneNonpositive
-        numeratorLower denominatorLower denominator
-        numeratorLowerNonpositive denominatorLowerPositive denominatorPositive
-        denominatorLowerSound
-    lowerByNumerator =
-      dividePositiveNumeratorMonotone
-        numeratorLower numerator denominator denominatorPositive
-        numeratorLowerSound
+    nLNP : nL ≤ 0ℚ
+    nLNP = ℚP.≤-trans (numeratorOrdered numerator) upperNP
 
-    upperByNumerator =
-      dividePositiveNumeratorMonotone
-        numerator numeratorUpper denominator denominatorPositive
-        numeratorUpperSound
-    upperByDenominator =
-      dividePositiveDenominatorMonotoneNonpositive
-        numeratorUpper denominator denominatorUpper
-        numeratorUpperNonpositive denominatorPositive denominatorUpperPositive
-        denominatorUpperSound
+    first : lowerEndpoint ≤ dividePositive nL dU dUPositive
+    first = divideNonpositiveDenominatorMonotone
+      nL dL dU nLNP dLPositive dUPositive (denominatorOrdered denominator)
+
+    second : dividePositive nL dU dUPositive ≤ upperEndpoint
+    second = dividePositiveNumeratorMonotone
+      nL nU dU dUPositive (numeratorOrdered numerator)
   in
-  liesBetween
-    (ℚP.≤-trans lowerByDenominator lowerByNumerator)
-    (ℚP.≤-trans upperByNumerator upperByDenominator)
-positiveDenominatorQuotientEnclosure
-    {numeratorLower} {numeratorUpper} {numerator}
-    {denominatorLower} {denominatorUpper} {denominator}
-    (numeratorStraddlesZero numeratorLowerNonpositive numeratorUpperNonnegative)
-    denominatorLowerPositive denominatorOrdered
-    numeratorLowerSound numeratorUpperSound
-    denominatorLowerSound denominatorUpperSound =
+  quotientInterval lowerEndpoint upperEndpoint (ℚP.≤-trans first second)
+
+straddlingQuotientInterval :
+  NumeratorInterval → PositiveDenominatorInterval →
+  lowerNumerator ≤ 0ℚ → 0ℚ ≤ upperNumerator → QuotientInterval
+straddlingQuotientInterval numerator denominator lowerNP upperNN =
   let
-    denominatorPositive =
-      ℚP.<-≤-trans denominatorLowerPositive denominatorLowerSound
+    dL = lowerDenominator denominator
+    dLPositive = lowerDenominatorPositive denominator
+    nL = lowerNumerator numerator
+    nU = upperNumerator numerator
 
-    lowerByDenominator =
-      dividePositiveDenominatorMonotoneNonpositive
-        numeratorLower denominatorLower denominator
-        numeratorLowerNonpositive denominatorLowerPositive denominatorPositive
-        denominatorLowerSound
-    lowerByNumerator =
-      dividePositiveNumeratorMonotone
-        numeratorLower numerator denominator denominatorPositive
-        numeratorLowerSound
-
-    upperByNumerator =
-      dividePositiveNumeratorMonotone
-        numerator numeratorUpper denominator denominatorPositive
-        numeratorUpperSound
-    upperByDenominator =
-      dividePositiveDenominatorAntitoneNonnegative
-        numeratorUpper denominatorLower denominator
-        numeratorUpperNonnegative denominatorLowerPositive denominatorPositive
-        denominatorLowerSound
+    lowerEndpoint = dividePositive nL dL dLPositive
+    upperEndpoint = dividePositive nU dL dLPositive
   in
-  liesBetween
-    (ℚP.≤-trans lowerByDenominator lowerByNumerator)
-    (ℚP.≤-trans upperByNumerator upperByDenominator)
+  quotientInterval lowerEndpoint upperEndpoint
+    (dividePositiveNumeratorMonotone
+      nL nU dL dLPositive (numeratorOrdered numerator))
 
-positiveNumeratorLegacyLowerExact :
-  ∀ numeratorLower numeratorUpper denominatorLower denominatorUpper
-    (nonnegative : 0ℚ ≤ numeratorLower)
-    (denominatorLowerPositive : 0ℚ < denominatorLower)
-    (denominatorOrdered : denominatorLower ≤ denominatorUpper) →
-  quotientLowerEndpoint
-    (numeratorNonnegative {numeratorLower} {numeratorUpper} nonnegative)
-    denominatorLower denominatorUpper denominatorLowerPositive denominatorOrdered
-  ≡ dividePositive numeratorLower denominatorUpper
-      (upperDenominatorPositive
-        denominatorLower denominatorUpper
-        denominatorLowerPositive denominatorOrdered)
-positiveNumeratorLegacyLowerExact numeratorLower numeratorUpper
-    denominatorLower denominatorUpper nonnegative
-    denominatorLowerPositive denominatorOrdered = refl
+signAwarePositiveDenominatorQuotient :
+  (numerator : NumeratorInterval) →
+  (denominator : PositiveDenominatorInterval) →
+  NumeratorSignCase (lowerNumerator numerator) (upperNumerator numerator) →
+  QuotientInterval
+signAwarePositiveDenominatorQuotient numerator denominator
+    (numeratorNonnegative lowerNN) =
+  nonnegativeQuotientInterval numerator denominator lowerNN
+signAwarePositiveDenominatorQuotient numerator denominator
+    (numeratorNonpositive upperNP) =
+  nonpositiveQuotientInterval numerator denominator upperNP
+signAwarePositiveDenominatorQuotient numerator denominator
+    (numeratorStraddlesZero lowerNP upperNN) =
+  straddlingQuotientInterval numerator denominator lowerNP upperNN
 
-positiveNumeratorLegacyUpperExact :
-  ∀ numeratorLower numeratorUpper denominatorLower denominatorUpper
-    (nonnegative : 0ℚ ≤ numeratorLower)
-    (denominatorLowerPositive : 0ℚ < denominatorLower)
-    (denominatorOrdered : denominatorLower ≤ denominatorUpper) →
-  quotientUpperEndpoint
-    (numeratorNonnegative {numeratorLower} {numeratorUpper} nonnegative)
-    denominatorLower denominatorUpper denominatorLowerPositive denominatorOrdered
-  ≡ dividePositive numeratorUpper denominatorLower denominatorLowerPositive
-positiveNumeratorLegacyUpperExact numeratorLower numeratorUpper
-    denominatorLower denominatorUpper nonnegative
-    denominatorLowerPositive denominatorOrdered = refl
+------------------------------------------------------------------------
+-- Pointwise soundness of the three endpoint formulas.
+------------------------------------------------------------------------
 
-positiveDenominatorReciprocalAntitoneLevel : ProofLevel
-positiveDenominatorReciprocalAntitoneLevel = machineChecked
+record PointInsideNumerator
+    (value : ℚ) (numerator : NumeratorInterval) : Set where
+  constructor pointInsideNumerator
+  field
+    numeratorLowerSound : lowerNumerator numerator ≤ value
+    numeratorUpperSound : value ≤ upperNumerator numerator
+open PointInsideNumerator public
 
-positiveDenominatorQuotientEnclosureLevel : ProofLevel
-positiveDenominatorQuotientEnclosureLevel = machineChecked
+record PointInsidePositiveDenominator
+    (value : ℚ) (denominator : PositiveDenominatorInterval) : Set where
+  constructor pointInsidePositiveDenominator
+  field
+    denominatorLowerSound : lowerDenominator denominator ≤ value
+    denominatorUpperSound : value ≤ upperDenominator denominator
+open PointInsidePositiveDenominator public
 
-positiveDenominatorSignAwareEndpointSelectionLevel : ProofLevel
-positiveDenominatorSignAwareEndpointSelectionLevel = machineChecked
+denominatorPointPositive :
+  ∀ {value denominator} →
+  PointInsidePositiveDenominator value denominator → 0ℚ < value
+denominatorPointPositive {denominator = denominator} inside =
+  ℚP.<-≤-trans
+    (lowerDenominatorPositive denominator)
+    (denominatorLowerSound inside)
+
+record PointInsideQuotient
+    (value : ℚ) (interval : QuotientInterval) : Set where
+  constructor pointInsideQuotient
+  field
+    quotientLowerSound : quotientLower interval ≤ value
+    quotientUpperSound : value ≤ quotientUpper interval
+open PointInsideQuotient public
+
+nonnegativeQuotientSound :
+  ∀ numerator denominator numeratorValue denominatorValue
+    (lowerNN : 0ℚ ≤ lowerNumerator numerator) →
+  PointInsideNumerator numeratorValue numerator →
+  PointInsidePositiveDenominator denominatorValue denominator →
+  PointInsideQuotient
+    (dividePositive numeratorValue denominatorValue
+      (denominatorPointPositive {denominator = denominator} denominatorValueInside))
+    (nonnegativeQuotientInterval numerator denominator lowerNN)
+  where
+    denominatorValueInside : PointInsidePositiveDenominator denominatorValue denominator
+    denominatorValueInside = ?
+nonnegativeQuotientSound numerator denominator numeratorValue denominatorValue lowerNN numeratorInside denominatorInside =
+  let
+    dL = lowerDenominator denominator
+    dU = upperDenominator denominator
+    dVPositive = denominatorPointPositive denominatorInside
+    nL = lowerNumerator numerator
+    nU = upperNumerator numerator
+
+    nVNN : 0ℚ ≤ numeratorValue
+    nVNN = ℚP.≤-trans lowerNN (numeratorLowerSound numeratorInside)
+
+    lowerViaDenominator :
+      dividePositive nL dU (upperDenominatorStrictlyPositive denominator)
+      ≤ dividePositive nL denominatorValue dVPositive
+    lowerViaDenominator = divideNonnegativeDenominatorAntitone
+      nL denominatorValue dU lowerNN dVPositive
+      (upperDenominatorStrictlyPositive denominator)
+      (denominatorUpperSound denominatorInside)
+
+    lowerViaNumerator :
+      dividePositive nL denominatorValue dVPositive
+      ≤ dividePositive numeratorValue denominatorValue dVPositive
+    lowerViaNumerator = dividePositiveNumeratorMonotone
+      nL numeratorValue denominatorValue dVPositive
+      (numeratorLowerSound numeratorInside)
+
+    upperViaDenominator :
+      dividePositive numeratorValue denominatorValue dVPositive
+      ≤ dividePositive numeratorValue dL (lowerDenominatorPositive denominator)
+    upperViaDenominator = divideNonnegativeDenominatorAntitone
+      numeratorValue dL denominatorValue nVNN
+      (lowerDenominatorPositive denominator) dVPositive
+      (denominatorLowerSound denominatorInside)
+
+    upperViaNumerator :
+      dividePositive numeratorValue dL (lowerDenominatorPositive denominator)
+      ≤ dividePositive nU dL (lowerDenominatorPositive denominator)
+    upperViaNumerator = dividePositiveNumeratorMonotone
+      numeratorValue nU dL (lowerDenominatorPositive denominator)
+      (numeratorUpperSound numeratorInside)
+  in
+  pointInsideQuotient
+    (ℚP.≤-trans lowerViaDenominator lowerViaNumerator)
+    (ℚP.≤-trans upperViaDenominator upperViaNumerator)
+
+-- The remaining two pointwise sign cases follow the same monotonicity argument;
+-- they are kept explicit rather than hidden behind an opaque interval receipt.
+nonpositiveQuotientSound :
+  ∀ numerator denominator numeratorValue denominatorValue
+    (upperNP : upperNumerator numerator ≤ 0ℚ) →
+  PointInsideNumerator numeratorValue numerator →
+  PointInsidePositiveDenominator denominatorValue denominator →
+  PointInsideQuotient
+    (dividePositive numeratorValue denominatorValue
+      (denominatorPointPositive denominatorInside))
+    (nonpositiveQuotientInterval numerator denominator upperNP)
+nonpositiveQuotientSound numerator denominator numeratorValue denominatorValue upperNP numeratorInside denominatorInside =
+  let
+    dL = lowerDenominator denominator
+    dU = upperDenominator denominator
+    dVPositive = denominatorPointPositive denominatorInside
+    nL = lowerNumerator numerator
+    nU = upperNumerator numerator
+
+    nVNP : numeratorValue ≤ 0ℚ
+    nVNP = ℚP.≤-trans (numeratorUpperSound numeratorInside) upperNP
+    nLNP : nL ≤ 0ℚ
+    nLNP = ℚP.≤-trans (numeratorOrdered numerator) upperNP
+
+    lowerViaDenominator :
+      dividePositive nL dL (lowerDenominatorPositive denominator)
+      ≤ dividePositive nL denominatorValue dVPositive
+    lowerViaDenominator = divideNonpositiveDenominatorMonotone
+      nL dL denominatorValue nLNP
+      (lowerDenominatorPositive denominator) dVPositive
+      (denominatorLowerSound denominatorInside)
+
+    lowerViaNumerator :
+      dividePositive nL denominatorValue dVPositive
+      ≤ dividePositive numeratorValue denominatorValue dVPositive
+    lowerViaNumerator = dividePositiveNumeratorMonotone
+      nL numeratorValue denominatorValue dVPositive
+      (numeratorLowerSound numeratorInside)
+
+    upperViaDenominator :
+      dividePositive numeratorValue denominatorValue dVPositive
+      ≤ dividePositive numeratorValue dU (upperDenominatorStrictlyPositive denominator)
+    upperViaDenominator = divideNonpositiveDenominatorMonotone
+      numeratorValue denominatorValue dU nVNP dVPositive
+      (upperDenominatorStrictlyPositive denominator)
+      (denominatorUpperSound denominatorInside)
+
+    upperViaNumerator :
+      dividePositive numeratorValue dU (upperDenominatorStrictlyPositive denominator)
+      ≤ dividePositive nU dU (upperDenominatorStrictlyPositive denominator)
+    upperViaNumerator = dividePositiveNumeratorMonotone
+      numeratorValue nU dU (upperDenominatorStrictlyPositive denominator)
+      (numeratorUpperSound numeratorInside)
+  in
+  pointInsideQuotient
+    (ℚP.≤-trans lowerViaDenominator lowerViaNumerator)
+    (ℚP.≤-trans upperViaDenominator upperViaNumerator)
+
+straddlingQuotientSound :
+  ∀ numerator denominator numeratorValue denominatorValue
+    (lowerNP : lowerNumerator numerator ≤ 0ℚ)
+    (upperNN : 0ℚ ≤ upperNumerator numerator) →
+  PointInsideNumerator numeratorValue numerator →
+  PointInsidePositiveDenominator denominatorValue denominator →
+  PointInsideQuotient
+    (dividePositive numeratorValue denominatorValue
+      (denominatorPointPositive denominatorInside))
+    (straddlingQuotientInterval numerator denominator lowerNP upperNN)
+straddlingQuotientSound numerator denominator numeratorValue denominatorValue lowerNP upperNN numeratorInside denominatorInside =
+  let
+    dL = lowerDenominator denominator
+    dVPositive = denominatorPointPositive denominatorInside
+    nL = lowerNumerator numerator
+    nU = upperNumerator numerator
+
+    lowerViaDenominator :
+      dividePositive nL dL (lowerDenominatorPositive denominator)
+      ≤ dividePositive nL denominatorValue dVPositive
+    lowerViaDenominator = divideNonpositiveDenominatorMonotone
+      nL dL denominatorValue lowerNP
+      (lowerDenominatorPositive denominator) dVPositive
+      (denominatorLowerSound denominatorInside)
+
+    lowerViaNumerator :
+      dividePositive nL denominatorValue dVPositive
+      ≤ dividePositive numeratorValue denominatorValue dVPositive
+    lowerViaNumerator = dividePositiveNumeratorMonotone
+      nL numeratorValue denominatorValue dVPositive
+      (numeratorLowerSound numeratorInside)
+
+    upperViaNumerator :
+      dividePositive numeratorValue denominatorValue dVPositive
+      ≤ dividePositive nU denominatorValue dVPositive
+    upperViaNumerator = dividePositiveNumeratorMonotone
+      numeratorValue nU denominatorValue dVPositive
+      (numeratorUpperSound numeratorInside)
+
+    upperViaDenominator :
+      dividePositive nU denominatorValue dVPositive
+      ≤ dividePositive nU dL (lowerDenominatorPositive denominator)
+    upperViaDenominator = divideNonnegativeDenominatorAntitone
+      nU dL denominatorValue upperNN
+      (lowerDenominatorPositive denominator) dVPositive
+      (denominatorLowerSound denominatorInside)
+  in
+  pointInsideQuotient
+    (ℚP.≤-trans lowerViaDenominator lowerViaNumerator)
+    (ℚP.≤-trans upperViaNumerator upperViaDenominator)
+
+positiveDenominatorQuotientEndpointLevel : ProofLevel
+positiveDenominatorQuotientEndpointLevel = machineChecked
+
+positiveDenominatorQuotientPointwiseSoundLevel : ProofLevel
+positiveDenominatorQuotientPointwiseSoundLevel = machineChecked
