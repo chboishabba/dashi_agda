@@ -16,8 +16,6 @@ module DASHI.Interop.AristotleMathSourceParityExact where
 -- snapshot retains its own JMD/Aristotle provenance.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; false; true)
-open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
@@ -90,8 +88,8 @@ baseGeneralParity = aristotleMathModuleParity
   288
   31
   partial
-  "DASHI.Arithmetic.DecimalDigitalRootNonaryExact;DASHI.Arithmetic.AristotleTeslaBaseNonaryOrbitExact;DASHI.Foundations.PhaseQuotientNonaryGroupSeparationExact"
-  "generic base-acts-as-one quotient principle and exact ZMod9 doubling orbit partition 1+2+6 are ported; generic base-b digitalRoot/trinity cardinality/minimal-base theorem and general base power-period theorem remain"
+  "DASHI.Arithmetic.DecimalDigitalRootNonaryExact;DASHI.Foundations.PhaseQuotientNonaryGroupSeparationExact"
+  "generic base-acts-as-one quotient principle present, but base-b digitalRoot/trinity cardinality/minimal-base theorem and ZMod9 vortex orbit partition/cardinalities are not source-parity"
 
 deltaGraphParity : AristotleMathModuleParity
 deltaGraphParity = aristotleMathModuleParity
@@ -130,8 +128,8 @@ fibVortexParity = aristotleMathModuleParity
   121
   7
   nearCoreParity
-  "DASHI.Arithmetic.FibonacciNonaryPeriodExact;DASHI.Arithmetic.AristotleFibVortexParityExact"
-  "exact mod9 state period 24, minimality, every-fourth triadic residues, and 24-cycle positive digital-root sum 117 are ported; source Nat fib/digitalRoot theorem packaging remains"
+  "DASHI.Arithmetic.FibonacciNonaryPeriodExact"
+  "exact mod9 state period 24, minimality and every-fourth triadic residues ported; source Nat fib digitalRoot statement packaging and cycle-sum theorem remain"
 
 hecke23Parity : AristotleMathModuleParity
 hecke23Parity = aristotleMathModuleParity
@@ -220,8 +218,8 @@ tesla369Parity = aristotleMathModuleParity
   304
   29
   partial
-  "DASHI.Arithmetic.DecimalDigitalRootNonaryExact;DASHI.Arithmetic.AristotleTeslaBaseNonaryOrbitExact;Base369;DASHI.Foundations.Base369NonaryTruthRing"
-  "casting-out-nines core, 1..9<->Z/9 chart, exact minimal six-step doubling cycle, triadic exclusion, and unit-orbit exhaustion are ported; Nat recursive digitalRoot/repeatedDigitSum and trinity generation/closure remain"
+  "DASHI.Arithmetic.DecimalDigitalRootNonaryExact;Base369;DASHI.Foundations.Base369NonaryTruthRing"
+  "casting-out-nines core and 1..9<->Z/9 chart ported; Nat recursive digitalRoot/repeatedDigitSum, trinity generation/closure, and exact doubling 6-cycle theorem not yet source-parity"
 
 verticalWallsParity : AristotleMathModuleParity
 verticalWallsParity = aristotleMathModuleParity
@@ -261,19 +259,9 @@ allAristotleMathModuleParity =
 
 record AristotleMathParityBoundary : Set where
   field
-    sourceInventoryComplete : Bool
-    sourceInventoryCompleteIsTrue : sourceInventoryComplete ≡ true
-    declarationInventoryExternalTSV : Bool
-    declarationInventoryExternalTSVIsTrue : declarationInventoryExternalTSV ≡ true
-    allModulesSemanticallyPorted : Bool
-    allModulesSemanticallyPortedIsFalse : allModulesSemanticallyPorted ≡ false
+    sourceInventoryComplete : Set
+    declarationInventoryExternalTSV : Set
+    allModulesSemanticallyPorted : Set
 
-canonicalAristotleMathParityBoundary : AristotleMathParityBoundary
-canonicalAristotleMathParityBoundary = record
-  { sourceInventoryComplete = true
-  ; sourceInventoryCompleteIsTrue = refl
-  ; declarationInventoryExternalTSV = true
-  ; declarationInventoryExternalTSVIsTrue = refl
-  ; allModulesSemanticallyPorted = false
-  ; allModulesSemanticallyPortedIsFalse = refl
-  }
+-- Intentionally no canonical inhabitant: the source inventory is complete,
+-- but the current parity ledger explicitly contains unported modules.
