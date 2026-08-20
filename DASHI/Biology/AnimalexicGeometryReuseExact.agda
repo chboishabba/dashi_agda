@@ -61,17 +61,16 @@ record AnimalWeightedKernelContract
 
 open AnimalWeightedKernelContract public
 
-implementedAnimalKernelClosedIffAbstractClosed :
+implementedAnimalKernelClosedImpliesAbstractClosed :
   ∀ {Node Scalar}
     {graph : Weighted.FiniteWeightedGraph Node Scalar}
     {deadzone : Weighted.GraphDeadzone graph} →
   (contract : AnimalWeightedKernelContract graph deadzone) →
   (state : Nonlinear.State Node) →
   ((node : Node) →
-    Weighted.GraphKernelImplementation.implemented
-      (implementation contract) state node ≡ state node) →
+    Weighted.implemented (implementation contract) state node ≡ state node) →
   Nonlinear.KernelClosed (Weighted.graphThresholdKernel graph deadzone) state
-implementedAnimalKernelClosedIffAbstractClosed contract state closed =
+implementedAnimalKernelClosedImpliesAbstractClosed contract state closed =
   Weighted.implementedClosedImpliesAbstractClosed
     (implementation contract) state closed
 
