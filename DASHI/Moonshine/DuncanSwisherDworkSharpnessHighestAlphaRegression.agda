@@ -3,17 +3,19 @@ module DASHI.Moonshine.DuncanSwisherDworkSharpnessHighestAlphaRegression where
 ------------------------------------------------------------------------
 -- Focused regression for the Dwork / Legendre sharpness dependency reversal.
 --
--- Exceptional 3/2 exponents are now algebraic outputs of the exact Legendre
--- j-factorization.  The genuine analytic boundary is split into:
+-- Exceptional 3/2 exponents are algebraic outputs of the exact Legendre
+-- j-factorization.  Finite residue-unit inputs are explicit for all exceptional
+-- p=5,7,11 branches, and the preferred local producer derives both unit depth
+-- and branch depth from residue/simple-root data.
 --
---   local p-adic Legendre/J geometry
+-- The remaining analytic boundary is therefore split into:
+--
+--   actual p-adic lift/local-coordinate factorization
 --   + Dwork n=1 A1 valuation transfer.
 --
 -- The repository's older integer `VpDepth` machinery is reused only as an
--- executable algebraic shadow of the same strict-minimum valuation interface.
--- It is not identified with Dwork's p-adic analytic carrier.  `VpTrue` also no
--- longer postulates a universal self-fuel adequacy theorem; stabilization is
--- proof-relevant.
+-- executable algebraic shadow.  It is not identified with Dwork's p-adic
+-- analytic carrier; stabilization is proof-relevant.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -31,6 +33,9 @@ import DASHI.Moonshine.DuncanSwisherLegendreRamificationDepthExact as Legendre
 import DASHI.Moonshine.LegendreJExceptionalPolynomialFactorizationExact as JFactor
 import DASHI.Moonshine.LegendreExceptionalBranchSimpleRootExact as SimpleRoot
 import DASHI.Moonshine.LegendreJExceptionalLocalValuationCutsetExact as LocalCut
+import DASHI.Moonshine.LegendreJExceptionalResidueLocalProducerExact as Preferred
+import DASHI.Moonshine.P5LegendreJZeroF25ResidueExact as P5Residue
+import DASHI.Moonshine.P7P11LegendreJ1728ResidueCertificatesExact as P7P11Residue
 import DASHI.Moonshine.P11GeometricSupersingularCarrierExact as Geo
 import DASHI.Moonshine.P11EichlerDeuringStackUnweightingExact as Stack11
 
@@ -104,7 +109,7 @@ vpDepthShadowNotPromotedToDworkCarrierRegression :
 vpDepthShadowNotPromotedToDworkCarrierRegression = refl
 
 ------------------------------------------------------------------------
--- New cutset: exceptional exponents are algebraic; analytic authorities split.
+-- Exceptional exponent/residue/local-parameter cutset.
 ------------------------------------------------------------------------
 
 jZeroExponentAlgebraicRegression :
@@ -119,6 +124,26 @@ simpleRootResidueUnitStillNotFabricatedRegression :
   SimpleRoot.residueNonzeroImpliesPadicUnitConstructedHere
     SimpleRoot.canonicalLegendreExceptionalBranchSimpleRootBoundary ≡ false
 simpleRootResidueUnitStillNotFabricatedRegression = refl
+
+p5FiniteResidueInputsCompleteRegression :
+  P5Residue.finiteResidueUnitInputsComplete
+    P5Residue.canonicalP5LegendreJZeroF25ResidueBoundary ≡ true
+p5FiniteResidueInputsCompleteRegression = refl
+
+p7p11FiniteResidueInputsCompleteRegression :
+  P7P11Residue.residueUnitInputsAvailableForP7P11
+    P7P11Residue.canonicalP7P11LegendreJ1728ResidueCertificatesBoundary ≡ true
+p7p11FiniteResidueInputsCompleteRegression = refl
+
+preferredOuterUnitDepthIsDerivedRegression :
+  Preferred.outerUnitDepthPrimitive
+    Preferred.canonicalLegendreJExceptionalResidueLocalProducerBoundary ≡ false
+preferredOuterUnitDepthIsDerivedRegression = refl
+
+preferredBranchDepthOneIsDerivedRegression :
+  Preferred.branchDepthOnePrimitive
+    Preferred.canonicalLegendreJExceptionalResidueLocalProducerBoundary ≡ false
+preferredBranchDepthOneIsDerivedRegression = refl
 
 freeRamificationExponentRejectedRegression :
   LocalCut.freeNumericRamificationExponentAcceptedFromSource
