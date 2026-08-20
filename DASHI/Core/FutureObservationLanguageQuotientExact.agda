@@ -161,7 +161,8 @@ exactSummaryCertifiesFutureLanguageSafety :
     {coarsen : State → Coarse} →
   ExactFutureLanguageSummary system project coarsen →
   FutureLanguageSafeProjection system project coarsen
-exactSummaryCertifiesFutureLanguageSafety {coarsen = coarsen} summary =
+exactSummaryCertifiesFutureLanguageSafety
+  {system = system} {project = project} {coarsen = coarsen} summary =
   futureLanguageSafeProjection certify
   where
     certify :
