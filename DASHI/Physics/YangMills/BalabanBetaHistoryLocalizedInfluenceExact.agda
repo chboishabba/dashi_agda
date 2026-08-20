@@ -42,6 +42,7 @@ module DASHI.Physics.YangMills.BalabanBetaHistoryLocalizedInfluenceExact where
 -- on the number of preceding RG steps from the target estimate.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
@@ -51,7 +52,6 @@ open import Relation.Binary.PropositionalEquality using (subst)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanContinuumScaleLocalObservableCauchyExact as Scale
 import DASHI.Physics.YangMills.BalabanTraceKoteckyPreissGeometricExact as Geo
-import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
 
 record LocalizedBetaHistoryInfluence : Set₁ where
   field
@@ -152,7 +152,6 @@ fullBetaKeepsHalfGaussian {history} dataSet count =
     chained = ℚP.≤-trans halfPlusHBelowGaussian
       (betaAboveGaussianMinusHistory dataSet count)
   in
-  -- Cancel the common history term using ordered-group translation.
   ℚP.+-cancelʳ-≤ h chained
 
 localizedBetaHistoryInfluenceCompilerLevel : ProofLevel
