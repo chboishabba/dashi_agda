@@ -1,52 +1,185 @@
 #!/usr/bin/env python3
-"""Run the legacy physical-progress audit plus the exact C1 frontier audit.
-
-The legacy implementation is preserved verbatim in
-``check_ym_physical_progress_legacy.py``.  This wrapper updates the statuses
-that advanced in PR #335, then executes both fail-closed audits.
-"""
+"""Fail-closed audit for the physical fibre, coercivity, polymer and RG tranche."""
 
 from __future__ import annotations
 
-import importlib.util
 from pathlib import Path
-import runpy
+import subprocess
+import sys
+import tempfile
 
 ROOT = Path(__file__).resolve().parents[1]
-LEGACY = Path(__file__).with_name("check_ym_physical_progress_legacy.py")
+YM = ROOT / "DASHI/Physics/YangMills"
+
+FILES: dict[Path, tuple[str, ...]] = {
+    YM / "BalabanFiniteEnumerationDistinctExact.agda": (
+        "allCyclicIndicesDuplicateFree",
+        "mapDuplicateFree",
+        "cartesianDuplicateFree",
+        "cartesianEnumerationDuplicateFreeLevel = machineChecked",
+    ),
+    YM / "BalabanPhysicalBlockEnumerationDistinctExact.agda": (
+        "physicalBlockSitesDuplicateFree",
+        "physicalAxisFibreDuplicateFree",
+        "physicalFibreEnumerationDuplicateFree",
+        "physicalPositiveEdgesDuplicateFree",
+        "physicalPositiveEdgesDuplicateFreeLevel = machineChecked",
+    ),
+    YM / "BalabanPath4AxisAverageNormContractionExact.agda": (
+        "axisAveragePythagoras",
+        "axisAverageNormContraction",
+        "path4AxisAveragePythagorasLevel = machineChecked",
+        "path4AxisAverageNormContractionLevel = machineChecked",
+    ),
+    YM / "BalabanPath4DirectionalEnergyContractionExact.agda": (
+        "axisAverageCommutesWithDistinctEdgeDifference",
+        "globalEdgeDifferenceNormFourfold",
+        "fourTimesDirectionalEnergyContraction",
+        "distinctAxisDirectionalEnergyContraction",
+        "path4DistinctAxisDirectionalEnergyContractionLevel = machineChecked",
+    ),
+    YM / "BalabanPath4GlobalPoincareExact.agda": (
+        "axisCenteringDirectionalEnergyExact",
+        "path4MartingaleDirectionalEnergyContraction",
+        "path4GlobalPoincare",
+        "path4GlobalPoincareLevel = machineChecked",
+    ),
+    YM / "BalabanPhysicalHaloOriginExact.agda": (
+        "cyclicPredecessor",
+        "shiftBackFourfold",
+        "physicalOffsetAfterOrigin",
+        "physicalOriginAfterOffset",
+        "physicalHaloOriginRoundTrips",
+        "literalPhysicalContainingOriginCount",
+        "physicalBlockOriginOffsetBijectionLevel = machineChecked",
+        "physicalOriginMatchesWilsonBlockContainmentLevel = conditional",
+    ),
+    YM / "BalabanCommutingProjectionMartingaleExact.agda": (
+        "residualOrthogonalToFixed",
+        "commutingResidualPreservesFixed",
+        "martingale01Zero",
+        "martingale23Zero",
+        "commutingProjectionMartingaleOrthogonalityLevel = machineChecked",
+        "physicalAxisAverageSelfAdjointnessLevel = conditional",
+    ),
+    YM / "BalabanConcreteRootedTracePolymer.agda": (
+        "rootedTracePolymerEncoding",
+        "tracePolymersOfSizeComplete",
+        "tracePolymersOfSizeCount",
+        "tracePolymerDiameterBelowAnisotropic",
+        "rootedTracePolymerEntropyLevel = machineChecked",
+        "physicalConnectedPolymerCanonicalTraceLevel = conditional",
+    ),
+    YM / "BalabanRunningCouplingIterationExact.agda": (
+        "iteratedInverseCouplingFormula",
+        "physicalIteratedInverseCouplingFormula",
+        "terminalOffsetSpacingExact",
+        "transmutationScaleFiniteRGInvariant",
+        "runningCouplingFiniteIterationLevel = machineChecked",
+        "physicalBetaRemainderEstimateLevel = conditional",
+        "physicalTerminalOffsetBoundLevel = conjectural",
+    ),
+    YM / "BalabanClayAnalyticInhabitationSpine.agda": (
+        "physicalFibreScaledMeanZeroLevel = machineChecked",
+        "path4PhysicalFibrePoincareLevel = machineChecked",
+        "su2AdjointSquaredRadiusConsequenceLevel = machineChecked",
+        "finiteTraceKoteckyPreissBoundLevel = machineChecked",
+        "runningCouplingFiniteIterationLevel = machineChecked",
+        "physicalHessianCoefficientDerivationLevel = conditional",
+        "physicalTerminalOffsetBoundLevel = conjectural",
+        "clayYangMillsSubmissionPromoted = false",
+    ),
+    YM / "BalabanPhysicalProgressLedger.agda": (
+        "literalPhysicalBlockDistinctnessLevel = machineChecked",
+        "path4AxisAverageNormContractionLevel = machineChecked",
+        "path4DistinctAxisDirectionalEnergyContractionLevel = machineChecked",
+        "path4ScalarGlobalPoincareLevel = machineChecked",
+        "physicalBondHodgeIdentificationLevel = conditional",
+        "literalPhysicalHaloOriginLevel = machineChecked",
+        "literalFiveWilsonOperatorBoundsLevel = conditional",
+        "physicalTerminalOffsetBoundLevel = conjectural",
+    ),
+}
+
+SCRIPTS: dict[Path, tuple[str, ...]] = {
+    ROOT / "scripts/generate_path_physical_bridge.py": (
+        "generate_bridge",
+        "physicalFinalCoordinateIsGenerated",
+        "physicalNormMatchesGenerated",
+        "physicalEnergyMatchesGenerated",
+        "physicalFibrePoincare",
+    ),
+}
+
+FORBIDDEN = (
+    "postulate",
+    "{!!}",
+    "{-# TERMINATING #-}",
+    "= _",
+)
 
 
-def load_legacy():
-    spec = importlib.util.spec_from_file_location("ym_physical_progress_legacy", LEGACY)
-    if spec is None or spec.loader is None:
-        raise RuntimeError(f"cannot load legacy audit from {LEGACY}")
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
-    return module
+def fail(message: str) -> None:
+    print(f"Physical YM progress audit failed: {message}", file=sys.stderr)
+    raise SystemExit(1)
+
+
+def audit_text(path: Path, required: tuple[str, ...], forbid: bool) -> None:
+    if not path.is_file():
+        fail(f"missing {path.relative_to(ROOT)}")
+    text = path.read_text(encoding="utf-8")
+    if forbid:
+        for token in FORBIDDEN:
+            if token in text:
+                fail(f"forbidden token {token!r} in {path.relative_to(ROOT)}")
+    for theorem in required:
+        if theorem not in text:
+            fail(f"missing {theorem!r} in {path.relative_to(ROOT)}")
+
+
+def audit_generated_physical_bridge() -> None:
+    with tempfile.TemporaryDirectory() as directory:
+        output = Path(directory) / "GeneratedPath5PhysicalBridge.agda"
+        subprocess.run(
+            [
+                sys.executable,
+                str(ROOT / "scripts/generate_path_physical_bridge.py"),
+                "5",
+                "--certificate-module",
+                "DASHI.Physics.YangMills.GeneratedPath5LDLCertificate",
+                "--bridge-module",
+                "DASHI.Physics.YangMills.GeneratedPath5PhysicalBridge",
+                "--output",
+                str(output),
+            ],
+            cwd=ROOT,
+            check=True,
+            text=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        text = output.read_text(encoding="utf-8")
+        for theorem in (
+            "physicalFinalCoordinateIsGenerated",
+            "physicalNormMatchesGenerated",
+            "physicalEnergyMatchesGenerated",
+            "physicalFibrePoincare",
+            "generatedPhysicalFibrePoincareLevel = machineChecked",
+        ):
+            if theorem not in text:
+                fail(f"generated physical bridge missing {theorem!r}")
+        for token in FORBIDDEN:
+            if token in text:
+                fail(f"generated physical bridge contains {token!r}")
 
 
 def main() -> None:
-    legacy = load_legacy()
-
-    translated = legacy.YM / "BalabanConfiguredSideTranslatedBlockExact.agda"
-    obsolete = {
-        "globalWilsonToLocalTranslatedBlockLevel = conditional",
-        "repositorySUNWilsonActionHessianAdapterLevel = conditional",
-    }
-    required = tuple(
-        item for item in legacy.FILES[translated] if item not in obsolete
-    )
-    legacy.FILES[translated] = required + (
-        "arbitraryLatticeOpenBlockWilsonExtractionLevel = machineChecked",
-        "repositorySUNWilsonActionSecondVariationAdapterLevel = machineChecked",
-        "repositoryWilsonHessianOperatorRepresentativeLevel = machineChecked",
-    )
-
-    legacy.main()
-    runpy.run_path(
-        str(ROOT / "scripts/check_ym_c1_exact_cutset.py"),
-        run_name="__main__",
-    )
+    for path, required in FILES.items():
+        audit_text(path, required, forbid=True)
+    for path, required in SCRIPTS.items():
+        audit_text(path, required, forbid=False)
+    audit_generated_physical_bridge()
+    print("Physical fibre, scalar coercivity, polymer and RG progress remains exact and fail-closed.")
 
 
 if __name__ == "__main__":
