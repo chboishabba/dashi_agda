@@ -38,13 +38,13 @@ open import Agda.Primitive using (Level)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.Nat using (Nat)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier as Cube
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
-import DASHI.Physics.Closure.NSTriadKNComplex3FieldAlgebra as Algebra
 import DASHI.Physics.Closure.NSTriadKNComplex3RealityPhaseAudit as Reality
 import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNPeriodicLittlewoodPaleyBonyExact as LP
@@ -79,7 +79,7 @@ selectedModePairingReal :
     {E : C3.IntegerEmbedding (LP.realField model)}
     {I : C3.ModeInverseSquare (LP.realField model) E}
     (system : Audit.FiniteComplex3GalerkinSystem (LP.realField model) E I)
-    (shell : Agda.Builtin.Nat.Nat)
+    (shell : Nat)
     (output : Z3.FourierMode) →
   C3.real
     (C3.hermitianPairing3
@@ -101,7 +101,7 @@ canonicalPacketPairingRealEqualsSelectedProjectedReal :
     {E : C3.IntegerEmbedding (LP.realField model)}
     {I : C3.ModeInverseSquare (LP.realField model) E}
     (system : Audit.FiniteComplex3GalerkinSystem (LP.realField model) E I)
-    (shell : Agda.Builtin.Nat.Nat)
+    (shell : Nat)
     (modes : List Z3.FourierMode) →
   C3.real
     (Packet.finiteHermitianPairing modes
