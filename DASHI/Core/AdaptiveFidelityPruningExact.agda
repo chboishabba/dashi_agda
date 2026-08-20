@@ -35,7 +35,7 @@ open OrderedScore public
 record CertifiedLowerBound
     {Score : Set}
     (order : OrderedScore Score)
-    (actual lower : Score) : Set where
+    (actual lower : Score) : Set₁ where
   constructor certifiedLowerBound
   field
     lowerIsValid : _≤s_ order lower actual
@@ -45,7 +45,7 @@ open CertifiedLowerBound public
 record SafeMinimisationPrune
     {Score : Set}
     (order : OrderedScore Score)
-    (incumbent actual lower : Score) : Set where
+    (incumbent actual lower : Score) : Set₁ where
   constructor safeMinimisationPrune
   field
     certified : CertifiedLowerBound order actual lower
