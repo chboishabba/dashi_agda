@@ -123,7 +123,7 @@ import DASHI.Biology.BodyMemoryBiologyRegression
 import DASHI.Biology.BodyMemoryCompiledInverseBridge
 import DASHI.Biology.BodyMemoryMeasurementProxyBoundary
 import DASHI.Biology.BrainDNABodyMemoryBridge
-import DASHI.Biology.DevelopmentalWindowBodyMemoryBridge
+-- import DASHI.Biology.DevelopmentalWindowBodyMemoryBridge -- Excluded: transitively imports YM/NS Balaban chain
 import DASHI.Biology.EpigeneticBodyMemoryBridge
 import DASHI.Biology.EpigeneticTemporalRegulationBridge
 import DASHI.Biology.EducationBodyMemoryBridge
@@ -157,9 +157,9 @@ import DASHI.Biology.RelationalChartDynamicsInterfaceResidualMachine
 import DASHI.Biology.RelationalQiEducationTraumaBridge
 import DASHI.Biology.RelationalQiBodyMemoryBridge
 import DASHI.Biology.RetinalPerturbationObservationBridge
-import DASHI.Biology.TraumaBodyMemoryCandidateBridge
-import DASHI.Biology.TraumaClinicalGovernanceBoundary
-import Ontology.ClinicalDiagnostics
+-- import DASHI.Biology.TraumaBodyMemoryCandidateBridge -- Excluded: transitively imports YM/NS Balaban chain
+-- import DASHI.Biology.TraumaClinicalGovernanceBoundary -- Excluded: transitively imports YM/NS Balaban chain
+-- import Ontology.ClinicalDiagnostics -- Excluded: transitively imports YM/NS Balaban chain
 import DASHI.Combinatorics.Confluence
 import DASHI.Combinatorics.Entropy
 import DASHI.Combinatorics.FractranCOL
