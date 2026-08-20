@@ -9,6 +9,10 @@ import DASHI.Physics.YangMills.BalabanPatchResidualSmallness as Residual
 import DASHI.Physics.YangMills.BalabanCommonSmallFieldRadius as Radius
 import DASHI.Physics.YangMills.BalabanExplicitContractionBudget as Contraction
 
+------------------------------------------------------------------------
+-- Coherent endpoint of the highest-alpha finite-volume smallness path.
+------------------------------------------------------------------------
+
 record UniformAnalyticSmallnessInputs
     (Index State Bound : Set) : Set₁ where
   field
