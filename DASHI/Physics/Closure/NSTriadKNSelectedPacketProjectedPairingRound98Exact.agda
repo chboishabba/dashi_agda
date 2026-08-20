@@ -26,8 +26,6 @@ module DASHI.Physics.Closure.NSTriadKNSelectedPacketProjectedPairingRound98Exact
 --
 --   (1/6) * Round96.sumPacketTransfer
 --   = (1/6) * Round96.sumBoundaryTransfer.
---
--- The latter equality is Round96's exact internal/all-external cancellation.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -311,10 +309,6 @@ normalizedPacketTransferIsSelectedOrderedFold E I selected velocity cutoff =
       (sumPacketTransferIsSixSelectedOrderedFold E I selected velocity cutoff))
     (solve (total ∷ []))
 
-------------------------------------------------------------------------
--- Literal selected projected pairing = selected ordered fold.
-------------------------------------------------------------------------
-
 selectedProjectedOutputPower :
   {E : C3.IntegerEmbedding F} →
   {I : C3.ModeInverseSquare F E} →
@@ -345,6 +339,58 @@ literalSelectedProjectedPairing system selected =
   sumSelectedProjectedPairings system selected
     (Cube.cutoffModes (Equation.cutoff system))
 
+selectedFiberFoldTrue :
+  {E : C3.IntegerEmbedding F} →
+  {I : C3.ModeInverseSquare F E} →
+  (system : Equation.FiniteComplex3GalerkinSystem F E I) →
+  (selected : Z3.FourierMode → Bool) →
+  (output : Z3.FourierMode) →
+  selected output ≡ true →
+  selectedOrderedFold E I selected (Equation.velocity system)
+    (Equation.concreteTriadsAt system output)
+  ≡ Round38.foldPower
+      (λ tau → Round38.orderedPower E I tau (Equation.velocity system))
+      (Equation.concreteTriadsAt system output)
+selectedFiberFoldTrue {E} {I} system selected output outputTrue =
+  go (Equation.concreteTriadsAt system output)
+    (λ tau member → Equation.concreteTriadsAtOutputAgreement member)
+  where
+  go :
+    (items : List Physical.PhysicalTriadIncidence) →
+    (∀ tau → Cube._∈_ tau items → Physical.k tau ≡ output) →
+    selectedOrderedFold E I selected (Equation.velocity system) items
+    ≡ Round38.foldPower
+      (λ tau → Round38.orderedPower E I tau (Equation.velocity system)) items
+  go [] pointwise = refl
+  go (tau ∷ rest) pointwise
+    rewrite pointwise tau (Cube.here refl) | outputTrue =
+    cong
+      (Round38.orderedPower E I tau (Equation.velocity system) +_)
+      (go rest (λ chosen member → pointwise chosen (Cube.there member)))
+
+selectedFiberFoldFalse :
+  {E : C3.IntegerEmbedding F} →
+  {I : C3.ModeInverseSquare F E} →
+  (system : Equation.FiniteComplex3GalerkinSystem F E I) →
+  (selected : Z3.FourierMode → Bool) →
+  (output : Z3.FourierMode) →
+  selected output ≡ false →
+  selectedOrderedFold E I selected (Equation.velocity system)
+    (Equation.concreteTriadsAt system output)
+  ≡ 0ℚ
+selectedFiberFoldFalse {E} {I} system selected output outputFalse =
+  go (Equation.concreteTriadsAt system output)
+    (λ tau member → Equation.concreteTriadsAtOutputAgreement member)
+  where
+  go :
+    (items : List Physical.PhysicalTriadIncidence) →
+    (∀ tau → Cube._∈_ tau items → Physical.k tau ≡ output) →
+    selectedOrderedFold E I selected (Equation.velocity system) items ≡ 0ℚ
+  go [] pointwise = refl
+  go (tau ∷ rest) pointwise
+    rewrite pointwise tau (Cube.here refl) | outputFalse =
+    go rest (λ chosen member → pointwise chosen (Cube.there member))
+
 selectedFiberFold :
   {E : C3.IntegerEmbedding F} →
   {I : C3.ModeInverseSquare F E} →
@@ -359,36 +405,9 @@ selectedFiberFold {E} {I} system selected output with selected output
   trans
     (OutputPairing.projectedOutputEnergyPairingEqualsOrderedFiberFold
       system output)
-    (sym (goTrue (Equation.concreteTriadsAt system output)
-      (λ tau member → Equation.concreteTriadsAtOutputAgreement member)))
-  where
-  goTrue :
-    (items : List Physical.PhysicalTriadIncidence) →
-    (∀ tau → Cube._∈_ tau items → Physical.k tau ≡ output) →
-    selectedOrderedFold E I (λ _ → true) (Equation.velocity system) items
-    ≡ Round38.foldPower
-        (λ tau → Round38.orderedPower E I tau (Equation.velocity system)) items
-  goTrue [] pointwise = refl
-  goTrue (tau ∷ rest) pointwise =
-    cong
-      (Round38.orderedPower E I tau (Equation.velocity system) +_)
-      (goTrue rest (λ chosen member → pointwise chosen (Cube.there member)))
-... | false =
-  sym (goFalse (Equation.concreteTriadsAt system output)
-    (λ tau member → Equation.concreteTriadsAtOutputAgreement member))
-  where
-  goFalse :
-    (items : List Physical.PhysicalTriadIncidence) →
-    (∀ tau → Cube._∈_ tau items → Physical.k tau ≡ output) →
-    selectedOrderedFold E I (λ _ → false) (Equation.velocity system) items
-    ≡ 0ℚ
-  goFalse [] pointwise = refl
-  goFalse (tau ∷ rest) pointwise =
-    goFalse rest (λ chosen member → pointwise chosen (Cube.there member))
+    (sym (selectedFiberFoldTrue system selected output refl))
+... | false = sym (selectedFiberFoldFalse system selected output refl)
 
--- We avoid a separate selected-output-fibre partition theorem: Round39 already
--- proves the literal concatenated fibre list is a permutation of the complete
--- enumeration, and foldPermutationInvariant works for any scalar value map.
 foldAppend :
   (value : Physical.PhysicalTriadIncidence → ℚ) →
   ∀ left right →
