@@ -1,8 +1,9 @@
 module DASHI.Physics.Closure.HEPDataW3GovernedContactAdapter where
 
-open import Agda.Builtin.Bool using (false; true)
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Float using (Float)
+open import Agda.Builtin.String using (String)
 
 import DASHI.Core.ContactGateCore as Gate
 import DASHI.Core.ContactHamiltonian as Hamiltonian
@@ -10,6 +11,14 @@ import DASHI.Core.GovernedContactCore as Governed
 import DASHI.Core.ObservableContactGeometry as Geometry
 import DASHI.Core.ReplayArtifactCore as Replay
 import DASHI.Physics.Closure.HEPDataW3ComparisonLawReceipt as W3
+
+------------------------------------------------------------------------
+-- Second-domain instance of the governed comparison/contact grammar.
+--
+-- This adapter does not alter the existing bounded W3 receipt.  It exposes the
+-- already-recorded covariance comparison as a projected contact surface and
+-- keeps the external-authority/bridge gate fail-closed.
+------------------------------------------------------------------------
 
 record Witness : Set where
   constructor witness
@@ -74,9 +83,14 @@ w3Gate = Gate.canonicalFailClosedContactGate
 w3GovernedContact : Governed.GovernedContactCore
 w3GovernedContact =
   Governed.governedContactCore
-    w3Geometry w3Hamiltonian w3Replay w3Gate
+    w3Geometry
+    w3Hamiltonian
+    w3Replay
+    w3Gate
     (λ residual → witness)
-    refl refl refl
+    refl
+    refl
+    refl
 
 w3ContactDoesNotPromoteTruth :
   Gate.promotesTruth (Governed.gate w3GovernedContact) ≡ false

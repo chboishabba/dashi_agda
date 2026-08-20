@@ -1,13 +1,22 @@
 module DASHI.Core.GovernedContactCore where
 
-open import Agda.Builtin.Bool using (false; true)
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Core.ContactGateCore as Gate
 import DASHI.Core.ContactHamiltonian as Hamiltonian
 import DASHI.Core.DependencyPullbackCore as Pullback
 import DASHI.Core.ObservableContactGeometry as Geometry
 import DASHI.Core.ReplayArtifactCore as Replay
+
+------------------------------------------------------------------------
+-- Type-linked governed contact assembly.
+--
+-- The geometry and Hamiltonian remain reusable records, but this bundle makes
+-- their compatibility explicit: every projected residual admitted by the
+-- geometry must be encodable into the exact residual carrier scored by the
+-- Hamiltonian.  Replay and gate layers are assembled beside that typed bridge.
+------------------------------------------------------------------------
 
 record GovernedContactCore : Set₁ where
   constructor governedContactCore
@@ -22,9 +31,9 @@ record GovernedContactCore : Set₁ where
       Geometry.Residual geometry left right →
       Hamiltonian.Residual hamiltonian
 
-    replayValidated       : Replay.replayable replay ≡ true
-    replayDoesNotPromote  : Replay.replayPromotesTruth replay ≡ false
-    gateFailClosed        : Gate.promotesTruth gate ≡ false
+    replayValidated : Replay.replayable replay ≡ true
+    replayDoesNotPromote : Replay.replayPromotesTruth replay ≡ false
+    gateFailClosed : Gate.promotesTruth gate ≡ false
 
 open GovernedContactCore public
 
@@ -46,6 +55,8 @@ record ContactPromotionWitness (core : GovernedContactCore) : Set where
 
 open ContactPromotionWitness public
 
+-- A promoted contact cannot be constructed from a status Bool alone.  It must
+-- carry the closed authority, bridge, and replay witnesses.
 record PromotedContact (core : GovernedContactCore) : Set where
   constructor promotedContact
   field

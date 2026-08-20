@@ -4,6 +4,14 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 
+------------------------------------------------------------------------
+-- Reusable replay/audit artifact core.
+--
+-- A replay artifact binds a contact claim to a concrete locator and an
+-- explicit validation command.  Replayability records auditability only;
+-- it does not promote truth or external authority.
+------------------------------------------------------------------------
+
 record ReplayArtifactCore : Set where
   constructor replayArtifactCore
   field
@@ -15,7 +23,8 @@ record ReplayArtifactCore : Set where
 
 open ReplayArtifactCore public
 
-canonicalReplayArtifact : String → String → String → ReplayArtifactCore
+canonicalReplayArtifact :
+  String → String → String → ReplayArtifactCore
 canonicalReplayArtifact label locator command =
   replayArtifactCore label locator command true false
 
