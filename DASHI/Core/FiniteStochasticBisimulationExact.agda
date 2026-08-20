@@ -27,6 +27,7 @@ open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
+open import Data.Nat using (_≤_; z≤n; s≤s)
 
 record ProjectedFiniteKernel
     (State Action Coarse : Set) : Set₁ where
@@ -38,7 +39,6 @@ record ProjectedFiniteKernel
     projectedMassBounded :
       ∀ action state coarse → transitionMass action state coarse ≤ rowMass action state
 
-open import Data.Nat using (_≤_)
 open ProjectedFiniteKernel public
 
 record KernelBisimulation
@@ -114,14 +114,20 @@ rowDemo : DemoAction → DemoState → Nat
 rowDemo storm hiddenFast = 1
 rowDemo storm hiddenSlow = 1
 
+zeroLeOne : 0 ≤ 1
+zeroLeOne = z≤n
+
+oneLeOne : 1 ≤ 1
+oneLeOne = s≤s z≤n
+
 massDemoBounded :
   ∀ action state coarse → massDemo action state coarse ≤ rowDemo action state
-massDemoBounded storm hiddenFast sameNow = _
-massDemoBounded storm hiddenFast lowLoad = _
-massDemoBounded storm hiddenFast highLoad = _
-massDemoBounded storm hiddenSlow sameNow = _
-massDemoBounded storm hiddenSlow lowLoad = _
-massDemoBounded storm hiddenSlow highLoad = _
+massDemoBounded storm hiddenFast sameNow = zeroLeOne
+massDemoBounded storm hiddenFast lowLoad = zeroLeOne
+massDemoBounded storm hiddenFast highLoad = oneLeOne
+massDemoBounded storm hiddenSlow sameNow = zeroLeOne
+massDemoBounded storm hiddenSlow lowLoad = oneLeOne
+massDemoBounded storm hiddenSlow highLoad = zeroLeOne
 
 demoKernel : ProjectedFiniteKernel DemoState DemoAction DemoCoarse
 demoKernel = projectedFiniteKernel projectDemo massDemo rowDemo massDemoBounded
