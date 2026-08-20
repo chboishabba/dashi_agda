@@ -5,6 +5,9 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.List.Base using ([]; _∷_)
 
+import DASHI.Core.AffectedDependencyClosureExact as Closure4
+import DASHI.Core.IdentifiabilityActiveInformationExact as Info4
+import DASHI.Environment.AssimilationDependencyReopeningExact as Assimilation4
 import DASHI.Environment.DepthTruncation as Depth
 import DASHI.Environment.EcologicalEvidenceGates as Evidence
 import DASHI.Environment.EcologicalKnowledge as Knowledge
@@ -115,14 +118,14 @@ researchRound4ScientificFrontierRecorded :
 researchRound4ScientificFrontierRecorded =
   Research4.canonicalLESRound4RemainingScientificFrontier
 
-positiveInformationValueRecorded : Research4.Information.PositiveDecisionValueWitness
+positiveInformationValueRecorded : Info4.PositiveDecisionValueWitness
 positiveInformationValueRecorded = Research4.positiveInformationValueWitness
 
 assimilationPlanReopeningRecorded :
-  Research4.Closure.ReopeningObligation
-    Research4.Assimilation.Depends
-    Research4.Assimilation.newObservation
-    Research4.Assimilation.candidatePlan
+  Closure4.ReopeningObligation
+    Assimilation4.Depends
+    Assimilation4.newObservation
+    Assimilation4.candidatePlan
 assimilationPlanReopeningRecorded = Research4.assimilationReopensDependentPlan
 
 springfieldScenarioRecorded : Pond.SpringfieldPondGoldenScenario
