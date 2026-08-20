@@ -15,43 +15,32 @@ module DASHI.Physics.Closure.NSTriadKNOffPacketRatioBoundaryFluxCoerciveRound98E
 --
 -- ROUND98 / OFF-PACKET RATIO RECUT AFTER THE PACKET-FLUX WELD
 --
--- Write
+-- With
 --
---   E = E_P + E_off,
---   D = D_P + D_off,
---   E'_P + D_P = F,
---   E' + D = 0.
+--   E = E_P + E_off,       D = D_P + D_off,
+--   E'_P + D_P = F,        E' + D = 0,
 --
--- The last identity is not an extra hypothesis here: it is the all-selected
--- instance of the same literal projected Galerkin packet theorem, whose
--- boundary transfer is definitionally zero because every triad is all-in.
---
--- Then E'_off = -D_off - F, and the cross-multiplied derivative numerator of
---
---   R_off = E_off / E
---
--- is exactly
+-- the cross-multiplied derivative numerator of R_off = E_off/E is exactly
 --
 --   E'_off E - E_off E'
 --     = -F E + E_off D_P - D_off E_P.
 --
--- This is a useful recut. Positive packet influx F is favorable for BOTH the
--- packet -log reserve and the off-packet ratio. The only boundary contribution
--- that can be adverse for the ratio is packet OUTFLOW (negative F). The other
--- term is a literal spectral-viscous comparison:
+-- The total-energy identity is not assumed independently: it is the
+-- all-selected instance of the same literal projected Galerkin packet theorem,
+-- and its boundary transfer is zero because every incidence is all-in.
+--
+-- Therefore positive packet influx is favorable for both the packet -log
+-- reserve and the off-packet ratio. The surviving ratio physics is packet
+-- OUTFLOW plus the spectral cross-dissipation term
 --
 --   E_off D_P - D_off E_P.
---
--- Thus the old generic `inwardFluxEstimate` is stronger than necessary: its
--- physical content can be reduced to (i) coercivity of this cross-dissipation
--- term under the selected shell separation and (ii) one-sided control of
--- outward boundary flux. No positive inward-flux tax survives.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; true)
+open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _-_; _*_ ; -_)
+open import Agda.Builtin.Nat using (Nat)
+open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _-_; _*_; -_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
@@ -147,7 +136,7 @@ allSelectedNormalizedBoundaryFluxZero :
   (E : C3.IntegerEmbedding F) →
   (I : C3.ModeInverseSquare F E) →
   (velocity : Z3.FourierMode → C3.Complex3 F) →
-  (cutoff : Agda.Builtin.Nat.Nat) →
+  (cutoff : Nat) →
   Norm.normalizedBoundaryTransfer E I allSelected velocity cutoff ≡ 0ℚ
 allSelectedNormalizedBoundaryFluxZero E I velocity cutoff =
   trans
@@ -173,6 +162,26 @@ literalTotalEnergyBalance {E} {I} system L reality divergenceFree =
     (allSelectedNormalizedBoundaryFluxZero
       E I (Equation.velocity system) (Equation.cutoff system))
 
+balanceToNegative : ∀ x d → x + d ≡ 0ℚ → x ≡ - d
+balanceToNegative x d balance =
+  let
+    shifted = cong (λ value → value - d) balance
+    leftNormalize : (x + d) - d ≡ x
+    leftNormalize = solve (x ∷ d ∷ [])
+    rightNormalize : 0ℚ - d ≡ - d
+    rightNormalize = solve (d ∷ [])
+  in
+  trans (sym leftNormalize) (trans shifted rightNormalize)
+
+balanceToFluxMinusDissipation : ∀ x d f → x + d ≡ f → x ≡ f - d
+balanceToFluxMinusDissipation x d f balance =
+  let
+    shifted = cong (λ value → value - d) balance
+    leftNormalize : (x + d) - d ≡ x
+    leftNormalize = solve (x ∷ d ∷ [])
+  in
+  trans (sym leftNormalize) shifted
+
 literalOffPacketEnergyBalance :
   {E : C3.IntegerEmbedding F} →
   {I : C3.ModeInverseSquare F E} →
@@ -194,23 +203,19 @@ literalOffPacketEnergyBalance {E} {I}
     dp = Packet.literalPacketDissipation system (Packet.equation L) selected
     flux = Norm.normalizedBoundaryTransfer E I selected
       (Equation.velocity system) (Equation.cutoff system)
-    totalBalance = literalTotalEnergyBalance system L reality divergenceFree
-    packetBalance = Packet.PhysicalPacketBoundaryFluxIdentification
-      system L selected reality divergenceFree
+    totalMeaning = balanceToNegative etDot dt
+      (literalTotalEnergyBalance system L reality divergenceFree)
+    packetMeaning = balanceToFluxMinusDissipation epDot dp flux
+      (Packet.PhysicalPacketBoundaryFluxIdentification
+        system L selected reality divergenceFree)
   in
-  -- From etDot + dt = 0 and epDot + dp = flux.
-  P.solve 5
-    (λ x y a b f →
-      (x P.⊕ y P.⊜ P.0#) P.→
-      (a P.⊕ b P.⊜ f) P.→
-      ((x P.⊕ P.⊝ a)
-        P.⊜
-       (P.⊝ (y P.⊕ P.⊝ b)) P.⊕ P.⊝ f))
-    refl totalBalance packetBalance etDot dt epDot dp flux
-  where
-  module P = Data.Rational.Tactic.FieldSolver
+  trans
+    (cong (λ value → value - epDot) totalMeaning)
+    (trans
+      (cong (λ value → (- dt) - value) packetMeaning)
+      (solve (dt ∷ dp ∷ flux ∷ [])))
 
--- Pure ring form of the cross-multiplied off-packet ratio numerator.
+-- Pure equality-transport proof of the cross-multiplied ratio numerator.
 offPacketRatioCrossNumeratorIdentity :
   (totalEnergy packetEnergy offEnergy : ℚ) →
   (totalDerivative packetDerivative : ℚ) →
@@ -228,25 +233,13 @@ offPacketRatioCrossNumeratorIdentity
     totalEnergy packetEnergy offEnergy
     totalDerivative packetDerivative
     totalDissipation packetDissipation offDissipation flux
-    energySplit dissipationSplit totalBalance packetBalance =
-  P.solve 8
-    (λ et ep eo etd epd dt dp doff f →
-      (et P.⊜ ep P.⊕ eo) P.→
-      (dt P.⊜ dp P.⊕ doff) P.→
-      (etd P.⊕ dt P.⊜ P.0#) P.→
-      (epd P.⊕ dp P.⊜ f) P.→
-      (((etd P.⊕ P.⊝ epd) P.⊗ et)
-        P.⊕ P.⊝ (eo P.⊗ etd)
-       P.⊜
-       ((P.⊝ f) P.⊗ et)
-        P.⊕ (eo P.⊗ dp)
-        P.⊕ P.⊝ (doff P.⊗ ep)))
-    refl energySplit dissipationSplit totalBalance packetBalance
-    totalEnergy packetEnergy offEnergy
-    totalDerivative packetDerivative totalDissipation
-    packetDissipation offDissipation flux
-  where
-  module P = Data.Rational.Tactic.FieldSolver
+    energySplit dissipationSplit totalBalance packetBalance
+  rewrite balanceToNegative totalDerivative totalDissipation totalBalance
+        | balanceToFluxMinusDissipation
+            packetDerivative packetDissipation flux packetBalance
+        | energySplit
+        | dissipationSplit =
+  solve (packetEnergy ∷ offEnergy ∷ packetDissipation ∷ offDissipation ∷ flux ∷ [])
 
 PhysicalOffPacketRatioBoundaryFluxCoerciveIdentity :
   {E : C3.IntegerEmbedding F} →
