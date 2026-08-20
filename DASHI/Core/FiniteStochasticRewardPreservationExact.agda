@@ -78,13 +78,14 @@ rowMassEqualUnderNormalizedBisimulation :
   Kernel.project kernel left ≡ Kernel.project kernel right →
   (action : Action) →
   Kernel.rowMass kernel action left ≡ Kernel.rowMass kernel action right
-rowMassEqualUnderNormalizedBisimulation normalized bisimulation same action =
+rowMassEqualUnderNormalizedBisimulation
+  {kernel = kernel} normalized bisimulation {left} {right} same action =
   trans
-    (sym (rowNormalizes normalized action _))
+    (sym (rowNormalizes normalized action left))
     (trans
       (sumMassEqualUnderBisimulation bisimulation same action
         (coarseOutcomes normalized))
-      (rowNormalizes normalized action _))
+      (rowNormalizes normalized action right))
 
 weightedProjectedReward :
   ∀ {State Action Coarse} →
