@@ -37,6 +37,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 
 import Real as Bishop
 import DASHI.Foundations.BishopMachinArctanConstructionExact as Machin
+import DASHI.Physics.YangMills.BalabanBishopNormalizedOuterMomentumAngleExact as Angle
 import DASHI.Physics.YangMills.BalabanBishopMachinNormalizedOuterMomentumExact as Outer
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -63,18 +64,12 @@ record CanonicalWilsonOuterCoordinate : Set₁ where
   field
     qAbs angle : Bishop.ℝ
     qAbsNonnegative : Bishop.NonNegative qAbs
-    qOuterLower : Bishop._≤_
-      (DASHI.Physics.YangMills.BalabanBishopNormalizedOuterMomentumAngleExact.embed
-        DASHI.Physics.YangMills.BalabanBishopNormalizedOuterMomentumAngleExact.half)
-      qAbs
-    qOuterUpper : Bishop._≤_ qAbs
-      (DASHI.Physics.YangMills.BalabanBishopNormalizedOuterMomentumAngleExact.embed
-        DASHI.Physics.YangMills.BalabanBishopNormalizedOuterMomentumAngleExact.one)
+    qOuterLower : Bishop._≤_ (Angle.embed Angle.half) qAbs
+    qOuterUpper : Bishop._≤_ qAbs (Angle.embed Angle.one)
     angleDefinition :
       Bishop._≃_ angle
         (Bishop._*_
-          (DASHI.Physics.YangMills.BalabanBishopNormalizedOuterMomentumAngleExact.embed
-            DASHI.Physics.YangMills.BalabanBishopNormalizedOuterMomentumAngleExact.half)
+          (Angle.embed Angle.half)
           (Bishop._*_ Machin.bishopMachinPi qAbs))
 
 open CanonicalWilsonOuterCoordinate public
