@@ -8,7 +8,6 @@ open import Relation.Binary.PropositionalEquality using (trans; sym)
 open import DASHI.Arithmetic.VpDepth using
   ( vp-depth
   ; vp-depth-stable-step
-  ; vp-depth-stable-next
   )
 
 ------------------------------------------------------------------------
@@ -80,13 +79,13 @@ open StableVpDepth public
 
 certified-vp :
   ∀ {p n} → StableVpDepth p n → Nat
-certified-vp C = vp-depth (fuel C) _ _
+certified-vp {p} {n} C = vp-depth (fuel C) p n
 
 certified-vp-stable :
   ∀ {p n} → (C : StableVpDepth p n) → (extra : Nat) →
   vp-depth (fuel C + extra) p n ≡ certified-vp C
-certified-vp-stable C extra =
-  sym (plateau-iter (fuel C) _ _ extra (plateau C))
+certified-vp-stable {p} {n} C extra =
+  sym (plateau-iter (fuel C) p n extra (plateau C))
 
 ------------------------------------------------------------------------
 -- Optional adequacy certificate for the historical self-fuel readout.
