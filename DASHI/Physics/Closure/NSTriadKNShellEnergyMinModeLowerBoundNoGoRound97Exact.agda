@@ -25,7 +25,7 @@ module DASHI.Physics.Closure.NSTriadKNShellEnergyMinModeLowerBoundNoGoRound97Exa
 -- Such a lower bound does not follow from shell energy or mode count alone.
 -- The exact two-mode countermodel below has total squared amplitude 1,
 -- while one modal amplitude is exactly zero.  Thus even the c = 1, n = 2
--- instance
+-- squared necessary condition
 --
 --   min |u_k|^2 >= E / 2
 --
@@ -37,9 +37,12 @@ module DASHI.Physics.Closure.NSTriadKNShellEnergyMinModeLowerBoundNoGoRound97Exa
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; _<_)
+open import Agda.Builtin.List using ([]; _∷_)
+import Data.Integer.Base as Int
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _/_; _+_; _*_; _≤_; _<_)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
+open import Relation.Nullary using (¬_)
 open import Relation.Nullary.Decidable.Core using (toWitness)
 
 square : ℚ → ℚ
@@ -59,10 +62,7 @@ firstAmplitudeSquareIsZero : square firstAmplitude ≡ 0ℚ
 firstAmplitudeSquareIsZero = refl
 
 half : ℚ
-half = 1 / 2
-  where
-  open import Data.Rational.Base using (_/_)
-  open import Data.Integer.Base using (+_)
+half = Int.+ 1 / 2
 
 -- Avoid any dependence on a square-root carrier: the alleged lower bound
 -- min |u_k| >= sqrt(E/2) implies after squaring the weaker necessary claim
@@ -71,8 +71,7 @@ halfPositive : 0ℚ < half
 halfPositive = toWitness {a? = 0ℚ ℚP.<? half} _
 
 zeroNotAboveHalf : ¬ (half ≤ square firstAmplitude)
-zeroNotAboveHalf hyp =
-  ℚP.<⇒≱ halfPositive hyp
+zeroNotAboveHalf hyp = ℚP.<⇒≱ halfPositive hyp
 
 energyHalfIsHalf : half * twoModeShellEnergy ≡ half
 energyHalfIsHalf rewrite twoModeShellEnergyIsOne = solve (half ∷ [])
