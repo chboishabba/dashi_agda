@@ -24,10 +24,13 @@ module DASHI.Physics.Closure.NSTriadKNBoundarySelfTriadNormalizedDriftWitnessRou
 -- This file gives exact rational witnesses inside the already-proved Round95
 -- Waleffe/Manley--Rowe algebra.  Even after setting self amplitude forcing and
 -- every external forcing to zero, unequal modal energies leave the normalized
--- self drift nonzero.  Two choices of the lambda ordering give opposite signs.
--- Hence the final packet-boundary theorem must retain the self-triad boundary
--- sector, and no universal pointwise sign can be assigned to it from the
--- three-leg energy identities alone.
+-- self drift nonzero.  The two spectral triples
+--
+--     (1,2,5/2) and (5/2,2,1)
+--
+-- both satisfy the strict triangle inequalities, while producing opposite
+-- signs for the normalized self drift.  Thus the sign obstruction is not an
+-- artefact of the earlier degenerate (1,2,3) calibration.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
@@ -42,10 +45,11 @@ open ℚP using (_<?_)
 
 import DASHI.Physics.Closure.NSTriadKNNormalizedWaleffePhaseDerivativeRound95Exact as Phase
 
-one two three : ℚ
+one two three fiveHalves : ℚ
 one = 1ℚ
 two = Int.+ 2 / 1
 three = Int.+ 3 / 1
+fiveHalves = Int.+ 5 / 2
 
 mkSelfTangent : ℚ → ℚ → ℚ → Phase.NormalizedPhaseTangentData
 mkSelfTangent lambdaK lambdaP lambdaQ =
@@ -67,59 +71,57 @@ mkSelfTangent lambdaK lambdaP lambdaQ =
     (solve (lambdaK ∷ lambdaP ∷ lambdaQ ∷ []))
     (solve (lambdaK ∷ lambdaP ∷ lambdaQ ∷ []))
 
-mkSelfTransferData :
-  (lambdaK lambdaP lambdaQ : ℚ) → Phase.WaleffeSelfTransferData
-mkSelfTransferData lambdaK lambdaP lambdaQ =
-  Phase.waleffe-self-transfer-data
-    (mkSelfTangent lambdaK lambdaP lambdaQ)
-    lambdaK lambdaP lambdaQ
-    (solve []) (solve []) (solve [])
+negativeData positiveData : Phase.NormalizedPhaseTangentData
+negativeData = mkSelfTangent one two fiveHalves
+positiveData = mkSelfTangent fiveHalves two one
 
-negativeData : Phase.NormalizedPhaseTangentData
-negativeData = mkSelfTangent one two three
+minusHalf fiveHalvesPositive : ℚ
+minusHalf = - (Int.+ 1 / 2)
+fiveHalvesPositive = fiveHalves
 
-positiveData : Phase.NormalizedPhaseTangentData
-positiveData = mkSelfTangent three two one
+negativeSelfNormalizedDriftIsMinusHalf :
+  Phase.selfNormalizedDrift negativeData ≡ minusHalf
+negativeSelfNormalizedDriftIsMinusHalf = solve []
 
-minusTwo : ℚ
-minusTwo = - two
+positiveSelfNormalizedDriftIsFiveHalves :
+  Phase.selfNormalizedDrift positiveData ≡ fiveHalvesPositive
+positiveSelfNormalizedDriftIsFiveHalves = solve []
 
-negativeSelfNormalizedDriftIsMinusTwo :
-  Phase.selfNormalizedDrift negativeData ≡ minusTwo
-negativeSelfNormalizedDriftIsMinusTwo = solve []
+minusHalfNegative : minusHalf < 0ℚ
+minusHalfNegative = toWitness {a? = minusHalf <? 0ℚ} _
 
-positiveSelfNormalizedDriftIsTwo :
-  Phase.selfNormalizedDrift positiveData ≡ two
-positiveSelfNormalizedDriftIsTwo = solve []
-
-minusTwoNegative : minusTwo < 0ℚ
-minusTwoNegative = toWitness {a? = minusTwo <? 0ℚ} _
-
-zeroBelowTwo : 0ℚ < two
-zeroBelowTwo = toWitness {a? = 0ℚ <? two} _
+zeroBelowFiveHalves : 0ℚ < fiveHalvesPositive
+zeroBelowFiveHalves = toWitness {a? = 0ℚ <? fiveHalvesPositive} _
 
 negativeSelfNormalizedDriftStrictlyNegative :
   Phase.selfNormalizedDrift negativeData < 0ℚ
 negativeSelfNormalizedDriftStrictlyNegative
-  rewrite negativeSelfNormalizedDriftIsMinusTwo = minusTwoNegative
+  rewrite negativeSelfNormalizedDriftIsMinusHalf = minusHalfNegative
 
 positiveSelfNormalizedDriftStrictlyPositive :
   0ℚ < Phase.selfNormalizedDrift positiveData
 positiveSelfNormalizedDriftStrictlyPositive
-  rewrite positiveSelfNormalizedDriftIsTwo = zeroBelowTwo
+  rewrite positiveSelfNormalizedDriftIsFiveHalves = zeroBelowFiveHalves
+
+triangle125 : one < two + fiveHalves
+triangle125 = toWitness {a? = one <? (two + fiveHalves)} _
+triangle215 : two < one + fiveHalves
+triangle215 = toWitness {a? = two <? (one + fiveHalves)} _
+triangle521 : fiveHalves < one + two
+triangle521 = toWitness {a? = fiveHalves <? (one + two)} _
+
+round100SelfDriftOppositeSignsSurviveStrictTriangleGeometry : Bool
+round100SelfDriftOppositeSignsSurviveStrictTriangleGeometry = true
 
 round100ThreeLegEnergyCancellationDoesNotEraseBoundarySelfDrift : Bool
 round100ThreeLegEnergyCancellationDoesNotEraseBoundarySelfDrift = true
 
-round100BoundarySelfDriftHasBothSignsInExactTransferAlgebra : Bool
-round100BoundarySelfDriftHasBothSignsInExactTransferAlgebra = true
-
 round100UniversalPointwiseSelfSectorSignAvailable : Bool
 round100UniversalPointwiseSelfSectorSignAvailable = false
 
-round100ThreeLegEnergyCancellationDoesNotEraseBoundarySelfDriftIsTrue :
-  round100ThreeLegEnergyCancellationDoesNotEraseBoundarySelfDrift ≡ true
-round100ThreeLegEnergyCancellationDoesNotEraseBoundarySelfDriftIsTrue = refl
+round100SelfDriftOppositeSignsSurviveStrictTriangleGeometryIsTrue :
+  round100SelfDriftOppositeSignsSurviveStrictTriangleGeometry ≡ true
+round100SelfDriftOppositeSignsSurviveStrictTriangleGeometryIsTrue = refl
 
 round100UniversalPointwiseSelfSectorSignAvailableIsFalse :
   round100UniversalPointwiseSelfSectorSignAvailable ≡ false
