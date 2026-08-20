@@ -36,9 +36,10 @@ module DASHI.Physics.YangMills.BalabanMarkedSourceCoefficientEnergyHilbertCompil
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.List using (List)
-open import Data.Rational.Base using (ℚ; _≤_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _≤_; _*_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteWeightedCauchyExact as Cauchy
 
 record FiniteMarkedSourceHilbertData : Set₁ where
@@ -61,7 +62,7 @@ sourceCoefficientEnergy dataSet = Cauchy.leftEnergy (samples dataSet)
 sourcePairingSquaredCauchy :
   (dataSet : FiniteMarkedSourceHilbertData) →
   let selected = samples dataSet in
-  Cauchy.L2.square (Cauchy.weightedPairing selected)
+  L2.square (Cauchy.weightedPairing selected)
   ≤ Cauchy.leftEnergy selected * Cauchy.rightEnergy selected
 sourcePairingSquaredCauchy dataSet =
   Cauchy.finiteWeightedCauchy (samples dataSet)
@@ -75,7 +76,7 @@ record MarkedCoefficientTestSample : Set where
   constructor markedCoefficientTestSample
   field
     weight coefficient testValue : ℚ
-    weightNonnegative : Cauchy.L2.zero ≤ weight
+    weightNonnegative : 0ℚ ≤ weight
 open MarkedCoefficientTestSample public
 
 asWeightedPair : MarkedCoefficientTestSample → Cauchy.WeightedPair
