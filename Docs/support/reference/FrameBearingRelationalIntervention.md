@@ -111,3 +111,41 @@ exact `196883+1=196884` arithmetic.
 - `DASHI.Dynamics.EvidenceGatedRechartBoundary`
 - `DASHI.Foundations.MoonshineObserverInterpretationBoundary`
 - `DASHI.Unified.FrameBearingRelationalInterventionBoundary`
+This extension formalises:
+under the invariant:
+## Second-order 1.0 -> 1.1 shift
+The power-up is represented as:
+not as a literal ten-percent increase in facts. The binary stance distinguishes
+immersion in a frame from observation of that frame. Frame awareness does not
+prove cause, mandate action, or guarantee relief.
+A distress or gluing-defect signal may open personal, biological, relational,
+environmental, institutional, economic, interpretive, and measurement
+hypotheses. Situated access may offer epistemic advantage through dual access,
+cross-frame comparison, and critical method, but not automatic infallibility.
+A local compression carries:
+A finite two-context gluing example is supplied. Local compression does not
+create universal truth or community authority.
+## Material feedback intervention
+An intervention receipt records target, mechanism, expected effect, possible
+side effects, measurement, falsifier, rollback, and provenance. The supplied
+advertising-pressure example remains a candidate mechanism rather than an
+adjudicated causal result.
+Two constructions are separated:
+X + {star}   exceptional overflow/rechart marker
+X * C2       immersed/frame-aware stance over every state
+The finite checks are:
+9 + 1 = 10
+9 * 2 = 18
+stable evidence       -> retain chart
+refinable residual    -> refine within chart
+gluing defect         -> successor chart
+MDL improvement       -> successor chart
+Frame awareness alone does not imply chart failure. A gluing-defect receipt at
+chart `10` permits chart `11`; ordinary refinement remains at chart `10`.
+196883 + 1 = 196884
+may carry a named trivial/identity/observer-summand interpretation, but it does
+not prove a period, topology change, `JFixedPoint`, Monster authority, or modular
+`j` authority.
+## Integrated route
+The focused compiler root is
+`DASHI.Unified.NDimSheafLogisticCrossPollinationRegression`.
