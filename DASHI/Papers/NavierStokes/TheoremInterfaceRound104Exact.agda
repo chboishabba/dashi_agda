@@ -17,15 +17,19 @@ module DASHI.Papers.NavierStokes.TheoremInterfaceRound104Exact where
 --   * therefore the pointwise Leith representation is too strong;
 --   * arbitrary finite conservative radial transfer obeys an exact Abel
 --     layer-cake identity in upper-packet fluxes;
---   * Round98 already identifies those selected PDE pairings with literal
---     normalized packet-boundary flux;
+--   * upper-frequency packets are executable on the literal integer lattice
+--     using the exact natural squared mode norm;
+--   * Round98 identifies the projected PDE pairing for those packets with the
+--     literal normalized packet-boundary flux;
 --   * Round92/96/97 danger/excess endpoint remainders feed the new signed
 --     critical-production compiler without an extra remainder receipt;
---   * the standard Galerkin limit lane reuses the existing concrete G-chain.
+--   * the standard Galerkin limit lane reuses the existing concrete G-chain and
+--     owns the exact G12 limit element.
 --
 -- REMAINING:
---   A. same-trajectory cutoff-uniform critical packet danger/excess coverage;
---   B. critical Sobolev/Simon upgrade on the same Galerkin/limit carrier.
+--   A. critical radial weighting/norm identification plus same-trajectory
+--      cutoff-uniform packet danger/excess coverage;
+--   B. critical Sobolev/Simon upgrade on the same Galerkin/limit element.
 --
 -- Those two physical inhabitants compile to the same-solution Round90
 -- CriticalBarrierFor and Serrin continuation.  No Clay promotion is asserted.
@@ -43,6 +47,10 @@ round104PaperPointwiseLeithMobilityRefuted =
 round104PaperCriticalProductionPacketLayerCakeClosed : Bool
 round104PaperCriticalProductionPacketLayerCakeClosed =
   R104.round104CriticalProductionPacketLayerCakeClosed
+
+round104PaperConcreteUpperSquaredPacketBoundaryFluxClosed : Bool
+round104PaperConcreteUpperSquaredPacketBoundaryFluxClosed =
+  R104.round104ConcreteUpperSquaredPacketBoundaryFluxClosed
 
 round104PaperLiteralPacketBoundaryFluxSameObject : Bool
 round104PaperLiteralPacketBoundaryFluxSameObject =
@@ -79,6 +87,10 @@ round104PaperPointwiseLeithMobilityRefutedIsTrue = refl
 round104PaperCriticalProductionPacketLayerCakeClosedIsTrue :
   round104PaperCriticalProductionPacketLayerCakeClosed ≡ true
 round104PaperCriticalProductionPacketLayerCakeClosedIsTrue = refl
+
+round104PaperConcreteUpperSquaredPacketBoundaryFluxClosedIsTrue :
+  round104PaperConcreteUpperSquaredPacketBoundaryFluxClosed ≡ true
+round104PaperConcreteUpperSquaredPacketBoundaryFluxClosedIsTrue = refl
 
 round104PaperLiteralPacketBoundaryFluxSameObjectIsTrue :
   round104PaperLiteralPacketBoundaryFluxSameObject ≡ true
