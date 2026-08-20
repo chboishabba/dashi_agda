@@ -26,6 +26,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoCommutatorContinuumRound14Validation wh
 -- constructed from the finite Parseval extraction, does not derive the
 -- centered kernel/Hölder branch bounds from energy alone, does not manufacture
 -- Yu's source-tail compactness, and does not claim global regularity.
+-- Validation-trigger child revision.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
