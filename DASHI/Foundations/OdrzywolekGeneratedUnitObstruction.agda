@@ -1,6 +1,6 @@
 module DASHI.Foundations.OdrzywolekGeneratedUnitObstruction where
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
 open import DASHI.Foundations.TernaryElementaryOperatorCandidate
