@@ -13,7 +13,6 @@ on:
       - '.github/workflows/ns-triad-concrete-retained-fiber-agda.yml'
   workflow_dispatch:
 
-
 concurrency:
   group: dashi-global-${{ github.ref }}
   cancel-in-progress: true
@@ -58,3 +57,9 @@ jobs:
           nix develop .# --command
           bash scripts/run_agda29_parallel_check.sh
           DASHI/Physics/Closure/NSTriadKNClayFrontierRound101Validation.agda
+
+      - name: Type-check Round102 two-obligation frontier
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNClayFrontierRound102Validation.agda
