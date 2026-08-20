@@ -22,7 +22,7 @@ module DASHI.Physics.YangMills.BalabanCompactSimpleFourOrbitHalfRemainderExact w
 -- H. David Politzer,
 -- "Reliable Perturbative Results for Strong Interactions?",
 -- Physical Review Letters 30 (1973), 1346--1349.
--- DOI: 10.1103/PhysRevLett.30.1349.
+-- DOI: 10.1103/PhysRevLett.30.1346.
 --
 -- MATHEMATICAL ROLE
 --
@@ -137,10 +137,6 @@ record LiteralFourOrbitBetaTrajectory
 
 open LiteralFourOrbitBetaTrajectory public
 
--- For an arbitrary classified group we expose the same universal scalar regular
--- remainder.  The physical colour-factorization theorem is responsible for
--- producing `betaIsGroupUniversalPlusRegular`; this compiler only removes the
--- subsequent interval aggregation and positivity arithmetic.
 record ClassifiedGroupFourOrbitBetaTrajectory
     (lieType : Class.SimpleLieType)
     (trajectory : Flow.SourceNormalizedCouplingTrajectory) : Set₁ where
