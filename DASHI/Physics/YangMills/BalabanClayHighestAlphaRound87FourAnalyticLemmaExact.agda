@@ -1,7 +1,7 @@
 module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound87FourAnalyticLemmaExact where
 
 ------------------------------------------------------------------------
--- ROUND87: SHORTEST LITERAL JAFFE--WITTEN CLAY CUTSET = FOUR ANALYTIC FAMILIES
+-- ROUND87/88: SHORTEST LITERAL JAFFE--WITTEN CUTSET = FOUR ANALYTIC FAMILIES
 --
 -- PRIMARY SOURCE
 --
@@ -26,22 +26,12 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound87FourAnalyticLemmaEx
 -- postcondition does not consume it.  The positive Hamiltonian and mass gap are
 -- separately reconstructed from the OS family.
 --
--- Round87 therefore obtains a real 5 -> 4 research cutset by:
---
---   * treating the stress insertion as another marked coordinate of the SAME
---     completed differentiated RG state, so its nuclear-field completion is
---     downstream of the strengthened marked-source Hilbert-modulus theorem;
---
---   * keeping the physical short-distance stress/OPE/Ward/AF statement together
---     with OPE coefficient/remainder identification;
---
---   * using the existing Round77 same-H Gaussian/Ward/Maxwell + positive-gap
---     reductio for nontriviality, so no independent fourth-cumulant theorem is
---     required on the shortest route.
---
--- The optional cumulant route is also strengthened in Round87: a finite
--- same-family buffered cumulant plus the existing continuum error transport now
--- constructs an interacting continuum witness exactly.
+-- Round87 therefore obtains a real 5 -> 4 research cutset.  Round88 sharpens B:
+-- the composite/stress Hilbert moduli are no longer primitive analytic leaves.
+-- Reusing the repository's exact finite weighted Cauchy--Schwarz/Gram-defect
+-- theorem reduces both to ONE cutoff-uniform differentiated-source coefficient
+-- energy estimate.  The physical work is now same-object CMP116 coefficient
+-- identification + geometric shell square summability.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
@@ -51,6 +41,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound85SixAnalyticLemmaAttackExact
 import DASHI.Physics.YangMills.YangMillsClayStressOPERequirementBoundaryExact
 import DASHI.Physics.YangMills.BalabanMarkedSourceCompositeStressFieldExact
+import DASHI.Physics.YangMills.BalabanMarkedSourceCoefficientEnergyHilbertCompilerExact
 import DASHI.Physics.YangMills.YangMillsSameFamilyCumulantMarginToInteractingExact
 import DASHI.Physics.YangMills.BalabanClayT4SineDeterminesCosineAtomExact
 import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound77FiveAnalyticCutsetExact
@@ -73,20 +64,25 @@ round87ShortestClayAnalyticCount = 4
 -- with a cutoff/volume/scale/group-uniform strictly positive lower bound.
 -- Round86 already compiles four joint regular orbit enclosures in [-1/2,1/2]
 -- into all-group positivity once the literal evaluator/trig/remainder data exist.
--- Round87 further removes an independent cosine interval producer: coherent
--- cos(k) intervals are derived algebraically from the primitive sin(k/2) boxes.
+-- Round87 removes an independent cosine interval producer: coherent cos(k)
+-- intervals are derived algebraically from primitive sin(k/2) boxes.
 literalCompactSimplePositiveBetaLevel : ProofLevel
 literalCompactSimplePositiveBetaLevel = conditional
 
--- B. ONE DIFFERENTIATED MARKED-SOURCE LOCALITY / FIELD THEOREM
+-- B. ONE DIFFERENTIATED MARKED-SOURCE LOCALITY / COEFFICIENT-ENERGY THEOREM
 --
--- On the SAME completed source-native RG state, prove mark-parametric locality
--- for physical Hessian separation and local insertions, and supply uniform
--- Hilbertian test-function moduli for BOTH curvature/composite and stress
--- insertion source derivatives.  Round85/87 then construct their nuclear fields
--- automatically with shared completed-state provenance.
-physicalMarkedSourceLocalityCompositeStressHilbertModuliLevel : ProofLevel
-physicalMarkedSourceLocalityCompositeStressHilbertModuliLevel = conditional
+-- On the SAME completed source-native RG state, identify physical Hessian,
+-- curvature/composite and stress marks with CMP116 analytic coordinates; prove
+-- common cutoff-uniform radii and the spatial shell majorant; and prove ONE
+-- weighted square-energy bound for the differentiated source coefficients.
+--
+-- The exact finite weighted Cauchy theorem then turns coefficient energy into
+-- the composite/stress Hilbert pairing bounds.  Round85/87 transports those
+-- Hilbert moduli to nuclear-continuous fields.  Thus B4/B5 from the previous
+-- prose cutset have been compiled into one coefficient-energy producer rather
+-- than retained as separate physical estimates.
+physicalMarkedSourceLocalityCompositeStressCoefficientEnergyLevel : ProofLevel
+physicalMarkedSourceLocalityCompositeStressCoefficientEnergyLevel = conditional
 
 -- C. SAME-DENSITY COMPACT-LIE HEAT/LANGEVIN MASS GAP
 --
@@ -111,7 +107,7 @@ sameFamilyShortDistanceOPEStressAFLevel : ProofLevel
 sameFamilyShortDistanceOPEStressAFLevel = conditional
 
 ------------------------------------------------------------------------
--- DOWNSTREAM THEOREMS THAT JUSTIFY THE 5 -> 4 RECUT
+-- DOWNSTREAM THEOREMS THAT JUSTIFY / SHARPEN THE FOUR-FAMILY RECUT
 ------------------------------------------------------------------------
 
 literalClayStressOPEBoundaryLevel : ProofLevel
@@ -119,6 +115,9 @@ literalClayStressOPEBoundaryLevel = machineChecked
 
 sameCompletedCompositeStressFieldCompilerLevel : ProofLevel
 sameCompletedCompositeStressFieldCompilerLevel = machineChecked
+
+markedSourceCoefficientEnergyToHilbertCauchyLevel : ProofLevel
+markedSourceCoefficientEnergyToHilbertCauchyLevel = machineChecked
 
 sineHalfDeterminesCosineIntervalLevel : ProofLevel
 sineHalfDeterminesCosineIntervalLevel = machineChecked
