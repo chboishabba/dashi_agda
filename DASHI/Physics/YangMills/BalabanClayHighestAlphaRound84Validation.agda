@@ -18,6 +18,9 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound84Validation where
 -- interaction compiler, the quadratic-form local-charge cutoff compiler, and
 -- the sine-half -> coherent-cosine atom reduction for the literal beta evaluator.
 --
+-- This synchronization commit exists only to force the focused Agda workflow on
+-- the latest Round87 head after the theorem root itself advanced.
+--
 -- A successful Agda check of THIS module forces typechecking of every new
 -- Round85--87 compiler used by the active mathematical cutset.  Import success
 -- establishes source/type correctness only; it does not inhabit any remaining
