@@ -4,18 +4,9 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound84Validation where
 -- ROUND84--88 FOCUSED VALIDATION ROOT
 --
 -- Import the established Round61 integration surface first, then the current
--- shortest Clay-facing Round84/85 stack, the Round86 beta/OPE/local-current
--- reductions, the Round87 literal-Jaffe--Witten four-family recut, and the
--- Round88 coefficient-energy + CMP109 mixed-jet sharpenings.
---
--- Round87 keeps stress tensor + OPE on the literal Clay route but removes the
--- stronger stress-charge = H_OS theorem from the shortest blocker set.
--- Round88 reuses exact finite weighted Cauchy so composite/stress Hilbert bounds
--- share one coefficient-energy producer, and uses CMP109 (5.36)--(5.41) to
--- reduce literal beta extraction to one off-diagonal mixed two-jet coefficient.
---
--- This root also forces the repaired sign-aware rational quotient arithmetic
--- used by the literal beta evaluator.
+-- shortest Clay-facing stack and all Round88 theorem-bearing reductions:
+-- coefficient-energy marked sources, CMP109 mixed-jet beta extraction, and the
+-- one-outer-component -> canonical four-dimensional Wilson denominator gap.
 --
 -- Import success establishes source/type correctness only; it does not inhabit
 -- any remaining conditional four-dimensional Yang--Mills analytic leaf.
@@ -44,4 +35,6 @@ import DASHI.Physics.YangMills.BalabanMarkedSourceCompositeStressFieldExact
 import DASHI.Physics.YangMills.YangMillsSameFamilyCumulantMarginToInteractingExact
 import DASHI.Physics.YangMills.YangMillsLocalChargeQuadraticFormCoreExact
 import DASHI.Physics.YangMills.BalabanClayT4SineDeterminesCosineAtomExact
+import DASHI.Physics.YangMills.BalabanClayT4BishopRegularHatMomentumGapExact
+import DASHI.Physics.YangMills.BalabanClayT4MachinOuterSineToCanonicalGapExact
 import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound87FourAnalyticLemmaExact
