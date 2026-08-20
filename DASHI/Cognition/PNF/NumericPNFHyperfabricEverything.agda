@@ -28,6 +28,16 @@ import DASHI.Cognition.PNF.TerminalisationDefectRegression
 import DASHI.Cognition.PNF.PNFResidualTerminalisationRegression
 import DASHI.Cognition.PNF.RelevanceMassDynamicSafetyRegression
 import DASHI.Cognition.PNF.SemanticSamplingDynamicSafety
+-- Runtime-economy constitution: these remain qualified because they deliberately
+-- expose generic fields such as revision/depth/work rather than one public PNF
+-- record namespace.
+--
+-- Companion theorem surfaces used by the next runtime pass live on sibling
+-- formalisation PRs rather than being duplicated here: #530 supplies canonical
+-- future-observation equivalence / exact-vs-relevant residual / dynamic
+-- composition, and #531 supplies query-factorisation and policy-relative safety.
+-- This branch supplies the numeric physical/execution constitution those
+-- theorems are intended to govern.
 import DASHI.Cognition.PNF.NumericHotPathConstitution
 import DASHI.Cognition.PNF.CorpusLearningEconomy
 import DASHI.Cognition.PNF.ContextualWorldCache
