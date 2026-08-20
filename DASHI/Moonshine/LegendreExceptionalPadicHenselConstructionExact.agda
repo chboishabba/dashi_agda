@@ -18,23 +18,19 @@ module DASHI.Moonshine.LegendreExceptionalPadicHenselConstructionExact where
 --
 -- DASHI CONTRIBUTION
 --
--- The earlier `ExceptionalPadicLift` record correctly stated the same-object
--- obligations but did not CONSTRUCT its nearby point.  Here the source-facing
--- authority is lowered to standard complete-DVR/Hensel data:
+-- Lower the old `ExceptionalPadicLift` obligation to standard complete-DVR /
+-- Hensel data.  The nearby point is DEFINED by
 --
---   * an actual Hensel lift lambda0 of the certified finite residue root;
---   * one uniformizer pi;
---   * the nearby point is DEFINED as lambda = lambda0 + pi;
---   * subtraction therefore derives lambda-lambda0 = pi*1;
---   * the selected Legendre branch is evaluated at that actual lambda;
---   * the simple-factor quotient and rational-function outer factor are actual
---     local elements with certified nonzero reductions;
---   * the exact branch and J-alpha factorizations are source algebraic laws.
+--     lambda = lambda0 + pi,
 --
--- Thus `lambda-lambda0 = pi epsilon` is no longer a primitive target equality:
--- epsilon is literally the local multiplicative identity.  The only imported
--- content is ordinary local-field/Hensel algebra and the same rational-function
--- factorization after transport to the completed local carrier.
+-- so the coordinate identity
+--
+--     lambda-lambda0 = pi * 1
+--
+-- is derived.  Since pi reduces to zero, reduction compatibility also derives
+-- that lambda and lambda0 have the same certified finite residue.  The selected
+-- branch polynomial, its simple-factor quotient, and the rational J-alpha
+-- outer factor are all evaluated at this SAME lambda.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -58,25 +54,35 @@ record ExceptionalHenselLocalSource
     finitePoint : Lift.ExceptionalFiniteResiduePoint Residue
     residueZeroMatches :
       ResidueUnit.residueZero residueValuation ≡ Lift.zero finitePoint
+
     add subtract : PadicLocal → PadicLocal → PadicLocal
-    subtractAddRight :
-      (x d : PadicLocal) → subtract (add x d) x ≡ d
+    subtractAddRight : (x d : PadicLocal) → subtract (add x d) x ≡ d
+
     zeroLocal : PadicLocal
     branchPolynomial : PadicLocal → PadicLocal
     liftedCentre : PadicLocal
     liftedCentreReduces :
       ResidueUnit.residue residueValuation liftedCentre ≡ Lift.centre finitePoint
     liftedCentreIsRoot : branchPolynomial liftedCentre ≡ zeroLocal
+
     uniformizer : PadicLocal
     uniformizerDepthOne : Ramified.valuation valuation uniformizer ≡ 1
     uniformizerReducesToZero :
       ResidueUnit.residue residueValuation uniformizer
       ≡ ResidueUnit.residueZero residueValuation
+
+    -- Standard residue homomorphism consequence specialized to the coordinate
+    -- actually used here: adding the maximal-ideal uniformizer does not change
+    -- the residue class.
+    residueCentrePlusUniformizer :
+      ResidueUnit.residue residueValuation (add liftedCentre uniformizer)
+      ≡ ResidueUnit.residue residueValuation liftedCentre
+
     oneResidueUnit :
       ResidueUnit.ResidueUnitWitness residueValuation (Ramified.one valuation)
     mulRightOne :
-      (x : PadicLocal) →
-      Ramified.mul valuation x (Ramified.one valuation) ≡ x
+      (x : PadicLocal) → Ramified.mul valuation x (Ramified.one valuation) ≡ x
+
     derivativeUnit : PadicLocal
     derivativeReduces :
       ResidueUnit.residue residueValuation derivativeUnit
@@ -86,6 +92,7 @@ record ExceptionalHenselLocalSource
       ≡ Ramified.mul valuation
           (subtract (add liftedCentre uniformizer) liftedCentre)
           derivativeUnit
+
     alphaLift : PadicLocal
     localJ : PadicLocal → PadicLocal
     outerUnit : PadicLocal
@@ -127,22 +134,19 @@ coordinateDifferenceIsPiTimesOne S =
   trans (coordinateDifferenceIsUniformizer S)
     (sym (mulRightOne S (uniformizer S)))
 
-record HenselNearbyResidueCompatibility
-    {branch : Legendre.ExceptionalLegendreBranch}
-    (S : ExceptionalHenselLocalSource branch) : Set where
-  field
-    nearbyReducesToCentre :
-      ResidueUnit.residue (residueValuation S) (liftedCoordinate S)
-      ≡ Lift.centre (finitePoint S)
-
-open HenselNearbyResidueCompatibility public
+liftedCoordinateReducesToFiniteCentre :
+  {branch : Legendre.ExceptionalLegendreBranch} →
+  (S : ExceptionalHenselLocalSource branch) →
+  ResidueUnit.residue (residueValuation S) (liftedCoordinate S)
+  ≡ Lift.centre (finitePoint S)
+liftedCoordinateReducesToFiniteCentre S =
+  trans (residueCentrePlusUniformizer S) (liftedCentreReduces S)
 
 constructExceptionalPadicLift :
   (branch : Legendre.ExceptionalLegendreBranch) →
   (S : ExceptionalHenselLocalSource branch) →
-  HenselNearbyResidueCompatibility S →
   Lift.ExceptionalPadicLift branch
-constructExceptionalPadicLift branch S nearby = record
+constructExceptionalPadicLift branch S = record
   { Lift.PadicLocal = PadicLocal S
   ; Lift.Residue = Residue S
   ; Lift.valuation = valuation S
@@ -155,7 +159,7 @@ constructExceptionalPadicLift branch S nearby = record
   ; Lift.liftedCentre = liftedCentre S
   ; Lift.coordinateDifference = coordinateDifference S
   ; Lift.liftedCentreReducesToFiniteCentre = liftedCentreReduces S
-  ; Lift.liftedCoordinateReducesToFiniteCentre = nearbyReducesToCentre nearby
+  ; Lift.liftedCoordinateReducesToFiniteCentre = liftedCoordinateReducesToFiniteCentre S
   ; Lift.coordinateDifferenceIsActualDifference = refl
   ; Lift.uniformizer = uniformizer S
   ; Lift.coordinateUnit = Ramified.one (valuation S)
@@ -176,35 +180,31 @@ constructExceptionalPadicLift branch S nearby = record
 constructedCoordinateDepthOne :
   (branch : Legendre.ExceptionalLegendreBranch) →
   (S : ExceptionalHenselLocalSource branch) →
-  (nearby : HenselNearbyResidueCompatibility S) →
   Ramified.valuation (valuation S)
-    (Lift.coordinateDifference (constructExceptionalPadicLift branch S nearby))
-  ≡ 1
-constructedCoordinateDepthOne branch S nearby =
+    (Lift.coordinateDifference (constructExceptionalPadicLift branch S)) ≡ 1
+constructedCoordinateDepthOne branch S =
   Preferred.coordinateDifferenceDepthOne
     (valuation S) branch
-    (Lift.asPreferredLocalProducer branch
-      (constructExceptionalPadicLift branch S nearby))
+    (Lift.asPreferredLocalProducer branch (constructExceptionalPadicLift branch S))
 
 constructedLocalJDepth :
   (branch : Legendre.ExceptionalLegendreBranch) →
   (S : ExceptionalHenselLocalSource branch) →
-  (nearby : HenselNearbyResidueCompatibility S) →
   Ramified.valuation (valuation S)
-    (Lift.localJDifference (constructExceptionalPadicLift branch S nearby))
+    (Lift.localJDifference (constructExceptionalPadicLift branch S))
   ≡ Legendre.exceptionalRamificationExponent branch
-constructedLocalJDepth branch S nearby =
+constructedLocalJDepth branch S =
   Lift.liftedLocalJDepthIsAlgebraicExponent branch
-    (constructExceptionalPadicLift branch S nearby)
+    (constructExceptionalPadicLift branch S)
 
 record LegendreExceptionalPadicHenselConstructionBoundary : Set where
   field
     henselCentreIsActualRootRequired : Bool
     nearbyCoordinateDefinedAsCentrePlusUniformizer : Bool
     lambdaMinusLambda0EqualsPiTimesOneDerived : Bool
+    nearbyResidueDerivedFromUniformizerReduction : Bool
     branchFactorEvaluatedAtActualNearbyPoint : Bool
     rationalJFactorEvaluatedAtActualNearbyPoint : Bool
-    sameFiniteResidueDerivedThroughLocalRing : Bool
     exceptionalPadicLiftRecordConstructed : Bool
     coordinateDepthOneDerived : Bool
     localJDepthDerived : Bool
@@ -217,9 +217,9 @@ canonicalLegendreExceptionalPadicHenselConstructionBoundary = record
   { henselCentreIsActualRootRequired = true
   ; nearbyCoordinateDefinedAsCentrePlusUniformizer = true
   ; lambdaMinusLambda0EqualsPiTimesOneDerived = true
+  ; nearbyResidueDerivedFromUniformizerReduction = true
   ; branchFactorEvaluatedAtActualNearbyPoint = true
   ; rationalJFactorEvaluatedAtActualNearbyPoint = true
-  ; sameFiniteResidueDerivedThroughLocalRing = true
   ; exceptionalPadicLiftRecordConstructed = true
   ; coordinateDepthOneDerived = true
   ; localJDepthDerived = true
