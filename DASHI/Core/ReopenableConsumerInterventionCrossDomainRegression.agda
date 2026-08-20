@@ -1,9 +1,8 @@
 module DASHI.Core.ReopenableConsumerInterventionCrossDomainRegression where
 
-open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Agda.Builtin.String using (String)
+open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Unit using (⊤; tt)
 open import Data.Empty using (⊥)
 open import Data.List.Base using ([])
@@ -123,7 +122,7 @@ abstentionPreservesAnchor =
 
 ------------------------------------------------------------------------
 -- 3. Adaptive fidelity: equality is a trivial but exact discrepancy bound and
--- therefore lies inside an equality-stable consumer margin.
+-- therefore lies inside an equality-stable Boolean consumer margin.
 ------------------------------------------------------------------------
 
 pair : Fidelity.FidelityPair ⊤ Bool
@@ -140,18 +139,21 @@ bounded = Fidelity.boundedDiscrepancy
   []
   (λ _ → refl)
 
-margin : Fidelity.ConsumerDecisionMargin (λ x → x)
+identityBool : Bool → Bool
+identityBool x = x
+
+margin : Fidelity.ConsumerDecisionMargin identityBool
 margin = Fidelity.consumerDecisionMargin
   _≡_
   (λ same → same)
-  "identity consumer equality margin"
+  "identity Boolean consumer equality margin"
 
 inside : Fidelity.FidelityInsideConsumerMargin bounded margin
 inside = Fidelity.fidelityInsideConsumerMargin (λ same → same)
 
 lowAndHighDecisionsAgree :
-  (λ x → x) (Fidelity.low pair tt)
-  ≡ (λ x → x) (Fidelity.high pair tt)
+  identityBool (Fidelity.low pair tt)
+  ≡ identityBool (Fidelity.high pair tt)
 lowAndHighDecisionsAgree =
   Fidelity.lowFidelityDecisionIsSafe bounded margin inside tt
 
