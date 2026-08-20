@@ -95,7 +95,7 @@ sameFamilyMarkedSourceGivesNuclearCompositeField :
   ∀ {C CompletedState Composite}
     (dataSet : SameFamilyMarkedSourceData C CompletedState Composite) →
   SameFamilyNuclearCompositeField dataSet
-sameFamilyMarkedSourceGivesNuclearCompositeField dataSet = record
+sameFamilyMarkedSourceGivesNuclearCompositeField {C = C} dataSet = record
   { continuumComposite = compositeProjection dataSet (completedState dataSet)
   ; fieldFunctional =
       sourceDerivative dataSet (compositeProjection dataSet (completedState dataSet))
