@@ -1,23 +1,26 @@
 module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound84Validation where
 
 ------------------------------------------------------------------------
--- ROUND84/85/86 FOCUSED VALIDATION ROOT
+-- ROUND84--87 FOCUSED VALIDATION ROOT
 --
 -- Import the established Round61 integration surface first, then the current
--- shortest Clay-facing Round84 cutset, the Round85 theorem-bearing attacks, and
--- the Round86 beta/OPE/local-current/common-core reductions.  A successful Agda
--- check of THIS module forces typechecking of every new Round85/86 compiler used
--- by the active mathematical cutset.
+-- shortest Clay-facing Round84/85 stack, the Round86 beta/OPE/local-current
+-- reductions, and the Round87 literal-Jaffe--Witten four-family recut.
 --
--- Round86 also repairs the legacy Ward helper at its actual predicate boundary:
--- diagram invariance/covariance fields are property families, so the convenience
--- helpers now define conjunction TYPES rather than pretending to manufacture
--- witnesses.  This root is touched to validate that corrected interpretation on
--- the latest head.
+-- Round87 corrects one important planning mistake: the official problem DOES
+-- retain stress tensor + OPE among the required short-distance predictions.
+-- What becomes optional is the stronger separate stress-charge = H_OS theorem.
+-- Stress-field completion is instead compiled from a stress marked source on
+-- the same completed differentiated RG state, while OPE/stress short-distance
+-- identification remains a genuine physical leaf.
 --
--- This is a kernel-target convenience only.  Import success establishes
--- source/type correctness of the formal compilers; it does not inhabit any of
--- the remaining conditional four-dimensional Yang--Mills analytic leaves.
+-- Round87 also imports the same-family finite-cumulant-margin -> continuum
+-- interaction compiler and the quadratic-form local-charge cutoff compiler.
+--
+-- A successful Agda check of THIS module forces typechecking of every new
+-- Round85--87 compiler used by the active mathematical cutset.  Import success
+-- establishes source/type correctness only; it does not inhabit any remaining
+-- conditional four-dimensional Yang--Mills analytic leaf.
 ------------------------------------------------------------------------
 
 import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound61DLRTransferAuditValidation
@@ -34,3 +37,10 @@ import DASHI.Physics.YangMills.YangMillsLocalChargeCommutatorToCoreStabilization
 import DASHI.Physics.YangMills.YangMillsLocalCurrentMicrocausalShellExact
 import DASHI.Physics.YangMills.YangMillsLocalCoreChargeLinearityExact
 import DASHI.Physics.YangMills.YangMillsStressWardCommonCoreGeneratorExact
+
+-- Round87 literal-Clay boundary / fusion compilers.
+import DASHI.Physics.YangMills.YangMillsClayStressOPERequirementBoundaryExact
+import DASHI.Physics.YangMills.BalabanMarkedSourceCompositeStressFieldExact
+import DASHI.Physics.YangMills.YangMillsSameFamilyCumulantMarginToInteractingExact
+import DASHI.Physics.YangMills.YangMillsLocalChargeQuadraticFormCoreExact
+import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound87FourAnalyticLemmaExact
