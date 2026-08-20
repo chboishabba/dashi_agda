@@ -24,8 +24,8 @@ LanguageEquivalent :
   (State → Observation) →
   (Action → State → State) →
   State → State → Set
-LanguageEquivalent language observe step left right =
-  (actions : List _) →
+LanguageEquivalent {Action = Action} language observe step left right =
+  (actions : List Action) →
   Admissible language actions →
   observe (Future.run step actions left)
   ≡ observe (Future.run step actions right)
@@ -66,8 +66,8 @@ RobustLanguageEquivalent :
   (Context → State → Observation) →
   (Context → Action → State → State) →
   State → State → Set
-RobustLanguageEquivalent language observe step left right =
-  (context : _) →
+RobustLanguageEquivalent {Context = Context} language observe step left right =
+  (context : Context) →
   LanguageEquivalent language
     (observe context)
     (step context)
