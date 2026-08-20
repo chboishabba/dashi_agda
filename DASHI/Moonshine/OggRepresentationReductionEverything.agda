@@ -1,26 +1,46 @@
 module DASHI.Moonshine.OggRepresentationReductionEverything where
 
 ------------------------------------------------------------------------
--- Aggregate surface for the corrected SSP research direction:
+-- Aggregate surface for the corrected SSP research direction.
 --
--- continuous irrep -> finite restriction -> branching/fixed-space spectrum
---                    ||
---                    vv
--- independent modular/Hecke column -> explicit intertwiner obligation.
+-- Representation lane:
+--   continuous irrep -> finite restriction -> branching/fixed-space spectrum
+--   -> explicit weight states -> matched-dihedral sector quotient.
 --
--- The old Ogg 7+7+1/nonary surfaces remain downstream comparison data.
--- The phase-quotient/jCoarse/jFine/Fricke weld is imported here because it
--- supplies an independently constructed finite reduction chain rather than an
--- SSP selector assumption.  Direct Aristotle arithmetic/Hecke/q-series
--- theorems and the complete candidate tau fingerprint are independent control
--- columns, not selector premises.  The prime Fricke coupling imports below
--- make the first exact representation/modular defect bridge: SO(3) characters
--- reconstruct the elliptic-point part of g(X0(p)); class-number Fricke fixed
--- points close the quotient defect, orbit saturation, and finite
--- supersingular/Frobenius two-orbit spectrum.  p=2 stays a separate SU(2)
--- spinor boundary rather than being forced through the odd SO(3) lane.
--- Cyclic C2/C3 elliptic stabilisers are embedded as proper subgroups of the
--- existing ternary S3 permutation carrier rather than conflated with S3.
+-- Modular/arithmetic lane:
+--   Fricke/class-number controls plus a source-faithful variable-degree
+--   classical Hecke correspondence carrier.  The older Vec15 Monster-prime
+--   ontology correspondence remains a useful finite quotient model but is not
+--   identified with the classical ell+1 isogeny fibre.
+--
+-- The matched-dihedral family H_j = D_(2j+1) gives the literal five-irrep
+-- decomposition 9 = 1+2+2+2+2 at j=4.  Its sector count j+1 replaces the raw
+-- p+1 term in the prime-level genus formula.  Scalar selector falsifiers show
+-- that C2/C3 and even C2/C3/C4/C5 fixed-space dimensions are too coarse.
+--
+-- Generic quotient descent is proved for both the legacy Vec15 correspondence
+-- and the new classical variable-degree correspondence.  FactorVec ->
+-- SupportMask supplies a complete nontrivial Vec15 model, while a count-only
+-- quotient is explicitly rejected as operator-unsafe.
+--
+-- The first actual classical arithmetic producer is p=11, ell=2.  The reduced
+-- modular polynomial gives the degree-three multiplicity matrix
+--
+--   [[0,3],[2,1]],
+--
+-- with exact eigenvalues 3 and -2 and degree-Laplacian modes 0 and 5.  Its
+-- two-state carrier has a two-way chart to the existing p=11 Frobenius normal
+-- form (two fixed, zero paired slots), with an explicit boundary preventing
+-- that finite chart from being promoted automatically to geometric
+-- supersingular realization.  A singleton quotient demonstrates that an
+-- operator-stable coarse observation may still erase the nonconstant spectral
+-- mode.
+--
+-- The real frontier is therefore source-specific rather than categorical:
+-- construct the geometric supersingular/Brandt correspondence (or another
+-- justified classical Hecke realization), construct the corresponding
+-- representation-side classical correspondence, and prove an actual
+-- intertwiner/quotient identification between those operator systems.
 ------------------------------------------------------------------------
 
 import DASHI.Analysis.FiniteRealQSeriesReflectionExact
@@ -46,6 +66,7 @@ import DASHI.Foundations.PolyhedralFixedSpaceDerivedNonaryExact
 import DASHI.Foundations.PolyhedralInvariantFixedSpaceSignatureExact
 import DASHI.Foundations.PolyhedralRestrictionCriticalCharacterExact
 import DASHI.Foundations.PolyhedralRegularRepresentationShiftExact
+import DASHI.Foundations.MatchedDihedralSO3RestrictionExact
 import DASHI.Foundations.BinaryPolyhedralMcKayDimensionExact
 import DASHI.Foundations.TernaryPermutationCyclicSubgroupsExact
 import DASHI.Foundations.TernaryPhaseShapeIncidenceExact
@@ -65,6 +86,12 @@ import DASHI.Moonshine.EisensteinDiscriminantWeight12Exact
 import DASHI.Moonshine.ModularCurveJFrickeInterfaceExact
 import DASHI.Moonshine.D4IrrepModularFrickeDescentExact
 import DASHI.Moonshine.Monster3BC3RepresentationRingEvaluationExact
+import DASHI.Moonshine.SO3CyclicFixedSpaceScanExact
+import DASHI.Moonshine.SO3CyclicBranchingControlExact
+import DASHI.Moonshine.SO3CyclicFixedSpaceFormulaExact
+import DASHI.Moonshine.SO3C5FiveIrrepNineExact
+import DASHI.Moonshine.OggFixedSpaceSelectorNoGoExact
+import DASHI.Moonshine.OggCyclicFixedSpaceFourProbeNoGoExact
 import DASHI.Moonshine.OggPolyhedralReductionControlExact
 import DASHI.Moonshine.OggTetrahedralReductionControlExact
 import DASHI.Moonshine.OggPrimeControlMatrixExact
@@ -72,9 +99,22 @@ import DASHI.Moonshine.PrimeFrickeGenusControlExact
 import DASHI.Moonshine.PrimeFrickeOrbitSaturationExact
 import DASHI.Moonshine.SupersingularFrobeniusOrbitSpectrumExact
 import DASHI.Moonshine.PrimeRepresentationFrickeCouplingExact
+import DASHI.Moonshine.MatchedDihedralFrickeGenusBridgeExact
 import DASHI.Moonshine.PrimeRepresentationFrickeOrbitSaturationExact
 import DASHI.Moonshine.PrimeRepresentationSupersingularOrbitCouplingExact
 import DASHI.Moonshine.AllPrimeRepresentationFrickeClosureExact
+import DASHI.Moonshine.HeckeCorrespondenceQuotientDescentExact
+import DASHI.Moonshine.FactorVecSupportMaskHeckeQuotientExact
+import DASHI.Moonshine.SupportMaskCountHeckeCompressionNoGoExact
+import DASHI.Moonshine.IndexedLevelHeckeQuotientDescentExact
+import DASHI.Moonshine.CandidateReductionSectorFamilyExact
+import DASHI.Moonshine.SO3WeightMatchedDihedralQuotientExact
+import DASHI.Moonshine.ClassicalFiniteHeckeCorrespondenceCore
+import DASHI.Moonshine.ClassicalHeckeQuotientDescentExact
+import DASHI.Moonshine.P11ClassicalTwoIsogenyCorrespondenceExact
+import DASHI.Moonshine.P11ClassicalTwoIsogenySpectralExact
+import DASHI.Moonshine.P11TwoIsogenyFrobeniusNormalFormBridgeExact
+import DASHI.Moonshine.P11ClassicalHeckeObservationQuotientExact
 import DASHI.Moonshine.SSPRepresentationHeckeIntertwinerBoundaryExact
 import DASHI.Moonshine.TernarySevenOggSSPComparisonExact
 import DASHI.Moonshine.OggPhaseFrickeSynthesisRegression
@@ -85,3 +125,8 @@ import DASHI.Physics.Closure.PhysicalSSPHeckeModelClosureReceipt
 import DASHI.Physics.Closure.SSPZ3EigenspaceClassificationReceipt
 import DASHI.Physics.Moonshine.SupersingularPrimeLaneBridge
 import Ontology.Hecke.CorrespondenceRepresentation
+import Ontology.Hecke.LevelCorrespondenceRepresentation
+import Ontology.Hecke.IndexedLevelCorrespondenceRepresentation
+import Ontology.Hecke.QuotientRepresentation
+import Ontology.Hecke.FactorVecCorrespondence
+import Ontology.Hecke.FactorVecInstances
