@@ -7,18 +7,23 @@ module DASHI.Core.ApproximateIntertwinerCompositionExact where
 -- This module proves the reusable two-stage bound used by causal abstraction,
 -- multi-fidelity transitions and aggregation: if each diagram commutes within
 -- epsilon and the downstream coarse map is nonexpansive, the composite defect
--- is bounded by the sum of the two stage defects.
+-- is bounded by the sum of the two stage defects.  It also proves that exact
+-- intertwining embeds as the zero-defect case.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
-open import Agda.Builtin.Nat using (Nat)
-open import Data.Nat using (_≤_; _+_)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat; zero)
+open import Data.Nat using (_≤_; _+_; z≤n)
 open import Data.Nat.Properties as NatP using (≤-trans; +-mono-≤)
+
+import DASHI.Core.ReopenableConsumerInterventionKernelExact as Core
 
 record NatDistance (X : Set) : Set where
   constructor natDistance
   field
     distance : X → X → Nat
+    selfZero : ∀ x → distance x x ≡ zero
     triangle :
       ∀ x y z →
       distance x z ≤ distance x y + distance y z
@@ -57,6 +62,26 @@ record ApproximateIntertwiner
       ≤ epsilon
 
 open ApproximateIntertwiner public
+
+exactIntertwinerIsZeroApproximate :
+  ∀ {FineIn FineOut CoarseIn CoarseOut}
+    {projectIn : FineIn → CoarseIn}
+    {projectOut : FineOut → CoarseOut}
+    {fineMap : FineIn → FineOut}
+    {coarseMap : CoarseIn → CoarseOut}
+    (dOut : NatDistance CoarseOut) →
+  Core.Intertwiner projectIn projectOut fineMap coarseMap →
+  ApproximateIntertwiner
+    dOut projectIn projectOut fineMap coarseMap zero
+exactIntertwinerIsZeroApproximate dOut exact =
+  approximateIntertwiner proof
+  where
+    proof : ∀ fine →
+      distance dOut
+        (projectOut (fineMap fine))
+        (coarseMap (projectIn fine))
+      ≤ zero
+    proof fine rewrite Core.commutes exact fine | selfZero dOut (coarseMap (projectIn fine)) = z≤n
 
 composeApproximateIntertwiners :
   ∀ {A B C A' B' C'}
@@ -99,7 +124,7 @@ record ApproximateIntertwinerBoundary : Set where
     approximateCommutationNeedsDeclaredMetric : Bool
     stageErrorsComposeByAProvedRule : Bool
     downstreamExpansionControlIsNeededForThisBound : Bool
-    exactIntertwiningIsTheZeroDefectSpecialCaseConceptually : Bool
+    exactIntertwiningIsProvedZeroDefectCase : Bool
 
 canonicalApproximateIntertwinerBoundary : ApproximateIntertwinerBoundary
 canonicalApproximateIntertwinerBoundary =
