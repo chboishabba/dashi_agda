@@ -1,20 +1,29 @@
 module DASHI.Physics.YangMills.BalabanUnifiedCharacteristicFunctionalCompletionExact where
 
 ------------------------------------------------------------------------
--- ROUND74: ONE UNIFIED COMPLETED STATE -> ONE CONTINUUM MEASURE
+-- ROUND75: ONE UNIFIED COMPLETED STATE -> ONE CONTINUUM MEASURE
 --          VIA A MEASURE-DEFINING CHARACTERISTIC FUNCTIONAL COORDINATE
 --
--- STANDARD SOURCE
+-- STANDARD SOURCES
 --
 -- R. A. Minlos,
 -- "Generalized Random Processes and Their Extension to a Measure",
 -- Trudy Moskov. Mat. Obshch. 8 (1959), 497--518.
 -- No DOI recorded for the original publication.
 --
--- Bochner--Minlos theorem (standard form): on a real nuclear test-function
--- space E, a normalized, positive-definite, nuclear-continuous characteristic
--- functional C is the Fourier transform of a UNIQUE Borel probability measure
--- on E'.
+-- Julien Fageot, Arash Amini, Michael Unser,
+-- "On the Continuity of Characteristic Functionals and Sparse Stochastic
+-- Modeling", Journal of Fourier Analysis and Applications 20 (2014),
+-- 1179--1211. DOI: 10.1007/s00041-014-9351-4.
+-- Their Theorem 1 gives the exact Minlos--Bochner criterion used here:
+-- normalized + positive-definite + continuous on a nuclear test space gives a
+-- unique probability measure on the topological dual.
+--
+-- Jose Velhinho,
+-- "Topics of Measure Theory on Infinite Dimensional Spaces", 2023,
+-- arXiv:2312.04365. DOI: 10.48550/arXiv.2312.04365.
+-- This source is used for the Hilbertian/nuclear-topology presentation and the
+-- support interpretation on the topological dual.
 --
 -- Konrad Osterwalder and Robert Schrader,
 -- "Axioms for Euclidean Green's Functions",
@@ -28,21 +37,21 @@ module DASHI.Physics.YangMills.BalabanUnifiedCharacteristicFunctionalCompletionE
 -- TOP-DOWN POINT
 --
 -- The current unified polymer/Schwinger state has ordinary, composite and
--- connected-correlation projections, but it does NOT yet define a probability
--- measure.  Therefore theorem #4 cannot honestly imply theorem #5 merely from
--- Cauchy completeness.
---
--- The shortest real 4 -> 5 route is to put a characteristic-functional
--- coordinate into the SAME strong state and prove that its limit retains:
+-- connected-correlation projections, but it does NOT define a probability
+-- measure merely by being Cauchy. The shortest real 4 -> 5 route is to put a
+-- characteristic-functional coordinate into the SAME strong state and prove
+-- that its limit retains:
 --
 --   C(0)=1,
 --   positive definiteness,
 --   continuity in a nuclear test-function topology,
---   Euclidean covariance / reflection positivity in the same limit.
+--   Euclidean covariance,
+--   reflection positivity,
+--   locality.
 --
 -- Bochner--Minlos then constructs the unique continuum measure; the existing
 -- ordinary Schwinger projection must be identified with moments/derivatives of
--- THIS SAME characteristic functional.  No independent measure subsequence is
+-- THIS SAME characteristic functional. No independent measure subsequence is
 -- allowed.
 ------------------------------------------------------------------------
 
@@ -72,11 +81,8 @@ record CharacteristicFunctionalAuthority : Set₁ where
         (characteristic limitState)
 
     Normalized PositiveDefinite NuclearContinuous : Characteristic → Set
-    EuclideanCovariant ReflectionPositive : Characteristic → Set
+    EuclideanCovariant ReflectionPositive Local : Characteristic → Set
 
-    -- Closed properties in the convergence topology carried by the strong
-    -- state.  These are topological implications, not additional choices of a
-    -- limit object.
     normalizedClosed :
       (∀ scale → Normalized (characteristic (stateAtScale scale))) →
       CharacteristicConverges
@@ -112,16 +118,19 @@ record CharacteristicFunctionalAuthority : Set₁ where
         (characteristic limitState) →
       ReflectionPositive (characteristic limitState)
 
-    -- Standard Bochner--Minlos constructor on the declared nuclear carrier.
+    localityClosed :
+      (∀ scale → Local (characteristic (stateAtScale scale))) →
+      CharacteristicConverges
+        (λ scale → characteristic (stateAtScale scale))
+        (characteristic limitState) →
+      Local (characteristic limitState)
+
     minlosMeasure : Characteristic → Measure
     IsFourierTransformOf : Characteristic → Measure → Set
     minlos : ∀ C →
       Normalized C → PositiveDefinite C → NuclearContinuous C →
       IsFourierTransformOf C (minlosMeasure C)
 
-    -- Same-family identification: the ordinary Schwinger coordinate must be
-    -- the moment/functional-derivative family of the characteristic functional
-    -- that constructs the measure.
     SchwingerOfCharacteristic : Characteristic → Schwinger → Set
 
 open CharacteristicFunctionalAuthority public
@@ -138,6 +147,8 @@ record FiniteCharacteristicLaws (A : CharacteristicFunctionalAuthority) : Set₁
       EuclideanCovariant A (characteristic A (stateAtScale A scale))
     finiteReflectionPositive : ∀ scale →
       ReflectionPositive A (characteristic A (stateAtScale A scale))
+    finiteLocal : ∀ scale →
+      Local A (characteristic A (stateAtScale A scale))
 
 open FiniteCharacteristicLaws public
 
@@ -161,6 +172,7 @@ record UnifiedContinuumMeasureFromCharacteristic
     limitNuclearContinuous : NuclearContinuous A limitCharacteristic
     limitEuclideanCovariant : EuclideanCovariant A limitCharacteristic
     limitReflectionPositive : ReflectionPositive A limitCharacteristic
+    limitLocal : Local A limitCharacteristic
 
     measureFourierIdentity :
       IsFourierTransformOf A limitCharacteristic continuumMeasure
@@ -170,8 +182,6 @@ record UnifiedContinuumMeasureFromCharacteristic
 
 open UnifiedContinuumMeasureFromCharacteristic public
 
--- Everything except the final same-family Schwinger/moment identity constructs
--- automatically from ONE completed state and closed finite laws.
 record SameFamilyMomentIdentification (A : CharacteristicFunctionalAuthority) : Set₁ where
   field
     schwingerAtLimitIsMomentFamily :
@@ -194,6 +204,7 @@ assembleUnifiedContinuumMeasure A finite moments =
     continuous = nuclearContinuousClosed A (finiteNuclearContinuous finite) convergence
     euclidean = euclideanCovariantClosed A (finiteEuclideanCovariant finite) convergence
     reflection = reflectionPositiveClosed A (finiteReflectionPositive finite) convergence
+    local = localityClosed A (finiteLocal finite) convergence
   in
   record
     { limitCharacteristic = characteristic A (limitState A)
@@ -207,6 +218,7 @@ assembleUnifiedContinuumMeasure A finite moments =
     ; limitNuclearContinuous = continuous
     ; limitEuclideanCovariant = euclidean
     ; limitReflectionPositive = reflection
+    ; limitLocal = local
     ; measureFourierIdentity = minlos A
         (characteristic A (limitState A)) normalized positive continuous
     ; schwingerBelongsToSameCharacteristic =
@@ -219,24 +231,25 @@ bochnerMinlosMeasureConstructionLevel = standardImported
 unifiedCharacteristicNoSplicingAssemblyLevel : ProofLevel
 unifiedCharacteristicNoSplicingAssemblyLevel = machineChecked
 
--- EXACT 4 -> 5 HOLES exposed by the backwards compiler:
+-- ROUND75 reduction of the old 4 -> 5 leaf:
 --
--- (a) strengthen theorem #4's state/norm so the characteristic-functional
---     projection has the same summable RG modulus;
--- (b) prove nuclear continuity is uniform/closed in that topology;
--- (c) identify the existing ordinary Schwinger projection with the moment
---     family of the limiting characteristic functional;
--- (d) feed the resulting reflection-positive Euclidean characteristic family
---     into the existing OS reconstruction theorem.
+-- (a) theorem #4 must carry one characteristic-functional coordinate with the
+--     SAME summable increment modulus;
+-- (b) `BalabanCharacteristicNuclearContinuityTransportExact` proves that one
+--     Hilbertian continuity modulus transports to the stronger nuclear topology
+--     once the test-space refinement is instantiated;
+-- (c) finite-scale normalization, positivity, Euclidean covariance, reflection
+--     positivity and locality are closed on the same characteristic limit;
+-- (d) the Schwinger coordinate is identified with moments of that same limit;
+-- (e) standard OS reconstruction consumes those same-limit OS data.
 --
--- Once (a)--(d) are proved, `SameFamilyContinuumOSCompletion` is downstream of
--- the strengthened unified RG theorem and the authoritative analytic count can
--- genuinely drop by one.
+-- There is therefore no trace-class Hilbert-space covariance gate on this
+-- nuclear-dual route. Trace class is a different construction route.
 physicalUnifiedCharacteristicCoordinateLevel : ProofLevel
 physicalUnifiedCharacteristicCoordinateLevel = conditional
 
-physicalNuclearContinuityClosureLevel : ProofLevel
-physicalNuclearContinuityClosureLevel = conditional
+physicalCommonHilbertianCharacteristicModulusLevel : ProofLevel
+physicalCommonHilbertianCharacteristicModulusLevel = conditional
 
 physicalSchwingerMomentIdentificationLevel : ProofLevel
 physicalSchwingerMomentIdentificationLevel = conditional
