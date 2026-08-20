@@ -27,6 +27,7 @@ module DASHI.Environment.LESResearchCrossPollinationRound4Exact where
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_)
+open import Data.Product using (_×_; _,_)
 
 import DASHI.Core.AdaptiveFidelityPruningExact as Fidelity
 import DASHI.Core.AffectedDependencyClosureExact as Closure
@@ -89,8 +90,6 @@ round2RobustnessImpliesDeclaredRobustness robust =
   Robustness.robustOnDeclared λ future member →
     Round2.evaluationIsForPlan robust future ,
     Round2.allDeclaredFuturesAcceptable robust future
-  where
-    open import Data.Product using (_×_; _,_)
 
 ------------------------------------------------------------------------
 -- 3. Concrete gap-closing witnesses are exported at one LES review surface.
