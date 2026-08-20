@@ -6,6 +6,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Maybe using (Maybe; just; nothing)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
+open import Agda.Builtin.Unit using (⊤; tt)
 
 import DASHI.Biology.AnimalSenseObservationThreadDischarge as AnimalSense
 import DASHI.Combinatorics.TriadicVideoCodecObservationQuotient as Codec
