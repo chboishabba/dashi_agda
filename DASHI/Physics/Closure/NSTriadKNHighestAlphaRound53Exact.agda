@@ -3,48 +3,41 @@ module DASHI.Physics.Closure.NSTriadKNHighestAlphaRound53Exact where
 ------------------------------------------------------------------------
 -- HIGHEST-ALPHA PERIODIC NAVIER-STOKES AGGREGATE — ROUND 53
 --
--- Round 53 implements the post-Round-52 compression without inventing any
--- unresolved Clay-level PDE estimate.
+-- Round 53 freezes the recurrence architecture and moves only physical-facing
+-- theorem surfaces forward.
 --
--- Fixed shift:
---   * exposes the source-shaped multiplicative coefficient as Luo's corrected
---     fixed-shift coefficient;
---   * proves the nine-owner B coefficients live in the ADDITIVE correction,
---     and enter there only through the exact aggregate sum B_i;
---   * moves any downstream B cap to the physical correction-vs-target theorem.
+-- * fixed shift: exposes an exact coefficient formula Phi and an affine
+--   aggregate specialization rather than retaining an opaque proposition;
+-- * global budget: proves the post-recursion scalar gate is exactly equivalent
+--   to the live HH-bad ceiling target; zero soft floors give exactly 15/32;
+-- * HH-bad: the literal inherited/generated/leakage normalization now targets
+--   the Round-52 general recurrence directly, so alpha_q <= 1 has been removed
+--   from the PHYSICAL Duhamel producer; shell-dependent capacity M_q and exact
+--   headroom then consume arbitrary nonnegative transient amplification;
+-- * HH-bad same-object endpoints name gain<=defect and unmasked charge<=D;
+-- * Com: names the common-hat bandwidth-one endpoint and separates Gram-block
+--   constants from literal operator-block constants, preventing a hidden
+--   square-root or cardinality conversion;
+-- * kernel: exact duplicate/cancel outcomes eliminate the independent owner;
+-- * HH-good: same-object restriction is operator-valued, not one-test-vector;
+-- * boundary: absent subtypes are discharged combinatorially before analytic
+--   tail limits are requested.
 --
--- HH-bad:
---   * removes alpha_q <= 1 from the literal inherited/generated/leakage Duhamel
---     normalization itself;
---   * proves the raw variable-capacity and exact headroom invariant;
---   * feeds such a capacity directly into the mature Round-52 HH-bad owner.
---
--- Com:
---   * gives an exact counterexample to reusing a Gram/squared constant as an
---     unsquared operator norm constant;
---   * simultaneously proves that the mature 133/256 coefficient is correctly
---     placed at the squared bandwidth-one Schur endpoint.
---
--- Kernel:
---   * closes the zero-independent-remainder branch to an exact zero-tax kernel
---     owner (eta=A=B=0).
---
--- HH-good and boundary:
---   * reuse the existing canonical continuum annular-symbol seam and the five
---     local boundary limits.  Their genuinely physical/analytic producers stay
---     fail-closed; no receipt is promoted in their place.
---
--- No unconditional periodic regularity theorem or Clay terminal claim is made.
+-- No literal PDE proof of the new amplifying Duhamel record, literal
+-- nine-owner-to-fixed-shift coefficient identification, whole-block Com
+-- estimate, literal kernel decomposition, smooth R^3 HH-good extension,
+-- remaining analytic boundary limits, unconditional periodic regularity, or
+-- Clay terminal claim is manufactured here.  Those remain fail-closed.
 ------------------------------------------------------------------------
 
 import DASHI.Physics.Closure.NSTriadKNHighestAlphaRound52Exact
-import DASHI.Physics.Closure.NSTriadKNFixedShiftCoefficientSeparationRound53Exact
+import DASHI.Physics.Closure.NSTriadKNFixedShiftCoefficientRound53Exact
+import DASHI.Physics.Closure.NSTriadKNGlobalGateIffRound53Exact
 import DASHI.Physics.Closure.NSTriadKNHHBadRawVariableCapacityRound53Exact
-import DASHI.Physics.Closure.NSTriadKNHHBadRawCapacityToOwnerRound53Exact
-import DASHI.Physics.Closure.NSTriadKNComGramOperatorMismatchRound53Exact
-import DASHI.Physics.Closure.NSTriadKNComSquaredEndpointRound53Exact
-import DASHI.Physics.Closure.NSTriadKNKernelIndependentZeroOwnerRound53Exact
-import DASHI.Physics.Closure.NSTriadKNHHGoodContinuumRestrictionRound49Exact
-import DASHI.Physics.Closure.NSTriadKNHHGoodAnnularMasterKernelRound41Exact
-import DASHI.Physics.Closure.NSTriadKNHHGoodParabolicPeriodizedOwnerRound42Exact
-import DASHI.Physics.Closure.NSTriadKNBoundaryFiveLocalLimitsRound47Exact
+import DASHI.Physics.Closure.NSTriadKNHHBadHeadroomRound53Exact
+import DASHI.Physics.Closure.NSTriadKNHHBadVariableDuhamelToBarrierRound53Exact
+import DASHI.Physics.Closure.NSTriadKNHHBadPhysicalIdentificationRound53Exact
+import DASHI.Physics.Closure.NSTriadKNComGramVsOperatorRound53Exact
+import DASHI.Physics.Closure.NSTriadKNKernelOwnerEliminationRound53Exact
+import DASHI.Physics.Closure.NSTriadKNHHGoodOperatorRestrictionRound53Exact
+import DASHI.Physics.Closure.NSTriadKNBoundaryDefinitionalVanishRound53Exact
