@@ -35,6 +35,7 @@ module DASHI.Physics.Closure.NSTriadKNProjectedCompactGammaPressureEliminationRo
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
+import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNPeriodicLittlewoodPaleyBonyExact as LP
 import DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact as Literal
 import DASHI.Physics.Closure.NSTriadKNLiteralPacketTransferFirstVariationRound82Exact as Packet
@@ -59,8 +60,7 @@ literalCompactGammaTransferFirstVariationUsesProjectedRHS :
   ∀ {r} {model : LP.PeriodicHardShellFourierPDE {r}}
     (datum : Drift.LiteralPhysicalCompactTransferDatum model) →
   Drift.rawTransferTangent datum
-  ≡
-  DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier.real
+  ≡ C3.real
     (Packet.packetTransferPairingFirstVariation
       model (Drift.finiteSystem datum) (Drift.shell datum)
       (Drift.packetModes datum)
