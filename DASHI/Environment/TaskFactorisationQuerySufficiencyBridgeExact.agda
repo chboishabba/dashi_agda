@@ -12,14 +12,6 @@ module DASHI.Environment.TaskFactorisationQuerySufficiencyBridgeExact where
 import DASHI.Core.QueryFactorisationSufficiency as Query
 import DASHI.Environment.LESResearchCrossPollinationExact as LES
 
-constantAnswerQuestions :
-  ∀ {State Task Output : Set} →
-  (Task → State → Output) →
-  Query.InquiryQuestionFamily State Task
-constantAnswerQuestions evaluate =
-  Query.inquiryQuestionFamily (λ task → _) evaluate
-
--- Keep the answer family explicit to avoid relying on an inferred Set witness.
 constantOutputQuestions :
   ∀ {State Task Output : Set} →
   (Task → State → Output) →
@@ -33,7 +25,8 @@ taskFactorisationToStaticSufficient :
     {evaluate : Task → State → Output} →
   LES.TaskFactorisation project evaluate →
   Query.StaticSufficient (constantOutputQuestions evaluate) project
-taskFactorisationToStaticSufficient factor =
+taskFactorisationToStaticSufficient {Task = Task} {project = project}
+  {evaluate = evaluate} factor =
   Query.staticSufficient proofFor
   where
     proofFor :
