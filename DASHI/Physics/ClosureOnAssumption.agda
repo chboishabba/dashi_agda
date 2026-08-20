@@ -10,9 +10,12 @@ open import DASHI.Physics.SignatureFromMask public
 open import DASHI.Physics.MaskedQuadraticRenormalization public
 open import DASHI.Physics.MaskedCanonicalizationInvariant public
 open import DASHI.Physics.MaskedBlockOrthogonality public
+open import DASHI.Physics.MaskedNoLeakageBridge public
 open import DASHI.Physics.MaskedOperatorInvariants public
 open import DASHI.Physics.MaskedCone public
 open import DASHI.Physics.LorentzianCoreClosure public
+open import DASHI.Physics.MaskedSignature31Bridge public
+open import DASHI.Physics.DefectLorentzBridge public
 open import DASHI.Physics.MaskedConeStructure public
 open import DASHI.Physics.RealConeStructureInstance public
 open import DASHI.Physics.RealCausalStructureInstance public
@@ -23,6 +26,7 @@ open import DASHI.Physics.MaskedClosureKit public
 open import DASHI.Physics.TernaryRealInstanceShift
 open import DASHI.Physics.DimensionBoundAssumptions public
 
+-- Strengthened typed completion gates.
 open import DASHI.Physics.GlobalDimensionUniqueness public
 open import DASHI.Physics.FiniteToContinuumGeometry public
 open import DASHI.Physics.BianchiLovelockCompletion public
@@ -33,6 +37,7 @@ open import DASHI.Physics.UnitaryCompletion public
 open import DASHI.Physics.StandardModelUniqueness public
 open import DASHI.Physics.FullPhysicsClosure public
 
+-- Legacy assumption interfaces retained for compatibility.
 open import DASHI.Physics.BianchiEinsteinAssumptions public
 open import DASHI.Physics.CliffordAssumptions public
 open import DASHI.Physics.SpinAssumptions public

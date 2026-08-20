@@ -6,6 +6,13 @@ open import Data.Product using (_×_; _,_)
 
 open import DASHI.Physics.DimensionBoundAssumptions as DBA
 
+------------------------------------------------------------------------
+-- Global extension of the finite orbit-profile calculation.
+--
+-- The repository computes the target fingerprint in the finite search range.
+-- This module isolates exactly what must be supplied to extend that result to
+-- every dimension; no empty profile is silently treated as evidence.
+
 record TargetFingerprint (m : Nat) : Set where
   field
     profile : DBA.ShellOrbitProfile m
@@ -17,8 +24,13 @@ record TargetFingerprint (m : Nat) : Set where
 record GlobalOrbitClassification : Set₁ where
   field
     fingerprint : (m : Nat) → DBA.ShellOrbitProfile m
+
     soundTarget : ∀ {m} (t : TargetFingerprint m) →
       TargetFingerprint.profile t ≡ fingerprint m
+
+    -- Completeness/exclusion outside the enumerated range is concentrated
+    -- here. A constructive implementation may use a recurrence, generating
+    -- function, or orbit-stabilizer formula.
     targetUniqueDimension : ∀ {m} → TargetFingerprint m → m ≡ 4
 
 record GlobalDimensionClosure : Set₁ where
