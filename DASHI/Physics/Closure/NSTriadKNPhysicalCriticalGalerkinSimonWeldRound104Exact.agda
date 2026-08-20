@@ -43,7 +43,7 @@ module DASHI.Physics.Closure.NSTriadKNPhysicalCriticalGalerkinSimonWeldRound104E
 -- setting.  That is a type-correct API boundary, not a mathematical loss.
 ------------------------------------------------------------------------
 
-open import Agda.Primitive using (lzero; Set)
+open import Agda.Primitive using (lzero; Set; Set₁)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
