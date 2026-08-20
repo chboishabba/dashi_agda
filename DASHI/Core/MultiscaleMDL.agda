@@ -6,11 +6,6 @@ open import Agda.Builtin.Sigma using (Σ; _,_)
 
 ------------------------------------------------------------------------
 -- Exact, application-neutral multiscale carrier.
---
--- This module isolates the checkable mathematical core shared by codec,
--- supervoxel, reasoning-field, and physics-facing readings.  It makes no
--- claim that a chosen carrier, cost, or kernel models nature.  Such claims
--- belong in explicitly gated bridge and empirical modules.
 
 record MultiscaleCarrier : Set₁ where
   field
@@ -22,19 +17,24 @@ open MultiscaleCarrier public
 
 ------------------------------------------------------------------------
 -- Residual decomposition.
---
--- No additive structure is assumed.  A residual is whatever extra witness is
--- sufficient to reconstruct the fine state from its coarse projection.
 
 record ResidualCodec (tower : MultiscaleCarrier) : Set₁ where
-  open MultiscaleCarrier tower
   field
     Residual : Nat → Set
-    residual : ∀ {j} → Carrier (suc j) → Residual j
-    reconstruct : ∀ {j} → Carrier j → Residual j → Carrier (suc j)
+    residual :
+      ∀ {j} →
+      MultiscaleCarrier.Carrier tower (suc j) → Residual j
+    reconstruct :
+      ∀ {j} →
+      MultiscaleCarrier.Carrier tower j →
+      Residual j →
+      MultiscaleCarrier.Carrier tower (suc j)
     reconstruct-project-residual :
-      ∀ {j} (x : Carrier (suc j)) →
-      reconstruct (project x) (residual x) ≡ x
+      ∀ {j} (x : MultiscaleCarrier.Carrier tower (suc j)) →
+      reconstruct
+        (MultiscaleCarrier.project tower x)
+        (residual x)
+      ≡ x
 open ResidualCodec public
 
 CoarseResidual :
@@ -72,32 +72,32 @@ join-split codec x = reconstruct-project-residual codec x
 -- Scale-indexed kernels and exact naturality.
 
 record KernelTower (tower : MultiscaleCarrier) : Set₁ where
-  open MultiscaleCarrier tower
   field
-    kernel : ∀ j → Carrier j → Carrier j
+    kernel :
+      ∀ j →
+      MultiscaleCarrier.Carrier tower j →
+      MultiscaleCarrier.Carrier tower j
     project-kernel :
-      ∀ {j} (x : Carrier (suc j)) →
-      project (kernel (suc j) x) ≡ kernel j (project x)
+      ∀ {j} (x : MultiscaleCarrier.Carrier tower (suc j)) →
+      MultiscaleCarrier.project tower (kernel (suc j) x)
+      ≡ kernel j (MultiscaleCarrier.project tower x)
 open KernelTower public
-
--- A weaker quantitative commutation law can be layered on top once a metric
--- and an error carrier have been selected.  The exact law above is the clean
--- theorem spine; approximation is not silently identified with equality.
 
 ------------------------------------------------------------------------
 -- Symmetry quotient interface.
---
--- Orbit equivalence is represented constructively by an explicit action
--- witness.  Formation of a quotient type is intentionally left to a chosen
--- setoid/quotient implementation rather than postulated here.
 
 record SymmetryAction (tower : MultiscaleCarrier) : Set₁ where
-  open MultiscaleCarrier tower
   field
     Symmetry : Nat → Set
     identity : ∀ {j} → Symmetry j
-    act : ∀ {j} → Symmetry j → Carrier j → Carrier j
-    identity-act : ∀ {j} (x : Carrier j) → act identity x ≡ x
+    act :
+      ∀ {j} →
+      Symmetry j →
+      MultiscaleCarrier.Carrier tower j →
+      MultiscaleCarrier.Carrier tower j
+    identity-act :
+      ∀ {j} (x : MultiscaleCarrier.Carrier tower j) →
+      act identity x ≡ x
 open SymmetryAction public
 
 record OrbitRelated
@@ -113,10 +113,6 @@ open OrbitRelated public
 
 ------------------------------------------------------------------------
 -- MDL accounting.
---
--- Costs are natural-number code lengths.  This gives exact accounting, not a
--- Shannon-optimality theorem.  Entropy/regret bounds require a probability
--- model and Kraft-style hypotheses and therefore remain separate obligations.
 
 record MDLCost
   (tower : MultiscaleCarrier)
@@ -147,7 +143,7 @@ step-description-is-coarse-plus-residual cost x = refl
 ------------------------------------------------------------------------
 -- Claim boundary.
 
-record MDLClaimBoundary : Set where
+record MDLClaimBoundary : Set₁ where
   constructor mdl-claim-boundary
   field
     exactResidualReconstructionProved : Set
@@ -155,6 +151,3 @@ record MDLClaimBoundary : Set where
     kraftAdmissibilitySupplied : Set
     residualEntropyBoundProved : Set
     rateDistortionOptimalityProved : Set
-
--- The fields above are proposition slots rather than Boolean marketing flags:
--- a consumer must supply inhabitants of the claims it wishes to promote.
