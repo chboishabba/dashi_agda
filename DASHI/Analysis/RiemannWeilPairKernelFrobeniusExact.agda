@@ -111,6 +111,7 @@ holomorphicPlusHermitianSquaresExposePairCrossCore
       con (+ 2) :*
         ((((p :* p) :- (q :* q)) :- (r :* r)) :+ (s :* s)))
     refl
+    p q r s
 
 ------------------------------------------------------------------------
 -- Diagonal specialization u=v with a.b=0.
