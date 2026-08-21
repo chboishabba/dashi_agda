@@ -3,6 +3,8 @@ module DASHI.Biology.EmbodiedWaveCrossPollinationRegression where
 open import DASHI.Core.Prelude
 
 import DASHI.Core.IntersectionalNonFactorability as NF
+import DASHI.Physics.Common.FiniteThreeCycleTorusExact as Torus
+import DASHI.Biology.BalancedTernaryHarmonicCarrierExact as Harmonic
 import DASHI.Biology.ObserverRelativeReachableSubfabricExact as Reach
 import DASHI.Biology.SymmetryResolvedEmbodiedWaveControlExact as Sym
 import DASHI.Biology.QuaternionOrbitEmbodiedReachNonfactorabilityExact as QReach
@@ -20,10 +22,10 @@ record EmbodiedWaveCrossPollinationRegression : Set where
       Sym.fineFrequency (Sym.translateFirstMode mode) ≡ Sym.fineFrequency mode
 
     sourceLikeRawSymmetryCanSplitEmbodiedReach :
-      (mode : Sym.SymmetryResolvedMode) →
-      Sym.geometry mode ≡ Sym.sourceSinkGeometry →
-      Sym.modeIncidence Reach.regulatedContext mode
-      ≡ Sym.modeIncidence Reach.mobilisedContext (Sym.translateFirstMode mode) → ⊥
+      (coarse : Torus.Torus3x3) (fine : Harmonic.FineFrequency) →
+      Sym.modeIncidence Reach.regulatedContext (Sym.sourceModeAt coarse fine)
+      ≡ Sym.modeIncidence Reach.mobilisedContext
+          (Sym.translateFirstMode (Sym.sourceModeAt coarse fine)) → ⊥
 
     quaternionOrbitInvariantStillCannotDecodeEmbodiedReach :
       (unit : Hopf.UnitQuaternion) (pair : Hopf.QuaternionPair) →
