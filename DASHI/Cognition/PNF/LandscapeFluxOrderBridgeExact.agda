@@ -1,6 +1,6 @@
 module DASHI.Cognition.PNF.LandscapeFluxOrderBridgeExact where
 
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_; refl; cong)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
 open import Data.Product using (_×_; _,_)
@@ -50,10 +50,7 @@ orderedEndpointsSharePotential = refl
 
 orderedEndpointsDiffer : AB ≡ BA → ⊥
 orderedEndpointsDiffer equality =
-  Order.updateMapsDoNotCommute
-    (cong beliefState equality)
-  where
-    open import Agda.Builtin.Equality using (cong)
+  Order.updateMapsDoNotCommute (cong beliefState equality)
 
 potentialCannotRecoverOrderedHistory :
   NF.FactorsThrough potentialObservation beliefState → ⊥
