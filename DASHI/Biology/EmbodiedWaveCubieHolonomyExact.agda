@@ -13,9 +13,9 @@ import DASHI.Core.IntersectionalNonFactorability as NF
 -- "Appearance of Gauge Structure in Simple Dynamical Systems".
 -- DOI: 10.1103/PhysRevLett.52.2111.
 --
--- This is a finite order-sensitive cubie model.  Wave-supported accessibility
+-- This is a finite order-sensitive cubie model. Wave-supported accessibility
 -- and body regulation preserve the same public surface individually, yet their
--- ordered composite endpoints differ.  No gauge connection, curvature,
+-- ordered composite endpoints differ. No gauge connection, curvature,
 -- Wilson loop, clinical treatment law, or quantum brain is asserted.
 ------------------------------------------------------------------------
 
@@ -51,19 +51,23 @@ orderedEndpointsSharePublicSurface :
   projectPublic waveThenBody ≡ projectPublic bodyThenWave
 orderedEndpointsSharePublicSurface = refl
 
+data OrderChoice : Set where
+  waveFirst bodyFirst : OrderChoice
+
+orderedEndpoint : OrderChoice → FineEmbodiedWaveState
+orderedEndpoint waveFirst = waveThenBody
+orderedEndpoint bodyFirst = bodyThenWave
+
+orderedSurface : OrderChoice → PublicSurface
+orderedSurface choice = projectPublic (orderedEndpoint choice)
+
 orderNonfactorability :
-  NF.NonFactorabilityWitness
-    (λ choice → projectPublic
-      (if choice then waveThenBody else bodyThenWave))
-    (λ choice → if choice then waveThenBody else bodyThenWave)
+  NF.NonFactorabilityWitness orderedSurface orderedEndpoint
 orderNonfactorability =
-  NF.nonFactorabilityWitness true false refl orderedEndpointsDiffer
+  NF.nonFactorabilityWitness waveFirst bodyFirst refl orderedEndpointsDiffer
 
 publicSurfaceCannotDecodeEmbodiedWaveOrder :
-  NF.FactorsThrough
-    (λ choice → projectPublic
-      (if choice then waveThenBody else bodyThenWave))
-    (λ choice → if choice then waveThenBody else bodyThenWave) → ⊥
+  NF.FactorsThrough orderedSurface orderedEndpoint → ⊥
 publicSurfaceCannotDecodeEmbodiedWaveOrder =
   NF.witnessRulesOutEveryFlatFactorisation orderNonfactorability
 
