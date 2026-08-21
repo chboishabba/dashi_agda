@@ -141,9 +141,13 @@ finitePrefixLinearMargin :
       (λ _ → linearMargin bMinus interactionConstant gamma)
   ≤
   Sums.sumRational shells betaTotal
-finitePrefixLinearMargin shells =
+finitePrefixLinearMargin
+    {bMinus = bMinus}
+    {interactionConstant = interactionConstant}
+    {gamma = gamma}
+    shells =
   sumMonotone
     shells
-    (λ _ → linearMargin _ _ _)
+    (λ _ → linearMargin bMinus interactionConstant gamma)
     betaTotal
     singleShellLinearMargin
