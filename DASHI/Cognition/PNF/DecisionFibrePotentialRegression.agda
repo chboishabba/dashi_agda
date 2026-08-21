@@ -3,7 +3,7 @@ module DASHI.Cognition.PNF.DecisionFibrePotentialRegression where
 open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
-open import Data.Product using (_×_; _,_)
+open import Data.Product using (_×_; _,_; proj₁)
 
 import DASHI.Cognition.PNF.DecisionFibrePotentialHyperformalismExact as Unified
 import DASHI.Cognition.PNF.DecisionPotentialFibreExact as Potential
@@ -15,6 +15,8 @@ import DASHI.Cognition.PNF.DecisionOutcomeLearningFeedbackExact as Feedback
 import DASHI.Cognition.PNF.AttentionValueActuationSeparationExact as Attention
 import DASHI.Cognition.PNF.DynamicDecisionFieldCompetitionExact as DFT
 import DASHI.Cognition.PNF.DecisionPotentialSourceRegistry as Sources
+import DASHI.Cognition.PNF.AccessibleCandidateReasoningPipelineExact as Pre
+import DASHI.Cognition.PNF.MemoryFibre as Memory
 import DASHI.Biology.NeuralDecisionProducerBridgeExact as Neural
 
 record DecisionFibrePotentialRegression : Set₁ where
@@ -54,17 +56,14 @@ record DecisionFibrePotentialRegression : Set₁ where
       ≡ Autonomy.emitted Autonomy.constrainedWithdrawal
 
     feedbackPreservesRememberedEvent :
-      (m : DASHI.Cognition.PNF.MemoryFibre.MemoryFibre) →
-      DASHI.Cognition.PNF.MemoryFibre.rememberedEvent
+      (m : Memory.MemoryFibre) →
+      Memory.rememberedEvent
         (Feedback.learnFromOutcome Feedback.reinforcingOutcome m)
-      ≡ DASHI.Cognition.PNF.MemoryFibre.rememberedEvent m
+      ≡ Memory.rememberedEvent m
 
     sameValueDifferentAttention :
-      Attention.attendedEvidence Attention.attended
-        DASHI.Cognition.PNF.AccessibleCandidateReasoningPipelineExact.counterCandidate
-      ≡
-      Attention.attendedEvidence Attention.unattended
-        DASHI.Cognition.PNF.AccessibleCandidateReasoningPipelineExact.counterCandidate
+      Attention.attendedEvidence Attention.attended Pre.counterCandidate
+      ≡ Attention.attendedEvidence Attention.unattended Pre.counterCandidate
       → ⊥
 
     dynamicPreferenceReversal : DFT.earlyState ≡ DFT.laterState → ⊥
@@ -94,7 +93,7 @@ canonicalDecisionFibrePotentialRegression = record
       Order.observableCommutationDoesNotForceUpdateCommutation
   ; qqViolationRejectsProjectiveDiagnostic = Order.qqNotUniversal
   ; sameActionDifferentAutonomy =
-      Data.Product.proj₁ Autonomy.sameActionDoesNotDetermineAutonomy
+      proj₁ Autonomy.sameActionDoesNotDetermineAutonomy
   ; feedbackPreservesRememberedEvent =
       Feedback.outcomeLearningPreservesRememberedEvent Feedback.reinforcingOutcome
   ; sameValueDifferentAttention = Attention.attentionAndValueAreDistinctAxes
