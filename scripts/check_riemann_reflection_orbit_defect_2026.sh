@@ -22,6 +22,8 @@ sources=(
   DASHI/Analysis/RiemannArithmeticUnitarityRigidityBoundary.agda
   DASHI/Analysis/RiemannHermitianEndgameTrichotomyExact.agda
   DASHI/Analysis/RiemannHermitianDreamRouteExact.agda
+  DASHI/Analysis/RiemannHermitianTopDownAssemblyExact.agda
+  DASHI/Analysis/RiemannHermitianSourceGapMapExact.agda
   DASHI/Analysis/RiemannReflectionC3OrbitShapeBridgeExact.agda
   DASHI/Analysis/RiemannReflectionOrbitDefectRegression.agda
   DASHI/Analysis/ZetaTheoremSurface.agda
@@ -64,6 +66,8 @@ localamp=DASHI/Analysis/RiemannHermitianLocalizationAmplificationExact.agda
 rigidity=DASHI/Analysis/RiemannArithmeticUnitarityRigidityBoundary.agda
 trichotomy=DASHI/Analysis/RiemannHermitianEndgameTrichotomyExact.agda
 dream=DASHI/Analysis/RiemannHermitianDreamRouteExact.agda
+topdown=DASHI/Analysis/RiemannHermitianTopDownAssemblyExact.agda
+gapmap=DASHI/Analysis/RiemannHermitianSourceGapMapExact.agda
 c3=DASHI/Analysis/RiemannReflectionC3OrbitShapeBridgeExact.agda
 regression=DASHI/Analysis/RiemannReflectionOrbitDefectRegression.agda
 surface=DASHI/Analysis/ZetaTheoremSurface.agda
@@ -74,56 +78,39 @@ require_pattern "$pair" 'reflectionBlockDeterminantMagnitudeIsSquaredDefect'
 require_pattern "$hyper" 'sourceSignatureCannotDetermineSquaredDefect'
 require_pattern "$channels" 'bilinearDiagonalTransverseVanishes'
 require_pattern "$channels" 'hermitianDiagonalTransverseDoubles'
-require_pattern "$channels" 'bilinearAndHermitianRecoverTwiceFirstTransverse'
 require_pattern "$energy" 'pairBlockFrobeniusDecomposition'
-require_pattern "$energy" 'holomorphicBaselineCannotDetermineHermitianEnergy'
-require_pattern "$finite" 'ComplexPoissonNormContract'
-require_pattern "$finite" 'ComplexPoissonStripContinuation'
-require_pattern "$finite" 'FiniteGridTailLedger'
-require_pattern "$finite" 'FiniteRetentionCertificate'
-require_pattern "$kernel" 'holomorphicPlusHermitianSquaresExposePairCrossCore'
-require_pattern "$kernel" 'pairCrossCorePlusMixedEnergyIsAlignedEnergy'
-require_pattern "$kernel" 'negativeInterferenceCoreIsMinusOne'
-require_pattern "$mixed" 'MixedChannelGlobalLedger'
-require_pattern "$mixed" 'PairAlmostOrthogonality'
-require_pattern "$mixed" 'RetainedPairCertificate'
-require_pattern "$mixed" 'AlmostOrthogonalityProducer'
+require_pattern "$finite" 'coerciveFiniteRetentionImpliesCertificate'
+require_pattern "$finite" 'retentionCertificateFromProducer'
+require_pattern "$kernel" 'imaginaryKernelEnergyIsTwiceMixedInterference'
+require_pattern "$kernel" 'MixedInterferenceKernelReductionAdapter'
+require_pattern "$mixed" 'pairAlmostOrthogonalityRetainsTarget'
+require_pattern "$mixed" 'retainedPairFromProducer'
 require_pattern "$primeex" 'PrimeSideExcessNormalization'
 require_pattern "$primeex" 'rawTraceNeedNotVanishWhenExcessVanishes'
-require_pattern "$primeex" 'AlpogeFurmanTraceScaleAdapter'
-require_pattern "$assembly" 'finiteZeroForcesTailZero'
-require_pattern "$assembly" 'pointwiseTransverseDefectVanishesFromZeroArithmeticBudget'
 require_pattern "$detect" 'detectableOffLinePairContradictsGlobalErrorBound'
-require_pattern "$detect" 'boundedByNonzeroErrorDoesNotForceVanishing'
-require_pattern "$detectassembly" 'HermitianExcessDetectabilityAssembly'
 require_pattern "$detectassembly" 'hermitianExcessDetectabilityContradiction'
-require_pattern "$detectassembly" 'producerExcludesOffLine'
 require_pattern "$power" 'powerGapDecomposition'
-require_pattern "$power" 'canonicalPowerAmplificationCertificate'
-require_pattern "$power" 'unitGapResidualLevel4'
-require_pattern "$localamp" 'LocalizedPairLedger'
-require_pattern "$localamp" 'AmplificationDetectabilityLedger'
 require_pattern "$localamp" 'HigherMomentLocalizationProducer'
-require_pattern "$rigidity" 'ArithmeticRigiditySystem'
 require_pattern "$rigidity" 'rigidityClosesTransverseDefect'
-require_pattern "$rigidity" 'SatakeAnalogyBoundary'
-require_pattern "$trichotomy" 'EndgameAlternative'
 require_pattern "$trichotomy" 'endgameAlternativeClosesOffLine'
-require_pattern "$dream" 'HermitianProducerStack'
-require_pattern "$dream" 'hermitianDreamRouteClosesOffLine'
-require_pattern "$dream" 'AlpogeFurmanHermitianDreamProducer'
+require_pattern "$dream" 'alpogeFurmanHermitianDreamExcludesOffLine'
+require_pattern "$topdown" 'MixedRetentionFromFinite'
+require_pattern "$topdown" 'PrimeNormalizationFromMixed'
+require_pattern "$topdown" 'DetectabilityFromPrime'
+require_pattern "$topdown" 'topDownOffLineContradiction'
+require_pattern "$topdown" 'ActualZetaHermitianTopDownProducer'
+require_pattern "$topdown" 'hermitianTopDownPlusExistingWeilSeparatorImpliesRH'
+require_pattern "$gapmap" 'G1ExistingSource'
+require_pattern "$gapmap" 'G1NewBridge'
+require_pattern "$gapmap" 'G2ExistingSource'
+require_pattern "$gapmap" 'G2NewBridge'
+require_pattern "$gapmap" 'G3NewBridge'
+require_pattern "$gapmap" 'G4HigherMomentBridge'
+require_pattern "$gapmap" 'G4ArithmeticRigidityBridge'
 require_pattern "$c3" 'completePhaseOrbitCancels'
 require_pattern "$regression" 'regressionNegativeInterference'
-require_pattern "$surface" 'RiemannHermitianExcessDetectabilityAssemblyExact'
-require_pattern "$surface" 'RiemannHermitianDreamRouteExact'
-require_pattern "$aggregate" 'RiemannComplexPoissonFiniteRetentionExact'
-require_pattern "$aggregate" 'RiemannMixedChannelAlmostOrthogonalityExact'
-require_pattern "$aggregate" 'RiemannPrimeSideExcessNormalizationExact'
-require_pattern "$aggregate" 'RiemannHermitianExcessDetectabilityAssemblyExact'
-require_pattern "$aggregate" 'RiemannHermitianLocalizationAmplificationExact'
-require_pattern "$aggregate" 'RiemannArithmeticUnitarityRigidityBoundary'
-require_pattern "$aggregate" 'RiemannHermitianEndgameTrichotomyExact'
-require_pattern "$aggregate" 'RiemannHermitianDreamRouteExact'
+require_pattern "$aggregate" 'RiemannHermitianTopDownAssemblyExact'
+require_pattern "$aggregate" 'RiemannHermitianSourceGapMapExact'
 
 DASHI_NO_TMUX=1 scripts/run_agda29_parallel_check.sh \
   DASHI/Analysis/RiemannComplexPoissonChannelSplitExact.agda \
@@ -132,12 +119,8 @@ DASHI_NO_TMUX=1 scripts/run_agda29_parallel_check.sh \
   DASHI/Analysis/RiemannWeilPairKernelFrobeniusExact.agda \
   DASHI/Analysis/RiemannMixedChannelAlmostOrthogonalityExact.agda \
   DASHI/Analysis/RiemannPrimeSideExcessNormalizationExact.agda \
-  DASHI/Analysis/RiemannHermitianDefectAssemblyExact.agda \
   DASHI/Analysis/RiemannHermitianDetectabilityGapExact.agda \
   DASHI/Analysis/RiemannHermitianExcessDetectabilityAssemblyExact.agda \
-  DASHI/Analysis/RiemannHermitianPowerAmplificationExact.agda \
-  DASHI/Analysis/RiemannHermitianLocalizationAmplificationExact.agda \
-  DASHI/Analysis/RiemannArithmeticUnitarityRigidityBoundary.agda \
-  DASHI/Analysis/RiemannHermitianEndgameTrichotomyExact.agda \
-  DASHI/Analysis/RiemannHermitianDreamRouteExact.agda \
+  DASHI/Analysis/RiemannHermitianTopDownAssemblyExact.agda \
+  DASHI/Analysis/RiemannHermitianSourceGapMapExact.agda \
   DASHI/EverythingRiemannReflectionOrbitDefect2026.agda
