@@ -87,6 +87,26 @@ samePastDifferentFutureConstraintChangesSection :
 samePastDifferentFutureConstraintChangesSection ()
 
 ------------------------------------------------------------------------
+-- Same future boundary, different embodied history can also change the live
+-- intermediate section.  The future constraint remains the same in this
+-- witness; the distinction is carried by learned/history state.
+------------------------------------------------------------------------
+
+data EmbodiedHistory : Set where
+  flexibleHistory threatBiasedHistory : EmbodiedHistory
+
+historyConditionedIntermediate : EmbodiedHistory → FutureConstraint → Cell
+historyConditionedIntermediate flexibleHistory flexibleSafetyGoal = safeIntermediate
+historyConditionedIntermediate threatBiasedHistory flexibleSafetyGoal = threatIntermediate
+historyConditionedIntermediate flexibleHistory avoidThreatGoal = threatIntermediate
+historyConditionedIntermediate threatBiasedHistory avoidThreatGoal = threatIntermediate
+
+sameFutureDifferentEmbodiedHistoryChangesSection :
+  historyConditionedIntermediate flexibleHistory flexibleSafetyGoal
+  ≡ historyConditionedIntermediate threatBiasedHistory flexibleSafetyGoal → ⊥
+sameFutureDifferentEmbodiedHistoryChangesSection ()
+
+------------------------------------------------------------------------
 -- Every intermediate cell has a local rank-three cubie address in the existing
 -- recursive hypervoxel language.
 ------------------------------------------------------------------------
@@ -116,9 +136,10 @@ record TwoBoundaryHyperformalismBoundary : Set where
     desiredFutureCausesPresentRetrocausally : Bool
     tsvfImpliesQuantumBrain : Bool
     intermediateSectionCanDependOnBothBoundaries : Bool
+    embodiedHistoryCanChangeSectionAtSameFutureBoundary : Bool
     historyEqualsEndpoint : Bool
 
 canonicalTwoBoundaryHyperformalismBoundary :
   TwoBoundaryHyperformalismBoundary
 canonicalTwoBoundaryHyperformalismBoundary =
-  twoBoundaryHyperformalismBoundary false false false true false
+  twoBoundaryHyperformalismBoundary false false false true true false

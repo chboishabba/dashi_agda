@@ -6,7 +6,9 @@ import DASHI.Biology.EmbodiedOptionConeInteroceptionExact
 import DASHI.Biology.MultiscaleAllostaticBodyHyperformalismExact
 import DASHI.Biology.ObserverRelativeReachableSubfabricExact
 import DASHI.Biology.TwoBoundaryHyperformalismExact
+import DASHI.Biology.TwoBoundaryRepairModesExact
 import DASHI.Biology.EmbodiedBranchingHyperformalismExact
+import DASHI.Biology.FeltStateSupervoxelExact
 import DASHI.Biology.BodyModulatedEffectiveTopologyExact
 import DASHI.Biology.BodyModulatedDecisionCoordinatesExact
 import DASHI.Biology.EmbodiedCausalConeFeedbackExact

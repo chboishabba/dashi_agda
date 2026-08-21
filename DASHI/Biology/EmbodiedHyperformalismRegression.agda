@@ -5,7 +5,9 @@ open import DASHI.Core.Prelude
 import DASHI.Biology.MultiscaleAllostaticBodyHyperformalismExact as Multi
 import DASHI.Biology.ObserverRelativeReachableSubfabricExact as Reach
 import DASHI.Biology.TwoBoundaryHyperformalismExact as Two
+import DASHI.Biology.TwoBoundaryRepairModesExact as Repair
 import DASHI.Biology.EmbodiedBranchingHyperformalismExact as Branch
+import DASHI.Biology.FeltStateSupervoxelExact as Felt
 import DASHI.Biology.BodyModulatedEffectiveTopologyExact as Topo
 import DASHI.Biology.IntrospectiveHyperformalismIncidenceExact as CV
 import DASHI.Biology.BodyModulatedDecisionCoordinatesExact as Controls
@@ -34,6 +36,23 @@ record EmbodiedHyperformalismRegression : Set where
     twoBoundarySectionHasDistinctIntermediateRoutes :
       Two.intermediate Two.threatSection ≡ Two.intermediate Two.safeSection → ⊥
 
+    sameFutureDifferentEmbodiedHistoryChangesSection :
+      Two.historyConditionedIntermediate Two.flexibleHistory Two.flexibleSafetyGoal
+      ≡ Two.historyConditionedIntermediate Two.threatBiasedHistory Two.flexibleSafetyGoal
+      → ⊥
+
+    resourceRepairWidensWithoutHistoryErasure :
+      Repair.corridorWidth Repair.contractedCorridor
+      ≡ Repair.corridorWidth Repair.resourceRepaired → ⊥
+
+    futureModelRepairWidensWithoutHistoryErasure :
+      Repair.corridorWidth Repair.contractedCorridor
+      ≡ Repair.corridorWidth Repair.futureModelRepaired → ⊥
+
+    couplingRepairWidensWithoutHistoryErasure :
+      Repair.corridorWidth Repair.contractedCorridor
+      ≡ Repair.corridorWidth Repair.couplingRepaired → ⊥
+
     sameWorldGoalHistoryDifferentFeltState :
       Branch.feltState Branch.regulatedBranchState
       ≡ Branch.feltState Branch.mobilisedBranchState → ⊥
@@ -41,6 +60,13 @@ record EmbodiedHyperformalismRegression : Set where
     recoveryRetainsHistory :
       Branch.history (Branch.recover Branch.mobilisedBranchState)
       ≡ Branch.history Branch.mobilisedBranchState
+
+    alarmSupervoxelContainsDistinctPhysiology :
+      Felt.alarmCubieMobilised ≡ Felt.alarmCubieProlonged → ⊥
+
+    samePhysiologyDifferentPriorChangesFeeling :
+      Felt.feltProjection Felt.alarmCubieMobilised
+      ≡ Felt.feltProjection Felt.samePhysiologySafetyPrior → ⊥
 
     sameWaveDifferentBodyChangesEffectiveGate :
       Topo.combinedGate Topo.regulatedTopology Cross.betaLow
@@ -58,6 +84,10 @@ record EmbodiedHyperformalismRegression : Set where
     bodyModulatesMoreThanAccess :
       Controls.decisionThreshold Controls.regulatedControls
       ≡ Controls.decisionThreshold Controls.mobilisedControls → ⊥
+
+    bodyAlsoModulatesMemoryRetrieval :
+      Controls.memoryRetrievalGain Controls.regulatedControls
+      ≡ Controls.memoryRetrievalGain Controls.mobilisedControls → ⊥
 
     verticalRegulationPreservesWorld :
       Cone.world (Cone.regulate Cone.mobilisedConstrained)
@@ -98,10 +128,18 @@ canonicalEmbodiedHyperformalismRegression = record
       Reach.sameWorldButBodyChangesAccessiblePlanning
   ; twoBoundarySectionHasDistinctIntermediateRoutes =
       Two.samePastAndFutureAdmitDistinctIntermediateCells
+  ; sameFutureDifferentEmbodiedHistoryChangesSection =
+      Two.sameFutureDifferentEmbodiedHistoryChangesSection
+  ; resourceRepairWidensWithoutHistoryErasure = Repair.resourceRepairWidensCorridor
+  ; futureModelRepairWidensWithoutHistoryErasure = Repair.futureModelRepairWidensCorridor
+  ; couplingRepairWidensWithoutHistoryErasure = Repair.couplingRepairWidensCorridor
   ; sameWorldGoalHistoryDifferentFeltState =
       Branch.sameWorldGoalHistoryDifferentFeltState
   ; recoveryRetainsHistory =
       Branch.recoveryPreservesHistory Branch.mobilisedBranchState
+  ; alarmSupervoxelContainsDistinctPhysiology = Felt.sameAlarmDifferentPhysiology
+  ; samePhysiologyDifferentPriorChangesFeeling =
+      Felt.samePhysiologyDifferentPriorChangesFeltState
   ; sameWaveDifferentBodyChangesEffectiveGate =
       Topo.sameWaveDifferentBodyChangesGate
   ; cvRecoveredTwoDistinctIntermediateRoutes =
@@ -111,6 +149,7 @@ canonicalEmbodiedHyperformalismRegression = record
   ; cvRecoveredContractedOccupancyBottleneck =
       CV.recoveredContractedBranchIsOccupancyBottleneck
   ; bodyModulatesMoreThanAccess = Controls.thresholdStillDiffers
+  ; bodyAlsoModulatesMemoryRetrieval = Controls.memoryRetrievalStillDiffers
   ; verticalRegulationPreservesWorld =
       Cone.verticalRegulationPreservesWorld Cone.mobilisedConstrained
   ; horizontalActionCanChangeWorld = Cone.horizontalLeaveChangesWorld
