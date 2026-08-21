@@ -4,184 +4,278 @@
 
 Levent Alpöge and Ralph Furman, **“More than two thirds of the zeta zeros are simple and on the critical line”**, arXiv:2608.13637 (2026). DOI: `10.48550/arXiv.2608.13637`.
 
-Machine-checked companion consulted for the exact zero-side block decomposition: Anthropic, `zeta-23-lean`, especially `Zeta23/ZeroSide.lean` (2026, Apache-2.0).
+Machine-checked companion consulted for the exact zero-side block decomposition and test-family formulas: Anthropic, `zeta-23-lean` (2026, Apache-2.0), especially `Zeta23/Defs.lean`, `Zeta23/Poisson.lean`, `Zeta23/Hypotheses/GzGp.lean`, `Zeta23/ZeroSide.lean`, and `Zeta23/ZeroSide/RankTraceMult.lean`.
 
-This tranche is source-calibrated to the 2026 rank/trace + Sylvester-inertia argument, but it does not claim to reprove the paper's analytic Weil-form estimates or the Riemann hypothesis.
+This tranche is source-calibrated to the 2026 rank/trace + Sylvester-inertia argument. It does not claim RH.
 
-## 1. Centre the functional-equation reflection
+## 1. Reflection quotient
 
-Write a hypothetical nontrivial zero as
-
-\[
-\rho = \frac12 + \alpha + i\gamma.
-\]
-
-The functional-equation partner at the same ordinate is
+Write
 
 \[
-1-\overline\rho = \frac12-\alpha+i\gamma.
+\rho=\frac12+\alpha+i\gamma,
+\qquad
+1-\bar\rho=\frac12-\alpha+i\gamma.
 \]
 
 Thus the transverse coordinate carries the involution
 
 \[
-\alpha\longleftrightarrow-\alpha.
+\alpha\leftrightarrow-\alpha.
 \]
 
-`RiemannReflectionOrbitDefectExact.agda` isolates exactly this geometry in a finite/discrete carrier:
+`RiemannReflectionOrbitDefectExact.agda` constructs a finite theorem-bearing model with one critical fixed centre and left/right inverse-oriented states. Its quotient forgets orientation while retaining magnitude and squared defect. It proves reflection involutivity, uniqueness of the fixed centre, reflection invariance of the defect, zero defect only at the centre, and exact finite left/right pair-count identities.
 
-```text
-criticalCentre
-left magnitude  <->  right magnitude
-```
+## 2. What bare inertia sees — and what it loses
 
-with a unique fixed centre.  The quotient forgets left/right orientation while retaining magnitude, and its first nontrivial residual is the squared defect
-
-\[
-\delta = \alpha^2
-\]
-
-in the analytic interpretation.  The Agda carrier uses natural-number magnitudes deliberately; it is a theorem-bearing orbit model, not a model of the actual real parts of zeta zeros.
-
-The module proves:
-
-```text
-reflection is involutive
-reflection-fixed => critical centre
-orbit magnitude is reflection invariant
-squared defect is reflection invariant
-zero squared defect => critical centre
-left count = right count for every paired finite population
-nonfixed count = left count + right count = 2 * pair count
-```
-
-The small `4 fixed + 1 inverse pair = 6 total` checksum records the exact `2/3` finite geometry only.  The asymptotic theorem remains analytic authority from Alpöge--Furman.
-
-## 2. Inverse pairing kills orientation, not every residual
-
-`RiemannReflectionPairBlockExact.agda` provides a deliberately elementary swap-symmetric diagnostic block
-
-\[
-B(m)=\begin{pmatrix}0&m\\m&0\end{pmatrix}.
-\]
-
-Its trace-like observable is zero for every inverse pair, while the squared off-diagonal observable is `m^2`.  The exact finite falsifier is:
-
-```text
-near pair: trace = 0, defect = 1
-far pair:  trace = 0, defect = 9
-```
-
-Hence a symmetric quotient can legitimately erase orientation while retaining a consumer-relevant defect.  This is a generic algebraic diagnostic only; `B(m)` is **not** asserted to be the paper's Weil block.
-
-## 3. What the actual 2026 inertia argument sees
-
-The source-native off-line contribution is sharper and also exposes an obstruction.
-
-For one representative of an off-line pair, write its complex evaluation vector as
+For one representative of an off-line pair, the verified source writes the evaluation vector
 
 \[
 u=x+iy.
 \]
 
-The verified zero-side source records the paired bilinear contribution as
+The pair contributes
 
 \[
-m\bigl(uu^T+\overline u\,\overline u^T\bigr)
-  = 2m\bigl(xx^T-yy^T\bigr).
+m\bigl(uu^T+\bar u\,\bar u^T\bigr)
+ =2m\bigl(xx^T-yy^T\bigr).
 \]
 
-Thus the pair is a difference of two positive rank-one forms: a pullback of a two-dimensional hyperbolic form of signature \((1,1)\).  In the formal companion this appears as the `rePart - imPart` decomposition, followed by the theorem
+Hence each off-line pair is a pullback of a hyperbolic source form with one positive and one negative channel. The companion proof obtains
 
 ```text
 n_+(Q) <= p
 ```
 
-for `p` unordered off-line reflection pairs.  Sylvester inertia therefore implies that the pulled-back contribution costs **at most one positive direction per off-line pair**.
+for `p` unordered off-line pairs.
 
-`RiemannWeilOffLineHyperbolicBlockExact.agda` formalizes the finite signature ledger:
+`RiemannWeilOffLineHyperbolicBlockExact.agda` formalizes this signature ledger and proves a no-factor theorem: the fixed/pair signature does not determine squared displacement. Two inverse-pair states may share the same signature code while carrying defects `1` and `9`. Therefore the present inertia count controls how many positive directions unresolved pairs can cost, but not how far those pairs lie from the critical line.
 
-```text
-one off-line pair -> source signature (1 positive, 1 negative)
-#off = 2 * pairCount
-source positive-index budget = pairCount
-source negative-index budget = pairCount
-```
+## 3. First source-facing displacement-sensitive producer: complex Poisson energy
 
-### Crucial result: the current inertia budget is displacement-blind
-
-The same module proves a genuine no-factor theorem.
-
-Two inverse-pair states may have different squared defects, for example `1` and `9`, while the bare source signature observer sends both to the same non-fixed-pair code.  Therefore there is no function
-
-```text
-source signature -> squared defect
-```
-
-that reconstructs the defect on all reflection states.
-
-This means the current Alpöge--Furman inertia count does **not** give an \(\sum \alpha^2\) or higher transverse-moment bound for free.  It controls **how many positive directions an unresolved pair can cost**, not how far the pair sits from the critical line.
-
-That distinction is the main mathematical advance of this implementation pass: it turns a tempting analogy into an explicit theorem-level obstruction.
-
-## 4. Monster C3 cross-pollination: orbit shape only
-
-`RiemannReflectionC3OrbitShapeBridgeExact.agda` reuses the existing exact Monster/C3 cyclotomic carrier:
+The companion definitions make the missing variable unusually explicit:
 
 \[
-1+\zeta+\zeta^2=0,
+\gamma_\rho
+ =\frac{\rho-1/2}{i}
+ =\gamma-i\alpha,
 \qquad
-\zeta^{-1}=\zeta^2.
+v_\rho(k)=\widehat\phi(\gamma_\rho-\tau_k).
 \]
 
-The common orbit shape is
+Its Poisson module proves, for real arguments,
+
+\[
+\sum_{k\in\mathbb Z}
+\widehat\phi(\tau-\tau_k)
+\widehat\phi(\tau'-\tau_k)
+=L\Phi(\tau-\tau'),
+\]
+
+and explicitly notes that the complex continuation mentioned in the paper is not needed by the published proof.
+
+If this identity is continued to the required complex arguments, two very different diagonal observables appear.
+
+### 3.1 Holomorphic/bilinear square: baseline-blind to displacement
+
+Taking the same complex argument twice gives schematically
+
+\[
+\sum_k v_\rho(k)^2=L\Phi(0)=aL^2.
+\]
+
+This is the analytic/bilinear quantity naturally aligned with the usual Weil matrix. It is constant along the transverse displacement in the ideal full-grid identity.
+
+### 3.2 Hermitian square: quantitatively displacement-sensitive
+
+Pairing the argument with its conjugate instead gives
+
+\[
+\sum_k|v_\rho(k)|^2
+=L\Phi(\gamma_\rho-\bar\gamma_\rho)
+=L\Phi(-2i\alpha).
+\]
+
+Because `phi` is real and even,
+
+\[
+\Phi(-2i\alpha)
+ =\int \phi(u)^2 e^{2\alpha u}\,du
+ =\int \phi(u)^2\cosh(2\alpha u)\,du.
+\]
+
+Therefore
+
+\[
+\sum_k|v_\rho(k)|^2-aL^2
+ =L\int \phi(u)^2\bigl(\cosh(2\alpha u)-1\bigr)\,du
+\ge
+2L\alpha^2\int u^2\phi(u)^2\,du,
+\]
+
+using `cosh x - 1 >= x^2/2`.
+
+This is exactly the shape sought in the previous frontier:
+
+\[
+\boxed{
+D(\rho)\ge c_\phi L\,|\beta-1/2|^2,
+\qquad
+D(\rho)=D(1-\bar\rho).
+}
+\]
+
+The remaining work is to prove the complex continuation and transport enough of this Hermitian information through the finite compression and arithmetic side.
+
+## 4. Exact local block consequence
+
+`RiemannComplexPoissonPairEnergyExact.agda` closes the local algebra without pretending the analytic promotion is already proved.
+
+Write
+
+\[
+A=\|x\|^2,
+\qquad B=\|y\|^2,
+\qquad C=\sum_kv_k^2.
+\]
+
+If the complex-square identity fixes `C` as a real baseline, then `x·y=0` and
+
+\[
+A-B=C,
+\qquad A=C+B.
+\]
+
+For the paired block
+
+\[
+Q_\rho=2m(xx^T-yy^T),
+\]
+
+orthogonality gives
+
+\[
+\|Q_\rho\|_F^2
+ =4m^2(A^2+B^2).
+\]
+
+The critical-line baseline is `B=0`, hence
+
+\[
+\|Q_{\rho,\mathrm{crit}}\|_F^2=4m^2C^2,
+\]
+
+and the exact excess is
+
+\[
+\boxed{
+\|Q_\rho\|_F^2-4m^2C^2
+ =8m^2BA.
+}
+\]
+
+The Agda module proves this as a polynomial identity and includes separating checks: with the same multiplicity and same holomorphic baseline, two pair ledgers have Hermitian energies `3` versus `7`, Frobenius squares `20` versus `100`, and excesses `16` versus `96`.
+
+It also proves a second no-factor theorem:
 
 ```text
-C3:   identity fixed + {zeta, zeta^-1}
-zeta: critical centre + {left magnitude, right magnitude}
+holomorphic baseline -> Hermitian energy
 ```
 
-or abstractly
+cannot exist as a universal decoder. The bilinear/holomorphic observer has genuinely quotiented out information that the Hermitian observer retains.
+
+So the new bottleneck is sharper than “find a defect”:
+
+\[
+\boxed{
+\text{transport the Hermitian residual to an arithmetic-controlled observable.}
+}
+\]
+
+## 5. Why the existing rank–trace inequality is nearby but not yet enough
+
+The companion `ZeroSide/RankTraceMult.lean` proves the multiplicity-aware inequality
+
+\[
+\|P+Q\|_F^2
+\ge
+c\,\mathrm{tr}P
++\sum_jg_c(m_jx_j)
++2c\,\mathrm{tr}Q
+-c^2b,
+\]
+
+with
+
+\[
+g_c(x)=x^2-cx-((x-c)_+)^2.
+\]
+
+This is promising because it already consumes rank-one norm data and Frobenius information. But in the published decomposition the off-line pairs sit in the indefinite `Q`, and only their positive-index budget survives into the final estimate. The displacement-sensitive Hermitian norm is not presently exposed as a separate controlled term.
+
+A successful refinement must therefore do at least one of:
+
+1. refine the decomposition so an off-line Hermitian residual survives the scalar/rank–trace step;
+2. derive an independent prime-side bound for a sesquilinear/Hermitian companion form;
+3. prove an almost-orthogonality inequality that converts the sum of local pair-energy excesses into a controlled part of the global Frobenius norm.
+
+The existing pair-ceiling and weighted-end machinery controls bandwidth-one pair-correlation laws and `psi`-weighted tail/endpoint errors, but it does not by itself identify the transverse Hermitian defect above. Its value for this lane is likely in the finite-grid/interference estimates, not as an automatic RH promotion.
+
+## 6. Ramanujan/Hecke cross-pollination at the correct level
+
+The repository's `RamanujanTauHecke23Exact.agda` provides exact local compatibility examples such as
+
+\[
+\tau(9)=\tau(3)^2-3^{11},
+\qquad
+\tau(27)=\tau(3)^3-2\,3^{11}\tau(3).
+\]
+
+The relevant lesson is architectural: local spectral data can be forced into a globally rigid compatible family. It does **not** supply a zeta-zero location theorem by analogy.
+
+For this zeta lane the corresponding bridge must be an actual intertwiner:
+
+\[
+\text{Hermitian zero defect}
+\longleftrightarrow
+\text{explicit-formula / prime observable},
+\]
+
+followed by an arithmetic rigidity/coercivity estimate. DASHI already has the terminal composition in `RiemannArithmeticCoercivity.agda` and `RiemannMillenniumAssembly.agda`: once an exact positive arithmetic decomposition is available, explicit-formula transport plus the Weil criterion yields RH. The new work should feed that existing terminal route rather than create a parallel prize claim.
+
+## 7. Current exact frontier
+
+The highest-alpha proof programme is now:
+
+\[
+\boxed{
+\begin{array}{c}
+\text{complex Gabor/Poisson continuation}\\
+\Downarrow\\
+D_{\mathrm{full}}(\rho)
+ =L\int\phi^2(\cosh(2\alpha u)-1)\\
+\ge 2L\alpha^2\int u^2\phi^2\\
+\Downarrow\\
+\text{finite-grid retention + pair/interference control}\\
+\Downarrow\\
+\text{Hermitian-to-arithmetic transport}\\
+\Downarrow\\
+\text{positive arithmetic decomposition / vanishing defect}\\
+\Downarrow\\
+\alpha=0\ \text{for every zero.}
+\end{array}}
+}
+\]
+
+The first genuinely displacement-sensitive candidate has therefore been identified. The open mathematical burden is no longer the orbit algebra or bare inertia; it is the three analytic arrows after the full-grid identity.
+
+Current fail-closed status remains:
 
 ```text
-one fixed sector + one inverse-oriented pair role.
-```
-
-The bridge proves only this action/orbit-role correspondence.  It explicitly blocks:
-
-```text
-Monster carrier = zeta-zero carrier
-cyclotomic cancellation = Weil inertia
-Monster phase data => Riemann-zero location
-```
-
-There is also a structural difference worth retaining: C3 has only one nontrivial inverse orbit, whereas the zeta reflection quotient can retain a continuum of magnitudes in the analytic setting.  Therefore the C3 analogy motivates the fixed-plus-inverse-pair organization but does not supply the missing displacement observable.
-
-Existing C3 sources remain those already attached to `MonsterC3CyclotomicEvaluationExact.agda`: I. M. Isaacs, *Character Theory of Finite Groups* (no DOI assigned), and Audrey Terras, *Fourier Analysis on Finite Groups and Applications*, DOI `10.1017/CBO9780511626265`.
-
-## 5. Exact next frontier
-
-The current implementation narrows the next high-alpha question to one source-facing producer:
-
-> Find an analytic observable of the actual off-line Weil pair that is reflection invariant **and** quantitatively sensitive to \(|\beta-1/2|\), then prove that the rank/trace or Hilbert--Schmidt machinery controls its aggregate.
-
-The typed `DistanceSensitiveOffLineAdapter` records the minimum bridge data needed before such a promotion is legitimate.
-
-A successful strengthening would need more than the bare hyperbolic signature.  Candidate directions include:
-
-1. inspect whether the norms, Gram determinants, singular values, or Hilbert--Schmidt contributions of the **actual** evaluation vectors retain transverse displacement after the reflection pair is assembled;
-2. connect any such invariant to the explicit-formula kernel strongly enough to sum it over zeros;
-3. determine whether the bandwidth/support restrictions of the present pair-correlation input prevent a weighted improvement just as they constrain the counting route;
-4. only then formulate a weighted even-moment target such as a controlled version of
-   \[
-   \sum_{|\gamma|\le T}(\beta-1/2)^2.
-   \]
-
-Until that analytic producer exists, the repository keeps
-
-```text
-weighted transverse moment bound = false
+complex Poisson continuation = not yet proved here
+finite-grid retention = not yet proved here
+cross-pair interference = not yet controlled here
+Hermitian/arithmetic transport = not yet constructed here
+weighted transverse moment theorem = false
 RH proved here = false
 ```
-
-while retaining the exact orbit, quotient, no-factor, and source-signature mathematics already closed.
