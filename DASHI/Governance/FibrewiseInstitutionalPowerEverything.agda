@@ -10,12 +10,14 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
+import DASHI.Core.IntersectionalNonFactorability as NF
 import DASHI.Core.ObserverRefinementLatticeExact as Observer
 import DASHI.Governance.AuthorityMandateCore as Authority
 import DASHI.Governance.ContestedAmbientAuthorityHyperformalismExact as Ambient
 import DASHI.Governance.ContestedJurisdictionPermissionExact as Jurisdiction
 import DASHI.Governance.EpistemicCaptureProfessionalClosureExact as Capture
 import DASHI.Governance.EpistemicErrorAllocationChillingBridgeExact as ErrorAllocation
+import DASHI.Governance.HyperformalNonFactorabilityTransportExact as NFTransport
 import DASHI.Governance.HyperformalTernaryCarrierEquivalenceExact as Ternary
 import DASHI.Governance.InstitutionPreservingRechartAntiSublationExact as Rechart
 import DASHI.Governance.InstitutionalNoticeActuationCulpabilityExact as Notice
@@ -145,6 +147,13 @@ regressionEpistemicBase369RoundTrip :
   Ternary.base369ToEpistemic9 (Ternary.epistemic9ToBase369 state) ≡ state
 regressionEpistemicBase369RoundTrip = Ternary.epistemic9Base369RoundTrip
 
+regressionExactRechartDoesNotRepairFlattenedRelation :
+  NF.FactorsThrough
+    NFTransport.base369PresentProjection
+    NFTransport.base369HistorySensitiveOutcome → ⊥
+regressionExactRechartDoesNotRepairFlattenedRelation =
+  NFTransport.base369PresentCannotDetermineHistoryOutcome
+
 record FibrewiseInstitutionalPowerBoundary : Set where
   constructor fibrewiseInstitutionalPowerBoundary
   field
@@ -169,6 +178,7 @@ record FibrewiseInstitutionalPowerBoundary : Set where
     sanctionAutomaticallyTeachesFineRule : Bool
     ternaryCarrierEquivalenceCreatesSemanticIdentity : Bool
     monsterProjectionCreatesCarrierEquivalence : Bool
+    exactRechartRepairsErasedConsumerRelation : Bool
     declaredPolicyCanGiveExactEpistemicTernaryRechart : Bool
     residualAndExteriorMustRemainReopenableOrPresent : Bool
 
@@ -176,4 +186,4 @@ canonicalFibrewiseInstitutionalPowerBoundary : FibrewiseInstitutionalPowerBounda
 canonicalFibrewiseInstitutionalPowerBoundary =
   fibrewiseInstitutionalPowerBoundary
     false false false false false false false false false false false false
-    false false false false false false false false false true true
+    false false false false false false false false false false true true
