@@ -6,7 +6,7 @@ module DASHI.Analysis.ZetaTheoremSurface where
 -- with the 3-adic geometric-series distinction, finite prime-counting and
 -- prime-power arithmetic, the fail-closed analytic promotion gate, the
 -- modular Millennium-level DASHI-to-Weil-square theorem ladder, and the 2026
--- reflection-orbit quotient/defect algebra motivated by Alpöge--Furman.
+-- reflection-orbit / Hermitian-defect architecture motivated by Alpöge--Furman.
 
 open import DASHI.Analysis.AbelZeta public
 open import DASHI.Analysis.ZetaVisualization public
@@ -15,17 +15,6 @@ open import DASHI.Analysis.RiemannZetaProgramBoundary public
 open import DASHI.Analysis.RiemannAnalyticSubstrate public
 open import DASHI.Analysis.WeilTestSpace public
 
--- 2026 reflection-orbit / inverse-pair lane.  The first two modules construct
--- exact finite/discrete orbit algebra and residual diagnostics.  The
--- hyperbolic module records the source-native off-line pair signature used by
--- Alpöge--Furman's inertia argument and proves that this bare signature cannot
--- determine transverse squared defect.  The complex-Poisson pair-energy module
--- closes the exact local Frobenius algebra for a displacement-sensitive
--- full-grid candidate.  The pair-kernel Frobenius module then proves that the
--- corresponding Hermitian kernel is already latent in the nonlinear
--- Frobenius square, while off-diagonal interference can have negative sign.
--- Analytic continuation, finite-grid retention, and interference domination
--- remain explicit authority boundaries.
 open import DASHI.Analysis.RiemannReflectionOrbitDefectExact public
 open import DASHI.Analysis.RiemannReflectionPairBlockExact public
 open import DASHI.Analysis.RiemannWeilOffLineHyperbolicBlockExact public
@@ -76,7 +65,21 @@ open import DASHI.Analysis.RiemannComplexPoissonPairEnergyExact public
     ; ComplexPoissonPairEnergyBoundary
     ; complexPoissonPairEnergyBoundary
     )
+
+-- Qualified 2026 frontier modules.  Keeping these qualified avoids projection
+-- collisions while making every analytic seam part of the canonical zeta API.
+import DASHI.Analysis.RiemannComplexPoissonChannelSplitExact
+import DASHI.Analysis.RiemannComplexPoissonFiniteRetentionExact
 import DASHI.Analysis.RiemannWeilPairKernelFrobeniusExact
+import DASHI.Analysis.RiemannMixedChannelAlmostOrthogonalityExact
+import DASHI.Analysis.RiemannPrimeSideExcessNormalizationExact
+import DASHI.Analysis.RiemannHermitianDefectAssemblyExact
+import DASHI.Analysis.RiemannHermitianDetectabilityGapExact
+import DASHI.Analysis.RiemannHermitianPowerAmplificationExact
+import DASHI.Analysis.RiemannHermitianLocalizationAmplificationExact
+import DASHI.Analysis.RiemannArithmeticUnitarityRigidityBoundary
+import DASHI.Analysis.RiemannHermitianEndgameTrichotomyExact
+import DASHI.Analysis.RiemannHermitianDreamRouteExact
 import DASHI.Analysis.RiemannReflectionC3OrbitShapeBridgeExact
 
 open import DASHI.Analysis.PrimeCountingFunction public
@@ -167,9 +170,6 @@ open import DASHI.Analysis.DashiWeightedValuationSquareCoercivity public
     ; weightedValuationCoercivityImpliesRH
     )
 
--- Detailed arithmetic, algorithmic, analytic, transform, square-coercivity,
--- reflection/C3 comparison, and regression modules stay qualified here to
--- avoid exporting local helper combinators and overlapping projection names.
 import DASHI.Analysis.NatPrimeCountingExamples
 import DASHI.Analysis.RiemannVonMangoldtSpecification
 import DASHI.Analysis.RiemannVonMangoldtPrimeSide
@@ -185,7 +185,4 @@ import DASHI.Analysis.RiemannExplicitFormulaComponents
 import DASHI.Analysis.RiemannWeilSquareCriterion
 import DASHI.Analysis.RiemannWeilSquareCoercivity
 import DASHI.Analysis.ZetaModularRegression
-
--- Retained for direct qualified imports by older callers, but not opened here:
--- its monolithic projections overlap names from the modular theorem ladder.
 import DASHI.Analysis.DashiWeilRiemannBridge
