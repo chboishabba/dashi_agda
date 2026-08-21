@@ -2,8 +2,11 @@ module DASHI.Biology.WaveControlledCoalitionBridgeExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
+open import Data.Empty using (⊥)
 
 import DASHI.Biology.ConsciousAccessCoalition as Coalition
+import DASHI.Biology.Levin.TravelingFieldControl as Field
 import DASHI.Biology.Levin.MillerTravelingWaveAccessProducerExact as Miller
 import DASHI.Biology.Levin.CrossFrequencyEffectiveTopologyExact as CrossFrequency
 import DASHI.Biology.Levin.WaveInterferenceRecruitmentExact as Interference
@@ -22,22 +25,21 @@ record WaveSupportedAccessCandidate : Set₁ where
     accessCoalition : Coalition.ConsciousAccessCoalition
     fastAccessField : Access.FastAccessControlField
     movingField :
-      DASHI.Biology.Levin.TravelingFieldControl.TravelingFieldSystem
-        Miller.Site2 Miller.Tick2 Miller.Phase2
-        Agda.Builtin.Nat.Nat Bool
+      Field.TravelingFieldSystem
+        Miller.Site2 Miller.Tick2 Miller.Phase2 Nat Bool
     coalitionCriteriaHold :
       Coalition.criteriaSatisfied (Coalition.criteria accessCoalition) ≡ true
     movingSupportChanges :
       Miller.recruitedAt Miller.firstTick Miller.leftSite
       ≡ Miller.recruitedAt Miller.secondTick Miller.leftSite →
-      Data.Empty.⊥
+      ⊥
     phaseCanChangeRecruitment :
       Interference.nonzeroRecruit
         (Interference.combinedAmplitude Interference.one Interference.inPhase)
       ≡
       Interference.nonzeroRecruit
         (Interference.combinedAmplitude Interference.one Interference.antiPhase) →
-      Data.Empty.⊥
+      ⊥
     candidateOnly : Coalition.candidateOnly accessCoalition ≡ true
     accessTheoryOnly : Coalition.accessTheoryOnly accessCoalition ≡ true
     phenomenalIdentityBlocked :
