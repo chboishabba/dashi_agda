@@ -64,23 +64,27 @@ jobs:
       - uses: cachix/install-nix-action@v31
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Check symmetry-aware introspection receipt boundary
+      - name: Reproduce symmetry-aware introspection from pixels
         shell: bash
         run: |
           set -euo pipefail
+          python3 -m pip install --disable-pip-version-check --quiet numpy opencv-python-headless
+          python3 scripts/introspective_embodied_hyperfabric_v3.py > introspective-v3.log
           python3 - <<'PY'
           import json
-          p='artifacts/introspective-embodied-hyperfabric-opencv-v3.json'
-          d=json.load(open(p))
-          assert d['observed_supervoxel_count'] == 4
-          assert d['observed_fibres_per_supervoxel'] == [3,1,2,3]
-          assert d['observed_edges'] == [[0,1],[0,2],[1,3],[2,3]]
-          assert d['source_like_route_recovered'] is True
-          assert d['rotational_route_recovered'] is True
-          assert d['biology_inferred_from_pixels'] is False
-          assert d['phenomenal_consciousness_inferred_from_pixels'] is False
-          assert d['mode_observations'][0]['recovered_vector_count'] == 4
-          assert d['mode_observations'][1]['recovered_vector_count'] == 4
+          committed=json.load(open('artifacts/introspective-embodied-hyperfabric-opencv-v3.json'))
+          recovered=json.load(open('artifacts/introspective-embodied-hyperfabric-v3/opencv_symmetry_observations.json'))
+          exact_keys=['observed_supervoxel_count','observed_fibres_per_supervoxel','observed_edges',
+                      'source_like_route_recovered','rotational_route_recovered',
+                      'biology_inferred_from_pixels','phenomenal_consciousness_inferred_from_pixels']
+          for key in exact_keys:
+              assert recovered[key] == committed[key], (key,recovered[key],committed[key])
+          assert len(recovered['mode_observations']) == len(committed['mode_observations']) == 2
+          for got,want in zip(recovered['mode_observations'],committed['mode_observations']):
+              for key in ['box','recovered_vector_count','chirality','gate_class']:
+                  assert got[key] == want[key], (key,got[key],want[key])
+              for key in ['divergence_proxy','curl_proxy','orientation_angle_deg','gate_fill_ratio']:
+                  assert abs(got[key]-want[key]) <= 0.01, (key,got[key],want[key])
           PY
       - name: Check embodied hyperformalism roots
         id: focused
@@ -112,7 +116,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: embodied-hyperformalism-agda-log
-          path: embodied-hyperformalism-check.log
+          path: |
+            embodied-hyperformalism-check.log
+            introspective-v3.log
           if-no-files-found: error
       - name: Fail on Agda error
         if: steps.focused.outputs.status != '0'
