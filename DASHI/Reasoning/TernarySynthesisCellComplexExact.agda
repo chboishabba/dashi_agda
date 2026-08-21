@@ -20,6 +20,7 @@ module DASHI.Reasoning.TernarySynthesisCellComplexExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Sigma using (_,_)
 
 import Base369 as Base
 import DASHI.Interop.PNFHodgeResidualTopology as Hodge

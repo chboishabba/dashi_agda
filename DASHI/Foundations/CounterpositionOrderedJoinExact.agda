@@ -83,8 +83,8 @@ invertDigitInvolutive BT.zeroDigit = refl
 invertDigitInvolutive BT.pos = refl
 
 strictInverseInvolutive :
-  (pattern : BT.TriadPattern) →
-  BT.strictInverse (BT.strictInverse pattern) ≡ pattern
+  (pat : BT.TriadPattern) →
+  BT.strictInverse (BT.strictInverse pat) ≡ pat
 strictInverseInvolutive (BT.triad first second third)
   rewrite invertDigitInvolutive first
         | invertDigitInvolutive second
