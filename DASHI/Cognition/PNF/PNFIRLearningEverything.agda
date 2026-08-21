@@ -21,6 +21,8 @@ import DASHI.Cognition.PNF.DecisionPotentialFibreExact
 import DASHI.Cognition.PNF.FiniteExpectedDecisionPotentialExact
 import DASHI.Cognition.PNF.UnifiedDecisionDynamicsExact
 import DASHI.Cognition.PNF.BoundedEvidenceCommitmentExact
+import DASHI.Cognition.PNF.NeuromodulatedCommitmentThresholdExact
+import DASHI.Cognition.PNF.DecisionConfidenceNoncollapseExact
 import DASHI.Cognition.PNF.GoNoGoActuationGateExact
 import DASHI.Cognition.PNF.NoncommutativeDecisionUpdateQQExact
 import DASHI.Cognition.PNF.ActiveInferenceFibreBoundaryExact
