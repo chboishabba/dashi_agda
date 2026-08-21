@@ -1,6 +1,6 @@
 module DASHI.Biology.InteroceptiveRefreshCalibrationExact where
 
-open import Agda.Builtin.Bool using (Bool; false)
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 
@@ -29,4 +29,4 @@ record InteroceptiveRefreshBoundary : Set where
 
 canonicalInteroceptiveRefreshBoundary : InteroceptiveRefreshBoundary
 canonicalInteroceptiveRefreshBoundary =
-  interoceptiveRefreshBoundary false false
+  interoceptiveRefreshBoundary false true
