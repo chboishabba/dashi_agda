@@ -7,7 +7,7 @@ on:
     paths:
       - 'DASHI/Biology/**'
       - 'DASHI/Mathematics/NumberTheory/RiemannReflectionOrbitDefectExact.agda'
-      - 'Docs/support/reference/ConsciousAccessRound10WaveSymmetryFormalism.md'
+      - 'Docs/support/reference/ConsciousAccessRound11WaveSymmetryFormalism.md'
       - 'scripts/check_conscious_access_round11_wave_symmetry.sh'
       - '.github/workflows/conscious-access-round11-wave-symmetry.yml'
   workflow_dispatch:
