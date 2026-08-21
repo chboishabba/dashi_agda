@@ -6,14 +6,14 @@ open import Agda.Builtin.Sigma using (Σ; _,_)
 open import Agda.Builtin.String using (String)
 open import Agda.Builtin.Unit using (⊤; tt)
 
-infix 4 _≢_
-_≢_ : ∀ {A : Set} → A → A → Set
-x ≢ y = x ≡ y → ⊥
-
 data ⊥ : Set where
 
 ¬_ : Set → Set
 ¬ A = A → ⊥
+
+infix 4 _≢_
+_≢_ : ∀ {A : Set} → A → A → Set
+x ≢ y = x ≡ y → ⊥
 
 data ComparisonResult : Set where
   agrees              : ComparisonResult
