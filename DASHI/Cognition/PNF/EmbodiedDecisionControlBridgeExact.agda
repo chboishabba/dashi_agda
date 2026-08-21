@@ -1,6 +1,6 @@
 module DASHI.Cognition.PNF.EmbodiedDecisionControlBridgeExact where
 
-open import Agda.Builtin.Bool using (Bool; false)
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 open import Data.Product using (_×_; _,_)
@@ -10,15 +10,6 @@ import DASHI.Cognition.PNF.AccessibleCandidateReasoningPipelineExact as Access
 import DASHI.Cognition.PNF.DecisionConfidenceNoncollapseExact as Confidence
 import DASHI.Cognition.PNF.DecisionPotentialFibreExact as Potential
 import DASHI.Cognition.PNF.NeuromodulatedCommitmentThresholdExact as Threshold
-
-------------------------------------------------------------------------
--- B_t -> I_t -> P_t -> (A_{t+1}, Theta_{t+1}, Phi_{t+1}, Q candidate)
---
--- This is the exact finite composition missing between the existing embodied
--- interoception loop and the decision-fibre controls.  It is a candidate
--- producer: no physiological variable is promoted to a deterministic law of
--- real human choice, stress, diagnosis or confidence.
-------------------------------------------------------------------------
 
 record DecisionControlSurface : Set where
   constructor decisionControlSurface
@@ -32,23 +23,14 @@ open DecisionControlSurface public
 
 controlFromFeeling : Embodied.FeltState → DecisionControlSurface
 controlFromFeeling Embodied.settledFeeling =
-  decisionControlSurface
-    Access.broadenedAccess
-    Threshold.lowerThreshold
-    Potential.ordinaryContext
-    Confidence.highConfidence
+  decisionControlSurface Access.broadenedAccess Threshold.lowerThreshold
+    Potential.ordinaryContext Confidence.highConfidence
 controlFromFeeling Embodied.activatedFeeling =
-  decisionControlSurface
-    Access.broadenedAccess
-    Threshold.lowerThreshold
-    Potential.ordinaryContext
-    Confidence.highConfidence
+  decisionControlSurface Access.broadenedAccess Threshold.lowerThreshold
+    Potential.ordinaryContext Confidence.highConfidence
 controlFromFeeling Embodied.alarmedFeeling =
-  decisionControlSurface
-    Access.narrowedAccess
-    Threshold.elevatedThreshold
-    Potential.threatContext
-    Confidence.lowConfidence
+  decisionControlSurface Access.narrowedAccess Threshold.elevatedThreshold
+    Potential.threatContext Confidence.lowConfidence
 
 feltFromBody : Embodied.InteroceptivePrior → Embodied.BodyState → Embodied.FeltState
 feltFromBody prior body =
@@ -59,31 +41,23 @@ bodyToDecisionControl :
 bodyToDecisionControl prior body = controlFromFeeling (feltFromBody prior body)
 
 sameMobilisedBodyDifferentPriorChangesControl :
-  accessMode
-    (bodyToDecisionControl Embodied.safetyPrior Embodied.mobilisedBody)
-  ≡ accessMode
-    (bodyToDecisionControl Embodied.threatPrior Embodied.mobilisedBody) → ⊥
+  accessMode (bodyToDecisionControl Embodied.safetyPrior Embodied.mobilisedBody)
+  ≡ accessMode (bodyToDecisionControl Embodied.threatPrior Embodied.mobilisedBody) → ⊥
 sameMobilisedBodyDifferentPriorChangesControl ()
 
 sameMobilisedBodyDifferentPriorChangesThreshold :
-  thresholdPolicy
-    (bodyToDecisionControl Embodied.safetyPrior Embodied.mobilisedBody)
-  ≡ thresholdPolicy
-    (bodyToDecisionControl Embodied.threatPrior Embodied.mobilisedBody) → ⊥
+  thresholdPolicy (bodyToDecisionControl Embodied.safetyPrior Embodied.mobilisedBody)
+  ≡ thresholdPolicy (bodyToDecisionControl Embodied.threatPrior Embodied.mobilisedBody) → ⊥
 sameMobilisedBodyDifferentPriorChangesThreshold ()
 
 sameMobilisedBodyDifferentPriorChangesPotential :
-  potentialContext
-    (bodyToDecisionControl Embodied.safetyPrior Embodied.mobilisedBody)
-  ≡ potentialContext
-    (bodyToDecisionControl Embodied.threatPrior Embodied.mobilisedBody) → ⊥
+  potentialContext (bodyToDecisionControl Embodied.safetyPrior Embodied.mobilisedBody)
+  ≡ potentialContext (bodyToDecisionControl Embodied.threatPrior Embodied.mobilisedBody) → ⊥
 sameMobilisedBodyDifferentPriorChangesPotential ()
 
 sameMobilisedBodyDifferentPriorChangesConfidenceCandidate :
-  confidenceCandidate
-    (bodyToDecisionControl Embodied.safetyPrior Embodied.mobilisedBody)
-  ≡ confidenceCandidate
-    (bodyToDecisionControl Embodied.threatPrior Embodied.mobilisedBody) → ⊥
+  confidenceCandidate (bodyToDecisionControl Embodied.safetyPrior Embodied.mobilisedBody)
+  ≡ confidenceCandidate (bodyToDecisionControl Embodied.threatPrior Embodied.mobilisedBody) → ⊥
 sameMobilisedBodyDifferentPriorChangesConfidenceCandidate ()
 
 interoceptiveControlIsMultiAxis :
@@ -107,4 +81,4 @@ record EmbodiedDecisionControlBoundary : Set where
 
 canonicalEmbodiedDecisionControlBoundary : EmbodiedDecisionControlBoundary
 canonicalEmbodiedDecisionControlBoundary =
-  embodiedDecisionControlBoundary false false false false
+  embodiedDecisionControlBoundary false false false true
