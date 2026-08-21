@@ -99,7 +99,6 @@ open import DASHI.Analysis.RiemannPrimePowerMangoldtIdentity public
     ; mangoldtLogQuotientTerm
     ; mangoldtLogQuotientSumLE
     ; mangoldtPrimePowerCount0
-    ; RiemannPrimePowerCountIdentity
     ; RiemannPrimePowerMangoldtIdentity
     ; RiemannPrimePowerMangoldtBoundary
     ; riemannPrimePowerMangoldtBoundary
