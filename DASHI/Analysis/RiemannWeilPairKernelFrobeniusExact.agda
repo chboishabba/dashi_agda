@@ -14,38 +14,25 @@ module DASHI.Analysis.RiemannWeilPairKernelFrobeniusExact where
 --
 -- DASHI CONTRIBUTION
 --
--- Make explicit the nonlinear kernel identity hidden when the paper passes
--- from the bilinear zero matrix to its Frobenius square.
---
 -- For u=a+i b and v=c+i d define
 --
 --   S = u^T v              (holomorphic/bilinear kernel),
---   H = u^T conjugate(v)   (Hermitian kernel).
+--   H = u^T conjugate(v)   (Hermitian kernel),
 --
--- Writing
---
---   p = a.c,  q = a.d,  r = b.c,  s = b.d,
---
--- gives
+-- and p=a.c, q=a.d, r=b.c, s=b.d.  Then
 --
 --   Re S = p-s,   Im S = q+r,
 --   Re H = p+s,   Im H = r-q.
 --
--- The paired real blocks are
+-- The nonlinear Frobenius cross term already contains both S and H.  The
+-- only sign-indefinite loss is N_uv=q^2+r^2.  This version also makes explicit
+-- the sharper kernel reduction
 --
---   Q_u = 2m (a a^T - b b^T),
---   Q_v = 2n (c c^T - d d^T),
+--   (Im S)^2 + (Im H)^2 = 2 N_uv,
 --
--- and their Frobenius cross term is
---
---   <Q_u,Q_v>_F
---     = 4mn (p^2-q^2-r^2+s^2)
---     = 2mn Re(S^2 + H^2).
---
--- Therefore the displacement-sensitive Hermitian kernel is ALREADY latent in
--- the nonlinear Frobenius quantity estimated on the prime side.  No new linear
--- explicit formula is required merely to make H appear.  The remaining issue
--- is sign/interference control of the off-diagonal pair terms.
+-- so after complex Poisson identifies S/H with difference/sum Phi-kernels,
+-- G2 becomes a kernel-decay/summability problem rather than an opaque vector
+-- interference problem.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -92,10 +79,6 @@ pairBlockCrossCore : PairCrossMoments → ℤ
 pairBlockCrossCore x =
   square (ac x) - square (ad x) - square (bc x) + square (bd x)
 
-------------------------------------------------------------------------
--- Exact kernel identity.
-------------------------------------------------------------------------
-
 holomorphicPlusHermitianSquaresExposePairCrossCore :
   (x : PairCrossMoments) →
   holomorphicSquareReal x + hermitianSquareReal x
@@ -112,27 +95,6 @@ holomorphicPlusHermitianSquaresExposePairCrossCore
         ((((p :* p) :- (q :* q)) :- (r :* r)) :+ (s :* s)))
     refl
     p q r s
-
-------------------------------------------------------------------------
--- Exact interference ledger.
---
--- The sign-indefinite part is not mysterious: it is exactly the two mixed
--- channels q=a.d and r=b.c.  Define
---
---   P = p^2+s^2,
---   N = q^2+r^2.
---
--- Then
---
---   pairBlockCrossCore + N = P,
---
--- and, after the S/H rewrite,
---
---   Re(S^2+H^2) + 2N = 2P.
---
--- Thus any analytic almost-orthogonality theorem only has to dominate the
--- aggregate mixed-channel budget N.  This is the exact algebraic loss socket.
-------------------------------------------------------------------------
 
 positiveAlignedChannelEnergy : PairCrossMoments → ℤ
 positiveAlignedChannelEnergy x = square (ac x) + square (bd x)
@@ -170,14 +132,68 @@ holomorphicHermitianPlusTwiceMixedIsTwiceAligned (pairCrossMoments p q r s) =
     p q r s
 
 ------------------------------------------------------------------------
+-- NEW EXACT G2 REDUCTION.
+--
+-- The mixed vector channels are exactly half the combined imaginary energy of
+-- the S/H kernels:
+--
+--   (q+r)^2 + (r-q)^2 = 2(q^2+r^2).
+--
+-- Therefore an analytic bound on Im S and Im H immediately bounds the entire
+-- mixed interference budget.  No separate vector-space observable is needed.
+------------------------------------------------------------------------
+
+imaginaryKernelEnergy : PairCrossMoments → ℤ
+imaginaryKernelEnergy x =
+  square (holomorphicImag x) + square (hermitianImag x)
+
+imaginaryKernelEnergyIsTwiceMixedInterference :
+  (x : PairCrossMoments) →
+  imaginaryKernelEnergy x
+    ≡ (+ 2) * mixedChannelInterferenceEnergy x
+imaginaryKernelEnergyIsTwiceMixedInterference
+  (pairCrossMoments p q r s) =
+  solve 2
+    (λ q r →
+      (((q :+ r) :* (q :+ r)) :+ ((r :- q) :* (r :- q)))
+      := con (+ 2) :* ((q :* q) :+ (r :* r)))
+    refl
+    q r
+
+realKernelEnergy : PairCrossMoments → ℤ
+realKernelEnergy x =
+  square (holomorphicReal x) + square (hermitianReal x)
+
+realKernelEnergyIsTwiceAlignedEnergy :
+  (x : PairCrossMoments) →
+  realKernelEnergy x
+    ≡ (+ 2) * positiveAlignedChannelEnergy x
+realKernelEnergyIsTwiceAlignedEnergy
+  (pairCrossMoments p q r s) =
+  solve 2
+    (λ p s →
+      (((p :- s) :* (p :- s)) :+ ((p :+ s) :* (p :+ s)))
+      := con (+ 2) :* ((p :* p) :+ (s :* s)))
+    refl
+    p s
+
+record MixedInterferenceKernelReductionAdapter : Set₁ where
+  field
+    AnalyticPair : Set
+    pairMoments : AnalyticPair → AnalyticPair → PairCrossMoments
+    holomorphicDifferenceKernel : AnalyticPair → AnalyticPair → ℤ
+    hermitianSumKernel : AnalyticPair → AnalyticPair → ℤ
+    identifyHolomorphicImag :
+      (u v : AnalyticPair) →
+      holomorphicImag (pairMoments u v)
+        ≡ holomorphicDifferenceKernel u v
+    identifyHermitianImag :
+      (u v : AnalyticPair) →
+      hermitianImag (pairMoments u v)
+        ≡ hermitianSumKernel u v
+
+------------------------------------------------------------------------
 -- Diagonal specialization u=v with a.b=0.
---
--- p=A=||a||^2, s=B=||b||^2, q=r=0.  Thus
---
---   C = A-B = u^T u,
---   H = A+B = u^T conjugate(u)=||u||^2,
---
--- and C^2 + H^2 = 2(A^2+B^2).
 ------------------------------------------------------------------------
 
 diagonalMoments : ℤ → ℤ → PairCrossMoments
@@ -232,10 +248,6 @@ negativeWitnessAlignedEnergyIsZero :
   positiveAlignedChannelEnergy negativeInterferenceWitness ≡ (+ 0)
 negativeWitnessAlignedEnergyIsZero = refl
 
-------------------------------------------------------------------------
--- Frontier contract.
-------------------------------------------------------------------------
-
 record PairKernelInterferenceAdapter : Set₁ where
   field
     AnalyticPair : Set
@@ -248,8 +260,11 @@ record PairKernelFrobeniusBoundary : Set where
     pairwiseKernelIdentityConstructed : Bool
     hermitianKernelLocatedInsideFrobenius : Bool
     exactMixedChannelLossDecompositionConstructed : Bool
+    imaginaryKernelExactlyTwiceMixedLoss : Bool
+    mixedLossReducedToDifferenceAndSumKernelControl : Bool
     negativeInterferenceWitnessConstructed : Bool
     complexPhiKernelIdentificationProvedHere : Bool
+    offDiagonalPhiKernelSummabilityProvedHere : Bool
     almostOrthogonalityBoundProvedHere : Bool
     diagonalExcessDominatesInterferenceHere : Bool
     weightedTransverseMomentBoundProvedHere : Bool
@@ -260,8 +275,11 @@ pairKernelFrobeniusBoundary = record
   { pairwiseKernelIdentityConstructed = true
   ; hermitianKernelLocatedInsideFrobenius = true
   ; exactMixedChannelLossDecompositionConstructed = true
+  ; imaginaryKernelExactlyTwiceMixedLoss = true
+  ; mixedLossReducedToDifferenceAndSumKernelControl = true
   ; negativeInterferenceWitnessConstructed = true
   ; complexPhiKernelIdentificationProvedHere = false
+  ; offDiagonalPhiKernelSummabilityProvedHere = false
   ; almostOrthogonalityBoundProvedHere = false
   ; diagonalExcessDominatesInterferenceHere = false
   ; weightedTransverseMomentBoundProvedHere = false
