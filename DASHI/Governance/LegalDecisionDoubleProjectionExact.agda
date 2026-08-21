@@ -26,6 +26,8 @@ open import Data.Product using (_×_; _,_; proj₁; proj₂)
 
 import DASHI.Core.IntersectionalNonFactorability as NF
 import DASHI.Core.NonFactorabilityCompositionExact as Composition
+import DASHI.Core.ObserverRefinementLatticeExact as Obs
+import DASHI.Core.ObserverIncomparabilityTypedJoinExact as Join
 import DASHI.Cognition.PNF.DecisionActionProjectionNonFactorabilityExact as DecisionProjection
 import DASHI.Cognition.PNF.DecisionAutonomyExact as Autonomy
 import DASHI.Cognition.PNF.UnifiedDecisionDynamicsExact as Decision
@@ -227,10 +229,64 @@ officialActionCannotRecoverAutonomyAndAuthority =
   NF.witnessRulesOutEveryFlatFactorisation officialAutonomyLossWitness
 
 ------------------------------------------------------------------------
--- 5. Decision-history and authority are transverse residual coordinates.
+-- 5. Decision-history and authority are genuinely incomparable observers.
 --
--- Adding only one residual to the official surface still leaves a collision on
--- the other.  Adding their typed join is sufficient for the deliberately
+-- This reuses the merged #582 generic owner.  One collision holds decision
+-- state fixed while authority changes; the other holds authority fixed while
+-- decision state changes.  The paired observer is therefore a strict common
+-- refinement of each and carries the generic least-common-refinement theorem.
+------------------------------------------------------------------------
+
+decisionStateObserver :
+  Obs.Observer LegalDecisionEpisode DecisionProjection.FineDecisionState
+decisionStateObserver episode =
+  DecisionProjection.fineDecisionState (decisionEpisode episode)
+
+authorityRouteObserver :
+  Obs.Observer LegalDecisionEpisode ParentAuthority.ParentAuthorityRoute
+authorityRouteObserver episode =
+  ParentAuthority.routeParentAuthority (legalRelation episode)
+
+decisionAuthorityObserversIncomparable :
+  Join.IncomparableObservers decisionStateObserver authorityRouteObserver
+decisionAuthorityObserversIncomparable =
+  Join.incomparableObservers
+    blockedDonor
+    blockedAdoptive
+    refl
+    ParentAuthority.routesDiffer
+    blockedDonor
+    unresolvedDonor
+    refl
+    DecisionProjection.blockedAndUnresolvedDifferFineState
+
+joinedDecisionAuthorityObserver :
+  Obs.Observer
+    LegalDecisionEpisode
+    (DecisionProjection.FineDecisionState × ParentAuthority.ParentAuthorityRoute)
+joinedDecisionAuthorityObserver =
+  Obs.pairObserver decisionStateObserver authorityRouteObserver
+
+joinedDecisionAuthorityStrictlyRefinesDecision :
+  Obs.StrictRefinement decisionStateObserver joinedDecisionAuthorityObserver
+joinedDecisionAuthorityStrictlyRefinesDecision =
+  Join.jointStrictlyRefinesLeft decisionAuthorityObserversIncomparable
+
+joinedDecisionAuthorityStrictlyRefinesAuthority :
+  Obs.StrictRefinement authorityRouteObserver joinedDecisionAuthorityObserver
+joinedDecisionAuthorityStrictlyRefinesAuthority =
+  Join.jointStrictlyRefinesRight decisionAuthorityObserversIncomparable
+
+decisionAuthorityLeastTypedJoin :
+  Join.LeastTypedObservationJoin decisionStateObserver authorityRouteObserver
+decisionAuthorityLeastTypedJoin =
+  Join.canonicalLeastTypedObservationJoin
+    decisionStateObserver
+    authorityRouteObserver
+
+------------------------------------------------------------------------
+-- 6. Adding only one residual to the official surface still leaves a collision
+-- on the other.  Adding their typed join is sufficient for the deliberately
 -- chosen FineLegalState consumer.  This is not whole-episode reconstruction.
 ------------------------------------------------------------------------
 
@@ -302,7 +358,7 @@ joinedResidualRecoversChosenFineLegalState =
   NF.factorsThrough proj₂ (λ episode → refl)
 
 ------------------------------------------------------------------------
--- 6. Consolidated boundary.
+-- 7. Consolidated boundary.
 ------------------------------------------------------------------------
 
 record LegalDecisionProjectionBoundary : Set where
@@ -312,6 +368,8 @@ record LegalDecisionProjectionBoundary : Set where
     laterInstitutionalProjectionRepairsEarlierLoss : Bool
     sameOfficialSurfaceCanHideDifferentAuthorityRoute : Bool
     sameOfficialActionCanHideDifferentAutonomyState : Bool
+    decisionAndAuthorityObserversAreComparable : Bool
+    typedJoinStrictlyRefinesEachResidualAxis : Bool
     eitherResidualAloneIsSufficient : Bool
     joinedResidualIsSufficientForChosenFineState : Bool
     officialSurfaceEqualsFineLegalState : Bool
@@ -319,4 +377,4 @@ record LegalDecisionProjectionBoundary : Set where
 canonicalLegalDecisionProjectionBoundary : LegalDecisionProjectionBoundary
 canonicalLegalDecisionProjectionBoundary =
   legalDecisionProjectionBoundary
-    true false true true false true false
+    true false true true false true false true false
