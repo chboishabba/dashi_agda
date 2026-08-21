@@ -19,24 +19,16 @@ module DASHI.Physics.Closure.NSAncientVelocityParabolicScaleDichotomyExact where
 --
 -- ROUND65 / EXACT SCALE-MATCHING PARAMETER
 --
--- Let M be the velocity amplitude at time t and let tau = T-t be the
--- remaining physical time to a putative first singularity.  There are two
--- natural spatial scales:
+-- Let M be the velocity amplitude at time t and tau = T-t the remaining
+-- physical time to a putative first singularity.  With r_v = 1/M and
+-- alpha = M^2 tau, the exact squared-scale identity is
 --
---   velocity scale   r_v = 1/M,
---   parabolic scale  r_p = sqrt(tau).
+--   tau = alpha r_v^2.
 --
--- Their squared ratio is exactly
---
---   (r_p / r_v)^2 = M^2 tau =: alpha.
---
--- Hence CKN non-smallness at singular parabolic scales does not by itself
--- imply non-smallness at the KNSŠ velocity scale.  The missing transfer is
--- precisely control across alpha.  Bounded alpha is the L-infinity Type-I
--- scaling regime; alpha -> infinity is the Type-II scale-separation regime.
---
--- This file proves only the algebraic seam and deliberately avoids a square
--- root carrier by working with squared scales.
+-- Thus the parabolic radius sqrt(tau) is sqrt(alpha) velocity radii.  CKN
+-- non-smallness at singular parabolic scales does not automatically descend
+-- to r_v.  Bounded alpha is the L-infinity Type-I scale regime; alpha growing
+-- large is precisely Type-II scale separation.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
@@ -58,12 +50,6 @@ normalizedForwardSingularityTime : ℚ → ℚ → ℚ
 normalizedForwardSingularityTime amplitude timeToSingularity =
   square amplitude * timeToSingularity
 
-scaleRatioSquaredWithoutDivision : ℚ → ℚ → ℚ → ℚ
-scaleRatioSquaredWithoutDivision
-    amplitude inverseAmplitude timeToSingularity =
-  parabolicScaleSquared timeToSingularity
-  * square amplitude
-
 velocityScaleInverseMeaning :
   (amplitude inverseAmplitude : ℚ) →
   inverseAmplitude * amplitude ≡ 1ℚ →
@@ -73,25 +59,44 @@ velocityScaleInverseMeaning amplitude inverseAmplitude inverse =
     (solve (inverseAmplitude ∷ amplitude ∷ []))
     (cong square inverse)
 
-scaleMismatchIsNormalizedForwardTime :
+parabolicScaleIsAlphaTimesVelocityScaleSquared :
   (amplitude inverseAmplitude timeToSingularity : ℚ) →
   inverseAmplitude * amplitude ≡ 1ℚ →
-  scaleRatioSquaredWithoutDivision
-      amplitude inverseAmplitude timeToSingularity
+  parabolicScaleSquared timeToSingularity
   ≡ normalizedForwardSingularityTime amplitude timeToSingularity
-scaleMismatchIsNormalizedForwardTime
+    * velocityScaleSquared inverseAmplitude
+parabolicScaleIsAlphaTimesVelocityScaleSquared
     amplitude inverseAmplitude timeToSingularity inverse =
-  solve (amplitude ∷ inverseAmplitude ∷ timeToSingularity ∷ [])
+  let
+    regroup :
+      normalizedForwardSingularityTime amplitude timeToSingularity
+        * velocityScaleSquared inverseAmplitude
+      ≡ timeToSingularity
+        * (velocityScaleSquared inverseAmplitude * square amplitude)
+    regroup = solve (amplitude ∷ inverseAmplitude ∷ timeToSingularity ∷ [])
 
--- In KNSŠ coordinates s = M^2 (t-T_selected), the physical first singular
--- time T sits alpha = M^2 (T-t_selected) units to the future.  The same alpha
--- is therefore simultaneously the forward-time distance and squared spatial
--- scale mismatch between sqrt(T-t) and 1/M.
-forwardTimeAndScaleMismatchAreSameParameter :
+    inverseSquared :
+      velocityScaleSquared inverseAmplitude * square amplitude ≡ 1ℚ
+    inverseSquared = velocityScaleInverseMeaning amplitude inverseAmplitude inverse
+  in
+  trans
+    (solve (timeToSingularity ∷ []))
+    (trans
+      (cong (timeToSingularity *_) (sym inverseSquared))
+      (sym regroup))
+  where
+    open import Relation.Binary.PropositionalEquality using (sym)
+
+normalizedForwardTimeIsSquaredScaleMismatch :
   (amplitude inverseAmplitude timeToSingularity : ℚ) →
   inverseAmplitude * amplitude ≡ 1ℚ →
-  scaleRatioSquaredWithoutDivision
-      amplitude inverseAmplitude timeToSingularity
-  ≡ normalizedForwardSingularityTime amplitude timeToSingularity
-forwardTimeAndScaleMismatchAreSameParameter =
-  scaleMismatchIsNormalizedForwardTime
+  normalizedForwardSingularityTime amplitude timeToSingularity
+    * velocityScaleSquared inverseAmplitude
+  ≡ parabolicScaleSquared timeToSingularity
+normalizedForwardTimeIsSquaredScaleMismatch
+    amplitude inverseAmplitude timeToSingularity inverse =
+  sym
+    (parabolicScaleIsAlphaTimesVelocityScaleSquared
+      amplitude inverseAmplitude timeToSingularity inverse)
+  where
+    open import Relation.Binary.PropositionalEquality using (sym)
