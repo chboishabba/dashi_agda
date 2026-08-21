@@ -114,6 +114,62 @@ holomorphicPlusHermitianSquaresExposePairCrossCore
     p q r s
 
 ------------------------------------------------------------------------
+-- Exact interference ledger.
+--
+-- The sign-indefinite part is not mysterious: it is exactly the two mixed
+-- channels q=a.d and r=b.c.  Define
+--
+--   P = p^2+s^2,
+--   N = q^2+r^2.
+--
+-- Then
+--
+--   pairBlockCrossCore + N = P,
+--
+-- and, after the S/H rewrite,
+--
+--   Re(S^2+H^2) + 2N = 2P.
+--
+-- Thus any analytic almost-orthogonality theorem only has to dominate the
+-- aggregate mixed-channel budget N.  This is the exact algebraic loss socket.
+------------------------------------------------------------------------
+
+positiveAlignedChannelEnergy : PairCrossMoments → ℤ
+positiveAlignedChannelEnergy x = square (ac x) + square (bd x)
+
+mixedChannelInterferenceEnergy : PairCrossMoments → ℤ
+mixedChannelInterferenceEnergy x = square (ad x) + square (bc x)
+
+pairCrossCorePlusMixedEnergyIsAlignedEnergy :
+  (x : PairCrossMoments) →
+  pairBlockCrossCore x + mixedChannelInterferenceEnergy x
+    ≡ positiveAlignedChannelEnergy x
+pairCrossCorePlusMixedEnergyIsAlignedEnergy (pairCrossMoments p q r s) =
+  solve 4
+    (λ p q r s →
+      ((((p :* p) :- (q :* q)) :- (r :* r)) :+ (s :* s))
+        :+ ((q :* q) :+ (r :* r))
+      := (p :* p) :+ (s :* s))
+    refl
+    p q r s
+
+holomorphicHermitianPlusTwiceMixedIsTwiceAligned :
+  (x : PairCrossMoments) →
+  (holomorphicSquareReal x + hermitianSquareReal x)
+    + (+ 2) * mixedChannelInterferenceEnergy x
+    ≡ (+ 2) * positiveAlignedChannelEnergy x
+holomorphicHermitianPlusTwiceMixedIsTwiceAligned (pairCrossMoments p q r s) =
+  solve 4
+    (λ p q r s →
+      ((((p :- s) :* (p :- s)) :- ((q :+ r) :* (q :+ r)))
+        :+
+        (((p :+ s) :* (p :+ s)) :- ((r :- q) :* (r :- q))))
+        :+ (con (+ 2) :* ((q :* q) :+ (r :* r)))
+      := con (+ 2) :* ((p :* p) :+ (s :* s)))
+    refl
+    p q r s
+
+------------------------------------------------------------------------
 -- Diagonal specialization u=v with a.b=0.
 --
 -- p=A=||a||^2, s=B=||b||^2, q=r=0.  Thus
@@ -146,13 +202,13 @@ diagonalKernelEnergyIdentity =
       := con (+ 2) :* ((A :* A) :+ (B :* B)))
     refl
 
+mixedEnergyVanishesOnOrthogonalDiagonal :
+  (A B : ℤ) →
+  mixedChannelInterferenceEnergy (diagonalMoments A B) ≡ (+ 0)
+mixedEnergyVanishesOnOrthogonalDiagonal A B = refl
+
 ------------------------------------------------------------------------
 -- Interference obstruction.
---
--- The Hermitian kernel appearing inside the global Frobenius square is not by
--- itself enough: cross-pair terms can have either sign.  The following exact
--- witness corresponds algebraically to a purely-real channel for one pair and
--- a purely-imaginary aligned channel for another.
 ------------------------------------------------------------------------
 
 negativeInterferenceWitness : PairCrossMoments
@@ -168,32 +224,30 @@ negativeInterferenceHolomorphicPlusHermitianIsMinusTwo :
     ≡ -[1+ 1 ]
 negativeInterferenceHolomorphicPlusHermitianIsMinusTwo = refl
 
+negativeWitnessMixedEnergyIsOne :
+  mixedChannelInterferenceEnergy negativeInterferenceWitness ≡ (+ 1)
+negativeWitnessMixedEnergyIsOne = refl
+
+negativeWitnessAlignedEnergyIsZero :
+  positiveAlignedChannelEnergy negativeInterferenceWitness ≡ (+ 0)
+negativeWitnessAlignedEnergyIsZero = refl
+
 ------------------------------------------------------------------------
 -- Frontier contract.
---
--- Since the desired H-kernel is already present in ||Q||_F^2, the missing
--- theorem should be an almost-orthogonality / interference estimate rather
--- than a brand-new explicit formula.  In the analytic setting S and H are
--- expected to be controlled by complex continuations of the same Phi kernel:
---
---   S_rs ~ L Phi(z_r-z_s),
---   H_rs ~ L Phi(z_r-conjugate(z_s)).
---
--- The existing psi-decay, tail and pair-correlation machinery is therefore a
--- plausible source of the needed bound, but no such bound is asserted here.
 ------------------------------------------------------------------------
 
 record PairKernelInterferenceAdapter : Set₁ where
   field
     AnalyticPair : Set
     diagonalHermitianExcess : AnalyticPair → ℤ
-    offDiagonalInterference : AnalyticPair → AnalyticPair → ℤ
+    offDiagonalMixedChannelBudget : AnalyticPair → AnalyticPair → ℤ
     arithmeticFrobeniusControl : ℤ
 
 record PairKernelFrobeniusBoundary : Set where
   field
     pairwiseKernelIdentityConstructed : Bool
     hermitianKernelLocatedInsideFrobenius : Bool
+    exactMixedChannelLossDecompositionConstructed : Bool
     negativeInterferenceWitnessConstructed : Bool
     complexPhiKernelIdentificationProvedHere : Bool
     almostOrthogonalityBoundProvedHere : Bool
@@ -205,6 +259,7 @@ pairKernelFrobeniusBoundary : PairKernelFrobeniusBoundary
 pairKernelFrobeniusBoundary = record
   { pairwiseKernelIdentityConstructed = true
   ; hermitianKernelLocatedInsideFrobenius = true
+  ; exactMixedChannelLossDecompositionConstructed = true
   ; negativeInterferenceWitnessConstructed = true
   ; complexPhiKernelIdentificationProvedHere = false
   ; almostOrthogonalityBoundProvedHere = false
