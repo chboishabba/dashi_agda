@@ -7,6 +7,7 @@ open import Data.Empty using (⊥)
 
 import DASHI.Biology.PredictiveMetastabilityTraumaBridge as Predictive
 import DASHI.Biology.TraumaMemoryAttractorPortfolio as Portfolio
+import DASHI.Biology.Levin.MillerTravelingWaveAccessProducerExact as Miller
 import DASHI.Cognition.PNF.MemoryFibre as Memory
 import DASHI.Cognition.PNF.PNFFastAccessMemoryLearningBridgeExact as AccessMemory
 
@@ -49,6 +50,36 @@ sameCueDifferentLearnedControl :
   safetyAccessible (controlProfile threatBiasedControl ambiguousCue)
   ≡ safetyAccessible (controlProfile flexibleControl ambiguousCue) → ⊥
 sameCueDifferentLearnedControl ()
+
+------------------------------------------------------------------------
+-- Learned/context state can select a different traveling-wave phase of the
+-- same physical producer.  On the right-site safety lane, the same ambiguous
+-- cue is closed under the threat-biased controller and open under the flexible
+-- controller.
+------------------------------------------------------------------------
+
+learnedWaveTick : ControlLearningState → CueContext → Miller.Tick2
+learnedWaveTick threatBiasedControl ambiguousCue = Miller.firstTick
+learnedWaveTick flexibleControl ambiguousCue = Miller.secondTick
+learnedWaveTick threatBiasedControl explicitSafetyCue = Miller.secondTick
+learnedWaveTick flexibleControl explicitSafetyCue = Miller.secondTick
+
+waveSupportedSafetyAccess : ControlLearningState → CueContext → Bool
+waveSupportedSafetyAccess control cue =
+  Miller.recruitedAt (learnedWaveTick control cue) Miller.rightSite
+
+biasedAmbiguousWaveClosesSafety :
+  waveSupportedSafetyAccess threatBiasedControl ambiguousCue ≡ false
+biasedAmbiguousWaveClosesSafety = refl
+
+flexibleAmbiguousWaveOpensSafety :
+  waveSupportedSafetyAccess flexibleControl ambiguousCue ≡ true
+flexibleAmbiguousWaveOpensSafety = refl
+
+sameCueLearnedStateChangesWaveSupportedSafety :
+  waveSupportedSafetyAccess threatBiasedControl ambiguousCue
+  ≡ waveSupportedSafetyAccess flexibleControl ambiguousCue → ⊥
+sameCueLearnedStateChangesWaveSupportedSafety ()
 
 record RetainedThreatSafetyPair : Set where
   constructor retainedThreatSafetyPair
