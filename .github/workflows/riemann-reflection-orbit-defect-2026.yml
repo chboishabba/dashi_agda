@@ -8,6 +8,7 @@ on:
       - 'DASHI/Analysis/RiemannReflectionOrbitDefectExact.agda'
       - 'DASHI/Analysis/RiemannReflectionPairBlockExact.agda'
       - 'DASHI/Analysis/RiemannWeilOffLineHyperbolicBlockExact.agda'
+      - 'DASHI/Analysis/RiemannComplexPoissonPairEnergyExact.agda'
       - 'DASHI/Analysis/RiemannReflectionC3OrbitShapeBridgeExact.agda'
       - 'DASHI/Analysis/RiemannReflectionOrbitDefectRegression.agda'
       - 'DASHI/Analysis/ZetaTheoremSurface.agda'
