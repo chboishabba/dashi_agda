@@ -71,6 +71,7 @@ open import DASHI.Analysis.RiemannComplexPoissonPairEnergyExact public
 import DASHI.Analysis.RiemannComplexPoissonChannelSplitExact
 import DASHI.Analysis.RiemannComplexPoissonFiniteRetentionExact
 import DASHI.Analysis.RiemannWeilPairKernelFrobeniusExact
+import DASHI.Analysis.RiemannMixedKernelEnvelopeExact
 import DASHI.Analysis.RiemannMixedChannelAlmostOrthogonalityExact
 import DASHI.Analysis.RiemannPrimeSideExcessNormalizationExact
 import DASHI.Analysis.RiemannHermitianDefectAssemblyExact
