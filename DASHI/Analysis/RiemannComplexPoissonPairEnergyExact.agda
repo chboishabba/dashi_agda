@@ -141,7 +141,13 @@ pairBlockFrobeniusDecomposition (pairEnergyLedger m c b) =
 criticalPairHasZeroFrobeniusExcess :
   (m c : Nat) →
   pairBlockFrobeniusExcess (pairEnergyLedger m c zero) ≡ zero
-criticalPairHasZeroFrobeniusExcess m c = refl
+criticalPairHasZeroFrobeniusExcess m c =
+  solve 2
+    (λ m c →
+      con 8 :* (m :+ con 1) :* (m :+ con 1) :* con 0 :* c
+      := con 0)
+    refl
+    m c
 
 criticalPairRecoversBaselineFrobenius :
   (m c : Nat) →
