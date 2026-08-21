@@ -19,6 +19,8 @@ import DASHI.Cognition.PNF.AccessActuationOrthogonalityExact
 import DASHI.Cognition.PNF.DecisionPotentialSourceRegistry
 import DASHI.Cognition.PNF.DecisionPotentialFibreExact
 import DASHI.Cognition.PNF.UnifiedDecisionDynamicsExact
+import DASHI.Cognition.PNF.BoundedEvidenceCommitmentExact
+import DASHI.Cognition.PNF.GoNoGoActuationGateExact
 import DASHI.Cognition.PNF.NoncommutativeDecisionUpdateQQExact
 import DASHI.Cognition.PNF.ActiveInferenceFibreBoundaryExact
 import DASHI.Cognition.PNF.DecisionAutonomyExact
