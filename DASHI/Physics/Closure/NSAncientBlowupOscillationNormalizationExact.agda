@@ -25,8 +25,9 @@ module DASHI.Physics.Closure.NSAncientBlowupOscillationNormalizationExact where
 
 open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Rational.Base using (ℚ; 1ℚ; _+_; -_)
-import Data.Rational.Properties as ℚP
+open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
 open import Relation.Nullary.Negation.Core using (¬_)
 
@@ -57,20 +58,10 @@ translateEqualityCancels :
 translateEqualityCancels a b c eq =
   let
     leftMeaning : (a + c) + (- c) ≡ a
-    leftMeaning =
-      trans
-        (sym (ℚP.+-assoc a c (- c)))
-        (trans
-          (cong (a +_) (ℚP.+-inverseʳ c))
-          (ℚP.+-identityʳ a))
+    leftMeaning = solve (a ∷ c ∷ [])
 
     rightMeaning : (b + c) + (- c) ≡ b
-    rightMeaning =
-      trans
-        (sym (ℚP.+-assoc b c (- c)))
-        (trans
-          (cong (b +_) (ℚP.+-inverseʳ c))
-          (ℚP.+-identityʳ b))
+    rightMeaning = solve (b ∷ c ∷ [])
   in
   trans
     (sym leftMeaning)
