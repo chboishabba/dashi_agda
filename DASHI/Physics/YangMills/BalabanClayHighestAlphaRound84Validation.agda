@@ -42,12 +42,14 @@ import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound87FourAnalyticLemmaEx
 -- Round89 adversarial completion conditions: bilateral beta+tuning for A,
 -- exact endpoint-determinant lower+upper prefix transport, cumulative-beta
 -- sensitivity -> shooting contraction, compact-group Heat/Doob (not silently
--- Euclidean BBD) for C, exact SU(2) Gaussian lower transport, and the
--- source-compatible O(g) interaction absorption which avoids an artificial
--- geometric summability requirement on the marginal coupling trajectory.
+-- Euclidean BBD) for C, exact SU(2) Gaussian lower transport, source-compatible
+-- O(g) interaction absorption, and the cutoff-independent cubic coupling
+-- telescope which is the natural budget for inverse-square shooting
+-- sensitivity on a marginal asymptotically-free trajectory.
 import DASHI.Physics.YangMills.BalabanIntervalDeterminantAlgebra
 import DASHI.Physics.YangMills.BalabanEndpointDeterminantPrefixBridge
 import DASHI.Physics.YangMills.BalabanBetaPrefixSensitivityToTubeContractionExact
 import DASHI.Physics.YangMills.BalabanYM4SU2GaussianBetaLowerExact
 import DASHI.Physics.YangMills.BalabanYM4LinearInteractionBetaMarginExact
+import DASHI.Physics.YangMills.BalabanYM4CubicCouplingDriftTelescopeExact
 import DASHI.Physics.YangMills.BalabanClayFrozenFourCompletionContractExact
