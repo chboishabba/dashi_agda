@@ -14,6 +14,7 @@ import DASHI.Cognition.PNF.DecisionAutonomyExact as Autonomy
 import DASHI.Cognition.PNF.DecisionOutcomeLearningFeedbackExact as Feedback
 import DASHI.Cognition.PNF.AttentionValueActuationSeparationExact as Attention
 import DASHI.Cognition.PNF.DynamicDecisionFieldCompetitionExact as DFT
+import DASHI.Cognition.PNF.DecisionActionProjectionNonFactorabilityExact as ActionNF
 import DASHI.Cognition.PNF.AccessibleCandidateReasoningPipelineExact as Pre
 import DASHI.Cognition.PNF.PNFFastAccessMemoryLearningBridgeExact as AccessPNF
 import DASHI.Cognition.PNF.MemoryFibre as Memory
@@ -22,6 +23,7 @@ import DASHI.Reasoning.AccessBiasFallacySeparationExact as Bias
 import DASHI.Reasoning.FallacyObstructionCatalogue as Fallacy
 import DASHI.Biology.NeuralDecisionProducerBridgeExact as Neural
 import DASHI.Interop.SensibLawResidualLattice as Residual
+import DASHI.Core.IntersectionalNonFactorability as NF
 
 ------------------------------------------------------------------------
 -- Unified decision-fibre formalism.
@@ -87,6 +89,13 @@ sameFibreCanCarryDifferentPotential :
   × Potential.slowPotential Potential.ordinaryContext Potential.safetyState ≡ 0
 sameFibreCanCarryDifferentPotential = Potential.sameFibreDifferentPotential
 
+bistableFibreRetainsBarrierComplexity :
+  Potential.isLocalMinimum Potential.ambivalentContext Potential.threatState ≡ true
+  × Potential.isLocalMinimum Potential.ambivalentContext Potential.safetyState ≡ true
+  × Potential.localMinimumCount Potential.ambivalentContext ≡ 2
+  × Potential.barrierHeight Potential.threatState Potential.safetyState ≡ 3
+bistableFibreRetainsBarrierComplexity = Potential.bistableFibreHasTwoMinimaAndBarrier
+
 accessFailureIsNotFormalNoTypedMeet :
   ((s : AccessPNF.AccessFormalState) →
     AccessPNF.accessSurface s ≡ false →
@@ -125,6 +134,10 @@ commitmentCanFailToActuate :
   Dynamics.commit Dynamics.counterLead ≡ Dynamics.counterCommitted
   × Dynamics.actuate Dynamics.blocked Dynamics.counterCommitted ≡ Dynamics.noAction
 commitmentCanFailToActuate = Dynamics.commitmentCanExistWithoutActuation
+
+observedActionCannotRecoverFineDecisionState :
+  NF.FactorsThrough ActionNF.observedAction ActionNF.fineDecisionState → ⊥
+observedActionCannotRecoverFineDecisionState = ActionNF.actionCannotRecoverFineDecisionState
 
 observableCommutationDoesNotForceUpdateCommutation :
   Order.observeAThenB Order.initial ≡ Order.observeBThenA Order.initial
