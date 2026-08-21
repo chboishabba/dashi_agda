@@ -5,3 +5,7 @@ module DASHI.Reasoning.Everything where
 import DASHI.Reasoning.RelationalEverything
 import DASHI.Reasoning.TernarySynthesisOrbitWeldEverything
 import DASHI.Reasoning.PathologicEverything
+import DASHI.Reasoning.FolkLawEpistemicAuthorityCaptureExact
+import DASHI.Reasoning.EpistemicAuthorityIntrospectiveVisualReceiptExact
+import DASHI.Reasoning.FolkLawEpistemicAuthorityBroadExact
+import DASHI.Reasoning.EpistemicAuthorityBroadVisualFindingExact
