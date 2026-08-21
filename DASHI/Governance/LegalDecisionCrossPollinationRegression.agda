@@ -5,7 +5,7 @@ module DASHI.Governance.LegalDecisionCrossPollinationRegression where
 -- projection / legal-authority cross-pollination.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool)
+open import Agda.Builtin.Equality using (_≡_)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.IntersectionalNonFactorability as NF
@@ -66,8 +66,3 @@ hiddenOrdersShareOfficialEndpointRegression :
   ≡ Dynamics.witnessOfficialSurface Dynamics.authorityAfterDecisionAtBlocked
 hiddenOrdersShareOfficialEndpointRegression =
   Dynamics.bothCompositeOrdersRemainOfficiallyInvisible
-
-boundaryRegression : Bool
-boundaryRegression =
-  Legal.LegalDecisionProjectionBoundary.joinedResidualIsSufficientForChosenFineState
-    Legal.canonicalLegalDecisionProjectionBoundary
