@@ -50,6 +50,7 @@ import DASHI.Governance.OppositionInterfaceAntiDomesticationExact
 import DASHI.Governance.EpistemicErrorAllocationChillingBridgeExact
 import DASHI.Governance.PeaceJusticeResidualNonFactorabilityExact
 import DASHI.Governance.HyperformalTernaryCarrierEquivalenceExact
+import DASHI.Governance.HyperformalNonFactorabilityTransportExact
 import DASHI.Governance.FibrewiseInstitutionalPowerEverything
 
 import DASHI.Governance.RevolutionarySourceAtlas
