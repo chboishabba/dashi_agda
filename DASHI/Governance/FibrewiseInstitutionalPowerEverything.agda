@@ -21,6 +21,7 @@ import DASHI.Governance.InstitutionPreservingRechartAntiSublationExact as Rechar
 import DASHI.Governance.InstitutionalNoticeActuationCulpabilityExact as Notice
 import DASHI.Governance.OppositionInterfaceAntiDomesticationExact as Opposition
 import DASHI.Governance.PeaceJusticeResidualNonFactorabilityExact as PeaceJustice
+import DASHI.Reasoning.DialecticMotifKernel as Dialectic
 
 regressionInterfaceDoesNotExhaustIndependentSource :
   Ambient.LeftExhaustive Ambient.canonicalPartialInterface → ⊥
@@ -134,9 +135,8 @@ regressionSanctionLearningIsNotFineRuleLearning :
 regressionSanctionLearningIsNotFineRuleLearning =
   ErrorAllocation.avoidanceIsNotFineRuleLearning
 
--- Exact hyperformal-equivalence regressions.
 regressionDialecticBase369RoundTrip :
-  (state : DASHI.Reasoning.DialecticMotifKernel.State9) →
+  (state : Dialectic.State9) →
   Ternary.base369ToDialectic (Ternary.dialecticToBase369 state) ≡ state
 regressionDialecticBase369RoundTrip = Ternary.dialecticBase369RoundTrip
 
