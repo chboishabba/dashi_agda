@@ -36,25 +36,15 @@ noBlowupFromConstantExcludingInvariant :
   ((u : X → V) → BoundedAncientMild u → SpatiallyConstant u) →
   ((b : Blowup) → Invariant (extract b)) →
   ((u : X → V) → Invariant u → SpatiallyConstant u →
-     IsNonzero (u basepoint) → Set) →
-  ((u : X → V) → Invariant u → SpatiallyConstant u →
-     IsNonzero (u basepoint) →
      ¬ IsNonzero (u basepoint)) →
   ((b : Blowup) → IsNonzero (extract b basepoint)) →
   ¬ Blowup
 noBlowupFromConstantExcludingInvariant
   basepoint BoundedAncientMild Invariant IsNonzero extract
   extractedBounded liouville inheritedInvariant
-  invariantConflictShape invariantExcludesNonzeroConstants
-  extractedNonzero blowup =
+  invariantExcludesNonzeroConstants extractedNonzero blowup =
   invariantExcludesNonzeroConstants
     (extract blowup)
     (inheritedInvariant blowup)
     (liouville (extract blowup) (extractedBounded blowup))
     (extractedNonzero blowup)
-    (extractedNonzero blowup)
-
--- The extra invariantConflictShape argument is propositionally irrelevant and
--- should not survive the next physical specialization.  It is retained here
--- only to make the intended contradiction arity explicit without introducing
--- an opaque "constant excluding" record.
