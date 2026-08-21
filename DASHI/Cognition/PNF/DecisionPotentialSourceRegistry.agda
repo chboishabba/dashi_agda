@@ -1,6 +1,6 @@
 module DASHI.Cognition.PNF.DecisionPotentialSourceRegistry where
 
-open import Agda.Builtin.Nat using (Nat; suc; zero)
+open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 
 ------------------------------------------------------------------------
@@ -62,6 +62,30 @@ manteEtAl2013 = decisionSource
   "10.1038/nature12742"
   "context-dependent population geometry without deleting represented inputs"
 
+goldShadlen2007 : DecisionSource
+goldShadlen2007 = decisionSource
+  "Joshua I. Gold; Michael N. Shadlen"
+  "The Neural Basis of Decision Making"
+  2007
+  "10.1146/annurev.neuro.29.051605.113038"
+  "bounded evidence accumulation with deliberation/commitment separation"
+
+hazyFrankOReilly2007 : DecisionSource
+hazyFrankOReilly2007 = decisionSource
+  "Thomas E. Hazy; Michael J. Frank; Randall C. O'Reilly"
+  "Towards an executive without a homunculus: computational models of the prefrontal cortex/basal ganglia system"
+  2007
+  "10.1098/rstb.2007.2055"
+  "downstream Go/NoGo gating of represented actions"
+
+bastenEtAl2010 : DecisionSource
+bastenEtAl2010 = decisionSource
+  "Ulrike Basten; Guido Biele; Hauke R. Heekeren; Christian J. Fiebach"
+  "How the brain integrates costs and benefits during decision making"
+  2010
+  "10.1073/pnas.0908104107"
+  "cost-benefit difference representation followed by accumulation"
+
 truebloodBusemeyer2011 : DecisionSource
 truebloodBusemeyer2011 = decisionSource
   "Jennifer S. Trueblood; Jerome R. Busemeyer"
@@ -102,5 +126,21 @@ hauserWernerfelt1990 = decisionSource
   "10.1086/209225"
   "cost-bounded live consideration sets"
 
+tverskyKahneman1974 : DecisionSource
+tverskyKahneman1974 = decisionSource
+  "Amos Tversky; Daniel Kahneman"
+  "Judgment under Uncertainty: Heuristics and Biases"
+  1974
+  "10.1126/science.185.4157.1124"
+  "availability/representativeness/anchoring as pre-selection distortions"
+
+mackenzie2014 : DecisionSource
+mackenzie2014 = decisionSource
+  "Catriona Mackenzie"
+  "Three Dimensions of Autonomy: A Relational Analysis"
+  2014
+  "book DOI 10.1093/acprof:oso/9780199969104.001.0001; no separate chapter DOI asserted"
+  "self-governance, self-determination and self-authorization as distinct autonomy dimensions"
+
 canonicalDecisionSourceCount : Nat
-canonicalDecisionSourceCount = 10
+canonicalDecisionSourceCount = 15
