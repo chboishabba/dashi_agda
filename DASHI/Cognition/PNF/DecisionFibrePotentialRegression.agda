@@ -39,8 +39,10 @@ record DecisionFibrePotentialRegression : Set₁ where
       × Potential.barrierHeight Potential.threatState Potential.safetyState ≡ 3
 
     lowerPotentialCanRemainInaccessible :
-      Potential.slowPotential Potential.threatContext Potential.safetyState ≡ 2
-      × Potential.accessible Potential.threatContext Potential.safetyState ≡ false
+      Potential.slowPotential Potential.blockedSafetyContext Potential.safetyState ≡ 0
+      × Potential.slowPotential Potential.blockedSafetyContext Potential.threatState ≡ 2
+      × Potential.accessible Potential.blockedSafetyContext Potential.safetyState ≡ false
+      × Potential.accessible Potential.blockedSafetyContext Potential.threatState ≡ true
 
     observerMinimaConflict :
       FreeEnergy.minimumPolicy FreeEnergy.person
@@ -114,7 +116,7 @@ canonicalDecisionFibrePotentialRegression = record
   { unified = Unified.canonicalDecisionFibrePotentialHyperformalism
   ; sameFibreDifferentPotential = Potential.sameFibreDifferentPotential
   ; bistableFibreComplexity = Potential.bistableFibreHasTwoMinimaAndBarrier
-  ; lowerPotentialCanRemainInaccessible = refl , refl
+  ; lowerPotentialCanRemainInaccessible = Potential.lowerPotentialNeedNotBeAccessible
   ; observerMinimaConflict = FreeEnergy.observerIndexedMinimaDiffer
   ; considerationChangesPreference = Dynamics.considerationSetCanChangePreferredCandidate
   ; boundedAccumulationSeparatesDeliberationCommitment =
