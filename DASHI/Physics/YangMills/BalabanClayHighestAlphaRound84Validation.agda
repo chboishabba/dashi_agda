@@ -39,7 +39,9 @@ import DASHI.Physics.YangMills.BalabanClayT4BishopRegularHatMomentumGapExact
 import DASHI.Physics.YangMills.BalabanClayT4MachinOuterSineToCanonicalGapExact
 import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound87FourAnalyticLemmaExact
 
--- Round89 adversarial completion conditions: bilateral beta+tuning for A and
--- compact-group Heat/Doob (not silently Euclidean BBD) for C.
+-- Round89 adversarial completion conditions: bilateral beta+tuning for A,
+-- cumulative-beta sensitivity -> shooting contraction, and compact-group
+-- Heat/Doob (not silently Euclidean BBD) for C.
 import DASHI.Physics.YangMills.BalabanIntervalDeterminantAlgebra
+import DASHI.Physics.YangMills.BalabanBetaPrefixSensitivityToTubeContractionExact
 import DASHI.Physics.YangMills.BalabanClayFrozenFourCompletionContractExact
