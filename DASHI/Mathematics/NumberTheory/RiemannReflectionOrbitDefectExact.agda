@@ -28,7 +28,7 @@ module DASHI.Mathematics.NumberTheory.RiemannReflectionOrbitDefectExact where
 -- weighted off-line displacement bound is claimed from their theorem.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl; cong; sym; trans)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Empty using (⊥)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; -_)
@@ -96,10 +96,6 @@ orbitDefectIndependentOfRepresentative : ∀ point →
   reflectionDefect (partner (canonicalReflectionOrbit point))
   ≡ reflectionDefect (representative (canonicalReflectionOrbit point))
 orbitDefectIndependentOfRepresentative = reflectionDefectInvariant
-
-------------------------------------------------------------------------
--- Generic centered 2 x 2 reflection block.
-------------------------------------------------------------------------
 
 record RationalBlock2 : Set where
   constructor rationalBlock2
