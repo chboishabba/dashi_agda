@@ -21,6 +21,8 @@ import DASHI.Analysis.RiemannHermitianLocalizationAmplificationExact
 import DASHI.Analysis.RiemannArithmeticUnitarityRigidityBoundary
 import DASHI.Analysis.RiemannHermitianEndgameTrichotomyExact
 import DASHI.Analysis.RiemannHermitianDreamRouteExact
+import DASHI.Analysis.RiemannHermitianTopDownAssemblyExact
+import DASHI.Analysis.RiemannHermitianSourceGapMapExact
 import DASHI.Analysis.RiemannReflectionC3OrbitShapeBridgeExact
 import DASHI.Analysis.RiemannReflectionOrbitDefectRegression
 import DASHI.Analysis.ZetaTheoremSurface
