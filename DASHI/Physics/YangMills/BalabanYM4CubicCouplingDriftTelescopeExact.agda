@@ -31,15 +31,16 @@ module DASHI.Physics.YangMills.BalabanYM4CubicCouplingDriftTelescopeExact where
 -- assumption that sum g_j itself is uniformly bounded in K.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_)
+open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; _+_; _-_; _*_; _≤_)
+  (ℚ; 0ℚ; _+_; _-_; _*_; _≤_; _/_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (subst)
 
 half : ℚ
-half = ℚ.1ℚ / ℚ.2ℚ
+half = + 1 / 2
 
 cube : ℚ → ℚ
 cube g = (g * g) * g
@@ -60,9 +61,6 @@ cubicHistory : CouplingChain → ℚ
 cubicHistory (terminal g) = 0ℚ
 cubicHistory (g then rest) = cube g + cubicHistory rest
 
--- Proof-relevant local drift data.  The terminal constructor carries no
--- artificial final shell.  Every `step` certifies precisely one physical RG
--- transition.
 data CubicDrift (bStar : ℚ) : CouplingChain → Set where
   done : ∀ g → CubicDrift bStar (terminal g)
   step : ∀ g {rest} →
@@ -70,9 +68,6 @@ data CubicDrift (bStar : ℚ) : CouplingChain → Set where
     CubicDrift bStar rest →
     CubicDrift bStar (g then rest)
 
--- Exact telescoping theorem.  No positivity assumption on bStar is needed for
--- this algebraic implication; positivity enters when the physical margin is
--- used to interpret the result as a finite budget.
 cubicDriftTelescopes :
   ∀ {bStar chain} →
   CubicDrift bStar chain →
@@ -110,25 +105,23 @@ cubicDriftTelescopes {bStar = bStar} {chain = g then rest}
       rightExact
       added)
 
--- If the chain starts nonnegative and terminates below gamma, the telescoped
--- cubic history is bounded by gamma in the cross-multiplied form actually
--- needed by the shooting argument.
 cubicHistoryBelowTerminalWindow :
   ∀ {bStar chain gamma} →
   CubicDrift bStar chain →
   0ℚ ≤ first chain →
   last chain ≤ gamma →
   half * bStar * cubicHistory chain ≤ gamma
-cubicHistoryBelowTerminalWindow drift firstNN terminalBelow =
+cubicHistoryBelowTerminalWindow {chain = chain} drift firstNN terminalBelow =
   let
     telescoped = cubicDriftTelescopes drift
-    differenceBelowLast : last _ - first _ ≤ last _
+
+    differenceBelowLast : last chain - first chain ≤ last chain
     differenceBelowLast =
       subst
-        (λ left → left ≤ last _)
-        (ℚRing.solve-∀ (last _) (first _))
+        (λ left → left ≤ last chain)
+        (ℚRing.solve-∀ (last chain) (first chain))
         (ℚP.+-monoʳ-≤
-          (last _)
+          (last chain)
           (ℚP.neg-mono-≤ firstNN))
   in
   ℚP.≤-trans telescoped
