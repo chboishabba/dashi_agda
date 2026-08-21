@@ -2,6 +2,8 @@ module DASHI.Biology.EmbodiedWaveCrossPollinationRegression where
 
 open import DASHI.Core.Prelude
 
+import DASHI.Core.IntersectionalNonFactorability as NF
+import DASHI.Biology.ObserverRelativeReachableSubfabricExact as Reach
 import DASHI.Biology.SymmetryResolvedEmbodiedWaveControlExact as Sym
 import DASHI.Biology.TranslationInvariantCompletionAccessibilityNonfactorabilityExact as Completion
 import DASHI.Biology.EmbodiedWaveCubieHolonomyExact as Hol
@@ -18,11 +20,11 @@ record EmbodiedWaveCrossPollinationRegression : Set where
     sourceLikeRawSymmetryCanSplitEmbodiedReach :
       (mode : Sym.SymmetryResolvedMode) →
       Sym.geometry mode ≡ Sym.sourceSinkGeometry →
-      Sym.modeIncidence Sym.Reach.regulatedContext mode
-      ≡ Sym.modeIncidence Sym.Reach.mobilisedContext (Sym.translateFirstMode mode) → ⊥
+      Sym.modeIncidence Reach.regulatedContext mode
+      ≡ Sym.modeIncidence Reach.mobilisedContext (Sym.translateFirstMode mode) → ⊥
 
     completionReadoutCannotDecodeAccessibility :
-      Completion.NF.FactorsThrough
+      NF.FactorsThrough
         Completion.completionProjection Completion.embodiedAccessibility → ⊥
 
     embodiedWaveOrderDoesNotCommute :
