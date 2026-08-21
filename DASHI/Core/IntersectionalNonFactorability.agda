@@ -1,9 +1,9 @@
 module DASHI.Core.IntersectionalNonFactorability where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
-open import Agda.Builtin.Equality using (_≡_; refl; cong)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
-open import Relation.Binary.PropositionalEquality using (sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 ------------------------------------------------------------------------
 -- INTERSECTIONAL NON-FACTORABILITY
@@ -62,10 +62,6 @@ witnessRulesOutEveryFlatFactorisation witness factor =
 
 ------------------------------------------------------------------------
 -- Concrete carrier-repair witness.
---
--- Two situated states share exactly the same flat single-axis label but differ
--- on the relevant relational/institutional phenomenon.  Therefore no change of
--- weights or interpretation *inside that flat carrier* can recover the outcome.
 ------------------------------------------------------------------------
 
 data SituatedState : Set where
@@ -100,13 +96,6 @@ flatReweightingCannotRepairMissingRelation :
   FactorsThrough flatProjection relationalOutcome → ⊥
 flatReweightingCannotRepairMissingRelation =
   witnessRulesOutEveryFlatFactorisation canonicalIntersectionalNonFactorability
-
-------------------------------------------------------------------------
--- Product-of-single-axis readings are not automatically intersectional.
--- This no-promotion boundary prevents two separately useful consumer surfaces
--- from being promoted to a sufficient situated-intersectional carrier without
--- an application-supplied factorisation witness.
-------------------------------------------------------------------------
 
 data SeparateAxisSufficiencyImpliesIntersectionalSufficiencyPermission : Set where
 
