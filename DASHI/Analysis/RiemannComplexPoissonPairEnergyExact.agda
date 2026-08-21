@@ -63,7 +63,7 @@ module DASHI.Analysis.RiemannComplexPoissonPairEnergyExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
+open import Agda.Builtin.Nat using (Nat; zero; _+_; _*_)
 open import Data.Empty using (⊥)
 open import Data.Nat.Solver using (module +-*-Solver)
 open +-*-Solver using (solve; _:+_; _:*_; con; _:=_)
@@ -84,7 +84,7 @@ record PairEnergyLedger : Set where
 open PairEnergyLedger public
 
 multiplicity : PairEnergyLedger → Nat
-multiplicity q = suc (multiplicityPredecessor q)
+multiplicity q = multiplicityPredecessor q + 1
 
 realChannelEnergy : PairEnergyLedger → Nat
 realChannelEnergy q = baselineSquareSum q + imaginaryChannelEnergy q
