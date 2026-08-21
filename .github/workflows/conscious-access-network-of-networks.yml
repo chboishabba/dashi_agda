@@ -13,15 +13,16 @@ on:
       - 'DASHI/Biology/PsychedelicAttractorReweightingBoundary.agda'
       - 'DASHI/Biology/ConsciousAccessNetworkSourceAtlas.agda'
       - 'DASHI/Biology/ConsciousAccessNetworkRegression.agda'
+      - 'DASHI/Cognition/PNF/**.agda'
+      - 'DASHI/Biology/NeuralDecisionProducerBridgeExact.agda'
       - 'DASHI/Biology/Everything.agda'
       - 'Docs/support/reference/ConsciousAccessNetworkOfNetworksFormalism.md'
       - 'scripts/check_conscious_access_network_of_networks.sh'
       - '.github/workflows/conscious-access-network-of-networks.yml'
   workflow_dispatch:
 
-
 concurrency:
-  group: dashi-global-${{ github.ref }}
+  group: conscious-access-network-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
