@@ -22,6 +22,7 @@ import DASHI.Cognition.PNF.ContextWaveFibreSelectionExact as ContextWave
 import DASHI.Cognition.PNF.MultiTimescaleAccessLearningExact as Timescale
 import DASHI.Cognition.PNF.AccessibleCandidateReasoningPipelineExact as Pipeline
 import DASHI.Cognition.PNF.AccessActuationOrthogonalityExact as Orthogonal
+import DASHI.Cognition.PNF.DecisionFibrePotentialRegression as Decision
 import DASHI.Reasoning.AccessBiasFallacySeparationExact as Bias
 import DASHI.Reasoning.FallacyObstructionCatalogue as Fallacy
 import DASHI.Interop.SensibLawResidualLattice as Residual
@@ -33,6 +34,8 @@ import DASHI.Interop.SensibLawResidualLattice as Residual
 
 record PNFWaveAccessTraumaLearningRegression : Set₁ where
   field
+    decisionFibrePotentialRegression : Decision.DecisionFibrePotentialRegression
+
     genericRetentionWithoutAccess :
       Access.RetentionWithoutAccessWitness Access.canonicalFastAccessControlField
 
@@ -141,7 +144,8 @@ open PNFWaveAccessTraumaLearningRegression public
 canonicalPNFWaveAccessTraumaLearningRegression :
   PNFWaveAccessTraumaLearningRegression
 canonicalPNFWaveAccessTraumaLearningRegression = record
-  { genericRetentionWithoutAccess = Access.canonicalRetentionWithoutAccess
+  { decisionFibrePotentialRegression = Decision.canonicalDecisionFibrePotentialRegression
+  ; genericRetentionWithoutAccess = Access.canonicalRetentionWithoutAccess
   ; movingWaveActuallyMovesSupport = Miller.movingSupportActuallyChanges
   ; crossFrequencySameGammaChangesReadout = CrossFrequency.sameGammaDifferentBeta
   ; betaLowOpensFixedAnatomicalEdge = CrossFrequency.betaLowOpensExistingAnatomicalEdge
