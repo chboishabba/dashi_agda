@@ -33,6 +33,9 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound87FourAnalyticLemmaEx
 --   coupling / nonvanishing physical observation window used by the
 --   renormalised construction.  Conversely, the one-sided prefix majorant used
 --   to keep g_j small is not by itself a positive asymptotic-freedom slope.
+--   The bilateral source condition is needed only on TERMINAL tails ending at
+--   K; demanding every internal subinterval would be an unnecessary stronger
+--   theorem.
 --
 -- * C: the primary compact-group route uses the Laplace--Beltrami Heat/Doob
 --   curvature inequality on G^E,
@@ -65,6 +68,7 @@ import DASHI.Physics.YangMills.BalabanClayT4MachinOuterSineToCanonicalGapExact
 import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound77FiveAnalyticCutsetExact
 import DASHI.Physics.YangMills.BalabanOPECoefficientRGRecurrenceUniquenessExact
 import DASHI.Physics.YangMills.BalabanPolchinskiShellIntegralDebtExact
+import DASHI.Physics.YangMills.BalabanBetaPrefixSensitivityToTubeContractionExact
 import DASHI.Physics.YangMills.BalabanClayFrozenFourCompletionContractExact
 
 ------------------------------------------------------------------------
@@ -79,13 +83,15 @@ round87ShortestClayAnalyticCount = 4
 -- Completion now means the exact same generated dynamics has BOTH:
 --
 --   (i) a bilateral cumulative linear beta tube with strictly positive lower
---       slope on every admissible finite interval; and
+--       slope on every source-required terminal tail k+1,...,K; and
 --  (ii) a tuned bare-coupling construction whose observation-scale coupling
 --       remains in a nonvanishing physical window while all CMP122 scales stay
 --       in the source small-coupling interval.
 --
 -- The constrained-Gaussian beta_Z Hessian and the nonlinear/history beta_Int
--- estimate are the direct analytic work needed to construct that inhabitant.
+-- estimate are the direct analytic work needed for (i).  For (ii), a strict
+-- cumulative-beta sensitivity q<1 implies the shooting-map contraction by the
+-- imported exact bridge; the physical q<1 estimate is still open.
 literalCompactSimplePositiveBetaLevel : ProofLevel
 literalCompactSimplePositiveBetaLevel = conditional
 
@@ -168,6 +174,9 @@ heatShellDebtSummationLevel = machineChecked
 
 bilateralCumulativeBetaAlgebraLevel : ProofLevel
 bilateralCumulativeBetaAlgebraLevel = machineChecked
+
+betaPrefixSensitivityToShootingContractionLevel : ProofLevel
+betaPrefixSensitivityToShootingContractionLevel = machineChecked
 
 frozenFourCompletionContractLevel : ProofLevel
 frozenFourCompletionContractLevel = machineChecked
