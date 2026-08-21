@@ -16,8 +16,11 @@ on:
       - '.github/workflows/riemann-reflection-orbit-defect-2026.yml'
   workflow_dispatch:
 
+# The repository currently launches many path-overlapping PR workflows.  A
+# tranche-local group prevents unrelated global checks on the same ref from
+# cancelling this focused proof check before it obtains a runner.
 concurrency:
-  group: dashi-global-${{ github.ref }}
+  group: riemann-reflection-orbit-defect-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:
