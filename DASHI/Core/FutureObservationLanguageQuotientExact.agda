@@ -6,7 +6,7 @@ module DASHI.Core.FutureObservationLanguageQuotientExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
-open import Relation.Binary.PropositionalEquality using (sym)
+open import Relation.Binary.PropositionalEquality using (sym; subst)
 
 import DASHI.Core.AdmissibleReachability as Reachability
 import DASHI.Core.TypedDependencyCore as Dependency
@@ -165,19 +165,20 @@ exactSummaryCertifiesFutureLanguageSafety
   {system = system} {project = project} {coarsen = coarsen} summary =
   futureLanguageSafeProjection certify
   where
-    certify :
-      ∀ {left right} →
+    certify : ∀ {left right} →
       coarsen left ≡ coarsen right →
       FutureObservationEquivalent system project left right
-    certify {left} {right} refl =
+    certify {left} {right} eq =
       futureObservationEquivalent λ actions observation →
         logicalIff
           (λ witness →
             backward (summaryExact summary right actions observation)
-              (forward (summaryExact summary left actions observation) witness))
+              (subst (λ c → SummaryLanguage summary c actions observation) eq
+                (forward (summaryExact summary left actions observation) witness)))
           (λ witness →
             backward (summaryExact summary left actions observation)
-              (forward (summaryExact summary right actions observation) witness))
+              (subst (λ c → SummaryLanguage summary c actions observation) (sym eq)
+                (forward (summaryExact summary right actions observation) witness)))
 
 ------------------------------------------------------------------------
 -- Concrete quotient presentations.
