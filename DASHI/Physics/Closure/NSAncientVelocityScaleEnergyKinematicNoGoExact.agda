@@ -44,6 +44,7 @@ module DASHI.Physics.Closure.NSAncientVelocityScaleEnergyKinematicNoGoExact wher
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
+open import Data.Product using (_×_; _,_)
 open import Data.Rational.Base using (ℚ; 1ℚ; _*_)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
@@ -115,9 +116,6 @@ pow5One = solve []
 pow6One : pow6 1ℚ ≡ 1ℚ
 pow6One = solve []
 
-pow2One : pow2 1ℚ ≡ 1ℚ
-pow2One = solve []
-
 fixedEnergyDespiteGrowingAmplitude :
   (n q : ℚ) →
   q * n ≡ 1ℚ →
@@ -160,10 +158,6 @@ relativeOscillationIsInverseScale n q reciprocal =
       (cong (λ z → q * pow5 z) reciprocal)
       (trans (cong (q *_) pow5One) (ℚP.*-identityʳ q)))
 
--- Exact combined witness: on the n^3 / n^(-2) concentration scaling,
--- fixed energy coexists with inverse-scale normalized derivative,
--- inverse-square critical cylinder defect, and inverse-scale relative
--- oscillation.  The Archimedean step q -> 0 belongs to the analytic carrier.
 energyAloneLeavesVelocityScaleDefectUnfunded :
   (n q : ℚ) →
   q * n ≡ 1ℚ →
@@ -176,5 +170,3 @@ energyAloneLeavesVelocityScaleDefectUnfunded n q reciprocal =
   normalizedDerivativeIsInverseScale n q reciprocal ,
   criticalGradientCylinderIsInverseSquare n q reciprocal ,
   relativeOscillationIsInverseScale n q reciprocal
-  where
-    open import Data.Product using (_×_; _,_)
