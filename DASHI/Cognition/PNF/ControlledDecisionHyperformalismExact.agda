@@ -1,11 +1,13 @@
 module DASHI.Cognition.PNF.ControlledDecisionHyperformalismExact where
 
-open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Empty using (⊥)
+open import Data.Product using (proj₁)
 
 import DASHI.Biology.AllostaticBodyStateExact as Allostatic
 import DASHI.Biology.InteroceptiveRefreshCalibrationExact as Refresh
+import DASHI.Core.IntersectionalNonFactorability as NF
+import DASHI.Cognition.PNF.BoundedEvidenceCommitmentExact as Evidence
 import DASHI.Cognition.PNF.ControlledDecisionDynamicalSystemExact as System
 import DASHI.Cognition.PNF.ControlledDecisionStateExact as Controlled
 import DASHI.Cognition.PNF.DecisionConfidenceNoncollapseExact as Confidence
@@ -17,20 +19,8 @@ import DASHI.Cognition.PNF.FiniteVariationalFreeEnergyExact as Variational
 import DASHI.Cognition.PNF.LandscapeFluxOrderBridgeExact as LandscapeOrder
 import DASHI.Cognition.PNF.LearningUpdateMechanismSeparationExact as LearningMechanism
 import DASHI.Cognition.PNF.NeuromodulatedCommitmentThresholdExact as Threshold
+import DASHI.Cognition.PNF.NoncommutativeDecisionUpdateQQExact as Order
 import DASHI.Cognition.PNF.QuantumDecisionInstrumentHierarchyExact as Instrument
-
-------------------------------------------------------------------------
--- CONTROLLED DECISION HYPERFORMALISM
---
--- A strict extension of DecisionFibrePotentialHyperformalismExact.  The base
--- object remains authoritative for access/candidate/audit/potential/commitment/
--- actuation/learning.  This layer adds only the coordinates demonstrated to be
--- independently stateful by the converging literature:
---
--- evidence, dynamic threshold, confidence, conflict, allostatic body,
--- interoception/felt state, nonequilibrium flux, and exact finite variational
--- structure.
-------------------------------------------------------------------------
 
 record ControlledDecisionHyperformalism : Set₁ where
   constructor controlledDecisionHyperformalism
@@ -77,26 +67,24 @@ sameConfidenceNeedNotMeanSameEvidenceHistory :
   Confidence.historyConfidence Confidence.highConfidenceAfterOne
   ≡ Confidence.historyConfidence Confidence.highConfidenceAfterTwo
 sameConfidenceNeedNotMeanSameEvidenceHistory =
-  Confidence.sameConfidenceDifferentEvidenceHistory .Data.Product.proj₁
-  where
-    open import Data.Product using (proj₁)
+  proj₁ Confidence.sameConfidenceDifferentEvidenceHistory
 
 sameEvidenceCanCommitAtDifferentThresholds :
-  Threshold.thresholdUnder Threshold.lowerThreshold Threshold.Evidence.e1
-  ≡ Threshold.thresholdUnder Threshold.elevatedThreshold Threshold.Evidence.e1 → ⊥
+  Threshold.thresholdUnder Threshold.lowerThreshold Evidence.e1
+  ≡ Threshold.thresholdUnder Threshold.elevatedThreshold Evidence.e1 → ⊥
 sameEvidenceCanCommitAtDifferentThresholds =
   Threshold.sameEvidenceDifferentThresholdChangesCommitment
 
 formalAuditCannotDetermineResponseConflict :
-  _ → ⊥
+  NF.FactorsThrough Conflict.formalAudit Conflict.responseConflict → ⊥
 formalAuditCannotDetermineResponseConflict = Conflict.formalAuditCannotDetermineConflict
 
 scalarPotentialCannotDetermineFluxOutcome :
-  _ → ⊥
+  NF.FactorsThrough Landscape.potential Landscape.flowOutcome → ⊥
 scalarPotentialCannotDetermineFluxOutcome = Landscape.potentialCannotDetermineFlowOutcome
 
 potentialCannotRecoverNoncommutingHistory :
-  _ → ⊥
+  NF.FactorsThrough LandscapeOrder.potentialObservation LandscapeOrder.beliefState → ⊥
 potentialCannotRecoverNoncommutingHistory = LandscapeOrder.potentialCannotRecoverOrderedHistory
 
 extinctionStillNotErasure :
@@ -108,11 +96,11 @@ extinctionStillNotReconsolidation :
 extinctionStillNotReconsolidation = LearningMechanism.extinctionIsNotReconsolidation
 
 generalizedInstrumentDoesNotForceQQ :
-  Instrument.Order.QQSatisfied
+  Order.QQSatisfied
     (Instrument.GeneralizedInstrumentWitness.counts
       Instrument.canonicalGeneralizedInstrumentWitness) → ⊥
 generalizedInstrumentDoesNotForceQQ = Instrument.generalizedInstrumentDoesNotForceQQ
 
 mobilisedBodyDoesNotDetermineAutonomy :
-  _ → ⊥
+  NF.FactorsThrough Controlled.bodyProjection Controlled.autonomyProjection → ⊥
 mobilisedBodyDoesNotDetermineAutonomy = Controlled.bodyStateCannotDetermineAutonomyAxes
