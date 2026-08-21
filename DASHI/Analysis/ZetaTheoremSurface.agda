@@ -4,8 +4,9 @@ module DASHI.Analysis.ZetaTheoremSurface where
 --
 -- Exact rational samples and visualisation receipts are exported together
 -- with the 3-adic geometric-series distinction, finite prime-counting and
--- prime-power arithmetic, the fail-closed analytic promotion gate, and the
--- modular Millennium-level DASHI-to-Weil-square theorem ladder.
+-- prime-power arithmetic, the fail-closed analytic promotion gate, the
+-- modular Millennium-level DASHI-to-Weil-square theorem ladder, and the 2026
+-- reflection-orbit quotient/defect algebra motivated by Alpöge--Furman.
 
 open import DASHI.Analysis.AbelZeta public
 open import DASHI.Analysis.ZetaVisualization public
@@ -13,6 +14,13 @@ open import DASHI.Analysis.ThreeAdicGeometricSeries public
 open import DASHI.Analysis.RiemannZetaProgramBoundary public
 open import DASHI.Analysis.RiemannAnalyticSubstrate public
 open import DASHI.Analysis.WeilTestSpace public
+
+-- 2026 reflection-orbit / inverse-pair lane.  These modules construct exact
+-- finite/discrete orbit algebra and explicit non-promotion boundaries; they do
+-- not claim to reconstruct the analytic Weil Hermitian compression.
+open import DASHI.Analysis.RiemannReflectionOrbitDefectExact public
+open import DASHI.Analysis.RiemannReflectionPairBlockExact public
+import DASHI.Analysis.RiemannReflectionC3OrbitShapeBridgeExact
 
 open import DASHI.Analysis.PrimeCountingFunction public
   using
@@ -103,8 +111,8 @@ open import DASHI.Analysis.DashiWeightedValuationSquareCoercivity public
     )
 
 -- Detailed arithmetic, algorithmic, analytic, transform, square-coercivity,
--- and regression modules stay qualified here to avoid exporting local helper
--- combinators and overlapping projection names.
+-- reflection/C3 comparison, and regression modules stay qualified here to
+-- avoid exporting local helper combinators and overlapping projection names.
 import DASHI.Analysis.NatPrimeCountingExamples
 import DASHI.Analysis.RiemannVonMangoldtSpecification
 import DASHI.Analysis.RiemannVonMangoldtPrimeSide
