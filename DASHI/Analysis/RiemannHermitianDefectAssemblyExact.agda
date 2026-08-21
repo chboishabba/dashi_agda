@@ -31,6 +31,12 @@ open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Data.Nat.Solver using (module +-*-Solver)
 open +-*-Solver using (solve; _:+_; _:*_; con; _:=_)
 
+sym : {A : Set} {x y : A} → x ≡ y → y ≡ x
+sym refl = refl
+
+trans : {A : Set} {x y z : A} → x ≡ y → y ≡ z → x ≡ z
+trans refl yz = yz
+
 ------------------------------------------------------------------------
 -- Elementary zero lemmas.
 ------------------------------------------------------------------------
@@ -45,34 +51,6 @@ sumZeroRight a (suc b) ()
 
 ------------------------------------------------------------------------
 -- Step 1 + Step 2 ledger.
---
--- `weightedTransverseDefect` stands for a quantity such as
---
---   c_phi * alpha^2
---
--- or an aggregate sum of such terms.
---
--- `coercivitySlack` records how much larger the full-grid Hermitian excess is
--- than that coercive lower target:
---
---   weightedDefect + coercivitySlack = fullGridExcess.
---
--- `tailLoss` is the Hermitian energy omitted by the finite k-window:
---
---   fullGridExcess = finiteCompressionExcess + tailLoss.
---
--- `retentionMargin` certifies that the retained finite excess dominates the
--- tail loss:
---
---   tailLoss + retentionMargin = finiteCompressionExcess.
---
--- Together these imply the exact domination identity
---
---   weightedDefect + coercivitySlack + retentionMargin
---      = 2 * finiteCompressionExcess.
---
--- Hence the familiar inequality weightedDefect <= 2 finiteExcess is recovered
--- without introducing an order API.
 ------------------------------------------------------------------------
 
 record FiniteHermitianRetention : Set where
@@ -127,6 +105,31 @@ finiteRetentionDominationIdentity r =
       refl
       f t m
 
+finiteZeroForcesTailZero :
+  (r : FiniteHermitianRetention) →
+  finiteCompressionExcess r ≡ zero →
+  tailLoss r ≡ zero
+finiteZeroForcesTailZero r hfinite =
+  sumZeroLeft
+    (tailLoss r)
+    (retentionMargin r)
+    (trans (tailDominatedByFinite r) hfinite)
+
+finiteZeroForcesFullGridZero :
+  (r : FiniteHermitianRetention) →
+  finiteCompressionExcess r ≡ zero →
+  fullGridExcess r ≡ zero
+finiteZeroForcesFullGridZero r hfinite =
+  trans
+    (finiteTailDecomposition r)
+    (zeroSum hfinite (finiteZeroForcesTailZero r hfinite))
+  where
+  zeroSum :
+    finiteCompressionExcess r ≡ zero →
+    tailLoss r ≡ zero →
+    finiteCompressionExcess r + tailLoss r ≡ zero
+  zeroSum refl refl = refl
+
 finiteZeroForcesWeightedDefectZero :
   (r : FiniteHermitianRetention) →
   finiteCompressionExcess r ≡ zero →
@@ -135,22 +138,14 @@ finiteZeroForcesWeightedDefectZero r hfinite =
   sumZeroLeft
     (weightedTransverseDefect r)
     (coercivitySlack r)
-    (transFull r)
-  where
-  transFull :
-    (q : FiniteHermitianRetention) →
-    weightedTransverseDefect q + coercivitySlack q ≡ zero
-  transFull q rewrite fullGridCoercivity q | finiteTailDecomposition q | hfinite =
-    sumZeroLeft zero (tailLoss q) refl
+    (trans
+      (fullGridCoercivity r)
+      (finiteZeroForcesFullGridZero r hfinite))
 
 ------------------------------------------------------------------------
 -- Step 3 ledger: transport the retained Hermitian excess to an arithmetic
 -- observable without pretending the existing holomorphic Weil trace already
 -- does this job.
---
--- The nonnegative `transportRemainder` makes the desired domination exact:
---
---   finite Hermitian excess + remainder = arithmetic budget.
 ------------------------------------------------------------------------
 
 record HermitianArithmeticTransport : Set where
@@ -172,11 +167,7 @@ zeroArithmeticBudgetForcesFiniteExcessZero a hbudget =
   sumZeroLeft
     (finiteCompressionExcess (retention a))
     (transportRemainder a)
-    eq0
-  where
-  eq0 :
-    finiteCompressionExcess (retention a) + transportRemainder a ≡ zero
-  eq0 rewrite arithmeticDecomposition a | hbudget = refl
+    (trans (arithmeticDecomposition a) hbudget)
 
 zeroArithmeticBudgetForcesWeightedDefectZero :
   (a : HermitianArithmeticTransport) →
@@ -189,11 +180,6 @@ zeroArithmeticBudgetForcesWeightedDefectZero a hbudget =
 
 ------------------------------------------------------------------------
 -- Step 4 / RH-facing socket.
---
--- This record does not identify `Zero` with actual zeta zeros.  It states the
--- final logical interface required once the analytic substrate supplies a
--- weighted defect whose vanishing forces each transverse displacement to
--- vanish.
 ------------------------------------------------------------------------
 
 record HermitianDefectVanishingCriterion : Set₁ where
@@ -219,11 +205,12 @@ aggregateDefectVanishesFromZeroArithmeticBudget :
   arithmeticBudget (HermitianDreamAssembly.transport a) ≡ zero →
   HermitianDefectVanishingCriterion.aggregateWeightedDefect
     (HermitianDreamAssembly.criterion a) ≡ zero
-aggregateDefectVanishesFromZeroArithmeticBudget a hbudget rewrite
-  HermitianDreamAssembly.aggregateIdentification a =
-    zeroArithmeticBudgetForcesWeightedDefectZero
+aggregateDefectVanishesFromZeroArithmeticBudget a hbudget =
+  trans
+    (HermitianDreamAssembly.aggregateIdentification a)
+    (zeroArithmeticBudgetForcesWeightedDefectZero
       (HermitianDreamAssembly.transport a)
-      hbudget
+      hbudget)
 
 pointwiseTransverseDefectVanishesFromZeroArithmeticBudget :
   (a : HermitianDreamAssembly) →
