@@ -25,10 +25,14 @@ module DASHI.Physics.Closure.NSAncientLinearGrowthLiouvilleCounterexampleExact w
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
-open import Data.Product using (_×_; _,_)
-open import Data.Rational.Base using (ℚ; 0ℚ; _+_; -_)
+open import Data.Product using (_×_; _,_; proj₁)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; -_; _<_)
+import Data.Rational.Properties as ℚP
+open ℚP using (_<?_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong₂)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; subst; sym)
+open import Relation.Nullary.Decidable.Core using (toWitness)
+open import Relation.Nullary.Negation.Core using (¬_)
 
 Point3 : Set
 Point3 = ℚ × (ℚ × ℚ)
@@ -40,7 +44,7 @@ velocity : Point3 → Vector3
 velocity (x , (y , z)) = x , ((- y) , 0ℚ)
 
 divergence : Point3 → ℚ
-divergence _ = 1 + ((- 1) + 0)
+divergence _ = 1ℚ + ((- 1ℚ) + 0ℚ)
 
 vorticity : Point3 → Vector3
 vorticity _ = 0ℚ , (0ℚ , 0ℚ)
@@ -82,14 +86,31 @@ origin : Point3
 origin = 0ℚ , (0ℚ , 0ℚ)
 
 xUnit : Point3
-xUnit = 1 , (0ℚ , 0ℚ)
+xUnit = 1ℚ , (0ℚ , 0ℚ)
 
 velocityAtOrigin : velocity origin ≡ (0ℚ , (0ℚ , 0ℚ))
 velocityAtOrigin = refl
 
-velocityAtXUnit : velocity xUnit ≡ (1 , (0ℚ , 0ℚ))
+velocityAtXUnit : velocity xUnit ≡ (1ℚ , (0ℚ , 0ℚ))
 velocityAtXUnit = refl
 
--- The distinct displayed values above are the concrete nonconstancy witness.
--- No general inequality or receipt is used: this is a literal exact solution
--- of the stationary incompressible equations on the polynomial carrier.
+SpatiallyConstant : (Point3 → Vector3) → Set
+SpatiallyConstant u = (a b : Point3) → u a ≡ u b
+
+zeroLessOne : 0ℚ < 1ℚ
+zeroLessOne = toWitness {a? = 0ℚ <? 1ℚ} _
+
+zeroNotOne : ¬ (0ℚ ≡ 1ℚ)
+zeroNotOne zeroEqualsOne =
+  let
+    zeroLessZero : 0ℚ < 0ℚ
+    zeroLessZero =
+      subst (λ right → 0ℚ < right) (sym zeroEqualsOne) zeroLessOne
+  in
+  ℚP.<-irrefl 0ℚ zeroLessZero
+
+linearGrowthWitnessIsNonconstant : ¬ SpatiallyConstant velocity
+linearGrowthWitnessIsNonconstant constant =
+  zeroNotOne
+    (cong proj₁
+      (constant origin xUnit))
