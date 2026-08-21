@@ -8,6 +8,20 @@ module DASHI.Core.FibreOrderNonfactorabilityExact where
 -- differ, the coarse surface cannot reconstruct which ordered endpoint was
 -- produced.
 --
+-- Mathematical precedent / structural analogue:
+-- Kenneth G. Wilson, "Confinement of quarks",
+-- DOI 10.1103/PhysRevD.10.2445.
+-- Frank Wilczek; A. Zee,
+-- "Appearance of Gauge Structure in Simple Dynamical Systems",
+-- DOI 10.1103/PhysRevLett.52.2111.
+--
+-- Non-Abelian parallel transport/holonomy is path ordered precisely because
+-- the transported transformations need not commute while the base loop may
+-- return to the same point.  The finite theorem below shares that algebraic
+-- shape, but it does NOT construct a connection, curvature, principal bundle,
+-- Wilson loop, Lie group, or gauge field.  Hence "holonomy analogue" is a
+-- provenance/calibration statement, not a semantic identification.
+--
 -- This is domain-neutral algebra.  It can be instantiated by legal decision
 -- dynamics, access/braid dynamics, or other fibre-preserving systems without
 -- identifying their semantics.
@@ -18,10 +32,6 @@ open import DASHI.Core.Prelude
 import DASHI.Core.FibreRestrictionCore as Fibre
 import DASHI.Core.FibrePreservingDynamicsExact as Dynamics
 import DASHI.Core.IntersectionalNonFactorability as NF
-
-------------------------------------------------------------------------
--- 1. Order carrier and composite endpoints.
-------------------------------------------------------------------------
 
 data UpdateOrder : Set where
   firstAfterSecond secondAfterFirst : UpdateOrder
@@ -45,10 +55,6 @@ orderedSurface :
   Fibre.Surface core
 orderedSurface {core} first second x order =
   Fibre.project core (orderedEndpoint first second x order)
-
-------------------------------------------------------------------------
--- 2. Surface invariance composes.
-------------------------------------------------------------------------
 
 compositeSurfaceInvariant :
   ∀ {core : Fibre.FibreRestrictionCore}
@@ -74,10 +80,6 @@ orderedCompositesShareSurface firstInvariant secondInvariant x =
   trans
     (compositeSurfaceInvariant firstInvariant secondInvariant x)
     (sym (compositeSurfaceInvariant secondInvariant firstInvariant x))
-
-------------------------------------------------------------------------
--- 3. Noncommuting hidden endpoints produce an exact non-factorability witness.
-------------------------------------------------------------------------
 
 orderEndpointNonfactorability :
   ∀ {core : Fibre.FibreRestrictionCore}
@@ -111,10 +113,6 @@ surfaceCannotDecodeOrderedEndpoint firstInvariant secondInvariant x noncommutes 
   NF.witnessRulesOutEveryFlatFactorisation
     (orderEndpointNonfactorability
       firstInvariant secondInvariant x noncommutes)
-
-------------------------------------------------------------------------
--- 4. Same statement directly from fibre automorphisms.
-------------------------------------------------------------------------
 
 automorphismOrderNonfactorability :
   ∀ {core : Fibre.FibreRestrictionCore} →
