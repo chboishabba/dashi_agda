@@ -7,6 +7,7 @@ on:
       - 'DASHI/Cognition/PNF/**'
       - 'DASHI/Core/NonFactorabilityCompositionExact.agda'
       - 'DASHI/Governance/LegalDecisionDoubleProjectionExact.agda'
+      - 'DASHI/Governance/DecisionPotentialAuthorityOrthogonalityExact.agda'
       - 'DASHI/Governance/Everything.agda'
       - 'DASHI/Cognition/Utterance/All.agda'
       - 'DASHI/Foundations/InverseLimitClopenRefinement.agda'
@@ -79,6 +80,7 @@ jobs:
               DASHI/Cognition/PNF/DecisionFibrePotentialRegression.agda
               DASHI/Core/NonFactorabilityCompositionExact.agda
               DASHI/Governance/LegalDecisionDoubleProjectionExact.agda
+              DASHI/Governance/DecisionPotentialAuthorityOrthogonalityExact.agda
               DASHI/Foundations/InverseLimitClopenRefinement.agda
               DASHI/Foundations/DerivedCoarseDynamics.agda
               DASHI/NumberTheory/ThreeAdicCompletionCutset.agda
