@@ -13,7 +13,7 @@ on:
   workflow_dispatch:
 
 concurrency:
-  group: dashi-global-${{ github.ref }}
+  group: conscious-round11-wave-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:
