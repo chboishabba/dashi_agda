@@ -12,11 +12,17 @@ import DASHI.Cognition.PNF.BoundedEvidenceCommitmentExact as Bounded
 import DASHI.Cognition.PNF.GoNoGoActuationGateExact as GoNoGo
 import DASHI.Cognition.PNF.NoncommutativeDecisionUpdateQQExact as Order
 import DASHI.Cognition.PNF.ActiveInferenceFibreBoundaryExact as FreeEnergy
+import DASHI.Cognition.PNF.FiniteExpectedDecisionPotentialExact as Expected
 import DASHI.Cognition.PNF.DecisionAutonomyExact as Autonomy
 import DASHI.Cognition.PNF.DecisionOutcomeLearningFeedbackExact as Feedback
 import DASHI.Cognition.PNF.AttentionValueActuationSeparationExact as Attention
 import DASHI.Cognition.PNF.DynamicDecisionFieldCompetitionExact as DFT
 import DASHI.Cognition.PNF.DecisionActionProjectionNonFactorabilityExact as ActionNF
+import DASHI.Cognition.PNF.DecisionStateBundleExact as Bundle
+import DASHI.Cognition.PNF.DecisionStateBundleDynamicsExact as BundleDynamics
+import DASHI.Cognition.PNF.DecisionActionFibreMultiplicityExact as ActionFibre
+import DASHI.Cognition.PNF.ContextualDecisionSubspaceExact as Subspace
+import DASHI.Cognition.PNF.ConsiderationSetSelectionExact as Consideration
 import DASHI.Cognition.PNF.AccessibleCandidateReasoningPipelineExact as Pre
 import DASHI.Cognition.PNF.PNFFastAccessMemoryLearningBridgeExact as AccessPNF
 import DASHI.Cognition.PNF.MemoryFibre as Memory
@@ -28,29 +34,36 @@ import DASHI.Interop.SensibLawResidualLattice as Residual
 import DASHI.Core.IntersectionalNonFactorability as NF
 
 ------------------------------------------------------------------------
--- Unified decision-fibre formalism.
+-- UNIFIED DECISION-FIBRE / POTENTIAL HYPERFORMALISM
 --
--- fine state
+-- fine retained state
 --   -> momentary accessibility
 --   -> live consideration fibre / candidate-generation bias
 --   -> formal fallacy/audit layer
---   -> potential + interaction + evidence-accumulation dynamics
+--   -> observer/context-indexed potential + interaction + accumulation
 --   -> bounded commitment
 --   -> Go/NoGo-style actuation gate
 --   -> outcome
 --   -> learning / future accessibility and transition weight.
 --
--- No coordinate is definitionally promoted to another.  Specific theories
--- (DFT, attentional DDM, recurrent attractor networks, bounded accumulation,
--- Go/NoGo gating, quantum-like order effects, active inference) enter as
--- producers/comparison structures over this spine rather than competing
--- foundational ontologies.
+-- DecisionStateBundleExact makes the snapshot carrier explicit:
+--   (F_o, A_t, C_t, V_t, K_t, H_t, Phi_t, M_t, G_t, L_t).
+--
+-- Specific theories (DFT, attentional DDM, recurrent attractor networks,
+-- context-dependent population geometry, bounded accumulation, Go/NoGo
+-- gating, quantum-like order effects and active inference) are producers or
+-- comparison structures over this spine.  None is promoted to the ontology.
 ------------------------------------------------------------------------
 
 record DecisionFibrePotentialHyperformalism : Set₁ where
   constructor decisionFibrePotentialHyperformalism
   field
     potentialBoundary : Potential.DecisionPotentialBoundary
+    bundleBoundary : Bundle.DecisionStateBundleBoundary
+    bundleDynamicsBoundary : BundleDynamics.DecisionStateBundleDynamicsBoundary
+    finiteExpectedPotentialBoundary : Expected.FiniteExpectedPotentialBoundary
+    contextSubspaceBoundary : Subspace.ContextualDecisionSubspaceBoundary
+    considerationSetBoundary : Consideration.ConsiderationSetSelectionBoundary
     operatorSeparation : Dynamics.DecisionOperatorSeparation
     boundedEvidenceBoundary : Bounded.BoundedEvidenceBoundary
     goNoGoBoundary : GoNoGo.GoNoGoBoundary
@@ -72,6 +85,11 @@ canonicalDecisionFibrePotentialHyperformalism :
 canonicalDecisionFibrePotentialHyperformalism =
   decisionFibrePotentialHyperformalism
     Potential.canonicalDecisionPotentialBoundary
+    Bundle.canonicalDecisionStateBundleBoundary
+    BundleDynamics.canonicalDecisionStateBundleDynamicsBoundary
+    Expected.canonicalFiniteExpectedPotentialBoundary
+    Subspace.canonicalContextualDecisionSubspaceBoundary
+    Consideration.canonicalConsiderationSetSelectionBoundary
     Dynamics.canonicalDecisionOperatorSeparation
     Bounded.canonicalBoundedEvidenceBoundary
     GoNoGo.canonicalGoNoGoBoundary
@@ -105,11 +123,27 @@ accessFailureIsNotFormalNoTypedMeet :
     AccessPNF.formalResidual s ≡ Residual.noTypedMeet) → ⊥
 accessFailureIsNotFormalNoTypedMeet = AccessPNF.accessFailureCannotForceNoTypedMeet
 
+contextualIrrelevanceDoesNotDeleteRepresentation :
+  Subspace.bothDimensionsRepresented Subspace.baseState
+  ≡ Subspace.bothDimensionsRepresented Subspace.counterPerturbedState
+  × Subspace.choiceReadout Subspace.readSupport Subspace.baseState
+    ≡ Subspace.choiceReadout Subspace.readSupport Subspace.counterPerturbedState
+  × (Subspace.counterSignal Subspace.baseState
+      ≡ Subspace.counterSignal Subspace.counterPerturbedState → ⊥)
+contextualIrrelevanceDoesNotDeleteRepresentation =
+  Subspace.irrelevantDimensionCanRemainRepresentedButChoiceOrthogonal
+
 considerationCanChangePreferenceWithoutChangingStorage :
   Dynamics.preferredCandidate Dynamics.narrowConsideration
   ≡ Dynamics.preferredCandidate Dynamics.broadConsideration → ⊥
 considerationCanChangePreferenceWithoutChangingStorage =
   Dynamics.considerationSetCanChangePreferredCandidate
+
+localConsiderationOptimumCanDifferFromFullCarrier :
+  Consideration.selectedByValue Dynamics.narrowConsideration
+  ≡ Consideration.selectedByValue Dynamics.broadConsideration → ⊥
+localConsiderationOptimumCanDifferFromFullCarrier =
+  Consideration.localAndFullCarrierOptimaCanDiffer
 
 sameBiasCannotDetermineFormalFallacy :
   (decode : Bias.AccessBias → Fallacy.FallacyObstruction) →
@@ -157,6 +191,23 @@ goNoGoCanChangeActuationWithCommitmentFixed = GoNoGo.sameCommitmentDifferentGoNo
 observedActionCannotRecoverFineDecisionState :
   NF.FactorsThrough ActionNF.observedAction ActionNF.fineDecisionState → ⊥
 observedActionCannotRecoverFineDecisionState = ActionNF.actionCannotRecoverFineDecisionState
+
+bundleActionCannotRecoverCommitment :
+  (memory : Memory.MemoryFibre) →
+  NF.FactorsThrough Bundle.observedAction Bundle.commitmentState → ⊥
+bundleActionCannotRecoverCommitment = Bundle.actionCannotRecoverCommitmentFromBundle
+
+bundleActionFibreIsMultidimensionallyPlural :
+  (memory : Memory.MemoryFibre) → ActionFibre.ActionFibreMultiplicity memory
+bundleActionFibreIsMultidimensionallyPlural =
+  ActionFibre.canonicalActionFibreMultiplicity
+
+bundleHistoryUpdatesAreNoncommutative :
+  (memory : Memory.MemoryFibre) →
+  BundleDynamics.historyABBundle memory
+  ≡ BundleDynamics.historyBABundle memory → ⊥
+bundleHistoryUpdatesAreNoncommutative =
+  BundleDynamics.bundleHistoryUpdatesDoNotCommute
 
 observableCommutationDoesNotForceUpdateCommutation :
   Order.observeAThenB Order.initial ≡ Order.observeBThenA Order.initial
