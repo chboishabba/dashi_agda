@@ -1,7 +1,7 @@
 module DASHI.Cognition.PNF.DecisionConfidenceNoncollapseExact where
 
-open import Agda.Builtin.Bool using (Bool; false)
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
 import DASHI.Cognition.PNF.BoundedEvidenceCommitmentExact as Evidence
@@ -14,9 +14,16 @@ import DASHI.Cognition.PNF.BoundedEvidenceCommitmentExact as Evidence
 -- "Representation of Confidence Associated with a Decision by Neurons in the
 -- Parietal Cortex", DOI 10.1126/science.1169405.
 --
--- The finite witness below only protects the type distinction.  It does not
--- claim a unique anatomical confidence decoder or that confidence is carried
--- exclusively by LIP.
+-- Michael Pereira; Nathan Faivre; Iñaki Iturrate; Marco Wirthlin; Luana
+-- Serafini; Stephanie Martin; Arnaud Desvachez; Olaf Blanke; Dimitri Van De
+-- Ville; José del R. Millán,
+-- "Disentangling the origins of confidence in speeded perceptual judgments
+-- through multimodal imaging", DOI 10.1073/pnas.1918335117.
+--
+-- The finite witness protects the type distinction and leaves postdecisional
+-- confidence computation separately representable.  It does not claim a
+-- unique anatomical confidence decoder or that confidence is exclusively LIP,
+-- IFG, insula, or any other single region.
 ------------------------------------------------------------------------
 
 data Confidence : Set where lowConfidence highConfidence : Confidence
@@ -37,7 +44,7 @@ committedHighConfidence = decisionReadout Evidence.committed highConfidence
 
 sameCommitmentDifferentConfidence :
   commitment committedLowConfidence ≡ commitment committedHighConfidence
-sameCommitmentDifferentConfidence = Agda.Builtin.Equality.refl
+sameCommitmentDifferentConfidence = refl
 
 commitmentDoesNotDetermineConfidence :
   committedLowConfidence ≡ committedHighConfidence → ⊥
@@ -48,6 +55,7 @@ record ConfidenceBoundary : Set where
   field
     confidenceEqualsCommitment : Bool
     sameCommitmentForcesSameConfidence : Bool
+    postdecisionalConfidenceSeparatelyRepresentable : Bool
 
 canonicalConfidenceBoundary : ConfidenceBoundary
-canonicalConfidenceBoundary = confidenceBoundary false false
+canonicalConfidenceBoundary = confidenceBoundary false false true
