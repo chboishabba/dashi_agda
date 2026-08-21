@@ -10,6 +10,7 @@ module DASHI.EverythingRiemannReflectionOrbitDefect2026 where
 import DASHI.Analysis.RiemannReflectionOrbitDefectExact
 import DASHI.Analysis.RiemannReflectionPairBlockExact
 import DASHI.Analysis.RiemannWeilOffLineHyperbolicBlockExact
+import DASHI.Analysis.RiemannComplexPoissonPairEnergyExact
 import DASHI.Analysis.RiemannReflectionC3OrbitShapeBridgeExact
 import DASHI.Analysis.RiemannReflectionOrbitDefectRegression
 import DASHI.Analysis.ZetaTheoremSurface
