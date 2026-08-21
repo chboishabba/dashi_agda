@@ -1,0 +1,50 @@
+{
+  "observer_boundary": "pixels only after render; theory metadata not read",
+  "observed_supervoxel_count": 4,
+  "observed_fibre_count": 9,
+  "observed_fibres_per_supervoxel": [
+    3,
+    1,
+    2,
+    3
+  ],
+  "observed_edges": [
+    [
+      0,
+      1
+    ],
+    [
+      0,
+      2
+    ],
+    [
+      1,
+      3
+    ],
+    [
+      2,
+      3
+    ]
+  ],
+  "observed_degree_profile": [
+    2,
+    2,
+    2,
+    2
+  ],
+  "observed_length2_paths_0_to_3": [
+    [
+      0,
+      1,
+      3
+    ],
+    [
+      0,
+      2,
+      3
+    ]
+  ],
+  "two_distinct_intermediate_paths": true,
+  "biological_mechanism_inferred_from_pixels": false,
+  "clinical_meaning_inferred_from_pixels": false
+}

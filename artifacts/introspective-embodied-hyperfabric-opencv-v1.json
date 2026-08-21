@@ -1,0 +1,16 @@
+{
+  "experiment": "introspective-embodied-hyperfabric-v1",
+  "method": [
+    "faithful finite theory model",
+    "deterministic matplotlib visualization",
+    "OpenCV connected-component and Hough-line recovery",
+    "Agda receipt formalizing only recovered invariants"
+  ],
+  "detector_input_boundary": "The OpenCV detector consumed the rendered PNG only; it did not consume theory.json or intended counts.",
+  "observed_supervoxel_count": 4,
+  "observed_fibre_count": 9,
+  "observed_fibres_per_supervoxel": [3, 1, 2, 3],
+  "observed_nonuniform_fibre_occupancy": true,
+  "formal_owner": "DASHI.Biology.IntrospectiveEmbodiedHyperformalismObservationExact",
+  "claim_boundary": "Recovered pixel topology is evidence about the rendered representation, not proof of a biological mechanism, diagnosis, or clinical interpretation."
+}
