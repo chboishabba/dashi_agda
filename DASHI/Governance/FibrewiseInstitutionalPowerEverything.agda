@@ -16,6 +16,7 @@ import DASHI.Governance.ContestedAmbientAuthorityHyperformalismExact as Ambient
 import DASHI.Governance.EpistemicCaptureProfessionalClosureExact as Capture
 import DASHI.Governance.InstitutionPreservingRechartAntiSublationExact as Rechart
 import DASHI.Governance.InstitutionalNoticeActuationCulpabilityExact as Notice
+import DASHI.Governance.OppositionInterfaceAntiDomesticationExact as Opposition
 
 ------------------------------------------------------------------------
 -- Direct regression aliases: if an upstream owner changes incompatibly this
@@ -90,6 +91,16 @@ regressionQuietSurfaceDoesNotDetermineJustice :
 regressionQuietSurfaceDoesNotDetermineJustice =
   Rechart.quietSurfaceDoesNotDetermineJustice
 
+regressionAdmittedOppositionDoesNotExhaustPoliticalCarrier :
+  Ambient.LeftExhaustive Opposition.oppositionAdministrativeInterface → ⊥
+regressionAdmittedOppositionDoesNotExhaustPoliticalCarrier =
+  Opposition.oppositionInterfaceIsNotExhaustive
+
+regressionVisiblePluralityCanShareAdmissionRule :
+  Opposition.VisiblePluralitySharedSkeleton
+regressionVisiblePluralityCanShareAdmissionRule =
+  Opposition.canonicalVisiblePluralitySharedSkeleton
+
 ------------------------------------------------------------------------
 -- Compact all-up boundary.
 ------------------------------------------------------------------------
@@ -109,9 +120,12 @@ record FibrewiseInstitutionalPowerBoundary : Set where
     formalEqualityCreatesCapabilityEquality : Bool
     internalSkeletonBindsExternalCarrier : Bool
     orderSurfaceCreatesJusticeClosure : Bool
+    admittedOppositionImpliesMetaRulePower : Bool
+    visiblePluralityImpliesOpenAdmissionAlgebra : Bool
     residualAndExteriorMustRemainReopenableOrPresent : Bool
 
 canonicalFibrewiseInstitutionalPowerBoundary : FibrewiseInstitutionalPowerBoundary
 canonicalFibrewiseInstitutionalPowerBoundary =
   fibrewiseInstitutionalPowerBoundary
-    false false false false false false false false false false false false true
+    false false false false false false false false false false false false
+    false false true
