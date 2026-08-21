@@ -19,7 +19,7 @@ module DASHI.Governance.LegalDecisionDoubleProjectionExact where
 -- autonomy, a live family relation, or the legality/justice of an actual case.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (true; false)
+open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl; cong)
 open import Data.Empty using (⊥)
 open import Data.Product using (_×_; _,_; proj₁; proj₂)
@@ -227,18 +227,96 @@ officialActionCannotRecoverAutonomyAndAuthority =
   NF.witnessRulesOutEveryFlatFactorisation officialAutonomyLossWitness
 
 ------------------------------------------------------------------------
--- 5. Consolidated boundary.
+-- 5. Decision-history and authority are transverse residual coordinates.
+--
+-- Adding only one residual to the official surface still leaves a collision on
+-- the other.  Adding their typed join is sufficient for the deliberately
+-- chosen FineLegalState consumer.  This is not whole-episode reconstruction.
+------------------------------------------------------------------------
+
+DecisionResidualSurface : Set
+DecisionResidualSurface = OfficialSurface × DecisionProjection.FineDecisionState
+
+AuthorityResidualSurface : Set
+AuthorityResidualSurface = OfficialSurface × ParentAuthority.ParentAuthorityRoute
+
+JoinedResidualSurface : Set
+JoinedResidualSurface = OfficialSurface × FineLegalState
+
+decisionResidualSurface : LegalDecisionEpisode → DecisionResidualSurface
+decisionResidualSurface episode =
+  officialSurface episode
+  , DecisionProjection.fineDecisionState (decisionEpisode episode)
+
+authorityResidualSurface : LegalDecisionEpisode → AuthorityResidualSurface
+authorityResidualSurface episode =
+  officialSurface episode
+  , ParentAuthority.routeParentAuthority (legalRelation episode)
+
+joinedResidualSurface : LegalDecisionEpisode → JoinedResidualSurface
+joinedResidualSurface episode = officialSurface episode , fineLegalStateOf episode
+
+decisionResidualStillCollapsesAuthority :
+  decisionResidualSurface blockedDonor
+  ≡ decisionResidualSurface blockedAdoptive
+decisionResidualStillCollapsesAuthority = refl
+
+decisionResidualAuthorityLossWitness :
+  NF.NonFactorabilityWitness decisionResidualSurface fineLegalStateOf
+decisionResidualAuthorityLossWitness =
+  NF.nonFactorabilityWitness
+    blockedDonor
+    blockedAdoptive
+    decisionResidualStillCollapsesAuthority
+    blockedDonorAndAdoptiveAuthorityDiffer
+
+authorityResidualStillCollapsesDecisionHistory :
+  authorityResidualSurface blockedDonor
+  ≡ authorityResidualSurface unresolvedDonor
+authorityResidualStillCollapsesDecisionHistory = refl
+
+authorityResidualDecisionLossWitness :
+  NF.NonFactorabilityWitness authorityResidualSurface fineLegalStateOf
+authorityResidualDecisionLossWitness =
+  NF.nonFactorabilityWitness
+    blockedDonor
+    unresolvedDonor
+    authorityResidualStillCollapsesDecisionHistory
+    blockedAndUnresolvedFineLegalStateDiffer
+
+decisionResidualAloneCannotRecoverFineLegalState :
+  NF.FactorsThrough decisionResidualSurface fineLegalStateOf → ⊥
+decisionResidualAloneCannotRecoverFineLegalState =
+  NF.witnessRulesOutEveryFlatFactorisation
+    decisionResidualAuthorityLossWitness
+
+authorityResidualAloneCannotRecoverFineLegalState :
+  NF.FactorsThrough authorityResidualSurface fineLegalStateOf → ⊥
+authorityResidualAloneCannotRecoverFineLegalState =
+  NF.witnessRulesOutEveryFlatFactorisation
+    authorityResidualDecisionLossWitness
+
+joinedResidualRecoversChosenFineLegalState :
+  NF.FactorsThrough joinedResidualSurface fineLegalStateOf
+joinedResidualRecoversChosenFineLegalState =
+  NF.factorsThrough proj₂ (λ episode → refl)
+
+------------------------------------------------------------------------
+-- 6. Consolidated boundary.
 ------------------------------------------------------------------------
 
 record LegalDecisionProjectionBoundary : Set where
   constructor legalDecisionProjectionBoundary
   field
-    sameExpressionCanHideDifferentDecisionState : true ≡ true
-    laterInstitutionalProjectionRepairsEarlierLoss : false ≡ false
-    sameOfficialSurfaceCanHideDifferentAuthorityRoute : true ≡ true
-    sameOfficialActionCanHideDifferentAutonomyState : true ≡ true
-    officialSurfaceEqualsFineLegalState : false ≡ false
+    sameExpressionCanHideDifferentDecisionState : Bool
+    laterInstitutionalProjectionRepairsEarlierLoss : Bool
+    sameOfficialSurfaceCanHideDifferentAuthorityRoute : Bool
+    sameOfficialActionCanHideDifferentAutonomyState : Bool
+    eitherResidualAloneIsSufficient : Bool
+    joinedResidualIsSufficientForChosenFineState : Bool
+    officialSurfaceEqualsFineLegalState : Bool
 
 canonicalLegalDecisionProjectionBoundary : LegalDecisionProjectionBoundary
 canonicalLegalDecisionProjectionBoundary =
-  legalDecisionProjectionBoundary refl refl refl refl refl
+  legalDecisionProjectionBoundary
+    true false true true false true false
