@@ -24,6 +24,24 @@ open import DASHI.Analysis.WeilTestSpace public
 open import DASHI.Analysis.RiemannReflectionOrbitDefectExact public
 open import DASHI.Analysis.RiemannReflectionPairBlockExact public
 open import DASHI.Analysis.RiemannWeilOffLineHyperbolicBlockExact public
+  using
+    ( HyperbolicPairBlock
+    ; multiplicity
+    ; positiveIndexBeforePullback
+    ; negativeIndexBeforePullback
+    ; hyperbolicPairHasOnePositiveDirection
+    ; hyperbolicPairHasOneNegativeDirection
+    ; sourcePositiveIndexBudget
+    ; sourceNegativeIndexBudget
+    ; offLineCountIsTwoSourcePositiveBudgets
+    ; sourcePositiveAndNegativeBudgetsEqual
+    ; sourceSignatureCode
+    ; nearFarSourceSignatureCollide
+    ; sourceSignatureCannotDetermineSquaredDefect
+    ; DistanceSensitiveOffLineAdapter
+    ; WeilOffLineHyperbolicBoundary
+    ; weilOffLineHyperbolicBoundary
+    )
 import DASHI.Analysis.RiemannReflectionC3OrbitShapeBridgeExact
 
 open import DASHI.Analysis.PrimeCountingFunction public
@@ -81,6 +99,7 @@ open import DASHI.Analysis.RiemannPrimePowerMangoldtIdentity public
     ; mangoldtLogQuotientTerm
     ; mangoldtLogQuotientSumLE
     ; mangoldtPrimePowerCount0
+    ; RiemannPrimePowerCountIdentity
     ; RiemannPrimePowerMangoldtIdentity
     ; RiemannPrimePowerMangoldtBoundary
     ; riemannPrimePowerMangoldtBoundary
