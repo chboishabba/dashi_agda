@@ -88,12 +88,12 @@ rightRecruitmentLaterOpen :
   recruitedAt secondTick rightSite ≡ true
 rightRecruitmentLaterOpen = refl
 
-falseNotTrue : false ≡ true → ⊥
-falseNotTrue ()
+trueNotFalse : true ≡ false → ⊥
+trueNotFalse ()
 
 movingSupportActuallyChanges :
   recruitedAt firstTick leftSite ≡ recruitedAt secondTick leftSite → ⊥
-movingSupportActuallyChanges = falseNotTrue
+movingSupportActuallyChanges = trueNotFalse
 
 waveFastAccessField : Access.FastAccessControlField
 waveFastAccessField = record
@@ -113,9 +113,6 @@ waveRetentionWithoutRewiring =
   Access.retentionWithoutAccessWitness
     leftSite firstTick secondTick betaBand
     true false refl refl trueNotFalse
-  where
-    trueNotFalse : true ≡ false → ⊥
-    trueNotFalse ()
 
 canonicalWaveCarrier : Wave.WaveCarrier Site2 Phase2 Nat FrequencyBand
 canonicalWaveCarrier = record
