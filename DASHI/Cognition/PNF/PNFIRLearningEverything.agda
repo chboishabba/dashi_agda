@@ -18,6 +18,7 @@ import DASHI.Cognition.PNF.AccessibleCandidateReasoningPipelineExact
 import DASHI.Cognition.PNF.AccessActuationOrthogonalityExact
 import DASHI.Cognition.PNF.DecisionPotentialSourceRegistry
 import DASHI.Cognition.PNF.DecisionPotentialFibreExact
+import DASHI.Cognition.PNF.FiniteExpectedDecisionPotentialExact
 import DASHI.Cognition.PNF.UnifiedDecisionDynamicsExact
 import DASHI.Cognition.PNF.BoundedEvidenceCommitmentExact
 import DASHI.Cognition.PNF.GoNoGoActuationGateExact
@@ -27,7 +28,12 @@ import DASHI.Cognition.PNF.DecisionAutonomyExact
 import DASHI.Cognition.PNF.DecisionOutcomeLearningFeedbackExact
 import DASHI.Cognition.PNF.AttentionValueActuationSeparationExact
 import DASHI.Cognition.PNF.DynamicDecisionFieldCompetitionExact
+import DASHI.Cognition.PNF.ContextualDecisionSubspaceExact
+import DASHI.Cognition.PNF.ConsiderationSetSelectionExact
 import DASHI.Cognition.PNF.DecisionActionProjectionNonFactorabilityExact
+import DASHI.Cognition.PNF.DecisionStateBundleExact
+import DASHI.Cognition.PNF.DecisionStateBundleDynamicsExact
+import DASHI.Cognition.PNF.DecisionActionFibreMultiplicityExact
 import DASHI.Cognition.PNF.DecisionFibrePotentialHyperformalismExact
 import DASHI.Cognition.PNF.DecisionFibrePotentialRegression
 import DASHI.Cognition.PNF.PNFWaveAccessTraumaLearningRegression
