@@ -25,6 +25,8 @@ open import DASHI.Core.Prelude
 
 import DASHI.Core.FibreRestrictionCore as Fibre
 import DASHI.Core.FibrePreservingDynamicsExact as Dynamics
+import DASHI.Core.FibreOrderNonfactorabilityExact as Order
+import DASHI.Core.IntersectionalNonFactorability as NF
 import DASHI.Governance.LegalDecisionDoubleProjectionExact as Legal
 
 ------------------------------------------------------------------------
@@ -199,7 +201,31 @@ bothCompositeOrdersRemainOfficiallyInvisible :
 bothCompositeOrdersRemainOfficiallyInvisible = refl
 
 ------------------------------------------------------------------------
--- 5. Consequences: official projection is noninjective and hidden update order
+-- 5. Generic order non-factorability instantiated on the legal fibre.
+------------------------------------------------------------------------
+
+legalHiddenOrderNonfactorability :
+  NF.NonFactorabilityWitness
+    (Order.orderedSurface decisionMotion authorityMotion blockedDonorState)
+    (Order.orderedEndpoint decisionMotion authorityMotion blockedDonorState)
+legalHiddenOrderNonfactorability =
+  Order.automorphismOrderNonfactorability
+    decisionFibreAutomorphism
+    authorityFibreAutomorphism
+    blockedDonorState
+    hiddenMotionsDoNotCommuteAtBlocked
+
+officialSurfaceCannotDecodeHiddenUpdateOrder :
+  NF.FactorsThrough
+    (Order.orderedSurface decisionMotion authorityMotion blockedDonorState)
+    (Order.orderedEndpoint decisionMotion authorityMotion blockedDonorState) →
+  ⊥
+officialSurfaceCannotDecodeHiddenUpdateOrder =
+  NF.witnessRulesOutEveryFlatFactorisation
+    legalHiddenOrderNonfactorability
+
+------------------------------------------------------------------------
+-- 6. Consequences: official projection is noninjective and hidden update order
 -- cannot be reconstructed from the official endpoint.
 ------------------------------------------------------------------------
 
