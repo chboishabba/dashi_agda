@@ -118,8 +118,16 @@ fi
 # checks each target in deterministic order and stops at the first failing
 # module, which is the concrete repair frontier for the next iteration.
 set +e
-"$REPO_ROOT/scripts/run_agda29_parallel_check.sh" "${TARGETS[@]}"
-status=$?
+if [ -n "$FROM_TARGET" ]; then
+  RESUMED_FILE="$(mktemp "${REPORT_DIR}/resumed_targets_XXXXXX.txt")"
+  printf '%s\n' "${TARGETS[@]}" > "$RESUMED_FILE"
+  AGDA_TARGETS_FILE="$RESUMED_FILE" "$REPO_ROOT/scripts/run_agda29_parallel_check.sh"
+  status=$?
+  rm -f "$RESUMED_FILE"
+else
+  AGDA_TARGETS_FILE="$TARGETS_FILE" "$REPO_ROOT/scripts/run_agda29_parallel_check.sh"
+  status=$?
+fi
 set -e
 if [ "$status" -ne 0 ]; then
   echo "Repository Agda check failed; no success receipt written." >&2

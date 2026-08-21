@@ -24,8 +24,9 @@ if [ -z "${TMUX:-}" ] && [ "${DASHI_NO_TMUX:-0}" != "1" ] && command -v tmux >/d
               AGDA_PROFILE_VERBOSITY=\"${AGDA_PROFILE_VERBOSITY:-}\" \
               AGDA_RTS_HEAP=\"${AGDA_RTS_HEAP:-}\" \
               AGDA_RTS_STATS=\"${AGDA_RTS_STATS:-0}\" \
+              AGDA_TARGETS_FILE=\"${AGDA_TARGETS_FILE:-}\" \
               DASHI_AGDA_RSS_LIMIT_MB=\"${DASHI_AGDA_RSS_LIMIT_MB:-}\" \
-              \"$0\" \"$@\"
+              \"$0\" ${@+\"$@\"}
       rc=\$?
       printf \"%s\\n\" \"\$rc\" > \"$STATUS_FILE\"
       tmux wait-for -S \"${WAIT_CHANNEL}\"
@@ -58,29 +59,20 @@ if [ -z "${TMUX:-}" ] && [ "${DASHI_NO_TMUX:-0}" != "1" ] && command -v tmux >/d
       STATUS_TMP="${STATUS_FILE}.tmp"
       printf '%s\n' "137" > "$STATUS_TMP"
       mv -f "$STATUS_TMP" "$STATUS_FILE"
+      tmux wait-for -S "${WAIT_CHANNEL}" 2>/dev/null || true
     fi
-    tmux wait-for -S "${WAIT_CHANNEL}" 2>/dev/null || true
   ) &
   SENTINEL_PID=$!
 
-  tmux wait-for "${WAIT_CHANNEL}" || true
+  tmux wait-for "${WAIT_CHANNEL}" 2>/dev/null || true
 
   # Clean up sentinel
   kill "$SENTINEL_PID" 2>/dev/null || true
   wait "$SENTINEL_PID" 2>/dev/null || true
 
-  if [ -s "$STATUS_FILE" ]; then
-    rc="$(cat "$STATUS_FILE")"
-    rm -f "$STATUS_FILE"
-    if [[ "$rc" =~ ^[0-9]+$ ]]; then
-      exit "$rc"
-    fi
-    echo "tmux worker recorded invalid exit status: ${rc@Q}" >&2
-    exit 125
-  fi
-
-  echo "tmux worker disappeared without recording an exit status" >&2
-  exit 125
+  rc="$(cat "$STATUS_FILE" 2>/dev/null || printf '137')"
+  rm -f "$STATUS_FILE"
+  exit "$rc"
 fi
 REPO_ROOT="${DASHI_REPO_ROOT:-/home/c/Documents/code/dashi_agda}"
 STDLIB_SRC="${AGDA_STDLIB_SRC_29:-${AGDA_STDLIB_SRC:-}}"
@@ -99,7 +91,9 @@ if [ -z "${XDG_CACHE_HOME:-}" ]; then
   mkdir -p "$XDG_CACHE_HOME"
 fi
 
-if [ "$#" -eq 0 ]; then
+if [ -n "${AGDA_TARGETS_FILE:-}" ] && [ -f "$AGDA_TARGETS_FILE" ]; then
+  mapfile -t TARGETS < "$AGDA_TARGETS_FILE"
+elif [ "$#" -eq 0 ]; then
   TARGETS=("DASHI/Everything.agda")
 else
   TARGETS=("$@")

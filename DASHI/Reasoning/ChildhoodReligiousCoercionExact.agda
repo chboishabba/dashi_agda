@@ -207,7 +207,7 @@ data EvidenceGrade : Set where
   quasiCausalGrade : EvidenceGrade
   establishedCausalGrade : EvidenceGrade
 
-record GradedClaim : Set where
+record GradedClaim : Set₁ where
   constructor gradedClaim
   field
     propositionClass : Set
