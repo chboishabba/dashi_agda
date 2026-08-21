@@ -1,7 +1,7 @@
 module DASHI.Cognition.PNF.DecisionConfidenceNoncollapseExact where
 
 open import Agda.Builtin.Bool using (Bool; false)
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
 import DASHI.Cognition.PNF.BoundedEvidenceCommitmentExact as Evidence
@@ -37,7 +37,7 @@ committedHighConfidence = decisionReadout Evidence.committed highConfidence
 
 sameCommitmentDifferentConfidence :
   commitment committedLowConfidence ≡ commitment committedHighConfidence
-sameCommitmentDifferentConfidence = Agda.Builtin.Equality.refl
+sameCommitmentDifferentConfidence = refl
 
 commitmentDoesNotDetermineConfidence :
   committedLowConfidence ≡ committedHighConfidence → ⊥
