@@ -1,0 +1,54 @@
+name: Riemann reflection orbit defect 2026
+
+on:
+  pull_request:
+    branches:
+      - 'master'
+    paths:
+      - 'DASHI/Analysis/RiemannReflectionOrbitDefectExact.agda'
+      - 'DASHI/Analysis/RiemannReflectionPairBlockExact.agda'
+      - 'DASHI/Analysis/RiemannWeilOffLineHyperbolicBlockExact.agda'
+      - 'DASHI/Analysis/RiemannReflectionC3OrbitShapeBridgeExact.agda'
+      - 'DASHI/Analysis/RiemannReflectionOrbitDefectRegression.agda'
+      - 'DASHI/Analysis/ZetaTheoremSurface.agda'
+      - 'DASHI/EverythingRiemannReflectionOrbitDefect2026.agda'
+      - 'scripts/check_riemann_reflection_orbit_defect_2026.sh'
+      - '.github/workflows/riemann-reflection-orbit-defect-2026.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: dashi-global-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+env:
+  AGDA_FLAKE: github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin
+  AGDA_JOBS: '2'
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
+      - name: Cache pinned Agda environment
+        uses: actions/cache@v4
+        with:
+          path: ${{ runner.temp }}/dashi-agda29
+          key: ${{ runner.os }}-agda29-86a1179c1f886da773dc53be920bcca5d876884e
+          restore-keys: |
+            ${{ runner.os }}-agda29-
+      - name: Check Riemann reflection orbit defect tranche
+        shell: bash
+        run: |
+          set -euo pipefail
+          export DASHI_REPO_ROOT="$GITHUB_WORKSPACE"
+          export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
+          bash scripts/check_riemann_reflection_orbit_defect_2026.sh
