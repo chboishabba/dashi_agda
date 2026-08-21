@@ -93,13 +93,21 @@ periodicIncrementMeanSquareAtMostFourEnergyDensity :
   incrementMeanSquare L
     ≤ ((1ℚ + 1ℚ) + (1ℚ + 1ℚ)) * originalMeanSquare L
 periodicIncrementMeanSquareAtMostFourEnergyDensity L =
-  subst
-    (λ shifted →
+  let
+    shiftedRemoved :
       incrementMeanSquare L
       ≤ (1ℚ + 1ℚ) * originalMeanSquare L
-        + (1ℚ + 1ℚ) * shifted)
-    (fullCellShiftInvariance L)
-    (subst
-      (λ upper → incrementMeanSquare L ≤ upper)
-      (solve (originalMeanSquare L ∷ []))
-      (pointwiseIntegratedBound L))
+        + (1ℚ + 1ℚ) * originalMeanSquare L
+    shiftedRemoved =
+      subst
+        (λ shifted →
+          incrementMeanSquare L
+          ≤ (1ℚ + 1ℚ) * originalMeanSquare L
+            + (1ℚ + 1ℚ) * shifted)
+        (fullCellShiftInvariance L)
+        (pointwiseIntegratedBound L)
+  in
+  subst
+    (λ upper → incrementMeanSquare L ≤ upper)
+    (solve (originalMeanSquare L ∷ []))
+    shiftedRemoved
