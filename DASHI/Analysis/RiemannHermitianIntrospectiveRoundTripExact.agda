@@ -21,13 +21,27 @@ module DASHI.Analysis.RiemannHermitianIntrospectiveRoundTripExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; _+_; _*_)
-open import Data.Nat.Solver using (module +-*-Solver)
-open +-*-Solver using (solve; _:*_; _:+_; con; _:=_)
+import Data.Nat.Solver as NatSolver
+open NatSolver.+-*-Solver using ()
+  renaming
+    ( solve to solveℕ
+    ; _:*_ to _:*ℕ_
+    ; _:+_ to _:+ℕ_
+    ; con to conℕ
+    ; _:=_ to _:=ℕ_
+    )
 
 open import Data.Integer using (ℤ; +_; _+_; _-_; _*_)
-open import Data.Integer.Solver as IntSolver using ()
-open IntSolver.+-*-Solver using (solve; _:*_; _:+_; _:-_; con; _:=_)
-  renaming (solve to solveℤ; _:*_ to _:*ℤ_; _:+_ to _:+ℤ_; _:-_ to _:-ℤ_; con to conℤ; _:=_ to _:=ℤ_)
+import Data.Integer.Solver as IntSolver
+open IntSolver.+-*-Solver using ()
+  renaming
+    ( solve to solveℤ
+    ; _:*_ to _:*ℤ_
+    ; _:+_ to _:+ℤ_
+    ; _:-_ to _:-ℤ_
+    ; con to conℤ
+    ; _:=_ to _:=ℤ_
+    )
 
 open import DASHI.Analysis.RiemannCenteredGridRetentionExact
 open import DASHI.Analysis.RiemannWeilPairKernelFrobeniusExact
@@ -57,10 +71,10 @@ quarterRetentionIdentity :
 quarterRetentionIdentity g c
   rewrite fullEnergyAsFourTailPlusTwoMargin c
         | finiteEnergyAsTailPlusMargin c =
-  solve 2
+  solveℕ 2
     (λ t m →
-      ((con 4 :* t) :+ (con 2 :* m)) :+ (con 2 :* m)
-        := con 4 :* (t :+ m))
+      ((conℕ 4 :*ℕ t) :+ℕ (conℕ 2 :*ℕ m)) :+ℕ (conℕ 2 :*ℕ m)
+        :=ℕ conℕ 4 :*ℕ (t :+ℕ m))
     refl
     (tailEnergy c) (margin c)
 
