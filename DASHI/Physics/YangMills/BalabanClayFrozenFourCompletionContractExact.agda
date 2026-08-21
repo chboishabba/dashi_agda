@@ -25,6 +25,10 @@ module DASHI.Physics.YangMills.BalabanClayFrozenFourCompletionContractExact wher
 -- Cluster Expansions", Communications in Mathematical Physics 116 (1988),
 -- 1--22. DOI: 10.1007/BF01239022.
 --
+-- John Milnor, "Curvatures of Left Invariant Metrics on Lie Groups",
+-- Advances in Mathematics 21 (1976), 293--329.
+-- DOI: 10.1016/S0001-8708(76)80002-3.
+--
 -- Dominique Bakry and Michel Emery, "Diffusions hypercontractives",
 -- Seminaire de Probabilites XIX, LNM 1123 (1985), 177--206.
 -- DOI: 10.1007/BFb0075847.
@@ -55,6 +59,7 @@ import DASHI.Physics.YangMills.BalabanEffectiveCouplingTrajectory as Trajectory
 import DASHI.Physics.YangMills.BalabanIntervalDeterminantAlgebra as Interval
 import DASHI.Physics.YangMills.BalabanRenormalisedCouplingExistence as Renorm
 import DASHI.Physics.YangMills.CompactLieHeatDoobMultiscaleLSIExact as HeatDoob
+import DASHI.Physics.YangMills.CompactLieHeatDoobRicciReserveDebtExact as Reserve
 import DASHI.Physics.YangMills.BalabanPolchinskiMultiscaleLSIBridgeExact as BBD
 
 ------------------------------------------------------------------------
@@ -113,26 +118,33 @@ rowAHasRenormalisedTrajectory = construction
 ------------------------------------------------------------------------
 
 -- The primary compact-group route is the literal Laplace--Beltrami Heat/Doob
--- flow on G^E.  Its curvature statement is
+-- flow on G^E.  The already-proved generic reduction says that
 --
---       1/2 Ric + Hess V_t >= kappa_t g,
+--   Ric >= rho g, rho > 0,
+--   Hess V_t >= -eta(t) g,
+--   integral_0^t eta <= M
 --
--- with finite integrated negative debt, followed on the SAME density by the
--- physical spatial influence estimate.  If one instead chooses the linear
--- Gaussian BBD/Polchinski route, its actual hypothesis is
+-- imply
+--
+--   I <= exp(2M)/rho,      gamma_LSI >= rho exp(-2M) > 0.
+--
+-- Thus the Yang--Mills-specific temporal leaf is the SAME-density, cutoff- and
+-- volume-uniform cumulative negative Hessian debt.  Spatial mass-gap closure
+-- additionally requires the physical covariant influence estimate on that
+-- same density.
+--
+-- If one instead chooses the linear Gaussian BBD/Polchinski route, its actual
+-- hypothesis is
 --
 --   dotC Hess(V_t) dotC - 1/2 ddotC >= dotEll dotC,
 --
 -- and a separate chart/globalisation theorem is mandatory.  The two routes
--- are therefore deliberately separate types below.
+-- are deliberately separate types below.
 record SameDensityCompactLieHeatDoobMassGapCompletion
     (dataSet : HeatDoob.HeatDoobMultiscaleLSIData) : Set₁ where
   field
-    history : HeatDoob.CurvatureTimeBound dataSet
     literalSameDensityIdentification : Set
-    curvatureLower : HeatDoob.CurvatureLowerBound dataSet history
-    integratedCurvatureWeightFinite :
-      HeatDoob.IntegratedCurvatureWeightFinite dataSet history
+    reserveAndHessianDebt : Reserve.RicciReserveHessianDebtData dataSet
     physicalCovariantInfluencePropagation : Set
     uniformExponentialConnectedClustering : Set
 
@@ -150,16 +162,14 @@ record AlternateBBDGaugeChartCompletion
 open AlternateBBDGaugeChartCompletion public
 
 -- This projection witnesses the exact generic consequence used by the primary
--- C route.  It does NOT manufacture the physical curvature or spatial bound.
+-- C route.  It does NOT manufacture the physical Hessian debt or spatial bound.
 rowCHeatDoobGivesLSI :
   ∀ {dataSet}
     (completion : SameDensityCompactLieHeatDoobMassGapCompletion dataSet) →
-  HeatDoob.LogSobolev dataSet (history completion)
-rowCHeatDoobGivesLSI {dataSet} completion =
-  HeatDoob.heatDoobMultiscaleLSI dataSet
-    (history completion)
-    (curvatureLower completion)
-    (integratedCurvatureWeightFinite completion)
+  HeatDoob.LogSobolev dataSet
+    (Reserve.history (reserveAndHessianDebt completion))
+rowCHeatDoobGivesLSI completion =
+  Reserve.ricciReserveDebtGivesLSI (reserveAndHessianDebt completion)
 
 ------------------------------------------------------------------------
 -- SCOREBOARD AUTHORITY
