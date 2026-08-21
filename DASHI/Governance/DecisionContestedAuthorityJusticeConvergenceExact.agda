@@ -1,28 +1,21 @@
 module DASHI.Governance.DecisionContestedAuthorityJusticeConvergenceExact where
 
-open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_; refl; cong)
 open import Data.Empty using (⊥)
 open import Data.Product using (_×_; _,_)
 
 import DASHI.Core.IntersectionalNonFactorability as NF
-import DASHI.Cognition.PNF.DecisionActionProjectionNonFactorabilityExact as DecisionProjection
+import DASHI.Cognition.PNF.DecisionActionProjectionNonfactorabilityExact as DecisionProjection
 import DASHI.Cognition.PNF.DecisionAutonomyExact as Autonomy
+import DASHI.Cognition.PNF.UnifiedDecisionDynamicsExact as Dynamics
+import DASHI.Governance.AuthorityMandateCore as Authority
 import DASHI.Governance.ContestedAmbientAuthorityHyperformalismExact as Ambient
 import DASHI.Governance.InstitutionPreservingRechartAntiSublationExact as Rechart
 import DASHI.Governance.LegalDecisionDoubleProjectionExact as Legal
 import DASHI.Governance.PeaceJusticeResidualNonFactorabilityExact as PeaceJustice
 import DASHI.Ontology.ProgenitorParentAuthorityRoutingNonfactorabilityExact as ParentAuthority
 open import DASHI.Ontology.ProgenitorParentProjectionFibre
-
-------------------------------------------------------------------------
--- DECISION x CONTESTED AUTHORITY x JUSTICE CONVERGENCE
---
--- One institutional surface can be compatible with different hidden decision
--- history, autonomy, authority provenance and justice residual.  This composes
--- the #606 decision/action fibre with the #603 contested-authority/justice
--- owners; neither stack is redefined here.
-------------------------------------------------------------------------
 
 record InstitutionalEpisode : Set where
   constructor institutionalEpisode
@@ -35,9 +28,7 @@ open InstitutionalEpisode public
 
 InstitutionalSurface : Set
 InstitutionalSurface =
-  Legal.OfficialSurface × Autonomy.ExecutedAction × Rechart.OrderObservation
-  where
-    open import DASHI.Cognition.PNF.UnifiedDecisionDynamicsExact using (ExecutedAction)
+  Legal.OfficialSurface × Dynamics.ExecutedAction × Rechart.OrderObservation
 
 institutionalSurface : InstitutionalEpisode → InstitutionalSurface
 institutionalSurface episode =
@@ -67,9 +58,7 @@ fineInstitutionalStateOf episode =
 
 unresolvedAdoptive : Legal.LegalDecisionEpisode
 unresolvedAdoptive =
-  Legal.legalDecisionEpisode
-    DecisionProjection.unresolvedInaction
-    adoptiveCarrier
+  Legal.legalDecisionEpisode DecisionProjection.unresolvedInaction adoptiveCarrier
 
 fineJustEpisode : InstitutionalEpisode
 fineJustEpisode =
@@ -86,8 +75,7 @@ collapsedOpenEpisode =
     Rechart.suppressedQuietState
 
 sameInstitutionalSurface :
-  institutionalSurface fineJustEpisode
-  ≡ institutionalSurface collapsedOpenEpisode
+  institutionalSurface fineJustEpisode ≡ institutionalSurface collapsedOpenEpisode
 sameInstitutionalSurface = refl
 
 decisionHistoryDiffers :
@@ -122,9 +110,7 @@ institutionalSurfaceNonfactorability :
   NF.NonFactorabilityWitness institutionalSurface fineInstitutionalStateOf
 institutionalSurfaceNonfactorability =
   NF.nonFactorabilityWitness
-    fineJustEpisode
-    collapsedOpenEpisode
-    sameInstitutionalSurface
+    fineJustEpisode collapsedOpenEpisode sameInstitutionalSurface
     fineInstitutionalStatesDiffer
 
 institutionalSurfaceCannotRecoverFineState :
@@ -138,7 +124,7 @@ institutionalClosureDoesNotEstablishJusticeClosure =
   PeaceJustice.orderOnlyPeaceDoesNotEstablishJusticeClosure
 
 coerciveAmbientClaimStillDoesNotSelfLegitimate :
-  Ambient.LegitimateAmbientAuthority Ambient.forceDominantAmbientClaim → _
+  Ambient.LegitimateAmbientAuthority Ambient.forceDominantAmbientClaim → Authority.Never
 coerciveAmbientClaimStillDoesNotSelfLegitimate =
   Ambient.coerciveDominanceDoesNotEstablishLegitimateAmbientAuthority
 
