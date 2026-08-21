@@ -11,32 +11,16 @@ module DASHI.Analysis.RiemannComplexPoissonChannelSplitExact where
 -- Anthropic, `zeta-23-lean`, especially Zeta23/Defs.lean and
 -- Zeta23/Poisson.lean.
 --
--- For a centred zero coordinate
---
---   z_i = gamma_i - i alpha_i,
---
--- two kernels naturally occur after complex continuation of the Gabor/Poisson
--- identity:
---
---   bilinear:   Phi(z_i - z_j)
---               transverse channel alpha_i - alpha_j,
---
---   Hermitian:  Phi(z_i - conjugate(z_j))
---               transverse channel alpha_i + alpha_j.
---
--- Hence on the diagonal i=j:
---
---   bilinear transverse argument  = 0,
---   Hermitian transverse argument = 2 alpha_i.
---
--- This exact signed-coordinate algebra explains why the published diagonal
--- bilinear square has a displacement-blind baseline while the proposed
--- Hermitian norm can retain |alpha|.  It does NOT prove the analytic complex
--- Poisson continuation itself.
+-- For z_i = gamma_i - i alpha_i, the bilinear channel sees
+-- alpha_i-alpha_j while the Hermitian channel sees alpha_i+alpha_j.  Hence
+-- diagonal bilinear Poisson is transverse-blind, whereas diagonal Hermitian
+-- Poisson sees 2 alpha_i.  This file proves only that exact signed-coordinate
+-- algebra, not the analytic complex continuation itself.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (zero; suc)
 open import Data.Integer using (ℤ; +_; -[1+_]; _+_; _-_; -_)
 open import Data.Integer.Solver using (module +-*-Solver)
 open +-*-Solver using (solve; _:+_; _:-_; con; _:=_)
@@ -48,11 +32,6 @@ record CentredComplexCoordinate : Set where
     transverse : ℤ
 
 open CentredComplexCoordinate public
-
-------------------------------------------------------------------------
--- We represent only the two real coordinates of a complex difference:
--- (real/ordinate difference, coefficient of -i).
-------------------------------------------------------------------------
 
 record PoissonArgument : Set where
   constructor poissonArgument
@@ -76,18 +55,11 @@ hermitianArgument x y =
     (ordinate x - ordinate y)
     (transverse x + transverse y)
 
-------------------------------------------------------------------------
--- Diagonal separation.
-------------------------------------------------------------------------
-
 bilinearDiagonalTransverseVanishes :
   (x : CentredComplexCoordinate) →
   transverseChannel (bilinearArgument x x) ≡ + 0
 bilinearDiagonalTransverseVanishes (centredComplexCoordinate gamma alpha) =
-  solve 1
-    (λ alpha → alpha :- alpha := con (+ 0))
-    refl
-    alpha
+  solve 1 (λ alpha → alpha :- alpha := con (+ 0)) refl alpha
 
 hermitianDiagonalTransverseDoubles :
   (x : CentredComplexCoordinate) →
@@ -99,33 +71,21 @@ bilinearDiagonalOrdinateVanishes :
   (x : CentredComplexCoordinate) →
   ordinateDifference (bilinearArgument x x) ≡ + 0
 bilinearDiagonalOrdinateVanishes (centredComplexCoordinate gamma alpha) =
-  solve 1
-    (λ gamma → gamma :- gamma := con (+ 0))
-    refl
-    gamma
+  solve 1 (λ gamma → gamma :- gamma := con (+ 0)) refl gamma
 
 hermitianDiagonalOrdinateVanishes :
   (x : CentredComplexCoordinate) →
   ordinateDifference (hermitianArgument x x) ≡ + 0
 hermitianDiagonalOrdinateVanishes = bilinearDiagonalOrdinateVanishes
 
-------------------------------------------------------------------------
--- Reflection alpha -> -alpha.
---
--- The diagonal bilinear channel is fixed at zero.  The Hermitian channel flips
--- orientation but keeps the same inverse-pair magnitude role: +2 alpha <->
--- -2 alpha.  Thus any even observable of this channel descends through the
--- reflection orbit while retaining transverse magnitude.
-------------------------------------------------------------------------
-
 reflectCoordinate : CentredComplexCoordinate → CentredComplexCoordinate
-reflectCoordinate x =
-  centredComplexCoordinate (ordinate x) (- transverse x)
+reflectCoordinate x = centredComplexCoordinate (ordinate x) (- transverse x)
 
 reflectCoordinateInvolutive :
   (x : CentredComplexCoordinate) →
   reflectCoordinate (reflectCoordinate x) ≡ x
-reflectCoordinateInvolutive (centredComplexCoordinate gamma (+ alpha)) = refl
+reflectCoordinateInvolutive (centredComplexCoordinate gamma (+ zero)) = refl
+reflectCoordinateInvolutive (centredComplexCoordinate gamma (+ (suc alpha))) = refl
 reflectCoordinateInvolutive (centredComplexCoordinate gamma -[1+ alpha ]) = refl
 
 hermitianDiagonalReflectionFlipsChannel :
@@ -136,8 +96,7 @@ hermitianDiagonalReflectionFlipsChannel (centredComplexCoordinate gamma alpha) =
   solve 1
     (λ alpha → ((con (+ 0) :- alpha) :+ (con (+ 0) :- alpha))
       := con (+ 0) :- (alpha :+ alpha))
-    refl
-    alpha
+    refl alpha
 
 bilinearDiagonalReflectionStillZero :
   (x : CentredComplexCoordinate) →
@@ -145,10 +104,6 @@ bilinearDiagonalReflectionStillZero :
     (bilinearArgument (reflectCoordinate x) (reflectCoordinate x)) ≡ + 0
 bilinearDiagonalReflectionStillZero x =
   bilinearDiagonalTransverseVanishes (reflectCoordinate x)
-
-------------------------------------------------------------------------
--- Two-point channel algebra.
-------------------------------------------------------------------------
 
 bilinearAndHermitianRecoverTwiceFirstTransverse :
   (x y : CentredComplexCoordinate) →
@@ -160,8 +115,7 @@ bilinearAndHermitianRecoverTwiceFirstTransverse
   (centredComplexCoordinate gammaY alphaY) =
   solve 2
     (λ x y → (x :- y) :+ (x :+ y) := x :+ x)
-    refl
-    alphaX alphaY
+    refl alphaX alphaY
 
 hermitianMinusBilinearRecoversTwiceSecondTransverse :
   (x y : CentredComplexCoordinate) →
@@ -173,12 +127,7 @@ hermitianMinusBilinearRecoversTwiceSecondTransverse
   (centredComplexCoordinate gammaY alphaY) =
   solve 2
     (λ x y → (x :+ y) :- (x :- y) := y :+ y)
-    refl
-    alphaX alphaY
-
-------------------------------------------------------------------------
--- Boundary.
-------------------------------------------------------------------------
+    refl alphaX alphaY
 
 record ComplexPoissonChannelBoundary : Set where
   field
