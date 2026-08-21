@@ -17,12 +17,9 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 import DASHI.Core.IntersectionalNonFactorability as NF
 import DASHI.Core.ObserverRefinementLatticeExact as Observer
 import DASHI.Core.RequiredObserverAxisJoinAdequacyExact as Required
+import DASHI.Governance.AsymmetricLegibilityContestabilityExact as Legibility
 import DASHI.Governance.ContestabilityAccessCostExact as Contestability
 import DASHI.Governance.InstitutionalNoticeActuationCulpabilityExact as Notice
-
-------------------------------------------------------------------------
--- 1. A second fibre: verification of the purported saving branch.
-------------------------------------------------------------------------
 
 data VerificationState : Set where
   savingBranchActuallyDead savingBranchActuallyLive : VerificationState
@@ -74,8 +71,6 @@ questionToVerificationStrictRefinement =
     refl
     (λ ())
 
--- The subject may know exactly which question needs answering while the
--- verification fibre still contains opposite action states.
 record QuestionKnownVerificationUnresolved : Set where
   constructor questionKnownVerificationUnresolved
   field
@@ -95,14 +90,10 @@ canonicalQuestionKnownVerificationUnresolved =
       (λ ()))
     questionObserverNotDecisionSafe
 
-------------------------------------------------------------------------
--- 2. Formal verification availability still does not give affordable access.
-------------------------------------------------------------------------
-
 verificationPathFormallyAvailable :
   Contestability.FormallyAvailableContestability
     Contestability.finiteContestabilityInterface
-    DASHI.Governance.AsymmetricLegibilityContestabilityExact.case0
+    Legibility.case0
 verificationPathFormallyAvailable = Contestability.finiteFormalAvailability
 
 verificationPathNotAffordableInCanonicalBudget :
@@ -128,13 +119,6 @@ canonicalVerificationClosureGap =
     ⊤
     tt
     verificationPathNotAffordableInCanonicalBudget
-
-------------------------------------------------------------------------
--- 3. Intersectional representation, not downstream demographic adjustment.
---
--- The flat observer sees the same subject label.  The fine carrier retains the
--- institutional relation/access configuration and communication modality.
-------------------------------------------------------------------------
 
 data SituatedAccessState : Set where
   lowAccessAsynchronous highAccessInteractive : SituatedAccessState
