@@ -2,6 +2,7 @@ module DASHI.Physics.YangMills.BalabanClayT4ConfiguredBrillouinBoxReceiptFamilyE
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Data.Product using (_×_)
 open import Data.Rational using (ℚ; 0ℚ; _+_; _-_; _*_; _≤_; _<_)
 open import Relation.Binary.PropositionalEquality using (subst)
 
@@ -145,11 +146,11 @@ record LiteralBrillouinIntegralPhysicalData
     casimirAdjoint inversePiSquared logBlocking : Scale → Scalar
     scalarIntegral regularRemainder coefficient : Scale → Scalar
 
-    colorTensorReductionExact : ∀ scale → Set
-    wardTransverseProjectorExact : ∀ scale → Set
-    massAndLongitudinalTermsVanish : ∀ scale → Set
+    colorTensorReductionExact : (scale : Scale) → Set
+    wardTransverseProjectorExact : (scale : Scale) → Set
+    massAndLongitudinalTermsVanish : (scale : Scale) → Set
 
-    infraredSingularIntegrandExact : ∀ scale → Set
+    infraredSingularIntegrandExact : (scale : Scale) → Set
     infraredShellIntegralLogLExact : ∀ scale →
       scalarIntegral scale
       ≡ multiply
@@ -175,13 +176,18 @@ record LiteralBrillouinIntegralPhysicalData
 
 open LiteralBrillouinIntegralPhysicalData public
 
+regularBoxCoverExact : RationalBrillouinBoxPartition → Set
 regularBoxCoverExact = regularBoxesCoverComplementExactly
+
+regularBoxEnclosuresValid :
+  ∀ {Scale Scalar}
+    (dataSet : LiteralBrillouinIntegralPhysicalData Scale Scalar)
+    (scale : Scale) → Set
 regularBoxEnclosuresValid dataSet scale =
-  everyRegularDenominatorPositive (partition dataSet scale) ,
-  everyRegularNumeratorEnclosed (partition dataSet scale) ,
-  everyRegularIntegrandEnclosed (partition dataSet scale) ,
-  everyRegularQuadratureRemainderEnclosed (partition dataSet scale)
-  where open import Data.Product using (_,_)
+  everyRegularDenominatorPositive (partition dataSet scale)
+  × (everyRegularNumeratorEnclosed (partition dataSet scale)
+  × (everyRegularIntegrandEnclosed (partition dataSet scale)
+  × everyRegularQuadratureRemainderEnclosed (partition dataSet scale)))
 
 asConfiguredBrillouinIntegralCertificate :
   ∀ {Scale Scalar} →
