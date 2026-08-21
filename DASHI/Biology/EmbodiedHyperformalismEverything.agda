@@ -23,6 +23,7 @@ import DASHI.Core.CubieFaceOrderHolonomyAnalogueExact
 -- #605 x #606 cross-pollination layer, written against merged primitive owners
 -- so the sibling draft PRs do not acquire a cyclic dependency.
 import DASHI.Biology.SymmetryResolvedEmbodiedWaveControlExact
+import DASHI.Biology.QuaternionOrbitEmbodiedReachNonfactorabilityExact
 import DASHI.Biology.TranslationInvariantCompletionAccessibilityNonfactorabilityExact
 import DASHI.Biology.EmbodiedWaveCubieHolonomyExact
 import DASHI.Biology.TwoBoundarySymmetryResolvedModeSectionExact
