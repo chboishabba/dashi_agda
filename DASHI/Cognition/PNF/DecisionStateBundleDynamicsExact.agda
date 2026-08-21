@@ -1,5 +1,6 @@
 module DASHI.Cognition.PNF.DecisionStateBundleDynamicsExact where
 
+open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_; refl; cong)
 open import Data.Empty using (⊥)
 open import Data.Product using (_×_; _,_)
@@ -15,11 +16,6 @@ import DASHI.Cognition.PNF.UnifiedDecisionDynamicsExact as Dynamics
 
 ------------------------------------------------------------------------
 -- COORDINATE-LOCAL DYNAMICS ON THE UNIFIED DECISION BUNDLE
---
--- Each producer acts on its own coordinate while the remaining fine carrier is
--- retained.  This is the formal counterpart of the paper bundle's repeated
--- dissociations: attention/value, evidence/commitment, history/update order,
--- commitment/release, and outcome/learning are different transitions.
 ------------------------------------------------------------------------
 
 setAttention : Attention.Attention → Bundle.DecisionStateBundle → Bundle.DecisionStateBundle
@@ -148,15 +144,11 @@ preferencePulsePreservesFineState pulse d = refl
 record DecisionStateBundleDynamicsBoundary : Set where
   constructor decisionStateBundleDynamicsBoundary
   field
-    contextPotentialChangeIsSemanticRevision : Agda.Builtin.Bool.Bool
-    historyOrderCanBeDiscarded : Agda.Builtin.Bool.Bool
-    outcomeLearningErasesRememberedEvent : Agda.Builtin.Bool.Bool
-    gateChangeRewritesCommitment : Agda.Builtin.Bool.Bool
+    contextPotentialChangeIsSemanticRevision : Bool
+    historyOrderCanBeDiscarded : Bool
+    outcomeLearningErasesRememberedEvent : Bool
+    gateChangeRewritesCommitment : Bool
 
 canonicalDecisionStateBundleDynamicsBoundary : DecisionStateBundleDynamicsBoundary
 canonicalDecisionStateBundleDynamicsBoundary =
-  decisionStateBundleDynamicsBoundary
-    Agda.Builtin.Bool.false
-    Agda.Builtin.Bool.false
-    Agda.Builtin.Bool.false
-    Agda.Builtin.Bool.false
+  decisionStateBundleDynamicsBoundary false false false false
