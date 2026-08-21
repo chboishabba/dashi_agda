@@ -14,9 +14,13 @@ import DASHI.Cognition.PNF.DecisionAutonomyExact as Autonomy
 import DASHI.Cognition.PNF.DecisionOutcomeLearningFeedbackExact as Feedback
 import DASHI.Cognition.PNF.AttentionValueActuationSeparationExact as Attention
 import DASHI.Cognition.PNF.DynamicDecisionFieldCompetitionExact as DFT
+import DASHI.Cognition.PNF.BoundedEvidenceCommitmentExact as Bounded
+import DASHI.Cognition.PNF.GoNoGoActuationGateExact as GoNoGo
+import DASHI.Cognition.PNF.DecisionActionProjectionNonFactorabilityExact as ActionNF
 import DASHI.Cognition.PNF.DecisionPotentialSourceRegistry as Sources
 import DASHI.Cognition.PNF.AccessibleCandidateReasoningPipelineExact as Pre
 import DASHI.Cognition.PNF.MemoryFibre as Memory
+import DASHI.Core.IntersectionalNonFactorability as NF
 import DASHI.Biology.NeuralDecisionProducerBridgeExact as Neural
 
 record DecisionFibrePotentialRegression : Set₁ where
@@ -27,6 +31,12 @@ record DecisionFibrePotentialRegression : Set₁ where
       Potential.project Potential.threatState ≡ Potential.project Potential.safetyState
       × Potential.slowPotential Potential.ordinaryContext Potential.threatState ≡ 2
       × Potential.slowPotential Potential.ordinaryContext Potential.safetyState ≡ 0
+
+    bistableFibreComplexity :
+      Potential.isLocalMinimum Potential.ambivalentContext Potential.threatState ≡ true
+      × Potential.isLocalMinimum Potential.ambivalentContext Potential.safetyState ≡ true
+      × Potential.localMinimumCount Potential.ambivalentContext ≡ 2
+      × Potential.barrierHeight Potential.threatState Potential.safetyState ≡ 3
 
     lowerPotentialCanRemainInaccessible :
       Potential.slowPotential Potential.threatContext Potential.safetyState ≡ 2
@@ -40,9 +50,27 @@ record DecisionFibrePotentialRegression : Set₁ where
       Dynamics.preferredCandidate Dynamics.narrowConsideration
       ≡ Dynamics.preferredCandidate Dynamics.broadConsideration → ⊥
 
+    boundedAccumulationSeparatesDeliberationCommitment :
+      Bounded.threshold (Bounded.contextGate Bounded.attendEvidence Bounded.e0)
+      ≡ Bounded.stillDeliberating
+      × Bounded.threshold
+          (Bounded.contextGate Bounded.attendEvidence
+            (Bounded.contextGate Bounded.attendEvidence Bounded.e0))
+        ≡ Bounded.committed
+
     commitmentNeedNotActuate :
       Dynamics.actuate Dynamics.blocked Dynamics.counterCommitted
       ≡ Dynamics.actuate Dynamics.released Dynamics.counterCommitted → ⊥
+
+    goNoGoChangesReleaseForSameCommitment :
+      Dynamics.actuate (GoNoGo.releaseGate GoNoGo.high GoNoGo.low)
+        Dynamics.supportCommitted
+      ≡ Dynamics.actuate (GoNoGo.releaseGate GoNoGo.high GoNoGo.high)
+        Dynamics.supportCommitted
+      → ⊥
+
+    observedActionCannotRecoverFineDecision :
+      NF.FactorsThrough ActionNF.observedAction ActionNF.fineDecisionState → ⊥
 
     observableCommutationAllowsUpdateNoncommutation :
       Order.observeAThenB Order.initial ≡ Order.observeBThenA Order.initial
@@ -77,7 +105,7 @@ record DecisionFibrePotentialRegression : Set₁ where
       Potential.signedSumCancels Potential.positive Potential.negative ≡ true
       × Potential.tensionMass Potential.positive Potential.negative ≡ 2
 
-    sourceCount : Sources.canonicalDecisionSourceCount ≡ 10
+    sourceCount : Sources.canonicalDecisionSourceCount ≡ 15
 
 open DecisionFibrePotentialRegression public
 
@@ -85,10 +113,15 @@ canonicalDecisionFibrePotentialRegression : DecisionFibrePotentialRegression
 canonicalDecisionFibrePotentialRegression = record
   { unified = Unified.canonicalDecisionFibrePotentialHyperformalism
   ; sameFibreDifferentPotential = Potential.sameFibreDifferentPotential
+  ; bistableFibreComplexity = Potential.bistableFibreHasTwoMinimaAndBarrier
   ; lowerPotentialCanRemainInaccessible = refl , refl
   ; observerMinimaConflict = FreeEnergy.observerIndexedMinimaDiffer
   ; considerationChangesPreference = Dynamics.considerationSetCanChangePreferredCandidate
+  ; boundedAccumulationSeparatesDeliberationCommitment =
+      Bounded.oneRelevantPulseNotYetCommitted , Bounded.twoRelevantPulsesCommit
   ; commitmentNeedNotActuate = Dynamics.sameCommitmentDifferentActuation
+  ; goNoGoChangesReleaseForSameCommitment = GoNoGo.sameCommitmentDifferentGoNoGoOutcome
+  ; observedActionCannotRecoverFineDecision = ActionNF.actionCannotRecoverFineDecisionState
   ; observableCommutationAllowsUpdateNoncommutation =
       Order.observableCommutationDoesNotForceUpdateCommutation
   ; qqViolationRejectsProjectiveDiagnostic = Order.qqNotUniversal
