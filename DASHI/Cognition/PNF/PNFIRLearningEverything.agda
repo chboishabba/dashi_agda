@@ -9,6 +9,14 @@ import DASHI.Cognition.PNF.LearningAlgebra
 import DASHI.Cognition.PNF.FibreLearningDynamics
 import DASHI.Cognition.PNF.BraidLearningTransport
 import DASHI.Cognition.PNF.TraumaMemoryHypervoxelBridge
+import DASHI.Cognition.PNF.FastAccessControlFieldExact
+import DASHI.Cognition.PNF.PNFFastAccessMemoryLearningBridgeExact
+import DASHI.Cognition.PNF.WaveAccessBraidOrderExact
+import DASHI.Cognition.PNF.ContextWaveFibreSelectionExact
+import DASHI.Cognition.PNF.MultiTimescaleAccessLearningExact
+import DASHI.Cognition.PNF.AccessibleCandidateReasoningPipelineExact
+import DASHI.Cognition.PNF.AccessActuationOrthogonalityExact
+import DASHI.Cognition.PNF.PNFWaveAccessTraumaLearningRegression
 import DASHI.Cognition.PNF.DepthWheelMemoryHyperfabric
 import DASHI.Cognition.PNF.DepthWheelMemoryPhaseGeometry
 import DASHI.Cognition.PNF.DepthWheelMemoryHyperfabricRegression
