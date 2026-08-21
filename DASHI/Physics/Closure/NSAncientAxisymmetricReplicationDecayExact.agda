@@ -63,14 +63,14 @@ replicationForcesReciprocalLocalMassBound
         (trans replaceCopies (ℚP.*-identityˡ localMass))
   in
   subst
-    (_≤ inverseCopies * totalMass)
+    (λ lower → lower ≤ inverseCopies * totalMass)
     leftMeaning
     multiplied
 
 -- For the Lei-Zhang-Zhao application:
---   copies       ~ floor(r),
+--   copies        ~ floor(r),
 --   inverseCopies ~ 1/floor(r),
---   localMass     = integral over one unit ball of |Gamma|^p,
---   totalMass     = global integral of |Gamma|^p.
+--   localMass      = integral over one unit ball of |Gamma|^p,
+--   totalMass      = global integral of |Gamma|^p.
 -- The remaining limit inverseCopies -> 0 is an Archimedean/real-analysis
 -- step, not hidden here.
