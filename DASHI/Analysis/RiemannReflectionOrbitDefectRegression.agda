@@ -12,11 +12,13 @@ module DASHI.Analysis.RiemannReflectionOrbitDefectRegression where
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat; _+_)
 open import Data.Empty using (⊥)
+open import Data.Integer using (ℤ; +_; -[1+_])
 
 import DASHI.Analysis.RiemannReflectionOrbitDefectExact as Orbit
 import DASHI.Analysis.RiemannReflectionPairBlockExact as Block
 import DASHI.Analysis.RiemannWeilOffLineHyperbolicBlockExact as Hyperbolic
 import DASHI.Analysis.RiemannComplexPoissonPairEnergyExact as PairEnergy
+import DASHI.Analysis.RiemannWeilPairKernelFrobeniusExact as PairKernel
 import DASHI.Analysis.RiemannReflectionC3OrbitShapeBridgeExact as C3Bridge
 
 regressionReflectInvolutive :
@@ -71,9 +73,6 @@ regressionSignatureCannotRecoverDefect :
 regressionSignatureCannotRecoverDefect =
   Hyperbolic.sourceSignatureCannotDetermineSquaredDefect
 
--- New local producer: the same bare hyperbolic role can carry a strictly
--- larger Hermitian/Frobenius residual once complex-Poisson norm information is
--- retained.  These checks exercise the exact polynomial block identity.
 regressionNearPairFrobeniusTwenty :
   PairEnergy.pairBlockFrobeniusSquared PairEnergy.nearPairEnergy ≡ 20
 regressionNearPairFrobeniusTwenty = PairEnergy.nearPairFrobeniusIsTwenty
@@ -89,6 +88,32 @@ regressionNearPairExcessSixteen = PairEnergy.nearPairExcessIsSixteen
 regressionFarPairExcessNinetySix :
   PairEnergy.pairBlockFrobeniusExcess PairEnergy.farPairEnergy ≡ 96
 regressionFarPairExcessNinetySix = PairEnergy.farPairExcessIsNinetySix
+
+regressionHolomorphicBaselineCannotRecoverHermitian :
+  (decode : Nat → Nat) →
+  ((q : PairEnergy.PairEnergyLedger) →
+    decode (PairEnergy.baselineSquareSum q)
+      ≡ PairEnergy.fullGridHermitianEnergy q) →
+  ⊥
+regressionHolomorphicBaselineCannotRecoverHermitian =
+  PairEnergy.holomorphicBaselineCannotDetermineHermitianEnergy
+
+-- Nonlinear Frobenius expansion exposes both the holomorphic S kernel and the
+-- Hermitian H kernel.  The latter is therefore latent in the existing
+-- quadratic prime-side observable rather than requiring a new linear explicit
+-- formula.  Negative cross interference is retained as an explicit obstacle.
+regressionPairKernelIdentity :
+  (x : PairKernel.PairCrossMoments) →
+  PairKernel.holomorphicSquareReal x + PairKernel.hermitianSquareReal x
+    ≡ (+ 2) * PairKernel.pairBlockCrossCore x
+regressionPairKernelIdentity =
+  PairKernel.holomorphicPlusHermitianSquaresExposePairCrossCore
+
+regressionNegativeInterference :
+  PairKernel.pairBlockCrossCore PairKernel.negativeInterferenceWitness
+    ≡ -[1+ 0 ]
+regressionNegativeInterference =
+  PairKernel.negativeInterferenceCoreIsMinusOne
 
 regressionC3InverseRoleInvariant :
   C3Bridge.c3OrbitRole C3Bridge.zetaPhase
