@@ -1,7 +1,7 @@
 module DASHI.Analysis.MarxOrdinaryDerivativeBridge where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Primitive using (Set; Set₁)
+open import Agda.Primitive using (Set)
 open import Relation.Binary.PropositionalEquality using (sym)
 
 open import DASHI.Analysis.MarxDifferentialCore public
@@ -16,7 +16,7 @@ open import DASHI.Analysis.MarxDifferentialCore public
 
 record RemainderDerivativeStructure
   (A : MarxAlgebra)
-  : Set₁ where
+  : Set₂ where
   field
     Nonzero : Carrier A → Set
 
@@ -24,7 +24,7 @@ record RemainderDerivativeStructure
       Carrier A → Carrier A → Carrier A
 
     TendsToZeroPunctured :
-      (Carrier A → Carrier A) → Set
+      (Carrier A → Carrier A) → Set₁
 
     puncturedCongruence :
       ∀ {phi psi : Carrier A → Carrier A} →
@@ -46,7 +46,7 @@ NormalizedRemainderVanishes :
   {A : MarxAlgebra} →
   RemainderDerivativeStructure A →
   (Carrier A → Carrier A) →
-  Set
+  Set₁
 NormalizedRemainderVanishes R remainder =
   TendsToZeroPunctured R
     (λ h → normaliseRemainder R h (remainder h))
@@ -55,7 +55,7 @@ littleOAtZero :
   {A : MarxAlgebra} →
   RemainderDerivativeStructure A →
   (Carrier A → Carrier A) →
-  Set
+  Set₁
 littleOAtZero = NormalizedRemainderVanishes
 
 ------------------------------------------------------------------------
@@ -94,7 +94,7 @@ PreliminaryContinuousAtDiagonal :
   {f : Function A} →
   MarxFactorisation A f →
   Carrier A →
-  Set
+  Set₁
 PreliminaryContinuousAtDiagonal {A} R F x =
   TendsToZeroPunctured R
     (λ h →
@@ -108,7 +108,7 @@ ContinuousDiagonal :
   {f : Function A} →
   MarxFactorisation A f →
   Carrier A →
-  Set
+  Set₁
 ContinuousDiagonal = PreliminaryContinuousAtDiagonal
 
 marxRemainder :
@@ -274,7 +274,7 @@ ordinaryDerivativeWithDividedDifferenceExtensionGivesMarxFactorisation extension
 ------------------------------------------------------------------------
 -- Completion seam for the selected constructive-real implementation.
 
-record ConstructiveRealDerivativeSeam : Set₁ where
+record ConstructiveRealDerivativeSeam : Set₂ where
   field
     algebra : MarxAlgebra
     remainderStructure : RemainderDerivativeStructure algebra

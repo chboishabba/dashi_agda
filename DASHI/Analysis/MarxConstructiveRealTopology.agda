@@ -2,9 +2,9 @@ module DASHI.Analysis.MarxConstructiveRealTopology where
 
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Sigma using (Σ)
-open import Agda.Primitive using (Set; Set₁)
+open import Agda.Primitive using (Set)
 open import Data.Empty using (⊥)
-open import Data.Nat.Base using (_≤_)
+open import Data.Nat.Base using () renaming (_≤_ to _≤N_)
 open import Relation.Binary.PropositionalEquality
   using (_≡_; trans; cong)
 
@@ -168,7 +168,6 @@ ContinuousAtSequentially R L f x =
 
 record PuncturedApproach
   (R : ConstructedOrderedCompleteReal)
-  (L : ConstructedRealSequentialLimitLaws R)
   : Set₁ where
   field
     parameters : Sequence R
@@ -177,22 +176,22 @@ record PuncturedApproach
       Σ Nat
         (λ cutoff →
           ∀ n →
-          cutoff ≤ n →
+          cutoff ≤N n →
           sequenceAt R parameters n ≡ zero R → ⊥)
 
 open PuncturedApproach public
 
 record ConstructedRealPuncturedTopology
   (R : ConstructedOrderedCompleteReal)
-  (L : ConstructedRealSequentialLimitLaws R)
-  : Set₁ where
+  : Set₂ where
   field
+    limits : ConstructedRealSequentialLimitLaws R
     Nonzero : Real R → Set
     normaliseRemainder : Real R → Real R → Real R
 
     normalisedAlong :
       (Real R → Real R) →
-      PuncturedApproach R L →
+      PuncturedApproach R →
       Sequence R
 
     normalisedAlongAt :
@@ -207,19 +206,19 @@ record ConstructedRealPuncturedTopology
       Σ Nat
         (λ cutoff →
           ∀ n →
-          cutoff ≤ n →
-          Nonzero (sequenceAt R (parameters approach) n))
+          cutoff ≤N n →
+          Nonzero (sequenceAt R (parameters {R = R} approach) n))
 
     puncturedCongruence :
       ∀ {phi psi : Real R → Real R} →
       (∀ h → Nonzero h → phi h ≡ psi h) →
       (∀ approach →
         ConvergesTo R
-          (mapSequence L phi (parameters approach))
+          (mapSequence {R = R} limits phi (parameters {R = R} approach))
           (zero R)) →
       (∀ approach →
         ConvergesTo R
-          (mapSequence L psi (parameters approach))
+          (mapSequence {R = R} limits psi (parameters {R = R} approach))
           (zero R))
 
     normalizedProductCancellation :
@@ -230,7 +229,7 @@ record ConstructedRealPuncturedTopology
     zeroTendsToZero :
       ∀ approach →
       ConvergesTo R
-        (mapSequence L (λ _ → zero R) (parameters approach))
+        (mapSequence {R = R} limits (λ _ → zero R) (parameters {R = R} approach))
         (zero R)
 
 open ConstructedRealPuncturedTopology public
@@ -238,23 +237,39 @@ open ConstructedRealPuncturedTopology public
 constructedRealRemainderDerivativeStructure :
   ∀ {R : ConstructedOrderedCompleteReal} →
   (ring : ConstructedRealRingNormalisationLaws R) →
-  (limits : ConstructedRealSequentialLimitLaws R) →
-  ConstructedRealPuncturedTopology R limits →
+  ConstructedRealPuncturedTopology R →
   RemainderDerivativeStructure
-    (ordinaryConstructiveRealMarxAlgebra ring)
-constructedRealRemainderDerivativeStructure {R} ring limits topology =
-  record
-    { Nonzero = Nonzero topology
-    ; normaliseRemainder = normaliseRemainder topology
-    ; TendsToZeroPunctured = λ phi →
-        ∀ approach →
-        ConvergesTo R
-          (mapSequence limits phi (parameters approach))
-          (zero R)
-    ; puncturedCongruence = puncturedCongruence topology
-    ; normalizedProductCancellation = normalizedProductCancellation topology
-    ; zeroTendsToZero = zeroTendsToZero topology
-    }
+    (ordinaryConstructiveRealMarxAlgebra {R = R} ring)
+constructedRealRemainderDerivativeStructure {R} ring top = build top
+  where
+    build :
+      ConstructedRealPuncturedTopology R →
+      RemainderDerivativeStructure
+        (ordinaryConstructiveRealMarxAlgebra {R = R} ring)
+    build
+      (record
+        { limits = lim
+        ; Nonzero = nz
+        ; normaliseRemainder = norm
+        ; normalisedAlong = normAlong
+        ; normalisedAlongAt = normAlongAt
+        ; approachNonzeroEventually = appNonzeroEv
+        ; puncturedCongruence = congTop
+        ; normalizedProductCancellation = prodCancel
+        ; zeroTendsToZero = zTz
+        }) =
+      record
+        { Nonzero = nz
+        ; normaliseRemainder = norm
+        ; TendsToZeroPunctured = λ phi →
+            ∀ (approach : PuncturedApproach R) →
+            ConvergesTo R
+              (mapSequence {R = R} lim phi (parameters {R = R} approach))
+              (zero R)
+        ; puncturedCongruence = λ eqHyp tendPhi → congTop eqHyp tendPhi
+        ; normalizedProductCancellation = prodCancel
+        ; zeroTendsToZero = zTz
+        }
 
 ------------------------------------------------------------------------
 -- A concrete fast-Cauchy backend should inhabit these structures by

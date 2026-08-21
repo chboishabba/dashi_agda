@@ -92,7 +92,7 @@ terminalPowerRule =
 
 terminalPolynomial : Polynomial terminalAlgebra
 terminalPolynomial =
-  (variable *P variable) +P constant tt
+  (varTerm *P varTerm) +P constant tt
 
 terminalPolynomialReceipt :
   MarxFactorisation terminalAlgebra (interpret terminalPolynomial)
