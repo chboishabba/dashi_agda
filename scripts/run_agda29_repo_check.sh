@@ -61,6 +61,8 @@ mkdir -p "$REPORT_DIR"
 TARGETS_FILE="$REPORT_DIR/targets.txt"
 HEAVY_FILE="$REPORT_DIR/heavy-or-tainted-skipped.txt"
 SUMMARY_FILE="$REPORT_DIR/summary.json"
+SUCCESS_FILE="$REPORT_DIR/last-success.json"
+rm -f "$SUCCESS_FILE"
 
 planner=(python3 "$REPO_ROOT/scripts/plan_agda_typecheck_targets.py"
   --root "$REPO_ROOT"
@@ -73,6 +75,7 @@ fi
 "${planner[@]}"
 
 mapfile -t TARGETS < "$TARGETS_FILE"
+PLANNED_COUNT="${#TARGETS[@]}"
 
 if [ -n "$FROM_TARGET" ]; then
   resumed=()
@@ -114,4 +117,49 @@ fi
 # One wrapper invocation means one shadow-tree/cache setup. The wrapper then
 # checks each target in deterministic order and stops at the first failing
 # module, which is the concrete repair frontier for the next iteration.
-exec "$REPO_ROOT/scripts/run_agda29_parallel_check.sh" "${TARGETS[@]}"
+set +e
+"$REPO_ROOT/scripts/run_agda29_parallel_check.sh" "${TARGETS[@]}"
+status=$?
+set -e
+if [ "$status" -ne 0 ]; then
+  echo "Repository Agda check failed; no success receipt written." >&2
+  exit "$status"
+fi
+
+# A resumed suffix is useful for repairs, but it is not evidence that the full
+# plan passed in this invocation. Only an unresumed run can mint the receipt.
+if [ -n "$FROM_TARGET" ]; then
+  echo "Resumed suffix passed; rerun without --from before claiming full coverage."
+  exit 0
+fi
+
+COMMIT_SHA="$(git -C "$REPO_ROOT" rev-parse HEAD 2>/dev/null || printf unknown)"
+TARGETS_SHA256="$(sha256sum "$TARGETS_FILE" | awk '{print $1}')"
+HEAVY_COUNT="$(wc -l < "$HEAVY_FILE" | tr -d '[:space:]')"
+CHECKED_AT="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+
+python3 - "$SUCCESS_FILE" "$COMMIT_SHA" "$TARGETS_SHA256" "$PLANNED_COUNT" "$HEAVY_COUNT" "$INCLUDE_HEAVY" "$CHECKED_AT" <<'PY'
+import json
+import sys
+
+path, commit, targets_hash, checked_count, heavy_count, include_heavy, checked_at = sys.argv[1:]
+receipt = {
+    "schema": "dashi.agda-repo-typecheck.v1",
+    "commit": commit,
+    "checked_at_utc": checked_at,
+    "targets_sha256": targets_hash,
+    "checked_target_count": int(checked_count),
+    "operationally_skipped_heavy_or_tainted": int(heavy_count),
+    "include_heavy": include_heavy == "1",
+    "claim": (
+        "all planned first-party Agda targets typechecked"
+        if include_heavy != "1"
+        else "all first-party Agda targets typechecked including heavy lanes"
+    ),
+}
+with open(path, "w") as handle:
+    json.dump(receipt, handle, indent=2, sort_keys=True)
+    handle.write("\n")
+PY
+
+printf 'SUCCESS receipt: %s\n' "$SUCCESS_FILE"
