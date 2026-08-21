@@ -9,6 +9,7 @@ sources=(
   DASHI/Analysis/RiemannReflectionPairBlockExact.agda
   DASHI/Analysis/RiemannWeilOffLineHyperbolicBlockExact.agda
   DASHI/Analysis/RiemannComplexPoissonPairEnergyExact.agda
+  DASHI/Analysis/RiemannWeilPairKernelFrobeniusExact.agda
   DASHI/Analysis/RiemannReflectionC3OrbitShapeBridgeExact.agda
   DASHI/Analysis/RiemannReflectionOrbitDefectRegression.agda
   DASHI/Analysis/ZetaTheoremSurface.agda
@@ -45,6 +46,7 @@ orbit=DASHI/Analysis/RiemannReflectionOrbitDefectExact.agda
 pair=DASHI/Analysis/RiemannReflectionPairBlockExact.agda
 hyper=DASHI/Analysis/RiemannWeilOffLineHyperbolicBlockExact.agda
 energy=DASHI/Analysis/RiemannComplexPoissonPairEnergyExact.agda
+kernel=DASHI/Analysis/RiemannWeilPairKernelFrobeniusExact.agda
 c3=DASHI/Analysis/RiemannReflectionC3OrbitShapeBridgeExact.agda
 regression=DASHI/Analysis/RiemannReflectionOrbitDefectRegression.agda
 surface=DASHI/Analysis/ZetaTheoremSurface.agda
@@ -65,19 +67,27 @@ require_pattern "$hyper" 'sourceSignatureCannotDetermineSquaredDefect'
 require_pattern "$hyper" 'DistanceSensitiveOffLineAdapter'
 require_pattern "$energy" 'fullGridEnergyDecomposition'
 require_pattern "$energy" 'pairBlockFrobeniusDecomposition'
-require_pattern "$energy" 'nearPairFrobeniusIsTwenty'
-require_pattern "$energy" 'farPairFrobeniusIsHundred'
+require_pattern "$energy" 'holomorphicBaselineCannotDetermineHermitianEnergy'
 require_pattern "$energy" 'ComplexPoissonCoercivityAdapter'
 require_pattern "$energy" 'FiniteCompressionTransferAdapter'
+require_pattern "$energy" 'HermitianArithmeticTransportAdapter'
+require_pattern "$kernel" 'holomorphicPlusHermitianSquaresExposePairCrossCore'
+require_pattern "$kernel" 'diagonalKernelEnergyIdentity'
+require_pattern "$kernel" 'negativeInterferenceCoreIsMinusOne'
+require_pattern "$kernel" 'PairKernelInterferenceAdapter'
 require_pattern "$c3" 'completePhaseOrbitCancels'
 require_pattern "$c3" 'c3OrbitRoleInversionInvariant'
 require_pattern "$c3" 'zetaSameRoleCanRetainDifferentDefects'
 require_pattern "$regression" 'regressionSignatureCannotRecoverDefect'
-require_pattern "$regression" 'regressionFarPairExcessNinetySix'
+require_pattern "$regression" 'regressionHolomorphicBaselineCannotRecoverHermitian'
+require_pattern "$regression" 'regressionPairKernelIdentity'
+require_pattern "$regression" 'regressionNegativeInterference'
 require_pattern "$surface" 'RiemannComplexPoissonPairEnergyExact'
-require_pattern "$aggregate" 'RiemannComplexPoissonPairEnergyExact'
+require_pattern "$surface" 'RiemannWeilPairKernelFrobeniusExact'
+require_pattern "$aggregate" 'RiemannWeilPairKernelFrobeniusExact'
 
 DASHI_NO_TMUX=1 scripts/run_agda29_parallel_check.sh \
   DASHI/Analysis/RiemannComplexPoissonPairEnergyExact.agda \
+  DASHI/Analysis/RiemannWeilPairKernelFrobeniusExact.agda \
   DASHI/Analysis/RiemannReflectionOrbitDefectRegression.agda \
   DASHI/EverythingRiemannReflectionOrbitDefect2026.agda
