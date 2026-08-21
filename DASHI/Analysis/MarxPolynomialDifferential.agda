@@ -14,34 +14,34 @@ powerFunction :
   Nat → Function A
 powerFunction {A} zeroN x = one A
 powerFunction {A} (suc n) x =
-  _*_ A (powerFunction n x) x
+  _*_ A (powerFunction {A = A} n x) x
 
 powerFactorisation :
   {A : MarxAlgebra} →
   (n : Nat) →
-  MarxFactorisation A (powerFunction n)
-powerFactorisation {A} zeroN = constantFactorisation (one A)
+  MarxFactorisation A (powerFunction {A = A} n)
+powerFactorisation {A} zeroN = constantFactorisation {A = A} (one A)
 powerFactorisation {A} (suc n) =
-  productFactorisations
-    (powerFactorisation n)
-    identityFactorisation
+  productFactorisations {A = A}
+    (powerFactorisation {A = A} n)
+    (identityFactorisation {A = A})
 
 powerDerivativeZero :
   {A : MarxAlgebra} →
   (x : Carrier A) →
-  marxDerivative (powerFactorisation zeroN) x ≡ zero A
+  marxDerivative {A = A} (powerFactorisation {A = A} zeroN) x ≡ zero A
 powerDerivativeZero x = refl
 
 powerDerivativeSuccessor :
   {A : MarxAlgebra} →
   (n : Nat) →
   (x : Carrier A) →
-  marxDerivative (powerFactorisation (suc n)) x
+  marxDerivative {A = A} (powerFactorisation {A = A} (suc n)) x
   ≡ _+_ A
       (_*_ A
-        (marxDerivative (powerFactorisation n) x)
+        (marxDerivative {A = A} (powerFactorisation {A = A} n) x)
         x)
-      (powerFunction n x)
+      (_*_ A (powerFunction {A = A} n x) (one A))
 powerDerivativeSuccessor n x = refl
 
 ------------------------------------------------------------------------
@@ -66,8 +66,8 @@ record PowerRuleNormalisation
 
     normalisePowerDerivative :
       ∀ n x →
-      marxDerivative (powerFactorisation (suc n)) x
-      ≡ natScale (suc n) (powerFunction n x)
+      marxDerivative (powerFactorisation {A = A} (suc n)) x
+      ≡ natScale (suc n) (powerFunction {A = A} n x)
 
 open PowerRuleNormalisation public
 
@@ -76,9 +76,9 @@ powerRule :
   (N : PowerRuleNormalisation A) →
   (n : Nat) →
   (x : Carrier A) →
-  marxDerivative (powerFactorisation (suc n)) x
-  ≡ natScale N (suc n) (powerFunction n x)
-powerRule N n x = normalisePowerDerivative N n x
+  marxDerivative {A = A} (powerFactorisation {A = A} (suc n)) x
+  ≡ natScale N (suc n) (powerFunction {A = A} n x)
+powerRule {A} N n x = normalisePowerDerivative N n x
 
 ------------------------------------------------------------------------
 -- A polynomial syntax whose differentiation receipts are constructed by
@@ -100,62 +100,62 @@ open Polynomial public
 interpret :
   {A : MarxAlgebra} →
   Polynomial A → Function A
-interpret (constant c) = constantFunction c
-interpret varTerm = identityFunction
-interpret (p +P q) = addFunctions (interpret p) (interpret q)
-interpret (p *P q) = multiplyFunctions (interpret p) (interpret q)
+interpret {A} (constant c) = constantFunction {A = A} c
+interpret {A} varTerm = identityFunction {A = A}
+interpret {A} (p +P q) = addFunctions {A = A} (interpret {A = A} p) (interpret {A = A} q)
+interpret {A} (p *P q) = multiplyFunctions {A = A} (interpret {A = A} p) (interpret {A = A} q)
 
 polynomialFactorisation :
   {A : MarxAlgebra} →
   (p : Polynomial A) →
-  MarxFactorisation A (interpret p)
-polynomialFactorisation (constant c) = constantFactorisation c
-polynomialFactorisation varTerm = identityFactorisation
-polynomialFactorisation (p +P q) =
-  addFactorisations
-    (polynomialFactorisation p)
-    (polynomialFactorisation q)
-polynomialFactorisation (p *P q) =
-  productFactorisations
-    (polynomialFactorisation p)
-    (polynomialFactorisation q)
+  MarxFactorisation A (interpret {A = A} p)
+polynomialFactorisation {A} (constant c) = constantFactorisation {A = A} c
+polynomialFactorisation {A} varTerm = identityFactorisation {A = A}
+polynomialFactorisation {A} (p +P q) =
+  addFactorisations {A = A}
+    (polynomialFactorisation {A = A} p)
+    (polynomialFactorisation {A = A} q)
+polynomialFactorisation {A} (p *P q) =
+  productFactorisations {A = A}
+    (polynomialFactorisation {A = A} p)
+    (polynomialFactorisation {A = A} q)
 
 polynomialDerivative :
   {A : MarxAlgebra} →
   Polynomial A → Function A
-polynomialDerivative p =
-  marxDerivative (polynomialFactorisation p)
+polynomialDerivative {A} p =
+  marxDerivative {A = A} (polynomialFactorisation {A = A} p)
 
 polynomialConstantRule :
   {A : MarxAlgebra} →
   (c x : Carrier A) →
-  polynomialDerivative (constant c) x ≡ zero A
+  polynomialDerivative {A = A} (constant c) x ≡ zero A
 polynomialConstantRule c x = refl
 
 polynomialVariableRule :
   {A : MarxAlgebra} →
   (x : Carrier A) →
-  polynomialDerivative varTerm x ≡ one A
+  polynomialDerivative {A = A} varTerm x ≡ one A
 polynomialVariableRule x = refl
 
 polynomialSumRule :
   {A : MarxAlgebra} →
   (p q : Polynomial A) →
   (x : Carrier A) →
-  polynomialDerivative (p +P q) x
+  polynomialDerivative {A = A} (p +P q) x
   ≡ _+_ A
-      (polynomialDerivative p x)
-      (polynomialDerivative q x)
+      (polynomialDerivative {A = A} p x)
+      (polynomialDerivative {A = A} q x)
 polynomialSumRule p q x = refl
 
 polynomialProductRule :
   {A : MarxAlgebra} →
   (p q : Polynomial A) →
   (x : Carrier A) →
-  polynomialDerivative (p *P q) x
+  polynomialDerivative {A = A} (p *P q) x
   ≡ _+_ A
-      (_*_ A (polynomialDerivative p x) (interpret q x))
-      (_*_ A (interpret p x) (polynomialDerivative q x))
+      (_*_ A (polynomialDerivative {A = A} p x) (interpret {A = A} q x))
+      (_*_ A (interpret {A = A} p x) (polynomialDerivative {A = A} q x))
 polynomialProductRule p q x = refl
 
 powerPolynomial :
@@ -168,8 +168,8 @@ powerPolynomialInterpretsAsPower :
   {A : MarxAlgebra} →
   (n : Nat) →
   (x : Carrier A) →
-  interpret (powerPolynomial n) x ≡ powerFunction n x
-powerPolynomialInterpretsAsPower zeroN x = refl
+  interpret {A = A} (powerPolynomial {A = A} n) x ≡ powerFunction {A = A} n x
+powerPolynomialInterpretsAsPower {A} zeroN x = refl
 powerPolynomialInterpretsAsPower {A} (suc n) x =
   cong (λ y → _*_ A y x)
-    (powerPolynomialInterpretsAsPower n x)
+    (powerPolynomialInterpretsAsPower {A = A} n x)
