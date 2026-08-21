@@ -65,6 +65,82 @@ canonicalSystemState memory =
     Landscape.leftMinimum
     refl
 
+------------------------------------------------------------------------
+-- Explicit controlled transition: Z_{t+1} = T(Z_t, u_t, o_t).
+-- The finite input controls landscape flow while an observation token is kept
+-- separately typed.  This first exact transition is intentionally conservative:
+-- it changes one dynamical coordinate and proves unrelated decision projections
+-- stay fixed, providing a base for richer coupled updates without conflation.
+------------------------------------------------------------------------
+
+data ControlInput : Set where
+  holdLandscape : ControlInput
+  applyClockwiseFlux applyCounterclockwiseFlux : ControlInput
+
+data ExternalObservation : Set where
+  noExternalObservation : ExternalObservation
+
+inputFlux : ControlInput → Landscape.FluxRegime
+inputFlux holdLandscape = Landscape.noFlux
+inputFlux applyClockwiseFlux = Landscape.clockwiseFlux
+inputFlux applyCounterclockwiseFlux = Landscape.counterclockwiseFlux
+
+transition :
+  ControlledDecisionSystemState →
+  ControlInput →
+  ExternalObservation →
+  ControlledDecisionSystemState
+transition state input observation =
+  controlledDecisionSystemState
+    (controlledDecision state)
+    (allostaticBody state)
+    (Landscape.next (inputFlux input) (landscapePosition state))
+    (allostaticCoreMatchesDecisionBody state)
+
+transitionPreservesMemory :
+  (state : ControlledDecisionSystemState)
+  (input : ControlInput)
+  (observation : ExternalObservation) →
+  memoryProjection (transition state input observation) ≡ memoryProjection state
+transitionPreservesMemory state input observation = refl
+
+transitionPreservesAccess :
+  (state : ControlledDecisionSystemState)
+  (input : ControlInput)
+  (observation : ExternalObservation) →
+  accessProjection (transition state input observation) ≡ accessProjection state
+transitionPreservesAccess state input observation = refl
+
+transitionPreservesDecisionReadout :
+  (state : ControlledDecisionSystemState)
+  (input : ControlInput)
+  (observation : ExternalObservation) →
+  decisionProjection (transition state input observation) ≡ decisionProjection state
+transitionPreservesDecisionReadout state input observation = refl
+
+transitionPreservesAction :
+  (state : ControlledDecisionSystemState)
+  (input : ControlInput)
+  (observation : ExternalObservation) →
+  actionProjection (transition state input observation) ≡ actionProjection state
+transitionPreservesAction state input observation = refl
+
+clockwiseInputMovesCanonicalLandscape :
+  (memory : Memory.MemoryFibre) →
+  landscapePosition
+    (transition (canonicalSystemState memory)
+      applyClockwiseFlux noExternalObservation)
+  ≡ Landscape.saddle
+clockwiseInputMovesCanonicalLandscape memory = refl
+
+counterclockwiseInputMovesCanonicalLandscapeDifferently :
+  (memory : Memory.MemoryFibre) →
+  landscapePosition
+    (transition (canonicalSystemState memory)
+      applyCounterclockwiseFlux noExternalObservation)
+  ≡ Landscape.rightMinimum
+counterclockwiseInputMovesCanonicalLandscapeDifferently memory = refl
+
 record ControlledDecisionSystemBoundary : Set where
   constructor controlledDecisionSystemBoundary
   field
@@ -75,7 +151,8 @@ record ControlledDecisionSystemBoundary : Set where
     actionProjectionIsWholeState : Bool
     landscapePotentialIsWholeDynamics : Bool
     explicitMultiProjectionCarrierExists : Bool
+    explicitControlledTransitionExists : Bool
 
 canonicalControlledDecisionSystemBoundary : ControlledDecisionSystemBoundary
 canonicalControlledDecisionSystemBoundary =
-  controlledDecisionSystemBoundary false false false false false false true
+  controlledDecisionSystemBoundary false false false false false false true true
