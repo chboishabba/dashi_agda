@@ -5,6 +5,9 @@ on:
     types: [opened, synchronize, reopened, ready_for_review]
     paths:
       - 'DASHI/Cognition/PNF/**'
+      - 'DASHI/Core/NonFactorabilityCompositionExact.agda'
+      - 'DASHI/Governance/LegalDecisionDoubleProjectionExact.agda'
+      - 'DASHI/Governance/Everything.agda'
       - 'DASHI/Cognition/Utterance/All.agda'
       - 'DASHI/Foundations/InverseLimitClopenRefinement.agda'
       - 'DASHI/Foundations/DerivedCoarseDynamics.agda'
@@ -74,6 +77,8 @@ jobs:
               DASHI/Cognition/PNF/DecisionActionProjectionNonFactorabilityExact.agda
               DASHI/Cognition/PNF/DecisionFibrePotentialHyperformalismExact.agda
               DASHI/Cognition/PNF/DecisionFibrePotentialRegression.agda
+              DASHI/Core/NonFactorabilityCompositionExact.agda
+              DASHI/Governance/LegalDecisionDoubleProjectionExact.agda
               DASHI/Foundations/InverseLimitClopenRefinement.agda
               DASHI/Foundations/DerivedCoarseDynamics.agda
               DASHI/NumberTheory/ThreeAdicCompletionCutset.agda
