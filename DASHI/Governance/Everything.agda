@@ -38,8 +38,15 @@ import DASHI.Governance.InverseJusticeAttractorExact
 import DASHI.Governance.SecondOrderJusticeGrammarExact
 import DASHI.Governance.ClosedAuthorityInverseJusticeExact
 import DASHI.Governance.SituatedInverseJusticeRegression
+
+-- Contested ambient authority / legal-epistemic power convergence.
 import DASHI.Governance.ContestedAmbientAuthorityHyperformalismExact
 import DASHI.Governance.ContestedAmbientAuthorityRegression
+import DASHI.Governance.InstitutionalNoticeActuationCulpabilityExact
+import DASHI.Governance.EpistemicCaptureProfessionalClosureExact
+import DASHI.Governance.InstitutionPreservingRechartAntiSublationExact
+import DASHI.Governance.FibrewiseInstitutionalPowerEverything
+
 import DASHI.Governance.RevolutionarySourceAtlas
 import DASHI.Governance.RevolutionaryPracticeBraid
 import DASHI.Governance.TraumaMemorySublationBoundary
