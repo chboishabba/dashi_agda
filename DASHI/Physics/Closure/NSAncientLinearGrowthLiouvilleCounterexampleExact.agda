@@ -24,8 +24,11 @@ module DASHI.Physics.Closure.NSAncientLinearGrowthLiouvilleCounterexampleExact w
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Product using (_×_; _,_)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; -_)
+open import Data.Rational.Tactic.RingSolver using (solve)
+open import Relation.Binary.PropositionalEquality using (cong₂)
 
 Point3 : Set
 Point3 = ℚ × (ℚ × ℚ)
@@ -56,7 +59,7 @@ vectorAdd (a , (b , c)) (x , (y , z)) =
   (a + x) , ((b + y) , (c + z))
 
 incompressible : (q : Point3) → divergence q ≡ 0ℚ
-incompressible q = refl
+incompressible q = solve []
 
 curlFree : (q : Point3) → vorticity q ≡ (0ℚ , (0ℚ , 0ℚ))
 curlFree q = refl
@@ -68,7 +71,12 @@ harmonicVelocity q = refl
 stationaryMomentumBalance : (q : Point3) →
   vectorAdd (convectiveAcceleration q) (pressureGradient q)
   ≡ laplacianVelocity q
-stationaryMomentumBalance q = refl
+stationaryMomentumBalance (x , (y , z)) =
+  cong₂ _,_
+    (solve (x ∷ []))
+    (cong₂ _,_
+      (solve (y ∷ []))
+      (solve []))
 
 origin : Point3
 origin = 0ℚ , (0ℚ , 0ℚ)
