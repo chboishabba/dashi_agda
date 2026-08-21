@@ -21,7 +21,7 @@ data CoarseObservation : Set where
   transitionState : CoarseObservation
 
 data Context : Set where
-  ordinaryContext threatContext ambivalentContext : Context
+  ordinaryContext threatContext blockedSafetyContext ambivalentContext : Context
 
 data PotentialObserver : Set where
   subjectObserver institutionObserver : PotentialObserver
@@ -41,6 +41,9 @@ slowPotential ordinaryContext saddleState = 3
 slowPotential threatContext threatState = 0
 slowPotential threatContext safetyState = 2
 slowPotential threatContext saddleState = 3
+slowPotential blockedSafetyContext threatState = 2
+slowPotential blockedSafetyContext safetyState = 0
+slowPotential blockedSafetyContext saddleState = 3
 slowPotential ambivalentContext threatState = 0
 slowPotential ambivalentContext safetyState = 0
 slowPotential ambivalentContext saddleState = 3
@@ -52,6 +55,9 @@ accessible ordinaryContext saddleState = false
 accessible threatContext threatState = true
 accessible threatContext safetyState = false
 accessible threatContext saddleState = false
+accessible blockedSafetyContext threatState = true
+accessible blockedSafetyContext safetyState = false
+accessible blockedSafetyContext saddleState = false
 accessible ambivalentContext threatState = true
 accessible ambivalentContext safetyState = true
 accessible ambivalentContext saddleState = false
@@ -63,10 +69,10 @@ sameFibreDifferentPotential :
 sameFibreDifferentPotential = refl , (refl , refl)
 
 lowerPotentialNeedNotBeAccessible :
-  slowPotential threatContext safetyState ≡ 2
-  × slowPotential threatContext threatState ≡ 0
-  × accessible threatContext safetyState ≡ false
-  × accessible threatContext threatState ≡ true
+  slowPotential blockedSafetyContext safetyState ≡ 0
+  × slowPotential blockedSafetyContext threatState ≡ 2
+  × accessible blockedSafetyContext safetyState ≡ false
+  × accessible blockedSafetyContext threatState ≡ true
 lowerPotentialNeedNotBeAccessible = refl , (refl , (refl , refl))
 
 contextCanReversePotentialOrdering :
@@ -94,6 +100,7 @@ lowerEndpointCanHavePositiveBarrier = refl , (refl , refl)
 isLocalMinimum : Context → FineState → Bool
 isLocalMinimum ordinaryContext safetyState = true
 isLocalMinimum threatContext threatState = true
+isLocalMinimum blockedSafetyContext safetyState = true
 isLocalMinimum ambivalentContext threatState = true
 isLocalMinimum ambivalentContext safetyState = true
 isLocalMinimum _ _ = false
@@ -101,6 +108,7 @@ isLocalMinimum _ _ = false
 localMinimumCount : Context → Nat
 localMinimumCount ordinaryContext = 1
 localMinimumCount threatContext = 1
+localMinimumCount blockedSafetyContext = 1
 localMinimumCount ambivalentContext = 2
 
 bistableFibreHasTwoMinimaAndBarrier :
@@ -139,10 +147,7 @@ observerMinimaNeedNotCoincide :
 observerMinimaNeedNotCoincide ()
 
 ------------------------------------------------------------------------
--- Balanced signed pressure is not the same object as low tension.  The
--- orientation quotient may cancel signed displacement while a squared/energy
--- style residual remains.  This is the decision-facing analogue of the
--- reflection-orbit defect discipline, not an identification with zeta.
+-- Balanced signed pressure is not the same object as low tension.
 ------------------------------------------------------------------------
 
 data SignedPressure : Set where
