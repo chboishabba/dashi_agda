@@ -10,10 +10,8 @@ module DASHI.Analysis.RiemannHermitianSourceGapMapExact where
 --
 -- Machine-checked source audit: `anthropics/zeta-23-lean`.
 --
--- This module does not mark a lane "open" merely because the final theorem is
--- absent.  It factors each G1--G4 producer into the source-native input that is
--- already available and the FIRST genuinely new bridge needed by the Hermitian
--- transverse-defect route.
+-- Each G1--G4 lane is split into source/native connections already available
+-- and the FIRST genuinely new bridge needed by the Hermitian defect route.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -22,57 +20,64 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 -- G1: COMPLEX POISSON + FINITE RETENTION
 --
 -- Existing source:
---   P1 real-argument Gabor Poisson summation (`Zeta23/Poisson.lean`),
---   P2 complex-argument phiHat definition and C^2 compact-support decay,
+--   P1 real-argument BILINEAR Gabor Poisson summation,
+--   P2 complex-argument phiHat definition and compact-support decay,
 --   P3 strip bound |phiHat(r-iy)| <= exp(L/4) C1 |r-iy|^-2,
---   P4 finite zero-side tail machinery (`Zeta23/Tail.lean`).
+--   P4 real/even taper structure,
+--   P5 finite ZERO-SIDE tail machinery.
 --
--- First new bridge:
---   extend the real bilinear Poisson identity to the conjugate/Hermitian
---   complex pair needed at z=gamma-i alpha.  After that, prove the resulting
---   Phi(-2 i alpha)-Phi(0) excess controls alpha^2 and align the source tail
---   estimate with the finite k-compression used by this new identity.
+-- DASHI reduction now shows the desired Hermitian norm identity is not an
+-- independent theorem: complex bilinear Poisson at (z,conj z), together with
+-- real/even Fourier symmetry, derives it exactly.  Thus the first genuinely
+-- new Poisson theorem is just the complex-parameter bilinear extension.
 ------------------------------------------------------------------------
 
 record G1ExistingSource : Set₁ where
   field
-    RealPoissonIdentity : Set
+    RealBilinearPoissonIdentity : Set
     ComplexPhiHatDefinition : Set
     ComplexStripDecay : Set
+    RealEvenTaperStructure : Set
     SourceZeroSideTail : Set
-    realPoissonIdentity : RealPoissonIdentity
+    realBilinearPoissonIdentity : RealBilinearPoissonIdentity
     complexPhiHatDefinition : ComplexPhiHatDefinition
     complexStripDecay : ComplexStripDecay
+    realEvenTaperStructure : RealEvenTaperStructure
     sourceZeroSideTail : SourceZeroSideTail
 
 record G1NewBridge (owned : G1ExistingSource) : Set₁ where
   field
-    ComplexHermitianPoissonContinuation : Set
+    RealEvenFourierConjugateSymmetry : Set
+    ComplexBilinearPoissonExtension : Set
     PhiImaginaryAxisAlphaSquaredCoercivity : Set
     FiniteKGridHermitianRetention : Set
-    complexHermitianPoissonContinuation : ComplexHermitianPoissonContinuation
+    realEvenFourierConjugateSymmetry : RealEvenFourierConjugateSymmetry
+    complexBilinearPoissonExtension : ComplexBilinearPoissonExtension
     phiImaginaryAxisAlphaSquaredCoercivity : PhiImaginaryAxisAlphaSquaredCoercivity
     finiteKGridHermitianRetention : FiniteKGridHermitianRetention
 
 ------------------------------------------------------------------------
 -- G2: MIXED OFF-DIAGONAL INTERFERENCE
 --
--- Existing DASHI algebra has reduced
+-- Exact DASHI algebra:
 --
 --   2[(a.d)^2+(b.c)^2] = (Im S)^2 + (Im H)^2.
 --
--- Existing source additionally owns local zero counts and the
--- Montgomery--Vaughan weighted Hilbert inequality.  Neither alone proves the
--- desired cross-sum estimate: a NEW alignment must first rewrite/control the
--- complex difference/sum Phi kernels in a summable separated-frequency form.
+-- Therefore after G1 identifies S/H with difference/sum Phi kernels, the
+-- entire mixed loss factors through a complex Phi-kernel envelope.  Existing
+-- source owns local zero counts and Montgomery--Vaughan.  The remaining bridge
+-- is a representation/decay/summation theorem showing that envelope lies below
+-- the non-target diagonal reservoir.
 ------------------------------------------------------------------------
 
 record G2ExistingSource : Set₁ where
   field
     MixedLossEqualsImaginaryKernelEnergy : Set
+    KernelEnvelopeToAlmostOrthogonality : Set
     LocalZeroCount : Set
     MontgomeryVaughanHilbert : Set
     mixedLossEqualsImaginaryKernelEnergy : MixedLossEqualsImaginaryKernelEnergy
+    kernelEnvelopeToAlmostOrthogonality : KernelEnvelopeToAlmostOrthogonality
     localZeroCount : LocalZeroCount
     montgomeryVaughanHilbert : MontgomeryVaughanHilbert
 
@@ -80,20 +85,15 @@ record G2NewBridge (owned : G2ExistingSource) : Set₁ where
   field
     SHToComplexPhiKernelIdentification : Set
     OffDiagonalPhiKernelDecay : Set
-    PairwiseKernelSumBound : Set
+    PairwiseKernelEnvelopeSumBound : Set
     InterferenceBelowNonTargetDiagonal : Set
     sHToComplexPhiKernelIdentification : SHToComplexPhiKernelIdentification
     offDiagonalPhiKernelDecay : OffDiagonalPhiKernelDecay
-    pairwiseKernelSumBound : PairwiseKernelSumBound
+    pairwiseKernelEnvelopeSumBound : PairwiseKernelEnvelopeSumBound
     interferenceBelowNonTargetDiagonal : InterferenceBelowNonTargetDiagonal
 
 ------------------------------------------------------------------------
 -- G3: PRIME-SIDE NORMALIZED EXCESS
---
--- Existing source owns the raw second-trace asymptotic and explicit error
--- scale.  What it does NOT source-own is the new statement that, after
--- subtracting the critical-compatible main term, the remainder is exactly the
--- retained Hermitian transverse excess constructed by G1/G2.
 ------------------------------------------------------------------------
 
 record G3ExistingSource : Set₁ where
@@ -115,15 +115,8 @@ record G3NewBridge (owned : G3ExistingSource) : Set₁ where
 ------------------------------------------------------------------------
 -- G4: CROSS THE ERROR FLOOR
 --
--- Existing connections are three partial routes, not three completed proofs:
---   localization: windows/tails already exist, but not arbitrary pair isolation;
---   amplification: DASHI owns exact scalar power residual amplification, but
---                  the source does not thereby own higher trace estimates;
---   rigidity: functional-equation reflection is owned, but there is no proved
---             zero <-> Satake/unitarity identification.
---
--- The common target of every route is the SAME strict inequality/certificate:
---       targetPairDefect > arithmeticErrorBudget.
+-- All three routes must manufacture the SAME terminal certificate:
+-- targetPairDefect > arithmeticErrorBudget.
 ------------------------------------------------------------------------
 
 record G4ExistingConnections : Set₁ where
@@ -158,18 +151,16 @@ record G4ArithmeticRigidityBridge (owned : G4ExistingConnections) : Set₁ where
     arithmeticCompatibilityObservable : ArithmeticCompatibilityObservable
     reflectionPlusArithmeticForcesAlphaZero : ReflectionPlusArithmeticForcesAlphaZero
 
-------------------------------------------------------------------------
--- FIRST-GAP SUMMARY.  These Booleans describe the audit, not theorem evidence;
--- all theorem-bearing producer fields stay in the records above.
-------------------------------------------------------------------------
-
 record HermitianSourceGapBoundary : Set where
   field
-    realPoissonSourceOwned : Bool
+    realBilinearPoissonSourceOwned : Bool
     complexPhiHatStripDecaySourceOwned : Bool
+    realEvenTaperSourceOwned : Bool
     sourceZeroTailOwned : Bool
-    complexHermitianPoissonStillNew : Bool
+    hermitianNormReducedToComplexBilinearPoisson : Bool
+    complexBilinearPoissonStillNew : Bool
     mixedLossKernelReductionOwned : Bool
+    kernelEnvelopeReductionOwned : Bool
     localZeroCountSourceOwned : Bool
     montgomeryVaughanSourceOwned : Bool
     mixedKernelSummationStillNew : Bool
@@ -182,11 +173,14 @@ record HermitianSourceGapBoundary : Set where
 
 hermitianSourceGapBoundary : HermitianSourceGapBoundary
 hermitianSourceGapBoundary = record
-  { realPoissonSourceOwned = true
+  { realBilinearPoissonSourceOwned = true
   ; complexPhiHatStripDecaySourceOwned = true
+  ; realEvenTaperSourceOwned = true
   ; sourceZeroTailOwned = true
-  ; complexHermitianPoissonStillNew = true
+  ; hermitianNormReducedToComplexBilinearPoisson = true
+  ; complexBilinearPoissonStillNew = true
   ; mixedLossKernelReductionOwned = true
+  ; kernelEnvelopeReductionOwned = true
   ; localZeroCountSourceOwned = true
   ; montgomeryVaughanSourceOwned = true
   ; mixedKernelSummationStillNew = true
