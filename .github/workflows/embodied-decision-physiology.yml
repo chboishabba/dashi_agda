@@ -23,6 +23,7 @@ on:
       - 'DASHI/Biology/IntrospectiveEmbodiedHyperformalismObservationExact.agda'
       - 'DASHI/Biology/IntrospectiveHyperformalismIncidenceExact.agda'
       - 'DASHI/Biology/SymmetryResolvedEmbodiedWaveControlExact.agda'
+      - 'DASHI/Biology/QuaternionOrbitEmbodiedReachNonfactorabilityExact.agda'
       - 'DASHI/Biology/TranslationInvariantCompletionAccessibilityNonfactorabilityExact.agda'
       - 'DASHI/Biology/EmbodiedWaveCubieHolonomyExact.agda'
       - 'DASHI/Biology/TwoBoundarySymmetryResolvedModeSectionExact.agda'
