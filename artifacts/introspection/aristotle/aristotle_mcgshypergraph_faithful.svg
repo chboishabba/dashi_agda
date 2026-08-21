@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="900" viewBox="0 0 1000 900">
+<rect width="1000" height="900" fill="white"/>
+<line x1="120" y1="450" x2="275" y2="330" stroke="black" stroke-width="8"/>
+<line x1="275" y1="330" x2="440" y2="150" stroke="black" stroke-width="3"/>
+<line x1="275" y1="330" x2="440" y2="450" stroke="black" stroke-width="3"/>
+<line x1="120" y1="450" x2="275" y2="560" stroke="black" stroke-width="8"/>
+<line x1="275" y1="560" x2="440" y2="620" stroke="black" stroke-width="3"/>
+<line x1="120" y1="450" x2="275" y2="730" stroke="black" stroke-width="8"/>
+<line x1="275" y1="730" x2="440" y2="790" stroke="black" stroke-width="3"/>
+<line x1="440" y1="150" x2="720" y2="150" stroke="black" stroke-width="8"/>
+<line x1="440" y1="290" x2="720" y2="290" stroke="black" stroke-width="8"/>
+<line x1="440" y1="450" x2="720" y2="450" stroke="black" stroke-width="8"/>
+<line x1="440" y1="620" x2="720" y2="620" stroke="black" stroke-width="8"/>
+<circle cx="120" cy="450" r="34" fill="white" stroke="black" stroke-width="4"/>
+<circle cx="120" cy="450" r="25" fill="white" stroke="black" stroke-width="4"/>
+<circle cx="440" cy="150" r="34" fill="white" stroke="black" stroke-width="4"/>
+<circle cx="440" cy="150" r="25" fill="white" stroke="black" stroke-width="4"/>
+<polygon points="483,121 495,121 489,109" fill="black"/>
+<circle cx="440" cy="290" r="34" fill="white" stroke="black" stroke-width="4"/>
+<circle cx="440" cy="290" r="25" fill="white" stroke="black" stroke-width="4"/>
+<polygon points="483,261 495,261 489,249" fill="black"/>
+<circle cx="440" cy="450" r="34" fill="white" stroke="black" stroke-width="4"/>
+<circle cx="440" cy="450" r="25" fill="white" stroke="black" stroke-width="4"/>
+<circle cx="440" cy="620" r="34" fill="white" stroke="black" stroke-width="4"/>
+<circle cx="440" cy="620" r="25" fill="white" stroke="black" stroke-width="4"/>
+<circle cx="440" cy="790" r="34" fill="white" stroke="black" stroke-width="4"/>
+<rect x="233.0" y="304.0" width="84" height="52" fill="white" stroke="black" stroke-width="4"/>
+<rect x="242.0" y="313.0" width="66" height="34" fill="white" stroke="black" stroke-width="4"/>
+<rect x="233.0" y="534.0" width="84" height="52" fill="white" stroke="black" stroke-width="4"/>
+<rect x="242.0" y="543.0" width="66" height="34" fill="white" stroke="black" stroke-width="4"/>
+<rect x="233.0" y="704.0" width="84" height="52" fill="white" stroke="black" stroke-width="4"/>
+<rect x="678.0" y="124.0" width="84" height="52" fill="white" stroke="black" stroke-width="4"/>
+<rect x="687.0" y="133.0" width="66" height="34" fill="white" stroke="black" stroke-width="4"/>
+<rect x="678.0" y="264.0" width="84" height="52" fill="white" stroke="black" stroke-width="4"/>
+<rect x="687.0" y="273.0" width="66" height="34" fill="white" stroke="black" stroke-width="4"/>
+<rect x="678.0" y="424.0" width="84" height="52" fill="white" stroke="black" stroke-width="4"/>
+<rect x="687.0" y="433.0" width="66" height="34" fill="white" stroke="black" stroke-width="4"/>
+<rect x="678.0" y="594.0" width="84" height="52" fill="white" stroke="black" stroke-width="4"/>
+<rect x="687.0" y="603.0" width="66" height="34" fill="white" stroke="black" stroke-width="4"/>
+<text x="120" y="455" font-family="monospace" font-size="18" text-anchor="middle">S0</text>
+<text x="440" y="155" font-family="monospace" font-size="18" text-anchor="middle">S1</text>
+<text x="440" y="295" font-family="monospace" font-size="18" text-anchor="middle">S1p</text>
+<text x="440" y="455" font-family="monospace" font-size="18" text-anchor="middle">S2</text>
+<text x="440" y="625" font-family="monospace" font-size="18" text-anchor="middle">S3</text>
+<text x="440" y="795" font-family="monospace" font-size="18" text-anchor="middle">S4</text>
+<text x="275" y="335" font-family="monospace" font-size="17" text-anchor="middle">A0</text>
+<text x="275" y="565" font-family="monospace" font-size="17" text-anchor="middle">A1</text>
+<text x="275" y="735" font-family="monospace" font-size="17" text-anchor="middle">A2</text>
+<text x="720" y="155" font-family="monospace" font-size="17" text-anchor="middle">T1</text>
+<text x="720" y="295" font-family="monospace" font-size="17" text-anchor="middle">T1p</text>
+<text x="720" y="455" font-family="monospace" font-size="17" text-anchor="middle">T2</text>
+<text x="720" y="625" font-family="monospace" font-size="17" text-anchor="middle">T3</text>
+<text x="590" y="704" font-family="sans-serif" font-size="18">triangle tag = shared observer fibre</text>
+<text x="590" y="732" font-family="sans-serif" font-size="18">double outline = proved</text>
+<text x="590" y="760" font-family="sans-serif" font-size="18">circle = state</text>
+<text x="590" y="788" font-family="sans-serif" font-size="18">wide rectangle = action</text>
+<text x="590" y="816" font-family="sans-serif" font-size="18">thick edge = source incidence</text>
+<text x="590" y="844" font-family="sans-serif" font-size="18">thin edge = target incidence</text>
+</svg>
