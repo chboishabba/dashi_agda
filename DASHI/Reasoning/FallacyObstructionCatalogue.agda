@@ -476,8 +476,7 @@ noFallacyPromotion :
   (obstruction : FallacyObstruction) →
   FallacyPromotionEligible obstruction →
   ⊥
-noFallacyPromotion _ impossible =
-  impossible
+noFallacyPromotion _ ()
 
 data FallacyCatalogueStatus : Set where
   typedObstructionCatalogueOnlyNoPromotion :
