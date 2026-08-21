@@ -1,3 +1,7 @@
 module DASHI.Biology.Levin.Everything where
 
 import DASHI.Biology.Levin.LevinDiverseIntelligenceSurface
+import DASHI.Biology.Levin.MillerTravelingWaveAccessProducerExact
+import DASHI.Biology.Levin.WaveInterferenceRecruitmentExact
+import DASHI.Biology.Levin.CrossFrequencyEffectiveTopologyExact
+import DASHI.Biology.Levin.MixedSelectivityWaveAccessExact
