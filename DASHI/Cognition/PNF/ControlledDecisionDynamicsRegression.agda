@@ -2,6 +2,7 @@ module DASHI.Cognition.PNF.ControlledDecisionDynamicsRegression where
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Empty using (⊥)
+open import Data.Rational.Base using (_+_)
 
 import DASHI.Biology.AllostaticBodyStateExact as Allostatic
 import DASHI.Biology.EmbodiedOptionConeInteroceptionExact as Embodied
