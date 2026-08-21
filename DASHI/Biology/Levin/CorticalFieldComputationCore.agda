@@ -15,9 +15,8 @@ import DASHI.Biology.Levin.MillerTravelingWaveAccessProducerExact as Miller
 import DASHI.Biology.Levin.WaveInterferenceRecruitmentExact as Interference
 import DASHI.Biology.Levin.CrossFrequencyEffectiveTopologyExact as CrossFrequency
 import DASHI.Biology.Levin.MixedSelectivityWaveAccessExact as MixedExact
-import DASHI.Cognition.PNF.FastAccessControlFieldExact as Access
 
-record CorticalFieldComputationCore : Set₁ where
+record CorticalFieldComputationCore : Set where
   field
     fieldControlBoundary : Mixed.FieldControlBoundary
     travelingWaveBoundary : Wave.TravelingWaveBoundary
@@ -25,8 +24,9 @@ record CorticalFieldComputationCore : Set₁ where
     chemistryAdapter : Chemistry.BioelectricChemistryWaveAdapter
     existingBiologyAdapter : Existing.ExistingBiologyPhysicalStateAdapter
 
-    -- Exact producer layer added beneath the prior candidate boundaries.
-    fastAccessProducer : Access.FastAccessControlField
+    -- Exact producer layer added beneath the prior candidate boundaries.  The
+    -- FastAccessControlField value itself remains owned by the PNF module so
+    -- this established Set-level core does not need a universe promotion.
     movingSupportActuallyChanges :
       Miller.recruitedAt Miller.firstTick Miller.leftSite
       ≡ Miller.recruitedAt Miller.secondTick Miller.leftSite → ⊥
@@ -64,7 +64,6 @@ canonicalCorticalFieldComputationCore = record
   ; memoryAdapter = Memory.canonicalOscillatoryMemoryAdapter
   ; chemistryAdapter = Chemistry.canonicalBioelectricChemistryWaveAdapter
   ; existingBiologyAdapter = Existing.canonicalExistingBiologyPhysicalStateAdapter
-  ; fastAccessProducer = Miller.waveFastAccessField
   ; movingSupportActuallyChanges = Miller.movingSupportActuallyChanges
   ; interferenceChangesRecruitment = Interference.phaseDifferenceChangesRecruitment
   ; fixedAnatomyDynamicEdge = CrossFrequency.betaLowOpensExistingAnatomicalEdge
