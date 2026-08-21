@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 
 import DASHI.Biology.EmbodiedInteroceptionSourceRegistry as Sources
 import DASHI.Biology.EmbodiedOptionConeInteroceptionExact as Body
+import DASHI.Biology.IntrospectiveEmbodiedHyperformalismObservationExact as Visual
 import DASHI.Cognition.PNF.NeuromodulatedCommitmentThresholdExact as Threshold
 import DASHI.Cognition.PNF.DecisionConfidenceNoncollapseExact as Confidence
 import DASHI.Cognition.PNF.BoundedEvidenceCommitmentExact as Evidence
@@ -35,6 +36,15 @@ record EmbodiedDecisionPhysiologyRegression : Set where
     sameCommitmentDoesNotFixConfidence :
       Confidence.committedLowConfidence ≡ Confidence.committedHighConfidence → ⊥
 
+    cvRecoveredFourSupervoxels : Visual.observedSupervoxelCount ≡ 4
+    cvRecoveredNineFibres : Visual.observedTotalFibreCount ≡ 9
+    cvRecoveredBroadContractedAsymmetry :
+      Visual.observedFibreCount Visual.recoveredS0
+      ≡ Visual.observedFibreCount Visual.recoveredS1 → ⊥
+    cvReceiptDoesNotPromoteBiologicalMeaning :
+      Visual.IntrospectiveObservationBoundary.pixelTopologyDeterminesBiologicalMechanism
+        Visual.canonicalIntrospectiveObservationBoundary ≡ false
+
 open EmbodiedDecisionPhysiologyRegression public
 
 canonicalEmbodiedDecisionPhysiologyRegression : EmbodiedDecisionPhysiologyRegression
@@ -47,4 +57,10 @@ canonicalEmbodiedDecisionPhysiologyRegression = record
   ; safetyPriorCanReopenSameContractedInput = Body.safetyPriorContractedConeCanReopenWitness
   ; sameEvidenceThresholdPolicyChangesCommitment = Threshold.sameEvidenceDifferentThresholdChangesCommitment
   ; sameCommitmentDoesNotFixConfidence = Confidence.commitmentDoesNotDetermineConfidence
+  ; cvRecoveredFourSupervoxels = Visual.opencvRecoveredFourSupervoxels
+  ; cvRecoveredNineFibres = Visual.opencvRecoveredNineFibres
+  ; cvRecoveredBroadContractedAsymmetry = Visual.broadAndContractedOccupancyDiffer
+  ; cvReceiptDoesNotPromoteBiologicalMeaning =
+      Visual.IntrospectiveObservationBoundary.pixelTopologyDeterminesBiologicalMechanismIsFalse
+        Visual.canonicalIntrospectiveObservationBoundary
   }
