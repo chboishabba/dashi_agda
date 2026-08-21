@@ -15,6 +15,14 @@ module DASHI.Physics.YangMills.BalabanIntervalDeterminantAlgebra where
 --
 -- The source-specific shell identity and analytic estimates remain arguments;
 -- the cumulative equality and bound composition are proved here.
+--
+-- ROUND89 CORRECTION
+--
+-- The inverse-square small-coupling consumer needs an UPPER prefix budget,
+-- while asymptotic freedom / a positive running-coupling slope needs a LOWER
+-- cumulative estimate.  These are distinct ordered statements.  This module
+-- therefore proves both transports from the same exact interval identity.
+-- A future A-row closure must not infer the lower slope from the upper budget.
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Nat.Base using (ℕ; zero; suc; _+_)
@@ -185,6 +193,23 @@ combineIntervalUpperBounds endpointBound correctionBound interactionBound =
     (+-mono-≤ endpointBound correctionBound)
     interactionBound
 
+-- The same ordered-additive argument in the opposite orientation.  Keeping it
+-- explicit prevents an upper prefix budget from being misread as a positive
+-- asymptotic-freedom slope.
+combineIntervalLowerBounds :
+  ∀ {endpointTerm correctionTerm interactionTerm
+      endpointLower correctionLower interactionLower} →
+  endpointLower ≤ℝ endpointTerm →
+  correctionLower ≤ℝ correctionTerm →
+  interactionLower ≤ℝ interactionTerm →
+  (endpointLower +ℝ correctionLower) +ℝ interactionLower
+    ≤ℝ
+  (endpointTerm +ℝ correctionTerm) +ℝ interactionTerm
+combineIntervalLowerBounds endpointBound correctionBound interactionBound =
+  +-mono-≤
+    (+-mono-≤ endpointBound correctionBound)
+    interactionBound
+
 -- The cumulative equality transports componentwise analytic bounds to the
 -- desired interval beta upper bound.
 betaIntervalUpperBound :
@@ -239,3 +264,58 @@ betaIntervalUpperBound
       b ≤ℝ c →
       a ≤ℝ c
     replaceLeft refl b≤c = b≤c
+
+-- Missing half of the physical A calculation: lower bounds on the exact same
+-- endpoint, correction, and interaction terms give a lower bound on the exact
+-- same beta interval.  No positivity is assumed by the algebra.
+betaIntervalLowerBound :
+  (beta gaussian correction interaction endpoint : ℕ → ℝ) →
+  (totalBeta :
+    ∀ j →
+    beta (suc j)
+      ≡ gaussian (suc j) +ℝ interaction (suc j)) →
+  (shellDecomposition :
+    ∀ j →
+    gaussian (suc j)
+      ≡ (endpoint (suc j) -ℝ endpoint j)
+          +ℝ correction (suc j)) →
+  (endpointLower correctionLower interactionLower : ℕ → ℕ → ℝ) →
+  (endpointBound :
+    ∀ k n →
+    endpointLower k n
+      ≤ℝ endpoint (n + k) -ℝ endpoint k) →
+  (correctionBound :
+    ∀ k n →
+    correctionLower k n
+      ≤ℝ intervalSum correction k n) →
+  (interactionBound :
+    ∀ k n →
+    interactionLower k n
+      ≤ℝ intervalSum interaction k n) →
+  ∀ k n →
+  (endpointLower k n +ℝ correctionLower k n)
+    +ℝ interactionLower k n
+    ≤ℝ intervalSum beta k n
+betaIntervalLowerBound
+  beta gaussian correction interaction endpoint
+  totalBeta shellDecomposition
+  endpointLower correctionLower interactionLower
+  endpointBound correctionBound interactionBound
+  k n =
+  let
+    equality = betaIntervalEquality
+      beta gaussian correction interaction endpoint
+      totalBeta shellDecomposition k n
+    bound = combineIntervalLowerBounds
+      (endpointBound k n)
+      (correctionBound k n)
+      (interactionBound k n)
+  in
+    replaceRight equality bound
+  where
+    replaceRight :
+      ∀ {a b c : ℝ} →
+      a ≡ b →
+      c ≤ℝ b →
+      c ≤ℝ a
+    replaceRight refl c≤b = c≤b
