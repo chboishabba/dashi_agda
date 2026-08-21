@@ -212,7 +212,7 @@ canonicalConsciousAccessNetworkRegression =
         Unconscious.canonicalBlockedRepresentationCausallyEffective
     ; transformedSymbolPreservesInvariant =
         Symbolic.canonicalTrueLatentHasTransformedInvariant
-    ; directAndTransformedCarriersDifferAtTrue =
+    ; directAndTransformedSymbolDiffer =
         Symbolic.directAndTransformedCarriersDifferAtTrue
     ; noClosedMacroDynamics =
         Deterministic.noClosedMacroDynamics
