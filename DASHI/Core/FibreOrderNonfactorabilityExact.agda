@@ -85,7 +85,7 @@ orderEndpointNonfactorability :
   Dynamics.SurfaceInvariant core first →
   Dynamics.SurfaceInvariant core second →
   (x : Fibre.Carrier core) →
-  first (second x) ≡ second (first x) → ⊥ →
+  (first (second x) ≡ second (first x) → ⊥) →
   NF.NonFactorabilityWitness
     (orderedSurface first second x)
     (orderedEndpoint first second x)
@@ -120,8 +120,8 @@ automorphismOrderNonfactorability :
   ∀ {core : Fibre.FibreRestrictionCore} →
   (first second : Dynamics.FibreAutomorphism core) →
   (x : Fibre.Carrier core) →
-  Dynamics.forward first (Dynamics.forward second x)
-    ≡ Dynamics.forward second (Dynamics.forward first x) → ⊥ →
+  (Dynamics.forward first (Dynamics.forward second x)
+    ≡ Dynamics.forward second (Dynamics.forward first x) → ⊥) →
   NF.NonFactorabilityWitness
     (orderedSurface (Dynamics.forward first) (Dynamics.forward second) x)
     (orderedEndpoint (Dynamics.forward first) (Dynamics.forward second) x)
