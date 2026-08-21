@@ -189,7 +189,7 @@ formalPolynomialDerivative :
   {A : MarxAlgebra} →
   Polynomial A → Polynomial A
 formalPolynomialDerivative {A} (constant c) = constant (zero A)
-formalPolynomialDerivative variable = constant (one _)
+formalPolynomialDerivative varTerm = constant (one _)
 formalPolynomialDerivative (p +P q) =
   formalPolynomialDerivative p +P formalPolynomialDerivative q
 formalPolynomialDerivative (p *P q) =
@@ -203,7 +203,7 @@ polynomialDerivativeInterpretationCommutes :
   polynomialDerivative p x
   ≡ interpret (formalPolynomialDerivative p) x
 polynomialDerivativeInterpretationCommutes (constant c) x = refl
-polynomialDerivativeInterpretationCommutes variable x = refl
+polynomialDerivativeInterpretationCommutes varTerm x = refl
 polynomialDerivativeInterpretationCommutes {A} (p +P q) x =
   trans
     (polynomialSumRule p q x)

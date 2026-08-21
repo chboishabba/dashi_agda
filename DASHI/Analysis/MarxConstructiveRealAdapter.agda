@@ -1,7 +1,6 @@
 module DASHI.Analysis.MarxConstructiveRealAdapter where
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Primitive using (Set₁)
 
 open import DASHI.Analysis.ConstructiveRealSpine
 open import DASHI.Analysis.MarxDifferentialCore
@@ -19,6 +18,7 @@ record ConstructiveRealMarxNormalisation
   (R : ConstructedOrderedCompleteReal)
   : Set₁ where
   field
+    _≢_ : Real R → Real R → Set
     mulZeroRight :
       ∀ x → _*_ R x (zero R) ≡ zero R
 
@@ -52,9 +52,11 @@ constructedRealToMarxAlgebra R N =
     ; _+_ = _+_ R
     ; _-_ = _-_ R
     ; _*_ = _*_ R
+    ; _≢_ = _≢_ N
     ; subSelf = subSelf R
     ; mulZeroRight = mulZeroRight N
     ; mulOneRight = mulOneRight R
+    ; mulCommutative = mulComm R
     ; mulAssoc = mulAssoc R
     ; addDifferenceFactor = addDifferenceFactor N
     ; productDifferenceFactor = productDifferenceFactor N

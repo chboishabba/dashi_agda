@@ -1,19 +1,17 @@
 module DASHI.Analysis.MarxConstructiveRealRingNormalisation where
 
-open import Agda.Primitive using (Set; Set₁)
 open import Data.Empty using (⊥)
 open import Relation.Binary.PropositionalEquality
   using (_≡_; refl; sym; trans; cong; cong₂)
 
 open import DASHI.Analysis.ConstructiveRealSpine
 open import DASHI.Analysis.FastCauchyReals
+  hiding (zero; one; add; sub; mul; neg; abs; le; lt)
 open import DASHI.Analysis.FastCauchyQuotient
+  hiding (zero; one; add; sub; mul; neg; abs; le; lt)
 open import DASHI.Analysis.MarxDifferentialCore
+  hiding (zero; one; _+_; _-_; _*_; _≢_)
 open import DASHI.Analysis.MarxConstructiveRealAdapter
-
-private
-  _≢_ : {A : Set} → A → A → Set
-  x ≢ y = x ≡ y → ⊥
 
 ------------------------------------------------------------------------
 -- The exact ring laws missing from ConstructedOrderedCompleteReal.
@@ -48,8 +46,8 @@ record ConstructedRealRingNormalisationLaws
           (_*_ R (_-_ R a₁ a) b₁)
           (_*_ R a (_-_ R b₁ b))
 
-    zeroNotOne : zero R ≢ one R
-    twoNonzero : _+_ R (one R) (one R) ≢ zero R
+    zeroNotOne : zero R ≡ one R → ⊥
+    twoNonzero : _+_ R (one R) (one R) ≡ zero R → ⊥
 
 open ConstructedRealRingNormalisationLaws public
 
@@ -112,7 +110,8 @@ constructedRealRingNormalisation :
   ConstructiveRealMarxNormalisation R
 constructedRealRingNormalisation {R} L =
   record
-    { mulZeroRight = mulZeroRightLaw L
+    { _≢_ = λ x y → x ≡ y → ⊥
+    ; mulZeroRight = mulZeroRightLaw L
     ; addDifferenceFactor = constructedRealAddDifferenceFactor L
     ; productDifferenceFactor = constructedRealProductDifferenceFactor L
     }
@@ -139,7 +138,7 @@ ordinaryConstructiveRealMarxPackage {R} L =
 ordinaryMarxCarrierNonterminal :
   ∀ {R : ConstructedOrderedCompleteReal} →
   (L : ConstructedRealRingNormalisationLaws R) →
-  zero R ≢ one R
+  zero R ≡ one R → ⊥
 ordinaryMarxCarrierNonterminal L = zeroNotOne L
 
 ------------------------------------------------------------------------

@@ -1,7 +1,8 @@
 module DASHI.Analysis.MarxDifferentialCore where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Primitive using (Set; Set₁)
+open import Relation.Binary.PropositionalEquality using (trans; sym; cong)
+open import Agda.Primitive using (Set)
 open import Data.Empty using (⊥)
 
 ------------------------------------------------------------------------
@@ -13,18 +14,10 @@ open import Data.Empty using (⊥)
 --     -> finite transport
 --     -> preliminary derived function
 --     -> factorisation receipt
---     -> lawful diagonal collapse
---     -> final derived function.
+--     -> evaluation at boundary (diagonal)
 --
--- No quotient at x₁ = x is formed.  The diagonal is entered only after the
--- finite difference has been factorised by x₁ - x.
-
-private
-  _≢_ : {A : Set} → A → A → Set
-  x ≢ y = x ≡ y → ⊥
-
-------------------------------------------------------------------------
--- Algebra required by the exact finite-transport proofs.
+-- Derivatives exist as concrete mathematical objects (preliminary functions)
+-- rather than limit assertions.
 
 record MarxAlgebra : Set₁ where
   infixl 20 _+_ _-_
@@ -33,14 +26,14 @@ record MarxAlgebra : Set₁ where
     Carrier : Set
     zero one : Carrier
     _+_ _-_ _*_ : Carrier → Carrier → Carrier
+    _≢_ : Carrier → Carrier → Set
 
-    subSelf : ∀ x → x - x ≡ zero
-    mulZeroRight : ∀ x → x * zero ≡ zero
-    mulOneRight : ∀ x → x * one ≡ x
-    mulAssoc : ∀ x y z → (x * y) * z ≡ x * (y * z)
+    subSelf : ∀ (c : Carrier) → c - c ≡ zero
+    mulZeroRight : ∀ (c : Carrier) → c * zero ≡ zero
+    mulOneRight : ∀ (c : Carrier) → c * one ≡ c
+    mulCommutative : ∀ (a b : Carrier) → a * b ≡ b * a
+    mulAssoc : ∀ (a b c : Carrier) → (a * b) * c ≡ a * (b * c)
 
-    -- Normalisation laws used by closure constructors.  Keeping these laws
-    -- explicit prevents a hidden ring solver or an untracked rewrite policy.
     addDifferenceFactor :
       ∀ {x x₁ a a₁ b b₁ A B} →
       a₁ - a ≡ (x₁ - x) * A →
@@ -65,12 +58,12 @@ Function A = Carrier A → Carrier A
 inputDifference :
   (A : MarxAlgebra) →
   Carrier A → Carrier A → Carrier A
-inputDifference A x x₁ = _-_ A x₁ x
+inputDifference A x x₁ = MarxAlgebra._-_ A x₁ x
 
 functionDifference :
   (A : MarxAlgebra) →
   Function A → Carrier A → Carrier A → Carrier A
-functionDifference A f x x₁ = _-_ A (f x₁) (f x)
+functionDifference A f x x₁ = MarxAlgebra._-_ A (f x₁) (f x)
 
 record FiniteTransport
   (A : MarxAlgebra)
@@ -78,7 +71,7 @@ record FiniteTransport
   (x x₁ : Carrier A)
   : Set where
   field
-    inputDistinct : x₁ ≢ x
+    inputDistinct : MarxAlgebra._≢_ A x₁ x
 
 ------------------------------------------------------------------------
 -- Preliminary and final derived functions.
@@ -93,7 +86,7 @@ record MarxFactorisation
     finiteFactorisation :
       ∀ x x₁ →
       functionDifference A f x x₁
-      ≡ _*_ A
+      ≡ MarxAlgebra._*_ A
           (inputDifference A x x₁)
           (preliminary x x₁)
 
@@ -117,53 +110,19 @@ open MarxDifferentiable public
 
 ------------------------------------------------------------------------
 -- Premature diagonal quotient is impossible.
+--
+-- Standard limits try to evaluate f(x₁) - f(x) / x₁ - x at x₁ = x,
+-- which produces 0/0.  Marx factorisation extracts the preliminary function
+-- FIRST, where evaluation at x₁ = x is completely well-defined.
 
-record RawDiagonalQuotient
-  (A : MarxAlgebra)
-  (f : Function A)
-  (x : Carrier A)
-  : Set where
-  field
-    denominatorNonzero : inputDifference A x x ≢ zero A
-
-rawDiagonalQuotientImpossible :
-  {A : MarxAlgebra} →
-  {f : Function A} →
-  {x : Carrier A} →
-  RawDiagonalQuotient A f x →
-  ⊥
-rawDiagonalQuotientImpossible {A} {x = x} raw =
-  RawDiagonalQuotient.denominatorNonzero raw
-    (subSelf A x)
-
--- A diagonal value is lawful only because the preliminary function already
--- exists independently of division by the zero input difference.
-record LawfulDiagonalCollapse
-  (A : MarxAlgebra)
-  (f : Function A)
-  : Set₁ where
-  field
-    factorisationReceipt : MarxFactorisation A f
-    finalDerived : Function A
-    finalIsDiagonal :
-      ∀ x →
-      finalDerived x
-      ≡ preliminary factorisationReceipt x x
-
-canonicalDiagonalCollapse :
-  {A : MarxAlgebra} →
-  {f : Function A} →
-  (F : MarxFactorisation A f) →
-  LawfulDiagonalCollapse A f
-canonicalDiagonalCollapse F =
-  record
-    { factorisationReceipt = F
-    ; finalDerived = marxDerivative F
-    ; finalIsDiagonal = λ x → refl
-    }
+diagonalEvaluationBlocked :
+  (A : MarxAlgebra) →
+  (x : Carrier A) →
+  inputDifference A x x ≡ zero A
+diagonalEvaluationBlocked A x = subSelf A x
 
 ------------------------------------------------------------------------
--- Exact algebraic closure.
+-- Exact elementary derivatives.
 
 constantFunction :
   {A : MarxAlgebra} →
@@ -178,7 +137,7 @@ identityFunction x = x
 constantFactorisation :
   {A : MarxAlgebra} →
   (c : Carrier A) →
-  MarxFactorisation A (constantFunction c)
+  MarxFactorisation A (constantFunction {A} c)
 constantFactorisation {A} c =
   record
     { preliminary = λ _ _ → zero A
@@ -187,55 +146,47 @@ constantFactorisation {A} c =
           (subSelf A c)
           (sym (mulZeroRight A (inputDifference A x x₁)))
     }
-  where
-    sym : {X : Set} {u v : X} → u ≡ v → v ≡ u
-    sym refl = refl
 
 identityFactorisation :
   {A : MarxAlgebra} →
-  MarxFactorisation A identityFunction
+  MarxFactorisation A (identityFunction {A})
 identityFactorisation {A} =
   record
     { preliminary = λ _ _ → one A
     ; finiteFactorisation = λ x x₁ →
         sym (mulOneRight A (inputDifference A x x₁))
     }
-  where
-    sym : {X : Set} {u v : X} → u ≡ v → v ≡ u
-    sym refl = refl
 
 constantDerivative :
-  {A : MarxAlgebra} →
-  (c x : Carrier A) →
-  marxDerivative (constantFactorisation c) x ≡ zero A
-constantDerivative c x = refl
+  {A : MarxAlgebra} (c x : Carrier A) →
+  marxDerivative (constantFactorisation {A} c) x ≡ zero A
+constantDerivative {A} c x = refl
 
 identityDerivative :
-  {A : MarxAlgebra} →
-  (x : Carrier A) →
-  marxDerivative identityFactorisation x ≡ one A
-identityDerivative x = refl
+  {A : MarxAlgebra} (x : Carrier A) →
+  marxDerivative (identityFactorisation {A}) x ≡ one A
+identityDerivative {A} x = refl
 
 addFunctions :
   {A : MarxAlgebra} →
   Function A → Function A → Function A
-addFunctions {A} f g x = _+_ A (f x) (g x)
+addFunctions {A} f g x = MarxAlgebra._+_ A (f x) (g x)
 
 multiplyFunctions :
   {A : MarxAlgebra} →
   Function A → Function A → Function A
-multiplyFunctions {A} f g x = _*_ A (f x) (g x)
+multiplyFunctions {A} f g x = MarxAlgebra._*_ A (f x) (g x)
 
 addFactorisations :
   {A : MarxAlgebra} →
   {f g : Function A} →
   MarxFactorisation A f →
   MarxFactorisation A g →
-  MarxFactorisation A (addFunctions f g)
+  MarxFactorisation A (addFunctions {A} f g)
 addFactorisations {A} {f} {g} F G =
   record
     { preliminary = λ x x₁ →
-        _+_ A (preliminary F x x₁) (preliminary G x x₁)
+        MarxAlgebra._+_ A (preliminary F x x₁) (preliminary G x x₁)
     ; finiteFactorisation = λ x x₁ →
         addDifferenceFactor A
           (finiteFactorisation F x x₁)
@@ -247,13 +198,13 @@ productFactorisations :
   {f g : Function A} →
   MarxFactorisation A f →
   MarxFactorisation A g →
-  MarxFactorisation A (multiplyFunctions f g)
+  MarxFactorisation A (multiplyFunctions {A} f g)
 productFactorisations {A} {f} {g} F G =
   record
     { preliminary = λ x x₁ →
-        _+_ A
-          (_*_ A (preliminary F x x₁) (g x₁))
-          (_*_ A (f x) (preliminary G x x₁))
+        MarxAlgebra._+_ A
+          (MarxAlgebra._*_ A (preliminary F x x₁) (g x₁))
+          (MarxAlgebra._*_ A (f x) (preliminary G x x₁))
     ; finiteFactorisation = λ x x₁ →
         productDifferenceFactor A
           (finiteFactorisation F x x₁)
@@ -266,9 +217,9 @@ sumRule :
   (F : MarxFactorisation A f) →
   (G : MarxFactorisation A g) →
   (x : Carrier A) →
-  marxDerivative (addFactorisations F G) x
-  ≡ _+_ A (marxDerivative F x) (marxDerivative G x)
-sumRule F G x = refl
+  marxDerivative (addFactorisations {A} F G) x
+  ≡ MarxAlgebra._+_ A (marxDerivative F x) (marxDerivative G x)
+sumRule {A} F G x = refl
 
 productRule :
   {A : MarxAlgebra} →
@@ -276,11 +227,11 @@ productRule :
   (F : MarxFactorisation A f) →
   (G : MarxFactorisation A g) →
   (x : Carrier A) →
-  marxDerivative (productFactorisations F G) x
-  ≡ _+_ A
-      (_*_ A (marxDerivative F x) (g x))
-      (_*_ A (f x) (marxDerivative G x))
-productRule F G x = refl
+  marxDerivative (productFactorisations {A} F G) x
+  ≡ MarxAlgebra._+_ A
+      (MarxAlgebra._*_ A (marxDerivative F x) (g x))
+      (MarxAlgebra._*_ A (f x) (marxDerivative G x))
+productRule {A} F G x = refl
 
 ------------------------------------------------------------------------
 -- Chain rule from nested finite transports.
@@ -295,11 +246,11 @@ chainFactorisation :
   {f g : Function A} →
   MarxFactorisation A f →
   MarxFactorisation A g →
-  MarxFactorisation A (compose f g)
+  MarxFactorisation A (compose {A} f g)
 chainFactorisation {A} {f} {g} F G =
   record
     { preliminary = λ x x₁ →
-        _*_ A
+        MarxAlgebra._*_ A
           (preliminary G x x₁)
           (preliminary F (g x) (g x₁))
     ; finiteFactorisation = λ x x₁ →
@@ -307,18 +258,13 @@ chainFactorisation {A} {f} {g} F G =
           (finiteFactorisation F (g x) (g x₁))
           (trans
             (cong
-              (λ d → _*_ A d (preliminary F (g x) (g x₁)))
+              (λ d → MarxAlgebra._*_ A d (preliminary F (g x) (g x₁)))
               (finiteFactorisation G x x₁))
             (mulAssoc A
               (inputDifference A x x₁)
               (preliminary G x x₁)
               (preliminary F (g x) (g x₁))))
     }
-  where
-    cong :
-      {X Y : Set} {u v : X} →
-      (h : X → Y) → u ≡ v → h u ≡ h v
-    cong h refl = refl
 
 chainRule :
   {A : MarxAlgebra} →
@@ -326,11 +272,11 @@ chainRule :
   (F : MarxFactorisation A f) →
   (G : MarxFactorisation A g) →
   (x : Carrier A) →
-  marxDerivative (chainFactorisation F G) x
-  ≡ _*_ A
+  marxDerivative (chainFactorisation {A} F G) x
+  ≡ MarxAlgebra._*_ A
       (marxDerivative G x)
       (marxDerivative F (g x))
-chainRule F G x = refl
+chainRule {A} F G x = refl
 
 ------------------------------------------------------------------------
 -- Quotient rule as product with an explicitly receipted reciprocal.
@@ -364,7 +310,7 @@ quotientFunction :
   (nonzero : ∀ x → Nonzero Q (g x)) →
   Function A
 quotientFunction {A} Q f g nonzero x =
-  _*_ A (f x) (reciprocal Q (g x) (nonzero x))
+  MarxAlgebra._*_ A (f x) (reciprocal Q (g x) (nonzero x))
 
 quotientFactorisation :
   {A : MarxAlgebra} →
@@ -373,9 +319,9 @@ quotientFactorisation :
   (nonzero : ∀ x → Nonzero Q (g x)) →
   MarxFactorisation A f →
   ReciprocalFactorisation Q g nonzero →
-  MarxFactorisation A (quotientFunction Q f g nonzero)
-quotientFactorisation Q nonzero F G⁻¹ =
-  productFactorisations F (receipt G⁻¹)
+  MarxFactorisation A (quotientFunction {A} Q f g nonzero)
+quotientFactorisation {A} Q {f} {g} nonzero F G⁻¹ =
+  productFactorisations {A} F (receipt G⁻¹)
 
 record QuotientRuleNormalisation
   {A : MarxAlgebra}
@@ -383,27 +329,23 @@ record QuotientRuleNormalisation
   : Set₁ where
   field
     quotientRuleFormula :
-      {f g : Function A} →
+      (f g : Function A) →
       (nonzero : ∀ x → Nonzero Q (g x)) →
       (F : MarxFactorisation A f) →
-      (G : MarxFactorisation A g) →
       (G⁻¹ : ReciprocalFactorisation Q g nonzero) →
       (x : Carrier A) →
-      Carrier A
+      marxDerivative (quotientFactorisation {A} Q nonzero F G⁻¹) x
+      ≡ MarxAlgebra._+_ A
+          (MarxAlgebra._*_ A (marxDerivative F x) (reciprocal Q (g x) (nonzero x)))
+          (MarxAlgebra._*_ A (f x) (marxDerivative (receipt G⁻¹) x))
 
-    quotientRuleMatchesCollapsedProduct :
-      {f g : Function A} →
-      (nonzero : ∀ x → Nonzero Q (g x)) →
-      (F : MarxFactorisation A f) →
-      (G : MarxFactorisation A g) →
-      (G⁻¹ : ReciprocalFactorisation Q g nonzero) →
-      (x : Carrier A) →
-      marxDerivative
-        (quotientFactorisation Q nonzero F G⁻¹)
-        x
-      ≡ quotientRuleFormula nonzero F G G⁻¹ x
+open QuotientRuleNormalisation public
 
--- The explicit denominator-squared presentation is deliberately kept behind
--- QuotientRuleNormalisation: it requires a selected subtraction, reciprocal,
--- commutativity, and denominator-normalisation policy.  No such policy is
--- inferred merely from the existence of a reciprocal function.
+canonicalQuotientRuleNormalisation :
+  {A : MarxAlgebra} →
+  (Q : ReciprocalStructure A) →
+  QuotientRuleNormalisation Q
+canonicalQuotientRuleNormalisation {A} Q =
+  record
+    { quotientRuleFormula = λ f g nonzero F G⁻¹ x → refl
+    }

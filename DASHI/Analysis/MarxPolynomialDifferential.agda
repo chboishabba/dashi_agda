@@ -1,8 +1,8 @@
 module DASHI.Analysis.MarxPolynomialDifferential where
 
-open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Agda.Primitive using (Set; Set₁)
+open import Relation.Binary.PropositionalEquality using (_≡_; refl; cong)
+open import Agda.Builtin.Nat using (Nat; suc) renaming (zero to zeroN)
+open import Agda.Primitive using (Set)
 
 open import DASHI.Analysis.MarxDifferentialCore public
 
@@ -12,7 +12,7 @@ open import DASHI.Analysis.MarxDifferentialCore public
 powerFunction :
   {A : MarxAlgebra} →
   Nat → Function A
-powerFunction {A} zero x = one A
+powerFunction {A} zeroN x = one A
 powerFunction {A} (suc n) x =
   _*_ A (powerFunction n x) x
 
@@ -20,7 +20,7 @@ powerFactorisation :
   {A : MarxAlgebra} →
   (n : Nat) →
   MarxFactorisation A (powerFunction n)
-powerFactorisation {A} zero = constantFactorisation (one A)
+powerFactorisation {A} zeroN = constantFactorisation (one A)
 powerFactorisation {A} (suc n) =
   productFactorisations
     (powerFactorisation n)
@@ -29,7 +29,7 @@ powerFactorisation {A} (suc n) =
 powerDerivativeZero :
   {A : MarxAlgebra} →
   (x : Carrier A) →
-  marxDerivative (powerFactorisation zero) x ≡ zero A
+  marxDerivative (powerFactorisation zeroN) x ≡ zero A
 powerDerivativeZero x = refl
 
 powerDerivativeSuccessor :
@@ -57,7 +57,7 @@ record PowerRuleNormalisation
     natScale : Nat → Carrier A → Carrier A
 
     zeroScale :
-      ∀ x → natScale zero x ≡ zero A
+      ∀ x → natScale zeroN x ≡ zero A
 
     successorScale :
       ∀ n x →
@@ -84,22 +84,24 @@ powerRule N n x = normalisePowerDerivative N n x
 -- A polynomial syntax whose differentiation receipts are constructed by
 -- structural recursion rather than asserted after evaluation.
 
+infixl 20 _+P_
+infixl 30 _*P_
+
 data Polynomial
   (A : MarxAlgebra)
   : Set where
   constant : Carrier A → Polynomial A
-  variable : Polynomial A
+  varTerm : Polynomial A
   _+P_ : Polynomial A → Polynomial A → Polynomial A
   _*P_ : Polynomial A → Polynomial A → Polynomial A
 
-infixl 20 _+P_
-infixl 30 _*P_
+open Polynomial public
 
 interpret :
   {A : MarxAlgebra} →
   Polynomial A → Function A
 interpret (constant c) = constantFunction c
-interpret variable = identityFunction
+interpret varTerm = identityFunction
 interpret (p +P q) = addFunctions (interpret p) (interpret q)
 interpret (p *P q) = multiplyFunctions (interpret p) (interpret q)
 
@@ -108,7 +110,7 @@ polynomialFactorisation :
   (p : Polynomial A) →
   MarxFactorisation A (interpret p)
 polynomialFactorisation (constant c) = constantFactorisation c
-polynomialFactorisation variable = identityFactorisation
+polynomialFactorisation varTerm = identityFactorisation
 polynomialFactorisation (p +P q) =
   addFactorisations
     (polynomialFactorisation p)
@@ -133,7 +135,7 @@ polynomialConstantRule c x = refl
 polynomialVariableRule :
   {A : MarxAlgebra} →
   (x : Carrier A) →
-  polynomialDerivative variable x ≡ one A
+  polynomialDerivative varTerm x ≡ one A
 polynomialVariableRule x = refl
 
 polynomialSumRule :
@@ -159,20 +161,15 @@ polynomialProductRule p q x = refl
 powerPolynomial :
   {A : MarxAlgebra} →
   Nat → Polynomial A
-powerPolynomial {A} zero = constant (one A)
-powerPolynomial {A} (suc n) = powerPolynomial {A} n *P variable
+powerPolynomial {A} zeroN = constant (one A)
+powerPolynomial {A} (suc n) = powerPolynomial {A} n *P varTerm
 
 powerPolynomialInterpretsAsPower :
   {A : MarxAlgebra} →
   (n : Nat) →
   (x : Carrier A) →
   interpret (powerPolynomial n) x ≡ powerFunction n x
-powerPolynomialInterpretsAsPower zero x = refl
+powerPolynomialInterpretsAsPower zeroN x = refl
 powerPolynomialInterpretsAsPower {A} (suc n) x =
   cong (λ y → _*_ A y x)
     (powerPolynomialInterpretsAsPower n x)
-  where
-    cong :
-      {X Y : Set} {u v : X} →
-      (h : X → Y) → u ≡ v → h u ≡ h v
-    cong h refl = refl
