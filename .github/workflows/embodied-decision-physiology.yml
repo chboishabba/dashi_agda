@@ -6,12 +6,15 @@ on:
     paths:
       - 'DASHI/Biology/EmbodiedInteroceptionSourceRegistry.agda'
       - 'DASHI/Biology/EmbodiedOptionConeInteroceptionExact.agda'
+      - 'DASHI/Biology/IntrospectiveEmbodiedHyperformalismObservationExact.agda'
       - 'DASHI/Biology/EmbodiedDecisionPhysiologyRegression.agda'
       - 'DASHI/Cognition/PNF/NeuromodulatedCommitmentThresholdExact.agda'
       - 'DASHI/Cognition/PNF/DecisionConfidenceNoncollapseExact.agda'
       - 'DASHI/Cognition/PNF/NoncommutativeDecisionUpdateQQExact.agda'
       - 'DASHI/Cognition/PNF/DecisionPotentialSourceRegistry.agda'
       - 'DASHI/Governance/OptionConeCoercionExact.agda'
+      - 'artifacts/introspective-embodied-hyperfabric-opencv-v1.json'
+      - 'scripts/introspective_embodied_hyperfabric.py'
       - '.github/workflows/embodied-decision-physiology.yml'
   workflow_dispatch:
 
