@@ -22,6 +22,8 @@ on:
       - 'DASHI/Analysis/RiemannArithmeticUnitarityRigidityBoundary.agda'
       - 'DASHI/Analysis/RiemannHermitianEndgameTrichotomyExact.agda'
       - 'DASHI/Analysis/RiemannHermitianDreamRouteExact.agda'
+      - 'DASHI/Analysis/RiemannHermitianTopDownAssemblyExact.agda'
+      - 'DASHI/Analysis/RiemannHermitianSourceGapMapExact.agda'
       - 'DASHI/Analysis/RiemannReflectionC3OrbitShapeBridgeExact.agda'
       - 'DASHI/Analysis/RiemannReflectionOrbitDefectRegression.agda'
       - 'DASHI/Analysis/ZetaTheoremSurface.agda'
