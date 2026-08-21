@@ -19,8 +19,11 @@ open import DASHI.Analysis.WeilTestSpace public
 -- exact finite/discrete orbit algebra and residual diagnostics.  The
 -- hyperbolic module records the source-native off-line pair signature used by
 -- Alpöge--Furman's inertia argument and proves that this bare signature cannot
--- determine transverse squared defect.  None reconstructs the analytic Weil
--- Hermitian compression by itself.
+-- determine transverse squared defect.  The complex-Poisson pair-energy module
+-- then closes the exact local Frobenius algebra for the first source-facing
+-- displacement-sensitive candidate: complex continuation of the Gabor/Poisson
+-- norm identity.  The analytic continuation and finite-grid/global transfer
+-- remain explicit authority boundaries.
 open import DASHI.Analysis.RiemannReflectionOrbitDefectExact public
 open import DASHI.Analysis.RiemannReflectionPairBlockExact public
 open import DASHI.Analysis.RiemannWeilOffLineHyperbolicBlockExact public
@@ -41,6 +44,33 @@ open import DASHI.Analysis.RiemannWeilOffLineHyperbolicBlockExact public
     ; DistanceSensitiveOffLineAdapter
     ; WeilOffLineHyperbolicBoundary
     ; weilOffLineHyperbolicBoundary
+    )
+open import DASHI.Analysis.RiemannComplexPoissonPairEnergyExact public
+  using
+    ( PairEnergyLedger
+    ; multiplicityPredecessor
+    ; baselineSquareSum
+    ; imaginaryChannelEnergy
+    ; realChannelEnergy
+    ; fullGridHermitianEnergy
+    ; criticalHermitianBaseline
+    ; pairBlockFrobeniusSquared
+    ; criticalBlockFrobeniusSquared
+    ; pairBlockFrobeniusExcess
+    ; fullGridEnergyDecomposition
+    ; pairBlockFrobeniusDecomposition
+    ; criticalPairHasZeroFrobeniusExcess
+    ; criticalPairRecoversBaselineFrobenius
+    ; nearPairEnergy
+    ; farPairEnergy
+    ; nearPairFrobeniusIsTwenty
+    ; farPairFrobeniusIsHundred
+    ; nearPairExcessIsSixteen
+    ; farPairExcessIsNinetySix
+    ; ComplexPoissonCoercivityAdapter
+    ; FiniteCompressionTransferAdapter
+    ; ComplexPoissonPairEnergyBoundary
+    ; complexPoissonPairEnergyBoundary
     )
 import DASHI.Analysis.RiemannReflectionC3OrbitShapeBridgeExact
 
