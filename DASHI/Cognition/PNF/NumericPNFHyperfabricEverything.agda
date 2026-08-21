@@ -66,6 +66,8 @@ import DASHI.Cognition.PNF.FreshReplayAuthorityAdmissionExact
 import DASHI.Cognition.PNF.FreshReplayAuthorityAdmissionRegression
 import DASHI.Cognition.PNF.StratifiedFibrewiseSupportLocalityExact
 import DASHI.Cognition.PNF.StratifiedFibrewiseSupportLocalityRegression
+import DASHI.Cognition.PNF.SetwiseGroupedFibreProjectionExact
+import DASHI.Cognition.PNF.SetwiseGroupedFibreProjectionRegression
 import DASHI.Cognition.PNF.ConsumerRestrictionAggregationIntertwinerExact
 import DASHI.Cognition.PNF.ConsumerRestrictionAggregationIntertwinerRegression
 import DASHI.Cognition.PNF.TypedEventuallyConsistentFibreSystemExact
