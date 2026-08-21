@@ -3,6 +3,7 @@ module DASHI.Reasoning.AccessBiasFallacySeparationExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
+open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 import DASHI.Reasoning.FallacyObstructionCatalogue as Fallacy
 
@@ -34,10 +35,7 @@ sameBiasCanFeedDifferentFallacies :
   decode confirmationAccessBias ≡ Fallacy.semanticEquivocation →
   ⊥
 sameBiasCanFeedDifferentFallacies decode first second =
-  missingSupportNotEquivocation
-    (trans (sym first) second)
-  where
-    open import Relation.Binary.PropositionalEquality using (sym; trans)
+  missingSupportNotEquivocation (trans (sym first) second)
 
 ------------------------------------------------------------------------
 -- Same fallacy, different candidate-access causes: no fallacy-only decoder can
@@ -50,10 +48,7 @@ sameFallacyCanHaveDifferentAccessCauses :
   decode Fallacy.missingPremiseSupport ≡ familiarityAccessBias →
   ⊥
 sameFallacyCanHaveDifferentAccessCauses decode first second =
-  threatNotFamiliarity
-    (trans (sym first) second)
-  where
-    open import Relation.Binary.PropositionalEquality using (sym; trans)
+  threatNotFamiliarity (trans (sym first) second)
 
 record CandidateGenerationBias : Set where
   constructor candidateGenerationBias
