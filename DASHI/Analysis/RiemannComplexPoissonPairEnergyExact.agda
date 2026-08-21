@@ -154,7 +154,14 @@ criticalPairRecoversBaselineFrobenius :
   pairBlockFrobeniusSquared (pairEnergyLedger m c zero)
     ≡ criticalBlockFrobeniusSquared (pairEnergyLedger m c zero)
 criticalPairRecoversBaselineFrobenius m c =
-  pairBlockFrobeniusDecomposition (pairEnergyLedger m c zero)
+  solve 2
+    (λ m c →
+      con 4 :* (m :+ con 1) :* (m :+ con 1) :*
+        (((c :+ con 0) :* (c :+ con 0)) :+ (con 0 :* con 0))
+      :=
+      con 4 :* (m :+ con 1) :* (m :+ con 1) :* (c :* c))
+    refl
+    m c
 
 nearPairEnergy : PairEnergyLedger
 nearPairEnergy = pairEnergyLedger 0 1 1
