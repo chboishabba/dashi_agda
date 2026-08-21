@@ -28,14 +28,25 @@ module DASHI.Analysis.RiemannHermitianDefectAssemblyExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
-open import Data.Nat.Solver using (module +-*-Solver)
-open +-*-Solver using (solve; _:+_; _:*_; con; _:=_)
 
 sym : {A : Set} {x y : A} → x ≡ y → y ≡ x
 sym refl = refl
 
 trans : {A : Set} {x y z : A} → x ≡ y → y ≡ z → x ≡ z
 trans refl yz = yz
+
+congSuc : {x y : Nat} → x ≡ y → suc x ≡ suc y
+congSuc refl = refl
+
+congTail : {a b : Nat} → a ≡ b → (c : Nat) → a + c ≡ b + c
+congTail refl c = refl
+
+congHead : (a : Nat) → {b c : Nat} → b ≡ c → a + b ≡ a + c
+congHead a refl = refl
+
++-assoc : (a b c : Nat) → (a + b) + c ≡ a + (b + c)
++-assoc zero b c = refl
++-assoc (suc a) b c = congSuc (+-assoc a b c)
 
 ------------------------------------------------------------------------
 -- Elementary zero lemmas.
@@ -82,28 +93,18 @@ finiteRetentionDominationIdentity :
   (weightedTransverseDefect r + coercivitySlack r) + retentionMargin r
     ≡ twoTimes (finiteCompressionExcess r)
 finiteRetentionDominationIdentity r =
-  let w = weightedTransverseDefect r
-      c = coercivitySlack r
-      f = finiteCompressionExcess r
-      t = tailLoss r
-      m = retentionMargin r
-  in
-  step w c f t m
-    (fullGridCoercivity r)
-    (finiteTailDecomposition r)
-    (tailDominatedByFinite r)
-  where
-  step :
-    (w c f t m : Nat) →
-    w + c ≡ fullGridExcess r →
-    fullGridExcess r ≡ f + t →
-    t + m ≡ f →
-    (w + c) + m ≡ f + f
-  step w c f t m refl refl refl =
-    solve 3
-      (λ f t m → (f :+ t) :+ m := f :+ f)
-      refl
-      f t m
+  trans
+    (congTail (fullGridCoercivity r) (retentionMargin r))
+    (trans
+      (congTail (finiteTailDecomposition r) (retentionMargin r))
+      (trans
+        (+-assoc
+          (finiteCompressionExcess r)
+          (tailLoss r)
+          (retentionMargin r))
+        (congHead
+          (finiteCompressionExcess r)
+          (tailDominatedByFinite r))))
 
 finiteZeroForcesTailZero :
   (r : FiniteHermitianRetention) →
