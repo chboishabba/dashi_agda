@@ -120,6 +120,7 @@ fullGridEnergyDecomposition (pairEnergyLedger m c b) =
   solve 2
     (λ c b → (c :+ b) :+ b := c :+ (con 2 :* b))
     refl
+    c b
 
 pairBlockFrobeniusDecomposition :
   (q : PairEnergyLedger) →
@@ -135,6 +136,7 @@ pairBlockFrobeniusDecomposition (pairEnergyLedger m c b) =
       :+
       (con 8 :* (m :+ con 1) :* (m :+ con 1) :* b :* (c :+ b)))
     refl
+    m c b
 
 criticalPairHasZeroFrobeniusExcess :
   (m c : Nat) →
@@ -177,16 +179,6 @@ nearPairExcessIsSixteen = refl
 farPairExcessIsNinetySix :
   pairBlockFrobeniusExcess farPairEnergy ≡ 96
 farPairExcessIsNinetySix = refl
-
-------------------------------------------------------------------------
--- Holomorphic-vs-Hermitian no-factor theorem.
---
--- `baselineSquareSum` models the complex-square/holomorphic diagonal quantity
--- fixed by the equal-argument Poisson identity.  `fullGridHermitianEnergy`
--- models the absolute-square quantity that sees transverse displacement.
--- The near/far examples have the same baseline but different Hermitian energy,
--- so no function of the baseline alone can reconstruct the latter.
-------------------------------------------------------------------------
 
 nearFarHolomorphicBaselinesCollide :
   baselineSquareSum nearPairEnergy ≡ baselineSquareSum farPairEnergy
