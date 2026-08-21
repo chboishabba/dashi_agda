@@ -94,11 +94,10 @@ regressionFlatCannotRetainBothRequiredRelationalAxes :
 regressionFlatCannotRetainBothRequiredRelationalAxes =
   Verification.flatCannotRetainBothRequiredRelationalAxes
 
-regressionSamePositiveEvidenceCanRemainOutOfScope :
-  Levelled.ResolvedPositiveHere
-    DASHI.Governance.ArgumentLevelAuthorityRoutingExact.intakeCurrentAuthorityStalk → ⊥
-regressionSamePositiveEvidenceCanRemainOutOfScope =
-  LegalArgument.intakePositiveEvidenceStillNotLocallyResolved
+regressionLegalArgumentRequiredAxisBridge :
+  LegalArgument.LegalArgumentRequiredAxis369Boundary
+regressionLegalArgumentRequiredAxisBridge =
+  LegalArgument.canonicalLegalArgumentRequiredAxis369Boundary
 
 regressionFlatArgumentEvidenceCannotRecoverLevelAwareDecision :
   NF.FactorsThrough Levelled.flattenEvidence Levelled.fineDecision → ⊥
