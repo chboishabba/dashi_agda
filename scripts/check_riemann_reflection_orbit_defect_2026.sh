@@ -11,6 +11,7 @@ sources=(
   DASHI/Analysis/RiemannComplexPoissonPairEnergyExact.agda
   DASHI/Analysis/RiemannWeilPairKernelFrobeniusExact.agda
   DASHI/Analysis/RiemannHermitianDefectAssemblyExact.agda
+  DASHI/Analysis/RiemannHermitianDetectabilityGapExact.agda
   DASHI/Analysis/RiemannReflectionC3OrbitShapeBridgeExact.agda
   DASHI/Analysis/RiemannReflectionOrbitDefectRegression.agda
   DASHI/Analysis/ZetaTheoremSurface.agda
@@ -49,6 +50,7 @@ hyper=DASHI/Analysis/RiemannWeilOffLineHyperbolicBlockExact.agda
 energy=DASHI/Analysis/RiemannComplexPoissonPairEnergyExact.agda
 kernel=DASHI/Analysis/RiemannWeilPairKernelFrobeniusExact.agda
 assembly=DASHI/Analysis/RiemannHermitianDefectAssemblyExact.agda
+detect=DASHI/Analysis/RiemannHermitianDetectabilityGapExact.agda
 c3=DASHI/Analysis/RiemannReflectionC3OrbitShapeBridgeExact.agda
 regression=DASHI/Analysis/RiemannReflectionOrbitDefectRegression.agda
 surface=DASHI/Analysis/ZetaTheoremSurface.agda
@@ -74,12 +76,18 @@ require_pattern "$energy" 'ComplexPoissonCoercivityAdapter'
 require_pattern "$energy" 'FiniteCompressionTransferAdapter'
 require_pattern "$energy" 'HermitianArithmeticTransportAdapter'
 require_pattern "$kernel" 'holomorphicPlusHermitianSquaresExposePairCrossCore'
+require_pattern "$kernel" 'pairCrossCorePlusMixedEnergyIsAlignedEnergy'
+require_pattern "$kernel" 'holomorphicHermitianPlusTwiceMixedIsTwiceAligned'
 require_pattern "$kernel" 'diagonalKernelEnergyIdentity'
 require_pattern "$kernel" 'negativeInterferenceCoreIsMinusOne'
 require_pattern "$kernel" 'PairKernelInterferenceAdapter'
 require_pattern "$assembly" 'finiteRetentionDominationIdentity'
+require_pattern "$assembly" 'finiteZeroForcesTailZero'
 require_pattern "$assembly" 'zeroArithmeticBudgetForcesWeightedDefectZero'
 require_pattern "$assembly" 'pointwiseTransverseDefectVanishesFromZeroArithmeticBudget'
+require_pattern "$detect" 'detectableOffLinePairContradictsGlobalErrorBound'
+require_pattern "$detect" 'boundedByNonzeroErrorDoesNotForceVanishing'
+require_pattern "$detect" 'RHDetectabilityProducer'
 require_pattern "$c3" 'completePhaseOrbitCancels'
 require_pattern "$c3" 'c3OrbitRoleInversionInvariant'
 require_pattern "$c3" 'zetaSameRoleCanRetainDifferentDefects'
@@ -90,10 +98,12 @@ require_pattern "$regression" 'regressionNegativeInterference'
 require_pattern "$surface" 'RiemannComplexPoissonPairEnergyExact'
 require_pattern "$surface" 'RiemannWeilPairKernelFrobeniusExact'
 require_pattern "$aggregate" 'RiemannHermitianDefectAssemblyExact'
+require_pattern "$aggregate" 'RiemannHermitianDetectabilityGapExact'
 
 DASHI_NO_TMUX=1 scripts/run_agda29_parallel_check.sh \
   DASHI/Analysis/RiemannComplexPoissonPairEnergyExact.agda \
   DASHI/Analysis/RiemannWeilPairKernelFrobeniusExact.agda \
   DASHI/Analysis/RiemannHermitianDefectAssemblyExact.agda \
+  DASHI/Analysis/RiemannHermitianDetectabilityGapExact.agda \
   DASHI/Analysis/RiemannReflectionOrbitDefectRegression.agda \
   DASHI/EverythingRiemannReflectionOrbitDefect2026.agda
