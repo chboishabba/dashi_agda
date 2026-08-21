@@ -7,7 +7,7 @@ module DASHI.Analysis.RiemannHermitianDetectabilityGapExact where
 -- "More than two thirds of the zeta zeros are simple and on the critical line",
 -- arXiv:2608.13637 (2026), DOI: 10.48550/arXiv.2608.13637.
 --
--- Their prime-side Theorem [thm:traces] gives, in the notation of the paper,
+-- Their prime-side Theorem [thm:traces] gives
 --
 --   tr Gtilde^2
 --     = (T L / 2pi) (ell_1^2 + L^2/3) (1 + O(E_T)),
@@ -16,12 +16,9 @@ module DASHI.Analysis.RiemannHermitianDetectabilityGapExact where
 -- only force RH from this lane after subtracting/identifying the compatible
 -- main term and proving the surviving defect is detectable above the remaining
 -- arithmetic error floor.
---
--- This module closes that terminal logic exactly over Nat.  It also proves the
--- complementary obstruction: a nonzero global error allowance can contain a
--- nonzero defect, so `defect <= error` alone never implies defect = 0.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Data.Empty using (⊥)
@@ -32,10 +29,19 @@ sym refl = refl
 trans : {A : Set} {x y z : A} → x ≡ y → y ≡ z → x ≡ z
 trans refl yz = yz
 
-------------------------------------------------------------------------
--- Elementary impossibility: a natural number cannot equal itself plus a
--- strictly positive amount.
-------------------------------------------------------------------------
+congSuc : {x y : Nat} → x ≡ y → suc x ≡ suc y
+congSuc refl = refl
+
+congTail : {a b : Nat} → a ≡ b → (c : Nat) → a + c ≡ b + c
+congTail refl c = refl
+
+congTwoTails :
+  {a b : Nat} → a ≡ b → (c d : Nat) → (a + c) + d ≡ (b + c) + d
+congTwoTails refl c d = refl
+
++-assoc : (a b c : Nat) → (a + b) + c ≡ a + (b + c)
++-assoc zero b c = refl
++-assoc (suc a) b c = congSuc (+-assoc a b c)
 
 selfPlusPositiveImpossible :
   (n extra : Nat) → n + suc extra ≡ n → ⊥
@@ -45,18 +51,6 @@ selfPlusPositiveImpossible (suc n) extra eq =
   where
   dropSuc : {a b : Nat} → suc a ≡ suc b → a ≡ b
   dropSuc refl = refl
-
-------------------------------------------------------------------------
--- Source-calibrated excess/error ledger.
---
--- `aggregateDefect + errorSlack = errorBudget` is the subtraction-free form of
---
---   aggregateDefect <= errorBudget.
---
--- A hypothetical off-line pair contributes `singlePairDefect` inside the
--- aggregate.  RH-strength detection requires that this one-pair contribution
--- beat the entire permitted error floor by a strictly positive margin.
-------------------------------------------------------------------------
 
 record ExcessErrorLedger : Set where
   constructor excessErrorLedger
@@ -90,10 +84,6 @@ record DetectabilityGap
 
 open DetectabilityGap public
 
-------------------------------------------------------------------------
--- Exact contradiction theorem.
-------------------------------------------------------------------------
-
 detectableOffLinePairContradictsGlobalErrorBound :
   (ledger : ExcessErrorLedger) →
   (w : HypotheticalOffLineWitness ledger) →
@@ -105,60 +95,42 @@ detectableOffLinePairContradictsGlobalErrorBound ledger w gap =
     positiveRemainder
     cycle
   where
-  -- Combine
-  --   pair + other = aggregate,
-  --   aggregate + slack = error,
-  --   error + positiveGap = pair
-  -- into
-  --   error + (positiveGap + other + slack) = error.
+  E : Nat
+  E = errorBudget ledger
+
+  g : Nat
+  g = gapPredecessor gap
+
+  o : Nat
+  o = otherDefect w
+
+  s : Nat
+  s = errorSlack ledger
+
   positiveRemainder : Nat
-  positiveRemainder =
-    gapPredecessor gap + otherDefect w + errorSlack ledger
+  positiveRemainder = (g + o) + s
 
-  reassoc :
-    (a b c d : Nat) →
-    ((a + suc b) + c) + d ≡ a + suc (b + c + d)
-  reassoc zero b c d = refl
-  reassoc (suc a) b c d =
-    congSuc (reassoc a b c d)
-    where
-    congSuc : {x y : Nat} → x ≡ y → suc x ≡ suc y
-    congSuc refl = refl
-
-  cycle :
-    errorBudget ledger + suc positiveRemainder ≡ errorBudget ledger
-  cycle =
+  packed : ((E + suc g) + o) + s ≡ E + suc positiveRemainder
+  packed =
     trans
-      (sym (reassoc
-        (errorBudget ledger)
-        (gapPredecessor gap)
-        (otherDefect w)
-        (errorSlack ledger)))
+      (congTail (+-assoc E (suc g) o) s)
       (trans
-        (congRight
-          (pairBeatsError gap)
-          (otherDefect w)
-          (errorSlack ledger))
-        (trans
-          (congTail
-            (pairInsideAggregate w)
-            (errorSlack ledger))
-          (aggregateWithinError ledger)))
-    where
-    congRight :
-      {a b : Nat} → a ≡ b → (c d : Nat) → (a + c) + d ≡ (b + c) + d
-    congRight refl c d = refl
+        (+-assoc E (suc g + o) s)
+        refl)
 
-    congTail : {a b : Nat} → a ≡ b → (c : Nat) → a + c ≡ b + c
-    congTail refl c = refl
+  chain : ((E + suc g) + o) + s ≡ E
+  chain =
+    trans
+      (congTwoTails (pairBeatsError gap) o s)
+      (trans
+        (congTail (pairInsideAggregate w) s)
+        (aggregateWithinError ledger))
+
+  cycle : E + suc positiveRemainder ≡ E
+  cycle = trans (sym packed) chain
 
 ------------------------------------------------------------------------
 -- Error-floor obstruction.
---
--- A positive allowance can genuinely hide a positive defect.  This checksum
--- prevents any later assembly from promoting `aggregate <= error` to
--- `aggregate = 0` without an additional shrinking/localization/amplification
--- theorem.
 ------------------------------------------------------------------------
 
 nonzeroDefectHiddenByPositiveError : ExcessErrorLedger
@@ -181,16 +153,6 @@ boundedByNonzeroErrorDoesNotForceVanishing eq = oneIsNotZero eq
 
 ------------------------------------------------------------------------
 -- Frontier socket.
---
--- To upgrade the current second-moment lane from an aggregate transverse bound
--- to RH, one must construct detectability.  Plausible mechanisms are:
---
---   * ordinate localization: shrink the spectral window around one orbit;
---   * higher Schatten/Frobenius moments: amplify H/C > 1 multiplicatively;
---   * a stronger arithmetic identity that lowers the excess error floor.
---
--- This record names those producer outputs without claiming any is supplied by
--- Alpoge--Furman.
 ------------------------------------------------------------------------
 
 record RHDetectabilityProducer : Set₁ where
@@ -207,14 +169,12 @@ record RHDetectabilityProducer : Set₁ where
 
 record HermitianDetectabilityBoundary : Set where
   field
-    globalErrorContradictionClosed : Agda.Builtin.Bool.Bool
-    positiveErrorNoGoWitnessConstructed : Agda.Builtin.Bool.Bool
-    sourceTrG2MainTermIsNonzeroRecorded : Agda.Builtin.Bool.Bool
-    localizationProducerConstructedHere : Agda.Builtin.Bool.Bool
-    higherMomentAmplificationConstructedHere : Agda.Builtin.Bool.Bool
-    rhStrengthDetectabilityProvedHere : Agda.Builtin.Bool.Bool
-
-open import Agda.Builtin.Bool using (true; false)
+    globalErrorContradictionClosed : Bool
+    positiveErrorNoGoWitnessConstructed : Bool
+    sourceTrG2MainTermIsNonzeroRecorded : Bool
+    localizationProducerConstructedHere : Bool
+    higherMomentAmplificationConstructedHere : Bool
+    rhStrengthDetectabilityProvedHere : Bool
 
 hermitianDetectabilityBoundary : HermitianDetectabilityBoundary
 hermitianDetectabilityBoundary = record
