@@ -21,7 +21,7 @@ data CoarseObservation : Set where
   transitionState : CoarseObservation
 
 data Context : Set where
-  ordinaryContext threatContext : Context
+  ordinaryContext threatContext ambivalentContext : Context
 
 data PotentialObserver : Set where
   subjectObserver institutionObserver : PotentialObserver
@@ -41,6 +41,9 @@ slowPotential ordinaryContext saddleState = 3
 slowPotential threatContext threatState = 0
 slowPotential threatContext safetyState = 2
 slowPotential threatContext saddleState = 3
+slowPotential ambivalentContext threatState = 0
+slowPotential ambivalentContext safetyState = 0
+slowPotential ambivalentContext saddleState = 3
 
 accessible : Context → FineState → Bool
 accessible ordinaryContext threatState = true
@@ -49,6 +52,9 @@ accessible ordinaryContext saddleState = false
 accessible threatContext threatState = true
 accessible threatContext safetyState = false
 accessible threatContext saddleState = false
+accessible ambivalentContext threatState = true
+accessible ambivalentContext safetyState = true
+accessible ambivalentContext saddleState = false
 
 sameFibreDifferentPotential :
   project threatState ≡ project safetyState
@@ -71,8 +77,7 @@ contextCanReversePotentialOrdering :
 contextCanReversePotentialOrdering = refl , (refl , (refl , refl))
 
 ------------------------------------------------------------------------
--- Explicit finite barrier geometry.  A globally lower endpoint may remain
--- separated from the current basin by a positive barrier.
+-- Explicit finite barrier and landscape-complexity geometry.
 ------------------------------------------------------------------------
 
 barrierHeight : FineState → FineState → Nat
@@ -85,6 +90,31 @@ lowerEndpointCanHavePositiveBarrier :
   × slowPotential ordinaryContext threatState ≡ 2
   × barrierHeight threatState safetyState ≡ 3
 lowerEndpointCanHavePositiveBarrier = refl , (refl , refl)
+
+isLocalMinimum : Context → FineState → Bool
+isLocalMinimum ordinaryContext safetyState = true
+isLocalMinimum threatContext threatState = true
+isLocalMinimum ambivalentContext threatState = true
+isLocalMinimum ambivalentContext safetyState = true
+isLocalMinimum _ _ = false
+
+localMinimumCount : Context → Nat
+localMinimumCount ordinaryContext = 1
+localMinimumCount threatContext = 1
+localMinimumCount ambivalentContext = 2
+
+bistableFibreHasTwoMinimaAndBarrier :
+  isLocalMinimum ambivalentContext threatState ≡ true
+  × isLocalMinimum ambivalentContext safetyState ≡ true
+  × localMinimumCount ambivalentContext ≡ 2
+  × barrierHeight threatState safetyState ≡ 3
+bistableFibreHasTwoMinimaAndBarrier = refl , (refl , (refl , refl))
+
+sameMinimumEnergyNeedNotMeanSameState :
+  slowPotential ambivalentContext threatState
+  ≡ slowPotential ambivalentContext safetyState
+  × (threatState ≡ safetyState → ⊥)
+sameMinimumEnergyNeedNotMeanSameState = refl , (λ ())
 
 ------------------------------------------------------------------------
 -- Observer-indexed potential.  Stability for one consumer is not a global
