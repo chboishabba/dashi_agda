@@ -4,10 +4,11 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
+import DASHI.Core.IntersectionalNonFactorability as NF
 import DASHI.Cognition.PNF.BoundedEvidenceCommitmentExact as Evidence
 
 ------------------------------------------------------------------------
--- CONFIDENCE IS NOT IDENTICAL TO COMMITMENT
+-- CONFIDENCE IS NOT IDENTICAL TO COMMITMENT OR EVIDENCE HISTORY
 --
 -- Literature calibration:
 -- Roozbeh Kiani; Michael N. Shadlen,
@@ -19,11 +20,6 @@ import DASHI.Cognition.PNF.BoundedEvidenceCommitmentExact as Evidence
 -- Ville; José del R. Millán,
 -- "Disentangling the origins of confidence in speeded perceptual judgments
 -- through multimodal imaging", DOI 10.1073/pnas.1918335117.
---
--- The finite witness protects the type distinction and leaves postdecisional
--- confidence computation separately representable.  It does not claim a
--- unique anatomical confidence decoder or that confidence is exclusively LIP,
--- IFG, insula, or any other single region.
 ------------------------------------------------------------------------
 
 data Confidence : Set where lowConfidence highConfidence : Confidence
@@ -50,12 +46,41 @@ commitmentDoesNotDetermineConfidence :
   committedLowConfidence ≡ committedHighConfidence → ⊥
 commitmentDoesNotDetermineConfidence ()
 
+record ConfidenceHistoryReadout : Set where
+  constructor confidenceHistoryReadout
+  field
+    evidenceHistory : Evidence.EvidenceLevel
+    historyConfidence : Confidence
+
+open ConfidenceHistoryReadout public
+
+highConfidenceAfterOne : ConfidenceHistoryReadout
+highConfidenceAfterOne = confidenceHistoryReadout Evidence.e1 highConfidence
+
+highConfidenceAfterTwo : ConfidenceHistoryReadout
+highConfidenceAfterTwo = confidenceHistoryReadout Evidence.e2 highConfidence
+
+sameConfidenceDifferentEvidenceHistory :
+  historyConfidence highConfidenceAfterOne
+  ≡ historyConfidence highConfidenceAfterTwo
+  × (evidenceHistory highConfidenceAfterOne
+      ≡ evidenceHistory highConfidenceAfterTwo → ⊥)
+sameConfidenceDifferentEvidenceHistory = refl , (λ ())
+
+confidenceCannotRecoverEvidenceHistory :
+  NF.FactorsThrough historyConfidence evidenceHistory → ⊥
+confidenceCannotRecoverEvidenceHistory =
+  NF.witnessRulesOutEveryFlatFactorisation
+    (NF.nonFactorabilityWitness
+      highConfidenceAfterOne highConfidenceAfterTwo refl (λ ()))
+
 record ConfidenceBoundary : Set where
   constructor confidenceBoundary
   field
     confidenceEqualsCommitment : Bool
     sameCommitmentForcesSameConfidence : Bool
+    sameConfidenceForcesSameEvidenceHistory : Bool
     postdecisionalConfidenceSeparatelyRepresentable : Bool
 
 canonicalConfidenceBoundary : ConfidenceBoundary
-canonicalConfidenceBoundary = confidenceBoundary false false true
+canonicalConfidenceBoundary = confidenceBoundary false false false true
