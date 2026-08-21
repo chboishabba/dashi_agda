@@ -40,7 +40,7 @@ module DASHI.Physics.Closure.NSAncientCKNNestedScaleTransferNoGoExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base using
-  (ℚ; 0ℚ; _*_; _≤_; _<_; Positive; positive)
+  (ℚ; 0ℚ; _*_; _≤_; _<_; Positive; positive; NonNegative; nonNegative)
 import Data.Rational.Properties as ℚP
 open import Relation.Nullary.Negation.Core using (¬_)
 
@@ -62,13 +62,16 @@ innerMassNestedBelowOuter :
   innerMass ≤ outerMass epsilon outerRadius
 innerMassNestedBelowOuter epsilon outerRadius epsilonNN radiusNN =
   let
-    instance epsilonNonnegative = positiveOrZero epsilon epsilonNN
-    instance radiusNonnegative = positiveOrZero outerRadius radiusNN
+    instance epsilonNonnegative : NonNegative epsilon
+        epsilonNonnegative = nonNegative epsilonNN
+
+    instance radiusNonnegative : NonNegative outerRadius
+        radiusNonnegative = nonNegative radiusNN
+
+    instance productNonnegative : NonNegative (epsilon * outerRadius)
+        productNonnegative = ℚP.nonNeg*nonNeg⇒nonNeg epsilon outerRadius
   in
   ℚP.nonNegative⁻¹ (epsilon * outerRadius)
-  where
-    positiveOrZero : (x : ℚ) → 0ℚ ≤ x → Data.Rational.Base.NonNegative x
-    positiveOrZero x proof = Data.Rational.Base.nonNegative proof
 
 innerCriticalDefectFails :
   (epsilon innerRadius : ℚ) →
