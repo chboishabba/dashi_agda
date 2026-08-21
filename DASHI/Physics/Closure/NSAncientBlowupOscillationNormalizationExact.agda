@@ -23,9 +23,10 @@ module DASHI.Physics.Closure.NSAncientBlowupOscillationNormalizationExact where
 -- common Galilean velocity and directly contradicts spatial constancy.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base using (ℚ; 1ℚ; _+_)
+open import Data.Rational.Base using (ℚ; 1ℚ; _+_; -_)
+import Data.Rational.Properties as ℚP
 open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
 open import Relation.Nullary.Negation.Core using (¬_)
 
@@ -49,6 +50,32 @@ oscillationRulesOutSpatialConstancy witness constant =
 addCommonVelocity : {X : Set} → (X → ℚ) → ℚ → X → ℚ
 addCommonVelocity u c x = u x + c
 
+translateEqualityCancels :
+  (a b c : ℚ) →
+  a + c ≡ b + c →
+  a ≡ b
+translateEqualityCancels a b c eq =
+  let
+    leftMeaning : (a + c) + (- c) ≡ a
+    leftMeaning =
+      trans
+        (sym (ℚP.+-assoc a c (- c)))
+        (trans
+          (cong (a +_) (ℚP.+-inverseʳ c))
+          (ℚP.+-identityʳ a))
+
+    rightMeaning : (b + c) + (- c) ≡ b
+    rightMeaning =
+      trans
+        (sym (ℚP.+-assoc b c (- c)))
+        (trans
+          (cong (b +_) (ℚP.+-inverseʳ c))
+          (ℚP.+-identityʳ b))
+  in
+  trans
+    (sym leftMeaning)
+    (trans (cong (_+ (- c)) eq) rightMeaning)
+
 commonVelocityPreservesSeparation :
   {X : Set} {u : X → ℚ} →
   (c : ℚ) →
@@ -59,48 +86,11 @@ commonVelocityPreservesSeparation c witness = record
   ; rightPoint = rightPoint witness
   ; separated = λ shiftedEqual →
       separated witness
-        (let
-          cancelCommon :
-            addCommonVelocity u c (leftPoint witness) ≡
-            addCommonVelocity u c (rightPoint witness) →
-            u (leftPoint witness) ≡ u (rightPoint witness)
-          cancelCommon eq =
-            -- Rational translation is injective; expose it by transporting
-            -- both sides by -c through the additive group law.
-            let
-              leftMeaning :
-                (u (leftPoint witness) + c) + (- c)
-                ≡ u (leftPoint witness)
-              leftMeaning =
-                trans
-                  (sym (Data.Rational.Properties.+-assoc
-                    (u (leftPoint witness)) c (- c)))
-                  (trans
-                    (cong (u (leftPoint witness) +_)
-                      (Data.Rational.Properties.+-inverseʳ c))
-                    (Data.Rational.Properties.+-identityʳ
-                      (u (leftPoint witness))))
-
-              rightMeaning :
-                (u (rightPoint witness) + c) + (- c)
-                ≡ u (rightPoint witness)
-              rightMeaning =
-                trans
-                  (sym (Data.Rational.Properties.+-assoc
-                    (u (rightPoint witness)) c (- c)))
-                  (trans
-                    (cong (u (rightPoint witness) +_)
-                      (Data.Rational.Properties.+-inverseʳ c))
-                    (Data.Rational.Properties.+-identityʳ
-                      (u (rightPoint witness))))
-            in
-            trans
-              (sym leftMeaning)
-              (trans (cong (_+ (- c)) eq) rightMeaning)
-        in cancelCommon shiftedEqual)
+        (translateEqualityCancels
+          (u (leftPoint witness))
+          (u (rightPoint witness))
+          c shiftedEqual)
   }
-  where
-    import Data.Rational.Properties
 
 -- Concrete counterexample to using only a point normalization such as
 -- |U(0,0)| = 1 to infer spatial nonconstancy.
