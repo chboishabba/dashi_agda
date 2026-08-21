@@ -28,6 +28,7 @@ open import Agda.Builtin.String using (String)
 import DASHI.Core.IntersectionalNonFactorability as Intersectional
 import DASHI.Governance.AuthorityMandateCore as Authority
 import DASHI.Governance.ClosedAuthorityInverseJusticeExact as ClosedAuthority
+import DASHI.Governance.ContestabilityAccessCostExact as Contestability
 import DASHI.Governance.DomainIndexedPeaceSubjectCarrier as Peace
 import DASHI.Governance.SituatedInverseJusticeFibreExact as Justice
 import DASHI.Governance.TraumaMemorySublationBoundary as Sublation
@@ -302,9 +303,9 @@ orderLikeFlatProjectionCannotDetermineSituatedJustice =
   Justice.intersectionalFlatteningCannotDetermineJusticeSign
 
 formalContestabilityStillDoesNotEstablishAffordableJusticeAccess :
-  Justice.Contestability.AffordableContestability
-    Justice.Contestability.finiteCost
-    Justice.Contestability.finiteBudget →
+  Contestability.AffordableContestability
+    Contestability.finiteCost
+    Contestability.finiteBudget →
   ⊥
 formalContestabilityStillDoesNotEstablishAffordableJusticeAccess =
   Justice.formalContestabilityDoesNotEstablishAffordableJusticeAccess
