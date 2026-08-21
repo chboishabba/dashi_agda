@@ -38,6 +38,8 @@ import DASHI.Governance.InverseJusticeAttractorExact
 import DASHI.Governance.SecondOrderJusticeGrammarExact
 import DASHI.Governance.ClosedAuthorityInverseJusticeExact
 import DASHI.Governance.SituatedInverseJusticeRegression
+import DASHI.Governance.ContestedAmbientAuthorityHyperformalismExact
+import DASHI.Governance.ContestedAmbientAuthorityRegression
 import DASHI.Governance.RevolutionarySourceAtlas
 import DASHI.Governance.RevolutionaryPracticeBraid
 import DASHI.Governance.TraumaMemorySublationBoundary
