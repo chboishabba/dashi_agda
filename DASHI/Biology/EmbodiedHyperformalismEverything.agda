@@ -19,5 +19,16 @@ import DASHI.Biology.RelationalEmbodiedCoregulationExact
 import DASHI.Biology.IntrospectiveEmbodiedHyperformalismObservationExact
 import DASHI.Biology.IntrospectiveHyperformalismIncidenceExact
 import DASHI.Core.CubieFaceOrderHolonomyAnalogueExact
+
+-- #605 x #606 cross-pollination layer, written against merged primitive owners
+-- so the sibling draft PRs do not acquire a cyclic dependency.
+import DASHI.Biology.SymmetryResolvedEmbodiedWaveControlExact
+import DASHI.Biology.TranslationInvariantCompletionAccessibilityNonfactorabilityExact
+import DASHI.Biology.EmbodiedWaveCubieHolonomyExact
+import DASHI.Biology.TwoBoundarySymmetryResolvedModeSectionExact
+import DASHI.Biology.BodyIndexedHarmonicWreathActionExact
+import DASHI.Biology.IntrospectiveSymmetryResolvedHyperformalismExact
+import DASHI.Biology.EmbodiedWaveCrossPollinationRegression
+
 import DASHI.Biology.EmbodiedDecisionPhysiologyRegression
 import DASHI.Biology.EmbodiedHyperformalismRegression
