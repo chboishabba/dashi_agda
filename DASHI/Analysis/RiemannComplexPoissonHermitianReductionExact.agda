@@ -6,26 +6,27 @@ module DASHI.Analysis.RiemannComplexPoissonHermitianReductionExact where
 -- Reduce the desired Hermitian full-grid norm identity to a COMPLEX BILINEAR
 -- extension of the source's already-proved real Gabor Poisson theorem.
 --
--- For a real even taper phi:
+-- Source-owned facts in `Zeta23/Taper/Fourier.lean`:
 --
---   conjugate(phiHat z) = phiHat(-conjugate z) = phiHat(conjugate z),
+--   conj h_v(z) = h_v(-conj z)     for real v,
+--   h_v(-z) = h_v(z)               for even v,
 --
--- hence
+-- hence for the real-even taper phi:
+--
+--   conj(phiHat z) = phiHat(conj z).
+--
+-- Therefore
 --
 --   |phiHat(z-tau_k)|^2
 --     = phiHat(z-tau_k) phiHat(conjugate(z)-tau_k).
 --
--- If the source bilinear identity is extended to complex parameters,
+-- If the source bilinear Poisson theorem is extended from real to complex
+-- parameters,
 --
 --   Sum_k phiHat(z-tau_k) phiHat(w-tau_k) = L Phi(z-w),
 --
 -- then setting w=conjugate(z) yields the Hermitian norm identity immediately.
 -- At z=gamma-i alpha, z-conjugate(z)=-2i alpha.
---
--- The final Hermitian equality is DERIVED below; it is not another producer
--- field.  The new analytic Poisson gap is therefore precisely the complex
--- bilinear extension plus the standard real-even Fourier symmetry needed to
--- identify the norm-square sum with the conjugate-pair bilinear sum.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -42,19 +43,11 @@ record ComplexPoissonHermitianCarrier : Set₁ where
     Complex Value : Set
     conjugate : Complex → Complex
     difference : Complex → Complex → Complex
-
     bilinearGridSum : Complex → Complex → Value
     hermitianGridSum : Complex → Value
     poissonKernelValue : Complex → Value
 
 open ComplexPoissonHermitianCarrier public
-
-------------------------------------------------------------------------
--- Real/even taper symmetry, already expected from the source definition of
--- paperFT.  The only equality the later proof actually needs is the aggregate
--- consequence identifying the norm-square grid with the bilinear grid at the
--- conjugate parameter.
-------------------------------------------------------------------------
 
 record RealEvenFourierGridSymmetry
   (c : ComplexPoissonHermitianCarrier) : Set₁ where
@@ -64,10 +57,6 @@ record RealEvenFourierGridSymmetry
       hermitianGridSum c z
         ≡ bilinearGridSum c z (conjugate c z)
 
-------------------------------------------------------------------------
--- The sole genuinely new Poisson continuation theorem required at this layer.
-------------------------------------------------------------------------
-
 record ComplexBilinearPoisson
   (c : ComplexPoissonHermitianCarrier) : Set₁ where
   field
@@ -75,10 +64,6 @@ record ComplexBilinearPoisson
       (z w : Complex c) →
       bilinearGridSum c z w
         ≡ poissonKernelValue c (difference c z w)
-
-------------------------------------------------------------------------
--- EXACT DERIVATION: Hermitian norm identity is not independent.
-------------------------------------------------------------------------
 
 hermitianPoissonFromComplexBilinear :
   (c : ComplexPoissonHermitianCarrier) →
@@ -93,10 +78,6 @@ hermitianPoissonFromComplexBilinear c symmetry poisson z =
       symmetry z)
     (ComplexBilinearPoisson.complexBilinearIdentity
       poisson z (conjugate c z))
-
-------------------------------------------------------------------------
--- Signed-coordinate specialization.
-------------------------------------------------------------------------
 
 record CentredConjugateDisplacement : Set₁ where
   field
@@ -113,26 +94,13 @@ record CentredConjugateDisplacement : Set₁ where
         (conjugate (centred gamma alpha))
         ≡ minusTwoI alpha
 
-------------------------------------------------------------------------
--- Compose the two reductions: complex bilinear Poisson gives kernel at
--- z-conj(z), and signed-coordinate geometry rewrites that argument to -2iα.
-------------------------------------------------------------------------
-
-record SignedHermitianPoissonCarrier : Set₁ where
-  field
-    poisson : ComplexPoissonHermitianCarrier
-    displacement : CentredConjugateDisplacement
-    sameComplex :
-      ComplexPoissonHermitianCarrier.Complex poisson
-        ≡ CentredConjugateDisplacement.Complex displacement
-
 record ComplexPoissonHermitianReductionBoundary : Set where
   field
     hermitianNormEqualityDerivedFromBilinearEquality : Bool
     signedDiagonalArgumentReducedToMinusTwoIAlpha : Bool
     sourceRealBilinearPoissonOwned : Bool
     sourceComplexPhiHatDefinitionAndDecayOwned : Bool
-    realEvenFourierGridSymmetryProvedHere : Bool
+    sourceRealEvenFourierConjugationOwned : Bool
     complexBilinearPoissonExtensionProvedHere : Bool
     analyticMinusTwoIAlphaIdentityInstantiatedHere : Bool
 
@@ -143,7 +111,7 @@ complexPoissonHermitianReductionBoundary = record
   ; signedDiagonalArgumentReducedToMinusTwoIAlpha = true
   ; sourceRealBilinearPoissonOwned = true
   ; sourceComplexPhiHatDefinitionAndDecayOwned = true
-  ; realEvenFourierGridSymmetryProvedHere = false
+  ; sourceRealEvenFourierConjugationOwned = true
   ; complexBilinearPoissonExtensionProvedHere = false
   ; analyticMinusTwoIAlphaIdentityInstantiatedHere = false
   }
