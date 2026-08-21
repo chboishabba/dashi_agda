@@ -22,18 +22,28 @@ on:
       - 'DASHI/Biology/RelationalEmbodiedCoregulationExact.agda'
       - 'DASHI/Biology/IntrospectiveEmbodiedHyperformalismObservationExact.agda'
       - 'DASHI/Biology/IntrospectiveHyperformalismIncidenceExact.agda'
+      - 'DASHI/Biology/SymmetryResolvedEmbodiedWaveControlExact.agda'
+      - 'DASHI/Biology/TranslationInvariantCompletionAccessibilityNonfactorabilityExact.agda'
+      - 'DASHI/Biology/EmbodiedWaveCubieHolonomyExact.agda'
+      - 'DASHI/Biology/TwoBoundarySymmetryResolvedModeSectionExact.agda'
+      - 'DASHI/Biology/BodyIndexedHarmonicWreathActionExact.agda'
+      - 'DASHI/Biology/IntrospectiveSymmetryResolvedHyperformalismExact.agda'
+      - 'DASHI/Biology/EmbodiedWaveCrossPollinationRegression.agda'
       - 'DASHI/Biology/EmbodiedDecisionPhysiologyRegression.agda'
       - 'DASHI/Biology/EmbodiedHyperformalismRegression.agda'
       - 'DASHI/Biology/EmbodiedHyperformalismEverything.agda'
       - 'DASHI/Core/CubieFaceOrderHolonomyAnalogueExact.agda'
+      - 'DASHI/Core/IntersectionalNonFactorability.agda'
       - 'DASHI/Biology/DomainEverything.agda'
       - 'DASHI/Cognition/PNF/NeuromodulatedCommitmentThresholdExact.agda'
       - 'DASHI/Cognition/PNF/DecisionConfidenceNoncollapseExact.agda'
       - 'DASHI/Governance/OptionConeCoercionExact.agda'
       - 'artifacts/introspective-embodied-hyperfabric-opencv-v1.json'
       - 'artifacts/introspective-embodied-hyperfabric-opencv-v2.json'
+      - 'artifacts/introspective-embodied-hyperfabric-opencv-v3.json'
       - 'scripts/introspective_embodied_hyperfabric.py'
       - 'scripts/introspective_embodied_hyperfabric_v2.py'
+      - 'scripts/introspective_embodied_hyperfabric_v3.py'
       - '.github/workflows/embodied-decision-physiology.yml'
   workflow_dispatch:
 
@@ -53,6 +63,24 @@ jobs:
       - uses: cachix/install-nix-action@v31
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Check symmetry-aware introspection receipt boundary
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          p='artifacts/introspective-embodied-hyperfabric-opencv-v3.json'
+          d=json.load(open(p))
+          assert d['observed_supervoxel_count'] == 4
+          assert d['observed_fibres_per_supervoxel'] == [3,1,2,3]
+          assert d['observed_edges'] == [[0,1],[0,2],[1,3],[2,3]]
+          assert d['source_like_route_recovered'] is True
+          assert d['rotational_route_recovered'] is True
+          assert d['biology_inferred_from_pixels'] is False
+          assert d['phenomenal_consciousness_inferred_from_pixels'] is False
+          assert d['mode_observations'][0]['recovered_vector_count'] == 4
+          assert d['mode_observations'][1]['recovered_vector_count'] == 4
+          PY
       - name: Check embodied hyperformalism roots
         id: focused
         shell: bash
@@ -71,6 +99,7 @@ jobs:
             scripts/run_agda29_parallel_check.sh \
               DASHI/Biology/EmbodiedDecisionPhysiologyRegression.agda \
               DASHI/Biology/EmbodiedHyperformalismRegression.agda \
+              DASHI/Biology/EmbodiedWaveCrossPollinationRegression.agda \
               DASHI/Biology/EmbodiedHyperformalismEverything.agda
           ) > embodied-hyperformalism-check.log 2>&1
           status=$?
