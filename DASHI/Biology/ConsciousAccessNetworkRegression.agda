@@ -13,6 +13,7 @@ import DASHI.Biology.UnconsciousAccessRegime as Unconscious
 import DASHI.Biology.SymbolicTransformWithoutHomunculus as Symbolic
 import DASHI.Biology.DeterministicCoarseGrainingBoundary as Deterministic
 import DASHI.Biology.SparseExpertRoutingCoalition as Sparse
+import DASHI.Cognition.PNF.PNFWaveAccessTraumaLearningRegression as WavePNF
 
 ------------------------------------------------------------------------
 -- Compact validation surface for the full tranche.
@@ -21,6 +22,7 @@ record ConsciousAccessNetworkRegression : Setω where
   field
     coalition : Access.ConsciousAccessCoalition
     psychedelicBoundary : Psychedelic.PsychedelicAttractorBoundary
+    wavePNFRegression : WavePNF.PNFWaveAccessTraumaLearningRegression
 
     stateChangesOutput :
       Stateful.runOutput Stateful.canonicalBoolTransducer false false false
@@ -174,6 +176,8 @@ canonicalConsciousAccessNetworkRegression =
         Access.canonicalConsciousAccessCoalition
     ; psychedelicBoundary =
         Psychedelic.canonicalPsychedelicAttractorBoundary
+    ; wavePNFRegression =
+        WavePNF.canonicalPNFWaveAccessTraumaLearningRegression
     ; stateChangesOutput =
         Stateful.canonicalStateChangesOutput
     ; modulatorChangesOutput =
@@ -208,7 +212,7 @@ canonicalConsciousAccessNetworkRegression =
         Unconscious.canonicalBlockedRepresentationCausallyEffective
     ; transformedSymbolPreservesInvariant =
         Symbolic.canonicalTrueLatentHasTransformedInvariant
-    ; directAndTransformedSymbolDiffer =
+    ; directAndTransformedCarriersDifferAtTrue =
         Symbolic.directAndTransformedCarriersDifferAtTrue
     ; noClosedMacroDynamics =
         Deterministic.noClosedMacroDynamics
