@@ -15,11 +15,15 @@ open import DASHI.Analysis.RiemannZetaProgramBoundary public
 open import DASHI.Analysis.RiemannAnalyticSubstrate public
 open import DASHI.Analysis.WeilTestSpace public
 
--- 2026 reflection-orbit / inverse-pair lane.  These modules construct exact
--- finite/discrete orbit algebra and explicit non-promotion boundaries; they do
--- not claim to reconstruct the analytic Weil Hermitian compression.
+-- 2026 reflection-orbit / inverse-pair lane.  The first two modules construct
+-- exact finite/discrete orbit algebra and residual diagnostics.  The
+-- hyperbolic module records the source-native off-line pair signature used by
+-- Alpöge--Furman's inertia argument and proves that this bare signature cannot
+-- determine transverse squared defect.  None reconstructs the analytic Weil
+-- Hermitian compression by itself.
 open import DASHI.Analysis.RiemannReflectionOrbitDefectExact public
 open import DASHI.Analysis.RiemannReflectionPairBlockExact public
+open import DASHI.Analysis.RiemannWeilOffLineHyperbolicBlockExact public
 import DASHI.Analysis.RiemannReflectionC3OrbitShapeBridgeExact
 
 open import DASHI.Analysis.PrimeCountingFunction public
