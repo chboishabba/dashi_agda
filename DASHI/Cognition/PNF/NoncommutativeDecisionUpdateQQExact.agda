@@ -17,13 +17,16 @@ open import Data.Product using (_×_; _,_)
 -- "Quantum cognition and decision theories: A tutorial",
 -- DOI 10.1016/j.jmp.2015.11.005.
 --
--- M. Fuyama; A. Khrennikov; M. Ozawa,
--- "Quantum-like cognition and decision making in the light of quantum
--- measurement theory", DOI 10.48550/arXiv.2503.05859.
+-- Masanao Ozawa; Andrei Khrennikov,
+-- "Modeling combination of question order effect, response replicability
+-- effect, and QQ-equality with quantum instruments",
+-- DOI 10.1016/j.jmp.2020.102491.
 --
 -- The exact finite statements below use the literature distinction between
 -- observable noncommutativity and state-update noncommutativity.  They do not
--- claim physical quantum dynamics in the brain.
+-- claim physical quantum dynamics in the brain.  QQ is retained only as a
+-- diagnostic for the restricted projective-like calibration family; general
+-- quantum-instrument update semantics need not inherit it.
 ------------------------------------------------------------------------
 
 record BeliefState : Set where
@@ -44,7 +47,6 @@ observeA = answerA
 observeB : BeliefState → Bool
 observeB = answerB
 
--- Pure observation functions do not alter the state.
 observeAThenB : BeliefState → Bool × Bool
 observeAThenB s = observeA s , observeB s
 
@@ -55,7 +57,6 @@ staticObservablesCommute : (s : BeliefState) →
   observeAThenB s ≡ observeBThenA s
 staticObservablesCommute s = refl
 
--- State-update maps can nevertheless fail to commute.
 updateA : BeliefState → BeliefState
 updateA (belief _ b _) = belief true b false
 
@@ -75,12 +76,6 @@ observableCommutationDoesNotForceUpdateCommutation :
   observeAThenB initial ≡ observeBThenA initial
   × (AB ≡ BA → ⊥)
 observableCommutationDoesNotForceUpdateCommutation = refl , updateMapsDoNotCommute
-
-------------------------------------------------------------------------
--- QQ equality as a MODEL-CLASS DIAGNOSTIC, not a universal human-decision law.
--- We use finite counts rather than pretending these are already normalized
--- empirical probabilities.  Both standard QQ balance equalities are explicit.
-------------------------------------------------------------------------
 
 record QQCounts : Set where
   constructor qqCounts
