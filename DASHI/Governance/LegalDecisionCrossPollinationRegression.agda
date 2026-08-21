@@ -8,6 +8,7 @@ module DASHI.Governance.LegalDecisionCrossPollinationRegression where
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Empty using (⊥)
 
+import DASHI.Core.FibreOrderNonfactorabilityExact as Order
 import DASHI.Core.IntersectionalNonFactorability as NF
 import DASHI.Governance.DecisionPotentialAuthorityOrthogonalityExact as PotentialAuthority
 import DASHI.Governance.LegalDecisionDoubleProjectionExact as Legal
@@ -66,3 +67,13 @@ hiddenOrdersShareOfficialEndpointRegression :
   ≡ Dynamics.witnessOfficialSurface Dynamics.authorityAfterDecisionAtBlocked
 hiddenOrdersShareOfficialEndpointRegression =
   Dynamics.bothCompositeOrdersRemainOfficiallyInvisible
+
+hiddenOrderCannotFactorThroughOfficialSurfaceRegression :
+  NF.FactorsThrough
+    (Order.orderedSurface
+      Dynamics.decisionMotion Dynamics.authorityMotion Dynamics.blockedDonorState)
+    (Order.orderedEndpoint
+      Dynamics.decisionMotion Dynamics.authorityMotion Dynamics.blockedDonorState) →
+  ⊥
+hiddenOrderCannotFactorThroughOfficialSurfaceRegression =
+  Dynamics.officialSurfaceCannotDecodeHiddenUpdateOrder
