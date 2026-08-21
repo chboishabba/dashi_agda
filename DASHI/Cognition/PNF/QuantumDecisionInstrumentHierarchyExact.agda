@@ -1,7 +1,6 @@
 module DASHI.Cognition.PNF.QuantumDecisionInstrumentHierarchyExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
-open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
 import DASHI.Cognition.PNF.NoncommutativeDecisionUpdateQQExact as Order
@@ -32,23 +31,11 @@ projectiveToInstrument : ProjectiveModel → QuantumInstrumentModel
 projectiveToInstrument projectiveModel = quantumInstrumentModel
 
 projectiveToGeneric : ProjectiveModel → GenericUpdateModel
-projectiveToGeneric = instrumentToGeneric ∘ projectiveToInstrument
-  where
-    _∘_ : {A B C : Set} → (B → C) → (A → B) → A → C
-    (f ∘ g) x = f (g x)
+projectiveToGeneric model = instrumentToGeneric (projectiveToInstrument model)
 
-qqRequiredByCalibrationClass : Bool → Bool
-qqRequiredByCalibrationClass true = true
-qqRequiredByCalibrationClass false = false
-
--- The existing satisfying witness is available to the restricted projective
--- calibration class.
 projectiveWitnessSatisfiesQQ : Order.QQSatisfied Order.projectiveLikeCounts
 projectiveWitnessSatisfiesQQ = Order.projectiveLikeSatisfiesQQ
 
--- Generalized-instrument space is deliberately broad enough to admit a finite
--- QQ-violating witness.  This is a model-class boundary, not an empirical claim
--- that any particular dataset instantiates this exact count table.
 record GeneralizedInstrumentWitness : Set where
   constructor generalizedInstrumentWitness
   field
