@@ -183,8 +183,20 @@ combineBounds :
 combineBounds {a} {b} {c} {x} {y} {z} ab bc cd =
   +-mono-≤ (+-mono-≤ ab bc) cd
 
+combineLowerBounds :
+  ∀ {a b c x y z} →
+  x ≤ℝ a →
+  y ≤ℝ b →
+  z ≤ℝ c →
+  (x +ℝ y) +ℝ z ≤ℝ (a +ℝ b) +ℝ c
+combineLowerBounds {a} {b} {c} {x} {y} {z} xa yb zc =
+  +-mono-≤ (+-mono-≤ xa yb) zc
+
 ≤-replace-left : ∀ {a b c : ℝ} → a ≡ b → b ≤ℝ c → a ≤ℝ c
 ≤-replace-left refl bc = bc
+
+≤-replace-right : ∀ {a b c : ℝ} → a ≡ b → c ≤ℝ b → c ≤ℝ a
+≤-replace-right refl cb = cb
 
 endpointDeterminantToBetaPrefix :
   (K : ℕ) →
@@ -233,3 +245,43 @@ endpointDeterminantToBetaPrefix K step prefixData threshold endpointUpper correc
     ; status = stat
     ; noClayPromotion = noClay
     }
+
+-- ROUND89: the same literal endpoint determinant identity also transports
+-- LOWER component bounds.  This is the missing half needed for a positive
+-- asymptotic-freedom slope.  It is intentionally separate from
+-- `BalabanBetaPrefixBound`, whose job is only the upper budget that keeps the
+-- finite trajectory inside the CMP122 small-coupling tube.
+endpointDeterminantToBetaPrefixLower :
+  (K : ℕ) →
+  (step : BalabanInverseSquareCouplingStep) →
+  (prefixData : EndpointDeterminantPrefixData K step) →
+  (endpointLower correctionLower interactionLower : ℕ → ℝ) →
+  (endpointPrefixLower :
+    ∀ k → k ≤ K →
+    endpointLower k ≤ℝ
+      (endpointDeterminant prefixData k
+        -ℝ endpointDeterminant prefixData zero)) →
+  (correctionPrefixLower :
+    ∀ k → k ≤ K →
+    correctionLower k ≤ℝ
+      sumShells (correctionShell prefixData) k) →
+  (interactionPrefixLower :
+    ∀ k → k ≤ K →
+    interactionLower k ≤ℝ
+      sumShells (interactionShell prefixData) k) →
+  ∀ k → k ≤ K →
+  (endpointLower k +ℝ correctionLower k) +ℝ interactionLower k
+    ≤ℝ betaPrefixSum step k
+endpointDeterminantToBetaPrefixLower
+  K step prefixData
+  endpointLower correctionLower interactionLower
+  endpointPrefixLower correctionPrefixLower interactionPrefixLower
+  k k≤K =
+  let
+    eq = betaSumEquality K step prefixData k k≤K
+    ineq = combineLowerBounds
+      (endpointPrefixLower k k≤K)
+      (correctionPrefixLower k k≤K)
+      (interactionPrefixLower k k≤K)
+  in
+    ≤-replace-right eq ineq
