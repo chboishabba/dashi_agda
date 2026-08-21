@@ -20,7 +20,7 @@ import DASHI.Governance.InstitutionPreservingRechartAntiSublationExact as Rechar
 data JusticeResidualStatus : Set where
   residualResolved residualOpen : JusticeResidualStatus
 
-justiceResidual : Rechart.OrderJusticeState → JusticeResidualStatus
+justiceResidual : Rechart.PoliticalFineState → JusticeResidualStatus
 justiceResidual Rechart.justQuietState = residualResolved
 justiceResidual Rechart.suppressedQuietState = residualOpen
 justiceResidual Rechart.visibleConflictState = residualOpen
@@ -38,7 +38,7 @@ quietStatesDifferOnResidual ()
 record OrderOnlyPeaceCertificate : Set where
   constructor orderOnlyPeaceCertificate
   field
-    observedState : Rechart.OrderJusticeState
+    observedState : Rechart.PoliticalFineState
     quietObserved :
       Rechart.orderObserver observedState ≡
       Rechart.orderObserver Rechart.justQuietState
@@ -49,7 +49,7 @@ suppressedQuietHasOrderOnlyPeaceCertificate : OrderOnlyPeaceCertificate
 suppressedQuietHasOrderOnlyPeaceCertificate =
   orderOnlyPeaceCertificate Rechart.suppressedQuietState refl
 
-record JusticeClosureCertificate (state : Rechart.OrderJusticeState) : Set where
+record JusticeClosureCertificate (state : Rechart.PoliticalFineState) : Set where
   constructor justiceClosureCertificate
   field
     residualClosed : justiceResidual state ≡ residualResolved
@@ -61,22 +61,16 @@ orderOnlyPeaceDoesNotEstablishJusticeClosure :
 orderOnlyPeaceDoesNotEstablishJusticeClosure certificate with residualClosed certificate
 ... | ()
 
-------------------------------------------------------------------------
--- A current chart can make "peace" require disappearance of the residual while
--- justice requires the residual remain expressible until genuinely resolved.
--- The conflict is in the chart's requirements, not proof that disorder follows.
-------------------------------------------------------------------------
-
 record CurrentChartPeaceJusticeConflict : Set where
   constructor currentChartPeaceJusticeConflict
   field
-    currentState : Rechart.OrderJusticeState
+    currentState : Rechart.PoliticalFineState
     orderSurfaceQuiet :
       Rechart.orderObserver currentState
       ≡ Rechart.orderObserver Rechart.justQuietState
     unresolvedJusticeResidual :
       justiceResidual currentState ≡ residualOpen
-    peaceCriterionRequiresResidualResolved :
+    orderOnlyClosureImpossibleAtCurrentState :
       JusticeClosureCertificate currentState → ⊥
 
 open CurrentChartPeaceJusticeConflict public
@@ -89,8 +83,6 @@ canonicalCurrentChartPeaceJusticeConflict =
     refl
     orderOnlyPeaceDoesNotEstablishJusticeClosure
 
--- The visible-conflict state and suppressed-quiet state retain the same open
--- justice residual even though their order surfaces differ.
 visibleToSuppressedSurfaceChangePreservesResidual :
   justiceResidual Rechart.visibleConflictState
   ≡ justiceResidual Rechart.suppressedQuietState
@@ -99,7 +91,7 @@ visibleToSuppressedSurfaceChangePreservesResidual = refl
 record CoerciveSurfaceClosureWithoutResidualClosure : Set where
   constructor coerciveSurfaceClosureWithoutResidualClosure
   field
-    before after : Rechart.OrderJusticeState
+    before after : Rechart.PoliticalFineState
     orderChanged :
       Rechart.orderObserver before ≡ Rechart.orderObserver after → ⊥
     residualUnchanged : justiceResidual before ≡ justiceResidual after
