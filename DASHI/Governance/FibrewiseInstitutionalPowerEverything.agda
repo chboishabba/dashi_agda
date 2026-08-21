@@ -10,6 +10,8 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
+import DASHI.Core.ObserverRefinementLatticeExact as Observer
+import DASHI.Governance.AuthorityMandateCore as Authority
 import DASHI.Governance.ContestedAmbientAuthorityHyperformalismExact as Ambient
 import DASHI.Governance.EpistemicCaptureProfessionalClosureExact as Capture
 import DASHI.Governance.InstitutionPreservingRechartAntiSublationExact as Rechart
@@ -27,7 +29,7 @@ regressionInterfaceDoesNotExhaustIndependentSource =
 
 regressionCoerciveDominanceDoesNotSelfLegitimate :
   Ambient.LegitimateAmbientAuthority Ambient.forceDominantAmbientClaim →
-  DASHI.Governance.AuthorityMandateCore.Never
+  Authority.Never
 regressionCoerciveDominanceDoesNotSelfLegitimate =
   Ambient.coerciveDominanceDoesNotEstablishLegitimateAmbientAuthority
 
@@ -55,7 +57,7 @@ regressionFormalEqualityCapabilityGap : Notice.FormalEqualityCapabilityGap
 regressionFormalEqualityCapabilityGap = Notice.canonicalFormalEqualityCapabilityGap
 
 regressionAuthoritySurfaceCollision :
-  DASHI.Core.ObserverRefinementLatticeExact.Separating Capture.formalSurfaceObserver → ⊥
+  Observer.Separating Capture.formalSurfaceObserver → ⊥
 regressionAuthoritySurfaceCollision = Capture.authoritySurfaceIsNotSeparating
 
 regressionProductionClosureMigratesToValidation :
