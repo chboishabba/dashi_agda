@@ -1,10 +1,10 @@
 module DASHI.Cognition.PNF.DecisionFibrePotentialHyperformalismExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
-open import Data.Product using (_×_)
+open import Data.Product using (_×_; proj₁)
 
 import DASHI.Cognition.PNF.DecisionPotentialFibreExact as Potential
 import DASHI.Cognition.PNF.UnifiedDecisionDynamicsExact as Dynamics
@@ -15,6 +15,7 @@ import DASHI.Cognition.PNF.AccessibleCandidateReasoningPipelineExact as Pre
 import DASHI.Cognition.PNF.PNFFastAccessMemoryLearningBridgeExact as AccessPNF
 import DASHI.Reasoning.AttractorAlignedBranchSelectionExact as Branch
 import DASHI.Biology.NeuralDecisionProducerBridgeExact as Neural
+import DASHI.Interop.SensibLawResidualLattice as Residual
 
 ------------------------------------------------------------------------
 -- Unified decision-fibre formalism.
@@ -73,7 +74,7 @@ sameFibreCanCarryDifferentPotential = Potential.sameFibreDifferentPotential
 accessFailureIsNotFormalNoTypedMeet :
   ((s : AccessPNF.AccessFormalState) →
     AccessPNF.accessSurface s ≡ false →
-    AccessPNF.formalResidual s ≡ DASHI.Interop.SensibLawResidualLattice.noTypedMeet) → ⊥
+    AccessPNF.formalResidual s ≡ Residual.noTypedMeet) → ⊥
 accessFailureIsNotFormalNoTypedMeet = AccessPNF.accessFailureCannotForceNoTypedMeet
 
 considerationCanChangePreferenceWithoutChangingStorage :
@@ -105,7 +106,7 @@ sameActionNeedNotMeanSameAutonomy :
   Autonomy.emitted Autonomy.autonomousWithdrawal
   ≡ Autonomy.emitted Autonomy.constrainedWithdrawal
 sameActionNeedNotMeanSameAutonomy =
-  Autonomy.sameActionDoesNotDetermineAutonomy .Data.Product.proj₁
+  proj₁ Autonomy.sameActionDoesNotDetermineAutonomy
 
 neuralContextCanChangeCommitment :
   Dynamics.commit (Neural.recurrentStep Neural.supportContext Dynamics.balanced)
