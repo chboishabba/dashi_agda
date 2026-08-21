@@ -16,6 +16,7 @@ module DASHI.Analysis.RiemannMixedKernelEnvelopeExact where
 -- PairAlmostOrthogonality object consumed by the top-down assembly.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 
@@ -42,15 +43,6 @@ congPlusRight refl c = refl
 +-assoc zero b c = refl
 +-assoc (suc a) b c rewrite +-assoc a b c = refl
 
-------------------------------------------------------------------------
--- Aggregate kernel envelope.
---
--- `kernelEnvelope` is intended to be the sum of bounds for
---   (Im Phi(z_rho-z_sigma))^2 +
---   (Im Phi(z_rho-conj z_sigma))^2
--- after the complex-Poisson S/H identification.
-------------------------------------------------------------------------
-
 record MixedKernelEnvelopeLedger
   (g : MixedChannelGlobalLedger)
   (p : PairInsideDiagonalLedger g) : Set where
@@ -67,11 +59,6 @@ record MixedKernelEnvelopeLedger
       kernelEnvelope + nonTargetMargin ≡ otherDiagonalEnergy p
 
 open MixedKernelEnvelopeLedger public
-
-------------------------------------------------------------------------
--- CONNECTION: pairwise kernel decay/summability is enough for the exact
--- almost-orthogonality certificate.
-------------------------------------------------------------------------
 
 kernelEnvelopeImpliesPairAlmostOrthogonality :
   (g : MixedChannelGlobalLedger) →
@@ -103,43 +90,40 @@ kernelEnvelopeImpliesPairAlmostOrthogonality g p e =
 ------------------------------------------------------------------------
 -- Pairwise-to-aggregate producer socket.
 --
--- This spelling makes the new analytic tasks explicit.  The first two fields
--- are source-facing complex-Poisson identifications; the third is the actual
--- summation theorem.  Existing local zero counts and Montgomery--Vaughan may
--- be used to build `aggregateEnvelopeBound`, but are not asserted to do so
--- without a representation lemma.
+-- The analytic producer carries numeric channel/envelope values plus evidence
+-- types asserting the two pairwise envelope inequalities and the final
+-- aggregate summation theorem.  Existing local zero counts and Montgomery--
+-- Vaughan may discharge the aggregate theorem only after a suitable kernel
+-- representation lemma has been proved.
 ------------------------------------------------------------------------
 
 record ComplexPhiKernelEnvelopeProducer : Set₁ where
   field
-    ZeroPair : Set
     PairIndex : Set
 
-    DifferencePhiImaginaryEnergy : PairIndex → Nat
-    SumPhiImaginaryEnergy : PairIndex → Nat
-    Envelope : PairIndex → Nat
+    differencePhiImaginaryEnergy : PairIndex → Nat
+    sumPhiImaginaryEnergy : PairIndex → Nat
+    envelope : PairIndex → Nat
 
-    differenceKernelEnvelope :
-      (i : PairIndex) →
-      DifferencePhiImaginaryEnergy i → Set
+    DifferenceKernelInsideEnvelope : PairIndex → Set
+    SumKernelInsideEnvelope : PairIndex → Set
 
-    sumKernelEnvelope :
-      (i : PairIndex) →
-      SumPhiImaginaryEnergy i → Set
+    differenceKernelInsideEnvelope :
+      (i : PairIndex) → DifferenceKernelInsideEnvelope i
+    sumKernelInsideEnvelope :
+      (i : PairIndex) → SumKernelInsideEnvelope i
 
     AggregateEnvelopeBound : Set
     aggregateEnvelopeBound : AggregateEnvelopeBound
 
 record MixedKernelEnvelopeBoundary : Set where
   field
-    mixedToKernelEnvelopeFactorConstructed : Agda.Builtin.Bool.Bool
-    kernelEnvelopeToAlmostOrthogonalityClosed : Agda.Builtin.Bool.Bool
-    complexSHToPhiIdentificationProvedHere : Agda.Builtin.Bool.Bool
-    pairwiseComplexPhiDecayProvedHere : Agda.Builtin.Bool.Bool
-    zeroPairEnvelopeSummedHere : Agda.Builtin.Bool.Bool
-    montgomeryVaughanApplicabilityProvedHere : Agda.Builtin.Bool.Bool
-
-open import Agda.Builtin.Bool using (Bool; true; false)
+    mixedToKernelEnvelopeFactorConstructed : Bool
+    kernelEnvelopeToAlmostOrthogonalityClosed : Bool
+    complexSHToPhiIdentificationProvedHere : Bool
+    pairwiseComplexPhiDecayProvedHere : Bool
+    zeroPairEnvelopeSummedHere : Bool
+    montgomeryVaughanApplicabilityProvedHere : Bool
 
 mixedKernelEnvelopeBoundary : MixedKernelEnvelopeBoundary
 mixedKernelEnvelopeBoundary = record
