@@ -27,9 +27,11 @@ module DASHI.Biology.ConsciousAccessWaveControlBridgeExact where
 -- coalition criterion is identified with phenomenal consciousness.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (true)
+open import Agda.Builtin.Bool using (true; false)
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Empty using (⊥)
+open import Data.Integer using (+_)
+open import Data.Product using (_×_; _,_)
 
 import DASHI.Algebra.TriadicDepthOneCharacters as Characters
 import DASHI.Physics.Common.FiniteThreeCycleTorusExact as Torus
@@ -137,10 +139,6 @@ canonicalWaveControlEvidence =
     Functional.oppositePhaseSuperpositionCancels
     Functional.fieldChangeCanChangeFutureNeuralState
     Access.canonicalCoalitionCriteriaSatisfied
-  where
-  open import Data.Product using (_,_)
-  open import Agda.Builtin.Bool using (false)
-  open import Data.Integer using (+_)
 
 data EvidenceStage : Set where
   oscillationPresent : EvidenceStage
