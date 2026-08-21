@@ -215,6 +215,7 @@ base369Epistemic9RoundTrip state
   rewrite nineTritsEpistemic9RoundTrip (Aggregate.flattenRound state)
         | Aggregate.rebuildFlattenRoundTrip state = refl
 
+monsterOggToCommonTrit : Lane.MonsterPrimeLane → SSP.SSPTrit
 monsterOggToCommonTrit = Monster.oggPrimeResidueTrit
 
 monsterThreeMapsToCommonNeutral :
