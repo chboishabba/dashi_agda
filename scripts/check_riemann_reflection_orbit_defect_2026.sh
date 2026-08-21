@@ -16,6 +16,7 @@ sources=(
   DASHI/Analysis/RiemannPrimeSideExcessNormalizationExact.agda
   DASHI/Analysis/RiemannHermitianDefectAssemblyExact.agda
   DASHI/Analysis/RiemannHermitianDetectabilityGapExact.agda
+  DASHI/Analysis/RiemannHermitianExcessDetectabilityAssemblyExact.agda
   DASHI/Analysis/RiemannHermitianPowerAmplificationExact.agda
   DASHI/Analysis/RiemannHermitianLocalizationAmplificationExact.agda
   DASHI/Analysis/RiemannArithmeticUnitarityRigidityBoundary.agda
@@ -57,6 +58,7 @@ mixed=DASHI/Analysis/RiemannMixedChannelAlmostOrthogonalityExact.agda
 primeex=DASHI/Analysis/RiemannPrimeSideExcessNormalizationExact.agda
 assembly=DASHI/Analysis/RiemannHermitianDefectAssemblyExact.agda
 detect=DASHI/Analysis/RiemannHermitianDetectabilityGapExact.agda
+detectassembly=DASHI/Analysis/RiemannHermitianExcessDetectabilityAssemblyExact.agda
 power=DASHI/Analysis/RiemannHermitianPowerAmplificationExact.agda
 localamp=DASHI/Analysis/RiemannHermitianLocalizationAmplificationExact.agda
 rigidity=DASHI/Analysis/RiemannArithmeticUnitarityRigidityBoundary.agda
@@ -93,6 +95,9 @@ require_pattern "$assembly" 'finiteZeroForcesTailZero'
 require_pattern "$assembly" 'pointwiseTransverseDefectVanishesFromZeroArithmeticBudget'
 require_pattern "$detect" 'detectableOffLinePairContradictsGlobalErrorBound'
 require_pattern "$detect" 'boundedByNonzeroErrorDoesNotForceVanishing'
+require_pattern "$detectassembly" 'HermitianExcessDetectabilityAssembly'
+require_pattern "$detectassembly" 'hermitianExcessDetectabilityContradiction'
+require_pattern "$detectassembly" 'producerExcludesOffLine'
 require_pattern "$power" 'powerGapDecomposition'
 require_pattern "$power" 'canonicalPowerAmplificationCertificate'
 require_pattern "$power" 'unitGapResidualLevel4'
@@ -109,10 +114,12 @@ require_pattern "$dream" 'hermitianDreamRouteClosesOffLine'
 require_pattern "$dream" 'AlpogeFurmanHermitianDreamProducer'
 require_pattern "$c3" 'completePhaseOrbitCancels'
 require_pattern "$regression" 'regressionNegativeInterference'
+require_pattern "$surface" 'RiemannHermitianExcessDetectabilityAssemblyExact'
 require_pattern "$surface" 'RiemannHermitianDreamRouteExact'
 require_pattern "$aggregate" 'RiemannComplexPoissonFiniteRetentionExact'
 require_pattern "$aggregate" 'RiemannMixedChannelAlmostOrthogonalityExact'
 require_pattern "$aggregate" 'RiemannPrimeSideExcessNormalizationExact'
+require_pattern "$aggregate" 'RiemannHermitianExcessDetectabilityAssemblyExact'
 require_pattern "$aggregate" 'RiemannHermitianLocalizationAmplificationExact'
 require_pattern "$aggregate" 'RiemannArithmeticUnitarityRigidityBoundary'
 require_pattern "$aggregate" 'RiemannHermitianEndgameTrichotomyExact'
@@ -127,6 +134,7 @@ DASHI_NO_TMUX=1 scripts/run_agda29_parallel_check.sh \
   DASHI/Analysis/RiemannPrimeSideExcessNormalizationExact.agda \
   DASHI/Analysis/RiemannHermitianDefectAssemblyExact.agda \
   DASHI/Analysis/RiemannHermitianDetectabilityGapExact.agda \
+  DASHI/Analysis/RiemannHermitianExcessDetectabilityAssemblyExact.agda \
   DASHI/Analysis/RiemannHermitianPowerAmplificationExact.agda \
   DASHI/Analysis/RiemannHermitianLocalizationAmplificationExact.agda \
   DASHI/Analysis/RiemannArithmeticUnitarityRigidityBoundary.agda \
