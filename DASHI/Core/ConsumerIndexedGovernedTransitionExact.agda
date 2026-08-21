@@ -140,7 +140,7 @@ sameProjectionSameObservation :
     {left right : Fine} →
   project left ≡ project right →
   observe fine consumer left ≡ observe fine consumer right
-sameProjectionSameObservation abstraction consumer same
+sameProjectionSameObservation abstraction consumer {left} {right} same
   rewrite observationDescends abstraction consumer left
         | observationDescends abstraction consumer right
         | same = refl
@@ -154,7 +154,7 @@ sameProjectionSameAuthority :
     {left right : Fine} →
   project left ≡ project right →
   authority fine consumer left ≡ authority fine consumer right
-sameProjectionSameAuthority abstraction consumer same
+sameProjectionSameAuthority abstraction consumer {left} {right} same
   rewrite authorityDescends abstraction consumer left
         | authorityDescends abstraction consumer right
         | same = refl
@@ -168,7 +168,7 @@ stepPreservesProjectionEquality :
     {left right : Fine} →
   project left ≡ project right →
   project (step fine action left) ≡ project (step fine action right)
-stepPreservesProjectionEquality abstraction action same
+stepPreservesProjectionEquality abstraction action {left} {right} same
   rewrite actionCommutes abstraction action left
         | actionCommutes abstraction action right =
   cong (coarseStep abstraction action) same
