@@ -182,13 +182,13 @@ yearsleyBusemeyer2016 = decisionSource
   "10.1016/j.jmp.2015.11.005"
   "QQ-equality and quantum-like order-effect model diagnostics"
 
-fuyamaKhrennikovOzawa2025 : DecisionSource
-fuyamaKhrennikovOzawa2025 = decisionSource
-  "M. Fuyama; A. Khrennikov; M. Ozawa"
-  "Quantum-like cognition and decision making in the light of quantum measurement theory"
-  2025
-  "10.48550/arXiv.2503.05859"
-  "separation of observable-noncommutativity from state-update noncommutativity"
+ozawaKhrennikov2021 : DecisionSource
+ozawaKhrennikov2021 = decisionSource
+  "Masanao Ozawa; Andrei Khrennikov"
+  "Modeling combination of question order effect, response replicability effect, and QQ-equality with quantum instruments"
+  2021
+  "10.1016/j.jmp.2020.102491"
+  "general quantum-instrument update semantics beyond the projection-postulate model"
 
 friston2010 : DecisionSource
 friston2010 = decisionSource
