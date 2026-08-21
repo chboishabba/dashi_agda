@@ -5,6 +5,7 @@ on:
     types: [opened, synchronize, reopened, ready_for_review]
     paths:
       - 'DASHI/Core/NonFactorabilityCompositionExact.agda'
+      - 'DASHI/Core/FibreOrderNonfactorabilityExact.agda'
       - 'DASHI/Governance/LegalDecisionDoubleProjectionExact.agda'
       - 'DASHI/Governance/LegalDecisionFibreDynamicsExact.agda'
       - 'DASHI/Governance/DecisionPotentialAuthorityOrthogonalityExact.agda'
