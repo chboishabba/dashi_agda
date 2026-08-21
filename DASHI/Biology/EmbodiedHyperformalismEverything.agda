@@ -4,10 +4,13 @@ import DASHI.Biology.EmbodiedInteroceptionSourceRegistry
 import DASHI.Biology.EmbodiedHyperformalismSourceRegistry
 import DASHI.Biology.EmbodiedOptionConeInteroceptionExact
 import DASHI.Biology.MultiscaleAllostaticBodyHyperformalismExact
+import DASHI.Biology.StressPhysiologyCascadeExact
 import DASHI.Biology.ObserverRelativeReachableSubfabricExact
+import DASHI.Biology.BranchStatusAlgebraExact
 import DASHI.Biology.TwoBoundaryHyperformalismExact
 import DASHI.Biology.TwoBoundaryRepairModesExact
 import DASHI.Biology.EmbodiedBranchingHyperformalismExact
+import DASHI.Biology.EmbodiedHistoryActionFunctionalExact
 import DASHI.Biology.FeltStateSupervoxelExact
 import DASHI.Biology.BodyModulatedEffectiveTopologyExact
 import DASHI.Biology.BodyModulatedDecisionCoordinatesExact

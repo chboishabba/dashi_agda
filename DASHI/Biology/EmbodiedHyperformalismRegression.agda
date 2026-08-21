@@ -3,10 +3,13 @@ module DASHI.Biology.EmbodiedHyperformalismRegression where
 open import DASHI.Core.Prelude
 
 import DASHI.Biology.MultiscaleAllostaticBodyHyperformalismExact as Multi
+import DASHI.Biology.StressPhysiologyCascadeExact as Stress
 import DASHI.Biology.ObserverRelativeReachableSubfabricExact as Reach
+import DASHI.Biology.BranchStatusAlgebraExact as Status
 import DASHI.Biology.TwoBoundaryHyperformalismExact as Two
 import DASHI.Biology.TwoBoundaryRepairModesExact as Repair
 import DASHI.Biology.EmbodiedBranchingHyperformalismExact as Branch
+import DASHI.Biology.EmbodiedHistoryActionFunctionalExact as HistoryCost
 import DASHI.Biology.FeltStateSupervoxelExact as Felt
 import DASHI.Biology.BodyModulatedEffectiveTopologyExact as Topo
 import DASHI.Biology.IntrospectiveHyperformalismIncidenceExact as CV
@@ -24,6 +27,10 @@ record EmbodiedHyperformalismRegression : Set where
     sameHPAStillDifferentWholeBody :
       Multi.regulatedStack ≡ Multi.acuteMobilisedStack → ⊥
 
+    acuteCatecholamineAndCortisolTimescalesDiffer :
+      Stress.mediatorTimescale Stress.norepinephrine
+      ≡ Stress.mediatorTimescale Stress.cortisol → ⊥
+
     predictedDemandCanChangeRegulatoryBody :
       Multi.applyPolicy (Multi.policyFor Multi.highDemand) Multi.regulatedStack
       ≡ Multi.applyPolicy (Multi.policyFor Multi.lowDemand) Multi.regulatedStack → ⊥
@@ -32,6 +39,12 @@ record EmbodiedHyperformalismRegression : Set where
       Reach.live Reach.accessibleLayer Reach.regulatedContext Reach.flexiblePlanning
       ≡ Reach.live Reach.accessibleLayer Reach.mobilisedContext Reach.flexiblePlanning
       → ⊥
+
+    predictedWeightDoesNotDetermineAccessibility :
+      Status.sameWeightAccessible ≡ Status.sameWeightGated → ⊥
+
+    pruningIsNotReweighting :
+      Status.prune Status.baselineBranch ≡ Status.reweight 1 Status.baselineBranch → ⊥
 
     twoBoundarySectionHasDistinctIntermediateRoutes :
       Two.intermediate Two.threatSection ≡ Two.intermediate Two.safeSection → ⊥
@@ -60,6 +73,10 @@ record EmbodiedHyperformalismRegression : Set where
     recoveryRetainsHistory :
       Branch.history (Branch.recover Branch.mobilisedBranchState)
       ≡ Branch.history Branch.mobilisedBranchState
+
+    sameBoundariesDifferentTrajectoryCost :
+      HistoryCost.totalCost (HistoryCost.costFor HistoryCost.threatRoute)
+      ≡ HistoryCost.totalCost (HistoryCost.costFor HistoryCost.safeRoute) → ⊥
 
     alarmSupervoxelContainsDistinctPhysiology :
       Felt.alarmCubieMobilised ≡ Felt.alarmCubieProlonged → ⊥
@@ -122,10 +139,15 @@ canonicalEmbodiedHyperformalismRegression : EmbodiedHyperformalismRegression
 canonicalEmbodiedHyperformalismRegression = record
   { sixCalibratingSources = refl
   ; sameHPAStillDifferentWholeBody = Multi.hpaCoordinateDoesNotRecoverWholeBody
+  ; acuteCatecholamineAndCortisolTimescalesDiffer =
+      Stress.norepinephrineAndCortisolTimescalesDiffer
   ; predictedDemandCanChangeRegulatoryBody =
       Multi.anticipatedDemandCanChangeBodyBeforeDemandObservation
   ; sameWorldDifferentAccessiblePlan =
       Reach.sameWorldButBodyChangesAccessiblePlanning
+  ; predictedWeightDoesNotDetermineAccessibility =
+      Status.accessibilityStillDiffersAtSameWeight
+  ; pruningIsNotReweighting = Status.pruningDiffersFromReweighting
   ; twoBoundarySectionHasDistinctIntermediateRoutes =
       Two.samePastAndFutureAdmitDistinctIntermediateCells
   ; sameFutureDifferentEmbodiedHistoryChangesSection =
@@ -137,6 +159,7 @@ canonicalEmbodiedHyperformalismRegression = record
       Branch.sameWorldGoalHistoryDifferentFeltState
   ; recoveryRetainsHistory =
       Branch.recoveryPreservesHistory Branch.mobilisedBranchState
+  ; sameBoundariesDifferentTrajectoryCost = HistoryCost.sameBoundariesDifferentRouteCost
   ; alarmSupervoxelContainsDistinctPhysiology = Felt.sameAlarmDifferentPhysiology
   ; samePhysiologyDifferentPriorChangesFeeling =
       Felt.samePhysiologyDifferentPriorChangesFeltState
