@@ -98,7 +98,7 @@ asBoxIntegralEnclosure dataSet = record
   ; lowerContribution = lowerContribution dataSet
   ; upperContribution = upperContribution dataSet
   ; contributionOrdered = contributionOrdered dataSet
-  ; denominatorPositiveOnBox = denominatorLowerPositive dataSet
+  ; denominatorPositiveOnBox = 0ℚ < denominatorLower dataSet
   ; numeratorTaylorEnclosureOnBox =
       numeratorTaylorEnclosureOnBox dataSet
   ; integrandEnclosureOnBox = integrandEnclosureOnBox dataSet
