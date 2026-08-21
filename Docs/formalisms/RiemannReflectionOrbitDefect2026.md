@@ -4,6 +4,8 @@
 
 Levent Alpöge and Ralph Furman, **“More than two thirds of the zeta zeros are simple and on the critical line”**, arXiv:2608.13637 (2026). DOI: `10.48550/arXiv.2608.13637`.
 
+Machine-checked companion consulted for the exact zero-side block decomposition: Anthropic, `zeta-23-lean`, especially `Zeta23/ZeroSide.lean` (2026, Apache-2.0).
+
 This tranche is source-calibrated to the 2026 rank/trace + Sylvester-inertia argument, but it does not claim to reprove the paper's analytic Weil-form estimates or the Riemann hypothesis.
 
 ## 1. Centre the functional-equation reflection
@@ -76,26 +78,26 @@ Hence a symmetric quotient can legitimately erase orientation while retaining a 
 
 The source-native off-line contribution is sharper and also exposes an obstruction.
 
-For an off-line pair \(\{\rho,1-\bar\rho\}\), Alpöge--Furman write the evaluation vector as
+For one representative of an off-line pair, write its complex evaluation vector as
 
 \[
-v_\rho=a+ib.
+u=x+iy.
 \]
 
-The paired contribution to the finite real-symmetric compression is
+The verified zero-side source records the paired bilinear contribution as
 
 \[
-m_\rho(v_\rho\bar v_\rho^T+ar v_\rho v_\rho^T)
-  = 2m_\rho(aa^T-bb^T).
+m\bigl(uu^T+\overline u\,\overline u^T\bigr)
+  = 2m\bigl(xx^T-yy^T\bigr).
 \]
 
-This is a pullback of the hyperbolic form
+Thus the pair is a difference of two positive rank-one forms: a pullback of a two-dimensional hyperbolic form of signature \((1,1)\).  In the formal companion this appears as the `rePart - imPart` decomposition, followed by the theorem
 
-\[
-m_\rho\operatorname{diag}(1,-1).
-\]
+```text
+n_+(Q) <= p
+```
 
-So before pullback each off-line reflection pair contributes one positive and one negative source direction.  Sylvester inertia then implies that the pulled-back contribution costs **at most one positive direction per off-line pair**.
+for `p` unordered off-line reflection pairs.  Sylvester inertia therefore implies that the pulled-back contribution costs **at most one positive direction per off-line pair**.
 
 `RiemannWeilOffLineHyperbolicBlockExact.agda` formalizes the finite signature ledger:
 
@@ -169,7 +171,7 @@ A successful strengthening would need more than the bare hyperbolic signature.  
 
 1. inspect whether the norms, Gram determinants, singular values, or Hilbert--Schmidt contributions of the **actual** evaluation vectors retain transverse displacement after the reflection pair is assembled;
 2. connect any such invariant to the explicit-formula kernel strongly enough to sum it over zeros;
-3. determine whether the support-`1` barrier of the present pair-correlation input prevents a weighted improvement just as it limits the counting constant;
+3. determine whether the bandwidth/support restrictions of the present pair-correlation input prevent a weighted improvement just as they constrain the counting route;
 4. only then formulate a weighted even-moment target such as a controlled version of
    \[
    \sum_{|\gamma|\le T}(\beta-1/2)^2.
