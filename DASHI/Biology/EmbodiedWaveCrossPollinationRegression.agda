@@ -5,11 +5,13 @@ open import DASHI.Core.Prelude
 import DASHI.Core.IntersectionalNonFactorability as NF
 import DASHI.Biology.ObserverRelativeReachableSubfabricExact as Reach
 import DASHI.Biology.SymmetryResolvedEmbodiedWaveControlExact as Sym
+import DASHI.Biology.QuaternionOrbitEmbodiedReachNonfactorabilityExact as QReach
 import DASHI.Biology.TranslationInvariantCompletionAccessibilityNonfactorabilityExact as Completion
 import DASHI.Biology.EmbodiedWaveCubieHolonomyExact as Hol
 import DASHI.Biology.TwoBoundarySymmetryResolvedModeSectionExact as TwoMode
 import DASHI.Biology.BodyIndexedHarmonicWreathActionExact as Wreath
 import DASHI.Biology.IntrospectiveSymmetryResolvedHyperformalismExact as CV
+import DASHI.Mathematics.Topology.QuaternionHopfUnitOrbitExact as Hopf
 
 record EmbodiedWaveCrossPollinationRegression : Set where
   field
@@ -22,6 +24,10 @@ record EmbodiedWaveCrossPollinationRegression : Set where
       Sym.geometry mode ≡ Sym.sourceSinkGeometry →
       Sym.modeIncidence Reach.regulatedContext mode
       ≡ Sym.modeIncidence Reach.mobilisedContext (Sym.translateFirstMode mode) → ⊥
+
+    quaternionOrbitInvariantStillCannotDecodeEmbodiedReach :
+      (unit : Hopf.UnitQuaternion) (pair : Hopf.QuaternionPair) →
+      NF.FactorsThrough QReach.hopfSurface QReach.embodiedReach → ⊥
 
     completionReadoutCannotDecodeAccessibility :
       NF.FactorsThrough
@@ -49,6 +55,7 @@ canonicalEmbodiedWaveCrossPollinationRegression : EmbodiedWaveCrossPollinationRe
 canonicalEmbodiedWaveCrossPollinationRegression = record
   { translatedRawModePreservesFineCoordinate = Sym.fineFrequencyPreservedByTranslation
   ; sourceLikeRawSymmetryCanSplitEmbodiedReach = Sym.sameRawSymmetryCanSplitEmbodiedReach
+  ; quaternionOrbitInvariantStillCannotDecodeEmbodiedReach = QReach.hopfInvariantCannotDecodeEmbodiedReach
   ; completionReadoutCannotDecodeAccessibility = Completion.completionSurfaceCannotDecodeAccessibility
   ; embodiedWaveOrderDoesNotCommute = Hol.orderedEndpointsDiffer
   ; sameBoundariesDoNotFixModeGeometry = TwoMode.sameBoundariesDifferentIntermediateGeometry
