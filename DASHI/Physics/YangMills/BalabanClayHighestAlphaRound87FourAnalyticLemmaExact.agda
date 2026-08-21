@@ -1,7 +1,7 @@
 module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound87FourAnalyticLemmaExact where
 
 ------------------------------------------------------------------------
--- ROUND87/88: SHORTEST LITERAL JAFFE--WITTEN CUTSET = FOUR ANALYTIC FAMILIES
+-- ROUND87--89: SHORTEST LITERAL JAFFE--WITTEN CUTSET = FOUR ANALYTIC FAMILIES
 --
 -- PRIMARY SOURCES
 --
@@ -19,17 +19,33 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound87FourAnalyticLemmaEx
 -- Cluster Expansions", Communications in Mathematical Physics 116 (1988),
 -- 1--22. DOI: 10.1007/BF01239022.
 --
--- ROUND88 INTERNAL REDUCTIONS
+-- FROZEN SCOREBOARD RULE (ROUND89)
 --
--- A1: CMP109 beta extraction needs one off-diagonal mixed two-jet coefficient;
---     the third-order remainder vanishes in the two-jet quotient.
--- A2: one outer canonical Wilson component gap gives the full regular hat{k}^2;
---     Machin-period Bishop sine analysis supplies 7569/4096 after same-object
---     atom materialization.
--- B1: weighted Cauchy reduces composite/stress Hilbert moduli to coefficient
---     energy.
--- B2: exact finite geometric summation reduces uniform coefficient energy to
---     ONE physical shell theorem E_d <= E0 r^d with 0 <= r < 1.
+-- The research count is now frozen at four.  It decreases only when one whole
+-- physical completion row is inhabited, or when a theorem proves one whole row
+-- from another.  A narrower conditional record, another compiler, or a source
+-- transcription does not decrement the count.
+--
+-- Round89 also corrects two possible false completions:
+--
+-- * A: a positive cumulative beta slope alone is insufficient.  The SAME
+--   generated history-dependent dynamics must also admit the tuned bare-
+--   coupling / nonvanishing physical observation window used by the
+--   renormalised construction.  Conversely, the one-sided prefix majorant used
+--   to keep g_j small is not by itself a positive asymptotic-freedom slope.
+--
+-- * C: the primary compact-group route uses the Laplace--Beltrami Heat/Doob
+--   curvature inequality on G^E,
+--
+--       1/2 Ric + Hess V_t >= kappa_t g,
+--
+--   with finite integrated debt.  The Bauerschmidt--Bodineau linear/Gaussian
+--   Polchinski condition
+--
+--       dotC Hess(V_t) dotC - 1/2 ddotC >= dotEll dotC
+--
+--   is a distinct alternate route and cannot discharge C without a literal
+--   gauge-chart/globalisation theorem.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
@@ -49,6 +65,7 @@ import DASHI.Physics.YangMills.BalabanClayT4MachinOuterSineToCanonicalGapExact
 import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound77FiveAnalyticCutsetExact
 import DASHI.Physics.YangMills.BalabanOPECoefficientRGRecurrenceUniquenessExact
 import DASHI.Physics.YangMills.BalabanPolchinskiShellIntegralDebtExact
+import DASHI.Physics.YangMills.BalabanClayFrozenFourCompletionContractExact
 
 ------------------------------------------------------------------------
 -- AUTHORITATIVE SHORTEST LITERAL-CLAY RESEARCH CUTSET
@@ -57,11 +74,18 @@ import DASHI.Physics.YangMills.BalabanPolchinskiShellIntegralDebtExact
 round87ShortestClayAnalyticCount : Nat
 round87ShortestClayAnalyticCount = 4
 
--- A. UV ENTRY / ASYMPTOTIC FREEDOM HISTORY
+-- A. POSITIVE AND TUNED LITERAL BETA TRAJECTORY
 --
--- Remaining physical content: literal Wilson/reduced-FP/Haar off-diagonal
--- mixed two-jet; same-object regular four-orbit matching; local and irrelevant
--- remainder budgets leaving a uniform positive margin.
+-- Completion now means the exact same generated dynamics has BOTH:
+--
+--   (i) a bilateral cumulative linear beta tube with strictly positive lower
+--       slope on every admissible finite interval; and
+--  (ii) a tuned bare-coupling construction whose observation-scale coupling
+--       remains in a nonvanishing physical window while all CMP122 scales stay
+--       in the source small-coupling interval.
+--
+-- The constrained-Gaussian beta_Z Hessian and the nonlinear/history beta_Int
+-- estimate are the direct analytic work needed to construct that inhabitant.
 literalCompactSimplePositiveBetaLevel : ProofLevel
 literalCompactSimplePositiveBetaLevel = conditional
 
@@ -79,10 +103,26 @@ physicalMarkedSourceLocalityCompositeStressGeometricShellEnergyLevel : ProofLeve
 physicalMarkedSourceLocalityCompositeStressGeometricShellEnergyLevel = conditional
 
 -- C. SAME-DENSITY COMPACT-LIE HEAT/LANGEVIN MASS GAP
+--
+-- Primary completion criterion: on the literal compact-group Gibbs density,
+-- prove one Heat/Doob curvature history
+--
+--        1/2 Ric + Hess V_t >= kappa_t g
+--
+-- with finite accumulated negative debt, and on that SAME density prove the
+-- physical covariant influence estimate giving cutoff-uniform exponential
+-- connected clustering.  A bare Hessian inequality is only a sufficient
+-- special-case estimate after the Ricci reserve is accounted for; it is not
+-- definitionally the covariance-weighted BBD criterion.
 sameDensityCompactLieHeatLangevinMassGapLevel : ProofLevel
 sameDensityCompactLieHeatLangevinMassGapLevel = conditional
 
 -- D. SAME-FAMILY SHORT-DISTANCE OPE / STRESS / AF IDENTIFICATION
+--
+-- Completion requires the physical RG product tail, the same one-step AF
+-- operator-mixing law and normalization, and the local translation Ward law on
+-- the SAME continuum family.  Integral T00 = H_OS is valuable additional QFT
+-- structure but is not counted as a fifth shortest-path Clay research row.
 sameFamilyShortDistanceOPEStressAFLevel : ProofLevel
 sameFamilyShortDistanceOPEStressAFLevel = conditional
 
@@ -125,6 +165,12 @@ round77GapPlusLocalWardNontrivialityCompilerLevel = machineChecked
 
 heatShellDebtSummationLevel : ProofLevel
 heatShellDebtSummationLevel = machineChecked
+
+bilateralCumulativeBetaAlgebraLevel : ProofLevel
+bilateralCumulativeBetaAlgebraLevel = machineChecked
+
+frozenFourCompletionContractLevel : ProofLevel
+frozenFourCompletionContractLevel = machineChecked
 
 ------------------------------------------------------------------------
 -- POSSIBLE 4 -> 3 TARGET -- NOT YET A DECREMENT
