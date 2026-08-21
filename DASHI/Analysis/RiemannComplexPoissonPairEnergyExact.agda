@@ -144,7 +144,7 @@ criticalPairHasZeroFrobeniusExcess :
 criticalPairHasZeroFrobeniusExcess m c =
   solve 2
     (λ m c →
-      con 8 :* (m :+ con 1) :* (m :+ con 1) :* con 0 :* c
+      con 8 :* (m :+ con 1) :* (m :+ con 1) :* con 0 :* (c :+ con 0)
       := con 0)
     refl
     m c
