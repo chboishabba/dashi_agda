@@ -10,7 +10,7 @@ module DASHI.Analysis.RiemannReflectionOrbitDefectRegression where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; _+_)
 open import Data.Empty using (⊥)
 
 import DASHI.Analysis.RiemannReflectionOrbitDefectExact as Orbit
