@@ -2,8 +2,10 @@ module DASHI.Cognition.PNF.PNFFastAccessMemoryLearningBridgeExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.Nat using (Nat; zero)
+open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
+open import Data.List.Base using (List)
 
 import DASHI.Cognition.PNF.FastAccessControlFieldExact as Access
 import DASHI.Cognition.PNF.MemoryFibre as Memory
@@ -117,6 +119,9 @@ formalResidual accessibleAndPartial = Residual.partial
 exactNotNoTypedMeet : Residual.exact ≡ Residual.noTypedMeet → ⊥
 exactNotNoTypedMeet ()
 
+partialNotExact : Residual.partial ≡ Residual.exact → ⊥
+partialNotExact ()
+
 accessFailureCannotForceNoTypedMeet :
   ((s : AccessFormalState) →
     accessSurface s ≡ false →
@@ -130,9 +135,8 @@ accessSuccessCannotForceFormalExactness :
     accessSurface s ≡ true →
     formalResidual s ≡ Residual.exact) →
   ⊥
-accessSuccessCannotForceFormalExactness rule with
-  rule accessibleAndPartial refl
-... | ()
+accessSuccessCannotForceFormalExactness rule =
+  partialNotExact (rule accessibleAndPartial refl)
 
 ------------------------------------------------------------------------
 -- Existing within-fibre rewiring is the slow-learning analogue: public PNF and
@@ -141,8 +145,8 @@ accessSuccessCannotForceFormalExactness rule with
 
 existingRewirePreservesRememberedPNF :
   (m : Memory.MemoryFibre) →
-  (label : Agda.Builtin.String.String) →
-  (oldGraph newGraph : Data.List.Base.List Learning.WeightedTransition) →
+  (label : String) →
+  (oldGraph newGraph : List Learning.WeightedTransition) →
   Memory.rememberedEvent
     (FibreLearning.after
       (FibreLearning.rewireWithinFibre m label oldGraph newGraph))
