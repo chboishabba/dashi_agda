@@ -54,42 +54,25 @@ module DASHI.Analysis.RiemannComplexPoissonPairEnergyExact where
 --       => positive imaginary-channel energy
 --       => an exact positive Frobenius excess of the paired hyperbolic block.
 --
--- That is the hard algebraic seam needed before attempting the remaining
--- analytic producer in the paper's actual finite compression.
+-- It also proves a second no-factor theorem: the holomorphic/bilinear baseline
+-- seen by the diagonal Weil/Gabor square cannot by itself reconstruct the
+-- Hermitian norm defect.  Hence the new producer must transport genuinely
+-- additional Hermitian information back to the arithmetic side rather than
+-- merely repackage the existing trace identity.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
+open import Data.Empty using (⊥)
 open import Data.Nat.Solver using (module +-*-Solver)
 open +-*-Solver using (solve; _:+_; _:*_; con; _:=_)
 
-------------------------------------------------------------------------
--- Exact pair-energy ledger.
---
--- Write v = a + i b and abbreviate
---
---   A = ||a||^2,
---   B = ||b||^2,
---   C = sum_k v_k^2.
---
--- The complex Poisson continuation at equal arguments predicts C is the same
--- baseline a L^2 as on the critical line.  Since C is real, a.b = 0; hence
--- A - B = C.  We encode that relation subtraction-free as A = C + B.
---
--- The paired real block is 2 m (a a^T - b b^T).  With a.b = 0 its squared
--- Frobenius norm is
---
---   4 m^2 (A^2 + B^2).
---
--- At B = 0 the critical-line baseline is 4 m^2 C^2.  Their difference is
--- exactly
---
---   8 m^2 B A.
---
--- Thus an inverse pair can be trace/signature-blind yet retain a strictly
--- positive second-order residual through B.
-------------------------------------------------------------------------
+sym : {A : Set} {x y : A} → x ≡ y → y ≡ x
+sym refl = refl
+
+trans : {A : Set} {x y z : A} → x ≡ y → y ≡ z → x ≡ z
+trans refl yz = yz
 
 record PairEnergyLedger : Set where
   constructor pairEnergyLedger
@@ -129,10 +112,6 @@ pairBlockFrobeniusExcess q =
   8 * multiplicity q * multiplicity q *
     imaginaryChannelEnergy q * realChannelEnergy q
 
-------------------------------------------------------------------------
--- Polynomial identities: these are the exact local block calculation.
-------------------------------------------------------------------------
-
 fullGridEnergyDecomposition :
   (q : PairEnergyLedger) →
   fullGridHermitianEnergy q
@@ -169,15 +148,6 @@ criticalPairRecoversBaselineFrobenius :
 criticalPairRecoversBaselineFrobenius m c =
   pairBlockFrobeniusDecomposition (pairEnergyLedger m c zero)
 
-------------------------------------------------------------------------
--- Concrete separating checksum.
---
--- These two blocks have the same multiplicity and same complex-square
--- baseline, hence the same bare hyperbolic signature and trace-type baseline,
--- but different imaginary-channel energies.  The Frobenius residual separates
--- them exactly.
-------------------------------------------------------------------------
-
 nearPairEnergy : PairEnergyLedger
 nearPairEnergy = pairEnergyLedger 0 1 1
 
@@ -209,21 +179,36 @@ farPairExcessIsNinetySix :
 farPairExcessIsNinetySix = refl
 
 ------------------------------------------------------------------------
--- Typed analytic seam.
+-- Holomorphic-vs-Hermitian no-factor theorem.
 --
--- The discovered producer needs two analytic promotions before it can feed an
--- RH-strength argument:
---
--- (1) complex Poisson continuation / coercivity:
---       full-grid excess >= const * alpha^2 * secondMoment(phi^2);
---
--- (2) finite-compression transfer:
---       the paper's k=0,...,d-1 compression retains enough of that excess,
---       with cross-pair interference controlled on the prime side.
---
--- Keeping these as named data prevents the exact local algebra above from
--- being mistaken for the still-open global analytic estimate.
+-- `baselineSquareSum` models the complex-square/holomorphic diagonal quantity
+-- fixed by the equal-argument Poisson identity.  `fullGridHermitianEnergy`
+-- models the absolute-square quantity that sees transverse displacement.
+-- The near/far examples have the same baseline but different Hermitian energy,
+-- so no function of the baseline alone can reconstruct the latter.
 ------------------------------------------------------------------------
+
+nearFarHolomorphicBaselinesCollide :
+  baselineSquareSum nearPairEnergy ≡ baselineSquareSum farPairEnergy
+nearFarHolomorphicBaselinesCollide = refl
+
+threeIsNotSeven : 3 ≡ 7 → ⊥
+threeIsNotSeven ()
+
+holomorphicBaselineCannotDetermineHermitianEnergy :
+  (decode : Nat → Nat) →
+  ((q : PairEnergyLedger) →
+    decode (baselineSquareSum q) ≡ fullGridHermitianEnergy q) →
+  ⊥
+holomorphicBaselineCannotDetermineHermitianEnergy decode rec =
+  threeIsNotSeven
+    (trans
+      (sym nearPairFullGridEnergyIsThree)
+      (trans
+        (sym (rec nearPairEnergy))
+        (trans
+          (rec farPairEnergy)
+          farPairFullGridEnergyIsSeven)))
 
 record ComplexPoissonCoercivityAdapter : Set₁ where
   field
@@ -244,14 +229,23 @@ record FiniteCompressionTransferAdapter : Set₁ where
     finiteCompressionDefect : AnalyticPair → Nat
     interferenceBudget : AnalyticPair → Nat
 
+record HermitianArithmeticTransportAdapter : Set₁ where
+  field
+    AnalyticPair : Set
+    hermitianDefect : AnalyticPair → Nat
+    arithmeticObservable : AnalyticPair → Nat
+    retainedResidual : AnalyticPair → Nat
+
 record ComplexPoissonPairEnergyBoundary : Set where
   field
     localPairFrobeniusIdentityConstructed : Bool
     traceBlindButEnergySensitiveWitnessConstructed : Bool
+    holomorphicToHermitianFactorizationRefuted : Bool
     complexPoissonContinuationProvedHere : Bool
     alphaSquaredCoshCoercivityProvedHere : Bool
     finiteGridRetentionProvedHere : Bool
     crossPairInterferenceControlledHere : Bool
+    hermitianArithmeticTransportConstructedHere : Bool
     globalWeightedTransverseMomentBoundProved : Bool
     riemannHypothesisProvedHere : Bool
 
@@ -259,10 +253,12 @@ complexPoissonPairEnergyBoundary : ComplexPoissonPairEnergyBoundary
 complexPoissonPairEnergyBoundary = record
   { localPairFrobeniusIdentityConstructed = true
   ; traceBlindButEnergySensitiveWitnessConstructed = true
+  ; holomorphicToHermitianFactorizationRefuted = true
   ; complexPoissonContinuationProvedHere = false
   ; alphaSquaredCoshCoercivityProvedHere = false
   ; finiteGridRetentionProvedHere = false
   ; crossPairInterferenceControlledHere = false
+  ; hermitianArithmeticTransportConstructedHere = false
   ; globalWeightedTransverseMomentBoundProved = false
   ; riemannHypothesisProvedHere = false
   }
