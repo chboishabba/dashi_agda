@@ -27,6 +27,9 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
       - name: Check wave symmetry round eleven
         id: check
         shell: bash
@@ -39,6 +42,7 @@ jobs:
             export XDG_CACHE_HOME="$RUNNER_TEMP/dashi-cache"
             export DASHI_STATUS_DIR="$RUNNER_TEMP/dashi-status"
             export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
+            export DASHI_NO_TMUX=1
             export AGDA_LOG_PATH="$GITHUB_WORKSPACE/conscious-access-round11-agda.log"
             export AGDA_JOBS=4
             bash scripts/check_conscious_access_round11_wave_symmetry.sh
@@ -55,6 +59,7 @@ jobs:
           path: |
             conscious-access-round11-check.log
             conscious-access-round11-agda.log
+            conscious-access-round11-agda-*.log
           if-no-files-found: warn
       - name: Publish checker status
         if: always()
