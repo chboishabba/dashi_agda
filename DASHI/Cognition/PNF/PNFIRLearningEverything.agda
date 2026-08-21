@@ -48,6 +48,7 @@ import DASHI.Cognition.PNF.ControlledDecisionDynamicalSystemExact
 import DASHI.Cognition.PNF.DecisionFibrePotentialHyperformalismExact
 import DASHI.Cognition.PNF.ControlledDecisionHyperformalismExact
 import DASHI.Cognition.PNF.DecisionFibrePotentialRegression
+import DASHI.Cognition.PNF.ControlledDecisionDynamicsRegression
 import DASHI.Cognition.PNF.PNFWaveAccessTraumaLearningRegression
 import DASHI.Cognition.PNF.DepthWheelMemoryHyperfabric
 import DASHI.Cognition.PNF.DepthWheelMemoryPhaseGeometry
