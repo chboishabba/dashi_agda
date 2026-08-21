@@ -16,11 +16,8 @@ open import Data.Empty using (⊥)
 import DASHI.Analysis.RiemannReflectionOrbitDefectExact as Orbit
 import DASHI.Analysis.RiemannReflectionPairBlockExact as Block
 import DASHI.Analysis.RiemannWeilOffLineHyperbolicBlockExact as Hyperbolic
+import DASHI.Analysis.RiemannComplexPoissonPairEnergyExact as PairEnergy
 import DASHI.Analysis.RiemannReflectionC3OrbitShapeBridgeExact as C3Bridge
-
-------------------------------------------------------------------------
--- Reflection quotient / fixed-point regression.
-------------------------------------------------------------------------
 
 regressionReflectInvolutive :
   (x : Orbit.CentredReflectionState) → Orbit.reflect (Orbit.reflect x) ≡ x
@@ -36,10 +33,6 @@ regressionZeroDefectImpliesCentre :
   Orbit.squaredDefect x ≡ 0 → x ≡ Orbit.criticalCentre
 regressionZeroDefectImpliesCentre = Orbit.zeroDefectImpliesCriticalCentre
 
-------------------------------------------------------------------------
--- Population symmetry regression.
-------------------------------------------------------------------------
-
 regressionLeftRightCountsEqual :
   (p : Orbit.ReflectionPopulation) → Orbit.leftCount p ≡ Orbit.rightCount p
 regressionLeftRightCountsEqual = Orbit.leftRightCountsEqual
@@ -48,10 +41,6 @@ regressionNonFixedSplitsIntoEqualSides :
   (p : Orbit.ReflectionPopulation) →
   Orbit.nonFixedCount p ≡ Orbit.leftCount p + Orbit.rightCount p
 regressionNonFixedSplitsIntoEqualSides = Orbit.nonFixedSplitsIntoEqualSides
-
-------------------------------------------------------------------------
--- Residual-after-inversion regression.
-------------------------------------------------------------------------
 
 regressionTraceBlindButDefectRetained :
   Block.traceLike (Block.reflectionDefectBlock Block.nearPair)
@@ -65,10 +54,6 @@ regressionNearDefectOne = Block.nearPairDefectIsOne
 regressionFarDefectNine :
   Block.determinantMagnitudeLike (Block.reflectionDefectBlock Block.farPair) ≡ 9
 regressionFarDefectNine = Block.farPairDefectIsNine
-
-------------------------------------------------------------------------
--- Source-native Alpöge--Furman obstruction regression.
-------------------------------------------------------------------------
 
 regressionOffLineCountTwoPairBudgets :
   (p : Orbit.ReflectionPopulation) →
@@ -86,9 +71,24 @@ regressionSignatureCannotRecoverDefect :
 regressionSignatureCannotRecoverDefect =
   Hyperbolic.sourceSignatureCannotDetermineSquaredDefect
 
-------------------------------------------------------------------------
--- Monster C3 comparison is intentionally only an orbit-role bridge.
-------------------------------------------------------------------------
+-- New local producer: the same bare hyperbolic role can carry a strictly
+-- larger Hermitian/Frobenius residual once complex-Poisson norm information is
+-- retained.  These checks exercise the exact polynomial block identity.
+regressionNearPairFrobeniusTwenty :
+  PairEnergy.pairBlockFrobeniusSquared PairEnergy.nearPairEnergy ≡ 20
+regressionNearPairFrobeniusTwenty = PairEnergy.nearPairFrobeniusIsTwenty
+
+regressionFarPairFrobeniusHundred :
+  PairEnergy.pairBlockFrobeniusSquared PairEnergy.farPairEnergy ≡ 100
+regressionFarPairFrobeniusHundred = PairEnergy.farPairFrobeniusIsHundred
+
+regressionNearPairExcessSixteen :
+  PairEnergy.pairBlockFrobeniusExcess PairEnergy.nearPairEnergy ≡ 16
+regressionNearPairExcessSixteen = PairEnergy.nearPairExcessIsSixteen
+
+regressionFarPairExcessNinetySix :
+  PairEnergy.pairBlockFrobeniusExcess PairEnergy.farPairEnergy ≡ 96
+regressionFarPairExcessNinetySix = PairEnergy.farPairExcessIsNinetySix
 
 regressionC3InverseRoleInvariant :
   C3Bridge.c3OrbitRole C3Bridge.zetaPhase
