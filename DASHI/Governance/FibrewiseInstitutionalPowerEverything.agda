@@ -11,6 +11,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Core.IntersectionalNonFactorability as NF
+import DASHI.Core.LevelIndexedProofObligationHyperformalismExact as Levelled
 import DASHI.Core.ObserverRefinementLatticeExact as Observer
 import DASHI.Core.RequiredObserverAxisJoinAdequacyExact as Required
 import DASHI.Governance.AuthorityMandateCore as Authority
@@ -23,6 +24,7 @@ import DASHI.Governance.HyperformalTernaryCarrierEquivalenceExact as Ternary
 import DASHI.Governance.InstitutionPreservingRechartAntiSublationExact as Rechart
 import DASHI.Governance.InstitutionalNoticeActuationCulpabilityExact as Notice
 import DASHI.Governance.InstitutionalVerificationFibreRequiredAxisExact as Verification
+import DASHI.Governance.LegalArgumentRequiredAxis369BridgeExact as LegalArgument
 import DASHI.Governance.OppositionInterfaceAntiDomesticationExact as Opposition
 import DASHI.Governance.PeaceJusticeResidualNonFactorabilityExact as PeaceJustice
 import DASHI.Reasoning.DialecticMotifKernel as Dialectic
@@ -91,6 +93,17 @@ regressionFlatCannotRetainBothRequiredRelationalAxes :
     Verification.communicationAxis → ⊥
 regressionFlatCannotRetainBothRequiredRelationalAxes =
   Verification.flatCannotRetainBothRequiredRelationalAxes
+
+regressionSamePositiveEvidenceCanRemainOutOfScope :
+  Levelled.ResolvedPositiveHere
+    DASHI.Governance.ArgumentLevelAuthorityRoutingExact.intakeCurrentAuthorityStalk → ⊥
+regressionSamePositiveEvidenceCanRemainOutOfScope =
+  LegalArgument.intakePositiveEvidenceStillNotLocallyResolved
+
+regressionFlatArgumentEvidenceCannotRecoverLevelAwareDecision :
+  NF.FactorsThrough Levelled.flattenEvidence Levelled.fineDecision → ⊥
+regressionFlatArgumentEvidenceCannotRecoverLevelAwareDecision =
+  LegalArgument.flatArgumentEvidenceCannotRecoverLevelAwareDecision
 
 regressionFormalEqualityCapabilityGap : Notice.FormalEqualityCapabilityGap
 regressionFormalEqualityCapabilityGap = Notice.canonicalFormalEqualityCapabilityGap
@@ -194,6 +207,8 @@ record FibrewiseInstitutionalPowerBoundary : Set where
     knowingLegalQuestionCreatesVerificationClosure : Bool
     flatAdjustmentRecoversMissingRelationalAxis : Bool
     oneStrongAxisCompensatesForMissingRequiredAxis : Bool
+    positiveEvidenceCreatesCurrentLevelApplicability : Bool
+    flatEvidenceRecoversLevelAwareDecision : Bool
     culpabilityPrecedesDecisionSafeClosure : Bool
     formalEqualityCreatesCapabilityEquality : Bool
     internalSkeletonBindsExternalCarrier : Bool
@@ -213,4 +228,4 @@ canonicalFibrewiseInstitutionalPowerBoundary =
   fibrewiseInstitutionalPowerBoundary
     false false false false false false false false false false false false
     false false false false false false false false false false false false
-    false true true
+    false false false true true
