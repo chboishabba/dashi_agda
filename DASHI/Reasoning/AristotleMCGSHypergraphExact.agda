@@ -2,17 +2,22 @@ module DASHI.Reasoning.AristotleMCGSHypergraphExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Agda.Builtin.Sigma using (Σ; _,_; fst; snd)
+open import Agda.Builtin.Sigma using (Σ; _,_; fst)
 open import Agda.Builtin.String using (String)
-open import Agda.Builtin.Unit using (⊤; tt)
 
 ------------------------------------------------------------------------
 -- Source
 --
 -- Aristotle: IMO-level Automated Theorem Proving
 -- The Harmonic Team
+-- Tudor Achim, Alex Best, Kevin Der, Mathïs Fédérico, Sergei Gukov,
+-- Daniel Halpern-Leistner, Kirsten Henningsgard, Yury Kudryashov,
+-- Alexander Meiburg, Martin Michelsen, Riley Patterson, Eric Rodriguez,
+-- Laura Scharff, Vikram Shanker, Vladmir Sicca, Hari Sowrirajan,
+-- Aidan Swope, Matyas Tamas, Vlad Tenev, Jonathan Thomm,
+-- Harold Williams, Lawrence Wu
 -- arXiv:2510.01346v1 [cs.AI], 1 October 2025
--- https://arxiv.org/abs/2510.01346
+-- DOI: 10.48550/arXiv.2510.01346
 --
 -- This module formalises the proof-theoretic/search-structural content of
 -- Sections 2.1--2.2.  It deliberately does NOT formalise empirical claims
@@ -47,9 +52,6 @@ sym≡ refl = refl
 
 trans≡ : ∀ {A : Set} {x y z : A} → x ≡ y → y ≡ z → x ≡ z
 trans≡ refl refl = refl
-
-cong : ∀ {A B : Set} (f : A → B) {x y : A} → x ≡ y → f x ≡ f y
-cong f refl = refl
 
 ------------------------------------------------------------------------
 -- Search hypergraph.
@@ -185,8 +187,8 @@ fibreProofTransport Q x y = transportProof Q (sameFibre⇒equivalent x y)
 -- Action equivalence induced by observable transitions.
 --
 -- The paper treats actions as equivalent when the transitions they induce
--- are equivalent.  Pointwise equality of observed target lists is a clean,
--- stronger exact version of that idea.
+-- are equivalent.  Equality of observed target lists is a clean, stronger
+-- exact version of that transition equivalence.
 ------------------------------------------------------------------------
 
 observeList : ∀ {G : SearchHypergraph}
@@ -217,21 +219,14 @@ record LemmaLedger : Set₁ where
 
 open LemmaLedger public
 
-IsProved : LemmaStatus → Set
-IsProved proved = ⊤
-IsProved unknown = Σ ⊤ λ _ → tt ≡ tt
-IsProved unproved = Σ ⊤ λ _ → tt ≡ tt
-
--- We need an actually discriminating proposition for preservation, so use
--- equality to the distinguished status rather than IsProved above.
 ProvedIn : (L : LemmaLedger) → LemmaId L → Set
 ProvedIn L l = status L l ≡ proved
 
 record FeedbackRefinement (old new : LemmaLedger) : Set₁ where
   field
-    sameLemmaId : LemmaId old ≡ LemmaId new
-
-    -- Cast a lemma identifier across the equality of identifier spaces.
+    -- A revision may replace/reformalise identifiers, so the refinement
+    -- carries the explicit identifier map instead of silently identifying
+    -- two lemma spaces.
     castId : LemmaId old → LemmaId new
 
     -- Core Aristotle iteration invariant: revised lemma collections keep
@@ -242,7 +237,6 @@ record FeedbackRefinement (old new : LemmaLedger) : Set₁ where
 
 open FeedbackRefinement public
 
--- Composition-free local theorem exposing the monotonicity invariant.
 provedKnowledgeMonotone : ∀ {old new : LemmaLedger}
                             (R : FeedbackRefinement old new)
                             (l : LemmaId old)
@@ -270,4 +264,4 @@ open AristotleKernel public
 
 canonicalReading : String
 canonicalReading =
-  "Aristotle (Harmonic Team), arXiv:2510.01346v1: MCGS search hypergraph with OR-state / AND-action semantics and iterative lemma feedback."
+  "Aristotle (Harmonic Team), DOI 10.48550/arXiv.2510.01346: MCGS hypergraph with OR-state / AND-action semantics, observer fibres, and monotone formal lemma feedback."
