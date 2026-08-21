@@ -36,6 +36,8 @@ jobs:
             set -euo pipefail
             export AGDA_FLAKE="github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin"
             export DASHI_REPO_ROOT="$GITHUB_WORKSPACE"
+            export XDG_CACHE_HOME="$RUNNER_TEMP/dashi-cache"
+            export DASHI_STATUS_DIR="$RUNNER_TEMP/dashi-status"
             export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
             export AGDA_LOG_PATH="$GITHUB_WORKSPACE/conscious-access-round11-agda.log"
             export AGDA_JOBS=4
