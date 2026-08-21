@@ -40,6 +40,7 @@ import DASHI.Governance.SecondOrderJusticeGrammarExact
 import DASHI.Governance.ClosedAuthorityInverseJusticeExact
 import DASHI.Governance.SituatedInverseJusticeRegression
 import DASHI.Governance.LegalDecisionDoubleProjectionExact
+import DASHI.Governance.DecisionPotentialAuthorityOrthogonalityExact
 import DASHI.Governance.RevolutionarySourceAtlas
 import DASHI.Governance.RevolutionaryPracticeBraid
 import DASHI.Governance.TraumaMemorySublationBoundary
