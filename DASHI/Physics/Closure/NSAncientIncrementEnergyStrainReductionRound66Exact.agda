@@ -37,11 +37,11 @@ module DASHI.Physics.Closure.NSAncientIncrementEnergyStrainReductionRound66Exact
 -- exactly over rationals and gives the scalar energy-ledger reduction.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _-_; _*_; -_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
+open import Relation.Binary.PropositionalEquality using (subst; trans)
 
 record Vector3 : Set where
   constructor v3
@@ -109,76 +109,21 @@ incrementStretchingIsHalfSymmetricContractionDivisionFree G w =
     ∷ g31 G ∷ g32 G ∷ g33 G
     ∷ x w ∷ y w ∷ z w ∷ [])
 
--- A purely antisymmetric velocity gradient contributes exactly zero.
-record AntisymmetricGradientWitness (G : Gradient3) : Set where
-  constructor antisymmetric-gradient
-  field
-    diagonal11Zero : g11 G ≡ 0ℚ
-    diagonal22Zero : g22 G ≡ 0ℚ
-    diagonal33Zero : g33 G ≡ 0ℚ
-    pair12 : g21 G ≡ - g12 G
-    pair13 : g31 G ≡ - g13 G
-    pair23 : g32 G ≡ - g23 G
-
-open AntisymmetricGradientWitness public
+-- Literal skew gradient.  Its quadratic contraction vanishes identically,
+-- which is the exact algebraic reason local rigid rotation does not contribute
+-- to the increment-energy production.
+antisymmetricGradient : ℚ → ℚ → ℚ → Gradient3
+antisymmetricGradient a b c = grad3
+  0ℚ a b
+  (- a) 0ℚ c
+  (- b) (- c) 0ℚ
 
 antisymmetricGradientInvisible :
-  (G : Gradient3) →
-  AntisymmetricGradientWitness G →
+  (a b c : ℚ) →
   (w : Vector3) →
-  incrementStretching G w ≡ 0ℚ
-antisymmetricGradientInvisible G anti w =
-  subst
-    (λ a33 →
-      bilinearContraction
-        (grad3 0ℚ (g12 G) (g13 G)
-          (- g12 G) 0ℚ (g23 G)
-          (- g13 G) (- g23 G) a33)
-        w w ≡ 0ℚ)
-    (diagonal33Zero anti)
-    (subst
-      (λ a32 →
-        bilinearContraction
-          (grad3 0ℚ (g12 G) (g13 G)
-            (- g12 G) 0ℚ (g23 G)
-            (- g13 G) a32 (g33 G))
-          w w ≡ 0ℚ)
-      (pair23 anti)
-      (subst
-        (λ a31 →
-          bilinearContraction
-            (grad3 0ℚ (g12 G) (g13 G)
-              (- g12 G) 0ℚ (g23 G)
-              a31 (g32 G) (g33 G))
-            w w ≡ 0ℚ)
-        (pair13 anti)
-        (subst
-          (λ a22 →
-            bilinearContraction
-              (grad3 0ℚ (g12 G) (g13 G)
-                (- g12 G) a22 (g23 G)
-                (g31 G) (g32 G) (g33 G))
-              w w ≡ 0ℚ)
-          (diagonal22Zero anti)
-          (subst
-            (λ a21 →
-              bilinearContraction
-                (grad3 0ℚ (g12 G) (g13 G)
-                  a21 (g22 G) (g23 G)
-                  (g31 G) (g32 G) (g33 G))
-                w w ≡ 0ℚ)
-            (pair12 anti)
-            (subst
-              (λ a11 →
-                bilinearContraction
-                  (grad3 a11 (g12 G) (g13 G)
-                    (g21 G) (g22 G) (g23 G)
-                    (g31 G) (g32 G) (g33 G))
-                  w w ≡ 0ℚ)
-              (diagonal11Zero anti)
-              (solve
-                ( g12 G ∷ g13 G ∷ g23 G
-                ∷ x w ∷ y w ∷ z w ∷ [])))))))
+  incrementStretching (antisymmetricGradient a b c) w ≡ 0ℚ
+antisymmetricGradientInvisible a b c w =
+  solve (a ∷ b ∷ c ∷ x w ∷ y w ∷ z w ∷ [])
 
 record IncrementEnergyLedger : Set where
   constructor increment-ledger
