@@ -158,9 +158,11 @@ unrelatedAccumulationCannotChangeClose :
   Extension before after →
   closeFromGlobal system fibre before
     ≡ closeFromGlobal system fibre after
-unrelatedAccumulationCannotChangeClose certificate fibre before after extension =
+unrelatedAccumulationCannotChangeClose
+  {system = system}
+  certificate fibre before after extension =
   sameSupportSameClose
-    _ fibre before after
+    system fibre before after
     (accumulationPreservesSupport certificate fibre before after extension)
 
 unrelatedAccumulationCannotIncreaseWork :
@@ -174,9 +176,11 @@ unrelatedAccumulationCannotIncreaseWork :
   Extension before after →
   workFromGlobal system fibre before
     ≡ workFromGlobal system fibre after
-unrelatedAccumulationCannotIncreaseWork certificate fibre before after extension =
+unrelatedAccumulationCannotIncreaseWork
+  {system = system}
+  certificate fibre before after extension =
   sameSupportSameWork
-    _ fibre before after
+    system fibre before after
     (accumulationPreservesSupport certificate fibre before after extension)
 
 ------------------------------------------------------------------------
