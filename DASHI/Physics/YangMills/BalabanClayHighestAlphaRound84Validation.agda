@@ -39,17 +39,25 @@ import DASHI.Physics.YangMills.BalabanClayT4BishopRegularHatMomentumGapExact
 import DASHI.Physics.YangMills.BalabanClayT4MachinOuterSineToCanonicalGapExact
 import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound87FourAnalyticLemmaExact
 
--- Round89 adversarial completion conditions: bilateral beta+tuning for A,
--- exact endpoint-determinant lower+upper prefix transport, cumulative-beta
--- sensitivity -> shooting contraction, compact-group Heat/Doob (not silently
--- Euclidean BBD) for C, exact SU(2) Gaussian lower transport, source-compatible
--- O(g) interaction absorption, and the cutoff-independent cubic coupling
--- telescope which is the natural budget for inverse-square shooting
--- sensitivity on a marginal asymptotically-free trajectory.
+-- Row A adversarial completion conditions and theorem-bearing quantitative
+-- reductions.  The composed gate uses the same beta law as inverse-square
+-- drift, derives the cutoff-independent cubic history budget, and feeds the
+-- shooting contraction.  The normalized-interaction theorem turns literal
+-- Cauchy constants z0,z1,A,B,gamma into the explicit O(g) interaction constant
+-- C=(z1 B + A^2 gamma)/z0^2.
 import DASHI.Physics.YangMills.BalabanIntervalDeterminantAlgebra
 import DASHI.Physics.YangMills.BalabanEndpointDeterminantPrefixBridge
 import DASHI.Physics.YangMills.BalabanBetaPrefixSensitivityToTubeContractionExact
 import DASHI.Physics.YangMills.BalabanYM4SU2GaussianBetaLowerExact
 import DASHI.Physics.YangMills.BalabanYM4LinearInteractionBetaMarginExact
 import DASHI.Physics.YangMills.BalabanYM4CubicCouplingDriftTelescopeExact
+import DASHI.Physics.YangMills.BalabanYM4ShootingSensitivityFromCubicDriftExact
+import DASHI.Physics.YangMills.BalabanYM4RowAGateCompositionExact
+import DASHI.Physics.YangMills.BalabanYM4InteractionLogHessianCauchyGateExact
+
+-- Row C guardrail: the covariance-weighted BBD interpolation inequality and
+-- the group Heat/Doob Hessian-debt criterion are not restatements of each
+-- other even pointwise, so neither may silently discharge the frozen row.
+import DASHI.Physics.YangMills.YMRowCCurvatureCriterionIndependenceExact
+
 import DASHI.Physics.YangMills.BalabanClayFrozenFourCompletionContractExact
