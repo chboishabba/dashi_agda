@@ -9,13 +9,14 @@ module DASHI.Physics.Closure.NSAncientConstantExcludingInvariantCompilerExact wh
 -- DOI: 10.1007/s11511-009-0039-6.
 --
 -- SOURCE LOGIC
--- Proposition 6.1 produces a bounded ancient mild solution which is nonzero.
--- The authors immediately note that constants remain possible and that a
--- scale-invariant estimate excluding nonzero constants, combined with a
+-- Proposition 6.1 produces a bounded ancient mild solution with a chosen
+-- point normalized nonzero (their construction has |v(0,0)| = 1).
+-- Constants remain possible.  KNSŠ explicitly note that any inherited
+-- scale-invariant property excluding nonzero constants, combined with a
 -- Liouville theorem, rules out the singularity.
 --
--- This file is the exact constructive contradiction behind that observation.
--- It assumes neither the invariant nor the Liouville theorem.
+-- This file is only that constructive contradiction.  It assumes neither the
+-- physical invariant nor the Liouville theorem.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
@@ -24,11 +25,9 @@ open import Relation.Nullary.Negation.Core using (¬_)
 SpatiallyConstant : {X V : Set} → (X → V) → Set
 SpatiallyConstant u = (x y : X) → u x ≡ u y
 
-NonzeroAt : {X V : Set} → (V → Set) → (X → V) → Set
-NonzeroAt IsNonzero u = (x : X) → IsNonzero (u x)
-
 noBlowupFromConstantExcludingInvariant :
   {Blowup X V : Set} →
+  (basepoint : X) →
   (BoundedAncientMild : (X → V) → Set) →
   (Invariant : (X → V) → Set) →
   (IsNonzero : V → Set) →
@@ -37,20 +36,25 @@ noBlowupFromConstantExcludingInvariant :
   ((u : X → V) → BoundedAncientMild u → SpatiallyConstant u) →
   ((b : Blowup) → Invariant (extract b)) →
   ((u : X → V) → Invariant u → SpatiallyConstant u →
-     ¬ ((x : X) → IsNonzero (u x))) →
-  ((b : Blowup) → (x : X) → IsNonzero (extract b x)) →
+     IsNonzero (u basepoint) → Set) →
+  ((u : X → V) → Invariant u → SpatiallyConstant u →
+     IsNonzero (u basepoint) →
+     ¬ IsNonzero (u basepoint)) →
+  ((b : Blowup) → IsNonzero (extract b basepoint)) →
   ¬ Blowup
 noBlowupFromConstantExcludingInvariant
-  BoundedAncientMild Invariant IsNonzero extract
-  extractedBounded liouville inheritedInvariant invariantExcludesNonzeroConstants
+  basepoint BoundedAncientMild Invariant IsNonzero extract
+  extractedBounded liouville inheritedInvariant
+  invariantConflictShape invariantExcludesNonzeroConstants
   extractedNonzero blowup =
   invariantExcludesNonzeroConstants
     (extract blowup)
     (inheritedInvariant blowup)
     (liouville (extract blowup) (extractedBounded blowup))
     (extractedNonzero blowup)
+    (extractedNonzero blowup)
 
--- In a source-faithful application, the final argument need only certify the
--- KNSŠ normalization at one point rather than every point.  A separate owner
--- can weaken NonzeroAt to a chosen basepoint once the physical carrier is
--- available.  This generic file keeps no hidden distinguished point.
+-- The extra invariantConflictShape argument is propositionally irrelevant and
+-- should not survive the next physical specialization.  It is retained here
+-- only to make the intended contradiction arity explicit without introducing
+-- an opaque "constant excluding" record.
