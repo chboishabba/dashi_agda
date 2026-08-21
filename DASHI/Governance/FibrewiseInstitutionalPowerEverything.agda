@@ -12,6 +12,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Core.IntersectionalNonFactorability as NF
 import DASHI.Core.ObserverRefinementLatticeExact as Observer
+import DASHI.Core.RequiredObserverAxisJoinAdequacyExact as Required
 import DASHI.Governance.AuthorityMandateCore as Authority
 import DASHI.Governance.ContestedAmbientAuthorityHyperformalismExact as Ambient
 import DASHI.Governance.ContestedJurisdictionPermissionExact as Jurisdiction
@@ -21,6 +22,7 @@ import DASHI.Governance.HyperformalNonFactorabilityTransportExact as NFTransport
 import DASHI.Governance.HyperformalTernaryCarrierEquivalenceExact as Ternary
 import DASHI.Governance.InstitutionPreservingRechartAntiSublationExact as Rechart
 import DASHI.Governance.InstitutionalNoticeActuationCulpabilityExact as Notice
+import DASHI.Governance.InstitutionalVerificationFibreRequiredAxisExact as Verification
 import DASHI.Governance.OppositionInterfaceAntiDomesticationExact as Opposition
 import DASHI.Governance.PeaceJusticeResidualNonFactorabilityExact as PeaceJustice
 import DASHI.Reasoning.DialecticMotifKernel as Dialectic
@@ -68,6 +70,27 @@ regressionLayPersistenceNotPromotedToCulpability :
   Notice.CostsCulpable Notice.layObserver → ⊥
 regressionLayPersistenceNotPromotedToCulpability =
   Notice.layPersistenceCannotBePromotedToThisCulpabilityBoundary
+
+regressionQuestionCanBeKnownWhileVerificationRemainsUnsafe :
+  Verification.VerificationDecisionSafe Verification.questionObserver → ⊥
+regressionQuestionCanBeKnownWhileVerificationRemainsUnsafe =
+  Verification.questionObserverNotDecisionSafe
+
+regressionVerificationClosureGap : Verification.VerificationClosureGap
+regressionVerificationClosureGap = Verification.canonicalVerificationClosureGap
+
+regressionFlatAdjustmentCannotRecoverRelationalAccess :
+  NF.FactorsThrough Verification.flatSubjectObserver Verification.relationAccessAxis → ⊥
+regressionFlatAdjustmentCannotRecoverRelationalAccess =
+  Verification.flatAdjustmentCannotRecoverRelationAccess
+
+regressionFlatCannotRetainBothRequiredRelationalAxes :
+  Required.RetainsBothRequiredAxes
+    Verification.flatSubjectObserver
+    Verification.relationAccessAxis
+    Verification.communicationAxis → ⊥
+regressionFlatCannotRetainBothRequiredRelationalAxes =
+  Verification.flatCannotRetainBothRequiredRelationalAxes
 
 regressionFormalEqualityCapabilityGap : Notice.FormalEqualityCapabilityGap
 regressionFormalEqualityCapabilityGap = Notice.canonicalFormalEqualityCapabilityGap
@@ -168,6 +191,9 @@ record FibrewiseInstitutionalPowerBoundary : Set where
     cheapActuationCreatesFineObserver : Bool
     repeatedNoticeCreatesDecisionSafety : Bool
     diagnosticInteractionCreatesClosure : Bool
+    knowingLegalQuestionCreatesVerificationClosure : Bool
+    flatAdjustmentRecoversMissingRelationalAxis : Bool
+    oneStrongAxisCompensatesForMissingRequiredAxis : Bool
     culpabilityPrecedesDecisionSafeClosure : Bool
     formalEqualityCreatesCapabilityEquality : Bool
     internalSkeletonBindsExternalCarrier : Bool
@@ -186,4 +212,5 @@ canonicalFibrewiseInstitutionalPowerBoundary : FibrewiseInstitutionalPowerBounda
 canonicalFibrewiseInstitutionalPowerBoundary =
   fibrewiseInstitutionalPowerBoundary
     false false false false false false false false false false false false
-    false false false false false false false false false false true true
+    false false false false false false false false false false false false
+    false true true
