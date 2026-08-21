@@ -15,6 +15,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Core.ObserverRefinementLatticeExact as Observer
+import DASHI.Governance.AuthorityMandateCore as Authority
 import DASHI.Governance.ContestedAmbientAuthorityHyperformalismExact as Ambient
 
 data SharedAct : Set where
@@ -66,20 +67,11 @@ canonicalPermissionNonMeet =
     refl
     (λ ())
 
--- The coercively dominant side still cannot bootstrap legitimate ambient
--- authority merely from the fact that it can deny/clear the act.
 permissionDenialDoesNotSelfLegitimateAmbientClaim :
   Ambient.LegitimateAmbientAuthority Ambient.forceDominantAmbientClaim →
-  DASHI.Governance.AuthorityMandateCore.Never
+  Authority.Never
 permissionDenialDoesNotSelfLegitimateAmbientClaim =
   Ambient.coerciveDominanceDoesNotEstablishLegitimateAmbientAuthority
-
-------------------------------------------------------------------------
--- Administrative projection can collapse jurisdictionally distinct fine
--- states.  This models the generic structure "unauthorised encampment" or
--- equivalent administrative classification without encoding any live case as
--- a theorem.
-------------------------------------------------------------------------
 
 data JurisdictionalFineState : Set where
   administrativeViolationState independentlyAuthorisedPresenceState :
@@ -122,10 +114,6 @@ jurisdictionalRefinesAdministrative =
     independentlyAuthorisedPresenceState
     refl
     (λ ())
-
-------------------------------------------------------------------------
--- Clearance/order changes a physical surface, not the source authority state.
-------------------------------------------------------------------------
 
 data PhysicalSurface : Set where
   occupiedSurface clearedSurface : PhysicalSurface
