@@ -38,10 +38,13 @@ module DASHI.Physics.Closure.NSAncientLocalizedPoincareFluxScalingNoGoExact wher
 -- scale-improving property of the blow-up class.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Rational.Base using
   (ℚ; 0ℚ; 1ℚ; _*_; _≤_; _<_; Positive; positive)
 import Data.Rational.Properties as ℚP
+open import Data.Rational.Tactic.RingSolver using (solve)
+open import Relation.Binary.PropositionalEquality using (subst₂)
 open import Relation.Nullary.Negation.Core using (¬_)
 
 square : ℚ → ℚ
@@ -65,20 +68,17 @@ unitViscosityFluxIsReynoldsTimesDamping :
   ≡ localReynoldsFactorAtUnitViscosity amplitude radius
     * localizedPoincareDampingScale 1ℚ amplitude radius
 unitViscosityFluxIsReynoldsTimesDamping amplitude radius =
-  ℚP.*-assoc amplitude (square amplitude) (square radius)
-  -- Both sides normalize to amplitude^3 radius^2; the remaining
-  -- associativity/identity normalization is discharged below by the ring
-  -- equality exposed through rational normalization.
+  solve (amplitude ∷ radius ∷ [])
 
 unitAmplitudeDamping :
   (radius : ℚ) →
   localizedPoincareDampingScale 1ℚ 1ℚ radius ≡ radius
-unitAmplitudeDamping radius = refl
+unitAmplitudeDamping radius = solve (radius ∷ [])
 
 unitAmplitudeFlux :
   (radius : ℚ) →
   absoluteTransportFluxScale 1ℚ radius ≡ square radius
-unitAmplitudeFlux radius = refl
+unitAmplitudeFlux radius = solve (radius ∷ [])
 
 fixedContractionCoefficientFailsAtLargeRadius :
   (theta radius : ℚ) →
@@ -95,7 +95,11 @@ fixedContractionCoefficientFailsAtLargeRadius theta radius radiusPositive thetaB
     scaledStrict = ℚP.*-monoʳ-<-pos radius thetaBelowRadius
 
     proposedNormalized : radius * radius ≤ theta * radius
-    proposedNormalized = proposed
+    proposedNormalized =
+      subst₂ _≤_
+        (unitAmplitudeFlux radius)
+        (solve (theta ∷ radius ∷ []))
+        proposed
   in
   ℚP.<-irrefl (theta * radius)
     (ℚP.<-≤-trans scaledStrict proposedNormalized)
