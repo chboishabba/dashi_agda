@@ -16,7 +16,6 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
-import DASHI.Algebra.Trit as Trit
 import DASHI.Foundations.BalancedTernaryStageSymmetryExact as BT
 import DASHI.Foundations.Base369InteractionAppraisalCubeExact as Cube
 import DASHI.Foundations.Base369NineCoordinateAggregateBridgeExact as Aggregate
@@ -24,11 +23,8 @@ import DASHI.Foundations.SSPTritCarrier as SSP
 import DASHI.Governance.EpistemicTritBalancedTernarySeparationExact as Separation
 import DASHI.Moonshine.MonsterOggNonarySSPTritBridgeExact as Monster
 import DASHI.Ontology.EpistemicTrit as Epistemic
+import DASHI.Physics.Closure.MoonshinePrimeLaneReceiptSurface as Lane
 import DASHI.Reasoning.DialecticMotifKernel as Dialectic
-
-------------------------------------------------------------------------
--- 1. Explicit BalancedDigit <-> SSPTrit carrier chart.
-------------------------------------------------------------------------
 
 balancedDigitToSSP : BT.BalancedDigit → SSP.SSPTrit
 balancedDigitToSSP BT.neg = SSP.sspNegOne
@@ -54,13 +50,6 @@ sspBalancedRoundTrip SSP.sspNegOne = refl
 sspBalancedRoundTrip SSP.sspZero = refl
 sspBalancedRoundTrip SSP.sspPosOne = refl
 
-------------------------------------------------------------------------
--- 2. Declared-policy EpistemicTrit <-> SSPTrit equivalence.
---
--- This does NOT assert unresolved definitionally means balanced zero.  It
--- explicitly chooses the already-existing neutralUnresolvedPolicy.
-------------------------------------------------------------------------
-
 epistemicToSSP : Epistemic.EpistemicTrit → SSP.SSPTrit
 epistemicToSSP state =
   balancedDigitToSSP
@@ -84,10 +73,6 @@ sspEpistemicRoundTrip :
 sspEpistemicRoundTrip SSP.sspNegOne = refl
 sspEpistemicRoundTrip SSP.sspZero = refl
 sspEpistemicRoundTrip SSP.sspPosOne = refl
-
-------------------------------------------------------------------------
--- 3. Nine epistemic coordinates <-> canonical NineTrits.
-------------------------------------------------------------------------
 
 record Epistemic9 : Set where
   constructor epistemic9
@@ -140,10 +125,6 @@ nineTritsEpistemic9RoundTrip
         | sspEpistemicRoundTrip h
         | sspEpistemicRoundTrip i = refl
 
-------------------------------------------------------------------------
--- 4. Dialectic State9 <-> canonical NineTrits.
-------------------------------------------------------------------------
-
 dialecticToNineTrits : Dialectic.State9 → Aggregate.NineTrits
 dialecticToNineTrits
   (Dialectic.state9 a b c d e f g h i) =
@@ -190,10 +171,6 @@ nineDialecticRoundTrip
         | SSP.fromTrit-toTrit h
         | SSP.fromTrit-toTrit i = refl
 
-------------------------------------------------------------------------
--- 5. Base369 round <-> dialectic and epistemic charts by composition.
-------------------------------------------------------------------------
-
 base369ToDialectic : Cube.OneRoundInteractionState → Dialectic.State9
 base369ToDialectic state =
   nineTritsToDialectic (Aggregate.flattenRound state)
@@ -238,21 +215,11 @@ base369Epistemic9RoundTrip state
   rewrite nineTritsEpistemic9RoundTrip (Aggregate.flattenRound state)
         | Aggregate.rebuildFlattenRoundTrip state = refl
 
-------------------------------------------------------------------------
--- 6. Monster/Ogg is an arithmetic projection into the common carrier, not an
---    equivalence and not an authority-promotion theorem.
-------------------------------------------------------------------------
-
 monsterOggToCommonTrit = Monster.oggPrimeResidueTrit
 
 monsterThreeMapsToCommonNeutral :
-  monsterOggToCommonTrit DASHI.Physics.Closure.MoonshinePrimeLaneReceiptSurface.p3
-  ≡ SSP.sspZero
+  monsterOggToCommonTrit Lane.p3 ≡ SSP.sspZero
 monsterThreeMapsToCommonNeutral = Monster.threeResidueTritNeutral
-
-------------------------------------------------------------------------
--- 7. The theorem-facing boundary.
-------------------------------------------------------------------------
 
 record HyperformalTernaryCarrierBoundary : Set where
   constructor hyperformalTernaryCarrierBoundary
