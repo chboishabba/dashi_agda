@@ -2,6 +2,7 @@ module DASHI.Biology.TraumaWaveAccessAttractorBridgeExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (zero)
 open import Data.Empty using (⊥)
 
 import DASHI.Biology.PredictiveMetastabilityTraumaBridge as Predictive
@@ -98,8 +99,7 @@ extinctionStillPreservesThreatEvent =
 
 extinctionChangesControlNotContent :
   (m : Memory.MemoryFibre) →
-  Memory.actionWeight (Memory.extinguishActionDominance m)
-  ≡ Agda.Builtin.Nat.zero
+  Memory.actionWeight (Memory.extinguishActionDominance m) ≡ zero
 extinctionChangesControlNotContent =
   AccessMemory.extinctionZerosActionWeight
 
