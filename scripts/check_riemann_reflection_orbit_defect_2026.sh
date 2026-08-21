@@ -8,10 +8,12 @@ sources=(
   DASHI/Analysis/RiemannReflectionOrbitDefectExact.agda
   DASHI/Analysis/RiemannReflectionPairBlockExact.agda
   DASHI/Analysis/RiemannWeilOffLineHyperbolicBlockExact.agda
+  DASHI/Analysis/RiemannComplexPoissonChannelSplitExact.agda
   DASHI/Analysis/RiemannComplexPoissonPairEnergyExact.agda
   DASHI/Analysis/RiemannWeilPairKernelFrobeniusExact.agda
   DASHI/Analysis/RiemannHermitianDefectAssemblyExact.agda
   DASHI/Analysis/RiemannHermitianDetectabilityGapExact.agda
+  DASHI/Analysis/RiemannHermitianPowerAmplificationExact.agda
   DASHI/Analysis/RiemannReflectionC3OrbitShapeBridgeExact.agda
   DASHI/Analysis/RiemannReflectionOrbitDefectRegression.agda
   DASHI/Analysis/ZetaTheoremSurface.agda
@@ -47,10 +49,12 @@ require_pattern() {
 orbit=DASHI/Analysis/RiemannReflectionOrbitDefectExact.agda
 pair=DASHI/Analysis/RiemannReflectionPairBlockExact.agda
 hyper=DASHI/Analysis/RiemannWeilOffLineHyperbolicBlockExact.agda
+channels=DASHI/Analysis/RiemannComplexPoissonChannelSplitExact.agda
 energy=DASHI/Analysis/RiemannComplexPoissonPairEnergyExact.agda
 kernel=DASHI/Analysis/RiemannWeilPairKernelFrobeniusExact.agda
 assembly=DASHI/Analysis/RiemannHermitianDefectAssemblyExact.agda
 detect=DASHI/Analysis/RiemannHermitianDetectabilityGapExact.agda
+power=DASHI/Analysis/RiemannHermitianPowerAmplificationExact.agda
 c3=DASHI/Analysis/RiemannReflectionC3OrbitShapeBridgeExact.agda
 regression=DASHI/Analysis/RiemannReflectionOrbitDefectRegression.agda
 surface=DASHI/Analysis/ZetaTheoremSurface.agda
@@ -69,6 +73,10 @@ require_pattern "$hyper" 'sourcePositiveIndexBudget'
 require_pattern "$hyper" 'offLineCountIsTwoSourcePositiveBudgets'
 require_pattern "$hyper" 'sourceSignatureCannotDetermineSquaredDefect'
 require_pattern "$hyper" 'DistanceSensitiveOffLineAdapter'
+require_pattern "$channels" 'bilinearDiagonalTransverseVanishes'
+require_pattern "$channels" 'hermitianDiagonalTransverseDoubles'
+require_pattern "$channels" 'hermitianDiagonalReflectionFlipsChannel'
+require_pattern "$channels" 'bilinearAndHermitianRecoverTwiceFirstTransverse'
 require_pattern "$energy" 'fullGridEnergyDecomposition'
 require_pattern "$energy" 'pairBlockFrobeniusDecomposition'
 require_pattern "$energy" 'holomorphicBaselineCannotDetermineHermitianEnergy'
@@ -88,6 +96,9 @@ require_pattern "$assembly" 'pointwiseTransverseDefectVanishesFromZeroArithmetic
 require_pattern "$detect" 'detectableOffLinePairContradictsGlobalErrorBound'
 require_pattern "$detect" 'boundedByNonzeroErrorDoesNotForceVanishing'
 require_pattern "$detect" 'RHDetectabilityProducer'
+require_pattern "$power" 'powerGapDecomposition'
+require_pattern "$power" 'canonicalPowerAmplificationCertificate'
+require_pattern "$power" 'unitGapResidualLevel4'
 require_pattern "$c3" 'completePhaseOrbitCancels'
 require_pattern "$c3" 'c3OrbitRoleInversionInvariant'
 require_pattern "$c3" 'zetaSameRoleCanRetainDifferentDefects'
@@ -97,13 +108,17 @@ require_pattern "$regression" 'regressionPairKernelIdentity'
 require_pattern "$regression" 'regressionNegativeInterference'
 require_pattern "$surface" 'RiemannComplexPoissonPairEnergyExact'
 require_pattern "$surface" 'RiemannWeilPairKernelFrobeniusExact'
+require_pattern "$aggregate" 'RiemannComplexPoissonChannelSplitExact'
 require_pattern "$aggregate" 'RiemannHermitianDefectAssemblyExact'
 require_pattern "$aggregate" 'RiemannHermitianDetectabilityGapExact'
+require_pattern "$aggregate" 'RiemannHermitianPowerAmplificationExact'
 
 DASHI_NO_TMUX=1 scripts/run_agda29_parallel_check.sh \
+  DASHI/Analysis/RiemannComplexPoissonChannelSplitExact.agda \
   DASHI/Analysis/RiemannComplexPoissonPairEnergyExact.agda \
   DASHI/Analysis/RiemannWeilPairKernelFrobeniusExact.agda \
   DASHI/Analysis/RiemannHermitianDefectAssemblyExact.agda \
   DASHI/Analysis/RiemannHermitianDetectabilityGapExact.agda \
+  DASHI/Analysis/RiemannHermitianPowerAmplificationExact.agda \
   DASHI/Analysis/RiemannReflectionOrbitDefectRegression.agda \
   DASHI/EverythingRiemannReflectionOrbitDefect2026.agda
