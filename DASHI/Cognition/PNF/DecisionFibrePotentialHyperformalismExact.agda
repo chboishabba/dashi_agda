@@ -8,6 +8,8 @@ open import Data.Product using (_×_; proj₁)
 
 import DASHI.Cognition.PNF.DecisionPotentialFibreExact as Potential
 import DASHI.Cognition.PNF.UnifiedDecisionDynamicsExact as Dynamics
+import DASHI.Cognition.PNF.BoundedEvidenceCommitmentExact as Bounded
+import DASHI.Cognition.PNF.GoNoGoActuationGateExact as GoNoGo
 import DASHI.Cognition.PNF.NoncommutativeDecisionUpdateQQExact as Order
 import DASHI.Cognition.PNF.ActiveInferenceFibreBoundaryExact as FreeEnergy
 import DASHI.Cognition.PNF.DecisionAutonomyExact as Autonomy
@@ -33,15 +35,16 @@ import DASHI.Core.IntersectionalNonFactorability as NF
 --   -> live consideration fibre / candidate-generation bias
 --   -> formal fallacy/audit layer
 --   -> potential + interaction + evidence-accumulation dynamics
---   -> commitment
---   -> actuation gate
+--   -> bounded commitment
+--   -> Go/NoGo-style actuation gate
 --   -> outcome
 --   -> learning / future accessibility and transition weight.
 --
 -- No coordinate is definitionally promoted to another.  Specific theories
--- (DFT, attentional DDM, recurrent attractor networks, quantum-like order
--- effects, active inference) enter as producers/comparison structures over
--- this spine rather than competing foundational ontologies.
+-- (DFT, attentional DDM, recurrent attractor networks, bounded accumulation,
+-- Go/NoGo gating, quantum-like order effects, active inference) enter as
+-- producers/comparison structures over this spine rather than competing
+-- foundational ontologies.
 ------------------------------------------------------------------------
 
 record DecisionFibrePotentialHyperformalism : Set₁ where
@@ -49,6 +52,8 @@ record DecisionFibrePotentialHyperformalism : Set₁ where
   field
     potentialBoundary : Potential.DecisionPotentialBoundary
     operatorSeparation : Dynamics.DecisionOperatorSeparation
+    boundedEvidenceBoundary : Bounded.BoundedEvidenceBoundary
+    goNoGoBoundary : GoNoGo.GoNoGoBoundary
     quantumLikeBoundary : Order.QuantumLikeDecisionBoundary
     activeInferenceBoundary : FreeEnergy.ActiveInferenceComparisonBoundary
     autonomyBoundary : Autonomy.AutonomyBoundary
@@ -68,6 +73,8 @@ canonicalDecisionFibrePotentialHyperformalism =
   decisionFibrePotentialHyperformalism
     Potential.canonicalDecisionPotentialBoundary
     Dynamics.canonicalDecisionOperatorSeparation
+    Bounded.canonicalBoundedEvidenceBoundary
+    GoNoGo.canonicalGoNoGoBoundary
     Order.canonicalQuantumLikeDecisionBoundary
     FreeEnergy.canonicalActiveInferenceComparisonBoundary
     Autonomy.canonicalAutonomyBoundary
@@ -78,10 +85,6 @@ canonicalDecisionFibrePotentialHyperformalism =
     Bias.canonicalAccessBiasFallacyBoundary
     Branch.canonicalAttractorAlignedPolicy
     Pre.canonicalPreDecisionPipelineBoundary
-
-------------------------------------------------------------------------
--- Cross-lane theorem surface.  These are the load-bearing non-collapse laws.
-------------------------------------------------------------------------
 
 sameFibreCanCarryDifferentPotential :
   Potential.project Potential.threatState ≡ Potential.project Potential.safetyState
@@ -130,10 +133,26 @@ sameStoredValueCanHaveDifferentAttentionEvidence = Attention.attentionAndValueAr
 preferenceCanReverseAlongDynamicTrajectory : DFT.earlyState ≡ DFT.laterState → ⊥
 preferenceCanReverseAlongDynamicTrajectory = DFT.preferenceCanReverseOverTrajectory
 
+boundedAccumulationSeparatesDeliberationAndCommitment :
+  Bounded.threshold (Bounded.contextGate Bounded.attendEvidence Bounded.e0)
+  ≡ Bounded.stillDeliberating
+  × Bounded.threshold
+      (Bounded.contextGate Bounded.attendEvidence
+        (Bounded.contextGate Bounded.attendEvidence Bounded.e0))
+    ≡ Bounded.committed
+boundedAccumulationSeparatesDeliberationAndCommitment =
+  Bounded.oneRelevantPulseNotYetCommitted , Bounded.twoRelevantPulsesCommit
+
 commitmentCanFailToActuate :
   Dynamics.commit Dynamics.counterLead ≡ Dynamics.counterCommitted
   × Dynamics.actuate Dynamics.blocked Dynamics.counterCommitted ≡ Dynamics.noAction
 commitmentCanFailToActuate = Dynamics.commitmentCanExistWithoutActuation
+
+goNoGoCanChangeActuationWithCommitmentFixed :
+  Dynamics.actuate (GoNoGo.releaseGate GoNoGo.high GoNoGo.low) Dynamics.supportCommitted
+  ≡ Dynamics.actuate (GoNoGo.releaseGate GoNoGo.high GoNoGo.high) Dynamics.supportCommitted
+  → ⊥
+goNoGoCanChangeActuationWithCommitmentFixed = GoNoGo.sameCommitmentDifferentGoNoGoOutcome
 
 observedActionCannotRecoverFineDecisionState :
   NF.FactorsThrough ActionNF.observedAction ActionNF.fineDecisionState → ⊥
