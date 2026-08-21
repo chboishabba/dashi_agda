@@ -3,6 +3,7 @@ module DASHI.Cognition.PNF.ControlledDecisionStateExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
+open import Data.Product using (_×_; _,_)
 
 import DASHI.Biology.EmbodiedOptionConeInteroceptionExact as Embodied
 import DASHI.Cognition.PNF.BoundedEvidenceCommitmentExact as Evidence
@@ -13,24 +14,14 @@ import DASHI.Cognition.PNF.DecisionLandscapeFluxExact as Landscape
 import DASHI.Cognition.PNF.DecisionStateBundleExact as Bundle
 import DASHI.Cognition.PNF.MemoryFibre as Memory
 import DASHI.Cognition.PNF.NeuromodulatedCommitmentThresholdExact as Threshold
+import DASHI.Cognition.PNF.UnifiedDecisionDynamicsExact as Dynamics
 import DASHI.Core.IntersectionalNonFactorability as NF
 
 ------------------------------------------------------------------------
 -- CONTROLLED DECISION STATE
 --
--- This is the expanded state requested by the converging decision, wave,
--- allostasis and interoception formalism.  Existing DecisionStateBundle remains
--- the stable fine decision carrier; this record adds the coordinates that are
--- independently stateful rather than increasing its constructor arity.
---
---   decision state
---   + accumulated evidence
---   + dynamic commitment threshold
---   + confidence readout
---   + multidimensional body state
---   + interoceptive afference and prior-indexed felt state
---   + nonequilibrium flux
---   + response-conflict signal.
+-- Stable decision bundle + independently stateful evidence, threshold,
+-- confidence, body/interoception, flux and conflict coordinates.
 ------------------------------------------------------------------------
 
 record ControlledDecisionState : Set where
@@ -60,7 +51,7 @@ commitmentReadout state =
     (thresholdPolicy state)
     (accumulatedEvidence state)
 
-observedAction : ControlledDecisionState → _
+observedAction : ControlledDecisionState → Dynamics.ExecutedAction
 observedAction state = Bundle.observedAction (decisionState state)
 
 canonicalControlled :
@@ -95,10 +86,6 @@ sameEvidenceDifferentThresholdCanChangeCommitment :
   ≡ Threshold.thresholdUnder Threshold.elevatedThreshold Evidence.e1 → ⊥
 sameEvidenceDifferentThresholdCanChangeCommitment =
   Threshold.sameEvidenceDifferentThresholdChangesCommitment
-
-------------------------------------------------------------------------
--- Physiology/state dependence does not itself determine autonomy.
-------------------------------------------------------------------------
 
 record EmbodiedAutonomyState : Set where
   constructor embodiedAutonomyState
