@@ -12,6 +12,7 @@ import DASHI.Biology.TraumaWaveAccessAttractorBridgeExact as Trauma
 import DASHI.Biology.Levin.MillerTravelingWaveAccessProducerExact as Miller
 import DASHI.Biology.Levin.CrossFrequencyEffectiveTopologyExact as CrossFrequency
 import DASHI.Biology.Levin.WaveInterferenceRecruitmentExact as Interference
+import DASHI.Biology.Levin.MixedSelectivityFieldControl as MixedCore
 import DASHI.Biology.Levin.MixedSelectivityWaveAccessExact as Mixed
 import DASHI.Cognition.PNF.FastAccessControlFieldExact as Access
 import DASHI.Cognition.PNF.PNFFastAccessMemoryLearningBridgeExact as PNFMemory
@@ -124,10 +125,10 @@ record PNFWaveAccessTraumaLearningRegression : Set₁ where
       Orthogonal.accessExpanded ≡ Orthogonal.actuationExpanded → ⊥
 
     sameStimulusContextChangesMixedParticipation :
-      Mixed.Mixed.respond Mixed.waveMixedSelectivitySystem
+      MixedCore.respond Mixed.waveMixedSelectivitySystem
         Miller.leftSite Miller.firstTick false
       ≡
-      Mixed.Mixed.respond Mixed.waveMixedSelectivitySystem
+      MixedCore.respond Mixed.waveMixedSelectivitySystem
         Miller.leftSite Miller.secondTick false → ⊥
 
     waveSupportedCoalition : Coalition.WaveSupportedAccessCandidate
