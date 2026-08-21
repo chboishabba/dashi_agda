@@ -119,10 +119,14 @@ record DistributedBraid : Set₁ where
       (holder : Holder) → GlobalSection → LocalState holder
     rotateHolder : Holder → Holder
     rotateGlobal : GlobalSection → GlobalSection
+    rotateLocal :
+      (holder : Holder) →
+      LocalState (rotateHolder holder) → LocalState holder
     observationEquivariant :
       (holder : Holder) →
       (section : GlobalSection) →
-      localObservation (rotateHolder holder) (rotateGlobal section)
+      rotateLocal holder
+        (localObservation (rotateHolder holder) (rotateGlobal section))
       ≡ localObservation holder section
     noSingleOwner :
       (holder : Holder) →
@@ -145,6 +149,7 @@ canonicalDistributedBraid =
     observe
     rotateAgent
     rotateSection
+    (λ holder state → state)
     rotationObservationEquivariant
     singleOwnerNonInjective
 
