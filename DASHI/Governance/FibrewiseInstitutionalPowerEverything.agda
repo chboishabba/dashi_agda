@@ -13,16 +13,14 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 import DASHI.Core.ObserverRefinementLatticeExact as Observer
 import DASHI.Governance.AuthorityMandateCore as Authority
 import DASHI.Governance.ContestedAmbientAuthorityHyperformalismExact as Ambient
+import DASHI.Governance.ContestedJurisdictionPermissionExact as Jurisdiction
 import DASHI.Governance.EpistemicCaptureProfessionalClosureExact as Capture
 import DASHI.Governance.EpistemicErrorAllocationChillingBridgeExact as ErrorAllocation
+import DASHI.Governance.HyperformalTernaryCarrierEquivalenceExact as Ternary
 import DASHI.Governance.InstitutionPreservingRechartAntiSublationExact as Rechart
 import DASHI.Governance.InstitutionalNoticeActuationCulpabilityExact as Notice
 import DASHI.Governance.OppositionInterfaceAntiDomesticationExact as Opposition
-
-------------------------------------------------------------------------
--- Direct regression aliases: if an upstream owner changes incompatibly this
--- aggregate should stop typechecking rather than silently weakening the model.
-------------------------------------------------------------------------
+import DASHI.Governance.PeaceJusticeResidualNonFactorabilityExact as PeaceJustice
 
 regressionInterfaceDoesNotExhaustIndependentSource :
   Ambient.LeftExhaustive Ambient.canonicalPartialInterface → ⊥
@@ -34,6 +32,19 @@ regressionCoerciveDominanceDoesNotSelfLegitimate :
   Authority.Never
 regressionCoerciveDominanceDoesNotSelfLegitimate =
   Ambient.coerciveDominanceDoesNotEstablishLegitimateAmbientAuthority
+
+regressionPermissionSystemsCanDisagree : Jurisdiction.PermissionNonMeet
+regressionPermissionSystemsCanDisagree = Jurisdiction.canonicalPermissionNonMeet
+
+regressionAdministrativeSurfaceCannotSeparateJurisdiction :
+  Observer.Separating Jurisdiction.administrativeObserver → ⊥
+regressionAdministrativeSurfaceCannotSeparateJurisdiction =
+  Jurisdiction.administrativeSurfaceCannotSeparateJurisdiction
+
+regressionPhysicalClearanceNeedNotCloseAuthorityResidual :
+  Jurisdiction.ClearanceWithoutJurisdictionClosure
+regressionPhysicalClearanceNeedNotCloseAuthorityResidual =
+  Jurisdiction.canonicalClearanceWithoutJurisdictionClosure
 
 regressionLayFibreNotDecisionSafe : Notice.DecisionSafe Notice.layObserver → ⊥
 regressionLayFibreNotDecisionSafe = Notice.layObserverIsNotDecisionSafe
@@ -92,6 +103,16 @@ regressionQuietSurfaceDoesNotDetermineJustice :
 regressionQuietSurfaceDoesNotDetermineJustice =
   Rechart.quietSurfaceDoesNotDetermineJustice
 
+regressionOrderOnlyPeaceDoesNotCloseJusticeResidual :
+  PeaceJustice.JusticeClosureCertificate Rechart.suppressedQuietState → ⊥
+regressionOrderOnlyPeaceDoesNotCloseJusticeResidual =
+  PeaceJustice.orderOnlyPeaceDoesNotEstablishJusticeClosure
+
+regressionSurfaceClosureCanPreserveJusticeResidual :
+  PeaceJustice.CoerciveSurfaceClosureWithoutResidualClosure
+regressionSurfaceClosureCanPreserveJusticeResidual =
+  PeaceJustice.canonicalCoerciveSurfaceClosureWithoutResidualClosure
+
 regressionAdmittedOppositionDoesNotExhaustPoliticalCarrier :
   Ambient.LeftExhaustive Opposition.oppositionAdministrativeInterface → ⊥
 regressionAdmittedOppositionDoesNotExhaustPoliticalCarrier =
@@ -113,9 +134,16 @@ regressionSanctionLearningIsNotFineRuleLearning :
 regressionSanctionLearningIsNotFineRuleLearning =
   ErrorAllocation.avoidanceIsNotFineRuleLearning
 
-------------------------------------------------------------------------
--- Compact all-up boundary.
-------------------------------------------------------------------------
+-- Exact hyperformal-equivalence regressions.
+regressionDialecticBase369RoundTrip :
+  (state : DASHI.Reasoning.DialecticMotifKernel.State9) →
+  Ternary.base369ToDialectic (Ternary.dialecticToBase369 state) ≡ state
+regressionDialecticBase369RoundTrip = Ternary.dialecticBase369RoundTrip
+
+regressionEpistemicBase369RoundTrip :
+  (state : Ternary.Epistemic9) →
+  Ternary.base369ToEpistemic9 (Ternary.epistemic9ToBase369 state) ≡ state
+regressionEpistemicBase369RoundTrip = Ternary.epistemic9Base369RoundTrip
 
 record FibrewiseInstitutionalPowerBoundary : Set where
   constructor fibrewiseInstitutionalPowerBoundary
@@ -124,6 +152,9 @@ record FibrewiseInstitutionalPowerBoundary : Set where
     noTypedMeetAnnihilatesExternalState : Bool
     recognitionExhaustsSource : Bool
     coercionCreatesAuthority : Bool
+    permissionDisagreementSelectsUniversalHost : Bool
+    administrativeProjectionExhaustsJurisdiction : Bool
+    physicalClearanceClosesAuthorityResidual : Bool
     polishedSurfaceCreatesValidity : Bool
     cheapActuationCreatesFineObserver : Bool
     repeatedNoticeCreatesDecisionSafety : Bool
@@ -136,10 +167,13 @@ record FibrewiseInstitutionalPowerBoundary : Set where
     visiblePluralityImpliesOpenAdmissionAlgebra : Bool
     comprehensionFailureDeterminesFaultAllocation : Bool
     sanctionAutomaticallyTeachesFineRule : Bool
+    ternaryCarrierEquivalenceCreatesSemanticIdentity : Bool
+    monsterProjectionCreatesCarrierEquivalence : Bool
+    declaredPolicyCanGiveExactEpistemicTernaryRechart : Bool
     residualAndExteriorMustRemainReopenableOrPresent : Bool
 
 canonicalFibrewiseInstitutionalPowerBoundary : FibrewiseInstitutionalPowerBoundary
 canonicalFibrewiseInstitutionalPowerBoundary =
   fibrewiseInstitutionalPowerBoundary
     false false false false false false false false false false false false
-    false false false false true
+    false false false false false false false false false true true
