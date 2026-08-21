@@ -30,19 +30,23 @@ module DASHI.Physics.Closure.NSAncientVelocityScaleEnergyKinematicNoGoExact wher
 -- Writing q = n^(-1), the exact scale products are
 --
 --   M^2 rho^3               = 1,
---   (r^2 G)                 = q,       -- normalized derivative
---   r^4 G^2                 = q^2,     -- spacetime Q_grad scale in 3D
---   (G r) / M               = q.       -- relative oscillation at r
+--   r^2 G                    = q,       -- normalized derivative
+--   r^4 G^2                  = q^2,     -- spacetime Q_grad scale in 3D
+--   (G r) / M                = q,       -- relative oscillation at r
+--   M rho                    = n.       -- plateau radius after KNSŠ zoom
 --
--- Thus one may keep the energy scale fixed while both the normalized
--- derivative and the velocity-scale critical gradient defect become
--- arbitrarily small as q -> 0.  No Navier-Stokes trajectory is asserted here;
--- the theorem is the sharper negative statement that ENERGY + SCALING alone
--- cannot prove SingularScaleVelocityScaleMatching.  Any positive R1 theorem
--- must consume genuinely dynamical/singularity information.
+-- Consequently the normalized diffusion time of the plateau relative to the
+-- unit KNSŠ time scale is (M rho)^2 = n^2.  Energy therefore permits a flat
+-- region which becomes larger, not smaller, on every fixed velocity-scale
+-- observation window.
+--
+-- No Navier-Stokes trajectory is asserted here.  The theorem is the sharper
+-- negative statement that ENERGY + SCALING alone cannot prove
+-- SingularScaleVelocityScaleMatching.  Any positive R1 theorem must consume
+-- genuinely dynamical/singularity information which excludes this profile.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Product using (_×_; _,_)
 open import Data.Rational.Base using (ℚ; 1ℚ; _*_)
@@ -90,6 +94,12 @@ relativeVelocityScaleOscillation : ℚ → ℚ → ℚ
 relativeVelocityScaleOscillation n q =
   gradientScale n * velocityProbeRadius q * velocityProbeRadius q
 
+normalizedPlateauRadius : ℚ → ℚ → ℚ
+normalizedPlateauRadius n q = amplitude n * width q
+
+normalizedPlateauDiffusionTime : ℚ → ℚ → ℚ
+normalizedPlateauDiffusionTime n q = pow2 (normalizedPlateauRadius n q)
+
 energyRegroup :
   (n q : ℚ) →
   energyScale n q ≡ pow6 (q * n)
@@ -110,11 +120,19 @@ relativeOscillationRegroup :
   relativeVelocityScaleOscillation n q ≡ q * pow5 (q * n)
 relativeOscillationRegroup n q = solve (n ∷ q ∷ [])
 
+normalizedPlateauRadiusRegroup :
+  (n q : ℚ) →
+  normalizedPlateauRadius n q ≡ n * pow2 (q * n)
+normalizedPlateauRadiusRegroup n q = solve (n ∷ q ∷ [])
+
 pow5One : pow5 1ℚ ≡ 1ℚ
 pow5One = solve []
 
 pow6One : pow6 1ℚ ≡ 1ℚ
 pow6One = solve []
+
+pow2One : pow2 1ℚ ≡ 1ℚ
+pow2One = solve []
 
 fixedEnergyDespiteGrowingAmplitude :
   (n q : ℚ) →
@@ -158,6 +176,24 @@ relativeOscillationIsInverseScale n q reciprocal =
       (cong (λ z → q * pow5 z) reciprocal)
       (trans (cong (q *_) pow5One) (ℚP.*-identityʳ q)))
 
+plateauExpandsInVelocityCoordinates :
+  (n q : ℚ) →
+  q * n ≡ 1ℚ →
+  normalizedPlateauRadius n q ≡ n
+plateauExpandsInVelocityCoordinates n q reciprocal =
+  trans
+    (normalizedPlateauRadiusRegroup n q)
+    (trans
+      (cong (λ z → n * pow2 z) reciprocal)
+      (trans (cong (n *_) pow2One) (ℚP.*-identityʳ n)))
+
+plateauDiffusionTimeIsSquareN :
+  (n q : ℚ) →
+  q * n ≡ 1ℚ →
+  normalizedPlateauDiffusionTime n q ≡ pow2 n
+plateauDiffusionTimeIsSquareN n q reciprocal =
+  cong pow2 (plateauExpandsInVelocityCoordinates n q reciprocal)
+
 energyAloneLeavesVelocityScaleDefectUnfunded :
   (n q : ℚ) →
   q * n ≡ 1ℚ →
@@ -165,8 +201,12 @@ energyAloneLeavesVelocityScaleDefectUnfunded :
   × (normalizedDerivativeScale n q ≡ q)
   × (criticalGradientCylinderScale n q ≡ pow2 q)
   × (relativeVelocityScaleOscillation n q ≡ q)
+  × (normalizedPlateauRadius n q ≡ n)
+  × (normalizedPlateauDiffusionTime n q ≡ pow2 n)
 energyAloneLeavesVelocityScaleDefectUnfunded n q reciprocal =
   fixedEnergyDespiteGrowingAmplitude n q reciprocal ,
   normalizedDerivativeIsInverseScale n q reciprocal ,
   criticalGradientCylinderIsInverseSquare n q reciprocal ,
-  relativeOscillationIsInverseScale n q reciprocal
+  relativeOscillationIsInverseScale n q reciprocal ,
+  plateauExpandsInVelocityCoordinates n q reciprocal ,
+  plateauDiffusionTimeIsSquareN n q reciprocal
