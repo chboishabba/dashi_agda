@@ -10,21 +10,19 @@ import DASHI.Biology.ObserverRelativeReachableSubfabricExact as Reach
 -- SYMMETRY-RESOLVED EMBODIED WAVE CONTROL
 --
 -- Cross-pollination seam between the finite T^2_3 / 3^9 harmonic carrier and
--- the embodied reachable-subfabric layer.  Spatial mode, fine harmonic
+-- the embodied reachable-subfabric layer. Spatial mode, fine harmonic
 -- address, geometric class, and body context remain separate coordinates.
 --
--- Source context for finite harmonic analysis:
 -- Audrey Terras, "Fourier Analysis on Finite Groups and Applications".
 -- DOI: 10.1017/CBO9780511626265.
 --
--- Empirical geometry calibration:
 -- Anup Das, Erfan Zabeh, Bard Ermentrout, Joshua Jacobs,
 -- "Planar, spiral, and concentric traveling waves distinguish behavioral
 -- states in human memory", Nature Communications 17 (2026), 5143.
 -- DOI: 10.1038/s41467-026-71386-z.
 --
--- The finite theorem below does not identify T^2_3 with cortex, nor does it
--- claim that body state breaks a literal physical symmetry of a measured field.
+-- The finite theorem below does not identify T^2_3 with cortex, nor claim
+-- that body state breaks a literal physical symmetry of a measured field.
 -- It proves that raw wave symmetry need not be a symmetry of an embodied
 -- consumer's effective reachability map.
 ------------------------------------------------------------------------
@@ -69,9 +67,6 @@ translatedModeIsRawSymmetryRelated : (mode : SymmetryResolvedMode) →
 translatedModeIsRawSymmetryRelated mode =
   firstTranslationOrbitWitness refl refl refl
 
--- A finite consumer gate.  The geometric coordinate and body coordinate are
--- independently visible to the consumer; the same structural carrier and fine
--- harmonic content therefore need not induce the same effective incidence.
 effectiveIncidence : Reach.BodyContext → GeometryClass → Bool
 effectiveIncidence Reach.regulatedContext planarGeometry = true
 effectiveIncidence Reach.regulatedContext sourceSinkGeometry = true
@@ -85,19 +80,25 @@ effectiveIncidence Reach.mobilisedContext spiralGeometry = false
 modeIncidence : Reach.BodyContext → SymmetryResolvedMode → Bool
 modeIncidence body mode = effectiveIncidence body (geometry mode)
 
-sameRawSymmetryCanSplitEmbodiedReach : (mode : SymmetryResolvedMode) →
-  geometry mode ≡ sourceSinkGeometry →
-  modeIncidence Reach.regulatedContext mode
-  ≡ modeIncidence Reach.mobilisedContext (translateFirstMode mode) → ⊥
-sameRawSymmetryCanSplitEmbodiedReach
-  (symmetryResolvedMode coarse fine sourceSinkGeometry) refl ()
+sourceModeAt : Torus.Torus3x3 → Harmonic.FineFrequency → SymmetryResolvedMode
+sourceModeAt coarse fine = symmetryResolvedMode coarse fine sourceSinkGeometry
 
-sameRawSymmetryCanSplitRotationalReach : (mode : SymmetryResolvedMode) →
-  geometry mode ≡ rotationalGeometry →
-  modeIncidence Reach.regulatedContext mode
-  ≡ modeIncidence Reach.mobilisedContext (translateFirstMode mode) → ⊥
-sameRawSymmetryCanSplitRotationalReach
-  (symmetryResolvedMode coarse fine rotationalGeometry) refl ()
+rotationalModeAt : Torus.Torus3x3 → Harmonic.FineFrequency → SymmetryResolvedMode
+rotationalModeAt coarse fine = symmetryResolvedMode coarse fine rotationalGeometry
+
+sameRawSymmetryCanSplitEmbodiedReach :
+  (coarse : Torus.Torus3x3) (fine : Harmonic.FineFrequency) →
+  modeIncidence Reach.regulatedContext (sourceModeAt coarse fine)
+  ≡ modeIncidence Reach.mobilisedContext
+      (translateFirstMode (sourceModeAt coarse fine)) → ⊥
+sameRawSymmetryCanSplitEmbodiedReach coarse fine ()
+
+sameRawSymmetryCanSplitRotationalReach :
+  (coarse : Torus.Torus3x3) (fine : Harmonic.FineFrequency) →
+  modeIncidence Reach.regulatedContext (rotationalModeAt coarse fine)
+  ≡ modeIncidence Reach.mobilisedContext
+      (translateFirstMode (rotationalModeAt coarse fine)) → ⊥
+sameRawSymmetryCanSplitRotationalReach coarse fine ()
 
 record SymmetryResolvedEmbodimentBoundary : Set where
   constructor symmetryResolvedEmbodimentBoundary
