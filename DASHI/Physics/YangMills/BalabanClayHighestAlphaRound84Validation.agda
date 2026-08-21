@@ -40,8 +40,10 @@ import DASHI.Physics.YangMills.BalabanClayT4MachinOuterSineToCanonicalGapExact
 import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound87FourAnalyticLemmaExact
 
 -- Round89 adversarial completion conditions: bilateral beta+tuning for A,
--- cumulative-beta sensitivity -> shooting contraction, and compact-group
--- Heat/Doob (not silently Euclidean BBD) for C.
+-- exact endpoint-determinant lower+upper prefix transport, cumulative-beta
+-- sensitivity -> shooting contraction, and compact-group Heat/Doob (not
+-- silently Euclidean BBD) for C.
 import DASHI.Physics.YangMills.BalabanIntervalDeterminantAlgebra
+import DASHI.Physics.YangMills.BalabanEndpointDeterminantPrefixBridge
 import DASHI.Physics.YangMills.BalabanBetaPrefixSensitivityToTubeContractionExact
 import DASHI.Physics.YangMills.BalabanClayFrozenFourCompletionContractExact
