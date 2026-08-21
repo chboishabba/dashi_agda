@@ -1,12 +1,11 @@
 module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound84Validation where
 
 ------------------------------------------------------------------------
--- ROUND84--88 FOCUSED VALIDATION ROOT
+-- ROUND84--89 FOCUSED VALIDATION ROOT
 --
 -- Import the established Round61 integration surface first, then the current
--- shortest Clay-facing stack and all Round88 theorem-bearing reductions:
--- geometric-shell marked sources, CMP109 mixed-jet beta extraction, and the
--- one-outer-component -> canonical four-dimensional Wilson denominator gap.
+-- shortest Clay-facing stack and all theorem-bearing reductions through the
+-- frozen four-family completion contract.
 --
 -- Import success establishes source/type correctness only; it does not inhabit
 -- any remaining conditional four-dimensional Yang--Mills analytic leaf.
@@ -39,3 +38,8 @@ import DASHI.Physics.YangMills.BalabanClayT4SineDeterminesCosineAtomExact
 import DASHI.Physics.YangMills.BalabanClayT4BishopRegularHatMomentumGapExact
 import DASHI.Physics.YangMills.BalabanClayT4MachinOuterSineToCanonicalGapExact
 import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound87FourAnalyticLemmaExact
+
+-- Round89 adversarial completion conditions: bilateral beta+tuning for A and
+-- compact-group Heat/Doob (not silently Euclidean BBD) for C.
+import DASHI.Physics.YangMills.BalabanIntervalDeterminantAlgebra
+import DASHI.Physics.YangMills.BalabanClayFrozenFourCompletionContractExact
