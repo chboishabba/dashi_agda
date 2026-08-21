@@ -8,6 +8,7 @@ import DASHI.Analysis.RiemannReflectionOrbitDefectExact
 import DASHI.Analysis.RiemannReflectionPairBlockExact
 import DASHI.Analysis.RiemannWeilOffLineHyperbolicBlockExact
 import DASHI.Analysis.RiemannComplexPoissonChannelSplitExact
+import DASHI.Analysis.RiemannComplexPoissonHermitianReductionExact
 import DASHI.Analysis.RiemannComplexPoissonPairEnergyExact
 import DASHI.Analysis.RiemannComplexPoissonFiniteRetentionExact
 import DASHI.Analysis.RiemannWeilPairKernelFrobeniusExact
