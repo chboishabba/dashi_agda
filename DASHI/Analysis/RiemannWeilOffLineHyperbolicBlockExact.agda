@@ -5,23 +5,26 @@ module DASHI.Analysis.RiemannWeilOffLineHyperbolicBlockExact where
 --
 -- Levent Alpöge and Ralph Furman,
 -- "More than two thirds of the zeta zeros are simple and on the critical line",
--- arXiv:2608.13637 (2026), especially Proposition 4.1 and Lemma 3.1.
+-- arXiv:2608.13637 (2026), especially the zero-side block/inertia argument.
 -- DOI: 10.48550/arXiv.2608.13637.
+--
+-- MACHINE-CHECKED COMPANION SOURCE
+--
+-- Anthropic, `zeta-23-lean`, Zeta23/ZeroSide.lean (2026), Apache-2.0.
+-- Its source comment records the pair identity used below:
+--
+--   m (u u^T + conjugate(u) conjugate(u)^T)
+--     = 2 m (x x^T - y y^T),    u = x + i y.
 --
 -- SOURCE-NATIVE SHAPE
 --
--- For an off-line functional-equation pair {rho,1-conj(rho)}, write the
--- evaluation vector v_rho = a + i b.  The paired contribution is
---
---   m_rho (v v^T_bar + v_bar v^T)
---     = 2 m_rho (a a^T - b b^T),
---
--- a pull-back of the hyperbolic form
---
---   m_rho * diag(1,-1).
---
--- Hence the pre-pullback pair has one positive and one negative direction;
--- inertia under pull-back gives at most one positive direction per pair.
+-- For each off-line functional-equation pair {rho,1-conj(rho)}, the paired
+-- zero-side form therefore has one positive and one negative source channel:
+-- a difference of two positive rank-one forms.  Equivalently it is the
+-- pull-back of a 2-dimensional hyperbolic form of signature (1,1).
+-- Sylvester inertia gives at most one positive direction per off-line pair
+-- after pull-back; the formal companion implements this through the
+-- decomposition `rePart - imPart` and the bound `n_+(Q) <= p`.
 --
 -- DASHI CONTRIBUTION / BOUNDARY
 --
@@ -87,8 +90,8 @@ hyperbolicPairHasOneNegativeDirection b = refl
 ------------------------------------------------------------------------
 -- Population-level inertia budget.
 --
--- The paper's analytic Lemma 3.1 supplies the inequality after pull-back.
--- The exact finite combinatorics needed by that lemma is simply:
+-- The paper's analytic Sylvester-inertia step supplies the inequality after
+-- pull-back.  The exact finite combinatorics needed by that step is simply:
 --
 --   #off = pairCount + pairCount,
 --   positive-index source budget = pairCount.
