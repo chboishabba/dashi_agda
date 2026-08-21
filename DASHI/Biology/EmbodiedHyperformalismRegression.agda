@@ -1,0 +1,125 @@
+module DASHI.Biology.EmbodiedHyperformalismRegression where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Biology.MultiscaleAllostaticBodyHyperformalismExact as Multi
+import DASHI.Biology.ObserverRelativeReachableSubfabricExact as Reach
+import DASHI.Biology.TwoBoundaryHyperformalismExact as Two
+import DASHI.Biology.EmbodiedBranchingHyperformalismExact as Branch
+import DASHI.Biology.BodyModulatedEffectiveTopologyExact as Topo
+import DASHI.Biology.IntrospectiveHyperformalismIncidenceExact as CV
+import DASHI.Biology.BodyModulatedDecisionCoordinatesExact as Controls
+import DASHI.Biology.EmbodiedCausalConeFeedbackExact as Cone
+import DASHI.Biology.RelationalEmbodiedCoregulationExact as Rel
+import DASHI.Biology.EmbodiedHyperformalismSourceRegistry as Sources
+import DASHI.Biology.Levin.CrossFrequencyEffectiveTopologyExact as Cross
+import DASHI.Core.CubieFaceOrderHolonomyAnalogueExact as CubieOrder
+
+record EmbodiedHyperformalismRegression : Set where
+  field
+    sixCalibratingSources : Sources.canonicalHyperformalismSourceCount ≡ 6
+
+    sameHPAStillDifferentWholeBody :
+      Multi.regulatedStack ≡ Multi.acuteMobilisedStack → ⊥
+
+    predictedDemandCanChangeRegulatoryBody :
+      Multi.applyPolicy (Multi.policyFor Multi.highDemand) Multi.regulatedStack
+      ≡ Multi.applyPolicy (Multi.policyFor Multi.lowDemand) Multi.regulatedStack → ⊥
+
+    sameWorldDifferentAccessiblePlan :
+      Reach.live Reach.accessibleLayer Reach.regulatedContext Reach.flexiblePlanning
+      ≡ Reach.live Reach.accessibleLayer Reach.mobilisedContext Reach.flexiblePlanning
+      → ⊥
+
+    twoBoundarySectionHasDistinctIntermediateRoutes :
+      Two.intermediate Two.threatSection ≡ Two.intermediate Two.safeSection → ⊥
+
+    sameWorldGoalHistoryDifferentFeltState :
+      Branch.feltState Branch.regulatedBranchState
+      ≡ Branch.feltState Branch.mobilisedBranchState → ⊥
+
+    recoveryRetainsHistory :
+      Branch.history (Branch.recover Branch.mobilisedBranchState)
+      ≡ Branch.history Branch.mobilisedBranchState
+
+    sameWaveDifferentBodyChangesEffectiveGate :
+      Topo.combinedGate Topo.regulatedTopology Cross.betaLow
+      ≡ Topo.combinedGate Topo.mobilisedTopology Cross.betaLow → ⊥
+
+    cvRecoveredTwoDistinctIntermediateRoutes :
+      CV.intermediateOf CV.viaS1 ≡ CV.intermediateOf CV.viaS2 → ⊥
+
+    cvRecoveredUpperPath : CV.ObservedPath CV.s0 CV.s3
+    cvRecoveredLowerPath : CV.ObservedPath CV.s0 CV.s3
+
+    cvRecoveredContractedOccupancyBottleneck :
+      CV.observedFibreCount CV.s0 ≡ CV.observedFibreCount CV.s1 → ⊥
+
+    bodyModulatesMoreThanAccess :
+      Controls.decisionThreshold Controls.regulatedControls
+      ≡ Controls.decisionThreshold Controls.mobilisedControls → ⊥
+
+    verticalRegulationPreservesWorld :
+      Cone.world (Cone.regulate Cone.mobilisedConstrained)
+      ≡ Cone.world Cone.mobilisedConstrained
+
+    horizontalActionCanChangeWorld :
+      Cone.world (Cone.act Cone.leaveAction Cone.mobilisedConstrained)
+      ≡ Cone.world Cone.mobilisedConstrained → ⊥
+
+    transitionLawCanDeformWithoutDeletingCarrier :
+      Cone.gate Cone.baselineLaw Cone.approachSafety
+      ≡ Cone.gate Cone.learnedThreatLaw Cone.approachSafety → ⊥
+
+    sameFeelingReportDoesNotRecoverFineCarrier :
+      Cone.tenseRegulated ≡ Cone.tenseMobilised → ⊥
+
+    dyadicCalmingCoregulatesBoth :
+      Rel.interactionUpdate Rel.calmingSignal Rel.bothMobilised
+      ≡ Rel.bothRegulated
+
+    institutionChangesWorldRouteWithoutBodyCoordinate :
+      Rel.routeAvailable Rel.closedProcedure Rel.reviewRoute
+      ≡ Rel.routeAvailable Rel.openProcedure Rel.reviewRoute → ⊥
+
+    cubieFaceHiddenOrderIsNonfactorable :
+      CubieOrder.firstTransport (CubieOrder.secondTransport CubieOrder.root)
+      ≡ CubieOrder.secondTransport (CubieOrder.firstTransport CubieOrder.root) → ⊥
+
+open EmbodiedHyperformalismRegression public
+
+canonicalEmbodiedHyperformalismRegression : EmbodiedHyperformalismRegression
+canonicalEmbodiedHyperformalismRegression = record
+  { sixCalibratingSources = refl
+  ; sameHPAStillDifferentWholeBody = Multi.hpaCoordinateDoesNotRecoverWholeBody
+  ; predictedDemandCanChangeRegulatoryBody =
+      Multi.anticipatedDemandCanChangeBodyBeforeDemandObservation
+  ; sameWorldDifferentAccessiblePlan =
+      Reach.sameWorldButBodyChangesAccessiblePlanning
+  ; twoBoundarySectionHasDistinctIntermediateRoutes =
+      Two.samePastAndFutureAdmitDistinctIntermediateCells
+  ; sameWorldGoalHistoryDifferentFeltState =
+      Branch.sameWorldGoalHistoryDifferentFeltState
+  ; recoveryRetainsHistory =
+      Branch.recoveryPreservesHistory Branch.mobilisedBranchState
+  ; sameWaveDifferentBodyChangesEffectiveGate =
+      Topo.sameWaveDifferentBodyChangesGate
+  ; cvRecoveredTwoDistinctIntermediateRoutes =
+      CV.distinctRecoveredIntermediateRoutes
+  ; cvRecoveredUpperPath = CV.upperRecoveredPath
+  ; cvRecoveredLowerPath = CV.lowerRecoveredPath
+  ; cvRecoveredContractedOccupancyBottleneck =
+      CV.recoveredContractedBranchIsOccupancyBottleneck
+  ; bodyModulatesMoreThanAccess = Controls.thresholdStillDiffers
+  ; verticalRegulationPreservesWorld =
+      Cone.verticalRegulationPreservesWorld Cone.mobilisedConstrained
+  ; horizontalActionCanChangeWorld = Cone.horizontalLeaveChangesWorld
+  ; transitionLawCanDeformWithoutDeletingCarrier =
+      Cone.historyDeformationCanCloseApproachWithoutDeletingTransition
+  ; sameFeelingReportDoesNotRecoverFineCarrier =
+      Cone.sameReportDoesNotRecoverFineCarrier
+  ; dyadicCalmingCoregulatesBoth = Rel.calmingCanCoregulateBoth
+  ; institutionChangesWorldRouteWithoutBodyCoordinate =
+      Rel.procedureChangesWorldReviewRoute
+  ; cubieFaceHiddenOrderIsNonfactorable = CubieOrder.orderedEndpointsDiffer
+  }
