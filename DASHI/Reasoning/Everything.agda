@@ -5,3 +5,6 @@ module DASHI.Reasoning.Everything where
 import DASHI.Reasoning.RelationalEverything
 import DASHI.Reasoning.TernarySynthesisOrbitWeldEverything
 import DASHI.Reasoning.PathologicEverything
+import DASHI.Reasoning.AristotleMCGSHypergraphExact
+import DASHI.Reasoning.AristotleMCGSIntrospectiveSpecimen
+import DASHI.Reasoning.AristotleMCGSRecoveredWitness

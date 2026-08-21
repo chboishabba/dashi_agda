@@ -1,0 +1,39 @@
+{
+  "state_count": 6,
+  "action_count": 7,
+  "states": {
+    "S0": {"proved": true},
+    "S1": {"proved": true},
+    "S1p": {"proved": true},
+    "S2": {"proved": true},
+    "S3": {"proved": true},
+    "S4": {"proved": false}
+  },
+  "actions": {
+    "A0": {"proved": true, "source": "S0", "targets": ["S1", "S2"]},
+    "A1": {"proved": true, "source": "S0", "targets": ["S3"]},
+    "A2": {"proved": false, "source": "S0", "targets": ["S4"]},
+    "T1": {"proved": true, "source": "S1", "targets": []},
+    "T1p": {"proved": true, "source": "S1p", "targets": []},
+    "T2": {"proved": true, "source": "S2", "targets": []},
+    "T3": {"proved": true, "source": "S3", "targets": []}
+  },
+  "shared_fibre_tagged_states": ["S1", "S1p"],
+  "edge_roles": {
+    "S0-A0": "source", "S0-A1": "source", "S0-A2": "source", "S0-T1": "absent", "S0-T1p": "absent", "S0-T2": "absent", "S0-T3": "absent",
+    "S1-A0": "target", "S1-A1": "absent", "S1-A2": "absent", "S1-T1": "source", "S1-T1p": "absent", "S1-T2": "absent", "S1-T3": "absent",
+    "S1p-A0": "absent", "S1p-A1": "absent", "S1p-A2": "absent", "S1p-T1": "absent", "S1p-T1p": "source", "S1p-T2": "absent", "S1p-T3": "absent",
+    "S2-A0": "target", "S2-A1": "absent", "S2-A2": "absent", "S2-T1": "absent", "S2-T1p": "absent", "S2-T2": "source", "S2-T3": "absent",
+    "S3-A0": "absent", "S3-A1": "target", "S3-A2": "absent", "S3-T1": "absent", "S3-T1p": "absent", "S3-T2": "absent", "S3-T3": "source",
+    "S4-A0": "absent", "S4-A1": "absent", "S4-A2": "target", "S4-T1": "absent", "S4-T1p": "absent", "S4-T2": "absent", "S4-T3": "absent"
+  },
+  "segment_densities": {
+    "S0-A0": 0.642, "S0-A1": 0.671, "S0-A2": 0.654, "S0-T1": 0.0, "S0-T1p": 0.008, "S0-T2": 0.0, "S0-T3": 0.0,
+    "S1-A0": 0.266, "S1-A1": 0.01, "S1-A2": 0.0, "S1-T1": 0.623, "S1-T1p": 0.013, "S1-T2": 0.034, "S1-T3": 0.04,
+    "S1p-A0": 0.0, "S1p-A1": 0.015, "S1p-A2": 0.018, "S1p-T1": 0.016, "S1p-T1p": 0.623, "S1p-T2": 0.012, "S1p-T3": 0.03,
+    "S2-A0": 0.27, "S2-A1": 0.02, "S2-A2": 0.015, "S2-T1": 0.034, "S2-T1p": 0.01, "S2-T2": 0.623, "S2-T3": 0.012,
+    "S3-A0": 0.0, "S3-A1": 0.272, "S3-A2": 0.02, "S3-T1": 0.041, "S3-T1p": 0.03, "S3-T2": 0.011, "S3-T3": 0.623,
+    "S4-A0": 0.011, "S4-A1": 0.0, "S4-A2": 0.272, "S4-T1": 0.044, "S4-T1p": 0.038, "S4-T2": 0.029, "S4-T3": 0.036
+  },
+  "roundtrip_ok": true
+}
