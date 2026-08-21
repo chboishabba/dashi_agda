@@ -30,5 +30,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
       - name: Check conscious-access network-of-networks tranche
-        run: bash scripts/check_conscious_access_network_of_networks.sh
+        shell: bash
+        run: |
+          set -euo pipefail
+          export AGDA_FLAKE="github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin"
+          export DASHI_REPO_ROOT="$GITHUB_WORKSPACE"
+          export XDG_CACHE_HOME="$RUNNER_TEMP/dashi-cache"
+          export DASHI_STATUS_DIR="$RUNNER_TEMP/dashi-status"
+          export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
+          export DASHI_NO_TMUX=1
+          export AGDA_LOG_PATH="$GITHUB_WORKSPACE/conscious-access-network-agda.log"
+          export AGDA_JOBS=4
+          bash scripts/check_conscious_access_network_of_networks.sh
