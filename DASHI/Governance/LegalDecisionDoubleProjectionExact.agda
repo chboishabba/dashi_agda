@@ -30,6 +30,7 @@ import DASHI.Cognition.PNF.DecisionActionProjectionNonFactorabilityExact as Deci
 import DASHI.Cognition.PNF.DecisionAutonomyExact as Autonomy
 import DASHI.Cognition.PNF.UnifiedDecisionDynamicsExact as Decision
 import DASHI.Ontology.ProgenitorParentAuthorityRoutingNonfactorabilityExact as ParentAuthority
+open import DASHI.Ontology.ProgenitorParentHyperfabric using (WikidataParentSlot)
 open import DASHI.Ontology.ProgenitorParentProjectionFibre
 
 ------------------------------------------------------------------------
