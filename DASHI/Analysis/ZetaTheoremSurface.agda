@@ -20,9 +20,11 @@ open import DASHI.Analysis.WeilTestSpace public
 -- hyperbolic module records the source-native off-line pair signature used by
 -- Alpöge--Furman's inertia argument and proves that this bare signature cannot
 -- determine transverse squared defect.  The complex-Poisson pair-energy module
--- then closes the exact local Frobenius algebra for the first source-facing
--- displacement-sensitive candidate: complex continuation of the Gabor/Poisson
--- norm identity.  The analytic continuation and finite-grid/global transfer
+-- closes the exact local Frobenius algebra for a displacement-sensitive
+-- full-grid candidate.  The pair-kernel Frobenius module then proves that the
+-- corresponding Hermitian kernel is already latent in the nonlinear
+-- Frobenius square, while off-diagonal interference can have negative sign.
+-- Analytic continuation, finite-grid retention, and interference domination
 -- remain explicit authority boundaries.
 open import DASHI.Analysis.RiemannReflectionOrbitDefectExact public
 open import DASHI.Analysis.RiemannReflectionPairBlockExact public
@@ -67,11 +69,14 @@ open import DASHI.Analysis.RiemannComplexPoissonPairEnergyExact public
     ; farPairFrobeniusIsHundred
     ; nearPairExcessIsSixteen
     ; farPairExcessIsNinetySix
+    ; holomorphicBaselineCannotDetermineHermitianEnergy
     ; ComplexPoissonCoercivityAdapter
     ; FiniteCompressionTransferAdapter
+    ; HermitianArithmeticTransportAdapter
     ; ComplexPoissonPairEnergyBoundary
     ; complexPoissonPairEnergyBoundary
     )
+import DASHI.Analysis.RiemannWeilPairKernelFrobeniusExact
 import DASHI.Analysis.RiemannReflectionC3OrbitShapeBridgeExact
 
 open import DASHI.Analysis.PrimeCountingFunction public
