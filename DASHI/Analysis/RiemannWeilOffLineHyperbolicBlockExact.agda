@@ -27,15 +27,31 @@ module DASHI.Analysis.RiemannWeilOffLineHyperbolicBlockExact where
 --
 -- We encode the exact finite signature ledger and its consequence that the
 -- positive-index BUDGET depends on pair count, not on transverse displacement.
+-- We additionally prove a non-factorability theorem: the source signature
+-- observer cannot determine the squared reflection defect, because two states
+-- with the same signature have distinct defects.
+--
 -- We do not reprove Sylvester inertia for arbitrary Hermitian forms here and
 -- do not identify a Nat defect with the analytic beta-1/2 displacement.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; suc; _+_)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
+open import Data.Empty using (⊥)
 
 import DASHI.Analysis.RiemannReflectionOrbitDefectExact as Orbit
+
+------------------------------------------------------------------------
+-- Small equality combinators kept local so the no-factor theorem does not
+-- depend on a larger algebraic import surface.
+------------------------------------------------------------------------
+
+sym : {A : Set} {x y : A} → x ≡ y → y ≡ x
+sym refl = refl
+
+trans : {A : Set} {x y z : A} → x ≡ y → y ≡ z → x ≡ z
+trans refl yz = yz
 
 ------------------------------------------------------------------------
 -- One source-native hyperbolic pair block.
@@ -131,6 +147,36 @@ nearFarNegativeIndexBudgetsCollide :
     ≡ negativeIndexBeforePullback farSourceBlock
 nearFarNegativeIndexBudgetsCollide = refl
 
+-- Coarse code for exactly the information retained by the bare fixed/pair
+-- signature observer: centre versus non-fixed inverse pair.
+sourceSignatureCode : Orbit.CentredReflectionState → Nat
+sourceSignatureCode Orbit.criticalCentre = zero
+sourceSignatureCode (Orbit.offLine _ _) = 1
+
+nearFarSourceSignatureCollide :
+  sourceSignatureCode nearOrbit ≡ sourceSignatureCode farOrbit
+nearFarSourceSignatureCollide = refl
+
+oneIsNotNine : 1 ≡ 9 → ⊥
+oneIsNotNine ()
+
+-- Stronger than a prose warning: no decoder from the bare source signature can
+-- reconstruct squared displacement defect on all reflection states.
+sourceSignatureCannotDetermineSquaredDefect :
+  (decode : Nat → Nat) →
+  ((x : Orbit.CentredReflectionState) →
+    decode (sourceSignatureCode x) ≡ Orbit.squaredDefect x) →
+  ⊥
+sourceSignatureCannotDetermineSquaredDefect decode rec =
+  oneIsNotNine
+    (trans
+      (sym nearOrbitDefectIsOne)
+      (trans
+        (sym (rec nearOrbit))
+        (trans
+          (rec farOrbit)
+          farOrbitDefectIsNine)))
+
 ------------------------------------------------------------------------
 -- Explicit next-frontier contract.
 --
@@ -158,6 +204,7 @@ record WeilOffLineHyperbolicBoundary : Set where
     sourceHyperbolicPairSignatureEncoded : Bool
     sourcePairCountBudgetEncoded : Bool
     displacementBlindnessWitnessConstructed : Bool
+    signatureToDefectFactorizationRefuted : Bool
     arbitraryHermitianPullbackInertiaReprovedHere : Bool
     actualDistanceSensitiveWeilObservableConstructed : Bool
     weightedTransverseMomentBoundProved : Bool
@@ -167,6 +214,7 @@ weilOffLineHyperbolicBoundary = record
   { sourceHyperbolicPairSignatureEncoded = true
   ; sourcePairCountBudgetEncoded = true
   ; displacementBlindnessWitnessConstructed = true
+  ; signatureToDefectFactorizationRefuted = true
   ; arbitraryHermitianPullbackInertiaReprovedHere = false
   ; actualDistanceSensitiveWeilObservableConstructed = false
   ; weightedTransverseMomentBoundProved = false
