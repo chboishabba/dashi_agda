@@ -12,6 +12,7 @@ on:
       - 'DASHI/Analysis/RiemannComplexPoissonPairEnergyExact.agda'
       - 'DASHI/Analysis/RiemannComplexPoissonFiniteRetentionExact.agda'
       - 'DASHI/Analysis/RiemannWeilPairKernelFrobeniusExact.agda'
+      - 'DASHI/Analysis/RiemannMixedKernelEnvelopeExact.agda'
       - 'DASHI/Analysis/RiemannMixedChannelAlmostOrthogonalityExact.agda'
       - 'DASHI/Analysis/RiemannPrimeSideExcessNormalizationExact.agda'
       - 'DASHI/Analysis/RiemannHermitianDefectAssemblyExact.agda'
