@@ -146,7 +146,9 @@ def orientation_angle(rect):
     ls=cv2.HoughLinesP(e,1,np.pi/180,20,minLineLength=30,maxLineGap=8)
     angles=[]
     if ls is not None:
-        for x1,y1,x2,y2 in ls[:,0]: angles.append(math.degrees(math.atan2(y2-y1,x2-x1)))
+        # OpenCV versions return either (N,1,4) or (N,4); normalize both.
+        for x1,y1,x2,y2 in np.asarray(ls).reshape(-1,4):
+            angles.append(math.degrees(math.atan2(int(y2)-int(y1),int(x2)-int(x1))))
     return None if not angles else float(np.median(angles))
 
 def gate_fill(rect):
