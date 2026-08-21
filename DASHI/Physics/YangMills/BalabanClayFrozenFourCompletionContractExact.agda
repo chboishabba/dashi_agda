@@ -48,7 +48,7 @@ module DASHI.Physics.YangMills.BalabanClayFrozenFourCompletionContractExact wher
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Data.Nat.Base using (_≤_; _+_)
+open import Data.Nat.Base using (_+_)
 open import Data.Product using (_×_)
 
 open import DASHI.Foundations.RealAnalysisAxioms using
@@ -86,11 +86,13 @@ record LiteralCompactSimplePositiveBetaCompletion : Set₁ where
     upperLinearStep : ∀ n →
       upperLinear (suc n) ≡ upperLinear n +ℝ upperSlope
 
-    -- Every finite interval of the SAME literal cutoff trajectory has the
-    -- source-required bilateral linear beta tube.  The interval [k,k+n]
-    -- consists of shells k+1,...,k+n.
-    betaIntervalBilateral :
-      ∀ K k n → k + n ≤ K →
+    -- The source running-coupling tube is a TERMINAL-TAIL statement.  For a
+    -- cutoff K and a decomposition K = k+n, the relevant beta sum consists of
+    -- shells k+1,...,K.  Requiring every internal subinterval would be strictly
+    -- stronger than Bałaban's consumer needs; the separate prefix majorant
+    -- already carried by `construction` controls smallness from the bare end.
+    betaTerminalTailBilateral :
+      ∀ K k n → k + n ≡ K →
       lowerLinear n ≤ℝ
         Interval.intervalSum
           (Trajectory.betaCorrection
