@@ -45,6 +45,7 @@ import DASHI.Governance.ContestedAmbientAuthorityRegression
 import DASHI.Governance.InstitutionalNoticeActuationCulpabilityExact
 import DASHI.Governance.EpistemicCaptureProfessionalClosureExact
 import DASHI.Governance.InstitutionPreservingRechartAntiSublationExact
+import DASHI.Governance.OppositionInterfaceAntiDomesticationExact
 import DASHI.Governance.FibrewiseInstitutionalPowerEverything
 
 import DASHI.Governance.RevolutionarySourceAtlas
