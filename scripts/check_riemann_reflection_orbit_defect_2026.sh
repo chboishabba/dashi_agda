@@ -12,6 +12,7 @@ sources=(
   DASHI/Analysis/RiemannComplexPoissonPairEnergyExact.agda
   DASHI/Analysis/RiemannComplexPoissonFiniteRetentionExact.agda
   DASHI/Analysis/RiemannWeilPairKernelFrobeniusExact.agda
+  DASHI/Analysis/RiemannMixedKernelEnvelopeExact.agda
   DASHI/Analysis/RiemannMixedChannelAlmostOrthogonalityExact.agda
   DASHI/Analysis/RiemannPrimeSideExcessNormalizationExact.agda
   DASHI/Analysis/RiemannHermitianDefectAssemblyExact.agda
@@ -56,6 +57,7 @@ channels=DASHI/Analysis/RiemannComplexPoissonChannelSplitExact.agda
 energy=DASHI/Analysis/RiemannComplexPoissonPairEnergyExact.agda
 finite=DASHI/Analysis/RiemannComplexPoissonFiniteRetentionExact.agda
 kernel=DASHI/Analysis/RiemannWeilPairKernelFrobeniusExact.agda
+kernelenv=DASHI/Analysis/RiemannMixedKernelEnvelopeExact.agda
 mixed=DASHI/Analysis/RiemannMixedChannelAlmostOrthogonalityExact.agda
 primeex=DASHI/Analysis/RiemannPrimeSideExcessNormalizationExact.agda
 assembly=DASHI/Analysis/RiemannHermitianDefectAssemblyExact.agda
@@ -83,6 +85,9 @@ require_pattern "$finite" 'coerciveFiniteRetentionImpliesCertificate'
 require_pattern "$finite" 'retentionCertificateFromProducer'
 require_pattern "$kernel" 'imaginaryKernelEnergyIsTwiceMixedInterference'
 require_pattern "$kernel" 'MixedInterferenceKernelReductionAdapter'
+require_pattern "$kernelenv" 'MixedKernelEnvelopeLedger'
+require_pattern "$kernelenv" 'kernelEnvelopeImpliesPairAlmostOrthogonality'
+require_pattern "$kernelenv" 'ComplexPhiKernelEnvelopeProducer'
 require_pattern "$mixed" 'pairAlmostOrthogonalityRetainsTarget'
 require_pattern "$mixed" 'retainedPairFromProducer'
 require_pattern "$primeex" 'PrimeSideExcessNormalization'
@@ -109,6 +114,10 @@ require_pattern "$gapmap" 'G4HigherMomentBridge'
 require_pattern "$gapmap" 'G4ArithmeticRigidityBridge'
 require_pattern "$c3" 'completePhaseOrbitCancels'
 require_pattern "$regression" 'regressionNegativeInterference'
+require_pattern "$surface" 'RiemannMixedKernelEnvelopeExact'
+require_pattern "$surface" 'RiemannHermitianTopDownAssemblyExact'
+require_pattern "$surface" 'RiemannHermitianSourceGapMapExact'
+require_pattern "$aggregate" 'RiemannMixedKernelEnvelopeExact'
 require_pattern "$aggregate" 'RiemannHermitianTopDownAssemblyExact'
 require_pattern "$aggregate" 'RiemannHermitianSourceGapMapExact'
 
@@ -117,6 +126,7 @@ DASHI_NO_TMUX=1 scripts/run_agda29_parallel_check.sh \
   DASHI/Analysis/RiemannComplexPoissonPairEnergyExact.agda \
   DASHI/Analysis/RiemannComplexPoissonFiniteRetentionExact.agda \
   DASHI/Analysis/RiemannWeilPairKernelFrobeniusExact.agda \
+  DASHI/Analysis/RiemannMixedKernelEnvelopeExact.agda \
   DASHI/Analysis/RiemannMixedChannelAlmostOrthogonalityExact.agda \
   DASHI/Analysis/RiemannPrimeSideExcessNormalizationExact.agda \
   DASHI/Analysis/RiemannHermitianDetectabilityGapExact.agda \
