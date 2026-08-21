@@ -131,5 +131,8 @@ fourLinkWilsonCubicQuarticProducerLevel = machineChecked
 -- Remaining physical leaf: instantiate each `factorJet4` with the literal
 -- right/left oriented SU(2) link exponential through derivative order four.
 -- Once that is done no independent Wilson cubic/quartic vertex input remains.
+-- `BalabanLiteralWilsonPlaquetteAnalyticRemainder.md` supplies the matching
+-- per-plaquette fifth-order Taylor estimate; a uniform polymer majorant for
+-- its local fifth-power density remains the analytic RG task.
 literalSU2LinkExponentialFourthJetInstantiationLevel : ProofLevel
 literalSU2LinkExponentialFourthJetInstantiationLevel = conditional

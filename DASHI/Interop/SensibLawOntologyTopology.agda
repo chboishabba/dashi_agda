@@ -177,8 +177,8 @@ data InterestSubjectKind : Set where
   individual child group community state environment ancestors : InterestSubjectKind
 
 data InterestObjectKind : Set where
-  body mind property data reputation relationship culture territory ecosystem
-    lineage status : InterestObjectKind
+  body mind property dataObject reputation relationship culture territory ecosystem
+    lineage statusKind : InterestObjectKind
 
 data InterestModality : Set where
   integrity useAndEnjoyment control privacy honourMana development
@@ -265,7 +265,7 @@ record OntologyEdge : Set where
 -- is not a canonical identity link until a separate decision accepts it.
 
 data FeatureKind : Set where
-  exactName fuzzyName longestName characterNGram contextTerms ontologyTags
+  exactName fuzzyName longestName characterNGram contextTermsFeature ontologyTags
     articleVector categoryVector topSense multimodalAlignment : FeatureKind
 
 record FeatureObservation : Set where
