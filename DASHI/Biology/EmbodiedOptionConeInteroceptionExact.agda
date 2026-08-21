@@ -40,7 +40,6 @@ mobilisedBody = bodyState high medium high low
 prolongedLoadBody : BodyState
 prolongedLoadBody = bodyState high high high low
 
--- Same cortisol coordinate does not determine the complete body regime.
 sameCortisolDifferentBody :
   cortisol regulatedBody ≡ cortisol mobilisedBody
 sameCortisolDifferentBody = refl
@@ -60,9 +59,7 @@ data Available : Situation → Option → Set where
   broadPlan : Available broadCone flexiblePlanning
   broadSupport : Available broadCone seekSupport
   broadWithdraw : Available broadCone defensiveWithdrawal
-
   contractedWithdraw : Available contractedCone defensiveWithdrawal
-
   reopenedPlan : Available reopenedCone flexiblePlanning
   reopenedSupport : Available reopenedCone seekSupport
   reopenedWithdraw : Available reopenedCone defensiveWithdrawal
@@ -109,94 +106,21 @@ contractedConeRecruitsDifferentBodyRegime ()
 
 ------------------------------------------------------------------------
 -- 3. Body -> interoceptive afference -> prior-indexed felt state.
+--
+-- `afference` is intentionally a toy projection of the multidimensional body
+-- state through the sympathetic coordinate.  It is not claimed to be a full
+-- anatomical interoceptive encoder.
 ------------------------------------------------------------------------
 
 data InteroceptiveAfference : Set where quietAfference arousalAfference : InteroceptiveAfference
 
+sympatheticAfference : Activation → InteroceptiveAfference
+sympatheticAfference low = quietAfference
+sympatheticAfference medium = arousalAfference
+sympatheticAfference high = arousalAfference
+
 afference : BodyState → InteroceptiveAfference
-afference (bodyState medium medium low high) = quietAfference
-afference (bodyState high medium high low) = arousalAfference
-afference (bodyState high high high low) = arousalAfference
--- Total fallback clauses keep this finite vocabulary total without claiming a
--- physiological partition theorem.
-afference (bodyState low low low low) = quietAfference
-afference (bodyState low low low medium) = quietAfference
-afference (bodyState low low low high) = quietAfference
-afference (bodyState low low medium low) = arousalAfference
-afference (bodyState low low medium medium) = arousalAfference
-afference (bodyState low low medium high) = arousalAfference
-afference (bodyState low low high low) = arousalAfference
-afference (bodyState low low high medium) = arousalAfference
-afference (bodyState low low high high) = arousalAfference
-afference (bodyState low medium low low) = quietAfference
-afference (bodyState low medium low medium) = quietAfference
-afference (bodyState low medium low high) = quietAfference
-afference (bodyState low medium medium low) = arousalAfference
-afference (bodyState low medium medium medium) = arousalAfference
-afference (bodyState low medium medium high) = arousalAfference
-afference (bodyState low medium high low) = arousalAfference
-afference (bodyState low medium high medium) = arousalAfference
-afference (bodyState low medium high high) = arousalAfference
-afference (bodyState low high low low) = quietAfference
-afference (bodyState low high low medium) = quietAfference
-afference (bodyState low high low high) = quietAfference
-afference (bodyState low high medium low) = arousalAfference
-afference (bodyState low high medium medium) = arousalAfference
-afference (bodyState low high medium high) = arousalAfference
-afference (bodyState low high high low) = arousalAfference
-afference (bodyState low high high medium) = arousalAfference
-afference (bodyState low high high high) = arousalAfference
-afference (bodyState medium low low low) = quietAfference
-afference (bodyState medium low low medium) = quietAfference
-afference (bodyState medium low low high) = quietAfference
-afference (bodyState medium low medium low) = arousalAfference
-afference (bodyState medium low medium medium) = arousalAfference
-afference (bodyState medium low medium high) = arousalAfference
-afference (bodyState medium low high low) = arousalAfference
-afference (bodyState medium low high medium) = arousalAfference
-afference (bodyState medium low high high) = arousalAfference
-afference (bodyState medium medium low low) = quietAfference
-afference (bodyState medium medium low medium) = quietAfference
-afference (bodyState medium medium medium low) = arousalAfference
-afference (bodyState medium medium medium medium) = arousalAfference
-afference (bodyState medium medium medium high) = arousalAfference
-afference (bodyState medium medium high low) = arousalAfference
-afference (bodyState medium medium high medium) = arousalAfference
-afference (bodyState medium medium high high) = arousalAfference
-afference (bodyState medium high low low) = quietAfference
-afference (bodyState medium high low medium) = quietAfference
-afference (bodyState medium high low high) = quietAfference
-afference (bodyState medium high medium low) = arousalAfference
-afference (bodyState medium high medium medium) = arousalAfference
-afference (bodyState medium high medium high) = arousalAfference
-afference (bodyState medium high high low) = arousalAfference
-afference (bodyState medium high high medium) = arousalAfference
-afference (bodyState medium high high high) = arousalAfference
-afference (bodyState high low low low) = quietAfference
-afference (bodyState high low low medium) = quietAfference
-afference (bodyState high low low high) = quietAfference
-afference (bodyState high low medium low) = arousalAfference
-afference (bodyState high low medium medium) = arousalAfference
-afference (bodyState high low medium high) = arousalAfference
-afference (bodyState high low high low) = arousalAfference
-afference (bodyState high low high medium) = arousalAfference
-afference (bodyState high low high high) = arousalAfference
-afference (bodyState high medium low low) = quietAfference
-afference (bodyState high medium low medium) = quietAfference
-afference (bodyState high medium low high) = quietAfference
-afference (bodyState high medium medium low) = arousalAfference
-afference (bodyState high medium medium medium) = arousalAfference
-afference (bodyState high medium medium high) = arousalAfference
-afference (bodyState high medium high medium) = arousalAfference
-afference (bodyState high medium high high) = arousalAfference
-afference (bodyState high high low low) = quietAfference
-afference (bodyState high high low medium) = quietAfference
-afference (bodyState high high low high) = quietAfference
-afference (bodyState high high medium low) = arousalAfference
-afference (bodyState high high medium medium) = arousalAfference
-afference (bodyState high high medium high) = arousalAfference
-afference (bodyState high high high medium) = arousalAfference
-afference (bodyState high high high high) = arousalAfference
+afference body = sympatheticAfference (sympathetic body)
 
 data InteroceptivePrior : Set where safetyPrior threatPrior : InteroceptivePrior
 
