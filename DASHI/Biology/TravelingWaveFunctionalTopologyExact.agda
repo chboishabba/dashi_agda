@@ -51,10 +51,6 @@ trueNotFalse ()
 falseNotTrue : false ≡ true → ⊥
 falseNotTrue ()
 
-------------------------------------------------------------------------
--- Fixed structural substrate, field-dependent effective coupling.
-------------------------------------------------------------------------
-
 effectiveCoupling : Bool → Bool → Bool
 effectiveCoupling structuralEdge fieldGate =
   boolAnd structuralEdge fieldGate
@@ -82,10 +78,6 @@ sameStructureDifferentFieldChangesEffectiveTopology :
 sameStructureDifferentFieldChangesEffectiveTopology equality =
   trueNotFalse equality
 
-------------------------------------------------------------------------
--- Cross-frequency control prototype: beta/control gate over gamma/content.
-------------------------------------------------------------------------
-
 gammaEffective : Bool → Bool → Bool
 gammaEffective slowControl highContent =
   boolAnd (boolNot slowControl) highContent
@@ -102,10 +94,6 @@ sameHighContentDifferentSlowControlChangesReadout :
   gammaEffective false true ≡ gammaEffective true true → ⊥
 sameHighContentDifferentSlowControlChangesReadout equality =
   trueNotFalse equality
-
-------------------------------------------------------------------------
--- A literal traveling stencil on the completed 3 x 3 torus.
-------------------------------------------------------------------------
 
 canonicalStencil : Torus.Field Bool
 canonicalStencil
@@ -167,10 +155,6 @@ completionRemainsOutsideCanonicalStencil :
   Torus.pullbackFirst canonicalStencil Torus.completionChannel ≡ false
 completionRemainsOutsideCanonicalStencil = refl
 
-------------------------------------------------------------------------
--- Analog/interference witness on the already-existing discrete wave carrier.
-------------------------------------------------------------------------
-
 oppositePhaseSuperpositionCancels :
   Discrete.waveAdd
     (Wave.encodeTritWave Wave.pos)
@@ -184,10 +168,6 @@ zeroPlusPositiveDoesNotCancel :
     (Wave.encodeTritWave Wave.pos)
   ≡ Wave.encodeTritWave Wave.pos
 zeroPlusPositiveDoesNotCancel = refl
-
-------------------------------------------------------------------------
--- Minimal field-to-successor causal witness.
-------------------------------------------------------------------------
 
 fieldControlledStep : Bool → Bool → Bool
 fieldControlledStep neuralState fieldState =
@@ -225,6 +205,6 @@ record TravelingWaveFunctionalBoundary : Set where
 canonicalTravelingWaveFunctionalBoundary : TravelingWaveFunctionalBoundary
 canonicalTravelingWaveFunctionalBoundary =
   travelingWaveFunctionalBoundary
-    ⊥ (λ impossible → impossible)
-    ⊥ (λ impossible → impossible)
-    ⊥ (λ impossible → impossible)
+    ⊥ (λ impossible → ⊥)
+    ⊥ (λ impossible → ⊥)
+    ⊥ (λ impossible → ⊥)
