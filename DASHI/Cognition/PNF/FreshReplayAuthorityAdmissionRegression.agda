@@ -8,6 +8,7 @@ open import DASHI.Cognition.PNF.FreshReplayAuthorityAdmissionExact
 data TokenRow : Set where
   rootRow childRow : TokenRow
 
+freshRoot : AuthorityAdmission TokenRow rootRow
 freshRoot = freshAuthorityAdmission rootRow
 
 freshRootNoRead : persistentParityReads freshRoot ≡ zero
@@ -16,6 +17,7 @@ freshRootNoRead = refl
 freshRootExact : authorityRow freshRoot ≡ rootRow
 freshRootExact = refl
 
+replayedChild : AuthorityAdmission TokenRow childRow
 replayedChild = replayAuthorityAdmission childRow childRow refl
 
 replayChildHasEvidence :
