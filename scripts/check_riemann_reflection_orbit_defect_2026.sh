@@ -8,6 +8,7 @@ sources=(
   DASHI/Analysis/RiemannReflectionOrbitDefectExact.agda
   DASHI/Analysis/RiemannReflectionPairBlockExact.agda
   DASHI/Analysis/RiemannWeilOffLineHyperbolicBlockExact.agda
+  DASHI/Analysis/RiemannComplexPoissonPairEnergyExact.agda
   DASHI/Analysis/RiemannReflectionC3OrbitShapeBridgeExact.agda
   DASHI/Analysis/RiemannReflectionOrbitDefectRegression.agda
   DASHI/Analysis/ZetaTheoremSurface.agda
@@ -43,6 +44,7 @@ require_pattern() {
 orbit=DASHI/Analysis/RiemannReflectionOrbitDefectExact.agda
 pair=DASHI/Analysis/RiemannReflectionPairBlockExact.agda
 hyper=DASHI/Analysis/RiemannWeilOffLineHyperbolicBlockExact.agda
+energy=DASHI/Analysis/RiemannComplexPoissonPairEnergyExact.agda
 c3=DASHI/Analysis/RiemannReflectionC3OrbitShapeBridgeExact.agda
 regression=DASHI/Analysis/RiemannReflectionOrbitDefectRegression.agda
 surface=DASHI/Analysis/ZetaTheoremSurface.agda
@@ -61,13 +63,21 @@ require_pattern "$hyper" 'sourcePositiveIndexBudget'
 require_pattern "$hyper" 'offLineCountIsTwoSourcePositiveBudgets'
 require_pattern "$hyper" 'sourceSignatureCannotDetermineSquaredDefect'
 require_pattern "$hyper" 'DistanceSensitiveOffLineAdapter'
+require_pattern "$energy" 'fullGridEnergyDecomposition'
+require_pattern "$energy" 'pairBlockFrobeniusDecomposition'
+require_pattern "$energy" 'nearPairFrobeniusIsTwenty'
+require_pattern "$energy" 'farPairFrobeniusIsHundred'
+require_pattern "$energy" 'ComplexPoissonCoercivityAdapter'
+require_pattern "$energy" 'FiniteCompressionTransferAdapter'
 require_pattern "$c3" 'completePhaseOrbitCancels'
 require_pattern "$c3" 'c3OrbitRoleInversionInvariant'
 require_pattern "$c3" 'zetaSameRoleCanRetainDifferentDefects'
 require_pattern "$regression" 'regressionSignatureCannotRecoverDefect'
-require_pattern "$surface" 'RiemannWeilOffLineHyperbolicBlockExact'
-require_pattern "$aggregate" 'RiemannReflectionOrbitDefectRegression'
+require_pattern "$regression" 'regressionFarPairExcessNinetySix'
+require_pattern "$surface" 'RiemannComplexPoissonPairEnergyExact'
+require_pattern "$aggregate" 'RiemannComplexPoissonPairEnergyExact'
 
-scripts/run_agda29_parallel_check.sh \
+DASHI_NO_TMUX=1 scripts/run_agda29_parallel_check.sh \
+  DASHI/Analysis/RiemannComplexPoissonPairEnergyExact.agda \
   DASHI/Analysis/RiemannReflectionOrbitDefectRegression.agda \
   DASHI/EverythingRiemannReflectionOrbitDefect2026.agda
