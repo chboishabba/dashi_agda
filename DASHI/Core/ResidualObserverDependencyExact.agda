@@ -30,8 +30,8 @@ module DASHI.Core.ResidualObserverDependencyExact where
 --
 -- Nikhil Bansal and Haotian Jiang,
 -- "Decoupling via Affine Spectral-Independence: Beck-Fiala and Komlos Bounds
--- Beyond Banaszczyk", STOC 2026; arXiv:2508.03961,
--- DOI 10.48550/arXiv.2508.03961.
+-- Beyond Banaszczyk", STOC 2026, DOI 10.1145/3798129.3800762;
+-- arXiv:2508.03961, DOI 10.48550/arXiv.2508.03961.
 --
 -- Boundary: a finite dependency code or coupling score is not automatically a
 -- covariance matrix, Gram operator, spectral-independence constant, or
