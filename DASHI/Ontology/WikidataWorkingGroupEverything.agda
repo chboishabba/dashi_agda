@@ -73,8 +73,9 @@ import DASHI.Cognition.PNF.BinaryBalancedTernaryAggregateLossExact
 import DASHI.Ontology.DependentDefinitionFibreExact
 
 -- Concrete Wikidata warfare specimen: current P31/P279/auxiliary assertions,
--- query-fibre failures, and a typed normalised facet target.
+-- query-fibre failures, typed facets, and the independent warfare-form base.
 import DASHI.Ontology.WikidataWarfareFibreExact
+import DASHI.Ontology.WikidataWarfareSemanticTargetExact
 
 -- Public regressions.
 import DASHI.Core.ConsumerQuotientBaseChangeRegression
