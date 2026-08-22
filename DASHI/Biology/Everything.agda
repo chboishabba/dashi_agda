@@ -174,3 +174,6 @@ import DASHI.Biology.TriadicVisualBraidCrossPollinationExact
 import DASHI.Biology.TernaryHallTransitionCoalitionExact
 import DASHI.Biology.ConsciousAccessRound6CrossSourceBridge
 import DASHI.Biology.ConsciousAccessRound6CrossPollinationRegression
+-- Residual dependency cross-pollination: coarse neural measurement, local
+-- separating probes, effective topology, and capability-preserving decoupling.
+import DASHI.Biology.NeuralResidualDependencyBridgeExact
