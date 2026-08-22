@@ -45,8 +45,8 @@ module DASHI.Biology.NeuralResidualDependencyBridgeExact where
 --
 -- Nikhil Bansal and Haotian Jiang,
 -- "Decoupling via Affine Spectral-Independence: Beck-Fiala and Komlos Bounds
--- Beyond Banaszczyk", STOC 2026; arXiv:2508.03961,
--- DOI 10.48550/arXiv.2508.03961.
+-- Beyond Banaszczyk", STOC 2026, DOI 10.1145/3798129.3800762;
+-- arXiv:2508.03961, DOI 10.48550/arXiv.2508.03961.
 --
 -- Claim boundary: the Nat-valued Laplacian variation and two-coordinate
 -- signature below are not covariance operators or affine spectral-independence
@@ -63,11 +63,6 @@ import DASHI.Core.ResidualObserverDependencyExact as Residual
 import DASHI.Physics.Common.SeparatingProbeFamilyExact as Probe
 import DASHI.Biology.NeuralRepresentationLaplacianExact as Neural
 import DASHI.Biology.DynamicEffectiveTopology as Dynamic
-
-------------------------------------------------------------------------
--- Joint fine state: microscopic activation plus state-dependent effective
--- topology.  The coarse measurement intentionally observes activation only.
-------------------------------------------------------------------------
 
 record BrainState : Set where
   constructor brainState
@@ -107,12 +102,6 @@ neuralResidualDependency = record
   ; dependencyCode = dependencySignature
   }
 
-------------------------------------------------------------------------
--- Existing Horn--Johnson separating-probe machinery now applies directly to
--- the finite dependency signature.  It does not reconstruct the whole brain
--- state; it determines only this declared two-coordinate signature.
-------------------------------------------------------------------------
-
 dependencyProbeSystem :
   Probe.SeparatingProbeSystem DependencySignature Nat
 dependencyProbeSystem = Probe.canonicalPairProbeSystem
@@ -145,8 +134,7 @@ inhibitedCollisionState =
 collisionHasSameCoarseMeasurement :
   coarseBrainObservation recurrentCollisionState
   ≡ coarseBrainObservation inhibitedCollisionState
-collisionHasSameCoarseMeasurement =
-  Neural.fmriProjectionCollision
+collisionHasSameCoarseMeasurement = Neural.fmriProjectionCollision
 
 recurrentDependencySignatureIsOneTwo :
   dependencySignature recurrentCollisionState inspectEffectiveDependency
@@ -190,9 +178,7 @@ collisionDiffersOnVariationProbe = refl , refl
 
 hiddenEffectiveDependency :
   Residual.HiddenResidualDependency
-    neuralResidualDependency
-    coarseBrainObservation
-    inspectEffectiveDependency
+    neuralResidualDependency coarseBrainObservation inspectEffectiveDependency
 hiddenEffectiveDependency =
   Residual.hiddenResidualDependency
     recurrentCollisionState
@@ -204,47 +190,30 @@ neuralDependencyStrictlyRefinesCoarseMeasurement :
   Observer.StrictRefinement
     coarseBrainObservation
     (Residual.refinedObservationAt
-      neuralResidualDependency
-      coarseBrainObservation
-      inspectEffectiveDependency)
+      neuralResidualDependency coarseBrainObservation inspectEffectiveDependency)
 neuralDependencyStrictlyRefinesCoarseMeasurement =
-  Residual.hiddenResidualDependencyGivesStrictRefinement
-    hiddenEffectiveDependency
+  Residual.hiddenResidualDependencyGivesStrictRefinement hiddenEffectiveDependency
 
 coarseMeasurementCannotReconstructEffectiveDependency :
   Residual.DependencyCodeDescendsAt
-    neuralResidualDependency
-    coarseBrainObservation
-    inspectEffectiveDependency
-  → ⊥
+    neuralResidualDependency coarseBrainObservation inspectEffectiveDependency → ⊥
 coarseMeasurementCannotReconstructEffectiveDependency =
-  Residual.hiddenResidualDependencyBlocksDescent
-    hiddenEffectiveDependency
-
-------------------------------------------------------------------------
--- Control example: raw decoupling versus required reach.
-------------------------------------------------------------------------
+  Residual.hiddenResidualDependencyBlocksDescent hiddenEffectiveDependency
 
 data NeuralControlAction : Set where
   retainRecurrentRoute closeEffectiveRoute : NeuralControlAction
 
 initialControlState : BrainState
 initialControlState =
-  brainState
-    (Neural.populationActivation 0 2 1)
-    Dynamic.recurrentState
+  brainState (Neural.populationActivation 0 2 1) Dynamic.recurrentState
 
 balancedRecurrentState : BrainState
 balancedRecurrentState =
-  brainState
-    (Neural.populationActivation 2 2 2)
-    Dynamic.recurrentState
+  brainState (Neural.populationActivation 2 2 2) Dynamic.recurrentState
 
 balancedInhibitedState : BrainState
 balancedInhibitedState =
-  brainState
-    (Neural.populationActivation 2 2 2)
-    Dynamic.inhibitedState
+  brainState (Neural.populationActivation 2 2 2) Dynamic.inhibitedState
 
 data NeuralControlPrecondition : BrainState → NeuralControlAction → Set where
   retainFromInitial :
@@ -294,11 +263,6 @@ closeIsAdmissible = record
       "finite calibration transition that suppresses the effective route"
   }
 
-------------------------------------------------------------------------
--- A deliberately crude coupling count makes the failure mode visible:
--- disconnecting everything scores lower than retaining a required route.
-------------------------------------------------------------------------
-
 candidateHarmfulCoupling :
   Residual.CouplingScore BrainState NeuralControlAction
 candidateHarmfulCoupling state retainRecurrentRoute = 1
@@ -325,13 +289,22 @@ RequiredPlanningRoute state =
 
 balancedRecurrentPreservesPlanningRoute :
   RequiredPlanningRoute balancedRecurrentState
-balancedRecurrentPreservesPlanningRoute =
-  Dynamic.recurrentAssociationPlanning
+balancedRecurrentPreservesPlanningRoute = Dynamic.recurrentAssociationPlanning
 
 balancedInhibitedCannotPreservePlanningRoute :
   RequiredPlanningRoute balancedInhibitedState → ⊥
 balancedInhibitedCannotPreservePlanningRoute =
   Dynamic.inhibitedAssociationPlanningImpossible
+
+closeAdmissibleCannotPreservePlanningRoute :
+  (admissible :
+    Dependency.AdmissibleAction
+      neuralControlSystem initialControlState closeEffectiveRoute) →
+  RequiredPlanningRoute (Dependency.after admissible) → ⊥
+closeAdmissibleCannotPreservePlanningRoute admissible capability
+  with Dependency.postcondition admissible
+... | closedAndBalanced =
+  Dynamic.inhibitedAssociationPlanningImpossible capability
 
 retainIsLeastCoupledAmongReachPreserving :
   Residual.LeastCoupledCapabilityPreservingChoice
@@ -346,15 +319,11 @@ retainIsLeastCoupledAmongReachPreserving = record
   ; leastAmongCapabilityPreserving = λ
       { retainRecurrentRoute alternativeAdmissible capability → ≤-refl
       ; closeEffectiveRoute alternativeAdmissible capability →
-          ⊥-elim (balancedInhibitedCannotPreservePlanningRoute capability)
+          ⊥-elim
+            (closeAdmissibleCannotPreservePlanningRoute
+              alternativeAdmissible capability)
       }
   }
-
-------------------------------------------------------------------------
--- Existing Laplacian variation supplies a real residual-state statistic.
--- Both displayed controls reduce that statistic to zero, so variation alone
--- cannot decide whether required effective reach was preserved.
-------------------------------------------------------------------------
 
 residualLaplacianVariation : Residual.ResidualStateScore BrainState
 residualLaplacianVariation state =
@@ -373,28 +342,20 @@ balancedInhibitedVariationIsZero :
 balancedInhibitedVariationIsZero = refl
 
 retainStrictlyReducesVariation :
-  Residual.StrictlyDecouples
-    residualLaplacianVariation retainIsAdmissible
+  Residual.StrictlyDecouples residualLaplacianVariation retainIsAdmissible
 retainStrictlyReducesVariation = s≤s z≤n
 
 closeStrictlyReducesVariation :
-  Residual.StrictlyDecouples
-    residualLaplacianVariation closeIsAdmissible
+  Residual.StrictlyDecouples residualLaplacianVariation closeIsAdmissible
 closeStrictlyReducesVariation = s≤s z≤n
 
 retainReachPreservingDecoupling :
   Residual.CapabilityPreservingDecoupling
-    residualLaplacianVariation
-    RequiredPlanningRoute
-    retainIsAdmissible
+    residualLaplacianVariation RequiredPlanningRoute retainIsAdmissible
 retainReachPreservingDecoupling =
   Residual.capabilityPreservingDecoupling
     balancedRecurrentPreservesPlanningRoute
     z≤n
-
-------------------------------------------------------------------------
--- Exact finite boundary.
-------------------------------------------------------------------------
 
 record NeuralResidualDependencyBoundary : Set where
   constructor neuralResidualDependencyBoundary
@@ -402,23 +363,18 @@ record NeuralResidualDependencyBoundary : Set where
     coarseMeasurementDeterminesEffectiveDependency : Bool
     coarseMeasurementDeterminesEffectiveDependencyIsFalse :
       coarseMeasurementDeterminesEffectiveDependency ≡ false
-
     declaredLocalProbesSeparateDependencySignature : Bool
     declaredLocalProbesSeparateDependencySignatureIsTrue :
       declaredLocalProbesSeparateDependencySignature ≡ true
-
     lowerCouplingAutomaticallyPreservesRequiredReach : Bool
     lowerCouplingAutomaticallyPreservesRequiredReachIsFalse :
       lowerCouplingAutomaticallyPreservesRequiredReach ≡ false
-
     laplacianReductionAloneCertifiesRequiredReach : Bool
     laplacianReductionAloneCertifiesRequiredReachIsFalse :
       laplacianReductionAloneCertifiesRequiredReach ≡ false
-
     capabilityConstrainedDecouplingConstructed : Bool
     capabilityConstrainedDecouplingConstructedIsTrue :
       capabilityConstrainedDecouplingConstructed ≡ true
-
     affineSpectralIndependencePromoted : Bool
     affineSpectralIndependencePromotedIsFalse :
       affineSpectralIndependencePromoted ≡ false
