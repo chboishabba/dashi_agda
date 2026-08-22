@@ -125,6 +125,47 @@ hiddenResidualDependencyGivesStrictRefinement witness =
     (dependencyCodeSeparates witness)
 
 ------------------------------------------------------------------------
+-- Non-factorability, in the same exact style as other DASHI observer bridges.
+--
+-- DependencyCodeDescendsAt says that one action-indexed dependency observation
+-- can be reconstructed from the present coarse observation alone.  A hidden
+-- residual-dependency collision refutes the existence of every such map.
+------------------------------------------------------------------------
+
+DependencyCodeDescendsAt :
+  ∀ {State Action Index Code Coarse : Set} →
+  ResidualDependencyObserver State Action Index Code →
+  Observer.Observer State Coarse →
+  Action →
+  Set
+DependencyCodeDescendsAt {State} {Code = Code} {Coarse = Coarse}
+    dependency coarse action =
+  Σ (Coarse → Code)
+    (λ reconstruct →
+      ∀ state →
+      reconstruct (coarse state) ≡
+      dependencyCode dependency state action)
+
+hiddenResidualDependencyBlocksDescent :
+  ∀ {State Action Index Code Coarse : Set}
+    {dependency : ResidualDependencyObserver State Action Index Code}
+    {coarse : Observer.Observer State Coarse}
+    {action : Action} →
+  HiddenResidualDependency dependency coarse action →
+  DependencyCodeDescendsAt dependency coarse action →
+  ⊥
+hiddenResidualDependencyBlocksDescent witness descent =
+  dependencyCodeSeparates witness
+    (trans
+      (sym (commutes (left witness)))
+      (trans
+        (cong reconstruct (sameCoarseObservation witness))
+        (commutes (right witness))))
+  where
+    reconstruct = proj₁ descent
+    commutes = proj₂ descent
+
+------------------------------------------------------------------------
 -- Quantitative seam.
 --
 -- A coupling score is intentionally only Nat-valued here.  It can count edges,
@@ -228,9 +269,9 @@ strictlyDecouplesImpliesDecouples :
 strictlyDecouplesImpliesDecouples = <⇒≤
 
 ------------------------------------------------------------------------
--- Boundary receipt kept theorem-bearing: the generic seam proves refinement
--- and admissibility-aware ordering, but deliberately does not promote those
--- facts into a spectral-independence theorem.
+-- Boundary receipt kept theorem-bearing: the generic seam proves refinement,
+-- non-descent and admissibility-aware ordering, but deliberately does not
+-- promote those facts into a spectral-independence theorem.
 ------------------------------------------------------------------------
 
 record ResidualDependencyBoundary : Set where
@@ -239,6 +280,9 @@ record ResidualDependencyBoundary : Set where
     dependencyCanStrictlyRefineCurrentObservation : Bool
     dependencyCanStrictlyRefineCurrentObservationIsTrue :
       dependencyCanStrictlyRefineCurrentObservation ≡ true
+    hiddenDependencyCanBlockCoarseDescent : Bool
+    hiddenDependencyCanBlockCoarseDescentIsTrue :
+      hiddenDependencyCanBlockCoarseDescent ≡ true
     admissibilityPrecedesCouplingOptimization : Bool
     admissibilityPrecedesCouplingOptimizationIsTrue :
       admissibilityPrecedesCouplingOptimization ≡ true
@@ -248,4 +292,4 @@ record ResidualDependencyBoundary : Set where
 
 canonicalResidualDependencyBoundary : ResidualDependencyBoundary
 canonicalResidualDependencyBoundary =
-  residualDependencyBoundary true refl true refl false refl
+  residualDependencyBoundary true refl true refl true refl false refl
