@@ -9,6 +9,7 @@ on:
       - 'DASHI/Biology/NeuralResidualDependencyBridgeExact.agda'
       - 'DASHI/Biology/NeuralResidualFutureLanguageBridgeExact.agda'
       - 'DASHI/Biology/NeuralResidualDependencyValidation.agda'
+      - 'DASHI/Mathematics/LinearAlgebra/RationalAffineSpectralIndependence2Exact.agda'
       - 'DASHI/Physics/Common/SeparatingProbeFamilyExact.agda'
       - 'DASHI/Biology/Everything.agda'
       - 'DASHI/EverythingTopDownObservationCalculus.agda'
@@ -39,6 +40,7 @@ jobs:
             DASHI/Biology/NeuralResidualDependencyBridgeExact.agda
             DASHI/Biology/NeuralResidualFutureLanguageBridgeExact.agda
             DASHI/Biology/NeuralResidualDependencyValidation.agda
+            DASHI/Mathematics/LinearAlgebra/RationalAffineSpectralIndependence2Exact.agda
             DASHI/Physics/Common/SeparatingProbeFamilyExact.agda
           )
           for source in "${sources[@]}"; do
