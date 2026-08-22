@@ -81,4 +81,5 @@ import DASHI.Core.ConsumerQuotientBaseChangeRegression
 import DASHI.Core.ContextIndexedObservationFibrationRegression
 import DASHI.Core.ResidualSymmetryCollisionFibreRegression
 import DASHI.Ontology.WikidataTernaryFibreRegression
+import DASHI.Ontology.WikidataWarfareFibreRegression
 import DASHI.Ontology.WikidataWorkingGroupRegression
