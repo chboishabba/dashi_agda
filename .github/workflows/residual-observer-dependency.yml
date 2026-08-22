@@ -7,6 +7,8 @@ on:
       - 'DASHI/Core/ResidualObserverDependencyExact.agda'
       - 'DASHI/Core/ResidualObserverDependencyRegression.agda'
       - 'DASHI/Biology/NeuralResidualDependencyBridgeExact.agda'
+      - 'DASHI/Biology/NeuralResidualFutureLanguageBridgeExact.agda'
+      - 'DASHI/Biology/NeuralResidualDependencyValidation.agda'
       - 'DASHI/Physics/Common/SeparatingProbeFamilyExact.agda'
       - 'DASHI/Biology/Everything.agda'
       - 'DASHI/EverythingTopDownObservationCalculus.agda'
@@ -35,6 +37,8 @@ jobs:
             DASHI/Core/ResidualObserverDependencyExact.agda
             DASHI/Core/ResidualObserverDependencyRegression.agda
             DASHI/Biology/NeuralResidualDependencyBridgeExact.agda
+            DASHI/Biology/NeuralResidualFutureLanguageBridgeExact.agda
+            DASHI/Biology/NeuralResidualDependencyValidation.agda
             DASHI/Physics/Common/SeparatingProbeFamilyExact.agda
           )
           for source in "${sources[@]}"; do
@@ -50,10 +54,10 @@ jobs:
           agda -i . -l standard-library \
             DASHI/Core/ResidualObserverDependencyRegression.agda
 
-      - name: Kernel-check neural residual dependency bridge
+      - name: Kernel-check neural residual dependency validation root
         run: |
           agda -i . -l standard-library \
-            DASHI/Biology/NeuralResidualDependencyBridgeExact.agda
+            DASHI/Biology/NeuralResidualDependencyValidation.agda
 
       - name: Kernel-check top-down aggregate
         run: |
