@@ -73,7 +73,7 @@ data CrossDomainProbeKind : Set where
   hessianStencilProbe : CrossDomainProbeKind
   restrictedExpressionProbe : CrossDomainProbeKind
 
-record ProbeAuthorityBoundary : Set where
+record ProbeAuthorityBoundary : Set₁ where
   constructor probeAuthorityBoundary
   field
     matchingTotalsImplyMatchingObjects : Set

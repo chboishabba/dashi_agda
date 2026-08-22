@@ -1,0 +1,68 @@
+name: monster-c3-ssp42
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'DASHI/Biology/BalancedTernaryHarmonicCarrierExact.agda'
+      - 'DASHI/Moonshine/C3FourierConjugationExact.agda'
+      - 'DASHI/Moonshine/C3CyclotomicRealDescentExact.agda'
+      - 'DASHI/Moonshine/C3CyclotomicAmplitudeAlgebraExact.agda'
+      - 'DASHI/Moonshine/C3RiemannConjugationBridgeExact.agda'
+      - 'DASHI/Moonshine/SSP15AffineC3TranslationExact.agda'
+      - 'DASHI/Moonshine/SSP15CMModSevenExact.agda'
+      - 'DASHI/Moonshine/SSP15PhaseClosure54Exact.agda'
+      - 'DASHI/Moonshine/MonsterReducedNonaryBoundaryExact.agda'
+      - 'DASHI/Moonshine/MonsterC3SSP42HighestAlphaValidation.agda'
+      - 'DASHI/Moonshine/Monster3BHighestAlphaValidation.agda'
+      - 'scripts/check_monster_3b_normalizer_dashboard.sh'
+      - '.github/workflows/monster-c3-ssp42.yml'
+
+concurrency:
+  group: monster-c3-ssp42-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  focused-kernel:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Agda and standard library
+        uses: wenkokke/setup-agda@v2
+        with:
+          agda-version: '2.6.4.3'
+          agda-stdlib-version: '2.1'
+
+      - name: Reject trust escapes in tranche
+        run: |
+          sources=(
+            DASHI/Biology/BalancedTernaryHarmonicCarrierExact.agda
+            DASHI/Moonshine/C3FourierConjugationExact.agda
+            DASHI/Moonshine/C3CyclotomicRealDescentExact.agda
+            DASHI/Moonshine/C3CyclotomicAmplitudeAlgebraExact.agda
+            DASHI/Moonshine/C3RiemannConjugationBridgeExact.agda
+            DASHI/Moonshine/SSP15AffineC3TranslationExact.agda
+            DASHI/Moonshine/SSP15CMModSevenExact.agda
+            DASHI/Moonshine/SSP15PhaseClosure54Exact.agda
+            DASHI/Moonshine/MonsterReducedNonaryBoundaryExact.agda
+            DASHI/Moonshine/MonsterC3SSP42HighestAlphaValidation.agda
+          )
+          for source in "${sources[@]}"; do
+            if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|allow-unsolved-metas|TERMINATING|NO_POSITIVITY_CHECK' "$source"; then
+              echo "forbidden trust escape in $source" >&2
+              exit 1
+            fi
+          done
+
+      - name: Kernel-check focused C3 SSP42 root
+        run: |
+          agda --version
+          agda -i . -l standard-library \
+            DASHI/Moonshine/MonsterC3SSP42HighestAlphaValidation.agda
+
+      - name: Kernel-check cumulative Monster 3B root
+        run: |
+          agda -i . -l standard-library \
+            DASHI/Moonshine/Monster3BHighestAlphaValidation.agda
