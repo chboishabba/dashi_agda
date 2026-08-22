@@ -39,10 +39,8 @@ module DASHI.Mathematics.LinearAlgebra.RationalAffineSpectralIndependence2Exact 
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Product using (_×_; _,_)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_)
-open import Data.Rational.Tactic.RingSolver using (solve)
 
 import DASHI.Mathematics.LinearAlgebra.RationalTwoByTwoSelfAdjointSpectralExact as LA
 
@@ -86,23 +84,13 @@ expectedTransformedCovariance = LA.matrix2 two 0ℚ 0ℚ two
 signedProbeTransformsIdentityToDiagonalTwo :
   transformedCovariance signedOrthogonalProbe identityCovariance
   ≡ expectedTransformedCovariance
-signedProbeTransformsIdentityToDiagonalTwo =
-  LA.matrixExtensionality
-    (solve [])
-    (solve [])
-    (solve [])
-    (solve [])
+signedProbeTransformsIdentityToDiagonalTwo = refl
 
 transformedCovarianceEqualsItsDiagonalPart :
   transformedCovariance signedOrthogonalProbe identityCovariance
   ≡ diagonalPart
       (transformedCovariance signedOrthogonalProbe identityCovariance)
-transformedCovarianceEqualsItsDiagonalPart =
-  LA.matrixExtensionality
-    (solve [])
-    (solve [])
-    (solve [])
-    (solve [])
+transformedCovarianceEqualsItsDiagonalPart = refl
 
 transformedOffDiagonalExactlyZero :
   LA.entry12
@@ -110,7 +98,7 @@ transformedOffDiagonalExactlyZero :
   ×
   LA.entry21
     (transformedCovariance signedOrthogonalProbe identityCovariance) ≡ 0ℚ
-transformedOffDiagonalExactlyZero = solve [] , solve []
+transformedOffDiagonalExactlyZero = refl , refl
 
 record FactorOneAffineSpectralIndependence2 : Set where
   constructor factorOneAffineSpectralIndependence2
