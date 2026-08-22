@@ -41,10 +41,7 @@ import DASHI.Core.AdmissibleReachability as Reachability
 import DASHI.Core.FutureObservationLanguageQuotientExact as Future
 import DASHI.Core.ResidualObserverDependencyExact as Residual
 import DASHI.Biology.NeuralResidualDependencyBridgeExact as Neural
-
-------------------------------------------------------------------------
--- Consumer-visible planning read.
-------------------------------------------------------------------------
+import DASHI.Biology.DynamicEffectiveTopology as Dynamic
 
 data PlanningReadAction : Set where
   readPlanning : PlanningReadAction
@@ -65,15 +62,11 @@ planningReadSystem = record
 
 planningAvailableObservation : Neural.BrainState → Bool
 planningAvailableObservation
-  (Neural.brainState activation DASHI.Biology.DynamicEffectiveTopology.inhibitedState) = false
+  (Neural.brainState activation Dynamic.inhibitedState) = false
 planningAvailableObservation
-  (Neural.brainState activation DASHI.Biology.DynamicEffectiveTopology.permissiveState) = false
+  (Neural.brainState activation Dynamic.permissiveState) = false
 planningAvailableObservation
-  (Neural.brainState activation DASHI.Biology.DynamicEffectiveTopology.recurrentState) = true
-
-------------------------------------------------------------------------
--- The recurrent balanced state admits the visible planning-read trace.
-------------------------------------------------------------------------
+  (Neural.brainState activation Dynamic.recurrentState) = true
 
 recurrentPlanningReadAdmissible :
   Dependency.AdmissibleAction
@@ -102,10 +95,6 @@ recurrentPlanningFutureObservation =
       Reachability.executesNil)
     refl
 
-------------------------------------------------------------------------
--- The inhibited balanced state cannot execute the same consumer-visible trace.
-------------------------------------------------------------------------
-
 inhibitedPlanningReadImpossible :
   Dependency.AdmissibleAction
     planningReadSystem
@@ -128,10 +117,6 @@ inhibitedPlanningFutureObservationImpossible
     observationEquality) =
   inhibitedPlanningReadImpossible admissible
 
-------------------------------------------------------------------------
--- Future-language capability and constrained residual choice.
-------------------------------------------------------------------------
-
 RequiredPlanningFutureLanguage :
   Residual.StateCapability Neural.BrainState
 RequiredPlanningFutureLanguage state =
@@ -144,8 +129,7 @@ RequiredPlanningFutureLanguage state =
 
 retainPreservesPlanningFutureLanguage :
   RequiredPlanningFutureLanguage Neural.balancedRecurrentState
-retainPreservesPlanningFutureLanguage =
-  recurrentPlanningFutureObservation
+retainPreservesPlanningFutureLanguage = recurrentPlanningFutureObservation
 
 closeAdmissibleCannotPreservePlanningFutureLanguage :
   (admissible :
@@ -177,11 +161,6 @@ retainIsLeastCoupledAmongFutureLanguagePreserving = record
               alternativeAdmissible capability)
       }
   }
-
-------------------------------------------------------------------------
--- The two post-states have equal declared Laplacian residual but unequal future
--- planning language.  This makes the scalar-insufficiency result dynamic.
-------------------------------------------------------------------------
 
 postStatesHaveEqualLaplacianResidual :
   Neural.residualLaplacianVariation Neural.balancedRecurrentState
