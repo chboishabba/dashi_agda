@@ -165,19 +165,28 @@ exactSummaryCertifiesFutureLanguageSafety
   {system = system} {project = project} {coarsen = coarsen} summary =
   futureLanguageSafeProjection certify
   where
+    transportSummary :
+      ∀ {leftCode rightCode actions observation} →
+      leftCode ≡ rightCode →
+      SummaryLanguage summary leftCode actions observation →
+      SummaryLanguage summary rightCode actions observation
+    transportSummary refl witness = witness
+
     certify :
       ∀ {left right} →
       coarsen left ≡ coarsen right →
       FutureObservationEquivalent system project left right
-    certify {left} {right} refl =
+    certify {left} {right} sameCoarse =
       futureObservationEquivalent λ actions observation →
         logicalIff
           (λ witness →
             backward (summaryExact summary right actions observation)
-              (forward (summaryExact summary left actions observation) witness))
+              (transportSummary sameCoarse
+                (forward (summaryExact summary left actions observation) witness)))
           (λ witness →
             backward (summaryExact summary left actions observation)
-              (forward (summaryExact summary right actions observation) witness))
+              (transportSummary (sym sameCoarse)
+                (forward (summaryExact summary right actions observation) witness)))
 
 ------------------------------------------------------------------------
 -- Concrete quotient presentations.
