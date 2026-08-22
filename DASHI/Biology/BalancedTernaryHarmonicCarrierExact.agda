@@ -114,7 +114,11 @@ elementaryHarmonicDimensionIs196830 :
   elementaryHarmonicDimension ≡ 196830
 elementaryHarmonicDimensionIs196830 = refl
 
-record HarmonicCarrierBoundary : Set where
+-- This boundary quantifies over proposition carriers (`Set`), so the record
+-- itself necessarily lives one universe higher.  The previous `: Set`
+-- annotation was a universe inconsistency; changing only the record sort to
+-- `Set₁` preserves every field and every boundary statement.
+record HarmonicCarrierBoundary : Set₁ where
   constructor harmonicCarrierBoundary
   field
     completionJIsOrdinaryBalancedPair : Set
