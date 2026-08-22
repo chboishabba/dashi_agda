@@ -76,6 +76,8 @@ import DASHI.Cognition.PNF.IndexedSparseFrontierActorRetentionExact
 import DASHI.Cognition.PNF.IndexedSparseFrontierActorRetentionRegression
 import DASHI.Cognition.PNF.IndexedSparseFrontierTransitionExact
 import DASHI.Cognition.PNF.IndexedSparseFrontierTransitionRegression
+import DASHI.Cognition.PNF.ConjunctiveExposureLocalityExact
+import DASHI.Cognition.PNF.ConjunctiveExposureLocalityRegression
 import DASHI.Cognition.PNF.ConsumerRestrictionAggregationIntertwinerExact
 import DASHI.Cognition.PNF.ConsumerRestrictionAggregationIntertwinerRegression
 import DASHI.Cognition.PNF.TypedEventuallyConsistentFibreSystemExact
