@@ -1,7 +1,10 @@
 {-# OPTIONS --safe #-}
 module DASHI.Cognition.PNF.DemandLocalWildcardTemporalOrderExact where
 
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_)
+open import Data.Empty using (⊥)
+
+import DASHI.Cognition.PNF.AmbiguityPreservingBoundedWildcardExact as Wildcard
 
 ------------------------------------------------------------------------
 -- DEMAND-LOCAL TEMPORAL RESTRICTION MUST PRECEDE OBJECT QUOTIENTING
@@ -56,9 +59,9 @@ commutingGlobalQuotientMayImplementRestrictionFirst system certificate =
 --
 -- ActiveSegment is an already-restricted object/position fibre.  Exactness of
 -- the compressed temporal carrier means each demand/object pair sees exactly
--- one active segment whenever the legacy relation has an eligible nearest
--- representative.  Score ambiguity inside that segment remains a separate
--- interval fibre and is handled by the existing MUST/MAY theorem.
+-- the same nearest-eligible segment relation as the legacy raw-profile semantics.
+-- Score ambiguity inside that segment remains a separate interval fibre and is
+-- handled by the existing MUST/MAY theorem.
 ------------------------------------------------------------------------
 
 record DemandLocalTemporalCarrier
@@ -86,8 +89,12 @@ demandLocalCarrierIsExtensionallyLegacyExact :
     (object : Object) →
     (segment : ActiveSegment) →
   ActiveForDemand carrier demand object segment
-    ≡ ActiveForDemand carrier demand object segment
-demandLocalCarrierIsExtensionallyLegacyExact carrier demand object segment = refl
+    Wildcard.↔
+  LegacyNearestEligible carrier demand object segment
+demandLocalCarrierIsExtensionallyLegacyExact carrier demand object segment =
+  Wildcard.iff
+    (activeSound carrier demand object segment)
+    (activeComplete carrier demand object segment)
 
 ------------------------------------------------------------------------
 -- No theorem below promotes a globally collapsed representative merely because
@@ -97,3 +104,7 @@ demandLocalCarrierIsExtensionallyLegacyExact carrier demand object segment = ref
 ------------------------------------------------------------------------
 
 data GlobalQuotientWithoutCommutationPermission : Set where
+
+globalQuotientWithoutCommutationIsForbidden :
+  GlobalQuotientWithoutCommutationPermission → ⊥
+globalQuotientWithoutCommutationIsForbidden ()
