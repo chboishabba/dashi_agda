@@ -175,12 +175,45 @@ equalLaplacianResidualDoesNotForceEqualFuturePlanningLanguage =
   recurrentPlanningFutureObservation
   , inhibitedPlanningFutureObservationImpossible
 
+------------------------------------------------------------------------
+-- Exact quotient-safety failure for the scalar residual observer.
+--
+-- The two displayed states collide under residualLaplacianVariation, but the
+-- one-step future planning language separates them.  Therefore that scalar
+-- projection cannot satisfy FutureLanguageSafeProjection for this consumer.
+------------------------------------------------------------------------
+
+laplacianResidualNotFutureLanguageSafe :
+  Future.FutureLanguageSafeProjection
+    planningReadSystem
+    planningAvailableObservation
+    Neural.residualLaplacianVariation → ⊥
+laplacianResidualNotFutureLanguageSafe safe =
+  inhibitedPlanningFutureObservationImpossible
+    (Future.forward
+      (Future.sameFutureLanguage equivalent
+        (readPlanning ∷ []) true)
+      recurrentPlanningFutureObservation)
+  where
+    equivalent :
+      Future.FutureObservationEquivalent
+        planningReadSystem
+        planningAvailableObservation
+        Neural.balancedRecurrentState
+        Neural.balancedInhibitedState
+    equivalent =
+      Future.kernelContainedInFutureEquivalence safe
+        postStatesHaveEqualLaplacianResidual
+
 record NeuralResidualFutureLanguageBoundary : Set where
   constructor neuralResidualFutureLanguageBoundary
   field
     equalScalarResidualForcesEqualFutureLanguage : Bool
     equalScalarResidualForcesEqualFutureLanguageIsFalse :
       equalScalarResidualForcesEqualFutureLanguage ≡ false
+    scalarResidualIsFutureLanguageSafe : Bool
+    scalarResidualIsFutureLanguageSafeIsFalse :
+      scalarResidualIsFutureLanguageSafe ≡ false
     futureLanguageCapabilityConstrainsDecoupling : Bool
     futureLanguageCapabilityConstrainsDecouplingIsTrue :
       futureLanguageCapabilityConstrainsDecoupling ≡ true
@@ -191,4 +224,8 @@ record NeuralResidualFutureLanguageBoundary : Set where
 canonicalNeuralResidualFutureLanguageBoundary :
   NeuralResidualFutureLanguageBoundary
 canonicalNeuralResidualFutureLanguageBoundary =
-  neuralResidualFutureLanguageBoundary false refl true refl false refl
+  neuralResidualFutureLanguageBoundary
+    false refl
+    false refl
+    true refl
+    false refl
