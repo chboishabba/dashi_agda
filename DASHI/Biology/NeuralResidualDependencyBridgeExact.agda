@@ -5,19 +5,20 @@ module DASHI.Biology.NeuralResidualDependencyBridgeExact where
 --
 -- This module instantiates the generic ResidualObserverDependencyExact seam
 -- with already-existing DASHI neural carriers.  It does not propose a new
--- neuroscience model.  The finite theorems only connect three distinctions
--- that the repository already keeps separate:
+-- neuroscience model.  The finite theorems connect four distinctions that the
+-- repository already keeps separate:
 --
 --   coarse regional measurement,
+--   local separating dependency probes,
 --   microscopic/Laplacian variation,
 --   state-dependent effective connectivity.
 --
 -- The main structural theorem is a non-descent result: one coarse fMRI-like
--- observation cannot reconstruct the effective dependency code on the
--- displayed collision.  The second theorem shows why raw coupling minimisation
--- is too weak: the numerically least-coupled admissible transition may close a
--- required association-to-planning route.  The corrected choice minimizes
--- coupling only among transitions whose post-state preserves that capability.
+-- observation cannot reconstruct the displayed effective-dependency signature.
+-- The second theorem shows why raw coupling minimisation is too weak: the
+-- numerically least-coupled admissible transition may close a required
+-- association-to-planning route.  The corrected choice minimizes coupling only
+-- among transitions whose post-state preserves that capability.
 --
 -- Sources / calibration:
 --
@@ -39,15 +40,18 @@ module DASHI.Biology.NeuralResidualDependencyBridgeExact where
 -- Fan R. K. Chung, "Spectral Graph Theory", CBMS 92, AMS 1997,
 -- DOI 10.1090/cbms/092.
 --
+-- Roger A. Horn and Charles R. Johnson, "Matrix Analysis", second edition,
+-- Cambridge University Press, 2012, DOI 10.1017/CBO9781139020411.
+--
 -- Nikhil Bansal and Haotian Jiang,
 -- "Decoupling via Affine Spectral-Independence: Beck-Fiala and Komlos Bounds
 -- Beyond Banaszczyk", STOC 2026; arXiv:2508.03961,
 -- DOI 10.48550/arXiv.2508.03961.
 --
--- Claim boundary: the Nat-valued Laplacian variation below is not a covariance
--- operator or affine spectral-independence constant, effective reachability is
--- not identified with consciousness, and this finite bridge is not a clinical
--- or biological sufficiency theorem.
+-- Claim boundary: the Nat-valued Laplacian variation and two-coordinate
+-- signature below are not covariance operators or affine spectral-independence
+-- constants; effective reachability is not identified with consciousness; and
+-- this finite bridge is not a clinical or biological sufficiency theorem.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -56,6 +60,7 @@ open import Agda.Builtin.String using (String)
 import DASHI.Core.ObserverRefinementLatticeExact as Observer
 import DASHI.Core.TypedDependencyCore as Dependency
 import DASHI.Core.ResidualObserverDependencyExact as Residual
+import DASHI.Physics.Common.SeparatingProbeFamilyExact as Probe
 import DASHI.Biology.NeuralRepresentationLaplacianExact as Neural
 import DASHI.Biology.DynamicEffectiveTopology as Dynamic
 
@@ -80,26 +85,54 @@ coarseBrainObservation state =
 data DependencyProbe : Set where
   inspectEffectiveDependency : DependencyProbe
 
-data EffectiveDependencyCode : Set where
-  planningRouteClosed planningRouteOpen : EffectiveDependencyCode
+planningRouteIndicator : BrainState → Nat
+planningRouteIndicator (brainState activation Dynamic.inhibitedState) = 0
+planningRouteIndicator (brainState activation Dynamic.permissiveState) = 0
+planningRouteIndicator (brainState activation Dynamic.recurrentState) = 1
 
-planningDependencyCode :
-  BrainState → DependencyProbe → EffectiveDependencyCode
-planningDependencyCode (brainState activation Dynamic.inhibitedState) _ =
-  planningRouteClosed
-planningDependencyCode (brainState activation Dynamic.permissiveState) _ =
-  planningRouteClosed
-planningDependencyCode (brainState activation Dynamic.recurrentState) _ =
-  planningRouteOpen
+DependencySignature : Set
+DependencySignature = Nat × Nat
+
+dependencySignature : BrainState → DependencyProbe → DependencySignature
+dependencySignature state probe =
+  planningRouteIndicator state
+  , Neural.laplacianVariation (activation state)
 
 neuralResidualDependency :
   Residual.ResidualDependencyObserver
-    BrainState DependencyProbe Dynamic.Node EffectiveDependencyCode
+    BrainState DependencyProbe Dynamic.Node DependencySignature
 neuralResidualDependency = record
   { Influences = λ state probe source target →
       Dynamic.Reachable (electrochemicalState state) source target
-  ; dependencyCode = planningDependencyCode
+  ; dependencyCode = dependencySignature
   }
+
+------------------------------------------------------------------------
+-- Existing Horn--Johnson separating-probe machinery now applies directly to
+-- the finite dependency signature.  It does not reconstruct the whole brain
+-- state; it determines only this declared two-coordinate signature.
+------------------------------------------------------------------------
+
+dependencyProbeSystem :
+  Probe.SeparatingProbeSystem DependencySignature Nat
+dependencyProbeSystem = Probe.canonicalPairProbeSystem
+
+dependencySignatureDeterminedByDeclaredProbes :
+  (left right : BrainState) →
+  ((probe : Probe.PairProbe) →
+    Probe.observePair probe
+      (dependencySignature left inspectEffectiveDependency)
+    ≡
+    Probe.observePair probe
+      (dependencySignature right inspectEffectiveDependency)) →
+  dependencySignature left inspectEffectiveDependency
+  ≡ dependencySignature right inspectEffectiveDependency
+dependencySignatureDeterminedByDeclaredProbes left right agreement =
+  Probe.agreementOnSeparatingProbes
+    dependencyProbeSystem
+    (dependencySignature left inspectEffectiveDependency)
+    (dependencySignature right inspectEffectiveDependency)
+    agreement
 
 recurrentCollisionState : BrainState
 recurrentCollisionState =
@@ -115,11 +148,45 @@ collisionHasSameCoarseMeasurement :
 collisionHasSameCoarseMeasurement =
   Neural.fmriProjectionCollision
 
-collisionHasDifferentDependencyCode :
-  planningDependencyCode recurrentCollisionState inspectEffectiveDependency
-  ≡ planningDependencyCode inhibitedCollisionState inspectEffectiveDependency
+recurrentDependencySignatureIsOneTwo :
+  dependencySignature recurrentCollisionState inspectEffectiveDependency
+  ≡ (1 , 2)
+recurrentDependencySignatureIsOneTwo = refl
+
+inhibitedDependencySignatureIsZeroThree :
+  dependencySignature inhibitedCollisionState inspectEffectiveDependency
+  ≡ (0 , 3)
+inhibitedDependencySignatureIsZeroThree = refl
+
+collisionHasDifferentDependencySignature :
+  dependencySignature recurrentCollisionState inspectEffectiveDependency
+  ≡ dependencySignature inhibitedCollisionState inspectEffectiveDependency
   → ⊥
-collisionHasDifferentDependencyCode ()
+collisionHasDifferentDependencySignature equality =
+  oneCannotEqualZero (cong proj₁ equality)
+  where
+    oneCannotEqualZero : 1 ≡ 0 → ⊥
+    oneCannotEqualZero ()
+
+collisionDiffersOnRouteProbe :
+  Probe.observePair Probe.firstProbe
+    (dependencySignature recurrentCollisionState inspectEffectiveDependency)
+  ≡ 1
+  ×
+  Probe.observePair Probe.firstProbe
+    (dependencySignature inhibitedCollisionState inspectEffectiveDependency)
+  ≡ 0
+collisionDiffersOnRouteProbe = refl , refl
+
+collisionDiffersOnVariationProbe :
+  Probe.observePair Probe.secondProbe
+    (dependencySignature recurrentCollisionState inspectEffectiveDependency)
+  ≡ 2
+  ×
+  Probe.observePair Probe.secondProbe
+    (dependencySignature inhibitedCollisionState inspectEffectiveDependency)
+  ≡ 3
+collisionDiffersOnVariationProbe = refl , refl
 
 hiddenEffectiveDependency :
   Residual.HiddenResidualDependency
@@ -131,7 +198,7 @@ hiddenEffectiveDependency =
     recurrentCollisionState
     inhibitedCollisionState
     collisionHasSameCoarseMeasurement
-    collisionHasDifferentDependencyCode
+    collisionHasDifferentDependencySignature
 
 neuralDependencyStrictlyRefinesCoarseMeasurement :
   Observer.StrictRefinement
@@ -336,6 +403,10 @@ record NeuralResidualDependencyBoundary : Set where
     coarseMeasurementDeterminesEffectiveDependencyIsFalse :
       coarseMeasurementDeterminesEffectiveDependency ≡ false
 
+    declaredLocalProbesSeparateDependencySignature : Bool
+    declaredLocalProbesSeparateDependencySignatureIsTrue :
+      declaredLocalProbesSeparateDependencySignature ≡ true
+
     lowerCouplingAutomaticallyPreservesRequiredReach : Bool
     lowerCouplingAutomaticallyPreservesRequiredReachIsFalse :
       lowerCouplingAutomaticallyPreservesRequiredReach ≡ false
@@ -356,6 +427,7 @@ canonicalNeuralResidualDependencyBoundary : NeuralResidualDependencyBoundary
 canonicalNeuralResidualDependencyBoundary =
   neuralResidualDependencyBoundary
     false refl
+    true refl
     false refl
     false refl
     true refl
