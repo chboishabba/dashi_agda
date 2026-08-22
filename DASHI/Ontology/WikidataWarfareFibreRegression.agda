@@ -1,6 +1,6 @@
 module DASHI.Ontology.WikidataWarfareFibreRegression where
 
-open import Agda.Builtin.Bool using (Bool)
+open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 open import Data.Product using (_×_; _,_)
@@ -104,6 +104,6 @@ submarineRetainsHierarchyDomainAndPlatform =
   W.submarine-platform
 
 trenchStillExposesCurrentRecallDefect :
-  W.underWarfare W.trenchWarfare ≡ Agda.Builtin.Bool.false
+  W.underWarfare W.trenchWarfare ≡ false
 trenchStillExposesCurrentRecallDefect =
   W.trenchMissedByCurrentWarfareProjection
