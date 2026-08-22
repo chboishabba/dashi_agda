@@ -62,6 +62,15 @@ agda_sources=(
   DASHI/Moonshine/MonsterThreeLocalE8LeechBridgeExact.agda
   DASHI/Moonshine/LeechWeightTwo196608BridgeExact.agda
   DASHI/Moonshine/MonsterYangMills196608CrossLaneExact.agda
+  DASHI/Moonshine/C3FourierConjugationExact.agda
+  DASHI/Moonshine/C3CyclotomicRealDescentExact.agda
+  DASHI/Moonshine/C3CyclotomicAmplitudeAlgebraExact.agda
+  DASHI/Moonshine/C3RiemannConjugationBridgeExact.agda
+  DASHI/Moonshine/SSP15AffineC3TranslationExact.agda
+  DASHI/Moonshine/SSP15CMModSevenExact.agda
+  DASHI/Moonshine/SSP15PhaseClosure54Exact.agda
+  DASHI/Moonshine/MonsterReducedNonaryBoundaryExact.agda
+  DASHI/Moonshine/MonsterC3SSP42HighestAlphaValidation.agda
   DASHI/Moonshine/Monster3BHighestAlphaValidation.agda
 )
 
@@ -91,6 +100,8 @@ else
 fi
 
 if command -v agda >/dev/null 2>&1; then
+  agda -i . -l standard-library \
+    DASHI/Moonshine/MonsterC3SSP42HighestAlphaValidation.agda
   agda -i . -l standard-library \
     DASHI/Moonshine/Monster3BHighestAlphaValidation.agda
 
