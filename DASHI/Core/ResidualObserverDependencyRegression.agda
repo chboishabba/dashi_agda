@@ -170,7 +170,10 @@ repairStrictlyDecouples = s≤s z≤n
 repairDecouples :
   Residual.Decouples residualCoupling repairIsAdmissible
 repairDecouples =
-  Residual.strictlyDecouplesImpliesDecouples repairStrictlyDecouples
+  Residual.strictlyDecouplesImpliesDecouples
+    {score = residualCoupling}
+    {admissible = repairIsAdmissible}
+    repairStrictlyDecouples
 
 ------------------------------------------------------------------------
 -- Exact regression boundary.
