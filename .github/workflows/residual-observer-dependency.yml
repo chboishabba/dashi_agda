@@ -7,6 +7,7 @@ on:
       - 'DASHI/Core/ResidualObserverDependencyExact.agda'
       - 'DASHI/Core/ResidualObserverDependencyRegression.agda'
       - 'DASHI/Biology/NeuralResidualDependencyBridgeExact.agda'
+      - 'DASHI/Physics/Common/SeparatingProbeFamilyExact.agda'
       - 'DASHI/Biology/Everything.agda'
       - 'DASHI/EverythingTopDownObservationCalculus.agda'
       - '.github/workflows/residual-observer-dependency.yml'
@@ -34,6 +35,7 @@ jobs:
             DASHI/Core/ResidualObserverDependencyExact.agda
             DASHI/Core/ResidualObserverDependencyRegression.agda
             DASHI/Biology/NeuralResidualDependencyBridgeExact.agda
+            DASHI/Physics/Common/SeparatingProbeFamilyExact.agda
           )
           for source in "${sources[@]}"; do
             if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|allow-unsolved-metas|TERMINATING|NO_POSITIVITY_CHECK' "$source"; then
