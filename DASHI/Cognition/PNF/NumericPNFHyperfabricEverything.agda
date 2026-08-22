@@ -80,6 +80,8 @@ import DASHI.Cognition.PNF.ConjunctiveExposureLocalityExact
 import DASHI.Cognition.PNF.ConjunctiveExposureLocalityRegression
 import DASHI.Cognition.PNF.AmbiguityPreservingBoundedWildcardExact
 import DASHI.Cognition.PNF.AmbiguityPreservingBoundedWildcardRegression
+import DASHI.Cognition.PNF.HybridWildcardDecisionRoutingExact
+import DASHI.Cognition.PNF.HybridWildcardDecisionRoutingRegression
 import DASHI.Cognition.PNF.ConsumerRestrictionAggregationIntertwinerExact
 import DASHI.Cognition.PNF.ConsumerRestrictionAggregationIntertwinerRegression
 import DASHI.Cognition.PNF.TypedEventuallyConsistentFibreSystemExact
