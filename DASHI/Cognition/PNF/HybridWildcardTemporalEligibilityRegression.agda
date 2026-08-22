@@ -2,6 +2,7 @@
 module DASHI.Cognition.PNF.HybridWildcardTemporalEligibilityRegression where
 
 open import Data.Empty using (⊥)
+open import Data.Product using (_×_; _,_)
 
 ------------------------------------------------------------------------
 -- DEMAND-LOCAL ELIGIBILITY REGRESSION
