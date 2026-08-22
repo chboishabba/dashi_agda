@@ -46,10 +46,6 @@ import DASHI.Core.TypedDependencyCore as Dependency
 
 ------------------------------------------------------------------------
 -- Action-indexed residual dependency observation.
---
--- Influences retains the typed relational object.  dependencyCode is an
--- explicitly chosen finite/quotient observation suitable for consumer-side
--- refinement.  No completeness relationship between the two is assumed.
 ------------------------------------------------------------------------
 
 record ResidualDependencyObserver
@@ -126,10 +122,6 @@ hiddenResidualDependencyGivesStrictRefinement witness =
 
 ------------------------------------------------------------------------
 -- Non-factorability, in the same exact style as other DASHI observer bridges.
---
--- DependencyCodeDescendsAt says that one action-indexed dependency observation
--- can be reconstructed from the present coarse observation alone.  A hidden
--- residual-dependency collision refutes the existence of every such map.
 ------------------------------------------------------------------------
 
 DependencyCodeDescendsAt :
@@ -167,13 +159,6 @@ hiddenResidualDependencyBlocksDescent witness descent =
 
 ------------------------------------------------------------------------
 -- Quantitative seam.
---
--- A coupling score is intentionally only Nat-valued here.  It can count edges,
--- active cross-blocks, maximum dependency degree, failed separations, or any
--- other proved finite statistic.  A later linear-algebraic instantiation may
--- map a genuine Gram/covariance/off-diagonal operator estimate into this
--- ordering, but this generic core does not pretend that every score is
--- spectral.
 ------------------------------------------------------------------------
 
 CouplingScore : Set → Set → Set
@@ -205,10 +190,6 @@ noWorseCoupledTrans = ≤-trans
 
 ------------------------------------------------------------------------
 -- Least-coupled choice among actions that are actually admissible.
---
--- This keeps optimization subordinate to TypedDependencyCore's proof gate:
--- a low-scoring action constructor cannot win unless it also carries an
--- AdmissibleAction witness at the current fine state.
 ------------------------------------------------------------------------
 
 record LeastCoupledAdmissibleChoice
@@ -228,11 +209,41 @@ record LeastCoupledAdmissibleChoice
 open LeastCoupledAdmissibleChoice public
 
 ------------------------------------------------------------------------
--- Post-action residual score and actual decoupling.
+-- Capability-preserving optimization.
 --
--- This is separate from the action-ranking score above.  The first can rank
--- candidate perturbations before execution; the second certifies what a
--- proof-bearing transition actually does to a residual state statistic.
+-- The brain/conscious-access application exposed an important generic boundary:
+-- reducing coupling to zero by deleting required communication is not useful
+-- decoupling.  A state capability is therefore a proof-relevant requirement on
+-- the post-action state.  Optimization may compare coupling only inside the
+-- subset of proof-bearing transitions that preserve that capability.
+------------------------------------------------------------------------
+
+StateCapability : Set → Set₁
+StateCapability State = State → Set
+
+record LeastCoupledCapabilityPreservingChoice
+    {State Action : Set}
+    (system : Dependency.DependentActionSystem State Action)
+    (score : CouplingScore State Action)
+    (capability : StateCapability State)
+    (state : State) : Set₁ where
+  field
+    chosenCapabilityAction : Action
+    chosenCapabilityAdmissible :
+      Dependency.AdmissibleAction system state chosenCapabilityAction
+    chosenPreservesCapability :
+      capability (Dependency.after chosenCapabilityAdmissible)
+    leastAmongCapabilityPreserving :
+      ∀ (alternative : Action) →
+      (alternativeAdmissible :
+        Dependency.AdmissibleAction system state alternative) →
+      capability (Dependency.after alternativeAdmissible) →
+      NoWorseCoupled score state chosenCapabilityAction alternative
+
+open LeastCoupledCapabilityPreservingChoice public
+
+------------------------------------------------------------------------
+-- Post-action residual score and actual decoupling.
 ------------------------------------------------------------------------
 
 ResidualStateScore : Set → Set
@@ -268,10 +279,27 @@ strictlyDecouplesImpliesDecouples :
   Decouples score admissible
 strictlyDecouplesImpliesDecouples = <⇒≤
 
+record CapabilityPreservingDecoupling
+    {State Action : Set}
+    {system : Dependency.DependentActionSystem State Action}
+    (score : ResidualStateScore State)
+    (capability : StateCapability State)
+    {before action}
+    (admissible : Dependency.AdmissibleAction system before action) : Set where
+  constructor capabilityPreservingDecoupling
+  field
+    preservesRequiredCapability :
+      capability (Dependency.after admissible)
+    residualCouplingDoesNotIncrease :
+      Decouples score admissible
+
+open CapabilityPreservingDecoupling public
+
 ------------------------------------------------------------------------
 -- Boundary receipt kept theorem-bearing: the generic seam proves refinement,
--- non-descent and admissibility-aware ordering, but deliberately does not
--- promote those facts into a spectral-independence theorem.
+-- non-descent, admissibility-aware ordering, and capability-preserving
+-- decoupling, but deliberately does not promote those facts into a spectral-
+-- independence theorem.
 ------------------------------------------------------------------------
 
 record ResidualDependencyBoundary : Set where
@@ -286,10 +314,18 @@ record ResidualDependencyBoundary : Set where
     admissibilityPrecedesCouplingOptimization : Bool
     admissibilityPrecedesCouplingOptimizationIsTrue :
       admissibilityPrecedesCouplingOptimization ≡ true
+    decouplingMayRequireCapabilityConstraint : Bool
+    decouplingMayRequireCapabilityConstraintIsTrue :
+      decouplingMayRequireCapabilityConstraint ≡ true
     finiteScoreAutomaticallySpectral : Bool
     finiteScoreAutomaticallySpectralIsFalse :
       finiteScoreAutomaticallySpectral ≡ false
 
 canonicalResidualDependencyBoundary : ResidualDependencyBoundary
 canonicalResidualDependencyBoundary =
-  residualDependencyBoundary true refl true refl true refl false refl
+  residualDependencyBoundary
+    true refl
+    true refl
+    true refl
+    true refl
+    false refl
