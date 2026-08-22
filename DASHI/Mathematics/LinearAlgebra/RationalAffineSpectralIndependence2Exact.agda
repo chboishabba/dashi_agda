@@ -37,7 +37,8 @@ module DASHI.Mathematics.LinearAlgebra.RationalAffineSpectralIndependence2Exact 
 -- factor-one domination for this single displayed example.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl; cong)
+open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Product using (_×_; _,_)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_)
@@ -110,15 +111,6 @@ transformedOffDiagonalExactlyZero :
   LA.entry21
     (transformedCovariance signedOrthogonalProbe identityCovariance) ≡ 0ℚ
 transformedOffDiagonalExactlyZero = solve [] , solve []
-
-------------------------------------------------------------------------
--- Exact finite factor-one certificate.
---
--- For the displayed rational example, transformed covariance equals its
--- diagonal part.  Therefore any future generic Loewner-order implementation
--- can obtain the Bansal--Jiang factor-one inequality by reflexivity/order
--- weakening, without changing this algebraic theorem.
-------------------------------------------------------------------------
 
 record FactorOneAffineSpectralIndependence2 : Set where
   constructor factorOneAffineSpectralIndependence2
