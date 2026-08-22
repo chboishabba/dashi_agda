@@ -84,6 +84,9 @@ import DASHI.Cognition.PNF.HybridWildcardDecisionRoutingExact
 import DASHI.Cognition.PNF.HybridWildcardDecisionRoutingRegression
 import DASHI.Cognition.PNF.HybridWildcardConsumerTupleParityExact
 import DASHI.Cognition.PNF.HybridWildcardTemporalEligibilityRegression
+import DASHI.Cognition.PNF.DemandLocalWildcardTemporalOrderExact
+import DASHI.Cognition.PNF.DemandLocalWildcardTemporalOrderRegression
+import DASHI.Cognition.PNF.DemandLocalWildcardHybridExact
 import DASHI.Cognition.PNF.ConsumerRestrictionAggregationIntertwinerExact
 import DASHI.Cognition.PNF.ConsumerRestrictionAggregationIntertwinerRegression
 import DASHI.Cognition.PNF.TypedEventuallyConsistentFibreSystemExact
