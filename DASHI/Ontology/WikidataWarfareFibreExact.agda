@@ -1,43 +1,45 @@
 module DASHI.Ontology.WikidataWarfareFibreExact where
 
 ------------------------------------------------------------------------
--- WIKIDATA WARFARE: NATIVE METACLASS / PROPERTY-SHAPE MODEL
+-- WIKIDATA WARFARE: CLASS / METACLASS / QUERY GRAPH SPECIMEN
 --
--- Reconstructed from live Wikidata on 2026-08-22.
+-- This module deliberately keeps three questions separate:
 --
--- Crucial correction: do NOT invent environment/mechanism/platform facets.
--- Keep actual Wikidata objects and actual relation families.  Use P1963
--- (properties for this type) as the schema-level mechanism: when a metaclass is
--- used as the object of P31, P1963 records the properties normally applicable
--- to its instances.  Hard conformance is a separate proof obligation.
+--   P31 : what kind of CLASS-ITEM is this?
+--   P279: what do all instances of this class inherit from?
+--   query reachability: what will a P279* consumer actually retrieve?
 --
--- Q1210930 is mountain warfare; "Alpine warfare" is an alias of that SAME item.
--- Q1558613 is instead a concrete IDF Alpinist Unit, currently typed as a
--- mountain infantry unit.  Warfare classes and military units therefore live
--- on different object levels and must not be conflated.
+-- That separation is the whole point of the Schemathings warfare example.
+-- `type of war` / `type of conflict` are metaclass membership statements.
+-- They do not replace P279, and they do not by themselves repair a P279* query.
+--
+-- Current-item facts below are restricted to the representative statements
+-- checked for this specimen. Proposed statements are represented by separate
+-- datatypes so a theorem cannot silently rewrite Wikidata.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Empty using (⊥)
 open import Data.Product using (_×_; _,_)
 
 ------------------------------------------------------------------------
--- Finite object universe used by this specimen.
+-- Finite representative universe.
 ------------------------------------------------------------------------
 
 data Entity : Set where
   warfare conflict typeOfWar typeOfConflict metaclass typeEntity : Entity
-  mountainWarfare skiWarfare coldWeatherWarfare : Entity
+  navalWarfare submarineWarfare economicWarfare : Entity
+  mountainWarfare coldWeatherWarfare skiWarfare trenchWarfare : Entity
+  staticBattle militaryTactics : Entity
   coldWeather climate weather skiing militarySkier : Entity
-  mountainGun mountainArtillery : Entity
+  mountainGun mountainArtillery trench : Entity
   alpinistUnit mountainInfantryUnit : Entity
-  skiersMilitaryUnit militaryUnitTypeClass mountainUnit militaryUnit skier : Entity
+  skiersMilitaryUnit militaryUnitTypeClass mountainUnit militaryUnit : Entity
   alpini : Entity
 
 ------------------------------------------------------------------------
--- Wikidata properties represented as first-class values where P1963 needs to
--- talk ABOUT a property.
+-- Property names are first-class only where schema statements talk ABOUT a
+-- property. This is not a replacement for the typed relations below.
 ------------------------------------------------------------------------
 
 data WDProperty : Set where
@@ -46,30 +48,49 @@ data WDProperty : Set where
   handledByProp associatedHazardProp fieldOfWorkProp : WDProperty
 
 ------------------------------------------------------------------------
--- Current statements, kept relation-typed.
+-- Current P31 statements.
 ------------------------------------------------------------------------
 
 data P31 : Entity → Entity → Set where
   type-of-war-is-metaclass : P31 typeOfWar metaclass
   type-of-conflict-is-metaclass : P31 typeOfConflict metaclass
+  naval-is-type-of-war : P31 navalWarfare typeOfWar
+  economic-is-type-of-conflict : P31 economicWarfare typeOfConflict
+  trench-is-military-tactics : P31 trenchWarfare militaryTactics
   cold-weather-is-climate : P31 coldWeather climate
   alpinist-unit-is-mountain-infantry : P31 alpinistUnit mountainInfantryUnit
   skiers-unit-is-military-unit-type : P31 skiersMilitaryUnit militaryUnitTypeClass
 
+------------------------------------------------------------------------
+-- Current P279 statements.
+--
+-- Note the deliberate contrast:
+--   submarine warfare -> naval warfare -> warfare
+--   trench warfare -> static battle
+--
+-- The latter path does not currently reach `warfare` in this specimen.
+------------------------------------------------------------------------
 
 data P279 : Entity → Entity → Set where
-  mountain-warfare-sub-warfare : P279 mountainWarfare warfare
+  naval-sub-warfare : P279 navalWarfare warfare
+  submarine-sub-naval : P279 submarineWarfare navalWarfare
+  economic-sub-warfare : P279 economicWarfare warfare
+  mountain-sub-warfare : P279 mountainWarfare warfare
+  cold-weather-warfare-sub-warfare : P279 coldWeatherWarfare warfare
   ski-sub-skiing : P279 skiWarfare skiing
   ski-sub-warfare : P279 skiWarfare warfare
   ski-sub-cold-weather-warfare : P279 skiWarfare coldWeatherWarfare
   ski-sub-mountain-warfare : P279 skiWarfare mountainWarfare
-  cold-weather-warfare-sub-warfare : P279 coldWeatherWarfare warfare
+  trench-sub-static-battle : P279 trenchWarfare staticBattle
   cold-weather-sub-weather : P279 coldWeather weather
   skiers-unit-sub-mountain-unit : P279 skiersMilitaryUnit mountainUnit
   skiers-unit-sub-military-unit : P279 skiersMilitaryUnit militaryUnit
   alpini-sub-mountain-infantry : P279 alpini mountainInfantryUnit
   alpini-sub-skiers-unit : P279 alpini skiersMilitaryUnit
 
+------------------------------------------------------------------------
+-- Other current relation families. These are not coerced into P279 facets.
+------------------------------------------------------------------------
 
 data PracticedBy : Entity → Entity → Set where
   ski-practiced-by-military-skier : PracticedBy skiWarfare militarySkier
@@ -80,15 +101,15 @@ data PracticedBy : Entity → Entity → Set where
 data Uses : Entity → Entity → Set where
   mountain-warfare-uses-mountain-gun : Uses mountainWarfare mountainGun
   mountain-warfare-uses-mountain-artillery : Uses mountainWarfare mountainArtillery
+  trench-warfare-uses-trench : Uses trenchWarfare trench
 
 
 data FieldOfWork : Entity → Entity → Set where
   alpini-field-mountain-warfare : FieldOfWork alpini mountainWarfare
 
 ------------------------------------------------------------------------
--- Current P1963 shape already present on Q125092269 "type of conflict".
--- P1963 means "when this subject is used as object of P31, these properties
--- normally apply".  It is schema/documentation, not by itself a hard theorem.
+-- Native schema documentation already demonstrated by `type of conflict`.
+-- P1963 is advisory/property-shape information, not a hard logical constraint.
 ------------------------------------------------------------------------
 
 data P1963 : Entity → WDProperty → Set where
@@ -101,96 +122,99 @@ data P1963 : Entity → WDProperty → Set where
   conflict-shape-associated-hazard : P1963 typeOfConflict associatedHazardProp
 
 ------------------------------------------------------------------------
--- Proposed P1963 extension for Q124867660 "type of war".
---
--- These are NOT claimed to be live statements.  They are the native Wikidata
--- way to express the property surface suggested by the positive specimens:
--- subclass location, practitioners, and things/concepts used in the activity.
-------------------------------------------------------------------------
-
-data ProposedWarP1963 : WDProperty → Set where
-  war-shape-subclass : ProposedWarP1963 p279Prop
-  war-shape-practiced-by : ProposedWarP1963 practicedByProp
-  war-shape-uses : ProposedWarP1963 usesProp
-
-------------------------------------------------------------------------
--- Proposed metaclass typing of the warfare classes in this specimen.
--- Again: separate from current statements so the formalisation does not rewrite
--- Wikidata merely by declaring a constructor.
+-- Candidate metaclass additions are stated separately from current Wikidata.
+-- Populating the metaclass helps enumerate/check the intended population, but
+-- does NOT itself make a class reachable through P279*.
 ------------------------------------------------------------------------
 
 data ProposedTypeOfWar : Entity → Set where
+  submarine-is-war-type : ProposedTypeOfWar submarineWarfare
   mountain-is-war-type : ProposedTypeOfWar mountainWarfare
-  ski-is-war-type : ProposedTypeOfWar skiWarfare
   cold-weather-is-war-type : ProposedTypeOfWar coldWeatherWarfare
+  ski-is-war-type : ProposedTypeOfWar skiWarfare
+  trench-is-war-type : ProposedTypeOfWar trenchWarfare
 
 ------------------------------------------------------------------------
--- P279 closure for query consumers.
+-- Proposed structural repair for trench warfare.
+--
+-- Keep the current static-battle classification and add a second superclass
+-- only if community consensus accepts that every instance of trench warfare is
+-- also warfare. Multiple inheritance is the Wikidata-native expression of the
+-- two simultaneously true class relationships.
+------------------------------------------------------------------------
+
+data ProposedP279 : Entity → Entity → Set where
+  trench-sub-warfare : ProposedP279 trenchWarfare warfare
+
+------------------------------------------------------------------------
+-- P279 reflexive/transitive closure: this is the semantic core of the SPARQL
+-- path `wdt:P279*` used by the film query.
 ------------------------------------------------------------------------
 
 data P279Star : Entity → Entity → Set where
   star-refl : ∀ {x} → P279Star x x
   star-step : ∀ {x y z} → P279 x y → P279Star y z → P279Star x z
 
-ski-under-mountain : P279Star skiWarfare mountainWarfare
-ski-under-mountain = star-step ski-sub-mountain-warfare star-refl
+naval-under-warfare : P279Star navalWarfare warfare
+naval-under-warfare = star-step naval-sub-warfare star-refl
 
-ski-under-warfare : P279Star skiWarfare warfare
-ski-under-warfare = star-step ski-sub-warfare star-refl
+submarine-under-naval : P279Star submarineWarfare navalWarfare
+submarine-under-naval = star-step submarine-sub-naval star-refl
+
+submarine-under-warfare : P279Star submarineWarfare warfare
+submarine-under-warfare =
+  star-step submarine-sub-naval
+    (star-step naval-sub-warfare star-refl)
+
+economic-under-warfare : P279Star economicWarfare warfare
+economic-under-warfare = star-step economic-sub-warfare star-refl
+
+mountain-under-warfare : P279Star mountainWarfare warfare
+mountain-under-warfare = star-step mountain-sub-warfare star-refl
 
 cold-weather-under-warfare : P279Star coldWeatherWarfare warfare
 cold-weather-under-warfare =
   star-step cold-weather-warfare-sub-warfare star-refl
 
+ski-under-mountain : P279Star skiWarfare mountainWarfare
+ski-under-mountain = star-step ski-sub-mountain-warfare star-refl
+
+ski-under-cold-weather : P279Star skiWarfare coldWeatherWarfare
+ski-under-cold-weather = star-step ski-sub-cold-weather-warfare star-refl
+
+ski-under-warfare : P279Star skiWarfare warfare
+ski-under-warfare = star-step ski-sub-warfare star-refl
+
+trench-under-static-battle : P279Star trenchWarfare staticBattle
+trench-under-static-battle = star-step trench-sub-static-battle star-refl
+
 ------------------------------------------------------------------------
--- The "cold weather" category check that killed the synthetic environment axis.
-------------------------------------------------------------------------
-
-coldWeatherHasClimateType : P31 coldWeather climate
-coldWeatherHasClimateType = cold-weather-is-climate
-
-coldWeatherHasWeatherParent : P279 coldWeather weather
-coldWeatherHasWeatherParent = cold-weather-sub-weather
-
--- No constructor embeds coldWeather itself into the warfare P279 graph.
--- The warfare object is coldWeatherWarfare, a distinct class.
-
-------------------------------------------------------------------------
--- Properly modelled Alpine / mountain warfare specimen.
+-- Finite observation matching the representative current P279 graph.
 --
--- "Alpine warfare" is an alias, so the semantic object is mountainWarfare.
--- Its current class structure is P279 warfare; its current operational
--- relations include Uses mountain gun/artillery.  The proposed missing
--- metaclass statement is P31 typeOfWar, represented separately above.
+-- This Bool is NOT the ontology. It is the exact observation made by the
+-- consumer question "does the current P279* graph reach warfare?" on this
+-- finite specimen. It exists so we can prove query failure constructively.
 ------------------------------------------------------------------------
 
-record AlpineWarfareCurrent : Set where
-  constructor alpineWarfareCurrent
-  field
-    superclass : P279 mountainWarfare warfare
-    usesMountainGun : Uses mountainWarfare mountainGun
-    usesMountainArtillery : Uses mountainWarfare mountainArtillery
+underWarfare : Entity → Bool
+underWarfare warfare = true
+underWarfare navalWarfare = true
+underWarfare submarineWarfare = true
+underWarfare economicWarfare = true
+underWarfare mountainWarfare = true
+underWarfare coldWeatherWarfare = true
+underWarfare skiWarfare = true
+underWarfare trenchWarfare = false
+underWarfare _ = false
 
-canonicalAlpineWarfareCurrent : AlpineWarfareCurrent
-canonicalAlpineWarfareCurrent =
-  alpineWarfareCurrent
-    mountain-warfare-sub-warfare
-    mountain-warfare-uses-mountain-gun
-    mountain-warfare-uses-mountain-artillery
+submarineRetrievedAsWarfare : underWarfare submarineWarfare ≡ true
+submarineRetrievedAsWarfare = refl
 
-record AlpineWarfareProposed : Set where
-  constructor alpineWarfareProposed
-  field
-    current : AlpineWarfareCurrent
-    metaclass : ProposedTypeOfWar mountainWarfare
-
-canonicalAlpineWarfareProposed : AlpineWarfareProposed
-canonicalAlpineWarfareProposed =
-  alpineWarfareProposed canonicalAlpineWarfareCurrent mountain-is-war-type
+trenchMissedByCurrentWarfareProjection : underWarfare trenchWarfare ≡ false
+trenchMissedByCurrentWarfareProjection = refl
 
 ------------------------------------------------------------------------
--- Ski warfare is the richer positive child specimen.  Its information is not
--- flattened into synthetic facets: it is literally the current relation fanout.
+-- Positive multi-inheritance specimen.
 ------------------------------------------------------------------------
 
 record SkiWarfareShape : Set where
@@ -212,7 +236,8 @@ canonicalSkiWarfareShape =
     ski-practiced-by-military-skier
 
 ------------------------------------------------------------------------
--- Object-level separation: a concrete Alpine unit is not the warfare class.
+-- Object-level separation: warfare classes and military units are not one
+-- carrier merely because their labels share military vocabulary.
 ------------------------------------------------------------------------
 
 alpinistUnitIsUnitTyped : P31 alpinistUnit mountainInfantryUnit
@@ -228,43 +253,48 @@ alpiniLinksUnitStructureBackToWarfareField =
   alpini-field-mountain-warfare
 
 ------------------------------------------------------------------------
--- Hard conformance is stronger than P1963 suggestion.
--- A type-of-war member must at minimum be located in the warfare hierarchy;
--- richer relation witnesses may then be present without inventing new axes.
+-- Query-oriented conformance is intentionally narrower than "all members of
+-- type of war". For the declared warfare-film consumer, a class is conformant
+-- only when it both belongs to the selected metaclass population and has an
+-- actual P279* path into warfare.
 ------------------------------------------------------------------------
 
-record WarTypeConforms (x : Entity) : Set where
-  constructor warTypeConforms
+record WarfareQueryConforms (x : Entity) : Set where
+  constructor warfareQueryConforms
   field
     typed : ProposedTypeOfWar x
-    underWarfare : P279Star x warfare
+    underWarfarePath : P279Star x warfare
 
-mountainConforms : WarTypeConforms mountainWarfare
+submarineConforms : WarfareQueryConforms submarineWarfare
+submarineConforms =
+  warfareQueryConforms submarine-is-war-type submarine-under-warfare
+
+mountainConforms : WarfareQueryConforms mountainWarfare
 mountainConforms =
-  warTypeConforms mountain-is-war-type
-    (star-step mountain-warfare-sub-warfare star-refl)
+  warfareQueryConforms mountain-is-war-type mountain-under-warfare
 
-skiConforms : WarTypeConforms skiWarfare
-skiConforms = warTypeConforms ski-is-war-type ski-under-warfare
+skiConforms : WarfareQueryConforms skiWarfare
+skiConforms = warfareQueryConforms ski-is-war-type ski-under-warfare
 
-coldWeatherWarfareConforms : WarTypeConforms coldWeatherWarfare
+coldWeatherWarfareConforms : WarfareQueryConforms coldWeatherWarfare
 coldWeatherWarfareConforms =
-  warTypeConforms cold-weather-is-war-type cold-weather-under-warfare
+  warfareQueryConforms cold-weather-is-war-type cold-weather-under-warfare
 
 ------------------------------------------------------------------------
--- Boundary: what the new model deliberately does NOT claim.
+-- Boundary claims.
 ------------------------------------------------------------------------
 
 record WarfareOntologyBoundary : Set where
   constructor warfareOntologyBoundary
   field
-    alpineWarfareNeedsSeparateItemFromMountainWarfare : Bool
-    coldWeatherIsAWeatherObject : Bool
-    coldWeatherIsAWarType : Bool
-    p1963IsHardConstraintByItself : Bool
+    p31ReplacesP279Inheritance : Bool
+    metaclassTypingRepairsP279ReachabilityByItself : Bool
+    flatDirectChildrenAreAutomaticallyWrong : Bool
+    multipleInheritanceIsAllowedWhenBothClassClaimsHold : Bool
+    trenchCurrentP279PathReachesWarfare : Bool
+    syntheticFacetVocabularyRequired : Bool
     warfareClassesAndConcreteMilitaryUnitsAreSameLevel : Bool
-    syntheticEnvironmentFacetRequired : Bool
 
 canonicalWarfareOntologyBoundary : WarfareOntologyBoundary
 canonicalWarfareOntologyBoundary =
-  warfareOntologyBoundary false true false false false false
+  warfareOntologyBoundary false false false true false false false
