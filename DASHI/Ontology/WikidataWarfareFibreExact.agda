@@ -38,6 +38,7 @@ module DASHI.Ontology.WikidataWarfareFibreExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
+open import Data.Product using (_×_; _,_)
 
 ------------------------------------------------------------------------
 -- Objects in the finite warfare specimen.
@@ -158,12 +159,18 @@ underNaval submarineWarfare = true
 underNaval unrestrictedSubmarineWarfare = true
 underNaval _ = false
 
+trueNotFalse : true ≡ false → ⊥
+trueNotFalse ()
+
 ------------------------------------------------------------------------
--- Exact collision witnesses.
---
--- P31 alone cannot support the naval consumer: submarine and mountain warfare
--- have the same current P31 observation but different naval membership.
+-- Exact collision / non-descent witnesses.
 ------------------------------------------------------------------------
+
+record FibreCounterexample (Observer Outcome : Entity → Set) : Set₁ where
+  field
+    left right : Entity
+    sameObservation : Observer left → Observer right
+    outcomeConflict : Outcome left → Outcome right → ⊥
 
 p31SubmarineMountainCollision :
   p31Observation submarineWarfare ≡ p31Observation mountainWarfare
@@ -185,6 +192,15 @@ submarineUnderWarfareObserved = refl
 
 mountainUnderWarfareObserved : underWarfare mountainWarfare ≡ true
 mountainUnderWarfareObserved = refl
+
+p31PlusWarfareStillCollides :
+  (p31Observation submarineWarfare ≡ p31Observation mountainWarfare) ×
+  (underWarfare submarineWarfare ≡ underWarfare mountainWarfare)
+p31PlusWarfareStillCollides = refl , refl
+
+navalOutcomeDoesNotDescendThroughThatCollision :
+  underNaval submarineWarfare ≡ underNaval mountainWarfare → ⊥
+navalOutcomeDoesNotDescendThroughThatCollision ()
 
 ------------------------------------------------------------------------
 -- Trench warfare is the recall defect for the bare P279* warfare query in the
@@ -244,8 +260,6 @@ data HasFacet : (x : Entity) → (axis : FacetAxis) → FacetValue axis → Set 
 mountainAndEconomicShareCurrentParent :
   P279 mountainWarfare warfare × P279 economicWarfare warfare
 mountainAndEconomicShareCurrentParent = mountain-sub-warfare , economic-sub-warfare
-  where
-  open import Data.Product using (_×_; _,_)
 
 mountainCarriesEnvironmentFacet :
   HasFacet mountainWarfare environment mountainEnvironment
@@ -275,8 +289,6 @@ skiCarriesTerrainClimateAndMobility :
   HasFacet skiWarfare mobility skiMobility
 skiCarriesTerrainClimateAndMobility =
   ski-mountain-environment , ski-cold-environment , ski-mobility
-  where
-  open import Data.Product using (_×_; _,_)
 
 ------------------------------------------------------------------------
 -- Consumer-level normal form.
@@ -293,7 +305,7 @@ record WarfareQueryInterface : Set₁ where
     Class : Set
     Meta : Class → Entity → Set
     Subclass : Class → Entity → Set
-    Facet : (Class → FacetAxis → Set)
+    Facet : (x : Class) → (axis : FacetAxis) → FacetValue axis → Set
 
 record WarfareOntologyBoundary : Set where
   constructor warfareOntologyBoundary
