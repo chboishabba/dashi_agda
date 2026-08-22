@@ -7,8 +7,8 @@ module DASHI.EverythingTopDownObservationCalculus where
 -- smallest current generic spine assembled from existing observer, future-
 -- language, provenance, hyperfabric and authority owners plus the new static
 -- consumer-descent, canonical-kernel, context/base-change, consumer-relevant
--- residual-necessity, residual-symmetry, orbit/stabilizer and finite
--- representation-cost theorems.
+-- residual-necessity, residual-symmetry, orbit/stabilizer, action-indexed
+-- residual-dependency/decoupling and finite representation-cost theorems.
 ------------------------------------------------------------------------
 
 -- Static observation/refinement and exact consumer descent/minimal quotient.
@@ -20,6 +20,13 @@ import DASHI.Core.ConsumerQuotientBaseChangeExact
 import DASHI.Core.ConsumerQuotientBaseChangeRegression
 import DASHI.Core.ConsumerIndexedResidualRefinementExact
 import DASHI.Core.TopDownObservationCalculusExact
+
+-- Action-indexed residual dependency geometry and admissibility-aware
+-- decoupling.  This generic seam is deliberately weaker than spectral
+-- independence: finite dependency codes/scores do not automatically construct
+-- covariance, Gram, SDP, or operator-norm certificates.
+import DASHI.Core.ResidualObserverDependencyExact
+import DASHI.Core.ResidualObserverDependencyRegression
 
 -- Context-indexed carriers and exact finite regression.
 import DASHI.Core.ContextIndexedObservationFibrationExact
@@ -56,6 +63,9 @@ import DASHI.Cognition.PNF.ObserverSeparationAuthorityBoundaryExact
 -- A consumer-relevant collision forces every sufficient repair to split it.
 -- Static consumer sufficiency != exact reconstruction.
 -- Static minimal observer != future-language minimal quotient.
+-- Current observation equality != action-indexed dependency equality.
+-- Low coupling score != action admissibility.
+-- Finite dependency score != affine spectral independence / SDP certificate.
 -- Context-local adequacy != natural/base-change transport.
 -- Symmetry-preserving collision fibre != automatic spectral decomposition.
 -- Orbit quotient != exact reconstruction without residual/stabilizer data.
