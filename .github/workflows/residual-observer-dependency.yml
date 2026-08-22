@@ -6,6 +6,8 @@ on:
     paths:
       - 'DASHI/Core/ResidualObserverDependencyExact.agda'
       - 'DASHI/Core/ResidualObserverDependencyRegression.agda'
+      - 'DASHI/Biology/NeuralResidualDependencyBridgeExact.agda'
+      - 'DASHI/Biology/Everything.agda'
       - 'DASHI/EverythingTopDownObservationCalculus.agda'
       - '.github/workflows/residual-observer-dependency.yml'
 
@@ -31,6 +33,7 @@ jobs:
           sources=(
             DASHI/Core/ResidualObserverDependencyExact.agda
             DASHI/Core/ResidualObserverDependencyRegression.agda
+            DASHI/Biology/NeuralResidualDependencyBridgeExact.agda
           )
           for source in "${sources[@]}"; do
             if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|allow-unsolved-metas|TERMINATING|NO_POSITIVITY_CHECK' "$source"; then
@@ -44,6 +47,11 @@ jobs:
           agda --version
           agda -i . -l standard-library \
             DASHI/Core/ResidualObserverDependencyRegression.agda
+
+      - name: Kernel-check neural residual dependency bridge
+        run: |
+          agda -i . -l standard-library \
+            DASHI/Biology/NeuralResidualDependencyBridgeExact.agda
 
       - name: Kernel-check top-down aggregate
         run: |
