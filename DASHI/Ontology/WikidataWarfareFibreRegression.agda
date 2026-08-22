@@ -2,22 +2,50 @@ module DASHI.Ontology.WikidataWarfareFibreRegression where
 
 open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Product using (_×_; _,_)
+open import Data.Product using (_×_)
 
 import DASHI.Ontology.WikidataWarfareFibreExact as W
+import DASHI.Ontology.WikidataWarfareSemanticTargetExact as Q
 
 ------------------------------------------------------------------------
--- Alpine warfare is mountain warfare: one object, alias-level naming.
+-- Positive inheritance case from the motivating film query.
 ------------------------------------------------------------------------
 
-alpineModelKeepsCurrentMountainStructure : W.AlpineWarfareCurrent
-alpineModelKeepsCurrentMountainStructure = W.canonicalAlpineWarfareCurrent
+submarineStillDescendsToNaval :
+  W.P279Star W.submarineWarfare W.navalWarfare
+submarineStillDescendsToNaval = W.submarine-under-naval
 
-alpineModelAddsOnlyMetaclassTyping : W.AlpineWarfareProposed
-alpineModelAddsOnlyMetaclassTyping = W.canonicalAlpineWarfareProposed
+submarineStillDescendsToWarfare :
+  W.P279Star W.submarineWarfare W.warfare
+submarineStillDescendsToWarfare = W.submarine-under-warfare
+
+submarineFilmStillHitsNaval :
+  Q.QueryHit Q.mainSubject Q.submarineFilm W.navalWarfare
+submarineFilmStillHitsNaval = Q.submarineFilmHitsNavalQuery
 
 ------------------------------------------------------------------------
--- Ski warfare remains a literal multi-parent positive specimen.
+-- Trench warfare remains the deliberate current-graph failure specimen.
+------------------------------------------------------------------------
+
+trenchStillClassifiedAsMilitaryTactics :
+  W.P31 W.trenchWarfare W.militaryTactics
+trenchStillClassifiedAsMilitaryTactics = W.trench-is-military-tactics
+
+trenchStillDescendsToStaticBattle :
+  W.P279Star W.trenchWarfare W.staticBattle
+trenchStillDescendsToStaticBattle = W.trench-under-static-battle
+
+trenchCurrentWarfareProjectionStillMisses :
+  W.underWarfare W.trenchWarfare ≡ false
+trenchCurrentWarfareProjectionStillMisses = refl
+
+trenchIntendedFilmConsumerStillIncludes :
+  Q.intendedWarfareFilmConsumer Q.trenchFilm ≡ true
+trenchIntendedFilmConsumerStillIncludes = refl
+
+------------------------------------------------------------------------
+-- Multi-inheritance is retained literally rather than normalised into fake
+-- environment/platform/mechanism facets.
 ------------------------------------------------------------------------
 
 skiKeepsActualRelationFanout : W.SkiWarfareShape
@@ -27,15 +55,23 @@ skiStillDescendsToMountainWarfare :
   W.P279Star W.skiWarfare W.mountainWarfare
 skiStillDescendsToMountainWarfare = W.ski-under-mountain
 
+skiStillDescendsToColdWeatherWarfare :
+  W.P279Star W.skiWarfare W.coldWeatherWarfare
+skiStillDescendsToColdWeatherWarfare = W.ski-under-cold-weather
+
 ------------------------------------------------------------------------
--- Cold weather itself is not promoted into the warfare type lattice.
+-- `cold weather` and `cold-weather warfare` stay distinct object levels.
 ------------------------------------------------------------------------
 
 coldWeatherStillTypedAsClimate : W.P31 W.coldWeather W.climate
-coldWeatherStillTypedAsClimate = W.coldWeatherHasClimateType
+coldWeatherStillTypedAsClimate = W.cold-weather-is-climate
 
 coldWeatherStillSubWeather : W.P279 W.coldWeather W.weather
-coldWeatherStillSubWeather = W.coldWeatherHasWeatherParent
+coldWeatherStillSubWeather = W.cold-weather-sub-weather
+
+coldWeatherWarfareStillUnderWarfare :
+  W.P279Star W.coldWeatherWarfare W.warfare
+coldWeatherWarfareStillUnderWarfare = W.cold-weather-under-warfare
 
 ------------------------------------------------------------------------
 -- Unit layer remains separate from warfare-class layer.
@@ -52,39 +88,48 @@ alpiniStillBridgesUnitClassToWarfareField =
   W.alpiniLinksUnitStructureBackToWarfareField
 
 ------------------------------------------------------------------------
--- Metaclass/P1963 shape: suggested properties and hard conformance stay apart.
+-- Metaclass membership and inheritance are independent obligations.
 ------------------------------------------------------------------------
 
-warTypeSuggestsSubclassProperty : W.ProposedWarP1963 W.p279Prop
-warTypeSuggestsSubclassProperty = W.war-shape-subclass
+navalCurrentMetaclassTyping : W.P31 W.navalWarfare W.typeOfWar
+navalCurrentMetaclassTyping = W.naval-is-type-of-war
 
-warTypeSuggestsPractitionerProperty : W.ProposedWarP1963 W.practicedByProp
-warTypeSuggestsPractitionerProperty = W.war-shape-practiced-by
+mountainProposedMetaclassTyping : W.ProposedTypeOfWar W.mountainWarfare
+mountainProposedMetaclassTyping = W.mountain-is-war-type
 
-warTypeSuggestsUsesProperty : W.ProposedWarP1963 W.usesProp
-warTypeSuggestsUsesProperty = W.war-shape-uses
-
-mountainWarTypeConforms : W.WarTypeConforms W.mountainWarfare
-mountainWarTypeConforms = W.mountainConforms
-
-skiWarTypeConforms : W.WarTypeConforms W.skiWarfare
-skiWarTypeConforms = W.skiConforms
-
-coldWeatherWarTypeConforms : W.WarTypeConforms W.coldWeatherWarfare
-coldWeatherWarTypeConforms = W.coldWeatherWarfareConforms
+mountainQueryConforms : W.WarfareQueryConforms W.mountainWarfare
+mountainQueryConforms = W.mountainConforms
 
 ------------------------------------------------------------------------
--- Guard the rejected synthetic reading.
+-- Boundary regressions: do not regress into the tempting but wrong repairs.
 ------------------------------------------------------------------------
 
-noSyntheticEnvironmentFacetRequired :
-  W.WarfareOntologyBoundary.syntheticEnvironmentFacetRequired
+p31DoesNotReplaceP279 :
+  W.WarfareOntologyBoundary.p31ReplacesP279Inheritance
     W.canonicalWarfareOntologyBoundary
   ≡ false
-noSyntheticEnvironmentFacetRequired = refl
+p31DoesNotReplaceP279 = refl
 
-coldWeatherIsNotPromotedToWarType :
-  W.WarfareOntologyBoundary.coldWeatherIsAWarType
+metaclassDoesNotMagicallyRepairTraversal :
+  W.WarfareOntologyBoundary.metaclassTypingRepairsP279ReachabilityByItself
     W.canonicalWarfareOntologyBoundary
   ≡ false
-coldWeatherIsNotPromotedToWarType = refl
+metaclassDoesNotMagicallyRepairTraversal = refl
+
+flatChildrenAreNotAutomaticallyDefective :
+  W.WarfareOntologyBoundary.flatDirectChildrenAreAutomaticallyWrong
+    W.canonicalWarfareOntologyBoundary
+  ≡ false
+flatChildrenAreNotAutomaticallyDefective = refl
+
+multipleInheritanceRemainsAvailable :
+  W.WarfareOntologyBoundary.multipleInheritanceIsAllowedWhenBothClassClaimsHold
+    W.canonicalWarfareOntologyBoundary
+  ≡ true
+multipleInheritanceRemainsAvailable = refl
+
+noSyntheticFacetVocabularyRequired :
+  W.WarfareOntologyBoundary.syntheticFacetVocabularyRequired
+    W.canonicalWarfareOntologyBoundary
+  ≡ false
+noSyntheticFacetVocabularyRequired = refl
