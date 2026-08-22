@@ -5,10 +5,12 @@ module DASHI.Core.ResidualObserverDependencyRegression where
 --
 -- Two fine states have the same present coarse observation but different
 -- action-indexed dependency codes.  Pairing the dependency observer with the
--- coarse observer is therefore a strict refinement.  Separately, a concrete
--- proof-bearing repair transition strictly decreases a residual coupling
--- score.  This is intentionally finite: it checks the generic theorem seam
--- without claiming affine spectral-independence or a discrepancy bound.
+-- coarse observer is therefore a strict refinement, and no reconstruction map
+-- from the coarse observation alone can recover the repair dependency code.
+-- Separately, a concrete proof-bearing repair transition strictly decreases a
+-- residual coupling score.  This is intentionally finite: it checks the
+-- generic theorem seam without claiming affine spectral-independence or a
+-- discrepancy bound.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -74,6 +76,14 @@ repairDependencyStrictlyRefinesPresentObservation :
       localResidualDependency coarse repair)
 repairDependencyStrictlyRefinesPresentObservation =
   Residual.hiddenResidualDependencyGivesStrictRefinement
+    presentCollisionHidesRepairDependency
+
+repairDependencyDoesNotDescendThroughPresentObservation :
+  Residual.DependencyCodeDescendsAt
+    localResidualDependency coarse repair →
+  ⊥
+repairDependencyDoesNotDescendThroughPresentObservation =
+  Residual.hiddenResidualDependencyBlocksDescent
     presentCollisionHidesRepairDependency
 
 ------------------------------------------------------------------------
@@ -172,9 +182,17 @@ record RegressionBoundary : Set where
     samePresentObservation : coarse entangled ≡ coarse quiet
     differentRepairDependencyCannotCollapse :
       dependencyCode entangled repair ≡ dependencyCode quiet repair → ⊥
+    repairDependencyCannotFactorThroughPresentObservation :
+      Residual.DependencyCodeDescendsAt
+        localResidualDependency coarse repair →
+      ⊥
     realizedRepairStrictlyReducesCoupling :
       Residual.StrictlyDecouples residualCoupling repairIsAdmissible
 
 canonicalRegressionBoundary : RegressionBoundary
 canonicalRegressionBoundary =
-  regressionBoundary refl (λ ()) repairStrictlyDecouples
+  regressionBoundary
+    refl
+    (λ ())
+    repairDependencyDoesNotDescendThroughPresentObservation
+    repairStrictlyDecouples
