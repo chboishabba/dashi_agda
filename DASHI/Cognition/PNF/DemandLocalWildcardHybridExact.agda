@@ -1,6 +1,9 @@
 {-# OPTIONS --safe #-}
 module DASHI.Cognition.PNF.DemandLocalWildcardHybridExact where
 
+open import Agda.Builtin.Equality using (_≡_)
+open import Data.Empty using (⊥)
+
 import DASHI.Cognition.PNF.AmbiguityPreservingBoundedWildcardExact as Wildcard
 import DASHI.Cognition.PNF.DemandLocalWildcardTemporalOrderExact as Temporal
 import DASHI.Cognition.PNF.HybridWildcardConsumerTupleParityExact as Consumer
@@ -97,3 +100,7 @@ demandLocalDispatcherPreservesConsumerObservation dispatcher demand =
 ------------------------------------------------------------------------
 
 data PerformanceImpliesSemanticCertificatePermission : Set where
+
+performanceCannotManufactureSemanticCertificate :
+  PerformanceImpliesSemanticCertificatePermission → ⊥
+performanceCannotManufactureSemanticCertificate ()
