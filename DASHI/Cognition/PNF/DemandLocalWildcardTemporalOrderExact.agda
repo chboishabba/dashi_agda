@@ -88,9 +88,9 @@ demandLocalCarrierIsExtensionallyLegacyExact :
     (demand : Demand) →
     (object : Object) →
     (segment : ActiveSegment) →
-  ActiveForDemand carrier demand object segment
-    Wildcard.↔
-  LegacyNearestEligible carrier demand object segment
+  Wildcard._↔_
+    (ActiveForDemand carrier demand object segment)
+    (LegacyNearestEligible carrier demand object segment)
 demandLocalCarrierIsExtensionallyLegacyExact carrier demand object segment =
   Wildcard.iff
     (activeSound carrier demand object segment)
