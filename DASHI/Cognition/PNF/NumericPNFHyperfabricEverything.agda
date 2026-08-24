@@ -55,6 +55,8 @@ import DASHI.Cognition.PNF.FibreSolverDeltaStreamExact
 import DASHI.Cognition.PNF.DreamPNFDeltaToDatabaseExact
 import DASHI.Cognition.PNF.DreamFibreSolverPipelineExact
 import DASHI.Cognition.PNF.FibreNaturalDeltaTransportExact
+import DASHI.Cognition.PNF.DreamFlowExecutionPlacementExact
+import DASHI.Cognition.PNF.DreamFlowRuntimeComplexityExact
 import DASHI.Cognition.PNF.EditTransportLeafLocalityExact
 import DASHI.Cognition.PNF.EditTransportCompositionExact
 import DASHI.Cognition.PNF.DependencyDerivedOccurrenceIdentityExact
