@@ -49,6 +49,7 @@ import DASHI.Cognition.PNF.IndependentFibreBatchExecutionExact
 import DASHI.Cognition.PNF.ReusableTemplateTrancheEconomyExact
 import DASHI.Cognition.PNF.NumericStreamSemanticCompilationExact
 import DASHI.Cognition.PNF.WholeTrancheExecutionArchitectureExact
+import DASHI.Cognition.PNF.WholeTrancheKernelSelectionExact
 import DASHI.Cognition.PNF.EditTransportLeafLocalityExact
 import DASHI.Cognition.PNF.EditTransportCompositionExact
 import DASHI.Cognition.PNF.DependencyDerivedOccurrenceIdentityExact
