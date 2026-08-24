@@ -12,6 +12,7 @@ import DASHI.Biology.StudentVoiceEpistemicAgencyBridge as Voice
 import DASHI.Biology.StudentIdentifiedSupportStrategiesBridge as Strategies
 import DASHI.Biology.EcologyOfDataHyperfabricBridge as Ecology
 import DASHI.Biology.ParentAllyshipMultiObserverBridge as Allyship
+import DASHI.Biology.ParentalFearIndependentMobilityExact as FearMobility
 import DASHI.Biology.InterpretiveCodingSystem as Coding
 import DASHI.Biology.CrossPaperDialecticalDevelopment as Development
 
@@ -64,6 +65,10 @@ record AliceBrownCorpusLoom : Set₁ where
     parentAllyshipBridgeIsCanonical :
       parentAllyshipBridge ≡ Allyship.canonicalParentAllyshipMultiObserverBridge
 
+    parentalFearMobilityBridge : FearMobility.ParentalFearEcologyBridge
+    parentalFearMobilityBridgeIsCanonical :
+      parentalFearMobilityBridge ≡ FearMobility.canonicalParentalFearEcologyBridge
+
     interpretiveCodingSystem : Coding.InterpretiveCodingSystem
     interpretiveCodingSystemIsCanonical :
       interpretiveCodingSystem ≡ Coding.canonicalInterpretiveCodingSystem
@@ -96,6 +101,10 @@ record AliceBrownCorpusLoom : Set₁ where
     humourSourcePreservedBeforeDialecticalCorrectionIsTrue :
       humourSourcePreservedBeforeDialecticalCorrection ≡ true
 
+    parentalFearSourcePreservedBeforeEcologyBridge : Bool
+    parentalFearSourcePreservedBeforeEcologyBridgeIsTrue :
+      parentalFearSourcePreservedBeforeEcologyBridge ≡ true
+
     corpusLoomCandidateOnly : Bool
     corpusLoomCandidateOnlyIsTrue : corpusLoomCandidateOnly ≡ true
 
@@ -114,6 +123,7 @@ canonicalAliceBrownCorpusLoom =
     Strategies.canonicalStudentIdentifiedSupportStrategiesBridge refl
     Ecology.canonicalEcologyOfDataHyperfabricBridge refl
     Allyship.canonicalParentAllyshipMultiObserverBridge refl
+    FearMobility.canonicalParentalFearEcologyBridge refl
     Coding.canonicalInterpretiveCodingSystem refl
     Development.canonicalCrossPaperDialecticalDevelopment refl
     true refl
@@ -123,8 +133,9 @@ canonicalAliceBrownCorpusLoom =
     true refl
     true refl
     true refl
-    "Corpus-level candidate loom: the OEF/AI paper supplies scalable proxy classification; the source-bound humour paper supplies a seven-consideration teacher-side pedagogical framework; the humour/agency hyperfabric bridge exposes constitutive governance, strict intersectional carrier expansion, conditional-normalisation and plural-dynamic-safety boundaries without rewriting the source; voice/agency supplies epistemic-participation gates; online-support research supplies student-identified +1 families; ecology-of-data supplies person-place custodianship; dyslexia allyship research supplies plural observer and proximity fibres; and the interpretive-coding interface exposes the common human/machine mediation layer. Source claims, cross-paper inferences, DASHI extensions and future empirical tests remain distinct."
+    true refl
+    "Corpus-level candidate loom: the OEF/AI paper supplies scalable proxy classification; the source-bound humour paper supplies a seven-consideration teacher-side pedagogical framework; the humour/agency hyperfabric bridge exposes constitutive governance, strict intersectional carrier expansion, conditional-normalisation and plural-dynamic-safety boundaries without rewriting the source; voice/agency supplies epistemic-participation gates; online-support research supplies student-identified +1 families; ecology-of-data supplies person-place custodianship; dyslexia allyship research supplies plural observer and proximity fibres; the parental fear/IAST study supplies a situated reciprocal negotiation model with opposed place readings, plural stranger meanings, benefit/fear tension and parent-action feedback; and the interpretive-coding interface exposes the common human/machine mediation layer. Source claims, cross-paper inferences, DASHI extensions and future empirical tests remain distinct."
 
 canonicalCorpusLoomSourceCountReading : String
 canonicalCorpusLoomSourceCountReading =
-  "eight source-bound papers/items with title, authors, DOI-or-explicit-no-DOI, venue and boundary metadata"
+  "nine source-bound papers/items with title, authors, DOI-or-explicit-no-DOI, venue and boundary metadata"
