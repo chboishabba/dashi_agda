@@ -1,6 +1,6 @@
 module DASHI.Cognition.PNF.DreamFlowRuntimeComplexityExact where
 
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat; _+_; _*_)
 
 ------------------------------------------------------------------------
@@ -130,10 +130,12 @@ measuredDeclaredWork receipt =
 
 ------------------------------------------------------------------------
 -- Near-parser performance target is a physical theorem/receipt, not derived from
--- asymptotics alone.
+-- asymptotics alone.  The concrete runtime supplies the order relation and the
+-- requested ratio.  For example, with ordinary natural-number order, numerator
+-- 6 and denominator 5 expresses post-parser <= 1.2 * parser.
 ------------------------------------------------------------------------
 
-record NearParserWallTarget : Set where
+record NearParserWallTarget (_≤W_ : Nat → Nat → Set) : Set where
   constructor nearParserWallTarget
   field
     parserWall : Nat
@@ -142,10 +144,16 @@ record NearParserWallTarget : Set where
     allowedDenominator : Nat
     targetWitness :
       postParserWall * allowedDenominator
-        ≡ postParserWall * allowedDenominator
+        ≤W parserWall * allowedNumerator
 
 open NearParserWallTarget public
 
--- targetWitness is deliberately not a speed claim; the runtime must instantiate
--- the actual inequality relation in its performance constitution.  This module
--- specifies only what work must be charged to the optimized path.
+------------------------------------------------------------------------
+-- Structural complexity and measured wall performance remain independent.
+------------------------------------------------------------------------
+
+data LinearDeclaredWorkImpliesNearParserWall : Set where
+
+linearWorkAloneCannotManufactureWallTarget :
+  LinearDeclaredWorkImpliesNearParserWall → ∀ {A : Set} → A
+linearWorkAloneCannotManufactureWallTarget ()
