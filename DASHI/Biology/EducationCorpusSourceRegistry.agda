@@ -82,6 +82,10 @@ partnershipBarriersAuthors =
   ∷ "Alice Brown"
   ∷ []
 
+parentalFearIndependentMobilityAuthors : List String
+parentalFearIndependentMobilityAuthors =
+  "Justen O'Connor" ∷ "Alice Brown" ∷ []
+
 aiFeedbackPaper : PaperReference
 aiFeedbackPaper =
   mkPaperReference
@@ -202,6 +206,21 @@ partnershipBarriersPaper =
     "Parent perceptions are valid situated observer surfaces but do not alone establish every participant's state, institutional intent, or universal school-system behaviour."
     true refl
 
+parentalFearIndependentMobilityPaper : PaperReference
+parentalFearIndependentMobilityPaper =
+  mkPaperReference
+    "parental-fear-independent-mobility-2013"
+    "A qualitative study of 'fear' as a regulator of children's independent physical activity in the suburbs"
+    parentalFearIndependentMobilityAuthors
+    "10.1016/j.healthplace.2013.09.002"
+    "Health & Place"
+    2013
+    "24"
+    "157-164"
+    "Uses interviews with 24 parents and Tudor's parameters-of-fear framework to show IAST fear as a situated, repeated negotiation among environmental, cultural, social, bodily, personality and biographical factors, alongside perceived benefits and child independence."
+    "The evidence is context-bound qualitative parent testimony from one white middle-class suburban Australian setting. It does not establish population prevalence, a universal causal fear model, or the child's own voice."
+    true refl
+
 canonicalEducationCorpusPapers : List PaperReference
 canonicalEducationCorpusPapers =
   aiFeedbackPaper
@@ -212,6 +231,7 @@ canonicalEducationCorpusPapers =
   ∷ parentalAllyshipLensPaper
   ∷ advocacyAllyshipPaper
   ∷ partnershipBarriersPaper
+  ∷ parentalFearIndependentMobilityPaper
   ∷ []
 
 record EducationCorpusSourceRegistry : Set where
@@ -235,4 +255,4 @@ canonicalEducationCorpusSourceRegistry =
     canonicalEducationCorpusPapers refl
     true refl
     true refl
-    "Eight source-bound papers/items are retained with title, author, DOI-or-explicit-no-DOI, venue and boundary metadata. Paper claims, cross-paper inferences, and DASHI extensions remain distinct promotion levels."
+    "Nine source-bound papers/items are retained with title, author, DOI-or-explicit-no-DOI, venue and boundary metadata. Paper claims, cross-paper inferences, and DASHI extensions remain distinct promotion levels."
