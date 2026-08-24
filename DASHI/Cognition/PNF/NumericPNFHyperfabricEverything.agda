@@ -54,6 +54,8 @@ import DASHI.Cognition.PNF.SparseFrontierTopologyExact
 import DASHI.Cognition.PNF.IndependentSentenceAdmissionExact
 import DASHI.Cognition.PNF.ProducerNativeDemandProjectionExact
 import DASHI.Cognition.PNF.OptimizationEconomyExact
+import DASHI.Cognition.PNF.OptimizationAdmissibilityUnderNondeterminismExact
+import DASHI.Cognition.PNF.OptimizationAdmissibilityUnderNondeterminismRegression
 import DASHI.Cognition.PNF.PhysicalMutationChurnEconomyExact
 import DASHI.Cognition.PNF.PhysicalMutationChurnEconomyRegression
 import DASHI.Cognition.PNF.ProducerCompleteDependencyProjectionExact
