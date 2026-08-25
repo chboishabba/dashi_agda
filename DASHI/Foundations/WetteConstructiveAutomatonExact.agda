@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Foundations.WetteConstructiveAutomatonExact where
 
 ------------------------------------------------------------------------
@@ -10,13 +9,13 @@ module DASHI.Foundations.WetteConstructiveAutomatonExact where
 --
 -- DASHI CONTRIBUTION
 --
--- Reuse the repository's KernelInternal automaton interface.  Wette's exact
+-- Reuse the repository's KernelInternal automaton interface. Wette's exact
 -- historical rule vocabulary is NOT invented here: a source reconstruction
 -- must provide State, Generator, step, admissibility, and the simulation law.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
-open import Agda.Builtin.Equality using (_≡_; refl; cong)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 
 import DASHI.Automata.KernelInternal as KI
@@ -59,14 +58,6 @@ asKernelInternalAutomaton machine =
     { system = asKernelSystem machine
     ; internality = asKernelInternal machine
     }
-
-------------------------------------------------------------------------
--- Source-level deduction simulation.
---
--- Merely coding syntax into arithmetic state is not enough.  The central
--- obligation is the commuting square saying one intended deduction step is
--- represented by one machine step.
-------------------------------------------------------------------------
 
 record WetteDeductionSimulation (machine : WetteMachineSpec) : Set₁ where
   field
@@ -124,7 +115,7 @@ simulation-n-step {machine} simulation g (suc n) term =
   trans refl q = q
 
 ------------------------------------------------------------------------
--- The theorem above is deliberately conditional on stepCommutes.  Recovering
+-- The theorem above is deliberately conditional on stepCommutes. Recovering
 -- Wette's actual calculus therefore reduces to a source-attributed finite set
 -- of generator definitions plus proofs of those commuting obligations.
 ------------------------------------------------------------------------
