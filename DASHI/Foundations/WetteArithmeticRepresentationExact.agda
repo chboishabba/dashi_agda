@@ -13,26 +13,23 @@ module DASHI.Foundations.WetteArithmeticRepresentationExact where
 -- "Vom Unendlichen zum Endlichen", Dialectica 24 (1970), 303--324.
 --
 -- No DOI is asserted here until a stable bibliographic record has been
--- independently verified.  These references identify the historical source
+-- independently verified. These references identify the historical source
 -- family whose representation architecture is being reconstructed.
 --
 -- DASHI CONTRIBUTION
 --
 -- This file does not claim that the repository's existing prime-exponent
--- lattice is Wette's literal historical coding.  It packages that existing
+-- lattice is Wette's literal historical coding. It packages that existing
 -- machinery as a reconstruction target: a finite structured state has a
 -- canonical prime-exponent coordinate and an executable scalar Goedel number.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 
 open import Ontology.GodelLattice using (FactorVec)
 open import Ontology.GodelScalarization using (G)
-
-------------------------------------------------------------------------
--- Reconstructed arithmetic state.
-------------------------------------------------------------------------
 
 record WetteArithmeticState : Set where
   constructor wetteArithmeticState
@@ -43,12 +40,6 @@ open WetteArithmeticState public
 
 wetteNumeral : WetteArithmeticState → Nat
 wetteNumeral state = G (factors state)
-
-------------------------------------------------------------------------
--- The representation law is intentionally modest: the scalar numeral is
--- exactly the repository's already-defined prime-power scalarization of the
--- structured exponent state.
-------------------------------------------------------------------------
 
 record WetteArithmeticRepresentation : Set₁ where
   field
@@ -73,15 +64,6 @@ canonicalNumeralLaw :
   wetteNumeral state ≡ G (factors state)
 canonicalNumeralLaw _ = refl
 
-------------------------------------------------------------------------
--- Claim boundary.
---
--- Prime-exponent scalarization by itself is an encoding theorem only.  It is
--- not yet a theorem that Wette's deduction relation has been reconstructed,
--- that the scalar numeral is lossless for arbitrary syntax, or that any
--- consistency statement follows from the representation.
-------------------------------------------------------------------------
-
 record WetteRepresentationClaimScope : Set where
   constructor wetteRepresentationClaimScope
   field
@@ -104,8 +86,6 @@ record WetteRepresentationClaimScope : Set where
     consistencyConsequenceEstablished : Bool
     consistencyConsequenceEstablishedIsFalse :
       consistencyConsequenceEstablished ≡ false
-
-open import Agda.Builtin.Bool using (Bool; true; false)
 
 canonicalWetteRepresentationClaimScope : WetteRepresentationClaimScope
 canonicalWetteRepresentationClaimScope =
