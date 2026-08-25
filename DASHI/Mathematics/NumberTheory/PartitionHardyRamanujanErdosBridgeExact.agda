@@ -21,7 +21,7 @@ module DASHI.Mathematics.NumberTheory.PartitionHardyRamanujanErdosBridgeExact wh
 --   the Number of Partitions of n", Amer. J. Math. 73, 599--601.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
@@ -57,7 +57,7 @@ hardyRamanujanRouteIsNotErdosRoute = Routes.circleRouteIsNotErdosRoute
 hardyRamanujanAndNewmanShareResolution :
   Routes.routeResolution Routes.hardyRamanujanCircleRoute
   ≡ Routes.routeResolution Routes.newmanElementaryConstantRoute
-hardyRamanujanAndNewmanShareResolution = GF.refl
+hardyRamanujanAndNewmanShareResolution = refl
 
 routeSeparationLevel : ProofLevel
 routeSeparationLevel = machineChecked
