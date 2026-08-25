@@ -27,8 +27,8 @@ module DASHI.Mathematics.NumberTheory.PartitionGeneratingFunctionExact where
 -- Hardy--Ramanujan asymptotic.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.List using (List)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
 
@@ -52,9 +52,9 @@ partitionPrefixEqualsEulerProductPrefix =
 partitionPrefix : List Nat
 partitionPrefix = partitionCoefficientPrefix
 
-partitionPrefixIs012357 :
+partitionPrefixIs112357 :
   partitionPrefix ≡ 1 ∷ 1 ∷ 2 ∷ 3 ∷ 5 ∷ 7 ∷ []
-partitionPrefixIs012357 = Fock.refl
+partitionPrefixIs112357 = refl
 
 ------------------------------------------------------------------------
 -- Keep the finite theorem and infinite/analytic promotions as different
