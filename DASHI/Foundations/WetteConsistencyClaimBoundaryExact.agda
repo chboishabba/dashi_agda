@@ -9,11 +9,11 @@ module DASHI.Foundations.WetteConsistencyClaimBoundaryExact where
 -- 'consistency'-deduction", International Logic Review (1974), 51--62.
 --
 -- Earlier constructive-arithmetic work is treated separately from this later
--- metamathematical claim.  No DOI is asserted until independently verified.
+-- metamathematical claim. No DOI is asserted until independently verified.
 --
 -- DASHI CONTRIBUTION
 --
--- Make the promotion boundaries explicit.  A representation, executable
+-- Make the promotion boundaries explicit. A representation, executable
 -- machine, or simulation theorem is not definitionally a soundness theorem,
 -- an internal consistency theorem, or a contradiction in ordinary arithmetic.
 ------------------------------------------------------------------------
@@ -21,6 +21,7 @@ module DASHI.Foundations.WetteConsistencyClaimBoundaryExact where
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
+import DASHI.Automata.KernelInternal as KI
 import DASHI.Physics.Foundations.FormalReceiptBoundaryExact as Receipt
 import DASHI.Foundations.WetteArithmeticRepresentationExact as Representation
 import DASHI.Foundations.WetteConstructiveAutomatonExact as Automaton
@@ -80,12 +81,6 @@ canonicalWetteClaimBoundary =
     false refl
     false refl
 
-------------------------------------------------------------------------
--- Concrete separation witnesses: the canonical reconstruction state carries
--- positive representation/interface facts while the stronger claims remain
--- explicitly false.  This prevents accidental prose-level promotion.
-------------------------------------------------------------------------
-
 representationDoesNotSetConsistencyFlag :
   systemInternalConsistencyProved canonicalWetteClaimBoundary ≡ false
 representationDoesNotSetConsistencyFlag = refl
@@ -98,16 +93,9 @@ historicalRecoveryStillRequired :
   historicalRuleSetRecovered canonicalWetteClaimBoundary ≡ false
 historicalRecoveryStillRequired = refl
 
-------------------------------------------------------------------------
--- Imported owners are intentionally referenced here so this boundary remains
--- attached to the actual reusable machinery rather than becoming a parallel
--- standalone vocabulary.
-------------------------------------------------------------------------
-
 representationOwner : Representation.WetteArithmeticRepresentation
 representationOwner = Representation.canonicalWetteArithmeticRepresentation
 
 automatonOwner :
-  (machine : Automaton.WetteMachineSpec) →
-  DASHI.Automata.KernelInternal.KernelInternalAutomaton
+  (machine : Automaton.WetteMachineSpec) → KI.KernelInternalAutomaton
 automatonOwner = Automaton.asKernelInternalAutomaton
