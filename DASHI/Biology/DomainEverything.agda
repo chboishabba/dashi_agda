@@ -10,6 +10,7 @@ import DASHI.Biology.Levin.Everything
 import DASHI.Biology.Cannabis.Everything
 import DASHI.Biology.AnimalexicEverything
 import DASHI.Biology.PointedBulkSporadicTarotEverything
+import DASHI.Biology.ThalamocorticalSensoryHistoryExact
 
 -- Existing thematic Biology aggregates that were previously floating outside
 -- the authoritative domain spine.
