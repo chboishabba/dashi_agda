@@ -7,7 +7,7 @@ module DASHI.Foundations.WetteArithmeticTransitionBridgeExact where
 -- Instead, this adapter says exactly what a recovered arithmetic rule must
 -- provide to inhabit the repository's existing prime-exponent transport lane.
 --
--- Each generator supplies an existing ScalarTransportStep.  Consequently the
+-- Each generator supplies an existing ScalarTransportStep. Consequently the
 -- machine transition carries an exact multiplication-only Goedel-scalar law:
 --
 --   p * G(next) = q * G(current)
@@ -17,6 +17,7 @@ module DASHI.Foundations.WetteArithmeticTransitionBridgeExact where
 
 open import Agda.Builtin.Bool using (true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (_*_)
 
 open import MonsterOntos using (SSP; toNat)
 open import Ontology.GodelLattice using (FactorVec)
@@ -52,13 +53,6 @@ arithmeticStepScalarLaw :
     ≡ toNat (creditPrime family g) * GS.G state
 arithmeticStepScalarLaw family g state =
   GS.transportScalarLaw (transition family g state)
-
-------------------------------------------------------------------------
--- Adapter into the existing KernelInternal-based Wette machine surface.
--- The arithmetic transport family itself is total, so this generic adapter
--- uses the trivial admissible shell.  A historical reconstruction may replace
--- it with a stricter source-level admissibility predicate.
-------------------------------------------------------------------------
 
 trivialArithmeticMachine :
   CertifiedArithmeticTransitionFamily → WetteMachine.WetteMachineSpec
