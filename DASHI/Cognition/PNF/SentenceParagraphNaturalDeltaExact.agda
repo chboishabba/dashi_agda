@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Cognition.PNF.SentenceParagraphNaturalDeltaExact where
 
 open import Agda.Builtin.Equality using (_≡_)
