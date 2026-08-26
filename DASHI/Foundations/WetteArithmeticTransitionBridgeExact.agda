@@ -54,6 +54,10 @@ arithmeticStepScalarLaw :
 arithmeticStepScalarLaw family g state =
   GS.transportScalarLaw (transition family g state)
 
+------------------------------------------------------------------------
+-- Adapter into the existing KernelInternal-based Wette machine surface.
+------------------------------------------------------------------------
+
 trivialArithmeticMachine :
   CertifiedArithmeticTransitionFamily → WetteMachine.WetteMachineSpec
 trivialArithmeticMachine family =
@@ -73,3 +77,36 @@ arithmeticMachineStepIsCertified :
     * GS.G (WetteMachine.step (trivialArithmeticMachine family) g state)
     ≡ toNat (creditPrime family g) * GS.G state
 arithmeticMachineStepIsCertified = arithmeticStepScalarLaw
+
+------------------------------------------------------------------------
+-- Identity syntax witness.
+--
+-- A certified arithmetic transition family already gives an executable syntax
+-- in the weak extensional sense where syntax is the FactorVec carrier itself.
+-- This closes the machine/simulation plumbing without claiming that FactorVec
+-- is Wette's historical formula grammar. A future source reconstruction replaces
+-- this identity syntax with Wette's actual expressions and proves the same
+-- commuting square nontrivially.
+------------------------------------------------------------------------
+
+arithmeticIdentitySimulation :
+  (family : CertifiedArithmeticTransitionFamily) →
+  WetteMachine.WetteDeductionSimulation (trivialArithmeticMachine family)
+arithmeticIdentitySimulation family =
+  record
+    { Syntax = FactorVec
+    ; encode = λ state → state
+    ; syntaxStep = arithmeticStep family
+    ; stepCommutes = λ _ _ → refl
+    }
+
+identitySimulationStepCommutes :
+  (family : CertifiedArithmeticTransitionFamily) →
+  (g : Generator family) →
+  (state : FactorVec) →
+  WetteMachine.encode (arithmeticIdentitySimulation family)
+    (WetteMachine.syntaxStep (arithmeticIdentitySimulation family) g state)
+  ≡
+  WetteMachine.step (trivialArithmeticMachine family) g
+    (WetteMachine.encode (arithmeticIdentitySimulation family) state)
+identitySimulationStepCommutes family g state = refl
