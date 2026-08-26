@@ -16,3 +16,5 @@ import DASHI.Cognition.PNF.ExecutionEngineTournamentExact
 import DASHI.Cognition.PNF.DreamFlowSprintConstitutionExact
 import DASHI.Cognition.PNF.PackedOperatorKernelSWARExact
 import DASHI.Cognition.PNF.PackedModalClosureExact
+import DASHI.Cognition.PNF.WorkloadOptimizationAdmissionExact
+import DASHI.Cognition.PNF.PackedNormativeDeltaAuthorityBridgeExact
