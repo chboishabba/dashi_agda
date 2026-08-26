@@ -15,14 +15,16 @@ module DASHI.Mathematics.NumberTheory.PartitionMultiplicityCarrierExact where
 -- copies of a part of size v is a coordinate operation, and the conventional
 -- coefficient v is represented independently by a Fin v unit fibre.
 --
--- This module owns the all-n *carrier shape*.  Finite enumeration of all such
--- vectors and the exact coordinate-deletion bijection are kept as explicit
--- subsequent theorem layers.
+-- This module owns the all-n carrier shape.  Finite enumeration of all such
+-- vectors and the exact coordinate-deletion bijection are subsequent theorem
+-- layers, not analytic assumptions.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Data.Fin.Base using (Fin; toℕ)
+  renaming (zero to fzero; suc to fsuc)
+open import Data.Nat.Base using (_≤_)
 open import Data.Vec.Base using (Vec; []; _∷_)
 
 ------------------------------------------------------------------------
@@ -50,6 +52,12 @@ open MultiplicityPartition public
 ------------------------------------------------------------------------
 -- Coordinate / part-size interpretation.
 
+lookupMultiplicity :
+  ∀ {n : Nat} → Fin n → Vec Nat n → Nat
+lookupMultiplicity fzero (x ∷ xs) = x
+lookupMultiplicity (fsuc index) (x ∷ xs) =
+  lookupMultiplicity index xs
+
 partValue : ∀ {n : Nat} → Fin n → Nat
 partValue index = suc (toℕ index)
 
@@ -58,12 +66,9 @@ record PositiveDeletionChoice {n : Nat}
   field
     partIndex : Fin n
     copies : Nat
-
-    -- These propositions intentionally state only the local coordinate facts.
-    -- The subsequent exact deletion owner constructs the updated vector and
-    -- proves its mass is n - copies*partValue.
-    copiesPositive : Set
-    copiesAvailable : Set
+    copiesPositive : suc zero ≤ copies
+    copiesAvailable :
+      copies ≤ lookupMultiplicity partIndex (multiplicities partition)
 
 open PositiveDeletionChoice public
 
@@ -77,6 +82,7 @@ record ErdosMultiplicityResidual (n : Nat) : Set where
   field
     partIndex : Fin n
     copies : Nat
+    copiesPositive : suc zero ≤ copies
     residualMass : Nat
     residualPartition : MultiplicityPartition residualMass
     decompositionExact :
@@ -93,6 +99,7 @@ record ErdosResidualTriple (n : Nat) : Set where
   field
     partIndex : Fin n
     copies : Nat
+    copiesPositive : suc zero ≤ copies
     residualMass : Nat
     residualPartition : MultiplicityPartition residualMass
     decompositionExact :
