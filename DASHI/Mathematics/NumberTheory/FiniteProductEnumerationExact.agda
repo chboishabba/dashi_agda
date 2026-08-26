@@ -21,6 +21,8 @@ open import Data.List.Membership.Propositional using (_∈_)
 open import Data.List.Membership.Propositional.Properties using
   (∈-cartesianProductWith⁺; ∈-allFin)
 open import Data.List.Relation.Unary.Any as Any using ()
+import Data.List.Relation.Unary.All as All
+import Data.List.Relation.Unary.AllPairs.Core as AllPairs
 open import Data.List.Relation.Unary.Unique.Propositional using (Unique)
 import Data.List.Relation.Unary.Unique.Propositional.Properties as UniqueP
 open import Data.Product using (_×_; _,_)
@@ -150,9 +152,7 @@ vecConsInjective refl = refl , refl
 uniqueFinVectorPowerNoDuplicates :
   (bound dimension : Nat) → Unique (uniqueFinVectorPower bound dimension)
 uniqueFinVectorPowerNoDuplicates bound zero =
-  UniqueP.map⁺
-    (λ { refl → refl })
-    (UniqueP.allFin⁺ 1)
+  AllPairs._∷_ All.[] AllPairs.[]
 uniqueFinVectorPowerNoDuplicates bound (suc dimension) =
   UniqueP.cartesianProductWith⁺ Vec._∷_ vecConsInjective
     (UniqueP.allFin⁺ bound)
