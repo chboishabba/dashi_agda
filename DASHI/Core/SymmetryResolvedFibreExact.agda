@@ -11,7 +11,7 @@ open import DASHI.Core.Prelude
 -- on reductions that explicitly claim equivariance.
 ------------------------------------------------------------------------
 
-record LawfulAction (G X : Set) : Set₁ where
+record LawfulAction (G X : Set) : Set where
   field
     identity : G
     compose : G → G → G
@@ -38,7 +38,7 @@ record EquivariantObserver
   (G Rich Coarse : Set)
   (rich : LawfulAction G Rich)
   (coarse : LawfulAction G Coarse)
-  : Set₁ where
+  : Set where
   field
     observe : Rich → Coarse
     observeEquivariant :
@@ -48,7 +48,7 @@ record EquivariantObserver
 
 open EquivariantObserver public
 
-record ReopenableObserver (Rich Surface Residual : Set) : Set₁ where
+record ReopenableObserver (Rich Surface Residual : Set) : Set where
   field
     project : Rich → Surface
     retainResidual : Rich → Residual
@@ -61,7 +61,7 @@ open ReopenableObserver public
 
 record SymmetryResolvedFibre
   (G Rich Surface Residual : Set)
-  : Set₁ where
+  : Set where
   field
     richAction : LawfulAction G Rich
     surfaceAction : LawfulAction G Surface
