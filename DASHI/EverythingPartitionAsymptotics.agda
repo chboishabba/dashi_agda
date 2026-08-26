@@ -2,12 +2,14 @@ module DASHI.EverythingPartitionAsymptotics where
 
 ------------------------------------------------------------------------
 -- Focused typecheck/import surface for the Hardy--Ramanujan / Erdos / Newman
--- partition lane.  Finite reindexing, Fin-n marking, Fin-v residual expansion,
--- and an executable all-n multiplicity-vector partition carrier now sit below
--- the analytic Bishop boundary.
+-- partition lane.  Finite reindexing, generic finite-product completeness,
+-- Fin-n marking, Fin-v residual expansion, and an executable all-n
+-- multiplicity-vector partition carrier now sit below the analytic Bishop
+-- boundary.
 ------------------------------------------------------------------------
 
 import DASHI.Mathematics.NumberTheory.FiniteWeightedReindexExact
+import DASHI.Mathematics.NumberTheory.FiniteProductEnumerationExact
 import DASHI.Mathematics.NumberTheory.FiniteWeightUnitExpansionExact
 import DASHI.Mathematics.NumberTheory.PartitionMarkedUnitEnumerationExact
 import DASHI.Mathematics.NumberTheory.PartitionMultiplicityCarrierExact
