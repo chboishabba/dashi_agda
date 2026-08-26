@@ -28,6 +28,7 @@ module DASHI.Core.LogisticFoldCriticalityExact where
 open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
+open import Data.Empty using (⊥)
 open import Data.Integer using (+_)
 open import Data.Rational as R using (_/_)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_)
@@ -54,7 +55,7 @@ logisticComplementSymmetry r x =
 
 logisticAtHalf :
   (r : ℚ) →
-  logistic r half ≡ r * (((+ 1) R./ 4))
+  logistic r half ≡ r * ((+ 1) R./ 4)
 logisticAtHalf r =
   solve (r ∷ [])
 
@@ -68,13 +69,11 @@ data HalfRole : Set where
   riemannCriticalRealPart : HalfRole
 
 logisticRoleIsNotBranchingRole :
-  logisticFoldCriticalPoint ≡ branchingCriticalAvailability →
-  Data.Empty.⊥
+  logisticFoldCriticalPoint ≡ branchingCriticalAvailability → ⊥
 logisticRoleIsNotBranchingRole ()
 
 logisticRoleIsNotRiemannRole :
-  logisticFoldCriticalPoint ≡ riemannCriticalRealPart →
-  Data.Empty.⊥
+  logisticFoldCriticalPoint ≡ riemannCriticalRealPart → ⊥
 logisticRoleIsNotRiemannRole ()
 
 record LogisticFoldCriticalityBoundary : Set where
