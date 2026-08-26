@@ -23,11 +23,12 @@ module DASHI.Mathematics.NumberTheory.PartitionHardyRamanujanErdosBridgeExact wh
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; _*_)
 open import Data.Empty using (⊥)
 
 import DASHI.Mathematics.NumberTheory.PartitionGeneratingFunctionExact as GF
 import DASHI.Mathematics.NumberTheory.PartitionAsymptoticRouteSeparationExact as Routes
+import DASHI.Mathematics.NumberTheory.PartitionErdosFiniteDoubleCountBridgeExact as Erdos
 import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact as BishopSeries
 import DASHI.Foundations.SpectralCountingComplexity as Counting
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -68,8 +69,11 @@ routeSeparationLevel = machineChecked
 -- BishopPowerSeriesElementaryBridgeExact already owns constructive convergent
 -- series and the exp/log elementary-function boundary.  SpectralCountingComplexity
 -- already owns the repo pattern "principal term + controlled remainder".
--- Importing those owners here records the intended reuse; neither one is
--- claimed to prove the partition-specific estimates by itself.
+--
+-- The Erdos route now additionally reuses the finite permutation/fold pattern
+-- extracted from the NS Galerkin lane.  Consequently the generic identity is
+-- derived from an explicit deletion-fibre system rather than postulated as an
+-- opaque Set.
 
 record PartitionAsymptoticCompletion : Set₁ where
   field
@@ -82,8 +86,9 @@ record PartitionAsymptoticCompletion : Set₁ where
     etaTransformationInstantiated : Set
     hardyRamanujanSharpLimit : Set
 
-    -- Erdos / elementary route.
-    erdosCountingIdentity : Set
+    -- Erdos / elementary route.  The counting identity itself is now derived
+    -- from this finite combinatorial object.
+    erdosDeletionFibreSystem : Erdos.ErdosDeletionFibreSystem
     elementaryRealUpperBound : Set
     elementaryRealLowerBound : Set
     positiveUnknownConstantLimit : Set
@@ -95,6 +100,19 @@ record PartitionAsymptoticCompletion : Set₁ where
     commonSharpPartitionAsymptotic : Set
 
 open PartitionAsymptoticCompletion public
+
+------------------------------------------------------------------------
+-- Any completed Erdos deletion-fibre owner automatically supplies the
+-- arbitrary-n counting identity needed by the elementary asymptotic route.
+
+erdosCountingIdentity :
+  (completion : PartitionAsymptoticCompletion) →
+  (n : Nat) →
+  n * Erdos.PartitionCount (erdosDeletionFibreSystem completion) n
+  ≡ Erdos.ErdosDoubleSum (erdosDeletionFibreSystem completion) n
+erdosCountingIdentity completion =
+  Erdos.erdosIdentityFromDeletionFibre
+    (erdosDeletionFibreSystem completion)
 
 partitionAsymptoticCompletionLevel : ProofLevel
 partitionAsymptoticCompletionLevel = conditional
