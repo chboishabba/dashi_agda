@@ -71,9 +71,9 @@ routeSeparationLevel = machineChecked
 -- already owns the repo pattern "principal term + controlled remainder".
 --
 -- The Erdos route now additionally reuses the finite permutation/fold pattern
--- extracted from the NS Galerkin lane.  Consequently the generic identity is
--- derived from an explicit deletion-fibre system rather than postulated as an
--- opaque Set.
+-- extracted from the NS Galerkin lane.  Consequently the generic residual
+-- identity is derived from an explicit deletion-fibre system rather than
+-- postulated as an opaque Set.
 
 record PartitionAsymptoticCompletion : Set₁ where
   field
@@ -86,8 +86,8 @@ record PartitionAsymptoticCompletion : Set₁ where
     etaTransformationInstantiated : Set
     hardyRamanujanSharpLimit : Set
 
-    -- Erdos / elementary route.  The counting identity itself is now derived
-    -- from this finite combinatorial object.
+    -- Erdos / elementary route.  The finite residual identity itself is now
+    -- derived from this combinatorial object.
     erdosDeletionFibreSystem : Erdos.ErdosDeletionFibreSystem
     elementaryRealUpperBound : Set
     elementaryRealLowerBound : Set
@@ -103,13 +103,13 @@ open PartitionAsymptoticCompletion public
 
 ------------------------------------------------------------------------
 -- Any completed Erdos deletion-fibre owner automatically supplies the
--- arbitrary-n counting identity needed by the elementary asymptotic route.
+-- arbitrary-n finite residual identity needed by the elementary route.
 
 erdosCountingIdentity :
   (completion : PartitionAsymptoticCompletion) →
   (n : Nat) →
   n * Erdos.PartitionCount (erdosDeletionFibreSystem completion) n
-  ≡ Erdos.ErdosDoubleSum (erdosDeletionFibreSystem completion) n
+  ≡ Erdos.ErdosResidualDoubleSum (erdosDeletionFibreSystem completion) n
 erdosCountingIdentity completion =
   Erdos.erdosIdentityFromDeletionFibre
     (erdosDeletionFibreSystem completion)
