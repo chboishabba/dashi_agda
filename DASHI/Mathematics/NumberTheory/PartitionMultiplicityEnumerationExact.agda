@@ -30,7 +30,7 @@ import DASHI.Mathematics.NumberTheory.PartitionMultiplicityCarrierExact as Parti
 import DASHI.Mathematics.NumberTheory.FiniteProductEnumerationExact as Product
 
 ------------------------------------------------------------------------
--- Original executable Nat-valued box.
+-- Original executable Nat-valued box retained as a regression oracle.
 
 natsUpTo : Nat → List Nat
 natsUpTo bound = map toℕ (Finite.allFin (suc bound))
@@ -197,16 +197,17 @@ selectedMassMemberOriginal {n} {vectors = head ∷ tail} member
 selectMassUnique :
   ∀ {n : Nat} {vectors : List (Vec.Vec Nat n)} →
   Unique vectors → Unique (selectMass {n} vectors)
-selectMassUnique AllPairs.[] = AllPairs.[]
-selectMassUnique {n} (AllPairs._∷_ fresh rest)
-  with Partition.weightedMass _ ≟ n
+selectMassUnique {vectors = []} AllPairs.[] = AllPairs.[]
+selectMassUnique {n} {vectors = head ∷ tail}
+    (AllPairs._∷_ fresh rest)
+  with Partition.weightedMass head ≟ n
 ... | yes _ =
   AllPairs._∷_
     selectedFresh
     (selectMassUnique rest)
   where
   selectedFresh :
-    All.All (λ other → _ ≢ other) (selectMass _)
+    All.All (λ other → head ≢ other) (selectMass {n} tail)
   selectedFresh =
     All.tabulate
       (λ member →
@@ -256,56 +257,9 @@ partitionMultiplicityVectorComplete partition =
     (Partition.massExact partition)
 
 ------------------------------------------------------------------------
--- Optional proof-bearing view retained for theorem consumers.
-
-packIfPartition :
-  {n : Nat} →
-  Vec.Vec Nat n → List (Partition.MultiplicityPartition n)
-packIfPartition {n = n} vector
-  with Partition.weightedMass vector ≟ n
-... | yes massProof =
-  Partition.multiplicityPartition vector massProof ∷ []
-... | no _ = []
-
-packCandidates :
-  {n : Nat} →
-  List (Vec.Vec Nat n) → List (Partition.MultiplicityPartition n)
-packCandidates [] = []
-packCandidates (vector ∷ vectors) =
-  packIfPartition vector ++ packCandidates vectors
-
-proofEnumerateMultiplicityPartitions :
-  (n : Nat) → List (Partition.MultiplicityPartition n)
-proofEnumerateMultiplicityPartitions n =
-  packCandidates (proofBoundedVectors n n)
-
-record MultiplicityPartitionEnumerationHit
-    {n : Nat}
-    (partition : Partition.MultiplicityPartition n) : Set where
-  constructor multiplicityPartitionEnumerationHit
-  field
-    representative : Partition.MultiplicityPartition n
-    representativeListed : representative ∈ proofEnumerateMultiplicityPartitions n
-    sameMultiplicities :
-      Partition.multiplicities representative
-      ≡ Partition.multiplicities partition
-
-open MultiplicityPartitionEnumerationHit public
-
-packCandidatesCompleteVector :
-  ∀ {n : Nat}
-    {vector : Vec.Vec Nat n}
-    {candidates : List (Vec.Vec Nat n)} →
-  vector ∈ candidates →
-  Partition.weightedMass vector ≡ n →
-  MultiplicityPartitionEnumerationHit
-    (Partition.multiplicityPartition vector massProof)
-  where
-  massProof = ?
-packCandidatesCompleteVector = λ where
-  -- Kept out of the canonical counting surface.  The extensional/vector
-  -- completeness theorem above is the authority-bearing result.
-
-------------------------------------------------------------------------
+-- The canonical counting carrier is now finite, complete and duplicate-free.
+-- Proof-bearing MultiplicityPartition values are reconstructed only at theorem
+-- consumption sites, avoiding any need for equality of mass proofs.
+--
 -- No Bishop/real/complex analysis is imported at this layer.
 ------------------------------------------------------------------------
