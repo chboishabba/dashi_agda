@@ -16,9 +16,9 @@ module DASHI.Mathematics.NumberTheory.PartitionMultiplicityDeletionMassExact whe
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; suc; _+_; _*_)
-open import Data.Fin.Base using (Fin; toℕ)
+open import Data.Fin.Base using (Fin)
   renaming (zero to fzero; suc to fsuc)
-open import Data.Nat.Base using (_≤_)
+open import Data.Nat.Base using (_≤_; _∸_)
 open import Data.Nat.Properties using
   (+-assoc; +-comm; *-comm; *-distribˡ-+; m∸n+n≡m)
 open import Data.Vec.Base using (Vec; _∷_)
@@ -61,36 +61,36 @@ coordinateWeightFromOneIsPartValue (fsuc index) =
 headDeletionMass :
   (first multiplicity amount tailMass : Nat) →
   amount ≤ multiplicity →
-  (first * (multiplicity Data.Nat.Base.∸ amount) + tailMass)
+  (first * (multiplicity ∸ amount) + tailMass)
     + amount * first
   ≡ first * multiplicity + tailMass
 headDeletionMass first multiplicity amount tailMass available =
   trans
     (+-assoc
-      (first * (multiplicity Data.Nat.Base.∸ amount))
+      (first * (multiplicity ∸ amount))
       tailMass
       (amount * first))
     (trans
       (cong
-        (first * (multiplicity Data.Nat.Base.∸ amount) +_)
+        (first * (multiplicity ∸ amount) +_)
         (+-comm tailMass (amount * first)))
       (trans
         (sym
           (+-assoc
-            (first * (multiplicity Data.Nat.Base.∸ amount))
+            (first * (multiplicity ∸ amount))
             (amount * first)
             tailMass))
         (cong
           (_+ tailMass)
           (trans
             (cong
-              (first * (multiplicity Data.Nat.Base.∸ amount) +_)
+              (first * (multiplicity ∸ amount) +_)
               (*-comm amount first))
             (trans
               (sym
                 (*-distribˡ-+
                   first
-                  (multiplicity Data.Nat.Base.∸ amount)
+                  (multiplicity ∸ amount)
                   amount))
               (cong (first *_) (m∸n+n≡m available)))))))
 
@@ -147,7 +147,7 @@ partitionDeletionMass partition amount index available =
         Partition.weightedMass
           (Update.subtractAt amount index (Partition.multiplicities partition))
         + amount * weight)
-      (coordinateWeightFromOneIsPartValue index))
+      (sym (coordinateWeightFromOneIsPartValue index)))
     (trans
       (weightedMassFromSubtractAt
         1 amount index (Partition.multiplicities partition) available)
