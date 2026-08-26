@@ -6,14 +6,15 @@ module DASHI.Foundations.WetteArithmeticRepresentationExact where
 -- Eduard Wette,
 -- "Definition eines (relativ vollstaendigen) formalen Systems konstruktiver
 -- Arithmetik", in Foundations of Mathematics: Symposium Papers
--- Commemorating the Sixtieth Birthday of Kurt Goedel, pp. 130--195.
+-- Commemorating the Sixtieth Birthday of Kurt Goedel, 1969, pp. 130--195.
+-- DOI: 10.1007/978-3-642-86745-3_9.
 --
 -- Eduard Wette,
 -- "Vom Unendlichen zum Endlichen", Dialectica 24 (1970), 303--324.
+-- DOI: 10.1111/j.1746-8361.1970.tb01221.x.
 --
--- No DOI is asserted here until a stable bibliographic record has been
--- independently verified. These references identify the historical source
--- family whose representation architecture is being reconstructed.
+-- These stable bibliographic identifiers anchor the historical source family
+-- whose representation architecture is being reconstructed.
 --
 -- DASHI CONTRIBUTION
 --
