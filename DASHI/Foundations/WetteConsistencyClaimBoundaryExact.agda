@@ -13,8 +13,9 @@ module DASHI.Foundations.WetteConsistencyClaimBoundaryExact where
 -- DASHI CONTRIBUTION
 --
 -- Make the promotion boundaries explicit. A representation, executable
--- machine, or simulation theorem is not definitionally a soundness theorem,
--- an internal consistency theorem, or a contradiction in ordinary arithmetic.
+-- machine, simulation theorem, or representation/kernel commuting theorem is
+-- not definitionally a soundness theorem, an internal consistency theorem, or
+-- a contradiction in ordinary arithmetic.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -22,8 +23,10 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Automata.KernelInternal as KI
 import DASHI.Physics.Foundations.FormalReceiptBoundaryExact as Receipt
+import DASHI.Physics.Closure.RepresentationKernelCompatibility as R
 import DASHI.Foundations.WetteArithmeticRepresentationExact as Representation
 import DASHI.Foundations.WetteConstructiveAutomatonExact as Automaton
+import DASHI.Foundations.WetteRepresentationKernelBridgeExact as KernelBridge
 
 data WetteClaimLevel : Set where
   arithmeticRepresentation : WetteClaimLevel
@@ -50,6 +53,10 @@ record WetteClaimBoundary : Set₁ where
     simulationInterfaceAvailableIsTrue :
       simulationInterfaceAvailable ≡ true
 
+    representationKernelOwnerAvailable : Bool
+    representationKernelOwnerAvailableIsTrue :
+      representationKernelOwnerAvailable ≡ true
+
     historicalRuleSetRecovered : Bool
     historicalRuleSetRecoveredIsFalse :
       historicalRuleSetRecovered ≡ false
@@ -75,6 +82,7 @@ canonicalWetteClaimBoundary =
     true refl
     true refl
     true refl
+    true refl
     false refl
     false refl
     false refl
@@ -83,6 +91,11 @@ canonicalWetteClaimBoundary =
 representationDoesNotSetConsistencyFlag :
   systemInternalConsistencyProved canonicalWetteClaimBoundary ≡ false
 representationDoesNotSetConsistencyFlag = refl
+
+representationKernelDoesNotSetConsistencyFlag :
+  representationKernelOwnerAvailable canonicalWetteClaimBoundary ≡ true
+  × systemInternalConsistencyProved canonicalWetteClaimBoundary ≡ false
+representationKernelDoesNotSetConsistencyFlag = refl , refl
 
 simulationInterfaceDoesNotSetContradictionFlag :
   contradictionInOrdinaryArithmeticProved canonicalWetteClaimBoundary ≡ false
@@ -98,3 +111,10 @@ representationOwner = Representation.canonicalWetteArithmeticRepresentation
 automatonOwner :
   (machine : Automaton.WetteMachineSpec) → KI.KernelInternalAutomaton
 automatonOwner = Automaton.asKernelInternalAutomaton
+
+representationKernelOwner :
+  {machine : Automaton.WetteMachineSpec} →
+  (simulation : Automaton.WetteDeductionSimulation machine) →
+  (g : Automaton.Generator machine) →
+  R.RepresentationKernelCompatibility
+representationKernelOwner = KernelBridge.fixedGeneratorCompatibility
