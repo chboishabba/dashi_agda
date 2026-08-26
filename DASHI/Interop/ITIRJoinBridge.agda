@@ -11,10 +11,6 @@ open import UFTC_Lattice as UFTC using (Severity; Code)
 
 ------------------------------------------------------------------------
 -- Conservative adapter from the ITIR/UFTC join lattice into DASHI pressure.
---
--- This is an adapter surface only. It does not import a live ITIR runtime,
--- does not classify real join edges, and does not promote the doc-only
--- JoinEdgePressureBridge into an aggregate DASHI theorem.
 ------------------------------------------------------------------------
 
 severityToPressure : Severity → Pressure
@@ -75,10 +71,15 @@ CodeToPressureMonotone =
   codeToPressure x ⊑p codeToPressure y
 
 severityToPressureMonotone : SeverityToPressureMonotone
-severityToPressureMonotone = P.fromLevel-monotone
+severityToPressureMonotone {a} {b} proof =
+  P.fromLevel-monotone {a = a} {b = b} proof
 
 codeToPressureMonotone : CodeToPressureMonotone
-codeToPressureMonotone = P.fromLevel-monotone
+codeToPressureMonotone {x} {y} proof =
+  P.fromLevel-monotone
+    {a = UFTC.severity x}
+    {b = UFTC.severity y}
+    proof
 
 record ITIRJoinBridgeObligations : Set₁ where
   field
