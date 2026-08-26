@@ -13,6 +13,10 @@ module DASHI.Foundations.WetteConsistencyClaimBoundaryExact where
 -- Dialectica 25 (1971), 171--195.
 -- DOI: 10.1111/j.1746-8361.1971.tb00598.x.
 --
+-- G. Kreisel and J. Zucker reviewed Wette's 1969 constructive-arithmetic
+-- chapter in Journal of Symbolic Logic 37 (1972), 203--204.
+-- DOI: 10.2307/2272630.
+--
 -- Earlier constructive-arithmetic work is treated separately from this later
 -- metamathematical claim. No DOI is asserted for the 1974 Wette paper until a
 -- stable bibliographic record is independently verified.
@@ -20,10 +24,10 @@ module DASHI.Foundations.WetteConsistencyClaimBoundaryExact where
 -- DASHI CONTRIBUTION
 --
 -- Make the promotion boundaries explicit. A representation, executable
--- machine, simulation theorem, representation/kernel commuting theorem, or
--- conditional consistency-to-contradiction reduction is not definitionally a
--- soundness theorem, an actual internal consistency proof, or a contradiction
--- in ordinary arithmetic.
+-- machine, simulation theorem, proof translation, representation/kernel
+-- commuting theorem, or conditional consistency-to-contradiction reduction is
+-- not definitionally a soundness theorem, an actual internal consistency proof,
+-- or a contradiction in ordinary arithmetic.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -36,12 +40,15 @@ import DASHI.Physics.Closure.RepresentationKernelCompatibility as R
 import DASHI.Foundations.WetteArithmeticRepresentationExact as Representation
 import DASHI.Foundations.WetteConstructiveAutomatonExact as Automaton
 import DASHI.Foundations.WetteRepresentationKernelBridgeExact as KernelBridge
+import DASHI.Foundations.WetteFiniteCalculusTranslationExact as Translation
 import DASHI.Foundations.WetteBernaysConsistencyDeductionBoundaryExact as Bernays
 
 data WetteClaimLevel : Set where
   arithmeticRepresentation : WetteClaimLevel
   executableMachine : WetteClaimLevel
   deductionSimulation : WetteClaimLevel
+  finiteProofTranslation : WetteClaimLevel
+  finiteEquiconsistency : WetteClaimLevel
   conditionalConsistencyReduction : WetteClaimLevel
   arithmeticSoundness : WetteClaimLevel
   internalConsistency : WetteClaimLevel
@@ -52,6 +59,7 @@ record WetteClaimBoundary : Set₁ where
   field
     receiptBoundary : Receipt.FormalReceiptBoundary
     bernaysBoundary : Bernays.WetteBernaysBoundary
+    translationBoundary : Translation.WetteTranslationBoundary
 
     representationAvailable : Bool
     representationAvailableIsTrue :
@@ -65,6 +73,10 @@ record WetteClaimBoundary : Set₁ where
     simulationInterfaceAvailableIsTrue :
       simulationInterfaceAvailable ≡ true
 
+    finiteProofTranslationInterfaceAvailable : Bool
+    finiteProofTranslationInterfaceAvailableIsTrue :
+      finiteProofTranslationInterfaceAvailable ≡ true
+
     representationKernelOwnerAvailable : Bool
     representationKernelOwnerAvailableIsTrue :
       representationKernelOwnerAvailable ≡ true
@@ -76,6 +88,10 @@ record WetteClaimBoundary : Set₁ where
     historicalRuleSetRecovered : Bool
     historicalRuleSetRecoveredIsFalse :
       historicalRuleSetRecovered ≡ false
+
+    historicalWetteOrdinaryArithmeticEquiconsistencyRecovered : Bool
+    historicalWetteOrdinaryArithmeticEquiconsistencyRecoveredIsFalse :
+      historicalWetteOrdinaryArithmeticEquiconsistencyRecovered ≡ false
 
     wetteInternalConsistencyProofRecovered : Bool
     wetteInternalConsistencyProofRecoveredIsFalse :
@@ -100,11 +116,14 @@ canonicalWetteClaimBoundary =
   wetteClaimBoundary
     Receipt.canonicalFormalReceiptBoundary
     Bernays.canonicalWetteBernaysBoundary
+    Translation.canonicalWetteTranslationBoundary
     true refl
     true refl
     true refl
     true refl
     true refl
+    true refl
+    false refl
     false refl
     false refl
     false refl
@@ -119,6 +138,12 @@ representationKernelDoesNotSetConsistencyFlag :
   representationKernelOwnerAvailable canonicalWetteClaimBoundary ≡ true
   × systemInternalConsistencyProved canonicalWetteClaimBoundary ≡ false
 representationKernelDoesNotSetConsistencyFlag = refl , refl
+
+proofTranslationInterfaceDoesNotSupplyHistoricalEquiconsistency :
+  finiteProofTranslationInterfaceAvailable canonicalWetteClaimBoundary ≡ true
+  × historicalWetteOrdinaryArithmeticEquiconsistencyRecovered
+      canonicalWetteClaimBoundary ≡ false
+proofTranslationInterfaceDoesNotSupplyHistoricalEquiconsistency = refl , refl
 
 conditionalReductionDoesNotSupplyInternalProof :
   conditionalConsistencyReductionAvailable canonicalWetteClaimBoundary ≡ true
@@ -151,6 +176,9 @@ representationKernelOwner :
   (g : Automaton.Generator machine) →
   R.RepresentationKernelCompatibility
 representationKernelOwner = KernelBridge.fixedGeneratorCompatibility
+
+translationBoundaryOwner : Translation.WetteTranslationBoundary
+translationBoundaryOwner = Translation.canonicalWetteTranslationBoundary
 
 bernaysConditionalOwner : Bernays.WetteBernaysBoundary
 bernaysConditionalOwner = Bernays.canonicalWetteBernaysBoundary
