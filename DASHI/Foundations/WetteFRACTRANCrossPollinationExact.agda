@@ -4,7 +4,7 @@ module DASHI.Foundations.WetteFRACTRANCrossPollinationExact where
 -- WETTE / FRACTRAN CROSS-POLLINATION
 --
 -- This module demonstrates that the Wette reconstruction interface is already
--- inhabited by an existing repo-native prime-valuation machine.  It is an
+-- inhabited by an existing repo-native prime-valuation machine. It is an
 -- architectural witness only: Conway-style/FRACTRAN arithmetic transport is
 -- not identified with Wette's historical calculus.
 ------------------------------------------------------------------------
@@ -32,11 +32,11 @@ fractranRuleMachine =
 canonicalRuleTransferThroughWetteInterface :
   W.step fractranRuleMachine F.transfer47To59 F.canonicalPrimeState
   ≡ F.firstCanonicalTransfer
-canonicalRuleTransferThroughWetteInterface = F.firstCanonicalTransferIsExact
+canonicalRuleTransferThroughWetteInterface = refl
 
 ------------------------------------------------------------------------
 -- Priority machine: package the repo's first-enabled scheduler as one unary
--- generator.  This is useful because Wette's later prose concerns regulated
+-- generator. This is useful because Wette's later prose concerns regulated
 -- effective calculation, while the mathematical content here remains simply a
 -- finite deterministic transition system.
 ------------------------------------------------------------------------
