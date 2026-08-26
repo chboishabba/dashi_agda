@@ -22,6 +22,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 
 import DASHI.Biology.JCoarseFineEvaluationFibreExact as JFibre
+import DASHI.Biology.JFineCoarseRelativeScaleExact as Scale
 import DASHI.Core.CoarseFineBranchAccessibilityExact as Branch
 import DASHI.Cognition.RecursiveFibreTower as Tower
 import DASHI.Foundations.StageAtlasZeroToEleven as Atlas
@@ -234,10 +235,10 @@ recursiveObservableLevelTwoHasTwentySevenCodes :
 recursiveObservableLevelTwoHasTwentySevenCodes =
   Tower.levelTwoCodeCountIsTwentySeven
 
-jCoarseFrequencyRemainsNine : JFibre.Scale.jCoarseFrequency ≡ 9
+jCoarseFrequencyRemainsNine : Scale.jCoarseFrequency ≡ 9
 jCoarseFrequencyRemainsNine = JFibre.jCoarseFrequencyIsNine
 
-jFineFrequencyRemains19683 : JFibre.Scale.jFineFrequency ≡ 19683
+jFineFrequencyRemains19683 : Scale.jFineFrequency ≡ 19683
 jFineFrequencyRemains19683 = JFibre.jFineFrequencyIsThreePowerNine
 
 -- Exact arithmetic coincidence from the declared independent toy model:
@@ -247,7 +248,7 @@ jFineFrequencyRemains19683 = JFibre.jFineFrequencyIsThreePowerNine
 
 ninetyPercentThreeAxisNumeratorMatchesJFine :
   Branch.jointExpectedNumerator 3 3 (Branch.availability 9 10)
-  ≡ JFibre.Scale.jFineFrequency
+  ≡ Scale.jFineFrequency
 ninetyPercentThreeAxisNumeratorMatchesJFine = refl
 
 fiveEighteenthsRemainsTernarySubcritical :
