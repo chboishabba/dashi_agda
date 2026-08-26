@@ -8,8 +8,8 @@ module DASHI.Biology.NeuralResidualDependencyValidation where
 --   * separating local dependency probes;
 --   * reach-preserving residual decoupling;
 --   * future-language capability preservation; and
---   * the exact rational 2x2 transformed-covariance seed calibrated against
---     Bansal--Jiang affine spectral-independence.
+--   * the theorem-facing quadratic-domination formulation of affine
+--     spectral-independence calibrated against Bansal--Jiang.
 --
 -- The final item is deliberately an algebraic neighbour, not a claim that the
 -- neural finite model itself already carries a Bansal--Jiang covariance/SDP.
@@ -19,7 +19,8 @@ open import Agda.Builtin.Unit using (⊤; tt)
 
 import DASHI.Biology.NeuralResidualDependencyBridgeExact
 import DASHI.Biology.NeuralResidualFutureLanguageBridgeExact
-import DASHI.Mathematics.LinearAlgebra.RationalAffineSpectralIndependence2Exact
+import DASHI.Mathematics.LinearAlgebra.FiniteRationalQuadraticDominationExact
+import DASHI.Mathematics.LinearAlgebra.AffineSpectralIndependenceQuadraticExact
 
 neuralResidualDependencyRoot : Set
 neuralResidualDependencyRoot = ⊤
