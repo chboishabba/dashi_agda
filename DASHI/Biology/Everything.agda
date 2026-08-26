@@ -181,3 +181,18 @@ import DASHI.Biology.TriadicVisualBraidCrossPollinationExact
 import DASHI.Biology.TernaryHallTransitionCoalitionExact
 import DASHI.Biology.ConsciousAccessRound6CrossSourceBridge
 import DASHI.Biology.ConsciousAccessRound6CrossPollinationRegression
+
+------------------------------------------------------------------------
+-- Conscious-access round seven: Aristotle theorem return and structural gates.
+
+import DASHI.Biology.TernaryCanonicalOrientationExact
+import DASHI.Biology.TernaryFixedTransverseFiniteExact
+import DASHI.Biology.TernaryRotationReflectionSeparationExact
+import DASHI.Biology.NondegenerateObserverAdmissionExact
+import DASHI.Biology.NeuralFixedTransverseObserverBridgeExact
+import DASHI.Biology.CyclotomicPhaseAmplitudeBoundaryExact
+import DASHI.Biology.EqualCardinalityStructureBoundaryExact
+import DASHI.Biology.OggTernaryEquivariantLabellingNoGoExact
+import DASHI.Biology.OperatorStructureAdmissionBoundaryExact
+import DASHI.Biology.ConsciousAccessRound7AristotleSourceBridge
+import DASHI.Biology.ConsciousAccessRound7AristotleRegression
