@@ -5,6 +5,7 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 
 FILES=(
+  DASHI/Foundations/WetteHistoricalSourceAtlasExact.agda
   DASHI/Foundations/WetteArithmeticRepresentationExact.agda
   DASHI/Foundations/WetteConstructiveAutomatonExact.agda
   DASHI/Foundations/WetteArithmeticTransitionBridgeExact.agda
@@ -35,7 +36,13 @@ for file in "${FILES[@]}"; do
   fi
 done
 
-# Promotion-boundary guards.
+# Provenance / promotion-boundary guards.
+grep -q 'doi:10.1007/978-3-642-86745-3_9' \
+  DASHI/Foundations/WetteHistoricalSourceAtlasExact.agda
+grep -q 'doi:10.2307/2272630' \
+  DASHI/Foundations/WetteHistoricalSourceAtlasExact.agda
+grep -q 'unverified1974DOIFabricatedIsFalse' \
+  DASHI/Foundations/WetteHistoricalSourceAtlasExact.agda
 grep -q 'historicalWetteCodecRecoveredIsFalse' \
   DASHI/Foundations/WetteArithmeticRepresentationExact.agda
 grep -q 'fractranMachineIsHistoricalWetteMachineIsFalse' \
@@ -54,6 +61,7 @@ grep -q 'contradictionInOrdinaryArithmeticProvedIsFalse' \
   DASHI/Foundations/WetteConsistencyClaimBoundaryExact.agda
 
 scripts/run_agda29_parallel_check.sh \
+  DASHI/Foundations/WetteHistoricalSourceAtlasExact.agda \
   DASHI/Foundations/WetteFiniteDeductionTraceExact.agda \
   DASHI/Foundations/WetteFiniteDerivationCompositionExact.agda \
   DASHI/Foundations/WetteFiniteCalculusTranslationExact.agda \
