@@ -54,6 +54,33 @@ fromLevel-toLevel medium = refl
 fromLevel-toLevel high = refl
 fromLevel-toLevel critical = refl
 
+join-level : ∀ a b → toLevel (a ⊔p b) ≡ toLevel a ⊔ toLevel b
+join-level none none = refl
+join-level none low = refl
+join-level none medium = refl
+join-level none high = refl
+join-level none critical = refl
+join-level low none = refl
+join-level low low = refl
+join-level low medium = refl
+join-level low high = refl
+join-level low critical = refl
+join-level medium none = refl
+join-level medium low = refl
+join-level medium medium = refl
+join-level medium high = refl
+join-level medium critical = refl
+join-level high none = refl
+join-level high low = refl
+join-level high medium = refl
+join-level high high = refl
+join-level high critical = refl
+join-level critical none = refl
+join-level critical low = refl
+join-level critical medium = refl
+join-level critical high = refl
+join-level critical critical = refl
+
 ------------------------------------------------------------------------
 -- Saturation at `critical` is monotone.  This closes the generic theorem gap
 -- needed by ITIR/SensibLaw severity-to-pressure repair comparisons.
