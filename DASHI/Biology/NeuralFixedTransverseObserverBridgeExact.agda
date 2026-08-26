@@ -6,6 +6,9 @@ import DASHI.Biology.NeuralRepresentationLaplacianExact as Neural
 import DASHI.Biology.NondegenerateObserverAdmissionExact as Observer
 import DASHI.Biology.TernaryFixedTransverseFiniteExact as C3
 
+_≢_ : {A : Set} → A → A → Set
+x ≢ y = x ≡ y → ⊥
+
 ------------------------------------------------------------------------
 -- Cross-pollination of Aristotle's fixed/transverse decomposition and observer
 -- admission gate with the existing DASHI neural observation quotient.
@@ -29,29 +32,37 @@ microAVariationIsFour :
   Observer.signalVariation (activationSignal Neural.microActivationA) ≡ 4
 microAVariationIsFour = refl
 
-microBVariationIsSix :
-  Observer.signalVariation (activationSignal Neural.microActivationB) ≡ 6
-microBVariationIsSix = refl
+microBVariationIsFour :
+  Observer.signalVariation (activationSignal Neural.microActivationB) ≡ 4
+microBVariationIsFour = refl
 
-sameCommonMassDifferentRelationalVariation :
+sameCommonMassAndVariation :
   Observer.signalMass (activationSignal Neural.microActivationA)
   ≡
   Observer.signalMass (activationSignal Neural.microActivationB)
   ×
   Observer.signalVariation (activationSignal Neural.microActivationA)
-  ≢
+  ≡
   Observer.signalVariation (activationSignal Neural.microActivationB)
-sameCommonMassDifferentRelationalVariation = refl , (λ ())
+sameCommonMassAndVariation = refl , refl
 
-microAObserverAreaCodeIsTwentyFour :
+microAObserverAreaCodeIsEight :
   Observer.observedAreaCode
     (Observer.tripleSignal 1 1 0)
     (activationSignal Neural.microActivationA)
   ≡ 8
-microAObserverAreaCodeIsTwentyFour = refl
+microAObserverAreaCodeIsEight = refl
+
+microBObserverAreaCodeIsEight :
+  Observer.observedAreaCode
+    (Observer.tripleSignal 1 1 0)
+    (activationSignal Neural.microActivationB)
+  ≡ 8
+microBObserverAreaCodeIsEight = refl
 
 ------------------------------------------------------------------------
--- Coarse fMRI projection collision survives while transverse variation differs.
+-- Coarse fMRI projection and norm-like observer codes can both collide while
+-- an order-sensitive Laplacian quantity remains distinct.
 
 coarseCollisionPersists :
   Neural.fmriLikeObservation Neural.microActivationA
@@ -59,11 +70,11 @@ coarseCollisionPersists :
   Neural.fmriLikeObservation Neural.microActivationB
 coarseCollisionPersists = Neural.fmriProjectionCollision
 
-relationalVariationSurvivesCoarseCollision :
-  Observer.signalVariation (activationSignal Neural.microActivationA)
+orderedLaplacianVariationStillDiffers :
+  Neural.laplacianVariation Neural.microActivationA
   ≢
-  Observer.signalVariation (activationSignal Neural.microActivationB)
-relationalVariationSurvivesCoarseCollision = λ ()
+  Neural.laplacianVariation Neural.microActivationB
+orderedLaplacianVariationStillDiffers = λ ()
 
 ------------------------------------------------------------------------
 -- Common amplitude and relational phase are typed independently.
@@ -89,10 +100,14 @@ record NeuralObserverBridgeBoundary : Set where
     sameCoarseReadoutImpliesSameRelationalModeIsFalse :
       sameCoarseReadoutImpliesSameRelationalMode ≡ false
 
+    sameNormLikeCodeIdentifiesOrderedState : Bool
+    sameNormLikeCodeIdentifiesOrderedStateIsFalse :
+      sameNormLikeCodeIdentifiesOrderedState ≡ false
+
     commonActivationIsPhenomenalConsciousness : Bool
     commonActivationIsPhenomenalConsciousnessIsFalse :
       commonActivationIsPhenomenalConsciousness ≡ false
 
 canonicalNeuralObserverBridgeBoundary : NeuralObserverBridgeBoundary
 canonicalNeuralObserverBridgeBoundary =
-  neuralObserverBridgeBoundary false refl false refl
+  neuralObserverBridgeBoundary false refl false refl false refl
