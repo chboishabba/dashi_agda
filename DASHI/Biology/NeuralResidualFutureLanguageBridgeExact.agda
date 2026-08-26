@@ -39,6 +39,7 @@ open import Agda.Builtin.String using (String)
 import DASHI.Core.TypedDependencyCore as Dependency
 import DASHI.Core.AdmissibleReachability as Reachability
 import DASHI.Core.FutureObservationLanguageQuotientExact as Future
+import DASHI.Core.FutureLanguageQuadraticControlExact as FutureControl
 import DASHI.Core.ResidualObserverDependencyExact as Residual
 import DASHI.Biology.NeuralResidualDependencyBridgeExact as Neural
 import DASHI.Biology.DynamicEffectiveTopology as Dynamic
@@ -119,11 +120,10 @@ inhibitedPlanningFutureObservationImpossible
 
 RequiredPlanningFutureLanguage :
   Residual.StateCapability Neural.BrainState
-RequiredPlanningFutureLanguage state =
-  Future.FutureObservation
+RequiredPlanningFutureLanguage =
+  FutureControl.RequiredFutureObservation
     planningReadSystem
     planningAvailableObservation
-    state
     (readPlanning ∷ [])
     true
 
