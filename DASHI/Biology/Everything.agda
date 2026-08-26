@@ -59,6 +59,7 @@ import DASHI.Biology.ParentalFearSourceAttributionExact
 import DASHI.Biology.ParentalFearObserverRefinementExact
 import DASHI.Biology.ParentalFearConsumerSufficiencyBridgeExact
 import DASHI.Biology.ParentalFearDynamicQuotientBridgeExact
+import DASHI.Biology.ParentalFearIntegratedFormalismExact
 import DASHI.Biology.InterpretiveCodingSystem
 import DASHI.Biology.CrossPaperDialecticalDevelopment
 import DASHI.Biology.AliceBrownCorpusLoom
