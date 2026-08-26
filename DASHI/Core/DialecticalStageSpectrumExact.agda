@@ -29,6 +29,7 @@ open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
+open import Data.Empty using (⊥)
 
 ------------------------------------------------------------------------
 -- Canonical finite stage carrier.
@@ -101,16 +102,14 @@ zeroMeansRefine : resolutionFromSign 0 ≡ refineDeeper
 zeroMeansRefine = refl
 
 ------------------------------------------------------------------------
--- Stage and motif remain separately named system roles.  We do not invent an
--- equality between their different carrier types merely to prove inequality.
+-- Stage and motif remain separately named system roles.
 ------------------------------------------------------------------------
 
 data SystemKind : Set where
   developmentalStageSystem operationalMotifSystem : SystemKind
 
 differentSystemKinds :
-  developmentalStageSystem ≡ operationalMotifSystem →
-  Agda.Builtin.Equality._≡_ developmentalStageSystem developmentalStageSystem
+  developmentalStageSystem ≡ operationalMotifSystem → ⊥
 differentSystemKinds ()
 
 ------------------------------------------------------------------------
