@@ -67,9 +67,6 @@ available person (ecology denseUncontrolledSpace conformityDemandNorms partialPe
 available person (ecology adjustableRetreatSpace lowDemandNorms permissiveRegime relation) action = true
 available person (ecology adjustableRetreatSpace lowDemandNorms partialPermissionRegime relation) action = true
 available person (ecology neutralPublicSpace lowDemandNorms permissiveRegime relation) action = true
-available person (ecology neutralPublicSpace norms restrictiveRegime sleepRelation) action = true
-  where
-  sleepRelation = unknownRelation
 available person ecology action = true
 
 canonicalAutisticPerson : SituatedPerson
@@ -196,10 +193,6 @@ canonicalPoliticalBoundary = politicalBoundary false refl true refl true refl
 
 ------------------------------------------------------------------------
 -- British Columbia cross-pollination.
---
--- The existing BC owner already separates legal possession protection from
--- public-space protection, policing, services, housing and poverty reduction.
--- We expose only a thin phase-to-public-space-regime adapter here.
 ------------------------------------------------------------------------
 
 bcPublicSpaceRegime : BC.PolicyPhase → InstitutionalRegime
