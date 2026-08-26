@@ -1,7 +1,8 @@
 {-# OPTIONS --safe #-}
 module DASHI.Cognition.PNF.PackedOperatorKernelSWARExact where
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
 
 ------------------------------------------------------------------------
@@ -62,7 +63,7 @@ swarSharesScalarTopology :
     (refinement : SWARMaskRefinement kernel)
     (input : Input) →
   scalarTopology kernel input ≡ localTopology kernel input
-swarSharesScalarTopology kernel refinement input = Agda.Builtin.Equality.refl
+swarSharesScalarTopology kernel refinement input = refl
 
 ------------------------------------------------------------------------
 -- Classification equivalence is exactly what downstream factor construction
@@ -88,16 +89,18 @@ factorConstructionNeedNotMoveIntoSWAR :
 factorConstructionNeedNotMoveIntoSWAR ()
 
 ------------------------------------------------------------------------
--- Admission receipt for one physical SWAR candidate.  Semantic parity and
--- physical evidence remain separate obligations so a slower SWAR realization
--- can be discarded without changing the packed scalar semantics.
+-- Physical measurements remain data, not semantic constructors.  The runtime
+-- engine tournament decides whether a semantically exact SWAR candidate earns
+-- its keep on the same already-packed input.
 ------------------------------------------------------------------------
 
 record SWARPhysicalReceipt : Set where
   constructor swarPhysicalReceipt
   field
-    scalarWallWork : Set
-    swarWallWork : Set
-    measuredOnSamePackedInput : Set
+    inputFingerprint : Nat
+    scalarWallWork : Nat
+    swarWallWork : Nat
+    scalarCpuWork : Nat
+    swarCpuWork : Nat
 
 open SWARPhysicalReceipt public
