@@ -17,6 +17,7 @@ FILES=(
   DASHI/Foundations/WetteFRACTRANCrossPollinationExact.agda
   DASHI/Foundations/WetteBernaysConsistencyDeductionBoundaryExact.agda
   DASHI/Foundations/WetteFiniteDerivabilityBernaysBridgeExact.agda
+  DASHI/Foundations/WetteTranslatedBernaysObstructionExact.agda
   DASHI/Foundations/WetteFiniteTraceConsistencyObstructionExact.agda
   DASHI/Foundations/WetteConsistencyClaimBoundaryExact.agda
   DASHI/Foundations/Wette/Everything.agda
@@ -51,6 +52,10 @@ grep -q 'ordinaryArithmeticInconsistencyEstablishedIsFalse' \
   DASHI/Foundations/WetteBernaysConsistencyDeductionBoundaryExact.agda
 grep -q 'machineReachabilityIsAlreadyMetatheoreticContradictionIsFalse' \
   DASHI/Foundations/WetteFiniteDerivabilityBernaysBridgeExact.agda
+grep -q 'translatedContradictionProofIsAlreadySemanticAbsurdityIsFalse' \
+  DASHI/Foundations/WetteTranslatedBernaysObstructionExact.agda
+grep -q 'historicalWetteComparisonArithmeticBridgeRecoveredIsFalse' \
+  DASHI/Foundations/WetteTranslatedBernaysObstructionExact.agda
 grep -q 'theoremProvesOrdinaryArithmeticConsistencyIsFalse' \
   DASHI/Foundations/WetteFiniteTraceConsistencyObstructionExact.agda
 grep -q 'historicalWetteToOrdinaryArithmeticTranslationRecoveredIsFalse' \
@@ -66,5 +71,6 @@ scripts/run_agda29_parallel_check.sh \
   DASHI/Foundations/WetteFiniteDerivationCompositionExact.agda \
   DASHI/Foundations/WetteFiniteCalculusTranslationExact.agda \
   DASHI/Foundations/WetteFiniteDerivabilityBernaysBridgeExact.agda \
+  DASHI/Foundations/WetteTranslatedBernaysObstructionExact.agda \
   DASHI/Foundations/WetteFiniteTraceConsistencyObstructionExact.agda \
   DASHI/Foundations/Wette/Everything.agda
