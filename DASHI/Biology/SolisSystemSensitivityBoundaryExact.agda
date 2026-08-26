@@ -1,23 +1,251 @@
 module DASHI.Biology.SolisSystemSensitivityBoundaryExact where
 
 open import DASHI.Core.Prelude
+open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Biology.NeurodivergentSocialEcologySourceRegistryExact as Sources
 
 ------------------------------------------------------------------------
--- SOLIS SYSTEM-SENSITIVITY CANDIDATE BOUNDARY
+-- SOLIS COMMUNICATOR NOTATION: EXACT MINIMAL CONTROL CORE
 --
--- Provenance discipline is essential here.  The Solis Communicator,
--- "psybernetic dissonance", "sacred data", syntax-checker metaphor, 3-6-9
--- mapping and Solis Phase-Shifted Nash Equilibrium were supplied from prior
--- discussion/conceptual material.  No indexed peer-reviewed source under the
--- Solis name was found in the repository search used for this tranche.
+-- Provenance has two distinct layers.
 --
--- Therefore this file gives those ideas an explicit candidate carrier and
--- fail-closed boundaries.  It does NOT cite autism literature as if it proved
--- the Solis equations, and it does NOT promote distress into proof of system
--- failure.
+-- 1. The Solis/SCN naming and equations are archived conceptual material from
+--    chboishabba/dashiTRADE, locally reported in
+--      ignore.TRADER_CANTEXT.md around lines 61211--62174,
+--    including the 0.5 threshold, the schematic
+--      AutisticSignal[x] := Check[SystemicIntegrity[x]],
+--    and collapse-risk / qPARA handling.
+--    The ignored archive is not asserted here to be a scholarly source.
+--
+-- 2. Historical DASHI commit
+--      2f45a6da102cf582503281ace8c508031f17fdbb
+--    contains related formal substrate such as
+--      DASHI/Cognition/PsychedelicNetworkDiffusion.agda
+--      DASHI/Cognition/NetworkIntegritySynchronyMetrics.agda
+--    and neighbouring cognition modules.  Those owners separate network
+--    integrity, cross-system communication, synchrony, perturbation metrics and
+--    ternary commitment.  They were not a standalone SCN implementation.
+--
+-- This file therefore installs the missing minimal SCN control logic while
+-- preserving a strict boundary: the threshold mathematics is exact; the
+-- empirical definition of an autism-relevant integrity functional is NOT.
+------------------------------------------------------------------------
+
+------------------------------------------------------------------------
+-- Finite exact [0,1] half-grid.
+--
+-- This is the smallest carrier that represents 0, 1/2 and 1 exactly and makes
+-- the archive's theta = 1/2 decision boundary executable without importing an
+-- unrelated real-number stack.  A later rational/real owner may refine it.
+------------------------------------------------------------------------
+
+data UnitIntervalHalfGrid : Set where
+  zeroScore halfScore oneScore : UnitIntervalHalfGrid
+
+complementScore : UnitIntervalHalfGrid → UnitIntervalHalfGrid
+complementScore zeroScore = oneScore
+complementScore halfScore = halfScore
+complementScore oneScore = zeroScore
+
+scoreNumeratorOverTwo : UnitIntervalHalfGrid → Nat
+scoreNumeratorOverTwo zeroScore = 0
+scoreNumeratorOverTwo halfScore = 1
+scoreNumeratorOverTwo oneScore = 2
+
+record MeasuredSystem (State : Set) : Set where
+  constructor measuredSystem
+  field
+    integrityScore : State → UnitIntervalHalfGrid
+
+open MeasuredSystem public
+
+incoherenceScore :
+  ∀ {State : Set} → MeasuredSystem State → State → UnitIntervalHalfGrid
+incoherenceScore measurement state =
+  complementScore (integrityScore measurement state)
+
+atOrAboveHalf : UnitIntervalHalfGrid → Bool
+atOrAboveHalf zeroScore = false
+atOrAboveHalf halfScore = true
+atOrAboveHalf oneScore = true
+
+atOrBelowHalf : UnitIntervalHalfGrid → Bool
+atOrBelowHalf zeroScore = true
+atOrBelowHalf halfScore = true
+atOrBelowHalf oneScore = false
+
+doubledAtLeastOne : UnitIntervalHalfGrid → Bool
+doubledAtLeastOne score = atOrAboveHalf score
+
+------------------------------------------------------------------------
+-- Total SCN checker.
+------------------------------------------------------------------------
+
+data SCNDecision : Set where
+  continueDecision flagAndBifurcateDecision : SCNDecision
+
+scnDecisionFromIncoherence : UnitIntervalHalfGrid → SCNDecision
+scnDecisionFromIncoherence zeroScore = continueDecision
+scnDecisionFromIncoherence halfScore = flagAndBifurcateDecision
+scnDecisionFromIncoherence oneScore = flagAndBifurcateDecision
+
+SCN :
+  ∀ {State : Set} → MeasuredSystem State → State → SCNDecision
+SCN measurement state =
+  scnDecisionFromIncoherence (incoherenceScore measurement state)
+
+scnFlagIndicator : SCNDecision → Bool
+scnFlagIndicator continueDecision = false
+scnFlagIndicator flagAndBifurcateDecision = true
+
+------------------------------------------------------------------------
+-- Exact threshold soundness on the half-grid:
+--
+--   SCN flags  <=>  2 A >= 1  <=>  I <= 1/2.
+--
+-- The proof is represented as equality of the three total Boolean decisions.
+------------------------------------------------------------------------
+
+scnFlagIffDoubledIncoherenceAtLeastOne :
+  ∀ {State : Set}
+    (measurement : MeasuredSystem State)
+    (state : State) →
+  scnFlagIndicator (SCN measurement state)
+  ≡ doubledAtLeastOne (incoherenceScore measurement state)
+scnFlagIffDoubledIncoherenceAtLeastOne measurement state
+  with integrityScore measurement state
+... | zeroScore = refl
+... | halfScore = refl
+... | oneScore = refl
+
+doubledIncoherenceThresholdIffIntegrityAtMostHalf :
+  ∀ {State : Set}
+    (measurement : MeasuredSystem State)
+    (state : State) →
+  doubledAtLeastOne (incoherenceScore measurement state)
+  ≡ atOrBelowHalf (integrityScore measurement state)
+doubledIncoherenceThresholdIffIntegrityAtMostHalf measurement state
+  with integrityScore measurement state
+... | zeroScore = refl
+... | halfScore = refl
+... | oneScore = refl
+
+scnThresholdSoundness :
+  ∀ {State : Set}
+    (measurement : MeasuredSystem State)
+    (state : State) →
+  scnFlagIndicator (SCN measurement state)
+  ≡ atOrBelowHalf (integrityScore measurement state)
+scnThresholdSoundness measurement state =
+  trans
+    (scnFlagIffDoubledIncoherenceAtLeastOne measurement state)
+    (doubledIncoherenceThresholdIffIntegrityAtMostHalf measurement state)
+
+------------------------------------------------------------------------
+-- Independent paradox/consistency gate.
+--
+-- The archive's qPARA/collapse-risk material is represented conservatively as
+-- an independent Boolean paradox detector.  Quarantine has precedence over the
+-- half-threshold bifurcation.  This is control logic, not a clinical judgment.
+------------------------------------------------------------------------
+
+data SCNAction : Set where
+  continueAction bifurcateAction quarantineAction : SCNAction
+
+SCNActionFor :
+  ∀ {State : Set} →
+  MeasuredSystem State →
+  (State → Bool) →
+  State → SCNAction
+SCNActionFor measurement paradoxDetected state with paradoxDetected state
+... | true = quarantineAction
+... | false with SCN measurement state
+...   | continueDecision = continueAction
+...   | flagAndBifurcateDecision = bifurcateAction
+
+quarantineHasPriority :
+  ∀ {State : Set}
+    (measurement : MeasuredSystem State)
+    (paradoxDetected : State → Bool)
+    (state : State) →
+  paradoxDetected state ≡ true →
+  SCNActionFor measurement paradoxDetected state ≡ quarantineAction
+quarantineHasPriority measurement paradoxDetected state proof
+  with paradoxDetected state
+... | true = refl
+... | false = λ ()
+
+------------------------------------------------------------------------
+-- Honest transition-safety contract.
+--
+-- Threshold logic alone cannot prove that a system transition preserves a
+-- domain-specific safety predicate.  The needed theorem therefore consumes an
+-- explicit preservation certificate.  This keeps the missing empirical / model
+-- semantics visible rather than hiding it in the checker.
+------------------------------------------------------------------------
+
+record ContinueSafetyCertificate
+    {State : Set}
+    (measurement : MeasuredSystem State)
+    (paradoxDetected : State → Bool)
+    (Step : State → State → Set)
+    (Safe : State → Set) : Set where
+  constructor continueSafetyCertificate
+  field
+    continueStepPreservesSafety :
+      ∀ {x y : State} →
+      Safe x →
+      SCNActionFor measurement paradoxDetected x ≡ continueAction →
+      Step x y →
+      Safe y
+
+open ContinueSafetyCertificate public
+
+scnContinueSafety :
+  ∀ {State : Set}
+    {measurement : MeasuredSystem State}
+    {paradoxDetected : State → Bool}
+    {Step : State → State → Set}
+    {Safe : State → Set} →
+  ContinueSafetyCertificate measurement paradoxDetected Step Safe →
+  ∀ {x y : State} →
+  Safe x →
+  SCNActionFor measurement paradoxDetected x ≡ continueAction →
+  Step x y →
+  Safe y
+scnContinueSafety certificate = continueStepPreservesSafety certificate
+
+------------------------------------------------------------------------
+-- Historical substrate receipt.
+------------------------------------------------------------------------
+
+record HistoricalSCNSubstrate : Set where
+  constructor historicalSCNSubstrate
+  field
+    commit : String
+    archiveRepository : String
+    archivePath : String
+    integrityOwner : String
+    networkOwner : String
+    standaloneSCNPresent : Bool
+
+open HistoricalSCNSubstrate public
+
+canonicalHistoricalSCNSubstrate : HistoricalSCNSubstrate
+canonicalHistoricalSCNSubstrate = historicalSCNSubstrate
+  "2f45a6da102cf582503281ace8c508031f17fdbb"
+  "chboishabba/dashiTRADE"
+  "ignore.TRADER_CANTEXT.md:61211-62174 (user-supplied local archive location)"
+  "DASHI/Cognition/NetworkIntegritySynchronyMetrics.agda"
+  "DASHI/Cognition/PsychedelicNetworkDiffusion.agda"
+  false
+
+------------------------------------------------------------------------
+-- Older qualitative Solis carrier retained for compatibility with the current
+-- neurodivergent/social-ecology cross-pollination owner.
 ------------------------------------------------------------------------
 
 data SystemIntegrity : Set where
@@ -143,11 +371,21 @@ spneNameDoesNotInstallNashProof :
   SPNEIsGameTheoreticNashProofPermission → ⊥
 spneNameDoesNotInstallNashProof ()
 
+------------------------------------------------------------------------
+-- Claim boundary.
+------------------------------------------------------------------------
+
 record SolisBoundary : Set where
   constructor solisBoundary
   field
-    conceptHasUserSuppliedProvenance : Bool
-    conceptHasUserSuppliedProvenanceIsTrue : conceptHasUserSuppliedProvenance ≡ true
+    conceptHasArchiveProvenance : Bool
+    conceptHasArchiveProvenanceIsTrue : conceptHasArchiveProvenance ≡ true
+    historicalFormalSubstrateLocated : Bool
+    historicalFormalSubstrateLocatedIsTrue : historicalFormalSubstrateLocated ≡ true
+    exactHalfThresholdControlLogicInstalled : Bool
+    exactHalfThresholdControlLogicInstalledIsTrue : exactHalfThresholdControlLogicInstalled ≡ true
+    empiricalIntegrityFunctionalInstalled : Bool
+    empiricalIntegrityFunctionalInstalledIsFalse : empiricalIntegrityFunctionalInstalled ≡ false
     peerReviewedSolisAutismMechanismInstalled : Bool
     peerReviewedSolisAutismMechanismInstalledIsFalse : peerReviewedSolisAutismMechanismInstalled ≡ false
     everyAutisticPersonIsSystemChecker : Bool
@@ -157,6 +395,9 @@ record SolisBoundary : Set where
     distressCanBePreservedAsPotentiallyInformativeEvidence : Bool
     distressCanBePreservedAsPotentiallyInformativeEvidenceIsTrue :
       distressCanBePreservedAsPotentiallyInformativeEvidence ≡ true
+    thresholdLogicAloneProvesTransitionSafety : Bool
+    thresholdLogicAloneProvesTransitionSafetyIsFalse :
+      thresholdLogicAloneProvesTransitionSafety ≡ false
     solis369IsEstablishedBase369Identity : Bool
     solis369IsEstablishedBase369IdentityIsFalse : solis369IsEstablishedBase369Identity ≡ false
     spneIsEstablishedNashEquilibriumTheorem : Bool
@@ -164,7 +405,18 @@ record SolisBoundary : Set where
 
 canonicalSolisBoundary : SolisBoundary
 canonicalSolisBoundary =
-  solisBoundary true refl false refl false refl false refl true refl false refl false refl
+  solisBoundary
+    true refl
+    true refl
+    true refl
+    false refl
+    false refl
+    false refl
+    false refl
+    true refl
+    false refl
+    false refl
+    false refl
 
 solisProvenance : Sources.SolisConceptProvenance
 solisProvenance = Sources.solisConversationConcept
