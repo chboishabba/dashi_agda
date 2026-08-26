@@ -25,7 +25,9 @@ open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Data.Fin.Base using (Fin; toℕ)
   renaming (zero to fzero; suc to fsuc)
 open import Data.Nat.Base using (_≤_)
+import Data.Nat.Properties as NatP
 open import Data.Vec.Base using (Vec; []; _∷_)
+open import Relation.Binary.PropositionalEquality using (subst)
 
 ------------------------------------------------------------------------
 -- Weighted mass of a multiplicity vector.  The first coordinate has the
@@ -60,6 +62,56 @@ lookupMultiplicity (fsuc index) (x ∷ xs) =
 
 partValue : ∀ {n : Nat} → Fin n → Nat
 partValue index = suc (toℕ index)
+
+------------------------------------------------------------------------
+-- Every coordinate of a positive-weight vector is bounded by its weighted
+-- mass.  This is the exact finite estimate needed to place every multiplicity
+-- m_j of a partition of n inside Fin (n+1).
+
+coordinate≤weightedMassFrom :
+  ∀ {dimension : Nat}
+    (offset : Nat)
+    (index : Fin dimension)
+    (vector : Vec Nat dimension) →
+  lookupMultiplicity index vector
+  ≤ weightedMassFrom (suc offset) vector
+coordinate≤weightedMassFrom offset fzero (multiplicity ∷ rest) =
+  NatP.≤-trans
+    (NatP.≤-trans
+      (NatP.m≤m*n multiplicity (suc offset))
+      (NatP.≤-reflexive (NatP.*-comm multiplicity (suc offset))))
+    (NatP.m≤m+n
+      ((suc offset) * multiplicity)
+      (weightedMassFrom (suc (suc offset)) rest))
+coordinate≤weightedMassFrom offset (fsuc index) (multiplicity ∷ rest) =
+  NatP.≤-trans
+    (coordinate≤weightedMassFrom (suc offset) index rest)
+    (NatP.≤-trans
+      (NatP.m≤m+n
+        (weightedMassFrom (suc (suc offset)) rest)
+        ((suc offset) * multiplicity))
+      (NatP.≤-reflexive
+        (NatP.+-comm
+          (weightedMassFrom (suc (suc offset)) rest)
+          ((suc offset) * multiplicity))))
+
+coordinate≤weightedMass :
+  ∀ {n : Nat}
+    (index : Fin n)
+    (vector : Vec Nat n) →
+  lookupMultiplicity index vector ≤ weightedMass vector
+coordinate≤weightedMass = coordinate≤weightedMassFrom zero
+
+partitionCoordinateAtMostGrade :
+  ∀ {n : Nat}
+    (partition : MultiplicityPartition n)
+    (index : Fin n) →
+  lookupMultiplicity index (multiplicities partition) ≤ n
+partitionCoordinateAtMostGrade partition index =
+  subst
+    (λ total → lookupMultiplicity index (multiplicities partition) ≤ total)
+    (massExact partition)
+    (coordinate≤weightedMass index (multiplicities partition))
 
 record PositiveDeletionChoice {n : Nat}
     (partition : MultiplicityPartition n) : Set where
@@ -111,8 +163,9 @@ tripleWeight : ∀ {n : Nat} → ErdosResidualTriple n → Nat
 tripleWeight triple = partValue (ErdosResidualTriple.partIndex triple)
 
 ------------------------------------------------------------------------
--- Completion boundary.  The carrier itself is no longer missing; what remains
--- is finite exhaustivity/uniqueness and exact coordinate deletion.
+-- Completion boundary.  The carrier itself and the coordinate <= grade bound
+-- are now machine-level terms; remaining work is finite enumeration uniqueness
+-- and exact coordinate deletion/reconstruction.
 
 record MultiplicityPartitionEnumerationCompletion : Set₁ where
   field
