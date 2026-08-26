@@ -61,11 +61,14 @@ jointObservationDistinguishesThoseSituations :
   jointObserver benignAmbiguity ≡ jointObserver hostileAmbiguity → ⊥
 jointObservationDistinguishesThoseSituations ()
 
+jointObserverRefinesSelfObserver : Observer.Refines selfObserver jointObserver
+jointObserverRefinesSelfObserver left right equality = refl
+
 trustedFriendStrictlyRefinesAmbiguousSelfObservation :
   Observer.StrictRefinement selfObserver jointObserver
 trustedFriendStrictlyRefinesAmbiguousSelfObservation =
   Observer.strictRefinement
-    (λ situation → refl)
+    jointObserverRefinesSelfObserver
     benignAmbiguity
     hostileAmbiguity
     sameSelfObservationAcrossDifferentSituations
