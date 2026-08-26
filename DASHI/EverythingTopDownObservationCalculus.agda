@@ -22,11 +22,14 @@ import DASHI.Core.ConsumerIndexedResidualRefinementExact
 import DASHI.Core.TopDownObservationCalculusExact
 
 -- Action-indexed residual dependency geometry and admissibility-aware
--- decoupling.  This generic seam is deliberately weaker than spectral
--- independence: finite dependency codes/scores do not automatically construct
--- covariance, Gram, SDP, or operator-norm certificates.
+-- decoupling.  The first tier remains finite/code-valued; the second tier may
+-- consume a genuine certified quadratic affine-spectral domination factor.
+-- Neither tier constructs covariance or SDP semantics by itself.
 import DASHI.Core.ResidualObserverDependencyExact
 import DASHI.Core.ResidualObserverDependencyRegression
+import DASHI.Core.ResidualObserverQuadraticControlExact
+import DASHI.Mathematics.LinearAlgebra.FiniteRationalQuadraticDominationExact
+import DASHI.Mathematics.LinearAlgebra.AffineSpectralIndependenceQuadraticExact
 
 -- Context-indexed carriers and exact finite regression.
 import DASHI.Core.ContextIndexedObservationFibrationExact
@@ -66,6 +69,9 @@ import DASHI.Cognition.PNF.ObserverSeparationAuthorityBoundaryExact
 -- Current observation equality != action-indexed dependency equality.
 -- Low coupling score != action admissibility.
 -- Finite dependency score != affine spectral independence / SDP certificate.
+-- Certified quadratic domination != proof that a supplied form is an actual
+-- Bansal--Jiang covariance/probe/SDP object.
+-- Capability preservation remains independent of coupling minimization.
 -- Context-local adequacy != natural/base-change transport.
 -- Symmetry-preserving collision fibre != automatic spectral decomposition.
 -- Orbit quotient != exact reconstruction without residual/stabilizer data.
