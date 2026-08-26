@@ -82,28 +82,47 @@ join-level critical high = refl
 join-level critical critical = refl
 
 ------------------------------------------------------------------------
--- Saturation at `critical` is monotone.  This closes the generic theorem gap
--- needed by ITIR/SensibLaw severity-to-pressure repair comparisons.
+-- Saturation at `critical` is monotone.  The upper index is split at the same
+-- four thresholds as `fromLevel`, so both sides reduce to literal Nat orders.
 ------------------------------------------------------------------------
 
 fromLevel-monotone :
   ∀ {a b : Nat} → a ≤ b → fromLevel a ⊑p fromLevel b
 fromLevel-monotone {zero} {b} a≤b = z≤n
+
 fromLevel-monotone {suc zero} {zero} ()
-fromLevel-monotone {suc zero} {suc b} a≤b = s≤s z≤n
+fromLevel-monotone {suc zero} {suc zero} a≤b = s≤s z≤n
+fromLevel-monotone {suc zero} {suc (suc zero)} a≤b = s≤s z≤n
+fromLevel-monotone {suc zero} {suc (suc (suc zero))} a≤b = s≤s z≤n
+fromLevel-monotone {suc zero} {suc (suc (suc (suc b)))} a≤b = s≤s z≤n
+
 fromLevel-monotone {suc (suc zero)} {zero} ()
 fromLevel-monotone {suc (suc zero)} {suc zero} ()
-fromLevel-monotone {suc (suc zero)} {suc (suc b)} a≤b =
+fromLevel-monotone {suc (suc zero)} {suc (suc zero)} a≤b =
   s≤s (s≤s z≤n)
+fromLevel-monotone {suc (suc zero)} {suc (suc (suc zero))} a≤b =
+  s≤s (s≤s z≤n)
+fromLevel-monotone {suc (suc zero)} {suc (suc (suc (suc b)))} a≤b =
+  s≤s (s≤s z≤n)
+
 fromLevel-monotone {suc (suc (suc zero))} {zero} ()
 fromLevel-monotone {suc (suc (suc zero))} {suc zero} ()
 fromLevel-monotone {suc (suc (suc zero))} {suc (suc zero)} ()
-fromLevel-monotone {suc (suc (suc zero))} {suc (suc (suc b))} a≤b =
+fromLevel-monotone
+  {suc (suc (suc zero))}
+  {suc (suc (suc zero))} a≤b =
   s≤s (s≤s (s≤s z≤n))
+fromLevel-monotone
+  {suc (suc (suc zero))}
+  {suc (suc (suc (suc b)))} a≤b =
+  s≤s (s≤s (s≤s z≤n))
+
 fromLevel-monotone {suc (suc (suc (suc a)))} {zero} ()
 fromLevel-monotone {suc (suc (suc (suc a)))} {suc zero} ()
 fromLevel-monotone {suc (suc (suc (suc a)))} {suc (suc zero)} ()
-fromLevel-monotone {suc (suc (suc (suc a)))} {suc (suc (suc zero))} ()
+fromLevel-monotone
+  {suc (suc (suc (suc a)))}
+  {suc (suc (suc zero))} ()
 fromLevel-monotone
   {suc (suc (suc (suc a)))}
   {suc (suc (suc (suc b)))} a≤b =
