@@ -12,6 +12,7 @@ import DASHI.Biology.AnimalexicEverything
 import DASHI.Biology.PointedBulkSporadicTarotEverything
 import DASHI.Biology.ThalamocorticalSensoryHistoryExact
 import DASHI.Biology.AutisticInformationProcessingLandscapeExact
+import DASHI.Biology.NeurotypeProcessingGeometryExact
 import DASHI.Biology.PsilautNetworkResponseGeometryExact
 
 -- Existing thematic Biology aggregates that were previously floating outside
