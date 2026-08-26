@@ -27,8 +27,8 @@ module DASHI.Mathematics.NumberTheory.PartitionErdosFiniteDoubleCountBridgeExact
 -- Once deletion is injective and its image has exactly the same members as the
 -- residual enumeration, the generic unique-membership theorem promotes it to
 -- a list permutation.  Weight preservation then proves the two finite folds
--- equal.  Thus the arbitrary-n identity no longer appears as an opaque Set:
--- it is a theorem derived from explicit enumeration/fibre obligations.
+-- equal.  The residual double sum below is definitionally that weighted fold;
+-- no arbitrary right-hand-side function is supplied by an instantiation.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
@@ -44,13 +44,13 @@ open import Relation.Binary.PropositionalEquality using (sym; trans)
 import DASHI.Mathematics.NumberTheory.FiniteWeightedReindexExact as Reindex
 
 ------------------------------------------------------------------------
--- Concrete owners instantiate this record with an actual partition carrier,
--- actual finite marked/residual enumerations, and the bounded Erdos double sum.
+-- Concrete owners instantiate this record with actual partition, marked and
+-- residual carriers.  The marked fold is the only evaluation law required for
+-- n*p(n); the residual RHS is computed directly from its enumeration.
 
 record ErdosDeletionFibreSystem : Set₁ where
   field
     PartitionCount : Nat → Nat
-    ErdosDoubleSum : Nat → Nat
 
     Marked Residual : Nat → Set
 
@@ -88,12 +88,17 @@ record ErdosDeletionFibreSystem : Set₁ where
       Reindex.foldNat markedWeight (markedEnumeration n)
       ≡ n * PartitionCount n
 
-    residualFoldEvaluation :
-      (n : Nat) →
-      Reindex.foldNat residualWeight (residualEnumeration n)
-      ≡ ErdosDoubleSum n
-
 open ErdosDeletionFibreSystem public
+
+------------------------------------------------------------------------
+-- Canonical finite RHS associated with the residual enumeration.
+
+ErdosResidualDoubleSum :
+  (system : ErdosDeletionFibreSystem) → Nat → Nat
+ErdosResidualDoubleSum system n =
+  Reindex.foldNat
+    (residualWeight system)
+    (residualEnumeration system n)
 
 ------------------------------------------------------------------------
 -- The NS-derived finite-enumeration machinery closes the reindexing step.
@@ -114,7 +119,7 @@ markedResidualFoldEquality :
   (system : ErdosDeletionFibreSystem) →
   (n : Nat) →
   Reindex.foldNat (markedWeight system) (markedEnumeration system n)
-  ≡ Reindex.foldNat (residualWeight system) (residualEnumeration system n)
+  ≡ ErdosResidualDoubleSum system n
 markedResidualFoldEquality system n =
   Reindex.weightedMappedPermutationPreservesFold
     (markedWeight system)
@@ -125,20 +130,44 @@ markedResidualFoldEquality system n =
     (deletePermutation system n)
 
 ------------------------------------------------------------------------
--- Arbitrary-n Erdos identity as a derived theorem.
+-- Arbitrary-n Erdos finite double-count identity as a derived theorem.
 
 erdosIdentityFromDeletionFibre :
   (system : ErdosDeletionFibreSystem) →
   (n : Nat) →
-  n * PartitionCount system n ≡ ErdosDoubleSum system n
+  n * PartitionCount system n ≡ ErdosResidualDoubleSum system n
 erdosIdentityFromDeletionFibre system n =
   trans
     (sym (markedFoldEvaluation system n))
-    (trans
-      (markedResidualFoldEquality system n)
-      (residualFoldEvaluation system n))
+    (markedResidualFoldEquality system n)
 
 ------------------------------------------------------------------------
--- The theorem above leaves concrete partition construction as the only domain
--- obligation.  In particular, no analytic convergence, eta modularity, or
--- asymptotic estimate is used to establish the finite identity.
+-- Identification with the conventional written double sum is a separate
+-- grouping theorem.  This prevents an arbitrary Nat-valued RHS from being
+-- smuggled into the finite reindexing theorem.
+
+record ClassicalErdosDoubleSumIdentification
+    (system : ErdosDeletionFibreSystem) : Set₁ where
+  field
+    classicalDoubleSum : Nat → Nat
+    residualGroupingExact :
+      (n : Nat) →
+      ErdosResidualDoubleSum system n ≡ classicalDoubleSum n
+
+open ClassicalErdosDoubleSumIdentification public
+
+erdosIdentityWithClassicalGrouping :
+  (system : ErdosDeletionFibreSystem) →
+  (identification : ClassicalErdosDoubleSumIdentification system) →
+  (n : Nat) →
+  n * PartitionCount system n ≡ classicalDoubleSum identification n
+erdosIdentityWithClassicalGrouping system identification n =
+  trans
+    (erdosIdentityFromDeletionFibre system n)
+    (residualGroupingExact identification n)
+
+------------------------------------------------------------------------
+-- No analytic convergence, eta modularity, or asymptotic estimate is used to
+-- establish the finite identity.  The remaining partition-specific work is to
+-- construct the concrete residual carrier whose grouped fold is literally
+-- sum_v sum_k v p(n-kv).
