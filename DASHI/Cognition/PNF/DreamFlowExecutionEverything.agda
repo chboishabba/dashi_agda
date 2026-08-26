@@ -8,6 +8,7 @@ import DASHI.Cognition.PNF.NumericPNFHyperfabricEverything
 import DASHI.Cognition.PNF.DeltaNativePNFDreamFlowExact
 import DASHI.Cognition.PNF.FibreSolverDeltaStreamExact
 import DASHI.Cognition.PNF.FibreNaturalDeltaTransportExact
+import DASHI.Cognition.PNF.SentenceParagraphNaturalDeltaExact
 import DASHI.Cognition.PNF.DreamFlowExecutionPlacementExact
 import DASHI.Cognition.PNF.DreamFlowRuntimeComplexityExact
 import DASHI.Cognition.PNF.FibreLocalTokenAddressExact
