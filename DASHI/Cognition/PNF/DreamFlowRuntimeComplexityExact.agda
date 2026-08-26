@@ -143,8 +143,9 @@ record NearParserWallTarget (_≤W_ : Nat → Nat → Set) : Set where
     allowedNumerator : Nat
     allowedDenominator : Nat
     targetWitness :
-      postParserWall * allowedDenominator
-        ≤W parserWall * allowedNumerator
+      _≤W_
+        (postParserWall * allowedDenominator)
+        (parserWall * allowedNumerator)
 
 open NearParserWallTarget public
 
