@@ -109,7 +109,7 @@ fromLevel-monotone {suc (suc (suc zero))} {zero} ()
 fromLevel-monotone {suc (suc (suc zero))} {suc zero} (s≤s ())
 fromLevel-monotone
   {suc (suc (suc zero))}
-  {suc (suc zero))} (s≤s (s≤s ()))
+  {suc (suc zero)} (s≤s (s≤s ()))
 fromLevel-monotone
   {suc (suc (suc zero))}
   {suc (suc (suc zero))} a≤b =
