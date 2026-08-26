@@ -2,6 +2,7 @@ module DASHI.Physics.Closure.TOESymmetryResolved369BridgeExact where
 
 open import DASHI.Core.Prelude
 
+import Base369
 import DASHI.Core.SymmetryResolvedFibreExact as TOE
 import DASHI.Biology.SignedSSPFRACTRANWeaveExact as SSP
 import DASHI.Biology.SSPHyperfibreSymmetryTowerExact as Tower
