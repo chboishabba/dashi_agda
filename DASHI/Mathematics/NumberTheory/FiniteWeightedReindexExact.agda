@@ -67,7 +67,9 @@ foldPermutationInvariant weight
     (trans
       (sym (NatP.+-assoc (weight x) (weight y) (foldNat weight ys)))
       (trans
-        (cong (_+ foldNat weight ys) (NatP.+-comm (weight x) (weight y)))
+        (cong
+          (λ pairSum → pairSum + foldNat weight ys)
+          (NatP.+-comm (weight x) (weight y)))
         (NatP.+-assoc (weight y) (weight x) (foldNat weight ys))))
 foldPermutationInvariant weight (Perm.trans first second) =
   trans
