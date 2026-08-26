@@ -10,6 +10,12 @@ on:
       - 'DASHI/Core/IntersectionalNonFactorability.agda'
       - 'DASHI/Core/IntersectionalConstraintGeometryExact.agda'
       - 'DASHI/Core/FeministRechartingSourceBridgeExact.agda'
+      - 'DASHI/Core/DialecticalStageSpectrumExact.agda'
+      - 'DASHI/Core/ContextualDialecticRoleExact.agda'
+      - 'DASHI/Core/EpistemicSuspensionExact.agda'
+      - 'DASHI/Core/StageTransitionBarrierExact.agda'
+      - 'DASHI/Core/DialecticStageMotifBridgeExact.agda'
+      - 'DASHI/Core/DialecticOriginSourceAtlasExact.agda'
       - 'DASHI/Biology/JCoarseFineBranchingCriticalityExact.agda'
       - 'DASHI/Core/Everything.agda'
       - 'DASHI/Biology/DomainEverything.agda'
@@ -51,6 +57,12 @@ jobs:
             DASHI/Core/NumberRoleProvenanceAtlasExact.agda
             DASHI/Core/IntersectionalConstraintGeometryExact.agda
             DASHI/Core/FeministRechartingSourceBridgeExact.agda
+            DASHI/Core/DialecticalStageSpectrumExact.agda
+            DASHI/Core/ContextualDialecticRoleExact.agda
+            DASHI/Core/EpistemicSuspensionExact.agda
+            DASHI/Core/StageTransitionBarrierExact.agda
+            DASHI/Core/DialecticStageMotifBridgeExact.agda
+            DASHI/Core/DialecticOriginSourceAtlasExact.agda
             DASHI/Biology/JCoarseFineBranchingCriticalityExact.agda
           )
           if grep -nE '\b(postulate|{-# OPTIONS --allow-unsolved-metas #-}|sorry|admit)\b' "${files[@]}"; then
@@ -78,6 +90,12 @@ jobs:
               DASHI/Core/IntersectionalConstraintGeometryExact.agda
               DASHI/Core/FeministRechartingSourceBridgeExact.agda
               DASHI/Core/NumberRoleProvenanceAtlasExact.agda
+              DASHI/Core/DialecticalStageSpectrumExact.agda
+              DASHI/Core/ContextualDialecticRoleExact.agda
+              DASHI/Core/EpistemicSuspensionExact.agda
+              DASHI/Core/StageTransitionBarrierExact.agda
+              DASHI/Core/DialecticStageMotifBridgeExact.agda
+              DASHI/Core/DialecticOriginSourceAtlasExact.agda
               DASHI/Biology/JCoarseFineBranchingCriticalityExact.agda
               DASHI/Core/Everything.agda
             )
@@ -85,7 +103,7 @@ jobs:
           ) > agda-jcoarse-fine-criticality-check.log 2>&1
           status=$?
           echo "status=$status" >> "$GITHUB_OUTPUT"
-          tail -n 260 agda-jcoarse-fine-criticality-check.log
+          tail -n 300 agda-jcoarse-fine-criticality-check.log
           exit 0
 
       - name: Upload focused Agda log
