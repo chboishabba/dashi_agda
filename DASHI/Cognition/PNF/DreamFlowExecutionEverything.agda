@@ -15,3 +15,4 @@ import DASHI.Cognition.PNF.FibreLocalPackedStorageExact
 import DASHI.Cognition.PNF.ExecutionEngineTournamentExact
 import DASHI.Cognition.PNF.DreamFlowSprintConstitutionExact
 import DASHI.Cognition.PNF.PackedOperatorKernelSWARExact
+import DASHI.Cognition.PNF.PackedModalClosureExact

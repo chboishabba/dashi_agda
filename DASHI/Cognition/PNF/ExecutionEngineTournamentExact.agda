@@ -17,16 +17,16 @@ open import DASHI.Cognition.PNF.ComplexityArithmetic using (_≤ᶜ_)
 ------------------------------------------------------------------------
 
 data Engine : Set where
-  postgresqlEngine
-  packedNativeEngine
-  numpyArrayEngine
-  customWorklistEngine
-  zelphEngine
+  postgresqlEngine : Engine
+  packedNativeEngine : Engine
+  numpyArrayEngine : Engine
+  customWorklistEngine : Engine
+  zelphEngine : Engine
   datalogEngine : Engine
 
 data KernelGeometry : Set where
-  localBoundedFibre
-  globalIndexedExposure
+  localBoundedFibre : KernelGeometry
+  globalIndexedExposure : KernelGeometry
   sparseDeltaClosure : KernelGeometry
 
 record EngineRun (Input Output : Set) : Set₁ where

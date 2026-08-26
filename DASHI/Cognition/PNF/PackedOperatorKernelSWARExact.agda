@@ -16,12 +16,12 @@ open import Data.Empty using (⊥)
 ------------------------------------------------------------------------
 
 data OperatorClass : Set where
-  modalAux
-  negation
-  conditionMarker
-  exceptionMarker
-  transitionPredicate
-  subjectDependency
+  modalAux : OperatorClass
+  negation : OperatorClass
+  conditionMarker : OperatorClass
+  exceptionMarker : OperatorClass
+  transitionPredicate : OperatorClass
+  subjectDependency : OperatorClass
   objectDependency : OperatorClass
 
 record PackedOperatorKernel (Input Mask Topology : Set) : Set₁ where
