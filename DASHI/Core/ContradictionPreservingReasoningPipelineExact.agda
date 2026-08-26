@@ -108,7 +108,8 @@ neutralEvidenceStillSuspends :
 neutralEvidenceStillSuspends = refl
 
 contradictionSurvivesMissingAggregation :
-  Exceptional.qPARA Exceptional.⊔E Exceptional.qVOID ≡ Exceptional.qPARA
+  Exceptional._⊔E_ Exceptional.qPARA Exceptional.qVOID
+  ≡ Exceptional.qPARA
 contradictionSurvivesMissingAggregation =
   Exceptional.paradoxDominatesVoid
 
