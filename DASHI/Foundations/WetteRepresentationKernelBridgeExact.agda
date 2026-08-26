@@ -36,7 +36,8 @@ fixedGeneratorCompatibility {machine} simulation g =
     ; fineObserve = W.encode simulation
     ; coarseObserve = λ state → state
     ; fineAdmissibleStep = fineStepPreservesAdmissibility
-    ; coarseAdmissibleStep = W.preservesAdmissible machine g
+    ; coarseAdmissibleStep =
+        λ {x} admissible → W.preservesAdmissible machine g x admissible
     ; projectPreservesAdmissibility = λ admissible → admissible
     ; projectPreservesObservable = λ _ → refl
     ; kernelCommutesWithProjection =
