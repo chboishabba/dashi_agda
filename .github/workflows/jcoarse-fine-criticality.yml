@@ -20,6 +20,8 @@ on:
       - 'DASHI/Core/Base369DialecticRoleBoundaryExact.agda'
       - 'DASHI/Core/ContradictionPreservingReasoningPipelineExact.agda'
       - 'DASHI/Core/RelationalEpistemicProcessSourceBridgeExact.agda'
+      - 'DASHI/Core/DeclaredRealizedIntegrityResidualExact.agda'
+      - 'DASHI/Core/SolisSituatedIntegrityBridgeExact.agda'
       - 'DASHI/Biology/JCoarseFineBranchingCriticalityExact.agda'
       - 'DASHI/Core/Everything.agda'
       - 'DASHI/Biology/DomainEverything.agda'
@@ -68,6 +70,8 @@ jobs:
             DASHI/Core/Base369DialecticRoleBoundaryExact.agda
             DASHI/Core/ContradictionPreservingReasoningPipelineExact.agda
             DASHI/Core/RelationalEpistemicProcessSourceBridgeExact.agda
+            DASHI/Core/DeclaredRealizedIntegrityResidualExact.agda
+            DASHI/Core/SolisSituatedIntegrityBridgeExact.agda
             DASHI/Biology/JCoarseFineBranchingCriticalityExact.agda
           )
           if grep -nE '\b(postulate|{-# OPTIONS --allow-unsolved-metas #-}|sorry|admit)\b' "${files[@]}"; then
@@ -104,6 +108,8 @@ jobs:
               DASHI/Core/Base369DialecticRoleBoundaryExact.agda
               DASHI/Core/ContradictionPreservingReasoningPipelineExact.agda
               DASHI/Core/RelationalEpistemicProcessSourceBridgeExact.agda
+              DASHI/Core/DeclaredRealizedIntegrityResidualExact.agda
+              DASHI/Core/SolisSituatedIntegrityBridgeExact.agda
               DASHI/Biology/JCoarseFineBranchingCriticalityExact.agda
               DASHI/Core/Everything.agda
             )
