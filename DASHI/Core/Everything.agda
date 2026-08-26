@@ -20,3 +20,5 @@ import DASHI.Core.ExceptionalSignalLatticeExact
 import DASHI.Core.Base369DialecticRoleBoundaryExact
 import DASHI.Core.ContradictionPreservingReasoningPipelineExact
 import DASHI.Core.RelationalEpistemicProcessSourceBridgeExact
+import DASHI.Core.DeclaredRealizedIntegrityResidualExact
+import DASHI.Core.SolisSituatedIntegrityBridgeExact
