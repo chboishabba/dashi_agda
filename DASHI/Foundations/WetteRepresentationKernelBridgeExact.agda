@@ -6,7 +6,7 @@ module DASHI.Foundations.WetteRepresentationKernelBridgeExact where
 -- The Wette reconstruction already carries a one-step simulation square.
 -- Rather than maintain a parallel trajectory theory, this module packages a
 -- fixed generator as the repository's existing canonical
--- RepresentationKernelCompatibility owner.  All n-step, observable,
+-- RepresentationKernelCompatibility owner. All n-step, observable,
 -- fixed-point, and finite-reachability transport then come from that owner.
 ------------------------------------------------------------------------
 
@@ -81,11 +81,27 @@ canonicalProjectedFixedPoint :
 canonicalProjectedFixedPoint simulation g admissible =
   R.projectedFixedPoint (fixedGeneratorCompatibility simulation g) admissible
 
+canonicalProjectedEventuallyReaches :
+  {machine : W.WetteMachineSpec} →
+  (simulation : W.WetteDeductionSimulation machine) →
+  (g : W.Generator machine) →
+  {term target : W.Syntax simulation} →
+  W.admissible machine (W.encode simulation term) ≡ true →
+  R.EventuallyReaches (W.syntaxStep simulation g) term target →
+  R.EventuallyReaches
+    (W.step machine g)
+    (W.encode simulation term)
+    (W.encode simulation target)
+canonicalProjectedEventuallyReaches simulation g admissible =
+  R.projectedEventuallyReaches
+    (fixedGeneratorCompatibility simulation g)
+    admissible
+
 ------------------------------------------------------------------------
 -- Interpretation boundary.
 --
 -- This proves a general theorem: IF source syntax and machine semantics satisfy
 -- WetteDeductionSimulation, then the canonical DASHI representation-kernel
--- theorem stack applies.  It does not assert that Wette's historical syntax or
+-- theorem stack applies. It does not assert that Wette's historical syntax or
 -- generator family has already been recovered.
 ------------------------------------------------------------------------
