@@ -56,8 +56,8 @@ open SentenceParagraphDeltaWorkReceipt public
 
 sentenceParagraphTransportDoesNotRequireLowerRebuild :
   RestrictionRequiresReconstructionOfVertexCarrier → ⊥
-sentenceParagraphTransportDoesNotRequireLowerRebuild =
-  restrictionCanTransportDeltaWithoutRebuild
+sentenceParagraphTransportDoesNotRequireLowerRebuild witness =
+  restrictionCanTransportDeltaWithoutRebuild witness {A = ⊥}
 
 ------------------------------------------------------------------------
 -- Negative boundaries.
