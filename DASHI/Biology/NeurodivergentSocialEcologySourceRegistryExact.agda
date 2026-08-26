@@ -117,7 +117,7 @@ builtEnvironment2026 = sourceReference
 
 publicLandscape2026 : SourceReference
 publicLandscape2026 = sourceReference
-  "multi-author public landscape study"
+  "Hanna Fors; Asa Ode Sang; Petra N. Bengtsson; Jessica Svannel; Thomas B. Randrup"
   "Autism-friendly public landscape architecture"
   "Urban Forestry & Urban Greening 115:129181"
   2026
@@ -207,7 +207,7 @@ neuroqueerIntimacy2026 = sourceReference
 
 genderDiversity2025 : SourceReference
 genderDiversity2025 = sourceReference
-  "Guilhem Bonazzi et al."
+  "Guilhem Bonazzi; Elodie Peyroux; Lucie Jurek; Ludovic Souiller; Adele Zufferey; Caroline Giroudon; Mikail Nourredine; Caroline Demily"
   "Gender on the Spectrum: Prevalence of Gender Diversity in Autism Spectrum Disorder - A Systematic Review and Meta-Analysis"
   "Autism in Adulthood"
   2025
@@ -215,9 +215,19 @@ genderDiversity2025 = sourceReference
   "peer-reviewed systematic review/meta-analysis"
   "supports an elevated and heterogeneous prevalence of gender diversity in autistic samples; definitions and ascertainment remain important"
 
+sexualityReview2023 : SourceReference
+sexualityReview2023 = sourceReference
+  "Sara Gonzalez-Garcia; Patricia Solis-Garcia; Lucia Moran-Suarez; Asuncion Monsalve-Gonzalez; Laura E. Gomez-Sanchez; Angeles Alcedo-Rodriguez"
+  "Gender identity and sexual orientation of people with Autism Spectrum Disorder: a systematic review"
+  "Siglo Cero 54(2):53-72"
+  2023
+  "10.14201/scero202354228880"
+  "peer-reviewed systematic review"
+  "supports greater representation of non-heterosexual orientation and gender diversity in autistic samples while retaining measurement and subgroup limitations"
+
 hostileDesign2024 : SourceReference
 hostileDesign2024 = sourceReference
-  "Michael Kauff; Lena Laemmle; Esther Kroll; Larissa Gehring; Roman Soucek; Frank Asbrock"
+  "Mathias Kauff; Lena Laemmle; Esther Kroll; Larissa Gehring; Roman Soucek; Frank Asbrock"
   "Should the city be for everyone? The relationship between worldviews, ideological attitudes, and the approval of hostile design"
   "Journal of Community & Applied Social Psychology 34(4):e2867"
   2024
@@ -290,6 +300,7 @@ record RegistryBoundary : Set where
     empiricalAndTheoreticalRolesSeparated : Bool
     qualitativeFriendshipEvidenceInstalled : Bool
     neuroqueerSourcesInstalled : Bool
+    sexualityAndGenderSourcesInstalled : Bool
     builtEnvironmentSourcesInstalled : Bool
     politicalHostileDesignSourcesInstalled : Bool
     intersectionalSourceInstalled : Bool
@@ -297,4 +308,4 @@ record RegistryBoundary : Set where
 
 canonicalRegistryBoundary : RegistryBoundary
 canonicalRegistryBoundary =
-  registryBoundary true true true true true true true
+  registryBoundary true true true true true true true true
