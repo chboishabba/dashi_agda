@@ -14,14 +14,15 @@ module DASHI.Core.ContextualDialecticRoleExact where
 -- Mathematical cross-pollination:
 --   DASHI.Biology.TernaryCyclicDialecticExact already proves that dialectical
 --   labels are external annotations on the cyclic ternary carrier: an
---   automorphism can exchange labelled positions.  This module extracts the
+--   automorphism can exchange labelled positions. This module extracts the
 --   generic frame-relative role principle without importing named demographic
 --   categories into the theorem statement.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; false)
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
+open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 ------------------------------------------------------------------------
 -- Roles are indexed by a frame.
@@ -81,8 +82,7 @@ demoRoleSystem = record
     role argumentA sameEntity = initialRole
     role argumentB sameEntity = counterRole
 
-demoRoleChanges :
-  RoleChangeWitness demoRoleSystem
+demoRoleChanges : RoleChangeWitness demoRoleSystem
 demoRoleChanges =
   role-change-witness
     sameEntity
@@ -111,12 +111,12 @@ record ContextualDialecticRoleBoundary : Set where
     jokeLabelIsOntology : Bool
     jokeLabelIsOntologyIsFalse : jokeLabelIsOntology ≡ false
     roleMayChangeWithComparisonFrame : Bool
-    roleMayChangeWithComparisonFrameIsFalse :
-      roleMayChangeWithComparisonFrame ≡ false
+    roleMayChangeWithComparisonFrameIsTrue :
+      roleMayChangeWithComparisonFrame ≡ true
 
 canonicalContextualDialecticRoleBoundary : ContextualDialecticRoleBoundary
 canonicalContextualDialecticRoleBoundary =
   contextual-dialectic-role-boundary
     false refl
     false refl
-    false refl
+    true refl
