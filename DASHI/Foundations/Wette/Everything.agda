@@ -2,14 +2,16 @@ module DASHI.Foundations.Wette.Everything where
 
 -- Eduard Wette reconstruction rollup.
 --
--- Keep source representation, executable-machine semantics, arithmetic
--- transition certification, finite mixed-rule traces, proof-carrying finite
--- derivability and composition, proof translations/equiconsistency boundaries,
--- invariant-based consistency obstruction, representation/kernel transport,
--- composed certified arithmetic kernels, concrete arithmetic-machine witnesses,
--- and metamathematical claim boundaries separate so no stronger conclusion is
--- imported merely by importing the arithmetic coding layer.
+-- Keep historical provenance, source representation, executable-machine
+-- semantics, arithmetic transition certification, finite mixed-rule traces,
+-- proof-carrying finite derivability and composition, proof translations /
+-- equiconsistency boundaries, invariant-based consistency obstruction,
+-- representation/kernel transport, composed certified arithmetic kernels,
+-- concrete arithmetic-machine witnesses, and metamathematical claim boundaries
+-- separate so no stronger conclusion is imported merely by importing the
+-- arithmetic coding layer.
 
+import DASHI.Foundations.WetteHistoricalSourceAtlasExact
 import DASHI.Foundations.WetteArithmeticRepresentationExact
 import DASHI.Foundations.WetteConstructiveAutomatonExact
 import DASHI.Foundations.WetteArithmeticTransitionBridgeExact
