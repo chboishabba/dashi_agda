@@ -9,3 +9,4 @@ import DASHI.Core.LogisticFoldCriticalityExact
 import DASHI.Core.NumberRoleProvenanceAtlasExact
 import DASHI.Core.IntersectionalNonFactorability
 import DASHI.Core.IntersectionalConstraintGeometryExact
+import DASHI.Core.FeministRechartingSourceBridgeExact
