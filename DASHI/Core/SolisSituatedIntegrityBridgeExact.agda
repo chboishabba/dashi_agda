@@ -25,6 +25,7 @@ module DASHI.Core.SolisSituatedIntegrityBridgeExact where
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
+open import Agda.Builtin.String using (String)
 
 import DASHI.Core.DeclaredRealizedIntegrityResidualExact as Integrity
 import DASHI.Core.ExceptionalSignalLatticeExact as Exception
