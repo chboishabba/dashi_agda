@@ -71,6 +71,16 @@ record WetteDeductionSimulation (machine : WetteMachineSpec) : Set₁ where
 
 open WetteDeductionSimulation public
 
+------------------------------------------------------------------------
+-- Local n-step theorem retained as a regression witness.
+--
+-- WetteRepresentationKernelBridgeExact independently packages this one-step
+-- square into the repository's canonical RepresentationKernelCompatibility
+-- owner, from which trajectory, fixed-point, observable, and finite-reachability
+-- transport follow generically. This local induction is retained so the bridge
+-- can be checked against the original reconstruction theorem surface.
+------------------------------------------------------------------------
+
 iterateSyntax :
   {machine : WetteMachineSpec} →
   (simulation : WetteDeductionSimulation machine) →
