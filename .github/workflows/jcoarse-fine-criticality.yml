@@ -16,6 +16,10 @@ on:
       - 'DASHI/Core/StageTransitionBarrierExact.agda'
       - 'DASHI/Core/DialecticStageMotifBridgeExact.agda'
       - 'DASHI/Core/DialecticOriginSourceAtlasExact.agda'
+      - 'DASHI/Core/ExceptionalSignalLatticeExact.agda'
+      - 'DASHI/Core/Base369DialecticRoleBoundaryExact.agda'
+      - 'DASHI/Core/ContradictionPreservingReasoningPipelineExact.agda'
+      - 'DASHI/Core/RelationalEpistemicProcessSourceBridgeExact.agda'
       - 'DASHI/Biology/JCoarseFineBranchingCriticalityExact.agda'
       - 'DASHI/Core/Everything.agda'
       - 'DASHI/Biology/DomainEverything.agda'
@@ -37,15 +41,12 @@ jobs:
       - uses: cachix/install-nix-action@v31
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
-
       - uses: DeterminateSystems/magic-nix-cache-action@v9
-
       - name: Restore Agda 2.9 shadow cache
         uses: actions/cache@v4
         with:
           path: ${{ runner.temp }}/dashi-agda29
           key: jcoarse-fine-criticality-agda29-${{ runner.os }}-86a1179-${{ hashFiles('scripts/run_agda29_parallel_check.sh') }}
-
       - name: Trust scan new theorem tranche
         shell: bash
         run: |
@@ -63,13 +64,16 @@ jobs:
             DASHI/Core/StageTransitionBarrierExact.agda
             DASHI/Core/DialecticStageMotifBridgeExact.agda
             DASHI/Core/DialecticOriginSourceAtlasExact.agda
+            DASHI/Core/ExceptionalSignalLatticeExact.agda
+            DASHI/Core/Base369DialecticRoleBoundaryExact.agda
+            DASHI/Core/ContradictionPreservingReasoningPipelineExact.agda
+            DASHI/Core/RelationalEpistemicProcessSourceBridgeExact.agda
             DASHI/Biology/JCoarseFineBranchingCriticalityExact.agda
           )
           if grep -nE '\b(postulate|{-# OPTIONS --allow-unsolved-metas #-}|sorry|admit)\b' "${files[@]}"; then
             echo 'Forbidden trust-boundary token found in new tranche.' >&2
             exit 1
           fi
-
       - name: Check focused tranche with Agda 2.9
         id: focused
         shell: bash
@@ -96,6 +100,10 @@ jobs:
               DASHI/Core/StageTransitionBarrierExact.agda
               DASHI/Core/DialecticStageMotifBridgeExact.agda
               DASHI/Core/DialecticOriginSourceAtlasExact.agda
+              DASHI/Core/ExceptionalSignalLatticeExact.agda
+              DASHI/Core/Base369DialecticRoleBoundaryExact.agda
+              DASHI/Core/ContradictionPreservingReasoningPipelineExact.agda
+              DASHI/Core/RelationalEpistemicProcessSourceBridgeExact.agda
               DASHI/Biology/JCoarseFineBranchingCriticalityExact.agda
               DASHI/Core/Everything.agda
             )
@@ -103,9 +111,8 @@ jobs:
           ) > agda-jcoarse-fine-criticality-check.log 2>&1
           status=$?
           echo "status=$status" >> "$GITHUB_OUTPUT"
-          tail -n 300 agda-jcoarse-fine-criticality-check.log
+          tail -n 340 agda-jcoarse-fine-criticality-check.log
           exit 0
-
       - name: Upload focused Agda log
         if: always()
         uses: actions/upload-artifact@v4
@@ -113,7 +120,6 @@ jobs:
           name: jcoarse-fine-criticality-agda-log
           path: agda-jcoarse-fine-criticality-check.log
           if-no-files-found: error
-
       - name: Fail on Agda error
         if: steps.focused.outputs.status != '0'
         run: exit 1
