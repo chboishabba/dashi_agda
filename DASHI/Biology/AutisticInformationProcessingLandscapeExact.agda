@@ -125,8 +125,9 @@ open InformationProcessingState public
 
 ------------------------------------------------------------------------
 -- Memory is retained state that can change processing of the same present
--- input.  This is a structural witness, not a claim that either policy is a
--- universal autistic policy.
+-- input even when diagnostic category and processing policy are held fixed.
+-- This is a structural witness, not a claim that either finite disposition is
+-- a universal autistic policy.
 ------------------------------------------------------------------------
 
 data PresentInput : Set where
@@ -140,7 +141,7 @@ processingDisposition :
 processingDisposition
   (informationProcessingState d weakTrace rapidCommit l s c) sameInput = commitNow
 processingDisposition
-  (informationProcessingState d strongTrace rapidCommit l s c) sameInput = commitNow
+  (informationProcessingState d strongTrace rapidCommit l s c) sameInput = holdForMoreEvidence
 processingDisposition
   (informationProcessingState d weakTrace detailPreserving l s c) sameInput = holdForMoreEvidence
 processingDisposition
@@ -154,22 +155,28 @@ memorySensitiveLeft =
 memorySensitiveRight : InformationProcessingState
 memorySensitiveRight =
   informationProcessingState
-    autistic strongTrace detailPreserving rapidUpdate earlierStage supportiveContext
+    autistic strongTrace rapidCommit conservativeUpdate earlierStage supportiveContext
 
-sameDiagnosisAcrossProcessingWitness :
+sameDiagnosisAcrossMemoryWitness :
   diagnosis memorySensitiveLeft ≡ diagnosis memorySensitiveRight
-sameDiagnosisAcrossProcessingWitness = refl
+sameDiagnosisAcrossMemoryWitness = refl
+
+sameProcessingPolicyAcrossMemoryWitness :
+  processing memorySensitiveLeft ≡ processing memorySensitiveRight
+sameProcessingPolicyAcrossMemoryWitness = refl
 
 samePresentInputAcrossProcessingWitness : sameInput ≡ sameInput
 samePresentInputAcrossProcessingWitness = refl
 
-processingCanDifferAtSameDiagnosisAndPresentInput :
+processingCanDifferAtSameDiagnosisPolicyAndPresentInput :
   processingDisposition memorySensitiveLeft sameInput
     ≡ processingDisposition memorySensitiveRight sameInput → ⊥
-processingCanDifferAtSameDiagnosisAndPresentInput ()
+processingCanDifferAtSameDiagnosisPolicyAndPresentInput ()
 
 ------------------------------------------------------------------------
 -- Learning is represented as an update law rather than as a static score.
+-- Equal diagnosis, memory, policy, stage and context can therefore lead to
+-- different next memory states solely because the update rule differs.
 ------------------------------------------------------------------------
 
 learnMemory : LearningRule → MemoryResidue → PresentInput → MemoryResidue
@@ -187,12 +194,12 @@ learningTransition
 slowLearnerState : InformationProcessingState
 slowLearnerState =
   informationProcessingState
-    autistic weakTrace detailPreserving conservativeUpdate earlierStage supportiveContext
+    autistic weakTrace rapidCommit conservativeUpdate earlierStage supportiveContext
 
 rapidLearnerState : InformationProcessingState
 rapidLearnerState =
   informationProcessingState
-    autistic weakTrace detailPreserving rapidUpdate earlierStage supportiveContext
+    autistic weakTrace rapidCommit rapidUpdate earlierStage supportiveContext
 
 sameDiagnosisBeforeLearning :
   diagnosis slowLearnerState ≡ diagnosis rapidLearnerState
@@ -202,10 +209,19 @@ sameMemoryBeforeLearning :
   memory slowLearnerState ≡ memory rapidLearnerState
 sameMemoryBeforeLearning = refl
 
+sameProcessingBeforeLearning :
+  processing slowLearnerState ≡ processing rapidLearnerState
+sameProcessingBeforeLearning = refl
+
 postLearningMemoryDiffers :
   memory (learningTransition slowLearnerState sameInput)
     ≡ memory (learningTransition rapidLearnerState sameInput) → ⊥
 postLearningMemoryDiffers ()
+
+postLearningProcessingDispositionDiffers :
+  processingDisposition (learningTransition slowLearnerState sameInput) sameInput
+    ≡ processingDisposition (learningTransition rapidLearnerState sameInput) sameInput → ⊥
+postLearningProcessingDispositionDiffers ()
 
 ------------------------------------------------------------------------
 -- Intersectionality: retaining autism as a category does not license treating
@@ -280,6 +296,14 @@ record PositiveAutismLandscapeBoundary : Set where
     memoryLearningProcessingCanBeTypedSeparatelyIsTrue :
       memoryLearningProcessingCanBeTypedSeparately ≡ true
 
+    retainedMemoryCanAlterFutureProcessingInFiniteDynamics : Bool
+    retainedMemoryCanAlterFutureProcessingInFiniteDynamicsIsTrue :
+      retainedMemoryCanAlterFutureProcessingInFiniteDynamics ≡ true
+
+    learningRuleCanAlterLaterProcessingInFiniteDynamics : Bool
+    learningRuleCanAlterLaterProcessingInFiniteDynamicsIsTrue :
+      learningRuleCanAlterLaterProcessingInFiniteDynamics ≡ true
+
     intersectionalContextIsMerelyAnAdditiveAfterthought : Bool
     intersectionalContextIsMerelyAnAdditiveAfterthoughtIsFalse :
       intersectionalContextIsMerelyAnAdditiveAfterthought ≡ false
@@ -297,6 +321,8 @@ canonicalPositiveAutismLandscapeBoundary =
   positiveAutismLandscapeBoundary
     true refl
     false refl
+    true refl
+    true refl
     true refl
     false refl
     false refl
