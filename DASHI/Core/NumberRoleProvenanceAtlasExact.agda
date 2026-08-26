@@ -7,12 +7,14 @@ module DASHI.Core.NumberRoleProvenanceAtlasExact where
 -- number can acquire different mathematical and historical roles.  This module
 -- makes that separation explicit and machine-visible.
 --
--- Primary literature already owned by imported modules:
+-- Primary literature already owned by referenced/imported modules:
 --
 -- * Robert M. May, "Simple mathematical models with very complicated
 --   dynamics", Nature 261 (1976), 459--467. DOI: 10.1038/261459a0.
 -- * Theodore E. Harris, "The Theory of Branching Processes", Springer, 1963.
 --   DOI: 10.1007/978-3-642-51866-9.
+-- * Fernando Q. Gouvea, "p-adic Numbers: An Introduction", 2nd ed., Springer,
+--   1997. DOI: 10.1007/978-3-642-59058-0.
 -- * Bernhard Riemann, "Ueber die Anzahl der Primzahlen unter einer gegebenen
 --   Grösse" (1859), no DOI assigned.
 -- * Enrico Bombieri, Clay Mathematics Institute RH problem description,
@@ -43,9 +45,12 @@ data NumberRole : Set where
   logisticFoldCriticalPoint
   riemannCriticalRealPart
   historicalAffineRefinementFixedPoint
+  threeAdicMinusHalfRole
+  tenAdicTwoFiveHistoryRole
   jCoarseFineFrequencyRole
   decimalStratificationRole
-  triadicDepthRole
+  decimalJRetentionRole
+  triadicJDepthRole
   : NumberRole
 
 halfBranchingRoleDistinctFromLogisticRole :
@@ -59,6 +64,10 @@ halfLogisticRoleDistinctFromRiemannRole ()
 halfBranchingRoleDistinctFromRiemannRole :
   branchingCriticalAvailability ≡ riemannCriticalRealPart → ⊥
 halfBranchingRoleDistinctFromRiemannRole ()
+
+halfRiemannRoleDistinctFromThreeAdicMinusHalfRole :
+  riemannCriticalRealPart ≡ threeAdicMinusHalfRole → ⊥
+halfRiemannRoleDistinctFromThreeAdicMinusHalfRole ()
 
 ------------------------------------------------------------------------
 -- Exact shared-scalar compatibility, without role identification.
@@ -113,16 +122,38 @@ record NumberProvenanceEntry : Set where
 
 open NumberProvenanceEntry public
 
+quarterHistoricalEntry : NumberProvenanceEntry
+quarterHistoricalEntry =
+  number-provenance-entry
+    "0.25 / 1/4"
+    historicalDecimalComparison
+    "supplied DASHI origin/reconstruction notes"
+    "initial consideration threshold in the historical notes"
+    "historical role; not inferred from later branching theory"
+    "DASHI genealogy notes / NumberRoleProvenanceAtlasExact"
+    historicalSourceMeaning
+
 quarterBranchingEntry : NumberProvenanceEntry
 quarterBranchingEntry =
   number-provenance-entry
     "0.25 / 1/4"
     branchingCriticalAvailability
-    "Harris branching-process criterion; DASHI historical notes separately use 0.25 as initial consideration"
+    "Harris branching-process criterion"
     "critical availability for arity four"
     "4 * (1/4) = 1"
     "DASHI.Core.FiniteBranchingCriticalityExact"
     exactTheorem
+
+threeTenthsHistoricalEntry : NumberProvenanceEntry
+threeTenthsHistoricalEntry =
+  number-provenance-entry
+    "0.3"
+    historicalDecimalComparison
+    "supplied DASHI origin/reconstruction notes"
+    "decimal 3-side comparison / attempted next consideration level"
+    "kept separate from exact 1/3 branching criticality"
+    "DASHI genealogy notes / NumberRoleProvenanceAtlasExact"
+    historicalSourceMeaning
 
 thirdBranchingEntry : NumberProvenanceEntry
 thirdBranchingEntry =
@@ -134,6 +165,17 @@ thirdBranchingEntry =
     "3 * (1/3) = 1"
     "DASHI.Core.FiniteBranchingCriticalityExact"
     exactTheorem
+
+halfHistoricalEntry : NumberProvenanceEntry
+halfHistoricalEntry =
+  number-provenance-entry
+    "0.5 / 1/2"
+    dyadicScreenCut
+    "supplied DASHI origin/reconstruction notes"
+    "binary screen split / commitment or hinge surface"
+    "historical role preceding later logistic/RH comparisons"
+    "DASHI genealogy notes / NumberRoleProvenanceAtlasExact"
+    historicalSourceMeaning
 
 halfBranchingEntry : NumberProvenanceEntry
 halfBranchingEntry =
@@ -164,9 +206,31 @@ halfRiemannEntry =
     riemannCriticalRealPart
     "Riemann 1859; Bombieri CMI RH problem description"
     "real coordinate of the RH critical line"
-    "reflection s |-> 1-conjugate(s) fixes exactly Re(s)=1/2 in the repo rational model"
+    "critical reflection fixes exactly Re(s)=1/2 in the repo rational model"
     "DASHI.Mathematics.NumberTheory.RiemannXiSymmetryExact"
     currentRepoOwner
+
+sixTenthsHistoricalEntry : NumberProvenanceEntry
+sixTenthsHistoricalEntry =
+  number-provenance-entry
+    "0.6"
+    historicalDecimalComparison
+    "supplied DASHI origin/reconstruction notes"
+    "reinforcement / comparison level in the historical threshold sequence"
+    "historical decimal role; no canonical identification with stage 6"
+    "DASHI genealogy notes / NumberRoleProvenanceAtlasExact"
+    historicalSourceMeaning
+
+nineTenthsHistoricalEntry : NumberProvenanceEntry
+nineTenthsHistoricalEntry =
+  number-provenance-entry
+    "0.9"
+    historicalDecimalComparison
+    "supplied DASHI origin/reconstruction notes"
+    "high decimal comparison level"
+    "later three-axis toy arithmetic gives (3*9)^3/10^3 = 19683/1000, but that is retrospective"
+    "DASHI.Biology.JCoarseFineBranchingCriticalityExact"
+    retrospectiveAnalogy
 
 fiveEighteenthsEntry : NumberProvenanceEntry
 fiveEighteenthsEntry =
@@ -179,6 +243,28 @@ fiveEighteenthsEntry =
     "DASHI.Core.FiniteBranchingCriticalityExact"
     exactTheorem
 
+threeAdicMinusHalfEntry : NumberProvenanceEntry
+threeAdicMinusHalfEntry =
+  number-provenance-entry
+    "-1/2"
+    threeAdicMinusHalfRole
+    "standard 3-adic geometric-series identity; repo keeps convergence witness explicit"
+    "candidate/sum for 1 + 3 + 3^2 + ... in the 3-adic metric"
+    "not a real-series equality and not the same role as positive 1/2"
+    "DASHI.Analysis.ThreeAdicGeometricSeries"
+    currentRepoOwner
+
+fiveTenAdicEntry : NumberProvenanceEntry
+fiveTenAdicEntry =
+  number-provenance-entry
+    "5"
+    tenAdicTwoFiveHistoryRole
+    "Gouvea p-adic background; DOI 10.1007/978-3-642-59058-0"
+    "5-adic factor in the compatible-history decomposition of the decimal 10-adic tower"
+    "10 = 2*5 motivates the CRT product tower; ring-level claims stay separate"
+    "DASHI.Biology.TenAdicInverseLimitBridge"
+    currentRepoOwner
+
 nineDecimalEntry : NumberProvenanceEntry
 nineDecimalEntry =
   number-provenance-entry
@@ -189,6 +275,28 @@ nineDecimalEntry =
     "9 -> 9.9 -> 9.99 is represented by exact Nat numerators"
     "DASHI.Core.DecimalResidualRefinementExact"
     historicalSourceMeaning
+
+decimalJElevenEntry : NumberProvenanceEntry
+decimalJElevenEntry =
+  number-provenance-entry
+    "11"
+    decimalJRetentionRole
+    "older supplied JCoarse/JFine stratification notes"
+    "retain decimal strata j0=1 and j1=10 simultaneously"
+    "1 + 10 = 11 is a decimal retained-resolution story"
+    "DASHI decimal/J stratification lineage"
+    historicalSourceMeaning
+
+triadicJElevenEntry : NumberProvenanceEntry
+triadicJElevenEntry =
+  number-provenance-entry
+    "11"
+    triadicJDepthRole
+    "current DASHI JCoarse/JFine triadic harmonic owner"
+    "absolute depth obtained from coarse depth 2 plus relative fine depth 9"
+    "3^11 = 3^2 * 3^9; this is not the same theorem as decimal 1+10=11"
+    "DASHI.Biology.JFineCoarseRelativeScaleExact"
+    currentRepoOwner
 
 ------------------------------------------------------------------------
 -- Boundary: provenance records are intentionally plural.
@@ -206,10 +314,18 @@ record NumberRoleProvenanceBoundary : Set where
     analogyPromotedToIdentity : Bool
     analogyPromotedToIdentityIsFalse :
       analogyPromotedToIdentity ≡ false
+    decimalElevenIdentifiedWithTriadicEleven : Bool
+    decimalElevenIdentifiedWithTriadicElevenIsFalse :
+      decimalElevenIdentifiedWithTriadicEleven ≡ false
+    positiveHalfIdentifiedWithThreeAdicMinusHalf : Bool
+    positiveHalfIdentifiedWithThreeAdicMinusHalfIsFalse :
+      positiveHalfIdentifiedWithThreeAdicMinusHalf ≡ false
 
 canonicalNumberRoleProvenanceBoundary : NumberRoleProvenanceBoundary
 canonicalNumberRoleProvenanceBoundary =
   number-role-provenance-boundary
+    false refl
+    false refl
     false refl
     false refl
     false refl
