@@ -15,6 +15,7 @@ open import UFTC_Lattice as UFTC using (Severity; Code)
 -- This is an adapter surface only. It does not import a live ITIR runtime,
 -- does not classify real join edges, and does not promote the doc-only
 -- JoinEdgePressureBridge into an aggregate DASHI theorem.
+------------------------------------------------------------------------
 
 severityToPressure : Severity → Pressure
 severityToPressure = P.fromLevel
@@ -61,17 +62,23 @@ codeXorJoinPreserved :
 codeXorJoinPreserved x y =
   severityJoinPreserved (UFTC.severity x) (UFTC.severity y)
 
-SeverityToPressureMonotoneGap : Set
-SeverityToPressureMonotoneGap =
+SeverityToPressureMonotone : Set
+SeverityToPressureMonotone =
   ∀ {a b} →
   a UFTC.⊑ b →
   severityToPressure a ⊑p severityToPressure b
 
-CodeToPressureMonotoneGap : Set
-CodeToPressureMonotoneGap =
+CodeToPressureMonotone : Set
+CodeToPressureMonotone =
   ∀ {x y} →
   UFTC.severity x UFTC.⊑ UFTC.severity y →
   codeToPressure x ⊑p codeToPressure y
+
+severityToPressureMonotone : SeverityToPressureMonotone
+severityToPressureMonotone = P.fromLevel-monotone
+
+codeToPressureMonotone : CodeToPressureMonotone
+codeToPressureMonotone = P.fromLevel-monotone
 
 record ITIRJoinBridgeObligations : Set₁ where
   field
@@ -87,8 +94,8 @@ record ITIRJoinBridgeObligations : Set₁ where
       ≡
       codeToPressure x ⊔p codeToPressure y
 
-    severityMonotonicityGap : Set
-    codeMonotonicityGap : Set
+    severityMonotonicity : SeverityToPressureMonotone
+    codeMonotonicity : CodeToPressureMonotone
 
     nonClaimBoundary : List String
 
@@ -97,12 +104,12 @@ itirJoinBridgeObligations =
   record
     { severityJoinPreservation = severityJoinPreserved
     ; codeXorJoinPreservation = codeXorJoinPreserved
-    ; severityMonotonicityGap = SeverityToPressureMonotoneGap
-    ; codeMonotonicityGap = CodeToPressureMonotoneGap
+    ; severityMonotonicity = severityToPressureMonotone
+    ; codeMonotonicity = codeToPressureMonotone
     ; nonClaimBoundary =
         "ITIRJoinBridge is only a conservative UFTC severity/code to DASHI pressure adapter"
         ∷ "It proves finite saturation join preservation for severityToPressure and codeToPressure over C_XOR"
+        ∷ "It now also proves monotonicity: reducing UFTC severity cannot increase the induced DASHI pressure"
         ∷ "It does not import a live ITIR runtime, classify production join edges, or promote Docs/JoinEdgePressureBridge.md into a system theorem"
-        ∷ "Full monotonicity is exposed as named proof-gap types rather than asserted"
         ∷ []
     }
