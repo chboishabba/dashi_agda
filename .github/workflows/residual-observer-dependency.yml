@@ -6,6 +6,7 @@ on:
     paths:
       - 'DASHI/Pressure.agda'
       - 'DASHI/Interop/ITIRJoinBridge.agda'
+      - 'DASHI/Interop/SensibLawPressureHealingBridgeExact.agda'
       - 'DASHI/Core/ResidualObserverDependencyExact.agda'
       - 'DASHI/Core/ResidualObserverDependencyRegression.agda'
       - 'DASHI/Core/ResidualObserverQuadraticControlExact.agda'
@@ -44,6 +45,7 @@ jobs:
           sources=(
             DASHI/Pressure.agda
             DASHI/Interop/ITIRJoinBridge.agda
+            DASHI/Interop/SensibLawPressureHealingBridgeExact.agda
             DASHI/Core/ResidualObserverDependencyExact.agda
             DASHI/Core/ResidualObserverDependencyRegression.agda
             DASHI/Core/ResidualObserverQuadraticControlExact.agda
@@ -69,6 +71,7 @@ jobs:
           agda --version
           agda -i . -l standard-library DASHI/Pressure.agda
           agda -i . -l standard-library DASHI/Interop/ITIRJoinBridge.agda
+          agda -i . -l standard-library DASHI/Interop/SensibLawPressureHealingBridgeExact.agda
 
       - name: Kernel-check focused residual dependency regression
         run: |
