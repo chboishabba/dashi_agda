@@ -11,9 +11,10 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Fin.Base using (Fin; toℕ)
   renaming (zero to fzero; suc to fsuc)
+open import Data.Nat.Base using (_<_; s≤s)
 open import Data.Nat.Properties using (m≤m+n)
 open import Data.Vec.Base using (Vec; []; _∷_)
-open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂)
 
 ------------------------------------------------------------------------
 -- Split a vector of length prefix + tail at the prefix boundary.
@@ -105,7 +106,7 @@ pointwiseZeroToVectorZero (x ∷ xs) pointwise =
 prefixLessThanShiftedSuccessor :
   ∀ (prefix extra : Nat) → prefix < suc (prefix + extra)
 prefixLessThanShiftedSuccessor prefix extra =
-  Data.Nat.Base.s≤s (m≤m+n prefix extra)
+  s≤s (m≤m+n prefix extra)
 
 ------------------------------------------------------------------------
 -- No domain semantics enter this owner.
