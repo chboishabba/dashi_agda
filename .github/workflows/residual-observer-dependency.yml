@@ -9,7 +9,9 @@ on:
       - 'DASHI/Biology/NeuralResidualDependencyBridgeExact.agda'
       - 'DASHI/Biology/NeuralResidualFutureLanguageBridgeExact.agda'
       - 'DASHI/Biology/NeuralResidualDependencyValidation.agda'
-      - 'DASHI/Mathematics/LinearAlgebra/RationalAffineSpectralIndependence2Exact.agda'
+      - 'DASHI/Mathematics/LinearAlgebra/FiniteRationalQuadraticDominationExact.agda'
+      - 'DASHI/Mathematics/LinearAlgebra/AffineSpectralIndependenceQuadraticExact.agda'
+      - 'DASHI/Mathematics/LinearAlgebra/RationalLDLQuadraticDominationBridgeExact.agda'
       - 'DASHI/Physics/Common/SeparatingProbeFamilyExact.agda'
       - 'DASHI/Biology/Everything.agda'
       - 'DASHI/EverythingTopDownObservationCalculus.agda'
@@ -40,7 +42,9 @@ jobs:
             DASHI/Biology/NeuralResidualDependencyBridgeExact.agda
             DASHI/Biology/NeuralResidualFutureLanguageBridgeExact.agda
             DASHI/Biology/NeuralResidualDependencyValidation.agda
-            DASHI/Mathematics/LinearAlgebra/RationalAffineSpectralIndependence2Exact.agda
+            DASHI/Mathematics/LinearAlgebra/FiniteRationalQuadraticDominationExact.agda
+            DASHI/Mathematics/LinearAlgebra/AffineSpectralIndependenceQuadraticExact.agda
+            DASHI/Mathematics/LinearAlgebra/RationalLDLQuadraticDominationBridgeExact.agda
             DASHI/Physics/Common/SeparatingProbeFamilyExact.agda
           )
           for source in "${sources[@]}"; do
@@ -55,6 +59,15 @@ jobs:
           agda --version
           agda -i . -l standard-library \
             DASHI/Core/ResidualObserverDependencyRegression.agda
+
+      - name: Kernel-check shared quadratic domination and LDL bridge
+        run: |
+          agda -i . -l standard-library \
+            DASHI/Mathematics/LinearAlgebra/FiniteRationalQuadraticDominationExact.agda
+          agda -i . -l standard-library \
+            DASHI/Mathematics/LinearAlgebra/AffineSpectralIndependenceQuadraticExact.agda
+          agda -i . -l standard-library \
+            DASHI/Mathematics/LinearAlgebra/RationalLDLQuadraticDominationBridgeExact.agda
 
       - name: Kernel-check neural residual dependency validation root
         run: |
