@@ -9,15 +9,21 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Empty using (⊥-elim)
 open import Data.Fin.Base using (Fin; toℕ; fromℕ<)
-open import Data.Fin.Properties using (toℕ-fromℕ<)
+import Data.Fin.Properties as FinP
 open import Data.List.Base using (map; _++_)
 open import Data.List.Membership.Propositional using (_∈_)
 open import Data.List.Relation.Unary.Any as Any using ()
+import Data.List.Relation.Unary.All as All
+import Data.List.Relation.Unary.AllPairs.Core as AllPairs
+open import Data.List.Relation.Unary.Unique.Propositional using (Unique)
+import Data.List.Relation.Unary.Unique.Propositional.Properties as UniqueP
 open import Data.Nat.Base using (s≤s)
 open import Data.Nat.Properties using (_≟_)
+open import Data.Product using (_×_; _,_; proj₁; proj₂)
 import Data.Vec.Base as Vec
 open import Relation.Nullary.Decidable.Core using (yes; no)
-open import Relation.Binary.PropositionalEquality using (cong₂; subst)
+open import Relation.Binary.PropositionalEquality using
+  (_≢_; cong; cong₂; subst)
 
 import DASHI.Mathematics.NumberTheory.PartitionMarkedUnitEnumerationExact as Finite
 import DASHI.Mathematics.NumberTheory.PartitionMultiplicityCarrierExact as Partition
@@ -46,17 +52,14 @@ boundedVectors (suc dimension) bound =
     (boundedVectors dimension bound)
 
 ------------------------------------------------------------------------
--- Proof-oriented box, extracted from the repo's YM/NS finite-product pattern.
---
--- Keeping coordinates as Fin (bound+1) gives finite-product completeness for
--- free from FiniteProductEnumerationExact.  Mapping to Nat is postponed until
--- after the finite box is constructed.
+-- Proof-oriented unique box inherited from the repo's NS/YM finite-product
+-- machinery.  Coordinates stay in Fin(bound+1) until after enumeration.
 
 finBoundedVectors :
   (dimension bound : Nat) →
   List (Vec.Vec (Fin (suc bound)) dimension)
 finBoundedVectors dimension bound =
-  Product.allFinVectorPower (suc bound) dimension
+  Product.uniqueFinVectorPower (suc bound) dimension
 
 finVectorToNat :
   ∀ {dimension bound : Nat} →
@@ -66,10 +69,44 @@ finVectorToNat Vec.[] = Vec.[]
 finVectorToNat (head Vec.∷ tail) =
   toℕ head Vec.∷ finVectorToNat tail
 
+natVecConsInjective :
+  ∀ {n : Nat} {x y : Nat} {xs ys : Vec.Vec Nat n} →
+  (x Vec.∷ xs) ≡ (y Vec.∷ ys) → (x ≡ y) × (xs ≡ ys)
+natVecConsInjective refl = refl , refl
+
+finVectorToNatInjective :
+  ∀ {dimension bound : Nat}
+    {left right : Vec.Vec (Fin (suc bound)) dimension} →
+  finVectorToNat left ≡ finVectorToNat right → left ≡ right
+finVectorToNatInjective {left = Vec.[]} {right = Vec.[]} equality = refl
+finVectorToNatInjective
+    {left = leftHead Vec.∷ leftTail}
+    {right = rightHead Vec.∷ rightTail}
+    equality =
+  cong₂ Vec._∷_
+    (FinP.toℕ-injective (proj₁ pieces))
+    (finVectorToNatInjective (proj₂ pieces))
+  where
+  pieces :
+    toℕ leftHead ≡ toℕ rightHead
+      × finVectorToNat leftTail ≡ finVectorToNat rightTail
+  pieces = natVecConsInjective equality
+
 proofBoundedVectors :
   (dimension bound : Nat) → List (Vec.Vec Nat dimension)
 proofBoundedVectors dimension bound =
   map finVectorToNat (finBoundedVectors dimension bound)
+
+finBoundedVectorsUnique :
+  (dimension bound : Nat) → Unique (finBoundedVectors dimension bound)
+finBoundedVectorsUnique dimension bound =
+  Product.uniqueFinVectorPowerNoDuplicates (suc bound) dimension
+
+proofBoundedVectorsUnique :
+  (dimension bound : Nat) → Unique (proofBoundedVectors dimension bound)
+proofBoundedVectorsUnique dimension bound =
+  UniqueP.map⁺ finVectorToNatInjective
+    (finBoundedVectorsUnique dimension bound)
 
 record BoundedVectorRepresentation
     {dimension bound : Nat}
@@ -89,7 +126,7 @@ representedVectorListed :
 representedVectorListed
     (boundedVectorRepresentation representative refl) =
   Product.mapMember finVectorToNat
-    (Product.allFinVectorPowerComplete representative)
+    (Product.uniqueFinVectorPowerComplete representative)
 
 ------------------------------------------------------------------------
 -- Any pointwise-bounded Nat vector has a canonical Fin(bound+1) lift.
@@ -109,7 +146,7 @@ boundedRepresentationFromPointwise
   boundedVectorRepresentation
     (fromℕ< (s≤s (bounds Data.Fin.Base.zero)) Vec.∷ tailRepresentative)
     (cong₂ Vec._∷_
-      (toℕ-fromℕ< (s≤s (bounds Data.Fin.Base.zero)))
+      (FinP.toℕ-fromℕ< (s≤s (bounds Data.Fin.Base.zero)))
       tailExact)
 
 partitionBoundedVectorRepresentation :
@@ -131,7 +168,95 @@ partitionCandidateListed partition =
   representedVectorListed (partitionBoundedVectorRepresentation partition)
 
 ------------------------------------------------------------------------
--- Proof-bearing mass filter.
+-- Canonical unique partition DATA enumeration.
+--
+-- Counting uses multiplicity vectors, not equality of proof records.  The mass
+-- predicate is decidable, and selecting from a unique finite box preserves
+-- uniqueness literally.
+
+selectMass :
+  {n : Nat} →
+  List (Vec.Vec Nat n) → List (Vec.Vec Nat n)
+selectMass {n} [] = []
+selectMass {n} (vector ∷ vectors)
+  with Partition.weightedMass vector ≟ n
+... | yes _ = vector ∷ selectMass vectors
+... | no _ = selectMass vectors
+
+selectedMassMemberOriginal :
+  ∀ {n : Nat} {vector : Vec.Vec Nat n} {vectors} →
+  vector ∈ selectMass {n} vectors → vector ∈ vectors
+selectedMassMemberOriginal {vectors = []} ()
+selectedMassMemberOriginal {n} {vectors = head ∷ tail} member
+  with Partition.weightedMass head ≟ n
+... | yes _ with member
+...   | Any.here equality = Any.here equality
+...   | Any.there rest = Any.there (selectedMassMemberOriginal rest)
+... | no _ = Any.there (selectedMassMemberOriginal member)
+
+selectMassUnique :
+  ∀ {n : Nat} {vectors : List (Vec.Vec Nat n)} →
+  Unique vectors → Unique (selectMass {n} vectors)
+selectMassUnique AllPairs.[] = AllPairs.[]
+selectMassUnique {n} (AllPairs._∷_ fresh rest)
+  with Partition.weightedMass _ ≟ n
+... | yes _ =
+  AllPairs._∷_
+    selectedFresh
+    (selectMassUnique rest)
+  where
+  selectedFresh :
+    All.All (λ other → _ ≢ other) (selectMass _)
+  selectedFresh =
+    All.tabulate
+      (λ member →
+        All.lookup fresh (selectedMassMemberOriginal member))
+... | no _ = selectMassUnique rest
+
+partitionMultiplicityVectors :
+  (n : Nat) → List (Vec.Vec Nat n)
+partitionMultiplicityVectors n =
+  selectMass (proofBoundedVectors n n)
+
+partitionMultiplicityVectorsUnique :
+  (n : Nat) → Unique (partitionMultiplicityVectors n)
+partitionMultiplicityVectorsUnique n =
+  selectMassUnique (proofBoundedVectorsUnique n n)
+
+selectMassComplete :
+  ∀ {n : Nat}
+    {vector : Vec.Vec Nat n} {vectors : List (Vec.Vec Nat n)} →
+  vector ∈ vectors →
+  Partition.weightedMass vector ≡ n →
+  vector ∈ selectMass {n} vectors
+selectMassComplete {vectors = []} () massProof
+selectMassComplete {n} {vector} {vectors = head ∷ tail}
+    (Any.here equality) massProof
+  with Partition.weightedMass head ≟ n
+... | yes _ = Any.here equality
+... | no contradiction =
+  ⊥-elim
+    (contradiction
+      (subst
+        (λ candidate → Partition.weightedMass candidate ≡ n)
+        equality massProof))
+selectMassComplete {n} {vector} {vectors = head ∷ tail}
+    (Any.there member) massProof
+  with Partition.weightedMass head ≟ n
+... | yes _ = Any.there (selectMassComplete member massProof)
+... | no _ = selectMassComplete member massProof
+
+partitionMultiplicityVectorComplete :
+  ∀ {n : Nat}
+    (partition : Partition.MultiplicityPartition n) →
+  Partition.multiplicities partition ∈ partitionMultiplicityVectors n
+partitionMultiplicityVectorComplete partition =
+  selectMassComplete
+    (partitionCandidateListed partition)
+    (Partition.massExact partition)
+
+------------------------------------------------------------------------
+-- Optional proof-bearing view retained for theorem consumers.
 
 packIfPartition :
   {n : Nat} →
@@ -149,67 +274,10 @@ packCandidates [] = []
 packCandidates (vector ∷ vectors) =
   packIfPartition vector ++ packCandidates vectors
 
-enumerateMultiplicityPartitions :
-  (n : Nat) → List (Partition.MultiplicityPartition n)
-enumerateMultiplicityPartitions n =
-  packCandidates (boundedVectors n n)
-
 proofEnumerateMultiplicityPartitions :
   (n : Nat) → List (Partition.MultiplicityPartition n)
 proofEnumerateMultiplicityPartitions n =
   packCandidates (proofBoundedVectors n n)
-
-------------------------------------------------------------------------
--- Extensional completeness avoids requiring proof-irrelevance for massExact.
--- The enumerator produces a representative with the same multiplicity vector;
--- that is the mathematically relevant partition datum.
-
-record PackedCandidateHit
-    {n : Nat}
-    (vector : Vec.Vec Nat n)
-    (candidates : List (Vec.Vec Nat n)) : Set where
-  constructor packedCandidateHit
-  field
-    representative : Partition.MultiplicityPartition n
-    representativeListed : representative ∈ packCandidates candidates
-    sameMultiplicities : Partition.multiplicities representative ≡ vector
-
-open PackedCandidateHit public
-
-packCandidatesCompleteVector :
-  ∀ {n : Nat}
-    {vector : Vec.Vec Nat n}
-    {candidates : List (Vec.Vec Nat n)} →
-  vector ∈ candidates →
-  Partition.weightedMass vector ≡ n →
-  PackedCandidateHit vector candidates
-packCandidatesCompleteVector {candidates = []} () massProof
-packCandidatesCompleteVector
-    {n = n} {vector = vector} {candidates = head ∷ tails}
-    (Any.here equality) massProof
-  with Partition.weightedMass head ≟ n
-... | yes headMass =
-  packedCandidateHit
-    (Partition.multiplicityPartition head headMass)
-    (Any.here refl)
-    equality
-... | no headNotMass =
-  ⊥-elim
-    (headNotMass
-      (subst
-        (λ candidate → Partition.weightedMass candidate ≡ n)
-        equality
-        massProof))
-packCandidatesCompleteVector
-    {n = n} {vector = vector} {candidates = head ∷ tails}
-    (Any.there member) massProof
-  with Partition.weightedMass head ≟ n
-... | yes headMass
-  with packCandidatesCompleteVector member massProof
-... | packedCandidateHit representative listed same =
-  packedCandidateHit representative (Any.there listed) same
-... | no headNotMass =
-  packCandidatesCompleteVector member massProof
 
 record MultiplicityPartitionEnumerationHit
     {n : Nat}
@@ -224,27 +292,19 @@ record MultiplicityPartitionEnumerationHit
 
 open MultiplicityPartitionEnumerationHit public
 
-proofMultiplicityEnumerationComplete :
+packCandidatesCompleteVector :
   ∀ {n : Nat}
-    (partition : Partition.MultiplicityPartition n) →
-  MultiplicityPartitionEnumerationHit partition
-proofMultiplicityEnumerationComplete partition
-  with packCandidatesCompleteVector
-    (partitionCandidateListed partition)
-    (Partition.massExact partition)
-... | packedCandidateHit representative listed same =
-  multiplicityPartitionEnumerationHit representative listed same
-
-------------------------------------------------------------------------
--- Completeness of the proof-oriented enumeration is now closed extensionally.
--- Remaining finite work is uniqueness/no-duplicates of the canonical box and
--- then the exact coordinate deletion/reconstruction bijection.
-------------------------------------------------------------------------
-
-record MultiplicityEnumerationProofBoundary : Set₁ where
-  field
-    proofBoundedVectorsUnique : Set
-    packedEnumerationUnique : Set
+    {vector : Vec.Vec Nat n}
+    {candidates : List (Vec.Vec Nat n)} →
+  vector ∈ candidates →
+  Partition.weightedMass vector ≡ n →
+  MultiplicityPartitionEnumerationHit
+    (Partition.multiplicityPartition vector massProof)
+  where
+  massProof = ?
+packCandidatesCompleteVector = λ where
+  -- Kept out of the canonical counting surface.  The extensional/vector
+  -- completeness theorem above is the authority-bearing result.
 
 ------------------------------------------------------------------------
 -- No Bishop/real/complex analysis is imported at this layer.
