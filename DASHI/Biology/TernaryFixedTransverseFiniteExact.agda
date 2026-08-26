@@ -13,35 +13,46 @@ open import DASHI.Core.Prelude
 -- no nonzero real eigenline in the transverse sector.  We do not manufacture
 -- real linear algebra here.  Instead we expose the exact finite decomposition
 -- needed by downstream visual/neural consumers: a common amplitude coordinate
--- plus a relational phase coordinate whose non-fixed part cycles.
+-- plus three distinguished phase directions living in one transverse sector.
+-- The transverse carrier is labelled by three directions because a 120-degree
+-- rotation has order three even though the ambient real transverse space is
+-- two-dimensional.
 
 data RelationalC3Mode : Set where
   fixedRelationalMode : RelationalC3Mode
-  transverseModeA : RelationalC3Mode
-  transverseModeB : RelationalC3Mode
+  transversePhaseZero : RelationalC3Mode
+  transversePhaseOne : RelationalC3Mode
+  transversePhaseTwo : RelationalC3Mode
 
 shiftMode : RelationalC3Mode → RelationalC3Mode
 shiftMode fixedRelationalMode = fixedRelationalMode
-shiftMode transverseModeA = transverseModeB
-shiftMode transverseModeB = transverseModeA
+shiftMode transversePhaseZero = transversePhaseOne
+shiftMode transversePhaseOne = transversePhaseTwo
+shiftMode transversePhaseTwo = transversePhaseZero
 
 fixedModeIsFixed :
   shiftMode fixedRelationalMode ≡ fixedRelationalMode
 fixedModeIsFixed = refl
 
-transverseANotFixed :
-  shiftMode transverseModeA ≡ transverseModeA → ⊥
-transverseANotFixed ()
+transverseZeroNotFixed :
+  shiftMode transversePhaseZero ≡ transversePhaseZero → ⊥
+transverseZeroNotFixed ()
 
-transverseBNotFixed :
-  shiftMode transverseModeB ≡ transverseModeB → ⊥
-transverseBNotFixed ()
+transverseOneNotFixed :
+  shiftMode transversePhaseOne ≡ transversePhaseOne → ⊥
+transverseOneNotFixed ()
 
-shiftModeInvolutiveOnFiniteShadow :
-  (m : RelationalC3Mode) → shiftMode (shiftMode m) ≡ m
-shiftModeInvolutiveOnFiniteShadow fixedRelationalMode = refl
-shiftModeInvolutiveOnFiniteShadow transverseModeA = refl
-shiftModeInvolutiveOnFiniteShadow transverseModeB = refl
+transverseTwoNotFixed :
+  shiftMode transversePhaseTwo ≡ transversePhaseTwo → ⊥
+transverseTwoNotFixed ()
+
+shiftModeCube :
+  (m : RelationalC3Mode) →
+  shiftMode (shiftMode (shiftMode m)) ≡ m
+shiftModeCube fixedRelationalMode = refl
+shiftModeCube transversePhaseZero = refl
+shiftModeCube transversePhaseOne = refl
+shiftModeCube transversePhaseTwo = refl
 
 ------------------------------------------------------------------------
 -- Common activation is carried independently from relational mode.
@@ -63,11 +74,19 @@ shiftPreservesCommonAmplitude :
   commonAmplitude (shiftState s) ≡ commonAmplitude s
 shiftPreservesCommonAmplitude (fixedTransverseState a m) = refl
 
+shiftStateCube :
+  (s : FixedTransverseState) →
+  shiftState (shiftState (shiftState s)) ≡ s
+shiftStateCube (fixedTransverseState a fixedRelationalMode) = refl
+shiftStateCube (fixedTransverseState a transversePhaseZero) = refl
+shiftStateCube (fixedTransverseState a transversePhaseOne) = refl
+shiftStateCube (fixedTransverseState a transversePhaseTwo) = refl
+
 canonicalFixedState : FixedTransverseState
 canonicalFixedState = fixedTransverseState 3 fixedRelationalMode
 
 canonicalTransverseState : FixedTransverseState
-canonicalTransverseState = fixedTransverseState 3 transverseModeA
+canonicalTransverseState = fixedTransverseState 3 transversePhaseZero
 
 sameCommonAmplitudeDifferentRelationalMode :
   commonAmplitude canonicalFixedState
@@ -91,6 +110,10 @@ record FixedTransverseBoundary : Set where
     commonAmplitudeDeterminesRelationalModeIsFalse :
       commonAmplitudeDeterminesRelationalMode ≡ false
 
+    threePhaseDirectionsMeanTransverseDimensionThree : Bool
+    threePhaseDirectionsMeanTransverseDimensionThreeIsFalse :
+      threePhaseDirectionsMeanTransverseDimensionThree ≡ false
+
 canonicalFixedTransverseBoundary : FixedTransverseBoundary
 canonicalFixedTransverseBoundary =
-  fixedTransverseBoundary false refl false refl
+  fixedTransverseBoundary false refl false refl false refl
