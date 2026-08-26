@@ -17,8 +17,7 @@ module DASHI.Foundations.WetteCertifiedArithmeticKernelExact where
 -- grammar.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (true)
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 
 open import Ontology.GodelLattice using (FactorVec)
 
