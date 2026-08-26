@@ -9,9 +9,9 @@ module DASHI.Mathematics.NumberTheory.PartitionMultiplicityDeletionMassExact whe
 -- DOI: 10.2307/1968802.
 --
 -- PURPOSE
--- Deleting k copies of the part at coordinate v removes exactly k*v units of
--- weighted partition mass.  This module proves that statement over the
--- multiplicity-vector carrier using the neutral coordinate-update algebra.
+-- Adding/deleting k copies of the part at coordinate v changes weighted
+-- partition mass by exactly k*v.  The proof is over the literal finite
+-- multiplicity-vector carrier and reuses the neutral coordinate-update owner.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -94,8 +94,32 @@ headDeletionMass first multiplicity amount tailMass available =
                   amount))
               (cong (first *_) (m∸n+n≡m available)))))))
 
+headInsertionMass :
+  (first multiplicity amount tailMass : Nat) →
+  first * (multiplicity + amount) + tailMass
+  ≡ (first * multiplicity + tailMass) + amount * first
+headInsertionMass first multiplicity amount tailMass =
+  trans
+    (cong (_+ tailMass)
+      (*-distribˡ-+ first multiplicity amount))
+    (trans
+      (+-assoc (first * multiplicity) (first * amount) tailMass)
+      (trans
+        (cong
+          (first * multiplicity +_)
+          (+-comm (first * amount) tailMass))
+        (trans
+          (sym
+            (+-assoc
+              (first * multiplicity)
+              tailMass
+              (first * amount)))
+          (cong
+            ((first * multiplicity + tailMass) +_)
+            (*-comm first amount)))))
+
 ------------------------------------------------------------------------
--- General deletion mass theorem.
+-- General deletion / insertion mass theorems.
 
 weightedMassFromSubtractAt :
   ∀ {n : Nat}
@@ -126,8 +150,33 @@ weightedMassFromSubtractAt first amount (fsuc index)
       (weightedMassFromSubtractAt
         (suc first) amount index rest available))
 
+weightedMassFromAddAt :
+  ∀ {n : Nat}
+    (first amount : Nat)
+    (index : Fin n)
+    (vector : Vec Nat n) →
+  Partition.weightedMassFrom first
+      (Update.addAt amount index vector)
+  ≡ Partition.weightedMassFrom first vector
+      + amount * coordinateWeightFrom first index
+weightedMassFromAddAt first amount fzero (multiplicity ∷ rest) =
+  headInsertionMass
+    first multiplicity amount
+    (Partition.weightedMassFrom (suc first) rest)
+weightedMassFromAddAt first amount (fsuc index) (multiplicity ∷ rest) =
+  trans
+    (cong
+      (first * multiplicity +_)
+      (weightedMassFromAddAt
+        (suc first) amount index rest))
+    (sym
+      (+-assoc
+        (first * multiplicity)
+        (Partition.weightedMassFrom (suc first) rest)
+        (amount * coordinateWeightFrom (suc first) index)))
+
 ------------------------------------------------------------------------
--- Partition specialization: deleting k copies of part v removes k*v.
+-- Partition-grade specializations.
 
 partitionDeletionMass :
   ∀ {n : Nat}
@@ -153,6 +202,20 @@ partitionDeletionMass partition amount index available =
         1 amount index (Partition.multiplicities partition) available)
       (Partition.massExact partition))
 
+partitionInsertionMass :
+  ∀ {n : Nat}
+    (vector : Vec Nat n)
+    (amount : Nat)
+    (index : Fin n) →
+  Partition.weightedMass (Update.addAt amount index vector)
+  ≡ Partition.weightedMass vector + amount * Partition.partValue index
+partitionInsertionMass vector amount index =
+  trans
+    (weightedMassFromAddAt 1 amount index vector)
+    (cong
+      (λ weight → Partition.weightedMass vector + amount * weight)
+      (coordinateWeightFromOneIsPartValue index))
+
 ------------------------------------------------------------------------
--- No real/complex analysis enters this theorem.
+-- No real/complex analysis enters these theorems.
 ------------------------------------------------------------------------
