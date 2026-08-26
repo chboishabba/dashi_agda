@@ -7,10 +7,12 @@ import DASHI.Biology.TernaryCanonicalOrientationExact as Orientation
 import DASHI.Biology.TernaryFixedTransverseFiniteExact as C3
 import DASHI.Biology.TernaryRotationReflectionSeparationExact as Ops
 import DASHI.Biology.NondegenerateObserverAdmissionExact as Observer
+import DASHI.Biology.NeuralRepresentationLaplacianExact as Neural
 import DASHI.Biology.NeuralFixedTransverseObserverBridgeExact as NeuralBridge
 import DASHI.Biology.CyclotomicPhaseAmplitudeBoundaryExact as Cyclotomic
 import DASHI.Biology.EqualCardinalityStructureBoundaryExact as Cardinality
 import DASHI.Biology.OggTernaryEquivariantLabellingNoGoExact as Ogg
+import DASHI.Biology.TernaryMonsterSymmetryCandidateExact as Monster
 import DASHI.Biology.OperatorStructureAdmissionBoundaryExact as Admission
 import DASHI.Biology.ConsciousAccessRound7AristotleSourceBridge as Sources
 
@@ -72,24 +74,42 @@ round7FlatChannelAreaZero :
   ≡ 0
 round7FlatChannelAreaZero = refl
 
+round7NeuralCoarseCollision :
+  Neural.fmriLikeObservation Neural.microActivationA
+  ≡ Neural.fmriLikeObservation Neural.microActivationB
 round7NeuralCoarseCollision =
   NeuralBridge.coarseCollisionPersists
 
+round7NeuralOrderedResidualPersists :
+  Neural.laplacianVariation Neural.microActivationA
+  ≡ Neural.laplacianVariation Neural.microActivationB → ⊥
 round7NeuralOrderedResidualPersists =
   NeuralBridge.orderedLaplacianVariationStillDiffers
 
 ------------------------------------------------------------------------
 -- Phase/amplitude separation.
 
+round7SamePhaseDifferentAmplitude :
+  Cyclotomic.phase Cyclotomic.samePhaseDifferentAmplitudeA
+  ≡ Cyclotomic.phase Cyclotomic.samePhaseDifferentAmplitudeB
 round7SamePhaseDifferentAmplitude =
   Cyclotomic.samePhaseWitness
 
+round7DifferentAmplitudeSamePhase :
+  Cyclotomic.amplitude Cyclotomic.samePhaseDifferentAmplitudeA
+  ≡ Cyclotomic.amplitude Cyclotomic.samePhaseDifferentAmplitudeB → ⊥
 round7DifferentAmplitudeSamePhase =
   Cyclotomic.differentAmplitudeWitness
 
+round7SameAmplitudeDifferentPhase :
+  Cyclotomic.amplitude Cyclotomic.sameAmplitudeDifferentPhaseA
+  ≡ Cyclotomic.amplitude Cyclotomic.sameAmplitudeDifferentPhaseB
 round7SameAmplitudeDifferentPhase =
   Cyclotomic.sameAmplitudeWitness
 
+round7DifferentPhaseSameAmplitude :
+  Cyclotomic.phase Cyclotomic.sameAmplitudeDifferentPhaseA
+  ≡ Cyclotomic.phase Cyclotomic.sameAmplitudeDifferentPhaseB → ⊥
 round7DifferentPhaseSameAmplitude =
   Cyclotomic.differentPhaseWitness
 
@@ -111,7 +131,7 @@ round7OggInternalCardinalityIsFifteen :
 round7OggInternalCardinalityIsFifteen = refl
 
 round7OggPrimeCountIsFifteen :
-  Ogg.Monster.listCount Ogg.Monster.canonicalOggPrimes ≡ 15
+  Monster.listCount Monster.canonicalOggPrimes ≡ 15
 round7OggPrimeCountIsFifteen =
   Ogg.oggPrimeCountIsFifteen
 
