@@ -14,6 +14,12 @@ import DASHI.Biology.ThalamocorticalSensoryHistoryExact
 import DASHI.Biology.AutisticInformationProcessingLandscapeExact
 import DASHI.Biology.NeurotypeProcessingGeometryExact
 import DASHI.Biology.PsilautNetworkResponseGeometryExact
+import DASHI.Biology.NeurodivergentSocialEcologySourceRegistryExact
+import DASHI.Biology.SocialEcologicalAffordanceConeExact
+import DASHI.Biology.TrustedFriendRelationalScaffoldingExact
+import DASHI.Biology.NeuroqueerRelationshipEcologyExact
+import DASHI.Biology.SolisSystemSensitivityBoundaryExact
+import DASHI.Biology.NeurodivergentSocialEcologyCrossPollinationExact
 
 -- Existing thematic Biology aggregates that were previously floating outside
 -- the authoritative domain spine.
