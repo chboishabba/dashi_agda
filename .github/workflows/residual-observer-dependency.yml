@@ -6,6 +6,7 @@ on:
     paths:
       - 'DASHI/Core/ResidualObserverDependencyExact.agda'
       - 'DASHI/Core/ResidualObserverDependencyRegression.agda'
+      - 'DASHI/Core/ResidualObserverQuadraticControlExact.agda'
       - 'DASHI/Biology/NeuralResidualDependencyBridgeExact.agda'
       - 'DASHI/Biology/NeuralResidualFutureLanguageBridgeExact.agda'
       - 'DASHI/Biology/NeuralResidualDependencyValidation.agda'
@@ -39,6 +40,7 @@ jobs:
           sources=(
             DASHI/Core/ResidualObserverDependencyExact.agda
             DASHI/Core/ResidualObserverDependencyRegression.agda
+            DASHI/Core/ResidualObserverQuadraticControlExact.agda
             DASHI/Biology/NeuralResidualDependencyBridgeExact.agda
             DASHI/Biology/NeuralResidualFutureLanguageBridgeExact.agda
             DASHI/Biology/NeuralResidualDependencyValidation.agda
@@ -68,6 +70,8 @@ jobs:
             DASHI/Mathematics/LinearAlgebra/AffineSpectralIndependenceQuadraticExact.agda
           agda -i . -l standard-library \
             DASHI/Mathematics/LinearAlgebra/RationalLDLQuadraticDominationBridgeExact.agda
+          agda -i . -l standard-library \
+            DASHI/Core/ResidualObserverQuadraticControlExact.agda
 
       - name: Kernel-check neural residual dependency validation root
         run: |
