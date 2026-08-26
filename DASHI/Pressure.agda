@@ -97,7 +97,7 @@ fromLevel-monotone {suc zero} {suc (suc (suc zero))} a≤b = s≤s z≤n
 fromLevel-monotone {suc zero} {suc (suc (suc (suc b)))} a≤b = s≤s z≤n
 
 fromLevel-monotone {suc (suc zero)} {zero} ()
-fromLevel-monotone {suc (suc zero)} {suc zero} ()
+fromLevel-monotone {suc (suc zero)} {suc zero} (s≤s ())
 fromLevel-monotone {suc (suc zero)} {suc (suc zero)} a≤b =
   s≤s (s≤s z≤n)
 fromLevel-monotone {suc (suc zero)} {suc (suc (suc zero))} a≤b =
@@ -106,8 +106,10 @@ fromLevel-monotone {suc (suc zero)} {suc (suc (suc (suc b)))} a≤b =
   s≤s (s≤s z≤n)
 
 fromLevel-monotone {suc (suc (suc zero))} {zero} ()
-fromLevel-monotone {suc (suc (suc zero))} {suc zero} ()
-fromLevel-monotone {suc (suc (suc zero))} {suc (suc zero)} ()
+fromLevel-monotone {suc (suc (suc zero))} {suc zero} (s≤s ())
+fromLevel-monotone
+  {suc (suc (suc zero))}
+  {suc (suc zero))} (s≤s (s≤s ()))
 fromLevel-monotone
   {suc (suc (suc zero))}
   {suc (suc (suc zero))} a≤b =
@@ -118,11 +120,15 @@ fromLevel-monotone
   s≤s (s≤s (s≤s z≤n))
 
 fromLevel-monotone {suc (suc (suc (suc a)))} {zero} ()
-fromLevel-monotone {suc (suc (suc (suc a)))} {suc zero} ()
-fromLevel-monotone {suc (suc (suc (suc a)))} {suc (suc zero)} ()
 fromLevel-monotone
   {suc (suc (suc (suc a)))}
-  {suc (suc (suc zero))} ()
+  {suc zero} (s≤s ())
+fromLevel-monotone
+  {suc (suc (suc (suc a)))}
+  {suc (suc zero)} (s≤s (s≤s ()))
+fromLevel-monotone
+  {suc (suc (suc (suc a)))}
+  {suc (suc (suc zero))} (s≤s (s≤s (s≤s ())))
 fromLevel-monotone
   {suc (suc (suc (suc a)))}
   {suc (suc (suc (suc b)))} a≤b =
