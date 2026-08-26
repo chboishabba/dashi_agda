@@ -16,3 +16,7 @@ import DASHI.Core.EpistemicSuspensionExact
 import DASHI.Core.StageTransitionBarrierExact
 import DASHI.Core.DialecticStageMotifBridgeExact
 import DASHI.Core.DialecticOriginSourceAtlasExact
+import DASHI.Core.ExceptionalSignalLatticeExact
+import DASHI.Core.Base369DialecticRoleBoundaryExact
+import DASHI.Core.ContradictionPreservingReasoningPipelineExact
+import DASHI.Core.RelationalEpistemicProcessSourceBridgeExact
