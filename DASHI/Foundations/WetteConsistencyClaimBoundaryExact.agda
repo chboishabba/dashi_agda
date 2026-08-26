@@ -1,21 +1,29 @@
 module DASHI.Foundations.WetteConsistencyClaimBoundaryExact where
 
 ------------------------------------------------------------------------
--- EDUARD WETTE SOURCE CONTEXT
+-- EDUARD WETTE / PAUL BERNAYS SOURCE CONTEXT
 --
 -- Eduard Wette,
 -- "Contradiction within pure number theory because of a system-internal
--- 'consistency'-deduction", International Logic Review (1974), 51--62.
+-- 'consistency'-deduction", International Logic Review 5, no. 9 (1974),
+-- 51--62.
+--
+-- Paul Bernays,
+-- "Zum Symposium ueber die Grundlagen der Mathematik",
+-- Dialectica 25 (1971), 171--195.
+-- DOI: 10.1111/j.1746-8361.1971.tb00598.x.
 --
 -- Earlier constructive-arithmetic work is treated separately from this later
--- metamathematical claim. No DOI is asserted until independently verified.
+-- metamathematical claim. No DOI is asserted for the 1974 Wette paper until a
+-- stable bibliographic record is independently verified.
 --
 -- DASHI CONTRIBUTION
 --
 -- Make the promotion boundaries explicit. A representation, executable
--- machine, simulation theorem, or representation/kernel commuting theorem is
--- not definitionally a soundness theorem, an internal consistency theorem, or
--- a contradiction in ordinary arithmetic.
+-- machine, simulation theorem, representation/kernel commuting theorem, or
+-- conditional consistency-to-contradiction reduction is not definitionally a
+-- soundness theorem, an actual internal consistency proof, or a contradiction
+-- in ordinary arithmetic.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -28,11 +36,13 @@ import DASHI.Physics.Closure.RepresentationKernelCompatibility as R
 import DASHI.Foundations.WetteArithmeticRepresentationExact as Representation
 import DASHI.Foundations.WetteConstructiveAutomatonExact as Automaton
 import DASHI.Foundations.WetteRepresentationKernelBridgeExact as KernelBridge
+import DASHI.Foundations.WetteBernaysConsistencyDeductionBoundaryExact as Bernays
 
 data WetteClaimLevel : Set where
   arithmeticRepresentation : WetteClaimLevel
   executableMachine : WetteClaimLevel
   deductionSimulation : WetteClaimLevel
+  conditionalConsistencyReduction : WetteClaimLevel
   arithmeticSoundness : WetteClaimLevel
   internalConsistency : WetteClaimLevel
   classicalContradiction : WetteClaimLevel
@@ -41,6 +51,7 @@ record WetteClaimBoundary : Set₁ where
   constructor wetteClaimBoundary
   field
     receiptBoundary : Receipt.FormalReceiptBoundary
+    bernaysBoundary : Bernays.WetteBernaysBoundary
 
     representationAvailable : Bool
     representationAvailableIsTrue :
@@ -58,9 +69,17 @@ record WetteClaimBoundary : Set₁ where
     representationKernelOwnerAvailableIsTrue :
       representationKernelOwnerAvailable ≡ true
 
+    conditionalConsistencyReductionAvailable : Bool
+    conditionalConsistencyReductionAvailableIsTrue :
+      conditionalConsistencyReductionAvailable ≡ true
+
     historicalRuleSetRecovered : Bool
     historicalRuleSetRecoveredIsFalse :
       historicalRuleSetRecovered ≡ false
+
+    wetteInternalConsistencyProofRecovered : Bool
+    wetteInternalConsistencyProofRecoveredIsFalse :
+      wetteInternalConsistencyProofRecovered ≡ false
 
     arithmeticSoundnessProved : Bool
     arithmeticSoundnessProvedIsFalse :
@@ -80,10 +99,13 @@ canonicalWetteClaimBoundary : WetteClaimBoundary
 canonicalWetteClaimBoundary =
   wetteClaimBoundary
     Receipt.canonicalFormalReceiptBoundary
+    Bernays.canonicalWetteBernaysBoundary
     true refl
     true refl
     true refl
     true refl
+    true refl
+    false refl
     false refl
     false refl
     false refl
@@ -97,6 +119,16 @@ representationKernelDoesNotSetConsistencyFlag :
   representationKernelOwnerAvailable canonicalWetteClaimBoundary ≡ true
   × systemInternalConsistencyProved canonicalWetteClaimBoundary ≡ false
 representationKernelDoesNotSetConsistencyFlag = refl , refl
+
+conditionalReductionDoesNotSupplyInternalProof :
+  conditionalConsistencyReductionAvailable canonicalWetteClaimBoundary ≡ true
+  × wetteInternalConsistencyProofRecovered canonicalWetteClaimBoundary ≡ false
+conditionalReductionDoesNotSupplyInternalProof = refl , refl
+
+conditionalReductionDoesNotSetContradictionFlag :
+  conditionalConsistencyReductionAvailable canonicalWetteClaimBoundary ≡ true
+  × contradictionInOrdinaryArithmeticProved canonicalWetteClaimBoundary ≡ false
+conditionalReductionDoesNotSetContradictionFlag = refl , refl
 
 simulationInterfaceDoesNotSetContradictionFlag :
   contradictionInOrdinaryArithmeticProved canonicalWetteClaimBoundary ≡ false
@@ -119,3 +151,6 @@ representationKernelOwner :
   (g : Automaton.Generator machine) →
   R.RepresentationKernelCompatibility
 representationKernelOwner = KernelBridge.fixedGeneratorCompatibility
+
+bernaysConditionalOwner : Bernays.WetteBernaysBoundary
+bernaysConditionalOwner = Bernays.canonicalWetteBernaysBoundary
