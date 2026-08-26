@@ -5,8 +5,8 @@ module DASHI.Foundations.Wette.Everything where
 -- Keep source representation, executable-machine semantics, arithmetic
 -- transition certification, representation/kernel transport, composed
 -- certified arithmetic kernels, concrete arithmetic-machine witnesses, and
--- later metamathematical claim boundaries separate so no stronger conclusion
--- is imported merely by importing the arithmetic coding layer.
+-- metamathematical claim boundaries separate so no stronger conclusion is
+-- imported merely by importing the arithmetic coding layer.
 
 import DASHI.Foundations.WetteArithmeticRepresentationExact
 import DASHI.Foundations.WetteConstructiveAutomatonExact
@@ -14,4 +14,5 @@ import DASHI.Foundations.WetteArithmeticTransitionBridgeExact
 import DASHI.Foundations.WetteRepresentationKernelBridgeExact
 import DASHI.Foundations.WetteCertifiedArithmeticKernelExact
 import DASHI.Foundations.WetteFRACTRANCrossPollinationExact
+import DASHI.Foundations.WetteBernaysConsistencyDeductionBoundaryExact
 import DASHI.Foundations.WetteConsistencyClaimBoundaryExact
