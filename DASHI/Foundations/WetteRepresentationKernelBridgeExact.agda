@@ -40,7 +40,7 @@ fixedGeneratorCompatibility {machine} simulation g =
     ; projectPreservesAdmissibility = λ admissible → admissible
     ; projectPreservesObservable = λ _ → refl
     ; kernelCommutesWithProjection =
-        λ _ → W.stepCommutes simulation g _
+        λ {x} _ → W.stepCommutes simulation g x
     }
   where
   fineStepPreservesAdmissibility :
