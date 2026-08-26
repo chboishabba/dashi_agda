@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Cognition.PNF.PackedNormativeSparseAdmissionExact where
 
 open import Agda.Builtin.Equality using (_≡_)
