@@ -7,21 +7,23 @@ module DASHI.Mathematics.NumberTheory.FiniteProductEnumerationExact where
 --
 --   allFin -> concatMap -> nested finite products -> completeness,
 --
--- while NSPeriodicConcreteCutoffCubeCarrier separately proves Cartesian
--- completeness/no-duplicates for finite cutoff carriers.
---
--- This owner extracts the domain-neutral completeness spine needed by the
--- partition multiplicity box.  It deliberately knows nothing about lattices,
--- Fourier modes, partitions, or asymptotics.
+-- while the NS exact-shell lane proves duplicate-freedom using stdlib
+-- UniqueP.allFin⁺ and UniqueP.cartesianProductWith⁺.  This owner extracts both
+-- parts into a domain-neutral finite-product theorem.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Fin.Base using (Fin) renaming (zero to fzero; suc to fsuc)
-open import Data.List.Base using (map; _++_)
+open import Data.List.Base using (map; _++_; cartesianProductWith)
 open import Data.List.Membership.Propositional using (_∈_)
+open import Data.List.Membership.Propositional.Properties using
+  (∈-cartesianProductWith⁺; ∈-allFin)
 open import Data.List.Relation.Unary.Any as Any using ()
+open import Data.List.Relation.Unary.Unique.Propositional using (Unique)
+import Data.List.Relation.Unary.Unique.Propositional.Properties as UniqueP
+open import Data.Product using (_×_; _,_)
 import Data.Vec.Base as Vec
 
 ------------------------------------------------------------------------
@@ -78,11 +80,7 @@ allFinComplete {suc n} (fsuc index) =
   Any.there (mapMember fsuc (allFinComplete index))
 
 ------------------------------------------------------------------------
--- Finite vector powers.
---
--- vectorPower coordinates d enumerates coordinates^d.  The proof below is
--- intentionally phrased using a pointwise membership witness, making it useful
--- for any finite coordinate alphabet, not only Fin n.
+-- Finite vector powers: lightweight constructive presentation.
 
 vectorPower :
   ∀ {A : Set} → List A → (dimension : Nat) → List (Vec.Vec A dimension)
@@ -115,9 +113,6 @@ vectorPowerComplete (head Vec.∷ tail)
     (mapMember (Vec._∷_ head)
       (vectorPowerComplete tail tailMembers))
 
-------------------------------------------------------------------------
--- In particular every vector of Fin bound coordinates is enumerated.
-
 allFinVectorPower :
   (bound dimension : Nat) → List (Vec.Vec (Fin bound) dimension)
 allFinVectorPower bound dimension = vectorPower (allFin bound) dimension
@@ -133,6 +128,45 @@ allFinVectorPowerComplete (head Vec.∷ tail) =
     (allFinComplete head)
     (mapMember (Vec._∷_ head)
       (allFinVectorPowerComplete tail))
+
+------------------------------------------------------------------------
+-- Stdlib-backed presentation with duplicate-freedom inherited directly from
+-- the same UniqueP stack already used by the NS shell enumerator.
+
+uniqueFinVectorPower :
+  (bound dimension : Nat) → List (Vec.Vec (Fin bound) dimension)
+uniqueFinVectorPower bound zero = Vec.[] ∷ []
+uniqueFinVectorPower bound (suc dimension) =
+  cartesianProductWith Vec._∷_
+    (Data.List.Base.allFin bound)
+    (uniqueFinVectorPower bound dimension)
+
+vecConsInjective :
+  ∀ {A : Set} {n : Nat}
+    {x y : A} {xs ys : Vec.Vec A n} →
+  (x Vec.∷ xs) ≡ (y Vec.∷ ys) → (x ≡ y) × (xs ≡ ys)
+vecConsInjective refl = refl , refl
+
+uniqueFinVectorPowerNoDuplicates :
+  (bound dimension : Nat) → Unique (uniqueFinVectorPower bound dimension)
+uniqueFinVectorPowerNoDuplicates bound zero =
+  UniqueP.map⁺
+    (λ { refl → refl })
+    (UniqueP.allFin⁺ 1)
+uniqueFinVectorPowerNoDuplicates bound (suc dimension) =
+  UniqueP.cartesianProductWith⁺ Vec._∷_ vecConsInjective
+    (UniqueP.allFin⁺ bound)
+    (uniqueFinVectorPowerNoDuplicates bound dimension)
+
+uniqueFinVectorPowerComplete :
+  ∀ {bound dimension : Nat}
+    (vector : Vec.Vec (Fin bound) dimension) →
+  vector ∈ uniqueFinVectorPower bound dimension
+uniqueFinVectorPowerComplete {dimension = zero} Vec.[] = Any.here refl
+uniqueFinVectorPowerComplete {bound} {suc dimension} (head Vec.∷ tail) =
+  ∈-cartesianProductWith⁺ Vec._∷_
+    (∈-allFin head)
+    (uniqueFinVectorPowerComplete tail)
 
 ------------------------------------------------------------------------
 -- No analysis enters this owner.  It is a reusable finite-product theorem.
