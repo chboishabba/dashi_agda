@@ -22,8 +22,9 @@ module DASHI.Mathematics.NumberTheory.PartitionErdosIdentityPrefixExact where
 -- identity exactly on that entire available prefix.
 --
 -- The arbitrary-n boundary is no longer an opaque theorem field: the generic
--- identity is derived in PartitionErdosFiniteDoubleCountBridgeExact from an
--- explicit finite deletion-fibre system.
+-- finite identity is derived in PartitionErdosFiniteDoubleCountBridgeExact
+-- from an explicit deletion-fibre system.  Identifying its residual fold with
+-- the conventional written double sum is tracked separately.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -136,11 +137,11 @@ record ErdosPartitionIdentityCompletion : Set₁ where
 
 open ErdosPartitionIdentityCompletion public
 
-arbitraryNIdentity :
+arbitraryNResidualIdentity :
   (completion : ErdosPartitionIdentityCompletion) →
   (n : Nat) →
   n * DoubleCount.PartitionCount (deletionFibreSystem completion) n
-  ≡ DoubleCount.ErdosDoubleSum (deletionFibreSystem completion) n
-arbitraryNIdentity completion =
+  ≡ DoubleCount.ErdosResidualDoubleSum (deletionFibreSystem completion) n
+arbitraryNResidualIdentity completion =
   DoubleCount.erdosIdentityFromDeletionFibre
     (deletionFibreSystem completion)
