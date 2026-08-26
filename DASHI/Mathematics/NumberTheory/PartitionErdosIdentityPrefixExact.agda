@@ -19,14 +19,18 @@ module DASHI.Mathematics.NumberTheory.PartitionErdosIdentityPrefixExact where
 --
 -- The repo already owns p(0)..p(5) = 1,1,2,3,5,7 through independently
 -- constructed partition-labelled Fock bases.  This module checks the Erdos
--- identity exactly on that entire available prefix.  It is a regression
--- witness, not a proof of the identity for arbitrary n.
+-- identity exactly on that entire available prefix.
+--
+-- The arbitrary-n boundary is no longer an opaque theorem field: the generic
+-- identity is derived in PartitionErdosFiniteDoubleCountBridgeExact from an
+-- explicit finite deletion-fibre system.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
+open import Agda.Builtin.Nat using (Nat; zero; _+_; _*_)
 
 import DASHI.Moonshine.RankOneFockPartitionGradingExact as Fock
+import DASHI.Mathematics.NumberTheory.PartitionErdosFiniteDoubleCountBridgeExact as DoubleCount
 
 ------------------------------------------------------------------------
 -- Exact partition values already certified by the Fock owner.
@@ -121,13 +125,22 @@ canonicalErdosIdentityPrefixCertificate = record
   }
 
 ------------------------------------------------------------------------
--- Generic identity remains a separate owner obligation.
+-- Generic completion now demands the concrete finite combinatorics rather
+-- than the conclusion itself.
 
 record ErdosPartitionIdentityCompletion : Set₁ where
   field
-    PartitionCount : Nat → Nat
-    partitionZero : PartitionCount zero ≡ 1
-    arbitraryNDoubleSum : Nat → Set
-    arbitraryNIdentity : (n : Nat) → Set
+    deletionFibreSystem : DoubleCount.ErdosDeletionFibreSystem
+    partitionZero :
+      DoubleCount.PartitionCount deletionFibreSystem zero ≡ 1
 
 open ErdosPartitionIdentityCompletion public
+
+arbitraryNIdentity :
+  (completion : ErdosPartitionIdentityCompletion) →
+  (n : Nat) →
+  n * DoubleCount.PartitionCount (deletionFibreSystem completion) n
+  ≡ DoubleCount.ErdosDoubleSum (deletionFibreSystem completion) n
+arbitraryNIdentity completion =
+  DoubleCount.erdosIdentityFromDeletionFibre
+    (deletionFibreSystem completion)
