@@ -20,6 +20,7 @@ module DASHI.Foundations.WetteConsistencyClaimBoundaryExact where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Product using (_×_; _,_)
 
 import DASHI.Automata.KernelInternal as KI
 import DASHI.Physics.Foundations.FormalReceiptBoundaryExact as Receipt
