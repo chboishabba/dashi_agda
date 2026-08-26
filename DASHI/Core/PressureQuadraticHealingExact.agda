@@ -45,7 +45,9 @@ NoWorsePressure :
   ∀ {State Action : Set} →
   PressureScore State Action → State → Action → Action → Set
 NoWorsePressure pressure state preferred alternative =
-  pressure state preferred Pressure.⊑p pressure state alternative
+  Pressure._⊑p_
+    (pressure state preferred)
+    (pressure state alternative)
 
 NoWorseHealing :
   ∀ {State Action Vector : Set} →
