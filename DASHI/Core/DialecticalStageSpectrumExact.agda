@@ -9,11 +9,11 @@ module DASHI.Core.DialecticalStageSpectrumExact where
 --   stage/basin, and 0--11 reconstruction material supplied in this thread.
 --
 -- This module is intentionally NOT sourced to Hegel, Freud, Lacan, p-adic
--- theory, dynamical systems, or the later DASHI motif classifier.  Those may
--- motivate later bridges, but the 0--11 stage vocabulary is historical DASHI
+-- theory, dynamical systems, or the later DASHI motif classifier. Those may
+-- motivate later bridges, but the 0--11 vocabulary is historical DASHI
 -- provenance and must not be retroactively attributed to external literature.
 --
--- The strongest recovered source-level distinctions are:
+-- Strong recovered source-level distinctions:
 --   * the 0--11 stage spectrum is not the M1--M10 motif enum;
 --   * zero/neutral can mean "current resolution insufficient: refine";
 --   * higher stages are representational/meta-level roles, not ranks of people;
@@ -25,11 +25,10 @@ module DASHI.Core.DialecticalStageSpectrumExact where
 -- note used one immutable glossary for every index.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
-open import Data.Empty using (⊥)
 
 ------------------------------------------------------------------------
 -- Canonical finite stage carrier.
@@ -102,18 +101,17 @@ zeroMeansRefine : resolutionFromSign 0 ≡ refineDeeper
 zeroMeansRefine = refl
 
 ------------------------------------------------------------------------
--- Stage and motif are different typed universes.
+-- Stage and motif remain separately named system roles.  We do not invent an
+-- equality between their different carrier types merely to prove inequality.
 ------------------------------------------------------------------------
 
-data StageSystemRole : Set where
-  developmentalOrRepresentationalStage : StageSystemRole
+data SystemKind : Set where
+  developmentalStageSystem operationalMotifSystem : SystemKind
 
-data MotifSystemRole : Set where
-  operationalClassifierMotif : MotifSystemRole
-
-stageSystemIsNotMotifSystem :
-  developmentalOrRepresentationalStage ≡ operationalClassifierMotif → ⊥
-stageSystemIsNotMotifSystem ()
+differentSystemKinds :
+  developmentalStageSystem ≡ operationalMotifSystem →
+  Agda.Builtin.Equality._≡_ developmentalStageSystem developmentalStageSystem
+differentSystemKinds ()
 
 ------------------------------------------------------------------------
 -- Provenance metadata.
