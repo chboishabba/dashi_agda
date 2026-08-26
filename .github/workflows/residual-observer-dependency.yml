@@ -4,10 +4,13 @@ on:
   workflow_dispatch:
   pull_request:
     paths:
+      - 'DASHI/Pressure.agda'
+      - 'DASHI/Interop/ITIRJoinBridge.agda'
       - 'DASHI/Core/ResidualObserverDependencyExact.agda'
       - 'DASHI/Core/ResidualObserverDependencyRegression.agda'
       - 'DASHI/Core/ResidualObserverQuadraticControlExact.agda'
       - 'DASHI/Core/FutureLanguageQuadraticControlExact.agda'
+      - 'DASHI/Core/PressureQuadraticHealingExact.agda'
       - 'DASHI/Biology/NeuralResidualDependencyBridgeExact.agda'
       - 'DASHI/Biology/NeuralResidualFutureLanguageBridgeExact.agda'
       - 'DASHI/Biology/NeuralResidualDependencyValidation.agda'
@@ -39,10 +42,13 @@ jobs:
       - name: Reject trust escapes in dependency tranche
         run: |
           sources=(
+            DASHI/Pressure.agda
+            DASHI/Interop/ITIRJoinBridge.agda
             DASHI/Core/ResidualObserverDependencyExact.agda
             DASHI/Core/ResidualObserverDependencyRegression.agda
             DASHI/Core/ResidualObserverQuadraticControlExact.agda
             DASHI/Core/FutureLanguageQuadraticControlExact.agda
+            DASHI/Core/PressureQuadraticHealingExact.agda
             DASHI/Biology/NeuralResidualDependencyBridgeExact.agda
             DASHI/Biology/NeuralResidualFutureLanguageBridgeExact.agda
             DASHI/Biology/NeuralResidualDependencyValidation.agda
@@ -58,9 +64,14 @@ jobs:
             fi
           done
 
-      - name: Kernel-check focused residual dependency regression
+      - name: Kernel-check pressure and ITIR monotonicity
         run: |
           agda --version
+          agda -i . -l standard-library DASHI/Pressure.agda
+          agda -i . -l standard-library DASHI/Interop/ITIRJoinBridge.agda
+
+      - name: Kernel-check focused residual dependency regression
+        run: |
           agda -i . -l standard-library \
             DASHI/Core/ResidualObserverDependencyRegression.agda
 
@@ -76,6 +87,8 @@ jobs:
             DASHI/Core/ResidualObserverQuadraticControlExact.agda
           agda -i . -l standard-library \
             DASHI/Core/FutureLanguageQuadraticControlExact.agda
+          agda -i . -l standard-library \
+            DASHI/Core/PressureQuadraticHealingExact.agda
 
       - name: Kernel-check neural residual dependency validation root
         run: |
