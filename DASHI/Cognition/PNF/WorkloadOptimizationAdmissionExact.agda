@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Cognition.PNF.WorkloadOptimizationAdmissionExact where
 
 open import Agda.Builtin.Nat using (Nat; suc; _+_)
@@ -22,12 +21,10 @@ open import DASHI.Cognition.PNF.ComplexityArithmetic using (_≤ᶜ_)
 ------------------------------------------------------------------------
 
 data BackendFamily : Set where
-  packedScalar
-  batchVector
-  nativeSWAR
+  packedScalar batchVector nativeSWAR : BackendFamily
   accelerator : BackendFamily
 
-record WorkloadGeometry : Set where
+record WorkloadGeometry : Set₁ where
   constructor workloadGeometry
   field
     itemCount : Nat
