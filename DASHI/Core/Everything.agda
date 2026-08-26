@@ -5,3 +5,7 @@ module DASHI.Core.Everything where
 import DASHI.Core.FallacyObstructionEverything
 import DASHI.Core.DecimalResidualRefinementExact
 import DASHI.Core.FiniteBranchingCriticalityExact
+import DASHI.Core.LogisticFoldCriticalityExact
+import DASHI.Core.NumberRoleProvenanceAtlasExact
+import DASHI.Core.IntersectionalNonFactorability
+import DASHI.Core.IntersectionalConstraintGeometryExact
