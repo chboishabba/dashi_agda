@@ -15,6 +15,8 @@ import DASHI.Biology.ParentAllyshipMultiObserverBridge as Allyship
 import DASHI.Biology.ParentalFearIndependentMobilityExact as FearMobility
 import DASHI.Biology.ParentalFearSourceAttributionExact as FearAttribution
 import DASHI.Biology.ParentalFearObserverRefinementExact as FearObserver
+import DASHI.Biology.ParentalFearConsumerSufficiencyBridgeExact as FearSufficiency
+import DASHI.Biology.ParentalFearDynamicQuotientBridgeExact as FearDynamics
 import DASHI.Biology.InterpretiveCodingSystem as Coding
 import DASHI.Biology.CrossPaperDialecticalDevelopment as Development
 
@@ -82,6 +84,18 @@ record AliceBrownCorpusLoom : Set₁ where
       parentalFearObserverRefinement ≡
       FearObserver.canonicalParentalFearObserverRefinementBridge
 
+    parentalFearConsumerSufficiency :
+      FearSufficiency.ParentalFearConsumerSufficiencyBridge
+    parentalFearConsumerSufficiencyIsCanonical :
+      parentalFearConsumerSufficiency ≡
+      FearSufficiency.canonicalParentalFearConsumerSufficiencyBridge
+
+    parentalFearDynamicQuotient :
+      FearDynamics.ParentalFearDynamicQuotientBridge
+    parentalFearDynamicQuotientIsCanonical :
+      parentalFearDynamicQuotient ≡
+      FearDynamics.canonicalParentalFearDynamicQuotientBridge
+
     interpretiveCodingSystem : Coding.InterpretiveCodingSystem
     interpretiveCodingSystemIsCanonical :
       interpretiveCodingSystem ≡ Coding.canonicalInterpretiveCodingSystem
@@ -122,6 +136,10 @@ record AliceBrownCorpusLoom : Set₁ where
     parentalFearAttributionRetainedThroughExtensionsIsTrue :
       parentalFearAttributionRetainedThroughExtensions ≡ true
 
+    parentalFearStaticAndDynamicNonDescentSeparated : Bool
+    parentalFearStaticAndDynamicNonDescentSeparatedIsTrue :
+      parentalFearStaticAndDynamicNonDescentSeparated ≡ true
+
     corpusLoomCandidateOnly : Bool
     corpusLoomCandidateOnlyIsTrue : corpusLoomCandidateOnly ≡ true
 
@@ -143,6 +161,8 @@ canonicalAliceBrownCorpusLoom =
     FearMobility.canonicalParentalFearEcologyBridge refl
     FearAttribution.canonicalParentalFearSourceAttribution refl
     FearObserver.canonicalParentalFearObserverRefinementBridge refl
+    FearSufficiency.canonicalParentalFearConsumerSufficiencyBridge refl
+    FearDynamics.canonicalParentalFearDynamicQuotientBridge refl
     Coding.canonicalInterpretiveCodingSystem refl
     Development.canonicalCrossPaperDialecticalDevelopment refl
     true refl
@@ -154,7 +174,8 @@ canonicalAliceBrownCorpusLoom =
     true refl
     true refl
     true refl
-    "Corpus-level candidate loom: the OEF/AI paper supplies scalable proxy classification; the source-bound humour paper supplies a seven-consideration teacher-side pedagogical framework; the humour/agency hyperfabric bridge exposes constitutive governance, strict intersectional carrier expansion, conditional-normalisation and plural-dynamic-safety boundaries without rewriting the source; voice/agency supplies epistemic-participation gates; online-support research supplies student-identified +1 families; ecology-of-data supplies person-place custodianship; dyslexia allyship research supplies plural observer and proximity fibres; the parental fear/IAST study supplies a situated reciprocal negotiation model with opposed place readings, plural stranger meanings, benefit/fear tension and parent-action feedback; its O'Connor/Brown 2013 Health & Place attribution and DOI remain first-class through downstream extensions; the observer-refinement bridge proves that coarse fear alone need not determine an intervention-relevant contextual distinction; and the interpretive-coding interface exposes the common human/machine mediation layer. Source claims, cross-paper inferences, DASHI extensions and future empirical tests remain distinct."
+    true refl
+    "Corpus-level candidate loom: the OEF/AI paper supplies scalable proxy classification; the source-bound humour paper supplies a seven-consideration teacher-side pedagogical framework; the humour/agency hyperfabric bridge exposes constitutive governance, strict intersectional carrier expansion, conditional-normalisation and plural-dynamic-safety boundaries without rewriting the source; voice/agency supplies epistemic-participation gates; online-support research supplies student-identified +1 families; ecology-of-data supplies person-place custodianship; dyslexia allyship research supplies plural observer and proximity fibres; the parental fear/IAST study supplies a situated reciprocal negotiation model with opposed place readings, plural stranger meanings, benefit/fear tension and parent-action feedback; its O'Connor/Brown 2013 Health & Place attribution and DOI remain first-class through downstream extensions; observer refinement gives a coarse-fear collision, the generic consumer-descent owner proves fear-only insufficiency/factorization failure for intervention need, and the generic dynamic-quotient owner gives a separate synthetic terminalisation defect showing same present fear can diverge under the same admissible support trace. Source claims, cross-paper inferences, static DASHI theorems, dynamic DASHI countermodels and future empirical tests remain distinct."
 
 canonicalCorpusLoomSourceCountReading : String
 canonicalCorpusLoomSourceCountReading =
