@@ -8,6 +8,7 @@ import DASHI.Biology.TrustedFriendRelationalScaffoldingExact as Friend
 import DASHI.Biology.NeuroqueerRelationshipEcologyExact as Neuroqueer
 import DASHI.Biology.PsilautNetworkResponseGeometryExact as Psilaut
 import DASHI.Biology.SolisSystemSensitivityBoundaryExact as Solis
+import DASHI.Core.ContrastiveInterventionResponseExact as Response
 
 ------------------------------------------------------------------------
 -- CROSS-POLLINATION OWNER
@@ -91,8 +92,7 @@ latencyDoesNotDetermineRemainAffordance :
 latencyDoesNotDetermineRemainAffordance = sameProcessingDoesNotFixRealizedOptionCone
 
 ------------------------------------------------------------------------
--- Trusted relation and third-place ecology are separable: neither a friend nor
--- a sensory-safe place is definitionally the other.
+-- Trusted relation and third-place ecology are separable.
 ------------------------------------------------------------------------
 
 data SafeSpaceEqualsSafeFriendPermission : Set where
@@ -101,13 +101,11 @@ safeSpaceDoesNotCollapseToSafeFriend : SafeSpaceEqualsSafeFriendPermission → �
 safeSpaceDoesNotCollapseToSafeFriend ()
 
 ------------------------------------------------------------------------
--- PSILAUT stays an intervention-response observer.  The cross-pollination does
--- not use its group-summary response as proof of processing, relationship,
--- sexuality, or Solis mechanism identity.
+-- PSILAUT stays an intervention-response observer.
 ------------------------------------------------------------------------
 
 psilautDMNResponseNonDescentInstalled :
-  ¬ Psilaut.Response.ResponseDescendsThroughBaseline
+  ¬ Response.ResponseDescendsThroughBaseline
       Psilaut.observeConnectivity
       Psilaut.applyDose
       Psilaut.placebo
