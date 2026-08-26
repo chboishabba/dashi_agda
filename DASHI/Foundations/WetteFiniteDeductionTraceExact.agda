@@ -5,12 +5,12 @@ module DASHI.Foundations.WetteFiniteDeductionTraceExact where
 --
 -- The fixed-generator n-step theorem in WetteConstructiveAutomatonExact is
 -- useful as a regression surface, but a real formal calculus uses different
--- rule constructors along one derivation.  DASHI already owns generic finite
+-- rule constructors along one derivation. DASHI already owns generic finite
 -- command execution in GenericFuturePartitionRefinementExact, and the
 -- HybridTraceSafetyExact lane already uses exactly the one-step-to-finite-trace
 -- induction pattern needed here.
 --
--- This module therefore does not introduce another trace engine.  It reuses
+-- This module therefore does not introduce another trace engine. It reuses
 -- Future.run and proves that a one-step WetteDeductionSimulation commutes over
 -- any finite list of possibly different generators.
 ------------------------------------------------------------------------
@@ -121,8 +121,8 @@ record MachineReachabilityWitness
   (source target : W.State machine) : Set where
   constructor machineReachabilityWitness
   field
-    actions : List (W.Generator machine)
-    reaches : runMachine machine actions source ≡ target
+    machineActions : List (W.Generator machine)
+    machineReaches : runMachine machine machineActions source ≡ target
 
 open MachineReachabilityWitness public
 
@@ -147,7 +147,7 @@ finiteDerivationProjectsToMachineReachability simulation
 --
 -- This is deliberately weaker than a global arithmetic soundness theorem.
 -- Given a predicate already proved invariant under every declared syntax rule,
--- every finite derivation preserves it.  The module does not manufacture the
+-- every finite derivation preserves it. The module does not manufacture the
 -- predicate, a model, or a reflection theorem.
 ------------------------------------------------------------------------
 
