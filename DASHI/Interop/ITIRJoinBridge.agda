@@ -105,8 +105,10 @@ itirJoinBridgeObligations =
   record
     { severityJoinPreservation = severityJoinPreserved
     ; codeXorJoinPreservation = codeXorJoinPreserved
-    ; severityMonotonicity = severityToPressureMonotone
-    ; codeMonotonicity = codeToPressureMonotone
+    ; severityMonotonicity =
+        λ {a} {b} proof → severityToPressureMonotone {a} {b} proof
+    ; codeMonotonicity =
+        λ {x} {y} proof → codeToPressureMonotone {x} {y} proof
     ; nonClaimBoundary =
         "ITIRJoinBridge is only a conservative UFTC severity/code to DASHI pressure adapter"
         ∷ "It proves finite saturation join preservation for severityToPressure and codeToPressure over C_XOR"
