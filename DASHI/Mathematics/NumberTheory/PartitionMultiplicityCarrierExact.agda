@@ -14,17 +14,14 @@ module DASHI.Mathematics.NumberTheory.PartitionMultiplicityCarrierExact where
 -- This representation is tailored to the Erdos deletion identity: deleting k
 -- copies of a part of size v is a coordinate operation, and the conventional
 -- coefficient v is represented independently by a Fin v unit fibre.
---
--- This module owns the all-n carrier shape.  Finite enumeration of all such
--- vectors and the exact coordinate-deletion bijection are subsequent theorem
--- layers, not analytic assumptions.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
+open import Data.Empty using (⊥-elim)
 open import Data.Fin.Base using (Fin; toℕ)
   renaming (zero to fzero; suc to fsuc)
-open import Data.Nat.Base using (_≤_)
+open import Data.Nat.Base using (_≤_; _<_)
 import Data.Nat.Properties as NatP
 open import Data.Vec.Base using (Vec; []; _∷_)
 open import Relation.Binary.PropositionalEquality using (subst)
@@ -63,10 +60,15 @@ lookupMultiplicity (fsuc index) (x ∷ xs) =
 partValue : ∀ {n : Nat} → Fin n → Nat
 partValue index = suc (toℕ index)
 
+coordinateWeightFrom :
+  ∀ {n : Nat} → Nat → Fin n → Nat
+coordinateWeightFrom first fzero = first
+coordinateWeightFrom first (fsuc index) =
+  coordinateWeightFrom (suc first) index
+
 ------------------------------------------------------------------------
--- Every coordinate of a positive-weight vector is bounded by its weighted
--- mass.  This is the exact finite estimate needed to place every multiplicity
--- m_j of a partition of n inside Fin (n+1).
+-- Every coordinate and every weighted coordinate contribution are bounded by
+-- the total positive-weighted mass.
 
 coordinate≤weightedMassFrom :
   ∀ {dimension : Nat}
@@ -95,6 +97,31 @@ coordinate≤weightedMassFrom offset (fsuc index) (multiplicity ∷ rest) =
           (weightedMassFrom (suc (suc offset)) rest)
           ((suc offset) * multiplicity))))
 
+coordinateContribution≤weightedMassFrom :
+  ∀ {dimension : Nat}
+    (first : Nat)
+    (index : Fin dimension)
+    (vector : Vec Nat dimension) →
+  coordinateWeightFrom first index * lookupMultiplicity index vector
+  ≤ weightedMassFrom first vector
+coordinateContribution≤weightedMassFrom first fzero
+    (multiplicity ∷ rest) =
+  NatP.m≤m+n
+    (first * multiplicity)
+    (weightedMassFrom (suc first) rest)
+coordinateContribution≤weightedMassFrom first (fsuc index)
+    (multiplicity ∷ rest) =
+  NatP.≤-trans
+    (coordinateContribution≤weightedMassFrom (suc first) index rest)
+    (NatP.≤-trans
+      (NatP.m≤m+n
+        (weightedMassFrom (suc first) rest)
+        (first * multiplicity))
+      (NatP.≤-reflexive
+        (NatP.+-comm
+          (weightedMassFrom (suc first) rest)
+          (first * multiplicity))))
+
 coordinate≤weightedMass :
   ∀ {n : Nat}
     (index : Fin n)
@@ -113,6 +140,43 @@ partitionCoordinateAtMostGrade partition index =
     (massExact partition)
     (coordinate≤weightedMass index (multiplicities partition))
 
+------------------------------------------------------------------------
+-- If a coordinate's part weight lies strictly above the exact total mass, its
+-- multiplicity must be zero.  This is the normalization lemma for ambient
+-- residual vectors: all coordinates above residual mass vanish.
+
+coordinateAboveExactMassIsZero :
+  ∀ {dimension mass : Nat}
+    (vector : Vec Nat dimension)
+    (massExactProof : weightedMass vector ≡ mass)
+    (index : Fin dimension) →
+  mass < coordinateWeightFrom 1 index →
+  lookupMultiplicity index vector ≡ zero
+coordinateAboveExactMassIsZero vector massExactProof index above
+  with lookupMultiplicity index vector
+... | zero = refl
+... | suc multiplicity =
+  ⊥-elim
+    (NatP.<⇒≱ above weight≤mass)
+  where
+  contribution≤mass :
+    coordinateWeightFrom 1 index * suc multiplicity ≤ mass
+  contribution≤mass =
+    subst
+      (λ total →
+        coordinateWeightFrom 1 index * suc multiplicity ≤ total)
+      massExactProof
+      (coordinateContribution≤weightedMassFrom 1 index vector)
+
+  weight≤contribution :
+    coordinateWeightFrom 1 index
+    ≤ coordinateWeightFrom 1 index * suc multiplicity
+  weight≤contribution =
+    NatP.m≤m*n (coordinateWeightFrom 1 index) (suc multiplicity)
+
+  weight≤mass : coordinateWeightFrom 1 index ≤ mass
+  weight≤mass = NatP.≤-trans weight≤contribution contribution≤mass
+
 record PositiveDeletionChoice {n : Nat}
     (partition : MultiplicityPartition n) : Set where
   field
@@ -126,8 +190,7 @@ open PositiveDeletionChoice public
 
 ------------------------------------------------------------------------
 -- Classical residual coordinate.  Rather than hiding the factor v as a
--- coefficient, retain an explicit Fin v label.  A residual therefore carries
--- (v,k,mu,u), with u : Fin v.
+-- coefficient, retain an explicit Fin v label.
 
 record ErdosMultiplicityResidual (n : Nat) : Set where
   constructor erdosMultiplicityResidual
@@ -142,9 +205,6 @@ record ErdosMultiplicityResidual (n : Nat) : Set where
     unit : Fin (partValue partIndex)
 
 open ErdosMultiplicityResidual public
-
-------------------------------------------------------------------------
--- Forgetting the unit coordinate produces the conventional weighted triple.
 
 record ErdosResidualTriple (n : Nat) : Set where
   constructor erdosResidualTriple
@@ -163,22 +223,15 @@ tripleWeight : ∀ {n : Nat} → ErdosResidualTriple n → Nat
 tripleWeight triple = partValue (ErdosResidualTriple.partIndex triple)
 
 ------------------------------------------------------------------------
--- Completion boundary.  The carrier itself and the coordinate <= grade bound
--- are now machine-level terms; remaining work is finite enumeration uniqueness
--- and exact coordinate deletion/reconstruction.
+-- Remaining explicit normalization/deletion boundaries.
 
 record MultiplicityPartitionEnumerationCompletion : Set₁ where
   field
-    enumeratePartitions :
-      (n : Nat) → Set
-    enumerationFiniteExact :
-      (n : Nat) → Set
-    enumerationUniqueExact :
-      (n : Nat) → Set
-    enumerationSoundExact :
-      (n : Nat) → Set
-    enumerationCompleteExact :
-      (n : Nat) → Set
+    enumeratePartitions : (n : Nat) → Set
+    enumerationFiniteExact : (n : Nat) → Set
+    enumerationUniqueExact : (n : Nat) → Set
+    enumerationSoundExact : (n : Nat) → Set
+    enumerationCompleteExact : (n : Nat) → Set
 
 record MultiplicityDeletionCompletion : Set₁ where
   field
