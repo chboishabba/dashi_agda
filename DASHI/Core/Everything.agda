@@ -10,3 +10,9 @@ import DASHI.Core.NumberRoleProvenanceAtlasExact
 import DASHI.Core.IntersectionalNonFactorability
 import DASHI.Core.IntersectionalConstraintGeometryExact
 import DASHI.Core.FeministRechartingSourceBridgeExact
+import DASHI.Core.DialecticalStageSpectrumExact
+import DASHI.Core.ContextualDialecticRoleExact
+import DASHI.Core.EpistemicSuspensionExact
+import DASHI.Core.StageTransitionBarrierExact
+import DASHI.Core.DialecticStageMotifBridgeExact
+import DASHI.Core.DialecticOriginSourceAtlasExact
