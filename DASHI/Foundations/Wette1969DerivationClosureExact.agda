@@ -2,12 +2,6 @@ module DASHI.Foundations.Wette1969DerivationClosureExact where
 
 ------------------------------------------------------------------------
 -- WETTE 1969 FINITE DERIVATION CLOSURE
---
--- This module strengthens the finite-context lane without introducing a new
--- trace engine.  Previously a rule application consumed premise-membership
--- evidence supplied externally.  Here we prove the generic closure facts that
--- let later premise evidence be generated from conclusions of earlier certified
--- applications in the same finite derivation context.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -21,24 +15,16 @@ import DASHI.Foundations.Wette1969InitialRuleTranscriptionExact as RuleBody
 import DASHI.Foundations.Wette1969ProofCarryingRuleApplicationExact as Historical
 import DASHI.Foundations.Wette1969FiniteDerivationContextExact as Finite
 
-------------------------------------------------------------------------
--- Every certified rule application makes its conclusion available at the
--- reached context, definitionally modulo the TypedDependencyCore postcondition.
-------------------------------------------------------------------------
+historicalApplicationSystem =
+  Historical.historicalRuleApplicationSystem
+    Finite.finiteHistoricalContextSystem
 
 certifiedConclusionAvailable :
   (context : Finite.DerivationContext) →
-  (selected :
-    PCRA.SelectedRuleApplication
-      (Historical.historicalRuleApplicationSystem
-        Finite.finiteHistoricalContextSystem)
-      context) →
+  (selected : PCRA.SelectedRuleApplication historicalApplicationSystem context) →
   Historical.Derives
     Finite.finiteHistoricalContextSystem
-    (PCRA.applySelected
-      (Historical.historicalRuleApplicationSystem
-        Finite.finiteHistoricalContextSystem)
-      selected)
+    (PCRA.applySelected historicalApplicationSystem selected)
     (RuleBody.conclusion (PCRA.selectedRule selected))
 certifiedConclusionAvailable context selected
   rewrite Dependency.postcondition (PCRA.applicationProof selected) =
@@ -46,26 +32,15 @@ certifiedConclusionAvailable context selected
     context
     (RuleBody.conclusion (PCRA.selectedRule selected))
 
-------------------------------------------------------------------------
--- Every formula available before a certified step remains available after it.
-------------------------------------------------------------------------
-
 certifiedStepPreservesPriorFormula :
   (context : Finite.DerivationContext) →
-  (selected :
-    PCRA.SelectedRuleApplication
-      (Historical.historicalRuleApplicationSystem
-        Finite.finiteHistoricalContextSystem)
-      context) →
+  (selected : PCRA.SelectedRuleApplication historicalApplicationSystem context) →
   (formula : Signature.Formula) →
   Historical.Derives
     Finite.finiteHistoricalContextSystem context formula →
   Historical.Derives
     Finite.finiteHistoricalContextSystem
-    (PCRA.applySelected
-      (Historical.historicalRuleApplicationSystem
-        Finite.finiteHistoricalContextSystem)
-      selected)
+    (PCRA.applySelected historicalApplicationSystem selected)
     formula
 certifiedStepPreservesPriorFormula context selected formula evidence
   rewrite Dependency.postcondition (PCRA.applicationProof selected) =
@@ -75,61 +50,93 @@ certifiedStepPreservesPriorFormula context selected formula evidence
     formula
     evidence
 
-------------------------------------------------------------------------
--- A later rule premise can be generated directly from an earlier conclusion
--- whenever the recovered historical formulae are equal.  This is the exact
--- closure seam needed to stop re-supplying such premise evidence externally.
-------------------------------------------------------------------------
-
 premiseFromPreviousCertifiedConclusion :
   (context : Finite.DerivationContext) →
-  (previous :
-    PCRA.SelectedRuleApplication
-      (Historical.historicalRuleApplicationSystem
-        Finite.finiteHistoricalContextSystem)
-      context) →
+  (previous : PCRA.SelectedRuleApplication historicalApplicationSystem context) →
   (later : RuleBody.HistoricalRuleBody) →
   (index : Fin (RuleBody.premiseCount later)) →
   lookup (RuleBody.premises later) index
     ≡ RuleBody.conclusion (PCRA.selectedRule previous) →
   Historical.Derives
     Finite.finiteHistoricalContextSystem
-    (PCRA.applySelected
-      (Historical.historicalRuleApplicationSystem
-        Finite.finiteHistoricalContextSystem)
-      previous)
+    (PCRA.applySelected historicalApplicationSystem previous)
     (lookup (RuleBody.premises later) index)
 premiseFromPreviousCertifiedConclusion
   context previous later index equality
   rewrite equality =
   certifiedConclusionAvailable context previous
 
-------------------------------------------------------------------------
--- Existing premise evidence can also be lifted wholesale through a certified
--- extension.  This is useful when a later historical rule reuses an earlier
--- premise family unchanged.
-------------------------------------------------------------------------
-
 premisesPersistAcrossCertifiedStep :
   (context : Finite.DerivationContext) →
-  (selected :
-    PCRA.SelectedRuleApplication
-      (Historical.historicalRuleApplicationSystem
-        Finite.finiteHistoricalContextSystem)
-      context) →
+  (selected : PCRA.SelectedRuleApplication historicalApplicationSystem context) →
   (later : RuleBody.HistoricalRuleBody) →
   Historical.PremisesHold
     Finite.finiteHistoricalContextSystem context later →
   Historical.PremisesHold
     Finite.finiteHistoricalContextSystem
-    (PCRA.applySelected
-      (Historical.historicalRuleApplicationSystem
-        Finite.finiteHistoricalContextSystem)
-      selected)
+    (PCRA.applySelected historicalApplicationSystem selected)
     later
 premisesPersistAcrossCertifiedStep context selected later premises index =
   certifiedStepPreservesPriorFormula
     context selected
+    (lookup (RuleBody.premises later) index)
+    (premises index)
+
+------------------------------------------------------------------------
+-- Trace-wide monotone closure.
+------------------------------------------------------------------------
+
+certifiedTracePreservesPriorFormula :
+  {context : Finite.DerivationContext} →
+  (trace : PCRA.CertifiedRuleTrace historicalApplicationSystem context) →
+  (formula : Signature.Formula) →
+  Historical.Derives
+    Finite.finiteHistoricalContextSystem context formula →
+  Historical.Derives
+    Finite.finiteHistoricalContextSystem
+    (PCRA.runCertifiedTrace historicalApplicationSystem trace)
+    formula
+certifiedTracePreservesPriorFormula PCRA.done formula evidence = evidence
+certifiedTracePreservesPriorFormula
+  {context}
+  (PCRA.choose selected rest)
+  formula
+  evidence =
+  certifiedTracePreservesPriorFormula
+    rest
+    formula
+    (certifiedStepPreservesPriorFormula context selected formula evidence)
+
+headConclusionAvailableAtTraceTarget :
+  {context : Finite.DerivationContext} →
+  (selected : PCRA.SelectedRuleApplication historicalApplicationSystem context) →
+  (rest :
+    PCRA.CertifiedRuleTrace
+      historicalApplicationSystem
+      (PCRA.applySelected historicalApplicationSystem selected)) →
+  Historical.Derives
+    Finite.finiteHistoricalContextSystem
+    (PCRA.runCertifiedTrace historicalApplicationSystem rest)
+    (RuleBody.conclusion (PCRA.selectedRule selected))
+headConclusionAvailableAtTraceTarget {context} selected rest =
+  certifiedTracePreservesPriorFormula
+    rest
+    (RuleBody.conclusion (PCRA.selectedRule selected))
+    (certifiedConclusionAvailable context selected)
+
+premisesPersistAcrossCertifiedTrace :
+  {context : Finite.DerivationContext} →
+  (trace : PCRA.CertifiedRuleTrace historicalApplicationSystem context) →
+  (later : RuleBody.HistoricalRuleBody) →
+  Historical.PremisesHold
+    Finite.finiteHistoricalContextSystem context later →
+  Historical.PremisesHold
+    Finite.finiteHistoricalContextSystem
+    (PCRA.runCertifiedTrace historicalApplicationSystem trace)
+    later
+premisesPersistAcrossCertifiedTrace trace later premises index =
+  certifiedTracePreservesPriorFormula
+    trace
     (lookup (RuleBody.premises later) index)
     (premises index)
 
@@ -144,6 +151,14 @@ record Wette1969DerivationClosureBoundary : Set where
     priorPremiseEvidencePersistsAcrossCertifiedExtensionIsTrue :
       priorPremiseEvidencePersistsAcrossCertifiedExtension ≡ true
 
+    priorFormulaePersistAcrossWholeCertifiedTrace : Bool
+    priorFormulaePersistAcrossWholeCertifiedTraceIsTrue :
+      priorFormulaePersistAcrossWholeCertifiedTrace ≡ true
+
+    earlierCertifiedConclusionsPersistToTraceTarget : Bool
+    earlierCertifiedConclusionsPersistToTraceTargetIsTrue :
+      earlierCertifiedConclusionsPersistToTraceTarget ≡ true
+
     formulaEqualityStillRequiredToReuseConclusionAsSpecificPremise : Bool
     formulaEqualityStillRequiredToReuseConclusionAsSpecificPremiseIsTrue :
       formulaEqualityStillRequiredToReuseConclusionAsSpecificPremise ≡ true
@@ -156,6 +171,8 @@ canonicalWette1969DerivationClosureBoundary :
   Wette1969DerivationClosureBoundary
 canonicalWette1969DerivationClosureBoundary =
   wette1969DerivationClosureBoundary
+    true refl
+    true refl
     true refl
     true refl
     true refl
