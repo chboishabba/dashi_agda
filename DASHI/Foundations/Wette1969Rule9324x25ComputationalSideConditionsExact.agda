@@ -54,10 +54,10 @@ premise3FreshnessCertificate :
   {parameters : Rule.Rule9324x25PremiseParameters} →
   Rule9324x25ComputationalSideConditions parameters →
   Eval.SchematicFreshnessCertificate
-premise3FreshnessCertificate certificate =
+premise3FreshnessCertificate {parameters} certificate =
   Eval.schematicFreshnessCertificate
     (freshVariable certificate)
-    (Rule.freshnessContextWord _)
+    (Rule.freshnessContextWord parameters)
     (premise3Freshness certificate)
 
 premise4SubstitutionCertificate :
