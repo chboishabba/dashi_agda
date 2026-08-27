@@ -15,6 +15,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.HistoryConditionedChoiceExact as HistoryChoice
+import DASHI.Core.IntersectionalNonFactorability as NonFactor
 import DASHI.Core.RelationalTensionCompressionExact as Tension
 import DASHI.Environment.EcologicalKnowledge as Knowledge
 import DASHI.Environment.LESResearchCrossPollinationExact as LES
@@ -92,7 +93,7 @@ lesHistoryChoiceWitness =
     }
 
 lesChoiceCannotDescendThroughCoarsePresentSummary :
-  DASHI.Core.IntersectionalNonFactorability.FactorsThrough
+  NonFactor.FactorsThrough
     observeManagementHistory choiceForManagementHistory → ⊥
 lesChoiceCannotDescendThroughCoarsePresentSummary =
   HistoryChoice.historySensitiveChoiceCannotDescendThroughPresentObservation
@@ -119,6 +120,13 @@ lesFutureConeWitness =
     ; sameObservation = refl
     ; futureConesDiffer = λ ()
     }
+
+lesFutureConeCannotDescendThroughCoarsePresentSummary :
+  NonFactor.FactorsThrough
+    observeManagementHistory futureConeForManagementHistory → ⊥
+lesFutureConeCannotDescendThroughCoarsePresentSummary =
+  HistoryChoice.futureConeCannotDescendThroughPresentObservation
+    lesFutureConeWitness
 
 ------------------------------------------------------------------------
 -- LES ecological-knowledge boundary already carries the local-vs-global
