@@ -14,11 +14,12 @@ import DASHI.Foundations.WetteHistoricalSourceAtlasExact as Source
 ------------------------------------------------------------------------
 -- Programme-level recovery profile.
 --
--- The 1970 Wette primary text and the 1972 Kreisel/Zucker contemporary review
--- have now been inspected and selected source facts extracted.  The programme
--- profile remains conservative because the critical 1969 formal-system pages
--- and the late 1974 contradiction / translation texts have not yet been
--- source-transcribed into the exact historical calculus and proof objects.
+-- Wette 1969 and 1970 primary texts plus the 1972 Kreisel/Zucker review have
+-- now been inspected directly.  Therefore primaryTextInspected is inhabited.
+-- The next stages remain deliberately uninhabited: selected source facts and
+-- rule surfaces have been extracted, but the complete historical rule system,
+-- deduction-indexed interpretation, and late contradiction proof objects have
+-- not yet been transcribed into exact Agda data and discharged.
 ------------------------------------------------------------------------
 
 currentWetteRecoveryProfile : Recovery.RecoveryStageProfile
@@ -27,7 +28,7 @@ currentWetteRecoveryProfile =
   where
     supports : Recovery.RecoveryStage → Set
     supports Recovery.sourceLocated = ⊤
-    supports Recovery.primaryTextInspected = ⊥
+    supports Recovery.primaryTextInspected = ⊤
     supports Recovery.transcriptionExtracted = ⊥
     supports Recovery.formalObjectReconstructed = ⊥
     supports Recovery.theoremObligationDischarged = ⊥
@@ -36,20 +37,25 @@ wetteSourceCorpusLocated :
   Recovery.Supports currentWetteRecoveryProfile Recovery.sourceLocated
 wetteSourceCorpusLocated = tt
 
--- Source-specific receipts: partial corpus inspection is real progress, but it
--- is not promoted to programme-level formal-object recovery.
+wetteProgrammePrimaryTextInspected :
+  Recovery.Supports currentWetteRecoveryProfile Recovery.primaryTextInspected
+wetteProgrammePrimaryTextInspected = tt
+
+wette1969PrimaryTextInspected : ⊤
+wette1969PrimaryTextInspected = tt
+
 wette1970PrimaryTextInspected : ⊤
 wette1970PrimaryTextInspected = tt
 
 kreiselZucker1972ReviewInspected : ⊤
 kreiselZucker1972ReviewInspected = tt
 
-critical1969And1974FormalObjectsStillUnrecovered : ⊤
-critical1969And1974FormalObjectsStillUnrecovered = tt
+criticalLate1974FormalObjectsStillUnrecovered : ⊤
+criticalLate1974FormalObjectsStillUnrecovered = tt
 
-wetteProgrammePrimaryTextInspectionNotYetCertified :
-  ¬ Recovery.Supports currentWetteRecoveryProfile Recovery.primaryTextInspected
-wetteProgrammePrimaryTextInspectionNotYetCertified impossible = impossible
+wetteCompleteTranscriptionNotYetCertified :
+  ¬ Recovery.Supports currentWetteRecoveryProfile Recovery.transcriptionExtracted
+wetteCompleteTranscriptionNotYetCertified impossible = impossible
 
 wetteFormalObjectRecoveryNotYetCertified :
   ¬ Recovery.Supports currentWetteRecoveryProfile Recovery.formalObjectReconstructed
@@ -87,13 +93,17 @@ record WetteHistoricalRecoveryGeometryBoundary : Set where
     bibliographicLocationIsNotPrimaryTextInspectionIsTrue :
       bibliographicLocationIsNotPrimaryTextInspection ≡ true
 
-    somePrimarySourcesNowInspected : Bool
-    somePrimarySourcesNowInspectedIsTrue :
-      somePrimarySourcesNowInspected ≡ true
+    central1969And1970PrimarySourcesNowInspected : Bool
+    central1969And1970PrimarySourcesNowInspectedIsTrue :
+      central1969And1970PrimarySourcesNowInspected ≡ true
 
-    partialInspectionEqualsCriticalFormalObjectRecovery : Bool
-    partialInspectionEqualsCriticalFormalObjectRecoveryIsFalse :
-      partialInspectionEqualsCriticalFormalObjectRecovery ≡ false
+    primaryInspectionEqualsCompleteHistoricalTranscription : Bool
+    primaryInspectionEqualsCompleteHistoricalTranscriptionIsFalse :
+      primaryInspectionEqualsCompleteHistoricalTranscription ≡ false
+
+    partialExtractionEqualsCriticalFormalObjectRecovery : Bool
+    partialExtractionEqualsCriticalFormalObjectRecoveryIsFalse :
+      partialExtractionEqualsCriticalFormalObjectRecovery ≡ false
 
     transcriptionAndReconstructionKeptSeparate : Bool
     transcriptionAndReconstructionKeptSeparateIsTrue :
@@ -113,6 +123,7 @@ canonicalWetteHistoricalRecoveryGeometryBoundary =
   wetteHistoricalRecoveryGeometryBoundary
     true refl
     true refl
+    false refl
     false refl
     true refl
     false refl
