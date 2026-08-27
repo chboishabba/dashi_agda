@@ -14,11 +14,24 @@ module DASHI.Core.DeductionIndexedInterpretationExact where
 --   (i) each source deduction d having a target proof of its interpretation;
 --   (ii) the target theory proving one formula expressing that (i) holds for
 --        all d.
--- The records below formalize that distinction; the cited review is source
--- calibration, not a proof certificate for the generic Agda lemmas.
+--
+-- The 1969 Wette primary text makes an earlier distinction necessary too:
+-- stating the interpretation procedure is not yet certifying that every
+-- source deduction has a target proof.  Hence this module now separates a
+-- DeductionIndexedInterpretationSpec from a proof-bearing
+-- DeductionIndexedInterpretation.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
+
+record DeductionIndexedInterpretationSpec : Set₁ where
+  constructor deductionIndexedInterpretationSpec
+  field
+    SourceDeduction : Set
+    TargetFormula : Set
+    interpretation : SourceDeduction → TargetFormula
+
+open DeductionIndexedInterpretationSpec public
 
 record DeductionIndexedInterpretation : Set₁ where
   constructor deductionIndexedInterpretation
@@ -33,24 +46,37 @@ record DeductionIndexedInterpretation : Set₁ where
 
 open DeductionIndexedInterpretation public
 
+forgetPointwiseCertificate :
+  DeductionIndexedInterpretation →
+  DeductionIndexedInterpretationSpec
+forgetPointwiseCertificate indexed =
+  deductionIndexedInterpretationSpec
+    (DeductionIndexedInterpretation.SourceDeduction indexed)
+    (DeductionIndexedInterpretation.TargetFormula indexed)
+    (DeductionIndexedInterpretation.interpretation indexed)
+
 -- Internalizing the whole pointwise family is additional data.  Nothing in a
 -- DeductionIndexedInterpretation manufactures this package.
 record UniformInternalization
     (indexed : DeductionIndexedInterpretation) : Set₁ where
   constructor uniformInternalization
   field
-    uniformFormula : TargetFormula indexed
-    ExpressesPointwiseFamily : TargetFormula indexed → Set
+    uniformFormula : DeductionIndexedInterpretation.TargetFormula indexed
+    ExpressesPointwiseFamily :
+      DeductionIndexedInterpretation.TargetFormula indexed → Set
     expressesFamily : ExpressesPointwiseFamily uniformFormula
-    uniformProof : TargetDerivable indexed uniformFormula
+    uniformProof :
+      DeductionIndexedInterpretation.TargetDerivable indexed uniformFormula
 
 open UniformInternalization public
 
 pointwiseInstance :
   (indexed : DeductionIndexedInterpretation) →
-  (deduction : SourceDeduction indexed) →
-  TargetDerivable indexed (interpretation indexed deduction)
-pointwiseInstance indexed deduction = pointwiseProof indexed deduction
+  (deduction : DeductionIndexedInterpretation.SourceDeduction indexed) →
+  DeductionIndexedInterpretation.TargetDerivable indexed
+    (DeductionIndexedInterpretation.interpretation indexed deduction)
+pointwiseInstance indexed deduction =
+  DeductionIndexedInterpretation.pointwiseProof indexed deduction
 
 record DeductionIndexedInterpretationBoundary : Set where
   constructor deductionIndexedInterpretationBoundary
@@ -58,6 +84,10 @@ record DeductionIndexedInterpretationBoundary : Set where
     deductionDependentInterpretationExplicitlyRepresentable : Bool
     deductionDependentInterpretationExplicitlyRepresentableIsTrue :
       deductionDependentInterpretationExplicitlyRepresentable ≡ true
+
+    interpretationSpecificationIsAlreadyPointwiseProofCertificate : Bool
+    interpretationSpecificationIsAlreadyPointwiseProofCertificateIsFalse :
+      interpretationSpecificationIsAlreadyPointwiseProofCertificate ≡ false
 
     pointwiseProofFamilyIsDefinitionallyUniformInternalProof : Bool
     pointwiseProofFamilyIsDefinitionallyUniformInternalProofIsFalse :
@@ -72,5 +102,6 @@ canonicalDeductionIndexedInterpretationBoundary :
 canonicalDeductionIndexedInterpretationBoundary =
   deductionIndexedInterpretationBoundary
     true refl
+    false refl
     false refl
     false refl
