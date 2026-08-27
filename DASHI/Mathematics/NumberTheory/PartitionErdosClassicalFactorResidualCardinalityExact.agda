@@ -17,12 +17,15 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Data.List.Base using (_++_)
+open import Data.Nat.Base using (_≤_; _∸_; z≤n; s≤s)
 import Data.Nat.Properties as NatP
+open import Data.Vec.Base using (Vec)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Moonshine.ClassicalHeckeWeightKSmallWordExact as Hecke
 import DASHI.Mathematics.NumberTheory.FiniteAllFinEnumerationExact as Finite
 import DASHI.Mathematics.NumberTheory.FiniteDependentPairCardinalityExact as Card
+import DASHI.Mathematics.NumberTheory.FiniteFactorPairDivisorSumExact as Factor
 import DASHI.Mathematics.NumberTheory.FinitePositiveFactorPairExact as Positive
 import DASHI.Mathematics.NumberTheory.FiniteWeightedReindexExact as Reindex
 import DASHI.Mathematics.NumberTheory.PartitionDivisorSumRegroupingExact as Regroup
@@ -88,9 +91,9 @@ foldSingleton weight x = NatP.+-identityʳ (weight x)
 
 residualsForVectorLength :
   ∀ {n r : Nat}
-    (bound : r Data.Nat.Base.≤ n)
+    (bound : r ≤ n)
     (pair : Positive.PositiveFactorPair r)
-    (vector : Data.Vec.Base.Vec Nat (n Data.Nat.Base.∸ r)) →
+    (vector : Vec Nat (n ∸ r)) →
   Reindex.listLength (Classical.residualsForVector bound pair vector)
   ≡ Positive.divisor pair
 residualsForVectorLength bound pair vector =
@@ -106,37 +109,37 @@ residualsForVectorLength bound pair vector =
 
 residualsForPairLength :
   ∀ {n r : Nat}
-    (bound : r Data.Nat.Base.≤ n)
+    (bound : r ≤ n)
     (pair : Positive.PositiveFactorPair r) →
   Reindex.listLength (Classical.residualsForPair bound pair)
-  ≡ Positive.divisor pair * Regroup.partitionCount (n Data.Nat.Base.∸ r)
+  ≡ Positive.divisor pair * Regroup.partitionCount (n ∸ r)
 residualsForPairLength {n} {r} bound pair =
   trans
     (Card.concatMapLength
       (Classical.residualsForVector bound pair)
-      (Enumeration.partitionMultiplicityVectors (n Data.Nat.Base.∸ r)))
+      (Enumeration.partitionMultiplicityVectors (n ∸ r)))
     (trans
       (Reindex.foldPointwise
         (λ vector →
           Reindex.listLength
             (Classical.residualsForVector bound pair vector))
         (λ _ → Positive.divisor pair)
-        (Enumeration.partitionMultiplicityVectors (n Data.Nat.Base.∸ r))
+        (Enumeration.partitionMultiplicityVectors (n ∸ r))
         (residualsForVectorLength bound pair))
       (foldConstantLength
         (Positive.divisor pair)
-        (Enumeration.partitionMultiplicityVectors (n Data.Nat.Base.∸ r))))
+        (Enumeration.partitionMultiplicityVectors (n ∸ r))))
 
 ------------------------------------------------------------------------
 -- One r-block contributes factorPairWeightSum(r) * p(n-r).
 
 residualBlockLength :
   ∀ {n r : Nat}
-    (positive : suc zero Data.Nat.Base.≤ r)
-    (bound : r Data.Nat.Base.≤ n) →
+    (positive : suc zero ≤ r)
+    (bound : r ≤ n) →
   Reindex.listLength (Classical.residualBlock positive bound)
-  ≡ Regroup.Factor.factorPairWeightSum r
-      * Regroup.partitionCount (n Data.Nat.Base.∸ r)
+  ≡ Factor.factorPairWeightSum r
+      * Regroup.partitionCount (n ∸ r)
 residualBlockLength {n} {r} positive bound =
   trans
     (Card.concatMapLength
@@ -148,16 +151,16 @@ residualBlockLength {n} {r} positive bound =
           Reindex.listLength (Classical.residualsForPair bound pair))
         (λ pair →
           Positive.divisor pair
-          * Regroup.partitionCount (n Data.Nat.Base.∸ r))
+          * Regroup.partitionCount (n ∸ r))
         (Positive.positiveFactorPairs r positive)
         (residualsForPairLength bound))
       (trans
         (foldScaledRight
           Positive.divisor
-          (Regroup.partitionCount (n Data.Nat.Base.∸ r))
+          (Regroup.partitionCount (n ∸ r))
           (Positive.positiveFactorPairs r positive))
         (cong
-          (_* Regroup.partitionCount (n Data.Nat.Base.∸ r))
+          (_* Regroup.partitionCount (n ∸ r))
           (Positive.positiveFactorPairWeightSumEqualsFactor r positive))))
 
 ------------------------------------------------------------------------
@@ -165,12 +168,12 @@ residualBlockLength {n} {r} positive bound =
 
 factorTerm : Nat → Nat → Nat
 factorTerm n r =
-  Regroup.Factor.factorPairWeightSum r
-  * Regroup.partitionCount (n Data.Nat.Base.∸ r)
+  Factor.factorPairWeightSum r
+  * Regroup.partitionCount (n ∸ r)
 
 classicalResidualsUpToLength :
   (n current : Nat)
-  (bound : current Data.Nat.Base.≤ n) →
+  (bound : current ≤ n) →
   Reindex.listLength (Classical.classicalResidualsUpTo n current bound)
   ≡ Reindex.foldNat (factorTerm n) (Hecke.oneTo current)
 classicalResidualsUpToLength n zero bound = refl
@@ -179,13 +182,12 @@ classicalResidualsUpToLength n (suc current) bound =
     (Card.appendLength
       (Classical.classicalResidualsUpTo n current
         (Classical.dropPositiveBound bound))
-      (Classical.residualBlock (Data.Nat.Base.s≤s Data.Nat.Base.z≤n) bound))
+      (Classical.residualBlock (s≤s z≤n) bound))
     (trans
       (cong₂ _+_
         (classicalResidualsUpToLength n current
           (Classical.dropPositiveBound bound))
-        (residualBlockLength
-          (Data.Nat.Base.s≤s Data.Nat.Base.z≤n) bound))
+        (residualBlockLength (s≤s z≤n) bound))
       (sym oneToStep))
   where
   cong₂ : ∀ {A B C : Set} (f : A → B → C)
