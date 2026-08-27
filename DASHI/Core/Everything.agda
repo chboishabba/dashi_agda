@@ -4,3 +4,4 @@ module DASHI.Core.Everything where
 
 import DASHI.Core.FallacyObstructionEverything
 import DASHI.Core.FormalClaimTransportGeometryExact
+import DASHI.Core.FormalizationRecoveryGeometryExact
