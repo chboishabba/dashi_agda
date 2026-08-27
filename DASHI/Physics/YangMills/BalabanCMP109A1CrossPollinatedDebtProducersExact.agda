@@ -59,7 +59,7 @@ module DASHI.Physics.YangMills.BalabanCMP109A1CrossPollinatedDebtProducersExact 
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _*_; _≤_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; -_; _*_; _≤_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanYM4FiniteModeBetaLowerRemainderExact as Beta
