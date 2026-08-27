@@ -19,6 +19,7 @@ import DASHI.Biology.NeurodivergentSocialEcologySourceRegistryExact
 import DASHI.Biology.SocialEcologicalAffordanceConeExact
 import DASHI.Biology.TrustedFriendRelationalScaffoldingExact
 import DASHI.Biology.TrustedFriendRelationalGateExact
+import DASHI.Biology.TrustedFriendEcologyInteractionExact
 import DASHI.Biology.NeuroqueerRelationshipEcologyExact
 import DASHI.Biology.SolisProjectProvenanceExact
 import DASHI.Biology.SolisSystemSensitivityBoundaryExact
