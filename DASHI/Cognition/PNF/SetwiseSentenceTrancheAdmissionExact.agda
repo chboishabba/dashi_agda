@@ -9,11 +9,6 @@ import DASHI.Cognition.PNF.IndependentFibreBatchExecutionExact as Batch
 
 ------------------------------------------------------------------------
 -- E0: sentence closure is semantically independent across sentence fibres.
---
--- A tranche changes physical scheduling only.  The semantic result of admitting
--- a finite set of independent sentence deltas must agree with sequential
--- admission of exactly those deltas; batching cannot manufacture a second
--- semantic authority or change sentence-local meaning.
 ------------------------------------------------------------------------
 
 record SetwiseSentenceTrancheAdmission
@@ -32,13 +27,6 @@ record SetwiseSentenceTrancheAdmission
 
 open SetwiseSentenceTrancheAdmission public
 
-------------------------------------------------------------------------
--- Reuse the existing generic exact-batch theorem owner rather than creating a
--- parallel notion of batch correctness.  Concrete sentence-tranche benchmarks
--- may package their sequential and tranche executions as ExactBatchRealization;
--- authority equality then comes from the existing theorem.
-------------------------------------------------------------------------
-
 sentenceTrancheExactBatchPreservesAuthority :
   ∀ {Input Authority Receipt : Set}
     (batch : Batch.ExactBatchRealization Input Authority Receipt)
@@ -49,11 +37,7 @@ sentenceTrancheExactBatchPreservesAuthority =
   Batch.batchingPreservesAuthority
 
 ------------------------------------------------------------------------
--- Physical work receipt.
---
--- Claiming and committing are charged per tranche, while semantic composition
--- remains charged per sentence/delta.  The declared path has no requirement for
--- one database transaction or one work-claim round trip per sentence.
+-- E0 scheduler work receipt.
 ------------------------------------------------------------------------
 
 record SentenceTrancheWorkReceipt : Set where
@@ -72,12 +56,35 @@ record SentenceTrancheWorkReceipt : Set where
 open SentenceTrancheWorkReceipt public
 
 ------------------------------------------------------------------------
--- Workload-geometry admission for process fan-out.
+-- E0b fixed-family authority admission.
 --
--- One available parser partition has no process-level fan-out to exploit.  A
--- direct execution lane may therefore avoid spawn/pool boundary work while
--- invoking exactly the same parser/semantic worker kernel.  This is an
--- execution-placement statement only, not a semantic shortcut.
+-- Once sentence-local semantic deltas have been composed independently, the
+-- physical database sink may stage all sentence carriers in tranche-keyed typed
+-- relations and merge each authority family once per tranche.  This is stronger
+-- than merely sharing a transaction: it excludes recreating staging tables or
+-- dispatching the object/factor/demand/export/lookup families once per sentence.
+--
+-- Exact semantic equality remains owned by SetwiseSentenceTrancheAdmission /
+-- ExactBatchRealization above.  This record owns only the physical work shape.
+------------------------------------------------------------------------
+
+record FixedFamilySentenceAdmissionReceipt : Set where
+  constructor fixedFamilySentenceAdmissionReceipt
+  field
+    sentenceCount : Nat
+    trancheCount : Nat
+    typedCopyStreamCount : Nat
+    authorityFamilyStatementCount : Nat
+    interfaceIdentityQueryCount : Nat
+    perSentenceStageCreateCount : Nat
+    perSentenceFamilyStatementCount : Nat
+    noRequiredPerSentenceStageCreate : perSentenceStageCreateCount ≡ zero
+    noRequiredPerSentenceFamilyDispatch : perSentenceFamilyStatementCount ≡ zero
+
+open FixedFamilySentenceAdmissionReceipt public
+
+------------------------------------------------------------------------
+-- Workload-geometry admission for process fan-out.
 ------------------------------------------------------------------------
 
 record SinglePartitionDirectExecutionStatus : Set where
@@ -110,11 +117,10 @@ singlePartitionDoesNotRequireProcessPool = refl
 ------------------------------------------------------------------------
 
 data SentenceBatchingRequiresIndependentAuthority : Set where
-
 data SentenceBatchingRequiresPerSentenceCommit : Set where
-
 data SentenceBatchingRequiresPerSentenceClaim : Set where
-
+data SentenceBatchingRequiresPerSentenceStageCreate : Set where
+data SentenceBatchingRequiresPerSentenceFamilyDispatch : Set where
 data OnePartitionRequiresProcessPool : Set where
 
 setwiseSentenceBatchingDoesNotCreateSecondAuthority :
@@ -128,6 +134,14 @@ setwiseSentenceBatchingNeedNotCommitPerSentence ()
 setwiseSentenceBatchingNeedNotClaimPerSentence :
   SentenceBatchingRequiresPerSentenceClaim → ⊥
 setwiseSentenceBatchingNeedNotClaimPerSentence ()
+
+setwiseSentenceBatchingNeedNotCreateStagesPerSentence :
+  SentenceBatchingRequiresPerSentenceStageCreate → ⊥
+setwiseSentenceBatchingNeedNotCreateStagesPerSentence ()
+
+setwiseSentenceBatchingNeedNotDispatchFamiliesPerSentence :
+  SentenceBatchingRequiresPerSentenceFamilyDispatch → ⊥
+setwiseSentenceBatchingNeedNotDispatchFamiliesPerSentence ()
 
 singlePartitionNeedNotSpawnProcessPool :
   OnePartitionRequiresProcessPool → ⊥
