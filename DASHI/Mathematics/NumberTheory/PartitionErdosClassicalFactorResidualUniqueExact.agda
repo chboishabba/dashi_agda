@@ -22,7 +22,7 @@ open import Data.List.Relation.Unary.Unique.Propositional using (Unique)
 import Data.List.Relation.Unary.Unique.Propositional.Properties as UniqueP
 open import Data.Nat.Base using (_≤_; _∸_; z≤n; s≤s)
 import Data.Nat.Properties as NatP
-open import Data.Product using (Σ; _×_; _,_)
+open import Data.Product using (Σ; _×_; _,_; proj₁; proj₂)
 open import Data.Sum.Base using (inj₁; inj₂)
 import Data.Vec.Base as Vec
 open import Relation.Binary.PropositionalEquality using (_≢_; cong; cong₂; subst; sym; trans)
@@ -232,16 +232,16 @@ residualBlockUnique :
     (positive : suc zero ≤ r)
     (bound : r ≤ n) →
   Unique (Classical.residualBlock positive bound)
-residualBlockUnique positive bound =
+residualBlockUnique {n} {r} positive bound =
   Dep.concatMapUniqueRecoverable
     (Classical.residualsForPair bound)
-    (Factor.positiveFactorPairsUnique _ positive)
+    (Factor.positiveFactorPairsUnique r positive)
     (residualsForPairUnique bound)
     recoverPair
   where
   recoverPair :
-    ∀ {leftPair rightPair}
-      {leftResidual rightResidual : Key.ResidualKey _} →
+    ∀ {leftPair rightPair : Factor.PositiveFactorPair r}
+      {leftResidual rightResidual : Key.ResidualKey n} →
     leftResidual ∈ Classical.residualsForPair bound leftPair →
     rightResidual ∈ Classical.residualsForPair bound rightPair →
     leftResidual ≡ rightResidual →
