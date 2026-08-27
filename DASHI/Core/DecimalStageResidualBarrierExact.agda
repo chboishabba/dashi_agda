@@ -23,15 +23,9 @@ module DASHI.Core.DecimalStageResidualBarrierExact where
 -- CLAIM BOUNDARY
 --
 -- DecimalResidualRefinementExact already owns the exact finite repeated-digit
--- numerators and the completed complement identity.  StageValuationBundleAtlas
+-- numerators and completed complement identity.  StageValuationBundleAtlas
 -- already owns the canonical 0--11 stage carrier and guarded transitions.
 -- This module introduces neither a new decimal calculus nor a new stage graph.
--- It proves only the finite bridge:
---
---   digit N < 9  -> a non-closed complement class remains;
---   digit 9      -> completed complement class is closed;
---   Stage 9 still has both an explicit self-loop and an explicit 9 -> 10 lift
---                    edge, so decimal refinement is not transition authority.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false)
@@ -73,6 +67,39 @@ stageIndexMatchesDigit Decimal.d8 = refl
 stageIndexMatchesDigit Decimal.d9 = refl
 
 ------------------------------------------------------------------------
+-- Fine depth is a second coordinate, not a stage increment.
+--
+-- `Decimal.decimalRefinementNumerator digit depth / 10^depth` may acquire
+-- arbitrarily many appended digits.  Its coarse stage chart remains determined
+-- by the coarse digit.  This is the exact finite form of:
+--
+--   refining a representation != acquiring the missing coordinate needed to
+--   leave that representation.
+------------------------------------------------------------------------
+
+refinedStage :
+  Decimal.DecimalDigit → Nat → Atlas.StageAtlasZeroToEleven
+refinedStage digit depth = digitStage digit
+
+refinementDepthPreservesCoarseStage :
+  (digit : Decimal.DecimalDigit) →
+  (depth : Nat) →
+  refinedStage digit depth ≡ digitStage digit
+refinementDepthPreservesCoarseStage digit depth = refl
+
+stage5FirstTenPercentRefinementNumeratorIs55 :
+  Decimal.decimalRefinementNumerator Decimal.d5 1 ≡ 55
+stage5FirstTenPercentRefinementNumeratorIs55 = Decimal.fiveDepthOne
+
+stage9FirstTenPercentRefinementNumeratorIs99 :
+  Decimal.decimalRefinementNumerator Decimal.d9 1 ≡ 99
+stage9FirstTenPercentRefinementNumeratorIs99 = Decimal.nineDepthOne
+
+stage9SecondFineRefinementStillChartsToStage9 :
+  refinedStage Decimal.d9 2 ≡ Atlas.atlas-9
+stage9SecondFineRefinementStillChartsToStage9 = refl
+
+------------------------------------------------------------------------
 -- "Stuck" as unresolved complement rather than lack of fine articulation.
 ------------------------------------------------------------------------
 
@@ -91,8 +118,7 @@ completedResidualClass Decimal.d7 = complementRemains
 completedResidualClass Decimal.d8 = complementRemains
 completedResidualClass Decimal.d9 = completedComplementClosed
 
--- A carrier for the quantifier "every decimal digit below nine".  This avoids
--- smuggling an order theorem into what is fundamentally a finite exact chart.
+-- Finite carrier for "every decimal digit below nine".
 data NonNineDigit : Set where
   n0 n1 n2 n3 n4 n5 n6 n7 n8 : NonNineDigit
 
@@ -119,6 +145,16 @@ allDigitsBelowNineRetainCompletedComplement n5 = refl
 allDigitsBelowNineRetainCompletedComplement n6 = refl
 allDigitsBelowNineRetainCompletedComplement n7 = refl
 allDigitsBelowNineRetainCompletedComplement n8 = refl
+
+-- Depth is arbitrary and cannot change the completed residual classification
+-- because the missing complement is a coarse/fibre coordinate, not a count of
+-- appended digits.
+nonNineRefinementRetainsResidualAtEveryFiniteDepth :
+  (digit : NonNineDigit) →
+  (depth : Nat) →
+  completedResidualClass (asDigit digit) ≡ complementRemains
+nonNineRefinementRetainsResidualAtEveryFiniteDepth digit depth =
+  allDigitsBelowNineRetainCompletedComplement digit
 
 nineAloneClosesCompletedComplement :
   completedResidualClass Decimal.d9 ≡ completedComplementClosed
