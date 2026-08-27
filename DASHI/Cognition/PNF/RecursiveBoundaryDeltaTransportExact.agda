@@ -4,13 +4,22 @@ open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat; suc; zero)
 open import Data.Empty using (⊥)
 
+import DASHI.Cognition.PNF.HierarchicalDeltaFusionExact as Hierarchical
+
 ------------------------------------------------------------------------
 -- B2 generic hierarchy specialization.
 --
--- Every hierarchy level owns a delta carrier.  Transport to the next parent
--- level preserves the fusion algebra exactly.  This is stronger than merely
--- requiring parent fusion to be associative: it states that batching before
--- transport and batching after transport are observationally identical.
+-- HierarchicalDeltaFusionExact already owns the state-level theorem that a
+-- fused execution must realize the same semantic state as sequential delta
+-- application, and that a sufficient closed-fibre summary removes any need to
+-- reopen the child carrier.  This module does not duplicate that owner.
+--
+-- Instead it adds the complementary delta-algebra law required for recursive
+-- transport: every hierarchy level owns a delta carrier, and transport to the
+-- next parent is a homomorphism of the fusion operation.  Batching before
+-- transport and batching after transport are therefore observationally
+-- identical at the delta boundary; Hierarchical.DeltaFusion separately governs
+-- equality after those deltas are applied to semantic state.
 ------------------------------------------------------------------------
 
 record RecursiveBoundaryDeltaArchitecture : Set₁ where
@@ -77,7 +86,21 @@ record RecursiveBoundaryDeltaWorkReceipt : Set where
 open RecursiveBoundaryDeltaWorkReceipt public
 
 ------------------------------------------------------------------------
--- Negative boundaries.
+-- Cross-owner boundary.
+--
+-- The existing hierarchical owner already proves that hierarchy depth alone
+-- cannot authorize reopening descendants.  Re-export that consequence here so
+-- the B2 transport contract remains explicitly attached to the established
+-- no-rescan theorem rather than inventing a parallel justification.
+------------------------------------------------------------------------
+
+recursiveHierarchyDepthDoesNotAuthorizeRescan :
+  Hierarchical.HierarchyDepthAuthorizesRescanPermission → ⊥
+recursiveHierarchyDepthDoesNotAuthorizeRescan =
+  Hierarchical.hierarchyDepthDoesNotAuthorizeRescan
+
+------------------------------------------------------------------------
+-- Negative boundaries specific to recursive transport.
 ------------------------------------------------------------------------
 
 data RecursiveTransportRequiresLowerCarrierRebuild : Set where
