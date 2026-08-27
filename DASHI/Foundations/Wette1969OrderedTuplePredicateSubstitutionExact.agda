@@ -25,15 +25,12 @@ module DASHI.Foundations.Wette1969OrderedTuplePredicateSubstitutionExact where
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
+open import Data.Fin using (zero)
 
 import DASHI.Foundations.Wette1969HistoricalSignatureExact as Signature
 import DASHI.Foundations.Wette1969SchematicSubstitutionFreshnessExact as Schematic
 
 WordTerm = Signature.WordTerm
-
-------------------------------------------------------------------------
--- Structural replacement of the distinguished predicate-mark constant.
-------------------------------------------------------------------------
 
 replacePredicateMark : WordTerm → WordTerm → WordTerm
 replacePredicateMark replacement (Signature.variableWordTerm variable) =
@@ -68,10 +65,6 @@ replacePredicateMark replacement
     (replacePredicateMark replacement left)
     (replacePredicateMark replacement right)
 
-------------------------------------------------------------------------
--- Source-ordered and reversed two-stage evaluators.
-------------------------------------------------------------------------
-
 orderedTupleThenPredicate :
   Schematic.SubstitutionEnvironment →
   WordTerm →
@@ -90,15 +83,6 @@ reversedPredicateThenTuple tupleEnvironment predicateReplacement source =
   Schematic.instantiateWordTerm tupleEnvironment
     (replacePredicateMark predicateReplacement source)
 
-------------------------------------------------------------------------
--- Exact order-sensitivity witness in the bounded structural model.
---
--- Let every schematic variable instantiate to the predicate mark and let the
--- predicate mark itself then be replaced by zero.  Starting from a schematic
--- variable, source order yields zero; reversed order leaves the newly inserted
--- predicate mark untouched by the already-completed predicate replacement.
-------------------------------------------------------------------------
-
 allPredicateMarks : Schematic.SubstitutionEnvironment
 allPredicateMarks variable =
   Signature.constantWordTerm Signature.predicateMarkKernel
@@ -107,7 +91,7 @@ zeroReplacement : WordTerm
 zeroReplacement = Signature.constantWordTerm Signature.zeroConstant
 
 sampleSource : WordTerm
-sampleSource = Signature.variableWordTerm Data.Fin.zero
+sampleSource = Signature.variableWordTerm zero
 
 orderedSampleReducesToZero :
   orderedTupleThenPredicate allPredicateMarks zeroReplacement sampleSource
@@ -131,10 +115,6 @@ orderedAndReversedCanDiffer :
   ⊥
 orderedAndReversedCanDiffer equality =
   zeroWordNotPredicateMarkWord equality
-
-------------------------------------------------------------------------
--- Certificate carrying exactly the source-ordered computation.
-------------------------------------------------------------------------
 
 record OrderedTuplePredicateSubstitutionCertificate : Set where
   constructor orderedTuplePredicateSubstitutionCertificate
