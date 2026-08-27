@@ -23,3 +23,7 @@ import DASHI.Biology.AliceBrownEpistemicGovernanceEverything
 -- does not duplicate #618's processing geometry.
 import DASHI.Biology.NeurodivergentHoldingTensionSourceBoundaryExact
 import DASHI.Biology.NeurodivergentHoldingTensionBridgeExact
+
+-- Explicit seam for the eventual #606 embodied-gate -> #618 social-ecology
+-- adapter once draft ancestry is reconciled.  No cross-draft owners are copied.
+import DASHI.Biology.EmbodiedSocialEcologyRelationalHistoryObligationExact
