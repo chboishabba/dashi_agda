@@ -14,7 +14,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; _+_)
 open import Data.List.Base using (map; _++_)
-open import Data.Product using (Σ)
+open import Data.Product using (Σ; _,_)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 import DASHI.Mathematics.NumberTheory.FiniteDependentPairEnumerationExact as Dep
@@ -39,7 +39,7 @@ pairBlockLength :
     (x : A) (values : List (B x)) →
   Reindex.listLength (Dep.pairBlock x values)
   ≡ Reindex.listLength values
-pairBlockLength x values = mapLength (λ value → x Data.Product., value) values
+pairBlockLength x values = mapLength (λ value → x , value) values
 
 dependentPairsLength :
   ∀ {A : Set} {B : A → Set}
