@@ -1,31 +1,22 @@
 module DASHI.Foundations.Wette1969Rule8211RecursorSubstitutionExact where
 
 ------------------------------------------------------------------------
--- WETTE 1969 RULE 8.2.11: SUBSTITUTION THROUGH THE RECURSOR
+-- WETTE 1969 RULE 8.2.11: PROOF-CARRYING RECURSOR SUBSTITUTION ADAPTER
 --
--- Eduard Wette, 1969, DOI 10.1007/978-3-642-86745-3_9.
---
--- Printed p.144 gives the recursor propagation rule in the form
---
---   J V W1, J V W, II W u W1 u1
---     -> II W (-1 V u) W1 (-1 V u1).
---
--- Section 1.62/1.63 says that 8.1.11/8.2.11 transfer the quantifier treatment
--- to the recursor and that confusion freedom for the recursor depends on its
--- binding regime.  Combined with the recovered B2 binder package, this rule is
--- the first historical bridge from a certified substitution in the definiens to
--- a certified substitution through the recursor itself.
+-- The literal historical rule body is owned by
+-- Wette1969SubstitutionRuleSpineExact.  This module adds only the recovered
+-- recursor-binder specialization and proof-carrying finite-context application;
+-- it deliberately does not duplicate the rule table.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
-open import Data.Vec using (Vec) renaming ([] to []ᵥ; _∷_ to _∷ᵥ_)
 import Data.Fin as Fin
 
 import DASHI.Core.ProofCarryingRuleApplicationExact as PCRA
 import DASHI.Foundations.Wette1969HistoricalSignatureExact as Signature
 import DASHI.Foundations.Wette1969JudgementConstructorsExact as Judgment
 import DASHI.Foundations.Wette1969InitialRuleTranscriptionExact as RuleBody
-import DASHI.Foundations.Wette1969RuleRevisionExact as Revision
+import DASHI.Foundations.Wette1969SubstitutionRuleSpineExact as Spine
 import DASHI.Foundations.Wette1969RecursorBindingScopeExact as Recursor
 import DASHI.Foundations.Wette1969ProofCarryingRuleApplicationExact as Historical
 import DASHI.Foundations.Wette1969FiniteDerivationContextExact as Finite
@@ -34,28 +25,10 @@ WordTerm = Signature.WordTerm
 Context = Finite.DerivationContext
 
 recursor : WordTerm → WordTerm → WordTerm
-recursor binder body =
-  Signature.binaryWordTerm Signature.recursionFunctor refl binder body
+recursor = Spine.binary Signature.recursionFunctor
 
-rule8-2-11Address : Revision.HistoricalRuleAddress
-rule8-2-11Address = Revision.historicalRuleAddress 8 2 11
-
-rule8-2-11 :
-  (binder substituend body replacement result : WordTerm) →
-  RuleBody.HistoricalRuleBody
-rule8-2-11 binder substituend body replacement result =
-  RuleBody.historicalRuleBody
-    rule8-2-11Address
-    3
-    ( Judgment.freeForSyntax binder replacement
-    ∷ᵥ Judgment.freeForSyntax binder substituend
-    ∷ᵥ Judgment.substitution substituend body replacement result
-    ∷ᵥ []ᵥ )
-    (Judgment.substitution
-      substituend
-      (recursor binder body)
-      replacement
-      (recursor binder result))
+rule8-2-11 : Spine.BinderRuleType
+rule8-2-11 = Spine.rule8-2-11
 
 rule8211ForRecoveredBinder :
   (target : Recursor.RecursorBinderTarget) →
@@ -74,8 +47,7 @@ rule8211PropagatesBodySubstitutionThroughRecursor :
   (binder substituend body replacement result : WordTerm) →
   RuleBody.conclusion
     (rule8-2-11 binder substituend body replacement result)
-  ≡ Judgment.substitution
-      substituend
+  ≡ Judgment.substitution substituend
       (recursor binder body)
       replacement
       (recursor binder result)
@@ -138,8 +110,7 @@ recursorSubstitutionAvailableAfter8211 :
   (bodySubstitution :
     Judgment.substitution substituend body replacement result
       Finite.∈Context context) →
-  Judgment.substitution
-    substituend
+  Judgment.substitution substituend
     (recursor binder body)
     replacement
     (recursor binder result)
@@ -156,18 +127,15 @@ recursorSubstitutionAvailableAfter8211
 record Wette1969Rule8211RecursorSubstitutionBoundary : Set where
   constructor wette1969Rule8211RecursorSubstitutionBoundary
   field
-    rule8211NowLiteralHistoricalBody : Bool
-    rule8211NowLiteralHistoricalBodyIsTrue :
-      rule8211NowLiteralHistoricalBody ≡ true
-
+    substitutionSpineOwnsLiteralRule8211 : Bool
+    substitutionSpineOwnsLiteralRule8211IsTrue :
+      substitutionSpineOwnsLiteralRule8211 ≡ true
     recoveredPiXBinderCanInstantiateRule8211 : Bool
     recoveredPiXBinderCanInstantiateRule8211IsTrue :
       recoveredPiXBinderCanInstantiateRule8211 ≡ true
-
     certifiedBodySubstitutionCanGenerateRecursorSubstitution : Bool
     certifiedBodySubstitutionCanGenerateRecursorSubstitutionIsTrue :
       certifiedBodySubstitutionCanGenerateRecursorSubstitution ≡ true
-
     rule8211AloneIsTotalCaptureAvoidingSubstitutionEvaluator : Bool
     rule8211AloneIsTotalCaptureAvoidingSubstitutionEvaluatorIsFalse :
       rule8211AloneIsTotalCaptureAvoidingSubstitutionEvaluator ≡ false
@@ -176,7 +144,4 @@ canonicalWette1969Rule8211RecursorSubstitutionBoundary :
   Wette1969Rule8211RecursorSubstitutionBoundary
 canonicalWette1969Rule8211RecursorSubstitutionBoundary =
   wette1969Rule8211RecursorSubstitutionBoundary
-    true refl
-    true refl
-    true refl
-    false refl
+    true refl true refl true refl false refl
