@@ -4,7 +4,6 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 
-# First preserve the full #604 predecessor contract.
 bash scripts/check_riemann_reflection_orbit_defect_2026.sh
 
 sources=(
@@ -14,6 +13,7 @@ sources=(
   DASHI/Analysis/RiemannG21AugmentedDeterminantFiniteExact.agda
   DASHI/Analysis/RiemannG21LiteralPoleRankAuditExact.agda
   DASHI/Analysis/RiemannG21PoleMainModeSeparationExact.agda
+  DASHI/Analysis/RiemannG21ConjugateHeightSourceBridgeExact.agda
   DASHI/Analysis/RiemannG21OffLinePoleQuotientTransversalityExact.agda
   DASHI/Analysis/RiemannG21PrimePairKernelExact.agda
   DASHI/Analysis/RiemannG21PoleQuotientedExteriorExact.agda
@@ -48,6 +48,10 @@ require_pattern DASHI/Analysis/RiemannG21LiteralPoleRankAuditExact.agda \
   'genericTwoPoleFourSampleCase'
 require_pattern DASHI/Analysis/RiemannG21PoleMainModeSeparationExact.agda \
   'MainModeTransportBridge'
+require_pattern DASHI/Analysis/RiemannG21ConjugateHeightSourceBridgeExact.agda \
+  'TwoHeightExteriorTarget'
+require_pattern DASHI/Analysis/RiemannG21ConjugateHeightSourceBridgeExact.agda \
+  'alphaVsZeroSensitivityImpliesAlphaVsHalfTransversalityIsFalse'
 require_pattern DASHI/Analysis/RiemannG21OffLinePoleQuotientTransversalityExact.agda \
   'OffLinePoleQuotientTransversality'
 require_pattern DASHI/Analysis/RiemannG21PrimePairKernelExact.agda \
