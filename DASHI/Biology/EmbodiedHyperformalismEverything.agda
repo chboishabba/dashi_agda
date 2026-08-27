@@ -1,0 +1,35 @@
+module DASHI.Biology.EmbodiedHyperformalismEverything where
+
+import DASHI.Biology.EmbodiedInteroceptionSourceRegistry
+import DASHI.Biology.EmbodiedHyperformalismSourceRegistry
+import DASHI.Biology.EmbodiedOptionConeInteroceptionExact
+import DASHI.Biology.MultiscaleAllostaticBodyHyperformalismExact
+import DASHI.Biology.StressPhysiologyCascadeExact
+import DASHI.Biology.ObserverRelativeReachableSubfabricExact
+import DASHI.Biology.BranchStatusAlgebraExact
+import DASHI.Biology.TwoBoundaryHyperformalismExact
+import DASHI.Biology.TwoBoundaryRepairModesExact
+import DASHI.Biology.EmbodiedBranchingHyperformalismExact
+import DASHI.Biology.EmbodiedHistoryActionFunctionalExact
+import DASHI.Biology.FeltStateSupervoxelExact
+import DASHI.Biology.BodyModulatedEffectiveTopologyExact
+import DASHI.Biology.BodyModulatedDecisionCoordinatesExact
+import DASHI.Biology.EmbodiedCausalConeFeedbackExact
+import DASHI.Biology.RelationalEmbodiedCoregulationExact
+import DASHI.Biology.IntrospectiveEmbodiedHyperformalismObservationExact
+import DASHI.Biology.IntrospectiveHyperformalismIncidenceExact
+import DASHI.Core.CubieFaceOrderHolonomyAnalogueExact
+
+-- #605 x #606 cross-pollination layer, written against merged primitive owners
+-- so the sibling draft PRs do not acquire a cyclic dependency.
+import DASHI.Biology.SymmetryResolvedEmbodiedWaveControlExact
+import DASHI.Biology.QuaternionOrbitEmbodiedReachNonfactorabilityExact
+import DASHI.Biology.TranslationInvariantCompletionAccessibilityNonfactorabilityExact
+import DASHI.Biology.EmbodiedWaveCubieHolonomyExact
+import DASHI.Biology.TwoBoundarySymmetryResolvedModeSectionExact
+import DASHI.Biology.BodyIndexedHarmonicWreathActionExact
+import DASHI.Biology.IntrospectiveSymmetryResolvedHyperformalismExact
+import DASHI.Biology.EmbodiedWaveCrossPollinationRegression
+
+import DASHI.Biology.EmbodiedDecisionPhysiologyRegression
+import DASHI.Biology.EmbodiedHyperformalismRegression

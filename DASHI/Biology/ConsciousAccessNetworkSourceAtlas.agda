@@ -26,6 +26,12 @@ data SourceRole : Set where
   psychedelicEntropyRole : SourceRole
   psychedelicRepertoireRole : SourceRole
   grokkingAnalogyRole : SourceRole
+  travelingWaveRole : SourceRole
+  spatialWaveControlRole : SourceRole
+  ephapticCouplingRole : SourceRole
+  analogInterferenceCandidateRole : SourceRole
+  anesthesiaPhaseRole : SourceRole
+  anesthesiaDynamicsRole : SourceRole
 
 record SourceRecord : Set where
   constructor sourceRecord
@@ -172,6 +178,84 @@ grokkingSource =
     "Grokking supplies an analogy for learned latent geometry becoming reusable across tasks."
     "Slow parameter-space grokking is not identified with rapid conscious access dynamics."
 
+bhattacharyaTravelingWaveSource : SourceRecord
+bhattacharyaTravelingWaveSource =
+  sourceRecord
+    "Sayak Bhattacharya; Scott L. Brincat; Mikael Lundqvist; Earl K. Miller"
+    "Traveling waves in the prefrontal cortex during working memory"
+    "PLOS Computational Biology"
+    2022
+    doiIdentifier
+    "10.1371/journal.pcbi.1009827"
+    travelingWaveRole
+    "Traveling prefrontal waves motivate a spatially moving fast-control producer."
+    "Traveling waves are not by themselves promoted to cognition, computation, or consciousness."
+
+lundqvistSpatialComputingSource : SourceRecord
+lundqvistSpatialComputingSource =
+  sourceRecord
+    "Mikael Lundqvist; Scott L. Brincat; Jonas Rose; Melissa R. Warden; Timothy J. Buschman; Earl K. Miller; Pawel Herman"
+    "Working memory control dynamics follow principles of spatial computing"
+    "Nature Communications"
+    2023
+    doiIdentifier
+    "10.1038/s41467-023-36555-4"
+    spatialWaveControlRole
+    "Beta/gamma spatial control motivates context-dependent effective topology and item accessibility."
+    "The spatial-control model is not promoted as a complete neural or consciousness theory."
+
+pinotsisEphapticSource : SourceRecord
+pinotsisEphapticSource =
+  sourceRecord
+    "Dimitris A. Pinotsis; Earl K. Miller"
+    "Ephaptic coupling can explain variability in neural activity"
+    "Cerebral Cortex"
+    2026
+    doiIdentifier
+    "10.1093/cercor/bhag098"
+    ephapticCouplingRole
+    "Mesoscale field-to-neuron coupling motivates a physical route from field state to effective excitability."
+    "Observed/modelled ephaptic influence is not promoted to a universal causal controller or clinical mechanism."
+
+millerAnalogCognitionSource : SourceRecord
+millerAnalogCognitionSource =
+  sourceRecord
+    "Earl K. Miller; Scott L. Brincat; Jefferson E. Roy"
+    "Analog Cognition and Consciousness"
+    "PsyArXiv / Journal of Neuroscience theory lineage"
+    2026
+    doiIdentifier
+    "10.31234/osf.io/z48x7_v3"
+    analogInterferenceCandidateRole
+    "Wave superposition and traveling control motivate an explicit candidate analog-computation producer beneath access semantics."
+    "The theory is not promoted to direct evidence that cortical wave interference computes cognition or establishes phenomenal consciousness."
+
+bardonAnesthesiaPhaseSource : SourceRecord
+bardonAnesthesiaPhaseSource =
+  sourceRecord
+    "Alexandra G. Bardon; Jesus J. Ballesteros; Scott L. Brincat; Jefferson E. Roy; Meredith K. Mahnke; Yumiko Ishizawa; Emery N. Brown; Earl K. Miller"
+    "Convergent effects of different anesthetics on changes in phase alignment of cortical oscillations"
+    "Cell Reports"
+    2025
+    doiIdentifier
+    "10.1016/j.celrep.2025.115685"
+    anesthesiaPhaseRole
+    "Cross-drug phase-alignment changes motivate phase organization as an empirical observation axis."
+    "A convergent phase signature does not identify a unique molecular cause or prove absence of all experience."
+
+eisenAnesthesiaDynamicsSource : SourceRecord
+eisenAnesthesiaDynamicsSource =
+  sourceRecord
+    "Adam J. Eisen; Alexandra G. Bardon; Jesus J. Ballesteros; Andre M. Bastos; Jacob A. Donoghue; Meredith K. Mahnke; Scott L. Brincat; Jefferson E. Roy; Yumiko Ishizawa; Emery N. Brown; Ila R. Fiete; Earl K. Miller"
+    "Similar destabilization of neural dynamics under different general anesthetics"
+    "Cell Reports"
+    2026
+    doiIdentifier
+    "10.1016/j.celrep.2026.117048"
+    anesthesiaDynamicsRole
+    "Cross-drug dynamical destabilization motivates a stability/recovery observation distinct from receptor identity."
+    "Dynamical convergence is not promoted to a unique cause, diagnosis, or complete theory of consciousness."
+
 canonicalConsciousAccessSources : List SourceRecord
 canonicalConsciousAccessSources =
   brooksConversationSource
@@ -184,6 +268,12 @@ canonicalConsciousAccessSources =
   ∷ entropicBrainSource
   ∷ tagliazucchiRepertoireSource
   ∷ grokkingSource
+  ∷ bhattacharyaTravelingWaveSource
+  ∷ lundqvistSpatialComputingSource
+  ∷ pinotsisEphapticSource
+  ∷ millerAnalogCognitionSource
+  ∷ bardonAnesthesiaPhaseSource
+  ∷ eisenAnesthesiaDynamicsSource
   ∷ []
 
 listCount : ∀ {A : Set} → List A → Nat
@@ -194,6 +284,6 @@ canonicalConsciousAccessSourceCount : Nat
 canonicalConsciousAccessSourceCount =
   listCount canonicalConsciousAccessSources
 
-canonicalConsciousAccessSourceCountIsTen :
-  canonicalConsciousAccessSourceCount ≡ 10
-canonicalConsciousAccessSourceCountIsTen = refl
+canonicalConsciousAccessSourceCountIsSixteen :
+  canonicalConsciousAccessSourceCount ≡ 16
+canonicalConsciousAccessSourceCountIsSixteen = refl

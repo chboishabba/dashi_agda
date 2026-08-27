@@ -28,15 +28,15 @@ sectionedProjectionCore :
   SectionedProjection Fine Coarse →
   Fibre.FibreRestrictionCore
 sectionedProjectionCore {Fine} {Coarse} projection = record
-  { Fibre.Carrier = Fine
-  ; Fibre.Surface = Coarse
-  ; Fibre.Evidence = ⊤
-  ; Fibre.project = project projection
-  ; Fibre.Fibre = λ coarse → Σ Fine (λ fine → project projection fine ≡ coarse)
-  ; Fibre.restrictsFibre = λ _ coarse →
+  { Carrier = Fine
+  ; Surface = Coarse
+  ; Evidence = ⊤
+  ; project = project projection
+  ; Fibre = λ coarse → Σ Fine (λ fine → project projection fine ≡ coarse)
+  ; restrictsFibre = λ _ coarse →
       Σ Fine (λ fine → project projection fine ≡ coarse)
-  ; Fibre.doesNotRecoverCarrier = true
-  ; Fibre.promotesTruth = false
+  ; doesNotRecoverCarrier = true
+  ; promotesTruth = false
   }
 
 record ResidualReopening
@@ -64,10 +64,6 @@ residualReopeningGivesProvenanceBearingQuotient reopening =
     (residual reopening)
     (reopen reopening)
     (reopenExact reopening)
-
-------------------------------------------------------------------------
--- Fibre-constant observable reconstruction from section representatives.
-------------------------------------------------------------------------
 
 FibreConstant :
   ∀ {Fine Coarse Value : Set} →
@@ -112,10 +108,6 @@ fibreConstantObservableReconstructsFromSection projection observable constant fi
     fine
     (representative projection (project projection fine))
     (sym (section projection (project projection fine)))
-
-------------------------------------------------------------------------
--- A section alone supplies no fine-state erasure authority.
-------------------------------------------------------------------------
 
 data SectionOnlyFineReconstructionPermission : Set where
 

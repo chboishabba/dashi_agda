@@ -1,0 +1,47 @@
+name: toe-symmetry-resolved-369
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'DASHI/Core/SymmetryResolvedFibreExact.agda'
+      - 'DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda'
+      - 'DASHI/EverythingTOESymmetryResolved369.agda'
+      - 'DASHI/Physics/Closure/Everything.agda'
+      - '.github/workflows/toe-symmetry-resolved-369.yml'
+
+concurrency:
+  group: toe-symmetry-resolved-369-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  focused-kernel:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Agda and standard library
+        uses: wenkokke/setup-agda@v2
+        with:
+          agda-version: '2.6.4.3'
+          agda-stdlib-version: '2.1'
+
+      - name: Reject trust escapes
+        run: |
+          sources=(
+            DASHI/Core/SymmetryResolvedFibreExact.agda
+            DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda
+            DASHI/EverythingTOESymmetryResolved369.agda
+          )
+          for source in "${sources[@]}"; do
+            if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|allow-unsolved-metas|TERMINATING|NO_POSITIVITY_CHECK' "$source"; then
+              echo "forbidden trust escape in $source" >&2
+              exit 1
+            fi
+          done
+
+      - name: Kernel-check TOE symmetry-resolved aggregate
+        run: |
+          agda --version
+          agda -i . -l standard-library DASHI/EverythingTOESymmetryResolved369.agda

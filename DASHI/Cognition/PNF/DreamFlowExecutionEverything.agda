@@ -8,9 +8,16 @@ import DASHI.Cognition.PNF.NumericPNFHyperfabricEverything
 import DASHI.Cognition.PNF.DeltaNativePNFDreamFlowExact
 import DASHI.Cognition.PNF.FibreSolverDeltaStreamExact
 import DASHI.Cognition.PNF.FibreNaturalDeltaTransportExact
+import DASHI.Cognition.PNF.SentenceParagraphNaturalDeltaExact
 import DASHI.Cognition.PNF.DreamFlowExecutionPlacementExact
 import DASHI.Cognition.PNF.DreamFlowRuntimeComplexityExact
 import DASHI.Cognition.PNF.FibreLocalTokenAddressExact
 import DASHI.Cognition.PNF.FibreLocalPackedStorageExact
 import DASHI.Cognition.PNF.ExecutionEngineTournamentExact
 import DASHI.Cognition.PNF.DreamFlowSprintConstitutionExact
+import DASHI.Cognition.PNF.PackedOperatorKernelSWARExact
+import DASHI.Cognition.PNF.PackedModalClosureExact
+import DASHI.Cognition.PNF.WorkloadOptimizationAdmissionExact
+import DASHI.Cognition.PNF.PackedNormativeDeltaAuthorityBridgeExact
+import DASHI.Cognition.PNF.PackedNormativeSparseAdmissionExact
+import DASHI.Cognition.PNF.PackedOperatorFamilyAdmissionExact

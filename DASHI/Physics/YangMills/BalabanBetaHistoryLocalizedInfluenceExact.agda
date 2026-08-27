@@ -1,7 +1,7 @@
 module DASHI.Physics.YangMills.BalabanBetaHistoryLocalizedInfluenceExact where
 
 ------------------------------------------------------------------------
--- ROUND82: LOCALIZED HISTORY INFLUENCE -> UNIFORM NONLINEAR BETA REMAINDER
+-- ROUND82/83: LOCALIZED IRRELEVANT MEMORY -> UNIFORM BETA CORRECTION
 --
 -- PRIMARY SOURCE / MOTIVATION
 --
@@ -12,34 +12,35 @@ module DASHI.Physics.YangMills.BalabanBetaHistoryLocalizedInfluenceExact where
 -- Communications in Mathematical Physics 109 (1987), 249--301.
 -- DOI: 10.1007/BF01215223.
 --
--- At the end of Sect. 5 Bałaban explicitly notes that beta_j depends not only
--- on g_{j-1} but on all preceding effective couplings.  This is the reason a
--- pointwise one-loop calculation is not yet a history-uniform theorem.
--- The same paper proves exponential localization of the irrelevant remainder,
--- and CMP116/119 preserve localization under the later cluster resummations.
+-- CORRECTION OF THE ROUND82 INTERPRETATION
+--
+-- At the end of Sect. 5 Bałaban explicitly says beta_j depends on all preceding
+-- coupling constants and that the dependence on g_{j-1} is important for the RG
+-- equations.  A marginal running coupling must therefore NOT be assigned an
+-- artificial exponential-forgetting law.
+--
+-- The geometric shell below is only for the IRRELEVANT / localized memory
+-- channel after the current marginal data have been held fixed.  The current-
+-- step/marginal nonlinear correction is a separate regular-remainder budget.
+--
+-- Thus the safe decomposition is schematically
+--
+--   beta_j = b_G + r_local(g_{j-1}, declared marginal data)
+--                  + r_irrelevant-memory(history),
+--
+-- and only the last term is controlled here.
 --
 -- DASHI CONTRIBUTION
 --
--- Do not bound the whole arbitrary-length coupling history by "number of past
--- scales times a local error".  Resolve the history response into shells whose
--- influence decays geometrically with distance from the current RG step.  The
--- already machine-checked geometric tail then gives a history-length-INDEPENDENT
--- remainder bound.
+-- If an irrelevant-memory difference is resolved into shells with
 --
--- If
---
---   historyDifference_j <= sum_{d=0}^{j-1} influence_d,
+--   memoryDifference <= sum influence_d,
 --   influence_d <= C gamma (1/4) 2^{-d},
 --
--- then for every j
---
---   historyDifference_j <= C gamma / 2.
---
--- Hence, if the zero-history constrained Gaussian coefficient is b>0 and
--- C gamma / 2 <= b/2, the full history-dependent coefficient remains >= b/2.
--- This isolates the real physical producer: a localized influence bound for the
--- literal Wilson/FP/Haar polarization coefficient.  It removes any dependence
--- on the number of preceding RG steps from the target estimate.
+-- then every finite irrelevant-memory correction is bounded by C gamma / 2,
+-- independently of the number of RG steps.  The theorem is generic and remains
+-- useful, but it is NOT a theorem that the marginal coupling trajectory itself
+-- forgets exponentially.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
@@ -63,6 +64,8 @@ record LocalizedBetaHistoryInfluence : Set₁ where
     majorantCoefficientExact :
       Scale.coefficient influenceMajorant ≡ coefficient * gamma
 
+    -- Backward-compatible field name.  Semantically this is an
+    -- IRRELEVANT-MEMORY difference at fixed declared marginal data.
     historyDifference : Nat → Nat → ℚ
     historyDifferenceNonnegative : ∀ start count →
       0ℚ ≤ historyDifference start count
@@ -71,6 +74,10 @@ record LocalizedBetaHistoryInfluence : Set₁ where
       ≤ Scale.scaleIncrementTail influenceMajorant start count
 
 open LocalizedBetaHistoryInfluence public
+
+irrelevantMemoryDifference :
+  LocalizedBetaHistoryInfluence → Nat → Nat → ℚ
+irrelevantMemoryDifference = historyDifference
 
 historyDifferenceUniform :
   (dataSet : LocalizedBetaHistoryInfluence) → ∀ start count →
@@ -102,64 +109,71 @@ historyDifferenceFromPresentScale dataSet count =
       (Geo.halfPower 0))
     (historyDifferenceUniform dataSet 0 count)
 
-record PositiveGaussianAgainstHistory
+record PositiveReferenceAgainstIrrelevantMemory
     (history : LocalizedBetaHistoryInfluence) : Set₁ where
   field
-    gaussianCoefficient : ℚ
+    -- This reference may already include the declared current/marginal local
+    -- remainder.  It need not be the zero-history Gaussian coefficient.
+    referenceCoefficient : ℚ
     fullBeta : Nat → ℚ
 
-    gaussianCoefficientNonnegative : 0ℚ ≤ gaussianCoefficient
+    referenceCoefficientNonnegative : 0ℚ ≤ referenceCoefficient
 
-    -- Division-free form of C gamma / 2 <= b / 2:
-    historyBudgetFitsHalfGaussian :
+    memoryBudgetFitsHalfReference :
       (coefficient history * gamma history) * Geo.half
-      + gaussianCoefficient * Geo.half
-      ≤ gaussianCoefficient
+      + referenceCoefficient * Geo.half
+      ≤ referenceCoefficient
 
-    betaAboveGaussianMinusHistory : ∀ count →
-      gaussianCoefficient
+    betaAboveReferenceMinusMemory : ∀ count →
+      referenceCoefficient
       ≤ fullBeta count + historyDifference history 0 count
 
-open PositiveGaussianAgainstHistory public
+open PositiveReferenceAgainstIrrelevantMemory public
 
-fullBetaKeepsHalfGaussian :
+fullBetaKeepsHalfReference :
   ∀ {history}
-    (dataSet : PositiveGaussianAgainstHistory history) count →
-  gaussianCoefficient dataSet * Geo.half ≤ fullBeta dataSet count
-fullBetaKeepsHalfGaussian {history} dataSet count =
+    (dataSet : PositiveReferenceAgainstIrrelevantMemory history) count →
+  referenceCoefficient dataSet * Geo.half ≤ fullBeta dataSet count
+fullBetaKeepsHalfReference {history} dataSet count =
   let
     h = historyDifference history 0 count
     hBound = historyDifferenceFromPresentScale history count
-    budget = historyBudgetFitsHalfGaussian dataSet
+    budget = memoryBudgetFitsHalfReference dataSet
 
-    halfPlusHBelowGaussian :
-      gaussianCoefficient dataSet * Geo.half + h
-      ≤ gaussianCoefficient dataSet
-    halfPlusHBelowGaussian =
+    halfPlusHBelowReference :
+      referenceCoefficient dataSet * Geo.half + h
+      ≤ referenceCoefficient dataSet
+    halfPlusHBelowReference =
       ℚP.≤-trans
         (ℚP.+-mono-≤ ℚP.≤-refl hBound)
         (subst
-          (λ left → left ≤ gaussianCoefficient dataSet)
+          (λ left → left ≤ referenceCoefficient dataSet)
           (ℚRing.solve-∀
-            (gaussianCoefficient dataSet)
+            (referenceCoefficient dataSet)
             (coefficient history * gamma history)
             Geo.half)
           budget)
 
     chained :
-      gaussianCoefficient dataSet * Geo.half + h
+      referenceCoefficient dataSet * Geo.half + h
       ≤ fullBeta dataSet count + h
-    chained = ℚP.≤-trans halfPlusHBelowGaussian
-      (betaAboveGaussianMinusHistory dataSet count)
+    chained = ℚP.≤-trans halfPlusHBelowReference
+      (betaAboveReferenceMinusMemory dataSet count)
   in
   ℚP.+-cancelʳ-≤ h chained
 
 localizedBetaHistoryInfluenceCompilerLevel : ProofLevel
 localizedBetaHistoryInfluenceCompilerLevel = machineChecked
 
--- New physical target after this compiler: prove that changing a coupling d
--- scales back changes the literal polarization/beta coefficient by a summable
--- localized shell amount.  The bound must be uniform in cutoff, volume, scale,
--- compact-simple group package, and admissible preceding history.
+localizedBetaIrrelevantMemoryCompilerLevel : ProofLevel
+localizedBetaIrrelevantMemoryCompilerLevel = machineChecked
+
+-- Correct physical target: prove a summable influence only for the localized
+-- irrelevant/polymer memory at fixed declared marginal data.  The local
+-- current-coupling/Bishop remainder is budgeted separately.
+literalBetaIrrelevantMemoryInfluenceLevel : ProofLevel
+literalBetaIrrelevantMemoryInfluenceLevel = conditional
+
+-- Compatibility name retained, with corrected semantics above.
 literalBetaLocalizedHistoryInfluenceLevel : ProofLevel
 literalBetaLocalizedHistoryInfluenceLevel = conditional

@@ -16,9 +16,9 @@ open import DASHI.Cognition.PNF.ComplexityArithmetic using (_≤ᶜ_)
 ------------------------------------------------------------------------
 
 data IdentityLayer : Set where
-  semanticIdentityLayer
-  authorityIdentityLayer
-  fibreAddressLayer
+  semanticIdentityLayer : IdentityLayer
+  authorityIdentityLayer : IdentityLayer
+  fibreAddressLayer : IdentityLayer
   solverPathLayer : IdentityLayer
 
 record FibreAddress : Set where
@@ -114,7 +114,7 @@ record IdentityCoordinates : Set where
   field
     semanticIdentity : Nat
     authorityIdentity : Nat
-    fibreAddress : FibreAddress
+    fibreExecutionAddress : FibreAddress
     solverPath : BranchPathAddress
 
 open IdentityCoordinates public

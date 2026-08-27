@@ -1,0 +1,8 @@
+module DASHI.Physics.Closure.NSTriadKNClayFrontierRound114Validation where
+
+-- Focused kernel root for the Round114 antisymmetry-defect decomposition.
+
+import DASHI.Physics.Closure.NSTriadKNClayFrontierRound113Validation
+import DASHI.Physics.Closure.NSTriadKNExternalSharedModeAntisymmetryDefectRound114Exact
+import DASHI.Physics.Closure.NSTriadKNClayFrontierRound114Exact
+import DASHI.Papers.NavierStokes.TheoremInterfaceRound114Exact

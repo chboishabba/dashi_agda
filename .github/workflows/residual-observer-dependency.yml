@@ -1,0 +1,104 @@
+name: residual-observer-dependency
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'DASHI/Pressure.agda'
+      - 'DASHI/Interop/ITIRJoinBridge.agda'
+      - 'DASHI/Interop/SensibLawPressureHealingBridgeExact.agda'
+      - 'DASHI/Core/ResidualObserverDependencyExact.agda'
+      - 'DASHI/Core/ResidualObserverDependencyRegression.agda'
+      - 'DASHI/Core/ResidualObserverQuadraticControlExact.agda'
+      - 'DASHI/Core/FutureLanguageQuadraticControlExact.agda'
+      - 'DASHI/Core/PressureQuadraticHealingExact.agda'
+      - 'DASHI/Biology/NeuralResidualDependencyBridgeExact.agda'
+      - 'DASHI/Biology/NeuralResidualFutureLanguageBridgeExact.agda'
+      - 'DASHI/Biology/NeuralResidualDependencyValidation.agda'
+      - 'DASHI/Mathematics/LinearAlgebra/FiniteRationalQuadraticDominationExact.agda'
+      - 'DASHI/Mathematics/LinearAlgebra/AffineSpectralIndependenceQuadraticExact.agda'
+      - 'DASHI/Mathematics/LinearAlgebra/RationalLDLQuadraticDominationBridgeExact.agda'
+      - 'DASHI/Physics/Common/SeparatingProbeFamilyExact.agda'
+      - 'DASHI/Biology/Everything.agda'
+      - 'DASHI/EverythingTopDownObservationCalculus.agda'
+      - '.github/workflows/residual-observer-dependency.yml'
+
+concurrency:
+  group: residual-observer-dependency-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  focused-kernel:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Agda and standard library
+        uses: wenkokke/setup-agda@v2
+        with:
+          agda-version: '2.6.4.3'
+          agda-stdlib-version: '2.1'
+
+      - name: Reject trust escapes in dependency tranche
+        run: |
+          sources=(
+            DASHI/Pressure.agda
+            DASHI/Interop/ITIRJoinBridge.agda
+            DASHI/Interop/SensibLawPressureHealingBridgeExact.agda
+            DASHI/Core/ResidualObserverDependencyExact.agda
+            DASHI/Core/ResidualObserverDependencyRegression.agda
+            DASHI/Core/ResidualObserverQuadraticControlExact.agda
+            DASHI/Core/FutureLanguageQuadraticControlExact.agda
+            DASHI/Core/PressureQuadraticHealingExact.agda
+            DASHI/Biology/NeuralResidualDependencyBridgeExact.agda
+            DASHI/Biology/NeuralResidualFutureLanguageBridgeExact.agda
+            DASHI/Biology/NeuralResidualDependencyValidation.agda
+            DASHI/Mathematics/LinearAlgebra/FiniteRationalQuadraticDominationExact.agda
+            DASHI/Mathematics/LinearAlgebra/AffineSpectralIndependenceQuadraticExact.agda
+            DASHI/Mathematics/LinearAlgebra/RationalLDLQuadraticDominationBridgeExact.agda
+            DASHI/Physics/Common/SeparatingProbeFamilyExact.agda
+          )
+          for source in "${sources[@]}"; do
+            if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|allow-unsolved-metas|TERMINATING|NO_POSITIVITY_CHECK' "$source"; then
+              echo "forbidden trust escape in $source" >&2
+              exit 1
+            fi
+          done
+
+      - name: Kernel-check pressure and ITIR monotonicity
+        run: |
+          agda --version
+          agda -i . -l standard-library DASHI/Pressure.agda
+          agda -i . -l standard-library DASHI/Interop/ITIRJoinBridge.agda
+          agda -i . -l standard-library DASHI/Interop/SensibLawPressureHealingBridgeExact.agda
+
+      - name: Kernel-check focused residual dependency regression
+        run: |
+          agda -i . -l standard-library \
+            DASHI/Core/ResidualObserverDependencyRegression.agda
+
+      - name: Kernel-check shared quadratic domination and LDL bridge
+        run: |
+          agda -i . -l standard-library \
+            DASHI/Mathematics/LinearAlgebra/FiniteRationalQuadraticDominationExact.agda
+          agda -i . -l standard-library \
+            DASHI/Mathematics/LinearAlgebra/AffineSpectralIndependenceQuadraticExact.agda
+          agda -i . -l standard-library \
+            DASHI/Mathematics/LinearAlgebra/RationalLDLQuadraticDominationBridgeExact.agda
+          agda -i . -l standard-library \
+            DASHI/Core/ResidualObserverQuadraticControlExact.agda
+          agda -i . -l standard-library \
+            DASHI/Core/FutureLanguageQuadraticControlExact.agda
+          agda -i . -l standard-library \
+            DASHI/Core/PressureQuadraticHealingExact.agda
+
+      - name: Kernel-check neural residual dependency validation root
+        run: |
+          agda -i . -l standard-library \
+            DASHI/Biology/NeuralResidualDependencyValidation.agda
+
+      - name: Kernel-check top-down aggregate
+        run: |
+          agda -i . -l standard-library \
+            DASHI/EverythingTopDownObservationCalculus.agda

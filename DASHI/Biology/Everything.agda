@@ -54,6 +54,12 @@ import DASHI.Biology.StudentVoiceEpistemicAgencyBridge
 import DASHI.Biology.StudentIdentifiedSupportStrategiesBridge
 import DASHI.Biology.EcologyOfDataHyperfabricBridge
 import DASHI.Biology.ParentAllyshipMultiObserverBridge
+import DASHI.Biology.ParentalFearIndependentMobilityExact
+import DASHI.Biology.ParentalFearSourceAttributionExact
+import DASHI.Biology.ParentalFearObserverRefinementExact
+import DASHI.Biology.ParentalFearConsumerSufficiencyBridgeExact
+import DASHI.Biology.ParentalFearDynamicQuotientBridgeExact
+import DASHI.Biology.ParentalFearIntegratedFormalismExact
 import DASHI.Biology.InterpretiveCodingSystem
 import DASHI.Biology.CrossPaperDialecticalDevelopment
 import DASHI.Biology.AliceBrownCorpusLoom
@@ -174,3 +180,21 @@ import DASHI.Biology.TriadicVisualBraidCrossPollinationExact
 import DASHI.Biology.TernaryHallTransitionCoalitionExact
 import DASHI.Biology.ConsciousAccessRound6CrossSourceBridge
 import DASHI.Biology.ConsciousAccessRound6CrossPollinationRegression
+-- Residual dependency cross-pollination: coarse neural measurement, local
+-- separating probes, effective topology, and capability-preserving decoupling.
+import DASHI.Biology.NeuralResidualDependencyBridgeExact
+
+------------------------------------------------------------------------
+-- Conscious-access round seven: Aristotle theorem return and structural gates.
+
+import DASHI.Biology.TernaryCanonicalOrientationExact
+import DASHI.Biology.TernaryFixedTransverseFiniteExact
+import DASHI.Biology.TernaryRotationReflectionSeparationExact
+import DASHI.Biology.NondegenerateObserverAdmissionExact
+import DASHI.Biology.NeuralFixedTransverseObserverBridgeExact
+import DASHI.Biology.CyclotomicPhaseAmplitudeBoundaryExact
+import DASHI.Biology.EqualCardinalityStructureBoundaryExact
+import DASHI.Biology.OggTernaryEquivariantLabellingNoGoExact
+import DASHI.Biology.OperatorStructureAdmissionBoundaryExact
+import DASHI.Biology.ConsciousAccessRound7AristotleSourceBridge
+import DASHI.Biology.ConsciousAccessRound7AristotleRegression
