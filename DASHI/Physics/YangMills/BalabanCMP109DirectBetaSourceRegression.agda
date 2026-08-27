@@ -31,6 +31,8 @@ module DASHI.Physics.YangMills.BalabanCMP109DirectBetaSourceRegression where
 -- cross-prover success is not an Agda kernel receipt.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Nat using (Nat)
+open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 open import DASHI.Physics.YangMills.BalabanCMP109SourceTranscriptionExact
 open import DASHI.Physics.YangMills.BalabanCMP109DirectBetaSourceCutsetExact
 open import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound82FiveAnalyticLeafExact
