@@ -96,6 +96,7 @@ canonicalMathlibHyperbolicReceipts =
 record MathlibHyperbolicBridgeTarget : Set₁ where
   field
     Real : Set
+    zero : Real
     Positive : Real → Set
     StrictGreater : Real → Real → Set
     sinh cosh tanh : Real → Real
@@ -107,7 +108,7 @@ record MathlibHyperbolicBridgeTarget : Set₁ where
 
     tanhPositive :
       (x : Real) → Positive x →
-      StrictGreater (tanh x) x → Set
+      StrictGreater (tanh x) zero
 
     bridgeReading : String
 
