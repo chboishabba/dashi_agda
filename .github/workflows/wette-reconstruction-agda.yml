@@ -8,12 +8,15 @@ on:
       - 'DASHI/Core/FormalizationRecoveryGeometryExact.agda'
       - 'DASHI/Core/SourceAcquisitionGeometryExact.agda'
       - 'DASHI/Core/DeductionIndexedInterpretationExact.agda'
+      - 'DASHI/Core/FormalSystemRevisionGeometryExact.agda'
+      - 'DASHI/Core/RulePremiseDependencyGeometryExact.agda'
       - 'DASHI/Core/Everything.agda'
       - 'DASHI/Foundations/Wette*.agda'
       - 'DASHI/Foundations/Wette/**'
       - 'DASHI/Foundations/Everything.agda'
       - 'scripts/check_wette_reconstruction.sh'
       - 'scripts/check_wette_source_acquisition.sh'
+      - 'scripts/check_wette_critical_rules.sh'
       - '.github/workflows/wette-reconstruction-agda.yml'
   workflow_dispatch:
 
@@ -39,4 +42,5 @@ jobs:
       - name: Run focused Wette source and typecheck audit
         run: |
           nix develop .# --command bash scripts/check_wette_source_acquisition.sh
+          nix develop .# --command bash scripts/check_wette_critical_rules.sh
           nix develop .# --command bash scripts/check_wette_reconstruction.sh
