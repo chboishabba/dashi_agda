@@ -170,6 +170,127 @@ backgroundFluctuationSecondTerms (factor ∷ factors) =
               ++ map (factorValue factor Jet.*q_)
                    (backgroundFluctuationSecondTerms factors)))))))
 
+------------------------------------------------------------------------
+-- Exact finite-sum identities for all derivative levels used by the mixed jet.
+------------------------------------------------------------------------
+
+sumBackgroundTermsExact : ∀ factors →
+  Jet.sumQuaternion (backgroundTerms factors) ≡ orderedBackgroundProduct factors
+sumBackgroundTermsExact [] = refl
+sumBackgroundTermsExact (factor ∷ factors)
+  rewrite Jet.sumQuaternionMapLeftMultiply
+      (factorValue factor) (backgroundTerms factors)
+        | sumBackgroundTermsExact factors = refl
+
+sumFluctuationTermsExact : ∀ factors →
+  Jet.sumQuaternion (fluctuationTerms factors) ≡ orderedFluctuationProduct factors
+sumFluctuationTermsExact [] = refl
+sumFluctuationTermsExact (factor ∷ factors)
+  rewrite Jet.sumQuaternionMapLeftMultiply
+      (factorValue factor) (fluctuationTerms factors)
+        | sumFluctuationTermsExact factors = refl
+
+sumFluctuationSecondTermsExact : ∀ factors →
+  Jet.sumQuaternion (fluctuationSecondTerms factors)
+  ≡ orderedFluctuationSecondProduct factors
+sumFluctuationSecondTermsExact [] = refl
+sumFluctuationSecondTermsExact (factor ∷ factors)
+  rewrite Jet.sumQuaternionAppend
+      (map (factorFluctuation factor Jet.*q_) (fluctuationTerms factors))
+      (map (factorFluctuation factor Jet.*q_) (fluctuationTerms factors)
+        ++ map (factorValue factor Jet.*q_) (fluctuationSecondTerms factors))
+        | Jet.sumQuaternionAppend
+            (map (factorFluctuation factor Jet.*q_) (fluctuationTerms factors))
+            (map (factorValue factor Jet.*q_) (fluctuationSecondTerms factors))
+        | Jet.sumQuaternionMapLeftMultiply
+            (factorFluctuation factor) (fluctuationTerms factors)
+        | Jet.sumQuaternionMapLeftMultiply
+            (factorValue factor) (fluctuationSecondTerms factors)
+        | sumFluctuationTermsExact factors
+        | sumFluctuationSecondTermsExact factors = refl
+
+sumBackgroundFluctuationTermsExact : ∀ factors →
+  Jet.sumQuaternion (backgroundFluctuationTerms factors)
+  ≡ orderedBackgroundFluctuationProduct factors
+sumBackgroundFluctuationTermsExact [] = refl
+sumBackgroundFluctuationTermsExact (factor ∷ factors)
+  rewrite Jet.sumQuaternionAppend
+      (map (factorBackground factor Jet.*q_) (fluctuationTerms factors))
+      (map (factorFluctuation factor Jet.*q_) (backgroundTerms factors)
+        ++ map (factorValue factor Jet.*q_) (backgroundFluctuationTerms factors))
+        | Jet.sumQuaternionAppend
+            (map (factorFluctuation factor Jet.*q_) (backgroundTerms factors))
+            (map (factorValue factor Jet.*q_) (backgroundFluctuationTerms factors))
+        | Jet.sumQuaternionMapLeftMultiply
+            (factorBackground factor) (fluctuationTerms factors)
+        | Jet.sumQuaternionMapLeftMultiply
+            (factorFluctuation factor) (backgroundTerms factors)
+        | Jet.sumQuaternionMapLeftMultiply
+            (factorValue factor) (backgroundFluctuationTerms factors)
+        | sumFluctuationTermsExact factors
+        | sumBackgroundTermsExact factors
+        | sumBackgroundFluctuationTermsExact factors = refl
+
+sumBackgroundFluctuationSecondTermsExact : ∀ factors →
+  Jet.sumQuaternion (backgroundFluctuationSecondTerms factors)
+  ≡ orderedBackgroundFluctuationSecondProduct factors
+sumBackgroundFluctuationSecondTermsExact [] = refl
+sumBackgroundFluctuationSecondTermsExact (factor ∷ factors)
+  rewrite Jet.sumQuaternionAppend
+      (map (factorFluctuationSecond factor Jet.*q_) (backgroundTerms factors))
+      (map (factorBackgroundFluctuation factor Jet.*q_) (fluctuationTerms factors)
+        ++ (map (factorBackgroundFluctuation factor Jet.*q_) (fluctuationTerms factors)
+          ++ (map (factorFluctuation factor Jet.*q_) (backgroundFluctuationTerms factors)
+            ++ (map (factorFluctuation factor Jet.*q_) (backgroundFluctuationTerms factors)
+              ++ (map (factorBackground factor Jet.*q_) (fluctuationSecondTerms factors)
+                ++ map (factorValue factor Jet.*q_)
+                     (backgroundFluctuationSecondTerms factors))))))
+        | Jet.sumQuaternionAppend
+            (map (factorBackgroundFluctuation factor Jet.*q_) (fluctuationTerms factors))
+            (map (factorBackgroundFluctuation factor Jet.*q_) (fluctuationTerms factors)
+              ++ (map (factorFluctuation factor Jet.*q_) (backgroundFluctuationTerms factors)
+                ++ (map (factorFluctuation factor Jet.*q_) (backgroundFluctuationTerms factors)
+                  ++ (map (factorBackground factor Jet.*q_) (fluctuationSecondTerms factors)
+                    ++ map (factorValue factor Jet.*q_)
+                         (backgroundFluctuationSecondTerms factors)))))
+        | Jet.sumQuaternionAppend
+            (map (factorBackgroundFluctuation factor Jet.*q_) (fluctuationTerms factors))
+            (map (factorFluctuation factor Jet.*q_) (backgroundFluctuationTerms factors)
+              ++ (map (factorFluctuation factor Jet.*q_) (backgroundFluctuationTerms factors)
+                ++ (map (factorBackground factor Jet.*q_) (fluctuationSecondTerms factors)
+                  ++ map (factorValue factor Jet.*q_)
+                       (backgroundFluctuationSecondTerms factors))))
+        | Jet.sumQuaternionAppend
+            (map (factorFluctuation factor Jet.*q_) (backgroundFluctuationTerms factors))
+            (map (factorFluctuation factor Jet.*q_) (backgroundFluctuationTerms factors)
+              ++ (map (factorBackground factor Jet.*q_) (fluctuationSecondTerms factors)
+                ++ map (factorValue factor Jet.*q_)
+                     (backgroundFluctuationSecondTerms factors)))
+        | Jet.sumQuaternionAppend
+            (map (factorFluctuation factor Jet.*q_) (backgroundFluctuationTerms factors))
+            (map (factorBackground factor Jet.*q_) (fluctuationSecondTerms factors)
+              ++ map (factorValue factor Jet.*q_)
+                   (backgroundFluctuationSecondTerms factors))
+        | Jet.sumQuaternionAppend
+            (map (factorBackground factor Jet.*q_) (fluctuationSecondTerms factors))
+            (map (factorValue factor Jet.*q_)
+              (backgroundFluctuationSecondTerms factors))
+        | Jet.sumQuaternionMapLeftMultiply
+            (factorFluctuationSecond factor) (backgroundTerms factors)
+        | Jet.sumQuaternionMapLeftMultiply
+            (factorBackgroundFluctuation factor) (fluctuationTerms factors)
+        | Jet.sumQuaternionMapLeftMultiply
+            (factorFluctuation factor) (backgroundFluctuationTerms factors)
+        | Jet.sumQuaternionMapLeftMultiply
+            (factorBackground factor) (fluctuationSecondTerms factors)
+        | Jet.sumQuaternionMapLeftMultiply
+            (factorValue factor) (backgroundFluctuationSecondTerms factors)
+        | sumBackgroundTermsExact factors
+        | sumFluctuationTermsExact factors
+        | sumBackgroundFluctuationTermsExact factors
+        | sumFluctuationSecondTermsExact factors
+        | sumBackgroundFluctuationSecondTermsExact factors = refl
+
 fourFactorJets :
   QuaternionBackgroundQuadraticFactorJet →
   QuaternionBackgroundQuadraticFactorJet →
@@ -183,6 +304,17 @@ fourFactorBackgroundFluctuationSecondAtomCountExact :
   length (backgroundFluctuationSecondTerms
     (fourFactorJets first second third fourth)) ≡ 64
 fourFactorBackgroundFluctuationSecondAtomCountExact first second third fourth = refl
+
+fourFactorBackgroundFluctuationSecondIs64AtomSum :
+  ∀ first second third fourth →
+  Jet.sumQuaternion
+    (backgroundFluctuationSecondTerms
+      (fourFactorJets first second third fourth))
+  ≡ orderedBackgroundFluctuationSecondProduct
+      (fourFactorJets first second third fourth)
+fourFactorBackgroundFluctuationSecondIs64AtomSum first second third fourth =
+  sumBackgroundFluctuationSecondTermsExact
+    (fourFactorJets first second third fourth)
 
 ------------------------------------------------------------------------
 -- Wilson scalar numerator: S_p = 1 - q0(U_p), so every nonconstant variation
@@ -201,6 +333,35 @@ wilsonBackgroundFluctuationSecondAtomSum factors =
     (map Jet.wilsonAtomContribution
       (backgroundFluctuationSecondTerms factors))
 
+wilsonBackgroundFluctuationSecondIsAtomSum : ∀ factors →
+  wilsonBackgroundFluctuationSecondNumerator factors
+  ≡ wilsonBackgroundFluctuationSecondAtomSum factors
+wilsonBackgroundFluctuationSecondIsAtomSum factors =
+  trans
+    (cong (λ q → - Jet.q0 q)
+      (sym (sumBackgroundFluctuationSecondTermsExact factors)))
+    (trans
+      (cong -_
+        (Jet.scalarPartSumQuaternion
+          (backgroundFluctuationSecondTerms factors)))
+      (trans
+        (Jet.negativeFiniteSum
+          (map Jet.q0 (backgroundFluctuationSecondTerms factors)))
+        (cong Jet.sumRational
+          (Jet.mapNegatedScalarParts
+            (backgroundFluctuationSecondTerms factors)))))
+
+fourLinkWilsonBackgroundFluctuationSecondIs64ScalarAtoms :
+  ∀ first second third fourth →
+  wilsonBackgroundFluctuationSecondNumerator
+    (fourFactorJets first second third fourth)
+  ≡ wilsonBackgroundFluctuationSecondAtomSum
+      (fourFactorJets first second third fourth)
+fourLinkWilsonBackgroundFluctuationSecondIs64ScalarAtoms
+    first second third fourth =
+  wilsonBackgroundFluctuationSecondIsAtomSum
+    (fourFactorJets first second third fourth)
+
 ------------------------------------------------------------------------
 -- Proof levels / source boundary
 ------------------------------------------------------------------------
@@ -211,11 +372,11 @@ wilsonBackgroundQuadraticProductJetLevel = machineChecked
 wilsonBackgroundQuadraticFourFactor64AtomLevel : ProofLevel
 wilsonBackgroundQuadraticFourFactor64AtomLevel = machineChecked
 
--- Still open: prove the finite atom sum equals the recursive mixed product and
--- instantiate every physical right-exponential link factor from the literal
--- background/fluctuation coordinates.  These are intentionally distinct seams.
 wilsonBackgroundQuadraticAtomSumIdentityLevel : ProofLevel
-wilsonBackgroundQuadraticAtomSumIdentityLevel = conditional
+wilsonBackgroundQuadraticAtomSumIdentityLevel = machineChecked
 
+-- Still open: instantiate every physical right-exponential link factor from the
+-- literal background/fluctuation coordinates and identify this mixed jet with
+-- D_background of the existing physical Wilson Hessian.
 wilsonPhysicalBackgroundQuadraticLinkJetLevel : ProofLevel
 wilsonPhysicalBackgroundQuadraticLinkJetLevel = conditional
