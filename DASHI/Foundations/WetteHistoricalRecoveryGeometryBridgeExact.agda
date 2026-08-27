@@ -63,11 +63,17 @@ schematicSubstitutionAndFreshnessEvaluatorFragmentRecovered = tt
 orderedTupleThenPredicateStructuralEvaluatorRecovered : ⊤
 orderedTupleThenPredicateStructuralEvaluatorRecovered = tt
 
+objectVariableAndPredicateMarkWordConstructorsRecovered : ⊤
+objectVariableAndPredicateMarkWordConstructorsRecovered = tt
+
 quantifierCaptureCriterionRecovered : ⊤
 quantifierCaptureCriterionRecovered = tt
 
-recursorBindingScopePartitionRecovered : ⊤
-recursorBindingScopePartitionRecovered = tt
+recursorBindingScopeAndExactTargetRecovered : ⊤
+recursorBindingScopeAndExactTargetRecovered = tt
+
+dependentTwoStagePairedIIRecovered : ⊤
+dependentTwoStagePairedIIRecovered = tt
 
 criticalLate1974FormalObjectsStillUnrecovered : ⊤
 criticalLate1974FormalObjectsStillUnrecovered = tt
@@ -141,6 +147,10 @@ record WetteHistoricalRecoveryGeometryBoundary : Set where
     structuralOrderSensitivityWitnessNowRecovered : Bool
     structuralOrderSensitivityWitnessNowRecoveredIsTrue : structuralOrderSensitivityWitnessNowRecovered ≡ true
 
+    objectVariableAndPredicateMarkConstructorsNowRecovered : Bool
+    objectVariableAndPredicateMarkConstructorsNowRecoveredIsTrue :
+      objectVariableAndPredicateMarkConstructorsNowRecovered ≡ true
+
     sourceQuantifierCaptureCriterionNowRecovered : Bool
     sourceQuantifierCaptureCriterionNowRecoveredIsTrue : sourceQuantifierCaptureCriterionNowRecovered ≡ true
 
@@ -148,19 +158,31 @@ record WetteHistoricalRecoveryGeometryBoundary : Set where
     recursorBindingScopePartitionNowRecoveredIsTrue : recursorBindingScopePartitionNowRecovered ≡ true
 
     exactRecursorBinderTargetParserNowRecovered : Bool
-    exactRecursorBinderTargetParserNowRecoveredIsFalse : exactRecursorBinderTargetParserNowRecovered ≡ false
+    exactRecursorBinderTargetParserNowRecoveredIsTrue : exactRecursorBinderTargetParserNowRecovered ≡ true
 
-    fullHistoricalTuplePredicateSubstitutionNowRecovered : Bool
-    fullHistoricalTuplePredicateSubstitutionNowRecoveredIsFalse : fullHistoricalTuplePredicateSubstitutionNowRecovered ≡ false
+    dependentTwoStagePairedIIJudgementNowRecovered : Bool
+    dependentTwoStagePairedIIJudgementNowRecoveredIsTrue :
+      dependentTwoStagePairedIIJudgementNowRecovered ≡ true
 
-    bindingAwareCaptureAvoidanceNowRecovered : Bool
-    bindingAwareCaptureAvoidanceNowRecoveredIsFalse : bindingAwareCaptureAvoidanceNowRecovered ≡ false
+    secondStageCaptureCheckedOnActualIntermediate : Bool
+    secondStageCaptureCheckedOnActualIntermediateIsTrue :
+      secondStageCaptureCheckedOnActualIntermediate ≡ true
+
+    fullHistoricalTuplePredicateSubstitutionEvaluatorNowRecovered : Bool
+    fullHistoricalTuplePredicateSubstitutionEvaluatorNowRecoveredIsFalse :
+      fullHistoricalTuplePredicateSubstitutionEvaluatorNowRecovered ≡ false
+
+    fullRecursorAwareCaptureAvoidingEvaluatorNowRecovered : Bool
+    fullRecursorAwareCaptureAvoidingEvaluatorNowRecoveredIsFalse :
+      fullRecursorAwareCaptureAvoidingEvaluatorNowRecovered ≡ false
 
     primaryInspectionEqualsCompleteHistoricalTranscription : Bool
-    primaryInspectionEqualsCompleteHistoricalTranscriptionIsFalse : primaryInspectionEqualsCompleteHistoricalTranscription ≡ false
+    primaryInspectionEqualsCompleteHistoricalTranscriptionIsFalse :
+      primaryInspectionEqualsCompleteHistoricalTranscription ≡ false
 
     partialExtractionEqualsCriticalFormalObjectRecovery : Bool
-    partialExtractionEqualsCriticalFormalObjectRecoveryIsFalse : partialExtractionEqualsCriticalFormalObjectRecovery ≡ false
+    partialExtractionEqualsCriticalFormalObjectRecoveryIsFalse :
+      partialExtractionEqualsCriticalFormalObjectRecovery ≡ false
 
     transcriptionAndReconstructionKeptSeparate : Bool
     transcriptionAndReconstructionKeptSeparateIsTrue : transcriptionAndReconstructionKeptSeparate ≡ true
@@ -189,7 +211,10 @@ canonicalWetteHistoricalRecoveryGeometryBoundary =
     true refl
     true refl
     true refl
-    false refl
+    true refl
+    true refl
+    true refl
+    true refl
     false refl
     false refl
     false refl
