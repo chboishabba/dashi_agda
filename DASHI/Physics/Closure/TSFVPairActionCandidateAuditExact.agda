@@ -55,6 +55,17 @@ pairCandidateDiagonalSeparates =
   CrossBand.ChemistryRightLimitsQuotientCrossBandLaw.I×BandSensitivityWitness
     Next.canonicalCandidate256QuotientLaw
 
+-- Important no-go: the concrete Candidate256 I× is pair-valued, but it is
+-- endpoint-separable.  It is the sum of one scalar contribution from each
+-- endpoint rather than a nonseparable interaction term.
+pairCandidateEndpointSeparable :
+  (left right : Surrogate.Candidate256QuotientClass) →
+  Action.localAction pairLocalActionSystem left right
+  ≡
+  CrossBand.canonicalCrossBandCoupling left
+  + CrossBand.canonicalCrossBandCoupling right
+pairCandidateEndpointSeparable left right = refl
+
 pairCandidateTrace : List (Action.Step pairLocalActionSystem)
 pairCandidateTrace =
   (candidateLeft , candidateRight)
@@ -79,7 +90,8 @@ v3CandidateIsDestinationOnly sourceLeft sourceRight destination = refl
 data ActionCandidateAxis : Set where
   finiteTraceAdditivityAxis : ActionCandidateAxis
   tInvarianceAxis : ActionCandidateAxis
-  twoEndpointSensitivityAxis : ActionCandidateAxis
+  twoEndpointCarrierAxis : ActionCandidateAxis
+  nonseparableTransitionGeometryAxis : ActionCandidateAxis
   witnessSymmetryAxis : ActionCandidateAxis
   nontrivialSeparationAxis : ActionCandidateAxis
   physicalCalibrationAxis : ActionCandidateAxis
@@ -87,6 +99,7 @@ data ActionCandidateAxis : Set where
 data CandidateAssessment : Set where
   provedHere : CandidateAssessment
   provedElsewhere : CandidateAssessment
+  obstructedHere : CandidateAssessment
   missing : CandidateAssessment
   notApplicable : CandidateAssessment
 
@@ -94,9 +107,12 @@ record CandidateComparison : Set where
   field
     v3Additivity : CandidateAssessment
     v3TInvariance : CandidateAssessment
-    v3TwoEndpointSensitivity : CandidateAssessment
+    v3TwoEndpointCarrier : CandidateAssessment
+    v3NonseparableTransitionGeometry : CandidateAssessment
 
     pairAdditivity : CandidateAssessment
+    pairTwoEndpointCarrier : CandidateAssessment
+    pairNonseparableTransitionGeometry : CandidateAssessment
     pairWitnessSymmetry : CandidateAssessment
     pairNontrivialSeparation : CandidateAssessment
     pairTInvariance : CandidateAssessment
@@ -111,14 +127,17 @@ canonicalCandidateComparison =
   record
     { v3Additivity = provedElsewhere
     ; v3TInvariance = provedElsewhere
-    ; v3TwoEndpointSensitivity = missing
+    ; v3TwoEndpointCarrier = missing
+    ; v3NonseparableTransitionGeometry = missing
     ; pairAdditivity = provedHere
+    ; pairTwoEndpointCarrier = provedHere
+    ; pairNonseparableTransitionGeometry = obstructedHere
     ; pairWitnessSymmetry = provedHere
     ; pairNontrivialSeparation = provedHere
     ; pairTInvariance = missing
     ; physicalCalibration = missing
     ; comparisonReading =
-        "The v3 candidate has exact T-invariance but is destination-only.  The cross-band candidate is genuinely pair-valued, additive over finite traces, symmetric at the canonical mixed witness, and nontrivial on canonical diagonal witnesses, but a Candidate256 T-invariance theorem and physical action calibration are not yet supplied."
+        "The v3 candidate has exact T-invariance but is destination-only.  The cross-band candidate is pair-valued, additive, witness-symmetric and nontrivial, but its concrete I× decomposes as an endpoint sum, so it still lacks a genuine nonseparable transition term; global Candidate256 T-invariance and physical action calibration also remain missing."
     }
 
 pairTraceAdditivityAvailable :
@@ -136,6 +155,10 @@ record PairActionCandidateBoundary : Set where
     pairObservableAlreadyPhysicalActionIsFalse :
       pairObservableAlreadyPhysicalAction ≡ false
 
+    pairValuedMeansNonseparableInteraction : Bool
+    pairValuedMeansNonseparableInteractionIsFalse :
+      pairValuedMeansNonseparableInteraction ≡ false
+
     witnessSymmetryProvesGlobalTimeReversalInvariance : Bool
     witnessSymmetryProvesGlobalTimeReversalInvarianceIsFalse :
       witnessSymmetryProvesGlobalTimeReversalInvariance ≡ false
@@ -147,6 +170,7 @@ record PairActionCandidateBoundary : Set where
 canonicalPairActionCandidateBoundary : PairActionCandidateBoundary
 canonicalPairActionCandidateBoundary =
   pairActionCandidateBoundary
+    false refl
     false refl
     false refl
     false refl
