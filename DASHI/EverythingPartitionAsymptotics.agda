@@ -4,10 +4,10 @@ module DASHI.EverythingPartitionAsymptotics where
 -- Focused typecheck/import surface for the Hardy--Ramanujan / Erdos / Newman
 -- partition lane.  The finite layer now includes generic graded pointing,
 -- proof-free exact key enumeration, strict deletion-fibre instantiation,
--- independent admissible residual normal form, exact residual permutation,
--- classical r=k*v residual enumeration/counting/decomposition,
--- factor-pair -> sigma1 regrouping, and the rank-one Fock occupation-grading
--- bridge.  Bishop analysis remains downstream.
+-- independent admissible residual normal form, exact residual permutations,
+-- classical r=k*v residual enumeration/counting/completeness/uniqueness,
+-- arbitrary-n factor-pair and sigma1 recurrences, and the rank-one Fock
+-- occupation-grading bridge.  Bishop analysis remains downstream.
 ------------------------------------------------------------------------
 
 import DASHI.Mathematics.NumberTheory.FiniteWeightedReindexExact
@@ -43,10 +43,16 @@ import DASHI.Mathematics.NumberTheory.PartitionErdosFiniteKeySystemExact
 import DASHI.Mathematics.NumberTheory.PartitionErdosAdmissibleResidualEnumerationExact
 import DASHI.Mathematics.NumberTheory.PartitionErdosResidualKeyPermutationExact
 import DASHI.Mathematics.NumberTheory.PartitionErdosAdmissibleResidualIdentityExact
+import DASHI.Mathematics.NumberTheory.PartitionErdosResidualAdmissibilityCompleteExact
+import DASHI.Mathematics.NumberTheory.PartitionErdosAdmissibleResidualDecompositionExact
 import DASHI.Mathematics.NumberTheory.PartitionErdosClassicalFactorResidualEnumerationExact
 import DASHI.Mathematics.NumberTheory.PartitionErdosClassicalFactorResidualCardinalityExact
 import DASHI.Mathematics.NumberTheory.PartitionErdosClassicalFactorResidualSoundExact
-import DASHI.Mathematics.NumberTheory.PartitionErdosAdmissibleResidualDecompositionExact
+import DASHI.Mathematics.NumberTheory.PartitionErdosClassicalFactorResidualCompletenessExact
+import DASHI.Mathematics.NumberTheory.PartitionErdosClassicalAdmissibleMembershipExact
+import DASHI.Mathematics.NumberTheory.PartitionErdosClassicalFactorResidualUniqueExact
+import DASHI.Mathematics.NumberTheory.PartitionErdosClassicalFactorResidualPermutationExact
+import DASHI.Mathematics.NumberTheory.PartitionErdosDivisorSumRecurrenceExact
 import DASHI.Mathematics.NumberTheory.PartitionErdosClassicalResidualExpansionExact
 import DASHI.Mathematics.NumberTheory.PartitionDivisorSumRecurrencePrefixExact
 import DASHI.Mathematics.NumberTheory.PartitionDivisorSumRegroupingExact
