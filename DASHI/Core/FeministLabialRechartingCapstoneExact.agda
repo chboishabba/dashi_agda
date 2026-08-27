@@ -14,6 +14,7 @@ open import DASHI.Core.Prelude
 
 import DASHI.Core.FeministRechartingSourceBridgeExact as Feminist
 import DASHI.Core.ObserverRefinementLatticeExact as Observer
+import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Core.TernaryRoleCarrierExact as Ternary
 import DASHI.Core.IrigarayLabialRelationalCarrierExact as Irigaray
 import DASHI.Core.DifferenceWithoutHierarchyExact as Difference
@@ -85,8 +86,7 @@ differenceNeedNotCreateHierarchy =
   Difference.canonicalDifferenceWithEqualStanding
 
 representabilityDoesNotRecoverSubjectPosition :
-  DASHI.Core.IntersectionalNonFactorability.FactorsThrough
-    Subject.categoryVisibility Subject.subjectPosition → ⊥
+  INF.FactorsThrough Subject.categoryVisibility Subject.subjectPosition → ⊥
 representabilityDoesNotRecoverSubjectPosition =
   Subject.categoryVisibilityCannotRecoverSubjectPosition
 
