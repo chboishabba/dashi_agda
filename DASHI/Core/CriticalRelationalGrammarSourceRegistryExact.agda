@@ -65,6 +65,16 @@ lacanOuPire = source-reference
   "psychoanalytic seminar"
   "later source context for the One/count material; not identified with formulas of sexuation"
 
+lacanEncore : SourceReference
+lacanEncore = source-reference
+  "Jacques Lacan; ed. Jacques-Alain Miller; trans. Bruce Fink"
+  "On Feminine Sexuality, the Limits of Love and Knowledge: The Seminar of Jacques Lacan, Book XX, Encore 1972-1973"
+  "W. W. Norton & Company"
+  1999
+  "ISBN 9780393319163; no DOI asserted"
+  "psychoanalytic seminar / English edition"
+  "source context for the formulas of sexuation and not-all/exception distinctions; kept separate from the Frege-derived ternary count"
+
 irigarayThisSex : SourceReference
 irigarayThisSex = source-reference
   "Luce Irigaray; trans. Catherine Porter with Carolyn Burke"
@@ -124,6 +134,16 @@ bhabhaLocation = source-reference
   "ISBN 9780415016353"
   "postcolonial theory monograph"
   "source context for hybridity, interstice and Third Space; DASHI generative-direction graph is a bounded interpretation"
+
+trinhWomanNativeOther : SourceReference
+trinhWomanNativeOther = source-reference
+  "Trinh T. Minh-ha"
+  "Woman, Native, Other: Writing Postcoloniality and Feminism"
+  "Indiana University Press"
+  1989
+  "ISBN 9780253205032; JSTOR stable j.ctt16xwccc"
+  "postcolonial feminist theory monograph"
+  "source context for linguistic exclusion, female-identity enclosure, subject-in-the-making and ethnicity/womanhood duality; no exhaustive three-role ontology inferred from the title"
 
 badiouBeingEvent : SourceReference
 badiouBeingEvent = source-reference
