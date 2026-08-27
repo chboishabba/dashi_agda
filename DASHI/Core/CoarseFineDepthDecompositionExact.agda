@@ -40,25 +40,6 @@ record CoarseFineDecomposition : Set where
 
 open CoarseFineDecomposition public
 
-swapComponents : CoarseFineDecomposition → CoarseFineDecomposition
-swapComponents decomposition =
-  coarse-fine-decomposition
-    (relativeFineComponent decomposition)
-    (coarseComponent decomposition)
-    (absoluteComponent decomposition)
-    (swapProof decomposition)
-  where
-  swapProof :
-    (d : CoarseFineDecomposition) →
-    absoluteComponent d
-    ≡ relativeFineComponent d + coarseComponent d
-  swapProof (coarse-fine-decomposition 0 fine absolute proof) = proof
-  swapProof (coarse-fine-decomposition (Nat.suc coarse) fine absolute proof) =
-    trans proof (+-comm (Nat.suc coarse) fine)
-
-  open import Data.Nat.Properties using (+-comm)
-  open import Agda.Builtin.Nat as Nat using (Nat; zero; suc)
-
 record CoarseFineDecompositionBoundary : Set where
   constructor coarse-fine-decomposition-boundary
   field
