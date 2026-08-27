@@ -23,6 +23,13 @@ import DASHI.Reasoning.StructuralMetaphorSourceRegistryExact as Sources
 -- The source is Robin Wall Kimmerer, Braiding Sweetgrass (2013), ISBN
 -- 9781571313560.  No braid-group, factorisation, cognitive-neuroscience, or
 -- quantitative learning theorem is attributed to Kimmerer.
+--
+-- A second boundary is now explicit: relational tension is not assumed to be
+-- universally recoverable.  Nusrat Fatima (2026), DOI 10.46809/jcsll.v7i2.430,
+-- motivates the methodological warning that a structural frame should be
+-- withdrawn when the target no longer supports the relation/recoverability the
+-- frame presupposes.  Fatima is not used as evidence that Kimmerer is doing
+-- topology.
 ------------------------------------------------------------------------
 
 data BraidFeature : Set where
@@ -57,11 +64,6 @@ heldTensionBecomesSalient = refl
 
 ------------------------------------------------------------------------
 -- Calibration gains discrimination.
---
--- The initial coarse frame sees only 'more than one strand'.  The calibrated
--- frame can distinguish a merely juxtaposed collection from a reciprocal,
--- tension-held relation.  This is a finite observer-refinement witness only;
--- it is not asserted as a psychological measurement model of readers.
 ------------------------------------------------------------------------
 
 data ToyBraidSituation : Set where
@@ -97,6 +99,9 @@ calibratedMeaningDoesNotDescendThroughInitialReading =
 kimmererSource : Sources.SourceReference
 kimmererSource = Sources.kimmerer2013
 
+fatimaMethodLimitSource : Sources.SourceReference
+fatimaMethodLimitSource = Sources.fatima2026
+
 narrativeCalibrationReading : String
 narrativeCalibrationReading =
   "DASHI interpretation: the surrounding stories can calibrate which relational features of the braid frame the reader should carry forward, allowing the braid to become a compact reusable representation rather than a bare picture of several strands."
@@ -120,6 +125,18 @@ record KimmererNarrativeCalibrationBoundary : Set where
     braidMeansAllSourcePredicatesTransferIsFalse :
       braidMeansAllSourcePredicatesTransfer ≡ false
 
+    relationalTensionAlwaysRecoverable : Bool
+    relationalTensionAlwaysRecoverableIsFalse :
+      relationalTensionAlwaysRecoverable ≡ false
+
+    braidFrameMayFailWhenTargetRelationIsRuptured : Bool
+    braidFrameMayFailWhenTargetRelationIsRupturedIsTrue :
+      braidFrameMayFailWhenTargetRelationIsRuptured ≡ true
+
+    fatimaLiteraryTopologyProvesKimmererTopology : Bool
+    fatimaLiteraryTopologyProvesKimmererTopologyIsFalse :
+      fatimaLiteraryTopologyProvesKimmererTopology ≡ false
+
     dashiCalibrationModelIsInterpretiveExtension : Bool
     dashiCalibrationModelIsInterpretiveExtensionIsTrue :
       dashiCalibrationModelIsInterpretiveExtension ≡ true
@@ -131,5 +148,8 @@ canonicalKimmererNarrativeCalibrationBoundary =
     false refl
     false refl
     false refl
+    false refl
+    false refl
+    true refl
     false refl
     true refl
