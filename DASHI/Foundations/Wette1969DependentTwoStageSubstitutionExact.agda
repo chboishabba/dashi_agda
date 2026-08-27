@@ -42,10 +42,6 @@ juxtapose : WordTerm → WordTerm → WordTerm
 juxtapose left right =
   Signature.binaryWordTerm Signature.juxtapositionFunctor refl left right
 
-------------------------------------------------------------------------
--- First stage: V2 -> V3 in the source/definiens.
-------------------------------------------------------------------------
-
 record TupleSubstitutionStage : Set where
   constructor tupleSubstitutionStage
   field
@@ -65,10 +61,6 @@ firstStageII stage =
     (source stage)
     (newTuple stage)
     (intermediate stage)
-
-------------------------------------------------------------------------
--- Second stage: W2 -> recursive predicate in the actual first-stage result.
-------------------------------------------------------------------------
 
 record PredicateSubstitutionStage (first : TupleSubstitutionStage) : Set where
   constructor predicateSubstitutionStage
@@ -103,15 +95,8 @@ record DependentTwoStageSubstitution : Set where
 
 open DependentTwoStageSubstitution public
 
-------------------------------------------------------------------------
--- Wette's special paired four-place II surface.
---
--- Rule 8.2.8 and p.148 pair the substituends as u(V2,W2) and the substitutes
--- as u(V3,R).  The p.148 convention interprets this four-place II by performing
--- the first component substitution and then the second.  Section 1.632 fixes
--- these components for 9.3.24/25 exactly as V2->V3 followed by W2->R.
-------------------------------------------------------------------------
-
+-- Wette p.148 pairs the substituends and substitutes with Juxtor.  Rule 8.2.8
+-- then packages the two individually checked stages into one four-place II.
 pairedSubstituend : DependentTwoStageSubstitution → WordTerm
 pairedSubstituend stages =
   juxtapose
@@ -131,10 +116,6 @@ pairedII stages =
     (source (first stages))
     (pairedReplacement stages)
     (result (second stages))
-
-------------------------------------------------------------------------
--- Literal source-level rule 8.2.8 composition schema.
-------------------------------------------------------------------------
 
 rule8-2-8Address : Revision.HistoricalRuleAddress
 rule8-2-8Address = Revision.historicalRuleAddress 8 2 8
@@ -178,10 +159,6 @@ pairedIIHasHistoricalSubstitutionRelator :
   (stages : DependentTwoStageSubstitution) →
   Signature.relator (pairedII stages) ≡ Signature.substitutionRelator
 pairedIIHasHistoricalSubstitutionRelator stages = refl
-
-------------------------------------------------------------------------
--- Boundary.
-------------------------------------------------------------------------
 
 record Wette1969DependentTwoStageSubstitutionBoundary : Set where
   constructor wette1969DependentTwoStageSubstitutionBoundary
