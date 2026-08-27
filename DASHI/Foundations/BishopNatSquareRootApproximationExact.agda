@@ -18,6 +18,7 @@ module DASHI.Foundations.BishopNatSquareRootApproximationExact where
 -- remaining finite rational/Nat construction.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Integer.Base using (+_)
 open import Data.Nat.Base using (NonZero)
