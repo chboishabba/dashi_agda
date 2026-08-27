@@ -153,8 +153,8 @@ record WetteHistoricalRecoveryGeometryBoundary : Set where
     fullHistoricalTuplePredicateSubstitutionNowRecovered : Bool
     fullHistoricalTuplePredicateSubstitutionNowRecoveredIsFalse : fullHistoricalTuplePredicateSubstitutionNowRecovered ≡ false
 
-    bindingAwareCaptureAvoidingEvaluatorNowRecovered : Bool
-    bindingAwareCaptureAvoidingEvaluatorNowRecoveredIsFalse : bindingAwareCaptureAvoidingEvaluatorNowRecovered ≡ false
+    bindingAwareCaptureAvoidanceNowRecovered : Bool
+    bindingAwareCaptureAvoidanceNowRecoveredIsFalse : bindingAwareCaptureAvoidanceNowRecovered ≡ false
 
     primaryInspectionEqualsCompleteHistoricalTranscription : Bool
     primaryInspectionEqualsCompleteHistoricalTranscriptionIsFalse : primaryInspectionEqualsCompleteHistoricalTranscription ≡ false
