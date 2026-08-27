@@ -5,8 +5,11 @@ on:
     paths:
       - 'DASHI/Governance/Fanning2022SupplementaryDataAuthorityExact.agda'
       - 'DASHI/Governance/Fanning2022LiteralDataToFigureCommutationExact.agda'
+      - 'DASHI/Governance/Fanning2022LiteralSituatedQualifiedUseBridgeExact.agda'
+      - 'DASHI/Governance/Fanning2022LiteralSituatedQualifiedUseRegression.agda'
       - 'DASHI/Governance/Fanning2022DataRealizationExact.agda'
       - 'DASHI/Governance/Fanning2022NormalizationExact.agda'
+      - 'DASHI/Governance/SafeJustSituatedClaimAuthorityBridgeExact.agda'
       - 'DASHI/Governance/Everything.agda'
       - '.github/workflows/fanning-literal-data-contract.yml'
   workflow_dispatch:
@@ -31,6 +34,8 @@ jobs:
           files=(
             DASHI/Governance/Fanning2022SupplementaryDataAuthorityExact.agda
             DASHI/Governance/Fanning2022LiteralDataToFigureCommutationExact.agda
+            DASHI/Governance/Fanning2022LiteralSituatedQualifiedUseBridgeExact.agda
+            DASHI/Governance/Fanning2022LiteralSituatedQualifiedUseRegression.agda
           )
           if grep -nE '\b(postulate|{-# OPTIONS --allow-unsolved-metas #-}|sorry|admit)\b' "${files[@]}"; then
             echo 'Forbidden trust-boundary token found in Fanning literal-data contract.' >&2
@@ -50,4 +55,5 @@ jobs:
           scripts/run_agda29_parallel_check.sh \
             DASHI/Governance/Fanning2022SupplementaryDataAuthorityExact.agda \
             DASHI/Governance/Fanning2022LiteralDataToFigureCommutationExact.agda \
+            DASHI/Governance/Fanning2022LiteralSituatedQualifiedUseRegression.agda \
             DASHI/Governance/Everything.agda
