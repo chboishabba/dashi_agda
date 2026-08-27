@@ -23,6 +23,7 @@ FILES=(
   DASHI/Foundations/Wette1969CriticalRuleDependencyExact.agda
   DASHI/Foundations/Wette1969SubstitutionOrderExact.agda
   DASHI/Foundations/Wette1969CriticalPremiseTypingExact.agda
+  DASHI/Foundations/Wette1969Rule9324x25PremiseTemplateExact.agda
   DASHI/Foundations/Wette1969CompletenessInterpretationBridgeExact.agda
   DASHI/Foundations/Wette1970PrimaryTextExtractionExact.agda
   DASHI/Foundations/WetteHistoricalRecoveryFrontierExact.agda
@@ -72,6 +73,9 @@ grep -q 'rule9324x25OrderRequirementRecoveredIsTrue' DASHI/Foundations/Wette1969
 grep -q 'sourceOrderRequirementAlreadySuppliesHistoricalSubstitutionEvaluatorIsFalse' DASHI/Foundations/Wette1969SubstitutionOrderExact.agda
 grep -q 'rule9324x25FourPremiseKindsRecoveredIsTrue' DASHI/Foundations/Wette1969CriticalPremiseTypingExact.agda
 grep -q 'judgementKindRecoveryAlreadySuppliesExactFormulaArgumentsIsFalse' DASHI/Foundations/Wette1969CriticalPremiseTypingExact.agda
+grep -q 'fourPremiseTemplateNowConstructibleIsTrue' DASHI/Foundations/Wette1969Rule9324x25PremiseTemplateExact.agda
+grep -q 'freshTupleSharingAcrossPremises2To4RecoveredIsTrue' DASHI/Foundations/Wette1969Rule9324x25PremiseTemplateExact.agda
+grep -q 'parameterizedTemplateIsAlreadyLiteralOCRPerfectTranscriptionIsFalse' DASHI/Foundations/Wette1969Rule9324x25PremiseTemplateExact.agda
 grep -q 'doi:10.1007/978-3-642-86745-3_9' DASHI/Foundations/WetteHistoricalSourceAtlasExact.agda
 grep -q 'doi:10.2307/2272630' DASHI/Foundations/WetteHistoricalSourceAtlasExact.agda
 grep -q 'unverified1974DOIFabricatedIsFalse' DASHI/Foundations/WetteHistoricalSourceAtlasExact.agda
@@ -116,6 +120,7 @@ scripts/run_agda29_parallel_check.sh \
   DASHI/Foundations/Wette1969CriticalRuleDependencyExact.agda \
   DASHI/Foundations/Wette1969SubstitutionOrderExact.agda \
   DASHI/Foundations/Wette1969CriticalPremiseTypingExact.agda \
+  DASHI/Foundations/Wette1969Rule9324x25PremiseTemplateExact.agda \
   DASHI/Foundations/Wette1969CompletenessInterpretationBridgeExact.agda \
   DASHI/Foundations/Wette1970PrimaryTextExtractionExact.agda \
   DASHI/Foundations/WetteHistoricalRecoveryFrontierExact.agda \
