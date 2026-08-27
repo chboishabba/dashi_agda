@@ -1,7 +1,7 @@
 module DASHI.Cognition.PNF.SetwiseSentenceTrancheAdmissionExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero)
 open import Data.Empty using (⊥)
 
@@ -98,12 +98,12 @@ singlePartitionUsesSameWorkerKernel :
   directWorkerKernelSameAsParallelWorkerKernel
     canonicalSinglePartitionDirectExecutionStatus
     ≡ true
-singlePartitionUsesSameWorkerKernel = _≡_.refl
+singlePartitionUsesSameWorkerKernel = refl
 
 singlePartitionDoesNotRequireProcessPool :
   processPoolRequired canonicalSinglePartitionDirectExecutionStatus
     ≡ false
-singlePartitionDoesNotRequireProcessPool = _≡_.refl
+singlePartitionDoesNotRequireProcessPool = refl
 
 ------------------------------------------------------------------------
 -- Negative boundaries.
