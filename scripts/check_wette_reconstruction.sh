@@ -9,10 +9,13 @@ FILES=(
   DASHI/Core/FormalizationRecoverySourceRegistryExact.agda
   DASHI/Core/FormalizationRecoveryGeometryExact.agda
   DASHI/Core/DeductionIndexedInterpretationExact.agda
+  DASHI/Core/FormalSystemRevisionGeometryExact.agda
   DASHI/Foundations/WetteHistoricalSourceAtlasExact.agda
   DASHI/Foundations/WettePrimaryTextAcquisitionPlanExact.agda
   DASHI/Foundations/Wette1969PrimaryTextExtractionExact.agda
   DASHI/Foundations/Wette1969HistoricalSignatureExact.agda
+  DASHI/Foundations/Wette1969RuleRevisionExact.agda
+  DASHI/Foundations/Wette1969InitialRuleTranscriptionExact.agda
   DASHI/Foundations/Wette1969CompletenessInterpretationBridgeExact.agda
   DASHI/Foundations/Wette1970PrimaryTextExtractionExact.agda
   DASHI/Foundations/WetteHistoricalRecoveryFrontierExact.agda
@@ -53,6 +56,8 @@ grep -q 'comparisonAxesAreDefinitionallyTotallyOrderedIsFalse' DASHI/Core/Formal
 grep -q 'interpretationSpecificationIsAlreadyPointwiseProofCertificateIsFalse' DASHI/Core/DeductionIndexedInterpretationExact.agda
 grep -q 'pointwiseProofFamilyIsDefinitionallyUniformInternalProofIsFalse' DASHI/Core/DeductionIndexedInterpretationExact.agda
 grep -q 'formulaOnlyTranslationIsDefinitionallyEnoughForEveryDeductionIndexedInterpretationIsFalse' DASHI/Core/DeductionIndexedInterpretationExact.agda
+grep -q 'historicalRevisionIsNotDefinitionallyDerivationalEquivalenceIsTrue' DASHI/Core/FormalSystemRevisionGeometryExact.agda
+grep -q 'matchingRuleCountsWouldNotProveSemanticEquivalenceIsTrue' DASHI/Core/FormalSystemRevisionGeometryExact.agda
 grep -q 'arxiv:2508.00459v2' DASHI/Core/FormalizationRecoverySourceRegistryExact.agda
 grep -q 'doi:10.3929/ethz-b-000387100' DASHI/Core/FormalizationRecoverySourceRegistryExact.agda
 grep -q 'arxiv:1807.05641' DASHI/Core/FormalizationRecoverySourceRegistryExact.agda
@@ -66,8 +71,15 @@ grep -q 'unverified1974DOIFabricatedIsFalse' DASHI/Foundations/WetteHistoricalSo
 grep -q 'DOI: 10.1007/978-3-642-86745-3_9' DASHI/Foundations/Wette1969PrimaryTextExtractionExact.agda
 grep -q 'historicalRuleSetFullyTranscribedIntoAgdaIsFalse' DASHI/Foundations/Wette1969PrimaryTextExtractionExact.agda
 grep -q 'hauptsatz2SubstitutionDomainIsDeductionDependentIsTrue' DASHI/Foundations/Wette1969PrimaryTextExtractionExact.agda
+grep -q 'wordTermsSeparatedFromConcreteWordsIsTrue' DASHI/Foundations/Wette1969HistoricalSignatureExact.agda
+grep -q 'formulaRelatorArityEnforcedByTypeIsTrue' DASHI/Foundations/Wette1969HistoricalSignatureExact.agda
 grep -q 'modifiedP193SignatureUsedAsCanonicalAuditSurfaceIsTrue' DASHI/Foundations/Wette1969HistoricalSignatureExact.agda
 grep -q 'signatureTranscriptionAlreadySuppliesAll97RuleBodiesIsFalse' DASHI/Foundations/Wette1969HistoricalSignatureExact.agda
+grep -q 'p193RevisionTranscribedIsTrue' DASHI/Foundations/Wette1969RuleRevisionExact.agda
+grep -q 'finalRuleCountDerivedFromSourceAccountingIsTrue' DASHI/Foundations/Wette1969RuleRevisionExact.agda
+grep -q 'countBalanceAlreadyProvesRevisionEquivalenceIsFalse' DASHI/Foundations/Wette1969RuleRevisionExact.agda
+grep -q 'firstRuleBodiesTranscribedIsTrue' DASHI/Foundations/Wette1969InitialRuleTranscriptionExact.agda
+grep -q 'twoRulesAlreadyConstituteCompleteHistoricalMachineIsFalse' DASHI/Foundations/Wette1969InitialRuleTranscriptionExact.agda
 grep -q 'hauptsatz2IsDefinitionallyFormulaOnlyTranslationIsFalse' DASHI/Foundations/Wette1969CompletenessInterpretationBridgeExact.agda
 grep -q 'sourceClaimIsAlreadyPointwiseProofCertificateIsFalse' DASHI/Foundations/Wette1969CompletenessInterpretationBridgeExact.agda
 grep -q 'DOI: 10.1111/j.1746-8361.1970.tb01221.x' DASHI/Foundations/Wette1970PrimaryTextExtractionExact.agda
@@ -98,10 +110,13 @@ scripts/run_agda29_parallel_check.sh \
   DASHI/Core/FormalizationRecoverySourceRegistryExact.agda \
   DASHI/Core/FormalizationRecoveryGeometryExact.agda \
   DASHI/Core/DeductionIndexedInterpretationExact.agda \
+  DASHI/Core/FormalSystemRevisionGeometryExact.agda \
   DASHI/Foundations/WetteHistoricalSourceAtlasExact.agda \
   DASHI/Foundations/WettePrimaryTextAcquisitionPlanExact.agda \
   DASHI/Foundations/Wette1969PrimaryTextExtractionExact.agda \
   DASHI/Foundations/Wette1969HistoricalSignatureExact.agda \
+  DASHI/Foundations/Wette1969RuleRevisionExact.agda \
+  DASHI/Foundations/Wette1969InitialRuleTranscriptionExact.agda \
   DASHI/Foundations/Wette1969CompletenessInterpretationBridgeExact.agda \
   DASHI/Foundations/Wette1970PrimaryTextExtractionExact.agda \
   DASHI/Foundations/WetteHistoricalRecoveryFrontierExact.agda \
