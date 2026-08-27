@@ -144,7 +144,7 @@ record TSFVBidirectionalCausticBridge : Set₁ where
 
     bidiBoundary : Bidi.BidirectionalAdmissibilityBoundary
     causticBoundary : Caustic.ProjectionCausticBoundary
-    stationaryBoundary : Stationary.StationaryCoherenceBoundary
+    stationaryBoundary : Stationary.StationaryCoherenceNonPromotionBoundary
 
     quantumObservationSurface : Quantum.QuantumPathFibreObservationQuotient
     feynmanKelvinSurface : FeynmanKelvin.FeynmanKelvinTrajectoryBridge
@@ -183,7 +183,7 @@ canonicalTSFVBidirectionalCausticBridge =
     ; projectionSurface = historyTrajectoryProjectionCaustic
     ; bidiBoundary = Bidi.canonicalBidirectionalAdmissibilityBoundary
     ; causticBoundary = Caustic.canonicalProjectionCausticBoundary
-    ; stationaryBoundary = Stationary.canonicalStationaryCoherenceBoundary
+    ; stationaryBoundary = Stationary.canonicalStationaryCoherenceNonPromotionBoundary
     ; quantumObservationSurface =
         Quantum.canonicalQuantumPathFibreObservationQuotient
     ; feynmanKelvinSurface =
