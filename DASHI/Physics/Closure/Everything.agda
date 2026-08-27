@@ -32,3 +32,4 @@ import DASHI.Physics.Closure.TOESymmetryResolved369BridgeExact
 -- source-bounded experimental support.
 import DASHI.Physics.Closure.FeynmanKelvinTrajectoryCrossPollinationExact
 import DASHI.Physics.Closure.ApertureWakeModeSelectionBridgeExact
+import DASHI.Physics.Closure.TSFVBidirectionalCausticBridgeExact
