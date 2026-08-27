@@ -63,11 +63,12 @@ premise4SubstitutionCertificate {parameters} certificate =
 ------------------------------------------------------------------------
 -- Stronger source-ordered premise-4 bundle.
 --
--- Section 1.632 requires tuple substitution first and predicate-mark
--- substitution second.  This record carries exactly that computation against
--- the recovered premise-4 source/result words.  It is strictly stronger than
--- the earlier schematic-only certificate, but it still does not pretend to be
--- the complete binding-aware historical substitution relation.
+-- The complete historical premise is now represented by its four independent II
+-- arguments in Rule9324x25PremiseTemplateExact.  This older evaluator-level
+-- bundle computes source -> result under the recovered stage order, but does not
+-- by itself prove that its environment encodes the paired substituend and paired
+-- replacement words.  That exact historical weld is owned by
+-- Wette1969DependentTwoStageSubstitutionExact and the proof-carrying 8.2.8 bridge.
 ------------------------------------------------------------------------
 
 record Rule9324x25OrderedComputationalSideConditions
@@ -131,6 +132,10 @@ record Wette1969Rule9324x25ComputationalBoundary : Set where
     premise4SourceOrderedTuplePredicateFragmentNowCertifiableIsTrue :
       premise4SourceOrderedTuplePredicateFragmentNowCertifiable ≡ true
 
+    evaluatorCertificateAloneIdentifiesWholePairedIIArguments : Bool
+    evaluatorCertificateAloneIdentifiesWholePairedIIArgumentsIsFalse :
+      evaluatorCertificateAloneIdentifiesWholePairedIIArguments ≡ false
+
     computationalCertificateIsAlreadyHistoricalDerivabilityProof : Bool
     computationalCertificateIsAlreadyHistoricalDerivabilityProofIsFalse :
       computationalCertificateIsAlreadyHistoricalDerivabilityProof ≡ false
@@ -146,5 +151,6 @@ canonicalWette1969Rule9324x25ComputationalBoundary =
     true refl
     true refl
     true refl
+    false refl
     false refl
     false refl
