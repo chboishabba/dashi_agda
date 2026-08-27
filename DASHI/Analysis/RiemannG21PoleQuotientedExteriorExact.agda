@@ -8,24 +8,19 @@ import DASHI.Analysis.RiemannHermitianTopDownAssemblyExact as G1G4
 import DASHI.Analysis.PoleQuotientedExteriorDeskTestExact as RankOneExterior
 import DASHI.Analysis.PoleRankTwoQuotientedExteriorDeskTestExact as RankTwoExterior
 import DASHI.Analysis.RiemannG21LiteralPoleRankAuditExact as PoleAudit
+import DASHI.Analysis.RiemannG21PoleMainModeSeparationExact as MainMode
+import DASHI.Analysis.RiemannG21OffLinePoleQuotientTransversalityExact as ZeroTrans
 import DASHI.Analysis.RiemannG21PrimePairKernelExact as Pair
 import DASHI.Analysis.RiemannG21TwoByTwoMixedObstructionExact as Mixed2
 import DASHI.Analysis.RiemannG21AugmentedDeterminantFiniteExact as Det3
 
-------------------------------------------------------------------------
--- Literal source audit changed the default geometry.
---
--- Zeta23/ExplicitFormula.lean owns two pole evaluations h(i/2)+h(-i/2).
--- Therefore nuisance rank one is an optimization requiring an additional
--- common-profile theorem.  The robust default is rank <= 2, hence four
--- samples are needed to retain a two-dimensional residual quotient.
-------------------------------------------------------------------------
-
 data G21Obligation : Set where
   literalTwoPoleAudit : G21Obligation
+  poleToPrimeMainModeTransport : G21Obligation
   optionalRankOnePoleReduction : G21Obligation
   rankTwoFourSamplePoleQuotientIdentity : G21Obligation
-  offLineZeroRankTwoInPoleQuotient : G21Obligation
+  sourceOffLineHyperbolicPair : G21Obligation
+  offLinePoleQuotientTransversality : G21Obligation
   literalTwoChannelExplicitFormulaExpansion : G21Obligation
   literalPrimePairDiagonalZero : G21Obligation
   literalPrimePairRelationalNonseparability : G21Obligation
@@ -51,22 +46,32 @@ open G21ObligationEntry public
 poleAuditEntry : G21ObligationEntry
 poleAuditEntry =
   g21ObligationEntry literalTwoPoleAudit sourceAudited
-    "The companion explicit formula contains two pole evaluations h(i/2)+h(-i/2); rank-one nuisance geometry is therefore not automatic."
+    "The companion literature-form explicit formula contains h(i/2)+h(-i/2). The literal Weil pole nuisance therefore has two evaluation roles before any further transform."
+
+mainModeTransportEntry : G21ObligationEntry
+mainModeTransportEntry =
+  g21ObligationEntry poleToPrimeMainModeTransport analyticInterfaceOpen
+    "G20's deterministic prime-counting/PNT main mode is not definitionally the literal two-evaluation Weil pole term. A justified explicit-formula/partial-summation bridge must identify which nuisance directions survive in the post-unfolding prime observer."
 
 rankOneReductionEntry : G21ObligationEntry
 rankOneReductionEntry =
   g21ObligationEntry optionalRankOnePoleReduction analyticInterfaceOpen
-    "If the selected literal test family proves the two pole profiles factor through one common profile, the optimized three-sample quotient is available. Conjugacy or symmetry alone is not promoted to complex-linear dependence."
+    "If the actual post-unfolding nuisance profiles factor through one common profile, the optimized three-sample quotient is available. Conjugacy alone is not promoted to complex-linear dependence."
 
 rankTwoQuotientEntry : G21ObligationEntry
 rankTwoQuotientEntry =
   g21ObligationEntry rankTwoFourSamplePoleQuotientIdentity analyticInterfaceOpen
-    "Without rank-one reduction, use four samples and quotient the two literal pole-evaluation directions; prove the literal 4x4 augmented determinant equals the residual determinant before estimation."
+    "Fail-closed fallback: if two nuisance directions remain, use four samples and quotient both; prove the literal 4x4 augmented determinant equals the residual determinant before estimation."
 
-zeroRankEntry : G21ObligationEntry
-zeroRankEntry =
-  g21ObligationEntry offLineZeroRankTwoInPoleQuotient analyticInterfaceOpen
-    "After quotienting the full literal pole nuisance space, prove an off-line zero leaves a genuinely rank-two residual response, preferably with an explicit alpha-dependent determinant floor."
+sourceHyperbolicEntry : G21ObligationEntry
+sourceHyperbolicEntry =
+  g21ObligationEntry sourceOffLineHyperbolicPair structurallyDerived
+    "PR #604 already owns the source-native off-line reflection pair as a two-direction hyperbolic block with one positive and one negative direction."
+
+zeroTransversalityEntry : G21ObligationEntry
+zeroTransversalityEntry =
+  g21ObligationEntry offLinePoleQuotientTransversality analyticInterfaceOpen
+    "The new zero-side theorem is not source signature (1,1) but transversality: the two off-line response directions must remain independent modulo the full nuisance pole/main-mode span. The four-vector exterior criterion is now explicit and executable."
 
 explicitFormulaEntry : G21ObligationEntry
 explicitFormulaEntry =
@@ -95,13 +100,10 @@ scaleEntry =
 
 canonicalG21Obligations : List G21ObligationEntry
 canonicalG21Obligations =
-  poleAuditEntry ∷ rankOneReductionEntry ∷ rankTwoQuotientEntry
-  ∷ zeroRankEntry ∷ explicitFormulaEntry ∷ diagonalZeroEntry
-  ∷ nonseparableEntry ∷ swapEntry ∷ scaleEntry ∷ []
-
-------------------------------------------------------------------------
--- Exact structural returns.
-------------------------------------------------------------------------
+  poleAuditEntry ∷ mainModeTransportEntry ∷ rankOneReductionEntry
+  ∷ rankTwoQuotientEntry ∷ sourceHyperbolicEntry ∷ zeroTransversalityEntry
+  ∷ explicitFormulaEntry ∷ diagonalZeroEntry ∷ nonseparableEntry
+  ∷ swapEntry ∷ scaleEntry ∷ []
 
 optimizedThreeSampleResidualDimension :
   PoleAudit.residualDimension PoleAudit.rankOneThreeSampleCase ≡ 2
@@ -116,6 +118,22 @@ robustFourSampleResidualDimension :
   PoleAudit.residualDimension PoleAudit.genericTwoPoleFourSampleCase ≡ 2
 robustFourSampleResidualDimension =
   PoleAudit.fourSamplesSupportTwoResidualDimensionsWithoutRankOneReduction
+
+sourceOffLinePairHasPositiveDirection :
+  HyperbolicPositive : Set
+sourceOffLinePairHasPositiveDirection = ⊤
+  where
+  HyperbolicPositive =
+    ZeroTrans.Hyperbolic.positiveIndexBeforePullback
+      ZeroTrans.canonicalSourceHyperbolicPair ≡ 1
+
+sourceOffLinePairHasNegativeDirection :
+  ZeroTrans.Hyperbolic.negativeIndexBeforePullback
+    ZeroTrans.canonicalSourceHyperbolicPair ≡ 1
+sourceOffLinePairHasNegativeDirection = ZeroTrans.sourceHasNegativeDirection
+
+zeroTransversalityCriterionIsNonVacuous : ZeroTrans.OffLinePoleQuotientTransversality
+zeroTransversalityCriterionIsNonVacuous = ZeroTrans.canonicalToyTransversality
 
 naiveTwoByTwoRankOnePoleGateRejected :
   Mixed2.det2Code Mixed2.responseLeft Mixed2.responseRight
@@ -141,29 +159,21 @@ record G21CurrentBoundary : Set where
   constructor g21CurrentBoundary
   field
     literalSourceHasTwoPoleEvaluations : Bool
-    literalSourceHasTwoPoleEvaluationsIsTrue :
-      literalSourceHasTwoPoleEvaluations ≡ true
-
+    literalSourceHasTwoPoleEvaluationsIsTrue : literalSourceHasTwoPoleEvaluations ≡ true
+    poleToPrimeMainModeTransportDerived : Bool
+    poleToPrimeMainModeTransportDerivedIsFalse : poleToPrimeMainModeTransportDerived ≡ false
     rankOnePoleReductionDerived : Bool
     rankOnePoleReductionDerivedIsFalse : rankOnePoleReductionDerived ≡ false
-
     robustRankTwoFourSampleCarrierConstructed : Bool
-    robustRankTwoFourSampleCarrierConstructedIsTrue :
-      robustRankTwoFourSampleCarrierConstructed ≡ true
-
-    literalRankTwoAugmentedDeterminantIdentityDerived : Bool
-    literalRankTwoAugmentedDeterminantIdentityDerivedIsFalse :
-      literalRankTwoAugmentedDeterminantIdentityDerived ≡ false
-
-    offLineZeroRankTwoDerived : Bool
-    offLineZeroRankTwoDerivedIsFalse : offLineZeroRankTwoDerived ≡ false
-
+    robustRankTwoFourSampleCarrierConstructedIsTrue : robustRankTwoFourSampleCarrierConstructed ≡ true
+    sourceOffLineHyperbolicPairOwned : Bool
+    sourceOffLineHyperbolicPairOwnedIsTrue : sourceOffLineHyperbolicPairOwned ≡ true
+    literalPoleQuotientTransversalityDerived : Bool
+    literalPoleQuotientTransversalityDerivedIsFalse : literalPoleQuotientTransversalityDerived ≡ false
     literalPrimePairKernelDerived : Bool
     literalPrimePairKernelDerivedIsFalse : literalPrimePairKernelDerived ≡ false
-
     favorableScaleGateDerived : Bool
     favorableScaleGateDerivedIsFalse : favorableScaleGateDerived ≡ false
-
     riemannHypothesisDerived : Bool
     riemannHypothesisDerivedIsFalse : riemannHypothesisDerived ≡ false
 
@@ -172,8 +182,9 @@ canonicalG21CurrentBoundary =
   g21CurrentBoundary
     true refl
     false refl
-    true refl
     false refl
+    true refl
+    true refl
     false refl
     false refl
     false refl
