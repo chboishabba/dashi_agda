@@ -1,0 +1,31 @@
+module DASHI.Governance.FeministClimateJusticeSafeJustRegression where
+
+open import DASHI.Core.Prelude
+import DASHI.Core.MeasurementBoundaryNonfactorabilityExact as Measurement
+import DASHI.Core.ResponsibilityBurdenNonfactorabilityExact as Responsibility
+import DASHI.Core.PoliticalContestabilityExact as Political
+import DASHI.Core.CategoryAuthorityAuditExact as Category
+import DASHI.Core.MultiaxialResidualBundleExact as Residual
+import DASHI.Governance.FeministClimateJusticeSafeJustCapstoneExact as Capstone
+import DASHI.Governance.FeministClimateQualifiedPromotionExact as Promotion
+
+measurementBoundaryLoaded : Measurement.MeasurementBoundaryPrinciple
+measurementBoundaryLoaded = Measurement.canonicalMeasurementBoundaryPrinciple
+
+responsibilityBoundaryLoaded : Responsibility.ResponsibilityBurdenBoundary
+responsibilityBoundaryLoaded = Responsibility.canonicalResponsibilityBurdenBoundary
+
+politicalBoundaryLoaded : Political.PoliticalAuthorityBoundary
+politicalBoundaryLoaded = Political.canonicalPoliticalAuthorityBoundary
+
+categoryBoundaryLoaded : Category.CategoryAuthorityBoundary
+categoryBoundaryLoaded = Category.canonicalCategoryAuthorityBoundary
+
+residualBoundaryLoaded : Residual.MultiaxialResidualBoundary
+residualBoundaryLoaded = Residual.canonicalMultiaxialResidualBoundary
+
+capstoneLoaded : Capstone.FeministClimateSafeJustBoundary
+capstoneLoaded = Capstone.canonicalFeministClimateSafeJustBoundary
+
+promotionLoaded : Promotion.FeministClimateQualifiedPromotion
+promotionLoaded = Promotion.canonicalFeministClimateQualifiedPromotion
