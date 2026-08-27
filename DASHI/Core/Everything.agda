@@ -17,3 +17,4 @@ import DASHI.Core.RulePremiseDependencyGeometryExact
 import DASHI.Core.OrderedSubstitutionGeometryExact
 import DASHI.Core.RulePremiseTypingGeometryExact
 import DASHI.Core.ProofCarryingRuleApplicationExact
+import DASHI.Core.CoarseFineBranchAccessibilityExact
