@@ -36,3 +36,13 @@ import DASHI.Biology.TarotEverything
 import DASHI.Biology.PsychogeographyEverything
 import DASHI.Biology.TrumpPsychogeographyEverything
 import DASHI.Biology.AliceBrownEpistemicGovernanceEverything
+
+-- Cross-branch evidence ledger for the #618 processing-geometry programme.
+-- This branch records sources/boundaries and a thin generic burden bridge; it
+-- does not duplicate #618's processing geometry.
+import DASHI.Biology.NeurodivergentHoldingTensionSourceBoundaryExact
+import DASHI.Biology.NeurodivergentHoldingTensionBridgeExact
+
+-- Explicit seam for the eventual #606 embodied-gate -> #618 social-ecology
+-- adapter once draft ancestry is reconciled.  No cross-draft owners are copied.
+import DASHI.Biology.EmbodiedSocialEcologyRelationalHistoryObligationExact

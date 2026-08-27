@@ -25,3 +25,18 @@ import DASHI.Physics.Closure.NSTriadKNResonantNullGain
 -- TOE integration: native SSP/369 symmetry action, equivariant two-sheet
 -- reduction, residual-bearing 9 -> 6 reopening, and NS 3 x 3 nonary chart.
 import DASHI.Physics.Closure.TOESymmetryResolved369BridgeExact
+
+-- Coupled-trajectory/Feynman/Kelvin cross-pollination: finite histories,
+-- path fibres, stationary coherence classification, wavelength/source-scale
+-- conditioning, context-dependent weighting, TSFV invariant boundary, and
+-- source-bounded experimental support.
+import DASHI.Physics.Closure.FeynmanKelvinTrajectoryCrossPollinationExact
+import DASHI.Physics.Closure.ApertureWakeModeSelectionBridgeExact
+import DASHI.Physics.Closure.TSFVBidirectionalCausticBridgeExact
+import DASHI.Physics.Closure.TSFVHistoryConditionedChoiceBridgeExact
+import DASHI.Physics.Closure.SinglePhotonRecoilRelationalObserverBridgeExact
+import DASHI.Physics.Closure.TSFVLocalActionCandidateAuditExact
+import DASHI.Physics.Closure.TSFVPairActionCandidateAuditExact
+import DASHI.Physics.Closure.TSFVNonseparableTransitionKernelExact
+import DASHI.Physics.Closure.TSFVBidirectionalActionRealizationObligationExact
+import DASHI.Physics.Closure.TSFVActionPhaseWeightSeparationExact
