@@ -55,7 +55,10 @@ import DASHI.Governance.PlanetaryBoundaryAllocationExact
 import DASHI.Governance.ProvisioningGeometryExact
 import DASHI.Governance.ONeill2018MethodsBoundaryExact
 import DASHI.Governance.Fanning2022TemporalIndicatorExact
+import DASHI.Governance.Fanning2022NormalizationExact
 import DASHI.Governance.Fanning2022ProjectionBoundaryExact
+import DASHI.Governance.Fanning2022ForecastAuthorityExact
+import DASHI.Governance.Fanning2022MethodsRegression
 
 -- Provenance-bearing policy routing, corrective reachability and source-bounded
 -- application surfaces assembled as one focused tranche.
