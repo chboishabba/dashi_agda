@@ -33,6 +33,7 @@ import DASHI.Governance.RequiredAxisJusticeRegression
 import DASHI.Governance.ArgumentLevelAuthorityRoutingExact
 import DASHI.Governance.ArgumentHyperformalism369Regression
 import DASHI.Governance.OptionConeCoercionExact
+import DASHI.Governance.TypedBranchingOptionConeBridgeExact
 import DASHI.Governance.JusticeCrossPollinationBridgeExact
 import DASHI.Governance.InverseJusticeAttractorExact
 import DASHI.Governance.SecondOrderJusticeGrammarExact
