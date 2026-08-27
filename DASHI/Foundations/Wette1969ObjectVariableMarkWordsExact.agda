@@ -36,16 +36,22 @@ variableKernelWord = Signature.constantWordTerm Signature.variableKernel
 predicateMarkKernelWord : WordTerm
 predicateMarkKernelWord = Signature.constantWordTerm Signature.predicateMarkKernel
 
--- Rule 3: an object variable is the variable kernel juxtaposed with its
--- natural-number index word.
 objectVariableWord : WordTerm → WordTerm
 objectVariableWord index = juxtapose variableKernelWord index
 
--- Rule 4: a predicate mark records both its arity and its index.  In the source
--- prefix word this is the iterated juxtaposition ((Π u arity) u index).
 predicateMarkWord : WordTerm → WordTerm → WordTerm
 predicateMarkWord arity index =
   juxtapose (juxtapose predicateMarkKernelWord arity) index
+
+data IsObjectVariableWord : WordTerm → Set where
+  isObjectVariableWord :
+    (index : WordTerm) →
+    IsObjectVariableWord (objectVariableWord index)
+
+data IsPredicateMarkWord : WordTerm → Set where
+  isPredicateMarkWord :
+    (arity index : WordTerm) →
+    IsPredicateMarkWord (predicateMarkWord arity index)
 
 record ObjectVariableView (word : WordTerm) : Set where
   constructor objectVariableView
@@ -72,9 +78,16 @@ canonicalPredicateMarkView :
   (arity index : WordTerm) → PredicateMarkView (predicateMarkWord arity index)
 canonicalPredicateMarkView arity index = predicateMarkView arity index refl
 
--- Positive separation from Wette's 19 *rule-schematic* metavariables.  There is
--- no coercion from a WordVariable to an object variable: one must explicitly
--- build/instantiate a historical word.
+objectVariableViewRecognizesObjectSyntax :
+  ∀ {word} → ObjectVariableView word → IsObjectVariableWord word
+objectVariableViewRecognizesObjectSyntax (objectVariableView index refl) =
+  isObjectVariableWord index
+
+predicateMarkViewRecognizesObjectSyntax :
+  ∀ {word} → PredicateMarkView word → IsPredicateMarkWord word
+predicateMarkViewRecognizesObjectSyntax (predicateMarkView arity index refl) =
+  isPredicateMarkWord arity index
+
 record Wette1969ObjectVariableMarkWordsBoundary : Set where
   constructor wette1969ObjectVariableMarkWordsBoundary
   field
@@ -90,6 +103,10 @@ record Wette1969ObjectVariableMarkWordsBoundary : Set where
     objectSyntaxSeparatedFromRuleSchematicWordVariablesIsTrue :
       objectSyntaxSeparatedFromRuleSchematicWordVariables ≡ true
 
+    proofRelevantObjectSyntaxRecognitionNowAvailable : Bool
+    proofRelevantObjectSyntaxRecognitionNowAvailableIsTrue :
+      proofRelevantObjectSyntaxRecognitionNowAvailable ≡ true
+
     constructorsAlreadyProveNaturalNumberIndexJudgements : Bool
     constructorsAlreadyProveNaturalNumberIndexJudgementsIsFalse :
       constructorsAlreadyProveNaturalNumberIndexJudgements ≡ false
@@ -102,6 +119,7 @@ canonicalWette1969ObjectVariableMarkWordsBoundary :
   Wette1969ObjectVariableMarkWordsBoundary
 canonicalWette1969ObjectVariableMarkWordsBoundary =
   wette1969ObjectVariableMarkWordsBoundary
+    true refl
     true refl
     true refl
     true refl
