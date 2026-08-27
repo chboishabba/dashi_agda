@@ -75,6 +75,8 @@ import DASHI.Governance.SafeJustQualifiedPromotionBoundaryExact
 import DASHI.Governance.SafeJustSocialIndicatorJusticeBoundaryExact
 import DASHI.Governance.SafeJustConsumerAdequacyResidualBridgeExact
 import DASHI.Governance.SafeJustConsumerAdequacyResidualRegression
+import DASHI.Governance.SafeJustSituatedClaimAuthorityBridgeExact
+import DASHI.Governance.SafeJustSituatedClaimAuthorityRegression
 
 -- Feminist economics / climate-justice cross-pollination.
 import DASHI.Governance.FeministClimateJusticeSourceRegistryExact
