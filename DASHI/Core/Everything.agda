@@ -12,3 +12,4 @@ import DASHI.Core.FormalSystemRevisionGeometryExact
 import DASHI.Core.RulePremiseDependencyGeometryExact
 import DASHI.Core.OrderedSubstitutionGeometryExact
 import DASHI.Core.RulePremiseTypingGeometryExact
+import DASHI.Core.ProofCarryingRuleApplicationExact
