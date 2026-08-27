@@ -13,9 +13,9 @@ module DASHI.Mathematics.NumberTheory.FiniteNatFractionOrderExact where
 -- the same rational representation used by the vendored Bishop real carrier.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; _*_)
 open import Data.Integer.Base as ℤ using (+_; +≤+)
-open import Data.Nat.Base using (NonZero)
+open import Data.Nat.Base using (NonZero; _≤_)
 open import Data.Rational.Unnormalised as ℚ using (ℚᵘ; _/_; _≤_; *≤*)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
