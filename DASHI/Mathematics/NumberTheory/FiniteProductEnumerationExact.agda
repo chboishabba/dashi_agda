@@ -19,13 +19,14 @@ open import Data.Fin.Base using (Fin) renaming (zero to fzero; suc to fsuc)
 open import Data.List.Base using (map; _++_; cartesianProductWith)
 open import Data.List.Membership.Propositional using (_∈_)
 open import Data.List.Membership.Propositional.Properties using
-  (∈-cartesianProductWith⁺; ∈-allFin)
+  (∈-cartesianProductWith⁺; ∈-allFin; ∈-++⁻)
 open import Data.List.Relation.Unary.Any as Any using ()
 import Data.List.Relation.Unary.All as All
 import Data.List.Relation.Unary.AllPairs.Core as AllPairs
 open import Data.List.Relation.Unary.Unique.Propositional using (Unique)
 import Data.List.Relation.Unary.Unique.Propositional.Properties as UniqueP
-open import Data.Product using (_×_; _,_)
+open import Data.Product using (Σ; _×_; _,_)
+open import Data.Sum.Base using (inj₁; inj₂)
 import Data.Vec.Base as Vec
 
 ------------------------------------------------------------------------
@@ -67,6 +68,21 @@ concatMapMember f (Any.here refl) yMember =
   appendMemberLeft yMember
 concatMapMember f (Any.there xMember) yMember =
   appendMemberRight _ (concatMapMember f xMember yMember)
+
+concatMapMemberInverse :
+  ∀ {A B : Set}
+    (f : A → List B)
+    {xs : List A} {y : B} →
+  y ∈ concatMap f xs →
+  Σ A (λ x → (x ∈ xs) × (y ∈ f x))
+concatMapMemberInverse f {xs = []} ()
+concatMapMemberInverse f {xs = x ∷ xs} member
+  with ∈-++⁻ (f x) member
+... | inj₁ headMember =
+  x , Any.here refl , headMember
+... | inj₂ tailMember with concatMapMemberInverse f tailMember
+...   | y , yMember , memberInFiber =
+  y , Any.there yMember , memberInFiber
 
 ------------------------------------------------------------------------
 -- Canonical enumeration of every Fin n coordinate.
