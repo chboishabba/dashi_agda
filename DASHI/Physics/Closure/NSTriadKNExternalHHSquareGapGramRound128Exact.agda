@@ -37,7 +37,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Integer using (ℤ; _+_; _-_; _*_)
 import Data.Integer.Tactic.RingSolver as IntRS
 import Tactic.RingSolver.NonReflective as NR
-open import Relation.Binary.PropositionalEquality using (subst; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
@@ -102,7 +102,9 @@ gramCauchyIdentity :
   ≡ Plane.modeNormSquared k * Plane.modeNormSquared d
 gramCauchyIdentity k d =
   trans
-    (congLeft (Plane.pluckerGramIdentity k d))
+    (cong
+      (λ remainder → Plane.dotMode k d * Plane.dotMode k d + remainder)
+      (Plane.pluckerGramIdentity k d))
     (RingZ.solve 3
       (λ dot nk nd →
         (dot * dot + (nk * nd - dot * dot)
@@ -111,18 +113,6 @@ gramCauchyIdentity k d =
       (Plane.dotMode k d)
       (Plane.modeNormSquared k)
       (Plane.modeNormSquared d))
-  where
-  congLeft :
-    Plane.pluckerNormSquared k d
-      ≡ Plane.modeNormSquared k * Plane.modeNormSquared d
-        - Plane.dotMode k d * Plane.dotMode k d →
-    Plane.dotMode k d * Plane.dotMode k d
-      + Plane.pluckerNormSquared k d
-      ≡
-    Plane.dotMode k d * Plane.dotMode k d
-      + (Plane.modeNormSquared k * Plane.modeNormSquared d
-        - Plane.dotMode k d * Plane.dotMode k d)
-  congLeft refl = refl
 
 squareGapGramIdentity :
   (tau : Physical.PhysicalTriadIncidence) →
@@ -142,8 +132,16 @@ squareGapGramIdentity tau =
       ≡ Plane.modeNormSquared (Physical.k tau) * Plane.modeNormSquared d)
     (sym factor)
     (gramCauchyIdentity (Physical.k tau) d)
-  where
-  open import Relation.Binary.PropositionalEquality using (sym)
+
+subtractRightAfterEquality :
+  ∀ a b c → a + b ≡ c → a ≡ c - b
+subtractRightAfterEquality a b c equality =
+  trans
+    (sym
+      (RingZ.solve 2
+        (λ a b → (a + b - b , a))
+        refl a b))
+    (cong (λ x → x - b) equality)
 
 -- Fully eliminated d-norm.  This is the exact polynomial numerator identity
 -- that the ordered-real HH estimate should consume.
@@ -167,14 +165,11 @@ hhSquareGapLowHighIdentity tau =
     para = resonantParallelogram tau
     dNormMeaning : Plane.modeNormSquared d ≡ two * np + two * nq - nk
     dNormMeaning =
-      RingZ.solve 4
-        (λ nd nk rhs →
-          (nd + nk , rhs) →
-          (nd , rhs - nk))
-        para
+      subtractRightAfterEquality
         (Plane.modeNormSquared d)
         nk
         (two * np + two * nq)
+        para
   in
   subst
     (λ dNorm →
