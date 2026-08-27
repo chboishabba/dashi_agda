@@ -21,3 +21,7 @@ import DASHI.Physics.Closure.NSTriadKNCarrierCoverage
 import DASHI.Physics.Closure.NSTriadKNBKMContinuation
 import DASHI.Physics.Closure.NSTriadKNLuoScalingExact
 import DASHI.Physics.Closure.NSTriadKNResonantNullGain
+
+-- TOE integration: native SSP/369 symmetry action, equivariant two-sheet
+-- reduction, residual-bearing 9 -> 6 reopening, and NS 3 x 3 nonary chart.
+import DASHI.Physics.Closure.TOESymmetryResolved369BridgeExact
