@@ -17,12 +17,12 @@ import DASHI.Foundations.WetteHistoricalSourceAtlasExact as Source
 -- Wette 1969 and 1970 primary texts plus the 1972 Kreisel/Zucker review have
 -- now been inspected directly. Exact transcription has begun: the 1969
 -- signature is typed with source arities; rules 0.1/0.2 have exact bodies; the
--- p.193 revision surface is represented; and the source-stated dependency,
--- substitution-order, premise-judgement typing, and complete typed 9.3.24/25
--- premise/conclusion template are represented.  Both 9.3.24 and 9.3.25 now
--- inhabit the HistoricalRuleBody carrier end-to-end as parameterized source
--- templates. OCR-sensitive compound words remain transcription obligations, so
--- the complete `transcriptionExtracted` stage remains uninhabited.
+-- p.193 revision surface is represented; the critical dependency/order/typing
+-- geometry is typed; 9.3.24/25 have complete parameterized HistoricalRuleBody
+-- templates; and those rules now lift through proof-carrying finite derivation
+-- contexts into the repo's existing mixed-generator finite-trace semantics.
+-- OCR-sensitive compound words and the rest of the 97-rule calculus remain
+-- transcription obligations, so `transcriptionExtracted` remains uninhabited.
 ------------------------------------------------------------------------
 
 currentWetteRecoveryProfile : Recovery.RecoveryStageProfile
@@ -67,6 +67,9 @@ critical915And9324x25PremiseKindsRecovered = tt
 
 rule9324x25ConclusionTemplatesAndBodiesRecovered : ⊤
 rule9324x25ConclusionTemplatesAndBodiesRecovered = tt
+
+finiteDerivationContextAndTraceErasureRecovered : ⊤
+finiteDerivationContextAndTraceErasureRecovered = tt
 
 criticalLate1974FormalObjectsStillUnrecovered : ⊤
 criticalLate1974FormalObjectsStillUnrecovered = tt
@@ -135,6 +138,10 @@ record WetteHistoricalRecoveryGeometryBoundary : Set where
     rule9324x25CompleteTypedTemplatesNowRecoveredIsTrue :
       rule9324x25CompleteTypedTemplatesNowRecovered ≡ true
 
+    finiteDerivationContextBridgeNowRecovered : Bool
+    finiteDerivationContextBridgeNowRecoveredIsTrue :
+      finiteDerivationContextBridgeNowRecovered ≡ true
+
     primaryInspectionEqualsCompleteHistoricalTranscription : Bool
     primaryInspectionEqualsCompleteHistoricalTranscriptionIsFalse :
       primaryInspectionEqualsCompleteHistoricalTranscription ≡ false
@@ -159,6 +166,7 @@ canonicalWetteHistoricalRecoveryGeometryBoundary :
   WetteHistoricalRecoveryGeometryBoundary
 canonicalWetteHistoricalRecoveryGeometryBoundary =
   wetteHistoricalRecoveryGeometryBoundary
+    true refl
     true refl
     true refl
     true refl
