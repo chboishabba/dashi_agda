@@ -16,19 +16,22 @@ module DASHI.Foundations.BishopNatSquareRootTangentExact where
 -- exponential kernel before positive inverse cancellation is introduced.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_; _∸_)
 open import Data.Integer.Base using (+_)
 open import Data.Nat.Base using (_≤_)
 import Data.Nat.Properties as NatP
 open import Data.Rational.Unnormalised as ℚ using (ℚᵘ; _/_)
+open import Relation.Binary.PropositionalEquality using (cong; sym)
 
 import Real as BishopReal
 import RealProperties as BishopP
 
 import DASHI.Foundations.BishopNatSquareRootApproximationExact as Approximation
-import DASHI.Foundations.BishopNatSquareRootNonnegativeExact as Nonnegative
 import DASHI.Foundations.BishopNatSquareRootRegularFloorExact as Root
 import DASHI.Foundations.BishopNatSquareRootSemanticSquareExact as Square
+import DASHI.Foundations.BishopSquareNonnegativeExact as SquareNN
+import DASHI.Mathematics.NumberTheory.FiniteNatRationalEmbeddingExact as NatEmbed
 import DASHI.Physics.YangMills.BalabanP33BishopInverseDexpCoefficientExact as Order
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -44,23 +47,18 @@ two = BishopReal._⋆ (+ 2 / 1)
 square : BishopReal.ℝ → BishopReal.ℝ
 square x = BishopReal._*_ x x
 
-squareNonnegative :
-  (value : BishopReal.ℝ) →
-  BishopReal.NonNegative (square value)
-squareNonnegative value =
-  let
-    absNN = BishopP.nonNeg∣x∣ value
-  in
-  BishopP.nonNegx,y⇒nonNegx*y absNN absNN
-  |> BishopP.nonNeg-cong
-      (let open BishopP.ℝ-Solver in
-       solve 1
-         (λ x → (∣ x ∣ ⊗ ∣ x ∣) ⊜ (x ⊗ x))
-         BishopP.≃-refl value)
-  where
-  infixl 0 _|>_
-  _|>_ : ∀ {A B : Set} → A → (A → B) → B
-  x |> f = f x
+embeddedNatAdd :
+  (left right : Nat) →
+  BishopReal._≃_
+    (embedNat (left + right))
+    (BishopReal._+_ (embedNat left) (embedNat right))
+embeddedNatAdd left right =
+  BishopP.≃-trans
+    (BishopP.⋆-cong
+      (NatEmbed.natAsRationalAdd left right))
+    (BishopP.⋆-distrib-+
+      (NatEmbed.natAsRational left)
+      (NatEmbed.natAsRational right))
 
 tangentAlgebraicGap :
   (A B : BishopReal.ℝ) →
@@ -93,7 +91,8 @@ rawTangentOrder A B =
     (BishopP.≤-respʳ-≃
       (BishopP.≃-symm (tangentAlgebraicGap A B))
       (BishopP.nonNegx⇒0≤x
-        (squareNonnegative (BishopReal._-_ A B))))
+        (SquareNN.bishopSquareNonnegative
+          (BishopReal._-_ A B))))
 
 embeddedNatSubtractionDifference :
   ∀ {n r : Nat} → r ≤ n →
@@ -106,13 +105,26 @@ embeddedNatSubtractionDifference {n} {r} r≤n =
   let
     decompose : (n ∸ r) + r ≡ n
     decompose = NatP.m∸n+n≡m r≤n
+
+    nToSum :
+      BishopReal._≃_ (embedNat n) (embedNat ((n ∸ r) + r))
+    nToSum =
+      BishopP.≃-refl₂ (cong embedNat (sym decompose))
+
     open BishopP.ℝ-Solver
   in
-  solve 0
-    (Κ (Approximation.natAsRational n)
-      ⊖ Κ (Approximation.natAsRational (n ∸ r))
-      ⊜ Κ (Approximation.natAsRational r))
-    BishopP.≃-refl
+  BishopP.≃-trans
+    (BishopP.+-cong nToSum BishopP.≃-refl)
+    (BishopP.≃-trans
+      (BishopP.+-cong
+        (embeddedNatAdd (n ∸ r) r)
+        BishopP.≃-refl)
+      (solve 2
+        (λ residual decrement →
+          ((residual ⊕ decrement) ⊖ residual) ⊜ decrement)
+        BishopP.≃-refl
+        (embedNat (n ∸ r))
+        (embedNat r)))
 
 rootSquareDifferenceIsDecrement :
   ∀ {n r : Nat} → r ≤ n →
