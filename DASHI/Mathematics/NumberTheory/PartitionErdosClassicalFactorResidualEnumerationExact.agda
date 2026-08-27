@@ -17,7 +17,8 @@ module DASHI.Mathematics.NumberTheory.PartitionErdosClassicalFactorResidualEnume
 --   × canonical partition of n-r
 --   × unit u : Fin(v).
 --
--- Canonical grade-(n-r) vectors are zero-padded into ambient dimension n.
+-- Canonical grade-(n-r) vectors are represented in ambient dimension n as the
+-- exact prefix followed by r zeros, transported along (n-r)+r=n.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -28,13 +29,15 @@ import Data.Fin.Properties as FinP
 open import Data.List.Base using (map; _++_)
 open import Data.Nat.Base using (_≤_; _∸_; z≤n; s≤s)
 import Data.Nat.Properties as NatP
-open import Data.Vec.Base using (Vec)
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Data.Vec.Base using (Vec; []; _∷_)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Mathematics.NumberTheory.FiniteAllFinEnumerationExact as Finite
 import DASHI.Mathematics.NumberTheory.FiniteNatVectorZeroPaddingExact as Pad
 import DASHI.Mathematics.NumberTheory.FinitePositiveFactorPairExact as Factor
 import DASHI.Mathematics.NumberTheory.FiniteProductEnumerationExact as Product
+import DASHI.Mathematics.NumberTheory.FiniteVectorPrefixSplitExact as Split
+import DASHI.Mathematics.NumberTheory.PartitionAmbientMultiplicityNormalizationExact as Normalize
 import DASHI.Mathematics.NumberTheory.PartitionErdosFiniteKeyEnumerationExact as Key
 import DASHI.Mathematics.NumberTheory.PartitionMultiplicityCarrierExact as Partition
 import DASHI.Mathematics.NumberTheory.PartitionMultiplicityEnumerationExact as Enumeration
@@ -100,12 +103,57 @@ ambientDivisorPartValue bound pair =
     (divisorIndexPartValue pair)
 
 ------------------------------------------------------------------------
--- Residual key construction for one classical factor/partition/unit datum.
+-- Exact ambient zero padding aligned with the normalization owner.
+
+transportVectorForward :
+  ∀ {left right : Nat} →
+  left ≡ right → Vec Nat left → Vec Nat right
+transportVectorForward refl vector = vector
+
+transportWeightedMassForward :
+  ∀ {left right : Nat}
+    (equality : left ≡ right)
+    (vector : Vec Nat left) →
+  Partition.weightedMass (transportVectorForward equality vector)
+  ≡ Partition.weightedMass vector
+transportWeightedMassForward refl vector = refl
+
+appendZeroMassFrom :
+  (first extra : Nat) →
+  ∀ {dimension : Nat} (vector : Vec Nat dimension) →
+  Partition.weightedMassFrom first
+    (Split.appendVec vector (Split.zeroVec extra))
+  ≡ Partition.weightedMassFrom first vector
+appendZeroMassFrom first extra [] =
+  Normalize.weightedMassFromZeroVec first extra
+appendZeroMassFrom first extra (x ∷ xs) =
+  cong
+    (first * x +_)
+    (appendZeroMassFrom (suc first) extra xs)
 
 padResidualVector :
-  (n r : Nat) → Vec Nat (n ∸ r) → Vec Nat n
-padResidualVector n r =
-  Pad.padNatVector (differenceBound n r)
+  ∀ {n r : Nat} →
+  r ≤ n → Vec Nat (n ∸ r) → Vec Nat n
+padResidualVector bound vector =
+  transportVectorForward
+    (differencePlus bound)
+    (Split.appendVec vector (Split.zeroVec _))
+
+padResidualWeightedMass :
+  ∀ {n r : Nat}
+    (bound : r ≤ n)
+    (vector : Vec Nat (n ∸ r)) →
+  Partition.weightedMass (padResidualVector bound vector)
+  ≡ Partition.weightedMass vector
+padResidualWeightedMass {r = r} bound vector =
+  trans
+    (transportWeightedMassForward
+      (differencePlus bound)
+      (Split.appendVec vector (Split.zeroVec r)))
+    (appendZeroMassFrom 1 r vector)
+
+------------------------------------------------------------------------
+-- Residual key construction for one classical factor/partition/unit datum.
 
 classicalResidualKey :
   ∀ {n r : Nat}
@@ -115,7 +163,7 @@ classicalResidualKey :
   Fin (Partition.partValue (ambientDivisorIndex bound pair)) →
   Key.ResidualKey n
 classicalResidualKey bound pair vector unit =
-  padResidualVector _ _ vector
+  padResidualVector bound vector
   , ambientDivisorIndex bound pair
   , Factor.predecessor pair
   , unit
@@ -145,7 +193,7 @@ classicalResidualTotalExact {n} {r} bound pair vector vectorMass unit =
         + suc (Factor.predecessor pair)
           * Partition.partValue (ambientDivisorIndex bound pair))
       (trans
-        (Pad.padWeightedMass (differenceBound n r) vector)
+        (padResidualWeightedMass bound vector)
         vectorMass))
     (trans
       (cong
