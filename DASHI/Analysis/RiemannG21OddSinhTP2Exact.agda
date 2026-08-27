@@ -13,15 +13,13 @@ import DASHI.Analysis.RiemannG21MathlibHyperbolicReceiptBoundary as Mathlib
 --
 --   sinh(p v) sinh(a u) > sinh(p u) sinh(a v).
 --
--- Equivalently the kernel K(a,u)=sinh(a u) is strictly TP2 on the positive
--- quadrant.  A standard route is
+-- Equivalently K(a,u)=sinh(a u) is strictly TP2 on the positive quadrant.
+-- A standard route is G(x)=x coth x with
 --
---   G(x)=x coth x,
---   G'(x)=(sinh(2x)-2x)/(2 sinh(x)^2) > 0,
+--   G'(x)=(sinh(2x)-2x)/(2 sinh(x)^2) > 0.
 --
--- with sinh(2x)>2x supplied in Lean from Real.self_lt_sinh_iff together
--- with Real.sinh_two_mul.  This Agda module records the exact implication
--- geometry and sign orientation; cross-prover transport remains explicit.
+-- Mathlib already owns the atomic sinh inequalities used by that route, but
+-- this Agda owner keeps cross-prover transport explicit.
 ------------------------------------------------------------------------
 
 record SinhTP2AnalyticTarget : Set₁ where
@@ -56,7 +54,7 @@ record OddMomentStrictSignTarget : Set₁ where
     multiply : Scalar → Scalar → Scalar
     StrictGreater : Scalar → Scalar → Set
 
-    -- Positive orientation for the high-height ratio:
+    -- Positive-margin orientation:
     -- N1(a) N3(p) > N3(a) N1(p).
     positiveMargin :
       StrictGreater
@@ -68,19 +66,25 @@ record OddMomentStrictSignTarget : Set₁ where
 open OddMomentStrictSignTarget public
 
 ------------------------------------------------------------------------
--- Orientation bridge: in G21's previously written determinant order this is
--- exactly a strict *negative* sign.
+-- In the determinant orientation used earlier by G21,
+--
+--   N3(a) N1(p) - N1(a) N3(p) < 0.
+--
+-- The theorem name below is deliberately the final analytic target name.
 ------------------------------------------------------------------------
 
 record G21OddOrientationBridge (target : OddMomentStrictSignTarget) : Set₁ where
   field
-    Negative : Scalar target → Scalar target → Set
-    g21OddDeterminantStrictNegative :
-      Negative
+    StrictNegativeDifference : Scalar target → Scalar target → Set
+
+    oddMomentDeterminantStrictNegative :
+      StrictNegativeDifference
         (multiply target (n3AtA target) (n1AtP target))
         (multiply target (n1AtA target) (n3AtP target))
 
     bridgeReading : String
+
+open G21OddOrientationBridge public
 
 ------------------------------------------------------------------------
 -- Symmetrized continuum producer.  The intended identity is
@@ -119,6 +123,9 @@ record OddMomentDoubleIntegralProducer : Set₁ where
 mathlibAtomicReceiptBoundary : Mathlib.MathlibHyperbolicReceiptBoundary
 mathlibAtomicReceiptBoundary = Mathlib.canonicalMathlibHyperbolicReceiptBoundary
 
+genericStrictKernelBoundary : TP2.StrictKernelMomentRatioBoundary
+genericStrictKernelBoundary = TP2.canonicalStrictKernelMomentRatioBoundary
+
 record OddSinhTP2Boundary : Set where
   constructor oddSinhTP2Boundary
   field
@@ -126,6 +133,8 @@ record OddSinhTP2Boundary : Set where
     strictSinhTP2TargetExplicitIsTrue : strictSinhTP2TargetExplicit ≡ true
     strictOddMomentSignTargetExplicit : Bool
     strictOddMomentSignTargetExplicitIsTrue : strictOddMomentSignTargetExplicit ≡ true
+    exactNegativeOrientationTargetNamed : Bool
+    exactNegativeOrientationTargetNamedIsTrue : exactNegativeOrientationTargetNamed ≡ true
     genericTP2MomentOwnerAvailable : Bool
     genericTP2MomentOwnerAvailableIsTrue : genericTP2MomentOwnerAvailable ≡ true
     mathlibAtomicSinhFactsLocated : Bool
@@ -133,9 +142,9 @@ record OddSinhTP2Boundary : Set where
     sinhTP2DerivedInAgda : Bool
     sinhTP2DerivedInAgdaIsFalse : sinhTP2DerivedInAgda ≡ false
     continuumOddMomentStrictSignDerived : Bool
-    continuumOddMomentStrictSignDerivedIsFalse :
-      continuumOddMomentStrictSignDerived ≡ false
+    continuumOddMomentStrictSignDerivedIsFalse : continuumOddMomentStrictSignDerived ≡ false
 
 canonicalOddSinhTP2Boundary : OddSinhTP2Boundary
 canonicalOddSinhTP2Boundary =
-  oddSinhTP2Boundary true refl true refl true refl true refl false refl false refl
+  oddSinhTP2Boundary
+    true refl true refl true refl true refl true refl false refl false refl
