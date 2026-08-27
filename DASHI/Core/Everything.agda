@@ -12,6 +12,7 @@ import DASHI.Core.FiniteTypedBranchingReachabilityBridgeExact
 import DASHI.Core.BinaryInteractionNonseparabilityExact
 import DASHI.Core.FiniteTypedBranchingInteractionBridgeExact
 import DASHI.Core.TrajectoryEndpointNonfactorabilityExact
+import DASHI.Core.HistoryConditionedChoiceExact
 import DASHI.Core.LogisticFoldCriticalityExact
 import DASHI.Core.NumberRoleProvenanceAtlasExact
 import DASHI.Core.IntersectionalNonFactorability
