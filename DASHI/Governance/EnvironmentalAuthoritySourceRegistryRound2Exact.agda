@@ -118,6 +118,17 @@ mithakaAntiquity2021 = sourceReference
   "peer-reviewed collaborative Mithaka-initiated archaeological research"
   "source for numerous large quarries, grindstone production, substantial dwellings and intensive regional economic practices; does not settle continent-wide agriculture terminology or all village-settlement claims"
 
+kunmingMontreal2022 : SourceReference
+kunmingMontreal2022 = sourceReference
+  "Conference of the Parties to the Convention on Biological Diversity"
+  "Kunming-Montreal Global Biodiversity Framework"
+  "CBD COP15 Decision 15/4"
+  2022
+  "international biodiversity framework"
+  "Target 3 and implementation section C"
+  "multilateral policy instrument"
+  "source for Target 3 recognition of Indigenous/traditional territories and rights, plus framework-level FPIC/rights safeguards; not proof that implementation in every jurisdiction satisfies those obligations"
+
 record Round2SourceBoundary : Set where
   constructor round2SourceBoundary
   field
