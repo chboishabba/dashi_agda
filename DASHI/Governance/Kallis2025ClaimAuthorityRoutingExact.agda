@@ -62,7 +62,24 @@ canonicalKallisSynthesisRoute =
   claimRoute empiricalSynthesis reviewSynthesisAuthority empiricalSynthesisAuthorized
 
 ------------------------------------------------------------------------
--- Review-level definition and the Reel's approximately $15,000 claim.
+-- Review-level conceptual definition.
+------------------------------------------------------------------------
+
+data PostGrowthFamily : Set where
+  doughnutEconomics wellbeingEconomics steadyStateEconomics degrowth : PostGrowthFamily
+
+record PostGrowthConcept : Set where
+  constructor postGrowthConcept
+  field
+    pursueGDPGrowthAsObjective : Bool
+    targetHumanWellbeing : Bool
+    respectPlanetaryBoundaries : Bool
+
+canonicalPostGrowthConcept : PostGrowthConcept
+canonicalPostGrowthConcept = postGrowthConcept false true true
+
+------------------------------------------------------------------------
+-- The Reel's approximately $15,000 claim.
 ------------------------------------------------------------------------
 
 data UpstreamEvidenceOwner : Set where
@@ -116,6 +133,9 @@ record KallisClaimRoutingBoundary : Set where
       reviewIdentityAloneDefinesPoliticalProgramme ≡ false
     postGrowthEqualsDegrowthByDefinition : Bool
     postGrowthEqualsDegrowthByDefinitionIsFalse : postGrowthEqualsDegrowthByDefinition ≡ false
+    reducingGDPIsDefinitionallyTheGoalOfPostGrowth : Bool
+    reducingGDPIsDefinitionallyTheGoalOfPostGrowthIsFalse :
+      reducingGDPIsDefinitionallyTheGoalOfPostGrowth ≡ false
     politicsOfTransitionRemainsOpenResearchFrontier : Bool
     politicsOfTransitionRemainsOpenResearchFrontierIsTrue :
       politicsOfTransitionRemainsOpenResearchFrontier ≡ true
@@ -124,4 +144,4 @@ record KallisClaimRoutingBoundary : Set where
 
 canonicalKallisClaimRoutingBoundary : KallisClaimRoutingBoundary
 canonicalKallisClaimRoutingBoundary =
-  kallisClaimRoutingBoundary false refl false refl false refl false refl false refl true refl true refl
+  kallisClaimRoutingBoundary false refl false refl false refl false refl false refl false refl true refl true refl
