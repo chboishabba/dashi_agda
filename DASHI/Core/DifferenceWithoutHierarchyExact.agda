@@ -31,9 +31,10 @@ record DifferenceWithEqualStanding
     (standing : Situated → Standing) : Set where
   constructor difference-with-equal-standing
   field
-    left right : Situated
-    observationDistinct : observe left ≡ observe right → ⊥
-    standingEqual : standing left ≡ standing right
+    differenceLeft differenceRight : Situated
+    observationDistinct :
+      observe differenceLeft ≡ observe differenceRight → ⊥
+    standingEqual : standing differenceLeft ≡ standing differenceRight
 
 open DifferenceWithEqualStanding public
 
@@ -47,9 +48,9 @@ record UniformTreatmentOutcomeFailure
     (outcome : Situated → Outcome) : Set where
   constructor uniform-treatment-outcome-failure
   field
-    left right : Situated
-    sameTreatment : treatment left ≡ treatment right
-    outcomeDistinct : outcome left ≡ outcome right → ⊥
+    treatmentLeft treatmentRight : Situated
+    sameTreatment : treatment treatmentLeft ≡ treatment treatmentRight
+    outcomeDistinct : outcome treatmentLeft ≡ outcome treatmentRight → ⊥
 
 open UniformTreatmentOutcomeFailure public
 
@@ -61,8 +62,8 @@ uniformTreatmentFailureIsNonFactorability :
   INF.NonFactorabilityWitness treatment outcome
 uniformTreatmentFailureIsNonFactorability failure =
   INF.nonFactorabilityWitness
-    (left failure)
-    (right failure)
+    (treatmentLeft failure)
+    (treatmentRight failure)
     (sameTreatment failure)
     (outcomeDistinct failure)
 
