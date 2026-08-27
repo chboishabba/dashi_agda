@@ -13,6 +13,7 @@ FILES=(
   DASHI/Core/RulePremiseDependencyGeometryExact.agda
   DASHI/Core/OrderedSubstitutionGeometryExact.agda
   DASHI/Core/RulePremiseTypingGeometryExact.agda
+  DASHI/Core/ProofCarryingRuleApplicationExact.agda
   DASHI/Foundations/WetteHistoricalSourceAtlasExact.agda
   DASHI/Foundations/WettePrimaryTextAcquisitionPlanExact.agda
   DASHI/Foundations/Wette1969PrimaryTextExtractionExact.agda
@@ -24,6 +25,8 @@ FILES=(
   DASHI/Foundations/Wette1969SubstitutionOrderExact.agda
   DASHI/Foundations/Wette1969CriticalPremiseTypingExact.agda
   DASHI/Foundations/Wette1969Rule9324x25PremiseTemplateExact.agda
+  DASHI/Foundations/Wette1969ProofCarryingRuleApplicationExact.agda
+  DASHI/Foundations/Wette1969FiniteDerivationContextExact.agda
   DASHI/Foundations/Wette1969CompletenessInterpretationBridgeExact.agda
   DASHI/Foundations/Wette1970PrimaryTextExtractionExact.agda
   DASHI/Foundations/WetteHistoricalRecoveryFrontierExact.agda
@@ -67,6 +70,8 @@ grep -q 'historicalRevisionIsNotDefinitionallyDerivationalEquivalenceIsTrue' DAS
 grep -q 'sourceRequiredOrderAlreadyProvesSemanticNonCommutationIsFalse' DASHI/Core/OrderedSubstitutionGeometryExact.agda
 grep -q 'premiseKindsCanBeRecoveredBeforeBodiesIsTrue' DASHI/Core/RulePremiseTypingGeometryExact.agda
 grep -q 'typedRequirementIsAlreadyExactPremiseBodyIsFalse' DASHI/Core/RulePremiseTypingGeometryExact.agda
+grep -q 'typedDependencyCoreOwnsAdmissibilityIsTrue' DASHI/Core/ProofCarryingRuleApplicationExact.agda
+
 grep -q 'allHistoricalRelatorAritiesHaveTypedConstructorsIsTrue' DASHI/Foundations/Wette1969JudgementConstructorsExact.agda
 grep -q 'constructorLayerAddsSemanticTruthIsFalse' DASHI/Foundations/Wette1969JudgementConstructorsExact.agda
 grep -q 'rule9324x25OrderRequirementRecoveredIsTrue' DASHI/Foundations/Wette1969SubstitutionOrderExact.agda
@@ -76,6 +81,11 @@ grep -q 'judgementKindRecoveryAlreadySuppliesExactFormulaArgumentsIsFalse' DASHI
 grep -q 'fourPremiseTemplateNowConstructibleIsTrue' DASHI/Foundations/Wette1969Rule9324x25PremiseTemplateExact.agda
 grep -q 'freshTupleSharingAcrossPremises2To4RecoveredIsTrue' DASHI/Foundations/Wette1969Rule9324x25PremiseTemplateExact.agda
 grep -q 'parameterizedTemplateIsAlreadyLiteralOCRPerfectTranscriptionIsFalse' DASHI/Foundations/Wette1969Rule9324x25PremiseTemplateExact.agda
+grep -q 'typedDependencyCoreReusedForHistoricalAdmissibilityIsTrue' DASHI/Foundations/Wette1969ProofCarryingRuleApplicationExact.agda
+grep -q 'proofCarryingTraceErasesToExistingFiniteTraceIsTrue' DASHI/Foundations/Wette1969FiniteDerivationContextExact.agda
+grep -q 'certifiedTraceProducesExistingFiniteDerivationWitnessIsTrue' DASHI/Foundations/Wette1969FiniteDerivationContextExact.agda
+grep -q 'finiteContextMembershipIsAlreadySemanticTruthIsFalse' DASHI/Foundations/Wette1969FiniteDerivationContextExact.agda
+
 grep -q 'doi:10.1007/978-3-642-86745-3_9' DASHI/Foundations/WetteHistoricalSourceAtlasExact.agda
 grep -q 'doi:10.2307/2272630' DASHI/Foundations/WetteHistoricalSourceAtlasExact.agda
 grep -q 'unverified1974DOIFabricatedIsFalse' DASHI/Foundations/WetteHistoricalSourceAtlasExact.agda
@@ -110,6 +120,7 @@ scripts/run_agda29_parallel_check.sh \
   DASHI/Core/RulePremiseDependencyGeometryExact.agda \
   DASHI/Core/OrderedSubstitutionGeometryExact.agda \
   DASHI/Core/RulePremiseTypingGeometryExact.agda \
+  DASHI/Core/ProofCarryingRuleApplicationExact.agda \
   DASHI/Foundations/WetteHistoricalSourceAtlasExact.agda \
   DASHI/Foundations/WettePrimaryTextAcquisitionPlanExact.agda \
   DASHI/Foundations/Wette1969PrimaryTextExtractionExact.agda \
@@ -121,6 +132,8 @@ scripts/run_agda29_parallel_check.sh \
   DASHI/Foundations/Wette1969SubstitutionOrderExact.agda \
   DASHI/Foundations/Wette1969CriticalPremiseTypingExact.agda \
   DASHI/Foundations/Wette1969Rule9324x25PremiseTemplateExact.agda \
+  DASHI/Foundations/Wette1969ProofCarryingRuleApplicationExact.agda \
+  DASHI/Foundations/Wette1969FiniteDerivationContextExact.agda \
   DASHI/Foundations/Wette1969CompletenessInterpretationBridgeExact.agda \
   DASHI/Foundations/Wette1970PrimaryTextExtractionExact.agda \
   DASHI/Foundations/WetteHistoricalRecoveryFrontierExact.agda \
