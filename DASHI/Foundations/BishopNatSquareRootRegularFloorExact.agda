@@ -8,9 +8,11 @@ open import Agda.Builtin.Nat using (Nat)
 open import Data.Integer.Base as ℤ using (+_; +≤+)
 open import Data.Nat.Base using (NonZero; z≤n)
 open import Data.Rational.Unnormalised as ℚ using
-  (ℚᵘ; _/_; _+_; _≤_; NonNegative; nonNegative; *≤*)
+  (ℚᵘ; _/_; _+_; _-_; _≤_; ∣_∣; NonNegative; nonNegative; *≤*)
 import Data.Rational.Unnormalised.Properties as ℚP
 
+import Real as BishopReal
+import DASHI.Foundations.BishopNatSquareRootFloorApproximationExact as FloorApprox
 import DASHI.Foundations.BishopNatSquareRootRationalCrossPrecisionExact as Cross
 import DASHI.Foundations.BishopRegularRationalApproximationExact as Approx
 import DASHI.Foundations.RationalDirectedDifferenceAbsoluteBoundExact as Absolute
@@ -39,7 +41,7 @@ floorApproximationDirectedRight :
 floorApproximationDirectedRight radicand leftPrecision rightPrecision =
   ℚP.≤-respʳ-≃
     (Successor.successorFractionEquivalent
-      (Cross.FloorApprox.floorSquareRootNumerator radicand rightPrecision)
+      (FloorApprox.floorSquareRootNumerator radicand rightPrecision)
       rightPrecision)
     (Cross.floorApproximationCrossPrecisionLe
       radicand leftPrecision rightPrecision)
@@ -55,7 +57,7 @@ floorApproximationDirectedLeft :
 floorApproximationDirectedLeft radicand leftPrecision rightPrecision =
   ℚP.≤-respʳ-≃
     (Successor.successorFractionEquivalent
-      (Cross.FloorApprox.floorSquareRootNumerator radicand leftPrecision)
+      (FloorApprox.floorSquareRootNumerator radicand leftPrecision)
       leftPrecision)
     (Cross.floorApproximationCrossPrecisionLeSwapped
       radicand leftPrecision rightPrecision)
@@ -91,7 +93,7 @@ canonicalRegularApproximation radicand = record
   }
 
 canonicalFloorSquareRootReal :
-  Nat → Cross.BishopReal.ℝ
+  Nat → BishopReal.ℝ
 canonicalFloorSquareRootReal radicand =
   Approx.realizeRegularApproximation
     (canonicalRegularApproximation radicand)
