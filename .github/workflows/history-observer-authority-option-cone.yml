@@ -1,0 +1,88 @@
+name: History/observer/authority option-cone Agda check
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Core/ObserverAffordanceIncomparabilityExact.agda'
+      - 'DASHI/Core/RelationalityGradeSeparationExact.agda'
+      - 'DASHI/Governance/HistoryConditionedSocialEcologyOptionConeExact.agda'
+      - 'DASHI/Governance/ObserverValuationAuthoritySeparationExact.agda'
+      - 'DASHI/Governance/HistoryObserverAuthorityOptionConeCapstoneExact.agda'
+      - 'DASHI/Core/Everything.agda'
+      - 'DASHI/Governance/Everything.agda'
+      - '.github/workflows/history-observer-authority-option-cone.yml'
+
+concurrency:
+  group: history-observer-authority-option-cone-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  focused-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
+      - name: Restore Agda 2.9 shadow cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ runner.temp }}/dashi-agda29
+          key: history-observer-authority-agda29-${{ runner.os }}-86a1179-${{ hashFiles('scripts/run_agda29_parallel_check.sh') }}
+      - name: Trust scan history observer authority tranche
+        shell: bash
+        run: |
+          set -euo pipefail
+          files=(
+            DASHI/Core/ObserverAffordanceIncomparabilityExact.agda
+            DASHI/Core/RelationalityGradeSeparationExact.agda
+            DASHI/Governance/HistoryConditionedSocialEcologyOptionConeExact.agda
+            DASHI/Governance/ObserverValuationAuthoritySeparationExact.agda
+            DASHI/Governance/HistoryObserverAuthorityOptionConeCapstoneExact.agda
+          )
+          if grep -nE '\b(postulate|{-# OPTIONS --allow-unsolved-metas #-}|sorry|admit)\b' "${files[@]}"; then
+            echo 'Forbidden trust-boundary token found in history/observer/authority tranche.' >&2
+            exit 1
+          fi
+      - name: Check focused roots with Agda 2.9
+        id: focused
+        shell: bash
+        run: |
+          set +e
+          (
+            set -euo pipefail
+            export AGDA_FLAKE="github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin"
+            export DASHI_REPO_ROOT="$GITHUB_WORKSPACE"
+            export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
+            export AGDA_LOG_PATH="$GITHUB_WORKSPACE/agda-history-observer-authority-check.log"
+            export AGDA_JOBS=2
+            targets=(
+              DASHI/Core/ObserverAffordanceIncomparabilityExact.agda
+              DASHI/Core/RelationalityGradeSeparationExact.agda
+              DASHI/Governance/HistoryConditionedSocialEcologyOptionConeExact.agda
+              DASHI/Governance/ObserverValuationAuthoritySeparationExact.agda
+              DASHI/Governance/HistoryObserverAuthorityOptionConeCapstoneExact.agda
+              DASHI/Core/Everything.agda
+              DASHI/Governance/Everything.agda
+            )
+            scripts/run_agda29_parallel_check.sh "${targets[@]}"
+          ) > agda-history-observer-authority-check.log 2>&1
+          status=$?
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          tail -n 340 agda-history-observer-authority-check.log
+          exit 0
+      - name: Upload focused Agda log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: history-observer-authority-agda-log
+          path: agda-history-observer-authority-check.log
+          if-no-files-found: error
+      - name: Fail on Agda error
+        if: steps.focused.outputs.status != '0'
+        run: exit 1

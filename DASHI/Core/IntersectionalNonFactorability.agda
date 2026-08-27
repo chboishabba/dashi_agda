@@ -18,6 +18,13 @@ open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 -- single-axis frames can fail to represent situated phenomena.  The
 -- factorisation criterion below is a DASHI mathematical translation, not a
 -- theorem attributed to Crenshaw.
+--
+-- The recharting theorem added below is also generic DASHI mathematics.  It
+-- formalises a representation-theoretic point used in the supplied 2026-08-27
+-- discussion: once two situated states have already collided under a coarse
+-- observer, post-composing that observer with a relabelling/reweighting/chart
+-- map cannot recover a phenomenon that distinguishes those states.  A richer
+-- observer must add information rather than merely rename the old quotient.
 ------------------------------------------------------------------------
 
 record FactorsThrough
@@ -61,6 +68,39 @@ witnessRulesOutEveryFlatFactorisation witness factor =
         (sym (factorisation factor (right witness)))))
 
 ------------------------------------------------------------------------
+-- Recharting/post-composition cannot recover information erased by `flatten`.
+-- This is stronger than a statement about permutations: the post-map may be
+-- any function whatsoever.  If the original observer identifies the witness
+-- pair, every observer factoring through it identifies that pair as well.
+------------------------------------------------------------------------
+
+postcomposeNonFactorability :
+  ∀ {Situated Flat Recharted Outcome}
+    {flatten : Situated → Flat}
+    {phenomenon : Situated → Outcome} →
+  (rechart : Flat → Recharted) →
+  NonFactorabilityWitness flatten phenomenon →
+  NonFactorabilityWitness (λ state → rechart (flatten state)) phenomenon
+postcomposeNonFactorability rechart witness =
+  nonFactorabilityWitness
+    (left witness)
+    (right witness)
+    (cong rechart (sameFlatProjection witness))
+    (situatedOutcomesDiffer witness)
+
+rechartingCannotRecoverErasedPhenomenon :
+  ∀ {Situated Flat Recharted Outcome}
+    {flatten : Situated → Flat}
+    {phenomenon : Situated → Outcome} →
+  (rechart : Flat → Recharted) →
+  NonFactorabilityWitness flatten phenomenon →
+  FactorsThrough (λ state → rechart (flatten state)) phenomenon →
+  ⊥
+rechartingCannotRecoverErasedPhenomenon rechart witness =
+  witnessRulesOutEveryFlatFactorisation
+    (postcomposeNonFactorability rechart witness)
+
+------------------------------------------------------------------------
 -- Concrete carrier-repair witness.
 ------------------------------------------------------------------------
 
@@ -97,6 +137,21 @@ flatReweightingCannotRepairMissingRelation :
 flatReweightingCannotRepairMissingRelation =
   witnessRulesOutEveryFlatFactorisation canonicalIntersectionalNonFactorability
 
+canonicalRechartingCannotRepairMissingRelation :
+  ∀ {Recharted : Set} →
+  (rechart : FlatSingleAxis → Recharted) →
+  FactorsThrough (λ state → rechart (flatProjection state)) relationalOutcome →
+  ⊥
+canonicalRechartingCannotRepairMissingRelation rechart =
+  rechartingCannotRecoverErasedPhenomenon
+    rechart canonicalIntersectionalNonFactorability
+
+------------------------------------------------------------------------
+-- Product-of-single-axis readings are not automatically intersectional.
+-- This no-promotion boundary prevents two separately useful consumer surfaces
+-- from being promoted to a sufficient situated-intersectional carrier without
+-- an application-supplied factorisation witness.
+------------------------------------------------------------------------
 data SeparateAxisSufficiencyImpliesIntersectionalSufficiencyPermission : Set where
 
 separateAxisSufficiencyCannotAutoPromote :
