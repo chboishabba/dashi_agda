@@ -22,6 +22,7 @@ module DASHI.Foundations.Wette1969RuleRevisionExact where
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
+import DASHI.Core.FormalSystemRevisionGeometryExact as Revision
 
 ------------------------------------------------------------------------
 -- Rule addresses are kept structural so later exact rule bodies can attach to
@@ -157,6 +158,21 @@ p193RuleCountBalance :
     ≡ finalModifiedRuleCount + removed921To926RuleCount + saved93RuleCount
 p193RuleCountBalance = refl
 
+-- Generic DASHI revision geometry sees exactly the same bookkeeping as
+-- seven additions versus eight removals.  This is count reconciliation only;
+-- it is not a derivational-equivalence certificate for the two presentations.
+p193GenericRuleCountBalance : Revision.RuleCountBalance
+p193GenericRuleCountBalance =
+  Revision.ruleCountBalance
+    originalCompactRuleCount
+    (added94RuleCount + added920RuleCount)
+    finalModifiedRuleCount
+    (removed921To926RuleCount + saved93RuleCount)
+    refl
+
+revisionGeometryOwner : Revision.FormalSystemRevisionBoundary
+revisionGeometryOwner = Revision.canonicalFormalSystemRevisionBoundary
+
 ------------------------------------------------------------------------
 -- The source's informal explanation in 1.632 separates three logical roles:
 --
@@ -212,6 +228,10 @@ record Wette1969RuleRevisionBoundary : Set where
     criticalRuleBodiesFullyTranscribedIsFalse :
       criticalRuleBodiesFullyTranscribed ≡ false
 
+    countBalanceAlreadyProvesRevisionEquivalence : Bool
+    countBalanceAlreadyProvesRevisionEquivalenceIsFalse :
+      countBalanceAlreadyProvesRevisionEquivalence ≡ false
+
     sourceRoleAssignmentIsAlreadySemanticCorrectnessProof : Bool
     sourceRoleAssignmentIsAlreadySemanticCorrectnessProofIsFalse :
       sourceRoleAssignmentIsAlreadySemanticCorrectnessProof ≡ false
@@ -222,5 +242,6 @@ canonicalWette1969RuleRevisionBoundary =
     true refl
     true refl
     true refl
+    false refl
     false refl
     false refl
