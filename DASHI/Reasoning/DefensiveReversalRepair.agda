@@ -81,7 +81,7 @@ record CausalConflictPath : Set where
     objection : String
     secondaryDistress : String
     counterAllegation : String
-    resolutionAttempt : String
+    resolutionAttemptDescription : String
     originalIssueStillOpen : Bool
     pathReceipt : String
 
