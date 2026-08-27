@@ -6,3 +6,4 @@ import DASHI.Core.FallacyObstructionEverything
 import DASHI.Core.FormalClaimTransportGeometryExact
 import DASHI.Core.FormalizationRecoverySourceRegistryExact
 import DASHI.Core.FormalizationRecoveryGeometryExact
+import DASHI.Core.SourceAcquisitionGeometryExact
