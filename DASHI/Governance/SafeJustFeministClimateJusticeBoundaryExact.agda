@@ -9,9 +9,13 @@ open import DASHI.Core.Prelude
 -- constructions motivated by the cited literature; the authors are not
 -- credited with these Nat/Bool encodings.
 --
+-- Marilyn Power, "Social Provisioning as a Starting Point for Feminist
+-- Economics", Feminist Economics 10(3) (2004), 3--19,
+-- DOI 10.1080/1354570042000267608.
+--
 -- Marilyn Waring, If Women Counted (1988); retrospective source:
--- Marilyn Power et al., "Twenty-Five Years of Counting for Nothing:
--- Waring's Critique of National Accounts", Feminist Economics 23(2),
+-- "Twenty-Five Years of Counting for Nothing: Waring's Critique of National
+-- Accounts", Feminist Economics 23(2),
 -- DOI 10.1080/13545701.2016.1178854.
 --
 -- Sherilyn MacGregor, "'Gender and climate change': from impacts to
@@ -39,17 +43,12 @@ open import DASHI.Core.Prelude
 ------------------------------------------------------------------------
 
 data FeministClimateSource : Set where
-  waring1988
-  macgregor2010
-  macgregor2014
-  sultana2022
-  alstonFullerKwarney2023
-  carterHoward2020
-  yusoff2018
-  maathai2004
+  power2004 waring1988 macgregor2010 macgregor2014 sultana2022
+  alstonFullerKwarney2023 carterHoward2020 yusoff2018 maathai2004
   : FeministClimateSource
 
 data SourceRole : Set where
+  socialProvisioningMethodology
   productionBoundaryCritique
   measurableImpactCritique
   postPoliticalAuthorityCritique
@@ -65,6 +64,9 @@ record SourceRoleEntry : Set where
   field
     source : FeministClimateSource
     role : SourceRole
+
+powerProvisioningRole : SourceRoleEntry
+powerProvisioningRole = sourceRoleEntry power2004 socialProvisioningMethodology
 
 waringRole : SourceRoleEntry
 waringRole = sourceRoleEntry waring1988 productionBoundaryCritique
@@ -117,12 +119,8 @@ countedOutputDoesNotRecoverProvisioning ()
 ------------------------------------------------------------------------
 
 data ResidualKind : Set where
-  phenomenonResidual
-  epistemicResidual
-  responsibilityImpactAsymmetryResidual
-  categoricalAuthorityResidual
-  democraticAuthorityResidual
-  : ResidualKind
+  phenomenonResidual epistemicResidual responsibilityImpactAsymmetryResidual
+  categoricalAuthorityResidual democraticAuthorityResidual : ResidualKind
 
 phenomenonResidualDiffersFromEpistemicResidual :
   phenomenonResidual ≡ epistemicResidual → ⊥
@@ -143,6 +141,9 @@ categoricalAuthorityResidualDiffersFromMissingData ()
 record FeministClimateJusticeBoundary : Set where
   constructor feministClimateJusticeBoundary
   field
+    marketExchangeExhaustsSocialProvisioning : Bool
+    marketExchangeExhaustsSocialProvisioningIsFalse :
+      marketExchangeExhaustsSocialProvisioning ≡ false
     countedEconomicOutputExhaustsProvisioning : Bool
     countedEconomicOutputExhaustsProvisioningIsFalse :
       countedEconomicOutputExhaustsProvisioning ≡ false
@@ -168,4 +169,4 @@ record FeministClimateJusticeBoundary : Set where
 canonicalFeministClimateJusticeBoundary : FeministClimateJusticeBoundary
 canonicalFeministClimateJusticeBoundary =
   feministClimateJusticeBoundary
-    false refl false refl false refl false refl false refl false refl false refl
+    false refl false refl false refl false refl false refl false refl false refl false refl
