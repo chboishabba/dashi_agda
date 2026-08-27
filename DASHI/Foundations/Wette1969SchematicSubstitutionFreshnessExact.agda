@@ -9,29 +9,24 @@ module DASHI.Foundations.Wette1969SchematicSubstitutionFreshnessExact where
 -- DOI: 10.1007/978-3-642-86745-3_9
 --
 -- This module attacks the computational side of the recovered critical rules
--- conservatively.  Wette's rule schemata use nineteen word variables, and the
+-- conservatively. Wette's rule schemata use nineteen word variables, and the
 -- historical syntax owner already distinguishes WordTerm from concrete Word.
--- We therefore implement exact structural instantiation of those schematic word
--- variables and a proof-relevant occurrence/freshness judgement on WordTerm.
+-- We implement exact structural instantiation of those schematic word variables
+-- and a proof-relevant occurrence/freshness judgement on WordTerm.
 --
 -- This is NOT yet the full object-language tuple/predicate substitution relation
--- described by Wette's four-place substitution relator on p.148.  In particular
+-- described by Wette's four-place substitution relator on p.148. In particular
 -- it does not manufacture capture-avoidance for bound predicate/variable
--- operations.  It does provide a concrete evaluator for schematic substitution
--- and concrete certificates for the freshness side-condition fragment.
+-- operations. It provides a concrete evaluator for schematic substitution and
+-- concrete certificates for the freshness side-condition fragment.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
-open import Data.Fin using (Fin)
 
 import DASHI.Foundations.Wette1969HistoricalSignatureExact as Signature
 
 WordTerm = Signature.WordTerm
 WordVariable = Signature.WordVariable
-
-------------------------------------------------------------------------
--- Exact structural instantiation of Wette's nineteen rule-schematic variables.
-------------------------------------------------------------------------
 
 SubstitutionEnvironment : Set
 SubstitutionEnvironment = WordVariable → WordTerm
@@ -99,11 +94,7 @@ freshBinary leftFresh rightFresh (occursBinaryRight occurrence) =
   rightFresh occurrence
 
 ------------------------------------------------------------------------
--- Extensional substitution agreement.
---
--- If two environments agree on every schematic variable that occurs in a term,
--- their instantiated results are equal.  This is the basic exactness theorem
--- needed before later specializing the evaluator to recovered 9.3.24/25 words.
+-- Extensional evaluator theorem.
 ------------------------------------------------------------------------
 
 environmentsAgreeOn :
@@ -149,25 +140,8 @@ instantiateCongOnOccurrences left right
     cong₂ f refl refl = refl
 
 ------------------------------------------------------------------------
--- Freshness makes a single environment-coordinate change observationally
--- irrelevant for that term.  This is a concrete computational form of the
--- side-condition intuition behind Wette's freshness premises, without claiming
--- that it already reconstructs his full four-place substitution calculus.
+-- Concrete certificates exposed to critical-rule consumers.
 ------------------------------------------------------------------------
-
-record SingleVariableEnvironmentChange
-    (variable : WordVariable)
-    (left right : SubstitutionEnvironment) : Set where
-  constructor singleVariableEnvironmentChange
-  field
-    agreesElsewhere :
-      (other : WordVariable) →
-      other ≡ variable → ⊥ →
-      left other ≡ right other
-
--- Stronger and directly consumable form: callers provide agreement on all
--- variables actually occurring in the term.  Freshness can be used when
--- constructing that agreement for a concrete source word.
 
 record SchematicFreshnessCertificate : Set where
   constructor schematicFreshnessCertificate
