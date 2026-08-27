@@ -2,18 +2,12 @@ module DASHI.EverythingPartitionAsymptotics where
 
 ------------------------------------------------------------------------
 -- Focused typecheck/import surface for the Hardy--Ramanujan / Erdos / Newman
--- partition lane.  The finite layer includes generic graded pointing,
--- proof-free exact key enumeration, strict deletion-fibre instantiation,
--- independent/classical residual normal forms and exact permutations,
--- arbitrary-n factor-pair and sigma1 recurrences, exact Nat majorant
--- cancellation, coarse finite growth envelopes, and the rank-one Fock
--- occupation-grading bridge.
+-- partition lane.
 --
--- The analytic layer uses the exact git-pinned `vendor/bishop` submodule.
--- Existing Yang--Mills Bishop geometric and polynomial-weighted finite-sum
--- machinery is reused directly for the Erdos degree-one kernel.  Square-root
--- realization is reduced to exact Nat/rational approximants constructed above
--- the vendored `Real.mkℝ` carrier.
+-- The analytic layer is built directly over the exact git-pinned
+-- `vendor/bishop` submodule.  The canonical Nat square-root candidate is now a
+-- `Real.mkℝ` value obtained from executable floor-square-root rational
+-- approximants with source-level cross-precision regularity.
 ------------------------------------------------------------------------
 
 import DASHI.Foundations.BishopVendoredSubmoduleProvenanceExact
@@ -21,8 +15,11 @@ import DASHI.Foundations.BishopRegularRationalApproximationExact
 import DASHI.Foundations.BishopNatSquareRootApproximationExact
 import DASHI.Foundations.BishopNatSquareRootFloorApproximationExact
 import DASHI.Foundations.BishopNatSquareRootRationalCrossPrecisionExact
+import DASHI.Foundations.RationalDirectedDifferenceAbsoluteBoundExact
+import DASHI.Foundations.BishopNatSquareRootRegularFloorExact
 import DASHI.Mathematics.NumberTheory.FiniteNatFloorSquareRootExact
 import DASHI.Mathematics.NumberTheory.FiniteNatFractionOrderExact
+import DASHI.Mathematics.NumberTheory.FiniteNatSuccessorFractionExact
 import DASHI.Mathematics.NumberTheory.FiniteWeightedReindexExact
 import DASHI.Mathematics.NumberTheory.FiniteProductEnumerationExact
 import DASHI.Mathematics.NumberTheory.FiniteProductCardinalityExact
