@@ -15,7 +15,11 @@ module DASHI.Physics.Closure.NSTriadKNWaleffeForcingRouteAuditRound108Exact wher
 -- * low-minority geometry carries two gap powers before network summation;
 -- * the literal network forcing is quartic under amplitude scaling;
 -- * frequency gap weights do not change that amplitude degree;
--- * the whole-interval phase normal form removes adverse masks exactly.
+-- * the whole-interval phase normal form removes adverse masks exactly;
+-- * the SELF Waleffe phase forcing is not opaque: for each projected helical
+--   pair its phase derivative contribution is the signed eigenvalue difference
+--   times a projected-cross square mass.  It must therefore be extracted
+--   before any generic external-forcing budget is applied.
 --
 -- EXACT NO-GOS
 --
@@ -30,15 +34,17 @@ module DASHI.Physics.Closure.NSTriadKNWaleffeForcingRouteAuditRound108Exact wher
 --
 -- SURVIVING DISCOVERY TARGET
 --
--- A new theorem must therefore use the LITERAL Navier--Stokes self/external
--- forcing structure together with phase/network/time geometry to obtain an
--- independent cutoff-uniform endpoint or integrable-remainder payment.  It
--- cannot be merely:
+-- The self term is already algebraically exposed.  The remaining theorem must
+-- therefore control the genuinely EXTERNAL cross-triad remainder after that
+-- extraction, using the signed gap-weighted phase/network/time geometry to
+-- obtain an independent cutoff-uniform endpoint or integrable-remainder
+-- payment.  It cannot be merely:
 --
 --   positive-part replacement,
 --   a global Wiener ceiling,
 --   direct gap-weighted quartic-to-quadratic absorption,
 --   unmasked cancellation,
+--   taxation of the already-exact self square-mass term,
 --   or a renamed signed-forcing budget.
 ------------------------------------------------------------------------
 
@@ -53,6 +59,7 @@ import DASHI.Physics.Closure.NSTriadKNInteriorEpisodeBudgetEquivalenceExact as E
 import DASHI.Physics.Closure.NSTriadKNGlobalPhaseNormalFormCriticalEnergyExact as GlobalNF
 import DASHI.Physics.Closure.NSTriadKNQuadraticCubicNormalFormCoercivityNoGoExact as CubicNoGo
 import DASHI.Physics.Closure.NSTriadKNQuarticForcingQuadraticAbsorptionNoGoExact as QuarticNoGo
+import DASHI.Physics.Closure.NSTriadKNSelfWaleffePhaseProjectedCrossMassRound106Exact as Self
 
 round108PositivePartOfNetworkForcingRequired : Bool
 round108PositivePartOfNetworkForcingRequired =
@@ -92,8 +99,16 @@ round108SimpleGlobalNormalFormAutomaticallyCoercive : Bool
 round108SimpleGlobalNormalFormAutomaticallyCoercive =
   CubicNoGo.simpleGlobalPhaseNormalFormIsAutomaticallyCoercive
 
-round108LiteralSignedSelfExternalForcingMechanismClosed : Bool
-round108LiteralSignedSelfExternalForcingMechanismClosed = false
+round108SelfWaleffePhaseProjectedCrossMassClosed : Bool
+round108SelfWaleffePhaseProjectedCrossMassClosed =
+  Self.round106SelfWaleffePhaseProjectedCrossMassClosed
+
+round108SelfPhaseMayBeTaxedAsArbitraryExternalForcing : Bool
+round108SelfPhaseMayBeTaxedAsArbitraryExternalForcing =
+  Self.round106SelfPhaseMayBeTaxedAsArbitraryExternalForcing
+
+round108PhysicalExternalCrossTriadForcingRemainderPaymentClosed : Bool
+round108PhysicalExternalCrossTriadForcingRemainderPaymentClosed = false
 
 round108PositivePartOfNetworkForcingRequiredIsFalse :
   round108PositivePartOfNetworkForcingRequired ≡ false
@@ -135,6 +150,14 @@ round108SimpleGlobalNormalFormAutomaticallyCoerciveIsFalse :
   round108SimpleGlobalNormalFormAutomaticallyCoercive ≡ false
 round108SimpleGlobalNormalFormAutomaticallyCoerciveIsFalse = refl
 
-round108LiteralSignedSelfExternalForcingMechanismClosedIsFalse :
-  round108LiteralSignedSelfExternalForcingMechanismClosed ≡ false
-round108LiteralSignedSelfExternalForcingMechanismClosedIsFalse = refl
+round108SelfWaleffePhaseProjectedCrossMassClosedIsTrue :
+  round108SelfWaleffePhaseProjectedCrossMassClosed ≡ true
+round108SelfWaleffePhaseProjectedCrossMassClosedIsTrue = refl
+
+round108SelfPhaseMayBeTaxedAsArbitraryExternalForcingIsFalse :
+  round108SelfPhaseMayBeTaxedAsArbitraryExternalForcing ≡ false
+round108SelfPhaseMayBeTaxedAsArbitraryExternalForcingIsFalse = refl
+
+round108PhysicalExternalCrossTriadForcingRemainderPaymentClosedIsFalse :
+  round108PhysicalExternalCrossTriadForcingRemainderPaymentClosed ≡ false
+round108PhysicalExternalCrossTriadForcingRemainderPaymentClosedIsFalse = refl
