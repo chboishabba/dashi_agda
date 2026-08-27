@@ -41,6 +41,17 @@ import DASHI.Core.SocialEcologyHierarchyProjectionBoundaryExact
 import DASHI.Core.CriticalSocialEcologyObserverRegimeExact
 import DASHI.Core.ZeroValueFibreNontrivialityExact
 import DASHI.Core.CriticalRelationalGrammarCapstoneExact
+import DASHI.Core.RelationalAffordanceCoreExact
+import DASHI.Core.PlumwoodMasterModelOperationFamilyExact
+import DASHI.Core.McCallCategoryStrategyBoundaryExact
+import DASHI.Core.ButlerPerformativeGenesisNonDescentExact
+import DASHI.Core.InterpretiveFormalisationCoreExact
+import DASHI.Core.VocabularyProvenanceExact
+import DASHI.Core.SituatedFormalisationBoundaryExact
+import DASHI.Core.FormalisationAbuseLintExact
+import DASHI.Core.FormalisationCompatibilityExact
+import DASHI.Core.KernelSemanticClosureBoundaryExact
+import DASHI.Core.FormalisationGovernanceSourceRegistryExact
 import DASHI.Core.DialecticalStageSpectrumExact
 import DASHI.Core.ContextualDialecticRoleExact
 import DASHI.Core.EpistemicSuspensionExact
