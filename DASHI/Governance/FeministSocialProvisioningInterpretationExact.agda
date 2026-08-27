@@ -11,8 +11,12 @@ import DASHI.Governance.FeministClimateJusticeSourceRegistryExact as Sources
 -- Economics", Feminist Economics 10(3):3-19 (2004).
 -- DOI: 10.1080/1354570042000267608.
 --
--- The five source components are represented as interpretation roles, not as a
--- claim that Power supplied or endorsed the DASHI carrier.
+-- Power states five methodological components.  DASHI represents them through
+-- six formal interpretation roles because her third component -- analysis of
+-- economic, political and social processes and power relations -- is split into
+-- `economicPoliticalSocialProcess` and `powerRelations`.  That split is a DASHI
+-- formal convenience, not a claim that Power stated six components or supplied
+-- this carrier.
 ------------------------------------------------------------------------
 
 data SocialProvisioningRole : Set where
@@ -45,13 +49,14 @@ record SocialProvisioningCalibrationReceipt : Set where
   field
     careMapped : interpretRole careAndUnpaidLabour ≡ provisioningActivity
     wellbeingMapped : interpretRole wellbeingCriterion ≡ functioningOrNeedOutcome
+    processMapped : interpretRole economicPoliticalSocialProcess ≡ institutionalAuthorityContext
     powerMapped : interpretRole powerRelations ≡ institutionalAuthorityContext
     ethicsMapped : interpretRole ethicalGoalsAndValues ≡ explicitNormativeClaimRole
     differenceMapped : interpretRole intersectionalDifference ≡ situatedIntersectionalCoordinates
 
 canonicalSocialProvisioningCalibration : SocialProvisioningCalibrationReceipt
 canonicalSocialProvisioningCalibration =
-  socialProvisioningCalibrationReceipt refl refl refl refl refl
+  socialProvisioningCalibrationReceipt refl refl refl refl refl refl
 
 -- Existing #625 witness remains a DASHI construction: changing resource input
 -- without changing the provisioning context need not expand capability.
