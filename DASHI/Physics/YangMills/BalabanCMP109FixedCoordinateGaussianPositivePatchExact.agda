@@ -26,9 +26,7 @@ module DASHI.Physics.YangMills.BalabanCMP109FixedCoordinateGaussianPositivePatch
 --
 --      Ahat' = C'^* A C + C^* A' C + C^* A C'.
 --
--- The old positive-patch consumer treated Wilson, averaging and projection
--- changes as three unrelated additive errors.  This file instead separates the
--- source-native derivative into:
+-- The source-native split is:
 --
 --   * middlePhysical = C^* A' C;
 --   * tangentialConnection = the C'=CK part, which cancels the induced
@@ -36,19 +34,21 @@ module DASHI.Physics.YangMills.BalabanCMP109FixedCoordinateGaussianPositivePatch
 --   * normalConnection = genuine motion of the constrained subspace.
 --
 -- Thus only middlePhysical + normalConnection has to win on the positive patch.
--- The Wilson part of A' is now supplied by the exact physical 64-atom mixed
--- Wilson jet; Q' enters only through the normal C' solve QC'=-Q'C.
+-- The Wilson part of A' is supplied by the exact physical 64-atom mixed Wilson
+-- jet; Q' enters only through the normal C' solve QC'=-Q'C.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.List using (List; _∷_)
 open import Data.Integer.Base using (+_)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _-_; -_; _≤_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _-_; -_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayT4ConfiguredBrillouinIntegralCertificateExact as Integral
+import DASHI.Physics.YangMills.BalabanConstructiveRationalMatrixInverseExact as Matrix
 import DASHI.Physics.YangMills.BalabanFiniteRationalTraceConnectionCancellationExact as Trace
 
 ------------------------------------------------------------------------
@@ -118,7 +118,7 @@ fixedCoordinateFloorBelowBoxLower patch =
 record CMP109FixedCoordinateGaussianPositivePatch : Set₁ where
   field
     positivePatch : FixedCoordinatePatchBox
-    complement : Agda.Builtin.List.List Integral.BoxIntegralEnclosure
+    complement : List Integral.BoxIntegralEnclosure
 
     patchHasCutoffVolumeUniformPositiveMeasure : Set
     patchUsesMixedLorentzColorComponent : Set
@@ -139,7 +139,7 @@ globalFixedCoordinateLowerFromPatch :
   middleFloor (contribution (positivePatch dataSet))
     - normalBudget (contribution (positivePatch dataSet))
   ≤ Integral.boxLowerSum
-      (box (positivePatch dataSet) Agda.Builtin.List.∷ complement dataSet)
+      (box (positivePatch dataSet) ∷ complement dataSet)
 globalFixedCoordinateLowerFromPatch dataSet =
   let
     patchLower = fixedCoordinateFloorBelowBoxLower (positivePatch dataSet)
@@ -166,7 +166,7 @@ tangentialCoordinateContributionIsZero :
     - (+ 1 / 2)
       * Trace.matrixTrace
           (Trace.carrier (Trace.connection (tangentialResponse dataSet)))
-          (DASHI.Physics.YangMills.BalabanConstructiveRationalMatrixInverseExact.multiplyMatrix
+          (Matrix.multiplyMatrix
             (Trace.carrier (Trace.connection (tangentialResponse dataSet)))
             (Trace.inverseRestricted (Trace.connection (tangentialResponse dataSet)))
             (Trace.connectionVariation (Trace.connection (tangentialResponse dataSet))))
