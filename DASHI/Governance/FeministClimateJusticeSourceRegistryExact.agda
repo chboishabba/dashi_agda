@@ -61,6 +61,17 @@ saundersDalziel2017 = sourceReference
   "peer-reviewed historical/methodological reassessment"
   "corroborates Waring's challenge to the national-accounting framework, including exclusion of unpaid household work and environmental impacts from core statistics"
 
+macGregor2010 : SourceReference
+macGregor2010 = sourceReference
+  "Sherilyn MacGregor"
+  "'Gender and climate change': from impacts to discourses"
+  "Journal of the Indian Ocean Region 6(2):223-238"
+  2010
+  "DOI"
+  "10.1080/19480881.2010.536669"
+  "peer-reviewed feminist climate-politics article"
+  "source for critique of an unnecessarily narrow fixation on material/measurable gendered climate impacts and passive-victim framing; motivates discourse/observer audit without rejecting measurement or impact research"
+
 macGregor2014 : SourceReference
 macGregor2014 = sourceReference
   "Sherilyn MacGregor"
