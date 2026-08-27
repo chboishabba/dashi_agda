@@ -18,6 +18,7 @@ sources=(
   DASHI/Analysis/RiemannG21SymmetricSampleBlockReductionExact.agda
   DASHI/Analysis/RiemannG21HyperbolicWeightMonotonicityTargetExact.agda
   DASHI/Analysis/RiemannG21ScaledHyperbolicMonotonicityBridgeExact.agda
+  DASHI/Analysis/RiemannG21EvenHyperbolicAlgebraicRouteExact.agda
   DASHI/Analysis/RiemannG21MathlibHyperbolicReceiptBoundary.agda
   DASHI/Analysis/RiemannG21TwoHeightMomentRatioTargetExact.agda
   DASHI/Analysis/RiemannG21TwoPointCovarianceShadowExact.agda
@@ -64,6 +65,10 @@ require_pattern DASHI/Analysis/RiemannG21HyperbolicWeightMonotonicityTargetExact
 require_pattern DASHI/Analysis/RiemannG21ScaledHyperbolicMonotonicityBridgeExact.agda 'scaledTanhStrictlyIncreasing'
 require_pattern DASHI/Analysis/RiemannG21ScaledHyperbolicMonotonicityBridgeExact.agda 'scaledCothStrictlyIncreasing'
 require_pattern DASHI/Analysis/RiemannG21ScaledHyperbolicMonotonicityBridgeExact.agda 'sinhCoshDominatesIdentity'
+require_pattern DASHI/Analysis/RiemannG21EvenHyperbolicAlgebraicRouteExact.agda 'sumArgumentFactorizationIdentifiedIsTrue'
+require_pattern DASHI/Analysis/RiemannG21EvenHyperbolicAlgebraicRouteExact.agda 'squareDifferenceFactorizationIdentifiedIsTrue'
+require_pattern DASHI/Analysis/RiemannG21EvenHyperbolicAlgebraicRouteExact.agda 'evenSectorIndependentOfXTanhRouteIsTrue'
+require_pattern DASHI/Analysis/RiemannG21EvenHyperbolicAlgebraicRouteExact.agda 'orderedRealCoshMinorDerivedInAgdaIsFalse'
 require_pattern DASHI/Analysis/RiemannG21MathlibHyperbolicReceiptBoundary.agda 'Real.self_lt_sinh_iff'
 require_pattern DASHI/Analysis/RiemannG21MathlibHyperbolicReceiptBoundary.agda 'Real.tanh_eq_sinh_div_cosh'
 require_pattern DASHI/Analysis/RiemannG21MathlibHyperbolicReceiptBoundary.agda 'leanProofTermImportedIntoAgdaIsFalse'
@@ -93,6 +98,7 @@ require_pattern DASHI/Analysis/RiemannG21PoleQuotientedExteriorExact.agda 'riema
 DASHI_NO_TMUX=1 scripts/run_agda29_parallel_check.sh \
   DASHI/Analysis/RiemannG21Regression.agda \
   DASHI/Analysis/RiemannG21ParityMinorAnalyticFrontierExact.agda \
+  DASHI/Analysis/RiemannG21EvenHyperbolicAlgebraicRouteExact.agda \
   DASHI/Analysis/RiemannG21MathlibHyperbolicReceiptBoundary.agda \
   DASHI/Analysis/RiemannG21ContextualAlternativeNonpromotionExact.agda \
   DASHI/Analysis/RiemannG21ContextualAlternativeFiniteInstanceExact.agda
