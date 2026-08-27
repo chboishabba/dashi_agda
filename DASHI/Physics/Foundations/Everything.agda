@@ -27,6 +27,10 @@ import DASHI.Physics.Foundations.UnifiedEffectiveActionBoundary
 import DASHI.Physics.Foundations.FiniteHistoryOrientationExact
 import DASHI.Physics.Foundations.HistoryWeightFiltrationExact
 import DASHI.Physics.Foundations.FiniteHistoryFunctionalExact
+import DASHI.Physics.Foundations.CoupledTrajectoryCoherenceExact
+import DASHI.Physics.Foundations.StationaryCoherenceClassificationExact
+import DASHI.Physics.Foundations.ContextConditionedTrajectoryWeightExact
+import DASHI.Physics.Foundations.PathIntegralExperimentalSourceRegistryExact
 import DASHI.Physics.Foundations.FormalReceiptBoundaryExact
 import DASHI.Physics.Foundations.FiniteResidueCycleReachabilityExact
 import DASHI.Physics.Foundations.FiniteWeightedTernaryKernelExact
