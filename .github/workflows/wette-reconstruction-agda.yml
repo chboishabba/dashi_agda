@@ -12,6 +12,7 @@ on:
       - 'DASHI/Foundations/Wette/**'
       - 'DASHI/Foundations/Everything.agda'
       - 'scripts/check_wette_reconstruction.sh'
+      - 'scripts/check_wette_source_acquisition.sh'
       - '.github/workflows/wette-reconstruction-agda.yml'
   workflow_dispatch:
 
@@ -36,4 +37,5 @@ jobs:
       - uses: DeterminateSystems/magic-nix-cache-action@v9
       - name: Run focused Wette source and typecheck audit
         run: |
+          nix develop .# --command bash scripts/check_wette_source_acquisition.sh
           nix develop .# --command bash scripts/check_wette_reconstruction.sh
