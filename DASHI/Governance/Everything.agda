@@ -59,6 +59,8 @@ import DASHI.Governance.Fanning2022SocialIndicatorRevisionExact
 import DASHI.Governance.Fanning2022NormalizationExact
 import DASHI.Governance.Fanning2022ProjectionBoundaryExact
 import DASHI.Governance.Fanning2022ForecastAuthorityExact
+import DASHI.Governance.Fanning2022MissingnessAndBalancedSampleExact
+import DASHI.Governance.Fanning2022DataRealizationExact
 import DASHI.Governance.Fanning2022MethodsRegression
 
 -- Consumer-indexed adequacy / capability-functioning / epistemic-residual /
