@@ -1,17 +1,23 @@
 module DASHI.Governance.SafeJustQualifiedClaimPromotionExact where
 
 open import DASHI.Core.Prelude
+import DASHI.Core.SituatedClaimAuthoritySystemExact as Situated
 import DASHI.Governance.Fanning2022ForecastAuthorityExact as Forecast
 import DASHI.Governance.SafeJustForecastConsumerAdequacyExact as Adequacy
 import DASHI.Governance.SafeJustEpistemicResidualLedgerExact as Residual
 import DASHI.Governance.Kallis2025ClaimAuthorityRoutingExact as Routing
+import DASHI.Governance.SafeJustSituatedClaimAuthorityBridgeExact as SituatedBridge
 
 ------------------------------------------------------------------------
 -- QUALIFIED PROMOTION: EVIDENCE PACKAGE + OPEN RESIDUAL LEDGER
+--                       + SITUATED RESEARCH-USE AUTHORITY
 --
 -- Domain-owned #625 specialization of the generic QualifiedPromotion direction
 -- identified on #620.  Promotion is allowed only for a declared consumer/claim
--- role and must retain unresolved epistemic obligations.  It is NOT closure.
+-- role, must retain unresolved epistemic obligations, and now carries the
+-- upstream agenda/category/provenance/protocol/permission/obligation receipts
+-- required by `SituatedClaimAuthoritySystemExact` for the Fanning forecast
+-- evidence it consumes.  It is NOT closure, causal identification or mandate.
 ------------------------------------------------------------------------
 
 record QualifiedSynthesisPromotion : Set₁ where
@@ -19,6 +25,16 @@ record QualifiedSynthesisPromotion : Set₁ where
   field
     projectionReceipt : Forecast.BAUProjectionReceipt
     forecastAdequacy : Adequacy.AdequateFor projectionReceipt Adequacy.forecastConsumer
+    situatedForecastResearchUse :
+      Situated.QualifiedUse
+        SituatedBridge.safeJustSituatedClaimAuthoritySystem
+        SituatedBridge.safeJustResearchAgenda
+        SituatedBridge.safeJustIndicatorCategory
+        SituatedBridge.fanningBAUProjectionClaim
+        SituatedBridge.repositorySourceRegistryContext
+        SituatedBridge.forecastResearchConsumer
+        SituatedBridge.researchSynthesisUse
+        SituatedBridge.attributionAndResidualCarriage
     claimRoute : Routing.ClaimRoute
     routeIsSynthesis : Routing.role claimRoute ≡ Routing.empiricalSynthesis
     blueWaterResidual :
@@ -35,6 +51,7 @@ canonicalQualifiedSynthesisPromotion =
   qualifiedSynthesisPromotion
     Forecast.canonicalProjectionReceipt
     Adequacy.forecastAdequate
+    SituatedBridge.fanningQualifiedResearchUse
     Routing.canonicalKallisSynthesisRoute
     refl
     Residual.blueWaterResidualStillOpenAtSynthesis
@@ -51,6 +68,19 @@ qualifiedPromotionStillHasProjectionResidual :
 qualifiedPromotionStillHasProjectionResidual =
   projectionResidual canonicalQualifiedSynthesisPromotion
 
+qualifiedPromotionCarriesSituatedResearchUse :
+  Situated.QualifiedUse
+    SituatedBridge.safeJustSituatedClaimAuthoritySystem
+    SituatedBridge.safeJustResearchAgenda
+    SituatedBridge.safeJustIndicatorCategory
+    SituatedBridge.fanningBAUProjectionClaim
+    SituatedBridge.repositorySourceRegistryContext
+    SituatedBridge.forecastResearchConsumer
+    SituatedBridge.researchSynthesisUse
+    SituatedBridge.attributionAndResidualCarriage
+qualifiedPromotionCarriesSituatedResearchUse =
+  situatedForecastResearchUse canonicalQualifiedSynthesisPromotion
+
 qualifiedPromotionDoesNotBecomeCausal :
   Adequacy.AdequateFor
     Forecast.canonicalProjectionReceipt
@@ -63,6 +93,14 @@ qualifiedPromotionDoesNotBecomeNormative :
     Adequacy.normativePolicyConsumer → ⊥
 qualifiedPromotionDoesNotBecomeNormative = Adequacy.forecastNotNormativePolicyAuthority
 
+qualifiedPromotionDoesNotCreateInterventionDecisionAuthority :
+  SituatedBridge.DecisionAuthorized
+    SituatedBridge.repositorySourceRegistryContext
+    SituatedBridge.fanningBAUProjectionClaim
+    SituatedBridge.policyInterventionUse → ⊥
+qualifiedPromotionDoesNotCreateInterventionDecisionAuthority =
+  SituatedBridge.fanningResearchUseDoesNotCreateDecisionAuthority
+
 record QualifiedPromotionBoundary : Set where
   constructor qualifiedPromotionBoundary
   field
@@ -72,6 +110,9 @@ record QualifiedPromotionBoundary : Set where
     promotionRequiresTypedClaimRoute : Bool
     promotionRequiresTypedClaimRouteIsTrue :
       promotionRequiresTypedClaimRoute ≡ true
+    promotionRequiresSituatedResearchUse : Bool
+    promotionRequiresSituatedResearchUseIsTrue :
+      promotionRequiresSituatedResearchUse ≡ true
     promotionSilentlyDischargesResidualLedger : Bool
     promotionSilentlyDischargesResidualLedgerIsFalse :
       promotionSilentlyDischargesResidualLedger ≡ false
@@ -81,7 +122,11 @@ record QualifiedPromotionBoundary : Set where
     qualifiedSynthesisIsNormativeMandate : Bool
     qualifiedSynthesisIsNormativeMandateIsFalse :
       qualifiedSynthesisIsNormativeMandate ≡ false
+    qualifiedResearchUseCreatesDecisionAuthority : Bool
+    qualifiedResearchUseCreatesDecisionAuthorityIsFalse :
+      qualifiedResearchUseCreatesDecisionAuthority ≡ false
 
 canonicalQualifiedPromotionBoundary : QualifiedPromotionBoundary
 canonicalQualifiedPromotionBoundary =
-  qualifiedPromotionBoundary true refl true refl false refl false refl false refl
+  qualifiedPromotionBoundary
+    true refl true refl true refl false refl false refl false refl false refl
