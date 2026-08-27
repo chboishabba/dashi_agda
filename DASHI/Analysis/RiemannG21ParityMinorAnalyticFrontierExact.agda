@@ -11,6 +11,8 @@ import DASHI.Analysis.StrictKernelMomentRatioExact as TP2
 import DASHI.Analysis.RiemannG21OddSinhTP2Exact as OddTP2
 import DASHI.Analysis.RiemannG21TwoPointCovarianceShadowExact as Cov
 import DASHI.Analysis.RiemannG21TwoHeightMomentRatioTargetExact as Moment
+import DASHI.Analysis.RiemannG21OddTaylorDeterminantExact as OddTaylor
+import DASHI.Analysis.RiemannG21OddTaylorRemainderDeterminantExact as OddRemainder
 import DASHI.Analysis.RiemannG21DeterminantMarginTransferExact as Margin
 import DASHI.Analysis.RiemannG21SymmetricSampleBlockReductionExact as Block
 import DASHI.Analysis.RiemannG21OffLinePoleQuotientTransversalityExact as Trans
@@ -24,6 +26,8 @@ data ParityFrontierArrow : Set where
   strictSinhTP2 : ParityFrontierArrow
   strictKernelMomentComposition : ParityFrontierArrow
   oddMomentDeterminantStrictSign : ParityFrontierArrow
+  oddCubicTaylorDeterminantFactorization : ParityFrontierArrow
+  exactOddDeterminantRemainderDecomposition : ParityFrontierArrow
   directDeterminantMarginTransfer : ParityFrontierArrow
   finiteCovarianceDecomposition : ParityFrontierArrow
   continuumEvenMomentRatioSeparation : ParityFrontierArrow
@@ -58,7 +62,7 @@ mathlibReceiptEntry = parityFrontierEntry
 xTanhEntry : ParityFrontierEntry
 xTanhEntry = parityFrontierEntry
   scaledXTanhXMonotonicity analyticOpen
-  "Optional even-sector calculus route: prove x -> x tanh x strictly increasing on x > 0. The even sector now also has a direct product-to-sum route, so this is no longer on the critical path."
+  "Optional even-sector calculus route: prove x -> x tanh x strictly increasing on x > 0. The even sector also has a direct product-to-sum route, so this is no longer on the critical path."
 
 xCothEntry : ParityFrontierEntry
 xCothEntry = parityFrontierEntry
@@ -68,7 +72,7 @@ xCothEntry = parityFrontierEntry
 evenRouteEntry : ParityFrontierEntry
 evenRouteEntry = parityFrontierEntry
   evenProductToSumRoute structurallyDerived
-  "The even/cosh TP2 minor has a derivative-free product-to-sum reduction using (p-a)(v-u)>0 and (pv-au)^2-(pu-av)^2=(p^2-a^2)(v^2-u^2)>0. Ordered-real cosh monotonicity is still an analytic instantiation."
+  "The even/cosh TP2 minor has a derivative-free product-to-sum reduction using (p-a)(v-u)>0 and (pv-au)^2-(pu-av)^2=(p^2-a^2)(v^2-u^2)>0. Ordered-real cosh monotonicity remains an analytic instantiation."
 
 sinhTP2Entry : ParityFrontierEntry
 sinhTP2Entry = parityFrontierEntry
@@ -78,17 +82,27 @@ sinhTP2Entry = parityFrontierEntry
 kernelCompositionEntry : ParityFrontierEntry
 kernelCompositionEntry = parityFrontierEntry
   strictKernelMomentComposition structurallyDerived
-  "StrictKernelMomentRatioExact now owns the generic TP2 -> strict moment-cross-product theorem shape, signed determinant orientation, and an exact finite two-support regression. The continuum integral theorem remains a producer obligation."
+  "StrictKernelMomentRatioExact owns the generic TP2 -> strict moment-cross-product theorem shape, signed determinant orientation, and an exact finite two-support regression. The continuum integral producer remains open."
 
 oddMomentEntry : ParityFrontierEntry
 oddMomentEntry = parityFrontierEntry
   oddMomentDeterminantStrictSign analyticOpen
-  "Use strict sinh TP2 plus positive nondegenerate taper support in the symmetrized double-integral identity to prove N1(a)N3(p) > N3(a)N1(p), equivalently the previous G21 odd determinant orientation is strictly negative."
+  "Use strict sinh TP2 plus positive nondegenerate taper support in the symmetrized double-integral identity to prove N1(a)N3(p) > N3(a)N1(p), equivalently the historical G21 odd determinant orientation is strictly negative."
+
+oddTaylorEntry : ParityFrontierEntry
+oddTaylorEntry = parityFrontierEntry
+  oddCubicTaylorDeterminantFactorization structurallyDerived
+  "For the six-scaled cubic truncation T_y(r)=-6rN1(y)+r^3N3(y), rational ring normalization proves det T = -6 r1 r2 (r2^2-r1^2) Delta_odd, where Delta_odd=N1(a)N3(p)-N3(a)N1(p). Linear-linear and cubic-cubic contributions cancel exactly."
+
+oddRemainderEntry : ParityFrontierEntry
+oddRemainderEntry = parityFrontierEntry
+  exactOddDeterminantRemainderDecomposition structurallyDerived
+  "If the actual response is T_y(r)+E_y(r), the actual determinant minus the cubic determinant is exactly a six-term bilinear remainder. This is now the only Taylor error object that needs analytic control."
 
 marginEntry : ParityFrontierEntry
 marginEntry = parityFrontierEntry
-  directDeterminantMarginTransfer structurallyDerived
-  "The Taylor stage is now formulated against one continuum determinant margin: prove |D_R-Delta_odd| < Delta_odd rather than four independent entrywise estimates. The interface is constructed; the actual remainder theorem remains open."
+  directDeterminantMarginTransfer analyticOpen
+  "Prove the magnitude of the exact six-term determinant remainder is smaller than the explicit cubic determinant margin. The interface requires |D_actual-D_cubic| < |D_cubic| directly and does not require four independent entrywise error bounds."
 
 finiteCovarianceEntry : ParityFrontierEntry
 finiteCovarianceEntry = parityFrontierEntry
@@ -103,7 +117,7 @@ evenMomentEntry = parityFrontierEntry
 finiteRadiusEntry : ParityFrontierEntry
 finiteRadiusEntry = parityFrontierEntry
   finiteRadiusParityMinors analyticOpen
-  "Use direct determinant-margin error control to preserve the strict continuum signs at two explicit symmetric sample radii."
+  "After direct determinant-margin control, preserve the strict odd sign and combine it with the even signed minor at two explicit symmetric sample radii."
 
 blockEntry : ParityFrontierEntry
 blockEntry = parityFrontierEntry
@@ -120,7 +134,8 @@ canonicalParityFrontier =
   strictHeightEntry ∷ mathlibReceiptEntry
   ∷ xTanhEntry ∷ xCothEntry ∷ evenRouteEntry
   ∷ sinhTP2Entry ∷ kernelCompositionEntry ∷ oddMomentEntry
-  ∷ marginEntry ∷ finiteCovarianceEntry ∷ evenMomentEntry
+  ∷ oddTaylorEntry ∷ oddRemainderEntry ∷ marginEntry
+  ∷ finiteCovarianceEntry ∷ evenMomentEntry
   ∷ finiteRadiusEntry ∷ blockEntry ∷ transversalityEntry ∷ []
 
 strictHeightBoundary : Height.ActualZetaHeightBoundary
@@ -140,6 +155,12 @@ genericTP2Boundary = TP2.canonicalStrictKernelMomentRatioBoundary
 
 oddTP2Boundary : OddTP2.OddSinhTP2Boundary
 oddTP2Boundary = OddTP2.canonicalOddSinhTP2Boundary
+
+oddTaylorBoundary : OddTaylor.OddTaylorDeterminantBoundary
+oddTaylorBoundary = OddTaylor.canonicalOddTaylorDeterminantBoundary
+
+oddRemainderBoundary : OddRemainder.OddTaylorRemainderBoundary
+oddRemainderBoundary = OddRemainder.canonicalOddTaylorRemainderBoundary
 
 marginTransferBoundary : Margin.DeterminantMarginBoundary
 marginTransferBoundary = Margin.canonicalDeterminantMarginBoundary
@@ -166,8 +187,10 @@ record ParityAnalyticFrontierBoundary : Set where
     evenProductToSumReductionDerivedIsTrue : evenProductToSumReductionDerived ≡ true
     genericStrictTP2MomentOwnerConstructed : Bool
     genericStrictTP2MomentOwnerConstructedIsTrue : genericStrictTP2MomentOwnerConstructed ≡ true
-    directDeterminantMarginInterfaceConstructed : Bool
-    directDeterminantMarginInterfaceConstructedIsTrue : directDeterminantMarginInterfaceConstructed ≡ true
+    oddCubicTaylorFactorizationDerived : Bool
+    oddCubicTaylorFactorizationDerivedIsTrue : oddCubicTaylorFactorizationDerived ≡ true
+    exactOddRemainderDecompositionDerived : Bool
+    exactOddRemainderDecompositionDerivedIsTrue : exactOddRemainderDecompositionDerived ≡ true
     finiteCovarianceAlgebraDerived : Bool
     finiteCovarianceAlgebraDerivedIsTrue : finiteCovarianceAlgebraDerived ≡ true
     parityBlockReductionDerived : Bool
@@ -176,6 +199,8 @@ record ParityAnalyticFrontierBoundary : Set where
     actualSinhTP2DerivedIsFalse : actualSinhTP2Derived ≡ false
     actualOddMomentStrictSignDerived : Bool
     actualOddMomentStrictSignDerivedIsFalse : actualOddMomentStrictSignDerived ≡ false
+    directRemainderBelowMarginDerived : Bool
+    directRemainderBelowMarginDerivedIsFalse : directRemainderBelowMarginDerived ≡ false
     actualEvenMomentStrictSignDerived : Bool
     actualEvenMomentStrictSignDerivedIsFalse : actualEvenMomentStrictSignDerived ≡ false
     finiteRadiusParityMinorsDerived : Bool
@@ -184,5 +209,6 @@ record ParityAnalyticFrontierBoundary : Set where
 canonicalParityAnalyticFrontierBoundary : ParityAnalyticFrontierBoundary
 canonicalParityAnalyticFrontierBoundary =
   parityAnalyticFrontierBoundary
-    true refl true refl true refl true refl true refl true refl true refl true refl
-    false refl false refl false refl false refl
+    true refl true refl true refl true refl true refl
+    true refl true refl true refl true refl
+    false refl false refl false refl false refl false refl
