@@ -36,6 +36,21 @@ mapMember :
 mapMember f (Any.here equality) = Any.here equality
 mapMember f (Any.there member) = Any.there (mapMember f member)
 
+appendMemberLeft :
+  ∀ {A : Set} {x : A} {xs ys : List A} →
+  x ∈ xs → x ∈ xs ++ ys
+appendMemberLeft {xs = []} ()
+appendMemberLeft {xs = _ ∷ _} (Any.here equality) = Any.here equality
+appendMemberLeft {xs = _ ∷ xs} (Any.there member) =
+  Any.there (appendMemberLeft {xs = xs} member)
+
+appendMemberRight :
+  ∀ {A : Set} {x : A} (xs : List A) {ys : List A} →
+  x ∈ ys → x ∈ xs ++ ys
+appendMemberRight [] member = member
+appendMemberRight (_ ∷ xs) member =
+  Any.there (appendMemberRight xs member)
+
 allAppend :
   ∀ {A : Set} {P : A → Set} {xs ys : List A} →
   All.All P xs → All.All P ys → All.All P (xs ++ ys)
@@ -163,11 +178,9 @@ dependentPairsMember :
     {x : A} {value : B x} →
   x ∈ xs → value ∈ fibres x → (x , value) ∈ dependentPairs xs fibres
 dependentPairsMember fibres (Any.here refl) valueMember =
-  Data.List.Membership.Propositional.Properties.∈-++⁺ˡ
-    (mapMember (λ value → _ , value) valueMember)
+  appendMemberLeft (mapMember (λ value → _ , value) valueMember)
 dependentPairsMember fibres (Any.there baseMember) valueMember =
-  Data.List.Membership.Propositional.Properties.∈-++⁺ʳ
-    (pairBlock _ (fibres _))
+  appendMemberRight _
     (dependentPairsMember fibres baseMember valueMember)
 
 ------------------------------------------------------------------------
