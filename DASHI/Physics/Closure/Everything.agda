@@ -26,7 +26,8 @@ import DASHI.Physics.Closure.NSTriadKNResonantNullGain
 -- reduction, residual-bearing 9 -> 6 reopening, and NS 3 x 3 nonary chart.
 import DASHI.Physics.Closure.TOESymmetryResolved369BridgeExact
 
--- Path-integral / stationary-phase cross-pollination.  Reuses existing
--- history, quantum-path fibre, TSFV invariant, and source-conditioned
--- trajectory machinery without promoting path enumeration to ontology.
+-- Coupled-trajectory/Feynman/Kelvin cross-pollination: finite histories,
+-- path fibres, stationary coherence classification, wavelength/source-scale
+-- conditioning, context-dependent weighting, TSFV invariant boundary, and
+-- source-bounded experimental support.
 import DASHI.Physics.Closure.FeynmanKelvinTrajectoryCrossPollinationExact
