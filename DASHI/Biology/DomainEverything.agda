@@ -13,6 +13,7 @@ import DASHI.Biology.PointedBulkSporadicTarotEverything
 import DASHI.Biology.ThalamocorticalSensoryHistoryExact
 import DASHI.Biology.AutisticInformationProcessingLandscapeExact
 import DASHI.Biology.NeurotypeProcessingGeometryExact
+import DASHI.Biology.ProcessingGeometryActionGateExact
 import DASHI.Biology.AuDHDInteractionGeometryExact
 import DASHI.Biology.PsilautNetworkResponseGeometryExact
 import DASHI.Biology.NeurodivergentSocialEcologySourceRegistryExact
