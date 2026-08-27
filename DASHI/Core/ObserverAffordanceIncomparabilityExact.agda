@@ -71,7 +71,7 @@ data SquareObservation : Set where
   approved disapproved : SquareObservation
 
 data SquareAffordance : Set where
-  closed open : SquareAffordance
+  affordanceClosed affordanceOpen : SquareAffordance
 
 squareObservation : SquareState → SquareObservation
 squareObservation closedApproved = approved
@@ -80,10 +80,10 @@ squareObservation closedDisapproved = disapproved
 squareObservation openDisapproved = disapproved
 
 squareAffordance : SquareState → SquareAffordance
-squareAffordance closedApproved = closed
-squareAffordance openApproved = open
-squareAffordance closedDisapproved = closed
-squareAffordance openDisapproved = open
+squareAffordance closedApproved = affordanceClosed
+squareAffordance openApproved = affordanceOpen
+squareAffordance closedDisapproved = affordanceClosed
+squareAffordance openDisapproved = affordanceOpen
 
 sameApprovalDifferentAffordance :
   INF.NonFactorabilityWitness squareObservation squareAffordance
