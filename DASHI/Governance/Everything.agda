@@ -74,6 +74,15 @@ import DASHI.Governance.CabarlahTraumaProjectionBridgeExact
 import DASHI.Governance.ComparativeCrisisClimateAtlas
 import DASHI.Governance.RevolutionaryAdjunctRegression
 
+-- Safe-and-just development / provisioning geometry.  Empirical source claims,
+-- allocation conventions, vector observations and causal interpretation remain
+-- explicitly separated.
+import DASHI.Governance.SafeJustSourceRegistryExact
+import DASHI.Governance.SafeJustIndicatorSystemExact
+import DASHI.Governance.PlanetaryBoundaryAllocationExact
+import DASHI.Governance.ProvisioningGeometryExact
+import DASHI.Governance.ONeill2018MethodsBoundaryExact
+
 -- Provenance-bearing policy routing, corrective reachability and source-bounded
 -- application surfaces assembled as one focused tranche.
 import DASHI.Governance.ProvenanceReflectionRoutingRound14
