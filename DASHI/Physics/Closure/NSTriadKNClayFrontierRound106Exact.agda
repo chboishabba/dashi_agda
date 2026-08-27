@@ -63,6 +63,7 @@ module DASHI.Physics.Closure.NSTriadKNClayFrontierRound106Exact where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
 
 -- Import the retained substrate so this alignment root fails if those owners
 -- disappear or are renamed without an explicit migration.
@@ -110,10 +111,8 @@ round106GlobalGaussianPressureRouteRequired = false
 round106SeparateAncientLiouvilleRouteRequired : Bool
 round106SeparateAncientLiouvilleRouteRequired = false
 
-round106CurrentTheoremSizedObligationCount : Bool
--- `true` certifies the repository-facing statement "the live countdown is the
--- Round105 pair A/B above".  It is not a claim that either obligation is solved.
-round106CurrentTheoremSizedObligationCount = true
+round106CurrentTheoremSizedObligationCount : Nat
+round106CurrentTheoremSizedObligationCount = 2
 
 ------------------------------------------------------------------------
 -- Regression equalities.
@@ -151,9 +150,9 @@ round106SeparateAncientLiouvilleRouteRequiredIsFalse :
   round106SeparateAncientLiouvilleRouteRequired ≡ false
 round106SeparateAncientLiouvilleRouteRequiredIsFalse = refl
 
-round106CurrentTheoremSizedObligationCountIsCurrent :
-  round106CurrentTheoremSizedObligationCount ≡ true
-round106CurrentTheoremSizedObligationCountIsCurrent = refl
+round106CurrentTheoremSizedObligationCountIsTwo :
+  round106CurrentTheoremSizedObligationCount ≡ 2
+round106CurrentTheoremSizedObligationCountIsTwo = refl
 
 round106ClayPromotion : Bool
 round106ClayPromotion = false
