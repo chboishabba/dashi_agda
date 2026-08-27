@@ -4,6 +4,9 @@ import DASHI.Analysis.RiemannG21LiteralPoleRankAuditExact as PoleAudit
 import DASHI.Analysis.RiemannG21ConjugateHeightSourceBridgeExact as Heights
 import DASHI.Analysis.RiemannG21SymmetricSampleBlockReductionExact as Blocks
 import DASHI.Analysis.RiemannG21ScaledHyperbolicMonotonicityBridgeExact as Scaled
+import DASHI.Analysis.StrictKernelMomentRatioExact as TP2
+import DASHI.Analysis.RiemannG21OddSinhTP2Exact as OddTP2
+import DASHI.Analysis.RiemannG21DeterminantMarginTransferExact as Margin
 import DASHI.Analysis.RiemannG21ParityMinorAnalyticFrontierExact as Frontier
 import DASHI.Analysis.RiemannG21ContextualAlternativeNonpromotionExact as Context
 import DASHI.Analysis.RiemannG21ContextualAlternativeFiniteInstanceExact as ContextInstance
@@ -56,13 +59,53 @@ regressionScaledLogDerivativeReductionDerived =
   Frontier.ParityAnalyticFrontierBoundary.scaledLogDerivativeReductionDerivedIsTrue
     Frontier.canonicalParityAnalyticFrontierBoundary
 
-regressionXTanhStillOpen :
-  Scaled.ScaledHyperbolicMonotonicityBoundary.actualXTanhXMonotonicityDerived
-    Scaled.canonicalScaledHyperbolicMonotonicityBoundary
+regressionGenericTP2OwnerConstructed :
+  TP2.StrictKernelMomentRatioBoundary.strictTP2InterfaceConstructed
+    TP2.canonicalStrictKernelMomentRatioBoundary
+  ≡ true
+regressionGenericTP2OwnerConstructed =
+  TP2.StrictKernelMomentRatioBoundary.strictTP2InterfaceConstructedIsTrue
+    TP2.canonicalStrictKernelMomentRatioBoundary
+
+regressionFiniteTP2Witness :
+  TP2.finiteKernel TP2.lowH TP2.innerU * TP2.finiteKernel TP2.highH TP2.outerU
+  ≡ TP2.finiteKernel TP2.lowH TP2.outerU * TP2.finiteKernel TP2.highH TP2.innerU
+  → ⊥
+regressionFiniteTP2Witness = TP2.finiteTP2MinorDistinct
+
+regressionFiniteMomentSignWitness :
+  TP2.finiteLowM0 * TP2.finiteHighMQ
+  ≡ TP2.finiteLowMQ * TP2.finiteHighM0
+  → ⊥
+regressionFiniteMomentSignWitness = TP2.finiteMomentCrossProductStrictlySeparated
+
+regressionActualSinhTP2StillOpen :
+  OddTP2.OddSinhTP2Boundary.sinhTP2DerivedInAgda OddTP2.canonicalOddSinhTP2Boundary
   ≡ false
-regressionXTanhStillOpen =
-  Scaled.ScaledHyperbolicMonotonicityBoundary.actualXTanhXMonotonicityDerivedIsFalse
-    Scaled.canonicalScaledHyperbolicMonotonicityBoundary
+regressionActualSinhTP2StillOpen =
+  OddTP2.OddSinhTP2Boundary.sinhTP2DerivedInAgdaIsFalse OddTP2.canonicalOddSinhTP2Boundary
+
+regressionActualOddMomentSignStillOpen :
+  OddTP2.OddSinhTP2Boundary.continuumOddMomentStrictSignDerived OddTP2.canonicalOddSinhTP2Boundary
+  ≡ false
+regressionActualOddMomentSignStillOpen =
+  OddTP2.OddSinhTP2Boundary.continuumOddMomentStrictSignDerivedIsFalse OddTP2.canonicalOddSinhTP2Boundary
+
+regressionDirectMarginInterfaceConstructed :
+  Margin.DeterminantMarginBoundary.directDeterminantErrorTargetConstructed
+    Margin.canonicalDeterminantMarginBoundary
+  ≡ true
+regressionDirectMarginInterfaceConstructed =
+  Margin.DeterminantMarginBoundary.directDeterminantErrorTargetConstructedIsTrue
+    Margin.canonicalDeterminantMarginBoundary
+
+regressionEntrywiseBoundsNotRequired :
+  Margin.DeterminantMarginBoundary.entrywiseTriangleBoundRequiredByInterface
+    Margin.canonicalDeterminantMarginBoundary
+  ≡ false
+regressionEntrywiseBoundsNotRequired =
+  Margin.DeterminantMarginBoundary.entrywiseTriangleBoundRequiredByInterfaceIsFalse
+    Margin.canonicalDeterminantMarginBoundary
 
 regressionXCothStillOpen :
   Scaled.ScaledHyperbolicMonotonicityBoundary.actualXCothXMonotonicityDerived
@@ -80,12 +123,12 @@ regressionFiniteCovarianceDerived =
   Frontier.ParityAnalyticFrontierBoundary.finiteCovarianceAlgebraDerivedIsTrue
     Frontier.canonicalParityAnalyticFrontierBoundary
 
-regressionActualMomentRatioStillOpen :
-  Frontier.ParityAnalyticFrontierBoundary.actualMomentRatioSeparationDerived
+regressionFiniteRadiusMinorsStillOpen :
+  Frontier.ParityAnalyticFrontierBoundary.finiteRadiusParityMinorsDerived
     Frontier.canonicalParityAnalyticFrontierBoundary
   ≡ false
-regressionActualMomentRatioStillOpen =
-  Frontier.ParityAnalyticFrontierBoundary.actualMomentRatioSeparationDerivedIsFalse
+regressionFiniteRadiusMinorsStillOpen =
+  Frontier.ParityAnalyticFrontierBoundary.finiteRadiusParityMinorsDerivedIsFalse
     Frontier.canonicalParityAnalyticFrontierBoundary
 
 regressionContextualAlternativeBoundary :
@@ -128,14 +171,6 @@ regressionPhysicalOriginUniquenessNotDerived =
   ContextInstance.ContextualAlternativeFiniteInstanceBoundary.physicalOriginUniquenessDerivedIsFalse
     ContextInstance.canonicalContextualAlternativeFiniteInstanceBoundary
 
-regressionZeroGroupedAmplitudeNoOntologyPromotion :
-  Context.AlternativeNonpromotionBoundary.zeroGroupedAmplitudeImpliesNoUnderlyingContribution
-    Context.canonicalAlternativeNonpromotionBoundary
-  ≡ false
-regressionZeroGroupedAmplitudeNoOntologyPromotion =
-  Context.AlternativeNonpromotionBoundary.zeroGroupedAmplitudeImpliesNoUnderlyingContributionIsFalse
-    Context.canonicalAlternativeNonpromotionBoundary
-
 regressionAttachedPaperDoesNotProveRH :
   Context.AlternativeNonpromotionBoundary.paperProvesRiemannHypothesis
     Context.canonicalAlternativeNonpromotionBoundary
@@ -158,8 +193,7 @@ regressionConditionalThreeByThreePoleQuotient = G21.finiteThreeByThreeRankOneMec
 regressionPairAdmission : Pair.PrimePairRelationalAdmission
 regressionPairAdmission = Pair.canonicalToyPrimePairRelationalAdmission
 
-regressionCrossPollinationObserver :
-  Cross.robustRankTwoExteriorCarrierReturned ≡ true
+regressionCrossPollinationObserver : Cross.robustRankTwoExteriorCarrierReturned ≡ true
 regressionCrossPollinationObserver = Cross.robustRankTwoExteriorCarrierReturnedIsTrue
 
 regressionRankOneNotDerived :
