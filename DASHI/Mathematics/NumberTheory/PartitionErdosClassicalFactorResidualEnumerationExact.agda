@@ -29,7 +29,7 @@ import Data.Fin.Properties as FinP
 open import Data.List.Base using (map; _++_)
 open import Data.Nat.Base using (_≤_; _∸_; z≤n; s≤s)
 import Data.Nat.Properties as NatP
-open import Data.Vec.Base using (Vec; []; _∷_)
+import Data.Vec.Base as Vec
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Mathematics.NumberTheory.FiniteAllFinEnumerationExact as Finite
@@ -107,33 +107,33 @@ ambientDivisorPartValue bound pair =
 
 transportVectorForward :
   ∀ {left right : Nat} →
-  left ≡ right → Vec Nat left → Vec Nat right
+  left ≡ right → Vec.Vec Nat left → Vec.Vec Nat right
 transportVectorForward refl vector = vector
 
 transportWeightedMassForward :
   ∀ {left right : Nat}
     (equality : left ≡ right)
-    (vector : Vec Nat left) →
+    (vector : Vec.Vec Nat left) →
   Partition.weightedMass (transportVectorForward equality vector)
   ≡ Partition.weightedMass vector
 transportWeightedMassForward refl vector = refl
 
 appendZeroMassFrom :
   (first extra : Nat) →
-  ∀ {dimension : Nat} (vector : Vec Nat dimension) →
+  ∀ {dimension : Nat} (vector : Vec.Vec Nat dimension) →
   Partition.weightedMassFrom first
     (Split.appendVec vector (Split.zeroVec extra))
   ≡ Partition.weightedMassFrom first vector
-appendZeroMassFrom first extra [] =
+appendZeroMassFrom first extra Vec.[] =
   Normalize.weightedMassFromZeroVec first extra
-appendZeroMassFrom first extra (x ∷ xs) =
+appendZeroMassFrom first extra (x Vec.∷ xs) =
   cong
     (first * x +_)
     (appendZeroMassFrom (suc first) extra xs)
 
 padResidualVector :
   ∀ {n r : Nat} →
-  r ≤ n → Vec Nat (n ∸ r) → Vec Nat n
+  r ≤ n → Vec.Vec Nat (n ∸ r) → Vec.Vec Nat n
 padResidualVector bound vector =
   transportVectorForward
     (differencePlus bound)
@@ -142,7 +142,7 @@ padResidualVector bound vector =
 padResidualWeightedMass :
   ∀ {n r : Nat}
     (bound : r ≤ n)
-    (vector : Vec Nat (n ∸ r)) →
+    (vector : Vec.Vec Nat (n ∸ r)) →
   Partition.weightedMass (padResidualVector bound vector)
   ≡ Partition.weightedMass vector
 padResidualWeightedMass {r = r} bound vector =
@@ -159,7 +159,7 @@ classicalResidualKey :
   ∀ {n r : Nat}
     (bound : r ≤ n)
     (pair : Factor.PositiveFactorPair r)
-    (vector : Vec Nat (n ∸ r)) →
+    (vector : Vec.Vec Nat (n ∸ r)) →
   Fin (Partition.partValue (ambientDivisorIndex bound pair)) →
   Key.ResidualKey n
 classicalResidualKey bound pair vector unit =
@@ -176,7 +176,7 @@ classicalResidualTotalExact :
   ∀ {n r : Nat}
     (bound : r ≤ n)
     (pair : Factor.PositiveFactorPair r)
-    (vector : Vec Nat (n ∸ r)) →
+    (vector : Vec.Vec Nat (n ∸ r)) →
   Partition.weightedMass vector ≡ n ∸ r →
   (unit : Fin (Partition.partValue (ambientDivisorIndex bound pair))) →
   Partition.weightedMass
@@ -212,7 +212,7 @@ residualsForVector :
   ∀ {n r : Nat}
     (bound : r ≤ n)
     (pair : Factor.PositiveFactorPair r)
-    (vector : Vec Nat (n ∸ r)) →
+    (vector : Vec.Vec Nat (n ∸ r)) →
   List (Key.ResidualKey n)
 residualsForVector bound pair vector =
   map
