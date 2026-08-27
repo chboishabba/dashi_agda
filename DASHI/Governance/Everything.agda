@@ -45,10 +45,7 @@ import DASHI.Governance.CabarlahTraumaProjectionBridgeExact
 import DASHI.Governance.ComparativeCrisisClimateAtlas
 import DASHI.Governance.RevolutionaryAdjunctRegression
 
--- Safe-and-just development / provisioning geometry.  Empirical source claims,
--- allocation conventions, vector observations and causal interpretation remain
--- explicitly separated.  Fanning 2022 extends the 2018 carrier through time
--- without pretending the national panel or indicator semantics are unchanged.
+-- Safe-and-just development / provisioning geometry.
 import DASHI.Governance.SafeJustSourceRegistryExact
 import DASHI.Governance.SafeJustIndicatorSystemExact
 import DASHI.Governance.PlanetaryBoundaryAllocationExact
@@ -63,9 +60,7 @@ import DASHI.Governance.Fanning2022MissingnessAndBalancedSampleExact
 import DASHI.Governance.Fanning2022DataRealizationExact
 import DASHI.Governance.Fanning2022MethodsRegression
 
--- Consumer-indexed adequacy / capability-functioning / epistemic-residual /
--- Kallis claim-routing layer.  These owners deliberately do not import draft
--- #620; they are shaped as future thin adapters after ancestry reconciliation.
+-- Consumer-indexed adequacy / Kallis review-evidence layer.
 import DASHI.Governance.SafeJustProvisioningCapabilityFunctioningBridgeExact
 import DASHI.Governance.SafeJustForecastConsumerAdequacyExact
 import DASHI.Governance.SafeJustEpistemicResidualLedgerExact
@@ -81,10 +76,7 @@ import DASHI.Governance.SafeJustSocialIndicatorJusticeBoundaryExact
 import DASHI.Governance.SafeJustConsumerAdequacyResidualBridgeExact
 import DASHI.Governance.SafeJustConsumerAdequacyResidualRegression
 
--- Feminist economics / climate-justice cross-pollination.  The safe-and-just
--- empirical carrier is retained while measurement boundaries, political
--- contestability, responsibility/burden, category genesis and situated
--- contribution are added as separately typed consumer coordinates.
+-- Feminist economics / climate-justice cross-pollination.
 import DASHI.Governance.FeministClimateJusticeSourceRegistryExact
 import DASHI.Governance.WaringProductionBoundaryNonfactorabilityExact
 import DASHI.Governance.FeministSocialProvisioningInterpretationExact
@@ -100,10 +92,16 @@ import DASHI.Governance.FeministClimateQualifiedPromotionExact
 import DASHI.Governance.FeministClimateJusticeSafeJustCapstoneExact
 import DASHI.Governance.FeministClimateJusticeSafeJustRegression
 
--- First Nations evidence-authority discipline.  This owner contains no
--- substantive cultural claim; it only blocks external reconstruction from
--- silently becoming First Nations situated-knowledge or land-authority evidence.
+-- Indigenous authority and recognition/constitution synthesis.  CARE, OCAP®,
+-- Local Contexts, Smith, Moreton-Robinson and Whyte retain distinct source
+-- roles; internal PR patterns are retrospective DASHI cross-pollination only.
+import DASHI.Governance.IndigenousAuthoritySourceRegistryExact
+import DASHI.Governance.IndigenousAuthorityEnvelopeExact
 import DASHI.Governance.FirstNationsOwnedEvidenceContractExact
+import DASHI.Governance.SmithResearchAgendaAuthorityBoundaryExact
+import DASHI.Governance.MoretonRobinsonRecognitionSovereigntyBoundaryExact
+import DASHI.Governance.WhyteKinshipTemporalityBoundaryExact
+import DASHI.Governance.FeministRecognitionAuthorityCrossPollinationExact
 
 -- Provenance-bearing policy routing, corrective reachability and source-bounded
 -- application surfaces assembled as one focused tranche.
@@ -130,8 +128,7 @@ import DASHI.Governance.RelationPolicyTransportComposition
 import DASHI.Governance.DomainIndexedPeaceSubjectCarrier
 import DASHI.Governance.TransitionGovernanceOperatorAdapter
 import DASHI.Governance.MiddleEastProvenancePolicyRouting
--- Source-bounded/symbolic application surfaces.  These do not promote the
--- generic structural operators into empirical motive, guilt, or ideology.
+-- Source-bounded/symbolic application surfaces.
 import DASHI.Governance.AmalekProvenanceRoleBinding
 import DASHI.Governance.PopulistPlutocraticDualProjection
 import DASHI.Governance.IranUS2026RestitutionObservation
