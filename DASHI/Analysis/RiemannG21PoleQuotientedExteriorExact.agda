@@ -10,6 +10,7 @@ import DASHI.Analysis.PoleRankTwoQuotientedExteriorDeskTestExact as RankTwoExter
 import DASHI.Analysis.RiemannG21LiteralPoleRankAuditExact as PoleAudit
 import DASHI.Analysis.RiemannG21PoleMainModeSeparationExact as MainMode
 import DASHI.Analysis.RiemannG21ConjugateHeightSourceBridgeExact as Heights
+import DASHI.Analysis.RiemannG21SymmetricSampleBlockReductionExact as Blocks
 import DASHI.Analysis.RiemannG21OffLinePoleQuotientTransversalityExact as ZeroTrans
 import DASHI.Analysis.RiemannWeilOffLineHyperbolicBlockExact as Hyperbolic
 import DASHI.Analysis.RiemannG21PrimePairKernelExact as Pair
@@ -23,7 +24,9 @@ data G21Obligation : Set where
   rankTwoFourSamplePoleQuotientIdentity : G21Obligation
   sourceOffLineHyperbolicPair : G21Obligation
   conjugateHeightSourceGeometry : G21Obligation
-  twoHeightTaperTransversality : G21Obligation
+  symmetricSampleParityBlockReduction : G21Obligation
+  actualTaperEvenHeightMinor : G21Obligation
+  actualTaperOddHeightMinor : G21Obligation
   offLinePoleQuotientTransversality : G21Obligation
   literalTwoChannelExplicitFormulaExpansion : G21Obligation
   literalPrimePairDiagonalZero : G21Obligation
@@ -77,15 +80,25 @@ heightGeometryEntry =
   g21ObligationEntry conjugateHeightSourceGeometry sourceAudited
     "The companion taper family has h_fk(z)=phiHat(z-tau_k), and its real-even Fourier theorem makes evaluations at conjugate imaginary heights conjugate response vectors. Pole and off-line reflection pairs therefore share one conjugate-height response grammar."
 
-twoHeightEntry : G21ObligationEntry
-twoHeightEntry =
-  g21ObligationEntry twoHeightTaperTransversality analyticInterfaceOpen
-    "Prove the actual taper response pair at off-line height alpha is exterior-transverse to the nuisance conjugate pair at pole height 1/2. Existing alpha-vs-zero cosh coercivity does not imply this alpha-vs-half determinant theorem."
+parityBlockEntry : G21ObligationEntry
+parityBlockEntry =
+  g21ObligationEntry symmetricSampleParityBlockReduction structurallyDerived
+    "With symmetric samples r1,-r1,r2,-r2, the conjugate-height four-vector problem separates into even/cosh-like and odd/sinh-like 2x2 minors. A finite exact witness shows both sectors are independently necessary."
+
+evenMinorEntry : G21ObligationEntry
+evenMinorEntry =
+  g21ObligationEntry actualTaperEvenHeightMinor analyticInterfaceOpen
+    "For the actual source taper, choose symmetric sample radii and prove the even-sector responses at off-line height alpha and pole height 1/2 are not proportional. Existing alpha-vs-zero cosh coercivity is relevant but not sufficient."
+
+oddMinorEntry : G21ObligationEntry
+oddMinorEntry =
+  g21ObligationEntry actualTaperOddHeightMinor analyticInterfaceOpen
+    "For the same samples, prove the odd/sinh-like responses at heights alpha and 1/2 are not proportional. The even minor alone cannot supply full exterior transversality."
 
 zeroTransversalityEntry : G21ObligationEntry
 zeroTransversalityEntry =
   g21ObligationEntry offLinePoleQuotientTransversality analyticInterfaceOpen
-    "Lift two-height taper nondegeneracy into the selected four-sample observer: the two off-line response directions must remain independent modulo the full nuisance pole/main-mode span."
+    "Combine the literal nuisance-space transport with both nonzero parity minors to obtain a rank-two off-line response modulo the full pole/main-mode nuisance span."
 
 explicitFormulaEntry : G21ObligationEntry
 explicitFormulaEntry =
@@ -116,8 +129,9 @@ canonicalG21Obligations : List G21ObligationEntry
 canonicalG21Obligations =
   poleAuditEntry ∷ mainModeTransportEntry ∷ rankOneReductionEntry
   ∷ rankTwoQuotientEntry ∷ sourceHyperbolicEntry ∷ heightGeometryEntry
-  ∷ twoHeightEntry ∷ zeroTransversalityEntry ∷ explicitFormulaEntry
-  ∷ diagonalZeroEntry ∷ nonseparableEntry ∷ swapEntry ∷ scaleEntry ∷ []
+  ∷ parityBlockEntry ∷ evenMinorEntry ∷ oddMinorEntry ∷ zeroTransversalityEntry
+  ∷ explicitFormulaEntry ∷ diagonalZeroEntry ∷ nonseparableEntry
+  ∷ swapEntry ∷ scaleEntry ∷ []
 
 optimizedThreeSampleResidualDimension :
   PoleAudit.residualDimension PoleAudit.rankOneThreeSampleCase ≡ 2
@@ -145,6 +159,13 @@ conjugateHeightSymmetryDoesNotForceSeparation :
   Heights.responseAtHeight Heights.canonicalCollapsedConjugateFamily Heights.lowHeight
   ≡ Heights.responseAtHeight Heights.canonicalCollapsedConjugateFamily Heights.highHeight
 conjugateHeightSymmetryDoesNotForceSeparation = Heights.collapsedHeightResponsesEqual
+
+symmetricParityAdmissionCriterionIsNonVacuous : Blocks.SymmetricSampleTwoHeightAdmission
+symmetricParityAdmissionCriterionIsNonVacuous = Blocks.canonicalSymmetricSampleAdmission
+
+evenMinorAloneDoesNotForceOddMinor :
+  Blocks.MinorNonzero (Blocks.oddMinor Blocks.evenOnlyOffLine Blocks.evenOnlyPole) → ⊥
+evenMinorAloneDoesNotForceOddMinor = Blocks.evenOnlyOddMinorFails
 
 zeroTransversalityCriterionIsNonVacuous : ZeroTrans.OffLinePoleQuotientTransversality
 zeroTransversalityCriterionIsNonVacuous = ZeroTrans.canonicalToyTransversality
@@ -184,8 +205,12 @@ record G21CurrentBoundary : Set where
     sourceOffLineHyperbolicPairOwnedIsTrue : sourceOffLineHyperbolicPairOwned ≡ true
     conjugateHeightGeometrySourceAudited : Bool
     conjugateHeightGeometrySourceAuditedIsTrue : conjugateHeightGeometrySourceAudited ≡ true
-    twoHeightTaperTransversalityDerived : Bool
-    twoHeightTaperTransversalityDerivedIsFalse : twoHeightTaperTransversalityDerived ≡ false
+    symmetricSampleParityBlockReductionDerived : Bool
+    symmetricSampleParityBlockReductionDerivedIsTrue : symmetricSampleParityBlockReductionDerived ≡ true
+    actualTaperEvenHeightMinorDerived : Bool
+    actualTaperEvenHeightMinorDerivedIsFalse : actualTaperEvenHeightMinorDerived ≡ false
+    actualTaperOddHeightMinorDerived : Bool
+    actualTaperOddHeightMinorDerivedIsFalse : actualTaperOddHeightMinorDerived ≡ false
     literalPoleQuotientTransversalityDerived : Bool
     literalPoleQuotientTransversalityDerivedIsFalse : literalPoleQuotientTransversalityDerived ≡ false
     literalPrimePairKernelDerived : Bool
@@ -204,6 +229,8 @@ canonicalG21CurrentBoundary =
     true refl
     true refl
     true refl
+    true refl
+    false refl
     false refl
     false refl
     false refl
