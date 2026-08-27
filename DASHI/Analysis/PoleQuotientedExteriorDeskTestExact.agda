@@ -3,24 +3,6 @@ module DASHI.Analysis.PoleQuotientedExteriorDeskTestExact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
-------------------------------------------------------------------------
--- Post-G20 desk-test owner.
---
--- The intended analytic specialization is
---
---   S_i(x) = c_i m(x) + E_i(x)
---
--- with the augmented determinant
---
---   det [ S_1(x_j) ; S_2(x_j) ; m(x_j) ]_{j=1}^3.
---
--- If the pole response is rank one with known profile m, row subtraction
--- should identify this determinant exactly with the residual determinant
--- det[E_1;E_2;m], killing both pure-pole and mixed pole/error terms before
--- any estimate.  This module makes that exact identity an explicit gate; it
--- does not pretend current DASHI has already proved it for a literal Weil EF.
-------------------------------------------------------------------------
-
 record PoleQuotientedExteriorSystem : Set₁ where
   field
     Sample Scalar : Set
@@ -36,12 +18,12 @@ record PoleQuotientedExteriorSystem : Set₁ where
     response₁Decomposes :
       (x : Sample) →
       response₁ x ≡
-      poleCoefficient₁ *S poleProfile x +S residual₁ x
+      ((poleCoefficient₁ *S poleProfile x) +S residual₁ x)
 
     response₂Decomposes :
       (x : Sample) →
       response₂ x ≡
-      poleCoefficient₂ *S poleProfile x +S residual₂ x
+      ((poleCoefficient₂ *S poleProfile x) +S residual₂ x)
 
     det3At :
       Sample → Sample → Sample →
@@ -60,34 +42,20 @@ record PoleQuotientedExteriorSystem : Set₁ where
 
 open PoleQuotientedExteriorSystem public
 
-------------------------------------------------------------------------
--- Dimension accounting: three samples minus one known nuisance direction
--- leaves a two-dimensional quotient, the minimum dimension supporting a
--- nontrivial two-channel exterior coordinate.
-------------------------------------------------------------------------
-
 record ExteriorQuotientDimensionReceipt : Set where
   constructor exteriorQuotientDimensionReceipt
   field
     sampleDimension : Nat
     nuisanceRank : Nat
     residualDimension : Nat
-
     sampleDimensionIsThree : sampleDimension ≡ 3
     nuisanceRankIsOne : nuisanceRank ≡ 1
     residualDimensionIsTwo : residualDimension ≡ 2
-
     dimensionBalance : nuisanceRank + residualDimension ≡ sampleDimension
 
 canonicalExteriorQuotientDimensionReceipt : ExteriorQuotientDimensionReceipt
 canonicalExteriorQuotientDimensionReceipt =
-  exteriorQuotientDimensionReceipt
-    3 1 2
-    refl refl refl refl
-
-------------------------------------------------------------------------
--- Five-lemma admission experiment.
-------------------------------------------------------------------------
+  exteriorQuotientDimensionReceipt 3 1 2 refl refl refl refl
 
 data G21GateStatus : Set where
   derivedHere : G21GateStatus
@@ -102,7 +70,6 @@ record G21ExteriorDeskTest : Set₁ where
     offLineZeroQuotientNondegeneracy : G21GateStatus
     literalPrimePairKernelIdentity : G21GateStatus
     primePairScaleGate : G21GateStatus
-
     dimensionReceipt : ExteriorQuotientDimensionReceipt
     deskTestReading : String
 
@@ -127,11 +94,9 @@ record PoleQuotientedExteriorNonPromotionBoundary : Set where
     rankOnePoleImpliesMixedTermsCancelInTwoByTwoDeterminant : Bool
     rankOnePoleImpliesMixedTermsCancelInTwoByTwoDeterminantIsFalse :
       rankOnePoleImpliesMixedTermsCancelInTwoByTwoDeterminant ≡ false
-
     threeSamplesProveOffLineZeroRankTwo : Bool
     threeSamplesProveOffLineZeroRankTwoIsFalse :
       threeSamplesProveOffLineZeroRankTwo ≡ false
-
     algebraicPoleQuotientProvesRH : Bool
     algebraicPoleQuotientProvesRHIsFalse :
       algebraicPoleQuotientProvesRH ≡ false
@@ -139,7 +104,4 @@ record PoleQuotientedExteriorNonPromotionBoundary : Set where
 canonicalPoleQuotientedExteriorNonPromotionBoundary :
   PoleQuotientedExteriorNonPromotionBoundary
 canonicalPoleQuotientedExteriorNonPromotionBoundary =
-  poleQuotientedExteriorNonPromotionBoundary
-    false refl
-    false refl
-    false refl
+  poleQuotientedExteriorNonPromotionBoundary false refl false refl false refl
