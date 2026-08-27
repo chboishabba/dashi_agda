@@ -3,6 +3,7 @@ module DASHI.Analysis.RiemannG21Regression where
 import DASHI.Analysis.RiemannG21LiteralPoleRankAuditExact as PoleAudit
 import DASHI.Analysis.RiemannG21ConjugateHeightSourceBridgeExact as Heights
 import DASHI.Analysis.RiemannG21SymmetricSampleBlockReductionExact as Blocks
+import DASHI.Analysis.RiemannG21ParityMinorAnalyticFrontierExact as Frontier
 import DASHI.Analysis.RiemannG21PrimePairKernelExact as Pair
 import DASHI.Analysis.RiemannG21TwoByTwoMixedObstructionExact as Mixed2
 import DASHI.Analysis.RiemannG21AugmentedDeterminantFiniteExact as Det3
@@ -36,6 +37,30 @@ regressionEvenAloneDoesNotForceOdd :
   Blocks.MinorNonzero (Blocks.oddMinor Blocks.evenOnlyOffLine Blocks.evenOnlyPole) → ⊥
 regressionEvenAloneDoesNotForceOdd = Blocks.evenOnlyOddMinorFails
 
+regressionStrictHeightSourceAudited :
+  Frontier.ParityAnalyticFrontierBoundary.strictActualZetaHeightSeparationAvailable
+    Frontier.canonicalParityAnalyticFrontierBoundary
+  ≡ true
+regressionStrictHeightSourceAudited =
+  Frontier.ParityAnalyticFrontierBoundary.strictActualZetaHeightSeparationAvailableIsTrue
+    Frontier.canonicalParityAnalyticFrontierBoundary
+
+regressionFiniteCovarianceDerived :
+  Frontier.ParityAnalyticFrontierBoundary.finiteCovarianceAlgebraDerived
+    Frontier.canonicalParityAnalyticFrontierBoundary
+  ≡ true
+regressionFiniteCovarianceDerived =
+  Frontier.ParityAnalyticFrontierBoundary.finiteCovarianceAlgebraDerivedIsTrue
+    Frontier.canonicalParityAnalyticFrontierBoundary
+
+regressionActualMomentRatioStillOpen :
+  Frontier.ParityAnalyticFrontierBoundary.actualMomentRatioSeparationDerived
+    Frontier.canonicalParityAnalyticFrontierBoundary
+  ≡ false
+regressionActualMomentRatioStillOpen =
+  Frontier.ParityAnalyticFrontierBoundary.actualMomentRatioSeparationDerivedIsFalse
+    Frontier.canonicalParityAnalyticFrontierBoundary
+
 regressionTwoByTwoNoGo :
   Mixed2.det2Code Mixed2.responseLeft Mixed2.responseRight
   ≡ Mixed2.det2Code Mixed2.commonPole Mixed2.commonPole → ⊥
@@ -59,10 +84,15 @@ regressionRankOneNotDerived :
 regressionRankOneNotDerived =
   G21.G21CurrentBoundary.rankOnePoleReductionDerivedIsFalse G21.canonicalG21CurrentBoundary
 
-regressionTwoHeightNotDerived :
-  G21.G21CurrentBoundary.twoHeightTaperTransversalityDerived G21.canonicalG21CurrentBoundary ≡ false
-regressionTwoHeightNotDerived =
-  G21.G21CurrentBoundary.twoHeightTaperTransversalityDerivedIsFalse G21.canonicalG21CurrentBoundary
+regressionEvenMinorNotDerived :
+  G21.G21CurrentBoundary.actualTaperEvenHeightMinorDerived G21.canonicalG21CurrentBoundary ≡ false
+regressionEvenMinorNotDerived =
+  G21.G21CurrentBoundary.actualTaperEvenHeightMinorDerivedIsFalse G21.canonicalG21CurrentBoundary
+
+regressionOddMinorNotDerived :
+  G21.G21CurrentBoundary.actualTaperOddHeightMinorDerived G21.canonicalG21CurrentBoundary ≡ false
+regressionOddMinorNotDerived =
+  G21.G21CurrentBoundary.actualTaperOddHeightMinorDerivedIsFalse G21.canonicalG21CurrentBoundary
 
 regressionTransversalityNotDerived :
   G21.G21CurrentBoundary.literalPoleQuotientTransversalityDerived G21.canonicalG21CurrentBoundary ≡ false
