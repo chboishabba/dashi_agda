@@ -13,6 +13,7 @@ module DASHI.Governance.FormalisationGovernanceCapstoneExact where
 
 open import DASHI.Core.Prelude
 
+import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Core.RelationalAffordanceCoreExact as Affordance
 import DASHI.Core.PlumwoodMasterModelOperationFamilyExact as Plumwood
 import DASHI.Core.McCallCategoryStrategyBoundaryExact as McCall
@@ -29,33 +30,24 @@ import DASHI.Governance.RecognitionDistributionRepresentationAxesExact as Fraser
 import DASHI.Governance.LegitimacyEvidenceSeparationExact as Legitimacy
 import DASHI.Governance.AuthorityRepairLegitimacySeparationExact as Repair
 
-------------------------------------------------------------------------
--- Live non-collapse theorems.
-------------------------------------------------------------------------
-
 functioningDoesNotRecoverCapability :
-  DASHI.Core.IntersectionalNonFactorability.FactorsThrough
-    Capability.functioning Capability.capabilitySignature → ⊥
+  INF.FactorsThrough Capability.functioning Capability.capabilitySignature → ⊥
 functioningDoesNotRecoverCapability = Capability.functioningCannotRecoverCapability
 
 capabilityDoesNotRecoverFunctioning :
-  DASHI.Core.IntersectionalNonFactorability.FactorsThrough
-    Capability.capabilitySignature Capability.functioning → ⊥
+  INF.FactorsThrough Capability.capabilitySignature Capability.functioning → ⊥
 capabilityDoesNotRecoverFunctioning = Capability.capabilityCannotRecoverFunctioning
 
 recognitionDoesNotRecoverDistribution :
-  DASHI.Core.IntersectionalNonFactorability.FactorsThrough
-    Fraser.recognition Fraser.distribution → ⊥
+  INF.FactorsThrough Fraser.recognition Fraser.distribution → ⊥
 recognitionDoesNotRecoverDistribution = Fraser.recognitionCannotRecoverDistribution
 
 distributionDoesNotRecoverRepresentation :
-  DASHI.Core.IntersectionalNonFactorability.FactorsThrough
-    Fraser.distribution Fraser.representation → ⊥
+  INF.FactorsThrough Fraser.distribution Fraser.representation → ⊥
 distributionDoesNotRecoverRepresentation = Fraser.distributionCannotRecoverRepresentation
 
 presentCategoryDoesNotRecoverGenesis :
-  DASHI.Core.IntersectionalNonFactorability.FactorsThrough
-    Butler.presentCategory Butler.genesis → ⊥
+  INF.FactorsThrough Butler.presentCategory Butler.genesis → ⊥
 presentCategoryDoesNotRecoverGenesis = Butler.presentCategoryCannotRecoverGenesis
 
 scopedModificationDoesNotGuaranteeEffect :
@@ -63,8 +55,7 @@ scopedModificationDoesNotGuaranteeEffect :
   Repair.Effective Repair.scopedButIneffective → ⊥
 scopedModificationDoesNotGuaranteeEffect = Repair.canModifyDoesNotGuaranteeEffect
 
-methodologicalTensionIsAdmissibleInformation :
-  Compatibility.FormalisationCompatibility
+methodologicalTensionIsAdmissibleInformation : Compatibility.FormalisationCompatibility
 methodologicalTensionIsAdmissibleInformation = Compatibility.methodologicalTension
 
 kernelClosureIsNotSemanticExhaustiveness :
