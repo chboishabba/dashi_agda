@@ -25,6 +25,8 @@ data SourceRole : Set where
   metaphorUnderstandingRepresentationChange
   twoEyedSeeingMathematics
   kimmererBraidingRelationalEpistemology
+  boundedStructuralAnalogy
+  methodologicalTransferLimit
   : SourceRole
 
 record SourceReference : Set where
@@ -89,12 +91,25 @@ kimmerer2013 =
     kimmererBraidingRelationalEpistemology
     "Primary conceptual source for braiding Indigenous knowledge, scientific knowledge and situated story under reciprocity; no braid-group, fibre-bundle or DASHI non-factorability theorem is attributed to the book."
 
+fatima2026 : SourceReference
+fatima2026 =
+  sourceReference
+    "Nusrat Fatima"
+    "Continuity and Its Limits: Toward a Critical Theory of Literary Topology in Shakespeare"
+    "Journal of Critical Studies in Language and Literature 7(2):1-8"
+    2026
+    "DOI 10.46809/jcsll.v7i2.430"
+    peerReviewedArticle
+    methodologicalTransferLimit
+    "Supports a bounded structural-analogy reading: literary-topological vocabulary is useful where target relations remain recoverable through deformation and should be withdrawn where rupture makes that assumption incompatible. Does not prove DASHI metaphor fitness, mathematical topology of Shakespeare, or Kimmerer braid mathematics."
+
 structuralMetaphorSources : List SourceReference
 structuralMetaphorSources =
   teichLealJost2025
   ∷ stuartWilkenfeld2022
   ∷ jungic2022
   ∷ kimmerer2013
+  ∷ fatima2026
   ∷ []
 
 record StructuralMetaphorAttributionBoundary : Set where
@@ -112,6 +127,14 @@ record StructuralMetaphorAttributionBoundary : Set where
     metaphorNetworkPaperProvesKimmererTopologyIsFalse :
       metaphorNetworkPaperProvesKimmererTopology ≡ false
 
+    fatimaProvesDASHIMetaphorFitness : Bool
+    fatimaProvesDASHIMetaphorFitnessIsFalse :
+      fatimaProvesDASHIMetaphorFitness ≡ false
+
+    fatimaProvesKimmererBraidTopology : Bool
+    fatimaProvesKimmererBraidTopologyIsFalse :
+      fatimaProvesKimmererBraidTopology ≡ false
+
     dashiStructuralMetaphorFormalisationIsOriginalInterpretiveExtension : Bool
     dashiStructuralMetaphorFormalisationIsOriginalInterpretiveExtensionIsTrue :
       dashiStructuralMetaphorFormalisationIsOriginalInterpretiveExtension ≡ true
@@ -120,6 +143,8 @@ canonicalStructuralMetaphorAttributionBoundary :
   StructuralMetaphorAttributionBoundary
 canonicalStructuralMetaphorAttributionBoundary =
   structuralMetaphorAttributionBoundary
+    false refl
+    false refl
     false refl
     false refl
     false refl
