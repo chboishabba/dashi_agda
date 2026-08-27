@@ -13,8 +13,10 @@ open import Data.List.Base using (_++_)
 open import Data.List.Membership.Propositional using (_∈_)
 open import Data.List.Membership.Propositional.Properties using (∈-++⁻)
 open import Data.List.Relation.Unary.Any as Any using ()
+import Data.List.Relation.Unary.All as All
 open import Data.Nat.Base using (_≤_; z≤n; s≤s)
 import Data.Nat.Properties as NatP
+open import Data.Product using (_×_; _,_)
 open import Data.Sum.Base using (inj₁; inj₂)
 open import Relation.Binary.PropositionalEquality using (subst)
 
@@ -40,6 +42,13 @@ oneToPositive {suc n} {r} member
 ... | inj₂ (Any.here equality) =
   subst (λ value → suc zero ≤ value) equality (s≤s z≤n)
 ... | inj₂ (Any.there ())
+
+oneToAllBounds :
+  (n : Nat) →
+  All.All (λ r → (suc zero ≤ r) × (r ≤ n)) (Hecke.oneTo n)
+oneToAllBounds n =
+  All.tabulate λ member →
+    oneToPositive member , oneToUpperBound member
 
 ------------------------------------------------------------------------
 -- Pure finite list/order facts.
