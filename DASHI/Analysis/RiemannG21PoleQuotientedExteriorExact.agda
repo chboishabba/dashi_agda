@@ -5,14 +5,26 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Analysis.RiemannAnalyticSubstrate as Analytic
 import DASHI.Analysis.RiemannHermitianTopDownAssemblyExact as G1G4
-import DASHI.Analysis.PoleQuotientedExteriorDeskTestExact as Exterior
+import DASHI.Analysis.PoleQuotientedExteriorDeskTestExact as RankOneExterior
+import DASHI.Analysis.PoleRankTwoQuotientedExteriorDeskTestExact as RankTwoExterior
+import DASHI.Analysis.RiemannG21LiteralPoleRankAuditExact as PoleAudit
 import DASHI.Analysis.RiemannG21PrimePairKernelExact as Pair
 import DASHI.Analysis.RiemannG21TwoByTwoMixedObstructionExact as Mixed2
 import DASHI.Analysis.RiemannG21AugmentedDeterminantFiniteExact as Det3
 
+------------------------------------------------------------------------
+-- Literal source audit changed the default geometry.
+--
+-- Zeta23/ExplicitFormula.lean owns two pole evaluations h(i/2)+h(-i/2).
+-- Therefore nuisance rank one is an optimization requiring an additional
+-- common-profile theorem.  The robust default is rank <= 2, hence four
+-- samples are needed to retain a two-dimensional residual quotient.
+------------------------------------------------------------------------
+
 data G21Obligation : Set where
-  commonPoleProfileFactorization : G21Obligation
-  augmentedDeterminantPoleQuotientIdentity : G21Obligation
+  literalTwoPoleAudit : G21Obligation
+  optionalRankOnePoleReduction : G21Obligation
+  rankTwoFourSamplePoleQuotientIdentity : G21Obligation
   offLineZeroRankTwoInPoleQuotient : G21Obligation
   literalTwoChannelExplicitFormulaExpansion : G21Obligation
   literalPrimePairDiagonalZero : G21Obligation
@@ -22,6 +34,7 @@ data G21Obligation : Set where
 
 data G21Status : Set where
   structurallyDerived : G21Status
+  sourceAudited : G21Status
   analyticInterfaceOpen : G21Status
   arithmeticInterfaceOpen : G21Status
   rejectedByExactCounterexample : G21Status
@@ -35,20 +48,25 @@ record G21ObligationEntry : Set where
 
 open G21ObligationEntry public
 
-commonPoleEntry : G21ObligationEntry
-commonPoleEntry =
-  g21ObligationEntry commonPoleProfileFactorization analyticInterfaceOpen
-    "Choose literal Weil channels whose deterministic pole responses factor through one common profile m(x)."
+poleAuditEntry : G21ObligationEntry
+poleAuditEntry =
+  g21ObligationEntry literalTwoPoleAudit sourceAudited
+    "The companion explicit formula contains two pole evaluations h(i/2)+h(-i/2); rank-one nuisance geometry is therefore not automatic."
 
-poleQuotientIdentityEntry : G21ObligationEntry
-poleQuotientIdentityEntry =
-  g21ObligationEntry augmentedDeterminantPoleQuotientIdentity analyticInterfaceOpen
-    "Prove on the literal Weil carrier that the 3x3 augmented determinant equals det[E1;E2;m], annihilating pure-pole and mixed pole/error terms before estimation."
+rankOneReductionEntry : G21ObligationEntry
+rankOneReductionEntry =
+  g21ObligationEntry optionalRankOnePoleReduction analyticInterfaceOpen
+    "If the selected literal test family proves the two pole profiles factor through one common profile, the optimized three-sample quotient is available. Conjugacy or symmetry alone is not promoted to complex-linear dependence."
+
+rankTwoQuotientEntry : G21ObligationEntry
+rankTwoQuotientEntry =
+  g21ObligationEntry rankTwoFourSamplePoleQuotientIdentity analyticInterfaceOpen
+    "Without rank-one reduction, use four samples and quotient the two literal pole-evaluation directions; prove the literal 4x4 augmented determinant equals the residual determinant before estimation."
 
 zeroRankEntry : G21ObligationEntry
 zeroRankEntry =
   g21ObligationEntry offLineZeroRankTwoInPoleQuotient analyticInterfaceOpen
-    "For an off-critical-line zero, prove the two residual zero channels remain rank two after quotienting by the pole profile, preferably with an explicit determinant floor."
+    "After quotienting the full literal pole nuisance space, prove an off-line zero leaves a genuinely rank-two residual response, preferably with an explicit alpha-dependent determinant floor."
 
 explicitFormulaEntry : G21ObligationEntry
 explicitFormulaEntry =
@@ -58,7 +76,7 @@ explicitFormulaEntry =
 diagonalZeroEntry : G21ObligationEntry
 diagonalZeroEntry =
   g21ObligationEntry literalPrimePairDiagonalZero arithmeticInterfaceOpen
-    "For a derivative/contrastive channel derive the log(n/m)-type factor and prove K(n,n)=0 on the literal pair kernel."
+    "For a derivative/contrastive channel derive the expected log(n/m)-type factor and prove K(n,n)=0 on the literal pair kernel."
 
 nonseparableEntry : G21ObligationEntry
 nonseparableEntry =
@@ -73,18 +91,31 @@ swapEntry =
 scaleEntry : G21ObligationEntry
 scaleEntry =
   g21ObligationEntry primePairScaleDecision arithmeticInterfaceOpen
-    "Compare the trivial surviving pair scale with the zero-side determinant floor and kill the lane immediately if the ratio diverges."
+    "Only after exact nuisance/diagonal cancellation, compare the trivial surviving pair scale with the zero-side determinant floor and kill the lane if the ratio diverges."
 
 canonicalG21Obligations : List G21ObligationEntry
 canonicalG21Obligations =
-  commonPoleEntry ∷ poleQuotientIdentityEntry ∷ zeroRankEntry
-  ∷ explicitFormulaEntry ∷ diagonalZeroEntry ∷ nonseparableEntry
-  ∷ swapEntry ∷ scaleEntry ∷ []
+  poleAuditEntry ∷ rankOneReductionEntry ∷ rankTwoQuotientEntry
+  ∷ zeroRankEntry ∷ explicitFormulaEntry ∷ diagonalZeroEntry
+  ∷ nonseparableEntry ∷ swapEntry ∷ scaleEntry ∷ []
 
-threeMinusOneLeavesTwo :
-  Exterior.residualDimension Exterior.canonicalExteriorQuotientDimensionReceipt ≡ 2
-threeMinusOneLeavesTwo =
-  Exterior.residualDimensionIsTwo Exterior.canonicalExteriorQuotientDimensionReceipt
+------------------------------------------------------------------------
+-- Exact structural returns.
+------------------------------------------------------------------------
+
+optimizedThreeSampleResidualDimension :
+  PoleAudit.residualDimension PoleAudit.rankOneThreeSampleCase ≡ 2
+optimizedThreeSampleResidualDimension = refl
+
+literalGenericThreeSampleResidualDimension :
+  PoleAudit.residualDimension PoleAudit.genericTwoPoleThreeSampleCase ≡ 1
+literalGenericThreeSampleResidualDimension =
+  PoleAudit.threeSamplesNeedRankOneReductionForTwoResidualDimensions
+
+robustFourSampleResidualDimension :
+  PoleAudit.residualDimension PoleAudit.genericTwoPoleFourSampleCase ≡ 2
+robustFourSampleResidualDimension =
+  PoleAudit.fourSamplesSupportTwoResidualDimensionsWithoutRankOneReduction
 
 naiveTwoByTwoRankOnePoleGateRejected :
   Mixed2.det2Code Mixed2.responseLeft Mixed2.responseRight
@@ -92,11 +123,11 @@ naiveTwoByTwoRankOnePoleGateRejected :
 naiveTwoByTwoRankOnePoleGateRejected =
   Mixed2.rankOnePoleDoesNotKillMixedTwoByTwoDeterminant
 
-finiteThreeByThreePoleQuotientMechanism :
+finiteThreeByThreeRankOneMechanism :
   Det3.SameSignedDeterminant
     (Det3.det3 Det3.response₁ Det3.response₂ Det3.poleProfile)
     (Det3.det3 Det3.residual₁ Det3.residual₂ Det3.poleProfile)
-finiteThreeByThreePoleQuotientMechanism =
+finiteThreeByThreeRankOneMechanism =
   Det3.augmentedPoleQuotientPreservesSignedDeterminant
 
 primePairRelationalAdmissionCriterionIsNonVacuous : Pair.PrimePairRelationalAdmission
@@ -109,24 +140,30 @@ pairSwapIsInvolutive = Pair.swapPairInvolutive
 record G21CurrentBoundary : Set where
   constructor g21CurrentBoundary
   field
-    newObserverUsesPoleQuotientExteriorCoordinate : Bool
-    newObserverUsesPoleQuotientExteriorCoordinateIsTrue :
-      newObserverUsesPoleQuotientExteriorCoordinate ≡ true
-    twoByTwoMixedTermObstructionDerived : Bool
-    twoByTwoMixedTermObstructionDerivedIsTrue :
-      twoByTwoMixedTermObstructionDerived ≡ true
-    finiteThreeByThreePoleQuotientMechanismDerived : Bool
-    finiteThreeByThreePoleQuotientMechanismDerivedIsTrue :
-      finiteThreeByThreePoleQuotientMechanismDerived ≡ true
-    literalAugmentedDeterminantIdentityDerived : Bool
-    literalAugmentedDeterminantIdentityDerivedIsFalse :
-      literalAugmentedDeterminantIdentityDerived ≡ false
+    literalSourceHasTwoPoleEvaluations : Bool
+    literalSourceHasTwoPoleEvaluationsIsTrue :
+      literalSourceHasTwoPoleEvaluations ≡ true
+
+    rankOnePoleReductionDerived : Bool
+    rankOnePoleReductionDerivedIsFalse : rankOnePoleReductionDerived ≡ false
+
+    robustRankTwoFourSampleCarrierConstructed : Bool
+    robustRankTwoFourSampleCarrierConstructedIsTrue :
+      robustRankTwoFourSampleCarrierConstructed ≡ true
+
+    literalRankTwoAugmentedDeterminantIdentityDerived : Bool
+    literalRankTwoAugmentedDeterminantIdentityDerivedIsFalse :
+      literalRankTwoAugmentedDeterminantIdentityDerived ≡ false
+
     offLineZeroRankTwoDerived : Bool
     offLineZeroRankTwoDerivedIsFalse : offLineZeroRankTwoDerived ≡ false
+
     literalPrimePairKernelDerived : Bool
     literalPrimePairKernelDerivedIsFalse : literalPrimePairKernelDerived ≡ false
+
     favorableScaleGateDerived : Bool
     favorableScaleGateDerivedIsFalse : favorableScaleGateDerived ≡ false
+
     riemannHypothesisDerived : Bool
     riemannHypothesisDerivedIsFalse : riemannHypothesisDerived ≡ false
 
@@ -134,7 +171,7 @@ canonicalG21CurrentBoundary : G21CurrentBoundary
 canonicalG21CurrentBoundary =
   g21CurrentBoundary
     true refl
-    true refl
+    false refl
     true refl
     false refl
     false refl
