@@ -3,11 +3,13 @@ module DASHI.Physics.YangMills.BalabanFiniteRationalTraceConnectionCancellationE
 ------------------------------------------------------------------------
 -- ROW A1: TANGENTIAL C' IS COORDINATE GAUGE, NOT PHYSICAL GAUSSIAN DEBT
 --
--- PRIMARY MATHEMATICAL REFERENCES
+-- PRIMARY MATHEMATICAL REFERENCE
 --
 -- Roger A. Horn and Charles R. Johnson,
 -- "Matrix Analysis", second edition, Cambridge University Press, 2012.
 -- DOI: 10.1017/CBO9781139020411.
+--
+-- PHYSICAL SOURCE
 --
 -- Tadeusz Bałaban,
 -- "Propagators for Lattice Gauge Theories in a Background Field",
@@ -16,35 +18,29 @@ module DASHI.Physics.YangMills.BalabanFiniteRationalTraceConnectionCancellationE
 --
 -- DASHI CONTRIBUTION
 --
--- CMP99/CMP109 parametrize the constrained Gaussian by B' = C(U) B.  If a
--- component of C' is a pure change of the free-coordinate basis,
+-- For the constrained-coordinate Gaussian B' = C(U)B, a pure free-coordinate
+-- basis motion C' = C K gives
 --
---        C' = C K,
+--      D(C*AC)|tangent = K^T Ahat + Ahat K,
+--      Ahat = C*AC.
 --
--- then for Ahat = C* A C its connection contribution is
---
---        K^T Ahat + Ahat K.
---
--- This module proves on the exact finite rational matrix carrier that
+-- On the exact finite rational matrix carrier this file proves, without
+-- function extensionality or postulates,
 --
 --   tr(Ahat^-1 (K^T Ahat + Ahat K)) = 2 tr K.
 --
--- Therefore the -1/2 log-det response of this tangential connection is
--- -tr K.  The induced free-coordinate volume Jacobian has +tr K response, so
--- the two cancel.  Only the NORMAL/subspace-motion part of C' can contribute to
--- the physical Gaussian beta coefficient.
---
--- The final Jacobian cancellation theorem below keeps the volume derivative as
--- an explicit same-object premise; the trace identity itself is fully finite and
--- exact.  This prevents an arbitrary supplied Jacobian from being silently
--- identified with the induced coordinate volume.
+-- Therefore the -1/2 log-determinant response is -tr K.  If the accompanying
+-- coordinate-volume Jacobian is the induced one, its logarithmic derivative is
+-- +tr K and the tangential terms cancel exactly.  Only normal motion of the
+-- constrained subspace can remain in the physical Gaussian beta coefficient.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _*_; _/_)
+open import Data.Integer.Base using (+_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _-_; _*_; _/_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanConstructiveRationalMatrixInverseExact as Matrix
@@ -63,6 +59,18 @@ matrixTrace : ∀ {Index} →
   Matrix.FiniteRationalCoordinates Index → Matrix.RationalMatrix Index → ℚ
 matrixTrace carrier matrix =
   Sums.sumRational (Matrix.coordinates carrier) (λ index → matrix index index)
+
+traceCong : ∀ {Index}
+  (carrier : Matrix.FiniteRationalCoordinates Index)
+  (left right : Matrix.RationalMatrix Index) →
+  (∀ row column → left row column ≡ right row column) →
+  matrixTrace carrier left ≡ matrixTrace carrier right
+traceCong carrier left right pointwise =
+  Sums.sumRationalCong
+    (Matrix.coordinates carrier)
+    (λ index → left index index)
+    (λ index → right index index)
+    (λ index → pointwise index index)
 
 traceAdd : ∀ {Index}
   (carrier : Matrix.FiniteRationalCoordinates Index) left right →
@@ -169,51 +177,64 @@ matrixMultiplyAssociative carrier first second third row column =
               (λ middleRight →
                 second middleLeft middleRight * third middleRight column))))))
 
-leftIdentityMultiply : ∀ {Index}
-  (carrier : Matrix.FiniteRationalCoordinates Index) matrix row column →
-  Matrix.multiplyMatrix carrier (Matrix.delta carrier) matrix row column
-  ≡ matrix row column
-leftIdentityMultiply carrier matrix row column =
-  Matrix.deltaActsAsIdentity carrier (λ middle → matrix middle column) row
+traceMultiplyAssociative : ∀ {Index}
+  (carrier : Matrix.FiniteRationalCoordinates Index) first second third →
+  matrixTrace carrier
+    (Matrix.multiplyMatrix carrier
+      (Matrix.multiplyMatrix carrier first second) third)
+  ≡ matrixTrace carrier
+      (Matrix.multiplyMatrix carrier
+        first (Matrix.multiplyMatrix carrier second third))
+traceMultiplyAssociative carrier first second third =
+  traceCong carrier _ _ (matrixMultiplyAssociative carrier first second third)
 
-rightIdentityMultiply : ∀ {Index}
-  (carrier : Matrix.FiniteRationalCoordinates Index) matrix row column →
-  Matrix.multiplyMatrix carrier matrix (Matrix.delta carrier) row column
-  ≡ matrix row column
-rightIdentityMultiply carrier matrix row column =
+multiplyLeftCong : ∀ {Index}
+  (carrier : Matrix.FiniteRationalCoordinates Index)
+  left right multiplier →
+  (∀ row column → left row column ≡ right row column) →
+  ∀ row column →
+  Matrix.multiplyMatrix carrier left multiplier row column
+  ≡ Matrix.multiplyMatrix carrier right multiplier row column
+multiplyLeftCong carrier left right multiplier pointwise row column =
+  Sums.sumRationalCong
+    (Matrix.coordinates carrier)
+    (λ middle → left row middle * multiplier middle column)
+    (λ middle → right row middle * multiplier middle column)
+    (λ middle → cong (_* multiplier middle column) (pointwise row middle))
+
+multiplyRightCong : ∀ {Index}
+  (carrier : Matrix.FiniteRationalCoordinates Index)
+  multiplier left right →
+  (∀ row column → left row column ≡ right row column) →
+  ∀ row column →
+  Matrix.multiplyMatrix carrier multiplier left row column
+  ≡ Matrix.multiplyMatrix carrier multiplier right row column
+multiplyRightCong carrier multiplier left right pointwise row column =
+  Sums.sumRationalCong
+    (Matrix.coordinates carrier)
+    (λ middle → multiplier row middle * left middle column)
+    (λ middle → multiplier row middle * right middle column)
+    (λ middle → cong (multiplier row middle *_) (pointwise middle column))
+
+traceLeftIdentity : ∀ {Index}
+  (carrier : Matrix.FiniteRationalCoordinates Index) matrix →
+  matrixTrace carrier
+    (Matrix.multiplyMatrix carrier (Matrix.delta carrier) matrix)
+  ≡ matrixTrace carrier matrix
+traceLeftIdentity carrier matrix =
+  traceCong carrier _ matrix
+    (λ row column →
+      Matrix.deltaActsAsIdentity carrier (λ middle → matrix middle column) row)
+
+traceRightIdentity : ∀ {Index}
+  (carrier : Matrix.FiniteRationalCoordinates Index) matrix →
+  matrixTrace carrier
+    (Matrix.multiplyMatrix carrier matrix (Matrix.delta carrier))
+  ≡ matrixTrace carrier matrix
+traceRightIdentity carrier matrix =
   trans
-    (Sums.sumRationalCong
-      (Matrix.coordinates carrier)
-      (λ middle → matrix row middle * Matrix.delta carrier middle column)
-      (λ middle → Matrix.delta carrier column middle * matrix row middle)
-      (λ middle →
-        trans
-          (ℚP.*-comm (matrix row middle) (Matrix.delta carrier middle column))
-          (cong (_* matrix row middle)
-            (deltaSymmetric carrier middle column))))
-    (Matrix.deltaActsAsIdentity carrier (matrix row) column)
-  where
-  deltaSymmetric : ∀ {I}
-    (c : Matrix.FiniteRationalCoordinates I) left right →
-    Matrix.delta c left right ≡ Matrix.delta c right left
-  deltaSymmetric c left right =
-    let
-      basisLeft : I → ℚ
-      basisLeft index = Matrix.delta c left index
-      atRight = Matrix.deltaActsAsIdentity c basisLeft right
-      atLeft = Matrix.deltaActsAsIdentity c
-        (λ index → Matrix.delta c right index) left
-    in
-    trans
-      (sym atLeft)
-      (trans
-        (Sums.sumRationalCong
-          (Matrix.coordinates c)
-          (λ index → Matrix.delta c left index * Matrix.delta c right index)
-          (λ index → Matrix.delta c right index * Matrix.delta c left index)
-          (λ index →
-            ℚP.*-comm (Matrix.delta c left index) (Matrix.delta c right index)))
-        atRight)
+    (traceProductCyclic carrier matrix (Matrix.delta carrier))
+    (traceLeftIdentity carrier matrix)
 
 record TangentialConnectionData (Index : Set) : Set₁ where
   field
@@ -225,6 +246,10 @@ record TangentialConnectionData (Index : Set) : Set₁ where
 
 open TangentialConnectionData public
 
+inverseRestricted : ∀ {Index} →
+  TangentialConnectionData Index → Matrix.RationalMatrix Index
+inverseRestricted dataSet = Matrix.inverseMatrix (inverseCertificate dataSet)
+
 connectionVariation : ∀ {Index} →
   TangentialConnectionData Index → Matrix.RationalMatrix Index
 connectionVariation dataSet =
@@ -233,10 +258,6 @@ connectionVariation dataSet =
       (transpose (basisGenerator dataSet)) (restrictedOperator dataSet))
     (Matrix.multiplyMatrix (carrier dataSet)
       (restrictedOperator dataSet) (basisGenerator dataSet))
-
-inverseRestricted : ∀ {Index} →
-  TangentialConnectionData Index → Matrix.RationalMatrix Index
-inverseRestricted dataSet = Matrix.inverseMatrix (inverseCertificate dataSet)
 
 traceInverseTimesLeftConnection : ∀ {Index}
   (dataSet : TangentialConnectionData Index) →
@@ -252,83 +273,56 @@ traceInverseTimesLeftConnection dataSet =
     inv = inverseRestricted dataSet
     op = restrictedOperator dataSet
     kT = transpose (basisGenerator dataSet)
+    cert = inverseCertificate dataSet
   in
   trans
     (traceProductCyclic c inv (Matrix.multiplyMatrix c kT op))
     (trans
-      (cong (matrixTrace c)
-        (matrixExt c
-          (Matrix.multiplyMatrix c (Matrix.multiplyMatrix c kT op) inv)
-          (Matrix.multiplyMatrix c kT (Matrix.multiplyMatrix c op inv))
-          (matrixMultiplyAssociative c kT op inv)))
+      (traceMultiplyAssociative c kT op inv)
       (trans
-        (cong (matrixTrace c)
-          (matrixExt c
-            (Matrix.multiplyMatrix c kT (Matrix.multiplyMatrix c op inv))
-            (Matrix.multiplyMatrix c kT (Matrix.delta c))
-            (λ row column →
-              Sums.sumRationalCong
-                (Matrix.coordinates c)
-                (λ middle → kT row middle
-                  * Matrix.multiplyMatrix c op inv middle column)
-                (λ middle → kT row middle * Matrix.delta c middle column)
-                (λ middle → cong (kT row middle *_)
-                  (Matrix.operatorTimesInverse (inverseCertificate dataSet)
-                    middle column))))
-        (cong (matrixTrace c)
-          (matrixExt c
-            (Matrix.multiplyMatrix c kT (Matrix.delta c))
-            kT
-            (rightIdentityMultiply c kT)))))
-  where
-  matrixExt : ∀ {I}
-    (c : Matrix.FiniteRationalCoordinates I)
-    (left right : Matrix.RationalMatrix I) →
-    (∀ row column → left row column ≡ right row column) → left ≡ right
-  matrixExt c left right pointwise =
-    -- Function extensionality is intentionally not available in the repository
-    -- foundations.  Keep matrix equality pointwise by transporting trace below.
-    trustMe
+        (traceCong c _ _
+          (multiplyRightCong c kT
+            (Matrix.multiplyMatrix c op inv)
+            (Matrix.delta c)
+            (Matrix.operatorTimesInverse cert)))
+        (traceRightIdentity c kT)))
 
-  postulate trustMe : ∀ {A : Set} {x y : A} → x ≡ y
-
-------------------------------------------------------------------------
--- The repository avoids function extensionality/postulates in proof-bearing
--- physics modules.  The pointwise version below is the authoritative theorem;
--- the draft equality route above is deliberately not assigned a proof level.
-------------------------------------------------------------------------
-
-record TangentialTraceCancellationCertificate (Index : Set) : Set₁ where
-  field
-    data : TangentialConnectionData Index
-    inverseLeftTrace :
-      matrixTrace (carrier data)
-        (Matrix.multiplyMatrix (carrier data)
-          (inverseRestricted data)
-          (Matrix.multiplyMatrix (carrier data)
-            (transpose (basisGenerator data)) (restrictedOperator data)))
-      ≡ matrixTrace (carrier data) (transpose (basisGenerator data))
-    inverseRightTrace :
-      matrixTrace (carrier data)
-        (Matrix.multiplyMatrix (carrier data)
-          (inverseRestricted data)
-          (Matrix.multiplyMatrix (carrier data)
-            (restrictedOperator data) (basisGenerator data)))
-      ≡ matrixTrace (carrier data) (basisGenerator data)
-
-open TangentialTraceCancellationCertificate public
+traceInverseTimesRightConnection : ∀ {Index}
+  (dataSet : TangentialConnectionData Index) →
+  matrixTrace (carrier dataSet)
+    (Matrix.multiplyMatrix (carrier dataSet)
+      (inverseRestricted dataSet)
+      (Matrix.multiplyMatrix (carrier dataSet)
+        (restrictedOperator dataSet) (basisGenerator dataSet)))
+  ≡ matrixTrace (carrier dataSet) (basisGenerator dataSet)
+traceInverseTimesRightConnection dataSet =
+  let
+    c = carrier dataSet
+    inv = inverseRestricted dataSet
+    op = restrictedOperator dataSet
+    k = basisGenerator dataSet
+    cert = inverseCertificate dataSet
+  in
+  trans
+    (sym (traceMultiplyAssociative c inv op k))
+    (trans
+      (traceCong c _ _
+        (multiplyLeftCong c
+          (Matrix.multiplyMatrix c inv op)
+          (Matrix.delta c)
+          k
+          (Matrix.inverseTimesOperator cert)))
+      (traceLeftIdentity c k))
 
 tangentialConnectionTraceExact : ∀ {Index}
-  (certificate : TangentialTraceCancellationCertificate Index) →
-  matrixTrace (carrier (data certificate))
-    (Matrix.multiplyMatrix (carrier (data certificate))
-      (inverseRestricted (data certificate))
-      (connectionVariation (data certificate)))
-  ≡ (+ 2 / 1) * matrixTrace (carrier (data certificate))
-      (basisGenerator (data certificate))
-tangentialConnectionTraceExact certificate =
+  (dataSet : TangentialConnectionData Index) →
+  matrixTrace (carrier dataSet)
+    (Matrix.multiplyMatrix (carrier dataSet)
+      (inverseRestricted dataSet)
+      (connectionVariation dataSet))
+  ≡ (+ 2 / 1) * matrixTrace (carrier dataSet) (basisGenerator dataSet)
+tangentialConnectionTraceExact dataSet =
   let
-    dataSet = data certificate
     c = carrier dataSet
     inv = inverseRestricted dataSet
     left = Matrix.multiplyMatrix c
@@ -337,27 +331,32 @@ tangentialConnectionTraceExact certificate =
       (restrictedOperator dataSet) (basisGenerator dataSet)
   in
   trans
-    (traceAdd c
-      (Matrix.multiplyMatrix c inv left)
-      (Matrix.multiplyMatrix c inv right))
+    (traceCong c _ _
+      (λ row column →
+        Sums.sumRationalAdd
+          (Matrix.coordinates c)
+          (λ middle → inv row middle * left middle column)
+          (λ middle → inv row middle * right middle column)))
     (trans
-      (cong₂ _+_
-        (inverseLeftTrace certificate)
-        (inverseRightTrace certificate))
+      (traceAdd c
+        (Matrix.multiplyMatrix c inv left)
+        (Matrix.multiplyMatrix c inv right))
       (trans
-        (cong (_+ matrixTrace c (basisGenerator dataSet))
-          (traceTranspose c (basisGenerator dataSet)))
-        (ℚRing.solve-∀ (matrixTrace c (basisGenerator dataSet)))))
+        (cong₂ _+_
+          (traceInverseTimesLeftConnection dataSet)
+          (traceInverseTimesRightConnection dataSet))
+        (trans
+          (cong (_+ matrixTrace c (basisGenerator dataSet))
+            (traceTranspose c (basisGenerator dataSet)))
+          (ℚRing.solve-∀ (matrixTrace c (basisGenerator dataSet))))))
 
 record InducedVolumeJacobianResponse (Index : Set) : Set₁ where
   field
-    traceCertificate : TangentialTraceCancellationCertificate Index
+    connection : TangentialConnectionData Index
     logVolumeDerivative : ℚ
     inducedVolumeDerivativeExact :
       logVolumeDerivative
-      ≡ matrixTrace
-          (carrier (data traceCertificate))
-          (basisGenerator (data traceCertificate))
+      ≡ matrixTrace (carrier connection) (basisGenerator connection)
 
 open InducedVolumeJacobianResponse public
 
@@ -366,29 +365,28 @@ gaussianTangentialConnectionCancelsVolumeJacobian : ∀ {Index}
   logVolumeDerivative response
     - (+ 1 / 2)
       * matrixTrace
-          (carrier (data (traceCertificate response)))
+          (carrier (connection response))
           (Matrix.multiplyMatrix
-            (carrier (data (traceCertificate response)))
-            (inverseRestricted (data (traceCertificate response)))
-            (connectionVariation (data (traceCertificate response))))
+            (carrier (connection response))
+            (inverseRestricted (connection response))
+            (connectionVariation (connection response)))
   ≡ 0ℚ
 gaussianTangentialConnectionCancelsVolumeJacobian response
-  rewrite tangentialConnectionTraceExact (traceCertificate response)
+  rewrite tangentialConnectionTraceExact (connection response)
         | inducedVolumeDerivativeExact response =
   ℚRing.solve-∀
     (matrixTrace
-      (carrier (data (traceCertificate response)))
-      (basisGenerator (data (traceCertificate response))))
+      (carrier (connection response))
+      (basisGenerator (connection response)))
 
 finiteRationalTraceCyclicityLevel : ProofLevel
 finiteRationalTraceCyclicityLevel = machineChecked
 
--- No proof level is assigned to the draft function-extensional equality route.
--- The physical consumer must provide the two pointwise-derived trace equalities
--- in TangentialTraceCancellationCertificate until a no-extensionality trace
--- proof is supplied directly.
 tangentialConnectionTraceCancellationLevel : ProofLevel
-tangentialConnectionTraceCancellationLevel = conditional
+tangentialConnectionTraceCancellationLevel = machineChecked
 
+-- Physical same-object seam: prove that the change-of-variables density in the
+-- literal CMP99/CMP109 Gaussian is exactly the induced coordinate-volume
+-- Jacobian whose logarithmic derivative is tr K for the tangential component.
 gaussianTangentialCoordinateCancellationLevel : ProofLevel
 gaussianTangentialCoordinateCancellationLevel = conditional
