@@ -27,6 +27,8 @@ open import Data.Product using (Σ; _,_; proj₁)
 open import Data.Sum.Base using (inj₁; inj₂)
 open import Relation.Binary.PropositionalEquality using (_≢_; cong; sym; trans)
 
+import DASHI.Mathematics.NumberTheory.FiniteProductEnumerationExact as Product
+
 ------------------------------------------------------------------------
 -- Generic membership helpers.
 
@@ -182,6 +184,45 @@ dependentPairsMember fibres (Any.here refl) valueMember =
 dependentPairsMember fibres (Any.there baseMember) valueMember =
   appendMemberRight _
     (dependentPairsMember fibres baseMember valueMember)
+
+------------------------------------------------------------------------
+-- Generic uniqueness for concatMap when an output equality recovers equality
+-- of the source base coordinates.  This is the proof-erasing analogue of the
+-- dependent-pair theorem above.
+------------------------------------------------------------------------
+
+concatMapUniqueRecoverable :
+  ∀ {A B : Set}
+    {xs : List A}
+    (fibres : A → List B) →
+  Unique xs →
+  ((x : A) → Unique (fibres x)) →
+  (∀ {leftSource rightSource : A}
+      {leftOutput rightOutput : B} →
+    leftOutput ∈ fibres leftSource →
+    rightOutput ∈ fibres rightSource →
+    leftOutput ≡ rightOutput →
+    leftSource ≡ rightSource) →
+  Unique (Product.concatMap fibres xs)
+concatMapUniqueRecoverable {xs = []} fibres baseUnique fibreUnique recover =
+  AllPairs.[]
+concatMapUniqueRecoverable {xs = x ∷ xs} fibres
+    (AllPairs._∷_ fresh tailUnique) fibreUnique recover =
+  uniqueAppendDisjoint
+    (fibreUnique x)
+    (concatMapUniqueRecoverable fibres tailUnique fibreUnique recover)
+    cross
+  where
+  cross :
+    ∀ {left right} →
+    left ∈ fibres x →
+    right ∈ Product.concatMap fibres xs →
+    left ≢ right
+  cross leftMember rightMember equality
+    with Product.concatMapMemberInverse fibres rightMember
+... | source , sourceMember , sourceOutputMember =
+  All.lookup fresh sourceMember
+    (recover leftMember sourceOutputMember equality)
 
 ------------------------------------------------------------------------
 -- This owner is finite/list-theoretic only.
