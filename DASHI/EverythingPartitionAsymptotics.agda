@@ -9,11 +9,12 @@ module DASHI.EverythingPartitionAsymptotics where
 -- cancellation, coarse finite growth envelopes, and the rank-one Fock
 -- occupation-grading bridge.
 --
--- The first genuine analytic frontier is typed over the concrete Bishop
--- real/exp substrate.  Existing Yang--Mills Bishop finite-geometric machinery
--- is explicitly reused for the Erdos weighted-kernel route.
+-- The analytic layer uses the exact git-pinned `vendor/bishop` submodule.
+-- Existing Yang--Mills Bishop geometric and polynomial-weighted finite-sum
+-- machinery is reused directly for the Erdos degree-one kernel.
 ------------------------------------------------------------------------
 
+import DASHI.Foundations.BishopVendoredSubmoduleProvenanceExact
 import DASHI.Mathematics.NumberTheory.FiniteWeightedReindexExact
 import DASHI.Mathematics.NumberTheory.FiniteProductEnumerationExact
 import DASHI.Mathematics.NumberTheory.FiniteProductCardinalityExact
@@ -61,6 +62,7 @@ import DASHI.Mathematics.NumberTheory.PartitionErdosClassicalFactorResidualUniqu
 import DASHI.Mathematics.NumberTheory.PartitionErdosClassicalFactorResidualPermutationExact
 import DASHI.Mathematics.NumberTheory.PartitionErdosDivisorSumRecurrenceExact
 import DASHI.Mathematics.NumberTheory.PartitionErdosNatMajorantBootstrapExact
+import DASHI.Mathematics.NumberTheory.PartitionErdosBishopDegreeOneDominationExact
 import DASHI.Mathematics.NumberTheory.PartitionErdosBishopGeometricKernelBridgeExact
 import DASHI.Mathematics.NumberTheory.PartitionErdosBishopUpperMajorantBoundaryExact
 import DASHI.Mathematics.NumberTheory.PartitionErdosClassicalResidualExpansionExact
