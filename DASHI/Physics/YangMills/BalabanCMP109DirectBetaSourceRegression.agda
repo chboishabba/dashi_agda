@@ -17,79 +17,80 @@ module DASHI.Physics.YangMills.BalabanCMP109DirectBetaSourceRegression where
 -- Tadeusz Bałaban, "Averaging Operations for Lattice Gauge Theories",
 -- CMP 98 (1985), 17--51. DOI: 10.1007/BF01211042.
 --
--- Current Row-A1 dependency history:
+-- CURRENT HIGHEST-ALPHA SOURCE ROUTE
 --
---   source transcription
---     -> direct p=0 beta projection / trace-log route
---     -> seagull-sign + history refinement
---     -> positive-measure patch correction
---     -> W/Q/R constrained first-variation decomposition
---     -> five-channel quartic current-step remainder
---     -> HISTORY ANTI-DOUBLE-COUNTING:
---          beta_j is projected from current E^(j+1), which already depends on
---          preceding couplings; if the five-channel remainder bound is uniform
---          over the admissible history, history is an argument of betaInt, not a
---          second additive final debt.
+-- CMP109 Sect. 2 linearizes the nonlinear fluctuation averaging before the
+-- Gaussian stage.  The delta constraint is then the fixed linear delta(Q B'),
+-- constrained coordinates are eliminated as B' = C(U) B, and the covariance is
 --
--- Hence the highest-alpha final A1 margin can collapse to
+--     (C(U)^* A(U) C(U))^-1.
 --
---   b_patch - C_beta gamma^4 > 0
+-- Hence the authoritative first variation is
 --
--- PROVIDED the physical five-channel instantiation is uniform over the full
--- admissible preceding-coupling history.  Localization/history estimates may be
--- used internally to prove that uniformity, but must not then be subtracted a
--- second time.
+--     D(C* A C) = C'* A C + C* A' C + C* A C',
 --
--- The Gaussian W channel is D_background of the Wilson HESSIAN, hence a mixed
--- third Wilson variation.  The existing literal first-variation plaquette owner
--- is useful coordinate/support infrastructure but is not itself W.  A literal
--- third-variation/right-exponential source weld remains open.
+-- not an abstract derivative of a moving delta-constraint.  A' contains the
+-- literal background derivative of the CMP99 quadratic operator (the Wilson
+-- Hessian contribution is a mixed third Wilson variation); C' is determined by
+-- differentiating the eliminated-coordinate equation Q(U) C(U) = 0.
+--
+-- On the remainder side, beta_j is projected from the current E^(j+1), which
+-- already depends on preceding couplings.  If the five-channel quartic bound is
+-- uniform over the admissible history, history is an argument of betaInt rather
+-- than a second additive final debt.  The final margin then collapses to
+--
+--     b_patch - C_beta gamma^4 > 0.
+--
+-- Existing quartic absorption algebra proves positivity once
+-- C_beta gamma^4 <= b_patch/2.  Thus explicit decimal C_beta is not intrinsically
+-- required: a finite history-uniform C_beta and a positive source-uniform patch
+-- floor are sufficient once a small-coupling threshold is produced.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
 open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel; conditional)
 open import DASHI.Physics.YangMills.BalabanCMP109SourceTranscriptionExact
 open import DASHI.Physics.YangMills.BalabanCMP109DirectBetaSourceCutsetExact
-open import DASHI.Physics.YangMills.BalabanCMP109SeagullHistorySourceRefinementExact
-open import DASHI.Physics.YangMills.BalabanCMP109UniformFloorSummableHistoryRefinementExact
-open import DASHI.Physics.YangMills.BalabanCMP109ReducedMarginSourceCutsetExact
 open import DASHI.Physics.YangMills.BalabanCMP109A1CrossPollinatedDebtProducersExact
 open import DASHI.Physics.YangMills.BalabanCMP109GaussianPositivePatchCorrectionExact
-open import DASHI.Physics.YangMills.BalabanCMP109GaussianFirstVariationSourceDecompositionExact
 open import DASHI.Physics.YangMills.BalabanCMP109CorrectedPatchMarginCrossProverExact
+open import DASHI.Physics.YangMills.BalabanCMP109FixedConstraintCoordinateGaussianExact
 open import DASHI.Physics.YangMills.BalabanA1HistoryUniformRemainderAntiDoubleCountExact
+open import DASHI.Physics.YangMills.BalabanCMP109QRConstraintAnnihilatorReductionExact
 open import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound82FiveAnalyticLeafExact
 
 ------------------------------------------------------------------------
--- Current shortest Row-A1 Gaussian source blockers
+-- Current authoritative Gaussian source blockers
 ------------------------------------------------------------------------
 
-literalWilsonHessianVariationRegressionLevel : ProofLevel
-literalWilsonHessianVariationRegressionLevel =
-  cmp109LiteralWilsonHessianVariationCurrentLevel
+literalCoordinateEmbeddingVariationRegressionLevel : ProofLevel
+literalCoordinateEmbeddingVariationRegressionLevel =
+  cmp109LiteralCoordinateEmbeddingVariationLevel
 
--- Sharper description of the same W seam: D_background Delta is a mixed third
--- Wilson variation, not the already-existing first action variation.
+literalQuadraticOperatorVariationRegressionLevel : ProofLevel
+literalQuadraticOperatorVariationRegressionLevel =
+  cmp109LiteralQuadraticOperatorVariationLevel
+
+literalRestrictedThreeTermVariationRegressionLevel : ProofLevel
+literalRestrictedThreeTermVariationRegressionLevel =
+  cmp109LiteralRestrictedThreeTermVariationLevel
+
+literalCoordinateJacobianContributionRegressionLevel : ProofLevel
+literalCoordinateJacobianContributionRegressionLevel =
+  cmp109LiteralCoordinateJacobianContributionLevel
+
+-- Within A', D_background Delta_Wilson is a mixed THIRD variation of the Wilson
+-- action.  Existing literal first/second plaquette jets are ancestry, not this
+-- final producer.
 literalWilsonMixedThirdVariationRegressionLevel : ProofLevel
 literalWilsonMixedThirdVariationRegressionLevel = conditional
-
-literalAveragingConstraintVariationRegressionLevel : ProofLevel
-literalAveragingConstraintVariationRegressionLevel =
-  cmp109LiteralAveragingConstraintVariationCurrentLevel
-
-literalGaugeProjectionVariationRegressionLevel : ProofLevel
-literalGaugeProjectionVariationRegressionLevel =
-  cmp109LiteralGaugeProjectionVariationCurrentLevel
-
-literalWQRAssemblyRegressionLevel : ProofLevel
-literalWQRAssemblyRegressionLevel = cmp109LiteralWQRAssemblyCurrentLevel
 
 literalMixedVertexPositivePatchRegressionLevel : ProofLevel
 literalMixedVertexPositivePatchRegressionLevel =
   cmp109LiteralPositivePatchCurrentLevel
 
 ------------------------------------------------------------------------
--- Current shortest Row-A1 remainder/history blocker
+-- Current remainder/history blocker
 ------------------------------------------------------------------------
 
 literalFiveChannelTaylorInstantiationRegressionLevel : ProofLevel
@@ -100,14 +101,12 @@ literalFiveChannelQuotientMajorantRegressionLevel : ProofLevel
 literalFiveChannelQuotientMajorantRegressionLevel =
   cmp109LiteralFiveChannelCurrentLevel
 
--- Highest-alpha source weld: the current five-channel betaInt must be bounded
--- uniformly over the complete admissible preceding-coupling history.
 literalFiveChannelUniformOverHistoryRegressionLevel : ProofLevel
 literalFiveChannelUniformOverHistoryRegressionLevel =
   cmp109LiteralFiveChannelUniformOverHistoryLevel
 
 ------------------------------------------------------------------------
--- Machine-checked reused Agda compilers
+-- Machine-checked reusable compilers
 ------------------------------------------------------------------------
 
 historyUniformAntiDoubleCountRegressionLevel : ProofLevel
@@ -121,22 +120,30 @@ fiveChannelQuarticDebtReuseRegressionLevel : ProofLevel
 fiveChannelQuarticDebtReuseRegressionLevel =
   cmp109FiveChannelQuarticDebtReuseLevel
 
-------------------------------------------------------------------------
--- Conditional fallback if history-uniform five-channel control fails
-------------------------------------------------------------------------
-
--- These remain available as a failure-closed fallback, but are no longer the
--- preferred final margin when the current betaInt is already history-uniform.
-literalIrrelevantMemoryInfluenceFallbackLevel : ProofLevel
-literalIrrelevantMemoryInfluenceFallbackLevel =
-  cmp109LiteralLocalizedMemoryCurrentLevel
-
-literalMarginalMemoryBoundFallbackLevel : ProofLevel
-literalMarginalMemoryBoundFallbackLevel =
-  cmp109LiteralMarginalMemoryBoundCurrentLevel
+qrConstraintAnnihilatorReductionRegressionLevel : ProofLevel
+qrConstraintAnnihilatorReductionRegressionLevel =
+  cmp109QRConstraintAnnihilatorReductionLevel
 
 ------------------------------------------------------------------------
--- Cross-prover-only theorem surfaces from the parallel Lean lane
+-- Conditional simplification / fallback paths
+------------------------------------------------------------------------
+
+-- KKT annihilation may simplify the C' connection terms, but only after the KKT
+-- projector is identified with the SAME fixed-coordinate constrained Gaussian.
+kktProjectionToConstrainedTraceWeldRegressionLevel : ProofLevel
+kktProjectionToConstrainedTraceWeldRegressionLevel =
+  cmp109KKTProjectionToConstrainedTraceWeldLevel
+
+-- If history-uniform current-remainder control fails, the older explicit
+-- localized/marginal history budget remains available as a failure-closed path.
+literalLocalizedHistoryFallbackLevel : ProofLevel
+literalLocalizedHistoryFallbackLevel = cmp109LiteralLocalizedMemoryCurrentLevel
+
+literalMarginalHistoryFallbackLevel : ProofLevel
+literalMarginalHistoryFallbackLevel = cmp109LiteralMarginalMemoryBoundCurrentLevel
+
+------------------------------------------------------------------------
+-- Cross-prover-only Lean theorem surfaces
 ------------------------------------------------------------------------
 
 wilsonCubicCornerDisqualificationCrossProverRegressionLevel : ProofLevel
@@ -150,10 +157,6 @@ singleModeUniformFloorNoGoCrossProverRegressionLevel =
 quarterPatchLowerBoundCrossProverRegressionLevel : ProofLevel
 quarterPatchLowerBoundCrossProverRegressionLevel =
   cmp109QuarterPatchLowerBoundCrossProverLevel
-
-wqrInterferenceCrossProverRegressionLevel : ProofLevel
-wqrInterferenceCrossProverRegressionLevel =
-  cmp109WQRInterferenceCrossProverLevel
 
 universalCoefficientCircularityCrossProverRegressionLevel : ProofLevel
 universalCoefficientCircularityCrossProverRegressionLevel =
