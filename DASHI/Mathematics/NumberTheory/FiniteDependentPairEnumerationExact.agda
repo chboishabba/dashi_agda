@@ -15,16 +15,17 @@ module DASHI.Mathematics.NumberTheory.FiniteDependentPairEnumerationExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Empty using (⊥; ⊥-elim)
 open import Data.List.Base using (map; _++_)
 open import Data.List.Membership.Propositional using (_∈_)
+open import Data.List.Membership.Propositional.Properties using (∈-++⁻)
 open import Data.List.Relation.Unary.Any as Any using ()
 import Data.List.Relation.Unary.All as All
 import Data.List.Relation.Unary.AllPairs.Core as AllPairs
 open import Data.List.Relation.Unary.Unique.Propositional using (Unique)
 import Data.List.Relation.Unary.Unique.Propositional.Properties as UniqueP
 open import Data.Product using (Σ; _,_; proj₁)
-open import Relation.Binary.PropositionalEquality using (_≢_; cong)
+open import Data.Sum.Base using (inj₁; inj₂)
+open import Relation.Binary.PropositionalEquality using (_≢_; cong; sym; trans)
 
 ------------------------------------------------------------------------
 -- Generic membership helpers.
@@ -34,21 +35,6 @@ mapMember :
   x ∈ xs → f x ∈ map f xs
 mapMember f (Any.here equality) = Any.here equality
 mapMember f (Any.there member) = Any.there (mapMember f member)
-
-appendMemberLeft :
-  ∀ {A : Set} {x : A} {xs ys : List A} →
-  x ∈ xs → x ∈ xs ++ ys
-appendMemberLeft {xs = []} ()
-appendMemberLeft {xs = _ ∷ _} (Any.here equality) = Any.here equality
-appendMemberLeft {xs = _ ∷ xs} (Any.there member) =
-  Any.there (appendMemberLeft {xs = xs} member)
-
-appendMemberRight :
-  ∀ {A : Set} {x : A} (xs : List A) {ys : List A} →
-  x ∈ ys → x ∈ xs ++ ys
-appendMemberRight [] member = member
-appendMemberRight (_ ∷ xs) member =
-  Any.there (appendMemberRight xs member)
 
 allAppend :
   ∀ {A : Set} {P : A → Set} {xs ys : List A} →
@@ -116,11 +102,10 @@ dependentPairsFirstMember :
   pair ∈ dependentPairs xs fibres → proj₁ pair ∈ xs
 dependentPairsFirstMember {xs = []} ()
 dependentPairsFirstMember {xs = x ∷ xs} {fibres} member
-  with Data.List.Membership.Propositional.Properties.∈-++⁻
-         (pairBlock x (fibres x)) member
-... | Data.Sum.Base.inj₁ blockMember =
+  with ∈-++⁻ (pairBlock x (fibres x)) member
+... | inj₁ blockMember =
   Any.here (pairBlockFirst x blockMember)
-... | Data.Sum.Base.inj₂ tailMember =
+... | inj₂ tailMember =
   Any.there (dependentPairsFirstMember tailMember)
 
 pairBlockUnique :
@@ -161,18 +146,30 @@ dependentPairsUnique {xs = x ∷ xs} fibres
     leftFirst : proj₁ left ≡ x
     leftFirst = pairBlockFirst x leftMember
 
+    sameFirst : proj₁ left ≡ proj₁ right
+    sameFirst = cong proj₁ equality
+
     firstEqual : x ≡ proj₁ right
-    firstEqual =
-      let sameFirst : proj₁ left ≡ proj₁ right
-          sameFirst = cong proj₁ equality
-      in
-      Data.Product.Properties.,-injectiveˡ
-        (Data.Product.Properties.,-injectiveˡ
-          ((x , _) , _) ≡ ((x , _) , _))
+    firstEqual = trans (sym leftFirst) sameFirst
 
 ------------------------------------------------------------------------
--- NOTE: `cross` is intentionally written using first-coordinate separation;
--- if the stdlib exposes a simpler Sigma first-projection equality eliminator,
--- the final few lines can be reduced during focused typecheck cleanup.  The
--- theorem boundary itself is the reusable object required by the key layer.
+-- Membership completeness is compositional: a base member and a fibre member
+-- produce a dependent-pair member.
+------------------------------------------------------------------------
+
+dependentPairsMember :
+  ∀ {A : Set} {B : A → Set}
+    {xs : List A} (fibres : (x : A) → List (B x))
+    {x : A} {value : B x} →
+  x ∈ xs → value ∈ fibres x → (x , value) ∈ dependentPairs xs fibres
+dependentPairsMember fibres (Any.here refl) valueMember =
+  Data.List.Membership.Propositional.Properties.∈-++⁺ˡ
+    (mapMember (λ value → _ , value) valueMember)
+dependentPairsMember fibres (Any.there baseMember) valueMember =
+  Data.List.Membership.Propositional.Properties.∈-++⁺ʳ
+    (pairBlock _ (fibres _))
+    (dependentPairsMember fibres baseMember valueMember)
+
+------------------------------------------------------------------------
+-- This owner is finite/list-theoretic only.
 ------------------------------------------------------------------------
