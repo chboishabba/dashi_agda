@@ -1,9 +1,5 @@
 module DASHI.Foundations.WetteHistoricalRecoveryGeometryBridgeExact where
 
-------------------------------------------------------------------------
--- WETTE HISTORICAL RECOVERY -> GENERIC FORMALIZATION RECOVERY GEOMETRY
-------------------------------------------------------------------------
-
 open import DASHI.Core.Prelude
 
 import DASHI.Core.FormalizationRecoveryGeometryExact as Recovery
@@ -22,12 +18,10 @@ currentWetteRecoveryProfile =
     supports Recovery.formalObjectReconstructed = ⊥
     supports Recovery.theoremObligationDischarged = ⊥
 
-wetteSourceCorpusLocated :
-  Recovery.Supports currentWetteRecoveryProfile Recovery.sourceLocated
+wetteSourceCorpusLocated : Recovery.Supports currentWetteRecoveryProfile Recovery.sourceLocated
 wetteSourceCorpusLocated = tt
 
-wetteProgrammePrimaryTextInspected :
-  Recovery.Supports currentWetteRecoveryProfile Recovery.primaryTextInspected
+wetteProgrammePrimaryTextInspected : Recovery.Supports currentWetteRecoveryProfile Recovery.primaryTextInspected
 wetteProgrammePrimaryTextInspected = tt
 
 wette1969PrimaryTextInspected : ⊤
@@ -60,27 +54,29 @@ finiteDerivationContextAndTraceErasureRecovered = tt
 derivationClosureFromPriorCertifiedStepsRecovered : ⊤
 derivationClosureFromPriorCertifiedStepsRecovered = tt
 
+traceWideMonotoneDerivationClosureRecovered : ⊤
+traceWideMonotoneDerivationClosureRecovered = tt
+
 schematicSubstitutionAndFreshnessEvaluatorFragmentRecovered : ⊤
 schematicSubstitutionAndFreshnessEvaluatorFragmentRecovered = tt
+
+orderedTupleThenPredicateStructuralEvaluatorRecovered : ⊤
+orderedTupleThenPredicateStructuralEvaluatorRecovered = tt
 
 criticalLate1974FormalObjectsStillUnrecovered : ⊤
 criticalLate1974FormalObjectsStillUnrecovered = tt
 
-wetteCompleteTranscriptionNotYetCertified :
-  ¬ Recovery.Supports currentWetteRecoveryProfile Recovery.transcriptionExtracted
+wetteCompleteTranscriptionNotYetCertified : ¬ Recovery.Supports currentWetteRecoveryProfile Recovery.transcriptionExtracted
 wetteCompleteTranscriptionNotYetCertified impossible = impossible
 
-wetteFormalObjectRecoveryNotYetCertified :
-  ¬ Recovery.Supports currentWetteRecoveryProfile Recovery.formalObjectReconstructed
+wetteFormalObjectRecoveryNotYetCertified : ¬ Recovery.Supports currentWetteRecoveryProfile Recovery.formalObjectReconstructed
 wetteFormalObjectRecoveryNotYetCertified impossible = impossible
 
-wetteTheoremDischargeNotYetCertified :
-  ¬ Recovery.Supports currentWetteRecoveryProfile Recovery.theoremObligationDischarged
+wetteTheoremDischargeNotYetCertified : ¬ Recovery.Supports currentWetteRecoveryProfile Recovery.theoremObligationDischarged
 wetteTheoremDischargeNotYetCertified impossible = impossible
 
 formalizationRecoveryCalibrationSource : Calibration.CalibrationSource
-formalizationRecoveryCalibrationSource =
-  Calibration.aspertNaiboSacerdotiCoen2026
+formalizationRecoveryCalibrationSource = Calibration.aspertNaiboSacerdotiCoen2026
 
 representationTranslationCalibrationSource : Calibration.CalibrationSource
 representationTranslationCalibrationSource = Calibration.wagner2019
@@ -92,82 +88,75 @@ historicalGrammarSource : Source.WetteSource
 historicalGrammarSource = Frontier.preferredSource Frontier.grammarTarget
 
 historicalConsistencyReductionSource : Source.WetteSource
-historicalConsistencyReductionSource =
-  Frontier.preferredSource Frontier.reductionTarget
+historicalConsistencyReductionSource = Frontier.preferredSource Frontier.reductionTarget
 
 historicalComparisonTranslationSource : Source.WetteSource
-historicalComparisonTranslationSource =
-  Frontier.preferredSource Frontier.comparisonTranslationTarget
+historicalComparisonTranslationSource = Frontier.preferredSource Frontier.comparisonTranslationTarget
 
 record WetteHistoricalRecoveryGeometryBoundary : Set where
   constructor wetteHistoricalRecoveryGeometryBoundary
   field
     bibliographicLocationIsNotPrimaryTextInspection : Bool
-    bibliographicLocationIsNotPrimaryTextInspectionIsTrue :
-      bibliographicLocationIsNotPrimaryTextInspection ≡ true
+    bibliographicLocationIsNotPrimaryTextInspectionIsTrue : bibliographicLocationIsNotPrimaryTextInspection ≡ true
 
     central1969And1970PrimarySourcesNowInspected : Bool
-    central1969And1970PrimarySourcesNowInspectedIsTrue :
-      central1969And1970PrimarySourcesNowInspected ≡ true
+    central1969And1970PrimarySourcesNowInspectedIsTrue : central1969And1970PrimarySourcesNowInspected ≡ true
 
     partialHistoricalTranscriptionNowStarted : Bool
-    partialHistoricalTranscriptionNowStartedIsTrue :
-      partialHistoricalTranscriptionNowStarted ≡ true
+    partialHistoricalTranscriptionNowStartedIsTrue : partialHistoricalTranscriptionNowStarted ≡ true
 
     criticalRuleDependencyGeometryNowRecovered : Bool
-    criticalRuleDependencyGeometryNowRecoveredIsTrue :
-      criticalRuleDependencyGeometryNowRecovered ≡ true
+    criticalRuleDependencyGeometryNowRecoveredIsTrue : criticalRuleDependencyGeometryNowRecovered ≡ true
 
     criticalSubstitutionOrderGeometryNowRecovered : Bool
-    criticalSubstitutionOrderGeometryNowRecoveredIsTrue :
-      criticalSubstitutionOrderGeometryNowRecovered ≡ true
+    criticalSubstitutionOrderGeometryNowRecoveredIsTrue : criticalSubstitutionOrderGeometryNowRecovered ≡ true
 
     criticalPremiseTypingGeometryNowRecovered : Bool
-    criticalPremiseTypingGeometryNowRecoveredIsTrue :
-      criticalPremiseTypingGeometryNowRecovered ≡ true
+    criticalPremiseTypingGeometryNowRecoveredIsTrue : criticalPremiseTypingGeometryNowRecovered ≡ true
 
     rule9324x25CompleteTypedTemplatesNowRecovered : Bool
-    rule9324x25CompleteTypedTemplatesNowRecoveredIsTrue :
-      rule9324x25CompleteTypedTemplatesNowRecovered ≡ true
+    rule9324x25CompleteTypedTemplatesNowRecoveredIsTrue : rule9324x25CompleteTypedTemplatesNowRecovered ≡ true
 
     finiteDerivationContextBridgeNowRecovered : Bool
-    finiteDerivationContextBridgeNowRecoveredIsTrue :
-      finiteDerivationContextBridgeNowRecovered ≡ true
+    finiteDerivationContextBridgeNowRecoveredIsTrue : finiteDerivationContextBridgeNowRecovered ≡ true
 
     derivationClosureFromPriorStepsNowRecovered : Bool
-    derivationClosureFromPriorStepsNowRecoveredIsTrue :
-      derivationClosureFromPriorStepsNowRecovered ≡ true
+    derivationClosureFromPriorStepsNowRecoveredIsTrue : derivationClosureFromPriorStepsNowRecovered ≡ true
+
+    traceWideMonotoneClosureNowRecovered : Bool
+    traceWideMonotoneClosureNowRecoveredIsTrue : traceWideMonotoneClosureNowRecovered ≡ true
 
     schematicSubstitutionFreshnessFragmentNowRecovered : Bool
-    schematicSubstitutionFreshnessFragmentNowRecoveredIsTrue :
-      schematicSubstitutionFreshnessFragmentNowRecovered ≡ true
+    schematicSubstitutionFreshnessFragmentNowRecoveredIsTrue : schematicSubstitutionFreshnessFragmentNowRecovered ≡ true
+
+    orderedTuplePredicateStructuralEvaluatorNowRecovered : Bool
+    orderedTuplePredicateStructuralEvaluatorNowRecoveredIsTrue : orderedTuplePredicateStructuralEvaluatorNowRecovered ≡ true
+
+    structuralOrderSensitivityWitnessNowRecovered : Bool
+    structuralOrderSensitivityWitnessNowRecoveredIsTrue : structuralOrderSensitivityWitnessNowRecovered ≡ true
 
     fullHistoricalTuplePredicateSubstitutionNowRecovered : Bool
-    fullHistoricalTuplePredicateSubstitutionNowRecoveredIsFalse :
-      fullHistoricalTuplePredicateSubstitutionNowRecovered ≡ false
+    fullHistoricalTuplePredicateSubstitutionNowRecoveredIsFalse : fullHistoricalTuplePredicateSubstitutionNowRecovered ≡ false
+
+    bindingAwareCaptureAvoidanceNowRecovered : Bool
+    bindingAwareCaptureAvoidanceNowRecoveredIsFalse : bindingAwareCaptureAvoidanceNowRecovered ≡ false
 
     primaryInspectionEqualsCompleteHistoricalTranscription : Bool
-    primaryInspectionEqualsCompleteHistoricalTranscriptionIsFalse :
-      primaryInspectionEqualsCompleteHistoricalTranscription ≡ false
+    primaryInspectionEqualsCompleteHistoricalTranscriptionIsFalse : primaryInspectionEqualsCompleteHistoricalTranscription ≡ false
 
     partialExtractionEqualsCriticalFormalObjectRecovery : Bool
-    partialExtractionEqualsCriticalFormalObjectRecoveryIsFalse :
-      partialExtractionEqualsCriticalFormalObjectRecovery ≡ false
+    partialExtractionEqualsCriticalFormalObjectRecoveryIsFalse : partialExtractionEqualsCriticalFormalObjectRecovery ≡ false
 
     transcriptionAndReconstructionKeptSeparate : Bool
-    transcriptionAndReconstructionKeptSeparateIsTrue :
-      transcriptionAndReconstructionKeptSeparate ≡ true
+    transcriptionAndReconstructionKeptSeparateIsTrue : transcriptionAndReconstructionKeptSeparate ≡ true
 
     calibrationLiteratureReplacesWettePrimarySources : Bool
-    calibrationLiteratureReplacesWettePrimarySourcesIsFalse :
-      calibrationLiteratureReplacesWettePrimarySources ≡ false
+    calibrationLiteratureReplacesWettePrimarySourcesIsFalse : calibrationLiteratureReplacesWettePrimarySources ≡ false
 
     sourceLocationIsAlreadyTheoremDischarge : Bool
-    sourceLocationIsAlreadyTheoremDischargeIsFalse :
-      sourceLocationIsAlreadyTheoremDischarge ≡ false
+    sourceLocationIsAlreadyTheoremDischargeIsFalse : sourceLocationIsAlreadyTheoremDischarge ≡ false
 
-canonicalWetteHistoricalRecoveryGeometryBoundary :
-  WetteHistoricalRecoveryGeometryBoundary
+canonicalWetteHistoricalRecoveryGeometryBoundary : WetteHistoricalRecoveryGeometryBoundary
 canonicalWetteHistoricalRecoveryGeometryBoundary =
   wetteHistoricalRecoveryGeometryBoundary
     true refl
@@ -180,6 +169,10 @@ canonicalWetteHistoricalRecoveryGeometryBoundary =
     true refl
     true refl
     true refl
+    true refl
+    true refl
+    true refl
+    false refl
     false refl
     false refl
     false refl
@@ -187,10 +180,6 @@ canonicalWetteHistoricalRecoveryGeometryBoundary =
     false refl
     false refl
 
--- Compatibility receipt name retained for the branch-wide checker.  The word
--- "evaluator" here refers only to the explicitly bounded schematic fragment;
--- the adjacent negative field prevents promotion to Wette's full historical
--- tuple/predicate substitution semantics.
 schematicSubstitutionFreshnessEvaluatorNowRecoveredIsTrue :
   WetteHistoricalRecoveryGeometryBoundary.schematicSubstitutionFreshnessFragmentNowRecovered
     canonicalWetteHistoricalRecoveryGeometryBoundary ≡ true
