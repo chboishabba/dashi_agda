@@ -31,3 +31,4 @@ import DASHI.Physics.Closure.TOESymmetryResolved369BridgeExact
 -- conditioning, context-dependent weighting, TSFV invariant boundary, and
 -- source-bounded experimental support.
 import DASHI.Physics.Closure.FeynmanKelvinTrajectoryCrossPollinationExact
+import DASHI.Physics.Closure.ApertureWakeModeSelectionBridgeExact
