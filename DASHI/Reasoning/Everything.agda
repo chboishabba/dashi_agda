@@ -13,3 +13,10 @@ import DASHI.Reasoning.FolkLawEpistemicAuthorityCaptureExact
 import DASHI.Reasoning.EpistemicAuthorityIntrospectiveVisualReceiptExact
 import DASHI.Reasoning.FolkLawEpistemicAuthorityBroadExact
 import DASHI.Reasoning.EpistemicAuthorityBroadVisualFindingExact
+
+-- Source-bounded metaphor-as-structure / task-relative compression layer.
+import DASHI.Reasoning.StructuralMetaphorSourceRegistryExact
+import DASHI.Reasoning.StructuralMetaphorTaskCompressionExact
+import DASHI.Reasoning.ConsumerRelativeMetaphorTransferFitnessExact
+import DASHI.Reasoning.StructuralTransferBreakdownExact
+import DASHI.Reasoning.MetaphorTransferResidualExact

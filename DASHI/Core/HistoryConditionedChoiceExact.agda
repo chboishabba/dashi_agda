@@ -1,200 +1,168 @@
 module DASHI.Core.HistoryConditionedChoiceExact where
 
-------------------------------------------------------------------------
--- HISTORY-CONDITIONED CHOICE / FUTURE-CONE NON-FACTORABILITY
---
--- INTERNAL THEOREM-PATTERN PROVENANCE
---
--- Draft PR #621 independently introduced this theorem shape while formalising
--- coupled trajectories: a coarse present observation need not determine either
--- the choice selected from a history or the history-conditioned future cone.
--- PR #606 supplies the same structural pressure through history-deformed gates,
--- PR #613 through retained trajectory residue, and PR #624 through trading
--- history/optionality.  This Core owner extracts the common mathematics without
--- importing any draft branch or domain semantics.
---
--- The key distinction is:
---
---   same present observation != same retained history pattern
---                            != same choice
---                            != same reachable future cone.
-------------------------------------------------------------------------
-
-open import DASHI.Core.Prelude
+open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
+open import Data.Empty using (⊥)
 
-import DASHI.Core.IntersectionalNonFactorability as NF
+import DASHI.Core.IntersectionalNonFactorability as NonFactor
 
 ------------------------------------------------------------------------
--- History-sensitive choice surface.
+-- HISTORY-CONDITIONED CHOICE
+--
+-- A history may be observationally coarse-grained without thereby becoming
+-- irrelevant to present choice.  This owner separates:
+--
+--   fine history
+--   coarse present observation
+--   history-sensitive pattern / continuation summary
+--   present choice
+--
+-- and reuses the existing generic non-factorability theorem to prove that a
+-- choice consumer cannot descend through a coarse observation whenever two
+-- histories share that observation but motivate different choices.
 ------------------------------------------------------------------------
 
 record HistoryConditionedChoiceSurface : Set₁ where
-  constructor history-conditioned-choice-surface
   field
-    History Observation Pattern Choice : Set
+    History : Set
+    Observation : Set
+    Pattern : Set
+    Choice : Set
+
     observe : History → Observation
     patternOf : History → Pattern
     choose : History → Choice
+
     historyReading : String
 
 open HistoryConditionedChoiceSurface public
 
-record SameObservationDifferentChoice
+record DistinctHistoriesSameObservationDifferentChoice
     (surface : HistoryConditionedChoiceSurface) : Set where
-  constructor same-observation-different-choice
   field
-    leftHistory rightHistory : History surface
-    sameObservation :
+    leftHistory : History surface
+    rightHistory : History surface
+
+    historiesDistinct : leftHistory ≡ rightHistory → ⊥
+
+    samePresentObservation :
       observe surface leftHistory ≡ observe surface rightHistory
+
     choicesDiffer :
       choose surface leftHistory ≡ choose surface rightHistory → ⊥
 
-open SameObservationDifferentChoice public
+open DistinctHistoriesSameObservationDifferentChoice public
 
-choiceNonfactorability :
-  {surface : HistoryConditionedChoiceSurface} →
-  SameObservationDifferentChoice surface →
-  NF.NonFactorabilityWitness (observe surface) (choose surface)
-choiceNonfactorability witness =
-  NF.nonFactorabilityWitness
+historyChoiceNonFactorability :
+  ∀ {surface : HistoryConditionedChoiceSurface} →
+  DistinctHistoriesSameObservationDifferentChoice surface →
+  NonFactor.NonFactorabilityWitness (observe surface) (choose surface)
+historyChoiceNonFactorability witness =
+  NonFactor.nonFactorabilityWitness
     (leftHistory witness)
     (rightHistory witness)
-    (sameObservation witness)
+    (samePresentObservation witness)
     (choicesDiffer witness)
 
-presentObservationCannotDetermineChoice :
-  {surface : HistoryConditionedChoiceSurface} →
-  SameObservationDifferentChoice surface →
-  NF.FactorsThrough (observe surface) (choose surface) →
+historySensitiveChoiceCannotDescendThroughPresentObservation :
+  ∀ {surface : HistoryConditionedChoiceSurface} →
+  DistinctHistoriesSameObservationDifferentChoice surface →
+  NonFactor.FactorsThrough (observe surface) (choose surface) →
   ⊥
-presentObservationCannotDetermineChoice witness =
-  NF.witnessRulesOutEveryFlatFactorisation
-    (choiceNonfactorability witness)
-
-postprocessedPresentCannotDetermineChoice :
-  {surface : HistoryConditionedChoiceSurface} →
-  ∀ {Chart : Set} →
-  (rechart : Observation surface → Chart) →
-  SameObservationDifferentChoice surface →
-  NF.FactorsThrough
-    (λ history → rechart (observe surface history))
-    (choose surface) →
-  ⊥
-postprocessedPresentCannotDetermineChoice rechart witness =
-  NF.rechartingCannotRecoverErasedPhenomenon
-    rechart
-    (choiceNonfactorability witness)
+historySensitiveChoiceCannotDescendThroughPresentObservation witness =
+  NonFactor.witnessRulesOutEveryFlatFactorisation
+    (historyChoiceNonFactorability witness)
 
 ------------------------------------------------------------------------
--- Pattern split: useful when the application wants to retain an explicit
--- history summary rather than a unique microscopic trajectory.
+-- Pattern-mediated form.
 ------------------------------------------------------------------------
 
-record SameObservationDifferentPattern
+record PatternMediatedChoiceWitness
     (surface : HistoryConditionedChoiceSurface) : Set where
-  constructor same-observation-different-pattern
   field
-    patternLeft patternRight : History surface
+    patternLeftHistory : History surface
+    patternRightHistory : History surface
+
     patternSameObservation :
-      observe surface patternLeft ≡ observe surface patternRight
+      observe surface patternLeftHistory ≡ observe surface patternRightHistory
+
     patternsDiffer :
-      patternOf surface patternLeft ≡ patternOf surface patternRight → ⊥
+      patternOf surface patternLeftHistory
+      ≡ patternOf surface patternRightHistory → ⊥
 
-open SameObservationDifferentPattern public
+    patternChoicesDiffer :
+      choose surface patternLeftHistory
+      ≡ choose surface patternRightHistory → ⊥
 
-patternNonfactorability :
-  {surface : HistoryConditionedChoiceSurface} →
-  SameObservationDifferentPattern surface →
-  NF.NonFactorabilityWitness (observe surface) (patternOf surface)
-patternNonfactorability witness =
-  NF.nonFactorabilityWitness
-    (patternLeft witness)
-    (patternRight witness)
-    (patternSameObservation witness)
-    (patternsDiffer witness)
-
-presentObservationCannotDeterminePattern :
-  {surface : HistoryConditionedChoiceSurface} →
-  SameObservationDifferentPattern surface →
-  NF.FactorsThrough (observe surface) (patternOf surface) →
+patternMediatedChoiceCannotDescendThroughObservation :
+  ∀ {surface : HistoryConditionedChoiceSurface} →
+  PatternMediatedChoiceWitness surface →
+  NonFactor.FactorsThrough (observe surface) (choose surface) →
   ⊥
-presentObservationCannotDeterminePattern witness =
-  NF.witnessRulesOutEveryFlatFactorisation
-    (patternNonfactorability witness)
+patternMediatedChoiceCannotDescendThroughObservation witness factor =
+  NonFactor.witnessRulesOutEveryFlatFactorisation
+    (NonFactor.nonFactorabilityWitness
+      (PatternMediatedChoiceWitness.patternLeftHistory witness)
+      (PatternMediatedChoiceWitness.patternRightHistory witness)
+      (PatternMediatedChoiceWitness.patternSameObservation witness)
+      (PatternMediatedChoiceWitness.patternChoicesDiffer witness))
+    factor
 
 ------------------------------------------------------------------------
 -- Future-cone code.
 --
--- Applications may use any exact code for reachable/admissible future options;
--- the generic theorem does not force powerset equality or a particular
--- reachability representation into Core.
+-- A full powerset-valued reachable set would unnecessarily force universe and
+-- extensional-equality commitments into the generic core.  Instead the owner
+-- permits any exact application-supplied code for a history-conditioned future
+-- cone.  Different codes at one coarse observation are already enough to prove
+-- that the coarse present state is not future-sufficient.
 ------------------------------------------------------------------------
 
 record HistoryConditionedFutureConeSurface : Set₁ where
-  constructor history-conditioned-future-cone-surface
   field
-    FutureHistory FutureObservation FutureConeCode : Set
+    FutureHistory : Set
+    FutureObservation : Set
+    FutureConeCode : Set
+
     observeFutureHistory : FutureHistory → FutureObservation
     futureCone : FutureHistory → FutureConeCode
+
     futureReading : String
 
 open HistoryConditionedFutureConeSurface public
 
 record SameObservationDifferentFutureCone
     (surface : HistoryConditionedFutureConeSurface) : Set where
-  constructor same-observation-different-future-cone
   field
-    futureLeft futureRight : FutureHistory surface
+    futureLeftHistory : FutureHistory surface
+    futureRightHistory : FutureHistory surface
+
     futureSameObservation :
-      observeFutureHistory surface futureLeft
-      ≡ observeFutureHistory surface futureRight
+      observeFutureHistory surface futureLeftHistory
+      ≡ observeFutureHistory surface futureRightHistory
+
     futureConesDiffer :
-      futureCone surface futureLeft
-      ≡ futureCone surface futureRight → ⊥
+      futureCone surface futureLeftHistory
+      ≡ futureCone surface futureRightHistory → ⊥
 
-open SameObservationDifferentFutureCone public
-
-futureConeNonfactorability :
-  {surface : HistoryConditionedFutureConeSurface} →
+futureConeCannotDescendThroughPresentObservation :
+  ∀ {surface : HistoryConditionedFutureConeSurface} →
   SameObservationDifferentFutureCone surface →
-  NF.NonFactorabilityWitness
-    (observeFutureHistory surface)
-    (futureCone surface)
-futureConeNonfactorability witness =
-  NF.nonFactorabilityWitness
-    (futureLeft witness)
-    (futureRight witness)
-    (futureSameObservation witness)
-    (futureConesDiffer witness)
-
-presentObservationCannotDetermineFutureCone :
-  {surface : HistoryConditionedFutureConeSurface} →
-  SameObservationDifferentFutureCone surface →
-  NF.FactorsThrough
+  NonFactor.FactorsThrough
     (observeFutureHistory surface)
     (futureCone surface) →
   ⊥
-presentObservationCannotDetermineFutureCone witness =
-  NF.witnessRulesOutEveryFlatFactorisation
-    (futureConeNonfactorability witness)
-
-postprocessedPresentCannotDetermineFutureCone :
-  {surface : HistoryConditionedFutureConeSurface} →
-  ∀ {Chart : Set} →
-  (rechart : FutureObservation surface → Chart) →
-  SameObservationDifferentFutureCone surface →
-  NF.FactorsThrough
-    (λ history → rechart (observeFutureHistory surface history))
-    (futureCone surface) →
-  ⊥
-postprocessedPresentCannotDetermineFutureCone rechart witness =
-  NF.rechartingCannotRecoverErasedPhenomenon
-    rechart
-    (futureConeNonfactorability witness)
+futureConeCannotDescendThroughPresentObservation witness =
+  NonFactor.witnessRulesOutEveryFlatFactorisation
+    (NonFactor.nonFactorabilityWitness
+      (SameObservationDifferentFutureCone.futureLeftHistory witness)
+      (SameObservationDifferentFutureCone.futureRightHistory witness)
+      (SameObservationDifferentFutureCone.futureSameObservation witness)
+      (SameObservationDifferentFutureCone.futureConesDiffer witness))
 
 ------------------------------------------------------------------------
--- Exact finite regression.
+-- Small exact specimen.
 ------------------------------------------------------------------------
 
 data ToyHistory : Set where
@@ -204,53 +172,76 @@ data ToyObservation : Set where
   sameNow : ToyObservation
 
 data ToyPattern : Set where
-  alphaPattern betaPattern : ToyPattern
+  patternAlpha patternBeta : ToyPattern
 
 data ToyChoice : Set where
-  alphaChoice betaChoice : ToyChoice
+  continueAlpha continueBeta : ToyChoice
 
 data ToyFutureCone : Set where
   alphaCone betaCone : ToyFutureCone
 
 toyChoiceSurface : HistoryConditionedChoiceSurface
 toyChoiceSurface =
-  history-conditioned-choice-surface
-    ToyHistory ToyObservation ToyPattern ToyChoice
-    (λ _ → sameNow)
-    (λ { historyAlpha → alphaPattern ; historyBeta → betaPattern })
-    (λ { historyAlpha → alphaChoice ; historyBeta → betaChoice })
-    "Two histories share one present projection while retaining different patterns and choices."
+  record
+    { History = ToyHistory
+    ; Observation = ToyObservation
+    ; Pattern = ToyPattern
+    ; Choice = ToyChoice
+    ; observe = λ _ → sameNow
+    ; patternOf = λ
+        { historyAlpha → patternAlpha
+        ; historyBeta → patternBeta
+        }
+    ; choose = λ
+        { historyAlpha → continueAlpha
+        ; historyBeta → continueBeta
+        }
+    ; historyReading =
+        "Two histories may share one present projection while retaining different relational patterns and motivating different present choices."
+    }
 
-toyChoiceWitness : SameObservationDifferentChoice toyChoiceSurface
-toyChoiceWitness =
-  same-observation-different-choice historyAlpha historyBeta refl (λ ())
+canonicalToyChoiceWitness :
+  DistinctHistoriesSameObservationDifferentChoice toyChoiceSurface
+canonicalToyChoiceWitness =
+  record
+    { leftHistory = historyAlpha
+    ; rightHistory = historyBeta
+    ; historiesDistinct = λ ()
+    ; samePresentObservation = refl
+    ; choicesDiffer = λ ()
+    }
 
-toyPatternWitness : SameObservationDifferentPattern toyChoiceSurface
-toyPatternWitness =
-  same-observation-different-pattern historyAlpha historyBeta refl (λ ())
+toyFutureConeSurface : HistoryConditionedFutureConeSurface
+toyFutureConeSurface =
+  record
+    { FutureHistory = ToyHistory
+    ; FutureObservation = ToyObservation
+    ; FutureConeCode = ToyFutureCone
+    ; observeFutureHistory = λ _ → sameNow
+    ; futureCone = λ
+        { historyAlpha → alphaCone
+        ; historyBeta → betaCone
+        }
+    ; futureReading =
+        "The same coarse present observation can hide histories with different coded continuation spaces."
+    }
 
-toyFutureSurface : HistoryConditionedFutureConeSurface
-toyFutureSurface =
-  history-conditioned-future-cone-surface
-    ToyHistory ToyObservation ToyFutureCone
-    (λ _ → sameNow)
-    (λ { historyAlpha → alphaCone ; historyBeta → betaCone })
-    "The same coarse present observation can hide histories with different coded continuation spaces."
-
-toyFutureWitness : SameObservationDifferentFutureCone toyFutureSurface
-toyFutureWitness =
-  same-observation-different-future-cone historyAlpha historyBeta refl (λ ())
-
-------------------------------------------------------------------------
--- Promotion boundary.
-------------------------------------------------------------------------
+canonicalToyFutureConeWitness :
+  SameObservationDifferentFutureCone toyFutureConeSurface
+canonicalToyFutureConeWitness =
+  record
+    { futureLeftHistory = historyAlpha
+    ; futureRightHistory = historyBeta
+    ; futureSameObservation = refl
+    ; futureConesDiffer = λ ()
+    }
 
 record HistoryConditionedChoiceBoundary : Set where
-  constructor history-conditioned-choice-boundary
+  constructor historyConditionedChoiceBoundary
   field
-    samePresentObservationImpliesSameHistoryPattern : Bool
-    samePresentObservationImpliesSameHistoryPatternIsFalse :
-      samePresentObservationImpliesSameHistoryPattern ≡ false
+    historyBearingAutomaticallyMeansPathDependent : Bool
+    historyBearingAutomaticallyMeansPathDependentIsFalse :
+      historyBearingAutomaticallyMeansPathDependent ≡ false
 
     samePresentObservationImpliesSameChoice : Bool
     samePresentObservationImpliesSameChoiceIsFalse :
@@ -260,18 +251,13 @@ record HistoryConditionedChoiceBoundary : Set where
     samePresentObservationImpliesSameFutureConeIsFalse :
       samePresentObservationImpliesSameFutureCone ≡ false
 
-    postprocessingPresentObservationRecoversErasedHistory : Bool
-    postprocessingPresentObservationRecoversErasedHistoryIsFalse :
-      postprocessingPresentObservationRecoversErasedHistory ≡ false
-
-    historySensitivityRequiresUniqueMicroscopicHistory : Bool
-    historySensitivityRequiresUniqueMicroscopicHistoryIsFalse :
-      historySensitivityRequiresUniqueMicroscopicHistory ≡ false
+    historySensitiveChoiceRequiresUniqueMicroscopicHistory : Bool
+    historySensitiveChoiceRequiresUniqueMicroscopicHistoryIsFalse :
+      historySensitiveChoiceRequiresUniqueMicroscopicHistory ≡ false
 
 canonicalHistoryConditionedChoiceBoundary : HistoryConditionedChoiceBoundary
 canonicalHistoryConditionedChoiceBoundary =
-  history-conditioned-choice-boundary
-    false refl
+  historyConditionedChoiceBoundary
     false refl
     false refl
     false refl
