@@ -12,7 +12,10 @@ on:
       - 'DASHI/Governance/ProvisioningGeometryExact.agda'
       - 'DASHI/Governance/ONeill2018MethodsBoundaryExact.agda'
       - 'DASHI/Governance/Fanning2022TemporalIndicatorExact.agda'
+      - 'DASHI/Governance/Fanning2022NormalizationExact.agda'
       - 'DASHI/Governance/Fanning2022ProjectionBoundaryExact.agda'
+      - 'DASHI/Governance/Fanning2022ForecastAuthorityExact.agda'
+      - 'DASHI/Governance/Fanning2022MethodsRegression.agda'
       - 'DASHI/Governance/Everything.agda'
       - '.github/workflows/safe-just-provisioning.yml'
   workflow_dispatch:
@@ -52,7 +55,10 @@ jobs:
             DASHI/Governance/ProvisioningGeometryExact.agda
             DASHI/Governance/ONeill2018MethodsBoundaryExact.agda
             DASHI/Governance/Fanning2022TemporalIndicatorExact.agda
+            DASHI/Governance/Fanning2022NormalizationExact.agda
             DASHI/Governance/Fanning2022ProjectionBoundaryExact.agda
+            DASHI/Governance/Fanning2022ForecastAuthorityExact.agda
+            DASHI/Governance/Fanning2022MethodsRegression.agda
           )
           if grep -nE '\b(postulate|{-# OPTIONS --allow-unsolved-metas #-}|sorry|admit)\b' "${files[@]}"; then
             echo 'Forbidden trust-boundary token found in safe-and-just provisioning tranche.' >&2
@@ -81,7 +87,10 @@ jobs:
               DASHI/Governance/ProvisioningGeometryExact.agda
               DASHI/Governance/ONeill2018MethodsBoundaryExact.agda
               DASHI/Governance/Fanning2022TemporalIndicatorExact.agda
+              DASHI/Governance/Fanning2022NormalizationExact.agda
               DASHI/Governance/Fanning2022ProjectionBoundaryExact.agda
+              DASHI/Governance/Fanning2022ForecastAuthorityExact.agda
+              DASHI/Governance/Fanning2022MethodsRegression.agda
               DASHI/Governance/Everything.agda
             )
             scripts/run_agda29_parallel_check.sh "${targets[@]}"
