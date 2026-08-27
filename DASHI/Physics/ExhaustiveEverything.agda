@@ -7,5 +7,7 @@ module DASHI.Physics.ExhaustiveEverything where
 -- reachability audits without forcing them into every routine root check.
 
 import DASHI.Physics.Everything
+import DASHI.Physics.Moonshine.Everything
+import DASHI.Physics.QFT.Everything
 import DASHI.Physics.YangMills.Everything
 import DASHI.Physics.Closure.Everything
