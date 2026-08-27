@@ -4,26 +4,31 @@ module DASHI.Mathematics.NumberTheory.PartitionErdosBishopGeometricKernelBridgeE
 -- CROSS-POLLINATION: ERDOS KERNEL <-> STEP-V GEOMETRIC INFRASTRUCTURE
 --
 -- P. Erdos (1942), DOI 10.2307/1968802, reduces the upper exponential bound
--- to a degree-one weighted geometric/exponential kernel.  The Yang--Mills Step
--- V lane already owns the relevant generic finite-series infrastructure over
--- Bishop reals.
+-- to a degree-one weighted geometric/exponential kernel.
 --
--- Reuse that owner directly:
+-- The real carrier is the exact repository submodule at `vendor/bishop`;
+-- BishopVendoredSubmoduleProvenanceExact records the gitlink provenance.
 --
---   unweighted finite geometric supersolution      [machine checked]
---   polynomially weighted geometric interface      [available]
---   degree-one weighted realization                 [still to construct]
+-- Reuse already present on this branch:
 --
--- This module adds no new analytic axiom and no new real carrier.
+--   unweighted finite Bishop geometric supersolution        [machine checked]
+--   generic polynomial-weighted finite summation theorem    [machine checked]
+--   degree-one adapter from pointwise domination            [implemented]
+--
+-- Therefore the missing Erdos theorem is no longer "construct a weighted
+-- geometric series".  It is the specific pointwise/reciprocal-square estimate
+-- linking the exp(-x) ratio to the sharp kernel used by the partition proof.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; suc; zero)
 
 import Real as BishopReal
 
+import DASHI.Foundations.BishopVendoredSubmoduleProvenanceExact as Vendored
 import DASHI.Physics.YangMills.BalabanStepVFiniteGeometricBackendExact as StepV
 import DASHI.Physics.YangMills.BalabanStepVFiniteGeometricInductionExact as Induction
 import DASHI.Physics.YangMills.BalabanStepVBishopFiniteGeometricExact as BishopGeometric
+import DASHI.Mathematics.NumberTheory.PartitionErdosBishopDegreeOneDominationExact as DegreeOne
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 ------------------------------------------------------------------------
@@ -43,28 +48,51 @@ ErdosDegreeOneWeightedGeometricBound : BishopReal.ℝ → Set₁
 ErdosDegreeOneWeightedGeometricBound ratio =
   StepV.PolynomiallyWeightedGeometricBound bishopKernel ratio (suc zero)
 
+ErdosDegreeOnePointwiseDomination : BishopReal.ℝ → Set₁
+ErdosDegreeOnePointwiseDomination =
+  DegreeOne.ErdosDegreeOnePointwiseDomination
+
+pointwiseDominationClosesFiniteWeightedSum :
+  ∀ {ratio : BishopReal.ℝ} →
+  ErdosDegreeOnePointwiseDomination ratio →
+  ErdosDegreeOneWeightedGeometricBound ratio
+pointwiseDominationClosesFiniteWeightedSum =
+  DegreeOne.erdosDegreeOneWeightedBound
+
 ------------------------------------------------------------------------
--- Existing unweighted geometric infrastructure is concrete and checked.
+-- Existing finite summation infrastructure is concrete and checked.
 
 finiteBishopGeometricInfrastructureLevel : ProofLevel
 finiteBishopGeometricInfrastructureLevel =
   BishopGeometric.bishopFiniteGeometricUniformBoundLevel
 
+degreeOneFiniteSummationLevel : ProofLevel
+degreeOneFiniteSummationLevel =
+  DegreeOne.erdosDegreeOneFiniteSummationLevel
+
 ------------------------------------------------------------------------
--- The sharp Erdos kernel requires more than the unweighted sum.  The generic
--- degree-one interface exists, but an explicit Bishop inhabitant with the
--- reciprocal-square bound is not supplied here.
+-- Sharpened frontier.
 
 data ErdosWeightedGeometricFrontier : Set where
-  degreeOneInterfaceAvailable : ErdosWeightedGeometricFrontier
+  unweightedBishopGeometricClosed : ErdosWeightedGeometricFrontier
+  weightedFiniteSummationClosed : ErdosWeightedGeometricFrontier
+  degreeOnePointwiseDominationPending : ErdosWeightedGeometricFrontier
   degreeOneBishopReciprocalSquareBoundPending : ErdosWeightedGeometricFrontier
 
 currentWeightedGeometricFrontier : ErdosWeightedGeometricFrontier
 currentWeightedGeometricFrontier =
-  degreeOneBishopReciprocalSquareBoundPending
+  degreeOnePointwiseDominationPending
 
 ------------------------------------------------------------------------
--- This prevents a misleading boundary: the missing theorem is NOT generic
--- geometric convergence.  It is the quantitative degree-one weighted estimate
--- needed to match Erdos's reciprocal-square kernel.
+-- Source target for the eventual sharper specialization:
+--
+--   q = exp(-x), x > 0
+--
+--   sum_{v>=1} v q^v
+--     = q / (1-q)^2
+--     < 1/x^2.
+--
+-- The finite weighted-summation bureaucracy is already discharged by the
+-- generic Step-V owner.  What remains is the concrete Bishop exponential /
+-- inverse inequality (or an equivalent direct finite bound).
 ------------------------------------------------------------------------
