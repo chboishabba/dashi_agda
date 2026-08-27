@@ -7,6 +7,7 @@ on:
       - 'DASHI/Core/FormalizationRecoverySourceRegistryExact.agda'
       - 'DASHI/Core/FormalizationRecoveryGeometryExact.agda'
       - 'DASHI/Core/SourceAcquisitionGeometryExact.agda'
+      - 'DASHI/Core/DeductionIndexedInterpretationExact.agda'
       - 'DASHI/Core/Everything.agda'
       - 'DASHI/Foundations/Wette*.agda'
       - 'DASHI/Foundations/Wette/**'
