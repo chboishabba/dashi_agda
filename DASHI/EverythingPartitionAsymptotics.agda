@@ -8,7 +8,9 @@ module DASHI.EverythingPartitionAsymptotics where
 -- `vendor/bishop` submodule.  The canonical Nat square-root candidate is now a
 -- `Real.mkℝ` value obtained from executable floor-square-root rational
 -- approximants with source-level cross-precision regularity and a direct
--- vendored `NonNegative` proof.
+-- vendored `NonNegative` proof.  The current analytic tranche also includes
+-- the semantic square law, division-free tangent estimate, concrete factorial
+-- exponential series, and Machin-pi sqrt(2/3) constant construction.
 ------------------------------------------------------------------------
 
 import DASHI.Foundations.BishopVendoredSubmoduleProvenanceExact
@@ -19,9 +21,18 @@ import DASHI.Foundations.BishopNatSquareRootRationalCrossPrecisionExact
 import DASHI.Foundations.RationalDirectedDifferenceAbsoluteBoundExact
 import DASHI.Foundations.BishopNatSquareRootRegularFloorExact
 import DASHI.Foundations.BishopNatSquareRootNonnegativeExact
+import DASHI.Foundations.BishopNatSquareRootCanonicalApproximationExact
+import DASHI.Foundations.BishopSquareNonnegativeExact
+import DASHI.Foundations.BishopNatSquareRootSemanticSquareExact
+import DASHI.Foundations.BishopNatSquareRootTangentExact
+import DASHI.Foundations.BishopFiniteSeriesExtensionalityExact
+import DASHI.Foundations.BishopExponentialSeriesConvergenceExact
+import DASHI.Foundations.BishopSqrtTwoThirdsMachinConstantExact
 import DASHI.Mathematics.NumberTheory.FiniteNatFloorSquareRootExact
 import DASHI.Mathematics.NumberTheory.FiniteNatFractionOrderExact
 import DASHI.Mathematics.NumberTheory.FiniteNatSuccessorFractionExact
+import DASHI.Mathematics.NumberTheory.FiniteNatRationalEmbeddingExact
+import DASHI.Mathematics.NumberTheory.FinitePositiveScaledReciprocalExact
 import DASHI.Mathematics.NumberTheory.FiniteWeightedReindexExact
 import DASHI.Mathematics.NumberTheory.FiniteProductEnumerationExact
 import DASHI.Mathematics.NumberTheory.FiniteProductCardinalityExact
