@@ -10,10 +10,15 @@ module DASHI.Physics.Closure.NSTriadKNExternalResidualCommutatorRound111Exact wh
 -- output fibre.  Therefore it restricts immediately to the self-orbit-removed
 -- external carrier.
 --
--- This is the decisive structural permission for the old compact-Gamma
--- far-low mechanism: the external residue may be estimated *after* exposing
--- the divergence-free/projector commutator, rather than by taking absolute
--- values of the opaque residual vector first.
+-- SAME-OBJECT REQUIREMENT
+--
+-- The commutator is evaluated on `Audit.velocity system` over the SAME real
+-- field and integer embedding as the physical Galerkin system.  There is no
+-- parallel model/velocity carrier silently compared by incidence labels alone.
+--
+-- This is the structural permission needed by the compact-Gamma far-low
+-- mechanism: expose the divergence-free/projector commutator on the actual
+-- external carrier before taking absolute values.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
@@ -23,7 +28,6 @@ open import Data.List.Base using (List; map)
 open import Data.List.Membership.Propositional using (_∈_)
 open import Relation.Binary.PropositionalEquality using (_≢_)
 
-import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPeriodicLittlewoodPaleyBonyExact as LP
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadSymmetry as Symmetry
@@ -38,21 +42,19 @@ externalOddPQCoefficients :
     (model : LP.PeriodicHardShellFourierPDE {r})
     (projectorCutoff : Nat)
     (E : C3.IntegerEmbedding (LP.realField model))
-    (velocity : Z3.FourierMode → C3.Complex3 (LP.realField model))
-    {rF} {F : C3.RealField rF}
-    {EF : C3.IntegerEmbedding F}
-    {I : C3.ModeInverseSquare F EF}
-    (system : Audit.FiniteComplex3GalerkinSystem F EF I)
+    {I : C3.ModeInverseSquare (LP.realField model) E}
+    (system : Audit.FiniteComplex3GalerkinSystem (LP.realField model) E I)
     (tau : Physical.PhysicalTriadIncidence)
     (tauMember : tau ∈ Audit.concreteTriadsAt system (Physical.k tau))
     (swapMember : Symmetry.swapTriad tau ∈
       Audit.concreteTriadsAt system (Physical.k tau))
     (swapDifferent : Symmetry.swapTriad tau ≢ tau) →
   List (C3.Complex (LP.realField model))
-externalOddPQCoefficients model projectorCutoff E velocity
+externalOddPQCoefficients model projectorCutoff E
     system tau tauMember swapMember swapDifferent =
   map
-    (Odd.literalOddPQTriadCoefficient model projectorCutoff E velocity)
+    (Odd.literalOddPQTriadCoefficient
+      model projectorCutoff E (Audit.velocity system))
     (External.externalResidualCarrier
       system tau tauMember swapMember swapDifferent)
 
@@ -61,22 +63,19 @@ externalProjectorCommutatorCoefficients :
     (model : LP.PeriodicHardShellFourierPDE {r})
     (projectorCutoff : Nat)
     (E : C3.IntegerEmbedding (LP.realField model))
-    (velocity : Z3.FourierMode → C3.Complex3 (LP.realField model))
-    {rF} {F : C3.RealField rF}
-    {EF : C3.IntegerEmbedding F}
-    {I : C3.ModeInverseSquare F EF}
-    (system : Audit.FiniteComplex3GalerkinSystem F EF I)
+    {I : C3.ModeInverseSquare (LP.realField model) E}
+    (system : Audit.FiniteComplex3GalerkinSystem (LP.realField model) E I)
     (tau : Physical.PhysicalTriadIncidence)
     (tauMember : tau ∈ Audit.concreteTriadsAt system (Physical.k tau))
     (swapMember : Symmetry.swapTriad tau ∈
       Audit.concreteTriadsAt system (Physical.k tau))
     (swapDifferent : Symmetry.swapTriad tau ≢ tau) →
   List (C3.Complex (LP.realField model))
-externalProjectorCommutatorCoefficients model projectorCutoff E velocity
+externalProjectorCommutatorCoefficients model projectorCutoff E
     system tau tauMember swapMember swapDifferent =
   map
     (Com.literalProjectorCommutatorTriadCoefficient
-      model projectorCutoff E velocity)
+      model projectorCutoff E (Audit.velocity system))
     (External.externalResidualCarrier
       system tau tauMember swapMember swapDifferent)
 
@@ -85,34 +84,38 @@ externalResidualOddPQIsProjectorCommutator :
     (model : LP.PeriodicHardShellFourierPDE {r})
     (projectorCutoff : Nat)
     (E : C3.IntegerEmbedding (LP.realField model))
-    (velocity : Z3.FourierMode → C3.Complex3 (LP.realField model))
-    {rF} {F : C3.RealField rF}
-    {EF : C3.IntegerEmbedding F}
-    {I : C3.ModeInverseSquare F EF}
-    (system : Audit.FiniteComplex3GalerkinSystem F EF I)
+    {I : C3.ModeInverseSquare (LP.realField model) E}
+    (system : Audit.FiniteComplex3GalerkinSystem (LP.realField model) E I)
     (tau : Physical.PhysicalTriadIncidence)
     (tauMember : tau ∈ Audit.concreteTriadsAt system (Physical.k tau))
     (swapMember : Symmetry.swapTriad tau ∈
       Audit.concreteTriadsAt system (Physical.k tau))
     (swapDifferent : Symmetry.swapTriad tau ≢ tau) →
   externalOddPQCoefficients
-    model projectorCutoff E velocity
+    model projectorCutoff E
     system tau tauMember swapMember swapDifferent
   ≡
   externalProjectorCommutatorCoefficients
-    model projectorCutoff E velocity
+    model projectorCutoff E
     system tau tauMember swapMember swapDifferent
 externalResidualOddPQIsProjectorCommutator
-    model projectorCutoff E velocity
+    model projectorCutoff E
     system tau tauMember swapMember swapDifferent =
   Com.mapPointwiseOddPQIsCommutator
-    model projectorCutoff E velocity
+    model projectorCutoff E (Audit.velocity system)
     (External.externalResidualCarrier
       system tau tauMember swapMember swapDifferent)
 
 round111ExternalResidualCommutesBeforeAbsoluteValues : Bool
 round111ExternalResidualCommutesBeforeAbsoluteValues = true
 
+round111ExternalResidualUsesSameGalerkinVelocity : Bool
+round111ExternalResidualUsesSameGalerkinVelocity = true
+
 round111ExternalResidualCommutesBeforeAbsoluteValuesIsTrue :
   round111ExternalResidualCommutesBeforeAbsoluteValues ≡ true
 round111ExternalResidualCommutesBeforeAbsoluteValuesIsTrue = refl
+
+round111ExternalResidualUsesSameGalerkinVelocityIsTrue :
+  round111ExternalResidualUsesSameGalerkinVelocity ≡ true
+round111ExternalResidualUsesSameGalerkinVelocityIsTrue = refl
