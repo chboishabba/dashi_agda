@@ -1,7 +1,8 @@
 module DASHI.Trading.DashiTradeDreamRegression where
 
-open import Agda.Builtin.Bool using (false)
+open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_)
+open import Data.Empty using (⊥)
 
 import DASHI.Core.DeclaredRealizedIntegrityResidualExact as Integrity
 import DASHI.Core.IntersectionalNonFactorability as INF
@@ -41,7 +42,7 @@ declaredRealizedObserverReused :
     DeclaredRealized.TradingAgent
     Dream.TradingFabricState
     Dream.Direction
-    Agda.Builtin.Bool.Bool
+    Bool
     DeclaredRealized.ViabilityResidual
 declaredRealizedObserverReused =
   DeclaredRealized.tradingProposalViabilityObserver
@@ -55,6 +56,6 @@ sameProposalDifferentResidualWitness :
       DeclaredRealized.tradingProposalViabilityObserver
       DeclaredRealized.canonicalTradingAgent
       Dream.crowdedLongState →
-  Data.Empty.⊥
+  ⊥
 sameProposalDifferentResidualWitness =
   DeclaredRealized.sameProposalDifferentResidual
