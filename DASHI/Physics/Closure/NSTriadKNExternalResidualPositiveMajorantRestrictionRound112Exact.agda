@@ -21,9 +21,10 @@ open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.List.Membership.Propositional using (_∈_)
+import Data.List.Relation.Unary.Any as Any
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _≤_)
 import Data.Rational.Properties as ℚP
-open import Relation.Binary.PropositionalEquality using (_≢_; subst)
+open import Relation.Binary.PropositionalEquality using (_≢_; subst; sym)
 
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadSymmetry as Symmetry
@@ -54,17 +55,12 @@ sumRemoveAtBelowOriginal :
   (membership : selected ∈ items) →
   sumMajorant value (Fibre.removeAt membership)
   ≤ sumMajorant value items
-sumRemoveAtBelowOriginal value valueNN (Data.List.Relation.Unary.Any.here refl) =
-  let
-    tailNN = sumMajorantNonnegative value valueNN _
-    headNN = valueNN _
-  in
+sumRemoveAtBelowOriginal value valueNN (Any.here refl) =
   subst
     (λ lower → lower ≤ value _ + sumMajorant value _)
     (sym (ℚP.+-identityˡ (sumMajorant value _)))
-    (ℚP.+-mono-≤ headNN ℚP.≤-refl)
-sumRemoveAtBelowOriginal value valueNN
-    (Data.List.Relation.Unary.Any.there membership) =
+    (ℚP.+-mono-≤ (valueNN _) ℚP.≤-refl)
+sumRemoveAtBelowOriginal value valueNN (Any.there membership) =
   ℚP.+-mono-≤ ℚP.≤-refl
     (sumRemoveAtBelowOriginal value valueNN membership)
 
@@ -92,12 +88,12 @@ externalResidualMajorantBelowFullOutputFibre
   let
     swapSurvives =
       Fibre.otherMemberSurvivesRemoval tauMember swapMember swapDifferent
-    afterFirst :
+    secondRemoval :
       sumMajorant majorant
         (Fibre.removeAt swapSurvives)
       ≤
       sumMajorant majorant (Fibre.removeAt tauMember)
-    afterFirst =
+    secondRemoval =
       sumRemoveAtBelowOriginal majorant majorantNN swapSurvives
     firstRemoval :
       sumMajorant majorant (Fibre.removeAt tauMember)
@@ -107,7 +103,7 @@ externalResidualMajorantBelowFullOutputFibre
     firstRemoval =
       sumRemoveAtBelowOriginal majorant majorantNN tauMember
   in
-  ℚP.≤-trans afterFirst firstRemoval
+  ℚP.≤-trans secondRemoval firstRemoval
 
 round112ExternalPositiveMajorantRestrictionClosed : Bool
 round112ExternalPositiveMajorantRestrictionClosed = true
