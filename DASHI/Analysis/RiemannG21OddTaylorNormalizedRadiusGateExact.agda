@@ -1,33 +1,9 @@
 module DASHI.Analysis.RiemannG21OddTaylorNormalizedRadiusGateExact where
 
-------------------------------------------------------------------------
--- Normalize the odd Taylor sign gate by the common N1(a)N1(p) mass.
---
--- Assume
---
---   N3(a) = N1(a) q_a,
---   N3(p) = N1(p) q_p,
---   C_a   = N1(a) c_a,
---   C_p   = N1(p) c_p,
---
--- where C_a,C_p are the six-scaled fifth-order response-remainder
--- coefficients.  Then both the strict odd signal margin and the constructed
--- determinant-error coefficient factor through N1(a)N1(p).
---
--- This reduces the eventual radius condition from
---
---   C_det r^2 < 36 Delta_odd
---
--- to the mass-free comparison
---
---   P(q_a,q_p,c_a,c_p) r^2 < 36 (q_p-q_a),
---
--- once positivity permits cancellation of N1(a)N1(p).
-------------------------------------------------------------------------
-
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
+open import Agda.Builtin.String using (String)
 open import Data.Rational.Base using (ℚ; _+_; _-_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 
@@ -56,6 +32,16 @@ normalizedErrorPolynomialQ qa qp ca cp =
   + 32 * ca * trunc1RatioQ qp
   + 64 * ca * cp
 
+normalizedErrorPolynomialExpanded :
+  (qa qp ca cp : ℚ) →
+  normalizedErrorPolynomialQ qa qp ca cp
+  ≡
+    204 * (ca + cp)
+    + 40 * (qa * cp + qp * ca)
+    + 64 * ca * cp
+normalizedErrorPolynomialExpanded qa qp ca cp =
+  solve (qa ∷ qp ∷ ca ∷ cp ∷ [])
+
 fullErrorCoefficientQ :
   ℚ → ℚ → ℚ → ℚ → ℚ → ℚ → ℚ
 fullErrorCoefficientQ n1a n1p qa qp ca cp =
@@ -74,8 +60,50 @@ errorCoefficientMassFactorization n1a n1p qa qp ca cp =
   solve (n1a ∷ n1p ∷ qa ∷ qp ∷ ca ∷ cp ∷ [])
 
 ------------------------------------------------------------------------
--- Division-free normalized gate interface.
+-- Support-only polynomial majorant target.
+--
+-- If R=L/2 and support domination yields
+--
+--   qa,qp <= R^2,
+--   ca,cp <= R^4/20,
+--
+-- then the expanded P satisfies the sufficient bound
+--
+--   25 P <= 510 R^4 + 100 R^6 + 4 R^8.
+--
+-- We construct the right-hand polynomial exactly here; the ordered-real
+-- inequality from the support bounds remains a separate analytic producer.
 ------------------------------------------------------------------------
+
+squareQ : ℚ → ℚ
+squareQ x = x * x
+
+fourthQ : ℚ → ℚ
+fourthQ x = squareQ x * squareQ x
+
+sixthQ : ℚ → ℚ
+sixthQ x = fourthQ x * squareQ x
+
+eighthQ : ℚ → ℚ
+eighthQ x = fourthQ x * fourthQ x
+
+supportPolynomial25Q : ℚ → ℚ
+supportPolynomial25Q r =
+  510 * fourthQ r + 100 * sixthQ r + 4 * eighthQ r
+
+record SupportNormalizedErrorMajorant : Set₁ where
+  field
+    Scalar : Set
+    supportRadius errorPolynomial supportPolynomial : Scalar
+    multiply : Scalar → Scalar → Scalar
+    times25 : Scalar → Scalar
+    LessOrEqual : Scalar → Scalar → Set
+
+    supportMomentBounds : Set
+    errorPolynomialMajorized :
+      LessOrEqual (times25 errorPolynomial) supportPolynomial
+
+    reading : String
 
 record NormalizedOddRadiusGate : Set₁ where
   field
@@ -94,7 +122,22 @@ record NormalizedOddRadiusGate : Set₁ where
         (multiply errorPolynomial radiusSquared)
         (times36 ratioGap)
 
-    reading : Agda.Builtin.String.String
+    reading : String
+
+record SupportOnlyOddRadiusGate : Set₁ where
+  field
+    Scalar : Set
+    supportPolynomial radiusSquared ratioGap : Scalar
+    multiply : Scalar → Scalar → Scalar
+    times900 : Scalar → Scalar
+    StrictBelow : Scalar → Scalar → Set
+
+    sufficientGate :
+      StrictBelow
+        (multiply supportPolynomial radiusSquared)
+        (times900 ratioGap)
+
+    reading : String
 
 record NormalizedRadiusGateBoundary : Set where
   constructor normalizedRadiusGateBoundary
@@ -105,15 +148,25 @@ record NormalizedRadiusGateBoundary : Set where
     errorCoefficientMassFactorizationDerived : Bool
     errorCoefficientMassFactorizationDerivedIsTrue :
       errorCoefficientMassFactorizationDerived ≡ true
+    normalizedErrorPolynomialExpansionDerived : Bool
+    normalizedErrorPolynomialExpansionDerivedIsTrue :
+      normalizedErrorPolynomialExpansionDerived ≡ true
+    supportOnlyPolynomialConstructed : Bool
+    supportOnlyPolynomialConstructedIsTrue : supportOnlyPolynomialConstructed ≡ true
     massFreeRadiusGateConstructed : Bool
     massFreeRadiusGateConstructedIsTrue : massFreeRadiusGateConstructed ≡ true
     positiveMassCancellationDerivedInAgda : Bool
     positiveMassCancellationDerivedInAgdaIsFalse :
       positiveMassCancellationDerivedInAgda ≡ false
+    supportPolynomialMajorantDerivedInAgda : Bool
+    supportPolynomialMajorantDerivedInAgdaIsFalse :
+      supportPolynomialMajorantDerivedInAgda ≡ false
     actualNormalizedRadiusGateInhabited : Bool
     actualNormalizedRadiusGateInhabitedIsFalse :
       actualNormalizedRadiusGateInhabited ≡ false
 
 canonicalNormalizedRadiusGateBoundary : NormalizedRadiusGateBoundary
 canonicalNormalizedRadiusGateBoundary =
-  normalizedRadiusGateBoundary true refl true refl true refl false refl false refl
+  normalizedRadiusGateBoundary
+    true refl true refl true refl true refl true refl
+    false refl false refl false refl
