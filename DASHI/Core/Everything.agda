@@ -22,7 +22,9 @@ import DASHI.Core.TernaryRoleCarrierExact
 import DASHI.Core.LacanFregeTernaryRoleChartExact
 import DASHI.Core.IrigarayLabialRelationalCarrierExact
 import DASHI.Core.DifferenceWithoutHierarchyExact
+import DASHI.Core.RepresentationSubjectPositionNonfactorabilityExact
 import DASHI.Core.LacanIrigarayTernaryGrammarBridgeExact
+import DASHI.Core.FeministLabialRechartingCapstoneExact
 import DASHI.Core.DialecticalStageSpectrumExact
 import DASHI.Core.ContextualDialecticRoleExact
 import DASHI.Core.EpistemicSuspensionExact
