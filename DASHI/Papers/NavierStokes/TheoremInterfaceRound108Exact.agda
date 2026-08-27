@@ -3,11 +3,17 @@ module DASHI.Papers.NavierStokes.TheoremInterfaceRound108Exact where
 ------------------------------------------------------------------------
 -- PAPER-FACING ROUND108 FRONTIER
 --
--- Round108 formally rejects the Wiener-L4 shortcut as the canonical
--- arbitrary-data route because it loses exact critical scaling.  The live
--- nonlinear target is now the resonant-shell refinement of the physical
--- Waleffe forcing estimate, preserving cancellation and shell geometry before
--- global l1 norms are paid.
+-- Round108 rejects two regressions as canonical arbitrary-data routes:
+--
+--   * Wiener-L4 expenditure loses exact critical scaling;
+--   * direct gap-weighted quartic -> fixed quadratic absorption is blocked by
+--     the literal amplitude homogeneity.
+--
+-- The repo-native physical Round106 normal-form lane also proves that adverse
+-- episodes retain SIGNED forcing, so replacing the network forcing by its
+-- positive part is not required.  The live nonlinear target is therefore a
+-- literal signed self/external Waleffe forcing mechanism with a genuine
+-- cutoff-uniform endpoint or integrable-remainder payment.
 --
 -- The theorem-sized countdown remains two.  No Clay promotion is asserted.
 ------------------------------------------------------------------------
@@ -24,9 +30,17 @@ round108PaperCriticalScalingAuditClosed = R108.round108CriticalScalingAuditClose
 round108PaperWienerL4ShortcutRequired : Bool
 round108PaperWienerL4ShortcutRequired = R108.round108WienerL4ShortcutRequired
 
-round108PaperResonantShellWaleffeForcingRefinementClosed : Bool
-round108PaperResonantShellWaleffeForcingRefinementClosed =
-  R108.round108PhysicalResonantShellWaleffeForcingRefinementClosed
+round108PaperPositivePartOfNetworkForcingRequired : Bool
+round108PaperPositivePartOfNetworkForcingRequired =
+  R108.round108PositivePartOfNetworkForcingRequired
+
+round108PaperDirectGapWeightedQuarticSchurRequired : Bool
+round108PaperDirectGapWeightedQuarticSchurRequired =
+  R108.round108DirectGapWeightedQuarticSchurRequired
+
+round108PaperLiteralSignedSelfExternalWaleffeForcingMechanismClosed : Bool
+round108PaperLiteralSignedSelfExternalWaleffeForcingMechanismClosed =
+  R108.round108PhysicalLiteralSignedSelfExternalWaleffeForcingMechanismClosed
 
 round108PaperPositiveWaleffeNetworkForcingBudgetClosed : Bool
 round108PaperPositiveWaleffeNetworkForcingBudgetClosed =
@@ -48,9 +62,17 @@ round108PaperWienerL4ShortcutRequiredIsFalse :
   round108PaperWienerL4ShortcutRequired ≡ false
 round108PaperWienerL4ShortcutRequiredIsFalse = refl
 
-round108PaperResonantShellWaleffeForcingRefinementClosedIsFalse :
-  round108PaperResonantShellWaleffeForcingRefinementClosed ≡ false
-round108PaperResonantShellWaleffeForcingRefinementClosedIsFalse = refl
+round108PaperPositivePartOfNetworkForcingRequiredIsFalse :
+  round108PaperPositivePartOfNetworkForcingRequired ≡ false
+round108PaperPositivePartOfNetworkForcingRequiredIsFalse = refl
+
+round108PaperDirectGapWeightedQuarticSchurRequiredIsFalse :
+  round108PaperDirectGapWeightedQuarticSchurRequired ≡ false
+round108PaperDirectGapWeightedQuarticSchurRequiredIsFalse = refl
+
+round108PaperLiteralSignedSelfExternalWaleffeForcingMechanismClosedIsFalse :
+  round108PaperLiteralSignedSelfExternalWaleffeForcingMechanismClosed ≡ false
+round108PaperLiteralSignedSelfExternalWaleffeForcingMechanismClosedIsFalse = refl
 
 round108PaperPositiveWaleffeNetworkForcingBudgetClosedIsFalse :
   round108PaperPositiveWaleffeNetworkForcingBudgetClosed ≡ false
