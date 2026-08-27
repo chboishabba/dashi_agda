@@ -25,3 +25,8 @@ import DASHI.Physics.Closure.NSTriadKNResonantNullGain
 -- TOE integration: native SSP/369 symmetry action, equivariant two-sheet
 -- reduction, residual-bearing 9 -> 6 reopening, and NS 3 x 3 nonary chart.
 import DASHI.Physics.Closure.TOESymmetryResolved369BridgeExact
+
+-- Path-integral / stationary-phase cross-pollination.  Reuses existing
+-- history, quantum-path fibre, TSFV invariant, and source-conditioned
+-- trajectory machinery without promoting path enumeration to ontology.
+import DASHI.Physics.Closure.FeynmanKelvinTrajectoryCrossPollinationExact
