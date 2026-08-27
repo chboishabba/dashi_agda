@@ -4,6 +4,7 @@ module DASHI.Core.Everything where
 
 import DASHI.Core.FallacyObstructionEverything
 import DASHI.Core.TrajectoryResidueExact
+import DASHI.Core.ContrastiveHistoryResidualExact
 import DASHI.Core.GeneratorCoverageReachabilityExact
 import DASHI.Core.FormalClaimTransportGeometryExact
 import DASHI.Core.FormalizationRecoverySourceRegistryExact
