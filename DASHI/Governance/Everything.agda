@@ -9,6 +9,7 @@ import DASHI.Governance.PermacultureEvolutionTests
 import DASHI.Governance.CaseyITIRNixBridge
 import DASHI.Governance.CaseyITIRNixBridgeTests
 import DASHI.Core.RequiredObserverAxisJoinAdequacyExact
+import DASHI.Core.NonFactorabilityCompositionExact
 import DASHI.Governance.AuthorityMandateCore
 import DASHI.Governance.CouncilDelegationGraph
 import DASHI.Governance.ExternalLegitimacyBoundary
@@ -38,7 +39,6 @@ import DASHI.Governance.InverseJusticeAttractorExact
 import DASHI.Governance.SecondOrderJusticeGrammarExact
 import DASHI.Governance.ClosedAuthorityInverseJusticeExact
 import DASHI.Governance.SituatedInverseJusticeRegression
-
 -- Contested ambient authority / legal-epistemic power convergence.
 import DASHI.Governance.ContestedAmbientAuthorityHyperformalismExact
 import DASHI.Governance.ContestedAmbientAuthorityRegression
@@ -54,7 +54,9 @@ import DASHI.Governance.PeaceJusticeResidualNonFactorabilityExact
 import DASHI.Governance.HyperformalTernaryCarrierEquivalenceExact
 import DASHI.Governance.HyperformalNonFactorabilityTransportExact
 import DASHI.Governance.FibrewiseInstitutionalPowerEverything
-
+import DASHI.Governance.LegalDecisionDoubleProjectionExact
+import DASHI.Governance.LegalDecisionFibreDynamicsExact
+import DASHI.Governance.DecisionPotentialAuthorityOrthogonalityExact
 import DASHI.Governance.RevolutionarySourceAtlas
 import DASHI.Governance.RevolutionaryPracticeBraid
 import DASHI.Governance.TraumaMemorySublationBoundary

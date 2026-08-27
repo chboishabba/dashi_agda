@@ -13,6 +13,7 @@ import DASHI.Biology.UnconsciousAccessRegime as Unconscious
 import DASHI.Biology.SymbolicTransformWithoutHomunculus as Symbolic
 import DASHI.Biology.DeterministicCoarseGrainingBoundary as Deterministic
 import DASHI.Biology.SparseExpertRoutingCoalition as Sparse
+import DASHI.Cognition.PNF.PNFWaveAccessTraumaLearningRegression as WavePNF
 
 ------------------------------------------------------------------------
 -- Compact validation surface for the full tranche.
@@ -21,6 +22,7 @@ record ConsciousAccessNetworkRegression : Setω where
   field
     coalition : Access.ConsciousAccessCoalition
     psychedelicBoundary : Psychedelic.PsychedelicAttractorBoundary
+    wavePNFRegression : WavePNF.PNFWaveAccessTraumaLearningRegression
 
     stateChangesOutput :
       Stateful.runOutput Stateful.canonicalBoolTransducer false false false
@@ -111,8 +113,8 @@ record ConsciousAccessNetworkRegression : Setω where
       ≡
       Psychedelic.geometricMotif
 
-    sourceCountIsTen :
-      Sources.canonicalConsciousAccessSourceCount ≡ 10
+    sourceCountIsSixteen :
+      Sources.canonicalConsciousAccessSourceCount ≡ 16
 
     blockedTraceRemainsCausallyEffective :
       Unconscious.actionReadout Unconscious.canonicalAccessAvoidanceRegime
@@ -174,6 +176,8 @@ canonicalConsciousAccessNetworkRegression =
         Access.canonicalConsciousAccessCoalition
     ; psychedelicBoundary =
         Psychedelic.canonicalPsychedelicAttractorBoundary
+    ; wavePNFRegression =
+        WavePNF.canonicalPNFWaveAccessTraumaLearningRegression
     ; stateChangesOutput =
         Stateful.canonicalStateChangesOutput
     ; modulatorChangesOutput =
@@ -202,8 +206,8 @@ canonicalConsciousAccessNetworkRegression =
         Psychedelic.reachableRepertoireIsLarger
     ; motifRecurs =
         Psychedelic.motifCycleReturns
-    ; sourceCountIsTen =
-        Sources.canonicalConsciousAccessSourceCountIsTen
+    ; sourceCountIsSixteen =
+        Sources.canonicalConsciousAccessSourceCountIsSixteen
     ; blockedTraceRemainsCausallyEffective =
         Unconscious.canonicalBlockedRepresentationCausallyEffective
     ; transformedSymbolPreservesInvariant =
