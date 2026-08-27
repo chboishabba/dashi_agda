@@ -24,6 +24,8 @@ sources=(
   DASHI/Analysis/RiemannG21OddSinhTP2Exact.agda
   DASHI/Analysis/RiemannG21TwoHeightMomentRatioTargetExact.agda
   DASHI/Analysis/RiemannG21TwoPointCovarianceShadowExact.agda
+  DASHI/Analysis/RiemannG21OddTaylorDeterminantExact.agda
+  DASHI/Analysis/RiemannG21OddTaylorRemainderDeterminantExact.agda
   DASHI/Analysis/RiemannG21DeterminantMarginTransferExact.agda
   DASHI/Analysis/RiemannG21ParityMinorAnalyticFrontierExact.agda
   DASHI/Analysis/RiemannG21ContextualAlternativeNonpromotionExact.agda
@@ -33,6 +35,7 @@ sources=(
   DASHI/Analysis/RiemannG21PoleQuotientedExteriorExact.agda
   DASHI/Analysis/RiemannG21CrossPollinationExact.agda
   DASHI/Analysis/RiemannG21Regression.agda
+  DASHI/Analysis/RiemannG21StrictTP2TrancheReceipt.agda
   DASHI/Analysis/RiemannG22ReflectionHermitianDeskTestExact.agda
 )
 
@@ -75,24 +78,30 @@ require_pattern DASHI/Analysis/RiemannG21OddSinhTP2Exact.agda 'positiveMargin'
 require_pattern DASHI/Analysis/RiemannG21OddSinhTP2Exact.agda 'oddMomentDeterminantStrictNegative'
 require_pattern DASHI/Analysis/RiemannG21OddSinhTP2Exact.agda 'symmetrizedDoubleIntegralIdentity'
 require_pattern DASHI/Analysis/RiemannG21OddSinhTP2Exact.agda 'continuumOddMomentStrictSignDerivedIsFalse'
+require_pattern DASHI/Analysis/RiemannG21OddTaylorDeterminantExact.agda 'oddCubicDeterminantFactorization'
+require_pattern DASHI/Analysis/RiemannG21OddTaylorDeterminantExact.agda 'oddCubicDeterminantAsNegativeMargin'
+require_pattern DASHI/Analysis/RiemannG21OddTaylorDeterminantExact.agda 'linearLinearCancellation'
+require_pattern DASHI/Analysis/RiemannG21OddTaylorDeterminantExact.agda 'cubicCubicCancellation'
+require_pattern DASHI/Analysis/RiemannG21OddTaylorRemainderDeterminantExact.agda 'oddDeterminantRemainderDecomposition'
+require_pattern DASHI/Analysis/RiemannG21OddTaylorRemainderDeterminantExact.agda 'oddDeterminantErrorIdentity'
+require_pattern DASHI/Analysis/RiemannG21OddTaylorRemainderDeterminantExact.agda 'fourIndependentEntryErrorsRequiredIsFalse'
 require_pattern DASHI/Analysis/RiemannG21TwoPointCovarianceShadowExact.agda 'twoPointMomentCrossProductDecomposition'
 require_pattern DASHI/Analysis/RiemannG21DeterminantMarginTransferExact.agda 'directDeterminantErrorBelowMargin'
 require_pattern DASHI/Analysis/RiemannG21DeterminantMarginTransferExact.agda 'finiteRadiusSignPreserved'
 require_pattern DASHI/Analysis/RiemannG21DeterminantMarginTransferExact.agda 'entrywiseTriangleBoundRequiredByInterfaceIsFalse'
-require_pattern DASHI/Analysis/RiemannG21ParityMinorAnalyticFrontierExact.agda 'strictSinhTP2'
-require_pattern DASHI/Analysis/RiemannG21ParityMinorAnalyticFrontierExact.agda 'oddMomentDeterminantStrictSign'
+require_pattern DASHI/Analysis/RiemannG21ParityMinorAnalyticFrontierExact.agda 'oddCubicTaylorDeterminantFactorization'
+require_pattern DASHI/Analysis/RiemannG21ParityMinorAnalyticFrontierExact.agda 'exactOddDeterminantRemainderDecomposition'
 require_pattern DASHI/Analysis/RiemannG21ParityMinorAnalyticFrontierExact.agda 'directDeterminantMarginTransfer'
-require_pattern DASHI/Analysis/RiemannG21ParityMinorAnalyticFrontierExact.agda 'finiteRadiusParityMinors'
 require_pattern DASHI/Analysis/RiemannG21ContextualAlternativeNonpromotionExact.agda '10.1038/s41467-026-69034-7'
 require_pattern DASHI/Analysis/RiemannG21ContextualAlternativeNonpromotionExact.agda 'paperProvesRiemannHypothesisIsFalse'
 require_pattern DASHI/Analysis/RiemannG21ContextualAlternativeFiniteInstanceExact.agda 'canonicalContextualAlternativeDescription'
 require_pattern DASHI/Analysis/RiemannG21OffLinePoleQuotientTransversalityExact.agda 'OffLinePoleQuotientTransversality'
 require_pattern DASHI/Analysis/RiemannG21PrimePairKernelExact.agda 'RectangleNonseparabilityWitness'
 require_pattern DASHI/Analysis/RiemannG21PrimePairKernelExact.agda 'RankOneMinorObstruction'
-require_pattern DASHI/Analysis/RiemannG21PoleQuotientedExteriorExact.agda 'strictSinhTP2OddKernel'
-require_pattern DASHI/Analysis/RiemannG21PoleQuotientedExteriorExact.agda 'strictOddMomentDeterminant'
-require_pattern DASHI/Analysis/RiemannG21PoleQuotientedExteriorExact.agda 'directDeterminantMarginTransfer'
 require_pattern DASHI/Analysis/RiemannG21PoleQuotientedExteriorExact.agda 'riemannHypothesisDerivedIsFalse'
+require_pattern DASHI/Analysis/RiemannG21StrictTP2TrancheReceipt.agda 'oddCubicTaylorFactorizationDerivedIsTrue'
+require_pattern DASHI/Analysis/RiemannG21StrictTP2TrancheReceipt.agda 'exactOddDeterminantRemainderDecompositionDerivedIsTrue'
+require_pattern DASHI/Analysis/RiemannG21StrictTP2TrancheReceipt.agda 'actualStructuredRemainderBoundDerivedIsFalse'
 
 require_pattern DASHI/Analysis/RiemannG22ReflectionHermitianDeskTestExact.agda 'defectZeroOnFixedLocus'
 require_pattern DASHI/Analysis/RiemannG22ReflectionHermitianDeskTestExact.agda 'diagonalSelfEnergyRetained'
@@ -108,6 +117,8 @@ DASHI_NO_TMUX=1 scripts/run_agda29_parallel_check.sh \
   DASHI/Analysis/RiemannG21ParityMinorAnalyticFrontierExact.agda \
   DASHI/Analysis/StrictKernelMomentRatioExact.agda \
   DASHI/Analysis/RiemannG21OddSinhTP2Exact.agda \
+  DASHI/Analysis/RiemannG21OddTaylorDeterminantExact.agda \
+  DASHI/Analysis/RiemannG21OddTaylorRemainderDeterminantExact.agda \
   DASHI/Analysis/RiemannG21DeterminantMarginTransferExact.agda \
-  DASHI/Analysis/RiemannG21ContextualAlternativeFiniteInstanceExact.agda \
+  DASHI/Analysis/RiemannG21StrictTP2TrancheReceipt.agda \
   DASHI/Analysis/RiemannG22ReflectionHermitianDeskTestExact.agda
