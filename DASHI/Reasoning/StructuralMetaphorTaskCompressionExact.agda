@@ -4,6 +4,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl; cong)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
+open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 import DASHI.Core.IntersectionalNonFactorability as NonFactor
 import DASHI.Reasoning.MetaphorAlignmentMisunderstanding as Metaphor
@@ -50,14 +51,12 @@ sameRepresentationSameDeclaredTaskOutput :
   {left right : Fine} →
   encode left ≡ encode right →
   evaluate task left ≡ evaluate task right
-sameRepresentationSameDeclaredTaskOutput compression task same =
+sameRepresentationSameDeclaredTaskOutput compression task {left} {right} same =
   trans
-    (factorisesForDeclaredTask compression task _)
+    (factorisesForDeclaredTask compression task left)
     (trans
       (cong (evaluateCompressed compression task) same)
-      (sym (factorisesForDeclaredTask compression task _)))
-  where
-    open import Relation.Binary.PropositionalEquality using (sym; trans)
+      (sym (factorisesForDeclaredTask compression task right)))
 
 ------------------------------------------------------------------------
 -- Consumer failure is the dual condition: one coarse representation may be
