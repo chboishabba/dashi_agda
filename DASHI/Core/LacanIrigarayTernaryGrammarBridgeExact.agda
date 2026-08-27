@@ -89,20 +89,9 @@ noTernaryRelabellingPreservesGrammar Ternary.cycle012Permutation = cycle012Fails
 noTernaryRelabellingPreservesGrammar Ternary.cycle021Permutation = cycle021Fails
 
 ------------------------------------------------------------------------
--- Direct role difference at code0: lack vs classification refusal.
-------------------------------------------------------------------------
-
-zeroRolesAreDistinctByConstruction :
-  Lacan.LacanianComparisonRole → Irigaray.IrigarayLabialRole → Set
-zeroRolesAreDistinctByConstruction _ _ = Set
-
--- The useful theorem is not cross-type inequality (which is ill-typed), but
--- that the shared code is interpreted through different codomains and different
--- relation laws.  `noTernaryRelabellingPreservesGrammar` is the exact structural
--- obstruction.
-
-------------------------------------------------------------------------
--- Boundary.
+-- The useful theorem is not a cross-type equality test between Lacanian and
+-- Irigarayan roles.  Their role codomains are intentionally distinct.  The
+-- structural comparison is the exact grammar obstruction above.
 ------------------------------------------------------------------------
 
 record LacanIrigarayGrammarBoundary : Set where
