@@ -16,11 +16,11 @@ module DASHI.Mathematics.NumberTheory.FiniteNatFloorSquareRootExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
-open import Data.Empty using (⊥-elim)
+open import Data.Empty using (⊥; ⊥-elim)
 open import Data.Nat.Base using (_≤_; _<_; z≤n; s≤s)
 import Data.Nat.Properties as NatP
 open import Data.Sum.Base using (inj₁; inj₂)
-open import Relation.Binary.PropositionalEquality using (_≢_; cong; subst)
+open import Relation.Binary.PropositionalEquality using (_≢_; cong; subst; sym)
 open import Relation.Nullary.Decidable.Core using (yes; no)
 
 ------------------------------------------------------------------------
@@ -53,7 +53,7 @@ floorSquareRootUpToBound target (suc bound)
 ... | no squareTooLarge = NatP.≤-step (floorSquareRootUpToBound target bound)
 
 ------------------------------------------------------------------------
--- Small order helper: if m <= n but m != n then m < n.
+-- Small order helpers.
 
 strictFromLeDifferent :
   ∀ {m n : Nat} → m ≤ n → m ≢ n → m < n
@@ -68,6 +68,38 @@ strictFromLeDifferent {suc m} {suc n} (s≤s bound) different =
 strictBelowSuccessorToLe :
   ∀ {m n : Nat} → m < suc n → m ≤ n
 strictBelowSuccessorToLe (s≤s bound) = bound
+
+strictSelfImpossible : (n : Nat) → n < n → ⊥
+strictSelfImpossible zero ()
+strictSelfImpossible (suc n) (s≤s proof) = strictSelfImpossible n proof
+
+------------------------------------------------------------------------
+-- Squaring reflects order on naturals.  This is the exact monotone-square
+-- fact needed by cross-precision floor-root estimates later.
+
+squareOrderReflects :
+  ∀ {left right : Nat} →
+  left * left ≤ right * right →
+  left ≤ right
+squareOrderReflects {left} {right} squareBound
+  with NatP.≤-total left right
+... | inj₁ left≤right = left≤right
+... | inj₂ right≤left with left NatP.≟ right
+...   | yes equality = NatP.≤-reflexive equality
+...   | no different =
+  ⊥-elim
+    (strictSelfImpossible
+      (right * right)
+      (NatP.<-≤-trans strictSquares squareBound))
+  where
+  right<left : right < left
+  right<left =
+    strictFromLeDifferent
+      right≤left
+      (λ equality → different (sym equality))
+
+  strictSquares : right * right < left * left
+  strictSquares = NatP.*-mono-< right<left right<left
 
 ------------------------------------------------------------------------
 -- Maximality inside the scanned interval.
