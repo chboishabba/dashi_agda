@@ -18,6 +18,7 @@ FILES=(
   DASHI/Foundations/Wette1969PrimaryTextExtractionExact.agda
   DASHI/Foundations/Wette1969HistoricalSignatureExact.agda
   DASHI/Foundations/Wette1969JudgementConstructorsExact.agda
+  DASHI/Foundations/Wette1969ObjectVariableMarkWordsExact.agda
   DASHI/Foundations/Wette1969RuleRevisionExact.agda
   DASHI/Foundations/Wette1969InitialRuleTranscriptionExact.agda
   DASHI/Foundations/Wette1969CriticalRuleDependencyExact.agda
@@ -26,6 +27,9 @@ FILES=(
   DASHI/Foundations/Wette1969Rule9324x25PremiseTemplateExact.agda
   DASHI/Foundations/Wette1969SchematicSubstitutionFreshnessExact.agda
   DASHI/Foundations/Wette1969OrderedTuplePredicateSubstitutionExact.agda
+  DASHI/Foundations/Wette1969QuantifierCaptureSafetyExact.agda
+  DASHI/Foundations/Wette1969RecursorBindingScopeExact.agda
+  DASHI/Foundations/Wette1969DependentTwoStageSubstitutionExact.agda
   DASHI/Foundations/Wette1969Rule9324x25ComputationalSideConditionsExact.agda
   DASHI/Foundations/Wette1969ProofCarryingRuleApplicationExact.agda
   DASHI/Foundations/Wette1969FiniteDerivationContextExact.agda
@@ -72,6 +76,10 @@ grep -q 'premiseKindsCanBeRecoveredBeforeBodiesIsTrue' DASHI/Core/RulePremiseTyp
 grep -q 'typedRequirementIsAlreadyExactPremiseBodyIsFalse' DASHI/Core/RulePremiseTypingGeometryExact.agda
 
 grep -q 'allHistoricalRelatorAritiesHaveTypedConstructorsIsTrue' DASHI/Foundations/Wette1969JudgementConstructorsExact.agda
+grep -q 'objectVariableConstructorRecoveredFromRule3IsTrue' DASHI/Foundations/Wette1969ObjectVariableMarkWordsExact.agda
+grep -q 'predicateMarkConstructorRecoveredFromRule4IsTrue' DASHI/Foundations/Wette1969ObjectVariableMarkWordsExact.agda
+grep -q 'objectSyntaxSeparatedFromRuleSchematicWordVariablesIsTrue' DASHI/Foundations/Wette1969ObjectVariableMarkWordsExact.agda
+
 grep -q 'rule9324x25OrderRequirementRecoveredIsTrue' DASHI/Foundations/Wette1969SubstitutionOrderExact.agda
 grep -q 'rule9324x25FourPremiseKindsRecoveredIsTrue' DASHI/Foundations/Wette1969CriticalPremiseTypingExact.agda
 grep -q 'fourPremiseTemplateNowConstructibleIsTrue' DASHI/Foundations/Wette1969Rule9324x25PremiseTemplateExact.agda
@@ -82,6 +90,21 @@ grep -q 'evaluatorAlreadyImplementsFullObjectLanguageTupleSubstitutionIsFalse' D
 grep -q 'tupleThenPredicateOrderNowExecutableIsTrue' DASHI/Foundations/Wette1969OrderedTuplePredicateSubstitutionExact.agda
 grep -q 'structuralOrderSensitivityWitnessNowExistsIsTrue' DASHI/Foundations/Wette1969OrderedTuplePredicateSubstitutionExact.agda
 grep -q 'boundedStructuralNonCommutationIsFullHistoricalSubstitutionTheoremIsFalse' DASHI/Foundations/Wette1969OrderedTuplePredicateSubstitutionExact.agda
+
+grep -q 'sourceQuantifierCaptureCriterionNowTypedIsTrue' DASHI/Foundations/Wette1969QuantifierCaptureSafetyExact.agda
+grep -q 'directCaptureRiskRefutesSafetyIsTrue' DASHI/Foundations/Wette1969QuantifierCaptureSafetyExact.agda
+grep -q 'recursorBindingRegimeAlreadyIncludedIsFalse' DASHI/Foundations/Wette1969QuantifierCaptureSafetyExact.agda
+
+grep -q 'exactRecursorBinderPackagePiXRecoveredIsTrue' DASHI/Foundations/Wette1969RecursorBindingScopeExact.agda
+grep -q 'predicateMarkAndVariableTupleTargetsSeparatedIsTrue' DASHI/Foundations/Wette1969RecursorBindingScopeExact.agda
+grep -q 'exactRecursorBinderTargetParserNowRecoveredIsTrue' DASHI/Foundations/Wette1969RecursorBindingScopeExact.agda
+grep -q 'wholeCPRPrefixIsInsideRecursorBindingScopeIsFalse' DASHI/Foundations/Wette1969RecursorBindingScopeExact.agda
+
+grep -q 'secondStageSafetyIndexedByActualIntermediateIsTrue' DASHI/Foundations/Wette1969DependentTwoStageSubstitutionExact.agda
+grep -q 'rule828SequentialCompositionNowTypedIsTrue' DASHI/Foundations/Wette1969DependentTwoStageSubstitutionExact.agda
+grep -q 'pairedFourPlaceIIJudgementNowReproducedIsTrue' DASHI/Foundations/Wette1969DependentTwoStageSubstitutionExact.agda
+grep -q 'sourceOrderV2ToV3ThenW2ToRecursivePredicatePreservedIsTrue' DASHI/Foundations/Wette1969DependentTwoStageSubstitutionExact.agda
+grep -q 'typedIIFormulaIsAlreadyHistoricalDerivabilityProofIsFalse' DASHI/Foundations/Wette1969DependentTwoStageSubstitutionExact.agda
 
 grep -q 'premise3FreshnessFragmentNowComputationallyCertifiableIsTrue' DASHI/Foundations/Wette1969Rule9324x25ComputationalSideConditionsExact.agda
 grep -q 'premise4SourceOrderedTuplePredicateFragmentNowCertifiableIsTrue' DASHI/Foundations/Wette1969Rule9324x25ComputationalSideConditionsExact.agda
@@ -104,9 +127,10 @@ grep -q 'premise27IndependenceRoleRecoveredIsTrue' DASHI/Foundations/Wette1969Cr
 grep -q 'hauptsatz2IsDefinitionallyFormulaOnlyTranslationIsFalse' DASHI/Foundations/Wette1969CompletenessInterpretationBridgeExact.agda
 grep -q 'DOI: 10.1111/j.1746-8361.1970.tb01221.x' DASHI/Foundations/Wette1970PrimaryTextExtractionExact.agda
 grep -q 'relativeCompletenessShouldBeDefinedBeforeSourceRecoveryIsFalse' DASHI/Foundations/WetteHistoricalRecoveryFrontierExact.agda
-grep -q 'derivationClosureFromPriorStepsNowRecoveredIsTrue' DASHI/Foundations/WetteHistoricalRecoveryGeometryBridgeExact.agda
-grep -q 'traceWideMonotoneClosureNowRecoveredIsTrue' DASHI/Foundations/WetteHistoricalRecoveryGeometryBridgeExact.agda
-grep -q 'orderedTuplePredicateStructuralEvaluatorNowRecoveredIsTrue' DASHI/Foundations/WetteHistoricalRecoveryGeometryBridgeExact.agda
+grep -q 'objectVariableAndPredicateMarkConstructorsNowRecoveredIsTrue' DASHI/Foundations/WetteHistoricalRecoveryGeometryBridgeExact.agda
+grep -q 'exactRecursorBinderTargetParserNowRecoveredIsTrue' DASHI/Foundations/WetteHistoricalRecoveryGeometryBridgeExact.agda
+grep -q 'dependentTwoStagePairedIIJudgementNowRecoveredIsTrue' DASHI/Foundations/WetteHistoricalRecoveryGeometryBridgeExact.agda
+grep -q 'secondStageCaptureCheckedOnActualIntermediateIsTrue' DASHI/Foundations/WetteHistoricalRecoveryGeometryBridgeExact.agda
 grep -q 'fullHistoricalTuplePredicateSubstitutionNowRecoveredIsFalse' DASHI/Foundations/WetteHistoricalRecoveryGeometryBridgeExact.agda
 grep -q 'bindingAwareCaptureAvoidanceNowRecoveredIsFalse' DASHI/Foundations/WetteHistoricalRecoveryGeometryBridgeExact.agda
 
@@ -133,6 +157,7 @@ scripts/run_agda29_parallel_check.sh \
   DASHI/Foundations/Wette1969PrimaryTextExtractionExact.agda \
   DASHI/Foundations/Wette1969HistoricalSignatureExact.agda \
   DASHI/Foundations/Wette1969JudgementConstructorsExact.agda \
+  DASHI/Foundations/Wette1969ObjectVariableMarkWordsExact.agda \
   DASHI/Foundations/Wette1969RuleRevisionExact.agda \
   DASHI/Foundations/Wette1969InitialRuleTranscriptionExact.agda \
   DASHI/Foundations/Wette1969CriticalRuleDependencyExact.agda \
@@ -141,6 +166,9 @@ scripts/run_agda29_parallel_check.sh \
   DASHI/Foundations/Wette1969Rule9324x25PremiseTemplateExact.agda \
   DASHI/Foundations/Wette1969SchematicSubstitutionFreshnessExact.agda \
   DASHI/Foundations/Wette1969OrderedTuplePredicateSubstitutionExact.agda \
+  DASHI/Foundations/Wette1969QuantifierCaptureSafetyExact.agda \
+  DASHI/Foundations/Wette1969RecursorBindingScopeExact.agda \
+  DASHI/Foundations/Wette1969DependentTwoStageSubstitutionExact.agda \
   DASHI/Foundations/Wette1969Rule9324x25ComputationalSideConditionsExact.agda \
   DASHI/Foundations/Wette1969DerivationClosureExact.agda \
   DASHI/Foundations/Wette1969CompletenessInterpretationBridgeExact.agda \
