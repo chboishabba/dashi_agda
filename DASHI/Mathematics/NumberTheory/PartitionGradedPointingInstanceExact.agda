@@ -15,12 +15,13 @@ open import Data.Fin.Base using (Fin)
   renaming (zero to fzero; suc to fsuc)
 open import Data.Product using (_×_; _,_; proj₁; proj₂)
 open import Data.Vec.Base using (Vec; []; _∷_)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Mathematics.NumberTheory.FiniteProductEnumerationExact as Product
 import DASHI.Mathematics.NumberTheory.FiniteWeightedReindexExact as Reindex
 import DASHI.Mathematics.NumberTheory.GradedMultiplicityPointingResidualExact as Pointing
 import DASHI.Mathematics.NumberTheory.PartitionMultiplicityCarrierExact as Partition
+import DASHI.Mathematics.NumberTheory.PartitionAmbientMultiplicityNormalizationExact as Normalize
 import DASHI.Mathematics.NumberTheory.PartitionErdosCellBijectionExact as ErdosCell
 
 ------------------------------------------------------------------------
@@ -63,8 +64,21 @@ partitionWeightedGeneratorFold :
   ≡ n
 partitionWeightedGeneratorFold partition =
   trans
-    (weightedGeneratorFoldFrom 1 (Partition.multiplicities partition))
-    (Partition.massExact partition)
+    (Reindex.foldPointwise
+      (λ index →
+        Partition.partValue index
+        * Partition.lookupMultiplicity index (Partition.multiplicities partition))
+      (λ index →
+        Partition.coordinateWeightFrom 1 index
+        * Partition.lookupMultiplicity index (Partition.multiplicities partition))
+      (Product.allFin _)
+      (λ index →
+        cong
+          (_* Partition.lookupMultiplicity index (Partition.multiplicities partition))
+          (sym (Normalize.coordinateWeightOneIsPartValue index))))
+    (trans
+      (weightedGeneratorFoldFrom 1 (Partition.multiplicities partition))
+      (Partition.massExact partition))
 
 ------------------------------------------------------------------------
 -- Canonical generic system attached to one partition.
