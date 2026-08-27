@@ -9,6 +9,11 @@ open import DASHI.Core.Prelude
 -- category authority, provenance, protocol, permission, contestability and
 -- decision authority.  No implication between these coordinates is supplied
 -- by default.
+--
+-- `QualifiedUse` deliberately requires receipts from the upstream agenda and
+-- category coordinates as well as the downstream provenance/protocol/
+-- permission/obligation coordinates.  This prevents an empirically adequate
+-- claim from becoming fully qualified merely because its source was cited.
 ------------------------------------------------------------------------
 
 record SituatedClaimAuthoritySystem : Set₁ where
@@ -29,6 +34,8 @@ record SituatedClaimAuthoritySystem : Set₁ where
 
 record QualifiedUse
   (system : SituatedClaimAuthoritySystem)
+  (agenda : SituatedClaimAuthoritySystem.ResearchAgenda system)
+  (category : SituatedClaimAuthoritySystem.CategoryScheme system)
   (claim : SituatedClaimAuthoritySystem.Claim system)
   (community : SituatedClaimAuthoritySystem.Community system)
   (consumer : SituatedClaimAuthoritySystem.Consumer system)
@@ -36,6 +43,10 @@ record QualifiedUse
   (obligation : SituatedClaimAuthoritySystem.Obligation system) : Set where
   constructor qualifiedUse
   field
+    agendaReceipt :
+      SituatedClaimAuthoritySystem.agendaAuthorized system community agenda
+    categoryReceipt :
+      SituatedClaimAuthoritySystem.categoryAuthorized system community category
     empiricalReceipt :
       SituatedClaimAuthoritySystem.empiricallyAdequate system claim consumer
     provenanceReceipt :
@@ -65,10 +76,10 @@ data DemoRepresentation : Set where representation : DemoRepresentation
 data DemoObligation : Set where attributionObligation : DemoObligation
 
 data DemoAgendaAuthorized : DemoCommunity → DemoAgenda → Set where
-  agendaReceipt : DemoAgendaAuthorized community agenda
+  demoAgendaReceipt : DemoAgendaAuthorized community agenda
 
 data DemoCategoryAuthorized : DemoCommunity → DemoCategory → Set where
-  categoryReceipt : DemoCategoryAuthorized community category
+  demoCategoryReceipt : DemoCategoryAuthorized community category
 
 data DemoProvenance : DemoClaim → DemoCommunity → Set where
   demoProvenanceReceipt : DemoProvenance claim community
@@ -99,10 +110,11 @@ demoSystem = situatedClaimAuthoritySystem
   DemoPermission DemoAdequacy DemoContestable DemoDecision DemoObligationSatisfied
 
 studyQualified :
-  QualifiedUse demoSystem claim community researchConsumer studyUse attributionObligation
+  QualifiedUse demoSystem agenda category claim community researchConsumer
+    studyUse attributionObligation
 studyQualified =
-  qualifiedUse descriptiveAdequacy demoProvenanceReceipt studyProtocol
-    studyPermission attributionSatisfied
+  qualifiedUse demoAgendaReceipt demoCategoryReceipt descriptiveAdequacy
+    demoProvenanceReceipt studyProtocol studyPermission attributionSatisfied
 
 studyPermissionDoesNotBecomeInterventionPermission :
   DemoPermission community claim researchConsumer interventionUse → ⊥
@@ -115,6 +127,12 @@ studyPermissionDoesNotBecomeDecisionAuthority ()
 record SituatedClaimAuthorityBoundary : Set where
   constructor situatedClaimAuthorityBoundary
   field
+    empiricalAdequacyImpliesAgendaAuthorization : Bool
+    empiricalAdequacyImpliesAgendaAuthorizationIsFalse :
+      empiricalAdequacyImpliesAgendaAuthorization ≡ false
+    empiricalAdequacyImpliesCategoryAuthorization : Bool
+    empiricalAdequacyImpliesCategoryAuthorizationIsFalse :
+      empiricalAdequacyImpliesCategoryAuthorization ≡ false
     empiricalAdequacyImpliesPermission : Bool
     empiricalAdequacyImpliesPermissionIsFalse : empiricalAdequacyImpliesPermission ≡ false
     correctAttributionImpliesArbitraryReuse : Bool
@@ -127,4 +145,5 @@ record SituatedClaimAuthorityBoundary : Set where
 
 canonicalSituatedClaimAuthorityBoundary : SituatedClaimAuthorityBoundary
 canonicalSituatedClaimAuthorityBoundary =
-  situatedClaimAuthorityBoundary false refl false refl false refl false refl
+  situatedClaimAuthorityBoundary
+    false refl false refl false refl false refl false refl false refl
