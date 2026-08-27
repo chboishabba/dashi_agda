@@ -17,3 +17,7 @@ import DASHI.Biology.TarotEverything
 import DASHI.Biology.PsychogeographyEverything
 import DASHI.Biology.TrumpPsychogeographyEverything
 import DASHI.Biology.AliceBrownEpistemicGovernanceEverything
+
+-- Cross-branch evidence ledger for the #618 processing-geometry programme.
+-- This branch records sources/boundaries only; it does not duplicate #618.
+import DASHI.Biology.NeurodivergentHoldingTensionSourceBoundaryExact
