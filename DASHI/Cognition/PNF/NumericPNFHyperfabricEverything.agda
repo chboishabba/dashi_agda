@@ -68,10 +68,8 @@ import DASHI.Cognition.PNF.DependencyDerivedOccurrenceIdentityExact
 import DASHI.Cognition.PNF.ConsumerSufficientComplexityExact
 import DASHI.Cognition.PNF.OwnerFibreReductionComplexityExact
 import DASHI.Cognition.PNF.SignatureBucketReductionFactorizationExact
-import DASHI.Cognition.PNF.DependencyIndexedOwnerWakeupExact
 import DASHI.Cognition.PNF.SparseFrontierTopologyExact
 import DASHI.Cognition.PNF.IndependentSentenceAdmissionExact
-import DASHI.Cognition.PNF.ProducerNativeDemandProjectionExact
 import DASHI.Cognition.PNF.OptimizationEconomyExact
 import DASHI.Cognition.PNF.OptimizationAdmissibilityUnderNondeterminismExact
 import DASHI.Cognition.PNF.OptimizationAdmissibilityUnderNondeterminismRegression
