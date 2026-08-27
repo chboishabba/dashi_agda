@@ -1,5 +1,9 @@
 module DASHI.Trading.DashiTradeDreamRegression where
 
+open import Agda.Builtin.Bool using (false)
+open import Agda.Builtin.Equality using (_≡_)
+
+import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Trading.PermissionKernel as Legacy
 import DASHI.Trading.DashiTradeDreamOptionConeExact as Dream
 
@@ -16,7 +20,7 @@ sameProposalWitness :
 sameProposalWitness = Dream.sameLongProposal
 
 buyNonFactorabilityWitness :
-  Dream.INF.NonFactorabilityWitness
+  INF.NonFactorabilityWitness
     Dream.candidateObserver
     (λ state → Dream.actionAvailable state Dream.buyAction)
 buyNonFactorabilityWitness = Dream.buyViabilityDoesNotFactorThroughDirection
