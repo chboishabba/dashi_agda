@@ -21,8 +21,9 @@ module DASHI.Physics.Closure.NSTriadKNExternalRealityPairingNoFreeCancellationRo
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong)
 
+import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadSymmetry as Symmetry
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
@@ -33,8 +34,7 @@ realityConjugatePairIsDoubleBaseTransfer :
   ∀ {r} {F : C3.RealField r}
     (E : C3.IntegerEmbedding F)
     (I : C3.ModeInverseSquare F E)
-    (velocity : DASHI.Physics.Closure.NSIntegerFourierLattice.FourierMode →
-      C3.Complex3 F) →
+    (velocity : Z3.FourierMode → C3.Complex3 F) →
   Audit.RealityCondition velocity →
   Audit.DivergenceFreeCondition E velocity →
   (tau : Physical.PhysicalTriadIncidence) →
