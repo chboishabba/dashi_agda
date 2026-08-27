@@ -31,6 +31,7 @@ module DASHI.Governance.TypedBranchingOptionConeBridgeExact where
 open import DASHI.Core.Prelude
 open import Data.Empty using (⊥-elim)
 
+import DASHI.Core.FiniteTypedBranchingKernelExact as Kernel
 import DASHI.Core.FiniteTypedBranchingReachabilityBridgeExact as Branch
 import DASHI.Core.AdmissibleReachability as Reach
 import DASHI.Governance.OptionConeCoercionExact as Cone
@@ -89,16 +90,16 @@ canonicalBranchGoalConeContraction =
 ------------------------------------------------------------------------
 
 sameLocalBranchMass :
-  Branch.Kernel.rowScaledMass Branch.routeKernel Branch.escapeStart
-  ≡ Branch.Kernel.rowScaledMass Branch.routeKernel Branch.trapStart
+  Kernel.rowScaledMass Branch.routeKernel Branch.escapeStart
+  ≡ Kernel.rowScaledMass Branch.routeKernel Branch.trapStart
 sameLocalBranchMass = refl
 
 record EqualLocalMassDifferentOptionCone : Set₁ where
   constructor equal-local-mass-different-option-cone
   field
     sameMass :
-      Branch.Kernel.rowScaledMass Branch.routeKernel Branch.escapeStart
-      ≡ Branch.Kernel.rowScaledMass Branch.routeKernel Branch.trapStart
+      Kernel.rowScaledMass Branch.routeKernel Branch.escapeStart
+      ≡ Kernel.rowScaledMass Branch.routeKernel Branch.trapStart
     availableOnEscapeSide :
       Cone.Available branchGoalCone Branch.escapeStart reachEscapeGoal
     unavailableOnTrapSide :
