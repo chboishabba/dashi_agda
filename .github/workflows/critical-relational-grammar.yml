@@ -1,0 +1,103 @@
+name: Critical relational grammar Agda check
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Core/RelationalRoleGrammarExact.agda'
+      - 'DASHI/Core/CriticalRelationalGrammarSourceRegistryExact.agda'
+      - 'DASHI/Core/LacanFregeTernaryRoleChartExact.agda'
+      - 'DASHI/Core/LacanS2RoleSeparationExact.agda'
+      - 'DASHI/Core/IrigarayLabialRelationalCarrierExact.agda'
+      - 'DASHI/Core/CriticalThirdnessRoleGrammarExact.agda'
+      - 'DASHI/Core/BadiouVoidCountAsOneBoundaryExact.agda'
+      - 'DASHI/Core/LugonesPurityCurdlingNonfactorabilityExact.agda'
+      - 'DASHI/Core/SocialEcologyHierarchyProjectionBoundaryExact.agda'
+      - 'DASHI/Core/CriticalSocialEcologyObserverRegimeExact.agda'
+      - 'DASHI/Core/ZeroValueFibreNontrivialityExact.agda'
+      - 'DASHI/Core/CriticalRelationalGrammarCapstoneExact.agda'
+      - 'DASHI/Core/Everything.agda'
+      - '.github/workflows/critical-relational-grammar.yml'
+
+concurrency:
+  group: critical-relational-grammar-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  focused-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
+      - name: Restore Agda 2.9 shadow cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ runner.temp }}/dashi-agda29
+          key: critical-relational-grammar-agda29-${{ runner.os }}-86a1179-${{ hashFiles('scripts/run_agda29_parallel_check.sh') }}
+      - name: Trust scan critical relational grammar tranche
+        shell: bash
+        run: |
+          set -euo pipefail
+          files=(
+            DASHI/Core/RelationalRoleGrammarExact.agda
+            DASHI/Core/CriticalRelationalGrammarSourceRegistryExact.agda
+            DASHI/Core/LacanFregeTernaryRoleChartExact.agda
+            DASHI/Core/LacanS2RoleSeparationExact.agda
+            DASHI/Core/IrigarayLabialRelationalCarrierExact.agda
+            DASHI/Core/CriticalThirdnessRoleGrammarExact.agda
+            DASHI/Core/BadiouVoidCountAsOneBoundaryExact.agda
+            DASHI/Core/LugonesPurityCurdlingNonfactorabilityExact.agda
+            DASHI/Core/SocialEcologyHierarchyProjectionBoundaryExact.agda
+            DASHI/Core/CriticalSocialEcologyObserverRegimeExact.agda
+            DASHI/Core/ZeroValueFibreNontrivialityExact.agda
+            DASHI/Core/CriticalRelationalGrammarCapstoneExact.agda
+          )
+          if grep -nE '\b(postulate|{-# OPTIONS --allow-unsolved-metas #-}|sorry|admit)\b' "${files[@]}"; then
+            echo 'Forbidden trust-boundary token found in critical relational grammar tranche.' >&2
+            exit 1
+          fi
+      - name: Check focused critical relational grammar roots with Agda 2.9
+        id: focused
+        shell: bash
+        run: |
+          set +e
+          (
+            set -euo pipefail
+            export AGDA_FLAKE="github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin"
+            export DASHI_REPO_ROOT="$GITHUB_WORKSPACE"
+            export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
+            export AGDA_LOG_PATH="$GITHUB_WORKSPACE/agda-critical-relational-grammar-check.log"
+            export AGDA_JOBS=2
+            targets=(
+              DASHI/Core/LacanS2RoleSeparationExact.agda
+              DASHI/Core/CriticalThirdnessRoleGrammarExact.agda
+              DASHI/Core/BadiouVoidCountAsOneBoundaryExact.agda
+              DASHI/Core/LugonesPurityCurdlingNonfactorabilityExact.agda
+              DASHI/Core/SocialEcologyHierarchyProjectionBoundaryExact.agda
+              DASHI/Core/CriticalSocialEcologyObserverRegimeExact.agda
+              DASHI/Core/ZeroValueFibreNontrivialityExact.agda
+              DASHI/Core/CriticalRelationalGrammarCapstoneExact.agda
+              DASHI/Core/Everything.agda
+            )
+            scripts/run_agda29_parallel_check.sh "${targets[@]}"
+          ) > agda-critical-relational-grammar-check.log 2>&1
+          status=$?
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          tail -n 340 agda-critical-relational-grammar-check.log
+          exit 0
+      - name: Upload focused Agda log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: critical-relational-grammar-agda-log
+          path: agda-critical-relational-grammar-check.log
+          if-no-files-found: error
+      - name: Fail on Agda error
+        if: steps.focused.outputs.status != '0'
+        run: exit 1
