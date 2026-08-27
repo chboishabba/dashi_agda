@@ -131,12 +131,12 @@ positiveBackgroundCancellation unit leftBackground =
   trans
     (sym (Jet.quaternionMultiplyAssociative u (uInv Jet.*q y) u))
     (trans
-      (cong (_Jet.*q u)
+      (cong (λ selected → selected Jet.*q u)
         (sym (Jet.quaternionMultiplyAssociative u uInv y)))
       (trans
         (cong (λ selected → (selected Jet.*q y) Jet.*q u)
           (valueInverse unit))
-        (cong (_Jet.*q u) (oneMultiplyLeft y))))
+        (cong (λ selected → selected Jet.*q u) (oneMultiplyLeft y))))
 
 inverseBackgroundCancellation :
   ∀ unit leftBackground →
@@ -151,7 +151,7 @@ inverseBackgroundCancellation unit leftBackground =
   trans
     (Jet.quaternionMultiplyAssociative (uInv Jet.*q y) u uInv)
     (trans
-      (cong ((uInv Jet.*q y) Jet.*q_)
+      (cong (λ selected → (uInv Jet.*q y) Jet.*q selected)
         (valueInverse unit))
       (multiplyOneRight (uInv Jet.*q y)))
 
@@ -204,10 +204,10 @@ positiveTrivializationMixedJetExact unit y x =
     background = positiveBackgroundCancellation unit y
     mixed = trans
       (sym (Jet.quaternionMultiplyAssociative u yR x))
-      (cong (_Jet.*q x) background)
+      (cong (λ selected → selected Jet.*q x) background)
     mixedSecond = trans
       (sym (Jet.quaternionMultiplyAssociative u yR (x Jet.*q x)))
-      (cong (_Jet.*q (x Jet.*q x)) background)
+      (cong (λ selected → selected Jet.*q (x Jet.*q x)) background)
   in
   mixedFactorJetExt refl background refl refl mixed mixedSecond
 
@@ -266,7 +266,8 @@ inverseMixedCancellation unit y x =
   trans
     (Jet.quaternionMultiplyAssociative x
       (rightTrivializedBackground unit y) (inverse unit))
-    (cong (x Jet.*q_) (inverseBackgroundCancellation unit y))
+    (cong (λ selected → x Jet.*q selected)
+      (inverseBackgroundCancellation unit y))
 
 inverseMixedSecondCancellation :
   ∀ unit leftBackground fluctuation →
