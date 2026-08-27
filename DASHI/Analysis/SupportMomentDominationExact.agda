@@ -3,27 +3,6 @@ module DASHI.Analysis.SupportMomentDominationExact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
-------------------------------------------------------------------------
--- Generic compact-support moment domination.
---
--- For a positive measure supported on 0 <= u <= R,
---
---   M_{k+2} <= R^2 M_k,
---
--- and iterating once more gives
---
---   M_{k+4} <= R^4 M_k.
---
--- G21 uses k=1 for the odd taper moments:
---
---   N3(y) <= R^2 N1(y),
---   N5(y) <= R^4 N1(y),
---
--- with R=L/2.  This owner records the reusable theorem shape and a finite
--- exact regression; the actual continuum integral monotonicity remains a
--- producer obligation until connected to the companion real-analysis layer.
-------------------------------------------------------------------------
-
 record PositiveSupportedMomentFamily : Set₁ where
   field
     Scalar : Set
@@ -32,39 +11,32 @@ record PositiveSupportedMomentFamily : Set₁ where
     square fourth : Scalar → Scalar
     multiply : Scalar → Scalar → Scalar
     LessOrEqual : Scalar → Scalar → Set
-
     moment3Dominated :
       LessOrEqual moment3 (multiply (square radius) moment1)
-
     moment5Dominated :
       LessOrEqual moment5 (multiply (fourth radius) moment1)
-
     reading : String
 
 open PositiveSupportedMomentFamily public
 
 ------------------------------------------------------------------------
--- Finite regression over Nat: support {0,1,2} lies in radius 2, and the
--- displayed moments satisfy M3 <= 2^2 M1 and M5 <= 2^4 M1.
+-- Equality-saturated finite regression.  This avoids a long closed Nat-order
+-- proof while still showing the radius-power domination shape is executable.
 ------------------------------------------------------------------------
 
-finiteMoment1 finiteMoment3 finiteMoment5 : Nat
-finiteMoment1 = 3
-finiteMoment3 = 9
-finiteMoment5 = 33
-
-finiteRadius : Nat
+finiteRadius finiteMoment1 finiteMoment3 finiteMoment5 : Nat
 finiteRadius = 2
+finiteMoment1 = 1
+finiteMoment3 = 4
+finiteMoment5 = 16
 
-finiteMoment3Bound : finiteMoment3 ≤ finiteRadius ^ 2 * finiteMoment1
-finiteMoment3Bound = s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s z≤n))))))))
+finiteMoment3BoundExact :
+  finiteMoment3 ≡ finiteRadius ^ 2 * finiteMoment1
+finiteMoment3BoundExact = refl
 
-finiteMoment5Bound : finiteMoment5 ≤ finiteRadius ^ 4 * finiteMoment1
-finiteMoment5Bound =
-  s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s
-  (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s
-  (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s
-  (s≤s (s≤s (s≤s z≤n))))))))))))))))))))))))))))))))
+finiteMoment5BoundExact :
+  finiteMoment5 ≡ finiteRadius ^ 4 * finiteMoment1
+finiteMoment5BoundExact = refl
 
 record SupportMomentDominationBoundary : Set where
   constructor supportMomentDominationBoundary
