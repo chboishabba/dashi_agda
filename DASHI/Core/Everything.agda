@@ -4,7 +4,7 @@ module DASHI.Core.Everything where
 
 import DASHI.Core.FallacyObstructionEverything
 
--- History-conditioned decision / relational compression core.
+-- History-conditioned decision / relational compression / observer-gain core.
 import DASHI.Core.HistoryConditionedChoiceExact
 import DASHI.Core.RelationalTensionCompressionExact
 import DASHI.Core.RelationalObserverGainExact
