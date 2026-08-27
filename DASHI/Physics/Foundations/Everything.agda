@@ -29,6 +29,7 @@ import DASHI.Physics.Foundations.HistoryWeightFiltrationExact
 import DASHI.Physics.Foundations.FiniteHistoryFunctionalExact
 import DASHI.Physics.Foundations.HistoryLocalActionAccumulationExact
 import DASHI.Physics.Foundations.TransitionActionNonseparabilityExact
+import DASHI.Physics.Foundations.ActionPhaseLiftBoundaryExact
 import DASHI.Physics.Foundations.BidirectionallyAdmissibleHistoryFibreExact
 import DASHI.Physics.Foundations.TrajectoryProjectionCausticExact
 import DASHI.Physics.Foundations.CoupledTrajectoryCoherenceExact
