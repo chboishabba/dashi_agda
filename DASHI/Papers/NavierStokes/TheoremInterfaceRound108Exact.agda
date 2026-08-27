@@ -11,9 +11,10 @@ module DASHI.Papers.NavierStokes.TheoremInterfaceRound108Exact where
 --
 -- The repo-native physical Round106 normal-form lane also proves that adverse
 -- episodes retain SIGNED forcing, so replacing the network forcing by its
--- positive part is not required.  The live nonlinear target is therefore a
--- literal signed self/external Waleffe forcing mechanism with a genuine
--- cutoff-uniform endpoint or integrable-remainder payment.
+-- positive part is not required.  It further exposes the SELF phase forcing as
+-- an exact signed projected-cross square-mass term.  The live nonlinear target
+-- is therefore only the genuinely EXTERNAL cross-triad forcing remainder,
+-- with a cutoff-uniform endpoint or integrable-remainder payment.
 --
 -- The theorem-sized countdown remains two.  No Clay promotion is asserted.
 ------------------------------------------------------------------------
@@ -38,9 +39,17 @@ round108PaperDirectGapWeightedQuarticSchurRequired : Bool
 round108PaperDirectGapWeightedQuarticSchurRequired =
   R108.round108DirectGapWeightedQuarticSchurRequired
 
-round108PaperLiteralSignedSelfExternalWaleffeForcingMechanismClosed : Bool
-round108PaperLiteralSignedSelfExternalWaleffeForcingMechanismClosed =
-  R108.round108PhysicalLiteralSignedSelfExternalWaleffeForcingMechanismClosed
+round108PaperSelfWaleffePhaseProjectedCrossMassClosed : Bool
+round108PaperSelfWaleffePhaseProjectedCrossMassClosed =
+  R108.round108SelfWaleffePhaseProjectedCrossMassClosed
+
+round108PaperSelfPhaseMayBeTaxedAsArbitraryExternalForcing : Bool
+round108PaperSelfPhaseMayBeTaxedAsArbitraryExternalForcing =
+  R108.round108SelfPhaseMayBeTaxedAsArbitraryExternalForcing
+
+round108PaperExternalCrossTriadForcingRemainderPaymentClosed : Bool
+round108PaperExternalCrossTriadForcingRemainderPaymentClosed =
+  R108.round108PhysicalExternalCrossTriadForcingRemainderPaymentClosed
 
 round108PaperPositiveWaleffeNetworkForcingBudgetClosed : Bool
 round108PaperPositiveWaleffeNetworkForcingBudgetClosed =
@@ -70,9 +79,17 @@ round108PaperDirectGapWeightedQuarticSchurRequiredIsFalse :
   round108PaperDirectGapWeightedQuarticSchurRequired ≡ false
 round108PaperDirectGapWeightedQuarticSchurRequiredIsFalse = refl
 
-round108PaperLiteralSignedSelfExternalWaleffeForcingMechanismClosedIsFalse :
-  round108PaperLiteralSignedSelfExternalWaleffeForcingMechanismClosed ≡ false
-round108PaperLiteralSignedSelfExternalWaleffeForcingMechanismClosedIsFalse = refl
+round108PaperSelfWaleffePhaseProjectedCrossMassClosedIsTrue :
+  round108PaperSelfWaleffePhaseProjectedCrossMassClosed ≡ true
+round108PaperSelfWaleffePhaseProjectedCrossMassClosedIsTrue = refl
+
+round108PaperSelfPhaseMayBeTaxedAsArbitraryExternalForcingIsFalse :
+  round108PaperSelfPhaseMayBeTaxedAsArbitraryExternalForcing ≡ false
+round108PaperSelfPhaseMayBeTaxedAsArbitraryExternalForcingIsFalse = refl
+
+round108PaperExternalCrossTriadForcingRemainderPaymentClosedIsFalse :
+  round108PaperExternalCrossTriadForcingRemainderPaymentClosed ≡ false
+round108PaperExternalCrossTriadForcingRemainderPaymentClosedIsFalse = refl
 
 round108PaperPositiveWaleffeNetworkForcingBudgetClosedIsFalse :
   round108PaperPositiveWaleffeNetworkForcingBudgetClosed ≡ false
