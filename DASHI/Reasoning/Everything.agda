@@ -5,3 +5,7 @@ module DASHI.Reasoning.Everything where
 import DASHI.Reasoning.RelationalEverything
 import DASHI.Reasoning.TernarySynthesisOrbitWeldEverything
 import DASHI.Reasoning.PathologicEverything
+
+-- Source-bounded metaphor-as-structure / task-relative compression layer.
+import DASHI.Reasoning.StructuralMetaphorSourceRegistryExact
+import DASHI.Reasoning.StructuralMetaphorTaskCompressionExact
