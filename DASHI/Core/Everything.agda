@@ -87,3 +87,5 @@ import DASHI.Core.HistoryConditionedChoiceExact
 import DASHI.Core.RelationalTensionCompressionExact
 import DASHI.Core.RelationalObserverGainExact
 import DASHI.Core.RelationalHistoryFabricExact
+import DASHI.Core.ContextualConversionNonfactorabilityExact
+import DASHI.Core.ThresholdResidualTrajectoryGeometryExact
