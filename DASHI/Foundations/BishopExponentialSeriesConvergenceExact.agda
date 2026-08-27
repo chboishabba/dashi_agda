@@ -23,7 +23,7 @@ open import Data.Nat.Base as ℕ using (NonZero; _≤_; _!; z≤n)
 import Data.Nat.Properties as ℕP
 open import Data.Product.Base using (_,_; proj₁; proj₂)
 open import Data.Rational.Unnormalised as ℚ using
-  (ℚᵘ; 0ℚᵘ; 1ℚᵘ; _/_; _*_; _≤_; NonNegative)
+  (ℚᵘ; 0ℚᵘ; 1ℚᵘ; _/_; _*_; _≤_; _≃_)
 import Data.Rational.Unnormalised.Properties as ℚP
 open import Relation.Binary.PropositionalEquality using (sym)
 
@@ -51,11 +51,6 @@ expMagnitudeTerm x n =
     (embed (inverseFactorial n))
     (BishopReal.∣_∣ (BishopReal.pow x n))
 
-inverseFactorialNonnegative : ∀ n → ℚ.NonNegative (inverseFactorial n)
-inverseFactorialNonnegative n =
-  ℚ.nonNegative
-    (ℚP.nonNegative⁻¹ (inverseFactorial n))
-
 embeddedInverseFactorialNonnegative : ∀ n →
   BishopReal.NonNegative (embed (inverseFactorial n))
 embeddedInverseFactorialNonnegative n =
@@ -80,28 +75,29 @@ expTermAbsIsMagnitude x n =
     (BishopP.∣x*y∣≃∣x∣*∣y∣
       (BishopReal.pow x n)
       (embed (inverseFactorial n)))
-    (let open BishopP.ℝ-Solver
-     in solve 2
-       (λ power coefficient →
-         (power ⊗ coefficient) ⊜ (coefficient ⊗ power))
-       BishopP.≃-refl
-       (BishopReal.∣_∣ (BishopReal.pow x n))
-       (BishopReal.∣_∣ (embed (inverseFactorial n))))
-    |> BishopP.≃-trans
+    (BishopP.≃-trans
+      (let open BishopP.ℝ-Solver
+       in solve 2
+         (λ power coefficient →
+           (power ⊗ coefficient) ⊜ (coefficient ⊗ power))
+         BishopP.≃-refl
+         (BishopReal.∣_∣ (BishopReal.pow x n))
+         (BishopReal.∣_∣ (embed (inverseFactorial n))))
       (BishopP.*-congʳ
         (BishopP.0≤x⇒∣x∣≃x
           (BishopP.nonNegx⇒0≤x
-            (embeddedInverseFactorialNonnegative n))))
-  where
-  infixl 0 _|>_
-  _|>_ : ∀ {A B : Set} → A → (A → B) → B
-  value |> f = f value
+            (embeddedInverseFactorialNonnegative n)))))
 
 inverseFactorialSuccessor : ∀ n →
   inverseFactorial (suc n)
   ℚ.≃
   ((+ 1 / suc n) ℚ.* inverseFactorial n)
 inverseFactorialSuccessor n =
+  let
+    instance
+      factorialNonZero : NonZero (n !)
+      factorialNonZero = ℕ.≢-nonZero (ℕP._!≢0 n)
+  in
   ℚP.≃-sym
     (ℚP.≃-reflexive
       (Factorial.positiveUnitFractionProduct
@@ -133,26 +129,22 @@ magnitudeSuccessorFactorization x n =
     (BishopP.*-cong
       (embeddedInverseFactorialSuccessor n)
       (BishopSequence.∣xⁿ∣≃∣x∣ⁿ x (suc n)))
-    (let open BishopP.ℝ-Solver
-     in solve 4
-       (λ reciprocal coefficient oldPower absx →
-         ((reciprocal ⊗ coefficient) ⊗ (oldPower ⊗ absx))
-         ⊜ ((absx ⊗ reciprocal) ⊗ (coefficient ⊗ oldPower)))
-       BishopP.≃-refl
-       (embed (+ 1 / suc n))
-       (embed (inverseFactorial n))
-       (BishopReal.pow (BishopReal.∣_∣ x) n)
-       (BishopReal.∣_∣ x))
-    |> BishopP.≃-trans
+    (BishopP.≃-trans
+      (let open BishopP.ℝ-Solver
+       in solve 4
+         (λ reciprocal coefficient oldPower absx →
+           ((reciprocal ⊗ coefficient) ⊗ (oldPower ⊗ absx))
+           ⊜ ((absx ⊗ reciprocal) ⊗ (coefficient ⊗ oldPower)))
+         BishopP.≃-refl
+         (embed (+ 1 / suc n))
+         (embed (inverseFactorial n))
+         (BishopReal.pow (BishopReal.∣_∣ x) n)
+         (BishopReal.∣_∣ x))
       (BishopP.*-cong
         BishopP.≃-refl
         (BishopP.*-congˡ
           (BishopP.≃-symm
-            (BishopSequence.∣xⁿ∣≃∣x∣ⁿ x n))))
-  where
-  infixl 0 _|>_
-  _|>_ : ∀ {A B : Set} → A → (A → B) → B
-  value |> f = f value
+            (BishopSequence.∣xⁿ∣≃∣x∣ⁿ x n)))))
 
 half : BishopReal.ℝ
 half = embed (+ 1 / 2)
@@ -184,19 +176,28 @@ ratioRationalBelowHalf :
   2 * bound ≤ suc n →
   (+ bound / suc n) ℚ.≤ (+ 1 / 2)
 ratioRationalBelowHalf {bound} {n} twoBound≤sucN =
-  ℚ.*≤*
-    (ℤ.+≤+
-      (ℕP.≤-reflexive
-        (let open ℕP.≤-Reasoning
-         in begin
-           bound * 2
-             ≡⟨ ℕP.*-comm bound 2 ⟩
-           2 * bound
-             ≤⟨ twoBound≤sucN ⟩
-           suc n
-             ≡⟨ sym (ℕP.*-identityʳ (suc n)) ⟩
-           suc n * 1
-         ∎)))
+  ℚ.*≤* (ℤ.+≤+ cross)
+  where
+  cross : bound * 2 ≤ suc n * 1
+  cross =
+    let open ℕP.≤-Reasoning
+    in begin
+      bound * 2
+        ≡⟨ ℕP.*-comm bound 2 ⟩
+      2 * bound
+        ≤⟨ twoBound≤sucN ⟩
+      suc n
+        ≡⟨ sym (ℕP.*-identityʳ (suc n)) ⟩
+      suc n * 1
+    ∎
+
+scaledReciprocalEquivalent :
+  (bound n : Nat) →
+  ((+ bound / 1) ℚ.* (+ 1 / suc n))
+  ℚ.≃
+  (+ bound / suc n)
+scaledReciprocalEquivalent bound n =
+  ℚP.≃-reflexive refl
 
 magnitudeRatioBelowHalf :
   ∀ x n →
@@ -227,6 +228,14 @@ magnitudeRatioBelowHalf x n cutoff =
       BishopP.*-monoˡ-≤-nonNeg
         (BishopP.<⇒≤ (magnitudeBelowNaturalBound x))
         reciprocalNN
+
+    rationalProductBound :
+      ((+ bound / 1) ℚ.* (+ 1 / suc n))
+      ℚ.≤ (+ 1 / 2)
+    rationalProductBound =
+      ℚP.≤-respˡ-≃
+        (scaledReciprocalEquivalent bound n)
+        (ratioRationalBelowHalf cutoff)
   in
   BishopP.≤-trans raw
     (BishopP.≤-respʳ-≃
@@ -237,10 +246,7 @@ magnitudeRatioBelowHalf x n cutoff =
       (BishopP.p≤q⇒p⋆≤q⋆
         ((+ bound / 1) ℚ.* (+ 1 / suc n))
         (+ 1 / 2)
-        (ℚP.≤-respˡ-≃
-          (ℚP.≃-sym
-            (ℚP.≃-reflexive refl))
-          (ratioRationalBelowHalf cutoff))))
+        rationalProductBound))
 
 expMagnitudeSuccessorRatioHalf :
   ∀ x n →
@@ -273,7 +279,6 @@ expAbsoluteSeriesConvergent : ∀ x →
 expAbsoluteSeriesConvergent x =
   let magnitudeConvergent = expMagnitudeSeriesConvergent x
       magnitudeLimit = proj₁ magnitudeConvergent
-      magnitudeConverges = proj₂ magnitudeConvergent
       partialSumsEquivalent =
         SeriesExt.seriesPartialSumsCongruent
           (expTermAbsIsMagnitude x)
