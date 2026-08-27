@@ -2,18 +2,6 @@ module DASHI.Foundations.Wette1969CriticalPremiseConcreteProducerChainExact wher
 
 ------------------------------------------------------------------------
 -- CONCRETE HISTORICAL PRODUCER CHAIN FOR 9.3.24/25 PREMISES 1--3
---
--- The generic local-derivation owner permits arbitrary certified producer
--- traces.  This module instantiates that interface with the historically named
--- producers now recovered from Wette's table:
---
---   9.1.5  -> predicate-schema premise 1
---   8.3.2  -> distinct fresh variable-tuple premise 2
---   8.1.12 -> tuple-level freshness premise 3
---
--- Thus the first three critical premises are not merely "some earlier trace
--- outputs": they can be manufactured by the source rules Wette himself says
--- feed 9.3.24/25.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -21,6 +9,7 @@ open import DASHI.Core.Prelude
 import DASHI.Core.ProofCarryingRuleApplicationExact as PCRA
 import DASHI.Foundations.Wette1969HistoricalSignatureExact as Signature
 import DASHI.Foundations.Wette1969JudgementConstructorsExact as Judgment
+import DASHI.Foundations.Wette1969Rule9324x25PremiseTemplateExact as CriticalRule
 import DASHI.Foundations.Wette1969DependentTwoStageSubstitutionExact as TwoStage
 import DASHI.Foundations.Wette1969Rule828To9324x25DerivationExact as Weld
 import DASHI.Foundations.Wette1969Rule915PredicateProducerExact as Rule915
@@ -41,7 +30,7 @@ recursivePredicateOf stages =
 
 parametersOf :
   WordTerm → WordTerm → TwoStage.DependentTwoStageSubstitution →
-  DASHI.Foundations.Wette1969Rule9324x25PremiseTemplateExact.Rule9324x25PremiseParameters
+  CriticalRule.Rule9324x25PremiseParameters
 parametersOf = Weld.criticalPremiseParametersFromStages
 
 after915 :
