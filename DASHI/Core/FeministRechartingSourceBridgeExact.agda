@@ -136,9 +136,9 @@ positiveRechartingStrictlyRefinesInheritedChart :
   Observer.StrictRefinement
     flatten
     (Observer.pairObserver flatten (residual repair))
-positiveRechartingStrictlyRefinesInheritedChart repair =
+positiveRechartingStrictlyRefinesInheritedChart {flatten = flatten} repair =
   Observer.strictPairRefinement
-    _
+    flatten
     (residual repair)
     (left repair)
     (right repair)
@@ -204,9 +204,9 @@ record FeministRechartingBoundary : Set where
     positiveResidualUniquelySpecifiedBySources : Bool
     positiveResidualUniquelySpecifiedBySourcesIsFalse :
       positiveResidualUniquelySpecifiedBySources ≡ false
-    positiveRepairRequiresObservableRefinementWitness : Bool
-    positiveRepairRequiresObservableRefinementWitnessIsFalse :
-      positiveRepairRequiresObservableRefinementWitness ≡ false
+    positiveRepairIsMerelyASecondLabel : Bool
+    positiveRepairIsMerelyASecondLabelIsFalse :
+      positiveRepairIsMerelyASecondLabel ≡ false
 
 canonicalFeministRechartingBoundary : FeministRechartingBoundary
 canonicalFeministRechartingBoundary =
