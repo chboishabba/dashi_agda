@@ -14,7 +14,9 @@ module DASHI.Foundations.BishopRegularRationalApproximationExact where
 -- approximants without inventing another completion or real carrier.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
+open import Data.Integer.Base using (+_)
 open import Data.Nat.Base as Nat using (NonZero)
 open import Data.Rational.Unnormalised as ℚ using (ℚᵘ; _/_; _+_; _-_; _≤_; ∣_∣)
 
