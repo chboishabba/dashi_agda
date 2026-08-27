@@ -2,16 +2,19 @@ module DASHI.EverythingPartitionAsymptotics where
 
 ------------------------------------------------------------------------
 -- Focused typecheck/import surface for the Hardy--Ramanujan / Erdos / Newman
--- partition lane.  The finite layer now includes generic graded pointing,
+-- partition lane.  The finite layer includes generic graded pointing,
 -- proof-free exact key enumeration, strict deletion-fibre instantiation,
--- independent admissible residual normal form, exact residual permutations,
--- classical r=k*v residual enumeration/counting/completeness/uniqueness,
--- arbitrary-n factor-pair and sigma1 recurrences, and the rank-one Fock
--- occupation-grading bridge.  Bishop analysis remains downstream.
+-- independent/classical residual normal forms and exact permutations,
+-- arbitrary-n factor-pair and sigma1 recurrences, coarse finite growth
+-- envelopes, and the rank-one Fock occupation-grading bridge.
+--
+-- The first genuine analytic frontier is now typed explicitly over the concrete
+-- Bishop real/exp substrate by PartitionErdosBishopUpperMajorantBoundaryExact.
 ------------------------------------------------------------------------
 
 import DASHI.Mathematics.NumberTheory.FiniteWeightedReindexExact
 import DASHI.Mathematics.NumberTheory.FiniteProductEnumerationExact
+import DASHI.Mathematics.NumberTheory.FiniteProductCardinalityExact
 import DASHI.Mathematics.NumberTheory.FiniteAllFinEnumerationExact
 import DASHI.Mathematics.NumberTheory.FiniteDependentPairEnumerationExact
 import DASHI.Mathematics.NumberTheory.FiniteDependentPairCardinalityExact
@@ -25,10 +28,12 @@ import DASHI.Mathematics.NumberTheory.FinitePositiveFactorPairExact
 import DASHI.Mathematics.NumberTheory.GradedMultiplicityPointingResidualExact
 import DASHI.Mathematics.NumberTheory.GradedFamilyPointingResidualExact
 import DASHI.Mathematics.NumberTheory.FiniteDivisorSumExact
+import DASHI.Mathematics.NumberTheory.FiniteDivisorSumBoundExact
 import DASHI.Mathematics.NumberTheory.FiniteFactorPairDivisorSumExact
 import DASHI.Mathematics.NumberTheory.PartitionMarkedUnitEnumerationExact
 import DASHI.Mathematics.NumberTheory.PartitionMultiplicityCarrierExact
 import DASHI.Mathematics.NumberTheory.PartitionMultiplicityEnumerationExact
+import DASHI.Mathematics.NumberTheory.PartitionFiniteGrowthEnvelopeExact
 import DASHI.Mathematics.NumberTheory.PartitionMultiplicityDeletionMassExact
 import DASHI.Mathematics.NumberTheory.PartitionAmbientMultiplicityDeletionExact
 import DASHI.Mathematics.NumberTheory.PartitionAmbientMultiplicityNormalizationExact
@@ -53,6 +58,7 @@ import DASHI.Mathematics.NumberTheory.PartitionErdosClassicalAdmissibleMembershi
 import DASHI.Mathematics.NumberTheory.PartitionErdosClassicalFactorResidualUniqueExact
 import DASHI.Mathematics.NumberTheory.PartitionErdosClassicalFactorResidualPermutationExact
 import DASHI.Mathematics.NumberTheory.PartitionErdosDivisorSumRecurrenceExact
+import DASHI.Mathematics.NumberTheory.PartitionErdosBishopUpperMajorantBoundaryExact
 import DASHI.Mathematics.NumberTheory.PartitionErdosClassicalResidualExpansionExact
 import DASHI.Mathematics.NumberTheory.PartitionDivisorSumRecurrencePrefixExact
 import DASHI.Mathematics.NumberTheory.PartitionDivisorSumRegroupingExact
