@@ -1,28 +1,28 @@
 module DASHI.Core.DialecticalStageSpectrumExact where
 
 ------------------------------------------------------------------------
--- DIALECTICAL STAGE SPECTRUM: HISTORICAL / PROVENANCE-CARRYING OWNER
+-- DIALECTICAL STAGE SPECTRUM: HISTORICAL READING OF THE CANONICAL ATLAS
 --
--- Source basis:
---   User-supplied DASHI origin/reconstruction notes, including the recovered
---   2025-2026 "nongin"/screen-splitting, probability-wave, ternary-refinement,
---   stage/basin, and 0--11 reconstruction material supplied in this thread.
+-- Historical provenance:
+--   user-supplied DASHI origin/reconstruction notes (2025--2026), including
+--   the recovered screen-splitting, probability-wave, ternary-refinement,
+--   stage/basin, and 0--11 material discussed in the 2026-08-26/27 tranche.
 --
--- This module is intentionally NOT sourced to Hegel, Freud, Lacan, p-adic
--- theory, dynamical systems, or the later DASHI motif classifier. Those may
--- motivate later bridges, but the 0--11 vocabulary is historical DASHI
--- provenance and must not be retroactively attributed to external literature.
+-- Canonical repository authority:
+--   DASHI.Foundations.StageAtlasZeroToEleven
+--   DASHI.Foundations.StageValuationBundleAtlas
 --
--- Strong recovered source-level distinctions:
---   * the 0--11 stage spectrum is not the M1--M10 motif enum;
---   * zero/neutral can mean "current resolution insufficient: refine";
---   * higher stages are representational/meta-level roles, not ranks of people;
---   * stage 9 is closure within a frame; stage 10 is an explicit lift/new axis;
---   * stage 11 is kept as a post-lift/nested-extension role, not M11.
+-- This module deliberately DOES NOT introduce a second 0--11 carrier or a
+-- second canonical operational stage-role map.  The merged Foundations atlas
+-- remains authoritative.  What is added here is a provenance-carrying
+-- historical/interpretive reading over that already-existing carrier.
 --
--- Intermediate stage names below are deliberately functional and conservative.
--- They preserve a total finite carrier without claiming that every historical
--- note used one immutable glossary for every index.
+-- Important boundaries:
+--   * canonical 0--11 atlas != M1--M10 motif classifier;
+--   * historical reading != canonical operational stage role;
+--   * stage index != human worth/rank or empirical psychometric scale;
+--   * zero/neutral can retain the recovered "refine deeper" reading;
+--   * stage 11 is not an invented motif M11.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false)
@@ -31,33 +31,47 @@ open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
+import DASHI.Foundations.StageAtlasZeroToEleven as Atlas
+import DASHI.Foundations.StageValuationBundleAtlas as Canonical
+
 ------------------------------------------------------------------------
--- Canonical finite stage carrier.
+-- Reuse the merged canonical carrier exactly.
 ------------------------------------------------------------------------
 
-data DialecticalStage : Set where
-  stage0 stage1 stage2 stage3 stage4 stage5
-  stage6 stage7 stage8 stage9 stage10 stage11 : DialecticalStage
+DialecticalStage : Set
+DialecticalStage = Atlas.StageAtlasZeroToEleven
+
+stage0 stage1 stage2 stage3 stage4 stage5 : DialecticalStage
+stage6 stage7 stage8 stage9 stage10 stage11 : DialecticalStage
+stage0 = Atlas.atlas-0
+stage1 = Atlas.atlas-1
+stage2 = Atlas.atlas-2
+stage3 = Atlas.atlas-3
+stage4 = Atlas.atlas-4
+stage5 = Atlas.atlas-5
+stage6 = Atlas.atlas-6
+stage7 = Atlas.atlas-7
+stage8 = Atlas.atlas-8
+stage9 = Atlas.atlas-9
+stage10 = Atlas.atlas-10
+stage11 = Atlas.atlas-11
 
 stageIndex : DialecticalStage → Nat
-stageIndex stage0 = 0
-stageIndex stage1 = 1
-stageIndex stage2 = 2
-stageIndex stage3 = 3
-stageIndex stage4 = 4
-stageIndex stage5 = 5
-stageIndex stage6 = 6
-stageIndex stage7 = 7
-stageIndex stage8 = 8
-stageIndex stage9 = 9
-stageIndex stage10 = 10
-stageIndex stage11 = 11
+stageIndex = Atlas.toNat
+
+stage10IndexIsTen : stageIndex stage10 ≡ 10
+stage10IndexIsTen = refl
+
+stage11IndexIsEleven : stageIndex stage11 ≡ 11
+stage11IndexIsEleven = refl
 
 ------------------------------------------------------------------------
--- Conservative semantic roles reconstructed from the supplied notes.
+-- Historical/interpretive roles.  These are NOT a replacement for
+-- Canonical.StageRole.  Their purpose is to retain versioned source meanings
+-- without mutating the merged operational atlas.
 ------------------------------------------------------------------------
 
-data StageRole : Set where
+data HistoricalStageRole : Set where
   presemanticVoid
   primitivePosition
   polarRelation
@@ -70,24 +84,52 @@ data StageRole : Set where
   closureWithinCurrentFrame
   newAxisLift
   nestedPostLiftExtension
-  : StageRole
+  : HistoricalStageRole
 
-stageRole : DialecticalStage → StageRole
-stageRole stage0 = presemanticVoid
-stageRole stage1 = primitivePosition
-stageRole stage2 = polarRelation
-stageRole stage3 = firstStructuredTriad
-stageRole stage4 = expandedRelation
-stageRole stage5 = hingeOrConjecture
-stageRole stage6 = explicitTension
-stageRole stage7 = firstEscapeBeyondStaticOpposition
-stageRole stage8 = unresolvedOrRecursiveRemainder
-stageRole stage9 = closureWithinCurrentFrame
-stageRole stage10 = newAxisLift
-stageRole stage11 = nestedPostLiftExtension
+StageRole : Set
+StageRole = HistoricalStageRole
+
+historicalStageRole : DialecticalStage → HistoricalStageRole
+historicalStageRole Atlas.atlas-0 = presemanticVoid
+historicalStageRole Atlas.atlas-1 = primitivePosition
+historicalStageRole Atlas.atlas-2 = polarRelation
+historicalStageRole Atlas.atlas-3 = firstStructuredTriad
+historicalStageRole Atlas.atlas-4 = expandedRelation
+historicalStageRole Atlas.atlas-5 = hingeOrConjecture
+historicalStageRole Atlas.atlas-6 = explicitTension
+historicalStageRole Atlas.atlas-7 = firstEscapeBeyondStaticOpposition
+historicalStageRole Atlas.atlas-8 = unresolvedOrRecursiveRemainder
+historicalStageRole Atlas.atlas-9 = closureWithinCurrentFrame
+historicalStageRole Atlas.atlas-10 = newAxisLift
+historicalStageRole Atlas.atlas-11 = nestedPostLiftExtension
+
+-- Backward-compatible name for existing PR consumers.  Its type makes clear
+-- that this is the historical reading, not Canonical.stageRole.
+stageRole : DialecticalStage → HistoricalStageRole
+stageRole = historicalStageRole
 
 ------------------------------------------------------------------------
--- Neutral/refinement semantics recovered from the ternary source material.
+-- Explicit bridge to the already-merged canonical operational roles.
+------------------------------------------------------------------------
+
+canonicalStage5Role :
+  Canonical.stageRole stage5 ≡ Canonical.decisionGateRole
+canonicalStage5Role = refl
+
+canonicalStage9Role :
+  Canonical.stageRole stage9 ≡ Canonical.systemicClosureBarrierRole
+canonicalStage9Role = refl
+
+canonicalStage10Role :
+  Canonical.stageRole stage10 ≡ Canonical.scalePromotedBundleRole
+canonicalStage10Role = refl
+
+canonicalStage11Role :
+  Canonical.stageRole stage11 ≡ Canonical.crossScaleFreshUnitRole
+canonicalStage11Role = refl
+
+------------------------------------------------------------------------
+-- Neutral/refinement semantics recovered from the historical ternary source.
 ------------------------------------------------------------------------
 
 data TernaryResolution : Set where
@@ -106,10 +148,10 @@ zeroMeansRefine = refl
 ------------------------------------------------------------------------
 
 data SystemKind : Set where
-  developmentalStageSystem operationalMotifSystem : SystemKind
+  canonicalStageSystem operationalMotifSystem : SystemKind
 
 differentSystemKinds :
-  developmentalStageSystem ≡ operationalMotifSystem → ⊥
+  canonicalStageSystem ≡ operationalMotifSystem → ⊥
 differentSystemKinds ()
 
 ------------------------------------------------------------------------
@@ -129,35 +171,35 @@ stage0Provenance =
   stage-provenance-entry stage0
     "user-supplied DASHI origin/reconstruction notes"
     "void / presemantic / unresolved field"
-    "historical reconstruction, not external scientific theorem"
+    "historical reading over canonical atlas; not external scientific theorem"
 
 stage5Provenance : StageProvenanceEntry
 stage5Provenance =
   stage-provenance-entry stage5
     "user-supplied DASHI threshold/stage notes"
     "hinge / conjecture / premature-collapse boundary"
-    "functional reconstruction; distinct from motif M5"
+    "historical reading; canonical operational role is decisionGateRole"
 
 stage9Provenance : StageProvenanceEntry
 stage9Provenance =
   stage-provenance-entry stage9
     "user-supplied DASHI closure/dimension-jump notes"
     "closure within current representational frame"
-    "historical stage role; distinct from motif M9"
+    "historical reading; canonical operational role is systemicClosureBarrierRole"
 
 stage10Provenance : StageProvenanceEntry
 stage10Provenance =
   stage-provenance-entry stage10
     "user-supplied DASHI +1 / dimension-jump notes"
     "new-axis lift after closure"
-    "historical stage role; later motif M10 is a separate operational consumer"
+    "historical reading; canonical operational role is scalePromotedBundleRole"
 
 stage11Provenance : StageProvenanceEntry
 stage11Provenance =
   stage-provenance-entry stage11
     "user-supplied DASHI 0-11 reconstruction notes"
     "nested/coalesced post-lift extension"
-    "kept fail-closed pending more exact June-note wording"
+    "historical reading; canonical operational role is crossScaleFreshUnitRole"
 
 ------------------------------------------------------------------------
 -- Scope boundary.
@@ -166,6 +208,12 @@ stage11Provenance =
 record DialecticalStageSpectrumBoundary : Set where
   constructor dialectical-stage-spectrum-boundary
   field
+    secondStageCarrierIntroducedHere : Bool
+    secondStageCarrierIntroducedHereIsFalse :
+      secondStageCarrierIntroducedHere ≡ false
+    historicalReadingReplacesCanonicalStageRole : Bool
+    historicalReadingReplacesCanonicalStageRoleIsFalse :
+      historicalReadingReplacesCanonicalStageRole ≡ false
     stageIsIntrinsicHumanRank : Bool
     stageIsIntrinsicHumanRankIsFalse : stageIsIntrinsicHumanRank ≡ false
     stageIndexIsEmpiricalPsychometricScale : Bool
@@ -183,6 +231,8 @@ record DialecticalStageSpectrumBoundary : Set where
 canonicalDialecticalStageSpectrumBoundary : DialecticalStageSpectrumBoundary
 canonicalDialecticalStageSpectrumBoundary =
   dialectical-stage-spectrum-boundary
+    false refl
+    false refl
     false refl
     false refl
     false refl
