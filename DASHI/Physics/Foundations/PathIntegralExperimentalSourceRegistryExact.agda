@@ -5,7 +5,7 @@ open import Agda.Builtin.String using (String)
 
 ------------------------------------------------------------------------
 -- SOURCE REGISTRY: path-integral experiments, stationary action,
--- diffraction/source-scale selection, and finite-source Kelvin wakes.
+-- diffraction/source-scale selection, caustics, and finite-source Kelvin wakes.
 --
 -- Author/title/venue/DOI metadata is explicit and every source carries a
 -- bounded role.  Experimental support for path-amplitude composition is not
@@ -68,6 +68,24 @@ bornWolfPrinciplesOfOptics = sourceReference
   1999
   "10.1017/CBO9781139644181"
   "classical optics authority for interference, diffraction, aperture-scale dependence, and stationary-phase/steepest-descent methods; supports the optics consumer role only and does not identify aperture diffraction with Kelvin-wake physics"
+
+berryUpstill1980 : SourceReference
+berryUpstill1980 = sourceReference
+  "Michael V. Berry; Colin Upstill"
+  "Catastrophe Optics: Morphologies of Caustics and Their Diffraction Patterns"
+  "Progress in Optics 18, 257-346"
+  1980
+  "10.1016/S0079-6638(08)70215-4"
+  "caustics and diffraction catastrophes as singular/focused structures of wave and ray families; supports the projection-caustic consumer without identifying every interference maximum with a geometric caustic"
+
+arnold1990Caustics : SourceReference
+arnold1990Caustics = sourceReference
+  "Vladimir I. Arnold"
+  "Singularities of Caustics and Wave Fronts"
+  "Mathematics and its Applications 62, Kluwer Academic Publishers"
+  1990
+  "10.1007/978-94-011-3330-2"
+  "mathematical source for caustic, wave-front and projection-singularity structure; not theorem authority for the finite DASHI toy projection unless separately instantiated"
 
 rabaudMoisy2013 : SourceReference
 rabaudMoisy2013 = sourceReference
