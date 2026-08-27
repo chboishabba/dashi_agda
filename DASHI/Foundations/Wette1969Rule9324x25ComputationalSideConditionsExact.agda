@@ -32,18 +32,14 @@ record Rule9324x25ComputationalSideConditions
   constructor rule9324x25ComputationalSideConditions
   field
     freshVariable : Signature.WordVariable
-
     freshTupleIsSchematicVariable :
       Rule.freshTupleWord parameters
         ≡ Signature.variableWordTerm freshVariable
-
     premise3Freshness :
       Eval.FreshVariableFor
         freshVariable
         (Rule.freshnessContextWord parameters)
-
     substitutionEnvironment : Eval.SubstitutionEnvironment
-
     premise4SchematicSubstitution :
       Eval.instantiateWordTerm
         substitutionEnvironment
@@ -79,15 +75,12 @@ record Wette1969Rule9324x25ComputationalBoundary : Set where
     premise3FreshnessFragmentNowComputationallyCertifiable : Bool
     premise3FreshnessFragmentNowComputationallyCertifiableIsTrue :
       premise3FreshnessFragmentNowComputationallyCertifiable ≡ true
-
     premise4SchematicSubstitutionFragmentNowComputationallyCertifiable : Bool
     premise4SchematicSubstitutionFragmentNowComputationallyCertifiableIsTrue :
       premise4SchematicSubstitutionFragmentNowComputationallyCertifiable ≡ true
-
     computationalCertificateIsAlreadyHistoricalDerivabilityProof : Bool
     computationalCertificateIsAlreadyHistoricalDerivabilityProofIsFalse :
       computationalCertificateIsAlreadyHistoricalDerivabilityProof ≡ false
-
     schematicFragmentIsAlreadyFullTuplePredicateSubstitution : Bool
     schematicFragmentIsAlreadyFullTuplePredicateSubstitutionIsFalse :
       schematicFragmentIsAlreadyFullTuplePredicateSubstitution ≡ false
