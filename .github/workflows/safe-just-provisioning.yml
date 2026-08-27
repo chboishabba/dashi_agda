@@ -17,6 +17,13 @@ on:
       - 'DASHI/Governance/Fanning2022ProjectionBoundaryExact.agda'
       - 'DASHI/Governance/Fanning2022ForecastAuthorityExact.agda'
       - 'DASHI/Governance/Fanning2022MethodsRegression.agda'
+      - 'DASHI/Governance/SafeJustProvisioningCapabilityFunctioningBridgeExact.agda'
+      - 'DASHI/Governance/SafeJustForecastConsumerAdequacyExact.agda'
+      - 'DASHI/Governance/SafeJustEpistemicResidualLedgerExact.agda'
+      - 'DASHI/Governance/Kallis2025ClaimAuthorityRoutingExact.agda'
+      - 'DASHI/Governance/SafeJustQualifiedClaimPromotionExact.agda'
+      - 'DASHI/Governance/SafeJustSocialIndicatorJusticeBoundaryExact.agda'
+      - 'DASHI/Governance/SafeJustConsumerAdequacyResidualBridgeExact.agda'
       - 'DASHI/Governance/Everything.agda'
       - '.github/workflows/safe-just-provisioning.yml'
   workflow_dispatch:
@@ -61,6 +68,13 @@ jobs:
             DASHI/Governance/Fanning2022ProjectionBoundaryExact.agda
             DASHI/Governance/Fanning2022ForecastAuthorityExact.agda
             DASHI/Governance/Fanning2022MethodsRegression.agda
+            DASHI/Governance/SafeJustProvisioningCapabilityFunctioningBridgeExact.agda
+            DASHI/Governance/SafeJustForecastConsumerAdequacyExact.agda
+            DASHI/Governance/SafeJustEpistemicResidualLedgerExact.agda
+            DASHI/Governance/Kallis2025ClaimAuthorityRoutingExact.agda
+            DASHI/Governance/SafeJustQualifiedClaimPromotionExact.agda
+            DASHI/Governance/SafeJustSocialIndicatorJusticeBoundaryExact.agda
+            DASHI/Governance/SafeJustConsumerAdequacyResidualBridgeExact.agda
           )
           if grep -nE '\b(postulate|{-# OPTIONS --allow-unsolved-metas #-}|sorry|admit)\b' "${files[@]}"; then
             echo 'Forbidden trust-boundary token found in safe-and-just provisioning tranche.' >&2
@@ -94,6 +108,13 @@ jobs:
               DASHI/Governance/Fanning2022ProjectionBoundaryExact.agda
               DASHI/Governance/Fanning2022ForecastAuthorityExact.agda
               DASHI/Governance/Fanning2022MethodsRegression.agda
+              DASHI/Governance/SafeJustProvisioningCapabilityFunctioningBridgeExact.agda
+              DASHI/Governance/SafeJustForecastConsumerAdequacyExact.agda
+              DASHI/Governance/SafeJustEpistemicResidualLedgerExact.agda
+              DASHI/Governance/Kallis2025ClaimAuthorityRoutingExact.agda
+              DASHI/Governance/SafeJustQualifiedClaimPromotionExact.agda
+              DASHI/Governance/SafeJustSocialIndicatorJusticeBoundaryExact.agda
+              DASHI/Governance/SafeJustConsumerAdequacyResidualBridgeExact.agda
               DASHI/Governance/Everything.agda
             )
             scripts/run_agda29_parallel_check.sh "${targets[@]}"
