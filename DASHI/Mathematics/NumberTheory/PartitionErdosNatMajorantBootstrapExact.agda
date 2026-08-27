@@ -18,15 +18,12 @@ module DASHI.Mathematics.NumberTheory.PartitionErdosNatMajorantBootstrapExact wh
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
-open import Data.Nat.Base using (_≤_; z≤n; s≤s)
+open import Data.Nat.Base using (_≤_)
 import Data.Nat.Properties as NatP
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import DASHI.Mathematics.NumberTheory.PartitionDivisorSumRegroupingExact as Regroup
 import DASHI.Mathematics.NumberTheory.PartitionErdosDivisorSumRecurrenceExact as Recurrence
-
-positiveNotZeroCase : suc zero ≤ zero → Regroup.partitionCount zero ≤ zero
-positiveNotZeroCase ()
 
 recurrenceMajorantBootstrap :
   (n majorant : Nat) →
