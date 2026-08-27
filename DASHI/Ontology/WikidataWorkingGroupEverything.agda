@@ -72,9 +72,15 @@ import DASHI.Cognition.PNF.BinaryBalancedTernaryAggregateLossExact
 -- Positive-description products versus dependent/fibred object construction.
 import DASHI.Ontology.DependentDefinitionFibreExact
 
+-- Concrete Wikidata warfare specimen: current P31/P279/auxiliary assertions,
+-- query-fibre failures, typed facets, and the independent warfare-form base.
+import DASHI.Ontology.WikidataWarfareFibreExact
+import DASHI.Ontology.WikidataWarfareSemanticTargetExact
+
 -- Public regressions.
 import DASHI.Core.ConsumerQuotientBaseChangeRegression
 import DASHI.Core.ContextIndexedObservationFibrationRegression
 import DASHI.Core.ResidualSymmetryCollisionFibreRegression
 import DASHI.Ontology.WikidataTernaryFibreRegression
+import DASHI.Ontology.WikidataWarfareFibreRegression
 import DASHI.Ontology.WikidataWorkingGroupRegression
