@@ -79,6 +79,24 @@ import DASHI.Governance.SafeJustSocialIndicatorJusticeBoundaryExact
 import DASHI.Governance.SafeJustConsumerAdequacyResidualBridgeExact
 import DASHI.Governance.SafeJustConsumerAdequacyResidualRegression
 
+-- Feminist economics / climate-justice cross-pollination.  The safe-and-just
+-- empirical carrier is retained while measurement boundaries, political
+-- contestability, responsibility/burden, category genesis and situated
+-- contribution are added as separately typed consumer coordinates.
+import DASHI.Governance.FeministClimateJusticeSourceRegistryExact
+import DASHI.Governance.WaringProductionBoundaryNonfactorabilityExact
+import DASHI.Governance.FeministSocialProvisioningInterpretationExact
+import DASHI.Governance.MacGregorPostPoliticalAuthorityBoundaryExact
+import DASHI.Governance.SultanaClimateColonialityResidualExact
+import DASHI.Governance.PacificWomenNegotiationContributionNonDescentExact
+import DASHI.Governance.VanuatuGenderedRecoveryObserverBoundaryExact
+import DASHI.Governance.YusoffGeologicCategoryAuthorityBoundaryExact
+import DASHI.Governance.MaathaiSituatedProvisioningAuthorityExact
+import DASHI.Governance.FeministClimateJusticeResidualBundleExact
+import DASHI.Governance.FeministClimateQualifiedPromotionExact
+import DASHI.Governance.FeministClimateJusticeSafeJustCapstoneExact
+import DASHI.Governance.FeministClimateJusticeSafeJustRegression
+
 -- Provenance-bearing policy routing, corrective reachability and source-bounded
 -- application surfaces assembled as one focused tranche.
 import DASHI.Governance.ProvenanceReflectionRoutingRound14
