@@ -25,6 +25,7 @@ on:
       - 'DASHI/Governance/Kallis2025ClaimAuthorityRoutingExact.agda'
       - 'DASHI/Governance/Kallis2025EvidenceAtlasExact.agda'
       - 'DASHI/Governance/SafeJustFeministClimateJusticeBoundaryExact.agda'
+      - 'DASHI/Governance/SafeJustFeministClimateJusticeRegression.agda'
       - 'DASHI/Governance/SafeJustQualifiedClaimPromotionExact.agda'
       - 'DASHI/Governance/SafeJustSocialIndicatorJusticeBoundaryExact.agda'
       - 'DASHI/Governance/SafeJustConsumerAdequacyResidualBridgeExact.agda'
@@ -80,6 +81,7 @@ jobs:
             DASHI/Governance/Kallis2025ClaimAuthorityRoutingExact.agda
             DASHI/Governance/Kallis2025EvidenceAtlasExact.agda
             DASHI/Governance/SafeJustFeministClimateJusticeBoundaryExact.agda
+            DASHI/Governance/SafeJustFeministClimateJusticeRegression.agda
             DASHI/Governance/SafeJustQualifiedClaimPromotionExact.agda
             DASHI/Governance/SafeJustSocialIndicatorJusticeBoundaryExact.agda
             DASHI/Governance/SafeJustConsumerAdequacyResidualBridgeExact.agda
@@ -124,6 +126,7 @@ jobs:
               DASHI/Governance/Kallis2025ClaimAuthorityRoutingExact.agda
               DASHI/Governance/Kallis2025EvidenceAtlasExact.agda
               DASHI/Governance/SafeJustFeministClimateJusticeBoundaryExact.agda
+              DASHI/Governance/SafeJustFeministClimateJusticeRegression.agda
               DASHI/Governance/SafeJustQualifiedClaimPromotionExact.agda
               DASHI/Governance/SafeJustSocialIndicatorJusticeBoundaryExact.agda
               DASHI/Governance/SafeJustConsumerAdequacyResidualBridgeExact.agda
