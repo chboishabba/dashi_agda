@@ -33,6 +33,7 @@ sources=(
   DASHI/Analysis/RiemannG21PoleQuotientedExteriorExact.agda
   DASHI/Analysis/RiemannG21CrossPollinationExact.agda
   DASHI/Analysis/RiemannG21Regression.agda
+  DASHI/Analysis/RiemannG22ReflectionHermitianDeskTestExact.agda
 )
 
 for source in "${sources[@]}"; do
@@ -93,10 +94,20 @@ require_pattern DASHI/Analysis/RiemannG21PoleQuotientedExteriorExact.agda 'stric
 require_pattern DASHI/Analysis/RiemannG21PoleQuotientedExteriorExact.agda 'directDeterminantMarginTransfer'
 require_pattern DASHI/Analysis/RiemannG21PoleQuotientedExteriorExact.agda 'riemannHypothesisDerivedIsFalse'
 
+require_pattern DASHI/Analysis/RiemannG22ReflectionHermitianDeskTestExact.agda 'defectZeroOnFixedLocus'
+require_pattern DASHI/Analysis/RiemannG22ReflectionHermitianDeskTestExact.agda 'diagonalSelfEnergyRetained'
+require_pattern DASHI/Analysis/RiemannG22ReflectionHermitianDeskTestExact.agda 'rawCoefficientHasSinhGrowth'
+require_pattern DASHI/Analysis/RiemannG22ReflectionHermitianDeskTestExact.agda 'normalizedCoefficientHasTanhShape'
+require_pattern DASHI/Analysis/RiemannG22ReflectionHermitianDeskTestExact.agda 'literalReflectedPrimeIdentityDerivedIsFalse'
+require_pattern DASHI/Analysis/RiemannG22ReflectionHermitianDeskTestExact.agda 'boundedNormalizedPrimeDistortionDerivedIsFalse'
+require_pattern DASHI/Analysis/RiemannG22ReflectionHermitianDeskTestExact.agda 'deBrangesPositivityDerivedIsFalse'
+require_pattern DASHI/Analysis/RiemannG22ReflectionHermitianDeskTestExact.agda 'riemannHypothesisDerivedIsFalse'
+
 DASHI_NO_TMUX=1 scripts/run_agda29_parallel_check.sh \
   DASHI/Analysis/RiemannG21Regression.agda \
   DASHI/Analysis/RiemannG21ParityMinorAnalyticFrontierExact.agda \
   DASHI/Analysis/StrictKernelMomentRatioExact.agda \
   DASHI/Analysis/RiemannG21OddSinhTP2Exact.agda \
   DASHI/Analysis/RiemannG21DeterminantMarginTransferExact.agda \
-  DASHI/Analysis/RiemannG21ContextualAlternativeFiniteInstanceExact.agda
+  DASHI/Analysis/RiemannG21ContextualAlternativeFiniteInstanceExact.agda \
+  DASHI/Analysis/RiemannG22ReflectionHermitianDeskTestExact.agda
