@@ -13,6 +13,11 @@ module DASHI.Core.FiniteTypedBranchingReachabilityBridgeExact where
 -- "Non-negative Matrices and Markov Chains", 2nd ed., Springer, 1981.
 -- DOI: 10.1007/0-387-32792-4.
 --
+-- David Blackwell,
+-- "Equivalent Comparisons of Experiments",
+-- Annals of Mathematical Statistics 24(2) (1953), 265--272.
+-- DOI: 10.1214/aoms/1177729032.
+--
 -- Patrick Cousot and Radhia Cousot,
 -- "Abstract interpretation: a unified lattice model for static analysis of
 -- programs by construction or approximation of fixpoints", POPL 1977,
@@ -21,25 +26,23 @@ module DASHI.Core.FiniteTypedBranchingReachabilityBridgeExact where
 -- SOURCE SCOPE
 --
 -- Harris/Seneta motivate finite typed branching and non-negative transition
--- structure. Cousot--Cousot motivates keeping a coarse abstraction separate
--- from concrete transition semantics. None of these sources is proof authority
--- for the exact DASHI bridge below.
+-- structure. Blackwell calibrates consumer-relative sufficiency vocabulary.
+-- Cousot--Cousot motivates keeping coarse abstraction separate from concrete
+-- transition semantics. None is proof authority for the exact DASHI witness.
 --
 -- DASHI CONTRIBUTION
 --
 -- FiniteTypedBranchingKernelExact owns row masses/regimes. TypedDependencyCore
 -- and AdmissibleReachability already own proof-bearing actions and finite
--- reachability. This file connects them without defining a second graph or
--- reachability calculus.
+-- reachability. ConsumerDescentMinimalObserverExact and DynamicalQuotientSafety
+-- already own static consumer sufficiency and same-trace dynamic safety.
 --
--- The key theorem shape is deliberately stronger than branch counting:
+-- This file composes those owners around one finite typed-branching witness.
+-- The central exact result is:
 --
 --   equal row mass / equal local branching regime
---   != equal target reachability.
---
--- The concrete witness has two start states with the same scaled row mass and
--- same subcritical row regime. One reaches the declared goal in one admissible
--- step; the other enters a closed trap and cannot reach the goal at all.
+--   != equal target reachability
+--   != dynamic quotient safety.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -49,6 +52,8 @@ import DASHI.Core.FiniteTypedBranchingKernelExact as Kernel
 import DASHI.Core.TypedDependencyCore as Dependency
 import DASHI.Core.AdmissibleReachability as Reach
 import DASHI.Core.StageTransitionBarrierExact as Barrier
+import DASHI.Core.ConsumerDescentMinimalObserverExact as Consumer
+import DASHI.Core.DynamicalQuotientSafety as Dynamic
 
 ------------------------------------------------------------------------
 -- Proof that a scaled offspring entry is actually available.
@@ -251,7 +256,158 @@ canonicalTypedBranchTrapBarrier =
     trapStartCannotReachGoal
 
 ------------------------------------------------------------------------
--- Exact semantic conclusion: local row count/regime is not target reachability.
+-- Static consumer non-descent: local row mass is too coarse for the declared
+-- target-reachability consumer.
+------------------------------------------------------------------------
+
+data GoalReachabilityCode : Set where
+  goalBlocked goalReachable : GoalReachabilityCode
+
+goalReachabilityCode : RouteType → GoalReachabilityCode
+goalReachabilityCode trapStart = goalBlocked
+goalReachabilityCode escapeStart = goalReachable
+goalReachabilityCode trapped = goalBlocked
+goalReachabilityCode escapeGoal = goalReachable
+
+rowMassCannotRecoverGoalReachabilityCode :
+  Consumer.ConsumerNonDescentWitness
+    (Kernel.rowScaledMass routeKernel)
+    goalReachabilityCode
+rowMassCannotRecoverGoalReachabilityCode =
+  Consumer.consumerNonDescentWitness
+    trapStart
+    escapeStart
+    sameStartRowMass
+    (λ ())
+
+rowMassIsNotConsumerSufficientForGoalReachability :
+  Consumer.ConsumerSufficient
+    (Kernel.rowScaledMass routeKernel)
+    goalReachabilityCode →
+  ⊥
+rowMassIsNotConsumerSufficientForGoalReachability =
+  Consumer.nonDescentWitnessBlocksSufficiency
+    rowMassCannotRecoverGoalReachabilityCode
+
+record GoalReachabilityCodeCalibration : Set where
+  constructor goal-reachability-code-calibration
+  field
+    blockedCodeBackedByNoPath :
+      Reach.Reachable routeSystem trapStart escapeGoal → ⊥
+    reachableCodeBackedByPath :
+      Reach.Reachable routeSystem escapeStart escapeGoal
+
+canonicalGoalReachabilityCodeCalibration : GoalReachabilityCodeCalibration
+canonicalGoalReachabilityCodeCalibration =
+  goal-reachability-code-calibration
+    trapStartCannotReachGoal
+    escapeStartReachesGoal
+
+------------------------------------------------------------------------
+-- Dynamic quotient-safety witness, inspired by the existing parental-fear and
+-- hidden-state future-defect lanes: the SAME consumer-visible action is applied
+-- to two coarse-equal current states, but the future coarse observations differ.
+--
+-- The action system below is separately calibrated against the two positive
+-- routeKernel entries. It is not a new branching kernel.
+------------------------------------------------------------------------
+
+data SharedAction : Set where
+  advance : SharedAction
+
+data AdvancePrecondition : RouteType → SharedAction → Set where
+  advanceFromTrapStart : AdvancePrecondition trapStart advance
+  advanceFromEscapeStart : AdvancePrecondition escapeStart advance
+
+data AdvancePostcondition : RouteType → SharedAction → RouteType → Set where
+  advanceIntoTrap : AdvancePostcondition trapStart advance trapped
+  advanceIntoGoal : AdvancePostcondition escapeStart advance escapeGoal
+
+sharedAdvanceSystem : Dependency.DependentActionSystem RouteType SharedAction
+sharedAdvanceSystem = record
+  { Precondition = AdvancePrecondition
+  ; Postcondition = AdvancePostcondition
+  ; actionLabel = λ advance → "advance"
+  }
+
+trapAdvanceAdmissible :
+  Dependency.AdmissibleAction sharedAdvanceSystem trapStart advance
+trapAdvanceAdmissible = record
+  { precondition = advanceFromTrapStart
+  ; after = trapped
+  ; postcondition = advanceIntoTrap
+  ; dependencyReceipt =
+      "shared advance follows positive trapStart -> trapped kernel support"
+  }
+
+escapeAdvanceAdmissible :
+  Dependency.AdmissibleAction sharedAdvanceSystem escapeStart advance
+escapeAdvanceAdmissible = record
+  { precondition = advanceFromEscapeStart
+  ; after = escapeGoal
+  ; postcondition = advanceIntoGoal
+  ; dependencyReceipt =
+      "shared advance follows positive escapeStart -> escapeGoal kernel support"
+  }
+
+trapAdvanceKernelSupported :
+  Positive (Kernel.scaledOffspring routeKernel trapStart trapped)
+trapAdvanceKernelSupported = positive
+
+escapeAdvanceKernelSupported :
+  Positive (Kernel.scaledOffspring routeKernel escapeStart escapeGoal)
+escapeAdvanceKernelSupported = positive
+
+data RouteObservation : Set where
+  currentBand trapBand goalBand : RouteObservation
+
+routeObservation : RouteType → RouteObservation
+routeObservation trapStart = currentBand
+routeObservation escapeStart = currentBand
+routeObservation trapped = trapBand
+routeObservation escapeGoal = goalBand
+
+sameCurrentRouteObservation :
+  routeObservation trapStart ≡ routeObservation escapeStart
+sameCurrentRouteObservation = refl
+
+trapAdvanceExecution :
+  Reach.Executes sharedAdvanceSystem (advance ∷ []) trapStart trapped
+trapAdvanceExecution =
+  Reach.executesCons trapAdvanceAdmissible Reach.executesNil
+
+escapeAdvanceExecution :
+  Reach.Executes sharedAdvanceSystem (advance ∷ []) escapeStart escapeGoal
+escapeAdvanceExecution =
+  Reach.executesCons escapeAdvanceAdmissible Reach.executesNil
+
+futureRouteObservationsDiffer :
+  routeObservation trapped ≡ routeObservation escapeGoal → ⊥
+futureRouteObservationsDiffer ()
+
+routeObservationTerminalisationDefect :
+  Dynamic.TerminalisationDefect sharedAdvanceSystem routeObservation
+routeObservationTerminalisationDefect =
+  Dynamic.terminalisationDefect
+    (advance ∷ [])
+    trapStart
+    escapeStart
+    trapped
+    escapeGoal
+    sameCurrentRouteObservation
+    trapAdvanceExecution
+    escapeAdvanceExecution
+    futureRouteObservationsDiffer
+
+routeObservationIsDynamicallyUnsafe :
+  Dynamic.DynamicConsumerSafety sharedAdvanceSystem routeObservation → ⊥
+routeObservationIsDynamicallyUnsafe safety =
+  Dynamic.terminalisationDefectContradictsSafety
+    safety
+    routeObservationTerminalisationDefect
+
+------------------------------------------------------------------------
+-- Exact semantic conclusion: local count/regime is not reachability geometry.
 ------------------------------------------------------------------------
 
 record EqualLocalBranchingDifferentReachability : Set₁ where
@@ -267,6 +423,11 @@ record EqualLocalBranchingDifferentReachability : Set₁ where
       Reach.Reachable routeSystem trapStart escapeGoal → ⊥
     rightCanReachGoal :
       Reach.Reachable routeSystem escapeStart escapeGoal
+    rowMassInsufficientForGoalConsumer :
+      Consumer.ConsumerSufficient
+        (Kernel.rowScaledMass routeKernel)
+        goalReachabilityCode →
+      ⊥
 
 canonicalEqualLocalBranchingDifferentReachability :
   EqualLocalBranchingDifferentReachability
@@ -276,6 +437,7 @@ canonicalEqualLocalBranchingDifferentReachability =
     sameStartRowRegime
     trapStartCannotReachGoal
     escapeStartReachesGoal
+    rowMassIsNotConsumerSufficientForGoalReachability
 
 record TypedBranchingReachabilityBoundary : Set where
   constructor typed-branching-reachability-boundary
@@ -289,6 +451,9 @@ record TypedBranchingReachabilityBoundary : Set where
     positiveKernelEntryAloneProvesGlobalEscape : Bool
     positiveKernelEntryAloneProvesGlobalEscapeIsFalse :
       positiveKernelEntryAloneProvesGlobalEscape ≡ false
+    sameCurrentObservationGuaranteesSameFutureObservation : Bool
+    sameCurrentObservationGuaranteesSameFutureObservationIsFalse :
+      sameCurrentObservationGuaranteesSameFutureObservation ≡ false
     reachabilityUsesExistingAdmissibleClosure : Bool
     reachabilityUsesExistingAdmissibleClosureIsTrue :
       reachabilityUsesExistingAdmissibleClosure ≡ true
@@ -297,6 +462,7 @@ canonicalTypedBranchingReachabilityBoundary :
   TypedBranchingReachabilityBoundary
 canonicalTypedBranchingReachabilityBoundary =
   typed-branching-reachability-boundary
+    false refl
     false refl
     false refl
     false refl
