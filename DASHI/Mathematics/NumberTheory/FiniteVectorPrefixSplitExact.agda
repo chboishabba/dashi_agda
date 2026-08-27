@@ -50,6 +50,24 @@ splitReconstruct (suc prefix) tail (x ∷ xs) =
   cong (x ∷_) (splitReconstruct prefix tail xs)
 
 ------------------------------------------------------------------------
+-- Exact append/split round trips.
+
+takePrefixAppend :
+  ∀ {A : Set} {left right : Nat}
+    (xs : Vec A left) (ys : Vec A right) →
+  takePrefix left right (appendVec xs ys) ≡ xs
+takePrefixAppend [] ys = refl
+takePrefixAppend (x ∷ xs) ys =
+  cong (x ∷_) (takePrefixAppend xs ys)
+
+dropPrefixAppend :
+  ∀ {A : Set} {left right : Nat}
+    (xs : Vec A left) (ys : Vec A right) →
+  dropPrefix left right (appendVec xs ys) ≡ ys
+dropPrefixAppend [] ys = refl
+dropPrefixAppend (x ∷ xs) ys = dropPrefixAppend xs ys
+
+------------------------------------------------------------------------
 -- Shift a tail-local Fin index through a prefix.
 
 shiftIndexBy :
