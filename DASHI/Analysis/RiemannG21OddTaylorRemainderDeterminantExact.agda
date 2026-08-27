@@ -27,6 +27,7 @@ module DASHI.Analysis.RiemannG21OddTaylorRemainderDeterminantExact where
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
+open import Agda.Builtin.String using (String)
 open import Data.Rational.Base using (ℚ; _+_; _-_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 
@@ -80,11 +81,6 @@ oddDeterminantErrorIdentity :
 oddDeterminantErrorIdentity ta1 ta2 tp1 tp2 ea1 ea2 ep1 ep2 =
   solve (ta1 ∷ ta2 ∷ tp1 ∷ tp2 ∷ ea1 ∷ ea2 ∷ ep1 ∷ ep2 ∷ [])
 
-------------------------------------------------------------------------
--- Analytic budget interface.  The eventual real-valued producer should bound
--- this one determinant error directly by the cubic strict margin.
-------------------------------------------------------------------------
-
 record OddRemainderDeterminantBudget : Set₁ where
   field
     Scalar : Set
@@ -96,7 +92,7 @@ record OddRemainderDeterminantBudget : Set₁ where
     directStructuredRemainderBelowMargin :
       StrictBelow determinantError cubicMargin
 
-    budgetReading : Agda.Builtin.String.String
+    budgetReading : String
 
 record OddTaylorRemainderBoundary : Set where
   constructor oddTaylorRemainderBoundary
