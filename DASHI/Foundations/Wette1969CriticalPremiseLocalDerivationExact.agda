@@ -2,24 +2,13 @@ module DASHI.Foundations.Wette1969CriticalPremiseLocalDerivationExact where
 
 ------------------------------------------------------------------------
 -- WETTE 1969 LOCALLY GENERATED 9.3.24/25 PREMISE CHAIN
---
--- This module composes the source-recovered producer lanes:
---   premise 1: predicate-schema production (ultimately 9.1.5),
---   premise 2: distinct variable-tuple production (8.3.1/2),
---   premise 3: tuple freshness production (8.1.12/13 family),
---   premise 4: paired II production (8.2.8),
--- then consumes all four with 9.3.24 or 9.3.25.
---
--- The important change from the previous weld is that the first three critical
--- premises are represented by *certified producer traces*, not membership facts
--- assumed at the initial context.  Their conclusions persist through all later
--- producer traces by the existing monotone-closure theorem.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
 
 import DASHI.Core.ProofCarryingRuleApplicationExact as PCRA
 import DASHI.Foundations.Wette1969HistoricalSignatureExact as Signature
+import DASHI.Foundations.Wette1969InitialRuleTranscriptionExact as RuleBody
 import DASHI.Foundations.Wette1969CriticalRuleDependencyExact as Critical
 import DASHI.Foundations.Wette1969Rule9324x25PremiseTemplateExact as CriticalRule
 import DASHI.Foundations.Wette1969DependentTwoStageSubstitutionExact as TwoStage
@@ -32,12 +21,10 @@ WordTerm = Signature.WordTerm
 Formula = Signature.Formula
 Context = Finite.DerivationContext
 
+historicalSystem :
+  PCRA.RuleApplicationSystem Context RuleBody.HistoricalRuleBody
 historicalSystem =
   Historical.historicalRuleApplicationSystem Finite.finiteHistoricalContextSystem
-
-------------------------------------------------------------------------
--- Dependent producer chain for the first three critical premises.
-------------------------------------------------------------------------
 
 record FirstThreeCriticalProducerChain
     (initial : Context)
@@ -82,13 +69,13 @@ predicateAvailableAtProducerTarget :
   (chain : FirstThreeCriticalProducerChain initial parameters) →
   CriticalRule.premiseAt parameters Critical.recursivePredicateFormation
     Finite.∈Context producerTarget chain
-predicateAvailableAtProducerTarget chain =
+predicateAvailableAtProducerTarget {parameters = parameters} chain =
   Closure.certifiedTracePreservesPriorFormula
     (freshnessTrace chain)
-    (CriticalRule.premiseAt _ Critical.recursivePredicateFormation)
+    (CriticalRule.premiseAt parameters Critical.recursivePredicateFormation)
     (Closure.certifiedTracePreservesPriorFormula
       (tupleTrace chain)
-      (CriticalRule.premiseAt _ Critical.recursivePredicateFormation)
+      (CriticalRule.premiseAt parameters Critical.recursivePredicateFormation)
       (predicateProduced chain))
 
 freshTupleAvailableAtProducerTarget :
@@ -97,10 +84,10 @@ freshTupleAvailableAtProducerTarget :
   (chain : FirstThreeCriticalProducerChain initial parameters) →
   CriticalRule.premiseAt parameters Critical.freshVariableTupleFormation
     Finite.∈Context producerTarget chain
-freshTupleAvailableAtProducerTarget chain =
+freshTupleAvailableAtProducerTarget {parameters = parameters} chain =
   Closure.certifiedTracePreservesPriorFormula
     (freshnessTrace chain)
-    (CriticalRule.premiseAt _ Critical.freshVariableTupleFormation)
+    (CriticalRule.premiseAt parameters Critical.freshVariableTupleFormation)
     (tupleProduced chain)
 
 freshnessAvailableAtProducerTarget :
@@ -121,12 +108,6 @@ firstThreeAvailableAtProducerTarget chain =
     (predicateAvailableAtProducerTarget chain)
     (freshTupleAvailableAtProducerTarget chain)
     (freshnessAvailableAtProducerTarget chain)
-
-------------------------------------------------------------------------
--- Sequential II premises may already be available before the producer chain.
--- Monotonicity carries them through all three producer traces to the point at
--- which rule 8.2.8 is applied.
-------------------------------------------------------------------------
 
 firstIIAvailableAtProducerTarget :
   {initial : Context} →
@@ -168,14 +149,6 @@ secondIIAvailableAtProducerTarget chain stages evidence =
         (predicateTrace chain)
         (TwoStage.secondStageII (TwoStage.first stages) (TwoStage.second stages))
         evidence))
-
-------------------------------------------------------------------------
--- Complete local critical traces.
---
--- All first-three evidence comes from producer traces.  Premise 4 then comes
--- from rule 8.2.8 at their common target.  Certified-trace append keeps each
--- continuation indexed by the actual state produced by the preceding trace.
-------------------------------------------------------------------------
 
 locallyGeneratedTrace9324 :
   (initial : Context) →
