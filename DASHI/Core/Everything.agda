@@ -7,3 +7,5 @@ import DASHI.Core.TrajectoryResidueExact
 import DASHI.Core.ContrastiveHistoryResidualExact
 import DASHI.Core.ContrastiveInterventionResponseExact
 import DASHI.Core.GeneratorCoverageReachabilityExact
+import DASHI.Core.ContextualConversionNonfactorabilityExact
+import DASHI.Core.ThresholdResidualTrajectoryGeometryExact
