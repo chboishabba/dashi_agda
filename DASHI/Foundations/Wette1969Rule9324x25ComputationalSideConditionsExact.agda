@@ -5,20 +5,6 @@ module DASHI.Foundations.Wette1969Rule9324x25ComputationalSideConditionsExact wh
 --
 -- Primary source: Eduard Wette 1969,
 -- DOI: 10.1007/978-3-642-86745-3_9.
---
--- This module connects the concrete schematic evaluator to the recovered
--- parameterized 9.3.24/25 premise surface. It discharges only the computational
--- fragment justified by the current evaluator:
---   * premise 3 when the fresh tuple parameter is represented by one schematic
---     word variable and that variable does not occur in the freshness context;
---   * premise 4 when the recovered substitution source/result are related by
---     exact schematic instantiation under a supplied environment.
---
--- These certificates establish the relevant syntactic side condition, but they
--- are not automatically formula-membership/derivability proofs in Wette's
--- historical calculus. The proof-carrying finite-context lane owns that second
--- step. This distinction prevents a meta-level evaluator from silently becoming
--- an extra historical inference rule.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -26,6 +12,11 @@ open import DASHI.Core.Prelude
 import DASHI.Foundations.Wette1969HistoricalSignatureExact as Signature
 import DASHI.Foundations.Wette1969Rule9324x25PremiseTemplateExact as Rule
 import DASHI.Foundations.Wette1969SchematicSubstitutionFreshnessExact as Eval
+import DASHI.Foundations.Wette1969OrderedTuplePredicateSubstitutionExact as Ordered
+
+------------------------------------------------------------------------
+-- First-stage schematic side-condition bundle retained for compatibility.
+------------------------------------------------------------------------
 
 record Rule9324x25ComputationalSideConditions
     (parameters : Rule.Rule9324x25PremiseParameters) : Set where
@@ -69,26 +60,90 @@ premise4SubstitutionCertificate {parameters} certificate =
     (Rule.substitutionResultWord parameters)
     (premise4SchematicSubstitution certificate)
 
+------------------------------------------------------------------------
+-- Stronger source-ordered premise-4 bundle.
+--
+-- Section 1.632 requires tuple substitution first and predicate-mark
+-- substitution second.  This record carries exactly that computation against
+-- the recovered premise-4 source/result words.  It is strictly stronger than
+-- the earlier schematic-only certificate, but it still does not pretend to be
+-- the complete binding-aware historical substitution relation.
+------------------------------------------------------------------------
+
+record Rule9324x25OrderedComputationalSideConditions
+    (parameters : Rule.Rule9324x25PremiseParameters) : Set where
+  constructor rule9324x25OrderedComputationalSideConditions
+  field
+    orderedFreshVariable : Signature.WordVariable
+    orderedFreshTupleIsSchematicVariable :
+      Rule.freshTupleWord parameters
+        ≡ Signature.variableWordTerm orderedFreshVariable
+    orderedPremise3Freshness :
+      Eval.FreshVariableFor
+        orderedFreshVariable
+        (Rule.freshnessContextWord parameters)
+
+    tupleEnvironment : Eval.SubstitutionEnvironment
+    recursivePredicateReplacement : Signature.WordTerm
+    orderedPremise4Substitution :
+      Ordered.orderedTupleThenPredicate
+        tupleEnvironment
+        recursivePredicateReplacement
+        (Rule.substitutionSourceWord parameters)
+      ≡ Rule.substitutionResultWord parameters
+
+open Rule9324x25OrderedComputationalSideConditions public
+
+orderedPremise3FreshnessCertificate :
+  {parameters : Rule.Rule9324x25PremiseParameters} →
+  Rule9324x25OrderedComputationalSideConditions parameters →
+  Eval.SchematicFreshnessCertificate
+orderedPremise3FreshnessCertificate {parameters} certificate =
+  Eval.schematicFreshnessCertificate
+    (orderedFreshVariable certificate)
+    (Rule.freshnessContextWord parameters)
+    (orderedPremise3Freshness certificate)
+
+orderedPremise4SubstitutionCertificate :
+  {parameters : Rule.Rule9324x25PremiseParameters} →
+  Rule9324x25OrderedComputationalSideConditions parameters →
+  Ordered.OrderedTuplePredicateSubstitutionCertificate
+orderedPremise4SubstitutionCertificate {parameters} certificate =
+  Ordered.orderedTuplePredicateSubstitutionCertificate
+    (tupleEnvironment certificate)
+    (recursivePredicateReplacement certificate)
+    (Rule.substitutionSourceWord parameters)
+    (Rule.substitutionResultWord parameters)
+    (orderedPremise4Substitution certificate)
+
 record Wette1969Rule9324x25ComputationalBoundary : Set where
   constructor wette1969Rule9324x25ComputationalBoundary
   field
     premise3FreshnessFragmentNowComputationallyCertifiable : Bool
     premise3FreshnessFragmentNowComputationallyCertifiableIsTrue :
       premise3FreshnessFragmentNowComputationallyCertifiable ≡ true
+
     premise4SchematicSubstitutionFragmentNowComputationallyCertifiable : Bool
     premise4SchematicSubstitutionFragmentNowComputationallyCertifiableIsTrue :
       premise4SchematicSubstitutionFragmentNowComputationallyCertifiable ≡ true
+
+    premise4SourceOrderedTuplePredicateFragmentNowCertifiable : Bool
+    premise4SourceOrderedTuplePredicateFragmentNowCertifiableIsTrue :
+      premise4SourceOrderedTuplePredicateFragmentNowCertifiable ≡ true
+
     computationalCertificateIsAlreadyHistoricalDerivabilityProof : Bool
     computationalCertificateIsAlreadyHistoricalDerivabilityProofIsFalse :
       computationalCertificateIsAlreadyHistoricalDerivabilityProof ≡ false
-    schematicFragmentIsAlreadyFullTuplePredicateSubstitution : Bool
-    schematicFragmentIsAlreadyFullTuplePredicateSubstitutionIsFalse :
-      schematicFragmentIsAlreadyFullTuplePredicateSubstitution ≡ false
+
+    orderedStructuralFragmentIsAlreadyBindingAwareHistoricalSubstitution : Bool
+    orderedStructuralFragmentIsAlreadyBindingAwareHistoricalSubstitutionIsFalse :
+      orderedStructuralFragmentIsAlreadyBindingAwareHistoricalSubstitution ≡ false
 
 canonicalWette1969Rule9324x25ComputationalBoundary :
   Wette1969Rule9324x25ComputationalBoundary
 canonicalWette1969Rule9324x25ComputationalBoundary =
   wette1969Rule9324x25ComputationalBoundary
+    true refl
     true refl
     true refl
     false refl
