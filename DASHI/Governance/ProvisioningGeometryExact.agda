@@ -2,6 +2,8 @@ module DASHI.Governance.ProvisioningGeometryExact where
 
 open import DASHI.Core.Prelude
 open import DASHI.Governance.SafeJustSourceRegistryExact as Sources
+import DASHI.Core.ContextualConversionNonfactorabilityExact as Conversion
+import DASHI.Core.ConsumerDescentMinimalObserverExact as Consumer
 
 ------------------------------------------------------------------------
 -- ENDS-MEANS / PROVISIONING GEOMETRY
@@ -70,6 +72,44 @@ resourceDifferenceRemains : resources lowEfficient ≡ resources mediumEfficient
 resourceDifferenceRemains ()
 
 ------------------------------------------------------------------------
+-- Generic contextual-conversion instantiation.
+--
+-- This is the reusable theorem seam shared with other situated systems:
+-- resource quantity is the input carrier; provisioning is conversion context;
+-- realised need is the consumer.  The existing finite witness therefore gives
+-- a first-class Core non-descent/factorisation obstruction rather than only a
+-- domain-local inequality.
+------------------------------------------------------------------------
+
+provisioningConversion :
+  Conversion.ContextualConversion ResourceLevel ProvisioningSystem NeedOutcome
+provisioningConversion = Conversion.contextualConversion λ where
+  (r , p) → realizedNeed (provisioningState r p)
+
+provisioningContextEssential :
+  Conversion.ContextEssentialWitness provisioningConversion
+provisioningContextEssential =
+  Conversion.contextEssentialWitness
+    mediumResource
+    (provisioningSystem inefficientInfrastructure exclusionaryProvisioning)
+    (provisioningSystem efficientInfrastructure inclusiveProvisioning)
+    (λ ())
+
+resourceOnlyConsumerNonDescent :
+  Consumer.ConsumerNonDescentWitness
+    Conversion.inputObserver
+    (Conversion.realise provisioningConversion)
+resourceOnlyConsumerNonDescent =
+  Conversion.contextEssentialGivesConsumerNonDescent provisioningContextEssential
+
+resourceOnlyFactorizationImpossible :
+  Consumer.FactorsThrough
+    Conversion.inputObserver
+    (Conversion.realise provisioningConversion) → ⊥
+resourceOnlyFactorizationImpossible =
+  Conversion.contextEssentialBlocksInputFactorization provisioningContextEssential
+
+------------------------------------------------------------------------
 -- The observed best-versus-typical resource gap is typed only as an observed
 -- residual.  It is not promoted into an identified causal treatment effect of
 -- provisioning institutions.
@@ -105,6 +145,10 @@ record ProvisioningBoundary : Set where
     observedEfficiencyGapIsIdentifiedCausalEffect : Bool
     observedEfficiencyGapIsIdentifiedCausalEffectIsFalse :
       observedEfficiencyGapIsIdentifiedCausalEffect ≡ false
+    genericInputOnlyFactorizationSurvivesContextWitness : Bool
+    genericInputOnlyFactorizationSurvivesContextWitnessIsFalse :
+      genericInputOnlyFactorizationSurvivesContextWitness ≡ false
 
 canonicalProvisioningBoundary : ProvisioningBoundary
-canonicalProvisioningBoundary = provisioningBoundary false refl false refl false refl
+canonicalProvisioningBoundary =
+  provisioningBoundary false refl false refl false refl false refl
