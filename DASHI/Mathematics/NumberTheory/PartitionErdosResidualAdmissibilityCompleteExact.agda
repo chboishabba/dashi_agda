@@ -11,6 +11,7 @@ open import Agda.Builtin.Nat using (Nat)
 open import Data.List.Membership.Propositional using (_∈_)
 import Data.Nat.Properties as NatP
 
+import DASHI.Mathematics.NumberTheory.FinitePositiveFactorPairExact as FinitePositive
 import DASHI.Mathematics.NumberTheory.PartitionErdosAdmissibleResidualDecompositionExact as Decompose
 import DASHI.Mathematics.NumberTheory.PartitionErdosAdmissibleResidualEnumerationExact as Admissible
 import DASHI.Mathematics.NumberTheory.PartitionErdosFiniteKeyEnumerationExact as Key
@@ -58,8 +59,6 @@ exactResidualTotalImpliesAdmissible {n} residual totalExact =
       (FinitePositive.predecessorBelowProduct
         (Decompose.residualFactorPair residual))
       (Decompose.residualDecrementAtMostGrade residual totalExact)
-    where
-    import DASHI.Mathematics.NumberTheory.FinitePositiveFactorPairExact as FinitePositive
 
   predecessorMember :
     Key.residualPredecessor residual
