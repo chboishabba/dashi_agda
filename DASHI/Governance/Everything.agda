@@ -61,6 +61,17 @@ import DASHI.Governance.Fanning2022ProjectionBoundaryExact
 import DASHI.Governance.Fanning2022ForecastAuthorityExact
 import DASHI.Governance.Fanning2022MethodsRegression
 
+-- Consumer-indexed adequacy / capability-functioning / epistemic-residual /
+-- Kallis claim-routing layer.  These owners deliberately do not import draft
+-- #620; they are shaped as future thin adapters after ancestry reconciliation.
+import DASHI.Governance.SafeJustProvisioningCapabilityFunctioningBridgeExact
+import DASHI.Governance.SafeJustForecastConsumerAdequacyExact
+import DASHI.Governance.SafeJustEpistemicResidualLedgerExact
+import DASHI.Governance.Kallis2025ClaimAuthorityRoutingExact
+import DASHI.Governance.SafeJustQualifiedClaimPromotionExact
+import DASHI.Governance.SafeJustSocialIndicatorJusticeBoundaryExact
+import DASHI.Governance.SafeJustConsumerAdequacyResidualBridgeExact
+
 -- Provenance-bearing policy routing, corrective reachability and source-bounded
 -- application surfaces assembled as one focused tranche.
 import DASHI.Governance.ProvenanceReflectionRoutingRound14
