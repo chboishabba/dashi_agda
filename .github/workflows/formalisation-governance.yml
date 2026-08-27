@@ -14,11 +14,16 @@ on:
       - 'DASHI/Core/FormalisationCompatibilityExact.agda'
       - 'DASHI/Core/KernelSemanticClosureBoundaryExact.agda'
       - 'DASHI/Core/FormalisationGovernanceSourceRegistryExact.agda'
+      - 'DASHI/Core/ConsumerIndexedTranslationRealisationExact.agda'
+      - 'DASHI/Core/ResidualObligationPropagationExact.agda'
+      - 'DASHI/Core/TranslationRealisationCrossPollinationExact.agda'
       - 'DASHI/Governance/CapabilityFunctioningNonDescentExact.agda'
       - 'DASHI/Governance/RecognitionDistributionRepresentationAxesExact.agda'
       - 'DASHI/Governance/LegitimacyEvidenceSeparationExact.agda'
       - 'DASHI/Governance/AuthorityRepairLegitimacySeparationExact.agda'
+      - 'DASHI/Governance/InterventionMechanismDecompositionExact.agda'
       - 'DASHI/Governance/FormalisationGovernanceCapstoneExact.agda'
+      - 'DASHI/Governance/ConsumerAdequacyResidualInterventionCapstoneExact.agda'
       - 'DASHI/Core/Everything.agda'
       - 'DASHI/Governance/Everything.agda'
       - '.github/workflows/formalisation-governance.yml'
@@ -61,11 +66,16 @@ jobs:
             DASHI/Core/FormalisationCompatibilityExact.agda
             DASHI/Core/KernelSemanticClosureBoundaryExact.agda
             DASHI/Core/FormalisationGovernanceSourceRegistryExact.agda
+            DASHI/Core/ConsumerIndexedTranslationRealisationExact.agda
+            DASHI/Core/ResidualObligationPropagationExact.agda
+            DASHI/Core/TranslationRealisationCrossPollinationExact.agda
             DASHI/Governance/CapabilityFunctioningNonDescentExact.agda
             DASHI/Governance/RecognitionDistributionRepresentationAxesExact.agda
             DASHI/Governance/LegitimacyEvidenceSeparationExact.agda
             DASHI/Governance/AuthorityRepairLegitimacySeparationExact.agda
+            DASHI/Governance/InterventionMechanismDecompositionExact.agda
             DASHI/Governance/FormalisationGovernanceCapstoneExact.agda
+            DASHI/Governance/ConsumerAdequacyResidualInterventionCapstoneExact.agda
           )
           if grep -nE '\b(postulate|{-# OPTIONS --allow-unsolved-metas #-}|sorry|admit)\b' "${files[@]}"; then
             echo 'Forbidden trust-boundary token found in formalisation-governance tranche.' >&2
@@ -87,11 +97,16 @@ jobs:
               DASHI/Core/RelationalAffordanceCoreExact.agda
               DASHI/Core/McCallCategoryStrategyBoundaryExact.agda
               DASHI/Core/InterpretiveFormalisationCoreExact.agda
+              DASHI/Core/ConsumerIndexedTranslationRealisationExact.agda
+              DASHI/Core/ResidualObligationPropagationExact.agda
+              DASHI/Core/TranslationRealisationCrossPollinationExact.agda
               DASHI/Core/FormalisationAbuseLintExact.agda
               DASHI/Governance/CapabilityFunctioningNonDescentExact.agda
               DASHI/Governance/LegitimacyEvidenceSeparationExact.agda
               DASHI/Governance/AuthorityRepairLegitimacySeparationExact.agda
+              DASHI/Governance/InterventionMechanismDecompositionExact.agda
               DASHI/Governance/FormalisationGovernanceCapstoneExact.agda
+              DASHI/Governance/ConsumerAdequacyResidualInterventionCapstoneExact.agda
               DASHI/Core/Everything.agda
               DASHI/Governance/Everything.agda
             )
