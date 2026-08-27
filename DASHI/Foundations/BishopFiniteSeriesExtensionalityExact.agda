@@ -49,15 +49,13 @@ termwiseEquivalentSeriesHaveEquivalentLimits :
     (BishopSequence.SeriesOf right) rightLimit →
   BishopReal._≃_ leftLimit rightLimit
 termwiseEquivalentSeriesHaveEquivalentLimits
+  {leftLimit = leftLimit}
   termCongruence leftConverges rightConverges =
   BishopSequence.uniqueness-of-limits
     (BishopSequence.xₙ≃yₙ∧xₙ→x₀⇒yₙ→x₀
       (seriesPartialSumsCongruent termCongruence)
       (leftLimit , leftConverges))
     rightConverges
-  where
-  leftLimit : BishopReal.ℝ
-  leftLimit = _
 
 bishopFiniteSeriesExtensionalityLevel : ProofLevel
 bishopFiniteSeriesExtensionalityLevel = machineChecked
