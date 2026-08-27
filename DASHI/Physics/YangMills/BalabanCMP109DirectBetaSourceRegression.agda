@@ -21,20 +21,25 @@ module DASHI.Physics.YangMills.BalabanCMP109DirectBetaSourceRegression where
 --
 --   source transcription / dependency recut
 --       !=
---   literal constrained-operator evaluation / positive beta proof.
+--   literal source sign / one-step response data
+--       !=
+--   quantitative uniform Row-A1 closure.
 --
--- The parallel Lean RequestProject return proved generic finite-dimensional
+-- Parallel Lean RequestProject returns have proved generic finite-dimensional
 -- trace-log Hessian algebra, constrained-propagator annihilation/Ward
 -- cancellation, third-order beta-projection annihilation, Fourier trace
--- reduction, and geometric history-response summability.  Those results guide
--- this Agda dependency graph, but are NOT labelled Agda machineChecked here:
--- cross-prover success is not an Agda kernel receipt.
+-- reduction, paramagnetic-seagull positivity criteria, the obstruction for a
+-- purely diamagnetic affine-Gram second variation, and chain-rule generation of
+-- geometric history-response decay.  Those results guide this Agda dependency
+-- graph, but are NOT labelled Agda machineChecked here: cross-prover success is
+-- not an Agda kernel receipt.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
 open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 open import DASHI.Physics.YangMills.BalabanCMP109SourceTranscriptionExact
 open import DASHI.Physics.YangMills.BalabanCMP109DirectBetaSourceCutsetExact
+open import DASHI.Physics.YangMills.BalabanCMP109SeagullHistorySourceRefinementExact
 open import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound82FiveAnalyticLeafExact
 
 ------------------------------------------------------------------------
@@ -46,6 +51,22 @@ sourceTranscriptionRegressionLevel = cmp109SourceTranscriptionLevel
 
 directBetaDependencyCutsetRegressionLevel : ProofLevel
 directBetaDependencyCutsetRegressionLevel = cmp109DirectBetaCutsetLevel
+
+seagullHistoryDependencyRefinementRegressionLevel : ProofLevel
+seagullHistoryDependencyRefinementRegressionLevel =
+  cmp109SeagullHistoryDependencyRefinementLevel
+
+literalParamagneticSeagullSignRegressionLevel : ProofLevel
+literalParamagneticSeagullSignRegressionLevel =
+  cmp109LiteralParamagneticSeagullSignLevel
+
+literalUniformGaussianFloorRegressionLevel : ProofLevel
+literalUniformGaussianFloorRegressionLevel =
+  cmp109LiteralUniformGaussianFloorLevel
+
+literalOneStepHistoryResponseRegressionLevel : ProofLevel
+literalOneStepHistoryResponseRegressionLevel =
+  cmp109LiteralOneStepHistoryResponseLevel
 
 literalGaussianBetaZRegressionLevel : ProofLevel
 literalGaussianBetaZRegressionLevel = cmp109LiteralGaussianBetaZLevel
