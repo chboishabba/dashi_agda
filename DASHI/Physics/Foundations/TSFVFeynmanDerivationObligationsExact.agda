@@ -5,10 +5,6 @@ open import Agda.Builtin.String using (String)
 
 ------------------------------------------------------------------------
 -- Exact map of the remaining hard arrows.
---
--- These are proof obligations, not assertions that TSFV already derives the
--- Feynman propagator.  The architecture is mature enough that the remaining
--- scientific problem can be stated as explicit interfaces.
 ------------------------------------------------------------------------
 
 data ObligationStatus : Set where
@@ -86,8 +82,8 @@ tsfvActionObligation = derivationObligation
 actionPhaseObligation : DerivationObligation
 actionPhaseObligation = derivationObligation
   actionToPhaseOverHbar
-  sourceBackedBoundaryOnly
-  "Experiment and standard theory support action-relative phase; TSFV has not yet derived the specific S/hbar phase law."
+  interfaceOnly
+  "An explicit action-to-phase lift interface now records the missing calibration carrier; standard theory and experiment support S/hbar, but TSFV supplies neither a physical action calibration nor the hbar/periodicity lift."
 
 amplitudeMeasureObligation : DerivationObligation
 amplitudeMeasureObligation = derivationObligation
@@ -137,6 +133,10 @@ record TSFVFeynmanDerivationBoundary : Set where
     nonseparableTransitionActionDerivedIsFalse :
       nonseparableTransitionActionDerived ≡ false
 
+    actionToPhaseCalibrationSupplied : Bool
+    actionToPhaseCalibrationSuppliedIsFalse :
+      actionToPhaseCalibrationSupplied ≡ false
+
     tsfvCurrentlyDerivesFeynmanPropagator : Bool
     tsfvCurrentlyDerivesFeynmanPropagatorIsFalse :
       tsfvCurrentlyDerivesFeynmanPropagator ≡ false
@@ -150,6 +150,7 @@ canonicalTSFVFeynmanDerivationBoundary =
   tsfvFeynmanDerivationBoundary
     true refl
     true refl
+    false refl
     false refl
     false refl
     false refl
