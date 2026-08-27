@@ -2,10 +2,6 @@ module DASHI.Mathematics.NumberTheory.PartitionErdosFiniteKeyCardinalityExact wh
 
 ------------------------------------------------------------------------
 -- EXACT CARDINALITY OF THE PROOF-FREE MARKED KEY LIST
---
--- Each occurrence/unit fibre has m_v * v elements.  Summing over part
--- coordinates gives the partition mass, and every selected source vector has
--- mass n.  Therefore the complete key list has exactly n * p(n) elements.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -16,6 +12,7 @@ open import Data.List.Membership.Propositional using (_∈_)
 open import Data.List.Relation.Unary.Any as Any using ()
 import Data.List.Relation.Unary.All as All
 import Data.Nat.Properties as NatP
+open import Data.Nat.Properties using (_≟_)
 open import Data.Vec.Base using (Vec)
 open import Relation.Nullary.Decidable.Core using (yes; no)
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
@@ -30,12 +27,14 @@ import DASHI.Mathematics.NumberTheory.PartitionMultiplicityCarrierExact as Parti
 import DASHI.Mathematics.NumberTheory.PartitionMultiplicityEnumerationExact as Enumeration
 
 ------------------------------------------------------------------------
--- Constant fold over allFin.
+-- Constant fold over allFin.  Multiplication is oriented with the varying
+-- finite-cardinality coordinate in the second argument so recursive reduction
+-- follows the list constructor.
 
 foldConstantAllFin :
   (constant n : Nat) →
   Reindex.foldNat (λ (_ : Fin n) → constant) (Finite.allFin n)
-  ≡ n * constant
+  ≡ constant * n
 foldConstantAllFin constant zero = refl
 foldConstantAllFin constant (suc n) =
   cong (constant +_) (foldConstantAllFin constant n)
@@ -58,9 +57,13 @@ occurrenceUnitLength vector index =
         (λ _ → Partition.partValue index)
         (Finite.allFin (Partition.lookupMultiplicity index vector))
         (λ _ → Finite.allFinLength (Partition.partValue index)))
-      (foldConstantAllFin
-        (Partition.partValue index)
-        (Partition.lookupMultiplicity index vector)))
+      (trans
+        (foldConstantAllFin
+          (Partition.partValue index)
+          (Partition.lookupMultiplicity index vector))
+        (NatP.*-comm
+          (Partition.partValue index)
+          (Partition.lookupMultiplicity index vector))))
 
 ------------------------------------------------------------------------
 -- Sum the fibre cardinalities over part coordinates.
@@ -125,7 +128,7 @@ selectMassSound :
   Partition.weightedMass vector ≡ n
 selectMassSound {vectors = []} ()
 selectMassSound {n} {vector} {vectors = head ∷ tail} member
-  with Partition.weightedMass head NatP.≟ n
+  with Partition.weightedMass head ≟ n
 ... | yes headMass with member
 ...   | Any.here equality =
   subst
@@ -148,13 +151,13 @@ partitionVectorsAllMass :
 partitionVectorsAllMass n = All.tabulate partitionVectorMassSound
 
 ------------------------------------------------------------------------
--- A fold whose entries are all the same constant is length * constant.
+-- A fold whose entries are all the same constant is constant * length.
 
 foldAllEqualConstant :
   ∀ {A : Set} {constant : Nat} {xs : List A}
     (weight : A → Nat) →
   All.All (λ x → weight x ≡ constant) xs →
-  Reindex.foldNat weight xs ≡ Reindex.listLength xs * constant
+  Reindex.foldNat weight xs ≡ constant * Reindex.listLength xs
 foldAllEqualConstant weight All.[] = refl
 foldAllEqualConstant weight (All._∷_ headExact tailExact) =
   trans
@@ -187,11 +190,9 @@ cellKeyEnumerationLength n =
         Partition.weightedMass
         (Enumeration.partitionMultiplicityVectors n)
         partCellLength)
-      (trans
-        (foldAllEqualConstant
-          Partition.weightedMass
-          (partitionVectorsAllMass n))
-        (NatP.*-comm (canonicalPartitionCount n) n)))
+      (foldAllEqualConstant
+        Partition.weightedMass
+        (partitionVectorsAllMass n)))
 
 cellKeyUnitFold : (n : Nat) → Nat
 cellKeyUnitFold n =
