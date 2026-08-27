@@ -9,7 +9,7 @@ module DASHI.Foundations.Wette1969HistoricalSignatureExact where
 -- DOI: 10.1007/978-3-642-86745-3_9
 --
 -- Source loci:
---   pp. 142--143  generic word/term/formula grammar and initial signature;
+--   pp. 142--143  generic word / word-term / formula grammar and signature;
 --   pp. 147--148  intended meanings of constants, functors and relators;
 --   pp. 193--194  addendum replacing A by _A in the crucial rule surface.
 --
@@ -18,6 +18,8 @@ module DASHI.Foundations.Wette1969HistoricalSignatureExact where
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
+open import Data.Fin using (Fin)
+open import Data.Vec using (Vec)
 
 ------------------------------------------------------------------------
 -- Seven constants and eight functors from the source signature.
@@ -100,7 +102,13 @@ relatorArity substitutionRelator = 4
 relatorArity assertionSchemaNoPredicateQuantificationRelator = 1
 
 ------------------------------------------------------------------------
--- Typed pure syntax mirrors Wette's prefix / Lukasiewicz construction.
+-- Exact pure syntax.
+--
+-- Wette first defines words over the constants/functors, then word terms by
+-- adjoining finitely many word variables, and only then formulas by applying a
+-- relator to the exact number of word terms dictated by its arity.  Keeping
+-- Word and WordTerm distinct matters: the rule schemata range over word terms,
+-- while substitution of concrete words for the word variables yields words.
 ------------------------------------------------------------------------
 
 data Word : Set where
@@ -109,11 +117,25 @@ data Word : Set where
   binaryWord :
     (f : HistoricalFunctor) → functorArity f ≡ 2 → Word → Word → Word
 
+-- Wette's specialized calculus uses nineteen word variables in rule schemata.
+WordVariable : Set
+WordVariable = Fin 19
+
+data WordTerm : Set where
+  variableWordTerm : WordVariable → WordTerm
+  constantWordTerm : HistoricalConstant → WordTerm
+  unaryWordTerm :
+    (f : HistoricalFunctor) → functorArity f ≡ 1 → WordTerm → WordTerm
+  binaryWordTerm :
+    (f : HistoricalFunctor) →
+    functorArity f ≡ 2 →
+    WordTerm → WordTerm → WordTerm
+
 record Formula : Set where
   constructor historicalFormula
   field
     relator : HistoricalRelator
-    arguments : List Word
+    arguments : Vec WordTerm (relatorArity relator)
 
 open Formula public
 
@@ -128,6 +150,7 @@ record HistoricalSignatureCounts : Set where
   field
     constantCount : Nat
     functorCount : Nat
+    wordVariableCount : Nat
     modifiedRelatorCount : Nat
     finalModifiedRuleCount : Nat
     alternateRelatorCount : Nat
@@ -136,7 +159,7 @@ record HistoricalSignatureCounts : Set where
 
 canonicalHistoricalSignatureCounts : HistoricalSignatureCounts
 canonicalHistoricalSignatureCounts =
-  historicalSignatureCounts 7 8 16 97 17 129 27
+  historicalSignatureCounts 7 8 19 16 97 17 129 27
 
 ------------------------------------------------------------------------
 -- Promotion boundary.
@@ -148,6 +171,14 @@ record Wette1969HistoricalSignatureBoundary : Set where
     primarySignatureTranscriptionStarted : Bool
     primarySignatureTranscriptionStartedIsTrue :
       primarySignatureTranscriptionStarted ≡ true
+
+    wordTermsSeparatedFromConcreteWords : Bool
+    wordTermsSeparatedFromConcreteWordsIsTrue :
+      wordTermsSeparatedFromConcreteWords ≡ true
+
+    formulaRelatorArityEnforcedByType : Bool
+    formulaRelatorArityEnforcedByTypeIsTrue :
+      formulaRelatorArityEnforcedByType ≡ true
 
     modifiedP193SignatureUsedAsCanonicalAuditSurface : Bool
     modifiedP193SignatureUsedAsCanonicalAuditSurfaceIsTrue :
@@ -165,6 +196,8 @@ canonicalWette1969HistoricalSignatureBoundary :
   Wette1969HistoricalSignatureBoundary
 canonicalWette1969HistoricalSignatureBoundary =
   wette1969HistoricalSignatureBoundary
+    true refl
+    true refl
     true refl
     true refl
     false refl
