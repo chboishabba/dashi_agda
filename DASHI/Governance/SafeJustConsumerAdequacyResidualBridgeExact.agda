@@ -1,6 +1,8 @@
 module DASHI.Governance.SafeJustConsumerAdequacyResidualBridgeExact where
 
 open import DASHI.Core.Prelude
+import DASHI.Core.ConsumerDescentMinimalObserverExact as Consumer
+import DASHI.Core.ContextualConversionNonfactorabilityExact as Conversion
 import DASHI.Governance.ProvisioningGeometryExact as Provisioning
 import DASHI.Governance.SafeJustProvisioningCapabilityFunctioningBridgeExact as Capability
 import DASHI.Governance.SafeJustIndicatorSystemExact as Indicators
@@ -21,10 +23,9 @@ import DASHI.Governance.SafeJustSocialIndicatorJusticeBoundaryExact as Justice
 ------------------------------------------------------------------------
 
 resourceObserverDoesNotDetermineNeedOutcome :
-  DASHI.Core.ConsumerDescentMinimalObserverExact.FactorsThrough
-    DASHI.Core.ContextualConversionNonfactorabilityExact.inputObserver
-    (DASHI.Core.ContextualConversionNonfactorabilityExact.realise
-      Provisioning.provisioningConversion) → ⊥
+  Consumer.FactorsThrough
+    Conversion.inputObserver
+    (Conversion.realise Provisioning.provisioningConversion) → ⊥
 resourceObserverDoesNotDetermineNeedOutcome =
   Provisioning.resourceOnlyFactorizationImpossible
 
