@@ -37,9 +37,6 @@ record AggregateBurdenLoss
     sameAggregate : aggregateObserver geometry left ≡ aggregateObserver geometry right
     differentBurden : burden geometry left ≡ burden geometry right → ⊥
 
-open AggregateResponsibilityLoss public
-open AggregateBurdenLoss public
-
 responsibilityDoesNotDescendThroughAggregate :
   ∀ {Population Aggregate Contribution Burden : Set}
     {geometry : ResponsibilityBurdenGeometry Population Aggregate Contribution Burden} →
