@@ -35,6 +35,7 @@ module DASHI.Physics.Closure.NSTriadKNExternalWaleffeCrossSelectedPartnerRound11
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List)
 open import Data.List.Membership.Propositional using (_∈_)
 open import Relation.Binary.PropositionalEquality using (_≢_)
 
@@ -67,7 +68,7 @@ kResidualCarrier :
     (system : Audit.FiniteComplex3GalerkinSystem F E I)
     (tau : Physical.PhysicalTriadIncidence) →
   KResidualSelection system tau →
-  Agda.Builtin.List.List Physical.PhysicalTriadIncidence
+  List Physical.PhysicalTriadIncidence
 kResidualCarrier system tau S =
   Residual.externalResidualCarrier system tau
     (selectedMember S) (selectedSwapMember S) (selectedSwapDifferent S)
