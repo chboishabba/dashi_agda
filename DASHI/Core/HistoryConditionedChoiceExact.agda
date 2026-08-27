@@ -76,32 +76,24 @@ historySensitiveChoiceCannotDescendThroughPresentObservation witness =
 
 ------------------------------------------------------------------------
 -- Pattern-mediated form.
---
--- This witnesses the stronger architecture
---
---   history -> pattern -> present choice
---
--- while keeping the coarse observation as an independent projection.  The
--- theorem does not assume that every pattern difference changes choice; that
--- application-specific separation is carried by the concrete witness.
 ------------------------------------------------------------------------
 
 record PatternMediatedChoiceWitness
     (surface : HistoryConditionedChoiceSurface) : Set where
   field
-    leftHistory : History surface
-    rightHistory : History surface
+    patternLeftHistory : History surface
+    patternRightHistory : History surface
 
-    sameObservation :
-      observe surface leftHistory ≡ observe surface rightHistory
+    patternSameObservation :
+      observe surface patternLeftHistory ≡ observe surface patternRightHistory
 
     patternsDiffer :
-      patternOf surface leftHistory ≡ patternOf surface rightHistory → ⊥
+      patternOf surface patternLeftHistory
+      ≡ patternOf surface patternRightHistory → ⊥
 
-    choicesDiffer :
-      choose surface leftHistory ≡ choose surface rightHistory → ⊥
-
-open PatternMediatedChoiceWitness public
+    patternChoicesDiffer :
+      choose surface patternLeftHistory
+      ≡ choose surface patternRightHistory → ⊥
 
 patternMediatedChoiceCannotDescendThroughObservation :
   ∀ {surface : HistoryConditionedChoiceSurface} →
@@ -111,10 +103,10 @@ patternMediatedChoiceCannotDescendThroughObservation :
 patternMediatedChoiceCannotDescendThroughObservation witness factor =
   NonFactor.witnessRulesOutEveryFlatFactorisation
     (NonFactor.nonFactorabilityWitness
-      (PatternMediatedChoiceWitness.leftHistory witness)
-      (PatternMediatedChoiceWitness.rightHistory witness)
-      (PatternMediatedChoiceWitness.sameObservation witness)
-      (PatternMediatedChoiceWitness.choicesDiffer witness))
+      (PatternMediatedChoiceWitness.patternLeftHistory witness)
+      (PatternMediatedChoiceWitness.patternRightHistory witness)
+      (PatternMediatedChoiceWitness.patternSameObservation witness)
+      (PatternMediatedChoiceWitness.patternChoicesDiffer witness))
     factor
 
 ------------------------------------------------------------------------
@@ -129,12 +121,12 @@ patternMediatedChoiceCannotDescendThroughObservation witness factor =
 
 record HistoryConditionedFutureConeSurface : Set₁ where
   field
-    History : Set
-    Observation : Set
+    FutureHistory : Set
+    FutureObservation : Set
     FutureConeCode : Set
 
-    observe : History → Observation
-    futureCone : History → FutureConeCode
+    observeFutureHistory : FutureHistory → FutureObservation
+    futureCone : FutureHistory → FutureConeCode
 
     futureReading : String
 
@@ -143,32 +135,30 @@ open HistoryConditionedFutureConeSurface public
 record SameObservationDifferentFutureCone
     (surface : HistoryConditionedFutureConeSurface) : Set where
   field
-    leftHistory : HistoryConditionedFutureConeSurface.History surface
-    rightHistory : HistoryConditionedFutureConeSurface.History surface
+    futureLeftHistory : FutureHistory surface
+    futureRightHistory : FutureHistory surface
 
-    sameObservation :
-      HistoryConditionedFutureConeSurface.observe surface leftHistory
-      ≡ HistoryConditionedFutureConeSurface.observe surface rightHistory
+    futureSameObservation :
+      observeFutureHistory surface futureLeftHistory
+      ≡ observeFutureHistory surface futureRightHistory
 
     futureConesDiffer :
-      HistoryConditionedFutureConeSurface.futureCone surface leftHistory
-      ≡ HistoryConditionedFutureConeSurface.futureCone surface rightHistory → ⊥
-
-open SameObservationDifferentFutureCone public
+      futureCone surface futureLeftHistory
+      ≡ futureCone surface futureRightHistory → ⊥
 
 futureConeCannotDescendThroughPresentObservation :
   ∀ {surface : HistoryConditionedFutureConeSurface} →
   SameObservationDifferentFutureCone surface →
   NonFactor.FactorsThrough
-    (HistoryConditionedFutureConeSurface.observe surface)
-    (HistoryConditionedFutureConeSurface.futureCone surface) →
+    (observeFutureHistory surface)
+    (futureCone surface) →
   ⊥
 futureConeCannotDescendThroughPresentObservation witness =
   NonFactor.witnessRulesOutEveryFlatFactorisation
     (NonFactor.nonFactorabilityWitness
-      (SameObservationDifferentFutureCone.leftHistory witness)
-      (SameObservationDifferentFutureCone.rightHistory witness)
-      (SameObservationDifferentFutureCone.sameObservation witness)
+      (SameObservationDifferentFutureCone.futureLeftHistory witness)
+      (SameObservationDifferentFutureCone.futureRightHistory witness)
+      (SameObservationDifferentFutureCone.futureSameObservation witness)
       (SameObservationDifferentFutureCone.futureConesDiffer witness))
 
 ------------------------------------------------------------------------
@@ -224,10 +214,10 @@ canonicalToyChoiceWitness =
 toyFutureConeSurface : HistoryConditionedFutureConeSurface
 toyFutureConeSurface =
   record
-    { History = ToyHistory
-    ; Observation = ToyObservation
+    { FutureHistory = ToyHistory
+    ; FutureObservation = ToyObservation
     ; FutureConeCode = ToyFutureCone
-    ; observe = λ _ → sameNow
+    ; observeFutureHistory = λ _ → sameNow
     ; futureCone = λ
         { historyAlpha → alphaCone
         ; historyBeta → betaCone
@@ -240,9 +230,9 @@ canonicalToyFutureConeWitness :
   SameObservationDifferentFutureCone toyFutureConeSurface
 canonicalToyFutureConeWitness =
   record
-    { leftHistory = historyAlpha
-    ; rightHistory = historyBeta
-    ; sameObservation = refl
+    { futureLeftHistory = historyAlpha
+    ; futureRightHistory = historyBeta
+    ; futureSameObservation = refl
     ; futureConesDiffer = λ ()
     }
 
