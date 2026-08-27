@@ -5,6 +5,7 @@ open import Agda.Builtin.String using (String)
 open import Data.List using (_++_)
 
 import DASHI.Physics.Foundations.HistoryLocalActionAccumulationExact as Action
+import DASHI.Physics.Foundations.TransitionActionNonseparabilityExact as Nonsep
 import DASHI.Physics.Closure.ChemistryRightLimitsQuotientCrossBandCouplingRequirement as CrossBand
 import DASHI.Physics.Closure.TSFVLocalActionCandidateAuditExact as V3Candidate
 import DASHI.Physics.Closure.W4StrictPhysicalNextObligation as Next
@@ -12,12 +13,6 @@ import DASHI.Physics.Closure.W4SurrogateScaleSettingBoundary as Surrogate
 
 ------------------------------------------------------------------------
 -- Second TSFV action-candidate audit: pair-sensitive local contribution.
---
--- The existing Candidate256 cross-band law already supplies a Nat-valued
--- observable I× on ordered pairs of quotient classes.  Unlike the first v3
--- candidate, this local contribution sees both step endpoints.  The generic
--- action accumulator therefore turns it into an additive finite-history
--- functional without inventing a new pair geometry.
 ------------------------------------------------------------------------
 
 pairLocalActionSystem : Action.LocalActionSystem
@@ -30,6 +25,15 @@ pairLocalActionSystem =
           (left , right)
     ; actionReading =
         "Structural pair-action candidate: reuse the existing Candidate256 cross-band observable I×(q1,q2) as a two-endpoint local contribution, then accumulate it additively over finite traces."
+    }
+
+pairTransitionKernel : Nonsep.TransitionActionKernel
+pairTransitionKernel =
+  record
+    { State = Surrogate.Candidate256QuotientClass
+    ; localAction = Action.localAction pairLocalActionSystem
+    ; kernelReading =
+        "Candidate256 I× transition kernel audited for endpoint separability versus genuine relational transition structure."
     }
 
 candidateLeft : Surrogate.Candidate256QuotientClass
@@ -55,9 +59,6 @@ pairCandidateDiagonalSeparates =
   CrossBand.ChemistryRightLimitsQuotientCrossBandLaw.I×BandSensitivityWitness
     Next.canonicalCandidate256QuotientLaw
 
--- Important no-go: the concrete Candidate256 I× is pair-valued, but it is
--- endpoint-separable.  It is the sum of one scalar contribution from each
--- endpoint rather than a nonseparable interaction term.
 pairCandidateEndpointSeparable :
   (left right : Surrogate.Candidate256QuotientClass) →
   Action.localAction pairLocalActionSystem left right
@@ -65,6 +66,19 @@ pairCandidateEndpointSeparable :
   CrossBand.canonicalCrossBandCoupling left
   + CrossBand.canonicalCrossBandCoupling right
 pairCandidateEndpointSeparable left right = refl
+
+pairEndpointSeparableWitness : Nonsep.EndpointSeparable pairTransitionKernel
+pairEndpointSeparableWitness =
+  record
+    { leftPotential = CrossBand.canonicalCrossBandCoupling
+    ; rightPotential = CrossBand.canonicalCrossBandCoupling
+    ; decomposition = pairCandidateEndpointSeparable
+    }
+
+pairCandidateCannotMeetNonseparableTarget :
+  Nonsep.NonseparableTransition pairTransitionKernel → ⊥
+pairCandidateCannotMeetNonseparableTarget =
+  Nonsep.endpointSeparableBlocksNonseparableTarget pairEndpointSeparableWitness
 
 pairCandidateTrace : List (Action.Step pairLocalActionSystem)
 pairCandidateTrace =
@@ -137,7 +151,7 @@ canonicalCandidateComparison =
     ; pairTInvariance = missing
     ; physicalCalibration = missing
     ; comparisonReading =
-        "The v3 candidate has exact T-invariance but is destination-only.  The cross-band candidate is pair-valued, additive, witness-symmetric and nontrivial, but its concrete I× decomposes as an endpoint sum, so it still lacks a genuine nonseparable transition term; global Candidate256 T-invariance and physical action calibration also remain missing."
+        "The v3 candidate has exact T-invariance but is destination-only. The cross-band candidate is pair-valued, additive, witness-symmetric and nontrivial, but the generic nonseparability test proves its concrete I× is endpoint-separable; global Candidate256 T-invariance and physical action calibration also remain missing."
     }
 
 pairTraceAdditivityAvailable :
