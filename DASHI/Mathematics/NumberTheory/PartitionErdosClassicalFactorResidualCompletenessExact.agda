@@ -13,11 +13,15 @@ module DASHI.Mathematics.NumberTheory.PartitionErdosClassicalFactorResidualCompl
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; suc)
 open import Data.Fin.Base using (Fin)
+import Data.Fin.Properties as FinP
 open import Data.List.Membership.Propositional using (_∈_)
-open import Data.Product using (Σ; _×_; _,_; proj₁; proj₂)
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Data.Nat.Base using (_≤_; _∸_)
+import Data.Nat.Properties as NatP
+open import Data.Product using (Σ; _×_; _,_)
+import Data.Vec.Base as Vec
+open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
 
 import DASHI.Mathematics.NumberTheory.FiniteAllFinEnumerationExact as Finite
 import DASHI.Mathematics.NumberTheory.FinitePositiveFactorPairExact as Factor
@@ -34,7 +38,7 @@ import DASHI.Mathematics.NumberTheory.PartitionMultiplicityEnumerationExact as E
 
 transportUnitToClassical :
   ∀ {n r : Nat}
-    (bound : r Data.Nat.Base.≤ n)
+    (bound : r ≤ n)
     (pair : Factor.PositiveFactorPair r)
     (residual : Key.ResidualKey n) →
   Classical.ambientDivisorIndex bound pair ≡ Key.residualIndex residual →
@@ -47,9 +51,9 @@ transportUnitToClassical bound pair residual indexExact =
 
 classicalKeyRecoversResidual :
   ∀ {n r : Nat}
-    (bound : r Data.Nat.Base.≤ n)
+    (bound : r ≤ n)
     (pair : Factor.PositiveFactorPair r)
-    (vector : Data.Vec.Base.Vec Nat (n Data.Nat.Base.∸ r))
+    (vector : Vec.Vec Nat (n ∸ r))
     (residual : Key.ResidualKey n)
     (vectorExact : Classical.padResidualVector bound vector
       ≡ Key.residualVector residual)
@@ -103,7 +107,7 @@ selectedPairAmbientIndex :
     pair
   ≡ Key.residualIndex residual
 selectedPairAmbientIndex residual totalExact pair divisorExact =
-  Data.Fin.Properties.toℕ-injective
+  FinP.toℕ-injective
     (sucInjective
       (trans
         (Classical.ambientDivisorPartValue bound pair)
@@ -112,8 +116,7 @@ selectedPairAmbientIndex residual totalExact pair divisorExact =
   bound = Decompose.residualDecrementAtMostGrade residual totalExact
 
   sucInjective :
-    ∀ {left right : Nat} →
-    Agda.Builtin.Nat.suc left ≡ Agda.Builtin.Nat.suc right → left ≡ right
+    ∀ {left right : Nat} → suc left ≡ suc right → left ≡ right
   sucInjective refl = refl
 
 ------------------------------------------------------------------------
@@ -129,7 +132,7 @@ admissibleResidualInBlock :
       (Decompose.residualDecrementAtMostGrade residual totalExact)
 admissibleResidualInBlock residual totalExact
   with selectedFactorPair residual
-... | pair , pairMember , divisorExact , predecessorExact =
+... | pair , (pairMember , (divisorExact , predecessorExact)) =
   subst
     (λ candidate → candidate ∈ Classical.residualBlock positive bound)
     keyExact
@@ -143,7 +146,7 @@ admissibleResidualInBlock residual totalExact
   vector = Partition.multiplicities canonical
 
   vectorMember :
-    vector ∈ Enumeration.partitionMultiplicityVectors (n Data.Nat.Base.∸ decrement)
+    vector ∈ Enumeration.partitionMultiplicityVectors (n ∸ decrement)
   vectorMember = Enumeration.partitionMultiplicityVectorComplete canonical
 
   indexExact :
@@ -200,7 +203,7 @@ admissibleResidualInClassicalEnumeration :
   residual ∈ Classical.classicalFactorResidualEnumeration n
 admissibleResidualInClassicalEnumeration {n} residual member =
   Classical.residualBlockMemberUpTo
-    Data.Nat.Properties.≤-refl
+    NatP.≤-refl
     (Decompose.residualDecrementPositive residual)
     (Decompose.residualDecrementAtMostGrade residual totalExact)
     (admissibleResidualInBlock residual totalExact)
