@@ -2,13 +2,6 @@ module DASHI.Foundations.Wette1969CertifiedSubstitutionDerivationExact where
 
 ------------------------------------------------------------------------
 -- CERTIFIED COMPOSITIONAL WETTE SUBSTITUTION DERIVATIONS
---
--- This is the execution layer over Wette1969SubstitutionRuleSpineExact.
--- Rather than inventing a total meta-level substitution function, it builds
--- historical II judgements by certified applications of Wette's own 8.2 rules.
--- Recursive constructor steps consume earlier generated II conclusions at the
--- actual reached finite context; binder freshness evidence is transported to
--- that same reached context before 8.2.9/10/11 is applied.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -26,6 +19,8 @@ import DASHI.Foundations.Wette1969DerivationClosureExact as Closure
 WordTerm = Signature.WordTerm
 Context = Finite.DerivationContext
 
+historicalSystem :
+  PCRA.RuleApplicationSystem Context RuleBody.HistoricalRuleBody
 historicalSystem = Closure.historicalApplicationSystem
 
 record CertifiedSubstitutionDerivation
@@ -45,18 +40,6 @@ targetContext :
   {context : Context} → {s u r v : WordTerm} →
   CertifiedSubstitutionDerivation context s u r v → Context
 targetContext derivation = PCRA.runCertifiedTrace historicalSystem (trace derivation)
-
-------------------------------------------------------------------------
--- One-premise base/unchanged producers.
-------------------------------------------------------------------------
-
-onePremiseHold :
-  (context : Context) →
-  (rule : RuleBody.HistoricalRuleBody) →
-  RuleBody.premiseCount rule ≡ 1 →
-  (premise : Signature.Formula) →
-  RuleBody.premises rule Finite.∈Context context → Set
-onePremiseHold context rule count premise impossible = ⊤
 
 variableBase :
   (context : Context) →
@@ -130,10 +113,6 @@ unchangedUnderFreshness context substituend source replacement freshness =
           (Spine.rule8-2-2 substituend source replacement)
           premises)
 
-------------------------------------------------------------------------
--- Successor congruence: generated body II becomes the sole premise of 8.2.3.
-------------------------------------------------------------------------
-
 successorCongruence :
   {context : Context} →
   {substituend source replacement result : WordTerm} →
@@ -144,31 +123,28 @@ successorCongruence :
     (Spine.unary Signature.successorFunctor source)
     replacement
     (Spine.unary Signature.successorFunctor result)
-successorCongruence derivation =
+successorCongruence
+  {substituend = substituend}
+  {source = source}
+  {replacement = replacement}
+  {result = result}
+  derivation =
   certifiedSubstitutionDerivation
     (PCRA.appendCertifiedTrace (trace derivation)
       (PCRA.choose selected PCRA.done))
     Finite.here
   where
     current = targetContext derivation
+    rule = Spine.rule8-2-3 substituend source replacement result
 
     premises :
-      Historical.PremisesHold
-        Finite.finiteHistoricalContextSystem current
-        (Spine.rule8-2-3 _ _ _ _)
+      Historical.PremisesHold Finite.finiteHistoricalContextSystem current rule
     premises Fin.zero = resultAvailable derivation
 
     selected =
-      PCRA.selectedRuleApplication
-        (Spine.rule8-2-3 _ _ _ _)
+      PCRA.selectedRuleApplication rule
         (Historical.certifyHistoricalRule
-          Finite.finiteHistoricalContextSystem current
-          (Spine.rule8-2-3 _ _ _ _)
-          premises)
-
-------------------------------------------------------------------------
--- Binary congruence constructors 8.2.4--7.
-------------------------------------------------------------------------
+          Finite.finiteHistoricalContextSystem current rule premises)
 
 data BinarySubstitutionConstructor : Set where
   juxtorCase implicationCase conjunctionCase disjunctionCase :
@@ -198,8 +174,7 @@ binaryCongruence :
       (targetContext leftDerivation)
       substituend right replacement rightResult) →
   CertifiedSubstitutionDerivation
-    context
-    substituend
+    context substituend
     (Spine.binary (binaryFunctor constructor) left right)
     replacement
     (Spine.binary (binaryFunctor constructor) leftResult rightResult)
@@ -242,10 +217,6 @@ binaryCongruence
         (Historical.certifyHistoricalRule
           Finite.finiteHistoricalContextSystem current rule premises)
 
-------------------------------------------------------------------------
--- Binder congruence constructors 8.2.9--11.
-------------------------------------------------------------------------
-
 data BinderSubstitutionConstructor : Set where
   particularizerCase generalizerCase recursorCase : BinderSubstitutionConstructor
 
@@ -269,13 +240,12 @@ binderCongruence :
     CertifiedSubstitutionDerivation
       context substituend body replacement result) →
   CertifiedSubstitutionDerivation
-    context
-    substituend
+    context substituend
     (Spine.binary (binderFunctor constructor) binder body)
     replacement
     (Spine.binary (binderFunctor constructor) binder result)
 binderCongruence
-  {context} {binder} {substituend} {body} {replacement} {result}
+  {binder = binder} {substituend} {body} {replacement} {result}
   constructor replacementFresh substituendFresh bodyDerivation =
   certifiedSubstitutionDerivation
     (PCRA.appendCertifiedTrace
@@ -318,6 +288,17 @@ binderCongruence
         (Historical.certifyHistoricalRule
           Finite.finiteHistoricalContextSystem current rule premises)
 
+recursorCongruence :
+  {context : Context} →
+  {binder substituend body replacement result : WordTerm} →
+  Judgment.freeForSyntax binder replacement Finite.∈Context context →
+  Judgment.freeForSyntax binder substituend Finite.∈Context context →
+  CertifiedSubstitutionDerivation context substituend body replacement result →
+  CertifiedSubstitutionDerivation
+    context substituend
+    (Spine.binary Signature.recursionFunctor binder body)
+    replacement
+    (Spine.binary Signature.recursionFunctor binder result)
 recursorCongruence = binderCongruence recursorCase
 
 record Wette1969CertifiedSubstitutionDerivationBoundary : Set where
