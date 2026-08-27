@@ -110,8 +110,6 @@ record CMP109LiteralInteractionBetaDebt
     betaInteraction : Scale → Scalar
     constant exponent : Scalar
 
-    abs power multiply lessEqual : Scalar → Scalar → Scalar
-
     -- Source-derived power/order from CMP109 (2.12)--(2.13).  It must not be
     -- inserted from continuum perturbative folklore.
     sourcePowerFromFluctuationIntegral : Set
@@ -153,9 +151,11 @@ open CMP109LiteralBetaHistoryResponseDecay public
 ------------------------------------------------------------------------
 
 record CMP109DirectRowA1PhysicalClosure
-    (Scale Scalar : Set) : Set₁ where
+    (Scale Background Operator Momentum Scalar : Set) : Set₁ where
   field
-    gaussian : CMP109LiteralGaussianBetaProducer Scale Set Set Set Scalar
+    gaussian :
+      CMP109LiteralGaussianBetaProducer
+        Scale Background Operator Momentum Scalar
     interaction : CMP109LiteralInteractionBetaDebt Scale Scalar
     history : CMP109LiteralBetaHistoryResponseDecay Scale Scalar
 
