@@ -16,12 +16,12 @@ module DASHI.Foundations.Wette1969Rule9324x25PremiseTemplateExact where
 --     the two directions of the relative conditional bisubjunction between the
 --     substituted definiens and the recursively defined predicate instance.
 --
--- The scan/OCR does not justify pretending every compound word has already
--- been transcribed character-for-character.  What the source does determine
--- reliably is both the argument-sharing skeleton of the four premises and the
--- nested-implication skeleton of the two conclusions.  This module therefore
--- completes the typed rule template and constructs both HistoricalRuleBody
--- values end-to-end, while leaving OCR-sensitive compound words as parameters.
+-- The p.145 page image plus p.148's special Juxtor-pair reading of II show that
+-- premise 4 must not identify the fresh variable tuple with the *whole* II
+-- replacement word.  The replacement is a paired Juxtor word containing that
+-- tuple together with the recursive-predicate replacement.  This module keeps
+-- the fresh tuple and the four II arguments separate so rule 8.2.8 can weld
+-- directly into premise 4 without collapsing those source levels.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -45,8 +45,12 @@ record Rule9324x25PremiseParameters : Set where
     recursivePredicateWord : WordTerm
     freshTupleWord : WordTerm
     freshnessContextWord : WordTerm
-    oldTupleWord : WordTerm
+
+    -- Four historical arguments of premise 4's II judgement.  In the source's
+    -- paired case the substituend/replacement themselves are Juxtor packages.
+    substitutionSubstituendWord : WordTerm
     substitutionSourceWord : WordTerm
+    substitutionReplacementWord : WordTerm
     substitutionResultWord : WordTerm
 
 open Rule9324x25PremiseParameters public
@@ -66,9 +70,9 @@ premiseAt parameters Critical.variableFreshnessCondition =
     (freshnessContextWord parameters)
 premiseAt parameters Critical.orderedSubstitutionCondition =
   Judgment.substitution
-    (oldTupleWord parameters)
+    (substitutionSubstituendWord parameters)
     (substitutionSourceWord parameters)
-    (freshTupleWord parameters)
+    (substitutionReplacementWord parameters)
     (substitutionResultWord parameters)
 
 premiseVector : Rule9324x25PremiseParameters → Vec Formula 4
@@ -100,19 +104,8 @@ rule9324x25TemplateRealizesPremiseTyping parameters =
     agrees Critical.variableFreshnessCondition = refl
     agrees Critical.orderedSubstitutionCondition = refl
 
-freshTupleIsPremise2TupleAndPremise4Replacement :
-  (parameters : Rule9324x25PremiseParameters) → WordTerm
-freshTupleIsPremise2TupleAndPremise4Replacement parameters =
-  freshTupleWord parameters
-
 ------------------------------------------------------------------------
 -- Conclusion argument template.
---
--- The printed p.145 conclusions share the outer derivability judgement L and
--- exchange the direction of the innermost implication.  Section 1.632 explains
--- the same pair unofficially as a relative conditional bisubjunction: under
--- U1 and the condition instantiated at the fresh tuple, the substituted
--- definiens U2 and the recursively defined predicate instance imply one another.
 ------------------------------------------------------------------------
 
 record Rule9324x25ConclusionParameters : Set where
@@ -220,9 +213,13 @@ record Wette1969Rule9324x25TemplateBoundary : Set where
     fourPremiseTemplateNowConstructibleIsTrue :
       fourPremiseTemplateNowConstructible ≡ true
 
-    freshTupleSharingAcrossPremises2To4Recovered : Bool
-    freshTupleSharingAcrossPremises2To4RecoveredIsTrue :
-      freshTupleSharingAcrossPremises2To4Recovered ≡ true
+    premise4HasIndependentPairedSubstituendAndReplacement : Bool
+    premise4HasIndependentPairedSubstituendAndReplacementIsTrue :
+      premise4HasIndependentPairedSubstituendAndReplacement ≡ true
+
+    freshTupleIsDefinitionallyWholePremise4Replacement : Bool
+    freshTupleIsDefinitionallyWholePremise4ReplacementIsFalse :
+      freshTupleIsDefinitionallyWholePremise4Replacement ≡ false
 
     templateRealizesRecoveredPremiseKinds : Bool
     templateRealizesRecoveredPremiseKindsIsTrue :
@@ -250,6 +247,7 @@ canonicalWette1969Rule9324x25TemplateBoundary =
   wette1969Rule9324x25TemplateBoundary
     true refl
     true refl
+    false refl
     true refl
     true refl
     true refl
