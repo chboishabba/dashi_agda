@@ -12,6 +12,7 @@ on:
       - 'DASHI/Core/RulePremiseDependencyGeometryExact.agda'
       - 'DASHI/Core/OrderedSubstitutionGeometryExact.agda'
       - 'DASHI/Core/RulePremiseTypingGeometryExact.agda'
+      - 'DASHI/Core/ProofCarryingRuleApplicationExact.agda'
       - 'DASHI/Core/Everything.agda'
       - 'DASHI/Foundations/Wette*.agda'
       - 'DASHI/Foundations/Wette/**'
@@ -21,6 +22,7 @@ on:
       - 'scripts/check_wette_critical_rules.sh'
       - 'scripts/check_wette_substitution_order.sh'
       - 'scripts/check_wette_premise_typing.sh'
+      - 'scripts/check_wette_proof_carrying_application.sh'
       - '.github/workflows/wette-reconstruction-agda.yml'
   workflow_dispatch:
 
@@ -49,4 +51,5 @@ jobs:
           nix develop .# --command bash scripts/check_wette_critical_rules.sh
           nix develop .# --command bash scripts/check_wette_substitution_order.sh
           nix develop .# --command bash scripts/check_wette_premise_typing.sh
+          nix develop .# --command bash scripts/check_wette_proof_carrying_application.sh
           nix develop .# --command bash scripts/check_wette_reconstruction.sh
