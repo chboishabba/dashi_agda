@@ -8,7 +8,7 @@ module DASHI.Core.RulePremiseDependencyGeometryExact where
 -- obligations depend on overlapping subsets of those premises.
 --
 -- A premise being listed in a rule is not the same thing as knowing which
--- higher-level obligation it supports.  Conversely, two obligations may share
+-- higher-level obligation it supports. Conversely, two obligations may share
 -- premises without becoming the same obligation.
 ------------------------------------------------------------------------
 
@@ -26,11 +26,11 @@ open PremiseDependencyGeometry public
 record SharedPremiseRulePair : Set₁ where
   constructor sharedPremiseRulePair
   field
-    Premise : Set
-    Conclusion : Set
-    commonPremises : List Premise
-    leftConclusion : Conclusion
-    rightConclusion : Conclusion
+    SharedPremise : Set
+    SharedConclusion : Set
+    commonPremises : List SharedPremise
+    leftConclusion : SharedConclusion
+    rightConclusion : SharedConclusion
 
 open SharedPremiseRulePair public
 
