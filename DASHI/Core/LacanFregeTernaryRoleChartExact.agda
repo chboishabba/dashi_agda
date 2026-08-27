@@ -8,8 +8,15 @@ module DASHI.Core.LacanFregeTernaryRoleChartExact where
 -- Jacques Lacan's Seminars IX (L'identification, 1961--62) and XIX (...ou
 -- pire, 1971--72) motivate the source-bounded 0/1/2 role reading discussed in
 -- the supplied DASHI reconstruction: zero/inexistence, unary trait / S1, and a
--- second signifying position / S2 through which repetition becomes legible.
+-- retroactive second-count position through which repetition becomes legible.
 -- No DOI is asserted for the seminars here.
+--
+-- IMPORTANT S2 BOUNDARY
+--
+-- The historical constructor name `retroactiveSecondS2` is retained for branch
+-- compatibility, but this module does NOT identify the Frege/genesis numeral
+-- two with Seminar-XVII discourse-theory S2 (knowledge/signifying battery).
+-- `LacanS2RoleSeparationExact` owns that distinction explicitly.
 --
 -- The role chart is intentionally NOT an anatomy chart and NOT Lacan's formulas
 -- of sexuation.  In particular `code2` is not identified with testes or with
@@ -32,10 +39,14 @@ data LacanFregeRole : Set where
   retroactiveSecondS2
   : LacanFregeRole
 
+-- Preferred clarified alias: this value is a Frege/genesis second-count role.
+fregeRetroactiveSecondCount : LacanFregeRole
+fregeRetroactiveSecondCount = retroactiveSecondS2
+
 lacanFregeRole : Ternary.TernaryRoleCode → LacanFregeRole
 lacanFregeRole Ternary.code0 = zeroOfInexistence
 lacanFregeRole Ternary.code1 = unaryTraitS1
-lacanFregeRole Ternary.code2 = retroactiveSecondS2
+lacanFregeRole Ternary.code2 = fregeRetroactiveSecondCount
 
 lacanFregeChart : Ternary.RoleChart LacanFregeRole
 lacanFregeChart = Ternary.role-chart lacanFregeRole
@@ -104,6 +115,9 @@ record LacanFregeTernaryRoleBoundary : Set where
     symbolicCastrationIsAnatomicalRemoval : Bool
     symbolicCastrationIsAnatomicalRemovalIsFalse :
       symbolicCastrationIsAnatomicalRemoval ≡ false
+    fregeSecondCountIsDefinitionallyDiscourseS2 : Bool
+    fregeSecondCountIsDefinitionallyDiscourseS2IsFalse :
+      fregeSecondCountIsDefinitionallyDiscourseS2 ≡ false
     fregeDerivedChartIsFormulaOfSexuation : Bool
     fregeDerivedChartIsFormulaOfSexuationIsFalse :
       fregeDerivedChartIsFormulaOfSexuation ≡ false
@@ -113,6 +127,7 @@ record LacanFregeTernaryRoleBoundary : Set where
 canonicalLacanFregeTernaryRoleBoundary : LacanFregeTernaryRoleBoundary
 canonicalLacanFregeTernaryRoleBoundary =
   lacan-frege-ternary-role-boundary
+    false refl
     false refl
     false refl
     false refl
